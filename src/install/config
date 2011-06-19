@@ -1,0 +1,6 @@
+#! /bin/sh
+fusionforge_dir=${FUSIONFORGE_DIR:-/opt/gforge}
+fusionforge_src_dir=${FUSIONFORGE_SRC_DIR:-/opt/gforge}
+fusionforge_data_dir=${FUSIONFORGE_DATA_DIR:-/var/lib/gforge}
+fusionforge_log_dir=${FUSIONFORGE_LOG_DIR:-/var/log/gforge}
+fusionforge_etc_dir=${FUSIONFORGE_ETC_DIR:-/etc/gforge}

@@ -1,0 +1,315 @@
+#! /bin/sh
+# FusionForge Installation Dependency Setup
+#
+# Copyright 2006 GForge, LLC
+# Copyright 2011 Christian Bayle <bayle@debian.org>
+# http://fusionforge.org/
+#
+# @version
+#
+# This file is part of GInstaller, it is called by install.sh.
+#
+# FusionForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# FusionForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+msg(){
+	GREEN="\033[01;32m"
+	NORMAL="\033[00m"
+	RED="\033[01;31m"
+	case $1 in
+		red)
+			echo "$RED $2 $NORMAL"
+			;;
+		green)
+			echo "$GREEN $2 $NORMAL"
+			;;
+	esac
+}
+
+create_db_admin_user(){
+	gforge_db="$1"
+	admin_user="$2"
+	su - postgres -c "psql $gforge_db -c \"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', 'INVALID', 'INVALID', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A'); INSERT INTO pfo_user_role (user_id, role_id) VALUES (currval('users_pk_seq'), 3)\""
+}
+
+msg green "-=# Welcome to FusionForge DB-Installer #=-"
+
+find_psql_init(){
+	initpsql=""
+	for initpsql in /etc/init.d/postgresql /etc/init.d/postgresql-8.2 /etc/init.d/postgresql-8.3 /etc/init.d/postgresql-8.4 /etc/init.d/cswpostgres
+	do
+		if [ -f $initpsql ]
+		then
+			pgservice=$initpsql
+		fi
+	done
+	if [ -z "$pgservice" ]
+	then
+		exit 1
+	fi
+}
+		
+psql_startdb(){
+	# Fedora9 (an maybe newer) requires running initdb
+	if [ "$pgservice" == '/etc/init.d/postgresql' ]
+	then
+		if [ -d /var/lib/pgsql/data/base ]
+		then
+			service postgresql initdb &>/dev/null
+		fi
+	fi
+
+	# Might fail if it's already running, so we'll ingnore the result
+	$pgservice start
+}
+
+get_config(){
+	insscriptdir=`cd \`dirname $0\`; pwd`
+	. $insscriptdir/config
+
+	if [ ! -d "$fusionforge_src_dir" ]
+	then
+		msg red "Error: GForge folder doesn't exist. Run fusionforge-install-2.php first."
+		exit 2
+	fi
+}
+
+# Where the pghba config file is
+find_pghba(){
+	pghbafile=""
+	for pghbafile in /var/lib/pgsql/data/pg_hba.conf /etc/postgresql/8.2/main/pg_hba.conf /etc/postgresql/8.3/main/pg_hba.conf /etc/postgresql/8.4/main/pg_hba.conf /opt/csw/var/pgdata/pg_hba.conf
+	do
+		if [ -f $pghbafile ]
+		then
+			$pghba="$pghbafile"
+		fi
+	done
+	if [ -z "$pghba" ]
+	then
+		msg red "ERROR: Could not find pg_hba.conf file"
+		exit 1
+	fi
+}
+
+# Where the tsearch sql config file is
+find_tsearch(){
+	tsearchfile=""
+	for tsearchfile in /usr/share/pgsql/contrib/tsearch2.sql /usr/share/postgresql/8.2/contrib/tsearch2.sql /usr/share/postgresql/8.3/contrib/tsearch2.sql /usr/share/postgresql/8.4/contrib/tsearch2.sql /opt/csw/postgresql/share/contrib/tsearch2.sql
+	do
+		if [ -f $tsearchfile ]
+		then
+			$tsearch="$tsearchfile"
+		fi
+	done
+	if [ -z "$tsearch" ]
+	then
+		msg red "ERROR: Could not find tsearch2.sql file"
+		exit 1
+	fi
+}
+
+installandrundb()
+{
+	# USING $pghba, $fusionforge_src_dir, $fusionforge_etc_dir, $tsearch, $pgservice, $STDIN, $STDOUT;
+
+	if [ -z "$FFORGE_DB" ]
+	then
+		while test -z "$FFORGE_DB"
+		do
+			msg green "* Enter the Database Name (fusionforge): "
+			read FFORGE_DB
+		done
+	fi
+	gforge_db="$FFORGE_DB"
+	msg green " ...using $gforge_db"
+
+	if [ -z "$FFORGE_USER" ]
+	then
+		while test -z "$FFORGE_USER"
+		do
+			msg green "* Enter the Database Username (gforge): "
+			read FFORGE_USER
+		done
+	fi
+	gforge_user="$FFORGE_USER"
+	msg green " ...using $gforge_user"
+
+	msg green " * Modifying DB Access Permissions..."
+	
+	if [ ! -f $pghba.fforge.backup ]
+	then 
+		cp $pghba $pghba.fforge.backup
+	fi
+	cat > $pghba <<-EOF
+# FUSIONFORGE
+local all all trust
+EOF
+	msg green " * Restarting PostgreSQL..."
+	$pgservice stop
+	$pgservice start
+
+	msg green " * Creating $gforge_user Group..."
+	/usr/sbin/groupadd $gforge_user;
+
+	msg green " * Creating '$gforge_user' User..."
+	/usr/sbin/useradd -g $gforge_user $gforge_user
+	
+	# Let's give some time for PostgreSQL to start
+	sleep 5 
+
+	msg green " * Creating Database User $gforge_user..."
+	su - postgres -c "createuser -A -R -d -E $gforge_user"
+
+	msg green " * Creating Language..."
+	su - postgres -c "createlang plpgsql template1"
+
+	if [ -d /home/$gforge_user ]
+	then
+		$susufix = ''
+	else
+		$susufix = '-'
+	fi
+
+	msg green " * Creating $gforge_db Database..."
+	su $susufix $gforge_user -c "createdb --encoding UNICODE $gforge_db"
+
+	# Detect postgresql version, load tsearch2 for pg < 8.3
+	pgv=`postgres --version | cut -d" " -f3`
+	case $pgv in
+		7.*|8.1*|8.2*)
+			msg green " * Dumping tsearch2 Database Into $gforge_db DB"
+			su - postgres -c "psql $gforge_db < $tsearch" >> /tmp/gforge-import.log
+			for table in pg_ts_cfg pg_ts_cfgmap pg_ts_dict pg_ts_parser
+			do
+				su - postgres -c "psql $gforge_db -c \"GRANT ALL on $table TO $gforge_user\";"
+			done
+			su - postgres -c "psql $gforge_db -c \"UPDATE pg_ts_cfg SET locale='en_US.UTF-8' WHERE ts_name='default'\""
+			;;
+	esac
+
+	msg green " * Dumping FusionForge DB"
+	su $susufix $gforge_user -c "psql $gforge_db < $fusionforge_src_dir/db/gforge.sql" >> /tmp/gforge-import.log
+
+	if [ -z "$FFORGE_ADMIN_USER" ]
+	then
+		while test -z "$FFORGE_ADMIN_USER"
+		do
+			msg green " * Enter the Admin Username (fforgeadmin): "
+			read FFORGE_ADMIN_USER
+		done
+	fi
+	admin_user=$FFORGE_ADMIN_USER
+	msg green " ...using $admin_user"
+
+	if [ -z "$FFORGE_ADMIN_PASSWORD" ]
+	then
+		retry=5
+		while test -z "$FFORGE_ADMIN_PASSWORD" -a $retry -gt 0
+		do
+			msg green " * Enter the Site Admin Password:"
+			read -s FFORGE_ADMIN_PASSWORD1
+			if validatePassword "$FFORGE_ADMIN_PASSWORD1"
+			then
+				msg green " * Please enter it again:"
+				read -s FFORGE_ADMIN_PASSWORD2
+				if [ "FFORGE_ADMIN_PASSWORD1" == "FFORGE_ADMIN_PASSWORD2" ]
+				then
+					FFORGE_ADMIN_PASSWORD=$FFORGE_ADMIN_PASSWORD1
+				else
+					msg green "Passwords don't match. Please try again."
+				fi
+			fi
+			retry=`expr $retry - 1`
+		done
+		if [ -z "$FFORGE_ADMIN_PASSWORD" ]
+		then
+			msg green "Passwords didn't match! Aborting."
+			exit 1
+		else
+			create_db_admin_user "$gforge_db" "$admin_user"
+			forge_set_password "$admin_user" "$FFORGE_ADMIN_PASSWORD"
+		fi
+	fi
+}
+
+forge_save_db_config(){
+	if [ ! -f "$fusionforge_etc_dir" ]
+	then
+		mkdir $fusionforge_etc_dir
+	fi
+	if [ ! -f "$fusionforge_etc_dir/config.ini.d" ]
+	then
+		mkdir $fusionforge_etc_dir/config.ini.d
+	fi
+	
+	msg green " * Saving database configuration in FForge config file"
+	if [ ! -f "$fusionforge_etc_dir/config.ini.d/rpm-install.ini" ]
+	then
+		cat > $fusionforge_etc_dir/config.ini.d/rpm-install.ini <<-EOF
+; You can edit the values here or move them to other files.
+[core]
+forge_name=FusionForge
+web_host=`hostname -f`
+
+; This file was generated by the RPM installation system.
+EOF
+	fi
+
+	if [ ! -f "$fusionforge_etc_dir/config.ini.d/rpm-install-secrets.ini" ]
+	then
+		cat > $fusionforge_etc_dir/config.ini.d/rpm-install-secrets.ini <<-EOF
+; You can edit the values here or move them to other files.
+; These values should not go into world-readable files!
+
+[core]
+database_host=""
+database_name=$gforge_db
+database_user=$gforge_user
+database_port=5432
+; database_password=$pw
+
+; This file was generated by the RPM installation system.
+EOF
+	fi
+	msg green " * Saving installation log in /tmp/gforge-import.log"
+}
+
+validatePassword() {
+	password="$1"
+	strlen=`echo "$1" | wc -m`
+	if [ $strlen -le 7 ]
+	then
+		msg red "Password is too short. Please try again"
+		return 1
+	fi
+        CHECK=`echo $password | grep -E "[[:alnum:]]*"`
+        if [ "$CHECK" == "" ] ; then
+        then
+                msg red "Password contains invalid characters. Please try again."
+		return 2
+	else
+		return 0
+        fi
+}
+
+install3(){
+	find_psql_init
+	psql_startdb
+	get_config
+	find_pghba
+	find_tsearch
+	installandrundb
+	forge_save_db_config
+	msg green "Done."
+}

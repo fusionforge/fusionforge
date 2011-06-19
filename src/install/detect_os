@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# Simple OS detection script
+#
+# Usage: ./install.sh <hostname>
+#
+# This will install all the fusionforge code in /opt/gforge
+# Configuration is stored in /etc/gforge
+#
+# Currently supported:
+# * Red Hat 5 / CentOS 5
+# * OpenSuSE 11
+#
+# Authors: Christian Bayle <bayle@debian.org>
+#
+
+detect_os(){
+	distrib=""
+	if [ -f "/etc/redhat-release" ]
+	then
+		distrib=`awk '{print $1}' /etc/redhat-release`
+		case $distrib in
+			CentOS)
+				os=centos
+				;;
+			Red)
+				os=rhel
+				;;
+			Fedora)
+				os=fedora
+				;;
+			openSUSE)
+				os=opensuse
+				;;
+			*)
+				os=redhat_unknown
+				;;
+		esac
+	elif [ -f "/etc/SuSE-release" ]
+	then
+        	distrib=`awk '{print $1}' /etc/SuSE-release | head -n 1`
+		if grep -q openSUSE /etc/SuSE-release
+		then
+			os="opensuse"
+		else
+        		os="suse"
+		fi
+	elif [ -f "/etc/ubuntu_version" ]
+	then
+        	distrib=`awk '{print $1}' /etc/ubuntu_version`
+        	os="ubuntu"
+	elif [ -f "/etc/debian_version" ]
+	then
+        	distrib=`awk '{print $1}' /etc/debian_version`
+        	os="debian"
+	else
+		distrib="unknown"
+		os="unknown"
+	fi
+	echo $os
+}
