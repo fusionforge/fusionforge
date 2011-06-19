@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh -e
 #
 # Simple wrapper for FusionForge installation
 #
@@ -16,6 +16,7 @@
 #
 scriptdir=`cd \`dirname $0\`; pwd`
 . $scriptdir/install/detect_os
+. $scriptdir/install/config
 
 hostname=$1
 
@@ -27,10 +28,23 @@ fi
 # Call to detect_os, this will set $type and $distrib
 os=$(detect_os)
 
-if [ -d "/opt/fusionforge" ]
+if [ -d "/opt/gforge" ]
 then
-	mode="update"
-	echo "Upgrading previous installation ...";
+	# If we install in place
+	if [ "`pwd`" == "/opt/gforge" ]
+	then
+		if [ -f "/opt/gforge/install_completed" ]
+		then
+			mode="update"
+			echo "Upgrading previous installation ...";
+		else
+			mode="install"
+			echo "Installing FusionForge ...";
+		fi
+	else
+		mode="update"
+		echo "Upgrading previous installation ...";
+	fi
 else
 	mode="install"
 	echo "Installing FusionForge ...";
@@ -44,17 +58,16 @@ deps_$os
 . $scriptdir/install/install4
 
 echo "Install type = $type"
-if [ "$type" = "redhat" ]
-then
+case $type in 
+	redhat)
 	echo "Running install/install2 "$hostname" apache apache"
 	install2 "$hostname" apache apache
-
-	if [ $mode = "install" ]
+	if [ "$mode" = "install" ]
 	then
 		echo "Running install/install3"
 		install3
 		echo "Running php db/upgrade-db.php"
-		php db/upgrade-db.php
+		cd $scriptdir; php db/upgrade-db.php
 		echo "Running install/install4"
 		install4
 
@@ -76,17 +89,18 @@ then
 		service crond reload
 	else
 		echo "Running php db/upgrade-db.php"
-		php db/upgrade-db.php
+		cd $scriptdir; php db/upgrade-db.php
 		php utils/normalize_roles.php
 	fi
-elif [ "$type" = "suse" ]
-then
-	install2 "$hostname" wwwrun www
+	;;
 
+	suse)
+	install2 "$hostname" wwwrun www
 	if [ $mode = "install" ]
 	then
 		install3
-		php db/upgrade-db.php
+		echo "Running php db/upgrade-db.php"
+		cd $scriptdir; php db/upgrade-db.php
 		install4
 
 		# Post installation fixes.
@@ -112,26 +126,31 @@ then
 		cp plugins/*/etc/cron.d/* /etc/cron.d/
 		rccron reload
 	else
-		php db/upgrade-db.php
+		echo "Running php db/upgrade-db.php"
+		cd $scriptdir; php db/upgrade-db.php
 	fi
-elif [ $type = "ubuntu" ]
-then
+	;;
+
+	ubuntu)
 	echo "--"
 	echo "For ubuntu, rather use ubuntu $distrib package"
 	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/UbuntuRepositories"
 	echo "--"
-elif [ $type = "debian" ]
-then
+	;;
+
+	debian)
 	echo "--"
 	echo "For debian, rather use debian $distrib package"
 	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/DebianRepositories"
 	echo "--"
-else
+	;;
+	
+	*)
 	echo "Only Red Hat, Fedora or CentOS and OpenSUSE are supported by this script.";
 	echo "See INSTALL for normal installation";
-	exit 1;
-fi
+	exit 1
+	;;
+esac
 
-echo "check /etc/gforge/local.inc for ${hostname} specific FusionForge settings"
-echo -e $msg;
-exit 0;
+echo "check /etc/gforge/local.inc for $hostname specific FusionForge settings"
+touch /opt/gforge/install_completed

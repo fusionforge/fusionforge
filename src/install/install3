@@ -24,15 +24,23 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 msg(){
-	GREEN="\033[01;32m"
-	NORMAL="\033[00m"
-	RED="\033[01;31m"
-	case $1 in
+	GREEN="[01;32m"
+	NORMAL="[00m"
+	RED="[01;31m"
+	if [ "$1" = "noreturn" ]
+	then
+		extra="-n"
+		shift
+	else
+		extra=""
+	fi
+	color=$1 ; shift
+	case $color in
 		red)
-			echo "$RED $2 $NORMAL"
+			echo $extra "$RED $1 $NORMAL"
 			;;
 		green)
-			echo "$GREEN $2 $NORMAL"
+			echo $extra "$GREEN $1 $NORMAL"
 			;;
 	esac
 }
@@ -40,10 +48,13 @@ msg(){
 create_db_admin_user(){
 	gforge_db="$1"
 	admin_user="$2"
-	su - postgres -c "psql $gforge_db -c \"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', 'INVALID', 'INVALID', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A'); INSERT INTO pfo_user_role (user_id, role_id) VALUES (currval('users_pk_seq'), 3)\""
+	if [ -f /tmp/fusionforge-use-pfo-rbac ]
+	then
+		su - postgres -c "psql $gforge_db -c \"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', 'INVALID', 'INVALID', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A'); INSERT INTO pfo_user_role (user_id, role_id) VALUES (currval('users_pk_seq'), 3)\""
+	else
+		su - postgres -c "psql $gforge_db -c \"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', 'INVALID', 'INVALID', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A')\""	
+	fi
 }
-
-msg green "-=# Welcome to FusionForge DB-Installer #=-"
 
 find_psql_init(){
 	initpsql=""
@@ -75,12 +86,9 @@ psql_startdb(){
 }
 
 get_config(){
-	insscriptdir=`cd \`dirname $0\`; pwd`
-	. $insscriptdir/config
-
 	if [ ! -d "$fusionforge_src_dir" ]
 	then
-		msg red "Error: GForge folder doesn't exist. Run fusionforge-install-2.php first."
+		msg red "Error: $fusionforge_src_dir folder doesn't exist. Run install2 first."
 		exit 2
 	fi
 }
@@ -92,7 +100,7 @@ find_pghba(){
 	do
 		if [ -f $pghbafile ]
 		then
-			$pghba="$pghbafile"
+			pghba="$pghbafile"
 		fi
 	done
 	if [ -z "$pghba" ]
@@ -109,7 +117,7 @@ find_tsearch(){
 	do
 		if [ -f $tsearchfile ]
 		then
-			$tsearch="$tsearchfile"
+			tsearch="$tsearchfile"
 		fi
 	done
 	if [ -z "$tsearch" ]
@@ -127,7 +135,7 @@ installandrundb()
 	then
 		while test -z "$FFORGE_DB"
 		do
-			msg green "* Enter the Database Name (fusionforge): "
+			msg noreturn green "* Enter the Database Name (fusionforge): "
 			read FFORGE_DB
 		done
 	fi
@@ -138,7 +146,7 @@ installandrundb()
 	then
 		while test -z "$FFORGE_USER"
 		do
-			msg green "* Enter the Database Username (gforge): "
+			msg noreturn green "* Enter the Database Username (gforge): "
 			read FFORGE_USER
 		done
 	fi
@@ -176,9 +184,9 @@ EOF
 
 	if [ -d /home/$gforge_user ]
 	then
-		$susufix = ''
+		susufix=''
 	else
-		$susufix = '-'
+		susufix='-'
 	fi
 
 	msg green " * Creating $gforge_db Database..."
@@ -205,7 +213,7 @@ EOF
 	then
 		while test -z "$FFORGE_ADMIN_USER"
 		do
-			msg green " * Enter the Admin Username (fforgeadmin): "
+			msg noreturn green " * Enter the Admin Username (fforgeadmin): "
 			read FFORGE_ADMIN_USER
 		done
 	fi
@@ -217,15 +225,15 @@ EOF
 		retry=5
 		while test -z "$FFORGE_ADMIN_PASSWORD" -a $retry -gt 0
 		do
-			msg green " * Enter the Site Admin Password:"
+			msg noreturn green " * Enter the Site Admin Password:"
 			read -s FFORGE_ADMIN_PASSWORD1
 			if validatePassword "$FFORGE_ADMIN_PASSWORD1"
 			then
-				msg green " * Please enter it again:"
+				msg noreturn green " * Please enter it again:"
 				read -s FFORGE_ADMIN_PASSWORD2
-				if [ "FFORGE_ADMIN_PASSWORD1" == "FFORGE_ADMIN_PASSWORD2" ]
+				if [ "$FFORGE_ADMIN_PASSWORD1" == "$FFORGE_ADMIN_PASSWORD2" ]
 				then
-					FFORGE_ADMIN_PASSWORD=$FFORGE_ADMIN_PASSWORD1
+					FFORGE_ADMIN_PASSWORD="$FFORGE_ADMIN_PASSWORD1"
 				else
 					msg green "Passwords don't match. Please try again."
 				fi
@@ -238,7 +246,7 @@ EOF
 			exit 1
 		else
 			create_db_admin_user "$gforge_db" "$admin_user"
-			forge_set_password "$admin_user" "$FFORGE_ADMIN_PASSWORD"
+			$fusionforge_src_dir/utils/forge_set_password "$admin_user" "$FFORGE_ADMIN_PASSWORD"
 		fi
 	fi
 }
@@ -294,7 +302,7 @@ validatePassword() {
 		return 1
 	fi
         CHECK=`echo $password | grep -E "[[:alnum:]]*"`
-        if [ "$CHECK" == "" ] ; then
+        if [ "$CHECK" == "" ]
         then
                 msg red "Password contains invalid characters. Please try again."
 		return 2
@@ -304,6 +312,7 @@ validatePassword() {
 }
 
 install3(){
+	msg green "-=# Welcome to FusionForge DB-Installer #=-"
 	find_psql_init
 	psql_startdb
 	get_config

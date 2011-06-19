@@ -25,9 +25,9 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 msg(){
-	GREEN="\033[01;32m"
-	NORMAL="\033[00m"
-	RED="\033[01;31m"
+	GREEN="[01;32m"
+	NORMAL="[00m"
+	RED="[01;31m"
 	case $1 in
 		red)
 			echo "$RED $2 $NORMAL"
@@ -39,14 +39,22 @@ msg(){
 }
 
 
-install_redhat() {
-	addFusionForgeYumRepo
-	addDagRPMForgeYumRepo
-	msg green "Installing packages: Executing YUM. Please wait..."
-	yum --enablerepo=fusionforge --enablerepo=dag-rpmforge  -y --skip-broken install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring php-jpgraph-1.5.2 poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync
+deps_redhat() {
+	type=redhat
+	if [ ! -f /tmp/done_yum ]
+	then
+		set -e
+		addFusionForgeYumRepo
+		addDagRPMForgeYumRepo
+		msg green "Installing packages: Executing YUM. Please wait..."
+		yum --enablerepo=fusionforge --enablerepo=dag-rpmforge  -y --skip-broken install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring php-jpgraph-1.5.2 poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync
+		touch /tmp/done_yum
+		set +e
+	fi
 }
 
-install_debian() {
+deps_debian() {
+	type=debian
 	msg green "Installing packages: Executing apt-get. Please wait..."
 	apt-get -y install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release php-htmlpurifier
 	a2enmod headers
@@ -59,7 +67,8 @@ install_debian() {
 }
 
 # http://www.arklinux.org/
-install_ark() {
+deps_ark() {
+	type=debian
 	msg green "Installing packages: Executing apt-get. Please wait..."
 	apt-get update
 	apt-get -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion subversion-server-httpd postfix rcs mod_ssl wget ssh
@@ -71,7 +80,8 @@ install_ark() {
 	msg red "You Must Install htmlpurifier manually."
 }
 
-install_suse() {
+deps_suse() {
+	type=suse
 	msg green "Installing Packages with yast"
 	yast -i php5 apache2-prefork php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php4-pgsql subversion apache-mod_dav_svn ssh postfix rcs php4-gd mod_ssl perl-IPC-Run php4-curl wget subversion-server apache2-mod_php4
 
@@ -92,7 +102,8 @@ install_suse() {
 	msg red "You Must Install htmlpurifier manually."
 }
 
-install_opensuse() {
+deps_opensuse() {
+	type=suse
 	msg green "Installing Packages with yast"
 	yast -i php5 apache2-prefork apache2-mod_php5 cvs mailman perl-IPC-Run perl-URI php5 php5-curl php5-gd php5-gettext php5-pgsql postfix postgresql postgresql-contrib postgresql-libs postgresql-server rcs openssh subversion subversion-server wget viewvc
 
@@ -123,7 +134,7 @@ name = Red Hat Enterprise \$releasever - fusionforge.org
 baseurl = $rpm_repo
 enabled = 0
 protect = 0
-gpgcheck = 0';
+gpgcheck = 0
 END
 	fi
 }
@@ -147,23 +158,23 @@ baseurl = $rpm_repo/el5/en/\$basearch/dag
 #mirrorlist = http://apt.sw.be/redhat/el5/en/mirrors-rpmforge
 enabled = 0
 protect = 0
-gpgcheck = 0';
+gpgcheck = 0
 END
 	fi
 }
 
-install_centos(){
-	install_redhat
+deps_centos(){
+	deps_redhat
 }
 
-install_rhel(){
-	install_redhat
+deps_rhel(){
+	deps_redhat
 }
 
-install_fedora(){
-	install_redhat
+deps_fedora(){
+	deps_redhat
 }
 
-install_ubuntu(){
-	install_debian
+deps_ubuntu(){
+	deps_debian
 }
