@@ -133,6 +133,13 @@ DocManListFileController.prototype =
 		} else {
 			this.params.divEditDirectory.hide();
 		}
+		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
+			if (this.params.divLeft.height() > this.params.divRight.height()) {
+				this.params.divHandle.css('height', this.params.divLeft.height());
+			} else {
+				this.params.divHandle.css('height', this.params.divRight.height());
+			}
+		}
 		return false;
 	},
 
@@ -144,6 +151,13 @@ DocManListFileController.prototype =
 			this.params.divEditDirectory.hide();
 		} else {
 			this.params.divAddItem.hide();
+		}
+		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
+			if (this.params.divLeft.height() > this.params.divRight.height()) {
+				this.params.divHandle.css('height', this.params.divLeft.height());
+			} else {
+				this.params.divHandle.css('height', this.params.divRight.height());
+			}
 		}
 		return false;
 	},
@@ -177,6 +191,13 @@ DocManListFileController.prototype =
 			});
 
 			clearInterval(this.lockInterval[id]);
+		}
+		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
+			if (this.params.divLeft.height() > this.params.divRight.height()) {
+				this.params.divHandle.css('height', this.params.divLeft.height());
+			} else {
+				this.params.divHandle.css('height', this.params.divRight.height());
+			}
 		}
 		return false;
 	},
@@ -249,6 +270,13 @@ DocManAddItemController.prototype =
 			this.params.divCreateDoc.hide();
 			this.params.divZipInject.hide();
 		}
+		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
+			if (jQuery('#left').height() > jQuery('#right').height()) {
+				jQuery('#handle').css('height', jQuery('#left').height());
+			} else {
+				jQuery('#handle').css('height', jQuery('#right').height());
+			}
+		}
 	},
 
 	toggleInjectZipView: function() {
@@ -260,6 +288,13 @@ DocManAddItemController.prototype =
 			this.params.divCreateDir.hide();
 			this.params.divCreateDoc.hide();
 		}
+		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
+			if (jQuery('#left').height() > jQuery('#right').height()) {
+				jQuery('#handle').css('height', jQuery('#left').height());
+			} else {
+				jQuery('#handle').css('height', jQuery('#right').height());
+			}
+		}
 	},
 
 	toggleAddFileView: function() {
@@ -270,6 +305,13 @@ DocManAddItemController.prototype =
 		} else {
 			this.params.divCreateDir.hide();
 			this.params.divZipInject.hide();
+		}
+		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
+			if (jQuery('#left').height() > jQuery('#right').height()) {
+				jQuery('#handle').css('height', jQuery('#left').height());
+			} else {
+				jQuery('#handle').css('height', jQuery('#right').height());
+			}
 		}
 	},
 
