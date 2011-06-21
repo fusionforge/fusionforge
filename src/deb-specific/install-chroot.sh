@@ -71,15 +71,11 @@ case "$1" in
 	    | sort -u \
 	    | cpio --quiet -pdumVLB $CHROOTDIR
 
-	# cvs extra
-	cp /lib/ld-linux*.so.* $CHROOTDIR/lib
-	# sshd extras
-	# pthread cancel
-	cp /lib/libgcc_s* $CHROOTDIR/lib
-	
-	# nss extras
-	# /lib/libnss_pgsql ?
-	cp /lib/libcom_err* $CHROOTDIR/lib
+	for i in "/lib/ld-linux*.so.*" "/lib/libgcc_s*" "/lib/libcom_err*" "/toto/nrst*"; do
+	    if [ -n "$(shopt -s nullglob; echo $i)" ] ; then
+		echo cp $i $CHROOTDIR/lib
+	    fi
+	done
 
 	# Create devices files
 	[ -c $CHROOTDIR/dev/null ] || mknod $CHROOTDIR/dev/null c 1 3 || true
