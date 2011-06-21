@@ -71,7 +71,7 @@ case "$1" in
 	    | sort -u \
 	    | cpio --quiet -pdumVLB $CHROOTDIR
 
-	for i in /lib/ld-linux*.so.* /lib/libgcc_s* /lib/libcom_err* ; do
+	for i in /lib/ld-linux*.so.* /lib/libgcc_s* /lib/libcom_err* /lib/libpam* /lib/libnss_files*; do
 		test -e "$i" || continue
 		cp "$i" $CHROOTDIR/lib/
 	done
@@ -108,10 +108,8 @@ FIN
 	[ -f /etc/pam.d/cvs ] && cp /etc/pam.d/cvs $CHROOTDIR/etc/pam.d
 	[ -f /etc/pam.d/other ] && cp /etc/pam.d/other $CHROOTDIR/etc/pam.d
 	[ "`ls /etc/pam.d/common* 2>/dev/null`" ] && cp /etc/pam.d/common* $CHROOTDIR/etc/pam.d
-	cp /lib/libpam* $CHROOTDIR/lib
-	
-	cp /lib/libnss_files* $CHROOTDIR/lib
-	cp /lib/security/* $CHROOTDIR/lib/security
+
+	cp -r /lib/security/* $CHROOTDIR/lib/
 	cp /etc/security/*.conf $CHROOTDIR/etc/security
 
 #	# Libnss-ldap related stuffs
