@@ -71,7 +71,7 @@ case "$1" in
 	    | sort -u \
 	    | cpio --quiet -pdumVLB $CHROOTDIR
 
-	for i in /lib/ld-linux*.so.* /lib/libgcc_s* /lib/libcom_err* /toto/nrst*; do
+	for i in /lib/ld-linux*.so.* /lib/libgcc_s* /lib/libcom_err* ; do
 		test -e "$i" || continue
 		cp "$i" $CHROOTDIR/lib/
 	done
