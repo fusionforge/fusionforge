@@ -7,7 +7,7 @@ set -e
 
 if [ $(id -u) != 0 ] ; then
     echo "You must be root to run this, please enter passwd"
-    exec su -c "$0 $1"
+    exec su -c "$0 $*"
 fi
 
 CHROOTDIR=$(/usr/share/gforge/bin/forge_get_config chroot)
@@ -71,10 +71,9 @@ case "$1" in
 	    | sort -u \
 	    | cpio --quiet -pdumVLB $CHROOTDIR
 
-	for i in "/lib/ld-linux*.so.*" "/lib/libgcc_s*" "/lib/libcom_err*" "/toto/nrst*"; do
-	    if [ -n "$(shopt -s nullglob; echo $i)" ] ; then
-		echo cp $i $CHROOTDIR/lib
-	    fi
+	for i in /lib/ld-linux*.so.* /lib/libgcc_s* /lib/libcom_err* /toto/nrst*; do
+		test -e "$i" || continue
+		cp "$i" $CHROOTDIR/lib/
 	done
 
 	# Create devices files
