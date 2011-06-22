@@ -69,7 +69,7 @@ if (getStringFromRequest('confirm')) {
 
 	if (!$group->removeUser($user_id)) {
 		exit_error($group->getErrorMessage(),'my');
-	} else {                    
+	} else {
 		session_redirect("/my/");
 	}
 
