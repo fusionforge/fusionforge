@@ -176,6 +176,10 @@ function ffOutputHandler($buffer) {
 			1 => array("pipe", "w"),
 			2 => array("pipe", "w"),
 		    );
+		$doctype = util_ifsetor($HTML->doctype);
+		if (!$doctype) {
+			$doctype = 'transitional';
+		}
 		$xmlstarlet = proc_open("xmlstarlet val -d " .
 		    escapeshellarg($dtdpath . $sysDTDs[$doctype]['dtdfile']) .
 		    " -e -", $dspec, $pipes);

@@ -54,6 +54,16 @@ class FusionForge extends Error {
 			$this->software_type = $forge_pkg_type;
 		}
 
+		if (isset($forge_pkg_name) && isset($forge_pkg_version)) {
+			$this->software_name = $forge_pkg_name;
+			$this->software_version = $forge_pkg_version;
+		}
+
+		$this->software_type = $this->software_name;
+		if (isset($forge_pkg_type)) {
+			$this->software_type = $forge_pkg_type;
+		}
+
 		return true;
 	}
 
