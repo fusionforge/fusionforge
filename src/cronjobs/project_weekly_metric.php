@@ -60,7 +60,7 @@ $rel = db_query_params ('INSERT INTO project_counts_weekly_tmp
 SELECT forum_group_list.group_id,$1,3*log(1+count(forum.msg_id)::float) AS count
 FROM forum,forum_group_list
 WHERE forum.group_forum_id=forum_group_list.group_forum_id
-AND post_date > $2
+AND post_date >= $2
 AND post_date < $3
 GROUP BY group_id',
 			array('forum',
@@ -76,7 +76,7 @@ $rel = db_query_params ('INSERT INTO project_counts_weekly_tmp
 SELECT project_group_list.group_id,$1,4*log(1+count(project_task.project_task_id)::float) AS count
 FROM project_task,project_group_list
 WHERE project_task.group_project_id=project_group_list.group_project_id
-AND end_date > $2
+AND end_date >= $2
 AND end_date < $3
 GROUP BY group_id',
 			array('tasks',
@@ -91,7 +91,7 @@ if (!$rel) {
 $rel = db_query_params ('INSERT INTO project_counts_weekly_tmp
 SELECT agl.group_id,$1,3*log(1+count(*)::float) AS count
 FROM artifact_group_list agl,artifact a
-WHERE a.open_date > $2
+WHERE a.open_date >= $2
 AND a.open_date < $3
 AND a.group_artifact_id=agl.group_artifact_id
 AND agl.datatype=$4
@@ -109,7 +109,7 @@ if (!$rel) {
 $rel = db_query_params ('INSERT INTO project_counts_weekly_tmp
 SELECT agl.group_id,$1,10*log(1+count(*)::float) AS count
 FROM artifact_group_list agl,artifact a
-WHERE a.open_date > $2
+WHERE a.open_date >= $2
 AND a.open_date < $3
 AND a.group_artifact_id=agl.group_artifact_id
 AND agl.datatype=$4
@@ -126,7 +126,7 @@ if (!$rel) {
 $rel = db_query_params ('INSERT INTO project_counts_weekly_tmp
 SELECT agl.group_id,$1,5*log(1+count(*)::float) AS count
 FROM artifact_group_list agl,artifact a
-WHERE a.open_date > $2
+WHERE a.open_date >= $2
 AND a.open_date < $3
 AND a.group_artifact_id=agl.group_artifact_id
 AND agl.datatype=$4
@@ -157,10 +157,10 @@ if (!$rel) {
 
 #file releases
 $rel = db_query_params ('INSERT INTO project_counts_weekly_tmp
-SELECT frs_package.group_id,$1,log(5 * count(*)::float)
+SELECT frs_package.group_id,$1,5*log(1+count(*)::float)
 FROM frs_release,frs_package
 WHERE frs_package.package_id = frs_release.package_id
-AND frs_release.release_date > $2
+AND frs_release.release_date >= $2
 AND frs_release.release_date < $3
 GROUP BY frs_package.group_id',
 			array('filereleases',
