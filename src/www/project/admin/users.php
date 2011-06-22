@@ -7,6 +7,7 @@
  * Copyright © 2011
  *	Thorsten Glaser <t.glaser@tarent.de>
  * All rights reserved.
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
