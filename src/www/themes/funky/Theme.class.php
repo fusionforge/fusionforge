@@ -388,6 +388,7 @@ class Theme extends Layout {
 	 */
 	function headerJS()
 	{
+		html_use_jquery();
 		echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
 		echo '<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>';
 		echo '<script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>';
