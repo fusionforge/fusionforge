@@ -2,8 +2,10 @@
 /**
  * Project Admin page to manage quotas disk and database
  *
- * 
- * Fabio Bertagnin November 2005
+ *
+ * Copyright 2005, Fabio Bertagnin
+ * Copyright 2011, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -22,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
+require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
@@ -44,7 +46,7 @@ $quotas = array();
 // all projects list
 $res_db = db_query_params ('SELECT group_id, group_name, unix_group_name, quota_soft, quota_hard FROM groups ORDER BY group_id ',
 			array ());
-if (db_numrows($res_db) > 0) 
+if (db_numrows($res_db) > 0)
 {
 	while($e = db_fetch_array($res_db))
 	{
@@ -63,7 +65,7 @@ if (db_numrows($res_db) > 0)
 // documents database size
 $res_db = db_query_params ('SELECT group_id, SUM(octet_length(data)) as size, SUM(octet_length(data_words)) as size1 FROM doc_data GROUP BY group_id ',
 			array ());
-if (db_numrows($res_db) > 0) 
+if (db_numrows($res_db) > 0)
 {
 	while($e = db_fetch_array($res_db))
 	{
@@ -77,7 +79,7 @@ if (db_numrows($res_db) > 0)
 // news database size
 $res_db = db_query_params ('SELECT group_id, SUM(octet_length(summary) + octet_length(details)) as size FROM news_bytes GROUP BY group_id',
 			array ());
-if (db_numrows($res_db) > 0) 
+if (db_numrows($res_db) > 0)
 {
 	while($e = db_fetch_array($res_db))
 	{
@@ -89,7 +91,7 @@ if (db_numrows($res_db) > 0)
 // forums database size
 $res_db = db_query_params ('SELECT forum_group_list.group_id as group_id, SUM(octet_length(subject)+octet_length(body)) as size FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id GROUP BY group_id',
 			array ());
-if (db_numrows($res_db) > 0) 
+if (db_numrows($res_db) > 0)
 {
 	while($e = db_fetch_array($res_db))
 	{
@@ -143,7 +145,7 @@ $ftp_dir = $chroot_dir."/home/users/";
 $users = array();
 $res_db = db_query_params ('SELECT user_id, user_name, realname, unix_status FROM users ORDER BY user_id ',
 			array ());
-if (db_numrows($res_db) > 0) 
+if (db_numrows($res_db) > 0)
 {
 	while($e = db_fetch_array($res_db))
 	{
@@ -177,13 +179,13 @@ foreach ($users as $u)
 		<td style="border-top:thick solid #808080" colspan="7">
 			<span style="font-size:10px">
 				(&nbsp;
-				<?php echo _('project'); ?>* : 
+				<?php echo _('project'); ?>* :
 				<?php echo _('Ftp, Home'); ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<?php echo _('scm'); ?>* : 
+				<?php echo _('scm'); ?>* :
 				<?php echo _('Cvs, Svn'); ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<?php echo _('others'); ?>* : 
+				<?php echo _('others'); ?>* :
 				<?php echo _('Download - without quota control'); ?>
 				&nbsp;)
 			</span>
@@ -234,7 +236,7 @@ foreach ($users as $u)
 		$color2 = "#ffffff";
 		$color0 = $color1;
 		$colorq = $color2;
-		if ($q["quota_soft"] > 0) 
+		if ($q["quota_soft"] > 0)
 		{
 			$color0 = "#E5ECB1";
 			$colorq = $color0;
@@ -275,16 +277,16 @@ foreach ($users as $u)
 				<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>;font-weight:bold" align="right">
-				<?php echo add_numbers_separator(convert_bytes_to_mega($local_disk_size)); ?> 
+				<?php echo add_numbers_separator(convert_bytes_to_mega($local_disk_size)); ?>
 				<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $colorq; ?>" align="right">
-				<?php 
+				<?php
 					if ($q["quota_soft"] > 0)
 					{
-						echo add_numbers_separator(convert_bytes_to_mega($q["quota_soft"])); 
+						echo add_numbers_separator(convert_bytes_to_mega($q["quota_soft"]));
 						echo " ";
-						echo _('Mb'); 
+						echo _('Mb');
 					}
 					else
 					{
@@ -293,12 +295,12 @@ foreach ($users as $u)
 				?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $colorq; ?>" align="right">
-				<?php 
+				<?php
 					if ($q["quota_hard"] > 0)
 					{
-						echo add_numbers_separator(convert_bytes_to_mega($q["quota_hard"])); 
+						echo add_numbers_separator(convert_bytes_to_mega($q["quota_hard"]));
 						echo " ";
-						echo _('Mb'); 
+						echo _('Mb');
 					}
 					else
 					{

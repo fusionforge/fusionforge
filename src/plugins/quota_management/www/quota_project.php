@@ -4,7 +4,9 @@
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2010 (c) FusionForge Team 
+ * Copyright 2005, Fabio Bertagnin
+ * Copyright 2010 (c) FusionForge Team
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -24,7 +26,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $id;
 
+require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
@@ -32,34 +36,33 @@ if (!forge_get_config('use_project_vhost')) {
 	exit_disabled('home');
 }
 
-session_require_perm ('project_admin', $group_id) ;
+session_require_perm('project_admin', $id);
 
-$group = &group_get_object($group_id);
+$group = &group_get_object($id);
 
 if (!$group || !is_object($group)) {
-        exit_no_group();
+	exit_no_group();
 } else if ($group->isError()) {
-        exit_error($group->getErrorMessage(),'home');
+	exit_error($group->getErrorMessage(), 'home');
 }
 
 
-project_admin_header(array('title'=>_('Project quota manager'),'group'=>$group->getID(),'pagename'=>'project_admin_quotas','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>_('Project quota manager'),'group'=>$group->getID(),'pagename'=>'project_admin_quotas','sectionvals'=>array(group_getname($id))));
 ?>
 
 <h4><?php echo _('Project quota manager'); ?></h4>
 
 <?php
 $quotas = array();
-$res_db = db_query_params ('SELECT SUM(octet_length(data)) as size, SUM(octet_length(data_words)) as size1, count(*) as nb FROM doc_data WHERE group_id = $1 ',
-			array ($group_id));
+$res_db = db_query_params('SELECT SUM(octet_length(data)) as size, SUM(octet_length(data_words)) as size1, count(*) as nb FROM doc_data WHERE group_id = $1 ',
+			array ($id));
 $q = array();
 $q["name"] = _('Documents');
 $q["nb"] = 0; $q["size"] = 0;
 $q1 = array();
 $q1["name"] = _('Documents search engine');
 $q["size"] = 0;
-if (db_numrows($res_db) > 0) 
-{
+if (db_numrows($res_db) > 0) {
 	$e = db_fetch_array($res_db);
 	$q["nb"] = $e["nb"];
 	$q["size"] = $e["size"];
@@ -69,12 +72,12 @@ if (db_numrows($res_db) > 0)
 $quotas[0] = $q;
 $quotas[1] = $q1;
 
-$res_db = db_query_params ('SELECT SUM(octet_length(summary) + octet_length(details)) as size, count(*) as nb FROM news_bytes WHERE group_id = $1 ',
-			array ($group_id));
+$res_db = db_query_params('SELECT SUM(octet_length(summary) + octet_length(details)) as size, count(*) as nb FROM news_bytes WHERE group_id = $1 ',
+			array ($id));
 $q = array();
 $q["name"] = _('News');
 $q["nb"] = 0; $q["size"] = 0;
-if (db_numrows($res_db) > 0) 
+if (db_numrows($res_db) > 0)
 {
 	$e = db_fetch_array($res_db);
 	$q["nb"] = $e["nb"];
@@ -82,14 +85,12 @@ if (db_numrows($res_db) > 0)
 }
 $quotas[2] = $q;
 
-
-$res_db = db_query_params ('SELECT SUM(octet_length(subject)+octet_length(body)) as size, count(*) as nb FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id WHERE group_id = $1 ',
-			array ($group_id));
+$res_db = db_query_params('SELECT SUM(octet_length(subject)+octet_length(body)) as size, count(*) as nb FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id WHERE group_id = $1 ',
+			array ($id));
 $q = array();
 $q["name"] = _('Forums');
 $q["nb"] = 0; $q["size"] = 0;
-if (db_numrows($res_db) > 0) 
-{
+if (db_numrows($res_db) > 0) {
 	$e = db_fetch_array($res_db);
 	$q["nb"] = $e["nb"];
 	$q["size"] = $e["size"];
@@ -105,10 +106,9 @@ $_quota_block_size = trim(shell_exec("echo $BLOCK_SIZE")) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 $quota_soft = "";
 $quota_hard = "";
-$res_db = db_query_params ('SELECT quota_soft, quota_hard FROM groups WHERE group_id = $1',
-			array ($group_id));
-if (db_numrows($res_db) > 0) 
-{
+$res_db = db_query_params('SELECT quota_soft, quota_hard FROM groups WHERE group_id = $1',
+			array($id));
+if (db_numrows($res_db) > 0) {
 	$e = db_fetch_array($res_db);
 	$quota_hard = $e["quota_hard"];
 	$quota_soft = $e["quota_soft"];
@@ -120,7 +120,7 @@ $quota_tot_other = 0;
 $quota_tot_1 = 0;
 $quota_tot_scm = 0;
 
-$upload_dir = forge_get_config('upload_dir') .  $group->getUnixName();
+$upload_dir = forge_get_config('upload_dir') . $group->getUnixName();
 $chroot_dir = forge_get_config('chroot');
 $ftp_dir = forge_get_config('ftp_upload_dir')."/pub/".$group->getUnixName();
 $group_dir = $chroot_dir.forge_get_config('groupdir_prefix') . "/" . $group->getUnixName();
@@ -164,10 +164,6 @@ $quotas_disk[] = $q;
 // echo "svn = $svn_dir <br />";
 // echo "cvs = $cvs_dir <br />";
 
-
-
-
-
 // print_debug(print_r($quotas, true));
 ?>
 
@@ -180,12 +176,10 @@ $quotas_disk[] = $q;
 		<td style="border-top:thin solid #808080" align="right"><?php echo _('quantity'); ?></td>
 		<td style="border-top:thin solid #808080" align="right"><?php echo _('size'); ?></td>
 	</tr>
-<?php 
-	$sizetot = 0;
-foreach ($quotas as $q) 
-{ 
-	if ($q["size"] != "")
-	{
+<?php
+$sizetot = 0;
+foreach ($quotas as $q) {
+	if ($q["size"] != "") {
 		$sizetot += $q["size"];
 		?>
 			<tr>
@@ -193,8 +187,8 @@ foreach ($quotas as $q)
 				<td style="border-top:thin solid #808080" align="right"><?php echo $q["nb"]; ?></td>
 				<td style="border-top:thin solid #808080" align="right"><?php echo add_numbers_separator(convert_bytes_to_mega($q["size"]))." "._('Mb'); ?></td>
 			</tr>
-<?php 
-	} 
+<?php
+	}
 }
 ?>
 	<tr style="font-weight:bold">
@@ -224,12 +218,10 @@ foreach ($quotas as $q)
 			<?php echo _('size'); ?>
 		</td>
 	</tr>
-<?php 
-	$sizetot = 0;
-foreach ($quotas_disk as $q) 
-{ 
-	if ($q["size"] != "")
-	{
+<?php
+$sizetot = 0;
+foreach ($quotas_disk as $q) {
+	if ($q["size"] != "") {
 		$sizetot += $q["size"];
 ?>
 	<tr>
@@ -241,8 +233,8 @@ foreach ($quotas_disk as $q)
 			<?php echo add_numbers_separator(convert_bytes_to_mega($q["size"]))." "._('Mb'); ?>
 		</td>
 	</tr>
-<?php 
-	} 
+<?php
+	}
 }
 ?>
 	<tr style="font-weight:bold">
@@ -258,22 +250,19 @@ foreach ($quotas_disk as $q)
 
 
 <?php
-	
-	$color1 = "#ffffff";
-	$color2 = "#ffffff";
-	$msg1 = "&nbsp;";
-	$msg2 = "&nbsp;";
-	$qs = $quota_soft * 1024 * 1024;
-	if (($quota_tot_1+0) > ($qs+0) && ($qs+0) > 0)
-	{
-		$color1 = "#FFDCDC";
-		$msg1 = _('Quota exceeded');
-	}
-	if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0)
-	{
-		$color2 = "#FFDCDC";
-		$msg2 = _('Quota exceeded');
-	}
+$color1 = "#ffffff";
+$color2 = "#ffffff";
+$msg1 = "&nbsp;";
+$msg2 = "&nbsp;";
+$qs = $quota_soft * 1024 * 1024;
+if (($quota_tot_1+0) > ($qs+0) && ($qs+0) > 0) {
+	$color1 = "#FFDCDC";
+	$msg1 = _('Quota exceeded');
+}
+if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
+	$color2 = "#FFDCDC";
+	$msg2 = _('Quota exceeded');
+}
 ?>
 
 <table width="500px" cellpadding="2" cellspacing="0" border="0">
@@ -302,28 +291,22 @@ foreach ($quotas_disk as $q)
 			<?php echo $msg1; ?>
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php 
-				if ($quota_soft == 0)
-				{
+			<?php
+				if ($quota_soft == 0) {
 					echo "---";
-				}
-				else
-				{
-					echo "$quota_soft";  
-					echo _('Mb'); 
+				} else {
+					echo "$quota_soft";
+					echo _('Mb');
 				}
 			?>
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php 
-				if ($quota_hard == 0)
-				{
+			<?php
+				if ($quota_hard == 0) {
 					echo "---";
-				}
-				else
-				{
-					echo "$quota_hard";  
-					echo _('Mb'); 
+				} else {
+					echo "$quota_hard";
+					echo _('Mb');
 				}
 			?>
 		</td>
@@ -336,28 +319,22 @@ foreach ($quotas_disk as $q)
 			<?php echo $msg2; ?>
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php 
-				if ($quota_soft == 0)
-				{
+			<?php
+				if ($quota_soft == 0) {
 					echo "---";
-				}
-				else
-				{
-					echo "$quota_soft";  
-					echo _('Mb'); 
+				} else {
+					echo "$quota_soft";
+					echo _('Mb');
 				}
 			?>
 			</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php 
-				if ($quota_hard == 0)
-				{
+			<?php
+				if ($quota_hard == 0) {
 					echo "---";
-				}
-				else
-				{
-					echo "$quota_hard";  
-					echo _('Mb'); 
+				} else {
+					echo "$quota_hard";
+					echo _('Mb');
 				}
 			?>
 		</td>

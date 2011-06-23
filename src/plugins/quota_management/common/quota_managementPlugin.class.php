@@ -1,10 +1,10 @@
 <?php
-
 /**
  * quota_managementPlugin Class
  *
- * Copyright 2010, Fusionforge Team
+ * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -30,7 +30,6 @@ class quota_managementPlugin extends Plugin {
 		$this->text = "Quota Management"; // To show in the tabs, use...
 		$this->_addHook('user_personal_links');//to make a link to the user's personal part of the plugin
 		$this->_addHook('usermenu');
-		$this->_addHook('groupmenu');	// To put into the project tabs
 		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook('groupisactivecheckboxpost'); //
 		$this->_addHook('userisactivecheckbox'); // The "use ..." checkbox in user account
@@ -49,71 +48,6 @@ class quota_managementPlugin extends Plugin {
 				$param = '?type=user&id='.$G_SESSION->getId()."&pluginname=".$this->name; // we indicate the part we're calling is the user one
 				echo $HTML->PrintSubMenu(array($text), array('/plugins/quota_management/index.php'.$param ), array(_('Manage your quota')));
 			}
-		} elseif ($hookname == "groupmenu") {
-			$group_id = $params['group'];
-			$project = &group_get_object($group_id);
-			if (!$project || !is_object($project)) {
-				return;
-			}
-			if ($project->isError()) {
-				return;
-			}
-			if (!$project->isProject()) {
-				return;
-			}
-			if ($project->usesPlugin($this->name)) {
-				$params['TITLES'][] = $this->text;
-				$params['DIRS'][] = util_make_url ('/plugins/quota_management/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
-				$params['ADMIN'][] = '';
-			} else {
-			//	$params['TITLES'][]=$this->text." is [Off]";
-			}
-			(($params['toptab'] == $this->name) ? $params['selected'] = (count($params['TITLES'])-1) : '' );
-		} elseif ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
-			$use_quota_managementplugin = getStringFromRequest('use_quota_managementplugin');
-			if ($use_quota_managementplugin == 1) {
-				$group->setPluginUse($this->name);
-			} else {
-				$group->setPluginUse($this->name, false);
-			}
-		} elseif ($hookname == "userisactivecheckbox") {
-			//check if user is active
-			// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
-			$user = $params['user'];
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_quota_managementplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin($this->name)) {
-				echo "CHECKED";
- 			}
-			echo ">    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "userisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
-			$user = $params['user'];
-			$use_quota_managementplugin = getStringFromRequest('use_quota_managementplugin');
-			if ($use_quota_managementplugin == 1) {
-				$user->setPluginUse($this->name);
-			} else {
-				$user->setPluginUse($this->name, false);
-			}
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_quota_managementplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ($user->usesPlugin($this->name)) {
-				echo "CHECKED";
-			}
-			echo ">    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
 			// this displays the link in the user's profile page to it's personal quota_management (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
@@ -138,7 +72,7 @@ class quota_managementPlugin extends Plugin {
 			}
 		} elseif ($hookname == "site_admin_option_hook") {
 			// www/admin/index.php line 167
-			// ...
+			//
 			?>
 			<li><?php echo util_make_link("/plugins/quota_management/quota.php",
 						       _('Ressources usage and quota')

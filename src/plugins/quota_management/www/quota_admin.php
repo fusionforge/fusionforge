@@ -2,8 +2,9 @@
 /**
  * Project Admin page to manage quotas disk and database
  *
- * 
- * Fabio Bertagnin November 2005
+ * Copyright 2005, Fabio Bertagnin
+ * Copyright 2011, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -22,7 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
+require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
@@ -43,7 +44,7 @@ site_admin_header(array('title'=>_('Site admin')));
 
 // echo "<pre>".print_r($_POST, true)."</pre>";
 
-// quota update 
+// quota update
 if ($_POST["cmd"] == "maj")
 {
 	$qs = $_POST["qs"] * $_quota_block_size;
@@ -71,7 +72,7 @@ $quotas = array();
 // all projects list
 $res_db = db_query_params ('SELECT group_id, group_name, unix_group_name, quota_soft, quota_hard FROM groups ORDER BY group_id ',
 			array ());
-if (db_numrows($res_db) > 0) 
+if (db_numrows($res_db) > 0)
 {
 	while($e = db_fetch_array($res_db))
 	{
@@ -120,17 +121,17 @@ if (db_numrows($res_db) > 0)
 			</a></td>
 			<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
 			<td style="border-top:thin solid #808080" align="right">
-				<input type="text" name="qs" 
-					size="12" 
-					value="<?php echo $q["quota_soft"]; ?>" 
-					style="background:#ffffd0;text-align:right" /> 
+				<input type="text" name="qs"
+					size="12"
+					value="<?php echo $q["quota_soft"]; ?>"
+					style="background:#ffffd0;text-align:right" />
 					<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080" align="right">
-				<input type="text" name="qh" 
-					size="12" 
-					value="<?php echo $q["quota_hard"]; ?>" 
-					style="background:#ffffd0;text-align:right" /> 
+				<input type="text" name="qh"
+					size="12"
+					value="<?php echo $q["quota_hard"]; ?>"
+					style="background:#ffffd0;text-align:right" />
 				<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080" align="right">
