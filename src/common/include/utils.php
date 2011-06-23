@@ -1482,21 +1482,25 @@ if ( !function_exists('sys_get_temp_dir')) {
 }
 
 /* convert '\n' to <br /> or </p><p> */
-function util_pwrap($encoded_string) {
-	return str_replace("<p></p>", "",
-	    str_replace("<br /></p>", "</p>",
-	    str_replace("<p><br />", "<p>",
-	    "<p>" . str_replace("<br /><br />", "</p><p>",
-	    implode("<br />", explode("\n",
-	    $encoded_string))) . "</p>")));
+function util_pwrap($encoded_string,$tag='p') {
+	return str_replace("<".$tag."></".$tag.">", "",
+	    str_replace("<".$tag."><br />", "<".$tag.">",
+	    "<".$tag.">" . str_replace("<br /><br />",
+	    "</".$tag."><".$tag.">",
+	    implode("<br />",
+	    explode("\n",
+	    $encoded_string
+	    ))) . "</".$tag.">"));
 }
-function util_ttwrap($encoded_string) {
-	return str_replace("<p><tt></tt></p>", "",
-	    str_replace("<br /></tt></p>", "</tt></p>",
-	    str_replace("<p><tt><br />", "<p><tt>",
-	    "<p><tt>" . str_replace("<br /><br />", "</tt></p><p><tt>",
-	    implode("<br />", explode("\n",
-	    encoded_string))) . "</tt></p>")));
+function util_ttwrap($encoded_string,$tag='p') {
+	return str_replace("<".$tag."><tt></tt></".$tag.">", "",
+	    str_replace("<".$tag."><tt><br />", "<".$tag."><tt>",
+	    "<".$tag."><tt>" . str_replace("<br /><br />",
+	    "</tt></".$tag."><".$tag."><tt>",
+	    implode("<br />",
+	    explode("\n",
+	    $encoded_string
+	    ))) . "</tt></".$tag.">"));
 }
 
 /* takes a string and returns it HTML encoded, URIs made to hrefs */
@@ -1506,7 +1510,7 @@ function util_uri_grabber($unencoded_string, $tryaidtid=false) {
 	    $unencoded_string));
 	/* replace all URIs with ^AURI^A */
 	$s = preg_replace(
-	    '|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$,_.!~*\'()%-]+)|',
+	    '|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$._!~*\'()%-]+)|',
 	    "\x01\$1\x01", $s);
 	if (!$s)
 		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");
