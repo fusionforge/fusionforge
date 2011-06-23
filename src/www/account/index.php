@@ -275,6 +275,7 @@ plugin_hook("userisactivecheckbox", $hookParams);
 ?>
 <tr><td>
 
+<?php
 echo $HTML->boxBottom();
 
 // ############################### Shell Account
