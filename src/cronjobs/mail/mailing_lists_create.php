@@ -37,11 +37,13 @@ require $gfcommon.'include/cron_utils.php';
 $err = '';
 
 if (is_dir(forge_get_config('mailman_path'))) {
-	$path_to_mailman=forge_get_config('mailman_path');
+	$path_to_mailman = forge_get_config('mailman_path');
 } elseif (is_dir("/usr/lib/mailman")) {
-	$path_to_mailman="/usr/lib/mailman";
+	$path_to_mailman = "/usr/lib/mailman";
 } else {
-	echo "\npath_to_mailman path is not set right for this script!!";
+	$err .= "\npath_to_mailman path is not set right for this script!!";
+	cron_entry(18, $err);
+	exit;
 }
 
 //
@@ -49,8 +51,8 @@ if (is_dir(forge_get_config('mailman_path'))) {
 // a "list" of them for use later so we don't try to create ones that
 // already exist
 //
-$mailing_lists=array();
-$mlists_cmd = escapeshellcmd($path_to_mailman."/bin/list_lists");
+$mailing_lists = array();
+$mlists_cmd = escapeshellcmd($path_to_mailman."/bin/list_lists -b");
 //$err .= "Command to be executed is $mlists_cmd\n";
 $fp = popen($mlists_cmd, "r");
 while (!feof($fp)) {
@@ -60,8 +62,7 @@ while (!feof($fp)) {
 	}
 	$mlist = trim($mlist);
 	if ($mlist <> "") {
-		list($listname, $listdesc) = explode(" ", $mlist);
-		$mailing_lists[] = strtolower($listname);
+		$mailing_lists[] = strtolower($mlist);
 	}
 }
 
@@ -240,6 +241,6 @@ for($k = 0; $k < $rows; $k++) {
 	}
 }
 
-cron_entry(18,$err);
+cron_entry(18, $err);
 
 ?>
