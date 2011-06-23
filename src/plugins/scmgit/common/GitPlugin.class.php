@@ -124,7 +124,7 @@ class GitPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the GIT tree via this method. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 			} else {
 				$b = '<p class="warning">'._('Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled').'</p>';
 			}
@@ -145,7 +145,7 @@ class GitPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the GIT tree via this method. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 			}
 		}
 
