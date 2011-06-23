@@ -212,7 +212,6 @@ if (count ($projects) < 1) {
 		// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/
 		$usergroup_uri = $project_uri .'members/';
 
-
 		print '<div rel="sioc:member_of">'."\n"
 			.'<div about="'. $usergroup_uri .'" typeof="sioc:UserGroup">'."\n"
 			.'<div rel="sioc:usergroup_of">'."\n"

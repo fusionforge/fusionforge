@@ -339,7 +339,7 @@ foreach ($members as $user) {
 			$seen = true ;
 		}
 
-		echo '
+		echo '<td>
 		<div style="float:left;">
 			' . $role->getName() . '
 		</div><div style="float:right;">
@@ -353,7 +353,7 @@ foreach ($members as $user) {
 		</div></td></tr>';
 	}
 
-	echo '
+	echo '<tr><td colspan="2">
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="submit" value="y" />
 		<input type="hidden" name="form_unix_name" value="'.$user->getUnixName().'" />
@@ -455,7 +455,7 @@ foreach ($used_external_roles as $r) {
 	</form>
 </td></tr>';
 }
-echo '</table>' ;
+echo '</tbody></table>' ;
 	}
 
 	if (count ($unused_external_roles)) {
