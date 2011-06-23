@@ -1,6 +1,29 @@
 #! /usr/bin/php
 <?php
 
+/**
+ * Mailing List Creation Cronjob
+ *
+ * Copyright 2000-2010, Fusionforge Team
+ * Copyright 2011, Franck Villaume - Capgemini
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 //
 //	This script will read in a list existing mailing lists, then add the new lists
 //	and, finally, create the lists in a /var/lib/gforge/dumps/mailman-aliases file
@@ -14,21 +37,22 @@ require $gfcommon.'include/cron_utils.php';
 $err = '';
 
 if (is_dir(forge_get_config('mailman_path'))) {
+	$path_to_mailman=forge_get_config('mailman_path');
 } elseif (is_dir("/usr/lib/mailman")) {
-	$sys_path_to_mailman="/usr/lib/mailman";
+	$path_to_mailman="/usr/lib/mailman";
 } else {
-    echo "\nsys_path_to_mailman path is not set right for this script!!";
+	echo "\npath_to_mailman path is not set right for this script!!";
 }
 
 //
 // Extract the mailing lists that already exist on the system and create
-// a "list" of them for use later so we don't try to create ones that 
+// a "list" of them for use later so we don't try to create ones that
 // already exist
 //
 $mailing_lists=array();
-$mlists_cmd = escapeshellcmd(forge_get_config('mailman_path')."/bin/list_lists");
+$mlists_cmd = escapeshellcmd($path_to_mailman."/bin/list_lists");
 //$err .= "Command to be executed is $mlists_cmd\n";
-$fp = popen ($mlists_cmd,"r");
+$fp = popen($mlists_cmd, "r");
 while (!feof($fp)) {
 	$mlist = fgets($fp, 4096);
 	if (stristr($mlist,"matching mailing lists") !== FALSE) {
@@ -36,8 +60,8 @@ while (!feof($fp)) {
 	}
 	$mlist = trim($mlist);
 	if ($mlist <> "") {
-		list($listname, $listdesc) = explode(" ",$mlist);	
-		$mailing_lists[] = strtolower($listname);	
+		list($listname, $listdesc) = explode(" ", $mlist);
+		$mailing_lists[] = strtolower($listname);
 	}
 }
 
@@ -45,18 +69,18 @@ while (!feof($fp)) {
 
 pclose($fp);
 
-$res = db_query_params ('SELECT users.user_name,email,mail_group_list.list_name,
-	mail_group_list.password,mail_group_list.status, 
-	mail_group_list.group_list_id,mail_group_list.is_public
-	FROM mail_group_list,users
-	WHERE mail_group_list.list_admin=users.user_id',
+$res = db_query_params('SELECT users.user_name,email,mail_group_list.list_name,
+			mail_group_list.password,mail_group_list.status,
+			mail_group_list.group_list_id,mail_group_list.is_public
+			FROM mail_group_list,users
+			WHERE mail_group_list.list_admin=users.user_id',
 			array ());
 $err .= db_error();
 
-$rows=db_numrows($res);
+$rows = db_numrows($res);
 //$err .= "$rows rows returned from query\n";
 
-$h1 = fopen(forge_get_config('data_path').'/dumps/mailman-aliases',"w");
+$h1 = fopen(forge_get_config('data_path').'/dumps/mailman-aliases', "w");
 
 $mailingListIds = array();
 
@@ -78,7 +102,7 @@ for ($i=0; $i<$rows; $i++) {
 		$err .= 'Invalid List Name: ' . $listname;
 		break;
 	}
-	
+
 	$is_commits_list = preg_match('/-commits$/', $listname);
 
 	// Hack to Disable auto-public of listname.
@@ -86,28 +110,28 @@ for ($i=0; $i<$rows; $i++) {
 
 	// Here we assume that the privatize_list.py script is located in the same dir as this script
 	$script_dir = dirname(__FILE__);
-	$privatize_cmd = escapeshellcmd(forge_get_config('mailman_path').'/bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
-	$publicize_cmd = escapeshellcmd(forge_get_config('mailman_path').'/bin/config_list -i '.$script_dir.'/publicize_list.py '.$listname);
-	
-	if (! in_array($listname,$mailing_lists)) {		// New list?
+	$privatize_cmd = escapeshellcmd($path_to_mailman.'/bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
+	$publicize_cmd = escapeshellcmd($path_to_mailman.'/bin/config_list -i '.$script_dir.'/publicize_list.py '.$listname);
+
+	if (!in_array($listname,$mailing_lists)) {	// New list?
 		$err .= "Creating Mailing List: $listname\n";
-		//$lcreate_cmd = forge_get_config('mailman_path')."/bin/newlist -q $listname@".forge_get_config('lists_host')." $email $listpassword &> /dev/null";
-		$lcreate_cmd = forge_get_config('mailman_path')."/bin/newlist -q $listname $email $listpassword";
+		//$lcreate_cmd = $path_to_mailman."/bin/newlist -q $listname@".forge_get_config('lists_host')." $email $listpassword &> /dev/null";
+		$lcreate_cmd = $path_to_mailman."/bin/newlist -q $listname $email $listpassword";
 		$err .= "Command to be executed is $lcreate_cmd\n";
 		passthru($lcreate_cmd, $failed);
-		if($failed) {
+		if ($failed) {
 			$err .= 'Failed to create '.$listname.", skipping\n";
-echo $err;
+			echo $err;
 			continue;
 		} else {
 			if ($is_commits_list || $public) {
 				// Make the *-commits list public
 				$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
-				passthru($publicize_cmd,$publicizeFailed);
+				passthru($publicize_cmd, $publicizeFailed);
 			} else {
 				// Privatize the new list
 				$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-				passthru($privatize_cmd,$privatizeFailed);
+				passthru($privatize_cmd, $privatizeFailed);
 			}
 		}
 		$mailingListIds[] = $grouplistid;
@@ -125,9 +149,9 @@ echo $err;
 			passthru($privatize_cmd,$privatizeFailed);
 		}
 	} elseif ($status == MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
-		$change_pw_cmd = escapeshellcmd(forge_get_config ('mailman_path').'/bin/change_pw -l '.$listname);
+		$change_pw_cmd = escapeshellcmd($path_to_mailman.'/bin/change_pw -l '.$listname);
 		$err .= "Resetting password of ".$listname."\n";
-		passthru($change_pw_cmd,$failed);
+		passthru($change_pw_cmd, $failed);
 		if ($failed) {
 			$err .= 'Failed to reset password of '.$listname."\n";
 		}
@@ -138,35 +162,35 @@ echo $err;
 			passthru($privatize_cmd,$privatizeFailed);
 		}
 	}
-	
-	if(file_exists(forge_get_config('mailman_path').'/mail/mailman')) {
+
+	if(file_exists($path_to_mailman.'/mail/mailman')) {
 		// Mailman 2.1
 		$list_str =
-$listname.':              "|'.forge_get_config('mailman_path').'/mail/mailman post '.$listname.'"'."\n"
-.$listname.'-admin:        "|'.forge_get_config('mailman_path').'/mail/mailman admin '.$listname.'"'."\n"
-.$listname.'-bounces:      "|'.forge_get_config('mailman_path').'/mail/mailman bounces '.$listname.'"'."\n"
-.$listname.'-confirm:      "|'.forge_get_config('mailman_path').'/mail/mailman confirm '.$listname.'"'."\n"
-.$listname.'-join:         "|'.forge_get_config('mailman_path').'/mail/mailman join '.$listname.'"'."\n"
-.$listname.'-leave:        "|'.forge_get_config('mailman_path').'/mail/mailman leave '.$listname.'"'."\n"
-.$listname.'-owner:        "|'.forge_get_config('mailman_path').'/mail/mailman owner '.$listname.'"'."\n"
-.$listname.'-request:      "|'.forge_get_config('mailman_path').'/mail/mailman request '.$listname.'"'."\n"
-.$listname.'-subscribe:    "|'.forge_get_config('mailman_path').'/mail/mailman subscribe '.$listname.'"'."\n"
-.$listname.'-unsubscribe:  "|'.forge_get_config('mailman_path').'/mail/mailman unsubscribe '.$listname.'"'."\n\n"
+$listname.':              "|'.$path_to_mailman.'/mail/mailman post '.$listname.'"'."\n"
+.$listname.'-admin:        "|'.$path_to_mailman.'/mail/mailman admin '.$listname.'"'."\n"
+.$listname.'-bounces:      "|'.$path_to_mailman.'/mail/mailman bounces '.$listname.'"'."\n"
+.$listname.'-confirm:      "|'.$path_to_mailman.'/mail/mailman confirm '.$listname.'"'."\n"
+.$listname.'-join:         "|'.$path_to_mailman.'/mail/mailman join '.$listname.'"'."\n"
+.$listname.'-leave:        "|'.$path_to_mailman.'/mail/mailman leave '.$listname.'"'."\n"
+.$listname.'-owner:        "|'.$path_to_mailman.'/mail/mailman owner '.$listname.'"'."\n"
+.$listname.'-request:      "|'.$path_to_mailman.'/mail/mailman request '.$listname.'"'."\n"
+.$listname.'-subscribe:    "|'.$path_to_mailman.'/mail/mailman subscribe '.$listname.'"'."\n"
+.$listname.'-unsubscribe:  "|'.$path_to_mailman.'/mail/mailman unsubscribe '.$listname.'"'."\n\n"
 ;
 	} else {
 		// Mailman < 2.1
 		$list_str =
-$listname.':		"|'.forge_get_config('mailman_path').'/mail/wrapper post '.$listname.'"'."\n"
-.$listname.'-admin:	"|'.forge_get_config('mailman_path').'/mail/wrapper mailowner '.$listname.'"'."\n"
-.$listname.'-request:	"|'.forge_get_config('mailman_path').'/mail/wrapper mailcmd '.$listname.'"'."\n"
+$listname.':		"|'.$path_to_mailman.'/mail/wrapper post '.$listname.'"'."\n"
+.$listname.'-admin:	"|'.$path_to_mailman.'/mail/wrapper mailowner '.$listname.'"'."\n"
+.$listname.'-request:	"|'.$path_to_mailman.'/mail/wrapper mailcmd '.$listname.'"'."\n"
 .$listname.'-owner:	'.$listname.'-admin'."\n\n";
 	}
 
-	fwrite($h1,$list_str);
+	fwrite($h1, $list_str);
 }
 
-db_query_params ('UPDATE mail_group_list set status=$1 WHERE status=$2',
-		 array (MAIL__MAILING_LIST_IS_CREATED,
+db_query_params('UPDATE mail_group_list set status=$1 WHERE status=$2',
+		 array(MAIL__MAILING_LIST_IS_CREATED,
 			MAIL__MAILING_LIST_IS_REQUESTED));
 echo db_error();
 
@@ -175,13 +199,13 @@ fclose($h1);
 //
 //delete mailing lists
 //
-$res = db_query_params ('SELECT mailing_list_name FROM deleted_mailing_lists WHERE isdeleted = 0',
-			array ());
+$res = db_query_params('SELECT mailing_list_name FROM deleted_mailing_lists WHERE isdeleted = 0',
+			array());
 $err .= db_error();
-$rows	 = db_numrows($res);
+$rows = db_numrows($res);
 
 for($k = 0; $k < $rows; $k++) {
-	$deleted_mail_list = db_result($res,$k,'mailing_list_name');
+	$deleted_mail_list = db_result($res, $k, 'mailing_list_name');
 
 	$deleted_mail_list = trim($deleted_mail_list);
 	if (!$deleted_mail_list) {
@@ -193,7 +217,7 @@ for($k = 0; $k < $rows; $k++) {
 		break;
 	}
 
-	exec(forge_get_config('mailman_path')."/bin/rmlist -a '$deleted_mail_list'", $output);
+	exec($path_to_mailman."/bin/rmlist -a '$deleted_mail_list'", $output);
 	$success = false;
 	foreach ($output as $line) {
 		// Mailman 2.1.x
@@ -207,15 +231,14 @@ for($k = 0; $k < $rows; $k++) {
 			break;
 		}
 	}
-	if($success){
-		$res1 = db_query_params ('UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = $1',
-			array ($deleted_mail_list));
+	if($success) {
+		$res1 = db_query_params('UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = $1',
+					array($deleted_mail_list));
 		$err .= db_error();
-	}else{
+	} else {
 		$err .= "Could not remove the list $deleted_mail_list \n";
 	}
 }
-
 
 cron_entry(18,$err);
 
