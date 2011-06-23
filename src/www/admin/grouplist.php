@@ -123,7 +123,7 @@ if (USE_PFO_RBAC) {
 		}
 	}
 	$rows = $private_rows;
-	array_merge($rows, $public_rows);
+	$rows = array_merge($rows, $public_rows);
 } else {
 	$rows = array();
 	while ($grp = db_fetch_array($res)) {

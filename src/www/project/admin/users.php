@@ -348,6 +348,8 @@ foreach ($members as $user) {
 		</div><div style="float:right;">
 			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="hidden" name="submit" value="y" />
+			<input type="hidden" name="username" value="'.$user->getUnixName() // Functionally ignored, only used for testsuite
+.'" />
 			<input type="hidden" name="user_id" value="'.$user->getID().'" />
 			<input type="hidden" name="group_id" value="'. $group_id .'" />
 			<input type="hidden" name="role_id" value="'.$role->getID().'" />

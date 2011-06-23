@@ -35,7 +35,7 @@ function rss_description ($in) {
 	if ((strlen($in)==0) && isset($GLOBALS['description_notnull']) && $GLOBALS['description_notnull']) {
 		$in = "No description available.";
 	}
-	return htmlspecialchars($in);
+	return htmlspecialchars(nl2br($in));
 }
 
 // callback is optional function name which should be called for each project

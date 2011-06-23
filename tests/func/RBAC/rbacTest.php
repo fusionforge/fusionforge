@@ -116,7 +116,9 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("projapp Lastname"));
 		$this->assertTrue($this->isTextPresent("newsmod Lastname"));
-		$this->click ("//a[contains(@href,'/users/projapp')]/../input[@name='rmuser']") ;
+		$this->click ("//a[contains(@href,'/users/projapp')]/../../td/input[@type='checkbox']") ;
+		$this->click ("//input[@name='reallyremove']") ;
+		$this->click ("//input[@name='dormusers']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("projapp Lastname"));
 		$this->assertTrue($this->isTextPresent("newsmod Lastname"));
@@ -145,7 +147,9 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
 		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
-		$this->click ("//a[contains(@href,'/users/toto')]/../input[@name='rmuser']") ;
+		$this->click ("//a[contains(@href,'/users/toto')]/../../td/input[@type='checkbox']") ;
+		$this->click ("//input[@name='reallyremove']") ;
+		$this->click ("//input[@name='dormusers']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("toto Lastname"));
 
@@ -294,64 +298,36 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("guru Lastname"));
-		$this->assertTrue($this->isElementPresent("
-//input[@value=
-   //tr/td/a[.='guru Lastname']/../..//input[@name='user_id']/@value
-]
-/../td[.='Senior Developer']")) ;
+		$this->assertTrue($this->isElementPresent("//tr/td/a[.='guru Lastname']/../../td/div[contains(.,'Senior Developer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
 		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Junior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("trainee Lastname"));
-		$this->assertTrue($this->isElementPresent("
-//input[@value=
-   //tr/td/a[.='trainee Lastname']/../..//input[@name='user_id']/@value
-]
-/../td[.='Junior Developer']")) ;
+		$this->assertTrue($this->isElementPresent("//tr/td/a[.='trainee Lastname']/../../td/div[contains(.,'Junior Developer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "docmaster") ;
 		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Doc Writer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("docmaster Lastname"));
-		$this->assertTrue($this->isElementPresent("
-//input[@value=
-   //tr/td/a[.='docmaster Lastname']/../..//input[@name='user_id']/@value
-]
-/../td[.='Doc Writer']")) ;
+		$this->assertTrue($this->isElementPresent("//tr/td/a[.='docmaster Lastname']/../../td/div[contains(.,'Doc Writer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "bigboss") ;
 		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Senior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("bigboss Lastname"));
-		$this->assertTrue($this->isElementPresent("
-//input[@value=
-   //tr/td/a[.='bigboss Lastname']/../..//input[@name='user_id']/@value
-]
-/../td[.='Senior Developer']")) ;
+		$this->assertTrue($this->isElementPresent("//tr/td/div[contains(.,'Senior Developer')]/..//input[@value='Remove']/../input[@name='username' and @value='bigboss']")) ;
 
 		// Oops, bigboss doesn't need the extra role after all
-		$this->click ("
-//input[@value=
-   //tr/td/a[.='bigboss Lastname']/../..//input[@name='user_id']/@value
-]
-/../td[.='Senior Developer']/../td/input[@value='Remove']") ;
+		$this->click("//tr/td/div[contains(.,'Senior Developer')]/../div/form/input[@name='username' and @value='bigboss']/../input[@value='Remove']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertFalse($this->isElementPresent("
-//input[@value=
-   //tr/td/a[.='bigboss Lastname']/../..//input[@name='user_id']/@value
-]
-/../td[.='Senior Developer']")) ;
+		$this->assertFalse($this->isElementPresent("//tr/td/div[contains(.,'Senior Developer')]/../div/form/input[@value='Remove']/../input[@name='username' and @value='bigboss']")) ;
 
 		// Remove/re-add a user
-		$this->click ("
-//input[@value=
-   //tr/td/a[.='trainee Lastname']/../..//input[@name='user_id']/@value
-]
-/../td[.='Junior Developer']/../td/input[@value='Remove']") ;
+		$this->click("//tr/td/div[contains(.,'Junior Developer')]/../div/form/input[@name='username' and @value='trainee']/../input[@value='Remove']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("trainee Lastname"));
 
@@ -360,11 +336,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("trainee Lastname"));
-		$this->assertTrue($this->isElementPresent("
-//input[@value=
-   //tr/td/a[.='trainee Lastname']/../..//input[@name='user_id']/@value
-]
-/../td[.='Junior Developer']")) ;
+		$this->assertTrue($this->isElementPresent("//tr/td/a[.='trainee Lastname']/../../td/div[contains(.,'Junior Developer')]")) ;
 
 		// Edit permissions of the JD role
 		$this->gotoProject ("MetaProject") ;
@@ -373,7 +345,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 
-		$this->click ("//td[.='Junior Developer']/../td/input[@value='Edit Permissions']") ;
+		$this->click ("//td/form/div[contains(.,'Junior Developer')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 
 		$this->select("//select[contains(@name,'data[frs]')]", "label=View public packages only");
@@ -437,7 +409,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
-		$this->click ("//td[.='Senior Developer']/../td/input[@value='Edit Permissions']") ;
+		$this->click ("//td/form/div[contains(.,'Senior Developer')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 		$this->click ("//input[@type='checkbox' and @name='public']") ;
 		$this->click ("//input[@value='Submit']") ;
@@ -450,14 +422,14 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../td/select/option[.='Senior Developer (in project MetaProject)']")) ;
-		$this->select("//input[@value='Link external role']/../../td/select", "label=Senior Developer (in project MetaProject)") ;
+		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/select/option[.='Senior Developer (in project MetaProject)']")) ;
+		$this->select("//input[@value='Link external role']/../../div/select", "label=Senior Developer (in project MetaProject)") ;
 		$this->click("//input[@value='Link external role']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isElementPresent("//tr/td[.='Senior Developer (in project MetaProject)']/../td/input[contains(@value,'Unlink Role')]"));
+		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Senior Developer (in project MetaProject)')]/../div/input[contains(@value,'Unlink Role')]"));
 
 		// Grant it tracker manager permissions
-		$this->click ("//td[.='Senior Developer (in project MetaProject)']/../td/input[@value='Edit Permissions']") ;
+		$this->click ("//td/form/div[contains(.,'Senior Developer (in project MetaProject)')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 		$this->select("//select[contains(@name,'data[tracker]')]", "label=Manager");
 		$this->click ("//input[@value='Submit']") ;
@@ -482,12 +454,12 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../td/select/option[.='Documentation masters (global role)']")) ;
-		$this->assertFalse($this->isElementPresent("//input[@value='Link external role']/../../td/select/option[.='Project moderators (global role)']")) ;
-		$this->select("//input[@value='Link external role']/../../td/select", "label=Documentation masters (global role)") ;
+		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/select/option[.='Documentation masters (global role)']")) ;
+		$this->assertFalse($this->isElementPresent("//input[@value='Link external role']/../../div/select/option[.='Project moderators (global role)']")) ;
+		$this->select("//input[@value='Link external role']/../../div/select", "label=Documentation masters (global role)") ;
 		$this->click("//input[@value='Link external role']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isElementPresent("//tr/td[.='Documentation masters (global role)']/../td/input[contains(@value,'Unlink Role')]"));
+		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Documentation masters (global role)')]/../div/input[contains(@value,'Unlink Role')]"));
 
 	}
 }
