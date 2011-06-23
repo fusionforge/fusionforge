@@ -55,7 +55,7 @@ class Theme extends Layout {
 		if ($this->header_displayed)
 			return;
 		$this->header_displayed=true;
-		
+
 		// The root location for images
 		if (!isset($params['h1']) && isset($params['title'])) {
 			$params['h1'] = util_ifsetor($params['title'], "!! title not set !!");
@@ -92,7 +92,7 @@ class Theme extends Layout {
 					</td>
 				</tr>
 			</table>
-			
+
 			<!-- outer tabs -->
 			';
                 echo $this->outerTabs($params);
@@ -227,7 +227,7 @@ class Theme extends Layout {
 		}
 	}
 
-	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false, 
+	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,
 					$selected=false, $sel_tab_bgcolor='WHITE',
 					$total_width='100%') {
 		$count=count($TABS_DIRS);
@@ -256,7 +256,7 @@ class Theme extends Layout {
 		}
 		$return .= ">\n";
 		$return .= '<tr>';
- 
+
 /*		$folder = $this->imgurl.($nested ? 'bottomtab-new/' : 'toptab-new/');*/
 
 		$accumulated_width = 0;
