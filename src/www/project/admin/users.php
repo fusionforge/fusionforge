@@ -313,7 +313,10 @@ echo '<th>'._('Role').'</th>';
 echo '<th style="text-align:right">'._('Action').'</th>';
 echo '</tr></thead><tbody>';
 
+$i = 0;
 foreach ($members as $user) {
+	$i++;
+	
 	$roles = array () ;
 	foreach (RBACEngine::getInstance()->getAvailableRolesForUser ($user) as $role) {
 		if ($role->getHomeProject() && $role->getHomeProject()->getID() == $group->getID()) {
@@ -325,7 +328,7 @@ foreach ($members as $user) {
 
 	$seen = false ;
 	foreach ($roles as $role) {
-		echo '<tr>' ;
+		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '>' ;
 		if (!$seen) {
 			echo '<td style="white-space: nowrap;" rowspan="'.(count($roles)+1).'">
 			<a href="/users/'.$user->getUnixName().'">';
@@ -353,7 +356,7 @@ foreach ($members as $user) {
 		</div></td></tr>';
 	}
 
-	echo '<tr><td colspan="2">
+	echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td colspan="2">
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="submit" value="y" />
 		<input type="hidden" name="form_unix_name" value="'.$user->getUnixName().'" />

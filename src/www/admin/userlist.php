@@ -64,6 +64,10 @@ function performAction($newStatus, $statusString, $user_id) {
 }
 
 function show_users_list ($users, $filter='') {
+	if (!count($users)) {
+		return;
+	}
+
 	echo '<p>' ._('Key') .':
 		<span class="active">'._('Active'). '</span>
 		<span class="deleted">' ._('Deleted') .'</span>
