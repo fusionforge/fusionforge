@@ -160,11 +160,11 @@ class Theme extends Layout {
 			$idtitle = "";
 			$idtcont = "";
 		}
-		
+
 		$t_result = '';
 		$t_result .= '<div' . $idid . ' class="box-surround">';
 		$t_result .= '<div' . $idtitle . ' class="box-title">';
-		$t_result .= '<div' . $idcontent . ' class="box-title-content">'. $title .'</div>';
+		$t_result .= '<div' . $idtcont . ' class="box-title-content">'. $title .'</div>';
 		$t_result .= '</div> <!-- class="box-title" -->';
 
 		return $t_result;
@@ -202,7 +202,7 @@ class Theme extends Layout {
 			$idcont = "";
 		}
 
-		$t_result ='<div' . $idtitle . ' class="box-content">'.$content.'</div>';
+		$t_result ='<div' . $idcont . ' class="box-content">'.$content.'</div>';
 		return $t_result;
 	}
 
