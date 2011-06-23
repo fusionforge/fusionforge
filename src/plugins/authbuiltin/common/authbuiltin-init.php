@@ -20,11 +20,11 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'authbuiltin/common/AuthBuiltinPlugin.class.php' ;
+require_once $gfplugins.'authbuiltin/common/AuthBuiltinPlugin.class.php';
 
-$AuthBuiltinPluginObject = new AuthBuiltinPlugin ;
+$AuthBuiltinPluginObject = new AuthBuiltinPlugin;
 
-register_plugin ($AuthBuiltinPluginObject) ;
+register_plugin($AuthBuiltinPluginObject);
 
 // Local Variables:
 // mode: php
