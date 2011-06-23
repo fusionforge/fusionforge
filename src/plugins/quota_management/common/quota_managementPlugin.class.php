@@ -71,13 +71,7 @@ class quota_managementPlugin extends Plugin {
 				echo '<br />';
 			}
 		} elseif ($hookname == "site_admin_option_hook") {
-			// www/admin/index.php line 167
-			//
-			?>
-			<li><?php echo util_make_link("/plugins/quota_management/quota.php",
-						       _('Ressources usage and quota')
-				); ?></li>
-			<?php
+			echo '<li>'.$this->getAdminOptionLink().'</li>';
 		} elseif ($hookname == "quota_label_project_admin") {
 			// www/project/admin/project_admin_utils.php line 80
 			$labels[] = _('Quota');
@@ -87,6 +81,11 @@ class quota_managementPlugin extends Plugin {
 			$links[] = '/plugins/quota_management/quota.php?group_id='.$group_id;
 		}
 	}
+
+	function getAdminOptionLink() {
+		return util_make_link('/plugins/'.$this->name.'/quota.php', _('Ressources usage and quota'));
+	}
+
 }
 
 // Local Variables:
