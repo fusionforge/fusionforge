@@ -26,29 +26,28 @@
 class quota_managementPlugin extends Plugin {
 	function quota_managementPlugin () {
 		$this->Plugin() ;
-		$this->name = "quota_management" ;
-		$this->text = "quota_management!" ; // To show in the tabs, use...
-		$this->hooks[] = "user_personal_links";//to make a link to the user's personal part of the plugin
-		$this->hooks[] = "usermenu" ;
-		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
-		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
-		$this->hooks[] = "userisactivecheckboxpost" ; //
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
-		$this->hooks[] = "site_admin_option_hook"; // to show in admin
-		$this->hooks[] = "quota_label_project_admin"; // to show in admin project
-		$this->hooks[] = "quota_link_project_admin"; // to show in admin project
+		$this->name = "quota_management";
+		$this->text = "Quota Management"; // To show in the tabs, use...
+		$this->_addHook('user_personal_links');//to make a link to the user's personal part of the plugin
+		$this->_addHook('usermenu');
+		$this->_addHook('groupmenu');	// To put into the project tabs
+		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
+		$this->_addHook('groupisactivecheckboxpost'); //
+		$this->_addHook('userisactivecheckbox'); // The "use ..." checkbox in user account
+		$this->_addHook('userisactivecheckboxpost'); //
+		$this->_addHook('project_admin_plugins'); // to show up in the admin page fro group
+		$this->_addHook('site_admin_option_hook'); // to show in admin
+		$this->_addHook('quota_label_project_admin'); // to show in admin project
+		$this->_addHook('quota_link_project_admin'); // to show in admin project
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $use_quota_managementplugin, $G_SESSION, $HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("quota_management")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
-				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/quota_management/index.php' . $param ));
+				$param = '?type=user&id='.$G_SESSION->getId()."&pluginname=".$this->name; // we indicate the part we're calling is the user one
+				echo $HTML->PrintSubMenu(array($text), array('/plugins/quota_management/index.php'.$param ), array(_('Manage your quota')));
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id = $params['group'];
