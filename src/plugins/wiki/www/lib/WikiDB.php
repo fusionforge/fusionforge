@@ -1,4 +1,4 @@
-<?php //$Id: WikiDB.php 8063 2011-05-04 10:22:51Z vargenau $
+<?php //$Id: WikiDB.php 8089 2011-06-01 12:21:26Z vargenau $
 require_once('lib/PageType.php');
 
 /**
@@ -1817,24 +1817,22 @@ class WikiDB_PageIterator
      * @return WikiDB_Page The next WikiDB_Page in the sequence.
      */
     function next () {
-        if ( ! ($next = $this->_iter->next()) )
+        if ( ! ($next = $this->_iter->next()) ) {
             return false;
+        }
 
         $pagename = &$next['pagename'];
-    if (!is_string($pagename)) { // Bug #1327912 fixed by Joachim Lous
-        /*if (is_array($pagename) && isset($pagename['linkto'])) {
-        $pagename = $pagename['linkto'];
-        }
-            $pagename = strval($pagename);*/
+        if (!is_string($pagename)) { // Bug #1327912 fixed by Joachim Lous
             trigger_error("WikiDB_PageIterator->next pagename", E_USER_WARNING);
-    }
+        }
+
         if (!$pagename) {
             if (isset($next['linkrelation'])
-                or isset($next['pagedata']['linkrelation'])) return false;
-            trigger_error('empty pagename in WikiDB_PageIterator::next()', E_USER_WARNING);
-            var_dump($next);
-            return false;
+              or isset($next['pagedata']['linkrelation'])) {
+                return false;
+            }
         }
+
         // There's always hits, but we cache only if more
         // (well not with file, cvs and dba)
         if (isset($next['pagedata']) and count($next['pagedata']) > 1) {

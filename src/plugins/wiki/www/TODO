@@ -1,7 +1,6 @@
 == Blockers ==
 * can no longer save UserPreferences: Warning: "Attempt to assign property of non-object"
   (partial revert to get in work again)
-* AllPages give too many pages
 * WantedPages give too many pages (from interwiki map)
   (to be tested in both Pear and ADODB)
 * revert of Patch 3024787 by Sébastien Le Callonnec (caused an SQL syntax error)

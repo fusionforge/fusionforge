@@ -1506,7 +1506,7 @@ function util_uri_grabber($unencoded_string, $tryaidtid=false) {
 	    $unencoded_string));
 	/* replace all URIs with ^AURI^A */
 	$s = preg_replace(
-	    '|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$._!~*\'()%-]+)|',
+	    '|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$,_.!~*\'()%-]+)|',
 	    "\x01\$1\x01", $s);
 	if (!$s)
 		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");

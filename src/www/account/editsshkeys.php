@@ -40,7 +40,7 @@ function checkKeys($keys) {
 			/* The encoded key is made of 0-9, A-Z ,a-z, +, / (base 64) characters,
 			 ends with zero or up to three '=' and the length must be >= 512 bits (157 base64 characters).
 			 The whole key ends with an optional comment. */
-			if ( preg_match("@^ssh-(rsa|dss)\s+[A-Za-z0-9+/]{157,}={0,2}(\s+.*)?$@", $key) === 0 ) { // Warning: we must use === for the test
+			if ( preg_match("@^(((no-port-forwarding|no-X11-forwarding|no-agent-forwarding|no-pty|command=\"[^\"]+\"|from=\"?[A-Za-z0-9\.-]+\"?),?)*\s+)?ssh-(rsa|dss)\s+[A-Za-z0-9+/]{157,}={0,2}(\s+.*)?$@", $key) === 0 ) { // Warning: we must use === for the test
 				$msg = sprintf (_('The following key has a wrong format: |%s|.  Please, correct it by going back to the previous page.'),
 						htmlspecialchars($key));
 				exit_error($msg,'my');

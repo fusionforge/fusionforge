@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: PearDB_ffpgsql.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: PearDB_ffpgsql.php 8091 2011-06-01 13:44:50Z vargenau $
 
 /*
  * Copyright (C) 2001-2009 $ThePhpWikiProgrammingTeam
@@ -322,9 +322,6 @@ extends WikiDB_backend_PearDB_pgsql
             $exclude = " AND $page_tbl.pagename NOT IN ".$this->_sql_set($exclude);
         else
             $exclude='';
-
-        // Horrible hack
-        $include_empty=false;
 
         if (strstr($orderby, 'mtime ')) { // multiple columns possible
             if ($include_empty) {
