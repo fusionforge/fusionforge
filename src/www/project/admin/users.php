@@ -339,7 +339,7 @@ foreach ($members as $user) {
 			$seen = true ;
 		}
 
-		echo '<td>
+		echo '<td colspan="2">
 		<div style="float:left;">
 			' . $role->getName() . '
 		</div><div style="float:right;">
@@ -424,7 +424,7 @@ echo '<tr><td colspan="2">
 	</form>
 </td></tr>';
 
-echo '</table>' ;
+echo '</tbody></table>' ;
 
 if (!USE_PFO_RBAC) {
 		echo '

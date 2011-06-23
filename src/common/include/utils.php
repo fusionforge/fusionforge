@@ -1482,25 +1482,21 @@ if ( !function_exists('sys_get_temp_dir')) {
 }
 
 /* convert '\n' to <br /> or </p><p> */
-function util_pwrap($encoded_string,$tag='p') {
-	return str_replace("<".$tag."></".$tag.">", "",
-	    str_replace("<".$tag."><br />", "<".$tag.">",
-	    "<".$tag.">" . str_replace("<br /><br />",
-	    "</".$tag."><".$tag.">",
-	    implode("<br />",
-	    explode("\n",
-	    $encoded_string
-	    ))) . "</".$tag.">"));
+function util_pwrap($encoded_string) {
+	return str_replace("<p></p>", "",
+	    str_replace("<br /></p>", "</p>",
+	    str_replace("<p><br />", "<p>",
+	    "<p>" . str_replace("<br /><br />", "</p><p>",
+	    implode("<br />", explode("\n",
+	    $encoded_string))) . "</p>")));
 }
-function util_ttwrap($encoded_string,$tag='p') {
-	return str_replace("<".$tag."><tt></tt></".$tag.">", "",
-	    str_replace("<".$tag."><tt><br />", "<".$tag."><tt>",
-	    "<".$tag."><tt>" . str_replace("<br /><br />",
-	    "</tt></".$tag."><".$tag."><tt>",
-	    implode("<br />",
-	    explode("\n",
-	    $encoded_string
-	    ))) . "</tt></".$tag.">"));
+function util_ttwrap($encoded_string) {
+	return str_replace("<p><tt></tt></p>", "",
+	    str_replace("<br /></tt></p>", "</tt></p>",
+	    str_replace("<p><tt><br />", "<p><tt>",
+	    "<p><tt>" . str_replace("<br /><br />", "</tt></p><p><tt>",
+	    implode("<br />", explode("\n",
+	    encoded_string))) . "</tt></p>")));
 }
 
 /* takes a string and returns it HTML encoded, URIs made to hrefs */
