@@ -5,15 +5,14 @@
 ## DP: No description.
 
 @DPATCH@
-Index: src/www/include/html.php
-===================================================================
---- src/www/include/html.php	(revision 13341)
-+++ src/www/include/html.php	(working copy)
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/www/include/html.php src/www/include/html.php
+--- src~/www/include/html.php	2011-06-22 20:31:14.000000000 +0200
++++ src/www/include/html.php	2011-06-23 14:44:26.823525263 +0200
 @@ -360,18 +360,18 @@
  }
  
  function html_use_jquery() {
--    use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+-	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
 +	use_javascript('/scripts/jquery/jquery.min.js');
  }
  
