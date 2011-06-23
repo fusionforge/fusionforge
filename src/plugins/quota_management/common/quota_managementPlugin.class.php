@@ -3,6 +3,8 @@
 /**
  * quota_managementPlugin Class
  *
+ * Copyright 2010, Fusionforge Team
+ * Copyright 2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -40,7 +42,7 @@ class quota_managementPlugin extends Plugin {
 	}
 
 	function CallHook ($hookname, &$params) {
-		global $use_quota_managementplugin,$G_SESSION,$HTML;
+		global $use_quota_managementplugin, $G_SESSION, $HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("quota_management")) {
@@ -49,7 +51,7 @@ class quota_managementPlugin extends Plugin {
 						  array ('/plugins/quota_management/index.php' . $param ));
 			}
 		} elseif ($hookname == "groupmenu") {
-			$group_id=$params['group'];
+			$group_id = $params['group'];
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
@@ -60,14 +62,14 @@ class quota_managementPlugin extends Plugin {
 			if (!$project->isProject()) {
 				return;
 			}
-			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=util_make_url ('/plugins/quota_management/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
-				$params['ADMIN'][]='';
+			if ($project->usesPlugin($this->name)) {
+				$params['TITLES'][] = $this->text;
+				$params['DIRS'][] = util_make_url ('/plugins/quota_management/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
+				$params['ADMIN'][] = '';
 			} else {
 			//	$params['TITLES'][]=$this->text." is [Off]";
 			}
-			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
+			(($params['toptab'] == $this->name) ? $params['selected'] = (count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 		} elseif ($hookname == "groupisactivecheckboxpost") {
@@ -75,10 +77,10 @@ class quota_managementPlugin extends Plugin {
 			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
 			$use_quota_managementplugin = getStringFromRequest('use_quota_managementplugin');
-			if ( $use_quota_managementplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
+			if ($use_quota_managementplugin == 1) {
+				$group->setPluginUse($this->name);
 			} else {
-				$group->setPluginUse ( $this->name, false );
+				$group->setPluginUse($this->name, false);
 			}
 		} elseif ($hookname == "userisactivecheckbox") {
 			//check if user is active
@@ -88,7 +90,7 @@ class quota_managementPlugin extends Plugin {
 			echo "<td>";
 			echo ' <input type="CHECKBOX" name="use_quota_managementplugin" value="1" ';
 			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin ( $this->name ) ) {
+			if ( $user->usesPlugin($this->name)) {
 				echo "CHECKED";
  			}
 			echo ">    Use ".$this->text." Plugin";
@@ -98,16 +100,16 @@ class quota_managementPlugin extends Plugin {
 			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
 			$user = $params['user'];
 			$use_quota_managementplugin = getStringFromRequest('use_quota_managementplugin');
-			if ( $use_quota_managementplugin == 1 ) {
-				$user->setPluginUse ( $this->name );
+			if ($use_quota_managementplugin == 1) {
+				$user->setPluginUse($this->name);
 			} else {
-				$user->setPluginUse ( $this->name, false );
+				$user->setPluginUse($this->name, false);
 			}
 			echo "<tr>";
 			echo "<td>";
 			echo ' <input type="CHECKBOX" name="use_quota_managementplugin" value="1" ';
 			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin ( $this->name ) ) {
+			if ($user->usesPlugin($this->name)) {
 				echo "CHECKED";
 			}
 			echo ">    Use ".$this->text." Plugin";
@@ -129,33 +131,27 @@ class quota_managementPlugin extends Plugin {
 			// this displays the link in the project admin options page to it's  quota_management administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo util_make_link ('/plugins/quota_management/index.php?id='.$group->getID().'&type=admin&pluginname='.$this->name,
+			if ( $group->usesPlugin($this->name)) {
+				echo util_make_link('/plugins/quota_management/index.php?id='.$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('View the quota_management Administration')
 					) ;
 				echo '<br />';
 			}
-		}
-		elseif ($hookname == "blahblahblah") {
-			// ...
-		}
-		elseif ($hookname == "site_admin_option_hook") {
+		} elseif ($hookname == "site_admin_option_hook") {
 			// www/admin/index.php line 167
 			// ...
 			?>
-			<li><?php echo util_make_link ("/plugins/quota_management/quota.php",
+			<li><?php echo util_make_link("/plugins/quota_management/quota.php",
 						       _('Ressources usage and quota')
 				); ?></li>
 			<?php
-		}
-		elseif ($hookname == "quota_label_project_admin") {
+		} elseif ($hookname == "quota_label_project_admin") {
 			// www/project/admin/project_admin_utils.php line 80
 			$labels[] = _('Quota');
-		}
-		elseif ($hookname == "quota_link_project_admin") {
+		} elseif ($hookname == "quota_link_project_admin") {
 			// www/project/admin/project_admin_utils.php line 99
 			$group_id=$params['group'];
-			 $links[] = '/plugins/quota_management/quota.php?group_id='.$group_id;
+			$links[] = '/plugins/quota_management/quota.php?group_id='.$group_id;
 		}
 	}
 }
