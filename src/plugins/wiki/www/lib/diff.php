@@ -1,5 +1,4 @@
 <?php // -*-php-*-
-// $Id: diff.php 8085 2011-05-20 10:53:54Z vargenau $
 // diff.php
 //
 // PhpWiki diff output code.

@@ -1,5 +1,4 @@
 <?php
-// $Id: backend.php 8080 2011-05-19 19:14:34Z vargenau $
 /*
  * Copyright 2004-2010 Reini Urban
  *

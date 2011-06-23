@@ -55,7 +55,7 @@ class ErrorManager
         $this->_postpone_mask = 0;
         $this->_postponed_errors = array();
 
-        set_error_handler('ErrorManager_errorHandler');
+        // set_error_handler('ErrorManager_errorHandler');
     }
 
     /**
