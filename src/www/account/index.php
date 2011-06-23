@@ -261,20 +261,21 @@ echo "\n</div>";
 		<?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url_u ($u->getUnixName(),$u->getId()));
 echo "\n</div>";
 } ?>
-<p>
+<div>
 <input type="checkbox"  name="use_tooltips" value="1"<?php
 	if ($u->usesTooltips()) print ' checked="checked"'; ?> />
 		<?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.');
 ?>
-</p>
+</div>
 </td></tr>
+
 <?php
 // displays a "Use xxxx Plugin" checkbox
 plugin_hook("userisactivecheckbox", $hookParams);
 ?>
 <tr><td>
 
-<?php echo $HTML->boxBottom();
+echo $HTML->boxBottom();
 
 // ############################### Shell Account
 
