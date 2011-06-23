@@ -160,7 +160,7 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending=false) {
 }
 
 function session_check_credentials_in_database($loginname, $passwd, $allowpending=false) {
-	global $feedback,$userstatus;
+	global $warning_msg ,$userstatus;
 
 	//  Try to get the users from the database using user_id and (MD5) user_pw
 	if (forge_get_config('require_unique_email')) {
@@ -184,7 +184,7 @@ function session_check_credentials_in_database($loginname, $passwd, $allowpendin
 		}
 		if (!$res || db_numrows($res) < 1) {
 			// No user by that name
-			$feedback=_('Invalid Password Or User Name');
+			$warning_msg = _('Invalid Password Or User Name');
 			return false;
 		} else {
 			// There is a user with the provided user_name/email, but the MD5 passwds do not match
@@ -195,7 +195,7 @@ function session_check_credentials_in_database($loginname, $passwd, $allowpendin
 			if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
 				// Even the (crypt) unix_pw does not patch
 				// This one has clearly typed a bad passwd
-				$feedback=_('Invalid Password Or User Name');
+				$warning_msg = _('Invalid Password Or User Name');
 				return false;
 			}
 			// User exists, (crypt) unix_pw matches
@@ -226,7 +226,7 @@ function session_check_credentials_in_database($loginname, $passwd, $allowpendin
 				$res = db_query_params ('UPDATE users SET user_pw=$1 WHERE user_id=$2',
 							array ('OUT OF DATE',
 							       $usr['user_id'])) ;
-				$feedback=_('Invalid Password Or User Name');
+				$warning_msg =_('Invalid Password Or User Name');
 				return false;
 			}
 		}
@@ -239,29 +239,29 @@ function session_check_credentials_in_database($loginname, $passwd, $allowpendin
 		if ($allowpending && ($usr['status'] == 'P')) {
 			//1;
 		} else {
-			if ($usr['status'] == 'S') { 
+			if ($usr['status'] == 'S') {
 				//acount suspended
-				$feedback = _('Account Suspended');
+				$warning_msg = _('Account Suspended');
 				return false;
 			}
-			if ($usr['status'] == 'P') { 
+			if ($usr['status'] == 'P') {
 				//account pending
-				$feedback = _('Account Pending');
+				$warning_msg = _('Account Pending');
 				return false;
-			} 
-			if ($usr['status'] == 'D') { 
+			}
+			if ($usr['status'] == 'D') {
 				//account deleted
-				$feedback = _('Account Deleted');
+				$warning_msg = _('Account Deleted');
 				return false;
 			}
 			if ($usr['status'] != 'A') {
 				//unacceptable account flag
-				$feedback = _('Account Not Active');
+				$warning_msg = _('Account Not Active');
 				return false;
 			}
 		}
 		//create a new session
-		session_set_new(db_result($res,0,'user_id'));
+		session_set_new(db_result($res, 0, 'user_id'));
 
 		return true;
 	}
@@ -300,9 +300,9 @@ function session_check_ip($oldip,$newip) {
 		} else {
 			$eoldip = explode(".",$oldip);
 			$enewip = explode(".",$newip);
-			
+
 			// require same class b subnet
-			return ( ($eoldip[0] == $enewip[0]) 
+			return ( ($eoldip[0] == $enewip[0])
 				 && ($eoldip[1] == $enewip[1]) ) ;
 		}
 	}
@@ -375,9 +375,9 @@ function session_redirect_external($url) {
  */
 function session_require($req, $reason='') {
 	if (!session_loggedin()) {
-		exit_not_logged_in();	
+		exit_not_logged_in();
 	}
-	
+
 	$user =& user_get_object(user_getid());
 	if (! $user->isActive()) {
 		session_logout();
@@ -421,7 +421,7 @@ function session_require($req, $reason='') {
 function session_require_perm ($section, $reference, $action = NULL, $reason='') {
 	if (!forge_check_perm ($section, $reference, $action)) {
 		exit_permission_denied ($reason,'');
-	}		
+	}
 }
 
 /**
@@ -438,7 +438,7 @@ function session_require_global_perm ($section, $action = NULL, $reason='') {
 					   forge_get_config ('forge_name')) ;
 		}
 		exit_permission_denied ($reason,'');
-	}		
+	}
 }
 
 /**
@@ -491,7 +491,7 @@ function session_set_new($user_id) {
 
 function session_set_internal ($user_id, $res=false) {
 	global $G_SESSION ;
-	
+
 	$G_SESSION = user_get_object($user_id,$res);
 	if ($G_SESSION) {
 		$G_SESSION->setLoggedIn(true);
@@ -526,7 +526,7 @@ function session_set_admin() {
 function session_getdata($user_id) {
 	return db_query_params ('SELECT u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code, t.dirname, t.fullname
                                  FROM users u, supported_languages sl, themes t
-                                 WHERE u.language=sl.language_id 
+                                 WHERE u.language=sl.language_id
                                    AND u.theme_id=t.theme_id
                                    AND u.user_id=$1',
 				array ($user_id)) ;
@@ -549,7 +549,7 @@ function session_set() {
 	$id_is_good = false;
 
 	$params = array();
-	// pass the session_ser from cookie to the auth plugins 
+	// pass the session_ser from cookie to the auth plugins
 	// (see AuthBuiltinPlugin::checkAuthSession() or likes)
 	// expect FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
 	// in results
@@ -573,7 +573,7 @@ function session_set() {
 		$params['results'] = NULL;
 		plugin_hook_by_reference('fetch_authenticated_user', $params);
 		$user = $params['results'];
-		
+
 		if ($user) {
 			$params = array();
 			$params['username'] = $user->getUnixName();
@@ -587,14 +587,14 @@ function session_set() {
 		}
 	}
 	// TODO: else... what ?
-	
+
 	$re = RBACEngine::getInstance();
 	$re->invalidateRoleCaches() ;
 }
 
 /**
  * Re initializes a session, trusting a non-sufficient plugin only temporarily
- * 
+ *
  * The checkAuthSession of the Auth plugin will have to acknowledge the 'sufficient_forced' param in 'check_auth_session' hook
  * @param string $authpluginname
  */
@@ -607,17 +607,17 @@ function session_set_for_authplugin($authpluginname) {
 	$id_is_good = false;
 
 	$params = array();
-	// pass the session_ser from cookie to the auth plugins 
+	// pass the session_ser from cookie to the auth plugins
 	// (see AuthBuiltinPlugin::checkAuthSession() or likes)
 	// expect FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
 	// in results
 	$params['sufficient_forced'] = $authpluginname;
-	
+
 	$params['auth_token'] = $session_ser;
 	$params['results'] = array();
-	
+
 	plugin_hook_by_reference('check_auth_session', $params);
-	
+
 	$seen_yes = false;
 	foreach ($params['results'] as $p => $r) {
 		if ($r == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
@@ -631,11 +631,11 @@ function session_set_for_authplugin($authpluginname) {
 		// expect user object in results
 		$params = array();
 		$params['results'] = NULL;
-		
+
 		plugin_hook_by_reference('fetch_authenticated_user', $params);
-		
+
 		$user = $params['results'];
-		
+
 		if ($user) {
 			$params = array();
 			$params['username'] = $user->getUnixName();
@@ -649,13 +649,13 @@ function session_set_for_authplugin($authpluginname) {
 		}
 	}
 	// TODO: else... what ?
-	
+
 	$re = RBACEngine::getInstance();
 	$re->invalidateRoleCaches() ;
 }
 
-//TODO - this should be generalized and used for pre.php, 
-//SOAP, forum_gateway.php, tracker_gateway.php, etc to 
+//TODO - this should be generalized and used for pre.php,
+//SOAP, forum_gateway.php, tracker_gateway.php, etc to
 //setup languages
 function session_continue($sessionKey) {
 	global $session_ser;
@@ -673,7 +673,7 @@ function session_continue($sessionKey) {
 
 /**
  *	session_get_user() - Wrapper function to return the User object for the logged in user.
- *	
+ *
  *	@return User
  *	@access public
  */
