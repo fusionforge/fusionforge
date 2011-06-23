@@ -46,7 +46,7 @@ class quota_managementPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("quota_management")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/quota_management/index.php' . $param ));				
+						  array ('/plugins/quota_management/index.php' . $param ));
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -63,10 +63,10 @@ class quota_managementPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_url ('/plugins/quota_management/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
-                $params['ADMIN'][]='';
+				$params['ADMIN'][]='';
 			} else {
 			//	$params['TITLES'][]=$this->text." is [Off]";
-			}	
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
@@ -117,7 +117,6 @@ class quota_managementPlugin extends Plugin {
 			// this displays the link in the user's profile page to it's personal quota_management (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
-			$text = $params['text'];
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>' ;
@@ -136,10 +135,10 @@ class quota_managementPlugin extends Plugin {
 					) ;
 				echo '<br />';
 			}
-		}												    
+		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
-		} 
+		}
 		elseif ($hookname == "site_admin_option_hook") {
 			// www/admin/index.php line 167
 			// ...
@@ -148,11 +147,11 @@ class quota_managementPlugin extends Plugin {
 						       _('Ressources usage and quota')
 				); ?></li>
 			<?php
-		} 
+		}
 		elseif ($hookname == "quota_label_project_admin") {
 			// www/project/admin/project_admin_utils.php line 80
 			$labels[] = _('Quota');
-		} 
+		}
 		elseif ($hookname == "quota_link_project_admin") {
 			// www/project/admin/project_admin_utils.php line 99
 			$group_id=$params['group'];
