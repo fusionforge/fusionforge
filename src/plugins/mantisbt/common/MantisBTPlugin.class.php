@@ -82,7 +82,6 @@ class MantisBTPlugin extends Plugin {
 				// this displays the link in the user's profile page to it's personal MantisBT (if you want other sto access it, youll have to change the permissions in the index.php
 				$userid = $params['user_id'];
 				$user = user_get_object($userid);
-				$text = $params['text'];
 				//check if the user has the plugin activated
 				if ($user->usesPlugin($this->name)) {
 					echo '<p>';
