@@ -27,7 +27,6 @@ global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $HTML; // Layout object
 global $nested_pending_docs;
-global $use_tooltips; // enable or not tooltips in docman
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -45,14 +44,6 @@ var controllerListPending;
 jQuery(document).ready(function() {
 	controllerListPending = new DocManListFileController({
 		groupId:		<?php echo $group_id ?>,
-		tipsyElements:		[
-						{selector: '.docman-pendingdownloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#docman-massactionpendingmessage', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '.docman-pendingactivate', options:{delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '.docman-pendingviewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '.docman-pendingeditfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
-					],
-
 		docManURL:		'<?php util_make_uri("docman") ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
 	});
@@ -80,11 +71,7 @@ jQuery(document).ready(function() {
 					$docurl = util_make_uri('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
 				}
 			}
-			echo '<td><a href="'.$docurl.'" class="docman-viewfile"';
-			if ($use_tooltips)
-				echo ' title="'._('View this document').'"';
-
-			echo ' >';
+			echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'._('View this document').'" >';
 			echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
 			echo '</a></td>';
 			echo '<td>';
@@ -92,8 +79,7 @@ jQuery(document).ready(function() {
 				$html_image_attr = array();
 				$html_image_attr['alt'] = _('new');
 				$html_image_attr['class'] = 'docman-newdocument';
-				if ($use_tooltips)
-					$html_image_attr['title'] = _('Created or updated since less than 7 days');
+				$html_image_attr['title'] = _('Created or updated since less than 7 days');
 				echo html_image('docman/new.png', '14', '14', $html_image_attr);
 			}
 			echo '&nbsp;'.$d->getFileName();
@@ -133,34 +119,18 @@ jQuery(document).ready(function() {
 			}
 
 			echo '<td>';
-			echo '<a class="docman-pendingeditfile" href="#" onclick="javascript:controllerListPending.toggleEditFileView(\''.$d->getID().'\')" ';
-			if ($use_tooltips)
-				echo ' title="'. _('Edit this document') .'" ';
-
-			echo '>'.html_image('docman/edit-file.png', 22, 22, array('alt'=>_('Edit this document'))). '</a>';
+			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListPending.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png', 22, 22, array('alt'=>_('Edit this document'))). '</a>';
 			echo '</td>';
 		}
 		echo '</tr>';
 		echo $HTML->listTableBottom();
 		echo '<p>';
-		echo '<span id="docman-massactionpendingmessage"';
-		if ($use_tooltips)
-			echo ' title="'. _('Actions availables for checked files, you need to check at least one file to get actions') . '" ';
-
-		echo '>';
+		echo '<span id="docman-massactionpendingmessage" class="tabtitle-nw" title="'. _('Actions availables for checked files, you need to check at least one file to get actions') . '">';
 		echo _('Mass actions for selected pending files:');
 		echo '</span>';
 		echo '<span id="massactionpending" class="docman-massaction-hide" style="display:none;" >';
-		echo '<a class="docman-pendingdownloadaszip" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox(\'pending\')" ';
-		if ($use_tooltips)
-			echo ' title="'. _('Download as a zip') . '" ';
-
-		echo '>' . html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>'Download as Zip')). '</a>';
-		echo '<a class="docman-pendingactivate" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=validatefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListPending.buildUrlByCheckbox(\'pending\')" ';
-		if ($use_tooltips)
-			echo ' title="'. _('Activate in this directory') . '" ';
-
-		echo '>' . html_image('docman/validate.png', 22, 22, array('alt'=>'Activate in this directory')). '</a>';
+		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>'Download as Zip')). '</a>';
+		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=validatefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Activate in this directory') . '" >' . html_image('docman/validate.png', 22, 22, array('alt'=>'Activate in this directory')). '</a>';
 		echo '</span>';
 		echo '</p>';
 		echo '</div>';

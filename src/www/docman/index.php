@@ -91,18 +91,6 @@ switch ($action) {
 	}
 }
 
-$use_tooltips = 1;
-
-if (session_loggedin()) {
-	$u =& user_get_object(user_getid());
-	if (!$u || !is_object($u)) {
-		exit_error(_('Could Not Get User'));
-	} elseif ($u->isError()) {
-		exit_error($u->getErrorMessage(), 'my');
-	}
-	$use_tooltips = $u->usesTooltips();
-}
-
 $df = new DocumentFactory($g);
 if ($df->isError())
 	exit_error($df->getErrorMessage(), 'docman');
@@ -115,7 +103,6 @@ $dgh = new DocumentGroupHTML($g);
 if ($dgh->isError())
 	exit_error($dgh->getErrorMessage(), 'docman');
 
-html_use_tooltips();
 html_use_storage();
 use_javascript('scripts/DocManController.js');
 use_javascript('/js/sortable.js');

@@ -1318,23 +1318,27 @@ class Layout extends Error {
 	function printSoftwareMapLinks() {
 		$subMenuTitle = array();
 		$subMenuUrl = array();
+		$subMenuAttr = array();
 
 		if (forge_get_config('use_project_tags')) {
 			$subMenuTitle[] = _('Tag cloud');
 			$subMenuUrl[] = '/softwaremap/tag_cloud.php';
+			$subMenuAttr[] = array('title' => _('Browse per tags defined by the projects.'), 'class' => 'tabtitle-nw');
 		}
 
 		if (forge_get_config('use_trove')) {
 			$subMenuTitle[] = _('Project Tree');
 			$subMenuUrl[] = '/softwaremap/trove_list.php';
+			$subMenuAttr[] = array('title' => _('Browse per category.'), 'class' => 'tabtitle');
 		}
 
 		if (forge_get_config('use_project_full_list')) {
 			$subMenuTitle[] = _('Project List');
 			$subMenuUrl[] = '/softwaremap/full_list.php';
+			$subMenuAttr[] = array('title' => _('Complete listing of available projects.'), 'class' => 'tabtitle');
 		}
 
-		echo $this->subMenu($subMenuTitle, $subMenuUrl);
+		echo $this->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
 	}
 }
 

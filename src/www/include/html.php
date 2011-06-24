@@ -787,52 +787,31 @@ function site_user_header($params) {
 	$all_l = array();
 	$arr_attr = array();
 
-	$user = session_get_user();
-	$use_tooltips = $user->usesTooltips();
-
 	$arr_t[] = _('My Personal Page');
 	$arr_l[] = '/my/';
-	if ($use_tooltips) {
-		$arr_attr[] = array('title' => _('View your personal page, a selection of widgets to follow the informations from projects.'));
-	} else {
-		$arr_attr[] = array();
-	}
+	$arr_attr[] = array('title' => _('View your personal page, a selection of widgets to follow the informations from projects.'), 'class' => 'tabtitle-nw');
+
 
 	$arr_t[] = _('Trackers dashboard');
 	$arr_l[] = '/my/dashboard.php';
-	if ($use_tooltips) {
-		$arr_attr[] = array('title' => _('View your tasks and artifacts.'));
-	} else {
-		$arr_attr[] = array();
-	}
+	$arr_attr[] = array('title' => _('View your tasks and artifacts.'), 'class' => 'tabtitle');
+
 
 	if (forge_get_config('use_diary')) {
 		$arr_t[] = _('Diary &amp; Notes');
 		$arr_l[] = '/my/diary.php';
-		if ($use_tooltips) {
-			$arr_attr[] = array('title' => _('Manage your diary. Add, modify or delete your notes.'));
-		} else {
-			$arr_attr[] = array();
-		}
+		$arr_attr[] = array('title' => _('Manage your diary. Add, modify or delete your notes.'), 'class' => 'tabtitle');
 	}
 
 	$arr_t[] = _('Account Maintenance');
 	$arr_l[] = '/account/';
-	if ($use_tooltips) {
-		$arr_attr[] = array('title' => _('Manage your account. Change your password, select your preferences.'));
-	} else {
-		$arr_attr[] = array();
-	}
+	$arr_attr[] = array('title' => _('Manage your account. Change your password, select your preferences.'), 'class' => 'tabtitle');
 
 	if (!forge_get_config('project_registration_restricted')
 			|| forge_check_global_perm('approve_projects', '')) {
 		$arr_t[] = _('Register Project');
 		$arr_l[] = '/register/';
-		if ($use_tooltips) {
-			$arr_attr[] = array('title' => _('Register a new project in forge, following the workflow.'));
-		} else {
-			$arr_attr[] = array();
-		}
+		$arr_attr[] = array('title' => _('Register a new project in forge, following the workflow.'), 'class' => 'tabtitle');
 	}
 
 	echo ($HTML->printSubMenu($arr_t, $arr_l, $arr_attr));

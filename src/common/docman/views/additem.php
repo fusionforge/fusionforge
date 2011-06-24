@@ -25,7 +25,7 @@
 /* global variables used */
 global $group_id; // id of the group
 global $dirid; //id of the doc_group
-global $use_tooltips; // enable or not tooltips in docman
+
 
 if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -38,13 +38,6 @@ var controllerAddItem;
 
 jQuery(document).ready(function() {
 	controllerAddItem = new DocManAddItemController({
-
-		tipsyElements:	[
-					{selector: '#labelDoc', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#labelDir', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#labelZip', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}}
-				],
-
 		divCreateDir:	jQuery('#addsubdocgroup'),
 		divCreateDoc:	jQuery('#addfile'),
 		divZipInject:	jQuery('#zipinject'),
@@ -63,19 +56,13 @@ function doItInject() {
 </script>
 <?php
 echo '<div class="docmanDivIncluded" >';
-echo '<input id="buttonDoc" type="radio" name="type" value="document" /><label ';
-if ($use_tooltips)
-	echo 'id="labelDoc" title="'. _('Submit a new document in this directory.').'"';
-echo '>'. _('Submit a new document.') .'</label>';
+echo '<input id="buttonDoc" type="radio" name="type" value="document" />';
+echo '<label id="labelDoc" class="tabtitle-nw" title="'. _('Submit a new document in this directory.').'" >'. _('Submit a new document.') .'</label>';
 if (forge_check_perm('docman', $group_id, 'approve')) {
-	echo '<input id="buttonDir" type="radio" name="type" value="directory" /><label ';
-	if ($use_tooltips)
-		echo 'id="labelDir" title="'. _('Create a directory based on this name.').'"';
-	echo '>'. _('Add a new directory.') .'</label>';
-	echo '<input id="buttonZip" type="radio" name="type" value="zip" /><label ';
-	if ($use_tooltips)
-		echo 'id="labelZip" title="'. _('Create a full directory tree using an compressed archive. Only zip or rar format support.').'"';
-	echo '>'. _('Inject Tree') . '</label>';
+	echo '<input id="buttonDir" type="radio" name="type" value="directory" />';
+	echo '<labelid="labelDir" class="tabtitle-nw" title="'. _('Create a directory based on this name.').'" >'. _('Add a new directory.') .'</label>';
+	echo '<input id="buttonZip" type="radio" name="type" value="zip" />';
+	echo '<label id="labelZip" class="tabtitle-w" title="'. _('Create a full directory tree using an compressed archive. Only zip or rar format support.').'" >'. _('Inject Tree') . '</label>';
 }
 if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo '<div class="docman_div_include" id="addsubdocgroup" style="display:none;">';

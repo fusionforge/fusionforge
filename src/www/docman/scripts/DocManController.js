@@ -25,16 +25,11 @@
 
 /*! ListFileController
  * @param groupId the current FusionForge groupID
- * @param tipsyElements [{selector: "name", options:{delayIn: 1000, delayOut: 1000, fade: true, gravity: 's'}}]
  */
 DocManListFileController = function(params)
 {
 	this.lockInterval	= [];
 	this.params		= params;
-
-	if (typeof(jQuery(window).tipsy) == 'function') {
-		this.initTipsy();
-	}
 	this.bindControls();
 	this.resizableDiv();
 	this.initSize();
@@ -43,20 +38,7 @@ DocManListFileController = function(params)
 DocManAddItemController = function(params)
 {
 	this.params	= params;
-
-	if (typeof(jQuery(window).tipsy) == 'function') {
-		this.initTipsy();
-	}
 	this.bindControls();
-};
-
-DocManMenuController = function(params)
-{
-	this.params	= params;
-
-	if (typeof(jQuery(window).tipsy) == 'function') {
-		this.initTipsy();
-	}
 };
 
 DocManListFileController.prototype =
@@ -106,20 +88,6 @@ DocManListFileController.prototype =
 
 	dragging: function() {
 		isDragging = true;
-	},
-
-	/*! initializes tipsy
-	 */
-	initTipsy: function() {
-		for(var i = 0; i < this.params.tipsyElements.length; i++) {
-			var el = this.params.tipsyElements[i];
-
-			jQuery(el.selector).tipsy({
-				gravity: el.options.gravity,
-				delayIn: el.options.delayIn,
-				delayOut: el.options.delayOut,
-				fade: el.options.fade});
-		}
 	},
 
 	/*! toggle edit group view div visibility
@@ -314,35 +282,4 @@ DocManAddItemController.prototype =
 			}
 		}
 	},
-
-	/*! initializes tipsy
-	 */
-	initTipsy: function() {
-		for(var i = 0; i < this.params.tipsyElements.length; i++) {
-			var el = this.params.tipsyElements[i];
-
-			jQuery(el.selector).tipsy({
-				gravity: el.options.gravity,
-				delayIn: el.options.delayIn,
-				delayOut: el.options.delayOut,
-				fade: el.options.fade});
-		}
-	}
-}
-
-DocManMenuController.prototype =
-{
-	/*! initializes tipsy
-	*/
-	initTipsy: function() {
-		for(var i = 0; i < this.params.tipsyElements.length; i++) {
-			var el = this.params.tipsyElements[i];
-
-			jQuery(el.selector).tipsy({
-				gravity: el.options.gravity,
-				delayIn: el.options.delayIn,
-				delayOut: el.options.delayOut,
-				fade: el.options.fade});
-		}
-	}
 }

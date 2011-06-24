@@ -74,11 +74,11 @@ if ($res1) {
 if (isset($hierarchy_used)) {
 	$hierarMenuTitle[] = _('Per Category');
 	$hierarMenuTitle[] = _('Per Hierarchy');
-	$hierarMenuTips[] = _('Browse per category the available projects. Some projects might not appear here they do not choose any categories');
-	$hierarMenuTips[] = _('Browse per hierarchy. Projects can share relationship between projects, as father and sons');
+	$hierarMenuAttr[] = array('title' => _('Browse per category the available projects. Some projects might not appear here they do not choose any categories'), 'class' => 'tabtitle-nw');
+	$hierarMenuAttr[] = array('title' => _('Browse per hierarchy. Projects can share relationship between projects, as father and sons'), 'class' => 'tabtitle');
 	$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=c';
 	$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=h';
-	echo ($HTML->subMenu($hierarMenuTitle, $hierarMenuUrl, $hierarMenuTips));
+	echo ($HTML->subMenu($hierarMenuTitle, $hierarMenuUrl, $hierarMenuAttr));
 }
 
 if ( $cat === 'c' ) {

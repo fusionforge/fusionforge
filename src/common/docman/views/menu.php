@@ -29,7 +29,6 @@
 global $HTML; // html object
 global $d_arr; // document array
 global $group_id; // id of group
-global $use_tooltips; // enable or not tooltips in docman
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -41,52 +40,21 @@ $menu_text = array();
 $menu_links = array();
 $menu_attr = array();
 
-?>
-<script type="text/javascript">//<![CDATA[
-var controllerMenu;
-
-jQuery(document).ready(function() {
-	controllerMenu = new DocManMenuController({
-		tipsyElements:	[
-					{selector: '#addItemDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#listFileDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#searchDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#trashDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#adminDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-				],
-	});
-});
-
-/* ]]> */</script>
-<?php
-
 $menu_text[] = _('List files & Directories');
 $menu_links[] = '/docman/?group_id='.$group_id.'&view=listfile&dirid=0';
-if ($use_tooltips) {
-	$menu_attr[] = array('title' => _('View the files and the directories in 2 panels. Left a directory tree, right a list of files of specific directory'), 'id' => 'listFileDocmanMenu');
-} else {
-	$menu_attr[] = array();
-}
+$menu_attr[] = array('title' => _('View the files and the directories in 2 panels. Left a directory tree, right a list of files of specific directory'), 'id' => 'listFileDocmanMenu', 'class' => 'tabtitle-nw');
 
 if (forge_check_perm('docman', $group_id, 'submit')) {
 	$menu_text[] = _('Add new item');
 	$menu_links[] = '/docman/?group_id='.$group_id.'&view=additem';
-	if ($use_tooltips) {
-		$menu_attr[] = array('title' => _('Add a new item such as file, create directory, inject a zip at root level.'), 'id' => 'addItemDocmanMenu');
-	} else {
-		$menu_attr[] = array();
-	}
+	$menu_attr[] = array('title' => _('Add a new item such as file, create directory, inject a zip at root level.'), 'id' => 'addItemDocmanMenu', 'class' => 'tabtitle');
 }
 
 if ($g->useDocmanSearch()) {
 	if ($d_arr || count($d_arr) > 1) {
 		$menu_text[] = _('Search in documents');
 		$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=search';
-		if ($use_tooltips) {
-			$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu');
-		} else {
-			$menu_attr[] = array();
-		}
+		$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu', 'class' => 'tabtitle');
 	}
 }
 
@@ -94,21 +62,13 @@ if (session_loggedin()) {
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		$menu_text[] = _('Trash');
 		$menu_links[] = '/docman/?group_id='.$group_id.'&view=listtrashfile';
-		if ($use_tooltips) {
-			$menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu');
-		} else {
-			$menu_attr[] = array();
-		}
+		$menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu', 'class' => 'tabtitle');
 	}
 
 	if (forge_check_perm('docman', $group_id, 'admin')) {
 		$menu_text[] = _('Admin');
 		$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=admin';
-		if ($use_tooltips) {
-			$menu_attr[] = array('title' => _('Docman module administration.'), 'id' => 'adminDocmanMenu');
-		} else {
-			$menu_attr[] = array();
-		}
+		$menu_attr[] = array('title' => _('Docman module administration.'), 'id' => 'adminDocmanMenu', 'class' => 'tabtitle');
 	}
 }
 

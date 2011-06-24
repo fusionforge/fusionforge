@@ -250,7 +250,17 @@ class Theme extends Layout {
 			?>
 			<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 				if (typeof(jQuery(window).tipsy) == 'function') {
-					jQuery(document).ready(function() {jQuery('.tabtitle').tipsy()});
+					jQuery(document).ready(
+						function() {
+							jQuery('.tabtitle').tipsy({delayIn: 500, delayOut: 0, fade: true});
+							jQuery('.tabtitle-nw').tipsy({gravity: 'nw', delayIn: 500, delayOut: 0, fade: true});
+							jQuery('.tabtitle-ne').tipsy({gravity: 'ne', delayIn: 500, delayOut: 0, fade: true});
+							jQuery('.tabtitle-w').tipsy({gravity: 'w', delayIn: 500, delayOut: 0, fade: true});
+							jQuery('.tabtitle-e').tipsy({gravity: 'w', delayIn: 500, delayOut: 0, fade: true});
+							jQuery('.tabtitle-sw').tipsy({gravity: 'w', delayIn: 500, delayOut: 0, fade: true});
+							jQuery('.tabtitle-se').tipsy({gravity: 'w', delayIn: 500, delayOut: 0, fade: true});
+						}
+					);
 				}
 			/* ]]> */</script>
 			<?

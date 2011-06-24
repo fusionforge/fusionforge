@@ -81,15 +81,6 @@ var controllerListTrash;
 jQuery(document).ready(function() {
 	controllerListTrash = new DocManListFileController({
 		groupId:		<?php echo $group_id ?>,
-		tipsyElements:		[
-						{selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '.docman-delete', options:{delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#docman-trashdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '.docman-downloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
-						],
-
 		divEditDirectory:	jQuery('#editdocgroup'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php util_make_uri("docman") ?>',
@@ -113,20 +104,10 @@ jQuery(document).ready(function() {
 	if ($DocGroupName) {
 		echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 		if ($DocGroupName != '.trash') {
-			echo '<a href="#" id="docman-editdirectory" ';
-			if ($use_tooltips)
-				echo 'title="'._('Edit this directory').'"';
-
-			echo ' >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-			echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" ';
-			if ($use_tooltips)
-				echo ' title="'._('Delete permanently this directory and his content.').'" ';
-
-			echo '>'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+			echo '<a href="#" id="docman-editdirectory" class="tabtitle"title="'._('Edit this directory').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
+			echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Delete permanently this directory and his content.').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 		}
-
 		echo '</h3>';
-
 		echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
 		echo '<h4 class="docman_h4">'. _('Edit this directory') .'</h4>';
 		include ($gfcommon.'docman/views/editdocgroup.php');
@@ -153,11 +134,7 @@ jQuery(document).ready(function() {
 					$docurl = util_make_uri('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
 				}
 			}
-			echo '<td><a href="'.$docurl.'" class="docman-viewfile"';
-			if ($use_tooltips)
-				echo ' title="'._('View this document').'"';
-
-			echo ' >';
+			echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'._('View this document').'" >';
 			echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
 			echo '</a></td>';
 			echo '<td>';
@@ -165,8 +142,7 @@ jQuery(document).ready(function() {
 				$html_image_attr = array();
 				$html_image_attr['alt'] = _('new');
 				$html_image_attr['class'] = 'docman-newdocument';
-				if ($use_tooltips)
-					$html_image_attr['title'] = _('Created or updated since less than 7 days');
+				$html_image_attr['title'] = _('Created or updated since less than 7 days');
 				echo html_image('docman/new.png', '14', '14', $html_image_attr);
 			}
 			echo '&nbsp;'.$d->getFileName();
@@ -206,33 +182,16 @@ jQuery(document).ready(function() {
 			}
 
 			echo '<td>';
-			echo '<a class="docman-delete" href="?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
-			if ($use_tooltips)
-				echo ' title="'. _('Delete permanently this document.') .'"';
-
-			echo ' >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
-
-			echo '<a class="docman-editfile" href="#" onclick="javascript:controllerListTrash.toggleEditFileView(\''.$d->getID().'\')" ';
-			if ($use_tooltips)
-				echo ' title="'. _('Edit this document') .'" ';
-
-			echo '>'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
+			echo '<a class="docman-delete" class="tabtitle" href="?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
+			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListTrash.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 			echo '</td>';
 		}
 		echo '</tr>';
 		echo $HTML->listTableBottom();
 		echo '<p>';
 		echo _('Mass actions for selected files:');
-		echo '<a class="docman-delete" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid=\'+controllerListTrash.buildUrlByCheckbox()" ';
-		if ($use_tooltips)
-			echo ' title="'. _('Delete permanently.') .'" ';
-
-		echo '>'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
-		echo '<a class="docman-downloadaszip" href="#" onClick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" ';
-		if ($use_tooltips)
-			echo ' title="'. _('Download as a zip') . '" ';
-
-		echo '>' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
+		echo '<a class="docman-delete" class="tabtitle" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Delete permanently.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
+		echo '<a class="docman-downloadaszip" class="tabtitle" href="#" onClick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
 		echo '</p>';
 		include ($gfcommon.'docman/views/editfile.php');
 		echo '</div>';
