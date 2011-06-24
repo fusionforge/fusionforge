@@ -35,25 +35,14 @@ function quota_management_Project_Header($params) {
 	site_project_header($params);
 }
 
-// the header that displays for the user portion of the plugin
-function quota_management_User_Header($params) {
-	global $user_id;
-	$params['toptab'] = 'quota_management';
-	$params['user'] = $user_id;
-	/*
-	 Show horizontal links
-	 */
-	site_user_header($params);
-}
-
 $user = session_get_user(); // get the session user
 
 if (!$user || !is_object($user)) {
-	exit_error(_('Invalid User'),'home');
+	exit_error(_('Invalid User'), 'home');
 } else if ( $user->isError() ) {
-	exit_error($user->getErrorMessage,'home');
+	exit_error($user->getErrorMessage, 'home');
 } else if ( !$user->isActive()) {
-	exit_error(_('User not active'),'home');
+	exit_error(_('User not active'), 'home');
 }
 
 $type = getStringFromRequest('type');
@@ -79,18 +68,6 @@ if (!$type) {
 		}
 		quota_management_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 		include('quota_management/www/quota_project.php');
-	} elseif ($type == 'user') {
-		$realuser = user_get_object($id);//
-		if (!($realuser) || !($realuser->usesPlugin($pluginname))) {
-			exit_error(sprintf(_('First activate the User\'s %s plugin through Account Maintenance Page'),$pluginname),'my');
-		}
-		if ( (!$user) || ($user->getID() != $id)) { // if someone else tried to access the private quota_management part of this user
-			exit_permission_denied(sprintf(_('You cannot access other user\'s personal %s'),$pluginname),'my');
-		}
-		quota_management_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
-		// DO THE STUFF FOR THE USER PART HERE
-		echo "We are in the User quota_management plugin <br>";
-		echo "Greetings from planet " . $world; // $world comes from the config file in /etc
 	} elseif ($type == 'admin') {
 		$group = group_get_object($id);
 		if ( !$group) {
@@ -108,7 +85,7 @@ if (!$type) {
 			quota_management_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 			include('quota_management/www/quota_project.php');
 		} else {
-			exit_permission_denied(_('You are not Admin of this project'),'home');
+			exit_permission_denied(_('You are not Admin of this project'), 'home');
 		}
 	}
 }

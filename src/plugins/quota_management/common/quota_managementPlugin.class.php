@@ -28,8 +28,6 @@ class quota_managementPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "quota_management";
 		$this->text = "Quota Management"; // To show in the tabs, use...
-		$this->_addHook('user_personal_links');//to make a link to the user's personal part of the plugin
-		$this->_addHook('usermenu');
 		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook('groupisactivecheckboxpost'); //
 		$this->_addHook('userisactivecheckbox'); // The "use ..." checkbox in user account
@@ -42,25 +40,7 @@ class quota_managementPlugin extends Plugin {
 
 	function CallHook($hookname, &$params) {
 		global $use_quota_managementplugin, $G_SESSION, $HTML;
-		if ($hookname == "usermenu") {
-			$text = $this->text; // this is what shows in the tab
-			if ($G_SESSION->usesPlugin("quota_management")) {
-				$param = '?type=user&id='.$G_SESSION->getId()."&pluginname=".$this->name; // we indicate the part we're calling is the user one
-				echo $HTML->PrintSubMenu(array($text), array('/plugins/quota_management/index.php'.$param ), array(_('Manage your quota')));
-			}
-		} elseif ($hookname == "user_personal_links") {
-			// this displays the link in the user's profile page to it's personal quota_management (if you want other sto access it, youll have to change the permissions in the index.php
-			$userid = $params['user_id'];
-			$user = user_get_object($userid);
-			//check if the user has the plugin activated
-			if ($user->usesPlugin($this->name)) {
-				echo '	<p>' ;
-				echo util_make_link ("/plugins/quota_management/index.php?id=$userid&type=user&pluginname=".$this->name,
-						     _('View Personal quota_management')
-					) ;
-				echo '</p>';
-			}
-		} elseif ($hookname == "project_admin_plugins") {
+		if ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it's  quota_management administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
