@@ -2,7 +2,7 @@
 /**
  * Tracker Front Page
  *
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
@@ -41,12 +41,13 @@ $params['toptab']='tracker';
 
 site_project_header($params);
 
-if (forge_check_perm ('tracker_admin', $group_id)) {
-	$menu_text=array();
-	$menu_links=array();
-	$menu_text[]=_('Administration');
-	$menu_links[]='/tracker/admin/?group_id='.$group_id;
-	echo $HTML->subMenu($menu_text,$menu_links);
+if (forge_check_perm('tracker_admin', $group_id)) {
+	$menu_text = array();
+	$menu_links = array();
+	$menu_text[] = _('Administration');
+	$menu_links[] = '/tracker/admin/?group_id='.$group_id;
+	$menu_attr[] = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'), 'class' => 'tabtitle-nw');
+	echo $HTML->subMenu($menu_text, $menu_links, $menu_attr);
 }
 
 

@@ -56,44 +56,54 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		$labels = array();
 		$links  = array();
+		$attr   = array();
 
 		$labels[] = _("View Trackers");
 		$links[]  = '/tracker/?group_id='.$group_id;
+		$attr[]   = array('title' => _('Get the list of available trackers'), 'class' => 'tabtitle-nw');
 		$labels[] = $this->getName();
 		$links[]  = '/tracker/?func=browse&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
+		$attr[]   = array('title' => _('Browse this tracker.'), 'class' => 'tabtitle');
 		$labels[] = _('Download .csv');
 		$links[]  = '/tracker/?func=downloadcsv&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
+		$attr[]   = array('title' => _('Download data from this tracker as csv file.'), 'class' => 'tabtitle');
 		if ($this->allowsAnon() || session_loggedin()) {
 			$labels[] = _('Submit New');
 			$links[]  = '/tracker/?func=add&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
+			$attr[]   = array('title' => _('Add a new issue.'), 'class' => 'tabtitle');
 		}
 
 		if (session_loggedin()) {
 			$labels[] = _('Reporting');
 			$links[]  = '/tracker/reporting/?group_id='.$group_id.'&amp;atid='. $this->getID();
-  			if ($this->isMonitoring()) {
+			$attr[]   = array('title' => _('Various graph about statistics.'), 'class' => 'tabtitle');
+			if ($this->isMonitoring()) {
 				$labels[] = _('Stop Monitor');
-   				$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor&amp;stop=1';
-  			} else {
+				$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor&amp;stop=1';
+				$attr[]   = array('title' => _('Remove this tracker from your monitoring.'), 'class' => 'tabtitle');
+			} else {
 				$labels[] = _('Monitor');
- 				$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor&amp;start=1';
-  			}
+				$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor&amp;start=1';
+				$attr[]   = array('title' => _('Add this tracker from your monitoring.'), 'class' => 'tabtitle');
+			}
 
 			if (forge_check_perm ('tracker', $this->getID(), 'manager')) {
 				$labels[] = _('Administration');
 				$links[]  = '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID();
+				$attr[]   = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'), 'class' => 'tabtitle');
 			}
 		} else {
 			$labels[] = _('Monitor');
-			$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor&amp;start=1';	
+			$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor&amp;start=1';
+			$attr[]   = array('title' => _('Add this tracker from your monitoring.'), 'class' => 'tabtitle');
 		}
 
-		$params['submenu'] = $HTML->subMenu($labels,$links);
+		$params['submenu'] = $HTML->subMenu($labels, $links, $attr);
 		site_project_header($params);
-		
+
 		if ($this)
-			plugin_hook ("blocks", "tracker_".$this->getName());
-		
+			plugin_hook("blocks", "tracker_".$this->getName());
+
 	}
 
 	function footer($params) {
@@ -167,7 +177,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 			}
 		}
-		
+
 		// 'DISPLAY' mode is for renderding in 'read-only' mode (for detail view).
 		if ($mode === 'DISPLAY') {
 			$keys=array_keys($efarr);
@@ -188,7 +198,7 @@ class ArtifactTypeHtml extends ArtifactType {
 						$value = 'None';
 					} else {
 						$arr = $this->getExtraFieldElements($efarr[$i]['extra_field_id']);
-						
+
 						// Convert the values (ids) to names in the ids order.
 						$new = array();
 						for ($j=0; $j<count($arr); $j++) {
@@ -203,25 +213,25 @@ class ArtifactTypeHtml extends ArtifactType {
 					}
 				} else if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
-					$value = preg_replace('/((http|https|ftp):\/\/\S+)/', 
+					$value = preg_replace('/((http|https|ftp):\/\/\S+)/',
 								"<a href=\"\\1\" target=\"_blank\">\\1</a>", $value);
 				} else if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 					// Convert artifact id to links.
 					$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
 				}
 				$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}',$post_name,$template);
-				$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$value,$template);		
+				$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$value,$template);
 			}
 			echo $template;
 			return ;
 		}
-		
+
 		$keys=array_keys($efarr);
 		for ($k=0; $k<count($keys); $k++) {
 			$i=$keys[$k];
 			$post_name = '';
 
-			if (!isset($selected[$efarr[$i]['extra_field_id']])) 
+			if (!isset($selected[$efarr[$i]['extra_field_id']]))
 				$selected[$efarr[$i]['extra_field_id']] = '';
 
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
@@ -242,14 +252,14 @@ class ArtifactTypeHtml extends ArtifactType {
 				if ($mode == 'QUERY') {
 					$post_name =  ' <i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
 				}
-				
+
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 
 				$str = $this->renderTextArea($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']);
 				if ($mode == 'QUERY') {
 					$post_name =  ' <i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
 				}
-				
+
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 
 				$str = $this->renderMultiSelectBox ($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100);
@@ -295,7 +305,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 
 		$taskcount = db_numrows($ah->getRelatedTasks());
-		
+
 		if (forge_check_perm ('tracker_admin', $ah->ArtifactType->Group->getID())) {
 			$is_admin=false;
 		} else {
@@ -359,7 +369,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$title_arr[] = _('By');
 			$title_arr[] = _('Download');
 			echo $GLOBALS['HTML']->listTableTop($title_arr);
-			
+
 			foreach ($file_list as $file) {
 				echo '<tr>';
 				echo '<td>'.human_readable_bytes($file->getSize()).'</td>';
@@ -383,7 +393,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 */
 	function getRenderHTML($types=array(), $mode='') {
 		// Use template only for the browse (not for query or mass update)
-		if (($mode === 'DISPLAY' || $mode === 'DETAIL' || $mode === 'UPDATE') 
+		if (($mode === 'DISPLAY' || $mode === 'DETAIL' || $mode === 'UPDATE')
 			&& $this->data_array['custom_renderer']) {
 			return preg_replace('/<!--(\S+.*?)-->/','{$\\1}',$this->data_array['custom_renderer']);
 		} else {
@@ -408,7 +418,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$keys=array_keys($efarr);
 		$count=count($keys);
 		if ($count == 0) return '';
-		
+
 		for ($k=0; $k<$count; $k++) {
 			$i=$keys[$k];
 
@@ -416,7 +426,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$is_required = ($mode == 'QUERY' || $mode == 'DISPLAY') ?	0 : $efarr[$i]['is_required'];
 			$name = $efarr[$i]['field_name'].($is_required ? utils_requiredField() : '').': ';
 			$name = '<strong>'.$name.'</strong>';
-			
+
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
 
 				$return .= '
@@ -511,13 +521,13 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 *	renderSelect - this function builds pop up
 	 *	box with choices.
-	 *	
+	 *
 	 *	@param		int 	The ID of this field.
 	 *	@param 		string	The item that should be checked
 	 *	@param		string	Whether to show the '100 row'
 	 *	@param		string	What to call the '100 row'
-	 *	@return		box and choices	
-	 */	
+	 *	@return		box and choices
+	 */
 	function renderSelect ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false) {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
@@ -534,13 +544,13 @@ class ArtifactTypeHtml extends ArtifactType {
 
 	/**
 	 *	renderRadio - this function builds radio buttons.
-	 *	
+	 *
 	 *	@param		int 	The ID of this field.
 	 *	@param 		string	The item that should be checked
 	 *	@param		string	Whether to show the '100 row'
 	 *	@param		string	What to call the '100 row'
 	 *	@return		radio buttons
-	 */	
+	 */
 	function renderRadio ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any') {
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		$keys = array();
@@ -554,13 +564,13 @@ class ArtifactTypeHtml extends ArtifactType {
 
 	/**
 	 *	renderCheckbox - this function builds checkboxes.
-	 *	
+	 *
 	 *	@param		int 	The ID of this field.
 	 *	@param 		array	The items that should be checked
 	 *	@param		string	Whether to show the '100 row'
 	 *	@param		string	What to call the '100 row'
 	 *	@return		radio buttons
-	 */	
+	 */
 	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
@@ -585,13 +595,13 @@ class ArtifactTypeHtml extends ArtifactType {
 
 	/**
 	 *	renderMultiSelectBox - this function builds checkboxes.
-	 *	
+	 *
 	 *	@param		int 	The ID of this field.
 	 *	@param 		array	The items that should be checked
 	 *	@param		string	Whether to show the '100 row'
 	 *	@param		string	What to call the '100 row'
 	 *	@return		radio multiselectbox
-	 */	
+	 */
 	function renderMultiSelectBox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
 		$arr =$this->getExtraFieldElements($extra_field_id);
 		if (!$checked) {
@@ -599,7 +609,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 		if (!is_array($checked)) {
 			$checked = explode(',',$checked);
-		}	
+		}
 		$keys=array();
 		$vals=array();
 		$arr = $this->getExtraFieldElements($extra_field_id);
@@ -613,11 +623,11 @@ class ArtifactTypeHtml extends ArtifactType {
 
 	/**
 	 *	renderTextField - this function builds a text field.
-	 *	
+	 *
 	 *	@param		int 	The ID of this field.
 	 *	@param 		string	The data for this field.
 	 *	@return		text area and data.
-	 */	
+	 */
 	function renderTextField ($extra_field_id,$contents,$size,$maxlength) {
 		return '
 			<input type="text" name="extra_fields['.$extra_field_id.']" value="'.$contents.'" size="'.$size.'" maxlength="'.$maxlength.'"/>';
@@ -625,11 +635,11 @@ class ArtifactTypeHtml extends ArtifactType {
 
 	/**
 	 *	renderRelationField - this function builds a relation field.
-	 *	
+	 *
 	 *	@param		int 	The ID of this field.
 	 *	@param 		string	The data for this field.
 	 *	@return		text area and data.
-	 */	
+	 */
 	function renderRelationField ($extra_field_id,$contents,$size,$maxlength) {
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		for ($i=0; $i<count($arr); $i++) {
@@ -647,11 +657,11 @@ class ArtifactTypeHtml extends ArtifactType {
 
 	/**
 	 *	renderTextArea - this function builds a text area.
-	 *	
+	 *
 	 *	@param		int 	The ID of this field.
 	 *	@param 		string	The data for this field.
 	 *	@return		text area and data.
-	 */	
+	 */
 	function renderTextArea ($extra_field_id,$contents,$rows,$cols) {
 		return '
 			<textarea name="extra_fields['.$extra_field_id.']" rows="'.$rows.'" cols="'.$cols.'">'.$contents.'</textarea>';
@@ -677,7 +687,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$ids[]=$extra_id;
 			$names[]=$extra_name;
 		}
-			
+
 		if ($multiple) {
 			if (!is_array($checked)) {
 				$checked = explode(',',$checked);
@@ -696,7 +706,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 *	statusBox - show the statuses - automatically shows the "custom statuses" if they exist
 	 *
-	 *	
+	 *
 	 */
 	function statusBox ($name='status_id',$checked='xzxz',$show_100=false,$text_100='none') {
 		if ($text_100=='none'){

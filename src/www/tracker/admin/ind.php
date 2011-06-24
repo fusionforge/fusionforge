@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, FusionForge Team
+ * Copyright 2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -46,7 +47,7 @@ if (getStringFromRequest('post_changes')) {
 			exit_error($res->getErrorMessage(),'tracker');
 		} else {
 			$feedback .= _('Tracker created successfully');
-            $feedback .= '<br/>';
+			$feedback .= '<br/>';
 			$feedback .= _('Please configure also the roles (by default, it\'s \'No Access\')');
 		}
 		$group->normalizeAllRoles () ;
@@ -78,7 +79,7 @@ if ($i==0 && $j>0) {
 //required params for site_project_header();
 $params['group']=$group_id;
 $params['toptab']='tracker';
-if(isset($page_title)){ 
+if(isset($page_title)){
 	$params['title'] = $page_title;
 } else {
 	$params['title'] = '';
@@ -93,6 +94,10 @@ echo $HTML->subMenu(
 	array(
 		'/tracker/reporting/?group_id='.$group_id,
 		'/tracker/admin/?group_id='.$group_id
+	),
+	array(
+		array('title' => _('Various graph about statistics'), 'class' => 'tabtitle-nw'),
+		array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'), 'class' => 'tabtitle')
 	)
 );
 

@@ -32,6 +32,10 @@ require_once $gfcommon.'reporting/Report.class.php';
 require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
 require_once $gfwww.'tracker/include/ArtifactTypeFactoryHtml.class.php';
 
+if (!session_loggedin()) {
+	exit_not_logged_in();
+}
+
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');
 $area = getFilteredStringFromRequest('area', '/^[a-z]+$/');
@@ -59,7 +63,7 @@ if ($group->isError()) {
 /*
  * Set the start date to birth of the project.
  */
-$res=db_query_params ('SELECT register_time FROM groups WHERE group_id=$1',
+$res=db_query_params('SELECT register_time FROM groups WHERE group_id=$1',
 			array($group_id));
 $report->site_start_date=db_result($res,0,'register_time');
 
@@ -72,10 +76,6 @@ if (!$end) {
 	$end = $z[count($z)-1];
 }
 if ($end < $start) list($start, $end) = array($end, $start);
-
-if (!session_loggedin()) {
-	exit_not_logged_in();
-}
 
 //
 //	Get list of trackers this person can see
