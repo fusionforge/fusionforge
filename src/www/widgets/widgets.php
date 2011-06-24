@@ -24,7 +24,6 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/preplugins.php';
 require_once $gfcommon.'include/plugins_utils.php';
-//require_once('www/my/my_utils.php');
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 require_once $gfcommon.'widget/Valid_Widget.class.php';
 

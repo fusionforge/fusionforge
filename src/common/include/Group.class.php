@@ -2338,7 +2338,7 @@ class Group extends Error {
 	 *	@access public
 	 */
 	function approve(&$user) {
-		global $gfcommon;
+		global $gfcommon,$gfwww;
 		require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 		if ($this->getStatus()=='A') {

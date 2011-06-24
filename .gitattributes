@@ -4725,6 +4725,7 @@ src/www/images/widget/widget-preview-rss.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview-twitterfollow.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview.png -text svneol=unset#image/png
 src/www/include/login-form.php -text
+src/www/include/my_utils.php -text
 src/www/include/pre.php -text
 src/www/include/unicode.php -text
 src/www/js/common.js -text
@@ -4750,7 +4751,6 @@ src/www/jscook/ThemeXP/plusbottom.gif -text svneol=native#image/gif
 src/www/jscook/ThemeXP/spacer.gif -text svneol=native#image/gif
 src/www/jscook/ThemeXP/theme.css svneol=native#text/css
 src/www/my/dashboard.php -text
-src/www/my/my_utils.php -text
 src/www/plugins/cvstracker -text
 src/www/plugins/fckeditor -text
 src/www/plugins/mediawiki -text

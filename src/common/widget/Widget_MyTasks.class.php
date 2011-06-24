@@ -20,7 +20,7 @@
 
 require_once('Widget.class.php');
 require_once('common/widget/WidgetLayoutManager.class.php');
-require_once('www/my/my_utils.php');
+require_once $gfwww.'include/my_utils.php';
 
 /**
 * Widget_MyTasks
