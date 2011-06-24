@@ -63,15 +63,22 @@ $res1 = db_query_params('SELECT g.group_name FROM plugins p, group_plugin gp, gr
 	array('projects_hierarchy'));
 if ($res1) {
 	if (db_numrows($res1) > 0) {
-		$hierarchy_used = true;
+		$res2 = db_query_params('SELECT count(*) as used FROM plugin_projects_hierarchy_relationship',array());
+		if ($res2)
+			$row = db_fetch_array($res2);
+			if ($row['used']) {
+				$hierarchy_used = true;
+			}
 	}
 }
 if (isset($hierarchy_used)) {
 	$hierarMenuTitle[] = _('Per Category');
 	$hierarMenuTitle[] = _('Per Hierarchy');
+	$hierarMenuTips[] = _('Browse per category the available projects. Some projects might not appear here they do not choose any categories');
+	$hierarMenuTips[] = _('Browse per hierarchy. Projects can share relationship between projects, as father and sons');
 	$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=c';
 	$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=h';
-	echo ($HTML->subMenu($hierarMenuTitle, $hierarMenuUrl));
+	echo ($HTML->subMenu($hierarMenuTitle, $hierarMenuUrl, $hierarMenuTips));
 }
 
 if ( $cat === 'c' ) {

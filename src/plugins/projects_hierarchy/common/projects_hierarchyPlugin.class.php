@@ -113,9 +113,13 @@ class projects_hierarchyPlugin extends Plugin {
 
 	function buildTree() {
 		global $project_name;
-		$res = db_query_params('select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name from groups as p1,groups as p2,plugin_projects_hierarchy where p1.group_id=plugin_projects_hierarchy.project_id and p2.group_id=plugin_projects_hierarchy.sub_project_id and plugin_projects_hierarchy.activated=$1 AND plugin_projects_hierarchy.link_type=$2 order by father_name, son_name',
-			array ('t',
-				'shar'));
+		$res = db_query_params('select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name
+					from groups as p1,groups as p2,plugin_projects_hierarchy_relationship
+					where p1.group_id=plugin_projects_hierarchy_relationship.project_id
+					and p2.group_id=plugin_projects_hierarchy_relationship.sub_project_id
+					and plugin_projects_hierarchy_relationship.status=$1
+					order by father_name, son_name',
+					array ('t'));
 		echo db_error();
 		// construction du tableau associatif
 		// key = name of the father
