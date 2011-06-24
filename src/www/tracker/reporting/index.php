@@ -2,12 +2,10 @@
 /**
  * Reporting System
  *
+ * Copyright 2003, Tim Perdue, tim@gforge.org
  * Copyright 2004 (c) GForge LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- *
- * @version   index.php,v 1.11 2004/08/05 20:48:59 tperdue Exp
- * @author Tim Perdue tim@gforge.org
- * @date 2003-03-16
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -63,9 +61,9 @@ if ($group->isError()) {
 /*
  * Set the start date to birth of the project.
  */
-$res=db_query_params('SELECT register_time FROM groups WHERE group_id=$1',
+$res = db_query_params('SELECT register_time FROM groups WHERE group_id=$1',
 			array($group_id));
-$report->site_start_date=db_result($res,0,'register_time');
+$report->site_start_date = db_result($res,0,'register_time');
 
 if (!$start || !$end) $z =& $report->getMonthStartArr();
 
@@ -81,18 +79,18 @@ if ($end < $start) list($start, $end) = array($end, $start);
 //	Get list of trackers this person can see
 //
 
-$atf = new ArtifactTypeFactory ($group) ;
-$tids = array () ;
+$atf = new ArtifactTypeFactory($group);
+$tids = array();
 foreach ($atf->getArtifactTypes() as $at) {
 	if (forge_check_perm ('tracker', $at->getID(), 'read')) {
-		$tids[] = $at->getID() ;
+		$tids[] = $at->getID();
 	}
 }
 
-$restracker = db_query_params ('SELECT group_artifact_id, name
+$restracker = db_query_params('SELECT group_artifact_id, name
 			FROM artifact_group_list
 			WHERE group_artifact_id = ANY ($1)',
-			       array (db_int_array_to_any_clause ($tids))) ;
+			       array(db_int_array_to_any_clause($tids)));
 echo db_error();
 
 //

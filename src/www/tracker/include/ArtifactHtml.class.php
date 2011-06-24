@@ -1,15 +1,29 @@
 <?php
-/*
+/**
  *
  * SourceForge Generic Tracker facility
  *
  * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * http://sourceforge.net
+ * Copyright 2011, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'include/utils_crossref.php';
@@ -129,7 +143,7 @@ class ArtifactHtml extends Artifact {
 				} else if ($field == 'close_date') {
 					if (db_result($result, $i, 'old_value'))
 						echo date(_('Y-m-d H:i'),db_result($result, $i, 'old_value'));
-					else 
+					else
 						echo '<i>None</i>';
 				} else {
 
@@ -198,10 +212,8 @@ class ArtifactHtml extends Artifact {
 </table>
 </div>
 <?php
-}	
+		}
 	}
-
-	
 }
 
 // Local Variables:
