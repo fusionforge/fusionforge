@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -1798,7 +1798,11 @@ class Group extends Error {
 			if (!is_object($i)) {
 				continue;
 			}
-			$i->delete();
+			if (!$i->delete()) {
+				$this->setError(_('Could not properly delete the survey'));
+				db_rollback();
+				return false;
+			}
 		}
 		//
 		//	Delete SurveyQuestions
@@ -1809,7 +1813,11 @@ class Group extends Error {
 			if (!is_object($i)) {
 				continue;
 			}
-			$i->delete();
+			if (!$i->delete()) {
+				$this->setError(_('Could not properly delete the survey questions'));
+				db_rollback();
+				return false;
+			}
 		}
 		//
 		//	Delete Mailing List Factory
@@ -1822,6 +1830,8 @@ class Group extends Error {
 			}
 			if (!$i->delete(1,1)) {
 				$this->setError(_('Could not properly delete the mailing list'));
+				db_rollback();
+				return false;
 			}
 		}
 		//
@@ -2052,7 +2062,7 @@ class Group extends Error {
 				//  user was already a member
 				//  make sure they are set up 
 				//
-				$user=&user_get_object($user_id,$res_newuser);
+				$user= user_get_object($user_id,$res_newuser);
 				$user->fetchData($user->getID());
 				$role = new Role($this,$role_id);
 				if (!$role || !is_object($role)) {
@@ -2217,7 +2227,7 @@ class Group extends Error {
 
 			$hook_params['group'] = $this;
 			$hook_params['group_id'] = $this->getID();
-			$hook_params['user'] = &user_get_object($user_id);
+			$hook_params['user'] = user_get_object($user_id);
 			$hook_params['user_id'] = $user_id;
 			plugin_hook ("group_removeuser", $hook_params);
 
