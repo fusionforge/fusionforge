@@ -148,7 +148,7 @@ class Document extends Error {
 
 		// key words for in-document search
 		if ($this->Group->useDocmanSearch()) {
-			$kw = new Parsedata($this->engine_path);
+			$kw = new Parsedata();
 			$kwords = $kw->get_parse_data($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
 		} else {
 			$kwords ='';
@@ -724,7 +724,7 @@ class Document extends Error {
 
 			// key words for in-document search
 			if ($this->Group->useDocmanSearch()) {
-				$kw = new Parsedata($this->engine_path);
+				$kw = new Parsedata();
 				$kwords = $kw->get_parse_data($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
 			} else {
 				$kwords = '';
