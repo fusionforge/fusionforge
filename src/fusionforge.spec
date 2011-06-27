@@ -757,6 +757,7 @@ fi
 %{FORGE_DIR}/gforge-restricted.sh
 %{FORGE_DIR}/install.sh
 %{FORGE_DIR}/install-common.inc
+%{FORGE_DIR}/install-ng
 # Directories under %{FORGE_DIR}
 %{FORGE_DIR}/backend
 %{FORGE_DIR}/common
@@ -790,6 +791,7 @@ fi
 %{FORGE_DIR}/www/frs
 %{FORGE_DIR}/www/images
 %{FORGE_DIR}/www/include
+%{FORGE_DIR}/www/install
 %{FORGE_DIR}/www/jscook
 %{FORGE_DIR}/www/js
 %{FORGE_DIR}/www/mail
