@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,6 +34,15 @@ global $gdf; // document grou factory object
 
 echo '<div class="docmanDivIncluded">';
 if ( $dgf->getNested() == NULL ) {
+	$dg = new DocumentGroup($g);
+
+	if ($dg->isError())
+		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
+
+	if ($dg->create('Uncategorized Submissions')) {
+		session_redirect('/docman/?group_id='.$group_id.'&view=addfile');
+	}
+
 	echo '<div class="warning">'. _('You MUST first create at least one directory to store your document.') .'</div>';
 } else {
 	/* display the add new documentation form */
