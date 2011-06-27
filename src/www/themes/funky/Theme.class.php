@@ -32,15 +32,18 @@ define('BOTTOM_TAB_HEIGHT', 22);
 class Theme extends Layout {
 
 	function Theme() {
+
+		$this->addStylesheet('/scripts/yui/reset-fonts-grids/reset-fonts-grids.css');
+		$this->addStylesheet('/scripts/yui/base/base-min.css');
+		$this->addStylesheet('/themes/css/fusionforge.css');
+		$this->addStylesheet('/themes/funky/css/theme.css');
+		$this->addStylesheet('/themes/funky/css/theme-pages.css');
+
 		// Parent constructor
 		$this->Layout();
 		$this->themeurl = util_make_url('themes/funky/');
 		$this->imgbaseurl = $this->themeurl . 'images/';
 		$this->imgroot = $this->imgbaseurl;
-	//        $this->doctype = 'strict';
-
-		$this->addStylesheet('/themes/funky/css/theme.css');
-		$this->addStylesheet('/themes/funky/css/theme-pages.css');
 	}
 
 	function quicknewsbutton() {
@@ -423,7 +426,6 @@ class Theme extends Layout {
 	 */
 	function headerJS()
 	{
-		html_use_jquery();
 		echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
 		echo '<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>';
 		echo '<script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>';
