@@ -767,6 +767,7 @@ fi
 %{FORGE_DIR}/docs
 %{FORGE_DIR}/etc
 %{FORGE_DIR}/image-sources
+%{FORGE_DIR}/install
 %{FORGE_DIR}/lib
 %{FORGE_DIR}/locales
 %{FORGE_DIR}/monitor
@@ -791,7 +792,6 @@ fi
 %{FORGE_DIR}/www/frs
 %{FORGE_DIR}/www/images
 %{FORGE_DIR}/www/include
-%{FORGE_DIR}/www/install
 %{FORGE_DIR}/www/jscook
 %{FORGE_DIR}/www/js
 %{FORGE_DIR}/www/mail
