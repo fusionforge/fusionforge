@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,7 +33,7 @@ $df->setStateID('2');
 $d_trash_arr =& $df->getDocuments();
 
 if (!$d_trash_arr || count($d_trash_arr) < 1) {
-	echo '<div class="feedback">'._('Trash is empty').'</div>';
+	echo '<p class="information">'._('Trash is empty').'</p>';
 } else {
 ?>
 <script language="JavaScript" type="text/javascript">/* <![CDATA[ */
@@ -47,14 +48,15 @@ function displayTrashDiv() {
 <?php
 	echo '<form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&amp;action=emptytrash" >';
 	echo '<ul>';
-	echo '<li><input id="submitemptytrash" type="button" value="'. _('Delete permanently all documents with deleted status.') .'" onclick="javascript:doIt(\'emptytrash\')" ></li>';
-	echo '</ul>';
+	echo '<li><input id="submitemptytrash" type="button" value="'. _('Delete permanently all documents with deleted status.') .'" onclick="javascript:doIt(\'emptytrash\')" /></li>';
+	echo '</ul>'."\n";
 	echo '</form>';
 	echo '<ul>';
 	echo '<li><a href="#" onclick="javascript:displayTrashDiv()">'. _('Select documents to be resurrected from deleted status.') .'</a></li>';
-	echo '</ul>';
+	echo '</ul>'."\n";
 	echo '<div id="listtrash" style="display:none;" >';
 	docman_display_documents($nested_groups, $df, true, 2, 0);
 	echo '</div>';
+	echo "\n";
 }
 ?>

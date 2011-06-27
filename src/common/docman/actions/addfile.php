@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -163,7 +164,7 @@ if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $ti
 		$return_msg = _('Document submitted successfully.');
 		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&feedback='.urlencode($return_msg));
 	} else {
-		$return_msg = _('Document submitted successfully : pending state (need validation).');
+		$return_msg = _('Document has been successfully uploaded and is waiting to be approved.');
 		session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
 	}
 }

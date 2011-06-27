@@ -310,7 +310,7 @@ function document_editdata(&$document) {
 ?>
 	<tr>
 		<td style="text-align:right;">
-			<strong><?php echo _('Directory that document belongs in') ?></strong>
+			<strong><?php echo _('Folder that document belongs in') ?></strong>
 		</td>
 		<td>
 			<?php $dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $document->getDocGroupID()); ?>

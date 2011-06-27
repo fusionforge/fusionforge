@@ -6,6 +6,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -94,7 +95,7 @@ class DocumentGroup extends Error {
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError(_('DocumentGroup: name is Required'));
+			$this->setError(_('Name is required'));
 			return false;
 		}
 		
@@ -135,7 +136,7 @@ class DocumentGroup extends Error {
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 		} else {
-			$this->setError(_('DocumentGroup::create() Error Adding Directory:').' '.db_error());
+			$this->setError(_('Error Adding Directory:').' '.db_error());
 			return false;
 		}
 
@@ -196,7 +197,7 @@ class DocumentGroup extends Error {
 		$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group=$1',
 					array($id));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('DocumentGroup: Invalid Document Directory ID'));
+			$this->setError(_('Invalid Document Directory ID'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -273,7 +274,7 @@ class DocumentGroup extends Error {
 							$this->Group->getID())
 						);
 			if (!$res || db_numrows($res) < 1) {
-				$this->setError(_('DocumentGroup: Invalid Document Directory parent ID'));
+				$this->setError(_('Invalid Document Directory parent ID'));
 				return false;
 			}
 		} else {

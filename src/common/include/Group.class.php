@@ -1859,7 +1859,7 @@ class Group extends Error {
 					       time(),
 					       0)) ;
 		if (!$res) {
-			$this->setError(_('Error Deleting Project: ').db_error());
+			$this->setError(_('Error Deleting Project:').' '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -1867,7 +1867,7 @@ class Group extends Error {
 		$res = db_query_params ('DELETE FROM groups WHERE group_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError(_('Error Deleting Project: ').db_error());
+			$this->setError(_('Error Deleting Project:').' '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -2167,7 +2167,7 @@ class Group extends Error {
 						array ($this->getID(),
 						       $user_id)) ;
 			if (!$res) {
-				$this->setError(sprintf(_('ERROR: DB: artifact: %s'),db_error()));
+			$this->setError(_('ERROR: DB: artifact:').' '.db_error());
 				db_rollback();
 				return false;
 			}

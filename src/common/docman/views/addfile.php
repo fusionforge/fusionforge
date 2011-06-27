@@ -75,8 +75,11 @@ if ( $dgf->getNested() == NULL ) {
 	if ($g->useDocmanSearch()) 
 		echo '<p>'. _('Both fields are used by document search engine.'). '</p>';
 
-	echo '<form name="adddata" action="?group_id='.$group_id.'&amp;action=addfile" method="post" enctype="multipart/form-data">
-			<table>
+	echo '<form name="adddata" action="?group_id='.$group_id.'&amp;action=addfile" method="post" enctype="multipart/form-data">';
+	if ($dirid) {
+		echo '<input type="hidden" name="doc_group" value="'.$dirid.'" />';
+	}
+	echo '<table>
 				<tr>
 					<td style="text-align:right;">
 						<strong>'. _('Document Title').'</strong>'.utils_requiredField()
@@ -97,12 +100,12 @@ if ( $dgf->getNested() == NULL ) {
 					<td style="text-align:right;">
 						<strong>'. _('Type of Document') .'</strong>'.utils_requiredField()
 					.'</td><td>
-					<input type="radio" name="type" value="httpupload" onClick="javascript:displayRowFile()" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onClick="javascript:displayRowUrl()" />'. _('URL');
+					<input type="radio" name="type" value="httpupload" onclick="javascript:displayRowFile()" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onclick="javascript:displayRowUrl()" />'. _('URL');
 			if (forge_get_config('use_manual_uploads')) {
-				echo '<input type="radio" name="type" value="manualupload" onClick="javascript:displayRowManual()" />'. _('Already-uploaded file');
+				echo '<input type="radio" name="type" value="manualupload" onclick="javascript:displayRowManual()" />'. _('Already-uploaded file');
 			}
 			if ($g->useCreateOnline()) {
-				echo '<input type="radio" name="type" value="editor" onClick="javascript:displayRowEditor()" />'. _('Create online');
+				echo '<input type="radio" name="type" value="editor" onclick="javascript:displayRowEditor()" />'. _('Create online');
 			}
 			echo '		</td>
 				</tr>
@@ -158,13 +161,11 @@ if ( $dgf->getNested() == NULL ) {
 	echo '
 					</td>
 				</tr>';
-	if ($dirid) {
-		echo '<input type="hidden" name="doc_group" value="'.$dirid.'">';
-	} else {
+	if (!$dirid) {
 		echo '
 				<tr>
 					<td>
-						<strong>'. _('Directory that document belongs in').'</strong>
+						<strong>'. _('Folder that document belongs in').'</strong>
 					</td><td>';
 		$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
 		echo '

@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -57,25 +58,26 @@ function doIt(formid) {
 /* ]]> */</script>
 <?php
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminpending\')" ><h4>'. _('Admin Pending Files') .'</h4></a>';
+		docman_editdata_js();
+		echo '<h4><a href="#" onclick="javascript:displayAdminDiv(\'adminpending\')" >'. _('Admin Pending Files') .'</a></h4>';
 		echo '<div id="adminpending" style="display:none">';
 		include ($gfcommon.'docman/views/listpendingfile.php');
 		echo '</div>';
 
-		echo '<a href="#" onclick="javascript:displayAdminDiv(\'admintrash\')" ><h4>'. _('Admin Trash') .'</h4></a>';
+		echo '<h4><a href="#" onclick="javascript:displayAdminDiv(\'admintrash\')" >'. _('Admin Trash') .'</a></h4>';
 		echo '<div id="admintrash" style="display:none;" >';
 		include ($gfcommon.'docman/views/listtrashfile.php');
 		echo '</div>';
 	}
 
 	if (forge_check_perm('docman', $group_id, 'admin')) {
-		echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminoptions\')" ><h4>'. _('Admin Options') .'</h4></a>';
+		echo '<h4><a href="#" onclick="javascript:displayAdminDiv(\'adminoptions\')" >'. _('Admin Options') .'</a></h4>';
 		echo '<div id="adminoptions" style="display:none;" >';
 
 		if (extension_loaded('zip')) {
 			echo '<form id="backup" name="backup" method="post" action="'. util_make_url ('/docman/view.php/'.$group_id.'/backup') .'" >';
 			echo '<ul>';
-			echo '<li><input id="submitbackup" type="button" value="'. _('Extract documents and directories as an archive') .'" onclick="javascript:doIt(\'backup\')"></li>';
+			echo '<li><input id="submitbackup" type="button" value="'. _('Extract documents and directories as an archive') .'" onclick="javascript:doIt(\'backup\')" /></li>';
 			echo '</ul>';
 			echo '</form>';
 		}
@@ -90,7 +92,7 @@ function doIt(formid) {
 			$labelCreateOnline = _('Disable Create Online Documents');
 		}
 
-		echo '<li><input name="status" type="hidden" value="'.$createOnlineStatus.'"><input id="submitcreateonline" type="button" value="'.$labelCreateOnline.'" onclick="javascript:doIt(\'createonline\')"></li>';
+		echo '<li><input name="status" type="hidden" value="'.$createOnlineStatus.'" /><input id="submitcreateonline" type="button" value="'.$labelCreateOnline.'" onclick="javascript:doIt(\'createonline\')" /></li>';
 		echo '</ul>';
 		echo '</form>';
 
@@ -104,7 +106,7 @@ function doIt(formid) {
 			$labelSearchEngine = _('Disable Search Engine');
 		}
 
-		echo '<li><input name="status" type="hidden" value="'.$searchEngineStatus.'"><input id="submitsearchengine" type="button" value="'.$labelSearchEngine.'" onclick="javascript:doIt(\'searchengine\')"></li>';
+		echo '<li><input name="status" type="hidden" value="'.$searchEngineStatus.'" /><input id="submitsearchengine" type="button" value="'.$labelSearchEngine.'" onclick="javascript:doIt(\'searchengine\')" /></li>';
 		echo '</ul>';
 		echo '</form>';
 
@@ -112,7 +114,7 @@ function doIt(formid) {
 			if ($d_arr || count($d_arr) > 1) {
 				echo '<form id="reindexword" name="reindexword" method="post" action="?group_id='.$group_id.'&amp;action=forcereindexenginesearch">';
 				echo '<ul>';
-				echo '<li><input name="status" type="hidden" value="1"><input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')"></li>';
+				echo '<li><input name="status" type="hidden" value="1" /><input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')" /></li>';
 				echo '</ul>';
 				echo '</form>';
 			}
@@ -127,7 +129,7 @@ function doIt(formid) {
 				$webdavStatus = '0';
 				$labelWebdavInterface = _('Disable Webdav Interface');
 			}
-			echo '<li><input name="status" type="hidden" value="'.$webdavStatus.'"><input id="submitweddavinterface" type="button" value="'.$labelWebdavInterface.'" onclick="javascript:doIt(\'webdavinterface\')"></li>';
+			echo '<li><input name="status" type="hidden" value="'.$webdavStatus.'" /><input id="submitweddavinterface" type="button" value="'.$labelWebdavInterface.'" onclick="javascript:doIt(\'webdavinterface\')" /></li>';
 			echo '</ul>';
 			echo '</form>';
 		}

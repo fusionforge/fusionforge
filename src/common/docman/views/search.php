@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,8 +40,8 @@ $handle = $vtp->Open($templates_dir."/docman/templates/search.tpl.html");
 $vtp->NewSession($handle,"MAIN");
 
 $allchecked = ""; $onechecked = "";
-if (getStringFromPost('search_type') == "one") {$onechecked = "checked";}
-else {$allchecked = "checked";}
+if (getStringFromPost('search_type') == "one") {$onechecked = 'checked="checked"';}
+else {$allchecked = 'checked="checked"';}
 $vtp->AddSession($handle,"FORMSEARCH");
 $vtp->SetVar($handle,"FORMSEARCH.TITLE",_('Search in documents'));
 $vtp->SetVar($handle,"FORMSEARCH.GROUP_ID",$_GET["group_id"]);

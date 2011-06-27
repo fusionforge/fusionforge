@@ -1,6 +1,7 @@
 <?php
 /*
  * Copyright (C) 2010 Alcatel-Lucent
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -65,9 +66,8 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("link=Uncategorized Submissions");
-		$this->clickAndWait("//img[@alt='Move to trash this document']");
-		$this->assertTextPresent("Document moved to trash successfully");
-//		$this->assertTextPresent("This project has no visible documents");
+		$this->clickAndWait("//img[@alt='Move this document to trash']");
+		$this->assertTrue($this->isTextPresent("Document moved to trash successfully."));
 	}
 }
 ?>
