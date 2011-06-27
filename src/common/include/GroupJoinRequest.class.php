@@ -4,6 +4,7 @@
  *
  * Copyright 2005, GForge, LLC
  * Copyright 2009-2010, Roland Mas
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -100,7 +101,7 @@ class GroupJoinRequest extends Error {
 		$v->check($user_id, "user_id");
 		$v->check(trim($comments), "comments");
 		if (!$v->isClean()) {
-			$this->setError($v->formErrorMsg("Must include "));
+			$this->setError($v->formErrorMsg(_("Must include ")));
 			return false;
 		}
 
