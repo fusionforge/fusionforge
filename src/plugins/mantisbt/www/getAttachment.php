@@ -62,7 +62,7 @@ if ( !$userperm->IsMember()) {
 	exit_permission_denied(_('You are not a member of this project'), 'home');
 }
 
-$mantisbtConf = $mantisbt->getMantisBTConf();
+$mantisbtConf = $mantisbt->getMantisBTConf($group_id);
 
 $mantisbtUserConf = $mantisbt->getUserConf($user->getID());
 if ($mantisbtUserConf) {
@@ -87,7 +87,7 @@ if ($idAttachment) {
 	header( 'Content-Disposition: filename="'.urlencode($arr[6]).'"' );
 	// filetype is missing.... now.... so we force application/binary
 	header('Content-type: application/binary');
-	echo base64_decode($content);
+	echo $content;
 } else {
 	exit_missing_param($_SERVER['HTTP_REFERER'], array(_('No idAttachment')), 'mantisbt');
 }

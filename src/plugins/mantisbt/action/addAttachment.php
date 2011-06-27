@@ -28,13 +28,11 @@ global $password;
 global $group_id;
 global $idBug;
 
-$data = file_get_contents($_FILES['attachment']['tmp_name'] );
-$content = base64_encode($data);
 try {
 	if (!isset($clientSOAP))
 		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 
-	$clientSOAP->__soapCall('mc_issue_attachment_add', array("username" => $username, "password" => $password, "issue_id" => $idBug, "name" => $_FILES['attachment']['name'], "file_type" => $_FILES['attachment']['type'], "content" => $content ));
+	$clientSOAP->__soapCall('mc_issue_attachment_add', array("username" => $username, "password" => $password, "issue_id" => $idBug, "name" => $_FILES['attachment']['name'], "file_type" => $_FILES['attachment']['type'], "content" => file_get_contents($_FILES['attachment']['tmp_name'])));
 	$feedback = _('Task Successed');
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
