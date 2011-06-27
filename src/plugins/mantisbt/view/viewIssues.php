@@ -64,7 +64,9 @@ try {
 	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
 	$errorPage = true;
 }
-if (!isset($errorPage) && isset($clientSOAP)) {
+if (!isset($clientSOAP) && !isset($errorPage)) {
+	echo '<div class="warning">'._('No data to retrieve').'</div>';
+} elseif (!isset($errorPage) && isset($clientSOAP)) {
 
 ?>
 
@@ -525,8 +527,6 @@ if (!isset($errorPage) && isset($clientSOAP)) {
 		}
 	}
 	echo 	'</div>';
-} else {
-	echo '<div class="warning">'._('No data to retrieve').'</div>';
 }
 
 ?>
