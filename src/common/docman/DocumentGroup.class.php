@@ -104,17 +104,19 @@ class DocumentGroup extends Error {
 			$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
 						array($parent_doc_group, $this->Group->getID())) ;
 			if (!$res || db_numrows($res) < 1) {
-				$this->setError(_('DocumentGroup: Invalid Document Directory parent ID'));
+				$this->setError(_('Invalid Document Directory parent ID'));
 				return false;
 			}
 		} else {
 			$parent_doc_group = 0;
 		}
 
-		$perm =& $this->Group->getPermission();
-		if (!$perm || !$perm->isDocEditor()) {
-			$this->setPermissionDeniedError();
-			return false;
+		if ($parent_doc_group || $name != 'Uncategorized Submissions') {
+			$perm =& $this->Group->getPermission();
+			if (!$perm || !$perm->isDocEditor()) {
+				$this->setPermissionDeniedError();
+				return false;
+				}
 		}
 		
 		$res=db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
