@@ -64,18 +64,18 @@ try {
 }
 
 if (!isset($errorPage)){
-	echo 	'<form name="issue" method="POST" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addIssue" >';
+	echo	'<form name="issue" method="POST" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addIssue" >';
 	echo	'<table>';
 	echo		'<tr>';
-	echo 			'<td width="16%">'._('Category').'</td>';
-	echo 			'<td width="16%">'._('Reproducibility').'</td>';
-	echo 			'<td width="16%">'._('Severity').'</td>';
-	echo 			'<td width="16%">'._('Priority').'</td>';
-	echo 			'<td width="16%">'._('Assigned to').'</td>';
-	echo 			'<td width="16%">'._('Found in').'</td>';
+	echo			'<td width="16%">'._('Category').'</td>';
+	echo			'<td width="16%">'._('Reproducibility').'</td>';
+	echo			'<td width="16%">'._('Severity').'</td>';
+	echo			'<td width="16%">'._('Priority').'</td>';
+	echo			'<td width="16%">'._('Assigned to').'</td>';
+	echo			'<td width="16%">'._('Found in').'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td>';
+	echo			'<td>';
 	echo				'<select name="categorie">';
 	foreach ($listCategories as $key => $category){
 		echo				"<option>".$category."</option>";
@@ -111,14 +111,20 @@ if (!isset($errorPage)){
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td>';
-	echo				'<select name="version">';
-	echo					"<option></option>";
-	foreach ($listVersions as $key => $version){
-		echo				"<option>".$version->name."</option>";
+	if (sizeof($listVersions)) {
+		echo		'<td>';
+		echo			'<select name="version">';
+		echo				"<option></option>";
+		foreach ($listVersions as $key => $version){
+			echo			"<option>".$version->name."</option>";
+		}
+		echo			'</select>';
+		echo		'</td>';
+	} else {
+		echo		'<td>';
+		echo			_('No version defined');
+		echo		'</td>';
 	}
-	echo				'</select>';
-	echo			'</td>';
 	echo		'</tr>';
 	echo	'</table>';
 	echo	'<br/>';
