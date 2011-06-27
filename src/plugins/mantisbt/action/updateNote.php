@@ -28,8 +28,15 @@ global $password;
 global $group_id;
 
 $noteEdit;
-$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
+try {
+	$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+	$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
+	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
+} catch (SoapFault $soapFault) {
+	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($error_msg));
+}
+
 foreach($defect->notes as $key => $note){
 	if ($note->id == $idNote){
 		$noteEdit = $note;
@@ -39,28 +46,21 @@ foreach($defect->notes as $key => $note){
 
 if (isset($_POST['edit_texte_note'])){
 	$noteEdit->text = $_POST['edit_texte_note'];
-	try {
-		$clientSOAP->__soapCall('mc_issue_note_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue_note_id" => $idNote, "note" => $noteEdit, "type_update" => "text"));
-	} catch (SoapFault $soapFault) {
-		$error_msg = _('Task failed:').' '.$soapFault->faultstring;
-		session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($error_msg));
-	}
-} else {
-	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
-	foreach($listViewStates as $state){
-		if (($state->id == 50 && $actionNote == "private") || ($state->id == 10 && $actionNote == "public")){
-			$noteEdit->view_state->name = $state->name;
-			$noteEdit->view_state->id = $state->id;
-			break;
-		}
-	}
+}
 
-	try {
-		$clientSOAP->__soapCall('mc_issue_note_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue_note_id" => $idNote, "note" => $noteEdit, "type_update" => "state"));
-	} catch (SoapFault $soapFault) {
-		$error_msg = _('Task failed:').' '.$soapFault->faultstring;
-		session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($error_msg));
+foreach($listViewStates as $state){
+	if (($state->id == 50 && $actionNote == "private") || ($state->id == 10 && $actionNote == "public")){
+		$noteEdit->view_state->name = $state->name;
+		$noteEdit->view_state->id = $state->id;
+		break;
 	}
+}
+
+try {
+	$clientSOAP->__soapCall('mc_issue_note_update', array("username" => $username, "password" => $password, "note" => $noteEdit));
+} catch (SoapFault $soapFault) {
+	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($error_msg));
 }
 
 $feedback = _('Task succeeded');
