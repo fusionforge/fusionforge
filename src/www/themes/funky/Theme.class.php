@@ -33,9 +33,6 @@ class Theme extends Layout {
 
 	function Theme() {
 
-		$this->addStylesheet('/scripts/yui/reset-fonts-grids/reset-fonts-grids.css');
-		$this->addStylesheet('/scripts/yui/base/base-min.css');
-		$this->addStylesheet('/themes/css/fusionforge.css');
 		$this->addStylesheet('/themes/funky/css/theme.css');
 		$this->addStylesheet('/themes/funky/css/theme-pages.css');
 
