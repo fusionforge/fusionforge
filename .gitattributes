@@ -1929,6 +1929,7 @@ src/plugins/mantisbt/bin/db-upgrade.pl -text
 src/plugins/mantisbt/common/MantisBTPlugin.class.php -text
 src/plugins/mantisbt/common/languages/Base.tab -text
 src/plugins/mantisbt/common/mantisbt-init.php -text
+src/plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php -text
 src/plugins/mantisbt/controler/filter.php -text
 src/plugins/mantisbt/controler/filter_roadmap.php -text
 src/plugins/mantisbt/db/mantisbt-init.sql -text

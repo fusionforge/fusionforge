@@ -40,6 +40,8 @@ class MantisBTPlugin extends Plugin {
 		$this->_addHook('group_delete');
 		$this->_addHook('group_update');
 		$this->_addHook('site_admin_option_hook');
+		$this->_addHook('widget_instance', 'myPageBox', false);
+		$this->_addHook('widgets', 'widgets', false);
 	}
 
 	function CallHook($hookname, &$params) {
@@ -142,6 +144,20 @@ class MantisBTPlugin extends Plugin {
 					}
 				} else {
 					$returned = true;
+				}
+				break;
+			}
+			case "widgets": {
+				$group = group_get_object($GLOBALS['group_id']);
+				if ($group->usesPlugin($this->name)) {
+					return $this->widgets($params);
+				}
+				break;
+			}
+			case "widget_instance": {
+				$group = group_get_object($GLOBALS['group_id']);
+				if ($group->usesPlugin($this->name)) {
+					return $this->myPageBox($params);
 				}
 				break;
 			}
@@ -619,6 +635,23 @@ class MantisBTPlugin extends Plugin {
 
 	function getAdminOptionLink() {
 		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name,_('Global MantisBT admin'));
+	}
+
+	function widgets($params) {
+ 		require_once('common/widget/WidgetLayoutManager.class.php');
+		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
+			$params['fusionforge_widgets'][] = 'plugin_mantisbt_project_latestissues';
+		}
+		return true;
+	}
+
+	function myPageBox($params) {
+		global $gfplugins;
+		require_once('common/widget/WidgetLayoutManager.class.php');
+		if ($params['widget'] == 'plugin_mantisbt_project_latestissues') {
+			require_once $gfplugins.$this->name.'/common/mantisbt_Widget_ProjectLastIssues.class.php';
+			$params['instance'] = new mantisbt_Widget_ProjectLastIssues($this);
+		}
 	}
 }
 // Local Variables:
