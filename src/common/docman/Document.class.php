@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -656,7 +657,6 @@ class Document extends Error {
 	 * @return	boolean	success.
 	 */
 	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid) {
-		global $LUSER;
 
 		$perm =& $this->Group->getPermission();
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
@@ -664,7 +664,8 @@ class Document extends Error {
 			return false;
 		}
 
-		if ($this->getLockedBy() != $LUSER->getID()) {
+		$user = session_get_user();
+		if ($this->getLocked() && ($this->getLockedBy() != $user->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
