@@ -406,6 +406,7 @@ src/common/dao/include/DataAccess.class.php -text
 src/common/dao/include/DataAccessException.class.php -text
 src/common/dao/include/DataAccessObject.class.php -text
 src/common/dao/include/DataAccessResult.class.php -text
+src/common/docman/DocumentManager.class.php -text
 src/common/docman/Parsedata.class.php -text
 src/common/docman/actions/addfile.php -text
 src/common/docman/actions/addsubdocgroup.php -text
