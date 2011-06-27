@@ -26,27 +26,8 @@ global $mantisbt;
 global $mantisbtConf;
 global $group_id;
 global $gfplugins;
-global $use_tooltips;
 
-?>
-<script type="text/javascript">
-var controller;
-
-jQuery(document).ready(function() {
-	controlerMantisBTMenuControler = new MantisBTMenuControler({
-		tipsyElements:	[
-					{selector: '#roadmapView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#ticketView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#adminView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#statView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-				],
-	});
-});
-
-</script>
-<?php
-
-$mantisbt->getSubMenu($use_tooltips);
+$mantisbt->getSubMenu();
 
 // page a afficher
 switch ($view) {

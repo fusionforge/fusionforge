@@ -86,11 +86,7 @@ class MantisBTPlugin extends Plugin {
 				if ($user->usesPlugin($this->name)) {
 					echo '<p>';
 					$arr_t = array();
-					if ($user->usesTooltips()) {
-						$arr_t[] = array('title' => _('Manage your mantisbt account and follow your tickets'));
-					} else {
-						$arr_t[] = array();
-					}
+					$arr_t[] = array('title' => _('Manage your mantisbt account and follow your tickets'), 'class' => 'tabtitle');
 					echo util_make_link('/plugins/'.$this->name.'/?user_id=$userid&type=user&pluginname='.$this->name, _('View Personal MantisBT'), $arr_t);
 					echo '</p>';
 				}
@@ -343,7 +339,7 @@ class MantisBTPlugin extends Plugin {
 	 * @param	int	enable tooltips : default NO
 	 * @return	bool	true only currently
 	 */
-	function getSubMenu($enable_tooltips = 0) {
+	function getSubMenu() {
 		global $HTML;
 		global $group_id;
 		global $user;
@@ -356,26 +352,16 @@ class MantisBTPlugin extends Plugin {
 		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id."&pluginname=".$this->name."&view=roadmap";
 		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id."&pluginname=".$this->name;
 		$labelAttr = array();
-		if ($enable_tooltips) {
-			$labelAttr[] = array('title' => _('View the roadmap, per version tickets'), 'id' => 'roadmapView');
-			$labelAttr[] = array('title' => _('View all tickets.'), 'id' => 'ticketView');
-		} else {
-			$labelAttr[] = array();
-			$labelAttr[] = array();
-		}
+		$labelAttr[] = array('title' => _('View the roadmap, per version tickets'), 'id' => 'roadmapView', 'class' => 'tabtitle-nw');
+		$labelAttr[] = array('title' => _('View all tickets.'), 'id' => 'ticketView', 'class' => 'tabtitle');
 		$userperm = $group->getPermission($user);
 		if ( $userperm->isAdmin() ) {
 			$labelTitle[] = _('Administration');
 			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&pluginname=".$this->name;
 			$labelTitle[] = _('Statistics');
 			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&pluginname=".$this->name."&view=stat";
-			if ($enable_tooltips) {
-				$labelAttr[] = array('title' => _('Manage versions, categories and general configuration.'), 'id' => 'adminView');
-				$labelAttr[] = array('title' => _('View global statistics.'), 'id' => 'statView');
-			} else {
-				$labelAttr[] = array();
-				$labelAttr[] = array();
-			}
+			$labelAttr[] = array('title' => _('Manage versions, categories and general configuration.'), 'id' => 'adminView', 'class' => 'tabtitle');
+			$labelAttr[] = array('title' => _('View global statistics.'), 'id' => 'statView', 'class' => 'tabtitle');
 		}
 
 		echo $HTML->subMenu($labelTitle, $labelPage, $labelAttr);
@@ -389,7 +375,6 @@ class MantisBTPlugin extends Plugin {
 	function getHeader($type) {
 		global $gfplugins;
 		$returned = false;
-		html_use_tooltips();
 		use_javascript('/plugins/'.$this->name.'/scripts/MantisBTController.js');
 		use_stylesheet('/plugins/'.$this->name.'/style.css');
 		switch ($type) {
@@ -628,7 +613,6 @@ class MantisBTPlugin extends Plugin {
 	function getGlobalAdminView() {
 		global $gfplugins;
 		$user = session_get_user();
-		$use_tooltips = $user->usesTooltips();
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
 	}

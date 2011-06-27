@@ -24,50 +24,20 @@
 
 global $HTML;
 global $mantisbt;
-global $use_tooltips;
 
 $mantisbtGlobalConf = $mantisbt->getGlobalconf();
-
-?>
-<script type="text/javascript">
-var controller;
-
-jQuery(document).ready(function() {
-	controllerMantisBTAdminViewControler = new MantisBTAdminViewController({
-		tipsyElements:		[
-						{selector: '#mantisbtinit-url', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-user', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-password', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-syncroles', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-					],
-		inputUrl:		jQuery('#mantisbturl'),
-		inputUser:		jQuery('#mantisbtuser'),
-		inputPassword:		jQuery('#mantisbtpassword'),
-	});
-});
-
-</script>
-<?php
 
 echo $HTML->boxTop(_('Manage configuration'));
 echo '<form method="POST" Action="?type=globaladmin&pluginname='.$mantisbt->name.'&action=updateGlobalConf">';
 echo '<table>';
-echo '<tr><td><label id="mantisbtinit-url" ';
-if ($use_tooltips)
-	echo 'title="'._('Specify the Full URL of the MantisBT Web Server.').'"';
-echo ' >URL</label></td><td><input type="text" size="50" maxlength="255" name="url" value="'.$mantisbtGlobalConf['url'].'" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-user" ';
-if ($use_tooltips)
-	echo 'title="'._('Specify the user with admin right to be used thru SOAP API.').'"';
-echo ' >SOAP User</label></td><td><input type="text" size="50" maxlength="255" name="soap_user" value="'.$mantisbtGlobalConf['soap_user'].'" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-password" ';
-if ($use_tooltips)
-	echo 'title="'._('Specify the password of this user.').'"';
-echo ' >SOAP Password</label></td><td><input type="text" size="50" maxlength="255" name="soap_password" value="'.$mantisbtGlobalConf['soap_password'].'" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-syncroles" ';
-if ($use_tooltips)
-	echo 'title="'._('Do you want to sync FusionForge -> MantisBT roles ? Not implemented yet.').'"';
-echo ' >Sync Roles</label></td><td><input disabled="disabled" type="checkbox" name="sync_roles" /></td></tr>';
+echo '<tr><td><label id="mantisbtinit-url" >URL</label></td>';
+echo '<td><input type="text" class="tabtitle-w" title="'._('Specify the Full URL of the MantisBT Web Server.').'" size="50" maxlength="255" name="url" value="'.$mantisbtGlobalConf['url'].'" /></td></tr>';
+echo '<tr><td><label id="mantisbtinit-user" >SOAP User</label></td>';
+echo '<td><input type="text" class="tabtitle-w" title="'._('Specify the user with admin right to be used thru SOAP API.').'" size="50" maxlength="255" name="soap_user" value="'.$mantisbtGlobalConf['soap_user'].'" /></td></tr>';
+echo '<tr><td><label id="mantisbtinit-password" >SOAP Password</label></td>';
+echo '<td><input type="text" class="tabtitle-w" title="'._('Specify the password of this user.').'" size="50" maxlength="255" name="soap_password" value="'.$mantisbtGlobalConf['soap_password'].'" /></td></tr>';
+echo '<tr><td><label id="mantisbtinit-syncroles" >Sync Roles</label></td>';
+echo '<td><input disabled="disabled" type="checkbox" class="tabtitle-w" title="'._('Do you want to sync FusionForge -> MantisBT roles ? Not implemented yet.').'" name="sync_roles" /></td></tr>';
 echo '</table>';
 echo '<input type="submit" value="'._('Update').'" />';
 echo '</form>';

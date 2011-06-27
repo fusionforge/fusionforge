@@ -92,7 +92,6 @@ switch ($type) {
 				}
 				$action = getStringFromRequest('action');
 			}
-			$use_tooltips = $user->usesTooltips();
 		}
 
 		if (!isset($username) || !isset($password)) {
@@ -177,8 +176,6 @@ switch ($type) {
 				session_redirect($redirect_url);
 			}
 		}
-		$use_tooltips = $user->usesTooltips();
-
 
 		switch ($action) {
 			case 'inituser':
