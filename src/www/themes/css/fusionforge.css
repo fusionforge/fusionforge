@@ -354,8 +354,7 @@ table.progress :link:hover, table.progress :visited:hover {
 table.progress td { background: #fff; padding: 0 }
 table.progress td :hover { background: none }
 
-/* style for warning messages box
-*/
+/* style for warning messages box */
 .warning_msg {
     font-weight: bold;
     border-width: 2px;
@@ -363,6 +362,20 @@ table.progress td :hover { background: none }
     background-color: #ffd297; /* orange */
     border-color: #FFA500; /* orange */
     padding: 0.5em;
+}
+
+p.information {
+   font-weight: bold;
+   font-size: 12px;
+   text-align: center;
+   border: 1px solid;
+   margin: 15px 0px;
+   padding: 10px 10px 10px 10px;
+}
+
+p.information {
+   border-color: blue;
+   background-color: #BDE5F8;
 }
 
 /* {{{ Widgets */
