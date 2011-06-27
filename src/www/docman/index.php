@@ -41,9 +41,6 @@ if (!forge_get_config('use_docman'))
 
 /* get informations from request or $_POST */
 $group_id = getIntFromRequest('group_id');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
-$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 
 /* validate group */
 if (!$group_id)
@@ -109,18 +106,18 @@ use_javascript('scripts/DocManController.js');
 use_javascript('/js/sortable.js');
 use_stylesheet('/jscook/ThemeXP/theme.css');
 
-$title = _('Document Manager: Display Document');
+$title = _('Documents for ').$g->getPublicName();
 
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));
 
-echo '<div style="float:left; width:17%;">';
+echo '<div id="docman_tree" style="float:left;">';
 include ($gfcommon.'docman/views/tree.php');
 echo '</div>';
 
-echo '<div style="float:right; width:82%;">';
+echo '<table><tr><td>';
 include ($gfcommon.'docman/views/menu.php');
 include ($gfcommon.'docman/views/views.php');
-echo '</div>';
+echo '</td></tr></table>';
 
 echo '<div style="clear:both; margin-bottom:5px;" />';
 site_project_footer(array());
