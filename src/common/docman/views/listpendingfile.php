@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,7 +33,7 @@ $df->setStateID('3');
 $d_pending_arr =& $df->getDocuments();
 
 if (!$d_pending_arr || count($d_pending_arr) < 1) {
-	echo '<div class="feedback">'._('No pending documents').'</div>';
+	echo '<p class="information">'._('No pending documents').'</p>';
 } else {
 	docman_display_documents($nested_groups, $df, true, 3, 0);
 }
