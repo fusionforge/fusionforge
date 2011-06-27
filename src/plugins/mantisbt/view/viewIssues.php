@@ -52,17 +52,19 @@ try {
 				$clientSOAP = new SoapClient($mantisbtConfUrl."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 				$idsBugAll = $clientSOAP->__soapCall('mc_issue_get_filtered_by_user', array("username" => $username, "password" => $password));
 			}
+			break;
 		}
 		case "group": {
 			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 			$idsBugAll = $clientSOAP->__soapCall('mc_project_get_issue_headers', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt'],  "page_number" => -1, "per_page" => -1));
+			break;
 		}
 	}
 } catch (SoapFault $soapFault) {
 	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
 	$errorPage = true;
 }
-if (!isset($errorPage)) {
+if (!isset($errorPage) && isset($clientSOAP)) {
 
 ?>
 
@@ -523,6 +525,8 @@ if (!isset($errorPage)) {
 		}
 	}
 	echo 	'</div>';
+} else {
+	echo '<div class="warning">'._('No data to retrieve').'</div>';
 }
 
 ?>
