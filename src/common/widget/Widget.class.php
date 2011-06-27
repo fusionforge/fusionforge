@@ -301,6 +301,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 		//$em =& EventManager::instance();
 		//$em->processEvent('widgets', array('codendi_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));
 		plugin_hook('widgets', array('codendi_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));
+		plugin_hook('widgets', array('fusionforge_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));
 
 		if (is_array($plugins_widgets)) {
 			$widgets = array_merge($widgets, $plugins_widgets);
