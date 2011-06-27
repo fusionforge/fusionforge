@@ -75,21 +75,17 @@ class Widget_MyAdmin extends Widget {
 	}
 
 	if (forge_check_global_perm ('approve_news')) {
-		$sql="SELECT * FROM news_bytes WHERE is_approved=0 OR is_approved=3";
-		$result=db_query_params($sql,array());
-		$pending_news = 0;
-		$rows=db_numrows($result);
-		for ($i=0; $i<$rows; $i++) {
-			//if the news is private, not display it in the list of news to be approved
-			$forum_id=db_result($result,$i,'forum_id');
-			/*$res = news_read_permissions($forum_id);
-			// check on db_result($res,0,'ugroup_id') == $UGROUP_ANONYMOUS only to be consistent
-			// with ST DB state
-			if ((db_numrows($res) < 1) || (db_result($res,0,'ugroup_id') == $GLOBALS['UGROUP_ANONYMOUS'])) {
-			$pending_news++;
-			}*/
-		}
-		
+		$old_date = time()-60*60*24*30;
+		$res = db_query_params('SELECT groups.group_id,id,post_date,summary,
+				group_name,unix_group_name
+			FROM news_bytes,groups
+			WHERE is_approved=0
+			AND news_bytes.group_id=groups.group_id
+			AND post_date > $1
+			AND groups.status=$2
+			ORDER BY post_date',
+					  array ($old_date, 'A')) ;
+		$pending_news = db_numrows($res);		
 		
 		$html_my_admin .= $this->_get_admin_row(
 			$i++, 
@@ -97,19 +93,6 @@ class Widget_MyAdmin extends Widget {
 			$pending_news,
 			$this->_get_color($pending_news)
 			);
-		
-		$result = array();
-		//$em =& EventManager::instance();
-		//$em->processEvent('widget_myadmin', array('result' => &$result));
-		foreach($result as $entry) {
-			$html_my_admin .= $this->_get_admin_row(
-				$i++, 
-				$entry['text'],
-				$entry['value'],
-				$entry['bgcolor'],
-				isset($entry['textcolor']) ? $entry['textcolor'] : 'white'
-				);
-		}
 	}
 	$html_my_admin .= '</table>';
 
