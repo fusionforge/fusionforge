@@ -6,6 +6,7 @@
  * Copyright 2000, Quentin Cregan/SourceForge
  * Copyright 2002-2004, GForge Team
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -55,7 +56,7 @@ if ($g->useDocmanSearch()) {
 
 if (session_loggedin()) {
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		$menu_text[] = _('Admin');
+		$menu_text[] = _('Administration');
 		$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=admin';
 	}
 }
