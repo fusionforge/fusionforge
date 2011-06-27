@@ -364,7 +364,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			}
 		}
 
-		return $this->create($name,$data,true);
+		return $this->create($name,$data,false);
 	}
 	
 	/**

@@ -42,13 +42,16 @@ db_query_params ('DELETE FROM trove_agg',
 db_query_params ('INSERT INTO trove_agg
 (SELECT tgl.trove_cat_id, g.group_id, g.group_name, g.unix_group_name, g.status, g.register_time, g.short_description, project_weekly_metric.percentile, project_weekly_metric.ranking
 FROM groups g
-LEFT JOIN project_weekly_metric USING (group_id), trove_group_link tgl
+LEFT JOIN project_weekly_metric USING (group_id), trove_group_link tgl, pfo_role_setting prs
 WHERE tgl.group_id=g.group_id
-AND g.is_public = 1
 AND g.type_id = 1
 AND g.status = $1
+AND g.group_id = prs.ref_id
+AND prs.section_name = $2
+AND prs.role_id = 1
 ORDER BY trove_cat_id ASC, ranking ASC)',
-		 array('A'));
+		 array('A',
+		       'project_read'));
 $err .= db_error();
 
 db_commit();
@@ -87,12 +90,16 @@ $res = db_query_params ('SELECT trove_cat.trove_cat_id,trove_cat.parent,count(gr
 	FROM  trove_cat LEFT JOIN trove_group_link ON
 		trove_cat.trove_cat_id=trove_group_link.trove_cat_id
 	LEFT JOIN groups ON
-		groups.group_id=trove_group_link.group_id
+		groups.group_id=trove_group_link.group_id,
+        pfo_role_setting prs
 	WHERE (groups.status=$1 OR groups.status IS NULL)
 	AND (groups.type_id=1 OR groups.status IS NULL)
-	AND (groups.is_public=1 OR groups.is_public IS NULL)
+	AND groups.group_id = prs.ref_id
+	AND prs.section_name = $2
+	AND prs.role_id = 1
 	GROUP BY trove_cat.trove_cat_id,trove_cat.parent',
-			array('A'));
+			array('A',
+				'project_read'));
 
 $rows = db_numrows($res);
 

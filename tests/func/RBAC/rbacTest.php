@@ -461,6 +461,32 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Documentation masters (global role)')]/../div/input[contains(@value,'Unlink Role')]"));
 
+		// Check that a project admin (not forge admin) can create a new role
+		$this->gotoProject ("SubProject") ;
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "guru") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Admin");
+		$this->click ("//input[@value='Add Member']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("guru Lastname"));
+		$this->assertTrue($this->isElementPresent("//tr/td/a[.='guru Lastname']/../../td/div[contains(.,'Admin')]")) ;
+
+		$this->switchUser('guru');
+		$this->gotoProject ("SubProject") ;
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'roleedit.php')]/..//input[@name='role_name']", "Role created by guru") ;
+		$this->click ("//input[@value='Create Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse ($this->isPermissionDenied()) ;
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Role created by guru')]/../div/input[@value='Edit Permissions']")) ;
 	}
 }
 ?>
