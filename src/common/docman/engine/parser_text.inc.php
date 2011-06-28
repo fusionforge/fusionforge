@@ -31,16 +31,19 @@ function parser_text($fichin) {
 
 	$fp = fopen($fichin, "r");
 	$buff = fread($fp, filesize($fichin));
+
 	// tout en minuscules
 	if (function_exists('mb_strtolower')) {
 		$buff = mb_strtolower($buff);
 	} else {
 		$buff = strtolower($buff);
 	}
+
 	// élimination d'éventuels caractères unicode encore présents
 	if (function_exists('mb_convert_encoding')) {
 		$buff = mb_convert_encoding($buff, "ascii");
 	}
+
 	// élimination caractères avec accents 
 	// et caractères spéciaux
 	$buff = suppression_diacritics($buff);

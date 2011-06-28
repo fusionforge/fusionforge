@@ -73,6 +73,10 @@ class ReportDownloads extends Report {
 						array ($group_id)) ;
 			$package_id = db_result($res, 0, 'package_id');
 		}
+		if (!$package_id) {
+			$this->setError(_('There are no packages defined.'));
+			return false;
+		}
 
 		$res = db_query_params ('SELECT frs_package.name, frs_release.name,
                        frs_file.filename, users.realname,
