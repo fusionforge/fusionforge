@@ -292,7 +292,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '<p class="warning">'._('No documents to display').'</p>';
 	}
 }
-if (forge_check_perm('docman', $group_id, 'approve')) {
+if (forge_check_perm('docman', $group_id, 'approve') && $DocGroupName) {
 	include ($gfcommon.'docman/views/pendingfiles.php');
 	include ($gfcommon.'docman/views/editfile.php');
 }
