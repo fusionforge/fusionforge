@@ -90,9 +90,12 @@ class DocumentManager extends Error {
 			$this->data_array['trashid'] = $arr['doc_group'];
 			return $this->data_array['trashid'];
 		} else {
-			$this->setError('DocumentManager:: trash not found');
-			return -1;
+			$dg = new DocumentGroup($this->Group);
+			$dg->create('.trash');
+			$dg->setStateID('2');
+			return $dg->getID();
 		}
+		return false;
 	}
 
 	/**
