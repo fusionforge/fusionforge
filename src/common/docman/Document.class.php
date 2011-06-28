@@ -124,15 +124,12 @@ class Document extends Error {
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
 
 		$doc_initstatus = '3';
-		// If Editor - uploaded Documents are ACTIVE
-		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission();
-			if ($perm && is_object($perm) && $perm->isDocEditor()) {
-				if ($stateid && $stateid != 2) {
-					$doc_initstatus = $stateid;
-				} else {
-					$doc_initstatus = '1';
-				}
+		$perm =& $this->Group->getPermission();
+		if ($perm && is_object($perm) && $perm->isDocEditor()) {
+			if ($stateid && $stateid != 2) {
+				$doc_initstatus = $stateid;
+			} else {
+				$doc_initstatus = '1';
 			}
 		}
 
