@@ -42,6 +42,10 @@ $manual_path = getStringFromRequest('manual_path');
 $type = getStringFromRequest('type');
 $name = getStringFromRequest('name');
 
+if ($error_msg) {
+	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
+}
+
 if (!$doc_group || $doc_group == 100) {
 	//cannot add a doc unless an appropriate group is provided
 	$return_msg = _('No valid Document Directory was selected.');
