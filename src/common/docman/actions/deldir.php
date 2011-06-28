@@ -42,12 +42,14 @@ if ($dg->isError())
 if (!$dg->delete($dirid, $group_id))
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-
-$parentId = $dg->getParentID();
-$return_msg = sprintf(_('Directory %s deleted successfully.'),$dg->getName());
-$returnUrl = '';
-if ($parentId) {
-	$returnUrl = '&view=listfile&dirid='.$parentId;
+if ($dg->getState() != 2) {
+	$parentId = $dg->getParentID();
+	$view='listfile';
+} else {
+	$parentId = 0;
+	$view='listtrashfile';
 }
-session_redirect('/docman/?group_id='.$group_id.$returnUrl.'&feedback='.urlencode($return_msg));
+
+$return_msg = sprintf(_('Directory %s deleted successfully.'),$dg->getName());
+session_redirect('/docman/?group_id='.$group_id.'&view='.$view.'&dirid='.$parentId.'&feedback='.urlencode($return_msg));
 ?>
