@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -30,7 +31,7 @@ $PERMISSION_OBJ=array();
  * permission_get_object() - Get permission objects
  *
  * permission_get_object is useful so you can pool Permission objects/save database queries
- * You should always use this instead of instantiating the object directly 
+ * You should always use this instead of instantiating the object directly
  *
  * @param		object	The Group in question
  * @param		object	The User needing Permission
@@ -40,7 +41,7 @@ $PERMISSION_OBJ=array();
 function &permission_get_object(&$_Group, &$_User = NULL) {
 	//create a common set of Permission objects
 	//saves a little wear on the database
-	
+
 	global $PERMISSION_OBJ;
 
 	if (is_object($_Group)) {
@@ -96,7 +97,7 @@ class Permission extends Error {
 	 *
 	 *	@param	object	Group Object required.
 	 *	@param	object	User Object required.
-	 *	
+	 *
 	 */
 	function Permission (&$_Group) {
 		if (!$_Group || !is_object($_Group)) {
@@ -135,7 +136,16 @@ class Permission extends Error {
 	 *  @return	boolean	is_doc_editor.
 	 */
 	function isDocEditor() {
-		return forge_check_perm ('docman', $this->group_id, 'admin') ;
+		return forge_check_perm('docman', $this->group_id, 'approve');
+	}
+
+	/**
+	 *  isDocAdmin - whether the current user has form doc admin perms.
+	 *
+	 *  @return	boolean	is_doc_admin.
+	 */
+	function isDocAdmin() {
+		return forge_check_perm('docman', $this->group_id, 'admin');
 	}
 
 	/**
@@ -182,7 +192,7 @@ class Permission extends Error {
 	function isCVSReader() {
 		return forge_check_perm ('scm', $this->group_id, 'read') ;
 	}
-	
+
 	/**
 	 *      isCVSWriter - checks if the user has CVS write access.
 	 *
@@ -200,7 +210,7 @@ class Permission extends Error {
 	function isMember() {
 		if ($this->isAdmin()) {
 			//admins are tested first so that super-users can return true
-			//and admins of a project should always have full privileges 
+			//and admins of a project should always have full privileges
 			//on their project
 			return true;
 		} else {
