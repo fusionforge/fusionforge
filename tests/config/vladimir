@@ -6,3 +6,5 @@
 # So it should only be stuffs like VAR=value
 #
 VMENGINE=lxc
+REMOTESELENIUM=true
+KEEPVM=true
