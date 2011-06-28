@@ -88,7 +88,7 @@ class Document extends Error {
 			if (!$this->isPublic()) {
 				$perm =& $this->Group->getPermission();
 
-				if (!$perm || !is_object($perm) || !$perm->isMember()) {
+				if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
 					$this->setPermissionDeniedError();
 					$this->data_array = null;
 					return false;
