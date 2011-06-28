@@ -70,7 +70,7 @@ if ($d_arr != NULL ) {
 }
 
 // $nested_groups has a system directory : .trash => so count < 2
-if ((!$d_arr || count($d_arr) < 1) && (!$nested_docs || count($nested_docs) < 2)) {
+if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) < 2)) {
 	echo '<div class="warning">'._('Trash is empty').'</div>';
 } else {
 
