@@ -39,7 +39,7 @@ class DocumentFactory extends Error {
 	/**
 	 * The Documents dictionary.
 	 *
-	 * @var	array		Contains doc_group_id as key and the array of documents associated to that id. 
+	 * @var	array		Contains doc_group_id as key and the array of documents associated to that id.
 	 */
 	var $Documents;
 
@@ -288,22 +288,15 @@ class DocumentFactory extends Error {
 				$doc =& $this->Documents[$key][$i];
 
 				if (!$this->stateid) {
-					if (session_loggedin()) {
-						$perm =& $this->Group->getPermission();
-						if (!$perm || !is_object($perm) || !$perm->isMember()) {
-							if ($doc->getStateID() != 1) {		// non-active document?
-								$valid = false;
-							}
-						} else {
-							if ($doc->getStateID() != 1 &&		/* not active */
-								$doc->getStateID() != 4 &&	/* not hidden */
-								$doc->getStateID() != 5) {	/* not private */
-								$valid = false;
-							}
-						}
-					} else {
-						if ($doc->getStateID() != 1) {			// non-active document?
+					$perm =& $this->Group->getPermission();
+					if (!$perm || !is_object($perm)) {
+						if ($doc->getStateID() != 1) {
 							$valid = false;
+							echo 'LA';
+						}
+						if ($perm->isEditor()) {
+							$valid = true;
+							echo 'ICI';
 						}
 					}
 				} else {
@@ -402,7 +395,7 @@ class DocumentFactory extends Error {
 	 * getStates - Return an array of states that have documents associated to them
 	 */
 	function getUsedStates() {
-		$result = db_query_params('SELECT DISTINCT doc_states.stateid,doc_states.name 
+		$result = db_query_params('SELECT DISTINCT doc_states.stateid,doc_states.name
 					FROM doc_states,doc_data
 					WHERE doc_data.stateid=doc_states.stateid
 					ORDER BY doc_states.name ASC',
