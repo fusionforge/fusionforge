@@ -100,7 +100,7 @@ class DocumentGroup extends Error {
 			$this->setError(_('DocumentGroup: Name is required'));
 			return false;
 		}
-		
+
 		if ($parent_doc_group) {
 			// check if parent group exists
 			$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
@@ -118,8 +118,8 @@ class DocumentGroup extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		
-		$res=db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
+
+		$res = db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
 					array($name,
 						$parent_doc_group,
 						$this->Group->getID())
@@ -208,7 +208,7 @@ class DocumentGroup extends Error {
 		} else {
 			$uploaded_data_type = $uploaded_data['type'];
 		}
-		
+
 		switch ($uploaded_data_type) {
 			case "application/zip": {
 				$returned = $this->__injectZip($uploaded_data);
