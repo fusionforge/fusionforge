@@ -53,7 +53,12 @@ if ($dg->isError())
 				<td><?php echo _('belongs to') ?></td>
 				<td>
 <?php
-$dgh->showSelectNestedGroups($dgf->getNested(), "parent_dirid", true, $dg->getParentId(), array($dg->getID()));
+if ($dg->getState() == 2) {
+	$newdgf = new DocumentGroupFactory($g);
+	$dgh->showSelectNestedGroups($newdgf->getNested(), 'parent_dirid', false, false);
+} else {
+	$dgh->showSelectNestedGroups($dgf->getNested(), 'parent_dirid', true, $dg->getParentId(), array($dg->getID()));
+}
 ?>
 				</td>
 				<td><input type="submit" value="<?php echo _('Edit') ?>" name="submit" /></td>
