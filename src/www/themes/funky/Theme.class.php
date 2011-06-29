@@ -32,15 +32,14 @@ define('BOTTOM_TAB_HEIGHT', 22);
 class Theme extends Layout {
 
 	function Theme() {
-
-		$this->addStylesheet('/themes/funky/css/theme.css');
-		$this->addStylesheet('/themes/funky/css/theme-pages.css');
-
 		// Parent constructor
 		$this->Layout();
 		$this->themeurl = util_make_url('themes/funky/');
 		$this->imgbaseurl = $this->themeurl . 'images/';
 		$this->imgroot = $this->imgbaseurl;
+
+		$this->addStylesheet('/themes/funky/css/theme.css');
+		$this->addStylesheet('/themes/funky/css/theme-pages.css');
 	}
 
 	function quicknewsbutton() {

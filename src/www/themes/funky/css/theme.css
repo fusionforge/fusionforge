@@ -192,8 +192,8 @@ hr {
 .quicknews .title {
     font-size: 12px;
     color: red;
-    
 }
+
 .quicknews ul {
     background-color: white;
     width: 100%;
@@ -742,6 +742,25 @@ a.topTabSelected:hover {
     border-style: solid;
     background-color: #aef26d; /* green */
     border-color: green; /* green */
+    padding: 7px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    text-shadow: 1px 1px #DFF59f;
+    text-align: left;
+    font-weight: normal;
+    font-size: small;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+p.information {
+    border-width: 1px;
+    border-style: solid;
+    background-color: #9db0d2;
+    border-color: #3a5fa5;
     padding: 7px;
     border-radius: 6px;
     -webkit-border-radius: 6px;
