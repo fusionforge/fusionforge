@@ -38,6 +38,21 @@ configure_centos()
 
     if grep -q ^lxc.network.ipv4 $path/config
     then
+	# configure localhost
+	if ! grep -q "^127.0.0.1" $rootfs/etc/hosts
+	then
+		cat <<EOF >> $rootfs/etc/hosts
+# Do not remove the following line, or various programs
+# that require network functionality will fail.
+127.0.0.1       localhost.localdomain localhost
+::1             localhost6.localdomain6 localhost6
+EOF
+	if ! grep -q "^::1" $rootfs/etc/hosts
+	then
+		cat <<EOF >> $rootfs/etc/hosts
+::1             localhost6.localdomain6 localhost6
+EOF
+	fi
         # configure static network
         lxc_network_ipv4=`grep ^lxc.network.ipv4 $path/config | cut -d= -f2`
         address=`echo $lxc_network_ipv4 | cut -d/ -f1`
