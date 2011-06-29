@@ -32,7 +32,7 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 /* NEED A REAL REWRITE */
 require_once $gfcommon.'docman/include/vtemplate.class.php';
 
-$is_editor = forge_check_perm('docman', $g->getID(), 'admin');
+$is_editor = forge_check_perm('docman', $g->getID(), 'approve');
 
 $vtp = new VTemplate;
 if (empty($gfcommon)) {
