@@ -175,7 +175,7 @@ DocManListFileController.prototype =
 	buildUrlByCheckbox: function(id) {
 		var CheckedBoxes = new Array();
 		for (var h = 0; h < jQuery("input:checked").length; h++) {
-			if (typeof(jQuery("input:checked")[h].className) != "undefined" && jQuery("input:checked")[h].className == 'checkeddocid'+id ) {
+			if (typeof(jQuery("input:checked")[h].className) != "undefined" && jQuery("input:checked")[h].className.match('checkeddocid'+id)) {
 				CheckedBoxes.push(jQuery("input:checked")[h].value);
 			}
 		}
