@@ -52,7 +52,7 @@ mkdir -p $WORKSPACE/build/packages $WORKSPACE/build/config $WORKSPACE/reports/co
 if $KEEPVM
 then
 	echo "Destroying vm $HOST"
-	tests/scripts/stop_vm $HOST || true)
+	tests/scripts/stop_vm $HOST || true
 fi
 
 tests/scripts/start_vm $HOST
