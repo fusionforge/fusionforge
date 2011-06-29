@@ -24,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-$no_gz_buffer=true;
+$no_gz_buffer = true;
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -32,6 +32,8 @@ require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';
+
+$sysdebug_enable = false;
 
 $arr = explode('/', getStringFromServer('REQUEST_URI'));
 $group_id = $arr[3];
@@ -82,14 +84,15 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 		exit_error(_('No document to display - invalid or inactive document number'), 'docman');
 	}
 
-	header('Content-disposition: filename="'.str_replace('"', '', $d->getFileName()) . '"');
+	header('Content-disposition: attachment; filename="'.str_replace('"', '', $d->getFileName()) . '"');
 
 	if (strstr($d->getFileType(), 'app')) {
 		header("Content-type: application/binary");
 	} else {
 		header("Content-type: ".$d->getFileType());
 	}
-
+	header("Content-Transfer-Encoding: binary");
+	ob_end_clean();
 	echo $d->getFileData();
 
 } elseif ($docid === 'backup') {
@@ -120,10 +123,16 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 			if ( !$zip->close())
 				exit_error(_('Unable to close zip archive for backup'), 'docman');
 
-			header('Content-disposition: filename="'.$filename.'"');
-			header('Content-type: application/binary');
+			header('Content-disposition: attachment; filename="'.$filename.'"');
+			header('Content-type: application/zip');
+			header("Content-Transfer-Encoding: binary");
+			ob_end_clean();
 
-			readfile($file);
+			if(!readfile_chunked($file)) {
+				unlink($file);
+				$error_msg = _('Unable to download backup file');
+				session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($error_msg));
+			}
 			unlink($file);
 		} else {
 			$warning_msg = _('No documents to backup.');
@@ -193,10 +202,16 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 				if ( !$zip->close())
 					exit_error(_('Unable to close zip archive for download as zip'), 'docman');
 
-				header('Content-disposition: filename="'.$filename.'"');
-				header('Content-type: application/binary');
+				header('Content-disposition: attachment; filename="'.$filename.'"');
+				header('Content-type: application/zip');
+				header("Content-Transfer-Encoding: binary");
+				ob_end_clean();
 
-				readfile($file);
+				if(!readfile_chunked($file)) {
+					unlink($file);
+					$error_msg = _('Unable to download zip archive');
+					session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($error_msg));
+				}
 				unlink($file);
 			} else {
 				$warning_msg = _('This directory is empty.');
@@ -232,10 +247,16 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 			if ( !$zip->close())
 				exit_error(_('Unable to close zip archive for download as zip'), 'docman');
 
-			header('Content-disposition: filename="'.$filename.'"');
-			header('Content-type: application/binary');
+			header('Content-disposition: attachment; filename="'.$filename.'"');
+			header('Content-type: application/zip');
+			header("Content-Transfer-Encoding: binary");
+			ob_end_clean();
 
-			readfile($file);
+			if(!readfile_chunked($file)) {
+				unlink($file);
+				$error_msg = _('Unable to download zip archive');
+				session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($error_msg));
+			}
 			unlink($file);
 		} else {
 			exit_error(_('No document to display - invalid or inactive document number.'), 'docman');
