@@ -22,10 +22,7 @@
  */
 
 require_once $gfcommon.'include/Error.class.php';
-
-if (file_exists($gfcommon.'pkginfo.inc.php')) {
-	require $gfcommon.'pkginfo.inc.php';
-}
+include_once $gfcommon.'pkginfo.inc.php';
 
 class FusionForge extends Error {
 
