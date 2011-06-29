@@ -51,11 +51,9 @@ if (forge_check_perm('docman', $group_id, 'submit')) {
 }
 
 if ($g->useDocmanSearch()) {
-	if ($d_arr || count($d_arr) > 1) {
-		$menu_text[] = _('Search in documents');
-		$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=search';
-		$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu', 'class' => 'tabtitle');
-	}
+	$menu_text[] = _('Search in documents');
+	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=search';
+	$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu', 'class' => 'tabtitle');
 }
 
 if (forge_check_perm('docman', $group_id, 'approve')) {
