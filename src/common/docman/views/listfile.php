@@ -58,6 +58,10 @@ if ($dirid) {
 	if (!$DocGroupName) {
 		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
 	}
+	if ($ndg->getState() != 1) {
+		$error_msg = _('Invalid folder');
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&error_msg='.urlencode($error_msg));
+	}
 }
 
 if ($d_arr != NULL ) {
