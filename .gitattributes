@@ -5181,6 +5181,7 @@ tests/scripts/cdx40-build-and-test-source.sh -text
 tests/scripts/fusionforge-build-and-test-deb.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-source.sh -text svneol=unset#text/x-sh
+tests/scripts/fusionforge-build-and-test-src-cos.sh -text
 tests/scripts/fusionforge-trunk-build-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-trunk-test-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/phpunit.sh -text
