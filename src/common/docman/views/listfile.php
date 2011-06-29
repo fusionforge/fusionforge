@@ -299,7 +299,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo '</div>';
 } else {
 	if ($dirid) {
-		echo '<p class="warning">'._('No documents to display').'</p>';
+		echo '<p class="information">'._('No documents.').'</p>';
 	}
 }
 if (forge_check_perm('docman', $group_id, 'approve') && $DocGroupName) {

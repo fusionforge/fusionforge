@@ -57,7 +57,7 @@ if ($dirid) {
 		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
 	}
 	if ($ndg->getState() != 2) {
-		$error_msg = _('Invalid folder');
+		$error_msg = _('Invalid folder.');
 		session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&error_msg='.urlencode($error_msg));
 	}
 }
@@ -75,7 +75,7 @@ if ($d_arr != NULL ) {
 
 // $nested_groups has a system directory : .trash => so count < 2
 if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) < 2)) {
-	echo '<div class="warning">'._('Trash is empty').'</div>';
+	echo '<p class="information">'._('Trash is empty.').'</p>';
 } else {
 
 ?>
@@ -205,7 +205,7 @@ jQuery(document).ready(function() {
 		echo '</div>';
 	} else {
 		if ($dirid) {
-			echo '<p class="warning">'._('No documents to display').'</p>';
+			echo '<p class="information">'._('No documents.').'</p>';
 		}
 	}
 

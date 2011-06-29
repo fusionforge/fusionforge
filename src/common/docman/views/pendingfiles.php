@@ -34,7 +34,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 if (!isset($nested_pending_docs)) {
-	echo '<div class="feedback">'._('No pending files.').'</div>';
+	echo '<p class="information">'._('No pending documents.').'</p>';
 } else {
 
 ?>
