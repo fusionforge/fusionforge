@@ -159,12 +159,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '<tr>';
 		echo '<td>';
 		if (!$d->getLocked() && !$d->getReserved()) {
-			echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select this document for massaction').'" onchange="controllerListFile.checkgeneral(\'active\')" />';
+			echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'" onchange="controllerListFile.checkgeneral(\'active\')" />';
 		} else {
 			if (session_loggedin() && ($d->getReservedBy() != $u->getID())) {
 				echo '<input type="checkbox" name="disabled" disabled="disabled"';
 			} else {
-				echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive" onchange="controllerListFile.checkgeneral(\'active\')" />';
+				echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'"" onchange="controllerListFile.checkgeneral(\'active\')" />';
 			}
 		}
 		echo '</td>';
@@ -276,8 +276,8 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	}
 	echo $HTML->listTableBottom();
 	echo '<p>';
-	echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for checked files, you need to check at least one file to get actions') . '" >';
-	echo _('Mass actions for selected files:');
+	echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
+	echo _('Mass actions for selected documents:');
 	echo '</span>';
 	echo '<span id="massactionactive" style="display: none;" >';
 	if (forge_check_perm('docman', $group_id, 'approve')) {

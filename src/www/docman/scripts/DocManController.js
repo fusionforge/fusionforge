@@ -200,10 +200,13 @@ DocManListFileController.prototype =
 		if (jQuery(this).attr('checked', false)) {
 			jQuery('#checkall'+id).attr('checked', false);
 			jQuery('#massaction'+id).hide();
+			console.log('cache');
 		}
 		for (var h = 0; h < jQuery("input:checked").length; h++) {
-			if (typeof(jQuery("input:checked")[h].className) != "undefined" && jQuery("input:checked")[h].className == 'checkeddocid'+id ) {
+			console.log("%s", jQuery("input:checked")[h].className);
+			if (typeof(jQuery("input:checked")[h].className) != "undefined" && jQuery("input:checked")[h].className.match('checkeddocid'+id)) {
 				jQuery('#massaction'+id).show();
+				console.log('visible');
 			}
 		}
 	},

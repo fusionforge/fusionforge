@@ -104,7 +104,7 @@ jQuery(document).ready(function() {
 	if ($DocGroupName) {
 		echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 		if ($DocGroupName != '.trash') {
-			echo '<a href="#" id="docman-editdirectory" class="tabtitle"title="'._('Edit this directory').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
+			echo '<a href="#" id="docman-editdirectory" class="tabtitle" title="'._('Edit this directory').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 			echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Delete permanently this directory and his content.').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 		}
 		echo '</h3>';
@@ -115,7 +115,7 @@ jQuery(document).ready(function() {
 	}
 
 	if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-		$tabletop = array('<input id="checkall" type="checkbox" onchange="controllerListTrash.checkAll()" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+		$tabletop = array('<input id="checkallactive" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" type="checkbox" onchange="controllerListTrash.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
 		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
 		echo '<div class="docmanDiv">';
 		echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
@@ -123,7 +123,7 @@ jQuery(document).ready(function() {
 		foreach ($nested_docs[$dirid] as $d) {
 			echo '<tr>';
 			echo '<td>';
-			echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" class="checkeddocid" onchange="controllerListTrash.checkgeneral()" />';
+			echo '<input title="'._('Select / Deselect this document for massaction').'" class="checkeddocidactive tabtitle-w" type="checkbox" value="'.$d->getID().'" onchange="controllerListTrash.checkgeneral(\'active\')" />';
 			echo '</td>';
 			switch ($d->getFileType()) {
 				case "URL": {
@@ -182,16 +182,20 @@ jQuery(document).ready(function() {
 			}
 
 			echo '<td>';
-			echo '<a class="docman-delete" class="tabtitle" href="?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
+			echo '<a class="tabtitle" href="?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
 			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListTrash.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 			echo '</td>';
 		}
 		echo '</tr>';
 		echo $HTML->listTableBottom();
 		echo '<p>';
-		echo _('Mass actions for selected files:');
-		echo '<a class="docman-delete" class="tabtitle" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Delete permanently.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
-		echo '<a class="docman-downloadaszip" class="tabtitle" href="#" onClick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
+		echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
+		echo _('Mass actions for selected documents:');
+		echo '</span>';
+		echo '<span id="massactionactive" style="display: none;" >';
+		echo '<a class="tabtitle" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Delete permanently.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
+		echo '<a class="tabtitle" href="#" onClick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
+		echo '</span>';
 		echo '</p>';
 		include ($gfcommon.'docman/views/editfile.php');
 		echo '</div>';
