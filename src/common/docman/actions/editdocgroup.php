@@ -34,7 +34,6 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 }
 
-
 $groupname = getStringFromRequest('groupname');
 $parent_dirid = getIntFromRequest('parent_dirid');
 $dg = new DocumentGroup($g, $dirid);
@@ -44,9 +43,37 @@ if ($dg->isError())
 if (!$dg->update($groupname, $parent_dirid))
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
+if ($dg->getState() == 2) {
+	/**
+	 * we need to update stateid for the content
+	 * Get the document groups info
+	 */
+	$df = new DocumentFactory($g);
+	if ($df->isError())
+		exit_error($df->getErrorMessage(), 'docman');
+
+	$dgf = new DocumentGroupFactory($g);
+	if ($dgf->isError())
+		exit_error($dgf->getErrorMessage(), 'docman');
+
+	$trashnested_groups =& $dgf->getNested();
+
+	$df->setDocGroupID($dirid);
+	$d_arr =& $df->getDocuments();
+
+	$trashnested_docs = array();
+	/* put the doc objects into an array keyed of the docgroup */
+	if (is_array($d_arr)) {
+		foreach ($d_arr as $doc) {
+			$trashnested_docs[$doc->getDocGroupID()][] = $doc;
+		}
+	}
+	docman_recursive_stateid($dirid, $trashnested_groups, $trashnested_docs, 1);
+}
+
 if (!$dg->setStateID('1'))
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-$return_msg = _('Document Directory Updated successfully.');
+$return_msg = sprintf(_('Directory %s Updated successfully.', $dg->getName());
 session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 ?>
