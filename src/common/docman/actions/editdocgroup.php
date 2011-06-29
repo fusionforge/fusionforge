@@ -74,6 +74,6 @@ if ($dg->getState() == 2) {
 if (!$dg->setStateID('1'))
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-$return_msg = sprintf(_('Directory %s Updated successfully.', $dg->getName());
+$return_msg = sprintf(_('Directory %s Updated successfully.', $dg->getName()));
 session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 ?>
