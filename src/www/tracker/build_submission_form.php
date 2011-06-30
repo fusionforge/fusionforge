@@ -40,7 +40,7 @@ function artifact_submission_form($ath, $group) {
 	            <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 <?php 
 	if (!session_loggedin()) {
-		echo '<div id="warning_msg">
+		echo '<div class="login_warning_msg">
 		<span class="warning_msg">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</span><br /><br />
 		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
 		<input type="text" name="user_email" size="50" maxlength="255" /></p>
@@ -85,11 +85,11 @@ function artifact_submission_form($ath, $group) {
 		<td colspan="2">
 <?php 
 	if (!session_loggedin()) {
-		echo '
+		echo '<div class="login_warning_msg">
 		<div class="error">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</div><br />
 		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
 		<input type="text" name="user_email" size="30" maxlength="255" /></p>
-		';
+		</div>';
 	} 
 ?>
 
@@ -100,6 +100,7 @@ function artifact_submission_form($ath, $group) {
 
 	<tr>
 		<td colspan="2">
+		<div class="file_attachments">
 		<a href="javascript:help_window(\''. util_make_url ('/help/tracker.php?helpname=attach_file') .'\')"><strong>(?)</strong></a><br />
 		<p>
 		<strong><?php echo _('Attach Files'); ?> :</strong><br />
@@ -109,6 +110,7 @@ function artifact_submission_form($ath, $group) {
 		<input type="file" name="input_file3" size="30" /><br />
 		<input type="file" name="input_file4" size="30" /><br />
 		</p>
+		</div>
 		</td>
 	</tr>
 

@@ -308,8 +308,13 @@ class FusionForgeCmController extends CmController {
 		
 		$params = $req->getParams();
 		
+		if (!isset($this->actionMimeType)) {
+			$this->_forward('UnknownAcceptType','error');
+			return;
+		}
+		
 		// do authentication.
-		$login = null;
+		/*$login = null;
 		$authenticated = $this->retrieveAuthentication($login);
 		if(isset($login)) {
 			// Basic auth requested
@@ -318,7 +323,7 @@ class FusionForgeCmController extends CmController {
 				// can't go on;
 				throw new Exception('Invalid authentication provided !');
 			}
-		}
+		}*/
 		
 		$contenttype = $req->getHeader('Content-Type');
 		$contenttype = $contenttype ? $contenttype : 'none';
@@ -344,7 +349,6 @@ class FusionForgeCmController extends CmController {
 		} else {
 			$body = file_get_contents('php://input');
 		}
-		//print $body;
 
 		if(array_key_exists('project',$params)) {
 			if (array_key_exists('tracker', $params)) {
@@ -370,6 +374,7 @@ class FusionForgeCmController extends CmController {
 
 				// pass the creation work to the OSLC connector
 				$identifier = $this->oslc->createChangeRequest($creationparams);
+
 				
 			}else{
 				throw new ConflictException('Need a valid tracker to create a change request');
@@ -394,10 +399,10 @@ class FusionForgeCmController extends CmController {
 			$newlocation = $httpScheme.'://'.$httpHost.$baseURL.'/'.$controllerName.'/project/'.$params['project'].'/tracker/'.$params['tracker'].'/bug/'.$identifier;
 		}
 		
-		//redirect to new change request
-		$this->getResponse()->setHttpResponseCode(200);
+		//Send back as a reponse the uri of the newly created change request
+		$this->getResponse()->setHeader('Content-Type', 'text/html');
+		$this->getResponse()->setHttpResponseCode(201);
 		$this->getResponse()->appendBody($newlocation);
-		//$this->getResponse()->setRedirect($newlocation,201);
 	}
 	public function indexAction(){
 		
@@ -580,28 +585,33 @@ class FusionForgeCmController extends CmController {
 		$prefix = $httpScheme.'://'.$httpHost;
 		$this->view->delegUrl = $prefix;
 		
-		if(isset($params['oauth_signature']) && isset($params['oauth_token']) && isset($params['oauth_consumer_key']) &&
-			isset($params['oauth_signature_method']) && isset($params['oauth_timestamp']) && 
-			isset($params['oauth_nonce'])) {
-			
-			$oauth_auth_header = 'OAuth oauth_signature="' . rawurlencode(substr($params['oauth_signature'],1,-1)) 
-			. '",oauth_token='.$params['oauth_token']
-			. ',oauth_consumer_key=' . $params['oauth_consumer_key']
-			. ',oauth_version=' . $params['oauth_version']
-			. ',oauth_signature_method=' . $params['oauth_signature_method']
-			. ',oauth_timestamp=' . $params['oauth_timestamp']
-			. ',oauth_nonce=' . $params['oauth_nonce'];
-			
-			$this->view->oauth_auth_header = $oauth_auth_header;
+		// do authentication.
+		if (isset($params['oauth_signature'])) {
+			session_set_for_authplugin('oauthprovider');
 		}
+		
+		//TODO add flags to propagate to the view if authentication went well ...
+		//And timers ....
+		if(session_loggedin()) {
+			$auth_timestamp = time();
+		}
+		
+		
 		if(isset($params['build_url'])) {
 			$this->view->build_url = $params['build_url'];
 		}
 		if (isset($params['build_number'])) {
 			$this->view->build_number = $params['build_number'];
 		}
+		if (isset($auth_timestamp)) {
+			$this->view->auth_timestamp = $auth_timestamp;
+		}
+		
 		$data = $this->oslc->getDataForCreationUi($project, $tracker);
+		
 		$this->view->data = $data;
+		
+		
 	}
 	
 	/**

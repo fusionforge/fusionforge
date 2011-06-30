@@ -18,6 +18,10 @@
 	if (isset($this->build_number)) {
 		$build_number = $this->build_number;
 	}
+	if (isset($this->auth_timestamp)) {
+		$auth_timestamp = $this->auth_timestamp;
+	}
+	
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -30,59 +34,85 @@
 
 jQuery(function(){
 	//remove warnings about authentication if any
-	jQuery("#warning_msg").empty();
+	jQuery(".login_warning_msg").remove();
+	jQuery(".file_attachments").remove();
+	jQuery('input:hidden').remove();
+
 	
 	var project = "<?php echo $project;?>";
 	var tracker = "<?php echo $tracker;?>";
-	var URL = '<?php echo $this->baseUrl(); ?>'+"/cm/project/"+project+"/tracker/"+tracker;
+	var URL = '<?php echo $this->baseUrl(); ?>' + '/cm/project/' + project + '/tracker/' + tracker;
 	var oauth_auth_header = '<?php if (isset($oauth_auth_header)) echo $oauth_auth_header;?>';
 	var build_url = '<?php if (isset($build_url)) echo $build_url;?>';
 	var build_number = '<?php if(isset($build_number)) echo $build_number;?>';
 	var postdata;
+	var auth_timestamp =  '<?php if (isset($auth_timestamp)) echo $auth_timestamp; ?>';
 	var error = false;
 
-	jQuery("#tracker-summary").val('Hudson Build #' + build_number + ' Failure');
-	jQuery("#tracker-description").val('Follow the build url for more details about the failure: ' + build_url);
+	if(build_number) {
+		jQuery("#tracker-summary").val('Hudson Build #' + build_number + ' Failure');
+		jQuery("#tracker-description").val('Follow the build url for more details about the failure: ' + build_url);
+	}
+
+	jQuery('input[type="submit"]').remove();
+	jQuery(document).ready(function() {
+		var input = document.createElement("input");
+		input.type = "submit";
+		input.name = "submit";
+		jQuery("body").append(input);
+	});
 	
-	$("#trackeraddform").submit(function(){
+	jQuery('input[type="submit"]').click(function(){
 		createBugData();
-		jQuery.ajax({
-			type: "POST",
-			url: URL,
-			data: jQuery.toJSON(postdata),
-			dataType: 'json',
-			beforeSend: function(xhr) {
-				if (oauth_auth_header != '') {
-					xhr.setRequestHeader("Authorization", oauth_auth_header);
-				}
-				xhr.setRequestHeader("Content-Type","application/x-oslc-cm-change-request+json");
-			},
-			success: function(data) {
-				alert("The url of the bug just created is: "+data);
-				refresh();
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				//alert(textStatus+' x '+jqXHR.responseText);
-               	var response = jQuery.parseJSON(jqXHR.responseText);
-               	var errmsg, errcode;
-               	for (var key in response) {
-					var obj = response[key];						   
-					if(key=="oslc_cm:Error") {
-						for (var i in obj) {
-							if(i=="oslc_cm:statusCode")	{
-								errcode = obj[i];
-							}else if(i=="oslc_cm:message") {
-								errmsg = obj[i];
+		if (checkTimeInterval(auth_timestamp)) {
+			jQuery.ajax({
+				type: "POST",
+				url: URL,
+				data: jQuery.toJSON(postdata),
+				contentType:"application/x-oslc-cm-change-request+json",
+				success: function(data) {
+					alert("The url of the bug just created is: " + data);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+    	           	var response = jQuery.parseJSON(errorThrown);
+    	           	var errmsg, errcode;
+     	          	for (var key in response) {
+						var obj = response[key];						   
+						if(key=="oslc_cm:Error") {
+							for (var i in obj) {
+								if(i=="oslc_cm:statusCode")	{
+									errcode = obj[i];
+								}else if(i=="oslc_cm:message") {
+									errmsg = obj[i];
+								}
 							}
+							var errtext = "Error " + errcode + ": " + errmsg;
+							alert(errtext);
 						}
-						var errtext = "Error " + errcode + ": " + errmsg;
-						alert(errtext);
 					}
 				}
-			}
-		});
-	});
+			});
+		} else {
+			alert ("You have exceeded the timeframe for a bug report creation. Hurry up next time !!!!");
+		}
+	}
 
+
+	);
+
+	var checkTimeInterval = function(auth_timestamp) {
+		var currentDate = new Date();
+		var time = currentDate.getTime();
+		//alert(auth_timestamp);
+		if(!auth_timestamp) return true;
+		//alert("Time= "  + time + "  auth_time= " + (auth_timestamp * 1000));
+		if((time - (auth_timestamp * 1000)) < 300000) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	var convertToByteArray = function(data) {
 		var bin=[] ;
 		for (var i=0; i<data.length; i++){
@@ -91,7 +121,7 @@ jQuery(function(){
 		return bin;
 	}
 
-	var createBugData = function() {
+	var createBugData = function() { 
 		error = false;
 
 		postdata = {};
