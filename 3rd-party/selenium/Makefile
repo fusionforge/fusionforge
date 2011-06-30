@@ -16,10 +16,10 @@ binary/selenium-server-current/selenium-server.jar: binary/selenium-server-1.0.3
 	ln -s selenium-server-1.0.3 binary/selenium-server-current
 
 binary/selenium-server-1.0.3: binary/selenium-remote-control-1.0.3.zip
-	cd binary ; [ -d selenium-server-1.0.3 ] || unzip selenium-remote-control-1.0.3.zip
+	@cd binary ; [ -d selenium-server-1.0.3 ] || unzip selenium-remote-control-1.0.3.zip
 
 binary/selenium-remote-control-1.0.3.zip: binary
-	if [ ! -f $@ ];then cd binary;wget -q -c $(SELENIUMDL);else echo "$@ already downloaded";fi
+	@if [ ! -f $@ ];then cd binary;wget -q -c $(SELENIUMDL);else echo "$@ already downloaded";fi
 
 binary:
 	mkdir binary
