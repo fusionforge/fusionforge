@@ -8,8 +8,16 @@ TEMPLATE=$2
 CIDR=$3
 IPGW=$4
 
-[ ! -z "$VMENGINE" ] || exit 1
-[ ! -z "$TEMPLATE" ] || exit 2
+if [ -z "$VMENGINE" ]
+then
+	echo "ERROR: VMENGINE not set" 
+	exit 1
+fi
+if [ -z "$TEMPLATE" ]
+then
+	echo "ERROR: TEMPLATE not set"
+	exit 2
+fi
 
 if [ ! -e /usr/lib/lxc/templates/lxc-$TEMPLATE ]
 then 
