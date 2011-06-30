@@ -9,3 +9,4 @@ CIDR=$3
 IPGW=$4
 
 sudo /usr/bin/lxc-stop -n $HOST
+sudo /usr/bin/lxc-destroy -n $HOST
