@@ -6,16 +6,6 @@
 # So it should only be stuffs like VAR=value
 #
 
-IPDEBBASE=10.194.10
-IPDEBDNS=10.194.11.20
-IPDEBMASK=255.255.255.0
-IPDEBGW=10.194.10.1
-
-IPCOSBASE=10.194.10
-IPCOSDNS=10.194.11.20
-IPCOSMASK=255.255.255.0
-IPCOSGW=10.194.10.1
-
 SSHPUBKEY=~/.ssh/id_rsa.pub
 
 DEBMIRROR=http://g-rub.rd.francetelecom.fr:3142/debian
@@ -27,3 +17,5 @@ VMENGINE=lxc
 REMOTESELENIUM=true
 KEEPVM=true
 DNSDOMAIN=rd.francetelecom.fr
+
+fgcostrksrc=lxc:centos5::
