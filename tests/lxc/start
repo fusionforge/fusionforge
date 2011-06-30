@@ -8,6 +8,9 @@ TEMPLATE=$2
 CIDR=$3
 IPGW=$4
 
+[ ! -z "$VMENGINE" ] || exit 1
+[ ! -z "$TEMPLATE" ] || exit 2
+
 if [ ! -e /usr/lib/lxc/templates/lxc-$TEMPLATE ]
 then 
 	echo "/usr/lib/lxc/templates/lxc-$TEMPLATE not found"
