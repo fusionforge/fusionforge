@@ -8,3 +8,5 @@
 VMENGINE=lxc
 REMOTESELENIUM=true
 KEEPVM=true
+
+fgsrccostrk=lxc:centos5::
