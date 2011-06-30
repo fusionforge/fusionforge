@@ -100,6 +100,7 @@ JOB_NAME=$JOB_NAME
 EOF
 
 rsync -a --delete src/ root@$HOST:/opt/gforge/
+rsync -a --delete tests/ root@$HOST:/opt/gforge/tests/
 
 ssh root@$HOST "/opt/gforge/install-ng"
 
