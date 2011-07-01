@@ -358,8 +358,6 @@ class projects_hierarchyPlugin extends Plugin {
 					if (!$res)
 						return false;
 
-					echo db_error();
-					die();
 					if (db_affected_rows($res))
 						return true;
 				} else {
