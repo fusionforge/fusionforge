@@ -39,7 +39,7 @@ class FusionForge extends Error {
 		$this->Error();
 
 		$this->software_name = 'FusionForge' ;
-		$this->software_version = '5.0.90' ;
+		$this->software_version = '5.1' ;
 
 		if (isset($forge_pkg_name) && isset($forge_pkg_version)) {
 			$this->software_name = $forge_pkg_name;

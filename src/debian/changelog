@@ -1,13 +1,13 @@
-fusionforge (5.0.51-2) UNRELEASED; urgency=low
+fusionforge (5.1~0) UNRELEASED; urgency=low
 
   [ Roland Mas ]
-  * Snapshot from upstream SVN.
+  * New upstream release.
 
   [ Thorsten Glaser ]
   * Update copyright file
   * Fix broken link in /usr/share/fusionforge (Evolvis [#1638])
 
- -- Thorsten Glaser <tg@mirbsd.de>  Fri, 20 May 2011 15:31:13 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 01 Jul 2011 14:24:31 +0200
 
 fusionforge (5.0.3-1) unstable; urgency=low
 
