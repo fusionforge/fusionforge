@@ -55,8 +55,9 @@ switch ($type) {
 		$action = getStringFromRequest('action');
 		global $gfplugins;
 		switch ($action) {
+			case "addChild":
 			case "projectsHierarchyDocman":
-			case "addChild": {
+			case "validateRelationship": {
 				include($gfplugins.$projectsHierarchy->name.'/actions/'.$action.'.php');
 				break;
 			}

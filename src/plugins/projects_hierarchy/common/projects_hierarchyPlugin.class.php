@@ -176,32 +176,33 @@ class projects_hierarchyPlugin extends Plugin {
 	 *
 	 * @param	integer	group_id to serach for
 	 * @param	string	parent or child ?
-	 * @param	boolean	recurvice or not ?
+	 * @param	boolean	recurcive or not ?
+	 * @param	boolean validated or pending relation ?
 	 * @return	array	array of arrays with group_id of parent or childs
 	 * @access	public
 	 */
-	function getFamily($group_id, $order, $deep = false) {
+	function getFamily($group_id, $order, $deep = false, $validated = true) {
 		$localFamily = array();
 		switch ($order) {
 			case "parent": {
 				$res = db_query_params('SELECT project_id as id FROM plugin_projects_hierarchy_relationship
-									WHERE sub_project_id = $1
-									AND status = $2',
-									array($group_id, 1));
+							WHERE sub_project_id = $1
+							AND status = $2',
+							array($group_id, $validated ? 't' : 'f'));
 				break;
 			}
 			case "child": {
 				$res = db_query_params('SELECT sub_project_id as id FROM plugin_projects_hierarchy_relationship
-									WHERE project_id = $1
-									AND status = $2',
-									array($group_id, 1));
+							WHERE project_id = $1
+							AND status = $2',
+							array($group_id, $validated ? 't' : 'f'));
 				break;
 			}
 			default: {
 				return $localFamily;
 			}
 		}
-		if ($res || db_numrows($res) > 1) {
+		if ($res && db_numrows($res) > 0) {
 			while ($arr = db_fetch_array($res)) {
 				$localFamily[] = array($arr['id']);
 			}
@@ -209,7 +210,7 @@ class projects_hierarchyPlugin extends Plugin {
 
 		if ($deep) {
 			for ( $i = 0; $i < count($localFamily); $i++) {
-				$localFamily[$i][] = $this->getFamily($localFamily[$i], $order, $deep);
+				$localFamily[$i][] = $this->getFamily($localFamily[$i], $order, $deep, $validated);
 			}
 		}
 		return $localFamily;
@@ -316,6 +317,65 @@ class projects_hierarchyPlugin extends Plugin {
 			db_commit();
 		}
 		return true;
+	}
+
+	function addChild($project_id, $sub_project_id) {
+		if ($this->exists($project_id)) {
+			$res = db_query_params('INSERT INTO plugin_projects_hierarchy_relationship (project_id, sub_project_id)
+						VALUES ($1, $2)', array($project_id, $sub_project_id));
+			if (!$res) {
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	function removeChild($group_id, $sub_group_id) {
+		return true;
+	}
+
+	function hasRelation($project_id, $sub_project_id) {
+		if ($this->exists($project_id)) {
+			$res = db_query_params('SELECT * FROM plugin_projects_hierarchy_relationship
+						WHERE ( project_id = $1 AND sub_project_id = $2 )
+						OR ( project_id = $2 AND sub_project_id = $1 )',
+						array($project_id, $sub_project_id));
+			if ($res && db_numrows($res) == 1 )
+				return true;
+		}
+		return false;
+	}
+
+	function validateRelationship($project_id, $sub_project_id, $status) {
+		if ($this->exists($project_id)) {
+			if ($this->hasRelation($project_id, $sub_project_id)) {
+				if ($status) {
+					$res = db_query_params('UPDATE plugin_projects_hierarchy_relationship
+								SET status = $1
+								WHERE project_id = $2 AND sub_project_id = $3',
+								array($status, $project_id, $sub_project_id));
+					if (!$res)
+						return false;
+
+					echo db_error();
+					die();
+					if (db_affected_rows($res))
+						return true;
+				} else {
+					$res = db_query_params('DELETE FROM plugin_projects_hierarchy_relationship
+								WHERE project_id = $1 AND sub_project_id = $2',
+								array($project_id, $sub_project_id));
+
+					if (!$res)
+						return false;
+
+					if (db_affected_rows($res))
+						return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	function exists($group_id) {
@@ -428,15 +488,17 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function son_box($group_id, $name, $selected = 'xzxzxz') {
-		$family = $this->getFamily($group_id, 'child', true);
+		$sons = $this->getFamily($group_id, 'child', true, false);
+		$parent = $this->getFamily($group_id, 'parent', true, false);
 		$skipped = array();
-		if($family != NULL) {
-			reset($family);
-			while (list($key, $val) = each($family)) {
-				$skipped[] = $val;
+		$family = array_merge($parent, $sons);
+		if (sizeof($family)) {
+			//TODO : need to fix this. We only get parent here....
+			foreach ($family as $element) {
+				$skipped[] = $element[0];
 			}
 		}
-		$son = db_query_params('SELECT group_id,group_name FROM groups
+		$son = db_query_params('SELECT group_id, group_name FROM groups
 					WHERE status = $1
 					AND group_id != $2
 					AND group_id <> ALL ($3)

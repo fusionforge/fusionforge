@@ -2376,6 +2376,7 @@ src/plugins/projects_hierarchy/COPYING -text
 src/plugins/projects_hierarchy/actions/addChild.php -text
 src/plugins/projects_hierarchy/actions/projectsHierarchyDocman.php -text
 src/plugins/projects_hierarchy/actions/updateGlobalConf.php -text
+src/plugins/projects_hierarchy/actions/validateRelationship.php -text
 src/plugins/projects_hierarchy/common/projects_hierarchy-init.php -text
 src/plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php -text
 src/plugins/projects_hierarchy/db/projects_hierarchy-init.sql -text

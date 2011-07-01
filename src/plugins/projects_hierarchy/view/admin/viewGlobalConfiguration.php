@@ -28,7 +28,7 @@ global $use_tooltips;
 $projectsHierarchyGlobalConf = $projectsHierarchy->getGlobalconf();
 
 echo $HTML->boxTop(_('Manage configuration'));
-echo '<form method="POST" action="?type=globaladmin&pluginname='.$projectsHierarchy->name.'&action=updateGlobalConf">';
+echo '<form method="post" action="?type=globaladmin&pluginname='.$projectsHierarchy->name.'&action=updateGlobalConf">';
 echo '<table>';
 
 echo '<tr><td><label id="projectsHierarchy-tree" ';
