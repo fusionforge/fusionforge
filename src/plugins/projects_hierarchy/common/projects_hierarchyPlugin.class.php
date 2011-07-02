@@ -177,25 +177,43 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @param	integer	group_id to serach for
 	 * @param	string	parent or child ?
 	 * @param	boolean	recurcive or not ?
-	 * @param	boolean validated or pending relation ?
+	 * @param	string validated or pending or any relation ?
 	 * @return	array	array of arrays with group_id of parent or childs
 	 * @access	public
 	 */
-	function getFamily($group_id, $order, $deep = false, $validated = true) {
+	function getFamily($group_id, $order, $deep = false, $status = 'any') {
 		$localFamily = array();
+		switch ($status) {
+			case "validated": {
+				$statusCondition = 't';
+				break;
+			}
+			case "pending": {
+				$statusCondition = 'f';
+				break;
+			}
+			case "any":
+			default: {
+				break;
+			}
+		}
 		switch ($order) {
 			case "parent": {
-				$res = db_query_params('SELECT project_id as id FROM plugin_projects_hierarchy_relationship
-							WHERE sub_project_id = $1
-							AND status = $2',
-							array($group_id, $validated ? 't' : 'f'));
+				$qpa = db_construct_qpa(false, 'SELECT project_id as id FROM plugin_projects_hierarchy_relationship
+							WHERE sub_project_id = $1 ', array($group_id));
+				if (isset($statusCondition)) {
+					db_construct_qpa($qpa, ' AND status = $1', array($statusCondition));
+				}
+				$res = db_query_qpa($qpa);
 				break;
 			}
 			case "child": {
-				$res = db_query_params('SELECT sub_project_id as id FROM plugin_projects_hierarchy_relationship
-							WHERE project_id = $1
-							AND status = $2',
-							array($group_id, $validated ? 't' : 'f'));
+				$qpa = db_construct_qpa(false, 'SELECT sub_project_id as id FROM plugin_projects_hierarchy_relationship
+							WHERE project_id = $1', array($group_id));
+				if (isset($statusCondition)) {
+					db_construct_qpa($qpa, ' AND status = $1', array($statusCondition));
+				}
+				$res = db_query_qpa($qpa);
 				break;
 			}
 			default: {
@@ -210,7 +228,7 @@ class projects_hierarchyPlugin extends Plugin {
 
 		if ($deep) {
 			for ( $i = 0; $i < count($localFamily); $i++) {
-				$localFamily[$i][] = $this->getFamily($localFamily[$i], $order, $deep, $validated);
+				$localFamily[$i][] = $this->getFamily($localFamily[$i], $order, $deep, $status);
 			}
 		}
 		return $localFamily;
@@ -320,7 +338,7 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function addChild($project_id, $sub_project_id) {
-		if ($this->exists($project_id)) {
+		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
 			$res = db_query_params('INSERT INTO plugin_projects_hierarchy_relationship (project_id, sub_project_id)
 						VALUES ($1, $2)', array($project_id, $sub_project_id));
 			if (!$res) {
@@ -336,7 +354,7 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function hasRelation($project_id, $sub_project_id) {
-		if ($this->exists($project_id)) {
+		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
 			$res = db_query_params('SELECT * FROM plugin_projects_hierarchy_relationship
 						WHERE ( project_id = $1 AND sub_project_id = $2 )
 						OR ( project_id = $2 AND sub_project_id = $1 )',
@@ -348,7 +366,7 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function validateRelationship($project_id, $sub_project_id, $status) {
-		if ($this->exists($project_id)) {
+		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
 			if ($this->hasRelation($project_id, $sub_project_id)) {
 				if ($status) {
 					$res = db_query_params('UPDATE plugin_projects_hierarchy_relationship
@@ -486,8 +504,8 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function son_box($group_id, $name, $selected = 'xzxzxz') {
-		$sons = $this->getFamily($group_id, 'child', true, false);
-		$parent = $this->getFamily($group_id, 'parent', true, false);
+		$sons = $this->getFamily($group_id, 'child', true, 'any');
+		$parent = $this->getFamily($group_id, 'parent', true, 'any');
 		$skipped = array();
 		$family = array_merge($parent, $sons);
 		if (sizeof($family)) {
