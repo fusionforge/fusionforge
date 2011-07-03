@@ -119,7 +119,7 @@ class projects_hierarchyPlugin extends Plugin {
 					and p2.group_id=plugin_projects_hierarchy_relationship.sub_project_id
 					and plugin_projects_hierarchy_relationship.status=$1
 					order by father_name, son_name',
-					array ('t'));
+					array('t'));
 		echo db_error();
 		// construction du tableau associatif
 		// key = name of the father
@@ -174,7 +174,7 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * getFamily - find the children or parent group_id of this project.
 	 *
-	 * @param	integer	group_id to serach for
+	 * @param	integer	group_id to search for
 	 * @param	string	parent or child ?
 	 * @param	boolean	recurcive or not ?
 	 * @param	string	validated or pending or any relation ?
@@ -186,6 +186,7 @@ class projects_hierarchyPlugin extends Plugin {
 		switch ($status) {
 			case "validated": {
 				$statusCondition = 't';
+
 				break;
 			}
 			case "pending": {
@@ -197,22 +198,23 @@ class projects_hierarchyPlugin extends Plugin {
 				break;
 			}
 		}
+		echo $statusCondition;
 		switch ($order) {
 			case "parent": {
 				$qpa = db_construct_qpa(false, 'SELECT project_id as id FROM plugin_projects_hierarchy_relationship
-							WHERE sub_project_id = $1 ', array($group_id));
-				if (isset($statusCondition)) {
-					db_construct_qpa($qpa, ' AND status = $1', array($statusCondition));
-				}
+							WHERE sub_project_id = $1', array($group_id));
+				if (isset($statusCondition))
+					$qpa = db_construct_qpa($qpa, ' AND status = $1', array($statusCondition));
+
 				$res = db_query_qpa($qpa);
 				break;
 			}
 			case "child": {
 				$qpa = db_construct_qpa(false, 'SELECT sub_project_id as id FROM plugin_projects_hierarchy_relationship
 							WHERE project_id = $1', array($group_id));
-				if (isset($statusCondition)) {
-					db_construct_qpa($qpa, ' AND status = $1', array($statusCondition));
-				}
+				if (isset($statusCondition))
+					$qpa = db_construct_qpa($qpa, ' AND status = $1', array($statusCondition));
+
 				$res = db_query_qpa($qpa);
 				break;
 			}

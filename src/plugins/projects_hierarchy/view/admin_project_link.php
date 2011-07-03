@@ -38,7 +38,7 @@ if (sizeof($childs)) {
 		$childGroup = group_get_object($child[0][0]);
 		echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=removeChild&id='.$group_id.'&child_id='.$childGroup->getID().'">';
 		echo $childGroup->getPublicName();
-		echo '<input type="submit" value="'._('Remove Child project').'">';
+		echo '<input type="submit" value="'._('Remove child project').'">';
 		echo '</form>';
 	}
 }
@@ -48,7 +48,6 @@ if (sizeof($parent)) {
 	$parentGroup = group_get_object($parent[0][0]);
 	echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=removeParent&id='.$group_id.'&parent_id='.$parentGroup->getID().'">';
 	echo $parentGroup->getPublicName();
-	//echo $projectsHierarchy->son_box($group_id, 'sub_project_id', '0');
 	echo '<input type="submit" value="'._('Remove parent project').'">';
 	echo '</form>';
 }
