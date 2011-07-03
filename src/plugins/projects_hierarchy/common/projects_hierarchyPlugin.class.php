@@ -198,7 +198,6 @@ class projects_hierarchyPlugin extends Plugin {
 				break;
 			}
 		}
-		echo $statusCondition;
 		switch ($order) {
 			case "parent": {
 				$qpa = db_construct_qpa(false, 'SELECT project_id as id FROM plugin_projects_hierarchy_relationship
