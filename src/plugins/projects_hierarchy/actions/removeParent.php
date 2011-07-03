@@ -1,7 +1,7 @@
 <?php
 /**
  * Projects Hierarchy plugin
- * action: addChild
+ * action: removeParent
  *
  * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
@@ -26,10 +26,10 @@ global $projectsHierarchy;
 global $_SERVER;
 global $id;
 
-$sub_project_id = getIntFromRequest('sub_project_id');
+$parent_id = getIntFromRequest('parent_id');
 
-if ($sub_project_id && $projectsHierarchy->addChild($id, $sub_project_id))
-	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Successfully added child'));
+if ($parent_id && $projectsHierarchy->removeParent($id, $parent_id))
+	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Successfully removed parent'));
 
-$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Failed to add child'));
+$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Failed to removed parent'));
 ?>

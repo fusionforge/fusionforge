@@ -340,18 +340,46 @@ class projects_hierarchyPlugin extends Plugin {
 
 	function addChild($project_id, $sub_project_id) {
 		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
-			$res = db_query_params('INSERT INTO plugin_projects_hierarchy_relationship (project_id, sub_project_id)
-						VALUES ($1, $2)', array($project_id, $sub_project_id));
-			if (!$res) {
-				return false;
+			if (!$this->hasRelation($project_id, $sub_project_id)) {
+				$res = db_query_params('INSERT INTO plugin_projects_hierarchy_relationship (project_id, sub_project_id)
+							VALUES ($1, $2)', array($project_id, $sub_project_id));
+				if (!$res)
+					return false;
+
+				return true;
 			}
-			return true;
 		}
 		return false;
 	}
 
-	function removeChild($group_id, $sub_group_id) {
-		return true;
+	function removeChild($project_id, $sub_project_id) {
+		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
+			if ($this->hasRelation($project_id, $sub_project_id)) {
+				$res = db_query_params('DELETE FROM plugin_projects_hierarchy_relationship
+							WHERE project_id = $1 AND sub_project_id = $2',
+							array($project_id, $sub_project_id));
+				if (!$res)
+					return false;
+
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function removeParent($project_id, $sub_project_id) {
+		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
+			if ($this->hasRelation($project_id, $sub_project_id)) {
+				$res = db_query_params('DELETE FROM plugin_projects_hierarchy_relationship
+							WHERE project_id = $1 AND sub_project_id = $2',
+							array($sub_project_id, $project_id));
+				if (!$res)
+					return false;
+
+				return true;
+			}
+		}
+		return false;
 	}
 
 	function hasRelation($project_id, $sub_project_id) {

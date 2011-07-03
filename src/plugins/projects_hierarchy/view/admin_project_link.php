@@ -32,19 +32,21 @@ echo $projectsHierarchy->son_box($group_id, 'sub_project_id', '0');
 echo '<input type="submit" value="'._('Add Child project').'">';
 echo '</form>';
 
-$child = $projectsHierarchy->getFamily($group_id, 'child', false, 'validated');
-if (sizeof($child)) {
-	echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=addChild&id='.$group_id.'">';
-	echo _('Select a project: ');
-	//echo $projectsHierarchy->son_box($group_id, 'sub_project_id', '0');
-	echo '<input type="submit" value="'._('Remove Child project').'">';
-	echo '</form>';
+$childs = $projectsHierarchy->getFamily($group_id, 'child', false, 'validated');
+if (sizeof($childs)) {
+	foreach ($childs as $child) {
+		$childGroup = group_get_object($child[0][0]);
+		echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=removeChild&id='.$group_id.'&child_id='.$childGroup->getID().'">';
+		echo $childGroup->getPublicName();
+		echo '<input type="submit" value="'._('Remove Child project').'">';
+		echo '</form>';
+	}
 }
 
 $parent = $projectsHierarchy->getFamily($group_id, 'parent', false, 'validated');
 if (sizeof($parent)) {
 	$parentGroup = group_get_object($parent[0][0]);
-	echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=addChild&id='.$group_id.'">';
+	echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=removeParent&id='.$group_id.'&parent_id='.$parentGroup->getID().'">';
 	echo $parentGroup->getPublicName();
 	//echo $projectsHierarchy->son_box($group_id, 'sub_project_id', '0');
 	echo '<input type="submit" value="'._('Remove parent project').'">';
@@ -66,10 +68,10 @@ if (sizeof($pendingParent)) {
 $pendingChilds = $projectsHierarchy->getFamily($group_id, 'child', false, 'pending');
 if (sizeof($pendingChilds)) {
 	foreach ($pendingChilds as $pendingChild) {
-		$childGroup = group_get_object($pendingChild[0][0]);
+		$pendingChildGroup = group_get_object($pendingChild[0][0]);
 		echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=validateRelationship&id='.$group_id.'">';
 		echo '<input type="hidden" name="validation_id" value="'.$pendingChild[0][0].'" />';
-		echo _('Validate child').' '.$childGroup->getPublicName();
+		echo _('Validate child').' '.$pendingChildGroup->getPublicName();
 		echo html_build_select_box_from_arrays(array(1,0), array(_('Yes'), _('No')), 'validation_status', 'xzxz', false);
 		echo '<input type="submit" value="'. _('Send') .'" />';
 		echo '</form>';

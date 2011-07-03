@@ -57,6 +57,8 @@ switch ($type) {
 		switch ($action) {
 			case "addChild":
 			case "projectsHierarchyDocman":
+			case "removeChild":
+			case "removeParent":
 			case "validateRelationship": {
 				include($gfplugins.$projectsHierarchy->name.'/actions/'.$action.'.php');
 				break;
