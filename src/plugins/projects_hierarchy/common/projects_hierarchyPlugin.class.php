@@ -177,7 +177,7 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @param	integer	group_id to serach for
 	 * @param	string	parent or child ?
 	 * @param	boolean	recurcive or not ?
-	 * @param	string validated or pending or any relation ?
+	 * @param	string	validated or pending or any relation ?
 	 * @return	array	array of arrays with group_id of parent or childs
 	 * @access	public
 	 */
@@ -218,6 +218,7 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 			default: {
 				return $localFamily;
+				break;
 			}
 		}
 		if ($res && db_numrows($res) > 0) {

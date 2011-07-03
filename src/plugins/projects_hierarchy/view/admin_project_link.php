@@ -69,7 +69,7 @@ if (sizeof($pendingChilds)) {
 		$childGroup = group_get_object($pendingChild[0][0]);
 		echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=validateRelationship&id='.$group_id.'">';
 		echo '<input type="hidden" name="validation_id" value="'.$pendingChild[0][0].'" />';
-		echo _('Validate parent').' '.$childGroup->getPublicName();
+		echo _('Validate child').' '.$childGroup->getPublicName();
 		echo html_build_select_box_from_arrays(array(1,0), array(_('Yes'), _('No')), 'validation_status', 'xzxz', false);
 		echo '<input type="submit" value="'. _('Send') .'" />';
 		echo '</form>';
