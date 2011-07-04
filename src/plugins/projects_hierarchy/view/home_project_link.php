@@ -27,7 +27,6 @@ global $group_id; // id of the group
 $projectsHierarchy = plugin_get_object('projects_hierarchy');
 
 $parent = $projectsHierarchy->getFamily($group_id, 'parent', false, 'validated');
-var_dump($parent);
 $childs = $projectsHierarchy->getFamily($group_id, 'child', false, 'validated');
 if (sizeof($parent) || sizeof($childs)) {
 	echo $HTML->boxTop(_('Linked projects'));
