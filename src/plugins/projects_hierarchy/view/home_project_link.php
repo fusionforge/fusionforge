@@ -3,7 +3,7 @@
  * projects_hierarchyPlugin Class
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
- * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,73 +26,29 @@ global $g; //group object
 global $group_id; // id of the group
 $projectsHierarchy = plugin_get_object('projects_hierarchy');
 
-$parent = $projectsHierarchy->getFamily($group_id, 'parent', false);
-$childs = $projectsHierarchy->getFamily($group_id, 'child', false);
+$parent = $projectsHierarchy->getFamily($group_id, 'parent', false, 'validated');
+var_dump($parent);
+$childs = $projectsHierarchy->getFamily($group_id, 'child', false, 'validated');
 if (sizeof($parent) || sizeof($childs)) {
 	echo $HTML->boxTop(_('Linked projects'));
-// $cpt_project = 0 ;
-// // father request
-// $res = db_query_params('SELECT DISTINCT group_id,unix_group_name,group_name FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=$3',
-// 			array ('shar',
-// 				't',
-// 				$group_id));
-// echo db_error();
-// while ($row = db_fetch_array($res)) {
-// 	echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Parent project').': <a href="'.forge_get_config('url_prefix').'/projects/'.$row['unix_group_name'].'/">' . $row['group_name'] . '</a><br/>';
-// 	$cpt_project ++;
-// }
-//
-// if($cpt_project != 0) {
-// 	print '<hr size="1" />';
-// }
-// $cpt_temp = $cpt_project;
-// // sons request
-// $res = db_query_params('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.project_id=$3',
-// 			array ('shar',
-// 				't',
-// 				$group_id));
-// echo db_error();
-// while ($row = db_fetch_array($res)) {
-// 	echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Child project').' : <a href="'.forge_get_config('url_prefix').'/projects/'.$row['unix_group_name'].'/">' . $row['group_name'] . '</a> : '.$row['com'].'<br/>';
-// 	$cpt_project ++;
-// }
-//
-// if($cpt_project != $cpt_temp) {
-// 	print '<hr size="1" />';
-// }
-// $cpt_temp = $cpt_project ;
-//
-// // links if project is father
-// $res = db_query_params('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.project_id=$3',
-// 			array ('navi',
-// 				't',
-// 				$group_id));
-// echo db_error();
-// while ($row = db_fetch_array($res)) {
-// 	echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Links')." : <a href=\"".forge_get_config('url_prefix')."/projects/".$row['unix_group_name']."/\">" . $row['group_name'] . "</a> :  ".$row['com']."<br/>";
-// 	$cpt_project ++;
-// }
-//
-// // links if project is son
-// $res = db_query_params('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=$3',
-// 			array('navi',
-// 				't',
-// 				$group_id));
-// echo db_error();
-// while ($row = db_fetch_array($res)) {
-// 	echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Links')." : <a href=\"".forge_get_config('url_prefix')."/projects/".$row['unix_group_name']."/\">" . $row['group_name'] . "</a><br/>";
-// 	$cpt_project ++;
-// }
-//
-// if($cpt_project != $cpt_temp){
-// 	print '<hr size="1" />';
-// }
-//
-// if($cpt_project == 0){
-// 	echo _('No linked project available');
-// 	print '<hr size="1" />';
-// }
+	if (sizeof($parent)) {
+		echo '<ul>';
+		$parentGroup = group_get_object($parent[0][0]);
+		echo '<li>'._('Parent Project:').' '.util_make_link('/projects/'.$parentGroup->getUnixName(), $parentGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
+		echo '</ul>';
+	}
+	if (sizeof($childs)) {
+		if (sizeof($parent))
+			echo '<hr>';
 
+		echo '<ul>';
+		foreach ($childs as $child) {
+			$childGroup = group_get_object($child[0][0]);
+			echo '<li>'._('Child project').' '.util_make_link('/projects/'.$childGroup->getUnixName(), $childGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
+		}
+		echo '</ul>';
+	}
+	echo '</ul>';
 	echo $HTML->boxBottom();
 }
 ?>

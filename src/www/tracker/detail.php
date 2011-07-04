@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,7 +31,7 @@ if (getStringFromRequest('commentsort') == 'anti') {
        $sort_comments_chronologically = true;
 }
 
-$ath->header(array ('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
+$ath->header(array('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
 
@@ -41,7 +42,7 @@ echo notepad_func();
 	<table cellpadding="0" width="100%">
 		<tr>
 			<td>
-				<?php 
+				<?php
 					if ($ah->isMonitoring()) {
 						$img="xmail16w.png";
 						$key="monitorstop";
@@ -109,7 +110,7 @@ echo notepad_func();
 			<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 			<p>
-			<strong><?php echo _('Add A Comment') ?>:</strong> 
+			<strong><?php echo _('Add A Comment') ?>:</strong>
 			<?php echo notepad_button('document.forms.trackerdetailform.details') ?><br />
 			<textarea name="details" rows="10" cols="60"></textarea>
 			</p>
