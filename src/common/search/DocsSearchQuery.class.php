@@ -25,21 +25,21 @@
 require_once $gfcommon.'search/SearchQuery.class.php';
 
 class DocsSearchQuery extends SearchQuery {
-	
+
 	/**
 	* group id
 	*
 	* @var int $groupId
 	*/
 	var $groupId;
-	
+
 	/**
 	* flag if non public items are returned
 	*
 	* @var boolean $showNonPublic
-	*/	
+	*/
 	var $showNonPublic;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -50,12 +50,12 @@ class DocsSearchQuery extends SearchQuery {
 	 * @param array $sections sections to search in
 	 * @param boolean $showNonPublic flag if private sections are searched too
 	 */
-	function DocsSearchQuery($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {	
+	function DocsSearchQuery($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
-		
+
 		$this->SearchQuery($words, $offset, $isExact);
-		
+
 		$this->setSections($sections);
 	}
 
@@ -96,7 +96,7 @@ class DocsSearchQuery extends SearchQuery {
 		}
 		return $qpa;
 	}
-	
+
 	function getFTIQuery() {
 		$words = $this->getFormattedWords();
 		$group_id=$this->groupId;
@@ -185,12 +185,12 @@ class DocsSearchQuery extends SearchQuery {
 		$sql = 'SELECT doc_groups.doc_group, doc_groups.groupname FROM doc_groups, doc_data'
 			.' WHERE doc_groups.doc_group = doc_data.doc_group AND doc_groups.group_id=$1';
 		if ($showNonPublic) {
-			$sql .= ' AND doc_data.stateid IN (1, 4, 5)';
+			$sql .= ' AND doc_data.stateid IN (1, 4, 5) AND doc_groups.stateid = 1';
 		} else {
-			$sql .= ' AND doc_data.stateid = 1';
+			$sql .= ' AND doc_data.stateid = 1  AND doc_groups.stateid = 1';
 		}
 		$sql .= ' ORDER BY groupname';
-		
+
 		$sections = array();
 		$res = db_query_params ($sql,
 					array ($groupId));
