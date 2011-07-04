@@ -77,6 +77,84 @@ $server->register(
     $uri.'#getUsersByName','rpc','encoded'
 );
 
+//addUser (unix_name,firstname,lastname,password1,password2,email,
+	//mail_site,mail_va,language_id,timezone,jabber_address,jabber_only,
+	//theme_id,unix_box='shell',address='',address2='',phone='',fax='',
+	//title='',ccode='US',send_mail)
+$server->register(
+    'addUser',
+    array('unix_name'=>'xsd:string','firstname'=>'xsd:string',
+	'lastname'=>'xsd:string','password1'=>'xsd:string',
+	'password2'=>'xsd:string','email'=>'xsd:string',
+	'mail_site'=>'xsd:string','mail_va'=>'xsd:string',
+	'language_id'=>'xsd:int','timezone'=>'xsd:string',
+	'jabber_address'=>'xsd:string','jabber_only'=>'xsd:int',
+	'theme_id'=>'xsd:int','unix_box'=>'xsd:string',
+	'address'=>'xsd:string','address2'=>'xsd:string',
+	'phone'=>'xsd:string','fax'=>'xsd:string',
+	'title'=>'xsd:string','ccode'=>'xsd:string'),
+    array('addUserResonse'=>'xsd:int'),
+    $uri,  
+    $uri.'#addUser','rpc','encoded'
+);
+
+//updateUser  (session_ser,user_id,firstname,lastname,language_id,timezone,mail_site,mail_va,use_ratings,jabber_address,$jabber_only,theme_id,address,address2,phone,fax,title,ccode)
+$server->register(
+    'updateUser',
+    array('session_ser'=>'xsd:string',
+	'user_id'=>'xsd:string',
+	'firstname'=>'xsd:string',
+	'lastname'=>'xsd:string',
+	'language_id'=>'xsd:int',
+	'timezone'=>'xsd:string',
+	'mail_site'=>'xsd:string',
+	'mail_va'=>'xsd:string',
+	'use_ratings'=>'xsd:string',	
+	'jabber_address'=>'xsd:string',
+	'jabber_only'=>'xsd:int',
+	'theme_id'=>'xsd:int',
+	'address'=>'xsd:string',
+	'address2'=>'xsd:string',
+	'phone'=>'xsd:string',
+	'fax'=>'xsd:string',
+	'title'=>'xsd:string',
+	'ccode'=>'xsd:string'),
+    array('updateUserResonse'=>'xsd:int'),
+    $uri,  
+    $uri.'#updateUser','rpc','encoded'
+);
+
+//deleteUser  (session_ser,user_id)
+$server->register(
+    'deleteUser',
+    array('session_ser'=>'xsd:string','user_id'=>'xsd:string'),
+    array('deleteUserResonse'=>'xsd:boolean'),
+    $uri,  
+    $uri.'#deleteUser','rpc','encoded'
+);
+
+//changeStatus  (session_ser,user_id,status)
+$server->register(
+    'changeStatus',
+    array('session_ser'=>'xsd:string',
+	'user_id'=>'xsd:string',
+	'status'=>'xsd:string'),
+    array('changeStatusResonse'=>'xsd:boolean'),
+    $uri,  
+    $uri.'#changeStatus','rpc','encoded'
+);
+
+//changePassword  (session_ser,user_id,password)
+$server->register(
+    'changePassword',
+    array('session_ser'=>'xsd:string',
+	'user_id'=>'xsd:string',
+	'password'=>'xsd:string'),
+    array('changePasswordResonse'=>'xsd:boolean'),
+    $uri,  
+    $uri.'#changePassword','rpc','encoded'
+);
+
 //getGroups (id array)
 $server->register(
     'userGetGroups',
@@ -107,6 +185,86 @@ function getUsersByName($session_ser,$user_names) {
 	}
 
 	return users_to_soap($usrs);
+}
+
+//add user object 
+function addUser($unix_name,$firstname,$lastname,$password1,$password2,$email,
+		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,$unix_box,$address,$address2,$phone,$fax,$title,$ccode){
+	$new_user = new GFUser();
+
+	$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',$address,$address2,$phone,$fax,$title,$ccode);
+
+	if (!$register){
+		return new soap_fault ('3004','user','Could Not Add A New User','Could Not Add A New User');
+	}
+
+	return $new_user->getID();
+}
+
+//update user object 
+function updateUser ($session_ser,$user_id,$firstname,$lastname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode){
+	continue_session($session_ser);
+	$user =& user_get_object($user_id);
+	if (!$user || !is_object($user)) {
+		return new soap_fault ('updateUser','Could Not Get User','Could Not Get User');
+	}
+
+	if (!$user->update($firstname,$lastname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode)){
+	return new soap_fault ('updateUser',$user->getErrorMessage(),$user->getErrorMessage());
+	}else{
+		return $user->getID();	
+	}
+}
+
+//delete user object 
+function deleteUser ($session_ser,$user_id){
+	continue_session($session_ser);
+	$user =& user_get_object($user_id);
+	if (!$user || !is_object($user)) {
+		return new soap_fault ('deleteUser','Could Not Get User','Could Not Get User');
+	}elseif ($user->isError()){
+		return new soap_fault ('deleteUser',$user->getErrorMessage(),$user->getErrorMessage());
+	}
+
+	if (!$user->delete(true)){
+		return new soap_fault ('deleteUser',$user->getErrorMessage(),$user->getErrorMessage());
+	}else{
+		return true;	
+	}
+}
+
+//change status user object 
+function changeStatus ($session_ser,$user_id,$status){
+	continue_session($session_ser);
+	$user =& user_get_object($user_id);
+	if (!$user || !is_object($user)) {
+		return new soap_fault ('changeStatus','Could Not Get User','Could Not Get User');
+	}elseif ($user->isError()){
+		return new soap_fault ('changeStatus',$user->getErrorMessage(),$user->getErrorMessage());
+	}
+	
+	if (!$user->setStatus($status)){
+		return new soap_fault ('changeStatus',$user->getErrorMessage(),$user->getErrorMessage());
+	}else{
+		return true;
+	}
+}
+
+//change password user object 
+function changePassword ($session_ser,$user_id,$password){
+	continue_session($session_ser);
+	$user =& user_get_object($user_id);
+	if (!$user || !is_object($user)) {
+		return new soap_fault ('changePassword','Could Not Get User','Could Not Get User');
+	}elseif ($user->isError()){
+		return new soap_fault ('changePassword',$user->getErrorMessage(),$user->getErrorMessage());
+	}
+	
+	if (!$user->setPasswd($password)){
+		return new soap_fault ('changePassword',$user->getErrorMessage(),$user->getErrorMessage());
+	}else{
+		return true;
+	}
 }
 
 //get groups for user_id
@@ -142,9 +300,9 @@ function &users_to_soap($usrs) {
 			'fax'=>$usrs[$i]->data_array['fax'],
 			'status'=>$usrs[$i]->data_array['status'],
 			'timezone'=>$usrs[$i]->data_array['timezone'],
-			'country_code'=>$usrs[$i]->data_array['country_code'],
+			'country_code'=>$usrs[$i]->data_array['ccode'],
 			'add_date'=>$usrs[$i]->data_array['add_date'],
-			'language_id'=>$usrs[$i]->data_array['language_id']
+			'language_id'=>$usrs[$i]->data_array['language']
 			);
 		}
 
