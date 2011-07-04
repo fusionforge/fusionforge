@@ -61,7 +61,7 @@ function pg_connectstring($dbname, $user, $password = "", $host = "", $port = ""
 /**
  *  db_connect() - Connect to the database
  *  Notice the global vars that must be set up
- *  Sets up a global $gfconn variable which is used 
+ *  Sets up a global $gfconn variable which is used
  *  in other functions in this library.
  */
 function db_connect() {
@@ -137,9 +137,9 @@ function db_switcher($dbserver=NULL) {
 			$dbconn = SYS_DB_PRIMARY ;
 		}
 	}
-	
+
 	return $dbconn;
-}	
+}
 
 /**
  *  db_query() - Query the database.
@@ -265,7 +265,7 @@ function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=NULL) 
 }
 
 /**
- *  db_query_params() - Query the database, with a query+params array
+ *  db_query_qpa() - Query the database, with a query+params array
  *
  *  @param array array(query, array(parameters...))
  *  @param int How many rows do you want returned.
@@ -453,7 +453,7 @@ function db_affected_rows($qhandle) {
 }
 
 /**
- *  db_fetch_array() - Returns an associative array from 
+ *  db_fetch_array() - Returns an associative array from
  *  the current row of this database result
  *
  *	@param		int		Query result set handle.
@@ -507,7 +507,7 @@ function db_error($dbserver=NULL) {
 }
 
 /**
- *	system_cleanup() - In the future, we may wish to do a number 
+ *	system_cleanup() - In the future, we may wish to do a number
  *	of cleanup functions at script termination.
  *
  *	For now, we just abort any in-process transaction.
@@ -585,10 +585,10 @@ function db_construct_qpa ($old_qpa = false, $new_sql = '', $new_params = array 
 	$new_sql = str_replace ('$_', '$', $new_sql) ;
 
 	$sql .= $new_sql ;
-	
+
 	return array ($sql, $params, $max) ;
 }
-	
+
 function db_join_qpa ($old_qpa = false, $new_qpa = false) {
 	return db_construct_qpa ($old_qpa, $new_qpa[0], $new_qpa[1]) ;
 }
