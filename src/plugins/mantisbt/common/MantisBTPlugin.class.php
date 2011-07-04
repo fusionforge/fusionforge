@@ -51,7 +51,7 @@ class MantisBTPlugin extends Plugin {
 			case "usermenu": {
 				if ($G_SESSION->usesPlugin($this->name)) {
 					$param = '?type=user&user_id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
-					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(array('title' => _('Personal MantisBT page'))));
+					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(array('class'=> 'tabtitle', 'title' => _('Personal MantisBT page'))));
 				}
 				$returned = true;
 				break;
@@ -101,8 +101,7 @@ class MantisBTPlugin extends Plugin {
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link("/plugins/mantisbt/?group_id=$group_id&type=admin&pluginname=".$this->name, _('View Admin MantisBT')
-					);
+					echo util_make_link("/plugins/mantisbt/?group_id=$group_id&type=admin&pluginname=".$this->name, _('View Admin MantisBT'), array('class' => 'tabtitle', 'title' => _('MantisBT administration page')));
 					echo '</p>';
 				}
 				$returned = true;
@@ -371,7 +370,7 @@ class MantisBTPlugin extends Plugin {
 		$labelAttr[] = array('title' => _('View the roadmap, per version tickets'), 'id' => 'roadmapView', 'class' => 'tabtitle-nw');
 		$labelAttr[] = array('title' => _('View all tickets.'), 'id' => 'ticketView', 'class' => 'tabtitle');
 		$userperm = $group->getPermission($user);
-		if ( $userperm->isAdmin() ) {
+		if ($userperm->isAdmin()) {
 			$labelTitle[] = _('Administration');
 			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&pluginname=".$this->name;
 			$labelTitle[] = _('Statistics');
@@ -604,7 +603,7 @@ class MantisBTPlugin extends Plugin {
 		if (!isset($confArr['url']) || !isset($confArr['soap_user']) || !isset($confArr['soap_password']))
 			return false;
 
-		$res = db_query_params('truncate plugin_mantisbt_global',array());
+		$res = db_query_params('truncate plugin_mantisbt_global', array());
 		if (!$res)
 			return false;
 
