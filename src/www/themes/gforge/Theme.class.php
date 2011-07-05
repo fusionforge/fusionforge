@@ -63,7 +63,7 @@ class Theme extends Layout {
 		if (!util_ifsetor($params['title'])) {
 			$params['title'] = forge_get_config('forge_name');
 		} else {
-			$params['title'] = $params['title'] . " - forge_get_config('forge_name') ";
+			$params['title'] = $params['title'] . " – " . forge_get_config('forge_name');
 		}
 
                 echo '
