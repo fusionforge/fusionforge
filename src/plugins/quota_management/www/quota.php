@@ -2,7 +2,6 @@
 /**
  * Project Admin page to manage quotas disk and database
  *
- *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
@@ -205,6 +204,9 @@ foreach ($users as $u)
 	<?php
 	$total_database = 0;
 	$total_disk = 0;
+	$total_disk_1 = 0;
+	$total_disk_other = 0;
+	$total_disk_scm = 0;
 	foreach ($quotas as $q)
 	{
 		$total_database += $q["database_size"];
