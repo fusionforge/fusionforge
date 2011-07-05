@@ -2389,9 +2389,6 @@ src/plugins/projects_hierarchy/view/admin_project_link.php -text
 src/plugins/projects_hierarchy/view/docman_project_link.php -text
 src/plugins/projects_hierarchy/view/home_project_link.php -text
 src/plugins/projects_hierarchy/www/add_link.php -text
-src/plugins/projects_hierarchy/www/add_son.php -text
-src/plugins/projects_hierarchy/www/del_father.php -text
-src/plugins/projects_hierarchy/www/del_son.php -text
 src/plugins/projects_hierarchy/www/dtree.css -text svneol=unset#text/css
 src/plugins/projects_hierarchy/www/dtree.js -text
 src/plugins/projects_hierarchy/www/img/base.gif -text svneol=unset#image/gif
@@ -2415,7 +2412,6 @@ src/plugins/projects_hierarchy/www/img/plusbottom.gif -text svneol=unset#image/g
 src/plugins/projects_hierarchy/www/img/question.gif -text svneol=unset#image/gif
 src/plugins/projects_hierarchy/www/img/trash.gif -text svneol=unset#image/gif
 src/plugins/projects_hierarchy/www/index.php -text
-src/plugins/projects_hierarchy/www/wait_son.php -text
 src/plugins/quota_management/INSTALL -text
 src/plugins/quota_management/common/quota_management-init.php -text
 src/plugins/quota_management/common/quota_managementPlugin.class.php -text
