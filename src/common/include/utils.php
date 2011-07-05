@@ -1129,11 +1129,7 @@ function util_make_uri($path) {
 }
 
 function util_make_link($path, $text, $extra_params = false, $absolute = false) {
-	$use_tooltips = 1;
-	if (session_loggedin()) {
-		$user = session_get_user();
-		$use_tooltips = $user->usesTooltips();
-	}
+	global $use_tooltips;
 	$ep = '';
 	if (is_array($extra_params)) {
 		foreach ($extra_params as $key => $value) {

@@ -233,17 +233,7 @@ class Theme extends Layout {
 		if ($count < 1)
 			return;
 
-		$use_tooltips = 1;
-
-		if (session_loggedin()) {
-			$u =& user_get_object(user_getid());
-			if (!$u || !is_object($u)) {
-				exit_error(_('Could Not Get User'));
-			} elseif ($u->isError()) {
-				exit_error($u->getErrorMessage(), 'my');
-			}
-			$use_tooltips = $u->usesTooltips();
-		}
+		global $use_tooltips;
 
 		if ($use_tooltips) {
 			?>

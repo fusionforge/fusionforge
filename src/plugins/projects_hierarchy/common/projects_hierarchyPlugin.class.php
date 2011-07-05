@@ -464,9 +464,7 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function getGlobalAdminView() {
-		global $gfplugins;
-		$user = session_get_user();
-		$use_tooltips = $user->usesTooltips();
+		global $gfplugins, $use_tooltips;
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
 	}

@@ -62,7 +62,7 @@ function setconfigfromoldsources ($sec, $var, $serv, $env, $glob) {
 			forge_define_config_item ($var, $sec,
 						  $headers[$serv]) ;
 			return ;
-		} 
+		}
 	}
 	if (isset ($_ENV[$env])) {
 		forge_define_config_item ($var, $sec,
@@ -211,73 +211,73 @@ require_once $gfcommon.'include/Error.class.php';
 // From here database is required
 if (forge_get_config('database_name')!=""){
 	require_once $gfcommon.'include/database-pgsql.php';
-	
+
 	// Authentication and access control
 	require_once $gfcommon.'include/session.php';
 	require_once $gfcommon.'include/RBACEngine.class.php';
-	
-	
+
+
 	// System library
 	require_once $gfcommon.'include/System.class.php';
 	forge_define_config_item('account_manager_type', 'core', 'UNIX') ;
 	require_once $gfcommon.'include/system/'.forge_get_config('account_manager_type').'.class.php';
 	$amt = forge_get_config('account_manager_type') ;
 	$SYS = new $amt();
-	
+
 	// User-related classes and functions
 	require_once $gfcommon.'include/User.class.php';
-	
+
 	// Project-related classes and functions
 	require_once $gfcommon.'include/Group.class.php';
-	
+
 	// Permission-related functions
 	require_once $gfcommon.'include/Permission.class.php';
-	
+
 	// Plugins subsystem
 	require_once $gfcommon.'include/Plugin.class.php' ;
 	require_once $gfcommon.'include/PluginManager.class.php' ;
-	
+
 	// SCM-specific plugins subsystem
 	require_once $gfcommon.'include/SCMPlugin.class.php' ;
-	
+
 	// Authentication-specific plugins subsystem
 	require_once $gfcommon.'include/AuthPlugin.class.php' ;
 
 	if (getenv ('FUSIONFORGE_NO_PLUGINS') != 'true') {
 		setup_plugin_manager () ;
 	}
-	
+
 	// Jabber subsystem
 	if (forge_get_config('use_jabber')) {
 		require_once $gfcommon.'include/Jabber.class.php';
 	}
-	
+
 	ini_set('date.timezone', forge_get_config ('default_timezone'));
-	
+
 	if (isset($_SERVER['SERVER_SOFTWARE'])) { // We're on the web
 		// exit_error() and variants (for the web)
 		require_once $gfcommon.'include/exit.php';
-	
+
 		// Library to determine browser settings
 		require_once $gfwww.'include/browser.php';
-	
+
 		// HTML layout class, may be overriden by the Theme class
 		require_once $gfwww.'include/Layout.class.php';
-	
+
 		// Various HTML utilities
 		require_once $gfcommon.'include/utils.php';
-	
+
 		// Various HTML libs like button bar, themable
 		require_once $gfwww.'include/html.php';
-	
+
 		// Forms key generation
 		require_once $gfcommon.'include/forms.php';
-	
+
 		// Determine if there's a web session running
 		session_set();
-		
+
 		plugin_hook('after_session_set');
-		
+
 		// Mandatory login
 		if (!session_loggedin() && forge_get_config ('force_login') == 1 ) {
 			$expl_pathinfo = explode('/',getStringFromServer('REQUEST_URI'));
@@ -286,30 +286,32 @@ if (forge_get_config('database_name')!=""){
 			// If not default web project page would be broken
 			if ($expl_pathinfo[1]=='export' && !ereg("^proj", $expl_pathinfo[2])) exit_not_logged_in();
 		}
-	
+
 		// Insert this page view into the database
 		require_once $gfwww.'include/logger.php';
-	
+
 		// If logged in, set up a $LUSER var referencing
 		// the logged in user's object
 		// and setup theme
 		if (session_loggedin()) {
 			$LUSER =& session_get_user();
+			$use_tooltips = $LUSER->usesTooltips();
 			putenv ('TZ='. $LUSER->getTimeZone());
 			header ('Cache-Control: private');
 			require_once forge_get_config('themes_root').'/'.$LUSER->setUpTheme().'/Theme.class.php';
 		} else {
+			$use_tooltips = 1;
 			require_once forge_get_config('themes_root').'/'.forge_get_config('default_theme').'/Theme.class.php';
 		}
 		$HTML = new Theme () ;
 	} else {		     // Script run from cron or a command line
 		require_once $gfcommon.'include/squal_exit.php';
 	}
-	
+
 	// Determine locale
 	require_once $gfcommon.'include/gettext.php';
 	require_once $gfcommon.'include/group_section_texts.php';
-	
+
 	setup_gettext_from_context();
 }
 

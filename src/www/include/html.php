@@ -322,11 +322,7 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 }
 
 function html_get_tooltip_description($element_name) {
-	$use_tooltips = 1;
-	if (session_loggedin()) {
-		$user = session_get_user();
-		$use_tooltips = $user->usesTooltips();
-	}
+	global $use_tooltips;
 	if ($use_tooltips) {
 		switch( $element_name ) {
 			case 'assigned_to':

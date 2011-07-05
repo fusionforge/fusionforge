@@ -29,8 +29,10 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
+global $use_tooltips;
+
 $group_id = getIntFromRequest('group_id');
-session_require_perm ('project_admin', $group_id) ;
+session_require_perm('project_admin', $group_id);
 
 // Check for submission. If so, make changes and redirect
 
@@ -53,7 +55,7 @@ if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 		',
 			array($group_id,
 				$rootnode));
-		
+
 		for ($i=1;$i<=$TROVE_MAXPERROOT;$i++) {
 			$varname = 'root'.$i;
 			// check to see if exists first, then insert into DB
@@ -84,7 +86,7 @@ project_admin_header(array('title'=>_('Edit Trove Categorization'),'group'=>$gro
 $CATROOTS = trove_getallroots();
 while (list($catroot,$fullname) = each($CATROOTS)) {
 	$res_cat = db_query_params ('SELECT * FROM trove_cat WHERE trove_cat_id=$1', array($catroot));
-	if (db_numrows($res_cat)>=1) {
+	if (db_numrows($res_cat)>=1 && $use_tooltips) {
 		$title = db_result($res_cat, 0, 'description');
 	} else {
 		$title = '';
@@ -99,17 +101,17 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 		AND trove_cat_root=$2',
 			array($group_id,
 				$catroot));
-		
+
 	for ($i=1;$i<=$TROVE_MAXPERROOT;$i++) {
 		// each drop down, consisting of all cats in each root
 		$name= "root$i"."[$catroot]";
 		// see if we have one for selection
 		if ($row_grpcat = db_fetch_array($res_grpcat)) {
-			$selected = $row_grpcat["trove_cat_id"];	
+			$selected = $row_grpcat["trove_cat_id"];
 		} else {
 			$selected = 0;
 		}
-		trove_catselectfull($catroot,$selected,$name, $title);
+		trove_catselectfull($catroot, $selected, $name, $title);
 	}
 }
 

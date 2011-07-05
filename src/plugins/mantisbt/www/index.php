@@ -34,7 +34,7 @@ if (!$type) {
 	exit_missing_param($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'mantisbt');
 }
 
-$use_tooltips = 1;
+global $use_tooltips;
 $editable = 1;
 $mantisbt = plugin_get_object('mantisbt');
 
@@ -254,7 +254,6 @@ switch ($type) {
 					$username = $mantisbtUserConf['user'];
 					$password = $mantisbtUserConf['password'];
 				}
-				$use_tooltips = $user->usesTooltips();
 			}
 
 			// no user init ? we shoud force this user to init his account
