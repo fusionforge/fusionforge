@@ -219,18 +219,18 @@ function trove_getallroots() {
 /**
  * trove_catselectfull() - Returns full select output for a particular root
  *
- * @param		int		The node
- * @param		string	The category to pre-select
- * @param		string	THe select-box name
+ * @param	int	The node
+ * @param	string	The category to pre-select
+ * @param	string	THe select-box name
  */
-function trove_catselectfull($node,$selected,$name, $title='') {
+function trove_catselectfull($node, $selected, $name, $title='') {
 	print '<br /><select class="trove-nodes" name="'.$name.'" title="'.util_html_secure($title).'">';
 	print '  <option value="0">'._('None Selected')."</option>\n";
-	$res_cat = db_query_params ('
-		SELECT trove_cat_id,fullpath
-		FROM trove_cat
-		WHERE root_parent=$1
-		ORDER BY fullpath',
+	$res_cat = db_query_params('
+			SELECT trove_cat_id,fullpath
+			FROM trove_cat
+			WHERE root_parent=$1
+			ORDER BY fullpath',
 			array($node));
 
 	while ($row_cat = db_fetch_array($res_cat)) {
