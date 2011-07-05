@@ -43,29 +43,44 @@ function project_admin_header($params) {
 
 	$labels = array();
 	$links = array();
-	
+	$attr_r = array();
+
 	$labels[] = _('Project Information');
+	$attr_r[] = array('class' => 'tabtitle', 'title' => _('General information about project. Tag, trove list, description.'));
 	$labels[] = _('Users and permissions');
+	$attr_r[] = array('class' => 'tabtitle', 'title' => _('Permissions management. Edit / Create roles. Assign new permissions to user. Add / Remove member.'));
 	$labels[] = _('Tools');
+	$attr_r[] = array('class' => 'tabtitle', 'title' => _('Activate / Desactivate extensions like docman, forums, plugins.'));
 	$labels[] = _('Project History');
+	$attr_r[] = array('class' => 'tabtitle', 'title' => _('Show the significant change of your project.'));
 	if(forge_get_config('use_people')) {
 		$labels[] = _('Post Jobs');
+		$attr_r[] = array('class' => 'tabtitle', 'title' => _('Hiring new people. Describe the job'));
 		$labels[] = _('Edit Jobs');
+		$attr_r[] = array('class' => 'tabtitle', 'title' => _('Edit already created available position in your project.'));
 	}
 	if(forge_get_config('use_project_multimedia')) {
 		$labels[] = _('Edit Multimedia Data');
+		//TODO: set the title.
+		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
 	}
 	if(forge_get_config('use_project_vhost')) {
 		$labels[] = _('VHOSTs');
+		//TODO: set the title.
+		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
 	}
 	if(forge_get_config('use_project_database')) {
 		$labels[] = _('Database Admin');
+		//TODO: set the title.
+		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
 	}
 	if ($project->usesStats()) {
 		$labels[] = _('Stats');
+		//TODO: set the title.
+		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
 	}
 	plugin_hook("quota_label_project_admin");
-	
+
 	$links[] = '/project/admin/?group_id='.$group_id;
 	$links[] = '/project/admin/users.php?group_id='.$group_id;
 	$links[] = '/project/admin/tools.php?group_id='.$group_id;
@@ -85,10 +100,10 @@ function project_admin_header($params) {
 	}
 	$links[] = '/project/stats/?group_id='.$group_id;
 	plugin_hook("quota_link_project_admin");
-	
-	$params['submenu'] = $HTML->subMenu($labels, $links);
 
-	plugin_hook ("groupadminmenu", $params) ;
+	$params['submenu'] = $HTML->subMenu($labels, $links, $attr_r);
+
+	plugin_hook("groupadminmenu", $params);
 
 	site_project_header($params);
 }
@@ -116,8 +131,8 @@ function project_admin_footer($params=array()) {
 
 function group_get_history ($group_id=false) {
 return db_query_params("SELECT group_history.field_name,group_history.old_value,group_history.adddate,users.user_name
-FROM group_history,users 
-WHERE group_history.mod_by=users.user_id 
+FROM group_history,users
+WHERE group_history.mod_by=users.user_id
 AND group_id=$1 ORDER BY group_history.adddate DESC", array($group_id));
 }
 
@@ -133,16 +148,16 @@ function group_add_history ($field_name,$old_value,$group_id) {
 */
 
 function show_grouphistory ($group_id) {
-	/*	  
-		show the group_history rows that are relevant to 
+	/*
+		show the group_history rows that are relevant to
 		this group_id
 	*/
 
 	$result=group_get_history($group_id);
 	$rows=db_numrows($result);
-	
+
 	if ($rows > 0) {
-	
+
 		echo '<p>'._('This log will show who made significant changes to your project and when').'</p>';
 
 		$title_arr=array();
@@ -150,13 +165,13 @@ function show_grouphistory ($group_id) {
 		$title_arr[]=_('Old Value');
 		$title_arr[]=_('Date');
 		$title_arr[]=_('By');
-		
+
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
-		for ($i=0; $i < $rows; $i++) { 
+		for ($i=0; $i < $rows; $i++) {
 			$field=db_result($result, $i, 'field_name');
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
-			
+
 			if (is_numeric(db_result($result, $i, 'old_value'))) {
 				if (preg_match("/[Uu]ser/i", $field)) {
 					echo user_getname(db_result($result, $i, 'old_value'));
@@ -165,11 +180,11 @@ function show_grouphistory ($group_id) {
 				}
 			} else {
 				echo db_result($result, $i, 'old_value');
-			}			
+			}
 			echo '</td>'.
 				'<td>'.date(_('Y-m-d H:i'),db_result($result, $i, 'adddate')).'</td>'.
 				'<td>'.db_result($result, $i, 'user_name').'</td></tr>';
-		}		   
+		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
 
@@ -180,8 +195,8 @@ function show_grouphistory ($group_id) {
 
 /*
 	prdb_namespace_seek - check that a projects' potential db name hasn't
-	already been used.  If it has - add a 1..20 to the end of it.  If it 
-	iterates through twenty times and still fails - namespace depletion - 
+	already been used.  If it has - add a 1..20 to the end of it.  If it
+	iterates through twenty times and still fails - namespace depletion -
 	throw an error.
 
  */
@@ -196,10 +211,10 @@ function prdb_namespace_seek($namecheck) {
 		$curr_num = 1;
 
 		while ((db_numrows($res_dbl) > 0) && ($curr_num < 20)) {
-			
+
 			$curr_num++;
 			$namecheck .= $namecheck.$curr_num;
-					
+
 			$res_dbl = db_query_params($query, array($namecheck));
 		}
 
