@@ -27,6 +27,7 @@ require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+$quota_management = plugin_get_object('quota_management');
 
 $_quota_block_size = 1024;
 $_quota_block_size = trim(shell_exec("echo $BLOCK_SIZE")) + 0;
@@ -42,40 +43,32 @@ site_admin_header(array('title'=>_('Site admin')));
 </h4>
 <?php
 
-// echo "<pre>".print_r($_POST, true)."</pre>";
-
 // quota update
 if ($_POST["cmd"] == "maj")
 {
 	$qs = $_POST["qs"] * $_quota_block_size;
 	$qh = $_POST["qh"] * $_quota_block_size;
-	if ($qs > $qh)
-	{
+	if ($qs > $qh) {
 		$message = utf8_encode(_('Input error: Hard quota must be greater than soft quota'));
 		echo "<h3 style=\"color:red\">$message</h3>";
-	}
-	else
-	{
-		db_query_params ('UPDATE groups SET quota_soft = $1, quota_hard = $2 WHERE group_id = $3',
-				 array ($qs,
+	} else {
+		db_query_params('UPDATE groups SET quota_soft = $1, quota_hard = $2 WHERE group_id = $3',
+				array($qs,
 					$qh,
-					getIntFromRequest ('group_id')));
+					getIntFromRequest('group_id')));
 		$message = utf8_encode(_('Successfully updated quota'));
 		echo "<h3 style=\"color:red\">$message</h3>";
 	}
 }
 
-
 // stock projects infos in array
 $quotas = array();
 
 // all projects list
-$res_db = db_query_params ('SELECT group_id, group_name, unix_group_name, quota_soft, quota_hard FROM groups ORDER BY group_id ',
-			array ());
-if (db_numrows($res_db) > 0)
-{
-	while($e = db_fetch_array($res_db))
-	{
+$res_db = db_query_params('SELECT group_id, group_name, unix_group_name, quota_soft, quota_hard FROM groups ORDER BY group_id ',
+			array());
+if (db_numrows($res_db) > 0) {
+	while($e = db_fetch_array($res_db)) {
 		$qh = $e["quota_hard"] / $_quota_block_size;
 		$qs = $e["quota_soft"] / $_quota_block_size;
 		$quotas["$e[group_id]"]["group_id"] = $e["group_id"];
@@ -87,9 +80,6 @@ if (db_numrows($res_db) > 0)
 		$quotas["$e[group_id]"]["quota_soft"] = $qs;
 	}
 }
-
-
-
 ?>
 <table width="700px" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
@@ -116,7 +106,7 @@ if (db_numrows($res_db) > 0)
 		<input type="hidden" name="group_id" value="<?php echo $q["group_id"]; ?>" />
 		<tr>
 			<td style="border-top:thin solid #808080"><?php echo $q["group_id"]; ?></td>
-			<td style="border-top:thin solid #808080"><a href="<?php echo util_make_url ('/project/admin/quota.php?group_id='.$q['group_id']); ?>">
+			<td style="border-top:thin solid #808080"><a href="<?php echo util_make_url('/plugins/quota_management/index.php?id='.$q['group_id'].'&type=admin&pluginname='.$quota_management->name); ?>">
 				<?php echo $q["unix_name"]; ?>
 			</a></td>
 			<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
@@ -151,39 +141,9 @@ if (db_numrows($res_db) > 0)
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 	</tr>
 </table>
-<br />
-<br />
 <?php
-
-
-print_debug(print_r($quotas, true));
-print_debug(print_r($users, true));
 
 site_admin_footer(array());
-?>
-
-<?php
-function print_debug ($text)
-{
-//	echo "<pre>$text</pre>";
-}
-function add_numbers_separator ($val, $sep=' ')
-{
-	$size = "$val";
-	$size = strrev($size);
-	$size = wordwrap($size, 3, $sep, 1);
-	$size = strrev($size);
-	return $size;
-}
-function get_dir_size ($dir)
-{
-	$size = "";
-	$cmd = "/usr/bin/du -bs $dir";
-	$res = shell_exec ($cmd);
-	$a = explode("\t", $res);
-	if (isset($a[1])) $size = $a[0];
-	return "$size";
-}
 
 // Local Variables:
 // mode: php

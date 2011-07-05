@@ -25,15 +25,6 @@ require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
 // the header that displays for the project portion of the plugin
-function quota_management_Project_Header($params) {
-	global $id;
-	$params['toptab'] = 'quota_management';
-	$params['group'] = $id;
-	/*
-	 Show horizontal links
-	 */
-	site_project_header($params);
-}
 
 $user = session_get_user(); // get the session user
 
@@ -48,6 +39,7 @@ if (!$user || !is_object($user)) {
 $type = getStringFromRequest('type');
 $id = getStringFromRequest('id');
 $pluginname = getStringFromRequest('pluginname');
+$quota_management = plugin_get_object($pluginname);
 
 if (!$type) {
 	exit_missing_params($_SERVER['HTTP_REFERER'],array(_('No TYPE specified')), 'home');
@@ -66,7 +58,7 @@ if (!$type) {
 		if (!$userperm->IsMember()) {
 			exit_permission_denied(_('You are not a member of this project'),'home');
 		}
-		quota_management_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+		$quota_management->quota_management_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 		include('quota_management/www/quota_project.php');
 	} elseif ($type == 'admin') {
 		$group = group_get_object($id);
@@ -82,7 +74,7 @@ if (!$type) {
 		}
 		//only project admin can access here
 		if ( $userperm->isAdmin() ) {
-			quota_management_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+			$quota_management->quota_management_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 			include('quota_management/www/quota_project.php');
 		} else {
 			exit_permission_denied(_('You are not Admin of this project'), 'home');

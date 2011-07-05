@@ -75,6 +75,37 @@ class quota_managementPlugin extends Plugin {
 		return util_make_link('/plugins/'.$this->name.'/quota.php', _('Ressources usage and quota'));
 	}
 
+	function convert_bytes_to_mega($mega) {
+		$b = round($mega / (1024*1024), 2);
+		return $b;
+	}
+
+	function add_numbers_separator($val, $sep=' ') {
+		$size = "$val";
+		$size = strrev($size);
+		$size = wordwrap($size, 3, $sep, 1);
+		$size = strrev($size);
+		return $size;
+	}
+
+	function get_dir_size($dir) {
+		$size = "";
+		$cmd = "/usr/bin/du -bs $dir";
+		$res = shell_exec ($cmd);
+		$a = explode("\t", $res);
+		if (isset($a[1])) $size = $a[0];
+		return "$size";
+	}
+
+	function quota_management_Project_Header($params) {
+		global $id;
+		$params['toptab'] = 'quota_management';
+		$params['group'] = $id;
+		/*
+		Show horizontal links
+		*/
+		site_project_header($params);
+	}
 }
 
 // Local Variables:

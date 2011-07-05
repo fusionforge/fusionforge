@@ -27,14 +27,11 @@
  */
 
 global $id;
+global $quota_management;
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
-
-if (!forge_get_config('use_project_vhost')) {
-	exit_disabled('home');
-}
 
 session_require_perm('project_admin', $id);
 
@@ -45,7 +42,6 @@ if (!$group || !is_object($group)) {
 } else if ($group->isError()) {
 	exit_error($group->getErrorMessage(), 'home');
 }
-
 
 project_admin_header(array('title'=>_('Project quota manager'),'group'=>$group->getID(),'pagename'=>'project_admin_quotas','sectionvals'=>array(group_getname($id))));
 ?>
@@ -61,7 +57,7 @@ $q["name"] = _('Documents');
 $q["nb"] = 0; $q["size"] = 0;
 $q1 = array();
 $q1["name"] = _('Documents search engine');
-$q["size"] = 0;
+$q1["size"] = 0;
 if (db_numrows($res_db) > 0) {
 	$e = db_fetch_array($res_db);
 	$q["nb"] = $e["nb"];
@@ -130,41 +126,34 @@ $svn_dir = $chroot_dir.$svndir_prefix . "/" . $group->getUnixName();
 $q["name"] = _('Download project directory');
 $q["path"] = "$upload_dir";
 $q["quota_label"] = _('Without quota control');
-$q["size"] = get_dir_size ("$upload_dir");
+$q["size"] = $quota_management->get_dir_size("$upload_dir");
 $quota_tot_other += $q["size"];
 $quotas_disk[] = $q;
 
 $q["name"] = _('Home project directory');
-$q["path"] = "$group_dir"; $q["size"] = get_dir_size ("$group_dir");
+$q["path"] = "$group_dir"; $q["size"] = $quota_management->get_dir_size("$group_dir");
 $q["quota_label"] = _('With ftp and home quota control');
 $quota_tot_1 += $q["size"];
 $quotas_disk[] = $q;
 
 $q["name"] = _('FTP project directory');
-$q["path"] = "$ftp_dir"; $q["size"] = get_dir_size ("$ftp_dir");
+$q["path"] = "$ftp_dir"; $q["size"] = $quota_management->get_dir_size("$ftp_dir");
 $q["quota_label"] = _('With ftp and home quota control');
 $quota_tot_1 += $q["size"];
 $quotas_disk[] = $q;
 
 $q["name"] = _('CVS project directory');
-$q["path"] = "$cvs_dir"; $q["size"] = get_dir_size ("$cvs_dir");
+$q["path"] = "$cvs_dir"; $q["size"] = $quota_management->get_dir_size("$cvs_dir");
 $q["quota_label"] = _('With cvs and svn quota control');
 $quota_tot_scm += $q["size"];
 $quotas_disk[] = $q;
 
 $q["name"] = _('Subversion project directory');
-$q["path"] = "$svn_dir"; $q["size"] = get_dir_size ("$svn_dir");
+$q["path"] = "$svn_dir"; $q["size"] = $quota_management->get_dir_size("$svn_dir");
 $q["quota_label"] = _('With cvs and svn quota control');
 $quota_tot_scm += $q["size"];
 $quotas_disk[] = $q;
 
-//echo "chroot = $chroot_dir <br />";
-//echo "ftp = $ftp_dir <br />";
-// echo "group = $group_dir <br />";
-// echo "svn = $svn_dir <br />";
-// echo "cvs = $cvs_dir <br />";
-
-// print_debug(print_r($quotas, true));
 ?>
 
 <table width="500px" cellpadding="2" cellspacing="0" border="0">
@@ -185,7 +174,7 @@ foreach ($quotas as $q) {
 			<tr>
 				<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
 				<td style="border-top:thin solid #808080" align="right"><?php echo $q["nb"]; ?></td>
-				<td style="border-top:thin solid #808080" align="right"><?php echo add_numbers_separator(convert_bytes_to_mega($q["size"]))." "._('Mb'); ?></td>
+				<td style="border-top:thin solid #808080" align="right"><?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["size"]))." "._('Mb'); ?></td>
 			</tr>
 <?php
 	}
@@ -197,7 +186,7 @@ foreach ($quotas as $q) {
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
-			<?php echo add_numbers_separator(convert_bytes_to_mega($sizetot))." "._('Mb'); ?>
+			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($sizetot))." "._('Mb'); ?>
 		</td>
 	</tr>
 </table>
@@ -230,7 +219,7 @@ foreach ($quotas_disk as $q) {
 			<?php echo $q["quota_label"]; ?>&nbsp;
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php echo add_numbers_separator(convert_bytes_to_mega($q["size"]))." "._('Mb'); ?>
+			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["size"]))." "._('Mb'); ?>
 		</td>
 	</tr>
 <?php
@@ -241,7 +230,7 @@ foreach ($quotas_disk as $q) {
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><?php echo _('Total'); ?></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
-			<?php echo add_numbers_separator(convert_bytes_to_mega($sizetot))." "._('Mb'); ?>
+			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($sizetot))." "._('Mb'); ?>
 		</td>
 	</tr>
 </table>
@@ -343,38 +332,4 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 		<td colspan="4" style="border-top:thick solid #808080" align="center">&nbsp;</td>
 	</tr>
 </table>
-
-
 <?php project_admin_footer(array()); ?>
-
-<?php
-function print_debug ($text)
-{
-	echo "<pre>$text</pre>";
-}
-
-function convert_bytes_to_mega ($mega)
-{
-	$b = round($mega / (1024*1024), 0);
-	return $b;
-}
-
-function add_numbers_separator ($val, $sep=' ')
-{
-	$size = "$val";
-	$size = strrev($size);
-	$size = wordwrap($size, 3, $sep, 1);
-	$size = strrev($size);
-	return $size;
-}
-
-function get_dir_size ($dir)
-{
-	$size = "";
-	$cmd = "/usr/bin/du -bs $dir";
-	$res = shell_exec ($cmd);
-	$a = explode("\t", $res);
-	if (isset($a[1])) $size = $a[0];
-	return "$size";
-}
-?>
