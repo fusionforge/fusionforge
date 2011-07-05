@@ -3,7 +3,7 @@
  * Trove
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -224,7 +224,7 @@ function trove_getallroots() {
  * @param		string	THe select-box name
  */
 function trove_catselectfull($node,$selected,$name, $title='') {
-	print "<br /><select class=\"trove-nodes\" name=\"$name\" title=\"util_html_secure($title)\">";
+	print '<br /><select class="trove-nodes" name="'.$name.'" title="'.util_html_secure($title).'">';
 	print '  <option value="0">'._('None Selected')."</option>\n";
 	$res_cat = db_query_params ('
 		SELECT trove_cat_id,fullpath
