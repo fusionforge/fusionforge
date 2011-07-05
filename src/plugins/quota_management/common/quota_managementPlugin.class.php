@@ -34,32 +34,41 @@ class quota_managementPlugin extends Plugin {
 		$this->_addHook('userisactivecheckboxpost'); //
 		$this->_addHook('project_admin_plugins'); // to show up in the admin page fro group
 		$this->_addHook('site_admin_option_hook'); // to show in admin
-		$this->_addHook('quota_label_project_admin'); // to show in admin project
-		$this->_addHook('quota_link_project_admin'); // to show in admin project
+		$this->_addHook('groupadminmenu');
 	}
 
 	function CallHook($hookname, &$params) {
 		global $use_quota_managementplugin, $G_SESSION, $HTML;
-		if ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it's  quota_management administration
-			$group_id = $params['group_id'];
-			$group = &group_get_object($group_id);
-			if ( $group->usesPlugin($this->name)) {
-				echo util_make_link('/plugins/quota_management/index.php?id='.$group->getID().'&type=admin&pluginname='.$this->name,
-						     _('View the quota_management Administration')
-					) ;
-				echo '<br />';
+		$returned = false;
+		switch ($hookname) {
+			case "project_admin_plugins": {
+				// this displays the link in the project admin options page to it's  quota_management administration
+				$group_id = $params['group_id'];
+				$group = &group_get_object($group_id);
+				if ( $group->usesPlugin($this->name)) {
+					echo util_make_link('/plugins/quota_management/index.php?id='.$group->getID().'&type=admin&pluginname='.$this->name,
+							_('View the quota_management Administration')
+						) ;
+					echo '<br />';
+				}
+				$returned = true;
+				break;
 			}
-		} elseif ($hookname == "site_admin_option_hook") {
-			echo '<li>'.$this->getAdminOptionLink().'</li>';
-		} elseif ($hookname == "quota_label_project_admin") {
-			// www/project/admin/project_admin_utils.php line 80
-			$labels[] = _('Quota');
-		} elseif ($hookname == "quota_link_project_admin") {
-			// www/project/admin/project_admin_utils.php line 99
-			$group_id=$params['group'];
-			$links[] = '/plugins/quota_management/quota.php?group_id='.$group_id;
+			case "site_admin_option_hook": {
+				echo '<li>'.$this->getAdminOptionLink().'</li>';
+				$returned = true;
+				break;
+			}
+			case "groupadminmenu": {
+				$params['labels'][] = _ ('Quota');
+				$group_id = $params['group'];
+				$params['links'][] = '/plugins/quota_management/index.php?id='.$group_id.'&type=admin&pluginname='.$this->name;
+				$params['attr_r'][] = array('class' => 'tabtitle', 'title' => _('View the quota_management Administration'));
+				$returned = true;
+				break;
+			}
 		}
+		return $returned;
 	}
 
 	function getAdminOptionLink() {

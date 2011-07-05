@@ -29,12 +29,12 @@
 */
 
 function project_admin_header($params) {
-	global $group_id,$feedback,$HTML;
+	global $group_id, $feedback, $HTML;
 
-	$params['toptab']='admin';
-	$params['group']=$group_id;
+	$params['toptab'] = 'admin';
+	$params['group'] = $group_id;
 
-	session_require_perm ('project_admin', $group_id) ;
+	session_require_perm('project_admin', $group_id);
 
 	$project = group_get_object($group_id);
 	if (!$project || !is_object($project)) {
@@ -47,64 +47,59 @@ function project_admin_header($params) {
 
 	$labels[] = _('Project Information');
 	$attr_r[] = array('class' => 'tabtitle', 'title' => _('General information about project. Tag, trove list, description.'));
+	$links[] = '/project/admin/?group_id='.$group_id;
+
 	$labels[] = _('Users and permissions');
 	$attr_r[] = array('class' => 'tabtitle', 'title' => _('Permissions management. Edit / Create roles. Assign new permissions to user. Add / Remove member.'));
+	$links[] = '/project/admin/users.php?group_id='.$group_id;
+
 	$labels[] = _('Tools');
 	$attr_r[] = array('class' => 'tabtitle', 'title' => _('Activate / Desactivate extensions like docman, forums, plugins.'));
+	$links[] = '/project/admin/tools.php?group_id='.$group_id;
+
 	$labels[] = _('Project History');
 	$attr_r[] = array('class' => 'tabtitle', 'title' => _('Show the significant change of your project.'));
+	$links[] = '/project/admin/history.php?group_id='.$group_id;
+
 	if(forge_get_config('use_people')) {
 		$labels[] = _('Post Jobs');
 		$attr_r[] = array('class' => 'tabtitle', 'title' => _('Hiring new people. Describe the job'));
+		$links[] = '/people/createjob.php?group_id='.$group_id;
 		$labels[] = _('Edit Jobs');
 		$attr_r[] = array('class' => 'tabtitle', 'title' => _('Edit already created available position in your project.'));
+		$links[] = '/people/?group_id='.$group_id;
 	}
+
 	if(forge_get_config('use_project_multimedia')) {
 		$labels[] = _('Edit Multimedia Data');
 		//TODO: set the title.
 		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
+		$links[] = '/project/admin/editimages.php?group_id='.$group_id;
 	}
 	if(forge_get_config('use_project_vhost')) {
 		$labels[] = _('VHOSTs');
 		//TODO: set the title.
 		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
+		$links[] = '/project/admin/vhost.php?group_id='.$group_id;
 	}
 	if(forge_get_config('use_project_database')) {
 		$labels[] = _('Database Admin');
 		//TODO: set the title.
 		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
+		$links[] = '/project/admin/database.php?group_id='.$group_id;
 	}
 	if ($project->usesStats()) {
 		$labels[] = _('Stats');
 		//TODO: set the title.
 		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
+		$links[] = '/project/stats/?group_id='.$group_id;
 	}
-	plugin_hook("quota_label_project_admin");
 
-	$links[] = '/project/admin/?group_id='.$group_id;
-	$links[] = '/project/admin/users.php?group_id='.$group_id;
-	$links[] = '/project/admin/tools.php?group_id='.$group_id;
-	$links[] = '/project/admin/history.php?group_id='.$group_id;
-	if(forge_get_config('use_people')) {
-		$links[] = '/people/createjob.php?group_id='.$group_id;
-		$links[] = '/people/?group_id='.$group_id;
-	}
-	if(forge_get_config('use_project_multimedia')) {
-		$links[] = '/project/admin/editimages.php?group_id='.$group_id;
-	}
-	if(forge_get_config('use_project_vhost')) {
-		$links[] = '/project/admin/vhost.php?group_id='.$group_id;
-	}
-	if(forge_get_config('use_project_database')) {
-		$links[] = '/project/admin/database.php?group_id='.$group_id;
-	}
-	$links[] = '/project/stats/?group_id='.$group_id;
-	plugin_hook("quota_link_project_admin");
-
-	$params['submenu'] = $HTML->subMenu($labels, $links, $attr_r);
-
+	$params['labels'] =& $labels;
+	$params['links'] =& $links;
+	$params['attr_r'] =& $attr_r;
 	plugin_hook("groupadminmenu", $params);
-
+	$params['submenu'] = $HTML->subMenu($params['labels'], $params['links'], $params['attr_r']);
 	site_project_header($params);
 }
 
