@@ -68,7 +68,7 @@ class Theme extends Layout {
 		if (!isset($params['title'])) {
 			$params['title'] = forge_get_config('forge_name');
 		} else {
-			$params['title'] = $params['title'] . " - forge_get_config('forge_name') ";
+			$params['title'] = $params['title'] . " - ".forge_get_config('forge_name');
 		}
 
 		echo '<table id="header" class="width-100p100">' . "\n";
