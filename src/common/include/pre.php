@@ -195,7 +195,7 @@ if ($sysdebug_enable && getenv('SERVER_SOFTWARE')) {
 	function sysdebug_lazymode($enable) {
 		/* nothing */
 	}
-	function sysdebug_ajaxbody($enable) {
+	function sysdebug_ajaxbody($enable=true) {
 		/* nothing */
 	}
 }
