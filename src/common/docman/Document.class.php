@@ -47,13 +47,6 @@ class Document extends Error {
 	var $Group;
 
 	/**
-	 * The Search engine path.
-	 *
-	 * @var	string	$engine_path
-	 */
-	var $engine_path;
-
-	/**
 	 * Constructor.
 	 *
 	 * @param	object	The Group object to which this document is associated.
@@ -61,7 +54,7 @@ class Document extends Error {
 	 * @param	array	The associative array of data.
 	 * @return	boolean	success.
 	 */
-	function Document(&$Group, $docid = false, $arr = false, $engine = '') {
+	function Document(&$Group, $docid = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setNotValidGroupObjectError();
@@ -96,7 +89,6 @@ class Document extends Error {
 				}
 			}
 		}
-		$this->engine_path = $engine;
 		return true;
 	}
 

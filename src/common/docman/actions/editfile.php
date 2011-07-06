@@ -56,12 +56,7 @@ switch ($fromview) {
 	}
 }
 
-if (empty($gfcommon)) {
-	$engine_dir = '../../common';
-} else {
-	$engine_dir = $gfcommon;
-}
-$d= new Document($g, $docid, false, $engine_dir.'/docman/engine/');
+$d= new Document($g, $docid);
 if ($d->isError())
 	session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 

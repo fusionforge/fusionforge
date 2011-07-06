@@ -66,13 +66,7 @@ if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !
 	exit_missing_param($_SERVER['HTTP_REFERER'], $missing_params, 'docman');
 }
 
-if (empty($gfcommon)) {
-	$engine_dir = '../../common';
-} else {
-	$engine_dir = $gfcommon;
-}
-
-$d = new Document($g, false, false, $engine_dir.'/docman/engine/');
+$d = new Document($g);
 
 if (!$d || !is_object($d)) {
 	$return_msg= _('Error getting blank document.');
