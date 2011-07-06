@@ -109,23 +109,4 @@ function docman_recursive_stateid($docgroup, $nested_groups, $nested_docs, $stat
 	}
 }
 
-// is it really used in trunk ?
-function docman_editdata_js() {
-	global $group_id;
-
-	echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */';
-	echo 'var lockInterval = new Array();';
-	echo 'function EditData(iddiv) {';
-	echo '	if ( "none" == document.getElementById(\'editdata\'+iddiv).style.display ) {';
-	echo '		document.getElementById(\'editdata\'+iddiv).style.display = "block";';
-	echo '		jQuery.get(\''. util_make_url('docman') .'\',{group_id:'. $group_id.',action:\'lockfile\',lock:1,fileid:iddiv});';
-	echo '		lockInterval[iddiv] = setInterval("jQuery.get(\''. util_make_url('docman') .'\',{group_id:'. $group_id .',action:\'lockfile\',lock:1,fileid:"+iddiv+"})",60000);';
-	echo '	} else {';
-	echo '		document.getElementById(\'editdata\'+iddiv).style.display = "none";';
-	echo '		jQuery.get(\''. util_make_url('docman') .'\',{group_id:'. $group_id .',action:\'lockfile\',lock:0,fileid:iddiv});';
-	echo '		clearInterval(lockInterval[iddiv]);';
-	echo '	}';
-	echo '}';
-	echo '/* ]]> */</script>'."\n";
-}
 ?>
