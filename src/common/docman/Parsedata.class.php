@@ -73,11 +73,6 @@ class Parsedata {
 		return preg_replace("/\n/", " ", "$rep $rep1");
 	}
 
-	function print_debug($text) {
-		echo "$text \n";
-		ob_flush();
-	}
-
 	function get_parser_list($parser_path) {
 		$file = $parser_path."parser_list.txt";
 		$rep = array();
