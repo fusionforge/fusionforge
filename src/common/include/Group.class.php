@@ -1758,6 +1758,7 @@ class Group extends Error {
 			}
 			if (!$i->delete()) {
 				$this->setError(_('Could not properly delete the survey'));
+				db_rollback();
 				return false;
 			}
 		}
@@ -1772,6 +1773,7 @@ class Group extends Error {
 			}
 			if (!$i->delete()) {
 				$this->setError(_('Could not properly delete the survey questions'));
+				db_rollback();
 				return false;
 			}
 		}
@@ -1786,6 +1788,7 @@ class Group extends Error {
 			}
 			if (!$i->delete(1,1)) {
 				$this->setError(_('Could not properly delete the mailing list'));
+				db_rollback();
 				return false;
 			}
 		}
@@ -2049,7 +2052,7 @@ class Group extends Error {
 
 		$hook_params['group'] = $this;
 		$hook_params['group_id'] = $this->getID();
-		$hook_params['user'] = &user_get_object($user_id);
+		$hook_params['user'] = user_get_object($user_id);
 		$hook_params['user_id'] = $user_id;
 		plugin_hook ("group_adduser", $hook_params);
 		

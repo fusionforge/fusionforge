@@ -1,6 +1,7 @@
 <?php
 /*
  * Copyright (C) 2010 Alcatel-Lucent
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.

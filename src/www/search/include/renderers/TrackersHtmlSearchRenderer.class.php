@@ -98,6 +98,13 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		
 		return TrackersSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
+
+	/**
+	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
+	 */
+	function redirectToResult() {
+		session_redirect('/tracker/?group_id='.$this->groupId.'&atid='.$this->getResultId('group_artifact_id').'&func=detail&aid='.$this->getResultId('artifact_id'));
+	}
 }
 
 // Local Variables:

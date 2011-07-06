@@ -22,7 +22,7 @@
 
 ######################################################################
 
-import sys, os, shutil, string, re
+import sys, os, shutil, string, re, subprocess
 
 ######################################################################
 # Global Settings
@@ -89,7 +89,11 @@ print "Beginning hot backup of '"+ repo_dir + "'."
 
 ### Step 1: get the youngest revision.
 
-infile, outfile, errfile = os.popen3(svnlook + " youngest " + repo_dir)
+p = subprocess.Popen([svnlook, 'youngest', repo_dir],
+                     stdin=subprocess.PIPE,
+                     stdout=subprocess.PIPE,
+                     stderr=subprocess.PIPE)
+infile, outfile, errfile = p.stdin, p.stdout, p.stderr
 stdout_lines = outfile.readlines()
 stderr_lines = errfile.readlines()
 outfile.close()

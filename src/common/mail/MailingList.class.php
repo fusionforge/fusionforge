@@ -123,7 +123,9 @@ class MailingList extends Error {
 		
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
 		
-		if(!validate_email($realListName.'@'.forge_get_config('lists_host'))) {
+		// '|' or '/' are valid chars in emails but are not allowed by mailman.
+		if( preg_match('/[|\/]/', $realListName) ||
+			!validate_email($realListName.'@'.forge_get_config('lists_host'))) {
 			$this->setError(_('Invalid List Name') . ': ' .
 			$realListName.'@'.forge_get_config('lists_host'));
 			return false;
@@ -159,7 +161,7 @@ class MailingList extends Error {
 						  $description)) ;
 		
 		if (!$result) {
-			$this->setError(sprintf(_('Error Creating %1$s'), _('Error Creating %1$s')).db_error());
+			$this->setError(_('Error Creating mailing list: ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -212,7 +214,7 @@ Thank you for registering your project with %1$s.
 					array ($groupListId,
 					       $this->Group->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(sprintf(_('Error Getting %1$s'), _('Error Getting %1$s')));
+			$this->setError(_('Error Getting mailing list'));
 			return false;
 		}
 		$this->dataArray = db_fetch_array($res);

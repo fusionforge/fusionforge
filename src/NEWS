@@ -1,3 +1,67 @@
+Release notes for FusionForge 5.1
+---------------------------------
+
+FusionForge 5.1 is another incremental step over 5.0, although it's a
+large step in some regards, with about 3000 commits since version 5.0.
+
+The FusionForge team would like to dedicate this release to the memory
+of Alexandre Neymann, who passed away in March 2011.  Alexandre was
+one of the founding members of the FusionForge project in 2009, and
+one of its most active developers.  His death has meant a great loss
+to us all.
+
+On the user interface front, the project summary pages and users'
+personal pages are now built out of blocks called "widgets" that can
+be rearranged at will; these widgets (taken from Codendi) allow
+greater flexibility on how the pages look.  A new theme, called Funky,
+is now available, with a more modern feel (contributed by Capgemini).
+In the same field, the old help window has been replaced with a new
+unobtrusive tooltip system (Alcatel-Lucent).  A less visible aspect is
+that the generated webpages are now much closer to full XHTML
+compliance.
+
+Among the improvements in features, the document manager has been
+vastly rewritten (by Capgemini again), with more features and an
+improved usability; more improvements are planned for the next
+release, but this should bring the docman to something we're no longer
+ashamed of :-)
+
+Many improvements in the trackers have been contributed (by
+Alcatel-Lucent), including a progress bar and improvements in sorting.
+
+The permissions system has been enhanced and made more flexible, with
+the new ability to have several roles at once in the same project and
+to share roles across projects (contributed by Roland Mas as part of
+the Coclico project).
+
+New projects can now cloned from one of a set of configurable
+templates, thus allowing forges to have standard shapes for their
+common project organizations (Roland Mas, Coclico).
+
+New plugins have been written or merged from Codendi as part of the
+Coclico project: Mailman, Forumml, Hudson and SoapAdmin.  Not all are
+production-ready yet, but they're made available for the adventurous.
+Other new plugins include a gravatar plugin (Alain Peyrat) and a
+"blocks" plugin allowing to add free descriptions in several places
+(Alcatel-Lucent).
+
+Behind the scenes, the configuration system has also been made
+simpler, it now uses standard *.ini files that are taken into account
+immediately; the Apache configuration files are also splitted out into
+independent components, rather than a large generated file.  (Both by
+Roland Mas.)
+
+Another improvement making installation easier is the availability
+packages in RPM format for Red Hat Enterprise Linux and CentOS, in
+addition to the *.deb packages for Debian-based distributions.
+Installation from source is still supported, of course.
+
+As usual, this release provides scripts to migrate what needs to be
+migrated to the new schemes (in this case, for the database schema,
+the configuration variables and the existing permissions).  Care
+should still be taken to check the results of these migrations, as a
+safety net.
+
 Release notes for FusionForge 5.0
 ---------------------------------
 

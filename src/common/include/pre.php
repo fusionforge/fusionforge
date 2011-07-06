@@ -255,6 +255,26 @@ if (forge_get_config('database_name')!=""){
 	ini_set('date.timezone', forge_get_config ('default_timezone'));
 
 	if (isset($_SERVER['SERVER_SOFTWARE'])) { // We're on the web
+		// Detect upload larger that upload allowed size.
+		if ( $_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
+		     empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0 )
+		{
+			$displayMaxSize = ini_get('post_max_size');
+			
+			switch ( substr($displayMaxSize,-1) )
+			{
+			case 'G':
+				$displayMaxSize = $displayMaxSize * 1024;
+			case 'M':
+				$displayMaxSize = $displayMaxSize * 1024;
+			case 'K':
+				$displayMaxSize = $displayMaxSize * 1024;
+			}
+
+			$error_msg = sprintf(_('Posted data is too large. %1$s exceeds the maximum size of %2$s'),
+					     human_readable_bytes($_SERVER['CONTENT_LENGTH']), human_readable_bytes($displayMaxSize));
+		}
+
 		// exit_error() and variants (for the web)
 		require_once $gfcommon.'include/exit.php';
 
