@@ -70,6 +70,6 @@ $dm = new DocumentManager($g);
 if (!$dg->setParentDocGroupId($dm->getTrashID()))
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-$return_msg = sprintf(_('Directory %s moved to trash successfully.'),$dg->getName());
+$return_msg = sprintf(_('Documents folder %s moved to trash successfully.'),$dg->getName());
 session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$currentParent.'&feedback='.urlencode($return_msg));
 ?>

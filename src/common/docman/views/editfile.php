@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -57,13 +58,11 @@ if (array_key_exists($dirid,$nested_docs) && is_array($nested_docs[$dirid])) {
 /* ]]> */</script>
 <div id="editfile<?php echo $d->getID(); ?>" style="display:none" class="docman_div_include">
 <p>
-<strong>
-<?php echo _('Document Title:') ?>
-</strong>
+<strong><?php echo _('Document Title:') ?></strong>
 <?php echo _('Refers to the relatively brief title of the document (e.g. How to use the download server).') ?>
-<p><strong>
-<?php echo _('Description:') ?>
-</strong>
+</p>
+<p>
+<strong><?php echo _('Description:') ?></strong>
 <?php echo _('A brief description to be placed just under the title.') ?>
 </p>
 <?php
@@ -135,7 +134,7 @@ if (array_key_exists($dirid,$nested_docs) && is_array($nested_docs[$dirid])) {
 ?>
 	<tr>
 		<td>
-			<strong><?php echo _('Directory that document belongs in') ?></strong><br />
+			<strong><?php echo _('Folder that document belongs in') ?></strong><br />
 			<?php
 				if ($d->getStateID() == 2) {
 					$newdgf = new DocumentGroupFactory($g);

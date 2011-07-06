@@ -71,7 +71,7 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 		}
 	}
 
-	/** 
+	/**
 	 * If the served document has wrong relative links, then
 	 * theses links may redirect to the same document with another
 	 * name, this way a search engine may loop and stress the
@@ -214,7 +214,7 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 				}
 				unlink($file);
 			} else {
-				$warning_msg = _('This directory is empty.');
+				$warning_msg = _('This documents folder is empty.');
 				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 			}
 		} elseif ( $arr[5] === 'selected' ) {

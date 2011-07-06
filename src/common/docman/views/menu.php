@@ -6,6 +6,7 @@
  * Copyright 2000, Quentin Cregan/SourceForge
  * Copyright 2002-2004, GForge Team
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -41,12 +42,12 @@ $menu_links = array();
 $menu_attr = array();
 
 $menu_text[] = _('List files & Directories');
-$menu_links[] = '/docman/?group_id='.$group_id.'&view=listfile&dirid=0';
-$menu_attr[] = array('title' => _('View the files and the directories in 2 panels. Left a directory tree, right a list of files of specific directory'), 'id' => 'listFileDocmanMenu', 'class' => 'tabtitle-nw');
+$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=listfile&amp;dirid=0';
+$menu_attr[] = array('title' => _('View files and folders in 2 panels. Left a folder tree, right a list of files of selected folder.'), 'id' => 'listFileDocmanMenu', 'class' => 'tabtitle-nw');
 
 if (forge_check_perm('docman', $group_id, 'submit')) {
 	$menu_text[] = _('Add new item');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&view=additem';
+	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=additem';
 	$menu_attr[] = array('title' => _('Add a new item such as file, create directory, inject a zip at root level.'), 'id' => 'addItemDocmanMenu', 'class' => 'tabtitle');
 }
 
@@ -58,7 +59,7 @@ if ($g->useDocmanSearch()) {
 
 if (forge_check_perm('docman', $group_id, 'approve')) {
 	$menu_text[] = _('Trash');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&view=listtrashfile';
+	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=listtrashfile';
 	$menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu', 'class' => 'tabtitle');
 }
 

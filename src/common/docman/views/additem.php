@@ -57,16 +57,16 @@ function doItInject() {
 <?php
 echo '<div class="docmanDivIncluded" >';
 echo '<input id="buttonDoc" type="radio" name="type" value="document" />';
-echo '<label id="labelDoc" class="tabtitle-nw" title="'. _('Submit a new document in this directory.').'" >'. _('Submit a new document.') .'</label>';
+echo '<label id="labelDoc" class="tabtitle-nw" title="'. _('Submit a new document in this folder.').'" >'. _('Submit a new document.') .'</label>';
 if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo '<input id="buttonDir" type="radio" name="type" value="directory" />';
-	echo '<labelid="labelDir" class="tabtitle-nw" title="'. _('Create a directory based on this name.').'" >'. _('Add a new directory.') .'</label>';
+	echo '<label id="labelDir" class="tabtitle-nw" title="'. _('Create a folder based on this name.').'" >'. _('Add a new directory.') .'</label>';
 	echo '<input id="buttonZip" type="radio" name="type" value="zip" />';
-	echo '<label id="labelZip" class="tabtitle-w" title="'. _('Create a full directory tree using an compressed archive. Only zip or rar format support.').'" >'. _('Inject Tree') . '</label>';
+	echo '<label id="labelZip" class="tabtitle-w" title="'. _('Create a full folders tree using an compressed archive. Only zip format support.').'" >'. _('Inject Tree') . '</label>';
 }
 if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo '<div class="docman_div_include" id="addsubdocgroup" style="display:none;">';
-	echo '<h4 class="docman_h4">'. _('Add a new subdirectory') .'</h4>';
+	echo '<h4 class="docman_h4">'. _('Add a new sub folder') .'</h4>';
 	include ($gfcommon.'docman/views/addsubdocgroup.php');
 	echo '</div>';
 }

@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,30 +51,26 @@ if (extension_loaded('zip')) {
 	echo '</form>';
 }
 
-echo '<form id="createonline" name="createonline" method="post" action="?group_id='.$group_id.'&action=updatecreateonline" >';
+echo '<form id="createonline" name="createonline" method="post" action="?group_id='.$group_id.'&amp;action=updatecreateonline" >';
 echo '<ul>';
-
 $createOnlineStatus = '1';
 $labelCreateOnline = _('Enable Create Online Documents');
 if ($g->useCreateOnline()) {
 	$createOnlineStatus='0';
 	$labelCreateOnline = _('Disable Create Online Documents');
 }
-
 echo '<li><input name="status" type="hidden" value="'.$createOnlineStatus.'"><input id="submitcreateonline" type="button" value="'.$labelCreateOnline.'" onclick="javascript:doIt(\'createonline\')"></li>';
 echo '</ul>';
 echo '</form>';
 
 echo '<form id="searchengine" name="searchengine" method="post" action="?group_id='.$group_id.'&amp;action=updateenginesearch" >';
 echo '<ul>';
-
 $searchEngineStatus = '1';
 $labelSearchEngine = _('Enable Search Engine');
 if ($g->useDocmanSearch()) {
 	$searchEngineStatus='0';
 	$labelSearchEngine = _('Disable Search Engine');
 }
-
 echo '<li><input name="status" type="hidden" value="'.$searchEngineStatus.'"><input id="submitsearchengine" type="button" value="'.$labelSearchEngine.'" onclick="javascript:doIt(\'searchengine\')"></li>';
 echo '</ul>';
 echo '</form>';
@@ -101,6 +98,5 @@ if (forge_get_config('use_webdav')) {
 }
 
 plugin_hook('hierarchy_views', array($group_id, 'docman'));
-
 echo '</div>';
 ?>

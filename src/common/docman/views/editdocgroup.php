@@ -6,6 +6,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -47,7 +48,7 @@ if ($dg->isError())
 		<input type="hidden" name="dirid" value="<?php echo $dirid; ?>" />
 		<table>
 			<tr>
-				<td><?php echo _('Directory Name') ?></td>
+				<td><?php echo _('Folder Name') ?></td>
 				<td><input type="text" name="groupname" value="<?php echo $dg->getName(); ?>" /></td>
 				<td>&nbsp;</td>
 				<td><?php echo _('belongs to') ?></td>
@@ -65,7 +66,7 @@ if ($dg->getState() == 2) {
 			</tr>
 		</table>
 		<p>
-		<?php echo _('Directory name will be used as a title, so it should be formatted correspondingly.') ?>
+		<?php echo _('Folder name will be used as a title, so it should be formatted correspondingly.') ?>
 		</p>
 	</form>
 </div>

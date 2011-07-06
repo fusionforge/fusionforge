@@ -39,7 +39,7 @@ class DocumentFactory extends Error {
 	/**
 	 * The Documents dictionary.
 	 *
-	 * @var	array		Contains doc_group_id as key and the array of documents associated to that id.
+	 * @var	array	Contains doc_group_id as key and the array of documents associated to that id.
 	 */
 	var $Documents;
 
@@ -64,7 +64,7 @@ class DocumentFactory extends Error {
 
 	/**
 	 * The columns order
-	 * @var	array		Contains the order of columns to sort before return documents in getDocuments.
+	 * @var	array	Contains the order of columns to sort before return documents in getDocuments.
 	 *		Default value is title order
 	 */
 	var $order = array('title');
@@ -261,7 +261,7 @@ class DocumentFactory extends Error {
 	 * getDocuments - returns an array of Document objects.
 	 *
 	 * @param	integer	no cache : force reinit $this->Documents : default: cache is used
-	 * @return	array		Document objects.
+	 * @return	array	Document objects.
 	 * @access	public
 	 */
 	function &getDocuments($nocache = 0) {
@@ -390,28 +390,6 @@ class DocumentFactory extends Error {
 		}
 		return true;
 	}
-
-	/**
-	 * getStates - Return an array of states that have documents associated to them
-	 */
-	function getUsedStates() {
-		$result = db_query_params('SELECT DISTINCT doc_states.stateid,doc_states.name
-					FROM doc_states,doc_data
-					WHERE doc_data.stateid=doc_states.stateid
-					ORDER BY doc_states.name ASC',
-					array());
-		if (!$result) {
-			exit_error(db_error(), 'docman');
-		}
-
-		$return = array();
-		while ($arr = db_fetch_array($result)) {
-			$return[] = $arr;
-		}
-
-		return $return;
-	}
-
 }
 
 // Local Variables:

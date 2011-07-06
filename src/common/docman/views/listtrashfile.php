@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -96,8 +97,8 @@ jQuery(document).ready(function() {
 });
 /* ]]> */</script>
 <?php
-	echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&action=emptytrash" >';
-	echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents with deleted status.') .'" >';
+	echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&amp;action=emptytrash" >';
+	echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents and folders with deleted status.') .'" >';
 	echo '</form></div>';
 
 	echo '<div id="left" style="float:left; width:17%; min-width: 50px;">';
@@ -106,14 +107,14 @@ jQuery(document).ready(function() {
 	echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
 	echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
 	if ($DocGroupName) {
-		echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
+		echo '<h3 class="docman_h3" >'._('Documents folder:').' <i>'.$DocGroupName.'</i>&nbsp;';
 		if ($DocGroupName != '.trash') {
-			echo '<a href="#" id="docman-editdirectory" class="tabtitle" title="'._('Edit this directory').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-			echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Delete permanently this directory and his content.').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+			echo '<a href="#" id="docman-editdirectory" class="tabtitle" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
+			echo '<a href="?group_id='.$group_id.'&amp;action=deldir&amp;dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Delete permanently this folder and his content.').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 		}
 		echo '</h3>';
 		echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
-		echo '<h4 class="docman_h4">'. _('Edit this directory') .'</h4>';
+		echo '<h4 class="docman_h4">'. _('Edit this folder') .'</h4>';
 		include ($gfcommon.'docman/views/editdocgroup.php');
 		echo '</div>';
 	}
@@ -146,7 +147,7 @@ jQuery(document).ready(function() {
 				$html_image_attr = array();
 				$html_image_attr['alt'] = _('new');
 				$html_image_attr['class'] = 'docman-newdocument';
-				$html_image_attr['title'] = _('Created or updated since less than 7 days');
+				$html_image_attr['title'] = _('Updated since less than 7 days');
 				echo html_image('docman/new.png', '14', '14', $html_image_attr);
 			}
 			echo '&nbsp;'.$d->getFileName();
@@ -170,23 +171,14 @@ jQuery(document).ready(function() {
 					break;
 				}
 				default: {
-					$metric = 'B';
-					$size = $d->getFileSize();
-					if ($size > 1024 ) {
-						$metric = 'KB';
-						$size = floor($size/1024);
-						if ($size > 1024 ) {
-							$metric = 'MB';
-							$size = floor($size/1024);
-						}
-					}
-					echo $size . $metric;
-					echo '</td>';
+					echo human_readable_bytes($d->getFileSize());
+					break;
 				}
 			}
+			echo '</td>';
 
 			echo '<td>';
-			echo '<a class="tabtitle" href="?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
+			echo '<a class="tabtitle" href="?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
 			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListTrash.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 			echo '</td>';
 		}
@@ -197,8 +189,8 @@ jQuery(document).ready(function() {
 		echo _('Mass actions for selected documents:');
 		echo '</span>';
 		echo '<span id="massactionactive" style="display: none;" >';
-		echo '<a class="tabtitle" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Delete permanently.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
-		echo '<a class="tabtitle" href="#" onClick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
+		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&amp;fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Delete permanently.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
+		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
 		echo '</span>';
 		echo '</p>';
 		include ($gfcommon.'docman/views/editfile.php');

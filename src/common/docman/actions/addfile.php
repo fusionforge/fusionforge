@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Roland Mas
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -43,6 +44,10 @@ $manual_path = getStringFromRequest('manual_path');
 $type = getStringFromRequest('type');
 $name = getStringFromRequest('name');
 $stateid = getIntFromRequest('stateid');
+
+if ($error_msg) {
+	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
+}
 
 if (!$doc_group || $doc_group == 100) {
 	//cannot add a doc unless an appropriate group is provided
@@ -158,7 +163,7 @@ if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $ti
 		$return_msg = sprintf(_('Document %s submitted successfully.'),$d->getFilename());
 		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&feedback='.urlencode($return_msg));
 	} else {
-		$return_msg = sprintf(_('Document %s submitted successfully : pending state (need validation).'),$d->getFilename());
+		$return_msg = sprintf(_('Document %s has been successfully uploaded and is waiting to be approved.'),$d->getFilename());
 		session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
 	}
 }

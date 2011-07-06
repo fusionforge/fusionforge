@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,6 +51,6 @@ if ($dg->getState() != 2) {
 	$view='listtrashfile';
 }
 
-$return_msg = sprintf(_('Directory %s deleted successfully.'),$dg->getName());
+$return_msg = sprintf(_('Document folder %s deleted successfully.'),$dg->getName());
 session_redirect('/docman/?group_id='.$group_id.'&view='.$view.'&dirid='.$parentId.'&feedback='.urlencode($return_msg));
 ?>

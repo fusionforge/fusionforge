@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -44,11 +45,11 @@ function doItAddSubGroup() {
 echo '<div class="docmanDivIncluded" >';
 echo '<form id="addsubgroup" name="addsubgroup" method="post" action="?group_id='.$group_id.'&amp;action=addsubdocgroup&amp;dirid='.$dirid.'">';
 if ($dirid) {
-	echo _('Name of the document subdirectory to create:'). ' ';
+	echo _('Name of the document subfolder to create:'). ' ';
 } else {
-	echo _('Name of the document directory to create:'). ' ';
+	echo _('Name of the document folder to create:'). ' ';
 }
-echo '<input type="text" name="groupname" size="40" maxlength="255" >';
+echo '<input type="text" name="groupname" size="40" maxlength="255" />';
 echo '<input id="submitaddsubgroup" type="button" value="'. _('Create') .'" onclick="javascript:doItAddSubGroup()" />';
 echo '</form>';
 echo '</div>';

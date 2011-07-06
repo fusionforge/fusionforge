@@ -103,20 +103,11 @@ jQuery(document).ready(function() {
 					break;
 				}
 				default: {
-					$metric = 'B';
-					$size = $d->getFileSize();
-					if ($size > 1024 ) {
-						$metric = 'KB';
-						$size = floor($size/1024);
-						if ($size > 1024 ) {
-							$metric = 'MB';
-							$size = floor($size/1024);
-						}
-					}
-					echo $size . $metric;
-					echo '</td>';
+					echo human_readable_bytes($d->getFileSize());
+					break;
 				}
 			}
+			echo '</td>';
 
 			echo '<td>';
 			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListPending.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png', 22, 22, array('alt'=>_('Edit this document'))). '</a>';

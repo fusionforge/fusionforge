@@ -5,6 +5,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2010, Franck Villaume - Capgemini
  * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,18 +25,20 @@
  */
 
 class Parsedata {
+
+	var $parsers;
+
+	var $p_path;
+
 	/**
 	 * Constructor.
 	 *
 	 * @param	string	path to the parser list file
 	 * @return	boolean	true
 	 */
-	var $parsers;
-	var $p_path = "";
-
-	function Parsedata($ppath = "") {
-		$this->p_path = $ppath;
-		$this->parsers = $this->get_parser_list($ppath);
+	function Parsedata() {
+		$this->p_path = dirname(__FILE__).'/engine/';
+		$this->parsers = $this->get_parser_list($this->p_path);
 		return true;
 	}
 

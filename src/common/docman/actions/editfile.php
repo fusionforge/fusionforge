@@ -46,9 +46,7 @@ $filetype = getStringFromRequest('filetype');
 $editor = getStringFromRequest('editor');
 $fromview = getStringFromRequest('fromview');
 switch ($fromview) {
-	case 'admin':
-	case 'listrashfile':
-	case 'listpendingfile': {
+	case 'listrashfile': {
 		$urlparam = '&view='.$fromview;
 		break;
 	}
@@ -95,7 +93,6 @@ if (($editor) && ($d->getFileData()!=$data) && (!$uploaded_data['name'])) {
 	$filename = $d->getFileName();
 	$filetype = $d->getFileType();
 }
-
 if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid))
 	session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 

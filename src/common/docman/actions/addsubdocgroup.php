@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,10 +51,10 @@ if (!$dg->create($groupname, $dirid))
 	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 if ($dirid) {
-	$return_msg = _('Subdirectory successfully created.');
+	$return_msg = _('Document subfolder successfully created.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 } else {
-	$return_msg = _('Directory successfully created.');
+	$return_msg = _('Document folder successfully created.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dg->getID().'&feedback='.urlencode($return_msg));
 }
 ?>

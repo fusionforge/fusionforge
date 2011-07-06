@@ -83,7 +83,7 @@ class DocumentGroupFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result) {
-			$this->setError(_('No Document Directory Found').' '.db_error());
+			$this->setError(_('No Documents Folder Found').' '.db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {
@@ -118,7 +118,7 @@ class DocumentGroupFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
-			$this->setError(_('No Document Directory Found').' '.db_error());
+			$this->setError(_('No Documents Folder Found').' '.db_error());
 		} else {
 			while ($arr = db_fetch_array($result)) {
 				$this->flat_groups[] = new DocumentGroup($this->Group, $arr);

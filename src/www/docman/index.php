@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -117,7 +117,7 @@ use_javascript('scripts/DocManController.js');
 use_javascript('/js/sortable.js');
 use_stylesheet('/jscook/ThemeXP/theme.css');
 
-$title = _('Document Manager');
+$title = _('Documents for ').$g->getPublicName();
 
 site_project_header(array('title'=>$title, 'group'=>$group_id, 'toptab'=>'docman'));
 

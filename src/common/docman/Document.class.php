@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -105,10 +106,10 @@ class Document extends Error {
 	 *	@param	string	The filename of this document. Can be a URL.
 	 *	@param	string	The filetype of this document. If filename is URL, this should be 'URL';
 	 *	@param	string	The contents of this document.
-	 *	@param	int		The doc_group id of the doc_groups table.
+	 *	@param	int	The doc_group id of the doc_groups table.
 	 *	@param	string	The title of this document.
 	 *	@param	string	The description of this document.
-	 *	@param	int		The state id of the document. At creation, can not be deleted status.
+	 *	@param	int	The state id of the document. At creation, can not be deleted status.
 	 *	@return	boolean	success.
 	 */
 	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0) {
@@ -154,7 +155,7 @@ class Document extends Error {
 
 		// key words for in-document search
 		if ($this->Group->useDocmanSearch()) {
-			$kw = new Parsedata($this->engine_path);
+			$kw = new Parsedata();
 			$kwords = $kw->get_parse_data($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
 		} else {
 			$kwords ='';
@@ -765,7 +766,6 @@ class Document extends Error {
 	 * @return	boolean	success.
 	 */
 	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid) {
-		global $LUSER;
 
 		$perm =& $this->Group->getPermission();
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
@@ -773,7 +773,8 @@ class Document extends Error {
 			return false;
 		}
 
-		if ($this->getLockedBy() != $LUSER->getID()) {
+		$user = session_get_user();
+		if ($this->getLocked() && ($this->getLockedBy() != $user->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -833,7 +834,7 @@ class Document extends Error {
 
 			// key words for in-document search
 			if ($this->Group->useDocmanSearch()) {
-				$kw = new Parsedata($this->engine_path);
+				$kw = new Parsedata();
 				$kwords = $kw->get_parse_data($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
 			} else {
 				$kwords = '';
