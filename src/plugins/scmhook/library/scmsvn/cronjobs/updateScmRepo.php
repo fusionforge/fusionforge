@@ -44,20 +44,29 @@ function updateScmRepo($params) {
 	if (is_dir($svndir_root)) {
 		@unlink($svndir_root.'/hooks/pre-commit');
 		@unlink($svndir_root.'/hooks/post-commit');
-		foreach($hooksAvailable as $hookAvailable) {
+		foreach($hooksAvailable['pre-commit'] as $hookAvailable) {
+			@unlink($svndir_root.'/hooks/'.$hookAvailable);
+		}
+		foreach($hooksAvailable['post-commit'] as $hookAvailable) {
 			@unlink($svndir_root.'/hooks/'.$hookAvailable);
 		}
 
 		$newHooks = explode('|', $hooksString);
 		foreach($newHooks as $newHook) {
-			$noprecommitFilename = preg_replace('/pre-commit_/','',$newHook);
-			$filename = preg_replace('/post-commit_/','',$noprecommitFilename);
-			copy(dirname(__FILE__).'/../hooks/'.$filename, $svndir_root.'/hooks/'.$filename);
-			chmod($svndir_root.'/hooks/'.$filename, 0755);
+			if (stristr($newHook, 'pre-commit')) {
+				$filename = preg_replace('/pre-commit_/','',$newHook);
+				copy(dirname(__FILE__).'/../hooks/pre-commit/'.$filename, $svndir_root.'/hooks/'.$filename);
+				chmod($svndir_root.'/hooks/'.$filename, 0755);
+			}
+			if (stristr($newHook, 'post-commit')) {
+				$filename = preg_replace('/post-commit_/','',$newHook);
+				copy(dirname(__FILE__).'/../hooks/post-commit/'.$filename, $svndir_root.'/hooks/'.$filename);
+				chmod($svndir_root.'/hooks/'.$filename, 0755);
+			}
 		}
 		// prepare the pre-commit
 		$file = fopen("/tmp/pre-commit-$unixname.tmp", "w");
-		fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/pre-commit.head'));
+		fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/pre-commit/pre-commit.head'));
 		$loopid = 0;
 		$string = '';
 		foreach($newHooks as $newHook) {
@@ -66,7 +75,7 @@ function updateScmRepo($params) {
 					//insert && \ between commands
 					$string .= ' && ';
 				}
-				$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/'.$newHook));
+				$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/pre-commit/'.$newHook));
 				$loopid = 1;
 			}
 		}
@@ -79,7 +88,7 @@ function updateScmRepo($params) {
 
 		// prepare the post-commit
 		$file = fopen("/tmp/post-commit-$unixname.tmp", "w");
-		fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-commit.head'));
+		fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-commit/post-commit.head'));
 		$loopid = 0;
 		$string = '';
 		foreach($newHooks as $newHook) {
@@ -88,7 +97,7 @@ function updateScmRepo($params) {
 					//insert && \ between commands
 					$string .= ' && ';
 				}
-				$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/'.$newHook));
+				$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/post-commit/'.$newHook));
 				$loopid = 1;
 			}
 		}
