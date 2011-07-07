@@ -1421,15 +1421,15 @@ function util_get_maxuploadfilesize() {
 
 function util_get_compressed_file_extension() {
 	$m = forge_get_config('compression_method');
-	if (preg_match ('/^gzip /', $m)) {
+	if (preg_match ('/^gzip\b/', $m)) {
 		return '.gz';
-	} elseif (preg_match ('/^bzip2 /', $m)) {
+	} elseif (preg_match ('/^bzip2\b/', $m)) {
 		return '.bzip2';
-	} elseif (preg_match ('/^lzma /', $m)) {
+	} elseif (preg_match ('/^lzma\b/', $m)) {
 		return '.lzma';
-	} elseif (preg_match ('/^xz /', $m)) {
+	} elseif (preg_match ('/^xz\b/', $m)) {
 		return '.xz';
-	} elseif (preg_match ('/^cat /', $m)) {
+	} elseif (preg_match ('/^cat\b/', $m)) {
 		return '';
 	} else {
 		return '.compressed';

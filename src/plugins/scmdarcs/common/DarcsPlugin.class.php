@@ -402,7 +402,7 @@ class DarcsPlugin extends SCMPlugin {
 		$dir = $project->getUnixName ()."-$today" ;
 		system ("mkdir -p $tmp/$dir") ;
 		system ("cd $tmp ; darcs $repo $dir > /dev/null 2>&1") ;
-		system ("tar cCf $tmp - $dir |".forge_get_config('compression_method')."> snapshot") ;
+		system ("tar cCf $tmp - $dir |".forge_get_config('compression_method')."> $tmp/snapshot") ;
 		chmod ("$tmp/snapshot", 0644) ;
 		copy ("$tmp/snapshot", $snapshot) ;
 		unlink ("$tmp/snapshot") ;
