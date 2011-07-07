@@ -87,8 +87,8 @@ if (getStringFromRequest('submit')) {
 		$built_from_template = $template_projects[0]->getID() ;
 	}
 
+	$scm_host = '';
 	if (forge_get_config('use_scm')) {
-		$scm_host = '';
 		$plugin = false ;
 		if (forge_get_config('use_scm') && $scm && $scm != 'noscm') {
 			$plugin = plugin_get_object($scm);
@@ -96,6 +96,11 @@ if (getStringFromRequest('submit')) {
 				$scm_host = $plugin->getDefaultServer();
 			}
 		}
+	}
+
+	if ($scm_host == '') {
+		$scm_host = forge_get_config('web_host');
+	}
 
 		if ( !$purpose && forge_get_config ('project_auto_approval') ) {
 			$purpose = 'No purpose given, autoapprove was on';
@@ -147,7 +152,6 @@ if (getStringFromRequest('submit')) {
 			$HTML->footer(array());
 			exit();
 		}
-	}
 } else if (getStringFromRequest('i_disagree')) {
 	session_redirect("/");
 } else {
