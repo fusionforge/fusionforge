@@ -165,7 +165,7 @@ install2(){
 	done
 
 	cp $fusionforge_dir/etc/config.ini-opt $fusionforge_etc_dir/config.ini
-	cp -rL $fusionforge_dir/etc/config.ini.d $fusionforge_etc_dir/config.ini.d
+	cp -rL $fusionforge_dir/etc/config.ini.d $fusionforge_etc_dir/
 
 	# Install default configuration files for all plugins.
 	mkdir -p $fusionforge_etc_dir/plugins/
@@ -216,11 +216,16 @@ install2(){
 	then
 		mkdir -p plugins
 	fi
-	for plugin in cvstracker svntracker message scmcvs fckeditor blocks authbuiltin
+	for plugin in cvstracker svntracker message scmcvs fckeditor blocks
 	do
 		if [ ! -L "$plugin" ]
 		then
-			ln -s ../../plugins/$plugin/www/ $plugin
+			if [ -d ../plugins/$plugin/www/ ]
+			then
+				ln -s ../plugins/$plugin/www/ $plugin
+			else
+				msg red "TARGET DIR ../plugins/$plugin/www/ doesn't exist for plugin $plugin"
+			fi
 		fi
 	done
 
