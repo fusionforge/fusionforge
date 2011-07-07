@@ -4,12 +4,14 @@ then
 	database=$1
 else
 	export PATH=$PATH:/usr/share/gforge/bin/:/usr/share/gforge/utils:/opt/gforge/utils
-	database=`forge_get_config database_name`
+	database=`FUSIONFORGE_NO_PLUGINS=true forge_get_config database_name`
 fi
 if [ "x$database" = "x" ]
 then
 	echo "Forge database name not found"
 	exit 1
+else
+	echo "Forge database is $database"
 fi
 
 echo "Cleaning up the database"
@@ -23,10 +25,13 @@ else
 fi
 
 su - postgres -c "dropdb -e $database"
-echo "Executing: pg_restore -C -d template1 < /root/dump"
-su - postgres -c "pg_restore -C -d template1" < /root/dump
+#echo "Executing: pg_restore -C -d template1 < /root/dump"
+#su - postgres -c "pg_restore -C -d template1" < /root/dump
 #echo "Executing: psql < /root/dump"
 #su - postgres -c "psql" < /root/dump
+
+echo "Executing: psql -f- < /root/dump"
+su - postgres -c "psql -f-" < /root/dump > /var/log/pg_restore.log 2>/var/log/pg_restore.err
 
 if type invoke-rc.d 2>/dev/null
 then
