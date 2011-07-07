@@ -22,7 +22,6 @@
  */
 
 require_once $gfcommon.'include/Error.class.php';
-include_once $gfcommon.'pkginfo.inc.php';
 
 class FusionForge extends Error {
 
@@ -34,21 +33,27 @@ class FusionForge extends Error {
 	 *	FusionForge - FusionForge object constructor
 	 */
 	function FusionForge() {
-		global $forge_pkg_name, $forge_pkg_version;
-
 		$this->Error();
 
-		$this->software_name = 'FusionForge' ;
-		$this->software_version = '5.1' ;
+		// Some variables are overridden if installed from a package
+		@include_once $gfcommon.'pkginfo.inc.php';
 
-		if (isset($forge_pkg_name) && isset($forge_pkg_version)) {
+		if (isset($forge_pkg_name)) {
 			$this->software_name = $forge_pkg_name;
-			$this->software_version = $forge_pkg_version;
+		} else {
+			$this->software_name = 'FusionForge' ;
 		}
 
-		$this->software_type = $this->software_name;
+		if (isset($forge_pkg_version)) {
+			$this->software_version = $forge_pkg_version;
+		} else {
+			$this->software_version = '5.1' ;
+		}
+
 		if (isset($forge_pkg_type)) {
 			$this->software_type = $forge_pkg_type;
+		} else {
+			$this->software_type = $this->software_name;
 		}
 
 		return true;
