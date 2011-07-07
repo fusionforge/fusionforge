@@ -102,56 +102,56 @@ if (getStringFromRequest('submit')) {
 		$scm_host = forge_get_config('web_host');
 	}
 
-		if ( !$purpose && forge_get_config ('project_auto_approval') ) {
-			$purpose = 'No purpose given, autoapprove was on';
-		}
+	if ( !$purpose && forge_get_config ('project_auto_approval') ) {
+		$purpose = 'No purpose given, autoapprove was on';
+	}
 
-		$send_mail = ! forge_get_config ('project_auto_approval') ;
+	$send_mail = ! forge_get_config ('project_auto_approval') ;
 
-		$group = new Group();
-		$u = session_get_user();
-		$res = $group->create(
-			$u,
-			$full_name,
-			$unix_name,
-			$description,
-			$purpose,
-			'shell1',
-			$scm_host,
-			0,
-			$send_mail,
-			$built_from_template
+	$group = new Group();
+	$u = session_get_user();
+	$res = $group->create(
+		$u,
+		$full_name,
+		$unix_name,
+		$description,
+		$purpose,
+		'shell1',
+		$scm_host,
+		0,
+		$send_mail,
+		$built_from_template
 		);
-		if ($res && forge_get_config('use_scm') && $plugin) {
-			$group->setUseSCM (true) ;
-			$res = $group->setPluginUse ($scm, true);
-		} else {
-			$group->setUseSCM (false) ;
-		}
+	if ($res && forge_get_config('use_scm') && $plugin) {
+		$group->setUseSCM (true) ;
+		$res = $group->setPluginUse ($scm, true);
+	} else {
+		$group->setUseSCM (false) ;
+	}
 
-		if (!$res) {
-			form_release_key(getStringFromRequest("form_key"));
-			$error_msg .= $group->getErrorMessage();
-		} else {
-			$HTML->header(array('title'=>_('Registration complete')));
+	if (!$res) {
+		form_release_key(getStringFromRequest("form_key"));
+		$error_msg .= $group->getErrorMessage();
+	} else {
+		$HTML->header(array('title'=>_('Registration complete')));
 
-			if ( ! forge_get_config ('project_auto_approval') ) {
-				printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
-			} else if ($group->isError()) {
-				printf(_('<div class="error">ERROR: %1$s</div>'), $group->getErrorMessage() );
+		if ( ! forge_get_config ('project_auto_approval') ) {
+			printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
+		} else if ($group->isError()) {
+			printf(_('<div class="error">ERROR: %1$s</div>'), $group->getErrorMessage() );
+		} else {
+			printf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
+
+			if (!$group->approve( user_get_object_by_name ( forge_get_config ('project_auto_approval_user') ) ) ) {
+				printf(_('<div class="error">Approval ERROR: %1$s</div>'), $group->getErrorMessage() );
 			} else {
-				printf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
-
-				if (!$group->approve( user_get_object_by_name ( forge_get_config ('project_auto_approval_user') ) ) ) {
-					printf(_('<div class="error">Approval ERROR: %1$s</div>'), $group->getErrorMessage() );
-				} else {
-					printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
-				}
+				printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
 			}
-
-			$HTML->footer(array());
-			exit();
 		}
+
+		$HTML->footer(array());
+		exit();
+	}
 } else if (getStringFromRequest('i_disagree')) {
 	session_redirect("/");
 }
