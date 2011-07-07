@@ -216,15 +216,16 @@ install2(){
 	then
 		mkdir -p plugins
 	fi
-	for plugin in cvstracker svntracker message scmcvs fckeditor blocks
+	cd $fusionforge_src_dir/www/plugins
+	for plugin in cvstracker svntracker message scmcvs fckeditor blocks authbuiltin
 	do
 		if [ ! -L "$plugin" ]
 		then
-			if [ -d ../plugins/$plugin/www/ ]
+			if [ -d ../../plugins/$plugin/www/ ]
 			then
-				ln -s ../plugins/$plugin/www/ $plugin
+				ln -s ../../plugins/$plugin/www/ $plugin
 			else
-				msg red "TARGET DIR ../plugins/$plugin/www/ doesn't exist for plugin $plugin"
+				msg red "TARGET DIR ../../plugins/$plugin/www/ doesn't exist for plugin $plugin"
 			fi
 		fi
 	done
