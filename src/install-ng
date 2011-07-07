@@ -1,8 +1,8 @@
-#!/bin/sh -e
+#!/bin/sh
 #
 # Simple wrapper for FusionForge installation
 #
-# Usage: ./install.sh <hostname>
+# Usage: ./install-ng <hostname>
 #
 # This will install all the fusionforge code in /opt/gforge
 # Configuration is stored in /etc/gforge
@@ -30,20 +30,13 @@ os=$(detect_os)
 
 if [ -d "/opt/gforge" ]
 then
-	# If we install in place
-	if [ "`pwd`" == "/opt/gforge" ]
+	if [ -f "/etc/gforge/install_completed" ]
 	then
-		if [ -f "/opt/gforge/install_completed" ]
-		then
-			mode="update"
-			echo "Upgrading previous installation ...";
-		else
-			mode="install"
-			echo "Installing FusionForge ...";
-		fi
-	else
 		mode="update"
 		echo "Upgrading previous installation ...";
+	else
+		mode="install"
+		echo "Installing FusionForge ...";
 	fi
 else
 	mode="install"
@@ -153,4 +146,7 @@ case $type in
 esac
 
 echo "check /etc/gforge/local.inc for $hostname specific FusionForge settings"
-touch /opt/gforge/install_completed
+echo "Write INSTALL COMPLETED"
+date >> /etc/gforge/install_completed
+ls -al /etc/gforge/install_completed
+
