@@ -153,7 +153,7 @@ install2(){
 
 	# Create default location for gforge config files
 	mkdir -p $fusionforge_etc_dir
-	if [ -f $fusionforge_etc_dir/httpd.conf ]
+	if [ ! -f $fusionforge_etc_dir/httpd.conf ]
 	then
 		cp $fusionforge_dir/etc/httpd.conf-opt $fusionforge_etc_dir/httpd.conf
 	fi
@@ -180,17 +180,29 @@ install2(){
 		fi
 	done
 		
-	for file in /etc/httpd/conf/httpd.conf /opt/csw/apache2/etc/httpd.conf /etc/apache2/httpd.conf
+	for file in /opt/csw/apache2/etc/httpd.conf /etc/apache2/httpd.conf
 	do
 		if [ -f $file ]
 		then 
 			msg green 'Setting FusionForge Include For Apache...'
-			if ! grep -q "^Include" $fusionforge_etc_dir/httpd.conf $file > /dev/null 2>&1
+			if ! grep -q "^Include $fusionforge_etc_dir/httpd.conf" $file > /dev/null 2>&1
 			then
 				echo "Include $fusionforge_etc_dir/httpd.conf" >> $file
 			fi
 		fi
 	done
+	if [ -f /etc/httpd/conf/httpd.conf ]
+	then
+		if [ ! -f /etc/httpd/conf.d/gforge.conf ]
+		then 
+			echo "Include $fusionforge_etc_dir/httpd.conf" > /etc/httpd/conf.d/gforge.conf
+		fi
+		if grep -q "^Include $fusionforge_etc_dir/httpd.conf" /etc/httpd/conf/httpd.conf > /dev/null 2>&1
+		then
+			echo "Remove include from /etc/httpd/conf/httpd.conf"
+			perl -pi -e "s!^Include $fusionforge_etc_dir/httpd.conf!!" /etc/httpd/conf/httpd.conf
+		fi
+	fi
 		
 	# Create symlink for the wiki plugin.
 	if [ ! -d $fusionforge_src_dir/www/wiki ]
