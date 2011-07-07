@@ -248,6 +248,9 @@ EOF
 			create_db_admin_user "$gforge_db" "$admin_user"
 			$fusionforge_src_dir/utils/forge_set_password "$admin_user" "$FFORGE_ADMIN_PASSWORD"
 		fi
+	else
+		create_db_admin_user "$gforge_db" "$admin_user"
+		$fusionforge_src_dir/utils/forge_set_password "$admin_user" "$FFORGE_ADMIN_PASSWORD"
 	fi
 }
 
