@@ -98,10 +98,6 @@ if (getStringFromRequest('submit')) {
 		}
 	}
 
-	if ($scm_host == '') {
-		$scm_host = forge_get_config('web_host');
-	}
-
 	if ( !$purpose && forge_get_config ('project_auto_approval') ) {
 		$purpose = 'No purpose given, autoapprove was on';
 	}

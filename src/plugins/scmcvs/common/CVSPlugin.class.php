@@ -70,7 +70,7 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForAnon ($project) {
-		$cvsrootend = $project->getSCMBox().':'.forge_get_config('repos_path', 'scmcvs').'/'.$project->getUnixName();
+		$cvsrootend = $this->getBoxForProject($project).':'.forge_get_config('repos_path', 'scmcvs').'/'.$project->getUnixName();
         $b = '<h2>' . _('Anonymous CVS Access') . '</h2>';
         $b .= '<p>';
         $b .= _('This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.');
@@ -84,7 +84,7 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForRW ($project) {
-		$cvsrootend = $project->getSCMBox().':'.forge_get_config('repos_path', 'scmcvs').'/'.$project->getUnixName();
+		$cvsrootend = $this->getBoxForProject($project).':'.forge_get_config('repos_path', 'scmcvs').'/'.$project->getUnixName();
 		if (session_loggedin()) {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;

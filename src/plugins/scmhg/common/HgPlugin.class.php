@@ -65,7 +65,7 @@ class HgPlugin extends SCMPlugin {
 			$b .= '<p>' ;
 			$b .= _('Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
 			$b .= '</p>' ;
-			$b .= '<p><tt>hg clone ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'/ .</tt></p>' ;
+			$b .= '<p><tt>hg clone ssh://'.$d.'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		} else {
 			$d = '<i>developername</i>';
 			$b = '</h2>' ;
@@ -74,7 +74,7 @@ class HgPlugin extends SCMPlugin {
 			$b .= '<p>' ;
 			$b .= _('Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.');
 			$b .= '</p>' ;
-			$b .= '<p><tt>hg clone ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'/ .</tt></p>' ;
+			$b .= '<p><tt>hg clone ssh://'.$d.'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		}
 		return $b ;
 	}

@@ -244,6 +244,17 @@ abstract class SCMPlugin extends Plugin {
 		}
 	}
 
+	function getBoxForProject($project) {
+		$box = $project->getSCMBox();
+		if ($box == '') {
+			$box = forge_get_config('default_server', $this->name);
+		}
+		if ($box == '') {
+			$box = forge_get_config('web_host');
+		}
+		return $box;
+	}
+
 	function checkParams ($params) {
 		$group_id = $params['group_id'] ;
 		$project = group_get_object($group_id);

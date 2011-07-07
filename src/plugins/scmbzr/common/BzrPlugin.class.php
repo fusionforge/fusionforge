@@ -97,7 +97,7 @@ class BzrPlugin extends SCMPlugin {
 			$b .= '<p>';
 			$b .= _('Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
 			$b .= '</p>';
-			$b .= '<p><tt>bzr checkout bzr+ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
+			$b .= '<p><tt>bzr checkout bzr+ssh://'.$d.'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
 		} else {
 			$b .= '<h2>';
 			$b .= _('Developer Bazaar Access via SSH');
@@ -105,7 +105,7 @@ class BzrPlugin extends SCMPlugin {
 			$b .= '<p>';
 			$b .= _('Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.');
 			$b .= '</p>';
-			$b .= '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
+			$b .= '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
 		}
 		return $b ;
 	}

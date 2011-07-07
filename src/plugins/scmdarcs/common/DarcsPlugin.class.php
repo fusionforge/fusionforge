@@ -98,7 +98,7 @@ class DarcsPlugin extends SCMPlugin {
  			}
  			if ($rw)
  			{
- 				$url = $project->getSCMBox() . ':'. $this->getRootRepositories($project) . '/' . $default_repo;
+ 				$url = $this->getBoxForProject($project) . ':'. $this->getRootRepositories($project) . '/' . $default_repo;
  			}
  			else
  			{
