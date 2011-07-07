@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh
 
 export CURDIR=`pwd`
 export WORKSPACE=${WORKSPACE:-$CURDIR}
@@ -94,27 +94,33 @@ else
 	scp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 fi
 
-cat > $WORKSPACE/build/config/phpunit <<-EOF
-HUDSON_URL=$HUDSON_URL
-JOB_NAME=$JOB_NAME
-EOF
-
 rsync -a --delete src/ root@$HOST:/opt/gforge/
-rsync -a --delete tests/ root@$HOST:/opt/gforge/tests/
 
-ssh root@$HOST "/opt/gforge/install-ng"
+ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=ffadmin FFORGE_ADMIN_PASSWORD=ffadmin /opt/gforge/install-ng"
 
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
-ssh root@$HOST "cd /opt/gforge/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=$DB_NAME php db_reload.php"
 #  Install a fake sendmail to catch all outgoing emails.
 # ssh root@$HOST "perl -spi -e s#/usr/sbin/sendmail#/opt/tests/scripts/catch_mail.php# /etc/gforge/local.inc"
 ssh root@$HOST "service crond stop" || true
 
 retcode=0
+# TODO: Make test dir a parameter
+echo "Transfer phpunit test on $HOST"
+cat > $WORKSPACE/build/config/phpunit <<-EOF
+HUDSON_URL=$HUDSON_URL
+JOB_NAME=$JOB_NAME
+EOF
+scp -r $WORKSPACE/build/config  root@$HOST:/root/
+rsync -a 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root/selenium-server.jar
+rsync -a --delete tests/ root@$HOST:/root/tests/
+
+echo "DB reload for phpunit test on $HOST"
+ssh root@$HOST "/root/tests/func/db_reload.sh"
+
 echo "Run phpunit test on $HOST"
-ssh -X root@$HOST "/opt/gforge/tests/scripts/phpunit.sh TarCentos52Tests.php" || retcode=$?
+ssh -X root@$HOST "cd /root; ./tests/scripts/phpunit.sh TarCentos52Tests.php" || retcode=$?
 
 if [ "x$SELENIUM_RC_DIR" != "x" ]
 then
