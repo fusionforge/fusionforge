@@ -101,10 +101,10 @@ scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 			echo '</tr></tbody></table>'."\n";
 		}
 	} else {
-		echo '<p>'._('Error - Site has SCM but no plugins registered').'</p>';
+		echo '<p class="error_msg">'._('Error - Site has SCM but no plugins registered').'</p>';
 	}
 
-	plugin_hook ("scm_admin_page", $hook_params) ;
+	plugin_hook("scm_admin_page", $hook_params);
 ?>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
