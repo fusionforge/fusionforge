@@ -85,16 +85,18 @@ class scmhookPlugin extends Plugin {
 		$updatedb = 0;
 		foreach($params as $key => $value) {
 			if ($key == strstr($key, 'scm')) {
-				$updatedb = 1;
 				$hookname = preg_replace('/scm[a-z][a-z][a-z]_/','',$key);
-				$extensions = $this->getAllowedExtension();
-				foreach($extensions as $extension) {
-					$hookname = preg_replace('/_'.$extension.'$/', '.'.$extension, $hookname);
-				}
-				if (strlen($hooksString)) {
-					$hooksString .= '|'.$hookname;
-				} else {
-					$hooksString .= $hookname;
+				if ($key != $hookname) {	//handle the case of scm_enable_anonymous
+					$updatedb = 1;
+					$extensions = $this->getAllowedExtension();
+					foreach($extensions as $extension) {
+						$hookname = preg_replace('/_'.$extension.'$/', '.'.$extension, $hookname);
+					}
+					if (strlen($hooksString)) {
+						$hooksString .= '|'.$hookname;
+					} else {
+						$hooksString .= $hookname;
+					}
 				}
 			}
 		}
@@ -198,6 +200,21 @@ class scmhookPlugin extends Plugin {
 		return array();
 	}
 
+	function isHookEnabled($group_id, $hookname) {
+		$res = db_query_params('SELECT hooks FROM plugin_scmhook
+					WHERE id_group = $1
+					AND hooks like $2',
+					array($group_id, '%'.$hookname.'%'));
+
+		if (!$res)
+			return false;
+
+		if (db_numrows($res) != 1)
+			return false;
+
+		return true;
+	}
+
 	function getListLibraryScm() {
 		return array_values(array_diff(scandir(dirname(__FILE__).'/../library/'), Array('.', '..', '.svn')));
 	}
@@ -224,7 +241,7 @@ class scmhookPlugin extends Plugin {
 	}
 
 	function getAllowedExtension() {
-		return array("sh", "pl");
+		return array("sh", "pl", "php");
 	}
 
 	/**
