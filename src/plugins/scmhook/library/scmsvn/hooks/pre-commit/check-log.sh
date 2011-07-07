@@ -57,7 +57,7 @@
 # that subprograms fail to launch unless invoked via absolute path.
 # If you're having unexpected problems with a hook program, the
 # culprisage de log obligatoire !" may be unusual (or missing) environment variables.
-# 
+#
 # Here is an example hook script, for a Unix /bin/sh interpreter.
 # For more examples and pre-written hooks, see those in
 # the Subversion repository at
@@ -73,9 +73,9 @@ RESULT=$?
 if [ $RESULT -eq "0" ]; then
         exit 0
 else
-        echo -e "-------------------------SIRHEN PRE COMMIT HOOK-------------------------" 1>&2
-        echo -e "\nChaque commit doit se voir accompagner d'un commentaire explicatif.\n" 1>&2
-        echo -e "-------------------------SIRHEN PRE COMMIT HOOK-------------------------" 1>&2
+        echo -e "---------PRE COMMIT HOOK---------" 1>&2
+        echo -e "\nEvery commit must have a log.\n" 1>&2
+        echo -e "---------------------------------" 1>&2
         exit 1
 fi
 

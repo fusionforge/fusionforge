@@ -2500,9 +2500,10 @@ src/plugins/scmhook/cronjobs/updateScmRepo.php -text
 src/plugins/scmhook/db/scmhook-init.sql -text
 src/plugins/scmhook/etc/scmhook.ini -text
 src/plugins/scmhook/library/scmsvn/cronjobs/updateScmRepo.php -text
-src/plugins/scmhook/library/scmsvn/hooks/check-mime-type.pl -text
-src/plugins/scmhook/library/scmsvn/skel/pre-commit.check-mime-type.pl -text
-src/plugins/scmhook/library/scmsvn/skel/pre-commit.head -text
+src/plugins/scmhook/library/scmsvn/hooks/pre-commit/check-mime-type.pl -text
+src/plugins/scmhook/library/scmsvn/skel/post-commit/post-commit.head -text
+src/plugins/scmhook/library/scmsvn/skel/pre-commit/pre-commit.check-mime-type.pl -text
+src/plugins/scmhook/library/scmsvn/skel/pre-commit/pre-commit.head -text
 src/plugins/scmsvn/NAME -text
 src/plugins/scmsvn/bin/install.sh svneol=native#text/x-sh
 src/plugins/scmsvn/etc/scmsvn.ini -text

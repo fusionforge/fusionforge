@@ -135,11 +135,11 @@ foreach my $path ( @files_added )
 		# Detect error conditions and add them to @errors
 		if (not $mime_type)
 			{
-				push @errors, "$path : svn:mime-type n'est pas defini";
+				push @errors, "$path : svn:mime-type undefined";
 			}
 		elsif ($mime_type =~ /^text\// and not $eol_style)
 			{
-				push @errors, "$path : svn:eol-style n'est pas defini (svn:mime-type=$mime_type)";
+				push @errors, "$path : svn:eol-style undefined (svn:mime-type=$mime_type)";
 			}
 	}
 
@@ -149,30 +149,15 @@ foreach my $path ( @files_added )
 if (@errors)
   {
     #warn "$0:\n\n",
-    warn "-------------------------SIRHEN PRE COMMIT HOOK-------------------------\n\nListe des fichiers en erreurs:\n\t",
+    warn "-------------------------PRE COMMIT HOOK-------------------------\n\nFiles in error state:\n\t",
          join("\n\t", @errors), "\n\n",
 				 <<EOS;
-Explications:
-\tChaque fichier ajoute sur SVN doit posseder la propriete:
+Explication:
+\EEvery file added into SVN must have svn:propriety set on:
 \t\tsvn:mime-type
-\tDe plus, les fichiers textes doivent egalement posseder la propriete:
+\tAll text files must also have svn:eol-style set on:
 \t\tsvn:eol-style
-
-Configuration de l'environnement:
-\tSi votre environnement de developpement SIRHEN est correctement configure,
-\tce message ne devrait jamais s'afficher. Dans le cas contraire, verifiez la
-\tconfiguration automatique des proprietes SVN dans le menu MyEclipse:
-\t\tWindow > Preferences > Team > SVN > Properties Configuration
-
-Commandes en ligne:
-\tPour les fichiers binaires:
-\t\tsvn propset svn:mime-type application/octet-stream path/of/file
-
-\tPour les fichiers textes:
-\t\tsvn propset svn:mime-type text/plain path/of/file
-\t\tsvn propset svn:eol-style native path/of/file
-
--------------------------SIRHEN PRE COMMIT HOOK-------------------------
+-------------------------PRE COMMIT HOOK-------------------------
 EOS
     exit 1;
   }

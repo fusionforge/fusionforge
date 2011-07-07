@@ -50,8 +50,10 @@ function updateScmRepo($params) {
 
 		$newHooks = explode('|', $hooksString);
 		foreach($newHooks as $newHook) {
-			copy(dirname(__FILE__).'/../hooks/'.$newHook, $svndir_root.'/hooks/'.$newHook);
-			chmod($svndir_root.'/hooks/'.$newHook, 0755);
+			$noprecommitFilename = preg_replace('/pre-commit_/','',$newHook);
+			$filename = preg_replace('/post-commit_/','',$noprecommitFilename);
+			copy(dirname(__FILE__).'/../hooks/'.$filename, $svndir_root.'/hooks/'.$filename);
+			chmod($svndir_root.'/hooks/'.$filename, 0755);
 		}
 		// prepare the pre-commit
 		$file = fopen("/tmp/pre-commit-$unixname.tmp", "w");
@@ -59,19 +61,43 @@ function updateScmRepo($params) {
 		$loopid = 0;
 		$string = '';
 		foreach($newHooks as $newHook) {
-			if ($loopid) {
-				//insert && \ between commands
-				$string .= ' && ';
+			if (stristr($newHook, 'pre-commit.')) {
+				if ($loopid) {
+					//insert && \ between commands
+					$string .= ' && ';
+				}
+				$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/'.$newHook));
+				$loopid = 1;
 			}
-			$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/pre-commit.'.$newHook));
-			$loopid = 1;
 		}
 		$string .= "\n";
-		fwrite($file,$string);
+		fwrite($file, $string);
 		fclose($file);
 		copy('/tmp/pre-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/pre-commit');
 		chmod($svndir_root.'/hooks/pre-commit', 0755);
 		unlink('/tmp/pre-commit-'.$unixname.'.tmp');
+
+		// prepare the post-commit
+		$file = fopen("/tmp/post-commit-$unixname.tmp", "w");
+		fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-commit.head'));
+		$loopid = 0;
+		$string = '';
+		foreach($newHooks as $newHook) {
+			if (stristr($newHook, 'post-commit.')) {
+				if ($loopid) {
+					//insert && \ between commands
+					$string .= ' && ';
+				}
+				$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/'.$newHook));
+				$loopid = 1;
+			}
+		}
+		$string .= "\n";
+		fwrite($file, $string);
+		fclose($file);
+		copy('/tmp/post-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/post-commit');
+		chmod($svndir_root.'/hooks/post-commit', 0755);
+		unlink('/tmp/post-commit-'.$unixname.'.tmp');
 		return true;
 	}
 	return false;

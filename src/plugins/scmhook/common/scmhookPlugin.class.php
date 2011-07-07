@@ -82,8 +82,10 @@ class scmhookPlugin extends Plugin {
 	function update($params) {
 		$group_id = $params['group_id'];
 		$hooksString = '';
+		$updatedb = 0;
 		foreach($params as $key => $value) {
 			if ($key == strstr($key, 'scm')) {
+				$updatedb = 1;
 				$hookname = preg_replace('/scm[a-z][a-z][a-z]_/','',$key);
 				$extensions = $this->getAllowedExtension();
 				foreach($extensions as $extension) {
@@ -96,43 +98,70 @@ class scmhookPlugin extends Plugin {
 				}
 			}
 		}
-		$res = db_query_params('UPDATE plugin_scmhook set hooks = $1, need_update = 1 where id_group = $2',
-					array($hooksString, $group_id));
+		if ($updatedb) {
+			$res = db_query_params('UPDATE plugin_scmhook set hooks = $1, need_update = 1 where id_group = $2',
+						array($hooksString, $group_id));
 
-		if (!$res)
-			return false;
+			if (!$res)
+				return false;
 
+		}
 		return true;
 	}
 
 	function displayScmHook($group_id) {
 		$hooksAvailable = $this->getAvailableHooks($group_id);
 		$statusDeploy = $this->getStatusDeploy($group_id);
-		if (count($hooksAvailable)) {
+		if (count($hooksAvailable['pre-commit']) || count($hooksAvailable['post-commit'])) {
 			$hooksEnabled = $this->getEnabledHooks($group_id);
 			echo '<div id="scmhook">';
 			if ($statusDeploy)
 				echo '<p class="warning">'._('Hooks management update process waiting ...').'</p>';
 
-			echo '<table>';
-			echo '<thead><tr><th>'._('Enable Repository Hooks').'</th></tr></thead>';
-			echo '<tbody>';
-			for ($i = 0; $i < count($hooksAvailable); $i++) {
-				$labelHook = preg_replace('/scm[a-z][a-z][a-z]_/','',$hooksAvailable[$i]);
-				echo '<tr><td>';
-				echo '<input name="'.$hooksAvailable[$i].'" type="checkbox"';
+			echo '<h3>'._('Enable Repository Hooks').'</h3>';
+			if (count($hooksAvailable['pre-commit'])) {
+				echo '<table>';
+				echo '<thead><tr><th>'._('pre-commit Hooks').'</th></tr></thead>';
+				echo '<tbody>';
+				for ($i = 0; $i < count($hooksAvailable['pre-commit']); $i++) {
+					$labelHook = preg_replace('/scm[a-z][a-z][a-z]_pre-commit_/','',$hooksAvailable['pre-commit'][$i]);
+					echo '<tr><td>';
+					echo '<input name="'.$hooksAvailable['pre-commit'][$i].'" type="checkbox"';
 
-				if (in_array($labelHook, $hooksEnabled))
-					echo ' checked="checked"';
+					if (in_array($labelHook, $hooksEnabled))
+						echo ' checked="checked"';
 
-				if ($statusDeploy)
-					echo ' disabled="disabled"';
+					if ($statusDeploy)
+						echo ' disabled="disabled"';
 
-				echo '/>';
-				echo '<label>'.$labelHook.'</label>';
-				echo '</td></tr>';
+					echo '/>';
+					echo '<label>'.$labelHook.'</label>';
+					echo '</td></tr>';
+				}
+				echo '</tbody></table>';
 			}
-			echo '</tbody></table></div>';
+			if (count($hooksAvailable['post-commit'])) {
+				echo '<table>';
+				echo '<thead><tr><th>'._('post-commit Hooks').'</th></tr></thead>';
+				echo '<tbody>';
+				for ($i = 0; $i < count($hooksAvailable['post-commit']); $i++) {
+					$labelHook = preg_replace('/scm[a-z][a-z][a-z]_post-commit_/','',$hooksAvailable['post-commit'][$i]);
+					echo '<tr><td>';
+					echo '<input name="'.$hooksAvailable['post-commit'][$i].'" type="checkbox"';
+
+					if (in_array($labelHook, $hooksEnabled))
+						echo ' checked="checked"';
+
+					if ($statusDeploy)
+						echo ' disabled="disabled"';
+
+					echo '/>';
+					echo '<label>'.$labelHook.'</label>';
+					echo '</td></tr>';
+				}
+				echo '</tbody></table>';
+			}
+			echo '</div>';
 		}
 	}
 
@@ -174,12 +203,21 @@ class scmhookPlugin extends Plugin {
 	}
 
 	function getListLibraryHook($scm) {
-		$listHooks = array_values(array_diff(scandir(dirname(__FILE__).'/../library/'.$scm.'/hooks'), Array('.', '..', '.svn')));
-		$listPrecommit = array_values(array_diff(scandir(dirname(__FILE__).'/../library/'.$scm.'/skel'), Array('.', '..', '.svn', 'pre-commit.head')));
+		$listHooksPrecommit = array_values(array_diff(scandir(dirname(__FILE__).'/../library/'.$scm.'/hooks/pre-commit'), Array('.', '..', '.svn')));
+		$listHooksPostcommit = array_values(array_diff(scandir(dirname(__FILE__).'/../library/'.$scm.'/hooks/post-commit'), Array('.', '..', '.svn')));
+		$listPrecommit = array_values(array_diff(scandir(dirname(__FILE__).'/../library/'.$scm.'/skel/pre-commit'), Array('.', '..', '.svn', 'pre-commit.head')));
+		$listPostcommit = array_values(array_diff(scandir(dirname(__FILE__).'/../library/'.$scm.'/skel/post-commit'), Array('.', '..', '.svn', 'post-commit.head')));
 		$validHooks = array();
-		foreach($listHooks as $hook) {
+		$validHooks['pre-commit'] = array();
+		foreach($listHooksPrecommit as $hook) {
 			if (in_array('pre-commit.'.$hook, $listPrecommit)) {
-				$validHooks[] = $scm.'_'.$hook;
+				$validHooks['pre-commit'][] = $scm.'_pre-commit_'.$hook;
+			}
+		}
+		$validHooks['post-commit'] = array();
+		foreach($listHooksPostcommit as $hook) {
+			if (in_array('post-commit.'.$hook, $listPostcommit)) {
+				$validHooks['post-commit'][] = $scm.'_post-commit_'.$hook;
 			}
 		}
 		return $validHooks;
