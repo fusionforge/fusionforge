@@ -59,8 +59,6 @@ case $type in
 	then
 		echo "Running install/install3"
 		install3
-		echo "Running php db/upgrade-db.php"
-		cd $scriptdir; php db/upgrade-db.php
 		echo "Running install/install4"
 		install4
 
@@ -77,12 +75,13 @@ case $type in
 		service iptables stop
 		msg="IMPORTANT: Service iptables (firewall) disabled, please reconfigure after"
 
-		cp packaging/cron.d/cron.fusionforge /etc/cron.d
-		cp plugins/*/etc/cron.d/* /etc/cron.d/
+		cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
+		cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
 		service crond reload
 	else
 		echo "Running php db/upgrade-db.php"
 		cd $scriptdir; php db/upgrade-db.php
+		echo "Running php utils/normalize_roles.php"
 		php utils/normalize_roles.php
 	fi
 	;;
