@@ -187,6 +187,20 @@ EOF
 	msg green " * Saving installation log in /tmp/gforge-import.log"
 }
 
+dropdbifexists()
+{
+	export PATH=$PATH:/usr/share/gforge/bin/:/usr/share/gforge/utils:/opt/gforge/utils
+	database=`FUSIONFORGE_NO_PLUGINS=true forge_get_config database_name`
+	if [ -z "$database" ]
+	then
+        	echo "Forge database name not found"
+        	exit 1
+	else
+		echo "Droping database $database"
+		su - postgres -c "dropdb -e $database"
+	fi
+}
+
 installandrundb()
 {
 	# USING $gforge_user, $gforge_db, $pghba, $fusionforge_src_dir, $fusionforge_etc_dir, $tsearch, $pgservice, $STDIN, $STDOUT;
