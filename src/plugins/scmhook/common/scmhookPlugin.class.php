@@ -263,6 +263,18 @@ class scmhookPlugin extends Plugin {
 		}
 	}
 
+	function task_extra_detail($params) {
+		$hooksAvailable = $this->getAvailableHooks($params['group_id']);
+		$hooksEnabled = $this->getEnabledHooks($params['group_id']);
+		foreach ($hooksAvailable as $hookAvailable) {
+			if (in_array($hookAvailable->getClassname(), $hooksEnabled)) {
+				if (method_exists($hookAvailable,'task_extra_detail')) {
+					$hookAvailable->task_extra_detail($params);
+				}
+			}
+		}
+	}
+
 	/**
 	 * override default groupisactivecheckboxpost function for init value in db
 	 */

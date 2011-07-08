@@ -50,6 +50,19 @@ class commitTracker extends scmhook {
 		}
 	}
 
+	function task_extra_detail($params) {
+		$DBResult = db_query_params ('SELECT * FROM plugin_scmhook_scmsvn_committracker_data_master, plugin_scmhook_scmsvn_committracker_data_artifact
+						WHERE plugin_scmhook_scmsvn_committracker_data_artifact.project_task_id=$1
+						AND plugin_scmhook_scmsvn_committracker_data_master.holder_id=plugin_scmhook_scmsvn_committracker_data_artifact.id
+						ORDER BY svn_date',
+						array($params['task_id']));
+		if (!$DBResult) {
+			echo '<p class="error_msg">'._('Unable to retrieve data').'</p>';
+		} else {
+			$this->getCommitEntries($DBResult, $params['group_id']);
+		}
+	}
+
 	/**
 	* It display a table with commit related to this tracker or task_extra_detail
 	*
