@@ -30,7 +30,6 @@ else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
 fi
 
-export DB_NAME=fforge
 export CONFIGURED=true
 
 export BUILDRESULT=$WORKSPACE/build/packages
@@ -98,7 +97,7 @@ echo "Sync code on root@$HOST:/opt/gforge/"
 rsync -a --delete src/ root@$HOST:/opt/gforge/
 
 echo "Run Install on $HOST"
-ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=admin FFORGE_ADMIN_PASSWORD=myadmin /opt/gforge/install-ng"
+ssh root@$HOST "/opt/gforge/install-ng --auto --reinit"
 
 echo "Dump freshly installed database"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
@@ -123,7 +122,13 @@ rsync -a 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar r
 rsync -a --delete tests/ root@$HOST:/root/tests/
 
 echo "Run phpunit test on $HOST"
-ssh -X root@$HOST "cd /root; ./tests/scripts/phpunit.sh TarCentos52Tests.php" || retcode=$?
+if xterm -e "sh -c exit" 2>/dev/null
+then
+	ssh -X root@$HOST "cd /root; ./tests/scripts/phpunit.sh TarCentos52Tests.php" || retcode=$?
+else
+	echo "No display is available, NOT RUNNING TESTS"
+	retcode=2
+fi
 
 if [ "x$SELENIUM_RC_DIR" != "x" ]
 then
