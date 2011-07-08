@@ -2504,12 +2504,16 @@ src/plugins/scmhook/etc/scmhook.ini -text
 src/plugins/scmhook/library/scmsvn/checkLog.class.php -text
 src/plugins/scmhook/library/scmsvn/checkMimetype.class.php -text
 src/plugins/scmhook/library/scmsvn/commitEmail.class.php -text
+src/plugins/scmhook/library/scmsvn/commitTracker.class.php -text
 src/plugins/scmhook/library/scmsvn/cronjobs/updateScmRepo.php -text
 src/plugins/scmhook/library/scmsvn/hooks/checkmimetype/check-mime-type.pl -text
 src/plugins/scmhook/library/scmsvn/hooks/commitemail/commit-email.php -text
 src/plugins/scmhook/library/scmsvn/hooks/commitemail/commit-email.pl -text
+src/plugins/scmhook/library/scmsvn/hooks/committracker/Snoopy.class.php -text
+src/plugins/scmhook/library/scmsvn/hooks/committracker/post.php -text
 src/plugins/scmhook/library/scmsvn/skel/post-commit/head -text
 src/plugins/scmhook/library/scmsvn/skel/pre-commit/head -text
+src/plugins/scmhook/www/committracker/newcommit.php -text
 src/plugins/scmsvn/NAME -text
 src/plugins/scmsvn/bin/install.sh svneol=native#text/x-sh
 src/plugins/scmsvn/etc/scmsvn.ini -text

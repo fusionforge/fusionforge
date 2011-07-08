@@ -53,7 +53,7 @@ class scmhookPlugin extends Plugin {
 				$group_id = $params['group_id'];
 				$group = &group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
-					$this->displayArtifactExtraDetail();
+					$this->displayArtifactExtraDetail($params['aid']);
 				}
 				break;
 			}
@@ -252,7 +252,12 @@ class scmhookPlugin extends Plugin {
 		return $validHooks;
 	}
 
-	function displayArtifactExtraDetail() {
+	function displayArtifactExtraDetail($aid) {
+		$DBResult = db_query_params('SELECT * FROM plugin_scmhook_scmsvn_committracker_data_master, plugin_scmhook_scmsvn_committracker_data_artifact
+						WHERE plugin_scmhook_scmsvn_committracker_data_artifact.group_artifact_id = $1
+						AND plugin_scmhook_scmsvn_committracker_data_master.holder_id = plugin_scmhook_scmsvn_committracker_data_artifact.id
+						ORDER BY svn_date',
+						array ($aid));
 		echo 'TOTO';
 	}
 
