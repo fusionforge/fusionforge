@@ -53,7 +53,7 @@ class scmhookPlugin extends Plugin {
 				$group_id = $params['group_id'];
 				$group = &group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
-					$this->displayArtifactExtraDetail($params['aid']);
+					$this->displayArtifactExtraDetail($params['artifact_id']);
 				}
 				break;
 			}
