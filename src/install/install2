@@ -144,6 +144,7 @@ install2(){
 	chmod -R 755 $fusionforge_dir/cronjobs/
 	chmod 755 $fusionforge_dir/www/scm/viewvc/bin/cgi/viewvc.cgi
 	chmod 755 $fusionforge_dir/utils/forge_get_config
+	chmod 755 $fusionforge_dir/utils/forge_set_password
 	find $fusionforge_dir -type f -name "*.sh" -exec chmod 755 {} \;
 	$fusionforge_dir/utils/manage-apache-config.sh build
 
