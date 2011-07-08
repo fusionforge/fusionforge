@@ -90,9 +90,9 @@ case $type in
 	install2 "$hostname" wwwrun www
 	if [ $mode = "install" ]
 	then
+		echo "Running install/install3"
 		install3
-		echo "Running php db/upgrade-db.php"
-		cd $scriptdir; php db/upgrade-db.php
+		echo "Running install/install4"
 		install4
 
 		# Post installation fixes.
@@ -114,8 +114,8 @@ case $type in
 		rcSuSEfirewall2 stop
 		msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
 
-		cp packaging/cron.d/cron.fusionforge /etc/cron.d
-		cp plugins/*/etc/cron.d/* /etc/cron.d/
+		cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
+		cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
 		rccron reload
 	else
 		echo "Running php db/upgrade-db.php"
