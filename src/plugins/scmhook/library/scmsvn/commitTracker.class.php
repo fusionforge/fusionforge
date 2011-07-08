@@ -34,5 +34,14 @@ class commitTracker extends scmhook {
 		$this->command = '/usr/bin/php -d include_path='.ini_get('include_path').' '.forge_get_config('plugins_path').'/scmhook/library/'.
 				$this->label.'/hooks/'.$this->unixname.'/post.php "$1" "$2"';
 	}
+
+	function artifact_extra_detail($aid) {
+		$DBResult = db_query_params('SELECT * FROM plugin_scmhook_scmsvn_committracker_data_master, plugin_scmhook_scmsvn_committracker_data_artifact
+						WHERE plugin_scmhook_scmsvn_committracker_data_artifact.group_artifact_id = $1
+						AND plugin_scmhook_scmsvn_committracker_data_master.holder_id = plugin_scmhook_scmsvn_committracker_data_artifact.id
+						ORDER BY svn_date',
+						array ($aid));
+		echo 'TOTO';
+	}
 }
 ?>
