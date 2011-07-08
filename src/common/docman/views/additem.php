@@ -59,8 +59,8 @@ echo '<div class="docmanDivIncluded" >';
 echo '<input id="buttonDoc" type="radio" name="type" value="document" />';
 echo '<label id="labelDoc" class="tabtitle-nw" title="'. _('Submit a new document in this folder.').'" >'. _('Submit a new document.') .'</label>';
 if (forge_check_perm('docman', $group_id, 'approve')) {
-	echo '<input id="buttonDir" type="radio" name="type" value="directory" />';
-	echo '<label id="labelDir" class="tabtitle-nw" title="'. _('Create a folder based on this name.').'" >'. _('Add a new directory.') .'</label>';
+	echo '<input id="buttonDir" type="radio" name="type" value="folder" />';
+	echo '<label id="labelDir" class="tabtitle-nw" title="'. _('Create a folder based on this name.').'" >'. _('Add a new folder.') .'</label>';
 	echo '<input id="buttonZip" type="radio" name="type" value="zip" />';
 	echo '<label id="labelZip" class="tabtitle-w" title="'. _('Create a full folders tree using an compressed archive. Only zip format support.').'" >'. _('Inject Tree') . '</label>';
 }

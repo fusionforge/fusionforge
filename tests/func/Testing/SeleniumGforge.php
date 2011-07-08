@@ -220,7 +220,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->waitForPageToLoad("30000");
 			$this->click("link=Add new item");
 			$this->waitForPageToLoad("30000");
-			$this->click("//input[@name='type' and @value='directory']");
+			$this->click("//input[@name='type' and @value='folder']");
 			$this->type("groupname", "Uncategorized Submissions");
 			$this->click("//input[@id='submitaddsubgroup']");
 			$this->waitForPageToLoad("30000");
