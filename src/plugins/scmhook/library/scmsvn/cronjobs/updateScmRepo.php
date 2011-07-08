@@ -44,69 +44,121 @@ function updateScmRepo($params) {
 	if (is_dir($svndir_root)) {
 		@unlink($svndir_root.'/hooks/pre-commit');
 		@unlink($svndir_root.'/hooks/post-commit');
-		foreach($hooksAvailable['pre-commit'] as $hookAvailable) {
-			@unlink($svndir_root.'/hooks/'.$hookAvailable);
+		$hooksPreCommit = array();
+		$hooksPostCommit = array();
+		foreach ($hooksAvailable as $hook) {
+			switch ($hook->getHookType()) {
+				case "pre-commit": {
+					$hooksPreCommit[] = $hook;
+					break;
+				}
+				case "post-commit": {
+					$hooksPostCommit[] = $hook;
+					break;
+				}
+				default: {
+					//byebye hook.... we do not validate you...
+					break;
+				}
+			}
 		}
-		foreach($hooksAvailable['post-commit'] as $hookAvailable) {
-			@unlink($svndir_root.'/hooks/'.$hookAvailable);
+
+		foreach($hooksPreCommit as $hookPreCommit) {
+			if ($hookPreCommit->needCopy()) {
+				foreach($hookPreCommit->getFiles() as $hookPreCommitFile) {
+					@unlink($svndir_root.'/hooks/'.basename($hookPreCommitFile));
+				}
+			}
+		}
+
+		foreach($hooksPostCommit as $hookPostCommit) {
+			if ($hookPostCommit->needCopy()) {
+				foreach($hookPostCommit->getFiles as $hookPostCommitFile) {
+					@unlink($svndir_root.'/hooks/'.basename($hookPostCommitFile));
+				}
+			}
 		}
 
 		$newHooks = explode('|', $hooksString);
-		foreach($newHooks as $newHook) {
-			if (stristr($newHook, 'pre-commit')) {
-				$filename = preg_replace('/pre-commit_/','',$newHook);
-				copy(dirname(__FILE__).'/../hooks/pre-commit/'.$filename, $svndir_root.'/hooks/'.$filename);
-				chmod($svndir_root.'/hooks/'.$filename, 0755);
-			}
-			if (stristr($newHook, 'post-commit')) {
-				$filename = preg_replace('/post-commit_/','',$newHook);
-				copy(dirname(__FILE__).'/../hooks/post-commit/'.$filename, $svndir_root.'/hooks/'.$filename);
-				chmod($svndir_root.'/hooks/'.$filename, 0755);
-			}
-		}
-		// prepare the pre-commit
-		$file = fopen("/tmp/pre-commit-$unixname.tmp", "w");
-		fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/pre-commit/pre-commit.head'));
-		$loopid = 0;
-		$string = '';
-		foreach($newHooks as $newHook) {
-			if (stristr($newHook, 'pre-commit.')) {
-				if ($loopid) {
-					//insert && \ between commands
-					$string .= ' && ';
+		if (count($newHooks)) {
+			$newHooksPreCommit = array();
+			$newHooksPostCommit = array();
+			foreach($newHooks as $newHook) {
+				foreach($hooksPreCommit as $hookPreCommit) {
+					if ($hookPreCommit->getClassname() == $newHook) {
+						$newHooksPreCommit[] = $hookPreCommit;
+					}
 				}
-				$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/pre-commit/'.$newHook));
-				$loopid = 1;
+				foreach($hooksPostCommit as $hookPostCommit) {
+					if ($hookPostCommit->getClassname() == $newHook) {
+						$newHooksPostCommit[] = $hookPostCommit;
+					}
+				}
 			}
 		}
-		$string .= "\n";
-		fwrite($file, $string);
-		fclose($file);
-		copy('/tmp/pre-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/pre-commit');
-		chmod($svndir_root.'/hooks/pre-commit', 0755);
-		unlink('/tmp/pre-commit-'.$unixname.'.tmp');
 
-		// prepare the post-commit
-		$file = fopen("/tmp/post-commit-$unixname.tmp", "w");
-		fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-commit/post-commit.head'));
-		$loopid = 0;
-		$string = '';
-		foreach($newHooks as $newHook) {
-			if (stristr($newHook, 'post-commit.')) {
+		foreach($newHooksPreCommit as $newHookPreCommit) {
+			if ($newHookPreCommit->needCopy()) {
+				foreach ($newHookPreCommit->getFiles() as $file) {
+					copy($file, $svndir_root.'/hooks/'.basename($file));
+					chmod($svndir_root.'/hooks/'.basename($file), 0755);
+				}
+			}
+		}
+
+
+		foreach($newHooksPostCommit as $newHookPostCommit) {
+			if ($newHookPostCommit->needCopy()) {
+				foreach ($newHookPostCommit->getFiles() as $file) {
+					copy($file, $svndir_root.'/hooks/'.basename($file));
+					chmod($svndir_root.'/hooks/'.basename($file), 0755);
+				}
+			}
+		}
+
+		if (count($newHooksPreCommit)) {
+			// prepare the pre-commit
+			$file = fopen("/tmp/pre-commit-$unixname.tmp", "w");
+			fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/pre-commit/head'));
+			$loopid = 0;
+			$string = '';
+			foreach($newHooksPreCommit as $newHookPreCommit) {
 				if ($loopid) {
 					//insert && \ between commands
 					$string .= ' && ';
 				}
-				$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/post-commit/'.$newHook));
+				$string .= $newHookPreCommit->getHookCmd();
 				$loopid = 1;
 			}
+			$string .= "\n";
+			fwrite($file, $string);
+			fclose($file);
+			copy('/tmp/pre-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/pre-commit');
+			chmod($svndir_root.'/hooks/pre-commit', 0755);
+			unlink('/tmp/pre-commit-'.$unixname.'.tmp');
 		}
-		$string .= "\n";
-		fwrite($file, $string);
-		fclose($file);
-		copy('/tmp/post-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/post-commit');
-		chmod($svndir_root.'/hooks/post-commit', 0755);
-		unlink('/tmp/post-commit-'.$unixname.'.tmp');
+
+		if (count($newHooksPostCommit)) {
+			// prepare the post-commit
+			$file = fopen("/tmp/post-commit-$unixname.tmp", "w");
+			fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-commit/head'));
+			$loopid = 0;
+			$string = '';
+			foreach($newHooksPostCommit as $newHookPostCommit) {
+				if ($loopid) {
+					//insert && \ between commands
+					$string .= ' && ';
+				}
+				$string .= $newHookPostCommit->getHookCmd();
+				$loopid = 1;
+			}
+			$string .= "\n";
+			fwrite($file, $string);
+			fclose($file);
+			copy('/tmp/post-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/post-commit');
+			chmod($svndir_root.'/hooks/post-commit', 0755);
+			unlink('/tmp/post-commit-'.$unixname.'.tmp');
+		}
 		return true;
 	}
 	return false;
