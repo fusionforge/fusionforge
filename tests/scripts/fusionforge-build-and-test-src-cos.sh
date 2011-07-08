@@ -83,7 +83,7 @@ else
 	scp src/rpm-specific/fusionforge.repo root@$HOST:/etc/yum.repos.d/
 fi
 
-# DAG
+# DAG REPO
 if [ ! -z "$DAG_RPMFORGE_REPO" ] ; then
 	echo "Installing specific DAG REPO $DAG_RPMFORGE_REPO"
 	cp src/rpm-specific/dag-rpmforge.repo $WORKSPACE/build/packages/dag-rpmforge.repo
@@ -94,15 +94,21 @@ else
 	scp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 fi
 
+echo "Sync code on root@$HOST:/opt/gforge/"
 rsync -a --delete src/ root@$HOST:/opt/gforge/
 
-ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=ffadmin FFORGE_ADMIN_PASSWORD=ffadmin /opt/gforge/install-ng"
+echo "Run Install on $HOST"
+ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=admin FFORGE_ADMIN_PASSWORD=myadmin /opt/gforge/install-ng"
 
+echo "Dump freshly installed database"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 
+echo "Set use_ssl=no"
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
 #  Install a fake sendmail to catch all outgoing emails.
 # ssh root@$HOST "perl -spi -e s#/usr/sbin/sendmail#/opt/tests/scripts/catch_mail.php# /etc/gforge/local.inc"
+
+echo "Stop cron daemon"
 ssh root@$HOST "service crond stop" || true
 
 retcode=0
@@ -116,9 +122,6 @@ scp -r $WORKSPACE/build/config  root@$HOST:/root/
 rsync -a 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root/selenium-server.jar
 rsync -a --delete tests/ root@$HOST:/root/tests/
 
-echo "DB reload for phpunit test on $HOST"
-ssh root@$HOST "/root/tests/func/db_reload.sh"
-
 echo "Run phpunit test on $HOST"
 ssh -X root@$HOST "cd /root; ./tests/scripts/phpunit.sh TarCentos52Tests.php" || retcode=$?
 
@@ -127,8 +130,15 @@ then
 	rsync -av root@$HOST:/var/log/ $SELENIUM_RC_DIR/
 fi
 
-cp $WORKSPACE/reports/phpunit-selenium.xml $WORKSPACE/reports/phpunit-selenium.xml.org
-xalan -in $WORKSPACE/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $WORKSPACE/reports/phpunit-selenium.xml
+if [ -f "$WORKSPACE/reports/phpunit-selenium.xml" ]
+then
+	echo "Fix selenium report"
+	cp $WORKSPACE/reports/phpunit-selenium.xml $WORKSPACE/reports/phpunit-selenium.xml.org
+	xalan -in $WORKSPACE/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $WORKSPACE/reports/phpunit-selenium.xml
+else
+	echo "Selenium report missing"
+	retcode=1
+fi
 
 if $KEEPVM 
 then
