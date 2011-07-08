@@ -6,13 +6,14 @@ CREATE TABLE plugin_scmhook (
 );
 
 CREATE TABLE plugin_scmhook_scmsvn_committracker_data_artifact (
-	id			serial PRIMARY KEY;
+	id			serial PRIMARY KEY,
 	kind			integer DEFAULT '0' NOT NULL,
 	group_artifact_id	integer,
 	project_task_id		integer
 );
+
 CREATE TABLE plugin_scmhook_scmsvn_committracker_data_master (
-	id		serial PRIMARY KEY;
+	id		serial PRIMARY KEY,
 	holder_id	integer NOT NULL,
 	svn_date	integer NOT NULL,
 	log_text	text DEFAULT '',
