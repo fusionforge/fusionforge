@@ -257,7 +257,7 @@ class scmhookPlugin extends Plugin {
 		foreach ($hooksAvailable as $hookAvailable) {
 			if (in_array($hookAvailable->getClassname(), $hooksEnabled)) {
 				if (method_exists($hookAvailable,'artifact_extra_detail')) {
-					return $hookAvailable->artifact_extra_detail($params['artifact_id']);
+					$hookAvailable->artifact_extra_detail($params);
 				}
 			}
 		}
