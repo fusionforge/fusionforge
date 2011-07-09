@@ -3,7 +3,6 @@
 export CURDIR=`pwd`
 export WORKSPACE=${WORKSPACE:-$CURDIR}
 
-export CONFIG_PHP=func/config.php.buildbot
 export SELENIUM_RC_HOST=${SELENIUM_RC_HOST:-`hostname -i`}
 export SELENIUM_RC_DIR=$WORKSPACE/reports
 
@@ -30,6 +29,8 @@ else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
 fi
 
+export DB_NAME=fforge
+export DB_USER=gforge
 export CONFIGURED=true
 
 export BUILDRESULT=$WORKSPACE/build/packages
