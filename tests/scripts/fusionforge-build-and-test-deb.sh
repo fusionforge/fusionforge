@@ -75,15 +75,20 @@ fi
 
 (cd tests/scripts ; ./start_vm.sh $HOST)
 
+# TODO: Make test dir a parameter
+echo "Transfer phpunit test on $HOST"
 cat > $WORKSPACE/build/config/phpunit <<-EOF
 HUDSON_URL=$HUDSON_URL
 JOB_NAME=$JOB_NAME
 EOF
+scp -r $WORKSPACE/build/config  root@$HOST:/root/
+rsync -a 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root/selenium-server.jar
+rsync -a --delete tests/ root@$HOST:/root/tests/
 
-scp -r tests root@$HOST:/root
-scp -r $WORKSPACE/build/config  root@$HOST:/root
-scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
+# Transfer preseeding
 ssh root@$HOST "cat /root/tests/preseed/* | LANG=C debconf-set-selections"
+
+# Setup debian repo
 ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
 ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
 
@@ -111,10 +116,10 @@ ssh root@$HOST "apt-get update"
 ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -y --force-yes install postgresql-contrib fusionforge-plugin-forumml fusionforge-full"
 echo "Set forge admin password"
 ssh root@$HOST "/usr/share/gforge/bin/forge_set_password admin myadmin"
-ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload ; LANG=C touch /tmp/fusionforge-use-pfo-rbac"
+ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload"
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini"
-ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
-#ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
+#ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
+ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 ssh root@$HOST "invoke-rc.d cron stop" || true
 
 retcode=0
