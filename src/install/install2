@@ -37,7 +37,7 @@ msg(){
 	esac
 }
 
-install2(){
+install2_files(){
 	hostname=$1
 	apacheuser=$2
 	apachegroup=$3

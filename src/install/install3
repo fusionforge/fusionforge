@@ -196,6 +196,9 @@ dropdbifexists()
         	echo "Forge database name not found"
         	exit 1
 	else
+		find_psql_init
+		$pgservice stop
+		$pgservice start
 		echo "Droping database $database"
 		su - postgres -c "dropdb -e $database"
 	fi
@@ -247,7 +250,7 @@ EOF
 	pgv=`postgres --version | cut -d" " -f3`
 	case $pgv in
 		7.*|8.1*|8.2*)
-			msg green " * Dumping tsearch2 Database Into $gforge_db DB"
+			msg green " * Loading tsearch2 Database Into $gforge_db DB"
 			su - postgres -c "psql $gforge_db < $tsearch" >> /tmp/gforge-import.log
 			for table in pg_ts_cfg pg_ts_cfgmap pg_ts_dict pg_ts_parser
 			do
@@ -257,7 +260,7 @@ EOF
 			;;
 	esac
 
-	msg green " * Dumping FusionForge DB"
+	msg green " * Loading FusionForge DB"
 	su $susufix $gforge_user -c "psql $gforge_db < $fusionforge_src_dir/db/gforge.sql" >> /tmp/gforge-import.log
 
 	msg green " * Running php db/upgrade-db.php"
@@ -327,7 +330,7 @@ validatePassword() {
         fi
 }
 
-install3(){
+install3_db(){
 	msg green "-=# Welcome to FusionForge DB-Installer #=-"
 	find_psql_init
 	psql_startdb

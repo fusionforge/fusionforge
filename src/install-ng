@@ -14,19 +14,69 @@
 # Author: Alain Peyrat <aljeux@free.fr>
 #         Christian Bayle <bayle@debian.org>
 #
+usage(){
+	echo "Usage: $1 [-r|-h|-a|--reinit|--help|--auto] [<hostname>]"
+}
+
+options=`getopt -o rha -l reinit,help,auto -- "$@"`
+
+if [ $? != 0 ] ; then echo "Terminating..." >&2 ; usage $0 ;exit 1 ; fi
+
+eval set -- "$options"
+
+REINIT=false
+AUTO=false
+while true
+do
+    case "$1" in
+        -r|--reinit)    REINIT=true; shift 1;;
+        -h|--help)      usage $0 ; exit 0; shift 1;;
+        -a|--auto)      AUTO=true ; shift 1;;
+	--)		shift 1; break;;
+        *)              break ;;
+    esac
+done
+
+hostname=$1
+
+if [ -z "$hostname" ]
+then
+	hostname=`hostname -f`
+fi
+echo "Using hostname=$hostname"
+
+# Load some script
 scriptdir=`cd \`dirname $0\`; pwd`
 . $scriptdir/install/detect_os
 . $scriptdir/install/config
 
-hostname=$1
-
-if [ ! "$hostname" ]
-then
-	hostname=`hostname -f`
-fi
-
 # Call to detect_os, this will set $type and $distrib
 os=$(detect_os)
+
+# Load deps script and run the appropriate one
+. $scriptdir/install/deps
+deps_$os
+
+# Load install scripts
+. $scriptdir/install/install2
+. $scriptdir/install/install3
+. $scriptdir/install/install4
+
+if $AUTO
+then
+	echo "Using automatic configuration"
+	FFORGE_DB=fforge
+	FFORGE_USER=gforge
+	FFORGE_ADMIN_USER=admin
+	FFORGE_ADMIN_PASSWORD=myadmin
+fi
+
+if $REINIT
+then
+	echo "Reinit the database"
+	rm -f /etc/gforge/install_completed
+	dropdbifexists
+fi
 
 if [ -d "/opt/gforge" ]
 then
@@ -43,24 +93,17 @@ else
 	echo "Installing FusionForge ...";
 fi
 
-. $scriptdir/install/deps
-deps_$os
-
-. $scriptdir/install/install2
-. $scriptdir/install/install3
-. $scriptdir/install/install4
-
 echo "Install type = $type"
 case $type in 
 	redhat)
-	echo "Running install/install2 "$hostname" apache apache"
-	install2 "$hostname" apache apache
+	echo "Running install2_files "$hostname" apache apache"
+	install2_files "$hostname" apache apache
 	if [ "$mode" = "install" ]
 	then
-		echo "Running install/install3"
-		install3
-		echo "Running install/install4"
-		install4
+		echo "Running install3_db"
+		install3_db
+		echo "Running install4_config"
+		install4_config
 
 		# Post installation fixes.
 		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
@@ -82,18 +125,18 @@ case $type in
 		echo "Running php db/upgrade-db.php"
 		cd $scriptdir; php db/upgrade-db.php
 		echo "Running php utils/normalize_roles.php"
-		php utils/normalize_roles.php
+		cd $scriptdir; php utils/normalize_roles.php
 	fi
 	;;
 
 	suse)
-	install2 "$hostname" wwwrun www
+	install2_files "$hostname" wwwrun www
 	if [ $mode = "install" ]
 	then
-		echo "Running install/install3"
-		install3
-		echo "Running install/install4"
-		install4
+		echo "Running install3_db"
+		install3_db
+		echo "Running install4_config"
+		install4_config
 
 		# Post installation fixes.
 		#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
@@ -120,6 +163,8 @@ case $type in
 	else
 		echo "Running php db/upgrade-db.php"
 		cd $scriptdir; php db/upgrade-db.php
+		echo "Running php utils/normalize_roles.php"
+		cd $scriptdir; php utils/normalize_roles.php
 	fi
 	;;
 
