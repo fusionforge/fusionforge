@@ -17,7 +17,7 @@
 %define httpduser       apache
 %define httpdgroup      apache
 
-%define fforge_admin    fforgeadmin
+%define fforge_admin    admin
 
 %define FORGE_DIR       %{_datadir}/gforge
 %define FORGE_CONF_DIR  %{_sysconfdir}/gforge

@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/sh
 
 export CURDIR=`pwd`
 export WORKSPACE=${WORKSPACE:-$CURDIR}
@@ -42,10 +42,8 @@ then
 	export USEVZCTL=true
 	export SELENIUM_RC_HOST=localhost
 	export SELENIUM_RC_URL=http://`hostname -f`$BASEDIR/reports
-	export FFORGE_RPM_REPO=http://`hostname -f`$BASEDIR/build/packages
 else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
-	export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
 	export VZTEMPLATE=centos-5-x86
 fi
 export DB_NAME=gforge
@@ -61,37 +59,51 @@ then
 	(cd tests/scripts ; sh ./stop_vm.sh $HOST || true)
 fi
 
-make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages all
 
 (cd 3rd-party/selenium ; make getselenium)
 
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
 
+# BUILD FUSIONFORGE REPO
+echo "Build FUSIONFORGE REPO"
+make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages all
+
 # FUSIONFORGE REPO
-cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
-sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
 if [ ! -z "$FFORGE_RPM_REPO" ]
 then
-	sed -i "s#baseurl = .*#baseurl = ${FFORGE_RPM_REPO}/#" $WORKSPACE/build/packages/fusionforge.repo
+        echo "Installing specific FUSIONFORGE REPO $FFORGE_RPM_REPO"
+        cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
+        sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
+        sed -i "s#baseurl = .*#baseurl = ${FFORGE_RPM_REPO}/#" $WORKSPACE/build/packages/fusionforge.repo
+        scp $WORKSPACE/build/packages/fusionforge.repo root@$HOST:/etc/yum.repos.d/
+else
+        rsync -a --delete $WORKSPACE/build/packages/ root@$HOST:/root/fusionforge_repo/
+        echo "Installing standart FUSIONFORGE REPO from src/rpm-specific/fusionforge.repo"
+        scp src/rpm-specific/fusionforge.repo root@$HOST:/etc/yum.repos.d/
 fi
-scp $WORKSPACE/build/packages/fusionforge.repo root@$HOST:/etc/yum.repos.d/
-[ ! -e ~/fusionforge_repo ] || scp -rp ~/fusionforge_repo root@$HOST:
 
-# DAG
-cp src/rpm-specific/dag-rpmforge.repo $WORKSPACE/build/packages/dag-rpmforge.repo
+# DAG REPO
 if [ ! -z "$DAG_RPMFORGE_REPO" ] ; then
-	sed -i "s#http://apt.sw.be/redhat#${DAG_RPMFORGE_REPO}#" $WORKSPACE/build/packages/dag-rpmforge.repo
+        echo "Installing specific DAG REPO $DAG_RPMFORGE_REPO"
+        cp src/rpm-specific/dag-rpmforge.repo $WORKSPACE/build/packages/dag-rpmforge.repo
+        sed -i "s#http://apt.sw.be/redhat#${DAG_RPMFORGE_REPO}#" $WORKSPACE/build/packages/dag-rpmforge.repo
+        scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
+else
+        echo "Installing standart DAG REPO from src/rpm-specific/dag-rpmforge.repo"
+        scp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 fi
-scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 
+# TODO: Make test dir a parameter
+echo "Transfer phpunit test on $HOST"
 cat > $WORKSPACE/build/config/phpunit <<-EOF
 HUDSON_URL=$HUDSON_URL
 JOB_NAME=$JOB_NAME
 EOF
+scp -r $WORKSPACE/build/config  root@$HOST:/root/
+rsync -a 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root/selenium-server.jar
+rsync -a --delete tests/ root@$HOST:/root/tests/
 
-scp -r tests root@$HOST:/root
-scp -r $WORKSPACE/build/config  root@$HOST:/root
-scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
+
 ssh root@$HOST "ln -s gforge /usr/share/src"
 
 sleep 5
@@ -99,9 +111,10 @@ sleep 5
 ssh root@$HOST "yum install -y --skip-broken fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-ldapextauth fusionforge-plugin-scmgit fusionforge-plugin-blocks"
 scp -p root@$HOST:/var/cache/yum/timedhosts.txt /tmp/timedhosts.txt || true
 ssh root@$HOST '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini'
-ssh root@$HOST "cd /root/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=$DB_NAME php db_reload.php"
-ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
-#ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
+ssh root@$HOST '/usr/share/gforge/utils/forge_set_password admin myadmin'
+#ssh root@$HOST "cd /root/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=$DB_NAME php db_reload.php"
+#ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
+ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 # Install a fake sendmail to catch all outgoing emails.
 # ssh root@".HOST." 'perl -spi -e s#/usr/sbin/sendmail#/usr/share/tests/scripts/catch_mail.php# /etc/gforge/local.inc'
 ssh root@$HOST "service crond stop" || true
