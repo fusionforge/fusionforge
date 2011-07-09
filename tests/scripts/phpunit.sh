@@ -22,7 +22,7 @@ SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
 SELENIUM_RC_HOST=`hostname -f`
 HOST=`hostname -f`
 CONFIG_PHP=func/config.php
-export SELENIUM_RC_DIR WORKSPACE SELENIUM_RC_URL SELENIUM_RC_HOST HOST DB_NAME CONFIG_PHP
+export SELENIUM_RC_DIR WORKSPACE SELENIUM_RC_URL SELENIUM_RC_HOST HOST DB_NAME DB_USER CONFIG_PHP
 
 cat <<-EOF >tests/func/config.php
 <?php
@@ -38,9 +38,9 @@ define ('ROOT', '');
 
 // Database connection parameters.
 define('DB_NAME', getenv('DB_NAME'));
-define('DB_USER', 'gforge');
+define('DB_USER', getenv('DB_USER'));
 define('DB_PASSWORD', '@@FFDB_PASS@@');
-define('DB_INIT_CMD', "/root/tests/func/db_reload.sh >/var/log/db_reload.log 2>/var/log/db_reload.errlog");
+define('DB_INIT_CMD', "/root/tests/func/db_reload.sh >>/var/log/db_reload_selenium.log 2>>/var/log/db_reload_selenium.errlog");
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'myadmin')
