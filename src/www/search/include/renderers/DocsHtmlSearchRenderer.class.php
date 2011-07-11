@@ -78,7 +78,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
 				. '<td width="5%">&nbsp;</td>'
 				. '<td>'.db_result($result, $i, 'docid').'</td>'
-				. '<td><a href="'.util_make_url ('/docman/view.php/'.$this->groupId . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'title')).'">'
+				. '<td><a href="'.util_make_url ('/docman/view.php/'.$this->groupId . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'filename')).'">'
 				. html_image('ic/msg.png', '10', '12', array('border' => '0'))
 				. ' '.db_result($result, $i, 'title').'</a></td>'
 				. '<td>'.db_result($result, $i, 'description').'</td></tr>';
