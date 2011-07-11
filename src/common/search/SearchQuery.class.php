@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc
  * Copyright 2004, Guillaume Smet/Open Wide
  * Copyright 2009, Roland Mas
- * Copyright 2010 (c) Capgemini - Franck Villaume
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -29,7 +29,7 @@ class SearchQuery extends Error {
 	 *
 	 * @var string $operator
 	 */
-	var $operator;	
+	var $operator;
 	/**
 	 * Number of rows per page
 	 *
@@ -76,7 +76,7 @@ class SearchQuery extends Error {
 	 * sections to search in
 	 *
 	 * @var array $sections
-	 */	
+	 */
 	var $sections = SEARCH__ALL_SECTIONS;
 
 	var $words = array();
@@ -86,10 +86,10 @@ class SearchQuery extends Error {
 	/**
 	 * Constructor
 	 *
-	 * @param string $words words we are searching for
-	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one is sufficient
-	 * @param int $rowsPerPage number of rows per page
+	 * @param	string	$words words we are searching for
+	 * @param	int	$offset offset
+	 * @param	boolean	$isExact if we want to search for all the words or if only one is sufficient
+	 * @param	int	$rowsPerPage number of rows per page
 	 */
 	function SearchQuery($words, $offset, $isExact, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE) {
 		$this->cleanSearchWords($words);
@@ -110,11 +110,11 @@ class SearchQuery extends Error {
 		$this->isExact = $isExact;
 		$this->operator = $this->getOperator();
 	}
-	
+
 	/**
 	 * cleanSearchWords - clean the words we are searching for
 	 *
-	 * @param string $words words we are searching for
+	 * @param	string	$words words we are searching for
 	 */
 	function cleanSearchWords($words) {
 		$words = trim($words);
@@ -160,14 +160,13 @@ class SearchQuery extends Error {
 						$this->words[] = $word;
 					}
 				}
-
 			}
 		}
 	}
-	
+
 	/**
 	 * executeQuery - execute the SQL query to get the results
-	 */ 
+	 */
 	function executeQuery() {
 
 		if($this->searchId) {
@@ -175,9 +174,8 @@ class SearchQuery extends Error {
 		} else {
 			$qpa = $this->getQuery();
 		}
-
 		if (forge_get_config('use_fti')) {
-			db_query_params ('select set_curcfg($1)',
+			db_query_params('select set_curcfg($1)',
 					 array ('default'));
 		}
 		$this->result = db_query_qpa (
@@ -186,11 +184,10 @@ class SearchQuery extends Error {
 			$this->offset,
 			'DB_SEARCH'
 		);
-
 		$this->rowsTotalCount = db_numrows($this->result);
 		$this->rowsCount = min($this->rowsPerPage, $this->rowsTotalCount);
 	}
-	
+
 	/**
 	 * getQuery - returns the query built to get the search results
 	 * This is an abstract method. It _MUST_ be implemented in children classes.
@@ -234,7 +231,7 @@ class SearchQuery extends Error {
 		}
 		return $qpa ;
 	}
-	
+
 	/**
 	 * getOperator - get the operator we have to use in ILIKE condition
 	 *
@@ -247,7 +244,7 @@ class SearchQuery extends Error {
 			return ' OR ';
 		}
 	}
-	
+
 	/**
 	 * implementsSearchById - check if the current object implements the search by id feature by having a getSearchByIdQuery method
 	 *
@@ -256,7 +253,7 @@ class SearchQuery extends Error {
 	function implementsSearchById() {
 		return method_exists($this, 'getSearchByIdQuery');
 	}
-	
+
 	/**
 	 * getResult - returns the result set
 	 *
@@ -265,7 +262,7 @@ class SearchQuery extends Error {
 	function & getResult() {
 		return $this->result;
 	}
-	
+
 	/**
 	 * getRowsCount - returns number of rows for the current page
 	 *
@@ -274,7 +271,7 @@ class SearchQuery extends Error {
 	function getRowsCount() {
 		return $this->rowsCount;
 	}
-	
+
 	/**
 	 * getRowsTotalCount - returns total number of rows
 	 *
@@ -283,7 +280,7 @@ class SearchQuery extends Error {
 	function getRowsTotalCount() {
 		return $this->rowsTotalCount;
 	}
-	
+
 	/**
 	 * getOffset - returns the offset
 	 *
@@ -292,7 +289,7 @@ class SearchQuery extends Error {
 	function getOffset() {
 		return $this->offset;
 	}
-	
+
 	/**
 	 * getRowsPerPage - returns number of rows per page
 	 *
@@ -301,7 +298,7 @@ class SearchQuery extends Error {
 	function getRowsPerPage() {
 		return $this->rowsPerPage;
 	}
-	
+
 	/**
 	 * getWords - returns the array containing words we are searching for
 	 *
@@ -310,7 +307,7 @@ class SearchQuery extends Error {
 	function getWords() {
 		return $this->words;
 	}
-	
+
 	/**
 	 * setSections - set the sections list
 	 *
@@ -318,7 +315,7 @@ class SearchQuery extends Error {
 	 */
 	function setSections($sections) {
 		if(is_array($sections)) {
-			$this->sections = array_keys ($sections) ;
+			$this->sections = array_keys($sections);
 		} else {
 			$this->sections = $sections;
 		}
@@ -328,7 +325,7 @@ class SearchQuery extends Error {
 	 * getFormattedWords - get words formatted in order to be used in the FTI stored procedures
 	 *
 	 * @return string words we are searching for, separated by a pipe
-	 */	
+	 */
 	function getFormattedWords() {
 		if ($this->isExact) {
 			$words = implode('&', $this->words);
