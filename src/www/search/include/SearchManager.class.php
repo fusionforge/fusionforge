@@ -3,6 +3,7 @@
  * Search Engine
  *
  * Copyright 2004 (c) Guillaume Smet
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -48,7 +49,7 @@ class SearchManager {
 		$this->loadSearchEngines();
 		$this->loadParameters();
 	}
-	
+
 	function setParametersValues($parametersValues) {
 		for($i = 0, $max = count($this->parameters); $i < $max; $i++) {
 			if(isset($parametersValues[$this->parameters[$i]])) {
@@ -56,21 +57,21 @@ class SearchManager {
 			}
 		}
 	}
-	
+
 	function getParameters() {
 		return $this->parametersValues;
 	}
-	
+
 	function addSearchEngine($type, &$searchEngine, $format = SEARCH__OUTPUT_HTML) {
 		$this->searchEngines[$format][$type] =& $searchEngine;
 	}
-	
+
 	function addParameter($parameterName) {
 		if(!in_array($parameterName, $this->parameters)) {
 			$this->parameters[] = $parameterName;
 		}
 	}
-	
+
 	function & getAvailableSearchEngines($format = SEARCH__OUTPUT_HTML) {
 		$availableSearchEngines = array();
 		if(isset($this->searchEngines[$format])) {
@@ -83,7 +84,7 @@ class SearchManager {
 		}
 		return $availableSearchEngines;
 	}
-	
+
 	function getSearchRenderer($typeOfSearch, $words, $offset, $exact, $format = SEARCH__OUTPUT_HTML) {
 		if(isset($this->searchEngines[$format]) && isset($this->searchEngines[$format][$typeOfSearch])) {
 			$searchEngine =& $this->searchEngines[$format][$typeOfSearch];
@@ -93,7 +94,7 @@ class SearchManager {
 		}
 		return false;
 	}
-	
+
 	function loadSearchEngines() {
 		// Specific search engines
 		$this->addSearchEngine(
@@ -104,7 +105,7 @@ class SearchManager {
 			SEARCH__TYPE_IS_FORUM,
 			new ForumSearchEngine()
 		);
-		
+
 		// Project search engines
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_FULL_PROJECT,
@@ -147,23 +148,27 @@ class SearchManager {
 			SEARCH__TYPE_IS_PEOPLE,
 			new GFSearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'))
 		);
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_ALLDOCS,
+			new GFSearchEngine(SEARCH__TYPE_IS_ALLDOCS, 'DocsAllHtmlSearchRenderer', _('Documents'))
+		);
 		if (forge_get_config('use_people')) {
 			$this->addSearchEngine(
 				SEARCH__TYPE_IS_SKILL,
 				new GFSearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skill'))
 			);
 		}
-		
+
 		// Rss search engines
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
 			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Project')),
 			SEARCH__OUTPUT_RSS
 		);
-		
+
 		plugin_hook('search_engines', array('object' => $this));
 	}
-	
+
 	function loadParameters() {
 		$this->parameters = array(
 			SEARCH__PARAMETER_GROUP_ID,
@@ -172,8 +177,8 @@ class SearchManager {
 			SEARCH__PARAMETER_GROUP_PROJECT_ID
 		);
 	}
-	
-	
+
+
 }
 
 // Local Variables:

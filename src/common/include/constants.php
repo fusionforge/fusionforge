@@ -28,6 +28,7 @@ define('SEARCH__TYPE_IS_FORUM', 'forum');
 define('SEARCH__TYPE_IS_PEOPLE', 'people');
 define('SEARCH__TYPE_IS_SKILL', 'skill');
 define('SEARCH__TYPE_IS_DOCS', 'docs');
+define('SEARCH__TYPE_IS_ALLDOCS', 'alldocs');
 define('SEARCH__TYPE_IS_TRACKERS', 'trackers');
 define('SEARCH__TYPE_IS_TASKS', 'tasks');
 define('SEARCH__TYPE_IS_FORUMS', 'forums');
