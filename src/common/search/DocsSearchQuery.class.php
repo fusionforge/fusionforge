@@ -43,14 +43,14 @@ class DocsSearchQuery extends SearchQuery {
 	/**
 	 * Constructor
 	 *
-	 * @param string $words words we are searching for
-	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
-	 * @param int $groupId group id
-	 * @param array $sections sections to search in
-	 * @param boolean $showNonPublic flag if private sections are searched too
+	 * @param	string	$words words we are searching for
+	 * @param	int	$offset offset
+	 * @param	boolean	$isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param	int	$groupId group id
+	 * @param	array	$sections sections to search in
+	 * @param	boolean	$showNonPublic flag if private sections are searched too
 	 */
-	function DocsSearchQuery($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
+	function DocsSearchQuery($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $showNonPublic = false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
 
@@ -62,37 +62,36 @@ class DocsSearchQuery extends SearchQuery {
 	/**
 	 * getQuery - get the query built to get the search results
 	 *
-	 * @return array query+params array
+	 * @return	array	query+params array
 	 */
 	function getQuery() {
-
 		if (forge_get_config('use_fti')) {
 			return $this->getFTIQuery();
 		} else {
-			$qpa = db_construct_qpa () ;
-			$qpa = db_construct_qpa ($qpa,
-						 'SELECT doc_data.docid, doc_data.title, doc_data.description, doc_groups.groupname FROM doc_data, doc_groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = $1',
-						 array ($this->groupId)) ;
+			$qpa = db_construct_qpa();
+			$qpa = db_construct_qpa($qpa,
+						 'SELECT doc_data.docid, doc_data.title, doc_data.description, doc_data.filename, doc_groups.groupname FROM doc_data, doc_groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = $1',
+						 array ($this->groupId));
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'AND doc_groups.doc_group = ANY ($1) ',
-							 db_int_array_to_any_clause ($this->sections)) ;
+							 db_int_array_to_any_clause($this->sections));
 			}
 			if ($this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_data.stateid IN (1, 4, 5)') ;
+				$qpa = db_construct_qpa($qpa,
+							 ' AND doc_data.stateid IN (1, 4, 5)');
 			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_data.stateid = 1') ;
+				$qpa = db_construct_qpa($qpa,
+							 ' AND doc_data.stateid = 1');
 			}
-			$qpa = db_construct_qpa ($qpa,
-						 ' AND ((') ;
-			$qpa = $this->addIlikeCondition ($qpa, 'title') ;
-			$qpa = db_construct_qpa ($qpa,
-						 ') OR (') ;
-			$qpa = $this->addIlikeCondition ($qpa, 'description') ;
-			$qpa = db_construct_qpa ($qpa,
-						 ')) ORDER BY doc_groups.groupname, doc_data.docid') ;
+			$qpa = db_construct_qpa($qpa,
+						 ' AND ((');
+			$qpa = $this->addIlikeCondition($qpa, 'title');
+			$qpa = db_construct_qpa($qpa,
+						 ') OR (');
+			$qpa = $this->addIlikeCondition($qpa, 'description');
+			$qpa = db_construct_qpa($qpa,
+						 ')) ORDER BY doc_groups.groupname, doc_data.docid');
 		}
 		return $qpa;
 	}
@@ -103,74 +102,74 @@ class DocsSearchQuery extends SearchQuery {
 
 		$qpa = db_construct_qpa () ;
 		if(count($this->words)) {
-			$qpa = db_construct_qpa ($qpa,
-						 'SELECT doc_data.docid, headline(doc_data.title, q) AS title, headline(doc_data.description, q) AS description doc_groups.groupname FROM doc_data, doc_groups, doc_data_idx, to_tsquery($1) q',
-						 array (implode (' ', $words))) ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
+						 'SELECT doc_data.docid, doc_data.filename, headline(doc_data.title, q) AS title, headline(doc_data.description, q) AS description doc_groups.groupname FROM doc_data, doc_groups, doc_data_idx, to_tsquery($1) q',
+						 array (implode (' ', $words)));
+			$qpa = db_construct_qpa($qpa,
 						 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ q') ;
 			if (count($this->phrases)) {
-				$qpa = db_construct_qpa ($qpa,
-							 $this->getOperator()) ;
-				$qpa = db_construct_qpa ($qpa,
-							 '(') ;
+				$qpa = db_construct_qpa($qpa,
+							 $this->getOperator());
+				$qpa = db_construct_qpa($qpa,
+							 '(');
 				$qpa = $this->addMatchCondition($qpa, 'title');
-				$qpa = db_construct_qpa ($qpa,
-							 ') OR (') ;
+				$qpa = db_construct_qpa($qpa,
+							 ') OR (');
 				$qpa = $this->addMatchCondition($qpa, 'description');
-				$qpa = db_construct_qpa ($qpa,
-							 ')') ;
+				$qpa = db_construct_qpa($qpa,
+							 ')');
 			}
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ') AND doc_data.group_id = $1',
 						 array ($group_id)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 ' AND doc_groups.doc_group = ANY ($1)',
-							 db_int_array_to_any_clause ($this->sections)) ;
+							 db_int_array_to_any_clause ($this->sections));
 			}
 			if ($this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_data.stateid IN (1, 4, 5)') ;
+				$qpa = db_construct_qpa($qpa,
+							 ' AND doc_data.stateid IN (1, 4, 5)');
 			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_data.stateid = 1') ;
+				$qpa = db_construct_qpa($qpa,
+							 ' AND doc_data.stateid = 1');
 			}
-			$qpa = db_construct_qpa ($qpa,
-						 ' ORDER BY rank(vectors, q) DESC, groupname ASC') ;
+			$qpa = db_construct_qpa($qpa,
+						 ' ORDER BY rank(vectors, q) DESC, groupname ASC');
 		} else {
-			$qpa = db_construct_qpa ($qpa,
-						 'SELECT doc_data.docid, title, description doc_groups.groupname FROM doc_data, doc_groups') ;
-			$qpa = db_construct_qpa ($qpa,
-						 'WHERE doc_data.doc_group = doc_groups.doc_group') ;
+			$qpa = db_construct_qpa($qpa,
+						 'SELECT doc_data.docid, filename, title, description doc_groups.groupname FROM doc_data, doc_groups');
+			$qpa = db_construct_qpa($qpa,
+						 'WHERE doc_data.doc_group = doc_groups.doc_group');
 			if (count($this->phrases)) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 $this->getOperator()) ;
-				$qpa = db_construct_qpa ($qpa,
-							 '(') ;
+				$qpa = db_construct_qpa($qpa,
+							 '(');
 				$qpa = $this->addMatchCondition($qpa, 'title');
-				$qpa = db_construct_qpa ($qpa,
-							 ') OR (') ;
+				$qpa = db_construct_qpa($qpa,
+							 ') OR (');
 				$qpa = $this->addMatchCondition($qpa, 'description');
-				$qpa = db_construct_qpa ($qpa,
-							 ')') ;
+				$qpa = db_construct_qpa($qpa,
+							 ')');
 			}
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ') AND doc_data.group_id = $1',
-						 array ($group_id)) ;
+						 array($group_id));
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'AND doc_groups.doc_group = ANY ($1) ',
-							 db_int_array_to_any_clause ($this->sections)) ;
+							 db_int_array_to_any_clause($this->sections));
 			}
 			if ($this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_data.stateid IN (1, 4, 5)') ;
+				$qpa = db_construct_qpa($qpa,
+							 ' AND doc_data.stateid IN (1, 4, 5)');
 			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_data.stateid = 1') ;
+				$qpa = db_construct_qpa($qpa,
+							 ' AND doc_data.stateid = 1');
 			}
-			$qpa = db_construct_qpa ($qpa,
-						 ' ORDER BY groupname') ;
+			$qpa = db_construct_qpa($qpa,
+						 ' ORDER BY groupname');
 		}
 		return $qpa ;
 	}
@@ -178,12 +177,12 @@ class DocsSearchQuery extends SearchQuery {
 	/**
 	 * getSections - returns the list of available doc groups
 	 *
-	 * @param $groupId int group id
-	 * @param $showNonPublic boolean if we should consider non public sections
+	 * @param	$groupId	int group id
+	 * @param	$showNonPublic	boolean if we should consider non public sections
 	 */
-	static function getSections($groupId, $showNonPublic=false) {
+	static function getSections($groupId, $showNonPublic = false) {
 		$sql = 'SELECT doc_groups.doc_group, doc_groups.groupname FROM doc_groups, doc_data'
-			.' WHERE doc_groups.doc_group = doc_data.doc_group AND doc_groups.group_id=$1';
+			.' WHERE doc_groups.doc_group = doc_data.doc_group AND doc_groups.group_id = $1';
 		if ($showNonPublic) {
 			$sql .= ' AND doc_data.stateid IN (1, 4, 5) AND doc_groups.stateid = 1';
 		} else {
@@ -192,8 +191,8 @@ class DocsSearchQuery extends SearchQuery {
 		$sql .= ' ORDER BY groupname';
 
 		$sections = array();
-		$res = db_query_params ($sql,
-					array ($groupId));
+		$res = db_query_params($sql,
+					array($groupId));
 		while($data = db_fetch_array($res)) {
 			$sections[$data['doc_group']] = $data['groupname'];
 		}

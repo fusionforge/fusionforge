@@ -23,9 +23,10 @@
 
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 require_once $gfcommon.'search/DocsSearchQuery.class.php';
-			  
+require_once $gfcommon.'docman/Document.class.php';
+
 class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
-	
+
 	/**
 	 * Constructor
 	 *
@@ -37,13 +38,13 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 *
 	 */
 	function DocsHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
-	
+
 		$userIsGroupMember = $this->isGroupMember($groupId);
-					
+
 		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember);
-		
+
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_DOCS, $words, $isExact, $searchQuery, $groupId, 'docman');
-		
+
 		$this->tableHeaders = array(
 			'&nbsp;',
 			_('#'),
@@ -61,24 +62,26 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 		$dateFormat = _('Y-m-d H:i');
-		
+
 		$return = '';
-		
+
 		$lastDocGroup = null;
-		
+
 		$rowColor = 0;
 		for($i = 0; $i < $rowsCount; $i++) {
 			//section changed
 			$currentDocGroup = db_result($result, $i, 'groupname');
+			$groupObject = group_get_object($this->groupId);
+			$document = new Document($groupObject, db_result($result, $i, 'docid'));
 			if ($lastDocGroup != $currentDocGroup) {
-				$return .= '<tr><td colspan="4">'.$currentDocGroup.'</td></tr>';
+				$return .= '<tr><td colspan="4">'.util_make_link('/docman/?group_id='.$this->groupId.'&amp;view=listfile&amp;dirid='.$document->getDocGroupID(),$currentDocGroup).'</td></tr>';
 				$lastDocGroup = $currentDocGroup;
 				$rowColor = 0;
 			}
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
 				. '<td width="5%">&nbsp;</td>'
 				. '<td>'.db_result($result, $i, 'docid').'</td>'
-				. '<td><a href="'.util_make_url ('/docman/view.php/'.$this->groupId . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'title')).'">'
+				. '<td><a href="'.util_make_url ('/docman/view.php/'.$this->groupId . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'filename')).'">'
 				. html_image('ic/msg.png', '10', '12', array('border' => '0'))
 				. ' '.db_result($result, $i, 'title').'</a></td>'
 				. '<td>'.db_result($result, $i, 'description').'</td></tr>';
@@ -89,12 +92,12 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
 	 * getSections - get the array of possible sections to search in
-	 * 
+	 *
   	 * @return array sections
-	 */		
+	 */
 	static function getSections($groupId) {
 		$userIsGroupMember = DocsHtmlSearchRenderer::isGroupMember($groupId);
-		
+
 		return DocsSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }
