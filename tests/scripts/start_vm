@@ -5,6 +5,7 @@ usage()
     cat <<EOF
 $1 -h|--host=<hostname> -e|--engine=<vmengine> -c|--config=<config>
 config use the syntax used in test/config/default file
+hostname=vmengine:template:address/mask:gateway
 EOF
     return 0
 }
