@@ -42,10 +42,10 @@ then
 	export USEVZCTL=true
 	export SELENIUM_RC_HOST=localhost
 	export SELENIUM_RC_URL=http://`hostname -f`$BASEDIR/reports
-	export FFORGE_RPM_REPO=http://`hostname -f`$BASEDIR/build/packages
+	#export FFORGE_RPM_REPO=http://`hostname -f`$BASEDIR/build/packages
 else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
-	export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
+	#export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
 	export VZTEMPLATE=centos-5-x86
 fi
 export DB_NAME=gforge
@@ -68,21 +68,29 @@ make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages all
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
 
 # FUSIONFORGE REPO
-cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
-sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
 if [ ! -z "$FFORGE_RPM_REPO" ]
 then
-	sed -i "s#baseurl = .*#baseurl = ${FFORGE_RPM_REPO}/#" $WORKSPACE/build/packages/fusionforge.repo
+        echo "Installing specific FUSIONFORGE REPO $FFORGE_RPM_REPO"
+        cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
+        sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
+        sed -i "s#baseurl = .*#baseurl = ${FFORGE_RPM_REPO}/#" $WORKSPACE/build/packages/fusionforge.repo
+        scp $WORKSPACE/build/packages/fusionforge.repo root@$HOST:/etc/yum.repos.d/
+else
+        rsync -a --delete $WORKSPACE/build/packages/ root@$HOST:/root/fusionforge_repo/
+        echo "Installing standart FUSIONFORGE REPO from src/rpm-specific/fusionforge.repo"
+        scp src/rpm-specific/fusionforge.repo root@$HOST:/etc/yum.repos.d/
 fi
-scp $WORKSPACE/build/packages/fusionforge.repo root@$HOST:/etc/yum.repos.d/
-[ ! -e ~/fusionforge_repo ] || scp -rp ~/fusionforge_repo root@$HOST:
 
-# DAG
-cp src/rpm-specific/dag-rpmforge.repo $WORKSPACE/build/packages/dag-rpmforge.repo
+# DAG REPO
 if [ ! -z "$DAG_RPMFORGE_REPO" ] ; then
-	sed -i "s#http://apt.sw.be/redhat#${DAG_RPMFORGE_REPO}#" $WORKSPACE/build/packages/dag-rpmforge.repo
+        echo "Installing specific DAG REPO $DAG_RPMFORGE_REPO"
+        cp src/rpm-specific/dag-rpmforge.repo $WORKSPACE/build/packages/dag-rpmforge.repo
+        sed -i "s#http://apt.sw.be/redhat#${DAG_RPMFORGE_REPO}#" $WORKSPACE/build/packages/dag-rpmforge.repo
+        scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
+else
+        echo "Installing standart DAG REPO from src/rpm-specific/dag-rpmforge.repo"
+        scp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 fi
-scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 
 cat > $WORKSPACE/build/config/phpunit <<-EOF
 HUDSON_URL=$HUDSON_URL
