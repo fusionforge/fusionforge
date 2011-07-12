@@ -52,7 +52,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 			$returnhtml .= '</table>';
 			return $returnhtml;
 		} else {
-			return '<p class="information">'._('No personal git repository').'</div>';
+			return '<p class="information">'._('No personal git repository').'</p>';
 		}
 	}
 
