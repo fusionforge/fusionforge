@@ -65,9 +65,9 @@ CREATE UNIQUE INDEX statsprojectmetric_month_day_group ON stats_project_metric(m
 --	Populated daily by site_stats.php
 --
 CREATE TABLE stats_agg_site_by_group_tmp AS
-SELECT 
-	substring(day::text from 1 for 6)::int AS month, 
-	substring(day::text from 7 for 2)::int AS day, 
+SELECT
+	substring(day::text from 1 for 6)::int AS month,
+	substring(day::text from 7 for 2)::int AS day,
 	group_id,
 	count
 	from stats_agg_site_by_group ;
@@ -86,11 +86,11 @@ CREATE UNIQUE INDEX statssitebygroup_month_day_group ON stats_agg_site_by_group(
 --	Populated daily by site_stats.php
 --
 CREATE TABLE stats_agg_logo_by_group_tmp AS
-SELECT	   
+SELECT
 	substring(day::text from 1 for 6)::int AS month,
 	substring(day::text from 7 for 2)::int AS day,
 	group_id,
-	count 
+	count
 	from stats_agg_logo_by_group ;
 
 DROP TABLE stats_agg_logo_by_group;
@@ -113,7 +113,7 @@ pages INT NOT NULL DEFAULT 0
 --	Migrate data from old stats_project table
 --
 INSERT INTO stats_subd_pages
-SELECT month,day,group_id,subdomain_views 
+SELECT month,day,group_id,subdomain_views
 FROM stats_project WHERE subdomain_views > 0;
 
 CREATE UNIQUE INDEX statssubdpages_month_day_group ON stats_subd_pages(month,day,group_id);
@@ -141,11 +141,11 @@ adds INT NOT NULL DEFAULT 0
 --
 --	Migrate data from old stats_project table
 --
-INSERT INTO stats_cvs_group 
-SELECT month,day,group_id,cvs_checkouts,cvs_commits,cvs_adds 
-FROM stats_project 
-WHERE cvs_checkouts > 0 
-OR cvs_commits > 0 
+INSERT INTO stats_cvs_group
+SELECT month,day,group_id,cvs_checkouts,cvs_commits,cvs_adds
+FROM stats_project
+WHERE cvs_checkouts > 0
+OR cvs_commits > 0
 OR cvs_adds > 0;
 
 CREATE UNIQUE INDEX statscvsgroup_month_day_group ON stats_cvs_group(month,day,group_id);
@@ -284,8 +284,8 @@ CREATE  INDEX "statssitemonths_month" on "stats_site_months" using btree ( "mont
 --
 --	Populated daily by site_stats.php
 --
-create table stats_site_tmp AS 
-select month,day,uniq_users,sessions,total_users,new_users,new_projects 
+create table stats_site_tmp AS
+select month,day,uniq_users,sessions,total_users,new_users,new_projects
 from stats_site;
 
 DROP TABLE stats_site;

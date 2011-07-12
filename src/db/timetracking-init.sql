@@ -11,9 +11,9 @@ CREATE TABLE rep_time_tracking (
 	time_code int not null CONSTRAINT reptimetrk_timecode REFERENCES rep_time_category(time_code),
 	hours float not null
 );
---	CREATE UNIQUE INDEX reptimetrk_weekusrtskcde ON 
+--	CREATE UNIQUE INDEX reptimetrk_weekusrtskcde ON
 --		rep_time_tracking (week,user_id,project_task_id,time_code);
-CREATE INDEX reptimetracking_userdate ON 
+CREATE INDEX reptimetracking_userdate ON
 	rep_time_tracking (user_id,week);
 
 INSERT INTO rep_time_category VALUES ('1','Coding');
@@ -125,11 +125,11 @@ CREATE VIEW rep_user_act_oa_vw AS
 	SELECT user_id,
 	sum(tracker_opened) AS tracker_opened,
 	sum(tracker_closed) AS tracker_closed,
-	sum(forum) AS forum, 
-	sum(docs) AS docs, 
+	sum(forum) AS forum,
+	sum(docs) AS docs,
 	sum(cvs_commits) AS cvs_commits,
 	sum(tasks_opened) AS tasks_opened,
-	sum(tasks_closed) AS tasks_closed 
+	sum(tasks_closed) AS tasks_closed
 	FROM rep_user_act_monthly
 	GROUP BY user_id;
 
@@ -196,7 +196,7 @@ CREATE VIEW rep_group_act_oa_vw AS
 	GROUP BY group_id;
 
 -- overall activity
-CREATE VIEW rep_site_act_daily_vw AS 
+CREATE VIEW rep_site_act_daily_vw AS
 	SELECT day,
 	sum(tracker_opened) AS tracker_opened,
 	sum(tracker_closed) AS tracker_closed,
@@ -209,7 +209,7 @@ CREATE VIEW rep_site_act_daily_vw AS
 	FROM rep_group_act_daily
 	GROUP BY day;
 
-CREATE VIEW rep_site_act_weekly_vw AS 
+CREATE VIEW rep_site_act_weekly_vw AS
 	SELECT week,
 	sum(tracker_opened) AS tracker_opened,
 	sum(tracker_closed) AS tracker_closed,

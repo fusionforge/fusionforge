@@ -106,7 +106,7 @@ CREATE TABLE :version_tbl (
 	id		INT4 REFERENCES :page_tbl,
         version		INT4 NOT NULL,
 	mtime		INT4 NOT NULL,
--- FIXME: should use boolean, but that returns 't' or 'f'. not 0 or 1. 
+-- FIXME: should use boolean, but that returns 't' or 'f'. not 0 or 1.
 	minor_edit	INT2 DEFAULT 0,
 -- use bytea instead?
         content		TEXT NOT NULL DEFAULT '',
@@ -119,7 +119,7 @@ CREATE INDEX :vers_mtime_idx ON :version_tbl (mtime);
 \echo Creating :recent_tbl
 CREATE TABLE :recent_tbl (
 	id		INT4 REFERENCES :page_tbl,
-	latestversion	INT4, 
+	latestversion	INT4,
 	latestmajor	INT4,
 	latestminor	INT4,
 	FOREIGN KEY (id, latestversion) REFERENCES :version_tbl (id, version),
@@ -147,10 +147,10 @@ CREATE INDEX :pagedata_id_idx ON pagedata (id);
 CREATE TABLE :versiondata_tbl (
 	id	  INT4 NOT NULL,
 	version	  INT4 NOT NULL,
-	markup    INT2 DEFAULT 2, 
-	author    VARCHAR(48), 
-	author_id VARCHAR(48), 
-	pagetype  VARCHAR(20) DEFAULT 'wikitext', 
+	markup    INT2 DEFAULT 2,
+	author    VARCHAR(48),
+	author_id VARCHAR(48),
+	pagetype  VARCHAR(20) DEFAULT 'wikitext',
         rest	  TEXT NOT NULL DEFAULT '',
 	FOREIGN KEY (id, version) REFERENCES :version_tbl (id, version)
 );
@@ -158,7 +158,7 @@ CREATE TABLE :versiondata_tbl (
 CREATE TABLE :pageperm_tbl (
 	id	 INT4 NOT NULL REFERENCES :page_tbl(id),
         -- view,edit,create,list,remove,change,dump
-	access   CHAR(12) NOT NULL, 
+	access   CHAR(12) NOT NULL,
 	groupname VARCHAR(48),
 	allowed  BOOLEAN
 );
@@ -175,7 +175,7 @@ CREATE VIEW :existing_page_view AS
 CREATE VIEW :curr_page_view AS
   SELECT P.id,P.pagename,P.hits,P.pagedata,P.cached_html,
 	 V.version,V.mtime,V.minor_edit,V.content,V.versiondata
-  FROM :page_tbl P 
+  FROM :page_tbl P
     JOIN :version_tbl V USING (id)
     JOIN :recent_tbl  R ON (V.id=R.id AND V.version=R.latestversion);
 
@@ -219,7 +219,7 @@ CREATE INDEX :sess_date_idx ON :session_tbl (sess_date);
 CREATE INDEX :sess_ip_idx   ON :session_tbl (sess_ip);
 
 -- Optional DB Auth and Prefs
--- For these tables below the default table prefix must be used 
+-- For these tables below the default table prefix must be used
 -- in the DBAuthParam SQL statements also.
 
 \echo Creating :pref_tbl
@@ -235,7 +235,7 @@ CREATE INDEX pref_group_idx ON :pref_tbl (groupname);
 -- Use the member table, if you need it for n:m user-group relations,
 -- and adjust your DBAUTH_AUTH_ SQL statements.
 CREATE TABLE :member_tbl (
-	userid    CHAR(48) NOT NULL REFERENCES :pref_tbl, 
+	userid    CHAR(48) NOT NULL REFERENCES :pref_tbl,
 	groupname CHAR(48) NOT NULL DEFAULT 'users'
 );
 CREATE INDEX :member_id_idx    ON :member_tbl (userid);
@@ -257,7 +257,7 @@ CREATE TABLE :accesslog_tbl (
 	request_time     CHAR(28),
 	status 	         INT2,
 	bytes_sent       INT4,
-        referer          VARCHAR(255), 
+        referer          VARCHAR(255),
 	agent            VARCHAR(255),
 	request_duration FLOAT
 );
@@ -269,12 +269,12 @@ CREATE INDEX :accesslog_host_idx ON :accesslog_tbl (remote_host);
 
 -- Use the tsearch2 fulltextsearch extension: (recommended) 7.4, 8.0, 8.1
 -- at first init it for the database:
--- $ psql phpwiki < /usr/share/postgresql/contrib/tsearch2.sql 
+-- $ psql phpwiki < /usr/share/postgresql/contrib/tsearch2.sql
 
 -- example of ISpell dictionary
 --   UPDATE pg_ts_dict SET dict_initoption='DictFile="/usr/local/share/ispell/russian.dict" ,AffFile ="/usr/local/share/ispell/russian.aff", StopFile="/usr/local/share/ispell/russian.stop"' WHERE dict_name='ispell_template';
 -- example of synonym dict
---   UPDATE pg_ts_dict SET dict_initoption='/usr/local/share/ispell/english.syn' WHERE dict_id=5; 
+--   UPDATE pg_ts_dict SET dict_initoption='/usr/local/share/ispell/english.syn' WHERE dict_id=5;
 
 \echo Initializing tsearch2 indices
 GRANT SELECT ON pg_ts_dict, pg_ts_parser, pg_ts_cfg, pg_ts_cfgmap TO :httpd_user;
@@ -288,7 +288,7 @@ CREATE TRIGGER tsvectorupdate BEFORE UPDATE OR INSERT ON :version_tbl
 
 --================================================================
 
-\echo You might want to ignore the following errors or run 
+\echo You might want to ignore the following errors or run
 \echo /usr/sbin/createuser -S -R -d  :httpd_user
 
 \echo Applying permissions for role :httpd_user
@@ -312,16 +312,16 @@ GRANT SELECT,INSERT,UPDATE,DELETE ON :accesslog_tbl	TO :httpd_user;
 \echo Initializing stored procedures
 
 -- id, version
-CREATE OR REPLACE FUNCTION :update_recent_fn (INT4, INT4) 
+CREATE OR REPLACE FUNCTION :update_recent_fn (INT4, INT4)
 	RETURNS integer AS $$
 DELETE FROM test_recent WHERE id = $1;
 INSERT INTO test_recent (id, latestversion, latestmajor, latestminor)
-  SELECT id, MAX(version) AS latestversion, 
-	     MAX(CASE WHEN minor_edit =  0 THEN version END) AS latestmajor, 
+  SELECT id, MAX(version) AS latestversion,
+	     MAX(CASE WHEN minor_edit =  0 THEN version END) AS latestmajor,
              MAX(CASE WHEN minor_edit <> 0 THEN version END) AS latestminor
     FROM test_version version WHERE id = $2 GROUP BY id;
 DELETE FROM test_nonempty WHERE id = $1;
-INSERT INTO test_nonempty (id) 
+INSERT INTO test_nonempty (id)
   SELECT recent.id
     FROM test_recent recent, test_version version
     WHERE recent.id = version.id
@@ -332,7 +332,7 @@ SELECT id FROM test_nonempty WHERE id = $1;
 $$ LANGUAGE SQL;
 
 -- oldid, newid
-CREATE OR REPLACE FUNCTION :prepare_rename_fn (INT4, INT4) 
+CREATE OR REPLACE FUNCTION :prepare_rename_fn (INT4, INT4)
         RETURNS void AS $$
 DELETE FROM test_page     WHERE id = $2;
 DELETE FROM test_version  WHERE id = $2;

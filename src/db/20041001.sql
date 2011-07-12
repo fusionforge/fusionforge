@@ -50,9 +50,9 @@ CREATE VIEW nss_groups AS
 CREATE VIEW nss_usergroups AS
 	SELECT group_id+10000 AS gid,
 		users.unix_uid+20000 AS uid
-	FROM user_group,users 
+	FROM user_group,users
 	WHERE user_group.user_id=users.user_id
-	UNION 
+	UNION
 	SELECT unix_uid+20000 AS gid,
 		unix_uid+20000 AS uid
 	FROM users

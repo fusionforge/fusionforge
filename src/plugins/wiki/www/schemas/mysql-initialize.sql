@@ -3,7 +3,7 @@
 CREATE TABLE page (
 	id              INT NOT NULL AUTO_INCREMENT,
 -- for mysql => 4.1 define the charset here
--- this is esp. needed for mysql 4.1.0 up to 4.1.6. 
+-- this is esp. needed for mysql 4.1.0 up to 4.1.6.
 -- not yet confirmed, at least since 4.1.8 it's okay with binary.
 --      pagename        VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
 -- otherwise use the old syntax to do case-sensitive comparison
@@ -68,7 +68,7 @@ CREATE TABLE session (
 -- ALTER TABLE session CHANGE sess_ip sess_ip CHAR(40) NOT NULL;
 
 -- Optional DB Auth and Prefs
--- For these tables below the default table prefix must be used 
+-- For these tables below the default table prefix must be used
 -- in the DBAuthParam SQL statements also.
 
 CREATE TABLE pref (
@@ -85,7 +85,7 @@ CREATE TABLE pref (
 -- ALTER TABLE pref ADD groupname CHAR(48) BINARY DEFAULT 'users';
 
 -- deprecated since 1.3.12. only useful for seperate databases.
--- better use the extra pref table where such users can be created easily 
+-- better use the extra pref table where such users can be created easily
 -- without password.
 
 -- CREATE TABLE user (
@@ -140,7 +140,7 @@ CREATE TABLE accesslog (
 	request_time  CHAR(28),
 	status 	      SMALLINT UNSIGNED,
 	bytes_sent    SMALLINT UNSIGNED,
-        referer       VARCHAR(255), 
+        referer       VARCHAR(255),
 	agent         VARCHAR(255),
 	request_duration FLOAT
 );

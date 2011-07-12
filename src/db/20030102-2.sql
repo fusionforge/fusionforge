@@ -35,8 +35,8 @@ SELECT users.user_name,users.realname,users.email,
 	doc_groups.groupname AS group_name,
 	sl.name as language_name
 FROM doc_data d
-NATURAL JOIN doc_states 
-NATURAL JOIN doc_groups 
+NATURAL JOIN doc_states
+NATURAL JOIN doc_groups
 JOIN supported_languages sl ON (sl.language_id=d.language_id)
 JOIN users ON (users.user_id=d.created_by);
 

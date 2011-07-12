@@ -53,7 +53,7 @@ CREATE INDEX sessdate_index ON session (sess_date);
 CREATE INDEX sessip_index ON session (sess_ip);
 
 -- Optional DB Auth and Prefs
--- For these tables below the default table prefix must be used 
+-- For these tables below the default table prefix must be used
 -- in the DBAuthParam SQL statements also.
 
 CREATE TABLE pref (
@@ -69,7 +69,7 @@ CREATE TABLE pref (
 -- ALTER TABLE pref ADD groupname CHAR(48) BINARY DEFAULT 'users';
 
 -- deprecated since 1.3.12. only useful for seperate databases.
--- better use the extra pref table where such users can be created easily 
+-- better use the extra pref table where such users can be created easily
 -- without password.
 --CREATE TABLE user (
 --  	userid 	CHAR(48) NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE accesslog (
 	request_time  CHAR(28),
 	status 	      SMALLINT UNSIGNED,
 	bytes_sent    SMALLINT UNSIGNED,
-        referer       VARCHAR(255), 
+        referer       VARCHAR(255),
 	agent         VARCHAR(255),
 	request_duration FLOAT
 );

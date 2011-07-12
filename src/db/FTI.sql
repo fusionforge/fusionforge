@@ -1,6 +1,6 @@
 SET client_min_messages TO warning;
 
--- ********** Create auxiliar tables ********** 
+-- ********** Create auxiliar tables **********
 
 CREATE TABLE artifact_idx (
 	artifact_id integer,
@@ -62,10 +62,10 @@ CREATE TABLE users_idx (
 	vectors tsvector
 );
 
--- ********** Populate with current data and create index ********** 
+-- ********** Populate with current data and create index **********
 
-INSERT INTO artifact_idx (artifact_id, group_artifact_id, vectors) 
-SELECT artifact_id, group_artifact_id, to_tsvector('default', coalesce(details,'') ||' 
+INSERT INTO artifact_idx (artifact_id, group_artifact_id, vectors)
+SELECT artifact_id, group_artifact_id, to_tsvector('default', coalesce(details,'') ||'
 '|| coalesce(summary,'')) AS vectors
 FROM artifact ORDER BY artifact_id;
 
@@ -78,14 +78,14 @@ FROM artifact_message ORDER BY id;
 CREATE INDEX artifact_message_idxFTI ON artifact_message_idx USING gist(vectors);
 
 INSERT INTO doc_data_idx (docid, group_id, vectors)
-SELECT docid, group_id, to_tsvector('default', coalesce(title,'') ||' 
+SELECT docid, group_id, to_tsvector('default', coalesce(title,'') ||'
 '|| coalesce(description,'')) AS vectors
 FROM doc_data ORDER BY docid;
 
 CREATE INDEX doc_data_idxFTI ON doc_data_idx USING gist(vectors);
 
 INSERT INTO forum_idx (msg_id, group_id, vectors)
-(SELECT f.msg_id, g.group_id, to_tsvector('default', coalesce(f.subject,'') ||' 
+(SELECT f.msg_id, g.group_id, to_tsvector('default', coalesce(f.subject,'') ||'
 '|| coalesce(f.body,'')) AS vectors
 FROM forum f, forum_group_list g WHERE f.group_forum_id = g.group_forum_id)
 ORDER BY msg_id;
@@ -99,28 +99,28 @@ FROM frs_file ORDER BY file_id;
 CREATE INDEX frs_file_idxFTI ON frs_file_idx USING gist(vectors);
 
 INSERT INTO frs_release_idx (release_id, vectors)
-SELECT release_id, to_tsvector('default', coalesce(changes,'') ||' 
+SELECT release_id, to_tsvector('default', coalesce(changes,'') ||'
 '|| coalesce(notes,'') ||' '|| coalesce(name,'')) AS vectors
 FROM frs_release ORDER BY release_id;
 
 CREATE INDEX frs_release_idxFTI ON frs_release_idx USING gist(vectors);
 
 INSERT INTO groups_idx (group_id, vectors)
-SELECT group_id, to_tsvector('default', coalesce(group_name,'') ||' 
+SELECT group_id, to_tsvector('default', coalesce(group_name,'') ||'
 '|| coalesce(short_description,'') ||' '|| coalesce(unix_group_name,'')) AS vectors
 FROM groups ORDER BY group_id;
 
 CREATE INDEX groups_idxFTI ON groups_idx USING gist(vectors);
 
 INSERT INTO news_bytes_idx (id, vectors)
-SELECT id, to_tsvector('default', coalesce(summary,'') ||' 
+SELECT id, to_tsvector('default', coalesce(summary,'') ||'
 '|| coalesce(details,'')) AS vectors
 FROM news_bytes ORDER BY id;
 
 CREATE INDEX news_bytes_idxFTI ON news_bytes_idx USING gist(vectors);
 
 INSERT INTO project_task_idx (project_task_id, vectors)
-SELECT project_task_id, to_tsvector('default', coalesce(summary,'') ||' 
+SELECT project_task_id, to_tsvector('default', coalesce(summary,'') ||'
 '|| coalesce(details,'')) AS vectors
 FROM project_task ORDER BY project_task_id;
 
@@ -131,14 +131,14 @@ FROM project_task ORDER BY project_task_id;
 CREATE INDEX project_task_idxFTI ON project_task_idx USING gist(vectors);
 
 INSERT INTO skills_data_idx (skills_data_id, vectors)
-SELECT skills_data_id, to_tsvector('default', coalesce(title,'') ||' 
+SELECT skills_data_id, to_tsvector('default', coalesce(title,'') ||'
 '|| coalesce(keywords,'')) AS vectors
 FROM skills_data ORDER BY skills_data_id;
 
 CREATE INDEX skills_data_idxFTI ON skills_data_idx USING gist(vectors);
 
 INSERT INTO users_idx (user_id, vectors)
-SELECT user_id, to_tsvector('default', coalesce(user_name,'') ||' 
+SELECT user_id, to_tsvector('default', coalesce(user_name,'') ||'
 '|| coalesce(realname,'')) AS vectors
 FROM users ORDER BY user_id;
 
@@ -146,7 +146,7 @@ CREATE INDEX users_idxFTI ON users_idx USING gist(vectors);
 
 -- VACUUM FULL ANALYZE;
 
--- ********** Create trigger function to update idx tables ********** 
+-- ********** Create trigger function to update idx tables **********
 
 CREATE OR REPLACE FUNCTION update_vectors() RETURNS TRIGGER AS '
 DECLARE
@@ -183,7 +183,7 @@ BEGIN
 	-- **** forum table ****
 	ELSIF table_name = ''forum'' THEN
 		IF TG_OP = ''INSERT'' THEN
-			INSERT INTO forum_idx (msg_id, group_id, vectors) (SELECT f.msg_id, g.group_id, to_tsvector(\'default\', coalesce(f.subject,\'\') ||\' \'|| 
+			INSERT INTO forum_idx (msg_id, group_id, vectors) (SELECT f.msg_id, g.group_id, to_tsvector(\'default\', coalesce(f.subject,\'\') ||\' \'||
 			coalesce(f.body,\'\')) AS vectors FROM forum f, forum_group_list g WHERE f.group_forum_id = g.group_forum_id AND f.msg_id = NEW.msg_id);
 		ELSIF TG_OP = ''UPDATE'' THEN
 			UPDATE forum_idx SET vectors=to_tsvector(\'default\', coalesce(NEW.subject,\'\') ||\' \'|| coalesce(NEW.body,\'\')) WHERE msg_id=NEW.msg_id;
@@ -260,7 +260,7 @@ BEGIN
 END;'
 LANGUAGE 'plpgsql';
 
--- ********** Set up triggers ********** 
+-- ********** Set up triggers **********
 
 CREATE TRIGGER artifact_ts_update AFTER UPDATE OR INSERT OR DELETE ON artifact
 FOR EACH ROW EXECUTE PROCEDURE update_vectors('artifact');
@@ -292,7 +292,7 @@ FOR EACH ROW EXECUTE PROCEDURE update_vectors('skills_data');
 CREATE TRIGGER users_ts_update AFTER UPDATE OR INSERT OR DELETE ON users
 FOR EACH ROW EXECUTE PROCEDURE update_vectors('users');
 
--- ********** Create types for results ********** 
+-- ********** Create types for results **********
 
 CREATE TYPE artifact_results AS (group_artifact_id integer,
 	artifact_id integer,
@@ -338,7 +338,7 @@ CREATE TYPE export_groups_results AS (group_name text,
 
 CREATE TYPE news_bytes_results AS (summary text,
 	post_date integer,
-	forum_id integer, 
+	forum_id integer,
 	realname text
 );
 
@@ -373,10 +373,10 @@ CREATE TYPE users_results AS (user_name text,
 	realname text
 );
 
--- ********** Create search store procedures ********** 
+-- ********** Create search store procedures **********
 
 CREATE OR REPLACE FUNCTION artifact_search(text, int) RETURNS SETOF artifact_results AS '
-	SELECT a.group_artifact_id, a.artifact_id, a.summary, a.open_date, u.realname FROM artifact a, 
+	SELECT a.group_artifact_id, a.artifact_id, a.summary, a.open_date, u.realname FROM artifact a,
 	(SELECT DISTINCT ON (ai.artifact_id) ai.artifact_id, COUNT(ami.id) AS total FROM artifact_idx ai LEFT OUTER JOIN artifact_message_idx ami USING (artifact_id),
 	to_tsquery($1) AS q
 	WHERE ai.group_artifact_id=$2
@@ -400,7 +400,7 @@ CREATE OR REPLACE FUNCTION doc_data_search(text, integer, text, boolean) RETURNS
 			AND doc_data.group_id = $2
 			AND doc_groups.doc_group IN (\'$3\')
 			AND doc_data.stateid IN (1, 4, 5)
-			AND doc_data.docid IN (SELECT docid FROM doc_data_idx, to_tsquery($1) AS q 
+			AND doc_data.docid IN (SELECT docid FROM doc_data_idx, to_tsquery($1) AS q
 			WHERE group_id = $2 AND vectors @@ q ORDER BY rank(vectors, q) DESC) LOOP
 				RETURN NEXT data;
 			END LOOP;
@@ -423,7 +423,7 @@ CREATE OR REPLACE FUNCTION doc_data_search(text, integer, text, boolean) RETURNS
 			WHERE doc_data.doc_group = doc_groups.doc_group
 			AND doc_data.group_id = $2
 			AND doc_data.stateid IN (1, 4, 5)
-			AND doc_data.docid IN (SELECT docid FROM doc_data_idx, to_tsquery($1) AS q 
+			AND doc_data.docid IN (SELECT docid FROM doc_data_idx, to_tsquery($1) AS q
 			WHERE group_id = $2 AND vectors @@ q ORDER BY rank(vectors, q) DESC) LOOP
 				RETURN NEXT data;
 			END LOOP;
@@ -433,7 +433,7 @@ CREATE OR REPLACE FUNCTION doc_data_search(text, integer, text, boolean) RETURNS
 			WHERE doc_data.doc_group = doc_groups.doc_group
 			AND doc_data.group_id = $2
 			AND doc_data.stateid = 1
-			AND doc_data.docid IN (SELECT docid FROM doc_data_idx, to_tsquery($1) AS q 
+			AND doc_data.docid IN (SELECT docid FROM doc_data_idx, to_tsquery($1) AS q
 			WHERE group_id = $2 AND vectors @@ q ORDER BY rank(vectors, q) DESC) LOOP
 				RETURN NEXT data;
 			END LOOP;
@@ -458,23 +458,23 @@ CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS S
 		IF $4 THEN
 			FOR data IN SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
 			FROM forum, users, forum_group_list, to_tsquery($1) AS q
-			WHERE users.user_id = forum.posted_by 
-			AND forum_group_list.group_forum_id = forum.group_forum_id 
-			AND forum_group_list.is_public <> 9 
+			WHERE users.user_id = forum.posted_by
+			AND forum_group_list.group_forum_id = forum.group_forum_id
+			AND forum_group_list.is_public <> 9
 			AND forum_group_list.group_forum_id IN (\'$3\')
-			AND forum.msg_id IN (SELECT msg_id FROM forum_idx, to_tsquery($1) AS q 
+			AND forum.msg_id IN (SELECT msg_id FROM forum_idx, to_tsquery($1) AS q
 			WHERE group_id = $2 AND vectors @@ q ORDER BY rank(vectors, q) DESC) LOOP
 				RETURN NEXT data;
 			END LOOP;
 		ELSE
 			FOR data IN SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
 			FROM forum, users, forum_group_list, to_tsquery($1) AS q
-			WHERE users.user_id = forum.posted_by 
-			AND forum_group_list.group_forum_id = forum.group_forum_id 
-			AND forum_group_list.is_public <> 9 
+			WHERE users.user_id = forum.posted_by
+			AND forum_group_list.group_forum_id = forum.group_forum_id
+			AND forum_group_list.is_public <> 9
 			AND forum_group_list.group_forum_id IN (\'$3\')
 			AND forum_group_list.is_public = 1
-			AND forum.msg_id IN (SELECT msg_id FROM forum_idx, to_tsquery($1) AS q 
+			AND forum.msg_id IN (SELECT msg_id FROM forum_idx, to_tsquery($1) AS q
 			WHERE group_id = $2 AND vectors @@ q ORDER BY rank(vectors, q) DESC) LOOP
 				RETURN NEXT data;
 			END LOOP;
@@ -483,21 +483,21 @@ CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS S
 		IF $4 THEN
 			FOR data IN SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
 			FROM forum, users, forum_group_list, to_tsquery($1) AS q
-			WHERE users.user_id = forum.posted_by 
-			AND forum_group_list.group_forum_id = forum.group_forum_id 
-			AND forum_group_list.is_public <> 9 
-			AND forum.msg_id IN (SELECT msg_id FROM forum_idx, to_tsquery($1) AS q 
+			WHERE users.user_id = forum.posted_by
+			AND forum_group_list.group_forum_id = forum.group_forum_id
+			AND forum_group_list.is_public <> 9
+			AND forum.msg_id IN (SELECT msg_id FROM forum_idx, to_tsquery($1) AS q
 			WHERE group_id = $2 AND vectors @@ q ORDER BY rank(vectors, q) DESC) LOOP
 				RETURN NEXT data;
 			END LOOP;
 		ELSE
 			FOR data IN SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
 			FROM forum, users, forum_group_list, to_tsquery($1) AS q
-			WHERE users.user_id = forum.posted_by 
-			AND forum_group_list.group_forum_id = forum.group_forum_id 
-			AND forum_group_list.is_public <> 9 
+			WHERE users.user_id = forum.posted_by
+			AND forum_group_list.group_forum_id = forum.group_forum_id
+			AND forum_group_list.is_public <> 9
 			AND forum_group_list.is_public = 1
-			AND forum.msg_id IN (SELECT msg_id FROM forum_idx, to_tsquery($1) AS q 
+			AND forum.msg_id IN (SELECT msg_id FROM forum_idx, to_tsquery($1) AS q
 			WHERE group_id = $2 AND vectors @@ q ORDER BY rank(vectors, q) DESC) LOOP
 				RETURN NEXT data;
 			END LOOP;
@@ -509,9 +509,9 @@ LANGUAGE 'plpgsql';
 
 CREATE OR REPLACE FUNCTION forum_search(text, integer) RETURNS SETOF forum_results AS '
 	SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname
-	FROM forum, users, to_tsquery($1) AS q 
+	FROM forum, users, to_tsquery($1) AS q
 	WHERE users.user_id=forum.posted_by
-	AND msg_id IN (SELECT fi.msg_id FROM forum_idx fi, forum f, to_tsquery($1) AS q 
+	AND msg_id IN (SELECT fi.msg_id FROM forum_idx fi, forum f, to_tsquery($1) AS q
 	WHERE fi.msg_id = f.msg_id AND f.group_forum_id=$2
 	AND vectors @@ q ORDER BY rank(vectors, q) DESC);'
 LANGUAGE 'SQL';
@@ -531,7 +531,7 @@ CREATE OR REPLACE FUNCTION frs_search(text, integer, text, boolean) RETURNS SETO
 			AND frs_file.release_id=frs_release.release_id
 			AND frs_package.group_id=$2
 			AND frs_package.package_id IN (\'$3\')
-			AND frs_release.release_id IN (SELECT r.release_id FROM frs_release_idx r 
+			AND frs_release.release_id IN (SELECT r.release_id FROM frs_release_idx r
 			LEFT JOIN frs_file_idx f ON r.release_id=f.release_id, to_tsquery($1) AS q
 			WHERE r.vectors @@ q OR f.vectors @@ q ORDER BY rank(r.vectors, q) DESC, rank(f.vectors, q) DESC) LOOP
 				RETURN NEXT data;
@@ -545,7 +545,7 @@ CREATE OR REPLACE FUNCTION frs_search(text, integer, text, boolean) RETURNS SETO
 			AND frs_package.group_id=$2
 			AND frs_package.package_id IN (\'$3\')
 			AND frs_package.is_public=1
-			AND frs_release.release_id IN (SELECT r.release_id FROM frs_release_idx r 
+			AND frs_release.release_id IN (SELECT r.release_id FROM frs_release_idx r
 			LEFT JOIN frs_file_idx f ON r.release_id=f.release_id, to_tsquery($1) AS q
 			WHERE r.vectors @@ q OR f.vectors @@ q ORDER BY rank(r.vectors, q) DESC, rank(f.vectors, q) DESC) LOOP
 				RETURN NEXT data;
@@ -559,7 +559,7 @@ CREATE OR REPLACE FUNCTION frs_search(text, integer, text, boolean) RETURNS SETO
 			AND frs_package.package_id = frs_release.package_id
 			AND frs_file.release_id=frs_release.release_id
 			AND frs_package.group_id=$2
-			AND frs_release.release_id IN (SELECT r.release_id FROM frs_release_idx r 
+			AND frs_release.release_id IN (SELECT r.release_id FROM frs_release_idx r
 			LEFT JOIN frs_file_idx f ON r.release_id=f.release_id, to_tsquery($1) AS q
 			WHERE r.vectors @@ q OR f.vectors @@ q ORDER BY rank(r.vectors, q) DESC, rank(f.vectors, q) DESC) LOOP
 				RETURN NEXT data;
@@ -572,7 +572,7 @@ CREATE OR REPLACE FUNCTION frs_search(text, integer, text, boolean) RETURNS SETO
 			AND frs_file.release_id=frs_release.release_id
 			AND frs_package.group_id=$2
 			AND frs_package.is_public=1
-			AND frs_release.release_id IN (SELECT r.release_id FROM frs_release_idx r 
+			AND frs_release.release_id IN (SELECT r.release_id FROM frs_release_idx r
 			LEFT JOIN frs_file_idx f ON r.release_id=f.release_id, to_tsquery($1) AS q
 			WHERE r.vectors @@ q OR f.vectors @@ q ORDER BY rank(r.vectors, q) DESC, rank(f.vectors, q) DESC) LOOP
 				RETURN NEXT data;
@@ -604,7 +604,7 @@ CREATE OR REPLACE FUNCTION export_groups_search(text) RETURNS SETOF export_group
 	license,
 	register_time
 	FROM groups, to_tsquery($1) AS q
-	WHERE status IN (\'A\', \'H\') AND is_public=\'1\' AND short_description <> \'\' AND 
+	WHERE status IN (\'A\', \'H\') AND is_public=\'1\' AND short_description <> \'\' AND
 	group_id IN (SELECT group_id FROM groups_idx, to_tsquery($1) AS q
 	WHERE vectors @@ q ORDER BY rank(vectors, q) DESC);'
 LANGUAGE 'SQL';
@@ -628,7 +628,7 @@ CREATE OR REPLACE FUNCTION project_task_search(text, integer, text, boolean) RET
 	IF $3 <> \'\' THEN
 	    -- show non public
 		IF $4 THEN
-			FOR data IN SELECT project_task.project_task_id, headline(project_task.summary, q) AS summary, project_task.percent_complete, 
+			FOR data IN SELECT project_task.project_task_id, headline(project_task.summary, q) AS summary, project_task.percent_complete,
 			project_task.start_date, project_task.end_date, users.firstname||\' \'||users.lastname AS realname,
 			project_group_list.project_name, project_group_list.group_project_id
 			FROM project_task, users, project_group_list, to_tsquery($1) AS q
@@ -644,7 +644,7 @@ CREATE OR REPLACE FUNCTION project_task_search(text, integer, text, boolean) RET
 				RETURN NEXT data;
 			END LOOP;
 		ELSE
-			FOR data IN SELECT project_task.project_task_id, headline(project_task.summary, q) AS summary, project_task.percent_complete, 
+			FOR data IN SELECT project_task.project_task_id, headline(project_task.summary, q) AS summary, project_task.percent_complete,
 			project_task.start_date, project_task.end_date, users.firstname||\' \'||users.lastname AS realname,
 			project_group_list.project_name, project_group_list.group_project_id
 			FROM project_task, users, project_group_list, to_tsquery($1) AS q
@@ -663,7 +663,7 @@ CREATE OR REPLACE FUNCTION project_task_search(text, integer, text, boolean) RET
 		END IF;
 	ELSE
 		IF $4 THEN
-			FOR data IN SELECT project_task.project_task_id, headline(project_task.summary, q) AS summary, project_task.percent_complete, 
+			FOR data IN SELECT project_task.project_task_id, headline(project_task.summary, q) AS summary, project_task.percent_complete,
 			project_task.start_date, project_task.end_date, users.firstname||\' \'||users.lastname AS realname,
 			project_group_list.project_name, project_group_list.group_project_id
 			FROM project_task, users, project_group_list, to_tsquery($1) AS q
@@ -678,7 +678,7 @@ CREATE OR REPLACE FUNCTION project_task_search(text, integer, text, boolean) RET
 				RETURN NEXT data;
 			END LOOP;
 		ELSE
-			FOR data IN SELECT project_task.project_task_id, headline(project_task.summary, q) AS summary, project_task.percent_complete, 
+			FOR data IN SELECT project_task.project_task_id, headline(project_task.summary, q) AS summary, project_task.percent_complete,
 			project_task.start_date, project_task.end_date, users.firstname||\' \'||users.lastname AS realname,
 			project_group_list.project_name, project_group_list.group_project_id
 			FROM project_task, users, project_group_list, to_tsquery($1) AS q
@@ -707,7 +707,7 @@ CREATE OR REPLACE FUNCTION skills_data_search(text) RETURNS SETOF skills_data_re
 	FROM skills_data, to_tsquery($1) AS q, users, skills_data_types
 	WHERE skills_data.user_id=users.user_id
 	AND skills_data.type=skills_data_types.type_id
-	AND skills_data.skills_data_id IN (SELECT skills_data_id FROM skills_data_idx, 
+	AND skills_data.skills_data_id IN (SELECT skills_data_id FROM skills_data_idx,
 	to_tsquery($1) AS q WHERE vectors @@ q ORDER BY rank(vectors, q) DESC);'
 LANGUAGE 'SQL';
 
@@ -726,8 +726,8 @@ CREATE OR REPLACE FUNCTION trackers_search(text, integer, text, boolean) RETURNS
 			AND artifact_group_list.group_artifact_id = artifact.group_artifact_id
 			AND artifact_group_list.group_id = $2
 			AND artifact_group_list.group_artifact_id IN (\'$3\')
-			AND artifact.artifact_id IN (SELECT a.artifact_id FROM artifact a, 
-			(SELECT DISTINCT ON (ai.artifact_id) ai.artifact_id, COUNT(ami.id) AS total FROM artifact_idx ai 
+			AND artifact.artifact_id IN (SELECT a.artifact_id FROM artifact a,
+			(SELECT DISTINCT ON (ai.artifact_id) ai.artifact_id, COUNT(ami.id) AS total FROM artifact_idx ai
 			LEFT OUTER JOIN artifact_message_idx ami USING (artifact_id), artifact_group_list agl,
 			to_tsquery($1) AS q
 			WHERE ai.group_artifact_id=agl.group_artifact_id
@@ -749,8 +749,8 @@ CREATE OR REPLACE FUNCTION trackers_search(text, integer, text, boolean) RETURNS
 			AND artifact_group_list.group_id = $2
 			AND artifact_group_list.group_artifact_id IN (\'$3\')
 			AND artifact_group_list.is_public = 1
-			AND artifact.artifact_id IN (SELECT a.artifact_id FROM artifact a, 
-			(SELECT DISTINCT ON (ai.artifact_id) ai.artifact_id, COUNT(ami.id) AS total FROM artifact_idx ai 
+			AND artifact.artifact_id IN (SELECT a.artifact_id FROM artifact a,
+			(SELECT DISTINCT ON (ai.artifact_id) ai.artifact_id, COUNT(ami.id) AS total FROM artifact_idx ai
 			LEFT OUTER JOIN artifact_message_idx ami USING (artifact_id), artifact_group_list agl,
 			to_tsquery($1) AS q
 			WHERE ai.group_artifact_id=agl.group_artifact_id
@@ -773,8 +773,8 @@ CREATE OR REPLACE FUNCTION trackers_search(text, integer, text, boolean) RETURNS
 			WHERE users.user_id = artifact.submitted_by
 			AND artifact_group_list.group_artifact_id = artifact.group_artifact_id
 			AND artifact_group_list.group_id = $2
-			AND artifact.artifact_id IN (SELECT a.artifact_id FROM artifact a, 
-			(SELECT DISTINCT ON (ai.artifact_id) ai.artifact_id, COUNT(ami.id) AS total FROM artifact_idx ai 
+			AND artifact.artifact_id IN (SELECT a.artifact_id FROM artifact a,
+			(SELECT DISTINCT ON (ai.artifact_id) ai.artifact_id, COUNT(ami.id) AS total FROM artifact_idx ai
 			LEFT OUTER JOIN artifact_message_idx ami USING (artifact_id), artifact_group_list agl,
 			to_tsquery($1) AS q
 			WHERE ai.group_artifact_id=agl.group_artifact_id
@@ -795,8 +795,8 @@ CREATE OR REPLACE FUNCTION trackers_search(text, integer, text, boolean) RETURNS
 			AND artifact_group_list.group_artifact_id = artifact.group_artifact_id
 			AND artifact_group_list.group_id = $2
 			AND artifact_group_list.is_public = 1
-			AND artifact.artifact_id IN (SELECT a.artifact_id FROM artifact a, 
-			(SELECT DISTINCT ON (ai.artifact_id) ai.artifact_id, COUNT(ami.id) AS total FROM artifact_idx ai 
+			AND artifact.artifact_id IN (SELECT a.artifact_id FROM artifact a,
+			(SELECT DISTINCT ON (ai.artifact_id) ai.artifact_id, COUNT(ami.id) AS total FROM artifact_idx ai
 			LEFT OUTER JOIN artifact_message_idx ami USING (artifact_id), artifact_group_list agl,
 			to_tsquery($1) AS q
 			WHERE ai.group_artifact_id=agl.group_artifact_id

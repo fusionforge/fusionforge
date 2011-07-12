@@ -49,7 +49,7 @@ CREATE TABLE webcal_entry_repeats_not (
 
 CREATE TABLE webcal_entry_user (
   cal_id int DEFAULT '0' NOT NULL,
-  cal_login varchar(25) DEFAULT '' NOT NULL, 
+  cal_login varchar(25) DEFAULT '' NOT NULL,
   cal_status char(1) DEFAULT 'A' NOT NULL,
   cal_category INT DEFAULT NULL,
   PRIMARY KEY ( cal_id,cal_login )

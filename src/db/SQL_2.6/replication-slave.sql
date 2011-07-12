@@ -35,7 +35,7 @@ CREATE TABLE "stats_project" (
         "tasks_closed" integer DEFAULT 0,
         "help_requests" integer DEFAULT 0
 );
-CREATE UNIQUE INDEX "statsproject_month_day_group" on "stats_project" 
+CREATE UNIQUE INDEX "statsproject_month_day_group" on "stats_project"
 	using btree ( "month" "int4_ops", "day" "int4_ops", "group_id" "int4_ops" );
 
 
@@ -45,7 +45,7 @@ CREATE TABLE "stats_project_developers" (
         "group_id" integer DEFAULT 0 NOT NULL,
         "developers" integer DEFAULT 0 NOT NULL
 );
-CREATE UNIQUE INDEX "statsprojectdev_month_day_group" on "stats_project_developers" 
+CREATE UNIQUE INDEX "statsprojectdev_month_day_group" on "stats_project_developers"
 	using btree ( "month" "int4_ops", "day" "int4_ops", "group_id" "int4_ops" );
 
 
@@ -56,7 +56,7 @@ CREATE TABLE "stats_project_metric" (
         "percentile" double precision DEFAULT 0 NOT NULL,
         "group_id" integer DEFAULT 0 NOT NULL
 );
-CREATE UNIQUE INDEX "statsprojectmetric_month_day_gr" on "stats_project_metric" 
+CREATE UNIQUE INDEX "statsprojectmetric_month_day_gr" on "stats_project_metric"
 	using btree ( "month" "int4_ops", "day" "int4_ops", "group_id" "int4_ops" );
 
 
@@ -66,7 +66,7 @@ CREATE TABLE "frs_dlstats_file_agg" (
         "file_id" integer,
         "downloads" integer
 );
-CREATE UNIQUE INDEX "frsdlfileagg_month_day_file" on "frs_dlstats_file_agg" 
+CREATE UNIQUE INDEX "frsdlfileagg_month_day_file" on "frs_dlstats_file_agg"
 	using btree ( "month" "int4_ops", "day" "int4_ops", "file_id" "int4_ops" );
 
 
@@ -76,7 +76,7 @@ CREATE TABLE "stats_subd_pages" (
         "group_id" integer DEFAULT 0 NOT NULL,
         "pages" integer DEFAULT 0 NOT NULL
 );
-CREATE UNIQUE INDEX "statssubdpages_month_day_group" on "stats_subd_pages" 
+CREATE UNIQUE INDEX "statssubdpages_month_day_group" on "stats_subd_pages"
 	using btree ( "month" "int4_ops", "day" "int4_ops", "group_id" "int4_ops" );
 
 
@@ -86,7 +86,7 @@ CREATE TABLE "stats_agg_logo_by_group" (
         "group_id" integer,
         "count" integer
 );
-CREATE UNIQUE INDEX "statslogobygroup_month_day_grou" on "stats_agg_logo_by_group" 
+CREATE UNIQUE INDEX "statslogobygroup_month_day_grou" on "stats_agg_logo_by_group"
 	using btree ( "month" "int4_ops", "day" "int4_ops", "group_id" "int4_ops" );
 
 
@@ -98,7 +98,7 @@ CREATE TABLE "stats_cvs_group" (
         "commits" integer DEFAULT 0 NOT NULL,
         "adds" integer DEFAULT 0 NOT NULL
 );
-CREATE UNIQUE INDEX "statscvsgroup_month_day_group" on "stats_cvs_group" 
+CREATE UNIQUE INDEX "statscvsgroup_month_day_group" on "stats_cvs_group"
 	using btree ( "month" "int4_ops", "day" "int4_ops", "group_id" "int4_ops" );
 
 
@@ -108,7 +108,7 @@ CREATE TABLE "stats_agg_site_by_group" (
         "group_id" integer,
         "count" integer
 );
-CREATE UNIQUE INDEX "statssitebygroup_month_day_grou" on "stats_agg_site_by_group" 
+CREATE UNIQUE INDEX "statssitebygroup_month_day_grou" on "stats_agg_site_by_group"
 	using btree ( "month" "int4_ops", "day" "int4_ops", "group_id" "int4_ops" );
 
 
@@ -117,7 +117,7 @@ CREATE TABLE "stats_site_pages_by_day" (
         "day" integer,
         "site_page_views" integer
 );
-CREATE  INDEX "statssitepagesbyday_month_day" on "stats_site_pages_by_day" 
+CREATE  INDEX "statssitepagesbyday_month_day" on "stats_site_pages_by_day"
 	using btree ( "month" "int4_ops", "day" "int4_ops" );
 
 
@@ -304,8 +304,8 @@ CREATE TABLE "trove_treesums" (
 
 CREATE TABLE "foundry_projects" (
         "id" integer DEFAULT nextval('foundry_projects_pk_seq'::text) NOT NULL,
-        "foundry_id" integer DEFAULT '0' NOT NULL, 
-        "project_id" integer DEFAULT '0' NOT NULL, 
+        "foundry_id" integer DEFAULT '0' NOT NULL,
+        "project_id" integer DEFAULT '0' NOT NULL,
         Constraint "foundry_projects_pkey" Primary Key ("id")
 );
 CREATE  INDEX "foundry_projects_foundry" on "foundry_projects" using btree (

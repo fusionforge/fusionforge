@@ -76,7 +76,7 @@ CREATE TABLE test_session (
 -- ALTER TABLE page CHANGE id id INT NOT NULL AUTO_INCREMENT;
 
 -- Optional DB Auth and Prefs
--- For these tables below the default table prefix must be used 
+-- For these tables below the default table prefix must be used
 -- in the DBAuthParam SQL statements also.
 
 CREATE TABLE test_pref (
@@ -85,7 +85,7 @@ CREATE TABLE test_pref (
   	PRIMARY KEY (userid)
 );
 
--- better use the extra pref table where such users can be created easily 
+-- better use the extra pref table where such users can be created easily
 -- without password.
 --CREATE TABLE test_user (
 --  	userid 	CHAR(48) BINARY NOT NULL UNIQUE,
@@ -120,7 +120,7 @@ CREATE TABLE test_accesslog (
 	request_time  char(28),
 	status 	      smallint unsigned,
 	bytes_sent    smallint unsigned,
-        referer       varchar(255), 
+        referer       varchar(255),
 	agent         varchar(255),
 	request_duration float
 );

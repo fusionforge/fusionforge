@@ -17,7 +17,7 @@ ALTER TABLE artifact_group_list ADD COLUMN custom_renderer TEXT;
 
 CREATE TABLE artifact_query (
 	artifact_query_id SERIAL NOT NULL,
-	group_artifact_id integer NOT NULL 
+	group_artifact_id integer NOT NULL
 		CONSTRAINT artquery_groupartid_fk REFERENCES artifact_group_list(group_artifact_id) ON DELETE CASCADE,
 	user_id integer NOT NULL,
 	query_name text NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE artifact_query (
 );
 
 CREATE TABLE artifact_query_fields (
-	artifact_query_id integer NOT NULL 
+	artifact_query_id integer NOT NULL
 		CONSTRAINT artqueryelmnt_artqueryid REFERENCES artifact_query(artifact_query_id) ON DELETE CASCADE,
 	query_field_type text NOT NULL,
 	query_field_id int NOT NULL,

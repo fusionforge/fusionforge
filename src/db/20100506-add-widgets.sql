@@ -10,7 +10,7 @@ CREATE TABLE layouts (
   description text NOT NULL,
   scope char(1) NOT NULL default 'S',
   PRIMARY KEY(id)
-); 
+);
 
 --
 -- Contenu de la table 'layouts'
@@ -58,7 +58,7 @@ CREATE TABLE layouts_rows (
   layout_id INTEGER  NOT NULL default '0',
   rank INTEGER NOT NULL default '0',
   PRIMARY KEY  (id)
-); 
+);
 
 --
 -- Contenu de la table 'layouts_rows'

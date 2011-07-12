@@ -1,113 +1,113 @@
 -- phpMyAdmin SQL Dump
 -- version 2.9.2
 -- http://www.phpmyadmin.net
--- 
--- 
+--
+--
 -- Database: `gforge`
--- 
+--
 
--- 
+--
 -- Dumping data for table `activity_log`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_canned_responses`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_counts_agg`
--- 
+--
 
-INSERT INTO `artifact_counts_agg` (`group_artifact_id`, `count`, `open_count`) VALUES 
+INSERT INTO `artifact_counts_agg` (`group_artifact_id`, `count`, `open_count`) VALUES
 (100, 0, 0);
 
--- 
+--
 -- Dumping data for table `artifact_extra_field_data`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_extra_field_elements`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_extra_field_list`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_file`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_group_list`
--- 
+--
 
-INSERT INTO `artifact_group_list` (`group_artifact_id`, `group_id`, `name`, `description`, `is_public`, `allow_anon`, `email_all_updates`, `email_address`, `due_period`, `submit_instructions`, `browse_instructions`, `datatype`, `status_timeout`, `custom_status_field`, `custom_renderer`) VALUES 
+INSERT INTO `artifact_group_list` (`group_artifact_id`, `group_id`, `name`, `description`, `is_public`, `allow_anon`, `email_all_updates`, `email_address`, `due_period`, `submit_instructions`, `browse_instructions`, `datatype`, `status_timeout`, `custom_status_field`, `custom_renderer`) VALUES
 (100, 1, 'Default', 'Default Data - Dont Edit', 3, 0, 0, '', 2592000, NULL, NULL, 0, NULL, 0, NULL);
 
--- 
+--
 -- Dumping data for table `artifact_history`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_message`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_monitor`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_perm`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_query`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_query_fields`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `artifact_status`
--- 
+--
 
-INSERT INTO `artifact_status` (`id`, `status_name`) VALUES 
+INSERT INTO `artifact_status` (`id`, `status_name`) VALUES
 (1, 'Open'),
 (2, 'Closed');
 
--- 
+--
 -- Dumping data for table `artifact_type_monitor`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `canned_responses`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `country_code`
--- 
+--
 
-INSERT INTO `country_code` (`country_name`, `ccode`) VALUES 
+INSERT INTO `country_code` (`country_name`, `ccode`) VALUES
 ('AFGHANISTAN', 'AF'),
 ('ALBANIA', 'AL'),
 ('ALGERIA', 'DZ'),
@@ -348,15 +348,15 @@ INSERT INTO `country_code` (`country_name`, `ccode`) VALUES
 ('ZIMBABWE', 'ZW'),
 ('UNITED KINGDOM', 'UK');
 
--- 
+--
 -- Dumping data for table `cron_history`
--- 
+--
 
--- 
+--
 -- Dumping data for table `forum_attachment_type`
--- 
+--
 
-INSERT INTO `forum_attachment_type` (`extension`, `mimetype`, `size`, `width`, `height`, `enabled`) VALUES 
+INSERT INTO `forum_attachment_type` (`extension`, `mimetype`, `size`, `width`, `height`, `enabled`) VALUES
 ("gif", "Content-type: image/gif", 20000, 620, 280, 1),
 ("jpeg", "Content-type: image/jpeg", 20000, 620, 280, 1),
 ("jpg", "Content-type: image/jpeg", 100000, 0, 0, 1),
@@ -370,103 +370,103 @@ INSERT INTO `forum_attachment_type` (`extension`, `mimetype`, `size`, `width`, `
 ("txt", "Content-type: plain/text", 20000, 0, 0, 1);
 
 
--- 
+--
 -- Dumping data for table `cron_history`
--- 
+--
 
 
 
--- 
+--
 -- Dumping data for table `db_images`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `deleted_groups`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `deleted_mailing_lists`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `doc_data`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `doc_groups`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `doc_states`
--- 
+--
 
-INSERT INTO `doc_states` (`stateid`, `name`) VALUES 
+INSERT INTO `doc_states` (`stateid`, `name`) VALUES
 (1, 'active'),
 (2, 'deleted'),
 (3, 'pending'),
 (4, 'hidden'),
 (5, 'private');
 
--- 
+--
 -- Dumping data for table `filemodule_monitor`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `forum`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `forum_agg_msg_count`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `forum_group_list`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `forum_monitored_forums`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `forum_perm`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `forum_saved_place`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `frs_dlstats_file`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `frs_dlstats_filetotal_agg`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `frs_file`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `frs_filetype`
--- 
+--
 
-INSERT INTO `frs_filetype` (`type_id`, `name`) VALUES 
+INSERT INTO `frs_filetype` (`type_id`, `name`) VALUES
 (1000, '.deb'),
 (2000, '.rpm'),
 (3000, '.zip'),
@@ -483,16 +483,16 @@ INSERT INTO `frs_filetype` (`type_id`, `name`) VALUES
 (9200, 'pdf'),
 (9999, 'Other');
 
--- 
+--
 -- Dumping data for table `frs_package`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `frs_processor`
--- 
+--
 
-INSERT INTO `frs_processor` (`processor_id`, `name`) VALUES 
+INSERT INTO `frs_processor` (`processor_id`, `name`) VALUES
 (1000, 'i386'),
 (6000, 'IA64'),
 (7000, 'Alpha'),
@@ -503,60 +503,60 @@ INSERT INTO `frs_processor` (`processor_id`, `name`) VALUES
 (5000, 'UltraSparc'),
 (9999, 'Other');
 
--- 
+--
 -- Dumping data for table `frs_release`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `frs_status`
--- 
+--
 
-INSERT INTO `frs_status` (`status_id`, `name`) VALUES 
+INSERT INTO `frs_status` (`status_id`, `name`) VALUES
 (1, 'Active'),
 (3, 'Hidden');
 
--- 
+--
 -- Dumping data for table `group_cvs_history`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `group_history`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `group_join_request`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `group_plugin`
--- 
+--
 
-INSERT INTO `group_plugin` (`group_plugin_id`, `group_id`, `plugin_id`) VALUES 
+INSERT INTO `group_plugin` (`group_plugin_id`, `group_id`, `plugin_id`) VALUES
 (1, 1, 1),
 (2, 2, 1),
 (3, 3, 1),
 (4, 4, 1);
 
--- 
+--
 -- Dumping data for table `groups`
--- 
+--
 
-INSERT INTO `groups` (`group_id`, `group_name`, `homepage`, `is_public`, `status`, `unix_group_name`, `unix_box`, `http_domain`, `short_description`, `register_purpose`, `license_other`, `register_time`, `rand_hash`, `use_mail`, `use_survey`, `use_forum`, `use_pm`, `use_scm`, `use_news`, `type_id`, `use_docman`, `new_doc_address`, `send_all_docs`, `use_pm_depend_box`, `use_ftp`, `use_tracker`, `use_frs`, `use_stats`, `enable_pserver`, `enable_anonscm`, `license`, `scm_box`) VALUES 
+INSERT INTO `groups` (`group_id`, `group_name`, `homepage`, `is_public`, `status`, `unix_group_name`, `unix_box`, `http_domain`, `short_description`, `register_purpose`, `license_other`, `register_time`, `rand_hash`, `use_mail`, `use_survey`, `use_forum`, `use_pm`, `use_scm`, `use_news`, `type_id`, `use_docman`, `new_doc_address`, `send_all_docs`, `use_pm_depend_box`, `use_ftp`, `use_tracker`, `use_frs`, `use_stats`, `enable_pserver`, `enable_anonscm`, `license`, `scm_box`) VALUES
 (1, 'Master Group', NULL, 0, 'A', 'gforge', 'shell1', NULL, NULL, NULL, NULL, 0, NULL, 1, 1, 1, 1, 1, 1, 1, 1, '', 0, 1, 1, 1, 1, 1, 1, 1, 100, 'cvs1'),
 (2, 'Stats Group', NULL, 0, 'A', 'stats', 'shell1', NULL, NULL, NULL, NULL, 0, NULL, 1, 1, 1, 1, 1, 1, 1, 1, '', 0, 1, 1, 1, 1, 1, 1, 1, 100, 'cvs1'),
 (3, 'News Group', NULL, 0, 'A', 'news', 'shell1', NULL, NULL, NULL, NULL, 0, NULL, 1, 1, 1, 1, 1, 1, 1, 1, '', 0, 1, 1, 1, 1, 1, 1, 1, 100, 'cvs1'),
 (4, 'Peer Ratings Group', NULL, 0, 'A', 'peerrating', 'shell1', NULL, NULL, NULL, NULL, 0, NULL, 1, 1, 1, 1, 1, 1, 1, 1, '', 0, 1, 1, 1, 1, 1, 1, 1, 100, 'cvs1'),
 (5, 'Template Project', NULL, 1, 'P', 'template', 'shell1', NULL, 'Project to house templates used to build other projects', NULL, NULL, 1120266772, NULL, 1, 1, 1, 1, 1, 1, 1, 1, '', 0, 1, 1, 1, 1, 1, 1, 1, 100, NULL);
 
--- 
+--
 -- Dumping data for table `licenses`
--- 
+--
 
-INSERT INTO `licenses` (`license_id`, `license_name`) VALUES 
+INSERT INTO `licenses` (`license_id`, `license_name`) VALUES
 ('100', 'None'),
 ('101', 'GNU General Public License (GPL)'),
 ('102', 'GNU Library Public License (LGPL)'),
@@ -585,26 +585,26 @@ INSERT INTO `licenses` (`license_id`, `license_name`) VALUES
 ('125', 'Website Only'),
 ('126', 'Other/Proprietary License');
 
--- 
+--
 -- Dumping data for table `mail_group_list`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `massmail_queue`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `news_bytes`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `nss_groups`
--- 
+--
 
-INSERT INTO `nss_groups` (`user_id`, `group_id`, `name`, `gid`) VALUES 
+INSERT INTO `nss_groups` (`user_id`, `group_id`, `name`, `gid`) VALUES
 (0, 1, 'gforge', 10001),
 (0, 2, 'stats', 10002),
 (0, 3, 'news', 10003),
@@ -614,21 +614,21 @@ INSERT INTO `nss_groups` (`user_id`, `group_id`, `name`, `gid`) VALUES
 (0, 3, 'scm_news', 50003),
 (0, 4, 'scm_peerrating', 50004);
 
--- 
+--
 -- Dumping data for table `nss_usergroups`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `people_job`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `people_job_category`
--- 
+--
 
-INSERT INTO `people_job_category` (`category_id`, `name`, `private_flag`) VALUES 
+INSERT INTO `people_job_category` (`category_id`, `name`, `private_flag`) VALUES
 (1, 'Developer', 0),
 (2, 'Project Manager', 0),
 (3, 'Unix Admin', 0),
@@ -637,185 +637,185 @@ INSERT INTO `people_job_category` (`category_id`, `name`, `private_flag`) VALUES
 (6, 'Support Manager', 0),
 (7, 'Graphic/Other Designer', 0);
 
--- 
+--
 -- Dumping data for table `people_job_inventory`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `people_job_status`
--- 
+--
 
-INSERT INTO `people_job_status` (`status_id`, `name`) VALUES 
+INSERT INTO `people_job_status` (`status_id`, `name`) VALUES
 (1, 'Open'),
 (2, 'Filled'),
 (3, 'Deleted');
 
--- 
+--
 -- Dumping data for table `people_skill`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `people_skill_inventory`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `people_skill_level`
--- 
+--
 
-INSERT INTO `people_skill_level` (`skill_level_id`, `name`) VALUES 
+INSERT INTO `people_skill_level` (`skill_level_id`, `name`) VALUES
 (1, 'Want to Learn'),
 (2, 'Competent'),
 (3, 'Wizard'),
 (4, 'Wrote The Book'),
 (5, 'Wrote It');
 
--- 
+--
 -- Dumping data for table `people_skill_year`
--- 
+--
 
-INSERT INTO `people_skill_year` (`skill_year_id`, `name`) VALUES 
+INSERT INTO `people_skill_year` (`skill_year_id`, `name`) VALUES
 (1, '< 6 Months'),
 (2, '6 Mo - 2 yr'),
 (3, '2 yr - 5 yr'),
 (4, '5 yr - 10 yr'),
 (5, '> 10 years');
 
--- 
+--
 -- Dumping data for table `plugin_cvstracker_data_artifact`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `plugin_cvstracker_data_master`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `plugins`
--- 
+--
 
-INSERT INTO `plugins` (`plugin_id`, `plugin_name`, `plugin_desc`) VALUES 
+INSERT INTO `plugins` (`plugin_id`, `plugin_name`, `plugin_desc`) VALUES
 (1, 'scmsvn', 'SVN Plugin');
 
--- 
+--
 -- Dumping data for table `prdb_dbs`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `prdb_states`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `prdb_types`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_assigned_to`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_category`
--- 
+--
 
-INSERT INTO `project_category` (`category_id`, `group_project_id`, `category_name`) VALUES 
+INSERT INTO `project_category` (`category_id`, `group_project_id`, `category_name`) VALUES
 (100, 1, 'None');
 
--- 
+--
 -- Dumping data for table `project_counts_agg`
--- 
+--
 
-INSERT INTO `project_counts_agg` (`group_project_id`, `count`, `open_count`) VALUES 
+INSERT INTO `project_counts_agg` (`group_project_id`, `count`, `open_count`) VALUES
 (1, 1, 1);
 
--- 
+--
 -- Dumping data for table `project_dependencies`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_group_list`
--- 
+--
 
-INSERT INTO `project_group_list` (`group_project_id`, `group_id`, `project_name`, `is_public`, `description`, `send_all_posts_to`) VALUES 
+INSERT INTO `project_group_list` (`group_project_id`, `group_id`, `project_name`, `is_public`, `description`, `send_all_posts_to`) VALUES
 (1, 1, 'Default', 0, 'Default Project - Don''t Change', NULL);
 
--- 
+--
 -- Dumping data for table `project_history`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_messages`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_metric`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_metric_tmp1`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_perm`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_status`
--- 
+--
 
-INSERT INTO `project_status` (`status_id`, `status_name`) VALUES 
+INSERT INTO `project_status` (`status_id`, `status_name`) VALUES
 (1, 'Open'),
 (2, 'Closed');
 
--- 
+--
 -- Dumping data for table `project_sums_agg`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_task`
--- 
+--
 
-INSERT INTO `project_task` (`project_task_id`, `group_project_id`, `summary`, `details`, `percent_complete`, `priority`, `hours`, `start_date`, `end_date`, `created_by`, `status_id`, `category_id`, `duration`, `parent_id`, `last_modified_date`) VALUES 
+INSERT INTO `project_task` (`project_task_id`, `group_project_id`, `summary`, `details`, `percent_complete`, `priority`, `hours`, `start_date`, `end_date`, `created_by`, `status_id`, `category_id`, `duration`, `parent_id`, `last_modified_date`) VALUES
 (1, 1, '', '', 0, 0, 0, 0, 0, 100, 1, 100, 0, 0, 1108701981);
 
--- 
+--
 -- Dumping data for table `project_task_artifact`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_task_external_order`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `project_weekly_metric`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `prweb_vhost`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `role`
--- 
+--
 
-INSERT INTO `role` (`role_id`, `group_id`, `role_name`) VALUES 
+INSERT INTO `role` (`role_id`, `group_id`, `role_name`) VALUES
 (1, 1, 'Default'),
 (2, 2, 'Admin'),
 (3, 2, 'Senior Developer'),
@@ -838,11 +838,11 @@ INSERT INTO `role` (`role_id`, `group_id`, `role_name`) VALUES
 (20, 1, 'Doc Writer'),
 (21, 1, 'Support Tech');
 
--- 
+--
 -- Dumping data for table `role_setting`
--- 
+--
 
-INSERT INTO `role_setting` (`role_id`, `section_name`, `ref_id`, `value`) VALUES 
+INSERT INTO `role_setting` (`role_id`, `section_name`, `ref_id`, `value`) VALUES
 (2, 'projectadmin', 0, 'A'),
 (2, 'frs', 0, '1'),
 (2, 'scm', 0, '1'),
@@ -994,127 +994,127 @@ INSERT INTO `role_setting` (`role_id`, `section_name`, `ref_id`, `value`) VALUES
 (21, 'pmadmin', 0, '0'),
 (21, 'pm', 1, '0');
 
--- 
+--
 -- Dumping data for table `skills_data`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `skills_data_types`
--- 
+--
 
-INSERT INTO `skills_data_types` (`type_id`, `type_name`) VALUES 
+INSERT INTO `skills_data_types` (`type_id`, `type_name`) VALUES
 (1, 'Unspecified'),
 (2, 'Project'),
 (3, 'Training'),
 (4, 'Proposal'),
 (5, 'Investigation');
 
--- 
+--
 -- Dumping data for table `snippet`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `snippet_package`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `snippet_package_item`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `snippet_package_version`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `snippet_version`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_agg_logo_by_day`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_agg_logo_by_group`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_agg_pages_by_day`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_agg_site_by_group`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_cvs_group`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_cvs_user`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_project`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_project_developers`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_project_metric`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_project_months`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_site`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_site_months`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_site_pages_by_day`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_site_pages_by_month`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `stats_subd_pages`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `supported_languages`
--- 
+--
 
-INSERT INTO `supported_languages` (`language_id`, `name`, `filename`, `classname`, `language_code`) VALUES 
+INSERT INTO `supported_languages` (`language_id`, `name`, `filename`, `classname`, `language_code`) VALUES
 (1, 'English', 'English.class', 'English', 'en'),
 (2, 'Japanese', 'Japanese.class', 'Japanese', 'ja'),
 (4, 'Spanish', 'Spanish.class', 'Spanish', 'es'),
@@ -1132,11 +1132,11 @@ INSERT INTO `supported_languages` (`language_id`, `name`, `filename`, `classname
 (16, 'Korean', 'Korean.class', 'Korean', 'ko'),
 (17, 'Smpl.Chinese', 'SimplifiedChinese.class', 'SimplifiedChinese', 'zh-cn');
 
--- 
+--
 -- Dumping data for table `survey_question_types`
--- 
+--
 
-INSERT INTO `survey_question_types` (`id`, `type`) VALUES 
+INSERT INTO `survey_question_types` (`id`, `type`) VALUES
 (1, 'Radio Buttons 1-5'),
 (2, 'Text Area'),
 (3, 'Radio Buttons Yes/No'),
@@ -1144,50 +1144,50 @@ INSERT INTO `survey_question_types` (`id`, `type`) VALUES
 (5, 'Text Field'),
 (100, 'None');
 
--- 
+--
 -- Dumping data for table `survey_questions`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `survey_rating_aggregate`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `survey_rating_response`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `survey_responses`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `surveys`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `themes`
--- 
+--
 
-INSERT INTO `themes` (`theme_id`, `dirname`, `fullname`, `enabled`) VALUES 
+INSERT INTO `themes` (`theme_id`, `dirname`, `fullname`, `enabled`) VALUES
 (1, 'gforge', 'Default Theme', 1),
 (2, 'ultralite', 'Ultra-Lite Text-only', 1),
 (3, 'osx', 'OSX', 1);
 
--- 
+--
 -- Dumping data for table `trove_agg`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `trove_cat`
--- 
+--
 
-INSERT INTO `trove_cat` (`trove_cat_id`, `version`, `parent`, `root_parent`, `shortname`, `fullname`, `description`, `count_subcat`, `count_subproj`, `fullpath`, `fullpath_ids`) VALUES 
+INSERT INTO `trove_cat` (`trove_cat_id`, `version`, `parent`, `root_parent`, `shortname`, `fullname`, `description`, `count_subcat`, `count_subproj`, `fullpath`, `fullpath_ids`) VALUES
 (1, 2000031601, 0, 0, 'audience', 'Intended Audience', 'The main class of people likely to be interested in this resource.', 0, 0, 'Intended Audience', '1'),
 (2, 2000032401, 1, 1, 'endusers', 'End Users/Desktop', 'Programs and resources for software end users. Software for the desktop.', 0, 0, 'Intended Audience :: End Users/Desktop', '1 :: 2'),
 (3, 2000041101, 1, 1, 'developers', 'Developers', 'Programs and resources for software developers, to include libraries.', 0, 0, 'Intended Audience :: Developers', '1 :: 3'),
@@ -1490,98 +1490,98 @@ INSERT INTO `trove_cat` (`trove_cat_id`, `version`, `parent`, `root_parent`, `sh
 (301, 2001041701, 14, 13, 'nosl', 'Nokia Open Source License', 'Nokia Open Source License', 0, 0, 'License :: OSI Approved :: Nokia Open Source License', '13 :: 14 :: 301'),
 (302, 2001041701, 14, 13, 'sleepycat', 'Sleepycat License', 'Sleepycat License', 0, 0, 'License :: OSI Approved :: Sleepycat License', '13 :: 14 :: 302'),
 (303, 2001041701, 14, 13, 'nethack', 'Nethack General Public License', 'Nethack General Public License', 0, 0, 'License :: OSI Approved :: Nethack General Public License', '13 :: 14 :: 303');
-INSERT INTO `trove_cat` (`trove_cat_id`, `version`, `parent`, `root_parent`, `shortname`, `fullname`, `description`, `count_subcat`, `count_subproj`, `fullpath`, `fullpath_ids`) VALUES 
+INSERT INTO `trove_cat` (`trove_cat_id`, `version`, `parent`, `root_parent`, `shortname`, `fullname`, `description`, `count_subcat`, `count_subproj`, `fullpath`, `fullpath_ids`) VALUES
 (304, 2001041701, 189, 13, 'mpl10', 'Mozilla Public License 1.0', 'Mozilla Public License 1.0', 0, 0, 'License :: OSI Approved :: Mozilla Public License (MPL) :: Mozilla Public License 1.0', '13 :: 14 :: 189 :: 304'),
 (305, 2001041701, 189, 13, 'mpl11', 'Mozilla Public License 1.1', 'Mozilla Public License 1.1', 0, 0, 'License :: OSI Approved :: Mozilla Public License (MPL) :: Mozilla Public License 1.1', '13 :: 14 :: 189 :: 305');
 
--- 
+--
 -- Dumping data for table `trove_group_link`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `trove_treesums`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `user_bookmarks`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `user_diary`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `user_diary_monitor`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `user_group`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `user_metric`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `user_metric0`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `user_metric_history`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `user_plugin`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `user_preferences`
--- 
+--
 
-INSERT INTO `user_preferences` (`user_id`, `preference_name`, `dead1`, `set_date`, `preference_value`) VALUES 
+INSERT INTO `user_preferences` (`user_id`, `preference_name`, `dead1`, `set_date`, `preference_value`) VALUES
 (101, 'forum_style', NULL, 1144591173, 'ultimate|25');
 
--- 
+--
 -- Dumping data for table `user_ratings`
--- 
+--
 
 
--- 
+--
 -- Dumping data for table `user_session`
--- 
+--
 
-INSERT INTO `user_session` (`user_id`, `session_hash`, `ip_addr`, `time`) VALUES 
+INSERT INTO `user_session` (`user_id`, `session_hash`, `ip_addr`, `time`) VALUES
 (100, '867b0c76e3a110d924f98029a28baa95', '', 1096480068);
 
--- 
+--
 -- Dumping data for table `user_type`
--- 
+--
 
-INSERT INTO `user_type` (`type_id`, `type_name`) VALUES 
+INSERT INTO `user_type` (`type_id`, `type_name`) VALUES
 (1, 'User'),
 (2, 'UserPool');
 
--- 
+--
 -- Dumping data for table `users`
--- 
+--
 
-INSERT INTO `users` (`user_id`, `user_name`, `email`, `user_pw`, `realname`, `status`, `shell`, `unix_pw`, `unix_status`, `unix_uid`, `unix_box`, `add_date`, `confirm_hash`, `mail_siteupdates`, `mail_va`, `authorized_keys`, `email_new`, `people_view_skills`, `people_resume`, `timezone`, `language`, `block_ratings`, `jabber_address`, `jabber_only`, `address`, `phone`, `fax`, `title`, `firstname`, `lastname`, `address2`, `ccode`, `theme_id`, `type_id`, `unix_gid`) VALUES 
+INSERT INTO `users` (`user_id`, `user_name`, `email`, `user_pw`, `realname`, `status`, `shell`, `unix_pw`, `unix_status`, `unix_uid`, `unix_box`, `add_date`, `confirm_hash`, `mail_siteupdates`, `mail_va`, `authorized_keys`, `email_new`, `people_view_skills`, `people_resume`, `timezone`, `language`, `block_ratings`, `jabber_address`, `jabber_only`, `address`, `phone`, `fax`, `title`, `firstname`, `lastname`, `address2`, `ccode`, `theme_id`, `type_id`, `unix_gid`) VALUES
 (2,	'noreply', '', '', '', 'D', '/bin/bash', '', 'N', 20002, 'shell1', 0, NULL, 0, 0, NULL, NULL, 0, '', 'GMT', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'US', 1, 1, 20002),
 (100, 'None', 'noreply@sourceforge.net', '*********34343', 'Nobody', 'D', '/bin/bash', '', 'N', 20100, 'shell1', 0, NULL, 0, 0, NULL, NULL, 0, '', 'GMT', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'Nobody', NULL, NULL, 'US', 1, 1, 20100);
 
--- 
+--
 -- Dumping data for table `forum_thread_seq`
--- 
+--
 
 INSERT INTO `forum_thread_seq` (`value`) VALUES (1);
 

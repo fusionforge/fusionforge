@@ -3,9 +3,9 @@ BEGIN;
 --
 --	reloid's get lost during dump/restore - reset them
 --
-UPDATE _rserv_tables_ 
+UPDATE _rserv_tables_
 SET reloid=
-(select oid 
+(select oid
 FROM pg_class pgc
 WHERE relname=_rserv_tables_.tname);
 

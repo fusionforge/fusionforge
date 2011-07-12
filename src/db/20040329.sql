@@ -1,4 +1,4 @@
-begin; 
+begin;
 alter table user_group drop column dead1;
 alter table user_group drop column dead2;
 alter table user_group drop column dead3;

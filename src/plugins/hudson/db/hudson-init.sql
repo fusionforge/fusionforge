@@ -5,7 +5,7 @@ CREATE SEQUENCE plugin_hudson_job_pk_seq
     NO MINVALUE
     CACHE 1;
 CREATE TABLE plugin_hudson_job (
-  job_id INTEGER DEFAULT nextval('plugin_hudson_job_pk_seq'::text) NOT NULL, 
+  job_id INTEGER DEFAULT nextval('plugin_hudson_job_pk_seq'::text) NOT NULL,
   group_id INTEGER NOT NULL ,
   job_url character varying(255) NOT NULL ,
   name character varying(128) NOT NULL ,

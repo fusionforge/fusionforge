@@ -1541,10 +1541,10 @@ CREATE TABLE stats_site_pages_by_day (
 CREATE FUNCTION forumgrouplist_insert_agg() RETURNS "trigger"
     AS '
 BEGIN
-        INSERT INTO forum_agg_msg_count (group_forum_id,count) 
+        INSERT INTO forum_agg_msg_count (group_forum_id,count)
                 VALUES (NEW.group_forum_id,0);
         RETURN NEW;
-END;    
+END;
 '
     LANGUAGE plpgsql;
 
@@ -1553,10 +1553,10 @@ END;
 CREATE FUNCTION artifactgrouplist_insert_agg() RETURNS "trigger"
     AS '
 BEGIN
-    INSERT INTO artifact_counts_agg (group_artifact_id,count,open_count) 
+    INSERT INTO artifact_counts_agg (group_artifact_id,count,open_count)
         VALUES (NEW.group_artifact_id,0,0);
         RETURN NEW;
-END;    
+END;
 '
     LANGUAGE plpgsql;
 
@@ -1576,13 +1576,13 @@ BEGIN
 		--
 		IF OLD.status_id=3 THEN
 			-- No need to decrement counters on old tracker
-		ELSE 
+		ELSE
 			IF OLD.status_id=2 THEN
-				UPDATE artifact_counts_agg SET count=count-1 
+				UPDATE artifact_counts_agg SET count=count-1
 					WHERE group_artifact_id=OLD.group_artifact_id;
-			ELSE 
+			ELSE
 				IF OLD.status_id=1 THEN
-					UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1 
+					UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1
 						WHERE group_artifact_id=OLD.group_artifact_id;
 				END IF;
 			END IF;
@@ -1592,57 +1592,57 @@ BEGIN
 			--DO NOTHING
 		ELSE
 			IF NEW.status_id=2 THEN
-					UPDATE artifact_counts_agg SET count=count+1 
+					UPDATE artifact_counts_agg SET count=count+1
 						WHERE group_artifact_id=NEW.group_artifact_id;
 			ELSE
 				IF NEW.status_id=1 THEN
-					UPDATE artifact_counts_agg SET count=count+1, open_count=open_count+1 
+					UPDATE artifact_counts_agg SET count=count+1, open_count=open_count+1
 						WHERE group_artifact_id=NEW.group_artifact_id;
 				END IF;
 			END IF;
 		END IF;
 	ELSE
 		--
-		-- just need to evaluate the status flag and 
+		-- just need to evaluate the status flag and
 		-- increment/decrement the counter as necessary
 		--
 		IF NEW.status_id <> OLD.status_id THEN
 			IF NEW.status_id = 1 THEN
 				IF OLD.status_id=2 THEN
-					UPDATE artifact_counts_agg SET open_count=open_count+1 
+					UPDATE artifact_counts_agg SET open_count=open_count+1
 						WHERE group_artifact_id=NEW.group_artifact_id;
-				ELSE 
+				ELSE
 					IF OLD.status_id=3 THEN
-						UPDATE artifact_counts_agg SET open_count=open_count+1, count=count+1 
+						UPDATE artifact_counts_agg SET open_count=open_count+1, count=count+1
 							WHERE group_artifact_id=NEW.group_artifact_id;
 					END IF;
 				END IF;
 			ELSE
 				IF NEW.status_id = 2 THEN
 					IF OLD.status_id=1 THEN
-						UPDATE artifact_counts_agg SET open_count=open_count-1 
+						UPDATE artifact_counts_agg SET open_count=open_count-1
 							WHERE group_artifact_id=NEW.group_artifact_id;
 					ELSE
 						IF OLD.status_id=3 THEN
-							UPDATE artifact_counts_agg SET count=count+1 
+							UPDATE artifact_counts_agg SET count=count+1
 								WHERE group_artifact_id=NEW.group_artifact_id;
 						END IF;
 					END IF;
-				ELSE 
+				ELSE
 					IF NEW.status_id = 3 THEN
 						IF OLD.status_id=2 THEN
-							UPDATE artifact_counts_agg SET count=count-1 
+							UPDATE artifact_counts_agg SET count=count-1
 								WHERE group_artifact_id=NEW.group_artifact_id;
 						ELSE
 							IF OLD.status_id=1 THEN
-								UPDATE artifact_counts_agg SET open_count=open_count-1,count=count-1 
+								UPDATE artifact_counts_agg SET open_count=open_count-1,count=count-1
 									WHERE group_artifact_id=NEW.group_artifact_id;
 							END IF;
 						END IF;
 					END IF;
 				END IF;
 			END IF;
-		END IF;	
+		END IF;
 	END IF;
 	RETURN NEW;
 END;
@@ -3617,19 +3617,19 @@ COPY themes (theme_id, dirname, fullname, enabled) FROM stdin;
 
 
 COPY supported_languages (language_id, name, filename, classname, language_code) FROM stdin;
-1	English	English.class	English	en   
-2	Japanese	Japanese.class	Japanese	ja   
-4	Spanish	Spanish.class	Spanish	es   
-5	Thai	Thai.class	Thai	th   
-6	German	German.class	German	de   
-8	Italian	Italian.class	Italian	it   
-10	Swedish	Swedish.class	Swedish	sv   
-12	Dutch	Dutch.class	Dutch	nl   
-14	Catalan	Catalan.class	Catalan	ca   
-22	Korean	Korean.class	Korean	ko   
-20	Bulgarian	Bulgarian.class	Bulgarian	bg   
-17	Russian	Russian.class	Russian	ru   
-7	French	French.class	French	fr   
+1	English	English.class	English	en
+2	Japanese	Japanese.class	Japanese	ja
+4	Spanish	Spanish.class	Spanish	es
+5	Thai	Thai.class	Thai	th
+6	German	German.class	German	de
+8	Italian	Italian.class	Italian	it
+10	Swedish	Swedish.class	Swedish	sv
+12	Dutch	Dutch.class	Dutch	nl
+14	Catalan	Catalan.class	Catalan	ca
+22	Korean	Korean.class	Korean	ko
+20	Bulgarian	Bulgarian.class	Bulgarian	bg
+17	Russian	Russian.class	Russian	ru
+7	French	French.class	French	fr
 23	Smpl.Chinese	SimplifiedChinese.class	SimplifiedChinese	zh-cn
 11	Trad.Chinese	Chinese.class	Chinese	zh-tw
 16	Pt. Brazilian	PortugueseBrazilian.class	PortugueseBrazilian	pt-br

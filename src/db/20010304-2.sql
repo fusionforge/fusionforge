@@ -17,12 +17,12 @@ BEGIN;
 --
 
 UPDATE groups SET bug_due_period='2592000' WHERE bug_due_period is null;
-INSERT INTO artifact_group_list 
+INSERT INTO artifact_group_list
 (group_artifact_id,group_id,name,description,is_public,
 allow_anon,email_all_updates,email_address,due_period,use_resolution,datatype)
 SELECT group_id+100000,group_id,'Bugs','Bug Tracking System',use_bugs,
-1,send_all_bugs,new_bug_address,bug_due_period,1,1 
-FROM groups 
+1,send_all_bugs,new_bug_address,bug_due_period,1,1
+FROM groups
 WHERE status != 'I' AND status != 'P'
 ORDER BY group_id ASC;
 
@@ -31,7 +31,7 @@ ORDER BY group_id ASC;
 --
 INSERT INTO artifact_perm
 (group_artifact_id,user_id,perm_level)
-SELECT group_id+100000,user_id,bug_flags 
+SELECT group_id+100000,user_id,bug_flags
 FROM user_group;
 
 --
@@ -60,13 +60,13 @@ UPDATE bug SET close_date=0 WHERE close_date is NULL;
 UPDATE bug SET summary=0 WHERE summary is NULL;
 UPDATE bug SET details='' WHERE details is NULL;
 
-INSERT INTO artifact 
+INSERT INTO artifact
 (artifact_id,group_artifact_id,status_id,category_id,artifact_group_id,priority,
 submitted_by,assigned_to,open_date,close_date,summary,details,resolution_id)
-SELECT 
+SELECT
 bug_id+100000,group_id+100000,status_id,category_id+100000,bug_group_id+100000,priority,
-submitted_by,assigned_to,date,close_date,summary,details,resolution_id 
-FROM bug 
+submitted_by,assigned_to,date,close_date,summary,details,resolution_id
+FROM bug
 ORDER BY group_id ASC;
 
 --
@@ -76,14 +76,14 @@ ORDER BY group_id ASC;
 UPDATE bug_history SET old_value=2 WHERE old_value='3' AND field_name='status_id';
 
 --BEGIN;
---SELECT * from bug_history 
+--SELECT * from bug_history
 --WHERE NOT EXISTS (select bug_id FROM bug
 --where bug.bug_id=bug_history.bug_id);
 --COMMIT;
 
 --DELETE FROM bug_history WHERE bug_id=0;
 
---DELETE FROM bug_history 
+--DELETE FROM bug_history
 --WHERE bug_id+100000 NOT IN (SELECT artifact_id FROM artifact);
 
 INSERT INTO artifact_history
@@ -145,12 +145,12 @@ BEGIN;
 
 UPDATE groups SET support_due_period='2592000' WHERE support_due_period is null;
 
-INSERT INTO artifact_group_list 
+INSERT INTO artifact_group_list
 (group_artifact_id,group_id,name,description,is_public,
 allow_anon,email_all_updates,email_address,due_period,use_resolution,datatype)
 SELECT group_id+200000,group_id,'Support Requests','Tech Support Tracking System',use_support,
-1,send_all_support,new_support_address,support_due_period,0,2 
-FROM groups  
+1,send_all_support,new_support_address,support_due_period,0,2
+FROM groups
 WHERE status != 'I' AND status != 'P'
 ORDER BY group_id ASC;
 
@@ -171,7 +171,7 @@ SELECT support_category_id+200000,group_id+200000,category_name,100 FROM support
 --
 --	support
 --
-DELETE FROM support WHERE NOT EXISTS 
+DELETE FROM support WHERE NOT EXISTS
 (SELECT group_id FROM groups WHERE support.group_id=groups.group_id);
 
 UPDATE patch SET summary=0 WHERE summary is NULL;
@@ -180,7 +180,7 @@ UPDATE patch SET details='' WHERE details is NULL;
 INSERT INTO artifact
 (artifact_id,group_artifact_id,status_id,category_id,artifact_group_id,priority,
 submitted_by,assigned_to,open_date,close_date,summary,details,resolution_id)
-SELECT 
+SELECT
 support_id+200000,group_id+200000,support_status_id,support_category_id+200000,100,priority,
 submitted_by,assigned_to,open_date,close_date,summary,'',100
 FROM support
@@ -234,7 +234,7 @@ INSERT INTO artifact_canned_responses
 (group_artifact_id,title,body)
 SELECT
 group_id+200000,title,body
-FROM support_canned_responses 
+FROM support_canned_responses
 WHERE group_id > 0;
 
 COMMIT;
@@ -245,19 +245,19 @@ COMMIT;
 --      Patch Manager
 --
 --
---BEGIN; 
+--BEGIN;
 
 --
 --      set up patch ArtifactTypes for each group
 --
 UPDATE groups SET patch_due_period='2592000' WHERE patch_due_period is null;
 
-INSERT INTO artifact_group_list  
+INSERT INTO artifact_group_list
 (group_artifact_id,group_id,name,description,is_public,
 allow_anon,email_all_updates,email_address,due_period,use_resolution,datatype)
 SELECT group_id+300000,group_id,'Patches','Patch Tracking System',use_patch,
-1,send_all_patches,new_patch_address,patch_due_period,1,3 
-FROM groups  
+1,send_all_patches,new_patch_address,patch_due_period,1,3
+FROM groups
 WHERE status != 'I' AND status != 'P'
 ORDER BY group_id ASC;
 
@@ -349,7 +349,7 @@ AND ph.field_name='details';
 INSERT INTO artifact_file
 (artifact_id,description,bin_data,filename,filesize,filetype,adddate,submitted_by)
 SELECT patch_id+300000,'None',code,'None',length(code),'text/plain',open_date,submitted_by
-FROM patch 
+FROM patch
 WHERE code IS NOT NULL;
 
 --COMMIT;
@@ -369,8 +369,8 @@ INSERT INTO artifact_group_list
 (group_artifact_id,group_id,name,description,is_public,
 allow_anon,email_all_updates,email_address,due_period,use_resolution,datatype)
 SELECT group_id+350000,group_id,'Feature Requests','Feature Request Tracking System',1,
-1,0,'',45*24*60*60,0,4 
-FROM groups  
+1,0,'',45*24*60*60,0,4
+FROM groups
 WHERE status != 'I' AND status != 'P'
 ORDER BY group_id ASC;
 

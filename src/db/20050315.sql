@@ -5,7 +5,7 @@ CREATE TABLE deleted_mailing_lists (
 );
 
 INSERT INTO deleted_mailing_lists (mailing_list_name,
-delete_date,isdeleted) SELECT 
+delete_date,isdeleted) SELECT
 list_name,(EXTRACT(EPOCH FROM now())::integer),0
 FROM mail_group_list WHERE status=9;
 

@@ -63,9 +63,9 @@ CREATE UNIQUE INDEX artperm_groupartifactid_userid on artifact_perm (group_artif
 --	create a view to make selecting all perms for a user_id/group_id easier
 --
 
-CREATE VIEW artifactperm_user_vw AS 
+CREATE VIEW artifactperm_user_vw AS
 SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname
-	FROM artifact_perm ap, users 
+	FROM artifact_perm ap, users
 	WHERE users.user_id=ap.user_id;
 
 CREATE VIEW artifactperm_artgrouplist_vw AS
@@ -134,7 +134,7 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 
 
 CREATE VIEW artifact_vw AS
-SELECT 
+SELECT
 artifact.*,
 u.user_name AS assigned_unixname,
 u.realname AS assigned_realname,
@@ -142,17 +142,17 @@ u.email AS assigned_email,
 u2.user_name AS submitted_unixname,
 u2.realname AS submitted_realname,
 u2.email AS submitted_email,
-artifact_status.status_name, 
-artifact_category.category_name, 
-artifact_group.group_name, 
-artifact_resolution.resolution_name 
-FROM 
+artifact_status.status_name,
+artifact_category.category_name,
+artifact_group.group_name,
+artifact_resolution.resolution_name
+FROM
 users u, users u2, artifact, artifact_status, artifact_category, artifact_group, artifact_resolution
-WHERE 
+WHERE
 artifact.assigned_to=u.user_id
 AND artifact.submitted_by=u2.user_id
-AND artifact.status_id=artifact_status.id 
-AND artifact.category_id=artifact_category.id 
+AND artifact.status_id=artifact_status.id
+AND artifact.category_id=artifact_category.id
 AND artifact.artifact_group_id=artifact_group.id
 AND artifact.resolution_id=artifact_resolution.id;
 
@@ -176,9 +176,9 @@ CREATE INDEX arthistory_artid_entrydate on artifact_history(artifact_id,entrydat
 --	create a view from the audit trail which joins the user table and history table
 --
 CREATE VIEW artifact_history_user_vw AS
-SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name 
-FROM artifact_history ah, users 
-WHERE ah.mod_by=users.user_id; 
+SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name
+FROM artifact_history ah, users
+WHERE ah.mod_by=users.user_id;
 
 --
 --	files attached to a given artifact
@@ -202,9 +202,9 @@ CREATE INDEX artfile_artid_adddate on artifact_file(artifact_id,adddate);
 --      create a view from the files which joins the user table and files table
 --
 CREATE VIEW artifact_file_user_vw AS
-SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, 
+SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype,
 	af.adddate, af.submitted_by, users.user_name, users.realname
-FROM artifact_file af,users 
+FROM artifact_file af,users
 WHERE af.submitted_by=users.user_id;
 
 --
@@ -226,9 +226,9 @@ CREATE INDEX artmessage_artid_adddate on artifact_message(artifact_id,adddate);
 --      create a view from the messages which joins the user table and messages table
 --
 CREATE VIEW artifact_message_user_vw AS
-SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate, 
+SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate,
 users.user_id, users.email, users.user_name, users.realname
-FROM artifact_message am,users 
+FROM artifact_message am,users
 WHERE am.submitted_by=users.user_id;
 
 --

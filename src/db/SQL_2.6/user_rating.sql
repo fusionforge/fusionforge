@@ -20,16 +20,16 @@ CREATE TABLE "user_metric0" (
 );
 CREATE  INDEX "user_metric0_user_id" on "user_metric0" using btree ( "user_id" "int4_ops" );
 
-INSERT INTO user_metric0 (user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor) 
-SELECT user_id,5,1.25,1,0,0,1.25 
+INSERT INTO user_metric0 (user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor)
+SELECT user_id,5,1.25,1,0,0,1.25
 FROM user_group
-WHERE 
+WHERE
 user_group.group_id=4
 AND user_group.admin_flags='A';
 
-UPDATE user_metric0 SET 
+UPDATE user_metric0 SET
 metric=(log(times_ranked::float)*avg_rating::float)::float,
 percentile=(100-(100*((ranking::float-1)/(select count(*) from user_metric0))))::float;
 
-UPDATE user_metric0 SET 
+UPDATE user_metric0 SET
 importance_factor=(1+((percentile::float/100)*.5))::float;

@@ -6,11 +6,11 @@ CREATE TABLE project_counts_agg (
 
 CREATE VIEW project_group_list_vw AS SELECT * FROM project_group_list NATURAL JOIN project_counts_agg;
 
-INSERT INTO project_counts_agg 
-	SELECT group_project_id, 
-	(SELECT count(*) FROM project_task WHERE status_id != 3 AND 
+INSERT INTO project_counts_agg
+	SELECT group_project_id,
+	(SELECT count(*) FROM project_task WHERE status_id != 3 AND
 		project_task.group_project_id=project_group_list.group_project_id),
-	(SELECT count(*) FROM project_task WHERE status_id = 1 AND 
+	(SELECT count(*) FROM project_task WHERE status_id = 1 AND
 		project_task.group_project_id=project_group_list.group_project_id)
 	FROM project_group_list;
 

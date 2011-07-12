@@ -1,5 +1,5 @@
 DROP VIEW bug;
-CREATE VIEW bug AS 
+CREATE VIEW bug AS
 	SELECT a.artifact_id AS bug_id,
 	g.group_id,
 	a.status_id,
@@ -11,8 +11,8 @@ CREATE VIEW bug AS
 	a.summary,a.details,
 	a.close_date,
 	a.group_artifact_id AS bug_group_id,
-	a.resolution_id AS resolution 
-	FROM artifact a, groups g, artifact_group_list agl 
-	WHERE a.group_artifact_id=agl.group_artifact_id 
-	AND agl.group_id=g.group_id  
+	a.resolution_id AS resolution
+	FROM artifact a, groups g, artifact_group_list agl
+	WHERE a.group_artifact_id=agl.group_artifact_id
+	AND agl.group_id=g.group_id
 	AND agl.name='Bugs';

@@ -1,4 +1,4 @@
-delete from forum where group_forum_id in 
+delete from forum where group_forum_id in
 (select group_forum_id  from forum_group_list where group_id in
 	(select group_id from groups where status='D')
 );

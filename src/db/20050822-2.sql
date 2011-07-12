@@ -10,7 +10,7 @@ alter table forum add bbcode_uid character varying(15);
 
 
 --
--- Name: forum_attachment; Type: TABLE; Schema: public; Owner: gforge; Tablespace: 
+-- Name: forum_attachment; Type: TABLE; Schema: public; Owner: gforge; Tablespace:
 --
 
 
@@ -30,7 +30,7 @@ CREATE TABLE forum_attachment (
 
 
 --
--- Name: filehash; Type: CONSTRAINT; Schema: public; Owner: gforge; Tablespace: 
+-- Name: filehash; Type: CONSTRAINT; Schema: public; Owner: gforge; Tablespace:
 --
 
 ALTER TABLE ONLY forum_attachment
@@ -39,7 +39,7 @@ ALTER TABLE ONLY forum_attachment
 
 
 --
--- Name: forum_attachment_key; Type: CONSTRAINT; Schema: public; Owner: gforge; Tablespace: 
+-- Name: forum_attachment_key; Type: CONSTRAINT; Schema: public; Owner: gforge; Tablespace:
 --
 
 ALTER TABLE ONLY forum_attachment
@@ -48,7 +48,7 @@ ALTER TABLE ONLY forum_attachment
 
 
 --
--- Name: msg_id; Type: CONSTRAINT; Schema: public; Owner: gforge; Tablespace: 
+-- Name: msg_id; Type: CONSTRAINT; Schema: public; Owner: gforge; Tablespace:
 --
 
 ALTER TABLE ONLY forum_attachment
@@ -62,7 +62,7 @@ ALTER TABLE ONLY forum_attachment
 
 
 --
--- Name: forum_attachmenttype; Type: TABLE; Schema: public; Owner: gforge; Tablespace: 
+-- Name: forum_attachmenttype; Type: TABLE; Schema: public; Owner: gforge; Tablespace:
 --
 
 
@@ -96,7 +96,7 @@ INSERT INTO forum_attachmenttype VALUES ('zip', 'a:1:{i:0;s:29:"Content-type: ap
 
 
 --
--- Name: forum_attachmenttype_key; Type: CONSTRAINT; Schema: public; Owner: gforge; Tablespace: 
+-- Name: forum_attachmenttype_key; Type: CONSTRAINT; Schema: public; Owner: gforge; Tablespace:
 --
 
 ALTER TABLE ONLY forum_attachmenttype

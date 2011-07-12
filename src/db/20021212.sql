@@ -47,7 +47,7 @@ INSERT INTO skills_data_types (type_name) values('Training');
 INSERT INTO skills_data_types (type_name) values('Proposal');
 INSERT INTO skills_data_types (type_name) values('Investigation');
 
-UPDATE project_group_list 
-	set project_name='Default',description='Default Project - Don\'t Change' 
+UPDATE project_group_list
+	set project_name='Default',description='Default Project - Don\'t Change'
 	where group_project_id=1;
 

@@ -9,7 +9,7 @@ set feedback off
 -- You should set this to the same value you specify for
 -- DATABASE_PREFIX in config.ini
 --
--- You have to use a prefix, because some phpWiki tablenames are 
+-- You have to use a prefix, because some phpWiki tablenames are
 -- Oracle reserved words!
 
 define prefix=phpwiki_
@@ -22,19 +22,19 @@ define prefix=phpwiki_
 
 --================================================================
 -- Note on Oracle datatypes...
--- 
--- Most of the 'NOT NULL' constraints on the character columns have been 
--- 	dropped since they can contain empty strings which are seen by 
+--
+-- Most of the 'NOT NULL' constraints on the character columns have been
+-- 	dropped since they can contain empty strings which are seen by
 --	Oracle as NULL.
 -- Oracle CLOBs are used for TEXTs/MEDUIMTEXTs columns.
 
 
 prompt Initializing PhpWiki tables with:
 prompt        prefix =  &prefix
-prompt 
+prompt
 prompt Expect some 'ORA-00942: table or view does not exist' unless you are
 prompt overwriting existing tables.
-prompt 
+prompt
 
 define page_tbl=&prefix.page
 define page_id=&prefix.page_id
@@ -125,7 +125,7 @@ prompt Creating &link_tbl
 CREATE TABLE &link_tbl (
         linkfrom	INT NOT NULL,
         linkto		INT NOT NULL,
-        relation  	INT 
+        relation  	INT
 );
 CREATE INDEX &link_from ON &link_tbl (linkfrom);
 CREATE INDEX &link_to   ON &link_tbl (linkto);
@@ -143,7 +143,7 @@ CREATE INDEX &sess_date ON &session_tbl (sess_date);
 CREATE INDEX &sess_ip   ON &session_tbl (sess_ip);
 
 -- Optional DB Auth and Prefs
--- For these tables below the default table prefix must be used 
+-- For these tables below the default table prefix must be used
 -- in the DBAuthParam SQL statements also.
 
 prompt Creating &pref_tbl
@@ -155,7 +155,7 @@ CREATE TABLE &pref_tbl (
 	CONSTRAINT &pref_id PRIMARY KEY (userid)
 );
 
--- better use the extra pref table where such users can be created easily 
+-- better use the extra pref table where such users can be created easily
 -- without password.
 --prompt Creating &user_tbl
 --CREATE TABLE &user_tbl (
@@ -206,7 +206,7 @@ CREATE TABLE &accesslog_tbl (
 	request_time  VARCHAR2(28),
 	status 	      NUMBER(4),
 	bytes_sent    NUMBER,
-        referer       VARCHAR(255), 
+        referer       VARCHAR(255),
 	agent         VARCHAR(255),
 	request_duration FLOAT
 );

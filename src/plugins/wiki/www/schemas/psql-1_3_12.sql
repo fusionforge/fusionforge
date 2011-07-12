@@ -2,10 +2,10 @@
 
 \set QUIET
 
--- Init the database with: 
+-- Init the database with:
 -- $ /usr/sbin/createdb phpwiki
 -- $ /usr/sbin/createuser -S -R -d phpwiki # (see httpd_user below)
--- $ /usr/bin/psql phpwiki < /usr/share/postgresql/contrib/tsearch2.sql 
+-- $ /usr/bin/psql phpwiki < /usr/share/postgresql/contrib/tsearch2.sql
 -- $ /usr/bin/psql phpwiki < psql-initialize.sql
 
 --================================================================
@@ -77,7 +77,7 @@
 --================================================================
 \echo schema enhancements
 
-ALTER TABLE :page_tbl 
+ALTER TABLE :page_tbl
 	ALTER COLUMN id TYPE SERIAL /* PRIMARY KEY */,
         ALTER COLUMN pagename TYPE VARCHAR(100),
 	ALTER COLUMN pagename SET NOT NULL,
@@ -86,8 +86,8 @@ ALTER TABLE :page_tbl
 ALTER TABLE :version_tbl
 	ALTER COLUMN id TYPE INT4,
         ADD FOREIGN KEY (id) REFERENCES :page_tbl ON DELETE CASCADE;
-ALTER TABLE :nonempty_tbl 
-	ALTER COLUMN id TYPE INT4, 
+ALTER TABLE :nonempty_tbl
+	ALTER COLUMN id TYPE INT4,
         ADD FOREIGN KEY (id) REFERENCES :page_tbl ON DELETE CASCADE;
 
 \echo Creating experimental page views (not yet used)
@@ -100,24 +100,24 @@ CREATE VIEW existing_page AS
 CREATE VIEW curr_page AS
   SELECT P.id,P.pagename,P.hits,P.pagedata,P.cached_html,
 	 V.version,V.mtime,V.minor_edit,V.content,V.versiondata
-  FROM :page_tbl P 
+  FROM :page_tbl P
     JOIN :version_tbl V USING (id)
     JOIN :recent_tbl  R ON (V.id=R.id AND V.version=R.latestversion);
 
-ALTER TABLE :link_tbl 
+ALTER TABLE :link_tbl
 	ALTER COLUMN linkfrom TYPE INT4,
 	ALTER COLUMN linkto   TYPE INT4,
 	ADD COLUMN   relation INT4 REFERENCES :page_tbl (id) ON DELETE CASCADE,
         ADD FOREIGN KEY (linkfrom) REFERENCES :page_tbl (id) ON DELETE CASCADE,
         ADD FOREIGN KEY (linkto)   REFERENCES :page_tbl (id) ON DELETE CASCADE;
 CREATE INDEX :relation_idx ON :link_tbl (relation);
-ALTER TABLE :rating_tbl 
+ALTER TABLE :rating_tbl
 	ALTER COLUMN raterpage TYPE INT8,
 	ALTER COLUMN rateepage TYPE INT8,
         ADD FOREIGN KEY (raterpage) REFERENCES :page_tbl (id) ON DELETE CASCADE,
         ADD FOREIGN KEY (rateepage) REFERENCES :page_tbl (id) ON DELETE CASCADE;
-ALTER TABLE :member_tbl 
-	ALTER COLUMN userid TYPE CHAR(48), 
+ALTER TABLE :member_tbl
+	ALTER COLUMN userid TYPE CHAR(48),
 	ALTER COLUMN userid SET NOT NULL,
 	ADD FOREIGN KEY (userid) REFERENCES :pref_tbl;
 
@@ -129,10 +129,10 @@ ALTER TABLE :member_tbl
 
 -- example of ISpell dictionary
 --   UPDATE pg_ts_dict SET dict_initoption='DictFile="/usr/local/share/ispell/russian.dict",
---     AffFile ="/usr/local/share/ispell/russian.aff", StopFile="/usr/local/share/ispell/russian.stop"' 
+--     AffFile ="/usr/local/share/ispell/russian.aff", StopFile="/usr/local/share/ispell/russian.stop"'
 --     WHERE dict_name='ispell_template';
 -- example of synonym dict
---   UPDATE pg_ts_dict SET dict_initoption='/usr/local/share/ispell/english.syn' WHERE dict_id=5; 
+--   UPDATE pg_ts_dict SET dict_initoption='/usr/local/share/ispell/english.syn' WHERE dict_id=5;
 
 GRANT SELECT ON pg_ts_dict, pg_ts_parser, pg_ts_cfg, pg_ts_cfgmap TO :httpd_user;
 ALTER TABLE :version_tbl ADD COLUMN idxFTI tsvector;
@@ -147,11 +147,11 @@ CREATE TRIGGER tsvectorupdate BEFORE UPDATE OR INSERT ON :version_tbl
 
 \echo Initializing stored procedures
 
-CREATE OR REPLACE FUNCTION update_recent (id INT4, version INT4) 
+CREATE OR REPLACE FUNCTION update_recent (id INT4, version INT4)
 	RETURNS void AS '
 DELETE FROM recent  WHERE id=$1;
 INSERT INTO recent (id, latestversion, latestmajor, latestminor)
-  SELECT id, MAX(version), MAX(CASE WHEN minor_edit=0  THEN version END), 
+  SELECT id, MAX(version), MAX(CASE WHEN minor_edit=0  THEN version END),
 	                   MAX(CASE WHEN minor_edit<>0 THEN version END)
     FROM version WHERE id=$2 GROUP BY id;
 DELETE FROM nonempty WHERE id=$1;
@@ -164,7 +164,7 @@ INSERT INTO nonempty (id)
           AND recent.id=$1;
 ' LANGUAGE SQL;
 
-CREATE OR REPLACE FUNCTION prepare_rename_page (oldid INT4, newid INT4) 
+CREATE OR REPLACE FUNCTION prepare_rename_page (oldid INT4, newid INT4)
         RETURNS void AS '
 DELETE FROM page     WHERE id=$2;
 DELETE FROM version  WHERE id=$2;

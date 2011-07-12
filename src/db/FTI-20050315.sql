@@ -39,7 +39,7 @@ BEGIN
 	-- **** forum table ****
 	ELSIF table_name = ''forum'' THEN
 		IF TG_OP = ''INSERT'' THEN
-			INSERT INTO forum_idx (msg_id, group_id, vectors) (SELECT f.msg_id, g.group_id, to_tsvector(\'default\', coalesce(f.subject,\'\') ||\' \'|| 
+			INSERT INTO forum_idx (msg_id, group_id, vectors) (SELECT f.msg_id, g.group_id, to_tsvector(\'default\', coalesce(f.subject,\'\') ||\' \'||
 			coalesce(f.body,\'\')) AS vectors FROM forum f, forum_group_list g WHERE f.group_forum_id = g.group_forum_id AND f.msg_id = NEW.msg_id);
 		ELSIF TG_OP = ''UPDATE'' THEN
 			UPDATE forum_idx SET vectors=to_tsvector(\'default\', coalesce(NEW.subject,\'\') ||\' \'|| coalesce(NEW.body,\'\')) WHERE msg_id=NEW.msg_id;
@@ -116,7 +116,7 @@ BEGIN
 END;'
 LANGUAGE 'plpgsql';
 
--- ********** Set up triggers ********** 
+-- ********** Set up triggers **********
 
 CREATE TRIGGER artifact_ts_update AFTER UPDATE OR INSERT OR DELETE ON artifact
 FOR EACH ROW EXECUTE PROCEDURE update_vectors('artifact');

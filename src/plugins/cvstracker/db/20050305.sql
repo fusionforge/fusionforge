@@ -5,7 +5,7 @@ DROP INDEX plugin_cvstracker_group_artifact_id;
 ALTER TABLE plugin_cvstracker_data_master ADD COLUMN cvs_date2 int4;
 ALTER TABLE plugin_cvstracker_data_master RENAME COLUMN cvs_date to dead1;
 ALTER TABLE plugin_cvstracker_data_master ALTER COLUMN dead1 DROP NOT NULL;
-ALTER TABLE plugin_cvstracker_data_master RENAME COLUMN cvs_date2 to cvs_date;                                   
+ALTER TABLE plugin_cvstracker_data_master RENAME COLUMN cvs_date2 to cvs_date;
 UPDATE plugin_cvstracker_data_master SET cvs_date=date_part('epoch', dead1);
 ALTER TABLE plugin_cvstracker_data_master ALTER COLUMN cvs_date SET NOT NULL;
 

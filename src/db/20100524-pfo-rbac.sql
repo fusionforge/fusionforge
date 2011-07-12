@@ -29,7 +29,7 @@ BEGIN
 		   IF nsec = 'project_admin' AND nref = opid THEN
 		      RETURN 1 ;
 		   END IF ;
-		   
+
 		   IF nsec = 'forge_admin' AND nref = -1 AND opid = mastergroupid THEN
 		      RETURN 1 ;
 		   END IF ;
@@ -202,13 +202,13 @@ BEGIN
 
 			PERFORM insert_pfo_role_setting (2, 'tracker', t.group_artifact_id, 1) ;
 		END LOOP ;
-		
+
 		FOR p IN SELECT * FROM project_group_list WHERE group_id = g.group_id AND is_public = 1
 		LOOP
 			PERFORM insert_pfo_role_setting (1, 'pm', p.group_project_id, 1) ;
 			PERFORM insert_pfo_role_setting (2, 'pm', p.group_project_id, 1) ;
 		END LOOP ;
-		
+
 		FOR f IN SELECT * FROM forum_group_list WHERE group_id = g.group_id AND is_public = 1
 		LOOP
 			IF f.allow_anonymous = 1 THEN
@@ -227,7 +227,7 @@ BEGIN
 			   PERFORM insert_pfo_role_setting (2, 'forum', f.group_forum_id, 2) ;
 			END IF ;
 		END LOOP ;
-		
+
 	END LOOP ;
 
 END ;

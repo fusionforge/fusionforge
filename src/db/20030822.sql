@@ -15,11 +15,11 @@ BEGIN
 		--
 		IF OLD.status_id=3 THEN
 			-- No need to decrement counters on old tracker
-		ELSE 
+		ELSE
 			IF OLD.status_id=2 THEN
 				UPDATE artifact_counts_agg SET count=count-1 \
 					WHERE group_artifact_id=OLD.group_artifact_id;
-			ELSE 
+			ELSE
 				IF OLD.status_id=1 THEN
 					UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1 \
 						WHERE group_artifact_id=OLD.group_artifact_id;
@@ -42,7 +42,7 @@ BEGIN
 		END IF;
 	ELSE
 		--
-		-- just need to evaluate the status flag and 
+		-- just need to evaluate the status flag and
 		-- increment/decrement the counter as necessary
 		--
 		IF NEW.status_id <> OLD.status_id THEN
@@ -50,7 +50,7 @@ BEGIN
 				IF OLD.status_id=2 THEN
 					UPDATE artifact_counts_agg SET open_count=open_count+1 \
 						WHERE group_artifact_id=NEW.group_artifact_id;
-				ELSE 
+				ELSE
 					IF OLD.status_id=3 THEN
 						UPDATE artifact_counts_agg SET open_count=open_count+1, count=count+1 \
 							WHERE group_artifact_id=NEW.group_artifact_id;
@@ -67,7 +67,7 @@ BEGIN
 								WHERE group_artifact_id=NEW.group_artifact_id;
 						END IF;
 					END IF;
-				ELSE 
+				ELSE
 					IF NEW.status_id = 3 THEN
 						IF OLD.status_id=2 THEN
 							UPDATE artifact_counts_agg SET count=count-1 \
@@ -81,7 +81,7 @@ BEGIN
 					END IF;
 				END IF;
 			END IF;
-		END IF;	
+		END IF;
 	END IF;
 	RETURN NEW;
 END;

@@ -6,7 +6,7 @@ license_name text
 SELECT setval('licenses_license_id_seq',100);
 INSERT INTO licenses (license_id,license_name) VALUES (100,'None');
 
--- 101 gpl 
+-- 101 gpl
 INSERT INTO licenses (license_name) VALUES ('GNU General Public License (GPL)');
 -- 102 lgpl
 INSERT INTO licenses (license_name) VALUES ('GNU Library Public License (LGPL)');

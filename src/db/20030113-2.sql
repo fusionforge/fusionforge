@@ -34,7 +34,7 @@ SELECT spd.group_id,
     scg.commits AS cvs_commits,
     scg.adds AS cvs_adds
 FROM stats_project_developers spd
-    LEFT JOIN stats_project sp USING (month,day,group_id) 
+    LEFT JOIN stats_project sp USING (month,day,group_id)
     LEFT JOIN stats_project_metric spm USING (month,day,group_id)
     LEFT JOIN stats_cvs_group scg USING (month,day,group_id)
     LEFT JOIN stats_agg_site_by_group sasbg USING (month,day,group_id)
@@ -73,7 +73,7 @@ SELECT group_id,
     FROM stats_project_months
     GROUP BY group_id;
 
-CREATE VIEW stats_site_vw AS 
+CREATE VIEW stats_site_vw AS
 SELECT p.month,
     p.day,
     sspbd.site_page_views,

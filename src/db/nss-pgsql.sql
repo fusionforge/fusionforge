@@ -5,7 +5,7 @@ CREATE SEQUENCE user_unix_id_seq START 20000;
 CREATE SEQUENCE group_unix_id_seq START 50000;
 UPDATE users SET unix_uid=0,unix_gid=0,shell='/bin/cvssh.pl';
 ALTER TABLE users ALTER COLUMN shell SET default '/bin/cvssh.pl';
-UPDATE users SET unix_uid=nextval('user_unix_id_seq'),unix_gid=currval('user_unix_id_seq') 
+UPDATE users SET unix_uid=nextval('user_unix_id_seq'),unix_gid=currval('user_unix_id_seq')
 	WHERE user_id IN (SELECT user_id FROM user_group);
 ALTER TABLE groups ADD COLUMN unix_gid int;
 ALTER TABLE groups SET DEFAULT nextval('group_unix_id_seq');
@@ -15,7 +15,7 @@ DROP FUNCTION userunixid_func() CASCADE;
 CREATE OR REPLACE FUNCTION userunixid_func() RETURNS TRIGGER AS '
 DECLARE
 	newuser RECORD;
-BEGIN 
+BEGIN
 	FOR newuser IN SELECT unix_uid FROM users WHERE user_id=NEW.user_id LOOP
 		IF newuser.unix_uid=0 THEN
 			UPDATE users SET unix_uid=nextval(''user_unix_id_seq''),
@@ -45,7 +45,7 @@ CREATE VIEW nss_passwd AS
 		user_name AS homedir,
 		status
 	FROM users
-	WHERE STATUS='A' AND EXISTS (SELECT user_id 
+	WHERE STATUS='A' AND EXISTS (SELECT user_id
 		FROM user_group WHERE user_id=users.user_id AND cvs_flags IN (0,1));
 
 --
@@ -59,7 +59,7 @@ CREATE VIEW nss_shadow AS
 		CHAR(1) 'n' AS expired,
 		CHAR(1) 'n' AS pwchange
 	FROM users
-	WHERE STATUS='A' AND EXISTS (SELECT user_id 
+	WHERE STATUS='A' AND EXISTS (SELECT user_id
 		FROM user_group WHERE user_id=users.user_id AND cvs_flags IN (0,1));
 --
 -- Group Table
@@ -72,7 +72,7 @@ CREATE VIEW nss_groups AS
 --	FROM users
 --	WHERE status = 'A' AND EXISTS (SELECT user_id
 --		FROM user_group WHERE user_id=users.user_id AND cvs_flags IN (0,1));
---	UNION 
+--	UNION
 	SELECT 0 AS user_id, group_id,unix_group_name AS name, unix_gid AS gid
 	FROM groups;
 --
@@ -80,7 +80,7 @@ CREATE VIEW nss_groups AS
 --
 DROP TABLE nss_usergroups ;
 DROP VIEW nss_usergroups;
-CREATE VIEW nss_usergroups AS 
+CREATE VIEW nss_usergroups AS
 	SELECT
 		users.unix_uid AS uid,
 		groups.unix_gid AS gid,
@@ -89,7 +89,7 @@ CREATE VIEW nss_usergroups AS
 		users.user_name AS user_name,
 		groups.unix_group_name AS unix_group_name
 	FROM users,groups,user_group
-	WHERE 
+	WHERE
 		users.user_id=user_group.user_id
 	AND
 		groups.group_id=user_group.group_id

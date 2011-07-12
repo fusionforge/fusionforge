@@ -4,6 +4,6 @@
 
 CREATE TABLE project_tags
 (
-   group_id integer NOT NULL, 
+   group_id integer NOT NULL,
    name text NOT NULL
 ) WITH OIDS;

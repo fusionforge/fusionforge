@@ -30,7 +30,7 @@ INSERT INTO supported_languages VALUES (14,'Catalan','Catalan.class','Catalan');
 --
 --      Default Data for 'users'
 --
-INSERT INTO users (user_id, user_name, email, user_pw)  
+INSERT INTO users (user_id, user_name, email, user_pw)
 VALUES (100,'None','noreply@sourceforge.net','*********34343');
 
 --

@@ -1,6 +1,6 @@
 INSERT INTO groups (group_id) VALUES (1);
 
-INSERT INTO users (user_id, user_name, email, user_pw)  
+INSERT INTO users (user_id, user_name, email, user_pw)
 VALUES (100,'None','noreply@sourceforge.net','*********');
 
 INSERT INTO bug_resolution (resolution_id, resolution_name) VALUES (1,'Fixed');

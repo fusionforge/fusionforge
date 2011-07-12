@@ -26,7 +26,7 @@ BEGIN
         INSERT INTO forum_agg_msg_count (group_forum_id,count) \
                 VALUES (NEW.group_forum_id,0);
         RETURN NEW;
-END;    
+END;
 ' LANGUAGE 'plpgsql';
 
 CREATE TRIGGER forumgrouplist_insert_trig AFTER INSERT ON forum_group_list
@@ -61,7 +61,7 @@ BEGIN
 	INSERT INTO artifact_counts_agg (group_artifact_id,count,open_count) \
 		VALUES (NEW.group_artifact_id,0,0);
         RETURN NEW;
-END;    
+END;
 ' LANGUAGE 'plpgsql';
 
 CREATE TRIGGER artifactgrouplist_insert_trig AFTER INSERT ON artifact_group_list
@@ -73,7 +73,7 @@ CREATE TRIGGER artifactgrouplist_insert_trig AFTER INSERT ON artifact_group_list
 --
 CREATE RULE artifact_insert_agg AS
 	ON INSERT TO artifact
-	DO UPDATE artifact_counts_agg SET count=count+1,open_count=open_count+1 
+	DO UPDATE artifact_counts_agg SET count=count+1,open_count=open_count+1
 		WHERE group_artifact_id=new.group_artifact_id;
 
 --
@@ -98,7 +98,7 @@ BEGIN
 		--
 		--	now see how to increment/decrement the old types sums
 		--
-		IF NEW.status_id <> OLD.status_id THEN 
+		IF NEW.status_id <> OLD.status_id THEN
 			IF OLD.status_id = 2 THEN
 				UPDATE artifact_counts_agg SET count=count-1 \
 					WHERE group_artifact_id=OLD.group_artifact_id;
@@ -115,25 +115,25 @@ BEGIN
 		END IF;
 	ELSE
 		--
-		-- just need to evaluate the status flag and 
+		-- just need to evaluate the status flag and
 		-- increment/decrement the counter as necessary
 		--
 		IF NEW.status_id <> OLD.status_id THEN
 			IF new.status_id = 1 THEN
 				UPDATE artifact_counts_agg SET open_count=open_count+1 \
 					WHERE group_artifact_id=new.group_artifact_id;
-			ELSE 
+			ELSE
 				IF new.status_id = 2 THEN
 					UPDATE artifact_counts_agg SET open_count=open_count-1 \
 						WHERE group_artifact_id=new.group_artifact_id;
-				ELSE 
+				ELSE
 					IF new.status_id = 3 THEN
 						UPDATE artifact_counts_agg SET open_count=open_count-1,count=count-1 \
 							WHERE group_artifact_id=new.group_artifact_id;
 					END IF;
 				END IF;
 			END IF;
-		END IF;	
+		END IF;
 	END IF;
 	RETURN NEW;
 END;

@@ -39,7 +39,7 @@ CREATE TABLE nss_groups AS
 	FROM groups;
 --
 -- Insert users group ids in nss_group table
--- 
+--
 INSERT INTO nss_groups (user_id,group_id,name, gid)
 	SELECT user_id,0,user_name, unix_gid
 	FROM users
@@ -65,7 +65,7 @@ CREATE TABLE nss_usergroups AS (
 		users.user_name AS user_name,
 		groups.unix_group_name AS unix_group_name
 	FROM users,groups,user_group
-	WHERE 
+	WHERE
 		users.user_id=user_group.user_id
 	AND
 		groups.group_id=user_group.group_id
@@ -84,7 +84,7 @@ CREATE TABLE nss_usergroups AS (
 		users.user_name AS user_name,
 		'scm_' || groups.unix_group_name AS unix_group_name
 	FROM users,groups,user_group
-	WHERE 
+	WHERE
 		users.user_id=user_group.user_id
 	AND
 		groups.group_id=user_group.group_id

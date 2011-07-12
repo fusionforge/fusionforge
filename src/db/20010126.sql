@@ -2,7 +2,7 @@
 -- purpose: stuff for project database and vhost maintanance
 
      CREATE TABLE prdb_dbs (
-        dbid SERIAL PRIMARY KEY, 
+        dbid SERIAL PRIMARY KEY,
         group_id INT NOT NULL,
         dbname TEXT NOT NULL,
         dbusername TEXT NOT NULL,
@@ -17,7 +17,7 @@
 
         stateid INT NOT NULL,
         statename TEXT
-    );                
+    );
 
 	CREATE UNIQUE INDEX idx_prdb_dbname ON prdb_dbs (dbname);
 
@@ -25,7 +25,7 @@
     INSERT INTO prdb_states VALUES ('2', 'Pending Create');
     INSERT INTO prdb_states VALUES ('3', 'Pending Delete');
     INSERT INTO prdb_states VALUES ('4', 'Pending Update');
-    INSERT INTO prdb_states VALUES ('5', 'Failed Create'); 
+    INSERT INTO prdb_states VALUES ('5', 'Failed Create');
     INSERT INTO prdb_states VALUES ('6', 'Failed Delete');
 	INSERT INTO prdb_states VALUES ('7', 'Failed Update');
 
@@ -34,14 +34,14 @@
         dbservername TEXT NOT NULL,
         dbsoftware TEXT NOT NULL
     );
-      
+
    INSERT INTO prdb_types VALUES ('1','pr-db1','mysql');
 
     CREATE TABLE prweb_vhost (
-        vhostid SERIAL PRIMARY KEY, 
-        vhost_name TEXT,        
+        vhostid SERIAL PRIMARY KEY,
+        vhost_name TEXT,
         docdir TEXT,
-		cgidir TEXT,	
+		cgidir TEXT,
         group_id INT NOT NULL
     );
 

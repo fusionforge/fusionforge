@@ -8,5 +8,5 @@ user_id int not null,
 ranking int not null,
 metric float not null);
 
-CREATE UNIQUE INDEX user_metric_history_date_userid 
+CREATE UNIQUE INDEX user_metric_history_date_userid
 ON user_metric_history(month,day,user_id);

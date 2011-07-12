@@ -8,8 +8,8 @@ CREATE TABLE webcal_user (
   PRIMARY KEY ( cal_login )
 );
 
-INSERT INTO webcal_user 
- (cal_login, cal_passwd, cal_lastname, cal_firstname, cal_is_admin) 
+INSERT INTO webcal_user
+ (cal_login, cal_passwd, cal_lastname, cal_firstname, cal_is_admin)
  VALUES ( 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'Default', 'Y' );
 
 
@@ -52,7 +52,7 @@ CREATE TABLE webcal_entry_repeats_not (
 
 CREATE TABLE webcal_entry_user (
   cal_id int DEFAULT 0 NOT NULL,
-  cal_login varchar(25) DEFAULT '' NOT NULL, 
+  cal_login varchar(25) DEFAULT '' NOT NULL,
   cal_status char(1) DEFAULT 'A' NOT NULL,
   cal_category INT DEFAULT NULL,
   PRIMARY KEY ( cal_id,cal_login )

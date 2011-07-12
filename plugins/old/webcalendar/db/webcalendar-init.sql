@@ -1,5 +1,5 @@
 CREATE VIEW webcal_user AS
-SELECT user_name AS cal_login, user_pw AS cal_passwd, lastname AS cal_lastname, firstname AS cal_firstname, status AS cal_is_admin, email AS cal_email FROM users; 
+SELECT user_name AS cal_login, user_pw AS cal_passwd, lastname AS cal_lastname, firstname AS cal_firstname, status AS cal_is_admin, email AS cal_email FROM users;
 -- CREATE TABLE webcal_user (
 --  cal_login VARCHAR(25) NOT NULL,
 --  cal_passwd VARCHAR(32),
@@ -48,7 +48,7 @@ CREATE TABLE webcal_entry_repeats_not (
 
 CREATE TABLE webcal_entry_user (
   cal_id int DEFAULT '0' NOT NULL,
-  cal_login varchar(25) DEFAULT '' NOT NULL, 
+  cal_login varchar(25) DEFAULT '' NOT NULL,
   cal_status char(1) DEFAULT 'A' NOT NULL,
   cal_category INT DEFAULT NULL,
   PRIMARY KEY ( cal_id,cal_login )
@@ -113,8 +113,8 @@ SELECT group_id AS cal_group_id, 'admin' AS cal_owner, unix_group_name AS cal_na
 --);
 
 DROP TABLE webcal_group_user;
-CREATE VIEW webcal_group_user AS 
-SELECT group_id AS cal_group_id, users.user_name AS cal_login FROM users,user_group 
+CREATE VIEW webcal_group_user AS
+SELECT group_id AS cal_group_id, users.user_name AS cal_login FROM users,user_group
 WHERE users.user_id = user_group.user_id;
 --CREATE TABLE webcal_group_user (
 --  cal_group_id INT NOT NULL,

@@ -3,7 +3,7 @@ DROP INDEX plugin_svntracker_group_artifact_id;
 ALTER TABLE plugin_svntracker_data_master ADD COLUMN svn_date2 int4;
 ALTER TABLE plugin_svntracker_data_master RENAME COLUMN svn_date to dead1;
 ALTER TABLE plugin_svntracker_data_master ALTER COLUMN dead1 DROP NOT NULL;
-ALTER TABLE plugin_svntracker_data_master RENAME COLUMN svn_date2 to svn_date;                                   
+ALTER TABLE plugin_svntracker_data_master RENAME COLUMN svn_date2 to svn_date;
 UPDATE plugin_svntracker_data_master SET svn_date=date_part('epoch', dead1);
 ALTER TABLE plugin_svntracker_data_master ALTER COLUMN svn_date SET NOT NULL;
 

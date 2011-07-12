@@ -23,7 +23,7 @@ CREATE INDEX groupcvshistory_groupid ON group_cvs_history(group_id);
 -- Forum Rewrite
 --
 DROP INDEX forum_forumid_isfollowupto;
-CREATE VIEW forum_user_vw AS select forum.*,users.user_name,users.realname 
+CREATE VIEW forum_user_vw AS select forum.*,users.user_name,users.realname
 	FROM forum,users WHERE forum.posted_by=users.user_id;
 CREATE VIEW forum_group_list_vw AS SELECT forum_group_list.*, forum_agg_msg_count.count as total
     FROM forum_group_list LEFT JOIN forum_agg_msg_count USING (group_forum_id);

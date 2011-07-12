@@ -72,13 +72,13 @@ CREATE TABLE "prdb_dbs" (
 CREATE TABLE prdb_states (
   stateid INT NOT NULL,
   statename TEXT
-);                
+);
 CREATE UNIQUE INDEX idx_prdb_dbname ON prdb_dbs (dbname);
 INSERT INTO prdb_states VALUES ('1', 'Active');
 INSERT INTO prdb_states VALUES ('2', 'Pending Create');
 INSERT INTO prdb_states VALUES ('3', 'Pending Delete');
 INSERT INTO prdb_states VALUES ('4', 'Pending Update');
-INSERT INTO prdb_states VALUES ('5', 'Failed Create'); 
+INSERT INTO prdb_states VALUES ('5', 'Failed Create');
 INSERT INTO prdb_states VALUES ('6', 'Failed Delete');
 INSERT INTO prdb_states VALUES ('7', 'Failed Update');
 CREATE TABLE prdb_types (
@@ -293,24 +293,24 @@ CREATE INDEX artifactcountsagg_groupartid ON artifact_counts_agg(group_artifact_
 ----- TODO
 -- Re-enable this when the "stats" account exists
 -----
--- GRANT SELECT ON 
+-- GRANT SELECT ON
 -- artifact,
 -- artifact_group_list
 -- TO stats;
 
 -- artifact-conversion
 UPDATE groups SET bug_due_period='2592000' WHERE bug_due_period is null;
-INSERT INTO artifact_group_list 
+INSERT INTO artifact_group_list
 (group_artifact_id,group_id,name,description,is_public,
 allow_anon,email_all_updates,email_address,due_period,use_resolution,datatype)
 SELECT group_id+100000,group_id,'Bugs','Bug Tracking System',use_bugs,
-1,send_all_bugs,new_bug_address,bug_due_period,1,1 
-FROM groups 
+1,send_all_bugs,new_bug_address,bug_due_period,1,1
+FROM groups
 WHERE status != 'I' AND status != 'P'
 ORDER BY group_id ASC;
 INSERT INTO artifact_perm
 (group_artifact_id,user_id,perm_level)
-SELECT group_id+100000,user_id,bug_flags 
+SELECT group_id+100000,user_id,bug_flags
 FROM user_group;
 INSERT INTO artifact_group (id,group_artifact_id,group_name)
 SELECT bug_group_id+100000,group_id+100000,group_name FROM bug_group;
@@ -321,12 +321,12 @@ INSERT INTO bug_status (status_id,status_name) VALUES (2,'Open');
 UPDATE bug SET status_id=2 WHERE status_id=3;
 DELETE FROM bug_status WHERE status_id=3;
 UPDATE bug SET close_date=0 WHERE close_date is NULL;
-INSERT INTO artifact 
+INSERT INTO artifact
 (artifact_id,group_artifact_id,status_id,category_id,artifact_group_id,priority,
 submitted_by,assigned_to,open_date,close_date,summary,details,resolution_id)
-SELECT 
+SELECT
 bug_id+100000,group_id+100000,status_id,category_id+100000,bug_group_id+100000,priority,
-submitted_by,assigned_to,date,close_date,summary,details,resolution_id 
+submitted_by,assigned_to,date,close_date,summary,details,resolution_id
 FROM bug WHERE summary is not null
 ORDER BY group_id ASC;
 -- UPDATE bug_history SET old_value=1 WHERE old_value='100' AND field_name='status_id';
@@ -364,12 +364,12 @@ group_id+100000,title,body
 FROM bug_canned_responses
 WHERE group_id > 0;
 UPDATE groups SET support_due_period='2592000' WHERE support_due_period is null;
-INSERT INTO artifact_group_list 
+INSERT INTO artifact_group_list
 (group_artifact_id,group_id,name,description,is_public,
 allow_anon,email_all_updates,email_address,due_period,use_resolution,datatype)
 SELECT group_id+200000,group_id,'Support Requests','Tech Support Tracking System',use_support,
-1,send_all_support,new_support_address,support_due_period,0,2 
-FROM groups  
+1,send_all_support,new_support_address,support_due_period,0,2
+FROM groups
 WHERE status != 'I' AND status != 'P'
 ORDER BY group_id ASC;
 INSERT INTO artifact_perm
@@ -378,12 +378,12 @@ SELECT group_id+200000,user_id,support_flags
 FROM user_group;
 INSERT INTO artifact_category (id,group_artifact_id,category_name,auto_assign_to)
 SELECT support_category_id+200000,group_id+200000,category_name,100 FROM support_category;
-DELETE FROM support WHERE NOT EXISTS 
+DELETE FROM support WHERE NOT EXISTS
 (SELECT group_id FROM groups WHERE support.group_id=groups.group_id);
 INSERT INTO artifact
 (artifact_id,group_artifact_id,status_id,category_id,artifact_group_id,priority,
 submitted_by,assigned_to,open_date,close_date,summary,details,resolution_id)
-SELECT 
+SELECT
 support_id+200000,group_id+200000,support_status_id,support_category_id+200000,100,priority,
 submitted_by,assigned_to,open_date,close_date,summary,'',100
 FROM support
@@ -421,15 +421,15 @@ INSERT INTO artifact_canned_responses
 (group_artifact_id,title,body)
 SELECT
 group_id+200000,title,body
-FROM support_canned_responses 
+FROM support_canned_responses
 WHERE group_id > 0;
 UPDATE groups SET patch_due_period='2592000' WHERE patch_due_period is null;
-INSERT INTO artifact_group_list  
+INSERT INTO artifact_group_list
 (group_artifact_id,group_id,name,description,is_public,
 allow_anon,email_all_updates,email_address,due_period,use_resolution,datatype)
 SELECT group_id+300000,group_id,'Patches','Patch Tracking System',use_patch,
-1,send_all_patches,new_patch_address,patch_due_period,1,3 
-FROM groups  
+1,send_all_patches,new_patch_address,patch_due_period,1,3
+FROM groups
 WHERE status != 'I' AND status != 'P'
 ORDER BY group_id ASC;
 INSERT INTO artifact_perm
@@ -493,7 +493,7 @@ AND ph.field_name='details';
 INSERT INTO artifact_file
 (artifact_id,description,bin_data,filename,filesize,filetype,adddate,submitted_by)
 SELECT patch_id+300000,'None',code,'None',length(code),'text/plain',open_date,submitted_by
-FROM patch 
+FROM patch
 WHERE code IS NOT NULL;
 
 INSERT INTO artifact_counts_agg
@@ -506,15 +506,15 @@ INSERT INTO artifact_group_list
 (group_artifact_id,group_id,name,description,is_public,
 allow_anon,email_all_updates,email_address,due_period,use_resolution,datatype)
 SELECT group_id+350000,group_id,'Feature Requests','Feature Request Tracking System',1,
-1,0,'',45*24*60*60,0,4 
-FROM groups  
+1,0,'',45*24*60*60,0,4
+FROM groups
 WHERE status != 'I' AND status != 'P'
 ORDER BY group_id ASC;
 
------ 
+-----
 -- Roland Mas 20020307 and 20020308
 -- Drop and recreate the groups and users tables.
--- Goals: 
+-- Goals:
 -- 1. Remove the dead columns (in groups)
 -- 2. Get rid of the undeleteable foreign key constraints with old tables
 
@@ -600,12 +600,12 @@ CREATE TABLE "users" (
 	"language" integer DEFAULT '1' NOT NULL,
 	CONSTRAINT "users_pkey" PRIMARY KEY ("user_id")
 );
-CREATE VIEW artifactperm_user_vw AS 
+CREATE VIEW artifactperm_user_vw AS
 SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname
-	FROM artifact_perm ap, users 
+	FROM artifact_perm ap, users
 	WHERE users.user_id=ap.user_id;
 CREATE VIEW artifact_vw AS
-SELECT 
+SELECT
 artifact.*,
 u.user_name AS assigned_unixname,
 u.realname AS assigned_realname,
@@ -613,32 +613,32 @@ u.email AS assigned_email,
 u2.user_name AS submitted_unixname,
 u2.realname AS submitted_realname,
 u2.email AS submitted_email,
-artifact_status.status_name, 
-artifact_category.category_name, 
-artifact_group.group_name, 
-artifact_resolution.resolution_name 
-FROM 
+artifact_status.status_name,
+artifact_category.category_name,
+artifact_group.group_name,
+artifact_resolution.resolution_name
+FROM
 users u, users u2, artifact, artifact_status, artifact_category, artifact_group, artifact_resolution
-WHERE 
+WHERE
 artifact.assigned_to=u.user_id
 AND artifact.submitted_by=u2.user_id
-AND artifact.status_id=artifact_status.id 
-AND artifact.category_id=artifact_category.id 
+AND artifact.status_id=artifact_status.id
+AND artifact.category_id=artifact_category.id
 AND artifact.artifact_group_id=artifact_group.id
 AND artifact.resolution_id=artifact_resolution.id;
 CREATE VIEW artifact_history_user_vw AS
-SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name 
-FROM artifact_history ah, users 
-WHERE ah.mod_by=users.user_id; 
+SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name
+FROM artifact_history ah, users
+WHERE ah.mod_by=users.user_id;
 CREATE VIEW artifact_file_user_vw AS
-SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, 
+SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype,
 	af.adddate, af.submitted_by, users.user_name, users.realname
-FROM artifact_file af,users 
+FROM artifact_file af,users
 WHERE af.submitted_by=users.user_id;
 CREATE VIEW artifact_message_user_vw AS
-SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate, 
+SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate,
 users.user_id, users.email, users.user_name, users.realname
-FROM artifact_message am,users 
+FROM artifact_message am,users
 WHERE am.submitted_by=users.user_id;
 
 INSERT INTO users
@@ -669,13 +669,13 @@ CREATE INDEX users_user_pw ON users USING BTREE (user_pw varchar_ops);
 -----
 
 -- artifact-fkeys
-DELETE from artifact_perm 
-	where not exists (select group_artifact_id 
-	from artifact_group_list 
+DELETE from artifact_perm
+	where not exists (select group_artifact_id
+	from artifact_group_list
 	where artifact_perm.group_artifact_id=artifact_group_list.group_artifact_id);
-ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_userid_fk 
+ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_userid_fk
         FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL;
-ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_groupartifactid_fk 
+ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_groupartifactid_fk
         FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
 
 ALTER TABLE artifact_category ADD CONSTRAINT artifactcategory_autoassignto_fk
@@ -791,7 +791,7 @@ BEGIN
         INSERT INTO forum_agg_msg_count (group_forum_id,count) \
                 VALUES (NEW.group_forum_id,0);
         RETURN NEW;
-END;    
+END;
 ' LANGUAGE 'plpgsql';
 CREATE TRIGGER forumgrouplist_insert_trig AFTER INSERT ON forum_group_list
         FOR EACH ROW EXECUTE PROCEDURE forumgrouplist_insert_agg();
@@ -809,14 +809,14 @@ BEGIN
 	INSERT INTO artifact_counts_agg (group_artifact_id,count,open_count) \
 		VALUES (NEW.group_artifact_id,0,0);
         RETURN NEW;
-END;    
+END;
 ' LANGUAGE 'plpgsql';
 
 CREATE TRIGGER artifactgrouplist_insert_trig AFTER INSERT ON artifact_group_list
         FOR EACH ROW EXECUTE PROCEDURE artifactgrouplist_insert_agg();
 CREATE RULE artifact_insert_agg AS
 	ON INSERT TO artifact
-	DO UPDATE artifact_counts_agg SET count=count+1,open_count=open_count+1 
+	DO UPDATE artifact_counts_agg SET count=count+1,open_count=open_count+1
 		WHERE group_artifact_id=new.group_artifact_id;
 -- drop TRIGGER artifactgroup_update_trig ON artifact;
 -- drop function artifactgroup_update_agg();
@@ -838,7 +838,7 @@ BEGIN
 		--
 		--	now see how to increment/decrement the old types sums
 		--
-		IF NEW.status_id <> OLD.status_id THEN 
+		IF NEW.status_id <> OLD.status_id THEN
 			IF OLD.status_id = 2 THEN
 				UPDATE artifact_counts_agg SET count=count-1 \
 					WHERE group_artifact_id=OLD.group_artifact_id;
@@ -855,25 +855,25 @@ BEGIN
 		END IF;
 	ELSE
 		--
-		-- just need to evaluate the status flag and 
+		-- just need to evaluate the status flag and
 		-- increment/decrement the counter as necessary
 		--
 		IF NEW.status_id <> OLD.status_id THEN
 			IF new.status_id = 1 THEN
 				UPDATE artifact_counts_agg SET open_count=open_count+1 \
 					WHERE group_artifact_id=new.group_artifact_id;
-			ELSE 
+			ELSE
 				IF new.status_id = 2 THEN
 					UPDATE artifact_counts_agg SET open_count=open_count-1 \
 						WHERE group_artifact_id=new.group_artifact_id;
-				ELSE 
+				ELSE
 					IF new.status_id = 3 THEN
 						UPDATE artifact_counts_agg SET open_count=open_count-1,count=count-1 \
 							WHERE group_artifact_id=new.group_artifact_id;
 					END IF;
 				END IF;
 			END IF;
-		END IF;	
+		END IF;
 	END IF;
 	RETURN NEW;
 END;
@@ -936,9 +936,9 @@ group_id int not null default 0
 -- copy stats_project_metric from '/tmp/stats_project_metric.dump';
 CREATE UNIQUE INDEX statsprojectmetric_month_day_group ON stats_project_metric(month,day,group_id);
 CREATE TABLE stats_agg_site_by_group_tmp AS
-SELECT 
-	substring(day::text from 1 for 6)::int AS month, 
-	substring(day::text from 7 for 2)::int AS day, 
+SELECT
+	substring(day::text from 1 for 6)::int AS month,
+	substring(day::text from 7 for 2)::int AS day,
 	group_id,
 	count
 	from stats_agg_site_by_group ;
@@ -950,11 +950,11 @@ DROP TABLE stats_agg_site_by_day;
 
 CREATE UNIQUE INDEX statssitebygroup_month_day_group ON stats_agg_site_by_group(month,day,group_id);
 CREATE TABLE stats_agg_logo_by_group_tmp AS
-SELECT	   
+SELECT
 	substring(day::text from 1 for 6)::int AS month,
 	substring(day::text from 7 for 2)::int AS day,
 	group_id,
-	count 
+	count
 	from stats_agg_logo_by_group ;
 
 DROP TABLE stats_agg_logo_by_group;
@@ -968,7 +968,7 @@ group_id INT NOT NULL DEFAULT 0,
 pages INT NOT NULL DEFAULT 0
 );
 INSERT INTO stats_subd_pages
-SELECT month,day,group_id,subdomain_views 
+SELECT month,day,group_id,subdomain_views
 FROM stats_project WHERE subdomain_views > 0;
 
 CREATE UNIQUE INDEX statssubdpages_month_day_group ON stats_subd_pages(month,day,group_id);
@@ -991,11 +991,11 @@ checkouts INT NOT NULL DEFAULT 0,
 commits INT NOT NULL DEFAULT 0,
 adds INT NOT NULL DEFAULT 0
 );
-INSERT INTO stats_cvs_group 
-SELECT month,day,group_id,cvs_checkouts,cvs_commits,cvs_adds 
-FROM stats_project 
-WHERE cvs_checkouts > 0 
-OR cvs_commits > 0 
+INSERT INTO stats_cvs_group
+SELECT month,day,group_id,cvs_checkouts,cvs_commits,cvs_adds
+FROM stats_project
+WHERE cvs_checkouts > 0
+OR cvs_commits > 0
 OR cvs_adds > 0;
 
 CREATE UNIQUE INDEX statscvsgroup_month_day_group ON stats_cvs_group(month,day,group_id);
@@ -1035,8 +1035,8 @@ help_requests INT DEFAULT 0
 );
 -- copy stats_project from '/tmp/stats_project.dump';
 CREATE UNIQUE INDEX statsproject_month_day_group ON stats_project(month,day,group_id);
-CREATE TABLE stats_site_tmp AS 
-SELECT month,day,uniq_users,sessions,total_users,new_users,new_projects 
+CREATE TABLE stats_site_tmp AS
+SELECT month,day,uniq_users,sessions,total_users,new_users,new_projects
 FROM stats_site;
 
 DROP TABLE stats_site;

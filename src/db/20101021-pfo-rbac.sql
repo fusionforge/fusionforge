@@ -26,7 +26,7 @@ BEGIN
 	      RETURN 1 ;
 	   END IF ;
 	END IF ;
-		   
+
 	FOR os IN SELECT * FROM role_setting WHERE role_id = rid ORDER BY role_id, section_name, ref_id
 	LOOP
 		SELECT group_id INTO opid FROM role WHERE role_id = os.role_id ;

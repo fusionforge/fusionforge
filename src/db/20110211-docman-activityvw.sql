@@ -11,7 +11,7 @@ SELECT
 agl.group_id, 'trackerclose'::text AS section, agl.group_artifact_id AS ref_id,
 a.artifact_id as subref_id, a.summary as description, a.close_date AS activity_date, u.user_id, u.user_name, u.realname
 FROM artifact_group_list agl JOIN artifact a using (group_artifact_id), users u WHERE u.user_id=a.assigned_to
---actually should join against  
+--actually should join against
 AND a.close_date > 0
 UNION
 SELECT

@@ -60,5 +60,5 @@ alter table groups rename column bug_due_period to dead11;
 alter table groups rename column patch_due_period to dead12;
 alter table groups rename column support_due_period to dead13;
 
-drop index groups_unix; 
+drop index groups_unix;
 create unique index group_unix_uniq on groups (unix_group_name);

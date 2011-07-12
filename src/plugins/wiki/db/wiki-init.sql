@@ -196,12 +196,12 @@ CREATE FUNCTION plugin_wiki_update_recent(integer, integer) RETURNS integer
     AS $_$
 DELETE FROM plugin_wiki_recent WHERE id = $1;
 INSERT INTO plugin_wiki_recent (id, latestversion, latestmajor, latestminor)
-  SELECT id, MAX(version) AS latestversion, 
-	     MAX(CASE WHEN minor_edit =  0 THEN version END) AS latestmajor, 
+  SELECT id, MAX(version) AS latestversion,
+	     MAX(CASE WHEN minor_edit =  0 THEN version END) AS latestmajor,
              MAX(CASE WHEN minor_edit <> 0 THEN version END) AS latestminor
     FROM plugin_wiki_version WHERE id = $2 GROUP BY id;
 DELETE FROM plugin_wiki_nonempty WHERE id = $1;
-INSERT INTO plugin_wiki_nonempty (id) 
+INSERT INTO plugin_wiki_nonempty (id)
   SELECT plugin_wiki_recent.id
     FROM plugin_wiki_recent, plugin_wiki_version
     WHERE plugin_wiki_recent.id = plugin_wiki_version.id

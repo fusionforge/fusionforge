@@ -16,7 +16,7 @@ CREATE TABLE accesslog (
 	request_time  char(28),
 	status 	      smallint unsigned,
 	bytes_sent    smallint unsigned,
-        referer       varchar(255), 
+        referer       varchar(255),
 	agent         varchar(255),
 	request_duration float
 );

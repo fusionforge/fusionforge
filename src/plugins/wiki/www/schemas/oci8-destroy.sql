@@ -9,7 +9,7 @@ set feedback off
 -- You should set this to the same value you specify for
 -- $DBParams['prefix'] in index.php.
 --
--- You have to use a prefix, because some phpWiki tablenames are 
+-- You have to use a prefix, because some phpWiki tablenames are
 -- Oracle reserved words!
 
 define prefix=phpwiki_
@@ -22,19 +22,19 @@ define prefix=phpwiki_
 
 --================================================================
 -- Note on Oracle datatypes...
--- 
--- Most of the 'NOT NULL' constraints on the character columns have been 
--- 	dropped since they can contain empty strings which are seen by 
+--
+-- Most of the 'NOT NULL' constraints on the character columns have been
+-- 	dropped since they can contain empty strings which are seen by
 --	Oracle as NULL.
 -- Oracle CLOBs are used for TEXTs/MEDUIMTEXTs columns.
 
 
 prompt Initializing PhpWiki tables with:
 prompt        prefix =  &prefix
-prompt 
+prompt
 prompt Expect some 'ORA-00942: table or view does not exist' unless you are
 prompt overwriting existing tables.
-prompt 
+prompt
 
 define page_tbl=&prefix.page
 define version_tbl=&prefix.version
@@ -67,13 +67,13 @@ prompt Dropping &session_tbl
 DROP TABLE &session_tbl;
 
 -- Optional DB Auth and Prefs
--- For these tables below the default table prefix must be used 
+-- For these tables below the default table prefix must be used
 -- in the DBAuthParam SQL statements also.
 
 prompt Dropping &pref_tbl
 DROP TABLE &pref_tbl;
 
--- better use the extra pref table where such users can be created easily 
+-- better use the extra pref table where such users can be created easily
 -- without password.
 
 prompt Dropping &user_tbl

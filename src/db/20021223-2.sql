@@ -7,7 +7,7 @@ alter table project_history rename column date to mod_date;
 --	Change project_task to delete on removal of project
 --
 
-ALTER TABLE project_task 
+ALTER TABLE project_task
 	ADD CONSTRAINT projecttask_groupprojectid_fk FOREIGN KEY (group_project_id)
 	REFERENCES project_group_list(group_project_id) ON DELETE CASCADE;
 
@@ -23,7 +23,7 @@ ALTER TABLE project_group_list ADD COLUMN send_all_posts_to text;
 CREATE SEQUENCE "project_categor_category_id_seq" ;
 CREATE TABLE project_category (
 category_id integer DEFAULT nextval('project_categor_category_id_seq'::text) NOT NULL,
-group_project_id int 
+group_project_id int
 	CONSTRAINT projcat_projgroupid_fk REFERENCES project_group_list(group_project_id) ON DELETE CASCADE,
 category_name text,
 	CONSTRAINT "project_category_pkey" Primary Key ("category_id")
@@ -41,19 +41,19 @@ UPDATE project_task SET category_id=100;
 --
 --	Convenience view required for ProjectTask object
 --
-CREATE VIEW project_task_vw AS 
-SELECT project_task.*,project_category.category_name,project_status.status_name 
-FROM project_task 
-FULL JOIN project_category ON (project_category.category_id=project_task.category_id) 
+CREATE VIEW project_task_vw AS
+SELECT project_task.*,project_category.category_name,project_status.status_name
+FROM project_task
+FULL JOIN project_category ON (project_category.category_id=project_task.category_id)
 NATURAL JOIN project_status;
 
 --
 --	Each task can have multiple artifacts associated with it
 --
 CREATE TABLE project_task_artifact (
-project_task_id int 
+project_task_id int
 	CONSTRAINT projtaskartifact_projtaskid_fk REFERENCES project_task(project_task_id) ON DELETE CASCADE,
-artifact_id int 
+artifact_id int
 	CONSTRAINT projtaskartifact_artifactid_fk REFERENCES artifact(artifact_id) ON DELETE CASCADE);
 CREATE INDEX projecttaskartifact_projecttaskid ON project_task_artifact (project_task_id);
 CREATE INDEX projecttaskartifact_artifactid ON project_task_artifact (artifact_id);
@@ -62,9 +62,9 @@ CREATE INDEX projecttaskartifact_artifactid ON project_task_artifact (artifact_i
 --	Relation to forums dedicated to this project
 --
 CREATE TABLE project_group_forum (
-group_project_id int 
+group_project_id int
 	CONSTRAINT projgroupforum_projgroupid_fk REFERENCES project_group_list(group_project_id) ON DELETE CASCADE,
-group_forum_id int 
+group_forum_id int
 	CONSTRAINT projgroupforum_groupforumid_fk REFERENCES forum_group_list(group_forum_id) ON DELETE CASCADE);
 CREATE INDEX projectgroupforum_groupprojectid ON project_group_forum(group_project_id);
 CREATE INDEX projectgroupforum_groupforumid ON project_group_forum(group_forum_id);
@@ -73,9 +73,9 @@ CREATE INDEX projectgroupforum_groupforumid ON project_group_forum(group_forum_i
 --	Relation to a category of docs for this project
 --
 CREATE TABLE project_group_doccat (
-group_project_id int 
+group_project_id int
 	CONSTRAINT projgroupdoccat_projgroupid_fk REFERENCES project_group_list(group_project_id) ON DELETE CASCADE,
-doc_group_id int 
+doc_group_id int
 	CONSTRAINT projgroupdoccat_docgroupid_fk REFERENCES doc_groups(doc_group) ON DELETE CASCADE);
 CREATE INDEX projectgroupdoccat_groupprojectid ON project_group_forum(group_project_id);
 CREATE INDEX projectgroupdoccat_groupgroupid ON project_group_doccat(doc_group_id);
@@ -83,17 +83,17 @@ CREATE INDEX projectgroupdoccat_groupgroupid ON project_group_doccat(doc_group_i
 --
 --
 --
-CREATE VIEW project_depend_vw AS 
+CREATE VIEW project_depend_vw AS
 	SELECT pt.project_task_id,pd.is_dependent_on_task_id,pt.end_date,pt.start_date
 	FROM project_task pt NATURAL JOIN project_dependencies pd;
 
-CREATE VIEW project_dependon_vw AS 
+CREATE VIEW project_dependon_vw AS
 	SELECT pd.project_task_id,pd.is_dependent_on_task_id,pt.end_date,pt.start_date
 	FROM project_task pt FULL JOIN project_dependencies pd ON (pd.is_dependent_on_task_id=pt.project_task_id);
 
 CREATE VIEW project_history_user_vw AS
-	SELECT users.realname,users.email,users.user_name,project_history.* 
-	FROM users,project_history 
+	SELECT users.realname,users.email,users.user_name,project_history.*
+	FROM users,project_history
 	WHERE project_history.mod_by=users.user_id;
 
 --
@@ -107,8 +107,8 @@ posted_by INT NOT NULL REFERENCES users(user_id),
 postdate int NOT NULL);
 
 --BEGIN;
-INSERT INTO project_messages (project_task_id,body,posted_by,postdate) 
-	SELECT project_task_id,old_value,mod_by,mod_date 
+INSERT INTO project_messages (project_task_id,body,posted_by,postdate)
+	SELECT project_task_id,old_value,mod_by,mod_date
 	FROM project_history
 	WHERE field_name='details';
 

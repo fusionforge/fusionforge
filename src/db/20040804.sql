@@ -46,7 +46,7 @@ perm_level int not null default 0
 CREATE UNIQUE INDEX projectperm_groupprojiduserid ON project_perm(group_project_id,user_id);
 
 DELETE FROM project_perm;
-INSERT INTO project_perm (group_project_id,user_id,perm_level) 
+INSERT INTO project_perm (group_project_id,user_id,perm_level)
 	SELECT project_group_list.group_project_id,user_group.user_id,user_group.project_flags
 	FROM user_group,project_group_list
 	WHERE project_group_list.group_id=user_group.group_id
@@ -67,7 +67,7 @@ perm_level int not null default 0
 CREATE UNIQUE INDEX forumperm_groupforumiduserid ON forum_perm(group_forum_id,user_id);
 
 DELETE FROM forum_perm;
-INSERT INTO forum_perm (group_forum_id,user_id,perm_level) 
+INSERT INTO forum_perm (group_forum_id,user_id,perm_level)
 	SELECT forum_group_list.group_forum_id,user_group.user_id,user_group.forum_flags
 	FROM user_group,forum_group_list
 	WHERE forum_group_list.group_id=user_group.group_id
@@ -79,7 +79,7 @@ INSERT INTO forum_perm (group_forum_id,user_id,perm_level)
 --	Add to all trackers
 --
 update user_group set artifact_flags=0 where artifact_flags is null;
-INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level) 
+INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level)
 	SELECT artifact_group_list.group_artifact_id,user_group.user_id,user_group.artifact_flags
 	FROM user_group,artifact_group_list
 	WHERE artifact_group_list.group_id=user_group.group_id

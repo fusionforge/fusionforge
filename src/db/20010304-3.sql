@@ -1,13 +1,13 @@
-ALTER TABLE artifact_group_list ADD CONSTRAINT artifactgroup_groupid_fk 
+ALTER TABLE artifact_group_list ADD CONSTRAINT artifactgroup_groupid_fk
 	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL;
 
-ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_userid_fk 
+ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_userid_fk
         FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL;
-DELETE from artifact_perm 
-	where not exists (select group_artifact_id 
-	from artifact_group_list 
+DELETE from artifact_perm
+	where not exists (select group_artifact_id
+	from artifact_group_list
 	where artifact_perm.group_artifact_id=artifact_group_list.group_artifact_id);
-ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_groupartifactid_fk 
+ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_groupartifactid_fk
         FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
 
 ALTER TABLE artifact_category ADD CONSTRAINT artifactcategory_groupartifactid_fk

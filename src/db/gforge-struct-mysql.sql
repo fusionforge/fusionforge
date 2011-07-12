@@ -1,21 +1,21 @@
 -- phpMyAdmin SQL Dump
 -- version 2.9.2
 -- http://www.phpmyadmin.net
--- 
+--
 -- Host: localhost
 -- Generation Time: Feb 23, 2007 at 08:35 PM
 -- Server version: 5.0.27
 -- PHP Version: 5.1.6
--- 
+--
 -- Database: `gforge`
--- 
+--
 -- CREATE DATABASE `gforge` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `canned_responses`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `canned_responses` (
   `response_id` int(11) NOT NULL auto_increment,
@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS `canned_responses` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `db_images`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `db_images` (
   `id` int(11) NOT NULL auto_increment,
@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS `db_images` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `doc_data`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `doc_data` (
   `docid` int(11) NOT NULL auto_increment,
@@ -73,9 +73,9 @@ CREATE TABLE IF NOT EXISTS `doc_data` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `doc_groups`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `doc_groups` (
   `doc_group` int(11) NOT NULL auto_increment,
@@ -89,9 +89,9 @@ CREATE TABLE IF NOT EXISTS `doc_groups` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `doc_states`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `doc_states` (
   `stateid` int(11) NOT NULL auto_increment,
@@ -101,9 +101,9 @@ CREATE TABLE IF NOT EXISTS `doc_states` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `filemodule_monitor`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `filemodule_monitor` (
   `id` int(11) NOT NULL auto_increment,
@@ -115,9 +115,9 @@ CREATE TABLE IF NOT EXISTS `filemodule_monitor` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `forum`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `forum` (
   `msg_id` int(11) NOT NULL auto_increment,
@@ -140,9 +140,9 @@ CREATE TABLE IF NOT EXISTS `forum` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `forum_agg_msg_count`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `forum_agg_msg_count` (
   `group_forum_id` int(11) NOT NULL default '0',
@@ -151,9 +151,9 @@ CREATE TABLE IF NOT EXISTS `forum_agg_msg_count` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `forum_group_list`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `forum_group_list` (
   `group_forum_id` int(11) NOT NULL auto_increment,
@@ -170,9 +170,9 @@ CREATE TABLE IF NOT EXISTS `forum_group_list` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `forum_monitored_forums`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `forum_monitored_forums` (
   `monitor_id` int(11) NOT NULL auto_increment,
@@ -184,9 +184,9 @@ CREATE TABLE IF NOT EXISTS `forum_monitored_forums` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `forum_saved_place`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `forum_saved_place` (
   `saved_place_id` int(11) NOT NULL auto_increment,
@@ -198,9 +198,9 @@ CREATE TABLE IF NOT EXISTS `forum_saved_place` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `frs_file`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `frs_file` (
   `file_id` int(11) NOT NULL auto_increment,
@@ -218,9 +218,9 @@ CREATE TABLE IF NOT EXISTS `frs_file` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `frs_filetype`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `frs_filetype` (
   `type_id` int(11) NOT NULL auto_increment,
@@ -230,9 +230,9 @@ CREATE TABLE IF NOT EXISTS `frs_filetype` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `frs_package`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `frs_package` (
   `package_id` int(11) NOT NULL auto_increment,
@@ -246,9 +246,9 @@ CREATE TABLE IF NOT EXISTS `frs_package` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `frs_processor`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `frs_processor` (
   `processor_id` int(11) NOT NULL auto_increment,
@@ -258,9 +258,9 @@ CREATE TABLE IF NOT EXISTS `frs_processor` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `frs_release`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `frs_release` (
   `release_id` int(11) NOT NULL auto_increment,
@@ -278,9 +278,9 @@ CREATE TABLE IF NOT EXISTS `frs_release` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `frs_status`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `frs_status` (
   `status_id` int(11) NOT NULL auto_increment,
@@ -290,9 +290,9 @@ CREATE TABLE IF NOT EXISTS `frs_status` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `group_history`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `group_history` (
   `group_history_id` int(11) NOT NULL auto_increment,
@@ -307,9 +307,9 @@ CREATE TABLE IF NOT EXISTS `group_history` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `groups`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `groups` (
   `group_id` int(11) NOT NULL auto_increment,
@@ -353,9 +353,9 @@ CREATE TABLE IF NOT EXISTS `groups` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `mail_group_list`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `mail_group_list` (
   `group_list_id` int(11) NOT NULL auto_increment,
@@ -372,9 +372,9 @@ CREATE TABLE IF NOT EXISTS `mail_group_list` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `news_bytes`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `news_bytes` (
   `id` int(11) NOT NULL auto_increment,
@@ -395,9 +395,9 @@ CREATE TABLE IF NOT EXISTS `news_bytes` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `people_job`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `people_job` (
   `job_id` int(11) NOT NULL auto_increment,
@@ -414,9 +414,9 @@ CREATE TABLE IF NOT EXISTS `people_job` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `people_job_category`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `people_job_category` (
   `category_id` int(11) NOT NULL auto_increment,
@@ -427,9 +427,9 @@ CREATE TABLE IF NOT EXISTS `people_job_category` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `people_job_inventory`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `people_job_inventory` (
   `job_inventory_id` int(11) NOT NULL auto_increment,
@@ -442,9 +442,9 @@ CREATE TABLE IF NOT EXISTS `people_job_inventory` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `people_job_status`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `people_job_status` (
   `status_id` int(11) NOT NULL auto_increment,
@@ -454,9 +454,9 @@ CREATE TABLE IF NOT EXISTS `people_job_status` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `people_skill`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `people_skill` (
   `skill_id` int(11) NOT NULL auto_increment,
@@ -466,9 +466,9 @@ CREATE TABLE IF NOT EXISTS `people_skill` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `people_skill_inventory`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `people_skill_inventory` (
   `skill_inventory_id` int(11) NOT NULL auto_increment,
@@ -481,9 +481,9 @@ CREATE TABLE IF NOT EXISTS `people_skill_inventory` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `people_skill_level`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `people_skill_level` (
   `skill_level_id` int(11) NOT NULL auto_increment,
@@ -493,9 +493,9 @@ CREATE TABLE IF NOT EXISTS `people_skill_level` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `people_skill_year`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `people_skill_year` (
   `skill_year_id` int(11) NOT NULL auto_increment,
@@ -505,9 +505,9 @@ CREATE TABLE IF NOT EXISTS `people_skill_year` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_assigned_to`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_assigned_to` (
   `project_assigned_id` int(11) NOT NULL auto_increment,
@@ -519,9 +519,9 @@ CREATE TABLE IF NOT EXISTS `project_assigned_to` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_dependencies`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_dependencies` (
   `project_depend_id` int(11) NOT NULL auto_increment,
@@ -534,9 +534,9 @@ CREATE TABLE IF NOT EXISTS `project_dependencies` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_group_list`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_group_list` (
   `group_project_id` int(11) NOT NULL auto_increment,
@@ -551,9 +551,9 @@ CREATE TABLE IF NOT EXISTS `project_group_list` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_history`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_history` (
   `project_history_id` int(11) NOT NULL auto_increment,
@@ -568,9 +568,9 @@ CREATE TABLE IF NOT EXISTS `project_history` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_metric`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_metric` (
   `ranking` int(11) NOT NULL auto_increment,
@@ -582,9 +582,9 @@ CREATE TABLE IF NOT EXISTS `project_metric` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_metric_tmp1`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_metric_tmp1` (
   `ranking` int(11) NOT NULL auto_increment,
@@ -595,9 +595,9 @@ CREATE TABLE IF NOT EXISTS `project_metric_tmp1` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_status`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_status` (
   `status_id` int(11) NOT NULL auto_increment,
@@ -607,9 +607,9 @@ CREATE TABLE IF NOT EXISTS `project_status` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_task`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_task` (
   `project_task_id` int(11) NOT NULL auto_increment,
@@ -633,9 +633,9 @@ CREATE TABLE IF NOT EXISTS `project_task` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_weekly_metric`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_weekly_metric` (
   `ranking` int(11) NOT NULL auto_increment,
@@ -648,9 +648,9 @@ CREATE TABLE IF NOT EXISTS `project_weekly_metric` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_session`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_session` (
   `user_id` int(11) NOT NULL default '0',
@@ -664,9 +664,9 @@ CREATE TABLE IF NOT EXISTS `user_session` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `snippet`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `snippet` (
   `snippet_id` int(11) NOT NULL auto_increment,
@@ -684,9 +684,9 @@ CREATE TABLE IF NOT EXISTS `snippet` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `snippet_package`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `snippet_package` (
   `snippet_package_id` int(11) NOT NULL auto_increment,
@@ -702,9 +702,9 @@ CREATE TABLE IF NOT EXISTS `snippet_package` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `snippet_package_item`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `snippet_package_item` (
   `snippet_package_item_id` int(11) NOT NULL auto_increment,
@@ -716,9 +716,9 @@ CREATE TABLE IF NOT EXISTS `snippet_package_item` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `snippet_package_version`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `snippet_package_version` (
   `snippet_package_version_id` int(11) NOT NULL auto_increment,
@@ -733,9 +733,9 @@ CREATE TABLE IF NOT EXISTS `snippet_package_version` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `snippet_version`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `snippet_version` (
   `snippet_version_id` int(11) NOT NULL auto_increment,
@@ -751,9 +751,9 @@ CREATE TABLE IF NOT EXISTS `snippet_version` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_agg_logo_by_day`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_agg_logo_by_day` (
   `day` int(11) default NULL,
@@ -762,9 +762,9 @@ CREATE TABLE IF NOT EXISTS `stats_agg_logo_by_day` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_agg_pages_by_day`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_agg_pages_by_day` (
   `day` int(11) NOT NULL default '0',
@@ -774,9 +774,9 @@ CREATE TABLE IF NOT EXISTS `stats_agg_pages_by_day` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_site_pages_by_month`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_site_pages_by_month` (
   `month` int(11) default NULL,
@@ -785,9 +785,9 @@ CREATE TABLE IF NOT EXISTS `stats_site_pages_by_month` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `survey_question_types`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `survey_question_types` (
   `id` int(11) NOT NULL auto_increment,
@@ -797,9 +797,9 @@ CREATE TABLE IF NOT EXISTS `survey_question_types` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `survey_questions`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `survey_questions` (
   `question_id` int(11) NOT NULL auto_increment,
@@ -812,9 +812,9 @@ CREATE TABLE IF NOT EXISTS `survey_questions` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `survey_rating_aggregate`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `survey_rating_aggregate` (
   `type` int(11) NOT NULL default '0',
@@ -826,9 +826,9 @@ CREATE TABLE IF NOT EXISTS `survey_rating_aggregate` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `survey_rating_response`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `survey_rating_response` (
   `user_id` int(11) NOT NULL default '0',
@@ -842,9 +842,9 @@ CREATE TABLE IF NOT EXISTS `survey_rating_response` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `survey_responses`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `survey_responses` (
   `user_id` int(11) NOT NULL default '0',
@@ -860,9 +860,9 @@ CREATE TABLE IF NOT EXISTS `survey_responses` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `surveys`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `surveys` (
   `survey_id` int(11) NOT NULL auto_increment,
@@ -876,9 +876,9 @@ CREATE TABLE IF NOT EXISTS `surveys` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `trove_cat`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `trove_cat` (
   `trove_cat_id` int(11) NOT NULL auto_increment,
@@ -898,9 +898,9 @@ CREATE TABLE IF NOT EXISTS `trove_cat` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `trove_group_link`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `trove_group_link` (
   `trove_group_id` int(11) NOT NULL auto_increment,
@@ -914,9 +914,9 @@ CREATE TABLE IF NOT EXISTS `trove_group_link` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_bookmarks`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_bookmarks` (
   `bookmark_id` int(11) NOT NULL auto_increment,
@@ -929,9 +929,9 @@ CREATE TABLE IF NOT EXISTS `user_bookmarks` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_diary`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_diary` (
   `id` int(11) NOT NULL auto_increment,
@@ -946,9 +946,9 @@ CREATE TABLE IF NOT EXISTS `user_diary` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_diary_monitor`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_diary_monitor` (
   `monitor_id` int(11) NOT NULL auto_increment,
@@ -960,9 +960,9 @@ CREATE TABLE IF NOT EXISTS `user_diary_monitor` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_group`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_group` (
   `user_group_id` int(11) NOT NULL auto_increment,
@@ -983,9 +983,9 @@ CREATE TABLE IF NOT EXISTS `user_group` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_metric`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_metric` (
   `ranking` int(11) NOT NULL auto_increment,
@@ -1002,9 +1002,9 @@ CREATE TABLE IF NOT EXISTS `user_metric` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_metric0`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_metric0` (
   `ranking` int(11) NOT NULL auto_increment,
@@ -1021,9 +1021,9 @@ CREATE TABLE IF NOT EXISTS `user_metric0` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_preferences`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_preferences` (
   `user_id` int(11) NOT NULL default '0',
@@ -1036,9 +1036,9 @@ CREATE TABLE IF NOT EXISTS `user_preferences` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_ratings`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_ratings` (
   `rated_by` int(11) NOT NULL default '0',
@@ -1050,9 +1050,9 @@ CREATE TABLE IF NOT EXISTS `user_ratings` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `users`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL auto_increment,
@@ -1097,9 +1097,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_sums_agg`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_sums_agg` (
   `group_id` int(11) NOT NULL default '0',
@@ -1109,9 +1109,9 @@ CREATE TABLE IF NOT EXISTS `project_sums_agg` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `prdb_dbs`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `prdb_dbs` (
   `dbid` int(11) NOT NULL auto_increment,
@@ -1130,9 +1130,9 @@ CREATE TABLE IF NOT EXISTS `prdb_dbs` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `prdb_states`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `prdb_states` (
   `stateid` int(11) NOT NULL default '0',
@@ -1142,9 +1142,9 @@ CREATE TABLE IF NOT EXISTS `prdb_states` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `prdb_types`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `prdb_types` (
   `dbtypeid` int(11) NOT NULL default '0',
@@ -1154,9 +1154,9 @@ CREATE TABLE IF NOT EXISTS `prdb_types` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `prweb_vhost`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `prweb_vhost` (
   `vhostid` int(11) NOT NULL auto_increment,
@@ -1171,9 +1171,9 @@ CREATE TABLE IF NOT EXISTS `prweb_vhost` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_group_list`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_group_list` (
   `group_artifact_id` int(11) NOT NULL auto_increment,
@@ -1197,9 +1197,9 @@ CREATE TABLE IF NOT EXISTS `artifact_group_list` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_perm`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_perm` (
   `id` int(11) NOT NULL auto_increment,
@@ -1212,22 +1212,22 @@ CREATE TABLE IF NOT EXISTS `artifact_perm` (
 
 
 CREATE OR REPLACE VIEW `artifactperm_user_vw` AS
-    SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname 
-	FROM artifact_perm AS ap, users 
+    SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname
+	FROM artifact_perm AS ap, users
 	WHERE users.user_id = ap.user_id;
 
 
 CREATE OR REPLACE VIEW `artifactperm_artgrouplist_vw` AS
-    SELECT agl.group_artifact_id, agl.name, agl.description, agl.group_id, ap.user_id, ap.perm_level 
-	FROM artifact_perm AS ap, artifact_group_list AS agl 
+    SELECT agl.group_artifact_id, agl.name, agl.description, agl.group_id, ap.user_id, ap.perm_level
+	FROM artifact_perm AS ap, artifact_group_list AS agl
 	WHERE ap.group_artifact_id = agl.group_artifact_id;
 
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_status`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_status` (
   `id` int(11) NOT NULL auto_increment,
@@ -1237,9 +1237,9 @@ CREATE TABLE IF NOT EXISTS `artifact_status` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact` (
   `artifact_id` int(11) NOT NULL auto_increment,
@@ -1265,9 +1265,9 @@ CREATE TABLE IF NOT EXISTS `artifact` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_history`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_history` (
   `id` int(11) NOT NULL auto_increment,
@@ -1282,16 +1282,16 @@ CREATE TABLE IF NOT EXISTS `artifact_history` (
 
 
 CREATE OR REPLACE VIEW `artifact_history_user_vw` AS
-    SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name 
-	FROM artifact_history AS ah, users 
+    SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name
+	FROM artifact_history AS ah, users
 	WHERE ah.mod_by = users.user_id;
 
-	
+
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_file`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_file` (
   `id` int(11) NOT NULL auto_increment,
@@ -1309,16 +1309,16 @@ CREATE TABLE IF NOT EXISTS `artifact_file` (
 
 
 CREATE OR REPLACE VIEW `artifact_file_user_vw` AS
-    SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, af.adddate, af.submitted_by, users.user_name, users.realname 
-	FROM artifact_file AS af, users 
+    SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, af.adddate, af.submitted_by, users.user_name, users.realname
+	FROM artifact_file AS af, users
 	WHERE af.submitted_by = users.user_id;
 
-	
+
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_message`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_message` (
   `id` int(11) NOT NULL auto_increment,
@@ -1333,16 +1333,16 @@ CREATE TABLE IF NOT EXISTS `artifact_message` (
 
 
 CREATE OR REPLACE VIEW `artifact_message_user_vw` AS
-    SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate, users.user_id, users.email, users.user_name, users.realname 
-	FROM artifact_message AS am, users 
+    SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate, users.user_id, users.email, users.user_name, users.realname
+	FROM artifact_message AS am, users
 	WHERE am.submitted_by = users.user_id;
 
-	
+
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_monitor`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_monitor` (
   `id` int(11) NOT NULL auto_increment,
@@ -1355,9 +1355,9 @@ CREATE TABLE IF NOT EXISTS `artifact_monitor` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_canned_responses`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_canned_responses` (
   `id` int(11) NOT NULL auto_increment,
@@ -1370,9 +1370,9 @@ CREATE TABLE IF NOT EXISTS `artifact_canned_responses` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_counts_agg`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_counts_agg` (
   `group_artifact_id` int(11) NOT NULL default '0',
@@ -1382,9 +1382,9 @@ CREATE TABLE IF NOT EXISTS `artifact_counts_agg` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_site_pages_by_day`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_site_pages_by_day` (
   `month` int(11) default NULL,
@@ -1395,9 +1395,9 @@ CREATE TABLE IF NOT EXISTS `stats_site_pages_by_day` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `massmail_queue`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `massmail_queue` (
   `id` int(11) NOT NULL auto_increment,
@@ -1413,9 +1413,9 @@ CREATE TABLE IF NOT EXISTS `massmail_queue` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_agg_site_by_group`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_agg_site_by_group` (
   `month` int(11) default NULL,
@@ -1427,9 +1427,9 @@ CREATE TABLE IF NOT EXISTS `stats_agg_site_by_group` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_project_metric`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_project_metric` (
   `month` int(11) NOT NULL default '0',
@@ -1442,9 +1442,9 @@ CREATE TABLE IF NOT EXISTS `stats_project_metric` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_agg_logo_by_group`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_agg_logo_by_group` (
   `month` int(11) default NULL,
@@ -1456,9 +1456,9 @@ CREATE TABLE IF NOT EXISTS `stats_agg_logo_by_group` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_subd_pages`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_subd_pages` (
   `month` int(11) NOT NULL default '0',
@@ -1470,9 +1470,9 @@ CREATE TABLE IF NOT EXISTS `stats_subd_pages` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_cvs_user`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_cvs_user` (
   `month` int(11) NOT NULL default '0',
@@ -1486,9 +1486,9 @@ CREATE TABLE IF NOT EXISTS `stats_cvs_user` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_cvs_group`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_cvs_group` (
   `month` int(11) NOT NULL default '0',
@@ -1502,9 +1502,9 @@ CREATE TABLE IF NOT EXISTS `stats_cvs_group` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_project_developers`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_project_developers` (
   `month` int(11) NOT NULL default '0',
@@ -1516,9 +1516,9 @@ CREATE TABLE IF NOT EXISTS `stats_project_developers` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_project`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_project` (
   `month` int(11) NOT NULL default '0',
@@ -1543,9 +1543,9 @@ CREATE TABLE IF NOT EXISTS `stats_project` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_site`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_site` (
   `month` int(11) default NULL,
@@ -1560,9 +1560,9 @@ CREATE TABLE IF NOT EXISTS `stats_site` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `activity_log`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `activity_log` (
   `day` int(11) NOT NULL default '0',
@@ -1578,9 +1578,9 @@ CREATE TABLE IF NOT EXISTS `activity_log` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_metric_history`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_metric_history` (
   `month` int(11) NOT NULL default '0',
@@ -1593,9 +1593,9 @@ CREATE TABLE IF NOT EXISTS `user_metric_history` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `frs_dlstats_filetotal_agg`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `frs_dlstats_filetotal_agg` (
   `file_id` int(11) NOT NULL default '0',
@@ -1604,9 +1604,9 @@ CREATE TABLE IF NOT EXISTS `frs_dlstats_filetotal_agg` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_project_months`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_project_months` (
   `month` int(11) default NULL,
@@ -1642,9 +1642,9 @@ CREATE TABLE IF NOT EXISTS `stats_project_months` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `stats_site_months`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `stats_site_months` (
   `month` int(11) default NULL,
@@ -1671,9 +1671,9 @@ CREATE TABLE IF NOT EXISTS `stats_site_months` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `trove_agg`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `trove_agg` (
   `trove_cat_id` int(11) default NULL,
@@ -1690,9 +1690,9 @@ CREATE TABLE IF NOT EXISTS `trove_agg` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `trove_treesums`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `trove_treesums` (
   `trove_treesums_id` int(11) NOT NULL auto_increment,
@@ -1704,9 +1704,9 @@ CREATE TABLE IF NOT EXISTS `trove_treesums` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `frs_dlstats_file`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `frs_dlstats_file` (
   `ip_address` varchar(25) default NULL,
@@ -1718,9 +1718,9 @@ CREATE TABLE IF NOT EXISTS `frs_dlstats_file` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `group_cvs_history`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `group_cvs_history` (
   `id` int(11) NOT NULL auto_increment,
@@ -1736,9 +1736,9 @@ CREATE TABLE IF NOT EXISTS `group_cvs_history` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `themes`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `themes` (
   `theme_id` int(11) NOT NULL auto_increment,
@@ -1751,9 +1751,9 @@ CREATE TABLE IF NOT EXISTS `themes` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `supported_languages`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `supported_languages` (
   `language_id` int(11) NOT NULL auto_increment,
@@ -1767,9 +1767,9 @@ CREATE TABLE IF NOT EXISTS `supported_languages` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `skills_data_types`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `skills_data_types` (
   `type_id` int(11) NOT NULL auto_increment,
@@ -1779,9 +1779,9 @@ CREATE TABLE IF NOT EXISTS `skills_data_types` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `skills_data`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `skills_data` (
   `skills_data_id` int(11) NOT NULL auto_increment,
@@ -1796,16 +1796,16 @@ CREATE TABLE IF NOT EXISTS `skills_data` (
 
 
 CREATE OR REPLACE VIEW `frs_file_vw` AS
-    SELECT frs_file.file_id, frs_file.filename, frs_file.release_id, frs_file.type_id, frs_file.processor_id, frs_file.release_time, frs_file.file_size, frs_file.post_date, frs_filetype.name AS filetype, frs_processor.name AS processor, frs_dlstats_filetotal_agg.downloads 
-	FROM frs_filetype, frs_processor, (frs_file LEFT JOIN frs_dlstats_filetotal_agg ON frs_dlstats_filetotal_agg.file_id = frs_file.file_id) 
+    SELECT frs_file.file_id, frs_file.filename, frs_file.release_id, frs_file.type_id, frs_file.processor_id, frs_file.release_time, frs_file.file_size, frs_file.post_date, frs_filetype.name AS filetype, frs_processor.name AS processor, frs_dlstats_filetotal_agg.downloads
+	FROM frs_filetype, frs_processor, (frs_file LEFT JOIN frs_dlstats_filetotal_agg ON frs_dlstats_filetotal_agg.file_id = frs_file.file_id)
 	WHERE frs_filetype.type_id = frs_file.type_id AND frs_processor.processor_id = frs_file.processor_id;
 
-	
+
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_category`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_category` (
   `category_id` int(11) NOT NULL auto_increment,
@@ -1818,9 +1818,9 @@ CREATE TABLE IF NOT EXISTS `project_category` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_task_artifact`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_task_artifact` (
   `project_task_id` int(11) NOT NULL default '0',
@@ -1831,16 +1831,16 @@ CREATE TABLE IF NOT EXISTS `project_task_artifact` (
 
 
 CREATE OR REPLACE VIEW `project_history_user_vw` AS
-    SELECT users.realname, users.email, users.user_name, project_history.project_history_id, project_history.project_task_id, project_history.field_name, project_history.old_value, project_history.mod_by, project_history.mod_date 
-	FROM users, project_history 
+    SELECT users.realname, users.email, users.user_name, project_history.project_history_id, project_history.project_task_id, project_history.field_name, project_history.old_value, project_history.mod_by, project_history.mod_date
+	FROM users, project_history
 	WHERE project_history.mod_by = users.user_id;
 
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_messages`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_messages` (
   `project_message_id` int(11) NOT NULL auto_increment,
@@ -1855,92 +1855,92 @@ CREATE TABLE IF NOT EXISTS `project_messages` (
 
 
 CREATE OR REPLACE VIEW `project_message_user_vw` AS
-    SELECT users.realname, users.email, users.user_name, project_messages.project_message_id, project_messages.project_task_id, project_messages.body, project_messages.posted_by, project_messages.postdate 
-	FROM users, project_messages 
+    SELECT users.realname, users.email, users.user_name, project_messages.project_message_id, project_messages.project_task_id, project_messages.body, project_messages.posted_by, project_messages.postdate
+	FROM users, project_messages
 	WHERE project_messages.posted_by = users.user_id;
 
 
 CREATE OR REPLACE VIEW `frs_dlstats_file_agg_vw` AS
-    SELECT frs_dlstats_file.`month`, frs_dlstats_file.`day`, frs_dlstats_file.file_id, count(*) AS downloads 
-	FROM frs_dlstats_file 
+    SELECT frs_dlstats_file.`month`, frs_dlstats_file.`day`, frs_dlstats_file.file_id, count(*) AS downloads
+	FROM frs_dlstats_file
 	GROUP BY frs_dlstats_file.`month`, frs_dlstats_file.`day`, frs_dlstats_file.file_id;
 
 
 CREATE OR REPLACE VIEW `frs_dlstats_grouptotal_vw` AS
-    SELECT frs_package.group_id, sum(frs_dlstats_filetotal_agg.downloads) AS downloads 
-	FROM frs_package, frs_release, frs_file, frs_dlstats_filetotal_agg 
-	WHERE frs_package.package_id = frs_release.package_id AND frs_release.release_id = frs_file.release_id AND frs_file.file_id = frs_dlstats_filetotal_agg.file_id 
+    SELECT frs_package.group_id, sum(frs_dlstats_filetotal_agg.downloads) AS downloads
+	FROM frs_package, frs_release, frs_file, frs_dlstats_filetotal_agg
+	WHERE frs_package.package_id = frs_release.package_id AND frs_release.release_id = frs_file.release_id AND frs_file.file_id = frs_dlstats_filetotal_agg.file_id
 	GROUP BY frs_package.group_id;
 
 
 CREATE OR REPLACE VIEW `frs_dlstats_group_vw` AS
-    SELECT frs_package.group_id, fdfa.`month`, fdfa.`day`, sum(fdfa.downloads) AS downloads 
-	FROM frs_package, frs_release, frs_file, frs_dlstats_file_agg_vw AS fdfa 
+    SELECT frs_package.group_id, fdfa.`month`, fdfa.`day`, sum(fdfa.downloads) AS downloads
+	FROM frs_package, frs_release, frs_file, frs_dlstats_file_agg_vw AS fdfa
 	WHERE frs_package.package_id = frs_release.package_id AND frs_release.release_id = frs_file.release_id AND frs_file.file_id = fdfa.file_id
 	GROUP BY frs_package.group_id, fdfa.`month`, fdfa.`day`;
 
 
 CREATE OR REPLACE VIEW `stats_project_vw` AS
-    SELECT spd.group_id, spd.`month`, spd.`day`, spd.developers, spm.ranking AS group_ranking, spm.percentile AS group_metric, salbg.count AS logo_showings, fdga.downloads, sasbg.count AS site_views, ssp.pages AS subdomain_views, (CASE WHEN (sasbg.count IS NOT NULL) THEN sasbg.count WHEN (0 IS NOT NULL) THEN 0 ELSE NULL END + CASE WHEN (ssp.pages IS NOT NULL) THEN ssp.pages WHEN (0 IS NOT NULL) THEN 0 ELSE NULL END) AS page_views, sp.file_releases, sp.msg_posted, sp.msg_uniq_auth, sp.bugs_opened, sp.bugs_closed, sp.support_opened, sp.support_closed, sp.patches_opened, sp.patches_closed, sp.artifacts_opened, sp.artifacts_closed, sp.tasks_opened, sp.tasks_closed, sp.help_requests, scg.checkouts AS cvs_checkouts, scg.commits AS cvs_commits, scg.adds AS cvs_adds 
-	FROM (((((((stats_project_developers AS spd 
-		LEFT JOIN stats_project AS sp USING (`month`, `day`, group_id)) 
-		LEFT JOIN stats_project_metric AS spm USING (`month`, `day`, group_id)) 
-		LEFT JOIN stats_cvs_group AS scg USING (`month`, `day`, group_id)) 
-		LEFT JOIN stats_agg_site_by_group AS sasbg USING (`month`, `day`, group_id)) 
-		LEFT JOIN stats_agg_logo_by_group AS salbg USING (`month`, `day`, group_id)) 
-		LEFT JOIN stats_subd_pages AS ssp USING (`month`, `day`, group_id)) 
+    SELECT spd.group_id, spd.`month`, spd.`day`, spd.developers, spm.ranking AS group_ranking, spm.percentile AS group_metric, salbg.count AS logo_showings, fdga.downloads, sasbg.count AS site_views, ssp.pages AS subdomain_views, (CASE WHEN (sasbg.count IS NOT NULL) THEN sasbg.count WHEN (0 IS NOT NULL) THEN 0 ELSE NULL END + CASE WHEN (ssp.pages IS NOT NULL) THEN ssp.pages WHEN (0 IS NOT NULL) THEN 0 ELSE NULL END) AS page_views, sp.file_releases, sp.msg_posted, sp.msg_uniq_auth, sp.bugs_opened, sp.bugs_closed, sp.support_opened, sp.support_closed, sp.patches_opened, sp.patches_closed, sp.artifacts_opened, sp.artifacts_closed, sp.tasks_opened, sp.tasks_closed, sp.help_requests, scg.checkouts AS cvs_checkouts, scg.commits AS cvs_commits, scg.adds AS cvs_adds
+	FROM (((((((stats_project_developers AS spd
+		LEFT JOIN stats_project AS sp USING (`month`, `day`, group_id))
+		LEFT JOIN stats_project_metric AS spm USING (`month`, `day`, group_id))
+		LEFT JOIN stats_cvs_group AS scg USING (`month`, `day`, group_id))
+		LEFT JOIN stats_agg_site_by_group AS sasbg USING (`month`, `day`, group_id))
+		LEFT JOIN stats_agg_logo_by_group AS salbg USING (`month`, `day`, group_id))
+		LEFT JOIN stats_subd_pages AS ssp USING (`month`, `day`, group_id))
 		LEFT JOIN frs_dlstats_group_vw AS fdga USING (`month`, `day`, group_id));
 
 
 CREATE OR REPLACE VIEW `stats_project_all_vw` AS
     SELECT
 		stats_project_months.group_id,
-		avg(stats_project_months.developers) AS developers, 
-		avg(stats_project_months.group_ranking) AS group_ranking, 
-		avg(stats_project_months.group_metric) AS group_metric, 
-		sum(stats_project_months.logo_showings) AS logo_showings, 
-		sum(stats_project_months.downloads) AS downloads, 
-		sum(stats_project_months.site_views) AS site_views, 
-		sum(stats_project_months.subdomain_views) AS subdomain_views, 
-		sum(stats_project_months.page_views) AS page_views, 
-		sum(stats_project_months.file_releases) AS file_releases, 
-		sum(stats_project_months.msg_posted) AS msg_posted, 
-		avg(stats_project_months.msg_uniq_auth) AS msg_uniq_auth, 
-		sum(stats_project_months.bugs_opened) AS bugs_opened, 
-		sum(stats_project_months.bugs_closed) AS bugs_closed, 
-		sum(stats_project_months.support_opened) AS support_opened, 
-		sum(stats_project_months.support_closed) AS support_closed, 
-		sum(stats_project_months.patches_opened) AS patches_opened, 
-		sum(stats_project_months.patches_closed) AS patches_closed, 
-		sum(stats_project_months.artifacts_opened) AS artifacts_opened, 
-		sum(stats_project_months.artifacts_closed) AS artifacts_closed, 
-		sum(stats_project_months.tasks_opened) AS tasks_opened, 
-		sum(stats_project_months.tasks_closed) AS tasks_closed, 
-		sum(stats_project_months.help_requests) AS help_requests, 
-		sum(stats_project_months.cvs_checkouts) AS cvs_checkouts, 
-		sum(stats_project_months.cvs_commits) AS cvs_commits, 
-		sum(stats_project_months.cvs_adds) AS cvs_adds 
-	FROM stats_project_months 
+		avg(stats_project_months.developers) AS developers,
+		avg(stats_project_months.group_ranking) AS group_ranking,
+		avg(stats_project_months.group_metric) AS group_metric,
+		sum(stats_project_months.logo_showings) AS logo_showings,
+		sum(stats_project_months.downloads) AS downloads,
+		sum(stats_project_months.site_views) AS site_views,
+		sum(stats_project_months.subdomain_views) AS subdomain_views,
+		sum(stats_project_months.page_views) AS page_views,
+		sum(stats_project_months.file_releases) AS file_releases,
+		sum(stats_project_months.msg_posted) AS msg_posted,
+		avg(stats_project_months.msg_uniq_auth) AS msg_uniq_auth,
+		sum(stats_project_months.bugs_opened) AS bugs_opened,
+		sum(stats_project_months.bugs_closed) AS bugs_closed,
+		sum(stats_project_months.support_opened) AS support_opened,
+		sum(stats_project_months.support_closed) AS support_closed,
+		sum(stats_project_months.patches_opened) AS patches_opened,
+		sum(stats_project_months.patches_closed) AS patches_closed,
+		sum(stats_project_months.artifacts_opened) AS artifacts_opened,
+		sum(stats_project_months.artifacts_closed) AS artifacts_closed,
+		sum(stats_project_months.tasks_opened) AS tasks_opened,
+		sum(stats_project_months.tasks_closed) AS tasks_closed,
+		sum(stats_project_months.help_requests) AS help_requests,
+		sum(stats_project_months.cvs_checkouts) AS cvs_checkouts,
+		sum(stats_project_months.cvs_commits) AS cvs_commits,
+		sum(stats_project_months.cvs_adds) AS cvs_adds
+	FROM stats_project_months
 	GROUP BY stats_project_months.group_id;
 
 
 CREATE OR REPLACE VIEW `stats_site_vw` AS
-    SELECT p.`month`, p.`day`, sspbd.site_page_views, sum(p.downloads) AS downloads, sum(p.subdomain_views) AS subdomain_views, sum(p.msg_posted) AS msg_posted, sum(p.bugs_opened) AS bugs_opened, sum(p.bugs_closed) AS bugs_closed, sum(p.support_opened) AS support_opened, sum(p.support_closed) AS support_closed, sum(p.patches_opened) AS patches_opened, sum(p.patches_closed) AS patches_closed, sum(p.artifacts_opened) AS artifacts_opened, sum(p.artifacts_closed) AS artifacts_closed, sum(p.tasks_opened) AS tasks_opened, sum(p.tasks_closed) AS tasks_closed, sum(p.help_requests) AS help_requests, sum(p.cvs_checkouts) AS cvs_checkouts, sum(p.cvs_commits) AS cvs_commits, sum(p.cvs_adds) AS cvs_adds 
-	FROM stats_project_vw AS p, stats_site_pages_by_day AS sspbd 
+    SELECT p.`month`, p.`day`, sspbd.site_page_views, sum(p.downloads) AS downloads, sum(p.subdomain_views) AS subdomain_views, sum(p.msg_posted) AS msg_posted, sum(p.bugs_opened) AS bugs_opened, sum(p.bugs_closed) AS bugs_closed, sum(p.support_opened) AS support_opened, sum(p.support_closed) AS support_closed, sum(p.patches_opened) AS patches_opened, sum(p.patches_closed) AS patches_closed, sum(p.artifacts_opened) AS artifacts_opened, sum(p.artifacts_closed) AS artifacts_closed, sum(p.tasks_opened) AS tasks_opened, sum(p.tasks_closed) AS tasks_closed, sum(p.help_requests) AS help_requests, sum(p.cvs_checkouts) AS cvs_checkouts, sum(p.cvs_commits) AS cvs_commits, sum(p.cvs_adds) AS cvs_adds
+	FROM stats_project_vw AS p, stats_site_pages_by_day AS sspbd
 	WHERE p.`month` = sspbd.`month` AND p.`day` = sspbd.`day`
 	GROUP BY p.`month`, p.`day`, sspbd.site_page_views;
 
 
 CREATE OR REPLACE VIEW `stats_site_all_vw` AS
-    SELECT sum(stats_site_months.site_page_views) AS site_page_views, sum(stats_site_months.downloads) AS downloads, sum(stats_site_months.subdomain_views) AS subdomain_views, sum(stats_site_months.msg_posted) AS msg_posted, sum(stats_site_months.bugs_opened) AS bugs_opened, sum(stats_site_months.bugs_closed) AS bugs_closed, sum(stats_site_months.support_opened) AS support_opened, sum(stats_site_months.support_closed) AS support_closed, sum(stats_site_months.patches_opened) AS patches_opened, sum(stats_site_months.patches_closed) AS patches_closed, sum(stats_site_months.artifacts_opened) AS artifacts_opened, sum(stats_site_months.artifacts_closed) AS artifacts_closed, sum(stats_site_months.tasks_opened) AS tasks_opened, sum(stats_site_months.tasks_closed) AS tasks_closed, sum(stats_site_months.help_requests) AS help_requests, sum(stats_site_months.cvs_checkouts) AS cvs_checkouts, sum(stats_site_months.cvs_commits) AS cvs_commits, sum(stats_site_months.cvs_adds) AS cvs_adds 
+    SELECT sum(stats_site_months.site_page_views) AS site_page_views, sum(stats_site_months.downloads) AS downloads, sum(stats_site_months.subdomain_views) AS subdomain_views, sum(stats_site_months.msg_posted) AS msg_posted, sum(stats_site_months.bugs_opened) AS bugs_opened, sum(stats_site_months.bugs_closed) AS bugs_closed, sum(stats_site_months.support_opened) AS support_opened, sum(stats_site_months.support_closed) AS support_closed, sum(stats_site_months.patches_opened) AS patches_opened, sum(stats_site_months.patches_closed) AS patches_closed, sum(stats_site_months.artifacts_opened) AS artifacts_opened, sum(stats_site_months.artifacts_closed) AS artifacts_closed, sum(stats_site_months.tasks_opened) AS tasks_opened, sum(stats_site_months.tasks_closed) AS tasks_closed, sum(stats_site_months.help_requests) AS help_requests, sum(stats_site_months.cvs_checkouts) AS cvs_checkouts, sum(stats_site_months.cvs_commits) AS cvs_commits, sum(stats_site_months.cvs_adds) AS cvs_adds
 	FROM stats_site_months;
 
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `plugins`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `plugins` (
   `plugin_id` int(11) NOT NULL auto_increment,
@@ -1952,9 +1952,9 @@ CREATE TABLE IF NOT EXISTS `plugins` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `group_plugin`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `group_plugin` (
   `group_plugin_id` int(11) NOT NULL auto_increment,
@@ -1966,9 +1966,9 @@ CREATE TABLE IF NOT EXISTS `group_plugin` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_plugin`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_plugin` (
   `user_plugin_id` int(11) NOT NULL auto_increment,
@@ -1979,9 +1979,9 @@ CREATE TABLE IF NOT EXISTS `user_plugin` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `cron_history`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `cron_history` (
   `rundate` int(11) NOT NULL default '0',
@@ -1994,9 +1994,9 @@ CREATE TABLE IF NOT EXISTS `cron_history` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `country_code`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `country_code` (
   `country_name` varchar(80) default NULL,
@@ -2005,9 +2005,9 @@ CREATE TABLE IF NOT EXISTS `country_code` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `licenses`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `licenses` (
   `license_id` varchar(10) NOT NULL default '',
@@ -2016,9 +2016,9 @@ CREATE TABLE IF NOT EXISTS `licenses` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `user_type`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `user_type` (
   `type_id` int(11) NOT NULL auto_increment,
@@ -2028,9 +2028,9 @@ CREATE TABLE IF NOT EXISTS `user_type` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `role`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `role` (
   `role_id` int(10) NOT NULL auto_increment,
@@ -2042,9 +2042,9 @@ CREATE TABLE IF NOT EXISTS `role` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_perm`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_perm` (
   `id` varchar(10) NOT NULL default '',
@@ -2056,9 +2056,9 @@ CREATE TABLE IF NOT EXISTS `project_perm` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `forum_perm`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `forum_perm` (
   `id` int(11) NOT NULL auto_increment,
@@ -2070,9 +2070,9 @@ CREATE TABLE IF NOT EXISTS `forum_perm` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `role_setting`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `role_setting` (
   `role_id` int(11) NOT NULL default '0',
@@ -2083,9 +2083,9 @@ CREATE TABLE IF NOT EXISTS `role_setting` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_extra_field_list`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_extra_field_list` (
   `extra_field_id` int(11) NOT NULL auto_increment,
@@ -2102,9 +2102,9 @@ CREATE TABLE IF NOT EXISTS `artifact_extra_field_list` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_extra_field_elements`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_extra_field_elements` (
   `element_id` int(11) NOT NULL auto_increment,
@@ -2117,9 +2117,9 @@ CREATE TABLE IF NOT EXISTS `artifact_extra_field_elements` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_extra_field_data`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_extra_field_data` (
   `data_id` int(11) NOT NULL auto_increment,
@@ -2132,9 +2132,9 @@ CREATE TABLE IF NOT EXISTS `artifact_extra_field_data` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_counts_agg`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_counts_agg` (
   `group_project_id` int(11) NOT NULL default '0',
@@ -2144,16 +2144,16 @@ CREATE TABLE IF NOT EXISTS `project_counts_agg` (
 
 
 CREATE OR REPLACE VIEW `project_group_list_vw` AS
-    SELECT project_group_list.group_project_id, group_id, project_name, is_public, description, send_all_posts_to, `count`, open_count 
+    SELECT project_group_list.group_project_id, group_id, project_name, is_public, description, send_all_posts_to, `count`, open_count
 	FROM (project_group_list
 	LEFT JOIN project_counts_agg ON project_counts_agg.group_project_id = project_group_list.group_project_id);
 
-	
+
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `project_task_external_order`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `project_task_external_order` (
   `project_task_id` int(11) NOT NULL default '0',
@@ -2162,25 +2162,25 @@ CREATE TABLE IF NOT EXISTS `project_task_external_order` (
 
 
 CREATE OR REPLACE VIEW `project_depend_vw` AS
-    SELECT pt.project_task_id, pd.is_dependent_on_task_id, pd.link_type, pt.end_date, pt.start_date 
+    SELECT pt.project_task_id, pd.is_dependent_on_task_id, pd.link_type, pt.end_date, pt.start_date
 	FROM (project_task pt NATURAL JOIN project_dependencies pd);
 
 
 CREATE OR REPLACE VIEW `project_dependon_vw` AS
-    SELECT pd.project_task_id, pd.is_dependent_on_task_id, pd.link_type, pt.end_date, pt.start_date 
-	FROM (project_task AS pt 
+    SELECT pd.project_task_id, pd.is_dependent_on_task_id, pd.link_type, pt.end_date, pt.start_date
+	FROM (project_task AS pt
 		LEFT JOIN project_dependencies AS pd ON pd.is_dependent_on_task_id = pt.project_task_id)
-	UNION 
-    SELECT pd.project_task_id, pd.is_dependent_on_task_id, pd.link_type, pt.end_date, pt.start_date 
-	FROM (project_task AS pt 
+	UNION
+    SELECT pd.project_task_id, pd.is_dependent_on_task_id, pd.link_type, pt.end_date, pt.start_date
+	FROM (project_task AS pt
 		RIGHT JOIN project_dependencies AS pd ON pd.is_dependent_on_task_id = pt.project_task_id);
 
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `group_join_request`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `group_join_request` (
   `group_id` int(11) NOT NULL default '0',
@@ -2210,18 +2210,18 @@ CREATE OR REPLACE VIEW `project_task_vw` AS
 		project_category.category_name,
 		project_status.status_name,
 		users.user_name,
-		users.realname 
-	FROM ((project_task 
-		LEFT JOIN project_category ON project_category.category_id = project_task.category_id) 
-		LEFT JOIN users ON users.user_id = project_task.created_by) 
+		users.realname
+	FROM ((project_task
+		LEFT JOIN project_category ON project_category.category_id = project_task.category_id)
+		LEFT JOIN users ON users.user_id = project_task.created_by)
 		LEFT JOIN project_status ON project_status.status_id = project_task.status_id;
 
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_type_monitor`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_type_monitor` (
   `group_artifact_id` int(11) NOT NULL default '0',
@@ -2230,9 +2230,9 @@ CREATE TABLE IF NOT EXISTS `artifact_type_monitor` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `plugin_cvstracker_data_artifact`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `plugin_cvstracker_data_artifact` (
   `id` int(11) NOT NULL auto_increment,
@@ -2245,9 +2245,9 @@ CREATE TABLE IF NOT EXISTS `plugin_cvstracker_data_artifact` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `plugin_cvstracker_data_master`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `plugin_cvstracker_data_master` (
   `id` int(11) NOT NULL auto_increment,
@@ -2264,19 +2264,19 @@ CREATE TABLE IF NOT EXISTS `plugin_cvstracker_data_master` (
 -- --------------------------------------------------------
 
 CREATE OR REPLACE VIEW `nss_passwd` AS
-    SELECT users.unix_uid AS uid, users.unix_gid AS gid, users.user_name AS login, users.unix_pw AS passwd, users.realname AS gecos, users.shell, users.user_name AS homedir, users.status 
-	FROM users 
+    SELECT users.unix_uid AS uid, users.unix_gid AS gid, users.user_name AS login, users.unix_pw AS passwd, users.realname AS gecos, users.shell, users.user_name AS homedir, users.status
+	FROM users
 	WHERE users.unix_status = 'A';
 
 
 CREATE OR REPLACE VIEW `nss_shadow` AS
-    SELECT users.user_name AS login, users.unix_pw AS passwd, 'n' AS expired, 'n' AS pwchange 
-	FROM users 
+    SELECT users.user_name AS login, users.unix_pw AS passwd, 'n' AS expired, 'n' AS pwchange
+	FROM users
 	WHERE users.unix_status = 'A';
 
--- 
+--
 -- Table structure for table `nss_groups`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `nss_groups` (
   `user_id` int(11) default NULL,
@@ -2287,9 +2287,9 @@ CREATE TABLE IF NOT EXISTS `nss_groups` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `nss_usergroups`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `nss_usergroups` (
   `uid` int(11) default NULL,
@@ -2302,9 +2302,9 @@ CREATE TABLE IF NOT EXISTS `nss_usergroups` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `deleted_mailing_lists`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `deleted_mailing_lists` (
   `mailing_list_name` varchar(30) default NULL,
@@ -2314,9 +2314,9 @@ CREATE TABLE IF NOT EXISTS `deleted_mailing_lists` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `deleted_groups`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `deleted_groups` (
   `unix_group_name` varchar(30) default NULL,
@@ -2326,9 +2326,9 @@ CREATE TABLE IF NOT EXISTS `deleted_groups` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_query`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_query` (
   `artifact_query_id` varchar(10) NOT NULL default '',
@@ -2339,9 +2339,9 @@ CREATE TABLE IF NOT EXISTS `artifact_query` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `artifact_query_fields`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `artifact_query_fields` (
   `artifact_query_id` int(11) NOT NULL default '0',
@@ -2352,14 +2352,14 @@ CREATE TABLE IF NOT EXISTS `artifact_query_fields` (
 
 
 CREATE OR REPLACE VIEW `artifact_group_list_vw` AS
-    SELECT agl.group_artifact_id, agl.group_id, agl.name, agl.description, agl.is_public, agl.allow_anon, agl.email_all_updates, agl.email_address, agl.due_period, agl.submit_instructions, agl.browse_instructions, agl.datatype, agl.status_timeout, agl.custom_status_field, agl.custom_renderer, aca.count, aca.open_count 
-	FROM (artifact_group_list AS agl 
+    SELECT agl.group_artifact_id, agl.group_id, agl.name, agl.description, agl.is_public, agl.allow_anon, agl.email_all_updates, agl.email_address, agl.due_period, agl.submit_instructions, agl.browse_instructions, agl.datatype, agl.status_timeout, agl.custom_status_field, agl.custom_renderer, aca.count, aca.open_count
+	FROM (artifact_group_list AS agl
 		LEFT JOIN artifact_counts_agg AS aca USING (group_artifact_id));
 
 
 CREATE OR REPLACE VIEW `artifact_vw` AS
-    SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact.last_modified_date 
-	FROM users u, users u2, artifact_status, artifact 
+    SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact.last_modified_date
+	FROM users u, users u2, artifact_status, artifact
 	WHERE artifact.assigned_to = u.user_id AND artifact.submitted_by = u2.user_id AND artifact.status_id = artifact_status.id;
 
 CREATE OR REPLACE VIEW `docdata_vw` AS
@@ -2382,11 +2382,11 @@ CREATE OR REPLACE VIEW `docdata_vw` AS
 		d.filesize,
 		doc_states.name AS state_name,
 		doc_groups.groupname AS group_name,
-		sl.name AS language_name 
-	FROM ((((doc_data d 
-		NATURAL JOIN doc_states) 
-			NATURAL JOIN doc_groups) 
-				JOIN supported_languages sl ON sl.language_id = d.language_id) 
+		sl.name AS language_name
+	FROM ((((doc_data d
+		NATURAL JOIN doc_states)
+			NATURAL JOIN doc_groups)
+				JOIN supported_languages sl ON sl.language_id = d.language_id)
 					JOIN users ON users.user_id = d.created_by);
 
 
@@ -2607,9 +2607,9 @@ CREATE OR REPLACE VIEW `activity_vw` AS
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `forum_thread_seq`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `forum_thread_seq` (
   `value` int(11) NOT NULL default '1'
@@ -2634,10 +2634,10 @@ CREATE PROCEDURE newval (IN tablename VARCHAR(64), OUT result INT)
         LEAVE update_loop;
       END IF;
     END LOOP update_loop;
-    
+
     DEALLOCATE PREPARE select_stmt;
     DEALLOCATE PREPARE update_stmt;
-    
+
     SET result=@newvalue;
   END;
 //
