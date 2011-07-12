@@ -61,7 +61,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			'&nbsp;',
 			_('Project Name'),
 			_('Title'),
-			_('Description'),
+			_('Description')
 		);
 	}
 

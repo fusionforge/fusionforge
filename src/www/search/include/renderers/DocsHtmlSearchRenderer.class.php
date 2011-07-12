@@ -49,7 +49,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			'&nbsp;',
 			_('#'),
 			_('Title'),
-			_('Description'),
+			_('Description')
 		);
 	}
 
