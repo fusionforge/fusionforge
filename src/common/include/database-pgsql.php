@@ -147,49 +147,6 @@ function db_switcher($dbserver = NULL) {
 }
 
 /**
- *  db_query() - Query the database.
- *
- *  @deprecated since 4.8. Use db_query_params() instead!
- *
- *  @param text SQL statement.
- *  @param int How many rows do you want returned.
- *  @param int Of matching rows, return only rows starting here.
- *	@param int ability to spread load to multiple db servers.
- *	@return int result set handle.
- */
-function db_query($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
-	global $sysdebug_dbquery;
-
-	db_connect_if_needed () ;
-	$dbconn = db_switcher($dbserver) ;
-
-	global $QUERY_COUNT;
-	$QUERY_COUNT++;
-
-	if (!$limit || !is_numeric($limit) || $limit < 0) {
-		$limit=0;
-	}
-	if ($limit > 0) {
-		if (!$offset || !is_numeric($offset) || $offset < 0) {
-			$offset=0;
-		}
-		$qstring=$qstring." LIMIT $limit OFFSET $offset";
-	}
-
-	if ($sysdebug_dbquery) {
-		ffDebug('trace', "tracing call of db_query():\n",
-		    debug_string_backtrace());
-	}
-
-	$res = @pg_query($dbconn,$qstring);
-	if (!$res) {
-		error_log('SQL: ' . preg_replace('/\n\t+/', ' ',$qstring));
-		error_log('SQL> ' . db_error($dbconn));
-	}
-	return $res;
-}
-
-/**
  *  db_query_from_file() - Query the database, from a file.
  *
  *  @param string File that contains the SQL statements.

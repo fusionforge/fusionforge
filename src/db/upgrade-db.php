@@ -8,30 +8,30 @@
 require_once dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
-/** 
-* Sets up CLI environment based on SAPI and PHP version 
-*/ 
-if (version_compare(phpversion(), '4.3.0', '<') || php_sapi_name() == 'cgi') { 
-   // Handle output buffering 
+/**
+* Sets up CLI environment based on SAPI and PHP version
+*/
+if (version_compare(phpversion(), '4.3.0', '<') || php_sapi_name() == 'cgi') {
+   // Handle output buffering
    while (@ob_end_flush());
-   ob_implicit_flush(TRUE); 
+   ob_implicit_flush(TRUE);
 
-   // PHP ini settings 
+   // PHP ini settings
    set_time_limit(0);
-   ini_set('track_errors', TRUE); 
-   ini_set('html_errors', FALSE); 
-   ini_set('magic_quotes_runtime', FALSE); 
+   ini_set('track_errors', TRUE);
+   ini_set('html_errors', FALSE);
+   ini_set('magic_quotes_runtime', FALSE);
 
-   // Define stream constants 
-   define('STDIN', fopen('php://stdin', 'r')); 
-   define('STDOUT', fopen('php://stdout', 'w')); 
-   define('STDERR', fopen('php://stderr', 'w')); 
+   // Define stream constants
+   define('STDIN', fopen('php://stdin', 'r'));
+   define('STDOUT', fopen('php://stdout', 'w'));
+   define('STDERR', fopen('php://stderr', 'w'));
 
-   // Close the streams on script termination 
-   register_shutdown_function( 
-       create_function('', 
-       'fclose(STDIN); fclose(STDOUT); fclose(STDERR); return true;') 
-       ); 
+   // Close the streams on script termination
+   register_shutdown_function(
+       create_function('',
+       'fclose(STDIN); fclose(STDOUT); fclose(STDERR); return true;')
+       );
 }
 
 $db_path = dirname(__FILE__).'/';
@@ -41,9 +41,9 @@ $version = '';
 // a huge message will warn not to run it without doing a backup first // warning.
 
 // Check if table 'database_startpoint' exists
-$res = db_query_params ('SELECT COUNT(*) AS proceed FROM pg_class WHERE relname = $1 AND relkind = $2',
+$res = db_query_params('SELECT COUNT(*) AS proceed FROM pg_class WHERE relname = $1 AND relkind = $2',
 			array('database_startpoint',
-			'r')) ;
+			'r'));
 
 if (!$res) { // db error
 	show("DB-ERROR-2: ".db_error()."\n");
@@ -55,8 +55,8 @@ if (!$res) { // db error
 		exit();
 	} else {
 		// Check if table 'database_startpoint' has proper values
-		$res = db_query_params ('SELECT * FROM database_startpoint',
-			array()) ;
+		$res = db_query_params('SELECT * FROM database_startpoint',
+			array());
 
 		if (!$res) { // db error
 			show("DB-ERROR-3: ".db_error()."\n");
@@ -81,8 +81,8 @@ if ($argc == 1 || $argv[1] == 'all') {
 	$scripts = get_scripts($db_path);
 	foreach ($scripts as $script) {
 		if ((int) $script['date'] > $date) {
-			$res = db_query_params ('SELECT * FROM database_changes WHERE filename=$1',
-						array ("{$script['filename']}")) ;
+			$res = db_query_params('SELECT * FROM database_changes WHERE filename=$1',
+						array ("{$script['filename']}"));
 			if (!$res) {
 				// error
 				show("ERROR-2: ".db_error()."\n");
@@ -152,7 +152,7 @@ function get_scripts($dir) {
 		usort($data, 'compare_scripts');
 		reset($data);
 	}
-	
+
 	return $data;
 }
 
@@ -163,7 +163,7 @@ function compare_scripts($script1, $script2) {
 function run_script($script) {
 	global $db_path;
 	$return = false;
-	
+
 	$ext = strtolower($script['ext']);
 	$filename = $script['filename'];
 	if ($ext == 'php') {
@@ -171,7 +171,7 @@ function run_script($script) {
 		$result = array();
 		$exec = 'php -f '.$db_path.$filename;
 		exec($exec, $result);
-		
+
 		if (count($result)) { // the script produced an output
 			if ($result[count($result)-1] == 'SUCCESS') {
 				show($db_path.$filename." ran correctly\n\n");
@@ -185,7 +185,7 @@ function run_script($script) {
 		} else {
 			show($db_path.$filename." FAILED!\n\n");
 		}
-		
+
 	} else if ($ext == 'sql') {
 		if (//$filename == '20021124-3_gforge-debian-sf-sync.sql' ||
 			$filename == '20021223-drops.sql') {
@@ -219,15 +219,15 @@ function run_sql_script($filename) {
 	}
 	$content = fread($file, filesize($sql_file));
 	fclose($file);
-	
+
 	$content = preg_replace("/--(.*)/", '', $content);
-	
+
 	$parts = explode(";\n", $content);
 	$queries = array();
 	$query_temp = '';
 	$is_function = false;
 	$is_copy_stdin = false;
-	
+
 	for ($i=0;$i<count($parts);$i++) {
 		$q = $parts[$i];
 		// Check if it's a function
@@ -263,7 +263,7 @@ function run_sql_script($filename) {
 	$i = 0;
 
 	//db_begin();
-	
+
 	foreach ($queries as $query) {
 		// Check if it is a DROP TABLE
 		if (in_string($query, 'drop table')) {
@@ -310,10 +310,10 @@ function run_sql_script($filename) {
 			$aux = explode(' ', trim($query));
 			$table = trim($aux[2], "\" ");
 			$constraint = trim($aux[5], "\" ");
-			
+
 			drop_constraint_if_exists($table, $constraint, $query);
 		} else {
-			$res = db_query($query);
+			$res = db_query_params($query, array());
 			if (!$res) {
 				show(db_error()."\n");
 				show("QUERY: $query\n");
@@ -330,7 +330,7 @@ function run_sql_script($filename) {
 			}
 		}
 	}
-	
+
 	// Patch for some 3.0preX versions
 	if ($filename == '20021216.sql') {
 		db_query_params ('SELECT setval($1, (SELECT MAX(theme_id) FROM themes), true)',
@@ -338,7 +338,7 @@ function run_sql_script($filename) {
 
 		show("Applying fix for some 3.0preX versions\n");
 	}
-	
+
 	//db_commit();
 	return true;
 }
@@ -416,7 +416,7 @@ function apply_fixes($version) {
 
 	//db_begin();
 	foreach ($queries as $query) {
-		$res = db_query($query);
+		$res = db_query_params($query, array());
 		if (!$res) {
 			show("ERROR: ".db_error()."\n");
 	//		db_rollback();
@@ -456,15 +456,15 @@ function drop_if_exists($name, $command, $kind, $commandSuffix = '') {
 	if (preg_match('/^"(.*)"$/', $name, $match)) {
 		$name = $match[1];
 	}
-	$res = db_query_params ('SELECT COUNT(*) AS exists FROM pg_class WHERE relname=$1 AND relkind=$2',
+	$res = db_query_params('SELECT COUNT(*) AS exists FROM pg_class WHERE relname=$1 AND relkind=$2',
 				array ($name,
-				       $kind)) ;
+				       $kind));
 	if (!$res) {
 		show("ERROR:".db_error()."\n");
 		return false;
 	}
 	if (db_result($res, 0, 'exists') != '0') {
-		$res = db_query("$command $name $commandSuffix");
+		$res = db_query_params("$command $name $commandSuffix", array());
 		if (!$res) {
 			show("ERROR:".db_error()."\n");
 			//db_rollback();
@@ -475,16 +475,16 @@ function drop_if_exists($name, $command, $kind, $commandSuffix = '') {
 }
 
 function drop_constraint_if_exists($table, $constraint, $query) {
-	$res = db_query_params ('SELECT COUNT(*) AS exists FROM information_schema.constraint_table_usage WHERE table_name=$1 AND constraint_name=$2',
+	$res = db_query_params('SELECT COUNT(*) AS exists FROM information_schema.constraint_table_usage WHERE table_name=$1 AND constraint_name=$2',
 			array($table,
-			$constraint)) ;
+			$constraint));
 
 	if (!$res) {
 		show("ERROR:".db_error()."\n");
 		return false;
 	}
 	if (db_result($res, 0, 'exists') != '0') {
-		$res = db_query($query);
+		$res = db_query_params($query, array());
 		if (!$res) {
 			show("ERROR:".db_error()."\n");
 		}
@@ -493,14 +493,14 @@ function drop_constraint_if_exists($table, $constraint, $query) {
 }
 
 function drop_trigger_if_exists($name, $on) {
-	$res = db_query_params ('SELECT COUNT(*) AS exists FROM pg_trigger WHERE tgname=$1',
-				array ($name)) ;
+	$res = db_query_params('SELECT COUNT(*) AS exists FROM pg_trigger WHERE tgname=$1',
+				array ($name));
 	if (!$res) {
 		show("ERROR:".db_error()."\n");
 		return false;
 	}
 	if (db_result($res, 0, 'exists') != '0') {
-		$res = db_query("DROP TRIGGER $name ON $on");
+		$res = db_query_params("DROP TRIGGER $1 ON $2", array($name, $on));
 		if (!$res) {
 			show("ERROR:".db_error()."\n");
 			//db_rollback();
