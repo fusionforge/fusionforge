@@ -339,7 +339,7 @@ class GitPlugin extends SCMPlugin {
 				if (is_file ("$repodir/hooks/post-update")) {
 					system ("chmod +x $repodir/hooks/post-update") ;
 				}
-				system ("echo \"Git repository for user $owner in project $project_name\" > $repodir/description") ;
+				system("echo \"Git repository for user $user_name in project $project_name\" > $repodir/description");
 				system ("chown -R $user_name:$unix_group $repodir") ;
 			}
 		}
