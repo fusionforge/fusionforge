@@ -8,6 +8,9 @@ FusionForge-5.x:
 * New Scmhook: complete library to handle hooks for any scm available in
   fusionforge. Currently supporting post-commit and pre-commit hook.
   scmsvn pre-commit and post-commit library is provided (Capgemini)
+* New Widget: smcgit personal URL of cloned repositories. Currently just
+  a list of URLs of your personal repository cloned from project you
+   belong. (Capgemini)
 
 FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)
