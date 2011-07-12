@@ -155,7 +155,7 @@ class MantisBTPlugin extends Plugin {
 			}
 			case "widget_instance": {
 				$group = group_get_object($GLOBALS['group_id']);
-				if ($group->usesPlugin($this->name)) {
+				if ((is_object($group)? $group->usesPlugin($this->name) : false) || $G_SESSION->usesPlugin($this->name)) {
 					return $this->myPageBox($params);
 				}
 				break;
