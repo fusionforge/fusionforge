@@ -2477,6 +2477,7 @@ src/plugins/scmgit/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/scmgit/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 src/plugins/scmgit/common/GitPlugin.class.php -text
 src/plugins/scmgit/common/scmgit-init.php -text
+src/plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php -text
 src/plugins/scmgit/db/scmgit-init.sql -text
 src/plugins/scmgit/etc/plugins/scmgit/config.php -text
 src/plugins/scmgit/etc/scmgit.ini -text

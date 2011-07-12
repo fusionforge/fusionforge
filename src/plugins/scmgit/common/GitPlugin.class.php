@@ -33,7 +33,8 @@ class GitPlugin extends SCMPlugin {
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
-
+		$this->_addHook('widget_instance', 'myPageBox', false);
+		$this->_addHook('widgets', 'widgets', false);
 		$this->register();
 	}
 
@@ -593,6 +594,27 @@ class GitPlugin extends SCMPlugin {
 		copy ("$tmp/tarball", $tarball) ;
 		unlink ("$tmp/tarball") ;
 		system ("rm -rf $tmp") ;
+	}
+
+	function widgets($params) {
+ 		require_once('common/widget/WidgetLayoutManager.class.php');
+		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
+			$params['fusionforge_widgets'][] = 'plugin_scmgit_project_latestcommits';
+		}
+		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
+			$params['fusionforge_widgets'][] = 'plugin_scmgit_user_myrepositories';
+		}
+		return true;
+	}
+
+	function myPageBox($params) {
+		global $gfplugins;
+		$user = UserManager::instance()->getCurrentUser();
+		require_once('common/widget/WidgetLayoutManager.class.php');
+		if ($params['widget'] == 'plugin_scmgit_user_myrepositories') {
+			require_once $gfplugins.$this->name.'/common/scmgit_Widget_MyRepositories.class.php';
+			$params['instance'] = new scmgit_Widget_MyRepositories(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+		}
 	}
 }
 

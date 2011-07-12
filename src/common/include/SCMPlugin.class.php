@@ -30,12 +30,13 @@ abstract class SCMPlugin extends Plugin {
 	 */
 	function SCMPlugin () {
 		$this->Plugin() ;
-		$this->hooks[] = 'scm_plugin';
-		$this->hooks[] = 'scm_page';
-		$this->hooks[] = 'scm_admin_page';
-		$this->hooks[] = 'scm_admin_update';
- 		$this->hooks[] = 'scm_stats';
-		$this->hooks[] = 'scm_create_repo';
+		$this->_addHook('scm_plugin');
+		$this->_addHook('scm_page');
+		$this->_addHook('scm_admin_page');
+		$this->_addHook('scm_admin_update');
+ 		$this->_addHook('scm_stats');
+		$this->_addHook('scm_create_repo');
+
 		# Other common hooks that can be enabled per plugin:
 		# scm_generate_snapshots
 		# scm_gather_stats
@@ -47,43 +48,61 @@ abstract class SCMPlugin extends Plugin {
 		global $HTML ;
 
 		switch ($hookname) {
-		case 'scm_plugin':
-			$scm_plugins=& $params['scm_plugins'];
-			$scm_plugins[]=$this->name;
-			break;
-		case 'scm_page':
-			$this->printPage ($params) ;
-			break ;
-		case 'scm_browser_page':
-			$this->printBrowserPage ($params) ;
-			break ;
-		case 'scm_admin_page':
-			$this->printAdminPage ($params) ;
-			break ;
-		case 'scm_admin_update':
-			$this->adminUpdate($params);
-			break ;
-		case 'scm_stats':
-			$this->printShortStats ($params) ;
-			break;
-		case 'scm_create_repo':
-			session_set_admin();
-			$this->createOrUpdateRepo($params);
-			break;
-		case 'scm_update_repolist':
-			session_set_admin () ;
-			$this->updateRepositoryList ($params) ;
-			break;
-		case 'scm_generate_snapshots': // Optional
-			session_set_admin () ;
-			$this->generateSnapshots ($params) ;
-			break;
-		case 'scm_gather_stats': // Optional
-			session_set_admin () ;
-			$this->gatherStats ($params) ;
-			break;
-		default:
-			// Forgot something
+			case 'scm_plugin': {
+				$scm_plugins=& $params['scm_plugins'];
+				$scm_plugins[]=$this->name;
+				break;
+			}
+			case 'scm_page': {
+				$this->printPage ($params) ;
+				break ;
+			}
+			case 'scm_browser_page': {
+				$this->printBrowserPage ($params) ;
+				break ;
+			}
+			case 'scm_admin_page': {
+				$this->printAdminPage ($params) ;
+				break ;
+			}
+			case 'scm_admin_update': {
+				$this->adminUpdate($params);
+				break ;
+			}
+			case 'scm_stats': {
+				$this->printShortStats ($params) ;
+				break;
+			}
+			case 'scm_create_repo': {
+				session_set_admin();
+				$this->createOrUpdateRepo($params);
+				break;
+			}
+			case 'scm_update_repolist': {
+				session_set_admin () ;
+				$this->updateRepositoryList ($params) ;
+				break;
+			}
+			case 'scm_generate_snapshots': {// Optional
+				session_set_admin () ;
+				$this->generateSnapshots ($params) ;
+				break;
+			}
+			case 'scm_gather_stats': { // Optional
+				session_set_admin () ;
+				$this->gatherStats ($params) ;
+				break;
+			}
+			case "widgets": { // Optional
+				$this->widgets($params);
+				break;
+			}
+			case "widget_instance": { // Optional
+				$this->myPageBox($params);
+				break;
+			}
+			default: { // Forgot something
+			}
 		}
 	}
 
