@@ -114,27 +114,32 @@ function db_connect_if_needed () {
         }
 }
 
-function db_switcher($dbserver=NULL) {
+function db_switcher($dbserver = NULL) {
 	switch ($dbserver) {
-	case NULL:
-	case 'SYS_DB_PRIMARY':
-		$dbconn = SYS_DB_PRIMARY ;
-		break ;
-	case 'SYS_DB_STATS':
-		$dbconn = SYS_DB_STATS ;
-		break ;
-	case 'SYS_DB_TROVE':
-		$dbconn = SYS_DB_TROVE ;
-		break ;
-	case 'SYS_DB_SEARCH':
-		$dbconn = SYS_DB_SEARCH ;
-		break ;
-	default:
-		// Cope with $dbserver already being a connection
-		if (pg_dbname($dbserver)) {
-			$dbconn = $dbserver;
-		} else {
-			$dbconn = SYS_DB_PRIMARY ;
+		case NULL:
+		case 'SYS_DB_PRIMARY': {
+			$dbconn = SYS_DB_PRIMARY;
+			break;
+		}
+		case 'SYS_DB_STATS': {
+			$dbconn = SYS_DB_STATS;
+			break;
+		}
+		case 'SYS_DB_TROVE': {
+			$dbconn = SYS_DB_TROVE;
+			break;
+		}
+		case 'SYS_DB_SEARCH': {
+			$dbconn = SYS_DB_SEARCH;
+			break;
+		}
+		default: {
+			// Cope with $dbserver already being a connection
+			if (pg_dbname($dbserver)) {
+				$dbconn = $dbserver;
+			} else {
+				$dbconn = SYS_DB_PRIMARY;
+			}
 		}
 	}
 
