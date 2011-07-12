@@ -57,7 +57,7 @@ foreach ($SubmittedVars as $SubmittedVar) {
 function parseConfig($Config)
 {
 	$repos_path = forge_get_config ('repos_path', 'scmcvs') ;
-	
+
 	$Result = array();
 	$Result['check'] = true;
 	$Repository = $Config['Repository'];
@@ -72,7 +72,7 @@ function parseConfig($Config)
 	} else {
 		$GroupName = $Repository;
 	}
-	
+
 	$Result['user']     = user_get_object_by_name($UserName);
 	if (!$Result['user'] || !is_object($Result['user']) ||
 		$Result['user']->isError() || !$Result['user']->isActive()) {

@@ -123,7 +123,7 @@ function snippet_header($params) {
 	/*
 		Show horizontal links
 	*/
-	
+
 	echo '<p><strong>';
 	echo util_make_link ('/snippet/',_('Browse')).'
 		 | '.util_make_link ('/snippet/submit.php',_('Submit A New Snippet')).'
@@ -138,11 +138,11 @@ function snippet_footer($params) {
 
 function snippet_show_package_snippets($version) {
 	//show the latest version
-	$result=db_query_params("SELECT snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name 
-FROM snippet,snippet_version,snippet_package_item,users 
-WHERE snippet.snippet_id=snippet_version.snippet_id 
-AND users.user_id=snippet_version.submitted_by 
-AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id 
+	$result=db_query_params("SELECT snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name
+FROM snippet,snippet_version,snippet_package_item,users
+WHERE snippet.snippet_id=snippet_version.snippet_id
+AND users.user_id=snippet_version.submitted_by
+AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id
 AND snippet_package_item.snippet_package_version_id=$1", array($version));
 
 	$rows=db_numrows($result);

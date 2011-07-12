@@ -45,12 +45,12 @@ class ProjectTaskHTML extends ProjectTask {
 
 		$tech_id_arr = array () ;
 		$tech_name_arr = array () ;
-		
+
 		foreach ($techs as $tech) {
 			$tech_id_arr[] = $tech->getID() ;
 			$tech_name_arr[] = $tech->getRealName() ;
 		}
-		
+
 		//get the data so we can mark items as SELECTED
 		$arr2 = $this->getAssignedTo();
 		return html_build_multiple_select_box_from_arrays ($tech_id_arr,$tech_name_arr,$name,$arr2);
@@ -59,9 +59,9 @@ class ProjectTaskHTML extends ProjectTask {
 
 	function showDependentTasks () {
 
-		$result=db_query_params ('SELECT project_task.project_task_id,project_task.summary 
-			FROM project_task,project_dependencies 
-			WHERE project_task.project_task_id=project_dependencies.project_task_id 
+		$result=db_query_params ('SELECT project_task.project_task_id,project_task.summary
+			FROM project_task,project_dependencies
+			WHERE project_task.project_task_id=project_dependencies.project_task_id
 			AND project_dependencies.is_dependent_on_task_id=$1',
 			array($this->getID() ));
 		$rows=db_numrows($result);
@@ -110,7 +110,7 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Status');
 			$title_arr[]=_('Open Date');
 			(($is_admin) ? $title_arr[]=_('Remove Relation') : '');
-		
+
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
@@ -156,7 +156,7 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Comment');
 			$title_arr[]=_('Date');
 			$title_arr[]=_('By');
-		
+
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
@@ -182,12 +182,12 @@ class ProjectTaskHTML extends ProjectTask {
 			echo '
 			<h3>'._('No Comments Have Been Added').'</h3>';
 		}
-	
+
 	}
 
 	function showHistory() {
 		/*
-			show the project_history rows that are 
+			show the project_history rows that are
 			relevant to this project_task_id, excluding details
 		*/
 		$result=$this->getHistory();

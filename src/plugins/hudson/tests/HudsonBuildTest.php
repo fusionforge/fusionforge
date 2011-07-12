@@ -36,11 +36,11 @@ class HudsonBuildTest extends UnitTestCase {
     function HudsonBuildTest($name = 'HudsonBuild test') {
         $this->UnitTestCase($name);
     }
-    
+
     function setUp() {
         $GLOBALS['Language'] = new MockBaseLanguage($this);
     }
-    
+
     function testMalformedURL() {
         $this->expectException('HudsonJobURLMalformedException');
         $this->expectError();
@@ -56,7 +56,7 @@ class HudsonBuildTest extends UnitTestCase {
         $this->expectError();
         $b = new HudsonBuild("http://");
     }
-    
+
     function testWrongXMLFile() {
         $xmlstr = <<<XML
 <?xml version='1.0' standalone='yes'?>
@@ -66,24 +66,24 @@ class HudsonBuildTest extends UnitTestCase {
 </foo>
 XML;
         $xmldom = new SimpleXMLElement($xmlstr);
-        
+
         $b = new HudsonBuildTestVersion($this);
         $b->setReturnValue('_getXMLObject', $xmldom);
         $b->buildBuildObject();
-        
+
         $this->expectError();
     }
-    
+
     function testSimpleJobBuild() {
-        
+
         $build_file = dirname(__FILE__).'/resources/jobbuild.xml';
         $xmldom = simplexml_load_file($build_file);
-        
+
         $b = new HudsonBuildTestVersion($this);
         $b->setReturnValue('_getXMLObject', $xmldom);
-        
+
         $b->HudsonBuild("http://myCIserver/jobs/myCIjob/lastBuild/");
-        
+
         $this->assertEqual($b->getBuildStyle(), "freeStyleBuild");
         $this->assertFalse($b->isBuilding());
         $this->assertEqual($b->getUrl(), "http://code4.grenoble.xrce.xerox.com:8080/hudson/job/Codendi/87/");
@@ -91,9 +91,9 @@ XML;
         $this->assertEqual($b->getNumber(), 87);
         $this->assertEqual($b->getDuration(), 359231);
         $this->assertEqual($b->getTimestamp(), 1230051671000);
-        
+
     }
-        
+
 }
 
 ?>

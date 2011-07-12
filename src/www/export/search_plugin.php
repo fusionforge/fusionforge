@@ -3,7 +3,7 @@
  * Project List plugin for Gforge
  * by Nicolas Quienot
  * Copyright (c) 2008 Linagora
- * License : GNU General Public License 
+ * License : GNU General Public License
  *
  *
  */

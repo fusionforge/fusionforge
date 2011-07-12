@@ -116,28 +116,28 @@ switch (getStringFromRequest('func')) {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		$add_artifact_id = getIntFromRequest('add_artifact_id');
-		
+
 		$pt = new ProjectTask($pg);
 		if (!$pt || !is_object($pt)) {
 			exit_error(_('Could Not Get Empty ProjectTask'),'pm');
 		} elseif ($pt->isError()) {
 			exit_error($pt->getErrorMessage(),'pm');
 		}
-		
+
 		$saved_hours = $hours;
 		$hours = (float) $hours;
 		if ( $saved_hours !== (string)$hours ) {
 			exit_error(_('Illegal format for hours: must be an integer or a float number.'),'pm');
 		}
-		
+
 		if (!$dependent_on)
 		{
 			$dependent_on=array();
 		}
 		$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
 		$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
-		
-		
+
+
 		$sanitizer = new TextSanitizer();
 		$details = $sanitizer->purify($details);
 
@@ -162,24 +162,24 @@ switch (getStringFromRequest('func')) {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		$rem_artifact_id = getIntFromRequest('rem_artifact_id');
-		
+
 		if(!$rem_artifact_id){
 			$rem_artifact_id=array();
 		}
-		
+
 		$pt = new ProjectTask($pg,$project_task_id);
 		if (!$pt || !is_object($pt)) {
 			exit_error(_('Could Not Get ProjectTask'),'pm');
 		} elseif ($pt->isError()) {
 			exit_error($pt->getErrorMessage(),'pm');
 		}
-		
+
 		$saved_hours = $hours;
 		$hours = (float) $hours;
 		if ( $saved_hours !== (string)$hours ) {
 			exit_error(_('Illegal format for hours: must be an integer or a float number.'),'pm');
 		}
-		
+
 		if (!$dependent_on)	{
 			$dependent_on=array();
 		}
@@ -235,7 +235,7 @@ switch (getStringFromRequest('func')) {
 	case 'massupdate' : {
 		$project_task_id_list = getArrayFromRequest('project_task_id_list');
 		$count=count($project_task_id_list);
-	
+
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		for ($i=0; $i < $count; $i++) {
@@ -301,7 +301,7 @@ switch (getStringFromRequest('func')) {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		$add_artifact_id[] = getIntFromRequest('add_artifact_id');
-		
+
 		$pt = new ProjectTask($pg,$project_task_id);
 		if (!$pt || !is_object($pt)) {
 			exit_error(_('Could Not Get ProjectTask'),'pm');
@@ -313,7 +313,7 @@ switch (getStringFromRequest('func')) {
 		} else {
 			$feedback=_('Successfully Added Tracker Relationship');
 			include $gfwww.'pm/browse_task.php';
-			
+
 		}
 		break;
 	}

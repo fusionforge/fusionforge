@@ -42,7 +42,7 @@ extends WikiDB_backend_iterator
     function next() {
         return array_shift($this->_pages);
     }
-  
+
     function free() {
         unset($this->_pages);
     }

@@ -23,7 +23,7 @@ require_once $gfcommon.'include/plugins_utils.php';
 
 /**
 * Widget_MyBookmarks
-* 
+*
 * Personal bookmarks
 */
 class Widget_MyBookmarks extends Widget {

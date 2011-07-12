@@ -29,7 +29,7 @@ class WikiConfig extends Error {
         'NUM_SPAM_LINKS' => false,
         'ENABLE_RATEIT' => false,
     );
-    
+
     var $default_desc = array(
     );
 
@@ -45,17 +45,17 @@ class WikiConfig extends Error {
         return true;
     }
 
-    function getWikiConfigNames() 
+    function getWikiConfigNames()
     {
        return array_keys($this->default_config);
     }
 
-    function getWikiConfigDescription($config_name) 
+    function getWikiConfigDescription($config_name)
     {
        return $this->default_desc[$config_name];
     }
 
-    function getWikiConfig($config_name) 
+    function getWikiConfig($config_name)
     {
         if (!isset($this->default_config[$config_name])) {
             $this->setError('getWikiConfig: illegal config name');
@@ -68,8 +68,8 @@ class WikiConfig extends Error {
             return $this->default_config[$config_name];
         }
     }
-    
-    function updateWikiConfig($config_name, $config_value) 
+
+    function updateWikiConfig($config_name, $config_value)
     {
         if (!isset($this->default_config[$config_name])) {
             $this->setError('updateWikiConfig: illegal config name');
@@ -82,10 +82,10 @@ class WikiConfig extends Error {
         $res = db_query_params('SELECT count(*) as c FROM plugin_wiki_config WHERE group_id=$1 AND config_name=$2',
             array($this->group_id, $config_name));
         if (db_result($res, 0, 'c') > 0) {
-            $res = db_query_params('UPDATE plugin_wiki_config SET config_value=$3 WHERE group_id=$1 AND config_name=$2', 
+            $res = db_query_params('UPDATE plugin_wiki_config SET config_value=$3 WHERE group_id=$1 AND config_name=$2',
                 array($this->group_id, $config_name, $config_value));
         } else {
-            $res = db_query_params('INSERT INTO plugin_wiki_config (group_id, config_name, config_value) VALUES ($1, $2, $3)', 
+            $res = db_query_params('INSERT INTO plugin_wiki_config (group_id, config_name, config_value) VALUES ($1, $2, $3)',
                 array($this->group_id, $config_name, $config_value));
         }
         if (!$res) {

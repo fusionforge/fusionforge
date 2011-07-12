@@ -25,21 +25,21 @@
 require_once $gfcommon.'search/SearchQuery.class.php';
 
 class TrackersSearchQuery extends SearchQuery {
-	
+
 	/**
 	* group id
 	*
 	* @var int $groupId
 	*/
 	var $groupId;
-	
+
 	/**
 	* flag if non public items are returned
 	*
 	* @var boolean $showNonPublic
-	*/	
+	*/
 	var $showNonPublic;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -53,7 +53,7 @@ class TrackersSearchQuery extends SearchQuery {
 	function TrackersSearchQuery($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
-		
+
 		$this->SearchQuery($words, $offset, $isExact);
 
 		$this->setSections($sections);
@@ -66,14 +66,14 @@ class TrackersSearchQuery extends SearchQuery {
 	 */
 	function getQuery() {
 
-		
+
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {
 			if (count ($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
 							 'SELECT DISTINCT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, (rank(artifact_idx.vectors, q)+rank(artifact_message_idx.vectors, q)) AS rank FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list, to_tsquery($1) q, artifact_idx, artifact_message_idx WHERE users.user_id = artifact.submitted_by AND artifact_idx.artifact_id = artifact.artifact_id AND artifact_message_idx.id = artifact_message.id AND artifact_message_idx.artifact_id = artifact_message_idx.artifact_id AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $2 ',
-							 
+
 							 array ($this->getFormattedWords(),
 								$this->groupId)) ;
 				$tsmatch = "(artifact_idx.vectors @@ q OR artifact_message_idx.vectors @@ q)";
@@ -145,7 +145,7 @@ class TrackersSearchQuery extends SearchQuery {
 		}
 		return $qpa ;
 	}
-	
+
 	/**
 	 * getSections - returns the list of available trackers
 	 *
@@ -158,7 +158,7 @@ class TrackersSearchQuery extends SearchQuery {
 			$sql .= ' AND artifact_group_list.is_public = 1';
 		}
 		$sql .= ' ORDER BY name';
-		
+
 		$res = db_query_params ($sql,
 					array ($groupId));
 		$sections = array();
@@ -167,7 +167,7 @@ class TrackersSearchQuery extends SearchQuery {
 		}
 		return $sections;
 	}
-	
+
 	function getSearchByIdQuery() {
 		$qpa = db_construct_qpa () ;
 		$qpa = db_construct_qpa ($qpa,

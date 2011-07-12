@@ -111,7 +111,7 @@ if (getStringFromRequest('submit')) {
 					exit_error ($ret,'frs') ;
 				}
 				$frsr->sendNotice();
-				
+
 				frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 				echo '<p>' ;
 				printf (_('You can now <a href="%1$s"><strong>add files to this release</strong></a> if you wish, or edit the release. Please note that file(s) may not appear immediately on the <a href="%2$s">download page</a>. Allow several hours for propagation.'),
@@ -156,7 +156,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	if (!$res || $rows < 1) {
 		echo '<h4>'._('No File Types Available').'</h4>';
 	} else {
-		
+
 		echo '<select name="package_id">';
 		for ($i=0; $i<$rows; $i++) {
 			echo '<option value="' . db_result($res,$i,'package_id') .
@@ -167,7 +167,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	}
 ?>
 			&nbsp;&nbsp;
-			
+
 			<?php printf(_('Or %1$s create a new package %2$s'), '<a href="'.util_make_url ('/frs/admin/?group_id='.$group_id).'">', '</a>') ?>
 		</td>
 	</tr>
@@ -205,7 +205,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 			echo _('Choose an FTP file instead of uploading:').'<br />';
 			$ftp_files_arr=ls($upload_dir,true);
 			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename',''); ?>
-		
+
 		</p>
 		<?php } ?>
 <?php if (forge_get_config('use_manual_uploads')) {
@@ -240,7 +240,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		<td>
 <?php
 	print frs_show_processor_popup ('processor_id',$processor_id);
-?>		
+?>
 		</td>
 	</tr>
 	<tr>

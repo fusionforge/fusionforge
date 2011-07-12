@@ -1,6 +1,6 @@
 #! /usr/bin/php
 <?php
-/* 
+/*
  * Copyright (C) 2010  Olaf Lenz
  *
  * This file is part of FusionForge.
@@ -22,7 +22,7 @@
 
   /** This script will automatically create mediawiki instances for
    projects that do not yet have it.
-   
+
    It is intended to be started in a cronjob.
    */
 
@@ -49,7 +49,7 @@ if (!$project_res) {
 # Loop over all projects that use the plugin
 while ( $row = db_fetch_array($project_res) ) {
 	$project = $row['unix_group_name'];
-	$project_dir = forge_get_config('projects_path', 'mediawiki') 
+	$project_dir = forge_get_config('projects_path', 'mediawiki')
 		. "/$project";
 	cron_debug("Checking $project...");
 	$res = db_query_params('DELETE FROM plugin_mediawiki_interwiki WHERE iw_prefix=$1', array($project));
@@ -75,7 +75,7 @@ while ( $row = db_fetch_array($project_res) ) {
 		cron_debug("  Creating schema $schema.");
 		$res = db_query_params("CREATE SCHEMA $schema", array());
 		if (!$res) {
-			$err =  "Error: Schema Creation Failed: " . 
+			$err =  "Error: Schema Creation Failed: " .
 				db_error();
 			cron_debug($err);
 			cron_entry(23,$err);
@@ -92,13 +92,13 @@ while ( $row = db_fetch_array($project_res) ) {
 			db_rollback();
 			exit;
 		}
-			
-/* Seems to be postgresql specific 
+
+/* Seems to be postgresql specific
 		$res = db_query_params("SET search_path=$schema", array());
 */
 		$res = db_query_params("use $schema;", array());
 		if (!$res) {
-			$err =  "Error: DB Query Failed: " . 
+			$err =  "Error: DB Query Failed: " .
 				db_error();
 			cron_debug($err);
 			cron_entry(23,$err);
@@ -109,7 +109,7 @@ while ( $row = db_fetch_array($project_res) ) {
 		$creation_query = file_get_contents($table_file);
 		$res = db_query_from_file($table_file);
 		if (!$res) {
-			$err =  "Error: Mediawiki Database Creation Failed: " . 
+			$err =  "Error: Mediawiki Database Creation Failed: " .
 				db_error();
 			cron_debug($err);
 			cron_entry(23,$err);
@@ -117,19 +117,19 @@ while ( $row = db_fetch_array($project_res) ) {
 			exit;
 		}
 
-/* Seems to be postgresql specific 
+/* Seems to be postgresql specific
 		$res = db_query_params("CREATE TEXT SEARCH CONFIGURATION $schema.default ( COPY = pg_catalog.english )", array());
 		if (!$res) {
-			$err =  "Error: DB Query Failed: " . 
+			$err =  "Error: DB Query Failed: " .
 				db_error();
 			cron_debug($err);
 			cron_entry(23,$err);
 			db_rollback();
 			exit;
 		}
-		
+
 		if (!db_commit()) {
-			$err =  "Error: DB Commit Failed: " . 
+			$err =  "Error: DB Commit Failed: " .
 				db_error();
 			cron_debug($err);
 			cron_entry(23,$err);
@@ -139,13 +139,13 @@ while ( $row = db_fetch_array($project_res) ) {
 
 		$mwwrapper = forge_get_config('source_path')."/plugins/mediawiki/bin/mw-wrapper.php" ;
 		$dumpfile = forge_get_config('config_path')."/mediawiki/initial-content.xml" ;
-		
+
 		if (file_exists ($dumpfile)) {
 			cron_debug("Dumping using $mwwrapper");
 			system ("$mwwrapper $project importDump.php $dumpfile") ;
 			system ("$mwwrapper $project rebuildrecentchanges.php") ;
 		}
-	} 
+	}
 }
 
 

@@ -193,7 +193,7 @@ class ForumML_InsertTest extends UnitTestCase {
         $i->expectAt(1, 'insertAttachment', array(2, 'attachment', 'image/png', '/a/b/c', '<part1.05020200.07040300@codendi.org>'));
         $i->expectAt(2, 'insertAttachment', array(2, 'new_trk_severity_migr.png', 'image/png; name="new_trk_severity_migr.png"', '/a/b/c', ''));
         $i->expectCallCount('insertAttachment', 3);
-        
+
         $i->storeEmail($structure, $storage);
     }
 
@@ -212,7 +212,7 @@ class ForumML_InsertTest extends UnitTestCase {
         $i->expectCallCount('insertAttachment', 2);
 
         $i->storeEmail($structure, $storage);
-    } 
+    }
 
 
 

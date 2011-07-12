@@ -26,14 +26,14 @@ require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php'
 require_once $gfcommon.'search/ForumSearchQuery.class.php';
 
 class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
-	
+
 	/**
 	 * forum id
 	 *
 	 * @var int $groupId
 	 */
 	var $forumId;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -45,18 +45,18 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function ForumHtmlSearchRenderer($words, $offset, $isExact, $groupId, $forumId) {
 		$this->forumId = $forumId;
-		
+
 		$searchQuery = new ForumSearchQuery($words, $offset, $isExact, $groupId, $forumId);
-		
+
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_FORUM, $words, $isExact, $searchQuery, $groupId, 'forums');
-		
+
 		$this->tableHeaders = array(
 			_('Thread'),
 			_('Author'),
 			_('Date')
 		);
 	}
-	
+
 	/**
 	 * getRows - get the html output for result rows
 	 *
@@ -66,7 +66,7 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 		$dateFormat = _('Y-m-d H:i');
-		
+
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td width="50%"><a href="'.util_make_url ('/forum/message.php?msg_id=' . db_result($result, $i, 'msg_id')).'">'
@@ -86,7 +86,7 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getPreviousResultsUrl() {
 		return parent::getPreviousResultsUrl().'&amp;forum_id='.$this->forumId;
 	}
-	
+
 	/**
 	 * getNextResultsUrl - get the url to go to see the next results
 	 *

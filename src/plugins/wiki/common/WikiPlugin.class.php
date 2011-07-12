@@ -33,7 +33,7 @@ class GforgeWikiPlugin extends Plugin {
 		$this->installdir = 'wiki';
 		$this->hooks[] = "groupmenu";
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; // 
+		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the project admin page
 		$this->hooks[] = 'search_engines';
 		$this->hooks[] = 'full_search_engines';
@@ -88,7 +88,7 @@ class GforgeWikiPlugin extends Plugin {
 					$searchManager->addSearchEngine(
 						SEARCH__TYPE_IS_WIKI,
 						new WikiSearchEngine(SEARCH__TYPE_IS_WIKI,
-								'WikiHtmlSearchRenderer', 
+								'WikiHtmlSearchRenderer',
 						_("This project's wiki"), $group_id)
 					);
 				}
@@ -190,7 +190,7 @@ class GforgeWikiPlugin extends Plugin {
 					}
 				}
 			}
-		}		
+		}
 	}
 }
 

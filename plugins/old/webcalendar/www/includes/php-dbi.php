@@ -88,7 +88,7 @@ $phpdbiVerbose = false;
  * @param string $login    Database login
  * @param string $password Database login password
  * @param string $database Name of database
- * 
+ *
  * @return resource The connection
  */
 function dbi_connect ( $host, $login, $password, $database ) {

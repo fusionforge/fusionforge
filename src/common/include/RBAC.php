@@ -56,7 +56,7 @@ abstract class BaseRole extends Error {
 
 	// var $perms_array;
 	// var $setting_array;
-	
+
 	public function BaseRole() {
 		if (USE_PFO_RBAC) {
 			// TODO: document these tables
@@ -73,7 +73,7 @@ abstract class BaseRole extends Error {
 				'tracker_admin' => array(0, 1),
 				'pm_admin' => array(0, 1),
 				'forum_admin' => array(0, 1),
-				
+
 				'tracker' => array(0, 1, 3, 5, 7),
 				'pm' => array(0, 1, 3, 5, 7),
 				'forum' => array(0, 1, 2, 3, 4),
@@ -91,9 +91,9 @@ abstract class BaseRole extends Error {
 
 			// Global permissions
 			$this->global_settings = array(
-				'forge_admin', // “God mode”: all actions allowed 
-				'approve_projects', // Ability to approve pending projects 
-				'approve_news', // Ability to approve news bits to the forge front page 
+				'forge_admin', // “God mode”: all actions allowed
+				'approve_projects', // Ability to approve pending projects
+				'approve_news', // Ability to approve news bits to the forge front page
 				'forge_stats'
 				);
 
@@ -168,7 +168,7 @@ abstract class BaseRole extends Error {
 				'pm'		=> array ('-1','0','1','2','3'),
 				'newpm'		=> array ('-1','0','1','2','3'),
 				'webcal'	=> array ('0','1','2'));
-			
+
 			$this->defaults = array(
 				'Admin'		  => array( 'projectadmin'=>'A',
 							    'frs'=>'1',
@@ -502,7 +502,7 @@ abstract class BaseRole extends Error {
 				case 'newforum':
 					$tohandle[] = array ('new_forum', $gid) ;
 					break ;
-					
+
 				default:
 					foreach ($t as $oldreference => $oldvalue) {
 						$tohandle[] = array ($oldsection, $oldreference) ;
@@ -638,12 +638,12 @@ abstract class BaseRole extends Error {
 		}
 		$min = PHP_INT_MAX ;
 		$mask = 0 ;
-		
+
 		switch ($section) {
 		case 'forge_admin':
 			return $value ;
 			break ;
-			
+
 		case 'forge_read':
 		case 'approve_projects':
 		case 'approve_news':
@@ -652,21 +652,21 @@ abstract class BaseRole extends Error {
 			}
 			return $value ;
 			break ;
-		
+
 		case 'forge_stats':
 			if ($this->hasGlobalPermission('forge_admin')) {
 				return 2 ;
 			}
 			return $value ;
 			break ;
-		
+
 		case 'project_admin':
 			if ($this->hasGlobalPermission('forge_admin')) {
 				return 1 ;
 			}
 			return $value ;
 			break ;
-			
+
 		case 'project_read':
 		case 'tracker_admin':
 		case 'pm_admin':
@@ -676,28 +676,28 @@ abstract class BaseRole extends Error {
 			}
 			return $value ;
 			break ;
-		
+
 		case 'scm':
 			if ($this->hasPermission('project_admin', $reference)) {
 				return 2 ;
 			}
 			return $value ;
 			break ;
-			
+
 		case 'docman':
 			if ($this->hasPermission('project_admin', $reference)) {
 				return 4 ;
 			}
 			return $value ;
 			break ;
-			
+
 		case 'frs':
 			if ($this->hasPermission('project_admin', $reference)) {
 				return 3 ;
 			}
 			return $value ;
 			break ;
-			
+
 		case 'forum':
 			if ($this->hasPermission('forum_admin', forum_get_groupid($reference))) {
 				return 4 ;
@@ -710,7 +710,7 @@ abstract class BaseRole extends Error {
 			}
 			return $value ;
 			break ;
-			
+
 		case 'tracker':
 			if ($this->hasPermission('tracker_admin', artifacttype_get_groupid($reference))) {
 				return 5 | $value ;
@@ -798,11 +798,11 @@ abstract class BaseRole extends Error {
 
         function hasPermission($section, $reference, $action = NULL) {
 		$result = false ;
-		
+
 		$value = $this->getSetting ($section, $reference) ;
 		$min = PHP_INT_MAX ;
 		$mask = 0 ;
-		
+
 		switch ($section) {
 		case 'forge_admin':
 		case 'forge_read':
@@ -815,7 +815,7 @@ abstract class BaseRole extends Error {
 		case 'forum_admin':
 			return ($value >= 1) ;
 			break ;
-		
+
 		case 'forge_stats':
 			switch ($action) {
 			case 'read':
@@ -826,7 +826,7 @@ abstract class BaseRole extends Error {
 				break ;
 			}
 			break ;
-			
+
 		case 'scm':
 			switch ($action) {
 			case 'read':
@@ -837,7 +837,7 @@ abstract class BaseRole extends Error {
 				break ;
 			}
 			break ;
-			
+
 		case 'docman':
 			switch ($action) {
 			case 'read':
@@ -854,7 +854,7 @@ abstract class BaseRole extends Error {
 				break ;
 			}
 			break ;
-			
+
 		case 'frs':
 			switch ($action) {
 			case 'read_public':
@@ -868,7 +868,7 @@ abstract class BaseRole extends Error {
 				break ;
 			}
 			break ;
-			
+
 		case 'forum':
 		case 'new_forum':
 			switch ($action) {
@@ -886,7 +886,7 @@ abstract class BaseRole extends Error {
 				break ;
 			}
 			break ;
-			
+
 		case 'tracker':
 		case 'new_tracker':
 			switch ($action) {
@@ -1010,7 +1010,7 @@ abstract class BaseRole extends Error {
 				 array ($this->getID(),
 					'pm',
 					db_int_array_to_any_clause (array_keys ($data['pm'])))) ;
-		
+
 
 
 
@@ -1022,7 +1022,7 @@ abstract class BaseRole extends Error {
 
 ////$data['section_name']['ref_id']=$val
 		$arr1 = array_keys($data);
-		for ($i=0; $i<count($arr1); $i++) {	
+		for ($i=0; $i<count($arr1); $i++) {
 		//	array_values($Report->adjust_days)
 			$arr2 = array_keys($data[$arr1[$i]]);
 			for ($j=0; $j<count($arr2); $j++) {
@@ -1245,10 +1245,10 @@ abstract class BaseRole extends Error {
 
 		$this->fetchData ($this->getID()) ;
 
-		$projects = $this->getLinkedProjects() ;		
+		$projects = $this->getLinkedProjects() ;
 		$new_sa = array () ;
 		$new_pa = array () ;
-		
+
 		// Add missing settings
 		// ...project-wide settings
 		if (USE_PFO_RBAC) {
@@ -1271,8 +1271,8 @@ abstract class BaseRole extends Error {
 
 		$hook_params = array ();
 		$hook_params['role'] =& $this;
-		$hook_params['new_sa'] =& $new_sa ; 
-		$hook_params['new_pa'] =& $new_pa ; 
+		$hook_params['new_sa'] =& $new_sa ;
+		$hook_params['new_pa'] =& $new_pa ;
 		plugin_hook ("role_normalize", $hook_params);
 
 		// ...tracker-related settings
@@ -1300,7 +1300,7 @@ abstract class BaseRole extends Error {
 				}
 			}
 		}
-		
+
 		// ...forum-related settings
 		$new_sa['forum'] = array () ;
 		$new_pa['forum'] = array () ;
@@ -1326,7 +1326,7 @@ abstract class BaseRole extends Error {
 				}
 			}
 		}
-		
+
 		// ...pm-related settings
 		$new_sa['pm'] = array () ;
 		$new_pa['pm'] = array () ;
@@ -1352,7 +1352,7 @@ abstract class BaseRole extends Error {
 				}
 			}
 		}
-		
+
 		// Save
 		if (USE_PFO_RBAC) {
 			$this->update ($this->getName(), $new_pa, false) ;
@@ -1391,7 +1391,7 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 					 array ($id,
 						$this->getID())) ;
 			}
-		}	
+		}
 
 		foreach ($this->getLinkedProjects() as $p) {
 			foreach ($ids as $uid) {
@@ -1470,7 +1470,7 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 
 		$c = __CLASS__ ;
 		self::$_instance = new $c ;
-		
+
 		$res = db_query_params ('SELECT r.role_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND c.class_name = $1',
 					array ('PFO_RoleAnonymous')) ;
 		if (!$res || !db_numrows($res)) {
@@ -1518,7 +1518,7 @@ class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
 
 		$c = __CLASS__ ;
 		self::$_instance = new $c ;
-		
+
 		$res = db_query_params ('SELECT r.role_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND c.class_name = $1',
 					array ('PFO_RoleLoggedIn')) ;
 		if (!$res || !db_numrows($res)) {
@@ -1627,7 +1627,7 @@ class RoleComparator {
 			$tmp = $projcmp->Compare ($ap, $bp) ;
 			if ($tmp) { /* Different projects, sort accordingly */
 				return $tmp ;
-			} 
+			}
 			return strcoll ($a->getName(), $b->getName()) ;
 		}
 	}

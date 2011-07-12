@@ -3,7 +3,7 @@
  * Test the wiki XMLRPC interface methods.
  * This is a client app used to query most methods from our server.
 
- * The interface specification is that discussed at 
+ * The interface specification is that discussed at
  * http://www.ecyrd.com/JSPWiki/Wiki.jsp?page=WikiRPCInterface
 
  * Author: Reini Urban
@@ -11,35 +11,35 @@
  */
 
 /*
-  This file is part of, or distributed with, libXMLRPC - a C library for 
+  This file is part of, or distributed with, libXMLRPC - a C library for
   xml-encoded function calls.
 
   Author: Dan Libby (dan@libby.com)
   Epinions.com may be contacted at feedback@epinions-inc.com
 */
 
-/*  
-  Copyright 2001 Epinions, Inc. 
+/*
+  Copyright 2001 Epinions, Inc.
 
-  Subject to the following 3 conditions, Epinions, Inc.  permits you, free 
-  of charge, to (a) use, copy, distribute, modify, perform and display this 
-  software and associated documentation files (the "Software"), and (b) 
-  permit others to whom the Software is furnished to do so as well.  
+  Subject to the following 3 conditions, Epinions, Inc.  permits you, free
+  of charge, to (a) use, copy, distribute, modify, perform and display this
+  software and associated documentation files (the "Software"), and (b)
+  permit others to whom the Software is furnished to do so as well.
 
-  1) The above copyright notice and this permission notice shall be included 
-  without modification in all copies or substantial portions of the 
-  Software.  
+  1) The above copyright notice and this permission notice shall be included
+  without modification in all copies or substantial portions of the
+  Software.
 
-  2) THE SOFTWARE IS PROVIDED "AS IS", WITHOUT ANY WARRANTY OR CONDITION OF 
-  ANY KIND, EXPRESS, IMPLIED OR STATUTORY, INCLUDING WITHOUT LIMITATION ANY 
-  IMPLIED WARRANTIES OF ACCURACY, MERCHANTABILITY, FITNESS FOR A PARTICULAR 
-  PURPOSE OR NONINFRINGEMENT.  
+  2) THE SOFTWARE IS PROVIDED "AS IS", WITHOUT ANY WARRANTY OR CONDITION OF
+  ANY KIND, EXPRESS, IMPLIED OR STATUTORY, INCLUDING WITHOUT LIMITATION ANY
+  IMPLIED WARRANTIES OF ACCURACY, MERCHANTABILITY, FITNESS FOR A PARTICULAR
+  PURPOSE OR NONINFRINGEMENT.
 
-  3) IN NO EVENT SHALL EPINIONS, INC. BE LIABLE FOR ANY DIRECT, INDIRECT, 
-  SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS ARISING OUT 
-  OF OR IN CONNECTION WITH THE SOFTWARE (HOWEVER ARISING, INCLUDING 
-  NEGLIGENCE), EVEN IF EPINIONS, INC.  IS AWARE OF THE POSSIBILITY OF SUCH 
-  DAMAGES.    
+  3) IN NO EVENT SHALL EPINIONS, INC. BE LIABLE FOR ANY DIRECT, INDIRECT,
+  SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS ARISING OUT
+  OF OR IN CONNECTION WITH THE SOFTWARE (HOWEVER ARISING, INCLUDING
+  NEGLIGENCE), EVEN IF EPINIONS, INC.  IS AWARE OF THE POSSIBILITY OF SUCH
+  DAMAGES.
 
 */
 
@@ -132,10 +132,10 @@ function run_test($server, $debug, $output, $method, $args='', $expected='') {
     if (!empty($HTTP_GET_VARS['start_debug'])) // zend ide support
         $server['uri'] .= "?start_debug=1";
     $result =  xu_rpc_http_concise(array('method' => $method,
-                                         'args'   => $params, 
-                                         'host'   => $server['host'], 
-                                         'uri'    => $server['uri'], 
-                                         'port'   => $server['port'], 
+                                         'args'   => $params,
+                                         'host'   => $server['host'],
+                                         'uri'    => $server['uri'],
+                                         'port'   => $server['port'],
                                          'debug'  => $debug,
                                          'output' => $output));
     check_if_matches($method, $expected, $result);
@@ -150,9 +150,9 @@ function run_no_param_test($server, $debug, $output, $method) {
     if (!empty($HTTP_GET_VARS['start_debug'])) // zend ide support
         $server['uri'] .= "?start_debug=1";
     $result =  xu_rpc_http_concise(array('method' => $method,
-                                         'host'   => $server['host'], 
-                                         'uri'    => $server['uri'], 
-                                         'port'   => $server['port'], 
+                                         'host'   => $server['host'],
+                                         'uri'    => $server['uri'],
+                                         'port'   => $server['port'],
                                          'debug'  => $debug,
                                          'output' => $output));
 
@@ -162,7 +162,7 @@ function run_no_param_test($server, $debug, $output, $method) {
     else {
         fail($method, false, $result);
     }
-   
+
     flush();
 }
 
@@ -173,11 +173,11 @@ function run_easy_tests($server, $debug=0, $output = null) {
     //global $wiki_dmap;
 
     run_test($server, $debug, $output, "wiki.getRPCVersionSupported", '', 1);
-    
+
     // getRecentChanges of the last day:
     // Note: may crash with dba on index.php, not on RPC2.php
     run_test($server, $debug, $output, "wiki.getRecentChanges", iso8601_encode(time()-86400));
-    
+
     run_test($server, $debug, $output, "wiki.getPage", "HomePage", "* What is a WikiWikiWeb? A description of this application. * Learn HowToUseWiki and learn about AddingPages. * Use the SandBox page to experiment with Wiki pages. * Please sign your name in RecentVisitors. * See RecentChanges for the latest page additions and changes. * Find out which pages are MostPopular. * Read the ReleaseNotes and RecentReleases. * Administer this wiki via PhpWikiAdministration. * See more PhpWikiDocumentation.");
     run_test($server, $debug, $output, "wiki.getPageVersion", array("HomePage", 1));
     run_test($server, $debug, $output, "wiki.getPageHTML", "HomePage");
@@ -187,10 +187,10 @@ function run_easy_tests($server, $debug=0, $output = null) {
     run_test($server, $debug, $output, "wiki.getPageInfoVersion", array("HomePage", 1));
     run_test($server, $debug, $output, "wiki.listLinks", "HomePage");
 
-    run_test($server, $debug, $output, "wiki.putPage", 
+    run_test($server, $debug, $output, "wiki.putPage",
              array("PutPage", "new PutPage content", "XxXx"),
              array('code' => 200, 'version' => 1, 'message' => "Page PutPage version 1 created"));
-    run_test($server, $debug, $output, "wiki.putPage", 
+    run_test($server, $debug, $output, "wiki.putPage",
              array("PutPage", "new PutPage content", "XxXx"),
              array('code' => 400, 'version' => 1, 'message' => "Page PutPage unchanged"));
     run_test($server, $debug, $output, "wiki.putPage",
@@ -232,7 +232,7 @@ if ($server) {
    if ($server) {
       $title = $server['title'];
       echo "<h2><center>Results for $title</center></h2>";
-      
+
       if($GLOBALS['HTTP_GET_VARS']['stress'] == 1) {
          run_stress_tests($server, $debug, $output);
       }

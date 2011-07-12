@@ -15,12 +15,12 @@ if (!$res) {
 	exit();
 } else {
 	$tasks = array();
-	
+
 	for ($i=0;$i<db_numrows($res);$i++) {
 		$data = db_fetch_array($res);
 		$tasks[] = $data['project_task_id'];
 	}
-	
+
 	foreach ($tasks as $task_id) {
 		$res = db_query_params ('DELETE FROM project_assigned_to WHERE project_task_id=$1',
 					array ($task_id));
@@ -83,12 +83,12 @@ if (!$res) {
 	exit();
 } else {
 	$artifacts = array();
-	
+
 	for ($i=0;$i<db_numrows($res);$i++) {
 		$data = db_fetch_array($res);
 		$artifacts[] = $data['artifact_id'];
 	}
-	
+
 	foreach ($artifacts as $artifact_id) {
 		$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
 					array ($artifact_id)) ;

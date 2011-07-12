@@ -25,21 +25,21 @@
 require_once $gfcommon.'search/SearchQuery.class.php';
 
 class FrsSearchQuery extends SearchQuery {
-	
+
 	/**
 	* group id
 	*
 	* @var int $groupId
 	*/
 	var $groupId;
-	
+
 	/**
 	* flag if non public items are returned
 	*
 	* @var boolean $showNonPublic
-	*/	
+	*/
 	var $showNonPublic;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -49,15 +49,15 @@ class FrsSearchQuery extends SearchQuery {
 	 * @param int $groupId group id
 	 * @param array $sections sections to search in
 	 */
-	function FrsSearchQuery($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {	
+	function FrsSearchQuery($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
-		
+
 		$this->SearchQuery($words, $offset, $isExact);
-		
+
 		$this->setSections($sections);
 	}
-	
+
 	/**
 	 * getQuery - get the query built to get the search results
 	 *
@@ -109,7 +109,7 @@ class FrsSearchQuery extends SearchQuery {
 				$qpa = db_construct_qpa ($qpa,
 							 ')) ') ;
 			}
-			
+
 			$qpa = db_construct_qpa ($qpa,
 						 ' ORDER BY frs_package.name, frs_release.name') ;
 
@@ -143,7 +143,7 @@ class FrsSearchQuery extends SearchQuery {
 		}
 		return $qpa ;
 	}
-	
+
 	/**
 	 * getSections - returns the list of available forums
 	 *
@@ -156,7 +156,7 @@ class FrsSearchQuery extends SearchQuery {
 			$sql .= ' AND is_public=1';
 		}
 		$sql .= ' ORDER BY name';
-		
+
 		$sections = array();
 		$res = db_query_params ($sql,
 					array ($groupId));

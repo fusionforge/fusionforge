@@ -92,7 +92,7 @@ function export_get_event_entry($id) {
 function export_quoted_printable_encode($car) {
   $res = "";
 
-  if ((ord($car) >= 33 && ord($car) <= 60) || (ord($car) >= 62 && ord($car) <= 126) || 
+  if ((ord($car) >= 33 && ord($car) <= 60) || (ord($car) >= 62 && ord($car) <= 126) ||
       ord($car) == 9 || ord($car) == 32) {
       $res = $car;
   } else {
@@ -104,7 +104,7 @@ function export_quoted_printable_encode($car) {
 
 function export_fold_lines($string, $encoding="none", $limit=76) {
   $len = strlen($string);
-  $fold = $limit; 
+  $fold = $limit;
   $res = array();
   $row = "";
   $enc = "";
@@ -175,7 +175,7 @@ function export_get_attendee($id, $export) {
   global $login;
 
   $request = "SELECT webcal_entry_user.cal_login, webcal_entry_user.cal_status, " .
-    " webcal_entry.cal_create_by " . 
+    " webcal_entry.cal_create_by " .
     "FROM webcal_entry_user LEFT JOIN  webcal_entry " .
     " ON webcal_entry_user.cal_id = webcal_entry.cal_id " .
     " WHERE webcal_entry_user.cal_id = '$id' AND webcal_entry_user.cal_status <> 'D'";

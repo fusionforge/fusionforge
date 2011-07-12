@@ -26,22 +26,22 @@ class ASelectextauthPlugin extends Plugin {
 	function ASelectextauthPlugin () {
 		$this->Plugin() ;
 		$this->name = "aselectextauth";
-		$this->hooks[] = "session_set_entry";	
+		$this->hooks[] = "session_set_entry";
 	}
-	
+
 	function CallHook ($hookname, &$params) {
 		global $HTML ;
-		
+
 		switch ($hookname) {
 		case "session_set_entry":
-		
-			$Aselect = new Aselect();			
-			$loginname = strtolower($Aselect->getUserName());//Since A-Select UserID is 
+
+			$Aselect = new Aselect();
+			$loginname = strtolower($Aselect->getUserName());//Since A-Select UserID is
 																											//not case sensitive we pass it to lower case
-			$passwd = '' ;		
-	
+			$passwd = '' ;
+
 			$this->AuthUser($loginname, $passwd) ;
-			break;		
+			break;
 		default:
 			// Forgot something
 		}
@@ -49,31 +49,31 @@ class ASelectextauthPlugin extends Plugin {
 
 	function AuthUser ($loginname, $passwd) {
 		global $feedback;
-	
-		if(!$loginname) {						
+
+		if(!$loginname) {
 			return false;
 		}
 
-		
+
 		$u = user_get_object_by_name ($loginname) ;
 		if ($u) {
 			// User exists in DB
-			if($u->getStatus()=='A'){ //we check if it's active				
-				$user_id = $u->getID();  
-				session_set_new($user_id); //create session cookie		
+			if($u->getStatus()=='A'){ //we check if it's active
+				$user_id = $u->getID();
+				session_set_new($user_id); //create session cookie
 				$GLOBALS['aselect_auth_failed']=false;
 				return true ;
 			} else {
 				$GLOBALS['aselect_auth_failed']=true;
 				return false ;
 			}
-		} else {				
-					$GLOBALS['aselect_auth_failed']=true;					
+		} else {
+					$GLOBALS['aselect_auth_failed']=true;
 					return false;
-		}						
-			
-			
-		
+		}
+
+
+
 	}
 }
 

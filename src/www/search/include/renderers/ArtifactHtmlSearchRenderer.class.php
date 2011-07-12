@@ -26,14 +26,14 @@ require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php'
 require_once $gfcommon.'search/ArtifactSearchQuery.class.php';
 
 class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
-	
+
 	/**
 	 * artifact id
 	 *
 	 * @var int $artifactId
 	 */
 	var $artifactId;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -46,11 +46,11 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function ArtifactHtmlSearchRenderer($words, $offset, $isExact, $groupId, $artifactId) {
 		$this->groupId = $groupId;
 		$this->artifactId = $artifactId;
-		
+
 		$searchQuery = new ArtifactSearchQuery($words, $offset, $isExact, $groupId, $artifactId);
-		
+
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ARTIFACT, $words, $isExact, $searchQuery, $groupId, 'tracker');
-		
+
 		$this->tableHeaders = array(
 			_('#'),
 			_('Summary'),
@@ -58,7 +58,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			_('Date')
 		);
 	}
-	
+
 	/**
 	 * getRows - get the html output for result rows
 	 *
@@ -69,7 +69,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$result =& $this->searchQuery->getResult();
 		$groupId = $this->groupId;
 		$dateFormat = _('Y-m-d H:i');
-		
+
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
@@ -82,7 +82,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * getPreviousResultsUrl - get the url to go to see the previous results
 	 *
@@ -91,7 +91,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getPreviousResultsUrl() {
 		return parent::getPreviousResultsUrl().'&amp;atid='.$this->artifactId;
 	}
-	
+
 	/**
 	 * getNextResultsUrl - get the url to go to see the next results
 	 *
@@ -100,7 +100,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getNextResultsUrl() {
 		return parent::getNextResultsUrl().'&amp;atid='.$this->artifactId;
 	}
-	
+
 	/**
 	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
 	 */

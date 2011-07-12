@@ -38,7 +38,7 @@ function parse_vcal($cal_file) {
               if ( $match[1] == $subsubstate ) {
                 $subsubstate = '';
               }
-            } else if ( $subsubstate == "VALARM" && 
+            } else if ( $subsubstate == "VALARM" &&
               preg_match ( "/TRIGGER:(.+)$/i", $buff, $match ) ) {
 		//echo "Set reminder to $match[1]<br />";
 		//reminder time is $match[1]
@@ -167,7 +167,7 @@ function format_vcal($event) {
   if (! empty($event['description'])) $fevent['Description'] = $event['description'];
   if (! empty($event['descriptionqp'])) {
     $fevent['Description'] = quoted_printable_decode ( $event['descriptionqp'] );
-    
+
     // hack for mozilla sunbird's extra = signs
     $fevent['Description'] = preg_replace('/^=/', '', $fevent['Description']);
     $fevent['Description'] = str_replace("\n=", "\n", $fevent['Description']);

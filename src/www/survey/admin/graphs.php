@@ -32,8 +32,8 @@
  *  @ value[]  - array of values
  *  @ type - grap type. We support pie and vertical bar graph (pie, vbar)
  *  @ width
- *  @ hight 
- */ 
+ *  @ hight
+ */
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -58,19 +58,19 @@ $value = getStringFromRequest('value');
 if ($type=='pie') {
     ShowPie($legend, $value);
 } else {
-    ShowHBar($legend, $value); 
+    ShowHBar($legend, $value);
 }
 
 /**
  * Show 3D Pie graph
- */ 
+ */
 function ShowPie(&$legend, &$value) {
-  
+
     $graph = new PieGraph(330,200,"auto");
     $graph->SetFrame(false);
     //$graph->title->Set("A simple 3D Pie plot");
     //$graph->title->SetFont(FF_FONT1,FS_BOLD);
-    
+
     $p1 = new PiePlot3D($value);
     $p1->ExplodeSlice(1);
     $p1->SetCenter(0.45);
@@ -84,15 +84,15 @@ function ShowPie(&$legend, &$value) {
 
 /**
  * Show Horizontal Bar graph
- */ 
+ */
 function ShowHBar(&$legend, &$value) {
-    
+
     $height=50+count($value)*18;
     $width=500;
-    
+
     // Set the basic parameters of the graph
     $graph = new Graph($width,$height,'auto');
-    
+
     $graph->SetScale("textlin");
     $top = 30;
     $bottom = 20;
@@ -104,10 +104,10 @@ function ShowHBar(&$legend, &$value) {
 
     // Label align for X-axis
     $graph->xaxis->SetLabelAlign('right','center','right');
-    
+
     // Label align for Y-axis
     $graph->yaxis->SetLabelAlign('center','bottom');
-    
+
     // Create a bar pot
     $bplot = new BarPlot($value);
     $bplot->SetFillColor("orange");
@@ -116,12 +116,12 @@ function ShowHBar(&$legend, &$value) {
     $graph->yaxis->scale->SetGrace(10);
     $graph->yaxis->SetLabelAlign('center','bottom');
     $graph->yaxis->SetLabelFormat('%d');
-	
+
     $bplot->value->Show();
     $bplot->value->SetFormat('%.d votes');
     // Setup color for gradient fill style
     $bplot->SetFillGradient("navy","lightsteelblue",GRAD_MIDVER);
- 
+
     $graph->Add($bplot);
 
     $graph->Stroke();

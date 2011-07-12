@@ -26,33 +26,33 @@ require_once('PluginHudsonJobDao.class.php');
 require_once('HudsonJob.class.php');
 
 class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
-    
+
     var $plugin;
-    
+
     var $_not_monitored_jobs;
     var $_use_global_status;
     var $_all_status;
     var $_global_status;
     var $_global_status_icon;
-    
+
     function hudson_Widget_MyMonitoredJobs($plugin) {
         $this->Widget('plugin_hudson_my_jobs');
         $this->plugin = $plugin;
 	$user=UserManager::instance()->getCurrentUser();
-        
+
         $this->_not_monitored_jobs = $user->getPreference('plugin_hudson_my_not_monitored_jobs');
         if ($this->_not_monitored_jobs === false) {
             $this->_not_monitored_jobs = array();
         } else {
             $this->_not_monitored_jobs = explode(",", $this->_not_monitored_jobs);
         }
-        
+
         $this->_use_global_status = $user->getPreference('plugin_hudson_use_global_status');
         if ($this->_use_global_status === false) {
             $this->_use_global_status = "false";
             $user->setPreference('plugin_hudson_use_global_status', $this->_use_global_status);
         }
-        
+
         if ($this->_use_global_status == "true") {
             $this->_all_status = array(
                 'grey' => 0,
@@ -62,9 +62,9 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
             );
             $this->computeGlobalStatus();
         }
-        
+
     }
-    
+
     function computeGlobalStatus() {
         $monitored_jobs = $this->_getMonitoredJobsByUser();
         foreach ($monitored_jobs as $monitored_job) {
@@ -75,7 +75,7 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
                     $row = $dar->current();
                     $job_url = $row['job_url'];
                     $job = new HudsonJob($job_url);
-                    $this->_all_status[(string)$job->getColorNoAnime()] = $this->_all_status[(string)$job->getColorNoAnime()] + 1;    
+                    $this->_all_status[(string)$job->getColorNoAnime()] = $this->_all_status[(string)$job->getColorNoAnime()] + 1;
                 }
             } catch (Exception $e) {
                 // Do not display wrong jobs
@@ -92,25 +92,25 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
             $this->_global_status_icon = $this->plugin->getThemePath() . "/images/ic/" . "status_blue.png";
         }
     }
-    
+
     function getTitle() {
         $title = '';
         if ($this->_use_global_status == "true") {
             $title = '<img src="'.$this->_global_status_icon.'" title="'.$this->_global_status.'" alt="'.$this->_global_status.'" /> ';
         }
-        $title .= _("My Hudson Jobs"); 
+        $title .= _("My Hudson Jobs");
         return  $title;
     }
-    
+
     function getDescription() {
         return _("Show an overview of all the jobs of all the projects you're member of. You can of course select the jobs you wish to display by selecting the preferences link of the widget.");
     }
-    
+
     function updatePreferences(&$request) {
         $request->valid(new Valid_String('cancel'));
         if (!$request->exist('cancel')) {
             $monitored_jobs = $request->get('myhudsonjobs');
-            
+
             $user = UserManager::instance()->getCurrentUser();
             $job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
             $dar = $job_dao->searchByUserID($user->getId());
@@ -118,15 +118,15 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
             while ($dar->valid()) {
                 $row = $dar->current();
                 if ( ! in_array($row['job_id'], $monitored_jobs)) {
-                    $not_monitored_jobs[] = $row['job_id'];                    
+                    $not_monitored_jobs[] = $row['job_id'];
                 }
                 $dar->next();
             }
-            
-            $this->_not_monitored_jobs = $not_monitored_jobs; 
-            
+
+            $this->_not_monitored_jobs = $not_monitored_jobs;
+
             $user->setPreference('plugin_hudson_my_not_monitored_jobs', implode(",", $this->_not_monitored_jobs));
-            
+
             $use_global_status = $request->get('use_global_status');
             $this->_use_global_status = ($use_global_status !== false)?"true":"false";
             $user->setPreference('plugin_hudson_use_global_status', $this->_use_global_status);
@@ -153,23 +153,23 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
             }
             $dar->next();
         }
-        
+
         // Use global status
         $prefs .= '<strong>'._("Use global status:").'</strong>';
         $prefs .= '<input type="checkbox" name="use_global_status" value="use_global" '.(($this->_use_global_status == "true")?'checked="checked"':'').'><br />';
         return $prefs;
     }
-    
+
     function getContent() {
         $monitored_jobs = $this->_getMonitoredJobsByUser();
         if (sizeof($monitored_jobs) > 0) {
-            $html = '';            
+            $html = '';
             $html .= '<table style="width:100%">';
             $cpt = 1;
-            
+
             foreach ($monitored_jobs as $monitored_job) {
                 try {
-                    
+
                     $job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
                     $dar = $job_dao->searchByJobID($monitored_job);
                     if ($dar->valid()) {
@@ -192,7 +192,7 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
                         $html .= '  <a href="/plugins/hudson/?action=view_job&group_id='.$group_id.'&job_id='.$job_id.'">'.$job->getName().'</a><br />';
                         $html .= ' </td>';
                         $html .= '</tr>';
-                        
+
                         $cpt++;
                     }
                 } catch (Exception $e) {
@@ -203,7 +203,7 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
             return $html;
         }
     }
-    
+
     function _getMonitoredJobsByUser() {
         $user = UserManager::instance()->getCurrentUser();
         $job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
@@ -212,7 +212,7 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
         while ($dar->valid()) {
             $row = $dar->current();
             if ( ! in_array($row['job_id'], $this->_not_monitored_jobs)) {
-                $monitored_jobs[] = $row['job_id'];                    
+                $monitored_jobs[] = $row['job_id'];
             }
             $dar->next();
         }

@@ -1,19 +1,19 @@
-<?php 
+<?php
 /*
  * FCKeditor - The text editor for internet
  * Copyright (C) 2003-2006 Frederico Caldeira Knabben
- * 
+ *
  * Licensed under the terms of the GNU Lesser General Public License:
  * 		http://www.opensource.org/licenses/lgpl-license.php
- * 
+ *
  * For further information visit:
  * 		http://www.fckeditor.net/
- * 
+ *
  * "Support Open Source software. What about a donation today?"
- * 
+ *
  * File Name: upload.php
  * 	This is the "File Uploader" for PHP.
- * 
+ *
  * File Authors:
  * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
@@ -78,7 +78,7 @@ $iCounter = 0 ;
 // The the target directory.
 if ( isset( $Config['UserFilesAbsolutePath'] ) && strlen( $Config['UserFilesAbsolutePath'] ) > 0 )
 	$sServerDir = $Config['UserFilesAbsolutePath'] ;
-else 
+else
 	$sServerDir = GetRootPath() . $Config["UserFilesPath"] ;
 
 while ( true )
@@ -103,7 +103,7 @@ while ( true )
 			chmod( $sFilePath, 0777 ) ;
 			umask( $oldumask ) ;
 		}
-		
+
 		$sFileUrl = $Config["UserFilesPath"] . $sFileName ;
 
 		break ;

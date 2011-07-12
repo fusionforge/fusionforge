@@ -2,9 +2,9 @@
 /**
  * FusionForge Config File edit page
  *
- * @version 
- * @author 
- * @copyright 
+ * @version
+ * @author
+ * @copyright
  * Copyright 2005 GForge, LLC
  * http://fusionforge.org/
  *

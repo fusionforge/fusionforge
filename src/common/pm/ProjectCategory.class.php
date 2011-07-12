@@ -26,7 +26,7 @@ require_once $gfcommon.'include/Error.class.php';
 
 class ProjectCategory extends Error {
 
-	/** 
+	/**
 	 * The ProjectGroup object.
 	 *
 	 * @var		object	$ProjectGroup.
@@ -48,7 +48,7 @@ class ProjectCategory extends Error {
 	 *  @return	boolean	success.
 	 */
 	function ProjectCategory(&$ProjectGroup, $data=false) {
-		$this->Error(); 
+		$this->Error();
 
 		//was ProjectGroup legit?
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {
@@ -146,7 +146,7 @@ class ProjectCategory extends Error {
 	function &getProjectGroup() {
 		return $this->ProjectGroup;
 	}
-	
+
 	/**
 	 *	getID - get this ProjectCategory's ID.
 	 *
@@ -179,7 +179,7 @@ class ProjectCategory extends Error {
 		if (!$name) {
 			$this->setMissingParamsError();
 			return false;
-		}   
+		}
 		$result = db_query_params ('UPDATE project_category SET category_name=$1
 			WHERE category_id=$2 AND group_project_id=$3',
 					   array (htmlspecialchars($name),

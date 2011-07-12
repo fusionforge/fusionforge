@@ -12,10 +12,10 @@ class DataAccessObject {
     */
     function DataAccessObject( & $da ) {
         $this->table_name = 'CLASSNAME_MUST_BE_DEFINE_FOR_EACH_CLASS';
-        
+
         $this->da=$da;
     }
-	
+
 
     //! An accessor
     /**
@@ -25,7 +25,7 @@ class DataAccessObject {
     */
     function &retrieve($sql,$params) {
         $result = new DataAccessResult(db_query_params($sql,$params));
-        
+
         return $result;
     }
 
@@ -39,8 +39,8 @@ class DataAccessObject {
         $result = db_query_params($sql,$params);
         return $result;
     }
-    
-    
-   
+
+
+
 }
 ?>

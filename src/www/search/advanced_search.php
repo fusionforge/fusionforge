@@ -37,7 +37,7 @@ if ($mode == SEARCH__MODE_AND) {
 	$exact = false;
 }
 
-if (!getStringFromRequest('search')) { 
+if (!getStringFromRequest('search')) {
 	$searchQuery = new AdvancedSearchHtmlSearchRenderer($words, $offset, true, $group_id);
 	//just display the header and footer if search is not set
 	$searchQuery->writeHeader();

@@ -7,12 +7,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -25,7 +25,7 @@
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-require_once 'checks.php';	
+require_once 'checks.php';
 
 $pluginname = 'oauthprovider';
 
@@ -72,7 +72,7 @@ foreach( $t_tokens as $t_token ) {
 	if($t_token->getAuthorized()==1)	$auth = 'Yes';
 	else $auth = 'No';
 	echo '<td>'.$auth.'</td>';
-	$role_id =$t_token->getRole(); 
+	$role_id =$t_token->getRole();
 	if($role_id!=0)	{
 		//echo 'Roleid: '.$role_id;
 		$role = RBACEngine::getInstance()->getRoleById($role_id);
@@ -80,7 +80,7 @@ foreach( $t_tokens as $t_token ) {
 		echo '<td>'.$role->getName().'</td>';
 	}else {
 		echo '<td>'.'---'.'</td>';
-	}	
+	}
 	if($t_token->getUserId() > 0 ) {
 		$user_object =& user_get_object($t_token->getUserId());
           $user = $user_object->getRealName().' ('.$user_object->getUnixName().')';
@@ -92,7 +92,7 @@ foreach( $t_tokens as $t_token ) {
 	echo '<td>'.util_make_link('/plugins/'.$pluginname.'/token_delete.php?token_id=' . $t_token->getId() . '&token_type=request' . '&plugin_oauthprovider_token_delete_token='.form_generate_key(), _('Delete')).'</td>';
 	echo '</tr>';
 	$i++;
-	
+
 }
 
 echo $HTML->listTableBottom();

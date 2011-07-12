@@ -96,7 +96,7 @@ if (session_loggedin()) {
 <script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 function show_add_snippet_box() {
 	newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
-	newWindow.location=('/snippet/add_snippet_to_package.php?suppress_nav=1&snippet_package_version_id=<?php 
+	newWindow.location=('/snippet/add_snippet_to_package.php?suppress_nav=1&snippet_package_version_id=<?php
 			echo $snippet_package_version_id; ?>');
 }
 /* ]]> */</script>
@@ -166,7 +166,7 @@ function show_add_snippet_box() {
 		<!--<?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Category')); ?>-->
 	</td>
 	</tr>
- 
+
 	<tr><td colspan="2"><strong><?php echo _('Version') ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="version" size="10" maxlength="15" />
 	</td></tr>

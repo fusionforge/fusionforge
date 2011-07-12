@@ -49,13 +49,13 @@ function print_user_list () {
       }
       $users .= ">" . $userlist[$i]['cal_fullname'] . "</option>\n";
     }
-  
+
     if ( $size > 50 )
       $size = 15;
     else if ( $size > 5 )
       $size = 5;
     print "<tr><td style=\"vertical-align:top;\">\n";
-    print "<label for=\"caluser\">" . 
+    print "<label for=\"caluser\">" .
     	translate("Calendar") . "</label></td><td>\n";
     print "<select name=\"calUser\" id=\"caluser\" size=\"$size\">$users\n";
     print "</select>\n";
@@ -91,14 +91,14 @@ if ( ! $upload_enabled ) {
 </td></tr>
 <tr id="palm"><td>
 	<label><?php etranslate("Exclude private records")?>:</label></td><td>
-	<label><input type="radio" name="exc_private" value="1" checked="checked" /><?php etranslate("Yes")?></label> 
+	<label><input type="radio" name="exc_private" value="1" checked="checked" /><?php etranslate("Yes")?></label>
 	<label><input type="radio" name="exc_private" value="0" /><?php etranslate("No")?></label>
 </td></tr>
 <!-- /PALM -->
 
 <tr id="ivcal"><td>
 	<label><?php etranslate("Overwrite Prior Import")?>:</label></td><td>
-	<label><input type="radio" name="overwrite" value="Y" checked="checked" />&nbsp;<?php etranslate("Yes");?></label> 
+	<label><input type="radio" name="overwrite" value="Y" checked="checked" />&nbsp;<?php etranslate("Yes");?></label>
 	<label><input type="radio" name="overwrite" value="N" />&nbsp;<?php etranslate("No");?></label>
 </td></tr>
 <!-- /IVCAL -->

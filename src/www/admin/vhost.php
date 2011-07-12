@@ -61,7 +61,7 @@ if (getStringFromRequest('add')) {
 
 
 			$res = db_query_params ('
-				INSERT INTO prweb_vhost(vhost_name, docdir, cgidir, group_id) 
+				INSERT INTO prweb_vhost(vhost_name, docdir, cgidir, group_id)
 				VALUES ($1,$2,$3,$4)
 			',
 			array($vhost_name,
@@ -89,9 +89,9 @@ if (getStringFromRequest('tweakcommit')) {
 	$cgidir = getStringFromRequest('cgidir');
 
 	$res = db_query_params ('
-		UPDATE prweb_vhost 
+		UPDATE prweb_vhost
 		SET docdir=$1,
-			cgidir=$2 
+			cgidir=$2
 		WHERE vhostid=$3
 	',
 			array($docdir,
@@ -103,7 +103,7 @@ if (getStringFromRequest('tweakcommit')) {
 		$error_msg .= _('Error updating VHOST entry: ') .db_error();
 	} else {
 		$feedback .= _('Virtual Host entry updated.');
-	}		
+	}
 
 }
 
@@ -167,7 +167,7 @@ if (getStringFromRequest('tweak')) {
 	if (db_numrows($res_vh) > 0) {
 
 		$row_vh = db_fetch_array($res_vh);
-	
+
 		print '<div class="feedback">'._('Update Record:').'</div>';
 
 		$title=array();

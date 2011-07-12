@@ -75,7 +75,7 @@ foreach ($members as $user) {
 		echo '		<td>'.$user->getRealName().'</td>';
 //                echo '</div>';
 	}
-	
+
 	/*
         print '<span property ="dc:Identifier" content="'.$user->getID().'">';
         echo '</span>';
@@ -108,7 +108,7 @@ foreach ($members as $user) {
 	print '</div>';
    	echo '</tr>';
 }
-// end of community member description block 
+// end of community member description block
 echo $GLOBALS['HTML']->listTableBottom();
 
 site_project_footer(array());

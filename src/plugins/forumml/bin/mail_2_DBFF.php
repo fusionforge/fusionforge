@@ -63,7 +63,7 @@ $plugin_manager =& PluginManager::instance();
 $p =& $plugin_manager->getPluginByName('forumml');
 if ($p && $plugin_manager->isPluginAvailable($p) ) {
 	if ($argv[2] == 2) {
-		// get list archive		
+		// get list archive
 		$forumml_arch = $GLOBALS['forumml_arch'];;
 		$mbox_file = $forumml_arch."/private/".$list.".mbox/".$list.".mbox";
 		// check if mbox file exists
@@ -71,7 +71,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) ) {
 			$stderr = fopen('php://stderr', 'w');
 			fwrite($stderr, "Invalid mbox file $mbox_file \n");
 			fclose($stderr);
-			exit;	
+			exit;
 		}
         // Do not import from archives if there are already messages for this list
         $sql = 'SELECT NULL FROM plugin_forumml_message WHERE id_list = $1 LIMIT 1';

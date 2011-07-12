@@ -47,12 +47,12 @@ if (getStringFromRequest('submit')) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(_('Old password is incorrect'),'my');
 	}
-	
+
 	if (strlen($passwd)<6) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(_('You must supply valid password (at least 6 chars)'),'my');
 	}
-	
+
 	if ($passwd != $passwd2) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(_('New passwords do not match.'),'my');
@@ -84,9 +84,9 @@ if (getStringFromRequest('submit')) {
 		 <?php printf(_('You should now <a href="%1$s">Return to User Prefs</a>.'),
 			      util_make_url('/account/')) ?>
 	</p>
-	
+
 	<?php
-} else { 
+} else {
 	// Show change form
 	site_user_header(array('title'=>_('Change Password')));
 	?>

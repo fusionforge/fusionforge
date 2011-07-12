@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -40,10 +40,10 @@ class BzrPlugin extends SCMPlugin {
 		$this->main_branch_names[] = 'main' ;
 		$this->main_branch_names[] = 'head' ;
 		$this->main_branch_names[] = 'HEAD' ;
-		
+
 		$this->register () ;
 	}
-	
+
 	function getDefaultServer() {
 		return forge_get_config('default_server', 'scmbzr') ;
 	}
@@ -53,7 +53,7 @@ class BzrPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if ($project->usesPlugin($this->name)) {
 			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						  array ($project->getID())) ;
@@ -68,7 +68,7 @@ class BzrPlugin extends SCMPlugin {
 			echo ' (Bazaar: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
-	
+
 	function getBlurb () {
 		return '<p>' . _('Documentation for Bazaar (sometimes referred to as "bzr") is available <a href="http://bazaar-vcs.org/Documentation">here</a>.') . '</p>';
 	}
@@ -139,7 +139,7 @@ class BzrPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-                
+
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
 				print '<iframe src="'.util_make_url ("/scm/loggerhead/".$project->getUnixName()).'" frameborder="0" width=100% height=700></iframe>' ;
@@ -152,7 +152,7 @@ class BzrPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-				
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
@@ -165,12 +165,12 @@ class BzrPlugin extends SCMPlugin {
 			$pipe = popen ("bzr info $repo 2>/dev/null", "r") ;
 			$line = fgets ($pipe) ;
 			fclose ($pipe) ;
-		
+
 			if (preg_match ("/^Shared repository/", $line) != 0) {
 				$repo_exists = true ;
 			}
 		}
-		
+
 		if (!$repo_exists) {
 			system ("mkdir -p $repo") ;
 			system ("bzr init-repo --no-trees $repo >/dev/null") ;
@@ -239,7 +239,7 @@ class BzrPlugin extends SCMPlugin {
                 if (!$project) {
                         return false ;
                 }
-                
+
                 if (! $project->usesPlugin ($this->name)) {
                         return false;
                 }
@@ -283,7 +283,7 @@ class BzrPlugin extends SCMPlugin {
                                 db_rollback () ;
                                 return false ;
                         }
-        
+
                         $res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
                                                 array ($month_string,
                                                        $day,
@@ -348,7 +348,7 @@ class BzrPlugin extends SCMPlugin {
 				$adds = $adds + $curadds ;
 				$updates = $updates + $curupdates ;
 			}
-                        
+
                         // inserting group results in stats_cvs_groups
 			if ($updates > 0 || $adds > 0) {
 				if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
@@ -363,7 +363,7 @@ class BzrPlugin extends SCMPlugin {
 					return false ;
 				}
 			}
-                                
+
                         // building the user list
                         $user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
 
@@ -375,7 +375,7 @@ class BzrPlugin extends SCMPlugin {
                                 } else {
                                         continue;
                                 }
-				
+
 				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0 ;
 				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0 ;
 				if ($uu > 0 || $ua > 0) {
@@ -420,7 +420,7 @@ class BzrPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		$group_name = $project->getUnixName() ;
 
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();

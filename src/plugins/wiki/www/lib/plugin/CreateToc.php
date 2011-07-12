@@ -252,16 +252,16 @@ extends WikiPlugin
             if (preg_match('/^\s*{\|/', $content[$i])) {
                $insidetable = true;
                continue;
-            } else if (preg_match('/^\s*{{{/', $content[$i]) 
-                    || preg_match('/^\s*<pre>/', $content[$i]) 
+            } else if (preg_match('/^\s*{{{/', $content[$i])
+                    || preg_match('/^\s*<pre>/', $content[$i])
                     || preg_match('/^\s*<verbatim>/', $content[$i])) {
                $insideverbatim = true;
                continue;
             } else if (preg_match('/^\s*\|}/', $content[$i])) {
                $insidetable = false;
                continue;
-            } else if (preg_match('/^\s*}}}/', $content[$i]) 
-                    || preg_match('/^\s*<\/pre>/', $content[$i]) 
+            } else if (preg_match('/^\s*}}}/', $content[$i])
+                    || preg_match('/^\s*<\/pre>/', $content[$i])
                     || preg_match('/^\s*<\/verbatim>/', $content[$i])) {
                $insideverbatim = false;
                continue;
@@ -383,7 +383,7 @@ extends WikiPlugin
         if (($notoc) or ($liststyle == 'ol')) {
             $with_counter = 1;
         }
-        if ($firstlevelstyle and ($firstlevelstyle != 'number') 
+        if ($firstlevelstyle and ($firstlevelstyle != 'number')
                              and ($firstlevelstyle != 'letter')
                              and ($firstlevelstyle != 'roman')) {
             return $this->error(_("Error: firstlevelstyle must be 'number', 'letter' or 'roman'"));

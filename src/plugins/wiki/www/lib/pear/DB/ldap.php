@@ -25,8 +25,8 @@
 //
 // $Id: ldap.php 8075 2011-05-18 16:10:53Z vargenau $
 //
-// Based on DB 1.3 from the pear.php.net repository. 
-// The only modifications made have been modification of the include paths. 
+// Based on DB 1.3 from the pear.php.net repository.
+// The only modifications made have been modification of the include paths.
 //
 // From Pear CVS: Id: ldap.php,v 1.9 2002/02/11 12:59:37 mj Exp
 
@@ -49,7 +49,7 @@ class LDAP_result extends DB_result
 {
 
     // {{{ properties
-    
+
     /**
      * data returned from ldap_entries()
      * @access private
@@ -65,7 +65,7 @@ class LDAP_result extends DB_result
      * @access private
      */
     var $_record    = null;
-    
+
     // }}}
     // {{{ constructor
 
@@ -142,8 +142,8 @@ class LDAP_result extends DB_result
         }
         return DB_OK;
     }
-    
-    
+
+
     /**
      * Fetch and return a row of data (it uses driver->fetchInto for that)
      * @param int $fetchmode  format of fetched row
@@ -174,7 +174,7 @@ class LDAP_result extends DB_result
      * @return  mixed  DB_OK on success, NULL on no more rows or
      *                 a DB_Error object on error
      *
-     * @access public     
+     * @access public
      */
 
     function fetchInto(&$ar, $fetchmode = DB_FETCHMODE_DEFAULT, $rownum = null)
@@ -188,7 +188,7 @@ class LDAP_result extends DB_result
         }
         return DB_OK;
     }
-    
+
     /**
      * return all records
      *
@@ -200,7 +200,7 @@ class LDAP_result extends DB_result
      * @return  mixed  DB_OK on success, NULL on no more rows or
      *                 a DB_Error object on error
      *
-     * @access public     
+     * @access public
      */
     function fetchAll($fetchmode = DB_FETCHMODE_DEFAULT, $rownum = null)
     {
@@ -225,13 +225,13 @@ class LDAP_result extends DB_result
     {
         return(strcmp(strtolower($this->_recordset[$a][$this->dbh->sorting]), strtolower($this->_recordset[$b][$this->dbh->sorting])));
     }
-  
+
     /**
      * Get the number of rows in a result set.
      *
      * @return int the number of rows, or a DB error
      *
-     * @access public     
+     * @access public
      */
     function numRows()
     {
@@ -244,7 +244,7 @@ class LDAP_result extends DB_result
      *
      * @return bool true if a new result is available or false if not.
      *
-     * @access public     
+     * @access public
      */
     function nextResult()
     {
@@ -255,7 +255,7 @@ class LDAP_result extends DB_result
      * Frees the resources allocated for this result set.
      * @return  int     error code
      *
-     * @access public     
+     * @access public
      */
     function free()
     {
@@ -277,7 +277,7 @@ class LDAP_result extends DB_result
     /**
     * returns the actual rows number
     * @return integer
-    */    
+    */
     function getRowCounter()
     {
         $this->getRows();
@@ -299,7 +299,7 @@ class LDAP_result extends DB_result
 class DB_ldap extends DB_common
 {
     // {{{ properties
-    
+
     /**
      * LDAP connection
      * @access private
@@ -582,7 +582,7 @@ class DB_ldap extends DB_common
         $this->limit_count = $count;
         return $query;
     }
-    
+
     /**
      * Executes a query returning only a specified number of rows
      *
@@ -703,7 +703,7 @@ class DB_ldap extends DB_common
         $this->q_params = $params;
         return(parent::getAssoc($query, $force_array, $data, $fetchmode, $group));
     }
-    
+
     /**
      * Fetch all the rows returned from a query.
      *
@@ -726,7 +726,7 @@ class DB_ldap extends DB_common
         $this->q_params = $params;
         return(parent::getAll($query, $data, $fetchmode));
     }
-    
+
     function numRows($result)
     {
         return $result->numRows();
@@ -834,7 +834,7 @@ class DB_ldap extends DB_common
                 }
             }
         } while ($repeat);
-        
+
         if (DB::isError($data)) {
             return $data;
         }

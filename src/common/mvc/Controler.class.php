@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Copyright 2005, STMicroelectronics
  *
  * Originally written by Manuel Vacelet
@@ -57,7 +57,7 @@ class Controler {
 
     if($this->action)
       $this->actionsManagement();
-    
+
     return $this->viewsManagement();
   }
 

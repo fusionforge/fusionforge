@@ -22,7 +22,7 @@
 //
 // $Id: Pager.php 8075 2011-05-18 16:10:53Z vargenau $
 ///
-// Based on DB_Pager 0.7 from the pear.php.net repository. 
+// Based on DB_Pager 0.7 from the pear.php.net repository.
 // The only modifications made have been modification of the include paths.
 //
 // From Pear CVS: Id: Pager.php,v 1.3 2002/05/12 13:59:40 cox Exp

@@ -40,20 +40,20 @@ ON user_metric_history(month,day,user_id);
 	The process starts with a seed group of users who are "trusted"
 		to rate others
 
-	After you are rated N times highly by other users, you can become trusted 
+	After you are rated N times highly by other users, you can become trusted
 		and your ratings of others will begin to count
 
-	Your rating is affected by how many times you are rated by others and 
+	Your rating is affected by how many times you are rated by others and
 		how highly they rate you and how highly rated they are
 
-	How highly rated they are is affected by how many times they're rated 
+	How highly rated they are is affected by how many times they're rated
 		and how highly rated they are and so on up the chain
 
 	For now, this process will run 8 times to get the calculations refined
 		As more users are added, it may have to be run more
 
-	Because of this circular dependency, the numbers are never "right", but 
-		after a few runs, they should be refined "enough" to give us 
+	Because of this circular dependency, the numbers are never "right", but
+		after a few runs, they should be refined "enough" to give us
 		what we want - a list of the top users on the site.
 
 */
@@ -83,10 +83,10 @@ foreach(RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin',forg
 db_query_params ('UPDATE user_metric0 SET ranking=ranking-1',
 			array()) ;
 
-db_query_params ('UPDATE user_metric0 SET metric=(log(times_ranked::float)*avg_rating::float)::float, percentile=(100-(100*((ranking::float-1)/(select count(*) from user_metric0))))::float', 
+db_query_params ('UPDATE user_metric0 SET metric=(log(times_ranked::float)*avg_rating::float)::float, percentile=(100-(100*((ranking::float-1)/(select count(*) from user_metric0))))::float',
 		 array());
 $err .= db_error();
-db_query_params ('UPDATE user_metric0 SET importance_factor=(1+((percentile::float/100)*.5))::float', 
+db_query_params ('UPDATE user_metric0 SET importance_factor=(1+((percentile::float/100)*.5))::float',
 		 array()) ;
 $err .= db_error();
 
@@ -104,7 +104,7 @@ for ($i=1; $i<9; $i++) {
 	db_drop_table_if_exists ("user_metric_next");
 
 	$res = db_query_params ('CREATE TEMPORARY TABLE user_metric_tmp_next (
-		user_id int not null default 0, 
+		user_id int not null default 0,
 		times_ranked float(8) null default 0,
 		avg_raters_importance float(8) not null default 0,
 		avg_rating float(8) not null default 0,
@@ -130,7 +130,7 @@ for ($i=1; $i<9; $i++) {
 	if (!$res) {
 		$err .= "Error in round $i inserting average ratings: " . db_error();
 		exit;
-		
+
 	}
 
 	/*
@@ -144,7 +144,7 @@ for ($i=1; $i<9; $i++) {
 	if (!$res) {
 		$err .= "Error in round $i calculating metric: " . db_error();
 		exit;
-		
+
 	}
 
 	$res = db_query_params ('DELETE FROM user_metric_tmp_next WHERE metric < $1',
@@ -152,19 +152,19 @@ for ($i=1; $i<9; $i++) {
 	if (!$res) {
                 $err .= "Error in round $i deleting < threshhold ids: " . db_error();
                 exit;
-                
+
         }
 
 	/*
-		Now we need to carry forward trusted IDs from the last round into this 
-		Round, as prior round people may not have been ranked enough times by 
+		Now we need to carry forward trusted IDs from the last round into this
+		Round, as prior round people may not have been ranked enough times by
 		new people in this round to stay in
 	*/
 
 	$res = db_query_params ('INSERT INTO user_metric_tmp_next
 		SELECT user_id,times_ranked,avg_raters_importance,avg_rating,metric
 		FROM user_metric_cur
-		WHERE NOT EXISTS 
+		WHERE NOT EXISTS
 		(SELECT user_id FROM user_metric_tmp_next
 		WHERE user_metric_tmp_next.user_id=user_metric_cur.user_id)',
 				array ()) ;

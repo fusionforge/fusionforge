@@ -90,7 +90,7 @@ function check_logo ($arr, $a_id=false) {
 		unlink ($arr['tmp_name']) ;
 	}
 	return $logo ;
-}	
+}
 
 // Get and validate parameters, error if tampered with
 switch ($action) {
@@ -107,13 +107,13 @@ case 'edit_role':
 case 'del_role':
 	$role_id = getIntFromRequest ('role_id') ;
 	check_role_id ($role_id) ;
-	break ;	
+	break ;
 case 'post_edit_role':
 	$role_id = getIntFromRequest ('role_id') ;
 	check_role_id ($role_id) ;
 	$name = getStringFromRequest ('role_name') ;
 	$desc = getStringFromRequest ('role_desc') ;
-	break ;	
+	break ;
 
 case 'add_structure':
 	break ;
@@ -125,13 +125,13 @@ case 'edit_structure':
 case 'del_structure':
 	$structure_id = getIntFromRequest ('structure_id') ;
 	check_structure_id ($structure_id) ;
-	break ;	
+	break ;
 case 'post_edit_structure':
 	$structure_id = getIntFromRequest ('structure_id') ;
 	check_structure_id ($structure_id) ;
 	$name = getStringFromRequest ('structure_name') ;
 	$desc = getStringFromRequest ('structure_desc') ;
-	break ;	
+	break ;
 
 case 'add_actor':
 	break ;
@@ -149,7 +149,7 @@ case 'edit_actor':
 case 'del_actor':
 	$actor_id = getIntFromRequest ('actor_id') ;
 	check_actor_id ($actor_id) ;
-	break ;	
+	break ;
 case 'post_edit_actor':
 	$actor_id = getIntFromRequest ('actor_id') ;
 	check_actor_id ($actor_id) ;
@@ -161,10 +161,10 @@ case 'post_edit_actor':
 	$logo = check_logo ($logoarr, $actor_id) ;
 	$structure_id = getIntFromRequest ('structure_id') ;
 	check_structure_id ($structure_id) ;
-	break ;	
+	break ;
 
 }
-	
+
 // Do the required action
 
 switch ($action) {
@@ -293,7 +293,7 @@ case 'display':
 			} else {
 		print _("No legal structures yet, can't define actors without them.") ;
 	}
-	
+
 	print '<h1>'._('Existing legal structures').'</h1>' ;
 	$structs = $plugin->getLegalStructures () ;
 	if (count ($structs)) {
@@ -319,7 +319,7 @@ case 'display':
 					 </td>
 					 <?php
 					 print '</tr>';
-		}	
+		}
 		print '</tbody></table>' ;
 	} else {
 		print _('No legal structures currently defined.') ;
@@ -358,7 +358,7 @@ case 'display':
 					 </td>
 					 <?php
 					 print '</tr>';
-		}	
+		}
 		print '</tbody></table>' ;
 	} else {
 		print _('No roles currently defined.') ;
@@ -389,7 +389,7 @@ case 'add_role':
 case 'edit_role':
 	print '<h1>'._('Edit a role').'</h1>' ;
 	$role = new ContribTrackerRole ($role_id) ;
-	
+
 	?>
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
 			 <input type="hidden" name="action" value="post_edit_role" />
@@ -417,7 +417,7 @@ case 'add_structure':
 case 'edit_structure':
 	print '<h1>'._('Edit a legal structure').'</h1>' ;
 	$structure = new ContribTrackerLegalStructure ($structure_id) ;
-	
+
 	?>
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
 			 <input type="hidden" name="action" value="post_edit_structure" />
@@ -458,7 +458,7 @@ case 'add_actor':
 case 'edit_actor':
 	print '<h1>'._('Edit an actor').'</h1>' ;
 	$actor = new ContribTrackerActor ($actor_id) ;
-	
+
 	?>
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post" enctype="multipart/form-data">
 			 <input type="hidden" name="action" value="post_edit_actor" />

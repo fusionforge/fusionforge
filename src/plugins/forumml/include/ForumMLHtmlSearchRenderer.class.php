@@ -6,7 +6,7 @@
  *
  * @version $Id: NewsHtmlSearchRenderer.class,v 1.1 2004/10/16 16:36:31 gsmet Exp $
  */
-global $gfwww,$gfcommon; 
+global $gfwww,$gfcommon;
 require_once 'preplugins.php';
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 require_once(dirname(__FILE__).'/../include/ForumML_HTMLPurifier.class.php');
@@ -32,11 +32,11 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
                 $searchQuery = new ForumMLSearchQuery($words, $offset, $isExact, $groupId);
 
                 //init the searchrendererr
-                $this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_LIST, $words, $isExact, 
+                $this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_LIST, $words, $isExact,
                                 $searchQuery, $groupId, 'list');
 
                // $this->tableHeaders = array(_('Thread'),_('Submitted on'), _('Author'));
-                
+
 
 
         }
@@ -88,7 +88,7 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
                         }
                         $from = mb_decode_mimeheader($header[1]);
 
-                        // Replace '<' by '&lt;' and '>' by '&gt;'. Otherwise the email adress won't be displayed 
+                        // Replace '<' by '&lt;' and '>' by '&gt;'. Otherwise the email adress won't be displayed
                         // because it will be considered as an xhtml tag.
                         $from = preg_replace('/\</', '&lt;', $from);
                         $from = preg_replace('/\>/', '&gt;', $from);
@@ -97,13 +97,13 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
                         $hp =& ForumML_HTMLPurifier::instance();
                         $subject = $hp->purify($subject,CODENDI_PURIFIER_FORUMML);
 
-                        // display the resulting threads in rows 
+                        // display the resulting threads in rows
                         $return .= "<tr class='".$class."'>
                                 <td class='subject'>
                                 &nbsp;<img src='".$p->getThemePath()."/images/ic/comment.png'/>
-                                <a href='/plugins/forumml/message.php?group_id=".$this->groupId."&topic=".$rows['id_message']."&list=".$rows['id_list']."'><b>".$subject."</b></a>                                            
+                                <a href='/plugins/forumml/message.php?group_id=".$this->groupId."&topic=".$rows['id_message']."&list=".$rows['id_list']."'><b>".$subject."</b></a>
                                 </td>
-                                <td>                                            
+                                <td>
                                 <font class='info'>".$date."</font>
                                 </td>
                                 <td>

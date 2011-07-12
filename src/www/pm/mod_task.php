@@ -110,7 +110,7 @@ echo notepad_func();
 	<tr>
 		<td colspan="3">
 		<strong><?php echo _('Original Comment') ?>:</strong><br />
-		<?php 
+		<?php
 			$sanitizer = new TextSanitizer();
         	$body = $sanitizer->SanitizeHtml($pt->getDetails());
 
@@ -287,9 +287,9 @@ echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 		<td>&nbsp;</td>
 		<td style="text-align:center"><input type="submit" name="add" value="'._('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
 	</tr>';
-	
+
 //setenv("TZ=" . $user_timezone); //restore the user's timezone
-	
+
 //
 //	Display Time Recorded for this task
 //
@@ -297,7 +297,7 @@ echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 
 $res=db_query_params ('SELECT users.realname, rep_time_tracking.report_date, rep_time_tracking.hours, rep_time_category.category_name
 	FROM users,rep_time_tracking,rep_time_category
-	WHERE 
+	WHERE
 	users.user_id=rep_time_tracking.user_id
 	AND rep_time_tracking.time_code=rep_time_category.time_code
 	AND rep_time_tracking.project_task_id=$1',
@@ -314,7 +314,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	<td>'.db_result($res,$i,'realname').'</td>
 	<td>&nbsp;</td></tr>';
 	$total_hours += db_result($res,$i,'hours');
-	
+
 }
 
 echo '

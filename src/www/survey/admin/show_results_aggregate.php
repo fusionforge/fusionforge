@@ -100,8 +100,8 @@ for ($i=0; $i<$count; $i++) {
 		$q_num++;
 
 	}
-	
-	if ($question_type == "1") { // This is a radio-button question. Values 1-5.	
+
+	if ($question_type == "1") { // This is a radio-button question. Values 1-5.
 		// Show the 1-5 markers only if this is the first in a series
 
 		if ($question_type != $last_question_type) {

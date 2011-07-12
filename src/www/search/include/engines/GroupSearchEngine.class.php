@@ -1,6 +1,6 @@
 <?php
 /**
- * Search Engine 
+ * Search Engine
  *
  * Copyright 2004, Guillaume Smet
  *
@@ -24,11 +24,11 @@ require_once $gfwww.'search/include/engines/SearchEngine.class.php';
 
 class GroupSearchEngine extends GFSearchEngine {
 	var $Group;
-	
+
 	function GroupSearchEngine($type, $rendererClassName, $label) {
 		$this->GFSearchEngine($type, $rendererClassName, $label);
 	}
-	
+
 	function isAvailable($parameters) {
 		if(isset($parameters[SEARCH__PARAMETER_GROUP_ID]) && $parameters[SEARCH__PARAMETER_GROUP_ID]) {
 			$Group = group_get_object($parameters[SEARCH__PARAMETER_GROUP_ID]);
@@ -39,7 +39,7 @@ class GroupSearchEngine extends GFSearchEngine {
 		}
 		return false;
 	}
-	
+
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		$this->includeSearchRenderer();
 		$rendererClassName = $this->rendererClassName;

@@ -37,7 +37,7 @@ $err='';
 //
 $res = db_query_params ('VACUUM FULL ANALYZE;',
 			array()) ;
-			 
+
 
 if (!$res) {
 	$err .= "Error on DB1: " . db_error();

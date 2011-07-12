@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  *
- * 
+ *
  */
 
 
@@ -28,10 +28,10 @@
  */
 abstract class SystemEvent {
 
-  const PRIORITY_MEDIUM = 2; 
-  const STATUS_NEW= 1; 
-  const STATUS_RUNNING= 2; 
-  const STATUS_DONE= 3; 
+  const PRIORITY_MEDIUM = 2;
+  const STATUS_NEW= 1;
+  const STATUS_RUNNING= 2;
+  const STATUS_DONE= 3;
 }
 
 ?>

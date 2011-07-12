@@ -96,7 +96,7 @@ else
   $login_url .= "?";
 if ( ! empty ( $login_return_path ) )
   $login_url .= "return_path=$login_return_path";
- 
+
 
 if ( empty ( $session_not_found ) )
   $session_not_found = false;

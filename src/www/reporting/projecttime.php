@@ -78,7 +78,7 @@ $a2[]='user';
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
-<?php 
+<?php
 	if ($g_id && $typ=='r') {
 		$report=new ReportProjectTime($g_id,$type,$start,$end);
 

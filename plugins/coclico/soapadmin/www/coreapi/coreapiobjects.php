@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * getSCMData_soap
  */

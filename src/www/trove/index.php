@@ -55,7 +55,7 @@ if($filter) {
 
 	// check and clean the array
 	$filterArray = explode(',', $filter);
-	$cleanArray = array();	
+	$cleanArray = array();
 	$count = max(6, sizeof($filterArray));
 	for ($i = 0; $i < $count; $i++) {
 		if(is_numeric($filterArray[$i]) && $filterArray[$i] != 0) {
@@ -65,9 +65,9 @@ if($filter) {
 	$filterArray = array_unique($cleanArray);
 	if(!empty($filterArray)) {
 		$filterCategories = TroveCategoryFactory::getCategories($filterArray);
-	
+
 		echo '<p><span style="color:red;">'._('Limiting View').'</span>';
-		
+
 		for($i=0, $count = sizeof($filterCategories); $i < $count; $i++) {
 			$filterCategory =& $filterCategories[$i];
 			echo '<br /> &nbsp; &nbsp; &nbsp; '
@@ -76,10 +76,10 @@ if($filter) {
 				.getFilterUrl($filterArray, $filterCategory->getId()).'">['._('Remove Filter').']'
 				.'</a>';
 		}
-	
+
 		echo '</p><hr />';
 	}
-	
+
 	$category->setFilter($filterArray);
 }
 
@@ -95,14 +95,14 @@ if($filter) {
 			echo _('Browse By').':';
 			for($i = 0, $count = sizeof($rootCategories); $i < $count; $i++) {
 				$rootCategory =& $rootCategories[$i];
-				
+
 				// print open folder if current, otherwise closed
 				// also make anchor if not current
 
 				echo '<br />';
 				if (($rootCategory->getId() == $category->getRootParentId())
 					|| ($rootCategory->getId() == $category->getId())) {
-					
+
 					echo html_image('ic/ofolder15.png','15','13',array());
 					echo '&nbsp; <strong>'.$rootCategory->getLocalizedLabel().'</strong>';
 				} else {
@@ -136,14 +136,14 @@ if($filter) {
 				}
 				echo '<br />';
 			}
-			
+
 			$childrenCategories =& $category->getChildren();
-			
+
 			$currentIndent .= str_repeat(' &nbsp; ', sizeof($parentCategories) * 2);
-			
+
 			for($i = 0, $count = sizeof($childrenCategories); $i < $count; $i++) {
 				$childCategory =& $childrenCategories[$i];
-				
+
 				echo $currentIndent;
 				echo '<a href="?form_cat='.$childCategory->getId().@$discrim_url.'">';
 				echo html_image('ic/cfolder15.png', '15', '13', array());

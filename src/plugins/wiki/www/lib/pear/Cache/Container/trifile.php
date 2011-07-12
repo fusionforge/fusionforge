@@ -46,14 +46,14 @@ class Cache_Container_trifile extends Cache_Container_file {
         $file = $this->getFilename($id, $group);
         if (!file_exists($file))
             return array(NULL, NULL, NULL);
-        
+
         return array(
                 file_get_contents($this->_getExpFile($file)),
                 file_get_contents($file),
                 file_get_contents($this->_getUDFile($file))
         );
     }
-    
+
     /**
      * Get the file to store cache data in.
      *
@@ -66,7 +66,7 @@ class Cache_Container_trifile extends Cache_Container_file {
         $file = basename($file);
         return $dir.'/.'.$file;
     }
-    
+
     /**
      * Get the file to store expiration data in.
      *
@@ -77,7 +77,7 @@ class Cache_Container_trifile extends Cache_Container_file {
     {
         return $this->_getFile($file).'.exp';
     }
-    
+
     /**
      * Get the file to store user data in.
      *
@@ -88,7 +88,7 @@ class Cache_Container_trifile extends Cache_Container_file {
     {
         return $this->_getFile($file).'.dat';
     }
-    
+
     /**
      * Cache file
      *
@@ -128,17 +128,17 @@ class Cache_Container_trifile extends Cache_Container_file {
         // Save data
         if (!($fh = @fopen($file, 'wb')))
             return new Cache_Error("Can't access '$file' to store cache data. Check access rights and path.", __FILE__, __LINE__);
-        
+
         if ($this->fileLocking) {
             flock($fh, LOCK_EX);
         }
-        
+
         fwrite($fh, $data);
-        
+
         if($this->fileLocking) {
             flock($fh, LOCK_UN);
         }
-        
+
         fclose($fh);
         return true;
     }

@@ -31,7 +31,7 @@ require_once $gfwww.'search/include/renderers/FrsHtmlSearchRenderer.class.php';
 require_once $gfwww.'search/include/renderers/NewsHtmlSearchRenderer.class.php';
 
 class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
-	
+
 	/**
 	 * group id
 	 *
@@ -43,7 +43,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * the words to search for
 	 *
 	 * @var string $words
-	 */	
+	 */
 	var $words;
 
 	/**
@@ -52,7 +52,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @var boolean $isExact
 	 */
 	var $isExact;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -66,10 +66,10 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->groupId = $groupId;
 		$this->words = $words;
 		$this->isExact = $isExact;
-		
+
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, '', $groupId);
 	}
-	
+
 	/**
 	 * flush - overwrites the flush method from htmlrenderer
 	 */
@@ -86,10 +86,10 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		site_project_header(array('title' => $title, 'group' => $this->groupId, 'toptab' => ''));
 		echo $this->getResult();
 	}
-	
+
 	/**
 	 * getResult - returns the Body of the output
-	 * 
+	 *
   	 * @return string result of all selected searches
 	 */
 	function getResult() {
@@ -150,13 +150,13 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$plugin = plugin_manager_get_object();
 		$html .= $plugin->getReturnedValue('full_search_engines');
 
-/*		
+/*
 		$renderer = new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		$html .= $this->getPartResult($renderer, 'short_forum', _('Forum Search Results'));
-		
+
 		$renderer = new TrackersHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		$html .= $this->getPartResult($renderer,  'short_tracker', _('Tracker Search Results'));
-		
+
 		$renderer = new TasksHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		$html .= $this->getPartResult($renderer, 'short_pm', _('Task Search Results'));
 
@@ -165,32 +165,32 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$renderer = new FrsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		$html .= $this->getPartResult($renderer, 'short_files', _('Files Search Results'));
-		
+
 		$renderer = new NewsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		$html .= $this->getPartResult($renderer, 'short_news', _('News Search Results'));
 */
 
-		return $html.'<br />'; 
+		return $html.'<br />';
 	}
 
 	/**
-	* getPartResult - returns the result of the given renderer 
-	* 
+	* getPartResult - returns the result of the given renderer
+	*
   	* @return string result of the renderer
-	*/			
+	*/
 	function getPartResult($renderer, $section, $title='') {
 		$result = '';
 		$renderer->searchQuery->executeQuery();
-		
+
 		if ($title === '')
 			$title = $section;
-		
+
 		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
-		
+
 		if ($renderer->searchQuery->getRowsCount() > 0) {
 			$result .= $GLOBALS['HTML']->listTabletop($renderer->tableHeaders);
-			$result .= $renderer->getRows();			
-			$result .= $GLOBALS['HTML']->listTableBottom();			
+			$result .= $renderer->getRows();
+			$result .= $GLOBALS['HTML']->listTableBottom();
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
 			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> - No sections available (check your permissions)'), $this->words).'</p>';
 		} else {

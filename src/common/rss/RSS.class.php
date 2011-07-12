@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  *
- * 
+ *
  */
 
 class RSS {
@@ -28,11 +28,11 @@ class RSS {
         $this->channel = $channel;
         $this->items   = array();
     }
-    
+
     function addItem($item) {
         $this->items[] = $item;
     }
-    
+
     function display() {
         $channel_elements   = array('title', 'description', 'link', 'language', 'rating', 'image', 'textinput', 'copyright', 'pubDate', 'lastBuildDate', 'docs', 'managingEditor', 'webMaster', 'skipHours', 'skipDays');
         $image_elements     = array('title', 'description', 'link', 'url', 'width', 'height');

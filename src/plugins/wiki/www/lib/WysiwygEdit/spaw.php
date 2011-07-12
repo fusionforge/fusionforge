@@ -35,7 +35,7 @@ class WysiwygEdit_spaw extends WysiwygEdit {
               $width='100%',              // width
               $height='300px',            // height
               $css_stylesheet='',         // css stylesheet file for content
-              $dropdown_data=''           // data for dropdowns (style, font, etc.) 
+              $dropdown_data=''           // data for dropdowns (style, font, etc.)
         */
         $this->SPAW = new SPAW_Wysiwyg($id, $textarea->_content);
         $textarea->SetAttr('id', $name);

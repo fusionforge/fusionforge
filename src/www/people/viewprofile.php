@@ -63,9 +63,9 @@ if ($user_id && is_numeric($user_id)) {
 		<strong>'._('Skills profile for').' : </strong>'. db_result($result,0,'realname') .
         ' ('.db_result($result, 0, 'user_name') .
         ')<br /><br /></p> <table border="0" width="100%">';
-        
+
         displayUserSkills($user_id, 0);
-        		
+
 		echo '</table>';
 	}
 

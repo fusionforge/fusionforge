@@ -87,7 +87,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	function writeFooter() {
 		$GLOBALS['HTML']->footer(array());
 	}
-	
+
 	/**
 	 * getResults - get the html output which will display the search results
 	 *
@@ -96,7 +96,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	function writeResults() {
 		$searchQuery =& $this->searchQuery;
 		$query =& $this->query;
-		
+
 		$html = '<h2>'.sprintf(_('Search results for <em>%1$s</em>'), $query['words']).'</h2>';
 		if(!$searchQuery->getResult() || $searchQuery->getRowsCount() < 1) {
 			$html .= '<p><strong>'.sprintf(_('No matches found for <em>%1$s</em>'), $query['words']).'</strong></p>';
@@ -106,11 +106,11 @@ class HtmlSearchRenderer extends SearchRenderer {
 			$html .= $this->getRows();
 			$html .= $GLOBALS['HTML']->listTableBottom();
 		}
-		
+
 		if($searchQuery->getRowsCount() > 0 && ($searchQuery->getRowsTotalCount() > $searchQuery->getRowsCount() || $searchQuery->getOffset() != 0 )) {
 			$html .= $this->getNavigationPanel();
 		}
-		
+
 		return $html;
 	}
 
@@ -118,10 +118,10 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * getNavigationPanel - get the html output for the navigation panel
 	 *
 	 * @return string html output
-	 */ 
+	 */
 	function getNavigationPanel() {
 		$searchQuery =& $this->searchQuery;
-		
+
 		$html = '<br />';
 		$html .= '<table class="tablecontent" width="100%" cellpadding="5" cellspacing="0">';
 		$html .= '<tr>';
@@ -145,7 +145,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$html .= '</table>';
 		return $html;
 	}
-	
+
 	/**
 	 * getPreviousResultsUrl - get the url to go to see the previous results
 	 *
@@ -154,14 +154,14 @@ class HtmlSearchRenderer extends SearchRenderer {
 	function getPreviousResultsUrl() {
 		$offset = $this->searchQuery->getOffset() - $this->searchQuery->getRowsPerPage();
 		$query =& $this->query;
-		
+
 		$url = '/search/?type='.$query['typeOfSearch'].'&amp;exact='.$query['isExact'].'&amp;q='.urlencode($query['words']);
 		if($offset > 0) {
 			$url .= '&amp;offset='.$offset;
 		}
 		return $url;
 	}
-	
+
 	/**
 	 * getNextResultsUrl - get the url to go to see the next results
 	 *

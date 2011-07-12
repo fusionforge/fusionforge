@@ -45,8 +45,8 @@ $err .= "\n\nBeginning stats_agg_logo_by_day ".date('Ymd H:i:s',time());
 $rel = db_query_params ('DELETE FROM stats_agg_logo_by_day WHERE day=$1',
 			array ($yesterday_formatted));
 $err .= db_error();
-$rel = db_query_params ('INSERT INTO stats_agg_logo_by_day 
-	SELECT day, count(*) 
+$rel = db_query_params ('INSERT INTO stats_agg_logo_by_day
+	SELECT day, count(*)
 	FROM activity_log WHERE type=0 AND day=$1 GROUP BY day',
 			array ($yesterday_formatted));
 $err .= db_error();

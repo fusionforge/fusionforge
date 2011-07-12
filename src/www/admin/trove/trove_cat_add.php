@@ -34,7 +34,7 @@ if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest("form_key"))) {
 		exit_form_double_submit();
 	}
-	
+
 	$form_parent = getIntFromRequest('form_parent');
 	$form_shortname = getStringFromRequest('form_shortname');
 	$form_fullname = getStringFromRequest('form_fullname');
@@ -44,7 +44,7 @@ if (getStringFromRequest('submit')) {
 
 	if ($form_shortname && $form_fullname) {
 		$res = db_query_params ('
-			INSERT INTO trove_cat 
+			INSERT INTO trove_cat
 				(shortname,fullname,description,parent,version,root_parent)
 			VALUES (
 				$1,
@@ -74,7 +74,7 @@ if (getStringFromRequest('submit')) {
 	} else {
 		$error_msg = 'Missing category short name or full name';
 	}
-} 
+}
 
 site_admin_header(array('title'=>_('Add New Trove Category')));
 ?>

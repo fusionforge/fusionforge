@@ -34,9 +34,9 @@ require_once $GLOBALS['gfcommon'].'include/User.class.php';
  */
 class AuthOpenIDPlugin extends ForgeAuthPlugin {
 	var $openid;
-	
+
 	var $openid_identity;
-	
+
 	function AuthOpenIDPlugin () {
 		global $gfconfig;
 		$this->ForgeAuthPlugin() ;
@@ -55,9 +55,9 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		$this->saved_user = NULL;
 
 		$this->openid = FALSE;
-		
+
 		$this->openid_identity = FALSE;
-		
+
 		$this->declareConfigVars();
 	}
 
@@ -78,11 +78,11 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		$result .= '<p>';
 		$result .= _('Cookies must be enabled past this point.');
 		$result .= '</p>';
-		
+
 		$result .= '<form action="' . util_make_url('/plugins/authopenid/post-login.php') . '" method="post">
 <input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
-Your OpenID identifier: <input type="text" name="openid_identifier" /> 
+Your OpenID identifier: <input type="text" name="openid_identifier" />
 <input type="submit" name="login" value="' . _('Login via OpenID') . '" />
 </form>';
 
@@ -94,7 +94,7 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 	 * Is there a valid session?
 	 * @param unknown_type $params
 	 */
-	
+
 	function checkAuthSession(&$params) {
 		$this->saved_user = NULL;
 		$user = NULL;
@@ -114,12 +114,12 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 				}
 			}
 		}
-		
+
 		if ($user) {
 			if ($this->isSufficient()) {
 				$this->saved_user = $user;
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-				
+
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}
@@ -157,8 +157,8 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 	 */
 	protected function declareConfigVars() {
 		parent::declareConfigVars();
-		
-		// Change vs default 
+
+		// Change vs default
 		forge_define_config_item ('required', $this->name, 'no');
 		forge_set_config_item_bool ('required', $this->name) ;
 
@@ -166,7 +166,7 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 		forge_define_config_item ('sufficient', $this->name, 'no');
 		forge_set_config_item_bool ('sufficient', $this->name) ;
 	}
-	
+
 	/**
 	 * Displays link to OpenID identities management tab in user's page ('usermenu' hook)
 	 * @param unknown_type $params
@@ -176,7 +176,7 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 		$text = $this->text; // this is what shows in the tab
 		if ($G_SESSION->usesPlugin($this->name)) {
 			//$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we�re calling is the user one
-			echo $HTML->PrintSubMenu (array ($text), array ('/plugins/authopenid/index.php'), array(_('coin pan')));				
+			echo $HTML->PrintSubMenu (array ($text), array ('/plugins/authopenid/index.php'), array(_('coin pan')));
 		}
 	}
 }

@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -33,7 +33,7 @@ class ArchPlugin extends SCMPlugin {
 
 		$this->register () ;
 	}
-	
+
 	function getDefaultServer() {
 		return forge_get_config('default_server', 'scmarch') ;
 	}
@@ -47,7 +47,7 @@ class ArchPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-				
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
@@ -77,7 +77,7 @@ class ArchPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		$group_name = $project->getUnixName() ;
 
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();

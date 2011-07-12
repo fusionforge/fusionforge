@@ -163,8 +163,8 @@ function filechecks_getfiletype($filename) {
 		$filetype = "deb";
 	}
 	elseif (preg_match("/\.([a-zA-Z]+)$/",$filename,$regs)) {
-		$filetype = $regs[1];		
-	} 
+		$filetype = $regs[1];
+	}
 
 	if (!$filetype) {
 		exit_error (_('This file does not have a system-recognized filename type.'),'');

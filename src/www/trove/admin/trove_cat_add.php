@@ -34,9 +34,9 @@ if ($GLOBALS['submit']) {
 
 	if ($GLOBALS[form_shortname]) {
 		$res = db_query_params("
-			INSERT INTO trove_cat 
+			INSERT INTO trove_cat
 				(shortname,fullname,description,parent,version,root_parent)
-			VALUES ($1, $2, $3, $4, $5, $6)", 
+			VALUES ($1, $2, $3, $4, $5, $6)",
 			array(htmlspecialchars($form_shortname),
 				htmlspecialchars($form_fullname),
 				htmlspecialchars($form_description),
@@ -48,13 +48,13 @@ if ($GLOBALS['submit']) {
 		if (!$res || db_affected_rows($res)<1) {
 			exit_error( _('Error in Trove operation: ').db_error(),'');
 		}
-	} 
+	}
 
 	// update full paths now
         trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
 
 	session_redirect("/admin/trove/trove_cat_list.php");
-} 
+}
 
 site_admin_header(array('title'=>_('Site Admin: Trove - Add Node')));
 ?>

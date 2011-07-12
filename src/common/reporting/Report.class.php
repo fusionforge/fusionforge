@@ -115,7 +115,7 @@ function setDates($result,$column) {
 	} else {
 	    $format = 'M d';
 	}
-	
+
 	for ($i=0; $i<count($arr); $i++) {
 		$this->labels[$i] = date($format,$arr[$i]);
 	}

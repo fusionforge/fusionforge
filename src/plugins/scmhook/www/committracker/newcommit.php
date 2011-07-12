@@ -63,7 +63,7 @@ foreach ($SubmittedVars as $SubmittedVar) {
 function parseConfig(&$Config)
 {
 	$repos_path = forge_get_config ('repos_path', 'scmsvn') ;
-	
+
 	$Result = array();
 	$Result['check'] = true;
 	$Repository = $Config['Repository'];
@@ -73,7 +73,7 @@ function parseConfig(&$Config)
 		$repos_path.='/';
 	}
 	$repo_root = substr($Repository,0,strrpos($Repository,"/") + 1); //we get the directory of the repository root (with trailing slash)
-	
+
 	if(fileinode($repos_path) == fileinode($repo_root)) { // since the $repos_path is usually $sys_svnroot, and that one is a symlink, we check that the inode is the same for both
 		$GroupName = substr($Repository, strrpos($Repository,"/") + 1);
 		$Config['FileName'] = substr($Config['FileName'],strlen($Repository)); //get only the filename relative to the repo
@@ -81,12 +81,12 @@ function parseConfig(&$Config)
 		$GroupName = $Repository;
 		$Config['FileName'] = $Config['FileName'];
 	}
-	
+
 	if($svn_tracker_debug) {
 		echo "GroupName = ".$GroupName."\n";
 		echo "SVNRootPath = ".$repos_path."\n";
 	}
-	
+
 	$Result['group']    = group_get_object_by_name($GroupName);
 	$Result['user']     = user_get_object_by_name($UserName);
 	if (!$Result['group'] || !is_object($Result['group']) ||
@@ -121,8 +121,8 @@ function parseConfig(&$Config)
 function addArtifactLog($Config, $GroupId, $Num)
 {
 	$return = array();
-	$Result = db_query_params ('SELECT * FROM artifact,artifact_group_list WHERE 
-artifact.group_artifact_id=artifact_group_list.group_artifact_id 
+	$Result = db_query_params ('SELECT * FROM artifact,artifact_group_list WHERE
+artifact.group_artifact_id=artifact_group_list.group_artifact_id
 AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 				   array ($GroupId,
 					  $Num));
@@ -133,8 +133,8 @@ AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 
 	if ($Rows == 1) {
 		db_begin();
-		$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_artifact 
-(kind, group_artifact_id) VALUES 
+		$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_artifact
+(kind, group_artifact_id) VALUES
 (0, $1)',
 					  array ($Num));
 		$HolderID= db_insertid($DBRes,'plugin_svntracker_data_artifact','id');
@@ -178,7 +178,7 @@ function addTaskLog($Config, $GroupId, $Num)
 {
 	$return = array();
 	$Result = db_query_params ('SELECT * FROM project_task,project_group_list
-WHERE project_task.group_project_id=project_group_list.group_project_id 
+WHERE project_task.group_project_id=project_group_list.group_project_id
 AND project_task.project_task_id=$1
 AND project_group_list.group_id=$2',
 			array ($Num,
@@ -189,8 +189,8 @@ AND project_group_list.group_id=$2',
 	}
 	if ($Rows == 1) {
 		db_begin();
-		$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_artifact 
-(kind, project_task_id) VALUES 
+		$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_artifact
+(kind, project_task_id) VALUES
 (1, $1)',
 			array ($Num));
 		$HolderID= db_insertid($DBRes,'plugin_svntracker_data_artifact','id');
@@ -198,8 +198,8 @@ AND project_group_list.group_id=$2',
 			$return['Error']='Problems with Task $Num: '.db_error();
 			db_rollback();
 		} else {
-			$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_master 
-(holder_id, svn_date, log_text, file, prev_version, 
+			$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_master
+(holder_id, svn_date, log_text, file, prev_version,
 actual_version, author)
 VALUES ($1, $2, $3, $4, $5, $6, $7)',
 
@@ -229,7 +229,7 @@ foreach ($Configs as $Config) {
 	if ($Result['check'] == false) {
 		exit_error('Check_error', $Result['error']);
 	}
-	
+
 	if (!is_null($Config['ArtifactNumbers'])) {
 		foreach ($Config['ArtifactNumbers'] as $Num)
 		{
@@ -239,7 +239,7 @@ foreach ($Configs as $Config) {
 			}
 		}
 	}
-	
+
 	if (!is_null($Config['TaskNumbers'])) {
 		foreach ($Config['TaskNumbers'] as $Num)
 		{
@@ -248,7 +248,7 @@ foreach ($Configs as $Config) {
 				exit_error('Adding TaskNumber',$AddResult['Error']);
 			}
 		}
-	}	
+	}
 }
 
 

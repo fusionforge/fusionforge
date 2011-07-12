@@ -40,7 +40,7 @@ if (!$res) {		// error, the field doesn't exist
 		echo db_error();
 		exit(16);
 	}
-} 
+}
 
 //
 //  Set up this script to run as the site admin
@@ -129,7 +129,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			exit(5);
 		}
 		$res2=db_query_params ('INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
-			SELECT artifact_id,$efe_id,$catbox_id FROM artifact 
+			SELECT artifact_id,$efe_id,$catbox_id FROM artifact
 			WHERE category_id=$1 AND group_artifact_id=$2',
 			array($cat_id,
 			$gaid)) ;
@@ -192,7 +192,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			exit(9);
 		}
 		$res2=db_query_params ('INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
-			SELECT artifact_id,$efe_id,$groupbox_id FROM artifact 
+			SELECT artifact_id,$efe_id,$groupbox_id FROM artifact
 			WHERE artifact_group_id=$1 AND group_artifact_id=$2',
 			array($artgroup_id,
 			$gaid)) ;
@@ -255,7 +255,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 				exit(13);
 			}
 			$res2=db_query_params ('INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
-				SELECT artifact_id,$efe_id,$resolutionbox_id FROM artifact 
+				SELECT artifact_id,$efe_id,$resolutionbox_id FROM artifact
 				WHERE resolution_id=$1 AND group_artifact_id=$2',
 			array($resolution_id,
 			$gaid)) ;
@@ -266,7 +266,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 				exit(14);
 			}
 			$res3=db_query_params ('UPDATE artifact_history SET old_value=$1,field_name=$2
-				WHERE old_value=$3 AND field_name=$4 AND artifact_id IN 
+				WHERE old_value=$3 AND field_name=$4 AND artifact_id IN
 				(SELECT artifact_id FROM artifact WHERE group_artifact_id=$5)',
 			array($resolution_name,
 			'Resolution',

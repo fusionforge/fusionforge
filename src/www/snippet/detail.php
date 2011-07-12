@@ -46,9 +46,9 @@ if ($type=='snippet') {
 	/*
 		Get all the versions of this snippet
 	*/
-	$result=db_query_params("SELECT users.realname,users.user_name,users.user_id,snippet_version.snippet_version_id,snippet_version.version,snippet_version.post_date,snippet_version.changes 
-FROM snippet_version,users 
-WHERE users.user_id=snippet_version.submitted_by AND snippet_id=$1 
+	$result=db_query_params("SELECT users.realname,users.user_name,users.user_id,snippet_version.snippet_version_id,snippet_version.version,snippet_version.post_date,snippet_version.changes
+FROM snippet_version,users
+WHERE users.user_id=snippet_version.submitted_by AND snippet_id=$1
 ORDER BY snippet_version.snippet_version_id DESC", array($id));
 
 	$rows=db_numrows($result);
@@ -64,19 +64,19 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 		$title_arr[]= _('Date Posted');
 		$title_arr[]= _('Author');
 		$title_arr[]= _('Delete');
-		
+
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		/*
 			get the newest version of this snippet, so we can display its code
 		*/
 		$newest_version=db_result($result,0,'snippet_version_id');
-	
+
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
 				'</td><td>'.
-				util_make_link ('/snippet/download.php?type=snippet&amp;id='.db_result($result,$i,'snippet_version_id'),'<strong>'. db_result($result,$i,'version').'</strong>').'</td><td>'. 
+				util_make_link ('/snippet/download.php?type=snippet&amp;id='.db_result($result,$i,'snippet_version_id'),'<strong>'. db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.
 				'<td style="text-align:center"><a href="'.util_make_url ('/snippet/delete.php?type=snippet&amp;snippet_version_id='.db_result($result,$i,'snippet_version_id')).'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
@@ -97,7 +97,7 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 		show the latest version of this snippet's code
 	*/
 	$result=db_query_params ('SELECT code,version FROM snippet_version WHERE snippet_version_id=$1',
-			array($newest_version));	
+			array($newest_version));
 
 	echo '
 		<p>&nbsp;</p>
@@ -157,7 +157,7 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		/*
-			determine the newest version of this package, 
+			determine the newest version of this package,
 			so we can display the snippets that it contains
 		*/
 		$newest_version=db_result($result,0,'snippet_package_version_id');
@@ -208,7 +208,7 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 	/*
 		Show a specific version of a package and its specific snippet versions
 	*/
-	
+
 	snippet_header(array('title'=>_('Snippet Library')));
 
 	snippet_show_package_details($id);

@@ -34,7 +34,7 @@ if (session_loggedin()) {
 	$filemodule_id = getIntFromRequest('filemodule_id');
 	$start = getIntFromRequest('start');
 	$stop = getIntFromRequest('stop');
-	
+
 	if ($group_id && $filemodule_id) {
 		//
 		//  Set up local objects

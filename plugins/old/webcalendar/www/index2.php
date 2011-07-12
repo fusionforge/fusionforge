@@ -8,23 +8,23 @@ site_project_header(array('title'=>'Webcalendar','group'=>$group_id,'toptab'=>'w
 
 if ($group_id > 5) { // add '> 5' if you won't a calendar for the admin groups
 	$g =& group_get_object($group_id);
-	if (!$g || !is_object($g) || $g->isError()) { 
+	if (!$g || !is_object($g) || $g->isError()) {
 		exit_no_group();
 	} else {
 	$user_id = user_getid() ;
 	$belong =  user_belongs_to_group($user_id,$group_id);
 		if($belong > 0){
-	?>	
-	<iframe src="<?php echo util_make_url('/plugins/webcalendar/login.php?type=group&group_id='.$group_id); ?>" border=no scrolling="yes" width="100%" height="700"></iframe>	
+	?>
+	<iframe src="<?php echo util_make_url('/plugins/webcalendar/login.php?type=group&group_id='.$group_id); ?>" border=no scrolling="yes" width="100%" height="700"></iframe>
 	<?php
 		} else {
-			print _('You are not allowed to see this calendar.');	
-		}	
+			print _('You are not allowed to see this calendar.');
+		}
 
 	}
 } else {
 	print _('No calendar for this group.');
-	//exit_no_group(); 
+	//exit_no_group();
 }
 echo site_project_footer(array());
 
@@ -54,8 +54,8 @@ if( $row[0] < 1) {
 }
 
 
-return $row[0];	
-	
+return $row[0];
+
 }
 
 // Local Variables:

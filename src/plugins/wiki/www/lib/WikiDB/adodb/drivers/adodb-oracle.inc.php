@@ -1,16 +1,16 @@
 <?php
 /*
 V4.22 15 Apr 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
-  Released under both BSD license and Lesser GPL library license. 
-  Whenever there is any discrepancy between the two licenses, 
+  Released under both BSD license and Lesser GPL library license.
+  Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
 
   Latest version is available at http://php.weblogs.com/
-  
+
   Oracle data driver. Requires Oracle client. Works on Windows and Unix and Oracle 7 and 8.
-  
+
   If you are using Oracle 8, use the oci8 driver which is much better and more reliable.
-  
+
 */
 
 class ADODB_oracle extends ADOConnection {
@@ -19,13 +19,13 @@ class ADODB_oracle extends ADOConnection {
 	var $concat_operator='||';
 	var $_curs;
 	var $_initdate = true; // init date to YYYY-MM-DD
-	var $metaTablesSQL = 'select table_name from cat';	
+	var $metaTablesSQL = 'select table_name from cat';
 	var $metaColumnsSQL = "select cname,coltype,width from col where tname='%s' order by colno";
 	var $sysDate = "TO_DATE(TO_CHAR(SYSDATE,'YYYY-MM-DD'),'YYYY-MM-DD')";
 	var $sysTimeStamp = 'SYSDATE';
 	var $connectSID = true;
-	
-	function ADODB_oracle() 
+
+	function ADODB_oracle()
 	{
 	}
 
@@ -35,7 +35,7 @@ class ADODB_oracle extends ADOConnection {
 		if (is_string($d)) $d = ADORecordSet::UnixDate($d);
 		return 'TO_DATE('.adodb_date($this->fmtDate,$d).",'YYYY-MM-DD')";
 	}
-	
+
 	// format and return date string in database timestamp format
 	function DBTimeStamp($ts)
 	{
@@ -43,24 +43,24 @@ class ADODB_oracle extends ADOConnection {
 		return 'TO_DATE('.adodb_date($this->fmtTimeStamp,$ts).",'RRRR-MM-DD, HH:MI:SS AM')";
 	}
 
-	
+
 	function BeginTrans()
-	{	  
+	{
 		 $this->autoCommit = false;
 		 ora_commitoff($this->_connectionID);
 		 return true;
 	}
 
-	
-	function CommitTrans($ok=true) 
-	{ 
+
+	function CommitTrans($ok=true)
+	{
 		   if (!$ok) return $this->RollbackTrans();
 		   $ret = ora_commit($this->_connectionID);
 		   ora_commiton($this->_connectionID);
 		   return $ret;
 	}
 
-	
+
 	function RollbackTrans()
 	{
 		$ret = ora_rollback($this->_connectionID);
@@ -70,21 +70,21 @@ class ADODB_oracle extends ADOConnection {
 
 
 	/* there seems to be a bug in the oracle extension -- always returns ORA-00000 - no error */
-	function ErrorMsg() 
+	function ErrorMsg()
  	{
 		$this->_errorMsg = @ora_error($this->_curs);
  		if (!$this->_errorMsg) $this->_errorMsg = @ora_error($this->_connectionID);
 		return $this->_errorMsg;
 	}
 
- 
-	function ErrorNo() 
+
+	function ErrorNo()
 	{
 		$err = @ora_errorcode($this->_curs);
 		if (!$err) return @ora_errorcode($this->_connectionID);
 	}
 
-	
+
 
 		// returns true or false
 		function _connect($argHostname, $argUsername, $argPassword, $argDatabasename, $mode=0)
@@ -144,12 +144,12 @@ class ADODB_oracle extends ADOConnection {
 		function _query($sql,$inputarr=false)
 		{
 			$curs = ora_open($this->_connectionID);
-		 
+
 		 	if ($curs === false) return false;
 			$this->_curs = $curs;
 			if (!ora_parse($curs,$sql)) return false;
 			if (ora_exec($curs)) return $curs;
-		
+
 		 	@ora_close($curs);
 			return false;
 		}
@@ -177,15 +177,15 @@ class ADORecordset_oracle extends ADORecordSet {
 
 	function ADORecordset_oracle($queryID,$mode=false)
 	{
-		
-		if ($mode === false) { 
+
+		if ($mode === false) {
 			global $ADODB_FETCH_MODE;
 			$mode = $ADODB_FETCH_MODE;
 		}
 		$this->fetchMode = $mode;
-		
+
 		$this->_queryID = $queryID;
-	
+
 		$this->_inited = true;
 		$this->fields = array();
 		if ($queryID) {
@@ -197,7 +197,7 @@ class ADORecordset_oracle extends ADORecordSet {
 			$this->_numOfFields = 0;
 			$this->EOF = true;
 		}
-		
+
 		return $this->_queryID;
 	}
 
@@ -227,10 +227,10 @@ class ADORecordset_oracle extends ADORecordSet {
 				$this->bind[strtoupper($o->name)] = $i;
 			}
 		}
-		
+
 		 return $this->fields[$this->bind[strtoupper($colname)]];
 	}
-	
+
    function _initrs()
    {
 		   $this->_numOfRows = -1;
@@ -246,14 +246,14 @@ class ADORecordset_oracle extends ADORecordSet {
    function _fetch($ignore_fields=false) {
 		if ($this->fetchMode & ADODB_FETCH_ASSOC)
 			return @ora_fetch_into($this->_queryID,$this->fields,ORA_FETCHINTO_NULLS|ORA_FETCHINTO_ASSOC);
-   		else 
+   		else
 			return @ora_fetch_into($this->_queryID,$this->fields,ORA_FETCHINTO_NULLS);
    }
 
    /*		close() only needs to be called if you are worried about using too much memory while your script
 		   is running. All associated result memory for the specified result identifier will automatically be freed.		*/
 
-   function _close() 
+   function _close()
 {
 		   return @ora_close($this->_queryID);
    }
@@ -265,7 +265,7 @@ class ADORecordset_oracle extends ADORecordSet {
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
-		
+
 		switch (strtoupper($t)) {
 		case 'VARCHAR':
 		case 'VARCHAR2':
@@ -281,13 +281,13 @@ class ADORecordset_oracle extends ADORecordSet {
 		case 'LONG VARBINARY':
 		case 'BLOB':
 				return 'B';
-		
+
 		case 'DATE': return 'D';
-		
+
 		//case 'T': return 'T';
-		
+
 		case 'BIT': return 'L';
-		case 'INT': 
+		case 'INT':
 		case 'SMALLINT':
 		case 'INTEGER': return 'I';
 		default: return 'N';

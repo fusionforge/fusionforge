@@ -57,7 +57,7 @@ class IncludePageTest extends phpwiki_TestCase {
         $lp = new WikiPlugin_IncludePage();
         $this->assertEquals("IncludePage", $lp->getName());
         $dbi = $request->getDbh();
-        $result = $lp->run($dbi, "page=$pagename section=Synopsis quiet=1", 
+        $result = $lp->run($dbi, "page=$pagename section=Synopsis quiet=1",
 			   $request, "IncludePage");
         $this->assertType('object', $result, 'isa HtmlElement');
 	//TODO: check content for found and extracted section

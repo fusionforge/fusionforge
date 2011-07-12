@@ -38,7 +38,7 @@ $HTML->header(array('title'=>sprintf(_('Top %1$s Projects'), forge_get_config ('
 <li><a href="toplist.php?type=downloads"><?php echo _('Top Downloads'); ?></a></li>
 </ul>
 <ul>
-<li><a href="toplist.php?type=pageviews_proj"><?php echo _('Top Project Pageviews'); ?></a></li> 
+<li><a href="toplist.php?type=pageviews_proj"><?php echo _('Top Project Pageviews'); ?></a></li>
 <li><a href="toplist.php?type=forumposts_week"><?php echo _('Top Forum Post Counts'); ?></a></li>
 
 <!--

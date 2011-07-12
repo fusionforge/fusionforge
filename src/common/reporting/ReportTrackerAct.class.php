@@ -118,7 +118,7 @@ function getAverageTime($atid,$start,$end) {
 function getOpenCount($atid,$start,$end) {
 	$res = db_query_params ('SELECT count(*)
 		FROM artifact
-		WHERE 
+		WHERE
 		group_artifact_id=$1
 		AND open_date BETWEEN $2 AND $3',
 				array ($atid,
@@ -130,7 +130,7 @@ function getOpenCount($atid,$start,$end) {
 function getStillOpenCount($atid,$start,$end) {
 	$res = db_query_params ('SELECT count(*)
 		FROM artifact
-		WHERE 
+		WHERE
 		group_artifact_id=$1
 		AND open_date <= $2
 		AND (close_date >= $3 OR close_date < 1 OR close_date is null)',

@@ -160,7 +160,7 @@ ORDER BY post_date DESC',
 				$return .= ' - ';
 				$return .= $proj_name ;
 				$return .= "</div>\n";
-				
+
 				if ($summ_txt != "") {
 					$return .= '<p>'.$summ_txt.'</p>';
 				}
@@ -178,7 +178,7 @@ ORDER BY post_date DESC',
 				} else {
 					$comments_txt = _('Comments');
 				}
-				
+
 				if ($show_forum) {
 					$link_text =  _('Read&nbsp;More/Comment') ;
 					$extra_params = array( 'class'      => 'dot-link',
@@ -231,13 +231,13 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 
 	$result=db_query_params("SELECT groups.group_name,groups.unix_group_name,groups.group_id,
 		users.user_name,users.realname,news_bytes.forum_id,
-		news_bytes.summary,news_bytes.post_date,news_bytes.details 
-		FROM users,news_bytes,groups,foundry_news 
-		WHERE foundry_news.foundry_id=$1 
-		AND users.user_id=news_bytes.submitted_by 
-		AND foundry_news.news_id=news_bytes.id 
-		AND news_bytes.group_id=groups.group_id 
-		AND foundry_news.is_approved=1 
+		news_bytes.summary,news_bytes.post_date,news_bytes.details
+		FROM users,news_bytes,groups,foundry_news
+		WHERE foundry_news.foundry_id=$1
+		AND users.user_id=news_bytes.submitted_by
+		AND foundry_news.news_id=news_bytes.id
+		AND news_bytes.group_id=groups.group_id
+		AND foundry_news.is_approved=1
 		ORDER BY news_bytes.post_date DESC", array($group_id),$limit);
 
 	$rows=db_numrows($result);

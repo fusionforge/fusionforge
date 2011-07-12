@@ -12,8 +12,8 @@
  *
  * Exception-handling code using PHP5 exceptions (try-catch-throw).
  */
-	
-if (!defined('ADODB_ERROR_HANDLER_TYPE')) define('ADODB_ERROR_HANDLER_TYPE',E_USER_ERROR); 
+
+if (!defined('ADODB_ERROR_HANDLER_TYPE')) define('ADODB_ERROR_HANDLER_TYPE',E_USER_ERROR);
 define('ADODB_ERROR_HANDLER','adodb_throw');
 
 class ADODB_Exception extends Exception {
@@ -23,7 +23,7 @@ var $sql = '';
 var $params = '';
 var $host = '';
 var $database = '';
-	
+
 	function __construct($dbms, $fn, $errno, $errmsg, $p1, $p2, $thisConnection)
 	{
 		switch($fn) {
@@ -32,7 +32,7 @@ var $database = '';
 			$this->params = $p2;
 			$s = "$dbms error: [$errno: $errmsg] in $fn(\"$p1\")\n";
 			break;
-	
+
 		case 'PCONNECT':
 		case 'CONNECT':
 			$user = $thisConnection->user;
@@ -42,13 +42,13 @@ var $database = '';
 			$s = "$dbms error: [$errno: $errmsg] in $fn($p1, $p2)\n";
 			break;
 		}
-	
+
 		$this->dbms = $dbms;
 		$this->host = $thisConnection->host;
 		$this->database = $thisConnection->database;
 		$this->fn = $fn;
 		$this->msg = $errmsg;
-				
+
 		if (!is_numeric($errno)) $errno = -1;
 		parent::__construct($s,$errno);
 	}

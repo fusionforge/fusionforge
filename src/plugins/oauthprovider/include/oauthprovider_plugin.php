@@ -26,11 +26,11 @@
 // TODO : fix missing copyright
 
 class oauthproviderPlugin extends ForgeAuthPlugin {
-	
+
 	public function __construct() {
-		
+
 		$this->ForgeAuthPlugin() ;
-		
+
 		$this->name = 'oauthprovider';
 		$this->text = 'OAuthProvider'; // To show in the tabs, use...
 		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
@@ -45,10 +45,10 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 		$this->_addHook("account_menu");
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
-		
+
 		// Is the plugin temporarily sufficient, only for one particular script
 		$this->sufficient_forced = NULL;
-		
+
 		$this->declareConfigVars();
 	}
 
@@ -57,7 +57,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 		$text = $this->text; // this is what shows in the tab
 		if ($G_SESSION->usesPlugin("oauthprovider")) {
 			echo  $HTML->PrintSubMenu (array ($text),
-					  array ('/plugins/oauthprovider/index.php'), array(''));				
+					  array ('/plugins/oauthprovider/index.php'), array(''));
 		}
 	}
 	function groupmenu($params) {
@@ -78,7 +78,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
-			}	
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 	}
 	function groupisactivecheckbox($params) {
@@ -102,7 +102,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 	}
 	function groupisactivecheckboxpost($params) {
 				global $use_oauthproviderplugin;
-		
+
 	// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
@@ -136,7 +136,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 	}
 	function userisactivecheckboxpost($params) {
 				global $use_oauthproviderplugin;
-		
+
 	// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
@@ -170,28 +170,28 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 				echo '<p>'.util_make_link ("/plugins/oauthprovider/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('oauthprovider Admin')).'</p>' ;
 			}
-		
+
 	}
-	
+
 	function site_admin_option_hook( ) {
 		echo '<li>'. util_make_link ('/plugins/oauthprovider/consumer.php', _('Manage OAuth consumers'). ' [' . _('OAuth provider plugin') . ']'). '</li>';
 	  }
-	
+
 	function account_menu( ) {
 		return array( '<a href="' . $gfplugins.'oauthprovider/www/access_tokens.php' . '">' . $plugin_oauthprovider_menu_account_summary. '</a>', );
 	  }
-	  
+
 	protected function declareConfigVars() {
 		parent::declareConfigVars();
-		
-		// Change vs default 
+
+		// Change vs default
 		forge_define_config_item ('required', $this->name, 'no');
 		forge_set_config_item_bool ('required', $this->name) ;
 
 		// Change vs default
 		forge_define_config_item ('sufficient', $this->name, 'yes');
 		forge_set_config_item_bool ('sufficient', $this->name) ;
-	
+
 	}
 
 	/* Overload the default ForgeAuthPlugin::isSufficient() to handle the case where we can be temporarily sufficient (sufficient_forced in checkAuthSession)
@@ -199,21 +199,21 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 	public function isSufficient() {
 		return (forge_get_config('sufficient', $this->name) || $this->sufficient_forced);
 	}
-	
+
 	/**
 	 * Is there a valid session?
-	 * 
+	 *
 	 * the session should generally not be set sufficient, but scripts will invoke session_set_for_authplugin('oauthprovider');
 	 * @param unknown_type $params
 	 */
-	
+
 	function checkAuthSession(&$params) {
-		
+
 		$user = NULL;
 		$code = NULL;
 		$req = NULL;
 		$errormsg = NULL;
-		
+
 		// As we may be re-invoked with 'sufficient_forced', we may have saved the user before, when auth was correct but insufficient
 		if($this->saved_user) {
 			$user = $this->saved_user;
@@ -221,22 +221,22 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 		else {
 			try {
 				$oauthprovider_server = new OAuthServer(FFDbOAuthDataStore::singleton());
-				
+
 				$hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
 				$oauthprovider_server->add_signature_method($hmac_method);
-				
+
 				$req = OAuthRequest::from_request();
 				list($consumer, $token) = $oauthprovider_server->verify_request( $req);
-				
+
 				// Now, the request is valid.
-				
+
 				// We know which consumer is connected
 				//echo "Authenticated as consumer : \n";
 				//print_r($consumer);
 				//echo "  name: ". $consumer->getName() ."\n";
 				//echo "  key: $consumer->key\n";
 				//echo "\n";
-				
+
 				// And on behalf of which user it connects
 				//echo "Authenticated with access token whose key is :  $token->key \n";
 				//echo "\n";
@@ -245,9 +245,9 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 				//$user_name = $user->getRealName().' ('.$user->getUnixName().')';
 				//echo "Acting on behalf of user : $user_name\n";
 				//echo "\n";
-				
+
 				// TODO: but with which role is the user authenticated ??
-				
+
 			} catch (OAuthException $e) {
 				$code = $e->getCode();
 				$errormsg = $e->getMessage();
@@ -279,7 +279,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 							break;
 					}
 				}
-				
+
 				echo "OAuth problem - code $code: \n";
 				print($errormsg . "\n<hr />\n");
 				print_r($req);
@@ -292,5 +292,5 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 			}
 		}
 	}
-	
+
 }

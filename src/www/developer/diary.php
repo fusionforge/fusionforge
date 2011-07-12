@@ -28,7 +28,7 @@ require_once $gfwww.'include/vote_function.php';
 $diary_user = getIntFromRequest('diary_user');
 if ($diary_user) {
 	$diary_id = getIntFromRequest('diary_id');
-  
+
 	$user_obj=user_get_object($diary_user);
 	if (!$user_obj) {
 		exit_error(_('User could not be found.'),'home');

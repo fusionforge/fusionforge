@@ -57,7 +57,7 @@ function showResultsEditQuestion($result) {
 	for($i=0; $i<$cols; $i++)  {
 		echo "<th>".db_fieldname($result,$i)."</th>\n";
 	}
-	
+
 	echo( "</tr>");
 	for($j  =  0;  $j  <  $rows;  $j++)  {
 

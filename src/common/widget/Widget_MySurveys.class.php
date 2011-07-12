@@ -24,11 +24,11 @@ require_once ('common/survey/SurveyFactory.class.php');
 
 /**
  * Widget_MySurveys
- * 
+ *
  * DEVELOPER SURVEYS
- * 
+ *
  * This needs to be updated manually to display any given survey
- * Default behavior: get first survey from group #1 
+ * Default behavior: get first survey from group #1
  */
 class Widget_MySurveys extends Widget {
 	var $content;
@@ -50,7 +50,7 @@ class Widget_MySurveys extends Widget {
 			}
 		}
 		$projects = $tmp ;
-		
+
 		$html_my_surveys = '';
 		if (count ($projects) < 1) {
 			$html_my_surveys .= '<div class="warning">'. _("There are no surveys in your projects.") ."</div>\n";

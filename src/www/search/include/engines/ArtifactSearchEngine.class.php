@@ -26,16 +26,16 @@ require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
 
 class ArtifactSearchEngine extends GroupSearchEngine {
 	var $ath;
-	
+
 	function ArtifactSearchEngine() {
 		$this->type = SEARCH__TYPE_IS_ARTIFACT;
 		$this->rendererClassName = 'ArtifactHtmlSearchRenderer';
 	}
-	
+
 	function getLabel($parameters) {
 		return $this->ath->getName();
 	}
-	
+
 	function isAvailable($parameters) {
 		if(parent::isAvailable($parameters) && isset($parameters[SEARCH__PARAMETER_ARTIFACT_ID]) && $parameters[SEARCH__PARAMETER_ARTIFACT_ID]) {
 			$ath = new ArtifactTypeHtml($this->Group, $parameters[SEARCH__PARAMETER_ARTIFACT_ID]);
@@ -46,7 +46,7 @@ class ArtifactSearchEngine extends GroupSearchEngine {
 		}
 		return false;
 	}
-	
+
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		$this->includeSearchRenderer();
 		$rendererClassName = $this->rendererClassName;

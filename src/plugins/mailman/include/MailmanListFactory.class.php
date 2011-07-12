@@ -23,11 +23,11 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
- 
+
  /*
- 
+
  This work is based on Tim Perdue's work on the forum stuff
- 
+
  */
 
 
@@ -51,7 +51,7 @@ class MailmanListFactory extends Error {
 	 */
 	var $mailingLists;
 	/**
-	 * DAO 
+	 * DAO
 	 *
 	 * @var	 MailingListDao   $mailingDAO.
 	 */
@@ -64,9 +64,9 @@ class MailmanListFactory extends Error {
 	 *	@param	object	The Group object to which these mailing lists are associated.
 	 */
 	function MailmanListFactory(& $Group) {
-		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());	
+		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());
 		$this->Error();
-		
+
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'MailmanListFactory'));
 			return false;
@@ -100,15 +100,15 @@ class MailmanListFactory extends Error {
 		if (isset($this->mailingLists) && is_array($this->mailingLists)) {
 			return $this->mailingLists;
 		}
-		
+
 		if (islogged() && $current_user->isMember($this->Group->getID())) {
 			$public_flag='0,1';
 		} else {
 			$public_flag='1';
 		}
 		$result =& $this->_mailingDAO->searchByGroupId($this->Group->getID());
-	
-		
+
+
 		if (!$result) {
 			$this->setError(sprintf(_('Error Getting %1$s'), _('Error Getting %1$s')).db_error());
 			return false;
@@ -130,14 +130,14 @@ class MailmanListFactory extends Error {
 	{
 		$current_user=UserManager::instance()->getCurrentUser();
 		$mail=$current_user->getEmail();
-		
+
 		$passwd= $current_user->getUserPw();
 		$name= $current_user->getRealName();
 		$result =& $this->_mailingDAO->compareInfos($mail);
 		if (!$result) {
 			return false;
 		}
-		else 
+		else
 		{
 			while( $arr =& $result->getRow())
 			{
@@ -159,16 +159,16 @@ class MailmanListFactory extends Error {
 	{
 		$current_user=UserManager::instance()->getCurrentUser();
 		$mail=$current_user->getEmail();
-		
+
 		$passwd= $current_user->getUserPw();
 		$name= $current_user->getRealName();
-		
+
 		$result =& $this->_mailingDAO->updateInfos($mail,$passwd,$name);
 		if (!$result) {
 			return false;
 		}
 		htmlRedirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
-		return $result;	
+		return $result;
 	}
 
 

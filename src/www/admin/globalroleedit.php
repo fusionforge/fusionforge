@@ -192,11 +192,11 @@ if ($role instanceof RoleExplicit) {
 		</form>
 <?php
 }
-		
+
 echo '
 <form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">';
 echo '<input type="hidden" name="role_id" value="'.$role_id.'" />';
-		
+
 if ($role instanceof RoleExplicit) {
 	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'" /></p>';
 	echo '<input type="checkbox" name="public" value="1"' ;
@@ -239,7 +239,7 @@ for ($i=0; $i<count($keys); $i++) {
 	echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][-1]", $role->getVal($keys[$i],-1), false, false ) ;
 	echo '</td>
 		</tr>';
-	
+
 }
 
 echo $HTML->listTableBottom();

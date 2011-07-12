@@ -23,7 +23,7 @@
 
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 require_once $gfcommon.'search/TrackersSearchQuery.class.php';
-	
+
 class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
@@ -38,11 +38,11 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function TrackersHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
-			
+
 		$searchQuery = new TrackersSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember);
-		
+
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_TRACKERS, $words, $isExact, $searchQuery, $groupId, 'tracker');
-		
+
 		$this->tableHeaders = array(
 			'&nbsp;',
 			_('#'),
@@ -61,11 +61,11 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 		$dateFormat = _('Y-m-d H:i');
-			
+
 		$return = '';
 		$rowColor = 0;
 		$lastTracker = null;
-		
+
 		for($i = 0; $i < $rowsCount; $i++) {
 			//section changed
 			$currentTracker = db_result($result, $i, 'name');
@@ -80,7 +80,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 						. '<td>'
 							. '<a href="'.util_make_url ('/tracker/?func=detail&amp;group_id='.$this->groupId.'&amp;aid='.db_result($result, $i, 'artifact_id') . '&amp;atid='.db_result($result, $i, 'group_artifact_id')).'">'
 							. html_image('ic/tracker20g.png').' '.db_result($result, $i, 'summary')
-							. '</a></td>'		
+							. '</a></td>'
 						. '<td width="15%">'.db_result($result, $i, 'realname').'</td>'
 						. '<td width="15%">'.date($dateFormat, db_result($result, $i, 'open_date')).'</td></tr>';
 			$rowColor ++;
@@ -90,12 +90,12 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
 	 * getSections - get the array of possible sections to search in
-	 * 
+	 *
   	 * @return array sections
-	 */		
+	 */
 	static function getSections($groupId) {
 		$userIsGroupMember = TrackersHtmlSearchRenderer::isGroupMember($groupId);
-		
+
 		return TrackersSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 

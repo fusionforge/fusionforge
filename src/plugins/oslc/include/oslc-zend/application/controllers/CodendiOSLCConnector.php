@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Copyright (c) Institut TELECOM, 2010. All Rights Reserved.
  *
@@ -33,12 +33,12 @@ require_once ('common/tracker/Tracker_FormElementFactory.class.php');
 
 class CodendiOSLCConnector extends OSLCConnector {
 
-	
+
     /**
      * Filter parameters provided in the REST GET request to check whether mandatory ones are set.
-     * 
+     *
      * @param array $params
-     * @return array 
+     * @return array
      */
     public function filterRequestParams($params) {
         // Process the args provided by Zend REST
@@ -52,9 +52,9 @@ class CodendiOSLCConnector extends OSLCConnector {
             }
         }
     }
-    
+
     /**
-     * Checks whether a change request exists inside Codendi trackers. 
+     * Checks whether a change request exists inside Codendi trackers.
      * @param int $id change request id.
      * @return bool
      */
@@ -67,7 +67,7 @@ class CodendiOSLCConnector extends OSLCConnector {
             return true;
         }
     }
-    
+
     /**
      * Constructs the model from Codendi DB by fetching the requested changeRequests.
      *
@@ -101,10 +101,10 @@ class CodendiOSLCConnector extends OSLCConnector {
         $tf = TrackerFactory::instance();
         if (!$tf) {
             throw new Exception('Error : Could Not Get TrackerFactory', 'fetchChangeRequests');
-        } 
-        
+        }
+
         $tracker = $tf->getTrackerById($tracker_id);
-        
+
         if ($tracker == null) {
             throw new Exception('Error : Could Not Get Tracker', 'fetchChangeRequests');
         } else {
@@ -138,7 +138,7 @@ class CodendiOSLCConnector extends OSLCConnector {
      * Updates an existant Codendi ChangeRequest in the tracker DataBase.
      * @param int $identifier id of the ChangeRequest within Codendi tracker
      * @param ChangeRequest the change request given as input for the PUT request.
-     * @param array $props array of the properties that PUT request is going to change 
+     * @param array $props array of the properties that PUT request is going to change
      * @return boolean true if success, false otherwise.
      */
     public function updateChangeRequest($changerequest_id, $group_id, $tracker_id, $changerequest, $props) {
@@ -170,7 +170,7 @@ class CodendiOSLCConnector extends OSLCConnector {
             }
         }
 
-        // Get the artifact data using its ID. 
+        // Get the artifact data using its ID.
 		$art_obj =& artifact_get_object($identifier);
 		$art = $art_obj->data_array;
 
@@ -181,10 +181,10 @@ class CodendiOSLCConnector extends OSLCConnector {
 			$prop = str_replace($terms,"",$prop);
 			//echo $prop;
 		}
-		
+
 		// Check all the mandatory fields for an artifact update request.
-		
-		// dc:title ===> summary 
+
+		// dc:title ===> summary
 		if(in_array('title',$props))
 		{
 			if(isset($cm_request['title']))
@@ -196,8 +196,8 @@ class CodendiOSLCConnector extends OSLCConnector {
 				throw new BadRequestException("dc:title mentioned in the request query not found in request body!");
 			}
 		}
-		
-		// dc:description ===> details 
+
+		// dc:description ===> details
 		if(in_array('description',$props))
 		{
 			if(isset($cm_request['description']))
@@ -209,8 +209,8 @@ class CodendiOSLCConnector extends OSLCConnector {
 				throw new BadRequestException("dc:decription mentioned in the request query not found in request body!");
 			}
 		}
-		
-		// helios_bt:priority ===> priority 
+
+		// helios_bt:priority ===> priority
 		if(in_array('priority',$props))
 		{
 			if(isset($cm_request['priority']))
@@ -222,8 +222,8 @@ class CodendiOSLCConnector extends OSLCConnector {
 				throw new BadRequestException("helios_bt:priority mentioned in the request query not found in request body!");
 			}
 		}
-		
-		// helios_bt:status ===> status 
+
+		// helios_bt:status ===> status
 		if(in_array('status',$props))
 		{
 			if(isset($cm_request['status']))
@@ -235,7 +235,7 @@ class CodendiOSLCConnector extends OSLCConnector {
 				throw new BadRequestException("helios_bt:status mentioned in the request query not found in request body!");
 			}
 		}
-		
+
 		//helios_bt:assigned_to ====> assigned_to
 		if(in_array('assigned_to', $props))
 		{
@@ -243,22 +243,22 @@ class CodendiOSLCConnector extends OSLCConnector {
 			{
 				$art['assigned_to'] = $cm_request['assigned_to'];
 			}
-			else 
+			else
 			{
 				throw new BadRequestException("helios_bt:assigned_to mentionned in the request query not found in request body!");
 			}
 		}
-		
-		
+
+
 		$canned_response=100;
-		
+
 		// We assume that we don't change the artifact type (bug, task, etc)
-		// in PUT request. 
+		// in PUT request.
 		$new_artifact_type_id = $art_obj->ArtifactType->getID();
-		
+
 		//TODO: figure out if a follow up is in OSLC specs and if it is the case include it.
 		$follow_up_msg = '';
-		
+
 		if(!$art_obj->update($art['priority'],$art['status_id'],$art['assigned_to'],$art['summary'],$canned_response,$follow_up_msg,$new_artifact_type_id,array(),$art['details']))
 		{
 			throw new Exception($art_obj->getErrorMessage());
@@ -276,18 +276,18 @@ class CodendiOSLCConnector extends OSLCConnector {
         if($user->getId() != 0) {
             $project_ids = $user->getProjects();
         } else {
-            return $this->createProjectsArray($pM->getAllPublicProjects()); 
+            return $this->createProjectsArray($pM->getAllPublicProjects());
         }
         foreach($project_ids as $id) {
             $projects[$id] = $pM->getProject($id);
         }
-        $uM->logout(); 
+        $uM->logout();
         return $this->createProjectsArray($projects);
 	}
-	
+
     /**
      *  Converts projects objects into a single projects array.
-     *  We only set the id and the public name of each project 
+     *  We only set the id and the public name of each project
      *  into the array.
      *  @param array $projects array of projects indexed by their relative ids
      */
@@ -295,7 +295,7 @@ class CodendiOSLCConnector extends OSLCConnector {
         $return = array();
         foreach($projects as $prj_idx => $project){
             $return[$prj_idx] = array(
-                'id'                => $prj_idx, 
+                'id'                => $prj_idx,
                 'name'              => $project->getPublicName()
             );
         }
@@ -314,7 +314,7 @@ class CodendiOSLCConnector extends OSLCConnector {
  *
  * @return int The artifact id if update was fine,
  *              or a soap fault if :
- *              - group_id does not match with a valid project, 
+ *              - group_id does not match with a valid project,
  *              - tracker_id does not match with a valid tracker,
  *              - artifact_id does not match with a valid artifact,
  *              - the given values are breaking a field dependency rule
@@ -333,7 +333,7 @@ function updateArtifact($sessionKey, $group_id, $tracker_id, $artifact_id, $valu
         if ( ! checkRestrictedAccess($project)) {
             return new SoapFault(get_group_fault, 'Restricted user: permission denied.', 'updateArtifact');
         }
-        
+
         $tf = TrackerFactory::instance();
         $tracker = $tf->getTrackerById($tracker_id);
         if ($tracker == null) {
@@ -341,13 +341,13 @@ function updateArtifact($sessionKey, $group_id, $tracker_id, $artifact_id, $valu
         } elseif ($tracker->getGroupId() != $group_id) {
             return new SoapFault(get_tracker_fault, 'Could not get Tracker.', 'updateArtifact');
         }
-        
+
         $af = Tracker_ArtifactFactory::instance();
         if ($artifact = $af->getArtifactById($artifact_id)) {
             if ($artifact->getTrackerId() != $tracker_id) {
                 return new SoapFault(get_tracker_fault, 'Could not get Artifact.', 'updateArtifact');
             }
-            
+
             //Check Field Dependencies
             // TODO : implement it
             /*require_once('common/tracker/ArtifactRulesManager.class.php');
@@ -355,17 +355,17 @@ function updateArtifact($sessionKey, $group_id, $tracker_id, $artifact_id, $valu
             if (!$arm->validate($ath->getID(), $data, $art_field_fact)) {
                 return new SoapFault(invalid_field_dependency_fault, 'Invalid Field Dependency', 'updateArtifact');
             }*/
-            
+
             $fef = Tracker_FormElementFactory::instance();
-            
+
             $fields_data = array();
             foreach ($value as $field_value) {
                 // field are identified by name, we need to retrieve the field id
                 if ($field_value->field_name) {
-                    
+
                     $field = $fef->getUsedFieldByName($tracker_id, $field_value->field_name);
                     if ($field) {
-                        
+
                         $field_data = $field->getFieldData($field_value->field_value);
                         if ($field_data != null) {
                             // $field_value is an object: SOAP must cast it in ArtifactFieldValue
@@ -385,7 +385,7 @@ function updateArtifact($sessionKey, $group_id, $tracker_id, $artifact_id, $valu
                     }
                 }
             }
-            
+
             if ($artifact->createNewChangeset($fields_data, $comment, $user, null)) {
                 return $artifact_id;
             } else {
@@ -399,7 +399,7 @@ function updateArtifact($sessionKey, $group_id, $tracker_id, $artifact_id, $valu
         } else {
             return new SoapFault(get_tracker_fault, 'Could not get Artifact.', 'updateArtifact');
         }
-        
+
     } else {
         return new SoapFault(invalid_session_fault,'Invalid Session ','updateArtifact');
     }

@@ -38,7 +38,7 @@ class WysiwygEdit_Wikiwyg extends WysiwygEdit {
                 (Javascript('', array('src' => $this->BasePath . '/' . $js,
                                       'language' => 'JavaScript')));
         }
-        $doubleClickToEdit = ($GLOBALS['request']->getPref('doubleClickEdit') or ENABLE_DOUBLECLICKEDIT) 
+        $doubleClickToEdit = ($GLOBALS['request']->getPref('doubleClickEdit') or ENABLE_DOUBLECLICKEDIT)
             ? 'true' : 'false';
 	if ($GLOBALS['request']->getArg('mode') && $GLOBALS['request']->getArg('mode') == 'wysiwyg'){
             return JavaScript($this->_jsdefault . "
@@ -64,7 +64,7 @@ class WysiwygEdit_Wikiwyg extends WysiwygEdit {
 		       ],
 		styleSelector: [
 		       'label', 'p', 'h2', 'h3', 'h4', 'pre'
-				], 
+				],
 		controlLabels: {
 	               save:     '"._("Apply changes")."',
 		       cancel:   '"._("Exit toolbar")."',
@@ -72,12 +72,12 @@ class WysiwygEdit_Wikiwyg extends WysiwygEdit {
 		       h3:       '"._("Title 2")."',
 		       h4:       '"._("Title 3")."',
 		       verbatim: '"._("Verbatim")."',
-                       toc:   '"._("Table of content")."', 
-                       wikitext:   '"._("Insert Wikitext section")."', 
-                       sup:      '"._("Sup")."', 
+                       toc:   '"._("Table of content")."',
+                       wikitext:   '"._("Insert Wikitext section")."',
+                       sup:      '"._("Sup")."',
                        sub:      '"._("Sub")."',
-                       preview:  '"._("Preview")."',   
-                       save_button:'"._("Save")."'   
+                       preview:  '"._("Preview")."',
+                       save_button:'"._("Save")."'
 	              }
             },
             wysiwyg: {
@@ -97,12 +97,12 @@ class WysiwygEdit_Wikiwyg extends WysiwygEdit {
 
     function Textarea ($textarea, $wikitext, $name='edit[content]') {
         global $request;
-    
+
         $htmltextid = $this->_htmltextid;
         $textarea->SetAttr('id', $htmltextid);
         $iframe0 = new RawXml('<iframe id="iframe0" src="blank.htm" height="0" width="0" frameborder="0"></iframe>');
         if ($request->getArg('mode') and $request->getArg('mode') == 'wysiwyg'){
-	    $out = HTML(HTML::div(array('class' => 'hint'), 
+	    $out = HTML(HTML::div(array('class' => 'hint'),
                                   _("Warning: This Wikiwyg editor has only Beta quality!")),
                         $textarea,
                         $iframe0,
@@ -122,8 +122,8 @@ class WysiwygEdit_Wikiwyg extends WysiwygEdit {
         return $text;
     }
 
-    /* 
-     * No special PHP HTML->Wikitext conversion needed. This is done in js thanksfully. 
+    /*
+     * No special PHP HTML->Wikitext conversion needed. This is done in js thanksfully.
      * Avoided in editpage.php: PageEditor->getContent
      */
     function ConvertAfter($text) {
@@ -145,8 +145,8 @@ class WikiToHtml {
     }
 
     function convert() {
-        require_once("lib/BlockParser.php");       
-	$xmlcontent = TransformText($this->_wikitext, 2.0, $this->_request->getArg('pagename')); 
+        require_once("lib/BlockParser.php");
+	$xmlcontent = TransformText($this->_wikitext, 2.0, $this->_request->getArg('pagename'));
 	$this->_html = $xmlcontent->AsXML();
 
 	$this->replace_inside_html();
@@ -165,7 +165,7 @@ class WikiToHtml {
 	if ($charset != 'utf-8') {
  	    if ($charset == 'iso-8959-1') {
  	        $this->_html = utf8_decode($this->_html);
-	    } else {    
+	    } else {
                 // check for iconv support
                 loadPhpExtension("iconv");
 	        $this->_html = iconv("UTF-8", $charset, $this->_html);
@@ -180,19 +180,19 @@ class WikiToHtml {
     function replace_known_plugins() {
       // If match a plugin
       $pattern = '/\&lt\;\?plugin\s+RichTable(.*)\?\&gt\;/Umsi';
-      $replace_string = "replace_rich_table";       
+      $replace_string = "replace_rich_table";
       $this->_html = preg_replace_callback($pattern,
 					   $replace_string,
 					   $this->_html);
     }
-    
+
     // Replace unknown plugins by keyword Wikitext { tag }
     function replace_unknown_plugins() {
         $pattern = '/(\&lt\;\?plugin[^?]*\?\&gt\;)/Usi';
-	$replace_string = 
+	$replace_string =
 	  '<p><div style="background-color:#D3D3D3;font-size:smaller;">Wikitext {
  <br> \1 <br>}</div><br></p>';
-       
+
 	$this->_html = preg_replace($pattern,
 				    $replace_string,
 				    $this->_html);
@@ -202,51 +202,51 @@ class WikiToHtml {
     function clean_links() {
         // Existing links
         // FIXME: use VIRTUAL_PATH
-        $pattern = '/\<a href\=\"index.php\?pagename\=(\w+)\"([^>])*\>/Umsi';      
-        $replace_string = '<a href="\1">';      
+        $pattern = '/\<a href\=\"index.php\?pagename\=(\w+)\"([^>])*\>/Umsi';
+        $replace_string = '<a href="\1">';
         $this->_html = preg_replace($pattern,
                                     $replace_string,
                                     $this->_html) ;
         // Non existing links
         $pattern = '/\<a href\=\"index.php\?pagename\=([^"]*)(&amp;action){1}([^>])*\>/Umsi';
         $replace_string = '<a href="\1">';
-	
+
         $this->_html = preg_replace($pattern,
                                     $replace_string,
                                     $this->_html) ;
 
-        // Clean underline 
+        // Clean underline
         $pattern = '/\<u\>(.*)\<\/u\>(\<a href="(.*))[?"]{1}.*\>.*\<\/a\>/Umsi';
-        $replace_string = 
+        $replace_string =
             '<span>\2" style="color:blue;">\1</a></span>';
-	
+
         $this->_html = preg_replace($pattern,
                                     $replace_string,
                                     $this->_html) ;
     }
-    
+
     // Put unknown tags in Wikitext {}
     function replace_tags() {
         // Replace old table format ( non plugin )
         $pattern = '/(\ {0,4}(?:\S.*)?\|\S+\s*$.*?\<\/p\>)/ms';
-        $replace_string = 
+        $replace_string =
             '<p><div style="background-color:#D3D3D3;font-size:smaller;">Wikitext {
  <br> \1 <br>}</div><br></p>';
-      
+
         $this->_html = preg_replace($pattern,
                                     $replace_string,
                                     $this->_html);
 }
-    
-    // Replace \n by <br> only in 
+
+    // Replace \n by <br> only in
     // <?plugin ? > tag to keep formatting
     function clean_plugin() {
         $pattern = '/(\&lt\;\?plugin.*\?\&gt\;)/Umsei';
 	$replace_string = 'preg_replace("/\n/Ums","<br>","\1")';
-	
+
 	$this->_html = preg_replace($pattern,
 				    $replace_string,
-				    $this->_html) ; 
+				    $this->_html) ;
 
     }
 
@@ -256,43 +256,43 @@ class WikiToHtml {
  	$replace_string = '\1 \2 \3';
  	$this->_html = preg_replace($pattern,
  				    $replace_string,
- 				    $this->_html) ; 
-    } 
+ 				    $this->_html) ;
+    }
 }
 
 // This is called to replace the RichTable plugin by an html table
-// $matched contains html <p> tags so 
+// $matched contains html <p> tags so
 // they are deleted before the conversion.
 function replace_rich_table($matched) {
     $plugin = $matched[1];
 
     $unknown_options = "/colspan|rowspan|width|height/";
-  
+
     // if the plugin contains one of the options bellow
     // it won't be converted
     if (preg_match($unknown_options,$plugin))
-        return $matched[0]."\n";   
+        return $matched[0]."\n";
     else {
         //Replace unused <p...>
         $pattern = '/\<p.*\>/Umsi';
         $replace_string = "";
-    
+
         $plugin = preg_replace($pattern,
                                $replace_string,
-                               $plugin) ; 
-    
+                               $plugin) ;
+
         //replace unused </p> by \n
         $pattern = '/\<\/p\>/Umsi';
         $replace_string = "\n";
-    
+
         $plugin = preg_replace($pattern,
                                $replace_string,
-                               $plugin) ; 
-    
+                               $plugin) ;
+
         $plugin = "<?plugin RichTable ".$plugin." ?>";
-    
-        require_once("lib/BlockParser.php"); 
-        $xmlcontent = TransformText($plugin, 2.0, $GLOBALS['request']->getArg('pagename')); 
+
+        require_once("lib/BlockParser.php");
+        $xmlcontent = TransformText($plugin, 2.0, $GLOBALS['request']->getArg('pagename'));
         return $xmlcontent->AsXML();
   }
 }

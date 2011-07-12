@@ -98,11 +98,11 @@ if (session_loggedin()) {
 		<tr><td colspan="2"><strong><?php echo _('Changes:'); ?></strong><br />
 			<textarea name="changes" rows="5" cols="45"></textarea>
 		</td></tr>
-  
+
 		<tr><td colspan="2"><strong><?php echo _('Paste the Code Here:'); ?></strong><br />
 			<textarea name="code" rows="30" cols="85"></textarea>
 		</td></tr>
- 
+
 		<tr><td colspan="2" style="text-align:center">
 			<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 			<br />

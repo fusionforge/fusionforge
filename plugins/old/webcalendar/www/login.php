@@ -22,8 +22,8 @@ load_global_settings ();
 if($_GET['type'] == 'group'){
 	$group_id = getIntFromRequest('group_id');
 	session_require_perm ('project_admin', $group_id) ;
-	
-	//choix du calendrier a afficher 
+
+	//choix du calendrier a afficher
 	$sql_group = "SELECT unix_group_name FROM groups WHERE group_id = '".$_GET['group_id']."'" ;
 	$result_group = dbi_query ($sql_group);
 		if ( $result_group ) {
@@ -33,29 +33,29 @@ if($_GET['type'] == 'group'){
 		     dbi_free_result ( $result_group );
 		   }
 	//on log l'utilisateur
-	$sql = "SELECT user_name,user_pw FROM users WHERE user_id = '".user_getid()."'" ;		
+	$sql = "SELECT user_name,user_pw FROM users WHERE user_id = '".user_getid()."'" ;
 
 $result = dbi_query ($sql);
 		if ( $result ) {
 			 if ( $row_log = dbi_fetch_row ( $result ) ) {
 		       $_POST['login'] = $row_log[0];
 		     	$_POST['password'] = $row_log[1];
-		     
+
 		     }
 		     dbi_free_result ( $result );
 		   }
-	
+
 }
 
 
 if($_GET['type'] == 'user'){
-$sql = "SELECT user_name,user_pw FROM users WHERE user_id = '".user_getid()."'" ;	
+$sql = "SELECT user_name,user_pw FROM users WHERE user_id = '".user_getid()."'" ;
 $result = dbi_query ($sql);
 		if ( $result ) {
 			 if ( $row_log = dbi_fetch_row ( $result ) ) {
 		       $_POST['login'] = $row_log[0];
 		     	$_POST['password'] = $row_log[1];
-		    
+
 		     }
 		     dbi_free_result ( $result );
 		   }
@@ -214,7 +214,7 @@ function myOnLoad() {
   ?>
 }
 </script>
-<?php 
+<?php
  include "includes/styles.php";
 
  // Print custom header (since we do not call print_header function)
@@ -247,25 +247,25 @@ if ( ! empty ( $CUSTOM_HEADER ) && $CUSTOM_HEADER == 'Y' ) {
 }
 ?>
 
-<h2><?php 
+<h2><?php
 // If Application Name is set to Title then get translation
 // If not, use the Admin defined Application Name
 if ( ! empty ( $application_name ) &&  $application_name =="Title") {
   etranslate($application_name);
 } else {
   echo htmlspecialchars ( $application_name );
-}  
+}
 ?></h2>
 
 <?php
 if ( ! empty ( $error ) ) {
-  print "<span style=\"color:#FF0000; font-weight:bold;\">" . 
+  print "<span style=\"color:#FF0000; font-weight:bold;\">" .
     translate("Error") . ": $error</span><br />\n";
 } else {
   print "<br />\n";
 }
 ?>
-<form name="login_form" id="login" action="login.php" method="post" 
+<form name="login_form" id="login" action="login.php" method="post"
   onsubmit="return valid_form(this)">
 <?php
 if ( ! empty ( $return_path ) ) {
@@ -278,17 +278,17 @@ if ( ! empty ( $return_path ) ) {
 <tr><td rowspan="2">
  <img src="login.gif" alt="Login" /></td><td align="right">
  <label for="user"><?php etranslate("Username")?>:</label></td><td>
- <input name="login" id="user" size="15" maxlength="25" 
-   value="<?php if ( ! empty ( $last_login ) ) echo $last_login;?>" 
+ <input name="login" id="user" size="15" maxlength="25"
+   value="<?php if ( ! empty ( $last_login ) ) echo $last_login;?>"
    tabindex="1" />
 </td></tr>
 <tr><td style="text-align:right;">
  <label for="password"><?php etranslate("Password")?>:</label></td><td>
- <input name="password" id="password" type="password" size="15" 
+ <input name="password" id="password" type="password" size="15"
    maxlength="30" tabindex="2" />
 </td></tr>
 <tr><td colspan="3" style="font-size: 10px;">
- <input type="checkbox" name="remember" id="remember" tabindex="3" 
+ <input type="checkbox" name="remember" id="remember" tabindex="3"
    value="yes" <?php if ( ! empty ( $remember ) && $remember == "yes" ) {
      echo "checked=\"checked\""; }?> /><label for="remember">&nbsp;
    <?php etranslate("Save login via cookies so I don't have to login next time")?></label>

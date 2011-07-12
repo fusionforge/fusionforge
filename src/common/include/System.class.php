@@ -49,7 +49,7 @@ class System extends Error {
 
 	/**
  	* sysCheckUser() - Check for the existence of a user
- 	* 
+ 	*
  	* @param		int		The user ID of the user to check
  	* @returns true on success/false on error
  	*
@@ -115,7 +115,7 @@ class System extends Error {
 	/**
  	* sysUserSetAttribute() - Set an attribute for a user
  	*
- 	* @param		int		The user ID 
+ 	* @param		int		The user ID
  	* @param		string	The attribute to set
  	* @param		string	The new value of the attribute
  	* @returns true on success/false on error
@@ -128,10 +128,10 @@ class System extends Error {
 	/*
  	* Group management functions
  	*/
-	
+
 	/**
  	* sysCheckGroup() - Check for the existence of a group
- 	* 
+ 	*
  	* @param		int		The ID of the group to check
  	* @returns true on success/false on error
  	*
@@ -142,7 +142,7 @@ class System extends Error {
 
 	/**
  	* sysCreateGroup() - Create a group
- 	* 
+ 	*
  	* @param		int		The ID of the group to create
  	* @returns true on success/false on error
  	*
@@ -153,7 +153,7 @@ class System extends Error {
 
 	/**
  	* sysRemoveGroup() - Remove a group
- 	* 
+ 	*
  	* @param		int		The ID of the group to remove
  	* @returns true on success/false on error
  	*

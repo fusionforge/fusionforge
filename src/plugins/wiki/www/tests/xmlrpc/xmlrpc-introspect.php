@@ -4,8 +4,8 @@
 * system.describeMethods Support *
 *********************************/
 
-/* public function. format method description. 
- * input = result from xmlrpc method "system.describeMethods" in a php array 
+/* public function. format method description.
+ * input = result from xmlrpc method "system.describeMethods" in a php array
  * result = html string suitable for display.
  */
 function format_describe_methods_result($response) {
@@ -187,7 +187,7 @@ function do_param($param, $bNewType=false, $bLinkUserTypes=true, $depth=0) {
       if ($bLinkUserTypes) {
          $type = "<a href='#$type'>$type</a>";
       }
-      else {  
+      else {
          /* hack to display user values inline.  max depth check above. */
          global $xi_type_hash;
          $newtype = $xi_type_hash[$type];

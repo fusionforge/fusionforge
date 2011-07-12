@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is (c) Copyright 2010 by Sabri LABBENE, Institut TELECOM
  *
@@ -6,12 +6,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -25,7 +25,7 @@ require_once($exceptions_dir . 'oslcException.php');
  *
  */
 class CompactController extends Zend_Rest_Controller {
-	
+
 	private static $supportedAcceptMimeTypes = array(
 		'get' => array(
 			'application/x-oslc-compact+xml' => 'xml'
@@ -39,7 +39,7 @@ class CompactController extends Zend_Rest_Controller {
 	);
 
 	private $rest_controller;
-	
+
 	/**
 	 * Initilizes the Zend REST controler
 	 */
@@ -47,15 +47,15 @@ class CompactController extends Zend_Rest_Controller {
 		$controller_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 		require_once($controller_dir . 'FusionForgeCompactController.php');
 	}
-	
+
 	public function getSupportedAcceptMimeTypes(){
 		return self::$supportedAcceptMimeTypes;
 	}
-	
+
 	public function checkSupportedActionMimeType($mime_types, $action) {
 		$req = $this->getRequest();
 
-		// check Accept header's mime type 
+		// check Accept header's mime type
 		$accept = $req->getHeader('Accept');
 
 		// prepare an array of accepted types
@@ -65,7 +65,7 @@ class CompactController extends Zend_Rest_Controller {
 		}
 		// make sure text/html is always an option (in last option)
 		$accepted_types[]='text/html';
-		
+
 		// If we can't directly find the accept header, then, have to negociate maybe among alternatives
 		if(!isset($mime_types[$action][$accept])) {
 			// use PEAR's HTTP::negotiateMimeType to identify the preferred content-type
@@ -84,7 +84,7 @@ class CompactController extends Zend_Rest_Controller {
 
 		return $content_type;
 	}
-	
+
 	public function getAction(){
 		switch (TRACKER_TYPE) {
 				case 'fusionforge':
@@ -94,21 +94,21 @@ class CompactController extends Zend_Rest_Controller {
 					break;
 			}
 	}
-	
+
 	public function putAction() {
-		
+
 	}
-	
+
 	public function postAction() {
-		
+
 	}
-	
+
 	public function deleteAction() {
-		
+
 	}
-	
+
 	public function indexAction() {
-		
+
 	}
 }
 ?>

@@ -23,12 +23,12 @@ class HtmlPurifier_Tests extends PHPUnit_Framework_TestCase
 	    // so include instead :
 	    include 'HTMLPurifier.auto.php';
 	  }
-	  
+
 	  catch (PHPUnit_Framework_Error $expected) {
 	    $this->fail('You probably need to install htmlpurifier : '.$expected->getMessage());
             return;
 	  }
- 	  
+
 	}
 
 }

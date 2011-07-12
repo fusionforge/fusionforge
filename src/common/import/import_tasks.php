@@ -12,7 +12,7 @@ require_once($gfcommon.'include/User.class.php');
 class Tasks{
 
 	function __construct($trackers, $group_id, $users) {
-		
+
 		$this->group =& group_get_object($group_id);
 		if (!$this->group || !is_object($this->group)) {
 			print "error retrieving group from id";
@@ -41,7 +41,7 @@ class Tasks{
 			$artifact->addMessage($c['comment'], $importData);
 		}
 	}
-	
+
 	/**
 	 * addHistory - Add history of changes to an Artifact Object
 	 * @param Artifact	the artifact object where history should be added
@@ -72,7 +72,7 @@ class Tasks{
 			$artifact->addHistory($h['field'],$old, $importData);
 		}
 	}
-	
+
 	/**
 	 * createTaskTracker - Create a specific tracker from data in the specified group
 	 * @param string Tracker type (bugs, support, ...)
@@ -80,7 +80,7 @@ class Tasks{
 	 * @param array	Tracker data from JSON
 	 * @return ArtifactType	the tracker created
 	 */
-	
+
 	function createTaskTracker($data){
 		// TaskTracker's type
 		$tracker = $data['type'];
@@ -119,7 +119,7 @@ class Tasks{
 		db_commit();
 		return $output;
 	}
-	
+
 	/**
 	 * Create each category for a single project group
 	 * @param ProjectGroup $pg
@@ -146,7 +146,7 @@ class Tasks{
 		}
 		return $cats;
 	}
-	
+
 	/**
 	 * Create each task for the considered project group
 	 * @param ProjectGroup $pg
@@ -162,14 +162,14 @@ class Tasks{
 			$artifact = new ProjectTask($pg);
 			if ($artifact){
 				$start = strtotime($a['start_date']);
-				$end = strtotime($a['end_date']); 
+				$end = strtotime($a['end_date']);
 				$assigned = array();
 				if(is_array($a['assigned_to[]'])){
 					foreach($a['assigned_to[]'] as $realname){
 						if($realname == 'None'){
 							$assigned[]=100;
 						}else{
-							$assigned[] = user_get_object_by_mail($this->hashrn[$realname])->getID(); // this should be done once instead of for each artifact, TODO	
+							$assigned[] = user_get_object_by_mail($this->hashrn[$realname])->getID(); // this should be done once instead of for each artifact, TODO
 						}
 					}
 				} else {
@@ -185,7 +185,7 @@ class Tasks{
 				if(!$artifact->create($a['summary'], $a['description'], $a['priority'], $a['hours'], $start, $end, $cats[$a['category']], $a['percent_complete'], &$assigned, &$dependentTemp, 0, 0, array('user' => $uid))){
 					return false;
 				} else {
-					
+
 					$atid =  $artifact->getID();
 					$atids[$a['summary']] = $atid;
 					$dependent[$atid] = $a['dependent_on[]'];
@@ -205,13 +205,13 @@ class Tasks{
 						$dependentIds[$atids[$taskName]] = 'FS'; // Default to PM_LINK_DEFAULT defined as FS in ProjectTask class, it seems there is no way to use any of the other relations anyway...
 					}
 				} else {
-					$dependentIds[$atids[$depNames]] = 'FS';				
+					$dependentIds[$atids[$depNames]] = 'FS';
 				}
 				$artifact->setDependentOn($dependentIds);
 			}
 		}
 	}
-	
+
 	/**
 	 * deleteTrackers - Delete all existing default trackers from a projet
 	 * @param Group A Group object
@@ -225,7 +225,7 @@ class Tasks{
 			}
 		}
 	}
-	
+
 	function createAllTasks(){
 		if($this->taskCreationArray){
 			foreach($this->taskCreationArray as $taskCreation){
@@ -233,17 +233,17 @@ class Tasks{
 			}
 		}
 	}
-	
+
 	/**
 	 * tracker_fill - Create trackers from an array in a given group
 	 * @param array Trackers part of a JSON pluck, including label, artifacts, vocabulary...
 	 * @param int	Group id of the group where the trackers should be added
 	 */
 	function tasks_fill(){
-	
+
 		//existing tracker deletion
 		$this->deleteTrackers();
-		
+
 		//Tracker creation
 		$this->taskCreationArray = array(); // This array is used to store each projectGroup and each artifacts which will be imported later, we need to stop the script so as to update permissions again (default to Read for each new TaskTracker, and thus nobody can be assigned to a task except userid 100 which is Nobody)
 		foreach ($this->trackers as $data){

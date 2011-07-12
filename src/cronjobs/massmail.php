@@ -2,7 +2,7 @@
 <?php
 /**
  * Massmail backend cron script
- * This is mass mailing backend script which actually sends messages 
+ * This is mass mailing backend script which actually sends messages
  * of the mailings scheduled via the web frontend.
  * Mailing types, for which this is applicable, have trailer
  * appended with individual URL for unsubscription from future
@@ -149,8 +149,8 @@ by logging in to %1$s and visiting your Account Maintenance
 page (%2$s), or disable them altogether
 by visiting following link:
 <%3$s>
-'), 
-				  forge_get_config ('forge_name'), 
+'),
+				  forge_get_config ('forge_name'),
 				  util_make_url('/account/'),
 				  util_make_url('/account/unsubscribe.php?ch=_'.$user->getConfirmHash())) ;
 	} else {
@@ -175,7 +175,7 @@ m_exit($mess);
 
 function m_exit($mess = '') {
 	global $err;
-	
+
 	if (!cron_remove_lock(__FILE__)) {
 		$err .= "Could not remove lock\n";
 	}

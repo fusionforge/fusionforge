@@ -24,21 +24,21 @@
 require_once $gfcommon.'search/SearchQuery.class.php';
 
 class ArtifactSearchQuery extends SearchQuery {
-	
+
 	/**
 	 * group id
 	 *
 	 * @var int $groupId
 	 */
 	var $groupId;
-	
+
 	/**
 	 * artifact id
 	 *
 	 * @var int $artifactId
 	 */
 	var $artifactId;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -52,7 +52,7 @@ class ArtifactSearchQuery extends SearchQuery {
 		//TODO: Why is groupId an arg and var since it isn't used anywhere?
 		$this->groupId = $groupId;
 		$this->artifactId = $artifactId;
-		
+
 		$this->SearchQuery($words, $offset, $isExact);
 	}
 
@@ -135,7 +135,7 @@ class ArtifactSearchQuery extends SearchQuery {
 			$qpa = db_construct_qpa ($qpa,
 						 'FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id), users WHERE a.group_artifact_id=$1 AND users.user_id=a.submitted_by AND ((',
 						 array ($this->artifactId)) ;
-			
+
 			$qpa = $this->addIlikeCondition ($qpa, 'a.details') ;
 			$qpa = db_construct_qpa ($qpa,
 						 ') OR (') ;
@@ -153,7 +153,7 @@ class ArtifactSearchQuery extends SearchQuery {
 	 * getSearchByIdQuery - get the query built to get the search results when we are looking for an int
 	 *
 	 * @return array query+params array
-	 */	
+	 */
 	function getSearchByIdQuery() {
 		$qpa = db_construct_qpa () ;
 

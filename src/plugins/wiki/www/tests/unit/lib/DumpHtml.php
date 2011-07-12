@@ -17,7 +17,7 @@ class DumpHtml extends phpwiki_TestCase {
         $request->setArg('action', 'dumphtml');
         unlink($cur_dir."/.dumphtml/$pagename.html");
         DumpHtmlToDir($request);
-        $this->assertTrue(file_exists($cur_dir."/.dumphtml/$pagename.html")); 
+        $this->assertTrue(file_exists($cur_dir."/.dumphtml/$pagename.html"));
     }
 
     /* at first dump some problematic pages */
@@ -46,7 +46,7 @@ class DumpHtml extends phpwiki_TestCase {
         //FIXME: LinkDatabase doesn't work for DumpHtmlToDir
         //$request->setArg('exclude','LinkDatabase');  // this does not work with format=text => exit
         DumpHtmlToDir($request);
-        $this->assertTrue(file_exists($cur_dir."/.dumphtml/".HOME_PAGE.".html")); 
+        $this->assertTrue(file_exists($cur_dir."/.dumphtml/".HOME_PAGE.".html"));
     }
 
 }

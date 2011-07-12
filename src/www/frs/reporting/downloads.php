@@ -117,20 +117,20 @@ if (count($data) == 0) {
 
     for ($i=0; $i<count($data); $i++) {
 		$date = preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][4]);
-		
+
 	echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
 		'<td>'. $data[$i][0] .'</td>'.
 		'<td>'. $data[$i][1] .'</td>'.
 		'<td>'. basename($data[$i][2]) .'</td>'.
 		'<td><a href="/users/'.urlencode($data[$i][5]).'/">'. $data[$i][3] .'</a></td>'.
 		'<td align="center">'. $date .'</td></tr>';
-	
+
     }
 
     echo $HTML->listTableBottom ();
 
 }
-	
+
 frs_footer();
 
 ?>

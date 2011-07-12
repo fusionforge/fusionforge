@@ -46,7 +46,7 @@ class Survey extends Error {
 	 *
 	 * @var	object	$Group.
 	 */
-	var $Group; 
+	var $Group;
 
 	/**
 	 * Constructor.
@@ -86,7 +86,7 @@ class Survey extends Error {
 	}
 
 	/**
-	 * create - use this function to create a survey 
+	 * create - use this function to create a survey
 	 *
 	 * @param	string	          The survey title
 	 * @param	int array         The question numbers to be added
@@ -131,7 +131,7 @@ class Survey extends Error {
 
 
 	/**
-	 * update - use this function to update a survey 
+	 * update - use this function to update a survey
 	 *
 	 * @param	string	          The survey title
 	 * @param	int array         The question numbers to be added
@@ -194,7 +194,7 @@ class Survey extends Error {
 		/* Decide delta */
 		if ($is_up) {
 			$delta = -1;
-		} else { 
+		} else {
 			$delta = 1;
 		}
 
@@ -208,7 +208,7 @@ class Survey extends Error {
 			$this->setError(_('UPDATE FAILED').db_error());
 			return false;
 		}
-		
+
 		/* Update internal data */
 		return $this->fetchData($survey_id);
 	}
@@ -244,7 +244,7 @@ class Survey extends Error {
 	 */
 	function fetchData($survey_id) {
 		$group_id = $this->Group->GetID();
-		
+
 		$res = db_query_params('SELECT * FROM surveys where survey_id=$1 AND group_id=$2',
 					array($survey_id, $group_id)) ;
 
@@ -319,16 +319,16 @@ class Survey extends Error {
 	function getNumberOfVotes() {
 		$group_id = $this->Group->GetID();
 		$survey_id = $this->getID();
-		
+
 		$res = db_query_params ('SELECT 1 FROM survey_responses WHERE survey_id=$1 AND group_id=$2 GROUP BY user_id',
 					array ($survey_id,
 					       $group_id)) ;
 		$ret = db_numrows($res);
-		db_free_result($res);		
-		
+		db_free_result($res);
+
 		return $ret;
 	}
-	
+
 	/**
 	 *	isUserVote - Figure out the user voted or not
 	 *
@@ -344,11 +344,11 @@ class Survey extends Error {
 					       $group_id,
 					       $user_id)) ;
 		$ret = db_numrows($res);
-		db_free_result($res);		
-		
+		db_free_result($res);
+
 		return $ret;
 	}
-	
+
 	/**
 	 *	getQuestionArray - Get the question string numbers in array
 	 *
@@ -363,13 +363,13 @@ class Survey extends Error {
 
 		$arr_from_str = explode(',', $questions);
 
-		/* Remove non existed questions */ 
+		/* Remove non existed questions */
 		for ($i=0; $i<count($arr_from_str); $i++) {
 			if ($this->_isValidQuestionID($arr_from_str[$i])) {
 				$ret_arr[] = $arr_from_str[$i];
 			}
 		}
-		
+
 		return $ret_arr;
 	}
 
@@ -416,7 +416,7 @@ class Survey extends Error {
 		if ($arr) {
 			/* Copy questions only if it is not in question string */
 			for ($i=0; $i<count($this->all_question_array); $i++) {
-				if (array_search($this->all_question_array[$i]->getID(), $arr) == false && 
+				if (array_search($this->all_question_array[$i]->getID(), $arr) == false &&
 					$this->all_question_array[$i]->getID()!=$arr[0]) {
 					$ret[] = $this->all_question_array[$i];
 				}
@@ -430,7 +430,7 @@ class Survey extends Error {
 
 	/***************************************************************
 	 * private question string deal methods
-	 * TODO: Add a joint table for surveys and survey_questions. 
+	 * TODO: Add a joint table for surveys and survey_questions.
 	 *       Deal with DBMS not comma separated string
          ***************************************************************/
 
@@ -444,18 +444,18 @@ class Survey extends Error {
 		$this->all_question_array = & $sqf->getSurveyQuestions();
 	}
 
-	
+
 	/**
 	 * _isValidQuestionID - Check it is correct question id
 	 *
-	 * @param	int	questioin id 
+	 * @param	int	questioin id
 	 * @return	boolean	true if it is valid question id
 	 */
 	function _isValidQuestionID($question_id) {
 		if (!$this->all_question_array || !is_array($this->all_question_array)) {
 			$this->_fillSurveyQuestions();
 		}
-		
+
 		for ($i=0; $i<count($this->all_question_array); $i++) {
 			if ($question_id == $this->all_question_array[$i]->getID()) {
 				return true;
@@ -504,7 +504,7 @@ class Survey extends Error {
 				}
 			}
 		}
-		
+
 		/* questions to delete */
 		if ($arr_to_del && is_array($arr_to_del) && count($arr_to_del)>0) {
 			$new_arr = array();
@@ -540,8 +540,8 @@ class Survey extends Error {
 
 		$index = array_search($question_number, $arr);
 
-		/* The question number is not in the array 
-		 * We have nothing to change 
+		/* The question number is not in the array
+		 * We have nothing to change
 		 */
 		if ($index==false && $question_number!=$arr[0]) {
 			return $this->getQuestionString();

@@ -68,7 +68,7 @@ GROUP BY fgl.group_forum_id',
 	if (!$res) {
 		$err .= "INSERT INTO forum_agg_msg_count : ".db_error();
 	}
-	
+
 	db_commit();
 }
 
@@ -98,9 +98,9 @@ FROM artifact_group_list agl
 LEFT JOIN artifact a USING (group_artifact_id)
 GROUP BY agl.group_artifact_id',
 			      array()) ;
-	
+
 	$err .= db_error();
-	
+
 	db_commit();
 }
 

@@ -24,7 +24,7 @@
 
 /**
 * This class is a simple utility to validate fields
-* 
+*
 * Sample usage:
 *
 * $v = new Validator();
@@ -58,7 +58,7 @@ class Validator {
 	function isClean() {
 		return count($this->badfields) == 0;
 	}
-	
+
 	/**
 	* Returns an error message which contains the null field names which have been checked
 	*

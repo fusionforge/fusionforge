@@ -74,8 +74,8 @@ if (getStringFromRequest('deletevhost')) {
 	//schedule for deletion
 
 	$res =	db_query_params ('
-		SELECT * 
-		FROM prweb_vhost 
+		SELECT *
+		FROM prweb_vhost
 		WHERE vhostid=$1
 	',
 			array($vhostid));
@@ -83,8 +83,8 @@ if (getStringFromRequest('deletevhost')) {
 	$row_vh = db_fetch_array($res);
 
 	$res = db_query_params ('
-		DELETE FROM prweb_vhost 
-		WHERE vhostid=$1 
+		DELETE FROM prweb_vhost
+		WHERE vhostid=$1
 		AND group_id=$2
 	',
 			array($vhostid,
@@ -114,7 +114,7 @@ print '</p>';
 
 ?>
 
-<form name="new_vhost" action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&amp;createvhost=1'; ?>" method="post"> 
+<form name="new_vhost" action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&amp;createvhost=1'; ?>" method="post">
 <table border="0">
 <tr>
 	<td> <?php echo _('New Virtual Host <em>(e.g. vhost.org)</em>') ?> </td>
@@ -130,7 +130,7 @@ $res_db = db_query_params('
 	SELECT *
 	FROM prweb_vhost
 	WHERE group_id=$1', array($group->getID()));
-	
+
 if (db_numrows($res_db) > 0) {
 
 	$title=array();
@@ -143,7 +143,7 @@ if (db_numrows($res_db) > 0) {
 		print '	<tr>
 			<td>'.$row_db['vhost_name'].'</td>
 			<td>[ <strong><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&amp;vhostid='.$row_db['vhostid'].'&amp;deletevhost=1">'._('Delete').'</a></strong>]
-			</tr>	
+			</tr>
 		';
 
 	}

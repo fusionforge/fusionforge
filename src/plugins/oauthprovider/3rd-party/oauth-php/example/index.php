@@ -95,7 +95,7 @@ foreach ($sig_methods as $key => $method) {
 ?>
 </ul>
 
-<?php 
+<?php
 if ("RSA-SHA1" == $sig_method->get_name()) {
   print "<pre>" . $sig_method->fetch_private_cert($req_req) . "</pre>\n";
   print "<pre>" . $sig_method->fetch_public_cert($req_req) . "</pre>\n";

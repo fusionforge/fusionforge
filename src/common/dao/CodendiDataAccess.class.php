@@ -23,12 +23,12 @@
 require_once('include/DataAccess.class.php');
 
 class CodendiDataAccess extends DataAccess {
-    
+
     protected function __construct() {
-      
+
       $this->DataAccess();
     }
-    
+
     protected static $_instance;
     public static function instance() {
         if (!isset(self::$_instance)) {
@@ -37,8 +37,8 @@ class CodendiDataAccess extends DataAccess {
         }
         return self::$_instance;
     }
-    
-    
+
+
 }
 
 

@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Copyright (C) 2010 Roland Mas, Olaf Lenz
  * Copyright (C) 2011 France Telecom
  *
@@ -24,12 +24,12 @@ class DatabaseForge extends DataBase{
 	function DatabaseForge($server=false, $user=false, $password=false,
 			       $dbName=false, $failFunction=false, $flags=0) {
 		global $wgDBtype;
-		
+
 		$wgDBtype = "mysql";
 		return Database::__construct($server, $user,
 							  $password, $dbName, $failFunction, $flags);
 	}
-	
+
 	function tableName($name) {
 		switch ($name) {
 		case 'interwiki':

@@ -233,7 +233,7 @@ function report_pie_arr($labels, $vals, $format=1) {
 		$pie_labels[]=_('Other')." (". number_format($rem,$format) .") ";
 		$pie_vals[]=$rem;
 	}
-	
+
 }
 
 function report_package_box($group_id, $name='dev_id', $selected='') {

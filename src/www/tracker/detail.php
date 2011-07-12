@@ -41,7 +41,7 @@ echo notepad_func();
 	<table cellpadding="0" width="100%">
 		<tr>
 			<td>
-				<?php 
+				<?php
 					if ($ah->isMonitoring()) {
 						$img="xmail16w.png";
 						$key="monitorstop";
@@ -109,7 +109,7 @@ echo notepad_func();
 			<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 			<p>
-			<strong><?php echo _('Add A Comment') ?>:</strong> 
+			<strong><?php echo _('Add A Comment') ?>:</strong>
 			<?php echo notepad_button('document.forms.trackerdetailform.details') ?><br />
 			<textarea name="details" rows="10" cols="60"></textarea>
 			</p>

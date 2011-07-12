@@ -12,7 +12,7 @@
  */
 
 /**
-    \mainpage 
+    \mainpage
 
      @version V4.22 15 Apr 2004 (c) 2000-2004 John Lim (jlim\@natsoft.com.my). All rights reserved.
 
@@ -139,7 +139,7 @@
                 die("Illegal path http:// or ftp://");
         }
 
-    
+
         // Initialize random number generator for randomizing cache flushes
         srand(((double)microtime())*1000000);
 
@@ -208,7 +208,7 @@
     // PUBLIC VARS
     //
     var $dataProvider = 'native';
-    var $databaseType = '';        /// RDBMS currently in use, eg. odbc, mysql, mssql            
+    var $databaseType = '';        /// RDBMS currently in use, eg. odbc, mysql, mssql
     var $database = '';            /// Name of database to be used.
     var $host = '';             /// The hostname of the database server
     var $user = '';             /// The username which is used to connect to the database server.
@@ -280,7 +280,7 @@
     var $_connectionID    = false;    /// The returned link identifier whenever a successful database connection is made.
     var $_errorMsg = false;        /// A variable which was used to keep the returned last error message.  The value will
                                 /// then returned by the errorMsg() function
-    var $_errorCode = false;    /// Last error code, not guaranteed to be used - only by oci8            
+    var $_errorCode = false;    /// Last error code, not guaranteed to be used - only by oci8
     var $_queryID = false;        /// This variable keeps the last created result link identifier
 
     var $_isPersistentConnection = false;    /// A boolean variable to state whether its a persistent connection or normal connection.    */
@@ -294,7 +294,7 @@
     /**
      * Constructor
      */
-    function ADOConnection()    
+    function ADOConnection()
     {
         die('Virtual Class -- cannot instantiate');
     }
@@ -429,7 +429,7 @@
         if ($argUsername != "") $this->user = $argUsername;
         if ($argPassword != "") $this->password = $argPassword;
         if ($argDatabaseName != "") $this->database = $argDatabaseName;
-    
+
         $this->_isPersistentConnection = true;
 
         if ($fn = $this->raiseErrorFn) {
@@ -751,10 +751,10 @@
             $element0 = reset($inputarr);
             # is_object check is because oci8 descriptors can be passed in
             $array_2d = is_array($element0) && !is_object(reset($element0));
-    
+
             if (!is_array($sql) && !$this->_bindInputArray) {
                 $sqlarr = explode('?',$sql);
-            
+
                 if (!$array_2d) $inputarr = array($inputarr);
                 foreach($inputarr as $arr) {
                     $sql = ''; $i = 0;
@@ -771,7 +771,7 @@
                         $i += 1;
                     }
                     $sql .= $sqlarr[$i];
-            
+
                     if ($i+1 != sizeof($sqlarr))
                         ADOConnection::outp( "Input Array does not match ?: ".htmlspecialchars($sql));
 
@@ -810,10 +810,10 @@
                 $ss = "[ $ss ]";
             }
             $sqlTxt = str_replace(',',', ',is_array($sql) ?$sql[0] : $sql);
-    
+
             // check if running from browser or command-line
             $inBrowser = isset($HTTP_SERVER_VARS['HTTP_USER_AGENT']);
-    
+
             if ($inBrowser) {
                 if ($this->debug === -1)
                     ADOConnection::outp( "<br>\n($this->databaseType): ".htmlspecialchars($sqlTxt)." &nbsp; <code>$ss</code>\n<br>\n",false);
@@ -839,7 +839,7 @@
             //****************************
             // non-debug version of query
             //****************************
-    
+
             $this->_queryID =@$this->_query($sql,$inputarr);
         }
 
@@ -854,7 +854,7 @@
             if ($fn) {
                 $fn($this->databaseType,'EXECUTE',$this->ErrorNo(),$this->ErrorMsg(),$sql,$inputarr,$this);
             }
-        
+
             return false;
         }
 
@@ -971,7 +971,7 @@
             $val = $this->_affectedrows();
             return ($val < 0) ? false : $val;
         }
-        
+
         if ($this->debug) ADOConnection::outp( '<p>Affected_Rows error</p>',false);
         return false;
     }
@@ -1071,9 +1071,9 @@
             $ismssql = (strpos($this->databaseType,'mssql') !== false);
             if ($ismssql) $isaccess = false;
             else $isaccess = (strpos($this->databaseType,'access') !== false);
-    
+
             if ($offset <= 0) {
-        
+
                     // access includes ties in result
                     if ($isaccess) {
                         $sql = preg_replace(
@@ -1110,7 +1110,7 @@
 
         $savec = $ADODB_COUNTRECS;
         $ADODB_COUNTRECS = false;
-    
+
         if ($offset>0){
             if ($secs2cache>0) $rs = &$this->CacheExecute($secs2cache,$sql,$inputarr);
             else $rs = &$this->Execute($sql,$inputarr);
@@ -1295,7 +1295,7 @@
         Calculate the offset of a date for a particular database and generate
             appropriate SQL. Useful for calculating future/past dates and storing
             in a database.
-    
+
         If dayFraction=1.5 means 1.5 days from now, 1.0/24 for 1 hour.
     */
     function OffsetDate($dayFraction,$date=false)
@@ -1522,7 +1522,7 @@
         if (empty($ADODB_INCLUDED_CSV)) include_once(ADODB_DIR.'/adodb-csvlib.inc.php');
 
         if (is_array($sql)) $sql = $sql[0];
-    
+
         $md5file = $this->_gencachename($sql.serialize($inputarr),true);
         $err = '';
 
@@ -1559,13 +1559,13 @@
                     //$rs = &csv2rs($md5file,$err);
                     $rs->connection = &$this; // Pablo suggestion
                 }
-        
+
             } else
                 @unlink($md5file);
         } else {
             $this->_errorMsg = '';
             $this->_errorCode = 0;
-    
+
             if ($this->fnCacheExecute) {
                 $fn = $this->fnCacheExecute;
                 $fn($this, $secs2cache, $sql, $inputarr);
@@ -1574,12 +1574,12 @@
             $rs->connection = &$this; // Pablo suggestion
             if ($this->debug){
             global $HTTP_SERVER_VARS;
-            
+
                 $inBrowser = isset($HTTP_SERVER_VARS['HTTP_USER_AGENT']);
                 $ttl = $rs->timeCreated + $secs2cache - time();
                 $s = is_array($sql) ? $sql[0] : $sql;
                 if ($inBrowser) $s = '<i>'.htmlspecialchars($s).'</i>';
-        
+
                 ADOConnection::outp( " $md5file reloaded, ttl=$ttl [ $s ]");
             }
         }
@@ -1736,7 +1736,7 @@
                 $this->fmtDate="d-m-Y";
                 $this->fmtTimeStamp = "d-m-Y H:i:s";
                 break;
-        
+
             case 'Ge':
                 $this->fmtDate="d.m.Y";
                 $this->fmtTimeStamp = "d.m.Y H:i:s";
@@ -1769,13 +1769,13 @@
         case 'X':
             return 'VARCHAR';
         case 'B':
-    
+
         case 'D':
         case 'T':
         case 'L':
 
         case 'R':
-    
+
         case 'I':
         case 'N':
             return false;
@@ -1837,16 +1837,16 @@
             if ($this->metaDatabasesSQL) {
                 $save = $ADODB_FETCH_MODE;
                 $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-        
+
                 if ($this->fetchMode !== false) $savem = $this->SetFetchMode(false);
-        
+
                 $arr = $this->GetCol($this->metaDatabasesSQL);
                 if (isset($savem)) $this->SetFetchMode($savem);
                 $ADODB_FETCH_MODE = $save;
-    
+
                 return $arr;
             }
-    
+
             return false;
         }
 
@@ -1870,21 +1870,21 @@
             // complicated state saving by the need for backward compat
             $save = $ADODB_FETCH_MODE;
             $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-    
+
             if ($this->fetchMode !== false) $savem = $this->SetFetchMode(false);
-    
+
             $rs = $this->Execute($this->metaTablesSQL);
             if (isset($savem)) $this->SetFetchMode($savem);
             $ADODB_FETCH_MODE = $save;
-    
+
             if ($rs === false) return false;
             $arr =& $rs->GetArray();
             $arr2 = array();
-    
+
             if ($hast = ($ttype && isset($arr[0][1]))) {
                 $showt = strncmp($ttype,'T',1);
             }
-    
+
             for ($i=0; $i < sizeof($arr); $i++) {
                 if ($hast) {
                     if ($showt == 0) {
@@ -1948,7 +1948,7 @@
                     if ($fld->scale>0) $fld->max_length += 1;
                 } else
                     $fld->max_length = $rs->fields[2];
-            
+
                 if ($ADODB_FETCH_MODE == ADODB_FETCH_NUM) $retarr[] = $fld;
                 else $retarr[$fld->name] = $fld;
                 $rs->MoveNext();
@@ -1988,7 +1988,7 @@
         }
         return $arr;
     }
-    
+
     /**
      * Different SQL databases used different methods to combine strings together.
      * This function provides a wrapper.
@@ -1998,7 +1998,7 @@
      * Usage: $db->Concat($str1,$str2);
      *
      * @return concatenated string
-     */ 
+     */
     function Concat()
     {
         $arr = func_get_args();
@@ -2077,7 +2077,7 @@
         if (!preg_match(
             "|^([0-9]{4})[-/\.]?([0-9]{1,2})[-/\.]?([0-9]{1,2})[ ,-]*(([0-9]{1,2}):?([0-9]{1,2}):?([0-9\.]{1,4}))?|",
             ($v), $rr)) return false;
-    
+
         if ($rr[1] <= TIMESTAMP_FIRST_YEAR && $rr[2]<= 1) return 0;
 
         // h-m-s-MM-DD-YY
@@ -2355,7 +2355,7 @@
             $this->_numOfFields = 0;
         }
         if ($this->_numOfRows != 0 && $this->_numOfFields && $this->_currentRow == -1) {
-    
+
             $this->_currentRow = 0;
             if ($this->EOF = ($this->_fetch() === false)) {
                 $this->_numOfRows = 0; // _numOfRows could be -1
@@ -2594,7 +2594,7 @@
 
         if (!preg_match( "|^([0-9]{4})[-/\.]?([0-9]{1,2})[-/\.]?([0-9]{1,2})|",
             ($v), $rr)) return false;
-    
+
         if ($rr[1] <= TIMESTAMP_FIRST_YEAR) return 0;
         // h-m-s-MM-DD-YY
         return @adodb_mktime(0,0,0,$rr[2],$rr[3],$rr[1]);
@@ -2685,8 +2685,8 @@
     function MoveFirst()
     {
         if ($this->_currentRow == 0) return true;
-        return $this->Move(0);    
-    }    
+        return $this->Move(0);
+    }
 
 
     /**
@@ -2744,7 +2744,7 @@
         if ($rowNumber == $this->_currentRow) return true;
         if ($rowNumber >= $this->_numOfRows)
                if ($this->_numOfRows != -1) $rowNumber = $this->_numOfRows-2;
-          
+
         if ($this->canSeek) {
 
             if ($this->_seek($rowNumber)) {
@@ -2764,10 +2764,10 @@
                     adodb_movenext($this);
                 }
             } else {
-    
+
                 while (! $this->EOF && $this->_currentRow < $rowNumber) {
                     $this->_currentRow++;
-            
+
                     if (!$this->_fetch()) $this->EOF = true;
                 }
             }
@@ -2909,7 +2909,7 @@
      * @return the number of columns in the recordset. Some databases will set this to 0
      * if no records are returned, others will return the number of columns in the query.
      */
-    function FieldCount() {return $this->_numOfFields;} 
+    function FieldCount() {return $this->_numOfFields;}
 
 
     /**
@@ -2972,7 +2972,7 @@
             $name = $this->_names[$i];
             if ($isupper) $n = strtoupper($name);
             else $n = $name;
-    
+
             $o->$n = $this->Fields($name);
         }
         return $o;
@@ -3149,14 +3149,14 @@
                 return 'X';
             }
             return 'C';
-    
+
         case 'I':
             if (!empty($fieldobj->primary_key)) return 'R';
             return 'I';
 
         case false:
             return 'N';
-    
+
         case 'B':
              if (isset($fieldobj->binary))
                  return ($fieldobj->binary) ? 'B' : 'X';
@@ -3165,7 +3165,7 @@
         case 'D':
             if (!empty($this->datetime)) return 'T';
             return 'D';
-    
+
         default:
             if ($t == 'LONG' && $this->dataProvider == 'oci8') return 'B';
             return $tmap;
@@ -3334,10 +3334,10 @@
             $o->name = $this->_colnames[$fieldOffset];
             $o->type =  $this->_types[$fieldOffset];
             $o->max_length = -1; // length not known
-    
+
             return $o;
         }
-    
+
         function _seek($row)
         {
             if (sizeof($this->_array) && 0 <= $row && $row < $this->_numOfRows) {
@@ -3353,9 +3353,9 @@
         {
             if (!$this->EOF) {
                 $this->_currentRow++;
-        
+
                 $pos = $this->_currentRow;
-        
+
                 if ($this->_numOfRows <= $pos) {
                     if (!$this->compat) $this->fields = false;
                 } else {
@@ -3365,14 +3365,14 @@
                 }
                 $this->EOF = true;
             }
-    
+
             return false;
         }
 
         function _fetch()
         {
             $pos = $this->_currentRow;
-    
+
             if ($this->_numOfRows <= $pos) {
                 if (!$this->compat) $this->fields = false;
                 return false;
@@ -3391,7 +3391,7 @@
 
     //==============================================================================================
     // HELPER FUNCTIONS
-    //==============================================================================================    
+    //==============================================================================================
 
     /**
      * Synonym for ADOLoadCode. Private function. Do not use.
@@ -3475,7 +3475,7 @@
                          $db,false,$ignore);
             } else
                  ADOConnection::outp( "<p>ADONewConnection: Unable to load database driver '$db'</p>",false);
-        
+
             return false;
         }
 
@@ -3578,7 +3578,7 @@
             // getmypid() actually returns 0 on Win98 - never mind!
             $tmpname = $filename.uniqid($mtime).getmypid();
             if (!($fd = fopen($tmpname,'a'))) return false;
-            $ok = ftruncate($fd,0);    
+            $ok = ftruncate($fd,0);
             if (!fwrite($fd,$contents)) $ok = false;
             fclose($fd);
             chmod($tmpname,0644);
@@ -3644,7 +3644,7 @@
         foreach ($traceArr as $arr) {
             $levels -= 1;
             if ($levels < 0) break;
-    
+
             $args = array();
             for ($i=0; $i < $tabs; $i++) $s .=  ($html) ? ' &nbsp; ' : "\t";
             $tabs -= 1;
@@ -3664,10 +3664,10 @@
                 }
             }
             $s .= $arr['function'].'('.implode(', ',$args).')';
-    
-    
+
+
             $s .= @sprintf($fmt, $arr['line'],$arr['file'],basename($arr['file']));
-        
+
             $s .= "\n";
         }
         if ($html) $s .= '</pre>';

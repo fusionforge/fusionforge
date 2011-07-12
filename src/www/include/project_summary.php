@@ -2,7 +2,7 @@
 /**
  * Project Summary
  *
- * Copyright 1999-2001 (c) VA Linux Systems 
+ * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * http://fusionforge.org
  *
@@ -38,7 +38,7 @@ function project_setup_agg($group_id) {
 	if ($res && $rows > 0) {
 		for ($i=0; $i<$rows; $i++) {
 			$project_agg_arr[db_result($res,$i,'type')]=db_result($res,$i,'count');
-		}	
+		}
 	}
 	$project_agg_arr_is_set=true;
 }
@@ -69,7 +69,7 @@ function project_getaggvalue($group_id,$type) {
  * @param		int		The group ID
  */
 function project_get_mail_list_count($group_id) {
-	return project_getaggvalue($group_id,'mail'); 
+	return project_getaggvalue($group_id,'mail');
 }
 
 /**
@@ -78,8 +78,8 @@ function project_get_mail_list_count($group_id) {
  * @param		int		The group ID
  */
 function project_get_survey_count($group_id) {
-	return project_getaggvalue($group_id,'surv'); 
-}	   
+	return project_getaggvalue($group_id,'surv');
+}
 
 /**
  * project_get_public_forum_count() - Get the number of public forums for a project.
@@ -137,14 +137,14 @@ function project_summary($group_id,$mode,$no_table) {
 	if ($mode != 'compact') {
 		$result=db_query_params ('SELECT agl.*,aca.count,aca.open_count
 		FROM artifact_group_list agl
-		LEFT JOIN artifact_counts_agg aca USING (group_artifact_id) 
+		LEFT JOIN artifact_counts_agg aca USING (group_artifact_id)
 		WHERE agl.group_id=$1
 		AND agl.is_public=1
 		ORDER BY group_artifact_id ASC',
 			array($group_id));
 
 		$rows = db_numrows($result);
-	
+
 		if (!$result || $rows < 1) {
 			$return .= '<br /><em>'._('There are no public trackers available').'</em>';
 		} else {
@@ -153,7 +153,7 @@ function project_summary($group_id,$mode,$no_table) {
 				&nbsp;-&nbsp;'.util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name'));
 				$return .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) ;
 				$return .= '</p>';
-			}   
+			}
 		}
 	}
 
@@ -226,7 +226,7 @@ function project_summary($group_id,$mode,$no_table) {
 		}
 	}
 
-	// ######################### Surveys 
+	// ######################### Surveys
 
 	if ($project->usesSurvey()) {
 		$return .= '
@@ -240,7 +240,7 @@ function project_summary($group_id,$mode,$no_table) {
 		}
 	}
 
-	// ######################### SCM 
+	// ######################### SCM
 
 	if ($project->usesSCM()) {
 		$return .= '
@@ -258,7 +258,7 @@ function project_summary($group_id,$mode,$no_table) {
 	}
 
 	// ######################## Released Files
-	
+
 	if ($project->isActive()) {
 		$return .= '
 

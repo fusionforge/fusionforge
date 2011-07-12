@@ -260,7 +260,7 @@ if (forge_get_config('database_name')!=""){
 		     empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0 )
 		{
 			$displayMaxSize = ini_get('post_max_size');
-			
+
 			switch ( substr($displayMaxSize,-1) )
 			{
 			case 'G':

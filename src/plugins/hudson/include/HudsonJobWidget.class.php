@@ -22,18 +22,18 @@ require_once('common/widget/Widget.class.php');
 require_once('PluginHudsonJobDao.class.php');
 
 abstract class HudsonJobWidget extends HudsonWidget {
-    
+
     var $widget_id;
     var $group_id;
-    
+
     var $job;
     var $job_url;
     var $job_id;
-    
+
     function isUnique() {
         return false;
     }
-    
+
     function create(&$request) {
         $content_id = false;
         $vId = new Valid_Uint('job_id');
@@ -47,18 +47,18 @@ abstract class HudsonJobWidget extends HudsonWidget {
         }
         return $content_id;
     }
-    
+
     function destroy($id) {
         $sql = 'DELETE FROM plugin_hudson_widget WHERE id = $1 AND owner_id = $2 AND owner_type = $3';
         db_query_params($sql,array($id,$this->owner_id,$this->owner_type));
     }
-    
+
     function getInstallPreferences() {
         $prefs  = '';
         $prefs .= '<strong>'._("Monitored job:").'</strong><br />';
         $jobs = $this->getAvailableJobs();
 	$selected_jobs_id = $this->getSelectedJobsId();
-        
+
         foreach ($jobs as $job_id => $job) {
             if (in_array($job_id, $selected_jobs_id)) {
     			$options = ' disabled="disabled"';
@@ -80,7 +80,7 @@ abstract class HudsonJobWidget extends HudsonWidget {
         $prefs .= '<strong>'._("Monitored job:").'</strong><br />';
         $jobs = $this->getAvailableJobs();
     	$selected_jobs_id = $this->getSelectedJobsId();
-        
+
         foreach ($jobs as $job_id => $job) {
     		if (in_array($job_id, $selected_jobs_id)) {
     			$options = ' disabled="disabled"';
@@ -97,13 +97,13 @@ abstract class HudsonJobWidget extends HudsonWidget {
         }
         return $prefs;
     }
-    
+
     function updatePreferences(&$request) {
         $request->valid(new Valid_String('cancel'));
         if (!$request->exist('cancel')) {
             $job_id = $request->get($this->id);
             $sql = "UPDATE plugin_hudson_widget SET job_id=$1 WHERE owner_id = $2 AND owner_type = $3 AND id = $4";
-            $res = db_query_params($sql,array($job_id,$this->owner_id,$this->owner_type,(int)$request->get('content_id'))); 
+            $res = db_query_params($sql,array($job_id,$this->owner_id,$this->owner_type,(int)$request->get('content_id')));
         }
         return true;
     }
@@ -121,7 +121,7 @@ abstract class HudsonJobWidget extends HudsonWidget {
         return $selected_jobs_id;
     }
 
-    
+
 }
 
 ?>

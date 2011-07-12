@@ -23,7 +23,7 @@
 
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 require_once $gfcommon.'search/ForumsSearchQuery.class.php';
-	
+
 class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
@@ -38,11 +38,11 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function ForumsHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
-		
+
 		$searchQuery = new ForumsSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember);
-		
+
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_FORUMS, $words, $isExact, $searchQuery, $groupId, 'forums');
-		
+
 		$this->tableHeaders = array(
 			'',
 			_('Thread'),
@@ -64,7 +64,7 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$return = '';
 		$rowColor = 0;
 		$lastForumName = null;
-		
+
 		for($i = 0; $i < $rowsCount; $i++) {
 			//section changed
 			$currentForumName = db_result($result, $i, 'forum_name');
@@ -77,22 +77,22 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 						. '<td width="5%">&nbsp;</td>'
 						. '<td><a href="'.util_make_url ('/forum/message.php?msg_id='. db_result($result, $i, 'msg_id')).'">'
 							. html_image('ic/msg.png', '10', '12').' '.db_result($result, $i, 'subject')
-							.'</a></td>'			
+							.'</a></td>'
 						. '<td width="15%">'.db_result($result, $i, 'realname').'</td>'
 						. '<td width="15%">'.date($dateFormat, db_result($result, $i, 'post_date')).'</td></tr>';
 			$rowColor ++;
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * getSections - get the array of possible sections to search in
-	 * 
+	 *
   	 * @return array sections
-	 */				
+	 */
 	static function getSections($groupId) {
 		$userIsGroupMember = ForumsHtmlSearchRenderer::isGroupMember($groupId);
-		
+
 		return ForumsSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }

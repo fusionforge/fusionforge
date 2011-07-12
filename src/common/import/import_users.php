@@ -89,12 +89,12 @@ $observer_equivs_name_value['Files']='frspackage';
 global $cache_forums;
 global $cache_tasks;
 global $cache_trackers;
-global $cache_frs;	
+global $cache_frs;
 */
 //$cache_forums=array();
 //$cache_tasks=array();
 //$cache_trackers=array();
-//$cache_frs=array();	
+//$cache_frs=array();
 
 /*
 function get_role_by_name($role,$group_id){
@@ -116,10 +116,10 @@ function check_roles(&$roles, $group_id){
   $res = db_query_params('SELECT role_id,role_name
 					FROM role
 					WHERE group_id=$1', array($group_id));
-		
+
   while ($row_roles=db_fetch_array($res)){
     $res_roles[]=array($row_roles['role_name'],$row_roles['role_id']);
-  }	
+  }
   foreach($res_roles as $nameid){
     if(isset($roles[$nameid[0]])){
       $roles[$nameid[0]]["role_id"]=$nameid[1];
@@ -130,17 +130,17 @@ function check_roles(&$roles, $group_id){
   }
   return $rolestodelete;
 }
-*/	
+*/
 /*
 function get_forum_id($forumname,$group_id,$i){
   $forum_id=-1;
-		
+
   if(array_key_exists($forumname,$cache_forums)){
     $cache_forums[$forumname][1]=1;
     $forum_id = $cache_forums[$forumname];
   }
   else {
-    $res = db_query_params('SELECT group_forum_id,forum_name 
+    $res = db_query_params('SELECT group_forum_id,forum_name
 					FROM forum_group_list WHERE group_id=$1', array($group_id));
     while ($row=db_fetch_array($res)){
       if ($row['forum_name']==$forumname){
@@ -161,13 +161,13 @@ function get_forum_id($forumname,$group_id,$i){
 /*
 function get_tasks_id($taskname,$group_id,$i){
   $task_id=-1;
-		
+
   if(array_key_exists($taskname,$cache_tasks)){
     $cache_tasks[$taskname][1]=1;
     $task_id = $cache_tasks[$taskname][0];
   }
   else {
-    $res = db_query_params('SELECT group_project_id,project_name 
+    $res = db_query_params('SELECT group_project_id,project_name
 					FROM project_group_list WHERE group_id=$1', array($group_id));
     while ($row=db_fetch_array($res)){
       if ($row['project_name']==$taskname){
@@ -188,13 +188,13 @@ function get_tasks_id($taskname,$group_id,$i){
 /*
 function get_tracker_id($trackername,$group_id,$i){
   $tracker_id=-1;
-		
+
   if(array_key_exists($trackername,$cache_trackers)){
     $cache_trackers[$trackername][1]=1;
     $tracker_id = $cache_trackers[$trackername][0];
   }
   else {
-    $res = db_query_params('SELECT group_artifact_id,name 
+    $res = db_query_params('SELECT group_artifact_id,name
 				FROM artifact_group_list WHERE group_id=$1', array($group_id));
     while ($row=db_fetch_array($res)){
       if ($row['name']==$trackername){
@@ -206,13 +206,13 @@ function get_tracker_id($trackername,$group_id,$i){
       }
     }
   }
-	
+
   if ($tracker_id==-1){
     //TODO:Create Tracker
   }
   return $tracker_id;
 }
-*/	
+*/
 /*
 function get_frs_id($frsname, $group_id){
   $frs_id=-1;
@@ -221,7 +221,7 @@ function get_frs_id($frsname, $group_id){
     $frs_id = $cache_frs[$frsname][0];
   }
   else {
-    $res = db_query_param('SELECT package_id,name 
+    $res = db_query_param('SELECT package_id,name
 				FROM frs_package WHERE group_id=$1', array($group_id));
     while ($row=db_fetch_array($res)){
       if ($row['name']==$frsname){
@@ -233,29 +233,29 @@ function get_frs_id($frsname, $group_id){
       }
     }
   }
-		
+
   return $frs_id;
 }
 */
-/*	
+/*
 function role_update($group_id, $rolename, $role_id, $data){
 
   if ($role_id=='observer') {
-			
+
     $role = new RoleObserver(group_get_object($group_id));
     if (!$role || !is_object($role)) {
       exit_error('Error','Could Not Get RoleObserver');
     } elseif ($role->isError()) {
       exit_error('Error',$role->getErrorMessage());
     }
-			
+
     if (!$role->update($data)) {
       $feedback = $role->getErrorMessage();
     } else {
       $feedback = _('Successfully Updated Role');
     }
-			
-			
+
+
   }
   else{
     echo "update de : ".$role_id." ".$rolename."<br>";
@@ -265,17 +265,17 @@ function role_update($group_id, $rolename, $role_id, $data){
     } elseif ($role->isError()) {
       exit_error('Error',$role->getErrorMessage());
     }
-			
+
     if (!$role->update($rolename,$data)) {
       $feedback = $role->getErrorMessage();
     } else {
       $feedback = _('Successfully Updated Role');
     }
-    plugin_hook('change_cal_permission_auto',$group_id);	
+    plugin_hook('change_cal_permission_auto',$group_id);
   }
 }
 */
-	
+
 //function role_create($group_id, $rolename, $data){
 //  $role = new Role(group_get_object($group_id),false);
 //  if (!$role || !is_object($role)) {
@@ -284,7 +284,7 @@ function role_update($group_id, $rolename, $role_id, $data){
 //    exit_error('Error',$role->getErrorMessage());
 //  }
 //  echo "<br>Role added:".$rolename;/*
-//				     var_dump($rolename);	
+//				     var_dump($rolename);
 //				     echo "<br>";
 //				     echo "groupidid:<br>";
 //				     var_dump($group_id);
@@ -298,17 +298,17 @@ function role_update($group_id, $rolename, $role_id, $data){
 //  } else {
 //    $feedback = _('Successfully Created New Role');
 //  }
-//  plugin_hook('change_cal_permission_auto',$group_id);	
+//  plugin_hook('change_cal_permission_auto',$group_id);
 //}
-/* TODO : reactivate or get rid, depending if still of any use 	
+/* TODO : reactivate or get rid, depending if still of any use
 function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $observer_equivs_text_value, $observer_equivs_name_value ){
   //	$debugdata=array();
   foreach($roles as $rolename => $rights){
-			
+
     $data = array(array());
-			
+
     $i=0;
-	
+
     if($rolename=='Observer'){
       $j=0;
       foreach($rights as $rightname => $right){
@@ -343,7 +343,7 @@ function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $obs
 	elseif($rightname!='role_id'){
 	  $data[$observer_equivs_name_value[$rightname]][0]=$observer_equivs_text_value[$observer_equivs_name_value[$rightname]][$right];
 	}
-	$j++;	
+	$j++;
       }
       if(array_key_exists("role_id", $rights)){
 	role_update($group_id, $rolename, $rights['role_id'], $data);
@@ -354,7 +354,7 @@ function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $obs
       //			$debugdata[]=array($rolename,$data);
     }
     else{
-	
+
       foreach($rights as $rightname => $right){
 	if(substr($rightname, 0, 6)=='Forum:'){
 	  $forum_id = get_forum_id(substr($rightname, 6),$group_id,$i);
@@ -396,7 +396,7 @@ function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $obs
 function user_fill($users, $group_id, $check=False){
 	global $feedback;
 	global $message;
-	
+
 	$group =& group_get_object($group_id);
 	if (!$group || !is_object($group)) {
 		exit_error('Error','Could Not Get Group');
@@ -410,10 +410,10 @@ function user_fill($users, $group_id, $check=False){
 			$feedback .= sprintf(_('Failed to find user %s'), $user);
 		} else {
 			$user_id = $user_object->getID();
-			
+
 			//$role_id = get_role_by_name($role['role'],$group_id);
 			$role_id = $role['role'];
-			
+
 			if(!$check) {
 				if (!$group->addUser($user,$role_id)) {
 					$feedback = $group->getErrorMessage();

@@ -21,36 +21,36 @@ require_once('hudson.class.php');
 require_once('HudsonJobURLMalformedException.class.php');
 require_once('HudsonJobURLFileException.class.php');
 require_once('HudsonJobURLFileNotFoundException.class.php');
- 
+
 class HudsonBuild {
 
     protected $hudson_build_url;
     protected $dom_build;
-    
+
     private $context;
-        
+
     /**
      * Construct an Hudson build from a build URL
      */
     function HudsonBuild($hudson_build_url) {
         $parsed_url = parse_url($hudson_build_url);
-        
+
         if ( ! $parsed_url || ! array_key_exists('scheme', $parsed_url) ) {
             throw new HudsonJobURLMalformedException(vsprintf(_("Wrong Job URL: %s"),  array($hudson_build_url)));
         }
-                
+
         $this->hudson_build_url = $hudson_build_url . "/api/xml";
-        
+
         $this->_setStreamContext();
-        
+
         $this->buildBuildObject();
-        
+
     }
-    
+
     public function buildBuildObject() {
         $this->dom_build = $this->_getXMLObject($this->hudson_build_url);
     }
-    
+
     protected function _getXMLObject($hudson_build_url) {
         $xmlstr = @file_get_contents($hudson_build_url, false, $this->context);
         if ($xmlstr !== false) {
@@ -61,10 +61,10 @@ class HudsonBuild {
                 throw new HudsonJobURLFileException(vsprintf(_("Unable to read file at URL: %s"),  array($hudson_build_url)));
             }
         } else {
-            throw new HudsonJobURLFileNotFoundException(vsprintf(_("File not found at URL: %s"),  array($hudson_build_url))); 
+            throw new HudsonJobURLFileNotFoundException(vsprintf(_("File not found at URL: %s"),  array($hudson_build_url)));
         }
     }
-    
+
     private function _setStreamContext() {
         if (array_key_exists('sys_proxy', $GLOBALS) && $GLOBALS['sys_proxy']) {
             $context_opt = array(
@@ -80,11 +80,11 @@ class HudsonBuild {
             $this->context = null;
         }
     }
-    
+
     function getDom() {
         return $this->dom_build;
     }
-    
+
     function getBuildStyle() {
         return $this->dom_build->getName();
     }

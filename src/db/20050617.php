@@ -49,7 +49,7 @@ if (!$res) {		// error, the field doesn't exist
 		echo db_error();
 		exit(1);
 	}
-} 
+}
 
 // Now fill all the data
 db_query_params ('BEGIN WORK',
@@ -66,28 +66,28 @@ if (!$res) {
 
 while ($row = db_fetch_array($res)) {
 	$name = $row["field_name"];
-	
+
 	// for some weird reason the alias was already set... don't try to change it
 	if (array_key_exists("alias", $row) && !empty($row["alias"])) {
 		continue;
 	}
-	
-	// Convert the original name to a valid alias (i.e., if the extra field is 
+
+	// Convert the original name to a valid alias (i.e., if the extra field is
 	// called "Quality test", make an alias called "quality_test").
 	// The alias can be seen as a "unix name" for this field
 	$alias = preg_replace("/ /", "_", $name);
 	$alias = preg_replace("/[^[:alpha:]_]/", "", $alias);
 	$alias = strtolower($alias);
-	
+
 	// no alias is suitable... do nothing
 	if (strlen($alias) == 0) continue;
-	
+
 	// alias is reserved?
 	if (in_array($alias, $reserved_alias)) {
 		// prepend "extra_" to the alias (indicates it is an extra field)
 		$alias = "extra_".$alias;
 	}
-	
+
 	// check for conflicting names
 	$conflict = false;
 	$count = 1;
@@ -112,7 +112,7 @@ while ($row = db_fetch_array($res)) {
 	if (!$update) {
 		echo db_error();
 		exit(3);
-	}	
+	}
 }
 db_commit ();
 

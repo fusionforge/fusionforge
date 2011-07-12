@@ -42,7 +42,7 @@ if (getStringFromRequest('submit')) {
 	}
 	$u->sendRegistrationEmail();
 	$HTML->header(array('title'=>"Account Pending Verification"));
-	
+
 	?>
 
 	<h2><?php echo _('Pending Account')?></h2>
@@ -64,11 +64,11 @@ if (forge_get_config('require_unique_email')) {
 ?>
 
 <form action="<?php echo util_make_url('/account/pending-resend.php'); ?>" method="post">
-<p><?php 
+<p><?php
 if (forge_get_config('require_unique_email')) {
 	echo _('Login name or email address:');
 } else {
-	echo _('Login name:'); 
+	echo _('Login name:');
 }
 ?>
 <br /><input type="text" name="loginname" /></p>

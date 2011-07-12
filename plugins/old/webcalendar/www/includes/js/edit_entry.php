@@ -121,7 +121,7 @@ function selectDate (  day, month, year, current, evt ) {
   var colorWindow = window.open(url,"DateSelection","width=300,height=200,"  + MyPosition);
 }
 
-<?php if ( $groups_enabled == "Y" ) { 
+<?php if ( $groups_enabled == "Y" ) {
 ?>function selectUsers () {
   // find id of user selection object
   var listid = 0;
@@ -146,10 +146,10 @@ function selectDate (  day, month, year, current, evt ) {
 }
 <?php } ?>
 
-<?php	// This function is called when the event type combo box 
+<?php	// This function is called when the event type combo box
 	// is changed. If the user selectes "untimed event" or "all day event",
 	// the times & duration fields are hidden.
-	// If they change their mind & switch it back, the original 
+	// If they change their mind & switch it back, the original
 	// values are restored for them
 ?>function timetype_handler () {
   var i = document.editentryform.timetype.selectedIndex;
@@ -240,9 +240,9 @@ function showSchedule () {
     return false;
   }
   var features = 'width='+ w +',height='+ h +',resizable=yes,scrollbars=no';
-  var url = 'availability.php?users=' + users + 
-           '&year='  + myForm.year.value + 
-           '&month=' + myForm.month.value + 
+  var url = 'availability.php?users=' + users +
+           '&year='  + myForm.year.value +
+           '&month=' + myForm.month.value +
            '&day='   + myForm.day.options[myForm.day.selectedIndex].text;
 
   if (sch_win != null && !sch_win.closed) {

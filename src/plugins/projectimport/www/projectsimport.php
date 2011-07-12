@@ -45,7 +45,7 @@ include_once('arc/ARC2.php');
 
 /**
  * Manages the display of the page : HTML + forms
- * 
+ *
  * @author Olivier Berger
  *
  */
@@ -54,59 +54,59 @@ class ProjectsImportPage extends FileManagerPage {
 	protected $importer;
 
 	protected $form_header_already_displayed;
-		
+
 	function ProjectsImportPage($HTML) {
 		$this->form_header_already_displayed = false;
-		
+
 		$this->importer = ProjectImporter::getInstance();
 
 		$storage = new SiteAdminFilesDirectory($HTML);
-		
+
 		parent::FileManagerPage($HTML, $storage);
 	}
-	
+
 	/**
 	 * Display initial contents of the page
 	 * @param string $message
 	 */
 	function display_headers($message) {
 		global $feedback;
-		
+
 		$params= array();
 		$params['title']=_('Projects importer');
 		$params['toptab']='projectimport';
-		
+
 		site_admin_header($params);
-		
+
 		$this->message .= $message;
 	}
-	
+
 	/**
 	 * Display the page
 	 */
 	function display_main() {
-		
+
 		global $feedback;
-		
+
 		// Do the work, first !
 		$html = $this->do_work();
-				
+
 		if($this->message) {
 			echo $this->message . '<br />';
 		}
 		html_feedback_top($feedback);
-		
+
 		echo $html;
-		
+
 		// If invoked initially (not on callback) or if more details needed
 		// display the last part of the form for JSON file upload
 		if (! $this->form_header_already_displayed) {
 			echo '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
 			$this->form_header_already_displayed = True;
 		}
-		
+
 		$preselected = False;
-		
+
 		if (!$feedback) {
 			if ($this->posted_selecteddumpfile) {
 				$preselected = basename($this->posted_selecteddumpfile);
@@ -115,11 +115,11 @@ class ProjectsImportPage extends FileManagerPage {
 				$preselected = $this->posted_uploadedfile;
 			}
 		}
-		
+
 		$selectiondialog = $this->storage->displayFileSelectionForm($preselected);
-		
+
 		echo $selectiondialog;
-		
+
 		// finally, display the file upload form
 		echo '<fieldset><legend>Please upload a file :</legend>
 		       <p><center>
@@ -133,7 +133,7 @@ class ProjectsImportPage extends FileManagerPage {
 
 		site_footer(array());
 	}
-	
+
 	/**
 	 * Initializes data structures from POSTed data coming from the form input
 	 */
@@ -142,13 +142,13 @@ class ProjectsImportPage extends FileManagerPage {
 
 		$filechosen = $this->initialize_chosenfile_from_submitted();
 		if($filechosen) {
-			
+
 			$filepath = $this->posted_selecteddumpfile;
 
 			if ($this->storage->getMimeType($filepath) == 'application/x-planetforge-forge-export') {
 				$package = Opendocument::open($filepath);
-				
-				
+
+
 		        $dumpfilenames = $package->getFileNamesByMediaType('application/x-forgeplucker-oslc-rdf+json');
         		if (count($dumpfilenames) == 1) {
         			$filename = $dumpfilenames[0];
@@ -156,7 +156,7 @@ class ProjectsImportPage extends FileManagerPage {
         			$contents = $package->getFileContents($filename);
         			print_r($contents);
         		}
-	
+
 				//print_r($package);
 			}
 			//print_r($filechosen);
@@ -182,18 +182,18 @@ class ProjectsImportPage extends FileManagerPage {
 				}
 			}
 		}
-	
+
 		if ((! $this->posted_selecteddumpfile) && (! $this->posted_uploadedfile)) {
 			$this->feedback(_('Please select an existing file to process, or upload a new one'));
 		}
 	}
-	
-	
+
+
 	/**
 	 * Does the main work
-	 * 
+	 *
 	 * initialize_from_submitted_data() has already been called to intialize objects sent as POST vars
-	 * 
+	 *
 	 * @return html string
 	 */
 	function do_work() {
@@ -220,7 +220,7 @@ class ProjectsImportPage extends FileManagerPage {
 
 				// Display project's general description
 				$html .= '<table id="project-summary-and-devs" class="my-layout-table" summary="">';
-					
+
 				// Display project attributes
 				foreach($projects as $project) {
 
@@ -246,12 +246,12 @@ class ProjectsImportPage extends FileManagerPage {
 						$is_public,
 						$send_mail,
 						$built_from_template);
-						
+
 					if (!$res) {
 						$error_msg = $group->getErrorMessage();
 						if ($feedback) $feedback .= '<br />';
 						$feedback .= 'Import of "'. $unix_name . '": '. $error_msg;
-							
+
 						$html .= '<tr>
 		                             <td>
 			                            <h2>'._('Failed to create project'). ': <pre>'. $unix_name .'</pre>
@@ -281,8 +281,8 @@ class ProjectsImportPage extends FileManagerPage {
 		}
 		return $html;
 	}
-	
-	
+
+
 }
 
 // The user should be forge admin
@@ -300,7 +300,7 @@ $message = '';
 if (getStringFromRequest('submit')) {
 
 	$this_page->initialize_from_submitted_data();
-		
+
 }
 else {
 	$message .= "You can import a list of projects from a JSON RDF document compatible with ForgePlucker's dump format.<br />";

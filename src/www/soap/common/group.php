@@ -138,7 +138,7 @@ function &groups_to_soap($grps) {
 				$is_public = 0;
 			}
 			//build an array of just the fields we want
-			$return[] = array('group_id'=>$grps[$i]->data_array['group_id'], 
+			$return[] = array('group_id'=>$grps[$i]->data_array['group_id'],
 			'group_name'=>$grps[$i]->data_array['group_name'],
 			'homepage'=>$grps[$i]->data_array['homepage'],
 			'is_public'=>$is_public,

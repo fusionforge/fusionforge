@@ -34,7 +34,7 @@ require_once $gfwww.'survey/include/SurveyHTML.class.php';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 
-/* We need a group_id */ 
+/* We need a group_id */
 if (!$group_id) {
     exit_no_group();
 }
@@ -86,7 +86,7 @@ if (getStringFromRequest('updown')=="Y") {
 if ($s->isError()) {
     $error_msg = $s->getErrorMessage();
     form_release_key(getStringFromRequest("form_key"));
-} 
+}
 
 $title = $survey_id ? _('Edit a Survey') : _('Add a Survey');
 $sh->header(array('title'=>$title));

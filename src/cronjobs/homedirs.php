@@ -23,7 +23,7 @@
  */
 
 /*
-This file creates blank user home directories and 
+This file creates blank user home directories and
 creates a group home directory with a template in it.
 
 #
@@ -48,13 +48,13 @@ creates a group home directory with a template in it.
 	<IfModule apache_ssl.c>
 		SSLDisable
 	</IfModule>
-</VirtualHost> 
+</VirtualHost>
 */
 require_once dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
-setup_gettext_from_sys_lang();	
+setup_gettext_from_sys_lang();
 define('USER_DEFAULT_GROUP','users');
 //error variable
 $err = '';
@@ -85,7 +85,7 @@ foreach ($active_projects as $project) {
 $unames = array_unique ($unames) ;
 foreach($unames as $uname) {
 	if (is_dir(forge_get_config('homedir_prefix')."/".$uname)) {
-		
+
 	} else {
 		@mkdir(forge_get_config('homedir_prefix')."/".$uname);
 	}
@@ -100,9 +100,9 @@ if (!is_dir(forge_get_config('ftp_upload_dir'))) {
 foreach($active_projects as $project) {
 	$groupname = $project->getUnixName() ;
 	//create an FTP upload dir for this project
-	if (forge_get_config('use_ftp_uploads')) { 
+	if (forge_get_config('use_ftp_uploads')) {
 		if (!is_dir(forge_get_config('ftp_upload_dir').'/'.$groupname)) {
-			@mkdir(forge_get_config('ftp_upload_dir').'/'.$groupname); 
+			@mkdir(forge_get_config('ftp_upload_dir').'/'.$groupname);
 		}
 	}
 
@@ -145,11 +145,11 @@ foreach($active_projects as $project) {
 		fclose($fw);
 	}
 
-	if (forge_get_config('use_manual_uploads')) { 
+	if (forge_get_config('use_manual_uploads')) {
 		$incoming = forge_get_config('groupdir_prefix')/$groupname."/incoming" ;
 		if (!is_dir($incoming))
 		{
-			@mkdir($incoming); 
+			@mkdir($incoming);
 		}
 	}
 

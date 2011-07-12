@@ -35,11 +35,11 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
 	function SkillHtmlSearchRenderer($words, $offset, $isExact) {
-		
+
 		$searchQuery = new SkillSearchQuery($words, $offset, $isExact);
-		
+
 		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_SKILL, $words, $isExact, $searchQuery);
-		
+
 		$this->tableHeaders = array(
 			_('Name'),
 			_('Type'),
@@ -57,7 +57,7 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 		$GLOBALS['HTML']->header(array('title'=>_('Search')));
 		parent::writeHeader();
 	}
-	
+
 	/**
 	 * getRows - get the html output for result rows
 	 *
@@ -66,14 +66,14 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
-		
+
 		$monthArray = array();
 		for($i = 1; $i <= 12; $i++) {
 			array_push($monthArray,date('M', mktime(0, 0, 0, $i, 10, 1980)));
 		}
-		
+
 		$return = '';
-		
+
 		for($i = 0; $i < $rowsCount; $i++) {
 			$start = db_result($result, $i, 'start');
 			$startYear = substr($start, 0, 4);
@@ -82,7 +82,7 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 			$finish = db_result($result, $i, 'finish');
 			$finishYear = substr($finish, 0, 4);
 			$finishMonth = substr($finish, 4, 2);
-				
+
 			$return .= '
 			<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>
 				<td>'.util_make_link_u (db_result($result, $i, 'user_name'),db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>
@@ -93,10 +93,10 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 				<td>'.$monthArray[$finishMonth - 1].' '.$finishYear.'</td>
 			<tr>';
 		}
-		
+
 		return $return;
 	}
-	
+
 	/**
 	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
 	 */

@@ -39,11 +39,11 @@ class HudsonTestResultTest extends UnitTestCase {
     function HudsonTestResultTest($name = 'HudsonTestResult test') {
         $this->UnitTestCase($name);
     }
-    
+
     function setUp() {
         $GLOBALS['Language'] = new MockBaseLanguage($this);
     }
-    
+
     function testMalformedURL() {
         $this->expectException('HudsonJobURLMalformedException');
         $this->expectError();
@@ -59,7 +59,7 @@ class HudsonTestResultTest extends UnitTestCase {
         $this->expectError();
         $j = new HudsonJob("http://");
     }
-    
+
     function testWrongXMLFile() {
         $xmlstr = <<<XML
 <?xml version='1.0' standalone='yes'?>
@@ -69,35 +69,35 @@ class HudsonTestResultTest extends UnitTestCase {
 </foo>
 XML;
         $xmldom = new SimpleXMLElement($xmlstr);
-        
+
         $j = new HudsonJobTestVersion($this);
         $j->setReturnValue('_getXMLObject', $xmldom);
         $j->buildJobObject();
-        
+
         $this->expectError();
     }
-    
+
     function testSimpleJobTestResult() {
-        
+
         $test_result_file = dirname(__FILE__).'/resources/testReport.xml';
         $xmldom = simplexml_load_file($test_result_file);
-        
+
         $j = new HudsonTestResultTestVersion($this);
         $j->setReturnValue('_getXMLObject', $xmldom);
         $mh = new Mockhudson($this);
         $mh->setReturnValue('getIconsPath', '');
         $j->setReturnValue('getHudsonControler', $mh);
         $j->setReturnValue('getIconsPath', '');
-        
+
         $j->HudsonTestResult("http://myCIserver/jobs/myCIjob/lastBuild/testReport/");
-        
+
         $this->assertEqual($j->getFailCount(), 5);
         $this->assertEqual($j->getPassCount(), 416);
         $this->assertEqual($j->getSkipCount(), 3);
         $this->assertEqual($j->getTotalCount(), 424);
-        
+
     }
-        
+
 }
 
 ?>

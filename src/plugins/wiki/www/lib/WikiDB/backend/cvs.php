@@ -95,12 +95,12 @@ extends WikiDB_backend
             // doesn't exist, need to create it and the replace the wiki
             // document directory.
             $this->_mkdir( $this->_repository, 0775 );
-  
+
             // assume that the repository is a local directory, prefix :local:
             if ( !ereg( "^:local:", $this->_repository ) ) {
                 $this->_repository = ":local:" . $this->_repository;
             }
-          
+
             $cmdLine = sprintf( "cvs -d \"%s\" init", $this->_repository);
             $this->_execCommand( $cmdLine, $cmdOutput, true );
 
@@ -109,14 +109,14 @@ extends WikiDB_backend
                                ."%s V R", $this->_docDir, $this->_repository,
                                $this->_module_name );
             $this->_execCommand( $cmdLine, $cmdOutput, true );
-          
+
             // remove the wiki directory and check it out from the
             // CVS repository
             $cmdLine = sprintf( "rm -fr %s; cd %s; cvs -d \"%s\" co %s",
                                 $this->_docDir, dirname($this->_docDir),
                                 $this->_repository, $this->_module_name);
             $this->_execCommand( $cmdLine, $cmdOutput, true );
-          
+
             // add the default pages using the update_pagedata
             $metaData = array();
             $metaData[$AUTHOR] = "PhpWiki -- CVS Backend";
@@ -126,7 +126,7 @@ extends WikiDB_backend
                 while ( $entry = readdir( $d ) ) {
                     $filename = $dbparam[CVS_PAGE_SOURCE] . "/" . $entry;
                     $this->_cvsDebug( sprintf("Found [%s] in [%s]", $entry, $dbparam[CVS_PAGE_SOURCE]) );
-                  
+
                     if ( is_file( $filename ) ) {
                         $metaData[CMD_CONTENT] = join('',file($filename));
                         $this->update_pagedata( $entry, $metaData );
@@ -134,7 +134,7 @@ extends WikiDB_backend
                 }
                 closedir( $d );
             }
-          
+
             // ensure that the results of the is_dir are cleared
             clearstatcache();
         }
@@ -151,7 +151,7 @@ extends WikiDB_backend
         $metaFile = $this->_docDir . "/CVS/_" . $pagename;
 
         if ( file_exists( $metaFile ) ) {
-          
+
             $megaHash =
                  unserialize(join( '',$this->_readFileWithPath($metaFile)));
 
@@ -258,7 +258,7 @@ extends WikiDB_backend
     function get_versiondata($pagename, $version, $want_content = false)
     {
         $this->_cvsDebug( "get_versiondata: [$pagename] [$version] [$want_content]" );
-    
+
         $filedata = "";
         if ( $want_content ) {
             // retrieve the version from the repository
@@ -266,7 +266,7 @@ extends WikiDB_backend
                                $this->_repository, $version,
                                $this->_module_name, $pagename );
             $this->_execCommand( $cmdLine, $filedata, true );
-      
+
             // TODO: DEBUG: 5 is a magic number here, depending on the
             // TODO: DEBUG: version of cvs used here, 5 might have to
             // TODO: DEBUG: change. Basically find a more reliable way of
@@ -302,7 +302,7 @@ extends WikiDB_backend
         foreach ( $rVal as $key => $value ) {
             $this->_cvsDebug( "$key == [$value]" );
         }
-    
+
         return $rVal;
     }
 
@@ -321,14 +321,14 @@ extends WikiDB_backend
         $this->_cvsDebug( "delete_page [$pagename]") ;
         $filename = $this->_docDir . "/" . $pagename;
         $metaFile = $this->_docDir . "/CVS/_" . $pagename;
-      
+
         // obtain a write block before deleting the file
         if ( $this->_deleteFile( $filename ) == false ) {
             return false;
         }
-      
+
         $this->_deleteFile( $metaFile );
-      
+
         $this->_removePage( $pagename );
 
         return true;
@@ -439,7 +439,7 @@ extends WikiDB_backend
             arsort( $mp, SORT_NUMERIC );
         }
         $returnVal = array();
-      
+
         while ( (list($key, $val) = each($a)) && $limit > 0 ) {
             $returnVal[] = $key;
             $limit--;
@@ -474,7 +474,7 @@ extends WikiDB_backend
             }
         } else if ( isset( $params['since'] ) ) {
             while ( (list($key, $val) = each($a)) ) {
-              
+
                 if ( $val > $params['since'] ) {
                     $returnVal[] = $key;
                 }
@@ -546,7 +546,7 @@ extends WikiDB_backend
         $this->_execCommand( $cmdLine, $cmdOutput, true );
         return true;
     }
-  
+
     //
     // ..-.-..-.-..-.-.. .--..-......-.--. --.-....----.....
     // The rest are all internal methods, not to be used
@@ -628,7 +628,7 @@ extends WikiDB_backend
         $cmdLine = sprintf("cd %s; cvs remove %s 2>&1; cvs commit -m '%s' "
                            ."%s 2>&1", $this->_docDir, $pagename,
                            "remove page", $pagename );
-      
+
         $this->_execCommand( $cmdLine, $cmdRemoveOutput, true );
     }
 
@@ -702,7 +702,7 @@ extends WikiDB_backend
         else {
             $rVal = true;
         }
-    
+
         return ($rVal && @mkdir( $path, $mode ) );
     }
 
@@ -722,7 +722,7 @@ extends WikiDB_backend
     function _deleteFile( $filename )
     {
         if( $fd = fopen($filename, 'a') ) {
-          
+
             $locked = flock($fd,2);  // Exclusive blocking lock
 
             if (!$locked) {
@@ -767,7 +767,7 @@ extends WikiDB_backend
         if ( $this->_debug_file == "" ) {
             return;
         }
-      
+
         if ( !file_exists( $this->_debug_file  ) ) {
             $this->_createFile( $this->_debug_file, 0755 );
         }
@@ -778,7 +778,7 @@ extends WikiDB_backend
                 fclose( $fdlock );
                 return;
             }
-          
+
             $fdappend = @fopen( $this->_debug_file, 'a' );
             fwrite( $fdappend, ($msg . "\n") );
             fclose( $fdappend );
@@ -899,7 +899,7 @@ extends WikiDB_backend
         $val = str_replace( "\\}", "}", $val );
         $val = str_replace( "\\;", ";", $val );
         $val = str_replace( "\\\"", "\"", $val );
-      
+
         return $val;
     }
 
@@ -983,7 +983,7 @@ extends Cvs_Backend_Array_Iterator
         // TODO: searching files.
         $cmdLine = sprintf( "grep -E -i '%s' %s > /dev/null 2>&1",
                             $searchString, $fileName );
-      
+
         return ( WikiDB_backend_cvs::_execCommand( $cmdLine, $cmdOutput,
                                                    false ) == 0 );
     }
@@ -1020,5 +1020,5 @@ extends Cvs_Backend_Array_Iterator
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

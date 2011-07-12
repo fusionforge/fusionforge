@@ -17,7 +17,7 @@ class AllPagesTest extends phpwiki_TestCase {
         $args = "";
         $this->assertType('object', $request->_dbi, 'isa WikiDB');
 /*
-*/        
+*/
         $result = $lp->run($request->_dbi, $args, $request, "AllPages");
         $this->assertType('object', $result, 'isa PageList');
         $this->assertType('object', $request->_dbi, 'isa WikiDB');
@@ -28,7 +28,7 @@ class AllPagesTest extends phpwiki_TestCase {
                 trigger_error("strange php bug\n",E_USER_WARNING);
                 return;
             }
-        }        
+        }
         $xml = $result->asXml();
         $this->assertType('object', $result, 'isa XmlContent');
         //$xml->asString();

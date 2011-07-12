@@ -94,7 +94,7 @@ for ($i=0; $i<$count; $i++) {
 			Don't show question number if it's just a comment
 		*/
 
-		echo "\n<tr><td valign=\"top\">&nbsp;</td>\n<td>"; 
+		echo "\n<tr><td valign=\"top\">&nbsp;</td>\n<td>";
 
 	} else {
 
@@ -113,11 +113,11 @@ for ($i=0; $i<$count; $i++) {
 		$q_num++;
 
 	}
-	
+
 	if ($question_type == "1") {
 
 		/*
-			This is a radio-button question. Values 1-5.	
+			This is a radio-button question. Values 1-5.
 		*/
 
 
@@ -156,7 +156,7 @@ for ($i=0; $i<$count; $i++) {
 		if ($not_found==0) {
 			echo db_result($result, 0, "response");
 		}
-		echo "</textarea>\n";	
+		echo "</textarea>\n";
 
 	} else if ($question_type == "3") {
 
@@ -188,7 +188,7 @@ for ($i=0; $i<$count; $i++) {
                 if (($not_found==0) && db_result($result, 0, "response")=="5") { echo " checked=\"checked\""; }
 
                 echo " />";
- 
+
 		echo "&nbsp; ".db_result($result, 0, "question")."\n";
 
         } else if ($question_type == "4") {

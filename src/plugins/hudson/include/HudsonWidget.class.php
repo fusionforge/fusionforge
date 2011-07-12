@@ -22,11 +22,11 @@ require_once('PluginHudsonJobDao.class.php');
 require_once('common/widget/WidgetLayoutManager.class.php');
 
 abstract class HudsonWidget extends Widget {
-    
+
     function getCategory() {
         return _('Hudson');
     }
-    
+
     protected function getAvailableJobs() {
         $jobs = array();
         if ($this->owner_type == WidgetLayoutManager::OWNER_TYPE_USER) {
@@ -36,7 +36,7 @@ abstract class HudsonWidget extends Widget {
         }
         return $jobs;
     }
-    
+
     protected function getJobsByGroup($group_id) {
     	$dao = CodendiDataAccess::instance();
         $job_dao = new PluginHudsonJobDao($dao);
@@ -54,7 +54,7 @@ abstract class HudsonWidget extends Widget {
         }
         return $jobs;
     }
-    
+
     protected function getJobsByUser($user_id) {
         $job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
         $dar = $job_dao->searchByUserID($user_id);
@@ -71,11 +71,11 @@ abstract class HudsonWidget extends Widget {
         }
         return $jobs;
     }
-    
+
     function isAjax() {
         return true;
     }
-    
+
 }
 
 ?>

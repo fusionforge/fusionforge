@@ -71,7 +71,7 @@ class TroveCategoryLabel extends Error {
 			// set error
 			return false;
 		}
-		
+
 		db_begin();
 		$result = db_query_params("INSERT INTO trove_category_labels
 			(category_id, label, language_id) VALUES ($1, $2, $3)",
@@ -88,7 +88,7 @@ class TroveCategoryLabel extends Error {
 
 	function update() {
 	}
-	
+
 	function fetchData($labelId) {
 		$res=db_query_params("SELECT trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages "
 			. "WHERE trove_category_labels.label_id=$1 "
@@ -124,11 +124,11 @@ class TroveCategoryLabel extends Error {
 	function getLabel() {
 		return $this->dataArray['label'];
 	}
-	
+
 	function getLanguageId() {
 		return $this->dataArray['language_id'];
 	}
-	
+
 	function getLanguageName() {
 		return $this->dataArray['language_name'];
 	}

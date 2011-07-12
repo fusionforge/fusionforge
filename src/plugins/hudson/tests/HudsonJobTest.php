@@ -44,11 +44,11 @@ class HudsonJobTest extends UnitTestCase {
     function HudsonJobTest($name = 'HudsonJob test') {
         $this->UnitTestCase($name);
     }
-    
+
     function setUp() {
         $GLOBALS['Language'] = new MockBaseLanguage($this);
     }
-    
+
     function testMalformedURL() {
         $this->expectException('HudsonJobURLMalformedException');
         $this->expectError();
@@ -64,7 +64,7 @@ class HudsonJobTest extends UnitTestCase {
         $this->expectError();
         $j = new HudsonJob("http://");
     }
-    
+
     function testWrongXMLFile() {
         $xmlstr = <<<XML
 <?xml version='1.0' standalone='yes'?>
@@ -74,15 +74,15 @@ class HudsonJobTest extends UnitTestCase {
 </foo>
 XML;
         $xmldom = new SimpleXMLElement($xmlstr);
-        
+
         $j = new HudsonJobTestVersion($this);
         $j->setReturnValue('_getXMLObject', $xmldom);
         $j->setReturnValue('getIconsPath', '');
         $j->buildJobObject();
-        
+
         $this->expectError();
     }
-    
+
     function testSimpleJob() {
         $xmlstr = <<<XML
 <?xml version='1.0' standalone='yes'?>
@@ -127,40 +127,40 @@ XML;
   <url>http://code4.grenoble.xrce.xerox.com:8080/hudson/job/Codendi/60/</url>
  </lastSuccessfulBuild>
  <nextBuildNumber>61</nextBuildNumber>
-</freeStyleProject>        
+</freeStyleProject>
 XML;
-        
+
         $xmldom = new SimpleXMLElement($xmlstr);
         //var_dump($xmldom);
-        
+
         $j = new HudsonJobTestVersion($this);
         $j->setReturnValue('_getXMLObject', $xmldom);
         $mh = new Mockhudson($this);
         $mh->setReturnValue('getIconsPath', '');
         $j->setReturnValue('getHudsonControler', $mh);
         $j->setReturnValue('getIconsPath', '');
-        
+
         $j->HudsonJob("http://myCIserver/jobs/myCIjob");
-        
+
         $this->assertEqual($j->getProjectStyle(), "freeStyleProject");
         $this->assertEqual($j->getName(), "Codendi");
         $this->assertEqual($j->getUrl(), "http://code4.grenoble.xrce.xerox.com:8080/hudson/job/Codendi/");
         $this->assertEqual($j->getColor(), "yellow");
         $this->assertEqual($j->getStatusIcon(), "status_yellow.png");
-        
+
         $this->assertEqual($j->getLastBuildNumber(), "60");
         $this->assertEqual($j->getLastSuccessfulBuildNumber(), "60");
         $this->assertEqual($j->getLastFailedBuildNumber(), "30");
         $this->assertEqual($j->getNextBuildNumber(), "61");
         $this->assertTrue($j->hasBuilds());
         $this->assertTrue($j->isBuildable());
-        
+
         $this->assertEqual($j->getHealthScores(), array('79', '98'));
         $this->assertEqual($j->getHealthAverageScore(), '88');
         $this->assertEqual($j->getWeatherReportIcon(), "health_80_plus.gif");
-        
+
     }
-    
+
     function testJobFromAnotherJob() {
         $xmlstr = <<<XML
 <?xml version='1.0' standalone='yes'?>
@@ -200,35 +200,35 @@ XML;
 XML;
 
         $xmldom = new SimpleXMLElement($xmlstr);
-        
+
         $j = new HudsonJobTestVersion($this);
         $j->setReturnValue('_getXMLObject', $xmldom);
         $mh = new Mockhudson($this);
         $mh->setReturnValue('getIconsPath', '');
         $j->setReturnValue('getHudsonControler', $mh);
         $j->setReturnValue('getIconsPath', '');
-        
+
         $j->HudsonJob("http://myCIserver/jobs/myCIjob");
-        
+
         $this->assertEqual($j->getProjectStyle(), "freeStyleProject");
         $this->assertEqual($j->getName(), "TestProjectExistingJob");
         $this->assertEqual($j->getUrl(), "http://code4.grenoble.xrce.xerox.com:8080/hudson/job/TestProjectExistingJob/");
         $this->assertEqual($j->getColor(), "red");
         $this->assertEqual($j->getStatusIcon(), "status_red.png");
-        
+
         $this->assertEqual($j->getLastBuildNumber(), "1");
         $this->assertNull($j->getLastSuccessfulBuildNumber());
         $this->assertEqual($j->getLastFailedBuildNumber(), "1");
         $this->assertEqual($j->getNextBuildNumber(), "2");
         $this->assertTrue($j->hasBuilds());
         $this->assertTrue($j->isBuildable());
-        
+
         $this->assertEqual($j->getHealthScores(), array('0'));
         $this->assertEqual($j->getHealthAverageScore(), '0');
         $this->assertEqual($j->getWeatherReportIcon(), "health_00_to_19.gif");
-        
+
     }
-    
+
     function testJobFromExternalJob() {
         $xmlstr = <<<XML
 <?xml version='1.0' standalone='yes'?>
@@ -245,34 +245,34 @@ XML;
 XML;
 
         $xmldom = new SimpleXMLElement($xmlstr);
-        
+
         $j = new HudsonJobTestVersion($this);
         $j->setReturnValue('_getXMLObject', $xmldom);
         $mh = new Mockhudson($this);
         $mh->setReturnValue('getIconsPath', '');
         $j->setReturnValue('getHudsonControler', $mh);
         $j->setReturnValue('getIconsPath', '');
-        
+
         $j->HudsonJob("http://myCIserver/jobs/myCIjob");
-        
+
         $this->assertEqual($j->getProjectStyle(), "externalJob");
         $this->assertEqual($j->getName(), "TestProjectExternalJob");
         $this->assertEqual($j->getUrl(), "http://code4.grenoble.xrce.xerox.com:8080/hudson/job/TestProjectExternalJob/");
         $this->assertEqual($j->getColor(), "grey");
         $this->assertEqual($j->getStatusIcon(), "status_grey.png");
-        
+
         $this->assertNull($j->getLastBuildNumber());
         $this->assertNull($j->getLastSuccessfulBuildNumber());
         $this->assertNull($j->getLastFailedBuildNumber());
         $this->assertEqual($j->getNextBuildNumber(), "1");
         $this->assertFalse($j->hasBuilds());
         $this->assertFalse($j->isBuildable());
-        
+
         $this->assertEqual($j->getHealthScores(), array());
         $this->assertEqual($j->getHealthAverageScore(), '0');
-        
+
     }
-    
+
     function testJobFromMaven2Job() {
         $xmlstr = <<<XML
 <?xml version='1.0' standalone='yes'?>
@@ -289,34 +289,34 @@ XML;
 XML;
 
         $xmldom = new SimpleXMLElement($xmlstr);
-        
+
         $j = new HudsonJobTestVersion($this);
         $j->setReturnValue('_getXMLObject', $xmldom);
         $mh = new Mockhudson($this);
         $mh->setReturnValue('getIconsPath', '');
         $j->setReturnValue('getHudsonControler', $mh);
         $j->setReturnValue('getIconsPath', '');
-        
+
         $j->HudsonJob("http://myCIserver/jobs/myCIjob");
-        
+
         $this->assertEqual($j->getProjectStyle(), "mavenModuleSet");
         $this->assertEqual($j->getName(), "TestProjectMaven2");
         $this->assertEqual($j->getUrl(), "http://code4.grenoble.xrce.xerox.com:8080/hudson/job/TestProjectMaven2/");
         $this->assertEqual($j->getColor(), "grey");
         $this->assertEqual($j->getStatusIcon(), "status_grey.png");
-        
+
         $this->assertNull($j->getLastBuildNumber());
         $this->assertNull($j->getLastSuccessfulBuildNumber());
         $this->assertNull($j->getLastFailedBuildNumber());
         $this->assertEqual($j->getNextBuildNumber(), "1");
         $this->assertFalse($j->hasBuilds());
         $this->assertTrue($j->isBuildable());
-        
+
         $this->assertEqual($j->getHealthScores(), array());
         $this->assertEqual($j->getHealthAverageScore(), '0');
-        
+
     }
-    
+
     function testJobFromMultiConfiguration() {
         $xmlstr = <<<XML
 <?xml version='1.0' standalone='yes'?>
@@ -333,55 +333,55 @@ XML;
 XML;
 
         $xmldom = new SimpleXMLElement($xmlstr);
-        
+
         $j = new HudsonJobTestVersion($this);
         $j->setReturnValue('_getXMLObject', $xmldom);
         $mh = new Mockhudson($this);
         $mh->setReturnValue('getIconsPath', '');
         $j->setReturnValue('getHudsonControler', $mh);
         $j->setReturnValue('getIconsPath', '');
-        
+
         $j->HudsonJob("http://myCIserver/jobs/myCIjob");
-        
+
         $this->assertEqual($j->getProjectStyle(), "matrixProject");
         $this->assertEqual($j->getName(), "TestProjectMultiConfiguration");
         $this->assertEqual($j->getUrl(), "http://code4.grenoble.xrce.xerox.com:8080/hudson/job/TestProjectMultiConfiguration/");
         $this->assertEqual($j->getColor(), "grey");
         $this->assertEqual($j->getStatusIcon(), "status_grey.png");
-        
+
         $this->assertNull($j->getLastBuildNumber());
         $this->assertNull($j->getLastSuccessfulBuildNumber());
         $this->assertNull($j->getLastFailedBuildNumber());
         $this->assertEqual($j->getNextBuildNumber(), "1");
         $this->assertFalse($j->hasBuilds());
         $this->assertTrue($j->isBuildable());
-        
+
         $this->assertEqual($j->getHealthScores(), array());
         $this->assertEqual($j->getHealthAverageScore(), '0');
-        
+
     }
-    
+
     function testColorNoAnime1() {
         $j = new HudsonJobTestColorVersion($this);
         $j->setReturnValue('getColor', "blue");
         $this->assertEqual($j->getColorNoAnime(), "blue");
-    }  
+    }
     function testColorNoAnime2() {
         $j = new HudsonJobTestColorVersion($this);
         $j->setReturnValue('getColor', "blue_anime");
         $this->assertEqual($j->getColorNoAnime(), "blue");
     }
     function testColorNoAnime3() {
-        $j = new HudsonJobTestColorVersion($this);        
+        $j = new HudsonJobTestColorVersion($this);
         $j->setReturnValue('getColor', "grey");
         $this->assertEqual($j->getColorNoAnime(), "grey");
     }
     function testColorNoAnime4() {
-        $j = new HudsonJobTestColorVersion($this);  
+        $j = new HudsonJobTestColorVersion($this);
         $j->setReturnValue('getColor', "grey_anime");
         $this->assertEqual($j->getColorNoAnime(), "grey");
     }
-    
+
 }
 
 ?>

@@ -116,12 +116,12 @@ if ($what) {
 
 
 
-			$result = db_query_params ('SELECT avg((end_date-start_date)/(24*60*60)) 
-FROM project_task,project_group_list 
-WHERE end_date > 0 
-AND (start_date >= $1 AND start_date <= $2) 
-AND project_task.status_id=2 
-AND project_group_list.group_project_id=project_task.group_project_id 
+			$result = db_query_params ('SELECT avg((end_date-start_date)/(24*60*60))
+FROM project_task,project_group_list
+WHERE end_date > 0
+AND (start_date >= $1 AND start_date <= $2)
+AND project_task.status_id=2
+AND project_group_list.group_project_id=project_task.group_project_id
 AND project_group_list.group_id=$3 ',
 			array($start,
 				$end,
@@ -140,11 +140,11 @@ AND project_group_list.group_id=$3 ',
 			$start=($time_now-($counter*$sub_duration));
 			$end=($time_now-(($counter-1)*$sub_duration));
 
-			$result = db_query_params ('SELECT count(*) 
-FROM project_task,project_group_list 
-WHERE start_date >= $1 
-AND start_date <= $2 
-AND project_group_list.group_project_id=project_task.group_project_id 
+			$result = db_query_params ('SELECT count(*)
+FROM project_task,project_group_list
+WHERE start_date >= $1
+AND start_date <= $2
+AND project_group_list.group_project_id=project_task.group_project_id
 AND project_group_list.group_id=$3 ',
 			array($start,
 				$end,
@@ -165,11 +165,11 @@ AND project_group_list.group_id=$3 ',
 
 
 
-			$result = db_query_params ('SELECT count(*) 
-FROM project_task,project_group_list 
-WHERE start_date <= $1 
-AND (end_date >= $2 OR end_date < 1 OR end_date is null) 
-AND project_group_list.group_project_id=project_task.group_project_id 
+			$result = db_query_params ('SELECT count(*)
+FROM project_task,project_group_list
+WHERE start_date <= $1
+AND (end_date >= $2 OR end_date < 1 OR end_date is null)
+AND project_group_list.group_project_id=project_task.group_project_id
 AND project_group_list.group_id=$3 ',
 			array($end,
 				$end,
@@ -187,18 +187,18 @@ AND project_group_list.group_id=$3 ',
 
 	} else if ($what=="subproject") {
 		$qpa1 = db_construct_qpa (false,
-					  'SELECT project_group_list.project_name AS Subproject, count(*) AS Count 
-FROM project_group_list,project_task 
-WHERE project_group_list.group_project_id=project_task.group_project_id 
+					  'SELECT project_group_list.project_name AS Subproject, count(*) AS Count
+FROM project_group_list,project_task
+WHERE project_group_list.group_project_id=project_task.group_project_id
 AND project_task.status_id = 1
 AND project_group_list.group_id=$1
 AND start_date >= $2
 GROUP BY Subproject',
 					  array ($group_id,
 						 $period_threshold)) ;
-		$qpa2 = db_construct_qpa ('SELECT project_group_list.project_name AS Subproject, count(*) AS Count 
-FROM project_group_list,project_task 
-WHERE project_group_list.group_project_id=project_task.group_project_id 
+		$qpa2 = db_construct_qpa ('SELECT project_group_list.project_name AS Subproject, count(*) AS Count
+FROM project_group_list,project_task
+WHERE project_group_list.group_project_id=project_task.group_project_id
 AND project_task.status_id <> 3
 AND project_group_list.group_id=$1
 AND start_date >= $2
@@ -212,11 +212,11 @@ GROUP BY Subproject',
 			  _('All Tasks By Category'), $qpa2);
 
 	} else if ($what=="tech") {
-		$qpa1 = db_construct_qpa ('SELECT users.user_name AS Technician, count(*) AS Count 
-FROM users,project_group_list,project_task,project_assigned_to 
-WHERE users.user_id=project_assigned_to.assigned_to_id 
-AND project_assigned_to.project_task_id=project_task.project_task_id 
-AND project_task.group_project_id=project_group_list.group_project_id 
+		$qpa1 = db_construct_qpa ('SELECT users.user_name AS Technician, count(*) AS Count
+FROM users,project_group_list,project_task,project_assigned_to
+WHERE users.user_id=project_assigned_to.assigned_to_id
+AND project_assigned_to.project_task_id=project_task.project_task_id
+AND project_task.group_project_id=project_group_list.group_project_id
 AND project_task.status_id = 1
 AND project_group_list.group_id=$1
 AND start_date >= $2
@@ -224,11 +224,11 @@ GROUP BY Technician',
 					  array ($group_id,
 						 $period_threshold)) ;
 
-		$qpa2 = db_construct_qpa ('SELECT users.user_name AS Technician, count(*) AS Count 
-FROM users,project_group_list,project_task,project_assigned_to 
-WHERE users.user_id=project_assigned_to.assigned_to_id 
-AND project_assigned_to.project_task_id=project_task.project_task_id 
-AND project_task.group_project_id=project_group_list.group_project_id 
+		$qpa2 = db_construct_qpa ('SELECT users.user_name AS Technician, count(*) AS Count
+FROM users,project_group_list,project_task,project_assigned_to
+WHERE users.user_id=project_assigned_to.assigned_to_id
+AND project_assigned_to.project_task_id=project_task.project_task_id
+AND project_task.group_project_id=project_group_list.group_project_id
 AND project_task.status_id <> 3
 AND project_group_list.group_id=$1
 AND start_date >= $2

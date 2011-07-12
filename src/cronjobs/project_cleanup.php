@@ -37,18 +37,18 @@ $err .= db_error();
 // one week ago for users
 $then=(time()-604800);
 if (USE_PFO_RBAC) {
-	db_query_params ('DELETE FROM pfo_user_role WHERE EXISTS (SELECT user_id FROM users 
+	db_query_params ('DELETE FROM pfo_user_role WHERE EXISTS (SELECT user_id FROM users
 WHERE status=$1 and add_date < $2 AND users.user_id=pfo_user_role.user_id)',
 			 array ('P',
 				$then));
 	$err .= db_error();
-	db_query_params ('DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users 
+	db_query_params ('DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users
 WHERE status=$1 and add_date < $2 AND users.user_id=user_group.user_id)',
 			 array ('P',
 				$then));
 	$err .= db_error();
 } else {
-	db_query_params ('DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users 
+	db_query_params ('DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users
 WHERE status=$1 and add_date < $2 AND users.user_id=user_group.user_id)',
 			 array ('P',
 				$then));

@@ -23,7 +23,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>
 <rss version="0.91">
 ';
 
-$res=db_query_params ('SELECT 
+$res=db_query_params ('SELECT
 					groups.group_id,
 					groups.group_name,
 					groups.unix_group_name,
@@ -31,15 +31,15 @@ $res=db_query_params ('SELECT
 					news_bytes.forum_id,
 					news_bytes.summary,
 					news_bytes.post_date,
-					news_bytes.details 
-				FROM 
+					news_bytes.details
+				FROM
 					news_bytes,
-					groups 
-				WHERE 
-					news_bytes.group_id=groups.group_id 
+					groups
+				WHERE
+					news_bytes.group_id=groups.group_id
 					AND groups.status=$1
-				ORDER BY 
-					post_date 
+				ORDER BY
+					post_date
 				DESC',
 		      array('A'),
 		      $limit * 3);
@@ -61,7 +61,7 @@ while ($row = db_fetch_array($res)) {
 	if (!forge_check_perm('project_read', $row['group_id'])) {
 		continue;
 	}
-	
+
 	if (!isset ($seen[$row['group_id']])) {
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";

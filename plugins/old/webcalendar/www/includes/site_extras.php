@@ -10,7 +10,7 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
  * Page Description:
  *	This file can be used to define extra information associated with a
  *	calender entry.
- *	
+ *
  *	You may define extra fields of the following types:
  *	  EXTRA_TEXT - will allow user to enter a line of text
  *	  EXTRA_MULTILINETEXT - will allow user to enter multiple lines of text
@@ -26,12 +26,12 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
  *	    extra options to send it out before this date also.
  *	  EXTRA_SELECTION_LIST - allows a custom selection list.  Can use
  *	    this to specify a list of possible locations, etc.
- *	
+ *
  * Comments:
  *	If you want to fully support using languages other than what
  *	you define below, you will need to add the 2nd field of the arrays
  *	below to the translation files.
- *	
+ *
  * WARNING:
  *	If you want to use reminders, you will need to do some
  *	extra steps in setting up WebCalendar.  There is no built-in support

@@ -28,7 +28,7 @@ $USER_OBJ=array();
 /**
  * user_get_object_by_name() - Get User object by username.
  * user_get_object is useful so you can pool user objects/save database queries
- * You should always use this instead of instantiating the object directly 
+ * You should always use this instead of instantiating the object directly
  *
  * @param	string	The unix username - required
  * @param	int	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
@@ -67,7 +67,7 @@ function user_get_object_by_email($email ,$res = false) {
 /**
  * user_get_object() - Get User object by user ID.
  * user_get_object is useful so you can pool user objects/save database queries
- * You should always use this instead of instantiating the object directly 
+ * You should always use this instead of instantiating the object directly
  *
  * @param	int	The ID of the user - required
  * @param	int	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
@@ -76,10 +76,10 @@ function user_get_object_by_email($email ,$res = false) {
 function &user_get_object($user_id, $res = false) {
 	//create a common set of group objects
 	//saves a little wear on the database
-	
-	//automatically checks group_type and 
+
+	//automatically checks group_type and
 	//returns appropriate object
-	
+
 	global $USER_OBJ;
 	if (!isset($USER_OBJ["_".$user_id."_"])) {
 		if ($res) {
@@ -144,13 +144,13 @@ function &user_get_active_users() {
 }
 
 class GFUser extends Error {
-	/** 
+	/**
 	 * Associative array of data from db.
 	 *
 	 * @var	array	$data_array.
 	 */
 	var $data_array;
-	
+
 	/**
 	 * Is this person a site super-admin?
 	 *
@@ -209,7 +209,7 @@ class GFUser extends Error {
 		$this->is_logged_in=false;
 		return true;
 	}
-	
+
 	/**
 	 * create() - Create a new user.
 	 *
@@ -402,7 +402,7 @@ class GFUser extends Error {
 			$hook_params['user_name'] = $unix_name;
 			$hook_params['user_password'] = $password1;
 			plugin_hook("user_create", $hook_params);
-			
+
 			if ($send_mail) {
 				setup_gettext_from_lang_id($language_id);
 				$this->sendRegistrationEmail();
@@ -422,7 +422,7 @@ class GFUser extends Error {
 	function sendRegistrationEmail() {
 		$message=stripcslashes(sprintf(_('Thank you for registering on the %3$s web site. You have
 account with username %1$s created for you. In order
-to complete your registration, visit the following url: 
+to complete your registration, visit the following url:
 
 <%2$s>
 
@@ -615,12 +615,12 @@ Enjoy the site.
 			db_rollback();
 			return false;
 		}
-		
+
 		$hook_params = array ();
 		$hook_params['user'] = $this;
 		$hook_params['user_id'] = $this->getID();
 		plugin_hook ("user_update", $hook_params);
-		
+
 		db_commit();
 		return true;
 	}
@@ -643,7 +643,7 @@ Enjoy the site.
 		$this->data_array = db_fetch_array($res);
 		return true;
 	}
-	
+
 	/**
 	 * getID - Simply return the user_id for this object.
 	 *
@@ -705,9 +705,9 @@ Enjoy the site.
 			$hook_params['user_id'] = $this->getID();
 			$hook_params['status'] = $status;
 			plugin_hook ("user_setstatus", $hook_params);
-			
+
 			db_commit();
-			
+
 			return true;
 		}
 	}
@@ -773,7 +773,7 @@ Enjoy the site.
 					}
 				}
 			}
-			
+
 			$this->data_array['unix_status']=$status;
 			db_commit();
 			return true;
@@ -815,7 +815,7 @@ Enjoy the site.
 	function getMD5Passwd() {
 		return $this->data_array['user_pw'];
 	}
-	
+
 	//Added to be compatible with codendi getUserPw function
 	function getUserPw() {
 		return $this->data_array['user_pw'];
@@ -838,10 +838,10 @@ Enjoy the site.
 	function getEmail() {
 		return str_replace("\n", "", $this->data_array['email']);
 	}
-	
+
 	/**
 	 * getSha1Email - a SHA1 encoded hash of the email URI (including mailto: prefix)
-	 * 
+	 *
 	 * @return string The SHA1 encoded value for the email
 	 */
 	function getSha1Email() {
@@ -901,7 +901,7 @@ Enjoy the site.
 			$hook_params['user_id'] = $this->getID();
 			$hook_params['user_email'] = $email;
 			plugin_hook("user_setemail", $hook_params);
-			
+
 			if (!$this->fetchData($this->getId())) {
 				db_rollback();
 				return false;
@@ -1385,12 +1385,12 @@ Enjoy the site.
 			$res = db_query_params('UPDATE users SET user_pw=$1 WHERE user_id=$2',
 						array($md5_pw,
 						       $this->getID()));
-			
+
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
 				db_rollback();
 				return false;
-			} 
+			}
 		}
 		db_commit();
 		return true;
@@ -1411,13 +1411,13 @@ Enjoy the site.
 			$res = db_query_params('UPDATE users SET unix_pw=$1 WHERE user_id=$1',
 						array ($unix_pw,
 						       $this->getID()));
-			
+
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
 				db_rollback();
 				return false;
-			} 
-			
+			}
+
 			// Now change system password, but only if corresponding
 			// entry exists (i.e. if user have shell access)
 			if ($SYS->sysCheckUser($this->getID())) {
@@ -1474,7 +1474,7 @@ Enjoy the site.
 	}
 
 	/**
-	 * usesPlugin - returns true if the user uses a particular plugin 
+	 * usesPlugin - returns true if the user uses a particular plugin
 	 *
 	 * @param	string	name of the plugin
 	 * @return	boolean	whether plugin is being used or not
@@ -1643,11 +1643,11 @@ Enjoy the site.
 		case 'P2':
 			//pm admin
 			return forge_check_perm_for_user($this, 'pm_admin', $group_id);
-			break; 
+			break;
 		case 'F2':
 			//forum admin
 			return forge_check_perm_for_user($this, 'forum_admin', $group_id);
-			break; 
+			break;
 		case 'A':
 			//admin for this group
 			return forge_check_perm_for_user($this, 'project_admin', $group_id);
@@ -1678,7 +1678,7 @@ Enjoy the site.
 
 /**
  * user_ismember() - DEPRECATED; DO NOT USE! (TODO: document what should be used instead)
- *  May need to be replaced by forge_check_perm ('project_admin', $group_id) if checking for project admin 
+ *  May need to be replaced by forge_check_perm ('project_admin', $group_id) if checking for project admin
  * @param		int		The Group ID
  * @param		int		The Type
  * @deprecated

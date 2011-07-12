@@ -49,7 +49,7 @@ function printnode ($nodeid,$text) {
 
 	$GLOBALS['depth']++;
 	$res_child = db_query_params ('
-		SELECT trove_cat_id,fullname FROM trove_cat 
+		SELECT trove_cat_id,fullname FROM trove_cat
 		WHERE parent=$1
 		AND trove_cat_id!=0;
 	',

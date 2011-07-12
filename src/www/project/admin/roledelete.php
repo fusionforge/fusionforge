@@ -61,7 +61,7 @@ if (getStringFromRequest('submit')) {
 	//change assistant for webcal
 	$params = getIntFromRequest('group_id');
 	plugin_hook('change_cal_permission_auto',$params);
-	
+
 	if (!isset($error_msg)) {
 		session_redirect('/project/admin/users.php?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
 	}

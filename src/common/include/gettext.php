@@ -24,7 +24,7 @@
 
 /**
  * choose_language_from_context - find the most appropriate language
- * 
+ *
  * @return string the language class name.
  */
 function choose_language_from_context () {
@@ -67,7 +67,7 @@ function choose_language_from_context () {
 	if ($lcount > 0) {
 		$delta = 0.009/$lcount ;
 		$i = 0 ;
-		
+
 		foreach ($ranges as $p) {
 			if (preg_match ('/(.*);q=(.*)/', $p, $matches)) {
 				$l = $matches[1] ;
@@ -80,7 +80,7 @@ function choose_language_from_context () {
 		}
 		arsort($languages, SORT_NUMERIC);
 		$languages = array_keys($languages);
-		
+
 		for( $i=0, $max = sizeof($languages); $i < $max; $i++){
 			$languageCode = $languages[$i];
 			$res = db_query_params ('select classname from supported_languages where language_code=$1', array ($languageCode)) ;
@@ -103,7 +103,7 @@ function choose_language_from_context () {
 	if (forge_get_config('default_language')) {
 		return forge_get_config('default_language') ;
 	}
-	
+
 	// Still no match?  Really?
 	return "English";
 }
@@ -216,7 +216,7 @@ function setup_gettext_from_sys_lang () {
  */
 function setup_gettext_from_locale ($locale) {
 	setlocale(LC_ALL, $locale);
-	
+
 	if (isset($GLOBALS['sys_gettext_path'])) {
 		bindtextdomain('fusionforge', $GLOBALS['sys_gettext_path']);
 	} else {

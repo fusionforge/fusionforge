@@ -45,7 +45,7 @@ echo '<p>';
 echo _("The information gathered is used only in aggregate form, not to single out specific users or developers.");
 echo '</p>';
 echo '<p>';
-echo _("If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'."); 
+echo _("If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'.");
 echo '</p>';
 
 ?>

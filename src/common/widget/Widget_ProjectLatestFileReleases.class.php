@@ -22,7 +22,7 @@ require_once('Widget.class.php');
 
 /**
 * Widget_ProjectLatestFileReleases
-* 
+*
 */
 class Widget_ProjectLatestFileReleases extends Widget {
     var $content;
@@ -78,11 +78,11 @@ $HTML=$GLOBALS['HTML'];
 			$public_required = 0 ;
 		}
 
-		$res_files = db_query_params ('SELECT frs_package.package_id,frs_package.name AS package_name,frs_release.name AS release_name,frs_release.release_id AS release_id,frs_release.release_date AS release_date 
-			FROM frs_package,frs_release 
-			WHERE frs_package.package_id=frs_release.package_id 
-			AND frs_package.group_id=$1 
-			AND frs_release.status_id=1 
+		$res_files = db_query_params ('SELECT frs_package.package_id,frs_package.name AS package_name,frs_release.name AS release_name,frs_release.release_id AS release_id,frs_release.release_date AS release_date
+			FROM frs_package,frs_release
+			WHERE frs_package.package_id=frs_release.package_id
+			AND frs_package.group_id=$1
+			AND frs_release.status_id=1
 			AND (frs_package.is_public=1 OR 1 != $2)
 			ORDER BY frs_package.package_id,frs_release.release_date DESC',
 			array ($group_id,
@@ -121,7 +121,7 @@ $HTML=$GLOBALS['HTML'];
 						'</td>
 						<td class="align-center">';
 //echo '</div>';
-					
+
 					// -> notes
 					// accessibility: image is a link, so alt must be unique in page => construct a unique alt
 					$tmp_alt = $package_name . " - " . _('Release Notes');
@@ -130,7 +130,7 @@ $HTML=$GLOBALS['HTML'];
 					echo util_make_link ($link, $link_content);
 					echo '</td>
 						<td class="align-center">';
-					
+
 					// -> monitor
 					$tmp_alt = $package_name . " - " . _('Monitor this package');
 					$link = '/frs/monitor.php?filemodule_id=' .  db_result($res_files,$f,'package_id') . '&amp;group_id='.$group_id.'&amp;start=1';
@@ -138,7 +138,7 @@ $HTML=$GLOBALS['HTML'];
 					echo util_make_link ($link, $link_content);
 					echo '</td>
 						<td class="align-center">';
-					
+
 					// -> download
 					$tmp_alt = $package_name." ".$package_release." - ". _('Download');
 					$link_content = $HTML->getDownloadPic($tmp_alt, $tmp_alt);
@@ -147,13 +147,13 @@ $HTML=$GLOBALS['HTML'];
 					echo util_make_link ($link, $link_content);
 					echo '</td>
 					</tr>';
-					
+
 				}
 			}
 		}
 		echo '</table>';
 		echo '<div class="underline-link">' . util_make_link ('/frs/?group_id='.$group_id, _('View All Project Files')) . '</div>';
-		
+
     }
     function isAvailable() {
         return isset($this->content['title']);

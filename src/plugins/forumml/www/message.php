@@ -25,7 +25,7 @@
 
 /*
  * ForumML Archives Browsing page
- *  
+ *
  */
 
 require_once('env.inc.php');
@@ -52,7 +52,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 
 	$vGrp = new Valid_UInt('group_id');
 	$vGrp->required();
-	if ($request->valid($vGrp)) {		
+	if ($request->valid($vGrp)) {
 		$group_id = $request->get('group_id');
 	} else {
 		$group_id = "";
@@ -96,7 +96,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 		$list = new MailmanList($group_id,$list_id);
 		if (!isLogged() || ($list->isPublic()!=1 && !$current_user->isMember($group_id))) {
 			exit_error(_('error'),_('You are not allowed to access this page'));
-		}		
+		}
 		if ($list->getStatus() !=3) {
 			exit_error(_('error'),_('This list is not active'));
 		}
@@ -130,7 +130,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 
 	$params['title'] = $Group->getPublicName().' - ForumML - '.$list_name;
 	if ($topicSubject) {
-		$params['title'] .= ' - '.$topicSubject;   
+		$params['title'] .= ' - '.$topicSubject;
 	}
 	$params['group'] = $group_id;
 	$params['toptab']='mail';
@@ -144,7 +144,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 		if (isset($ret) && $ret) {
 			// wait few seconds before redirecting to archives page
 			echo "<script> setTimeout('window.location=\"/plugins/forumml/message.php?group_id=".$group_id."&list=".$list_id."&topic=".$topic."\"',3000) </script>";
-		}		
+		}
 	}
 
 	$list_link = '<a href="/plugins/forumml/message.php?group_id='.$group_id.'&list='.$list_id.'">'.$list_name.'</a>';
@@ -195,18 +195,18 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 		// Check if there are archives to browse
 		$res = getForumMLDao()->hasArchives($list_id);
 		if ($res->rowCount() > 0) {
-			// Call to show_thread() function to display the archives			
+			// Call to show_thread() function to display the archives
 			if (isset($topic) && $topic != 0) {
 				// specific thread
 				plugin_forumml_show_thread($p, $list_id, $topic, $purgeCache);
 			} else {
 				plugin_forumml_show_all_threads($p,$list_id,$list_name,$offset);
-			}	
+			}
 		} else {
 			echo "<H2>"._('Empty archives')."</H2>";
 		}
 	} else {
-		// search archives		
+		// search archives
 		$pattern = "%".$request->get('search')."%";
 		$result = getForumMLDao()->searchArchives($list_id,$pattern);
 		echo "<H3>"._('Search result for ').$request->get('search')." (".$result->rowCount()." "._('Thread(s) found').")</H3>";

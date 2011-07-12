@@ -1,6 +1,6 @@
 <?php // #!/usr/local/bin/php -Cq
 /*
-  This file is part of, or distributed with, libXMLRPC - a C library for 
+  This file is part of, or distributed with, libXMLRPC - a C library for
   xml-encoded function calls.
 
   Author: Dan Libby (dan@libby.com)
@@ -8,28 +8,28 @@
   $Id: interop-client.php 7181 2009-10-05 14:25:48Z vargenau $
 */
 
-/*  
-  Copyright 2001 Epinions, Inc. 
+/*
+  Copyright 2001 Epinions, Inc.
 
-  Subject to the following 3 conditions, Epinions, Inc.  permits you, free 
-  of charge, to (a) use, copy, distribute, modify, perform and display this 
-  software and associated documentation files (the "Software"), and (b) 
-  permit others to whom the Software is furnished to do so as well.  
+  Subject to the following 3 conditions, Epinions, Inc.  permits you, free
+  of charge, to (a) use, copy, distribute, modify, perform and display this
+  software and associated documentation files (the "Software"), and (b)
+  permit others to whom the Software is furnished to do so as well.
 
-  1) The above copyright notice and this permission notice shall be included 
-  without modification in all copies or substantial portions of the 
-  Software.  
+  1) The above copyright notice and this permission notice shall be included
+  without modification in all copies or substantial portions of the
+  Software.
 
-  2) THE SOFTWARE IS PROVIDED "AS IS", WITHOUT ANY WARRANTY OR CONDITION OF 
-  ANY KIND, EXPRESS, IMPLIED OR STATUTORY, INCLUDING WITHOUT LIMITATION ANY 
-  IMPLIED WARRANTIES OF ACCURACY, MERCHANTABILITY, FITNESS FOR A PARTICULAR 
-  PURPOSE OR NONINFRINGEMENT.  
+  2) THE SOFTWARE IS PROVIDED "AS IS", WITHOUT ANY WARRANTY OR CONDITION OF
+  ANY KIND, EXPRESS, IMPLIED OR STATUTORY, INCLUDING WITHOUT LIMITATION ANY
+  IMPLIED WARRANTIES OF ACCURACY, MERCHANTABILITY, FITNESS FOR A PARTICULAR
+  PURPOSE OR NONINFRINGEMENT.
 
-  3) IN NO EVENT SHALL EPINIONS, INC. BE LIABLE FOR ANY DIRECT, INDIRECT, 
-  SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS ARISING OUT 
-  OF OR IN CONNECTION WITH THE SOFTWARE (HOWEVER ARISING, INCLUDING 
-  NEGLIGENCE), EVEN IF EPINIONS, INC.  IS AWARE OF THE POSSIBILITY OF SUCH 
-  DAMAGES.    
+  3) IN NO EVENT SHALL EPINIONS, INC. BE LIABLE FOR ANY DIRECT, INDIRECT,
+  SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS ARISING OUT
+  OF OR IN CONNECTION WITH THE SOFTWARE (HOWEVER ARISING, INCLUDING
+  NEGLIGENCE), EVEN IF EPINIONS, INC.  IS AWARE OF THE POSSIBILITY OF SUCH
+  DAMAGES.
 
 */
 
@@ -114,10 +114,10 @@ function run_test($server, $debug, $output, $method, $args) {
     echo "<hr>";
     $params = array($args);
     $result =  xu_rpc_http_concise(array(method => $method,
-                                         args   => $params, 
-                                         host   => $server[host], 
-                                         uri    => $server[uri], 
-                                         port   => $server[port], 
+                                         args   => $params,
+                                         host   => $server[host],
+                                         uri    => $server[uri],
+                                         port   => $server[port],
                                          debug  => $debug,
                                          output => $output));
     check_if_matches($method, $args, $result);
@@ -128,9 +128,9 @@ function run_test($server, $debug, $output, $method, $args) {
 function run_no_param_test($server, $debug, $output, $method) {
     echo "<hr>";
     $result =  xu_rpc_http_concise(array(method => $method,
-                                         host => $server[host], 
-                                         uri  => $server[uri], 
-                                         port => $server[port], 
+                                         host => $server[host],
+                                         uri  => $server[uri],
+                                         port => $server[port],
                                          debug => $debug,
                                          output => $output));
 
@@ -140,7 +140,7 @@ function run_no_param_test($server, $debug, $output, $method) {
     else {
         fail($method, false, $result);
     }
-   
+
     flush();
 }
 
@@ -170,7 +170,7 @@ function run_easy_tests($server, $debug=0, $output = null) {
                                                                                        "varInt" => 3200,
                                                                                        "varString" => "happy little string" )
                                                                                  ));
-                                                                  
+
     $foo = "some base64 string";
     xmlrpc_set_type($foo, "base64");
     run_test($server, $debug, $output, "interopEchoTests.echoBase64", $foo);
@@ -178,7 +178,7 @@ function run_easy_tests($server, $debug=0, $output = null) {
     $foo="19980717T14:08:55";
     xmlrpc_set_type($foo, "datetime");
     run_test($server, $debug, $output, "interopEchoTests.echoDate", $foo);
-   
+
     run_no_param_test($server, $debug, $output, "interopEchoTests.noInParams");
 }
 
@@ -187,7 +187,7 @@ function ident($server, $debug=0, $output=null) {
     $result =  xu_rpc_http_concise(array('method' => $method,
                                          'host'   => $server['host'],
                                          'uri'    => $server['uri'],
-                                         'port'   => $server['port'], 
+                                         'port'   => $server['port'],
                                          'debug'  => $debug,
                                          'output' => $output));
     if ($result && $result['toolkitDocsUrl'] && !$result['faultCode']) {
@@ -210,17 +210,17 @@ function run_stress_tests($server, $debug=0, $output=null) {
     run_test($server, $debug, $output, "interopEchoTests.echoString", "XML Comment in a string: <!-- A comment -->");
     run_test($server, $debug, $output, "interopEchoTests.echoInteger", 4200000000);
     run_test($server, $debug, $output, "interopEchoTests.echoFloat", 1.2);
-    run_test($server, $debug, $output, "interopEchoTests.echoStruct", 
+    run_test($server, $debug, $output, "interopEchoTests.echoStruct",
              array("varFloat" => 1.2345,
                    "varInt" => 186000,
                    "varString" => "18 > 2 && 2 < 18 && 42 == the answer to life, the universe, and everything" ));
-    run_test($server, $debug, $output, "interopEchoTests.echoStringArray", 
+    run_test($server, $debug, $output, "interopEchoTests.echoStringArray",
              array($decl_1, $decl_2, $decl_3, $decl_4, "non-ascii chars above 127 (165-170): ¥, ¦, §, ¨, ©, ª"));
-    run_test($server, $debug, $output, "interopEchoTests.echoIntegerArray", 
+    run_test($server, $debug, $output, "interopEchoTests.echoIntegerArray",
              array(23, 234, 1, 0, -10, 999));
-    run_test($server, $debug, $output, "interopEchoTests.echoFloatArray", 
+    run_test($server, $debug, $output, "interopEchoTests.echoFloatArray",
              array(2.45, 9.9999));
-    run_test($server, $debug, $output, "interopEchoTests.echoStructArray", 
+    run_test($server, $debug, $output, "interopEchoTests.echoStructArray",
              array(array("varFloat" => 1.2345,
                          "varInt" => 186000,
                          "varString" => "non-print char (8): "),
@@ -257,9 +257,9 @@ if ($server) {
    if ($server) {
       $title = $server['title'];
       echo "<h2><CENTER>Results for $title</CENTER></H2>";
-      
+
       ident($server, $debug, $output);
-      
+
       if($GLOBALS['HTTP_GET_VARS']['stress'] == 1) {
          run_stress_tests($server, $debug, $output);
       }

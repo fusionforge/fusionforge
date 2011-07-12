@@ -5,7 +5,7 @@
  *     Index: session_id
  *     Values: date : IP : data
  *  Already open sessions, e.g. interim xmlrpc requests are
- *  are treated specially. see write(). 
+ *  are treated specially. see write().
  *  To avoid deadlocks in the session.db3 access,
  *  the db is opened and closed for each access.
  * @author: Reini Urban.
@@ -78,7 +78,7 @@ extends DbSession
         }
         return $packed;
     }
-  
+
     function write ($id, $sess_data) {
         if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return;
 
@@ -114,7 +114,7 @@ extends DbSession
         return true;
     }
 
-    // WhoIsOnline support. 
+    // WhoIsOnline support.
     // TODO: ip-accesstime dynamic blocking API
     function currentSessions() {
         $sessions = array();

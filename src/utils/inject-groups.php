@@ -49,7 +49,7 @@ while (! feof ($f)) {
 		db_rollback () ;
 		exit (1) ;
 	}
-	
+
 	$g = new Group () ;
 	$r = $g->create ($u, $fullname, $unixname, $description, 'Project injected into the database by inject-groups.php', 'shell', 'scm', $is_public, false) ;
 

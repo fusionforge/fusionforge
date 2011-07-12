@@ -56,7 +56,7 @@ if ( $single_user == "N" ) {
       if ( ! empty ( $layers[$id]['cal_layeruser'] ) ) {
         if ( $layers[$id]['cal_layeruser'] == $userlist[$i]['cal_login'] )
           $users .= " selected=\"selected\"";
-      } 
+      }
       $users .= ">" . $userlist[$i]['cal_fullname'] . "</option>\n";
     }
   }
@@ -80,8 +80,8 @@ if ( $single_user == "N" ) {
 </td></tr>
 <tr><td style="font-weight:bold;">
 	<?php etranslate("Duplicates")?>:</td><td>
-	<label><input type="checkbox" name="dups" value="Y"<?php 
-		if (! empty ($layers[$id]['cal_dups']) && $layers[$id]['cal_dups'] == 'Y') 
+	<label><input type="checkbox" name="dups" value="Y"<?php
+		if (! empty ($layers[$id]['cal_dups']) && $layers[$id]['cal_dups'] == 'Y')
 			echo " checked=\"checked\"";
 	?> />&nbsp;<?php etranslate("Show layer events that are the same as your own")?></label>
 </td></tr>

@@ -51,7 +51,7 @@ if ( empty ( $id ) ) {
 }
 
 // If view_name not found, then the specified view id does not
-// belong to current user. 
+// belong to current user.
 if ( empty( $viewname ) ) {
   $error = translate ( "You are not authorized" );
 }
@@ -79,7 +79,7 @@ if ( ! empty ( $error ) ) {
   print_trailer ();
   exit;
 }
-	
+
 if ( $newview ) {
   $v = array ();
   echo "<h2>" . translate("Add View") . "</h2>\n";

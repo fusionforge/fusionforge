@@ -26,12 +26,12 @@ require_once $gfcommon.'include/Error.class.php';
 
 class ArtifactCanned extends Error {
 
-	/** 
+	/**
 	 * The artifact type object.
 	 *
 	 * @var		object	$ArtifactType.
 	 */
-	var $ArtifactType; 
+	var $ArtifactType;
 
 	/**
 	 * Array of artifact data.
@@ -48,7 +48,7 @@ class ArtifactCanned extends Error {
 	 *  @return	boolean	success.
 	 */
 	function ArtifactCanned(&$ArtifactType, $data=false) {
-		$this->Error(); 
+		$this->Error();
 
 		//was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
@@ -144,7 +144,7 @@ class ArtifactCanned extends Error {
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
-	
+
 	/**
 	 *	getID - get this ArtifactCanned message's ID.
 	 *
@@ -183,11 +183,11 @@ class ArtifactCanned extends Error {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
-		}   
+		}
 		if (!$title || !$body) {
 			$this->setMissingParamsError();
 			return false;
-		}   
+		}
 
 		$result = db_query_params ('UPDATE artifact_canned_responses
 			SET title=$1,body=$2

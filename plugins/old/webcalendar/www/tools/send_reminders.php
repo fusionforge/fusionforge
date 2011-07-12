@@ -24,7 +24,7 @@
  * If you're a Windows user, you'll either need to find a cron clone
  * for Windows (they're out there) or use the Windows Task Scheduler.
  * (See docs/WebCalendar-SysAdmin.html for instructions.)
- * 
+ *
  * Comments:
  * You will need access to the PHP binary (command-line) rather than
  * the module-based version that is typically installed for use with
@@ -174,7 +174,7 @@ function send_reminder ( $id, $event_date ) {
   $pri[3] = translate("High");
 
   // get participants first...
- 
+
   $sql = "SELECT cal_login FROM webcal_entry_user " .
     "WHERE cal_id = $id AND cal_status IN ('A','W') " .
     "ORDER BY cal_login";
@@ -338,7 +338,7 @@ function send_reminder ( $id, $event_date ) {
           translate("External User") . ")\n";
       }
     }
-  
+
     $subject = translate("Reminder") . ": " . $name;
 
     if ( strlen ( $GLOBALS["email_fallback_from"] ) )
@@ -346,7 +346,7 @@ function send_reminder ( $id, $event_date ) {
         "X-Mailer: " . translate($application_name);
     else
       $extra_hdrs = "X-Mailer: " . translate($application_name);
-  
+
     if ( $debug )
       echo "Sending mail to $recip (in $userlang)\n";
     if ( $only_testing ) {
@@ -400,7 +400,7 @@ function process_event ( $id, $name, $event_date, $event_time ) {
       printf ( "  name: %s\n  type: %d\n  arg1: %s\n  arg2: %s\n",
       $extra_name, $extra_type, $extra_arg1, $extra_arg2 );
     if ( ! empty ( $extras[$extra_name]['cal_remind'] ) ) {
-    	
+
       if ( $debug )
         echo "  Reminder set for event. <br />\n";
       // how many minutes before event should we send the reminder?

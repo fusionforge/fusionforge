@@ -70,7 +70,7 @@ class DocumentGroupHTML extends Error {
 
 		// Recursively build the document group tree
 		$this->buildArrays($group_arr, $id_array, $text_array, $dont_display);
-		
+
 		echo html_build_select_box_from_arrays($id_array, $text_array, $select_name, $selected_id, false);
 	}
 
@@ -95,10 +95,10 @@ class DocumentGroupHTML extends Error {
 			if (in_array($doc_group->getID(), $dont_display)) continue;
 
 			$margin = str_repeat("--", $level);
-			
+
 			$id_array[] = $doc_group->getID();
 			$text_array[] = $margin.$doc_group->getName();
-			
+
 			// Show childs (if any)
 			$this->buildArrays($group_arr, $id_array, $text_array, $dont_display, $doc_group->getID(), $level+1);
 		}

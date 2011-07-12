@@ -24,19 +24,19 @@ require_once $gfwww.'include/my_utils.php';
 
 /**
 * Widget_MyTasks
-* 
+*
 * Tasks assigned to me
 */
 class Widget_MyTasks extends Widget {
     var $content;
     var $can_be_displayed;
-    
+
     function Widget_MyTasks() {
         $this->Widget('mytasks');
         $this->content = '';
         $this->setOwner(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER);
         $last_group=0;
-    
+
         $sql = 'SELECT groups.group_id, groups.group_name, project_group_list.group_project_id, project_group_list.project_name '.
             'FROM groups,project_group_list,project_task,project_assigned_to '.
             'WHERE project_task.project_task_id=project_assigned_to.project_task_id '.
@@ -44,18 +44,18 @@ class Widget_MyTasks extends Widget {
             ' AND project_task.status_id=1 AND project_group_list.group_id=groups.group_id '.
             "AND project_group_list.is_public!='9' ".
           'AND project_group_list.group_project_id=project_task.group_project_id GROUP BY groups.group_id, groups.group_name, project_group_list.project_name, project_group_list.group_project_id';
-    
+
         $result=db_query_params($sql,array(user_getid()));
         $rows=db_numrows($result);
-    
+
         if ($result && $rows >= 1) {
             $request =& HTTPRequest::instance();
             $this->content .= '<table style="width:100%">';
             for ($j=0; $j<$rows; $j++) {
-    
+
                 $group_id = db_result($result,$j,'group_id');
                 $group_project_id = db_result($result,$j,'group_project_id');
-        
+
                 $sql2 = 'SELECT project_task.project_task_id, project_task.priority, project_task.summary,project_task.percent_complete '.
                     'FROM groups,project_group_list,project_task,project_assigned_to '.
                     'WHERE project_task.project_task_id=project_assigned_to.project_task_id '.
@@ -65,8 +65,8 @@ class Widget_MyTasks extends Widget {
                     'AND project_group_list.group_project_id=project_task.group_project_id '.
                     "AND project_group_list.is_public!='9' ".
                    "AND project_group_list.group_project_id= $3 LIMIT 100";
-        
-        
+
+
                 $result2 = db_query_params($sql2,array(user_getid(),$group_id,$group_project_id));
                 $rows2 = db_numrows($result2);
 
@@ -87,7 +87,7 @@ class Widget_MyTasks extends Widget {
                 }
 
                 list($hide_now,$count_diff,$hide_url) = my_hide_url('pm',$group_project_id,$hide_item_id,$rows2,$hide_pm);
-        
+
                 $html_hdr = ($j ? '<tr class="boxitem"><td colspan="3">' : '').
                     $hide_url.'<a href="/pm/task.php?group_id='.$group_id.
                     '&amp;group_project_id='.$group_project_id.'">'.
@@ -96,9 +96,9 @@ class Widget_MyTasks extends Widget {
                 $html = '';
                 $count_new = max(0, $count_diff);
                 for ($i=0; $i<$rows2; $i++) {
-                    
+
                     if (!$hide_now) {
-        
+
                     $html .= '
                     <tr class=priority"'.db_result($result2,$i,'priority').
                         '"><td class="small"><a href="/pm/task.php/?func=detailtask&amp;project_task_id='.
@@ -106,10 +106,10 @@ class Widget_MyTasks extends Widget {
                         $group_id.'&amp;group_project_id='.$group_project_id.
                         '">'.stripslashes(db_result($result2,$i,'summary')).'</a></td>'.
                         '<td class="small">'.(db_result($result2,$i,'percent_complete')).'%</td></tr>';
-        
+
                     }
                 }
-        
+
                 $html_hdr .= my_item_count($rows2,$count_new).'</td></tr>';
                 $this->content .= $html_hdr.$html;
             }
@@ -136,7 +136,7 @@ class Widget_MyTasks extends Widget {
 	    }
 	    return false ;
     }
-    
+
     function getDescription() {
         return _("List the tasks assigned to you.");
     }

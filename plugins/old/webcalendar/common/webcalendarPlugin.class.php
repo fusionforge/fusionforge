@@ -64,7 +64,7 @@ class webcalendarPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("webcalendar")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array (util_make_url('/plugins/webcalendar/index.php' . $param)));				
+						  array (util_make_url('/plugins/webcalendar/index.php' . $param)));
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -84,7 +84,7 @@ class webcalendarPlugin extends Plugin {
 				} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
-			}	
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			///Check if the group is active
@@ -134,16 +134,16 @@ class webcalendarPlugin extends Plugin {
 			// this displays the link in the project admin options page to it's  webcalendar administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
-			
+
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo util_make_link('/plugins/webcalendar/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name,_('View the webcalendar Administration')) . '<br />';
 			}
-			
-		}												    
+
+		}
 		elseif ($hookname == "call_user_cal") {
 			//my/index.php line 365
 			?>
-			
+
 			<div id="cal" class="tabbertab" title="WebCalendar"  >
 			<table width="100%" cellspacing="0" cellpadding="0" border="0" ><tr align="center" ><td >
 			<iframe name="webcal" src="<?php echo util_make_url('/plugins/webcalendar/login.php?type=user'); ?>" border=no scrolling="yes" width="100%" height="700"></iframe>
@@ -152,17 +152,17 @@ class webcalendarPlugin extends Plugin {
 			<script>
 			function reload_webcal() {
 			frames['webcal'].location.replace('<?php echo util_make_url("/plugins/webcalendar/login.php?type=user"); ?>');
-			
+
 			}
 			</script>
-			<?php		
+			<?php
 		}
 		elseif ($hookname == "call_user_js") {
 			// my/index.php line 67
-			
+
 			?>
 			onclick="reload_webcal()"
-			<?php		
+			<?php
 		} elseif ($hookname == "role_get") {
 			$role =& $params['role'] ;
 
@@ -180,7 +180,7 @@ class webcalendarPlugin extends Plugin {
 			$new_pa =& $params['new_pa'] ;
 
 			if (USE_PFO_RBAC) {
-				$projects = $role->getLinkedProjects() ;		
+				$projects = $role->getLinkedProjects() ;
 				foreach ($projects as $p) {
 					$role->normalizePermsForSection ($new_pa, 'plugin_webcalendar_access', $p->getID()) ;
 				}
@@ -215,10 +215,10 @@ class webcalendarPlugin extends Plugin {
 				}
 			}
 		}
-		elseif ($hookname == "user_setstatus") { 
+		elseif ($hookname == "user_setstatus") {
 			$user = $params['user'] ;
 			$status = $params['status'] ;
-			
+
 			if ($status == 'A') {
 				$res_cal = db_query_params ('SELECT COUNT(*) FROM webcal_user WHERE cal_login=$1',
 							    array ($user->getUnixName())) ;
@@ -233,7 +233,7 @@ class webcalendarPlugin extends Plugin {
 				}
 			} else {
 				db_query_params ('DELETE FROM webcal_user WHERE cal_login = $1',
-							    array ($user->getUnixName()));	
+							    array ($user->getUnixName()));
 				db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 OR cal_assistant = $2',
 						 array ($user->getUnixName(),
 							$user->getUnixName())) ;
@@ -242,12 +242,12 @@ class webcalendarPlugin extends Plugin {
 			}
 		} elseif ($hookname == "group_approved") {
 			$project = group_get_object ($params['group_id']) ;
-			
+
 			$emails = array () ;
 			foreach ($project->getAdmins() as $u) {
 				$emails[] = $u->getEmail() ;
 			}
-			
+
 			db_query_params ('INSERT INTO webcal_user (cal_login, cal_passwd, cal_firstname,cal_email) VALUES ($1,$2,$3,$4)',
 					 array ($project->getUnixName(),
 						'cccc',
@@ -259,50 +259,50 @@ class webcalendarPlugin extends Plugin {
 						array ($params[0],
 						       $params[1]));
 			$row_flags = db_fetch_array($res);
-				 
-				
-				
+
+
+
 				//get user name
 				$res_nom_boss = db_query_params ('SELECT unix_group_name FROM groups WHERE group_id = $1 ',
 			array ($params[1]));
 				$row_nom_boss = db_fetch_array($res_nom_boss);
-				
-				
+
+
 				$res_nom_user = db_query_params ('SELECT user_name,email FROM users WHERE user_id = $1 ',
 			array ($params[0]));
 				$row_nom_user = db_fetch_array($res_nom_user);
-				
+
 				//verif du flag sur webcal
 				$res = db_query_params ('SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
 			array ($row_nom_boss['unix_group_name'],
 				$row_nom_user['user_name']));
 				$row_num = db_fetch_array($res);
-				
+
 				 //select email
 				$res_mail = db_query_params ('SELECT cal_email FROM webcal_user WHERE  cal_login = $1',
 			array ($row_nom_boss['unix_group_name']));
 				$row_mail = db_fetch_array($res_mail);
-				$mail = $row_mail['cal_email']; 
-				
+				$mail = $row_mail['cal_email'];
+
 				if(($row_num[0] != 1 ) && (trim($row_flags['admin_flags']) == 'A')){
 					//recuperer le nom du user et du group
 					$res_insert = db_query_params ('INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ($1,$2)',
 			array ($row_nom_boss['unix_group_name'],
 				$row_nom_user['user_name']));
-				
+
 				//we add email of the new admin
 				$mail = str_replace($row_nom_user['email'],"",$mail);
 				$mail = str_replace(",".$row_nom_user['email'],"",$mail);
-								
+
 				if($mail == ""){
-					$virgule = "";	
+					$virgule = "";
 					}
 				else {
-					$virgule = ",";	
+					$virgule = ",";
 					}
-									
+
 				$mail = $mail.$virgule.$row_nom_user['email'] ;
-								
+
 				//$mail = $row_mail['cal_email'].",".$row_nom_user['email'] ;
 				db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 						 array (trim($mail,','),
@@ -311,15 +311,15 @@ class webcalendarPlugin extends Plugin {
 				elseif($row_num[0] == 1 && (trim($row_flags['admin_flags']) != 'A')){
 					$res_del = db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
 			array ($row_nom_boss['unix_group_name'],
-				$row_nom_user['user_name']));	
-				
+				$row_nom_user['user_name']));
+
 				//we del email of the old admin
 				$mail = str_replace(",".$row_nom_user['email'],"",$row_mail['cal_email']) ;
 db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 			array ($mail,
 				$row_nom_boss['unix_group_name']));
 				}
-				
+
 		}
 		elseif ($hookname == "change_cal_permission") {
 			//argument user_id -> $params[0]et project_id -> $params[1]
@@ -331,7 +331,7 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 
 			$project = group_get_object ($project_id) ;
 			$user = user_get_object ($user_id) ;
-			
+
 			if (USE_PFO_RBAC) {
 				if (forge_check_perm_for_user ($user, 'plugin_webcalendar_access', $project_id, 'write')) {
 					$user_perm = 1 ;
@@ -348,19 +348,19 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 				$row_flags = db_fetch_array($res);
 				$user_perm = $row_flags['value'] ;
 			}
-				
+
 			//flag verification
 			$res = db_query_params ('SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
 						array ($project->getUnixName(),
 						       $user->getUnixName()));
 			$row_num = db_fetch_array($res);
-				
+
 			//select email
 			$res_mail = db_query_params ('SELECT cal_email FROM webcal_user WHERE cal_login = $1',
 						     array ($project->getUnixName()));
 			$row_mail = db_fetch_array($res_mail);
 			$mail = $row_mail['cal_email'] ;
-				
+
 			//if group admin
 			if($project_id == 1){
 				$res_flags_admin = db_query_params ('SELECT admin_flags FROM user_group WHERE user_id = $1 AND group_id = $2',
@@ -378,26 +378,26 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 			}
 
 			if(($row_num[0] != 1 ) && ($user_perm == 1)){
-					
+
 				$res_insert = db_query_params ('INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ($1,$2)',
 							       array ($project->getUnixName(),
 								      $user->getUnixName()));
-				
+
 				//we add email of the new admin
 				$mail = str_replace($user->getEmail(),"",$mail);
 				$mail = str_replace(",".$user->getEmail(),"",$mail);
-								
+
 				if($mail == ""){
-					$virgule = "";	
+					$virgule = "";
 				}
 				else {
-					$virgule = ",";	
+					$virgule = ",";
 				}
-									
+
 				$mail = $mail.$virgule.$user->getEmail() ;
-				
-				
-				
+
+
+
 				//$mail = $row_mail['cal_email'].",".$row_nom_user['email'] ;
 				db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 						 array (trim($mail,','),
@@ -406,8 +406,8 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 			elseif($row_num[0] == 1 && ($user_perm != 1)){
 				$res_del = db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
 							    array ($project->getUnixName(),
-								   $user->getUnixName()));	
-				
+								   $user->getUnixName()));
+
 				//we del email of the old admin
 				$mail = str_replace(",".$row_nom_user['email'],"",$row_mail['cal_email']) ;
 				db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
@@ -421,50 +421,50 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 				$params));
 				if($res){
 						while( $row_flags = db_fetch_array($res)){
-						
-						
-						
+
+
+
 								//get the group and user names
 							$res_nom_boss = db_query_params ('SELECT unix_group_name FROM groups WHERE group_id = $1 ',
 			array ($params));
 							$row_nom_boss = db_fetch_array($res_nom_boss);
-							
-							
+
+
 							$res_nom_user = db_query_params ('SELECT user_name,email FROM users WHERE user_id = $1 ',
 			array ($row_flags['user_id']));
 								$row_nom_user = db_fetch_array($res_nom_user);
-								
+
 								//verif if the user is admin
 								$res_count = db_query_params ('SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
 			array ($row_nom_boss['unix_group_name'],
 				$row_nom_user['user_name']));
 								$row_num = db_fetch_array($res_count);
-								 								
+
 								//select email
 								$res_mail = db_query_params ('SELECT cal_email FROM webcal_user WHERE  cal_login = $1',
 			array ($row_nom_boss['unix_group_name']));
 								$row_mail = db_fetch_array($res_mail);
 								$mail = $row_mail['cal_email'];
-								
+
 								if(($row_num[0] != 1 ) && ($row_flags['value'] == 1)){
 								//recuperer le nom du user et du group
 									$res_insert = db_query_params ('INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ($1,$2)',
 			array ($row_nom_boss['unix_group_name'],
 				$row_nom_user['user_name']));
-								
+
 								//we add email of the new admin
 								$mail = str_replace($row_nom_user['email'],"",$mail);
 								$mail = str_replace(",".$row_nom_user['email'],"",$mail);
-								
+
 								if($mail == ""){
-									$virgule = "";	
+									$virgule = "";
 									}
 									else {
-									$virgule = ",";	
+									$virgule = ",";
 									}
-									
+
 								$mail = $mail.$virgule.$row_nom_user['email'] ;
-								
+
 								//$mail = $row_mail['cal_email'].",".$row_nom_user['email'] ;
 								db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 										 array (trim($mail,','),
@@ -473,8 +473,8 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 								elseif($row_num[0] == 1 && ($row_flags['value'] != 1)){
 									$res_del = db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
 			array ($row_nom_boss['unix_group_name'],
-				$row_nom_user['user_name']));	
-								
+				$row_nom_user['user_name']));
+
 								//we del email of the old admin
 								$mail = str_replace(",".$row_nom_user['email'],"",$row_mail['cal_email']) ;
 db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
@@ -483,7 +483,7 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 								}
 						}
 				}
-				
+
 		}
 		elseif ($hookname == "add_cal_link_father") {
 				//argument id du fils --> $params[0], id du pere--> $params[1]
@@ -506,8 +506,8 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 				'A'));
 								}
 							}
-						}	
-						
+						}
+
 					}
 		}
 		elseif ($hookname == "add_cal_link_father_event") {
@@ -527,7 +527,7 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 				$row_pere['unix_group_name'],
 				'A'));
 				}
-				
+
 		}
 		elseif ($hookname == "del_cal_link_father") {
 				//argument id son --> $params[0], id father--> $params[1]
@@ -548,13 +548,13 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 				$row_hierarchy['father_unix_name']));
 								}
 							}
-						}	
-						
+						}
+
 					}
 		}
 		elseif ($hookname == "del_cal_link_father_event") {
 				//argument id son --> $params[0], id_cal--> $params[1]
-				
+
 		}
 		elseif ($hookname == "change_cal_password") {
 				//argument user_id
@@ -562,25 +562,25 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 			$res_name = db_query_params ('SELECT user_name,user_pw,email  FROM users WHERE user_id = $1',
 			array ($params));
 				$row_name = db_fetch_array($res_name);
-				
+
 				$res_update = db_query_params ('UPDATE webcal_user SET cal_passwd = $1, cal_email = $2 WHERE cal_login = $3',
 			array ($row_name['user_pw'],
 				$row_name['email'],
-				$row_name['user_name'])); 
-						
+				$row_name['user_name']));
+
 		}
 		elseif ($hookname == "change_cal_mail") {
 				//argument user_id
 				//account/change_email-complete.php line 63
-				 
+
 			$res_name = db_query_params ('SELECT user_name,user_pw,email  FROM users WHERE user_id = $1',
 			array ($params));
 				$row_name = db_fetch_array($res_name);
-				
+
 				$res_old = db_query_params ('SELECT cal_email FROM webcal_user WHERE cal_login = $1',
 			array ($row_name['user_name']));
 				$row_old = db_fetch_array($res_old);
-				
+
 				//get all the cal_login where you need to change mail
 				$res_all_mail = db_query_params ('SELECT cal_login, cal_email FROM webcal_user WHERE lower(cal_email) LIKE $1',
 								 array ("%".$row_old['cal_email']."%"));
@@ -590,11 +590,11 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 										$res_update = db_query_params ('UPDATE webcal_user SET cal_passwd = $1, cal_email = $2 WHERE cal_login = $3',
 			array ($row_name['user_pw'],
 				$mail,
-				$row_all_mail['cal_login'])); 
-					
+				$row_all_mail['cal_login']));
+
 				}
-								
-						
+
+
 		}
 		elseif ($hookname == "cal_link_group" ){
 		// www/include/project_home.php line 418
@@ -602,7 +602,7 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 		print '<hr size="1" />';
 		print util_make_link('/plugins/webcalendar/index2.php?type=group&group_id='.$params,_('Webcalendar'));
 		}
-		 
+
 	}
 }
 

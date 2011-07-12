@@ -37,7 +37,7 @@ if (!session_loggedin()) {
     exit_not_logged_in();
 }
 
-// 
+//
 // The data for the graphs
 //
 $data = array();
@@ -84,12 +84,12 @@ if (count($userTasks) > 0) {
 			$task->getPercentComplete()."%");
 		$progress[$pos] = array($pos,$task->getPercentComplete()/100);
 
-		if($group_begin > $task->getStartDate()) 
+		if($group_begin > $task->getStartDate())
 			$group_begin = $task->getStartDate();
-		if($group_end < $task->getEndDate()) 
+		if($group_end < $task->getEndDate())
 			$group_end = $task->getEndDate();
 
-		$pos = $pos + 1;	
+		$pos = $pos + 1;
 	}
 	if ($g_index > 0) {
 		$data[$g_index][3]=date("Y-m-d",$group_begin);

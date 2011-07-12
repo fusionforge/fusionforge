@@ -25,9 +25,9 @@
 
 /*
  * ForumML New Thread submission form
- * 
- */ 
-require_once('env.inc.php'); 
+ *
+ */
+require_once('env.inc.php');
 require_once('pre.php');
 require_once('preplugins.php');
 require_once('forumml_utils.php');
@@ -42,13 +42,13 @@ $p =& $plugin_manager->getPluginByName('forumml');
 if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 
 	$request =& HTTPRequest::instance();
-	
+
 	if ($request->valid(new Valid_UInt('group_id'))) {
 		$group_id = $request->get('group_id');
 	} else {
 		$group_id = "";
 	}
-	
+
 	// Checks 'list' parameter
 	if (! $request->valid(new Valid_UInt('list'))) {
 		exit_error(_('Error'),_('No list specified'));
@@ -57,7 +57,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 $list = new MailmanList($group_id,$list_id);
 		if (!isLogged() || ($list->isPublic()!=1 && !$current_user->isMember($group_id))) {
 			exit_error(_('error'),_('You are not allowed to access this page'));
-		}		
+		}
 		if ($list->getStatus() !=3) {
 			exit_error(_('Error'),_('The mailing  list does not exist or is inactive'));
 		}
@@ -68,7 +68,7 @@ $list = new MailmanList($group_id,$list_id);
 		// Checks if mail subject is empty
 		$vSub = new Valid_String('subject');
 		$vSub->required();
-		if (! $request->valid($vSub)) {		
+		if (! $request->valid($vSub)) {
 			$feedback .=_('Submit failed you must specify the mail subject.');
 		} else {
 			// process the mail
@@ -89,7 +89,7 @@ $list = new MailmanList($group_id,$list_id);
 	$params['toptab'] = 'mail';
 	$params['help'] = "CommunicationServices.html#MailingLists";
 	mailman_header($params);
-		
+
 	if ($request->isPost() && $request->get('post') && $request->valid($vSub)) {
 		if (isset($return) && $return) {
 			// wait few seconds before redirecting to archives page

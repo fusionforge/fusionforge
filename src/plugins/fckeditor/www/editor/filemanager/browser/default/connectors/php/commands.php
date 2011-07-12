@@ -1,19 +1,19 @@
-<?php 
+<?php
 /*
  * FCKeditor - The text editor for internet
  * Copyright (C) 2003-2006 Frederico Caldeira Knabben
- * 
+ *
  * Licensed under the terms of the GNU Lesser General Public License:
  * 		http://www.opensource.org/licenses/lgpl-license.php
- * 
+ *
  * For further information visit:
  * 		http://www.fckeditor.net/
- * 
+ *
  * "Support Open Source software. What about a donation today?"
- * 
+ *
  * File Name: commands.php
  * 	This is the File Manager Connector for PHP.
- * 
+ *
  * File Authors:
  * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
@@ -38,7 +38,7 @@ function GetFolders( $resourceType, $currentFolder )
 
 	// Open the "Folders" node.
 	echo "<Folders>" ;
-	
+
 	natcasesort( $aFolders ) ;
 	foreach ( $aFolders as $sFolder )
 		echo $sFolder ;
@@ -160,7 +160,7 @@ function FileUpload( $resourceType, $currentFolder )
 
 		// Get the uploaded file name.
 		$sFileName = $oFile['name'] ;
-		
+
 		// Replace dots in the name with underscores (only one dot can be there... security issue).
 		if ( $Config['ForceSingleExtension'] )
 			$sFileName = preg_replace( '/\\.(?![^.]*$)/', '_', $sFileName ) ;

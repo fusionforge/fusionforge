@@ -10,7 +10,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -46,34 +46,34 @@
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Site_AllTests::main');
 }
- 
+
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
- 
+
 require_once 'func/config.php';
 require_once 'func/Soap/checks.php';
 require_once 'func/Soap/login.php';
 require_once 'func/Soap/usergroup.php';
- 
+
 class Soap_AllTests
 {
     public static function main()
     {
         PHPUnit_TextUI_TestRunner::run(self::suite());
     }
- 
+
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
- 
+
         $suite->addTestSuite('SoapChecksProcess');
 	$suite->addTestSuite('SoapLoginProcess');
 	$suite->addTestSuite('SoapUserGroupProcess');
-        
+
         return $suite;
     }
 }
- 
+
 if (PHPUnit_MAIN_METHOD == 'Soap_AllTests::main') {
     Soap_AllTests::main();
 }

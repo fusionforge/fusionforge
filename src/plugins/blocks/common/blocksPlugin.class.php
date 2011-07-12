@@ -66,7 +66,7 @@ class blocksPlugin extends Plugin {
 			}
 		} elseif ($hookname == "blocks") {
 			return $this->blocks($params);
-		} 
+		}
 	}
 	function blocks($params) {
 		// Check if block is active and if yes, display the block.
@@ -103,7 +103,7 @@ class blocksPlugin extends Plugin {
 			}
 		}
 	}
-	
+
 	function parseContent($t) {
 		global $HTML;
 
@@ -118,7 +118,7 @@ class blocksPlugin extends Plugin {
 		$t = preg_replace('/{boxHeader}/i', '<hr />', $t);
 		$t = preg_replace('/{boxFooter}<\/p>/i', '<hr />', $t);
 		$t = preg_replace('/{boxFooter}/i', '<hr />', $t);
-		
+
 		return $t;
 	}
 }

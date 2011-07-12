@@ -1,6 +1,6 @@
 #! /usr/bin/php
 <?php
-/* 
+/*
  * Copyright (C) 2010  Olaf Lenz
  *
  * This file is part of FusionForge.

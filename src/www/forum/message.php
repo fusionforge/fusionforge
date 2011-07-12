@@ -106,7 +106,7 @@ if ($msg_id) {
 	if ($reply) {
 		session_require_perm ('forum', $f->getID(), 'post') ;
 	}
-	
+
 	forum_header(array('title'=>$fm->getSubject(),'forum_id'=>$forum_id));
 
 //	$title_arr=array();
@@ -115,7 +115,7 @@ if ($msg_id) {
 //	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$url = util_make_url('/forum/message.php?msg_id='. $msg_id .'&amp;group_id='.$group_id);
-	
+
 	echo '<br /><br /><table border="0" width="100%" cellspacing="0">';
 	echo '<tr class="tablecontent"><td valign="top">'."\n";
 	echo '<strong>'.$fm->getSubject() .'</strong>';
@@ -133,9 +133,9 @@ if ($msg_id) {
 	$am = new AttachManager();
 	echo $am->PrintHelperFunctions();
 	echo $am->PrintAttachLink($fm,$group_id,$forum_id) . '</td></tr><tr><td colspan="2"><br/><br />';
-	
-	
-	if (strpos($fm->getBody(), '>') === false) { 
+
+
+	if (strpos($fm->getBody(), '>') === false) {
 		echo util_make_links(nl2br($fm->getBody())); //backwards compatibility for non html messages
 	} else {
 		echo util_make_links($fm->getBody());
@@ -168,7 +168,7 @@ if ($msg_id) {
 	if ($rows > $max_rows) {
 		$rows=$max_rows;
 	}
-	
+
 	$current_message=$msg_id;
 	$i=0;
 	while (($i < $rows) && ($total_rows < $max_rows)) {

@@ -33,7 +33,7 @@ require_once $gfcommon.'include/account.php';
  */
 function checkKeys($keys) {
 	$key = strtok($keys,"\n");
-	
+
 	while ($key !== false) {
 		$key = trim($key);
 		if ((strlen($key) > 0) && ($key[0] != '#')) {

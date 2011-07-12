@@ -23,7 +23,7 @@
 
 
 //
-//  FORM TO BUILD SELECTION BOXES 
+//  FORM TO BUILD SELECTION BOXES
 //
 
 $title = sprintf(_('Manage Custom Fields for %s'), $ath->getName());
@@ -41,9 +41,9 @@ $ath->adminHeader(array ('title'=>$title));
 
 			$title_arr=array();
 			$title_arr[]=_('Custom Fields Defined');
-			$title_arr[]=_('Type');	
-			$title_arr[]=_('Elements Defined');	
-			$title_arr[]=_('Add Options');	
+			$title_arr[]=_('Type');
+			$title_arr[]=_('Elements Defined');
+			$title_arr[]=_('Add Options');
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($k=0; $k < $rows; $k++) {
@@ -63,15 +63,15 @@ $ath->adminHeader(array ('title'=>$title));
 				/*
 		  			List of possible options for a user built Selection Box
 		  		*/
-				$elearray = $ath->getExtraFieldElements($efarr[$i]['extra_field_id']);	
-			
+				$elearray = $ath->getExtraFieldElements($efarr[$i]['extra_field_id']);
+
 				if (!empty($elearray)) {
 					$optrows=count($elearray);
 
 					echo '<td>';
 					for ($j=0; $j <$optrows; $j++)
 					{
-						echo $elearray[$j]['element_name'];				
+						echo $elearray[$j]['element_name'];
 						echo ' <a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
 						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'">'.
@@ -85,25 +85,25 @@ $ath->adminHeader(array ('title'=>$title));
 				} else {
 					echo '<td>';
 				}
-				
+
 				echo '</td>';
 				echo '<td>';
 				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT
-					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO 
+					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO
 					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX
-					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT 
+					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT
 					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 					echo '<a href="'.getStringFromServer('PHP_SELF').'?add_opt=1&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
 						_('add choices').']</a>';
 				}
-				echo '</td>'; 
+				echo '</td>';
 			        echo   '</tr>'."\n";
 			}
 			echo $GLOBALS['HTML']->listTableBottom();
-			
+
 			echo utils_requiredField().' '._('Indicates required fields.');
-		} else { 
+		} else {
 			echo "\n<strong>"._('You have not defined any custom fields')."</strong>";
 		}
 

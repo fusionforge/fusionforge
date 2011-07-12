@@ -30,7 +30,7 @@ require_once $gfcommon.'include/account.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 session_require_global_perm ('forge_admin');
- 
+
 $user_id = getIntFromRequest('user_id');
 $u =& user_get_object($user_id);
 if (!$u || !is_object($u)) {

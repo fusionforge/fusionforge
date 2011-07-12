@@ -46,7 +46,7 @@ $input_file = getUploadedFile('userfile');
 if (is_uploaded_file($input_file['tmp_name'])) {
 	$handle = fopen($input_file['tmp_name'], 'r');
 	$tasks = array();
-	
+
 	// Detect separator & if headers are present or not.
 	$sep = ',';
 	$values = fgetcsv($handle, 4096, $sep);
@@ -59,7 +59,7 @@ if (is_uploaded_file($input_file['tmp_name'])) {
 
 	// Rewind the file.
 	fseek($handle, 0);
-	
+
 	if ($headers) {
 		// Headers are given in the file (first line).
 		$headers = array_flip(fgetcsv($handle, 4096, $sep));
@@ -75,22 +75,22 @@ if (is_uploaded_file($input_file['tmp_name'])) {
 	} else {
 		// Original code (default format, no headers)
 		while (($cols = fgetcsv($handle, 4096, $sep)) !== false) {
-	
+
 			$resources = array();
 			for ($i=12;$i<17;$i++) {
 				if (trim($cols[$i]) != '') {
 					$resources[] = array('user_name'=>$cols[$i]);
 				}
 			}
-	
+
 			$dependentOn = array();
-	
+
 			for ($i=17;$i<30;$i=$i+3) {
 				if (trim($cols[$i]) != '') {
 					$dependentOn[] = array('task_id'=>$cols[$i], 'msproj_id'=>$cols[$i+1], 'task_name'=>'', 'link_type'=>$cols[$i+2]);
 				}
 			}
-	
+
 			$tasks[] = array('id'=>$cols[0],
 					'msproj_id'=>$cols[1],
 					'parent_id'=>$cols[2],
@@ -100,7 +100,7 @@ if (is_uploaded_file($input_file['tmp_name'])) {
 					'work'=>$cols[6],
 					'start_date'=>$cols[7],
 					'end_date'=>$cols[8],
-					'percent_complete'=>$cols[9],	
+					'percent_complete'=>$cols[9],
 					'priority'=>$cols[10],
 					'resources'=>$resources,
 					'dependenton'=>$dependentOn,
@@ -108,7 +108,7 @@ if (is_uploaded_file($input_file['tmp_name'])) {
 		}
 	}
 	$res=&pm_import_tasks($group_project_id, $tasks);
-	
+
 	if ($res['success']) {
 		$feedback .= 'Import Was Successful';
 	} else {

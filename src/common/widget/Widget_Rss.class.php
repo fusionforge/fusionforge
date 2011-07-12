@@ -22,7 +22,7 @@ require_once('Widget.class.php');
 
 /**
  * Widget_Rss
- * 
+ *
  * Rss reader
  */
 /* abstract */ class Widget_Rss extends Widget {
@@ -101,7 +101,7 @@ require_once('Widget.class.php');
 		return $prefs;
 	}
 	function cloneContent($id, $owner_id, $owner_type) {
-		$sql = "INSERT INTO widget_rss (owner_id, owner_type, title, url) 
+		$sql = "INSERT INTO widget_rss (owner_id, owner_type, title, url)
 			SELECT $1, $2, title, url
 			FROM widget_rss
 			WHERE owner_id = $3 AND owner_type = $4";

@@ -76,14 +76,14 @@ class MockConfig extends FusionForgeConfig {
 	public function cleanup () {
 		parent::$instance = NULL ;
 	}
-		
+
 	static public function get_instance () {
 		if (parent::$instance == NULL) {
 			parent::$instance = new MockConfig () ;
 		}
 		return parent::$instance ;
 	}
-	
+
 	public function get_value ($section, $var) {
 		return "$section/$var" ;
 	}

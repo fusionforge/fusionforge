@@ -19,7 +19,7 @@ class WysiwygEdit_htmlarea3 extends WysiwygEdit {
         return new RawXml('
 <script type="text/javascript" src="'.DATA_PATH.'/themes/default/htmlarea3/htmlarea.js"></script>
 <script type="text/javascript" src="'.DATA_PATH.'/themes/default/htmlarea3/lang/en.js"></script>
-<script type="text/javascript" src="'.DATA_PATH.'/themes/default/htmlarea3/dialog.js"></script> 
+<script type="text/javascript" src="'.DATA_PATH.'/themes/default/htmlarea3/dialog.js"></script>
 <style type="text/css">
 @import url('.DATA_PATH.'/themes/default/htmlarea3/htmlarea.css);
 </style>
@@ -32,7 +32,7 @@ function initEditor() {
   // comment the following two lines to see how customization works
   editor.generate();
   return false;
-  
+
   // BEGIN: code that adds custom buttons
   var cfg = editor.config; // this is the default configuration
   function clickHandler(editor, buttonId) {
@@ -56,7 +56,7 @@ function initEditor() {
   cfg.registerButton("my-date", "Insert date/time", _editor_url+"ed_custom.gif", false, clickHandler);
   cfg.registerButton("my-bold-em", "Toggle bold/italic", _editor_url+"ed_custom.gif", false, clickHandler);
   cfg.registerButton("my-hilite", "Hilite selection", _editor_url+"ed_custom.gif", false, clickHandler);
-  
+
   cfg.registerButton("my-sample", "Class: sample", _editor_url+"ed_custom.gif", false,
     function(editor) {
       if (HTMLArea.is_ie) {
@@ -78,11 +78,11 @@ function initEditor() {
       }
     }
   );
-  
+
   //cfg.pageStyle = "body { background-color: #efd; } .hilite { background-color: yellow; } "+
   //                ".sample { color: green; font-family: monospace; }";
   // add the new button to the toolbar
-  //cfg.toolbar.push(["linebreak", "my-toc", "my-date", "my-bold-em", "my-hilite", "my-sample"]); 
+  //cfg.toolbar.push(["linebreak", "my-toc", "my-date", "my-bold-em", "my-hilite", "my-sample"]);
   // END: code that adds custom buttons
 
   editor.generate();

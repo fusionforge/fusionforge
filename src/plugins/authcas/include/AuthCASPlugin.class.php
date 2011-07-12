@@ -118,13 +118,13 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 			// otherwise, use the CAS user
 			$user = $this->startSession(phpCAS::getUser());
 		}
-		
+
 		// TODO : document this
 		if ($user) {
 			if ($this->isSufficient()) {
 				$this->saved_user = $user;
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-				
+
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}

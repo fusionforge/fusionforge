@@ -33,7 +33,7 @@ $HeadX = '';
 if ( $auto_refresh == "Y" && ! empty ( $auto_refresh_time ) ) {
   $refresh = $auto_refresh_time * 60; // convert to seconds
   $HeadX = "<meta http-equiv=\"refresh\" content=\"$refresh; url=month.php?$u_url" .
-    "year=$thisyear&amp;month=$thismonth$caturl" . 
+    "year=$thisyear&amp;month=$thismonth$caturl" .
     ( ! empty ( $friendly ) ? "&amp;friendly=1" : "") . "\" />\n";
 }
 $INC = array('js/popups.php');
@@ -163,7 +163,7 @@ for ( $i = $wkstart; date ( "Ymd", $i ) <= date ( "Ymd", $monthend );
 ?>
 
 <br />
-<a title="<?php etranslate("Generate printer-friendly version")?>" 
+<a title="<?php etranslate("Generate printer-friendly version")?>"
 class="printer" href="month.php?<?php
    if ( $thisyear ) {
     echo "year=$thisyear&amp;month=$thismonth&amp;";
@@ -174,7 +174,7 @@ class="printer" href="month.php?<?php
    if ( ! empty ( $cat_id ) ) {
      echo "cat_id=$cat_id&amp;";
    }
-  ?>friendly=1" target="cal_printer_friendly" 
+  ?>friendly=1" target="cal_printer_friendly"
 onmouseover="window.status = '<?php etranslate("Generate printer-friendly version")
   ?>'">[<?php etranslate("Printer Friendly")?>]</a>
 <?php

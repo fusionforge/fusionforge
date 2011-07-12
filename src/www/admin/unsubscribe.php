@@ -117,7 +117,7 @@ if ($pattern) {
 	$title[]=_('Comm. Mail.');
 
 	echo $GLOBALS['HTML']->listTableTop($title);
-	
+
 	$i = 0 ;
 	while ($row = db_fetch_array($res)) {
 		echo '

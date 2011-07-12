@@ -92,7 +92,7 @@ if ( $single_user == "Y" ) {
   } elseif ( substr($user_inc,0,9) == 'user-app-' ) {
     // Use another application's authentication
     if (! $login = user_logged_in()) app_login_screen(clean_whitespace($login_return_path));
-  
+
   } else {
     if ( ! empty ( $settings['session'] ) && $settings['session'] == 'php' ) {
       session_start ();

@@ -3,13 +3,13 @@ include_once $gfplugins.'webcalendar/www/includes/init.php';
 print_header( '', '', '', true );
 
 if ( ! $is_admin ) {
-  echo "<h2>" . translate("Error") . "</h2>\n" . 
+  echo "<h2>" . translate("Error") . "</h2>\n" .
   		translate("You are not authorized") . ".\n";
   echo "</body>\n</html>";
   exit;
 }
 if ( ! $NONUSER_PREFIX ) {
-  echo "<h2>" . translate("Error") . "</h2>\n" . 
+  echo "<h2>" . translate("Error") . "</h2>\n" .
   		translate("NONUSER_PREFIX not set") . ".\n";
   echo "</body>\n</html>";
   exit;
@@ -63,7 +63,7 @@ if (( ($add == '1') || (! empty ($nid)) ) && empty ($error)) {
   for ( $i = 0; $i < count ( $userlist ); $i++ ) {
 	echo "<option value=\"".$userlist[$i]['cal_login']."\"";
 	if (! empty ( $nonusertemp_admin ) &&
-            $nonusertemp_admin == $userlist[$i]['cal_login'] ) 
+            $nonusertemp_admin == $userlist[$i]['cal_login'] )
 		echo " selected=\"selected\"";
 	echo ">".$userlist[$i]['cal_fullname']."</option>\n";
   }

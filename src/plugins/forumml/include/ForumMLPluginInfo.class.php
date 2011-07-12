@@ -23,36 +23,36 @@ require_once('ForumMLPluginDescriptor.class.php');
 require_once('common/include/PropertyDescriptor.class.php');
 
 class ForumMLPluginInfo extends PluginInfo {
-    
+
     function __construct($plugin) {
         parent::__construct($plugin);
         $this->setPluginDescriptor(new ForumMLPluginDescriptor());
         $this->_conf_path = $plugin->getPluginEtcRoot() .'/forumml.inc';
         $this->loadProperties();
-        
+
     }
-    
+
 	function loadProperties() {
         if (is_file($this->_conf_path)) {
             $this->checkConfigurationFiles($this->_conf_path);
             $variables = $this->_getVariablesFromConfigurationFile($this->_conf_path);
             foreach($variables as $variable) {
                 $key =& $variable['name'];
-                if (preg_match('`^"(.*)"$`', $variable['value'], $match) || 
-                    preg_match('`^\'(.*)\'$`', $variable['value'], $match)) 
+                if (preg_match('`^"(.*)"$`', $variable['value'], $match) ||
+                    preg_match('`^\'(.*)\'$`', $variable['value'], $match))
                 {
                     $value = $match[1];
-                } 
-                else 
+                }
+                else
                 {
                     $value = $variable['value'];
                 }
                 $descriptor =& new PropertyDescriptor($key, $value);
                 $this->_addPropertyDescriptor($descriptor);
             }
-        }	
+        }
 	}
-	
+
 	function saveProperties() {
         copy($this->_conf_path, $this->_conf_path .'.'. date('YmdHis'));
         $content = file_get_contents($this->_conf_path);
@@ -69,8 +69,8 @@ class ForumMLPluginInfo extends PluginInfo {
                 $replace = '$1"'.addslashes($desc->getValue()).'";';
             }
             $content = preg_replace(
-                '`((?:^|\n)\$'. preg_quote($desc_name) .'\s*=\s*)(.*)\s*;`', 
-                $replace, 
+                '`((?:^|\n)\$'. preg_quote($desc_name) .'\s*=\s*)(.*)\s*;`',
+                $replace,
                 $content
             );
             $iter->next();
@@ -79,14 +79,14 @@ class ForumMLPluginInfo extends PluginInfo {
         if ($f) {
             fwrite($f, $content);
             fclose($f);
-        }	
+        }
 	}
-    
+
 	function getPropertyValueForName($name) {
         $desc = $this->getPropertyDescriptorForName($name);
         return $desc ? $desc->getValue() : $desc;
     }
-    
+
     function _getVariablesFromConfigurationFile($file) {
         $tokens = token_get_all(file_get_contents($file));
 
@@ -127,9 +127,9 @@ class ForumMLPluginInfo extends PluginInfo {
         }
         return $variables;
     }
-	
+
 	function checkConfigurationFiles() {
         require($this->_conf_path);
-    }        
+    }
 }
 ?>

@@ -68,8 +68,8 @@ if (getStringFromRequest('send_mail')) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_missing_param('',array(_('Subject'),_('Body'),_('Name'),_('Email')),'home');
 	}
-	
-	// we remove the CRLF in all thoses vars. This is to make sure that there will be no CRLF Injection	
+
+	// we remove the CRLF in all thoses vars. This is to make sure that there will be no CRLF Injection
 	$name = util_remove_CRLF($name);
 	// Really don't see what wrong could happen with CRLF in message body
 	//$email = util_remove_CRLF($email);

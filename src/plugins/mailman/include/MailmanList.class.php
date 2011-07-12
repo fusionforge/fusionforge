@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- * 
+ *
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
@@ -42,7 +42,7 @@ require_once 'common/system_event/SystemEvent.class.php';
 
 class MailmanList extends Error {
 	/**
-	 * DAO 
+	 * DAO
 	 *
 	 * @var	 MailingListDao   $mailingDAO.
 	 */
@@ -80,7 +80,7 @@ class MailmanList extends Error {
 	function MailmanList($group_id, $groupListId = false, $dataArray = false) {
 		$pm = ProjectManager::instance();
 		$Group = $pm->getProject($group_id);
-		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());	
+		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'MailmanList'));
@@ -174,7 +174,7 @@ class MailmanList extends Error {
 		$systemevent->createEvent('MAILMAN_LIST_CREATE', $this->groupMailmanListId,SystemEvent::PRIORITY_MEDIUM);
 		$this->fetchData($this->groupMailmanListId);
 		$user=UserManager::instance()->getUserByID($creator_id);
-	
+
 		$userEmail = $user->getEmail();
 		if(empty($userEmail) || !validate_email($userEmail)) {
 			$this->setInvalidEmailError();
@@ -185,7 +185,7 @@ class MailmanList extends Error {
 
 		return true;
 	}
-	
+
 	/**
 	* activationRequested - LEt us know if an event is present to create this list
 	*
@@ -383,7 +383,7 @@ class MailmanList extends Error {
 	}
 	/**
 	 * unsubscribeUrl - delete the user from the mailing list
-	 * 
+	 *
 	 * @return string url of the info page
 	 */
 	function unsubscribe() {

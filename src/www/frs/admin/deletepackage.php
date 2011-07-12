@@ -62,16 +62,16 @@ frs_admin_header(array('title'=>sprintf(_('Delete Package: %1$s'), $frsp->getNam
 	<input type="hidden" name="func" value="delete_package" />
 	<input type="hidden" name="package_id" value="'. $package_id .'" />
 	'._('You are about to permanently and irretrievably delete this package and all its releases and files!').'
-        </p> 
-        <p> 
+        </p>
+        <p>
 	<input type="checkbox" name="sure" value="1" />'._('I\'m Sure').'
-        </p> 
-        <p> 
+        </p>
+        <p>
 	<input type="checkbox" name="really_sure" value="1" />'._('I\'m Really Sure').'
         </p>
         <p>
 	<input type="submit" name="submit" value="'._('Delete').'" />
-        </p> 
+        </p>
 	</form>';
 
 frs_admin_footer();

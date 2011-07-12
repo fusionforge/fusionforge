@@ -23,18 +23,18 @@
  *-
  * FusionForge Core Api (full description in FusionforgeCoreApi.wsdl)
  * Rewrite of the older Api based on NuSOAP
- * 
+ *
  * Main technical features :
  * - Based on the PHP SOAP extension (PHP > 5.x)
  * - SOAP Document/Litteral wrapped mode
  * - WS-I Basic Profile Compliant
- * 
+ *
  */
 
 require_once './coreapiservice.php';
 
 # uncomment this for development purpose only
-# ini_set('soap.wsdl_cache_enabled', '0'); 
+# ini_set('soap.wsdl_cache_enabled', '0');
 
 use_soap_error_handler(false);
 

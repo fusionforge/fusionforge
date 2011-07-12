@@ -151,7 +151,7 @@ if (file_exists($gfcgfile)) {
 // Arch plugin
 if (file_exists ($gfconfig.'plugins/scmarch/config.php')) {
 	require_once $gfconfig.'plugins/scmarch/config.php' ;
-	
+
 	forge_define_config_item ('default_server', 'scmarch', $default_arch_server) ;
 	if (isset ($arch_root)) {
 		forge_define_config_item ('repos_path', 'scmarch', $arch_root) ;
@@ -164,7 +164,7 @@ if (file_exists ($gfconfig.'plugins/scmarch/config.php')) {
 // Bazaar plugin
 if (file_exists ($gfconfig.'plugins/scmbzr/config.php')) {
 	require_once $gfconfig.'plugins/scmbzr/config.php' ;
-	
+
 	forge_define_config_item ('default_server', 'scmbzr', $default_bzr_server) ;
 	if (isset ($bzr_root)) {
 		forge_define_config_item ('repos_path', 'scmbzr', $bzr_root) ;
@@ -185,7 +185,7 @@ if (file_exists ($gfconfig.'plugins/scmccase/config.php')) {
 // CVS plugin
 if (file_exists ($gfconfig.'plugins/scmcvs/config.php')) {
 	require_once $gfconfig.'plugins/scmcvs/config.php' ;
-	
+
 	forge_define_config_item ('default_server', 'scmcvs', $default_cvs_server) ;
 	if (isset ($cvs_root)) {
 		forge_define_config_item ('repos_path', 'scmcvs', $cvs_root) ;
@@ -200,7 +200,7 @@ if (file_exists ($gfconfig.'plugins/scmcvs/config.php')) {
 // Darcs plugin
 if (file_exists ($gfconfig.'plugins/scmdarcs/config.php')) {
 	require_once $gfconfig.'plugins/scmdarcs/config.php' ;
-	
+
 	forge_define_config_item ('default_server', 'scmdarcs', $default_darcs_server) ;
 	if (isset ($darcs_root)) {
 		forge_define_config_item ('repos_path', 'scmdarcs', $darcs_root) ;
@@ -213,7 +213,7 @@ if (file_exists ($gfconfig.'plugins/scmdarcs/config.php')) {
 // Git plugin
 if (file_exists ($gfconfig.'plugins/scmgit/config.php')) {
 	require_once $gfconfig.'plugins/scmgit/config.php' ;
-	
+
 	forge_define_config_item ('default_server', 'scmgit', $default_git_server) ;
 	if (isset ($git_root)) {
 		forge_define_config_item ('repos_path', 'scmgit', $git_root) ;
@@ -226,7 +226,7 @@ if (file_exists ($gfconfig.'plugins/scmgit/config.php')) {
 // Mercurial plugin
 if (file_exists ($gfconfig.'plugins/scmhg/config.php')) {
 	require_once $gfconfig.'plugins/scmhg/config.php' ;
-	
+
 	forge_define_config_item ('default_server', 'scmhg', $default_hg_server) ;
 	if (isset ($hg_root)) {
 		forge_define_config_item ('repos_path', 'scmhg', $hg_root) ;
@@ -239,7 +239,7 @@ if (file_exists ($gfconfig.'plugins/scmhg/config.php')) {
 // Subversion plugin
 if (file_exists ($gfconfig.'plugins/scmsvn/config.php')) {
 	require_once $gfconfig.'plugins/scmsvn/config.php' ;
-	
+
 	forge_define_config_item ('default_server', 'scmsvn', $default_svn_server) ;
 	if (isset ($svn_root)) {
 		forge_define_config_item ('repos_path', 'scmsvn', $svn_root) ;
@@ -265,7 +265,7 @@ if (isset ($sys_use_mwframe)) {
 // Mantis plugin
 if (file_exists ($gfconfig.'plugins/mantis/config.php')) {
 	require_once $gfconfig.'plugins/mantis/config.php' ;
-	
+
 	forge_define_config_item ('server', 'mantis', $serveur_mantis) ;
 	forge_define_config_item ('db_host', 'mantis', $mantis_db_host) ;
 	forge_define_config_item ('db_user', 'mantis', $mantis_db_user) ;

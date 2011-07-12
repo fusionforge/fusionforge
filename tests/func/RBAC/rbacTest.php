@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -77,7 +77,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertSelected("//select[@name='data[approve_projects][-1]']", "Approve projects");
 		$this->assertNotSelected("//select[@name='data[approve_projects][-1]']", "No access");
 		$this->assertSelected("//select[@name='data[approve_news][-1]']", "Approve news");
-		
+
 		// Whoops, we don't actually want the news moderation bit, unset it
 		$this->select("//select[@name='data[approve_news][-1]']", "label=No access");
 		$this->click ("//input[@value='Submit']") ;
@@ -99,7 +99,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//input[@value='Add User']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("projapp Lastname"));
-		
+
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=News moderators") ;
@@ -137,7 +137,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//input[@value='Add User']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("toto Lastname"));
-		
+
 		// Register project
 		$this->registerProject ("TotoProject", "toto") ;
 

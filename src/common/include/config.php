@@ -23,7 +23,7 @@
 // See docs in http://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Configuration
 
 /**
- * 
+ *
  * Singleton FusionForge configuration database manager TODO : Enter better description here ...
  *
  */
@@ -31,7 +31,7 @@ class FusionForgeConfig {
 	static protected $instance = NULL ;
 	private $settings ;
 	private $bools = array () ;
-    
+
 	/**
 	 * Singleton accessor to the configuration database
 	 * @return FusionForgeConfig instance
@@ -42,9 +42,9 @@ class FusionForgeConfig {
 		}
 		return self::$instance ;
 	}
-  
+
 	// TODO: add a constructor that initializes self::$instance to self ?
-	
+
 	public function get_sections () {
 		return array_keys ($this->settings) ;
 	}
@@ -67,7 +67,7 @@ class FusionForgeConfig {
 
 		foreach ($matches[0] as $m) {
 			$c = explode ('/', substr($m,1)) ;
-			
+
 			if (isset ($this->settings[$c[0]][$c[1]])) {
 				$tmp = str_replace ($m, $this->get_value($c[0],$c[1]), $tmp) ;
 			}
@@ -142,7 +142,7 @@ class FusionForgeConfig {
 		case '1':
 			return true ;
 		}
-		
+
 		return false ;
 	}
 
@@ -247,13 +247,13 @@ function forge_read_config_file ($filename) {
  */
 function forge_read_config_dir ($path) {
 	$c = FusionForgeConfig::get_instance () ;
-	
+
 	$files = array () ;
-	
+
 	if (is_dir($path)){
 		if ($handle = opendir($path)) {
 			while (false !== ($file = readdir($handle))) {
-				if ($file != "." 
+				if ($file != "."
 			    	&& $file != ".."
 			    	// Avoid .bak, .old, .dpkg-old and so on, but keep .ini
 			    	&& preg_match ('/^[0-9a-zA-Z_-]+(.ini)?$/', $file)) {

@@ -45,7 +45,7 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
 }
 
 // If view_name not found, then the specified view id does not
-// belong to current user. 
+// belong to current user.
 if ( empty( $view_name ) ) {
   $error = translate ( "You are not authorized" );
 }
@@ -90,11 +90,11 @@ for ( $i = 0; $i < 7; $i++ ) {
 ?>
 
 <div style="border-width:0px; width:99%;">
-<a title="<?php etranslate("Previous")?>" class="prev" 
+<a title="<?php etranslate("Previous")?>" class="prev"
   href="view_v.php?id=<?php echo $id?>&amp;date=<?php echo $prevdate?>">
   <img src="leftarrow.gif" alt="<?php etranslate("Previous")?>" /></a>
 
-<a title="<?php etranslate("Next")?>" class="next" 
+<a title="<?php etranslate("Next")?>" class="next"
   href="view_v.php?id=<?php echo $id?>&amp;date=<?php echo $nextdate?>">
   <img src="rightarrow.gif" class="prevnext" alt="<?php etranslate("Next")?>" /></a>
 <div class="title">
@@ -241,7 +241,7 @@ if ( ! empty ( $eventinfo ) ) {
   echo $eventinfo;
 }
 
-echo "<a title=\"" . translate("Generate printer-friendly version") . 
+echo "<a title=\"" . translate("Generate printer-friendly version") .
   "\" class=\"printer\" href=\"view_v.php?id=$id&amp;date=" .
   "$thisdate&amp;friendly=1\" " .
   "target=\"cal_printer_friendly\" onmouseover=\"window.status='" .

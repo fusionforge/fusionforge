@@ -32,7 +32,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
-	function ExportProjectSearchQuery($words, $offset, $isExact) {	
+	function ExportProjectSearchQuery($words, $offset, $isExact) {
 		$this->SearchQuery($words, $offset, $isExact, 200);
 	}
 

@@ -36,7 +36,7 @@ class SVNCommitEmailPlugin extends Plugin {
 		$group = group_get_object($params['group']);
 		if ($group->usesPlugin('scmsvn') || $group->usesPlugin('websvn')) {
 			parent::groupisactivecheckbox($params);
-		} 
+		}
 	}
 
 	function cmd_for_post_commit_hook (&$params) {

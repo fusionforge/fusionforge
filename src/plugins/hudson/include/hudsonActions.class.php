@@ -32,7 +32,7 @@ class hudsonActions extends Actions {
     function hudsonActions(&$controler, $view=null) {
         $this->Actions($controler);
 	}
-	
+
 	// {{{ Actions
     function addJob() {
         global $feedback, $error_msg;
@@ -98,7 +98,7 @@ class hudsonActions extends Actions {
         }
     }
     // }}}
-   
+
 }
 
 ?>

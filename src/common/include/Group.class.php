@@ -63,9 +63,9 @@ function &group_get_object($group_id, $res = false) {
 	//create a common set of group objects
 	//saves a little wear on the database
 
-	//automatically checks group_type and 
+	//automatically checks group_type and
 	//returns appropriate object
-	
+
 	global $GROUP_OBJ;
 	if (!isset($GROUP_OBJ["_".$group_id."_"])) {
 		if ($res) {
@@ -93,11 +93,11 @@ function &group_get_object($group_id, $res = false) {
 
 function &group_get_objects($id_arr) {
 	global $GROUP_OBJ;
-	
+
 	// Note: if we don't do this, the result may be corrupted
 	$fetch = array();
 	$return = array();
-	
+
 	foreach ($id_arr as $id) {
 		//
 		//	See if this ID already has been fetched in the cache
@@ -152,14 +152,14 @@ function &group_get_object_by_publicname($groupname) {
 class Group extends Error {
 	/**
 	 * Associative array of data from db.
-	 * 
+	 *
 	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * array of User objects.
-	 * 
+	 *
 	 * @var	array	$membersArr.
 	 */
 	var $membersArr;
@@ -173,14 +173,14 @@ class Group extends Error {
 
 	/**
 	 * Artifact types result handle.
-	 * 
+	 *
 	 * @var	int	$types_res.
 	 */
 	var $types_res;
 
 	/**
 	 * Associative array of data for plugins.
-	 * 
+	 *
 	 * @var	array	$plugins_data.
 	 */
 	var $plugins_data;
@@ -253,7 +253,7 @@ class Group extends Error {
 	 * create - Create new group.
 	 *
 	 * This method should be called on empty Group object.
-	 * It will add an entry for a pending group/project (status 'P') 
+	 * It will add an entry for a pending group/project (status 'P')
 	 *
 	 * @param	object	The User object.
 	 * @param	string	The full name of the user.
@@ -551,7 +551,7 @@ class Group extends Error {
 
 		db_begin();
 
-		//XXX not yet actived logo_image_id='$logo_image_id', 
+		//XXX not yet actived logo_image_id='$logo_image_id',
 		$res = db_query_params('UPDATE groups
 			SET group_name=$1,
 				homepage=$2,
@@ -587,7 +587,7 @@ class Group extends Error {
 					     $use_frs,
 					     $use_stats,
 					     $this->getID()));
-		
+
 		if (!$res) {
 			$this->setError(sprintf(_('Error updating project information: %s'), db_error()));
 			db_rollback();
@@ -959,7 +959,7 @@ class Group extends Error {
 	 */
 	function &getAdmins() {
 		$roles = RBACEngine::getInstance()->getRolesByAllowedAction ('project_admin', $this->getID());
-		
+
 		$user_ids = array();
 
 		foreach ($roles as $role) {
@@ -970,7 +970,7 @@ class Group extends Error {
 			    || $role->getHomeProject()->getID() != $this->getID()) {
 				continue;
 			}
-			
+
 			foreach ($role->getUsers() as $u) {
 				$user_ids[] = $u->getID();
 			}
@@ -1399,7 +1399,7 @@ class Group extends Error {
 	}
 
 	/**
-	 * usesPlugin - returns true if the group uses a particular plugin 
+	 * usesPlugin - returns true if the group uses a particular plugin
 	 *
 	 * @param	string	name of the plugin
 	 * @return	boolean	whether plugin is being used or not
@@ -1440,7 +1440,7 @@ class Group extends Error {
 	 *
 	 * @param	string	name of the plugin
 	 * @param	boolean	the new state
-	 * @return	string	database result 
+	 * @return	string	database result
 	 */
 	function setPluginUse($pluginname, $val=true) {
 		if ($val == $this->usesPlugin($pluginname)) {
@@ -1713,7 +1713,7 @@ class Group extends Error {
 			db_rollback();
 			return false;
 		}
-					
+
 		//
 		//	Delete group history
 		//
@@ -1846,7 +1846,7 @@ class Group extends Error {
 		$hook_params['group'] = $this;
 		$hook_params['group_id'] = $this->getID();
 		plugin_hook("group_delete", $hook_params);
-		
+
 		if (forge_get_config('upload_dir') != '' && $this->getUnixName()) {
 			exec('/bin/rm -rf '.forge_get_config('upload_dir').'/'.$this->getUnixName().'/');
 		}
@@ -1927,7 +1927,7 @@ class Group extends Error {
 				db_rollback();
 				return false;
 			}
-				
+
 			if (USE_PFO_RBAC) {
 				$role->addUser(user_get_object($user_id)) ;
 				if (!$SYS->sysCheckCreateGroup($this->getID())){
@@ -1951,7 +1951,7 @@ class Group extends Error {
 				//	if not already a member, add them
 				//
 				$res_member = db_query_params('SELECT user_id
-				FROM user_group 
+				FROM user_group
 				WHERE user_id=$1 AND group_id=$2',
 				array($user_id, $this->getID()));
 
@@ -2055,7 +2055,7 @@ class Group extends Error {
 		$hook_params['user'] = user_get_object($user_id);
 		$hook_params['user_id'] = $user_id;
 		plugin_hook ("group_adduser", $hook_params);
-		
+
 		//
 		//	audit trail
 		//
@@ -2066,7 +2066,7 @@ class Group extends Error {
 
 	/**
 	 * removeUser - controls removing a user from a group.
-	 * 
+	 *
 	 * Users can remove themselves.
 	 *
 	 * @param	int	The ID of the user to remove.
@@ -2106,7 +2106,7 @@ class Group extends Error {
 			}
 
 		} else {
-			$res = db_query_params('DELETE FROM user_group WHERE group_id=$1 AND user_id=$2', 
+			$res = db_query_params('DELETE FROM user_group WHERE group_id=$1 AND user_id=$2',
 						array($this->getID(),
 						      $user_id));
 			if (!$res || db_affected_rows($res) < 1) {
@@ -2120,9 +2120,9 @@ class Group extends Error {
 		//	reassign open artifacts to id=100
 		//
 		$res = db_query_params('UPDATE artifact SET assigned_to=100
-				WHERE group_artifact_id 
-				IN (SELECT group_artifact_id 
-				FROM artifact_group_list 
+				WHERE group_artifact_id
+				IN (SELECT group_artifact_id
+				FROM artifact_group_list
 				WHERE group_id=$1 AND status_id=1 AND assigned_to=$2)',
 						array($this->getID(),
 						      $user_id));
@@ -2134,13 +2134,13 @@ class Group extends Error {
 
 		//
 		//	reassign open tasks to id=100
-		//	first have to purge any assignments that would cause 
+		//	first have to purge any assignments that would cause
 		//	conflict with existing assignment to 100
 		//
 		$res = db_query_params('DELETE FROM project_assigned_to
-					WHERE project_task_id IN (SELECT pt.project_task_id 
-					FROM project_task pt, project_group_list pgl, project_assigned_to pat 
-					WHERE pt.group_project_id = pgl.group_project_id 
+					WHERE project_task_id IN (SELECT pt.project_task_id
+					FROM project_task pt, project_group_list pgl, project_assigned_to pat
+					WHERE pt.group_project_id = pgl.group_project_id
 					AND pat.project_task_id=pt.project_task_id
 					AND pt.status_id=1 AND pgl.group_id=$1
 					AND pat.assigned_to_id=$2)
@@ -2153,10 +2153,10 @@ class Group extends Error {
 			return false;
 		}
 		$res = db_query_params('UPDATE project_assigned_to SET assigned_to_id=100
-					WHERE project_task_id IN (SELECT pt.project_task_id 
-					FROM project_task pt, project_group_list pgl 
-					WHERE pt.group_project_id = pgl.group_project_id 
-					AND pt.status_id=1 AND pgl.group_id=$1) 
+					WHERE project_task_id IN (SELECT pt.project_task_id
+					FROM project_task pt, project_group_list pgl
+					WHERE pt.group_project_id = pgl.group_project_id
+					AND pt.status_id=1 AND pgl.group_id=$1)
 					AND assigned_to_id=$2',
 						array($this->getID(),
 						      $user_id));
@@ -2183,7 +2183,7 @@ class Group extends Error {
 
 		//audit trail
 		$this->addHistory('Removed User',$user_id);
-		
+
 		db_commit();
 		return true;
 	}
@@ -2211,7 +2211,7 @@ class Group extends Error {
 			} elseif ($newrole->isError()) {
 				$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
 				return false;
-			} elseif ($newrole->getHomeProject() == NULL 
+			} elseif ($newrole->getHomeProject() == NULL
 				  || $newrole->getHomeProject()->getID() != $this->getID()) {
 				$this->setError(_('Wrong destination role'));
 				return false;
@@ -2261,7 +2261,7 @@ class Group extends Error {
 	 * @access public
 	 */
 	function addHistory($field_name, $old_value) {
-		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate) 
+		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate)
 			VALUES ($1,$2,$3,$4,$5)',
 					array ($this->getID(),
 					       $field_name,
@@ -2274,7 +2274,7 @@ class Group extends Error {
 	 * activateUsers - Make sure that group members have unix accounts.
 	 *
 	 * Setup unix accounts for group members. Can be called even
-	 * if members are already active. 
+	 * if members are already active.
 	 *
 	 * @access private
 	 */
@@ -2282,7 +2282,7 @@ class Group extends Error {
 		/*
 			Activate member(s) of the project
 		*/
-		
+
 		if (USE_PFO_RBAC) {
 		$members = $this->getUsers (true) ;
 
@@ -2296,7 +2296,7 @@ class Group extends Error {
 					return false;
 				}
 			}
-			
+
 		}
 		} else {
 			$res_member = db_query_params('SELECT user_id,role_id FROM user_group WHERE group_id=$1',
@@ -2348,7 +2348,7 @@ class Group extends Error {
 			$this->setError(_("Group already active"));
 			return false;
 		}
-		
+
 		db_begin();
 
 		// Step 1: Activate group and create LDAP entries
@@ -2413,7 +2413,7 @@ class Group extends Error {
 			$adminperms = array ('project_admin' => array ($this->getID() => 1)) ;
 			$role_id = $role->create ('Admin', $adminperms, true) ;
 		}
-		
+
 		if (USE_PFO_RBAC) {
 			$roles = $this->getRoles() ;
 			foreach ($roles as $r) {
@@ -2422,7 +2422,7 @@ class Group extends Error {
 				}
 			}
 		}
-		
+
 		// Temporarily switch to the submitter's identity
 		$saved_session = session_get_user();
 		session_set_internal($idadmin_group);
@@ -2464,7 +2464,7 @@ class Group extends Error {
 					}
 				}
 			}
-			
+
 			if (forge_get_config('use_docman')) {
 				$this->setUseDocman($template->usesDocman());
 				if ($template->usesDocman()) {
@@ -2489,7 +2489,7 @@ class Group extends Error {
 					}
 				}
 			}
-			
+
 			if (forge_get_config('use_frs')) {
 				$this->setUseFRS ($template->usesFRS());
 				if ($template->usesFRS()) {
@@ -2528,7 +2528,7 @@ class Group extends Error {
 					$newrole->setPublic ($oldrole->isPublic()) ;
 				}
 				$oldsettings = $oldrole->getSettingsForProject ($template) ;
-				
+
 				$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
 				foreach ($sections as $section) {
 					$newrole->setSetting ($section, $this->getID(), $oldsettings[$section][$template->getID()]) ;
@@ -2547,7 +2547,7 @@ class Group extends Error {
 						}
 					}
 				}
-			}	
+			}
 
 			$lm = new WidgetLayoutManager();
 			$lm->createDefaultLayoutForProject ($this->getID(), $template->getID()) ;
@@ -2575,7 +2575,7 @@ class Group extends Error {
 
 		$this->sendApprovalEmail();
 		$this->addHistory('Approved', 'x');
-		
+
 		//
 		//	Plugin can make approve operation there
 		//
@@ -2636,12 +2636,12 @@ menus on the left.
 Enjoy the system, and please tell others about %4$s. Let us know
 if there is anything we can do to help you.
 
--- the %4$s crew'), 
+-- the %4$s crew'),
 						       htmlspecialchars_decode($this->getPublicName()),
-						       $this->getUnixName(), 
+						       $this->getUnixName(),
 						       util_make_url ('/project/admin/?group_id='.$this->getID()),
 						       forge_get_config ('forge_name'));
-	
+
 			util_send_message($admin->getEmail(), sprintf(_('%1$s Project Approved'), forge_get_config ('forge_name')), $message);
 
 			setup_gettext_from_context();
@@ -2738,7 +2738,7 @@ Reasons for negative decision:
 			$this->setError(_("Could not find user who has submitted the project."));
 			return false;
 		}
-		
+
 		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('approve_projects', -1) ;
 
 		if (count($admins) < 1) {
@@ -2753,7 +2753,7 @@ Reasons for negative decision:
 			foreach ($submitters as $u) {
 				$submitter_names[] = $u->getRealName() ;
 			}
-			
+
 			$message = sprintf(_('New %1$s Project Submitted
 
 Project Full Name:  %2$s
@@ -2762,11 +2762,11 @@ Submitted Description: %3$s
 					   forge_get_config ('forge_name'),
 					   htmlspecialchars_decode($this->getPublicName()),
 					   htmlspecialchars_decode($this->getRegistrationPurpose()));
-			
+
 			foreach ($submitters as $submitter) {
 				$message .= sprintf(_('Submitter: %1$s (%2$s)
 '),
-						    $submitter->getRealName(), 
+						    $submitter->getRealName(),
 						    $submitter->getUnixName());
 			}
 
@@ -2777,21 +2777,21 @@ Please visit the following URL to approve or reject this project:
 			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), forge_get_config ('forge_name')), $message);
 			setup_gettext_from_context();
 		}
-		
+
 
 		$email = $submitter->getEmail() ;
 		setup_gettext_for_user ($submitter) ;
-				
+
 		$message=sprintf(_('New %1$s Project Submitted
 
 Project Full Name:  %2$s
 Submitted Description: %3$s
 
 The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), forge_get_config ('forge_name'), $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), forge_get_config('web_host'));
-				
+
 		util_send_message($email, sprintf(_('New %1$s Project Submitted'), forge_get_config ('forge_name')), $message);
 		setup_gettext_from_context();
-		
+
 		return true;
 	}
 
@@ -2827,7 +2827,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	 */
 	function getRolesId() {
 		$role_ids = array();
-		
+
 		if (USE_PFO_RBAC) {
 			$res = db_query_params('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
 						array($this->getID()));
@@ -2846,7 +2846,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 				$role_ids[] = $arr['role_id'];
 			}
 		}
-		
+
 		return array_unique($role_ids);
 	}
 
@@ -2875,7 +2875,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 
 	function normalizeAllRoles() {
 		$roles = $this->getRoles();
-		
+
 		foreach ($roles as $r) {
 			$r->normalizeData();
 		}
@@ -2889,7 +2889,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	function getUnixStatus() {
 		return $this->data_array['unix_status'];
 	}
-	
+
 	/**
 	 * setUnixStatus - Sets status of activation of unix account.
 	 *
@@ -2907,7 +2907,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		$res = db_query_params ('UPDATE groups SET unix_status=$1 WHERE group_id=$2',
 					array ($status,
 					       $this->getID())) ;
-	
+
 		if (!$res) {
 			$this->setError(sprintf(_('ERROR - Could Not Update Group Unix Status: %s'),db_error()));
 			db_rollback();
@@ -2928,13 +2928,13 @@ The %1$s admin team will now examine your project submission.  You will be notif
 					}
 				}
 			}
-			
+
 			$this->data_array['unix_status']=$status;
 			db_commit();
 			return true;
 		}
 	}
-	
+
 	/**
 	 * getUsers - Get the users of a group
 	 *
@@ -2943,11 +2943,11 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	function getUsers($onlylocal = true) {
 		if (!isset($this->membersArr)) {
 			$this->membersArr = array () ;
-			
+
 			if (USE_PFO_RBAC) {
 				$ids = array () ;
 				foreach ($this->getRoles() as $role) {
-					if ($onlylocal 
+					if ($onlylocal
 					    && ($role->getHomeProject() == NULL || $role->getHomeProject()->getID() != $this->getID())) {
 						continue ;
 					}
@@ -2963,7 +2963,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 					}
 				}
 			} else {
-				
+
 				$users_group_res = db_query_params ('SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND ug.user_id=u.user_id AND u.status=$2',
 								    array ($this->getID(),
 									   'A'));
@@ -2971,11 +2971,11 @@ The %1$s admin team will now examine your project submission.  You will be notif
 					$this->setError(_('Error: Enable to get users from group'). ' ' . $this->getID() . ' ' .db_error());
 					return false;
 				}
-				
+
 				for ($i=0; $i<db_numrows($users_group_res); $i++) {
 					$this->membersArr[$i] = new GFUser(db_result($users_group_res,$i,'user_id'),false);
 				}
-				
+
 			}
 		}
 		return $this->membersArr;
@@ -2986,7 +2986,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		/* if we activate search engine, we probably want to reindex */
 		$res = db_query_params('UPDATE groups SET use_docman_create_online=$1 WHERE group_id=$2',
 					array($status, $this->getID()));
-	
+
 		if (!$res) {
 			$this->setError(sprintf(_('ERROR - Could Not Update Group DocmanCreateOnline Status: %s'),db_error()));
 			db_rollback();
@@ -3004,7 +3004,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		$res = db_query_params('UPDATE groups SET use_webdav=$1 WHERE group_id=$2',
 					array($status,
 					       $this->getID()));
-	
+
 		if (!$res) {
 			$this->setError(sprintf(_('ERROR - Could Not Update Group UseWebdab Status: %s'),db_error()));
 			db_rollback();
@@ -3022,7 +3022,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		$res = db_query_params('UPDATE groups SET use_docman_search=$1, force_docman_reindex=$1 WHERE group_id=$2',
 					array($status,
 					       $this->getID()));
-	
+
 		if (!$res) {
 			$this->setError(sprintf(_('ERROR - Could Not Update Group UseDocmanSearch Status: %s'),db_error()));
 			db_rollback();
@@ -3040,7 +3040,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		$res = db_query_params('UPDATE groups SET force_docman_reindex=$1 WHERE group_id=$2',
 					array($status,
 					       $this->getID()));
-	
+
 		if (!$res) {
 			$this->setError(sprintf(_('ERROR - Could Not Update Group force_docman_reindex %s'),db_error()));
 			db_rollback();

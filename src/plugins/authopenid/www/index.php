@@ -43,17 +43,17 @@ if (!$u || !is_object($u)) {
 $openid_identity = htmlspecialchars(trim(getStringFromRequest('openid_identity', 'http://')));
 
 try {
-	
+
 	// initialize the OpenID lib handler which will read the posted args
 	$plugin->openid = new LightOpenID;
 	// check the 'openid_mode' that may be set on returning from OpenID provider
 	if($plugin->openid->mode) {
-		
+
     	// or we are called back by the OpenID provider
     	if($plugin->openid->mode == 'cancel') {
         	$warning_msg .= _('User has canceled authentication. Identity not added.');
     	} else {
-    	
+
 	    	// Authentication should have been attempted by OpenID provider
     		if ($plugin->openid->validate()) {
     			// If user successfully logged in to OpenID provider
@@ -69,7 +69,7 @@ try {
 				}
     		}
     	}
-	}        
+	}
 } catch(ErrorException $e) {
     $error_msg = 'OpenID error: '. $e->getMessage();
     //exit(0);
@@ -87,17 +87,17 @@ if (getStringFromRequest('addidentity') != '') {
 		if ($res && db_numrows($res) > 0) {
 			$error_msg = _('ERROR: identity already used by a forge user.');
 		} else {
-			
+
 			// TODO : redirect and check that the identity is authorized for the user
 			try {
-	
+
 				// initialize the OpenID lib handler which will read the posted args
 				$plugin->openid = new LightOpenID;
 				// check the 'openid_mode' that may be set on returning from OpenID provider
-				
+
             	$plugin->openid->identity = htmlspecialchars_decode($openid_identity);
             	session_redirect_external($plugin->openid->authUrl());
-            	
+
         	} catch(ErrorException $e) {
     			$error_msg = 'OpenID error: '. $e->getMessage();
     			//exit(0);
@@ -155,7 +155,7 @@ if($res) {
 
 	while ($row = db_fetch_array($res)) {
 		$openid_identity = 	$row['openid_identity'];
-	
+
 		echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
 		echo '<td>'. $openid_identity .'</td>';
 		echo '<td><a href="'.util_make_uri ('/plugins/authopenid/').'?openid_identity='. urlencode($openid_identity) .'&delete=1">delete</a></td>';

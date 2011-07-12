@@ -33,7 +33,7 @@ class PeopleSearchQuery extends SearchQuery {
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
-	function PeopleSearchQuery($words, $offset, $isExact) {	
+	function PeopleSearchQuery($words, $offset, $isExact) {
 		$this->SearchQuery($words, $offset, $isExact);
 	}
 
@@ -44,7 +44,7 @@ class PeopleSearchQuery extends SearchQuery {
 	 */
 	function getQuery() {
 
-		
+
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {

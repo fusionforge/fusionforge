@@ -25,58 +25,58 @@ class ASelect {
 	var $attributes=array();
 	var $ticket;
 	function ASelect () {
-		
+
 		if(isset($_COOKIE['aselectuid'])){
-		   $this->username = $_COOKIE['aselectuid'];		   		    
+		   $this->username = $_COOKIE['aselectuid'];
 		} else {
-   		 $this->username = '';   		 
+   		 $this->username = '';
 		}
-		
+
 		if(isset($_COOKIE['aselectorganization'])){
 			$this->organization = $_COOKIE['aselectorganization'];
 		} else {
    		$this->organization = '';
 		}
-		
-		if(isset($_COOKIE['aselectattributes'])){			
+
+		if(isset($_COOKIE['aselectattributes'])){
 			$a = explode('&', $_COOKIE['aselectattributes']);
 			$i = 0;
 			while ($i < count($a)) {
    			$b = split('=', $a[$i]);
    			$this->$attributes[htmlspecialchars(urldecode($b[0]))] = htmlspecialchars(urldecode($b[1]));
    			$i++;
-			}		
+			}
 			} else {
    		//nothing to be done here yet.
 			}
-		
+
 		if(isset($_COOKIE['aselectticket'])){
 			$this->ticket = $_COOKIE['aselectticket'];
 		} else {
    		$this->ticket = '';
 		}
 	}
-	
+
 	function getUserName () {
 		return $this->username;
 	}
-	
+
 	function getOrganization () {
 		return $this->organization;
 	}
-	
+
 	function getAttributes () {
 		return $this->attributes;
 	}
-	
+
 	function getAttribute ($attribute) {
 		return $this->attributes[$attribute];
 	}
-	
+
 	function getTicket () {
 		return $this->ticket;
 	}
-	
-	
+
+
 }
 ?>

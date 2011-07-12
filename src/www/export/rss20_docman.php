@@ -44,7 +44,7 @@ if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group
 
 	$group =& group_get_object($group_id);
 
-	
+
 	//does group exist? do we get an object?
 	if (!$group || !is_object($group)) {
 		beginFeed();
@@ -74,12 +74,12 @@ if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group
 	}
 	// Get the document groups info
 	$nested_groups =& $dgf->getNested();
-	
+
 	$d_arr =& $df->getDocuments();
-	
+
 	writeFeed($d_arr,$group_id, $nested_groups);
 	endFeed();
-	
+
 }//no group_id in GET
 else {
 	beginFeed();
@@ -123,7 +123,7 @@ function writeFeed($d_arr, $group_id){
 		return;
 	}
 	$child_count = count($nested_groups["$parent_group"]);
-	*/	
+	*/
 	if (!$d_arr || count($d_arr) < 1) {
 		endOnError(_("No documents found in Document Manager"));
 
@@ -135,34 +135,34 @@ function writeFeed($d_arr, $group_id){
 		//loop through the documents
 		for ($j = 0; $j < count($d_arr); $j++) {
 			$link = (( $d_arr[$j]->isURL() ) ? $d_arr[$j]->getFileName() : "docman/view.php/".$d_arr[$j]->Group->getID()."/".$d_arr[$j]->getID()."/".$d_arr[$j]->getFileName() );
-			
-			print "  <item>\n";			
+
+			print "  <item>\n";
 			if (!is_object($d_arr[$j])) {
                         	//just skip it
 			} elseif ($d_arr[$j]->isError()) {
 				print " <title>Error</title>".
 						"<description>".rss_description($d_arr[$j]->getErrorMessage())."</decription>";
-			} else {				
-				print "   <title>".$d_arr[$j]->getName()."</title>\n"; 
+			} else {
+				print "   <title>".$d_arr[$j]->getName()."</title>\n";
 				print "   <link>http://".forge_get_config('web_host')."/".$link."</link>\n";
 				print "   <category>".$d_arr[$j]->getDocGroupName()."</category>\n";
-				
+
 				print "   <description>".
 						rss_description($d_arr[$j]->getDescription()).
 						" - Language: ". $d_arr[$j]->getLanguageName().
 						"</description>\n";
-				
+
 				print "   <author>".$d_arr[$j]->getCreatorRealName()."</author>\n";
 				//print "   <comment></comment>\n";
 				//print "   <pubDate>".gmdate('D, d M Y G:i:s',time())." GMT</pubDate>\n";
 				//print "   <guid></guid>\n";
-			}//else (everything ok)			
+			}//else (everything ok)
 			print "  </item>\n";
-			
+
 			//$outputtotal++;
 			//if ($outputtotal >= $limit) break;
 		}//for loop
-	}//else (there are documents)	
+	}//else (there are documents)
 }
 
 

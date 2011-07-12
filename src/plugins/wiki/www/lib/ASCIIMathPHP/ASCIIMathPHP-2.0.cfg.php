@@ -68,7 +68,7 @@ $symbol_arr = array(
 '<='	=> array( 'input'=>'<=','tag'=>'mo', 'output'=>'&#' . hexdec('2264') . ';'),
 'lt='	=> array( 'input'=>'lt=','tag'=>'mo', 'output'=>'&#' . hexdec('2264') . ';'),
 'le'	=> array( 'input'=>'le','tag'=>'mo', 'output'=>'&#' . hexdec('2264') . ';'), 	/* 2005-06-05 wes */
-'>'		=> array( 'input'=>'>','tag'=>'mo', 'output'=>'&gt;'), 
+'>'		=> array( 'input'=>'>','tag'=>'mo', 'output'=>'&gt;'),
 '>='	=> array( 'input'=>'>=','tag'=>'mo', 'output'=>'&#' . hexdec('2265') . ';'),
 'qeq'	=> array( 'input'=>'geq','tag'=>'mo', 'output'=>'&#' . hexdec('2265') . ';'),
 '-<'	=> array( 'input'=>'-<','tag'=>'mo', 'output'=>'&#' . hexdec('227A') . ';'),

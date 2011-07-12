@@ -40,7 +40,7 @@ if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group
 
 	$group =& group_get_object($group_id);
 
-	
+
 	//does group exist? do we get an object?
 	if (!$group || !is_object($group)) {
 		beginFeed();
@@ -65,10 +65,10 @@ if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group
 	}
 
 	$at_arr =& $atf->getArtifactTypes();
-	
+
 	writeFeed($at_arr,$group_id);
 	endFeed();
-	
+
 }//no group_id in GET
 else {
 	beginFeed();
@@ -117,13 +117,13 @@ function writeFeed($at_arr, $group_id){
 		//$outputtotal = 0;
 		//loop through the bug trackers
 		for ($j = 0; $j < count($at_arr); $j++) {
-			print "  <item>\n";			
+			print "  <item>\n";
 			if (!is_object($at_arr[$j])) {
                         	//just skip it
 			} elseif ($at_arr[$j]->isError()) {
 				print " <title>Error</title>".
 						"<description>".rss_description($at_arr[$j]->getErrorMessage())."</decription>";
-			} else {				
+			} else {
 				print "   <title>".$at_arr[$j]->getName()."</title>\n";
 				print "   <link>http://".forge_get_config('web_host')."/tracker?atid=".$at_arr[$j]->getID()."&amp;group_id=".$group_id."&amp;func=browse</link>\n";
 				print "   <description>".
@@ -135,13 +135,13 @@ function writeFeed($at_arr, $group_id){
 				//print "   <comment></comment>\n";
 				//print "   <pubDate>".gmdate('D, d M Y G:i:s',time())." GMT</pubDate>\n";
 				//print "   <guid></guid>\n";
-			}//else (everything ok)			
+			}//else (everything ok)
 			print "  </item>\n";
-			
+
 			//$outputtotal++;
 			//if ($outputtotal >= $limit) break;
 		}//for loop
-	}//else (there are trackers)	
+	}//else (there are trackers)
 }
 
 

@@ -27,21 +27,21 @@ class pgsql extends System {
 	/*
  	* Constants
  	*/
-	
+
 	/**
  	* Value to add to unix_uid to get unix uid
- 	* 
+ 	*
  	* @var	constant	$UID_ADD
  	*/
 	var $UID_ADD = 20000;
-		
+
 	/**
  	* Value to add to group_id to get unix gid
  	*
  	* @var	constant	$GID_ADD
  	*/
 	var $GID_ADD = 10000;
-		
+
 	/**
  	* Value to add to unix gid to get unix uid of anoncvs special user
  	*
@@ -81,7 +81,7 @@ class pgsql extends System {
 
 	/**
  	* sysCheckUser() - Check for the existence of a user
- 	* 
+ 	*
  	* @param	int	The user ID of the user to check
  	* @return	boolean	true on success/false on error
  	*
@@ -142,7 +142,7 @@ class pgsql extends System {
 				$this->setError('ERROR - Could Not Update Group GID: '.db_error());
 				return false;
 			}
-			
+
 			$pids = array () ;
 			foreach ($user->getGroups() as $p) {
 				$pids[] = $p->getID() ;
@@ -219,7 +219,7 @@ class pgsql extends System {
 	/**
  	* sysUserSetAttribute() - Set an attribute for a user
  	*
- 	* @param	int	The user ID 
+ 	* @param	int	The user ID
  	* @param	string	The attribute to set
  	* @param	string	The new value of the attribute
  	* @return	boolean	true on success/false on error
@@ -232,10 +232,10 @@ class pgsql extends System {
 	/*
  	* Group management functions
  	*/
-	
+
 	/**
  	* sysCheckGroup() - Check for the existence of a group
- 	* 
+ 	*
  	* @param	int	The ID of the group to check
  	* @return	boolean	true on success/false on error
  	*
@@ -257,7 +257,7 @@ class pgsql extends System {
 
 	/**
  	* sysCreateGroup() - Create a group
- 	* 
+ 	*
  	* @param		int		The ID of the group to create
  	* @returns true on success/false on error
  	*
@@ -299,12 +299,12 @@ class pgsql extends System {
 					 array ('scm_',
 						$this->SCM_UID_ADD,
 						$group_id)) ;
-		
+
 		if (!$res5) {
 			$this->setError('ERROR - Could Not Insert SCM Group GID: '.db_error());
 			return false;
 		}
-		
+
 		foreach ($group->getUsers() as $u) {
 			$this->sysGroupAddUser ($group_id, $u->getID()) ;
 		}
@@ -314,7 +314,7 @@ class pgsql extends System {
 
 	/**
  	* sysRemoveGroup() - Remove a group
- 	* 
+ 	*
  	* @param		int		The ID of the group to remove
  	* @returns true on success/false on error
  	*
@@ -413,7 +413,7 @@ WHERE users.user_id=$2
 				return false;
 			}
 		}
-		
+
 		db_commit () ;
 		return true;
 	}

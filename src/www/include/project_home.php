@@ -1,8 +1,8 @@
-<?php 
+<?php
 /**
  * FusionForge Project Home
  *
- * Copyright 1999-2001 (c) VA Linux Systems 
+ * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
@@ -52,13 +52,13 @@ if (session_loggedin()) {
 	} elseif ($group->isError()) {
 		exit_error($group->getErrorMessage(), 'home');
 	}
-	
+
 	$perm =& $group->getPermission( session_get_user() );
 	if ($perm && is_object($perm) && $perm->isAdmin()) {
-		$sql = "SELECT l.* 
-				FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id) 
-				WHERE o.owner_type = $1 
-				AND o.owner_id = $2 
+		$sql = "SELECT l.*
+				FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
+				WHERE o.owner_type = $1
+				AND o.owner_id = $2
 				AND o.is_default = 1
 				";
 		$res = db_query_params($sql,array('g', $group_id));

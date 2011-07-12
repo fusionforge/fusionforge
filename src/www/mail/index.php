@@ -40,7 +40,7 @@ if ($group_id) {
 	} elseif ($group->isError()) {
 		exit_error($group->getErrorMessage(),'mail');
 	}
-	
+
 	$mlFactory = new MailingListFactory($group);
 	if (!$mlFactory || !is_object($mlFactory)) {
 		exit_error(_('Could Not Get MailingListFactory'),'mail');
@@ -61,7 +61,7 @@ if ($group_id) {
 		mail_footer(array());
 		exit;
 	}
-	
+
 	$mlCount = count($mlArray);
 	if($mlCount == 0) {
 		echo '<p>'.sprintf(_('No Lists found for %1$s'), $group->getPublicName()) .'</p>';
@@ -69,9 +69,9 @@ if ($group_id) {
 		mail_footer(array());
 		exit;
 	}
-	
+
 	echo '<p>' . _('Choose a list to browse, search, and post messages.') . '</p>';
-	
+
 	$tableHeaders = array(
 		_('Mailing list'),
 		_('Description'),
@@ -101,7 +101,7 @@ if ($group_id) {
 	}
 
 	echo $HTML->listTableBottom();
-	
+
 	mail_footer(array());
 
 } else {

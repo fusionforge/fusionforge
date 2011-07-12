@@ -59,7 +59,7 @@ Please visit the following URL to complete the email change:
 
 %2$s
 
- -- the %1$s staff'), 
+ -- the %1$s staff'),
 					 forge_get_config ('forge_name'),
 					 util_make_url ('/account/change_email-complete.php?ch=_'.$confirm_hash));
 

@@ -36,7 +36,7 @@ $question_id = getIntFromRequest('question_id');
 $question = getStringFromRequest('question');
 $question_type = getStringFromRequest('question_type');
 
-/* We need a group_id */ 
+/* We need a group_id */
 if (!$group_id) {
     exit_no_group();
 }
@@ -89,9 +89,9 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
 		exit_form_double_submit();
 	}
     $sq->create($question, $question_type);
-	$msg = _('Question Added'); 
+	$msg = _('Question Added');
     }
-    
+
     /* Error */
     if ( $sq->isError()) {
 		$msg = $sq->getErrorMessage();
@@ -105,8 +105,8 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
     $sq = false;
 }
 
-/* Show Add/Modify form 
- * If $question is null it is add form, otherwise modify 
+/* Show Add/Modify form
+ * If $question is null it is add form, otherwise modify
  */
 echo($sh->showAddQuestionForm($sq));
 

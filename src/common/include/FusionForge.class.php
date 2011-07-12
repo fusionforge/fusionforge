@@ -1,4 +1,4 @@
-<?php   
+<?php
 /**
  * FusionForge top-level information
  *
@@ -61,7 +61,7 @@ class FusionForge extends Error {
 
 	function getNumberOfPublicHostedProjects() {
 		$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1',
-				      array ('A'));	
+				      array ('A'));
 		if (!$res) {
 			$this->setError('Unable to get hosted project count: '.db_error());
 			return false;
@@ -78,7 +78,7 @@ class FusionForge extends Error {
 
 	function getNumberOfHostedProjects() {
 		$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1',
-					array ('A'));	
+					array ('A'));
 		if (!$res) {
 			$this->setError('Unable to get hosted project count: '.db_error());
 			return false;
@@ -120,7 +120,7 @@ class FusionForge extends Error {
 		}
 		return $result;
 	}
-	
+
 	function parseCount($res) {
 		$row_count = db_fetch_array($res);
 		return $row_count['count'];

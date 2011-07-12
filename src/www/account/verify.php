@@ -79,11 +79,11 @@ if (isset($GLOBALS['error_msg'])) {
 
 <form action="<?php echo util_make_url('/account/verify.php'); ?>" method="post">
 
-<p><?php 
+<p><?php
 if (forge_get_config('require_unique_email')) {
 	echo _('Login name or email address:');
 } else {
-	echo _('Login name:'); 
+	echo _('Login name:');
 }
 ?>
 <br /><input type="text" name="loginname" /></p>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Help Wanted 
+ * Help Wanted
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team

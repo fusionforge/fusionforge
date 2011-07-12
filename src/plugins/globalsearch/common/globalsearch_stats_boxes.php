@@ -11,7 +11,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -28,7 +28,7 @@ require_once $gfcommon.'/include/FusionForge.class.php';
 
 function show_globalsearch_stats_boxes() {
         GLOBAL $HTML;
-        
+
         $return = '';
         $return .= $HTML->boxTop(_("Global Search"));
         $return .= globalsearch_box();
@@ -60,11 +60,11 @@ function globalsearch_box() {
 
 function show_top_n_assocsites($num_assocsites) {
         $res_top_n_assoc = db_query_params ('
-                SELECT a.title, a.link, count(*) AS numprojects 
-                FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a 
-                WHERE p.assoc_site_id = a.assoc_site_id AND p.assoc_site_id IN 
-                        (SELECT assoc_site_id FROM plugin_globalsearch_assoc_site 
-                        WHERE status_id = 2 AND enabled=$1 ORDER BY rank LIMIT $2) 
+                SELECT a.title, a.link, count(*) AS numprojects
+                FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a
+                WHERE p.assoc_site_id = a.assoc_site_id AND p.assoc_site_id IN
+                        (SELECT assoc_site_id FROM plugin_globalsearch_assoc_site
+                        WHERE status_id = 2 AND enabled=$1 ORDER BY rank LIMIT $2)
                 GROUP BY a.title, a.link',
 					    array('t',
 						  $num_assocsites));
@@ -77,12 +77,12 @@ function show_top_n_assocsites($num_assocsites) {
         while ($row_topdown = db_fetch_array($res_top_n_assoc)) {
                 if ($row_topdown['numprojects'] > 0)
                         $return .= "<tr><td><a href=\"$row_topdown[link]/\">";
-                        $return .= $row_topdown[title]."</a></td>"; 
+                        $return .= $row_topdown[title]."</a></td>";
                         $return .= "<td><div align=\"right\">". number_format($row_topdown[numprojects], 0);
                         $return .= " projects</div></td></tr>\n";
         }
         $return .= "</div></table>";
-        
+
         return $return;
 }
 

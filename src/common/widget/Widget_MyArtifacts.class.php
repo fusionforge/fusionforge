@@ -28,7 +28,7 @@ require_once('common/tracker/ArtifactCanned.class.php');
 
 /**
  * Widget_MyArtifacts
- * 
+ *
  * Artifact assigned to or submitted by this person
  */
 class Widget_MyArtifacts extends Widget {
@@ -167,7 +167,7 @@ class Widget_MyArtifacts extends Widget {
 
 				//work on the tracker of the last round if there was one
 				if ($atid != $atid_old && $count_aids != 0) {
-					list($hide_now,$count_diff,$hide_url) = 
+					list($hide_now,$count_diff,$hide_url) =
 						my_hide_url('artifact',$atid_old,$hide_item_id,$count_aids,$hide_artifact);
 					$html_hdr =  '<tr class="boxitem"><td colspan="3">' .
 						$hide_url.'<a href="/tracker/?group_id='.$group_id_old.'&amp;atid='.$atid_old.'">'.
@@ -181,7 +181,7 @@ class Widget_MyArtifacts extends Widget {
 					$html = '';
 					$j++;
 
-				} 
+				}
 
 
 				if ($count_aids == 0) {

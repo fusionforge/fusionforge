@@ -52,10 +52,10 @@ for ($i=0; $i<db_numrows($res); $i++) {
 }
 
 //
-//	Long-standing oddity in GForge - 
+//	Long-standing oddity in GForge -
 //	forums were ZERO-pen Discussion, not Oh-pen Discussion
 //
-$res = db_query_params ('UPDATE forum_group_list SET forum_name=$1 
+$res = db_query_params ('UPDATE forum_group_list SET forum_name=$1
 	WHERE forum_name=$2',
 			array('open-discussion',
 			'0pen-discussion')) ;

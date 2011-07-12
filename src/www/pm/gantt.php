@@ -73,7 +73,7 @@ $graph->SetMargin(10,10,25,10);
 $graph->title->Set($pg->getName());
 
 if (isset($gantt_title_font_family)) {
-	$graph->title->SetFont( constant($gantt_title_font_family), 
+	$graph->title->SetFont( constant($gantt_title_font_family),
 		constant($gantt_title_font_style), $gantt_title_font_size);
 }
 
@@ -110,7 +110,7 @@ for ($i=0; $i<$rows; $i++) {
 	// Format the bar for the first activity
 	// ($row,$title,$startdate,$enddate)
 	$activity[$i] = new GanttBar ($i, convert_unicode($pt_arr[$i]->getSummary()), date('Y-m-d',$pt_arr[$i]->getStartDate()), date('Y-m-d',$pt_arr[$i]->getEndDate()-86400));
-	
+
 	// Yellow diagonal line pattern on a red background
 	$activity[$i]->SetPattern(BAND_RDIAG, "yellow");
 	$activity[$i]->SetFillColor ("red");
@@ -118,7 +118,7 @@ for ($i=0; $i<$rows; $i++) {
 	$activity[$i]->progress->SetPattern(BAND_RDIAG, "blue");
 
 	if (isset($gantt_task_font_family)) {
-		$activity[$i]->title->SetFont( constant($gantt_task_font_family), 
+		$activity[$i]->title->SetFont( constant($gantt_task_font_family),
 			constant($gantt_task_font_style), $gantt_task_font_size);
 	}
 

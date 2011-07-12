@@ -1,9 +1,9 @@
 <?php
 /**
  * Copyright (c) STMicroelectronics, 2007. All Rights Reserved.
- * 
+ *
  * Originally written by Manuel VACELET, 2007.
- * 
+ *
  * This file is a part of Codendi.
  *
  * Codendi is free software; you can redistribute it and/or modify
@@ -50,7 +50,7 @@ class Codendi_HTMLPurifier {
      * Hold an instance of the class
      */
     private static $Codendi_HTMLPurifier_instance;
-    
+
     /**
      * Constructor
      */
@@ -90,7 +90,7 @@ class Codendi_HTMLPurifier {
         $config->set('HTML', 'Allowed', $this->getLightConfigMarkups());
         return $config;
     }
-    
+
     /**
      * Get allowed markups for light config
      *
@@ -109,10 +109,10 @@ class Codendi_HTMLPurifier {
         $eList            = array('ul', 'ol', 'li');
         $eContentBasedTxt = array('cite', 'code', 'blockquote', 'strong', 'em',
                                   'pre', 'b', 'i');
-        
+
         $aa = array_merge($eParagraph, $eLinks, $eList, $eContentBasedTxt);
         $allowed = implode(',', $aa);
-        
+
         return $allowed;
     }
 
@@ -168,7 +168,7 @@ class Codendi_HTMLPurifier {
      *   consider CONVERT_HTML.
      *
      * - CODENDI_PURIFIER_BASIC (need $groupId to be set for automagic links)
-     *   Removes all user submitted HTML markups but: 
+     *   Removes all user submitted HTML markups but:
      *    - transform typed URLs into clickable URLs.
      *    - transform autmagic links.
      *    - transform carrige return into HTML br markup.

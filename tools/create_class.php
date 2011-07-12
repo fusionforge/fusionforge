@@ -168,7 +168,7 @@ function generateClassConstructor($className, $fields) {
 		"\t\treturn true;\n";
 	$variables=array("%{ID_FIELD}","KKKK");
 	$substitutions=array(getIdFieldFromFieldsArr($fields),"FFFF");
-	
+
 	$output.=str_replace($variables,$substitutions,$input);
 	$output.="\t}\n\n";
 	return $output;
@@ -190,8 +190,8 @@ function generateClassObjectCreator($tableName,$className,$fields) {
 		if($count++ != 0)
 			$output.=",";  // First occurence hasn't a comma before
 		$lineLength += strlen($fieldName );
-		if ($lineLength >= 80 ) { 
-			$output.="\n\t\t"; // New line at 80 
+		if ($lineLength >= 80 ) {
+			$output.="\n\t\t"; // New line at 80
 			$lineLength= 8;
 		}
 		$output.="\$".$fieldName;
@@ -246,7 +246,7 @@ function generateClassObjectCreator($tableName,$className,$fields) {
 			$all_values.=",";
 		}
 		$field_len += strlen($fieldName);
-		if ($field_len > 80) { 
+		if ($field_len > 80) {
 			$all_fields.="\n\t\t\t\t\t";
 			$field_len = 40;
 		}
@@ -328,7 +328,7 @@ function generateClassGetID($className, $fields) {
         "\tfunction getID() {\n".
         "\t\treturn \$this->data_array['".getIdFieldFromFieldsArr($fields)."'];\n".
         "\t}\n\n";
-	
+
 	return $output;
 }
 
@@ -345,8 +345,8 @@ function generateClassGetField($className,$fieldName,$field) {
 	$type="string"; // TO DO: Check the Field
 	$variables = array("%{FUNCTION_NAME}","%{FIELD}","%{TYPE}");
 	$substitutions= array($functionName, $fieldName, $field["type"] );
-	$output = str_replace($variables, $substitutions, $input );	
-	
+	$output = str_replace($variables, $substitutions, $input );
+
 	return $output;
 }
 
@@ -367,7 +367,7 @@ function generateClassUpdate($tableName,$className,$fields) {
                         $output.=",";  // First occurence hasn't a comma before
                 $lineLength += strlen($fieldName );
                 if ($lineLength >= 80 ) {
-                        $output.="\n\t\t"; // New line at 80 
+                        $output.="\n\t\t"; // New line at 80
                         $lineLength= 8;
                 }
                 $output.="\$".$fieldName;
@@ -466,7 +466,7 @@ function generateClassDelete($tableName, $fields) {
 			$this->setPermissionDeniedError();
 			return false;
 		} else {
-			$res=db_query("DELETE FROM '.$tableName.' WHERE 
+			$res=db_query("DELETE FROM '.$tableName.' WHERE
 				'.getIdFieldFromFieldsArr($fields).'=\'".$this->getID()."\'");
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(\'Could Not Delete: \'.db_error());

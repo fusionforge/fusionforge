@@ -42,7 +42,7 @@ extends WikiDB_backend_PearDB
             }
         }
     }
-  
+
     /**
      * Kill timed out processes. ( so far only called on about every 50-th save. )
      */
@@ -67,10 +67,10 @@ extends WikiDB_backend_PearDB
     function set_versiondata($pagename, $version, $data) {
         $dbh = &$this->_dbh;
         $version_tbl = $this->_table_names['version_tbl'];
-      
+
         $minor_edit = (int) !empty($data['is_minor_edit']);
         unset($data['is_minor_edit']);
-      
+
         $mtime = (int)$data['mtime'];
         unset($data['mtime']);
         assert(!empty($mtime));
@@ -78,7 +78,7 @@ extends WikiDB_backend_PearDB
         @$content = (string) $data['%content'];
         unset($data['%content']);
         unset($data['%pagedata']);
-      
+
         $this->lock();
         $id = $this->_get_pageid($pagename, true);
         // requires PRIMARY KEY (id,version)!
@@ -163,7 +163,7 @@ extends WikiDB_backend_PearDB
                     . ( $pageid ? " AND $recent_tbl.id=$pageid" : ""));
     }
     */
- 
+
     /**
      * Pack tables.
      */
@@ -231,5 +231,5 @@ extends WikiDB_backend_PearDB_search
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

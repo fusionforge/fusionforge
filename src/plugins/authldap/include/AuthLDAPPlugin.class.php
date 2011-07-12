@@ -1,7 +1,7 @@
 <?php
 /** External authentication via LDAP for FusionForge
  * Copyright 2003, Roland Mas <lolando@debian.org>
- * Copyright 2004, Roland Mas <roland@gnurandal.com> 
+ * Copyright 2004, Roland Mas <roland@gnurandal.com>
  *                 The Gforge Group, LLC <http://gforgegroup.com/>
  * Copyright 2004, Christian Bayle <bayle@debian.org>
  * Copyright 2009-2010, Alain Peyrat, Alcatel-Lucent
@@ -50,7 +50,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 
 		$this->declareConfigVars();
 	}
-	
+
 	function syncAccountInfo($params) {
 		if (!$this->syncDataOn($params['event'])) {
 			return true;
@@ -75,7 +75,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 			$u = new GFUser();
 
 			$user_data = array();
-			
+
 			$user_data['unix_name'] = $n;
 			$user_data['firstname'] = '';
 			$user_data['lastname'] = '';
@@ -133,7 +133,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 					 $send_mail)) {
 				return false;
 			}
-			
+
 			if (!$u->setStatus ('A')) {
 				return false;
 			}
@@ -146,7 +146,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		    && !session_check_credentials_in_database($this->saved_login, $this->saved_password, false)) {
 			$u->setPasswd($this->saved_password);
 		}
-		
+
 		$mapped_data = array(
 			'username' => $u->getUnixName(),
 			'md5_password' => '',
@@ -156,7 +156,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 			'email' => $u->getEmail(),
 			'phone' => $u->getPhone()
 			);
-			
+
 		foreach (explode(',', forge_get_config('mapping', $this->name))
 			 as $map_entry) {
 			list ($fffield, $ldapfield) = explode('=',$map_entry);
@@ -164,7 +164,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 				$mapped_data[$fffield] = $data[$ldapfield][0];
 			}
 		}
-		
+
 		$u->update($mapped_data['firstname'],
 			   $mapped_data['lastname'],
 			   $u->getLanguage(),
@@ -234,7 +234,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		}
 
 		if (forge_get_config('manager_dn', $this->name)) {
-			ldap_bind($this->ldap_conn, 
+			ldap_bind($this->ldap_conn,
 				   forge_get_config('manager_dn', $this->name),
 				   forge_get_config('ldap_password'));
 		} else {

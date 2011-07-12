@@ -1,44 +1,44 @@
 <?php
 
 /**
- * 
+ *
  * RDF Parser for ARC2 to OSLC Core RDF JSON format
- * 
+ *
  * Copyright (c) 2010 Olivier Berger, Institut Telecom
- * 
+ *
  * homepage: See http://oslc-tools.svn.sourceforge.net/viewvc/oslc-tools/language-libs/php/arc2-plugin/
  * license:
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0 or in the acompanying COPYING file
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * class:    ARC2_OSLCCoreRDFJSONParserPlugin
  * author:   Olivier Berger
  * version:  2010-12-23
- * 
+ *
  * This program was developped in the frame of the COCLICO project
  * (http://www.coclico-project.org/) with financial support of the Paris
  * Region council.
- * 
+ *
  * It was initially developped to in order to provide a JSON parser for
  * RDF content formatted along the OSLC (Open Services for Lifecycle
  * Collaboration) Core specs guidelines, which could be used in the
  * FusionForge project import plugin.
- * 
+ *
  * The most up-to-date version is maintained in the frame of the OSLC
  * support Open Source project at http://oslc-tools.sourceforge.net/.
- * 
+ *
  * $Id$
- * 
+ *
  */
 
 /*

@@ -129,7 +129,7 @@ class Plugin extends Error {
 					ORDER BY group_plugin.group_id ASC',
 					array($this->name));
 		$rows = db_numrows($res);
-		
+
 		for ($i=0; $i<$rows; $i++) {
 			$group_id = db_result($res,$i,'group_id');
 			$result[] = group_get_object($group_id);
@@ -329,7 +329,7 @@ class PluginSpecificRoleSetting {
 		$this->role =& $role;
 		$this->name = $name;
 	}
-	
+
 	function SetAllowedValues($values) {
 		$this->role->role_values = array_replace_recursive($this->role->role_values,
 								   array($this->name => $values));

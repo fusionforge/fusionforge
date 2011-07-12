@@ -28,22 +28,22 @@ function util_gen_cross_ref ($text, $group_id) {
 
 	// Some important information.
 	$prj = group_getunixname ($group_id);
-	
+
 	// Handle URL in links, replace them with hyperlinks.
 	$text = util_make_links($text);
-	
+
 	// Handle gforge [#nnn] Syntax => links to tracker.
 	$text = preg_replace('/\[\#(\d+)\]/e', "_artifactid2url('\\1')", $text);
-	
+
 	// Handle gforge [Tnnn] Syntax => links to task.
 	$text = preg_replace('/\[\T(\d+)\]/e', "_taskid2url('\\1')", $text);
-	
+
 	// Handle [wiki:<pagename>] syntax
 	$text = preg_replace('/\[wiki:(\S+)\]/', "<a href=\"/wiki/g/$prj/\\1\">\\1</a>", $text);
-	
+
 	// Handle [forum:<thread_id>] Syntax => links to forum.
 	$text = preg_replace('/\[forum:(\d+)\]/e', "_forumid2url('\\1')", $text);
-	
+
 	return $text;
 }
 
@@ -59,7 +59,7 @@ function _artifactid2url ($id, $mode='') {
 		$url = '/tracker/?func=detail&amp;aid='.$id.'&amp;group_id='.$row['group_id'].'&amp;atid='.$row['group_artifact_id'];
 		$arg = 'title="'.util_html_secure($row['summary']).'"' ;
 		if ($row['status_id'] == 2) {
-			$arg .= 'class="artifact_closed"'; 
+			$arg .= 'class="artifact_closed"';
 		}
 		if ($mode == 'title') {
 			return '<a href="'.$url.'" '.$arg.'>'.$text.'</a> <a href="'.$url.'">'.$row['summary'].'</a><br />';
@@ -82,7 +82,7 @@ function _taskid2url ($id) {
 		$url = '/pm/task.php?func=detailtask&amp;project_task_id='.$id.'&amp;group_id='.$row['group_id'].'&amp;group_project_id='.$row['group_project_id'];
 		$arg = 'title="'.$row['summary'].'"' ;
 		if ($row['status_id'] == 2) {
-			$arg .= 'class="task_closed"'; 
+			$arg .= 'class="task_closed"';
 		}
 		return '<a href="'.$url.'" '.$arg.'>'.$text.'</a>';
 	}

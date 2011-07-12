@@ -24,11 +24,11 @@
 require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
 
 class TasksGroupSearchEngine extends GroupSearchEngine {
-	
+
 	function TasksGroupSearchEngine() {
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_TASKS, 'TasksHtmlSearchRenderer', _('This project\'s tasks'));
 	}
-	
+
 	function isAvailable($parameters) {
 		if(parent::isAvailable($parameters)) {
 			if($this->Group->usesPM()) {

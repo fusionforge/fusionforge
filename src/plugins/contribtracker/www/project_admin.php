@@ -73,7 +73,7 @@ function check_updown () {
 	} else {
 		return 0 ;
 	}
-}	
+}
 
 // Get and validate parameters, error if tampered with
 switch ($action) {
@@ -90,7 +90,7 @@ case 'edit_contrib':
 case 'del_contrib':
 	$contrib_id = getIntFromRequest ('contrib_id') ;
 	check_contrib_id ($contrib_id, $group_id) ;
-	break ;	
+	break ;
 case 'post_edit_contrib':
 	$contrib_id = getIntFromRequest ('contrib_id') ;
 	check_contrib_id ($contrib_id, $group_id) ;
@@ -126,7 +126,7 @@ case 'add_part':
 	}
 	break ;
 }
-	
+
 // Do the required action
 
 switch ($action) {
@@ -216,7 +216,7 @@ case 'edit_contrib':
 <?php
 
 	 print '<h3>'._('Current participants').'</h3>' ;
-	  
+
 	$parts = $contrib->getParticipations () ;
 	print '<strong>'.ngettext('Participant:',
 				  'Participants:',
@@ -250,9 +250,9 @@ case 'edit_contrib':
 		print '</li>' ;
 	}
 	print '</ul>' ;
-	
+
 	  print '<h3>'._('Add a participant').'</h3>' ;
-	
+
 ?>
 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
 <input type="hidden" name="action" value="add_part" />
@@ -283,17 +283,17 @@ case 'display':
 	$contribs = $plugin->getContributionsByGroup ($group) ;
 	if (count ($contribs) != 0) {
 		print '<h1>'._('Existing contributions').'</h1>' ;
-		
+
 		foreach ($contribs as $c) {
 			print '<h3>'.$c->getName().'</h3>' ;
 			print '<strong>'._('Date:').'</strong> ' ;
 			print strftime (_('%Y-%m-%d'), $c->getDate ()) ;
 			print '<br />' ;
-			
+
 			print '<strong>'._('Description:').'</strong> ' ;
 			print htmlspecialchars ($c->getDescription ()) ;
 			print '<br />' ;
-			
+
 			$parts = $c->getParticipations () ;
 			print '<strong>'.ngettext('Participant:',
 						  'Participants:',
@@ -328,7 +328,7 @@ case 'display':
 		}
 	} else {
 		print '<h1>'._('No contributions for this project yet.').'</h1>' ;
-	}		
+	}
 ?>
 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
 <input type="hidden" name="action" value="add_contrib" />

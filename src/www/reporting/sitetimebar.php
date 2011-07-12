@@ -63,7 +63,7 @@ report_header(_('Site-Wide Time Tracking'));
 </tr></table>
 </form>
 
-<?php 
+<?php
 if ($typ=='r') {
 
 	if (!$start) {

@@ -132,8 +132,8 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function groupProjectBox($name='group_project_id',$checked='xzxz',$show_100=true,$text_100='None') {
-		$res=db_query_params ('SELECT group_project_id,project_name 
-			FROM project_group_list 
+		$res=db_query_params ('SELECT group_project_id,project_name
+			FROM project_group_list
 			WHERE group_id=$1',
 			array($this->Group->getID()));
 		return html_build_select_box($res,$name,$checked,$show_100,$text_100);

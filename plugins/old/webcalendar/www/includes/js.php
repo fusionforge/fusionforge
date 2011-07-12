@@ -25,7 +25,7 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
 
 NS4 = (document.layers) ? 1 : 0;
 IE4 = (document.all) ? 1 : 0;
-W3C = (document.getElementById) ? 1 : 0;	
+W3C = (document.getElementById) ? 1 : 0;
 <?php // W3C stands for the W3C standard, implemented in Mozilla (and Netscape 6) and IE5
 
 // Function show(evt, name)

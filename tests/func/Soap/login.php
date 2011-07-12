@@ -8,7 +8,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -40,14 +40,14 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	  // this fails, the hostname and IP address should be
 	  // different and the WSDL retrieval should work
 	  $ip = gethostbyname(HOST);
-	  if ($ip != HOST) 
+	  if ($ip != HOST)
 	    {
 
 	      // Instantiate the SOAP client with WSDL
 	      $this->soapclient = new SoapClient(WSDL_URL,
-					     array('cache_wsdl' => WSDL_CACHE_NONE, 
+					     array('cache_wsdl' => WSDL_CACHE_NONE,
 						   'trace' => true));
-	  
+
 	  //	  } catch (SoapFault $fault) {
 	  //	    $fault->faultstring;
 	  //	    print_r($fault);
@@ -98,7 +98,7 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	  $this->assertNotNull($this->soapclient);
 
 	  $version = $this->soapclient->version();
-	  
+
 	  $this->assertEquals('4.8.50', $version);
 
 	}
@@ -135,7 +135,7 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	  $this->assertNotNull($this->soapclient);
 
 	  $userid = 'coin';
-	  
+
 	  try {
 	    $response = $this->soapclient->login($userid, 'pan');
 	  }
@@ -145,7 +145,7 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	    //	    print_r($response);
 	    return;
 	  }
- 
+
 	  $this->fail('An expected exception has not been raised.');
 	}
 
@@ -157,7 +157,7 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	  $this->assertNotNull($this->soapclient);
 
 	  $userid = EXISTING_USER;
-	  
+
 	  try {
 	    $response = $this->soapclient->login($userid, 'xxxxxx');
 	  }
@@ -168,7 +168,7 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	    //	    print_r($response);
 	    return;
 	  }
- 
+
 	  $this->fail('An expected exception has not been raised.');
 	}
 

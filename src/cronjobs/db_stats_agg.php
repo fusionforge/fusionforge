@@ -45,7 +45,7 @@ $err .= db_error();
 $res = db_query_params ('INSERT INTO stats_project_months
 	SELECT month, group_id,
 	avg(developers)::int AS developers,
-    avg(group_ranking)::int AS group_ranking, 
+    avg(group_ranking)::int AS group_ranking,
 	avg(group_metric) AS group_metric,
 	sum(logo_showings) AS logo_showings,
 	sum(downloads) AS downloads,

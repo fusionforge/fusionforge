@@ -33,7 +33,7 @@ $res = db_query_params('SELECT docid,filesize FROM doc_data',
 if (!$res) {		// error
 	echo db_error();
 	exit(1);
-} 
+}
 
 echo "Updating ".db_numrows($res)." documents\n";
 

@@ -32,8 +32,8 @@
 // Notes:
 // Keep in mind to write "&" in URLs as &amp; in RSS feeds
 
-// Doc: 
-// Params in calling URL: 
+// Doc:
+// Params in calling URL:
 // group_ids (0 - x group ids, separated by "+"), optional, default: not set
 // forum_ids (0 - x forum ids, separated by "+"), optional, default: not set
 // number (no. of feed items), optional, default: 10
@@ -82,18 +82,18 @@ $debug = false;
 if (isset($_GET['group_ids'])&&!empty($_GET['group_ids'])) {
     //explode: http changes "+" to " "
     $group_ids = array_unique(array_merge($group_ids, explode(" ",$_GET['group_ids'])));
-    
+
     //loop through group_ids
     for ($i=0; $i<count($group_ids);$i++){
         if (is_numeric($group_ids[$i])) {
             $group =& group_get_object($group_ids[$i]);
             //does group exist? do we get an object? is group public? does it use forums?
-            if ($group && is_object($group) && !$group->isError() 
+            if ($group && is_object($group) && !$group->isError()
                         && $group->isPublic() && $group->usesForum()){
                 $groups[] = $group;
                 //valid forums from forum_ids param (needed for feed title)
                 $n_group_ids++;
-                                
+
                 //this groups' forums in array (code based on forum/index.php)
                 $ff=new ForumFactory($group);
                 if ($ff &&is_object($ff) && !$ff->isError()) {
@@ -114,7 +114,7 @@ if (isset($_GET['group_ids'])&&!empty($_GET['group_ids'])) {
 if (isset($_GET['forum_ids']) && !empty($_GET['forum_ids'])) {
     //explode: http changes "+" to " "
     $forum_ids = array_unique(explode(' ',$_GET['forum_ids']));
-    
+
     foreach ($forum_ids as $fid){
         //we got strings from explode(), cast them to int (if possible)
         $fid= (int) $fid;
@@ -126,11 +126,11 @@ if (isset($_GET['forum_ids']) && !empty($_GET['forum_ids'])) {
 					array ($fid));
             if ($result && db_numrows($result) >= 1) {
                 $forum_group_id=db_result($result,0,'group_id');
-    
+
                 $g =& group_get_object($forum_group_id);
                 if ($g && is_object($g) && !$g->isError() && $g->isPublic() && $g->usesForum()) {
                     $f=new Forum($g,$fid);
-                    
+
                     if ($f && is_object($f) && !$f->isError() && $f->isPublic()) {
                         //add group to group array, forum to forum array
                         $groups[] = $g;
@@ -166,7 +166,7 @@ $error_no_messages = false;
 //there were filter parameters but they were invalid or
 //there were valid group_ids, but they contained no forums
 
-if (($n_groups == 0 && isset($_GET['group_ids']) && count($_GET['group_ids'])>0) || 
+if (($n_groups == 0 && isset($_GET['group_ids']) && count($_GET['group_ids'])>0) ||
     ($n_forums == 0 && isset($_GET['forum_ids']) && count($_GET['forum_ids'])>0) ||
     ($n_groups > 0 && $n_forums == 0)){
     $error_no_messages = "No forum messages found. Please check for invalid parameters and if the project(s) contain public forums.";
@@ -184,8 +184,8 @@ if (isset($_GET['number']) && !empty($_GET['number']) &&
 
 //item
 if (isset($_GET['item']) && !empty($_GET['item']) && ($_GET['item'] == "posting")) {
-    $show_threads = false;    
-} 
+    $show_threads = false;
+}
 else $where_threads = " AND is_followup_to=0";
 
 
@@ -209,11 +209,11 @@ if ($n_groups == 1 && $n_forum_ids == 0){
     $feed_link = $feed_link . "/forum/?group_id=".$groups[0]->getID();
     $feed_desc = $groups[0]->getDescription(); //Feed desc = project desc
 }
-//one forum and no (valid) group param 
+//one forum and no (valid) group param
 //-> forum's group name and forum name in feed title; link to forum
 if ($n_forum_ids == 1 && $n_group_ids == 0){
     $forum_group = $forums[0]->getGroup();
-    
+
     $feed_title = $forum_group->getPublicName().' - "' .$forums[0]->getName().'" forum: '.
                 $feed_title_desc;
     $feed_link = $feed_link . "/forum/forum.php?forum_id=".$forums[0]->getID();
@@ -231,9 +231,9 @@ if (!$error_no_messages){
     //messages to be displayed
     $rss_messages = array();
 
-    //get forum messages 
+    //get forum messages
     $qpa = db_construct_qpa () ;
-    $qpa = db_construct_qpa ($qpa, 'SELECT f.group_forum_id AS group_forum_id, 
+    $qpa = db_construct_qpa ($qpa, 'SELECT f.group_forum_id AS group_forum_id,
                 f.msg_id AS msg_id, f.subject AS subject, f.most_recent_date AS most_recent_date,
                 f.has_followups, f.thread_id,
                 u.realname AS user_realname,
@@ -242,7 +242,7 @@ if (!$error_no_messages){
         FROM forum f,users u, groups g,forum_group_list fg
         WHERE f.posted_by=u.user_id
         AND g.group_id = fg.group_id
-        AND f.group_forum_id = fg.group_forum_id 
+        AND f.group_forum_id = fg.group_forum_id
         AND g.status=$1
         AND g.use_forum=1 ',
 			     array ('A')) ;
@@ -262,7 +262,7 @@ if (!$error_no_messages){
 
     $qpa = db_construct_qpa ($qpa, 'ORDER BY f.most_recent_date DESC LIMIT $1',
 			     array ($number_items)) ;
-    
+
     $res_msg = db_query_qpa($qpa);
     if (!$res_msg) {
             error_log(_("Forum RSS: Forum not found: ").' '.db_error(),0);
@@ -278,7 +278,7 @@ if (!$error_no_messages){
         $row_thread = db_fetch_array($res_thread);
         if (!$res_thread || db_numrows($res_thread) != 1) {
                 error_log("Forum RSS: Could not get thread subject to thread-ID ".$row_msg['thread_id'],0);
-        }    
+        }
         //category: Project name - Forum Name - Thread Name
         $item_cat = $row_msg['group_name']." - ".$row_msg['forum_name']." -- ".$row_thread['subject'];
         writeForumFeed($row_msg, $item_cat);
@@ -287,8 +287,8 @@ if (!$error_no_messages){
 else {
     displayError($error_no_messages);
 }
-endFeed(); 	
-	
+endFeed();
+
 
 
 //*********************** HELPER FUNCTIONS ***************************************
@@ -318,19 +318,19 @@ function beginForumFeed($feed_title, $feed_link, $feed_desc) {
 
 function writeForumFeed($msg, $item_cat){
     global  $show_threads;
-            
+
     $link = "forum/message.php?msg_id=".$msg['msg_id'];
 
     //------------ build one feed item ------------
-    print "  <item>\n";					
-        print "   <title>".$msg['subject']."</title>\n"; 
+    print "  <item>\n";
+        print "   <title>".$msg['subject']."</title>\n";
         print "   <link>http://".forge_get_config('web_host')."/".$link."</link>\n";
         print "   <category>".$item_cat."</category>\n";
                 //print "   <description>".rss_description($item_desc)."</description>\n";
         print "   <author>".$msg['user_realname']."</author>\n";
                 //print "   <comment></comment>\n";
         print "   <pubDate>".gmdate('D, d M Y G:i:s',$msg['most_recent_date'])." GMT</pubDate>\n";
-                //print "   <guid></guid>\n";			
+                //print "   <guid></guid>\n";
     print "  </item>\n";
 
 }
@@ -355,7 +355,7 @@ function endOnError($errorMessage) {
 function object_array_unique($array, $keep_key_assoc = false)
 {
     $duplicate_keys = array();
-    $tmp         = array();       
+    $tmp         = array();
 
     foreach ($array as $key=>$val)
     {
@@ -371,7 +371,7 @@ function object_array_unique($array, $keep_key_assoc = false)
 
     foreach ($duplicate_keys as $key)
         unset($array[$key]);
-       
+
     return $keep_key_assoc ? $array : array_values($array);
 }
 ?>

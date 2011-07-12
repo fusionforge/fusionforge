@@ -84,7 +84,7 @@ if (!$end) {
 
 
 if ($area == 'category') {
-	$res = db_query_params ('SELECT ac.category_name,count(*) 
+	$res = db_query_params ('SELECT ac.category_name,count(*)
 	FROM artifact a, artifact_category ac
 	WHERE a.group_artifact_id=$1
 	AND a.category_id=ac.id
@@ -94,7 +94,7 @@ if ($area == 'category') {
 				      $start,
 				      $end));
 } elseif ($area == 'group') {
-	$res = db_query_params ('SELECT ag.group_name,count(*) 
+	$res = db_query_params ('SELECT ag.group_name,count(*)
 	FROM artifact a, artifact_group ag
 	WHERE a.group_artifact_id=$1
 	AND a.artifact_group_id=ag.id
@@ -104,7 +104,7 @@ if ($area == 'category') {
 				      $start,
 				      $end));
 } elseif ($area == 'resolution') {
-	$res = db_query_params ('SELECT ar.resolution_name,count(*) 
+	$res = db_query_params ('SELECT ar.resolution_name,count(*)
 	FROM artifact a, artifact_resolution ar
 	WHERE a.group_artifact_id=$1
 	AND a.resolution_id=ar.id
@@ -115,7 +115,7 @@ if ($area == 'category') {
 				      $end));
 } else {
 	$area = 'assignee';
-	$res = db_query_params ('SELECT u.realname,count(*) 
+	$res = db_query_params ('SELECT u.realname,count(*)
 	FROM artifact a, users u
 	WHERE a.group_artifact_id=$1
 	AND a.assigned_to=u.user_id

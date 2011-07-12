@@ -60,8 +60,8 @@ $users = explode(",",$users);
 <a title="<?php etranslate("Previous")?>" class="prev" href="<?php echo $prev_url ?>"><img src="leftarrow.gif" class="prevnext" alt="<?php etranslate("Previous")?>" /></a>
 <a title="<?php etranslate("Next")?>" class="next" href="<?php echo $next_url ?>"><img src="rightarrow.gif" class="prevnext" alt="<?php etranslate("Next")?>" /></a>
 <div class="title">
-<span class="date"><?php 
-  printf ( "%s, %s %d, %d", weekday_name ( $wday ), month_name ( $month - 1 ), $day, $year ); 
+<span class="date"><?php
+  printf ( "%s, %s %d, %d", weekday_name ( $wday ), month_name ( $month - 1 ), $day, $year );
 ?></span><br />
 </div></div>
 <br />

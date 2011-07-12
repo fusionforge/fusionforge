@@ -11,7 +11,7 @@ class ProjectLabelsPlugin extends Plugin {
 
 	function CallHook ($hookname, &$params) {
 		global $HTML;
-		
+
 		if ($hookname == "site_admin_option_hook") {
 			echo '<li>' . util_make_link ('/plugins/projectlabels/index.php',
 						      _('Project labels'). ' [' . _('Project labels plugin') . ']') . '</li>';

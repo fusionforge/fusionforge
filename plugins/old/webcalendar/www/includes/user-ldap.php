@@ -34,12 +34,12 @@ $admin_can_delete_user = false;
 
 //------ LDAP General Server Settings ------//
 //
-// Name or address of the LDAP server 
+// Name or address of the LDAP server
 //  For SSL/TLS use 'ldaps://localhost'
-$ldap_server = 'localhost';          
+$ldap_server = 'localhost';
 
-// Port LDAP listens on (default 389)        
-$ldap_port = '389';                   
+// Port LDAP listens on (default 389)
+$ldap_port = '389';
 
 // Use TLS for the connection (not the same as ldaps://)
 $ldap_start_tls = false;
@@ -48,15 +48,15 @@ $ldap_start_tls = false;
 $set_ldap_version = false;
 $ldap_version = '3'; // (usually 3)
 
-// base DN to search for users      
+// base DN to search for users
 $ldap_base_dn = 'ou=people,dc=company,dc=com';
 
-// The ldap attribute used to find a user (login). 
+// The ldap attribute used to find a user (login).
 // E.g., if you use cn,  your login might be "Jane Smith"
 //       if you use uid, your login might be "jsmith"
 $ldap_login_attr = 'uid';
 
-// Account used to bind to the server and search for information. 
+// Account used to bind to the server and search for information.
 // This user must have the correct rights to perform search.
 // If left empty the search will be made in anonymous.
 //
@@ -84,7 +84,7 @@ $ldap_user_filter = '(objectclass=person)';
 
 // Attributes to fetch from LDAP and corresponding user variables in the
 // application. Do change according to your LDAP Schema
-$ldap_user_attr = array( 
+$ldap_user_attr = array(
   // LDAP attribute   //WebCalendar variable
   'uid',              //login
   'sn',               //lastname
@@ -100,7 +100,7 @@ $ldap_user_attr = array(
 $ldap_admin_group_attr = strtolower($ldap_admin_group_attr);
 $ldap_admin_group_type = strtolower($ldap_admin_group_type);
 
-// Function to search the dn of a given user the error message will 
+// Function to search the dn of a given user the error message will
 // be placed in $error.
 // params:
 //   $login - user login
@@ -144,13 +144,13 @@ function user_valid_login ( $login, $password ) {
   $ret = false;
   $ds = @ldap_connect ( $ldap_server, $ldap_port );
   if ( $ds ) {
-    if ($set_ldap_version || $ldap_start_tls) 
+    if ($set_ldap_version || $ldap_start_tls)
       ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
-  
+
     if ($ldap_start_tls) {
       if (!ldap_start_tls($ds)) {
         $error = 'Could not start TLS for LDAP connection';
-        return $ret;      
+        return $ret;
       }
     }
 
@@ -389,22 +389,22 @@ function stripdn($dn){
 // Tries to connect as $ldap_admin_dn if we set it.
 //  returns: bind result or false
 function connect_and_bind() {
-  global $ds, $error, $ldap_server, $ldap_port, $ldap_version; 
+  global $ds, $error, $ldap_server, $ldap_port, $ldap_version;
   global $ldap_admin_dn, $ldap_admin_pwd, $ldap_start_tls, $set_ldap_version;
 
   $ret = false;
   $ds = @ldap_connect ( $ldap_server, $ldap_port );
   if ( $ds ) {
-    if ($set_ldap_version || $ldap_start_tls) 
+    if ($set_ldap_version || $ldap_start_tls)
       ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
-  
+
     if ($ldap_start_tls) {
       if (!ldap_start_tls($ds)) {
         $error = 'Could not start TLS for LDAP connection';
-        return $ret;      
+        return $ret;
       }
     }
-    
+
     if ( $ldap_admin_dn != '') {
       $r = @ldap_bind ( $ds, $ldap_admin_dn, $ldap_admin_pwd );
     } else {

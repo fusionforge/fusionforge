@@ -223,7 +223,7 @@ class DB_ifx extends DB_common
         } else {
             return 0;
         }
-        
+
     }
 
     // }}}

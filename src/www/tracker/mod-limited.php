@@ -204,8 +204,8 @@ echo $ah->showMessages($sort_comments_chronologically);
 <table border="0" width="80%">
 	<tr><td colspan="2">
 		<h2><?php echo _('Change Log') ?>:</h2>
-		<?php 
-			echo $ah->showHistory(); 
+		<?php
+			echo $ah->showHistory();
 		?>
 	</td></tr>
 </table>

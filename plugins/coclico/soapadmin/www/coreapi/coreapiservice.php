@@ -16,8 +16,8 @@ Logger::configure(dirname(__FILE__).'/../log4php.properties');
  */
 Class CoreApiServer extends SoapServer {
 
-	private $logger; 
-	
+	private $logger;
+
 	/**
 	 * Default class map for wsdl=>php
 	 * @access private
@@ -51,7 +51,7 @@ Class CoreApiServer extends SoapServer {
 	 * @param array $options Options for the SoapClient
 	 */
 	public function __construct($wsdl="FusionforgeCoreApi.wsdl", $options=array()) {
-		
+
 		$this->logger = Logger::getLogger('api.soap.core.CoreApi');
 		$this->logger->debug("FusionForgeCoreApi Soap Server created ...");
 		foreach(self::$classmap as $wsdlClassName => $phpClassName) {
@@ -66,13 +66,13 @@ Class CoreApiServer extends SoapServer {
 
 class CoreApiService {
 
-	private $logger; 
-	
+	private $logger;
+
 	public function __construct() {
 		// log4php logger initialization for the class
 		$this->logger = Logger::getLogger('fusionforge.api.soap.CoreApi');
 	}
-	
+
 		/**
 	 * Checks if an argument list matches against a valid argument type list
 	 * @param array $arguments The argument list to check
@@ -94,10 +94,10 @@ class CoreApiService {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Service Call: getVersion
-	 * 
+	 *
 	 * @param mixed getVersion_soap (Soap request object)
 	 * @return getVersionResponse_soap (Soap response object) or SoapFault if parameter are invalid
 	 */
@@ -115,7 +115,7 @@ class CoreApiService {
 			// Invalid parameters => return a soap fault
 			return new SoapFault($e->getCode(),$e->getMessage());
 		}
-		
+
 		$fusionforge = new FusionForge();
 		$response = new getVersionResponse_soap();
 		$response->version = $fusionforge->software_version;
@@ -125,7 +125,7 @@ class CoreApiService {
 
 	/**
 	 * Service Call: getGroups
-	 * 
+	 *
 	 * @param mixed  getGroups_soap (Soap request object)
 	 * @return getGroupsResponse_soap (Soap response object) or SoapFault if parameters are invalid
 	 */
@@ -135,7 +135,7 @@ class CoreApiService {
 		$validParameters = array(
 			"(getGroups_soap)",
 		);
-		
+
 		try {
 			$args = func_get_args();
 			$this->_checkArguments($args, $validParameters);
@@ -144,7 +144,7 @@ class CoreApiService {
 			// Invalid parameters => return a soap fault
 			return new SoapFault($e->getCode(),$e->getMessage());
 		}
-		
+
 		$grps =& group_get_objects($group_ids);
 		if (!$grps) {
 			$this->logger->debug("Could Not Get Groups by Id");
@@ -153,7 +153,7 @@ class CoreApiService {
 
 		$response = new getGroupsResponse_soap();
 		$this->logger->debug((count($grps)+1)." Groups objects found");
-		
+
 		for ($i=0; $i<count($grps); $i++) {
 			$group = new group_soap();
 			$group->group_id = $grps[$i]->data_array['group_id'];
@@ -168,14 +168,14 @@ class CoreApiService {
 			$response->group[$i]=$group;
 			$this->logger->debug("Adding Group objects : ".var_export($group, true));
 		}
-		
+
 		return $response;
 	}
 
 
 	/**
 	 * Service Call: getUsers
-	 * 
+	 *
 	 * @param mixed  getUsers_soap (Soap request object)
 	 * @return getUsersResponse_soap (Soap response object) or SoapFault if parameters are invalid
 	 */
@@ -189,11 +189,11 @@ class CoreApiService {
 		else {
 			$user_id = array(0=>$mixed->user_id);
 		}
-		
+
 		$validParameters = array(
 			"(getUsers_soap)",
 		);
-		
+
 		try {
 			$args = func_get_args();
 			$this->_checkArguments($args, $validParameters);
@@ -202,13 +202,13 @@ class CoreApiService {
 			// Invalid parameters => return a soap fault
 			return new SoapFault($e->getCode(),$e->getMessage());
 		}
-		
+
 		$users =& user_get_objects($user_id);
 		$this->logger->debug("users found : ".var_export($users, true));
 		if (!$users) {
 			return new SoapFault('3001','Could Not Get Users By Id');
-		}		
-		
+		}
+
 		$response = new getUsersResponse_soap();
 		for ($i=0; $i<count($users); $i++) {
 			if ($users[$i]->isError()){
@@ -232,14 +232,14 @@ class CoreApiService {
 				$user->language_id=$users[$i]->data_array['language_id'];
 				$response->user[$i]=$user;
 			}
-		}		
+		}
 		return $response;
 	}
 
 
 	/**
 	 * Service Call: getGroupsByName
-	 * 
+	 *
 	 * @param mixed	getGroupsByName_soap (Soap request object)
 	 * @return getGroupsByNameResponse_soap (Soap response object) or SoapFault if parameters are invalid
 	 */
@@ -252,11 +252,11 @@ class CoreApiService {
 		else {
 			$group_names = array(0=>$mixed->group_name);
 		}
-		
+
 		$validParameters = array(
 			"(getGroupsByName_soap)",
 		);
-		
+
 		try {
 			$args = func_get_args();
 			$this->_checkArguments($args, $validParameters);
@@ -264,12 +264,12 @@ class CoreApiService {
 		catch (Exception $e) {
 			// Invalid parameters => return a soap fault
 			return new SoapFault($e->getCode(),$e->getMessage());
-		}	
+		}
 		$grps =& group_get_objects_by_name($group_names);
 		if (!$grps) {
 			return new SoapFault('2002','Could Not Get Groups by Name');
 		}
-		
+
 		$response = new getGroupsByNameResponse_soap();
 		// $grps contains an array of Group object
 		for ($i=0; $i<count($grps); $i++) {
@@ -298,7 +298,7 @@ class CoreApiService {
 
 	/**
 	 * Service Call: getPublicProjectNames
-	 * 
+	 *
 	 * @param mixed	getPublicProjectNames_soap (Soap request object)
 	 * @return getPublicProjectNamesResponse_soap (Soap response object) or SoapFault if parameters are invalid
 	 */
@@ -315,8 +315,8 @@ class CoreApiService {
 		catch (Exception $e) {
 			// Invalid parameters => return a soap fault
 			return new SoapFault($e->getCode(),$e->getMessage());
-		}		
-		// SOAP Response 
+		}
+		// SOAP Response
 		$response = new getPublicProjectNamesResponse_soap();
 		$forge = new FusionForge();
 		$response->project_name = $forge->getPublicProjectNames();
@@ -332,7 +332,7 @@ class CoreApiService {
 
 	/**
 	 * Service Call: getUsersByName
-	 * 
+	 *
 	 * @param mixed	getUsersByName_soap (Soap request object)
 	 * @return getUsersByNameResponse_soap (Soap response object) or SoapFault if parameters are invalid
 	 */
@@ -345,7 +345,7 @@ class CoreApiService {
 		else {
 			$user_names = array(0=>$mixed->user_name);
 		}
-		
+
 		$validParameters = array(
 			"(getUsersByName_soap)",
 		);
@@ -356,13 +356,13 @@ class CoreApiService {
 		catch (Exception $e) {
 			// Invalid parameters => return a soap fault
 			return new SoapFault($e->getCode(),$e->getMessage());
-		}		
-				
+		}
+
 		$users =& user_get_objects_by_name($user_names);
 		if (!$users) {
 			return new SoapFault('3002','Could Not Get Users By Name');
-		}		
-		
+		}
+
 		$response = new getUsersByNameResponse_soap();
 		for ($i=0; $i<count($users); $i++) {
 			if ($users[$i]->isError()){
@@ -386,22 +386,22 @@ class CoreApiService {
 				$user->language_id=$users[$i]->data_array['language_id'];
 				$response->user[$i]=$user;
 			}
-		}		
+		}
 		return $response;
 	}
 
 
 	/**
 	 * Service Call: userGetGroups
-	 * 
+	 *
 	 * @param mixed	userGetGroups_soap (Soap request object)
 	 * @return userGetGroupsResponse_soap (Soap response object) or SoapFault if parameters are invalid
 	 */
 	public function userGetGroups($mixed = null) {
-		
+
 		$this->logger->debug("CoreApiService Soap call : userGetGroups for user_id ".var_export($mixed, true));
 		$user_id = $mixed->user_id;
-		
+
 		$validParameters = array(
 			"(userGetGroups_soap)",
 		);
@@ -412,8 +412,8 @@ class CoreApiService {
 		catch (Exception $e) {
 			// Invalid parameters => return a soap fault
 			return new SoapFault($e->getCode(),$e->getMessage());
-		}		
-				
+		}
+
 		$user =& user_get_object($user_id);
 		if (!$user) {
 			return new SoapFault('3003','Could Not Get Users Groups');
@@ -423,7 +423,7 @@ class CoreApiService {
 		$grps = $user->getGroups();
 		$this->logger->debug(count($grps). " groups found");
 		$response = new userGetGroupsResponse_soap();
-		
+
 		for ($i=0; $i<count($grps); $i++) {
 			if ($grps[$i]->isError()) {
 				//skip it if it had an error
@@ -443,9 +443,9 @@ class CoreApiService {
 				$this->logger->debug("adding group : ".var_export($group, true));
 			}
 		}
-				
+
 		$this->logger->debug("userGetGroupsResponse_soap : ".var_export($response, true));
-		
+
 		return $response;
 
 	}
@@ -453,7 +453,7 @@ class CoreApiService {
 
 	/**
 	 * Service Call: getSCMData
-	 * 
+	 *
 	 * @param mixed	getSCMData_soap (Soap request object)
 	 * @return getSCMDataResponse_soap (Soap response object) or SoapFault if parameters are invalid
 	 */
@@ -470,7 +470,7 @@ class CoreApiService {
 		catch (Exception $e) {
 			// Invalid parameters => return a soap fault
 			return new SoapFault($e->getCode(),$e->getMessage());
-		}				
+		}
 		// Search the group object in the database
 		$grp =& group_get_object($group_id);
 		$this->logger->debug("group_get_object : ".var_export($grp, true));
@@ -489,12 +489,12 @@ class CoreApiService {
 			$this->logger->error('SCM is not enabled in this project ; group_id : '.$group_id);
 			// TODO : Error code to be determined
 			return new SoapFault ('-1','SCM is not enabled in this project');
-		}		
-		
+		}
+
 		// Create the SOAP response
 		$response = new getSCMDataResponse_soap();
 		$scm_data = new scmData_soap();
-		
+
 		if ($grp->usesPlugin("scmcvs")) {
 			$scm_data->type = "CVS";
 			$scm_data->allow_anonymous = $grp->enableAnonSCM();
@@ -511,20 +511,20 @@ class CoreApiService {
 			$scm_data->box = $grp->getSCMBox();
 			$scm_data->root = $GLOBALS["svn_root"]."/".$grp->getUnixName();
 			$scm_data->module = "";		// doesn't apply to SVN
-			
+
 			// Note: This is an ugly hack. We can't access SVN plugin object for this project
 			// directly. Currently this is being rewritten, but for now we must make this.
-			
+
 			//TODO How to have access to $gfconfig variable ??
-			
+
 			include $gfconfig.'plugins/scmsvn/config.php';
 			$scm_data->connection_string = "http".(($use_ssl) ? "s" : "")."://".$grp->getSCMBox()."/".$svn_root."/".$grp->getUnixName();
 		}
-			
+
 		$response->scm_data= $scm_data;
 		return $response;
 	}
-	
+
 }
 
 ?>

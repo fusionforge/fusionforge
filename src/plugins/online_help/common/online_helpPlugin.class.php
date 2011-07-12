@@ -20,9 +20,9 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- * 
+ *
  * Description:
- * 
+ *
  * This plugin adds a contextual online doc to GForge by adding a link 'Get Help'
  * on top of the page (near the login/logout links).
  * Documentation is based on the docbook manual converted in chunked HTML.
@@ -80,12 +80,12 @@ class online_helpPlugin extends Plugin {
 			} else {
 				$guide .= 'index.html';
 			}
-			
+
 			$guide = '<a href="javascript:help_window(\''.$guide.'\')">'._('Get Help').'</a>';
-			
+
 			$template = isset($params['template']) ?  $params['template'] : ' | {menu}';
 			echo str_replace('{menu}', $guide, $template);
-		} 
+		}
 	}
 }
 

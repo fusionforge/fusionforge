@@ -53,7 +53,7 @@ if ($group->isError()) {
 //
 //	Create Report
 //
-$report=new ReportTrackerAct($SPAN,$group_id,$atid,$start,$end); 
+$report=new ReportTrackerAct($SPAN,$group_id,$atid,$start,$end);
 
 //
 //	Check for error, such as license key problem
@@ -100,14 +100,14 @@ $lineplot3 ->SetLegend("Total Still Open");
 //
 //	Titles
 //
-$graph->title->Set("Tracker Activity For: ".$group->getPublicName(). 
+$graph->title->Set("Tracker Activity For: ".$group->getPublicName().
 	" (".date('Y-m-d',$report->getStartDate()) ." to ". date('Y-m-d',$report->getEndDate()) .")");
 $graph->subtitle->Set($report_company_name);
 //$graph->xaxis-> title->Set("Date" );
-//$graph->yaxis-> title->Set("Number" ); 
+//$graph->yaxis-> title->Set("Number" );
 
 $a=$report->getDates();
-$graph->xaxis->SetTickLabels($a); 
+$graph->xaxis->SetTickLabels($a);
 $graph->xaxis->SetLabelAngle(90);
 $graph->xaxis->SetTextLabelInterval($report->getGraphInterval());
 

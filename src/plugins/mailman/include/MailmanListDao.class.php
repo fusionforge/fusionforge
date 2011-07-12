@@ -16,14 +16,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
 require_once 'common/dao/include/DataAccessObject.class.php';
 
 /**
- *  Data Access Object for mailing lists 
+ *  Data Access Object for mailing lists
  */
 class MailmanListDao extends DataAccessObject {
 
@@ -31,15 +31,15 @@ class MailmanListDao extends DataAccessObject {
 		parent::__construct($da);
 	}
 
-	
+
 	/**
-	 * Search active (=not deteted) mailing lists 
+	 * Search active (=not deteted) mailing lists
 	 * return all active lists
 	 * @return DataAccessResult
 	 */
 	function & searchAllActiveML() {
-		$sql = "SELECT * 
-			FROM mail_group_list 
+		$sql = "SELECT *
+			FROM mail_group_list
 			WHERE is_public IN (0,1)";
 		return $this->retrieve($sql,array());
 	}
@@ -50,7 +50,7 @@ class MailmanListDao extends DataAccessObject {
 	 */
 	function & searchByGroupListId($group_list_id) {
 		$group_list_id = $this->da->quoteSmart($group_list_id);
-		$sql = "SELECT * FROM mail_group_list 
+		$sql = "SELECT * FROM mail_group_list
 			WHERE group_list_id = $1";
 		return $this->retrieve($sql,array($group_list_id));
 	}
@@ -69,7 +69,7 @@ class MailmanListDao extends DataAccessObject {
 	 */
 	function & searchByGroupId($group_id) {
 		$group_id = $this->da->quoteSmart($group_id);
-		$sql = "SELECT * FROM mail_group_list 
+		$sql = "SELECT * FROM mail_group_list
 			WHERE group_id = $1 ORDER BY group_list_id";
 		return $this->retrieve($sql,array($group_id));
 	}
@@ -80,7 +80,7 @@ class MailmanListDao extends DataAccessObject {
 	function & searchListFromGroup($group_list_id,$group_id) {
 		$group_id = $this->da->quoteSmart($group_id);
 		$group_list_id = $this->da->quoteSmart($group_list_id);
-		$sql = "SELECT * FROM mail_group_list 
+		$sql = "SELECT * FROM mail_group_list
 			WHERE group_id = $1 AND group_list_id=$2";
 		return $this->retrieve($sql,array($group_id,$group_list_id));
 	}
@@ -133,7 +133,7 @@ class MailmanListDao extends DataAccessObject {
 		$sql="SELECT count(*) AS count FROM plugin_mailman WHERE address=$1 AND listname=$2;";
 		return $this->retrieve($sql,array($usermail,$listname));
 	}
-	
+
 	function & listsMonitoredByUser($usermail) {
 		$usermail = $this->da->quoteSmart($usermail);
 		$sql="SELECT groups.group_name,groups.group_id,mail_group_list.group_list_id,mail_group_list.list_name ".
@@ -141,7 +141,7 @@ class MailmanListDao extends DataAccessObject {
 		     "WHERE groups.group_id=mail_group_list.group_id AND groups.status ='A' ".
 		     "AND mail_group_list.list_name=plugin_mailman.listname ".
 		     "AND plugin_mailman.address=$1 ORDER BY group_name DESC";
-		
+
 		return $this->retrieve($sql,array($usermail));
 	}
 

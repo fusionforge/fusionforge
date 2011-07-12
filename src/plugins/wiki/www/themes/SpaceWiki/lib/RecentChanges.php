@@ -9,7 +9,7 @@ require_once('lib/plugin/PageHistory.php');
 
 function SpaceWiki_RC_revision_formatter (&$fmt, &$rev) {
     $class = 'rc-' . $fmt->importance($rev);
-      
+
     return HTML::li(array('class' => $class),
                     $fmt->diffLink($rev), ' ',
                     $fmt->pageLink($rev), ' ',
@@ -79,5 +79,5 @@ extends _PageHistory_HtmlFormatter
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

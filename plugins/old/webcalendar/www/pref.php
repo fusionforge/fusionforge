@@ -45,7 +45,7 @@ print_header($INC);
 	etranslate("Preferences");
 	if ( $is_nonuser_admin ) {
 		nonuser_load_variables ( $user, "nonuser" );
-		echo "<br /><strong>-- " . 
+		echo "<br /><strong>-- " .
 			translate("Admin mode") . ": ".$nonuserfullname." --</strong>\n";
 	}
 ?>&nbsp;<img src="help.gif" alt="<?php etranslate("Help")?>" class="help" onclick="window.open ( 'help_pref.php', 'cal_help', 'dependent,menubar,scrollbars,height=400,width=400,innerHeight=420,outerWidth=420');" /></h2>
@@ -53,8 +53,8 @@ print_header($INC);
 <a title="<?php etranslate("Admin") ?>" class="nav" href="adminhome.php">&laquo;&nbsp;<?php etranslate("Admin") ?></a><br /><br />
 
 <form action="pref_handler.php" method="post" onsubmit="return valid_form(this);" name="prefform">
-<?php 
-	if ($user) 
+<?php
+	if ($user)
 		echo "<input type=\"hidden\" name=\"user\" value=\"$user\" />\n";
 ?>
 
@@ -156,13 +156,13 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
 
 <tr><td class="tooltip" title="<?php etooltip("display-weekends-help");?>">
 	<?php etranslate("Display weekends in week view")?>:</td><td>
-	<label><input type="radio" name="pref_DISPLAY_WEEKENDS" value="Y" <?php if ( $prefarray["DISPLAY_WEEKENDS"] != "N" ) echo " checked=\"checked\"";?> /> <?php etranslate("Yes")?></label> 
+	<label><input type="radio" name="pref_DISPLAY_WEEKENDS" value="Y" <?php if ( $prefarray["DISPLAY_WEEKENDS"] != "N" ) echo " checked=\"checked\"";?> /> <?php etranslate("Yes")?></label>
 	<label><input type="radio" name="pref_DISPLAY_WEEKENDS" value="N" <?php if ( $prefarray["DISPLAY_WEEKENDS"] == "N" ) echo " checked=\"checked\"";?> /> <?php etranslate("No")?></label>
 </td></tr>
 
 <tr><td class="tooltip" title="<?php etooltip("display-desc-print-day-help");?>">
 	<?php etranslate("Display description in printer day view")?>:</td><td>
-	<label><input type="radio" name="pref_DISPLAY_DESC_PRINT_DAY" value="Y" <?php if ( $prefarray["DISPLAY_DESC_PRINT_DAY"] == "Y" ) echo " checked=\"checked\"";?> /> <?php etranslate("Yes")?></label> 
+	<label><input type="radio" name="pref_DISPLAY_DESC_PRINT_DAY" value="Y" <?php if ( $prefarray["DISPLAY_DESC_PRINT_DAY"] == "Y" ) echo " checked=\"checked\"";?> /> <?php etranslate("Yes")?></label>
 	<label><input type="radio" name="pref_DISPLAY_DESC_PRINT_DAY" value="N" <?php if ( $prefarray["DISPLAY_DESC_PRINT_DAY"] != "Y" ) echo " checked=\"checked\"";?> /> <?php etranslate("No")?></label>
 </td></tr>
 
@@ -252,7 +252,7 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
 
 <tr><td class="tooltip" title="<?php etooltip("time-format-help")?>">
 	<?php etranslate("Time format")?>:</td><td>
-	<label><input type="radio" name="pref_TIME_FORMAT" value="12" <?php if ( $prefarray["TIME_FORMAT"] == "12" ) echo " checked=\"checked\"";?> /> <?php etranslate("12 hour")?></label> 
+	<label><input type="radio" name="pref_TIME_FORMAT" value="12" <?php if ( $prefarray["TIME_FORMAT"] == "12" ) echo " checked=\"checked\"";?> /> <?php etranslate("12 hour")?></label>
 	<label><input type="radio" name="pref_TIME_FORMAT" value="24" <?php if ( $prefarray["TIME_FORMAT"] != "12" ) echo " checked=\"checked\"";?> /> <?php etranslate("24 hour")?></label>
 </td></tr>
 
@@ -294,7 +294,7 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
 </td></tr>
 <tr><td class="tooltip" title="<?php etooltip("work-hours-help")?>">
 	<?php etranslate("Work hours")?>:</td><td>
-	<label for="pref_starthr"><?php etranslate("From")?></label> 
+	<label for="pref_starthr"><?php etranslate("From")?></label>
 	<select name="pref_WORK_DAY_START_HOUR" id="pref_starthr">
 <?php
   if ( empty ( $prefarray["WORK_DAY_START_HOUR"] ) ) {
@@ -307,7 +307,7 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
       ">" . display_time ( $i * 10000, 1 ) . "</option>\n";
   }
 ?>
-	</select> 
+	</select>
 	<label for="pref_endhr"><?php etranslate("to")?></label>
 	<select name="pref_WORK_DAY_END_HOUR" id="pref_endhr">
 <?php
@@ -322,7 +322,7 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
 
 <tr><td class="tooltip" title="<?php etooltip("timed-evt-len-help");?>">
 	<?php etranslate("Specify timed event length by")?>:</td><td>
-	<label><input type="radio" name="pref_TIMED_EVT_LEN" value="D" <?php if ( $prefarray["TIMED_EVT_LEN"] != "E" ) echo " checked=\"checked\"";?> /> <?php etranslate("Duration")?></label> 
+	<label><input type="radio" name="pref_TIMED_EVT_LEN" value="D" <?php if ( $prefarray["TIMED_EVT_LEN"] != "E" ) echo " checked=\"checked\"";?> /> <?php etranslate("Duration")?></label>
 	<label><input type="radio" name="pref_TIMED_EVT_LEN" value="E" <?php if ( $prefarray["TIMED_EVT_LEN"] == "E" ) echo " checked=\"checked\"";?> /> <?php etranslate("End Time")?></label>
 </td></tr>
 
@@ -334,7 +334,7 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
 	echo "<option value=\"\"";
 	if ( empty ( $prefarray["CATEGORY_VIEW"] ) ) echo " selected=\"selected\"";
 	echo ">".translate("All")."</option>\n";
-	
+
 	if ( ! empty ( $categories ) ) {
 		foreach( $categories as $K => $V ){
 			echo "<option value=\"$K\"";

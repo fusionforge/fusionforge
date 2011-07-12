@@ -28,7 +28,7 @@
  *  HTTP POSTs to /plugins/cvstracker/newcommit.php.
  *
  */
- 
+
 require dirname(__FILE__).'/../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once ($gfcommon.'common/include/utils.php');
@@ -49,7 +49,7 @@ function usage( $argv ) {
 	global $cvs_binary_version;
 	if ($cvs_binary_version == "1.12" ) {
 		echo "Usage: $argv[0] <Repository> <Path> [<File> <VersionFrom> <VersionTo>]xN\n";
-	} 
+	}
 	if ($cvs_binary_version == "1.11" ) {
 		echo "Usage: $argv[0] <Repository> [<File>,<VersionFrom>,<VersionTo>xN]\n";
 	}
@@ -121,11 +121,11 @@ if( $cvs_binary_version == "1.11" ) {
 	if ($argc <= 3 ) {
 		usage ( $argv );
 	}
-	
+
 	$repository      = $argv[1];
 	$parameters = explode(' ', $argv[2]);
 	$path = $parameters[0];
-	
+
 	for($i = 1; $i < count($parameters); $i++) {
 		$filesInformation = explode(',', trim($parameters[$i], ','));
 
@@ -135,13 +135,13 @@ if( $cvs_binary_version == "1.11" ) {
 			'actual' => $filesInformation[2]
 		);
 	}
-	
-} 
+
+}
 if ( $cvs_binary_version == "1.12" ) {
 	if ($argc < 6 ) {
 		usage ( $argv );
 	}
-	
+
 	if ( (($argc - 3) % 3 ) != 0 ) {
 		echo "There should be 3 params + 3*N, instead of $argc\n";
 		usage ( $argv );
@@ -149,7 +149,7 @@ if ( $cvs_binary_version == "1.12" ) {
 	$NumFiles= (($argc-3) / 3 ); // 3 Fixed params + 3 * File
 	$repository      = $argv[1];
 	$path            = $argv[2];
-	
+
 	for ( $i=0; $i < $NumFiles; $i++ ) {
 		$files[] = array(
 			'name' => $path."/".$argv[3 + 3*$i],
@@ -198,7 +198,7 @@ foreach ( $files as $file )
 	$SubmitVars[$i]["CvsDate"]         = time();
 	$i++;
 }
-	
+
 $vars['data'] = serialize($SubmitVars);
 $snoopy->submit($SubmitUrl,$vars);
 

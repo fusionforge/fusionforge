@@ -27,7 +27,7 @@ require_once('common/tracker/ArtifactWorkflow.class.php');
 
 		$from = getIntFromRequest('from');
 		$next = getIntFromRequest('next');
-		
+
 //	FORM TO UPDATE ARTIFACT TYPES
 
 		/*
@@ -44,10 +44,10 @@ require_once('common/tracker/ArtifactWorkflow.class.php');
 
     	$keys=array_keys($efarr);
     	$field_id = $keys[0];
-    	
+
     	$atw = new ArtifactWorkflow($ath, $field_id);
 		$roles = $atw->getAllowedRoles($from, $next);
-		
+
 		$elearray = $ath->getExtraFieldElements($field_id);
 		foreach ($elearray as $e) {
 			$name[ $e['element_id'] ] = $e['element_name'];
@@ -61,8 +61,8 @@ require_once('common/tracker/ArtifactWorkflow.class.php');
 		<input type="hidden" name="workflow_roles" value="1" />
 		<input type="hidden" name="from" value="<?php echo $from ?>" />
 		<input type="hidden" name="next" value="<?php echo $next ?>" />
-    	
-<?php 
+
+<?php
 		$group_roles = $group->getRoles() ;
 		sortRoleList ($group_roles) ;
 		foreach ($group_roles as $role) {
@@ -71,7 +71,7 @@ require_once('common/tracker/ArtifactWorkflow.class.php');
 			$str .= ' '.$role->getDisplayableName($group);
 			echo $str."<br />\n";
 		}
-?>		
+?>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 		</form>

@@ -22,34 +22,34 @@
  * PluginInfo
  */
 class PluginInfo {
-    
+
     var $plugin;
     var $pluginDescriptor;
     var $propertyDescriptors;
-    
+
     function PluginInfo($plugin) {
         $this->plugin              = $plugin;
     }
-    
+
     function setPluginDescriptor($descriptor) {
     }
-    
+
     function getPluginDescriptor() {
     }
     function getPropertyDescriptors() {
     }
-    
+
     function _addPropertyDescriptor($descriptor) {
     }
     function _removePropertyDescriptor($descriptor) {
     }
-    
+
     function loadProperties() {
     }
-    
+
     function saveProperties() {
     }
-    
+
     function getPropertyDescriptorForName($name) {
     }
 }

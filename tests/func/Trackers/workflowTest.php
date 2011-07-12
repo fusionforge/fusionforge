@@ -51,7 +51,7 @@ class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 		// Testing extra-fields
 		$this->populateStandardTemplate('trackers');
 		$this->init();
-			
+
 		$this->clickAndWait("link=Tracker");
 		$this->clickAndWait("link=Bugs");
 		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
@@ -197,7 +197,7 @@ class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Workflow saved"));
-		
+
 		// Ensure that it is not possible to configure the workflow without initial state.
 		$this->click("//tr[@id='initval']//td[1]/input");
 		$this->click("//tr[@id='initval']//td[2]/input");

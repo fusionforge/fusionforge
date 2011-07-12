@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // here you can put all your configuration variables
 
@@ -7,7 +7,7 @@ $world = 'Earth';
 // Define the backend tracker type : by defaut : fusionforge
 defined('TRACKER_TYPE')
     || define('TRACKER_TYPE', (getenv('TRACKER_TYPE') ? getenv('TRACKER_TYPE') : 'fusionforge'));
-    
+
 // Define application environment
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
@@ -23,7 +23,7 @@ switch (TRACKER_TYPE) {
 		// this is supposed to be placed into mantis_top_level_dir/www/oslc-zend/
 		defined('MANTIS_DIR')
     		|| define('MANTIS_DIR', (getenv('MANTIS_DIR') ? getenv('MANTIS_DIR') : dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR));
-		
+
 		$t_mantis_dir = MANTIS_DIR;
 
 		// TODO : explain the following line :

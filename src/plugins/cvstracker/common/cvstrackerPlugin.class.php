@@ -57,20 +57,20 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getCommitEntries($DBResult,$group_id) {
 		$group = group_get_object($group_id);
-		
+
 		if (!$group->usesPlugin($this->name)) {
 			return;
 		}
-		
+
 		$Rows= db_numrows($DBResult);
-		
+
 		if ($Rows > 0) {
 			echo '<tr><td colspan="2">';
 			echo '<h4>'._('Links to related CVS commits').':</h4>';
 
 			$title_arr=$this->getTitleArr();
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
-		
+
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
@@ -173,9 +173,9 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function addCvsTrackerToFile($group, $path) {
 		global  $cvs_binary_version;
-		
+
 		$FOut = fopen($path, "a");
-		if($FOut) {		
+		if($FOut) {
 			fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
 			if ( $cvs_binary_version == "1.12" ) {
 				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
@@ -192,11 +192,11 @@ class cvstrackerPlugin extends Plugin {
 			fclose($FOut);
 		}
 	}
-	
+
 	/**
-	* Function to get cvstracker loginfo lines 
+	* Function to get cvstracker loginfo lines
 	*
-	* 
+	*
 	*	return array with the loginfo lines.
 	*/
 	function getCvsTrackerLogInfoLines() {
@@ -211,12 +211,12 @@ class cvstrackerPlugin extends Plugin {
 			$array[] = "ALL ( php -q -d include_path=".ini_get('include_path').
 			" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
  %r %p %{sVv} )\n";
-		}			
+		}
 		$array[]= "# END added by gforge-plugin-cvstracker\n";
-		
+
 		return $array;
 	}
-	
+
 	/**
 	* Retrieve a file into a temporary directory from a CVS server
 	*
@@ -228,7 +228,7 @@ class cvstrackerPlugin extends Plugin {
 	function getCvsFile($repos,$file) {
 		$actual_dir = getcwd();
 		$tempdirname = tempnam("/tmp","cvstracker");
-		if (!$tempdirname) 
+		if (!$tempdirname)
 			return false;
 		if (!unlink($tempdirname))
 			return false;
@@ -240,7 +240,7 @@ class cvstrackerPlugin extends Plugin {
 		if (!chdir($tempdirname))
 			return false;
 		system("cvs -d ".$repos." co ".$file);
-		
+
 		chdir($actual_dir);
 		return $tempdirname.$file;
 	}
@@ -290,7 +290,7 @@ class cvstrackerPlugin extends Plugin {
 							}
 				 	}
 				 	fclose($FIn);
-				}				
+				}
 				if($LineFound==FALSE) {
 					$newfile=getCvsFile($params["file_name"],
 						 "CVSROOT/loginfo");
@@ -301,7 +301,7 @@ class cvstrackerPlugin extends Plugin {
 			}
 		} elseif ($hookname == "get_cvs_loginfo_lines") {
 			$group = group_get_object($group_id);
-			$GLOBALS['loginfo_lines']=$this->getCvsTrackerLogInfoLines($group);		
+			$GLOBALS['loginfo_lines']=$this->getCvsTrackerLogInfoLines($group);
 		}
 	}
 }

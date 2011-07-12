@@ -135,7 +135,7 @@ if ( empty ( $participants[0] ) ) {
   // WebCalendar should respect it
   if ( ! empty ( $public_access_default_selected ) &&
     $public_access_default_selected == "Y" ) {
-    $participants[1] = "__public__";     
+    $participants[1] = "__public__";
   }
 }
 // If "all day event" was selected, then we set the event time
@@ -195,7 +195,7 @@ $ext_emails = array ();
 $matches = array ();
 $ext_count = 0;
 if ( $single_user == "N" &&
-  ! empty ( $allow_external_users ) && 
+  ! empty ( $allow_external_users ) &&
   $allow_external_users == "Y" &&
   ! empty ( $externalparticipants ) ) {
   $lines = explode ( "\n", $externalparticipants );
@@ -229,8 +229,8 @@ if ( $single_user == "N" &&
         // Test for duplicate Names
         if ( $i > 0 ) {
           for ( $k = $i ; $k > 0 ; $k-- ) {
-            if ( $ext_names[$i] == $ext_names[$k] ) { 
-              $ext_names[$i]  .= "[$k]";     
+            if ( $ext_names[$i] == $ext_names[$k] ) {
+              $ext_names[$i]  .= "[$k]";
             }
           }
         }
@@ -291,7 +291,7 @@ if ( $allow_conflicts != "Y" && empty ( $confirm_conflicts ) &&
 
   $dates = get_all_dates ( $date, $rpt_type, $endt, $dayst,
     $ex_days, $rpt_freq );
-    
+
   $conflicts = check_for_conflicts ( $dates, $duration, $hour, $minute,
     $participants, $login, empty ( $id ) ? 0 : $id );
 }
@@ -321,7 +321,7 @@ if ( empty ( $error ) ) {
     $res = dbi_query ( $sql );
     if ( $res ) {
       for ( $i = 0; $tmprow = dbi_fetch_row ( $res ); $i++ ) {
-        $old_status[$tmprow[0]] = $tmprow[1]; 
+        $old_status[$tmprow[0]] = $tmprow[1];
         $old_category[$tmprow[0]] = $tmprow[2];
       }
       dbi_free_result ( $res );
@@ -352,10 +352,10 @@ if ( empty ( $error ) ) {
     "cal_access, cal_type, cal_name, cal_description ) " .
     "VALUES ( $id, " .
     ( $old_id > 0 ? " $old_id, " : "" ) .
-    "'" . ( ! empty ( $old_create_by ) && 
-      ( ( $is_admin && ! $newevent ) || $is_assistant || 
+    "'" . ( ! empty ( $old_create_by ) &&
+      ( ( $is_admin && ! $newevent ) || $is_assistant ||
       $is_nonuser_admin ) ? $old_create_by : $login ) . "', ";
-    
+
   $date = mktime ( 3, 0, 0, $month, $day, $year );
   $sql .= date ( "Ymd", $date ) . ", ";
   if ( strlen ( $hour ) > 0 && $timetype != 'U' ) {
@@ -381,14 +381,14 @@ if ( empty ( $error ) ) {
     $description = $name;
   }
   $sql .= "'" . $description . "' )";
-  
+
   if ( empty ( $error ) ) {
     if ( ! dbi_query ( $sql ) ) {
       $error = translate("Database error") . ": " . dbi_error ();
     }
     else {
     //mettre le plugin
-    //add father 
+    //add father
     $params[0] = $user ;
     $params[1] = $id ;
     plugin_hook('add_cal_link_father_event',$params);
@@ -398,7 +398,7 @@ if ( empty ( $error ) ) {
   // log add/update
   activity_log ( $id, $login, ($is_assistant || $is_nonuser_admin ? $user : $login),
     $newevent ? $LOG_CREATE : $LOG_UPDATE, "" );
-  
+
   if ( $single_user == "Y" ) {
     $participants[0] = $single_user_login;
   }
@@ -448,11 +448,11 @@ if ( empty ( $error ) ) {
             $user_day = $day;
             $user_year = $year;
           }
-          if (($GLOBALS['LANGUAGE'] != $user_language) && 
+          if (($GLOBALS['LANGUAGE'] != $user_language) &&
             ! empty ( $user_language ) && ( $user_language != 'none' )){
             reset_language ( $user_language );
           }
-          //do_debug($user_language);    
+          //do_debug($user_language);
           $fmtdate = sprintf ( "%04d%02d%02d", $user_year, $user_month, $user_day );
           $msg = translate("Hello") . ", " . $tempfullname . ".\n\n" .
             translate("An appointment has been canceled for you by") .
@@ -487,10 +487,10 @@ if ( empty ( $error ) ) {
   }
 
   // now add participants and send out notifications
-   
+
   for ( $i = 0; $i < count ( $participants ); $i++ ) {
     $my_cat_id = "";
-    
+
     // Is the person adding the nonuser calendar admin
     $is_nonuser_admin = user_is_nonuser_admin ( $login, $participants[$i] );
 
@@ -538,10 +538,10 @@ if ( empty ( $error ) ) {
         $my_cat_id = $cat_id;
       }
     } else {  // New Event
-    
+
       $send_user_mail = true;
-      $status = ( $participants[$i] != $login && 
-        boss_must_approve_event ( $login, $participants[$i] ) && 
+      $status = ( $participants[$i] != $login &&
+        boss_must_approve_event ( $login, $participants[$i] ) &&
         $require_approvals == "Y" && ! $is_nonuser_admin ) ?
         "W" : "A";
       // If admin, no need to approve Public Access Events
@@ -562,7 +562,7 @@ if ( empty ( $error ) ) {
         }
       }
     }
-    
+
     // Some users report that they get an error on duplicate keys
     // on the following add... As a safety measure, delete any
     // existing entry with the id.  Ignore the result.
@@ -588,13 +588,13 @@ if ( empty ( $error ) ) {
         $user_TZ = get_pref_setting ( $participants[$i], "TZ_OFFSET" );
         $user_language = get_pref_setting ( $participants[$i], "LANGUAGE" );
         user_load_variables ( $participants[$i], "temp" );
-        
-        
-        if ( $participants[$i] != $login && 
-          boss_must_be_notified ( $login, $participants[$i] ) && 
+
+
+        if ( $participants[$i] != $login &&
+          boss_must_be_notified ( $login, $participants[$i] ) &&
           strlen ( $tempemail ) &&
           $do_send == "Y" && $send_user_mail && $send_email != "N" ) {
-		
+
           // Want date/time in user's timezone
           $user_hour = $hour + $user_TZ;
           if ( $user_hour < 0 ) {
@@ -618,7 +618,7 @@ if ( empty ( $error ) ) {
             $user_day = $day;
             $user_year = $year;
           }
-          if (($GLOBALS['LANGUAGE'] != $user_language) && 
+          if (($GLOBALS['LANGUAGE'] != $user_language) &&
             ! empty ( $user_language ) && ( $user_language != 'none' )) {
              reset_language ( $user_language );
           }
@@ -653,13 +653,13 @@ if ( empty ( $error ) ) {
           } else {
             $extra_hdrs = "X-Mailer: " . translate($application_name);
           }
-          	
-        
+
+
          mail ( $tempemail,
             translate($application_name) . " " . translate("Notification") . ": " . $name,
             utf8_decode(html_to_8bits ($msg)), $extra_hdrs );
           activity_log ( $id, $login, $participants[$i], $LOG_NOTIFICATION, "" );
-          
+
         }
       }
     }
@@ -719,7 +719,7 @@ if ( empty ( $error ) ) {
             translate($application_name) . " " .
             translate("Notification") . ": " . $name,
             utf8_decode(html_to_8bits ($msg)), $extra_hdrs );
-        
+
         }
       }
     }
@@ -807,7 +807,7 @@ if ( empty ( $error ) ) {
       } else {
         $days = "nnnnnnn";
       }
-  
+
       $sql = "INSERT INTO webcal_entry_repeats ( cal_id, " .
         "cal_type, cal_end, cal_days, cal_frequency ) VALUES " .
         "( $id, '$rpt_type', $end, '$days', $freq )";
@@ -827,7 +827,7 @@ if ( empty ( $error ) ) {
 }
 
 print_header();
-if ( strlen ( $conflicts ) ) { 
+if ( strlen ( $conflicts ) ) {
 ?>
 <h2><?php etranslate("Scheduling Conflict")?></h2>
 
@@ -878,7 +878,7 @@ if ( strlen ( $conflicts ) ) {
       "value=\"" . translate("Save") . "\" /></td>\n";
   }
 ?>
-   <td><input type="button" value="<?php etranslate("Cancel")?>" 
+   <td><input type="button" value="<?php etranslate("Cancel")?>"
 onclick="history.back()" /><td>
  </tr>
 </table>

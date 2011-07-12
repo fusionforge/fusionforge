@@ -21,12 +21,12 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
- 
+
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 require_once 'WikiSearchQuery.class.php';
 
 class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
-	
+
 	var $groupId;
 	/**
 	 * Constructor
@@ -40,16 +40,16 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function WikiHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
-		
+
 		$searchQuery = new WikiSearchQuery($words, $offset, $isExact, $groupId);
-		
+
 		//init the searchrendererr
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_WIKI, $words, $isExact, 
+		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_WIKI, $words, $isExact,
 			$searchQuery, $groupId, 'wiki');
-		
+
 		$this->tableHeaders = array(_('Page'),_('Author'), _('Date'));
 	}
-	
+
 	/**
 	 * getRows - get the html output for result rows
 	 *
@@ -59,10 +59,10 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 		$dateFormat = _('Y-m-d H:i');
-		
+
 		$group = group_get_object($this->groupId);
 		$group_name = $group->getUnixName();
-		
+
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {
 			$data = unserialize(db_result($result, $i, 'versiondata'));

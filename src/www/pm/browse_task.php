@@ -187,7 +187,7 @@ if ($rows < 1) {
 								'10', '25', '50', '100', '1000'), 'nres', $paging, 1));
 	} else {
 		echo "</p>\n";
-	}	
+	}
 
 	//create a new $set string to be used for next/prev button
 	if ($set=='custom') {
@@ -239,7 +239,7 @@ if ($rows < 1) {
 
 	for ($i=0; $i < $rows; $i++) {
 		$url = getStringFromServer('PHP_SELF')."?func=detailtask&amp;project_task_id=".$pt_arr[$i]->getID()."&amp;group_id=".$group_id."&amp;group_project_id=".$group_project_id;
-		
+
 		echo '
 			<tr class="priority'.$pt_arr[$i]->getPriority().'"><td style="width:16px; background-color:#FFFFFF">' .
 			util_make_link("/export/rssAboTask.php?tid=" .
@@ -252,9 +252,9 @@ if ($rows < 1) {
 			$pt_arr[$i]->getID() ."</td>\n";
 		if ($display_col['summary'])
 			echo '<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() ."</a></td>\n";
-		if ($display_col['start_date']) 
+		if ($display_col['start_date'])
 			echo '<td>'.date(_('Y-m-d H:i'), $pt_arr[$i]->getStartDate() )."</td>\n";
-		if ($display_col['end_date']) 
+		if ($display_col['end_date'])
 			echo '<td>';
 			if ($now>$pt_arr[$i]->getEndDate() && $pt_arr[$i]->getStatusId() != 2 ) {
 				echo '<strong>* ';
@@ -265,9 +265,9 @@ if ($rows < 1) {
 			}
 			echo date(_('Y-m-d H:i'), $pt_arr[$i]->getEndDate()) .
 			    $x . "</td>\n";
-		if ($display_col['percent_complete']) 
+		if ($display_col['percent_complete'])
 			echo '<td>'. $pt_arr[$i]->getPercentComplete() ."%</td>\n";
-		if ($display_col['category']) 
+		if ($display_col['category'])
 			echo '<td>'. $pt_arr[$i]->getCategoryName() ."</td>\n";
 		if ($display_col['assigned_to'])
 			echo '<td>'. $pg->renderAssigneeList($pt_arr[$i]->getAssignedTo()) ."</td>\n";
@@ -316,7 +316,7 @@ if ($rows < 1) {
 
 		$tech_id_arr = array () ;
 		$tech_name_arr = array () ;
-		
+
 		foreach ($techs as $tech) {
 			$tech_id_arr[] = $tech->getID() ;
 			$tech_name_arr[] = $tech->getRealName() ;

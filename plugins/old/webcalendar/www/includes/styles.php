@@ -7,7 +7,7 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
     die ( "You can't access this file directly!" );
 }
 ?>
-<?php /* 
+<?php /*
 
                    HOW TO READ THIS DOCUMENT
 
@@ -24,7 +24,7 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
   In the example above, there is only one declaraion ("color: red;")
   For that declaration, the PROPERTY is "color" and the VALUE is "red"
 
-  NOTE: Each property must be followed by a colon (:), 
+  NOTE: Each property must be followed by a colon (:),
     and each value must be followed by a semi-colon (;)
 
   Each selector can contain multiple declarations
@@ -75,11 +75,11 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
 
   The following sections appear below:
     Section A - basic, required elements that affect WebCalendar as a whole
-    Section B - more specific to select areas of WebCalendar, yet still 
+    Section B - more specific to select areas of WebCalendar, yet still
       affects many areas of WebCalendar
-    Section C - classes specific to certain pages, but that affect either 
+    Section C - classes specific to certain pages, but that affect either
       the page as a whole, or large areas within that page
-    Section D - the "nitty gritty" of classes. Used specifically for 
+    Section D - the "nitty gritty" of classes. Used specifically for
       fine-tuning elements within a specific page
 */
 
@@ -91,8 +91,8 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
   background-color: <?php echo $GLOBALS['BGCOLOR']; ?>;
 }
 <?php //links that don't have a specific class
-//NOTE: these must appear ABOVE the 'printer' & all other 
-//link-related classes for those classes to work 
+//NOTE: these must appear ABOVE the 'printer' & all other
+//link-related classes for those classes to work
 ?>a {
   color: <?php echo $GLOBALS['TEXTCOLOR']; ?>;
   text-decoration: none;
@@ -160,7 +160,7 @@ label {
 .sample {
   border-style: groove;
 }
-<?php //week number in monthview & such 
+<?php //week number in monthview & such
 ?>.weeknumber,
 .weeknumber a {
   font-size: 10px;
@@ -173,7 +173,7 @@ label {
   width: 15px;
   height: 15px;
 }
-<?php //display:none; is unhidden by includes/print_styles.css for printer-friendly pages 
+<?php //display:none; is unhidden by includes/print_styles.css for printer-friendly pages
 ?>#cat {
   display: none;
   font-size: 18px;
@@ -222,7 +222,7 @@ label {
   margin-top: 10px;
   font-size: 10px;
 }
-<?php //printer-friendly links 
+<?php //printer-friendly links
 ?>.printer {
   font-size: 14px;
   color: <?php echo $GLOBALS['TEXTCOLOR']; ?>;
@@ -362,7 +362,7 @@ a.matrix img {
 .matrixd {
   border-left: 1px solid <?php echo $GLOBALS['TABLEBG']; ?>;
   border-right: 1px solid <?php echo $GLOBALS['TABLEBG']; ?>;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: auto;
 }
 .matrixlegend {
@@ -370,7 +370,7 @@ a.matrix img {
   padding: 5px;
   text-align: center;
   background: #ffffff;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: auto;
   border: 1px solid #000000;
 }
@@ -446,7 +446,7 @@ textarea {
   color: <?php echo $GLOBALS['H2COLOR']; ?>;
   text-align: center;
 }
-<?php //left column in help sections 
+<?php //left column in help sections
 ?>.help {
   vertical-align: top;
   font-weight: bold;
@@ -456,7 +456,7 @@ textarea {
   border-width: 0px;
   cursor: help;
 }
-<?php //standard table appearing mainly in prefs.php & admin.php 
+<?php //standard table appearing mainly in prefs.php & admin.php
 ?>.standard {
   border: 1px solid <?php echo $GLOBALS['TABLEBG']; ?>;
   background-color: <?php echo $GLOBALS['CELLBG']; ?>;
@@ -484,7 +484,7 @@ textarea {
   color: #0000FF;
 }
 <?php //formats the day name (i.e. Sun, Mon, etc) in minicals
-?>.minical th, 
+?>.minical th,
 .minical td.empty {
   color: <?php echo $GLOBALS['TEXTCOLOR']; ?>;
   text-align: center;
@@ -631,7 +631,7 @@ th {
   font-size: 13px;
   color: <?php echo $GLOBALS['THFG']; ?>;
   background-color: <?php echo $GLOBALS['THBG']; ?>;
-}  
+}
 #viewv .main th,
 #viewl .main th,
 #month .main th {

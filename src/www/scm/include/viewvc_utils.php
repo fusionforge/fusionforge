@@ -22,7 +22,7 @@ function viewcvs_is_html() {
 	$request_uri = getStringFromServer('REQUEST_URI');
 	$query_string = getStringFromServer('QUERY_STRING');
 
-	return (strpos($request_uri,"*checkout*") === false && 
+	return (strpos($request_uri,"*checkout*") === false &&
 		strpos($query_string,"view=graphimg") === false &&
 		strpos($query_string,"view=patch") === false &&
 		strpos($query_string,"view=tar") === false &&
@@ -51,9 +51,9 @@ function make_arg_cmd_safe($arg) {
 function viewcvs_execute($repos_name, $repos_type) {
 	$request_uri = getStringFromServer('REQUEST_URI');
 	$query_string = getStringFromServer('QUERY_STRING');
-	
+
 	$viewcvs_path = forge_get_config('url_root').'/scm/viewvc';
-	
+
 	// this is very important ...
 	$path = getStringFromServer('PATH_INFO');
 	if ($path == '') {
@@ -68,7 +68,7 @@ function viewcvs_execute($repos_name, $repos_type) {
 	} else {
 		$path = '/';
 	}
-	
+
 	if ($repos_type == "cvs") {
 		$repos_root = forge_get_config('repos_path', 'scmcvs').'/'.$repos_name;
 	} else if ($repos_type == "svn") {
@@ -76,12 +76,12 @@ function viewcvs_execute($repos_name, $repos_type) {
 	} else {
 		die("Invalid repository type");
 	}
-	
+
 	if (!is_dir($repos_root)) {
 		$content = _('The repository for this project isn\'t created yet. It will be created in the next few minutes.');
 		return $content;
 	}
-	
+
 	$query_string = str_replace('\\&', '&', make_arg_cmd_safe($query_string));
 	$query_string = str_replace('\\*', '*', $query_string);
 

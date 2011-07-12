@@ -48,7 +48,7 @@ extends WikiDB_backend_PearDB_pgsql
      */
     function _lock_tables($write_lock=true) {
         $dbh = &$this->_dbh;
-      
+
         // Not sure if we really need to lock tables here, the Oracle row
         // locking mechanism should be more than enough
         // For the time being, lets stay on the safe side and lock...
@@ -89,7 +89,7 @@ extends WikiDB_backend_PearDB_pgsql
                           $entry->user,
                           $entry->request_method,
                           $entry->request,
-                          $entry->request_uri,  
+                          $entry->request_uri,
                           $entry->request_args,
                           $entry->_ncsa_time($entry->time),
                           $entry->status,
@@ -125,5 +125,5 @@ extends WikiDB_backend_PearDB_search
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

@@ -4,35 +4,35 @@
 
 
 /*
-  This file is part of, or distributed with, libXMLRPC - a C library for 
+  This file is part of, or distributed with, libXMLRPC - a C library for
   xml-encoded function calls.
 
   Author: Dan Libby (dan@libby.com)
   Epinions.com may be contacted at feedback@epinions-inc.com
 */
 
-/*  
-  Copyright 2001 Epinions, Inc. 
+/*
+  Copyright 2001 Epinions, Inc.
 
-  Subject to the following 3 conditions, Epinions, Inc.  permits you, free 
-  of charge, to (a) use, copy, distribute, modify, perform and display this 
-  software and associated documentation files (the "Software"), and (b) 
-  permit others to whom the Software is furnished to do so as well.  
+  Subject to the following 3 conditions, Epinions, Inc.  permits you, free
+  of charge, to (a) use, copy, distribute, modify, perform and display this
+  software and associated documentation files (the "Software"), and (b)
+  permit others to whom the Software is furnished to do so as well.
 
-  1) The above copyright notice and this permission notice shall be included 
-  without modification in all copies or substantial portions of the 
-  Software.  
+  1) The above copyright notice and this permission notice shall be included
+  without modification in all copies or substantial portions of the
+  Software.
 
-  2) THE SOFTWARE IS PROVIDED "AS IS", WITHOUT ANY WARRANTY OR CONDITION OF 
-  ANY KIND, EXPRESS, IMPLIED OR STATUTORY, INCLUDING WITHOUT LIMITATION ANY 
-  IMPLIED WARRANTIES OF ACCURACY, MERCHANTABILITY, FITNESS FOR A PARTICULAR 
-  PURPOSE OR NONINFRINGEMENT.  
+  2) THE SOFTWARE IS PROVIDED "AS IS", WITHOUT ANY WARRANTY OR CONDITION OF
+  ANY KIND, EXPRESS, IMPLIED OR STATUTORY, INCLUDING WITHOUT LIMITATION ANY
+  IMPLIED WARRANTIES OF ACCURACY, MERCHANTABILITY, FITNESS FOR A PARTICULAR
+  PURPOSE OR NONINFRINGEMENT.
 
-  3) IN NO EVENT SHALL EPINIONS, INC. BE LIABLE FOR ANY DIRECT, INDIRECT, 
-  SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS ARISING OUT 
-  OF OR IN CONNECTION WITH THE SOFTWARE (HOWEVER ARISING, INCLUDING 
-  NEGLIGENCE), EVEN IF EPINIONS, INC.  IS AWARE OF THE POSSIBILITY OF SUCH 
-  DAMAGES.    
+  3) IN NO EVENT SHALL EPINIONS, INC. BE LIABLE FOR ANY DIRECT, INDIRECT,
+  SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS ARISING OUT
+  OF OR IN CONNECTION WITH THE SOFTWARE (HOWEVER ARISING, INCLUDING
+  NEGLIGENCE), EVEN IF EPINIONS, INC.  IS AWARE OF THE POSSIBILITY OF SUCH
+  DAMAGES.
 
 */
 
@@ -101,7 +101,7 @@ $test_cases = array(
       xml => ""),
 array(
    title => "arrayOfStructsTest",
-   desc => 
+   desc =>
    "This handler takes a single parameter, an array of structs, each of which contains at least three elements
     named moe, larry and curly, all <i4>s. Your handler must add all the struct elements named curly and
     return the result.",
@@ -302,10 +302,10 @@ array(
                >, &, ' and \".
 
                Your handler must return a struct that contains five fields, all numbers: ctLeftAngleBrackets,
-               ctRightAngleBrackets, ctAmpersands, ctApostrophes, ctQuotes. 
+               ctRightAngleBrackets, ctAmpersands, ctApostrophes, ctQuotes.
 
                To validate, the numbers must be correct",
-      xml => 
+      xml =>
 "<?xml version='1.0'?>
 <methodCall>
 <methodName>validator1.countTheEntities</methodName>
@@ -614,7 +614,7 @@ array(
          array(
             title => "manyTypesTest",
             desc => "This handler takes six parameters, and returns an array containing all the parameters.",
-            xml => 
+            xml =>
 "<?xml version='1.0'?>
 <methodCall>
         <methodName>validator1.manyTypesTest</methodName>
@@ -642,7 +642,7 @@ array(
    array(
       title => "moderateSizeArrayCheck",
       desc => "This handler takes a single parameter, which is an array containing between 100 and 200 elements. Each of the items is a string, your handler must return a string containing the concatenated text of the first and last elements.",
-      xml => 
+      xml =>
 "<?xml version='1.0'?>
 <methodCall>
         <methodName>validator1.moderateSizeArrayCheck</methodName>
@@ -773,7 +773,7 @@ array(
                   <p>
                   Ken MacLeod: \"This description isn't clear, I expected '2000.April.1' when in fact it's '2000.04.01'. Adding
                   a note saying that month and day are two-digits with leading 0s, and January is 01 would help.\" Done.",
-         xml => 
+         xml =>
 "<?xml version='1.0'?>
 <methodCall>
 <methodName>validator1.nestedStructTest</methodName>

@@ -25,23 +25,23 @@ require_once('PluginHudsonJobDao.class.php');
 require_once('HudsonJob.class.php');
 
 class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
-    
+
     var $plugin;
     var $group_id;
-    
+
     var $_not_monitored_jobs;
     var $_use_global_status = true;
     var $_all_status;
     var $_global_status;
     var $_global_status_icon;
-    
+
     function hudson_Widget_ProjectJobsOverview($plugin) {
         $this->Widget('plugin_hudson_project_jobsoverview');
         $this->plugin = $plugin;
-        
+
         $request =& HTTPRequest::instance();
         $this->group_id = $request->get('group_id');
-        
+
         if ($this->_use_global_status == "true") {
             $this->_all_status = array(
                 'grey' => 0,
@@ -51,13 +51,13 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
             );
             $this->computeGlobalStatus();
         }
-        
+
     }
-    
+
     function computeGlobalStatus() {
         $jobs = $this->getJobsByGroup($this->group_id);
         foreach ($jobs as $job) {
-            $this->_all_status[(string)$job->getColorNoAnime()] = $this->_all_status[(string)$job->getColorNoAnime()] + 1;    
+            $this->_all_status[(string)$job->getColorNoAnime()] = $this->_all_status[(string)$job->getColorNoAnime()] + 1;
         }
         if ($this->_all_status['grey'] > 0 || $this->_all_status['red'] > 0) {
             $this->_global_status = _("One or more failure or pending job");
@@ -70,27 +70,27 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
             $this->_global_status_icon = $this->plugin->getThemePath() . "/images/ic/" . "status_blue.png";
         }
     }
-    
+
     function getTitle() {
         $title = '';
         if ($this->_use_global_status == "true") {
             $title = '<img src="'.$this->_global_status_icon.'" title="'.$this->_global_status.'" alt="'.$this->_global_status.'" /> ';
         }
-        $title .= _("Hudson Jobs"); 
+        $title .= _("Hudson Jobs");
         return  $title;
     }
-    
+
     function getDescription() {
         return _("Shows an overview of all the jobs associated with this project. You can always choose the ones you want to display in the widget (preferences link).");
     }
-    
+
     function getContent() {
         $jobs = $this->getJobsByGroup($this->group_id);
         if (sizeof($jobs) > 0) {
-            $html = '';            
+            $html = '';
             $html .= '<table style="width:100%">';
             $cpt = 1;
-            
+
             foreach ($jobs as $job_id => $job) {
 		if ($cpt % 2 == 0) {
                         $class="boxitemalt bgcolor-white";
@@ -99,7 +99,7 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
                 }
 
                 try {
-                    
+
                     $html .= '<tr class="'. $class .'">';
                     $html .= ' <td>';
                     $html .= ' <img src="'.$job->getStatusIcon().'" title="'.$job->getStatus().'" >';
@@ -108,9 +108,9 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
                     $html .= '  <a href="/plugins/hudson/?action=view_job&group_id='.$this->group_id.'&job_id='.$job_id.'">'.$job->getName().'</a><br />';
                     $html .= ' </td>';
                     $html .= '</tr>';
-                        
+
                     $cpt++;
-                    
+
                 } catch (Exception $e) {
                     // Do not display wrong jobs
                 }

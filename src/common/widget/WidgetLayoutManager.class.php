@@ -25,7 +25,7 @@ require_once $gfcommon.'include/preplugins.php';
 
 /**
  * WidgetLayoutManager
- * 
+ *
  * Manage layouts for users, groups and homepage
  */
 class WidgetLayoutManager {
@@ -199,7 +199,7 @@ class WidgetLayoutManager {
 						$w->setOwner($template_id, self::OWNER_TYPE_GROUP);
 						if ($w->canBeUsedByProject($project)) {
 							$content_id = $w->cloneContent($w->content_id, $group_id, self::OWNER_TYPE_GROUP);
-							$sql = "INSERT INTO layouts_contents(owner_id, owner_type, content_id, layout_id, column_id, name, rank, is_minimized, is_removed, display_preferences) 
+							$sql = "INSERT INTO layouts_contents(owner_id, owner_type, content_id, layout_id, column_id, name, rank, is_minimized, is_removed, display_preferences)
 								VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);
 							";
 							db_query_params($sql, array($group_id , self::OWNER_TYPE_GROUP , $content_id ,  $data['layout_id'] ,  $data['column_id'] ,  $data['name'] ,  $data['rank'] ,  $data['is_minimized'] ,  $data['is_removed'] ,  $data['display_preferences'] ));
@@ -221,11 +221,11 @@ class WidgetLayoutManager {
 	 */
 	function displayAvailableWidgets($owner_id, $owner_type, $layout_id) {
 		$used_widgets = array();
-		$sql = "SELECT * 
-			FROM layouts_contents 
+		$sql = "SELECT *
+			FROM layouts_contents
 			WHERE owner_type = $1
-			AND owner_id = $2 
-			AND layout_id = $3 
+			AND owner_id = $2
+			AND layout_id = $3
 			AND content_id = 0 AND column_id <> 0";
 		$res = db_query_params($sql,array($owner_type,$owner_id,$layout_id));
 		while($data = db_fetch_array($res)) {
@@ -330,10 +330,10 @@ class WidgetLayoutManager {
 	}
 
 	function updateLayout($owner_id, $owner_type, $layout, $custom_layout) {
-		$sql = "SELECT l.* 
-			FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id) 
+		$sql = "SELECT l.*
+			FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
 			WHERE o.owner_type = $1
-			AND o.owner_id = $2 
+			AND o.owner_id = $2
 			AND o.is_default = 1
 			";
 		$req = db_query_params($sql,array($owner_type,$owner_id));
@@ -359,19 +359,19 @@ class WidgetLayoutManager {
 					}
 					//If the structure contains at least one column, create a new layout
 					if (count($rows)) {
-						$sql = "INSERT INTO layouts(name, description, scope) 
+						$sql = "INSERT INTO layouts(name, description, scope)
 							VALUES ('custom', '', 'P')";
 						if ($res = db_query_params($sql,array())) {
 							if ($new_layout_id = db_insertid($res,'layouts', 'id')) {
 								//Create rows & columns
 								$rank = 0;
 								foreach($rows as $cols) {
-									$sql = "INSERT INTO layouts_rows(layout_id, rank) 
+									$sql = "INSERT INTO layouts_rows(layout_id, rank)
 										VALUES ($1,$2)";
 									if ($res = db_query_params($sql,array($new_layout_id,$rank++))) {
 										if ($row_id = db_insertid($res,'layouts_rows', 'id')) {
 												foreach($cols as $width) {
-													$sql = "INSERT INTO layouts_rows_columns(layout_row_id, width) 
+													$sql = "INSERT INTO layouts_rows_columns(layout_row_id, width)
 														VALUES ($1,$2)";
 													db_query_params($sql,array($row_id,$width));
 												}
@@ -399,19 +399,19 @@ class WidgetLayoutManager {
 						if (list(,$new_col) = each($new['columns'])) {
 							$last_new_col_id = $new_col['id'];
 						}
-						$sql = "UPDATE layouts_contents 
+						$sql = "UPDATE layouts_contents
 							SET layout_id  = $1
-							, column_id  =$2 
+							, column_id  =$2
 							WHERE owner_type =$3
 							AND owner_id   =$4
 							AND layout_id  =$5
 							AND column_id  =$6;";
 						db_query_params($sql,array($new_layout_id,$last_new_col_id,$owner_type,$owner_id,$old_layout_id,$old_col['id']));
 					}
-					$sql = "UPDATE owner_layouts 
+					$sql = "UPDATE owner_layouts
 						SET layout_id  = $1
-						WHERE owner_type = $2 
-						AND owner_id   = $3 
+						WHERE owner_type = $2
+						AND owner_id   = $3
 						AND layout_id  = $4";
 					db_query_params($sql,array($new_layout_id,$owner_type,$owner_id,$old_layout_id));
 
@@ -419,14 +419,14 @@ class WidgetLayoutManager {
 					if ($old_scope != 'S') {
 						$structure = $this->_retrieveStructureOfLayout($old_layout_id);
 						foreach($structure['rows'] as $row) {
-							$sql = "DELETE FROM layouts_rows 
+							$sql = "DELETE FROM layouts_rows
 								WHERE id  = $1";
 							db_query_params($sql,array($row['id']));
-							$sql = "DELETE FROM layouts_rows_columns 
+							$sql = "DELETE FROM layouts_rows_columns
 								WHERE layout_row_id  = $1";
 							db_query_params($sql,array($row['id']));
 						}
-						$sql = "DELETE FROM layouts 
+						$sql = "DELETE FROM layouts
 							WHERE id  = $1";
 						db_query_params($sql,array($old_layout_id));
 					}
@@ -455,9 +455,9 @@ class WidgetLayoutManager {
 	/**
 	 * _displayWidgetsSelectionForm
 	 *
-	 * @param  title  
-	 * @param  widgets  
-	 * @param  used_widgets  
+	 * @param  title
+	 * @param  widgets
+	 * @param  used_widgets
 	 */
 	function _displayWidgetsSelectionForm($title, $widgets, $used_widgets) {
 		$hp = Codendi_HTMLPurifier::instance();
@@ -568,7 +568,7 @@ class WidgetLayoutManager {
 					ON (c.layout_row_id = r.id)
 					WHERE r.layout_id = $1) AS col
 			ON (u.column_id = col.id)
-			WHERE u.owner_type = $2 
+			WHERE u.owner_type = $2
 			AND u.owner_id = $3
 			AND u.layout_id = $4
 			AND u.column_id <> 0
@@ -578,7 +578,7 @@ class WidgetLayoutManager {
 		$column_id = db_result($res, 0, 'id');
 		if (!$column_id) {
 			$sql = "SELECT r.rank AS rank, c.id as id
-				FROM layouts_rows AS r 
+				FROM layouts_rows AS r
 				INNER JOIN layouts_rows_columns AS c
 				ON (c.layout_row_id = r.id)
 				WHERE r.layout_id = $1
@@ -596,7 +596,7 @@ class WidgetLayoutManager {
 		}
 
 		//See if it already exists but not used
-		$sql = "SELECT column_id FROM layouts_contents 
+		$sql = "SELECT column_id FROM layouts_contents
 			WHERE owner_type =$1
 			AND owner_id = $2
 			AND layout_id = $3
@@ -621,11 +621,11 @@ class WidgetLayoutManager {
 			echo db_error();
 		} else {
 			//Insert
-			$sql = "INSERT INTO layouts_contents(owner_type, owner_id, layout_id, column_id, name, content_id, rank) 
-				SELECT R1.owner_type, R1.owner_id, R1.layout_id, R1.column_id, $1, $2, coalesce(R2.rank, 1) - 1 
-				FROM ( SELECT $3::character varying(1) AS owner_type, $4::integer AS owner_id, $5::integer AS layout_id, $6::integer AS column_id ) AS R1 
-				LEFT JOIN layouts_contents AS R2 USING ( owner_type, owner_id, layout_id, column_id ) 
-				ORDER BY rank ASC 
+			$sql = "INSERT INTO layouts_contents(owner_type, owner_id, layout_id, column_id, name, content_id, rank)
+				SELECT R1.owner_type, R1.owner_id, R1.layout_id, R1.column_id, $1, $2, coalesce(R2.rank, 1) - 1
+				FROM ( SELECT $3::character varying(1) AS owner_type, $4::integer AS owner_id, $5::integer AS layout_id, $6::integer AS column_id ) AS R1
+				LEFT JOIN layouts_contents AS R2 USING ( owner_type, owner_id, layout_id, column_id )
+				ORDER BY rank ASC
 				LIMIT 1";
 			$myfile=fopen('/tmp/debug','a');
 			$params = array($name,$content_id,$owner_type,$owner_id,$layout_id,$column_id);
@@ -776,7 +776,7 @@ class WidgetLayoutManager {
 									$_and .= ')';
 									$sql = "UPDATE layouts_contents
 									SET column_id = 0
-									WHERE owner_type = $1 
+									WHERE owner_type = $1
 									AND owner_id = $2
 									AND column_id = $3".
 									$_and;
@@ -799,8 +799,8 @@ class WidgetLayoutManager {
 												$_and .= ')';
 												//old and new column must be part of the same layout
 												$sql = 'UPDATE layouts_contents
-												SET column_id = $1 
-												WHERE owner_type = $2 
+												SET column_id = $1
+												WHERE owner_type = $2
 												AND owner_id = $3' .
 												$_and ."
 												AND layout_id = $4";

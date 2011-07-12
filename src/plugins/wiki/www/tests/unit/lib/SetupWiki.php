@@ -20,24 +20,24 @@ class SetupWiki extends phpwiki_TestCase {
         $request->setArg('source', false);
         $this->assertTrue($dbi->isWikiPage($pagename));
     }
-    
+
     /* PCRE memory problem (crash) with such big pages and anchored blocks */
     /*
     // Broken since r.7418
     function testOldMarkupTestPage() {
     	$this->_loadPage('Help/OldMarkupTestPage');
     }*/
-    
+
     /* ADODB set_links _id_cache error: IncludePagePlugin => HomePage */
     function testIncludePagePlugin() {
     	$this->_loadPage('Help/IncludePagePlugin');
     }
-    
+
     function testSetupWiki() {
         global $request;
 
         purge_testbox();
-        
+
         $dbi = $request->getDbh();
         $dbi->purgePage('HomePage'); // possibly in cache
         $this->assertFalse($dbi->isWikiPage('HomePage'));
@@ -47,7 +47,7 @@ class SetupWiki extends phpwiki_TestCase {
         LoadAny($request, $request->getArg('source'));
         $request->setArg('source', false);
         $request->setArg('overwrite', false);
-        
+
         $this->assertTrue($dbi->isWikiPage('HomePage'));
     }
 }

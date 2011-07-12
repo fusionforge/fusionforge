@@ -106,7 +106,7 @@ function user_load_variables ( $login, $prefix ) {
     nonuser_load_variables ( $login, $prefix );
     return true;
   }
-  
+
   if ( $login == "__public__" ) {
     $GLOBALS[$prefix . "login"] = $login;
     $GLOBALS[$prefix . "firstname"] = "";

@@ -20,7 +20,7 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-        
+
 require (dirname(__FILE__).'/../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
@@ -31,11 +31,11 @@ require_once $gfcommon.'include/PluginManager.class.php' ;
 
 // SCM-specific plugins subsystem
 require_once $gfcommon.'include/SCMPlugin.class.php' ;
-			 
+
 setup_plugin_manager () ;
 
 $res = db_query_params ('SELECT group_id FROM groups WHERE status=$1 AND use_scm=1 ORDER BY group_id DESC',
-			array ('A')); 
+			array ('A'));
 if (!$res) {
 	$this->setError('Unable to get list of projects using SCM: '.db_error());
 	return false;

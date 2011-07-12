@@ -10,13 +10,13 @@
 require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
 
 class ForumMLGroupSearchEngine extends GroupSearchEngine {
-	
+
 	function ForumMLGroupSearchEngine() {
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_LIST,
-					 'ForumMLHtmlSearchRenderer', 
+					 'ForumMLHtmlSearchRenderer',
 					 _('ForumML'));
 	}
-	
+
 	function isAvailable($parameters) {
 		if (parent::isAvailable($parameters)) {
 			if ($this->Group->usesPlugin('forumml')) {

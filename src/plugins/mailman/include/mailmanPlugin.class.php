@@ -1,7 +1,7 @@
 <?php
 
 /**
- * mailmanPlugin class 
+ * mailmanPlugin class
  *
  * This file is part of FusionForge.
  *
@@ -18,11 +18,11 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- * 
+ *
  * Portions Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
- 
+
 require_once 'plugins_utils.php';
 require_once('common/system_event/SystemEvent.class.php');
 require_once('common/event/Event.class.php');
@@ -54,14 +54,14 @@ class mailmanPlugin extends Plugin {
 		$this->_addHook("group_approve"); // to create mailing list 'Commit' when creating a group
 		$this->_addHook('site_admin_option_hook');
 		$this->_addHook(Event::GET_SYSTEM_EVENT_CLASS,'getSystemEventClass', false);//to make SystemEvent manager knows about mailman plugin
-		
+
 	}
-	
+
 	function process() {
 		echo '<h1>Mailman</h1>';
 		echo $this->getPluginInfo()->getpropVal('answer');
 	}
-	
+
 	function getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'MailmanPluginInfo')) {
 			require_once('MailmanPluginInfo.class.php');
@@ -69,7 +69,7 @@ class mailmanPlugin extends Plugin {
 		}
 		return $this->pluginInfo;
 	}
-	
+
 	function CallHook ($hookname, &$params) {
 		global $use_mailmanplugin,$G_SESSION,$HTML,$gfcommon,$gfwww,$gfplugins;
 		if ($hookname == "usermenu") {
@@ -77,7 +77,7 @@ class mailmanPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("mailman")) {
 				$param = '?type=user&amp;id=' . $G_SESSION->getId() . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-					array ('/plugins/mailman/index.php' . $param ));				
+					array ('/plugins/mailman/index.php' . $param ));
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -95,7 +95,7 @@ class mailmanPlugin extends Plugin {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]='/plugins/mailman/index.php?group_id=' . $group_id . "&amp;pluginname=" . $this->name; // we indicate the part we�re calling is the project one
                 $params['ADMIN'][]='';
-			} 
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
@@ -115,7 +115,7 @@ class mailmanPlugin extends Plugin {
 			echo "<strong>Use ".$this->text." Plugin</strong>";
 			echo "</td>";
 			echo "</tr>";
-			
+
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group_id=$params['group'];
@@ -146,7 +146,7 @@ class mailmanPlugin extends Plugin {
 				echo '<p>'.util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&amp;type=admin&amp;pluginname='.$this->name,
 									 _('View the mailman Administration')).'</p>';
 			}
-		}												    
+		}
 		elseif ($hookname == "monitored_element") {
 			$current_user=UserManager::instance()->getCurrentUser();
 			$last_group=0;
@@ -154,7 +154,7 @@ class mailmanPlugin extends Plugin {
 			$order_name_arr[]=_('Remove');
 			$order_name_arr[]=_('Monitored Lists');
 			echo $HTML->listTableTop($order_name_arr);
-			$dao = new MailmanListDao(CodendiDataAccess::instance());	
+			$dao = new MailmanListDao(CodendiDataAccess::instance());
 			$result = $dao->listsMonitoredByUser($current_user->getEmail());
 			for ($i=0; $i<$result->rowCount(); $i++) {
 				$listResult = $result->getRow();
@@ -184,7 +184,7 @@ class mailmanPlugin extends Plugin {
 				}
 			}
 			echo $HTML->listTableBottom();
-	
+
 		}
 		elseif ($hookname == "group_delete") {
 			$group_id = $params['group_id'];
@@ -200,8 +200,8 @@ class mailmanPlugin extends Plugin {
 					$this->setError(_('Could not properly delete the mailing list'));
 				}
 				//echo 'MailmanListFactory'.db_error();
-			}	
-		}  
+			}
+		}
 		elseif ($hookname == "group_approve") {
 			$idadmin_group =$params[0];
 			$group_id=$params[1];
@@ -217,17 +217,17 @@ class mailmanPlugin extends Plugin {
 		elseif ($hookname=='site_admin_option_hook') {
 			echo '<li><a href="'.$this->getPluginPath().'/">Template [' . _('Mailman plugin') . ']</a></li>';
 		}
-		
-		
-		
+
+
+
 	}
 	function getSystemEventClass($params) {
-		
+
 		switch($params['type']) {
 			case 'MAILMAN_LIST_CREATE' :
-				
+
 				require_once(dirname(__FILE__).'/events/SystemEvent_MAILMAN_LIST_CREATE.class.php');
-				
+
 				$params['class'] = 'SystemEvent_MAILMAN_LIST_CREATE';
 				break;
 			case 'MAILMAN_LIST_DELETE' :
@@ -239,11 +239,11 @@ class mailmanPlugin extends Plugin {
 		}
 
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }
 
 // Local Variables:

@@ -67,7 +67,7 @@ class AuthHTTPDPlugin extends ForgeAuthPlugin {
 <p><input type="submit" name="login" value="' . _('Login via HTTP authentication') . '" />
 </p>
 </form>' ;
-		
+
 		$params['html_snippets'][$this->name] = $result;
 
 		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/authhttpd/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)));
@@ -90,13 +90,13 @@ class AuthHTTPDPlugin extends ForgeAuthPlugin {
 		if ($username) {
 			$user = user_get_object_by_name($username);
 		}
-		
+
 		// TODO : shouldn't this part be factorized as it seems quite common for many plugins ?
 		if ($user) {
 			if ($this->isSufficient()) {
 				$this->saved_user = $user;
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-				
+
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}

@@ -23,7 +23,7 @@ class WidgetLayout_Row {
     var $rank;
     var $columns;
     var $layout;
-    
+
     function WidgetLayout_Row($id, $rank) {
         $this->id      = $id;
         $this->rank    = $rank;

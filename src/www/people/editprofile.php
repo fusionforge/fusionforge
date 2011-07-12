@@ -46,7 +46,7 @@ if (session_loggedin()) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit('my');
 		}
-		
+
 		$result=db_query_params('UPDATE users SET people_view_skills=$1
 WHERE user_id=$2', array($people_view_skills, user_getid()));
 		if (!$result || db_affected_rows($result) < 1) {
@@ -69,17 +69,17 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 		$endY = getStringFromRequest('endY');
 		$keywords = getStringFromRequest('keywords');
 
-		if($type && $title && $startM && $startY && $endM && $endY && $keywords) {			 
+		if($type && $title && $startM && $startY && $endM && $endY && $keywords) {
 			$start = $startY.$startM;
 			$finish = $endY.$endM;
-			
+
 			$title = substr($title, 0, 100);	/* delimit the title to 100 chars */
 			$keywords = substr($keywords, 0, 255); /* ditto the keywords. */
-			
+
 			$keywords = str_replace("\n", " ", $keywords);  /* strip out any backspace characters. */
 			$title = str_replace("\n", " ", $title);
-			
-				 
+
+
 			$result = db_query_params("SELECT * from skills_data where user_id = $1
 				   AND type=$2
 				   AND title=$3
@@ -87,18 +87,18 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 				   AND finish=$5
 				   AND keywords=$6",
 					 array(user_getid(), $type, $title, $start, $finish, $keywords));
-				   
+
 			if (db_numrows($result) >= 1) {
 				$feedback .= '';	/* don't tell them anything! */
-			} else {		  
+			} else {
 				$result = db_query_params("INSERT into skills_data (user_id, type, title, start, finish, keywords) values
 ($1, $2, $3, $4, $5, $6)",array(user_getid(), $type, $title, $start, $finish, $keywords));
-			   
+
 				if (!$result || db_affected_rows($result) < 1) {
 					form_release_key(getStringFromRequest("form_key"));
 					$error_msg .= sprintf(_('Failed to add the skill %s'),db_error());
 					echo '<h2>'._('Failed to add the skill').'</h2>';
-				} else {		  
+				} else {
 					$feedback = _('Skill added successfully');
 				}
 			}
@@ -164,7 +164,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 	} else if (getStringFromRequest('cancelMultiEdit')) {
 		$warning_msg = _('Cancelled skills update');
 	}
-	
+
 	if (getStringFromRequest('MultiDelete')) {
 		$unfiltered_skill_delete_array = getArrayFromRequest('skill_delete');
 		$skill_delete = array() ;
@@ -186,7 +186,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 				if (!$result || db_affected_rows($result) < 1) {
 					$error_msg .= sprintf(_('Failed to delete any skills: %s'),db_error());
 					echo '<h2>'._('Failed to delete any skills').'</h2>';
-				} else {		  
+				} else {
 					$feedback = ngettext ('Skill deleted successfully', 'Skills deleted successfully', db_affected_rows($result));
 				}
 			} else {
@@ -195,7 +195,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 				$rows = db_numrows($result);
 				if (!$result || $rows < 1) {
 					exit_error(db_error(),'my');
-				} else {		  
+				} else {
 					people_header(array('title'=>_('Confirm skill delete')));
 
 					echo '<span class="important">'._('Confirm Delete').'</span>';
@@ -206,7 +206,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 					}
 					echo "<br />"._('This action cannot be undone.')."<br /><br />";
 					echo _('Are you <strong>sure</strong> you wish to continue?');
-					
+
 					echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 					echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
 					for($i = 0; $i < $rows; $i ++) {
@@ -220,7 +220,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 				}
 				return;
 			}
-			
+
 		}
 	} elseif (getStringFromRequest('MultiDeleteCancel')) {
 		$warning_msg .= _('Skill deletion cancelled');
@@ -242,7 +242,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 		'._('The following option determines if others can see your skills. If they can\'t, you can still enter your skills.').'
 		<p>
 		<strong>'._('Publicly Viewable').':</strong><br />
-		<input type="hidden" name="form_key" value="'.form_generate_key().'"> 
+		<input type="hidden" name="form_key" value="'.form_generate_key().'">
 		<input type="radio" name="people_view_skills" value="0" '. ((db_result($result,0,'people_view_skills')==0)?'checked="checked"':'') .' /> <strong>'._('No').'</strong><br />
 		<input type="radio" name="people_view_skills" value="1" '. ((db_result($result,0,'people_view_skills')==1)?'checked="checked"':'') .' /> <strong>'._('Yes').'</strong><br /></p>
 		<p>
@@ -251,14 +251,14 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 
 		//now show the list of desired skills
 		//echo '<p>'.people_edit_skill_inventory( user_getid() );
-	   
+
 		$skills = db_query_params("SELECT * FROM skills_data_types WHERE type_id > 0", array());
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
 			$feedback .= _('No skill types in database (skills_data_types table)');
 			echo '<h2>'._('No skill types in database - inform system administrator').'</h2>';
 		}
-		
+
 		$yearArray = array();
 		for($years = date("Y"); $years >= 1980; $years--) {
 			array_push($yearArray,$years);
@@ -270,8 +270,8 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 			array_push($monthArrayVals,($i<10?"0".$i:$i));
 			array_push($monthArray,date("M", mktime(0,0,0,$i,1,1980)));
 		}
-	   
-		
+
+
 		/* add skills. */
 		echo '<h2>'._('Add a new skill').'</h2>';
 		echo _('You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.').'<br />'.
@@ -313,15 +313,15 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 <td><input type=submit name=\"AddSkill\" value=\""._('Add This Skill')."\"></td>
 </tr>
 </table>";
-		
+
 		echo '</form>';
-		
-		
+
+
 		echo '<h2>'._('Edit/Delete Your Skills').'</h2>
 		<table border="0" width="100%">';
 		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
-		displayUserSkills(user_getid(), 1); 
-		echo '</form>';				
+		displayUserSkills(user_getid(), 1);
+		echo '</form>';
 		echo '</table>';
 
 	}

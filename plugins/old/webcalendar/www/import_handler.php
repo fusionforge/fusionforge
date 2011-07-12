@@ -18,7 +18,7 @@
  *      single user = Y or Admin, caluser will equal logged
  *      in user.
  *    exc_private: exclude private records from Palmdesktop import
- *    overwrite: Overwrite previous import 
+ *    overwrite: Overwrite previous import
  *
  * Security:
  * TBD
@@ -199,9 +199,9 @@ function import_data ( $data, $overwrite, $type ) {
       ( $Entry['Duration'] != 0 )) {
       $date = mktime (0,0,0,$Entry['StartMonth'],
         $Entry['StartDay'],$Entry['StartYear']);
-      $endt =  (! empty ( $Entry['Repeat']['EndTime'] ) ) ? 
+      $endt =  (! empty ( $Entry['Repeat']['EndTime'] ) ) ?
         $Entry['Repeat']['EndTime'] : 'NULL';
-      $dayst =  (! empty ( $Entry['Repeat']['RepeatDays'] ) ) ? 
+      $dayst =  (! empty ( $Entry['Repeat']['RepeatDays'] ) ) ?
         $Entry['Repeat']['RepeatDays'] : "nnnnnnn";
 
       $ex_days = array ();
@@ -211,9 +211,9 @@ function import_data ( $data, $overwrite, $type ) {
         }
       }
 
-      $dates = get_all_dates($date, RepeatType($Entry['Repeat']['Interval']), 
+      $dates = get_all_dates($date, RepeatType($Entry['Repeat']['Interval']),
         $endt, $dayst, $ex_days, $Entry['Repeat']['Frequency']);
-      $overlap = check_for_conflicts ( $dates, $Entry['Duration'], 
+      $overlap = check_for_conflicts ( $dates, $Entry['Duration'],
         $Entry['StartHour'], $Entry['StartMinute'], $participants, $login, 0 );
     }
 
@@ -234,7 +234,7 @@ function import_data ( $data, $overwrite, $type ) {
 /************************************************************************
   Not sure what to do with this code since I don't know how Palm and vCal
   use the UID stuff yet...
-  
+
       if ( ! empty ( $Entry['UID'] ) ) {
         $res = dbi_query ( "SELECT webcal_import_data.cal_id " .
           "FROM webcal_import_data, webcal_entry_user " .
@@ -262,7 +262,7 @@ function import_data ( $data, $overwrite, $type ) {
         dbi_free_result ( $res );
       } else {
         $id = 1;
-        //$error = "Unable to select MAX cal_id: " . dbi_error () . 
+        //$error = "Unable to select MAX cal_id: " . dbi_error () .
         //  "<br /><br />\n<b>SQL:</b> $sql";
         //break;
       }
@@ -281,7 +281,7 @@ function import_data ( $data, $overwrite, $type ) {
       $values[] = sprintf ( "%04d%02d%02d",
         $Entry['StartYear'],$Entry['StartMonth'],$Entry['StartDay']);
       $names[] = 'cal_time';
-      $values[] = ( ! empty ( $Entry['Untimed'] ) && 
+      $values[] = ( ! empty ( $Entry['Untimed'] ) &&
         $Entry['Untimed'] == 1) ? "-1" :
         sprintf ( "%02d%02d00", $Entry['StartHour'],$Entry['StartMinute']);
       $names[] = 'cal_mod_date';
@@ -293,7 +293,7 @@ function import_data ( $data, $overwrite, $type ) {
       $names[] = 'cal_priority';
       $values[] = $priority;
       $names[] = 'cal_access';
-      $values[] = ( ! empty ( $Entry['Private'] ) && 
+      $values[] = ( ! empty ( $Entry['Private'] ) &&
         $Entry['Private'] == 1) ? "'R'" : "'P'";
       $names[] = 'cal_type';
       $values[] = ( ! empty ( $Entry['Repeat'] ) ) ? "'M'" : "'E'";
@@ -313,15 +313,15 @@ function import_data ( $data, $overwrite, $type ) {
       $Entry['Description'] = str_replace ( "\\\"", "\"", $Entry['Description'] );
       $Entry['Description'] = str_replace ( "'", "\\'", $Entry['Description'] );
       // Mozilla will send this goofy string, so replace it with real html
-      $Entry['Description'] = str_replace ( "=0D=0A=", "<br />", 
+      $Entry['Description'] = str_replace ( "=0D=0A=", "<br />",
         $Entry['Description'] );
-      $Entry['Description'] = str_replace ( "=0D=0A", "", 
+      $Entry['Description'] = str_replace ( "=0D=0A", "",
         $Entry['Description'] );
       // Allow option to not limit description size
-      // This will only be practical for mysql and MSSQL/Postgres as 
+      // This will only be practical for mysql and MSSQL/Postgres as
       //these do not have limits on the table definition
       //TODO Add this option to preferences
-      if ( empty ( $LIMIT_DESCRIPTION_SIZE ) || 
+      if ( empty ( $LIMIT_DESCRIPTION_SIZE ) ||
          $LIMIT_DESCRIPTION_SIZE == "Y" ) {
         // limit length to 1024 chars since we setup tables that way
         if ( strlen ( $Entry['Description'] ) >= 1024 ) {
@@ -427,7 +427,7 @@ function import_data ( $data, $overwrite, $type ) {
         //  echo "$k: $v <br />\n";
         //}
         $rpt_type = RepeatType($Entry['Repeat']['Interval']);
-        $freq = ( ! empty ( $Entry['Repeat']['Frequency'] ) ? 
+        $freq = ( ! empty ( $Entry['Repeat']['Frequency'] ) ?
           $Entry['Repeat']['Frequency'] : 1 );
         if ( ! empty ( $Entry['Repeat']['EndTime'] ) ) {
           $REND   = localtime($Entry['Repeat']['EndTime']);
@@ -435,7 +435,7 @@ function import_data ( $data, $overwrite, $type ) {
         } else {
           $end = 'NULL';
         }
-        $days = (! empty ($Entry['Repeat']['RepeatDays'])) ? 
+        $days = (! empty ($Entry['Repeat']['RepeatDays'])) ?
           "'".$Entry['Repeat']['RepeatDays']."'" : 'NULL';
         $sql = "INSERT INTO webcal_entry_repeats ( cal_id, " .
           "cal_type, cal_end, cal_days, cal_frequency ) VALUES " .

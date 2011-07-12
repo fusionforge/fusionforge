@@ -46,9 +46,9 @@ function ReportUserTime($user_id,$type,$start=0,$end=0) {
 	//	Task report
 	//
 	if (!$type || $type=='tasks') {
-		$res = db_query_params ('SELECT pt.summary,sum(rtt.hours) AS hours 
+		$res = db_query_params ('SELECT pt.summary,sum(rtt.hours) AS hours
 			FROM rep_time_tracking rtt, project_task pt
-			WHERE rtt.user_id=$1 
+			WHERE rtt.user_id=$1
 			AND rtt.report_date BETWEEN $2 AND $3
 			AND rtt.project_task_id=pt.project_task_id
 			GROUP BY pt.summary
@@ -60,9 +60,9 @@ function ReportUserTime($user_id,$type,$start=0,$end=0) {
 	//	Category report
 	//
 	} elseif ($type=='category') {
-		$res = db_query_params ('SELECT rtc.category_name, sum(rtt.hours) AS hours 
+		$res = db_query_params ('SELECT rtc.category_name, sum(rtt.hours) AS hours
 			FROM rep_time_tracking rtt, rep_time_category rtc
-			WHERE rtt.user_id=$1 
+			WHERE rtt.user_id=$1
 			AND rtt.report_date BETWEEN $2 AND $3
 			AND rtt.time_code=rtc.time_code
 			GROUP BY rtc.category_name
@@ -74,9 +74,9 @@ function ReportUserTime($user_id,$type,$start=0,$end=0) {
 	//	Percentage this user spent on a specific subproject
 	//
 	} elseif ($type=='subproject') {
-		$res = db_query_params ('SELECT pgl.project_name, sum(rtt.hours) AS hours 
+		$res = db_query_params ('SELECT pgl.project_name, sum(rtt.hours) AS hours
 			FROM rep_time_tracking rtt, project_task pt, project_group_list pgl
-			WHERE rtt.user_id=$1 
+			WHERE rtt.user_id=$1
 			AND rtt.report_date BETWEEN $2 AND $3
 			AND rtt.project_task_id=pt.project_task_id
 			AND pt.group_project_id=pgl.group_project_id

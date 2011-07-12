@@ -44,7 +44,7 @@ function parser_text($fichin) {
 		$buff = mb_convert_encoding($buff, "ascii");
 	}
 
-	// élimination caractères avec accents 
+	// élimination caractères avec accents
 	// et caractères spéciaux
 	$buff = suppression_diacritics($buff);
 	// tous les mots dans un tableau

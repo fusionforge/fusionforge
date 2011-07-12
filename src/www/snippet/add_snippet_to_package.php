@@ -87,8 +87,8 @@ if (session_loggedin()) {
 			/*
 				make sure the snippet_version_id isn't already in this package
 			*/
-			$result=db_query_params ('SELECT * FROM snippet_package_item 
-WHERE snippet_package_version_id=$1 
+			$result=db_query_params ('SELECT * FROM snippet_package_item
+WHERE snippet_package_version_id=$1
 AND snippet_version_id=$2',
 			array($snippet_package_version_id,
 				$snippet_version_id));
@@ -101,7 +101,7 @@ AND snippet_version_id=$2',
 			/*
 				create the snippet version
 			*/
-			$result=db_query_params("INSERT INTO snippet_package_item (snippet_package_version_id,snippet_version_id) 
+			$result=db_query_params("INSERT INTO snippet_package_item (snippet_package_version_id,snippet_version_id)
 VALUES ($1, $2)", array($snippet_package_version_id, $snippet_version_id));
 
 			if (!$result) {
@@ -118,9 +118,9 @@ VALUES ($1, $2)", array($snippet_package_version_id, $snippet_version_id));
 
 	}
 
-	$result=db_query_params ('SELECT snippet_package.name,snippet_package_version.version 
-FROM snippet_package,snippet_package_version 
-WHERE snippet_package.snippet_package_id=snippet_package_version.snippet_package_id 
+	$result=db_query_params ('SELECT snippet_package.name,snippet_package_version.version
+FROM snippet_package,snippet_package_version
+WHERE snippet_package.snippet_package_id=snippet_package_version.snippet_package_id
 AND snippet_package_version.snippet_package_version_id=$1',
 			array($snippet_package_version_id));
 
@@ -172,10 +172,10 @@ for ($i=0; $i<$combolistrows; $i++)
 	/*
 		Show the snippets in this package
 	*/
-	$result=db_query_params ('SELECT snippet_package_item.snippet_version_id, snippet_version.version, snippet.name 
-FROM snippet,snippet_version,snippet_package_item 
-WHERE snippet.snippet_id=snippet_version.snippet_id 
-AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id 
+	$result=db_query_params ('SELECT snippet_package_item.snippet_version_id, snippet_version.version, snippet.name
+FROM snippet,snippet_version,snippet_package_item
+WHERE snippet.snippet_id=snippet_version.snippet_id
+AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id
 AND snippet_package_item.snippet_package_version_id=$1',
 			array($snippet_package_version_id));
 	$rows=db_numrows($result);

@@ -147,7 +147,7 @@ function trove_setnode($group_id,$trove_cat_id,$rootnode=0) {
 		for ($i=0;$i<count($subnodeids);$i++) {
 			if ($subnodeids[$i] == $row_checksubs['trove_cat_id']) {
 				// then delete subnode
-				db_query_params("DELETE FROM trove_group_link WHERE 
+				db_query_params("DELETE FROM trove_group_link WHERE
 					group_id=$1 AND trove_cat_id=$2",
 					array($group_id, $subnodeids[$i]));
 			}

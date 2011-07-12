@@ -49,7 +49,7 @@ function user_valid_login ( $login, $password ) {
         $error = translate ("Invalid login") . ": " .
           translate("incorrect password");
     } else {
-      $error = translate ("Invalid login"); 
+      $error = translate ("Invalid login");
       // Could be no such user or bad password
       // Check if user exists, so we can tell.
       $res2 = dbi_query ( "SELECT cal_login FROM webcal_user " .
@@ -127,7 +127,7 @@ function user_load_variables ( $login, $prefix ) {
     nonuser_load_variables ( $login, $prefix );
     return true;
   }
-  
+
   if ( $login == "__public__" ) {
     $GLOBALS[$prefix . "login"] = $login;
     $GLOBALS[$prefix . "firstname"] = "";

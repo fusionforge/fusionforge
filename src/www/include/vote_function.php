@@ -2,7 +2,7 @@
 /**
  * vote_function.php
  *
- * Copyright 1999-2001 (c) VA Linux Systems 
+ * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * http://fusionforge.org
  *
@@ -107,7 +107,7 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 	$rating=((16*vote_get_rating ($vote_on_id,$flag))-15);
 
 	?>
-	
+
 	<form action="/survey/rating_resp.php" method="post">
 	<input type="radio" name="vote_on_id" value="<?php echo $vote_on_id; ?>" />
 	<input type="radio" name="redirect_to" value="<?php echo urlencode(getStringFromServer('REQUEST_URI')); ?>" />
@@ -129,7 +129,7 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 	<input type="submit" name="submit" value="Rate" />
 	</div>
 	</form>
-	
+
 	<?php
 
 }

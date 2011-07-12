@@ -44,7 +44,7 @@ require_once $gfcommon.'scm/SCMFactory.class.php';
 //	Test if restricted project registration
 //
 if (forge_get_config('project_registration_restricted')) {
-	session_require_global_perm ('approve_projects', '', 
+	session_require_global_perm ('approve_projects', '',
 				     sprintf (_('Project registration is restricted on %s, and only administrators can create new projects.'),
 					      forge_get_config ('forge_name')));
 } elseif (!session_loggedin()) {
@@ -193,7 +193,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 </textarea>
 
 <h2><?php echo $index++.'. '._('Project Unix Name') ?></h2>
-<p><?php echo _('In addition to full project name, you will need to choose short, "Unix" name for your project.') ?></p> 
+<p><?php echo _('In addition to full project name, you will need to choose short, "Unix" name for your project.') ?></p>
 <p><?php echo _('The "Unix Name" has several restrictions because it is used in so many places around the site. They are:') ?></p>
 <ul>
 <li><?php echo _('cannot match the unix name of any other project;') ?></li>
@@ -222,7 +222,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 <?php
 	$SCMFactory = new SCMFactory() ;
 $scm_plugins=$SCMFactory->getSCMs() ;
-if (forge_get_config('use_scm') && count($scm_plugins) > 0) {	
+if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 	echo '<h2>'.$index++.'. '._('Source Code').'</h2>';
 	echo '<p>' . _('You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.')."</p>\n";
 	echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';

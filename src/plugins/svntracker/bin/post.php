@@ -151,7 +151,7 @@ foreach ($changed as $onefile) {
 	if ($actrev == 0) {
 		$prev = 1;
 	}
-	
+
 	$files[] = array(
 			'name' => $repository . "/" . $onefile,
 			'previous' => $prev,

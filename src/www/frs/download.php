@@ -51,7 +51,7 @@ function send_file ($filename,$filepath,$file_id=NULL) {
 	if (!file_exists($filepath)) {
 		send_404();
 	}
-	
+
 	if ($GLOBALS['sys_block_anonymous_downloads']) {
 		if (!session_loggedin()) {
 			exit_permission_denied();
@@ -62,20 +62,20 @@ function send_file ($filename,$filepath,$file_id=NULL) {
 	header("Content-type: application/binary");
 	$length = filesize($filepath);
 	header("Content-length: $length");
-	
+
 	readfile_chunked($filepath);
-	
+
 	if (!$file_id) {
 		return true;
 	}
-	
+
 	if (session_loggedin()) {
 		$s =& session_get_user();
 		$us=$s->getID();
 	} else {
 		$us=100;
 	}
-	
+
 	$ip = getStringFromServer('REMOTE_ADDR');
 	$res = db_query_params("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)", array($ip,$file_id,date('Ym'),date('d'),$us));
 }
@@ -112,7 +112,7 @@ case 'file':
 	send_file ($filename, $filepath, $file_id);
 
 	break;
-					
+
 case 'latestzip':
 	// .../download.php/latestzip/123/package-latest.zip
 	// 123 -> package_id
@@ -153,7 +153,7 @@ case 'latestfile':
 	$row = db_fetch_array($res);
 	$file_id = $row['file_id'];
 	$File = frsfile_get_object($file_id);
-		
+
 	$Release = $File->FRSRelease;
 	$Package = $Release->FRSPackage;
 	$Group = $Package->Group;

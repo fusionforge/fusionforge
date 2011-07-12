@@ -167,7 +167,7 @@ if ($edit=="yes") {
 			forum_footer(array());
 			exit();
 		}
-		
+
 	}
 }
 

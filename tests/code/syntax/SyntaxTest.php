@@ -99,7 +99,7 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
 	    $this->assertEquals('', $output);
     }
 }
-	
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

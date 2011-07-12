@@ -28,7 +28,7 @@ require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 
 class ArtifactTypes extends Error {
 
-	/** 
+	/**
 	 * The artifact type object.
 	 *
 	 * @var		object	$ArtifactType.
@@ -70,7 +70,7 @@ class ArtifactTypes extends Error {
 	function createTrackers() {
 
 		// first, check if trackers already exist
-		$res = db_query_params ('SELECT * FROM artifact_group_list 
+		$res = db_query_params ('SELECT * FROM artifact_group_list
 			WHERE group_id=$1 AND datatype > 0',
 					array ($this->Group->getID()));
 		if (db_numrows($res) > 0) {

@@ -2,16 +2,16 @@
 
 /**
  * Copyright (c) STMicroelectronics, 2006. All Rights Reserved.
- * 
+ *
  * Originally written by Mohamed CHAARI, 2007.
- * 
+ *
  * This file is a part of codendi.
- * 
+ *
  * codendi is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * codendi is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- * 
+ *
  * $Id$
  */
 
@@ -57,7 +57,7 @@ class ForumML_FileStorageTest extends UnitTestCase {
 
     function setUp() {
     }
-	
+
     function tearDown() {
         $this->_deleteIfExists($this->_fixture.'/gpig-interest/2007_10_24/Screenshot_jpg');
         $this->_deleteIfExists($this->_fixture.'/gpig-interest/2007_10_24');
@@ -72,8 +72,8 @@ class ForumML_FileStorageTest extends UnitTestCase {
 		$this->assertEqual($fstorage->root,$this->_fixture);
 		$this->assertNoErrors();
 	}
-	
-    // case 1: an attachment file whose name has more than 64 characters  		
+
+    // case 1: an attachment file whose name has more than 64 characters
 	function test_getPathFileNameWithMoreThan64Char() {
 		$fs1 = $this->_getFileStorage($this->_fixture);
 		$name1 = "a string with more than 64 characters, which is the limit allowed for ForumML attachments";
@@ -85,7 +85,7 @@ class ForumML_FileStorageTest extends UnitTestCase {
 		$path1 = $fs1->_getPath($name1,$list1,$date1,$type1);
 		$this->assertNotNull($path1);
 		$this->assertIsA($path1, 'string');
-		$this->assertNoErrors();		
+		$this->assertNoErrors();
 		// check filename length is restricted to 64 characters
 		$path_array1 = explode("/",$path1);
 		$fname1 = $path_array1[count($path_array1) - 1];
@@ -111,17 +111,17 @@ class ForumML_FileStorageTest extends UnitTestCase {
 		$path2 = $fs1->_getPath($name2,$list1,$date1,$type1);
 		$this->assertNotNull($path2);
 		$this->assertIsA($path2, 'string');
-		$this->assertNoErrors();				
+		$this->assertNoErrors();
 		$path_array2 = explode("/",$path2);
-		$fname2 = $path_array2[count($path_array2) - 1];		
-		$this->assertEqual($fname2,"filename_less_than_64_chars");				
+		$fname2 = $path_array2[count($path_array2) - 1];
+		$this->assertEqual($fname2,"filename_less_than_64_chars");
 		$this->assertNotEqual(strlen($fname2),64);
 		// check path components
 		$flist2 = $path_array2[count($path_array2) - 3];
 		$this->assertEqual($flist2,$list1);
 		$fdate2 = $path_array2[count($path_array2) - 2];
-		$this->assertEqual($fdate2,$date1);		
-		// check regexp		
+		$this->assertEqual($fdate2,$date1);
+		// check regexp
 		$this->assertWantedPattern($this->_namePattern,$name2);
     }
 
@@ -136,7 +136,7 @@ class ForumML_FileStorageTest extends UnitTestCase {
 		$path3 = $fs1->_getPath($name3,$list1,$date1,$type1);
 		$this->assertNotNull($path3);
 		$this->assertIsA($path3, 'string');
-		$this->assertNoErrors();		
+		$this->assertNoErrors();
 		$path_array3 = explode("/",$path3);
 		$fname3 = $path_array3[count($path_array3) - 1];
 		$this->assertNoUnwantedPattern($this->_namePattern,$name3);
@@ -158,14 +158,14 @@ class ForumML_FileStorageTest extends UnitTestCase {
 		$fname4 = $path_array4[count($path_array4) - 1];
 		$this->assertWantedPattern('/^attachment.*/', $fname4);
 	}
-	
+
     // case 5: same attachment name submitted 2 times same day for same list
     function testGetPathWithSameFileName() {
         $fs = new ForumML_FileStorageTestVersion($this);
         $fs->root = $this->_fixture;
         $fs->setReturnValueAt(0, 'fileExists', false);
         $fs->setReturnValueAt(1, 'fileExists', true);
- 
+
         $list = "gpig-interest";
 		$date = "2007_10_24";
 		$type = "store";

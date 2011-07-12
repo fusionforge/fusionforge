@@ -25,7 +25,7 @@ require_once $gfcommon.'include/Error.class.php';
 
 class ArtifactBoxOptions extends Error {
 
-	/** 
+	/**
 	 * The artifact type object.
 	 *
 	 * @var		object	$ArtifactType.
@@ -46,8 +46,8 @@ class ArtifactBoxOptions extends Error {
 	 *  @return	boolean	success.
 	 */
 	function ArtifactBoxOptions(&$ArtifactType,$data=false) {
-		$this->Error(); 
-		
+		$this->Error();
+
 		//was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
 			$this->setError('ArtifactSelectionBox: No Valid ArtifactType');
@@ -74,17 +74,17 @@ class ArtifactBoxOptions extends Error {
 	}
 
 	/**
-	 *	create - create a new row in the table used to store the 
-	 *	choices for selection boxes.  This function is only used for 
+	 *	create - create a new row in the table used to store the
+	 *	choices for selection boxes.  This function is only used for
 	 *	extra fields and boxes configured by the admin
 	 *
 	 *	@param	string		Name of the choice
 	 *	@param	int		Id the box that contains the choice.
 	 *  @return 	true on success / false on failure.
 	 */
-	
+
 	function create($name,$id) {
-//settype($id,"integer");	
+//settype($id,"integer");
 		//
 		//	data validation
 		//
@@ -145,7 +145,7 @@ class ArtifactBoxOptions extends Error {
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
-	
+
 	/**
 	 *	getID - get this ArtifactSelectionBox ID.
 	 *
@@ -154,7 +154,7 @@ class ArtifactBoxOptions extends Error {
 	function getID() {
 		return $this->data_array['id'];
 	}
-	
+
 	/**
 	 *	getBoxID - get this  artifact box id.
 	 *
@@ -175,12 +175,12 @@ class ArtifactBoxOptions extends Error {
 
 
 	/**
-	 *  update - update rows in the table used to store the choices 
-	 *  for a selection box. This function is used only for extra  
+	 *  update - update rows in the table used to store the choices
+	 *  for a selection box. This function is used only for extra
 	 *  boxes and fields configured by the admin
 	 *
 	 *  @param	string	Name of the choice in a box.
-	 *  @param	int	Id of the box 
+	 *  @param	int	Id of the box
 	 *  @param	int	id of the row
 	 *  @return	boolean	success.
 	 */
@@ -192,8 +192,8 @@ class ArtifactBoxOptions extends Error {
 		if (!$name) {
 			$this->setMissingParamsError();
 			return false;
-		}   
-		$result = db_query_params ('UPDATE artifact_group_selection_box_options 
+		}
+		$result = db_query_params ('UPDATE artifact_group_selection_box_options
 			SET box_options_name=$1
 			WHERE id=$2',
 					   array (htmlspecialchars($name),

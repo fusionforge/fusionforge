@@ -24,7 +24,7 @@
  */
 
 /*
-This file creates user / group permissions by editing 
+This file creates user / group permissions by editing
 the /etc/passwd /etc/shadow and /etc/group files
 */
 require_once dirname(__FILE__).'/../../env.inc.php';
@@ -86,23 +86,23 @@ for ($i=0; $i < count($passwd_orig); $i++) {
 			$i++;
 			$line = trim($passwd_orig[$i]);
 		} while ($i < count($passwd_orig) && !preg_match("/^[[:blank:]]*#GFORGEEND/", $line));
-		
+
 		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file, but
 		// it's not a fatal error
 		if ($i >= (count($passwd_orig)-1)) break;
-		
+
 		// read next line
 		$i++;
 		$line = trim($passwd_orig[$i]);
 	}
-	
-	// Here, we're outside the #GFORGE markers	
+
+	// Here, we're outside the #GFORGE markers
 	$entries = explode(":", $line);
 	if (!empty($entries[0])) {
 		$username = $entries[0];
 		$unmanaged_usernames[] = $username;
 	}
-	
+
 	$unmanaged_lines_passwd[] = $line;
 }
 
@@ -118,7 +118,7 @@ foreach ($users as $u) {
 		$user_unix_gid = $u->getUnixGID() ;
 		$shell = DEFAULT_SHELL;
 		$unix_passwd = $u->getUnixPasswd() ;
-		
+
 		$line_passwd =	$username.":x:".$user_unix_uid.":".$user_unix_gid.":".
 						$user_description.":/home/".$username.":".$shell;
 		$gforge_lines_passwd[] = $line_passwd;
@@ -147,23 +147,23 @@ for ($i=0; $i < count($shadow_orig); $i++) {
 			$i++;
 			$line = trim($shadow_orig[$i]);
 		} while ($i < count($shadow_orig) && !preg_match("/^[[:blank:]]*#GFORGEEND/", $line));
-		
+
 		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file, but
 		// it's not a fatal error
 		if ($i >= (count($shadow_orig)-1)) break;
-		
+
 		// read next line
 		$i++;
 		$line = trim($shadow_orig[$i]);
 	}
-	
-	// Here, we're outside the #GFORGE markers	
+
+	// Here, we're outside the #GFORGE markers
 	$entries = explode(":", $line);
 	if (!empty($entries[0])) {
 		$username = $entries[0];
 		$unmanaged_usernames[] = $username;
 	}
-	
+
 	$unmanaged_lines_shadow[] = $line;
 }
 foreach ($users as $u) {
@@ -172,7 +172,7 @@ foreach ($users as $u) {
 
 	if ($managed_by_gforge) {
 		$unix_passwd = $user_pws[$i];
-		
+
 		$line_shadow = $username.":".$unix_passwd.":12090:0:99999:7:::";
 		$gforge_lines_shadow[] = $line_shadow;
 	}
@@ -199,15 +199,15 @@ for ($i=0; $i < count($group_orig); $i++) {
 			$i++;
 			$line = trim($group_orig[$i]);
 		} while ($i < count($group_orig) && !preg_match("/^[[:blank:]]*#GFORGEEND/", $line));
-		
+
 		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file
 		if ($i >= (count($group_orig)-1)) break;
-		
+
 		// read next line
 		$i++;
 		$line = trim($group_orig[$i]);
 	}
-	
+
 	$entries = explode(":", $line);
 	if (!empty($entries[0])) {
 		$groupname = $entries[0];
@@ -232,12 +232,12 @@ foreach ($groups as $g) {
 	$unix_gid = $g->getID() + 50000;	// 50000: hardcoded value (for now).
 
 	$line = $group_name.":x:".$unix_gid.":";
-	
+
 	/* we need to get the project object to check if a project
 	 * has a private CVS repository - in which case we need to add
 	 * the apache user to the group so that ViewCVS can be used
 	 */
-	 
+
 	$group_id = $g->getID() ;
 
 	$gmembers =  array () ;
@@ -249,7 +249,7 @@ foreach ($groups as $g) {
 	} else {
 		$gmembers[] = forge_get_config('apache_user');
 	}
-	
+
 	$line .= implode(',', $gmembers);
 	$gforge_lines_group[] = $line;
 }

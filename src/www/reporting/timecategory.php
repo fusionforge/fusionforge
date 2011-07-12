@@ -94,7 +94,7 @@ echo $HTML->listTableBottom();
 <p>
 <?php
 
-if ($time_code) { 
+if ($time_code) {
 	echo '<input type="submit" name="update" value="'._('Update').'" />';
 } else {
 	echo '<input type="submit" name="add" value="'._('Add').'" />';

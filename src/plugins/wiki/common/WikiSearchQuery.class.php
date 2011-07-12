@@ -26,14 +26,14 @@
 require_once $gfcommon.'search/SearchQuery.class.php';
 
 class WikiSearchQuery extends SearchQuery {
-	
+
 	/**
 	* group id
 	*
 	* @var int $groupId
 	*/
 	var $groupId;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -42,9 +42,9 @@ class WikiSearchQuery extends SearchQuery {
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 */
-	function WikiSearchQuery($words, $offset, $isExact, $groupId) {	
+	function WikiSearchQuery($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
-		
+
 		$this->SearchQuery($words, $offset, $isExact);
 	}
 
@@ -54,25 +54,25 @@ class WikiSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		
+
 		$pat = '_g'.$this->groupId.'_';
 		$len = strlen($pat)+1;
 		$words = addslashes(join('&', $this->words));
-		$sql = "SELECT plugin_wiki_page.id AS id, 
+		$sql = "SELECT plugin_wiki_page.id AS id,
 					substring(plugin_wiki_page.pagename from $len) AS pagename,
-					plugin_wiki_page.hits AS hits, 
-					plugin_wiki_page.pagedata as pagedata, 
+					plugin_wiki_page.hits AS hits,
+					plugin_wiki_page.pagedata as pagedata,
 					plugin_wiki_version.version AS version,
-					plugin_wiki_version.mtime AS mtime, 
-					plugin_wiki_version.minor_edit AS minor_edit, 
+					plugin_wiki_version.mtime AS mtime,
+					plugin_wiki_version.minor_edit AS minor_edit,
 					plugin_wiki_version.content AS content,
-					plugin_wiki_version.versiondata AS versiondata 
+					plugin_wiki_version.versiondata AS versiondata
 				FROM plugin_wiki_nonempty, plugin_wiki_page, plugin_wiki_recent,
-					plugin_wiki_version 
-				WHERE plugin_wiki_nonempty.id=plugin_wiki_page.id 
-					AND plugin_wiki_page.id=plugin_wiki_recent.id 
-					AND plugin_wiki_page.id=plugin_wiki_version.id 
-					AND latestversion=version 
+					plugin_wiki_version
+				WHERE plugin_wiki_nonempty.id=plugin_wiki_page.id
+					AND plugin_wiki_page.id=plugin_wiki_recent.id
+					AND plugin_wiki_page.id=plugin_wiki_version.id
+					AND latestversion=version
 					AND substring(plugin_wiki_page.pagename from 0 for $len) = '$pat'
 					AND (idxFTI @@ to_tsquery('$words'))
 				ORDER BY ts_rank(idxFTI, to_tsquery('$words')) DESC";

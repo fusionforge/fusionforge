@@ -27,7 +27,7 @@ function week_to_dates( $week, $year = 0 ) {
 
 	if ( $year == 0 ) {
 		$year = gmstrftime("%Y", time() );
-	} 
+	}
 
 	   // One second into the New Year!
 	$beginning = gmmktime(0,0,0,1,1,$year);
@@ -49,7 +49,7 @@ function stats_project_daily( $group_id, $span = 7 ) {
 	//
 	//	We now only have 30 & 7-day views
 	//
-	if ( $span != 30 && $span != 7) { 
+	if ( $span != 30 && $span != 7) {
 		$span = 7;
 	}
 
@@ -117,7 +117,7 @@ function stats_project_daily( $group_id, $span = 7 ) {
 function stats_project_monthly( $group_id ) {
 	global $HTML;
 	$res = db_query_params("
-		SELECT * FROM stats_project_months 
+		SELECT * FROM stats_project_months
 		WHERE group_id=$1
 		ORDER BY group_id DESC, month DESC
 	",array($group_id), -1, 0, 'DB_STATS');

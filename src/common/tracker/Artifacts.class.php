@@ -39,14 +39,14 @@ class Artifacts extends Error {
 	 *
 	 * @var		object	$ArtifactType.
 	 */
-	var $ArtifactType; 
+	var $ArtifactType;
 
 	/**
 	 * Array of Artifact objects.
 	 *
 	 * @var		array	$artifacts_array.
 	 */
-	var $artifacts_array; 
+	var $artifacts_array;
 
 	/**
 	 *  Artifacts - constructor.
@@ -58,7 +58,7 @@ class Artifacts extends Error {
 	 *  @return	boolean	success.
 	 */
 	function Artifacts(&$ArtifactType) {
-		$this->Error(); 
+		$this->Error();
 
 		$this->ArtifactType =& $ArtifactType;
 

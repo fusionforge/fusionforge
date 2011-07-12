@@ -316,7 +316,7 @@ echo '</tr></thead><tbody>';
 $i = 0;
 foreach ($members as $user) {
 	$i++;
-	
+
 	$roles = array () ;
 	foreach (RBACEngine::getInstance()->getAvailableRolesForUser ($user) as $role) {
 		if ($role->getHomeProject() && $role->getHomeProject()->getID() == $group->getID()) {

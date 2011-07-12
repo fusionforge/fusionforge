@@ -1,6 +1,6 @@
 #! /usr/bin/php
 <?php
-/* 
+/*
  * Copyright (C) 2010  Olaf Lenz
  *
  * This file is part of FusionForge.
@@ -21,7 +21,7 @@
  */
 
   /** This script will set up the structure required to use the
-   mediawiki plugin. 
+   mediawiki plugin.
   */
 
 require_once dirname(__FILE__) . '/../../../www/env.inc.php';
@@ -60,8 +60,8 @@ echo "Creating symlinks from $master_path to $src_path...\n";
 if (!($dh = opendir($src_path))) {
 	echo "Could not open mediawiki source directory $src_path!\n";
 } else {
-	$ignore_file = array( 
-		'.' => true, 
+	$ignore_file = array(
+		'.' => true,
 		'..' => true,
 		'config' => true,
 		'skins' => true,
@@ -111,8 +111,8 @@ mysymlink($from, $to);
 $fromdir = "$mediawiki_src_path/skins/monobook";
 
 $dh = opendir($fromdir);
-$ignore_file = array( 
-	'.' => true, 
+$ignore_file = array(
+	'.' => true,
 	'..' => true,
 	);
 while ($file = readdir($dh)) {

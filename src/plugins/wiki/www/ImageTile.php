@@ -4,10 +4,10 @@ require_once('lib/stdlib.php');
 
 $remove = 0;
 if (preg_match('/^(http|ftp|https):\/\//i',$_REQUEST['url'])) {
-    
+
     $data_path = '';
     list($usec, $sec) = explode(" ", microtime());
-    
+
     $fp = fopen('config/config.ini','r');
     while ($config = fgetcsv($fp,1024,';')) {
         if (preg_match('/DATA_PATH/',$config[0])) {
@@ -28,12 +28,12 @@ if (preg_match('/^(http|ftp|https):\/\//i',$_REQUEST['url'])) {
     }
     fwrite($fp,$source);
     $remove = 1;
-    
+
 } else {
     @$fp = fopen($_REQUEST['url'],"r");
-    
+
     if (!$fp) {
-    
+
         header ("Content-type: text/html");
         echo "<html><head></head><body>Not an image</body></html>";
         exit();
@@ -106,14 +106,14 @@ switch ($type) {
         echo "<html><head></head><body>Not an image</body></html>";
         exit();
         break;
-}    
+}
 
 $width  = @imagesx($img);
 $height = @imagesy($img);
 
 $newwidth = $_REQUEST['width'];
 if (empty($newidth)) $newidth = 50;
-    
+
 $newheight = $_REQUEST['height'];
 if (empty($newheight)) $newheight = round($newwidth * ($height / $width)) ;
 

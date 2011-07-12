@@ -43,7 +43,7 @@ class ForumMLPlugin extends Plugin {
 		$this->_addHook('cssfile');
 		$this->_addHook('search_engines');
 		$this->_addHook('full_search_engines');
-		// Set ForumML plugin scope to 'Projects' wide 
+		// Set ForumML plugin scope to 'Projects' wide
 		//$this->setScope(Plugin::SCOPE_PROJECT);
 		$this->allowedForProject = array();
 	}
@@ -55,7 +55,7 @@ class ForumMLPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("mailman")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we�re calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						array ('/plugins/mailman/index.php' . $param ));				
+						array ('/plugins/mailman/index.php' . $param ));
 			}
 		} elseif ($hookname =='cssfile') {
 			echo '<link rel="stylesheet" type="text/css" href="/plugins/forumml/themes/default/css/style.css" />';
@@ -104,8 +104,8 @@ class ForumMLPlugin extends Plugin {
 					}
 					$searchManager->addSearchEngine(
 							SEARCH__TYPE_IS_LIST,
-							new ForumMLSearchEngine(SEARCH__TYPE_IS_LIST, 
-								'ForumMLHtmlSearchRenderer', 
+							new ForumMLSearchEngine(SEARCH__TYPE_IS_LIST,
+								'ForumMLHtmlSearchRenderer',
 								_("This project's mailing lists"), $group_id)
 							);
 				}
@@ -125,7 +125,7 @@ class ForumMLPlugin extends Plugin {
 		} elseif ($hookname == "plugins_powered_search") {
 			$this->forumml_search($params);
 
-		}											
+		}
 	}
 
 	function &getPluginInfo() {

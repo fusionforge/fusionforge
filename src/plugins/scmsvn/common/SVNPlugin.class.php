@@ -63,7 +63,7 @@ class SVNPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if ($project->usesPlugin($this->name)) {
 			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						  array ($project->getID())) ;
@@ -181,14 +181,14 @@ class SVNPlugin extends SCMPlugin {
 		$b .= ']</p>' ;
 		return $b ;
 	}
-	
+
 	function getStatsBlock ($project) {
 		global $HTML ;
 		$b = '' ;
 
 		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 					  array ($project->getID()));
-		
+
 		if (db_numrows($result) > 0) {
 			$b .= $HTML->boxMiddle(_('Repository Statistics'));
 
@@ -198,10 +198,10 @@ class SVNPlugin extends SCMPlugin {
 				_('Commits')
 				);
 			$b .= $HTML->listTableTop($tableHeaders);
-			
+
 			$i = 0;
 			$total = array('adds' => 0, 'commits' => 0);
-			
+
 			while($data = db_fetch_array($result)) {
 				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 				$b .= '<td width="50%">' ;
@@ -292,7 +292,7 @@ class SVNPlugin extends SCMPlugin {
 				continue;
 			}
 			$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
-			
+
 			$users = $project->getMembers () ;
 			foreach ($users as $user) {
 				if (forge_check_perm_for_user ($user,
@@ -313,7 +313,7 @@ class SVNPlugin extends SCMPlugin {
 			if ( $project->enableAnonSCM() ) {
 				$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = r\n" ;
 				$access_data .= "* = r\n" ;
-				
+
 			}
 			$access_data .= "\n" ;
 		}
@@ -344,7 +344,7 @@ class SVNPlugin extends SCMPlugin {
 			$usr_adds, $usr_deletes, $usr_updates;
 
 		$time_ok = true ;
-		
+
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
@@ -391,7 +391,7 @@ class SVNPlugin extends SCMPlugin {
 				db_rollback () ;
 				return false ;
 			}
-	
+
 			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
 						array ($month_string,
 						       $day,
@@ -409,7 +409,7 @@ class SVNPlugin extends SCMPlugin {
 			// Analyzing history stream
 			while (!feof($pipe) &&
 			       $data = fgets ($pipe, 4096)) {
-				
+
 				if (!xml_parse ($xml_parser, $data, feof ($pipe))) {
 					debug("Unable to parse XML with error " .
 					      xml_error_string(xml_get_error_code($xml_parser)) .
@@ -625,7 +625,7 @@ function SVNPluginCharData ($parser, $chars) {
 		$time_ok, $user_list;
 	switch ($last_tag) {
 	case "AUTHOR":
-		$last_user = ereg_replace ('[^a-z0-9_-]', '', 
+		$last_user = ereg_replace ('[^a-z0-9_-]', '',
 					   strtolower (trim ($chars))) ;
 		break;
 	case "DATE":

@@ -21,25 +21,25 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
- 
+
 require_once $gfcommon.'search/SearchQuery.class.php';
 
 class ForumsSearchQuery extends SearchQuery {
-	
+
 	/**
 	* group id
 	*
 	* @var int $groupId
 	*/
 	var $groupId;
-	
+
 	/**
 	* flag if non public items are returned
 	*
 	* @var boolean $showNonPublic
-	*/	
+	*/
 	var $showNonPublic;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -53,9 +53,9 @@ class ForumsSearchQuery extends SearchQuery {
 	function ForumsSearchQuery($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
-		
+
 		$this->SearchQuery($words, $offset, $isExact);
-		
+
 		$this->setSections($sections);
 	}
 
@@ -125,7 +125,7 @@ class ForumsSearchQuery extends SearchQuery {
 	 * getSearchByIdQuery - get the sql query built to get the search results when we are looking for an int
 	 *
 	 * @return array query+params array
-	 */	
+	 */
 	function getSearchByIdQuery() {
 		$qpa = db_construct_qpa () ;
 		$qpa = db_construct_qpa ($qpa,
@@ -139,7 +139,7 @@ class ForumsSearchQuery extends SearchQuery {
 
 		return $qpa;
 	}
-	
+
 	/**
 	 * getSections - returns the list of available forums
 	 *
@@ -152,7 +152,7 @@ class ForumsSearchQuery extends SearchQuery {
 			$sql .= ' AND is_public = 1';
 		}
 		$sql .= ' ORDER BY forum_name';
-		
+
 		$sections = array();
 		$res = db_query_params ($sql,
 					array ($groupId));

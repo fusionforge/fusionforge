@@ -55,13 +55,13 @@ class SurveyResponseFactory extends Error {
 	var $Result;
 
 	/**
-	 *  Constructor. 
+	 *  Constructor.
 	 *
-	 *	@param	object	The Survey object 
+	 *	@param	object	The Survey object
 	 *	@param	object	The Question object to which this survey Response is associated.
          *      @param  int     The survey_id
 	 */
-	function SurveyResponseFactory(&$Survey, &$Question ) { 
+	function SurveyResponseFactory(&$Survey, &$Question ) {
 		$this->Error();
 
 		if (!$Survey || !is_object($Survey)) {
@@ -116,7 +116,7 @@ class SurveyResponseFactory extends Error {
 	}
 
 	/**
-	 *	getSurveyResponses - get an array of Survey Response objects 
+	 *	getSurveyResponses - get an array of Survey Response objects
          *                           for the Survey and Question
 	 *
  	 *	@return	array	The array of Survey Response objects.
@@ -133,7 +133,7 @@ class SurveyResponseFactory extends Error {
 		$survey_id = $survey->GetID();
 		$question = $this->getQuestion();
 		$question_id = $question->GetID();
-		
+
 		$result = db_query_params ('SELECT * FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 ORDER BY post_date DESC',
 					   array ($survey_id,
 						  $question_id,
@@ -153,7 +153,7 @@ class SurveyResponseFactory extends Error {
 
 	/**
 	 *	getNumberOfSurveyResponses - get the number of Survey Responses
-         *                       
+         *
  	 *	@return	int      the number of survey responses
 	 */
 	function getNumberOfSurveyResponses() {
@@ -167,7 +167,7 @@ class SurveyResponseFactory extends Error {
 
 	/**
 	 *	getResults - get the array of result for yes/no and 1-5 question
-         *                       
+         *
  	 *	@return	int      the array of result
          *              for the yes/no question, it returns counts in arr[1] and arr[5];
          *              for the 1-5 question, it returns counts in arr[1], arr[1], ..., arr[5];
@@ -182,10 +182,10 @@ class SurveyResponseFactory extends Error {
 		if (!$arr || !is_array($arr)) {
 			return false;
 		}
-		$count = count($arr); 
-		
+		$count = count($arr);
+
 		$question = $this->getQuestion();
-		if ($question->getQuestionType()=='1' || 
+		if ($question->getQuestionType()=='1' ||
 		    $question->getQuestionType()=='3') {
 			/* This is a radio-button question. Values 1-5 or yes(1) no (5)question  */
 			$is_radio = true;
@@ -193,15 +193,15 @@ class SurveyResponseFactory extends Error {
 		} else {
 			$is_radio=false;
 		}
-		
+
 		for($i=0; $i<$count; $i++) {
 			if ($arr[$i]->isError()) {
 				echo $arr[$i]->getErrorMessage();
 				continue;
 			}
-			
+
 			$response = $arr[$i]->getResponse();
-			
+
 			if($is_radio) {
 				/* We only counts */
 				$this->Result[$response]++;

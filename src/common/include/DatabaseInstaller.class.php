@@ -21,10 +21,10 @@
  */
 
 class DatabaseInstaller extends Error {
-	
+
 	function DatabaseInstaller($name='', $path='') {
 		$this->name = $name;
-		$this->path	= $path;	
+		$this->path	= $path;
 	}
 
 	/**
@@ -45,7 +45,7 @@ class DatabaseInstaller extends Error {
 		}
 		return $this->setError(_('No database installation scripts found.'));
 	}
-	
+
 	/**
 	 * TODO: Enter description here ...
 	 * @return boolean|string
@@ -89,7 +89,7 @@ class DatabaseInstaller extends Error {
 		}
 		return $output;
 	}
-	
+
 	private static function getDatabaseDate() {
 		// Check if table 'database_startpoint' has proper values
 		$res = db_query_params ('SELECT * FROM database_startpoint', array()) ;
@@ -135,7 +135,7 @@ class DatabaseInstaller extends Error {
 						if (strlen($name) >= 8) {
 							$date_aux = substr($name, 0, 8);
 							$type_aux = substr($file, $pos + 1);
-							if ((int) $date_aux > 20000000 && ($type_aux=='sql' || $type_aux=='php') 
+							if ((int) $date_aux > 20000000 && ($type_aux=='sql' || $type_aux=='php')
 								&& strpos($file, 'debian') === false) {
 								$data[] = array('date'=>$date_aux, 'filename'=>$file, 'ext'=>$type_aux);
 							}

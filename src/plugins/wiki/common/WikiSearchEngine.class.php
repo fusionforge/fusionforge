@@ -25,7 +25,7 @@
 require_once $GLOBALS['gfwww'].'search/include/engines/GroupSearchEngine.class.php';
 
 class WikiSearchEngine extends GFSearchEngine {
-	
+
 	/**
 	* name of the external site
 	*
@@ -33,22 +33,22 @@ class WikiSearchEngine extends GFSearchEngine {
 	*/
 	var $rendererClassName;
 	var $groupId;
-	
+
 	function WikiSearchEngine($type, $rendererClassName, $label, $groupId) {
 		$this->groupId = $groupId;
 		$this->rendererClassName = $rendererClassName;
-		
+
 		$this->GFSearchEngine($type, $rendererClassName, $label);
 	}
-	
+
 	function isAvailable($parameters) {
 		return true;
 	}
-	
+
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		global $gfwww, $gfcommon, $gfplugins;
 		require_once($this->rendererClassName.'.class.php');
-		$renderer = new $this->rendererClassName($words, $offset, $exact, 
+		$renderer = new $this->rendererClassName($words, $offset, $exact,
 			$this->groupId);
 		return $renderer;
 	}

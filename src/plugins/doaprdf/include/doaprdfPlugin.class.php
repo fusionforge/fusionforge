@@ -40,7 +40,7 @@ class doaprdfPlugin extends Plugin {
 		//$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_project_home");
-		
+
 	}
 /*
 	function CallHook ($hookname, &$params) {
@@ -50,7 +50,7 @@ class doaprdfPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("doaprdf")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/doaprdf/index.php' . $param ));				
+						  array ('/plugins/doaprdf/index.php' . $param ));
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -70,7 +70,7 @@ class doaprdfPlugin extends Plugin {
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
-			}	
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
@@ -121,47 +121,47 @@ class doaprdfPlugin extends Plugin {
 				echo '<p>'.util_make_link ("/plugins/doaprdf/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('DoaPRDF Admin')).'</p>' ;
 			}
-		}												    
+		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
-		} 
+		}
 	}
 	*/
-	
+
 	/**
 	 * Declares itself as accepting RDF XML on /users
 	 * @param unknown_type $params
 	 */
 	function script_accepted_types (&$params) {
-		$script = $params['script']; 
-		if ($script == 'project_home') { 
-			$params['accepted_types'][] = 'application/rdf+xml'; 
-		} 
+		$script = $params['script'];
+		if ($script == 'project_home') {
+			$params['accepted_types'][] = 'application/rdf+xml';
+		}
 	}
-	
+
 	/**
 	 * Outputs user's FOAF profile
 	 * @param unknown_type $params
 	 */
 	function content_negociated_project_home (&$params) {
 		$projectname = $params['groupname'];
-		$accept = $params['accept']; 
-		
+		$accept = $params['accept'];
+
 		if($accept == 'application/rdf+xml') {
 				$params['content_type'] = 'application/rdf+xml';
-				
+
 				$params['content'] = '<?xml version="1.0"?>
 				<rdf:RDF
       				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
       				xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
       				xmlns:doap=http://usefulinc.com/ns/doap#">
-      				
+
       			<doap:Project rdf:about="">
-      				<doap:name>'. $projectname .'</doap:name> 
+      				<doap:name>'. $projectname .'</doap:name>
       			</doap:Project>
-      			
+
     			</rdf:RDF>';
-  
+
 		}
 	}
 }

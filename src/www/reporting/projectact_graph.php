@@ -38,7 +38,7 @@ $area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','task
 //
 //	Create Report
 //
-$report=new ReportProjectAct($SPAN,$g_id,$start,$end); 
+$report=new ReportProjectAct($SPAN,$g_id,$start,$end);
 
 //
 //	Check for error, such as license key problem
@@ -145,19 +145,19 @@ if ($area=='tracker') {
 	$lineplot4 ->SetLegend(convert_unicode(_('Page Views')));
 
 } else {
-	/*	
+	/*
  	* The goal of this code is to get values from the activity hook to compute stats without the
  	* need of another specific hook or another dedicated tables.
- 	* 
+ 	*
  	* So, values are requested to the hook and stored in $results array.
  	* After, the sum is made according to the chosen interval
  	* And then, the sum is stored in the ydata array.
-	*/	
-	
+	*/
+
 	$results = array();
 	$ids = array();
 	$texts = array();
-	
+
 	$hookParams['group'] = $g_id ;
 	$hookParams['results'] = &$results;
 	$hookParams['show'] = array();
@@ -166,7 +166,7 @@ if ($area=='tracker') {
 	$hookParams['ids'] = &$ids;
 	$hookParams['texts'] = &$texts;
 	plugin_hook ("activity", $hookParams) ;
-	
+
 	if ($SPAN == REPORT_TYPE_DAILY) {
 		$interval = REPORT_DAY_SPAN;
 	} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
@@ -174,10 +174,10 @@ if ($area=='tracker') {
 	} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
 		$interval = REPORT_MONTH_SPAN;
 	}
-	
+
 	print "start: $start ".date('r',$start)."<br>";
 	print "  end: $end ".date('r', $end)."<br>";
-	
+
 	$sum = array();
 	$starting_date = $start;
 	foreach ($results as $arr) {
@@ -186,21 +186,21 @@ if ($area=='tracker') {
 		$col_date = $starting_date+$col*$interval;
 		$sum[$col_date]++;
 	}
-	
+
 	// Now, stores the values in the ydata array for the graph.
 	$ydata = array();
 	$i = 0;
 	foreach ($report->getDates() as $d) {
-		$ydata[$i++] = isset($sum[strtotime($d)]) ? $sum[strtotime($d)] : 0; 
+		$ydata[$i++] = isset($sum[strtotime($d)]) ? $sum[strtotime($d)] : 0;
 	}
-	
+
 	$lineplot =new LinePlot($ydata);
 	$lineplot->SetColor("violet");
 	$graph->Add( $lineplot );
 
 	//	Legends
 	$lineplot->SetLegend($area);
-	
+
 //	var_dump($report->getDates());
 //	var_dump($ydata);
 // 	exit;
@@ -210,14 +210,14 @@ if ($area=='tracker') {
 //
 //	Titles
 //
-$graph->title->Set("Project Activity For: ".util_unconvert_htmlspecialchars($g->getPublicName()). 
+$graph->title->Set("Project Activity For: ".util_unconvert_htmlspecialchars($g->getPublicName()).
 	" (".date('Y-m-d',$report->getStartDate()) ." to ". date('Y-m-d',$report->getEndDate()) .")");
 $graph->subtitle->Set(forge_get_config ('forge_name'));
 //$graph->xaxis-> title->Set("Date" );
-//$graph->yaxis-> title->Set("Number" ); 
+//$graph->yaxis-> title->Set("Number" );
 
 $a=$report->getDates();
-$graph->xaxis->SetTickLabels($a); 
+$graph->xaxis->SetTickLabels($a);
 $graph->xaxis->SetLabelAngle(90);
 $graph->xaxis->SetTextLabelInterval($report->getGraphInterval());
 

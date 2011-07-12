@@ -12,7 +12,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -38,7 +38,7 @@ function globalsearch_admin_table_add () {
 	echo '<tr><td><strong>'._('Software only').'</strong></td><td><input type="checkbox" checked name="onlysw" value="t"/></td></tr>';
 	echo '<tr><td><strong>'._('Enabled').'</strong></td><td><input type="checkbox" checked name="enabled" value="t"/></td></tr>';
 	echo '<tr><td><strong>'._('Rank').'</strong></td><td><input type="text" name="rank" /></td></tr>';
-	
+
 	echo '</table><input type="submit" value="'._('Submit new associated forge').'" /></form>
                         <form name="cancel" action="'.$PHP_SELF.'" method="post">
                         <input type="submit" value="Cancel" />
@@ -150,7 +150,7 @@ function globalsearch_admin_table_edit ($id) {
 		echo '<tr><td><strong>'._('Software only').'</strong></td><td><input type="checkbox" '.(($old_onlysw == 't')?'checked':'') .' name="onlysw" value="t"/></td></tr>';
 		echo '<tr><td><strong>'._('Enabled').'</strong></td><td><input type="checkbox" '.(($old_enabled == 't')?'checked':'') .' name="enabled" value="t"/></td></tr>';
 		echo '<tr><td><strong>'._('Rank').'</strong></td><td><input type="text" name="rank" value="'.$old_rank.'"/></td></tr>';
-		
+
 		echo '</table><input type="submit" value="'._('Submit changes').'" /></form>
                         <form name="cancel" action="'.$PHP_SELF.'" method="post">
                         <input type="submit" value="'._('Cancel').'" />
@@ -240,13 +240,13 @@ function globalsearch_admin_table_show () {
                 echo db_error();
         }
 }
-	
+
 function globalsearch_status_name ($status_id) {
 	switch ($status_id) {
-	case 1: return _('New'); break; 
-	case 2: return _('OK'); break; 
-	case 3: return _('Error fetching data'); break; 
-	case 4: return _('Error parsing data'); break; 
+	case 1: return _('New'); break;
+	case 2: return _('OK'); break;
+	case 3: return _('Error fetching data'); break;
+	case 4: return _('Error parsing data'); break;
 	default: return _('Unknown status ID');
 	}
 }

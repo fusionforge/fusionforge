@@ -44,7 +44,7 @@ class helloworldPlugin extends Plugin {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo $HTML->PrintSubMenu (array ($text),
 						  array ('/plugins/helloworld/index.php' . $param ));
-						  
+
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -64,7 +64,7 @@ class helloworldPlugin extends Plugin {
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
-			}	
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
@@ -115,10 +115,10 @@ class helloworldPlugin extends Plugin {
 				echo '<p>'.util_make_link ("/plugins/helloworld/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('HelloWorld Admin')).'</p>' ;
 			}
-		}												    
+		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
-		} 
+		}
 	}
 }
 

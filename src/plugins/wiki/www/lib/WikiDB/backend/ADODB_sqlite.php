@@ -26,7 +26,7 @@ extends WikiDB_backend_ADODB
         }
         $this->WikiDB_backend_ADODB($dbparams);
     }
-  
+
     function _get_pageid($pagename, $create_if_missing = false) {
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
@@ -41,7 +41,7 @@ extends WikiDB_backend_ADODB
 
         $row = $dbh->GetRow($query);
         if (! $row ) {
-            // atomic version 
+            // atomic version
             // TODO: we have auto-increment since sqlite-2.3.4
             //   http://www.sqlite.org/faq.html#q1
             $rs = $dbh->Execute(sprintf("INSERT INTO $page_tbl"
@@ -62,5 +62,5 @@ extends WikiDB_backend_ADODB
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

@@ -21,7 +21,7 @@
  */
 
 class SearchRenderer extends Error {
-	
+
 	/**
 	 * This is not the SQL query but elements from the HTTP query
 	 *
@@ -48,7 +48,7 @@ class SearchRenderer extends Error {
 		$this->query['typeOfSearch'] = $typeOfSearch;
 		$this->query['isExact'] = $isExact;
 		$this->query['words'] = $words;
-		
+
 		$this->searchQuery = $searchQuery;
 	}
 
@@ -57,7 +57,7 @@ class SearchRenderer extends Error {
 	 * This is an abstract method. It _MUST_ be implemented in children classes.
 	 */
 	function flush() {}
-	
+
 }
 
 ?>

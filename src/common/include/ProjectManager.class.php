@@ -23,22 +23,22 @@
  * Provide access to projects
  */
 class ProjectManager {
-    
+
     /**
-   
-    
+
+
     /**
      * Hold an instance of the class
      */
     private static $_instance;
-    
+
     /**
      * A private constructor; prevents direct creation of object
      */
     private function __construct() {
-    
+
     }
-    
+
     /**
      * ProjectManager is a singleton
      * @return ProjectManager
@@ -50,18 +50,18 @@ class ProjectManager {
         }
         return self::$_instance;
     }
-    
-  
-    
+
+
+
     /**
      * @param $group_id int The id of the project to look for
      * @return Project
      */
     public function & getProject($group_id) {
-      
+
         return  group_get_object($group_id);
     }
-    
- 
+
+
 }
 ?>

@@ -52,7 +52,7 @@ if (session_loggedin()) {
 		}
 		$u->setPreference("paging", $paging);
 	}
-	
+
 	if($query_id) {
 		if ($query_id == '-1') {
 			$u->setPreference('art_query'.$ath->getID(),'');
@@ -354,7 +354,7 @@ if (db_numrows($res)>0) {
 	$selected = $af->getDefaultQuery();
 	while ($row = db_fetch_array($res)) {
 		if ($current != $row['type']) {
-			if ($current !== '') 
+			if ($current !== '')
 				echo '</optgroup>';
 			$label = $row['type'] ? 'Project' : 'Private';
 			echo '<optgroup label="'.$label.'">';
@@ -365,7 +365,7 @@ if (db_numrows($res)>0) {
 			echo ' selected="selected"';
 		echo '>'. $row['query_name'] .'</option>'."\n";
 	}
-	if ($current !== '') 
+	if ($current !== '')
 		echo '</optgroup>';
 	echo '</select>';
 	echo '</span>
@@ -436,7 +436,7 @@ if ($art_arr && $art_cnt > 0) {
 	} else {
 		$has_bargraph = false;
 	}
-	
+
 	if ($has_bargraph) {
 		// Display the roadmap block based on the values of the Status field.
 		$colors = array('#a71d16', '#ffa0a0', '#f5f5b5', '#bae0ba', '#16a716');
@@ -485,7 +485,7 @@ if ($art_arr && $art_cnt > 0) {
 				$i++;
 			}
 		}
-	
+
 		if ($graph) {
 		?>
 		<table class="progress">
@@ -499,7 +499,7 @@ if ($art_arr && $art_cnt > 0) {
 	<?php
 		}
 	}
-	
+
 	if ($set=='custom') {
 		$set .= '&amp;_assigned_to='.$_assigned_to.'&amp;_status='.$_status.'&amp;_sort_col='.$_sort_col.'&amp;_sort_ord='.$_sort_ord;
 		if (array_key_exists($ath->getCustomStatusField(),$_extra_fields)) {
@@ -589,7 +589,7 @@ if ($art_arr && $art_cnt > 0) {
 			} else if ($f == 'submitted_by') {
 				echo '<td>'. $art_arr[$i]->getSubmittedRealName() .'</td>';
 			} else if ($f == 'close_date') {
-				echo '<td>'. ($art_arr[$i]->getCloseDate() ? 
+				echo '<td>'. ($art_arr[$i]->getCloseDate() ?
 				date(_('Y-m-d H:i'),$art_arr[$i]->getCloseDate()) :'&nbsp; ') .'</td>';
 			} else if ($f == 'details') {
 				echo '<td>'. $art_arr[$i]->getDetails() .'</td>';
@@ -620,7 +620,7 @@ if ($art_arr && $art_cnt > 0) {
 					if ($art_arr[$i]->getStatusID() == 2) {
 						$value = '<strike>'.$value.'</strike>';
 					}
-					
+
 				}
 				echo '<td>' . $value .'</td>';
 			} else {
@@ -710,7 +710,7 @@ if ($art_arr && $art_cnt > 0) {
 			</tr>
 
 			<tr>
-			<td><strong>'._('Assigned to').':</strong><br />'. 
+			<td><strong>'._('Assigned to').':</strong><br />'.
 				$ath->technicianBox ('assigned_to','100.1',true,_('Nobody'),'100.1',_('No Change')) .'</td>
 			<td>';
 		if (!$ath->usesCustomStatuses()) {

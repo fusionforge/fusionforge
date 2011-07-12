@@ -41,7 +41,7 @@ class messagePlugin extends Plugin {
 		use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
 		use_javascript('/plugins/message/js/message.js');
 	}
-	
+
 	function site_admin_option_hook() {
 		echo '<li>' . util_make_link ('/plugins/message/index.php', _('Configure Global Message')) . '</li>';
 	}

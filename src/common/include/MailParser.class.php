@@ -82,7 +82,7 @@ class MailParser extends Error {
 		if ($header['Content-Type']) {
 			$hdr = strtolower($header['Content-Type']);
 			if (strpos($hdr,'text/plain') !== false) {
-				
+
 			} else {
 				$this->setError('Error - only text/plain supported at this time');
 				return false;

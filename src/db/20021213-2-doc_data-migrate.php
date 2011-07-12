@@ -24,7 +24,7 @@ if (!$res) {
 	echo db_error();
 	db_rollback();
 	exit();
-}	 
+}
 $rows=db_numrows($res);
 
 for ($i=0; $i<$rows; $i++) {

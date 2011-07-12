@@ -146,9 +146,9 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 	}
 	/**
 	 * cloneContent
-	 * 
+	 *
 	 * Take the content of a widget, clone it and return the id of the new content
-	 * 
+	 *
 	 * @param $id the id of the content to clone
 	 * @param $owner_id the owner of the widget of the new widget
 	 * @param $owner_type the type of the owner of the new widget (see WidgetLayoutManager)
@@ -205,7 +205,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 				break;
 				case 'mylatestsvncommits':
 				$o = new Widget_MyLatestSvnCommits();
-				break; 
+				break;
 				case 'mybugs':
 				$o = new Widget_MyBugs();
 				break;
@@ -276,17 +276,17 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 	static function getCodendiWidgets($owner_type) {
 		switch ($owner_type) {
 			case WidgetLayoutManager::OWNER_TYPE_USER:
-				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks', 
+				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks',
 						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mybugs', //'mywikipage' //not yet
 						'mytasks', 'mysrs', 'mylatestsvncommits', 'mytwitterfollow',
 						'mysystemevent', 'myrss', 'mymonitoreddocuments', 'myprojectslastdocuments',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:
-				$widgets = array('projectdescription', 'projectmembers', 'projectinfo', 
+				$widgets = array('projectdescription', 'projectmembers', 'projectinfo',
 						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
-						'projectlatestsvncommits', 'projectlatestcvscommits', 'projecttwitterfollow', 
-						'projectsvnstats', 'projectrss', 
+						'projectlatestsvncommits', 'projectlatestcvscommits', 'projecttwitterfollow',
+						'projectsvnstats', 'projectrss',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:

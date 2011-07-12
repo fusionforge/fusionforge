@@ -1,6 +1,6 @@
 <?php // -*-php-*-
 // $Id: AllRevisionsIter.php 7956 2011-03-03 17:08:31Z vargenau $
-  
+
 /**
  * An iterator which returns all revisions of page.
  *
@@ -22,7 +22,7 @@ extends WikiDB_backend_iterator
         $this->_pagename = $pagename;
         $this->_lastversion = -1;
     }
-  
+
     /**
      * Get next revision in sequence.
      *
@@ -42,10 +42,10 @@ extends WikiDB_backend_iterator
         if ($version)
             $vdata = $backend->get_versiondata($pagename, $version);
         //$backend->unlock();
-      
+
         if ($version == 0)
             return false;
-          
+
 	if (is_string($vdata) and !empty($vdata)) {
     	    $vdata1 =  @unserialize($vdata);
     	    if (empty($vdata1)) {
@@ -58,7 +58,7 @@ extends WikiDB_backend_iterator
         $rev = array('versiondata' => $vdata,
                      'pagename' => $pagename,
                      'version' => $version);
-      
+
         if (!empty($vdata['%pagedata'])) {
             $rev['pagedata'] = $vdata['%pagedata'];
         }
@@ -73,5 +73,5 @@ extends WikiDB_backend_iterator
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

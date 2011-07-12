@@ -1,7 +1,7 @@
 <?php
 /** External authentication via LDAP for Gforge
  * Copyright 2003 Roland Mas <lolando@debian.org>
- * Copyright 2004 Roland Mas <roland@gnurandal.com> 
+ * Copyright 2004 Roland Mas <roland@gnurandal.com>
  *                The Gforge Group, LLC <http://gforgegroup.com/>
  *
  * This file is not part of Gforge

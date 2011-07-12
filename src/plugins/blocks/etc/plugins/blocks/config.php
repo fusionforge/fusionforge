@@ -41,10 +41,10 @@
  * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
  * ALONE BASIS."
  */
- 
+
 $plugins_blocks_templates = array(
 	'summary_right' => "{boxTop Project}\nEnter your text here\n{boxBottom}",
 	'summary_description' => "Enter your description here",
 	'*' => "{boxHeader}Enter your text here{boxFooter}");
-	
+
 ?>

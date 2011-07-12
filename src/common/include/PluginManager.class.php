@@ -73,7 +73,7 @@ class PluginManager extends Error {
 	 */
 	function GetPluginObject($pluginname) {
 		if (!isset($this->plugins_objects[$pluginname])) {
-			return false; 
+			return false;
 		}
 		return $this->plugins_objects[$pluginname];
 	}

@@ -18,13 +18,13 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 class Event {
-   
+
     /**
      * Use this event to get the class name of an external event type (plugins)
      * see git plugin for implementation example
      */
      const GET_SYSTEM_EVENT_CLASS = 'get_system_event_class';
-     
-   
+
+
 }
 ?>

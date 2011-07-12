@@ -74,7 +74,7 @@ if (!$Group->usesSCM()) {
 
 // check if the scm_box is located in another server
 $scm_box = $Group->getSCMBox();
-//$external_scm = (gethostbyname(forge_get_config('web_host')) != gethostbyname($scm_box)); 
+//$external_scm = (gethostbyname(forge_get_config('web_host')) != gethostbyname($scm_box));
 $external_scm = !$sys_scm_single_host;
 
 if (!forge_check_perm ('scm', $Group->getID(), 'read')) {
@@ -85,21 +85,21 @@ if ($external_scm) {
 	//$server_script = "/cgi-bin/viewcvs.cgi";
 	$server_script = $GLOBALS["sys_path_to_scmweb"]."/viewcvs.cgi";
 	// remove leading / (if any)
-	$server_script = preg_replace("/^\\//", "", $server_script); 
-	
+	$server_script = preg_replace("/^\\//", "", $server_script);
+
 	// pass the parameters passed to this script to the remote script in the same fashion
 	$script_url = "http://".$scm_box."/".$server_script.$_SERVER["PATH_INFO"]."?".$_SERVER["QUERY_STRING"];
 	$fh = @fopen($script_url, "r");
 	if (!$fh) {
 		exit_error(sprintf(_('Could not open script %s.'),$script_url),'home');
 	}
-	
+
 	// start reading the output of the script (in 8k chunks)
 	$content = "";
 	while (!feof($fh)) {
 		$content .= fread($fh, 8192);
 	}
-	
+
 	if (viewcvs_is_html()) {
 		// Now, we must replace the occurencies of $server_script with this script
 		// (do this only of outputting HTML)
@@ -111,14 +111,14 @@ if ($external_scm) {
 	$unix_name = $Group->getUnixName();
 
 	// Call to ViewCVS CGI locally (see viewcvs_utils.php)
-	
+
 	// see what type of plugin this project if using
 	if ($Group->usesPlugin('scmcvs')) {
 		$repos_type = 'cvs';
 	} else if ($Group->usesPlugin('scmsvn')) {
 		$repos_type = 'svn';
 	}
-	
+
 	$content = viewcvs_execute($unix_name, $repos_type);
 }
 
@@ -132,7 +132,7 @@ while ($line && !$found) {
 		header('Content-Type:' . $matches[1]);
  		$found = true;
  	}
-	$line = strtok(SEPARATOR);	
+	$line = strtok(SEPARATOR);
 }
 $content = substr($content, strpos($content,$line));
 

@@ -35,11 +35,11 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
 	function ProjectHtmlSearchRenderer($words, $offset, $isExact) {
-		
+
 		$searchQuery = new ProjectSearchQuery($words, $offset, $isExact);
-		
+
 		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_SOFTWARE, $words, $isExact, $searchQuery);
-		
+
 		$this->tableHeaders = array(
 			_('Project Name'),
 			_('Description')
@@ -61,10 +61,10 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	 */
 	function getRows() {
 		$result =& $this->searchQuery->getResult();
-		
+
 		$return = '';
 		$i = 0;
-		
+
 		while ($row = db_fetch_array($result)) {
 			if (!forge_check_perm ('project_read', $row_top['group_id'])) {
 				continue ;
@@ -74,14 +74,14 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 				$what = 'foundry';
 			} else {
 				$what = 'projects';
-			}		
+			}
 			$return .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>'
 				.'<td width="30%"><a href="'.util_make_url('/'.$what.'/'.$row['unix_group_name'].'/').'">'
 				.html_image('ic/msg.png', '10', '12')
 				.' '.$this->highlightTargetWords($row['group_name']).'</a></td>'
 				.'<td width="70%">'.$this->highlightTargetWords($row['short_description']).'</td></tr>';
 		}
-		
+
 		return $return;
 	}
 
@@ -90,17 +90,17 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	 */
 	function redirectToResult() {
 
-		
+
 		$project_name = $this->getResultId('unix_group_name');
 		$project_id = $this->getResultId('group_id');
-		
+
 		if (forge_get_config('use_fti')) {
 			// If FTI is being used, the project name returned by the query will be "<b>projectname</b>", so
 			// we remove the HTML code (otherwise we'd get an error)
 			$project_name = str_replace('<b>', '', $project_name);
 			$project_name = str_replace('</b>', '', $project_name);
 		}
-		
+
 		if ($this->getResultId('type') == 2) {
 			session_redirect('/foundry/'.$project_name.'/');
 		} else {
@@ -108,7 +108,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 		}
 		exit();
 	}
-	
+
 }
 
 ?>

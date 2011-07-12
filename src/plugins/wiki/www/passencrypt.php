@@ -33,7 +33,7 @@ with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * Seed the random number generator.
  *
  * better_srand() ensures the randomizer is seeded only once.
- * 
+ *
  * How random do you want it? See:
  * http://www.php.net/manual/en/function.srand.php
  * http://www.php.net/manual/en/function.mt-srand.php
@@ -43,7 +43,7 @@ function better_srand($seed = '') {
     if (!$wascalled) {
         if ($seed === '') {
             list($usec, $sec) = explode(" ", microtime());
-            if ($usec > 0.1) 
+            if ($usec > 0.1)
                 $seed = (double) $usec * $sec;
             else // once in a while use the combined LCG entropy
                 $seed = (double) 1000000 * substr(uniqid("", true), 13);
@@ -51,7 +51,7 @@ function better_srand($seed = '') {
         if (function_exists('mt_srand')) {
             mt_srand($seed); // mersenne twister
         } else {
-            srand($seed);    
+            srand($seed);
         }
         $wascalled = TRUE;
     }
@@ -64,7 +64,7 @@ function rand_ascii($length = 1) {
         // return only typeable 7 bit ascii, avoid quotes
         if (function_exists('mt_rand'))
             // the usually bad glibc srand()
-            $s .= chr(mt_rand(40, 126)); 
+            $s .= chr(mt_rand(40, 126));
         else
             $s .= chr(rand(40, 126));
     }
@@ -100,9 +100,9 @@ function random_good_password ($minlength = 5, $maxlength = 8) {
     return $newpass;
 }
 
-/** PHP5 deprecated old-style globals if !(bool)ini_get('register_long_arrays'). 
+/** PHP5 deprecated old-style globals if !(bool)ini_get('register_long_arrays').
   *  See Bug #1180115
-  * We want to work with those old ones instead of the new superglobals, 
+  * We want to work with those old ones instead of the new superglobals,
   * for easier coding.
   */
 foreach (array('SERVER','GET','POST','ENV') as $k) {

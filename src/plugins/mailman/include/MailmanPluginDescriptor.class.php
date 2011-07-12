@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
@@ -24,7 +24,7 @@ require_once('common/plugin/PluginDescriptor.class.php');
 
 
 class MailmanPluginDescriptor extends PluginDescriptor {
-    
+
     function MailmanPluginDescriptor() {
         $this->PluginDescriptor(_('Mailman'), 'v1.0', _('Offers a better integration of Mailman in the forge'));
     }

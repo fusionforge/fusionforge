@@ -49,7 +49,7 @@ require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 
 class ArtifactExtraFieldElement extends Error {
 
-	/** 
+	/**
 	 * The artifact type object.
 	 *
 	 * @var		object	$ArtifactExtraField.
@@ -70,8 +70,8 @@ class ArtifactExtraFieldElement extends Error {
 	 *  @return	boolean	success.
 	 */
 	function ArtifactExtraFieldElement(&$ArtifactExtraField,$data=false) {
-		$this->Error(); 
-		
+		$this->Error();
+
 		//was ArtifactExtraField legit?
 		if (!$ArtifactExtraField || !is_object($ArtifactExtraField)) {
 			$this->setError('ArtifactExtraField: No Valid ArtifactExtraField');
@@ -99,8 +99,8 @@ class ArtifactExtraFieldElement extends Error {
 	}
 
 	/**
-	 *	create - create a new row in the table used to store the 
-	 *	choices for selection boxes.  This function is only used for 
+	 *	create - create a new row in the table used to store the
+	 *	choices for selection boxes.  This function is only used for
 	 *	extra fields and boxes configured by the admin
 	 *
 	 *	@param	string		Name of the choice
@@ -108,7 +108,7 @@ class ArtifactExtraFieldElement extends Error {
 	 *  @param  int status_id - optional for status box - maps to either open/closed.
 	 *  @return 	true on success / false on failure.
 	 */
-	
+
 	function create($name,$status_id=0) {
 		//
 		//	data validation
@@ -156,7 +156,7 @@ class ArtifactExtraFieldElement extends Error {
 					$atw = new ArtifactWorkflow($this->ArtifactExtraField->ArtifactType, $this->ArtifactExtraField->getID());
 					$atw->addNode($id);
 				}
-				
+
 				db_commit();
 				return $id;
 			}
@@ -194,7 +194,7 @@ class ArtifactExtraFieldElement extends Error {
 	function &getArtifactExtraField() {
 		return $this->ArtifactExtraField;
 	}
-	
+
 	/**
 	 *	getID - get this ArtifactExtraField ID.
 	 *
@@ -203,7 +203,7 @@ class ArtifactExtraFieldElement extends Error {
 	function getID() {
 		return $this->data_array['element_id'];
 	}
-	
+
 	/**
 	 *	getBoxID - get this  artifact box id.
 	 *
@@ -232,8 +232,8 @@ class ArtifactExtraFieldElement extends Error {
 	}
 
 	/**
-	 *  update - update rows in the table used to store the choices 
-	 *  for a selection box. This function is used only for extra  
+	 *  update - update rows in the table used to store the choices
+	 *  for a selection box. This function is used only for extra
 	 *  boxes and fields configured by the admin
 	 *
 	 *  @param	string	Name of the choice in a box.
@@ -265,7 +265,7 @@ class ArtifactExtraFieldElement extends Error {
 		} else {
 			$status_id=0;
 		}
-		$result = db_query_params ('UPDATE artifact_extra_field_elements 
+		$result = db_query_params ('UPDATE artifact_extra_field_elements
 			SET element_name=$1, status_id=$2
 			WHERE element_id=$3',
 					   array (htmlspecialchars($name),

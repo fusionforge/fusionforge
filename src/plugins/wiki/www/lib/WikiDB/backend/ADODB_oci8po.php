@@ -30,7 +30,7 @@ extends WikiDB_backend_ADODB
 
         $this->_prefix = isset($dbparams['prefix']) ? $dbparams['prefix'] : '';
     }
-  
+
     /**
      * Pack tables.
      */
@@ -96,7 +96,7 @@ extends WikiDB_backend_ADODB
                . "OR DBMS_LOB.INSTR(content, '$word') > 0";
     }
     */
-  
+
     /**
      * Serialize data
      */
@@ -136,7 +136,7 @@ extends WikiDB_backend_ADODB
                           $entry->user,
                           $entry->request_method,
                           $entry->request,
-                          $entry->request_uri,  
+                          $entry->request_uri,
                           $entry->request_args,
                           $entry->_ncsa_time($entry->time),
                           $entry->status,
@@ -172,5 +172,5 @@ extends WikiDB_backend_ADODB_search
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

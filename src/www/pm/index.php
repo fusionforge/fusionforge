@@ -134,7 +134,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		default:
 			return 0;
 		}
-		
+
 		switch ($sorttype) {
 		case 'str':
 			$tmp = strcoll ($va, $vb) ;
@@ -158,7 +158,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 			return $tmp ;
 		}
 	}
-		
+
 	usort ($pg_arr, 'project_group_comparator') ;
 
 	for ($j = 0; $j < count($pg_arr); $j++) {

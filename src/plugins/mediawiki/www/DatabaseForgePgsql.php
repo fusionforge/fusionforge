@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Copyright (C) 2010 Roland Mas, Olaf Lenz
  * Copyright (C) 2011 France Telecom
  *
@@ -25,12 +25,12 @@ class DatabaseForge extends DataBasePostgres{
 	function DatabaseForge($server=false, $user=false, $password=false,
 			       $dbName=false, $failFunction=false, $flags=0) {
 		global $wgDBtype;
-		
+
 		$wgDBtype = "postgres";
 		return DatabasePostgres::DatabasePostgres($server, $user,
 							  $password, $dbName, $failFunction, $flags);
 	}
-	
+
 	function tableName($name) {
 		switch ($name) {
 		case 'interwiki':

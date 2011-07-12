@@ -108,7 +108,7 @@ site_admin_header(array('title'=>_('Site Admin: Trove - Category List'))) ;
 
 	$labels =& $category->getLabels();
 	$alreadyDefined = array();
-	
+
 	$keys = array_keys($labels);
 	$count =0;
 

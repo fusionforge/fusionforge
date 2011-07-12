@@ -25,7 +25,7 @@ require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php'
 require_once $gfcommon.'search/TasksSearchQuery.class.php';
 
 class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
-	
+
 	/**
 	 * Constructor
 	 *
@@ -38,11 +38,11 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function TasksHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
-		
+
 		$searchQuery = new TasksSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember);
 
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_TASKS, $words, $isExact, $searchQuery, $groupId, 'pm');
-		
+
 		$this->tableHeaders = array(
 			'&nbsp;',
 			_('#'),
@@ -58,16 +58,16 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * getRows - get the html output for result rows
 	 *
 	 * @return string html output
-	 */	
+	 */
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 		$dateFormat = _('Y-m-d H:i');
-		
+
 		$return = '';
 		$rowColor = 0;
 		$lastProjectName = null;
-		
+
 		for($i = 0; $i < $rowsCount; $i++) {
 			//section changed
 			$currentProjectName = db_result($result, $i, 'project_name');
@@ -91,16 +91,16 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		return $return;
 	}
-		
+
 	/**
 	 * getSections - get the array of possible sections to search in
-	 * 
+	 *
   	 * @return array sections
-	 */		
+	 */
 	static function getSections($groupId) {
 		$userIsGroupMember = TasksHtmlSearchRenderer::isGroupMember($groupId);
-		
-		return TasksSearchQuery::getSections($groupId, $userIsGroupMember);		
+
+		return TasksSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }
 

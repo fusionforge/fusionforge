@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -83,14 +83,14 @@ class CreateNews extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Second news"));
 		$this->assertTrue($this->isTextPresent("This is another text"));
-		
+
 		// Check that news are visible in the activity
 		// TODO: Not implemented in gforge-4.6
 //		$this->click("link=Activity");
 //		$this->waitForPageToLoad("30000");
 //		$this->assertTextPresent("First news");
 //		$this->assertTextPresent("Second news");
-		
+
 		// Check modification of a news.
 		$this->clickAndWait("link=News");
 		$this->click("//a[contains(@href, '" . ROOT . "/news/admin/?group_id=6')]");
@@ -146,7 +146,7 @@ class CreateNews extends FForge_SeleniumTestCase
 		$this->assertTextPresent("hello");
 		$this->assertTextPresent("line5");
 	}
-	
+
 	/*
 	 * Test multiple post of the news (reload).
 	 * Test skipped due to manual intervention required.
@@ -161,15 +161,15 @@ class CreateNews extends FForge_SeleniumTestCase
 		$this->type("summary", "My ABC news");
 		$this->type("details", "hello DEF with a long detail.\n");
 		$this->clickAndWait("submit");
-		$this->assertTextPresent("News Added."); 
+		$this->assertTextPresent("News Added.");
 		$this->chooseOkOnNextConfirmation();
 		// Problem, a confirmation window is displayed and I didn't found
 		// the way to automatically click on the Ok button.
 		$this->refresh();
 		$this->waitForPageToLoad("30000");
-		$this->assertTextPresent("Error - double submit"); 
+		$this->assertTextPresent("Error - double submit");
 	}
-	
+
 }
 
 // Local Variables:

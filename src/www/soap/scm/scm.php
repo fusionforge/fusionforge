@@ -59,7 +59,7 @@ function getSCMData($session_ser, $group_id) {
 	if (!$grp->usesSCM()) {
 		return new soap_fault ('','getSCMData','SCM is not enabled in this project');
 	}
-	
+
 	$res = array();
 	//TODO: Get SCM type from plugins
 	if ($grp->usesPlugin("scmcvs")) {
@@ -69,9 +69,9 @@ function getSCMData($session_ser, $group_id) {
 		$res["box"] = $grp->getSCMBox();
 		$res["module"] = $grp->getUnixName();
 		$res["connection_string"] = "";	// this doesn't apply to CVS
-		
+
 		// Note: This was taken from CVS plugin. Maybe we shouldn't hardcode this?
-		$res["root"] = "/cvsroot/".$grp->getUnixName();		
+		$res["root"] = "/cvsroot/".$grp->getUnixName();
 	} else if ($grp->usesPlugin("scmsvn")) {
 		$res["type"] = "SVN";
 		$res["allow_anonymous"] = $grp->enableAnonSCM();
@@ -79,7 +79,7 @@ function getSCMData($session_ser, $group_id) {
 		$res["box"] = $grp->getSCMBox();
 		$res["root"] = $GLOBALS["svn_root"]."/".$grp->getUnixName();
 		$res["module"] = "";		// doesn't apply to SVN
-		
+
 		// Note: This is an ugly hack. We can't access SVN plugin object for this project
 		// directly. Currently this is being rewritten, but for now we must make this.
 		include $gfconfig.'plugins/scmsvn/config.php';

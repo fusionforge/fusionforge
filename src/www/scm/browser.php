@@ -24,7 +24,7 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'scm/include/scm_utils.php';    
+require_once $gfwww.'scm/include/scm_utils.php';
 
 $group_id = getIntFromRequest("group_id");
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
@@ -36,6 +36,6 @@ $hook_params['group_id'] = $group_id ;
 $hook_params['repo_name'] = $repo_name ;
 plugin_hook ("scm_browser_page", $hook_params) ;
 
-scm_footer(); 
+scm_footer();
 
 ?>

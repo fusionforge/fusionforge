@@ -25,7 +25,7 @@
 require_once $gfwww.'search/include/renderers/SearchRenderer.class.php';
 
 class RssSearchRenderer extends SearchRenderer {
-	
+
 	/**
 	 * callback function name used during the RSS export
 	 *
@@ -53,13 +53,13 @@ class RssSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 
 		header('Content-Type: text/plain');
-		
+
 		if($searchQuery->isError() || $this->isError()) {
 			echo '<channel></channel>';
-		} else {		
+		} else {
 			$searchQuery->executeQuery();
 			include_once $GLOBALS['gfwww'].'export/rss_utils.inc';
-	
+
 			rss_dump_project_result_set(
 				$searchQuery->getResult(),
 				'GForge Search Results',

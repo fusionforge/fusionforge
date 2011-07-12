@@ -35,11 +35,11 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
 	function PeopleHtmlSearchRenderer($words, $offset, $isExact) {
-		
+
 		$searchQuery = new PeopleSearchQuery($words, $offset, $isExact);
-		
+
 		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_PEOPLE, $words, $isExact, $searchQuery);
-		
+
 		$this->tableHeaders = array(
 			_('User name'),
 			_('Real name')
@@ -53,7 +53,7 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 		$GLOBALS['HTML']->header(array('title'=>_('People Search')));
 		parent::writeHeader();
 	}
-	
+
 	/**
 	 * getRows - get the html output for result rows
 	 *
@@ -62,7 +62,7 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
-		
+
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
@@ -72,7 +72,7 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
 	 */

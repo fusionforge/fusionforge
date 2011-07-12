@@ -82,7 +82,7 @@ $sr = new SurveyResponse($g);
 
 for ($i=0; $i<$count; $i++) {
     /*	Insert each form value into the responses table */
-    
+
     $val="_" . $quest_array[$i];
     $response = getStringFromRequest($val);;
 

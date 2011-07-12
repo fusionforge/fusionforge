@@ -40,7 +40,7 @@ $ath->adminHeader(array ('title'=> _('Configure workflow'),'pagename'=>'tracker_
 	List of possible user built Selection Boxes for an ArtifactType
 */
 if (!$has_error) {
-    		
+
   	$keys=array_keys($efarr);
    	$field_id = $keys[0];
    	$field_name = $efarr[$field_id]['field_name'];
@@ -51,13 +51,13 @@ if (!$has_error) {
 	$states = $elearray;
 
 ?>
-	    	
+
    	<h2><?php printf(_('Allowed initial values for the %1$s field'), $field_name) ?></h2>
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 	<input type="hidden" name="field_id" value="<?php echo $field_id ?>" />
 	<input type="hidden" name="workflow" value="1" />
-   	
-<?php 
+
+<?php
 	$from = _('From').' ';
 	$to = _('To').' ';
 	$init = _('Initial values').' ';
@@ -65,7 +65,7 @@ if (!$has_error) {
 	$title_arr=array();
 	$title_arr[]=_('From Value');
 	foreach ($elearray as $status) {
-		$title_arr[]=$status['element_name'];		
+		$title_arr[]=$status['element_name'];
 	}
 	echo $GLOBALS['HTML']->listTableTop($title_arr, false, ' ');
 	echo "\n";
@@ -89,7 +89,7 @@ if (!$has_error) {
 		$totitle_arr[] = $title_arr[$i]? $to.$title_arr[$i] : '';
 	}
 	echo $GLOBALS['HTML']->listTableTop($totitle_arr, false, ' ');
-	
+
 	$i=1;
 	foreach ($elearray as $status) {
 		echo '<tr id="configuring-'.$i++.'"><th style="text-align:left">'.$from.$status['element_name'].'</th>'."\n";
@@ -116,7 +116,7 @@ if (!$has_error) {
 	echo $GLOBALS['HTML']->listTableBottom();
 
 ?>
-<div class="tips">Tip: Click on <?php echo html_image('ic/acl_roles20.png', 20, 20, array('alt'=> _('Edit Roles'))) ?> to configure allowed roles for a transition (all by default).</div>	
+<div class="tips">Tip: Click on <?php echo html_image('ic/acl_roles20.png', 20, 20, array('alt'=> _('Edit Roles'))) ?> to configure allowed roles for a transition (all by default).</div>
 <p>
 <input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 </form>

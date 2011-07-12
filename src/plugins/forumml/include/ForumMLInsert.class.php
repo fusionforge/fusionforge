@@ -30,20 +30,20 @@ class ForumMLInsert {
     var $mail;
     var $id_list;
     var $dao;
-	
+
     // Class Constructor
 	function __construct($list_id) {
 		// set id_list
 		$this->id_list = $list_id;
 		$this->dao = new ForumML_MessageDao(CodendiDataAccess::instance());
 	}
-    
+
     // Insert values into forumml_messageheader table
     function insertMessageHeader($id_header,$value) {
 	$this->dao->insertMessageHeader($this->id_message,$id_header,$value);
     }
 
-    // Insert values into forumml_attachment table 
+    // Insert values into forumml_attachment table
     function insertAttachment($id_message, $filename,$filetype,$filepath,$content_id="") {
         if (is_file($filepath)) {
             $filesize = filesize($filepath);
@@ -55,9 +55,9 @@ class ForumMLInsert {
 
     // Insert values into forumml_header table
     function insertHeader($header) {
-        
+
     	// Search if the header is already in the table
-       $result = $this->dao->searchHeader($header);        
+       $result = $this->dao->searchHeader($header);
         // If not, insert it
        if ($result->rowCount()<1) {
 	       return $this->dao->insertHeader($header);
@@ -97,13 +97,13 @@ class ForumMLInsert {
 	    $this->mail = $structure;
 
 	    if (isset($structure["in-reply-to"])) {
-		    // special case: 'in-reply-to' header may contain "Message from ... " 
+		    // special case: 'in-reply-to' header may contain "Message from ... "
 		    if (preg_match('/^Message from.*$/',$structure["in-reply-to"])) {
 			    $arr = explode(" ",$structure["in-reply-to"]);
 			    $reply_to = $arr[count($structure["in-reply-to"]) - 1];
 		    } else {
 			    $reply_to = $structure["in-reply-to"];
-		    }	
+		    }
 	    } else {
 		    if (isset($structure["references"])) {
 			    // special case: 'in-reply-to' header is not set, but 'references' - which contain list of parent messages ids - is set
@@ -111,7 +111,7 @@ class ForumMLInsert {
 			    $reply_to = $ref_arr[count($structure["references"]) - 1];
 		    } else {
 			    $reply_to = "";
-		    }	
+		    }
 	    }
 
 	    // Message date
@@ -200,7 +200,7 @@ $this->id_message = $this->dao->insertMessage($this->id_list,  $id_parent , $bod
 					    $filename = "attachment";
 				    } else {
 					    // get filename from 'name' section
-					    $filename = substr(substr($filetype,$pos),6,-1);			
+					    $filename = substr(substr($filetype,$pos),6,-1);
 				    }
 			    } else {
 				    $filename = $struct->d_parameters["filename"];
@@ -219,7 +219,7 @@ $this->id_message = $this->dao->insertMessage($this->id_list,  $id_parent , $bod
 		    $fpath = $storage->store($basename, $struct->body, $this->id_list, $date);
 
 		    // insert attachment in the DB
-		    $this->insertAttachment($messageId, $basename, $filetype, $fpath, $content_id);	
+		    $this->insertAttachment($messageId, $basename, $filetype, $fpath, $content_id);
 	    }
     }
 
@@ -300,7 +300,7 @@ $this->id_message = $this->dao->insertMessage($this->id_list,  $id_parent , $bod
     }
 
     /**
-     * Abandon all hope you who enter here! Mail & MIME is at best a nightmare, take a couple of 
+     * Abandon all hope you who enter here! Mail & MIME is at best a nightmare, take a couple of
      * bottles before diving into this code...
      * http://en.wikipedia.org/wiki/MIME
      *

@@ -58,7 +58,7 @@ class ArtifactFactory extends Error {
 	var $summary;
 	var $description;
 	var $followups;
-	
+
 	var $query_type;		// query, default, custom
 	var $query_id;			// id of the query (when query_type=query)
 
@@ -152,7 +152,7 @@ class ArtifactFactory extends Error {
 			} elseif (isset($_COOKIE["GFTrackerQuery"])) {
 				$gf_tracker = unserialize($_COOKIE["GFTrackerQuery"]);
 				$query_id = (int)$gf_tracker[$this->ArtifactType->getID()];
-				if ($query_id) { 
+				if ($query_id) {
 					$this->query_type = 'query';
 					$this->query_id = $query_id;
 				}
@@ -216,7 +216,7 @@ class ArtifactFactory extends Error {
 			$i=$keys[$k];
 			$allowed_order_col[] = $efarr[$i]['extra_field_id'];
 		}
-		
+
 		$_order_col = util_ensure_value_in_set ($order_col,
 							$allowed_order_col);
 		$_sort_ord = util_ensure_value_in_set ($sort,
@@ -234,7 +234,7 @@ class ArtifactFactory extends Error {
 				if (is_array($_extra_fields)){
 					//print_r($_extra_fields);
 					$keys=array_keys($_extra_fields);
-					
+
 					foreach ($keys as $key) {
 						if ($_extra_fields[$key] != 'Array') {
 							$aux_extra_fields[$key] = $_extra_fields[$key];
@@ -246,7 +246,7 @@ class ArtifactFactory extends Error {
 				if (count($aux_extra_fields)>0) {
 					$extra_pref = '|'.serialize($aux_extra_fields);
 				}
-				
+
 				$pref_=$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.$extra_pref;
 				if ($pref_ != $u->getPreference('art_cust'.$this->ArtifactType->getID())) {
 					$u->setPreference('art_cust'.$this->ArtifactType->getID(),$pref_);
@@ -267,7 +267,7 @@ class ArtifactFactory extends Error {
 		$this->setChangedFrom($_changed);
 	}
 
-	
+
 	/**
 	 *	setChangedFrom - sets up changed-from and last-changed before you call getTasks().
 	 *
@@ -281,7 +281,7 @@ class ArtifactFactory extends Error {
 	/**
 	 *	getDefaultQuery - get the default query
 	 *
-	 *	@return	int	
+	 *	@return	int
 	 */
 	function getDefaultQuery() {
 		if ($this->query_type == 'query')
@@ -289,7 +289,7 @@ class ArtifactFactory extends Error {
 		else
 			return '';
 	}
-	
+
 	/**
 	 *	getArtifacts - get an array of Artifact objects.
 	 *
@@ -302,7 +302,7 @@ class ArtifactFactory extends Error {
 
 		$params = array() ;
 		$paramcount = 1 ;
-		
+
 		$selectsql = 'SELECT DISTINCT ON (group_artifact_id, artifact_id) artifact_vw.* FROM artifact_vw';
 
 		$wheresql = ' WHERE group_artifact_id=$'.$paramcount++ ;
@@ -416,7 +416,7 @@ class ArtifactFactory extends Error {
 
 		$sortorder = util_ensure_value_in_set ($this->sort,
 						       array ('ASC', 'DESC')) ;
-		
+
 		$sortcol = util_ensure_value_in_set ($this->order_col,
 						     array ('extra',
 							    'artifact_id',
@@ -432,7 +432,7 @@ class ArtifactFactory extends Error {
 		} else {
 			$ordersql = ''  ;
 		}
-			
+
 		$result = db_query_params ('SELECT * FROM (' . $selectsql . $wheresql . ') AS Artifacts' . $ordersql,
 					   $params) ;
 		$rows = db_numrows($result);

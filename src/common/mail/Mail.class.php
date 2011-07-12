@@ -1,10 +1,10 @@
 <?php
 /*
- * 
+ *
  */
 
 class Mail {
-    
+
     function Mail() {
         $this->setHeaderCharset('UTF-8');
         $this->setBodyCharset('UTF-8');
@@ -15,23 +15,23 @@ class Mail {
         $this->setBody('', true);
         $this->clearAdditionalHeaders();
     }
-    
+
     var $_headerCharset;
-    function setHeaderCharset($charset) { 
-        $this->_headerCharset = $charset; 
+    function setHeaderCharset($charset) {
+        $this->_headerCharset = $charset;
     }
-    function getHeaderCharset() { 
-        return $this->_headerCharset; 
+    function getHeaderCharset() {
+        return $this->_headerCharset;
     }
-    
+
     var $_bodyCharset;
-    function setBodyCharset($charset) { 
-        $this->_bodyCharset = $charset; 
+    function setBodyCharset($charset) {
+        $this->_bodyCharset = $charset;
     }
-    function getBodyCharset() { 
-        return $this->_bodyCharset; 
+    function getBodyCharset() {
+        return $this->_bodyCharset;
     }
-    
+
     var $_subject;
     function setSubject($subject) {
         $this->_subject = $subject;
@@ -42,14 +42,14 @@ class Mail {
     function getEncodedSubject() {
         return $this->_encodeHeader($this->_subject, $this->getHeaderCharset());
     }
-    
+
     /**
      * Function to encode a header if necessary
      * according to RFC2047
      * Filename.......: class.html.mime.mail.inc
      * Project........: HTML Mime mail class
-     * Last Modified..: Date: 2002/07/24 13:14:10 
-     * CVS Revision...: Revision: 1.4 
+     * Last Modified..: Date: 2002/07/24 13:14:10
+     * CVS Revision...: Revision: 1.4
      * Copyright......: 2001, 2002 Richard Heyes
      */
     function _encodeHeader($input, $charset) {
@@ -58,10 +58,10 @@ class Mail {
 			$replacement = preg_replace('/([\x80-\xFF])/e', '"=" . strtoupper(dechex(ord("\1")))', $value);
 			$input = str_replace($value, '=?' . $charset . '?Q?' . $replacement . '?=', $input);
 		}
-		
+
 		return $input;
 	}
-    
+
     /**
      * Given a header, this function will decode it
      * according to RFC2047. Probably not *exactly*
@@ -102,8 +102,8 @@ class Mail {
         }
 
         return $input;
-    }    
-    
+    }
+
     var $_body;
     function setBody($body) {
         $this->_body = $body;
@@ -111,7 +111,7 @@ class Mail {
     function getBody() {
         return $this->_body;
     }
-    
+
     var $_from;
     function setFrom($from) {
         $this->_from = $this->_validateRecipient($from);
@@ -210,13 +210,13 @@ class Mail {
 
     /**
      * @returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
-     *          It is important to note that just because the mail was accepted for delivery, 
-     *          it does NOT mean the mail will actually reach the intended destination. 
+     *          It is important to note that just because the mail was accepted for delivery,
+     *          it does NOT mean the mail will actually reach the intended destination.
      **/
     function send() {
 	$sys_lf="\n";
 	    if($this->getTo() === ''
-			    && $this->getCc() === '' 
+			    && $this->getCc() === ''
 			    && $this->getBcc() === '') {
 		    return false;
 	    }
@@ -246,7 +246,7 @@ class Mail {
 			    'header' => $header);
 	    //$em =& EventManager::instance();
 	    //$em->processEvent('mail_sendmail', $params);
-	    
+
 	    return mail($this->getTo(),
 			    $this->getEncodedSubject(),
 			    $this->getBody(),

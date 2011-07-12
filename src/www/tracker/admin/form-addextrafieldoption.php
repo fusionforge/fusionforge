@@ -38,7 +38,7 @@
 
 		$rows=count($efearr);
 		if ($rows > 0) {
-			
+
 			?>
 			<form action="<?php echo 'index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid; ?>" method="post">
 			<?php
@@ -47,7 +47,7 @@
 			$title_arr[]=_('Up/Down positions');
 			$title_arr[]=_('Elements Defined');
 			$title_arr[]='';
-			
+
 			echo $GLOBALS['HTML']->listTableTop ($title_arr,false, ' ');
 
 			for ($i=0; $i < $rows; $i++) {
@@ -63,11 +63,11 @@
 					'</td>'."\n".'<td>'.'&nbsp;&nbsp;&nbsp;'.$efearr[$i]['element_name'].
 					'</td>'."\n".'<td align="center">'.
 					'<a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
-					$efearr[$i]['element_id'].'&amp;boxid='.			
+					$efearr[$i]['element_id'].'&amp;boxid='.
 					$boxid.'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 					html_image('ic/forum_edit.gif','37','15',array('alt'=>"Edit")).'</a>'.
 					'</td></tr>'."\n";
-			}		   
+			}
 //			echo $GLOBALS['HTML']->listTableBottom();
 			?>
 			<tr class="noborder">
@@ -85,7 +85,7 @@
 			</form>
 			<?php
 
-		} else { 
+		} else {
 			echo "\n<strong>"._('You have not defined any elements')."</strong>";
 		}
 		?>

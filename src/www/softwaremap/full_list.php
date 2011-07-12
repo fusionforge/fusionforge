@@ -56,7 +56,7 @@ $HTML->printSoftwareMapLinks();
 $res_grp = db_query_params ('
 	SELECT group_id, group_name, unix_group_name, short_description, register_time
 	FROM groups
-	WHERE status = $1 AND type_id=1 AND group_id>4 AND register_time > 0 
+	WHERE status = $1 AND type_id=1 AND group_id>4 AND register_time > 0
 	ORDER BY group_name ASC
 ',
 			    array ('A'),
@@ -69,7 +69,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	$projects[] = $row_grp;
 }
 $querytotalcount = count($projects);
-	
+
 // #################################################################
 // limit/offset display
 
@@ -108,7 +108,7 @@ print $html_limit."<hr />\n";
 
 // #################################################################
 // print actual project listings
-for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) { 
+for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
 	$row_grp = $projects[$i_proj];
 
 	// check to see if row is in page range
@@ -116,15 +116,15 @@ for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
 		$viewthisrow = 1;
 	} else {
 		$viewthisrow = 0;
-	}	
+	}
 
 	if ($viewthisrow) {
-		
-		// Embed RDFa description for /projects/PROJ_NAME 
+
+		// Embed RDFa description for /projects/PROJ_NAME
 		$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']);
 		print '<div typeof="doap:Project sioc:Space" about="'.$proj_uri.'">'."\n";
 		print '<span rel="planetforge:hosted_by" resource="'. util_make_url ('/') .'"></span>'."\n";
-		
+
 		print '<table border="0" cellpadding="0" width="100%">';
 		print '<tr valign="top"><td colspan="2">';
 		print util_make_link_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id'],'<strong>'
@@ -135,7 +135,7 @@ for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
 
 		if ($row_grp['short_description']) {
 			print "- "
-			. '<span property="doap:short_desc">' 
+			. '<span property="doap:short_desc">'
 			. $row_grp['short_description']
 			. '</span>';
 		}
@@ -150,7 +150,7 @@ for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
         print '</table>';
         print '</div>'; // /doap:Project
 		print '<hr />';
-	} // end if for row and range chacking   
+	} // end if for row and range chacking
 }
 
 // print bottom navigation if there are more projects to display

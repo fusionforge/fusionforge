@@ -27,7 +27,7 @@ extends WikiDB_backend_ADODB
 
         $this->_prefix = isset($dbparams['prefix']) ? $dbparams['prefix'] : '';
     }
-  
+
     /**
      * Pack tables.
      */
@@ -112,5 +112,5 @@ extends WikiDB_backend_ADODB
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

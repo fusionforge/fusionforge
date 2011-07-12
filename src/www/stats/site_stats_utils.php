@@ -82,7 +82,7 @@ function stats_generate_trove_pulldown( $selected_id = 0 ) {
 		FROM trove_cat
 		ORDER BY fullpath',
 			array());
-	
+
 	print '
 		<select name="trovecatid">';
 
@@ -112,14 +112,14 @@ function stats_trove_cat_to_name( $trovecatid ) {
 
 	if ( $row = db_fetch_array($res) ) {
 		return $row["fullpath"];
-	} else { 
+	} else {
 		return sprintf(_(" (no category found with ID %d)"), $trovecatid) ;
 	}
 }
 
 
 function stats_generate_trove_grouplist( $trovecatid ) {
-	
+
 	$results = array();
 
 	$res = db_query_params ('
@@ -271,7 +271,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		if ( $trove_cat > 0 ) {
 			$uri_string .= "&amp;trovecatid=" . $trove_cat;
 		}
-		if ( $trove_cat == -1 ) { 
+		if ( $trove_cat == -1 ) {
 			$uri_string .= "&amp;projects=" . urlencode( implode( " ", $projects) );
 		}
 		$uri_string .= "&amp;orderby=";
@@ -306,8 +306,8 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 			<?php plugin_hook('stats_detail_header_table'); ?>
 			</tr>
 		<?php
-	
-		$i = $offset;	
+
+		$i = $offset;
 		while ( $row = db_fetch_array($res) ) {
 			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' align="right">'
 				. '<td>' . ($i + 1)." " . util_make_link ('/project/stats/?group_id='.$row["group_id"], $row["group_name"]) . '</td>'
@@ -386,7 +386,7 @@ function stats_site_projects_daily( $span ) {
 			<td><strong><?php echo _('SCM'); ?></strong></td>
 			</tr>
 		<?php
-	
+
 		while ( $row = db_fetch_array($res) ) {
 			 $i++;
 
@@ -482,7 +482,7 @@ function stats_site_aggregate( ) {
 	$res = db_query_params ('SELECT COUNT(*) AS count FROM users WHERE status=$1',
 			array ('A'));
 	$users = db_fetch_array($res);
-	
+
 
 	?>
 	<h2><?php echo _('Current Aggregate Statistics for All Time'); ?></h2>

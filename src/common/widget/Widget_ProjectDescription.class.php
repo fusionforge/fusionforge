@@ -23,7 +23,7 @@ require_once('common/include/Codendi_HTMLPurifier.class.php');
 
 /**
 * Widget_ProjectDescription
-* 
+*
 */
 class Widget_ProjectDescription extends Widget {
     public function __construct() {

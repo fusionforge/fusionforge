@@ -62,7 +62,7 @@ class CVSSyncMailPlugin extends Plugin {
 			} else {
 				$group->setPluginUse ( $this->name, false );
 			}
-		} 
+		}
 	}
 }
 

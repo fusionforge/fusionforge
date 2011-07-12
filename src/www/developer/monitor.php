@@ -49,7 +49,7 @@ if (!session_loggedin()) {
 						  $diary_user));
 		if (!$result || db_numrows($result) < 1) {
 			/*
-				User is not already monitoring thread, so 
+				User is not already monitoring thread, so
 				insert a row so monitoring can begin
 			*/
 			$result = db_query_params ('INSERT INTO user_diary_monitor (monitored_user,user_id) VALUES ($1,$2)',
@@ -70,13 +70,13 @@ if (!session_loggedin()) {
 							  $diary_user));
 			echo '<p class="feedback">' . _('Monitoring has been turned off') . "</p>";
 			echo _('You will not receive any more emails from this user');
-	
+
 		}
 		$HTML->footer (array());
 	} else {
 		$HTML->header(array('title'=>_('Error - Choose a User To Monitor First')));
 		$HTML->footer (array());
-	} 
+	}
 
 }
 

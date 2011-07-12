@@ -7,12 +7,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -22,7 +22,7 @@
  *
  */
 
-// This program helps test the OAuth provider plugin of fusionforge. 
+// This program helps test the OAuth provider plugin of fusionforge.
 // See the README for more details.
 
 require_once("OAuth.php");
@@ -47,13 +47,13 @@ function usage($code=0) {
 	echo " access_token [consumer_key] [consumer_secret] [request_token] [request_token_secret]\n";
 	echo "\n";
 	echo " call_echo [consumer_key] [consumer_secret] [access_token] [access_token_secret] [message]\n";
-	
+
 	exit($code);
 }
 
 /**
  * Makes a requests with the CURL library
- * 
+ *
  * @param integer $code HTTP return code (writable)
  * @param string $url to be called
  * @param string $params passed to curl_init
@@ -70,7 +70,7 @@ function request_curl(&$code, $url, $params=array()) {
     curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/xrds+xml, */*'));
 
     curl_setopt($curl, CURLOPT_HTTPGET, true);
-        
+
     $response = curl_exec($curl);
     if(curl_errno($curl))
     {
@@ -113,24 +113,24 @@ function fusionforge_authorize_endpoint() {
  * @param string $consumer_secret
  */
 function retrieve_request_token($request_token_endpoint, $consumer_key, $consumer_secret) {
-	
+
 	$hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
-	
+
 	$test_consumer = new OAuthConsumer($consumer_key, $consumer_secret);
-	
+
 	//print_r($test_consumer);
 
 	$params = array();
-	
+
 	$req_req = OAuthRequest::from_consumer_and_token($test_consumer, NULL, "GET", $request_token_endpoint, $params);
-	
+
 	$sig_method = $hmac_method;
-	
+
 	$req_req->sign_request($sig_method, $test_consumer, NULL);
-	
+
 	//print "request url: " . $req_req->to_url(). "\n";
 	//print_r($req_req);
-	
+
 	$code = -1;
 	$response = request_curl($code, $req_req->to_url());
 
@@ -139,18 +139,18 @@ function retrieve_request_token($request_token_endpoint, $consumer_key, $consume
 	$params = array();
 	parse_str($response, $params);
 	//print_r($params);
-	
+
 	echo "received request token :\n";
 	echo ' $oauth_token : '. $params['oauth_token'] ."\n";
 	echo ' $oauth_token_secret : '. $params['oauth_token_secret'] ."\n";
 	echo "\n";
-	
+
 	authorize_request_token_message(fusionforge_authorize_endpoint(), $params['oauth_token']);
 }
 
 /**
  * Call remote endpoints through OAuth
- *  
+ *
  * @param string $endpoint URL
  * @param string $consumer_key
  * @param string $consumer_secret
@@ -161,32 +161,32 @@ function retrieve_request_token($request_token_endpoint, $consumer_key, $consume
  */
 function call_remote_endpoint($endpoint, $consumer_key, $consumer_secret, $access_token, $token_secret, $params) {
 	$hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
-	
+
 	$test_consumer = new OAuthConsumer($consumer_key, $consumer_secret);
-	
+
   	$test_token = new OAuthConsumer($access_token, $token_secret);
 
-	
+
 	//print_r($test_consumer);
-	
+
 	$acc_req = OAuthRequest::from_consumer_and_token($test_consumer, $test_token, "GET", $endpoint, $params);
-	
+
 	$sig_method = $hmac_method;
-	
+
 	$acc_req->sign_request($sig_method, $test_consumer, $test_token);
-	
+
 	//print "request url: " . $req_req->to_url(). "\n";
 	//print_r($req_req);
-	
+
 	$code = -1;
 	$response = request_curl($code, $acc_req->to_url());
-	
+
 	//print_r($response);
-	
+
 	//echo "code : ";
 	//echo $code;
 	//echo "\n";
-	
+
 	if ($code != 200) {
 		echo 'received error code : ' . $code . "\n";
 		echo ' '. $response;
@@ -197,7 +197,7 @@ function call_remote_endpoint($endpoint, $consumer_key, $consumer_secret, $acces
 
 /**
  * Retrieves an access token in exchange for the request token (that should have been authorized by now)
- * 
+ *
  * @param string $access_token_endpoint
  * @param string $consumer_key
  * @param string $consumer_secret

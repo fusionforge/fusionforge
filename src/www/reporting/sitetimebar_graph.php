@@ -53,9 +53,9 @@ if (!$end) {
 	$end--;
 }
 
-$res=db_query_params ('SELECT week,sum(hours) 
-	FROM rep_time_tracking 
-	WHERE week 
+$res=db_query_params ('SELECT week,sum(hours)
+	FROM rep_time_tracking
+	WHERE week
 	BETWEEN $1 AND $2 GROUP BY week',
 			array($start,
 				$end));
@@ -65,7 +65,7 @@ $report->setData($res,1);
 
 //////
 // Create the graph. These two calls are always required
-$graph = new Graph(640,480,"auto");    
+$graph = new Graph(640,480,"auto");
 $graph->SetScale("textlin");
 $graph->yaxis->scale->SetGrace(20);
 

@@ -29,7 +29,7 @@ require_once $gfcommon.'include/pre.php';
 //system library
 //Required by Role.class.php to update system
 require_once $gfcommon.'include/System.class.php';
-// Right now the nss tables don't exist so if sys_account_manager_type=pgsql 
+// Right now the nss tables don't exist so if sys_account_manager_type=pgsql
 // This will fail UNIX should be safe
 //if (!forge_get_config('account_manager_type')) {
 	$sys_account_manager_type='UNIX';

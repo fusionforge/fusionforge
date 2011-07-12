@@ -68,7 +68,7 @@
 
 
 	/**
-	 * Get the value of $variable in $array. 
+	 * Get the value of $variable in $array.
 	 *
 	 * @access private
 	 * @param string $variable Name of the parameter to get.
@@ -127,7 +127,7 @@
 	function valid(&$validator) {
 		$this->_validated_input[$validator->getKey()] = true;
 		return $validator->validate($this->get($validator->getKey()));
-	} 
+	}
 
 	/**
 	 * Apply validator on all values of a submitted user array.

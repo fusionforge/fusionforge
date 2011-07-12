@@ -25,7 +25,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 
 class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
-	
+
 	/**
 	 * group id
 	 *
@@ -37,7 +37,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * the words to search for
 	 *
 	 * @var string $words
-	 */	
+	 */
 	var $words;
 
 	/**
@@ -46,7 +46,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @var boolean $isExact
 	 */
 	var $isExact;
-	
+
 	/**
 	 * selected parents sections
 	 *
@@ -68,10 +68,10 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->words = $words;
 		$this->isExact = $isExact;
 		$searchQuery =& $this->searchQuery;
-		
+
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
 	}
-	
+
 	/**
 	 * flush - overwrites the flush method from htmlrenderer
 	 */
@@ -83,7 +83,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
 	 * writeHeader - write the header of the output
-	 */		
+	 */
 	function writeHeader() {
 		site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, 'toptab'=>'none'));
 		$sectionarray = $this->getSectionArray();
@@ -91,7 +91,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		echo $this->getAdvancedSearchBox($sectionarray, $this->groupId, $this->words, $this->isExact);
 	}
-	
+
 	/**
 	 * writeBody - write the Body of the output
 	 */
@@ -102,25 +102,25 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			echo $this->getResult();
 		}
 	}
-	
+
 	/**
 	 * getResult - returns the Body of the output
-	 * 
+	 *
   	 * @return string result of all selected searches
 	 */
 	function getResult() {
 		$html = '';
-		
+
 		if (in_array('short_forum', $this->selectedParentSections)) {
 			$renderer = new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_forum'));
 			$html .= $this->getPartResult($renderer, 'short_forum', _('Forum Search Results'));
 		}
-		
+
 		if (in_array('short_tracker', $this->selectedParentSections)) {
 			$renderer = new TrackersHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId,  $this->getSelectedChildSections('short_tracker'));
 			$html .= $this->getPartResult($renderer,  'short_tracker', _('Tracker Search Results'));
 		}
-		
+
 		if (in_array('short_pm', $this->selectedParentSections)) {
 			$renderer = new TasksHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_pm'));
 			$html .= $this->getPartResult($renderer, 'short_pm', _('Task Search Results'));
@@ -135,19 +135,19 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$renderer = new FilesHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_files'));
 			$html .= $this->getPartResult($renderer, 'short_files', _('Files Search Results'));
 		}
-		
+
 		if (in_array('short_news', $this->selectedParentSections)) {
 			$renderer = new NewsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 			$html .= $this->getPartResult($renderer, 'short_news', _('News Search Results'));
 		}
 
-		// This is quite complex but the goal is to extract all the 
+		// This is quite complex but the goal is to extract all the
 		// registered plugins to the hook 'search_engines' and call
 		// them.
 		$pluginManager = plugin_manager_get_object();
 		$searchManager = getSearchManager();
 		$engines = $searchManager->getAvailableSearchEngines();
-		
+
 		if (isset($pluginManager->hooks_to_plugins['search_engines'])) {
 			$p_list = $pluginManager->hooks_to_plugins['search_engines'];
 			foreach ($p_list as $p_name) {
@@ -156,8 +156,8 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				if (in_array($p_name, $this->selectedParentSections)) {
 					reset($engines);
 					foreach($engines as $e) {
-						if ($e->type == $p_name) {		
-							$renderer = $e->getSearchRenderer($this->words, 
+						if ($e->type == $p_name) {
+							$renderer = $e->getSearchRenderer($this->words,
 								$this->offset, $this->isExact, $this->groupId);
 							$html .= $this->getPartResult($renderer, 'short_'.$p_name, $name);
 						}
@@ -166,30 +166,30 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			}
 		}
 
-		return $html.'<br />'; 
+		return $html.'<br />';
 	}
 
 	/**
-	* getPartResult - returns the result of the given renderer 
-	* 
+	* getPartResult - returns the result of the given renderer
+	*
   	* @return string result of the renderer
-	*/			
+	*/
 	function getPartResult($renderer, $section, $title='') {
 		$result = '';
 		$renderer->searchQuery->executeQuery();
 		$query = NULL;
-		
+
 		if ($title === '')
 			$title = $section;
-		
+
 		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
-		
+
 		if ($renderer->searchQuery->getRowsCount() > 0) {
 			if ($renderer->searchQuery->getRowsTotalCount() >= $renderer->searchQuery->getRowsPerPage())
 				$result .= '<i>' . sprintf(_('Note: only the first %d results for this category are displayed.'), $renderer->searchQuery->getRowsPerPage()) . '</i>';
 			$result .= $GLOBALS['HTML']->listTabletop($renderer->tableHeaders);
-			$result .= $renderer->getRows();			
-			$result .= $GLOBALS['HTML']->listTableBottom();			
+			$result .= $renderer->getRows();
+			$result .= $GLOBALS['HTML']->listTableBottom();
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
 			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> - No sections available (check your permissions)'), $query['words']).'</p>';
 		} else {
@@ -197,18 +197,18 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		return $result;
 	}
-	
+
 	/**
 	* getSectionArray - creates an array of sections in which the user can search
-	* 
-  	* @return array sections 
-	*/		
+	*
+  	* @return array sections
+	*/
 	function getSectionArray() {
 		global $gfwww, $gfcommon;
-		
+
 		$sections = array();
 		$group = group_get_object($this->groupId);
-		
+
 		if ($group->usesForum()) {
 			require_once $gfwww.'search/include/renderers/ForumsHtmlSearchRenderer.class.php';
 			$undersections = ForumsHtmlSearchRenderer::getSections($this->groupId);
@@ -216,7 +216,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				$sections['short_forum'] = $undersections;
 			}
 		}
-		
+
 		if ($group->usesTracker()) {
 			require_once $gfwww.'search/include/renderers/TrackersHtmlSearchRenderer.class.php';
 			$undersections = TrackersHtmlSearchRenderer::getSections($this->groupId);
@@ -236,17 +236,17 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		if ($group->usesDocman()) {
 			require_once $gfwww.'search/include/renderers/DocsHtmlSearchRenderer.class.php';
-			$undersections = DocsHtmlSearchRenderer::getSections($this->groupId);	
+			$undersections = DocsHtmlSearchRenderer::getSections($this->groupId);
 			if (count($undersections) > 0) {
 				$sections['short_docman'] = $undersections;
 			}
 		}
-		
+
 		if ($group->usesNews()) {
 			require_once $gfwww.'search/include/renderers/NewsHtmlSearchRenderer.class.php';
 			$sections['short_news'] = true;
 		}
-			
+
 		if ($group->usesFRS()) {
 			require_once $gfwww.'search/include/renderers/FrsHtmlSearchRenderer.class.php';
 			$undersections = FrsHtmlSearchRenderer::getSections($this->groupId);
@@ -268,17 +268,17 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		return $sections;
 	}
-	
+
 	/**
 	* handleTransferInformation - marks parentsections if child is marked and processes cookie information
-	* 
-	*/		
+	*
+	*/
 	function handleTransferInformation(&$sectionarray) {
 		//get through all sections
 		//if a childsection is marked to search in, mark the parent too
-		
+
 		$postArray = _getPostArray();
-		
+
 		foreach($sectionarray as $key => $section) {
 			if(is_array($section)) {
 				foreach ($postArray as $postkey => $postvalue) {
@@ -293,18 +293,18 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 
 	}
-	
+
 	/**
 	* getSelectedChildSections - gets all selected child sections from the given parentsection
-	* 
+	*
 	* @param string	$parentsection the parentsection
-	* 
+	*
   	* @return array all child sections from the parent section the user wants to search in
-	*/		
+	*/
 	function getSelectedChildSections($parentsection) {
 		$sections = array();
 		$postArray = _getPostArray();
-		
+
 		foreach($postArray as $key => $value) {
 			if (substr($key, 0, strlen($parentsection)) == $parentsection) {
 				if (strlen(substr($key, strlen($parentsection) , strlen($key))) > 0) {
@@ -351,7 +351,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 
                 for (var i = 0; i < document.advancedsearch.elements.length; i++)
-                    if (document.advancedsearch.elements[i].type == "checkbox") 
+                    if (document.advancedsearch.elements[i].type == "checkbox")
                             if (document.advancedsearch.elements[i].name.substr(0, parent.length) == parent)
                                 document.advancedsearch.elements[i].checked = checked;
                 }
@@ -378,7 +378,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$break = $breakLimit;
 		$countLines = 0;
  		$countCol = 1;
- 
+
 		$return = '
 			<table width="100%" border="0" cellspacing="0" cellpadding="1">
 				<tr class="tableheader">
@@ -400,7 +400,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			} else {
 				$countLines += 3;
 			}
-				
+
 			if ($countLines >= $break) {
  				// if we are closer to the limit with this one included, then
  				// it's better to include it.
@@ -410,7 +410,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 					$break += $breakLimit;
 				}
 			}
-		
+
 			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0">
 							<tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
 							<tr>
@@ -423,7 +423,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 							</tr>
 							<tr class="tablecontent">
 								<td colspan="2">';
-								
+
 			if (!is_array($section)) {
 				$return .= '		<input type="checkbox" name="'.urlencode($key).'"';
 				if (isset($GLOBALS[urlencode($key)]))
@@ -435,14 +435,14 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 					$return .= '	<input type="checkbox" name="'.urlencode($key.$underkey).'"';
 					if (isset($GLOBALS[urlencode($key.$underkey)]))
 						$return .= ' checked="checked" ';
-					$return .= ' />'.$undersection.'<br />';				
-					
+					$return .= ' />'.$undersection.'<br />';
+
 				}
-				
+
 			$return .=		'	</td>
 							</tr>
 						</table></td></tr></table><br />';
-						
+
 			if ($countLines >= $break) {
 				if (($countLines - $break) < ($break - $countLines)) {
 					$return .= '</td><td width="33%">';
@@ -450,7 +450,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				}
 			}
 		}
-		
+
 		return $return.'		</td>
 							</tr>
 						</table></td></tr></table>';

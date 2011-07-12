@@ -46,7 +46,7 @@ function ReportProjectTime($group_id,$type,$start=0,$end=0) {
 	//	Task report
 	//
 	if (!$type || $type=='tasks') {
-		$res = db_query_params ('SELECT pt.summary,sum(rtt.hours) AS hours 
+		$res = db_query_params ('SELECT pt.summary,sum(rtt.hours) AS hours
 			FROM rep_time_tracking rtt, project_task pt, project_group_list pgl
 			WHERE pgl.group_project_id=pt.group_project_id
 			AND pgl.group_id=$1
@@ -62,7 +62,7 @@ function ReportProjectTime($group_id,$type,$start=0,$end=0) {
 	//
 	} elseif ($type=='category') {
 
-		$res = db_query_params ('SELECT rtc.category_name, sum(rtt.hours) AS hours 
+		$res = db_query_params ('SELECT rtc.category_name, sum(rtt.hours) AS hours
 			FROM rep_time_tracking rtt, rep_time_category rtc, project_task pt, project_group_list pgl
 			WHERE pgl.group_id=$1
 			AND pgl.group_project_id=pt.group_project_id
@@ -79,7 +79,7 @@ function ReportProjectTime($group_id,$type,$start=0,$end=0) {
 	//
 	} elseif ($type=='subproject') {
 
-		$res = db_query_params ('SELECT pgl.project_name, sum(rtt.hours) AS hours 
+		$res = db_query_params ('SELECT pgl.project_name, sum(rtt.hours) AS hours
 			FROM rep_time_tracking rtt, project_task pt, project_group_list pgl
 			WHERE pgl.group_id=$1
 			AND rtt.report_date BETWEEN $2 AND $3
@@ -95,7 +95,7 @@ function ReportProjectTime($group_id,$type,$start=0,$end=0) {
 	//
 	//	Biggest Users
 	//
-		$res = db_query_params ('SELECT u.realname, sum(rtt.hours) AS hours 
+		$res = db_query_params ('SELECT u.realname, sum(rtt.hours) AS hours
 			FROM users u, rep_time_tracking rtt, project_task pt, project_group_list pgl
 			WHERE pgl.group_id=$1
 			AND rtt.report_date BETWEEN $2 AND $3

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Copyright (c) Institut TELECOM, 2010. All Rights Reserved.
  *
@@ -24,22 +24,22 @@ require_once ('CodendiOSLCConnector.php');
 class CodendiCmController extends CmController {
     /**
      * @var oslc
-     * 
+     *
      * This will be the OSLC-CM controller managing the business logic of the application
      */
     private $oslc;
-    
+
     /**
-     * Defines accepted mime-types for queries, and corresponding 
+     * Defines accepted mime-types for queries, and corresponding
      * format of output
-     * 
-     * Order is important for the XML variants : 
+     *
+     * Order is important for the XML variants :
      * the first one is the default returned when only basic XML is required
-     * 
+     *
      * @var array
      */
     private static $supportedAcceptMimeTypes = array();
-    
+
     /**
      * Init Codendi REST controller.
      */
@@ -89,7 +89,7 @@ class CodendiCmController extends CmController {
     // Create an OSLC Controller for Codendi.
         $this->oslc = new CodendiOSLCConnector();
     }
-    
+
     public function getAction(){
         $params = $this->getRequest()->getParams();
 
@@ -138,14 +138,14 @@ class CodendiCmController extends CmController {
                 break;
         }
     }
-	
+
     /**
      * Handles PUT action as routed by Zend_Rest_Route
-     *  
+     *
      * Update of an existing changerequest
      * Will be invoked if PUT or if POST on a path relating to resources (due to Zend REST route behaviour)
      * So in case of POST, will pass the handling to postAction()
-     * 
+     *
      * @return unknown_type
      */
     public function putAction(){
@@ -236,7 +236,7 @@ class CodendiCmController extends CmController {
             }
         }
     }
-    
+
     public function postAction(){
         $req = $this->getRequest();
 
@@ -306,7 +306,7 @@ class CodendiCmController extends CmController {
                 throw new ConflictException('Need a valid tracker to create a change request');
             }
         } else {
-            throw new ConflictException('Need a valid project and tracker to create change request !');	
+            throw new ConflictException('Need a valid project and tracker to create change request !');
         }
 
         // prepare redirection
@@ -324,27 +324,27 @@ class CodendiCmController extends CmController {
 
         //logout the user
         session_logout();
-				
+
         //redirect to new change request
         $this->getResponse()->setRedirect($newlocation,201);
     }
 
     public function indexAction(){
-        
+
     }
 
     public function deleteAction(){
-        
+
     }
-    
+
     /**
      * Retrieve an individual resource and populates the view of an OSLC CM ChangeRequest
-     * 
+     *
      * @param string $identifier
      * @param string $uri
      */
     public function readresourceAction() {
-	
+
         $params = $this->getRequest()->getParams();
         $content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
         if (! $content_type) {
@@ -380,7 +380,7 @@ class CodendiCmController extends CmController {
             $this->_forward('ResNotFound','error');
         }
     }
-    
+
     public function readresourcecollectionAction()	{
 
         $content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
@@ -424,7 +424,7 @@ class CodendiCmController extends CmController {
         //print_r($this->view);
         $this->getResponse()->setHeader('Content-Type', $content_type);
     }
-    
+
     /**
      * Handle OSLC services catalog access.
      */
@@ -443,9 +443,9 @@ class CodendiCmController extends CmController {
 
         $this->getResponse()->setHeader('Content-Type', $content_type);
     }
-    
+
     /**
-     * 
+     *
      * Handles OSLC service document (service document) access.
      * TODO: Implement service document details.
      */
@@ -463,7 +463,7 @@ class CodendiCmController extends CmController {
 
         $this->getResponse()->setHeader('Content-Type', $content_type);
     }
-    
+
     /**
      * Performs authentication according to the configured AUTH_TYPE configured
      *
@@ -484,7 +484,7 @@ class CodendiCmController extends CmController {
                 break;
         }
     }
-    
+
     /**
      * Helper function that performs HTTP Basic authentication from request parameters/headers
      *
@@ -513,7 +513,7 @@ class CodendiCmController extends CmController {
                 throw new BadRequestException('Unsupported auth method : '. $auth[0] .' !');
             }
         }
-        // Do authentication in Codendi 
+        // Do authentication in Codendi
         if(isset($password)) {
             $user = UserManager::instance()->login($login, $password);
             if($user->isLoggedIn()) {
@@ -522,7 +522,7 @@ class CodendiCmController extends CmController {
             	$return =  false;
             }
         }
-        
+
         return $return;
     }
 }

@@ -50,7 +50,7 @@ class CreateTrackerRelation extends FForge_SeleniumTestCase
 	{
 		$this->populateStandardTemplate('trackers');
 		$this->init();
-					
+
 		// Testing extra-fields
 		$this->click("link=Tracker");
 		$this->waitForPageToLoad("30000");

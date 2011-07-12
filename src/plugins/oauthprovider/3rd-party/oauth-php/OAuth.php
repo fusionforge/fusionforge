@@ -37,7 +37,7 @@ class OAuthToken {/*{{{*/
    * would respond to request_token and access_token calls with
    */
   function to_string() {/*{{{*/
-    return "oauth_token=" . OAuthUtil::urlencodeRFC3986($this->key) . 
+    return "oauth_token=" . OAuthUtil::urlencodeRFC3986($this->key) .
         "&oauth_token_secret=" . OAuthUtil::urlencodeRFC3986($this->secret);
   }/*}}}*/
 
@@ -124,7 +124,7 @@ class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {/*{{{*/
   public function build_signature(&$request, $consumer, $token) {/*{{{*/
     $base_string = $request->get_signature_base_string();
     $request->base_string = $base_string;
-  
+
     // Fetch the private key cert based on the request
     $cert = $this->fetch_private_cert($request);
 
@@ -132,11 +132,11 @@ class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {/*{{{*/
     $privatekeyid = openssl_get_privatekey($cert);
 
     // Sign using the key
-    $ok = openssl_sign($base_string, $signature, $privatekeyid);   
+    $ok = openssl_sign($base_string, $signature, $privatekeyid);
 
     // Release the key resource
     openssl_free_key($privatekeyid);
-  
+
     return base64_encode($signature);
   } /*}}}*/
 
@@ -144,7 +144,7 @@ class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {/*{{{*/
     $decoded_sig = base64_decode($signature);
 
     $base_string = $request->get_signature_base_string();
-  
+
     // Fetch the public key cert based on the request
     $cert = $this->fetch_public_cert($request);
 
@@ -152,11 +152,11 @@ class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {/*{{{*/
     $publickeyid = openssl_get_publickey($cert);
 
     // Check the computed signature against the one passed in the query
-    $ok = openssl_verify($base_string, $decoded_sig, $publickeyid);   
+    $ok = openssl_verify($base_string, $decoded_sig, $publickeyid);
 
     // Release the key resource
     openssl_free_key($publickeyid);
-  
+
     return $ok == 1;
   } /*}}}*/
 }/*}}}*/
@@ -184,7 +184,7 @@ class OAuthRequest {/*{{{*/
     $scheme = (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != "on") ? 'http' : 'https';
     @$http_url or $http_url = $scheme . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     @$http_method or $http_method = $_SERVER['REQUEST_METHOD'];
-    
+
     $request_headers = OAuthRequest::get_headers();
 
     // let the library user override things however they'd like, if they know
@@ -200,10 +200,10 @@ class OAuthRequest {/*{{{*/
       $header_parameters = OAuthRequest::split_header($request_headers['Authorization']);
       if ($http_method == "GET") {
         $req_parameters = $_GET;
-      } 
+      }
       else if ($http_method == "POST") {
         $req_parameters = $_POST;
-      } 
+      }
       $parameters = array_merge($header_parameters, $req_parameters);
       $req = new OAuthRequest($http_method, $http_url, $parameters);
     }
@@ -247,25 +247,25 @@ class OAuthRequest {/*{{{*/
 
   /**
    * Returns the normalized parameters of the request
-   * 
+   *
    * This will be all (except oauth_signature) parameters,
    * sorted first by key, and if duplicate keys, then by
    * value.
    *
    * The returned string will be all the key=value pairs
    * concated by &.
-   * 
+   *
    * @return string
    */
   public function get_signable_parameters() {/*{{{*/
     // Grab all parameters
     $params = $this->parameters;
-		
+
     // Remove oauth_signature if present
     if (isset($params['oauth_signature'])) {
       unset($params['oauth_signature']);
     }
-		
+
     // Urlencode both keys and values
     $keys = array_map(array('OAuthUtil', 'urlencodeRFC3986'), array_keys($params));
     $values = array_map(array('OAuthUtil', 'urlencodeRFC3986'), array_values($params));
@@ -278,7 +278,7 @@ class OAuthRequest {/*{{{*/
     $pairs = array();
     foreach ($params as $key=>$value ) {
       if (is_array($value)) {
-        // If the value is an array, it's because there are multiple 
+        // If the value is an array, it's because there are multiple
         // with the same key, sort them, then add all the pairs
         natsort($value);
         foreach ($value as $v2) {
@@ -288,7 +288,7 @@ class OAuthRequest {/*{{{*/
         $pairs[] = $key . '=' . $value;
       }
     }
-		
+
     // Return the pairs, concated with &
     return implode('&', $pairs);
   }/*}}}*/
@@ -412,8 +412,8 @@ class OAuthRequest {/*{{{*/
    * parameters, has to do some unescaping
    */
   private static function split_header($header) {/*{{{*/
-    // remove 'OAuth ' at the start of a header 
-    $header = substr($header, 6); 
+    // remove 'OAuth ' at the start of a header
+    $header = substr($header, 6);
 
     // error cases: commas in parameter values?
     $parts = explode(",", $header);
@@ -469,10 +469,10 @@ class OAuthServer {/*{{{*/
   }/*}}}*/
 
   public function add_signature_method($signature_method) {/*{{{*/
-    $this->signature_methods[$signature_method->get_name()] = 
+    $this->signature_methods[$signature_method->get_name()] =
         $signature_method;
   }/*}}}*/
-  
+
   // high level functions
 
   /**
@@ -543,16 +543,16 @@ class OAuthServer {/*{{{*/
    * figure out the signature with some defaults
    */
   private function get_signature_method(&$request) {/*{{{*/
-    $signature_method =  
+    $signature_method =
         @$request->get_parameter("oauth_signature_method");
     if (!$signature_method) {
       $signature_method = "PLAINTEXT";
     }
-    if (!in_array($signature_method, 
+    if (!in_array($signature_method,
                   array_keys($this->signature_methods))) {
       throw new OAuthException(
         "Signature method '$signature_method' not supported try one of the following: " . implode(", ", array_keys($this->signature_methods)), 400
-      );      
+      );
     }
     return $this->signature_methods[$signature_method];
   }/*}}}*/
@@ -602,11 +602,11 @@ class OAuthServer {/*{{{*/
 
     $signature_method = $this->get_signature_method($request);
 
-    $signature = $request->get_parameter('oauth_signature');    
+    $signature = $request->get_parameter('oauth_signature');
     $valid_sig = $signature_method->check_signature(
-      $request, 
-      $consumer, 
-      $token, 
+      $request,
+      $consumer,
+      $token,
       $signature
     );
 
@@ -740,12 +740,12 @@ class OAuthUtil {/*{{{*/
   public static function urlencodeRFC3986($string) {/*{{{*/
     return str_replace('+', ' ',
                        str_replace('%7E', '~', rawurlencode($string)));
-    
-  }/*}}}*/
-    
 
-  // This decode function isn't taking into consideration the above 
-  // modifications to the encoding process. However, this method doesn't 
+  }/*}}}*/
+
+
+  // This decode function isn't taking into consideration the above
+  // modifications to the encoding process. However, this method doesn't
   // seem to be used anywhere so leaving it as is.
   public static function urldecodeRFC3986($string) {/*{{{*/
     return rawurldecode($string);

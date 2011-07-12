@@ -8,8 +8,8 @@ if ( $is_admin == "Y" ) {
 }
 	print_header($INC);
 ?>
-<h2><?php 
-	etranslate("Search"); 
+<h2><?php
+	etranslate("Search");
 ?></h2>
 
 <form action="search_handler.php" method="post" name="searchformentry" style="margin-left:13px;">
@@ -17,12 +17,12 @@ if ( $is_admin == "Y" ) {
 <label for="keywordsadv"><?php etranslate("Keywords")?>:&nbsp;</label>
 <input type="text" name="keywords" id="keywordsadv" size="30" />&nbsp;
 <input type="submit" value="<?php etranslate("Search")?>" /><br />
-<?php 
+<?php
 	if ( ($login == "__public__" && $public_access_others != "Y") || (! $is_admin) ) {
 		echo "</form>";
 	} else {
-		echo "<div id=\"advlink\"><a title=\"" . 
-			translate("Advanced Search") . "\" href=\"javascript:show('adv'); hide('advlink');\">" . 
+		echo "<div id=\"advlink\"><a title=\"" .
+			translate("Advanced Search") . "\" href=\"javascript:show('adv'); hide('advlink');\">" .
 			translate("Advanced Search") . "</a></div>";
 ?>
 <table id="adv" style="display:none;">
@@ -54,7 +54,7 @@ if ( $is_admin == "Y" ) {
     $size = count ( $users );
 ?>
 <select name="users[]" size="<?php echo $size;?>" multiple="multiple"><?php echo $out; ?></select>
-<?php 
+<?php
   if ( $groups_enabled == "Y" ) {
    echo "<input type=\"button\" onclick=\"selectUsers()\" value=\"" .
       translate("Select") . "...\" />\n";

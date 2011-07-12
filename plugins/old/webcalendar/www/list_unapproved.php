@@ -53,7 +53,7 @@ function list_unapproved ( $user ) {
       $duration = $row[6];
       $status = $row[7];
       $divname = "eventinfo-$id-$key";
-      echo "<li><a title=\"" . 
+      echo "<li><a title=\"" .
       		translate("View this entry") . "\" class=\"entry\" href=\"view_entry.php?id=$id&amp;user=$user";
       echo "\" onmouseover=\"window.status='" . translate("View this entry") .
         "'; show(event, '$divname'); return true;\" onmouseout=\"hide('$divname'); return true;\">";
@@ -78,28 +78,28 @@ function list_unapproved ( $user ) {
       echo "</a>";
       echo " (" . date_to_str ($date) . ")\n";
 //approve
-      echo ": <a title=\"" . 
+      echo ": <a title=\"" .
 	translate("Approve/Confirm") . "\"  href=\"approve_entry.php?id=$id&amp;ret=list&amp;user=$user";
       if ( $user == "__public__" )
         echo "&amp;public=1";
       echo "\" class=\"nav\" onclick=\"return confirm('" .
-        translate("Approve this entry?") . "');\">" . 
+        translate("Approve this entry?") . "');\">" .
 	translate("Approve/Confirm") . "</a>, ";
 //reject
-      echo "<a title=\"" . 
+      echo "<a title=\"" .
 	translate("Reject") . "\" href=\"reject_entry.php?id=$id&amp;ret=list&amp;user=$user";
       if ( $user == "__public__" )
         echo "&amp;public=1";
       echo "\" class=\"nav\" onclick=\"return confirm('" .
-        translate("Reject this entry?") . "');\">" . 
+        translate("Reject this entry?") . "');\">" .
 	translate("Reject") . "</a>";
 //delete
-      echo ", <a title=\"" . 
+      echo ", <a title=\"" .
 	translate("Delete") . "\" href=\"del_entry.php?id=$id&amp;ret=list";
       if ( $user != $login )
         echo "&amp;user=$user";
       echo "\" class=\"nav\" onclick=\"return confirm('" .
-        translate("Are you sure you want to delete this entry?") . "');\">" . 
+        translate("Are you sure you want to delete this entry?") . "');\">" .
 	translate("Delete") . "</a>";
       echo "\n</li>\n";
       $eventinfo .= build_event_popup ( $divname, $user, $description,
@@ -111,7 +111,7 @@ function list_unapproved ( $user ) {
   }
   if ( $count == 0 ) {
     user_load_variables ( $user, "temp_" );
-    echo "<span class=\"nounapproved\">" . 
+    echo "<span class=\"nounapproved\">" .
 	translate("No unapproved events for") . "&nbsp;" . $temp_fullname . ".</span>\n";
   } else {
     if ( ! empty ( $eventinfo ) ) echo $eventinfo;
@@ -119,9 +119,9 @@ function list_unapproved ( $user ) {
 }
 ?>
 
-<h2><?php 
-	etranslate("Unapproved Events"); 
-	if ( $user == '__public__' ) echo " - " . $PUBLIC_ACCESS_FULLNAME; 
+<h2><?php
+	etranslate("Unapproved Events");
+	if ( $user == '__public__' ) echo " - " . $PUBLIC_ACCESS_FULLNAME;
 ?></h2>
 <?php
 // List unapproved events for this user.

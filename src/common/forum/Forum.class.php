@@ -31,7 +31,7 @@ define('FORUM_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 
 /**
  * Gets a Forum object from its id
- * 
+ *
  * @param	int	the Forum id
  * @return	object	the Forum object
  */
@@ -49,7 +49,7 @@ function &forum_get_object($forum_id) {
 	$f->fetchData($forum_id);
 
 	return $f;
-}	
+}
 
 function forum_get_groupid ($forum_id) {
 	$res = db_query_params('SELECT group_id FROM forum_group_list WHERE group_forum_id=$1',
@@ -211,7 +211,7 @@ class Forum extends Error {
 		}
 		$this->group_forum_id=db_insertid($result,'forum_group_list','group_forum_id');
 		$this->fetchData($this->group_forum_id);
-		
+
 		if ($create_default_message) {
 			$fm=new ForumMessage($this);
 			// Use the system side default language
@@ -362,7 +362,7 @@ class Forum extends Error {
 	function getDescription() {
 		return $this->data_array['description'];
 	}
-	
+
 	/**
 	 * getModerationLevel - the moderation level of the forum
 	 *
@@ -409,7 +409,7 @@ class Forum extends Error {
 					  array($this->getID()));
 		return util_result_column_to_array($result);
 	}
-	
+
 	/**
 	 * getReturnEmailAddress() - return the return email address for notification emails
 	 *
@@ -597,7 +597,7 @@ class Forum extends Error {
 					      $is_public,
 					      $this->Group->getID(),
 					      $this->getID()));
-		
+
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error On Update:').': '.db_error());
 			return false;

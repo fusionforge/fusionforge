@@ -299,7 +299,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 				//iterate the tasks
 				for ($i=0; $i<$count; $i++) {
 					$darr=$tasks[$i]['dependenton'];
-				
+
 					$deps=array();
 					//iterate each dependency in a task
 					for ($dcount=0; $dcount<count($darr); $dcount++) {

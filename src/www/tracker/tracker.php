@@ -283,7 +283,7 @@ switch (getStringFromRequest('func')) {
 		} else if (!$ath->allowsAnon() && !session_loggedin()) {
 			exit_error(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'),'tracker');
 		} else {
-			
+
 			$remlink = getArrayFromRequest('remlink');
 			if (count($remlink) > 0 && forge_check_perm ('tracker_admin', $ah->ArtifactType->Group->getID())) {
 				require_once $gfcommon.'pm/ProjectTask.class.php';
@@ -360,11 +360,11 @@ switch (getStringFromRequest('func')) {
 						$n = $i+1;
 						if ($error === 1 || $error === 2) {
 							// UPLOAD_ERR_INI_SIZE or UPLOAD_ERR_FORM_SIZE
-							$ext_feedback .= "<br />" . 
+							$ext_feedback .= "<br />" .
 								sprintf(_("ERROR: Skipping attachment %d: file is too large."), $n);
 						} elseif ($error === 3) {
 							// UPLOAD_ERR_PARTIAL
-							$ext_feedback .= "<br />" . 
+							$ext_feedback .= "<br />" .
 								sprintf(_("ERROR: Skipping attachment %d: transfer interrupted."), $n);
 						}
 						continue;
@@ -396,7 +396,7 @@ switch (getStringFromRequest('func')) {
 						}
 					}
 				}
-					
+
 				// Admin and Techs can delete files.
 				if (forge_check_perm ('tracker', $ath->getID(), 'tech')
 						|| forge_check_perm ('tracker', $ath->getID(), 'manager')) {

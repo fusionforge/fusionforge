@@ -23,7 +23,7 @@ require_once('Widget.class.php');
 
 /**
 * Widget_ProjectLatestDocuments
-* 
+*
 */
 class Widget_ProjectLatestDocuments extends Widget {
 	var $content;

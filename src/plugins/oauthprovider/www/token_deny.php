@@ -7,12 +7,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -26,7 +26,7 @@
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-require_once 'checks.php';	
+require_once 'checks.php';
 
 $pluginname = 'oauthprovider';
 
@@ -40,7 +40,7 @@ try {
   //  echo "token_id : $f_token_id \n";
 
   $t_token = OauthAuthzRequestToken::load( $f_token_id );
-  
+
   if($t_token) {
     $consumer =  OauthAuthzConsumer::load($t_token->getConsumerId());
 
@@ -48,9 +48,9 @@ try {
     //    helper_ensure_confirmed( sprintf( $plugin_oauthprovider_ensure_authorize, $consumer->getName() ), $plugin_oauthprovider_authorize_token );
 
     $t_token->delete();
-    
+
     oauthprovider_CheckUser();
-    
+
     ?>
 
 <h2><?php echo _('Authorization Denied') ?></h2>
@@ -67,7 +67,7 @@ try {
 
 	error_parameters($e->getMessage(), "OauthAuthz");
 	exit_error( "Error trying to deny/delete token!", 'oauthprovider' );
-	
+
 }
 
 site_project_footer(array());

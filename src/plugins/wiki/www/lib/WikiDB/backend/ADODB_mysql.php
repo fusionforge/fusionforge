@@ -36,7 +36,7 @@ extends WikiDB_backend_ADODB
     function WikiDB_backend_ADODB_mysql($dbparams) {
         $this->WikiDB_backend_ADODB($dbparams);
         if (!$this->_dbh->_connectionID) return;
-      
+
         $this->_serverinfo = $this->_dbh->ServerInfo();
         if (!empty($this->_serverinfo['version'])) {
             $arr = explode('.',$this->_serverinfo['version']);
@@ -62,7 +62,7 @@ extends WikiDB_backend_ADODB
             }
         }
     }
-  
+
     /**
      * Kill timed out processes. ( so far only called on about every 50-th save. )
      */
@@ -109,7 +109,7 @@ extends WikiDB_backend_ADODB
             if (!$result or $result[0] == 0) {
                 trigger_error( "WARNING: Couldn't obtain application lock " . $lock . "\n<br />",
                                E_USER_WARNING);
-                return;                        
+                return;
             }
     	}
         if (DO_FULL_LOCK) {
@@ -166,7 +166,7 @@ extends WikiDB_backend_ADODB
                 return $cache[$pagename];
             }
         }
-      
+
 	// attributes play this game.
         if ($pagename === '') return 0;
 
@@ -199,10 +199,10 @@ extends WikiDB_backend_ADODB
     function set_versiondata($pagename, $version, $data) {
         $dbh = &$this->_dbh;
         $version_tbl = $this->_table_names['version_tbl'];
-      
+
         $minor_edit = (int) !empty($data['is_minor_edit']);
         unset($data['is_minor_edit']);
-      
+
         $mtime = (int)$data['mtime'];
         unset($data['mtime']);
         assert(!empty($mtime));
@@ -210,7 +210,7 @@ extends WikiDB_backend_ADODB
         @$content = (string) $data['%content'];
         unset($data['%content']);
         unset($data['%pagedata']);
-      
+
         $this->lock(array('page','recent','version','nonempty'));
         $dbh->BeginTrans( );
         $dbh->CommitLock($version_tbl);
@@ -229,7 +229,7 @@ extends WikiDB_backend_ADODB
         else $dbh->RollbackTrans( );
         $this->unlock(array('page','recent','version','nonempty'));
     }
-  
+
 };
 
 // Local Variables:
@@ -238,5 +238,5 @@ extends WikiDB_backend_ADODB
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

@@ -23,7 +23,7 @@ require_once $gfwww.'include/my_utils.php';
 
 /**
 * Widget_MyMonitoredForums
-* 
+*
 * Forums that are actively monitored
 */
 class Widget_MyMonitoredForums extends Widget {
@@ -50,7 +50,7 @@ class Widget_MyMonitoredForums extends Widget {
         }
         //$sql .= "GROUP BY groups.group_id ORDER BY groups.group_id ASC LIMIT 100";
         $sql .= "ORDER BY groups.group_id ASC LIMIT 100";
-    
+
         $result=db_query_params($sql,array(user_getid()));
         $rows=db_numrows($result);
         if (!$result || $rows < 1) {
@@ -60,7 +60,7 @@ class Widget_MyMonitoredForums extends Widget {
             $html_my_monitored_forums .= '<table style="width:100%">';
             for ($j=0; $j<$rows; $j++) {
                 $group_id = db_result($result,$j,'group_id');
-        
+
                 $sql2="SELECT forum_group_list.group_forum_id,forum_group_list.forum_name ".
                     "FROM groups,forum_group_list,forum_monitored_forums ".
                     "WHERE groups.group_id=forum_group_list.group_id ".
@@ -68,7 +68,7 @@ class Widget_MyMonitoredForums extends Widget {
                     "AND forum_group_list.is_public <> 9 ".
                     "AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
                     "AND forum_monitored_forums.user_id=$2 LIMIT 100";
-        
+
                 $result2 = db_query_params($sql2,array($group_id,user_getid()));
                 $rows2 = db_numrows($result2);
 

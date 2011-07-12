@@ -34,7 +34,7 @@ class ProjectSearchQuery extends SearchQuery {
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
-	function ProjectSearchQuery($words, $offset, $isExact) {	
+	function ProjectSearchQuery($words, $offset, $isExact) {
 		$this->SearchQuery($words, $offset, $isExact);
 	}
 
@@ -87,7 +87,7 @@ class ProjectSearchQuery extends SearchQuery {
 							 'ORDER BY group_name') ;
 			}
 		} else {
-			$qpa = db_construct_qpa ($qpa, 
+			$qpa = db_construct_qpa ($qpa,
 						 'SELECT g.group_name AS group_name, g.unix_group_name AS unix_group_name, g.type_id AS type_id, g.group_id AS group_id, g.short_description AS short_description FROM groups g WHERE g.status IN ($1, $2) AND ((',
 						 array ('A', 'H')) ;
 			$qpa = $this->addIlikeCondition ($qpa, 'g.group_name') ;
@@ -102,7 +102,7 @@ class ProjectSearchQuery extends SearchQuery {
 		}
 		return $qpa ;
 	}
-	
+
 }
 
 // Local Variables:

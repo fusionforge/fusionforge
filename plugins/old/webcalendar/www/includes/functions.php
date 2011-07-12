@@ -202,10 +202,10 @@ for ( $i = 0; $i < count ( $offsets ); $i++ ) {
 
 /**
  * Gets the value resulting from an HTTP POST method.
- * 
+ *
  * <b>Note:</b> The return value will be affected by the value of
  * <var>magic_quotes_gpc</var> in the php.ini file.
- * 
+ *
  * @param string $name Name used in the HTML form
  *
  * @return string The value used in the HTML form
@@ -441,7 +441,7 @@ function get_plugin_list ( $include_disabled=false ) {
  *
  * Do this by getting a list of all plugins that are not disabled by the
  * administrator and make sure this user has not disabled any of them.
- * 
+ *
  * It's done this was so that when an admin adds a new plugin, it shows up on
  * each users system automatically (until they disable it).
  *
@@ -1174,7 +1174,7 @@ function build_event_popup ( $popupid, $user, $description, $time, $site_extras=
 
   if ( empty ( $popup_fullnames ) )
     $popup_fullnames = array ();
-  
+
   if ( $user != $login ) {
     if ( empty ( $popup_fullnames[$user] ) ) {
       user_load_variables ( $user, "popuptemp_" );
@@ -1310,11 +1310,11 @@ function display_small_month ( $thismonth, $thisyear, $showyear,
     echo "<caption>$thisday</caption>\n";
     echo "<thead>\n";
     echo "<tr class=\"monthnav\"><th colspan=\"7\">\n";
-    echo "<a title=\"" . 
+    echo "<a title=\"" .
  translate("Previous") . "\" class=\"prev\" href=\"day.php?" . $u_url  .
  "date=$month_ago$caturl\"><img src=\"leftarrowsmall.gif\" alt=\"" .
  translate("Previous") . "\" /></a>\n";
-    echo "<a title=\"" . 
+    echo "<a title=\"" .
  translate("Next") . "\" class=\"next\" href=\"day.php?" . $u_url .
  "date=$month_ahead$caturl\"><img src=\"rightarrowsmall.gif\" alt=\"" .
  translate("Next") . "\" /></a>\n";
@@ -1407,7 +1407,7 @@ function display_small_month ( $thismonth, $thisyear, $showyear,
         if ( date ( "Ymd", $date  ) == date ( "Ymd", $today ) ){
           echo " id=\"today\"";
         }
-        echo "><a href=\"day.php?" .$u_url  . "date=" .  $dateYmd . 
+        echo "><a href=\"day.php?" .$u_url  . "date=" .  $dateYmd .
           "\">";
         echo date ( "d", $date ) . "</a></td>\n";
         } else {
@@ -1444,7 +1444,7 @@ function print_entry ( $id, $date, $time, $duration,
   $pri, $access, $event_owner, $event_cat=-1 ) {
   global $eventinfo, $login, $user, $PHP_SELF, $TZ_OFFSET;
   static $key = 0;
-  
+
   global $layers;
 
   if ( $login != $event_owner && strlen ( $event_owner ) ) {
@@ -1463,11 +1463,11 @@ function print_entry ( $id, $date, $time, $duration,
   if ( $pri == 3 ) echo "<strong>";
   $popupid = "eventinfo-$id-$key";
   $key++;
-  echo "<a title=\"" . 
+  echo "<a title=\"" .
     translate("View this entry") . "\" class=\"$class\" href=\"view_entry.php?id=$id&amp;date=$date";
   if ( strlen ( $user ) > 0 )
     echo "&amp;user=" . $user;
-  echo "\" onmouseover=\"window.status='" . 
+  echo "\" onmouseover=\"window.status='" .
     translate("View this entry") .
     "'; show(event, '$popupid'); return true;\" onmouseout=\"window.status=''; hide('$popupid'); return true;\">";
   $icon = "circle.gif";
@@ -1479,11 +1479,11 @@ function print_entry ( $id, $date, $time, $duration,
   }
 
   if ( empty ( $catIcon ) ) {
-    echo "<img src=\"$icon\" class=\"bullet\" alt=\"" . 
+    echo "<img src=\"$icon\" class=\"bullet\" alt=\"" .
       translate("View this entry") . "\" />";
   } else {
     // Use category icon
-    echo "<img src=\"$catIcon\" alt=\"" . 
+    echo "<img src=\"$catIcon\" alt=\"" .
       translate("View this entry") . "\" /><br />";
   }
 
@@ -1548,7 +1548,7 @@ function print_entry ( $id, $date, $time, $duration,
       $description, $timestr, site_extras_for_popup ( $id ) );
 }
 
-/** 
+/**
  * Gets any site-specific fields for an entry that are stored in the database in the webcal_site_extras table.
  *
  * @param int $eventid Event ID
@@ -1817,7 +1817,7 @@ function query_events ( $user, $want_repeated, $date_filter, $cat_id = '' ) {
   $sql .= " ORDER BY webcal_entry.cal_time, webcal_entry.cal_id";
 
   //echo "<strong>SQL:</strong> $sql<br />\n";
-  
+
   $res = dbi_query ( $sql );
   if ( $res ) {
     $i = 0;
@@ -2269,7 +2269,7 @@ function repeated_event_matches_date($event,$dateYmd) {
 
 /**
  * Converts a date to a timestamp.
- * 
+ *
  * @param string $d Date in YYYYMMDD format
  *
  * @return int Timestamp representing 3:00 (or 4:00 if during Daylight Saving
@@ -2327,7 +2327,7 @@ function get_sunday_before ( $year, $month, $day ) {
   return $newdate;
 }
 
-/** 
+/**
  * Gets the Monday of the week that the specified date is in.
  *
  * If the date specified is a Monday, then that date is returned.
@@ -2351,7 +2351,7 @@ function get_monday_before ( $year, $month, $day ) {
 
 /**
  * Returns the week number for specified date.
- * 
+ *
  * Depends on week numbering settings.
  *
  * @param int $date Date in UNIX timestamp format
@@ -2383,18 +2383,18 @@ function week_number ( $date ) {
  */
 function icon_text ( $id, $can_edit, $can_delete ) {
   global $readonly, $is_admin;
-  $ret = "<a title=\"" . 
-  translate("View this entry") . "\" href=\"view_entry.php?id=$id\"><img src=\"view.gif\" alt=\"" . 
+  $ret = "<a title=\"" .
+  translate("View this entry") . "\" href=\"view_entry.php?id=$id\"><img src=\"view.gif\" alt=\"" .
   translate("View this entry") . "\" style=\"border-width:0px; width:10px; height:10px;\" /></a>";
   if ( $can_edit && $readonly == "N" )
-    $ret .= "<a title=\"" . 
-  translate("Edit entry") . "\" href=\"edit_entry.php?id=$id\"><img src=\"edit.gif\" alt=\"" . 
+    $ret .= "<a title=\"" .
+  translate("Edit entry") . "\" href=\"edit_entry.php?id=$id\"><img src=\"edit.gif\" alt=\"" .
   translate("Edit entry") . "\" style=\"border-width:0px; width:10px; height:10px;\" /></a>";
   if ( $can_delete && ( $readonly == "N" || $is_admin ) )
-    $ret .= "<a title=\"" . 
+    $ret .= "<a title=\"" .
       translate("Delete entry") . "\" href=\"del_entry.php?id=$id\" onclick=\"return confirm('" .
-  translate("Are you sure you want to delete this entry?") . "\\n\\n" . 
-  translate("This will delete this entry for all users.") . "');\"><img src=\"delete.gif\" alt=\"" . 
+  translate("Are you sure you want to delete this entry?") . "\\n\\n" .
+  translate("This will delete this entry for all users.") . "');\"><img src=\"delete.gif\" alt=\"" .
   translate("Delete entry") . "\" style=\"border-width:0px; width:10px; height:10px;\" /></a>";
   return $ret;
 }
@@ -2461,7 +2461,7 @@ function print_date_entries ( $date, $user, $ssi ) {
     print "<br />\n";
     $cnt++;
   }
-  
+
   // get all the repeating events for this date and store in array $rep
   $rep = get_repeating_entries ( $user, $date, $get_unapproved );
   $cur_rep = 0;
@@ -2575,7 +2575,7 @@ function times_overlap ( $time1, $duration1, $time2, $duration2 ) {
  * Limits on number of appointments: if enabled in System Settings
  * (<var>$limit_appts</var> global variable), too many appointments can also
  * generate a scheduling conflict.
- * 
+ *
  * @todo Update this to handle exceptions to repeating events
  *
  * @param array  $dates        Array of dates in YYYYMMDD format that is
@@ -2688,7 +2688,7 @@ function check_for_conflicts ( $dates, $duration, $hour, $minute,
   } else {
     echo translate("Database error") . ": " . dbi_error (); exit;
   }
-  
+
   //echo "<br />\nhello";
   for ($q=0;$q<count($participants);$q++) {
     $time1 = sprintf ( "%d%02d00", $hour, $minute );
@@ -2714,7 +2714,7 @@ function check_for_conflicts ( $dates, $duration, $hour, $minute,
         //okay we've narrowed it down to a day, now I just gotta check the time...
         //I hope this is right...
         $row = $list[$j];
-        if ( $row['cal_id'] != $id && ( empty ( $row['cal_ext_for_id'] ) || 
+        if ( $row['cal_id'] != $id && ( empty ( $row['cal_ext_for_id'] ) ||
           $row['cal_ext_for_id'] != $id ) ) {
           $time2 = $row['cal_time'];
           $duration2 = $row['cal_duration'];
@@ -2742,7 +2742,7 @@ function check_for_conflicts ( $dates, $duration, $hour, $minute,
       }
     }
   }
-   
+
   return $conflicts;
 }
 
@@ -2822,13 +2822,13 @@ function html_for_add_icon ( $date=0,$hour="", $minute="", $user="" ) {
     $u_url = "user=$user&amp;";
   if ( isset ( $hour ) && $hour != NULL )
     $hour += $TZ_OFFSET;
-  return "<a title=\"" . 
+  return "<a title=\"" .
  translate("New Entry") . "\" href=\"edit_entry.php?" . $u_url .
     "date=$date" . ( isset ( $hour ) && $hour != NULL && $hour >= 0 ? "&amp;hour=$hour" : ""  ) .
     ( $minute > 0 ? "&amp;minute=$minute" : "" ) .
     ( empty ( $user ) ? "" :  "&amp;defusers=$user" ) .
     ( empty ( $cat_id ) ? "" :  "&amp;cat_id=$cat_id" ) .
-    "\"><img src=\"new.gif\" class=\"new\" alt=\"" . 
+    "\"><img src=\"new.gif\" class=\"new\" alt=\"" .
  translate("New Entry") . "\" /></a>\n";
 }
 
@@ -2861,7 +2861,7 @@ function html_for_event_week_at_a_glance ( $id, $date, $time,
 
   $popupid = "eventinfo-day-$id-$key";
   $key++;
-  
+
   // Figure out which time slot it goes in.
   if ( $time >= 0 && $duration != ( 24 * 60 ) ) {
     $ind = calc_time_slot ( $time );
@@ -2894,7 +2894,7 @@ function html_for_event_week_at_a_glance ( $id, $date, $time,
     $hour_arr[$ind] .= "<img src=\"$catIcon\" alt=\"$catIcon\" />";
   }
 
-  $hour_arr[$ind] .= "<a title=\"" . 
+  $hour_arr[$ind] .= "<a title=\"" .
   translate("View this entry") . "\" class=\"$class\" href=\"view_entry.php?id=$id&amp;date=$date";
   if ( strlen ( $GLOBALS["user"] ) > 0 )
     $hour_arr[$ind] .= "&amp;user=" . $GLOBALS["user"];
@@ -3053,7 +3053,7 @@ function html_for_event_day_at_a_glance ( $id, $date, $time,
   }
   // if we are looking at a view, then always use "entry"
   if ( strstr ( $PHP_SELF, "view_m.php" ) ||
-    strstr ( $PHP_SELF, "view_w.php" )  || 
+    strstr ( $PHP_SELF, "view_w.php" )  ||
     strstr ( $PHP_SELF, "view_v.php" ) ||
     strstr ( $PHP_SELF, "view_t.php" ) )
     $class = "entry";
@@ -3178,7 +3178,7 @@ function print_day_at_a_glance ( $date, $user, $can_add=0 ) {
 
   // $interval is number of minutes per slot
   $interval = ( 24 * 60 ) / $TIME_SLOTS;
-    
+
   $rowspan_arr = array ();
   for ( $i = 0; $i < $TIME_SLOTS; $i++ ) {
     $rowspan_arr[$i] = 0;
@@ -3287,7 +3287,7 @@ function print_day_at_a_glance ( $date, $user, $can_add=0 ) {
         // this will move entries apart that appear in one field,
         // yet start on different hours
         for ( $u = $diff_start_time ; $u > 0 ; $u-- ) {
-          $hour_arr[$last_row] .= "<br />\n"; 
+          $hour_arr[$last_row] .= "<br />\n";
         }
         $hour_arr[$last_row] .= $hour_arr[$i];
         $hour_arr[$i] = "";
@@ -3441,7 +3441,7 @@ function display_time ( $time, $ignore_offset=0 ) {
   if ( ! $ignore_offset )
     $hour += $TZ_OFFSET;
   $min = abs( ( $time / 100 ) % 100 );
-  //Prevent goofy times like 8:00 9:30 9:00 10:30 10:00 
+  //Prevent goofy times like 8:00 9:30 9:00 10:30 10:00
   if ( $time < 0 && $min > 0 ) $hour = $hour - 1;
   while ( $hour < 0 )
     $hour += 24;
@@ -3677,7 +3677,7 @@ function hextoint ( $val ) {
  * the username in plain text.
  *
  * @param string $instr A hex-encoded string. "Hello" would be "678ea786a5".
- * 
+ *
  * @return string The decoded string
  *
  * @global array Array of offsets
@@ -3786,7 +3786,7 @@ function load_user_categories ($ex_global = '') {
   global $categories_enabled, $is_admin;
 
   $cat_owner =  ( ( ! empty ( $user ) && strlen ( $user ) ) &&  ( $is_assistant  ||
-    $is_admin ) ) ? $user : $login;  
+    $is_admin ) ) ? $user : $login;
   $categories = array ();
   $category_owners = array ();
   if ( $categories_enabled == "Y" ) {
@@ -3900,7 +3900,7 @@ function user_get_boss_list ( $assistant ) {
  *
  * @param string $assistant Login of potential assistant
  * @param string $boss      Login of potential boss
- * 
+ *
  * @return bool True or false
  */
 function user_is_assistant ( $assistant, $boss ) {
@@ -3908,7 +3908,7 @@ function user_is_assistant ( $assistant, $boss ) {
 
   if ( empty ( $boss ) )
     return false;
-  $res = dbi_query ( "SELECT * FROM webcal_asst " . 
+  $res = dbi_query ( "SELECT * FROM webcal_asst " .
      "WHERE cal_assistant = '$assistant' AND cal_boss = '$boss'" );
   if ( $res ) {
     if ( dbi_fetch_row ( $res ) )
@@ -3977,7 +3977,7 @@ function boss_must_approve_event ( $assistant, $boss ) {
  *
  * @ignore
  */
-function fake_mail ( $mailto, $subj, $text, $hdrs ) { 
+function fake_mail ( $mailto, $subj, $text, $hdrs ) {
   echo "To: $mailto <br />\n" .
     "Subject: $subj <br />\n" .
     nl2br ( $hdrs ) . "<br />\n" .
@@ -4007,7 +4007,7 @@ function print_date_entries_timebar ( $date, $user, $ssi ) {
   $year = substr ( $date, 0, 4 );
   $month = substr ( $date, 4, 2 );
   $day = substr ( $date, 6, 2 );
- 
+
   $dateu = mktime ( 3, 0, 0, $month, $day, $year );
 
   $can_add = ( $readonly == "N" || $is_admin );
@@ -4120,7 +4120,7 @@ function print_entry_timebar ( $id, $date, $time, $duration,
   if ($ev_duration > 20)   { $pos = 1; }
    elseif ($ev_padding > 20)   { $pos = 2; }
    else        { $pos = 0; }
- 
+
   echo "\n<!-- ENTRY BAR -->\n<table class=\"entrycont\" cellpadding=\"0\" cellspacing=\"0\">\n";
    echo "<tr>\n";
    echo ($ev_start > 0 ?  "<td style=\"text-align:right;  width:$ev_start%;\">" : "" );
@@ -4152,7 +4152,7 @@ function print_entry_timebar ( $id, $date, $time, $duration,
   echo "<a class=\"$class\" href=\"view_entry.php?id=$id&amp;date=$date";
   if ( strlen ( $user ) > 0 )
     echo "&amp;user=" . $user;
-  echo "\" onmouseover=\"window.status='" . 
+  echo "\" onmouseover=\"window.status='" .
     translate("View this entry") . "'; show(event, '$popupid'); return true;\" onmouseout=\"hide('$popupid'); return true;\">";
 
   if ( $login != $event_owner && strlen ( $event_owner ) ) {
@@ -4247,7 +4247,7 @@ function print_header_timebar($start_hour, $end_hour) {
 //   $width = 100 - $offset;
 //   echo "<td style=\"width:$width%;\">&nbsp;</td>\n";
    echo "</tr>\n</table>\n<!-- /TIMEBAR -->\n";
- 
+
    // print yardstick
   echo "\n<!-- YARDSTICK -->\n<table class=\"yardstick\">\n<tr>\n";
   $width = round(100/($end_hour - $start_hour));
@@ -4547,7 +4547,7 @@ function clean_html($value){
  *
  * @return string The converted text
  */
-function clean_word($data) { 
+function clean_word($data) {
   return preg_replace("/\W/", '', $data);
 }
 
@@ -4558,7 +4558,7 @@ function clean_word($data) {
  *
  * @return string The converted text
  */
-function clean_int($data) { 
+function clean_int($data) {
   return preg_replace("/\D/", '', $data);
 }
 
@@ -4566,10 +4566,10 @@ function clean_int($data) {
  * Removes whitespace from the specified text.
  *
  * @param string $data Input text
- * 
+ *
  * @return string The converted text
  */
-function clean_whitespace($data) { 
+function clean_whitespace($data) {
   return preg_replace("/\s/", '', $data);
 }
 
@@ -4681,7 +4681,7 @@ function daily_matrix ( $date, $participants, $popup = '' ) {
 
       $hour = substr($E['cal_time'], 0, 2 );
       $mins = substr($E['cal_time'], 2, 2 );
-       
+
       // Timezone Offset
       if ( ! $ignore_offset ) $hour += $TZ_OFFSET;
       while ( $hour < 0 ) $hour += 24;
@@ -4777,7 +4777,7 @@ function daily_matrix ( $date, $participants, $popup = '' ) {
     if ($participants[$i] != '_all_') {
       // Load full name of user
       user_load_variables ( $participants[$i], "user_" );
-  
+
       // exchange space for &nbsp; to keep from breaking
       $user_nospace = preg_replace ( '/\s/', '&nbsp;', $user_fullname );
     } else {
@@ -4816,11 +4816,11 @@ function daily_matrix ( $date, $participants, $popup = '' ) {
          $col++;
       }
     }
-    
+
     echo "</tr><tr>\n<td class=\"matrix\" colspan=\"$cols\">" .
       "<img src=\"pix.gif\" alt=\"-\" /></td></tr>\n";
   } // End foreach participant
-  
+
   echo "</table><br />\n";
   $busy = translate ("Busy");
   $tentative = translate ("Tentative");
@@ -4828,7 +4828,7 @@ function daily_matrix ( $date, $participants, $popup = '' ) {
   echo "<img src=\"pix.gif\" title=\"$busy\" alt=\"$busy\" /> $busy &nbsp; &nbsp; &nbsp;\n";
   echo "<img src=\"pixb.gif\" title=\"$tentative\" alt=\"$tentative\" /> $tentative\n";
   echo "</td></tr></table>\n";
-} 
+}
 
 /**
  * Return the time in HHMMSS format of input time + duration

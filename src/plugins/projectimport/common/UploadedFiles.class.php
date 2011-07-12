@@ -2,7 +2,7 @@
 
 /**
  * Utility classes to manage uploaded files
- * 
+ *
  * Copyright (c) 2011 Olivier Berger & Institut Telecom
  *
  * This program was developped in the frame of the COCLICO project
@@ -31,18 +31,18 @@
 /**
  * Generic file storage management class
  * The files are stored in an arbitrary dir on the server side
- * 
+ *
  * @author Olivier Berger
  *
  */
 class AbstractFilesDirectory extends Error {
-	
+
 	protected $dir_path;
-		
+
 	protected $html_generator;
-	
+
 	protected static $finfo;
-	
+
 	/**
 	 * Initializes the directory permissions
 	 */
@@ -56,7 +56,7 @@ class AbstractFilesDirectory extends Error {
 			}
 		}
 	}
-	
+
 	protected static function finfo() {
 		if (!isset(self::$finfo)) {
 			self::$finfo = new finfo(FILEINFO_MIME, forge_get_config('libmagic_db', 'projectimport-plugin'));
@@ -69,20 +69,20 @@ class AbstractFilesDirectory extends Error {
 	 * @param string $storage_base path to the storage directory (if omitted, uses a temprary dir in /tmp)
 	 */
 	public function AbstractFilesDirectory($HTML, $storage_base=False) {
-		
+
 		$this->html_generator = $HTML;
-		
+
 		if (!isset(self::$finfo)) {
 			self::$finfo = new finfo(FILEINFO_MIME, forge_get_config('libmagic_db', 'projectimport-plugin'));
 		}
-		
+
 		if(! $storage_base) {
 			$storage_base = tempnam("/tmp", "ff-projectimport");
 		}
 		$this->dir_path = $storage_base;
 		$this->createStorage();
 	}
-	
+
 	/**
 	 * Move a file on the server (typically an uploaded one) into the storage dir
 	 * @param string $filename
@@ -103,7 +103,7 @@ class AbstractFilesDirectory extends Error {
 		}
 		return $newpath;
 	}
-	
+
 	/**
 	 * Displays an HTML list of the directory contents
 	 * @return string HTML
@@ -114,7 +114,7 @@ class AbstractFilesDirectory extends Error {
 			// maybe use scandir instead ?
     		if ($dh = opendir($this->dir_path)) {
     			$html.='<ul>';
-    	
+
         		while (($file = readdir($dh)) !== false) {
         			if ($file != '.' && $file != '..') {
             			$html.='<li>'.'filename: '. $file .': filetype: ' . filetype($this->dir_path . $file) . '</li>';
@@ -126,7 +126,7 @@ class AbstractFilesDirectory extends Error {
 		}
 		return $html;
 	}
-	
+
 	public function getMimeType($filepath) {
 		$finfo = self::finfo();
 		if (!$finfo) {
@@ -135,32 +135,32 @@ class AbstractFilesDirectory extends Error {
 		}
 		$mimetype = $finfo->file($filepath);
 		$mimetype = strstr($mimetype, ';', true);
-			
+
 		// try to identify OpenDocument Package Zip container
 		if ($mimetype == 'application/octet-stream') {
 			$zip = new ZipArchive;
 			$res = $zip->open($filepath);
 			if ($res === TRUE) {
-				// if it has a mimetype file in the zip, then read its contents 
+				// if it has a mimetype file in the zip, then read its contents
 				$contents = $zip->getFromName('mimetype');
 				if($contents) {
 					$mimetype = $contents;
 				}
-			}	
+			}
 		}
 		return $mimetype;
 	}
-	
+
 	/**
 	 * Returns an HTML box/table containing (single) file selection radio buttons
 	 * @param string $preselected filename
 	 * @return boolean|string
 	 */
 	public function displayFileSelectionForm($preselected = False) {
-		$html = '';		
+		$html = '';
 
-		
-		
+
+
 		if (is_dir($this->dir_path)) {
 			$contents = scandir($this->dir_path);
 			if(count($contents) > 2) {
@@ -170,7 +170,7 @@ class AbstractFilesDirectory extends Error {
 				$html .= '<th>'._('type').'</th>';
 				$html .= '<th>'._('selected ?').'</th>';
 				$html .= '</tr></thead><tbody>';
-			
+
 				foreach($contents as $file) {
 					if ($file != '.' && $file != '..') {
 						$filepath = $this->dir_path . $file;
@@ -208,10 +208,10 @@ class AbstractFilesDirectory extends Error {
 				$html .= $this->html_generator->boxBottom();
 			}
     	}
-	
+
 		return $html;
 	}
-	
+
 	/**
 	 * Returns the path given a SHA1 hash for a filename
 	 * @param unknown_type $filesha1
@@ -220,7 +220,7 @@ class AbstractFilesDirectory extends Error {
 	public function getFilePath($filesha1) {
 		$filepath = False;
 		if (is_dir($this->dir_path)) {
-			$contents = scandir($this->dir_path);	
+			$contents = scandir($this->dir_path);
 			foreach($contents as $file) {
 				if ($filesha1 == sha1($file)) {
 					$filepath = $this->dir_path . $file;
@@ -235,9 +235,9 @@ class AbstractFilesDirectory extends Error {
 
 /**
  * Specialized file storage management class for site-level files
- * 
+ *
  * Files are stored inside $storage_base/projectimport-plugin (for instance '$core/data_path/plugins/projectimport/)
- * 
+ *
  * @author Olivier Berger
  *
  */
@@ -247,20 +247,20 @@ class SiteAdminFilesDirectory extends AbstractFilesDirectory {
 		$storage_base = forge_get_config('storage_base', 'projectimport-plugin');
 
 		parent::AbstractFilesDirectory($HTML, $storage_base);
-				
+
 	}
 }
 
 /**
  * Specialized file storage management class for project-level files
- * 
+ *
  * Files are stored inside subdirs of $storage_base/projectimport-plugin (for instance '$core/data_path/plugins/projectimport/_projname_/)
- * 
+ *
  * @author Olivier Berger
  *
  */
 class ProjectFilesDirectory extends AbstractFilesDirectory {
-	
+
 	/**
 	 * Constructor
 	 * @param HTML generator $HTML
@@ -274,14 +274,14 @@ class ProjectFilesDirectory extends AbstractFilesDirectory {
 		$storage_base .= '/'. $group->getUnixName().'/';
 
 		parent::AbstractFilesDirectory($HTML, $storage_base);
-				
+
 	}
 }
 
 
 /**
  * Utility HTML display class for pages containing a file upload and selection form
- * 
+ *
  * @author Olivier Berger
  *
  */
@@ -297,17 +297,17 @@ class FileManagerPage {
 	 * @var string
 	 */
 	protected $posted_uploadedfile;
-	
+
 	protected $html_generator;
-	
+
 	protected $message;
-	
+
 	/**
 	 * File storage
 	 * @var AbstractFilesDirectory
 	 */
 	protected $storage;
-	
+
 	/**
 	 * Constructor
 	 * @param HTML generator $HTML
@@ -322,7 +322,7 @@ class FileManagerPage {
 			$this->storage = $storage;
 		} else {
 			// otherwise create one with temporary directory
-			$this->storage = new AbstractFilesDirectory($this->html_generator);	
+			$this->storage = new AbstractFilesDirectory($this->html_generator);
 		}
 		$this->posted_selecteddumpfile = False;
 		$this->posted_uploadedfile = False;
@@ -337,18 +337,18 @@ class FileManagerPage {
 		if ($feedback) $feedback .= '<br />';
 		$feedback .= $message;
 	}
-	
+
 	/**
 	 * Parses the POSTed data to initialize the $posted_selecteddumpfile and $posted_uploadedfile and returns selected file name (if any)
 	 * @return Ambigous <boolean, Ambigous, string>
 	 */
 	function initialize_chosenfile_from_submitted() {
-		
+
 		$filechosen = FALSE;
-		
+
 		$uploaded_file = getUploadedFile('uploaded_file');
 		//print_r($uploaded_file);
-		
+
 		// process chosen file -> $filechosen set after this (or not)
 		if (getStringFromPost('submit_file')) {
 			$filesha1s = array();
@@ -359,7 +359,7 @@ class FileManagerPage {
 				}
 			}
 			if (count($filesha1s) > 1) {
-				
+
 				$this->feedback(_('Please select only one file'));
 			} else {
 				if (count($filesha1s) == 1) {
@@ -370,11 +370,11 @@ class FileManagerPage {
 				}
 			}
 		}
-		
+
 		// Process uploaded file : $this->posted_selecteddumpfile set afterwards (or not)
 		if($uploaded_file) {
 			// May use codendi's rules to check results of upload ?
-			//$rule_file = new Rule_File(); 
+			//$rule_file = new Rule_File();
 			//if ($rule_file->isValid($uploaded_file)) {
 			if($uploaded_file['error'] == UPLOAD_ERR_OK  ) {
 				if ($filechosen) {
@@ -413,14 +413,14 @@ class FileManagerPage {
 	            			$this->feedback(_('File upload stopped by extension'));
 	        			default:
 	            			$this->feedback(_('Unknown upload error %d', $error_code));
-	    			} 
+	    			}
 				}
 			}
 		}
 		if($filechosen) {
 			$this->posted_selecteddumpfile = $filechosen;
 		}
-		
+
 		return $filechosen;
 	}
 }

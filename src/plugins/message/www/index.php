@@ -59,7 +59,7 @@ if ($message) {
 	}
 }
 
-site_admin_header($params);														
+site_admin_header($params);
 
 print _("Edit the message as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)");
 
@@ -78,4 +78,4 @@ print "<br /><br /><input type=\"submit\" value=\"" ._("Save") ."\" />";
 print "</form>";
 print "</center>";
 
-site_admin_footer($params);														
+site_admin_footer($params);

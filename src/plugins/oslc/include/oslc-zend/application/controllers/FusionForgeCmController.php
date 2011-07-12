@@ -1,18 +1,18 @@
-<?php 
+<?php
 /**
- * This file is (c) Copyright 2010 by Sabri LABBENE, Madhumita DHAR, 
+ * This file is (c) Copyright 2010 by Sabri LABBENE, Madhumita DHAR,
  * Olivier BERGER, Institut TELECOM
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -26,17 +26,17 @@ class FusionForgeCmController extends CmController {
 
 		/**
 	 * @var oslc
-	 * 
+	 *
 	 * This will be the OSLC-CM controller managing the business logic of the application
 	 */
 	private $oslc;
-	
+
 		/**
-	 * Defines accepted mime-types for queries on actions, and corresponding 
+	 * Defines accepted mime-types for queries on actions, and corresponding
 	 * format of output
-	 * 
+	 *
 	 * ATTENTION : order is important for the XML variants : the first one is the default returned when only basic XML is required
-	 * 
+	 *
 	 * @var array
 	 */
 	private static $supportedAcceptMimeTypes = array();
@@ -50,19 +50,19 @@ class FusionForgeCmController extends CmController {
 		),
 	);
 	private $actionMimeType;
-	
+
 	public function setActionMimeType($action) {
 		if(!isset($this->actionMimeType)) {
 			$this->actionMimeType = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $action);
 		}
 	}
-	
+
 	/**
 	 * Init FusionForge REST controller.
 	 */
 	public function init(){
 		self::$supportedAcceptMimeTypes = array_merge(parent::getSupportedAcceptMimeTypes(), self::$fusionforgeSupportedAcceptMimeTypes);
-		
+
 		// TODO : render this path configurable
 		//		$writer = new Zend_Log_Writer_Stream('/tmp/zend-log.txt');
 		//		$this->logger = new Zend_Log($writer);
@@ -74,7 +74,7 @@ class FusionForgeCmController extends CmController {
 		//print_r($req);
 
 		$action = $req->getActionName();
-		
+
 		if(($action == 'post')||($action == 'put'))
 		{
 			$accept = $req->getHeader('Content-Type');
@@ -83,14 +83,14 @@ class FusionForgeCmController extends CmController {
 		{
 			$accept = $req->getHeader('Accept');
 		}
-		
+
 		// Set the mime type for action.
 		$this->setActionMimeType($action);
-		
+
 		if(isset($this->actionMimeType)) {
 		  $accept = $this->actionMimeType;
 		}
-		
+
 		// determine output format
 		if (isset(self::$supportedAcceptMimeTypes[$action])) {
 			if (isset(self::$supportedAcceptMimeTypes[$action][$accept])) {
@@ -99,7 +99,7 @@ class FusionForgeCmController extends CmController {
 				$req->setParam('format', $format);
 			}
 		}
-		
+
 		$contextSwitch = $this->_helper->getHelper('contextSwitch');
 
 		// we'll handle JSON ourselves
@@ -111,11 +111,11 @@ class FusionForgeCmController extends CmController {
 			//print_r("Typesarr : ".$typesarr);
 			$contextSwitch->addActionContext($action, $types)->initContext();
 		}
-		
+
 		// Create an OSLC Controller for FusionForge.
 		$this->oslc = new FusionForgeOSLCConnector();
 	}
-	
+
 	public function getAction(){
 		$params = $this->getRequest()->getParams();
 
@@ -136,15 +136,15 @@ class FusionForgeCmController extends CmController {
 				$this->_forward('oslcServiceCatalog');
 				return;
 		}
-		
+
 		// Handle OSLC-CM services catalog for specific project
-		// An OSLC-CM services catalog in FusionForge lists all the trackers 
+		// An OSLC-CM services catalog in FusionForge lists all the trackers
 		// of a specific project.
 		elseif (isset($params['oslc-cm-services'])){
 			$this->_forward('oslcServiceCatalogProject');
 			return;
 		}
-		
+
 		// handle OSLC-CM service document access
 		// An OSLC-CM service document describes capabilities of a FusionForge tracker.
 		elseif (isset($params['oslc-cm-service']) && isset($params['tracker'])) {
@@ -156,12 +156,12 @@ class FusionForgeCmController extends CmController {
 			$this->_forward('showCreationUi');
 			return;
 		}
-		// Handle selection UI access 
+		// Handle selection UI access
 		elseif (isset($params['ui']) && $params['ui'] == 'selection' && isset($params['project']) && isset($params['tracker'])){
 			$this->_forward('showSelectionUi');
 			return;
 		}
-		
+
 		// Now, do the OSLC-CM resources access work
 		// if no bug was mentioned, then return a resource collection
 		if (!array_key_exists('bug', $params)) {
@@ -186,14 +186,14 @@ class FusionForgeCmController extends CmController {
 				break;
 		}
 	}
-	
+
 	/**
 	 * Handles PUT action as routed by Zend_Rest_Route
-	 * 
+	 *
 	 * Update of an existing changerequest
 	 * Will be invoked if PUT or if POST on a path relating to resources (due to Zend REST route behaviour)
 	 * So in case of POST, will pass the handling to postAction()
-	 * 
+	 *
 	 * @return unknown_type
 	 */
 	public function putAction(){
@@ -205,9 +205,9 @@ class FusionForgeCmController extends CmController {
             $this->postAction();
 		}
 		else {
-		
+
 			// otherwise it is indeed a PUT and we are trying to modify a change request
-			
+
 			// do authentication.
 			$login = null;
 			$authenticated = $this->retrieveAuthentication($login);
@@ -291,28 +291,28 @@ class FusionForgeCmController extends CmController {
 			else {
 				// Proceed to change request update
 				$this->oslc->updateChangeRequest($identifier, $newchangerequest, $modifiedproperties);
-				
+
 				//logout the user
 				session_logout();
 			}
 		}
 	}
-	
+
 	public function postAction(){
 		$req = $this->getRequest();
-		
+
 		// check that we're indeed invoked by a POST request
 		if(! $req->isPost()) {
 			throw new Exception('postAction invoked without POST !');
 		}
-		
+
 		$params = $req->getParams();
-		
+
 		if (!isset($this->actionMimeType)) {
 			$this->_forward('UnknownAcceptType','error');
 			return;
 		}
-		
+
 		// do authentication.
 		/*$login = null;
 		$authenticated = $this->retrieveAuthentication($login);
@@ -324,10 +324,10 @@ class FusionForgeCmController extends CmController {
 				throw new Exception('Invalid authentication provided !');
 			}
 		}*/
-		
+
 		$contenttype = $req->getHeader('Content-Type');
 		$contenttype = $contenttype ? $contenttype : 'none';
-		
+
 		switch($contenttype) {
 			case 'application/x-oslc-cm-change-request+xml':
 			case 'application/x-oslc-cm-change-request+xml; charset=UTF-8':
@@ -342,7 +342,7 @@ class FusionForgeCmController extends CmController {
 				throw new UnsupportedMediaTypeException('Unknown Content-Type for method post : '. $contenttype .' !');
 				break;
 		}
-		
+
 		// used for PhpUnit tests.
 		if(APPLICATION_ENV=='testing') {
 			$body = $_POST['xml'];
@@ -367,7 +367,7 @@ class FusionForgeCmController extends CmController {
 						$newchangerequest = FusionForgeChangeRequest::CreateFusionForgeArrayFromJson($body);
 						break;
 				}
-	
+
 				$creationparams = array('project' => $params['project'],
 										'tracker' => $params['tracker'],
 										'new' => $newchangerequest);
@@ -375,14 +375,14 @@ class FusionForgeCmController extends CmController {
 				// pass the creation work to the OSLC connector
 				$identifier = $this->oslc->createChangeRequest($creationparams);
 
-				
+
 			}else{
 				throw new ConflictException('Need a valid tracker to create a change request');
 			}
 		}else{
-			throw new ConflictException('Need a valid project and tracker to create change request !');	
+			throw new ConflictException('Need a valid project and tracker to create change request !');
 		}
-		
+
 		// prepare redirection
 		$httpScheme = $this->getRequest()->getScheme();
 		$httpHost = $this->getRequest()->getHttpHost();
@@ -398,36 +398,36 @@ class FusionForgeCmController extends CmController {
 		{
 			$newlocation = $httpScheme.'://'.$httpHost.$baseURL.'/'.$controllerName.'/project/'.$params['project'].'/tracker/'.$params['tracker'].'/bug/'.$identifier;
 		}
-		
+
 		//Send back as a reponse the uri of the newly created change request
 		$this->getResponse()->setHeader('Content-Type', 'text/html');
 		$this->getResponse()->setHttpResponseCode(201);
 		$this->getResponse()->appendBody($newlocation);
 	}
 	public function indexAction(){
-		
+
 	}
 	public function deleteAction(){
-		
+
 	}
-	
+
 	/**
 	 * Retrieve an individual resource and populates the view of an OSLC CM ChangeRequest
-	 * 
+	 *
 	 * @param string $identifier
 	 * @param string $uri
 	 */
 	public function readresourceAction() {
-		
+
 		$params = $this->getRequest()->getParams();
 		//$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
 		if (!isset($this->actionMimeType)) {
 			$this->_forward('UnknownAcceptType','error');
 			return;
 		}
-		
+
 		$identifier = $params['bug'];
-		
+
 		// prepare resource URI
 		$httpScheme = $this->getRequest()->getScheme();
 		$httpHost = $this->getRequest()->getHttpHost();
@@ -440,14 +440,14 @@ class FusionForgeCmController extends CmController {
 		} else {
 			$preparedChangeRequest = $this->oslc->fetchChangeRequest($identifier, $changerequestURI);
 		}
-		
+
 		if(isset($preparedChangeRequest)) {
 
 			// populate the view with the model
 			foreach($preparedChangeRequest as $field => $value) {
 				$this->view->{$field} = $value;
 			}
-			
+
 			$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 		}
 		else{
@@ -455,11 +455,11 @@ class FusionForgeCmController extends CmController {
 			$this->_forward('ResNotFound','error');
 		}
 	}
-	
+
 	public function readresourcecollectionAction()	{
 		$req = $this->getRequest();
 		$params = $req->getParams();
-		
+
 		//$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
 		// TODO: raise the correct error code according to the specs.
 		if (!isset($this->actionMimeType)) {
@@ -467,7 +467,7 @@ class FusionForgeCmController extends CmController {
 		  throw new NotAcceptableException("Accept header ".$req->getHeader('Accept')." not supported!");
 		  return;
 		}
-		
+
 		// load the model. Will fetch requested change requests from the db.
 		$params = $this->oslc->init($params);
 
@@ -496,16 +496,16 @@ class FusionForgeCmController extends CmController {
 
 		//print_r($this->view);
 		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
-		
+
 	}
-	
+
 	/**
 	 * Handle OSLC Core services provider catalog access (http://open-services.net/bin/view/Main/OslcCoreSpecification)
 	 * Will show the list of prjects.
-	 * 
+	 *
 	 */
 	public function oslcservicecatalogAction() {
-		
+
 		//$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
 		if (! isset($this->actionMimeType)) {
 		  //			print_r("error");
@@ -514,12 +514,12 @@ class FusionForgeCmController extends CmController {
 		}
 		// each project is considered as a service Provider.
 		$proj_arr = $this->oslc->getProjectsList();
-		
+
 		$this->view->projects = $proj_arr;
-		
+
 		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 	}
-	
+
 	/**
 	 * Handle OSLC services catalog access per project.
 	 * Accessed by uris like ".../cm/oslc-cm-services/x"
@@ -531,21 +531,21 @@ class FusionForgeCmController extends CmController {
 			$this->_forward('UnknownAcceptType','error');
 			return;
 		}
-		
+
 		$req = $this->getRequest();
 		$params = $req->getParams();
-		
+
 		$project = $params['oslc-cm-services'];
 		$trackers = $this->oslc->getProjectTrackers($project);
-		
+
 		$this->view->project = $project;
 		$this->view->trackers = $trackers;
-		
+
 		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 	}
 
 	/**
-	 * 
+	 *
 	 * Handles OSLC-CM service document access.
 	 */
 	public function oslccmservicedocumentAction() {
@@ -554,7 +554,7 @@ class FusionForgeCmController extends CmController {
 			$this->_forward('UnknownAcceptType','error');
 			return;
 		}
-		
+
 		$req = $this->getRequest();
 		$params = $req->getParams();
 
@@ -573,30 +573,30 @@ class FusionForgeCmController extends CmController {
 		$data = $this->oslc->getDataForSelectionUi($project, $tracker);
 		$this->view->data = $data;
 	}
-	
+
 	public function showcreationuiAction() {
 		$req = $this->getRequest();
 		$params = $req->getParams();
 		$project = $params['project'];
 		$tracker = $params['tracker'];
-		
+
 		$httpScheme = $this->getRequest()->getScheme();
 		$httpHost = $this->getRequest()->getHttpHost();
 		$prefix = $httpScheme.'://'.$httpHost;
 		$this->view->delegUrl = $prefix;
-		
+
 		// do authentication.
 		if (isset($params['oauth_signature'])) {
 			session_set_for_authplugin('oauthprovider');
 		}
-		
+
 		//TODO add flags to propagate to the view if authentication went well ...
 		//And timers ....
 		if(session_loggedin()) {
 			$auth_timestamp = time();
 		}
-		
-		
+
+
 		if(isset($params['build_url'])) {
 			$this->view->build_url = $params['build_url'];
 		}
@@ -606,14 +606,14 @@ class FusionForgeCmController extends CmController {
 		if (isset($auth_timestamp)) {
 			$this->view->auth_timestamp = $auth_timestamp;
 		}
-		
+
 		$data = $this->oslc->getDataForCreationUi($project, $tracker);
-		
+
 		$this->view->data = $data;
-		
-		
+
+
 	}
-	
+
 	/**
 	 * Performs authentication according to the authorization header recieved.
 	 *
@@ -634,14 +634,14 @@ class FusionForgeCmController extends CmController {
 			} elseif (strcasecmp($auth_type, 'basic')==0) {
 				return $this->retrieveRequestAuthHttpBasic($login);
 			} else {
-				throw new BadRequestException('Unsupported Authorization type : '. $auth_type .' !');	
+				throw new BadRequestException('Unsupported Authorization type : '. $auth_type .' !');
 			}
 		} else {
 			return FALSE;
 		}
 
 	}
-	
+
 	/**
 	 * Helper function that performs HTTP Basic authentication from request parameters/headers
 	 *
@@ -682,14 +682,14 @@ class FusionForgeCmController extends CmController {
 			}
 		}
 		if (isset($password)) {
-				
+
 			$config = array(
 		    	'accept_schemes' => 'basic',
     			'realm'          => 'Oslc-Demo',
     			'digest_domains' => '/cm',
     			'nonce_timeout'  => 3600,
 			);
-				
+
 			// Http authentication adapter
 			$adapter = new Zend_Auth_Adapter_Http($config);
 

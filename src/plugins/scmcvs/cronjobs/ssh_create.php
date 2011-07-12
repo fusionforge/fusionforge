@@ -30,8 +30,8 @@ require $gfcommon.'include/cron_utils.php';
 
 $err='';
 
-$res=db_query_params ('SELECT user_name,user_id,authorized_keys 
-	FROM users 
+$res=db_query_params ('SELECT user_name,user_id,authorized_keys
+	FROM users
 	WHERE authorized_keys != $1
 	AND status=$2 AND unix_status = $3',
 		      array('',
@@ -68,7 +68,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	fclose($h8);
 	posix_seteuid(0);
 	posix_setegid(0);
-		
+
 	system("chown $username:users forge_get_config('homedir_prefix')/$username");
 	system("chown $username:users $ssh_dir");
 	system("chmod 0644 $ssh_dir/authorized_keys");

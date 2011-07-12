@@ -25,7 +25,7 @@ include $gfcommon.'docman/DocumentFactory.class.php';
 
 /**
 * Widget_MyProjectsLastDocuments
-* 
+*
 * PROJECT LIST
 */
 class Widget_MyProjectsLastDocuments extends Widget {

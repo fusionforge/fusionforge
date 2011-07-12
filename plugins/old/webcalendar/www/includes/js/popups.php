@@ -65,7 +65,7 @@ function show(evt, name){
    scrollX=(typeof window.pageXOffset == "number")? window.pageXOffset:(document.documentElement && document.documentElement.scrollLeft)?document.documentElement.scrollLeft:(document.body && document.body.scrollLeft)?document.body.scrollLeft:window.scrollX;
    scrollY=(typeof window.pageYOffset == "number")? window.pageYOffset:(document.documentElement && document.documentElement.scrollTop)?document.documentElement.scrollTop:(document.body && document.body.scrollTop)?document.body.scrollTop:window.scrollY;
    popupW = document.getElementById(name).offsetWidth;
-   popupH = document.getElementById(name).offsetHeight;   
+   popupH = document.getElementById(name).offsetHeight;
 
    showtip(evt);
   }
@@ -75,17 +75,17 @@ function showtip(e){
   e = e? e: window.event;
   if(idiv) {
     if(e)   {
-      x=e.pageX?e.pageX:e.clientX?e.clientX + scrollX:0; 
+      x=e.pageX?e.pageX:e.clientX?e.clientX + scrollX:0;
       y=e.pageY?e.pageY:e.clientY?e.clientY + scrollY:0;
     }
     else {
       x=0; y=0;
     }
     // MAke sure we don't go off screen
-    if ( popupW > maxwidth ) { 
+    if ( popupW > maxwidth ) {
       popupW = maxwidth;
       idiv.width = maxwidth + px;
-    }  
+    }
     idiv.left=(((x + popupW + xoffset)>winW)?x - popupW - xoffset:x + xoffset)+px;
     if ((popupH + yoffset)>winH) {
       idiv.top= yoffset + px;

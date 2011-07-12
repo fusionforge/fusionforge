@@ -199,7 +199,7 @@ if ( ! empty ( $action ) && $action == "dbtest" ) {
     echo "</body></html>\n";
   } else { // Not valid user
     echo "You are not authorized.";
-    // etranslate ( "You are not authorized" );  
+    // etranslate ( "You are not authorized" );
   }
   exit;
 }
@@ -436,7 +436,7 @@ doc.li {
 </head>
 <body onload="<?php echo $onload;?>">
 <?php
-/* other features coming soon.... 
+/* other features coming soon....
 <div class="nav">
 <table border="0" width="100%">
 <tr>
@@ -575,7 +575,7 @@ You should select "Web Server" from the list of
     echo "<option value=\"mysql\" " .
       ( $settings['db_type'] == 'mysql' ? " selected=\"selected\"" : "" ) .
       "> MySQL </option>\n";
-      
+
   if ( ! empty ( $supported['mysqli'] ) )
     echo "<option value=\"mysqli\" " .
       ( $settings['db_type'] == 'mysqli' ? " selected=\"selected\"" : "" ) .

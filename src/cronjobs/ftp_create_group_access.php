@@ -1,7 +1,7 @@
 #! /usr/bin/php
 <?php
 /**
- * 
+ *
  * Fabio Bertagnin nov 2005
  * fbertatnin@mail.transiciel.com
  *

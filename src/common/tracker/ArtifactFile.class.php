@@ -53,7 +53,7 @@ function &artifactfile_get_object($artifact_file_id,$data=false) {
 
 class ArtifactFile extends Error {
 
-	/** 
+	/**
 	 * The artifact object.
 	 *
 	 * @var		object	$Artifact.
@@ -75,7 +75,7 @@ class ArtifactFile extends Error {
 	 *  @return	boolean	success.
 	 */
 	function ArtifactFile(&$Artifact, $data=false) {
-		$this->Error(); 
+		$this->Error();
 
 		//was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {
@@ -145,7 +145,7 @@ class ArtifactFile extends Error {
 		} else {
 			$time = time();
 		}
-		
+
 
 		// If $filetype is "text/plain", $bin_data convert UTF-8 encoding.
 		if (strcasecmp($filetype,"text/plain") === 0 &&
@@ -167,7 +167,7 @@ class ArtifactFile extends Error {
 					       $filesize,
 					       $filetype,
 					       $time,
-					       $userid)) ; 
+					       $userid)) ;
 
 		$id=db_insertid($res,'artifact_file','id');
 
@@ -242,7 +242,7 @@ class ArtifactFile extends Error {
 	function &getArtifact() {
 		return $this->Artifact;
 	}
-	
+
 	/**
 	 *	getID - get this ArtifactFile's ID.
 	 *

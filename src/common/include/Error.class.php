@@ -1,4 +1,4 @@
-<?php   
+<?php
 /**
  * FusionForge base error class
  *
@@ -54,7 +54,7 @@ class Error {
 	 * @var int $error_code.
 	 */
 	var $error_code;
-	
+
 	/**
 	 * Error() - Constructor.
 	 * Constructor for the Error class.
@@ -118,7 +118,7 @@ class Error {
 	function isError() {
 		return $this->error_state;
 	}
-	
+
 
 	/**
 	 * setPermissionDeniedError() - sets a Permission Denied error
@@ -129,7 +129,7 @@ class Error {
 	function setPermissionDeniedError(){
 		$this->setError(_('Permission denied.'), ERROR__PERMISSION_DENIED_ERROR);
 	}
-	
+
 	/**
 	 * isPermissionDeniedError() - Determines if it is a permission denied error
 	 *
@@ -151,7 +151,7 @@ class Error {
 			$e .= ' ' . _('(none given)');
 		$this->setError($e, ERROR__INVALID_EMAIL_ERROR);
 	}
-	
+
 	/**
 	 * isInvalidEmailError() - Determines if it is an invalid email error
 	 *
@@ -160,7 +160,7 @@ class Error {
 	function isInvalidEmailError(){
 		return ($this->error_code == ERROR__INVALID_EMAIL_ERROR);
 	}
-	
+
 	/**
 	 * setOnUpdateError() - sets an On Update Error
 	 *  retrieves the localized error string for On Update
@@ -171,7 +171,7 @@ class Error {
 	function setOnUpdateError($result=""){
 		$this->setError(sprintf(_('Error On Update: %s'), $result), ERROR__ON_UPDATE_ERROR);
 	}
-	
+
 	/**
 	 * isOnUpdateError() - Determines if it is an on update error
 	 *
@@ -183,13 +183,13 @@ class Error {
 
 	/**
 	 * setGroupIdError() - sets an Group ID Error
-	 *  retrieves the localized error string for Group ID 
+	 *  retrieves the localized error string for Group ID
 	 */
 	function setGroupIdError(){
 		$this->setError(_('Group_id in db result does not match Group Object'), ERROR__GROUPID_ERROR);
-		
+
 	}
-	
+
 	/**
 	 * isGroupIdError() - Determines if it is a group ID error
 	 *
@@ -212,7 +212,7 @@ class Error {
 		}
 		$this->setError(_('Missing Parameters').$param, ERROR__MISSING_PARAMS_ERROR);
 	}
-	
+
 	/**
 	 * isMissingParamsError() - Determines if it is a missing params error
 	 *

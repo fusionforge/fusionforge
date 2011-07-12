@@ -22,7 +22,7 @@ if ( empty ( $error ) && $id > 0 ) {
     $params[0] = $app_user ;
     $params[1] = $id ;
     plugin_hook('add_cal_link_father_event',$params);
-    
+
   } else {
     activity_log ( $id, $login, $app_user, $LOG_APPROVE, "" );
   }

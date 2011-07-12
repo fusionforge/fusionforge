@@ -24,7 +24,7 @@ require_once('common/rss/RSS.class.php');
 
 /**
 * Widget_MyProjects
-* 
+*
 * PROJECT LIST
 */
 class Widget_MyProjects extends Widget {
@@ -137,7 +137,7 @@ class Widget_MyProjects extends Widget {
 			if (forge_check_perm ('project_admin', $pid)) {
 				$desc .= '<br />Admin: '. util_make_url('/project/admin/?group_id='.$pid);
 			}
-			
+
 			$rss->addItem(array(
 						'title'       => $title,
 						'description' => $desc,

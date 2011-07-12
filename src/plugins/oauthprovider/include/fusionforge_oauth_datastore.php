@@ -7,12 +7,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -31,12 +31,12 @@ require_once('OAuth.php');
 
 /**
  * OAuthDataStore singleton class to manage tokens, consumers and nonce in FusionForge DB
- * 
+ *
  * Everything specific to the DB model is handled in this class : no other SQL request should exist outside it
  * It should be reimplemented for other apps, the rest of the classes being untouched
- * 
+ *
  * It will assume that OauthAuthzConsumer, OauthAuthzToken and its sub-classes are used
- * 
+ *
  * @author Olivier Berger
  *
  */
@@ -69,7 +69,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Converts request or access token types to table names for FusionForge
-	 * 
+	 *
 	 * @param string $token_type
 	 * @return string
 	 */
@@ -83,19 +83,19 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Retrieve values of columns for a consumer in the DB provided its id
-	 * 
+	 *
 	 * @param int $p_id ID in the DB
 	 * @return array of column values
 	 */
 	function find_consumer_from_id( $p_id ) {
 		$t_consumer_table = "plugin_oauthprovider_consumer";
-		
+
 		$t_result = db_query_params ("SELECT * FROM $t_consumer_table WHERE id=$1",
 					   array ( (int) $p_id )) ;
 		if (!$t_result || ( db_numrows( $t_result ) < 1 )) {
 			exit_error( "Consumer not found!", 'oauthprovider' );
 		}
-		
+
 		$t_row = db_fetch_array( $t_result );
 
 		return $t_row;
@@ -103,7 +103,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Retrieve a table of columns values for all consumers
-	 * 
+	 *
 	 * @return array of arrays of column values
 	 */
 	function find_all_consumers() {
@@ -121,7 +121,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Retrieve values of columns for a consumer in the DB provided its key
-	 * 
+	 *
 	 * @param string $p_consumer_key consumer's key
 	 * @return array of column values
 	 */
@@ -139,10 +139,10 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 		return $t_row;
 	}
-	
+
 	/**
 	 * Retrieve values of columns for a consumer in the DB provided its key
-	 * 
+	 *
 	 * @param string $p_consumer_key consumer's key
 	 * @return array of column values
 	 */
@@ -160,10 +160,10 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 		$t_consumer = OauthAuthzConsumer::row_to_new_consumer($t_row);
 		return $t_consumer;
 	}
-	
+
 	/**
 	 * Retrieve values of columns for a consumer in the DB provided its name
-	 * 
+	 *
 	 * @param string $p_consumer_name
 	 * @return array of column values
 	 */
@@ -184,7 +184,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Saves an OauthAuthzConsumer to the DB
-	 * 
+	 *
 	 * @param OauthAuthzConsumer $consumer
 	 * @return int the consumer ID in the DB
 	 */
@@ -193,7 +193,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 		$consumer_id = $consumer->getId();
 		if ( 0 == $consumer_id ) { # create
-			
+
 			db_begin();
 			$result = db_query_params ("INSERT INTO $t_consumer_table".' ( name, consumer_key, consumer_secret, consumer_url, consumer_desc, consumer_email ) VALUES ($1,$2,$3,$4,$5,$6)',
 						   array ($consumer->getName(), $consumer->key, $consumer->secret, $consumer->getUrl(), $consumer->getDesc(), $consumer->getEmail())) ;
@@ -203,16 +203,16 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 				return false;
 			}
 			$consumer_id = db_insertid($result, $t_consumer_table, 'id' );
-			
+
 			db_commit();
-			
+
 		} else { # update
 			$t_query = "UPDATE $t_consumer_table SET name=$1, consumer_key=$2, consumer_secret=$3, consumer_url=$4, consumer_desc=$5, consumer_email=$6 WHERE id=$7";
 			db_query_params( $t_query, array( $consumer->getName(), $consumer->key, $consumer->secret, $consumer->getUrl(), $consumer->getDesc(), $consumer->getEmail(), $consumer->getId() ) );
 		}
 		return $consumer_id;
 	}
-	
+
 	/**
 	 * Creates a new consumer key-secret
 	 */
@@ -225,28 +225,28 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
   /**
    * Deletes a consumer from the DB
-   * 
+   *
    * @param int $consumer_id
    */
 	public function delete_consumer( $consumer_id ) {
 
 		$t_consumer_table = "plugin_oauthprovider_consumer";
-		
+
 		$t_query = "DELETE FROM $t_consumer_table WHERE id=$1";
 		$t_result = db_query_params( $t_query, array( (int) $consumer_id ) );
-		
+
 		if (!$t_result) {
 			db_rollback();
 			return false;
 		}
-		
+
 		db_commit();
 		return true;
-	}	
-	
+	}
+
 	/**
 	 * Retrieve values of columns for a token in the DB provided its key
-	 * 
+	 *
 	 * @param string $token_type
 	 * @param string $token_string
 	 * @return array of column values
@@ -268,7 +268,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Retrieve values of columns for a token in the DB provided its id
-	 * 
+	 *
 	 * @param string $token_type
 	 * @param int $token_id
 	 * @return array of column values
@@ -290,7 +290,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Retrieve a table of columns values for all tokens (of a user)
-	 * 
+	 *
 	 * @param string $token_type
 	 * @param optional int $user_id
 	 * @return array of arrays of column values
@@ -315,10 +315,10 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 		return $t_rows;
 	}
-	
+
 	/**
 	 * Retrieve a table of columns values for all tokens issued for a consumer (and a user)
-	 * 
+	 *
 	 * @param string $token_type
 	 * @param int $consumer_id
 	 * @param optional int $user_id
@@ -344,12 +344,12 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 		return $t_rows;
 	}
-    	
+
 	/**
 	 * Retrieve an OAuthToken from its key
-	 * 
+	 *
 	 * Concrete class implementation required for OAuthDataStore
-	 * 
+	 *
 	 * @param string $token_type
 	 * @param string $token_string
 	 * @return OauthAuthzToken
@@ -384,11 +384,11 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Check a nonce already existed in the DB
-	 * 
+	 *
 	 * It will auto-purge nonce older than 10 minutes (cleanup made every 100 nonce creation) to avoid the table to fillup
-	 * 
+	 *
 	 * Concrete class implementation required for OAuthDataStore
-	 * 
+	 *
 	 * @param OAuthConsumer $consumer
 	 * @param OAuthToken $token
 	 * @params string $nonce
@@ -440,9 +440,9 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Generates an new token in the DB
-	 * 
+	 *
  	 * It will auto-purge request tokens older than 24 hours that haven't been converted to access tokens in time (cleanup made every 100 request token creation)
-	 * 
+	 *
 	 * @param OAuthConsumer $consumer
 	 * @param string $token_type
 	 * @return OAuthToken
@@ -454,9 +454,9 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 		$hash = sha1($random);
 		$key = substr($hash, 0, 20);
 		$secret = substr($hash, 20, 40);
-		
+
 		$time_stamp = time();
-		
+
 		$token = new OAuthToken($key, $secret);
 
 		$t_query = "INSERT INTO $t_token_table ( consumer_id, token_key, token_secret, role_id, time_stamp ) VALUES ( $1, $2, $3, $4, $5 )";
@@ -478,10 +478,10 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Generates a new request token in the DB
-	 * 
+	 *
 	 * Concrete class implboundementation
 	 * called by the OAuthServer
-	 * 
+	 *
 	 * @param OAuthConsumer $consumer
 	 * @return OAuthToken
 	 */
@@ -494,10 +494,10 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Generates a new access token in the DB
-	 * 
+	 *
 	 * Concrete class implementation
 	 * called by the OAuthServer
-	 * 
+	 *
 	 * @param OAuthToken $request_token
 	 * @param OAuthConsumer $consumer
 	 * @return OAuthToken
@@ -540,7 +540,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 	/**
 	 * Saves an OauthAuthzAccessToken to the DB
-	 * 
+	 *
 	 * @param OauthAuthzAccessToken $token
 	 * @return int the token ID in the DB
 	 */
@@ -561,12 +561,12 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 			//db_query_params( $t_query, array( $token->getConsumerId(), $token->key, $token->secret, $token->getUserId(), $token->gettime_stamp(), $token->getId() ) );
 			exit_error("The access token already exists and cannot be modified.", 'oauthprovider');
 		}
-		
+
 	}
-	
+
 	/**
 	 * Saves an OauthAuthzRequestToken to the DB
-	 * 
+	 *
 	 * @param OauthAuthzRequestToken $token
 	 * @return int the token ID in the DB
 	 */
@@ -586,11 +586,11 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 		}
 		return $token_id;
 	}
-	
-	
+
+
   /**
    * Deletes a token from the DB
-   * 
+   *
    * @param string $token_type
    * @param int $token_id
    */
@@ -600,6 +600,6 @@ class FFDbOAuthDataStore extends OAuthDataStore {
     $t_query = "DELETE FROM $t_token_table WHERE id=$1";
     $t_result = db_query_params( $t_query, array( (int) $token_id ) );
   }
-	
+
 
 }

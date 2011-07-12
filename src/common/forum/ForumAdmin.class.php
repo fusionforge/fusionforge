@@ -28,16 +28,16 @@
 class ForumAdmin extends Error {
 	var $group_id;
 	var $p,$g;
-	
+
 	function ForumAdmin($group_id) {
-		$this->group_id = $group_id; 
+		$this->group_id = $group_id;
 		if ($group_id) {
 			$this->group_id = $group_id;
 			$this->g = group_get_object($group_id);
 			$this->p =& $this->g->getPermission ();
 		}
 	}
-	
+
 	/**
 	 *  PrintAdminMessageOptions - prints the different administrator options for a message
 	 *
@@ -47,9 +47,9 @@ class ForumAdmin extends Error {
 	 *	@param   integer	The Forum ID : to return to the message if the user cancels (forumhtml only, not message.php)
 	 *	@return  The HTML output
 	 */
-	
+
 	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0,$return_to_message=0) {
-		
+
 		$return = '<a href="admin/index.php?movethread=' . $thread_id  . '&amp;msg_id=' . $msg_id . '&amp;group_id=' . $group_id . '&amp;forum_id=' . $forum_id .
 				  '&amp;return_to_message=' . $return_to_message . '">' . html_image('ic/forum_move.gif','37','15',array('alt'=>_('Move thread'))). "</a>";
 
@@ -63,34 +63,34 @@ class ForumAdmin extends Error {
 		//		$return .= "<br />";
 		return $return;
 	}
-	
+
 	/**
 	 *  PrintAdminOptions - prints the different administrator option for the forums (heading).
 	 *
 	 */
-	
+
 	function PrintAdminOptions() {
 		global $group_id,$forum_id;
-		
+
 		echo '
 			<p>
 			<a href="index.php?group_id='.$group_id.'&amp;add_forum=1">'._('Add forum').'</a>';
 		echo '
 			| <a href="pending.php?action=view_pending&amp;group_id=' . $group_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
 	}
-	
+
 	/**
 	 *  PrintAdminOptions - prints the administrator option for an individual forum, to link to the pending messages management
 	 *
 	 *	@param 	int		The Forum ID.
 	 */
-	
+
 	function PrintAdminPendingOption($forum_id) {
 		echo '
 			<p>
 			<a href="pending.php?action=view_pending&amp;group_id=' . $this->group_id . '&amp;forum_id=' . $forum_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
 	}
-	
+
 	/**
 	 *  GetPermission - Gets the permission for the user
 	 *
@@ -99,7 +99,7 @@ class ForumAdmin extends Error {
 	function &GetPermission() {
 		return $this->p;
 	}
-	
+
 	/**
 	 *  GetGroupObject - Gets the group object of the forum
 	 *
@@ -108,7 +108,7 @@ class ForumAdmin extends Error {
 	function &GetGroupObject() {
 		return $this->g;
 	}
-	
+
 	/**
 	 *  isGroupAdmin - checks whether the authorized user is a group admin for the forums. The user must be authenticated
 	 *
@@ -116,13 +116,13 @@ class ForumAdmin extends Error {
 	function isGroupAdmin() {
 		return forge_check_perm ('forum_admin', $this->group_id) ;
 	}
-	
+
 	/**
 	 *  Authorized - authorizes and returns true if the user is authorized for the group, or false.
 	 *
 	 *  @param  string	 The group id.
 	 */
-	
+
 	function Authorized($group_id) {
 		if (!$group_id) {
 			$this->setGroupIdError();
@@ -145,7 +145,7 @@ class ForumAdmin extends Error {
 		}
 		return true;
 	}
-	
+
 	/**
 	 *  ExecuteAction - Executes the action passed as parameter
 	 *
@@ -153,7 +153,7 @@ class ForumAdmin extends Error {
 	 */
 	function ExecuteAction ($action) {
         global $HTML;
-		
+
 		$feedback='';
 		if ($action == "change_status") { //change a forum
 			$forum_name = getStringFromRequest('forum_name');
@@ -270,15 +270,15 @@ class ForumAdmin extends Error {
 						array ($group_id));
 			if (!$res) {
 				echo db_error();
-				return;			
+				return;
 			}
-			
+
 			$moderated_forums = array();
 			for ($i=0;$i<db_numrows($res);$i++) {
 				$aux = db_fetch_array($res);
 				$moderated_forums[$aux[1]] = $aux[0];
 			}
-			
+
 			if (count($moderated_forums)==0) {
 				echo $HTML->warning_msg(_('No forums are moderated for this group'));
 				forum_footer(array());
@@ -289,10 +289,10 @@ class ForumAdmin extends Error {
 				$keys = array_keys($moderated_forums);
 				$forum_id = $keys[0];
 			}
-			
+
 			echo '
 			<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
-		
+
 			function confirmDel() {
 				var agree=confirm("' . _('Proceed? Actions are permanent!') . '");
 				if (agree) {
@@ -309,21 +309,21 @@ class ForumAdmin extends Error {
 			<input type="hidden" name="forum_id" value="' . $forum_id . '" />
 
 			';
-			
+
 			echo html_build_select_box_from_assoc($moderated_forums,'forum_id',$forum_id);
 			echo '    <input name="Go" type="submit" value="Go" />';
-			
+
 			$title = array();
 			$title[] = _('Forum Name');
 			$title[] = _('Message');
 			$title[] = "Action";
-			
+
 			$res = db_query_params ('SELECT msg_id,subject,pm.group_forum_id,gl.forum_name FROM forum_pending_messages pm, forum_group_list gl WHERE pm.group_forum_id=$1 AND pm.group_forum_id=gl.group_forum_id AND gl.group_forum_id=$2',
 			array ($forum_id,
 				$forum_id));
 			if (!$res) {
 				echo db_error();
-				return;			
+				return;
 			}
 
 			//array with the supported actions
@@ -335,7 +335,7 @@ class ForumAdmin extends Error {
 			for($i=0;$i<db_numrows($res);$i++) {
 				$ids .= db_result($res,$i,'msg_id') . ",";
 			}
-			
+
 			$i = 2;
 			echo $HTML->listTableTop($title);
 			while ($onemsg = db_fetch_array($res)) {
@@ -345,12 +345,12 @@ class ForumAdmin extends Error {
 				$url = "http://www.google.com";
 				echo "
 				<tr" . $HTML->boxGetAltRowStyle($i++). ">
-					<td>$onemsg[forum_name]</td>	
+					<td>$onemsg[forum_name]</td>
 					<td><a href=\"#\" onclick=\"window.open('pendingmsgdetail.php?msg_id=$onemsg[msg_id]&amp;forum_id=$onemsg[group_forum_id]&amp;group_id=$group_id','PendingMessageDetail','width=800,height=600,status=no,resizable=yes');\">$onemsg[subject]</a></td>
 					<td><div align=\"right\">" . html_build_select_box_from_assoc($options,"doaction[]",1) . "</div></td>
 				</tr>";
 			}
-			
+
 			echo $HTML->listTableBottom();
 			echo '
 			<input type="hidden" name="msgids" value="' . $ids . '" />
@@ -363,22 +363,22 @@ class ForumAdmin extends Error {
 			$forum_id = getIntFromRequest("forum_id");
 			$msgids = getStringFromRequest("msgids");//the message ids to update
 			$doaction = getArrayFromRequest("doaction"); //the actions for the messages
-			
+
 			$msgids = explode(",",$msgids);
 			array_pop($msgids);//this last one is empty
-			
+
 			/*if ($this->isGroupAdmin()) {
 				$this->PrintAdminOptions();
 			}*/
-			
+
 			$results = array(); //messages
 			for($i=0;$i<count($msgids);$i++) {
 				switch ($doaction[$i]) {
-					case 1 : { 
+					case 1 : {
 						//no action
 						break;
 					}
-					case 2 : { 
+					case 2 : {
 						//delete
 						db_begin();
 						if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
@@ -397,7 +397,7 @@ class ForumAdmin extends Error {
 						$feedback .= _('Forum deleted');
 						break;
 					}
-					case 3 : { 
+					case 3 : {
 						//release
 						$res1 = db_query_params ('SELECT * FROM forum_pending_messages WHERE msg_id=$1',
 			array ($msgids[$i]));
@@ -464,7 +464,7 @@ class ForumAdmin extends Error {
 								$deleteok = false;
 							}
 						}
-								
+
 						if ( isset($am) && (is_object($am)) ) {
 							//if there was an attach, check if it was uploaded ok
 							 if ((!$am->isError())) {
@@ -482,7 +482,7 @@ class ForumAdmin extends Error {
 								$deleteok = false;
 							 }
 						}
-						
+
 						if ($deleteok) {
 							//delete the message and attach
 							db_begin();

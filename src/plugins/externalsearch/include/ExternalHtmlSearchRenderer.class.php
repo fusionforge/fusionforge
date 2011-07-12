@@ -18,13 +18,13 @@ class ExternalHtmlSearchRenderer extends SearchRenderer {
 	* @var string $name
 	*/
 	var $name;
-	
+
 	/**
 	* url of the external site
 	*
 	* @var string $url
 	*/
-	var $url;	
+	var $url;
 
 	/**
 	 * Constructor

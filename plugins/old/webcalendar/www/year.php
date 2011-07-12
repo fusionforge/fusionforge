@@ -44,7 +44,7 @@ if ( $user == "__public__" )
 
  print_header();
  ?>
- 
+
 <div class="title">
 	<a title="<?php etranslate("Previous")?>" class="prev" href="year.php?year=<?php echo $prevYear; if ( ! empty ( $user ) ) echo "&amp;user=$user";?>"><img src="leftarrow.gif" alt="<?php etranslate("Previous")?>" /></a>
 	<a title="<?php etranslate("Next")?>" class="next" href="year.php?year=<?php echo $nextYear; if ( ! empty ( $user ) ) echo "&amp;user=$user";?>"><img src="rightarrow.gif" alt="<?php etranslate("Next")?>" /></a>
@@ -64,7 +64,7 @@ if ( $user == "__public__" )
 	?></span>
 </div>
 <br />
- 
+
 <div align="center">
 	<table class="main">
 		<tr><td>
@@ -91,7 +91,7 @@ if ( $user == "__public__" )
 <br />
 <?php display_unapproved_events ( $login ); ?>
 <br />
-<a title="<?php 
+<a title="<?php
 	etranslate("Generate printer-friendly version")
 ?>" class="printer" href="year.php?<?php
 	if ( $thisyear )

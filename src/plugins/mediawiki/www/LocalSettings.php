@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Copyright (C) 2010 Roland Mas, Olaf Lenz
  *
  * This file is part of FusionForge.
@@ -52,7 +52,7 @@ while (count ($exppath) >= 4) {
 }
 
 $gconfig_dir = forge_get_config('mwdata_path', 'mediawiki');
-$project_dir = forge_get_config('projects_path', 'mediawiki') . "/" 
+$project_dir = forge_get_config('projects_path', 'mediawiki') . "/"
 	. $fusionforgeproject ;
 
 if (!is_dir($project_dir)) {
@@ -213,7 +213,7 @@ function FusionForgeMWAuth( $user, &$result ) {
 				$rs = array ($r) ;
 			}
 		}
-		
+
 		// Sync MW groups for current user with FF roles
 		$rnames = array () ;
 		foreach ($rs as $r) {
@@ -251,10 +251,10 @@ function SetupPermissionsFromRoles () {
 	$rs = $g->getRoles() ;
 	foreach ($rs as $r) {
 		$gr = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
-		
+
 		// Read access
 		$wgGroupPermissions[$gr]['read'] = $r->hasPermission ('plugin_mediawiki_read', $g->getID()) ;
-		
+
 		// Day-to-day edit privileges
 		$wgGroupPermissions[$gr]['edit']               = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editexisting') ;
 		$wgGroupPermissions[$gr]['writeapi']           = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editexisting') ;
@@ -266,25 +266,25 @@ function SetupPermissionsFromRoles () {
 		$wgGroupPermissions[$gr]['move-rootuserpages'] = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editmove') ;
 		$wgGroupPermissions[$gr]['delete']             = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editmove') ;
 		$wgGroupPermissions[$gr]['undelete']           = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editmove') ;
-		
+
 		// File upload privileges
 		$wgGroupPermissions[$gr]['upload']          = $r->hasPermission ('plugin_mediawiki_upload', $g->getID(), 'upload') ;
 		$wgGroupPermissions[$gr]['reupload-own']    = $r->hasPermission ('plugin_mediawiki_upload', $g->getID(), 'upload') ;
 		$wgGroupPermissions[$gr]['reupload']        = $r->hasPermission ('plugin_mediawiki_upload', $g->getID(), 'reupload') ;
 		$wgGroupPermissions[$gr]['reupload-shared'] = $r->hasPermission ('plugin_mediawiki_upload', $g->getID(), 'reupload') ;
 		$wgGroupPermissions[$gr]['upload_by_url']   = $r->hasPermission ('plugin_mediawiki_upload', $g->getID(), 'reupload') ;
-		
+
 		// Administrative tasks
 		$wgGroupPermissions[$gr]['editinterface'] = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
 		$wgGroupPermissions[$gr]['import']        = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
 		$wgGroupPermissions[$gr]['importupload']  = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
 		$wgGroupPermissions[$gr]['siteadmin']     = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
-	}	
+	}
 
 	$rs = RBACEngine::getInstance()->getGlobalRoles();
 	foreach ($rs as $r) {
 		$gr = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
-		
+
 		// Interwiki management restricted to forge admins
 		$wgGroupPermissions[$gr]['interwiki'] = $r->hasGlobalPermission ('forge_admin') ;
 	}

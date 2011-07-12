@@ -1,6 +1,6 @@
 <?php
 /**
- * List of all groups in the system. 
+ * List of all groups in the system.
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
  *
@@ -143,7 +143,7 @@ foreach ($rows as $grp) {
 	if ($grp['status']=='D'){
 		$status="deleted";
 	}
-	
+
 	$time_display = "";
 	if ($grp['register_time'] != 0) {
 		$time_display = date(_('Y-m-d H:i'),$grp['register_time']);

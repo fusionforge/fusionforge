@@ -38,7 +38,7 @@ if ( ! $is_admin ) {
         $error = translate ("Database error") . ": " . dbi_error();
       }
     }
-  
+
     # update user list
     if ( $error == "" &&  ! empty ( $users ) ) {
       dbi_query ( "DELETE FROM webcal_group_user WHERE cal_group_id = $id" );

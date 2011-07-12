@@ -92,7 +92,7 @@ OR lower(realname) LIKE $1',
 		$title[]=_('Email');
 		$title[]=_('Member since');
 		$title[]=_('Status');
-					 
+
 		echo $GLOBALS['HTML']->listTableTop($title);
 		$i = 0 ;
 		while ($row = db_fetch_array($result)) {
@@ -105,12 +105,12 @@ OR lower(realname) LIKE $1',
 				<td>'.date(_('Y-m-d H:i'), $row['add_date']).'</td>
 				<td style="text-align:center">'.format_name($row['status'].'/'.$row['unix_status'], $row['status']).'</td>
 				</tr>
-			'; 
+			';
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
 
-	} 
+	}
 } // end if ($usersearch)
 
 
@@ -119,7 +119,7 @@ if (getStringFromRequest('groupsearch')) {
 	$is_public = getIntFromRequest('is_public', -1);
 	$crit_desc = '' ;
 	$qpa = db_construct_qpa () ;
-	
+
 	if(is_numeric($search)) {
 		$qpa = db_construct_qpa ($qpa, 'SELECT DISTINCT * FROM groups
 WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE $2)',
@@ -147,7 +147,7 @@ WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE
 		$rows = array();
 		$ra = RoleAnonymous::getInstance() ;
 		while ($row = db_fetch_array($result)) {
-			
+
 			if ($is_public == 1) {
 				if ($ra->hasPermission('project_read', $row['group_id'])) {
 					$rows[] = $row;
@@ -160,7 +160,7 @@ WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE
 				$rows[] = $row;
 			}
 		}
-		
+
 		print '<p><strong>'.sprintf(ngettext('Group search with criteria <em>%s</em>: %d match', 'Group search with criteria <em>%s</em>: %d matches', count($rows)), $crit_desc, count($rows)).'</strong></p>';
 
 		$title=array();
@@ -178,7 +178,7 @@ WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE
 			if (!$ra->hasPermission('project_read', $row['group_id'])) {
 				$extra_status = "/PRV";
 			}
-			
+
 			print '
 				<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 				<td><a href="groupedit.php?group_id='.$row['group_id'].'">'.$row['group_id'].'</a></td>
@@ -188,12 +188,12 @@ WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE
 				<td style="text-align:center">'.format_name($row['status'].$extra_status, $row['status']).'</td>
 				</tr>
 			';
-					
+
 		}
-		
+
 		echo $GLOBALS['HTML']->listTableBottom();
 
-	} 
+	}
 
 
 } //end if($groupsearch)

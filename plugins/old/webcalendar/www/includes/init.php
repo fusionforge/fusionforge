@@ -69,7 +69,7 @@ $DMW = in_array($SCRIPT, $special);
 
 // Unset some variables that shouldn't be set
 unset($user_inc);
- 
+
 include_once 'includes/config.php';
 include_once 'includes/php-dbi.php';
 include_once 'includes/functions.php';
@@ -99,7 +99,7 @@ if ( empty ( $public_access ) )
 
 // Load if $SCRIPT is in $special array:
 if ($DMW) {
-  
+
   // Tell the browser not to cache
   send_no_cache_header ();
 
@@ -124,8 +124,8 @@ if ($DMW) {
     }
     for ( $i = 0; $i < count ( $userlist ); $i++ ) {
       if ( $user == $userlist[$i]['cal_login'] ) $valid_user = true;
-    } 
-    if ($valid_user == false) { 
+    }
+    if ($valid_user == false) {
       $user = ""; // security precaution
     }
   }
@@ -313,8 +313,8 @@ function print_header($includes = '', $HeadX = '', $BodyX = '',
 
   // Include includes/print_styles.css as a media="print" stylesheet. When the
   // user clicks on the "Printer Friendly" link, $friendly will be non-empty,
-  // including this as a normal stylesheet so they can see how it will look 
-  // when printed. This maintains backwards-compatibility for browsers that 
+  // including this as a normal stylesheet so they can see how it will look
+  // when printed. This maintains backwards-compatibility for browsers that
   // don't support media="print" stylesheets
   echo "<link rel=\"stylesheet\" type=\"text/css\"" . ( empty ( $friendly ) ? " media=\"print\"" : "" ) . " href=\"includes/print_styles.css\" />\n";
 
@@ -370,7 +370,7 @@ function print_trailer ( $include_nav_links=true, $closeDb=true,
     $is_nonuser_admin, $public_access_others, $allow_view_other,
     $views, $reports_enabled, $LAYER_STATUS, $nonuser_enabled,
     $groups_enabled, $fullname, $has_boss;
-  
+
   if ( $include_nav_links ) {
     include_once "includes/trailer.php";
   }

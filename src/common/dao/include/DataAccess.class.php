@@ -28,13 +28,13 @@ class DataAccess {
     * Constucts a new DataAccess object
     */
     function DataAccess() {
-       
+
     }
    function quoteSmart($value, $params = array()) {
-        
+
         return $value;
     }
-     
+
 
 }
 ?>

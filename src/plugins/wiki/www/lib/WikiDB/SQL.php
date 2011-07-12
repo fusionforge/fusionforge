@@ -26,7 +26,7 @@ class WikiDB_SQL extends WikiDB
         if (DB::isError($backend->_dbh)) return;
         $this->WikiDB($backend, $dbparams);
     }
-  
+
     function view_dsn ($dsn = false) {
         if (!$dsn)
             $dsninfo = DB::parseDSN($GLOBALS['DBParams']['dsn']);
@@ -40,7 +40,7 @@ class WikiDB_SQL extends WikiDB
                        );
     }
 
-  
+
     /**
      * Determine whether page exists (in non-default form).
      * @see WikiDB::isWikiPage for the slow generic version

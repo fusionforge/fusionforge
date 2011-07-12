@@ -8,12 +8,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -30,23 +30,23 @@ require_once($model_dir . 'ChangeRequests.php');
 
 /**
  * Example of a FusionForge ChangeRequest that extends its model
- * 
+ *
  *  Adds a status with the helios_bt ontology (fictional)
  */
 class MantisChangeRequest extends ChangeRequest
 {
 	/**
 	 * Adds helios_bt:status as mandatory
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $_mandatory = array('title','identifier','helios_bt:status');
 
 	protected $_optional = array('type','description','subject','creator','modified','mantisbt:project');
-	
+
 	// may then add a status ?
 	//private $_status;
-	
+
 	/**
 	 * Create from XML (RDF) OSLC-CM document
 	 *
@@ -59,9 +59,9 @@ class MantisChangeRequest extends ChangeRequest
 		$resource = null;
 
 		// we use simplexml PHP library which supports namespaces
-		
+
 		/*******Sample CR*****************************************
-		 * 
+		 *
 		 * <?xml version="1.0"?>
 		 * <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 		 *   <oslc_cm:ChangeRequest xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/">
@@ -74,9 +74,9 @@ class MantisChangeRequest extends ChangeRequest
 		 *       <dc:modified xmlns:dc="http://purl.org/dc/terms/">2008-09-16T08:42:11.265Z</dc:modified>
 		 *   </oslc_cm:ChangeRequest>
 		 * </rdf:RDF>
-		 *           
+		 *
 		 */
-		
+
 		$dc_attr = array("title", "identifier", "type", "description","subject","creator","modified","name","created");
 		$mantisbt_attr = array("severity","status","priority","branch","version", "target_version","version_number","notes");
 
@@ -90,8 +90,8 @@ class MantisChangeRequest extends ChangeRequest
 		    'dc' => 'http://purl.org/dc/terms/'
 		);*/
 		if ( ($namespace['rdf'] == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#') &&
-			 ($xml->getName() == 'RDF')) 
-		{		
+			 ($xml->getName() == 'RDF'))
+		{
 			foreach ($xml->children('http://open-services.net/xmlns/cm/1.0/') as $changerequest) {
 				if ($changerequest->getName() == 'ChangeRequest') {
 					$resource = array();
@@ -119,7 +119,7 @@ class MantisChangeRequest extends ChangeRequest
 							}
 							else
 							{
-								$resource[$field] = $value;	
+								$resource[$field] = $value;
 							}
 						}
 					}
@@ -139,7 +139,7 @@ class MantisChangeRequest extends ChangeRequest
 
 		return $changerequest;
 	}
-	
+
 	public static function CreateMantisArrayFromJson($jsonstr)
 	{
 		//print_r($jsonstr);
@@ -148,7 +148,7 @@ class MantisChangeRequest extends ChangeRequest
 		$changerequest = new MantisChangeRequest();
 
 		// the dublin core elements prefix is removed
-		
+
 		foreach ($resource as $field => $value) {
 			if($field=="mantisbt:notes")
 			{
@@ -156,13 +156,13 @@ class MantisChangeRequest extends ChangeRequest
 			}
 			$field = str_replace('dc:', '', $field);
 			$field = str_replace('mantisbt:', '', $field);
-			
+
 			$changerequest->container[$field] = $value;
 		}
 
 		return $changerequest;
 	}
-	
+
 	public static function CreateMantisNotesArrayFromJson($jsonstr)
 	{
 		Zend_Json::decode($jsonstr); //to check for well-formed json
@@ -174,7 +174,7 @@ class MantisChangeRequest extends ChangeRequest
 		}
 		return $notes;
 	}
-	
+
 	/**
 	 * Create an array of bugnotes from XML (RDF)
 	 *
@@ -188,25 +188,25 @@ class MantisChangeRequest extends ChangeRequest
 
 		$xml = simplexml_load_string($xmlstr);
 		$namespace = $xml->getNamespaces(true);
-		
+
 		if ( ($namespace['rdf'] == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#') &&
-			 ($xml->getName() == 'RDF')) 
-		{		
+			 ($xml->getName() == 'RDF'))
+		{
 			foreach ($xml->children('http://open-services.net/xmlns/cm/1.0/') as $changerequest) {
 				if ($changerequest->getName() == 'ChangeRequest') {
 					$resource = array();
-					
+
 					$x = 0;
 					foreach ($changerequest->children($namespace['mantisbt']) as $child) {
 						$field = $child->getName();
 						//print($field);
-						
+
 						if (strcasecmp($field,"notes")==0)
 						{
 							$value = (string)$child;
 							$resource[$x] = $value;
 							$x++;
-							
+
 						}
 					}
 				}
@@ -215,7 +215,7 @@ class MantisChangeRequest extends ChangeRequest
 
 		return $resource;
 	}
-	
+
 }
 
 // Represents a base of changerequests loaded from FusionForge DB
@@ -223,11 +223,11 @@ class ChangeRequestsMantisDb extends ChangeRequests
 {
 
 	private static $status_arr = array(10=>'new', 20=>'feedback', 30=>'acknowledged', 40=>'confirmed', 50=>'assigned', 80=>'resolved', 90=>'closed');
-	
+
 	private static $priority_arr = array(10=>'none', 20=>'low', 30=>'normal', 40=>'high', 50=>'urgent', 60=>'immediate');
-	
+
 	private static $severity_arr = array(10=>'feature', 20=>'trivial', 30=>'text', 40=>'tweak', 50=>'minor', 60=>'major', 70=>'crash', 80=>'block');
-	
+
 	/**
 	 * @param array $rows_arr as returned by filter_get_bug_rows() in Mantis internal API
 	 */
@@ -257,19 +257,19 @@ class ChangeRequestsMantisDb extends ChangeRequests
 			for ($i=0; $i<count($rows_arr); $i++) {
 
 				$row = $rows_arr[$i];
-				
+
 				if(count($row) < 1) { continue; }
 
 				//print_r($rows_arr[$i]);
 
 				$identifier = $row->id;
-				
+
 				$v_num_id = custom_field_get_id_from_name("version_number");
 				$return[$identifier]=array();
 				$fields = explode(",", $fieldstring);
 				//print_r($fieldstring);
 				$custom_field_array = custom_field_get_linked_ids($row->project_id);
-				
+
 				if(empty($fieldstring))	{
 					//mandatory attributes
 					$return[$identifier]=array(
@@ -284,7 +284,7 @@ class ChangeRequestsMantisDb extends ChangeRequests
 						'modified'=>date(DATE_ATOM,$row->last_updated),
 						'created'=>date(DATE_ATOM,$row->date_submitted)
 						);
-						
+
 					$temp_arr = version_get_all_rows($row->project_id);
 					if(!empty($temp_arr))	{
 						if($row->version!="")	{
@@ -293,15 +293,15 @@ class ChangeRequestsMantisDb extends ChangeRequests
 						if($row->target_version!="")	{
 							$return[$identifier]['mantisbt:target_version'] = $row->target_version;
 						}
-					}						
-						
+					}
+
 					if ($v_num_id) {
 						$v_num = custom_field_get_value( $v_num_id, $identifier );
 						if($v_num!="")	{
 							$return[$identifier]['mantisbt:version_number'] = $v_num;
-						}						
+						}
 					}
-					 
+
 				}else {
 					foreach ($fields as $field)	{
 						switch($field)	{
@@ -339,9 +339,9 @@ class ChangeRequestsMantisDb extends ChangeRequests
 							default: throw new ConflictException("The attribute specified ".$field." cannot be found!");
 						}
 					}
-								
+
 				}
-				
+
 			}
 		}
 		return $return;

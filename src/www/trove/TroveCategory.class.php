@@ -26,28 +26,28 @@ require_once('TroveCategoryLabel.class.php');
 
 // should extend observable
 class TroveCategory extends Error {
-	
+
 	/**
 	 * Associative array of data from db.
 	 *
 	 * @var	 array   $dataArray.
 	 */
 	var $dataArray;
-	
+
 	/**
 	 * Selected Trove category id
 	 *
 	 * @var int $categoryId
 	 */
 	var $categoryId;
-	
+
 	var $labels;
 	var $children;
 	var $parents;
 	var $parent;
-	
+
 	var $filter;
-	
+
 	/**
 	 *  Constructor.
 	 *
@@ -71,7 +71,7 @@ class TroveCategory extends Error {
 			$this->setError(_('ERROR'), _('That Trove category does not exist.'));
 		}
 	}
-	
+
 	/**
 	 *  fetchData - re-fetch the data for this category from the database.
 	 *
@@ -88,7 +88,7 @@ class TroveCategory extends Error {
 		db_free_result($res);
 		return true;
 	}
-	
+
 	function update($shortName, $fullName, $description) {
 		$shortName = trim($shortName);
 		$fullName = trim($fullName);
@@ -103,7 +103,7 @@ class TroveCategory extends Error {
 					fullname=$2,
 					description=$3,
 					version=$4
-				WHERE trove_cat_id=$5", 
+				WHERE trove_cat_id=$5",
 				array(htmlspecialchars($shortName), htmlspecialchars($fullName), htmlspecialchars($description), date('Ymd',time())."01", $this->categoryId));
 			if(!$result || db_affected_rows($result) != 1) {
 				$this->setError(_('ERROR'), _('Cannot update'));
@@ -116,11 +116,11 @@ class TroveCategory extends Error {
 			}
 		}
 	}
-	
+
 	function getId() {
 		return $this->categoryId;
 	}
-	
+
 	// returns a localized label if available
 	function & getLabel($languageId) {
 		if(!isset($this->labels)) {
@@ -133,7 +133,7 @@ class TroveCategory extends Error {
 			return $this->labels;
 		}
 	}
-	
+
 	function getLocalizedLabel() {
 		$languageId = choose_language_from_context();
 		$label = $this->getLabel($languageId);
@@ -143,14 +143,14 @@ class TroveCategory extends Error {
 			return $this->getFullName();
 		}
 	}
-	
+
 	function &getLabels() {
 		if(!isset($this->labels)) {
 			$this->labels = array();
-			$res = db_query_params("SELECT  trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages  
-																WHERE category_id=$1 AND supported_languages.language_id=trove_category_labels.language_id", 
+			$res = db_query_params("SELECT  trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages
+																WHERE category_id=$1 AND supported_languages.language_id=trove_category_labels.language_id",
 																array($this->cathergoryId));
-			
+
 			if (!$res) {
 				return $this->labels;
 			}
@@ -161,27 +161,27 @@ class TroveCategory extends Error {
 		}
 		return $this->labels;
 	}
-	
+
 	function &getParents() {
 		return $this->parents;
 	}
-	
+
 	function &getChildren() {
 		if(!isset($this->children)) {
 			$this->children = array();
-			
+
 			$result = db_query_params("
 				SELECT trove_cat.*,
 				trove_treesums.subprojects AS subprojects
-				FROM trove_cat LEFT JOIN trove_treesums USING (trove_cat_id) 
+				FROM trove_cat LEFT JOIN trove_treesums USING (trove_cat_id)
 				WHERE (
-					trove_treesums.limit_1=0 
+					trove_treesums.limit_1=0
 					OR trove_treesums.limit_1 IS NULL
 				)
 				AND trove_cat.parent=$1
 				ORDER BY fullname",
 				array($this->categoryId), -1, 0, 'DB_TROVE');
-			
+
 			if(!$result) {
 				$this->setError();
 				return false;
@@ -193,7 +193,7 @@ class TroveCategory extends Error {
 		}
 		return $this->children;
 	}
-	
+
 	function getRootParentId() {
 		return $this->dataArray['root_parent'];
 	}
@@ -201,19 +201,19 @@ class TroveCategory extends Error {
 	function getFullName() {
 		return $this->dataArray['fullname'];
 	}
-	
+
 	function getShortName() {
 		return $this->dataArray['shortname'];
 	}
-	
+
 	function getDescription() {
 		return $this->dataArray['description'];
 	}
-	
+
 	function getSubProjectsCount() {
 		return ($this->dataArray['subprojects'] ? $this->dataArray['subprojects'] : 0);
 	}
-	
+
 	function setFilter($filterArray) {
 		$this->filter = $filterArray;
 	}
@@ -221,7 +221,7 @@ class TroveCategory extends Error {
 	function getProjects($offset) {
 		$qpa = db_constract_qpa () ;
 		$qpa = db_construct_qpa ($qpa, 'SELECT * FROM trove_agg') ;
-		
+
 		for($i = 0, $count = sizeof($this->filter); $i < $count; $i++) {
 			$qpa = db_construct_qpa ($qpa,
 						 ", trove_agg trove_agg_$i") ;
@@ -239,11 +239,11 @@ class TroveCategory extends Error {
 
 		$qpa = db_construct_qpa ($qpa,
 					 'ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC') ;
-		
+
 		$result = db_query_qpa ($qpa, TROVE__PROJECTS_PER_PAGE, $offset);
 		return $result;
 	}
-	
+
 }
 
 // Local Variables:

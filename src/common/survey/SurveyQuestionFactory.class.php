@@ -41,12 +41,12 @@ class SurveyQuestionFactory extends Error {
 	var $questions;
 
 	/**
-	 *  Constructor. 
+	 *  Constructor.
 	 *
 	 *	@param	object	The Group object to which this survey question is associated.
          *      @param  int     The survey_id
 	 */
-	function SurveyQuestionFactory(&$Group) { 
+	function SurveyQuestionFactory(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No valid Group Object'));
@@ -71,7 +71,7 @@ class SurveyQuestionFactory extends Error {
 	}
 
 	/**
-	 *	getSurveyQuestion - get an array of Survey Question objects 
+	 *	getSurveyQuestion - get an array of Survey Question objects
          *                          for this Group and Survey id if survey_id is given.
 	 *
  	 *	@return	array	The array of Survey Question objects.
@@ -82,10 +82,10 @@ class SurveyQuestionFactory extends Error {
 			return $this->questions;
 		}
 
-		$group_id = $this->Group->GetID();		
-		$result = db_query_params ('SELECT survey_questions.*,survey_question_types.type 
-			FROM survey_questions,survey_question_types 
-			WHERE survey_question_types.id=survey_questions.question_type 
+		$group_id = $this->Group->GetID();
+		$result = db_query_params ('SELECT survey_questions.*,survey_question_types.type
+			FROM survey_questions,survey_question_types
+			WHERE survey_question_types.id=survey_questions.question_type
                         AND survey_questions.group_id=$1
 			ORDER BY survey_questions.question_id ASC',
 					   array ($group_id));

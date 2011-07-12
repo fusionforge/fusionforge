@@ -54,17 +54,17 @@ class TrackerGateway extends Error {
 
 	function TrackerGateway() {
 		$this->Error();
-	
+
 		/* Copy mail message to tmp file */
 		$tmpfile = $this->copyMailTmp();
 		//DBG("Tmpname: ". $tmpfile);
 
 		/* parse email */
 		$ret = $this->parseMail($tmpfile);
-	
+
 		/* Delete temp file */
 		unlink($tmpfile);
-	
+
 		/* Check the return variable from parseMail */
 		if (!$ret) {
 			return false;
@@ -75,7 +75,7 @@ class TrackerGateway extends Error {
 		if (!$ret) {
 			return false;
 		}
-	
+
 		return true;
 	}
 
@@ -90,7 +90,7 @@ class TrackerGateway extends Error {
 		$tmpfile = tempnam ("/tmp", "artifact_gateway.".util_randnum()."-".util_randnum());
 		$in = fopen("php://stdin", "r");
 		$out = fopen($tmpfile, "w");
-	
+
 		while($buffer = fgets($in, 4096)) {
 			fputs($out, $buffer);
 		}

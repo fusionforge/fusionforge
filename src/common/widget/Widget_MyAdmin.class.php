@@ -22,7 +22,7 @@ require_once('Widget.class.php');
 
 /**
 * Widget_MyAdmin
-* 
+*
 * Personal Admin
 */
 class Widget_MyAdmin extends Widget {
@@ -43,17 +43,17 @@ class Widget_MyAdmin extends Widget {
 		$res = db_query_params("SELECT count(*) AS count FROM users WHERE status='V' OR status='W'",array());
 		$row = db_fetch_array($res);
 		$validated_users = $row['count'];
-		
+
 		$html_my_admin .= $this->_get_admin_row(
-			$i++, 
+			$i++,
 			vsprintf(_('Users in <a href="%s"><b>P</b> (pending) Status</a>'), array("/admin/userlist.php?status=P")),
 			$pending_users,
 			$this->_get_color($pending_users)
 			);
-		
+
 		if (isset($GLOBALS['sys_user_approval']) && $GLOBALS['sys_user_approval'] == 1) {
 			$html_my_admin .= $this->_get_admin_row(
-				$i++, 
+				$i++,
 				vsprintf(_('Validated users <a href="%s"><b>pending email activation</b></a>'), array("/admin/approve_pending_users.php?page=validated")),
 				$validated_users,
 				$this->_get_color($validated_users)
@@ -67,7 +67,7 @@ class Widget_MyAdmin extends Widget {
 		$pending_projects = $row['count'];
 
 		$html_my_admin .= $this->_get_admin_row(
-			$i++, 
+			$i++,
 			vsprintf(_('Groups in <a href="%s"><b>P</b> (pending) Status</a>'), array("/admin/approve-pending.php")),
 			$pending_projects,
 			$this->_get_color($pending_projects)
@@ -85,10 +85,10 @@ class Widget_MyAdmin extends Widget {
 			AND groups.status=$2
 			ORDER BY post_date',
 					  array ($old_date, 'A')) ;
-		$pending_news = db_numrows($res);		
-		
+		$pending_news = db_numrows($res);
+
 		$html_my_admin .= $this->_get_admin_row(
-			$i++, 
+			$i++,
 			'<a href="/news/admin">'. _("Site News Approval") .'</a>',
 			$pending_news,
 			$this->_get_color($pending_news)

@@ -107,7 +107,7 @@ class SurveyQuestion extends Error {
 		if (!$res) {
 			$this->setError(_('Question Added').db_error());
 			return false;
-		} 
+		}
 
 		/* Load question to data array */
 		$question_id = db_insertid($res,'survey_questions','question_id');
@@ -182,10 +182,10 @@ class SurveyQuestion extends Error {
 	 */
 	function fetchData($question_id) {
 		$group_id = $this->Group->GetID();
-		
-		$res = db_query_params('SELECT survey_questions.*, survey_question_types.type 
-		      FROM survey_questions ,survey_question_types 
-		      WHERE survey_question_types.id=survey_questions.question_type 
+
+		$res = db_query_params('SELECT survey_questions.*, survey_question_types.type
+		      FROM survey_questions ,survey_question_types
+		      WHERE survey_question_types.id=survey_questions.question_type
 		      AND survey_questions.question_id=$1
 		      AND survey_questions.group_id=$2',
 					array($question_id,

@@ -23,24 +23,24 @@ require_once 'PHPUnit/Framework/TestCase.php';
 
 class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 {
-  
+
 	function setUp()
 	{
 	  //	  print_r("setup\n");
 	  $this->session = NULL;
 	  $this->soapclient = NULL;
-	
+
 	  //	  try {
 
 	  // see comments in SoapLoginProcess:setup() for details about this
 	  $ip = gethostbyname(HOST);
-	  if ($ip != HOST) 
+	  if ($ip != HOST)
 	    {
 
 		$this->soapclient = new SoapClient(WSDL_URL,
 						   array('cache_wsdl' => WSDL_CACHE_NONE,
 							 'trace' => true));
-		 
+
 		//	  } catch (SoapFault $fault) {
 		//	    $fault->faultstring;
 		//	    print_r($fault);
@@ -131,7 +131,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 		}
 		catch (SoapFault $expected) {
 			//	    print_r($expected->faultstring);
-			 
+
 			// Use strpos instead of assertStringStartsWith (for PHPunit 3.3 compatibility)
 			$this->assertTrue( strpos($expected->faultstring, 'Could Not Get Groups by Name') === 0);
 			//$this->assertStringStartsWith('Could Not Get Groups by Name', $expected->faultstring);
@@ -182,7 +182,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 			  	$this->assertEquals($group_id, $group2->group_id);
 			  	$this->assertEquals($group->unix_group_name, $group2->unix_group_name);
 			  }
-			   
+
 	}
 
 
@@ -320,7 +320,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	  // corner case, but a dangerous ? one : the way the SOAP
 	  // server works allow to trick it in returning several
 	  // values at a time : this one may be fixed some day and we'd then
-	  $users = array('admin", "None' => array( 'count' => 2, 
+	  $users = array('admin", "None' => array( 'count' => 2,
 						   'user_names' => array('admin', 'None')));
 
 	  foreach (array_keys($users) as $user_name) {
@@ -345,7 +345,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 		$this->assertNotNull($this->session);
 
 		$users = array('admin'=>'admin',
-			       'None'=>'None', 
+			       'None'=>'None',
 			       EXISTING_USER => EXISTING_USER);
 
 		foreach (array_keys($users) as $user_name) {
@@ -389,9 +389,9 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 				}
 
 			}
-	   
+
 		}
-		 
+
 	}
 }
 ?>

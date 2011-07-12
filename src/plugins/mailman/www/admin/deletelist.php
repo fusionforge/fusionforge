@@ -7,7 +7,7 @@
  * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
  *
  * @version $Id$
- * 
+ *
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 require_once ('env.inc.php');

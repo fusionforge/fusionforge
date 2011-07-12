@@ -1,6 +1,6 @@
 <?php // $Id: PDO.php 7956 2011-03-03 17:08:31Z vargenau $
 
-/** 
+/**
  * Db sessions for PDO, based on pear DB Sessions.
  *
  * @author: Reini Urban
@@ -36,7 +36,7 @@ extends DbSession
         }
         return $dbh->_dbh;
     }
-    
+
     function query($sql) {
         return $this->_backend->query($sql);
     }
@@ -56,7 +56,7 @@ extends DbSession
      * Actually this function is a fake for session_set_save_handle.
      * @param  string $save_path a path to stored files
      * @param  string $session_name a name of the concrete file
-     * @return boolean true just a variable to notify PHP that everything 
+     * @return boolean true just a variable to notify PHP that everything
      * is good.
      * @access private
      */
@@ -70,7 +70,7 @@ extends DbSession
      *
      * This function is called just after <i>write</i> call.
      *
-     * @return boolean true just a variable to notify PHP that everything 
+     * @return boolean true just a variable to notify PHP that everything
      * is good.
      * @access private
      */
@@ -106,11 +106,11 @@ extends DbSession
         }
         return $res;
     }
-  
+
     /**
      * Saves the session data into DB.
      *
-     * Just  a  comment:       The  "write"  handler  is  not 
+     * Just  a  comment:       The  "write"  handler  is  not
      * executed until after the output stream is closed. Thus,
      * output from debugging statements in the "write" handler
      * will  never be seen in the browser. If debugging output
@@ -124,8 +124,8 @@ extends DbSession
      * @access private
      */
     function write ($id, $sess_data) {
-        if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return;    	
-        
+        if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return;
+
         $dbh = $this->_connect();
         $table = $this->_table;
         $time = time();
@@ -183,7 +183,7 @@ extends DbSession
      * Removes a session from the table.
      *
      * @param  string $id
-     * @return boolean true 
+     * @return boolean true
      * @access private
      */
     function destroy ($id) {
@@ -193,7 +193,7 @@ extends DbSession
         $sth->bindParam(1, $id, PDO_PARAM_STR, 32);
         $sth->execute();
         $this->_disconnect();
-        return true;     
+        return true;
     }
 
     /**
@@ -214,7 +214,7 @@ extends DbSession
         return true;
     }
 
-    // WhoIsOnline support. 
+    // WhoIsOnline support.
     // TODO: ip-accesstime dynamic blocking API
     function currentSessions() {
         $sessions = array();

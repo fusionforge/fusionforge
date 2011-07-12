@@ -11,7 +11,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -38,7 +38,7 @@ require_once $gfcommon.'include/pre.php';
 $otherfreeknowledge = getIntFromRequest('otherfreeknowledge') ;
 $gwords = getStringFromRequest('gwords');
 $order = getStringFromRequest('order', 'rank');
-util_ensure_value_in_set ($order, 
+util_ensure_value_in_set ($order,
 			  array ('rank',
 				 'project_title',
 				 'project_description',
@@ -122,7 +122,7 @@ foreach ($array as $val) {
 		}
 	}
 	$i++ ;
-	
+
 	$qpa = db_construct_qpa ($qpa, 'lower(project_title) LIKE $1', array ("%$val%")) ;
 }
 
@@ -138,7 +138,7 @@ foreach ($array as $val) {
 		}
 	}
 	$i++ ;
-	
+
 	$qpa = db_construct_qpa ($qpa, 'lower(project_description) LIKE $1', array ("%$val%")) ;
 }
 $qpa = db_construct_qpa ($qpa, ')) ORDER BY '.$order) ;
@@ -179,7 +179,7 @@ if (!$result || $rows < 1) {
                 } else {
                         $what = 'projects';
                 }
-                
+
                 print        "<tr ". $HTML->boxGetAltRowStyle($i)."><td><a href=\""
                         . db_result($result, $i, 'project_link')."\" target=\"blank\">"
                         . html_image("ic/msg.png","10","12",array("border"=>"0"))."&nbsp;"

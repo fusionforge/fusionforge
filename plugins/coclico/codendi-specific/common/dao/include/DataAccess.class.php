@@ -35,12 +35,12 @@ class DataAccess {
     * $db stores a database resource
     */
     var $db;
-    
+
     /**
      * store the database name used to instantiate the connection
      */
     public $db_name;
-    
+
     /**
     * Constucts a new DataAccess object
     * @param $host string hostname for dbserver
@@ -61,13 +61,13 @@ class DataAccess {
             throw new DataAccessException('Unable to access the database. Please contact your administrator.');
         }
     }
-    
+
     protected function connect($host, $user, $pass, $opt) {
         return mysql_connect($host, $user, $pass, true, $opt);
     }
-    
+
     var $store;
-    
+
     /**
     * Fetches a query resources and stores it in a local member
     * @param $sql string the database query to run
@@ -125,7 +125,7 @@ class DataAccess {
             return mysql_error();
         }
     }
-    
+
     /**
     * Quote variable to make safe
     * @see http://php.net/mysql-real-escape-string
@@ -158,10 +158,10 @@ class DataAccess {
             }
             $str.=$this->quoteSmart($piece,$params);
             $after_first=true;
-        }            
+        }
         return $str;
     }
-    
+
 
     function escapeInt($v, $null = CODENDI_DB_NOT_NULL) {
         $m = array();
@@ -179,13 +179,13 @@ class DataAccess {
     function mysql_query_params($sql,$params=array(),$database) {
 	if(!empty($params)) {
 		for ($i=1;$i<=count($params);$i++ ) {
-	   		$args[]="$".$i;	
+	   		$args[]="$".$i;
 		}
 		return mysql_query(str_replace($args,$params,$sql),$database);
 	} else {
 		return mysql_query($sql,$database);
 	}
-	
+
     }
 
 

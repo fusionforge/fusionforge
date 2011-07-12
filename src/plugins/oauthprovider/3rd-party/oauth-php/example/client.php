@@ -36,7 +36,7 @@ if ($action == "request_token") {
     exit;
   }
   Header("Location: $req_req");
-} 
+}
 else if ($action == "authorize") {
   $callback_url = "$base_url/client.php?key=$key&secret=$secret&token=$token&token_secret=$token_secret&endpoint=" . urlencode($endpoint);
   $auth_url = $endpoint . "?oauth_token=$token&oauth_callback=".urlencode($callback_url);
@@ -109,7 +109,7 @@ try to get an access token: <input type="submit" name="action" value="access_tok
 <ul>
 <?php
 foreach ($sig_methods as $key => $method) {
-  
+
   print "<li>$key";
   if ($key != $sig_method->get_name()) {
     print "(<a href='?sig_method=$key'>switch</a>)";
@@ -119,7 +119,7 @@ foreach ($sig_methods as $key => $method) {
 ?>
 </ul>
 
-<?php 
+<?php
 if ("RSA-SHA1" == $sig_method->get_name()) {
   // passing test_server as a dummy referecne
   print "<pre>" . $sig_method->fetch_private_cert($test_server). "</pre>\n";

@@ -66,7 +66,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('Support for several configurations running on the same code.'); ?></li>
 <li><?php print _('Improved security, no need for PHP register_globals.'); ?></li>
 <li><?php print _('Available as full install CD.'); ?></li>
-<li><?php print _('New wiki plugins (using MediaWiki or phpWiki).'); ?></li> 
+<li><?php print _('New wiki plugins (using MediaWiki or phpWiki).'); ?></li>
 <li><?php print _('New online_help plugin.'); ?></li>
 <li><?php print _('New phpwebcalendar plugin.'); ?></li>
 <li><?php print _('New project hierarchy plugin.'); ?></li>

@@ -27,7 +27,7 @@ require_once $gfwww.'admin/admin_utils.php';
 
 // user must be forge admin to proceed
 session_require_global_perm ('forge_admin');
- 
+
 $HTML->header(array('title'=>_('User List')));
 
 /**
@@ -118,7 +118,7 @@ function show_users_list ($users, $filter='') {
 		echo '</tr>';
 		$count ++;
 	}
-	
+
 	echo $GLOBALS['HTML']->listTableBottom();
 
 }

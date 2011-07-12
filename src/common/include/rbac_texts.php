@@ -32,7 +32,7 @@ require_once $gfcommon.'include/utils.php';
  */
 function setup_rbac_strings () {
 	global $rbac_permission_names, $rbac_edit_section_names ;
-	
+
 	if (!isset ($rbac_permission_names)) {
 		$rbac_permission_names = array () ;
 	}
@@ -41,7 +41,7 @@ function setup_rbac_strings () {
 	}
 
 	if (USE_PFO_RBAC) {
-		$rbac_permission_names = array_replace_recursive ($rbac_permission_names, 
+		$rbac_permission_names = array_replace_recursive ($rbac_permission_names,
 								  array (
 									  'forge_admin0' => _('No administrative access'),
 									  'forge_admin1' => _('Forge administration'),
@@ -64,7 +64,7 @@ function setup_rbac_strings () {
 									  'pm_admin1' => _('Task managers administration'),
 									  'forum_admin0' => _('No administrative access'),
 									  'forum_admin1' => _('Forums administration'),
-				
+
 									  'tracker0' => _('No access'),
 									  'tracker1' => _('Read only'),
 									  'tracker2' => _('Technician (no read access)'),
@@ -141,7 +141,7 @@ function setup_rbac_strings () {
 									    'tracker_admin' => _('Trackers administration'),
 									    'pm_admin' => _('Task managers administration'),
 									    'forum_admin' => _('Forums administration'),
-				
+
 									    'tracker' => _('Tracker'),
 									    'pm' => _('Tasks'),
 									    'forum' => _('Forum'),
@@ -158,7 +158,7 @@ function setup_rbac_strings () {
 									    )
 			) ;
 	} else { // Not USE_PFO_RBAC
-		$rbac_permission_names = array_replace_recursive ($rbac_permission_names, 
+		$rbac_permission_names = array_replace_recursive ($rbac_permission_names,
 								  array (
 									  'frspackage0' => _('Private'),
 									  'frspackage1' => _('Public'),

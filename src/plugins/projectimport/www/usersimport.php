@@ -41,7 +41,7 @@ include_once('arc/ARC2.php');
 
 /**
  * Manages the display of the page : HTML + forms
- * 
+ *
  * @author Olivier Berger
  *
  */
@@ -50,50 +50,50 @@ class UsersImportPage extends FileManagerPage {
 	protected $importer;
 
 	protected $form_header_already_displayed;
-		
+
 	function UsersImportPage($HTML) {
 		$this->form_header_already_displayed = false;
-		
+
 		$this->importer = ProjectImporter::getInstance();
-		
+
 		$storage = new SiteAdminFilesDirectory($HTML);
-		
+
 		parent::FileManagerPage($HTML, $storage);
 	}
-	
+
 	/**
 	 * Display initial contents of the page
 	 * @param string $message
 	 */
 	function display_headers($message) {
 		global $feedback;
-		
+
 		$params= array();
 		$params['title']=_('Users importer');
 		$params['toptab']='projectimport';
-		
+
 		site_admin_header($params);
-		
+
 		$this->message .= $message;
 	}
-	
+
 	/**
 	 * Display the page
 	 */
 	function display_main() {
-		
+
 		global $feedback;
-		
+
 		// Do the work, first !
 		$html = $this->do_work();
-				
+
 		if($this->message) {
 			echo $this->message . '<br />';
 		}
 		html_feedback_top($feedback);
-		
+
 		echo $html;
-		
+
 		// If invoked initially (not on callback) or if more details needed
 		// display the last part of the form for JSON file upload
 		if (! $this->form_header_already_displayed) {
@@ -102,7 +102,7 @@ class UsersImportPage extends FileManagerPage {
 		}
 
 		$preselected = False;
-		
+
 		if (!$feedback) {
 			if ($this->posted_selecteddumpfile) {
 				$preselected = basename($this->posted_selecteddumpfile);
@@ -111,11 +111,11 @@ class UsersImportPage extends FileManagerPage {
 				$preselected = $this->posted_uploadedfile;
 			}
 		}
-		
+
 		$selectiondialog = $this->storage->displayFileSelectionForm($preselected);
-		
+
 		echo $selectiondialog;
-		
+
 		// finally, display the file upload form
 		echo '<fieldset><legend>Please upload a file :</legend>
 		       <p><center>
@@ -129,7 +129,7 @@ class UsersImportPage extends FileManagerPage {
 
 		site_footer(array());
 	}
-	
+
 	/**
 	 * Initializes data structures from POSTed data coming from the form input
 	 */
@@ -144,30 +144,30 @@ class UsersImportPage extends FileManagerPage {
 				$feedback = "Error : missing data";
 			}
 			else {
-	
+
 				//			print_r($imported_file);
 				$this->importer->parse_OSLCCoreRDFJSON($json);
-	
+
 				$debug = FALSE;
 				if($debug) {
-				 // Debug the loaded triples 
+				 // Debug the loaded triples
 				 $triples = $this->importer->parse_OSLCCoreRDFJSON($json);
 				 $ser = ARC2::getTurtleSerializer();
-	
+
 				 if(count($triples)) {
 					$this->message .= '<pre>'. nl2br(htmlspecialchars($ser->toTurtle($triples))) . '</pre>';
 					}
 				}
 			}
 		}
-			
+
 		if ((! $this->posted_selecteddumpfile) && (! $this->posted_uploadedfile)) {
 			$this->feedback(_('Please select an existing file to process, or upload a new one'));
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Does the main work
 	 * @return html string
@@ -181,17 +181,17 @@ class UsersImportPage extends FileManagerPage {
 		// and if it has data we can work
 		// If it indeed has valid data
 		if ($this->importer->has_project_dump()) {
-			
+
 			$this->message .= "Here are the results from your upload :";
-				
+
 			// start HTML output
 			if (! $this->form_header_already_displayed) {
 				$this->form_header_already_displayed = true;
 				$html .= '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
 			}
-				
+
 			$imported_users = $this->importer->get_user_objs();
-				
+
 			if (count($imported_users)) {
 				$html .= $this->html_generator->boxTop(_("Users found in imported file"));
 
@@ -202,12 +202,12 @@ class UsersImportPage extends FileManagerPage {
 
 					$firstname = $user_obj->getFirstname();
 					$lastname = $user_obj->getLastname();
-					
+
 					$theme_id=$this->html_generator->getThemeIdFromName(forge_get_config('default_theme'));
 					$password1 = substr(md5($GLOBALS['session_ser'] . time() . util_randbytes()), 0, 8);
 					$password2 = $password1;
 					$language_id = language_name_to_lang_id (choose_language_from_context ());
-					
+
 					$new_user = new GFUser();
 					$res = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 						$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
@@ -217,7 +217,7 @@ class UsersImportPage extends FileManagerPage {
 						$error_msg = $new_user->getErrorMessage();
 						if ($feedback) $feedback .= '<br />';
 						$feedback .= 'Import of "'. $unix_name . '": '. $error_msg;
-							
+
 						$html .= _('Failed to create user'). ': <pre>'. $unix_name .'</pre>';
 					}
 					else {
@@ -235,15 +235,15 @@ class UsersImportPage extends FileManagerPage {
 				$html .= $this->html_generator->boxBottom();
 
 			}
-		
+
 			else {
 				$feedback .= 'Found no users<br />';
 			}
 		}
 		return $html;
 	}
-	
-	
+
+
 }
 
 // The user should be forge admin
@@ -261,7 +261,7 @@ $message = '';
 if (getStringFromRequest('submit')) {
 
 	$this_page->initialize_from_submitted_data();
-		
+
 }
 else {
 	$message .= "You can import a list of users from a JSON RDF document compatible with ForgePlucker's dump format.<br />";

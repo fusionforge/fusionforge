@@ -73,7 +73,7 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 			$u->setUnixStatus('N');
 		}
 	}
-	
+
 	if ($u->isError()) {
 		$error_msg = $u->getErrorMessage();
 	} else {
@@ -148,11 +148,11 @@ echo html_build_select_box_from_arrays(
 </td>
 </tr>
 
-<?php 
+<?php
 
 
 	if (forge_get_config('use_shell')) {
-?>    
+?>
 <tr>
 	<td>
 		<?php echo _('Unix Account Status'); ?><sup>2</sup>:
@@ -206,17 +206,17 @@ echo html_build_select_box_from_arrays(
 <sup>1</sup><?php echo _('This pages allows to change only direct properties of user object. To edit properties pertinent to user within specific group, visit admin page of that group (below).'); ?>
 </p>
 
-<?php 
+<?php
 
 
 	if (forge_get_config('use_shell')) {
-?>    
+?>
 <p>
 <sup>2</sup><?php echo _('Unix status updated mirroring web status, unless it has value \'No unix account (N)\''); ?>
 </p>
 <?php
 	} //end of sys_use_shell condition
-?> 
+?>
 
 </form>
 

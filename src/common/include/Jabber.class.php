@@ -8,7 +8,7 @@
 
 	The FULL documentation and examples for this software can be found at
 	http://phpjabber.g-blog.net (not many doc comments in here, sorry)
-	
+
 	last modified: 2002-10-09 21:57:20
 
 	NOTE:
@@ -23,86 +23,86 @@
  * you distribute of the Licensed Product or any Modifications thereto.
  * Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
- * 
+ *
  * License
- * 
+ *
  * The contents of this file are subject to the Jabber Open Source License
  * Version 1.0 (the "License").  You may not copy or use this file, in either
  * source code or executable form, except in compliance with the License.  You
  * may obtain a copy of the License at http://www.jabber.com/license/ or at
- * http://www.opensource.org/.  
- * 
+ * http://www.opensource.org/.
+ *
  * Software distributed under the License is distributed on an "AS IS" basis,
  * WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the License
  * for the specific language governing rights and limitations under the
  * License.
- * 
+ *
  * Copyrights
- * 
- * Portions created by or assigned to Jabber.com, Inc. are 
+ *
+ * Portions created by or assigned to Jabber.com, Inc. are
  * Copyright (c) 2000 Jabber.com, Inc.  All Rights Reserved.  Contact
  * information for Jabber.com, Inc. is available at http://www.jabber.com/.
- * 
+ *
  * Portions Copyright (c) 2002-present Carlo Zottmann,
  * http://phpjabber.g-blog.net
- *  
+ *
  * Other portions copyright their respective owners.
- * 
+ *
  * Acknowledgements
- * 
+ *
  * Special thanks to the Jabber Open Source Contributors for their
  * suggestions and support of Jabber.
- * 
+ *
  ***************************************************************************/
 
 /*
-	Jabber::Connect() 
-	Jabber::Disconnect() 
-	Jabber::SendAuth() 
+	Jabber::Connect()
+	Jabber::Disconnect()
+	Jabber::SendAuth()
 	Jabber::AccountRegistration($reg_email {string}, $reg_name {string})
- 
-	Jabber::Listen() 
+
+	Jabber::Listen()
 	Jabber::SendPacket($xml {string})
- 
-	Jabber::RosterUpdate() 
-	Jabber::RosterAddUser($jid {string}, $id {string}, $name {string}) 
+
+	Jabber::RosterUpdate()
+	Jabber::RosterAddUser($jid {string}, $id {string}, $name {string})
 	Jabber::RosterRemoveUser($jid {string}, $id {string})
- 
-	Jabber::Subscribe($jid {string}) 
+
+	Jabber::Subscribe($jid {string})
 	Jabber::Unsubscribe($jid {string})
- 
-	Jabber::CallHandler($message {array}) 
+
+	Jabber::CallHandler($message {array})
 	Jabber::CruiseControl([$seconds {number}])
- 
-	Jabber::SubscriptionApproveRequest($to {string}) 
+
+	Jabber::SubscriptionApproveRequest($to {string})
 	Jabber::SubscriptionDenyRequest($to {string})
- 
-	Jabber::GetFirstFromQueue() 
+
+	Jabber::GetFirstFromQueue()
 	Jabber::GetFromQueueById($packet_type {string}, $id {string})
- 
+
 	Jabber::SendMessage($to {string}, $id {number}, $type {string}, $content {array}[, $payload {array}])
  	Jabber::SendIq($to {string}, $type {string}, $id {string}, $xmlns {string}[, $payload {string}])
 	Jabber::SendPresence($type {string}[, $to {string}[, $status {string}[, $show {string}[, $priority {number}]]]])
- 
-	Jabber::SendError($to {string}, $id {string}, $error_number {number}[, $error_message {string}]) 
 
-	Jabber::GetInfoFromMessageFrom($message {array}) 
-	Jabber::GetInfoFromMessageType($message {array}) 
-	Jabber::GetInfoFromMessageId($message {array}) 
-	Jabber::GetInfoFromMessageThread($message {array}) 
-	Jabber::GetInfoFromMessageSubject($message {array}) 
-	Jabber::GetInfoFromMessageBody($message {array}) 
+	Jabber::SendError($to {string}, $id {string}, $error_number {number}[, $error_message {string}])
+
+	Jabber::GetInfoFromMessageFrom($message {array})
+	Jabber::GetInfoFromMessageType($message {array})
+	Jabber::GetInfoFromMessageId($message {array})
+	Jabber::GetInfoFromMessageThread($message {array})
+	Jabber::GetInfoFromMessageSubject($message {array})
+	Jabber::GetInfoFromMessageBody($message {array})
 	Jabber::GetInfoFromMessageError($message {array})
- 
-	Jabber::GetInfoFromIqFrom($message {array}) 
-	Jabber::GetInfoFromIqType($message {array}) 
-	Jabber::GetInfoFromIqId($message {array}) 
+
+	Jabber::GetInfoFromIqFrom($message {array})
+	Jabber::GetInfoFromIqType($message {array})
+	Jabber::GetInfoFromIqId($message {array})
 	Jabber::GetInfoFromIqKey($message {array})
- 
-	Jabber::GetInfoFromPresenceFrom($message {array}) 
-	Jabber::GetInfoFromPresenceType($message {array}) 
-	Jabber::GetInfoFromPresenceStatus($message {array}) 
-	Jabber::GetInfoFromPresenceShow($message {array}) 
+
+	Jabber::GetInfoFromPresenceFrom($message {array})
+	Jabber::GetInfoFromPresenceType($message {array})
+	Jabber::GetInfoFromPresenceStatus($message {array})
+	Jabber::GetInfoFromPresenceShow($message {array})
 	Jabber::GetInfoFromPresencePriority($message {array})
 
 
@@ -133,13 +133,13 @@ class Jabber
 
 	var $packet_queue;
 	var $subscription_queue;
-	
+
 	var $iq_version_name;
 	var $iq_version_os;
 	var $iq_version_version;
 
 	var $error_codes;
-	
+
 	var $CONNECTOR;
 
 
@@ -152,7 +152,7 @@ class Jabber
 		$this->username				= forge_get_config('jabber_user');
 		$this->password				= forge_get_config('jabber_password');
 		$this->resource				= 'home';
-		
+
 		$this->enable_logging		= FALSE;
 		$this->logfile				= array();
 
@@ -231,7 +231,7 @@ class Jabber
 	{
 		$this->SendPacket("</stream:stream>");
 		$this->CONNECTOR->CloseSocket($this->connection);
-		
+
 		if ($this->enable_logging) {
 			echo "<h2>logging enabled, logged events below:</h2>\n";
 			echo (count($this->logfile) > 0) ? implode("<br /><br />\n", $this->logfile) : "No logged events.";
@@ -278,28 +278,28 @@ class Jabber
 	function AccountRegistration($reg_email = NULL, $reg_name = NULL)
 	{
 		$packet = $this->SendIq($this->server, "get", "reg_01", "jabber:iq:register");
-		
+
 		if ($packet) {
-	
+
 			$key = $this->GetInfoFromIqKey($packet);	// just in case a key was passed back from the server
 			unset($packet);
-		
+
 			$payload = "<username>" . $this->username . "</username>
 						<password>" . $this->password . "</password>
 						<email>$reg_email</email>
 						<name>$reg_name</name>\n";
 			$payload .= ($key) ? "<key>$key</key>\n" : "";
-		
+
 			$packet = $this->SendIq($this->server, "set", "reg_01", "jabber:iq:register", $payload);
-		
+
 			if ($this->GetInfoFromIqType($packet) == "result") {
-			
+
 				if (isset($packet["iq"]["#"]["query"][0]["#"]["registered"][0]["#"])) {
 					$return_code = 1;
 				} else {
 					$return_code = 2;
 				}
-		
+
 				if ($this->resource) {
 					$this->jid = $this->username . "@" . $this->server . "/" . $this->resource;
 				} else {
@@ -307,18 +307,18 @@ class Jabber
 				}
 
 			} elseif ($this->GetInfoFromIqType($packet) == "error") {
-		
+
 				if (isset($packet["iq"]["#"]["error"][0]["#"])) {
 					$return_code = "Error " . $packet["iq"]["#"]["error"][0]["@"]["code"] . ": " . $packet["iq"]["#"]["error"][0]["#"];
 				}
 			}
-	
+
 			return $return_code;
-	
+
 		} else {
-		
+
 			return 3;
-	
+
 		}
 	}
 
@@ -355,7 +355,7 @@ class Jabber
 		while ($line = $this->CONNECTOR->ReadFromSocket($this->connection, 4096)) {
 			$incoming .= $line;
 		}
-		
+
 		$incoming = trim($incoming);
 
 		if ($this->enable_logging && $incoming != "") {
@@ -386,7 +386,7 @@ class Jabber
 	function SendMessage($to, $type = "normal", $id = NULL, $content = NULL, $payload = NULL)
 	{
 		if ($to && is_array($content)) {
-		
+
 			if (!$id) { $id = $type . "_" . time(); }
 
 			$content = $this->_array_htmlspecialchars($content);
@@ -396,10 +396,10 @@ class Jabber
 			if ($content["thread"]) {
 				$xml .= "<thread>" . $content["thread"] . "</thread>\n";
 			}
-			if ($content['subject']) { 
-				$xml .= "<subject>" . $content['subject'] . "</subject>\n"; 
+			if ($content['subject']) {
+				$xml .= "<subject>" . $content['subject'] . "</subject>\n";
 			}
-			
+
 			$xml .= "<body>" . $content["body"] . "</body>\n";
 			$xml .= $payload;
 			$xml .= "</message>\n";
@@ -419,7 +419,7 @@ class Jabber
 			}
 
 		} else {
-		
+
 			if ($this->enable_logging) {
 				$this->logfile[] = "<strong>Error:</strong> SendMessage() #2";
 			}
@@ -481,7 +481,7 @@ class Jabber
 		$incoming_array = $this->SendIq(NULL, "get", $roster_request_id, "jabber:iq:roster");
 
 		if (is_array($incoming_array)) {
-			
+
 			if ($incoming_array["iq"]["@"]["type"] == "result"
 				&& $incoming_array["iq"]["@"]["id"] == $roster_request_id
 				&& $incoming_array["iq"]["#"]["query"]["0"]["@"]["xmlns"] == "jabber:iq:roster")
@@ -527,7 +527,7 @@ class Jabber
 		$id = ($id) ? $id : "adduser_" . time();
 
 		if ($jid) {
-	
+
 			$payload = "		<item jid='$jid'";
 			$payload .= ($name) ? " name='" . htmlspecialchars($name) . "'" : "";
 			$payload .= "/>\n";
@@ -538,7 +538,7 @@ class Jabber
 
 				$this->RosterUpdate();
 				return TRUE;
-			
+
 			} else {
 
 				if ($this->enable_logging) {
@@ -570,7 +570,7 @@ class Jabber
 
 				$this->RosterUpdate();
 				return TRUE;
-			
+
 			} else {
 
 				if ($this->enable_logging) {
@@ -628,13 +628,13 @@ class Jabber
 		$packet_type	= $this->_get_packet_type($packet);
 
 		if ($packet_type == "message") {
-		
+
 			$type		= $packet["message"]["@"]["type"];
 			$type		= ($type != "") ? $type : "normal";
 			$funcmeth	= "Handler_message_$type";
 
 		} elseif ($packet_type == "iq") {
-		
+
 			$this->TraverseXMLize($packet);
 
 			$namespace	= $packet["iq"]["#"]["query"][0]["@"]["xmlns"];
@@ -686,7 +686,7 @@ class Jabber
 			$count++;
 			sleep(1);
 		}
-		
+
 		return TRUE;
 	}
 
@@ -728,7 +728,7 @@ class Jabber
 			if ($this->enable_logging) {
 				$this->logfile[] = "<strong>Error:</strong> SendIq() #2 - type must be 'get', 'set', 'result' or 'error'";
 			}
-			
+
 			return FALSE;
 
 		} elseif ($id && $xmlns) {
@@ -744,7 +744,7 @@ class Jabber
 			$this->SendPacket($xml);
 			sleep($this->iq_sleep_timer);
 			$this->Listen();
-			
+
 			return (preg_match("/^(get|set)$/", $type)) ? $this->GetFromQueueById("iq", $id) : TRUE;
 
 		} else {
@@ -772,7 +772,7 @@ class Jabber
 		while ($line = $this->CONNECTOR->ReadFromSocket($this->connection, 4096)) {
 			$incoming .= $line;
 		}
-		
+
 		$incoming = trim($incoming);
 
 		if ($this->enable_logging && $incoming != "") {
@@ -787,9 +787,9 @@ class Jabber
 	function _check_connected()
 	{
 		$incoming_array = $this->_listen_incoming();
-		
+
 		if (is_array($incoming_array)) {
-			
+
 			if ($incoming_array["stream:stream"]["@"]["from"] == $this->server
 				&& $incoming_array["stream:stream"]["@"]["xmlns"] == "jabber:client"
 				&& $incoming_array["stream:stream"]["@"]["xmlns:stream"] == "http://etherx.jabber.org/streams")
@@ -860,7 +860,7 @@ class Jabber
 				}
 			}
 		}
-		
+
 		return $array;
 	}
 
@@ -1054,7 +1054,7 @@ class Jabber
 	{
 		$from	= $this->GetInfoFromIqFrom($packet);
 		$id		= $this->GetInfoFromIqId($packet);
-		
+
 		$this->SendError($from, $id, 501);
 		$this->logfile[] = "<strong>jabber:iq:autoupdate</strong> from $from";
 	}
@@ -1066,7 +1066,7 @@ class Jabber
 	{
 		$from	= $this->GetInfoFromIqFrom($packet);
 		$id		= $this->GetInfoFromIqId($packet);
-		
+
 		$this->SendError($from, $id, 501);
 		$this->logfile[] = "<strong>jabber:iq:agent</strong> from $from";
 	}
@@ -1078,7 +1078,7 @@ class Jabber
 	{
 		$from	= $this->GetInfoFromIqFrom($packet);
 		$id		= $this->GetInfoFromIqId($packet);
-		
+
 		$this->SendError($from, $id, 501);
 		$this->logfile[] = "<strong>jabber:iq:agents</strong> from $from";
 	}
@@ -1090,7 +1090,7 @@ class Jabber
 	{
 		$from	= $this->GetInfoFromIqFrom($packet);
 		$id		= $this->GetInfoFromIqId($packet);
-		
+
 		$this->SendError($from, $id, 501);
 		$this->logfile[] = "<strong>jabber:iq:auth</strong> from $from";
 	}
@@ -1102,7 +1102,7 @@ class Jabber
 	{
 		$from	= $this->GetInfoFromIqFrom($packet);
 		$id		= $this->GetInfoFromIqId($packet);
-		
+
 		$this->SendError($from, $id, 501);
 		$this->logfile[] = "<strong>jabber:iq:oob</strong> from $from";
 	}
@@ -1114,7 +1114,7 @@ class Jabber
 	{
 		$from	= $this->GetInfoFromIqFrom($packet);
 		$id		= $this->GetInfoFromIqId($packet);
-		
+
 		$this->SendError($from, $id, 501);
 		$this->logfile[] = "<strong>jabber:iq:private</strong> from $from";
 	}
@@ -1126,7 +1126,7 @@ class Jabber
 	{
 		$from	= $this->GetInfoFromIqFrom($packet);
 		$id		= $this->GetInfoFromIqId($packet);
-		
+
 		$this->SendError($from, $id, 501);
 		$this->logfile[] = "<strong>jabber:iq:register</strong> from $from";
 	}
@@ -1138,7 +1138,7 @@ class Jabber
 	{
 		$from	= $this->GetInfoFromIqFrom($packet);
 		$id		= $this->GetInfoFromIqId($packet);
-		
+
 		$this->SendError($from, $id, 501);
 		$this->logfile[] = "<strong>jabber:iq:roster</strong> from $from";
 	}
@@ -1150,7 +1150,7 @@ class Jabber
 	{
 		$from	= $this->GetInfoFromIqFrom($packet);
 		$id		= $this->GetInfoFromIqId($packet);
-		
+
 		$this->SendError($from, $id, 501);
 		$this->logfile[] = "<strong>jabber:iq:search</strong> from $from";
 	}
@@ -1170,7 +1170,7 @@ class Jabber
 			$payload = "<utc>" . gmdate("Ydm\TH:i:s") . "</utc>
 						<tz>" . date("T") . "</tz>
 						<display>" . date("Y/d/m h:i:s A") . "</display>";
-	
+
 			$this->SendIq($from, "result", $id, "jabber:iq:time", $payload);
 		}
 
@@ -1301,7 +1301,7 @@ class Jabber
 
 	// xmlize()
 	// (c) Hans Anderson / http://www.hansanderson.com/php/xml/
-	
+
 	function xmlize($data) {
 		$vals = $index = $array = array();
 		$parser = xml_parser_create();
@@ -1309,46 +1309,46 @@ class Jabber
 		xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
 		xml_parse_into_struct($parser, $data, $vals, $index);
 		xml_parser_free($parser);
-	
-		$i = 0; 
-	
+
+		$i = 0;
+
 		$tagname = $vals[$i]['tag'];
 		$array[$tagname]["@"] = $vals[$i]["attributes"];
 		$array[$tagname]["#"] = $this->_xml_depth($vals, $i);
-	
+
 		return $array;
 	}
-	
-	
-	
+
+
+
 	// _xml_depth()
 	// (c) Hans Anderson / http://www.hansanderson.com/php/xml/
-	
-	function _xml_depth($vals, &$i) { 
-		$children = array(); 
+
+	function _xml_depth($vals, &$i) {
+		$children = array();
 
 		if ($vals[$i]['value']) {
 			array_push($children, trim($vals[$i]['value']));
 		}
-	
-		while (++$i < count($vals)) { 
-	
-			switch ($vals[$i]['type']) { 
-	
-				case 'cdata': 
-					array_push($children, trim($vals[$i]['value'])); 
-	 				break; 
-	
-				case 'complete': 
+
+		while (++$i < count($vals)) {
+
+			switch ($vals[$i]['type']) {
+
+				case 'cdata':
+					array_push($children, trim($vals[$i]['value']));
+	 				break;
+
+				case 'complete':
 					$tagname = $vals[$i]['tag'];
 					$size = sizeof($children["$tagname"]);
 					$children[$tagname][$size]["#"] = trim($vals[$i]['value']);
 					if ($vals[$i]["attributes"]) {
 						$children[$tagname][$size]["@"] = $vals[$i]["attributes"];
 					}
-					break; 
-	
-				case 'open': 
+					break;
+
+				case 'open':
 					$tagname = $vals[$i]['tag'];
 					$size = sizeof($children["$tagname"]);
 					if ($vals[$i]["attributes"]) {
@@ -1357,28 +1357,28 @@ class Jabber
 					} else {
 						$children["$tagname"][$size]["#"] = $this->_xml_depth($vals, $i);
 					}
-					break; 
-	
-				case 'close':
-					return $children; 
 					break;
-			} 
-		} 
-	
+
+				case 'close':
+					return $children;
+					break;
+			}
+		}
+
 		return $children;
-	
+
 	}
-	
-	
-	
+
+
+
 	// TraverseXMLize()
 	// (c) acebone@f2s.com, a HUGE help!
-	
+
 	function TraverseXMLize($array, $arrName = "array", $level = 0) {
 		if ($level == 0) {
 			echo "<pre>";
 		}
-	
+
 		while (list($key, $val) = @each($array)) {
 			if (is_array($val)) {
 				$this->TraverseXMLize($val, $arrName . "[" . $key . "]", $level + 1);
@@ -1386,13 +1386,13 @@ class Jabber
 				echo '$' . $arrName . '[' . $key . '] = "' . $val . "\"\n";
 			}
 		}
-	
+
 		if ($level == 0) {
 			echo "</pre>";
 		}
 	}
 
-}	
+}
 
 
 
@@ -1415,7 +1415,7 @@ class MakeXML extends Jabber
 		}
 
 		$temp = @explode("/", $string);
-		
+
 		for ($a = 0; $a < count($temp); $a++) {
 			$temp[$a] = preg_replace("/^[@]{1}([a-z0-9_]*)$/i", "[\"@\"][\"\\1\"]", $temp[$a]);
 			$temp[$a] = preg_replace("/^([a-z0-9_]*)\(([0-9]*)\)$/i", "[\"\\1\"][\\2]", $temp[$a]);
@@ -1423,7 +1423,7 @@ class MakeXML extends Jabber
 		}
 
 		$node = implode("", $temp);
-		
+
 		// Yeahyeahyeah, I know it's ugly... get over it. ;)
 		echo "\$this->nodes$node = \"" . htmlspecialchars($value) . "\";<br/>";
 		eval("\$this->nodes$node = \"" . htmlspecialchars($value) . "\";");
@@ -1443,7 +1443,7 @@ class MakeXML extends Jabber
 			array_multisort($array, SORT_ASC, SORT_STRING);
 
 			foreach ($array as $key => $value) {
-	
+
 				if (is_array($value) && $key == "@") {
 
 					foreach ($value as $subkey => $subvalue) {

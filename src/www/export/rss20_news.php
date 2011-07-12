@@ -36,7 +36,7 @@ if ($limit > 100) $limit = 100;
 
 if ($group_id) {
 	session_require_perm('project_read', $group_id);
-	
+
 	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1',
 				array($group_id),
 				1);

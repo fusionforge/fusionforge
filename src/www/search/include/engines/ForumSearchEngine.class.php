@@ -24,18 +24,18 @@
 require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
 
 class ForumSearchEngine extends GroupSearchEngine {
-	
+
 	function ForumSearchEngine() {
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_FORUM, 'ForumHtmlSearchRenderer', _('This forum'));
 	}
-	
+
 	function isAvailable($parameters) {
 		if(parent::isAvailable($parameters) && isset($parameters[SEARCH__PARAMETER_FORUM_ID]) && $parameters[SEARCH__PARAMETER_FORUM_ID]) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		$this->includeSearchRenderer();
 		$rendererClassName = $this->rendererClassName;

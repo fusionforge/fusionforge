@@ -45,7 +45,7 @@ if (getStringFromRequest('add_to_task')) {
 	$_assigned_to = getStringFromRequest('_assigned_to');
 	$_status = getStringFromRequest('_status');
 	$_category_id = getIntFromRequest('_category_id');
-	
+
 	// $group object is created in tracker.php
 
 	$pg=new ProjectGroup($group,$group_project_id);

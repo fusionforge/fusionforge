@@ -143,7 +143,7 @@ class ProjectTaskFactory extends Error {
 		}
 		$this->max_rows=$max_rows;
 	}
-	
+
 	/**
 	 *	getTasks - get an array of ProjectTask objects.
 	 *
@@ -162,12 +162,12 @@ class ProjectTaskFactory extends Error {
 
 		if ($this->assigned_to) {
 			$tat = $this->assigned_to ;
-			if (! is_array ($tat)) 
+			if (! is_array ($tat))
 				$tat = array ($tat) ;
-			
+
 			$result = db_query_params ('SELECT project_task_vw.*, project_task_external_order.external_id
 			FROM project_task_vw natural left join project_task_external_order, project_assigned_to
-			WHERE project_task_vw.project_task_id=project_assigned_to.project_task_id 
+			WHERE project_task_vw.project_task_id=project_assigned_to.project_task_id
                           AND project_task_vw.group_project_id = $1
                           AND project_assigned_to.assigned_to_id = ANY ($2)' . $order,
 						   array ($this->ProjectGroup->getID(),
@@ -206,7 +206,7 @@ class ProjectTaskFactory extends Error {
 				if ($arr['category_id'] != $this->category)
 					continue ;
 			}
-					
+
 			$this->project_tasks[] = new ProjectTask($this->ProjectGroup, $arr['project_task_id'], $arr);
 		}
 		return $this->project_tasks;

@@ -53,7 +53,7 @@ if ($group_id && $atid) {
 	//	get the Project object
 	//
 	$group = group_get_object($group_id);
-	
+
 	beginDocument();
 	if (!$group || !is_object($group)) {
 		endOnError('Could not get the Project object');
@@ -82,7 +82,7 @@ if ($group_id && $atid) {
 	//
 	// Create the Artifacts object
 	//
-	$artifacts = new Artifacts($ath);	
+	$artifacts = new Artifacts($ath);
 	if (!$artifacts || !is_object($ath)) {
 		endOnError('Artifacts could not be created');
 	}

@@ -24,11 +24,11 @@
 require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
 
 class ForumsGroupSearchEngine extends GroupSearchEngine {
-	
+
 	function ForumsGroupSearchEngine() {
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_FORUMS, 'ForumsHtmlSearchRenderer', _('This project\'s forums'));
 	}
-	
+
 	function isAvailable($parameters) {
 		if(parent::isAvailable($parameters)) {
 			if($this->Group->usesForum()) {

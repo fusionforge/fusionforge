@@ -52,7 +52,7 @@ if (getStringFromRequest('submit')) {
 		} elseif ($group->isError()) {
 			exit_error($group->getErrorMessage(),'home');
 		}
-		
+
 		$group_id = $group->getID();
 
 		$user =& session_get_user();

@@ -129,7 +129,7 @@ function list_reminder ( $id, $event_date, $remind_time ) {
   $pri[3] = translate("High");
 
   // get participants first...
- 
+
   $sql = "SELECT cal_login FROM webcal_entry_user " .
     "WHERE cal_id = $id AND cal_status IN ('A','W') " .
     "ORDER BY cal_login";
@@ -212,7 +212,7 @@ function list_reminder ( $id, $event_date, $remind_time ) {
   if ( ! $disable_priority_field )
     echo "  <priority>" . $pri[$row[6]] . "</priority>\n";
   if ( ! $disable_access_field )
-    echo "  <access>" . 
+    echo "  <access>" .
       ( $row[8] == "P" ? translate("Public") : translate("Confidential") ) .
       "</access>\n";
   if ( ! strlen ( $single_user_login ) )

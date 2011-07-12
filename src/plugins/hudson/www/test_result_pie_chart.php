@@ -13,7 +13,7 @@ $skip_count = $request->get('s');
 $total_count = $pass_count + $fail_count + $skip_count;
 
 // graph size
-$graph = new PieGraph(250,150); 
+$graph = new PieGraph(250,150);
 
 // graph title
 $graph->title-> Set(_("Test Results"));
@@ -40,7 +40,7 @@ $pp->SetLegends($array_legend);
 
 // pie chart color values
 // Pass is blue and Failed is red (Skip is black)
-$pp->SetSliceColors($array_color); 
+$pp->SetSliceColors($array_color);
 
 // pie chart position
 // the pie chart is a little bit on the left (0.35) and at the bottom (0.60)
@@ -49,6 +49,6 @@ $pp->SetCenter(0.35, 0.60);
 $graph->Add($pp);
 
 // display graph
-$graph->Stroke(); 
+$graph->Stroke();
 
 ?>

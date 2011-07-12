@@ -91,13 +91,13 @@ if ( ! $error ) {
  <table cellspacing="0" cellpadding="3">
  <tr><td class="tooltip" title="<?php etooltip("app-name-help")?>">
   <label for="admin_application_name"><?php etranslate("Application Name")?>:</label></td><td>
-  <input type="text" size="40" name="admin_application_name" id="admin_application_name" value="<?php 
+  <input type="text" size="40" name="admin_application_name" id="admin_application_name" value="<?php
    echo htmlspecialchars ( $application_name );
   ?>" />
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("server-url-help")?>">
   <label for="admin_server_url"><?php etranslate("Server URL")?>:</label></td><td>
-  <input type="text" size="40" name="admin_server_url" id="admin_server_url" value="<?php 
+  <input type="text" size="40" name="admin_server_url" id="admin_server_url" value="<?php
    echo htmlspecialchars ( $server_url );
   ?>" />
  </td></tr>
@@ -117,7 +117,7 @@ if ( ! $error ) {
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("fonts-help") ?>">
   <label for="admin_fonts"><?php etranslate("Fonts")?>:</label></td><td>
-  <input type="text" size="40" name="admin_FONTS" id="admin_fonts" value="<?php 
+  <input type="text" size="40" name="admin_FONTS" id="admin_fonts" value="<?php
             echo htmlspecialchars ( $FONTS );
            ?>" />
  </td></tr>
@@ -142,16 +142,16 @@ if ( ! $error ) {
  <tr><td class="tooltip" title="<?php etooltip("preferred-view-help");?>">
   <label for="admin_startview"><?php etranslate("Preferred view")?>:</label></td><td>
   <select name="admin_STARTVIEW" id="admin_startview">
-   <option value="day.php"<?php 
+   <option value="day.php"<?php
       if ( $s["STARTVIEW"] == "day.php" ) echo " selected=\"selected\"";
      ?>><?php etranslate("Day")?></option>
-   <option value="week.php"<?php 
+   <option value="week.php"<?php
       if ( $s["STARTVIEW"] == "week.php" ) echo " selected=\"selected\"";
      ?>><?php etranslate("Week")?></option>
-   <option value="month.php" <?php 
+   <option value="month.php" <?php
       if ( $s["STARTVIEW"] == "month.php" ) echo " selected=\"selected\"";
      ?>><?php etranslate("Month")?></option>
-   <option value="year.php" <?php 
+   <option value="year.php" <?php
       if ( $s["STARTVIEW"] == "year.php" ) echo " selected=\"selected\"";
      ?>><?php etranslate("Year")?></option>
   </select>
@@ -322,32 +322,32 @@ if ( ! $error ) {
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("disable-priority-field-help")?>">
   <?php etranslate("Disable Priority field")?>:</td><td>
-  <label><input type="radio" name="admin_disable_priority_field" value="Y"<?php if ( $s["disable_priority_field"] != "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label> 
+  <label><input type="radio" name="admin_disable_priority_field" value="Y"<?php if ( $s["disable_priority_field"] != "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label>
   <label><input type="radio" name="admin_disable_priority_field" value="N"<?php if ( $s["disable_priority_field"] == "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("No")?></label>
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("disable-access-field-help")?>">
   <?php etranslate("Disable Access field")?>:</td><td>
-  <label><input type="radio" name="admin_disable_access_field" value="Y"<?php if ( $s["disable_access_field"] != "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label> 
+  <label><input type="radio" name="admin_disable_access_field" value="Y"<?php if ( $s["disable_access_field"] != "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label>
   <label><input type="radio" name="admin_disable_access_field" value="N"<?php if ( $s["disable_access_field"] == "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("No")?></label>
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("disable-participants-field-help")?>">
   <?php etranslate("Disable Participants field")?>:</td><td>
-  <label><input type="radio" name="admin_disable_participants_field" value="Y" <?php if ( $s["disable_participants_field"] != "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label> 
+  <label><input type="radio" name="admin_disable_participants_field" value="Y" <?php if ( $s["disable_participants_field"] != "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label>
   <label><input type="radio" name="admin_disable_participants_field" value="N" <?php if ( $s["disable_participants_field"] == "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("No")?></label>
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("disable-repeating-field-help")?>">
   <?php etranslate("Disable Repeating field")?>:</td><td>
-  <label><input type="radio" name="admin_disable_repeating_field" value="Y" <?php if ( $s["disable_repeating_field"] != "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label> 
+  <label><input type="radio" name="admin_disable_repeating_field" value="Y" <?php if ( $s["disable_repeating_field"] != "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label>
   <label><input type="radio" name="admin_disable_repeating_field" value="N" <?php if ( $s["disable_repeating_field"] == "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("No")?></label>
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("popup-includes-siteextras-help")?>">
   <?php etranslate("Display Site Extras in popup")?>:</td><td>
-  <label><input type="radio" name="admin_site_extras_in_popup" value="Y" <?php if ( $s["site_extras_in_popup"] == "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label> 
+  <label><input type="radio" name="admin_site_extras_in_popup" value="Y" <?php if ( $s["site_extras_in_popup"] == "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label>
   <label><input type="radio" name="admin_site_extras_in_popup" value="N" <?php if ( $s["site_extras_in_popup"] != "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("No")?></label>
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("allow-html-description-help")?>">
   <?php etranslate("Allow HTML in Description")?>:</td><td>
-  <label><input type="radio" name="admin_allow_html_description" value="Y" <?php if ( $s["allow_html_description"] == "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label> 
+  <label><input type="radio" name="admin_allow_html_description" value="Y" <?php if ( $s["allow_html_description"] == "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label>
   <label><input type="radio" name="admin_allow_html_description" value="N" <?php if ( $s["allow_html_description"] != "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("No")?></label>
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("allow-view-other-help")?>">
@@ -367,7 +367,7 @@ if ( ! $error ) {
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("conflict-check-help")?>">
   <?php etranslate("Check for event conflicts")?>:</td><td>
-  <label><input type="radio" name="admin_allow_conflicts" value="N" <?php if ( $s["allow_conflicts"] == "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label> 
+  <label><input type="radio" name="admin_allow_conflicts" value="N" <?php if ( $s["allow_conflicts"] == "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label>
   <label><input type="radio" name="admin_allow_conflicts" value="Y" <?php if ( $s["allow_conflicts"] != "N" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("No")?></label>
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("conflict-months-help")?>">
@@ -376,12 +376,12 @@ if ( ! $error ) {
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("conflict-check-override-help")?>">
   &nbsp;&nbsp;&nbsp;&nbsp;<?php etranslate("Allow users to override conflicts")?>:</td><td>
-  <label><input type="radio" name="admin_allow_conflict_override" value="Y" <?php if ( $s["allow_conflict_override"] == "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label> 
+  <label><input type="radio" name="admin_allow_conflict_override" value="Y" <?php if ( $s["allow_conflict_override"] == "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label>
   <label><input type="radio" name="admin_allow_conflict_override" value="N" <?php if ( $s["allow_conflict_override"] != "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("No")?></label>
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("limit-appts-help")?>">
   <?php etranslate("Limit number of timed events per day")?>:</td><td>
-  <label><input type="radio" name="admin_limit_appts" value="Y" <?php if ( $s["limit_appts"] == "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label> 
+  <label><input type="radio" name="admin_limit_appts" value="Y" <?php if ( $s["limit_appts"] == "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Yes")?></label>
   <label><input type="radio" name="admin_limit_appts" value="N" <?php if ( $s["limit_appts"] != "Y" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("No")?></label>
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("limit-appts-number-help")?>">
@@ -390,7 +390,7 @@ if ( ! $error ) {
  </td></tr>
  <tr><td class="tooltip" title="<?php etooltip("timed-evt-len-help")?>">
   <?php etranslate("Specify timed event length by")?>:</td><td>
-  <label><input type="radio" name="admin_TIMED_EVT_LEN" value="D" <?php if ( $s["TIMED_EVT_LEN"] != "E" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Duration")?></label> 
+  <label><input type="radio" name="admin_TIMED_EVT_LEN" value="D" <?php if ( $s["TIMED_EVT_LEN"] != "E" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("Duration")?></label>
   <label><input type="radio" name="admin_TIMED_EVT_LEN" value="E" <?php if ( $s["TIMED_EVT_LEN"] == "E" ) echo " checked=\"checked\"";?> />&nbsp;<?php etranslate("End Time")?></label>
  </td></tr>
 </table>

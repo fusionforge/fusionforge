@@ -59,7 +59,7 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 					    array ($expl_pathinfo[2],
 						   'A',
 						   'H'));
-		
+
 		// store subpage id for analyzing later
 		$subpage  = isset($expl_pathinfo[3])?$expl_pathinfo[3]:'';
 		$subpage2 = isset($expl_pathinfo[4]) ? $expl_pathinfo[4] : '';
@@ -102,7 +102,7 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 			array($group_name,
 				'A',
 				'H'));
-		
+
 		// store subpage id for analyzing later
 		$subpage = @$expl_pathinfo[4];
 		$subpage2 = @$expl_pathinfo[5];
@@ -127,8 +127,8 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	$log_group=0;
 }
 
-$sql =	"INSERT INTO activity_log 
-(day,hour,group_id,browser,ver,platform,time,page,type) 
+$sql =	"INSERT INTO activity_log
+(day,hour,group_id,browser,ver,platform,time,page,type)
 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
 
 $res_logger = db_query_params ($sql, array(date('Ymd'), date('H'),

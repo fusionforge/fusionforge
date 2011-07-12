@@ -1,6 +1,6 @@
 <?php
 /**
- * Help Wanted 
+ * Help Wanted
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
@@ -54,8 +54,8 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit('admin');
 		}
-		$result=db_query_params("INSERT INTO people_job (group_id,created_by,title,description,post_date,status_id,category_id) 
-VALUES ($1, $2, $3, $4, $5, $6, $7)", 
+		$result=db_query_params("INSERT INTO people_job (group_id,created_by,title,description,post_date,status_id,category_id)
+VALUES ($1, $2, $3, $4, $5, $6, $7)",
 array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($description), time(), '1',$category_id));
 		if (!$result || db_affected_rows($result) < 1) {
 			$error_msg .= sprintf(_('JOB insert FAILED: %s'),db_error());
@@ -153,7 +153,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		echo '<h2>'._('No such posting for this project').'</h2>';
 	} else {
 
-		echo '<p>' 
+		echo '<p>'
         . _('Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements.')
         .'</p><p>'
         . _('All postings are automatically closed after two weeks.').'

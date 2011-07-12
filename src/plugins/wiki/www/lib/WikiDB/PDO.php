@@ -35,7 +35,7 @@ class WikiDB_PDO extends WikiDB
         $backend = new $backend_class($dbparams);
         $this->WikiDB($backend, $dbparams);
     }
-  
+
     /**
      * Determine whether page exists (in non-default form).
      * @see WikiDB::isWikiPage

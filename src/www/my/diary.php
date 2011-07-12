@@ -58,7 +58,7 @@ if (!session_loggedin()) {
 		//make changes to the database
 		if (getStringFromRequest('update')) {
 			//updating an existing diary entry
-			$res=db_query_params ('UPDATE user_diary SET summary=$1,details=$2,is_public=$3 
+			$res=db_query_params ('UPDATE user_diary SET summary=$1,details=$2,is_public=$3
 WHERE user_id=$4 AND id=$5',
 			array($summary,
 				$details,
@@ -75,7 +75,7 @@ WHERE user_id=$4 AND id=$5',
 		} else if (getStringFromRequest('add')) {
 			//inserting a new diary entry
 
-			$res=db_query_params ('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES 
+			$res=db_query_params ('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES
 								($1,$2,$3,$4,$5)',
 								array(user_getid() ,
 									time() ,
@@ -87,7 +87,7 @@ WHERE user_id=$4 AND id=$5',
 				if ($is_public) {
 
 					//send an email if users are monitoring
-					$result=db_query_params ('SELECT users.email from user_diary_monitor,users 
+					$result=db_query_params ('SELECT users.email from user_diary_monitor,users
 										WHERE user_diary_monitor.user_id=users.user_id
 										AND user_diary_monitor.monitored_user=$1',
 										array(user_getid() ));
@@ -96,7 +96,7 @@ WHERE user_id=$4 AND id=$5',
 					if ($result) {
 						if ($rows > 0) {
 							$tolist=implode(util_result_column_to_array($result),', ');
-							
+
 							$to = ''; // send to noreply@
 							$subject = sprintf (_("[%s User Notes: %s] %s"),
 									    forge_get_config ('forge_name'),
@@ -118,9 +118,9 @@ You are receiving this email because you elected to monitor this user.
 To stop monitoring this user, visit the following link:
 ');
 							$body .= util_make_url("/developer/monitor.php?diary_user=".user_getid());
-							
+
 							util_send_message($to, $subject, $body, $to, $tolist);
-							
+
 							$feedback .= " ".sprintf(ngettext("email sent to %s monitoring user",
 											  "email sent to %s monitoring users",
 											  $rows),

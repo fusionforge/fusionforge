@@ -124,7 +124,7 @@ class Graph {
 	var $image_height;
 
 	/**
-	 * Image width 
+	 * Image width
 	 *
 	 * @var		int		$image_width
 	 */
@@ -161,7 +161,7 @@ class Graph {
 	/**
 	 * Graph() - Constructor
 	 *
-	 * The function constructor sets up the basic vars needed to draw a graph.  
+	 * The function constructor sets up the basic vars needed to draw a graph.
 	 * It sets up the geometry for the graph
 	 * as well as any data extents that need to be set.
 	 *
@@ -172,10 +172,10 @@ class Graph {
 
 		$this->xpad = 50;
 		$this->ypad = 40;
-		
+
 		$this->graph_height = $height - (2 * $this->ypad);
 		$this->graph_width  = $width  - (2 * $this->xpad);
-		
+
 		$this->image_height = $height;
 		$this->image_width  = $width;
 
@@ -201,7 +201,7 @@ class Graph {
 	/**
 	 * SetPad() - Redefines the x and y padding distances on the object.
 	 *
-	 * @param	int		The x distance on either side reserved for markings. 
+	 * @param	int		The x distance on either side reserved for markings.
 	 * @param	int		The y distance on the top and bottom reserved for markings.
 	 */
 	function SetPads( $xpad = 50, $ypad = 40 ) {
@@ -224,7 +224,7 @@ class Graph {
 		//asort( $xdata );
 		$i = 0;
 
-		$this->strDebug[] = "Adding dataset " . $this->num_data_sets . " " 
+		$this->strDebug[] = "Adding dataset " . $this->num_data_sets . " "
 					. ($xlabel ? "with a label" : "without a label") . " to the datasets.";
 
 		while (list($index,$val) = each($xdata)) {
@@ -256,7 +256,7 @@ class Graph {
 			$this->xmin = min($this->xmin,$tmp_xmin);
 			$this->ymax = max($this->ymax,$tmp_ymax);
 			$this->ymin = (min($this->ymin,$tmp_ymin) < 0 ) ? min($this->ymin,$tmp_ymin) : 0;
-		} 
+		}
 
 		$this->xdata_diff = (($this->xmax) - ($this->xmin));
 		$this->ydata_diff = (($this->ymax) - ($this->ymin));
@@ -278,7 +278,7 @@ class Graph {
 	function translate( &$x, &$y, &$xpos, &$ypos ) {
 		$xpos = $this->xdata_diff ? ($this->graph_width / $this->xdata_diff) * ($x - $this->xmin) + $this->xpad : 0 + $this->xpad;
 		$ypos = $this->ydata_diff ? ((($this->ymax - $y) / $this->ydata_diff) * $this->graph_height) + $this->ypad : 0 + $this->ypad;
-	} 
+	}
 
 
 	/**
@@ -311,7 +311,7 @@ class Graph {
 			$divisor  = pow(10,$decimals);
 			$num      = round($num * $divisor) / $divisor;
 
-		} 
+		}
 
 		return $num;
 
@@ -334,7 +334,7 @@ class Graph {
 		$this->translate( $x2, $y2, $x2pos, $y2pos );
 
 		ImageLine( $this->im, $x1pos, $y1pos, $x2pos, $y2pos, $color );
-	} 
+	}
 
 
 
@@ -352,11 +352,11 @@ class Graph {
 		}
 
 		imageFilledPolygon( $this->im, $verts, (sizeof($verts) / 2), $color );
-	} 
+	}
 
 
 	/**
-	 * DrawShadowedPolygon() - Is a wrapper to the imageFilledPolygon GD function that 
+	 * DrawShadowedPolygon() - Is a wrapper to the imageFilledPolygon GD function that
 	 * first creates a drop shadow.
 	 *
 	 * @param	array	The vertices for the polygon
@@ -369,7 +369,7 @@ class Graph {
 		}
 
 		imageFilledPolygon( $this->im, $verts, (sizeof($verts) / 2), $color );
-	} 
+	}
 
 
 	/**
@@ -384,7 +384,7 @@ class Graph {
 	 * @param	string	The line color
 	 */
 	function DrawDashedLine ($x1,$y1,$x2,$y2,$dash_length,$dash_space,$color) {
-	
+
 		$this->translate($x1,$y1,$x1pos,$y1pos);
 		$this->translate($x2,$y2,$x2pos,$y2pos);
 
@@ -401,27 +401,27 @@ class Graph {
 		for ( $i = 0; $i < $line_length; $i += ($dash_length + $dash_space) ) {
 			$xpos = ($dash_length * $cosTheta) + $lastx;
 			$ypos = ($dash_length * $sinTheta) + $lasty;
-			
+
 			ImageLine( $this->im, $lastx, $lasty, $xpos, $ypos, $color );
 			$lastx = $xpos + ($dash_space * $cosTheta);
 			$lasty = $ypos + ($dash_space * $sinTheta);
-		} 
+		}
 	}
 
 	/**
 	 * DrawGrid() - Draws the grid lines for the graph
 	 *
-	 * @param	string	The color to draw the grid lines in. 
+	 * @param	string	The color to draw the grid lines in.
 	 */
 	function DrawGrid( $color ) {
-		
+
 		$color    = $this->color[$color];
 		$numGrid  = 10;
 		$xNum     = $this->graph_width  / 30;
 		$yNum     = $this->graph_height / 30;
 
 
-		   // If we have a NULL data set, assume some sane defaults. 
+		   // If we have a NULL data set, assume some sane defaults.
 		if ( $this->ydata_diff == 0 ) {
 			$this->ydata_diff = 10;
 			$this->ymax = $this->ymin + 10;
@@ -448,7 +448,7 @@ class Graph {
 		$this->ydata_diff = ( $this->ymax - $this->ymin );
 
 		   // Draw the vertical grid lines
-		for ( $gridCount = $xStart; $gridCount <= $xEnd; $gridCount++ ) {	
+		for ( $gridCount = $xStart; $gridCount <= $xEnd; $gridCount++ ) {
 			$gridx = $gridCount * $xTick;
 
 			$this->DrawDashedLine($gridx, $this->ymin, $gridx, $this->ymax, 2, 3, $color);
@@ -458,7 +458,7 @@ class Graph {
 			ImageLine  ($this->im,$x0,$y0 + 3,$x0,$y0 - 3,$this->color['black']);
 			$gridx = $this->data_set[1]['xlabel'][$gridx];
 			ImageString($this->im,1,$x0 - 2.5 * strlen($gridx),$y0 + 6,$gridx,$this->color['black']);
-		} 
+		}
 
 		   // Draw the horizontal grid lines
 		for ( $gridCount = $yStart; $gridCount <= $yEnd; $gridCount++ ) {
@@ -473,10 +473,10 @@ class Graph {
 			$this->translate($this->xmin,$gridy,$x0,$y0);
 			ImageLine( $this->im, $x0 - 3, $y0, $x0 + 3, $y0, $this->color['black'] );
 			ImageString( $this->im, 1, $x0 - 5 * strlen($gridy) - 3, $y0 - 4, $gridy, $this->color['black'] );
-		} 
+		}
 	} // function DrawGrid
 
-	
+
 	/**
 	 * DrawAxis() - Draws the x-axis and the y-axis for the graph
 	 */
@@ -496,15 +496,15 @@ class Graph {
 	function LineGraph ($dataset,$color) {
 
 		$color = $this->color[$color];
-		
+
 		$lastx = $this->data_set[$dataset]['x'][0];
 		$lasty = $this->data_set[$dataset]['y'][0];
-		
+
 		for ($i = 1; $i < $this->num_points[$dataset]; ++$i) {
 			$this->DrawLine($lastx, $lasty, $this->data_set[$dataset]['x'][$i], $this->data_set[$dataset]['y'][$i], $color);
 			$lastx = $this->data_set[$dataset]['x'][$i];
 			$lasty = $this->data_set[$dataset]['y'][$i];
-		} 
+		}
 
 	} // function LineGraph
 
@@ -517,7 +517,7 @@ class Graph {
 	 * @param	string	The color you want the graph drawn.
 	 */
 	function FilledLineGraph( $dataset, $color, $colortwo = 0 ) {
-		
+
 		$color = $this->color[$color];
 		$lastx = $this->data_set[$dataset]['x'][0];
 		$lasty = $this->data_set[$dataset]['y'][0];
@@ -542,7 +542,7 @@ class Graph {
 			} else {
 				$this->DrawFilledPolygon( $verts, $color );
 			}
-		} 
+		}
 
 	} // function FilledLineGraph
 
@@ -566,14 +566,14 @@ class Graph {
 			for ( $i = 0; $i < strlen($str); $i += $span )  {
 				$span = ($this->image_width - (($this->xpad * 2) + 5 + ($lpad ? 20 : 0))) / 5;
 				ImageString( $this->im, 1,
-					$this->xpad + 5 + ($lpad++ ? 20 : 0), 
+					$this->xpad + 5 + ($lpad++ ? 20 : 0),
 					$this->ypad + 5 + ($lines++ * 13),
-					substr( $str, $i, $span ), 
+					substr( $str, $i, $span ),
 					$this->color['red'] );
 			}
 		}
 
-	} 
+	}
 
 
 	/**
@@ -586,7 +586,7 @@ class Graph {
 		$text_left = ($this->image_width / 2) - (strlen($title) * 2.7);
 		ImageString($this->im,2,$text_left,5,$title,$this->color['black']);
 
-	} 
+	}
 
 
 	/**
@@ -597,7 +597,7 @@ class Graph {
 	function SetSubTitle($subtitle) {
 		$text_left = ($this->image_width / 2) - (strlen($subtitle) * 2.4);
 		ImageString($this->im,1,$text_left,25,$subtitle,$this->color['black']);
-	} 
+	}
 
 
 	/**
@@ -606,7 +606,7 @@ class Graph {
 	function SetxTitle($xtitle) {
 		$text_left = ($this->image_width / 2) - (strlen($xtitle) * 2.4);
 		ImageString($this->im,1,$text_left,($this->image_height - $this->ypad + 20),$xtitle,$this->color['black']);
-	} 
+	}
 
 
 	/**
@@ -616,7 +616,7 @@ class Graph {
 		$text_left = 10;
 		$text_top  = ($this->image_height / 2) + (strlen($ytitle) * 2.4);
 		ImageStringUp($this->im,1,$text_left,$text_top,$ytitle,$this->color['black']);
-	} 
+	}
 
 
 	/**

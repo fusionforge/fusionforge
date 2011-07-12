@@ -145,7 +145,7 @@ function continue_session($sessionKey) {
 // session/authentication
 /**
  * login - Logs in a SOAP client
- * 
+ *
  * @param	string	userid	The user's unix id
  * @param	string	passwd	The user's passwd in clear text
  *
@@ -153,15 +153,15 @@ function continue_session($sessionKey) {
  */
 function login($userid, $passwd) {
 	global $feedback, $session_ser;
-		
+
 	setlocale (LC_TIME, _('en_US'));
 
 	$res = session_check_credentials_in_database($userid, $passwd);
-	
+
 	if (!$res) {
 		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid, $feedback);
  	}
-	
+
 	return session_build_session_token(user_getid());
 }
 
@@ -178,7 +178,7 @@ function logout($session_ser) {
 
 /**
  * version - get the running version of FusionForge
- * 
+ *
  * @return	string 	the version of FusionForge running on the server
  */
 function version() {

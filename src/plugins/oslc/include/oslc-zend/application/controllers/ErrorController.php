@@ -36,17 +36,17 @@ class ErrorController extends Zend_Controller_Action
         $contextSwitch = $this->_helper->getHelper('contextSwitch');
         $contextSwitch->addActionContext($this->getRequest()->getActionName(), 'xml')->initContext();
         $contextSwitch->addActionContext($this->getRequest()->getActionName(), 'json')->initContext();
-        
-        switch ($errors->type) { 
+
+        switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-        
+
                 // 404 error -- controller or action not found
                 $this->getResponse()->setHttpResponseCode(404);
                 $this->view->message = 'Page not found';
                 break;
             default:
-                // application error 
+                // application error
                 //$this->getResponse()->setHttpResponseCode(500);
                 $this->view->message = 'Application error';
                 //print_r(get_class($errors->exception));
@@ -64,15 +64,15 @@ class ErrorController extends Zend_Controller_Action
                 		//$this->_forward('res-not-found');
                 		$this->getResponse()->setHttpResponseCode($errors->exception->getCode());
                 		break;
-                		
+
                 	default:
                 		$this->getResponse()->setHttpResponseCode(500);
                 		break;
                 }
-              
+
                 break;
         }
-        
+
         if($errors->exception->getCode()==0)
         {
         	$return_code = 500;
@@ -81,11 +81,11 @@ class ErrorController extends Zend_Controller_Action
         {
         	$return_code = $errors->exception->getCode();
         }
-        
+
         $this->view->code = $return_code;
         $this->view->exception = $errors->exception;
         $this->view->request   = $errors->request;
-        
+
         $this->getResponse()->setHeader('Content-Type', 'text/html');
     }
 

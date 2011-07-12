@@ -28,7 +28,7 @@ define('FORGE_AUTH_NOT_AUTHORITATIVE', 3);
 
 /**
  * Pluggable Authentication plugins base class
- * 
+ *
  * By default, the session cookie is used
  *
  */
@@ -48,7 +48,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 		// get_extra_roles - add new roles not necessarily stored in the database
 		// restrict_roles - filter out unwanted roles
 		// close_auth_session - terminate an authentication session
-		
+
 		$this->saved_user = NULL;
 	}
 
@@ -91,18 +91,18 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	// Default mechanisms
-	
-	
+
+
 	/**
 	 * Current forge user
-	 * 
+	 *
 	 * @var object GFUser
 	 */
 	protected $saved_user;
-	
+
 	/**
 	 * Is there a valid session?
-	 * 
+	 *
 	 * @param unknown_type $params
 	 * @return FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
 	 * TODO : document 'auth_token' param
@@ -133,9 +133,9 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * What GFUser is logged in?
-	 * 
+	 *
 	 * This will generate a valid forge user (by default, it was generated and cached already in saved_user)
-	 * 
+	 *
 	 * @param unknown_type $params
 	 * @return array $params['results'] containing user object
 	 */
@@ -165,7 +165,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	function getExtraRoles(&$params) {
 		// $params['new_roles'][] = RBACEngine::getInstance()->getRoleById(123);
 	}
-	
+
 	/**
 	 * Filter out unwanted roles
 	 * @param unknown_type $params
@@ -173,14 +173,14 @@ abstract class ForgeAuthPlugin extends Plugin {
 	function restrictRoles(&$params) {
 		// $params['dropped_roles'][] = RBACEngine::getInstance()->getRoleById(123);
 	}
-	
+
 	// Helper functions for individual plugins
 	// FIXME : where is $this->cookie_name set ?
 	protected $cookie_name;
 
 	/**
 	 * Returns the session cookie name for the auth plugin (by default forge_session_AUTHPLUGINNAME)
-	 * 
+	 *
 	 * @return string
 	 */
 	protected function getCookieName() {
@@ -272,7 +272,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 			$events = array();
 			break;
 		}
-		
+
 		return in_array($event, $events);
 	}
 

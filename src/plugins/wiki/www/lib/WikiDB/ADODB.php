@@ -37,7 +37,7 @@ class WikiDB_ADODB extends WikiDB
 	if (!$backend->_dbh->_connectionID) return false;
         $this->WikiDB($backend, $dbparams);
     }
-  
+
     /**
      * Determine whether page exists (in non-default form).
      * @see WikiDB::isWikiPage

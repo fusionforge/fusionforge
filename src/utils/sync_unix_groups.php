@@ -21,7 +21,7 @@
 
 require (dirname(__FILE__).'/../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
-			 
+
 $err='';
 
 // Plugins subsystem
@@ -41,7 +41,7 @@ db_begin();
 for ($i=0; $i<$rows; $i++) {
 	$project = group_get_object(db_result($res,$i,'group_id')) ;
 	echo "Checking Unix group memberships for project ".$project->getUnixName()."\n";
-	
+
 	$SYS->sysCheckCreateGroup($project->getID());
 }
 

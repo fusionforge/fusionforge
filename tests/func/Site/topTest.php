@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -58,11 +58,11 @@ class Top extends FForge_SeleniumTestCase
 		$this->type("body", "Text1");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Message Posted Successfully");
-		
+
 		sleep(1);
 		$this->cron("cronjobs/project_weekly_metric.php");
 
-		// Test that from the main page we access the most active this week.    
+		// Test that from the main page we access the most active this week.
 		$this->clickAndWait("link=Home");
 		$this->clickAndWait("link=[More]");
 		$this->assertTextPresent("Most Active This Week");

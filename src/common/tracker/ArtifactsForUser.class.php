@@ -39,13 +39,13 @@ class ArtifactsForUser extends Error {
 	* @param	user	the User object for which to collect artifacts
 	*/
 	function ArtifactsForUser(&$user) {
-		$this->User =& $user;	
+		$this->User =& $user;
 		return true;
 	}
 
 	/**
 	*	getArtifactsFromSQL - Gets an array of Artifacts
-	*	
+	*
 	*	@param	sql	The sql that returns artifact_id
 	*	@return	Artifact[]	The array of Artifacts
 	*/
@@ -76,7 +76,7 @@ class ArtifactsForUser extends Error {
 	function &getAssignedArtifactsByGroup() {
 		return $this->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av WHERE av.assigned_to=$1 AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',
 							    array($this->User->getID())) ;
-								  
+
 	}
 
 	/**
@@ -99,12 +99,12 @@ class ArtifactsForUser extends Error {
 
 		$result=db_query_params ('SELECT groups.group_name,groups.group_id,
 artifact_group_list.group_artifact_id,
-artifact_group_list.name 
-FROM groups,artifact_group_list,artifact_type_monitor 
-WHERE groups.group_id=artifact_group_list.group_id 
-AND groups.status =$1 
-AND artifact_group_list.group_artifact_id=artifact_type_monitor.group_artifact_id 
-AND artifact_type_monitor.user_id=$2 
+artifact_group_list.name
+FROM groups,artifact_group_list,artifact_type_monitor
+WHERE groups.group_id=artifact_group_list.group_id
+AND groups.status =$1
+AND artifact_group_list.group_artifact_id=artifact_type_monitor.group_artifact_id
+AND artifact_type_monitor.user_id=$2
 ORDER BY group_name DESC',
 					 array('A',
 					       $this->User->getID()));

@@ -1,8 +1,8 @@
 	<a name="tabgroups"></a>
 	<div id="tabscontent_groups">
 		<?php
-			echo "<a title=\"" . 
-				translate("Add New Group") . "\" href=\"group_edit.php\" target=\"grpiframe\" onclick=\"javascript:show('grpiframe');\">" . 
+			echo "<a title=\"" .
+				translate("Add New Group") . "\" href=\"group_edit.php\" target=\"grpiframe\" onclick=\"javascript:show('grpiframe');\">" .
 				translate("Add New Group") . "</a><br />\n";
 		?>
 			<?php
@@ -14,8 +14,8 @@
 					  if ( $count == 0 ) {
 						  echo "<ul>\n";
 						}
-					echo "<li><a title=\"" . 
-						$row[1] . "\" href=\"group_edit.php?id=" . $row[0] . "\" target=\"grpiframe\" onclick=\"javascript:show('grpiframe');\">" . 
+					echo "<li><a title=\"" .
+						$row[1] . "\" href=\"group_edit.php?id=" . $row[0] . "\" target=\"grpiframe\" onclick=\"javascript:show('grpiframe');\">" .
 						$row[1] . "</a></li>\n";
 						$count++;
 						$lastrow = $row[0];

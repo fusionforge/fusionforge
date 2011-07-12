@@ -61,7 +61,7 @@ class Widget_ProjectInfo extends Widget {
 
 		// registration date
 		$project_start_date = $project->getStartDate();
-		print(_('Registered: ') . 
+		print(_('Registered: ') .
 				'<span property="doap:created" content="'.date('Y-m-d', $project_start_date).'">'.
 				date(_('Y-m-d H:i'), $project_start_date).
 				"</span>\n");
@@ -88,11 +88,11 @@ class Widget_ProjectInfo extends Widget {
 		}
 
 		if(forge_get_config('use_people')) {
-			$jobs_res = db_query_params ('SELECT name 
-					FROM people_job,people_job_category 
-					WHERE people_job.category_id=people_job_category.category_id 
-					AND people_job.status_id=1 
-					AND group_id=$1 
+			$jobs_res = db_query_params ('SELECT name
+					FROM people_job,people_job_category
+					WHERE people_job.category_id=people_job_category.category_id
+					AND people_job.status_id=1
+					AND group_id=$1
 					GROUP BY name',
 					array ($group_id),
 					2);
@@ -108,7 +108,7 @@ class Widget_ProjectInfo extends Widget {
 							db_result($jobs_res,0,"name"));
 					print "</p>\n";
 					//print '<div rel="fusionforge:has_job" typeof="fusionforge:Job" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
-					//print '<span rel="dc:title" content="'. db_result($jobs_res,0,"name").'" xmlns:dc="http://purl.org/dc/elements/1.1/">'; 
+					//print '<span rel="dc:title" content="'. db_result($jobs_res,0,"name").'" xmlns:dc="http://purl.org/dc/elements/1.1/">';
 					//print '</span>';
 					//echo '</div>';
 					//end of job description part

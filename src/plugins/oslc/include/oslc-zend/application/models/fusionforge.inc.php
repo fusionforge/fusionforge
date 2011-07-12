@@ -8,12 +8,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -31,27 +31,27 @@ require_once($model_dir . 'ChangeRequests.php');
 
 /**
  * For FusionForge
- *  
- * @package FusionForgeModel 
- * 
+ *
+ * @package FusionForgeModel
+ *
  * @TODO: Replace helios_bt by OSLC ontology
  */
 
 /**
  * Example of a FusionForge ChangeRequest that extends its model
- * 
+ *
  *  Adds a status with the helios_bt ontology (fictional)
  */
 class FusionForgeChangeRequest extends ChangeRequest
 {
 	/**
 	 * Adds helios_bt:status as mandatory
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $_mandatory = array('title','identifier','helios_bt:status');
 
-	protected $_optional = array('description','creator','modified',);	
+	protected $_optional = array('description','creator','modified',);
 
 	// may then add a status ?
 	//private $_status;
@@ -62,7 +62,7 @@ class FusionForgeChangeRequest extends ChangeRequest
 	 *
 	 * @param string $xmlstr
 	 * @return ChangeRequest
-	 * 
+	 *
 	 * TODO: Replace with other semantic rdf parser, ex: PHP-ARC2
 	 */
 	public static function CreateFusionForgeArrayFromXml($xmlstr)
@@ -71,9 +71,9 @@ class FusionForgeChangeRequest extends ChangeRequest
 		$resource = null;
 
 		// we use simplexml PHP library which supports namespaces
-		
+
 		/*******Sample CR*****************************************
-		 * 
+		 *
 		 * <?xml version="1.0"?>
 		 * <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 		 *   <oslc_cm:ChangeRequest xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/">
@@ -86,9 +86,9 @@ class FusionForgeChangeRequest extends ChangeRequest
 		 *       <dc:modified xmlns:dc="http://purl.org/dc/terms/">2008-09-16T08:42:11.265Z</dc:modified>
 		 *   </oslc_cm:ChangeRequest>
 		 * </rdf:RDF>
-		 *           
+		 *
 		 */
-		
+
 		$dc_attr = array("title", "identifier", "description","creator","modified","created");
 		$fusionforgebt_attr = array("status","priority", "assigned_to");
 
@@ -102,8 +102,8 @@ class FusionForgeChangeRequest extends ChangeRequest
 		    'dc' => 'http://purl.org/dc/terms/'
 		);*/
 		if ( ($namespace['rdf'] == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#') &&
-			 ($xml->getName() == 'RDF')) 
-		{		
+			 ($xml->getName() == 'RDF'))
+		{
 			foreach ($xml->children('http://open-services.net/xmlns/cm/1.0/') as $changerequest) {
 				if ($changerequest->getName() == 'ChangeRequest') {
 					$resource = array();
@@ -163,25 +163,25 @@ class FusionForgeChangeRequest extends ChangeRequest
 
 		return $changerequest;
 	}
-	
+
 	public static function CreateFusionForgeArrayFromJson($jsonstr) {
 		$resource = Zend_Json::decode($jsonstr);
 
 		$changerequest = new FusionForgeChangeRequest();
 
 		// the dublin core elements prefix is removed
-		
+
 		foreach ($resource as $field => $value) {
 			$field = str_replace('dcterms:', '', $field);
 			$field = str_replace('helios_bt:', '', $field);
 			$field = str_replace('oslc_cm:', '', $field);
-			
+
 			$changerequest->container[$field] = $value;
 		}
 
 		return $changerequest;
 	}
-	
+
 }
 
 
@@ -200,18 +200,18 @@ class ChangeRequestsFusionForgeDb extends ChangeRequests
 		}
 	}
 
-	/* 
-	 * 
-	 * Maps fusionforge tracker fields to ontologies (dc, oslc_cm, oslc, helios_bt, etc) 
-	 * 
+	/*
+	 *
+	 * Maps fusionforge tracker fields to ontologies (dc, oslc_cm, oslc, helios_bt, etc)
+	 *
 	 */
 	protected static function convert_artifacts_array($at_arr, $fields_string) {
 		$FusionForgeCR_attr = array('artifact_id','group_artifact_id','status_id','priority','submitted_by','assigned_to','open_date','close_date',
 			'summary','details','assigned_unixname','assigned_realname','assigned_email','submitted_unixname','submitted_realname','submitted_email',
 			'status_name','last_modified_date');
-		
+
 		$return = array();
-		
+
 		if (is_array($at_arr) && count($at_arr) > 0) {
 			for ($i=0; $i <count($at_arr); $i++) {
 				if ($at_arr[$i]->isError()) {
@@ -246,9 +246,9 @@ class ChangeRequestsFusionForgeDb extends ChangeRequests
 							unset($fldarr);
 						}
 					}
-					
+
 					$identifier = $at_arr[$i]->data_array['artifact_id'];
-					
+
 					// If specific fields were requested using a query
 					// we only return the requested fields data in the change request.
 					if(is_array($fields_string)){
@@ -258,38 +258,38 @@ class ChangeRequestsFusionForgeDb extends ChangeRequests
 							$fields = explode(",", $fields_string);
 						}
 					}
-					
+
 					if(isset($fields) && is_array($fields) && count($fields) > 0){
 						foreach ($fields as $field) {
 							switch ($field) {
-								case 'dcterms:identifier': 
+								case 'dcterms:identifier':
 									$return[$identifier]['identifier'] = $identifier;
 									break;
-								case 'dcterms:title': 
+								case 'dcterms:title':
 									$return[$identifier]['title'] = $at_arr[$i]->data_array['summary'];
 									break;
-								case 'dcterms:description': 
+								case 'dcterms:description':
 									$return[$identifier]['description'] = $at_arr[$i]->data_array['details'];
 									break;
-								case 'dcterms:creator': 
+								case 'dcterms:creator':
 									$return[$identifier]['creator'] = $at_arr[$i]->data_array['submitted_realname'];
 									break;
-								case 'oslc_cm:status': 
+								case 'oslc_cm:status':
 									$return[$identifier]['oslc_cm:status'] = $at_arr[$i]->data_array['status_name'];
 									break;
-								case 'helios_bt:priority': 
+								case 'helios_bt:priority':
 									$return[$identifier]['helios_bt:priority'] = $at_arr[$i]->data_array['priority'];
 									break;
-								case 'helios_bt:assigned_to': 
+								case 'helios_bt:assigned_to':
 									$return[$identifier]['helios_bt:assigned_to'] = $at_arr[$i]->data_array['assigned_realname'];
 									break;
-								case 'dcterms:modified': 
+								case 'dcterms:modified':
 									$return[$identifier]['modified'] = $at_arr[$i]->data_array['last_modified_date'];
 									break;
-								case 'dcterms:created': 
+								case 'dcterms:created':
 									$return[$identifier]['created'] = $at_arr[$i]->data_array['open_date'];
 									break;
-								default: 
+								default:
 									throw new ConflictException("The attribute specified ".$field." cannot be found!");
 							}
 						}

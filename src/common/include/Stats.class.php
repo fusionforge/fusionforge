@@ -1,4 +1,4 @@
-<?php   
+<?php
 /**
  * FusionForge statistics
  *
@@ -89,11 +89,11 @@ class Stats extends Error {
 	* @return a resultset of group_name, unix_group_name, items
 	*/
 	function getTopPageViews() {
-		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(s.page_views) AS items FROM stats_project_months s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name ORDER BY items DESC', 
+		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(s.page_views) AS items FROM stats_project_months s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name ORDER BY items DESC',
 					array ('A'),
 					100) ;
 	}
-	
+
 	/**
 	* Returns a resultset containing group_name, unix_group_name, and items - the count of
 	* the downloads for that group

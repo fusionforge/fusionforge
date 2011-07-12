@@ -25,8 +25,8 @@
 require_once $gfwww.'search/include/renderers/HtmlSearchRenderer.class.php';
 
 class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
-	
-	/** TODO: Find what for is $offset, looks like it's not used, added to remove warning 
+
+	/** TODO: Find what for is $offset, looks like it's not used, added to remove warning
 	*/
 	var $offset;
 	/**
@@ -35,7 +35,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	 * @var int $groupId
 	 */
 	var $groupId;
-	
+
 	/**
 	 * selected top tab
 	 * @var string $topTab
@@ -57,7 +57,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 		$this->groupId = $groupId;
 		$this->topTab = $topTab;
 	}
-	
+
 	/**
 	 * writeHeader - write the header of the output
 	 */
@@ -65,7 +65,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 		site_project_header(array('title' => _('Search'), 'group' => $this->groupId, 'toptab' => $this->topTab));
 		parent::writeHeader();
 	}
-	
+
 	/**
 	 * getPreviousResultsUrl - get the url to go to see the previous results
 	 *
@@ -74,7 +74,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	function getPreviousResultsUrl() {
 		return parent::getPreviousResultsUrl().'&amp;group_id='.$this->groupId;
 	}
-	
+
 	/**
 	 * getNextResultsUrl - get the url to go to see the next results
 	 *
@@ -97,7 +97,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 				return true;
 			}
 		}
-		return false;		
+		return false;
 	}
 }
 ?>

@@ -24,21 +24,21 @@ require_once('hudsonActions.class.php');
 /**
  * hudson */
 class hudson extends Controler {
-    
+
     private $themePath;
-    
+
     function hudson() {
         $p = PluginManager::instance()->getPluginByName('hudson');
         $this->themePath = $p->getThemePath();
     }
-    
+
     function getThemePath() {
         return $this->themePath;
     }
     function getIconsPath() {
         return $this->themePath . "/images/ic/";
     }
-    
+
     function request() {
 		global $feedback, $error_msg;
         $request =& HTTPRequest::instance();
@@ -129,7 +129,7 @@ class hudson extends Controler {
                 } else {
                     $error_msg .= _("Permission Denied");
                 }
-                
+
             } else {
                 $error_msg .= _("Hudson service is not enabled");
             }

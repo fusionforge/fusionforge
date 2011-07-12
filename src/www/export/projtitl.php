@@ -8,7 +8,7 @@
  *	show_summaries	-	0 to show only headlines, 1 to also show
  *				summaries
  *	flat		-	1 to use minimal HTML formatting
- *	
+ *
  * Copyright 2004 (c) Tim Perdue - GForge LLC
  * http://fusionforge.org
  *

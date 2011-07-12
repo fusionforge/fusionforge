@@ -36,7 +36,7 @@ $end = getIntFromRequest('end');
 //
 //	Create Report
 //
-$report=new ReportUserAdded($SPAN,$start,$end); 
+$report=new ReportUserAdded($SPAN,$start,$end);
 
 //
 //	Check for error, such as license key problem
@@ -66,10 +66,10 @@ $graph->title->Set("Users Added ".$report->getSpanName()
 	." (".date('m/d/Y',$report->getStartDate()) ."-". date('m/d/Y',$report->getEndDate()) .")");
 $graph->subtitle->Set(forge_get_config ('forge_name'));
 //$graph->xaxis-> title->Set("Date" );
-//$graph->yaxis-> title->Set("Number" ); 
+//$graph->yaxis-> title->Set("Number" );
 
 $a=$report->getDates();
-$graph->xaxis->SetTickLabels($a); 
+$graph->xaxis->SetTickLabels($a);
 $graph->xaxis->SetLabelAngle(90);
 $graph->xaxis->SetTextLabelInterval($report->getGraphInterval());
 

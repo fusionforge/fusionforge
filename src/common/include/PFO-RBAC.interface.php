@@ -33,11 +33,11 @@ define ("PFO_ROLE_UNION",     4) ;
  * Interface for the RBAC engine
  * @author Roland Mas
  *
- * This interface is meant to be implemented with a singleton pattern. 
- * Its methods use the session management to decide what roles are available within the current session (if any), 
- * and to provide the answer to the question “Does the current client have the permission for this action?”. 
- * Other interesting questions that this interface is meant to answer include “does another account have the permission for that action?” 
- * and, more generically, “who is allowed that action?”. 
+ * This interface is meant to be implemented with a singleton pattern.
+ * Its methods use the session management to decide what roles are available within the current session (if any),
+ * and to provide the answer to the question “Does the current client have the permission for this action?”.
+ * Other interesting questions that this interface is meant to answer include “does another account have the permission for that action?”
+ * and, more generically, “who is allowed that action?”.
  */
 interface PFO_RBACEngine {
 	/**
@@ -66,7 +66,7 @@ interface PFO_RBACEngine {
  * Interfaces for the capabilities
  * @author Roland Mas
  *
- * Abstract interface, not meant to be implemented directly. 
+ * Abstract interface, not meant to be implemented directly.
  */
 interface PFO_Role {
 	public function getName() ;
@@ -77,7 +77,7 @@ interface PFO_Role {
 	public function setPublic($flag) ;
 	/**
 	 * TODO: Enter description here ...
-	 * NULL if role is “floating” 
+	 * NULL if role is “floating”
 	 */
 	public function getHomeProject() ;
 	public function getLinkedProjects() ;
@@ -95,7 +95,7 @@ interface PFO_Role {
 }
 
 /**
- * Standard, explicit membership role (members are list of usernames). 
+ * Standard, explicit membership role (members are list of usernames).
  * @author Roland Mas
  *
  */
@@ -118,8 +118,8 @@ interface PFO_RoleUnion extends PFO_Role {
 
 /**
  * Implicit membership role : always applying
- * 
- * Global scope (public, no home project), always available (even when logged in). hasUser() always returns true. 
+ *
+ * Global scope (public, no home project), always available (even when logged in). hasUser() always returns true.
  * @author Roland Mas
  *
  */
@@ -129,7 +129,7 @@ interface PFO_RoleAnonymous extends PFO_Role {
 
 /**
  * Implicit membership role : the client has opened a session
- * 
+ *
  * Global scope (public, no home project), available whenever a valid session is opened. hasUser() always returns true.
  * @author Roland Mas
  *

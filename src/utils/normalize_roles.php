@@ -21,7 +21,7 @@
 
 require (dirname(__FILE__).'/../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
-			 
+
 $err='';
 
 // Plugins subsystem
@@ -39,7 +39,7 @@ $rows=db_numrows($res);
 for ($i=0; $i<$rows; $i++) {
 	$role = RBACEngine::getInstance()->getRoleById (db_result($res,$i,'role_id')) ;
 	echo "Normalizing role ".$role->getDisplayableName()."\n" ;
-	
+
 	$role->normalizeData() ;
 }
 

@@ -22,11 +22,11 @@ require_once('User.class.php');
 
 
 class UserManager {
-   
-    
+
+
     protected function __construct() {
     }
-    
+
     protected static $_instance;
     public static function instance() {
         if (!isset(self::$_instance)) {
@@ -35,11 +35,11 @@ class UserManager {
         }
         return self::$_instance;
     }
-    
-    
+
+
     /**
-     * @param $session_hash string Optional parameter. If given, this will force 
-     *                             the load of the user with the given session_hash. 
+     * @param $session_hash string Optional parameter. If given, this will force
+     *                             the load of the user with the given session_hash.
      *                             else it will check from the user cookies & ip
      * @return User the user currently logged in (who made the request)
      */
@@ -49,11 +49,11 @@ class UserManager {
     	}
     	return session_get_user();
     }
-    
+
     function getUserById($user_id) {
     	return user_get_object($user_id);
     }
-   
+
     function getUserByEmail($user_id) {
 	    return user_get_object_by_email($user_id);
     }

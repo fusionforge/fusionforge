@@ -39,7 +39,7 @@ $survey_id = getIntFromRequest('survey_id');
 $graph = getStringFromRequest('graph');
 $show_comment = getStringFromRequest('show_comment');
 
-/* We need a group_id */ 
+/* We need a group_id */
 if (!$group_id) {
     exit_no_group();
 }
@@ -64,7 +64,7 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 /* Show detailed results of a survey */
 if ($survey_id) {
     $s = new Survey($g, $survey_id);
-		
+
     if (!$s || !is_object($s)) {
 		echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey') ."</div>";
 		$sh->footer(array());
@@ -87,13 +87,13 @@ if ($survey_id) {
 		} else {
 	    	showResult($sh, $s, $sq, 1, 0, $graph);
 		}
-	
+
     } else {
 		echo '<h2>'.$s->getTitle().' ( '. $s->getNumberOfVotes() .' Votes )</h2><p/>';
 
 		/* Get questions of this survey */
 		$questions = & $s->getQuestionInstances();
-	
+
 		$question_number = 1;
 		for ($i=0; $i<count($questions); $i++) {
 	    	if ($questions[$i]->isError()) {
@@ -134,7 +134,7 @@ function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
     } else if ( $srf->isError()) {
 	echo '<div class="error">'._('Error'). $srf->getErrorMessage() ."</div>";
     } else {
-        /* Show result in HTML*/ 
+        /* Show result in HTML*/
 	echo ($SurveyHTML->showResult($srf, $show_comment, $q_num, $graph));
     }
 }

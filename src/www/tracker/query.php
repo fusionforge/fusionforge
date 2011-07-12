@@ -33,12 +33,12 @@ if (getStringFromRequest('submit')) {
 	//
 	//  Create a Saved Query
 	//
-		
+
 	if ($query_action == 1) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit('tracker');
 		}
-		
+
 		$aq = new ArtifactQuery($ath);
 		if (!$aq || !is_object($aq)) {
 			exit_error($aq->getErrorMessage(),'tracker');
@@ -67,7 +67,7 @@ if (getStringFromRequest('submit')) {
 		$aq->makeDefault();
 		$query_id=$aq->getID();
 		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse&feedback='.urlencode($feedback));
-	//	
+	//
 /*
 	// Make the displayed query the default
 	//
@@ -80,7 +80,7 @@ if (getStringFromRequest('submit')) {
 			$feedback .= $aq->getErrorMessage();
 		} else {
 			$feedback .= 'Query Made Default';
-		}	
+		}
 */	//
 	// Update the name and or fields of the displayed saved query
 	//
@@ -212,7 +212,7 @@ $sort_name_arr[]=_('Descending');
 
 $sort_arr=array();
 $sort_arr[]='ASC';
-$sort_arr[]='DESC'; 
+$sort_arr[]='DESC';
 
 //
 //	custom changed arrays to build pop-up box
@@ -353,7 +353,7 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	array_multisort($order_name_arr, $order_arr);
 
 	$tips = '<i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
-	
+
 echo '
 	<tr>
 		<td colspan="2" nowrap="nowrap">'.
@@ -377,7 +377,7 @@ echo '
 	</tr>
 	<tr>
 		<td><strong>'._('Order by').':</strong><br />
-		'. 
+		'.
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .'</td>
 		<td>&nbsp;<br />
 		'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .'</td>

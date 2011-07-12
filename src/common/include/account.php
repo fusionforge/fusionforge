@@ -89,7 +89,7 @@ function account_namevalid($name) {
 		$GLOBALS['register_error'] = _('Name is reserved for CVS.');
 		return 0;
 	}
-		
+
 	return 1;
 }
 
@@ -102,7 +102,7 @@ function account_namevalid($name) {
  */
 function account_groupnamevalid($name) {
 	if (!account_namevalid($name)) return 0;
-	
+
 	// illegal names
 	$regExpReservedGroupNames = "^(www[0-9]?|cvs[0-9]?|shell[0-9]?|ftp[0-9]?|"
 		. "irc[0-9]?|news[0-9]?|mail[0-9]?|ns[0-9]?|download[0-9]?|pub|users|"
@@ -123,19 +123,19 @@ function account_groupnamevalid($name) {
 
 /**
  * genchr() - Generate a random character
- * 
+ *
  * This is a local function used for account_salt()
  *
  * @return int $num A random character
  *
  */
 function genchr(){
-	do {	  
+	do {
 		$num = util_randnum(46, 122);
-	} while ( ( $num > 57 && $num < 65 ) || ( $num > 90 && $num < 97 ) );	  
-	$char = chr($num);	  
-	return $char;	  
-}	   
+	} while ( ( $num > 57 && $num < 65 ) || ( $num > 90 && $num < 97 ) );
+	$char = chr($num);
+	return $char;
+}
 
 /**
  * account_gensalt() - A random salt generator
@@ -148,15 +148,15 @@ function account_gensalt(){
 	// ncommander: modified for cipher selection
 	// crypt() selects the cipher based on
 	// the salt, so ...
-	
-	$a = genchr(); 
+
+	$a = genchr();
 	$b = genchr();
 	switch(forge_get_config('unix_cipher')) {
 		case 'DES':
 			$salt = "$a$b";
 			break;
 		default:
-		case 'MD5':	
+		case 'MD5':
 			$salt = "$1$" . "$a$b";
 			break;
 		case 'Blowfish':
@@ -168,7 +168,7 @@ function account_gensalt(){
 			return "$2a$".$salt;
 			break;
 	}
-	return $salt;	
+	return $salt;
 }
 
 /**

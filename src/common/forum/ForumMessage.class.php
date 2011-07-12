@@ -42,7 +42,7 @@ class ForumMessage extends Error {
 	 * @var	 object  $Forum.
 	 */
 	var $Forum;
-	
+
 		/**
 	 *  Constructor.
 	 *
@@ -102,7 +102,7 @@ class ForumMessage extends Error {
 	 *	@param 	int	The id of the user that is posting the message
 	 *	@return	boolean success.
 	*/
-	
+
 	function insertmoderated($subject, $body, $thread_id='', $is_followup_to='',$user_id) {
 		if (!$thread_id) {
 			$thread_id=$this->Forum->getNextThreadID();
@@ -113,7 +113,7 @@ class ForumMessage extends Error {
 				return false;
 			}
 		}
-		
+
 		$result = db_query_params ('INSERT INTO forum_pending_messages (group_forum_id,posted_by,subject,
 		body,post_date,is_followup_to,thread_id,most_recent_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 					   array ($this->Forum->getID(),
@@ -149,7 +149,7 @@ class ForumMessage extends Error {
 			}
 		}
 	}
-	
+
 
 	/**
 	*	insertreleasedmsg - inserts the released message into the main table (forum)
@@ -164,10 +164,10 @@ class ForumMessage extends Error {
 	 *	@param 	int	most recent date
 	 *	@return	boolean success.
 	*/
-	
+
 	function insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,$most_recent_date) {
 		if ($is_followup_to != 0) {
-			
+
 			//was posted in reply to another thread
 			//we must check whether that thread still exists. if it does, post the message. else, set the error
 				//
@@ -196,8 +196,8 @@ class ForumMessage extends Error {
 			}
 			db_commit();
 		}
-			
-			
+
+
 		db_begin();
 		$result = db_query_params ('INSERT INTO forum (group_forum_id,posted_by,subject,body,post_date,is_followup_to,thread_id,most_recent_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 					   array ($group_forum_id,
@@ -235,9 +235,9 @@ class ForumMessage extends Error {
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	/**
 	*	insertmsg - inserts the message into the main table (forum)
 	 *	@param	string	The subject of the message.
@@ -248,7 +248,7 @@ class ForumMessage extends Error {
 	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
 	 *	@return	boolean success.
 	*/
-	
+
 	function insertmsg($subject, $body, $thread_id='', $is_followup_to='',$user_id,$has_attach=false) {
 		if (!$thread_id) {
 			$thread_id=$this->Forum->getNextThreadID();
@@ -283,7 +283,7 @@ class ForumMessage extends Error {
 				}
 			}
 		}
-		
+
 		$result = db_query_params ('INSERT INTO forum (group_forum_id,posted_by,subject,body,post_date,is_followup_to,thread_id,most_recent_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 					   array ($this->Forum->getID(),
 						  $user_id,
@@ -321,8 +321,8 @@ class ForumMessage extends Error {
 		$this->awaits_moderation = false;
 		return true;
 	}
-	
-	
+
+
 	/**
 	 *	create - use this function to create a new message in the database.
 	 *
@@ -359,12 +359,12 @@ class ForumMessage extends Error {
 				return false;
 			}
 		}
-		if (!$is_followup_to) { 
-			$is_followup_to=0; 
+		if (!$is_followup_to) {
+			$is_followup_to=0;
 		}
 
 		db_begin();
-		
+
 		//now we check the moderation status of the forum and act accordingly
 		if (forge_check_perm ('forum', $this->Forum->getID(), 'unmoderated_post')) {
 			//no moderation
@@ -392,7 +392,7 @@ class ForumMessage extends Error {
 		db_free_result($res);
 		return true;
 	}
-	
+
 	/**
 	 *  fetchModeratedData - re-fetch the data for this forum_message from the database, for pending messages
 	 *
@@ -492,7 +492,7 @@ class ForumMessage extends Error {
 	function getParentID() {
 		return $this->data_array['is_followup_to'];
 	}
-	
+
 	/**
 	 *	isPending - is the message pending, awaiting moderation?
 	 *
@@ -528,13 +528,13 @@ class ForumMessage extends Error {
 	function hasFollowups() {
 		return $this->data_array['has_followups'];
 	}
-	
+
 	/**
 	 *	hasAttach - whether this message has an attachment.
 	 *
 	 *	@return boolean has_attach.
 	 */
-	
+
 	function hasAttach() {
 		if ($this->isPending()) {
 			$res = db_query_params ('SELECT attachmentid FROM forum_pending_attachment WHERE msg_id=$1',
@@ -546,7 +546,7 @@ class ForumMessage extends Error {
 		if (db_numrows($res) > 0) {
 			return true;
 		}
-		return false;		
+		return false;
 	}
 
 	/**
@@ -560,13 +560,13 @@ class ForumMessage extends Error {
 			$this->setError(_('Invalid Message ID'));
 			return false;
 		}
-		
+
 		if (!forge_check_perm ('forum_admin', $this->Forum->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		
-		$result = db_query_params ('SELECT msg_id FROM forum 
+
+		$result = db_query_params ('SELECT msg_id FROM forum
 			WHERE is_followup_to=$1
 			AND group_forum_id=$2',
 					   array ($msg_id,
@@ -578,7 +578,7 @@ class ForumMessage extends Error {
 			$msg = new ForumMessage($this->Forum,db_result($result,$i,'msg_id'));
 			$count += $msg->delete();
 		}
-		$toss = db_query_params ('DELETE FROM forum 
+		$toss = db_query_params ('DELETE FROM forum
 			WHERE msg_id=$1
 			AND group_forum_id=$2',
 					 array ($msg_id,
@@ -600,7 +600,7 @@ class ForumMessage extends Error {
 		$replaced =  preg_replace("/\[.+\](.+)\[\/.+\]/","$1",$text);
 		return $replaced;
 	}
-	
+
 	/**
 	 *	sendNotice - contains the logic to send out email followups when a message is posted.
 	 *
@@ -641,7 +641,7 @@ class ForumMessage extends Error {
 			$body = sprintf(_("\nRead and respond to this message at: \n%s"), util_make_url ('/forum/message.php?msg_id='.$this->getID()));
 			if (forge_get_config('use_mail')) {
 				$body .= stripcslashes(sprintf(_('
-Or reply to this e-mail entering your response between the following markers: 
+Or reply to this e-mail entering your response between the following markers:
 %1$s
 (enter your response here)
 %1$s'), FORUM_MAIL_MARKER));
@@ -683,7 +683,7 @@ Or reply to this e-mail entering your response between the following markers:
 				$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
 					."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
 			}
-			
+
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
 
 			util_send_message($dest_email,$subject,$body,"noreply@".forge_get_config('web_host'),'','Forum',$extra_headers);
@@ -693,7 +693,7 @@ Or reply to this e-mail entering your response between the following markers:
 		setup_gettext_from_context();
 		return true;
 	}
-	
+
 	/**
 	 *	sendNewModeratedMsgNotice - contains the logic to send out email notifications to the forum admins when a new moderated message is posted
 	 *
@@ -707,14 +707,14 @@ Or reply to this e-mail entering your response between the following markers:
 		foreach ($moderators as $m) {
 			$ids[] = $m->getID () ;
 		}
-		
+
 		//
 		//	See if there is anyone to send messages to
 		//
 		if (!count($ids) > 0 && !$this->Forum->getSendAllPostsTo()) {
 			return true;
 		}
-		
+
 		$f =& $this->getForum();
 		$g =& $f->getGroup();
 
@@ -723,7 +723,7 @@ Or reply to this e-mail entering your response between the following markers:
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
 
 		$text = $this->getBody();
-		$sanitizer = new TextSanitizer();	
+		$sanitizer = new TextSanitizer();
 		$text = $sanitizer->convertNeededTagsForEmail($text);
 		$text= strip_tags($this->removebbcode(util_line_wrap($text)));
 		$text = $sanitizer->convertExtendedCharsForEmail($text);
@@ -752,7 +752,7 @@ Or reply to this e-mail entering your response between the following markers:
 						   array ('A',
 							  db_int_array_to_any_clause ($ids))) ;
 		}
-		
+
 		$BCC = implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 		$User = user_get_object($this->getPosterID());
 		//util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
@@ -763,7 +763,7 @@ Or reply to this e-mail entering your response between the following markers:
 
 	/**
 	 *	updatemsg - impacts in the DB the new content of the message
-	 *	
+	 *
 	 *	@param	string	The forum ID
 	 *	@param 	int		The id of the user that is posting the message
 	 *	@param	string	The subject of the message.
@@ -780,7 +780,7 @@ Or reply to this e-mail entering your response between the following markers:
 		$subject = htmlspecialchars($subject);
 		$body = $body;
 		$msg_id = $this->getID();
-		$res = db_query_params ('UPDATE forum 
+		$res = db_query_params ('UPDATE forum
 			SET group_forum_id=$1, posted_by=$2, subject=$3,
 			body=$4, post_date=$5, is_followup_to=$6,
 			thread_id=$7, most_recent_date=$8
@@ -805,7 +805,7 @@ Or reply to this e-mail entering your response between the following markers:
 			return true;
 		}
 	}
-	
+
 	/**
 	 *	sendAttachNotice - contains the logic to send out email attachement followups when a message is posted.
 	 *
@@ -823,11 +823,11 @@ Or reply to this e-mail entering your response between the following markers:
 			if (!count($ids) > 0 && !$this->Forum->getSendAllPostsTo()) {
 				return true;
 			}
-			
+
 			$body = "\nRead and respond to this message at: ".
 				"\n".util_make_url('/forum/message.php?msg_id='.$this->getID()).
 			"\nBy: " . $this->getPosterRealName() . "\n\n";
-			
+
 			$body .= "A file has been uploaded to this message, you can download it at: ".
 				"\n".util_make_url('/forum/attachment.php?attachid='. $attach_id . "&group_id=" . $this->Forum->Group->getID() . "&forum_id=" . $this->Forum->getID()) . "\n\n";
 
@@ -836,7 +836,7 @@ Or reply to this e-mail entering your response between the following markers:
 			"\nYou are receiving this email because you elected to monitor this forum.".
 			"\nTo stop monitoring this forum, login to ".forge_get_config ('forge_name')." and visit: ".
 			"\n".util_make_url ('/forum/monitor.php?forum_id='.$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1');
-	
+
 			$extra_headers = "Return-Path: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Errors-To: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
@@ -850,7 +850,7 @@ Or reply to this e-mail entering your response between the following markers:
 				$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
 					."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
 			}
-	
+
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
 			if (count($ids) != 0) {
 				$bccres = db_query_params ('SELECT email FROM users WHERE status=$1 AND user_id = ANY ($2)',
@@ -862,7 +862,7 @@ Or reply to this e-mail entering your response between the following markers:
 			util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
 			return true;
 		}
-		
+
 		return false;
 	}
 }

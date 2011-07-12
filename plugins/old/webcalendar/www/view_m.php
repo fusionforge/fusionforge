@@ -43,7 +43,7 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
 }
 
 // If view_name not found, then the specified view id does not
-// belong to current user. 
+// belong to current user.
 if ( $view_name == "" ) {
   $error = translate ( "You are not authorized" );
 }
@@ -245,11 +245,11 @@ if ( ! empty ( $eventinfo ) ) {
   echo $eventinfo;
 }
 
-echo "<a title=\"" . 
+echo "<a title=\"" .
   translate("Generate printer-friendly version") . "\" class=\"printer\" " .
   "href=\"view_m.php?id=$id&amp;date=$thisdate&amp;friendly=1\" " .
   "target=\"cal_printer_friendly\" onmouseover=\"window.status='" .
-  translate("Generate printer-friendly version") . "'\">[" . 
+  translate("Generate printer-friendly version") . "'\">[" .
   translate("Printer Friendly") . "]</a>\n";
 
 print_trailer (); ?>

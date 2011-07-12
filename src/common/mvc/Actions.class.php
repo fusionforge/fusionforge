@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Copyright 2005, STMicroelectronics
  *
  * Originally written by Manuel Vacelet
@@ -31,16 +31,16 @@
  * @license   http://opensource.org/licenses/gpl-license.php GPL
  */
 class Actions {
-    
+
     var $_controler;
     function Actions(&$controler) {
         $this->_controler =& $controler;
     }
-    
+
     function getControler() {
         return $this->_controler;
     }
-    
+
   function check() {
     return true;
   }

@@ -23,7 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/* Updated rewrite of the File Release System to clean up the UI 
+/* Updated rewrite of the File Release System to clean up the UI
  * a little and incorporate FRS.class.php.		-Darrell
  */
 
@@ -107,7 +107,7 @@ for ($i=0; $i<count($rs); $i++) {
 			<td>'.$frsp->getName().'</td>
 			<td><a href="editrelease.php?group_id='.$group_id
 				.'&amp;package_id='.$package_id
-				.'&amp;release_id='.$rs[$i]->getID().'">'. 
+				.'&amp;release_id='.$rs[$i]->getID().'">'.
 				$rs[$i]->getName().' ['._('Edit').']</a>
 				<a href="deleterelease.php?group_id='.$group_id
 				.'&amp;package_id='.$package_id

@@ -28,8 +28,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'stats/site_stats_utils.php';
 
 $report=getStringFromRequest('report');
-$orderby=getStringFromRequest('orderby'); 
-$projects=getIntFromRequest('projects'); 
+$orderby=getStringFromRequest('orderby');
+$projects=getIntFromRequest('projects');
 $trovecatid=getIntFromRequest('trovecatid');
 
 session_require_global_perm ('forge_stats', 'read') ;

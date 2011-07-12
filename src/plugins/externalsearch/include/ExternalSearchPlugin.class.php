@@ -23,7 +23,7 @@ class ExternalSearchPlugin extends Plugin {
 		$this->Plugin();
 		$this->name = 'externalsearch';
 		$this->text = 'External Search';
-		
+
 		$this->hooks[] = 'search_engines';
 	}
 

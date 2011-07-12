@@ -76,10 +76,10 @@ $graph->Add( $lineplot);
 $graph->title->Set($g->getPublicName()." Commits Over Time: ".$report->start_date." - ".$report->end_date);
 $graph->subtitle->Set(forge_get_config ('forge_name'));
 //$graph->xaxis-> title->Set("Date" );
-//$graph->yaxis-> title->Set("Number" ); 
+//$graph->yaxis-> title->Set("Number" );
 
 $a=$report->getDates();
-$graph->xaxis->SetTickLabels($a); 
+$graph->xaxis->SetTickLabels($a);
 $graph->xaxis->SetLabelAngle(90);
 $graph->xaxis->SetTextLabelInterval(3);
 

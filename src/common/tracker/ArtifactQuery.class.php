@@ -62,7 +62,7 @@ define('ARTIFACT_QUERY_FOLLOWUPS',11);
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 
 class ArtifactQuery extends Error {
-	/** 
+	/**
 	 * The artifact type object.
 	 *
 	 * @var		object	$ArtifactType.
@@ -87,11 +87,11 @@ class ArtifactQuery extends Error {
 	 *	ArtifactQuery - Constructer
 	 *
 	 *	@param	object	ArtifactType object.
-	 *	@param 	
+	 *	@param
 	 *  	@return	boolean	success.
 	 */
 	function ArtifactQuery(&$ArtifactType, $data = false) {
-		$this->Error(); 
+		$this->Error();
 
 		//was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
@@ -121,7 +121,7 @@ class ArtifactQuery extends Error {
 
 	/**
 	 *	create - create a row in the table that stores a saved query for
-	 *  a tracker.   
+	 *  a tracker.
 	 *
 	 *	@param	string	Name of the saved query.
 	 *  @return 	true on success / false on failure.
@@ -149,7 +149,7 @@ class ArtifactQuery extends Error {
 			$this->setError( _('You must have tracker admin rights to set or update a project level query.'));
 			return false;
 		}
-		
+
 		// Reset the project default query.
 		if ($query_type==2) {
 			$res = db_query_params ('UPDATE artifact_query SET query_type=1 WHERE query_type=2 AND group_artifact_id=$1',
@@ -159,7 +159,7 @@ class ArtifactQuery extends Error {
 				return false;
 			}
 		}
-		
+
 		db_begin();
 		$result = db_query_params ('INSERT INTO artifact_query (group_artifact_id,query_name,user_id,query_type) VALUES ($1,$2,$3,$4)',
 					   array ($this->ArtifactType->getID(),
@@ -205,7 +205,7 @@ class ArtifactQuery extends Error {
 	function fetchData($id) {
 			$res = db_query_params ('SELECT * FROM artifact_query WHERE artifact_query_id=$1',
 						array ($id)) ;
-		
+
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactQuery: Invalid ArtifactQuery ID'.db_error());
 			return false;
@@ -257,21 +257,21 @@ class ArtifactQuery extends Error {
 			$this->setError('Setting Status: '.db_error());
 			return false;
 		}
-	
+
 		if (is_array($assignee)) {
 				for($e=0; $e<count($assignee); $e++) {
-					$assignee[$e]=intval($assignee[$e]); 
+					$assignee[$e]=intval($assignee[$e]);
 				}
 				$assignee=implode(',',$assignee);
 		} else {
 			$assignee = intval($assignee);
-		}	
-		
+		}
+
 		if (preg_match("/[^[:alnum:]_]/", $sort_col)) {
 			$this->setError('ArtifactQuery: not valid sort_col');
 			return false;
 		}
-		
+
 		if (preg_match("/[^[:alnum:]_]/", $sort_ord)) {
 			$this->setError('ArtifactQuery: not valid sort_ord');
 			return false;
@@ -358,7 +358,7 @@ class ArtifactQuery extends Error {
 			$this->setError('Setting Sort Order: '.db_error());
 			return false;
 		}
-		
+
 		// Saving the summary value.
 		$res=db_query_params ('INSERT INTO artifact_query_fields
 			(artifact_query_id,query_field_type,query_field_id,query_field_values)
@@ -384,7 +384,7 @@ class ArtifactQuery extends Error {
 			$this->setError('Setting Description: '.db_error());
 			return false;
 		}
-		
+
 		// Saving the followups value.
 		$res=db_query_params ('INSERT INTO artifact_query_fields
 			(artifact_query_id,query_field_type,query_field_id,query_field_values)
@@ -401,7 +401,7 @@ class ArtifactQuery extends Error {
 		if (!$extra_fields) {
 			$extra_fields=array();
 		}
-		
+
 		$keys=array_keys($extra_fields);
 		$vals=array_values($extra_fields);
 		for ($i=0; $i<count($keys); $i++) {
@@ -640,8 +640,8 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *  update - update a row in the table used to query names 
-	 *  for a tracker.  
+	 *  update - update a row in the table used to query names
+	 *  for a tracker.
 	 *
 	 *  @param	int	 Id of the saved query
 	 *	@param	string	The name of the saved query
@@ -665,7 +665,7 @@ class ArtifactQuery extends Error {
 			$this->setError(_('You must have tracker admin rights to set or update a project level query.'));
 			return false;
 		}
-		
+
 		// Reset the project default query.
 		if ($query_type==2) {
 			$res = db_query_params ('UPDATE artifact_query SET query_type=1 WHERE query_type=2 AND group_artifact_id=$1',

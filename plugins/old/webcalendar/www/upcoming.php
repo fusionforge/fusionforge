@@ -154,7 +154,7 @@ $events = read_events ( $username, $date, $endDate, $cat_id );
 // Print header without custom header and no style sheet
 if ( ! empty ( $LANGUAGE ) ) {
   $charset = translate ( "charset" );
-  $lang = languageToAbbrev ( ( $LANGUAGE == "Browser-defined" || 
+  $lang = languageToAbbrev ( ( $LANGUAGE == "Browser-defined" ||
     $LANGUAGE == "none" )? $lang : $LANGUAGE );
   if ( $charset != "charset" ) {
     echo "<?xml version=\"1.0\" encoding=\"$charset\"?>\n" .
@@ -178,7 +178,7 @@ if ( ! empty ( $LANGUAGE ) ) {
   $charset = "iso-8859-1";
 }
 echo "<title>".translate($application_name)."</title>\n";
- 
+
 ?>
 </head>
 <body>
@@ -192,8 +192,8 @@ if ( ! empty ( $error ) ) {
 print "<dl>\n";
 
 print "<!-- \nstartTime: $startTime\nendTime: $endTime\nstartDate: " .
-  "$date\nnumDays: $numDays\nuser: $username\nevents: " . 
-  count ( $events ) . "\nrepeated_events: " . 
+  "$date\nnumDays: $numDays\nuser: $username\nevents: " .
+  count ( $events ) . "\nrepeated_events: " .
   count ( $repeated_events ) . " -->\n";
 
 $numEvents = 0;
@@ -230,10 +230,10 @@ function print_upcoming_event ( $e ) {
 
   if ( $e['cal_access'] == 'P' ) {
     if ( $display_link && ! empty ( $server_url ) ) {
-      print "<a title=\"" . 
-        $e['cal_name'] . "\" href=\"" . 
-        $server_url . "view_entry.php?id=" . 
-        $e['cal_id'] . "&amp;date=" . 
+      print "<a title=\"" .
+        $e['cal_name'] . "\" href=\"" .
+        $server_url . "view_entry.php?id=" .
+        $e['cal_id'] . "&amp;date=" .
         $e['cal_date'] . "\"";
       if ( ! empty ( $link_target ) ) {
         print " target=\"$link_target\"";

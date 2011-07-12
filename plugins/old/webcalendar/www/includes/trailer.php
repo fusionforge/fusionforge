@@ -86,7 +86,7 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
   $d_time = mktime ( 3, 0, 0, $m, $d, $y );
   $thisdate = date ( "Ymd", $d_time );
   $wday = date ( "w", $d_time );
-  // $WEEK_START equals 1 or 0 
+  // $WEEK_START equals 1 or 0
   $wkstart = mktime ( 3, 0, 0, $m, $d - ( $wday - $WEEK_START ), $y );
 
   for ( $i = -7; $i <= 7; $i++ ) {
@@ -179,16 +179,16 @@ if ( ! strstr ( $reqURI, "month.php" ) &&
 
 if ( $single_user != "Y" ) {
   if ( ! empty ( $user ) && $user != $login ) {
-   /* $goto_link[] = "<a title=\"" . 
+   /* $goto_link[] = "<a title=\"" .
       translate("My Calendar") . "\" style=\"font-weight:bold;\" " .
-      "href=\"$mycal\">" . 
+      "href=\"$mycal\">" .
       translate("Back to My Calendar") . "</a>";
       */
   } else {
   	/*
-    $goto_link[] = "<a title=\"" . 
+    $goto_link[] = "<a title=\"" .
       translate("My Calendar") . "\" style=\"font-weight:bold;\" " .
-      "href=\"$mycal\">" . 
+      "href=\"$mycal\">" .
       translate("My Calendar") . "</a>";
       */
   }
@@ -196,15 +196,15 @@ if ( $single_user != "Y" ) {
     $todayURL .= '?user=' . $user;
   }
   /*
-  $goto_link[] = "<a title=\"" . 
+  $goto_link[] = "<a title=\"" .
     translate("Today") . "\" style=\"font-weight:bold;\" " .
-    "href=\"$todayURL\">" . 
+    "href=\"$todayURL\">" .
     translate("Today") . "</a>";
     */
   if ( $login != '__public__' && $readonly == 'N' ) {
-    $goto_link[] = "<a title=\"" . 
+    $goto_link[] = "<a title=\"" .
       translate("Admin") . "\" style=\"font-weight:bold;\" " .
-      "href=\"adminhome.php\">" . 
+      "href=\"adminhome.php\">" .
       translate("Admin") . "</a>";
   }
   if ( $login != "__public__" && $readonly == "N" &&
@@ -213,50 +213,50 @@ if ( $single_user != "Y" ) {
     if ($is_nonuser_admin) {
       $url .= "?user=$user";
     }
-    $goto_link[] = "<a title=\"" . 
-      translate("Unapproved Events") . "\" href=\"$url\">" . 
+    $goto_link[] = "<a title=\"" .
+      translate("Unapproved Events") . "\" href=\"$url\">" .
       translate("Unapproved Events") . "</a>";
   }
   if ( $login == "__public__" && $public_access_others != "Y" ) {
     // don't allow them to see other people's calendar
   } else if ( $allow_view_other == "Y" || $is_admin ) {
    /*
-    $goto_link[] = "<a title=\"" . 
-    translate("Another User's Calendar") . "\" href=\"select_user.php\">" . 
+    $goto_link[] = "<a title=\"" .
+    translate("Another User's Calendar") . "\" href=\"select_user.php\">" .
     translate("Another User's Calendar") . "</a>";
-      */ 
-  } 
+      */
+  }
 } else {
-  $goto_link[] = "<a title=\"" . 
+  $goto_link[] = "<a title=\"" .
     translate("My Calendar") . "\" style=\"font-weight:bold;\" " .
-    "href=\"$mycal\">" . 
+    "href=\"$mycal\">" .
     translate("My Calendar") . "</a>";
-  $goto_link[] = "<a title=\"" . 
+  $goto_link[] = "<a title=\"" .
     translate("Today") . "\" style=\"font-weight:bold;\" " .
-    "href=\"$todayURL\">" . 
+    "href=\"$todayURL\">" .
     translate("Today") . "</a>";
   if ( $readonly == 'N' ) {
-    $goto_link[] = "<a title=\"" . 
+    $goto_link[] = "<a title=\"" .
       translate("Admin") . "\" style=\"font-weight:bold;\" " .
-      "href=\"adminhome.php\">" . 
+      "href=\"adminhome.php\">" .
       translate("Admin") . "</a>";
   }
 }
 // only display some links if we're viewing our own calendar.
 if ( empty ( $user ) || $user == $login ) {
-  $goto_link[] = "<a title=\"" . 
+  $goto_link[] = "<a title=\"" .
     translate("Search") . "\" href=\"search.php\">" .
     translate("Search") . "</a>";
   if ( $login != '__public__' ) {
-    $goto_link[] = "<a title=\"" . 
-      translate("Import") . "\" href=\"import.php\">" . 
+    $goto_link[] = "<a title=\"" .
+      translate("Import") . "\" href=\"import.php\">" .
       translate("Import") . "</a>";
-    $goto_link[] = "<a title=\"" . 
-      translate("Export") . "\" href=\"export.php\">" . 
+    $goto_link[] = "<a title=\"" .
+      translate("Export") . "\" href=\"export.php\">" .
       translate("Export") . "</a>";
   }
   if ( $can_add ) {
-    $url = "<a title=\"" . 
+    $url = "<a title=\"" .
       translate("Add New Entry") . "\" href=\"edit_entry.php";
     if ( ! empty ( $thisyear ) ) {
       $url .= "?year=$thisyear";
@@ -273,12 +273,12 @@ if ( empty ( $user ) || $user == $login ) {
 }
 if ( $login != '__public__' ) {
 	/*
-  $goto_link[] = "<a title=\"" . 
+  $goto_link[] = "<a title=\"" .
     translate("Help") . "\" href=\"#\" onclick=\"window.open " .
     "( 'help_index.php', 'cal_help', 'dependent,menubar,scrollbars, " .
     "height=400,width=400,innerHeight=420,outerWidth=420' );\"  " .
-    "onmouseover=\"window.status='" . 
-    translate("Help") . "'\">" . 
+    "onmouseover=\"window.status='" .
+    translate("Help") . "'\">" .
     translate("Help") . "</a>";
     */
 }
@@ -335,9 +335,9 @@ if ( ! empty ( $reports_enabled ) && $reports_enabled == 'Y' ) {
     "ORDER BY cal_report_id" );
   if ( $res ) {
     while ( $row = dbi_fetch_row ( $res ) ) {
-      $reports_link[] = "<a title=\"" . 
-        htmlspecialchars ( $row[0] ) . 
-        "\" href=\"report.php?report_id=$row[1]$u_url\">" . 
+      $reports_link[] = "<a title=\"" .
+        htmlspecialchars ( $row[0] ) .
+        "\" href=\"report.php?report_id=$row[1]$u_url\">" .
         htmlspecialchars ( $row[0] ) . "</a>";
     }
     dbi_free_result ( $res );
@@ -364,28 +364,28 @@ if ( ! $use_http_auth ) {
   $login_url = "login.php?return_path=$login_return_path";
 
   // Should we use another application's login/logout pages?
-  if ( substr ( $GLOBALS['user_inc'], 0, 9 ) == 'user-app-' ) {  
+  if ( substr ( $GLOBALS['user_inc'], 0, 9 ) == 'user-app-' ) {
     if ( strlen ( $login ) && $login != "__public__" ) {
       $login_url = $GLOBALS['app_logout_page'];
     } else {
       if ($login_return_path != '' && $GLOBALS['app_redir_param'] != '') {
         $GLOBALS['app_login_page'] .= '?'. $GLOBALS['app_redir_param'] .
           '=' . $login_return_path;
-      } 
+      }
       $login_url = $GLOBALS['app_login_page'];
     }
-  }  
+  }
     /*
  if ( strlen ( $login ) && $login != "__public__" ) {
   echo "<span class=\"prefix\">" .
-   translate("Current User") . ":</span>&nbsp;$fullname&nbsp;(<a title=\"" . 
-   translate("Logout") . "\" href=\"$login_url\">" . 
+   translate("Current User") . ":</span>&nbsp;$fullname&nbsp;(<a title=\"" .
+   translate("Logout") . "\" href=\"$login_url\">" .
    translate("Logout") . "</a>)\n";
  } else {
   echo "<span class=\"prefix\">" .
-   translate("Current User") . ":</span>&nbsp;" . 
-   translate("Public Access") . "&nbsp;(<a title=\"" . 
-   translate("Login") . "\" href=\"$login_url\">" . 
+   translate("Current User") . ":</span>&nbsp;" .
+   translate("Public Access") . "&nbsp;(<a title=\"" .
+   translate("Login") . "\" href=\"$login_url\">" .
    translate("Login") . "</a>)\n";
  }
  */

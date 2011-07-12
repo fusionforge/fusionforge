@@ -43,9 +43,9 @@ if ( $res ) {
 		}
 	echo "><td>\n" .
         $row[0] . "</td><td>\n" .
-        $row[1] . "</td><td>\n" . 
+        $row[1] . "</td><td>\n" .
         date_to_str ( $row[3] ) . "&nbsp;" .
-        display_time ( $row[4] ) . "</td><td>\n" . 
+        display_time ( $row[4] ) . "</td><td>\n" .
         "<a title=\"" .
         htmlspecialchars($row[6]) . "\" href=\"view_entry.php?id=$row[5]\">" .
         htmlspecialchars($row[6]) . "</a></td><td>\n";
@@ -78,10 +78,10 @@ if ( $res ) {
 <?php
 //go BACK in time
 if ( ! empty ( $nextpage ) ) {
-  echo "<a title=\"" . 
-  	translate("Previous") . "&nbsp;$PAGE_SIZE&nbsp;" . 
-	translate("Events") . "\" class=\"prev\" href=\"activity_log.php?startid=$nextpage\">" . 
-  	translate("Previous") . "&nbsp;$PAGE_SIZE&nbsp;" . 
+  echo "<a title=\"" .
+  	translate("Previous") . "&nbsp;$PAGE_SIZE&nbsp;" .
+	translate("Events") . "\" class=\"prev\" href=\"activity_log.php?startid=$nextpage\">" .
+  	translate("Previous") . "&nbsp;$PAGE_SIZE&nbsp;" .
 	translate("Events") . "</a>\n";
 }
 
@@ -97,10 +97,10 @@ if ( ! empty ( $startid ) ) {
         $prevarg = "?startid=$previd";
       }
       //go FORWARD in time
-      echo "<a title=\"" . 
-  	translate("Next") . "&nbsp;$PAGE_SIZE&nbsp;" . 
-	translate("Events") . "\" class=\"next\" href=\"activity_log.php$prevarg\">" . 
-  	translate("Next") . "&nbsp;$PAGE_SIZE&nbsp;" . 
+      echo "<a title=\"" .
+  	translate("Next") . "&nbsp;$PAGE_SIZE&nbsp;" .
+	translate("Events") . "\" class=\"next\" href=\"activity_log.php$prevarg\">" .
+  	translate("Next") . "&nbsp;$PAGE_SIZE&nbsp;" .
 	translate("Events") . "</a><br />\n";
     }
     dbi_free_result ( $res );

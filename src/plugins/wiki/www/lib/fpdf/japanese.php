@@ -47,7 +47,7 @@ class PDF_Japanese extends PDF {
         $registry=array('ordering'=>'Japan1','supplement'=>2);
         $this->AddCIDFonts($family,$name,$cw,$CMap,$registry);
     }
-    
+
     function AddSJIShwFont($family='SJIS-hw')
     {
         //Add SJIS font with half-width Latin
@@ -101,7 +101,7 @@ class PDF_Japanese extends PDF {
         else
             parent::MultiCell($w,$h,$txt,$border,$align,$fill);
     }
-  
+
     function SJISMultiCell($w,$h,$txt,$border=0,$align='L',$fill=0)
     {
         //Output text with automatic or explicit line breaks

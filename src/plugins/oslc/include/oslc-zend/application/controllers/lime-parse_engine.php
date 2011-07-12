@@ -92,9 +92,9 @@ class parse_engine {
 	private function drop() { $this->stack->pop_n(1); }
 	function eat_eof() {
 		{/*
-		
+
 		So that I don't get any brilliant misguided ideas:
-		
+
 		The "accept" step happens when we try to eat a start symbol.
 		That happens because the reductions up the stack at the end
 		finally (and symetrically) tell the parser to eat a symbol
@@ -102,32 +102,32 @@ class parse_engine {
 		and reduced. However, that doesn't put the parser into any
 		special different state. Therefore, it's back at the start
 		state.
-		
+
 		That being said, the parser is ready to reduce an EOF to the
 		empty program, if given a grammar that allows them.
-		
+
 		So anyway, if you literally tell the parser to eat an EOF
 		symbol, then after it's done reducing and accepting the prior
 		program, it's going to think it has another symbol to deal with.
 		That is the EOF symbol, which means to reduce the empty program,
 		accept it, and then continue trying to eat the terminal EOF.
-		
+
 		This infinte loop quickly runs out of memory.
-		
+
 		That's why the real EOF algorithm doesn't try to pretend that
 		EOF is a terminal. Like the invented start symbol, it's special.
-		
+
 		Instead, we pretend to want to eat EOF, but never actually
 		try to get it into the parse stack. (It won't fit.) In short,
 		we look up what reduction is indicated at each step in the
 		process of rolling up the parse stack.
-		
+
 		The repetition is because one reduction is not guaranteed to
 		cascade into another and clean up the entire parse stack.
 		Rather, it will instead shift each partial production as it
 		is forced to completion by the EOF lookahead.
 		*/}
-		
+
 		# We must reduce as if having read the EOF symbol
 		do {
 			# and we have to try at least once, because if nothing
@@ -146,7 +146,7 @@ class parse_engine {
 		causes the "accept" instruction to fire. Otherwise, the
 		step('#') method will indicate an error in the syntax, which
 		here means a premature EOF.
-		
+
 		Incedentally, some tremendous amount of voodoo with the parse
 		stack might help find the beginning of some unfinished
 		production that the sentence was cut off during, but as a
@@ -165,7 +165,7 @@ class parse_engine {
 				continue;
 			}
 			$seen[$this->state()] = true;
-			
+
 			$this->eat('error', NULL);
 			if ($this->has_step_for('#')) {
 				// Good. We can continue as normal.
@@ -200,20 +200,20 @@ class parse_engine {
 			$this->stack->shift($operand, $semantic);
 			# echo $this->stack->text()." shift $type<br/>\n";
 			break;
-			
+
 			case 'r':
 			$this->reduce($operand);
 			$this->eat($type, $semantic);
 			# Yes, this is tail-recursive. It's also the simplest way.
 			break;
-			
+
 			case 'a':
 			if ($this->stack->occupied()) throw new parse_bug('Accept should happen with empty stack.');
 			$this->accept = true;
 			#if ($this->debug) echo ("Accept\n\n");
 			$this->semantic = $semantic;
 			break;
-			
+
 			case 'e':
 			# This is thought to be the uncommon, exceptional path, so
 			# it's OK that this algorithm will cause the stack to
@@ -227,7 +227,7 @@ class parse_engine {
 				throw new parse_error("Parse Error: ($type)($semantic) not expected");
 			}
 			break;
-			
+
 			default:
 			throw new parse_bug("Bad parse table instruction ".htmlspecialchars($opcode));
 		}

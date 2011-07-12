@@ -5,7 +5,7 @@ require_once (dirname(__FILE__)).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 db_begin();
-			      
+
 $rel = db_query_params ('SELECT id,bin_data FROM artifact_file ORDER BY id ASC',
 						      array ());
 echo db_error();

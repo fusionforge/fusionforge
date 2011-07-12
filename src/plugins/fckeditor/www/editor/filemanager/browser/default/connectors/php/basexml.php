@@ -1,20 +1,20 @@
-<?php 
+<?php
 /*
  * FCKeditor - The text editor for internet
  * Copyright (C) 2003-2006 Frederico Caldeira Knabben
- * 
+ *
  * Licensed under the terms of the GNU Lesser General Public License:
  * 		http://www.opensource.org/licenses/lgpl-license.php
- * 
+ *
  * For further information visit:
  * 		http://www.fckeditor.net/
- * 
+ *
  * "Support Open Source software. What about a donation today?"
- * 
+ *
  * File Name: basexml.php
  * 	These functions define the base of the XML response sent by the PHP
  * 	connector.
- * 
+ *
  * File Authors:
  * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
@@ -41,13 +41,13 @@ function SetXmlHeaders()
 function CreateXmlHeader( $command, $resourceType, $currentFolder )
 {
 	SetXmlHeaders() ;
-	
+
 	// Create the XML document header.
 	echo '<?xml version="1.0" encoding="utf-8" ?>' ;
 
 	// Create the main "Connector" node.
 	echo '<Connector command="' . $command . '" resourceType="' . $resourceType . '">' ;
-	
+
 	// Add the current folder node.
 	echo '<CurrentFolder path="' . ConvertToXmlAttribute( $currentFolder ) . '" url="' . ConvertToXmlAttribute( GetUrlFromPath( $resourceType, $currentFolder ) ) . '" />' ;
 }
@@ -60,12 +60,12 @@ function CreateXmlFooter()
 function SendError( $number, $text )
 {
 	SetXmlHeaders() ;
-	
+
 	// Create the XML document header
 	echo '<?xml version="1.0" encoding="utf-8" ?>' ;
-	
+
 	echo '<Connector><Error number="' . $number . '" text="' . htmlspecialchars( $text ) . '" /></Connector>' ;
-	
+
 	exit ;
 }
 ?>

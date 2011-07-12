@@ -67,7 +67,7 @@ $SELECTED_STYLE = 'style="text-decoration:overline underline;"';
  * 				 B = 1 - A * Cmin
  * 				 F(count) = size = A * count + 1 - A * Cmin
  * 				 => size = 1 + (count  - Cmin) * A
- * 
+ *
  * @param		array	selected tag, max tag displayed, number of sizes available,
  * 						class prefix for css class, style for selected tag
  */

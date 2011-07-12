@@ -49,7 +49,7 @@ class ProjectImportPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("projectimport")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/projectimport/index.php' . $param ));				
+						  array ('/plugins/projectimport/index.php' . $param ));
 			}
 		} else */ if ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -69,7 +69,7 @@ class ProjectImportPlugin extends Plugin {
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
-			}	
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} /*elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
@@ -153,13 +153,13 @@ class ProjectImportPlugin extends Plugin {
 				echo util_make_link ("/plugins/projectimport/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('View the ProjectImport Administration')).'<br />';
 			}
-		}												    
+		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
 		}
 		*/
 	}
-	
+
 	/**
 	 * Displays the link in the Project Maintenance part of the Site Admin ('site_admin_project_maintenance_hook' plugin_hook_by_reference() -style hook)
 	 * @param array $params for concatenating return value in ['results']
@@ -184,7 +184,7 @@ class ProjectImportPlugin extends Plugin {
 		$params['result'] = $html;
 	}
 
-	
+
 }
 
 // Local Variables:

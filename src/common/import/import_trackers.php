@@ -66,19 +66,19 @@ function createFieldElements($aef, $vocabulary){
 function createFields($at, $data){
 	global $NOT_EXTRA_FIELDS;
 //new dBug($data);
-	//TODO:Create ExtraFields	
+	//TODO:Create ExtraFields
 	//include $GLOBALS['gfcommon'].'import/import_arrays.php';
 	$artifactToCheck = $data["artifacts"][0];
 	foreach($artifactToCheck as $fieldName => $fieldValue){
 		if (!in_array($fieldName, $NOT_EXTRA_FIELDS)){
 			$type = findType($fieldName, $fieldValue, $data["vocabulary"]);
 			$aef = new ArtifactExtraField($at);
-			
+
 			$defaultExtraFieldsSettings = array(0,0,0);
 			$defaultTextFieldsSettings = array(40,100,0);
-			
+
 			if($type==ARTIFACT_EXTRAFIELDTYPE_TEXT){
-				$extraFieldSettings = $defaultTextFieldsSettings;				
+				$extraFieldSettings = $defaultTextFieldsSettings;
 			}
 			else{
 				$extraFieldSettings = $defaultExtraFieldsSettings;
@@ -114,14 +114,14 @@ function createTracker($tracker, $group, $data){
 		return false;
 	}
 	//include $GLOBALS['gfcommon'].'import/import_arrays.php';
-	
+
 	$base_tracker_association = array( 'bugs' => TRACKER_BUGS, 'support' => TRACKER_SUPPORT, 'patches' => TRACKER_PATCHES, 'features' => TRACKER_FEATURES );
 	if(array_key_exists($tracker, $base_tracker_association)){
 		$valueType = $base_tracker_association[$tracker];
 	} else {
 		$valueType = 0;
 	}
-	
+
 	$is_public = TRACKER_IS_PUBLIC;
 	$allow_anon = TRACKER_ALLOW_ANON;
 	$email_all = '';
@@ -130,7 +130,7 @@ function createTracker($tracker, $group, $data){
 	$use_resolution = 0;
 	$submit_instructions = 0;
 	$use_resolution = 0;
-	
+
 	if (!$at->create($data["label"], $data["label"], $is_public, $allow_anon, $email_all, $email_address, $due_period, $use_resolution, $submit_instructions, $use_resolution, $valueType)) {
 		db_rollback();
 		return false;
@@ -147,7 +147,7 @@ function createTracker($tracker, $group, $data){
  * @param Group A Group object
  */
 function deleteTrackers($group){
-	$res = db_query_params ('SELECT group_artifact_id FROM artifact_group_list 
+	$res = db_query_params ('SELECT group_artifact_id FROM artifact_group_list
 			WHERE group_id=$1 AND datatype > 0',
 					array ($group->getID()));
 	while($row=db_fetch_array($res)){
@@ -155,7 +155,7 @@ function deleteTrackers($group){
 		$at->delete(true,true);
 		//print $at->getID();
 	}
-	
+
 }
 
 /**
@@ -206,33 +206,33 @@ function addHistory($artifact, $jsonArtifact){
 
 function addFiles($artifact, $jsonArtifact){
 	foreach($jsonArtifact['attachments'] as $a){
-		
+
 		$path = '/tmp/'.$a['url'];
 		if (is_file($path)){
 			$af = new ArtifactFile($artifact);
 			$fn = $a['filename'];
 			//$bin_data = 0;//load bin data from $a['url']?
-			
-			$bin_data = file_get_contents($path); 
-			
+
+			$bin_data = file_get_contents($path);
+
 			$fs = filesize($path);
-			
-			
+
+
 			$finfo = new finfo(FILEINFO_MIME, "/usr/share/misc/magic"); // Retourne le type mime
 			if (!$finfo) {
 	   			echo "error opening fileinfo";
 	    		exit();
 			}
-			
+
 			$ftype = $finfo->file($path);
 			$time = strtotime($a['date']);
 			$uid =&user_get_object_by_name($a['by'])->getID();
 			$importData = array('user' => $uid, 'time' => $time);
-			
+
 			//we have no descriptions for files => None
 			$af->create($fn,$ftype,$fs,$bin_data,'None',$importData);
-		}		
-	}	
+		}
+	}
 }
 
 
@@ -245,7 +245,7 @@ function addFiles($artifact, $jsonArtifact){
  */
 function createArtifacts($at, $data, $hashrn, $hashlogin) {
 	global $NOT_EXTRA_FIELDS;
-	
+
 	$name_id = array();
 	//include $GLOBALS['gfcommon'].'import/import_arrays.php';
 	$extra_fields_ids = $at->getExtraFields();
@@ -298,21 +298,21 @@ function createArtifacts($at, $data, $hashrn, $hashlogin) {
 			$assigned_to = 100;
 		} else {
 			$m = $hashrn[$artifact['assigned_to']];
-			$assigned_to =&user_get_object_by_mail($m)->getID(); 
+			$assigned_to =&user_get_object_by_mail($m)->getID();
 //new dBug(array($m,$assigned_to));
 		}
-		
+
 		$arti->create($artifact['summary'],$artifact['description'],$assigned_to,substr($artifact['priority'],0,1),$extra_fields_array,array('user' => $uid, 'time' => $timestamp));
-		//TODO:pass only relevant JSON info		
+		//TODO:pass only relevant JSON info
 		addComments($arti, $artifact);
 		addHistory($arti, $artifact);
 		addFiles($arti, $artifact);
 
 		if(array_key_exists('closed_at', $artifact)){
-			
+
 			$timestamp_closed = strtotime($artifact['closed_at']);
 
-			$arti->setStatus(2, $timestamp_closed);			
+			$arti->setStatus(2, $timestamp_closed);
 		}
 	}
 }
@@ -338,10 +338,10 @@ function tracker_fill($trackers, $group_id, $users){
 
 	//existing tracker deletion
 	deleteTrackers($group);
-	
+
 	//Tracker creation
-	foreach ($trackers as $data){	
-		
+	foreach ($trackers as $data){
+
 
 		$at = createTracker($data['type'], $group, $data);
 		createArtifacts($at, $data['artifacts'], $hashrn, $hashlogin);

@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -28,22 +28,22 @@ class CpoldPlugin extends SCMPlugin {
 		$this->text = 'CPOLD';
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_cpold_do_nothing' ;
-		
+
 		require $gfconfig.'plugins/scmcpold/config.php' ;
-		
+
 		$this->default_cpold_server = $default_cpold_server ;
 		if (isset ($cpold_root)) {
 			$this->cpold_root = $cpold_root;
 		} else {
 			$this->cpold_root = $GLOBALS['sys_chroot'].'/scmrepos/cpold' ;
 		}
-		
+
 		$this->register () ;
 	}
-	
+
 	function CallHook ($hookname, &$params) {
 		global $HTML;
-		
+
 		switch ($hookname) {
 		case 'scm_cpold_do_nothing':
 			// Do nothing
@@ -98,7 +98,7 @@ class CpoldPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-				
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
@@ -124,7 +124,7 @@ class CpoldPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		$group_name = $project->getUnixName() ;
 
 		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';

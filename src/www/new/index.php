@@ -49,15 +49,15 @@ $res_new = db_query_params ('SELECT groups.group_name,
 	frs_release.name AS release_version,
 	frs_release.release_date,
 	frs_release.released_by,
-	frs_package.name AS module_name, 
-	frs_dlstats_grouptotal_vw.downloads 
-	FROM groups,users,frs_package,frs_release,frs_dlstats_grouptotal_vw 
+	frs_package.name AS module_name,
+	frs_dlstats_grouptotal_vw.downloads
+	FROM groups,users,frs_package,frs_release,frs_dlstats_grouptotal_vw
 	WHERE ( frs_release.release_date > $1
-	AND frs_release.package_id = frs_package.package_id 
-	AND frs_package.group_id = groups.group_id 
-	AND frs_release.released_by = users.user_id 
-	AND frs_package.group_id = frs_dlstats_grouptotal_vw.group_id 
-	AND frs_release.status_id=1 
+	AND frs_release.package_id = frs_package.package_id
+	AND frs_package.group_id = groups.group_id
+	AND frs_release.released_by = users.user_id
+	AND frs_package.group_id = frs_dlstats_grouptotal_vw.group_id
+	AND frs_release.status_id=1
 	AND frs_package.is_public=1 )
 	ORDER BY frs_release.release_date DESC',
 			    array($start_time),

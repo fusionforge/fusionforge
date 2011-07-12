@@ -21,7 +21,7 @@ if ( $WEEK_START == 1 ) {
 }
 
 $wkend = $wkstart + ( 3600 * 24 * 6 );
- 
+
 $startdate = date ( "Ymd", $wkstart );
 $enddate = date ( "Ymd", $wkend );
 
@@ -43,7 +43,7 @@ if ( ! empty ( $auto_refresh ) && $auto_refresh == "Y" &&
   ! empty ( $auto_refresh_time ) ) {
   $refresh = $auto_refresh_time * 60; // convert to seconds
   $HeadX = "<meta http-equiv=\"refresh\" content=\"$refresh; url=week.php?$u_url" .
-    "date=$startdate$caturl" . 
+    "date=$startdate$caturl" .
     ( ! empty ( $friendly ) ? "&amp;friendly=1" : "") . "\" />\n";
 }
 $INC = array('js/popups.php');
@@ -77,14 +77,14 @@ if ( $GLOBALS["DISPLAY_WEEKNUMBER"] == "Y" ) {
     translate("Week") . " " . week_number ( $wkstart ) . ")</span>";
 }
 ?>
-<a title="<?php etranslate("Previous")?>" 
-class="prev" href="week.php?<?php echo $u_url; ?>date=<?php echo 
-  date("Ymd", $prev ) . $caturl;?>"><img src="leftarrow.gif" 
+<a title="<?php etranslate("Previous")?>"
+class="prev" href="week.php?<?php echo $u_url; ?>date=<?php echo
+  date("Ymd", $prev ) . $caturl;?>"><img src="leftarrow.gif"
   alt="<?php etranslate("Previous")?>" /></a>
 
-<a title="<?php etranslate("Next")?>" class="next" 
-href="week.php?<?php echo $u_url;?>date=<?php echo 
-  date ("Ymd", $next ) . $caturl;?>"><img src="rightarrow.gif" 
+<a title="<?php etranslate("Next")?>" class="next"
+href="week.php?<?php echo $u_url;?>date=<?php echo
+  date ("Ymd", $next ) . $caturl;?>"><img src="rightarrow.gif"
   alt="<?php etranslate("Next")?>" /></a>
 <span class="user"><?php
   if ( $single_user == "N" ) {
@@ -98,10 +98,10 @@ href="week.php?<?php echo $u_url;?>date=<?php echo
   }
 ?></span>
 <?php
-  if ( $categories_enabled == "Y" && (!$user || ($user == $login || 
+  if ( $categories_enabled == "Y" && (!$user || ($user == $login ||
     $is_assistant ))) {
     echo "<br /><br />\n";
-    print_category_menu('week', sprintf ( "%04d%02d%02d",$thisyear, 
+    print_category_menu('week', sprintf ( "%04d%02d%02d",$thisyear,
       $thismonth, $thisday ), $cat_id );
   }
 ?></div>
@@ -262,7 +262,7 @@ for ( $d = $start_ind; $d < $end_ind; $d++ ) {
         // this will move entries apart that appear in one field,
         // yet start on different hours
         for ( $u = $diff_start_time ; $u > 0 ; $u-- ) {
-          $hour_arr[$last_row] .= "<br />\n"; 
+          $hour_arr[$last_row] .= "<br />\n";
         }
         $hour_arr[$last_row] .= $hour_arr[$i];
         $hour_arr[$i] = "";
@@ -366,7 +366,7 @@ for ( $i = $first_slot; $i <= $last_slot; $i++ ) {
      }
      echo ">";
      if ( $can_add ) { //if user can add events...
-       echo html_for_add_icon (  date ( "Ymd", $days[$d] ), $time_h, $time_m, 
+       echo html_for_add_icon (  date ( "Ymd", $days[$d] ), $time_h, $time_m,
          $user ); //..then echo the add event icon
      }
      echo "&nbsp;</td>\n";
@@ -397,7 +397,7 @@ for ( $i = $first_slot; $i <= $last_slot; $i++ ) {
   }
   echo "</tr>\n";
 }
-?> 
+?>
 </table>
 <br />
 
@@ -405,12 +405,12 @@ for ( $i = $first_slot; $i <= $last_slot; $i++ ) {
 if ( ! empty ( $eventinfo ) ) {
   echo $eventinfo;
 }
-display_unapproved_events ( ( $is_assistant || 
+display_unapproved_events ( ( $is_assistant ||
   $is_nonuser_admin ? $user : $login ) );
 ?>
 
 <br />
-<a title="<?php etranslate("Generate printer-friendly version")?>" 
+<a title="<?php etranslate("Generate printer-friendly version")?>"
 class="printer" href="week.php?<?php
   echo $u_url;
   if ( $thisyear ) {

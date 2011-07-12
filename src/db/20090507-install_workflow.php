@@ -23,7 +23,7 @@ session_set_new($admin_id);
 
 			      $res = db_query_params ('SELECT group_id, artifact_group_list.group_artifact_id, element_id, artifact_extra_field_elements.extra_field_id
 		FROM artifact_extra_field_list, artifact_extra_field_elements, artifact_group_list
-		WHERE 
+		WHERE
 			artifact_extra_field_list.extra_field_id=artifact_extra_field_elements.extra_field_id
 		AND 	artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
 		AND	field_type=7',
@@ -35,7 +35,7 @@ while($row = db_fetch_array($res)) {
 	$efarr =& $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
 	$keys=array_keys($efarr);
 	$field_id = $keys[0];
-	    	
+
 	$atw = new ArtifactWorkflow($ath, $field_id);
 	$atw->addNode($row['element_id']);
 	$atw->_addEvent('100', $row['element_id']);

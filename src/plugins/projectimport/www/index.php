@@ -43,13 +43,13 @@ require_once $gfplugins.'projectimport/common/UploadedFiles.class.php';
 //include_once('arc/ARC2.php');
 /**
  * Manages the display of the page : HTML + forms
- * 
+ *
  * @author Olivier Berger
  *
  */
 class ProjectImportPage extends FileManagerPage {
 
-	
+
 	protected $importer;
 
 	// will contain the list of spaces to be imported
@@ -60,9 +60,9 @@ class ProjectImportPage extends FileManagerPage {
 
 	// will contain roles of users added to the project
 	protected $posted_new_member_roles;
-	
+
 	protected $form_header_already_displayed;
-	
+
 
 	function ProjectImportPage($HTML) {
 		global $group_id;
@@ -72,7 +72,7 @@ class ProjectImportPage extends FileManagerPage {
 		$this->posted_new_member_roles = array();
 		$this->posted_spaces_imported = array();
 		$storage = new ProjectFilesDirectory($HTML, $group_id);
-		
+
 		parent::FileManagerPage($HTML, $storage);
 	}
 	/**
@@ -82,9 +82,9 @@ class ProjectImportPage extends FileManagerPage {
 		global $group_id, $feedback;
 
 		$group_id = getIntFromRequest('group_id');
-		
+
 		$filechosen = $this->initialize_chosenfile_from_submitted();
-		
+
 		// if a file was chose among the existing ones, try to import its JSON contents
 		if($filechosen) {
 			//print_r($filechosen);
@@ -145,45 +145,45 @@ class ProjectImportPage extends FileManagerPage {
 			//	echo '$posted_spaces_imported : ';
 			//	print_r($posted_spaces_imported);
 			//	echo '<br />';
-			
+
 		}
 		if ((! $this->posted_selecteddumpfile) && (! $this->posted_uploadedfile)) {
 			$this->feedback(_('Please select an existing file to process, or upload a new one'));
 		}
 	}
-	
+
 	/**
 	 * Display initial contents of the page
 	 * @param string $message
 	 */
 	function display_headers($message) {
 		global $group_id, $feedback;
-		
+
 		$params= array();
 		$params['title']=_('Project importer');
 		$params['toptab']='projectimport';
 		$params['group']=$group_id;
 
 		site_project_header($params);
-		
+
 		$this->message .= $message;
 	}
-	
-	function display_users($imported_users) 
+
+	function display_users($imported_users)
 	{
 		$html = '';
-		
+
 		$html .= $this->html_generator->boxTop(_("Users found in imported file"));
-		
+
 		foreach($imported_users as $user => $userres) {
 			$html .= $this->importer->display_user($user);
 		}
-		
+
 		$html .= $this->html_generator->boxBottom();
-		
+
 		return $html;
 	}
-	
+
 	/**
 	 * Tries to match imported users to forge users, and display mapping form bits if needed
 	 * @param array of ARC2 resources $imported_users
@@ -193,24 +193,24 @@ class ProjectImportPage extends FileManagerPage {
 	function match_users($imported_users, $apply = FALSE)
 	{
 		global $group_id, $feedback, $message;
-		
+
 		$html = '';
 		$html_tbody = '';
-					
+
 		$needs_to_warn = FALSE;
-		
+
 		// if mapping has been provided for all imported users
 		$mapping_all_users_provided = TRUE;
-		
+
 		// if all mapped users are already in the project
 		$all_mapped_users_in_project = TRUE;
-		
+
 		// if all new project members roles posted by user
 		$all_new_project_members_roles_set = TRUE;
-		
+
 		// array of existing forge users and the imported users that have been mapped to it
 		$new_member_map_users = array();
-		
+
 		/*
 		$role_names = array();
 		$group_object = group_get_object($group_id);
@@ -220,7 +220,7 @@ class ProjectImportPage extends FileManagerPage {
 			$role_names[$name] = & $role;
 		}
 		*/
-		
+
 		// Load users members of the project (may be needed later for display of user mapping selection widgets)
 		$existing_users = array();
 		$active_users = user_get_active_users();
@@ -237,12 +237,12 @@ class ProjectImportPage extends FileManagerPage {
 				}
 				/*
 				 else {
-					print_r('dunno...<br />');				
+					print_r('dunno...<br />');
 				}*/
 			}
 			/*
 			else {
-				print_r('not member of project...<br />');	
+				print_r('not member of project...<br />');
 			}
 			*/
 			$existing_users[] = array( 'name' => $username,
@@ -251,10 +251,10 @@ class ProjectImportPage extends FileManagerPage {
 
 		// displays all imported users, with the found matching existing forge user, if any
 		foreach($imported_users as $user => $userres) {
-			
+
 			$imported_username = $this->importer->get_user_name($user);
 			$imported_email = $this->importer->get_user_email($user);
-			
+
 			$already_mapped = FALSE;
 			// check if the user already chose to map it
 			if (array_key_exists($imported_username, $this->posted_user_mapping)) {
@@ -265,14 +265,14 @@ class ProjectImportPage extends FileManagerPage {
 				// try to find user with same login
 				$username = $imported_username;
 			}
-			
+
 			$automatically_matched = FALSE;
-			
+
 			$user_object = user_get_object_by_name($username);
 			// if the user hasn't mapped it already, try some automatic mapping
 			if ( ! $already_mapped ) {
 				$mapping_all_users_provided = FALSE;
-				
+
 				// if we have found an existing user with the same login, try to match it automatically
 				if ($user_object) {
 					$automatically_matched = $username;
@@ -296,21 +296,21 @@ class ProjectImportPage extends FileManagerPage {
 					}
 				}
 			}
-			
+
 			if (! $user_object) {
 				$this->feedback(sprintf(_('Failed to find existing user matching imported user "%s"'), $username));
 				$needs_to_warn = TRUE;
 			}
-			
+
 			// now construct mapping table to be displayed later
 			$html_tbody .= '<tr>';
 			$html_tbody .= '<td style="white-space: nowrap;">'. $imported_username .'</td>';
 			$html_tbody .= '<td style="white-space: nowrap;">'. $imported_email .'</td>';
 			$html_tbody .= '<td>'. $this->importer->get_user_role($user) . '</td>';
-			
+
 			// if not all mapping of users has been provided, then must display selection widgets
 			if (! $mapping_all_users_provided ) {
-				
+
 				$html_tbody .= '<td><select name="map_'.$imported_username.'">';
 
 				if ($user_object) {
@@ -355,7 +355,7 @@ class ProjectImportPage extends FileManagerPage {
 					}
 					$new_member_map_users[$already_mapped][] = $imported_username;
 					$all_mapped_users_in_project = FALSE;
-					
+
 					if ( ! array_key_exists($already_mapped, $this->posted_new_member_roles) ) {
 						$all_new_project_members_roles_set = FALSE;
 					}
@@ -374,9 +374,9 @@ class ProjectImportPage extends FileManagerPage {
 
 			// If we have to provide the user with some dialog about mapping
 			if (! $mapping_all_users_provided) {
-				
+
 				$html .= $this->display_users($imported_users);
-				
+
 				if ($needs_to_warn) {
 					$html .= '<p>'._('Failed to find existing users matching some imported users.').'<br />'.
 					_('If you wish to map their data to existing users, choose them in the form bellow, and re-submit it:'). '</p>';
@@ -385,10 +385,10 @@ class ProjectImportPage extends FileManagerPage {
 					$html .= '<p>'._('You may change some mappings and re-submit.');
 				}
 			}
-			
+
 			// display users mapping table
 			$html .= $this->html_generator->boxTop(_("Matching imported users to existing forge users"));
-				
+
 			$html .= '<table width="100%"><thead><tr>';
 			$html .= '<th>'._('Imported user logname').'</th>';
 			$html .= '<th>'._('Imported user email').'</th>';
@@ -400,34 +400,34 @@ class ProjectImportPage extends FileManagerPage {
 			}
 			$html .= '</tr></thead><tbody>';
 			$html .= '<input type="hidden" name="submit_mappings" value="y" />';
-				
+
 			$html .= $html_tbody;
 
 			$html .= '</tbody></table>';
 			$html .= $this->html_generator->boxBottom();
-			
-			
+
+
 			if ($mapping_all_users_provided) {
 				// the mapping must be applied as all users mapping has been posted
-				
+
 				//if ($apply) {
 				$can_proceed = TRUE;
-				
+
 				// now, need to check if new (mapped to) users need to be added to (roles of) the project
 				if ( ! $all_mapped_users_in_project ) {
-					
+
 					// if the new project members haven't been posted by the user display box
-					if ( ! $all_new_project_members_roles_set ) { 
-					
+					if ( ! $all_new_project_members_roles_set ) {
+
 						$html .= $this->html_generator->boxTop(_("Matching new project members roles"));
-							
+
 						$html .= '<table width="100%"><thead><tr>';
 						$html .= '<th>'._('New project member').'</th>';
 						$html .= '<th>'._('Imported users mapped to it').'</th>';
 						$html .= '<th>'._('New role').'</th>';
-							
+
 						$html .= '</tr></thead><tbody>';
-							
+
 						foreach($new_member_map_users as $new_member => $imported_users_mapped) {
 							$html .= '<tr>';
 							$html .= '<td>'. $new_member . '</td>';
@@ -437,7 +437,7 @@ class ProjectImportPage extends FileManagerPage {
 							$html .= '<td>'. role_box($group_id, 'role_'.$new_member) . '</td>';
 							$html .= '</tr>';
 						}
-							
+
 						$html .= '<input type="hidden" name="submit_new_roles" value="y" />';
 
 						$html .= '</tbody></table>';
@@ -448,35 +448,35 @@ class ProjectImportPage extends FileManagerPage {
 				// Last check if we can proceed to the user's import
 				$users = array();
 				foreach ($imported_users as $user => $userres) {
-					
+
 					//print_r('Check for : '. $user. '<br />');
-					
+
 					$imported_username = $this->importer->get_user_name($user);
 					$mapped_to_username = $this->posted_user_mapping[$imported_username];
 					$user_object = user_get_object_by_name($mapped_to_username);
-					
+
 					if ($user_object) {
 						if ( ! $user_object->isMember($group_id) ) {
 							// no need to add it, already in the group
 							// $this->message .= sprintf(_('Imported user "%s", mapped as "%s" which is already in the project : no need to add it.'), $imported_username, $mapped_to_username);
-						
+
 							// need to add it to the group
 							if ( array_key_exists($mapped_to_username, $this->posted_new_member_roles) ) {
 								$role = $this->posted_new_member_roles[$mapped_to_username];
 								$rolename = $this->importer->get_user_role($user);
-								
+
 								$users[$mapped_to_username] = array( 'role' => $role );
-								
+
 								if ($this->message) {
 									$this->message .= '<br />';
 								}
-								$this->message .= sprintf(_('Imported user "%s" (role "%s"), mapped as "%s" which is not yet in the project : need to add it as role "%s".'), 
+								$this->message .= sprintf(_('Imported user "%s" (role "%s"), mapped as "%s" which is not yet in the project : need to add it as role "%s".'),
 												$imported_username, $rolename, $mapped_to_username, $role);
 							}
 							else {
 								$can_proceed = FALSE;
 							}
-							
+
 						}
 					}
 					else {
@@ -485,12 +485,12 @@ class ProjectImportPage extends FileManagerPage {
 						$can_proceed = FALSE;
 					}
 				} // foreach
-				
+
 				if($can_proceed) {
 					//print_r('We can proceed !');
 					$check=TRUE;
 					if($apply) $check = FALSE;
-					
+
 					// For security, for now : TODO to be removed later
 					//$check = TRUE;
 					user_fill($users, $group_id, $check);
@@ -502,23 +502,23 @@ class ProjectImportPage extends FileManagerPage {
 				$html .= "All (mapped) imported users added to the group.";
 				// }
 			}
-			
+
 		}
-		
+
 		return $html;
 
 	}
-	
+
 	/**
 	 * Does the main work
 	 * @return html string
 	 */
 	function do_work() {
 		global $group_id, $feedback;
-		
+
 		$html = '';
-		
-		// If the posted JSON file indeed contains a project dump, an importer was created, 
+
+		// If the posted JSON file indeed contains a project dump, an importer was created,
 		// and if it has data we can work
 		if($this->importer) {
 			// If it indeed has valid data
@@ -535,13 +535,13 @@ class ProjectImportPage extends FileManagerPage {
 				if (! $this->form_header_already_displayed) {
 					$this->form_header_already_displayed = true;
 					$html .= '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
-				}		
-				
-				// Handle missing users, taking into account the user mapping form elements 
+				}
+
+				// Handle missing users, taking into account the user mapping form elements
 				// that may have been provided
 				$apply = TRUE;
 				$html .= $this->match_users($imported_users, $apply);
-				
+
 				// Then handle project(s)
 
 				if(count($projects)) {
@@ -557,7 +557,7 @@ class ProjectImportPage extends FileManagerPage {
 
 					// Display project attributes
 					foreach($projects as $project) {
-						
+
 						// Display project's general description
 						$html .= '<table id="project-summary-and-devs" class="my-layout-table" summary="">
 	                               <tr>
@@ -570,8 +570,8 @@ class ProjectImportPage extends FileManagerPage {
 
 						$spaces = $project->getSpaces();
 
-						// if no spaces posted to be imported, display checkboxes to prompt user 
-						// for spaces to be imported for next POST 
+						// if no spaces posted to be imported, display checkboxes to prompt user
+						// for spaces to be imported for next POST
 						if( ! count($this->posted_spaces_imported) ) {
 
 							// spaces header first
@@ -635,23 +635,23 @@ class ProjectImportPage extends FileManagerPage {
 		}
 		return $html;
 	}
-	
+
 	/**
 	 * Display the page
 	 */
 	function display_main() {
 		global $feedback, $group_id;
-		
+
 		// Do the work, first !
 		$html = $this->do_work();
-		
+
 		if($this->message) {
 			echo $this->message . '<br />';
 		}
 		html_feedback_top($feedback);
-		
+
 		echo $html;
-		
+
 		// If invoked initially (not on callback) or if more details needed
 		// display the last part of the form for JSON file upload
 		if (! $this->form_header_already_displayed) {
@@ -676,11 +676,11 @@ class ProjectImportPage extends FileManagerPage {
 				$preselected = $this->posted_uploadedfile;
 			}
 		}
-		
+
 		$selectiondialog = $this->storage->displayFileSelectionForm($preselected);
-		
+
 		echo $selectiondialog;
-		
+
 		if($selectiondialog) { // there are some selectable files already
 			if ($preselected) {
 				$legend = _('Confirm selected file or upload a new one');
@@ -691,22 +691,22 @@ class ProjectImportPage extends FileManagerPage {
 		} else { // there are yet no files
 			$legend = _('Please upload a file');
 		}
-        
+
 		// finally, display the file upload form
 		echo '<fieldset><legend>'. $legend .'</legend>
 		       <p><center>
                           <input type="file" id="uploaded_file" name="uploaded_file" tabindex="2" size="30" />
                   </center></p>
                </fieldset>';
-        
+
 		echo '<input type="hidden" name="group_id" value="' . $group_id . '" />';
 		echo '<div style="text-align:center;">
                       <input type="submit" name="submit" value="Submit" />
                     </div>';
 		echo '</form>';
-		
+
 		site_project_footer(array());
-		
+
 	}
 }
 
@@ -723,23 +723,23 @@ if (session_loggedin()) {
 	$this_page = new ProjectImportPage($HTML);
 
 	//print_r($_POST);
-	
+
 	$message = '';
-	
+
 	// when called back by post form we can initialize some elements provided by the user
 	if (getStringFromRequest('submit')) {
-		
+
 		$this_page->initialize_from_submitted_data();
-			
+
 	}
 	else {
 		$message .= "You can import a project from a JSON RDF document compatible with ForgePlucker's dump format.<br />";
 	}
 
 	$this_page->display_headers($message);
-	
+
 	$this_page->display_main();
-	
+
 } else {
 
 	exit_not_logged_in();

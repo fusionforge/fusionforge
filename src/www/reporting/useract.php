@@ -63,7 +63,7 @@ echo '</p>';
 for ($i=0; $i<count($abc_array); $i++) {
 	if ($sw == $abc_array[$i]) {
 		echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
-	} else { 
+	} else {
 		echo '<a href="useract.php?sw='.$abc_array[$i].'">'.$abc_array[$i].'</a>&nbsp;';
 	}
 }

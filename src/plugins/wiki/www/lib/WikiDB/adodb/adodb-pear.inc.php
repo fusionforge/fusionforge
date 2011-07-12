@@ -1,12 +1,12 @@
 <?php
-/** 
+/**
  * @version V4.22 15 Apr 2004 (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
- * Released under both BSD license and Lesser GPL library license. 
- * Whenever there is any discrepancy between the two licenses, 
- * the BSD license will take precedence. 
+ * Released under both BSD license and Lesser GPL library license.
+ * Whenever there is any discrepancy between the two licenses,
+ * the BSD license will take precedence.
  *
  * Set tabs to 4 for best viewing.
- * 
+ *
  * PEAR DB Emulation Layer for ADODB.
  *
  * The following code is modelled on PEAR DB code by Stig Bakken <ssb@fast.no>								   |
@@ -15,7 +15,7 @@
 
  /*
  We support:
- 
+
  DB_Common
  ---------
  	query - returns PEAR_Error on error
@@ -27,7 +27,7 @@
 	quote
 	nextID
 	disconnect
-	
+
  DB_Result
  ---------
  	numRows - returns -1 if not supported
@@ -36,7 +36,7 @@
 	fetchRows - does not support passing of fetchmode
 	free
  */
- 
+
 define('ADODB_PEAR',dirname(__FILE__));
 include_once "PEAR.php";
 include_once ADODB_PEAR."/adodb-errorpear.inc.php";
@@ -171,10 +171,10 @@ class DB
 
 		if (isset($dsninfo['socket'])) $dsninfo['hostspec'] .= ':'.$dsninfo['socket'];
 		else if (isset($dsninfo['port'])) $dsninfo['hostspec'] .= ':'.$dsninfo['port'];
-		
+
 		if($persist) $ok = $obj->PConnect($dsninfo['hostspec'], $dsninfo['username'],$dsninfo['password'],$dsninfo['database']);
 		else  $ok = $obj->Connect($dsninfo['hostspec'], $dsninfo['username'],$dsninfo['password'],$dsninfo['database']);
-		
+
 		if (!$ok) $obj = ADODB_PEAR_Error();
 		return $obj;
 	}

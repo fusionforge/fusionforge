@@ -88,10 +88,10 @@ class UNIX extends System {
 	/*
  	* Group management functions
  	*/
-	
+
 	/**
  	* sysCheckGroup() - Check for the existence of a group
- 	* 
+ 	*
  	* @param		int		The ID of the group to check
  	* @returns true on success/false on error
  	*
@@ -106,7 +106,7 @@ class UNIX extends System {
 
 	/**
  	* sysCreateGroup() - Create a group
- 	* 
+ 	*
  	* @param		int		The ID of the group to create
  	* @returns true on success/false on error
  	*

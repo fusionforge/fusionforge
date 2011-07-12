@@ -111,8 +111,8 @@ $s_printr = 'Array
 
     [4] => -42
     [5] => 1
-    [6] => 
-    [7] => 
+    [6] =>
+    [7] =>
     [8] => Array
         (
             [integer] => 1234567890
@@ -122,11 +122,11 @@ $s_printr = 'Array
             [] => 2.3456789012E+76
             [zero] => 0
             [one] => 1
-            [space] =>  
+            [space] =>
             [quote] => "
             [backslash] => \\
             [controls] => 
-	
+
             [slash] => / & /
             [alpha] => abcdefghijklmnopqrstuvwyz
             [ALPHA] => ABCDEFGHIJKLMNOPQRSTUVWYZ
@@ -135,8 +135,8 @@ $s_printr = 'Array
             [special] => `1~!@#$%^&*()_+-={\':[,]}|;.</>?
             [hex] => ģ䕧覫췯ꯍ
             [true] => 1
-            [false] => 
-            [null] => 
+            [false] =>
+            [null] =>
             [array] => Array
                 (
                 )
@@ -148,7 +148,7 @@ $s_printr = 'Array
             [address] => 50 St. James Street
             [url] => http://www.JSON.org/
             [comment] => // /* <!-- --
-            [# -- --> */] =>  
+            [# -- --> */] =>
             [ s p a c e d ] => Array
                 (
                     [0] => 1
@@ -213,8 +213,8 @@ $s_printre = 'Array
 
     [4] => -42
     [5] => 1
-    [6] => 
-    [7] => 
+    [6] =>
+    [7] =>
     [8] => Array
         (
             [integer] => 1234567890
@@ -224,11 +224,11 @@ $s_printre = 'Array
             [] => 2.3456789012E+76
             [zero] => 0
             [one] => 1
-            [space] =>  
+            [space] =>
             [quote] => "
             [backslash] => \\
             [controls] => 
-	
+
             [slash] => / & /
             [alpha] => abcdefghijklmnopqrstuvwyz
             [ALPHA] => ABCDEFGHIJKLMNOPQRSTUVWYZ
@@ -237,7 +237,7 @@ $s_printre = 'Array
             [special] => `1~!@#$%^&*()_+-={\':[,]}|;.</>?
             [hex] => ģ䕧覫췯ꯍ
             [true] => 1
-            [false] => 
+            [false] =>
             [array] => Array
                 (
                 )
@@ -249,7 +249,7 @@ $s_printre = 'Array
             [address] => 50 St. James Street
             [url] => http://www.JSON.org/
             [comment] => // /* <!-- --
-            [# -- --> */] =>  
+            [# -- --> */] =>
             [ s p a c e d ] => Array
                 (
                     [0] => 1

@@ -66,12 +66,12 @@ class DataAccessObject {
             return true;
         }
     }
-    
+
     /**
     * Prepare ranking of items.
-    * 
+    *
     * @see  https://partners.xrce.xerox.com/plugins/docman/?group_id=120&action=show&id=95
-    * 
+    *
     * @param   int $id  The id of the item to rank. 0 if the item doesn't exist.
     * @param   int $parent_id   The id of the element used to group items
     * @param   mixed $rank    The rank asked for the items. Possible values are :
@@ -80,7 +80,7 @@ class DataAccessObject {
     *                       'end'       => to put item after each others
     *                       'up'        => to put item before previous sibling
     *                       'down'      => to put item after next sibling
-    *                       <int>       => to put item at a specific position. 
+    *                       <int>       => to put item at a specific position.
     *                   Please note that for a new item ($id = 0) you must not use
     *                   '--', 'up' or 'down' value
     * @param   string $primary_key the column name of the primary key. Default 'id'
@@ -92,7 +92,7 @@ class DataAccessObject {
     */
     function prepareRanking($id, $parent_id, $rank, $primary_key = 'id', $parent_key = 'parent_id', $rank_key = 'rank') {
         $newRank = null;
-        
+
         // First, check if there is already some items
         $sql = sprintf('SELECT NULL'.
                        ' FROM '. $this->table_name .

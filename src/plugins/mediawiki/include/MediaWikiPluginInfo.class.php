@@ -16,18 +16,18 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 require_once('common/plugin/PluginInfo.class.php');
 require_once('MediaWikiPluginDescriptor.class.php');
 
 class MediaWikiPluginInfo extends PluginInfo {
-    
+
     function MediaWikiPluginInfo(&$plugin) {
         $this->PluginInfo($plugin);
         $this->setPluginDescriptor(new MediaWikiPluginDescriptor());
     }
-    
+
 }
 ?>

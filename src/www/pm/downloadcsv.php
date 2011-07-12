@@ -44,10 +44,10 @@
 Record description for .csv file format
 
 project_task_id					This is the ID in gforge database
-external_task_id				The equivalent of project_task_id but determined by 
+external_task_id				The equivalent of project_task_id but determined by
 									external application, such as MS Project
 parent_id						The project_task_id of the parent task, if any
-external_parent_id				The equivalent of parent project_task_id but 
+external_parent_id				The equivalent of parent project_task_id but
 									determined by external application, such as MS Project
 title							Name                ********may contain , characters???
 duration						Days

@@ -25,7 +25,7 @@ require_once $gfwww.'include/my_utils.php';
 
 /**
 * Widget_MyMonitoredDocuments
-* 
+*
 * Documents that are actively monitored
 */
 class Widget_MyMonitoredDocuments extends Widget {

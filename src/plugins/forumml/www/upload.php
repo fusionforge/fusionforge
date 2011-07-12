@@ -46,7 +46,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 	$list = new MailmanList($groupId,$list_id);
 	if (!isLogged() || ($list->isPublic()!=1 && !$current_user->isMember($groupId))) {
 		exit_error(_('error'),_('You are not allowed to access this page'));
-	}		
+	}
 	if ($list->getStatus() !=3) {
 		exit_error(_('error'),_('This list is not active'));
 	}

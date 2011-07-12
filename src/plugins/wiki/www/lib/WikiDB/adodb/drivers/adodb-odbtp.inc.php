@@ -233,12 +233,12 @@ class ADODB_odbtp extends ADOConnection{
 			@odbtp_set_attr(ODB_ATTR_UNICODESQL, TRUE, $this->_connectionID);
         return true;
 	}
-	
+
 	function _pconnect($HostOrInterface, $UserOrDSN='', $argPassword='', $argDatabase='')
 	{
   		return $this->_connect($HostOrInterface, $UserOrDSN, $argPassword, $argDatabase);
 	}
-	
+
 	function SelectDB($dbName)
 	{
 		if (!@odbtp_select_db($dbName, $this->_connectionID)) {
@@ -247,7 +247,7 @@ class ADODB_odbtp extends ADOConnection{
 		$this->databaseName = $dbName;
 		return true;
 	}
-	
+
 	function &MetaTables($ttype='',$showSchema=false,$mask=false)
 	{
 	global $ADODB_FETCH_MODE;
@@ -265,7 +265,7 @@ class ADODB_odbtp extends ADOConnection{
 		}
 		return $arr2;
 	}
-	
+
 	function &MetaColumns($table,$upper=true)
 	{
 	global $ADODB_FETCH_MODE;
@@ -280,7 +280,7 @@ class ADODB_odbtp extends ADOConnection{
 		$ADODB_FETCH_MODE = $savem;
 
 		if (!$rs) return false;
-		
+
 		while (!$rs->EOF) {
 			//print_r($rs->fields);
 			if (strtoupper($rs->fields[2]) == $table) {
@@ -299,7 +299,7 @@ class ADODB_odbtp extends ADOConnection{
 				break;
 			$rs->MoveNext();
 		}
-		$rs->Close(); 
+		$rs->Close();
 
 		return $retarr;
 	}
@@ -608,7 +608,7 @@ class ADORecordSet_odbtp extends ADORecordSet {
 		$this->_currentRow = $this->_numOfRows - 1;
 	  return true;
     }
-    
+
 	function NextRecordSet()
 	{
 		if (!@odbtp_next_result($this->_queryID)) return false;

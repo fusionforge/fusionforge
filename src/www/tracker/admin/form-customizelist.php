@@ -36,7 +36,7 @@ $browse_fields = explode(',',$ath->getBrowseList());
 <p>
 <?php echo _('Set order of the fields that will be displayed on the browse view of your tracker:') ?>
 </p>
-		
+
 <?php
 // Display regular fields.
 $fields = array (
@@ -71,7 +71,7 @@ foreach ($fields as $f => $name) {
 		 "\" size=\"3\" maxlength=\"3\" /> " .
 		 $name .
 		 "<br />\n";
-}	
+}
 
 $keys=array_keys($efarr);
 $rows=count($keys);

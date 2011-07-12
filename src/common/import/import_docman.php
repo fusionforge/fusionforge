@@ -7,20 +7,20 @@ require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/Document.class.php';
 
 class Docman {
-	
+
 	public $doc_group_ids = array();
-	
+
 	var $group;
-	
+
 	var $group_id;
-	
+
 	public $language_ids = array("Bulgarian" => 20, "Catalan" => 14, "Dutch" => 12, "English" => 1, "Esperanto" =>13, "French" =>7, "Greek" => 19, "German" =>6, "Hebrew" =>3,
-					"Indonesian" =>21, "Italian" => 8, "Japanese" =>2, "Korean" => 22, "Latin" => 25, "Norwegian" =>9, "Polish" =>15, "Portuguese" =>18, "Pt. Brazilian" =>16, "Russian" => 17, 
+					"Indonesian" =>21, "Italian" => 8, "Japanese" =>2, "Korean" => 22, "Latin" => 25, "Norwegian" =>9, "Polish" =>15, "Portuguese" =>18, "Pt. Brazilian" =>16, "Russian" => 17,
 					"Smpl.Chinese" =>23, "Spanish" =>4, "Swedish" =>10, "Thai" =>5, "Trad.Chinese" =>11);
-	
-	public $docman_states = array("active"=>1, "deleted"=>2, "pending"=>3, "hidden"=>4, "private"=>5);	
-	
-	
+
+	public $docman_states = array("active"=>1, "deleted"=>2, "pending"=>3, "hidden"=>4, "private"=>5);
+
+
     function __construct($docman, $group_id) {
         $this->docman = $docman;
         $this->group_id = $group_id;
@@ -40,7 +40,7 @@ class Docman {
     	}
     	return false;
     }
-    
+
     function addFile($params, $parent_dir_id, $status="active"){
     	//nothing for now
     	echo "Adding file:".$params["given_name"]." at directory:".$parent_dir_id;
@@ -48,10 +48,10 @@ class Docman {
     	$path = '/tmp/'.$params['url'];
 		if (is_file($path)){
     		$doc = new Document($this->group);
-			
+
     		$fn = $params["file_name"];
     		$ftitle = $params["given_name"];
-			$fdata = file_get_contents($path); 
+			$fdata = file_get_contents($path);
 			$fdocgrp = $parent_dir_id;
 			$flanguage = $this->language_ids[$params["language"]];
 			$fdesc = $params["description"];
@@ -61,17 +61,17 @@ class Docman {
 	    		exit();
 			}
 			$ftype = $finfo->file($path);
-			
-			$doc->create($fn,$ftype,$fdata,$fdocgrp,$ftitle,$flanguage,$fdesc);    
+
+			$doc->create($fn,$ftype,$fdata,$fdocgrp,$ftitle,$flanguage,$fdesc);
 
 			//now update state
 			$fstate_id = $this->docman_states[$status];
 			$doc->update($fn, $ftype, $fdata, $fdocgrp, $ftitle, $flanguage, $fdesc,$fstate_id);
 		}
     }
-    
-    
-    
+
+
+
     function addDirectory($dirName, $parent_dir_id){
     	if(!$parent_dir_id){
     		//root of the current type
@@ -87,7 +87,7 @@ class Docman {
     		} else {
     			//dir exists : return its id
     		}
-    		
+
     	} else {
     		echo $parent_dir.":".$dirName;
     		echo "<br />";
@@ -104,7 +104,7 @@ class Docman {
     	}
     	return $dirid;
     }
-    
+
     function getUncat(){
     	$gr = new DocumentGroupFactory($this->group);
 		$dgroups = $gr->getDocumentGroups();
@@ -115,7 +115,7 @@ class Docman {
 		}
 		return false;
     }
-    
+
     function fill_type($content, $status = "", $parent_dir_id = ""){
 //    	while (len($content) != 0){
 //    		$c = array_pop($content);
@@ -126,30 +126,30 @@ class Docman {
     		} else {
     			//$k is a directory
     			if($k!='Uncategorized Submissions'){ //Uncategorized subs is a basic category which should not be duplicated, we need to get its id to add docs to it though
-    				$dirid = $this->addDirectory($k, $parent_dir_id); 
+    				$dirid = $this->addDirectory($k, $parent_dir_id);
     			} else {
     				//get Uncategorized Submissions doc_group
     				$dirid = $this->getUncat();
     				if(!$dirid){
     					//error : no Uncategorized subs for this project for unknown reason
     					//create it
-    					$dirid = $this->addDirectory($k, $parent_dir_id); 
+    					$dirid = $this->addDirectory($k, $parent_dir_id);
     				}
     			}
-    			
+
     			$this->fill_type($v,$status,$dirid);
     		}
     	}
     }
-    
+
 	function docman_fill(){
 		$r1 = db_query_params ('DELETE FROM doc_data WHERE group_id=$1',
 					   array ($this->group_id)) ;
-		
+
 		$r2 = db_query_params ('DELETE FROM doc_groups WHERE group_id=$1',
 					   array ($this->group_id)) ;
 
-		
+
 		foreach($this->docman as $status => $content){
 			$this->fill_type($content, $status);
 		}

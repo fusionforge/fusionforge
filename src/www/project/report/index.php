@@ -178,7 +178,7 @@ foreach ($group->getUsers() as $member) {
 	echo '
 		</tr>';
 
-	// print out all the artifacts assigned to this person 
+	// print out all the artifacts assigned to this person
         $artifact_group=db_query_params("SELECT group_artifact_id, name
                                   FROM artifact_group_list
                                   WHERE group_id=$1

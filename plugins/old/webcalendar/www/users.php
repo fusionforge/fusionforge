@@ -29,7 +29,7 @@ $INC = array('js/users.php','js/visible.php');
 print_header($INC);
 
 //if ( ! $is_admin ) {
-//echo "<h2>" . translate("Error") . "</h2>\n" . 
+//echo "<h2>" . translate("Error") . "</h2>\n" .
 //  translate("You are not authorized") . ".\n";
 //  echo "</body>\n</html>";
 //  exit;
@@ -39,7 +39,7 @@ print_header($INC);
 
 <!-- TABS -->
 <div id="tabs">
-	<span class="tabfor" id="tab_users"><a href="#tabusers" onclick="return showTab('users')"><?php 
+	<span class="tabfor" id="tab_users"><a href="#tabusers" onclick="return showTab('users')"><?php
 		if ($is_admin) {
 			echo translate("Users");
 		} else {
@@ -48,7 +48,7 @@ print_header($INC);
 	?></a></span>
 	<?php if ($groups_enabled == "Y" && $is_admin) { ?>
 		<span class="tabbak" id="tab_groups"><a href="#tabgroups" onclick="return showTab('groups')"><?php etranslate("Groups")?></a></span>
-	<?php } 
+	<?php }
 	if ($nonuser_enabled == 'Y' && $is_admin) { ?>
 		<span class="tabbak" id="tab_nonusers"><a href="#tabnonusers" onclick="return showTab('nonusers')"><?php etranslate("NonUser Calendars")?></a></span>
 	<?php } ?>
@@ -62,8 +62,8 @@ print_header($INC);
 	<?php if ( $is_admin ) { ?>
 		<?php
 			if ( $admin_can_add_user )
-				echo "<a title=\"" . 
-					translate("Add New User") . "\" href=\"edit_user.php\" target=\"useriframe\" onclick=\"javascript:show('useriframe');\">" . 
+				echo "<a title=\"" .
+					translate("Add New User") . "\" href=\"edit_user.php\" target=\"useriframe\" onclick=\"javascript:show('useriframe');\">" .
 					translate("Add New User") . "</a><br />\n";
 		?>
 		<ul>
@@ -71,8 +71,8 @@ print_header($INC);
 				$userlist = user_get_users ();
 				for ( $i = 0; $i < count ( $userlist ); $i++ ) {
 					if ( $userlist[$i]['cal_login'] != '__public__' ) {
-						echo "<li><a title=\"" . 
-							$userlist[$i]['cal_fullname'] . "\" href=\"edit_user.php?user=" . 
+						echo "<li><a title=\"" .
+							$userlist[$i]['cal_fullname'] . "\" href=\"edit_user.php?user=" .
 							$userlist[$i]["cal_login"] . "\" target=\"useriframe\" onclick=\"javascript:show('useriframe');\">";
 						echo $userlist[$i]['cal_fullname'];
 						echo "</a>";
@@ -85,7 +85,7 @@ print_header($INC);
 		</ul>
 	*&nbsp;<?php etranslate("denotes administrative user")?><br />
 
-		<?php 
+		<?php
 			echo "<iframe " .
 				" name=\"useriframe\" id=\"useriframe\" style=\"width:90%;border-width:0px; height:280px;\"></iframe>";
 		?>
@@ -94,10 +94,10 @@ print_header($INC);
 <?php } ?>
 </div>
 
-<?php 
-	if ($groups_enabled == "Y" && $is_admin) { 
+<?php
+	if ($groups_enabled == "Y" && $is_admin) {
 		include_once $gfplugins.'webcalendar/www/groups.php';
-	} 
+	}
 	if ($nonuser_enabled == 'Y' && $is_admin) {
 		include_once $gfplugins.'webcalendar/www/nonusers.php';
 	}

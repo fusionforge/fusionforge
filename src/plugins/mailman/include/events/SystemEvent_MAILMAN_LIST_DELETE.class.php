@@ -26,12 +26,12 @@ require_once 'mailman/include/BackendMailmanList.class.php';
 *
 */
 class SystemEvent_MAILMAN_LIST_DELETE extends SystemEvent {
-    
+
     /**
-     * Verbalize the parameters so they are readable and much user friendly in 
+     * Verbalize the parameters so they are readable and much user friendly in
      * notifications
-     * 
-     * @param bool $with_link true if you want links to entities. The returned 
+     *
+     * @param bool $with_link true if you want links to entities. The returned
      * string will be html instead of plain/text
      *
      * @return string
@@ -41,8 +41,8 @@ class SystemEvent_MAILMAN_LIST_DELETE extends SystemEvent {
         $txt .= 'mailing list: #'. $this->getIdFromParam($this->parameters);
         return $txt;
     }
-    
-    /** 
+
+    /**
      * Process stored event
      */
     function process() {
@@ -57,10 +57,10 @@ class SystemEvent_MAILMAN_LIST_DELETE extends SystemEvent {
             $this->error("Could not delete mailing list $group_list_id");
             return false;
         }
-            
+
         // Need to add list aliases
         Backend::instance('Aliases')->setNeedUpdateMailAliases();
-            
+
         $this->done();
         return true;
     }

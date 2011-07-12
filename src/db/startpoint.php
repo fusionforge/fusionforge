@@ -22,7 +22,7 @@ if (count($argv) < 2) {
 		exit();
 	} else {
 		$date = check_version($version);
-		
+
 		if ($date != 0) {
 			set_version($version, $date);
 		}
@@ -118,6 +118,6 @@ function set_version($version, $date) {
 		return false;
 	}
 	echo "FusionForge Database Version: $version ($date)\n";
-	db_commit();	
+	db_commit();
 }
 ?>

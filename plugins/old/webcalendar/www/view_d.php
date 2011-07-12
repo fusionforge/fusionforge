@@ -44,7 +44,7 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
 }
 
 // If view_name not found, then the specified view id does not
-// belong to current user. 
+// belong to current user.
 if ( empty( $view_name ) ) {
   $error = translate ( "You are not authorized" );
 }
@@ -135,16 +135,16 @@ $thisdate = sprintf ( "%04d%02d%02d", $thisyear, $thismonth, $thisday );
 
 <div style="border-width:0px; width:99%;">
 <a title="<?php etranslate("Previous")?>" class="prev" href="view_d.php?id=
-<?php echo $id . "&amp;date=" . $prevdate?>"><img src="leftarrow.gif" 
+<?php echo $id . "&amp;date=" . $prevdate?>"><img src="leftarrow.gif"
   class="prevnext" alt="<?php etranslate("Previous")?>" /></a>
 
 <a title="<?php etranslate("Next")?>" class="next" href="view_d.php?id=
-<?php echo $id . "&amp;date=" . $nextdate?>"><img src="rightarrow.gif" 
+<?php echo $id . "&amp;date=" . $nextdate?>"><img src="rightarrow.gif"
   class="prevnext" alt="<?php etranslate("Next")?>" /></a>
 <div class="title">
-<span class="date"><?php 
+<span class="date"><?php
   printf ( "%s, %s %d, %d", weekday_name ( $wday ),
-    month_name ( $thismonth - 1 ), $thisday, $thisyear ); 
+    month_name ( $thismonth - 1 ), $thisday, $thisyear );
 ?></span><br />
 <span class="viewname"><?php echo $view_name; ?></span>
 </div></div>
@@ -165,7 +165,7 @@ daily_matrix($date,$participants);
 </form>
 
 <?php
-echo "<br /><a title=\"" . translate ( "Generate printer-friendly version" ) . 
+echo "<br /><a title=\"" . translate ( "Generate printer-friendly version" ) .
   "\" class=\"printer\" href=\"view_d.php?id=$id&amp;";
 echo ( empty ( $u_url ) ? '' : $u_url ) . "date=$nowYmd";
 echo ( empty ( $caturl ) ? '' : $caturl );

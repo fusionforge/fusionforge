@@ -22,14 +22,14 @@
  * Displays a selection box for roles in a group (TODO : provide more details on parameters roles)
  * @param unknown_type $group_id
  * @param unknown_type $name
- * @param unknown_type $selected 
+ * @param unknown_type $selected
  * @param unknown_type $local_only
  * @return string
  */
 function role_box ($group_id,$name,$selected='xzxzxz',$local_only=true) {
 	$group = group_get_object ($group_id) ;
 	$roles = $group->getRoles () ;
-	
+
 	if ($local_only) {
 		$roles2 = array () ;
 		foreach ($roles as $role) {
@@ -45,7 +45,7 @@ function role_box ($group_id,$name,$selected='xzxzxz',$local_only=true) {
 
 	$ids = array () ;
 	$names = array () ;
-	
+
 	foreach ($roles as $role) {
 		$ids[] = $role->getID ();
 
@@ -96,12 +96,12 @@ function global_role_box ($name,$selected='xzxzxz') {
 
 	$ids = array () ;
 	$names = array () ;
-	
+
 	sortRoleList ($roles, NULL, 'composite') ;
 
 	foreach ($roles as $role) {
 		$ids[] = $role->getID ();
-		
+
 		$names[] = $role->getName () ;
 	}
 

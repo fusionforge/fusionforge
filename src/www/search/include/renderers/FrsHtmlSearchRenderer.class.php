@@ -23,9 +23,9 @@
 
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 require_once $gfcommon.'search/FrsSearchQuery.class.php';
-			  
+
 class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
-	
+
 	/**
 	 * Constructor
 	 *
@@ -38,11 +38,11 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function FrsHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
-		
+
 		$searchQuery = new FrsSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember);
-		
+
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_FRS, $words, $isExact, $searchQuery, $groupId, 'frs');
-		
+
 		$this->tableHeaders = array(
 			'&nbsp;',
 			_('Release name'),
@@ -60,11 +60,11 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 		$dateFormat = _('Y-m-d H:i');
-		
+
 		$return = '';
 		$rowColor = 0;
 		$lastPackage = null;
-		
+
 		for($i = 0; $i < $rowsCount; $i++) {
 			//section changed
 			$currentPackage = db_result($result, $i, 'package_name');
@@ -82,16 +82,16 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * getSections - get the array of possible sections to search in
-	 * 
+	 *
   	 * @return array sections
-	 */		
+	 */
 	static function getSections($groupId) {
 		$userIsGroupMember = FrsHtmlSearchRenderer::isGroupMember($groupId);
-	
-		return FrsSearchQuery::getSections($groupId, $userIsGroupMember);	
+
+		return FrsSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Skills support functions.
- * 
+ *
  * Copyright 2002 (c) Silicon and Software Systems (S3)
  * http://fusionforge.org/
  *
@@ -31,7 +31,7 @@ function displayUserSkills($user_id, $allowEdit) {
 			$typesDescs[$i] = db_result($result, $i, 'type_name');
 		}
 	}
-	
+
 	$result= db_query_params("SELECT * FROM skills_data WHERE user_id=$1 ORDER BY finish DESC, start ASC, skills_data_id DESC",array($user_id));
 	$rows = db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -39,7 +39,7 @@ function displayUserSkills($user_id, $allowEdit) {
 		$feedback = 'No skills listed ';
 		echo '<tr><td>This user has not entered any skills.</td></tr>';
 	} else {
-		
+
 		echo '<tr class="tableheading">';				 /* headings for the columns */
 		if($allowEdit) {
 			echo '<td>'._('Edit').'</td>'.
@@ -57,13 +57,13 @@ function displayUserSkills($user_id, $allowEdit) {
 			$typeID = db_result($result, $i, 'type');
 			$start = db_result($result, $i, 'start');
 			$finish = db_result($result, $i, 'finish');
-			
+
 			$startY = substr($start, 0, 4);
 			$startM = substr($start, 4, 2);
-			
+
 			$finishY = substr($finish, 0, 4);
 			$finishM = substr($finish, 4, 2);
-			
+
 			if($startM > 0 && $startM < 13) {
 				$startStr = date ("M Y", mktime(0,0,0,$startM,1,$startY));
 			} else {
@@ -71,13 +71,13 @@ function displayUserSkills($user_id, $allowEdit) {
 			}
 			if (!(isset($finishtM))){
 				$finishtM=0;			}
-		
+
 			if($finishM > 0 && $finishtM < 13) {
 				$finishStr = date ("M Y", mktime(0,0,0,$finishM,1,$finishY));
 			} else {
 				$finishStr = $finishY;
 			}
-			
+
 			/* now print out the row, formatted nicely */
 			echo '<tr '. $HTML->boxGetAltRowStyle($i+1) . '>';
 			if($allowEdit) {
@@ -122,7 +122,7 @@ function handle_multi_edit($skill_ids = array()) {
 			$feedback .= _('User fetch FAILED');
 			echo '<h2>'._('No Such User').'<h2>';
 		}
-		
+
 		$yearArray = array();
 		for($years = date("Y"); $years >= 1980; $years--) {
 			array_push($yearArray,$years);
@@ -134,19 +134,19 @@ function handle_multi_edit($skill_ids = array()) {
 			array_push($monthArrayVals,($i<10?"0".$i:$i));
 			array_push($monthArray,date("M", mktime(0,0,0,$i,1,1980)));
 		}
-	   
-		
-		
+
+
+
 		for($i = 0; $i < $rows; $i++) {
 			$start = db_result($result, $i, 'start');
 			$finish = db_result($result, $i, 'finish');
-			
+
 			$startY = substr($start, 0, 4);
 			$startM = substr($start, 4, 2);
-			
+
 			$finishY = substr($finish, 0, 4);
 			$finishM = substr($finish, 4, 2);
-							   
+
 			echo '<table border="0">'.
 				'<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
 				'<td><h3>'.db_result($result, $i,'title').'</h3></td></tr>'.
@@ -166,7 +166,7 @@ function handle_multi_edit($skill_ids = array()) {
 					'</tr>'.
 				'</table>'.
 				'</td></tr>'.
-				
+
 				'<tr '.$HTML->boxGetAltRowStyle($i+1).'><td>'.
 				'<table border="0">'.
 					'<tr class="tableheading">'.
@@ -182,7 +182,7 @@ function handle_multi_edit($skill_ids = array()) {
 					'<tr>'.
 						'<td><textarea name="keywords[]" rows="3" cols="85">'.db_result($result, $i,'keywords').'</textarea></td>'.
 					'</tr>'.
-					
+
 				 '</table>';
 				 '</td></tr>';
 			echo '</table><br />';

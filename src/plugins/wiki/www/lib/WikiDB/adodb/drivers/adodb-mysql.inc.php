@@ -38,7 +38,7 @@ class ADODB_mysql extends ADOConnection {
 	var $nameQuote = '`';		/// string to use to quote identifiers and names
 
 	function ADODB_mysql()
-	{	
+	{
 	}
 
 	function ServerInfo()
@@ -73,50 +73,50 @@ class ADODB_mysql extends ADOConnection {
 	{
         // save old fetch mode
         global $ADODB_FETCH_MODE;
-      
+
         $save = $ADODB_FETCH_MODE;
         $ADODB_FETCH_MODE = ADODB_FETCH_NUM;
         if ($this->fetchMode !== FALSE) {
                $savem = $this->SetFetchMode(FALSE);
         }
-      
+
         // get index details
         $rs = $this->Execute(sprintf('SHOW INDEX FROM %s',$table));
-      
+
         // restore fetchmode
         if (isset($savem)) {
                 $this->SetFetchMode($savem);
         }
         $ADODB_FETCH_MODE = $save;
-      
+
         if (!is_object($rs)) {
                 return FALSE;
         }
-      
+
         $indexes = array ();
-      
+
         // parse index data into array
         while ($row = $rs->FetchRow()) {
                 if ($primary == FALSE AND $row[2] == 'PRIMARY') {
                         continue;
                 }
-              
+
                 if (!isset($indexes[$row[2]])) {
                         $indexes[$row[2]] = array(
                                 'unique' => ($row[1] == 0),
                                 'columns' => array()
                         );
                 }
-              
+
                 $indexes[$row[2]]['columns'][$row[3] - 1] = $row[4];
         }
-      
+
         // sort columns by order in the index
         foreach ( array_keys ($indexes) as $index )
         {
                 ksort ($indexes[$index]['columns']);
         }
-      
+
         return $indexes;
 	}
 
@@ -238,7 +238,7 @@ class ADODB_mysql extends ADOConnection {
 			case 'Q':
 			case 'q':
 				$s .= "'),Quarter($col)";
-		
+
 				if ($len > $i+1) $s .= ",DATE_FORMAT($col,'";
 				else $s .= ",('";
 				$concat = true;
@@ -246,7 +246,7 @@ class ADODB_mysql extends ADOConnection {
 			case 'M':
 				$s .= '%b';
 				break;
-		
+
 			case 'm':
 				$s .= '%m';
 				break;
@@ -254,30 +254,30 @@ class ADODB_mysql extends ADOConnection {
 			case 'd':
 				$s .= '%d';
 				break;
-	
+
 			case 'H':
 				$s .= '%H';
 				break;
-		
+
 			case 'h':
 				$s .= '%I';
 				break;
-		
+
 			case 'i':
 				$s .= '%i';
 				break;
-		
+
 			case 's':
 				$s .= '%s';
 				break;
-		
+
 			case 'a':
 			case 'A':
 				$s .= '%p';
 				break;
-		
+
 			default:
-		
+
 				if ($ch == '\\') {
 					$i++;
 					$ch = substr($fmt,$i,1);
@@ -356,21 +356,21 @@ class ADODB_mysql extends ADOConnection {
 			$save = $ADODB_FETCH_MODE;
 			$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 			if ($this->fetchMode !== false) $savem = $this->SetFetchMode(false);
-	
+
 			$rs = $this->Execute(sprintf($this->metaColumnsSQL,$table));
-	
+
 			if (isset($savem)) $this->SetFetchMode($savem);
 			$ADODB_FETCH_MODE = $save;
-	
+
 			if ($rs === false) return false;
-	
+
 			$retarr = array();
 			while (!$rs->EOF){
 				$fld = new ADOFieldObject();
 				$fld->name = $rs->fields[0];
 				$type = $rs->fields[1];
-		
-		
+
+
 				// split type into type(length):
 				$fld->scale = null;
 				if (strpos($type,',') && preg_match("/^(.+)\((\d+),(\d+)/", $type, $query_array)) {
@@ -397,7 +397,7 @@ class ADODB_mysql extends ADOConnection {
 				$fld->primary_key = ($rs->fields[3] == 'PRI');
 				$fld->auto_increment = (strpos($rs->fields[5], 'auto_increment') !== false);
 				$fld->binary = (strpos($fld->type,'blob') !== false);
-		
+
 				if (!$fld->binary) {
 					$d = $rs->fields[4];
 					if ($d != "" && $d != "NULL") {
@@ -545,7 +545,7 @@ class ADORecordSet_mysql extends ADORecordSet{
 			$o->max_length = @mysql_field_len($this->_queryID); // suggested by: Jim Nicholson (jnich@att.com)
 			//$o->max_length = -1; // mysql returns the max length less spaces -- so it is unrealiable
 		}
-	
+
 		return $o;
 	}
 
@@ -585,7 +585,7 @@ class ADORecordSet_mysql extends ADORecordSet{
 	//global $ADODB_EXTENSION;if ($ADODB_EXTENSION) return adodb_movenext($this);
 
 		if ($this->EOF) return false;
-		
+
 		$this->_currentRow++;
 		$this->fields = @mysql_fetch_array($this->_queryID,$this->fetchMode);
 		if (is_array($this->fields)) return true;
@@ -631,12 +631,12 @@ class ADORecordSet_mysql extends ADORecordSet{
 		case 'ENUM':
 		case 'SET':
 			if ($len <= $this->blobSize) return 'C';
-	
+
 		case 'TEXT':
 		case 'LONGTEXT':
 		case 'MEDIUMTEXT':
 			return 'X';
-	
+
 		// php_mysql extension always returns 'blob' even if 'text'
 		// so we have to check whether binary...
 		case 'IMAGE':
@@ -644,7 +644,7 @@ class ADORecordSet_mysql extends ADORecordSet{
 		case 'BLOB':
 		case 'MEDIUMBLOB':
 			return !empty($fieldobj->binary) ? 'B' : 'X';
-	
+
 		case 'YEAR':
 		case 'DATE': return 'D';
 
@@ -658,7 +658,7 @@ class ADORecordSet_mysql extends ADORecordSet{
 		case 'TINYINT':
 		case 'MEDIUMINT':
 		case 'SMALLINT':
-	
+
 			if (!empty($fieldobj->primary_key)) return 'R';
 			else return 'I';
 
@@ -675,5 +675,5 @@ class ADORecordSet_mysql extends ADORecordSet{
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

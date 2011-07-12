@@ -51,11 +51,11 @@ require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 
 // This string is used when sending the notification mail for identifying the
 // user response
-define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');	
+define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 
 	/**
 	*	Factory method which creates an Artifact from an artifact ID
-	*	
+	*
 	*	@param int	The artifact ID
 	*	@param array	The result array, if it's passed in
 	*	@return	object	Artifact object
@@ -78,7 +78,7 @@ define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 			$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType,$data);
 		}
 		return $ARTIFACT_OBJ["_".$artifact_id."_"];
-	}	
+	}
 
 class Artifact extends Error {
 
@@ -94,7 +94,7 @@ class Artifact extends Error {
 	 *
 	 * @var		object	$ArtifactType.
 	 */
-	var $ArtifactType; 
+	var $ArtifactType;
 
 	/**
 	 * Array of artifact data.
@@ -115,7 +115,7 @@ class Artifact extends Error {
 	 *
 	 * @var		array	$files
 	 */
-	var $files; 
+	var $files;
 
 	/**
 	 * Database result set of related tasks
@@ -123,17 +123,17 @@ class Artifact extends Error {
 	 * @var     result $relatedtasks
 	 */
 	var $relatedtasks;
-    
+
 	/**
 	 *  Artifact - constructor.
 	 *
 	 *	@param	object	The ArtifactType object.
-	 *  @param	integer	(primary key from database OR complete assoc array) 
+	 *  @param	integer	(primary key from database OR complete assoc array)
 	 *		ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
 	 *  @return	boolean	success.
 	 */
 	function Artifact(&$ArtifactType, $data=false) {
-		$this->Error(); 
+		$this->Error();
 
 		$this->ArtifactType =& $ArtifactType;
 
@@ -176,7 +176,7 @@ class Artifact extends Error {
 			}
 		}
 	}
-	
+
 	/**
 	 *	create - construct a new Artifact in the database.
 	 *
@@ -185,14 +185,14 @@ class Artifact extends Error {
 	 *	@param	int		The ID of the user to which this artifact is to be assigned.
 	 *	@param	int		The artifacts priority.
 	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
-	 *	@param	array	Array of data to change submitter and time of submit like: array('user' => 127, 'time' => 1234556789)	
+	 *	@param	array	Array of data to change submitter and time of submit like: array('user' => 127, 'time' => 1234556789)
 	 *  @return id on success / false on failure.
 	 */
 	function create( $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array(), $importData = array()) {
 		//
 		//	make sure this person has permission to add artifacts
 		//
-		
+
 		if (!$this->ArtifactType->isPublic()) {
 			//
 			//	Only admins can post/modify private artifacts
@@ -209,7 +209,7 @@ class Artifact extends Error {
 		//
 		//	get the user_id
 		//
-		
+
 		if(array_key_exists('user', $importData)){
 				$user = $importData['user'];
 		} else {
@@ -223,8 +223,8 @@ class Artifact extends Error {
 					return false;
 				}
 			}
-		}	
-			
+		}
+
 
 		//
 		//	data validation
@@ -263,9 +263,9 @@ class Artifact extends Error {
 		} else {
 			$time = time();
 		}
-		$res = db_query_params ('INSERT INTO artifact 
+		$res = db_query_params ('INSERT INTO artifact
 			(group_artifact_id,status_id,priority,
-			submitted_by,assigned_to,open_date,summary,details) 
+			submitted_by,assigned_to,open_date,summary,details)
 			VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 					array ($this->ArtifactType->getID(),
 					       $status_id,
@@ -280,7 +280,7 @@ class Artifact extends Error {
 			db_rollback();
 			return false;
 		}
-		
+
 		$artifact_id=db_insertid($res,'artifact','artifact_id');
 
 		if (!$res || !$artifact_id) {
@@ -312,7 +312,7 @@ class Artifact extends Error {
 			return $artifact_id;
 		}
 	}
-	
+
 	/**
 	 *	fetchData - re-fetch the data for this Artifact from the database.
 	 *
@@ -340,7 +340,7 @@ class Artifact extends Error {
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
-	
+
 	/**
 	 *	getID - get this ArtifactID.
 	 *
@@ -552,7 +552,7 @@ class Artifact extends Error {
 			db_rollback();
 			return false;
 		}
-		
+
 		if ($this->getStatusID() == 1) {
 			$res = db_query_params ('UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1
 				WHERE group_artifact_id=$1',
@@ -618,7 +618,7 @@ class Artifact extends Error {
 			}
 		} else {
 			//already monitoring - remove their monitor
-			db_query_params ('DELETE FROM artifact_monitor 
+			db_query_params ('DELETE FROM artifact_monitor
 				WHERE artifact_id=$1
 				AND user_id=$2',
 					 array ($this->getID(),
@@ -748,7 +748,7 @@ class Artifact extends Error {
 				$this->setError('ERROR - Logged In User Bug Could Not Get User Object');
 				return false;
 			}
-			//	we'll store this email even though it will likely never be used - 
+			//	we'll store this email even though it will likely never be used -
 			//	since we have their correct user_id, we can join the USERS table to get email
 			$by=$user->getEmail();
 		} elseif (!$this->ArtifactType->allowsAnon()) {
@@ -840,8 +840,8 @@ class Artifact extends Error {
 				return false;
 			}
 		}
-               
-               
+
+
 		//commiting changes
 		db_commit();
 		return true;
@@ -890,10 +890,10 @@ class Artifact extends Error {
 		if (count($extra_fields) > 0) {
 			$status_id=$this->ArtifactType->remapStatus($status_id,$extra_fields);
 		}
-		if (!$this->getID() 
-			|| !$assigned_to 
-			|| !$status_id 
-			|| !$canned_response 
+		if (!$this->getID()
+			|| !$assigned_to
+			|| !$status_id
+			|| !$canned_response
 			|| !$new_artifact_type_id) {
 			$this->setMissingParamsError();
 			return false;
@@ -911,7 +911,7 @@ class Artifact extends Error {
 		// Array to record which properties were changed
 		$changes = array();
 		$update  = false;
-		
+
 		db_begin();
 
 		//
@@ -937,7 +937,7 @@ class Artifact extends Error {
 				db_rollback();
 				return false;
 			}
-			
+
 			// Add a message to explain that the tracker was moved.
 			$message = 'Moved from '.$this->ArtifactType->getName().' to '.$newArtifactType->getName();
 			$this->addHistory('type', $this->ArtifactType->getName());
@@ -995,7 +995,7 @@ class Artifact extends Error {
 					}
 				}
 			}
-			
+
 			// Special case if moving to a tracker with custom status (previous has not).
 			$custom_status_id = $newArtifactType->getCustomStatusField();
 			if ($custom_status_id && !$new_extra_fields[$custom_status_id]) {
@@ -1108,7 +1108,7 @@ class Artifact extends Error {
 			db_rollback();
 			return false;
 		}
-		
+
 		/*
 			handle canned responses
 
@@ -1150,7 +1150,7 @@ class Artifact extends Error {
 			db_rollback();
 			return false;
 		}
-	
+
 	}
 
 	/**
@@ -1174,7 +1174,7 @@ class Artifact extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		
+
 		$user_id = user_getid();
 		$res = db_query_params ('UPDATE artifact SET assigned_to=$1 WHERE artifact_id=$2',
 								array ($user_id, $this->getID())) ;
@@ -1183,7 +1183,7 @@ class Artifact extends Error {
 			return false;
 		}
 		$this->fetchData($this->getID());
-		
+
 		return true;
 	}
 
@@ -1198,14 +1198,14 @@ class Artifact extends Error {
 	function updateExtraFields($extra_fields,&$changes){
 /*
 	This is extremely complex code - we have take the passed array
-	and see if we need to insert it into the db, and may have to 
+	and see if we need to insert it into the db, and may have to
 	add history rows for the audit trail
 
 	start by getting all the available extra fields from ArtifactType
-		For each field from ArtifacType, check the passed array - 
+		For each field from ArtifacType, check the passed array -
 			This prevents someone from passing bogus extra field entries - they will be ignored
 			if the passed entry is blank, may have to force a default value
-			if the passed array is different from the existing data in db, 
+			if the passed array is different from the existing data in db,
 				delete old entry and insert new entries, along with possible audit trail
 			else
 				skip it and continue to next item
@@ -1241,7 +1241,7 @@ class Artifact extends Error {
 				}
 			}
 		}
-		
+
 		//now we'll update this artifact for each extra field
 		for ($i=0; $i<count($efk); $i++) {
 			$efid=$efk[$i];
@@ -1312,16 +1312,16 @@ class Artifact extends Error {
 				//
 				//	Compare for history purposes
 				//
-				
+
 				// these types have arrays associated to them, so they need
 				// special handling to check for differences
 				if ($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT || $type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
 					// check the differences between the old values and the new values
 					$old_values = util_result_column_to_array($resd,"field_data");
-					
+
 					$added_values = array_diff($extra_fields[$efid], $old_values);
 					$deleted_values = array_diff($old_values, $extra_fields[$efid]);
-					
+
 					if (!empty($added_values) || !empty($deleted_values))	{	// there are differences...
 						$field_name = $ef[$efid]['field_name'];
 						if (!preg_match('/^@/', $ef[$efid]['alias'])) {
@@ -1494,7 +1494,7 @@ class Artifact extends Error {
 		} else {
 			return '';
 		}
-	}				
+	}
 
 	/**
 	 *	mailFollowupEx - send out an email update for this artifact.
@@ -1513,7 +1513,7 @@ class Artifact extends Error {
 		if (!$changes) {
 			$changes=array();
 		}
-		
+
 		$sess = session_get_user() ;
 		if ($type == 1) { // Initial opening
 			if ($sess) {
@@ -1535,7 +1535,7 @@ class Artifact extends Error {
 				    date(_('Y-m-d H:i'), $tm);
 			}
 		}
-			      
+
 
 		$body .= "\nYou can respond by visiting: ".
 			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
@@ -1557,14 +1557,14 @@ class Artifact extends Error {
 			 " (". $this->getAssignedUnixName(). ")"."\n".
 			$this->marker('summary',$changes).
 			 "Summary: ". util_unconvert_htmlspecialchars( $this->getSummary() )." \n";
-			 
+
 		// Now display the extra fields
 		$efd = $this->getExtraFieldDataText();
 		foreach ($efd as $efid => $ef) {
 			$body .= $this->marker('extra_fields', $changes, $efid);
 			$body .= $ef["name"].": ".$ef["value"]."\n";
 		}
-			
+
 		$subject='['. $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() . '][' . $this->getID() .'] '. util_unconvert_htmlspecialchars( $this->getSummary() );
 
 		if ($type > 1) {
@@ -1611,11 +1611,11 @@ class Artifact extends Error {
 			$result2=$this->getMessages();
 
 			$rows=db_numrows($result2);
-		
+
 			if ($result2 && $rows > 0) {
 				for ($i=0; $i<$rows; $i++) {
 					//
-					//	for messages posted by non-logged-in users, 
+					//	for messages posted by non-logged-in users,
 					//	we grab the email they gave us
 					//
 					//	otherwise we use the confirmed one from the users table
@@ -1636,7 +1636,7 @@ class Artifact extends Error {
 					"\n\nMessage:".
 					"\n".util_unconvert_htmlspecialchars( db_result($result2,$i,'body') ).
 					"\n\n----------------------------------------------------------------------";
-				}	   
+				}
 			}
 
 		}
@@ -1656,10 +1656,10 @@ class Artifact extends Error {
 		} else {
 			$monitor_ids=array_unique($monitor_ids);
 		}
-		
+
 		$from = $this->ArtifactType->getReturnEmailAddress();
 		$extra_headers = 'Reply-to: '.$from;
-		
+
 		// load the e-mail addresses of the users
 		$users =& user_get_objects($monitor_ids);
 		if (count($users) > 0) {
@@ -1669,21 +1669,21 @@ class Artifact extends Error {
 				}
 			}
 		}
-		
+
 		//now remove all duplicates from the email list
 		if (count($emails) > 0) {
 			$BCC=implode(',',array_unique($emails));
-			util_send_message('',$subject,$body,$from,$BCC,'',$extra_headers);			
+			util_send_message('',$subject,$body,$from,$BCC,'',$extra_headers);
 		}
-		
+
 		$this->sendSubjectMsg = $subject;
 		$this->sendBodyMsg = $body;
-		
+
 		//util_handle_message($monitor_ids,$subject,$body,$BCC);
-		
+
 		return true;
 	}
-	
+
 	/**
 	* getExtraFieldDataText - Return the extra fields' data in a human-readable form.
 	*
@@ -1695,16 +1695,16 @@ class Artifact extends Error {
 		// associated to the fields
 		$efs = $this->ArtifactType->getExtraFields();
 		$efd = $this->getExtraFieldData();
-		
+
 		$return = array();
 
 		foreach ($efs as $efid => $ef) {
 			$name = $ef["field_name"];
 			$type = $ef["field_type"];
-			
+
 			// Get the value according to the type
 			switch ($type) {
-				
+
 				// for these types, the associated value comes straight
 				case ARTIFACT_EXTRAFIELDTYPE_TEXT:
 				case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
@@ -1716,7 +1716,7 @@ class Artifact extends Error {
 						$value = '';
 					}
 					break;
-	
+
 				// the other types have and ID or an array of IDs associated to them
 				default:
 					if (isset($efd[$efid])) {
@@ -1725,10 +1725,10 @@ class Artifact extends Error {
 						$value = 'None';
 					}
 			}
-			
+
 			$return[$efid] = array("name" => $name, "value" => $value, 'type' => $type);
 		}
-		
+
 		return $return;
 	}
 

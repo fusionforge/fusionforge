@@ -48,18 +48,18 @@ $pn_admin_gid = '2';
 
 //------ General Application Settings ------//
 // What is the full URL to the login page (including http:// or https://)
-$app_login_page = 'http://www.mysite.com/postnuke/html/user.php?op=loginscreen&module=NS-User'; 
+$app_login_page = 'http://www.mysite.com/postnuke/html/user.php?op=loginscreen&module=NS-User';
 
 // Is there a parameter we can pass to tell the application to
 // redirect the user back to the calendar after login?
 $app_redir_param = 'url';  // postnuke uses 'url'
 
 // What is the full URL to the logout page (including http:// or https://)
-$app_logout_page = 'http://www.mysite.com/postnuke/html/user.php?module=NS-User&op=logout'; 
+$app_logout_page = 'http://www.mysite.com/postnuke/html/user.php?module=NS-User&op=logout';
 
 // Are the application's tables in the same database as webcalendar's?
 $app_same_db = '0';  // 1 = yes, 0 = no
- 
+
 // Only need configure the rest if $app_same_db != 1
 
  // Name of database containing the app's tables
@@ -85,10 +85,10 @@ $admin_can_delete_user = false;
 // returns: login id
 function user_logged_in() {
   global $pn_sid, $_COOKIE;
-  
+
   // First check to see if the user even has a session cookie
   if (empty($_COOKIE[$pn_sid])) return false;
-  
+
   // Check to see if the session is still valid
   if (! $login = pn_active_session($_COOKIE[$pn_sid]) ) return false;
 
@@ -99,8 +99,8 @@ function user_logged_in() {
 }
 
 
-//  Checks to see if the session has a user associated with it and 
-//  if the session is timed out 
+//  Checks to see if the session has a user associated with it and
+//  if the session is timed out
 //  returns: login id
 function pn_active_session($sid) {
   global $pn_user_table, $pn_session_table, $pn_settings_table;
@@ -140,7 +140,7 @@ function pn_active_session($sid) {
 }
 
 
-//  Updates the session table to set the last access time to now 
+//  Updates the session table to set the last access time to now
 function pn_update_session($sid) {
   global $pn_session_table;
   global $app_host, $app_login, $app_pass, $app_db, $app_same_db;
@@ -243,12 +243,12 @@ function user_load_variables ( $login, $prefix ) {
   global $PUBLIC_ACCESS_FULLNAME, $NONUSER_PREFIX;
   global $app_host, $app_login, $app_pass, $app_db, $pn_user_table;
   global $c, $db_host, $db_login, $db_password, $db_database, $app_same_db;
-  
+
   if ($NONUSER_PREFIX && substr($login, 0, strlen($NONUSER_PREFIX) ) == $NONUSER_PREFIX) {
     nonuser_load_variables ( $login, $prefix );
     return true;
   }
-  
+
   if ( $login == "__public__" ) {
     $GLOBALS[$prefix . "login"] = $login;
     $GLOBALS[$prefix . "firstname"] = "";
@@ -262,7 +262,7 @@ function user_load_variables ( $login, $prefix ) {
 
   // if postnuke is in a separate db, we have to connect to it
   if ($app_same_db != '1') $c = dbi_connect($app_host, $app_login, $app_pass, $app_db);
-  
+
   $sql = "SELECT pn_uid, pn_name, pn_uname, pn_email FROM $pn_user_table WHERE pn_uname = '$login'";
 
   $res = dbi_query ( $sql );
@@ -291,14 +291,14 @@ function user_load_variables ( $login, $prefix ) {
 // Redirect the user to the application's login screen
 function app_login_screen($return_path = 'index.php') {
   global $app_login_page, $app_redir_param;
-  
+
   if ($return_path != '' && $app_redir_param != '') {
     if (strstr($app_login_page, '?')) {
       $app_login_page .= '&'.$app_redir_param.'='.$return_path;
     } else {
       $app_login_page .= '?'.$app_redir_param.'='.$return_path;
     }
-  } 
+  }
   header("Location: $app_login_page");
   exit;
 }

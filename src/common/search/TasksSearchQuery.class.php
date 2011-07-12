@@ -25,21 +25,21 @@
 require_once $gfcommon.'search/SearchQuery.class.php';
 
 class TasksSearchQuery extends SearchQuery {
-	
+
 	/**
 	* group id
 	*
 	* @var int $groupId
 	*/
 	var $groupId;
-	
+
 	/**
 	* flag if non public items are returned
 	*
 	* @var boolean $showNonPublic
-	*/	
+	*/
 	var $showNonPublic;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -50,12 +50,12 @@ class TasksSearchQuery extends SearchQuery {
 	 * @param array $sections sections to search in
 	 * @param boolean $showNonPublic flag if private sections are searched too
 	 */
-	function TasksSearchQuery($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {	
+	function TasksSearchQuery($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
-		
+
 		$this->SearchQuery($words, $offset, $isExact);
-				
+
 		$this->setSections($sections);
 	}
 
@@ -68,7 +68,7 @@ class TasksSearchQuery extends SearchQuery {
 
 
 		$qpa = db_construct_qpa () ;
-		
+
 		if (forge_get_config('use_fti')) {
 			if (count ($this->words)) {
 				$words = $this->getFormattedWords();
@@ -140,7 +140,7 @@ class TasksSearchQuery extends SearchQuery {
 		}
 		return $qpa ;
 	}
-	
+
 	/**
 	 * getSections - returns the list of available subprojects
 	 *
@@ -153,7 +153,7 @@ class TasksSearchQuery extends SearchQuery {
 			$sql .= ' AND is_public = 1';
 		}
 		$sql .= ' ORDER BY project_name';
-		
+
 		$sections = array();
 		$res = db_query_params ($sql,
 					array ($groupId));

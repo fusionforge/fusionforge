@@ -20,7 +20,7 @@
 require_once('common/dao/include/DataAccessObject.class.php');
 
 /**
- *  Data Access Object for PluginHudsonJob 
+ *  Data Access Object for PluginHudsonJob
  */
 class PluginHudsonJobDao extends DataAccessObject {
 	/**
@@ -41,11 +41,11 @@ class PluginHudsonJobDao extends DataAccessObject {
 	}
 
 	/**
-	 * Searches PluginHudsonJob by Codendi group ID 
+	 * Searches PluginHudsonJob by Codendi group ID
 	 * @return DataAccessResult
 	 */
 	function & searchByGroupID($group_id) {
-		$sql = "SELECT *  
+		$sql = "SELECT *
 			FROM plugin_hudson_job
 			WHERE group_id = $1";
 		$group_id = $this->da->quoteSmart($group_id);
@@ -53,11 +53,11 @@ class PluginHudsonJobDao extends DataAccessObject {
 	}
 
 	/**
-	 * Searches PluginHudsonJob by job ID 
+	 * Searches PluginHudsonJob by job ID
 	 * @return DataAccessResult
 	 */
 	function & searchByJobID($job_id) {
-		$sql = "SELECT *  
+		$sql = "SELECT *
 			FROM plugin_hudson_job
 			WHERE job_id = $1";
 		$job_id = $this->da->quoteSmart($job_id);
@@ -65,11 +65,11 @@ class PluginHudsonJobDao extends DataAccessObject {
 	}
 
 	/**
-	 * Searches PluginHudsonJob by job name 
+	 * Searches PluginHudsonJob by job name
 	 * @return DataAccessResult
 	 */
 	function & searchByJobName($job_name) {
-		$sql = "SELECT *  
+		$sql = "SELECT *
 			FROM plugin_hudson_job
 			WHERE name = $1";
 		$job_name = $this->da->quoteSmart($job_name);
@@ -78,21 +78,21 @@ class PluginHudsonJobDao extends DataAccessObject {
 
 	/**
 	 * Searches PluginHudsonJob by user ID
-	 * means "all the jobs of all projects the user is member of" 
+	 * means "all the jobs of all projects the user is member of"
 	 * @return DataAccessResult
 	 */
 	function & searchByUserID($user_id) {
-		$sql = "SELECT j.*  
+		$sql = "SELECT j.*
 			FROM plugin_hudson_job j, users u, user_group ug
 			WHERE ug.group_id = j.group_id AND
-			u.user_id = ug.user_id AND 
+			u.user_id = ug.user_id AND
 			u.user_id = $1";
 		$user_id = $this->da->quoteSmart($user_id);
 		return $this->retrieve($sql,array($user_id));
 	}
 
 	/**
-	 * create a row in the table plugin_hudson_job 
+	 * create a row in the table plugin_hudson_job
 	 * @return true if there is no error
 	 */
 	function createHudsonJob($group_id, $hudson_job_url, $job_name, $use_svn_trigger = false, $use_cvs_trigger = false, $token = null) {

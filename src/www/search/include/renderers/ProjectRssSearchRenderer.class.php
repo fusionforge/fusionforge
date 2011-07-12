@@ -42,7 +42,7 @@ AND group_id=$2',
 	$return .= ' | date registered: '.date('M jS Y', $dataRow['register_time']);
 	$return .= ' | category: '.str_replace(' ', '', implode(',', util_result_column_to_array($result)));
 	$return .= ' | license: '.$dataRow['license'];
-	
+
 	return $return;
 }
 
@@ -56,11 +56,11 @@ class ProjectRssSearchRenderer extends RssSearchRenderer {
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
 	function ProjectRssSearchRenderer($words, $offset, $isExact) {
-		
+
 		$this->callbackFunction = 'rssProjectCallback';
-		
+
 		$searchQuery = new ExportProjectSearchQuery($words, $offset, $isExact);
-		
+
 		$this->RssSearchRenderer(SEARCH__TYPE_IS_SOFTWARE, $words, $isExact, $searchQuery);
 	}
 }

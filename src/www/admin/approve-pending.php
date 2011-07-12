@@ -76,7 +76,7 @@ if ($action == 'activate') {
 	$add_to_can = getStringFromRequest('add_to_can');
 	$response_text = getStringFromRequest('response_text');
 	$response_title = getStringFromRequest('response_title');
-	
+
 	$group = group_get_object($group_id);
 	if (!$group || !is_object($group)) {
 		exit_no_group();
@@ -172,7 +172,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<br /><strong><?php echo _('Home Box:')." "; print $row_grp['unix_box']; ?></strong>
 	<?php
 		} //end of sys_use_shell
-	?> 
+	?>
 	<br /><strong><?php echo _('HTTP Domain:')." "; print $row_grp['http_domain']; ?></strong>
 
 	<br />
@@ -212,13 +212,13 @@ while ($row_grp = db_fetch_array($res_grp)) {
 
 		if (db_numrows($res) >= 1) {
 			$submitter =& user_get_object(db_result($res,0,'user_id'));
-		
+
 			echo '<p>'
 			.sprintf(_('Submitted by %1$s (%2$s)'), $submitter->getRealName(), $submitter->getUnixName())
 			.'</p>' ;
 		}
 	}
-	
+
 	if ($row_grp['built_from_template']) {
 		$templateproject = group_get_object ($row_grp['built_from_template']) ;
 		print "<p>" .sprintf(_('Based on template project: %s (%s)'),$templateproject->getPublicName(),$templateproject->getUnixName())."</p>";

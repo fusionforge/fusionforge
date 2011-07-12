@@ -145,7 +145,7 @@ class ForumMessageFactory extends Error {
 		for ($i=0; $i<$cnt; $i++) {
 			if ($row[$i]) {
 				$msg_arr["".$row[$i]->getParentID().""][] =& $row[$i];
-			}  
+			}
 	  	}
 		return $msg_arr;
 	}
@@ -160,7 +160,7 @@ class ForumMessageFactory extends Error {
 			return $this->forum_messages;
 		}
 		if (isset ($thread_id) && is_numeric($thread_id)) {
-			$result = db_query_params ('SELECT * FROM forum_user_vw 
+			$result = db_query_params ('SELECT * FROM forum_user_vw
 		WHERE group_forum_id=$1
                   AND thread_id=$2
 		ORDER BY most_recent_date DESC',
@@ -169,7 +169,7 @@ class ForumMessageFactory extends Error {
 						   $this->max_rows+25,
 						   $this->offset);
 		} else {
-			$result = db_query_params ('SELECT * FROM forum_user_vw 
+			$result = db_query_params ('SELECT * FROM forum_user_vw
 		WHERE group_forum_id=$1
 		ORDER BY most_recent_date DESC',
 						   array ($this->Forum->getID()),
@@ -201,7 +201,7 @@ class ForumMessageFactory extends Error {
 			return $this->forum_messages;
 		}
 		if (isset ($thread_id) && is_numeric($thread_id)) {
-			$result = db_query_params ('SELECT * FROM forum_user_vw 
+			$result = db_query_params ('SELECT * FROM forum_user_vw
 		WHERE group_forum_id=$1
                   AND thread_id=$2
 		ORDER BY most_recent_date DESC',
@@ -210,7 +210,7 @@ class ForumMessageFactory extends Error {
 						   $this->max_rows+25,
 						   $this->offset);
 		} else {
-			$result = db_query_params ('SELECT * FROM forum_user_vw 
+			$result = db_query_params ('SELECT * FROM forum_user_vw
 		WHERE group_forum_id=$1
 		ORDER BY most_recent_date DESC',
 						   array ($this->Forum->getID()),
@@ -242,7 +242,7 @@ class ForumMessageFactory extends Error {
 			return $this->forum_messages;
 		}
 		if (isset ($thread_id) && is_numeric($thread_id)) {
-			$result = db_query_params ('SELECT * FROM forum_user_vw 
+			$result = db_query_params ('SELECT * FROM forum_user_vw
 		WHERE group_forum_id=$1
                   AND thread_id=$2
 		ORDER BY msg_id DESC',
@@ -251,7 +251,7 @@ class ForumMessageFactory extends Error {
 						   $this->max_rows+25,
 						   $this->offset);
 		} else {
-			$result = db_query_params ('SELECT * FROM forum_user_vw 
+			$result = db_query_params ('SELECT * FROM forum_user_vw
 		WHERE group_forum_id=$1
 		ORDER BY msg_id DESC',
 						   array ($this->Forum->getID()),

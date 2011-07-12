@@ -35,12 +35,12 @@ class BackendMailmanList {
      * Hold an instance of the class
      */
     protected static $_instance;
-    
+
     /**
      * Backends are singletons
      */
     public static function instance() {
-    
+
         if (!isset(self::$_instance)) {
             $c = __CLASS__;
             self::$_instance = new $c;
@@ -59,7 +59,7 @@ class BackendMailmanList {
     }
 
 
-    /** 
+    /**
      * Update mailman configuration for the given list
      * Write configuration in temporary file, and load it with mailman config_list tool
      * @return true on success, false otherwise
@@ -67,10 +67,10 @@ class BackendMailmanList {
     protected function updateListConfig($list) {
         // write configuration in temporary file
         $config_file=$GLOBALS['tmp_dir']."/mailman_config_".$list->getID().".in";
-        
+
         if ($fp = fopen($config_file, 'w')) {
-            // Define encoding of this file for Python. See SR #764 
-            // Please note that this allows config_list to run with UTF-8 strings, but if the 	 
+            // Define encoding of this file for Python. See SR #764
+            // Please note that this allows config_list to run with UTF-8 strings, but if the
             // description contains non-ascii chars, they will be displayed badly in mailman config web page.
             fwrite($fp, "# coding=UTF-8\n\n");
             // Deactivate monthly reminders by default
@@ -79,7 +79,7 @@ class BackendMailmanList {
             fwrite($fp, "description = '".addslashes($list->getDescription())."'\n");
             // Allow up to 200 kB messages
             fwrite($fp, "max_message_size = 200\n");
-        
+
             if ($list->isPublic() == 0) { // Private lists
                 // Don't advertise this list when people ask what lists are on this machine
                 fwrite($fp, "advertised = False\n");
@@ -89,7 +89,7 @@ class BackendMailmanList {
                 fwrite($fp, "subscribe_policy = 2\n");
             }
             fclose($fp);
-            
+
             if (system($GLOBALS['mailman_bin_dir']."/config_list -i $config_file ".$list->getName()) !== false) {
                 if (unlink($config_file)) {
 			return true;
@@ -125,7 +125,7 @@ class BackendMailmanList {
 				    if (!$result) {
 					    printf('Unable to update the list status: '.db_error());
 					    return false;
-				    }		
+				    }
 				    else {
 					    return true;
 				    }
@@ -139,7 +139,7 @@ class BackendMailmanList {
 			    if (!$result) {
 				    printf('Unable to update the list status: '.db_error());
 				    return false;
-			    }		
+			    }
 			    else {
 				    return true;
 			    }
@@ -150,7 +150,7 @@ class BackendMailmanList {
     }
 
     /**
-     * Delete mailing list 
+     * Delete mailing list
      * - list and archives are deleted
      * - backup first in temp directory
      * @return true on success, false otherwise

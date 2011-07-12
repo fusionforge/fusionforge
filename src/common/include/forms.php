@@ -24,18 +24,18 @@
 /**
  *  form_generate_key() - Returns a new key, and registers it in the db.
  *
- *  @return	int	A new identifier. 
+ *  @return	int	A new identifier.
  *
  */
 function form_generate_key() {
 	$is_new=false;
 	db_begin();
-	// there's about 99.999999999% probability this loop will run only once :) 
+	// there's about 99.999999999% probability this loop will run only once :)
 	while(!$is_new) {
 		$key = md5(microtime() + util_randbytes() + $_SERVER["REMOTE_ADDR"]);
 		$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1', array ($key));
 		if (!db_numrows($res)) {
-			$is_new=true;	
+			$is_new=true;
 		}
 	}
 	$res = db_query_params('INSERT INTO form_keys (key,is_used,creation_date) VALUES ($1, 0, $2)', array ($key,time()));
@@ -44,15 +44,15 @@ function form_generate_key() {
 		return false;
 	}
 	db_commit();
-	return $key;	
-}	
+	return $key;
+}
 
 /**
  *  form_key_is_valid() - Checks the db to see if the given key is already used. In case it's not already used
  * 	it updates the db.
  *
- *	@param	int	The key.			
- *  @return	boolean	True if the given key is already used. False if not. 
+ *	@param	int	The key.
+ *  @return	boolean	True if the given key is already used. False if not.
  *
  */
 function form_key_is_valid($key) {
@@ -80,8 +80,8 @@ function form_key_is_valid($key) {
 /**
  *  form_release_key() - Releases the given key if it is already used. If the given key it's not in the db, it returns false.
  *
- *	@param	int	The key.			
- *  @return	boolean	True if the given key is successfully released. False if not. 
+ *	@param	int	The key.
+ *  @return	boolean	True if the given key is successfully released. False if not.
  *
  */
 function form_release_key($key) {

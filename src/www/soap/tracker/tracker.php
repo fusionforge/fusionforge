@@ -132,8 +132,8 @@ $server->register(
 	$uri,
 	$uri.'#getArtifactTypes','rpc','encoded'
 );
-// 
-// Artifact Extra Fields 
+//
+// Artifact Extra Fields
 // By remo on 08-Mar-2005
 
 $server->wsdl->addComplexType(
@@ -578,7 +578,7 @@ function arrangeExtraFields($extra_fields, $extra_field_info) {
 			$efields=$extra_fields[$eky];
 			$efid = $efields['extra_field_id'];
 			$data = $efields['field_data'];
-			
+
 			// if the extra field is of type CHECKBOX or MULTISELECT we must
 			// convert the value passed by the user from a comma separated list
 			// of ids to an array
@@ -588,7 +588,7 @@ function arrangeExtraFields($extra_fields, $extra_field_info) {
 					$data = split(",", $data);
 				}
 			}
-			
+
 			$fieldsdata[$efid]=$data;
 		}
 	}
@@ -623,7 +623,7 @@ function &addArtifact($session_ser,$group_id,$group_artifact_id,$status_id,
 	} elseif ($a->isError()) {
 		return new soap_fault ('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	}
-	
+
 	$aef = $a->ArtifactType->getExtraFields();
 	$extra_flds=arrangeExtraFields($extra_fields,$aef);
 	if (!$a->create($summary,$details,$assigned_to,$priority,$extra_flds)) {
@@ -728,7 +728,7 @@ function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$s
 	} else {
 		$set = false;
 	}
-	
+
 	$af->setup(0,'','',0,$set,$assigned_to,$status);
 	$artifacts = $af->getArtifacts();
 	if ($artifacts === false) {
@@ -828,7 +828,7 @@ function &getArtifactFiles($session_ser,$group_id,$group_artifact_id,$artifact_i
 	} elseif ($a->isError()) {
 		return new soap_fault ('','getArtifactFiles',$a->getErrorMessage(),$a->getErrorMessage());
 	}
-	
+
 	$files_arr = $a->getFiles();
 	$return = artifactfiles_to_soap($files_arr);
 
@@ -882,14 +882,14 @@ function getArtifactFileData($session_ser,$group_id,$group_artifact_id,$artifact
 	} elseif ($a->isError()) {
 		return new soap_fault ('','getArtifactFileData',$a->getErrorMessage(),$a->getErrorMessage());
 	}
-	
+
 	$af=new ArtifactFile($a,$file_id);
 	if (!$af || !is_object($af)) {
 		return new soap_fault ('','getArtifactFileData','ArtifactFile Could Not Be Created','ArtifactFile Could Not Be Created');
 	} else if ($af->isError()) {
 		return new soap_fault ('','getArtifactFileData',$af->getErrorMessage(),$af->getErrorMessage());
-	} 
-	
+	}
+
 	//send file encoded in base64
 	return base64_encode($af->getData());
 }
@@ -898,7 +898,7 @@ function getArtifactFileData($session_ser,$group_id,$group_artifact_id,$artifact
 //
 //
 //	addArtifactFile
-// 
+//
 
 /*
  'session_ser'=>'xsd:string',
@@ -912,7 +912,7 @@ function getArtifactFileData($session_ser,$group_id,$group_artifact_id,$artifact
  */
 function addArtifactFile($session_ser,$group_id,$group_artifact_id,$artifact_id,$base64_contents,$description,$filename,$filetype) {
 	continue_session($session_ser);
-	
+
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','addArtifactFile','Could Not Get Project','Could Not Get Project');
@@ -933,7 +933,7 @@ function addArtifactFile($session_ser,$group_id,$group_artifact_id,$artifact_id,
 	} elseif ($a->isError()) {
 		return new soap_fault ('','addArtifactFile',$a->getErrorMessage(),$a->getErrorMessage());
 	}
-	
+
 	$af = new ArtifactFile($a);
 	if (!$af || !is_object($af)) {
 		return new soap_fault ('','addArtifactFile','Could Not Create ArtifactFile object','Could Not Create ArtifactFile object');
@@ -943,13 +943,13 @@ function addArtifactFile($session_ser,$group_id,$group_artifact_id,$artifact_id,
 
 	$bin_data = base64_decode($base64_contents);
 	$filesize = strlen($bin_data);
-	
+
 	$res = $af->create($filename,$filetype,$filesize,$bin_data,$description);
-	
+
 	if (!$res) {
 		return new soap_fault ('','addArtifactFile',$af->getErrorMessage(),$af->getErrorMessage());
 	}
-	
+
 	return $res;
 }
 
@@ -1095,7 +1095,7 @@ function artifactGetChangeLog($session_ser, $group_id, $group_artifact_id, $arti
 	} elseif ($grp->isError()) {
 		return new soap_fault ('','artifactGetChangeLog',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
-	
+
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
 		return new soap_fault ('','artifactGetChangeLog','Could Not Get ArtifactType','Could Not Get ArtifactType');
@@ -1109,7 +1109,7 @@ function artifactGetChangeLog($session_ser, $group_id, $group_artifact_id, $arti
 	} elseif ($artifact->isError()) {
 		return new soap_fault ('','artifactGetChangeLog',$artifact->getErrorMessage(),$artifact->getErrorMessage());
 	}
-	
+
 	// note that Artifact::getHistory returns a DB result handler
 	$result = $artifact->getHistory();
 	return artifact_history_to_soap($result, $at);
@@ -1122,7 +1122,7 @@ function artifact_history_to_soap($db_result, &$artifactType) {
 		$old_value = $entry["old_value"];
 		$date = $entry["entrydate"];
 		$user_name = $entry["user_name"];
-		
+
 		if ($field_name == 'status_id') {
 			$old_value = $artifactType->getStatusName($old_value);
 		} else if ($field_name == 'assigned_to') {
@@ -1130,9 +1130,9 @@ function artifact_history_to_soap($db_result, &$artifactType) {
 		} else if ($field == 'close_date') {
 			$old_value =  date(_('Y-m-d H:i'), $old_value);
 		}
-		
+
 		//$date = date(_('Y-m-d H:i'), $date);
-		
+
 		$result[] = array(
 					"field_name"	=> $field_name,
 					"old_value"		=> $old_value,
@@ -1140,7 +1140,7 @@ function artifact_history_to_soap($db_result, &$artifactType) {
 					"user_name"		=> $user_name
 					);
 	}
-	
+
 	return $result;
 }
 ?>

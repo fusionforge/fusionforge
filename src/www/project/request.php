@@ -57,7 +57,7 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'summary'
 plugin_hook ("blocks", "request_join");
 
 ?>
-<p><?php 
+<p><?php
 $nbadmins = count($group->getAdmins());
 echo ngettext('You can request to join a project by clicking the submit button. The administrator will be emailed to approve or deny your request.', 'You can request to join a project by clicking the submit button. The administrators will be emailed to approve or deny your request.', $nbadmins); ?></p>
 <form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post">

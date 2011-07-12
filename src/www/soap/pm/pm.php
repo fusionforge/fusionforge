@@ -397,13 +397,13 @@ function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$deta
 	} elseif ($a->isError()) {
 		return new soap_fault ('','addProjectTask','$a->getErrorMessage()',$a->getErrorMessage());
 	}
-	
+
 	// transform the $depend_arr (which is an array of ints) to include the link type
 	$depend_map = array();
 	foreach ($depend_arr as $depend_id) {
 		$depend_map[$depend_id] = PM_LINK_DEFAULT;
 	}
-	
+
 	if (!$a->create($summary,$details,$priority,$hours,$start_date,$end_date,
             $category_id,$percent_complete,$assigned_arr,$depend_map,$duration,$parent_id)) {
 		return new soap_fault ('','addProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
@@ -439,13 +439,13 @@ function &updateProjectTask($session_ser,$group_id,$group_project_id,$project_ta
     } elseif ($a->isError()) {
         return new soap_fault ('','updateProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
     }
-    
+
     // transform the $depend_arr (which is an array of ints) to include the link type
 	$depend_map = array();
 	foreach ($depend_arr as $depend_id) {
 		$depend_map[$depend_id] = PM_LINK_DEFAULT;
 	}
-	
+
     if (!$a->update($summary,$details,$priority,$hours,$start_date,$end_date,$status_id,$category_id,
 		$percent_complete,$assigned_arr,$depend_map,$new_group_project_id,$duration,$parent_id)) {
         return new soap_fault ('','updateProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
@@ -472,7 +472,7 @@ function &getProjectTaskCategories($session_ser,$group_id,$group_project_id) {
 	} elseif ($at->isError()) {
 		return new soap_fault ('','getProjectTaskCategories',$at->getErrorMessage(),$at->getErrorMessage());
 	}
-	
+
 	$cat_arr = $at->getCategoryObjects();
 
 	return projectcategories_to_soap($cat_arr);
@@ -566,19 +566,19 @@ function projecttasks_to_soap($pt_arr) {
 				$dependent_on[] = array("task_id" => $dependent_on_id,
 										"link_type" => $link_type);
 			}
-			
+
 			//build the assigned_to array
 			$assigned_to = array();
 			$assigned_ids = $pt_arr[$i]->getAssignedTo();
 			foreach ($assigned_ids as $assigned_id) {
-				$assigned_to[] = array("user_id" => $assigned_id, 
+				$assigned_to[] = array("user_id" => $assigned_id,
 										"percent_effort" => 0		// TODO: This should be implemented
 									);
 			}
-			
+
 			$sort_id = $pt_arr[$i]->getExternalID();
 			if (!$sort_id) $sort_id=0;
-			
+
 			$return[]=array(
 				'project_task_id'=>$pt_arr[$i]->data_array['project_task_id'],
 				'group_project_id'=>$pt_arr[$i]->data_array['group_project_id'],

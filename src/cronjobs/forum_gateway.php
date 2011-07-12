@@ -6,7 +6,7 @@
  * Copyright 2004 GForge, LLC
  *
  * @author Tim Perdue tim@gforge.org
- * @author Sung Kim 
+ * @author Sung Kim
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -53,17 +53,17 @@ class ForumGateway extends Error {
 
 	function ForumGateway() {
 		$this->Error();
-	
+
 		/* Copy mail message to tmp file */
 		$tmpfile = $this->copyMailTmp();
 		//DBG("Tmpname: ". $tmpfile);
 
 		/* parse email */
 		$ret = $this->parseMail($tmpfile);
-	
+
 		/* Delete temp file */
 		unlink($tmpfile);
-	
+
 		/* Check the return variable from parseMail */
 		if (!$ret) {
 			return false;
@@ -74,11 +74,11 @@ class ForumGateway extends Error {
 		if (!$ret) {
 			return false;
 		}
-	
+
 		return true;
 	}
-	
-	
+
+
 	/**
 	 * function - Copy mail(from stdin to tmp and return the tmp file
 	 *
@@ -90,14 +90,14 @@ class ForumGateway extends Error {
 		$tmpfile = tempnam ("/tmp", "forum_gateway.".util_randnum()."-".util_randnum());
 		$in = fopen("php://stdin", "r");
 		$out = fopen($tmpfile, "w");
-	
+
 		while($buffer = fgets($in, 4096)) {
 			fputs($out, $buffer);
 		}
-	
+
 		fclose($in);
 		fclose($out);
-	
+
 		return $tmpfile;
 	}
 
@@ -111,7 +111,7 @@ class ForumGateway extends Error {
 	function parseMail($input_file) {
 		global $argv;
 //DBG("parseMail start");
-		
+
 		if (!$mp = new MailParser($input_file)) {
 			$this->setError('Error In MailParser');
 //DBG("parseMail error1: ".$mp->getErrorMessage());
@@ -172,8 +172,8 @@ class ForumGateway extends Error {
 
 		$begin = strpos($this->Body, FORUM_MAIL_MARKER);
 		if ($begin === false) { //do nothing
-				return true; 
-		}		
+				return true;
+		}
 		// get the part of the message located after the marker
 		$this->Body = substr($this->Body, $begin+strlen(FORUM_MAIL_MARKER));
 //DBG( "body2:". $this->Body);
@@ -184,14 +184,14 @@ class ForumGateway extends Error {
 		}
 		$message = substr($this->Body, 0, $end);
 		$message = trim($message);
-		
+
 		// maybe the last line was "> (FORUM_MAIL_MARKER)". In that case, delete the last ">"
 		$message = preg_replace('/>$/', '', $message);
 		$this->Message = $message;
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Insert data into the forum db
 	 *
@@ -236,7 +236,7 @@ class ForumGateway extends Error {
 			return false;
 		}
 //DBG( "AddMessage 3\n");
-		if ($this->Message!=""){	
+		if ($this->Message!=""){
 			if (!$ForumMessage->create($this->Subject,$this->Message,$this->ThreadId,$this->Parent)) {
 //DBG( "AddMessage 4.".$ForumMessage->getErrorMessage()."\n");
 				$this->setError("ForumMessage Create Error: ".$ForumMessage->getErrorMessage());
@@ -252,7 +252,7 @@ class ForumGateway extends Error {
 
 
 	/*------------------------------------------------------------------------
-	 *  Utility functions 
+	 *  Utility functions
 	 *-----------------------------------------------------------------------*/
 
 	/* Find user_id from email */
@@ -261,7 +261,7 @@ class ForumGateway extends Error {
 		$from = strtolower($this->FromEmail);
 		// If no user id, user id is 0;
 		if (! $from) return 0;
-		$res = db_query_params ('SELECT user_id FROM users 
+		$res = db_query_params ('SELECT user_id FROM users
 			WHERE lower(email) = $1 AND status = $2',
 					array (strtolower($from),
 					       'A'));
@@ -271,7 +271,7 @@ class ForumGateway extends Error {
 			$user_id = db_result($res,0,'user_id');
 		}
 		db_free_result($res);
-	
+
 		return $user_id;
 	}
 
@@ -291,7 +291,7 @@ class ForumGateway extends Error {
 				//
 				// Find Forum id by parent
 				//
-				$res = db_query_params ('SELECT group_forum_id,thread_id 
+				$res = db_query_params ('SELECT group_forum_id,thread_id
 					FROM forum
 					WHERE msg_id=$1',
 							array ($this->Parent));
@@ -299,7 +299,7 @@ class ForumGateway extends Error {
 				//
 				//	Find forum by arguments passed by aliases file
 				//
-				$res = db_query_params ('SELECT group_forum_id, 0 AS thread_id 
+				$res = db_query_params ('SELECT group_forum_id, 0 AS thread_id
 					FROM forum_group_list
 					WHERE forum_name=$1
 					AND group_id=$2',
@@ -316,10 +316,10 @@ class ForumGateway extends Error {
 
 			$this->Forum = new Forum($Group,$this->ForumId);
 		}
-	
+
 		return $this->Forum;
 	}
- 
+
 }
 
 
@@ -329,7 +329,7 @@ class ForumGateway extends Error {
  * Add this in /etc/syslog.conf and see /var/log/debug file:
  * # Debug
  * *.=debug			/var/log/debug
- * 
+ *
  */
 function DBG($str) {
 	global $debug;
@@ -341,7 +341,7 @@ system("echo \"forum: ".$str."\n\" >> /tmp/forum.log");
 		echo $str."\n";
 	}
 }
- 
+
 
 /* Main routine */
 $debug = 0;

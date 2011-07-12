@@ -49,7 +49,7 @@
     //:serial
 
      (types are scalars: strings, ints, bools)
-*/   
+*/
 
 /**
  * A WikiDB_backend handles the storage and retrieval of data for a WikiDB.
@@ -115,7 +115,7 @@ class WikiDB_backend
     function update_pagedata($pagename, $newdata) {
         trigger_error("virtual", E_USER_ERROR);
     }
-  
+
 
     /**
      * Get the current version number for a page.
@@ -127,7 +127,7 @@ class WikiDB_backend
     function get_latest_version($pagename) {
         trigger_error("virtual", E_USER_ERROR);
     }
-  
+
     /**
      * Get preceding version number.
      *
@@ -139,7 +139,7 @@ class WikiDB_backend
     function get_previous_version($pagename, $version) {
         trigger_error("virtual", E_USER_ERROR);
     }
-  
+
     /**
      * Get revision meta-data and content.
      *
@@ -266,7 +266,7 @@ class WikiDB_backend
         }
         $this->set_versiondata($pagename, $version, $data);
     }
-  
+
     /**
      * Set links for page.
      *
@@ -277,7 +277,7 @@ class WikiDB_backend
     function set_links($pagename, $links) {
         trigger_error("virtual", E_USER_ERROR);
     }
-      
+
     /**
      * Find pages which link to or are linked from a page.
      *
@@ -303,7 +303,7 @@ class WikiDB_backend
         include_once('lib/WikiDB/backend/dumb/AllRevisionsIter.php');
         return new WikiDB_backend_dumb_AllRevisionsIter($this, $pagename);
     }
-  
+
     /**
      * Get all pages in the database.
      *
@@ -326,7 +326,7 @@ class WikiDB_backend
     function get_all_pages($include_defaulted, $orderby=false, $limit='', $exclude='') {
         trigger_error("virtual", E_USER_ERROR);
     }
-      
+
     /**
      * Title or full text search.
      *
@@ -522,7 +522,7 @@ class WikiDB_backend
         $search = strtolower(trim($search));
         if (!$search)
             return array(array(),array());
-      
+
         $words = preg_split('/\s+/', $search);
         $exclude = array();
         foreach ($words as $key => $word) {
@@ -556,7 +556,7 @@ class WikiDB_backend
             return array(0, $limit);
         }
     }
-  
+
     /**
      * Handle sortby requests for the DB iterator and table header links.
      * Prefix the column with + or - like "+pagename","-mtime", ...
@@ -696,7 +696,7 @@ class WikiDB_backend_iterator
     	if (!empty($this->_pages))
 	    return count($this->_pages);
 	else
-	    return 0;  
+	    return 0;
     }
 
     function asArray() {
@@ -710,7 +710,7 @@ class WikiDB_backend_iterator
             return $result;
     	}
     }
-  
+
     /**
      * limit - if empty the pagelist iterator will do nothing.
      * Some backends limit the result set itself (dba, file, flatfile),

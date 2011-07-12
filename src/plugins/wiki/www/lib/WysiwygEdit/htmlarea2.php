@@ -26,7 +26,7 @@ if (win_ie_ver >= 5.5) {
   document.write('<scr' + 'ipt src=\"' +_editor_url+ 'editor.js\"');
   document.write(' language=\"Javascript1.2\"></scr' + 'ipt>');
 } else {
-  document.write('<scr'+'ipt>function editor_generate() { return false; }</scr'+'ipt>'); 
+  document.write('<scr'+'ipt>function editor_generate() { return false; }</scr'+'ipt>');
 }
  ",
 		    array('version' => 'JavaScript1.2',

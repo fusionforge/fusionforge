@@ -1,6 +1,6 @@
 #! /usr/bin/php
 <?php
-/* 
+/*
  * Copyright 2011, Roland Mas
  *
  * This file is part of FusionForge. FusionForge is free software;

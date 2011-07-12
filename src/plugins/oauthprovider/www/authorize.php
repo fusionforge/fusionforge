@@ -7,12 +7,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -33,7 +33,7 @@
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require $gfconfig.'/plugins/oauthprovider/config.php';
-require_once 'checks.php';	
+require_once 'checks.php';
 
 //non-admin users shud be able to do authorisations
 //session_require_global_perm('project_admin');
@@ -42,7 +42,7 @@ $pluginname = 'oauthprovider';
 
 
 try {
-	
+
 	$req = OAuthRequest::from_request();
 	//  print_r($req);
 
@@ -52,9 +52,9 @@ try {
 	$t_request_token = OauthAuthzRequestToken::load_by_key($p_token);
 
 	oauthprovider_CheckUser();
-	
+
 	echo '<h2>'. _('Pending authorization requests via OAuth') .'</h2>';
-	
+
 	if($type=="group") $groupname = $name;
 	else $groupname = null;
 	$group = group_get_object_by_name($groupname);
@@ -63,11 +63,11 @@ try {
 	//echo "group: ".$groupid;
 	$user = user_get_object($user_id);
 	$roles = array () ;
-	
+
 	foreach (RBACEngine::getInstance()->getAvailableRolesForUser($user) as $role) {
 		//print_r('role :');
 		//print_r($role);
-		
+
 		if ($role->getHomeProject()) {
 			if($groupname) {
 				if ($role->getHomeProject()->getID() == $group->getID()) {
@@ -80,10 +80,10 @@ try {
 				print_r($role);
 				$roles[] = $role ;
 			}
-			
+
 		}
 	}
-	
+
 	if($t_request_token) {
 		$consumer =  OauthAuthzConsumer::load($t_request_token->getConsumerId());
 		// don't allow to authorize tokens older than 24 hours
@@ -105,9 +105,9 @@ try {
 
 		if ($already_authorized > 0) {
 			echo "<p><b>ATTENTION: You have already $already_authorized authorized access for this consumer on your behalf. You are advised to delete previous access tokens first.</b></p>";
-			
+
 		}
-	
+
 		// Now we can display the pending request token and point to the authorization confirmation dialog
 	echo sprintf( _('Consumer <b>"%s"</b> wants to be authorized to access Fusionforge on your behalf (asked %s)'), $consumer->getName(), $date ) . ' ';
 	echo "<table><tr><td>";
@@ -118,16 +118,16 @@ try {
 		echo '<input type="hidden" name="plugin_oauthprovider_token_authorize_token" value="'.form_generate_key().'"/>';
 		echo '<input type="hidden" name="token_id" value="'.$t_request_token->getId().'"/>';
 		echo '<input type="hidden" name="callback_url" value="'.urlencode($callback_url).'"/>';
-			
+
 		echo "<table><tr><td>Role:</td><td><select name=\"rolelist\">";
 		foreach($roles as $role)	{
 			echo '<option value="'.$role->getID().'">'.$role->getDisplayableName().'</option>';
 		}
 		echo "</select></td>";
-		
+
 		echo '<td><input type="submit" value="'. _('Authorize') .'"/></td></tr></table>';
 		echo '</form>';
-		
+
 	}
 	else {
 		// just display an inactive authorization link
@@ -170,7 +170,7 @@ try {
 
 	error_parameters($e->getMessage(), "OauthAuthz");
 	exit_error( "Oauth authorisation error!", 'oauthprovider' );
-	
+
 }
 site_project_footer(array());
 

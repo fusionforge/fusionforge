@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -62,7 +62,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$location=$this->getLocation();
 		$url_regexp = str_replace('.', '\.', HOST);
 		$url_regexp = '/https?:\/\/'. $url_regexp .'\//';
-		$this->assertRegExp($url_regexp, $location, 
+		$this->assertRegExp($url_regexp, $location,
 				    "You may need to set 'HOST' setting in test suite's config file to something compatible with 'web_host' defined in ini file");
 
 		$this->type("form_loginname", "admin");
@@ -74,7 +74,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->logout();
 		// Verify that logout is succesfull
 		$this->assertTrue($this->isTextPresent("Log In"));
-	
+
 		// Test with an empty password.
 		$this->open( ROOT );
 		$this->click("link=Log In");
@@ -86,7 +86,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Missing Password Or User Name"));
 		$this->assertFalse($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log In"));
-		
+
 		// Test with a wrong password.
 		$this->open( ROOT );
 		$this->click("link=Log In");
@@ -98,7 +98,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Invalid Password Or User Name"));
 		$this->assertFalse($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log In"));
-		
+
 		// Test factored code.
 		$this->login('admin');
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
@@ -125,7 +125,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Log Out"));
 	}
 
-	
+
 }
 
 // Local Variables:

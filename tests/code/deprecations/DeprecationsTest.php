@@ -28,7 +28,7 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 		    -e ^src/common/include/database-mysql.php`;
 		$this->assertEquals('', $output);
 	}
-	
+
 	/**
 	 * Check that no code uses configuration items from global variables
 	 */
@@ -133,7 +133,7 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			) ;
 
 		$pattern = implode ('|', $vars) ;
-		
+
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
 		$output = `cd $root ; find src tests -name '*.php' -type f | xargs pcregrep -n '\\$($pattern)\b(?! *=[^=])' \
 					   | grep -v ^src/common/include/config-vars.php`;
@@ -143,7 +143,7 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 					   | grep -v ^src/common/include/config-vars.php`;
 		$this->assertEquals('', $output, "Found deprecated \$GLOBALS['\$var'] for var in ($pattern):");
 	}
-		
+
 	/**
 	 * Check that no code uses session_require()
 	 */
@@ -156,9 +156,9 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 		    -e ^src/common/include/session.php`;
 		$this->assertEquals('', $output);
 	}
-	
+
 }
-	
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

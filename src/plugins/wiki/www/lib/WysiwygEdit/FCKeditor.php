@@ -61,28 +61,28 @@ oFCKeditor.ReplaceTextarea();
         $out = HTML(
 		    JavaScript("
 var oFCKeditor = new FCKeditor( '$htmltextid' ) ;
-oFCKeditor.Value	= '" . $textarea->_content[0]->asXML() . "';" 
+oFCKeditor.Value	= '" . $textarea->_content[0]->asXML() . "';"
 . $this->_jsdefault . "
 oFCKeditor.Create();"),
-		    HTML::div(array("id"    => $this->_wikitextid, 
+		    HTML::div(array("id"    => $this->_wikitextid,
 				    'style' => 'display:none'),
 			      $wikitext),
 		    "\n");
 	return $out;
     }
-    
+
     /* textarea only */
     function Textarea_Replace ($textarea, $wikitext, $name='edit[content]') {
         $htmltextid = $this->_htmltextid;
         $textarea->SetAttr('id', $htmltextid);
         $out = HTML($textarea,
-		    HTML::div(array("id"    => $this->_wikitextid, 
+		    HTML::div(array("id"    => $this->_wikitextid,
 				    'style' => 'display:none'),
 			      $wikitext),
 		    "\n");
 	return $out;
     }
-    
+
     /* via the PHP object */
     function Textarea_PHP ($textarea, $wikitext, $name='edit[content]') {
         global $LANG;
@@ -98,8 +98,8 @@ oFCKeditor.Create();"),
 	$this->oFCKeditor->Config['AutoDetectLanguage']	= true ;
 	$this->oFCKeditor->Config['DefaultLanguage'] = $LANG;
 	$this->oFCKeditor->Create();
-	
-	return HTML::div(array("id"   => $this->_wikitextid, 
+
+	return HTML::div(array("id"   => $this->_wikitextid,
 			      'style' => 'display:none'),
 			      $wikitext);
     }

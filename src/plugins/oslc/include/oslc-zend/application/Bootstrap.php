@@ -25,7 +25,7 @@
 
   /* $Id$ */
 
-// This is a bit of black zend magic... don't ask : 
+// This is a bit of black zend magic... don't ask :
 // we don't know and borrowed it from somewhere ;-)
 
 // The next stop will be in controllers/CmController.php
@@ -40,26 +40,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'namespace' => 'Default_',
             'basePath'  => dirname(__FILE__),
         ));
-	
+
         return $autoloader;
-	} 
+	}
 	*/
-	
+
 	protected function _initRestRoute() {
 	  // This may be necessary if needing to override the _initRequest()
 	  //	  	$this->bootstrap('Request');
 	  	$this->bootstrap('FrontController');
-		
+
 	  	$front = Zend_Controller_Front::getInstance();
-		
-		/* This seems only needed if REST only for specific modules 
+
+		/* This seems only needed if REST only for specific modules
 		$cmRoute = new Zend_Rest_Route($front, array(), array('default' => array('cm')));
 		$front->getRouter()->addRoute('rest', $cmRoute);
 		*/
 		$restRoute = new Zend_Rest_Route($front);
 		$front->getRouter()->addRoute('default', $restRoute);
-	} 
-	
+	}
+
 	/* Seems not necessary to override it from the defaults at the moment
 	protected function _initRequest(){
         $this->bootstrap('FrontController');
@@ -69,7 +69,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $request = new Zend_Controller_Request_Http();
             $front->setRequest($request);
         }
-    	return $request;        
+    	return $request;
 	}*/
 
 

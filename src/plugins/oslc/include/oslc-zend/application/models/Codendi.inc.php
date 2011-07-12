@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Copyright (c) Institut TELECOM, 2010. All Rights Reserved.
  *
@@ -28,7 +28,7 @@ require_once('ChangeRequests.php');
         // we use simplexml PHP library which supports namespaces
 
         /*******Sample CR*****************************************
-         * 
+         *
          * <?xml version="1.0"?>
          * <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
          *   <oslc_cm:ChangeRequest xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/">
@@ -41,7 +41,7 @@ require_once('ChangeRequests.php');
          *       <dc:modified xmlns:dc="http://purl.org/dc/terms/">2008-09-16T08:42:11.265Z</dc:modified>
          *   </oslc_cm:ChangeRequest>
          * </rdf:RDF>
-         *           
+         *
          */
 
 /*        $dc_attr = array("title", "identifier", "description","creator","modified","created");
@@ -62,11 +62,11 @@ class ChangeRequestsCodendiDb extends ChangeRequests {
             $this->_data[$identifier] = $data;
         }
     }
-	
+
     /* duplicated from Codendi tracker SOAP API
-     * 
-     * TODO Add code that maps Codendi tracker fields to ontologies (dc, oslc, etc) 
-     * 
+     *
+     * TODO Add code that maps Codendi tracker fields to ontologies (dc, oslc, etc)
+     *
      */
     protected static function convert_artifacts_array($at_arr, $fields_string) {
         $CodendiCR_attr = array('artifact_id','group_artifact_id','status_id','priority','submitted_by','assigned_to','open_date','close_date',
@@ -91,34 +91,34 @@ class ChangeRequestsCodendiDb extends ChangeRequests {
                 if(isset($fields) && is_array($fields) && count($fields) > 0){
                     foreach ($fields as $field) {
                         switch ($field) {
-                            case 'dc:identifier': 
+                            case 'dc:identifier':
                                 $return[$identifier]['identifier'] = $identifier;
                                 break;
-                            case 'dc:title': 
+                            case 'dc:title':
                                 $return[$identifier]['title'] = $at_arr[$i]->data_array['summary'];
                                 break;
-                            case 'dc:description': 
+                            case 'dc:description':
                                 $return[$identifier]['description'] = $at_arr[$i]->data_array['details'];
                                 break;
-                            case 'dc:creator': 
+                            case 'dc:creator':
                                 $return[$identifier]['creator'] = $at_arr[$i]->data_array['submitted_realname'];
                                 break;
-                            case 'helios_bt:status': 
+                            case 'helios_bt:status':
                                 $return[$identifier]['helios_bt:status'] = $at_arr[$i]->data_array['status_name'];
                                 break;
-                            case 'helios_bt:priority': 
+                            case 'helios_bt:priority':
                                 $return[$identifier]['helios_bt:priority'] = $at_arr[$i]->data_array['priority'];
                                 break;
-                            case 'helios_bt:assigned_to': 
+                            case 'helios_bt:assigned_to':
                                 $return[$identifier]['helios_bt:assigned_to'] = $at_arr[$i]->data_array['assigned_realname'];
                                 break;
-                            case 'dc:modified': 
+                            case 'dc:modified':
                                 $return[$identifier]['modified'] = $at_arr[$i]->data_array['last_modified_date'];
                                 break;
-                            case 'dc:created': 
+                            case 'dc:created':
                                 $return[$identifier]['created'] = $at_arr[$i]->data_array['open_date'];
                                 break;
-                            default: 
+                            default:
                                 throw new ConflictException("The attribute specified ".$field." cannot be found!");
                         }
                     }

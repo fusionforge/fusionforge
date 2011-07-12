@@ -37,7 +37,7 @@ $end = getIntFromRequest('end');
 //
 //	Create Report
 //
-$report=new ReportSiteAct($SPAN,$start,$end); 
+$report=new ReportSiteAct($SPAN,$start,$end);
 
 //
 //	Check for error, such as license key problem
@@ -131,10 +131,10 @@ if ($area=='tracker') {
 $graph->title->Set("Site-Wide Activity (".date('m/d/Y',$report->getStartDate()) ."-". date('m/d/Y',$report->getEndDate()) .")");
 $graph->subtitle->Set(forge_get_config ('forge_name'));
 //$graph->xaxis-> title->Set("Date" );
-//$graph->yaxis-> title->Set("Number" ); 
+//$graph->yaxis-> title->Set("Number" );
 
 $a=$report->getDates();
-$graph->xaxis->SetTickLabels($a); 
+$graph->xaxis->SetTickLabels($a);
 $graph->xaxis->SetLabelAngle(90);
 $graph->xaxis->SetTextLabelInterval($report->getGraphInterval());
 

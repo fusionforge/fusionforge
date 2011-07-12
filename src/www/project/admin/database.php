@@ -50,10 +50,10 @@ if (getStringFromRequest('createdb')) {
 	$newdbtypeid = getIntFromRequest('newdbtypeid');
 
 	//mysql takes issue with database names that have dashes in them - so strip the dashes, replace with ""
-	//e.g. free-mysql becomes freemysql (it's a workaround) 
+	//e.g. free-mysql becomes freemysql (it's a workaround)
 	//if there is a dash in the groupname
 	$dbname = str_replace("-", "", $group->getUnixName());
-	
+
 	//check there is no name double up - if there is - add an incrementing to the number to the end
 
 	$dbname = prdb_namespace_seek($dbname);
@@ -65,10 +65,10 @@ if (getStringFromRequest('createdb')) {
 	if (!$res || db_affected_rows($res) < 1) {
 		$error_msg .= _('Cannot add database entry').': '.db_error();
 	} else {
-	
+
 		$feedback .= _('Database scheduled for creation');
 		group_add_history('Created database '.$dbname.' type '.$row_db['dbsoftware'].' ','',$group_id);
-	
+
 	}
 }
 
@@ -83,23 +83,23 @@ if (getStringFromRequest('updatedbrec')) {
 		//sync new password, and flag it as 'pending (an) update'
 
 		$res = db_query_params ('
-			UPDATE prdb_dbs 
+			UPDATE prdb_dbs
 			SET dbuserpass = $1,
 				state = $2
-			WHERE dbid = $3 
+			WHERE dbid = $3
 			AND group_id = $4
 		',
 			array($pw,
 				'4',
 				$dbid,
-				$group_id)); 
+				$group_id));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$error_msg .= "Update failure - ".db_error()."";
 		} else {
 			$res = db_query_params ('
-				SELECT * 
-				FROM prdb_types 
+				SELECT *
+				FROM prdb_types
 				WHERE dbtypeid=$1
 			',
 			array($newdbtypeid));
@@ -120,8 +120,8 @@ if (getStringFromRequest('deletedbconfirm')) {
 	//schedule for deletion
 
 	$res = db_query_params ('
-		UPDATE prdb_dbs 
-		SET state=3 
+		UPDATE prdb_dbs
+		SET state=3
 		WHERE dbid=$1
 		AND group_id=$2
 	',
@@ -146,12 +146,12 @@ if ($deletedb == 1) {
 }
 
 $res_db = db_query_params ('
-	SELECT * 
-	FROM prdb_types 
+	SELECT *
+	FROM prdb_types
 	WHERE dbsoftware NOT IN (
-		SELECT dbsoftware 
-		FROM prdb_dbs,prdb_types 
-		WHERE dbtypeid=dbtype 
+		SELECT dbsoftware
+		FROM prdb_dbs,prdb_types
+		WHERE dbtypeid=dbtype
 		AND group_id=$1
 		AND state IN (1,2,4)
 	)
@@ -175,7 +175,7 @@ if (db_numrows($res_db) > 0) {
 
 	while ($res_row = db_fetch_array($res_db)) {
 
-		print "<option value=\"".$res_row['dbtypeid']."\">".$res_row['dbsoftware']."</option>"; 
+		print "<option value=\"".$res_row['dbtypeid']."\">".$res_row['dbsoftware']."</option>";
 	}
 
 	print '
@@ -183,7 +183,7 @@ if (db_numrows($res_db) > 0) {
 		</select>
 		&nbsp; <input type="submit" name="Create" value="'._('Create').'" />
 		</form></p>
-	';	
+	';
 
 } else {
 ?>
@@ -194,10 +194,10 @@ if (db_numrows($res_db) > 0) {
 }
 
 $res_db = db_query_params("
-	SELECT * 
-	FROM prdb_dbs,prdb_states,prdb_types 
+	SELECT *
+	FROM prdb_dbs,prdb_states,prdb_types
 	WHERE group_id=$1
-	AND stateid=state 
+	AND stateid=state
 	AND dbtype=dbtypeid
 ", array($group_id));
 
@@ -222,7 +222,7 @@ if (db_numrows($res_db) > 0) {
 			';
 
 		//if database is active or pending update allow the record to be deleted or password changed
-		
+
 		if (($row_db['state'] == 1) || ($row_db['state'] == 4) || ($row_db['state'] == 2)) {
 
 			print '<form name="dbupdate" method="post" action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'">
@@ -233,7 +233,7 @@ if (db_numrows($res_db) > 0) {
 				     <td>
 				       <input type="submit" name="submit" value="'._('Update').'" />
 				     </td>
-				  </form> 
+				  </form>
 			';
 
 		} else {
@@ -243,7 +243,7 @@ if (db_numrows($res_db) > 0) {
 				<td>&nbsp;</td>
 			';
 		}
-		
+
 		print '</tr>';
 
 	}

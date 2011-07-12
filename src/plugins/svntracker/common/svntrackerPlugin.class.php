@@ -64,7 +64,7 @@ class svntrackerPlugin extends Plugin {
 
 			$title_arr=$this->getTitleArr();
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
-		
+
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
@@ -166,7 +166,7 @@ class svntrackerPlugin extends Plugin {
 	*/
 	/*function addCvsTrackerToFile($path) {
 		global  $cvs_binary_version;
-		
+
 		$FOut = fopen($path, "a");
 		if($FOut) {
 			fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
@@ -197,7 +197,7 @@ class svntrackerPlugin extends Plugin {
 	/*function getCvsFile($repos,$file) {
 		$actual_dir = getcwd();
 		$tempdirname = tempnam("/tmp","cvstracker");
-		if (!$tempdirname) 
+		if (!$tempdirname)
 			return false;
 		if (!unlink($tempdirname))
 			return false;
@@ -209,7 +209,7 @@ class svntrackerPlugin extends Plugin {
 		if (!chdir($tempdirname))
 			return false;
 		system("cvs -d ".$repos." co ".$file);
-		
+
 		chdir($actual_dir);
 		return $tempdirname.$file;
 	}*/

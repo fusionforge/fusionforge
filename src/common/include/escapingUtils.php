@@ -304,7 +304,7 @@ function & _getCookieArray() {
 function inputSpecialchars($string) {
 	return str_replace('"', '&quot;', $string);
 }
-	
+
 /**
 * unInputSpecialchars - clean a string escaped with inputSpecialchars
 *

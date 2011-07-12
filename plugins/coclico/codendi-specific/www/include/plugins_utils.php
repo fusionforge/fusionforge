@@ -39,4 +39,3 @@ function getImage($url) {
 return util_get_image_theme($url);
 }
 ?>
-

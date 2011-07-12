@@ -240,7 +240,7 @@ if ( empty ( $error ) && empty ( $list ) ) {
     "cal_allow_nav, cal_cat_id, cal_include_empty, cal_update_date " .
     "FROM webcal_report WHERE cal_report_id = $report_id" );
   if ( $res ) {
-    if ( $row = dbi_fetch_row ( $res ) ) { 
+    if ( $row = dbi_fetch_row ( $res ) ) {
       if ( $row[2] != 'Y' && $login != $row[0] ) {
         $error = translate ( "You are not authorized" ) . ".";
       } else {
@@ -342,7 +342,7 @@ if ( ! isset ( $report_time_range ) ) {
   $week_offset = 11 - $report_time_range + $offset;
   //echo "week_offset=$week_offset <br />";
   $start_date = date ( "Ymd", $wkstart + ( $week_offset * 7 * $ONE_DAY ) );
-  $end_date = date ( "Ymd", $wkstart + ( $week_offset * 7 * $ONE_DAY ) + 
+  $end_date = date ( "Ymd", $wkstart + ( $week_offset * 7 * $ONE_DAY ) +
     ( $ONE_DAY * 6 ) );
 } else if ( $report_time_range >= 20 && $report_time_range < 30 ) {
   if ( $WEEK_START == 1 ) {
@@ -356,7 +356,7 @@ if ( ! isset ( $report_time_range ) ) {
   $week_offset = 21 - $report_time_range + $offset;
   //echo "week_offset=$week_offset <br />";
   $start_date = date ( "Ymd", $wkstart + ( $week_offset * 7 * $ONE_DAY ) );
-  $end_date = date ( "Ymd", $wkstart + ( $week_offset * 7 * $ONE_DAY ) + 
+  $end_date = date ( "Ymd", $wkstart + ( $week_offset * 7 * $ONE_DAY ) +
     ( $ONE_DAY * 13 ) );
 } else if ( $report_time_range >= 30 && $report_time_range < 40 ) {
   $thismonth = date ( "m" );
@@ -434,7 +434,7 @@ if ( empty ( $error ) && empty ( $list ) ) {
     $ev = get_entries ( empty ( $user ) ? $login : $user, $dateYmd );
     $cur_rep = 0;
     //echo "DATE: $dateYmd <br />\n";
-  
+
     for ( $i = 0; $i < count ( $ev ); $i++ ) {
       // print out any repeating events that are before this one...
       while ( $cur_rep < count ( $rep ) &&
@@ -491,7 +491,7 @@ if ( empty ( $error ) && empty ( $list ) ) {
       }
       $cur_rep++;
     }
-  
+
     if ( ! empty ( $event_str ) || $report_include_empty == 'Y' ||
       $report_time_range < 10 ) {
       $date_str = date_to_str ( $dateYmd, "", false );
@@ -513,7 +513,7 @@ if ( ! empty ( $error ) ) {
     echo translate($PUBLIC_ACCESS_FULLNAME) . " ";
   }
   echo translate("Manage Reports");
-  echo "</h2>\n" . 
+  echo "</h2>\n" .
   "<a title=\"" . translate("Admin") . "\" class=\"nav\" href=\"adminhome.php\"> " .
      "&laquo;&nbsp;" . translate("Admin") . "</a><br /><br />\n" . $list;
 } else {
@@ -542,7 +542,7 @@ if ( empty ( $error ) && empty ( $list ) ) {
       translate ( "Next" ) . "</a><br />\n";
   }
   if ( $report_include_header == 'Y' ) {
-    echo '<br /><br /><a title="' . translate("Printer Friendly") . 
+    echo '<br /><br /><a title="' . translate("Printer Friendly") .
       '" class="nav" href="report.php?report_id=' . $report_id .
       '&amp;friendly=1' . $u_url . '&amp;offset=' . $offset .
       '" target="cal_printer_friendly" onmouseover="window.status=\'' .

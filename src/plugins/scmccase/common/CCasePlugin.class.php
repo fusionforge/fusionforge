@@ -11,7 +11,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -43,7 +43,7 @@ class CCasePlugin extends SCMPlugin {
 
 	function CallHook ($hookname, &$params) {
 		global $HTML ;
-		
+
 		switch ($hookname) {
 		case "scm_page":
 			$group_id = $params['group_id'] ;
@@ -74,10 +74,10 @@ class CCasePlugin extends SCMPlugin {
 		global $HTML ;
 
 		$project = group_get_object($group_id);
-		
+
 		if ($project->usesPlugin ("scmccase")) {
 			$vob_tag = preg_replace("/GROUPNAME/", $project->getUnixName (), forge_get_config('tag_pattern', 'scmccase')) ;
-	
+
 			print '<h2>ClearCase</h2>
 		                <p>Documentation for ClearCase is probably available somewhere.
                                 </p>' ;
@@ -87,7 +87,7 @@ class CCasePlugin extends SCMPlugin {
 			print '<table width="100%"><tr valign="top"><td width="65%">' ;
 
 			// Developer access
-			
+
 			echo "<b>".print(_('ClearCase Access'))."</b>" ;
 
 			print "<p>" ;
@@ -106,12 +106,12 @@ class CCasePlugin extends SCMPlugin {
 				$perm =& $project->getPermission ();
 				$anonymous = !$perm->isMember();
 			}
-			
+
 			if ($project->enableAnonCVS() || !$anonymous) {
 				echo $HTML->boxTop(_('History'));
-				
+
 				echo '<b>'._('Browse the ClearCase tree').'</b><p>'._('Browsing the ClearCase tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.').'</p>' ;
-				
+
 				$browse_url = "http://" . $this->GetGroupServer($group_id) . "/ccweb" ;
 				// $browse_url = $browse_url . "?vob_tag=".$vob_tag ;
 				echo "<p>" ;
@@ -125,10 +125,10 @@ class CCasePlugin extends SCMPlugin {
 			print '</td></tr></table>' ;
 		}
 	}
-	
+
 	function scm_admin_update ($params) {
 		$group = group_get_object($params['group_id']);
-		
+
 		if ($params['scmccase_ccase_server'] && $params['scmccase_ccase_server'] != "") {
 			$this->SetGroupServer ($params['group_id'], $params['scmccase_ccase_server']) ;
 		} else {
@@ -138,7 +138,7 @@ class CCasePlugin extends SCMPlugin {
 
 	function display_scm_admin_page ($params) {
 		$group = group_get_object($params['group_id']);
-		
+
 		if ( $group->usesPlugin ( $this->name ) ) {
 			print '<input type="text" name="scmccase_ccase_server" value="'.$this->GetGroupServer ($params['group_id']).'"> <strong>'._('ClearCase server').'</strong><br /><br />' ;
 		}
@@ -163,11 +163,11 @@ class CCasePlugin extends SCMPlugin {
 		$add_count=number_format($add_num, 0);
 		echo ' (CCase: <strong>'.$commit_count.'</strong> ';
 		printf(ngettext("commit","commits",$commit_count),$commit_count);
-		echo ', <strong>'.$add_count.'</strong> '; 
+		echo ', <strong>'.$add_count.'</strong> ';
 		printf(ngettext("add","adds",$add_count),$add_count);
 		echo ')';
 	}
-	
+
 
 	function GetDefaultServer () {
 		return forge_get_config('default_server', 'scmccase') ;
@@ -210,7 +210,7 @@ class CCasePlugin extends SCMPlugin {
 		} elseif ($project->isError()) {
 			return false;
 		}
-               
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}

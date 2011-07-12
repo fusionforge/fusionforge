@@ -7,7 +7,7 @@
  * Daniel Perez <danielperez.arg@gmail.com>
  *
  * This is an example to watch things in action. You can obviously modify things and logic as you see fit
- * 
+ *
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 require_once ('env.inc.php');
@@ -16,12 +16,12 @@ require_once 'preplugins.php';
 require_once 'plugins_utils.php';
 require_once 'mailman_utils.php';
 $request =& HTTPRequest::instance();
-	
+
 $group_id = $request->get('group_id');
 $pm = ProjectManager::instance();
 $Group = $pm->getProject($group_id);
 if (isset ($group_id)) {
-	
+
 	if (!$Group || !is_object($Group)) {
 		exit_error(_('Error'), 'Could Not Get Group');
 	} elseif ($Group->isError()) {
@@ -68,7 +68,7 @@ if (isset ($group_id)) {
 			echo '</p>';
 	}
 	}
-	
+
 	echo '<p>';
 	echo _('Choose a list to browse, search, and post messages.');
 	echo '</p>';

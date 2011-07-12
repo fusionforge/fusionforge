@@ -88,7 +88,7 @@ class SurveyResponse extends Error {
 		if (!$res) {
 			$this->setError(_('Error').db_error());
 			return false;
-		} 
+		}
 		return true;
 	}
 

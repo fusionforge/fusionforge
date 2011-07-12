@@ -49,7 +49,7 @@ class MailingListFactory extends Error {
 	 */
 	function MailingListFactory(& $Group) {
 		$this->Error();
-		
+
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'MailingListFactory'));
 			return false;
@@ -82,9 +82,9 @@ class MailingListFactory extends Error {
 		if (isset($this->mailingLists) && is_array($this->mailingLists)) {
 			return $this->mailingLists;
 		}
-		
+
 		$public_flag = MAIL__MAILING_LIST_IS_PUBLIC;
-		
+
 		$perm = & $this->Group->getPermission ();
 		if ($perm && is_object($perm) && $perm->isMember()) {
 			$public_flag = MAIL__MAILING_LIST_IS_PRIVATE.', '.MAIL__MAILING_LIST_IS_PUBLIC;

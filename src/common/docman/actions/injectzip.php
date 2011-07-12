@@ -38,7 +38,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 $doc_group = getIntFromRequest('dirid');
 $uploaded_zip = getUploadedFile('uploaded_zip');
 $dg = new DocumentGroup($g,$doc_group);
-	
+
 if ($dg->isError())
 	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 

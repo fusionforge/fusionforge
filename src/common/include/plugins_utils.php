@@ -24,10 +24,10 @@ $GLOBALS['mailman_lib_dir'] = '/var/lib/mailman';
 $GLOBALS['forumml_arch'] = '/var/lib/mailman/archives';
 $GLOBALS['forumml_tmp'] = '/var/spool/forumml';
 $GLOBALS['forumml_dir'] = '/var/lib/gforge/forumml';
-$GLOBALS['sys_lf'] = "\n"; 
+$GLOBALS['sys_lf'] = "\n";
 
 function isLogged(){
-        
+
         return session_loggedin();
 }
 
@@ -43,13 +43,13 @@ function htmlIframe($url,$poub) {
         }
         echo ('<iframe src= "'.$url.'" id="'.$id.'" width=100% height=500px></iframe>');
 }
-    
+
 function helpButton($help) {
 
 }
 function getIcon($url,$w=16,$h=16,$args=array()) {
-        echo html_image($url,$w,$h,$args); 
-}   
+        echo html_image($url,$w,$h,$args);
+}
 function getImage($img) {
         echo util_make_url($GLOBALS['HTML']->imgroot.$img);
 

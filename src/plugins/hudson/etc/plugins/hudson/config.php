@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // here you can put all your configuration variables
 

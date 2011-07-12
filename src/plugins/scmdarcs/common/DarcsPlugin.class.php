@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -33,10 +33,10 @@ class DarcsPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_update_repolist' ;
 		$this->hooks[] = 'scm_browser_page' ;
 		$this->hooks[] = 'scm_gather_stats' ;
-		
+
 		$this->register () ;
 	}
-	
+
 	function getDefaultServer() {
 		return forge_get_config('default_server', 'scmdarcs') ;
 	}
@@ -67,7 +67,7 @@ class DarcsPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if ($project->usesPlugin($this->name)) {
 			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						  array ($project->getID())) ;
@@ -82,7 +82,7 @@ class DarcsPlugin extends SCMPlugin {
 			echo ' (Darcs: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
-	
+
 	function getBlurb () {
 		return '<p>' . _('Documentation for Darcs is available <a href="http://darcs.net/">here</a>.') . '</p>';
 	}
@@ -120,7 +120,7 @@ class DarcsPlugin extends SCMPlugin {
  		};
  		return $b ;
  	}
- 
+
 	function getInstructionsForAnon ($project) {
 		$b = '<h2>';
 		$b .=  _('Anonymous Darcs Access');
@@ -188,7 +188,7 @@ class DarcsPlugin extends SCMPlugin {
 
 		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 					  array ($project->getID()));
-		
+
 		if (db_numrows($result) > 0) {
 			$b .= $HTML->boxMiddle(_('Repository Statistics'));
 
@@ -198,10 +198,10 @@ class DarcsPlugin extends SCMPlugin {
 				_('Commits')
 				);
 			$b .= $HTML->listTableTop($tableHeaders);
-			
+
 			$i = 0;
 			$total = array('adds' => 0, 'commits' => 0);
-			
+
 			while($data = db_fetch_array($result)) {
 				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 				$b .= '<td width="50%">' ;
@@ -230,7 +230,7 @@ class DarcsPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
 				print '<iframe src="'.
@@ -246,7 +246,7 @@ class DarcsPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-				
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
@@ -291,8 +291,8 @@ class DarcsPlugin extends SCMPlugin {
 				}
 			}
 		}
-	
-			
+
+
 		foreach ($this->getRepositories($project) as $repo_name)
 		{
 			$repo =  $toprepo . '/' . $repo_name ;
@@ -347,15 +347,15 @@ class DarcsPlugin extends SCMPlugin {
 				{
 					# Default repository name, we create a default entry for it
 					fwrite ($f,
-						$this->darcswebRepository($project, 
-																			"$unix_name", 
-																			"$unix_name/$repo_name", 
+						$this->darcswebRepository($project,
+																			"$unix_name",
+																			"$unix_name/$repo_name",
 																			"$toprepo/$repo_name"));
 				}
-				fwrite ($f, 
-					$this->darcswebRepository($project, 
-																		"$unix_name/$repo_name", 
-																		"$unix_name/$repo_name", 
+				fwrite ($f,
+					$this->darcswebRepository($project,
+																		"$unix_name/$repo_name",
+																		"$unix_name/$repo_name",
 																		"$toprepo/$repo_name"));
 			}
 		}
@@ -371,7 +371,7 @@ class DarcsPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		$group_name = $project->getUnixName() ;
 
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
@@ -418,33 +418,33 @@ class DarcsPlugin extends SCMPlugin {
 	function gatherStats ($params) {
 		global  $adds, $deletes, $updates, $commits,
 			$usr_adds, $usr_deletes, $usr_updates;
-		
+
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
-		
+
 		if ($params['mode'] == 'day') {
 			db_begin();
-		
+
 			$year = $params ['year'] ;
 			$month = $params ['month'] ;
 			$day = $params ['day'] ;
 			$month_string = sprintf( "%04d%02d", $year, $month );
 			$start_time = gmmktime( 0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
-		
+
 			$updates = 0 ;
 			$adds = 0 ;
 			$deletes = 0;
 			$usr_adds = array () ;
 			$usr_updates = array () ;
 			$usr_deletes = array ();
-		
+
 			$toprepo = $this->getRootRepositories($project) ;
 			$from_date = date("c", $start_time);
 			$to_date   = date("c", $end_time);
@@ -459,7 +459,7 @@ class DarcsPlugin extends SCMPlugin {
 				db_rollback () ;
 				return false ;
 			}
-		
+
 			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
 						array ($month_string,
 						       $day,
@@ -469,7 +469,7 @@ class DarcsPlugin extends SCMPlugin {
 				db_rollback () ;
 				return false ;
 			}
-		
+
 			foreach ($this->getRepositories($project) as $repo_name)
 			{
 				$repo = $toprepo . '/' . $repo_name;
@@ -482,18 +482,18 @@ class DarcsPlugin extends SCMPlugin {
 				{
 					echo "$repo\n";
 				}
-		
+
 				$pipe = popen("darcs changes --repodir='$repo' "
 								."--match 'date \"between $from_date and $to_date\"' "
 								."--xml -s\n", 'r');
-			
+
 				$xml_parser = xml_parser_create();
 				xml_set_element_handler($xml_parser, "DarcsPluginStartElement", "DarcsPluginEndElement");
-			
+
 				// Analyzing history stream
 				while (!feof($pipe) &&
 							 $data = fgets ($pipe, 4096)) {
-					
+
 					if (!xml_parse ($xml_parser, $data, feof ($pipe))) {
 						debug("Unable to parse XML with error " .
 									xml_error_string(xml_get_error_code($xml_parser)) .
@@ -504,12 +504,12 @@ class DarcsPlugin extends SCMPlugin {
 						break;
 					}
 				}
-				
+
 				xml_parser_free ($xml_parser);
 			}
-			
+
 			// inserting group results in stats_cvs_groups
-		
+
 			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 					      array ($month_string,
 						     $day,
@@ -521,11 +521,11 @@ class DarcsPlugin extends SCMPlugin {
 				db_rollback () ;
 				return false ;
 			}
-				
-			// build map for email -> login 
-		
+
+			// build map for email -> login
+
 			$email_login = array();
-			$email_login_fn = $repo."/_darcs/email-login.txt"; 
+			$email_login_fn = $repo."/_darcs/email-login.txt";
 			if (!file_exists($email_login_fn))
 			{
 				$email_login_fn = $repo."/.email-login.txt";
@@ -534,7 +534,7 @@ class DarcsPlugin extends SCMPlugin {
 			{
 				unset($email_login_fn);
 			};
-			
+
 			if (isset($email_login_fn))
 			{
 				$fh = fopen($email_login_fn, 'r');
@@ -548,10 +548,10 @@ class DarcsPlugin extends SCMPlugin {
 				};
 				fclose($fh);
 			};
-		
+
 			// building the user list
 			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
-		
+
 			foreach ( $user_list as $user ) {
 				// trying to get user id from darcs user name
 				$id = $user;
@@ -565,14 +565,14 @@ class DarcsPlugin extends SCMPlugin {
 				{
 				  $id = $email_login[$id];
 				}
-		
+
 				$u = &user_get_object_by_name ($id) ;
 				if ($u) {
 					$user_id = $u->getID();
 				} else {
 					continue;
 				}
-					
+
 				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 						      array ($month_string,
 							     $day,
@@ -585,7 +585,7 @@ class DarcsPlugin extends SCMPlugin {
 					return false ;
 				}
 			}
-		
+
 			db_commit();
 		}
 	}
@@ -611,7 +611,7 @@ class DarcsPlugin extends SCMPlugin {
 				{
 					array_push($nm, $res['repo_name']);
 				}
-				print '<p><strong>'._('Repository to be created: ') . '</strong>' . 
+				print '<p><strong>'._('Repository to be created: ') . '</strong>' .
 					implode(_(', '), $nm) . '</p>';
 			}
 
@@ -666,7 +666,7 @@ class DarcsPlugin extends SCMPlugin {
 			}
 
 			db_begin ();
-			if (!db_query_params ('INSERT INTO plugin_scmdarcs_create_repos (group_id,repo_name,clone_repo_name) 
+			if (!db_query_params ('INSERT INTO plugin_scmdarcs_create_repos (group_id,repo_name,clone_repo_name)
 				VALUES ($1,$2,$3)',
 				array($project->getID(), $new_repo_name, $clone_repo_name)))
 			{
@@ -680,10 +680,10 @@ class DarcsPlugin extends SCMPlugin {
 		}
 	}
 
-}	
-		
+}
+
 function DarcsPluginStartElement($parser, $name, $attrs) {
-	global $last_user, $commits, 
+	global $last_user, $commits,
 		$adds, $updates, $deletes,
 		$usr_adds, $usr_updates, $usr_deletes;
 	switch($name) {
@@ -726,7 +726,7 @@ function DarcsPluginStartElement($parser, $name, $attrs) {
 		break;
 	}
 }
-	
+
 function DarcsPluginEndElement ($parser, $name) {
 }
 // Local Variables:

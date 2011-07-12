@@ -1,5 +1,5 @@
 <?php
- 
+
 require dirname(__FILE__).'/SeleniumRemoteSuite.php';
 
 class TarSeleniumRemoteSuite extends SeleniumRemoteSuite

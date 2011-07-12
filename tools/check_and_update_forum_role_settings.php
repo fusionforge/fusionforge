@@ -24,13 +24,13 @@ for ($g=0; $g<db_numrows($groups_res); $g++) {
 		$error .= 'Error: Enable to get forums from group '. db_result($groups_res,$g,'group_id') . ' : ' .db_error();
 		return false;
 	}
-	
+
 	// build of an array containing group's forums
 	$forums_group = Array ();
 	for ($f=0; $f<db_numrows($forums_group_res); $f++) {
 		$forums_group[$f] = db_result($forums_group_res,$f,'group_forum_id');
 	}
-	
+
 	// select of all group's roles
 	$roles_group_res = db_query_params ('SELECT role_id FROM role WHERE group_id=$1',
 							       array (db_result($groups_res,$g,'group_id'))) ;
@@ -38,7 +38,7 @@ for ($g=0; $g<db_numrows($groups_res); $g++) {
 		$error .= 'Error: Enable to get roles from group '. db_result($groups_res,$g,'group_id') . ' : ' .db_error();
 		return false;
 	}
-		
+
 	// for each role
 	for ($r=0; $r<db_numrows($roles_group_res); $r++) {
 		// select conf of each role
@@ -49,8 +49,8 @@ for ($g=0; $g<db_numrows($groups_res); $g++) {
 			$error .= 'Error: Enable to get role settings from role '. db_result($roles_group_res,$r,'role_id') . ' : ' .db_error();
 			return false;
 		}
-		
-		// for each conf 
+
+		// for each conf
 		for ($c=0; $c<db_numrows($role_settings_res); $c++) {
 			// check if the conf is corresponding to an existing forum of the group
 			if (!in_array(db_result($role_settings_res,$c,'ref_id'),$forums_group)) {
@@ -67,8 +67,8 @@ for ($g=0; $g<db_numrows($groups_res); $g++) {
 			}
 		}
 	}
-	
-	// for each forum 
+
+	// for each forum
 	for ($f=0; $f<sizeof($forums_group); $f++) {
 		// for each role
 		for ($r=0; $r<db_numrows($roles_group_res); $r++) {

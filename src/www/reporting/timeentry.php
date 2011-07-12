@@ -43,13 +43,13 @@ $server->register(
 //      addArtifact
 //
 
-function &addTimeEntry($session_ser, $projectTaskId, $week, $daysAdjust, $timeCode, $hours) 
+function &addTimeEntry($session_ser, $projectTaskId, $week, $daysAdjust, $timeCode, $hours)
 {
         continue_session($session_ser);
 
         $teObj = new TimeEntry();
 	error_log("addTimeEntry ($projectTaskId, $week, $daysAdjust, $timeCode, $hours)");
-        return $teObj->create($projectTaskId, $week, $daysAdjust, $timeCode, $hours); 
+        return $teObj->create($projectTaskId, $week, $daysAdjust, $timeCode, $hours);
 }
 
 ?>

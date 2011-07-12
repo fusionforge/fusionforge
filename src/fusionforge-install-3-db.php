@@ -41,14 +41,14 @@ show("\n-=# Welcome to FusionForge DB-Installer #=-");
 //}
 
 // Make sure the DB is initialized by starting postgresql service
-if (is_file('/etc/init.d/postgresql')) 
+if (is_file('/etc/init.d/postgresql'))
 {
 	$pgservice='/etc/init.d/postgresql';
-} 
+}
 elseif (is_file('/etc/init.d/postgresql-8.2'))
 {
 	$pgservice='/etc/init.d/postgresql-8.2';
-} 
+}
 elseif (is_file('/etc/init.d/postgresql-8.3'))
 {
 	$pgservice='/etc/init.d/postgresql-8.3';
@@ -183,7 +183,7 @@ function install()
 
 	show(" * Creating '$gforge_user' User...");
 	run("/usr/sbin/useradd -g $gforge_user $gforge_user", true);
-	
+
 	// Let's give some time for PostgreSQL to start
 	sleep(5);
 
@@ -280,18 +280,18 @@ function install()
 		$pw_md5 = md5($pwd1);
 		$pw_crypt = crypt($pwd1);
 		$pw_crypt = str_replace('$', '\\\\\\$', $pw_crypt);
-		//run(	'su - postgres -c "psql ' . 
-		//	$gforge_db . 
-		//	' -c \\"UPDATE \\\\\"user\\\\\" SET unix_name=\'' . 
-		//	$admin_user . '\', password_md5=\'' . 
-		//	$pw_md5 . '\', password_crypt=\'' . 
+		//run(	'su - postgres -c "psql ' .
+		//	$gforge_db .
+		//	' -c \\"UPDATE \\\\\"user\\\\\" SET unix_name=\'' .
+		//	$admin_user . '\', password_md5=\'' .
+		//	$pw_md5 . '\', password_crypt=\'' .
 		//	$pw_crypt . '\' WHERE user_id=101;\\""'); // MODIFIQUE ESTO
 
-		//run(	'su - postgres -c "psql ' . 
-		//	$gforge_db . 
-		//	' -c \\"UPDATE \\\\\"users\\\\\" SET user_name=\'' . 
-		//	$admin_user . '\', user_pw=\'' . 
-		//	$pw_md5 . '\', unix_pw=\'' . 
+		//run(	'su - postgres -c "psql ' .
+		//	$gforge_db .
+		//	' -c \\"UPDATE \\\\\"users\\\\\" SET user_name=\'' .
+		//	$admin_user . '\', user_pw=\'' .
+		//	$pw_md5 . '\', unix_pw=\'' .
 		//	$pw_crypt . '\' WHERE user_id=101;\\""');
 //echo "BREAKPOINT 1\n";
 //$t = trim(fgets($STDIN));
@@ -329,7 +329,7 @@ forge_name=FusionForge
 web_host='.system("hostname -f").'
 ';
 			fwrite ($fp, $config);
-			fclose($fp);	
+			fclose($fp);
 		}
 	}
 	if (!is_file("$fusionforge_etc_dir/config.ini.d/rpm-install-secrets.ini")){
@@ -346,7 +346,7 @@ database_port=5432
 ; database_password=$pw
 ';
 			fwrite ($fp, $config);
-			fclose($fp);	
+			fclose($fp);
 		}
 	}
 	#$data = file_get_contents("$fusionforge_etc_dir/local.inc");
@@ -360,7 +360,7 @@ database_port=5432
 
 	#if ($fp = fopen("$fusionforge_etc_dir/local.inc", "w")) {
 	#	fwrite ($fp, $config);
-	#	fclose($fp);	
+	#	fclose($fp);
 	#}
 
 	show(' * Saving installation log in /tmp/gforge-import.log');

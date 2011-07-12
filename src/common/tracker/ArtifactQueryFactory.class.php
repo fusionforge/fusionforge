@@ -20,7 +20,7 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
- 
+
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/ArtifactQuery.class.php';
 
@@ -60,14 +60,14 @@ class ArtifactQueryFactory extends Error {
 
 		return true;
 	}
-	
+
 	function &getArtifactQueries() {
 		if (!is_null($this->ArtifactQueries)) {
 			return $this->ArtifactQueries;
 		}
-		
+
 		$this->ArtifactQueries = array();
-		
+
 		$res = db_query_params ('SELECT * FROM artifact_query WHERE user_id=$1
 					 AND group_artifact_id=$2',
 					array (user_getid(),
@@ -75,12 +75,12 @@ class ArtifactQueryFactory extends Error {
 		if (!$res) {
 			$this->setError("ArtifactQueryFactory:: Database error");
 		}
-		
+
 		while ($data = db_fetch_array($res)) {
 			$artifactQuery = new ArtifactQuery($this->ArtifactType, $data["artifact_query_id"]);
 			$this->ArtifactQueries[] = $artifactQuery;
 		}
-		
+
 		return $this->ArtifactQueries;
 	}
 }

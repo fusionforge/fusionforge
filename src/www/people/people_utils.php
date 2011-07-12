@@ -1,6 +1,6 @@
 <?php
 /**
- * Help Wanted 
+ * Help Wanted
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
@@ -97,7 +97,7 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 		$result=db_query_prams("SELECT * FROM people_skill_inventory WHERE user_id=$1 AND skill_id=$2", array(user_getid(), $skill_id));
 		if (!$result || db_numrows($result) < 1) {
 			//skill not already in inventory
-			$result = db_query_params("INSERT INTO people_skill_inventory (user_id,skill_id,skill_level_id,skill_year_id) 
+			$result = db_query_params("INSERT INTO people_skill_inventory (user_id,skill_id,skill_level_id,skill_year_id)
 VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill_year_id));
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= sprintf(_('ERROR inserting into skill inventory: %s'),db_error());
@@ -114,11 +114,11 @@ VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill
 }
 
 function people_show_skill_inventory($user_id) {
-	$result = db_query_params("SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name 
-FROM people_skill_year,people_skill_level,people_skill,people_skill_inventory 
-WHERE people_skill_year.skill_year_id=people_skill_inventory.skill_year_id 
-AND people_skill_level.skill_level_id=people_skill_inventory.skill_level_id 
-AND people_skill.skill_id=people_skill_inventory.skill_id 
+	$result = db_query_params("SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name
+FROM people_skill_year,people_skill_level,people_skill,people_skill_inventory
+WHERE people_skill_year.skill_year_id=people_skill_inventory.skill_year_id
+AND people_skill_level.skill_level_id=people_skill_inventory.skill_level_id
+AND people_skill.skill_id=people_skill_inventory.skill_id
 AND people_skill_inventory.user_id=$1", array($user_id));
 
 	$title_arr=array();
@@ -204,7 +204,7 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 		$result=db_query_params('SELECT * FROM people_job_inventory WHERE job_id=$1 AND skill_id=$2', array($job_id, $skill_id));
 		if (!$result || db_numrows($result) < 1) {
 			//skill isn't already in this inventory
-			$result=db_query_params('INSERT INTO people_job_inventory (job_id,skill_id,skill_level_id,skill_year_id) 
+			$result=db_query_params('INSERT INTO people_job_inventory (job_id,skill_id,skill_level_id,skill_year_id)
 VALUES ($1, $2, $3, $4)', array($job_id, $skill_id, $skill_level_id, $skill_year_id));
 			if (!$result || db_affected_rows($result) < 1) {
 				$feedback .= _('ERROR inserting into skill inventory');
@@ -222,11 +222,11 @@ VALUES ($1, $2, $3, $4)', array($job_id, $skill_id, $skill_level_id, $skill_year
 }
 
 function people_show_job_inventory($job_id) {
-	$result=db_query_params('SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name 
-FROM people_skill_year,people_skill_level,people_skill,people_job_inventory 
-WHERE people_skill_year.skill_year_id=people_job_inventory.skill_year_id 
-AND people_skill_level.skill_level_id=people_job_inventory.skill_level_id 
-AND people_skill.skill_id=people_job_inventory.skill_id 
+	$result=db_query_params('SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name
+FROM people_skill_year,people_skill_level,people_skill,people_job_inventory
+WHERE people_skill_year.skill_year_id=people_job_inventory.skill_year_id
+AND people_skill_level.skill_level_id=people_job_inventory.skill_level_id
+AND people_skill.skill_id=people_job_inventory.skill_id
 AND people_job_inventory.job_id=$1', array($job_id));
 
 	$title_arr=array();
@@ -351,11 +351,11 @@ function people_show_category_table() {
 
 	$return = $GLOBALS['HTML']->listTableTop ($title_arr);
 
-	$result= db_query_params('SELECT pjc.category_id, pjc.name, COUNT(pj.category_id) AS total 
-FROM people_job_category pjc LEFT JOIN people_job pj 
-ON pjc.category_id=pj.category_id 
-WHERE pjc.private_flag=0 
-AND (pj.status_id=1 OR pj.status_id IS NULL) 
+	$result= db_query_params('SELECT pjc.category_id, pjc.name, COUNT(pj.category_id) AS total
+FROM people_job_category pjc LEFT JOIN people_job pj
+ON pjc.category_id=pj.category_id
+WHERE pjc.private_flag=0
+AND (pj.status_id=1 OR pj.status_id IS NULL)
 GROUP BY pjc.category_id, pjc.name', array());
 
 	$rows=db_numrows($result);
@@ -374,11 +374,11 @@ GROUP BY pjc.category_id, pjc.name', array());
 
 function people_show_project_jobs($group_id) {
 	//show open jobs for this project
-	$result = db_query_params('SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name 
-FROM people_job,people_job_category,groups 
+	$result = db_query_params('SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name
+FROM people_job,people_job_category,groups
 WHERE people_job.group_id=$1
-AND people_job.group_id=groups.group_id 
-AND people_job.category_id=people_job_category.category_id 
+AND people_job.group_id=groups.group_id
+AND people_job.category_id=people_job_category.category_id
 AND people_job.status_id=1 ORDER BY post_date DESC', array($group_id));
 
 	return people_show_job_list($result);
@@ -386,11 +386,11 @@ AND people_job.status_id=1 ORDER BY post_date DESC', array($group_id));
 
 function people_show_category_jobs($category_id) {
 	//show open jobs for this category
-	$result=db_query_params('SELECT people_job.group_id,people_job.job_id,groups.unix_group_name,groups.group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name 
-FROM people_job,people_job_category,groups 
+	$result=db_query_params('SELECT people_job.group_id,people_job.job_id,groups.unix_group_name,groups.group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name
+FROM people_job,people_job_category,groups
 WHERE people_job.category_id=$1
-AND people_job.group_id=groups.group_id 
-AND people_job.category_id=people_job_category.category_id 
+AND people_job.group_id=groups.group_id
+AND people_job.category_id=people_job_category.category_id
 AND people_job.status_id=1 ORDER BY post_date DESC', array($category_id));
 
 	return people_show_job_list($result);

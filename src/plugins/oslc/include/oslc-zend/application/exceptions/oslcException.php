@@ -4,13 +4,13 @@ class oslcException extends Exception
 {
 	protected $code = 0;
 	protected $exception_details = "OSLC Custom Exception";
-	
+
 	public function __construct($message, Exception $previous = null)
 	{
 		parent::__construct($message, $this->code, $previous);
-		
+
 	}
-	
+
 	public function getExceptionDetails()
 	{
 		return $this->exception_details;

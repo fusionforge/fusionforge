@@ -70,7 +70,7 @@ if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('my');
 	}
-	
+
 	if (forge_get_config('user_registration_accept_conditions') && ! $accept_conditions) {
 		$warning_msg = _("You can't register an account unless you accept the terms of use.") ;
 	} else {
@@ -83,7 +83,7 @@ if (getStringFromRequest('submit')) {
 			$send_mail = true;
 			$activate_immediately = false;
 		}
-		
+
 		$new_user = new GFUser();
 		$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 					      $email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
@@ -105,13 +105,13 @@ if (getStringFromRequest('submit')) {
 			}
 			if ($send_mail) {
 				echo '<p>';
-				printf(_('You have registered the %1$s account on %2$s.'), 
+				printf(_('You have registered the %1$s account on %2$s.'),
 				       $new_user->getUnixName(),
 				       forge_get_config ('forge_name'));
 				echo '</p>';
 				print '<p>' . _('A confirmation email is being sent to verify the submitted email address. Visiting the link sent in this email will activate the account.') . '</p>';
 			} else {
-				print '<p>' ; 
+				print '<p>' ;
 				printf (_('You have registered and activated user %1$s on %2$s. They will not receive an eMail about this fact.'), $unix_name, forge_get_config('forge_name'));
 				print '</p>' ;
 			}
@@ -193,7 +193,7 @@ if (forge_get_config('require_unique_email')) {
 <?php
 if (forge_get_config('use_jabber')) {
 	echo _('Jabber Address:').'<br />
-	<input size="30" type="text" name="jabber_address" value="'. 
+	<input size="30" type="text" name="jabber_address" value="'.
 	htmlspecialchars($jabber_address) .'" /><br />
 	<input type="checkbox" name="jabber_only" value="1" />
 	'._('Send auto-generated notices only to my Jabber address').'.';

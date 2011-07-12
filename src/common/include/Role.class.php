@@ -68,7 +68,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				}
 			}
 		}
-		
+
 		if (!$role_id) {
 			//setting up an empty object
 			//probably going to call create()
@@ -124,7 +124,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					$this->setError('Cannot create a role with this name (already used)');
 					return false;
 				}
-				
+
 				$res = db_query_params('UPDATE role SET role_name=$1 WHERE group_id=$2 AND role_id=$3',
 							array(htmlspecialchars($role_name),
 							       $this->Group->getID(),
@@ -192,12 +192,12 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			} elseif (!forge_check_perm ('project_admin', $this->Group->getID())) {
 				$this->setPermissionDeniedError();
 				return false;
-			}			
+			}
 			if ($role_name == '') {
 				$this->setError('Cannot create a role with an empty name');
 				return false;
 			}
-			
+
 			db_begin();
 			if ($this->Group == NULL) {
 				$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id IS NULL AND role_name=$1',
@@ -216,7 +216,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					return false;
 				}
 			}
-				
+
 			if ($this->Group == NULL) {
 				$res = db_query_params ('INSERT INTO pfo_role (role_name) VALUES ($1)',
 				array (htmlspecialchars($role_name))) ;
@@ -240,11 +240,11 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			$this->data_array['role_name'] = $role_name ;
 
 			$this->update ($role_name, $data) ;
-				
+
 			$this->normalizeData () ;
-			
+
 		} else { // not USE_PFO_RBAC
-			
+
 			$perm =& $this->Group->getPermission ();
 			if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 				$this->setPermissionDeniedError();
@@ -276,7 +276,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			}
 
 			$arr1 = array_keys($data);
-			for ($i=0; $i<count($arr1); $i++) {	
+			for ($i=0; $i<count($arr1); $i++) {
 			//	array_values($Report->adjust_days)
 				$arr2 = array_keys($data[$arr1[$i]]);
 				for ($j=0; $j<count($arr2); $j++) {
@@ -302,7 +302,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				}
 			}
 		}
-		
+
 		if (!$this->fetchData($role_id)) {
 			db_rollback();
 			return false;
@@ -320,7 +320,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		if ($this->Group == NULL) {
 			return $this->create($name,array(),true);
 		}
-		
+
 		if (array_key_exists ($name, $this->defaults)) {
 			$arr =& $this->defaults[$name];
 		} else {
@@ -366,7 +366,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 		return $this->create($name,$data,false);
 	}
-	
+
 	/**
 	 * delete - delete a role in the database.
 	 *
@@ -383,7 +383,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$this->setPermissionDeniedError();
 				return false;
 			}
-			
+
 			$res=db_query_params('SELECT user_id FROM pfo_user_role WHERE role_id=$1',
 					     array($this->getID()));
 			assert($res);
@@ -399,7 +399,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				db_rollback();
 				return false;
 			}
-			
+
 			$res=db_query_params('DELETE FROM role_project_refs WHERE role_id=$1',
 					     array($this->getID()));
 			if (!$res || db_affected_rows($res) < 1) {
@@ -407,7 +407,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				db_rollback();
 				return false;
 			}
-			
+
 			$res=db_query_params('DELETE FROM pfo_role_setting WHERE role_id=$1',
 					     array($this->getID()));
 			if (!$res || db_affected_rows($res) < 1) {
@@ -415,7 +415,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				db_rollback();
 				return false;
 			}
-			
+
 			$res=db_query_params('DELETE FROM pfo_role WHERE role_id=$1',
 					     array($this->getID()));
 			if (!$res || db_affected_rows($res) < 1) {
@@ -423,14 +423,14 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				db_rollback();
 				return false;
 			}
-			
+
 		} else { // not USE_PFO_RBAC
-			
+
 			if (!is_numeric($this->getID())) {
 				$this->setError('Role::delete() role_id is not an integer');
 				return false;
 			}
-			
+
 			//	Cannot delete role_id=1
 			if ($this->getID() == 1) {
 				$this->setError(_('Cannot Delete Default Role.'));
@@ -441,7 +441,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$this->setPermissionDeniedError();
 				return false;
 			}
-			
+
 			$res=db_query_params('SELECT user_id FROM user_group WHERE role_id=$1',
 					     array($this->getID()));
 			assert($res);
@@ -449,9 +449,9 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$this->setError(_('Cannot remove a non empty role.'));
 				return false;
 			}
-		
+
 			db_begin();
-			
+
 			$res=db_query_params('DELETE FROM role WHERE group_id=$1 AND role_id=$2',
 			array($this->Group->getID(), $this->getID()));
 			if (!$res || db_affected_rows($res) < 1) {
@@ -459,9 +459,9 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				db_rollback();
 				return false;
 			}
-				
+
 			db_commit();
-				
+
 			return true;
 		}
 	}
@@ -474,9 +474,9 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 */
 	function setUser($user_id) {
 		global $SYS;
-		
+
 		if (USE_PFO_RBAC) {
-			
+
 			if ($this->Group == NULL) {
 				if (!forge_check_global_perm ('forge_admin')) {
 					$this->setPermissionDeniedError();
@@ -486,11 +486,11 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$this->setPermissionDeniedError();
 				return false;
 			}
-				
+
 			return $this->addUser (user_get_object($user_id)) ;
-				
+
 		} else { // not USE_PFO_RBAC
-				
+
 			$perm =& $this->Group->getPermission ();
 			if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 				$this->setPermissionDeniedError();

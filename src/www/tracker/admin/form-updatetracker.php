@@ -41,11 +41,11 @@ $ath->adminHeader(array ('title'=>sprintf(_('Update settings for %s'),$ath->getN
 		<?php echo _('<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
 		<?php if ($ath->getDataType()) {
 			echo $ath->getName();
-		} else { 
+		} else {
 			?>
 			<input type="text" name="name" value="<?php echo $ath->getName(); ?>" />
-			<?php 
-		} 
+			<?php
+		}
 		?>
 		</p>
 		<p>
@@ -55,8 +55,8 @@ $ath->adminHeader(array ('title'=>sprintf(_('Update settings for %s'),$ath->getN
 		} else {
 			?>
 			<input type="text" name="description" value="<?php echo $ath->getDescription(); ?>" size="50" />
-			<?php 
-		} 
+			<?php
+		}
 		?>
 		</p>
 		<p>
@@ -67,7 +67,7 @@ $ath->adminHeader(array ('title'=>sprintf(_('Update settings for %s'),$ath->getN
 		<p>
 		<strong><?php echo _('Days till considered overdue') ?>:</strong><br />
 		<input type="text" name="due_period" value="<?php echo $due_period; ?>" /></p>
-		<p> 
+		<p>
 		<strong><?php echo _('Days till pending tracker items time out') ?>:</strong><br />
 		<input type="text" name="status_timeout"  value="<?php echo $status_timeout; ?>" /></p>
 		<p>

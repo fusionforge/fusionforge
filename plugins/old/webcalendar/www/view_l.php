@@ -45,7 +45,7 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
 }
 
 // If view_name not found, then the specified view id does not
-// belong to current user. 
+// belong to current user.
 if ( empty ( $view_name ) ) {
   $error = translate ( "You are not authorized" );
 }
@@ -87,7 +87,7 @@ $viewusers = array ();
 $all_users = false;
 if ( $res ) {
   while ( $row = dbi_fetch_row ( $res ) ) {
-    $viewusers[] = $row[0]; 
+    $viewusers[] = $row[0];
     if ( $row[0] == "__all__" ) {
       $all_users = true;
     }
@@ -142,12 +142,12 @@ $e_save = array ();
 $re_save = array ();
 for ( $i = 0; $i < count ( $viewusers ); $i++ ) {
   /* Pre-Load the repeated events for quckier access */
-  $repeated_events = read_repeated_events ( $viewusers[$i], "", $startdate ); 
+  $repeated_events = read_repeated_events ( $viewusers[$i], "", $startdate );
   $re_save = array_merge($re_save, $repeated_events);
   /* Pre-load the non-repeating events for quicker access */
   $events = read_events ( $viewusers[$i], $startdate, $enddate );
   $e_save = array_merge($e_save, $events);
-} 
+}
 $events = array ();
 $repeated_events = array ();
 
@@ -175,9 +175,9 @@ for ( $i = 0; $i < count ( $re_save ); $i++ ) {
   }
 }
 
-display_small_month ( $prevmonth, $prevyear, true, true, "prevmonth", 
+display_small_month ( $prevmonth, $prevyear, true, true, "prevmonth",
   "view_l.php?id=$id&amp;" );
-display_small_month ( $nextmonth, $nextyear, true, true, "nextmonth", 
+display_small_month ( $nextmonth, $nextyear, true, true, "nextmonth",
   "view_l.php?id=$id&amp;" );
 ?>
 
@@ -263,12 +263,12 @@ if ( ! empty ( $eventinfo ) ) {
   echo $eventinfo;
 }
 
-display_unapproved_events ( ( $is_assistant || 
+display_unapproved_events ( ( $is_assistant ||
   $is_nonuser_admin ? $user : $login ) );
 ?>
 
 <br />
-<a title="<?php 
+<a title="<?php
  etranslate("Generate printer-friendly version")
 ?>" class="printer" href="view_l.php?id=<?php echo $id?>&amp;<?php
  if ( $thisyear ) {
@@ -276,8 +276,8 @@ display_unapproved_events ( ( $is_assistant ||
  }
  if ( ! empty ( $user ) ) echo "user=$user&amp;";
  if ( ! empty ( $cat_id ) ) echo "cat_id=$cat_id&amp;";
-?>friendly=1" target="cal_printer_friendly" onmouseover="window.status = '<?php 
- etranslate("Generate printer-friendly version")?>'">[<?php 
+?>friendly=1" target="cal_printer_friendly" onmouseover="window.status = '<?php
+ etranslate("Generate printer-friendly version")?>'">[<?php
  etranslate("Printer Friendly")?>]</a>
 
 <?php print_trailer ();?>

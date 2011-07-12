@@ -25,7 +25,7 @@ $ath->header(array ('title'=>_('Submit New')));
 
 require_once $gfwww.'tracker/build_submission_form.php';
 artifact_submission_form($ath, $group);
-	
+
 $ath->footer(array());
 
 // Local Variables:

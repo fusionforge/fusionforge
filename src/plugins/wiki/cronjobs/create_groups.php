@@ -1,7 +1,7 @@
 #! /usr/bin/php -f
 <?php
 /**
- * create_groups.php 
+ * create_groups.php
  *
  * Francisco Gimeno <kikov@fco-gimeno.com>
  *
@@ -60,8 +60,8 @@ if (!$res) {
 
 $groups_dir = "$upload_path/groups";
 
-if (!is_dir($groups_dir)) 
-	system("mkdir -p $groups_dir"); 
+if (!is_dir($groups_dir))
+	system("mkdir -p $groups_dir");
 
 
 while ( $row = db_fetch_array($res) ) {

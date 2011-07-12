@@ -25,13 +25,13 @@
 require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
 
 class WikiGroupSearchEngine extends GroupSearchEngine {
-	
+
 	function WikiGroupSearchEngine() {
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_WIKI,
-					 'WikiHtmlSearchRenderer', 
+					 'WikiHtmlSearchRenderer',
 					 _('Wiki'));
 	}
-	
+
 	function isAvailable($parameters) {
 		if (parent::isAvailable($parameters)) {
 			if ($this->Group->usesPlugin('wiki')) {

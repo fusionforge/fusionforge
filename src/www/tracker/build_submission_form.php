@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Generic Tracker facility
  *
@@ -32,20 +32,20 @@ function artifact_submission_form($ath, $group) {
 	<form id="trackeraddform" action="<?php echo getStringFromServer('PHP_SELF') . '?group_id='.$group->getID().'&amp;atid='.$ath->getID(); ?>" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 	<table>
-	
+
 	<tr>
 		<td valign="top">
 	            <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 	            <input type="hidden" name="func" value="postadd" />
 	            <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-<?php 
+<?php
 	if (!session_loggedin()) {
 		echo '<div class="login_warning_msg">
 		<span class="warning_msg">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</span><br /><br />
 		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
 		<input type="text" name="user_email" size="50" maxlength="255" /></p>
 		</div>';
-	} 
+	}
 ?>
 		</td>
 	</tr>
@@ -54,7 +54,7 @@ function artifact_submission_form($ath, $group) {
 		<td valign="top"><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></td>
 	</tr>
 
-<?php 
+<?php
 	$ath->renderExtraFields(array(),true,'none',false,'Any',array(),false,'UPDATE');
 
 	if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
@@ -76,21 +76,21 @@ function artifact_submission_form($ath, $group) {
 
 	<tr>
 		<td colspan="2">
-			<strong> <?php echo _('Detailed description'); echo utils_requiredField(); ?> :</strong><?php notepad_button('document.forms.trackeraddform.details'); ?><br /> 
+			<strong> <?php echo _('Detailed description'); echo utils_requiredField(); ?> :</strong><?php notepad_button('document.forms.trackeraddform.details'); ?><br />
 			<textarea id="tracker-description" name="details" rows="20" cols="79" title="<?php echo util_html_secure(html_get_tooltip_description('description')); ?> "></textarea>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-<?php 
+<?php
 	if (!session_loggedin()) {
 		echo '<div class="login_warning_msg">
 		<div class="error">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</div><br />
 		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
 		<input type="text" name="user_email" size="30" maxlength="255" /></p>
 		</div>';
-	} 
+	}
 ?>
 
 		<p>&nbsp;</p>
@@ -121,6 +121,6 @@ function artifact_submission_form($ath, $group) {
 
 	<tr><td colspan="2"><br/><?php  echo utils_requiredField(); echo _('Indicates required fields.'); ?></td></tr>
 	</table></form>
-<?php 
+<?php
 }
 ?>

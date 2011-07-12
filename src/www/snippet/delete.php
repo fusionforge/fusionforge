@@ -51,8 +51,8 @@ if (session_loggedin()) {
 		} else {
 
 			//Remove the item from the package
-			$result=db_query_params ('DELETE FROM snippet_package_item 
-WHERE snippet_version_id=$1 
+			$result=db_query_params ('DELETE FROM snippet_package_item
+WHERE snippet_version_id=$1
 AND snippet_package_version_id=$2',
 			array($snippet_version_id,
 				$snippet_package_version_id));

@@ -27,11 +27,11 @@ require $gfcommon.'include/cron_utils.php';
 $err='';
 
 /*
-  
+
   Rebuild the trove_agg table, which saves us
   from doing really expensive queries in trove
   each time of the trove map is viewed
-  
+
 */
 
 db_begin();
@@ -63,7 +63,7 @@ Calculate the number of projects under each category
 Do this by first running an aggregate query in the database,
 then putting that into two associative arrays.
 
-Start at the top of the trove tree and recursively go down 
+Start at the top of the trove tree and recursively go down
 the tree, building a third associative array which contains
 the count of projects under each category
 
@@ -115,7 +115,7 @@ function get_trove_sub_projects($cat_id) {
 
 	// Number of groups that were in this trove_cat
 	$count=isset($cat_counts[$cat_id][1]) ? $cat_counts[$cat_id][1] : 0;
- 
+
 	//number of children of this trove_cat
 	$rows=count( @$parent_list[$cat_id] );
 
@@ -141,7 +141,7 @@ $err .= db_error();
 
 //$err .= "<table>";
 while (list($k,$v) = each($sum_totals)) {
-	$res = db_query_params ('INSERT INTO trove_treesums (trove_cat_id,subprojects) 
+	$res = db_query_params ('INSERT INTO trove_treesums (trove_cat_id,subprojects)
 		VALUES ($1,$2)',
 				array($k,
 				      $v));

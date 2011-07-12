@@ -14,7 +14,7 @@
  *              sends mail for tracker items
  *
  *            ./send_pending_items_mail.php pm
- *              sends mail for pm items 
+ *              sends mail for pm items
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -73,15 +73,15 @@ function send_pending_pm_items_mail(){
 			$language=db_result($userres,$usercount,"language");
 			setup_gettext_from_language_id($language);
 			$subject=_('Pending task manager items notification');
-			$messagebody=stripcslashes(sprintf(_('This mail is sent to you to remind you of pending/overdue tasks. 
-The task manager item #%1$s is pending: 
+			$messagebody=stripcslashes(sprintf(_('This mail is sent to you to remind you of pending/overdue tasks.
+The task manager item #%1$s is pending:
 Task Summary: %2$s
 Submitted by: %4$s
 Status:%5$s
 Percent Complete: %6$s
 
 Click here to visit the item %3$s'), $project_task_id, $summary, $hyperlink, $user_name, $status_name, db_result($res, $i,'percent_complete')));
-			util_send_message($mailto,$subject,$messagebody);	
+			util_send_message($mailto,$subject,$messagebody);
 		}
 	}
 	cron_entry(19,db_error());
@@ -93,7 +93,7 @@ function send_pending_tracker_items_mail(){
 	$time = time();
 	$res = db_query_params ('SELECT artifact_id, submitted_by, group_id, assigned_to, summary,  details, description,  assigned_realname, submitted_realname, status_name, category_name, group_name, group_artifact_id, open_date	FROM artifact_vw a NATURAL JOIN artifact_group_list agl	WHERE (agl.due_period+a.open_date) < $1 AND a.status_id=1',
 			array($time));
-	
+
 	for ($tmp=0; $tmp<db_numrows($res); $tmp++) {
 		$realopendate=date(_('Y-m-d H:i'), db_result($res,$tmp,'open_date'));
 		$status_name=db_result($res,$tmp,'status_name');
@@ -124,7 +124,7 @@ Details: %9$s
 
 Click here to visit the item: %4$s'),  $artifact, $opendate, $summary, $hyperlink, $status_name, $realopendate, db_result($res,$tmp,'assigned_realname'), db_result($res,$tmp,'submitted_realname'),  db_result($res,$tmp,'details')));
 			/* and finally send the email */
-			util_send_message($mailto,$subject,$messagebody);	
+			util_send_message($mailto,$subject,$messagebody);
 		}
 	}
 	cron_entry(19,db_error());

@@ -24,14 +24,14 @@
 require_once $gfcommon.'search/SearchQuery.class.php';
 
 class NewsSearchQuery extends SearchQuery {
-	
+
 	/**
 	* group id
 	*
 	* @var int $groupId
 	*/
 	var $groupId;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -40,9 +40,9 @@ class NewsSearchQuery extends SearchQuery {
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 */
-	function NewsSearchQuery($words, $offset, $isExact, $groupId) {	
+	function NewsSearchQuery($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
-		
+
 		$this->SearchQuery($words, $offset, $isExact);
 	}
 
@@ -53,7 +53,7 @@ class NewsSearchQuery extends SearchQuery {
 	 */
 	function getQuery() {
 
-		
+
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {

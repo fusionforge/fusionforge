@@ -34,14 +34,14 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
-		$this->_addHook("user_link_with_tooltip"); 
+		$this->_addHook("user_link_with_tooltip");
 		$this->_addHook("project_link_with_tooltip");
-		$this->_addHook("javascript_file"); // Add js files for oslc plugin	
+		$this->_addHook("javascript_file"); // Add js files for oslc plugin
 		$this->_addHook("javascript"); // Add js initialization code
 		$this->_addHook("cssfile");
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");
-		$this->_addHook("content_negociated_project_home");		
+		$this->_addHook("content_negociated_project_home");
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -51,7 +51,7 @@ class oslcPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("oslc")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/oslc/index.php' . $param ));				
+						  array ('/plugins/oslc/index.php' . $param ));
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -73,7 +73,7 @@ class oslcPlugin extends Plugin {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
 				$params['ADMIN'][]='';
-			}	
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
@@ -181,14 +181,14 @@ class oslcPlugin extends Plugin {
 			use_stylesheet('/plugins/oslc/css/oslcTooltipStyle.css');
 		}
 		elseif($hookname == "script_accepted_types"){
-			$script = $params['script']; 
-			if ($script == 'user_home' || $script == 'project_home') { 
-				$params['accepted_types'][] = 'application/x-oslc-compact+xml'; 
-			} 
+			$script = $params['script'];
+			if ($script == 'user_home' || $script == 'project_home') {
+				$params['accepted_types'][] = 'application/x-oslc-compact+xml';
+			}
 		}
 		elseif($hookname == "content_negociated_user_home") {
-			$username = $params['username']; 
-			$accept = $params['accept']; 
+			$username = $params['username'];
+			$accept = $params['accept'];
 			if($accept == 'application/x-oslc-compact+xml') {
 				$params['content_type'] = 'application/x-oslc-compact+xml';
 				$params['content'] = '<?xml version="1.0"?>
@@ -230,7 +230,7 @@ class oslcPlugin extends Plugin {
 		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
-		} 
+		}
 	}
 }
 

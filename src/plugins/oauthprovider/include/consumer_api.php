@@ -7,12 +7,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -26,13 +26,13 @@ require_once('OAuth.php');
 
 /**
  * OAuth Consumer class stored in DB
- * 
+ *
  * @author Olivier Berger
  */
 class OauthAuthzConsumer extends OAuthConsumer {
 	protected $id; // ID in the DB
 	protected $name; // admin provided user-friendly name for the consumer
-	
+
 	protected $url;
 	protected $desc;
 	protected $email;
@@ -45,61 +45,61 @@ class OauthAuthzConsumer extends OAuthConsumer {
 	  $this->desc = $p_desc;
 	  $this->email = $p_email;
 	}
-	
+
 	public function setId($p_id) {
   		$this->id = $p_id;
   	}
-  	
+
 	public function setName($p_name) {
   		$this->name = $p_name;
   	}
-  	
+
 	public function setURL($p_url) {
   		$this->url = $p_url;
   	}
-  	
+
 	public function setDesc($p_desc) {
   		$this->desc = $p_desc;
   	}
-  	
+
 	public function setEmail($p_email) {
   		$this->email = $p_email;
   	}
-  
+
 	public function getId() {
   		return $this->id;
   	}
-  	
+
 	public function getName() {
   		return $this->name;
   	}
-  	
+
 	public function getUrl() {
   		return $this->url;
   	}
-  	
+
 	public function getDesc() {
   		return $this->desc;
   	}
-  	
+
 	public function getEmail() {
   		return $this->email;
   	}
-  	
+
   	static function check_consumer_values($p_consumer_name, $p_consumer_url, $p_consumer_desc, $p_consumer_email)	{
 	  	if ((!trim($p_consumer_name))) {
 			//$missing_params[] = _('"Consumer Name"');
-			return "The field 'Consumer Name' is empty! "; 
+			return "The field 'Consumer Name' is empty! ";
 			//exit_missing_param('', $missing_params,'oauthprovider');
 		}
 		elseif ((!trim($p_consumer_url))) {
-			return "The field 'Consumer URL' is empty! "; 
+			return "The field 'Consumer URL' is empty! ";
 		}
 		elseif ((!trim($p_consumer_desc))) {
-			return "The field 'Consumer Description' is empty! "; 
+			return "The field 'Consumer Description' is empty! ";
 		}
 		elseif ((!trim($p_consumer_email))) {
-			return "The field 'Consumer Email' is empty! "; 
+			return "The field 'Consumer Email' is empty! ";
 		}
 		elseif(strlen($p_consumer_name)<5)	{
 			return "The Consumer Name cannot be less than 5 characters!";
@@ -118,7 +118,7 @@ class OauthAuthzConsumer extends OAuthConsumer {
 		}
 		elseif(OauthAuthzConsumer::consumer_exists($p_consumer_name))	{
 			return "The name '".$p_consumer_name."' has already been taken. Please choose another!";
-				
+
 		}
 		elseif(!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $p_consumer_url))	{
 			return "The Consumer URL is not valid.";
@@ -127,10 +127,10 @@ class OauthAuthzConsumer extends OAuthConsumer {
 			return null;
 		}
   	}
-	
+
   /**
    * Converts a row returned by select * into an object
-   * 
+   *
    * @param array $t_row
    * @return OauthAuthzRequestToken
    */
@@ -142,28 +142,28 @@ class OauthAuthzConsumer extends OAuthConsumer {
   		}else {
   			return null;
   		}
-  		
+
   	}
-  	
+
 	/**
 	   * returns a newly generated consumer key and secret
-	   * 
-	   * @return array 
+	   *
+	   * @return array
 	   */
 	  	static function new_consumer_keys_generate () {
 	  		$DBSTORE = FFDbOAuthDataStore::singleton();
 	  		return $DBSTORE->new_consumer_keys();
 	  	}
-  	 
+
 	/**
 	 * Loads an OauthAuthzConsumer from its ID in the DB
-	 * 
+	 *
 	 * @param int $p_id ID in the DB
 	 * @return OauthAuthzConsumer
 	 */
 	static function load( $p_id ) {
 		$DBSTORE = FFDbOAuthDataStore::singleton();
-		$t_row = $DBSTORE->find_consumer_from_id($p_id); 
+		$t_row = $DBSTORE->find_consumer_from_id($p_id);
 		$t_consumer = OauthAuthzConsumer::row_to_new_consumer($t_row);
 		$t_consumer->setId($t_row['id']);
 		return $t_consumer;
@@ -171,7 +171,7 @@ class OauthAuthzConsumer extends OAuthConsumer {
 
 	/**
 	 * Loads all OauthAuthzConsumer from the DB
-	 * 
+	 *
 	 * @return array of OauthAuthzConsumer
 	 */
 	static function load_all() {
@@ -191,7 +191,7 @@ class OauthAuthzConsumer extends OAuthConsumer {
 
 	/**
 	 * Loads an OauthAuthzConsumer from the DB provided its key
-	 * 
+	 *
 	 * @param string $p_consumer_key
 	 * @return OauthAuthzConsumer
 	 */
@@ -206,10 +206,10 @@ class OauthAuthzConsumer extends OAuthConsumer {
 			return $t_consumer;
 		}
 	}
-	
+
 	/**
 	 * Loads an OauthAuthzConsumer from the DB provided its name
-	 * 
+	 *
 	 * @param string $p_consumer_name
 	 * @return bool
 	 */
@@ -222,7 +222,7 @@ class OauthAuthzConsumer extends OAuthConsumer {
 		else {
 			return true;
 		}
-		
+
 	}
 
 	/**
@@ -239,10 +239,10 @@ class OauthAuthzConsumer extends OAuthConsumer {
 		}else {
 			$this->setId($id);
 		}
-		
-		
+
+
 	}
-	
+
 	/**
 	 * Deletes an OauthAuthzConsumer from the DB
 	 */
@@ -252,6 +252,6 @@ class OauthAuthzConsumer extends OAuthConsumer {
 			exit_error("Error trying to delete consumer from DB", 'oauthprovider');
 		}
 	}
-	
+
 
   };

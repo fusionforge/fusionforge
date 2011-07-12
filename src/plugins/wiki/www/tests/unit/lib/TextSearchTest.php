@@ -24,14 +24,14 @@ class TextSearchTest extends phpwiki_TestCase {
         $subpages = $dbi->titleSearch($query, $sortby, $limit, $exclude);
 
 	// don't trust count() with limit
-	$this->assertTrue($subpages->count() > 0 and $subpages->count() <= 7, 
+	$this->assertTrue($subpages->count() > 0 and $subpages->count() <= 7,
 			  "0 < count() <= 7");
 	$result = array();
 	// but the iterator should limit
 	while ($page = $subpages->next())
 	    $result[] = $page->getName();
 	$this->assertEquals(5, count($result), "limit 5");
-	
+
     }
 
     function testFulltextSearch() {
@@ -71,7 +71,7 @@ class TextSearchTest extends phpwiki_TestCase {
 	while ($page = $pages->next())
 	    $result[] = $page->getName();
         $this->assertTrue(in_array("TextFormattingRules", $result), "found case phrase");
-        
+
     }
 }
 

@@ -41,7 +41,7 @@ class ArtifactFromID extends Error {
 			} else {
 				$art_arr = db_fetch_array($res);
 			}
-		} 
+		}
 
 		$at = artifactType_get_object($art_arr['group_artifact_id']);
 		if (!$at || !is_object($at)) {

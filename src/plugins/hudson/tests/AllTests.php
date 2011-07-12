@@ -12,7 +12,7 @@ require_once('../../../codendi_tools/tests/simpletest/mock_objects.php');
 class HudsonGroupTest extends GroupTest {
     function HudsonGroupTest($name = 'All Hudson Plugin tests') {
         $this->GroupTest($name);
-        
+
         $this->addTestFile(dirname(__FILE__).'/HudsonJobTest.php');
         $this->addTestFile(dirname(__FILE__).'/HudsonTestResultTest.php');
         $this->addTestFile(dirname(__FILE__).'/HudsonBuildTest.php');

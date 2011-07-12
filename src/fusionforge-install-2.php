@@ -72,7 +72,7 @@
 	//     echo 1>&2 "invalid apache group"
 	//     exit 2
 	//fi
-	
+
 
 	exec("getent group $args[3] > /dev/null", $arr, $t);
 	if ($t != 0) {
@@ -180,7 +180,7 @@
 	system("mkdir -p /etc/gforge/httpd.conf.d");
 	$h = opendir ('etc/httpd.conf.d-opt') ;
 	while (false !== ($file = readdir($h))) {
-		if ($file != "." 
+		if ($file != "."
 		    && $file != ".."
 		    && (preg_match ('/^[0-9a-zA-Z_-]+(.conf)?$/', $file)
 			|| preg_match ('/^[0-9a-zA-Z_-]+(.inc)?$/', $file))) {
@@ -268,7 +268,7 @@
 
 	//cd /opt/gforge
 	chdir("/opt/gforge");
-	
+
 	if (!is_dir("/etc/gforge"))
 	{
 		echo "/etc/gforge didn't exist - error - make sure you've got permission";

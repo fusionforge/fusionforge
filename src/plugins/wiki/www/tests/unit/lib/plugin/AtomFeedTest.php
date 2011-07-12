@@ -30,12 +30,12 @@ class AtomFeedTest
 extends phpwiki_TestCase
 {
     var $atom_feed_plugin;
-    
+
     public function setUp() {
         parent::setUp();
         $this->atom_feed_plugin = new WikiPlugin_AtomFeed();
     }
-    
+
     public function testRunMaxItem() {
         global $request;
         $expected_html = <<<EXPECTED
@@ -43,7 +43,7 @@ extends phpwiki_TestCase
 <dl>
 <dt><a href="http://maps.google.com/maps?f=q&sll=53.125728,-6.068907&ie=UTF8">Foobar Éire</a></dt>
 <dd><div xmlns="http://www.w3.org/1999/xhtml">Millenium Spire, Dublin
-          <div class="geo">Geo coordinates: 
+          <div class="geo">Geo coordinates:
             <abbr class="latitude" title="53.349441">53.349441</abbr>
             <abbr class="longitude" title="-6.260282">-6.260282</abbr>
           </div>
@@ -54,7 +54,7 @@ EXPECTED;
         $html = $this->atom_feed_plugin->run(null, 'url=file://' . dirname(__FILE__) . '/atom-example.xml maxitem=1', $request, '.');
         $this->assertEquals($expected_html, trim(html_entity_decode($html->asXML())));
     }
-    
+
     public function testRunTitleOnly() {
         global $request;
         $expected_html = <<<EXPECTED

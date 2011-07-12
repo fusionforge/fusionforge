@@ -44,8 +44,8 @@ $server->wsdl->addComplexType(
 	'status' => array('name'=>'status', 'type' => 'xsd:string'),
 	'timezone' => array('name'=>'timezone', 'type' => 'xsd:string'),
 	'country_code' => array('name'=>'country_code', 'type' => 'xsd:string'),
-	'add_date' => array('name'=>'add_date', 'type' => 'xsd:int'), 
-	'language_id' => array('name'=>'language_id', 'type' => 'xsd:int') 
+	'add_date' => array('name'=>'add_date', 'type' => 'xsd:int'),
+	'language_id' => array('name'=>'language_id', 'type' => 'xsd:int')
 	) );
 
 // Array of users
@@ -94,7 +94,7 @@ $server->register(
 	'phone'=>'xsd:string','fax'=>'xsd:string',
 	'title'=>'xsd:string','ccode'=>'xsd:string'),
     array('addUserResonse'=>'xsd:int'),
-    $uri,  
+    $uri,
     $uri.'#addUser','rpc','encoded'
 );
 
@@ -109,7 +109,7 @@ $server->register(
 	'timezone'=>'xsd:string',
 	'mail_site'=>'xsd:string',
 	'mail_va'=>'xsd:string',
-	'use_ratings'=>'xsd:string',	
+	'use_ratings'=>'xsd:string',
 	'jabber_address'=>'xsd:string',
 	'jabber_only'=>'xsd:int',
 	'theme_id'=>'xsd:int',
@@ -120,7 +120,7 @@ $server->register(
 	'title'=>'xsd:string',
 	'ccode'=>'xsd:string'),
     array('updateUserResonse'=>'xsd:int'),
-    $uri,  
+    $uri,
     $uri.'#updateUser','rpc','encoded'
 );
 
@@ -129,7 +129,7 @@ $server->register(
     'deleteUser',
     array('session_ser'=>'xsd:string','user_id'=>'xsd:string'),
     array('deleteUserResonse'=>'xsd:boolean'),
-    $uri,  
+    $uri,
     $uri.'#deleteUser','rpc','encoded'
 );
 
@@ -140,7 +140,7 @@ $server->register(
 	'user_id'=>'xsd:string',
 	'status'=>'xsd:string'),
     array('changeStatusResonse'=>'xsd:boolean'),
-    $uri,  
+    $uri,
     $uri.'#changeStatus','rpc','encoded'
 );
 
@@ -151,7 +151,7 @@ $server->register(
 	'user_id'=>'xsd:string',
 	'password'=>'xsd:string'),
     array('changePasswordResonse'=>'xsd:boolean'),
-    $uri,  
+    $uri,
     $uri.'#changePassword','rpc','encoded'
 );
 
@@ -187,7 +187,7 @@ function getUsersByName($session_ser,$user_names) {
 	return users_to_soap($usrs);
 }
 
-//add user object 
+//add user object
 function addUser($unix_name,$firstname,$lastname,$password1,$password2,$email,
 		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,$unix_box,$address,$address2,$phone,$fax,$title,$ccode){
 	$new_user = new GFUser();
@@ -201,7 +201,7 @@ function addUser($unix_name,$firstname,$lastname,$password1,$password2,$email,
 	return $new_user->getID();
 }
 
-//update user object 
+//update user object
 function updateUser ($session_ser,$user_id,$firstname,$lastname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode){
 	continue_session($session_ser);
 	$user =& user_get_object($user_id);
@@ -212,11 +212,11 @@ function updateUser ($session_ser,$user_id,$firstname,$lastname,$language_id,$ti
 	if (!$user->update($firstname,$lastname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode)){
 	return new soap_fault ('updateUser',$user->getErrorMessage(),$user->getErrorMessage());
 	}else{
-		return $user->getID();	
+		return $user->getID();
 	}
 }
 
-//delete user object 
+//delete user object
 function deleteUser ($session_ser,$user_id){
 	continue_session($session_ser);
 	$user =& user_get_object($user_id);
@@ -229,11 +229,11 @@ function deleteUser ($session_ser,$user_id){
 	if (!$user->delete(true)){
 		return new soap_fault ('deleteUser',$user->getErrorMessage(),$user->getErrorMessage());
 	}else{
-		return true;	
+		return true;
 	}
 }
 
-//change status user object 
+//change status user object
 function changeStatus ($session_ser,$user_id,$status){
 	continue_session($session_ser);
 	$user =& user_get_object($user_id);
@@ -242,7 +242,7 @@ function changeStatus ($session_ser,$user_id,$status){
 	}elseif ($user->isError()){
 		return new soap_fault ('changeStatus',$user->getErrorMessage(),$user->getErrorMessage());
 	}
-	
+
 	if (!$user->setStatus($status)){
 		return new soap_fault ('changeStatus',$user->getErrorMessage(),$user->getErrorMessage());
 	}else{
@@ -250,7 +250,7 @@ function changeStatus ($session_ser,$user_id,$status){
 	}
 }
 
-//change password user object 
+//change password user object
 function changePassword ($session_ser,$user_id,$password){
 	continue_session($session_ser);
 	$user =& user_get_object($user_id);
@@ -259,7 +259,7 @@ function changePassword ($session_ser,$user_id,$password){
 	}elseif ($user->isError()){
 		return new soap_fault ('changePassword',$user->getErrorMessage(),$user->getErrorMessage());
 	}
-	
+
 	if (!$user->setPasswd($password)){
 		return new soap_fault ('changePassword',$user->getErrorMessage(),$user->getErrorMessage());
 	}else{
@@ -289,7 +289,7 @@ function &users_to_soap($usrs) {
 		} else {
 			//build an array of just the fields we want
 			$return[] = array(
-			'user_id'=>$usrs[$i]->data_array['user_id'], 
+			'user_id'=>$usrs[$i]->data_array['user_id'],
 			'user_name'=>$usrs[$i]->data_array['user_name'],
 			'title'=>$usrs[$i]->data_array['title'],
 			'firstname'=>$usrs[$i]->data_array['firstname'],

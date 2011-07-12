@@ -1,5 +1,5 @@
 <?php
- 
+
 $default_cvs_server = forge_get_config('scm_host') ;
 $cvs_binary_version='1.12';
 $use_ssl=false;
@@ -10,5 +10,5 @@ $GLOBALS['cvs_binary_version']=$cvs_binary_version;
 // mode: php
 // c-file-style: "bsd"
 // End:
- 
+
 ?>

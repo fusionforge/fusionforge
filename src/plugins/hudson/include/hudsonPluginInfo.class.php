@@ -22,11 +22,11 @@ require_once('common/plugin/PluginInfo.class.php');
 require_once('hudsonPluginDescriptor.class.php');
 
 class hudsonPluginInfo extends PluginInfo {
-    
+
     function hudsonPluginInfo(&$plugin) {
         $this->PluginInfo($plugin);
         $this->setPluginDescriptor(new hudsonPluginDescriptor());
     }
-    
+
 }
 ?>

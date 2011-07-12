@@ -8,7 +8,7 @@
 
 require_once ('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'scm/include/scm_utils.php';    
+require_once $gfwww.'scm/include/scm_utils.php';
 
 $func = getStringFromRequest ('func') ;
 switch ($func) {
@@ -22,17 +22,17 @@ case 'request-personal-repo':
 	if ($result && db_numrows ($result) == 1) {
 		scm_header (array ('title' => _('SCM Repository'), 'group' => $group_id)) ;
 		echo _('You have already requested a personal Git repository for this project.  If it does not exist yet, it will be created shortly.') ;
-		scm_footer(); 
+		scm_footer();
 		exit;
 	}
-	
+
 	$glist = $user->getGroups() ;
 	foreach ($glist as $g) {
 		if ($g->getID() == $group_id) {
 			$result = db_query_params ('INSERT INTO plugin_scmgit_personal_repos (group_id, user_id) VALUES ($1,$2)',
 						   array ($group_id,
 							  $user->getID())) ;
-			
+
 			scm_header (array ('title' => _('SCM Repository'), 'group' => $group_id)) ;
 			echo _('You have now requested a personal Git repository for this project.  If will be created shortly.') ;
 			scm_footer() ;

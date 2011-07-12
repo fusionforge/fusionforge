@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  *
- * 
+ *
  */
 
 /**
@@ -26,12 +26,12 @@
 * Base class to manage system events
 */
 class SystemEventManager {
-    
-   
+
+
 
     // Constructor
     function SystemEventManager() {
-       
+
     }
 
     protected static $_instance;
@@ -45,7 +45,7 @@ class SystemEventManager {
         }
         return self::$_instance;
     }
- 
+
     /**
      * Create a new event, store it in the db and send notifications
      */
@@ -57,10 +57,10 @@ class SystemEventManager {
 				'NEW')
 		);
         }
-    
+
    /**
      * Table to display the status of the last n events
-     * 
+     *
      * @param int     $offset        the offset of the pagination
      * @param int     $limit         the number of event to includ in the table
      * @param boolean $full          display a full table or only a summary

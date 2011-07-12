@@ -53,8 +53,8 @@ function addHeader(cc,file,header_type)
   					+file
   					+"'size=30></td><td align=center><a href=\"javascript:;\" onclick=\"removeHeader(\'"
   					+divIdName
-  					+"\')\"><img border='0' src=\"<?php echo getImage("ic/trash.png"); ?>\"></a></td></tr></table>";  
-  }					
+  					+"\')\"><img border='0' src=\"<?php echo getImage("ic/trash.png"); ?>\"></a></td></tr></table>";
+  }
   ni.appendChild(newdiv);
 }
 

@@ -27,7 +27,7 @@ if ($func == 'addlabel') {
 	} else {
 		echo _('Project label added.');
 	}
-	
+
 }
 if ($func == 'delete') {
 	db_begin () ;
@@ -42,7 +42,7 @@ if ($func == 'delete') {
 	} else {
 		$res = db_query_params ('DELETE FROM plugin_projectlabels_labels WHERE label_id=$1',
 			array($label_id));
-		
+
 		if (!$res) {
 			printf (_('Cannot delete label: %s'),
 				db_error()) ;
@@ -64,7 +64,7 @@ if ($func == 'addlabeltoproject') {
 		$res = db_query_params ('INSERT INTO plugin_projectlabels_group_labels (label_id, group_id) VALUES ($1, $2)',
 					array ($label_id,
 					       $g->getID()));
-		
+
 		if (!$res || db_affected_rows($res) < 1) {
 			printf (_('Cannot add label onto project: %s'),
 				db_error()) ;
@@ -74,7 +74,7 @@ if ($func == 'addlabeltoproject') {
 	} else {
 		echo _('No such project.') ;
 	}
-	
+
 }
 if ($func == 'removelabelfromproject') {
 	$label_id = getIntFromRequest ('label_id', 0) ;
@@ -88,7 +88,7 @@ if ($func == 'removelabelfromproject') {
 	} else {
 		echo _('The label has been removed from the project.') ;
 	}
-	
+
 }
 if ($func == 'editlabel') {
 	$label_id = getIntFromRequest ('label_id', 0) ;
@@ -130,7 +130,7 @@ if ($func == 'edit') {
 ?>
 
 <p>
-<?php 
+<?php
 
 $res = db_query_params ('SELECT label_id, label_name, label_text FROM plugin_projectlabels_labels
 		 ORDER BY label_name ASC',
@@ -144,7 +144,7 @@ if (db_numrows($res) >= 1) {
 		echo "<h3>".stripslashes ($row['label_name'])."</h3>" ;
 		echo "<br />" . _('This label currently looks like this:') ." ";
 		echo stripslashes ($row['label_text']) . "<br />" ;
-		
+
 		$res2 = db_query_params ('SELECT groups.unix_group_name, groups.group_name, groups.group_id FROM groups, plugin_projectlabels_group_labels
                  WHERE plugin_projectlabels_group_labels.group_id = groups.group_id
                  AND plugin_projectlabels_group_labels.label_id=$1
@@ -154,7 +154,7 @@ if (db_numrows($res) >= 1) {
 			echo ngettext ('This label is used on the following group:',
 				       'This label is used on the following groups:',
 				       db_numrows ($res2)) ;
-				       
+
 			echo "<br />";
 			while ($row2 = db_fetch_array($res2)) {
 				printf ('%1$s (%2$s)',
@@ -185,7 +185,7 @@ if (db_numrows($res) >= 1) {
 ?>
 </p>
 
-		  <p><?php 
+		  <p><?php
 
 		  echo "<h2>"._('Add new labels')."</h2>" ;
 		  echo _('You can create new labels with the form below.') ?></p>

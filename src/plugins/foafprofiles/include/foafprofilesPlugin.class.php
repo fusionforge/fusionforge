@@ -40,7 +40,7 @@ class foafprofilesPlugin extends Plugin {
 		//$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");
-		
+
 	}
 /*
 	function CallHook ($hookname, &$params) {
@@ -50,7 +50,7 @@ class foafprofilesPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("foafprofiles")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/foafprofiles/index.php' . $param ));				
+						  array ('/plugins/foafprofiles/index.php' . $param ));
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -70,7 +70,7 @@ class foafprofilesPlugin extends Plugin {
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
-			}	
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
@@ -121,64 +121,64 @@ class foafprofilesPlugin extends Plugin {
 				echo '<p>'.util_make_link ("/plugins/foafprofiles/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('FOAFProfiles Admin')).'</p>' ;
 			}
-		}												    
+		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
-		} 
+		}
 	}
 	*/
-	
+
 	/**
 	 * Declares itself as accepting RDF XML on /users
 	 * @param unknown_type $params
 	 */
 	function script_accepted_types (&$params) {
-		$script = $params['script']; 
-		if ($script == 'user_home') { 
-			$params['accepted_types'][] = 'application/rdf+xml'; 
-		} 
+		$script = $params['script'];
+		if ($script == 'user_home') {
+			$params['accepted_types'][] = 'application/rdf+xml';
+		}
 	}
-	
+
 	/**
 	 * Outputs user's FOAF profile
 	 * @param unknown_type $params
 	 */
 	function content_negociated_user_home (&$params) {
-		$username = $params['username']; 
-		$accept = $params['accept']; 
-		
+		$username = $params['username'];
+		$accept = $params['accept'];
+
 		if($accept == 'application/rdf+xml') {
 				$params['content_type'] = 'application/rdf+xml';
-			
+
 				$user_obj = user_get_object_by_name($username);
-				
+
 				$user_real_name = $user_obj->getRealName();
 				$user_email = $user_obj->getEmail();
 				$mbox = 'mailto:'.$user_email;
 				$mbox_sha1sum = sha1($mbox);
-				
+
 				$params['content'] = '<?xml version="1.0"?>
 				<rdf:RDF
       				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
       				xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
       				xmlns:foaf="http://xmlns.com/foaf/0.1/"
       				xmlns:sioc="http://rdfs.org/sioc/ns#">
-      				
+
       			<foaf:OnlineAccount rdf:about="">
       				<foaf:accountServiceHomepage rdf:resource="/"/>
       				<foaf:accountName>'. $username .'</foaf:accountName>
       				<sioc:account_of rdf:resource="#person" />
       				<foaf:accountProfilePage rdf:resource="" />
     			</foaf:OnlineAccount>
-    			
+
       			<foaf:Person rdf:ID="person">
       				<foaf:name>'. $username .'</foaf:name>
 					<foaf:holdsAccount rdf:resource="" />
 					<foaf:mbox_sha1sum>'. $mbox_sha1sum .'</foaf:mbox_sha1sum>
     			</foaf:Person>
-    			
+
     			</rdf:RDF>';
-  
+
 		}
 	}
 }

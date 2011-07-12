@@ -70,7 +70,7 @@ class hudsonViews extends Views {
 		$group_id = $request->get('group_id');
 		$user = UserManager::instance()->getCurrentUser();
 
-		$this->_display_jobs_table($group_id);       
+		$this->_display_jobs_table($group_id);
 		if ($user->isMember($request->get('group_id'), 'A')) {
 			$this->_display_add_job_form($group_id);
 		}
@@ -375,7 +375,7 @@ class hudsonViews extends Views {
 				$dar->next();
 				$cpt++;
 			}
-			echo '</table>';   
+			echo '</table>';
 		} else {
 			echo '<p>'._("No Hudson jobs associated with this project. To add a job, select the link just below.").'</p>';
 		}

@@ -31,11 +31,11 @@ extends WikiPlugin
     function getName() {
         return _('AtomFeed');
     }
-    
+
     function getDescription() {
         return _('Atom Aggregator Plugin');
     }
-    
+
     function getDefaultArguments() {
         return array(
            'feed' => "",
@@ -45,16 +45,16 @@ extends WikiPlugin
            'titleonly' => false
         );
     }
-   
+
     function run($dbi, $argstr, &$request, $basepage) {
         extract($this->getArgs($argstr, $request));
         $parser = new AtomParser();
-        
+
         assert(!empty($url));
         $parser->parse_url($url);
-        
+
         $html = '';
-        
+
         $items = HTML::dl();
         foreach ($parser->feed as $feed) {
             $title = HTML::h3(HTML::a(array('href' => $feed["links"]["0"]["href"]), $feed["title"]));
@@ -62,14 +62,14 @@ extends WikiPlugin
             foreach($parser->entries as $entry) {
                 $item = HTML::dt(HTML::a(array('href' => $entry["links"]["0"]["href"]), $entry["title"]));
                 $items->pushContent($item);
-                
+
                 if (!$titleonly) {
                     $description = HTML::dd(HTML::raw(html_entity_decode($entry["content"])));
                 } else {
                     $description = HTML::dd();
                 }
                 $items->pushContent($description);
-                
+
                 if ($maxitem > 0 && $counter >= $maxitem) {
                     break;
                 }

@@ -51,7 +51,7 @@
  *	Limit height and width parameters to 600 so a malicious user cannot
  *	request a 10Gb image 8-)
  */
- 
+
 $MAX_HEIGHT = 600;
 $MAX_WIDTH = 600;
 $MIN_COLORS = 4;

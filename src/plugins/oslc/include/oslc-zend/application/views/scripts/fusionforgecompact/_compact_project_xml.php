@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is (c) Copyright 2010 by Sabri LABBENE, Institut
  * TELECOM
@@ -7,12 +7,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -42,7 +42,7 @@ $Compact->appendChild($short_title_node);
 $smallPreview = $doc->createElement('oslc:smallPreview');
 $Preview = $doc->createElement('oslc:Preview');
 $Doc = $doc->createElement('oslc:document');
-$Doc->setAttribute('rdf:ressource', $this->serverUrl().'/plugins/oslc/compact/project/'. $this->project->getUnixName().'/type/small'); 
+$Doc->setAttribute('rdf:ressource', $this->serverUrl().'/plugins/oslc/compact/project/'. $this->project->getUnixName().'/type/small');
 $hintW = $doc->createElement('oslc:hintWidth', '500px');
 $hintH = $doc->createElement('oslc:hintHeight', '150px');
 $Preview->appendChild($Doc);

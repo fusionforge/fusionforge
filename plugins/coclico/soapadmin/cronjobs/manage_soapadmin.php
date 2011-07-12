@@ -11,7 +11,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -29,10 +29,10 @@ require_once $gfcommon.'include/cron_utils.php';
 // MailingList backend class
 /* This is only sample
 require_once $gfplugins.'soapadmin/include/BackendHelloworld.class.php' ;
-			 
+
 
 $res = db_query_params ('SELECT id,type, parameters FROM system_event WHERE status=$1 ORDER BY id DESC',
-			array ('1')); 
+			array ('1'));
 if (!$res) {
 	printf('Unable to get list of events: '.db_error());
 	return false;
@@ -50,7 +50,7 @@ while ($data = db_fetch_array ($res)) {
 }
 if(isset($events)) {
 	foreach($events as $event_id => $log) {
-		$sql = "UPDATE system_event SET end_date=$1, log=$2, status='3' WHERE id=$3;"; 
+		$sql = "UPDATE system_event SET end_date=$1, log=$2, status='3' WHERE id=$3;";
 		$result = db_query_params($sql,array(time(),$log,$event_id));
 		if (!$result) {
 			printf('Unable to update the list of events: '.db_error());

@@ -83,7 +83,7 @@ ORDER BY group_forum_id',
 			$result[] = $arr['group_forum_id'] ;
 		}
 		return $result ;
-	}		
+	}
 
 	/**
 	 *	getForums - get an array of Forum objects for this Group.
@@ -97,7 +97,7 @@ ORDER BY group_forum_id',
 
 		$this->forums = array () ;
 		$ids = $this->getAllForumIds() ;
-		
+
 		if (!empty($ids) ) {
 			foreach ($ids as $id) {
 				if (forge_check_perm ('forum', $id, 'read')) {
@@ -107,7 +107,7 @@ ORDER BY group_forum_id',
 		}
 		return $this->forums;
 	}
-		
+
 	/**
 	 *	getForumsAdmin - get an array of all (public, private and suspended) Forum objects for this Group.
 	 *
@@ -118,7 +118,7 @@ ORDER BY group_forum_id',
 			return $this->forums;
 		}
 
-		
+
 		if (session_loggedin()) {
 			if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
 				$this->setError(_("You don't have a permission to access this page"));
@@ -133,9 +133,9 @@ ORDER BY group_forum_id',
 			$this->setError(_("You don't have a permission to access this page"));
 			$this->forums = false;
 		}
-		
+
 		$rows = db_numrows($result);
-		
+
 		if (!$result) {
 			$this->setError(_('Forum not found').' : '.db_error());
 			$this->forums = false;
@@ -149,11 +149,11 @@ ORDER BY group_forum_id',
 
 	/**
 	 *	moveThread - move thread in another forum
-	 *	
+	 *
 	 *	@param	string	The forum ID
 	 *	@param	int		The thread_id of the tread to change.
 	 *	@param	string	The old forum ID
-	 * 
+	 *
 	 * 	Note:
 	 *   old forum ID is useless if forum_agg_msg_count table is no longer used
 	 *

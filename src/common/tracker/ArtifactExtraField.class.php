@@ -37,7 +37,7 @@ define('ARTIFACT_EXTRAFIELDTYPE_INTEGER',10);
 
 class ArtifactExtraField extends Error {
 
-	/** 
+	/**
 	 * The artifact type object.
 	 *
 	 * @var		object	$ArtifactType.
@@ -59,7 +59,7 @@ class ArtifactExtraField extends Error {
 	 *  @return	boolean	success.
 	 */
 	function ArtifactExtraField(&$ArtifactType, $data=false) {
-		$this->Error(); 
+		$this->Error();
 
 		//was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
@@ -89,7 +89,7 @@ class ArtifactExtraField extends Error {
 
 	/**
 	 *	create - create a row in the table that stores box names for a
-	 *	a tracker.  This function is only used to create rows for boxes 
+	 *	a tracker.  This function is only used to create rows for boxes
 	 *	configured by the admin.
 	 *
 	 *	@param	string	Name of the extra field.
@@ -110,7 +110,7 @@ class ArtifactExtraField extends Error {
 		}
 		if (!$field_type) {
 			$this->setError("Type of custom field not selected");
-			return false;			
+			return false;
 		}
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
@@ -136,19 +136,19 @@ class ArtifactExtraField extends Error {
 				return false;
 			}
 		}
-		
+
 		if ($is_required) {
 			$is_required=1;
 		} else {
 			$is_required=0;
-		}	
-		
+		}
+
 		if (!($alias = $this->generateAlias($alias,$name))) {
 			return false;
 		}
-		
+
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id,field_name,field_type,attribute1,attribute2,is_required,alias) 
+		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id,field_name,field_type,attribute1,attribute2,is_required,alias)
 			VALUES ($1,$2,$3,$4,$5,$6,$7)',
 					   array ($this->ArtifactType->getID(),
 						  htmlspecialchars($name),
@@ -200,7 +200,7 @@ class ArtifactExtraField extends Error {
 //
 //	Must insert some default 100 rows for the data table so None queries will work right
 //
-				$resdefault = db_query_params ('INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
+				$resdefault = db_query_params ('INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id)
 					SELECT artifact_id,100,$1 FROM artifact WHERE group_artifact_id=$2',
 							       array ($id,
 								      $this->ArtifactType->getID())) ;
@@ -227,7 +227,7 @@ class ArtifactExtraField extends Error {
 		$this->id=$id;
 		$res = db_query_params ('SELECT * FROM artifact_extra_field_list WHERE extra_field_id=$1',
 					array ($id)) ;
-		
+
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactExtraField: Invalid ArtifactExtraField ID');
 			return false;
@@ -245,7 +245,7 @@ class ArtifactExtraField extends Error {
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
-	
+
 	/**
 	 *	getID - get this ArtifactExtraField ID.
 	 *
@@ -328,7 +328,7 @@ class ArtifactExtraField extends Error {
 			10=>_('Integer')
 			);
 	}
-	
+
 	/**
 	 *	getAlias - the alias that is used for this field
 	 *
@@ -337,7 +337,7 @@ class ArtifactExtraField extends Error {
 	function getAlias() {
 		return $this->data_array['alias'];
 	}
-	
+
 	/**
 	 *	getAvailableValues - Get the list of available values for this extra field
 	 *
@@ -354,7 +354,7 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
-	 *  update - update a row in the table used to store box names 
+	 *  update - update a row in the table used to store box names
 	 *  for a tracker.  This function is only to update rowsf
 	 *  for boxes configured by
 	 *  the admin.
@@ -378,7 +378,7 @@ class ArtifactExtraField extends Error {
 			$this->setError(_('a field name is required'));
 			return false;
 		}
-		$res = db_query_params ('SELECT field_name FROM artifact_extra_field_list 
+		$res = db_query_params ('SELECT field_name FROM artifact_extra_field_list
 				WHERE field_name=$1 AND group_artifact_id=$2 AND extra_field_id !=$3',
 			array($name,
 				$this->ArtifactType->getID(),
@@ -392,12 +392,12 @@ class ArtifactExtraField extends Error {
 		} else {
 			$is_required=0;
 		}
-		
+
 		if (!($alias = $this->generateAlias($alias,$name))) {
 			return false;
-		}		
+		}
 
-		$result = db_query_params ('UPDATE artifact_extra_field_list 
+		$result = db_query_params ('UPDATE artifact_extra_field_list
 			SET field_name=$1,
 			attribute1=$2,
 			attribute2=$3,
@@ -468,7 +468,7 @@ class ArtifactExtraField extends Error {
 		}
 
 	}
-	
+
 	/**
 	 * 	Validate an alias.
 	 *	Note that this function does not check for conflicts.
@@ -499,10 +499,10 @@ class ArtifactExtraField extends Error {
 			$this->setError(sprintf(_('\'%1$s\' is a reserved alias. Please provide another name.'), $alias));
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 *	Generate an alias for this field. The alias can be entered by the user or
 	 *	be generated automatically from the name of the field.
@@ -514,7 +514,7 @@ class ArtifactExtraField extends Error {
 		$alias = strtolower(trim($alias));
 		if (strlen($alias) == 0) {		// no alias was entered, generate alias from $name
 			$name = strtolower(trim($name));
-			// Convert the original name to a valid alias (i.e., if the extra field is 
+			// Convert the original name to a valid alias (i.e., if the extra field is
 			// called "Quality test", make an alias called "quality_test").
 			// The alias can be seen as a "unix name" for this field
 			$alias = preg_replace("/ /", "_", $name);
@@ -523,11 +523,11 @@ class ArtifactExtraField extends Error {
 		} elseif (!$this->validateAlias($alias)) {
 			// alias is invalid...
 			return false;
-		} 
+		}
 		// check if the name conflicts with another alias in the same artifact type
 		// in that case append a serial number to the alias
 		$serial = 1;
-		$conflict = false;	
+		$conflict = false;
 		do {
 			if ($this->data_array['extra_field_id']) {
 				$res = db_query_params ('SELECT * FROM artifact_extra_field_list

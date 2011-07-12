@@ -30,8 +30,8 @@ require_once $gfcommon.'include/cron_utils.php';
 session_set_admin() ;
 
 // Get user id's from users who have open tasks
-$res = db_query_params ('SELECT DISTINCT u.user_id, u.realname, u.email FROM users u, project_assigned_to pat, project_task_vw ptv 
-		WHERE u.user_id > 100 AND u.user_id=pat.assigned_to_id AND pat.project_task_id=ptv.project_task_id 
+$res = db_query_params ('SELECT DISTINCT u.user_id, u.realname, u.email FROM users u, project_assigned_to pat, project_task_vw ptv
+		WHERE u.user_id > 100 AND u.user_id=pat.assigned_to_id AND pat.project_task_id=ptv.project_task_id
 		AND ptv.status_id=1 ORDER BY u.user_id;',
 			array()) ;
 
@@ -63,7 +63,7 @@ for ($i=0; $i<db_numrows($res);$i++) {
 		$last_group = 0;
 		$last_projectgroup = 0;
 
-		// start composing the email	
+		// start composing the email
 		$subject = 'Tasks for '.$realname.' for '.$today;
 
 		if (count($userTasks) > 0) {

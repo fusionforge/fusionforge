@@ -27,7 +27,7 @@ require_once('HudsonJob.class.php');
 require_once('HudsonTestResult.class.php');
 
 class hudson_Widget_JobTestTrend extends HudsonJobWidget {
-    
+
     function hudson_Widget_JobTestTrend($owner_type, $owner_id) {
         $request =& HTTPRequest::instance();
         if ($owner_type == WidgetLayoutManager::OWNER_TYPE_USER) {
@@ -38,10 +38,10 @@ class hudson_Widget_JobTestTrend extends HudsonJobWidget {
             $this->group_id = $request->get('group_id');
         }
         $this->Widget($this->widget_id);
-        
+
         $this->setOwner($owner_id, $owner_type);
     }
-    
+
     function getTitle() {
         if ($this->job) {
             return sprintf(_('%s Test Result Trend'), $this->job->getName());
@@ -49,11 +49,11 @@ class hudson_Widget_JobTestTrend extends HudsonJobWidget {
             return _('Test Result Trend');
         }
     }
-    
+
     function getDescription() {
         return _("Show the test result trend for the selected job. To display something, your job needs to have tests. The graph will show the number of tests (failed and successfull) along  time. The number of tests is increasing while the number of build and commits are increasing too.");
     }
-    
+
     function loadContent($id) {
         $sql = "SELECT * FROM plugin_hudson_widget WHERE widget_name=$1 AND owner_id=$2 AND owner_type=$3 AND id=$4";
         $res = db_query_params($sql,array($this->widget_id,$this->owner_id,$this->owner_type,$id));
@@ -61,34 +61,34 @@ class hudson_Widget_JobTestTrend extends HudsonJobWidget {
             $data = db_fetch_array($res);
             $this->job_id    = $data['job_id'];
             $this->content_id = $id;
-            
+
             $jobs = $this->getAvailableJobs();
-            
+
             if (array_key_exists($this->job_id, $jobs)) {
                 $used_job = $jobs[$this->job_id];
                 $this->job_url = $used_job->getUrl();
                 $this->job = $used_job;
-                
+
                 try {
                     $this->test_result = new HudsonTestResult($this->job_url);
                 } catch (Exception $e) {
                     $this->test_result = null;
                 }
-                
+
             } else {
                 $this->job = null;
                 $this->test_result = null;
             }
-            
+
         }
     }
-    
+
     function getContent() {
         $html = '';
         if ($this->job != null && $this->test_result != null) {
 
             $job = $this->job;
-            
+
             $html .= '<div style="padding: 20px;">';
             $html .= '<a href="/plugins/hudson/?action=view_test_trend&group_id='.$this->group_id.'&job_id='.$this->job_id.'">';
             $html .= '<img src="'.$job->getUrl().'/test/trend?width=320&height=240" alt="'.vsprintf(_("%s Test Result Trend"),  array($this->job->getName())).'" title="'.vsprintf(_("%s Test Result Trend"),  array($this->job->getName())).'" />';
@@ -102,7 +102,7 @@ class hudson_Widget_JobTestTrend extends HudsonJobWidget {
                 $html .= _("Job not found.");
             }
         }
-            
+
         return $html;
     }
 }

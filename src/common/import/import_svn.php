@@ -15,7 +15,7 @@ if (isset($oldpjctname) && isset($newpjctname)){
 	$dumppath = "/tmp/".$oldpjctname."/SCM/SVN/".$oldpjctname.".svndump";
 
 	$shellstring = "svnadmin load ".$svnpath." < ".$dumppath." 1>/dev/null 2>/dev/null";
-	
+
 	shell_exec($shellstring);
 
 }

@@ -63,7 +63,7 @@ if ($form) {
         try {
             aform = <?php echo $pform ?>;
             document.forms[0].details.value = aform.value;
-       
+
         } catch (e) {
         }
     }
@@ -96,7 +96,7 @@ if ($form) {
         </tr>
         <tr>
           <td>
-            <textarea name="details" ROWS="<?php echo $rows ?>" 
+            <textarea name="details" ROWS="<?php echo $rows ?>"
                       COLS="<?php echo $cols ?>"
                       WRAP="<?php echo $wrap ?>"></textarea>
           </td>

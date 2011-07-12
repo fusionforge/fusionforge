@@ -1,6 +1,6 @@
 #! /usr/bin/php
 <?php
-/* 
+/*
  * Copyright (C) 2010  Olaf Lenz
  *
  * This file is part of FusionForge.
@@ -22,7 +22,7 @@
 
   /** This script will automatically create the image upload
    directories for all mediawiki instances.
-   
+
    It is intended to be started in a cronjob with root permissions.
    */
 

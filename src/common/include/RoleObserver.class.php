@@ -189,7 +189,7 @@ class RoleObserver extends Error {
 
 ////$data['section_name']['ref_id']=$val
 		$arr1 = array_keys($data);
-		for ($i=0; $i<count($arr1); $i++) {	
+		for ($i=0; $i<count($arr1); $i++) {
 			$arr2 = array_keys($data[$arr1[$i]]);
 			for ($j=0; $j<count($arr2); $j++) {
 				$usection_name=$arr1[$i];
@@ -205,7 +205,7 @@ class RoleObserver extends Error {
 				//	See if this setting changed. If so, then update it
 				//
 				if ($this->getVal($usection_name,$uref_id) != $uvalue) {
-					if ($usection_name == 'scmpublic' || 
+					if ($usection_name == 'scmpublic' ||
 						$usection_name == 'projectpublic') {
 						if (!$data['scmpublic'][0]) {
 							$data['scmpublic'][0]=0;
@@ -213,7 +213,7 @@ class RoleObserver extends Error {
 						if (!$data['projectpublic'][0]) {
 							$data['projectpublic'][0]=0;
 							// Groups cannot be private and have public SCM
-							// so we should always ensure that the scm is 
+							// so we should always ensure that the scm is
 							// private if we change a group to private.
 							$data['scmpublic'][0]=0;
 						}

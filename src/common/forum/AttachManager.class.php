@@ -24,26 +24,26 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/* 
+/*
 	by Daniel Perez - 2005
 */
 
 class AttachManager extends Error {
-	
+
 	var $attachs = array(); //the attached files
 	var $msg_id; //the msg_id that links to the attachs
 	var $user_id,$dateline,$filename,$filedata,$filesize,$visible,$filehash,$posthash;
 	var $messages = array();
 	var $ForumMsg; // The Forum object
-	
+
 	function Setmsgid($id) {
 		$this->msg_id = $id;
 	}
-	
+
 	function Getmessages() {
 		return $this->messages;
 	}
-	
+
 	function fillvalues($user_id,$dateline,$filename,$filedata,$filesize,$visible,$filehash,$posthash) {
 		$this->user_id = $user_id;
 		$this->dateline = $dateline;
@@ -53,7 +53,7 @@ class AttachManager extends Error {
 		$this->filehash = $filehash;
 		$this->posthash = $posthash;
 	}
-	
+
 	/**
 	* Function SetForumMsg
 	*
@@ -62,7 +62,7 @@ class AttachManager extends Error {
 	function SetForumMsg(&$ForumMsg) {
 		$this->ForumMsg =& $ForumMsg;
 	}
-	
+
 	/**
 	* Function GetAttachId
 	*
@@ -77,23 +77,23 @@ class AttachManager extends Error {
 			return false;
 		}
 	}
-	
+
 	/**
 	* Function PrintHelperFunctions
 	*
 	*
 	* @return 	returns the javascript helper functions
 	*/
-	
+
 	function PrintHelperFunctions() {
 		return '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
-		
+
 		function confirmDel() {
 			var agree=confirm("Proceed with deletion? ");
 			if (agree) return true ;
 			else return false ;
 		}
-		
+
 		function manageattachments(url,del) {
 			var newwindow;
 			if (del=="yes") {
@@ -105,7 +105,7 @@ class AttachManager extends Error {
 		}
 		/* ]]> */</script>';
 	}
-	
+
 	 /**
 	 * Function PrintAttachLink
 	 *
@@ -116,7 +116,7 @@ class AttachManager extends Error {
 	 * @return 	returns link to attachment /delete if corresponding; else returns a message about no attachment found
 	 */
 	function PrintAttachLink(&$msg,$group_id,$forum_id) {
-		
+
 		//ask if the message has an attachment
 		$msg_id = $msg->getID();
 		if ($msg->isPending()) {
@@ -128,7 +128,7 @@ class AttachManager extends Error {
 						array ($msg_id));
 			$pend = "";
 		}
-		
+
 		$attach = '';
 		$attachid = '';
 		if ($res && db_numrows($res)) {
@@ -138,7 +138,7 @@ class AttachManager extends Error {
 			$attach = "<br/>
 			<a href=\"javascript:manageattachments('".util_make_url("/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id$pend")."','no');\">" . html_image('ic/cfolder15.png',"15","13") . db_result($res,0,'filename') . "</a>  (" . db_result($res,0,'counter') . ") downloads";
 			$attach_userid = db_result($res,0,'userid');
-			
+
 			$f = $msg->getForum();
 			if (!$f || !is_object($f)) {
 			exit_error('Error', _('Could Not Get Forum Object'));
@@ -165,10 +165,10 @@ class AttachManager extends Error {
 				}
 			}
 		}
-		
+
 		return $attach;
 	}
-	
+
 	/**
 	 * Function AddToDBOnly : DB Query Only - used for releasing pending messages
 	 *
@@ -182,7 +182,7 @@ class AttachManager extends Error {
 		} else {
 			$this->msg_id = db_result($result,0,0);
 			if (db_query_params ('INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
-					VALUES 
+					VALUES
 					( $1 , $2, $3,
 					$4, $5, $6, $7,  $8, $9)',
 			array ($userid,
@@ -201,9 +201,9 @@ class AttachManager extends Error {
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Function attach : saves the file in the DB
 	 *
@@ -222,15 +222,15 @@ class AttachManager extends Error {
 		$attachment_name = trim($attach['name']);
 		$attachment_size = trim($attach['size']);
 		$attachment_type = trim($attach['type']);
-			
+
 		if ($attachment == 'none' OR empty($attachment) OR empty($attachment_name))
 		{
 			return false; //no point in continuing if there's no file
 		}
-		
+
 		$attachment_name2 = strtolower($attachment_name);
 		$extension = substr(strrchr($attachment_name2, '.'), 1);
-		
+
 		if ($extension == 'exe')
 		{
 			// invalid extension
@@ -239,21 +239,21 @@ class AttachManager extends Error {
 			@unlink($attachment);
 			return false;
 		}
-		
+
 		if (!is_uploaded_file($attachment) || !($filestuff = @file_get_contents($attachment)) )
 		{
 			$this->messages[] = _('Error, problem with the attachment file uploaded into the server');
 			return false;
 		}
-		
+
 		if (!session_loggedin()) {
 			$user_id = 100;
 		}	else {
 			$user_id = user_getid();
 		}
-		
+
 		$id = 0;
-			
+
 		if ($this->ForumMsg->isPending()) {
 			if ($update) {
 				//update the fileinfo
@@ -274,7 +274,7 @@ class AttachManager extends Error {
 					}
 				}
 				$res = db_query_params ('INSERT INTO forum_pending_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
-					VALUES 
+					VALUES
 					( $1 , $2, $3,
 					$4, $5, 1, $6,  $7, $8)',
 			array ($user_id,
@@ -296,8 +296,8 @@ class AttachManager extends Error {
 			if ($update) {
 				//update the fileinfo
 				if (db_query_params ('UPDATE forum_attachment SET dateline = $1 , filedata = $2 ,
-				 filename = $3 , 
-				 filehash = $4 , 
+				 filename = $3 ,
+				 filehash = $4 ,
 				 mimetype = $5 ,
 				 counter = 0 ,
 				 filesize = $6 where attachmentid=$7',
@@ -330,7 +330,7 @@ class AttachManager extends Error {
 					}
 				}
 				$res = db_query_params ('INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
-					VALUES 
+					VALUES
 					( $1 , $2, $3,
 					$4, $5, 1, $6,  $7, $8)',
 			array ($user_id,

@@ -8,12 +8,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -24,8 +24,8 @@
  */
 
 /**
- * This is the Mantis OSLC-CM connector, which specializes the generic 
- * OSLC-CM controller (in oslc.inc.php) 
+ * This is the Mantis OSLC-CM connector, which specializes the generic
+ * OSLC-CM controller (in oslc.inc.php)
  */
 
 /* $Id:$*/
@@ -88,7 +88,7 @@ class Mantis_Http_Auth_Resolver implements Zend_Auth_Adapter_Http_Resolver_Inter
 	// the query's elements
 	protected $username = null;
 	protected $password = null;
-	
+
 	public function __construct($username, $password)
 	{
 		$this->username = $username;
@@ -152,13 +152,13 @@ class MantisOSLCConnector extends OSLCConnector {
 
 
 	private static $status_arr = array('new'=>10, 'feedback'=>20, 'acknowledged'=>30, 'confirmed'=>40, 'assigned'=>50, 'resolved'=>80, 'closed'=>90);
-	
+
 	private static $priority_arr = array('none'=>10, 'low'=>20, 'normal'=>30, 'high'=>40, 'urgent'=>50, 'immediate'=>60);
-	
+
 	private static $severity_arr = array('feature'=>10, 'trivial'=>20, 'text'=>30, 'tweak'=>40, 'minor'=>50, 'major'=>60, 'crash'=>70, 'block'=>80);
-	
+
 	private static $reproducibility_arr = array('always'=>10, 'sometimes'=>30, 'random'=>50, 'have not tried'=>70, 'unable to duplicate'=>90, 'not applicable'=>100);
-	
+
 	private static $where_params = array(
 		'dc:creator',
 		'dc:type',
@@ -169,7 +169,7 @@ class MantisOSLCConnector extends OSLCConnector {
 		'mantisbt:version_number',
 		'mantisbt:project'
 	);
-	
+
 	private static $orderBy_params = array(
 		'mantisbt:priority',
 		'dc:identifier',
@@ -179,8 +179,8 @@ class MantisOSLCConnector extends OSLCConnector {
 		'dc:modified',
 		'dc:title'
 	);
-	
-	private static $properties_params = array( 	//TODO synchronize with models/mantis.inc.php 
+
+	private static $properties_params = array( 	//TODO synchronize with models/mantis.inc.php
 												//where the properties are implemented
 		'dc:identifier',
 		'dc:title',
@@ -194,21 +194,21 @@ class MantisOSLCConnector extends OSLCConnector {
 		'mantisbt:target_version',
 		'dc:modified',
 		'dc:created',
-		'mantisbt:version_number' 
+		'mantisbt:version_number'
 	);
-	
+
 	/**
 	 * Filter only meaningful parameters provided in the REST GET request
-	 * 
- 	 * Initially $params may contain 'id' => 'bug' or 'id' => 'bugs' for 
-	 * all resources to be loaded or 'bug' => identifier for one 
+	 *
+ 	 * Initially $params may contain 'id' => 'bug' or 'id' => 'bugs' for
+	 * all resources to be loaded or 'bug' => identifier for one
 	 * resource, so a filtering and normalization is needed
 	 *
 	 * @param array $params
 	 * @return array
 	 */
 	protected function filterRequestParams($params) {
-	
+
 		// if only one bug requested
 		$identifier = null;
 
@@ -246,20 +246,20 @@ class MantisOSLCConnector extends OSLCConnector {
 				}
 			}
 		}
-		
+
 		// the args that need to be passed to initialize the model
 		$modelparams = array();
-		
+
 		if(isset($project)) {
 			$modelparams['project'] = $project;
 		}
 		if ($identifier) {
 			$modelparams['bug'] = $identifier;
 		}
-		
-		return $modelparams;		
+
+		return $modelparams;
 	}
-	
+
 	protected function createQueryFromFilter($filter)
 	{
 		//print_r($filter);
@@ -280,24 +280,24 @@ class MantisOSLCConnector extends OSLCConnector {
 		$query['os_build'][] = 0;
 		$query['tag_string'] = "";
 		$query['note_user_id'][] = 0;
-		
+
 		if(array_key_exists('limit', $filter))	{
-			$query['per_page'] = $filter['limit'];		
+			$query['per_page'] = $filter['limit'];
 		}else 	{
 			$query['per_page'] = 0;
 		}
-		
+
 		if(array_key_exists('offset', $filter))	{
-			$query['page_number'] = $filter['offset'];		
+			$query['page_number'] = $filter['offset'];
 		}else 	{
-			$query['page_number'] = 1;		
+			$query['page_number'] = 1;
 		}
-		
+
 		if(array_key_exists('where', $filter))	{
 			foreach($filter['where']['terms'] as $term)	{
-				if($term[0]=='=')	{	
+				if($term[0]=='=')	{
 					$term[2] = str_replace("\"", "", $term[2]);
-					//print_r($term[2]);		
+					//print_r($term[2]);
 					switch($term[1])	{
 						case self::$where_params[0]:
 							if($creator_id = user_get_id_by_name($term[2]))	{
@@ -368,40 +368,40 @@ class MantisOSLCConnector extends OSLCConnector {
 						break;
 					}
 				}
-			}		
+			}
 		}
-		
+
 		if(!array_key_exists('reporter_id', $query))	{
 			$query['reporter_id'][] = 0;
 		}
-		
+
 		if(!array_key_exists('show_category', $query))	{
 			$query['show_category'][] = 0;
 		}
-		
+
 		if(!array_key_exists('show_severity', $query))	{
 			$query['show_severity'][] = 0;
 		}
-		
+
 		if(!array_key_exists('show_status', $query))	{
 			$query['show_status'][] = 0;
 		}
-		
+
 		if(!array_key_exists('show_priority', $query))	{
 			$query['show_priority'][] = 0;
 		}
-		
+
 		if(!array_key_exists('target_version', $query))	{
 			$query['target_version'][] = 0;
 		}
-		
+
 		$custom_field_ids = custom_field_get_linked_ids();
 		foreach($custom_field_ids as $id)	{
 			if(!array_key_exists('custom_field_'.$id, $query))	{
 				$query['custom_field_'.$id][] = 0;
 			}
 		}
-		
+
 		if(!array_key_exists('project_id', $query))	{
 			$query['project_id'][] = 0;
 		}
@@ -429,16 +429,16 @@ class MantisOSLCConnector extends OSLCConnector {
 							case self::$orderBy_params[6]: $query['sort_'.$i] = "summary";
 								break;
 							default: throw new ConflictException("Sorting over attribute ".$filter['orderBy'][$i][1]." is not supported for mantis!");
-								break; 
+								break;
 						}
-						
+
 					}else	{
 						$query['dir_'.$i] = "";
 						$query['sort_'.$i] = "";
 					}
 				}
 			}
-			
+
 		}else	{
 			$query['dir_0'] = "";
 			$query['dir_1'] = "";
@@ -455,18 +455,18 @@ class MantisOSLCConnector extends OSLCConnector {
 			$query['search'] = substr($terms, 0, -1);
 		}else 	{
 			$query['search'] = "";
-		}		
-		
+		}
+
 		return $query;
 	}
-	
+
 	/*
 	 * Retrieves the data to be displayed in the creation ui
 	 */
 	public function getDataForCreationUi($project)
 	{
 		$data = array();
-		
+
 		//check project validity
 		if(!is_numeric($project)) {
 			$project = project_get_id_by_name($project);
@@ -476,14 +476,14 @@ class MantisOSLCConnector extends OSLCConnector {
 		}else {
 			throw new BadRequestException("Invalid project specified!");
 		}
-		
+
 		$fields = config_get( 'bug_report_page_fields');
 		//print_r($fields);
 		//exit;
-		
+
 		foreach($fields as $field)	{
 			switch($field)	{
-				
+
 				case 'category_id': foreach(category_get_all_rows($project) as $row){
 										$data[$field][] = $row['name'];
 									}
@@ -519,20 +519,20 @@ class MantisOSLCConnector extends OSLCConnector {
 											break;
 			}
 		}
-		
+
 		//print_r($data);
 		//exit;
 		return $data;
-		
+
 	}
-	
+
 	/*
 	 * Retrieves the data to be displayed in the selection ui
 	 */
 	public function getDataForSelectionUi($project)
 	{
 		$data = array();
-		
+
 		//check project validity
 		if(!is_numeric($project)) {
 			$project = project_get_id_by_name($project);
@@ -542,8 +542,8 @@ class MantisOSLCConnector extends OSLCConnector {
 		}else {
 			throw new BadRequestException("Invalid project specified!");
 		}
-		
-		
+
+
 		//construct array for oslc.where with all possible values for each attribute
 		foreach (self::$where_params as $param) {
 			if($param=='dc:creator')
@@ -591,11 +591,11 @@ class MantisOSLCConnector extends OSLCConnector {
 						$data['where'][$param][] = $v_num;
 					}
 				}
-				
+
 			}
-						
+
 		}
-		
+
 		//construct array for oslc.properties
 		foreach(self::$properties_params as $prop)	{
 			switch($prop)	{
@@ -606,26 +606,26 @@ class MantisOSLCConnector extends OSLCConnector {
 						$data['properties'][] = $prop;
 					}
 					break;
-					
+
 				case 'mantisbt:version_number':
 					if(custom_field_get_id_from_name("version_number")!=false)	{
 						$data['properties'][] = $prop;
 					}
 					break;
-					
+
 				default:
 					$data['properties'][] = $prop;
-					
+
 			}
 		}
-		
+
 		//construct array for oslc.orderBy
 		$data['orderBy'] = self::$orderBy_params;
-		
+
 		return $data;
-		
+
 	}
-	
+
 	protected function postQuery($filter, $fields)
 	{
 		/*$post = array();
@@ -633,59 +633,59 @@ class MantisOSLCConnector extends OSLCConnector {
 		$data = "type=1&page_number=1&view_type=advanced&reporter_id%5B%5D=0&user_monitor%5B%5D=0&handler_id%5B%5D=0&show_category%5B%5D=General&show_severity%5B%5D=0&show_resolution%5B%5D=0&show_profile%5B%5D=0&show_status%5B%5D=10&show_priority%5B%5D=0&target_version%5B%5D=0&per_page=100&view_state=0&sticky_issues=on&highlight_changed=6&relationship_type=-1&relationship_bug=0&platform%5B%5D=0&os%5B%5D=0&os_build%5B%5D=0&tag_string=&custom_field_1%5B%5D=0&note_user_id%5B%5D=0&sort_0=summary&dir_0=ASC&sort_1=last_updated&dir_1=DESC&project_id%5B%5D=0&search=random+post";
 		parse_str($data, $post);
 		print_r($post);*/
-		
+
 		$post = array();
 		$post = $this->createQueryFromFilter($filter);
-		
+
 		//print_r($post); exit;
 		foreach($post as $key => $value) //to mimic POST action on view_all_set.php
 		{
 			$_POST[$key] = $value;
 		}
 		$_POST['temporary']=true;
-		
+
 		//another option, to copy all the code from view_all_set.php to a local file mantisquery.php
 		//include APPLICATION_PATH.'/models/'.'mantisquery.php';
-		
+
 		//to disable the redirection code in view_all_set.php
 		$temp_stop_on_errors = config_get_global( 'stop_on_errors');
 		config_set_global( 'stop_on_errors' , ON);
 		global $g_error_handled;
 		$temp_g_error_handled = $g_error_handled;
 		$g_error_handled = true;
-		
+
 		include MANTIS_DIR.'view_all_set.php';
 		$_POST['filter']=$t_token_id;
 		//print_r("BACK TO POST QUERY");
-		
+
 		//putting everything back to previous state
 		config_set_global( 'stop_on_errors' , $temp_stop_on_errors);
 		$g_error_handled = $temp_g_error_handled;
-		
+
 		$f_page_number		= $post['page_number'];
 
 		$t_per_page = null;
 		$t_bug_count = null;
 		$t_page_count = null;
-	
+
 		$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, null, null, null, true );
-		
+
 		/*foreach($rows as $bug)
 		{
 			print_r($bug->id."-");
 		}
 		*/
-		
+
 		$this->changerequests = new ChangeRequestsMantisDb($rows, $fields);
 		//print_r($this->changerequests);
-		
+
 	}
-			
+
 	/*
 	 * Constructs the model from the Mantis DB
 	 *
 	 * TODO : remove provided project if not found in DB
-	 * 
+	 *
 	 * @param array $params contains 'project' if filtered on particular project
 	 */
 	protected function fetchChangeRequests($params=null)
@@ -708,10 +708,10 @@ class MantisOSLCConnector extends OSLCConnector {
 			$arr['where']['terms'][] = array("=","mantisbt:project",'"'.$params['project'].'"');
 			$this->postQuery($arr, null);
 		}
-		
+
 
 	}
-	
+
 	public function getChangeRequest($id, $uri)
 	{
 		$row[0] = bug_get($id, true);
@@ -719,7 +719,7 @@ class MantisOSLCConnector extends OSLCConnector {
 		//print_r($this->prepareChangeRequest($changerequest[$id], $uri));
 		return $this->prepareChangeRequest($changerequest[$id], $uri);
 	}
-	
+
 	public function getBugnoteCollection($bugid, $url)
 	{
 		$tmp_arr = bugnote_get_all_visible_bugnotes($bugid, 'DESC', -1);
@@ -737,41 +737,41 @@ class MantisOSLCConnector extends OSLCConnector {
 			$notes['title'] = $notes['resource']['dc:title'];
 			//print_r($note->id);
 			$notes_arr[] = $notes;
-			
+
 		}
 		return $notes_arr;
 	}
-	
+
 	public function getBugnote($bugnote_id, $url)
 	{
 		if(!bugnote_exists($bugnote_id))
 		{
 			throw new Exception("Bugnote ".$bugnote_id." does not exist!");
 		}
-		
+
 		$note['id'] = $url;
-		
+
 		$note['resource']['dc:title'] = "Bugnote-".$bugnote_id;
 		$note['resource']['dc:identifier'] = $url;
 		$note['resource']['dc:description'] = bugnote_get_text($bugnote_id);
-		
+
 		$creator = bugnote_get_field($bugnote_id, 'reporter_id');
 		$note['resource']['dc:creator'] = user_get_name($creator);
-				
+
 		$created = bugnote_get_field($bugnote_id, 'date_submitted');
 		$note['resource']['dc:created'] = date(DATE_ATOM, $created);
-		
+
 		$modified = bugnote_get_field($bugnote_id, 'last_modified');
 		$note['resource']['dc:modified'] = date(DATE_ATOM, $modified);
 
 		return $note;
 	}
-	
+
 	public function getProjectList()
 	{
 		return project_get_all_rows();
 	}
-	
+
 	public function setProject($proj_id)
 	{
 		if(!is_numeric($proj_id))
@@ -784,35 +784,35 @@ class MantisOSLCConnector extends OSLCConnector {
 		}
 		return $proj_id;
 	}
-	
+
 	public function retrieveStatsByDate($id)
 	{
 		$pid = $this->setProject($id);
 		$this->statsByDate( config_get( 'date_partitions' ), $pid);
 	}
-	
+
 	public function retrieveStatsByActivity($id)
 	{
 		$pid = $this->setProject($id);
 		$this->statsByActivity($pid);
 	}
-	
+
 	public function retrieveStatsByAge($id)
 	{
 		$pid = $this->setProject($id);
 		$this->statsByAge($pid);
 	}
-	
+
 	# Print list of bugs opened from the longest time
 	# taken from function summary_print_by_age()
 	function statsByAge($pid)
 	{
 		$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
-	
+
 		$t_project_id = $pid;
 		$t_user_id = auth_get_current_user_id();
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	
+
 		$specific_where = helper_project_specific_where( $t_project_id );
 		if( ' 1<>1' == $specific_where ) {
 			return;
@@ -822,32 +822,32 @@ class MantisOSLCConnector extends OSLCConnector {
 					AND $specific_where
 					ORDER BY date_submitted ASC, priority DESC";
 		$result = db_query( $query );
-	
+
 		$t_count = 0;
 		$t_private_bug_threshold = config_get( 'private_bug_threshold' );
 		while( $row = db_fetch_array( $result ) ) {
-	
+
 			// as we select all from bug_table, inject into the cache.
 			bug_cache_database_result( $row );
-	
+
 			// Skip private bugs unless user has proper permissions
 			if(( VS_PRIVATE == bug_get_field( $row['id'], 'view_state' ) ) && ( false == access_has_bug_level( $t_private_bug_threshold, $row['id'] ) ) ) {
 				continue;
 			}
-	
+
 			if( $t_count++ == 10 ) {
 				break;
 			}
-	
+
 			$t_bugid = $row['id'];
 			$t_summary = $row['summary'];
 			$t_days_open = intval(( time() - $row['date_submitted'] ) / SECONDS_PER_DAY );
-	
+
 			print $t_bugid.",".$t_summary.",".$t_days_open."\n";
-			
+
 		}
 	}
-	
+
 	# Print list of open bugs with the highest activity score
 	# the score is calculated assigning one "point" for each history event
 	# associated with the bug
@@ -856,11 +856,11 @@ class MantisOSLCConnector extends OSLCConnector {
 	{
 		$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
 		$t_mantis_history_table = db_get_table( 'mantis_bug_history_table' );
-	
+
 		$t_project_id = $pid;
 		$t_user_id = auth_get_current_user_id();
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	
+
 		$specific_where = helper_project_specific_where( $t_project_id );
 		if( ' 1<>1' == $specific_where ) {
 			return;
@@ -873,22 +873,22 @@ class MantisOSLCConnector extends OSLCConnector {
 					GROUP BY h.bug_id, b.id, b.summary, b.last_updated, b.view_state
 					ORDER BY count DESC, b.last_updated DESC";
 		$result = db_query_bound( $query, Array( $t_resolved ) );
-	
+
 		$t_count = 0;
 		$t_private_bug_threshold = config_get( 'private_bug_threshold' );
 		$t_summarydata = Array();
 		$t_summarybugs = Array();
 		while( $row = db_fetch_array( $result ) ) {
-	
+
 			// Skip private bugs unless user has proper permissions
 			if(( VS_PRIVATE == $row['view_state'] ) && ( false == access_has_bug_level( $t_private_bug_threshold, $row['id'] ) ) ) {
 				continue;
 			}
-	
+
 			if( $t_count++ == 10 ) {
 				break;
 			}
-	
+
 			$t_summarydata[] = array(
 				'id' => $row['id'],
 				'summary' => $row['summary'],
@@ -896,20 +896,20 @@ class MantisOSLCConnector extends OSLCConnector {
 			);
 			$t_summarybugs[] = $row['id'];
 		}
-	
+
 		bug_cache_array_rows( $t_summarybugs );
-	
+
 		foreach( $t_summarydata as $row ) {
 			//$t_bugid = string_get_bug_view_link( $row['id'] );
 			$t_bugid = $row['id'];
 			$t_summary = string_html_specialchars( $row['summary'] );
 			$t_notescount = $row['count'];
-	
+
 			print $t_bugid.",".$t_summary.",".$t_notescount."\n";
-			
+
 		}
 	}
-	
+
 	# This function shows the number of bugs submitted in the last X days
 	# An array of integers representing days is passed in
 	# taken from summary_print_by_date( $p_date_array )
@@ -923,85 +923,85 @@ class MantisOSLCConnector extends OSLCConnector {
 		$stats[$x][] = 'Balance';
 		print implode(",",$stats[$x]);
 		print "\n";
-		
+
 		foreach( $p_date_array as $t_days ) {
 			$x++;
 			$t_new_count = $this->summaryNewBugCountByDate( $t_days, $pid);
 			$t_resolved_count = $this->summaryResolvedBugCountByDate( $t_days, $pid);
-	
+
 			$t_start_date = mktime( 0, 0, 0, date( 'm' ), ( date( 'd' ) - $t_days ), date( 'Y' ) );
 			$t_new_bugs_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_FILTER_BY_DATE . '=on&amp;' . FILTER_PROPERTY_START_YEAR . '=' . date( 'Y', $t_start_date ) . '&amp;' . FILTER_PROPERTY_START_MONTH . '=' . date( 'm', $t_start_date ) . '&amp;' . FILTER_PROPERTY_START_DAY . '=' . date( 'd', $t_start_date ) . '&amp;' . FILTER_PROPERTY_HIDE_STATUS_ID . '=">';
-	
+
 			$stats[$x][] = $t_days;
 			$stats[$x][] = $t_new_count;
 			$stats[$x][] = $t_resolved_count;
-			
-				
+
+
 			$t_balance = $t_new_count - $t_resolved_count;
 			if( $t_balance > 0 ) {
-	
+
 				# we are talking about bugs: a balance > 0 is "negative" for the project...
 				$t_style = " negative";
 				$t_balance = sprintf( '%+d', $t_balance );
-	
+
 				# "+" modifier added in PHP >= 4.3.0
 			}
 			else if( $t_balance < 0 ) {
 				$t_style = ' positive';
 				$t_balance = sprintf( '%+d', $t_balance );
 			}
-	
+
 			$stats[$x][] = $t_balance;
 			print implode(",",$stats[$x]);
 			print "\n";
-						
+
 		}
-	
+
 		# end foreach
 		//print_r($stats);
 		//return $stats;
-		
+
 	}
-	
+
 	# prints the bugs submitted in the last X days (default is 1 day) for the
 	# current project
 	function summaryNewBugCountByDate( $p_time_length = 1, $id) {
 		$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
-	
+
 		$c_time_length = (int) $p_time_length * SECONDS_PER_DAY;
-	
+
 		$t_project_id = $id;
 		$t_user_id = auth_get_current_user_id();
-	
+
 		$specific_where = helper_project_specific_where( $t_project_id );
 		if( ' 1<>1' == $specific_where ) {
 			return;
 		}
-	
+
 		$query = "SELECT COUNT(*)
 					FROM $t_mantis_bug_table
 					WHERE " . db_helper_compare_days( "" . db_now() . "", "date_submitted", "<= $c_time_length" ) . " AND $specific_where";
 		$result = db_query_bound( $query );
 		return db_result( $result, 0 );
 	}
-	
+
 	# returns the number of bugs resolved in the last X days (default is 1 day) for the
 	# current project
 	function summaryResolvedBugCountByDate( $p_time_length = 1, $id) {
 		$t_bug_table = db_get_table( 'mantis_bug_table' );
 		$t_bug_history_table = db_get_table( 'mantis_bug_history_table' );
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	
+
 		$c_time_length = (int) $p_time_length * SECONDS_PER_DAY;
-	
+
 		$t_project_id = $id;
 		$t_user_id = auth_get_current_user_id();
-	
+
 		$specific_where = helper_project_specific_where( $t_project_id );
 		if( ' 1<>1' == $specific_where ) {
 			return;
 		}
-	
+
 		$query = "SELECT COUNT(DISTINCT(b.id))
 					FROM $t_bug_table b
 					LEFT JOIN $t_bug_history_table h
@@ -1016,14 +1016,14 @@ class MantisOSLCConnector extends OSLCConnector {
 		$result = db_query_bound( $query, Array( $t_resolved, $t_resolved, $t_resolved ) );
 		return db_result( $result, 0 );
 	}
-	
+
 	public function addBugnotes($bugid, $bugnotes)
 	{
 		if(!bug_exists($bugid))
 		{
 			throw new NotFoundException( "Bug ".$bugid." does not exist!" );
 		}
-	
+
 		foreach($bugnotes as $note)
 		{
 			if((!isset($note))||(is_blank($note)))
@@ -1031,27 +1031,27 @@ class MantisOSLCConnector extends OSLCConnector {
 				throw new BadRequestException( "Bug note must not be blank!" );
 			}
 		}
-				
+
 		$project_id = bug_get_field( $bugid, 'project_id' );
 		$user_id = auth_get_current_user_id();
-				
+
 		if(!access_has_bug_level(config_get('add_bugnote_threshold'), $bugid, $user_id))
 		{
 			throw new Exception( "You do not have access rights to add notes to this bug!" );
 		}
-	
+
 		if(bug_is_readonly($bugid))
 		{
 			throw new Exception("Bug ".$bugid." is readonly!" );
 		}
-	
+
 		foreach($bugnotes as $note)
 		{
 			bugnote_add($bugid, $note);
 		}
-			
+
 	}
-	
+
 	private function checkCreator($reporter, &$cm_data)
 	{
 		$user = auth_get_current_user_id();
@@ -1083,9 +1083,9 @@ class MantisOSLCConnector extends OSLCConnector {
 		{
 			throw new BadRequestException("Invalid creator: ".$reporter);
 		}
-		
+
 	}
-	
+
 	private function checkType($category, &$cm_data)
 	{
 		$category_id = null;
@@ -1106,7 +1106,7 @@ class MantisOSLCConnector extends OSLCConnector {
 			$cm_data->category_id = $category_id;
 		}
 	}
-	
+
 	private function checkStatus($status, &$cm_data)
 	{
 		if (array_key_exists($status,self::$status_arr))
@@ -1119,7 +1119,7 @@ class MantisOSLCConnector extends OSLCConnector {
 			throw new BadRequestException('Unknown mantisbt:status value specified!');
 		}
 	}
-	
+
 	private function checkPriority($priority, &$cm_data)
 	{
 		if (array_key_exists($priority,self::$priority_arr))
@@ -1132,7 +1132,7 @@ class MantisOSLCConnector extends OSLCConnector {
 			throw new BadRequestException('Unknown mantisbt:priority value specified!');
 		}
 	}
-	
+
 	private function checkSeverity($severity, &$cm_data)
 	{
 		if (array_key_exists($severity,self::$severity_arr))
@@ -1144,7 +1144,7 @@ class MantisOSLCConnector extends OSLCConnector {
 			throw new BadRequestException('Unknown mantisbt:severity value specified!');
 		}
 	}
-	
+
 	private function checkReproducibility($reproducibility, &$cm_data)
 	{
 		if (array_key_exists($reproducibility,self::$reproducibility_arr))
@@ -1156,7 +1156,7 @@ class MantisOSLCConnector extends OSLCConnector {
 			throw new BadRequestException('Unknown mantisbt:reproducibility value specified!');
 		}
 	}
-	
+
 	private function checkVersion($version, &$cm_data)
 	{
 		if(version_get_id($version, $cm_data->project_id ))
@@ -1169,7 +1169,7 @@ class MantisOSLCConnector extends OSLCConnector {
 			throw new NotFoundException('Version '.$version.' does not exist in Project '.$proj_name.' !!!');
 		}
 	}
-	
+
 	private function checkTargetVersion($target_version, &$cm_data)
 	{
 		if(version_get_id($target_version, $cm_data->project_id ))
@@ -1182,7 +1182,7 @@ class MantisOSLCConnector extends OSLCConnector {
 			throw new NotFoundException('Version '.$target_version.' does not exist in Project '.$proj_name.' !!!');
 		}
 	}
-	
+
 	private function checkVersionNumber($version_number, &$cm_data, $id)
 	{
 		//version_number => custom_field
@@ -1216,9 +1216,9 @@ class MantisOSLCConnector extends OSLCConnector {
 	{
 		$cm_request = $params['new']->container;
 		//print_r($cm_request);
-		  
+
 		$cm_data = new BugData;
-		
+
 		//dc:title ===> mantis:summary
 		if(isset($cm_request['title'])) {
 			$cm_data->summary = $cm_request['title'];			//mandatory
@@ -1245,17 +1245,17 @@ class MantisOSLCConnector extends OSLCConnector {
 			$cm_data->project_id = project_get_id_by_name($project);
 			//print_r($cm_data->project_id);
 		}
-		
+
 		if(( $cm_data->project_id == 0 ) || !project_exists( $cm_data->project_id ) ) {
 			throw new NotFoundException("Project does not exist!!!");
 		}
-		
+
 		$user = auth_get_current_user_id();
 
 		if(isset($cm_request['creator']))
 		{
 			$reporter = $cm_request['creator'];
-			$this->checkCreator($reporter, $cm_data);			
+			$this->checkCreator($reporter, $cm_data);
 		}
 		else
 		{
@@ -1268,31 +1268,31 @@ class MantisOSLCConnector extends OSLCConnector {
 				$cm_data->reporter_id = $user;
 			}
 		}
-			
+
 		//dc:type ===> mantis:category
 		if(isset($cm_request['type']))
 		{
 			$category= $cm_request['type'];                 //mandatory
-			$this->checkType($category, $cm_data);			
+			$this->checkType($category, $cm_data);
 		}
 		else
 		{
 			throw new BadRequestException('Mandatory field "Category" missing!!');
 		}
-		
+
 		//mantisbt:priority
 		//print_r($cm_request['priority']);
-		
+
 		if(isset($cm_request['priority']))
 		{
 			$cm_request['priority'] = strtolower($cm_request['priority']);
-			$this->checkPriority($cm_request['priority'], $cm_data);			
+			$this->checkPriority($cm_request['priority'], $cm_data);
 		}
 		else
 		{
 			$cm_data->priority = config_get( 'default_bug_priority' );
 		}
-		
+
 		//mantisbt:severity
 		if(isset($cm_request['severity']))
 		{
@@ -1303,7 +1303,7 @@ class MantisOSLCConnector extends OSLCConnector {
 		{
 			$cm_data->severity = config_get( 'default_bug_severity' );
 		}
-		
+
 		//mantisbt:reproducibility
 		if(isset($cm_request['reproducibility']))
 		{
@@ -1314,34 +1314,34 @@ class MantisOSLCConnector extends OSLCConnector {
 		{
 			$cm_data->reproducibility = config_get( 'default_bug_reproducibility' );
 		}
-		
+
 		//cases to be chked when versions not specified
 		if ( isset( $cm_request['version'] ) && !is_blank( $cm_request['version'] ) )
 		{
 			//$v_id = version_get_id( $cm_request['version'], $cm_data->project_id );
-			$this->checkVersion($cm_request['version'], $cm_data);						
+			$this->checkVersion($cm_request['version'], $cm_data);
 		}
-		
+
 		if ( isset( $cm_request['target_version'] ) && !is_blank( $cm_request['target_version'] ) )
 		{
 			//$v_id = version_get_id( $cm_request['version'], $cm_data->project_id );
-			$this->checkTargetVersion($cm_request['target_version'], $cm_data);						
+			$this->checkTargetVersion($cm_request['target_version'], $cm_data);
 		}
-		
+
 		//mantisbt:steps_to_reproduce
 		if(isset($cm_request['steps_to_reproduce'])) {
 			$cm_data->steps_to_reproduce = $cm_request['steps_to_reproduce'];
 		}else{
 			$cm_data->steps_to_reproduce = config_get( 'default_bug_steps_to_reproduce' );
 		}
-		
+
 		//mantisbt:additional_information
 		if(isset($cm_request['additional_information'])) {
 			$cm_data->additional_information = $cm_request['additional_information'];
 		}else{
 			$cm_data->additional_information = config_get( 'default_bug_additional_info' );
 		}
-		
+
 		//mantisbt:view_state
 		if(isset($cm_request['view_state'])) {
 			if($cm_request['view_state']=="public")	{
@@ -1353,21 +1353,21 @@ class MantisOSLCConnector extends OSLCConnector {
 			}
 		}else{
 			$cm_data->view_state = config_get( 'default_bug_view_status' );
-		}	
-		
+		}
+
 		$cm_data->handler_id = 0;
 		$cm_data->profile_id = 0;
-				
-		$cm_data->status = config_get( 'bug_submit_status' );		
+
+		$cm_data->status = config_get( 'bug_submit_status' );
 		$cm_data->projection = config_get( 'default_bug_projection' );
 		$cm_data->eta = config_get( 'default_bug_eta' );
 		$cm_data->resolution = config_get( 'default_bug_resolution' );
-		
+
 		$cm_data->due_date = date_get_null();
 		$cm_data->summary = trim( $cm_data->summary );
 
 		# still have to add code to Validate the custom fields (for a particular project) before adding the bug
-		
+
 		# Create the bug
 		$cm_id = $cm_data->create();
 		// bugnotes still to be added
@@ -1378,7 +1378,7 @@ class MantisOSLCConnector extends OSLCConnector {
 		{
 			$this->checkVersionNumber($cm_request['version_number'], $cm_data, $cm_id);
 		}
-				
+
 		if(isset( $cm_request['notes']))
 		{
 			$notes = array();
@@ -1393,15 +1393,15 @@ class MantisOSLCConnector extends OSLCConnector {
 			}
 			$this->addBugnotes($cm_id, $notes);
 		}
-			
+
 		return $cm_id;
 	}
-	
+
 	public function checkChangeRequestExists($id)
 	{
 		return bug_exists($id);
 	}
-	
+
 	public function updateChangeRequest($id, $changerequest, $props)
 	{
 		$cm_data = bug_get($id, true);
@@ -1414,26 +1414,26 @@ class MantisOSLCConnector extends OSLCConnector {
 			//echo $prop;
 		}
 		//print_r($props);
-		
+
 		$user = auth_get_current_user_id();
 		if(!(user_get_access_level($user, $cm_data->project_id )>=REPORTER))
 		{
 			throw new Exception("User doesnt have access to update bug!!");
 		}
-				
+
 		if(in_array('creator',$props))
 		{
 			if(isset($cm_request['creator']))
 			{
 				$reporter = $cm_request['creator'];
-				$this->checkCreator($reporter, $cm_data);			
+				$this->checkCreator($reporter, $cm_data);
 			}
 			else
 			{
 				throw new BadRequestException("dc:creator mentioned in the request query not found in request body!");
 			}
 		}
-		
+
 		//dc:title ===> mantis:summary
 		if(in_array('title',$props))
 		{
@@ -1459,50 +1459,50 @@ class MantisOSLCConnector extends OSLCConnector {
 			{
 				throw new BadRequestException("dc:description mentioned in the request query not found in request body!");
 			}
-		}		
-						
+		}
+
 		//dc:type ===> mantis:category
 		if(in_array('type',$props))
 		{
 			if(isset($cm_request['type']))
 			{
 				$category= $cm_request['type'];                 //mandatory
-				$this->checkType($category, $cm_data);			
+				$this->checkType($category, $cm_data);
 			}
 			else
 			{
 				throw new BadRequestException("dc:type mentioned in the request query not found in request body!");
 			}
 		}
-		
+
 		//mantisbt:status
 		if(in_array("status",$props))
 		{
 			if(isset($cm_request['status']))
 			{
 				$cm_request['status'] = strtolower($cm_request['status']);
-				$this->checkStatus($cm_request['status'], $cm_data);		
+				$this->checkStatus($cm_request['status'], $cm_data);
 			}
 			else
 			{
 				throw new BadRequestException("mantisbt:status mentioned in the request query not found in request body!");
 			}
 		}
-		
+
 		//mantisbt:priority
 		if(in_array("priority",$props))
 		{
 			if(isset($cm_request['priority']))
 			{
 				$cm_request['priority'] = strtolower($cm_request['priority']);
-				$this->checkPriority($cm_request['priority'], $cm_data);			
+				$this->checkPriority($cm_request['priority'], $cm_data);
 			}
 			else
 			{
 				throw new BadRequestException("mantisbt:priority mentioned in the request query not found in request body!");
 			}
 		}
-		
+
 		//mantisbt:severity
 		if(in_array('severity',$props))
 		{
@@ -1516,38 +1516,38 @@ class MantisOSLCConnector extends OSLCConnector {
 				throw new BadRequestException("mantisbt:severity mentioned in the request query not found in request body!");
 			}
 		}
-		
+
 		if(in_array('version',$props))
 		{
 			if ( isset( $cm_request['version'] ) && !is_blank( $cm_request['version'] ) )
 			{
 				//$v_id = version_get_id( $cm_request['version'], $cm_data->project_id );
-				$this->checkVersion($cm_request['version'], $cm_data);						
+				$this->checkVersion($cm_request['version'], $cm_data);
 			}
 			else
 			{
 				throw new BadRequestException("mantisbt:version mentioned in the request query not found in request body!");
 			}
 		}
-		
+
 		if(in_array('target_version',$props))
 		{
 			if ( isset( $cm_request['target_version'] ) && !is_blank( $cm_request['target_version'] ) )
 			{
 				//$v_id = version_get_id( $cm_request['version'], $cm_data->project_id );
-				$this->checkTargetVersion($cm_request['target_version'], $cm_data);						
+				$this->checkTargetVersion($cm_request['target_version'], $cm_data);
 			}
 			else
 			{
 				throw new BadRequestException("mantisbt:target_version mentioned in the request query not found in request body!");
 			}
 		}
-		
-		
+
+
 		$cm_data->summary = trim( $cm_data->summary );
 
 		# still have to add code to Validate the custom fields (for a particular project) before adding the bug
-		
+
 		# Update the bug
 		if(!$cm_data->update(TRUE, TRUE))
 		{
@@ -1567,7 +1567,7 @@ class MantisOSLCConnector extends OSLCConnector {
 				throw new BadRequestException("mantisbt:version_number mentioned in the request query not found in request body!");
 			}
 		}
-				
+
 		if(in_array('notes',$props))
 		{
 			if(isset( $cm_request['notes']))
@@ -1589,7 +1589,7 @@ class MantisOSLCConnector extends OSLCConnector {
 				throw new BadRequestException("mantisbt:notes mentioned in the request query not found in request body!");
 			}
 		}
-		
+
 	}
 
 	public function getHttpAuthBasicResolver($login, $password) {
@@ -1599,10 +1599,10 @@ class MantisOSLCConnector extends OSLCConnector {
 		return $basicResolver;
 
 	}
-	
+
 	/**
 	 * Reproduced from OAuth PHP lib : splits oauth headers
-	 * 
+	 *
 	 * @param string $header
 	 */
 	private static function splitHeader($header) {
@@ -1629,7 +1629,7 @@ class MantisOSLCConnector extends OSLCConnector {
 	/**
 	 * Uses OAuth PHP lib's and OauthAuthz plugin's data store to check OAuth headers
 	 * validating an access token, and logging-in the corresponding user
-	 * 
+	 *
 	 * @param string $auth_header
 	 * @return boolean
 	 */
@@ -1639,7 +1639,7 @@ class MantisOSLCConnector extends OSLCConnector {
 
 			$hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
 			$oauth_server->add_signature_method($hmac_method);
-			
+
 			// HACK : zend framework relies on PHP parse_str() which replaces dots by underscores in the parameters
 			// so we need to restore the original "oslc_cm.xxx" query parameters before checking the signature
 			$parameters=$_GET;
@@ -1679,13 +1679,13 @@ class MantisOSLCConnector extends OSLCConnector {
 			echo "\n"; */
 
 			// if user is succesfully retrieved, then simulate its login
-			if( isset($user) && auth_attempt_script_login($user) ) { 
+			if( isset($user) && auth_attempt_script_login($user) ) {
 				return True;
 			}
 			else {
 				return False;
-			} 
-		/*	
+			}
+		/*
 		} catch (OAuthException $e) {
 			//print($e->getMessage() . "\n<hr />\n");
 			//print_r($req);

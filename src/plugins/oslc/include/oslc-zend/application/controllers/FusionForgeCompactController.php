@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is (c) Copyright 2010 by Sabri LABBENE, Institut TELECOM
  *
@@ -6,12 +6,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -28,19 +28,19 @@ require_once $gfwww.'include/pre.php';
  *
  */
 class FusionForgeCompactController extends CompactController {
-	
+
 	private $actionMimeType;
 	private static $supportedAcceptMimeTypes = array();
-	
+
 	public function setActionMimeType($action) {
 		if(!isset($this->actionMimeType)) {
 			$this->actionMimeType = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $action);
 		}
 	}
-	
+
 	public function init(){
 		self::$supportedAcceptMimeTypes = parent::getSupportedAcceptMimeTypes();
-		
+
 		// now do things that relate to the REST framework
 		$req = $this->getRequest();
 
@@ -50,10 +50,10 @@ class FusionForgeCompactController extends CompactController {
 		if($action =='get')	{
 			$accept = $req->getHeader('Accept');
 		}
-		
+
 		// Set the mime type for action.
 		$this->setActionMimeType($action);
-		
+
 		if(isset($this->actionMimeType)) {
 		  $accept = $this->actionMimeType;
 		}
@@ -66,7 +66,7 @@ class FusionForgeCompactController extends CompactController {
 				$req->setParam('format', $format);
 			}
 		}
-		
+
 		$contextSwitch = $this->_helper->getHelper('contextSwitch');
 
 		$types = array();
@@ -75,10 +75,10 @@ class FusionForgeCompactController extends CompactController {
 			$contextSwitch->addActionContext($action, $types)->initContext();
 		}
 	}
-	
+
 	public function getAction(){
 		$params = $this->getRequest()->getParams();
-		
+
 		if(isset($params['user']) && isset($params['type']) && $params['type'] == "small") {
 				$this->_forward('oslcCompactUserSmall');
 				return;
@@ -96,7 +96,7 @@ class FusionForgeCompactController extends CompactController {
 			return;
 		}
 	}
-	
+
 	/**
 	 * TODO: Enter description here ...
 	 */
@@ -108,13 +108,13 @@ class FusionForgeCompactController extends CompactController {
 
 		$req = $this->getRequest();
 		$params = $req->getParams();
-		
+
 		$user_obj = user_get_object_by_name($params['user']);
 		$this->view->user = $user_obj;
-		
+
 		$this->getResponse()->setHeader('Content-Type', 'application/x-oslc-compact+xml');
 	}
-	
+
 	/**
 	 * Enter description here ...
 	 */
@@ -126,13 +126,13 @@ class FusionForgeCompactController extends CompactController {
 
 		$req = $this->getRequest();
 		$params = $req->getParams();
-		
+
 		$group_obj = group_get_object_by_name($params['project']);
 		$this->view->project = $group_obj;
-		
+
 		$this->getResponse()->setHeader('Content-Type', 'application/x-oslc-compact+xml');
 	}
-	
+
 	/**
 	 * TODO: Enter description here ...
 	 */
@@ -141,7 +141,7 @@ class FusionForgeCompactController extends CompactController {
 			$this->_forward('UnknownAcceptType','error');
 			return;
 		}
-		
+
 		$req = $this->getRequest();
 		$params = $req->getParams();
 
@@ -150,7 +150,7 @@ class FusionForgeCompactController extends CompactController {
 
 		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 	}
-	
+
 	public function oslccompactprojectsmallAction() {
 		if (! isset($this->actionMimeType)) {
 			$this->_forward('UnknownAcceptType','error');
@@ -159,10 +159,10 @@ class FusionForgeCompactController extends CompactController {
 
 		$req = $this->getRequest();
 		$params = $req->getParams();
-		
+
 		$group_obj = group_get_object_by_name($params['project']);
 		$this->view->project = $group_obj;
-		
+
 		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 	}
 }

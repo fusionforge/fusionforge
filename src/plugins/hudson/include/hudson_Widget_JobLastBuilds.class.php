@@ -25,7 +25,7 @@ require_once('PluginHudsonJobDao.class.php');
 require_once('HudsonJob.class.php');
 
 class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
-    
+
     function hudson_Widget_JobLastBuilds($owner_type, $owner_id) {
         $request =& HTTPRequest::instance();
         if ($owner_type == WidgetLayoutManager::OWNER_TYPE_USER) {
@@ -36,10 +36,10 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
             $this->group_id = $request->get('group_id');
         }
         $this->Widget($this->widget_id);
-                
+
         $this->setOwner($owner_id, $owner_type);
     }
-    
+
     function getTitle() {
         $title = '';
         if ($this->job) {
@@ -49,11 +49,11 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
         }
         return  $title;
     }
-    
+
     function getDescription() {
         return _("Show the last builds for this job (last one, last successfull, last failed) and the weather report. The trend is represented by a weather report (sun, thunder, etc.) meaning that the trend is good or not.");
     }
-    
+
     function loadContent($id) {
         $sql = "SELECT * FROM plugin_hudson_widget WHERE widget_name=$1 AND owner_id=$2 AND owner_type=$3 AND id=$4";
         $res = db_query_params($sql,array($this->widget_id,$this->owner_id,$this->owner_type,$id));
@@ -61,9 +61,9 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
             $data = db_fetch_array($res);
             $this->job_id    = $data['job_id'];
             $this->content_id = $id;
-            
+
             $jobs = $this->getAvailableJobs();
-            
+
             if (array_key_exists($this->job_id, $jobs)) {
                 $used_job = $jobs[$this->job_id];
                 $this->job_url = $used_job->getUrl();
@@ -71,7 +71,7 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
             } else {
                 $this->job = null;
             }
-            
+
         }
     }
 
@@ -79,7 +79,7 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
         $html = '';
         if ($this->job != null) {
             $job = $this->job;
-            
+
             $html .= '<table width="100%">';
             $html .= ' <tr>';
             $html .= '  <td>';
@@ -97,11 +97,11 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
             $html .= _("Weather Report:").'<img src="'.$job->getWeatherReportIcon().'" class="widget_lastbuilds_weather_img" />';
             $html .= '  </td>';
             $html .= ' </tr>';
-            $html .= '</table>';        
+            $html .= '</table>';
         } else {
             $html .= _("Job not found.");
         }
-            
+
         return $html;
     }
 }

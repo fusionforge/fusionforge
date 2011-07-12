@@ -12,7 +12,7 @@
 require_once $GLOBALS['gfwww'].'search/include/engines/GroupSearchEngine.class.php';
 
 class ForumMLSearchEngine extends GroupSearchEngine {
-	
+
 	/**
 	* name of the external site
 	*
@@ -20,21 +20,21 @@ class ForumMLSearchEngine extends GroupSearchEngine {
 	*/
 	var $rendererClassName;
 	var $groupId;
-	
+
 	function ForumMLSearchEngine($type, $rendererClassName, $label, $groupId) {
 		$this->groupId = $groupId;
 		$this->rendererClassName = $rendererClassName;
-		
+
 		$this->GroupSearchEngine($type, $rendererClassName, $label);
 	}
-	
+
 	function isAvailable($parameters) {
 		return true;
 	}
-	
+
 	function & getSearchRenderer($words, $offset, $exact) {
 		require_once($this->rendererClassName.'.class.php');
-		$renderer = new $this->rendererClassName($words, $offset, $exact, 
+		$renderer = new $this->rendererClassName($words, $offset, $exact,
 			$this->groupId);
 		return $renderer;
 	}

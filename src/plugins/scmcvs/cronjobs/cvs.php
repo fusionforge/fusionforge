@@ -58,7 +58,7 @@ function checkout_cvs_file($repos,$file) {
 	}
 	$actual_dir = getcwd();
 	$tempdirname = tempnam("/tmp","cvstracker");
-	if (!$tempdirname) 
+	if (!$tempdirname)
 		return false;
 	if (!unlink($tempdirname))
 		return false;
@@ -88,7 +88,7 @@ function commit_cvs_file($repos,$file,$message="Automatic updated by cvstracker"
 		return true;
 	}
 	$actual_dir = getcwd();
-	chdir(dirname($file));	
+	chdir(dirname($file));
 	system("cvs -d ".$repos." ci -m \"".$message."\" ".basename($file));
 	// unlink (basename($file));
 	chdir($actual_dir);
@@ -110,7 +110,7 @@ function release_cvs_file($file) {
 		return;
 	}
 	$dir = $result[1];
-	
+
 	// this shouldn't happen... but add it as a security checke
 	if (util_is_root_dir($dir)) {
 		echo "Trying to delete root dir. Skipping...";
@@ -217,7 +217,7 @@ function add_cvstracker($unix_group_name) {
 	} else {
 //		echo "cvstracker Found!\n";
 	}
-	
+
 	// now make sure that if cvs version is 1.12, "UseNewInfoFmtStrings=yes" line
 	// MUST be present in CVSROOT/config, or else cvstracker won't work
 	if ($cvs_binary_version == "1.12") {
@@ -226,7 +226,7 @@ function add_cvstracker($unix_group_name) {
 			echo "Couldn't get CVSROOT/config for $unix_group_name";
 			return;
 		}
-		
+
 		$content = file_get_contents($config_file);
 		if (!preg_match("/UseNewInfoFmtStrings=yes/i", $content)) {
 			// file must be modified
@@ -287,9 +287,9 @@ function update_cvs_repositories() {
 
 	$res = db_query_params ('select groups.group_id,groups.unix_group_name,groups.enable_anonscm,groups.enable_pserver
  FROM groups, plugins, group_plugin
- WHERE groups.status != $1 
- AND groups.group_id=group_plugin.group_id 
- AND group_plugin.plugin_id=plugins.plugin_id 
+ WHERE groups.status != $1
+ AND groups.group_id=group_plugin.group_id
+ AND group_plugin.plugin_id=plugins.plugin_id
  AND plugins.plugin_name=$2',
 			array('P',
 				'scmcvs'));
@@ -324,7 +324,7 @@ function update_cvs_repositories() {
 /*
 
 
-	Loop through and create/update each repository for every project 
+	Loop through and create/update each repository for every project
 	that uses SCMCVS plugin
 
 
@@ -344,7 +344,7 @@ if(is_dir($cvsdir_prefix)) {
 		} else {
 			$err .= "unable to make $cvsdir_prefix directory\n";
 			exit;
-		}	
+		}
 	}
 }
 

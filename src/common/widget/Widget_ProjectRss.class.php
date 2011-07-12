@@ -25,9 +25,9 @@ require_once('Widget.class.php');
 
 /**
 * Widget_TwitterFollow
-* 
+*
 * Allow to follow a twitter user
-* 
+*
 */
 class Widget_ProjectRss extends Widget_Rss {
     function Widget_ProjectRss() {

@@ -2,23 +2,23 @@
 
 /**
 * Widget_MyLatestSvnCommits
-* 
+*
 * Copyright (c) Xerox Corporation, Codendi 2001-2009.
 *
 * @author  marc.nazarian@xrce.xerox.com
 */
 class Widget_MyLatestSvnCommits extends Widget {
-    
+
     /**
-     * Default number of SVN commits to display (if user did not change/set preferences) 
+     * Default number of SVN commits to display (if user did not change/set preferences)
      */
     const NB_COMMITS_TO_DISPLAY = 5;
-    
+
     /**
-     * Number of SVN commits to display (user preferences) 
+     * Number of SVN commits to display (user preferences)
      */
     private $_nb_svn_commits;
-    
+
     public function __construct() {
         $this->Widget('mylatestsvncommits');
         $this->_nb_svn_commits = user_get_preference('my_latests_svn_commits_nb_display');
@@ -36,7 +36,7 @@ class Widget_MyLatestSvnCommits extends Widget {
     public function _getLinkToMore($group_id, $commiter) {
         return '/svn/?func=browse&group_id='.$group_id.'&_commiter='.$commiter;
     }
-    
+
     public function getContent() {
         $html = '';
         $uh = new UserHelper();
@@ -49,10 +49,10 @@ class Widget_MyLatestSvnCommits extends Widget {
             if ($project->usesSVN()) {
                 list($latest_revisions, $nb_revisions) = svn_get_revisions($project, 0, $this->_nb_svn_commits, '', $user->getUserName());
                 if ($nb_revisions > 0) {
-                    
+
                     list($hide_now,$count_diff,$hide_url) = my_hide_url('my_svn_group', $project_id, $request->get('hide_item_id'), count($project_ids), $request->get('hide_my_svn_group'));
                     $html .= $hide_url;
-                    
+
                     $html .= '<strong>' . $project->getPublicName() . '</strong>';
                     if (!$hide_now) {
                         $i = 0;
@@ -103,7 +103,7 @@ class Widget_MyLatestSvnCommits extends Widget {
         }
         return true;
     }
-    
+
     function getCategory() {
         return 'scm';
     }

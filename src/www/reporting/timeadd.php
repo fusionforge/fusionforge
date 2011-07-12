@@ -95,7 +95,7 @@ if (getStringFromRequest('submit')) {
 
 if ($week) {
 	$group_project_id = getIntFromRequest('group_project_id');
-	
+
 	report_header(_('Time tracking'));
 
 	if (!$group_project_id) {
@@ -103,8 +103,8 @@ if ($week) {
 		foreach (session_get_user()->getGroups() as $p) {
 			$project_ids[] = $p->getID() ;
 		}
-		
-		$respm = db_query_params ('SELECT pgl.group_project_id,g.group_name || $1 || pgl.project_name 
+
+		$respm = db_query_params ('SELECT pgl.group_project_id,g.group_name || $1 || pgl.project_name
 		FROM groups g, project_group_list pgl
 		WHERE g.group_id=ANY($2)
 		AND g.group_id=pgl.group_id
@@ -115,7 +115,7 @@ if ($week) {
 	?>
 		<h3><?php printf(_('Time Entries For The Week Starting %s'), date(_('Y-m-d'),$week)) ?></h3>
 <?php
-	$res = db_query_params ('SELECT pt.project_task_id, pgl.project_name || $1 || pt.summary AS name, 
+	$res = db_query_params ('SELECT pt.project_task_id, pgl.project_name || $1 || pt.summary AS name,
 	rtt.hours, rtt.report_date, rtc.category_name, rtt.time_code
 	FROM groups g, project_group_list pgl, project_task pt, rep_time_tracking rtt,
 	rep_time_category rtc

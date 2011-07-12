@@ -36,7 +36,7 @@ return data:
 	$array[success]=true;
 	$array[session_hash]=jkjkjkjkjkjkjkj;
 	$array[subprojects]=array(
-						55=>'Subproject 1', 
+						55=>'Subproject 1',
 						77=>'Subproject2'
 						);
 
@@ -56,7 +56,7 @@ function &MSPLogin($username,$password) {
 
 		$result = db_query_params ('SELECT group_project_id FROM project_group_list',
 					   array ()) ;
-		
+
 		$gids = array () ;
 		while ($arr = db_fetch_array($result)) {
 			if (forge_check_perm ('pm', $arr['group_project_id'], 'read')) {
@@ -142,7 +142,7 @@ function &MSPDownload($session_hash,$group_project_id) {
 
 LINK TYPES -
 				SS . Start to Start
-				SF . Start to Finish  
+				SF . Start to Finish
 				FS . Finish to Start
 				FF . Finish to Finish
 
@@ -151,7 +151,7 @@ LINK TYPES -
 
 	$session_hash
 	$group_project_id (subproject_id)
-	$tasks = 
+	$tasks =
 		array(
 			id=>1,
 			msproj_id=>p1,
@@ -270,7 +270,7 @@ function &MSPCreateProject($groupid,$session_hash,$name,$ispublic,$description) 
 					$res['description']='Error Creating Subproject '.$pg->getErrorMessage();
 					return $res;
 				} else {
-					return $pg;	
+					return $pg;
 				}
 			}
 		}

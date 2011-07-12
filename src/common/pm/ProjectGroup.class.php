@@ -27,7 +27,7 @@ require_once $gfcommon.'include/Error.class.php';
 	/**
 	* Fetches a ProjectGroup object from the database
 	*
-	* @param	int	the projectgroup id  
+	* @param	int	the projectgroup id
 	* @param	array	whether or not the db result handle is passed in
 	* @return	object	the ProjectGroup object
 	*/
@@ -154,7 +154,7 @@ class ProjectGroup extends Error {
 				return false;
 			}
 		}
-		
+
 		if (!forge_check_perm ('pm_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;

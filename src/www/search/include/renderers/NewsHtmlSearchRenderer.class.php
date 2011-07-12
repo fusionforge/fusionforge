@@ -20,12 +20,12 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
- 
+
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 require_once $gfcommon.'search/NewsSearchQuery.class.php';
 
 class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
-	
+
 	/**
 	 * Constructor
 	 *
@@ -38,19 +38,19 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function NewsHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
-	
+
 		$searchQuery = new NewsSearchQuery($words, $offset, $isExact, $groupId);
-		
+
 		//init the searchrendererr
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_NEWS, $words, $isExact, $searchQuery, $groupId, 'news');
-		
+
 		$this->tableHeaders = array(
 			_('Summary'),
 			_('Posted by'),
 			_('Post date'),
 		);
 	}
-	
+
 	/**
 	 * getRows - get the html output for result rows
 	 *
@@ -60,7 +60,7 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 		$dateFormat = _('Y-m-d H:i');
-		
+
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'

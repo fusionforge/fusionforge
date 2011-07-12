@@ -17,14 +17,14 @@ class DataAccessResult  implements Iterator {
     var $_current;
     var $_row;
     var $nb_rows;
-    
+
     function DataAccessResult($result) {
         $this->result       = $result;
-        
+
             $this->_current = -1;
             $this->_row     = false;
             $this->rewind();
-       
+
     }
 
     /**
@@ -59,33 +59,33 @@ class DataAccessResult  implements Iterator {
         else
             return false;
     }
-    
-    
+
+
     // {{{ Iterator
     function &current() {
         return $this->_row;
     }
-    
+
     function next() {
         $this->_current++;
         if ($this->_current < $this->rowCount()) {
-        $this->_row = db_fetch_array_by_row($this->result, $this->_current);   
+        $this->_row = db_fetch_array_by_row($this->result, $this->_current);
         } else {
             $this->_row = false;
         }
     }
-    
+
     function valid() {
         return $this->_row !== false;
     }
-    
+
     function rewind() {
         if ($this->rowCount() > 0) {
             $this->_current = -1;
             $this->next();
         }
     }
-    
+
     function key() {
         return $this->_current;
     }

@@ -3,7 +3,7 @@
 // The next require_once is just to get HOST
 $config = getenv('CONFIG_PHP') ? getenv('CONFIG_PHP'): 'func/config.php';
 require_once $config;
- 
+
 class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 {
 	protected function setUp()

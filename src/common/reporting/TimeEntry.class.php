@@ -48,7 +48,7 @@ class TimeEntry extends Error {
      * @access public
      *
      */
-    function TimeEntry() 
+    function TimeEntry()
     {
     }
 
@@ -71,7 +71,7 @@ class TimeEntry extends Error {
      * @todo I'm quite concerned that none of the form data is being sanitized for things like
      * unwanted HTML, JavaSript and SQL Injection.  Might be worth adding that sort of filtering
      * as provided by the KSES Filter (search Google).
-     * @todo The check that looks to see if this method works is not language independent.  
+     * @todo The check that looks to see if this method works is not language independent.
      * someone that better understands how that all works will want to remove the hardcoded
      * 'successfully added'.
      *
@@ -92,12 +92,12 @@ class TimeEntry extends Error {
             $feedback.=_('Successfully Added');
         }
 	return db_affected_rows($res);
-    }  
+    }
 
     /**
      * Updates a timeEntry record.
      *
-     * This isn't supported by the current timeadd.php code so I'm assuming that all 
+     * This isn't supported by the current timeadd.php code so I'm assuming that all
      * that is expected is that instead of changing something you'd simply delete it
      * and readd it.  Messy, IMHO, but I am still including this method here to let
      * know I purposely left this unimplemented.
@@ -111,7 +111,7 @@ class TimeEntry extends Error {
     {
         // Not supported in timeadd.php
         return false;
-    } 
+    }
 
     /**
      * Deletes an existing timeEntry record
@@ -147,8 +147,8 @@ class TimeEntry extends Error {
         $tmpOutput = ob_get_contents();
 
         // Now discard any output.
-        ob_clean();        
-        
+        ob_clean();
+
         if (!stristr($tmpOutput, 'successfully deleted')) return false;
         return true;
     }

@@ -20,11 +20,11 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
- 
+
 require_once('TroveCategory.class.php');
- 
+
 class TroveCategoryFactory {
-	
+
 	/**
 	 *	getRootCategories - get an array of root TroveCategory objects
 	 *
@@ -38,7 +38,7 @@ class TroveCategoryFactory {
 			AND trove_cat_id != 0
 			ORDER BY fullname
 		", array());
-		
+
 		if(!$result) {
 			$this->setError();
 			return false;
@@ -50,7 +50,7 @@ class TroveCategoryFactory {
 			return $rootCategories;
 		}
 	}
-	
+
 	function & getCategories($ids) {
 		$result = db_query_params("
 			SELECT *

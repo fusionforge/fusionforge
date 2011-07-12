@@ -2,7 +2,7 @@
 // There is the potential for a lot of mischief from users trying to
 // access this file in ways the shouldn't.  Users may try to type in
 // a URL to get around functions that are not being displayed on the
-// web page to them. 
+// web page to them.
 
 include_once $gfplugins.'webcalendar/www/includes/init.php';
 load_user_layers ();
@@ -42,15 +42,15 @@ else if ( $formtype == "setpassword" && strlen ( $user ) ) {
 // Handle update of user info
 else if ( $formtype == "edituser" ) {
   if ( strlen ( $add ) && $is_admin ) {
-    if ( $upassword1 != $upassword2 ) { 
-      $error = translate( "The passwords were not identical" ) . "."; 
+    if ( $upassword1 != $upassword2 ) {
+      $error = translate( "The passwords were not identical" ) . ".";
     } else {
       if ( addslashes ( $user ) != $user ) {
         // This error should get caught before here anyhow, so
         // no need to translate this.  This is just in case :-)
         $error = "Invalid characters in login.";
       } else if ( empty ( $user ) || $user == "" ) {
-        // Username can not be blank. This is currently the only place that 
+        // Username can not be blank. This is currently the only place that
         // calls user_add_user that is located in $user_inc
         $error = translate( "Username can not be blank" ) . ".";
       } else {

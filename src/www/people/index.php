@@ -1,6 +1,6 @@
 <?php
 /**
- * Help Wanted 
+ * Help Wanted
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
@@ -35,7 +35,7 @@ $group_id = getIntFromRequest('group_id');
 $category_id = getIntFromRequest('category_id');
 
 if ($group_id) {
-	
+
 	project_admin_header(array());
 
 	echo '
@@ -81,11 +81,11 @@ if ($group_id) {
 
 	echo '<h2>'._('Last posts').'</h2>';
 
-	$result=db_query_params('SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name 
-FROM people_job,people_job_category,groups 
-WHERE people_job.group_id=groups.group_id 
-AND people_job.category_id=people_job_category.category_id 
-AND people_job.status_id=1 
+	$result=db_query_params('SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name
+FROM people_job,people_job_category,groups
+WHERE people_job.group_id=groups.group_id
+AND people_job.category_id=people_job_category.category_id
+AND people_job.status_id=1
 ORDER BY post_date DESC', array(), 5);
         echo people_show_job_list($result);
         echo '<p><a href="helpwanted-latest.php">['._('more latest posts').']</a></p>';

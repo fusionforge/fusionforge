@@ -306,7 +306,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->gotoProject("ProjectA");
         $this->waitForPageToLoad("30000");
         $this->click("link=Tasks");
-        $this->waitForPageToLoad("30000");	    
+        $this->waitForPageToLoad("30000");
         $this->click("link=To Do");
         $this->waitForPageToLoad("30000");
         $this->clickAndWait("link=exact:Task1: Hello Paris");

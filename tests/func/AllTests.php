@@ -34,7 +34,7 @@ class AllTests
 
 		// Unit tests
 //		$suite->addTest(ACL_AllTests::suite());
-		
+
 		// Integration tests (Selenium).
 		$suite->addTest(Site_AllTests::suite());
 //		$suite->addTest(Trackers_AllTests::suite());
@@ -45,7 +45,7 @@ class AllTests
 //		$suite->addTest(PluginsWebSvn_AllTests::suite());
 //		$suite->addTest(Scm_AllTests::suite());
 //		$suite->addTest(Docs_AllTests::suite());
-		
+
 		return $suite;
 	}
 }

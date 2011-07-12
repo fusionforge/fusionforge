@@ -17,7 +17,7 @@ global $class;
 $current_user=UserManager::instance()->getCurrentUser();
 
 function sendCreationMail($userEmail,&$list) {
- $message = sprintf(_('A mailing list will be created on %1$s in few minutes 
+ $message = sprintf(_('A mailing list will be created on %1$s in few minutes
 and you are the list administrator.
 
 This list is: %3$s@%2$s .
@@ -50,7 +50,7 @@ Thank you for registering your project with %1$s.
 function table_begin()
 {
 
-//	echo "<table WIDTH=\"100%\" border=0>\n"."<TR><TD VALIGN=\"TOP\">\n"; 
+//	echo "<table WIDTH=\"100%\" border=0>\n"."<TR><TD VALIGN=\"TOP\">\n";
   echo "<table class='border' width='100%' border='0'>
             <tr class='boxtable'>
                 <th class='forumml' width='15%'>"._('Mailing List')."</th>
@@ -66,7 +66,7 @@ function table_begin()
 function table_begin_admin()
 {
 
-//	echo "<table WIDTH=\"100%\" border=0>\n"."<TR><TD VALIGN=\"TOP\">\n"; 
+//	echo "<table WIDTH=\"100%\" border=0>\n"."<TR><TD VALIGN=\"TOP\">\n";
   echo "<table class='border' width='100%' border='0'>
             <tr class='boxtable'>
                 <th class='forumml' width='15%'>"._('Mailing List')."</th>
@@ -124,7 +124,7 @@ $p =& $plugin_manager->getPluginByName('mailman');
 				plugin_hook('browse_archives', array('html' => &$archives, 'group_list_id' => $currentList->getID()));
 				echo '<td>'.$archives.'</td>';
 				if(isLogged())
-				{ 
+				{
 					echo '<td>';
 					if ($currentList->isMonitoring()) {
 						echo ' <a href="index.php?group_id='.$request->get('group_id').'&action=unsubscribe&id='.$currentList->getID().'"><img src="'.$p->getThemePath().'/images/ic/delete.png" title='._('Unsubscribe').'>';

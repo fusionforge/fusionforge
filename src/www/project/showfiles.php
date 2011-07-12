@@ -10,7 +10,7 @@ $release_id = getIntFromRequest ('release_id');
 
 if ($group_id) {
 	if ($release_id) {
-		session_redirect('/frs/?group_id='.$group_id.'&release_id='.$release_id); 
+		session_redirect('/frs/?group_id='.$group_id.'&release_id='.$release_id);
 	} else {
 		session_redirect('/frs/?group_id='.$group_id); }
 } else {

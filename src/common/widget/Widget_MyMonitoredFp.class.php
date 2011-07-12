@@ -22,7 +22,7 @@ require_once('Widget.class.php');
 require_once('common/frs/FRSPackageFactory.class.php');
 /**
 * Widget_MyMonitoredFp
-* 
+*
 * Filemodules that are actively monitored
 */
 class Widget_MyMonitoredFp extends Widget {
@@ -33,7 +33,7 @@ class Widget_MyMonitoredFp extends Widget {
         return _("Monitored File Packages");
     }
     function getContent() {
-        $frsrf = new FRSReleaseFactory();        
+        $frsrf = new FRSReleaseFactory();
         $html_my_monitored_fp = '';
         $sql="SELECT groups.group_name,groups.group_id ".
             "FROM groups,filemodule_monitor,frs_package ".
@@ -48,7 +48,7 @@ class Widget_MyMonitoredFp extends Widget {
             $sql .= "AND groups.group_id IN (". implode(',', $projects) .") ";
         }
         $sql .= "GROUP BY group_id ORDER BY group_id ASC LIMIT 100";
-    
+
         $result=db_query_params($sql,array($frsrf->STATUS_DELETED,user_getid()));
         $rows=db_numrows($result);
         if (!$result || $rows < 1) {
@@ -58,7 +58,7 @@ class Widget_MyMonitoredFp extends Widget {
             $request =& HTTPRequest::instance();
             for ($j=0; $j<$rows; $j++) {
                 $group_id = db_result($result,$j,'group_id');
-        
+
                 $sql2="SELECT frs_package.name,filemodule_monitor.filemodule_id ".
                     "FROM groups,filemodule_monitor,frs_package ".
                     "WHERE groups.group_id=frs_package.group_id ".
@@ -86,11 +86,11 @@ class Widget_MyMonitoredFp extends Widget {
                 }
 
                 list($hide_now,$count_diff,$hide_url) = my_hide_url('frs',$group_id,$hide_item_id,$rows2,$hide_frs);
-        
+
                 $html_hdr = ($j ? '<tr class="boxitem"><td colspan="2">' : '').
                     $hide_url.'<a href="/project/?group_id='.$group_id.'">'.
                     db_result($result,$j,'group_name').'</a>    ';
-        
+
                 $html = '';
                 $count_new = max(0, $count_diff);
                 for ($i=0; $i<$rows2; $i++) {
@@ -106,7 +106,7 @@ class Widget_MyMonitoredFp extends Widget {
                             'border="0" alt="'._("STOP MONITORING").'" /></a></td></tr>';
                     }
                 }
-                
+
                 $html_hdr .= my_item_count($rows2,$count_new).'</td></tr>';
                 $html_my_monitored_fp .= $html_hdr .$html;
             }
@@ -114,7 +114,7 @@ class Widget_MyMonitoredFp extends Widget {
         }
         return $html_my_monitored_fp;
     }
-    
+
     function getCategory() {
         return 'frs';
     }

@@ -66,7 +66,7 @@ function parse_ical ( $cal_file ) {
               if ( $match[1] == $subsubstate ) {
                 $subsubstate = '';
               }
-            } else if ( $subsubstate == "VALARM" && 
+            } else if ( $subsubstate == "VALARM" &&
               preg_match ( "/TRIGGER:(.+)$/i", $buff, $match ) ) {
               // Example: TRIGGER;VALUE=DATE-TIME:19970317T133000Z
               //echo "Set reminder to $match[1]<br />";
@@ -255,7 +255,7 @@ function format_ical($event) {
     $fevent['Description'] = $event['summary'];
   }
   if ( ! empty ( $event['class'] ) ) {
-    $fevent['Private'] = preg_match("/private|confidential/i", 
+    $fevent['Private'] = preg_match("/private|confidential/i",
       $event['class']) ? '1' : '0';
   }
   $fevent['UID'] = $event['uid'];

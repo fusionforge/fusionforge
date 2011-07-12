@@ -60,7 +60,7 @@ $cron_arr[901]='create_groups.php';
 $cron_arr[902]='mailing_lists_index.php';
 
 function cron_entry($job,$output) {
-	$sql='INSERT INTO cron_history (rundate,job,output) 
+	$sql='INSERT INTO cron_history (rundate,job,output)
 		values ($1, $2, $3)' ;
 	return db_query_params ($sql,
 				array (time(), $job, $output));

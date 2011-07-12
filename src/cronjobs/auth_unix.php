@@ -6,7 +6,7 @@
  *
  * Novaforge is a registered trade mark from Bull S.A.S
  * Copyright (C) 2007 Bull S.A.S.
- * 
+ *
  * http://novaforge.org/
  *
  * This file has been developed within the Novaforge(TM) project from Bull S.A.S

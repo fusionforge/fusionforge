@@ -73,12 +73,12 @@ function admin_table_postadd($table, $unit, $primary_key) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('home');
 	}
-	
+
 	$field_list = getStringFromRequest('__fields__');
 	$fields = explode(",", $field_list);
 	$values = array(); $v = array ();
 	$qpa = db_construct_qpa (false, 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
-	
+
 	$i = 1 ;
 	foreach ($fields as $field) {
 		$v[] = '$'.$i;
@@ -192,7 +192,7 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 		$cols = db_numfields($result);
 
 		printf(_('Modify the %1$s below:'), getUnitLabel($unit));
-		
+
 		echo '
 			<form name="edit" action="'.getStringFromServer('PHP_SELF').'?function=postedit&amp;id='.$id.'" method="post">
 			<table>';
@@ -230,7 +230,7 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 	global $_POST;
 
 	$qpa = db_construct_qpa (false, 'UPDATE ' . $table . ' SET ') ;
-	
+
 	$i = 0 ;
 	while (list($var, $val) = each($_POST)) {
 		if ($i > 0) {
@@ -256,7 +256,7 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 	$fields = explode(",", $field_list);
 	$values = array(); $v = array ();
 	$qpa = db_construct_qpa (false, 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
-	
+
 	$i = 1 ;
 	foreach ($fields as $field) {
 		$v[] = '$'.$i;

@@ -30,7 +30,7 @@ if ( empty ( $error ) && $id > 0 ) {
       if ( ! dbi_query ( "UPDATE webcal_entry_user SET cal_status = 'R' " .
         "WHERE cal_login = '$app_user' AND cal_id = $ext_id" ) ) {
         $error = translate("Error approving event") . ": " . dbi_error ();
-      } 
+      }
     }
     dbi_free_result ( $res );
   }

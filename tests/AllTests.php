@@ -22,7 +22,7 @@ class AllTests
 
 		// Code tests
 		$suite->addTestFiles(glob("code/*/*Test.php"));
-		
+
 		return $suite;
 	}
 }

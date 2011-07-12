@@ -37,7 +37,7 @@ if ( empty ( $error ) &&
       "WHERE cat_id = $id AND cat_owner = '$login'" ) )
       $error = translate ("Database error") . ": " . dbi_error();
   }
-      
+
   // Set any events in this category to NULL
   if ( ! dbi_query ( "UPDATE webcal_entry_user SET cal_category = NULL " .
     "WHERE cal_category = $id" ) )

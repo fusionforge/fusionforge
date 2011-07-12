@@ -8,12 +8,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -27,7 +27,7 @@
 
 /**
  * OSLC-CM V1 ChangeRequest model
- * 
+ *
  * @package model
  * @subpackage OslcCmChangeRequest
  */
@@ -79,10 +79,10 @@ class ChangeRequest implements ArrayAccess, Iterator
 
 	/**
 	 * Holds the container for the real attributes array
-	 * 
+	 *
 	 * The dublin core OSLC-CM V1 attributes ($_mandatory and $_optional) are handled without any prefix.
 	 * Additional attributes from other ontologies can be stored but with their prefixes
-	 * 
+	 *
 	 * @var array
 	 */
 	private $container = array();
@@ -123,7 +123,7 @@ class ChangeRequest implements ArrayAccess, Iterator
 	 */
 	public static function Create($bugtrackertype = 'default')
 	{
-		// use a utility function outside the class since otherwise we would 
+		// use a utility function outside the class since otherwise we would
 		//have cycle in dependencies between ChangeRequest and MantisChangeRequest
 		return __createChangeRequest($bugtrackertype);
 	}
@@ -140,9 +140,9 @@ class ChangeRequest implements ArrayAccess, Iterator
 		$resource = null;
 
 		// we use simplexml PHP library which supports namespaces
-		
+
 		/*******Sample CR*****************************************
-		 * 
+		 *
 		 * <?xml version="1.0"?>
 		 * <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 		 *   <oslc_cm:ChangeRequest xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/">
@@ -155,14 +155,14 @@ class ChangeRequest implements ArrayAccess, Iterator
 		 *       <dc:modified xmlns:dc="http://purl.org/dc/terms/">2008-09-16T08:42:11.265Z</dc:modified>
 		 *   </oslc_cm:ChangeRequest>
 		 * </rdf:RDF>
-		 *           
+		 *
 		 */
 
 		$xml = simplexml_load_string($xmlstr);
 		$namespace = $xml->getNamespaces();
 		if ( ($namespace['rdf'] == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#') &&
-			 ($xml->getName() == 'RDF')) 
-		{		
+			 ($xml->getName() == 'RDF'))
+		{
 			foreach ($xml->children('http://open-services.net/xmlns/cm/1.0/') as $changerequest) {
 				if ($changerequest->getName() == 'ChangeRequest') {
 					$resource = array();
@@ -187,11 +187,11 @@ class ChangeRequest implements ArrayAccess, Iterator
 
 	/**
 	 * Create a ChangeRequest from a JSON OSLC-CM representation
-	 * 
+	 *
 	 * @param string $jsonstr
 	 * @return ChangeRequest
 	 */
-	
+
 	public static function CreateFromJson($jsonstr) {
 
 		$resource = Zend_Json::decode($jsonstr);
@@ -199,7 +199,7 @@ class ChangeRequest implements ArrayAccess, Iterator
 		$changerequest = new ChangeRequest();
 
 		// the dublin core elements prefix is removed
-		
+
 		foreach ($resource as $field => $value) {
 			$field = str_replace('dc:', '', $field);
 			$field = str_replace('mantisbt:', '', $field);
@@ -229,7 +229,7 @@ class ChangeRequest implements ArrayAccess, Iterator
 	}
 
 	// Iterator methods
-	
+
 	public function rewind() {
 		reset($this->container);
 	}
@@ -252,7 +252,7 @@ class ChangeRequest implements ArrayAccess, Iterator
 
 	/**
 	 * Check that all mandatory ChangeRequest fields are defined
-	 * 
+	 *
 	 * Throws an exception otherwise
 	 */
 	public function checkMandatoryFields() {
@@ -269,26 +269,26 @@ class ChangeRequest implements ArrayAccess, Iterator
 
 /**
  * Abstract class implementing a ChangeRequest DB
- * 
+ *
  * Holds all ChangeRequest in memory.
- * They will be loaded all at once when first access is made 
- * unless this behaviour is redefined un subclasses by 
+ * They will be loaded all at once when first access is made
+ * unless this behaviour is redefined un subclasses by
  * overloading loadChangeRequest()
- * 
+ *
  * @abstract
  */
 class ChangeRequests implements ArrayAccess, Iterator, Countable
 {
 	/**
 	 * Attributes known for the ChangeRequest instances
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $_fields;
-	
+
 	/**
 	 * An array containing the ChangeRequest instances accessible by their identifiers
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $_data;
@@ -301,9 +301,9 @@ class ChangeRequests implements ArrayAccess, Iterator, Countable
 
 	/**
 	 * Loads all ChangeRequest at once
-	 * 
+	 *
 	 * Method to be implemented / overloaded in subclasses
-	 * 
+	 *
 	 * @abstract
 	 */
 	protected function loadAllChangeRequests()
@@ -313,10 +313,10 @@ class ChangeRequests implements ArrayAccess, Iterator, Countable
 
 	/**
 	 * Load a single ChangeRequest provided its indentifier
-	 * 
-	 * May be overloaded if need to do individual queries in a DB 
+	 *
+	 * May be overloaded if need to do individual queries in a DB
 	 * instead of loading everything at once
-	 * 
+	 *
 	 * @param string $identifier
 	 */
 	protected function loadChangeRequest($identifier) {
@@ -324,11 +324,11 @@ class ChangeRequests implements ArrayAccess, Iterator, Countable
 		// by default, try and load all changerequests on the first query
 		$this->loadAllChangeRequests();
 	}
-	
+
 	public function setFilter($params) {
-		
+
 	}
-	
+
 	// Countable methods
 	public function count() {
 		return count($this->_data);
@@ -432,8 +432,8 @@ function __createChangeRequest($bugtrackertype)
 
 /**
  * For demo DB using a CSV file
- *  
- * @package CsvModel 
+ *
+ * @package CsvModel
  */
 
 /**
@@ -450,7 +450,7 @@ class ChangeRequestsCsv extends ChangeRequests
 	private $_csvfilename;
 
 	private $_filter = null;
-	
+
 	/**
 	 * @param string $filename
 	 */
@@ -466,25 +466,25 @@ class ChangeRequestsCsv extends ChangeRequests
 		//print_r($params);
 		if(array_key_exists('project',$params)) {
 			$this->_filter = array('mantisbt:project' => $params['project']);
-		}	
+		}
 	}
-	
+
 	/**
 	 * Load all ChangeRequest from the CSV file
-	 * 
+	 *
 	 */
 	protected function loadAllChangeRequests()
 	{
 		//print_r('ChangeRequestsCsv::loadAllChangeRequests()');
-		
+
 		// only load once (if not already loaded before)
 		if (isset($this->_data))
 		return;
-		
+
 		$this->_data = array();
 
 		$filename = $this->_csvfilename;
-		
+
 		// load the formet of the CSV file
 		//print_r('load from : '.$filename);
 		$conf = File_CSV::discoverFormat($filename);
@@ -503,11 +503,11 @@ class ChangeRequestsCsv extends ChangeRequests
 
 				// search for identifier's column number
 				for ($i=0; $i < $conf['fields']; $i++ ) {
-						
+
 					if ( trim($res[$i]) == 'identifier') {
 						$idcolnum = $i;
 					}
-						
+
 					// handle special case of the additional definitions at the end of the columns headers
 					$definitions = explode('=', $res[$i]);
 					if ( (count($definitions) > 1) && ($definitions[0] == 'bugtracker')) {
@@ -539,7 +539,7 @@ class ChangeRequestsCsv extends ChangeRequests
 				// add an entry for the identifier
 
 				$cr = ChangeRequest::Create($bugtrackertype);
-				
+
 				for ($i=0; $i < count($this->_fields); $i++ ) {
 					$fieldname = $this->_fields[$i];
 					if (isset($res[$i])) {
@@ -547,15 +547,15 @@ class ChangeRequestsCsv extends ChangeRequests
 					}
 					else {
 						throw new Exception('No value for bug '.$id.' in column '.$fieldname.' !');
-					}					
+					}
 				}
-				
+
 				$cr->checkMandatoryFields();
-				
+
 				//print_r($cr);
 				//print_r('filter:');
 				//print_r($this->_filter);
-				
+
 				// filter only for specific fields/values
 				if (isset($this->_filter) && is_array($this->_filter)) {
 					// for each filter field
@@ -580,11 +580,11 @@ class ChangeRequestsCsv extends ChangeRequests
 					$this->_data[$id] = $cr;
 				}/*
 				else {
-					print_r('NOK : dismissed');	
-				} 	*/	
+					print_r('NOK : dismissed');
+				} 	*/
 			}
 		}
-		
+
 		// reset the CSV file reading to be able to call it twice on same file
 		$file = File_CSV::getPointer($filename,$conf);
 		if($file) {

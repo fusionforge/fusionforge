@@ -21,7 +21,7 @@
 
 require (dirname(__FILE__).'/../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
-			 
+
 $err='';
 
 // Plugins subsystem
@@ -92,7 +92,7 @@ function populateProject($project) {
 			return false;
 		}
 	}
-               
+
 	if (forge_get_config('use_docman')) {
 		$dg = new DocumentGroup($project);
 		if (!$dg->create(_('Uncategorized Submissions'))) {
@@ -134,16 +134,16 @@ function populateProject($project) {
 	$rl = RoleLoggedIn::getInstance() ;
 	$ra->linkProject ($project) ;
 	$rl->linkProject ($project) ;
-	
+
 	$ra->setSetting ('project_read', $project->getID(), 1) ;
 	$rl->setSetting ('project_read', $project->getID(), 1) ;
-	
+
 	$ra->setSetting ('frs', $project->getID(), 1) ;
 	$rl->setSetting ('frs', $project->getID(), 1) ;
-	
+
 	$ra->setSetting ('docman', $project->getID(), 1) ;
 	$rl->setSetting ('docman', $project->getID(), 1) ;
-	
+
 	$ff = new ForumFactory ($project) ;
 	foreach ($ff->getAllForumIds() as $fid) {
 		$f = forum_get_object ($fid) ;
@@ -198,7 +198,7 @@ function populateProject($project) {
 
 	return true;
 }
- 
+
 $project = group_get_object(5);
 
 if (!populateProject($project)) {

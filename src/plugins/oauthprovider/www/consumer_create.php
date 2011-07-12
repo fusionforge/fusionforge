@@ -7,12 +7,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -26,7 +26,7 @@
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-require_once 'checks.php';	
+require_once 'checks.php';
 
 $pluginname = 'oauthprovider';
 
@@ -46,12 +46,12 @@ $f_consumer_email = getStringFromPost( 'consumer_email' );
 
 	if (($msg=OauthAuthzConsumer::check_consumer_values($f_consumer_name, $f_consumer_url, $f_consumer_desc, $f_consumer_email))!=null) {
 		//$missing_params[] = _('"Consumer Name"');
-		$feedback .= $msg; 
+		$feedback .= $msg;
 		//exit_missing_param('', $missing_params,'oauthprovider');
 		form_release_key(getStringFromRequest('plugin_oauthprovider_consumer_create_token'));
-		
+
 		//site_admin_header(array('title'=>_('Create OAuth consumer')));
-		
+
 		include 'consumer.php';
 	}
 	else {

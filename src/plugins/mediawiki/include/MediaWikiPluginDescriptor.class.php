@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Portions Copyright 2010 (c) Mélanie Le Bail
  * Portions Copyright 2011 (c) France Telecom
  */
@@ -25,7 +25,7 @@ require_once('common/plugin/PluginDescriptor.class.php');
 
 
 class MediaWikiPluginDescriptor extends PluginDescriptor {
-    
+
     function MediaWikiPluginDescriptor() {
         $this->PluginDescriptor(_('Mediawiki'), 'v1.0', _('Mediawiki integration in the forge'));
     }

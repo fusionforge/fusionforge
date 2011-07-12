@@ -64,18 +64,18 @@ for ($i=0; $i < count($aliases_orig); $i++) {
 			$i++;
 			$line = trim($aliases_orig[$i]);
 		} while ($i < count($aliases_orig) && !preg_match("/^[[:blank:]]*#GFORGEEND/", $line));
-		
+
 		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file
 		if ($i >= (count($aliases_orig)-1)) break;
-		
+
 		// read next line
 		$i++;
 		$line = trim($aliases_orig[$i]);
 	}
-	
+
 	// empty line or comment
 	if (empty($line) || preg_match('/^#/', $line)) continue;
-	
+
 	list($alias_name, $alias) = explode(':', $line, 2);
 	$alias_name = trim($alias_name);
 	$alias = trim($alias);
@@ -96,12 +96,12 @@ if (forge_get_config('use_forum')) {
 			array ('A'));
 	for ($forres=0; $forres<db_numrows($resforum); $forres++) {
 		$forname=strtolower(db_result($resforum,$forres,'unix_group_name').'-'.strtolower(db_result($resforum,$forres,'forum_name')));
-		
+
 		if (array_key_exists($forname, $aliases)) {
 			// A GForge alias was found outside the markers
 			unset($aliases[$forname]);
 		}
-		
+
 		$gforge_aliases[$forname] = '"|'.$php_command." ".$path_to_cronjobs."/forum_gateway.php ".db_result($resforum,$forres,'unix_group_name')." ".strtolower(db_result($resforum,$forres,'forum_name')).'"';
 	}
 }
@@ -120,18 +120,18 @@ if (forge_get_config('use_tracker')) {
 		// first we remove non-alphanumeric characters (spaces and other stuff)
 		$formatted_tracker_name = preg_replace('/[^[:alnum:]]/','',db_result($restracker,$forres,'tracker_name'));
 		$formatted_tracker_name = strtolower($formatted_tracker_name);
-		
+
 		$trackername=strtolower(db_result($restracker,$forres,'unix_group_name'))."-".$formatted_tracker_name;
 		// enclose tracker name with quotes if it has whitespaces
 		if (strpos($trackername, ' ') !== false) {
 			$trackername = '"'.$trackername.'"';
 		}
-		
+
 		if (array_key_exists($trackername, $aliases)) {
 			// A GForge alias was found outside the markers
 			unset($aliases[$trackername]);
 		}
-		
+
 		$gforge_aliases[$trackername] = '"|'.$php_command." ".$path_to_cronjobs."/tracker_gateway.php ".db_result($restracker,$forres,'unix_group_name')." ".strtolower(db_result($restracker,$forres,'group_artifact_id')).'"';
 	}
 }
@@ -146,16 +146,16 @@ if (forge_get_config('use_mail') && file_exists(forge_get_config('data_path').'/
 	$mailmanlines = explode("\n",$mailmancontents);
 	for	($k = 0; $k < count($mailmanlines); $k++) {
 		$mailmanline = explode(":",$mailmanlines[$k], 2);
-		
+
 		$alias = trim($mailmanline[0]);
 		if (empty($alias)) continue;
 		$command = trim($mailmanline[1]);
-		
+
 		if (array_key_exists($alias, $aliases)) {
 			// A GForge alias was found outside the markers
 			unset($aliases[$alias]);
 		}
-		
+
 		$gforge_aliases[$alias] = $command;
 	}
 	$err .= "\n$k Mailman Lines";
@@ -184,7 +184,7 @@ for ($i=0; $i<$rows; $i++) {
 		// A GForge alias was found outside the markers
 		unset($aliases[$user]);
 	}
-	
+
 	$gforge_aliases[$user] = $email;
 }
 

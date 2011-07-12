@@ -18,7 +18,7 @@ $inBody = 0;
 $cr = 0;
 while (!feof($stdin)) {
 	$line = rtrim(fgets($stdin), "\n\r");
-	
+
 	if ($inBody) {
 		$in .= $line . "\n";
 	}

@@ -64,7 +64,7 @@ if ($selected_tag) {
 		WHERE name = $1
 		AND project_tags.group_id = groups.group_id
 		AND status = $2 AND type_id=1 AND register_time > 0
-		ORDER BY group_name ASC', 
+		ORDER BY group_name ASC',
 		array($selected_tag, 'A'), $TROVE_HARDQUERYLIMIT);
 	$projects = array();
 	$project_ids = array();
@@ -108,7 +108,7 @@ if ($selected_tag) {
 							       '&lt;'.$i.'&gt;');
 			} else {
 				$html_limit .= '<strong>&lt;'.$i.'&gt;</strong>';
-			}				
+			}
 			$html_limit .= ' ';
 		}
 	}
@@ -160,7 +160,7 @@ if ($selected_tag) {
 			}
 			printf ('<br />'._('Activity Percentile: <strong>%3.0f</strong>'), $percentile);
 			printf ('<br />'._('Activity Ranking: <strong>%d</strong>'), $ranking);
-			printf ('<br />'._('Registered: <strong>%s</strong>'), 
+			printf ('<br />'._('Registered: <strong>%s</strong>'),
 				date(_('Y-m-d H:i'),$row_grp['register_time']));
 			print '</td></tr>';
 			/*

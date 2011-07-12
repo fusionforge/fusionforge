@@ -44,7 +44,7 @@ for ( $i = 0; $i < count ( $views ); $i++ ) {
 }
 
 // If view_name not found, then the specified view id does not
-// belong to current user. 
+// belong to current user.
 if ( empty ( $view_name ) ) {
   $error = translate ( "You are not authorized" );
 }
@@ -192,8 +192,8 @@ if ( ! empty ( $error ) ) {
     "&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;" .
     date_to_str ( date ( "Ymd", $wkend ), false );
 ?></span><br />
-<span class="viewname"><?php 
- echo $view_name 
+<span class="viewname"><?php
+ echo $view_name
 ?></span>
 </div>
 </div><br /><br />
@@ -250,17 +250,17 @@ for ( $date = $wkstart, $h = 0;
   }
 
   // Default settings
-  if ( ! isset ($prefarray["WORK_DAY_START_HOUR"] ) || 
+  if ( ! isset ($prefarray["WORK_DAY_START_HOUR"] ) ||
     ! isset ( $prefarray["WORK_DAY_END_HOUR"] ) ) {
-     $val = dbi_fetch_row ( dbi_query ( "SELECT cal_value FROM webcal_config 
+     $val = dbi_fetch_row ( dbi_query ( "SELECT cal_value FROM webcal_config
      where cal_setting='WORK_DAY_START_HOUR'" ));
      $prefarray["WORK_DAY_START_HOUR"]=$val[0];
-     $val = dbi_fetch_row ( dbi_query ( "SELECT cal_value FROM webcal_config 
+     $val = dbi_fetch_row ( dbi_query ( "SELECT cal_value FROM webcal_config
      where cal_setting='WORK_DAY_END_HOUR'" ));
      $prefarray["WORK_DAY_END_HOUR"]=$val[0];
   }
-    
-  print_header_timebar($prefarray["WORK_DAY_START_HOUR"], 
+
+  print_header_timebar($prefarray["WORK_DAY_START_HOUR"],
     $prefarray["WORK_DAY_END_HOUR"]);
   print_date_entries_timebar ( date ( "Ymd", $date ), $GLOBALS["login"], true );
   echo "</td>";

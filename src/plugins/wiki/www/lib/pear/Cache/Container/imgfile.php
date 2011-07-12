@@ -53,18 +53,18 @@ class Cache_Container_file extends Cache_Container {
     * @var  string
     */
     var $filename_prefix = '';
-    
-    
+
+
     /**
     * List of cache entries, used within a gc run
-    * 
+    *
     * @var array
     */
     var $entries;
-    
+
     /**
     * Total number of bytes required by all cache entries, used within a gc run.
-    * 
+    *
     * @var  int
     */
     var $total_size = 0;
@@ -77,7 +77,7 @@ class Cache_Container_file extends Cache_Container {
      function Cache_Container_file($options = '') {
         if (is_array($options))
             $this->setOptions($options, array_merge($this->allowed_options, array('cache_dir', 'filename_prefix')));
-        
+
         clearstatcache();
         if ($this->cache_dir)
         {
@@ -87,7 +87,7 @@ class Cache_Container_file extends Cache_Container {
                 $this->cache_dir = realpath( getcwd() . '/' . $this->cache_dir) . '/';
 
             // check if a trailing slash is in cache_dir
-            if (!substr($this->cache_dir,-1) ) 
+            if (!substr($this->cache_dir,-1) )
                  $this->cache_dir .= '/';
 
             if  (!file_exists($this->cache_dir) || !is_dir($this->cache_dir))
@@ -95,7 +95,7 @@ class Cache_Container_file extends Cache_Container {
         }
         $this->entries = array();
         $this->group_dirs = array();
-                    
+
     } // end func contructor
 
     function fetch($id, $group) {
@@ -129,7 +129,7 @@ class Cache_Container_file extends Cache_Container {
         // touch without second param produced stupid entries...
         touch($file,time());
         clearstatcache();
-        
+
         return array($expire, $cachedata, $userdata);
     } // end func fetch
 
@@ -232,27 +232,27 @@ class Cache_Container_file extends Cache_Container {
 
         $ok = $this->doGarbageCollection($maxlifetime, $this->cache_dir);
 
-        // check the space used by the cache entries        
+        // check the space used by the cache entries
         if ($this->total_size > $this->highwater) {
-        
+
             krsort($this->entries);
             reset($this->entries);
-            
+
             while ($this->total_size > $this->lowwater && list($lastmod, $entry) = each($this->entries)) {
                 if (@unlink($entry['file']))
                     $this->total_size -= $entry['size'];
                 else
                     new CacheError("Can't delete {$entry["file"]}. Check the permissions.");
             }
-            
+
         }
-        
+
         $this->entries = array();
         $this->total_size = 0;
-        
+
         return $ok;
     } // end func garbageCollection
-    
+
     /**
     * Does the recursive gc procedure, protected.
     *
@@ -262,7 +262,7 @@ class Cache_Container_file extends Cache_Container {
     * @throws   Cache_Error
     */
     function doGarbageCollection($maxlifetime, $dir) {
-           
+
         if (!($dh = opendir($dir)))
             return new Cache_Error("Can't access cache directory '$dir'. Check permissions and path.", __FILE__, __LINE__);
 
@@ -296,13 +296,13 @@ class Cache_Container_file extends Cache_Container {
                 $x = filesize($file.'.img');
             $this->entries[$lastused] = array('file' => $file, 'size' => filesize($file)+$x);
             $this->total_size += filesize($file)+$x;
-            
+
             // remove if expired
             if ( ($expire && $expire <= time()) || ($lastused <= (time() - $maxlifetime)) ) {
-                $ok = unlink($file);               
+                $ok = unlink($file);
                 if ( file_exists($file.'.img') )
                     $ok = $ok && unlink($file.'.img');
-                if (!$ok)            
+                if (!$ok)
                     new Cache_Error("Can't unlink cache file '$file', skipping. Check permissions and path.", __FILE__, __LINE__);
             }
 //JOHANNES END
@@ -377,6 +377,6 @@ class Cache_Container_file extends Cache_Container {
 
         return $num_removed;
     } // end func deleteDir
-    
+
 } // end class file
 ?>

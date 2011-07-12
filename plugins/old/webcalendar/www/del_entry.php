@@ -35,13 +35,13 @@ if ( $res ) {
   $row = dbi_fetch_row ( $res );
   $owner = $row[0];
   dbi_free_result ( $res );
-  
-  
+
+
   if ( $owner == $login || $is_assistant && ( $user == $owner ) || $is_nonuser_admin && ( $user == $owner ) ) {
     $my_event = true;
     $can_edit = true;
   }
-  
+
 }
 
 if ( $readonly == 'Y' )
@@ -80,7 +80,7 @@ if ( $id > 0 && empty ( $error ) ) {
 
   // Only allow delete of webcal_entry & webcal_entry_repeats
   // if owner or admin, not participant.
-   
+
   if ( $is_admin || $my_event ) {
 	// Email participants that the event was deleted
     // First, get list of participants (with status Approved or
@@ -118,16 +118,16 @@ if ( $id > 0 && empty ( $error ) ) {
       $user_language = get_pref_setting ( $partlogin[$i], "LANGUAGE" );
       user_load_variables ( $partlogin[$i], "temp" );
       // Want date/time in user's timezone
-      if ( $eventtime != '-1' ) { 
+      if ( $eventtime != '-1' ) {
         $eventtime += ( $user_TZ * 10000 );
         if ( $eventtime < 0 ) {
           $eventtime += 240000;
         } else if ( $eventtime >= 240000 ) {
           $eventtime -= 240000;
         }
-      }  
-               
-      if ( /*$partlogin[$i] != $login &&*/ $do_send == "Y" && boss_must_be_notified ( $login, $partlogin[$i] ) && 
+      }
+
+      if ( /*$partlogin[$i] != $login &&*/ $do_send == "Y" && boss_must_be_notified ( $login, $partlogin[$i] ) &&
         strlen ( $tempemail ) && $send_email != "N" ) {
          if (($GLOBALS['LANGUAGE'] != $user_language) && ! empty ( $user_language ) && ( $user_language != 'none' )){
           reset_language ( $user_language );

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Site Admin phpinfo() page
  *

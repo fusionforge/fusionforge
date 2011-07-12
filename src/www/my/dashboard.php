@@ -86,7 +86,7 @@ if (!session_loggedin()) {
 			$at_arr =& $atf->getArtifactTypes();
 
 			$art_found = 0;
-			
+
 			if(count($at_arr) > 0) {
 				echo '
 				<tr>

@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -62,7 +62,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			// Reload a fresh database before running this test suite.
 			system(DB_INIT_CMD);
 		}
-		
+
 		$this->setBrowser('*firefox');
 		$this->setBrowserUrl(URL);
 		$this->setHost(SELENIUM_RC_HOST);
@@ -131,7 +131,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->click("document.forms[2].field_type[3]");
 			$this->click("post_changes");
 			$this->waitForPageToLoad("30000");
-			
+
 			$this->click("link=Admin");
 			$this->waitForPageToLoad("30000");
 			$this->click("link=Tools");
@@ -171,7 +171,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->click("submit");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Subproject Inserted"));
-			
+
 			$this->type("project_name", "Next Release");
 			$this->type("description", "Items for our next release");
 			$this->click("submit");
@@ -186,7 +186,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->waitForPageToLoad("30000");
 			$this->click("link=Forums Admin");
 			$this->waitForPageToLoad("30000");
-			
+
 			$this->click("link=Add forum");
 			$this->waitForPageToLoad("30000");
 			$this->type("forum_name", "Open-Discussion");
@@ -261,7 +261,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		} else {
 			$password = 'password';
 		}
-		
+
 		$this->type("form_loginname", $username);
 		$this->type("form_pw", $password);
 		$this->clickAndWait("login");
@@ -277,7 +277,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 		$this->logged_in = false ;
 	}
-	
+
 	protected function switchUser($username)
 	{
 		if ($this->logged_in != $username) {
@@ -315,7 +315,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
 
 		$this->switchUser ($saved_user) ;
-	}	
+	}
 
 	protected function approveProject ($name, $user) {
 		$unix_name = strtolower($name);
@@ -337,14 +337,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$unix_name = strtolower($name);
 
 		$this->switchUser ('admin') ;
-		
+
 		// Create a simple project.
 		if ((!defined('PROJECTA')) || ($unix_name != "projecta")) {
 			$this->registerProject ($name, 'admin') ;
 			$this->approveProject ($name, 'admin') ;
 		}
 	}
-	
+
 	protected function createAndGoto($project) {
 		$this->createProject($project);
 		$this->gotoProject($project);
@@ -379,7 +379,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function gotoProject($project) {
 		$unix_name = strtolower($project);
-		
+
 		$this->open( ROOT . '/projects/' . $unix_name) ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("This is the public description for $project."));

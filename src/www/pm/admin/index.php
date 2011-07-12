@@ -145,7 +145,7 @@ if (getStringFromRequest('post_changes')) {
 		$sure = getStringFromRequest('sure');
 		$really_sure = getStringFromRequest('really_sure');
 
-	
+
 		/*
 			Delete a subproject
 		*/

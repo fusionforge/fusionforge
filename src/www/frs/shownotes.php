@@ -31,8 +31,8 @@ $release_id = getIntFromRequest('release_id');
 
 $result=db_query_params ('SELECT frs_release.notes,frs_release.changes,
 		frs_release.preformatted,frs_release.name,frs_package.group_id,frs_package.is_public
-		FROM frs_release,frs_package 
-		WHERE frs_release.package_id=frs_package.package_id 
+		FROM frs_release,frs_package
+		WHERE frs_release.package_id=frs_package.package_id
 		AND frs_release.release_id=$1',
 			array($release_id));
 

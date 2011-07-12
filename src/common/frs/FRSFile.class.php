@@ -125,7 +125,7 @@ class FRSFile extends Error {
 //
 //	Can't really use is_uploaded_file() or move_uploaded_file()
 //	since we want this to be generalized code
-//	This is potentially exploitable if you do not validate 
+//	This is potentially exploitable if you do not validate
 //	before calling this function
 //
 		if (!is_file($file_location) || !file_exists($file_location)) {
@@ -349,8 +349,8 @@ class FRSFile extends Error {
 			return false;
 		}
 
-		$file=forge_get_config('upload_dir').'/'. 
-			$this->FRSRelease->FRSPackage->Group->getUnixName() . '/' . 
+		$file=forge_get_config('upload_dir').'/'.
+			$this->FRSRelease->FRSPackage->Group->getUnixName() . '/' .
 			$this->FRSRelease->FRSPackage->getFileName().'/'.
 			$this->FRSRelease->getFileName().'/'.
 			$this->getName();

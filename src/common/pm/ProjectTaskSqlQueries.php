@@ -45,12 +45,12 @@ function getGroupProjectIdGroupId($project_task_id) {
 function isProjectTaskInfoPublic($project_task_id) {
 	$res = db_query_params('SELECT group_project_id FROM project_task WHERE project_task_id=$1',
 			       array ($project_task_id)) ;
-	
+
 	if (!$res || db_numrows($res) < 1) {
 		return false;
 	}
-	
-	return RoleAnonymous::getInstance()->hasPermission('pm', 
+
+	return RoleAnonymous::getInstance()->hasPermission('pm',
 							   db_result ($res, 0, 'group_project_id'),
 							   'read') ;
 }
@@ -67,12 +67,12 @@ function isProjectTaskInfoPublic($project_task_id) {
 function isUserAndTaskinSameGroup($project_task_id, $user_name) {
 	$res = db_query_params('SELECT group_project_id FROM project_task WHERE project_task_id=$1',
 			       array ($project_task_id)) ;
-	
+
 	if (!$res || db_numrows($res) < 1) {
 		return false;
 	}
 	$arr = db_fetch_array($res) ;
-	
+
 	return forge_check_perm_for_user(user_get_object_by_name ($user_name), 'pm', $arr['group_project_id'], 'read') ;
 }
 

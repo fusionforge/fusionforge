@@ -39,6 +39,6 @@ function getFilterUrl($filterArray, $currentId = 0) {
 		$url = '&discrim='.implode(',', $filterArray);
 	}
 	return $url;
-} 
- 
+}
+
 ?>

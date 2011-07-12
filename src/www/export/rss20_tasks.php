@@ -99,7 +99,7 @@ if(isset($projects[0]))
 				$group_c[$project_c[$project]['group_id']]=$a['group_name'];
 			}
 		}*/
-		
+
 	}
 $project_sq='('.substr($project_sq,4).')';
 }
@@ -127,7 +127,7 @@ if(!empty($project_sq) AND !empty($user))
 	$btwp=$additive;
 }
 
-//calculates number of shown 
+//calculates number of shown
 if (isset($_GET['number']) AND ctype_digit($_GET['number']))
 {
 	if($_GET['number']<=$max_number AND $_GET['number']>0)
@@ -148,7 +148,7 @@ $sql="
 		project_task pt,users u,project_assigned_to a
 	WHERE
 		".is_needed('(').$project_sq." ".$btwp."
-		".$user." 
+		".$user."
 		".$status.is_needed(')')."
 		".$us."u.user_id=pt.created_by
 		AND pt.project_task_id=a.project_task_id
@@ -187,9 +187,9 @@ if(0<pg_num_rows($res))
 			{
 				$group_c[$row1['group_id']]='Wrong or deleted group';
 			}
-	
-	
-	
+
+
+
 			$item_cat = $group_c[$project_c[pg_fetch_result($res,$i,'group_project_id')]['group_id']]." - ".$project_c[pg_fetch_result($res,$i,'group_project_id')]['project_name']." -- ".pg_fetch_result($res,$i,'summary');
 			$ar['project_task_id']=pg_fetch_result($res,$i,'project_task_id');
 			$ar['group_project_id']=pg_fetch_result($res,$i,'group_project_id');
@@ -267,10 +267,10 @@ function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
 
 function writeTaskFeed($msg, $item_cat){
     global  $show_threads;
-            
+
     //------------ build one feed item ------------
-    print "  <item>\n";					
-        print "   <title>".$msg['subject']."</title>\n"; 
+    print "  <item>\n";
+        print "   <title>".$msg['subject']."</title>\n";
         print "   <link>" . util_make_url("/pm/t_follow.php/" . $msg['project_task_id']) . "</link>\n";
         print "   <category>".$item_cat."</category>\n";
         print "   <description>".$msg['details']."</description>\n";

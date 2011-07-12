@@ -72,7 +72,7 @@ class ProjectTasksForUser extends Error {
 	* @return an array of ProjectTask objects
 	*/
 	function &getTasksByGroupProjectName () {
-		return $this->getTasksFromSQLwithParams ('SELECT ptv.*,g.group_name,pgl.project_name 
+		return $this->getTasksFromSQLwithParams ('SELECT ptv.*,g.group_name,pgl.project_name
 			FROM project_task_vw ptv,
 				project_assigned_to pat,
 				groups g,
@@ -85,9 +85,9 @@ class ProjectTasksForUser extends Error {
 			ORDER BY group_name,project_name',
 							 array ($this->User->getID())) ;
 	}
-	
+
 	function &getOpenTasksForDate($date) {
-		return $this->getTasksFromSQLwithParams ('SELECT ptv.*,g.group_name,pgl.project_name 
+		return $this->getTasksFromSQLwithParams ('SELECT ptv.*,g.group_name,pgl.project_name
 			FROM project_task_vw ptv,
 				project_assigned_to pat,
 				groups g,

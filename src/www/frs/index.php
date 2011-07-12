@@ -52,9 +52,9 @@ if (session_loggedin()) {
 }
 
 $sql = "SELECT *
-	FROM frs_package 
-	WHERE group_id=$1 
-	AND status_id='1' 
+	FROM frs_package
+	WHERE group_id=$1
+	AND status_id='1'
 	$pub_sql
 	ORDER BY name";
 $res_package = db_query_params( $sql, array($group_id));
@@ -94,14 +94,14 @@ if ( $num_packages < 1) {
 	$proj_stats['packages'] = $num_packages;
 	$proj_stats['releases'] = 0;
 	$proj_stats['size']     = 0;
-	
+
 	// Iterate and show the packages
 	for ( $p = 0; $p < $num_packages; $p++ ) {
-		
+
 		$frsPackage = new FRSPackage($cur_group, db_result($res_package, $p, 'package_id'));
-		
+
 		$package_name = db_result($res_package, $p, 'name');
-		
+
 		if($frsPackage->isMonitoring()) {
 			$title = db_result($res_package, $p, 'name') . " - " . _('Stop monitoring this package');
 			$url = '/frs/monitor.php?filemodule_id='. db_result($res_package, $p, 'package_id') .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;stop=1';
@@ -114,7 +114,7 @@ if ( $num_packages < 1) {
 
 		$package_name_protected = $HTML->toSlug($package_name);
 		echo "\n".'<h2 id="title_'. $package_name_protected .'">' . $package_name . ' <span class="frs-monitor-package">' . $package_monitor . '</span></h2>'."\n";
-		
+
 		// get the releases of the package
 		$res_release = db_query_params ('SELECT * FROM frs_release
 		WHERE package_id=$1
@@ -159,12 +159,12 @@ if ( $num_packages < 1) {
 				frs_file.release_time AS release_time,
 				frs_filetype.name AS type,
 				frs_processor.name AS processor,
-				frs_dlstats_filetotal_agg.downloads AS downloads 
+				frs_dlstats_filetotal_agg.downloads AS downloads
 				FROM frs_filetype,frs_processor,
-				frs_file LEFT JOIN frs_dlstats_filetotal_agg ON frs_dlstats_filetotal_agg.file_id=frs_file.file_id 
+				frs_file LEFT JOIN frs_dlstats_filetotal_agg ON frs_dlstats_filetotal_agg.file_id=frs_file.file_id
 				WHERE release_id=$1
-				AND frs_filetype.type_id=frs_file.type_id 
-				AND frs_processor.processor_id=frs_file.processor_id 
+				AND frs_filetype.type_id=frs_file.type_id
+				AND frs_processor.processor_id=frs_file.processor_id
 				ORDER BY filename", array($package_release['release_id']));
 				$num_files = db_numrows( $res_file );
 
@@ -189,7 +189,7 @@ if ( $num_packages < 1) {
                 } else {
                     // release_id but not current one => dont print anything here
                 }
-				
+
                 if ( ! $release_id || $release_id==$package_release['release_id'] ) {
                     // no release_id OR no release_id OR release_id is current one
                     if ( !$res_file || $num_files < 1 ) {

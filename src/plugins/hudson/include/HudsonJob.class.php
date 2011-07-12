@@ -21,7 +21,7 @@ require_once('hudson.class.php');
 require_once('HudsonJobURLMalformedException.class.php');
 require_once('HudsonJobURLFileException.class.php');
 require_once('HudsonJobURLFileNotFoundException.class.php');
- 
+
 class HudsonJob {
 
     protected $hudson_job_url;
@@ -30,46 +30,46 @@ class HudsonJob {
     protected $dom_job;
     protected $config_job;
     private $icons_path;
-    
+
     private $context;
-        
+
     /**
      * Construct an Hudson job from a job URL
      */
     function HudsonJob($hudson_job_url) {
         $parsed_url = parse_url($hudson_job_url);
-        
+
         if ( ! $parsed_url || ! array_key_exists('scheme', $parsed_url) ) {
             throw new HudsonJobURLMalformedException(vsprintf(_("Wrong Job URL: %s"),  array($hudson_job_url)));
         }
-                
+
         $this->hudson_job_url = $hudson_job_url . "/api/xml";
         $this->hudson_dobuild_url = $hudson_job_url . "/build";
         $this->hudson_config_job_url = $hudson_job_url . "/config.xml";
-        
-        $controler = $this->getHudsonControler(); 
+
+        $controler = $this->getHudsonControler();
         $this->icons_path = $controler->getIconsPath();
-        
+
         $this->_setStreamContext();
-        
+
         $this->buildJobObject();
-        
+
     }
     function getHudsonControler() {
         return new hudson();
     }
-    
+
     public function buildJobObject() {
         $this->dom_job = $this->_getXMLObject($this->hudson_job_url);
     }
-    
+
     public function configJobObject() {
 	if ($this->config_job) {
 	    return;
 	}
         $this->config_job = $this->_getXMLObject($this->hudson_config_job_url);
     }
-    
+
     protected function _getXMLObject($hudson_job_url) {
 
         // If enabled, use APC cache (1sec) to reduce RSS fetching that may cause big delays.
@@ -91,10 +91,10 @@ class HudsonJob {
                 throw new HudsonJobURLFileException(vsprintf(_("Unable to read file at URL: %s"),  array($hudson_job_url)));
             }
         } else {
-            throw new HudsonJobURLFileNotFoundException(vsprintf(_("File not found at URL: %s"),  array($hudson_job_url))); 
+            throw new HudsonJobURLFileNotFoundException(vsprintf(_("File not found at URL: %s"),  array($hudson_job_url)));
         }
     }
-    
+
     private function _setStreamContext() {
         if (array_key_exists('sys_proxy', $GLOBALS) && $GLOBALS['sys_proxy']) {
             $context_opt = array(
@@ -110,7 +110,7 @@ class HudsonJob {
             $this->context = null;
         }
     }
-    
+
     function getProjectStyle() {
         return $this->dom_job->getName();
     }
@@ -142,11 +142,11 @@ class HudsonJob {
                 break;
             case "yellow":
                 // The last build was successful but unstable. This is primarily used to represent test failures.
-                return _("Unstable"); 
+                return _("Unstable");
                 break;
             case "yellow_anime":
                 // The last build was successful but unstable. This is primarily used to represent test failures. A new build is in progress.
-                return _("In progress"); 
+                return _("In progress");
                 break;
             case "red":
                 // The last build fatally failed.
@@ -170,7 +170,7 @@ class HudsonJob {
                 break;
         }
     }
-    
+
     function getIconsPath() {
         return $this->icons_path;
     }
@@ -186,7 +186,7 @@ class HudsonJob {
                 break;
             case "yellow":
                 // The last build was successful but unstable. This is primarily used to represent test failures.
-                return $this->getIconsPath()."status_yellow.png"; 
+                return $this->getIconsPath()."status_yellow.png";
                 break;
             case "yellow_anime":
                 // The last build was successful but unstable. A new build is in progress.
@@ -214,40 +214,40 @@ class HudsonJob {
                 break;
         }
     }
-    
+
     function isBuildable() {
         return ($this->dom_job->buildable == "true");
     }
-    
+
     function hasBuilds() {
-        return ((int)$this->getLastBuildNumber() !== 0); 
+        return ((int)$this->getLastBuildNumber() !== 0);
     }
-    
+
     function getLastBuildNumber() {
         return $this->dom_job->lastBuild->number;
     }
     function getLastBuildUrl() {
         return $this->dom_job->lastBuild->url;
     }
-    
+
     function getLastSuccessfulBuildNumber() {
         return $this->dom_job->lastSuccessfulBuild->number;
     }
     function getLastSuccessfulBuildUrl() {
         return $this->dom_job->lastSuccessfulBuild->url;
     }
-    
+
     function getLastFailedBuildNumber() {
         return $this->dom_job->lastFailedBuild->number;
     }
     function getLastFailedBuildUrl() {
         return $this->dom_job->lastFailedBuild->url;
     }
-    
+
     function getNextBuildNumber() {
         return $this->dom_job->nextBuildNumber;
     }
-    
+
     function getHealthScores() {
         $scores = array();
         foreach ($this->dom_job->healthReport as $health_report) {
@@ -275,7 +275,7 @@ class HudsonJob {
             return null;
         }
     }
-    
+
     function getWeatherReportIcon() {
         $score = $this->getHealthAverageScore();
         if ($score >= 80) {
@@ -290,17 +290,17 @@ class HudsonJob {
             return $this->getIconsPath()."health_00_to_19.gif";
         }
     }
-    
+
     function getSvnLocation() {
         $this->configJobObject();
         return $this->config_job->scm->locations->{'hudson.scm.SubversionSCM_-ModuleLocation'}->remote;
     }
-    
+
     /**
      * Launch a Build for this job on the Continuous Integration server.
-     * 
+     *
      * @exception if unable to open build URL or if response is an error
-     *  
+     *
      * @param string $token if CI server has activated security (login/password), then a token is mandatory to build jobs. This token is defined in the job configuration.
      * @return response of build call.
      */
@@ -324,7 +324,7 @@ class HudsonJob {
         }
         return $response;
     }
-    
+
 }
 
 ?>

@@ -39,7 +39,7 @@ class MailingList extends Error {
 	 * @var	 object  $Group.
 	 */
 	var $Group;
-	
+
 	/**
 	 * The mailing list id
 	 *
@@ -115,14 +115,14 @@ class MailingList extends Error {
 				return false;
 			}
 		}
-		
+
 		if(!$listName || strlen($listName) < MAIL__MAILING_LIST_NAME_MIN_LENGTH) {
 			$this->setError(_('Must Provide List Name That Is 4 or More Characters Long'));
 			return false;
 		}
-		
+
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
-		
+
 		// '|' or '/' are valid chars in emails but are not allowed by mailman.
 		if( preg_match('/[|\/]/', $realListName) ||
 			!validate_email($realListName.'@'.forge_get_config('lists_host'))) {
@@ -149,7 +149,7 @@ class MailingList extends Error {
 		}
 
 		$listPassword = substr(md5(time() . util_randbytes()), 0, 16);
-		
+
 		db_begin();
 		$result = db_query_params ('INSERT INTO mail_group_list (group_id,list_name,is_public,password,list_admin,status,description) VALUES ($1,$2,$3,$4,$5,$6,$7)',
 					   array ($this->Group->getID(),
@@ -159,16 +159,16 @@ class MailingList extends Error {
 						  $creator_id,
 						  MAIL__MAILING_LIST_IS_REQUESTED,
 						  $description)) ;
-		
+
 		if (!$result) {
 			$this->setError(_('Error Creating mailing list: ').db_error());
 			db_rollback();
 			return false;
 		}
-			
+
 		$this->groupMailingListId = db_insertid($result, 'mail_group_list', 'group_list_id');
 		$this->fetchData($this->groupMailingListId);
-		
+
 		$user = &user_get_object($creator_id);
 		$userEmail = $user ? $user->getEmail() : "";
 		if(empty($userEmail) || !validate_email($userEmail)) {
@@ -176,7 +176,7 @@ class MailingList extends Error {
 			db_rollback();
 			return false;
 		} else {
-			$mailBody = sprintf(_('A mailing list will be created on %1$s in 6-24 hours 
+			$mailBody = sprintf(_('A mailing list will be created on %1$s in 6-24 hours
 and you are the list administrator.
 
 This list is: %3$s@%2$s .
@@ -195,10 +195,10 @@ Thank you for registering your project with %1$s.
 -- the %1$s staff
 '), forge_get_config ('forge_name'), forge_get_config('lists_host'), $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
 			$mailSubject = sprintf(_('%1$s New Mailing List'), forge_get_config ('forge_name'));
-			
+
 			util_send_message($userEmail, $mailSubject, $mailBody, 'admin@'.forge_get_config('web_host'));
 		}
-		
+
 		db_commit();
 		return true;
 	}
@@ -238,7 +238,7 @@ Thank you for registering your project with %1$s.
 		if ($status == 'xyzzy') {
 			$status = $this->getStatus();
 		}
-		
+
 		$res = db_query_params ('UPDATE mail_group_list SET is_public=$1, description=$2, status=$3
 			                 WHERE group_list_id=$4 AND group_id=$5',
 					array ($isPublic,
@@ -246,7 +246,7 @@ Thank you for registering your project with %1$s.
 					       $status,
 					       $this->groupMailingListId,
 					       $this->Group->getID())) ;
-		
+
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error On Update:').db_error());
 			return false;
@@ -300,7 +300,7 @@ Thank you for registering your project with %1$s.
 	function getDescription() {
 		return $this->dataArray['description'];
 	}
-	
+
 	/**
 	 * getPassword - get the password to administrate the mailing list
 	 *
@@ -309,7 +309,7 @@ Thank you for registering your project with %1$s.
 	function getPassword() {
 		return $this->dataArray['password'];
 	}
-	
+
 	/**
 	 * getListAdmin - get the user who is the admin of this mailing list
 	 *
@@ -318,7 +318,7 @@ Thank you for registering your project with %1$s.
 	function getListAdmin() {
 		return user_get_object($this->dataArray['list_admin']);
 	}
-	
+
 	/**
 	 * getStatus - get the status of this mailing list
 	 *
@@ -327,7 +327,7 @@ Thank you for registering your project with %1$s.
 	function getStatus() {
 		return $this->dataArray['status'];
 	}
-	
+
 	/**
 	 * getArchivesUrl - get the url to see the archives of the list
 	 *
@@ -340,7 +340,7 @@ Thank you for registering your project with %1$s.
 			return 'http://'.forge_get_config('lists_host').'/mailman/private/'.$this->getName().'/';
 		}
 	}
-	
+
 	/**
 	 * getExternalInfoUrl - get the url to subscribe/unsubscribe
 	 *
@@ -354,7 +354,7 @@ Thank you for registering your project with %1$s.
 		}
 		return "$proto://".forge_get_config('lists_host').'/mailman/listinfo/'.$this->getName();
 	}
-	
+
 	/**
 	 * getExternalAdminUrl - get the url to admin the list with the external tools used
 	 *
@@ -401,7 +401,7 @@ Thank you for registering your project with %1$s.
 			return false;
 		}
 		return true;
-		
+
 	}
 }
 

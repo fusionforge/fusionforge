@@ -28,7 +28,7 @@ require_once dirname(__FILE__).'/html.php';
 /**
  * editor_button_raw() - Open an Editor dialog window
  *
- * @param               str     Anchor string       
+ * @param               str     Anchor string
  * @param		form	Form name
  * @param               int     wrap
  * @param		int     rows

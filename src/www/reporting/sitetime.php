@@ -79,7 +79,7 @@ $a2[]='user';
 </tr></table>
 </form>
 
-<?php 
+<?php
 if ($typ =='r') {
 	$report=new ReportSiteTime($type,$start,$end);
 	$labels = $report->labels;

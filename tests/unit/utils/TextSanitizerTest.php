@@ -15,7 +15,7 @@ require_once dirname(__FILE__) . '/../../../src/common/include/TextSanitizer.cla
 class TextSanitizerTests extends PHPUnit_Framework_TestCase
 {
 	protected $s;
-	
+
 	function setUp()
 	{
 		$this->s = new TextSanitizer();
@@ -29,7 +29,7 @@ class TextSanitizerTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals('<h1>A valid message</h1>', $this->s->purify('<h1>A valid message</h1>'));
 		$this->assertEquals('<h1>A <b>valid</b> message</h1>', $this->s->purify('<h1>A <B>valid</B> message</h1>'));
 	}
-	
+
 	/**
 	 * test purify on repairing damaged code.
 	 */
@@ -38,7 +38,7 @@ class TextSanitizerTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals('<h1>Missing ending tag</h1>', $this->s->purify('<h1>Missing ending tag'));
 		$this->assertEquals('Invalid  tag', $this->s->purify('Invalid <toto> tag'));
 	}
-	
+
 	/**
 	 * test purify on malicious code.
 	 */

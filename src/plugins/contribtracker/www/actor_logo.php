@@ -39,7 +39,7 @@ if ($actor_id) {
 	echo $actor->getLogo();
 } else {
 		exit_error (_('Invalid actor'),'contribtracker');
-}	
+}
 
 // Local Variables:
 // mode: php

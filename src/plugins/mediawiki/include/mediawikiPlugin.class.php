@@ -88,7 +88,7 @@ class MediaWikiPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				if (forge_get_config('use_frame', 'mediawiki')){
-					$params['DIRS'][]=util_make_url ('/plugins/mediawiki/frame.php?group_id=' . $project->getID()) ; 
+					$params['DIRS'][]=util_make_url ('/plugins/mediawiki/frame.php?group_id=' . $project->getID()) ;
 				} else {
 					$params['DIRS'][]=util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
 				}
@@ -152,7 +152,7 @@ class MediaWikiPlugin extends Plugin {
 							 'Junior Developer' => '1',
 							 'Doc Writer' => '1',
 							 'Support Tech' => '1')) ;
-			
+
 			// Edit privileges
 			$right = new PluginSpecificRoleSetting ($role,
 								'plugin_mediawiki_edit') ;
@@ -162,7 +162,7 @@ class MediaWikiPlugin extends Plugin {
 							 'Junior Developer' => '1',
 							 'Doc Writer' => '3',
 							 'Support Tech' => '0')) ;
-			
+
 			// File upload privileges
 			$right = new PluginSpecificRoleSetting ($role,
 								'plugin_mediawiki_upload') ;
@@ -172,7 +172,7 @@ class MediaWikiPlugin extends Plugin {
 							 'Junior Developer' => '1',
 							 'Doc Writer' => '2',
 							 'Support Tech' => '0')) ;
-			
+
 			// Administrative tasks
 			$right = new PluginSpecificRoleSetting ($role,
 								'plugin_mediawiki_admin') ;
@@ -182,14 +182,14 @@ class MediaWikiPlugin extends Plugin {
 							 'Junior Developer' => '0',
 							 'Doc Writer' => '0',
 							 'Support Tech' => '0')) ;
-			
+
 		} elseif ($hookname == "role_normalize") {
 			$role =& $params['role'] ;
 			$new_sa =& $params['new_sa'] ;
 			$new_pa =& $params['new_pa'] ;
 
 			if (USE_PFO_RBAC) {
-				$projects = $role->getLinkedProjects() ;		
+				$projects = $role->getLinkedProjects() ;
 				foreach ($projects as $p) {
 					$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_read', $p->getID()) ;
 					$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_edit', $p->getID()) ;
@@ -213,15 +213,15 @@ class MediaWikiPlugin extends Plugin {
 							       'plugin_mediawiki_edit') ;
 			$right->setDescription (_('Mediawiki write access')) ;
 			$right->setValueDescriptions (array ('0' => _('No editing'),
-							     '1' => _('Edit existing pages only'), 
-							     '2' => _('Edit and create pages'), 
+							     '1' => _('Edit existing pages only'),
+							     '2' => _('Edit and create pages'),
 							     '3' => _('Edit, create, move, delete pages'))) ;
 
 			$right = new PluginSpecificRoleSetting ($role,
 							       'plugin_mediawiki_upload') ;
 			$right->setDescription (_('Mediawiki file upload')) ;
 			$right->setValueDescriptions (array ('0' => _('No uploading'),
-							     '1' => _('Upload permitted'), 
+							     '1' => _('Upload permitted'),
 							     '2' => _('Upload and re-upload'))) ;
 
 			$right = new PluginSpecificRoleSetting ($role,
@@ -361,13 +361,13 @@ class MediaWikiPlugin extends Plugin {
 			$template = $params['template'] ;
 			$project = $params['project'] ;
 			$id_mappings = $params['id_mappings'] ;
-			
+
 			$sections = array ('plugin_mediawiki_read', 'plugin_mediawiki_edit', 'plugin_mediawiki_upload', 'plugin_mediawiki_admin') ;
 
 			foreach ($template->getRoles() as $oldrole) {
 				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]) ;
 				$oldsettings = $oldrole->getSettingsForProject ($template) ;
-				
+
 				foreach ($sections as $section) {
 					if (isset ($oldsettings[$section][$template->getID()])) {
 						$newrole->setSetting ($section, $project->getID(), $oldsettings[$section][$template->getID()]) ;
@@ -375,7 +375,7 @@ class MediaWikiPlugin extends Plugin {
 				}
 			}
 		} elseif ($hookname == "site_admin_option_hook") {
-			echo '<li><a href="'.$this->getPluginPath().'/">' . _('Mediawiki plugin') . '</a></li>';	
+			echo '<li><a href="'.$this->getPluginPath().'/">' . _('Mediawiki plugin') . '</a></li>';
 		}
 	}
   }

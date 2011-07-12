@@ -58,7 +58,7 @@ class GroupJoinRequest extends Error {
 	 *  @return boolean success.
 	 */
 	function GroupJoinRequest($Group=false, $user_id=false, $arr=false) {
-		$this->error(); 
+		$this->error();
 
 		if (!$Group || !is_object($Group)) {
 			$this->setError('GroupJoinRequest:: No Valid Group Object');
@@ -83,7 +83,7 @@ class GroupJoinRequest extends Error {
 					$this->setError('group_id in db result does not match Group Object');
 					return false;
 				}
-			} 
+			}
 		}
 		return true;
 	}
@@ -136,7 +136,7 @@ class GroupJoinRequest extends Error {
 			db_rollback();
 			return false;
 		}
-		
+
 		if (!$this->fetchData($this->Group->getID(),$user_id)) {
 			db_rollback();
 			return false;
@@ -214,7 +214,7 @@ class GroupJoinRequest extends Error {
 	}
 
 	/**
-	 *	sendJoinNotice() - 
+	 *	sendJoinNotice() -
 	 *
 	 *	@return boolean	true/false.
 	 */
@@ -223,12 +223,12 @@ class GroupJoinRequest extends Error {
 		$admins =& $this->Group->getAdmins();
 		for ($i=0; $i<count($admins); $i++) {
 			setup_gettext_for_user ($admins[$i]) ;
-		  
+
 			$email=$admins[$i]->getEmail();
 			$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
 			$comments = util_unconvert_htmlspecialchars($this->data_array["comments"]);
-			$body = sprintf(_('%1$s has requested to join your project. 
-You can approve this request here: %2$s 
+			$body = sprintf(_('%1$s has requested to join your project.
+You can approve this request here: %2$s
 
 Comments by the user:
 %3$s'),

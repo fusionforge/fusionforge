@@ -39,7 +39,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			$c = __CLASS__;
 			self::$_instance = new $c;
 		}
-		
+
 		return self::$_instance;
 	}
 
@@ -54,7 +54,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		$this->_cached_available_roles = array () ;
 
 		$this->_cached_available_roles[] = RoleAnonymous::getInstance() ;
-		
+
 		if (session_loggedin()) {
 			$this->_cached_available_roles[] = RoleLoggedIn::getInstance() ;
 			$user = session_get_user() ;
@@ -72,7 +72,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 				}
 			}
 		}
-		
+
 		$params = array();
 		$params['current_roles'] = $this->_cached_available_roles;
 		$params['new_roles'] = array();
@@ -80,7 +80,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		foreach ($params['new_roles'] as $r) {
 			$this->addAvailableRole($r);
 		}
-		
+
 		$params = array();
 		$params['current_roles'] = $this->_cached_available_roles;
 		$params['dropped_roles'] = array();
@@ -88,7 +88,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		foreach ($params['dropped_roles'] as $r) {
 			$this->dropAvailableRole($r);
 		}
-		
+
 		return $this->_cached_available_roles ;
 	}
 
@@ -128,7 +128,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 				$this->_cached_global_roles[] = $this->getRoleById ($arr['role_id']) ;
 			}
 		}
-		
+
 		return $this->_cached_global_roles ;
 	}
 
@@ -146,7 +146,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 				$this->_cached_public_roles[] = $this->getRoleById ($arr['role_id']) ;
 			}
 		}
-		
+
 		return $this->_cached_public_roles ;
 	}
 
@@ -161,7 +161,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 
 		$result[] = RoleAnonymous::getInstance() ;
 		$result[] = RoleLoggedIn::getInstance() ;
-		
+
 		if (USE_PFO_RBAC) {
 			$res = db_query_params ('SELECT role_id FROM pfo_user_role WHERE user_id=$1',
 						array ($user->getID()));
@@ -175,7 +175,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 				$result[] = $this->getRoleById ($arr['role_id']) ;
 			}
 		}
-		
+
 		return $result ;
 	}
 
@@ -220,7 +220,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			if (!$res || !db_numrows($res)) {
 				return NULL ;
 			}
-			
+
 			$class_id = db_result ($res, 0, 'class_name') ;
 			switch ($class_id) {
 			case 'PFO_RoleExplicit':
@@ -437,31 +437,31 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 				$t = artifactType_get_object ($reference) ;
 				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $t->Group->getID())) ;
 			}
-			break ;			
+			break ;
 		case 'pm':
 			if ($action != 'tech') {
 				$t = projectgroup_get_object ($reference) ;
 				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('pm_admin', $t->Group->getID())) ;
 			}
-			break ;			
+			break ;
 		case 'forum':
 			$t = forum_get_object ($reference) ;
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forum_admin', $t->Group->getID())) ;
-			break ;			
+			break ;
 		case 'new_tracker':
 			if ($action != 'tech') {
 				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $reference)) ;
 			}
-			break ;			
+			break ;
 		case 'new_pm':
 			if ($action != 'tech') {
 				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('pm_admin', $reference)) ;
 			}
-			break ;			
+			break ;
 		case 'new_forum':
 			$t = forum_get_object ($reference) ;
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forum_admin', $reference)) ;
-			break ;			
+			break ;
 		}
 
 		return array_unique ($result) ;

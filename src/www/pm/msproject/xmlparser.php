@@ -70,7 +70,7 @@ $data = str_replace("\r","",$data);
 printr($data,'next-data');
 printr(getenv('TZ'),'xmlparser1:: TZ');
 
-//SECTION 2. 
+//SECTION 2.
 //FUNCTIONS AND VARIABLES
 $result = array();
 global $principal_tag;
@@ -114,7 +114,7 @@ function startElement($parser, $name, $attrib){
     global $iddependenton;
     global $projectiddependenton;
     global $linktypedependenton;
-   	
+
     $tag_aux = $name;
 	if ($tasks == true){
 		//ID TASK
@@ -136,7 +136,7 @@ function startElement($parser, $name, $attrib){
 		}
 		return;
 	}
-	
+
     switch ($name){
 	    case $name=="REQUEST" : {
 		    switch ($attrib["HANDLE"]){
@@ -171,12 +171,12 @@ function startElement($parser, $name, $attrib){
 			}
 	    	break;
     	}
-    
+
 	   	case $name=="SUBPROJECT" : {
 			$subproject_id = $attrib["ID"];
 			break;
 		}
-	
+
 	   	case $name=="TASKS" : {
 		   	$tasks = true;
 			break;
@@ -250,7 +250,7 @@ function characterDataHandler ($parser, $data) {
 			$tag_aux = "";
 			break;
 		}
-		
+
 		case $principal_tag == "download": {
 			switch ($tag_aux) {
 				case $tag_aux == "SESSION_ID": {
@@ -265,7 +265,7 @@ function characterDataHandler ($parser, $data) {
 			$tag_aux = "";
 			break;
 		}
-		
+
 		case  $principal_tag == "GetProjects": {
                         switch ($tag_aux) {
 				case $tag_aux == "SESSION_ID": {
@@ -514,7 +514,7 @@ switch ($result["REQUEST"]) {
 					print('</resourcenames>');
 					print('<usernames>');
 					$usernames = $gforgeresult["usernames"];
-					if (count($usernames) > 0 ) {					
+					if (count($usernames) > 0 ) {
 						foreach($usernames as $k => $username) {
 							print('<user id ="'.$k.'">'.$username.'</user>');
 						}
@@ -565,12 +565,12 @@ case $result["REQUEST"] == "GetProjects": {
 	print('</response>');
 	print('</xml>');
 	break;
-}		
+}
 
 case $result["REQUEST"] == "CreateProject": {
 	if($result["ispublic"]==1 || $result["ispublic"]==true) {
 		$result["ispublic"]=1;
-	} else { 
+	} else {
 		$result["ispublic"]=0;
 	}
 	$gforgeresult = MSPCreateProject($result["GROUPID"],$result["session_id"],$result["name"],$result["ispublic"],$result["description"]);
@@ -581,7 +581,7 @@ case $result["REQUEST"] == "CreateProject": {
 		print('<error>');
 		print('<description>'.$gforgeresult['description'].'</description>');
 		print('</error>');
-	} else { 
+	} else {
 		print('<response handle="result">');
 		print('<Group_ID>'.$result["GROUPID"].'</Group_ID>');
 		print('<Group_Project_ID>'.$gforgeresult->getID().'</Group_Project_ID>');

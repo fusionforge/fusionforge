@@ -23,7 +23,7 @@
 
 
 //
-//  FORM TO COPY Choices configured by admin for extra_field BOXES 
+//  FORM TO COPY Choices configured by admin for extra_field BOXES
 //
 $id = getIntFromRequest('id');
 $fb= new ArtifactExtraField($ath,$id);
@@ -38,11 +38,11 @@ foreach (session_get_user()->getGroups() as $p) {
 }
 
 $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aefl.field_name, aefl.extra_field_id
-			FROM groups g, 
-			artifact_group_list agl, 
+			FROM groups g,
+			artifact_group_list agl,
 			artifact_extra_field_list aefl
 			WHERE g.group_id=ANY($1)
-			AND g.group_id=agl.group_id 
+			AND g.group_id=agl.group_id
 			AND agl.group_artifact_id=ap.group_artifact_id
 			AND aefl.group_artifact_id=agl.group_artifact_id
 			AND aefl.extra_field_id != $2
@@ -52,17 +52,17 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 		if (db_numrows($res) < 1) {
 			exit_error(_('Cannot find a destination tracker where you have administration rights.'),'tracker');
 		}
-		
+
 		$title = sprintf(_('Copy choices from custom field %1$s'), $fb->getName());
 		$ath->adminHeader(array ('title'=>$title));
-		
+
 		$efearr = $ath->getExtraFieldElements($id);
 		for ($i=0; $i<count($efearr); $i++) {
 			$field_id_arr[] = $efearr[$i]['element_id'];
 			$field_arr[] = $efearr[$i]['element_name'];
 		}
 		?>
-		<form action="<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post" >        
+		<form action="<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post" >
 		<table>
 		<tr>
 		<td></td><td><center><strong>
@@ -81,7 +81,7 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 		<?php
 		echo html_build_multiple_select_box_from_arrays($field_id_arr,$field_arr,'copyid[]',array(),10,false);
 		echo '</td><td><center><strong>';
-		
+
 		while($arr =db_fetch_array($res)) {
 				$name_arr[]=$arr['unix_group_name']. '::'. $arr['tracker_name'] . '::'. $arr['field_name'];
 				$id_arr[]=$arr['extra_field_id'];
@@ -96,7 +96,7 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 		<br />
 	 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 		</td></tr></table></form>
-		
+
 		<?php
 		$ath->footer(array());
 

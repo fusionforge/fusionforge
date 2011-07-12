@@ -27,7 +27,7 @@ require_once $gfwww.'snippet/snippet_utils.php';
 
 /**
  * create_snippet_hash() - A little utility function to reduce duplicated code in snippet_mainpage()
- * 
+ *
  * @param	qpa	Array	A query+parameter array
  * @param	field	String	The field name - either 'language' or 'category'
  * @return An associative array filled with the results of the SQL query
@@ -46,15 +46,15 @@ function create_snippet_hash($qpa, $field) {
  */
 function snippet_mainpage() {
 	global $SCRIPT_LANGUAGE,$SCRIPT_CATEGORY;
-	$return = '<p>' 
+	$return = '<p>'
       . _('The purpose of this archive is to let you share your code snippets, scripts, and functions with the Open Source Software Community.')
-      . '</p><p>' 
-      . _('You can create a "new snippet", then post additional versions of that snippet quickly and easily.') 
-      . '</p><p>' 
-      . _('Once you have snippets posted, you can then create a "Package" of snippets. That package can contain multiple, specific versions of other snippets.') 
-      . '</p><h3>' 
-      . _('Browse Snippets') 
-      . '</h3><p>' 
+      . '</p><p>'
+      . _('You can create a "new snippet", then post additional versions of that snippet quickly and easily.')
+      . '</p><p>'
+      . _('Once you have snippets posted, you can then create a "Package" of snippets. That package can contain multiple, specific versions of other snippets.')
+      . '</p><h3>'
+      . _('Browse Snippets')
+      . '</h3><p>'
       . _('You can browse the snippet library quickly:').'
 	</p>
 	<table width="100%" border="0">
@@ -76,11 +76,11 @@ function snippet_mainpage() {
 		}
 	}
 
-	$return .= 	
+	$return .=
 	'</ul></td><td>
 	<strong>'._('Browse by Category').':</strong>
 	<ul>';
-	
+
 	$qpa = db_construct_qpa (false, 'SELECT category, count(*) as count from snippet group by category') ;
 	$existing_categories = create_snippet_hash($qpa, "category");
 	for ($i=1; $i<count($SCRIPT_CATEGORY); $i++) {

@@ -24,21 +24,21 @@
 require_once $gfcommon.'search/SearchQuery.class.php';
 
 class ForumSearchQuery extends SearchQuery {
-	
+
 	/**
 	 * group id
 	 *
 	 * @var int $groupId
 	 */
 	var $groupId;
-	
+
 	/**
 	 * forum id
 	 *
 	 * @var int $groupId
 	 */
 	var $forumId;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -51,7 +51,7 @@ class ForumSearchQuery extends SearchQuery {
 	function ForumSearchQuery($words, $offset, $isExact, $groupId, $forumId) {
 		$this->groupId = $groupId;
 		$this->forumId = $forumId;
-		
+
 		$this->SearchQuery($words, $offset, $isExact);
 	}
 
@@ -67,7 +67,7 @@ class ForumSearchQuery extends SearchQuery {
 
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFormattedWords();
-			
+
 
 			if(count($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
@@ -111,12 +111,12 @@ class ForumSearchQuery extends SearchQuery {
 		}
 		return $qpa ;
 	}
-	
+
 	/**
 	 * getSearchByIdQuery - get the sql query built to get the search results when we are looking for an int
 	 *
 	 * @return array query+params array
-	 */	
+	 */
 	function getSearchByIdQuery() {
 		$qpa = db_construct_qpa () ;
 		$qpa = db_construct_qpa ($qpa,

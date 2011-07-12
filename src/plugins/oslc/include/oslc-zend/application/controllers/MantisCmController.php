@@ -1,18 +1,18 @@
-<?php 
+<?php
 /**
- * This file is (c) Copyright 2010 by Sabri LABBENE, Madhumita DHAR, 
+ * This file is (c) Copyright 2010 by Sabri LABBENE, Madhumita DHAR,
  * Olivier BERGER, Institut TELECOM
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -23,10 +23,10 @@ require_once($controller_dir . 'CmController.php');
 require_once($controller_dir . 'MantisOSLCConnector.php');
 
 class MantisCmController extends CmController{
-	
+
 	/**
 	 * @var oslc
-	 * 
+	 *
 	 * This will be the OSLC-CM controller managing the business logic of the application
 	 */
 	private $oslc;
@@ -37,26 +37,26 @@ class MantisCmController extends CmController{
 					'text/xml' => 'xml',
 				 	'application/json' => 'json',
 				 	'application/x-oslc-cm-change-request+json' => 'json'
-				),			 	
+				),
 
 				'readBugnoteCollection' => array(
 					'application/atom+xml' => 'xml',
 					'application/json' => 'json'
 				)
 	);
-	
+
 	private static $supportedAcceptMimeTypes = array();
-	
+
 	public function getSupportedAcceptMimeTypes(){
 		return self::$supportedAcceptMimeTypes;
 	}
-	
+
 	/*public function __construct(){
 		// just merge Mantis specifc action mime types with the default set
 		// of supported actions mime types in OSLC-CM
 		$this->getSupportedAcceptMimeTypes = array_merge(CmController::getSupportedAcceptMimeTypes(), $this->mantisSupportedAcceptMimeTypes);
 	}*/
-	
+
 	/**
 	 * Init Mantis REST controller.
 	 */
@@ -79,12 +79,12 @@ class MantisCmController extends CmController{
 		{
 			$accept = $req->getHeader('Accept');
 		}
-		
+
 		$action = $req->getActionName();
 		//print_r("Action : ".$action);
-		
+
 		$mime = $this->checkSupportedActionMimeType($this->getSupportedAcceptMimeTypes(), $action);
-		
+
 		if($mime) {
 			$accept = $mime;
 		}
@@ -96,12 +96,12 @@ class MantisCmController extends CmController{
 				$req->setParam('format', $format);
 			}
 		}
-		
+
 		$contextSwitch = $this->_helper->getHelper('contextSwitch');
 
 		// we'll handle JSON ourselves
 		$contextSwitch->setAutoJsonSerialization(false);
-		
+
 		foreach (self::$supportedAcceptMimeTypes as $action => $typesarr) {
 			if(($action!="post")&&($action!="put")){
 				$types = array_unique(array_values($typesarr));
@@ -110,14 +110,14 @@ class MantisCmController extends CmController{
 				//print_r($types);
 			}
 		}
-		
+
 		// Create an OSLC Connector for Mantis.
 		$this->oslc = new MantisOSLCConnector();
-		
-	}
-	
 
-	
+	}
+
+
+
 		/**
 	 * Performs authentication according to the configured AUTH_TYPE configured
 	 *
@@ -140,7 +140,7 @@ class MantisCmController extends CmController{
 				break;
 		}
 	}
-	
+
 	/**
 	 * Helper function that performs HTTP Basic authentication from request parameters/headers
 	 *
@@ -178,14 +178,14 @@ class MantisCmController extends CmController{
 			}
 		}
 		if (isset($password)) {
-				
+
 			$config = array(
 		    	'accept_schemes' => 'basic',
     			'realm'          => 'Oslc-Demo',
     			'digest_domains' => '/cm',
     			'nonce_timeout'  => 3600,
 			);
-				
+
 			// Http authentication adapter
 			$adapter = new Zend_Auth_Adapter_Http($config);
 
@@ -233,9 +233,9 @@ class MantisCmController extends CmController{
 
 	/**
 	 * Checks that OAuth authorization is correct, or fallbacks to Basic Auth
-	 * 
+	 *
 	 * Will log-in the user corresponding to the OAuth authorization delegation
-	 * 
+	 *
 	 * @param string $login (write)
 	 */
 	private function checkOauthAuthorization(&$login) {
@@ -269,13 +269,13 @@ class MantisCmController extends CmController{
 	public function listAction(){
 		throw new BadRequestException('Method list not yet supported !');
 	}
-	
+
 	/**
 	 * GET REST Action handler : Get one or all changerequests
-	 * 
+	 *
 	 * Allow /cm/bug/ or /cm/bugs/ to list all changerequests
 	 *  or /cm/bug/bug_id to retrieve one specific changerequest
-	 * 
+	 *
 	 */
 	public function getAction() {
 		//print_r('getAction');
@@ -302,7 +302,7 @@ class MantisCmController extends CmController{
 		if ( isset($params['id']) && ($params['id'] == "oslc-services")) {
 			$this->_forward('oslcServiceCatalog');
 			//return;
-		}		
+		}
 		// handle OSLC-CM service document access
 		elseif (isset($params['oslc-cm-service'])) {
 			$this->_forward('oslcCmServiceDocument');
@@ -317,15 +317,15 @@ class MantisCmController extends CmController{
 		{
 			$this->_forward('showCreationUi');
 			//echo "here";exit;
-		}		
+		}
 		elseif(preg_match("/^\/cm\/bug\/[1-9]+[0-9]*\/notes[\/]?$/", $this->getRequest()->getPathInfo()))
 		{
 			$this->_forward('readBugnoteCollection');
-		}		
+		}
 		elseif(preg_match("/^\/cm\/notes\/[1-9]+[0-9]*[\/]?$/", $this->getRequest()->getPathInfo()))
 		{
 			$this->_forward('readBugnote');
-		}		
+		}
 		elseif(preg_match("/^\/cm\/([A-Za-z]?\/)|(0\/)|([1-9]+[0-9]*\/)|(\/)stats_activity[\/]?$/", $this->getRequest()->getPathInfo()))
 		{
 			$proj = $this->getRequest()->getPathInfo();
@@ -334,7 +334,7 @@ class MantisCmController extends CmController{
 			//print_r($proj);
 			$this->oslc->retrieveStatsByActivity($proj);
 		}
-		
+
 		elseif(preg_match("/^\/cm\/([A-Za-z]?\/)|(0\/)|([1-9]+[0-9]*\/)|(\/)stats_age[\/]?$/", $this->getRequest()->getPathInfo()))
 		{
 			//print_r("get stats \n");
@@ -343,7 +343,7 @@ class MantisCmController extends CmController{
 			$proj = preg_replace("/\/stats_age[\/]?$/","",$proj);
 			$this->oslc->retrieveStatsByAge($proj);
 		}
-		
+
 		elseif(preg_match("/^\/cm\/([A-Za-z]?\/)|(0\/)|([1-9]+[0-9]*\/)|(\/)stats_date[\/]?$/", $this->getRequest()->getPathInfo()))
 		{
 			//print_r("get stats \n");
@@ -351,10 +351,10 @@ class MantisCmController extends CmController{
 			$proj = preg_replace("/^\/cm\//","",$proj);
 			$proj = preg_replace("/\/stats_date[\/]?$/","",$proj);
 			$this->oslc->retrieveStatsByDate($proj);
-		}		
+		}
 		else {
 			// Now, do the OSLC-CM resources access work
-			
+
 			// if no bug was mentioned, then return a resource collection
 			if ((array_key_exists('project', $params))||($params['id']=='bug')||($params['id']=='bugs')) {
 				// forward to an independant action so that it has its own views
@@ -367,7 +367,7 @@ class MantisCmController extends CmController{
 				// read the individual resource and pass to the view
 				$this->_forward('readResource');
 
-			
+
 			}else
 			{
 				throw new NotFoundException("Resource ".$this->getRequest()->getRequestUri()." was not found on the server!");
@@ -384,14 +384,14 @@ class MantisCmController extends CmController{
 			}
 		}
 	}
-	
+
 	/**
 	 * Handles PUT action as routed by Zend_Rest_Route
-	 * 
+	 *
 	 * Update of an existing changerequest
 	 * Will be invoked if PUT or if POST on a path relating to resources (due to Zend REST route behaviour)
 	 * So in case of POST, will pass the handling to postAction()
-	 * 
+	 *
 	 * @return unknown_type
 	 */
 	public function putAction(){
@@ -404,12 +404,12 @@ class MantisCmController extends CmController{
 		// so we check such case and then redirect to postAction() if needed
 		if ($req->isPost()) {
         	//print_r('redirect to post');
-            $this->_forward('post');            
+            $this->_forward('post');
 		}
 		else {
-		
+
 			// otherwise it is indeed a PUT and we are trying to modify a change request
-			
+
 			$login = null;
 			$authenticated = $this->retrieveAuthentication($login);
 			if(isset($login)) {
@@ -422,7 +422,7 @@ class MantisCmController extends CmController{
 			}
 
 			$contenttype = $req->getHeader('Content-Type');
-			
+
 			$contenttype = $contenttype ? $contenttype : 'none';
 
 			switch($contenttype) {
@@ -512,28 +512,28 @@ class MantisCmController extends CmController{
 			{
 				$this->oslc->updateChangeRequest($identifier, $newchangerequest, $modifiedproperties);
 			}
-						
+
 		}
 	}
-	
+
 	/**
 	 * Handles POST action as routed by Zend_Rest_Route
-	 * 
+	 *
 	 * Creation of a new changerequest
-	 * 
+	 *
 	 * May be invoked from putAction() because of Zend pecularities
-	 * 
+	 *
 	 * @return unknown_type
 	 */
 	public function postAction(){
 
 		$req = $this->getRequest();
-		
+
 		// check that we're indeed invoked by a POST request
 		if(! $req->isPost()) {
 			throw new Exception('postAction invoked without POST !');
 		}
-		
+
 		$params = $req->getParams();
 		//print_r($params);
 
@@ -548,13 +548,13 @@ class MantisCmController extends CmController{
 				throw new Exception('Invalid authentication provided !');
 			}
 		}
-		
-		
+
+
 		$req = $this->getRequest();
 		//print_r("Request: ".$req);
 
 		$contenttype = $req->getHeader('Content-Type');
-		
+
 		$contenttype = $contenttype ? $contenttype : 'none';
 
 		switch($contenttype) {
@@ -585,7 +585,7 @@ class MantisCmController extends CmController{
 		{
 			$body = file_get_contents('php://input');
 		}
-		
+
 		if(array_key_exists('project',$params)) {
 			// create a change request
 			switch($contenttype) {
@@ -627,7 +627,7 @@ class MantisCmController extends CmController{
 			}
 			//print_r($req->getPathInfo());
 			$path = $req->getPathInfo();
-			if (preg_match("/^\/cm\/bug\/[1-9]+[0-9]*\/notes[\/]?$/", $path)) 
+			if (preg_match("/^\/cm\/bug\/[1-9]+[0-9]*\/notes[\/]?$/", $path))
 			{
 				$this->oslc->addBugnotes($params['bug'],$notes_arr);
 				$identifier = $params['bug']."/notes";
@@ -637,14 +637,14 @@ class MantisCmController extends CmController{
 			{
 				throw new BadRequestException('Incorrect syntax for bugnote URL');
 			}
-			
+
 		}
 		else
 		{
 			throw new ConflictException('Need a valid project to create change request !');
 		}
-	
-		
+
+
 		// prepare redirection
 		$httpScheme = $this->getRequest()->getScheme();
 		$httpHost = $this->getRequest()->getHttpHost();
@@ -661,9 +661,9 @@ class MantisCmController extends CmController{
 			$newlocation = $httpScheme.'://'.$httpHost.$baseURL.'/'.$controllerName.'/bug/'.$identifier;
 		}
 		print_r($newlocation);
-		
+
 		$this->getResponse()->setRedirect($newlocation,201);
-		
+
 	}
 
 	public function deleteAction(){
@@ -671,28 +671,28 @@ class MantisCmController extends CmController{
 		//$this->_forward('get');
 		throw new BadRequestException('Method delete not yet supported !');
 	}
-	
+
 	/* returns a collection of OSLC CM ChangeRequests */
 
 	/**
 	 * GET REST Action handler : Get all changerequests
-	 * 
+	 *
 	 * Allow /cm/bug/ or /cm/bugs/ to list all changerequests
-	 * 
+	 *
 	 * Invoked as rerouted from getAction()
-	 * 
+	 *
 	 */
 	public function readresourcecollectionAction()	{
-		
+
 		$content_type = $this->checkSupportedActionMimeType($this->getSupportedAcceptMimeTypes(), $this->getRequest()->getActionName());
 		if (! $content_type) {
 		  //			print_r("error");
 		  throw new NotAcceptableException("Accept header ".$this->getRequest()->getHeader('Accept')." not supported!");
 		}
-		
+
 		$req = $this->getRequest();
 		$params = $req->getParams();
-		
+
 		// load the model
 		$params = $this->oslc->init($params);
 		//print_r($params);
@@ -706,7 +706,7 @@ class MantisCmController extends CmController{
 			//removing the query string from the uri if it exists
 			$requestUri = substr($requestUri, 0, $pos);
 		}
-		
+
 		$requestUri = str_replace('bugs','bug', $requestUri);
 		$requestUri = preg_replace("/project.*/", 'bug/', $requestUri);
 		$requestUri = $requestUri.(($requestUri[strlen($requestUri)-1]=='/')?'':'/');
@@ -714,7 +714,7 @@ class MantisCmController extends CmController{
 
 		// get all resources
 		$collection = $this->oslc->getResourceCollection($prefix);
-		
+
 		// construct an intermediate array that will be used to populate the view
 		$preparedCollection = array ('id'         => $httpScheme.'://'.$httpHost.$requestUri,
 									'collection'     => $collection
@@ -731,19 +731,19 @@ class MantisCmController extends CmController{
 
 		//print_r($this->view);
 		$this->getResponse()->setHeader('Content-Type', $content_type);
-		
+
 	}
-	
+
 	/**
 	 * Retrieve an individual resource and populates the view of an OSLC CM ChangeRequest
-	 * 
+	 *
 	 */
 	public function readresourceAction()
 	{
 		if (! $this->checkSupportedActionMimeType($this->getSupportedAcceptMimeTypes(), $this->getRequest()->getActionName())) {
 			return;
 		}
-				
+
 		//(preg_match("/^\/cm\/bug\/[1-9]+[0-9]*[\/]?$/", $this->getRequest()->getPathInfo()))
 		$params = $this->getRequest()->getParams();
 		$identifier = $params['bug'];
@@ -754,13 +754,13 @@ class MantisCmController extends CmController{
 
 		$uri = $httpScheme.'://'.$httpHost.$requestUri;
 		$content_type = $this->checkSupportedActionMimeType($this->getSupportedAcceptMimeTypes(), $this->getRequest()->getActionName());
-		
+
 		if (! $content_type) {
 		  //			print_r("error");
 		  $this->_forward('UnknownAcceptType','error');
 		  return;
 		}
-		
+
 		$preparedChangeRequest = $this->oslc->getChangeRequest($identifier, $uri);
 		//print_r($preparedChangeRequest);
 
@@ -770,7 +770,7 @@ class MantisCmController extends CmController{
 			foreach($preparedChangeRequest as $field => $value) {
 				$this->view->{$field} = $value;
 			}
-			
+
 			$this->getResponse()->setHeader('Content-Type', $content_type);
 		}
 
@@ -782,25 +782,25 @@ class MantisCmController extends CmController{
 		}
 		//print($content_type);
 	}
-	
+
 	public function readbugnotecollectionAction() {
 		if (! $this->checkSupportedActionMimeType($this->getSupportedAcceptMimeTypes(), $this->getRequest()->getActionName())) {
 			return;
 		}
-		
+
 		$req = $this->getRequest();
 		$params = $req->getParams();
-		
+
 		$httpScheme = $this->getRequest()->getScheme();
 		$httpHost = $this->getRequest()->getHttpHost();
 		$requestUri = $this->getRequest()->getRequestUri();
 		$requestUri = $requestUri.(($requestUri[strlen($requestUri)-1]=='/')?'':'/');
 		$bugnoteUri = preg_replace("/bug\/[1-9]+[0-9]*\//", '', $requestUri);
-		$prefix = $httpScheme.'://'.$httpHost.$bugnoteUri;		
+		$prefix = $httpScheme.'://'.$httpHost.$bugnoteUri;
 
 		//print_r("get bugnotes \n");
 		$collection = $this->oslc->getBugnoteCollection($params['bug'], $prefix);
-		
+
 		// construct an intermediate array that will be used to populate the view
 		$preparedCollection = array ('id'         => $httpScheme.'://'.$httpHost.$requestUri,
 							  'collection'     => $collection);
@@ -811,20 +811,20 @@ class MantisCmController extends CmController{
 		}
 		//print_r($this->view);
 	}
-	
+
 	public function readbugnoteAction()
 	{
 		$req = $this->getRequest();
 		$params = $req->getParams();
-		
+
 		$httpScheme = $this->getRequest()->getScheme();
 		$httpHost = $this->getRequest()->getHttpHost();
 		$requestUri = $this->getRequest()->getRequestUri();
-		$prefix = $httpScheme.'://'.$httpHost.$requestUri;		
+		$prefix = $httpScheme.'://'.$httpHost.$requestUri;
 
 		//print_r("get a single bugnote \n");
 		$note = $this->oslc->getBugnote($params['notes'], $prefix);
-		
+
 		if (isset($note)) {
 
 			// populate the view with the model
@@ -839,29 +839,29 @@ class MantisCmController extends CmController{
 			$this->_forward('ResNotFound','error');
 
 		}
-		
+
 	}
-	
+
 	/**
 	 * Handle OSLC services catalog access (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
 	 */
 	public function oslcservicecatalogAction() {
-		
+
 		$content_type = $this->checkSupportedActionMimeType($this->getSupportedAcceptMimeTypes(), $this->getRequest()->getActionName());
 		if (! $content_type) {
 		  //			print_r("error");
 		  $this->_forward('UnknownAcceptType','error');
 		  return;
 		}
-		
+
 		// each project will generate its own service description
 		$proj_arr = $this->oslc->getProjectList();
 
 		$this->view->projects = $proj_arr;
-		
+
 		$this->getResponse()->setHeader('Content-Type', $content_type);
 	}
-	
+
 	public function oslccmservicedocumentAction() {
 		$content_type = $this->checkSupportedActionMimeType($this->getSupportedAcceptMimeTypes(), $this->getRequest()->getActionName());
 		if (! $content_type) {
@@ -869,7 +869,7 @@ class MantisCmController extends CmController{
 		  $this->_forward('UnknownAcceptType','error');
 		  return;
 		}
-		
+
 		$req = $this->getRequest();
 		$params = $req->getParams();
 		$project = $params['oslc-cm-service'];
@@ -878,7 +878,7 @@ class MantisCmController extends CmController{
 		$this->getResponse()->setHeader('Content-Type', $content_type);
 
 	}
-	
+
 	public function showselectionuiAction()
 	{
 		$req = $this->getRequest();
@@ -887,7 +887,7 @@ class MantisCmController extends CmController{
 		$data = $this->oslc->getDataForSelectionUi($project);
 		$this->view->data = $data;
 	}
-	
+
 	public function showcreationuiAction()
 	{
 		$req = $this->getRequest();
@@ -896,7 +896,7 @@ class MantisCmController extends CmController{
 		$data = $this->oslc->getDataForCreationUi($project);
 		$this->view->data = $data;
 	}
-	
+
 }
 
 ?>

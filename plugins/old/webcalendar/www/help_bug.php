@@ -5,7 +5,7 @@
 
 <h2><?php etranslate("Report Bug")?></h2>
 
-<?php 
+<?php
 	//No need to translate the text below since I want all bugs
 	//reported in English.
 	//Americans only speak English, of course ;-)

@@ -184,7 +184,7 @@ if($status == 'P') {
 <?php
 
 	if (forge_get_config('use_shell')) {
-?> 
+?>
 <tr>
 <td>
 <?php echo _('Home Box:'); ?>

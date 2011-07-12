@@ -4,13 +4,13 @@
  *
  * Some of the settings made here can be overwrite in the
  * configuration file if needed.
- * 
+ *
  */
 
 // Attempt to set up the include path, to fix problems with relative includes
 $fusionforge_basedir = dirname(dirname(dirname( __FILE__ ))) ;
-$include_path = join(PATH_SEPARATOR, 
-	array("/etc/gforge/custom", "/etc/gforge", ".", 
+$include_path = join(PATH_SEPARATOR,
+	array("/etc/gforge/custom", "/etc/gforge", ".",
 		"$fusionforge_basedir/common", "$fusionforge_basedir/www",
 		"$fusionforge_basedir/plugins", "$fusionforge_basedir",
 		"$fusionforge_basedir/www/include",
@@ -31,7 +31,7 @@ $include_path = join(PATH_SEPARATOR,
 if (getenv('sys_localinc')) {
 	$gfcgfile = getenv('sys_localinc');
 	$gfconfig = dirname($gfcgfile).'/';
-} elseif (isset($_SERVER['SERVER_NAME']) && 
+} elseif (isset($_SERVER['SERVER_NAME']) &&
 	file_exists($fusionforge_basedir.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php')) {
 	$gfcgfile = $fusionforge_basedir.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php';
 	$gfconfig = $fusionforge_basedir.'/config/'.$_SERVER['SERVER_NAME'].'/';

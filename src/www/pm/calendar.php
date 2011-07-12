@@ -163,7 +163,7 @@ function display_month($m, $y) {
 	global $months, $today, $month, $day, $year, $HTML,
 		$pt_arr, $group_id, $group_project_id;
 	$dow = array(_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'));
-	
+
 	$tstamp = mktime(0, 0, 0, $m + 1, 0, $y) ;
 
 	$date = getdate($tstamp);

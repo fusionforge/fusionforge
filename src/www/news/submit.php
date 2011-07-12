@@ -94,7 +94,7 @@ if (session_loggedin()) {
 			  create a new discussion forum without a default msg
 			  if one isn't already there
 			*/
-			
+
 			db_begin();
 			$f = new Forum($group);
 			if (!$f->create(preg_replace('/[^_\.0-9a-z-]/','-', strtolower($summary)),$details,1,'',0,0)) {
@@ -103,7 +103,7 @@ if (session_loggedin()) {
 			}
 			$group->normalizeAllRoles();
 			$new_id=$f->getID();
-			$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) 
+			$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details)
  VALUES ($1, $2, $3, $4, $5, $6, $7)';
 			$result=db_query_params($sql,
 						array($group_id, user_getid(), 0, time(), $new_id, htmlspecialchars($summary), $details));
@@ -121,7 +121,7 @@ if (session_loggedin()) {
 		}
 	}
 
-	//news must now be submitted from a project page - 
+	//news must now be submitted from a project page -
 
 	if (!$group_id) {
 		exit_no_group();
@@ -139,7 +139,7 @@ if (session_loggedin()) {
 
 	echo '
 		<p>
-		'. sprintf(_('You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable.'), forge_get_config ('forge_name')) .'</p>' . $jsfunc . 
+		'. sprintf(_('You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable.'), forge_get_config ('forge_name')) .'</p>' . $jsfunc .
 		'
 		<form id="newssubmitform" action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
@@ -151,7 +151,7 @@ if (session_loggedin()) {
 		<input type="text" name="summary" value="'.$summary.'" size="60" maxlength="60" /></p>
 		<p>
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms.newssubmitform.details').utils_requiredField().'</p>';
-	
+
 	$GLOBALS['editor_was_set_up']=false;
 	$params = array() ;
 	$params['name'] = 'details';

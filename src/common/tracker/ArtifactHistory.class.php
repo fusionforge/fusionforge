@@ -25,7 +25,7 @@ require_once $gfcommon.'include/Error.class.php';
 
 class ArtifactHistory extends Error {
 
-	/** 
+	/**
 	 * The artifact object.
 	 *
 	 * @var		object	$Artifact.
@@ -47,7 +47,7 @@ class ArtifactHistory extends Error {
 	 *  @return	boolean	success.
 	 */
 	function ArtifactHistory(&$Artifact, $data=false) {
-		$this->Error(); 
+		$this->Error();
 
 		//was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {
@@ -94,7 +94,7 @@ class ArtifactHistory extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$result = db_query_params ('INSERT INTO artifact_category (group_artifact_id,category_name,auto_assign_to) 
+		$result = db_query_params ('INSERT INTO artifact_category (group_artifact_id,category_name,auto_assign_to)
 			VALUES ($1,$2,$3)',
 					   array ($this->Artifact->getID(),
 						  htmlspecialchars($name),
@@ -141,7 +141,7 @@ class ArtifactHistory extends Error {
 	function &getArtifact() {
 		return $this->Artifact;
 	}
-	
+
 	/**
 	 *	getID - get this ArtifactHistory's ID.
 	 *

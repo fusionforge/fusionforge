@@ -25,7 +25,7 @@ require_once $gfcommon.'include/Error.class.php';
 
 class ArtifactMessage extends Error {
 
-	/** 
+	/**
 	 * The artifact object.
 	 *
 	 * @var		object	$Artifact.
@@ -47,7 +47,7 @@ class ArtifactMessage extends Error {
 	 *  @return	boolean	success.
 	 */
 	function ArtifactMessage(&$Artifact, $data=false) {
-		$this->Error(); 
+		$this->Error();
 
 		//was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {
@@ -109,7 +109,7 @@ class ArtifactMessage extends Error {
 			}
 		}
 
-		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) 
+		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body)
 			VALUES ($1,$2,$3,$4,$5)',
 					array ($this->Artifact->getID(),
 					       $user_id,
@@ -158,7 +158,7 @@ class ArtifactMessage extends Error {
 	function &getArtifact() {
 		return $this->Artifact;
 	}
-	
+
 	/**
 	 *	getID - get this ArtifactMessage's ID.
 	 *

@@ -13,19 +13,19 @@ require_once 'PHPUnit/Framework/TestCase.php';
 class Packages_Tests extends PHPUnit_Framework_TestCase
 {
     /**
-     * Build tarballs 
+     * Build tarballs
      */
     public function testBuildTarball()
     {
-	    $tests = dirname( dirname( dirname( dirname (__FILE__)))); 
+	    $tests = dirname( dirname( dirname( dirname (__FILE__))));
 	    $base = dirname( $tests );
 	    system("cd ..; make BUILDRESULT=$base/build/packages buildtar", $retval);
 	    $this->assertEquals(0, $retval);
     }
-    
+
     public function testBuildDeb()
     {
-	    $tests = dirname( dirname( dirname( dirname (__FILE__)))); 
+	    $tests = dirname( dirname( dirname( dirname (__FILE__))));
 	    $base = dirname( $tests );
 	    system("cd ..; make -f Makefile.debian BUILDRESULT=$base/build/packages clean all", $retval);
 	    $this->assertEquals(0, $retval);
@@ -33,7 +33,7 @@ class Packages_Tests extends PHPUnit_Framework_TestCase
 
     public function testBuildRPM()
     {
-	    $tests = dirname( dirname( dirname( dirname (__FILE__)))); 
+	    $tests = dirname( dirname( dirname( dirname (__FILE__))));
 	    $base = dirname( $tests );
 	    system("cd ..; make -f Makefile.rh BUILDRESULT=$base/build/packages all", $retval);
 	    $this->assertEquals(0, $retval);

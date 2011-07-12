@@ -52,7 +52,7 @@ class InlineParserTest extends phpwiki_TestCase {
 	    call_user_func(array(&$this, $this->_name));
 	}
     }
-  
+
     function testNoWikiWords() {
         $str1 = 'This has no wiki words, and is all text.';
         $xmlc1 = TransformInline($str1);
@@ -75,12 +75,12 @@ class InlineParserTest extends phpwiki_TestCase {
         $this->assertEquals($ww, $c1[1]->asString());
         $this->assertEquals('.', $c1[2]);
     }
-  
+
     function _testLink($wiki, $expected = null) {
         if (is_null($expected)) {
             $ta = $this->_tests();
             $expected = $ta[$wiki];
-        }   
+        }
         $xml = TransformInline($wiki);
         $this->assertTrue(isa($xml, 'XmlContent'));
         $expectobj = unserialize($expected);
@@ -101,5 +101,5 @@ foreach (InlineParserTest::_tests() as $wiki => $expected) {
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

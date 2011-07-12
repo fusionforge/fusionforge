@@ -3,7 +3,7 @@
 require_once 'common/include/HTTPRequest.class.php';
 //Codendi class for hmlPurifier
 require_once 'common/include/Codendi_HTMLPurifier.class.php';
-//Codendi class for Validator 
+//Codendi class for Validator
 require_once 'common/valid/ValidFactory.class.php';
 
 //Manager from Codendi

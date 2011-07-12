@@ -5,16 +5,16 @@
  * Version : 1.3.2 Base Edition ( Decembre 2003 ) build 1
  *
  * Address : http://vtemplate.sourceforge.net
- * 
- * Authors: 
+ *
+ * Authors:
  *   + THIEBAUT Jean-Baptiste(J.Baptiste@leweby.com)  -  http://www.leweby.com .
  *   + CAMPANA François (fc@netouaibe.com).
  * Licence: GPL.
- * 
- * 
  *
- *			  
- *****************************************************************/ 
+ *
+ *
+ *
+ *****************************************************************/
 
 if ( !isset($DEFINE_VTEMPLATE) ){
 define("ALL",1);
@@ -145,19 +145,19 @@ function Session($name,$source,$stored){
 
 function parseVar_orig(){
  // Récupération des noms des variables
- $regle = "|".VARTAG."(.*)}|sU"; 
+ $regle = "|".VARTAG."(.*)}|sU";
  preg_match_all ($regle,$this->source,$var1);
  // Création du tableau de variable  à partir de la liste parsée.
  $this->varlist=@array_merge($var[1],$var1[1]);
 return 1;
-} 
+}
 
 // la fonction parseVar a été reécrire ( voir l'origin parseVar_orig )
 // car des prblèmes se présentaient avec array_merge quand la classe
 // était utilisée avec php5 ( bogue dans php5beta4 ? )
 function parseVar(){
  // Récupération des noms des variables
- $regle = "|".VARTAG."(.*)}|sU"; 
+ $regle = "|".VARTAG."(.*)}|sU";
  $var1 = array(); $var1[1] = array();
  preg_match_all ($regle,$this->source,$var1);
  /* Création du tableau de variable  à partir de la liste parsée. */
@@ -166,7 +166,7 @@ function parseVar(){
  	$this->varlist[] = $v;
  }
 return 1;
-} 
+}
 
 function init(){
 if($this->used) return $this->error(1,array($this->stored,$this->name),"SESSION1",1,"init",__LINE__);
@@ -175,7 +175,7 @@ $this->temp = $this->source;
 $this->used = 1;
 }
 function closeSession(){
-// Check if the zone has been used.    
+// Check if the zone has been used.
 if(!$this->used) return $this->error(2,array($this->stored,$this->name),"SESSION2",1,"closeSession",__LINE__);
 // Set Globals vars.
 $this->generateCode();
@@ -230,8 +230,8 @@ function dispVar(){
 function setGlobalVar($varname,$value){
 $set = 0;
 if (in_array($varname,$this->varlist)){
-  // Replace the var into this session 
-  $this->globalvar[$varname]=$value;   
+  // Replace the var into this session
+  $this->globalvar[$varname]=$value;
   $set = 1;
 }
   // Replace the var into sub zones
@@ -261,7 +261,7 @@ function generateCode(){
 	if(count($this->subzone)){
 	  foreach(array_keys($this->subzone) as $subzone){
 		$text = ($this->subzone[$subzone]->used) ? $this->subzone[$subzone]->generateCode() : $this->subzone[$subzone]->generated;
-		$this->temp = preg_replace("(\|$subzone\|)",$text,$this->temp); 	
+		$this->temp = preg_replace("(\|$subzone\|)",$text,$this->temp);
 		$this->subzone[$subzone]->reset();
 	  }
     }
@@ -293,10 +293,10 @@ function getNom($code){
 // Retourne le premier nom de zone qu'il trouve dans le code
 
    preg_match("(<!--VTP_([^()]+)-->)sU",$code,$reg);
-   
+
    // Tester la présence des caratère invalides dans le nom ( | et {});
    if (@count(explode("|",$reg[1]))>1 || @count(explode("{",$reg[1]))>1 || @count(explode("}",$reg[1]))>1) exit($this->error(5,$reg[1],"PARSE1",1,"getNom",__LINE__));
-   
+
    return @$reg[1];
 }
 
@@ -359,12 +359,12 @@ $this->sessions[$handle][$zone] = new Session($zone,$this->sources[$zone]["sourc
 
 // Create sub-zone
 if (@count($this->sources[$zone]["fils"])){
-   foreach($this->sources[$zone]["fils"] as $subzone){	  
+   foreach($this->sources[$zone]["fils"] as $subzone){
     $this->createSession($handle,$subzone);
     $this->sessions[$handle][$zone]->addSubZone($this->sessions[$handle][$subzone]);
    }
 }
-				  
+
 //end createSession
 }
 
@@ -389,8 +389,8 @@ $this->v_global[$var]=$value;
 if (is_array($this->sessions)){
     foreach($this->sessions as $handle => $v){
 		$declare = $this->setGFile($handle,$var,$value) || $declare;
-		}	
-  } 
+		}
+  }
 return $declare;
 }
 
@@ -401,7 +401,7 @@ foreach($this->v_global as $name => $val){
 }
 return 1;
 }
- 
+
 // Fin VTemplate_Private
 }
 
@@ -413,7 +413,7 @@ class VTemplate extends VTemplate_Private{
 
 
 /****************************************************************
-	    Core Functions 
+	    Core Functions
 *****************************************************************/
 
 
@@ -463,19 +463,19 @@ function addSession($handle="{0}",$nom_zone = "|root|"){
    return 1;
 }
 
-function closeSession($handle="{0}",$nom_zone = "|root|"){ 
+function closeSession($handle="{0}",$nom_zone = "|root|"){
 // Close the current session and all his sub-session
 	  // Check if the zone exists.
 	if(!isset($this->sessions[$handle][$nom_zone])) return $this->error(11,array($nom_zone,$this->file_name[$handle]),"TTT5",1,"closeSession",__LINE__);
      // Closing sub-zone
-     $this->sessions[$handle][$nom_zone]->closeSession();	
+     $this->sessions[$handle][$nom_zone]->closeSession();
    return 1;
 }
 
 function setGlobalVar($arg1,$arg2,$arg3){
 if ($arg1 == 1){
   if (!$this->setGAll($arg2,$arg3)) return $this->error(12,$arg2,"TTT6",1,"setGlobalVar",__LINE__);
-  return 1; 
+  return 1;
 }
 if (!isset($this->sessions[$arg1])) return $this->error(13,$arg1,"TTT7",1,"setGlobalVar",__LINE__);
  $tab=explode(".",$arg2);
@@ -546,97 +546,97 @@ return $this->sessions[$handle][$zone]->setVar($var,$val);
 
 
 
-function isZone($handle, $zone="|root|") 
-{ 
-return isset($this->sessions[$handle][$zone]) ; 
-} 
+function isZone($handle, $zone="|root|")
+{
+return isset($this->sessions[$handle][$zone]) ;
+}
 
 function Display($handle="{0}",$display=1,$zone="|root|"){
 	$this->closeSession($handle,$zone);
-	$c_genere = $this->sessions[$handle][$zone]->generated; 
-	
+	$c_genere = $this->sessions[$handle][$zone]->generated;
+
 	if ($display) echo $c_genere; else return ($c_genere);
 }
 //fonction complementaire version BETA
 
 /*
-* 
-On peut l'utiliser : 
-- SetVarTab($array): tout les couples clef/valeur sont valorisées 
-- SetVarTab($array,$index) seuls les couples clef/valeur dont la clef est dans le tableau index ou dont la valeur == $index (si pas tableau) 
-Si $index contient ou est une clef de type zone.clef, la clef sera extraite du texte est servira d'index pour $array 
+*
+On peut l'utiliser :
+- SetVarTab($array): tout les couples clef/valeur sont valorisées
+- SetVarTab($array,$index) seuls les couples clef/valeur dont la clef est dans le tableau index ou dont la valeur == $index (si pas tableau)
+Si $index contient ou est une clef de type zone.clef, la clef sera extraite du texte est servira d'index pour $array
 
-Vincent 
+Vincent
 */
 
-function setVarTab($handle,$zones,$index = array()){ 
-	if (is_array($index)) 
-	{ 
-		if (count($index)>0) 
-		{ 
-			reset($index); 
-			while (list (, $key) = each ($index)) 
-			{ 
-				$tab=explode(".",$key); 
-				if(count($tab)==2){ 
-					$var=$tab[1]; 
-				} 
-				else 
-				{ 
-					$var=$tab[0]; 
-				} 
-				setVar($handle,$key,$zones[$var]); 
-			} 
-		} 
-		else 
-		{ 
-			reset($zones); 
-			while (list ($key, $val) = each ($zones)) 
-			{ 
-				setVar($handle,$key,$val); 
-			} 
-		} 
-	} 
-	else 
-	{ 
-		setVar($handle,$index,$zones[$index]); 
-	} 
-} 
-
-function setGlobalVarTab($handle,$zones,$index = array()){ 
-
-	if (is_array($index)) 
-	{ 
-		if (count($index)>0) 
-		{ 
-			reset($index); 
-			while (list (, $key) = each ($index)) 
-			{ 
-				$tab=explode(".",$key); 
-				if(count($tab)==2){ 
-					$var=$tab[1]; 
-				} 
-				else 
-				{ 
-					$var=$tab[0]; 
-				} 
-				setGlobalVar($handle,$key,$zones[$var]); 
-			} 
-		} 
-		else 
-		{ 
-			reset($zones); 
-			while (list ($key, $val) = each ($zones)) 
+function setVarTab($handle,$zones,$index = array()){
+	if (is_array($index))
+	{
+		if (count($index)>0)
+		{
+			reset($index);
+			while (list (, $key) = each ($index))
 			{
-				GlobalVar($handle,$key,$val); 
-			} 
-		} 
-	} 
-	else 
-	{ 
-		setBlobalVar($handle,$index,$zones[$index]); 
-	} 
-} 
+				$tab=explode(".",$key);
+				if(count($tab)==2){
+					$var=$tab[1];
+				}
+				else
+				{
+					$var=$tab[0];
+				}
+				setVar($handle,$key,$zones[$var]);
+			}
+		}
+		else
+		{
+			reset($zones);
+			while (list ($key, $val) = each ($zones))
+			{
+				setVar($handle,$key,$val);
+			}
+		}
+	}
+	else
+	{
+		setVar($handle,$index,$zones[$index]);
+	}
+}
+
+function setGlobalVarTab($handle,$zones,$index = array()){
+
+	if (is_array($index))
+	{
+		if (count($index)>0)
+		{
+			reset($index);
+			while (list (, $key) = each ($index))
+			{
+				$tab=explode(".",$key);
+				if(count($tab)==2){
+					$var=$tab[1];
+				}
+				else
+				{
+					$var=$tab[0];
+				}
+				setGlobalVar($handle,$key,$zones[$var]);
+			}
+		}
+		else
+		{
+			reset($zones);
+			while (list ($key, $val) = each ($zones))
+			{
+				GlobalVar($handle,$key,$val);
+			}
+		}
+	}
+	else
+	{
+		setBlobalVar($handle,$index,$zones[$index]);
+	}
+}
 
 
 

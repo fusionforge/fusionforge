@@ -54,9 +54,9 @@ function createTables() {
 		time_code int not null CONSTRAINT reptimetrk_timecode REFERENCES rep_time_category(time_code),
                 hours float not null);";
 	$sql[]=$sql1;
-//	$sql[]="CREATE UNIQUE INDEX reptimetrk_weekusrtskcde ON 
+//	$sql[]="CREATE UNIQUE INDEX reptimetrk_weekusrtskcde ON
 //		rep_time_tracking (week,user_id,project_task_id,time_code);";
-	$sql[]="CREATE INDEX reptimetracking_userdate ON 
+	$sql[]="CREATE INDEX reptimetracking_userdate ON
 		rep_time_tracking (user_id,week);";
 
 	$sql[]="INSERT INTO rep_time_category VALUES ('1','Coding');";
@@ -173,11 +173,11 @@ function createTables() {
 	SELECT user_id,
 	sum(tracker_opened) AS tracker_opened,
 	sum(tracker_closed) AS tracker_closed,
-	sum(forum) AS forum, 
-	sum(docs) AS docs, 
+	sum(forum) AS forum,
+	sum(docs) AS docs,
 	sum(cvs_commits) AS cvs_commits,
 	sum(tasks_opened) AS tasks_opened,
-	sum(tasks_closed) AS tasks_closed 
+	sum(tasks_closed) AS tasks_closed
 	FROM rep_user_act_monthly
 	GROUP BY user_id;";
 
@@ -249,7 +249,7 @@ function createTables() {
 
 //overall activity
 	$sql[]="DROP VIEW rep_site_act_daily_vw";
-	$sql[]="CREATE VIEW rep_site_act_daily_vw AS 
+	$sql[]="CREATE VIEW rep_site_act_daily_vw AS
 	SELECT day,
 	sum(tracker_opened) AS tracker_opened,
 	sum(tracker_closed) AS tracker_closed,
@@ -263,7 +263,7 @@ function createTables() {
 	GROUP BY day;";
 
 	$sql[]="DROP VIEW rep_site_act_weekly_vw";
-	$sql[]="CREATE VIEW rep_site_act_weekly_vw AS 
+	$sql[]="CREATE VIEW rep_site_act_weekly_vw AS
 	SELECT week,
 	sum(tracker_opened) AS tracker_opened,
 	sum(tracker_closed) AS tracker_closed,
@@ -419,8 +419,8 @@ function users_added_daily($day) {
 			array($day)) ;
 
 
-	return db_query_params ('INSERT INTO rep_users_added_daily (day,added) 
-		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date 
+	return db_query_params ('INSERT INTO rep_users_added_daily (day,added)
+		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
 		BETWEEN $3 AND $4 ))',
 			array($day,
 				'A',
@@ -468,8 +468,8 @@ function groups_added_daily($day) {
 			array($day)) ;
 
 
-	return db_query_params ('INSERT INTO rep_groups_added_daily (day,added) 
-		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time 
+	return db_query_params ('INSERT INTO rep_groups_added_daily (day,added)
+		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
 		BETWEEN $3 AND $4 ))',
 			array($day,
 				'A',
@@ -689,8 +689,8 @@ function users_cum_daily($day) {
 			array($day)) ;
 
 
-	return db_query_params ('INSERT INTO rep_users_cum_daily (day,total) 
-		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date 
+	return db_query_params ('INSERT INTO rep_users_cum_daily (day,total)
+		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
 		BETWEEN 0 AND $3))',
 				array($day,
 				      'A',
@@ -737,8 +737,8 @@ function groups_cum_daily($day) {
 			array($day)) ;
 
 
-	return db_query_params ('INSERT INTO rep_groups_cum_daily (day,total) 
-		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time 
+	return db_query_params ('INSERT INTO rep_groups_cum_daily (day,total)
+		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
 		BETWEEN 0 AND $3))',
 				array($day,
 				      'A',
