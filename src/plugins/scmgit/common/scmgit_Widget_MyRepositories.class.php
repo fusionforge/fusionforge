@@ -28,7 +28,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 	}
 
 	function getTitle() {
-		return _("SCMGit Repository List");
+		return _("My Git personal Repositories List");
 	}
 
 	function getCategory() {
