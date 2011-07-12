@@ -61,7 +61,7 @@ class TroveCategory extends Error {
 			if (!$dataArray || !is_array($dataArray)) {
 				if (!$this->fetchData($categoryId)) {
 					$this->setError(_('Invalid Trove Category'),
-							_('That Trove category does not exist.').' '.db_error('DB_TROVE')
+							_('That Trove category does not exist.').' '.db_error('SYS_DB_TROVE')
 					);
 				}
 			} else {
@@ -180,7 +180,7 @@ class TroveCategory extends Error {
 				)
 				AND trove_cat.parent=$1
 				ORDER BY fullname",
-				array($this->categoryId), -1, 0, 'DB_TROVE');
+				array($this->categoryId), -1, 0, 'SYS_DB_TROVE');
 
 			if(!$result) {
 				$this->setError();

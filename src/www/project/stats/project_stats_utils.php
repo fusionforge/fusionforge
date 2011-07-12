@@ -57,12 +57,12 @@ function stats_project_daily( $group_id, $span = 7 ) {
 		WHERE group_id=$1 ORDER BY month DESC, day DESC";
 
 	if ($span == 30) {
-		$res = db_query_params($sql, array($group_id), 30, 0, 'DB_STATS');
+		$res = db_query_params($sql, array($group_id), 30, 0, 'SYS_DB_STATS');
 	} else {
-		$res = db_query_params($sql, array($group_id),  7, 0, 'DB_STATS');
+		$res = db_query_params($sql, array($group_id),  7, 0, 'SYS_DB_STATS');
 	}
 
-	echo db_error('DB_STATS');
+	echo db_error('SYS_DB_STATS');
 
    // if there are any days, we have valid data.
 	if ( ($valid_days = db_numrows( $res )) > 0 ) {
@@ -108,7 +108,7 @@ function stats_project_daily( $group_id, $span = 7 ) {
 
 	} else {
 		echo _('Project did not exist on this date.');
-		echo db_error('DB_STATS') .'</p>';
+		echo db_error('SYS_DB_STATS') .'</p>';
 	}
 
 }
@@ -120,7 +120,7 @@ function stats_project_monthly( $group_id ) {
 		SELECT * FROM stats_project_months
 		WHERE group_id=$1
 		ORDER BY group_id DESC, month DESC
-	",array($group_id), -1, 0, 'DB_STATS');
+	",array($group_id), -1, 0, 'SYS_DB_STATS');
 
 	   // if there are any weeks, we have valid data.
 	if ( ($valid_months = db_numrows( $res )) > 1 ) {
@@ -167,7 +167,7 @@ function stats_project_monthly( $group_id ) {
 
 	} else {
 		echo _('Project did not exist on this date.')."<p>";
-		echo db_error('DB_STATS');
+		echo db_error('SYS_DB_STATS');
 	}
 }
 
@@ -177,7 +177,7 @@ function stats_project_all( $group_id ) {
 		SELECT *
 		FROM stats_project_all_vw
 		WHERE group_id=$1
-	", array($group_id), -1, 0, 'DB_STATS');
+	", array($group_id), -1, 0, 'SYS_DB_STATS');
 	$row = db_fetch_array($res);
 
 	?>
