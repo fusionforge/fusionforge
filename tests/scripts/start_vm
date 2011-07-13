@@ -1,0 +1,113 @@
+#! /bin/sh 
+
+usage()
+{
+    cat <<EOF
+$1 -h|--host=<hostname> -e|--engine=<vmengine> -c|--config=<config>
+config use the syntax used in test/config/default file
+hostname=vmengine:template:address/mask:gateway
+EOF
+    return 0
+}
+
+scriptdir=`dirname $0`/../scripts
+configdir=`dirname $0`/../config
+
+# Loading default config
+if [ -f $configdir/default ]
+then 
+	. $configdir/default
+else
+	echo "Something went wrong, could not find default config: $configdir/default"
+	exit 1
+fi
+
+options=`getopt -o h:e:c: -l host:,engine:,config: -- "$@"`
+if [ $? -ne 0 ]; then
+        usage `basename $0`
+        exit 1
+fi
+eval set -- "$options"
+
+while true
+do
+    case "$1" in
+        -e|--engine)    VMENGINE=$2; shift 2;;
+        -h|--host)      HOST=$2; shift 2;;
+        -c|--config)    CONFIG=$2; shift 2;;
+        --)             shift 1; break ;;
+        *)              break ;;
+    esac
+done
+
+# Loading specific config
+if [ -f $configdir/`hostname` ]
+then
+	echo "Using specific config: $configdir/`hostname`"
+	. $configdir/`hostname`
+else
+	echo "Using default config"
+fi
+
+# Host can be defined by env var
+if [ -z "$HOST" ]
+then
+	echo "host not defined"
+	usage
+	exit 2	
+fi
+
+BASEHOST=`echo $HOST|cut -d. -f1`
+# Config as a param
+if [ ! -z "$CONFIG" ]
+then
+	eval "$BASEHOST=$CONFIG"
+fi	
+
+# Now let's look if host/engine is defined in config
+IFS=: ; VARS=`eval echo \\\$$BASEHOST` ; unset IFS ;
+if [ ! -z "$VARS" ]
+then 
+	set $VARS
+	VMENGINE=$1
+	echo "$BASEHOST=`eval echo \\\$$BASEHOST`"
+	export HOST BASEHOST $BASEHOST
+fi
+export SSHPUBKEY
+
+# Here VM engine must be defined by env var
+if [ -z "$VMENGINE" ]
+then
+	if [ -z "$2" ]
+	then
+		echo "VM engine not defined"
+		usage
+		exit 3
+	fi
+fi
+
+# Start script for this engine must exist
+if [ ! -x $scriptdir/../${VMENGINE}/start ]
+then 
+	echo "Don't know how to run ${VMENGINE} engine"
+	echo "$scriptdir/../${VMENGINE}/start not found"
+	exit 4
+else
+	$scriptdir/../${VMENGINE}/start
+fi
+
+# Loop until engine is up and ssh is running
+ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a
+ret=$?
+for loop in 1 2 3 4 5 6 7 8 9
+do
+
+	if [ $ret -ne 0 ];then
+		echo -n $loop
+		sleep 20;
+		ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a
+		ret=$?
+	fi
+done
+sleep 1
+exit $ret
