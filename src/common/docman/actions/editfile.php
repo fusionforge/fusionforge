@@ -76,9 +76,9 @@ if (($editor) && ($d->getFileData()!=$data) && (!$uploaded_data['name'])) {
 	$filename = $uploaded_data['name'];
 	if (function_exists('finfo_open')) {
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
-		$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
+		$filetype = finfo_file($finfo, $uploaded_data['tmp_name']);
 	} else {
-		$uploaded_data_type = $uploaded_data['type'];
+		$filetype = $uploaded_data['type'];
 	}
 } elseif ($file_url) {
 	$data = '';
