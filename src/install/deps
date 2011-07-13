@@ -1,0 +1,180 @@
+#! /bin/sh
+# FusionForge Installation Dependency Setup
+#
+# Copyright 2006 GForge, LLC
+# Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+# Copyright (C) 2011 Christian Bayle
+# http://fusionforge.org/
+#
+# @version
+#
+# highly inspired from GInstaller
+#
+# FusionForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# FusionForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+msg(){
+	GREEN="[01;32m"
+	NORMAL="[00m"
+	RED="[01;31m"
+	case $1 in
+		red)
+			echo "$RED $2 $NORMAL"
+			;;
+		green)
+			echo "$GREEN $2 $NORMAL"
+			;;
+	esac
+}
+
+
+deps_redhat() {
+	type=redhat
+	if [ ! -f /tmp/done_yum ]
+	then
+		set -e
+		addFusionForgeYumRepo
+		addDagRPMForgeYumRepo
+		msg green "Installing packages: Executing YUM. Please wait..."
+		yum --enablerepo=fusionforge --enablerepo=dag-rpmforge  -y --skip-broken install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring php-jpgraph-1.5.2 poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync
+		touch /tmp/done_yum
+		set +e
+	fi
+}
+
+deps_debian() {
+	type=debian
+	msg green "Installing packages: Executing apt-get. Please wait..."
+	apt-get -y install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release php-htmlpurifier
+	a2enmod headers
+	a2enmod proxy
+	a2enmod ssl
+	a2enmod rewrite
+	a2enmod vhost_alias
+	# TODO: automate next
+	msg red "You Must Install Mailman Manually: apt-get install mailman postfix"
+}
+
+# http://www.arklinux.org/
+deps_ark() {
+	type=debian
+	msg green "Installing packages: Executing apt-get. Please wait..."
+	apt-get update
+	apt-get -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion subversion-server-httpd postfix rcs mod_ssl wget ssh
+
+	msg green "Restarting PostgreSQL"
+	/sbin/service postgresql restart
+
+	# TODO: automate next
+	msg red "You Must Install htmlpurifier manually."
+}
+
+deps_suse() {
+	type=suse
+	msg green "Installing Packages with yast"
+	yast -i php5 apache2-prefork php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php4-pgsql subversion apache-mod_dav_svn ssh postfix rcs php4-gd mod_ssl perl-IPC-Run php4-curl wget subversion-server apache2-mod_php4
+
+	msg green "Fixing php4 installation"
+	cp /usr/lib/apache2-prefork/libphp4.so /usr/lib/apache2/mod_php.so
+
+	msg green "Stopping Apache"
+	/etc/init.d/apache2 stop
+
+	msg green "Restarting PostgreSQL"
+	/etc/init.d/postgresql stop
+	/etc/init.d/postgresql start
+
+	msg green "Starting Apache"
+	/etc/init.d/apache2 start
+
+	# TODO: automate next
+	msg red "You Must Install htmlpurifier manually."
+}
+
+deps_opensuse() {
+	type=suse
+	msg green "Installing Packages with yast"
+	yast -i php5 apache2-prefork apache2-mod_php5 cvs mailman perl-IPC-Run perl-URI php5 php5-curl php5-gd php5-gettext php5-pgsql postfix postgresql postgresql-contrib postgresql-libs postgresql-server rcs openssh subversion subversion-server wget viewvc
+
+	msg green "Restarting PostgreSQL..."
+	rcpostgresql restart
+	msg green "Restarting Apache..."
+	rcapache2 restart
+
+	# TODO: automate next
+	msg red "You Must Install htmlpurifier manually."
+}
+
+addFusionForgeYumRepo() {
+	if [ ! -f "/etc/yum.repos.d/fusionforge.repo" ]
+	then 
+		msg green "Adding Fusionforge YUM repository"
+		if [ -z "$FFORGE_RPM_REPO" ]
+		then 
+			rpm_repo="http://fusionforge.fusionforge.org/rpm/5.1"
+		else
+			rpm_repo="$FFORGE_RPM_REPO"
+		fi
+		cat > /etc/yum.repos.d/fusionforge.repo <<-END
+# Name: FusionForge RPM Repository
+# URL: http://fusionforge.org/
+[fusionforge]
+name = Red Hat Enterprise \$releasever - fusionforge.org
+baseurl = $rpm_repo
+enabled = 0
+protect = 0
+gpgcheck = 0
+END
+	fi
+}
+
+addDagRPMForgeYumRepo() {
+	if [ ! -f "/etc/yum.repos.d/dag-rpmforge.repo" ]
+	then
+		msg green "Adding Dag RPMForge YUM repository" ]
+		if [ -z "$DAG_RPMFORGE_REPO" ]
+		then
+			rpm_repo="http://apt.sw.be/redhat"
+		else
+			rpm_repo="$DAG_RPMFORGE_REPO"
+		fi
+		cat > /etc/yum.repos.d/dag-rpmforge.repo <<-END
+# Name: RPMforge RPM Repository for Red Hat Enterprise 5 - dag
+# URL: http://rpmforge.net/
+[dag-rpmforge]
+name = Red Hat Enterprise \$releasever - RPMforge.net - dag
+baseurl = $rpm_repo/el5/en/\$basearch/dag
+#mirrorlist = http://apt.sw.be/redhat/el5/en/mirrors-rpmforge
+enabled = 0
+protect = 0
+gpgcheck = 0
+END
+	fi
+}
+
+deps_centos(){
+	deps_redhat
+}
+
+deps_rhel(){
+	deps_redhat
+}
+
+deps_fedora(){
+	deps_redhat
+}
+
+deps_ubuntu(){
+	deps_debian
+}

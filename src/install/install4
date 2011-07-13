@@ -1,0 +1,37 @@
+#! /bin/sh
+# FusionForge Installation Dependency Setup
+#
+# Copyright 2011 Christian Bayle <bayle@debian.org>
+# http://fusionforge.org/
+#
+# @version
+#
+# This file is part of GInstaller, it is called by install.sh.
+#
+# FusionForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# FusionForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+install4_config(){
+	if [ -f "/etc/gforge/local.inc" ]
+	then
+		PATH=/opt/gforge/utils/:$PATH migrate-to-ini-files.sh
+	fi
+	
+	PATH=/opt/gforge/utils/:$PATH manage-apache-config.sh install
+	
+	ls /etc/gforge/httpd.conf.d/*.generated | while read i
+	do
+		mv $i ${i%%.generated}
+	done
+}

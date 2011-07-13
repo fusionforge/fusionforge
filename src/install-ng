@@ -1,0 +1,196 @@
+#!/bin/sh
+#
+# Simple wrapper for FusionForge installation
+#
+# Usage: ./install-ng <hostname>
+#
+# This will install all the fusionforge code in /opt/gforge
+# Configuration is stored in /etc/gforge
+#
+# Currently supported:
+# * Red Hat 5 / CentOS 5
+# * OpenSuSE 11 (contributed by Martin Bernreuther)
+#
+# Author: Alain Peyrat <aljeux@free.fr>
+#         Christian Bayle <bayle@debian.org>
+#
+usage(){
+	echo "Usage: $1 [-r|-h|-a|--reinit|--help|--auto] [<hostname>]"
+}
+
+options=`getopt -o rha -l reinit,help,auto -- "$@"`
+
+if [ $? != 0 ] ; then echo "Terminating..." >&2 ; usage $0 ;exit 1 ; fi
+
+eval set -- "$options"
+
+REINIT=false
+AUTO=false
+while true
+do
+    case "$1" in
+        -r|--reinit)    REINIT=true; shift 1;;
+        -h|--help)      usage $0 ; exit 0; shift 1;;
+        -a|--auto)      AUTO=true ; shift 1;;
+	--)		shift 1; break;;
+        *)              break ;;
+    esac
+done
+
+hostname=$1
+
+if [ -z "$hostname" ]
+then
+	hostname=`hostname -f`
+fi
+echo "Using hostname=$hostname"
+
+# Load some script
+scriptdir=`cd \`dirname $0\`; pwd`
+. $scriptdir/install/detect_os
+. $scriptdir/install/config
+
+# Call to detect_os, this will set $type and $distrib
+os=$(detect_os)
+
+# Load deps script and run the appropriate one
+. $scriptdir/install/deps
+deps_$os
+
+# Load install scripts
+. $scriptdir/install/install2
+. $scriptdir/install/install3
+. $scriptdir/install/install4
+
+if $AUTO
+then
+	echo "Using automatic configuration"
+	FFORGE_DB=fforge
+	FFORGE_USER=gforge
+	FFORGE_ADMIN_USER=admin
+	FFORGE_ADMIN_PASSWORD=myadmin
+fi
+
+if $REINIT
+then
+	echo "Reinit the database"
+	rm -f /etc/gforge/install_completed
+	dropdbifexists
+fi
+
+if [ -d "/opt/gforge" ]
+then
+	if [ -f "/etc/gforge/install_completed" ]
+	then
+		mode="update"
+		echo "Upgrading previous installation ...";
+	else
+		mode="install"
+		echo "Installing FusionForge ...";
+	fi
+else
+	mode="install"
+	echo "Installing FusionForge ...";
+fi
+
+echo "Install type = $type"
+case $type in 
+	redhat)
+	echo "Running install2_files "$hostname" apache apache"
+	install2_files "$hostname" apache apache
+	if [ "$mode" = "install" ]
+	then
+		echo "Running install3_db"
+		install3_db
+		echo "Running install4_config"
+		install4_config
+
+		# Post installation fixes.
+		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
+		# Disable ssl
+		perl -spi -e "s/^Include/#Include/" /etc/gforge/httpd.conf.d/ssl-on.inc
+
+		chkconfig httpd on
+		chkconfig postgresql on
+		chkconfig iptables off
+
+		service httpd restart
+		service iptables stop
+		msg="IMPORTANT: Service iptables (firewall) disabled, please reconfigure after"
+
+		cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
+		cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
+		service crond reload
+	else
+		echo "Running php db/upgrade-db.php"
+		cd $scriptdir; php db/upgrade-db.php
+		echo "Running php utils/normalize_roles.php"
+		cd $scriptdir; php utils/normalize_roles.php
+	fi
+	;;
+
+	suse)
+	install2_files "$hostname" wwwrun www
+	if [ $mode = "install" ]
+	then
+		echo "Running install3_db"
+		install3_db
+		echo "Running install4_config"
+		install4_config
+
+		# Post installation fixes.
+		#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
+
+		chkconfig -s apache2 on
+		chkconfig -s postgresql on
+
+		# Apache settings: modules
+		for m in dav dav_svn authz_svn ssl; do
+			a2enmod $m
+			a2enflag $m
+		done
+		echo "Virtual hosts for ${hostname}:"
+		httpd2 -S -DSSL 2>&1 | grep ${hostname}
+
+		rcapache2 restart
+
+		rcSuSEfirewall2 stop
+		msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
+
+		cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
+		cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
+		rccron reload
+	else
+		echo "Running php db/upgrade-db.php"
+		cd $scriptdir; php db/upgrade-db.php
+		echo "Running php utils/normalize_roles.php"
+		cd $scriptdir; php utils/normalize_roles.php
+	fi
+	;;
+
+	ubuntu)
+	echo "--"
+	echo "For ubuntu, rather use ubuntu $distrib package"
+	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/UbuntuRepositories"
+	echo "--"
+	;;
+
+	debian)
+	echo "--"
+	echo "For debian, rather use debian $distrib package"
+	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/DebianRepositories"
+	echo "--"
+	;;
+	
+	*)
+	echo "Only Red Hat, Fedora or CentOS and OpenSUSE are supported by this script.";
+	echo "See INSTALL for normal installation";
+	exit 1
+	;;
+esac
+
+echo "check /etc/gforge/local.inc for $hostname specific FusionForge settings"
+echo "Write INSTALL COMPLETED"
+date >> /etc/gforge/install_completed
+ls -al /etc/gforge/install_completed
+

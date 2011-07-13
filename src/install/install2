@@ -1,0 +1,248 @@
+#! /bin/sh
+# FusionForge Installation Dependency Setup
+#
+# Copyright 2006 GForge, LLC
+# Copyright 2011 Christian Bayle <bayle@debian.org>
+# http://fusionforge.org/
+#
+# @version
+#
+# This file is part of GInstaller, it is called by install.sh.
+#
+# FusionForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# FusionForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+msg(){
+	GREEN="[01;32m"
+	NORMAL="[00m"
+	RED="[01;31m"
+	case $1 in
+		red)
+			echo "$RED $2 $NORMAL"
+			;;
+		green)
+			echo "$GREEN $2 $NORMAL"
+			;;
+	esac
+}
+
+install2_files(){
+	hostname=$1
+	apacheuser=$2
+	apachegroup=$3
+	
+	if [ $# -ne 3 ]
+	then
+		msg red "Validating arguments: FAIL"
+		msg red "Usage: $0 fusionforge.org apacheuser apachegroup"
+		exit 127
+	else
+		msg green "Validating arguments: OK"
+	fi
+
+	CHECK=`echo $hostname | grep -E "[^[:alnum:]\-]"`
+	if [ "$CHECK" != "" ]
+	then
+		msg green "Validating hostname: OK";
+	else
+		msg red "Validating hostname: FAIL invalid hostname"
+	fi
+
+	if ! getent passwd $apacheuser > /dev/null
+	then
+		msg red "Invalid apache user"
+	 	exit 2
+	else
+		msg green "Apache user $apacheuser exists"
+	fi
+
+	if ! getent group $apachegroup > /dev/null
+	then
+		msg red "Invalid apache group"
+	 	exit 3
+	else
+		msg green "Apache group $apachegroup exists"
+	fi
+ 
+	if [ -z "$fusionforge_dir" ] ; then msg red "fusionforge_dir not set" ; exit 4 ; fi
+	if [ -z "$fusionforge_data_dir" ] ; then msg red "fusionforge_data_dir not set" ; exit 4 ; fi
+	if [ -z "$fusionforge_log_dir" ] ; then msg red "fusionforge_log_dir not set" ; exit 4 ; fi
+
+	for dir in $fusionforge_dir $fusionforge_data_dir $fusionforge_log_dir
+	do
+		if [ ! -d "$dir" ]
+		then
+			if mkdir -p $dir > /dev/null
+			then
+				msg green "Creating $dir : OK"
+			else
+				msg red "Creating $dir : FAILED"
+				msg red "$dir didn't exist - error - make sure you've got permission"
+				exit 4
+			fi
+		fi
+	done
+				
+	if [ "$fusionforge_dir" != "$fusionforge_src_dir" ]
+	then
+		cp -r * $fusionforge_dir
+	fi
+
+	mkdir -p $fusionforge_data_dir/uploads
+	mkdir -p $fusionforge_data_dir/scmtarballs
+	mkdir -p $fusionforge_data_dir/scmsnapshots
+	mkdir -p $fusionforge_data_dir/scmrepos/svn
+	mkdir -p $fusionforge_data_dir/scmrepos/cvs
+
+	mkdir -p $fusionforge_data_dir/etc
+	touch $fusionforge_data_dir/etc/httpd.vhosts
+
+	mkdir -p $fusionforge_data_dir/homedirs
+	mkdir -p /home/groups
+	if [ ! -L  $fusionforge_data_dir/homedirs/groups ]
+	then
+		ln -s /home/groups $fusionforge_data_dir/homedirs/groups
+	fi
+
+	if [ ! -L  /scmrepos ]
+	then 
+		ln -s $fusionforge_data_dir/scmrepos /scmrepos
+	fi
+
+	# Create the old symlink /svnroot for compatibility.
+	if [ ! -L /svnroot ]
+	then 
+		ln -s $fusionforge_data_dir/scmrepos/svn /svnroot
+	fi
+		
+	# Create the old symlink /cvsroot for compatibility.
+	if [ ! -L /cvsroot ]
+	then 
+		ln -s $fusionforge_data_dir/scmrepos/cvs /cvsroot
+	fi
+	
+	# Create default dumps dir
+	mkdir -p $fusionforge_data_dir/dumps
+
+	cd $fusionforge_dir
+	chown -R root:$apachegroup $fusionforge_dir
+	chmod -R 644 $fusionforge_dir
+	chmod 755 $fusionforge_dir/install*
+	cd $fusionforge_dir && find -type d | xargs chmod 755
+	chown -R $apacheuser:$apachegroup $fusionforge_data_dir/uploads
+	chmod -R 755 $fusionforge_dir/cronjobs/
+	chmod 755 $fusionforge_dir/www/scm/viewvc/bin/cgi/viewvc.cgi
+	chmod 755 $fusionforge_dir/utils/forge_get_config
+	chmod 755 $fusionforge_dir/utils/forge_set_password
+	find $fusionforge_dir -type f -name "*.sh" -exec chmod 755 {} \;
+	$fusionforge_dir/utils/manage-apache-config.sh build
+
+	#restricted shell for cvs accounts
+	cp $fusionforge_dir/plugins/scmcvs/bin/cvssh.pl /bin/
+	chmod 755 /bin/cvssh.pl
+
+	# Create default location for gforge config files
+	mkdir -p $fusionforge_etc_dir
+	if [ ! -f $fusionforge_etc_dir/httpd.conf ]
+	then
+		cp $fusionforge_dir/etc/httpd.conf-opt $fusionforge_etc_dir/httpd.conf
+	fi
+	mkdir -p $fusionforge_etc_dir/httpd.conf.d
+
+	ls $fusionforge_dir/etc/httpd.conf.d-opt/[0-9a-zA-Z_-]*.conf $fusionforge_dir/etc/httpd.conf.d-opt/[0-9a-zA-Z_-]*.inc | while read file
+	do
+		cp $file $fusionforge_etc_dir/httpd.conf.d/
+	done
+
+	cp $fusionforge_dir/etc/config.ini-opt $fusionforge_etc_dir/config.ini
+	cp -rL $fusionforge_dir/etc/config.ini.d $fusionforge_etc_dir/
+
+	# Install default configuration files for all plugins.
+	mkdir -p $fusionforge_etc_dir/plugins/
+
+	cd $fusionforge_dir/plugins
+	find $fusionforge_dir/plugins -maxdepth 1 -type d| while read plugdir
+	do
+		plugin=`basename $plugdir`
+		if [ -d $fusionforge_dir/plugins/$plugin/etc/plugins/$plugin ]
+		then 
+			cp -r $fusionforge_dir/plugins/$plugin/etc/plugins/$plugin $fusionforge_etc_dir/plugins/
+		fi
+	done
+		
+	for file in /opt/csw/apache2/etc/httpd.conf /etc/apache2/httpd.conf
+	do
+		if [ -f $file ]
+		then 
+			msg green 'Setting FusionForge Include For Apache...'
+			if ! grep -q "^Include $fusionforge_etc_dir/httpd.conf" $file > /dev/null 2>&1
+			then
+				echo "Include $fusionforge_etc_dir/httpd.conf" >> $file
+			fi
+		fi
+	done
+	if [ -f /etc/httpd/conf/httpd.conf ]
+	then
+		if [ ! -f /etc/httpd/conf.d/gforge.conf ]
+		then 
+			echo "Include $fusionforge_etc_dir/httpd.conf" > /etc/httpd/conf.d/gforge.conf
+		fi
+		if grep -q "^Include $fusionforge_etc_dir/httpd.conf" /etc/httpd/conf/httpd.conf > /dev/null 2>&1
+		then
+			echo "Remove include from /etc/httpd/conf/httpd.conf"
+			perl -pi -e "s!^Include $fusionforge_etc_dir/httpd.conf!!" /etc/httpd/conf/httpd.conf
+		fi
+	fi
+		
+	# Create symlink for the wiki plugin.
+	if [ ! -d $fusionforge_src_dir/www/wiki ]
+	then
+		ln -s ../plugins/wiki/www/ $fusionforge_src_dir/www/wiki
+	fi
+
+	# symlink plugin www's
+	cd $fusionforge_src_dir/www
+	if [ ! -d "plugins" ]
+	then
+		mkdir -p plugins
+	fi
+	cd $fusionforge_src_dir/www/plugins
+	for plugin in cvstracker svntracker message scmcvs fckeditor blocks authbuiltin
+	do
+		if [ ! -L "$plugin" ]
+		then
+			if [ -d ../../plugins/$plugin/www/ ]
+			then
+				ln -s ../../plugins/$plugin/www/ $plugin
+			else
+				msg red "TARGET DIR ../../plugins/$plugin/www/ doesn't exist for plugin $plugin"
+			fi
+		fi
+	done
+
+	cd $fusionforge_dir
+	if [ ! -d $fusionforge_etc_dir ]
+	then
+		msg red "/etc/gforge didn't exist - error - make sure you've got permission"
+		exit 2
+	fi
+	
+	chown -R root:$apachegroup $fusionforge_etc_dir
+	chmod -R 644 $fusionforge_etc_dir
+	cd $fusionforge_etc_dir && find -type d | xargs chmod 755
+	cd $fusionforge_etc_dir && find -type f -exec perl -pi -e "s/apacheuser/$apacheuser/" {} \;
+	cd $fusionforge_etc_dir && find -type f -exec perl -pi -e "s/apachegroup/$apachegroup/" {} \;
+	cd $fusionforge_etc_dir && find -type f -exec perl -pi -e "s/gforge.company.com/$hostname/" {} \;
+	echo "noreply:	/dev/null" >> /etc/aliases
+}

@@ -849,7 +849,14 @@ src/image-sources/fusionforge-logo.xcf -text
 src/image-sources/pow-fusionforge.xcf -text
 src/image-sources/top-logo.xcf -text
 src/install-common.inc -text
+src/install-ng -text
 src/install.sh -text svneol=unset#text/x-sh
+src/install/config -text
+src/install/deps -text
+src/install/detect_os -text
+src/install/install2 -text
+src/install/install3 -text
+src/install/install4 -text
 src/lib/vendor/jquery-tipsy/LICENSE -text
 src/lib/vendor/jquery-tipsy/README -text
 src/lib/vendor/jquery-tipsy/Rakefile -text
