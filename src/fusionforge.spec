@@ -677,6 +677,7 @@ fi
 %{FORGE_DIR}/gforge-restricted.sh
 %{FORGE_DIR}/install.sh
 %{FORGE_DIR}/install-common.inc
+%{FORGE_DIR}/install-ng
 # Directories under %{FORGE_DIR}
 %{FORGE_DIR}/backend
 %{FORGE_DIR}/common
@@ -686,6 +687,7 @@ fi
 %{FORGE_DIR}/docs
 %{FORGE_DIR}/etc
 %{FORGE_DIR}/image-sources
+%{FORGE_DIR}/install
 %{FORGE_DIR}/lib
 %{FORGE_DIR}/locales
 %{FORGE_DIR}/monitor
