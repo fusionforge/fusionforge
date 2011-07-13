@@ -27,3 +27,5 @@ VMENGINE=lxc
 REMOTESELENIUM=true
 KEEPVM=true
 DNSDOMAIN=rd.francetelecom.fr
+
+fgcos51src=lxc:centos5::
