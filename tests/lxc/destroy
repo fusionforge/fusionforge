@@ -1,0 +1,12 @@
+#! /bin/sh -x
+
+lxcdir=`dirname $0`
+
+IFS=: ; VARS=`eval echo \\\$$BASEHOST` ; unset IFS ; set $VARS
+VMENGINE=$1
+TEMPLATE=$2
+CIDR=$3
+IPGW=$4
+
+sudo /usr/bin/lxc-stop -n $HOST
+sudo /usr/bin/lxc-destroy -n $HOST

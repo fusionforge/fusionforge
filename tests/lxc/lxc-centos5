@@ -36,6 +36,23 @@ configure_centos()
     mkdir -p $rootfs/selinux
     echo 0 > $rootfs/selinux/enforce
 
+    # configure localhost
+    if ! grep -q "^127.0.0.1" $rootfs/etc/hosts
+    then
+	cat <<EOF >> $rootfs/etc/hosts
+# Do not remove the following line, or various programs
+# that require network functionality will fail.
+127.0.0.1       localhost.localdomain localhost
+::1             localhost6.localdomain6 localhost6
+EOF
+    fi
+    if ! grep -q "^::1" $rootfs/etc/hosts
+    then
+	cat <<EOF >> $rootfs/etc/hosts
+::1             localhost6.localdomain6 localhost6
+EOF
+    fi
+
     if grep -q ^lxc.network.ipv4 $path/config
     then
         # configure static network
@@ -556,11 +573,11 @@ then
 fi
 if [ ! -e $hostkeydir ]
 then
-    mkdir $hostkeydir
+    mkdir -p $hostkeydir
 fi
 if [ ! -e $macdir ]
 then
-    mkdir $macdir
+    mkdir -p $macdir
 fi
 
 install_centos $rootfs
