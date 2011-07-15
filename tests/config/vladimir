@@ -9,5 +9,12 @@ VMENGINE=lxc
 REMOTESELENIUM=true
 KEEPVM=true
 
-fgsrccostrk=lxc:centos5::
+# VM for trunk
+fgcostrksrc=lxc:centos5::
+fgcostrk=lxc:centos5::
+fgdebtrk=lxc:debian6::
+
+# VM for Branch 5.1
 fgcos51src=lxc:centos5::
+fgcos51=lxc:centos5::
+fgdeb51=lxc:debian6::
