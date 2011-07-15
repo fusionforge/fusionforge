@@ -4,50 +4,88 @@
 #
 # Once built, packages are in $RPM_TMP
 
-RPM_TMP=~/rpmbuild
-DEPOT=~/depot
-BUILDRESULT=~/fusionforge_repo
+RPM_TMP=$(HOME)/rpmbuild
+DEPOT=$(HOME)/depot
+BUILDRESULT=$(HOME)/fusionforge_repo
 
 HTMLPURIFIER_VERSION=4.3.0
+HTMLPURIFIER_SPEC=php-htmlpurifier/php-htmlpurifier.spec
+HTMLPURIFIER_TBZ=htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
+HTMLPURIFIER_RPM=php-htmlpurifier-$(HTMLPURIFIER_VERSION)-1.noarch.rpm
+
 WEBDAV_SERVER_VERSION=1.0.0RC5
+WEBDAV_SERVER_SPEC=php-pear-HTTP_WebDAV_Server/php-pear-HTTP_WebDAV_Server.spec
+WEBDAV_SERVER_TBZ=HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION).tgz
+WEBDAV_SERVER_RPM=php-pear-HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION)-1.noarch.rpm
 
-all: php-htmlpurifier php-jpgraph php-pear-HTTP_WebDAV_Server dist
+JPGRAPH_VERSION=1.5.2
+JPGRAPH_SPEC=php-jpgraph/php-jpgraph.spec
+JPGRAPH_TBZ=jpgraph-$(JPGRAPH_VERSION).tar.gz
+JPGRAPH_RPM=php-jpgraph-$(JPGRAPH_VERSION)-1.noarch.rpm
+JPGRAPH_DIFF=libphp-jpgraph_$(JPGRAPH_VERSION)-12.diff
 
-rpmprep:
-	-rm -Rf $(RPM_TMP)/*
+default: php-htmlpurifier php-jpgraph php-pear-HTTP_WebDAV_Server dist getselenium
+
+all: clean default
+
+clean:	
+	-rm -Rf $(HOME)/.rpmmacros $(RPM_TMP) $(DEPOT) $(BUILDRESULT)
+
+rpmprep: $(HOME)/.rpmmacros
+
+$(HOME)/.rpmmacros:
 	-rm -Rf ~/.rpmmacros
 	sh ../tools/rpmdev-setuptree
 	echo '%_tmppath %{_topdir}/TMP' >> ~/.rpmmacros
 	echo '%_buildroot %{_tmppath}/%{name}-root' >> ~/.rpmmacros
 	echo '%_sysconfdir /etc' >> ~/.rpmmacros
-	mkdir $(RPM_TMP)/TMP
+	[ -d $(RPM_TMP)/TMP ] || mkdir $(RPM_TMP)/TMP
 
 dist:
 	-mkdir -p $(BUILDRESULT)
 	cp $(RPM_TMP)/RPMS/noarch/*.rpm $(BUILDRESULT)
-	createrepo $(BUILDRESULT)
+	createrepo $(BUILDRESULT) 2>&1 | grep -v DeprecationWarning
 
+getselenium:
+	cd selenium ; make getselenium
 #
 # Building RPM for external components
 #
-php-htmlpurifier: rpmprep $(DEPOT)/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
-	cp $(DEPOT)/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz $(RPM_TMP)/SOURCES/
-	rpmbuild --quiet --clean -ba php-htmlpurifier/php-htmlpurifier.spec
+# PHP JPGRAPH
+php-jpgraph: rpmprep $(BUILDRESULT)/$(JPGRAPH_RPM)
 
-php-jpgraph: rpmprep
-	cp php-jpgraph/libphp-jpgraph_1.5.2.orig.tar.gz $(RPM_TMP)/SOURCES/jpgraph-1.5.2.tar.gz
-	zcat php-jpgraph/libphp-jpgraph_1.5.2-12.diff.gz > $(RPM_TMP)/SOURCES/libphp-jpgraph_1.5.2-12.diff
+$(BUILDRESULT)/$(JPGRAPH_RPM): $(JPGRAPH_SPEC) $(RPM_TMP)/SOURCES/$(JPGRAPH_TBZ)
+	rpmbuild --quiet --clean -ba $(JPGRAPH_SPEC)
+
+$(RPM_TMP)/SOURCES/$(JPGRAPH_TBZ):
+	cp php-jpgraph/libphp-jpgraph_$(JPGRAPH_VERSION).orig.tar.gz $@
+	zcat php-jpgraph/$(JPGRAPH_DIFF).gz > $(RPM_TMP)/SOURCES/$(JPGRAPH_DIFF)
 	cp php-jpgraph/*.patch $(RPM_TMP)/SOURCES/
-	rpmbuild --quiet --clean -ba php-jpgraph/php-jpgraph.spec
+	
+# HTML PURIFIER
+php-htmlpurifier: rpmprep $(BUILDRESULT)/$(HTMLPURIFIER_RPM)
 
-php-pear-HTTP_WebDAV_Server: rpmprep $(DEPOT)/HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION).tgz
-	cp $(DEPOT)/HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION).tgz $(RPM_TMP)/SOURCES/
-	rpmbuild --quiet --clean -ba php-pear-HTTP_WebDAV_Server/php-pear-HTTP_WebDAV_Server.spec
+$(BUILDRESULT)/$(HTMLPURIFIER_RPM): $(HTMLPURIFIER_SPEC) $(RPM_TMP)/SOURCES/$(HTMLPURIFIER_TBZ)
+	rpmbuild --quiet --clean -ba $(HTMLPURIFIER_SPEC)
 
-$(DEPOT)/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz: rpmprep
-	mkdir -p $(DEPOT)
-	cd $(DEPOT); wget -q -N http://htmlpurifier.org/releases/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
+$(RPM_TMP)/SOURCES/$(HTMLPURIFIER_TBZ): $(DEPOT)/$(HTMLPURIFIER_TBZ)
+	cp $(DEPOT)/$(HTMLPURIFIER_TBZ) $@
 
-$(DEPOT)/HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION).tgz: rpmprep
-	mkdir -p $(DEPOT)
-	cd $(DEPOT); wget -q -N http://download.pear.php.net/package/HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION).tgz
+$(DEPOT)/$(HTMLPURIFIER_TBZ): $(DEPOT) rpmprep
+	@cd $(DEPOT); [ -f $@ ] || wget -q -N http://htmlpurifier.org/releases/$(HTMLPURIFIER_TBZ)
+
+# WEBDAV SERVER
+php-pear-HTTP_WebDAV_Server: rpmprep $(BUILDRESULT)/$(WEBDAV_SERVER_RPM)
+
+$(BUILDRESULT)/$(WEBDAV_SERVER_RPM): $(WEBDAV_SERVER_SPEC) $(RPM_TMP)/SOURCES/$(WEBDAV_SERVER_TBZ)
+	rpmbuild --quiet --clean -ba $(WEBDAV_SERVER_SPEC)
+
+$(RPM_TMP)/SOURCES/$(WEBDAV_SERVER_TBZ): $(DEPOT)/$(WEBDAV_SERVER_TBZ)
+	cp $(DEPOT)/$(WEBDAV_SERVER_TBZ) $@
+
+$(DEPOT)/$(WEBDAV_SERVER_TBZ): $(DEPOT) rpmprep
+	@cd $(DEPOT); [ -f $@ ] || wget -q -N http://download.pear.php.net/package/$(WEBDAV_SERVER_TBZ)
+
+# DEPOT
+$(DEPOT):
+	@[ -d "$(DEPOT)" ] || mkdir $(DEPOT)
