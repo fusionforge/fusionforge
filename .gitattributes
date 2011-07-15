@@ -4850,6 +4850,7 @@ tests/config/christian -text
 tests/config/default -text
 tests/config/g-dellm65-1 -text
 tests/config/g-virtual05 -text
+tests/config/vladimir -text
 tests/func/AllTests.php -text
 tests/func/Docs/createDocURLTest.php -text
 tests/func/Forums/forumsTest.php -text
