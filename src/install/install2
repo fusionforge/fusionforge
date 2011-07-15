@@ -151,6 +151,12 @@ install2_files(){
 	#restricted shell for cvs accounts
 	cp $fusionforge_dir/plugins/scmcvs/bin/cvssh.pl /bin/
 	chmod 755 /bin/cvssh.pl
+	
+	# local.inc unfortunatly still required for a fresh install
+	if [ ! -f /etc/gforge/local.inc ]
+	then
+        	cp $fusionforge_dir/etc/local.inc.example /etc/gforge/local.inc
+	fi
 
 	# Create default location for gforge config files
 	mkdir -p $fusionforge_etc_dir
