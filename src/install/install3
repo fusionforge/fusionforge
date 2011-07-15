@@ -199,7 +199,9 @@ dropdbifexists()
 	if [ -z "$database" ]
 	then
         	echo "Forge database name not found"
-        	exit 1
+		find_psql_init
+		$pgservice stop
+		$pgservice start
 	else
 		find_psql_init
 		$pgservice stop
