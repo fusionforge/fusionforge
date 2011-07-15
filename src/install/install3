@@ -189,8 +189,13 @@ EOF
 
 dropdbifexists()
 {
-	export PATH=$PATH:/usr/share/gforge/bin/:/usr/share/gforge/utils:/opt/gforge/utils
-	database=`FUSIONFORGE_NO_PLUGINS=true forge_get_config database_name`
+	if [ -z "$1" ]
+	then
+		export PATH=$PATH:/usr/share/gforge/bin/:/usr/share/gforge/utils:/opt/gforge/utils
+		database=`FUSIONFORGE_NO_PLUGINS=true forge_get_config database_name`
+	else
+		database=$1
+	fi
 	if [ -z "$database" ]
 	then
         	echo "Forge database name not found"
