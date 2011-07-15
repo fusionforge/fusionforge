@@ -156,6 +156,7 @@ install2_files(){
 	if [ ! -f /etc/gforge/local.inc ]
 	then
 		msg green "Use $fusionforge_dir/etc/local.inc.example as /etc/gforge/local.inc"
+		[ -d /etc/gforge ] || mkdir /etc/gforge
         	cp $fusionforge_dir/etc/local.inc.example /etc/gforge/local.inc
 	fi
 
