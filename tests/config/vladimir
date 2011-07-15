@@ -10,4 +10,4 @@ REMOTESELENIUM=true
 KEEPVM=true
 
 fgsrccostrk=lxc:centos5::
-fgcos51src.local=lxc:centos5::
+fgcos51src=lxc:centos5::
