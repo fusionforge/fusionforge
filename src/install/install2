@@ -224,7 +224,7 @@ install2_files(){
 		mkdir -p plugins
 	fi
 	cd $fusionforge_src_dir/www/plugins
-	for plugin in cvstracker svntracker message scmcvs fckeditor blocks authbuiltin
+	for plugin in cvstracker svntracker scmcvs fckeditor blocks
 	do
 		if [ ! -L "$plugin" ]
 		then
