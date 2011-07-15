@@ -63,6 +63,7 @@ else
 	# Destroy the VM if found
 	echo "Destroying vm $HOST"
 	tests/scripts/stop_vm $HOST || true
+	tests/scripts/start_vm $HOST
 fi
 
 # BUILD FUSIONFORGE REPO
