@@ -155,6 +155,7 @@ install2_files(){
 	# local.inc unfortunatly still required for a fresh install
 	if [ ! -f /etc/gforge/local.inc ]
 	then
+		msg green "Use $fusionforge_dir/etc/local.inc.example as /etc/gforge/local.inc"
         	cp $fusionforge_dir/etc/local.inc.example /etc/gforge/local.inc
 	fi
 
