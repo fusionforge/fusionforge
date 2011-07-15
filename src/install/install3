@@ -205,7 +205,9 @@ dropdbifexists()
 	else
 		find_psql_init
 		$pgservice stop
+		sleep 5
 		$pgservice start
+		sleep 5
 		echo "Droping database $database"
 		su - postgres -c "dropdb -e $database"
 	fi
