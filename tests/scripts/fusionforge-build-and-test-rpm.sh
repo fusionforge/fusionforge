@@ -48,7 +48,7 @@ else
 	#export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
 	export VZTEMPLATE=centos-5-x86
 fi
-export DB_NAME=fforge
+export DB_NAME=gforge
 export CONFIGURED=true
 
 [ ! -d $WORKSPACE/build ] || rm -fr $WORKSPACE/build
