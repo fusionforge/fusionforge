@@ -719,6 +719,7 @@ fi
 %{FORGE_DIR}/www/new
 %{FORGE_DIR}/www/news
 %{FORGE_DIR}/www/people
+%{FORGE_DIR}/www/plugins
 %{FORGE_DIR}/www/pm
 %{FORGE_DIR}/www/project
 %{FORGE_DIR}/www/register
