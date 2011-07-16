@@ -448,6 +448,7 @@ WHICH_VERSION=%{version}-%{release}
 # plugin: cvssyncmail
 
 # plugin: cvstracker
+%{__ln_s} ../../plugins/cvstracker/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/cvstracker
 # delete stuff that is clearly outdated/obsolete so we don't package this and confuse others
 %{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/cvstracker/httpd.conf
 %{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/cvstracker/Makefile
@@ -456,6 +457,7 @@ WHICH_VERSION=%{version}-%{release}
 # plugin: externalsearch
 
 # plugin: fckeditor
+%{__ln_s} ../../plugins/fckeditor/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/fckeditor
 
 # plugin: forumml
 %{__ln_s} ../../plugins/forumml/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/forumml
@@ -467,8 +469,10 @@ WHICH_VERSION=%{version}-%{release}
 %{__rm} -rf $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/ldapextauth/rpm-specific
 
 # plugin: mantis
+%{__ln_s} ../../plugins/mantis/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mantis
 
 # plugin: mediawiki
+%{__ln_s} ../../plugins/mediawiki/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mediawiki
 # create symlink for apache configuration for mediawiki plugin
 ## first, delete the php_admin_value include_path
 %{__sed} -i -e "/^.*php_admin_value[[:space:]]*include_path.*/d" $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki
@@ -489,10 +493,13 @@ WHICH_VERSION=%{version}-%{release}
 %{__cp} -f %{SOURCE1} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/README.jlbond
 
 # plugin: online_help
+%{__ln_s} ../../plugins/online_help/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/online_help
 
 # plugin: projects_hierarchy
+%{__ln_s} ../../plugins/projects_hierarchy/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projects_hierarchy
 
 # plugin: quota_management
+%{__ln_s} ../../plugins/quota_management/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/quota_management
 
 # plugin: scmarch
 
@@ -522,6 +529,7 @@ WHICH_VERSION=%{version}-%{release}
 # plugin: svncommitemail
 
 # plugin: svntracker
+%{__ln_s} ../../plugins/svntracker/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/svntracker
 # install crontab
 %{__install} -m 644 plugins/svntracker/rpm-specific/cron.d/gforge-plugin-svntracker $RPM_BUILD_ROOT%{_sysconfdir}/cron.d
 
