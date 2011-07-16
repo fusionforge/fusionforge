@@ -115,6 +115,7 @@ ssh root@$HOST "/usr/share/gforge/bin/forge_set_password admin myadmin"
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini"
 #ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
+ssh root@$HOST "a2dissite default"
 ssh root@$HOST "invoke-rc.d cron stop" || true
 
 retcode=0
