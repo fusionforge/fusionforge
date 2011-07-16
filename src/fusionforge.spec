@@ -346,6 +346,8 @@ mantisbt plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT/bin
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/lib
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/www
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.d
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d
