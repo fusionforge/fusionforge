@@ -386,7 +386,7 @@ ubukey:
 /usr/sbin/cowbuilder:
 	@echo "Error: you need to install package 'cowdancer', for instance with 'sudo apt-get install cowdancer'." ; /bin/false
 
-localrepo: $(LOCALREPO) $(LOCALREPO)/conf $(LOCALREPO)/conf/distributions
+localrepo: $(LOCALREPO) $(LOCALREPO)/conf distributions #$(LOCALREPO)/conf/distributions
 
 reprepro: $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE) # Install in repository
 
@@ -398,7 +398,9 @@ $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE): $(BUILDRESULT)/$(CHAN
 	echo "$@ already installed" ; \
 	fi
 
-$(LOCALREPO)/conf/distributions:
+#$(LOCALREPO)/conf/distributions:
+distributions:
+	-rm -f $(LOCALREPO)/conf/distributions
 	for xdist in $(DISTRIBLIST) ; do \
 	dist=`echo $$xdist | cut -c2-` ; \
 	echo "Codename: $$dist" ; \
