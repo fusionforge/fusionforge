@@ -75,7 +75,7 @@ if $REINIT
 then
 	echo "Reinit the database"
 	rm -f /etc/gforge/install_completed
-	dropdbifexists
+	dropdbifexists $FFORGE_DB
 fi
 
 if [ -d "/opt/gforge" ]
