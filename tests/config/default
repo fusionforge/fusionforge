@@ -59,3 +59,14 @@ dhdebian6=lxc:debian6::
 dhdebian6src=lxc:debian6::
 dhcentos5=lxc:centos5::
 dhcentos5src=lxc:centos5::
+
+# Trunk vm
+fgcostrksrc=lxc:centos5::
+fgcostrk=lxc:centos5::
+fgdebtrk=lxc:debian6::
+
+# 5.1 vm
+fgcos51src=lxc:centos5::
+fgcos51=lxc:centos5::
+fgdeb51=lxc:debian6::
+
