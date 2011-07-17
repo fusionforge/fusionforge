@@ -42,10 +42,8 @@ then
 	export USEVZCTL=true
 	export SELENIUM_RC_HOST=localhost
 	export SELENIUM_RC_URL=http://`hostname -f`$BASEDIR/reports
-	#export FFORGE_RPM_REPO=http://`hostname -f`$BASEDIR/build/packages
 else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
-	#export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
 	export VZTEMPLATE=centos-5-x86
 fi
 export DB_NAME=gforge
@@ -61,11 +59,13 @@ then
 	(cd tests/scripts ; sh ./stop_vm.sh $HOST || true)
 fi
 
-make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages all
-
 (cd 3rd-party/selenium ; make getselenium)
 
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
+
+# BUILD FUSIONFORGE REPO
+echo "Build FUSIONFORGE REPO"
+make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages all
 
 # FUSIONFORGE REPO
 if [ ! -z "$FFORGE_RPM_REPO" ]
@@ -92,14 +92,17 @@ else
         scp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 fi
 
+# TODO: Make test dir a parameter
+echo "Transfer phpunit test on $HOST"
 cat > $WORKSPACE/build/config/phpunit <<-EOF
 HUDSON_URL=$HUDSON_URL
 JOB_NAME=$JOB_NAME
 EOF
 
-scp -r tests root@$HOST:/root
-scp -r $WORKSPACE/build/config  root@$HOST:/root
-scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
+scp -r $WORKSPACE/build/config  root@$HOST:/root/
+rsync -a 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root/selenium-server.jar
+rsync -a --delete tests/ root@$HOST:/root/tests/
+
 ssh root@$HOST "ln -s gforge /usr/share/src"
 
 sleep 5
