@@ -59,7 +59,6 @@ then
 	(cd tests/scripts ; sh ./stop_vm.sh $HOST || true)
 fi
 
-
 (cd 3rd-party/selenium ; make getselenium)
 
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
@@ -99,19 +98,18 @@ cat > $WORKSPACE/build/config/phpunit <<-EOF
 HUDSON_URL=$HUDSON_URL
 JOB_NAME=$JOB_NAME
 EOF
+
 scp -r $WORKSPACE/build/config  root@$HOST:/root/
 rsync -a 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root/selenium-server.jar
 rsync -a --delete tests/ root@$HOST:/root/tests/
-
 
 ssh root@$HOST "ln -s gforge /usr/share/src"
 
 sleep 5
 [ ! -e "/tmp/timedhosts.txt" ] || scp -p /tmp/timedhosts.txt root@$HOST:/var/cache/yum/timedhosts.txt
-ssh root@$HOST "yum install -y --skip-broken fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-ldapextauth fusionforge-plugin-scmgit fusionforge-plugin-blocks"
+ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=admin FFORGE_ADMIN_PASSWORD=myadmin export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD; yum install -y --skip-broken fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-ldapextauth fusionforge-plugin-scmgit fusionforge-plugin-blocks"
 scp -p root@$HOST:/var/cache/yum/timedhosts.txt /tmp/timedhosts.txt || true
 ssh root@$HOST '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini'
-ssh root@$HOST '/usr/share/gforge/utils/forge_set_password admin myadmin'
 #ssh root@$HOST "cd /root/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=$DB_NAME php db_reload.php"
 #ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
