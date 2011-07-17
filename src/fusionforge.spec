@@ -17,7 +17,7 @@
 %define httpduser       apache
 %define httpdgroup      apache
 
-%define fforge_admin    admin
+%define fforge_admin    fforgeadmin
 
 %define FORGE_DIR       %{_datadir}/gforge
 %define FORGE_CONF_DIR  %{_sysconfdir}/gforge
@@ -400,6 +400,8 @@ oauthprovider plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT/bin
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/lib
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/www
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.d
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d
@@ -437,24 +439,6 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__ln_s} /home/groups $RPM_BUILD_ROOT/%{FORGE_VAR_LIB}/homedirs/groups
 # install restricted shell for cvs accounts
 %{__cp} -a plugins/scmcvs/bin/cvssh.pl $RPM_BUILD_ROOT/bin/
-
-# Fix configuration files entries (various sys_* variables)
-#%{__cp} -a etc/local.inc.example $RPM_BUILD_ROOT/%{FORGE_CONF_DIR}/local.inc
-#%{__sed} -i -e "s!/path/to/gforge!%{FORGE_DIR}!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-#%{__sed} -i -e "s!/path/to/jpgraph!/var/www/jpgraph-1.19!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-#%{__sed} -i -e "s/\$sys_dbname=.*/\$sys_dbname='%{dbname}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-#%{__sed} -i -e "s/\$sys_dbuser=.*/\$sys_dbuser='%{dbuser}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-#%{__sed} -i -e "s/\$sys_apache_user=.*/\$sys_apache_user='%{httpduser}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-#%{__sed} -i -e "s/\$sys_apache_group=.*/\$sys_apache_group='%{httpdgroup}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-#%{__sed} -i -e "s|\$sys_plugins_path=.*|\$sys_plugins_path=\"%{FORGE_DIR}/plugins\";|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-#%{__sed} -i -e "s|\$sys_upload_dir=.*|\$sys_upload_dir=\"\$sys_var_path/upload\";|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-#%{__sed} -i -e "s|\$sys_urlroot=.*|\$sys_urlroot=\"%{FORGE_DIR}/www\";|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-
-# Replace sys_localinc, sys_gfdbname, sys_gfdbuser
-#%{__cp} -a etc/httpd.secrets.example $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
-#%{__sed} -i -e "s|sys_localinc.*$|sys_localinc %{FORGE_CONF_DIR}/local.inc|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
-#%{__sed} -i -e "s|sys_gfdbname.*$|sys_gfdbname %{dbname}|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
-#%{__sed} -i -e "s|sys_gfdbuser.*$|sys_gfdbname %{dbuser}|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
 
 # Apache configuration file
 %{__cp} -a etc/httpd.conf.d-fhs/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/
@@ -520,6 +504,7 @@ WHICH_VERSION=%{version}-%{release}
 # plugin: cvssyncmail
 
 # plugin: cvstracker
+%{__ln_s} ../../plugins/cvstracker/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/cvstracker
 # delete stuff that is clearly outdated/obsolete so we don't package this and confuse others
 %{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/cvstracker/httpd.conf
 %{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/cvstracker/Makefile
@@ -528,6 +513,7 @@ WHICH_VERSION=%{version}-%{release}
 # plugin: externalsearch
 
 # plugin: fckeditor
+%{__ln_s} ../../plugins/fckeditor/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/fckeditor
 
 # plugin: forumml
 %{__ln_s} ../../plugins/forumml/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/forumml
@@ -536,6 +522,7 @@ WHICH_VERSION=%{version}-%{release}
 %{__ln_s} ../../plugins/hudson/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/hudson
 
 # plugin: mediawiki
+%{__ln_s} ../../plugins/mediawiki/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mediawiki
 # create symlink for apache configuration for mediawiki plugin
 ## first, delete the php_admin_value include_path
 %{__sed} -i -e "/^.*php_admin_value[[:space:]]*include_path.*/d" $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki
@@ -559,10 +546,13 @@ WHICH_VERSION=%{version}-%{release}
 %{__ln_s} ../../plugins/message/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/message
 
 # plugin: online_help
+%{__ln_s} ../../plugins/online_help/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/online_help
 
 # plugin: projects_hierarchy
+%{__ln_s} ../../plugins/projects_hierarchy/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projects_hierarchy
 
 # plugin: quota_management
+%{__ln_s} ../../plugins/quota_management/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/quota_management
 
 # plugin: scmarch
 
@@ -592,6 +582,7 @@ WHICH_VERSION=%{version}-%{release}
 # plugin: svncommitemail
 
 # plugin: svntracker
+%{__ln_s} ../../plugins/svntracker/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/svntracker
 # install crontab
 %{__install} -m 644 plugins/svntracker/rpm-specific/cron.d/gforge-plugin-svntracker $RPM_BUILD_ROOT%{_sysconfdir}/cron.d
 
