@@ -626,7 +626,7 @@ function session_set_for_authplugin($authpluginname) {
 	}
 
 	if ($seen_yes) {
-		echo "user ok\n";
+		//echo "user ok\n";
 		// see AuthBuiltinPlugin::fetchAuthUser() or likes
 		// expect user object in results
 		$params = array();
@@ -642,8 +642,9 @@ function session_set_for_authplugin($authpluginname) {
 			$params['event'] = 'every-page';
 			plugin_hook('sync_account_info', $params);
 
-			$user->setLoggedIn(true);
+			$user->setLoggedIn(true);echo "user:".$user->getUnixName();
 			$G_SESSION = $user;
+						
 		} else {
 			$G_SESSION=false;
 		}
@@ -651,7 +652,12 @@ function session_set_for_authplugin($authpluginname) {
 	// TODO: else... what ?
 
 	$re = RBACEngine::getInstance();
+	//print_r($re->getGlobalRoles());
+	//print_r($re->getPublicRoles());
 	$re->invalidateRoleCaches() ;
+	//print_r($re->getAvailableRoles());
+	
+	
 }
 
 //TODO - this should be generalized and used for pre.php,
