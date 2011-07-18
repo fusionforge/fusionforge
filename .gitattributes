@@ -1069,6 +1069,7 @@ src/plugins/doaprdf/packaging/control/222plugin-doaprdf.shortdesc -text
 src/plugins/doaprdf/packaging/dirs/plugin-doaprdf -text
 src/plugins/doaprdf/packaging/docs/plugin-doaprdf -text
 src/plugins/doaprdf/packaging/install/plugin-doaprdf -text
+src/plugins/env.inc.php -text
 src/plugins/externalsearch/bin/db-delete.pl svneol=native#text/x-perl
 src/plugins/externalsearch/bin/db-upgrade.pl svneol=native#text/x-perl
 src/plugins/externalsearch/etc/engines.json -text
