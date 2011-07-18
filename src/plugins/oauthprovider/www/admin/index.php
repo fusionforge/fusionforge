@@ -27,7 +27,7 @@ global $gfwww;
 require_once('../../../env.inc.php');
 require_once '../checks.php';
 
-oauthprovider_CheckUser();
+oauthprovider_CheckAdminExit();
 
 ?>
 
@@ -63,7 +63,7 @@ oauthprovider_CheckUser();
 
 <?php
 # Create a basic href link to the manage.php plugin page
-echo '<a href="', '/plugins/'.$pluginname.'/consumer.php?type='.$type.'&id='.$id , '">', 'Consumers', '</a><br> ';
+echo '<a href="', '/plugins/'.$pluginname.'/consumer.php' , '">', 'Consumers', '</a><br> ';
 echo '<a href="', '/plugins/'.$pluginname.'/request_tokens.php?type='.$type.'&id='.$id , '">', 'Request tokens', '</a><br> ';
 echo '<a href="', '/plugins/'.$pluginname.'/access_tokens.php?type='.$type.'&id='.$id , '">', 'Access tokens', '</a><br> ';
 

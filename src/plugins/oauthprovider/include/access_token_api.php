@@ -68,7 +68,7 @@ class OauthAuthzAccessToken extends OauthAuthzToken {
   }
 
   static function load_all($user_id=null)	{
-  	$rows = parent::load_all($user_id=null, self::TOKEN_TYPE);
+  	$rows = parent::load_all($user_id, self::TOKEN_TYPE);
   	$tokens = array();
 
     foreach ($rows as $row) {

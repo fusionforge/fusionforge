@@ -28,7 +28,7 @@ require_once 'checks.php';
 
 $pluginname = 'oauthprovider';
 
-oauthprovider_CheckSiteAdmin();
+oauthprovider_CheckForgeAdminExit();
 
 session_require_global_perm('forge_admin');
 

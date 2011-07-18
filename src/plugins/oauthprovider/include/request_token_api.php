@@ -59,7 +59,7 @@ class OauthAuthzRequestToken extends OauthAuthzToken {
   	return $this->authorized;
   }
 
-  public function getRole() {
+  public function getRoleId() {
   	return $this->role_id;
   }
 

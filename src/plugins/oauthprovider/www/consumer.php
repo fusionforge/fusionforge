@@ -2,19 +2,19 @@
 
 /**
  * Manage OAuth consumers
- *
+ * 
  * This file is (c) Copyright 2010 by Olivier BERGER, Madhumita DHAR, Institut TELECOM
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -27,11 +27,10 @@
 
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
+
 require_once 'checks.php';
 
-$pluginname = 'oauthprovider';
-
-oauthprovider_CheckSiteAdmin();
+oauthprovider_CheckUser();
 
 $user = session_get_user(); // get the session user
 $t_consumers = OauthAuthzConsumer::load_all();
@@ -40,11 +39,11 @@ $t_can_manage = false;
 if(forge_check_global_perm ('forge_admin')) $t_can_manage = true;
 
 // FIXME : use $HTML->boxTop() and likes bellow
-if(count($t_consumers)>0)	{
+if(count($t_consumers)>0)	{	
 	echo $HTML->boxTop(_('OAuth consumers'));
 
 	echo $HTML->listTableTop(array(_('Consumer'), _('URL'), _('Description'), _('Email'), _('Key'), _('Secret'), '', ''));
-
+	
 	$i = 0;
 	foreach( $t_consumers as $t_consumer ) { ?>
 	<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
@@ -52,29 +51,25 @@ if(count($t_consumers)>0)	{
     <td class="center"><?php echo ( $t_consumer->getURL() ) ?></td>
 	<td class="center"><?php echo ( $t_consumer->getDesc() ) ?></td>
 	<td class="center"><?php echo ( $t_consumer->getEmail() ) ?></td>
-	<td><?php echo ( substr($t_consumer->key, 0, 10).'...' ) ?></td>
-    <td><?php
-	//if ( $t_can_manage ) {
-	  echo ( substr($t_consumer->secret, 0, 10).'...' );
-	/*}
-	else {
-	  echo '**************';
-	}*/ ?></td>
+	<td><?php echo ( $t_consumer->key) ?></td>
+    <td><?php 
+	echo ( $t_consumer->secret);
+	?></td>
 	<td class="center">
-      <?php
-	if ( $t_can_manage ) {
+      <?php 
+	if ( $t_can_manage ) {	  
 	  print util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?consumer_id=' . $t_consumer->getId() , _('Manage'));
 	}
       ?>
     </td>
     <td class="center">
-      <?php
+      <?php 
 	if ( $t_can_manage ) {
 	  print util_make_link('/plugins/'.$pluginname.'/consumer_delete.php?consumer_id=' . $t_consumer->getId() . '&plugin_oauthprovider_consumer_delete_token='.form_generate_key(), _('Delete'));
 	}
-    }
+    } 
     echo $HTML->listTableBottom();
-
+    
 echo $HTML->boxBottom();
 
 }
@@ -82,13 +77,13 @@ else {
 	echo '<p>'. _('There are currently no OAuth consumers registered in the database').'</p>';
 }
 
-if ( $t_can_manage ) {
+if ( $t_can_manage ) { 
 
 $f_consumer_name = getStringFromPost( 'consumer_name' );
 $f_consumer_url = getStringFromPost( 'consumer_url' );
 $f_consumer_desc = getStringFromPost( 'consumer_desc' );
 $f_consumer_email = getStringFromPost( 'consumer_email' );
-
+	
 	?>
 <br/>
 <form action="consumer_create.php" method="post">
@@ -128,8 +123,8 @@ $f_consumer_email = getStringFromPost( 'consumer_email' );
 </table>
 </form>
 <?php }
-
-
+	
+	
 	site_project_footer(array());
 
 // Local Variables:

@@ -27,6 +27,8 @@
 
 class oauthproviderPlugin extends ForgeAuthPlugin {
 
+	public $oauth_token = null;
+	public $oauth_user = null;
 	public function __construct() {
 
 		$this->ForgeAuthPlugin() ;
@@ -45,7 +47,8 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 		$this->_addHook("account_menu");
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
-
+		$this->_addHook("restrict_roles");
+		
 		// Is the plugin temporarily sufficient, only for one particular script
 		$this->sufficient_forced = NULL;
 
@@ -56,8 +59,9 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 		global $G_SESSION,$HTML;
 		$text = $this->text; // this is what shows in the tab
 		if ($G_SESSION->usesPlugin("oauthprovider")) {
+			$param = '?type=user&id=' . $G_SESSION->getId(); // we indicate the part we're calling is the user one
 			echo  $HTML->PrintSubMenu (array ($text),
-					  array ('/plugins/oauthprovider/index.php'), array(''));
+					  array ('/plugins/oauthprovider/index.php'. $param) );				
 		}
 	}
 	function groupmenu($params) {
@@ -81,7 +85,11 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 	}
-	function groupisactivecheckbox($params) {
+	/*
+	 * works with the function implementations in Plugin.class.php
+	 * re-implementation below is redundant 
+	 * 
+	 function groupisactivecheckbox($params) {
 		//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 			$group_id=$params['group'];
@@ -113,9 +121,8 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 				$group->setPluginUse ( $this->name, false );
 			}
 	}
-	/*
-	function userisactivecheckbox ($params) {
-		global $G_SESSION
+	/*function userisactivecheckbox ($params) {
+		global $G_SESSION;
 		//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 			$userid = $params['user_id'];
@@ -146,8 +153,8 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 			} else {
 				$user->setPluginUse ( $this->name, false );
 			}
-	}
-	*/
+	}*/
+	
 	function user_personal_links($params) {
 	// this displays the link in the user's profile page to it's personal oauthprovider (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
@@ -167,7 +174,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<p>'.util_make_link ("/plugins/oauthprovider/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+				echo '<p>'.util_make_link ("/plugins/oauthprovider/admin/index.php?id=".$group->getID().'&type=admin',
 						     _('oauthprovider Admin')).'</p>' ;
 			}
 
@@ -200,6 +207,22 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 		return (forge_get_config('sufficient', $this->name) || $this->sufficient_forced);
 	}
 
+	function restrictRoles(&$params) {
+		global $oauth_token, $oauth_user;
+		if($oauth_token!=null) {
+			$id = $oauth_token->getRoleId();
+			//$params['dropped_roles'][] = RBACEngine::getInstance()->getRoleById($id);
+			print_r("in restrict roles");
+			foreach (RBACEngine::getInstance()->getAvailableRolesForUser($oauth_user) as $role) {
+				$tempid = $role->getID();
+				if($tempid!=$id) {
+					$params['dropped_roles'][] = RBACEngine::getInstance()->getRoleById($tempid);
+					//print_r($role->getName() . " removed!");	
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Is there a valid session?
 	 *
@@ -241,7 +264,10 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 				//echo "Authenticated with access token whose key is :  $token->key \n";
 				//echo "\n";
 				$t_token = OauthAuthzAccessToken::load_by_key($token->key);
+				global $oauth_token, $oauth_user;
+				$oauth_token = $t_token;
 				$user =& user_get_object($t_token->getUserId());
+				$oauth_user = $user;
 				//$user_name = $user->getRealName().' ('.$user->getUnixName().')';
 				//echo "Acting on behalf of user : $user_name\n";
 				//echo "\n";

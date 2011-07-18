@@ -297,10 +297,10 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 	 */
 	public function find_all_tokens($token_type, $user_id=null) {
 		$t_token_table = $this->token_table_name($token_type);
-
-		if(isset($user_id)) {
+		if(isset($user_id)||($user_id)) {
 			$t_query = "SELECT * FROM $t_token_table WHERE user_id = $1";
 			$t_result = db_query_params( $t_query, array( (int) $user_id ) );
+			
 		}
 		else {
 			$t_query = "SELECT * FROM $t_token_table";
@@ -577,12 +577,12 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 		$token_id = $token->getId();
 		if ( 0 == $token_id ) { # create
 			$t_query = "INSERT INTO $t_token_table ( consumer_id, token_key, token_secret, authorized, user_id, role_id, time_stamp ) VALUES ($1, $2, $3, $4, $5, $6, $7)";
-			$t_result = db_query_params( $t_query, array( $token->getConsumerId(), $token->key, $token->secret, $token->getAuthorized(), $token->getUserId(), $token->getRole(), $token->gettime_stamp() ) );
+			$t_result = db_query_params( $t_query, array( $token->getConsumerId(), $token->key, $token->secret, $token->getAuthorized(), $token->getUserId(), $token->getRoleId(), $token->gettime_stamp() ) );
 
 			$token_id = db_insertid($t_result, $t_token_table, 'id');
 		} else { # update
 			$t_query = "UPDATE $t_token_table SET consumer_id=$1, token_key=$2, token_secret=$3, authorized=$4, user_id=$5, role_id=$6, time_stamp=$7 WHERE id=$8";
-			db_query_params( $t_query, array( $token->getConsumerId(), $token->key, $token->secret, $token->getAuthorized(), $token->getUserId(), $token->getRole(), $token->gettime_stamp(), $token->getId() ) );
+			db_query_params( $t_query, array( $token->getConsumerId(), $token->key, $token->secret, $token->getAuthorized(), $token->getUserId(), $token->getRoleId(), $token->gettime_stamp(), $token->getId() ) );
 		}
 		return $token_id;
 	}

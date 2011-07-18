@@ -26,8 +26,8 @@ require_once('../../env.inc.php');
 require_once 'checks.php';
 
 $pluginname = 'oauthprovider';
-
-oauthprovider_CheckUser();
+if($type == 'group') oauthprovider_CheckGroup();
+else oauthprovider_CheckUser();
 
 ?>
 
@@ -61,15 +61,10 @@ oauthprovider_CheckUser();
   <p>The <b>HMAC_SHA1</b> signature method is the only one supported at the moment.</p>
 
 <?php
-//global $plugin_oauthprovider_consumers, _('Request Tokens');
-# Create a basic href link to the manage.php plugin page
-if( forge_check_global_perm ('forge_admin') ){
-	echo util_make_link('/plugins/'.$pluginname.'/consumer.php', _('Consumers')). ' <br />';
-}
-
-
-echo '<a href="', '/plugins/'.$pluginname.'/request_tokens.php?type='.$type , '">', _('Request tokens'), '</a><br> ';
-echo util_make_link('/plugins/'.$pluginname.'/access_tokens.php', _('Access tokens')).'<br /> ';
+$link_param = '?type='.$type.'&'.$type_param[0].'='.$type_param[1];
+echo util_make_link('/plugins/'.$pluginname.'/consumer.php', _('Consumers')). ' <br />';
+echo util_make_link('/plugins/'.$pluginname.'/request_tokens.php'.$link_param, _('Request tokens')).'<br /> ';
+echo util_make_link('/plugins/'.$pluginname.'/access_tokens.php'.$link_param, _('Access tokens')).'<br /> ';
 
 //html_page_bottom();
 site_project_footer(array());

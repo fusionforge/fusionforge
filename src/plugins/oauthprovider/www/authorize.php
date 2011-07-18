@@ -51,13 +51,10 @@ try {
 
 	$t_request_token = OauthAuthzRequestToken::load_by_key($p_token);
 
-	oauthprovider_CheckUser();
+	$group = oauthprovider_CheckGroup();
 
 	echo '<h2>'. _('Pending authorization requests via OAuth') .'</h2>';
 
-	if($type=="group") $groupname = $name;
-	else $groupname = null;
-	$group = group_get_object_by_name($groupname);
 	$user_id = user_getid();
 	//echo "user: ".$user_id;
 	//echo "group: ".$groupid;
@@ -65,19 +62,17 @@ try {
 	$roles = array () ;
 
 	foreach (RBACEngine::getInstance()->getAvailableRolesForUser($user) as $role) {
-		//print_r('role :');
-		//print_r($role);
 
 		if ($role->getHomeProject()) {
 			if($groupname) {
 				if ($role->getHomeProject()->getID() == $group->getID()) {
-					print_r('role :');
-					print_r($role);
+					print_r('role1 :');
+					$roles[] = $role ;
 				}
 			}
 			else {
-				print_r('role :');
-				print_r($role);
+				print_r('role2 :');
+				//print_r($role);
 				$roles[] = $role ;
 			}
 
