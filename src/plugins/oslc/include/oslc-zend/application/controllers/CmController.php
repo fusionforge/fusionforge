@@ -167,10 +167,14 @@ class CmController extends Zend_Rest_Controller {
 	  $req = $this->getRequest();
 	  //		$action = $req->getActionName();
 	  //	  print_r("Action : ".$action);
-
-	  // check Accept header's mime type
-	  $accept = $req->getHeader('Accept');
-	  //print_r("\nAccept : ".$accept);
+	  
+	  if($action == 'put'  || $action == 'post') {
+		$accept = $req->getHeader('Content-Type');
+	  } else {
+	  	// check Accept header's mime type
+	  	$accept = $req->getHeader('Accept');
+	  	//print_r("\nAccept : ".$accept);
+	  }
 
 	  // prepare an array of accepted types
 	  $accepted_types = array();
