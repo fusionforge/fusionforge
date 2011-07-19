@@ -66,12 +66,12 @@ try {
 		if ($role->getHomeProject()) {
 			if($groupname) {
 				if ($role->getHomeProject()->getID() == $group->getID()) {
-					print_r('role1 :');
+					//print_r('role1 :');
 					$roles[] = $role ;
 				}
 			}
 			else {
-				print_r('role2 :');
+				//print_r('role2 :');
 				//print_r($role);
 				$roles[] = $role ;
 			}
