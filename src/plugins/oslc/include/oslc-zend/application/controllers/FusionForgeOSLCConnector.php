@@ -602,14 +602,10 @@ class FusionForgeOSLCConnector extends OslcConnector {
 		}
 
 		$at = new ArtifactType($grp, $creation_params['tracker']);
-		if (!$at || !is_object($at)) {
-			throw new Exception('Error: Could Not Get ArtifactType. Please give a valid tracker identifier.', $code);
-		}
+		if ($at->isError())	throw new Exception($at->getErrorMessage());
 
 		$a = new Artifact($at);
-		if (!$a || !is_object($a)) {
-			throw new Exception('Error: Could Not Get Artifact');
-		}
+		if ($a->isError())	throw new Exception($a->getErrorMessage());
 
 		// Check that Mandatory fields are given.
 		if (!isset($cm_request['title'])) {
