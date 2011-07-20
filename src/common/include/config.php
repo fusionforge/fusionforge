@@ -92,12 +92,22 @@ class FusionForgeConfig {
 	}
 
 	function read_config_file ($file) {
+		if (getenv ('FUSIONFORGE_USE_PRE_51_CONFIG') == 'true') {
+			$fallback_only = true;
+		} else {
+			$fallback_only = false;
+		}
+
 		if (file_exists($file) && is_readable($file)) {
 			$sections = parse_ini_file ($file, true) ;
 			if (is_array($sections)) {
 				foreach ($sections as $section => $options) {
 					foreach ($options as $var => $value) {
-						$this->settings[$section][$var] = $value ;
+						if ($fallback_only) {
+							$this->set_value($section,$var,$value);
+						} else {
+							$this->reset_value($section,$var,$value);
+						}
 					}
 				}
 			}

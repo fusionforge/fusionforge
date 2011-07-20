@@ -2,6 +2,8 @@
 
 set -e
 
+export FUSIONFORGE_USE_PRE_51_CONFIG=true
+
 config_dir=$(forge_get_config extra_config_dirs | xargs -n 1 echo | head -1)
 if [ "$config_dir" = "" ] ; then
     config_path=$(forge_get_config config_path)/config.ini.d
