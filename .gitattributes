@@ -732,10 +732,10 @@ src/etc/httpd.conf.d-fhs/40-vhosts-extra.conf -text
 src/etc/httpd.conf.d-fhs/auth-main.inc -text
 src/etc/httpd.conf.d-fhs/auth-projects.inc -text
 src/etc/httpd.conf.d-fhs/block-trace.inc -text
+src/etc/httpd.conf.d-fhs/lists-vhost-plugin-mailman.inc -text
 src/etc/httpd.conf.d-fhs/log.inc -text
 src/etc/httpd.conf.d-fhs/plugin-fckeditor.inc -text
 src/etc/httpd.conf.d-fhs/plugin-generic.inc -text
-src/etc/httpd.conf.d-fhs/plugin-mailman.inc -text
 src/etc/httpd.conf.d-fhs/plugin-mediawiki.inc -text
 src/etc/httpd.conf.d-fhs/plugin-scmbzr.inc -text
 src/etc/httpd.conf.d-fhs/plugin-scmdarcs.inc -text
@@ -758,10 +758,10 @@ src/etc/httpd.conf.d-opt/40-vhosts-extra.conf -text
 src/etc/httpd.conf.d-opt/auth-main.inc -text
 src/etc/httpd.conf.d-opt/auth-projects.inc -text
 src/etc/httpd.conf.d-opt/block-trace.inc -text
+src/etc/httpd.conf.d-opt/lists-vhost-plugin-mailman.inc -text
 src/etc/httpd.conf.d-opt/log.inc -text
 src/etc/httpd.conf.d-opt/plugin-fckeditor.inc -text
 src/etc/httpd.conf.d-opt/plugin-generic.inc -text
-src/etc/httpd.conf.d-opt/plugin-mailman.inc -text
 src/etc/httpd.conf.d-opt/plugin-mediawiki.inc -text
 src/etc/httpd.conf.d-opt/plugin-scmbzr.inc -text
 src/etc/httpd.conf.d-opt/plugin-scmdarcs.inc -text
@@ -785,10 +785,10 @@ src/etc/httpd.conf.d-usrlocal/40-vhosts-extra.conf -text
 src/etc/httpd.conf.d-usrlocal/auth-main.inc -text
 src/etc/httpd.conf.d-usrlocal/auth-projects.inc -text
 src/etc/httpd.conf.d-usrlocal/block-trace.inc -text
+src/etc/httpd.conf.d-usrlocal/lists-vhost-plugin-mailman.inc -text
 src/etc/httpd.conf.d-usrlocal/log.inc -text
 src/etc/httpd.conf.d-usrlocal/plugin-fckeditor.inc -text
 src/etc/httpd.conf.d-usrlocal/plugin-generic.inc -text
-src/etc/httpd.conf.d-usrlocal/plugin-mailman.inc -text
 src/etc/httpd.conf.d-usrlocal/plugin-mediawiki.inc -text
 src/etc/httpd.conf.d-usrlocal/plugin-scmbzr.inc -text
 src/etc/httpd.conf.d-usrlocal/plugin-scmdarcs.inc -text
