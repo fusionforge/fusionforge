@@ -201,7 +201,7 @@ class Navigation extends Error {
                         
                         if (!forge_get_config ('user_registration_restricted')) {
                                 $res['titles'][] = _('New Account');
-                                $res['urls'][] = util_make_url('/account/register.php');
+                                $res['urls'][] = util_make_uri('/account/register.php');
                         }
                 }
                 return $res;
@@ -280,7 +280,7 @@ class Navigation extends Error {
 		if (forge_check_global_perm ('forge_admin')) {
 			$user_is_super = true;
 			$menu['titles'][] = _('Site Admin');
-			$menu['urls'][] = util_make_url('/admin/') ;
+			$menu['urls'][] = util_make_uri('/admin/') ;
 			if (strstr($request_uri, util_make_uri('/admin/'))) {
 				$selected=count($menu['urls'])-1;
 			}
@@ -403,7 +403,7 @@ class Navigation extends Error {
                                 $menu['titles'][] = _('Forums');
                                 $menu['urls'][] = util_make_uri('/forum/?group_id=' . $group_id);
                                 if (forge_check_perm ('forum_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_url('/forum/admin/?group_id='.$group_id);
+                                        $menu['adminurls'][] = util_make_uri('/forum/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
@@ -417,7 +417,7 @@ class Navigation extends Error {
                                 $menu['titles'][] = _('Tracker');
                                 $menu['urls'][] = util_make_uri('/tracker/?group_id=' . $group_id);
                                 if (forge_check_perm ('tracker_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_url('/tracker/admin/?group_id='.$group_id);
+                                        $menu['adminurls'][] = util_make_uri('/tracker/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
@@ -434,7 +434,7 @@ class Navigation extends Error {
                                 $menu['titles'][] = _('Lists');
                                 $menu['urls'][] = util_make_uri('/mail/?group_id=' . $group_id);
                                 if (forge_check_perm ('project_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_url('/mail/admin/?group_id='.$group_id);
+                                        $menu['adminurls'][] = util_make_uri('/mail/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
@@ -596,7 +596,7 @@ class Navigation extends Error {
 	 */
         function getShowSource($asHTML=true) {
                 if (forge_get_config('show_source')) {
-                        $res['url'] = util_make_url('/source.php?file='.getStringFromServer('SCRIPT_NAME'));
+                        $res['url'] = util_make_uri('/source.php?file='.getStringFromServer('SCRIPT_NAME'));
                         $res['title'] = _('Show source');
                 } else {
                         return ($asHTML ? "" : NULL); 
