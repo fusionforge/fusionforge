@@ -811,10 +811,10 @@ src/etc/httpd.conf.d/40-vhosts-extra.conf -text
 src/etc/httpd.conf.d/auth-main.inc -text
 src/etc/httpd.conf.d/auth-projects.inc -text
 src/etc/httpd.conf.d/block-trace.inc -text
+src/etc/httpd.conf.d/lists-vhost-plugin-mailman.inc -text
 src/etc/httpd.conf.d/log.inc -text
 src/etc/httpd.conf.d/plugin-fckeditor.inc -text
 src/etc/httpd.conf.d/plugin-generic.inc -text
-src/etc/httpd.conf.d/plugin-mailman.inc -text
 src/etc/httpd.conf.d/plugin-mediawiki.inc -text
 src/etc/httpd.conf.d/plugin-scmbzr.inc -text
 src/etc/httpd.conf.d/plugin-scmdarcs.inc -text
