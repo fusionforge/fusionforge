@@ -223,10 +223,26 @@ class CreateProject extends FForge_SeleniumTestCase
 	}
 
 	// Test removal of project.
-	// TODO: Test not finished as removal does not work.
 	function testRemoveProject()
 	{
-		$this->createProject('testal1');
+		$this->login('admin');
+
+		// Create project as a different user
+		// Non-regression test for Adacore ticket K720-005
+		$this->createUser('toto');
+
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Forge administrators") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "toto") ;
+		$this->click ("//input[@value='Add User']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("toto Lastname"));
+
+		$this->registerProject('testal1','toto');
+		$this->approveProject('testal1','admin');
 
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
@@ -240,6 +256,10 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("reallysure");
 		$this->click("reallyreallysure");
 		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Home");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("testal1"));
 	}
 }
 
