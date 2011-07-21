@@ -61,7 +61,7 @@ jQuery(function(){
 		input.name = "submit";
 		jQuery("body").append(input);
 	});
-	
+
 	jQuery('input[type="submit"]').click(function(){
 		createBugData();
 		if (checkTimeInterval(auth_timestamp)) {
@@ -70,6 +70,11 @@ jQuery(function(){
 				url: URL,
 				data: jQuery.toJSON(postdata),
 				contentType:"application/x-oslc-cm-change-request+json",
+				beforeSend: function(xhr) {
+					if (oauth_auth_header != '') {
+						xhr.setRequestHeader("Authorization", oauth_auth_header);
+					}
+				},
 				success: function(data) {
 					alert("The url of the bug just created is: " + data);
 				},
