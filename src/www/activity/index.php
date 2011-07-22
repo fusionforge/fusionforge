@@ -107,7 +107,7 @@ if (forge_get_config('use_frs') && $group->usesFRS()) {
 	$texts[]	= _('FRS Release');
 }
 
-if (forge_get_config('use_frs') && $group->usesDocman()) {
+if (forge_get_config('use_docman') && $group->usesDocman()) {
 	$ids[]		= 'docmannew';
 	$texts[]	= _('New Documents');
 	$ids[]		= 'docmanupdate';
