@@ -104,7 +104,7 @@ jQuery(document).ready(function() {
 		buttonAddItem:		jQuery('#docman-additem'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php util_make_uri("docman") ?>',
-		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
+		lockIntervalDelay:	60000, //in millisecond and if you change this value, please update the check value 600
 		divLeft:		jQuery('#left'),
 		divHandle:		jQuery('#handle'),
 		divRight:		jQuery('#right'),
