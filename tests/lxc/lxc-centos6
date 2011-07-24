@@ -217,8 +217,8 @@ test -e $rootfs/dev/tty1 || mknod -m 666 $rootfs/dev/tty1 c 4 1
 test -e $rootfs/dev/tty2 || mknod -m 666 $rootfs/dev/tty2 c 4 2
 test -e $rootfs/dev/tty3 || mknod -m 666 $rootfs/dev/tty3 c 4 3
 test -e $rootfs/dev/tty4 || mknod -m 666 $rootfs/dev/tty4 c 4 4
-test -e $rootfs/dev/tty5 || mknod -m 666 $rootfs/dev/tty5 c 4 5
-test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
+#test -e $rootfs/dev/tty5 || mknod -m 666 $rootfs/dev/tty5 c 4 5
+#test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
 
     return 0
 }
