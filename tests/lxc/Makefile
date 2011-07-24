@@ -49,7 +49,7 @@ addrights: beroot
 delrights: beroot
 	lxc-setcap -d
 
-installtemplate: /usr/lib/lxc/templates/lxc-debian6 /usr/lib/lxc/templates/lxc-centos5
+installtemplate: /usr/lib/lxc/templates/lxc-debian6 /usr/lib/lxc/templates/lxc-centos5 /usr/lib/lxc/templates/lxc-centos6
 
 /usr/lib/lxc/templates/lxc-debian6: lxc-debian6 /usr/lib/lxc
 	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian6
@@ -57,6 +57,9 @@ installtemplate: /usr/lib/lxc/templates/lxc-debian6 /usr/lib/lxc/templates/lxc-c
 
 /usr/lib/lxc/templates/lxc-centos5: lxc-centos5 /usr/lib/lxc
 	cp lxc-centos5 /usr/lib/lxc/templates/
+
+/usr/lib/lxc/templates/lxc-centos6: lxc-centos6 /usr/lib/lxc
+	cp lxc-centos6 /usr/lib/lxc/templates/
 
 createdeb:
 	sudo /usr/bin/lxc-create -n dhdebian6.local -f config.debian6 -t debian6

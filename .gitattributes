@@ -5163,9 +5163,11 @@ tests/func/db_reload.php -text
 tests/func/db_reload.sh -text
 tests/lxc/Makefile -text
 tests/lxc/config.centos5 -text
+tests/lxc/config.centos6 -text
 tests/lxc/config.debian6 -text
 tests/lxc/destroy -text
 tests/lxc/lxc-centos5 -text
+tests/lxc/lxc-centos6 -text
 tests/lxc/lxc-debian6 -text
 tests/lxc/start -text
 tests/lxc/stop -text
