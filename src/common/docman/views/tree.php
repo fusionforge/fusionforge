@@ -43,13 +43,15 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 $idExposeTreeIndex = 0;
 $idhtml = 0;
 
+$displayProjectName = 0;
+
 if ($g->usesPlugin('projects_hierarchy')) {
-	$displayProjectName = 1;
 	$projectsHierarchy = plugin_get_object('projects_hierarchy');
 	$projectIDsArray = array($g->getID());
 	$projectIDsArray = array_merge($projectIDsArray, $projectsHierarchy->getFamilyID($group_id, 'child', false, 'validated'));
+	if (sizeof($projectIDsArray) >= 2)
+		$displayProjectName = 1;
 } else {
-	$displayProjectName = 0;
 	$projectIDsArray = array($g->getID());
 }
 echo '<div id="documenttree" style="height:100%">';
