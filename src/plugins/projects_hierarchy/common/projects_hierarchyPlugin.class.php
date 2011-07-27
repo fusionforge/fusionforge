@@ -126,14 +126,13 @@ class projects_hierarchyPlugin extends Plugin {
 		// value = list of sons
 		$tree = array();
 		while ($row = db_fetch_array($res)) {
-			//$tree[$row['father_name']][] = $row['son_name'];
 			$tree[$row['father_id']][] = $row['son_id'];
 			//get the unix name of the project
 			$project_name[$row['father_id']][0] = $row['father_name'];
 			$project_name[$row['son_id']][0] = $row['son_name'];
 			$project_name[$row['father_id']][1] = $row['father_unix_name'];
 			$project_name[$row['son_id']][1] = $row['son_unix_name'];
-			}
+		}
 		return $tree;
 	}
 
