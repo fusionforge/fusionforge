@@ -39,31 +39,6 @@ function doc_get_state_box($checkedval = 'xzxz', $removedval = '') {
 }
 
 /**
- * docman_recursive_display - Recursive function to show the documents inside the groups tree : javascript enabled function
- *
- * @param	int	doc_group_id
- */
-function docman_recursive_display($docgroup) {
-	global $nested_groups, $group_id;
-	global $idExposeTreeIndex, $dirid, $idhtml, $linkmenu;
-
-	if (is_array(@$nested_groups[$docgroup])) {
-		foreach ($nested_groups[$docgroup] as $dg) {
-			$idhtml++;
-
-			if ($dirid == $dg->getID())
-				$idExposeTreeIndex = $idhtml;
-
-			echo "
-				['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif" /></i></span>'."', '".addslashes($dg->getName())."', '?group_id=".$group_id."&amp;view=".$linkmenu."&amp;dirid=".$dg->getID()."', '', '',";
-					docman_recursive_display($dg->getID());
-			echo ",
-				],";
-		}
-	}
-}
-
-/**
  * docman_fill_zip - Recursive function to add docgroup and documents inside zip for backup
  *
  * @param	$object	zip
