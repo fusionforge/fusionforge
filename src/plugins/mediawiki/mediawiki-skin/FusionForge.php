@@ -108,7 +108,7 @@ class FusionForgeTemplate extends QuickTemplate {
 <?php	}
 		if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
         	<!-- FUSIONFORGE Stylesheet BEGIN -->
-		<?php if (!$GLOBALS['sys_use_mwframe']){ $GLOBALS['HTML']->displayStylesheetElements(); } ?>
+		<?php if (!$GLOBALS['sys_use_mwframe'] && !$this->data['printable']){ $GLOBALS['HTML']->displayStylesheetElements(); } ?>
         	<!-- FUSIONFORGE Stylesheet END -->
 	</head>
 <body id="mydoc" <?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
@@ -116,7 +116,7 @@ class FusionForgeTemplate extends QuickTemplate {
  class="mediawiki <?php $this->text('dir') ?> <?php $this->text('pageclass') ?> <?php $this->text('skinnameclass') ?>">
         <!-- FUSIONFORGE BodyHeader BEGIN -->
         <?php
-	if (!$GLOBALS['sys_use_mwframe']){
+	if (!$GLOBALS['sys_use_mwframe'] && !$this->data['printable']){
         	$project=group_get_object_by_name($GLOBALS['fusionforgeproject']);
         	if ($project) {
 			$GLOBALS['group_id']=$project->getID();
@@ -260,7 +260,7 @@ class FusionForgeTemplate extends QuickTemplate {
 -->
 <?php endif; ?>
         <!-- FUSIONFORGE Footer BEGIN -->
-<?php	if (!$GLOBALS['sys_use_mwframe']){
+<?php	if (!$GLOBALS['sys_use_mwframe'] && !$this->data['printable']){
 		$GLOBALS['HTML']->footer($params);
 	} else { ?>
 </body></html>
