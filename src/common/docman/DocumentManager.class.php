@@ -150,6 +150,32 @@ class DocumentManager extends Error {
 		}
 		echo '</ul>';
 	}
+
+	function getJSTree($linkmenu) {
+		global $idExposeTreeIndex;
+		?>
+		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+	var myThemeXPBase = "<?php echo util_make_uri('/jscook/ThemeXP/'); ?>";
+/* ]]> */</script>
+<script type="text/javascript" src="<?php echo util_make_uri('/jscook/JSCookTree.js'); ?>"></script>
+<script src="<?php echo util_make_uri('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
+
+<div id="myMenuID" style="overflow:auto;"></div>
+
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+	var myMenu =
+		[
+			['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + myThemeXPBase + 'folder1.gif" /></i></span><span id="ctItemID0" class="JSCookTreeFolderOpen"><i><img alt="" src="' + myThemeXPBase + 'folderopen1.gif" /></i></span>', '/', '<?php echo '?group_id='.$this->Group->getID().'&view='.$linkmenu ?>', '', '', <?php docman_recursive_display(0); ?>
+			]
+		];
+
+	var treeIndex = ctDraw('myMenuID', myMenu, ctThemeXP1, 'ThemeXP', 0, 1);
+	ctExposeTreeIndex(treeIndex, <?php echo $idExposeTreeIndex ?>);
+	var openItem = ctGetSelectedItem(treeIndex);
+	ctOpenFolder(openItem);
+/* ]]> */</script>
+		<?php
+	}
 }
 
 ?>
