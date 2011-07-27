@@ -46,24 +46,24 @@ $idhtml = 0;
 if ($g->usesPlugin('projects_hierarchy')) {
 	$displayProjectName = 1;
 	$projectsHierarchy = plugin_get_object('projects_hierarchy');
-	//$projectIDsArray = $projectsHierarchy->getFamilyID($group_id);
 	$projectIDsArray = array($g->getID());
+	$projectIDsArray = array_merge($projectIDsArray, $projectsHierarchy->getFamilyID($group_id, 'child', false, 'validated'));
 } else {
 	$displayProjectName = 0;
 	$projectIDsArray = array($g->getID());
 }
 echo '<div id="documenttree" style="height:100%">';
-foreach ($projectIDsArray as $projectID) {
+foreach ($projectIDsArray as $key=>$projectID) {
 	$groupObject = group_get_object($projectID);
-	$dm = new DocumentManager($g);
+	$dm = new DocumentManager($groupObject);
 	$dm->getJSTree($linkmenu, $displayProjectName);
 	echo '<noscript>';
 	echo '<ul>';
 	$label = '/';
 	if ($displayProjectName)
-		$label = $g->getPublicName();
+		$label = $groupObject->getPublicName();
 
-	echo '<li><a href="?group_id='.$group_id.'&amp;view='.$linkmenu.'">/</a></il>';
+	echo '<li><a href="?group_id='.$groupObject->getID().'&amp;view='.$linkmenu.'">/</a></il>';
 	$dm->getTree($linkmenu, $displayProjectName);
 	echo '</ul>';
 	echo '</noscript>';

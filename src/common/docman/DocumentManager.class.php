@@ -163,16 +163,16 @@ class DocumentManager extends Error {
 		<script type="text/javascript" src="<?php echo util_make_uri('/jscook/JSCookTree.js'); ?>"></script>
 		<script src="<?php echo util_make_uri('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
 
-		<div id="myMenuID" style="overflow:auto;"></div>
+		<div id="menu<?php echo $this->Group->getID() ?>" style="overflow:auto;"></div>
 
 		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 			var myMenu =
 				[
-					['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + myThemeXPBase + 'folder1.gif" /></i></span><span id="ctItemID0" class="JSCookTreeFolderOpen"><i><img alt="" src="' + myThemeXPBase + 'folderopen1.gif" /></i></span>', '<?php echo $label ?>', '<?php echo '?group_id='.$this->Group->getID().'&view='.$linkmenu ?>', '', '', <?php $this->getJSTreeEntry(0, $linkmenu); ?>
+					['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + myThemeXPBase + 'folder1.gif" /></i></span><span id="<?php echo $this->Group->getID().'ctItemID0' ?>" class="JSCookTreeFolderOpen"><i><img alt="" src="' + myThemeXPBase + 'folderopen1.gif" /></i></span>', '<?php echo $label ?>', '<?php echo '?group_id='.$this->Group->getID().'&view='.$linkmenu ?>', '', '', <?php $this->getJSTreeEntry(0, $linkmenu); ?>
 					]
 				];
 
-			var treeIndex = ctDraw('myMenuID', myMenu, ctThemeXP1, 'ThemeXP', 0, 1);
+			var treeIndex = ctDraw('<?php echo 'menu'.$this->Group->getID() ?>', myMenu, ctThemeXP1, 'ThemeXP', 0, 1);
 			ctExposeTreeIndex(treeIndex, <?php echo $idExposeTreeIndex ?>);
 			var openItem = ctGetSelectedItem(treeIndex);
 			ctOpenFolder(openItem);
