@@ -236,7 +236,7 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function getDocmanStatus($group_id) {
-		$res = db_query_params('SELECT docman FROM plugin_projects_hierarchy WHERE project_id = $1 or sub_project_id = $1 limit 1',
+		$res = db_query_params('SELECT docman FROM plugin_projects_hierarchy WHERE project_id = $1 limit 1',
 					array($group_id));
 		if (!$res)
 			return false;
@@ -256,8 +256,8 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @return	boolean	success or not
 	 */
 	function setDocmanStatus($group_id, $status = 0) {
-		$res = db_query_params('UPDATE plugin_projects_hierarchy set docman = $1 WHERE sub_project_id = $2 OR project_id = $3',
-					array($status, $group_id, $group_id));
+		$res = db_query_params('UPDATE plugin_projects_hierarchy set docman = $1 WHERE project_id = $2',
+					array($status, $group_id));
 
 		if (!$res)
 			return false;
