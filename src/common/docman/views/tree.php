@@ -66,7 +66,7 @@ foreach ($projectIDsArray as $key=>$projectID) {
 		$label = $groupObject->getPublicName();
 
 	echo '<li><a href="?group_id='.$groupObject->getID().'&amp;view='.$linkmenu.'">'.$label.'</a></il>';
-	$dm->getTree($linkmenu, $displayProjectName);
+	$dm->getTree($linkmenu);
 	echo '</ul>';
 	echo '</noscript>';
 }
