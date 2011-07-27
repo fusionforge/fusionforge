@@ -50,7 +50,7 @@ class ArtifactHtml extends Artifact {
 		$result = $this->getDetails();
 		$result = util_gen_cross_ref($result, $this->ArtifactType->Group->getID());
 		//$result = util_line_wrap( $result, 120,"\n");
-		$result = preg_replace('/\r?\n/', '<br />', $result);
+		$result = preg_replace('/\r|\n/', '<br />', $result);
 
 		$title_arr = array();
 		if ($editable === true) {
