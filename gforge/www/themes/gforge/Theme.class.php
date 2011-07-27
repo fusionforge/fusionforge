@@ -394,13 +394,12 @@ class Theme extends Layout {
         $searchEngines =& $searchManager->getAvailableSearchEngines();
 
         echo '
-        <label for="searchBox-words">
         <select name="type_of_search">';
         for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
             $searchEngine =& $searchEngines[$i];
             echo '<option class="ff" value="'.$searchEngine->getType().'"'.( $type_of_search == $searchEngine->getType() ? ' selected="selected"' : '' ).'>'.$searchEngine->getLabel($parameters).'</option>'."\n";
         }
-        echo '</select></label>';
+        echo '</select>';
 
         $parameters = $searchManager->getParameters();
         foreach($parameters AS $name => $value) {
