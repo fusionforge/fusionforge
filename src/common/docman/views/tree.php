@@ -43,14 +43,20 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 $idExposeTreeIndex = 0;
 $idhtml = 0;
 
-echo '<div id="documenttree" style="height:100%">';
-$dm = new DocumentManager($g);
-$dm->getJSTree($linkmenu);
-echo '<noscript>';
-echo '<ul id="0">';
-echo '<li><a href="?group_id='.$group_id.'&amp;view='.$linkmenu.'">/</a></il>';
-$dm->getTree($linkmenu);
-echo '</ul>';
-echo '</noscript>';
-echo '</div>';
+if ($g->usesPlugin('projects_hierarchy')) {
+	$projectsArray = array($g->getID());
+} else {
+	$projectsArray = array($g->getID());
+}
+foreach ($projectsArray as $projectID) {
+	echo '<div id="documenttree" style="height:100%">';
+	$groupObject = group_get_object($projectID);
+	$dm = new DocumentManager($g);
+	$dm->getJSTree($linkmenu);
+	echo '<noscript>';
+	$dm->getTree($linkmenu);
+	echo '</noscript>';
+	echo '</div>';
+}
+
 ?>
