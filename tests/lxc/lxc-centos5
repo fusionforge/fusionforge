@@ -285,7 +285,7 @@ download_centos()
     echo "Downloading centos minimal ..."
     #febootstrap $DISTRO $cache/partial-$arch
     rinsearch=`dpkg-architecture -qDEB_BUILD_ARCH`
-    pkglist="openssh-server man zsh bind-utils openssh-clients php wget rsync avahi php-pear php-dom java-1.6.0-openjdk xorg-x11-xauth firefox make rpm-build"
+    pkglist="openssh-server man zsh bind-utils openssh-clients php wget rsync avahi php-pear php-dom java-1.6.0-openjdk xorg-x11-xauth firefox make rpm-build createrepo"
 
     cat <<EOF > /var/cache/rinse/$DISTRO-$arch.before_post_install
 echo "Rinse defines mirror=\$mirror in config"
