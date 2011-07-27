@@ -235,6 +235,13 @@ class projects_hierarchyPlugin extends Plugin {
 		return $localFamily;
 	}
 
+	function getFamilyID($group_id, $order, $deep = false, $status = 'any') {
+		$familyFlatArray = array();
+		$familyArray = $this->getFamily($group_id, $order, $deep, $status);
+		array_walk_recursive($familyArray, create_function('$val, $key, $obj', 'array_push($obj, $val);'), &$familyFlatArray);
+		return $familyFlatArray;
+	}
+
 	function getDocmanStatus($group_id) {
 		$res = db_query_params('SELECT docman FROM plugin_projects_hierarchy WHERE project_id = $1 limit 1',
 					array($group_id));
