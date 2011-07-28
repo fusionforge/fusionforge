@@ -152,7 +152,11 @@ if ($DocGroupName) {
 		echo '<a href="#" class="tabtitle" id="docman-additem" title="'. _('Add a new item in this folder') . '" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'additem')). '</a>';
 	}
 
-	echo '<a href="/docman/view.php/'.$group_id.'/zip/full/'.$dirid.'" class="tabtitle" title="'. _('Download this folder as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
+	$numFiles = $ndg->getNumberOfDocuments();
+	if (forge_check_perm('docman', $group_id, 'approve'))
+		$numPendingFiles = $ndg->getNumberOfDocuments(3);
+	if ($numFiles || (isset($numPendingFiles) && $numPendingFiles))
+		echo '<a href="/docman/view.php/'.$group_id.'/zip/full/'.$dirid.'" class="tabtitle" title="'. _('Download this folder as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
 
 	echo '</h3>';
 
