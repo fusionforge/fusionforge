@@ -34,6 +34,13 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
+// plugin projects_hierarchy
+$actionurl = '?group_id='.$group_id.'&amp;action=addsubdocgroup&amp;dirid='.$dirid;
+if ($childgroup_id) {
+	$g = group_get_object($childgroup_id);
+	$actionurl .= '&amp;childgroup_id='.$childgroup_id;
+}
+
 ?>
 <script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 function doItAddSubGroup() {
@@ -43,7 +50,7 @@ function doItAddSubGroup() {
 /* ]]> */</script>
 <?php
 echo '<div class="docmanDivIncluded" >';
-echo '<form id="addsubgroup" name="addsubgroup" method="post" action="?group_id='.$group_id.'&amp;action=addsubdocgroup&amp;dirid='.$dirid.'">';
+echo '<form id="addsubgroup" name="addsubgroup" method="post" action="'.$actionurl.'">';
 if ($dirid) {
 	echo _('Name of the document subfolder to create:'). ' ';
 } else {
