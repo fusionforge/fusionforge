@@ -157,7 +157,12 @@ class DocumentManager extends Error {
 				} else {
 					$link = '/docman/?group_id='.$this->Group->getID().'&amp;view='.$linkmenu.'&amp;dirid='.$localDg->getID();
 				}
-				echo '<li class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).'</li>';
+				$nbDocsLabel = '';
+				$nbDocs = $localDg->getNumberOfDocuments();
+				if ($nbDocs) {
+					$nbDocsLabel = ' ('.$nbDocs.')';
+				}
+				echo '<li class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel.'</li>';
 				$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
 			}
 			echo '</ul>';

@@ -407,6 +407,16 @@ class DocumentGroup extends Error {
 		}
 	}
 
+	function getNumberOfDocuments($stateId = 1) {
+		$res = db_query_params('select count(*) from docdata_vw where doc_group = $1 and group_id = $2 and stateid = $3',
+					array($this->getID(), $this->Group->getID(), $stateId));
+		if (!$res) {
+			return 0;
+		}
+		$arr = db_fetch_array($res);
+		return $arr[0];
+	}
+
 	/**
 	 * hasSubgroup - Checks if this group has a specified subgroup associated to it
 	 *
