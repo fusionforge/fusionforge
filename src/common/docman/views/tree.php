@@ -42,8 +42,17 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
  */
 $idExposeTreeIndex = 0;
 $idhtml = 0;
-
 $displayProjectName = 0;
+
+echo '<div id="documenttree" style="height:100%">';
+$dm = new DocumentManager($g);
+$dm->getJSTree($linkmenu, $displayProjectName);
+echo '<noscript>';
+echo '<ul>';
+echo '<li><a href="?group_id='.$g->getID().'&amp;view='.$linkmenu.'">/</a></il>';
+$dm->getTree($linkmenu);
+echo '</ul>';
+echo '</noscript>';
 
 if ($g->usesPlugin('projects_hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects_hierarchy');
@@ -51,25 +60,17 @@ if ($g->usesPlugin('projects_hierarchy')) {
 	if (sizeof($projectIDsArray))
 		$displayProjectName = 1;
 }
-
-echo '<div id="documenttree" style="height:100%">';
-$dm = new DocumentManager($g);
-$dm->getJSTree($linkmenu, $displayProjectName);
-echo '<noscript>';
-echo '<ul>';
-$label = '/';
-if ($displayProjectName)
-	$label = $g->getPublicName();
-
-echo '<li><a href="?group_id='.$g->getID().'&amp;view='.$linkmenu.'">'.$label.'</a></il>';
-$dm->getTree($linkmenu);
-echo '</ul>';
-echo '</noscript>';
 if (isset($projectIDsArray) && is_array($projectIDsArray)) {
+	if (sizeof($projectIDsArray))
+		echo '<h5>'._('Child projects').'</h5>';
 	foreach ($projectIDsArray as $key=>$projectID) {
 		$groupObject = group_get_object($projectID);
 		if ($groupObject->usesDocman() && $projectsHierarchy->getDocmanStatus($groupObject->getID())
 			&& forge_check_perm('docman', $groupObject->getID(), 'read')) {
+
+			echo '<hr>';
+			if ($displayProjectName)
+				$label = $g->getPublicName();
 			$dm = new DocumentManager($groupObject);
 			$dm->getJSTree($linkmenu, $displayProjectName);
 			echo '<noscript>';
