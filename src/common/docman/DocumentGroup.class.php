@@ -451,16 +451,25 @@ class DocumentGroup extends Error {
 	/**
 	 * getPath - return the complete_path
 	 *
+	 * @param	boolean	does path is url clickable (default is false)
+	 * @param	boolean	does path include this document group name ? (default is true)
 	 * @return	string	the complete_path
 	 * @access	public
 	 */
-	function getPath() {
+	function getPath($url = false, $includename = true) {
 		$returnPath = '';
 		if ($this->getParentID()) {
 			$parentDg = new DocumentGroup($this->Group, $this->getParentID());
-			$returnPath = $parentDg->getPath();
+			$returnPath = $parentDg->getPath($url);
 		}
-		return $returnPath.'/'.$this->getName();
+		if ($includename) {
+			if ($url) {
+				$returnPath .= '/'.util_make_link('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getID(),$this->getName());
+			} else {
+				$returnPath .= '/'.$this->getName();
+			}
+		}
+		return $returnPath;
 	}
 
 	/**
