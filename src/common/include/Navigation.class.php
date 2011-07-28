@@ -153,15 +153,14 @@ class Navigation extends Error {
 		$searchManager->setParametersValues($parameters);
 		$searchEngines =& $searchManager->getAvailableSearchEngines();
 
-		$res .= '<label for="searchBox-words">
-			<select name="type_of_search">';
+		$res .= '<select name="type_of_search">';
 		for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
 			$searchEngine =& $searchEngines[$i];
 			$res .= '<option value="' . $searchEngine->getType() . '"'
 				. ( $type_of_search == $searchEngine->getType() ? ' selected="selected"' : '' )
 				. '>' . $searchEngine->getLabel($parameters) . '</option>' . "\n";
 		}
-		$res .= '</select></label>';
+		$res .= '</select>';
 
 		$parameters = $searchManager->getParameters();
 		foreach($parameters AS $name => $value) {
