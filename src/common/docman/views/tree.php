@@ -70,7 +70,7 @@ echo '<div id="documenttree" style="height:100%">';
 $linkmenu = 'listfile';
 echo '<noscript>';
 //echo '<ul>';
-//echo '<li><a href="?group_id='.$group_id.'&view='.$linkmenu.'">/</a></il>';
+//echo '<li><a href="?group_id='.$group_id.'&view='.$linkmenu.'">/</a></li>';
 $dm = new DocumentManager($g);
 $dm->getTree($linkmenu);
 //echo '</ul>';
