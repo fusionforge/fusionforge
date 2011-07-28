@@ -47,29 +47,42 @@ $displayProjectName = 0;
 
 if ($g->usesPlugin('projects_hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects_hierarchy');
-	$projectIDsArray = array($g->getID());
-	$projectIDsArray = array_merge($projectIDsArray, $projectsHierarchy->getFamilyID($group_id, 'child', false, 'validated'));
-	if (sizeof($projectIDsArray) >= 2)
+	$projectIDsArray = $projectsHierarchy->getFamilyID($group_id, 'child', false, 'validated'));
+	if (sizeof($projectIDsArray))
 		$displayProjectName = 1;
-} else {
-	$projectIDsArray = array($g->getID());
 }
-echo '<div id="documenttree" style="height:100%">';
-foreach ($projectIDsArray as $key=>$projectID) {
-	$groupObject = group_get_object($projectID);
-	if ($groupObject->usesDocman() && forge_check_perm('docman', $groupObject->getID(), 'read')) {
-		$dm = new DocumentManager($groupObject);
-		$dm->getJSTree($linkmenu, $displayProjectName);
-		echo '<noscript>';
-		echo '<ul>';
-		$label = '/';
-		if ($displayProjectName)
-			$label = $groupObject->getPublicName();
 
-		echo '<li><a href="?group_id='.$groupObject->getID().'&amp;view='.$linkmenu.'">'.$label.'</a></il>';
-		$dm->getTree($linkmenu);
-		echo '</ul>';
-		echo '</noscript>';
+echo '<div id="documenttree" style="height:100%">';
+$dm = new DocumentManager($g);
+$dm->getJSTree($linkmenu, $displayProjectName);
+echo '<noscript>';
+echo '<ul>';
+$label = '/';
+if ($displayProjectName)
+	$label = $g->getPublicName();
+
+echo '<li><a href="?group_id='.$groupObject->getID().'&amp;view='.$linkmenu.'">'.$label.'</a></il>';
+$dm->getTree($linkmenu);
+echo '</ul>';
+echo '</noscript>';
+if (isset($projectIDsArray) && is_array($projectIDsArray)) {
+	foreach ($projectIDsArray as $key=>$projectID) {
+		$groupObject = group_get_object($projectID);
+		if ($groupObject->usesDocman() && $projectsHierarchy->getDocmanStatus($groupObject->getID())
+			&& forge_check_perm('docman', $groupObject->getID(), 'read')) {
+			$dm = new DocumentManager($groupObject);
+			$dm->getJSTree($linkmenu, $displayProjectName);
+			echo '<noscript>';
+			echo '<ul>';
+			$label = '/';
+			if ($displayProjectName)
+				$label = $groupObject->getPublicName();
+
+			echo '<li><a href="?group_id='.$groupObject->getID().'&amp;view='.$linkmenu.'">'.$label.'</a></il>';
+			$dm->getTree($linkmenu);
+			echo '</ul>';
+			echo '</noscript>';
+		}
 	}
 }
 echo '</div>';
