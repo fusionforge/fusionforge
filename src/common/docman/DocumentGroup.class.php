@@ -457,16 +457,16 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function getPath($url = false, $includename = true) {
-		$returnPath = '';
+		$returnPath = '/';
 		if ($this->getParentID()) {
 			$parentDg = new DocumentGroup($this->Group, $this->getParentID());
 			$returnPath = $parentDg->getPath($url);
 		}
 		if ($includename) {
 			if ($url) {
-				$returnPath .= '/'.util_make_link('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getID(),$this->getName());
+				$returnPath .= util_make_link('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getID(),$this->getName());
 			} else {
-				$returnPath .= '/'.$this->getName();
+				$returnPath .= $this->getName();
 			}
 		}
 		return $returnPath;
