@@ -50,7 +50,7 @@ class DocumentGroup extends Error {
 	 *
 	 * @param	object	Group object.
 	 * @param	array	(all fields from doc_groups) OR doc_group id from database.
-	 * @return	boolean	success.
+	 * @return	boolean	True on success.
 	 * @access	public
 	 */
 	function DocumentGroup(&$Group, $data = false) {
@@ -71,9 +71,11 @@ class DocumentGroup extends Error {
 		if ($data) {
 			if (is_array($data)) {
 				$this->data_array =& $data;
-//
-//	should verify group_id
-//
+				if ($this->data_array['group_id'] != $this->Group->getID()) {
+					$this->setError('DocumentGroup:: '. _('Group_id in db result does not match Group Object'));
+					$this->data_array = null;
+					return false;
+				}
 				return true;
 			} else {
 				if (!$this->fetchData($data)) {
@@ -237,8 +239,8 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function fetchData($id) {
-		$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group = $1',
-					array($id));
+		$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group = $1 and group_id = $2',
+					array($id, $this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid Document Folder ID'));
 			return false;

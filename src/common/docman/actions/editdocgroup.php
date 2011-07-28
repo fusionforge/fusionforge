@@ -28,20 +28,30 @@
 global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
+global $childgroup_id; // plugin projects hierarchy handler
+
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg = _('Document Manager Action Denied.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 }
 
+$urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
+
+// plugin projects_hierarchy handler
+if ($childgroup_id) {
+	$g = group_get_object($childgroup_id);
+	$urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&childgroup_id='.$childgroup_id;
+}
+
 $groupname = getStringFromRequest('groupname');
 $parent_dirid = getIntFromRequest('parent_dirid');
 $dg = new DocumentGroup($g, $dirid);
 if ($dg->isError())
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+	session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 if (!$dg->update($groupname, $parent_dirid))
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+	session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 if ($dg->getState() == 2) {
 	/**
@@ -72,8 +82,11 @@ if ($dg->getState() == 2) {
 }
 
 if (!$dg->setStateID('1'))
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+	session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-$return_msg = sprintf(_('Documents folder %s updated successfully.', $dg->getName()));
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
+$return_msg = sprintf(_('Documents folder %s updated successfully'), $dg->getName());
+if ($childgroup_id)
+	$return_msg .= ' '.sprintf(_('on project %s'), $g->getPublicName());
+
+session_redirect($urlredirect.'&feedback='.urlencode($return_msg));
 ?>

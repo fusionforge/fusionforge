@@ -63,6 +63,8 @@ $dirid = getIntFromRequest('dirid');
 if (empty($dirid))
 	$dirid = 0;
 
+$childgroup_id = getIntFromRequest('childgroup_id');
+
 /* everything sounds ok, now let do the job */
 $action = getStringFromRequest('action');
 switch ($action) {
@@ -100,22 +102,9 @@ if (session_loggedin()) {
 	}
 }
 
-$df = new DocumentFactory($g);
-if ($df->isError())
-	exit_error($df->getErrorMessage(), 'docman');
-
-$dgf = new DocumentGroupFactory($g);
-if ($dgf->isError())
-	exit_error($dgf->getErrorMessage(), 'docman');
-
-$dgh = new DocumentGroupHTML($g);
-if ($dgh->isError())
-	exit_error($dgh->getErrorMessage(), 'docman');
-
 html_use_storage();
 use_javascript('scripts/DocManController.js');
 use_javascript('/js/sortable.js');
-use_stylesheet('/jscook/ThemeXP/theme.css');
 
 $title = _('Documents for ').$g->getPublicName();
 

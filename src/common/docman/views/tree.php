@@ -27,62 +27,36 @@
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
 global $group_id; // id of the group
-global $nested_docs;
 global $linkmenu;
 global $g; // the group object
+global $dirid; // the selected directory
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
-/**
- * needed for docman_recursive_display function call
- * see utils.php for more information
- */
-$idExposeTreeIndex = 0;
-$idhtml = 0;
-$displayProjectName = 0;
+// plugin hierarchy : since tree is loaded from listfile.php, you need to be sure that
+if ($childgroup_id) {
+	$g = group_get_object($group_id);
+}
 
 echo '<div id="documenttree" style="height:100%">';
 $dm = new DocumentManager($g);
-$dm->getJSTree($linkmenu, $displayProjectName);
-echo '<noscript>';
-echo '<ul>';
-echo '<li><a href="?group_id='.$g->getID().'&amp;view='.$linkmenu.'">/</a></il>';
-$dm->getTree($linkmenu);
-echo '</ul>';
-echo '</noscript>';
-
+$dm->getTree($dirid, $linkmenu);
 if ($g->usesPlugin('projects_hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects_hierarchy');
 	$projectIDsArray = $projectsHierarchy->getFamilyID($group_id, 'child', false, 'validated');
-	if (sizeof($projectIDsArray))
-		$displayProjectName = 1;
 }
 if (isset($projectIDsArray) && is_array($projectIDsArray)) {
-	if (sizeof($projectIDsArray))
-		echo '<h5>'._('Child projects').'</h5>';
 	foreach ($projectIDsArray as $key=>$projectID) {
 		$groupObject = group_get_object($projectID);
 		if ($groupObject->usesDocman() && $projectsHierarchy->getDocmanStatus($groupObject->getID())
 			&& forge_check_perm('docman', $groupObject->getID(), 'read')) {
-
 			echo '<hr>';
-			if ($displayProjectName)
-				$label = $g->getPublicName();
+			echo '<h5>'._('Child project:').$groupObject->getPublicName().'</h5>';
 			$dm = new DocumentManager($groupObject);
-			$dm->getJSTree($linkmenu, $displayProjectName);
-			echo '<noscript>';
-			echo '<ul>';
-			$label = '/';
-			if ($displayProjectName)
-				$label = $groupObject->getPublicName();
-
-			echo '<li><a href="?group_id='.$groupObject->getID().'&amp;view='.$linkmenu.'">'.$label.'</a></il>';
-			$dm->getTree($linkmenu);
-			echo '</ul>';
-			echo '</noscript>';
+			$dm->getTree($dirid, $linkmenu);
 		}
 	}
 }

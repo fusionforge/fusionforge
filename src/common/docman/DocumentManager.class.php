@@ -126,10 +126,12 @@ class DocumentManager extends Error {
 	/**
 	 *  getTree - display recursively the content of the doc_group. Only doc_groups within doc_groups.
 	 *
+	 * @param	integer	the selected directory
 	 * @param	string	the type of link in the menu
-	 * @param	int	the doc_group to start: default 0
+	 * @param	integer	the doc_group to start: default 0
 	 */
-	function getTree($linkmenu, $docGroupId = 0) {
+	function getTree($selecteddir, $linkmenu, $docGroupId = 0) {
+		global $g; // the master group of all the groups .... anyway.
 		$dg = new DocumentGroup($this->Group);
 		switch ($linkmenu) {
 			case "listtrashfile": {
@@ -142,67 +144,23 @@ class DocumentManager extends Error {
 			}
 		}
 		$subGroupIdArr = $dg->getSubgroup($docGroupId, $stateId);
-		echo '<ul>';
-		foreach ($subGroupIdArr as $subGroupIdValue) {
-			$localDg = new DocumentGroup($this->Group, $subGroupIdValue);
-			echo '<li><a href="?group_id='.$this->Group->getID().'&amp;view='.$linkmenu.'&amp;dirid='.$localDg->getID().'">'.$localDg->getName().'</a></il>';
-			$this->getTree($linkmenu, $subGroupIdValue);
-		}
-		echo '</ul>';
-	}
-
-	function getJSTree($linkmenu, $displayProjectName) {
-		global $idExposeTreeIndex;
-		$label = '/';
-		if ($displayProjectName)
-			$label = $this->Group->getPublicName()
-		?>
-		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
-			var myThemeXPBase = "<?php echo util_make_uri('/jscook/ThemeXP/'); ?>";
-		/* ]]> */</script>
-		<script type="text/javascript" src="<?php echo util_make_uri('/jscook/JSCookTree.js'); ?>"></script>
-		<script src="<?php echo util_make_uri('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
-
-		<div id="menu<?php echo $this->Group->getID() ?>" style="overflow:auto;"></div>
-
-		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
-			var myMenu =
-				[
-					['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + myThemeXPBase + 'folder1.gif" /></i></span><span id="<?php echo $this->Group->getID().'ctItemID0' ?>" class="JSCookTreeFolderOpen"><i><img alt="" src="' + myThemeXPBase + 'folderopen1.gif" /></i></span>', '<?php echo $label ?>', '<?php echo '?group_id='.$this->Group->getID().'&view='.$linkmenu ?>', '', '', <?php $this->getJSTreeEntry(0, $linkmenu); ?>
-					]
-				];
-
-			var treeIndex = ctDraw('<?php echo 'menu'.$this->Group->getID() ?>', myMenu, ctThemeXP1, 'ThemeXP', 0, 1);
-			ctExposeTreeIndex(treeIndex, <?php echo $idExposeTreeIndex ?>);
-			var openItem = ctGetSelectedItem(treeIndex);
-			ctOpenFolder(openItem);
-		/* ]]> */</script>
-		<?php
-	}
-
-	/**
-	 * getJSTreeEntry - Recursive function to show the documents inside the groups tree : javascript enabled function
-	 *
-	 * @param	int	doc_group_id
-	 * @param	string	the type of link in the menu
-	 */
-	function getJSTreeEntry($docgroup, $linkmenu) {
-		global $nested_groups;
-		global $idExposeTreeIndex, $dirid, $idhtml;
-
-		if (is_array(@$nested_groups[$docgroup])) {
-			foreach ($nested_groups[$docgroup] as $dg) {
-				$idhtml++;
-
-				if ($dirid == $dg->getID())
-					$idExposeTreeIndex = $idhtml;
-
-				echo "
-					['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif" /></i></span>'."', '".addslashes($dg->getName())."', '?group_id=".$this->Group->getID()."&amp;view=".$linkmenu."&amp;dirid=".$dg->getID()."', '', '',";
-						$this->getJSTreeEntry($dg->getID(), $linkmenu);
-				echo ",
-					],";
+		if (sizeof($subGroupIdArr)) {
+			echo '<ul>';
+			foreach ($subGroupIdArr as $subGroupIdValue) {
+				$localDg = new DocumentGroup($this->Group, $subGroupIdValue);
+				$liclass = 'docman_li_treecontent';
+				if ($selecteddir == $localDg->getID()) {
+					$liclass = 'docman_li_treecontent_selected';
+				}
+				if ($this->Group->getID() != $g->getID()) {
+					$link = '/docman/?group_id='.$g->getID().'&amp;view='.$linkmenu.'&amp;dirid='.$localDg->getID().'&amp;childgroup_id='.$this->Group->getID();
+				} else {
+					$link = '/docman/?group_id='.$this->Group->getID().'&amp;view='.$linkmenu.'&amp;dirid='.$localDg->getID();
+				}
+				echo '<li class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).'</li>';
+				$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
 			}
+			echo '</ul>';
 		}
 	}
 }

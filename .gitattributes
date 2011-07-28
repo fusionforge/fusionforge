@@ -4745,25 +4745,6 @@ src/www/include/unicode.php -text
 src/www/js/common.js -text
 src/www/js/sortable.js -text
 src/www/js/tooltips.js -text
-src/www/jscook/ThemePanel/arrow.gif -text svneol=native#image/gif
-src/www/jscook/ThemePanel/arrowdown.gif -text svneol=native#image/gif
-src/www/jscook/ThemePanel/blank.gif -text svneol=native#image/gif
-src/www/jscook/ThemePanel/theme.css svneol=native#text/css
-src/www/jscook/ThemeXP/folder1.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/folder2.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/folderopen1.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/folderopen2.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/home.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/join.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/joinbottom.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/line.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/minus.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/minusbottom.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/page.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/plus.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/plusbottom.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/spacer.gif -text svneol=native#image/gif
-src/www/jscook/ThemeXP/theme.css svneol=native#text/css
 src/www/my/dashboard.php -text
 src/www/pm/csv.php -text
 src/www/pm/format_csv.php -text
@@ -4839,6 +4820,7 @@ src/www/themes/funky/images/category.png -text svneol=unset#image/png
 src/www/themes/funky/images/clear.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/configure-directory.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/delete-directory.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/directory-with-documents.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/directory.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/document-reserved.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/download-directory-zip.png -text svneol=unset#image/png
@@ -4972,6 +4954,7 @@ src/www/themes/gforge/images/category.png -text svneol=unset#image/png
 src/www/themes/gforge/images/clear.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/configure-directory.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/delete-directory.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/directory-with-documents.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/directory.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/document-reserved.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/download-directory-zip.png -text svneol=unset#image/png

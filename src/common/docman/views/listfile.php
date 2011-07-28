@@ -36,10 +36,29 @@ global $u; // User object
 global $g; // the Group object
 global $df;
 
+$childgroup_id = getIntFromRequest('childgroup_id');
+
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
+
+// plugin projects_hierarchy
+if ($childgroup_id) {
+	$g = group_get_object($childgroup_id);
+}
+
+$df = new DocumentFactory($g);
+if ($df->isError())
+	exit_error($df->getErrorMessage(), 'docman');
+
+$dgf = new DocumentGroupFactory($g);
+if ($dgf->isError())
+	exit_error($dgf->getErrorMessage(), 'docman');
+
+$dgh = new DocumentGroupHTML($g);
+if ($dgh->isError())
+	exit_error($dgh->getErrorMessage(), 'docman');
 
 $df->setDocGroupID($dirid);
 
@@ -115,7 +134,7 @@ jQuery(document).ready(function() {
 /* ]]> */</script>
 
 <?php
-echo '<div id="left" style="float:left; width:17%; min-width: 50px;">';
+echo '<div id="left" style="float:left; width:17%; min-width: 50px; overflow: auto;">';
 include ($gfcommon.'docman/views/tree.php');
 echo '</div>';
 echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';

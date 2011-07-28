@@ -227,6 +227,16 @@
 	padding: 3px;
 }
 
+.docman_li_treecontent {
+	list-style-image: url('/themes/funky/images/docman/directory.png');
+	margin: 2px;
+}
+
+.docman_li_treecontent_selected {
+	list-style-image: url('/themes/funky/images/docman/directory-with-documents.png');
+	margin: 2px;
+}
+
 /*
     tracker
 */
