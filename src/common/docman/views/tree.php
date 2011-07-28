@@ -47,7 +47,7 @@ $displayProjectName = 0;
 
 if ($g->usesPlugin('projects_hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects_hierarchy');
-	$projectIDsArray = $projectsHierarchy->getFamilyID($group_id, 'child', false, 'validated'));
+	$projectIDsArray = $projectsHierarchy->getFamilyID($group_id, 'child', false, 'validated');
 	if (sizeof($projectIDsArray))
 		$displayProjectName = 1;
 }
@@ -61,7 +61,7 @@ $label = '/';
 if ($displayProjectName)
 	$label = $g->getPublicName();
 
-echo '<li><a href="?group_id='.$groupObject->getID().'&amp;view='.$linkmenu.'">'.$label.'</a></il>';
+echo '<li><a href="?group_id='.$g->getID().'&amp;view='.$linkmenu.'">'.$label.'</a></il>';
 $dm->getTree($linkmenu);
 echo '</ul>';
 echo '</noscript>';
