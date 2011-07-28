@@ -641,16 +641,9 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @access	public
 	 */
 	function son_box($group_id, $name, $selected = 'xzxzxz') {
-		$sons = $this->getFamily($group_id, 'child', true, 'any');
-		$parent = $this->getFamily($group_id, 'parent', true, 'any');
-		$skipped = array();
+		$sons = $this->getFamilyID($group_id, 'child', true, 'any');
+		$parent = $this->getFamilyID($group_id, 'parent', true, 'any');
 		$family = array_merge($parent, $sons);
-		if (sizeof($family)) {
-			//TODO : need to fix this. We only get parent here....
-			foreach ($family as $element) {
-				$skipped[] = $element[0];
-			}
-		}
 		$son = db_query_params('SELECT group_id, group_name FROM groups
 					WHERE status = $1
 					AND group_id != $2
@@ -659,7 +652,7 @@ class projects_hierarchyPlugin extends Plugin {
 					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $4);',
 					array('A',
 						$group_id,
-						db_int_array_to_any_clause($skipped),
+						db_int_array_to_any_clause($family),
 						$this->name));
 		return html_build_select_box($son, $name, $selected, false);
 	}
