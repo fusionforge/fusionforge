@@ -30,11 +30,9 @@
 /* global variables used */
 global $group_id; // id of the group
 global $dirid; // id of doc_group
-global $dgf; // document group factory
 global $HTML; // Layout object
 global $u; // User object
 global $g; // the Group object
-global $df;
 
 $childgroup_id = getIntFromRequest('childgroup_id');
 

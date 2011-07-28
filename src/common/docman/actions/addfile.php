@@ -29,6 +29,7 @@
 /* global variables used */
 global $g; //group object
 global $group_id; // id of group
+global $dirid;
 
 if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$return_msg = _('Document Manager Action Denied.');

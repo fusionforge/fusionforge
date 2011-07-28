@@ -30,12 +30,27 @@
 global $g; // group object
 global $group_id; // id of the group
 global $dirid; //id of the doc_group
-global $dgh; // document group html object
-global $gdf; // document grou factory object
+
+// plugin projects_hierarchy
+$actionurl = '?group_id='.$group_id.'&amp;action=addfile&amp;dirid='.$dirid;
+$redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
+if ($childgroup_id) {
+	$g = group_get_object($childgroup_id);
+	$actionurl .= '&amp;childgroup_id='.$childgroup_id;
+	$redirecturl .= '&amp;childgroup_id='.$childgroup_id;
+}
+
+$dgf = new DocumentGroupFactory($g);
+if ($dgf->isError())
+	exit_error($dgf->getErrorMessage(), 'docman');
+
+$dgh = new DocumentGroupHTML($g);
+if ($dgh->isError())
+	exit_error($dgh->getErrorMessage(), 'docman');
 
 if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
 }
 
 echo '<div class="docmanDivIncluded">';
@@ -90,10 +105,7 @@ if ($dgf->getNested() == NULL) {
 	if ($g->useDocmanSearch())
 		echo '<p>'._('Both fields are used by the document search engine.').'</p>';
 
-	echo '<form name="adddata" action="?group_id='.$group_id.'&amp;action=addfile" method="post" enctype="multipart/form-data">';
-	if ($dirid) {
-		echo '<input type="hidden" name="doc_group" value="'.$dirid.'" />';
-	}
+	echo '<form name="adddata" action="'.$actionurl.'" method="post" enctype="multipart/form-data">';
 	echo '<table>
 				<tr>
 					<td style="text-align:right;">
