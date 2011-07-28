@@ -196,8 +196,8 @@ class DocumentGroup extends Error {
 	 * @return	boolean	success
 	 */
 	function fetchData($id) {
-		$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group=$1',
-					array($id));
+		$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group=$1 and group_id = $2',
+					array($id, $this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid Document Directory ID'));
 			return false;
