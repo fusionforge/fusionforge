@@ -164,7 +164,7 @@ class DocumentManager extends Error {
 				} else {
 					$nbDocsLabel .= '-';
 				}
-				if (forge_check_perm('docman', $group_id, 'approve')) {
+				if (forge_check_perm('docman', $this->Group->getID(), 'approve')) {
 					$nbDocsPending = $localDg->getNumberOfDocuments(3);
 					if ($nbDocsPending) {
 						$nbDocsLabel .= '/'.$nbDocsPending;
