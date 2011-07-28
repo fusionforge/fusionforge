@@ -157,23 +157,16 @@ class DocumentManager extends Error {
 				} else {
 					$link = '/docman/?group_id='.$this->Group->getID().'&amp;view='.$linkmenu.'&amp;dirid='.$localDg->getID();
 				}
-				$nbDocsLabel = ' (';
+				$nbDocsLabel = '';
 				$nbDocs = $localDg->getNumberOfDocuments();
-				if ($nbDocs) {
-					$nbDocsLabel .= $nbDocs;
-				} else {
-					$nbDocsLabel .= '-';
-				}
-				if (forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+				if (forge_check_perm('docman', $this->Group->getID(), 'approve'))
 					$nbDocsPending = $localDg->getNumberOfDocuments(3);
-					if ($nbDocsPending) {
-						$nbDocsLabel .= '/'.$nbDocsPending;
-					} else {
-						$nbDocsLabel .= '/-';
-					}
-				}
-				$nbDocsLabel .= ')';
 
+				if ($nbDocs && (!isset($nbDocsPending) || $nbDocsPending == 0)) {
+					$nbDocsLabel = '('.$nbDocs.')';
+				} elseif (isset($nbDocsPending) && $nbDocsPending) {
+					$nbDocsLabel = '('.$nbDocs.'/'.$nbDocsPending.')';
+				}
 				echo '<li class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel.'</li>';
 				$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
 			}
