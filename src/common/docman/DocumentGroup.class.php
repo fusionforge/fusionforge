@@ -464,7 +464,7 @@ class DocumentGroup extends Error {
 		}
 		if ($includename) {
 			if ($url) {
-				$returnPath .= util_make_link('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getID(),$this->getName());
+				$returnPath .= util_make_link('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getID(),$this->getName(), array('title' => _('Browse this folder'), 'class' => 'tabtitle'));
 			} else {
 				$returnPath .= $this->getName();
 			}
