@@ -157,11 +157,23 @@ class DocumentManager extends Error {
 				} else {
 					$link = '/docman/?group_id='.$this->Group->getID().'&amp;view='.$linkmenu.'&amp;dirid='.$localDg->getID();
 				}
-				$nbDocsLabel = '';
+				$nbDocsLabel = ' (';
 				$nbDocs = $localDg->getNumberOfDocuments();
 				if ($nbDocs) {
-					$nbDocsLabel = ' ('.$nbDocs.')';
+					$nbDocsLabel .= $nbDocs;
+				} else {
+					$nbDocsLabel .= '-';
 				}
+				if (forge_check_perm('docman', $group_id, 'approve')) {
+					$nbDocsPending = $localDg->getNumberOfDocuments(3);
+					if ($nbDocsPending) {
+						$nbDocsLabel .= '/'.$nbDocsPending;
+					} else {
+						$nbDocsLabel .= '/-';
+					}
+				}
+				$nbDocsLabel .= ')';
+
 				echo '<li class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel.'</li>';
 				$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
 			}
