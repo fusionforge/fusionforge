@@ -27,23 +27,36 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $df; // document factory
-global $dgf; // document group factory
 global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $g; // the Group object
+
+$childgroup_id = getIntFromRequest('childgroup_id');
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
+// plugin projects_hierarchy
+if ($childgroup_id) {
+	$g = group_get_object($childgroup_id);
+}
+
+$df = new DocumentFactory($g);
+if ($df->isError())
+	exit_error($df->getErrorMessage(), 'docman');
+
+$dgf = new DocumentGroupFactory($g);
+if ($dgf->isError())
+	exit_error($dgf->getErrorMessage(), 'docman');
+
+$dgh = new DocumentGroupHTML($g);
+if ($dgh->isError())
+	exit_error($dgh->getErrorMessage(), 'docman');
+
 $df->setStateID('2');
 
-/**
- * var must be named d_arr & nested_groups
- * because used by tree.php
- */
 $d_arr =& $df->getDocuments();
 $nested_groups =& $dgf->getNested('2');
 $linkmenu = 'listtrashfile';
