@@ -78,7 +78,7 @@ class projects_hierarchyPlugin extends Plugin {
 				break;
 			}
 			case "project_admin_plugins": {
-				// this displays the link in the project admin options page to it's  MantisBT administration
+				// this displays the link in the project admin options page to it's administration
 				$group_id = $params['group_id'];
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
@@ -235,6 +235,16 @@ class projects_hierarchyPlugin extends Plugin {
 		return $localFamily;
 	}
 
+	/**
+	 * getFamilyID - returns a flatted array containing all ids of the family, based on getFamily function.
+	 *
+	 * @param	integer	group_id to search for
+	 * @param	string	parent or child ?
+	 * @param	boolean	recurcive or not ?
+	 * @param	string	validated or pending or any relation ?
+	 * @return	array	flatted array with group_id of parent or childs
+	 * @access	public
+	 */
 	function getFamilyID($group_id, $order, $deep = false, $status = 'any') {
 		$familyFlatArray = array();
 		$familyArray = $this->getFamily($group_id, $order, $deep, $status);
@@ -242,6 +252,13 @@ class projects_hierarchyPlugin extends Plugin {
 		return $familyFlatArray;
 	}
 
+	/**
+	 * getDocmanStatus - returns the docman status for this project
+	 *
+	 * @param	integer	group_id
+	 * @return	boolean	true/false
+	 * @access	public
+	 */
 	function getDocmanStatus($group_id) {
 		$res = db_query_params('SELECT docman FROM plugin_projects_hierarchy WHERE project_id = $1 limit 1',
 					array($group_id));
@@ -315,6 +332,13 @@ class projects_hierarchyPlugin extends Plugin {
 		return true;
 	}
 
+	/**
+	 * add - add a new group_id using the plugin
+	 *
+	 * @param	integer	group_id
+	 * @return	boolean	true on success
+	 * @access	public
+	 */
 	function add($group_id) {
 		if (!$this->exists($group_id)) {
 			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id) VALUES ($1)', array($group_id));
@@ -325,6 +349,13 @@ class projects_hierarchyPlugin extends Plugin {
 		return true;
 	}
 
+	/**
+	 * remove - remove group_id using the plugin
+	 *
+	 * @param	integer	group_id
+	 * @return	boolean	true on success
+	 * @access	public
+	 */
 	function remove($group_id) {
 		if ($this->exists($group_id)) {
 			db_begin();
@@ -345,6 +376,14 @@ class projects_hierarchyPlugin extends Plugin {
 		return true;
 	}
 
+	/**
+	 * addChild - add a new child to this project
+	 *
+	 * @param	integer	group_id
+	 * @param	integer	sub_group_id
+	 * @return	boolean	true on success
+	 * @access	public
+	 */
 	function addChild($project_id, $sub_project_id) {
 		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
 			if (!$this->hasRelation($project_id, $sub_project_id)) {
@@ -359,6 +398,14 @@ class projects_hierarchyPlugin extends Plugin {
 		return false;
 	}
 
+	/**
+	 * removeChild - remove a child to this project
+	 *
+	 * @param	integer	group_id
+	 * @param	integer	sub_group_id
+	 * @return	boolean	true on success
+	 * @access	public
+	 */
 	function removeChild($project_id, $sub_project_id) {
 		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
 			if ($this->hasRelation($project_id, $sub_project_id)) {
@@ -374,6 +421,14 @@ class projects_hierarchyPlugin extends Plugin {
 		return false;
 	}
 
+	/**
+	 * removeParent - remove a parent to this project
+	 *
+	 * @param	integer	group_id
+	 * @param	integer	sub_group_id
+	 * @return	boolean	true on success
+	 * @access	public
+	 */
 	function removeParent($project_id, $sub_project_id) {
 		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
 			if ($this->hasRelation($project_id, $sub_project_id)) {
@@ -389,6 +444,14 @@ class projects_hierarchyPlugin extends Plugin {
 		return false;
 	}
 
+	/**
+	 * hasRelation - check if there is a relation child->parent or parent->child between 2 projects
+	 *
+	 * @param	integer	group_id
+	 * @param	integer	sub_group_id
+	 * @return	boolean	true on success
+	 * @access	public
+	 */
 	function hasRelation($project_id, $sub_project_id) {
 		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
 			$res = db_query_params('SELECT * FROM plugin_projects_hierarchy_relationship
@@ -401,6 +464,15 @@ class projects_hierarchyPlugin extends Plugin {
 		return false;
 	}
 
+	/**
+	 * validateRelationship - validate or reject a relation between 2 projects
+	 *
+	 * @param	integer	group_id
+	 * @param	integer	sub_group_id
+	 * @param	integer	status of the relation
+	 * @return	boolean	true on success
+	 * @access	public
+	 */
 	function validateRelationship($project_id, $sub_project_id, $status) {
 		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
 			if ($this->hasRelation($project_id, $sub_project_id)) {
@@ -430,6 +502,13 @@ class projects_hierarchyPlugin extends Plugin {
 		return false;
 	}
 
+	/**
+	 * exists - if this project use the plugin
+	 *
+	 * @param	integer	group_id
+	 * @return	boolean	true on success
+	 * @access	public
+	 */
 	function exists($group_id) {
 		$res = db_query_params('SELECT project_id FROM plugin_projects_hierarchy WHERE project_id = $1', array($group_id));
 		if (!$res)
@@ -441,6 +520,12 @@ class projects_hierarchyPlugin extends Plugin {
 		return false;
 	}
 
+	/**
+	 * getAdminOptionLink - return the admin link url
+	 *
+	 * @return	string	html url
+	 * @access	public
+	 */
 	function getAdminOptionLink() {
 		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name,_('Global Hierarchy admin'));
 	}
@@ -469,6 +554,12 @@ class projects_hierarchyPlugin extends Plugin {
 		return $returned;
 	}
 
+	/**
+	 * getGlobalAdminView - display the global configuration view
+	 *
+	 * @return	boolean	True
+	 * @access	public
+	 */
 	function getGlobalAdminView() {
 		global $gfplugins, $use_tooltips;
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
@@ -506,6 +597,9 @@ class projects_hierarchyPlugin extends Plugin {
 		return $returnArr;
 	}
 
+	/**
+	 * getFooter - display footer
+	 */
 	function getFooter() {
 		site_admin_footer(array());
 	}
@@ -537,6 +631,15 @@ class projects_hierarchyPlugin extends Plugin {
 		return true;
 	}
 
+	/**
+	 * son_box - display a select box for son selection
+	 *
+	 * @param	integer	group_id
+	 * @param	string
+	 * @param	string	selected value
+	 * @return	string	html box
+	 * @access	public
+	 */
 	function son_box($group_id, $name, $selected = 'xzxzxz') {
 		$sons = $this->getFamily($group_id, 'child', true, 'any');
 		$parent = $this->getFamily($group_id, 'parent', true, 'any');
