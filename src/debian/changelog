@@ -2,12 +2,19 @@ fusionforge (5.1-0) UNRELEASED; urgency=low
 
   [ Roland Mas ]
   * New upstream release.
+  * Fixed chroot generation error in case of some files not always present
+    (closes: #634169).
+  * Apache configuration is now split into several snippets rather than in
+    one monolithic file (closes: #568532).
+  * Runtime configuration is also now stored into a set of *.ini files
+    marked as conffiles, so local customizations aren't overwritten
+    (closes: #599274).
 
   [ Thorsten Glaser ]
   * Update copyright file
   * Fix broken link in /usr/share/fusionforge (Evolvis [#1638])
 
- -- Roland Mas <lolando@debian.org>  Fri, 01 Jul 2011 14:24:31 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 29 Jul 2011 18:21:48 +0200
 
 fusionforge (5.0.3-1) unstable; urgency=low
 
