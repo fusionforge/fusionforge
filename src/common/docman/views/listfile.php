@@ -160,7 +160,7 @@ if ($DocGroupName) {
 		echo '<a href="#" class="tabtitle" id="docman-additem" title="'. _('Add a new item in this folder') . '" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'additem')). '</a>';
 	}
 
-	$numFiles = $ndg->getNumberOfDocuments();
+	$numFiles = $ndg->getNumberOfDocuments(1);
 	if (forge_check_perm('docman', $group_id, 'approve'))
 		$numPendingFiles = $ndg->getNumberOfDocuments(3);
 	if ($numFiles || (isset($numPendingFiles) && $numPendingFiles))
