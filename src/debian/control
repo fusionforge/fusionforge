@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Uploaders: Christian Bayle <bayle@debian.org>
 Build-Depends-Indep: sharutils, docbook-to-man, devscripts, gettext
-Build-Depends: debhelper (>= 7), dpatch, perl
+Build-Depends: debhelper (>= 7), dpatch, perl, confget
 Standards-Version: 3.9.1
 Homepage: http://fusionforge.org/
 Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/
@@ -318,7 +318,7 @@ Description: Extratabs plugin for FusionForge
 
 Package: fusionforge-plugin-forumml
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, php5-cli, php-mail, php-mail-mime, php-mail-mbox, php-mail-mimedecode, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, fusionforge-plugin-mailman, php5-cli, php-mail, php-mail-mime, php-mail-mbox, php-mail-mimedecode, python-iniparse, ${misc:Depends}
 Description: collaborative development tool - ForumML plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -375,7 +375,7 @@ Description: collaborative development tool - Hudson plugin
 
 Package: fusionforge-plugin-mailman
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, apache2 (>= 2.0.52), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, mailman (>= 2.1.13), python-psycopg2, python-mysqldb, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, apache2 (>= 2.0.52), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, mailman (>= 2.1.13), python-psycopg2, python-mysqldb, python-iniparse, ${misc:Depends}
 Provides: gforge-lists
 Conflicts: gforge-lists
 Description: collaborative development tool - mailing-lists plugin (using Mailman)
