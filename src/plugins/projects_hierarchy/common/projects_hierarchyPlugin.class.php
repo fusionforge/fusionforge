@@ -111,7 +111,7 @@ class projects_hierarchyPlugin extends Plugin {
 			<script type="text/javascript" src="/plugins/projects_hierarchy/dtree.js"></script>';
 	}
 
-	function buildTree($private = false) {
+	function buildTree() {
 		global $project_name;
 		$res = db_query_params('select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name
 					from groups as p1,groups as p2,plugin_projects_hierarchy_relationship
