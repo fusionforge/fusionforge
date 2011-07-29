@@ -158,8 +158,8 @@ class DocumentManager extends Error {
 					$link = '/docman/?group_id='.$this->Group->getID().'&amp;view='.$linkmenu.'&amp;dirid='.$localDg->getID();
 				}
 				$nbDocsLabel = '';
-				$nbDocs = $localDg->getNumberOfDocuments();
-				if (forge_check_perm('docman', $this->Group->getID(), 'approve'))
+				$nbDocs = $localDg->getNumberOfDocuments($stateId);
+				if ($stateId == 1 && forge_check_perm('docman', $this->Group->getID(), 'approve'))
 					$nbDocsPending = $localDg->getNumberOfDocuments(3);
 
 				if ($nbDocs && (!isset($nbDocsPending) || $nbDocsPending == 0)) {

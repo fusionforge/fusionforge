@@ -246,6 +246,7 @@ class DocumentGroup extends Error {
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
+		$this->data_array['numberFiles'] = array();
 		db_free_result($res);
 		return true;
 	}
@@ -408,12 +409,18 @@ class DocumentGroup extends Error {
 	}
 
 	function getNumberOfDocuments($stateId = 1) {
+		if (isset($this->data_array['numberFiles'][$stateId])) {
+			echo "from cache";
+			return $this->data_array['numberFiles'][$stateId];
+		}
+
 		$res = db_query_params('select count(*) from docdata_vw where doc_group = $1 and group_id = $2 and stateid = $3',
 					array($this->getID(), $this->Group->getID(), $stateId));
 		if (!$res) {
 			return 0;
 		}
 		$arr = db_fetch_array($res);
+		$this->data_array['numberFiles'][$stateId] = $arr[0];
 		return $arr[0];
 	}
 
