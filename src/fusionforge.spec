@@ -783,7 +783,6 @@ fi
 %{FORGE_DIR}/www/frs
 %{FORGE_DIR}/www/images
 %{FORGE_DIR}/www/include
-%{FORGE_DIR}/www/jscook
 %{FORGE_DIR}/www/js
 %{FORGE_DIR}/www/mail
 %{FORGE_DIR}/www/my
