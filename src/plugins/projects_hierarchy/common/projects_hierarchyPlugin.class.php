@@ -111,7 +111,7 @@ class projects_hierarchyPlugin extends Plugin {
 			<script type="text/javascript" src="/plugins/projects_hierarchy/dtree.js"></script>';
 	}
 
-	function buildTree() {
+	function buildTree($private = false) {
 		global $project_name;
 		$res = db_query_params('select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name
 					from groups as p1,groups as p2,plugin_projects_hierarchy_relationship
@@ -126,12 +126,14 @@ class projects_hierarchyPlugin extends Plugin {
 		// value = list of sons
 		$tree = array();
 		while ($row = db_fetch_array($res)) {
-			$tree[$row['father_id']][] = $row['son_id'];
-			//get the unix name of the project
-			$project_name[$row['father_id']][0] = $row['father_name'];
-			$project_name[$row['son_id']][0] = $row['son_name'];
-			$project_name[$row['father_id']][1] = $row['father_unix_name'];
-			$project_name[$row['son_id']][1] = $row['son_unix_name'];
+			if (forge_check_perm('project_read', $row['father_id'])) {
+				$tree[$row['father_id']][] = $row['son_id'];
+				//get the unix name of the project
+				$project_name[$row['father_id']][0] = $row['father_name'];
+				$project_name[$row['son_id']][0] = $row['son_name'];
+				$project_name[$row['father_id']][1] = $row['father_unix_name'];
+				$project_name[$row['son_id']][1] = $row['son_unix_name'];
+			}
 		}
 		return $tree;
 	}
@@ -154,19 +156,21 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 		}
 
-		$returnTree .= '<table ><tr><td>';
-		$returnTree .= '<script type="text/javascript">';
-		$returnTree .= 'd = new dTree(\'d\');';
-		$returnTree .= 'd.add(0,-1,\'Project Tree\');';
-		reset($arbre);
-		//construction automatique de l'arbre format : (num_fils, num_pere,nom,nom_unix)
-		while (list($key2, $sons2) = each($arbre)) {
-			$returnTree .= "d.add('".$key2."','".$sons2."','".$project_name[$key2][0]."','".util_make_url( '/projects/'.$project_name[$key2][1] .'/', $project_name[$key2][1] ) ."');";
-		}
+		if (sizeof($arbre)) {
+			$returnTree .= '<table ><tr><td>';
+			$returnTree .= '<script type="text/javascript">';
+			$returnTree .= 'd = new dTree(\'d\');';
+			$returnTree .= 'd.add(0,-1,\'Project Tree\');';
+			reset($arbre);
+			//construction automatique de l'arbre format : (num_fils, num_pere,nom,nom_unix)
+			while (list($key2, $sons2) = each($arbre)) {
+				$returnTree .= "d.add('".$key2."','".$sons2."','".$project_name[$key2][0]."','".util_make_url( '/projects/'.$project_name[$key2][1] .'/', $project_name[$key2][1] ) ."');";
+			}
 
-		$returnTree .= 'document.write(d);';
-		$returnTree .= '</script>';
-		$returnTree .= '</td></tr></table>';
+			$returnTree .= 'document.write(d);';
+			$returnTree .= '</script>';
+			$returnTree .= '</td></tr></table>';
+		}
 		return $returnTree;
 	}
 
