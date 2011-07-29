@@ -139,7 +139,7 @@ echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; b
 echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
 if ($DocGroupName) {
 	echo '<h4>'._('Path:').'&nbsp;<i>'.$dgpath.'</i></h4>';
-	echo '<h3 class="docman_h3" >'._('Document Folder:').'<i>'.$DocGroupName.'</i>&nbsp;';
+	echo '<h3 class="docman_h3" >'._('Document Folder:').' <i>'.$DocGroupName.'</i>&nbsp;';
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		echo '<a href="#" class="tabtitle" id="docman-editdirectory" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 		echo '<a href="?group_id='.$group_id.'&amp;action=trashdir&amp;dirid='.$dirid.'" class="tabtitle" id="docman-trashdirectory" title="'._('Move this folder and his content to trash').'" >'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';

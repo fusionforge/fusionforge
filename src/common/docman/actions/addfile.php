@@ -31,11 +31,6 @@ global $g; //group object
 global $group_id; // id of group
 global $dirid;
 
-if (!forge_check_perm('docman', $group_id, 'submit')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
-}
-
 $doc_group = getIntFromRequest('doc_group');
 $title = getStringFromRequest('title');
 $description = getStringFromRequest('description');
@@ -46,14 +41,37 @@ $type = getStringFromRequest('type');
 $name = getStringFromRequest('name');
 $stateid = getIntFromRequest('stateid');
 
+if (!$doc_group) {
+	$doc_group = $dirid;
+}
+
+$baseurl = '/docman/?group_id='.$group_id;
+$redirecturl = $baseurl.'&view=listfile&dirid='.$doc_group;
+
+// plugin hierarchy handler
+$childgroup_id = getIntFromRequest('childgroup_id');
+if ($childgroup_id) {
+	$redirecturl .= '&childgroup_id='.$childgroup_id;
+	if (!forge_check_perm('docman', $childgroup_id, 'submit')) {
+		$return_msg = _('Document Manager Action Denied.');
+		session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
+	}
+	$g = group_get_object($childgroup_id);
+}
+
+if (!forge_check_perm('docman', $group_id, 'submit')) {
+	$return_msg = _('Document Manager Action Denied.');
+	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
+}
+
 if ($error_msg) {
-	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
+	session_redirect($baseurl.'&error_msg='.urlencode($error_msg));
 }
 
 if (!$doc_group || $doc_group == 100) {
 	//cannot add a doc unless an appropriate group is provided
 	$return_msg = _('No valid Directory was selected.');
-	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
+	session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 }
 
 if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name))) {
@@ -71,9 +89,9 @@ $d = new Document($g);
 
 if (!$d || !is_object($d)) {
 	$return_msg= _('Error getting blank document.');
-	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
+	session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 } elseif ($d->isError()) {
-	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($d->getErrorMessage()));
+	session_redirect($baseurl.'&error_msg='.urlencode($d->getErrorMessage()));
 }
 
 switch ($type) {
@@ -84,7 +102,7 @@ switch ($type) {
 		$data = $sanitizer->SanitizeHtml($data);
 		if (strlen($data)<1) {
 			$return_msg = _('Error getting blank document.');
-			session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
+			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 		}
 		$uploaded_data_type = 'text/html';
 		break;
@@ -98,7 +116,7 @@ switch ($type) {
 	case 'httpupload' : {
 		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 		$return_msg = _('Invalid file name.');
-			session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
+			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 		}
 		if (function_exists('finfo_open')) {
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -114,7 +132,7 @@ switch ($type) {
 	case 'manualupload' : {
 		if (!forge_get_config('use_manual_uploads')) {
 			$return_msg = _('Manual uploads disabled.');
-			session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
+			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 		}
 
 		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
@@ -122,7 +140,7 @@ switch ($type) {
 
 		if (!util_is_valid_filename($manual_path) || !is_file($filename)) {
 		$return_msg = _('Invalid file name.');
-			session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
+			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 		}
 
 		if (function_exists('finfo_open')) {
@@ -139,15 +157,15 @@ switch ($type) {
 	}
 	default: {
 		$return_msg = _('Unknown type submission.');
-		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
+		session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 	}
 }
 
 if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $title, $description, $stateid)) {
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&error_msg='.urlencode($d->getErrorMessage()));
+		session_redirect($redirecturl.'&error_msg='.urlencode($d->getErrorMessage()));
 	} else {
-		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($d->getErrorMessage()));
+		session_redirect($baseurl.'&error_msg='.urlencode($d->getErrorMessage()));
 	}
 } else {
 	if ($type == 'editor') {
@@ -156,10 +174,10 @@ if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $ti
 	}
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		$return_msg = sprintf(_('Document %s submitted successfully.'),$d->getFilename());
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&feedback='.urlencode($return_msg));
+		session_redirect($redirecturl.'&feedback='.urlencode($return_msg));
 	} else {
 		$return_msg = sprintf(_('Document %s has been successfully uploaded and is waiting to be approved.'),$d->getFilename());
-		session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
+		session_redirect($baseurl.'&feedback='.urlencode($return_msg));
 	}
 }
 ?>
