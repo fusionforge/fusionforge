@@ -9,12 +9,15 @@ fusionforge (5.1-0) UNRELEASED; urgency=low
   * Runtime configuration is also now stored into a set of *.ini files
     marked as conffiles, so local customizations aren't overwritten
     (closes: #599274).
+  * Add a /usr/share/gforge/bin/fix_default_role.php script to run if
+    upgrades from really old instances fail when migrating permissions for
+    users having the "Default" role in their projects (closes: #561351).
 
   [ Thorsten Glaser ]
   * Update copyright file
   * Fix broken link in /usr/share/fusionforge (Evolvis [#1638])
 
- -- Roland Mas <lolando@debian.org>  Fri, 29 Jul 2011 18:21:48 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 29 Jul 2011 18:40:00 +0200
 
 fusionforge (5.0.3-1) unstable; urgency=low
 
