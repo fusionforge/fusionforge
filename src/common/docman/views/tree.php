@@ -36,11 +36,6 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
-// plugin hierarchy : since tree is loaded from listfile.php, you need to be sure that
-if ($childgroup_id) {
-	$g = group_get_object($group_id);
-}
-
 echo '<div id="documenttree" style="height:100%">';
 $dm = new DocumentManager($g);
 $dm->getTree($dirid, $linkmenu);

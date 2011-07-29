@@ -34,6 +34,7 @@ global $HTML; // Layout object
 global $u; // User object
 global $g; // the Group object
 
+$linkmenu = 'listfile';
 $baseredirecturl = '/docman/?group_id='.$group_id;
 $redirecturl = $baseredirecturl.'&view=listfile&dirid='.$dirid;
 $actionlistfileurl = '?group_id='.$group_id.'&amp;view=listfile&amp;dirid='.$dirid;
@@ -41,6 +42,10 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
 }
+
+echo '<div id="left" style="float:left; width:17%; min-width: 50px; overflow: auto;">';
+include ($gfcommon.'docman/views/tree.php');
+echo '</div>';
 
 // plugin projects_hierarchy
 $childgroup_id = getIntFromRequest('childgroup_id');
@@ -74,7 +79,6 @@ $df->setDocGroupID($dirid);
  */
 $d_arr =& $df->getDocuments();
 $nested_groups = $dgf->getNested();
-$linkmenu = 'listfile';
 
 $nested_docs = array();
 $DocGroupName = 0;
@@ -140,9 +144,6 @@ jQuery(document).ready(function() {
 /* ]]> */</script>
 
 <?php
-echo '<div id="left" style="float:left; width:17%; min-width: 50px; overflow: auto;">';
-include ($gfcommon.'docman/views/tree.php');
-echo '</div>';
 echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
 echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
 if ($DocGroupName) {
