@@ -34,15 +34,23 @@ global $HTML; // Layout object
 global $u; // User object
 global $g; // the Group object
 
-$childgroup_id = getIntFromRequest('childgroup_id');
-
+$baseredirecturl = '/docman/?group_id='.$group_id;
+$redirecturl = $baseredirecturl.'&view=listfile&dirid='.$dirid;
+$actionlistfileurl = '?group_id='.$group_id.'&amp;view=listfile&amp;dirid='.$dirid;
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+	session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
 }
 
 // plugin projects_hierarchy
+$childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
+	if (!forge_check_perm('docman', $childgroup_id, 'read')) {
+		$return_msg= _('Document Manager Access Denied');
+		session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
+	}
+	$redirecturl .= '&childgroup_id='.$childgroup_id;
+	$actionlistfileurl .= '&childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
 }
 
@@ -76,11 +84,11 @@ if ($dirid) {
 	$DocGroupName = $ndg->getName();
 	$dgpath = $ndg->getPath(true, false);
 	if (!$DocGroupName) {
-		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
+		session_redirect($baseredirecturl.'&error_msg='.urlencode($g->getErrorMessage()));
 	}
 	if ($ndg->getState() != 1) {
 		$error_msg = _('Invalid folder');
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&error_msg='.urlencode($error_msg));
+		session_redirect($baseredirecturl.'&view=listfile&error_msg='.urlencode($error_msg));
 	}
 }
 
@@ -142,9 +150,9 @@ if ($DocGroupName) {
 	echo '<h3 class="docman_h3" >'._('Document Folder:').' <i>'.$DocGroupName.'</i>&nbsp;';
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		echo '<a href="#" class="tabtitle" id="docman-editdirectory" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-		echo '<a href="?group_id='.$group_id.'&amp;action=trashdir&amp;dirid='.$dirid.'" class="tabtitle" id="docman-trashdirectory" title="'._('Move this folder and his content to trash').'" >'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
+		echo '<a href="'.$actionlistfileurl.'&amp;action=trashdir" class="tabtitle" id="docman-trashdirectory" title="'._('Move this folder and his content to trash').'" >'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
 		if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]) && !isset($nested_pending_docs[$dirid])) {
-			echo '<a href="?group_id='.$group_id.'&amp;action=deldir&amp;dirid='.$dirid.'" class="tabtitle" id="docman-deletedirectory" title="'._('Permanently delete this folder').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+			echo '<a href="'.$actionlistfileurl.'&amp;action=deldir" class="tabtitle" id="docman-deletedirectory" title="'._('Permanently delete this folder').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 		}
 	}
 
@@ -265,20 +273,20 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				}
 			}
 			if (!$d->getLocked() && !$d->getReserved()) {
-				echo '<a class="tabtitle-ne" href="?group_id='.$group_id.'&amp;action=trashfile&amp;view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
+				echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=trashfile&fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
 				if (session_loggedin()) {
 					echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListFile.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
-					echo '<a class="tabtitle-ne" href="?group_id='.$group_id.'&amp;action=reservefile&amp;view=listfile&amp;dirid='.$dirid.'&amp;fileid='.$d->getID().'" title="'. _('Reserve this document for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
+					echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=reservefile&amp;fileid='.$d->getID().'" title="'. _('Reserve this document for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
 				}
 			} else {
 				if (session_loggedin() && $d->getReservedBy() != $u->getID()) {
 					if (forge_check_perm('docman', $group_id, 'admin')) {
-						echo '<a class="docman-enforcereservation" href="?group_id='.$group_id.'&amp;action=enforcereserve&amp;view=listfile&amp;dirid='.$dirid.'&amp;fileid='.$d->getID().'" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
+						echo '<a class="docman-enforcereservation" href="'.$actionlistfileurl.'&amp;action=enforcereserve&amp;fileid='.$d->getID().'" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
 					}
 				} else {
-					echo '<a class="tabtitle-ne" href="?group_id='.$group_id.'&amp;action=trashfile&amp;view=listfile&amp;dirid='.$dirid.'&amp;fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
+					echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=trashfile&amp;fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
 					echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListFile.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
-					echo '<a class="tabtitle-ne" href="?group_id='.$group_id.'&amp;action=releasefile&amp;view=listfile&amp;dirid='.$dirid.'&amp;fileid='.$d->getID().'" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
+					echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=releasefile&amp;fileid='.$d->getID().'" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
 				}
 			}
 			if (session_loggedin()) {
@@ -289,7 +297,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 					$option = 'add';
 					$titleMonitor = _('Start monitoring this document');
 				}
-				echo '<a class="tabtitle-ne" href="?group_id='.$group_id.'&amp;action=monitorfile&amp;option='.$option.'&amp;view=listfile&amp;dirid='.$dirid.'&amp;fileid='.$d->getID().'" title="'.$titleMonitor.'" >'.html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)). '</a>';
+				echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=monitorfile&amp;option='.$option.'&amp;fileid='.$d->getID().'" title="'.$titleMonitor.'" >'.html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)). '</a>';
 			}
 			echo '</td>';
 		}
@@ -304,10 +312,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Move to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash'))). '</a>';
 		if (session_loggedin()) {
-			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Reserve for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve'))). '</a>';
-			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Release reservation') .'">'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
-			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=add&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Start monitoring') .'" >'.html_image('docman/monitor-adddocument.png',22,22,array('alt'=>_('Start monitoring'))). '</a>';
-			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Stop monitoring') .'" >'.html_image('docman/monitor-removedocument.png',22,22,array('alt'=>_('Stop monitoring'))). '</a>';
+			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=reservefile&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Reserve for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve'))). '</a>';
+			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=releasefile&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Release reservation') .'">'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
+			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=monitorfile&option=add&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Start monitoring') .'" >'.html_image('docman/monitor-adddocument.png',22,22,array('alt'=>_('Start monitoring'))). '</a>';
+			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=monitorfile&option=remove&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Stop monitoring') .'" >'.html_image('docman/monitor-removedocument.png',22,22,array('alt'=>_('Stop monitoring'))). '</a>';
 		}
 	}
 	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
