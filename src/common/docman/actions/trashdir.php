@@ -29,9 +29,20 @@ global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 
+$redirecturl = '/docman/?group_id='.$group_id.'&view=listfile';
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	session_redirect($redirecturl.'&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+}
+
+$childgroup_id = getIntFromRequest('childgroup_id');
+if ($childgroup_id) {
+	if (!forge_check_perm('docman', $childgroup_id, 'approve')) {
+		$return_msg = _('Document Manager Action Denied.');
+		session_redirect($redirecturl.'&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	}
+	$redirecturl .= '&childgroup_id='.$childgroup_id;
+	$g = group_get_object($childgroup_id);
 }
 
 /* when moving a document group to trash, it's recursive and it's applied to documents that belong to these document groups */
@@ -64,12 +75,12 @@ docman_recursive_stateid($dirid, $trashnested_groups, $trashnested_docs, 2);
 $dg = new DocumentGroup($g, $dirid);
 $currentParent = $dg->getParentID();
 if (!$dg->setStateID('2'))
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+	session_redirect($redirecturl.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 $dm = new DocumentManager($g);
 if (!$dg->setParentDocGroupId($dm->getTrashID()))
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
+	session_redirect($redirecturl.'&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 $return_msg = sprintf(_('Documents folder %s moved to trash successfully.'),$dg->getName());
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$currentParent.'&feedback='.urlencode($return_msg));
+session_redirect($redirecturl.'&dirid='.$currentParent.'&feedback='.urlencode($return_msg));
 ?>
