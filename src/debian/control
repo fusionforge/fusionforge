@@ -14,7 +14,7 @@ Architecture: all
 Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version})
 Replaces: gforge
 Provides: gforge
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, fusionforge-plugin-mailman | gforge-lists-mailman | gforge-lists, ${misc:Depends}
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-lists-mailman | gforge-lists, ${misc:Depends}
 Recommends: fusionforge-plugin-scmsvn | fusionforge-plugin-scm
 Description: FusionForge collaborative development tool - standard metapackage
  FusionForge provides many tools to aid collaboration in a
@@ -45,7 +45,7 @@ Architecture: all
 Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version}), gforge
 Replaces: gforge
 Provides: gforge
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-web-apache2-vhosts, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, fusionforge-plugin-mailman | gforge-lists-mailman | gforge-lists, fusionforge-plugin-contribtracker, fusionforge-plugin-extratabs, fusionforge-plugin-globalsearch, fusionforge-plugin-mediawiki, fusionforge-plugin-projectlabels, fusionforge-plugin-scmarch, fusionforge-plugin-scmbzr, fusionforge-plugin-scmcvs, fusionforge-plugin-scmdarcs, fusionforge-plugin-scmgit, fusionforge-plugin-scmhg, fusionforge-plugin-scmsvn, fusionforge-plugin-blocks, fusionforge-plugin-hudson, ${misc:Depends}
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-web-apache2-vhosts, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-lists-mailman | gforge-lists, fusionforge-plugin-contribtracker, fusionforge-plugin-extratabs, fusionforge-plugin-globalsearch, fusionforge-plugin-mediawiki, fusionforge-plugin-projectlabels, fusionforge-plugin-scmarch, fusionforge-plugin-scmbzr, fusionforge-plugin-scmcvs, fusionforge-plugin-scmdarcs, fusionforge-plugin-scmgit, fusionforge-plugin-scmhg, fusionforge-plugin-scmsvn, fusionforge-plugin-blocks, fusionforge-plugin-hudson, ${misc:Depends}
 Description: FusionForge collaborative development tool - full metapackage
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -372,22 +372,6 @@ Description: collaborative development tool - Hudson plugin
  This plugin contains the Hudson subsystem of FusionForge. It allows each
  FusionForge project to have its own Hudson, and gives some
  control over it to the project's administrator.
-
-Package: fusionforge-plugin-mailman
-Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, apache2 (>= 2.0.52), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, mailman (>= 2.1.13), python-psycopg2, python-mysqldb, python-iniparse, ${misc:Depends}
-Provides: gforge-lists
-Conflicts: gforge-lists
-Description: collaborative development tool - mailing-lists plugin (using Mailman)
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This package controls the interaction between FusionForge and Mailman.
- It provides a single sign on authentication mecanism between
- the forge and mailman.
 
 Package: fusionforge-plugin-mediawiki
 Architecture: all
