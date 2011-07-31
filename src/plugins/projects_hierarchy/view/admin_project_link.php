@@ -67,7 +67,7 @@ if (sizeof($pendingParent)) {
 $pendingChilds = $projectsHierarchy->getFamily($group_id, 'child', false, 'pending');
 if (sizeof($pendingChilds)) {
 	foreach ($pendingChilds as $pendingChild) {
-		$pendingChildGroup = group_get_object($pendingChild[0][0]);
+		$pendingChildGroup = group_get_object($pendingChild[0]);
 		echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=validateRelationship&id='.$group_id.'">';
 		echo '<input type="hidden" name="validation_id" value="'.$pendingChild[0][0].'" />';
 		echo _('Validate child').' '.util_make_link('/projects/'.$pendingChildGroup->getUnixName(), $pendingChildGroup->getPublicName(), array('title'=>_('Browse this project'), 'class'=>'tabtitle'));
