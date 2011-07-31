@@ -2388,6 +2388,7 @@ src/plugins/projects_hierarchy/db/projects_hierarchy-init.sql -text
 src/plugins/projects_hierarchy/etc/projects_hierarchy.ini -text
 src/plugins/projects_hierarchy/include/hierarchy_utils.php -text
 src/plugins/projects_hierarchy/view/admin/viewGlobalConfiguration.php -text
+src/plugins/projects_hierarchy/view/admin/viewProjectConfiguration.php -text
 src/plugins/projects_hierarchy/view/admin_project_link.php -text
 src/plugins/projects_hierarchy/view/docman_project_link.php -text
 src/plugins/projects_hierarchy/view/home_project_link.php -text

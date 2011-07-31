@@ -77,6 +77,11 @@ class projects_hierarchyPlugin extends Plugin {
 				}
 				break;
 			}
+			case "site_admin_option_hook": {
+				echo '<li>'.$this->getAdminOptionLink().'</li>';
+				$returned = true;
+				break;
+			}
 			case "project_admin_plugins": {
 				// this displays the link in the project admin options page to it's administration
 				$group_id = $params['group_id'];
@@ -86,11 +91,6 @@ class projects_hierarchyPlugin extends Plugin {
 					echo util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('Hierarchy Admin'));
 					echo '</p>';
 				}
-				$returned = true;
-				break;
-			}
-			case "site_admin_option_hook": {
-				echo '<li>'.$this->getAdminOptionLink().'</li>';
 				$returned = true;
 				break;
 			}
@@ -345,10 +345,10 @@ class projects_hierarchyPlugin extends Plugin {
 	 */
 	function add($group_id) {
 		if (!$this->exists($group_id)) {
-			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id) VALUES ($1)', array($group_id));
+			$globalConf = $this->getGlobalConf();
+			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id, tree, docman, delegate) VALUES ($1)', array($group_id, $globalConf['tree'], $globalConf['docman'], $globalConf['delegate']));
 			if (!$res)
 				return false;
-
 		}
 		return true;
 	}
@@ -547,11 +547,14 @@ class projects_hierarchyPlugin extends Plugin {
 				session_require_global_perm('forge_admin');
 				global $gfwww;
 				require_once($gfwww.'admin/admin_utils.php');
-				site_admin_header(array('title'=>_('Site Global Hierarchy Admin'), 'toptab' => ''));
+				site_admin_header(array('title'=>_('Site Global Hierarchy Admin'), 'toptab'=>''));
 				$returned = true;
 				break;
 			}
+			case 'admin':
 			default: {
+				site_project_header();
+				$returned = true;
 				break;
 			}
 		}
@@ -601,11 +604,31 @@ class projects_hierarchyPlugin extends Plugin {
 		return $returnArr;
 	}
 
+	function getProjectAdminView() {
+		global $gfplugins, $use_tooltips;
+		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';
+		return true;
+	}
+
 	/**
 	 * getFooter - display footer
 	 */
-	function getFooter() {
-		site_admin_footer(array());
+	function getFooter($type) {
+		global $gfplugins;
+		$returned = false;
+		switch ($type) {
+			case 'globaladmin': {
+				session_require_global_perm('forge_admin');
+				site_admin_footer(array());
+				break;
+			}
+			case 'admin':
+			default: {
+				site_project_footer(array());
+				break;
+			}
+		}
+		return $returned;
 	}
 
 	/**

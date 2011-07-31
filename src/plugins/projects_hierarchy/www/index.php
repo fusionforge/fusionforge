@@ -39,6 +39,9 @@ if (!$type) {
 
 switch ($type) {
 	case "group": {
+		if (!session_loggedin()) {
+			exit_not_logged_in();
+		}
 		$id = getStringFromRequest('id');
 		if (!$id) {
 			exit_error("Cannot Process your request: No ID specified", 'home');
@@ -71,6 +74,10 @@ switch ($type) {
 		break;
 	}
 	case "globaladmin": {
+		if (!session_loggedin()) {
+			exit_not_logged_in();
+		}
+		session_require_global_perm('forge_admin');
 		$action = getStringFromRequest('action');
 		switch ($action) {
 			case 'updateGlobalConf': {
@@ -81,8 +88,36 @@ switch ($type) {
 		}
 		$projectsHierarchy->getHeader('globaladmin');
 		$projectsHierarchy->getGlobalAdminView();
-		$projectsHierarchy->getFooter();
+		$projectsHierarchy->getFooter('globaladmin');
 		break;
+	}
+	case "admin": {
+		if (!session_loggedin()) {
+			exit_not_logged_in();
+		}
+		session_require_perm('project_admin', $id);
+		$id = getStringFromRequest('group_id');
+		if (!$id) {
+			exit_error("Cannot Process your request: No ID specified", 'home');
+		}
+		$group = group_get_object($id);
+		if ( !$group) {
+			exit_error("Invalid Project", 'home');
+		}
+		if (!$group->usesPlugin($projectsHierarchy->name)) {//check if the group has the projects_hierarchy plugin active
+			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $projectsHierarchy->name), 'home');
+		}
+		$action = getStringFromRequest('action');
+		switch ($action) {
+			case 'updateProjectConf': {
+				global $gfplugins;
+				include($gfplugins.$projectsHierarchy->name.'/actions/'.$action.'.php');
+				break;
+			}
+		}
+		$projectsHierarchy->getHeader('admin');
+		$projectsHierarchy->getProjectAdminView();
+		$projectsHierarchy->getFooter('admin');
 	}
 	default: {
 		exit_error("No TYPE specified", 'home');
