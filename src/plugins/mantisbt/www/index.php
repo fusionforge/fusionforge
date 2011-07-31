@@ -143,7 +143,6 @@ switch ($type) {
 		break;
 	}
 	case 'user': {
-
 		if (!session_loggedin()) {
 			exit_not_logged_in();
 		}
@@ -151,7 +150,6 @@ switch ($type) {
 		if (!($user) || !($user->usesPlugin($mantisbt->name))) {
 			exit_error(sprintf(_('First activate the User\'s %s plugin through Account Maintenance Page'), $mantisbt->name), 'my');
 		}
-
 
 		$action = getStringFromRequest('action');
 		$view = getStringFromRequest('view');
@@ -210,6 +208,12 @@ switch ($type) {
 		if (!session_loggedin()) {
 			exit_not_logged_in();
 		}
+		$user = session_get_user();
+
+		if (!($user) || !($user->usesPlugin($mantisbt->name))) {
+			exit_error(sprintf(_('First activate the User\'s %s plugin through Account Maintenance Page'), $mantisbt->name), 'my');
+		}
+
 		$group_id = getIntFromRequest('group_id');
 		if (!$group_id) {
 			exit_missing_param($_SERVER['HTTP_REFERER'], array('No GROUP_ID specified'), 'mantisbt');
@@ -225,15 +229,7 @@ switch ($type) {
 		if ($group->isError()) {
 			$error_msg .= $group->getErrorMessage();
 		}
-		$user = session_get_user();
-		$userperm = $group->getPermission($user);//we'll check if the user belongs to the group
-		if (!$userperm->IsMember()) {
-			exit_permission_denied(_('You are not a member of this project'), 'home');
-		}
-
-		if (!$userperm->isAdmin()) {
-			exit_permission_denied(_('You are not Admin of this project'), 'mantisbt');
-		}
+		session_require_perm('project_admin', $group_id);
 
 		$mantisbtConf = $mantisbt->getMantisBTConf($group_id);
 		$action = getStringFromRequest('action');
@@ -298,6 +294,10 @@ switch ($type) {
 		break;
 	}
 	case 'globaladmin': {
+		if (!session_loggedin()) {
+			exit_not_logged_in();
+		}
+		session_require_global_perm('forge_admin');
 		$action = getStringFromRequest('action');
 		switch ($action) {
 			case 'updateGlobalConf': {
