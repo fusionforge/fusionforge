@@ -50,39 +50,15 @@ if ($sortorder == 'is_public') {
 
 if ($group_name_search != '') {
 	echo "<p>"._('Projects that begin with'). " <strong>".$group_name_search."</strong></p>\n";
-	if (USE_PFO_RBAC) {
-		$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license AND lower(group_name) LIKE $1 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder,
-					array (strtolower ("$group_name_search%"))) ;
-	} else {
-		$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
-							FROM groups
-							LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
-							WHERE license_id=license
-							AND lower(group_name) LIKE $1
-							GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name
-							ORDER BY '.$sortorder,
-							array (strtolower ("$group_name_search%"))) ;
-	}
+	$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license AND lower(group_name) LIKE $1 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder,
+				array (strtolower ("$group_name_search%"))) ;
 } else {
-	if (USE_PFO_RBAC) {
-		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license') ;
-		if ($status) {
-			$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
-		}
-		$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder) ;
-		$res = db_query_qpa ($qpa) ;
-	} else {
-		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
-								FROM groups
-								LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
-								WHERE license_id=license',
-					 array ()) ;
-		if ($status) {
-			$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
-		}
-		$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name ORDER BY '.$sortorder) ;
-		$res = db_query_qpa ($qpa) ;
+	$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license') ;
+	if ($status) {
+		$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
 	}
+	$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder) ;
+	$res = db_query_qpa ($qpa) ;
 }
 
 $headers = array(
@@ -109,27 +85,20 @@ $headerLinks = array(
 
 echo $HTML->listTableTop($headers, $headerLinks);
 
-if (USE_PFO_RBAC) {
-	$public_rows = array();
-	$private_rows = array();
-	$ra = RoleAnonymous::getInstance() ;
-	while ($grp = db_fetch_array($res)) {
-		if ($ra->hasPermission('project_read', $grp['group_id'])) {
-			$grp['is_public'] = 1;
-			$public_rows[] = $grp;
-		} else {
-			$grp['is_public'] = 0;
-			$private_rows[] = $grp;
-		}
-	}
-	$rows = $private_rows;
-	$rows = array_merge($rows, $public_rows);
-} else {
-	$rows = array();
-	while ($grp = db_fetch_array($res)) {
-		$rows[] = $grp;
+$public_rows = array();
+$private_rows = array();
+$ra = RoleAnonymous::getInstance() ;
+while ($grp = db_fetch_array($res)) {
+	if ($ra->hasPermission('project_read', $grp['group_id'])) {
+		$grp['is_public'] = 1;
+		$public_rows[] = $grp;
+	} else {
+		$grp['is_public'] = 0;
+		$private_rows[] = $grp;
 	}
 }
+$rows = $private_rows;
+$rows = array_merge($rows, $public_rows);
 
 $i = 0;
 foreach ($rows as $grp) {

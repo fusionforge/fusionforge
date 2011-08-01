@@ -89,7 +89,6 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	}
 ?>
 
-<?php if (USE_PFO_RBAC) { ?>
 <h2><?php echo _('Global roles and permissions'); ?></h2>
 	<ul>
 	<li><?php
@@ -107,7 +106,6 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		echo '&nbsp;<input type="submit" name="add" value="'._("Create Role").'" /></p></form>';
 	?></li>
 </ul>
-<?php } ?>
 <h2><?php echo _('Project Maintenance'); ?></h2>
 <ul>
 	<li><?php

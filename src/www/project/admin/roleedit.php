@@ -65,16 +65,12 @@ if ($role_id=='observer') {
 		}
 	}
 } else {
-	if (USE_PFO_RBAC) {
-		if (getStringFromRequest('add')) {
-			$role_name = trim(getStringFromRequest('role_name')) ;
-			$role = new Role ($group) ;
-			$role_id=$role->createDefault($role_name) ;
-		} else {
-			$role = RBACEngine::getInstance()->getRoleById($role_id) ;
-		}
+	if (getStringFromRequest('add')) {
+		$role_name = trim(getStringFromRequest('role_name')) ;
+		$role = new Role ($group) ;
+		$role_id=$role->createDefault($role_name) ;
 	} else {
-		$role = new Role($group,$role_id);
+		$role = RBACEngine::getInstance()->getRoleById($role_id) ;
 	}
 	if (!$role || !is_object($role)) {
 		exit_error(_('Could Not Get Role'),'admin');
@@ -146,11 +142,7 @@ if ($role_id=='observer') {
 	} else {
 		$title= _('Edit Role');
 	}
-	if (USE_PFO_RBAC) {
-		$msg = _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the the Anonymous role has read access to a forum, all other roles will have it too.');
-	} else {
-		$msg = _('Use this page to edit your project\'s Roles. Note that each member has at least as much access as the Observer. For example, if the Observer can read CVS, so can any other role in the project.');
-	}
+	$msg = _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the the Anonymous role has read access to a forum, all other roles will have it too.');
 }
 
 project_admin_header(array('title'=> $title,'group'=>$group_id));
@@ -159,25 +151,17 @@ echo '<p>'.$msg.'</p>';
 echo '
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;role_id='. $role_id .'" method="post">';
 
-if (USE_PFO_RBAC) {
-	if ($role->getHomeProject() == NULL
-	    || $role->getHomeProject()->getID() != $group_id) {
-		echo '<p><strong>'._('Role Name').'</strong></p>' ;
-		echo $role->getDisplayableName ($group) ;
-	} else {
-		echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'" /><br />' ;
-		echo '<input type="checkbox" name="public" value="1"' ;
-		if ($role->isPublic()) {
-			echo ' checked="checked"' ;
-		}
-		echo ' /> '._('Shared role (can be referenced by other projects)').'</p>' ;
-	}
+if ($role->getHomeProject() == NULL
+    || $role->getHomeProject()->getID() != $group_id) {
+	echo '<p><strong>'._('Role Name').'</strong></p>' ;
+	echo $role->getDisplayableName ($group) ;
 } else {
-	if ($role_id != 'observer') {
-		echo '<p><strong>'._('Role Name').'</strong><br />
-	<input type="text" name="role_name" value="'.$role->getName().'" />
-	</p>';
+	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'" /><br />' ;
+	echo '<input type="checkbox" name="public" value="1"' ;
+	if ($role->isPublic()) {
+		echo ' checked="checked"' ;
 	}
+	echo ' /> '._('Shared role (can be referenced by other projects)').'</p>' ;
 }
 
 $titles[]=_('Section');
@@ -194,18 +178,14 @@ echo $HTML->listTableTop($titles);
 //	Everything is built on the multi-dimensial arrays in the Role object
 //
 $j = 0;
-if (USE_PFO_RBAC) {
-	$keys = array_keys($role->getSettingsForProject ($group)) ;
-	$keys2 = array () ;
-	foreach ($keys as $key) {
-		if (!in_array ($key, $role->global_settings)) {
-			$keys2[] = $key ;
-		}
+$keys = array_keys($role->getSettingsForProject ($group)) ;
+$keys2 = array () ;
+foreach ($keys as $key) {
+	if (!in_array ($key, $role->global_settings)) {
+		$keys2[] = $key ;
 	}
-	$keys = $keys2 ;
-} else {
-	$keys = array_keys($role->role_values);
 }
+$keys = $keys2 ;
 for ($i=0; $i<count($keys); $i++) {
         if ((!$group->usesForum() && preg_match("/forum/", $keys[$i])) ||
                 (!$group->usesTracker() && preg_match("/tracker/", $keys[$i])) ||
@@ -334,11 +314,7 @@ for ($i=0; $i<count($keys); $i++) {
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 		<td colspan="2"><strong>'.$rbac_edit_section_names[$keys[$i]].'</strong></td>
 		<td>';
-        	if (USE_PFO_RBAC) {
-			echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][$group_id]", $role->getVal($keys[$i],$group_id), false, false ) ;
-                } else {
-			echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][0]", $role->getVal($keys[$i],0), false, false ) ;
-                }
+		echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][$group_id]", $role->getVal($keys[$i],$group_id), false, false ) ;
 		echo '</td>
 		</tr>';
 

@@ -59,33 +59,31 @@ if (plugin_hook_listeners("project_admin_users") > 0) {
 function cache_external_roles () {
 	global $used_external_roles, $unused_external_roles, $group, $group_id;
 
-	if (USE_PFO_RBAC) {
-		$unused_external_roles = array () ;
-		foreach (RBACEngine::getInstance()->getPublicRoles() as $r) {
-			$grs = $r->getLinkedProjects () ;
-			$seen = false ;
-			foreach ($grs as $g) {
-				if ($g->getID() == $group_id) {
-					$seen = true ;
-					break ;
-				}
-			}
-			if (!$seen) {
-				$unused_external_roles[] = $r ;
+	$unused_external_roles = array () ;
+	foreach (RBACEngine::getInstance()->getPublicRoles() as $r) {
+		$grs = $r->getLinkedProjects () ;
+		$seen = false ;
+		foreach ($grs as $g) {
+			if ($g->getID() == $group_id) {
+				$seen = true ;
+				break ;
 			}
 		}
-		$used_external_roles = array () ;
-		foreach ($group->getRoles() as $r) {
-			if ($r->getHomeProject() == NULL
-			    || $r->getHomeProject()->getID() != $group_id) {
-				$used_external_roles[] = $r ;
-			}
+		if (!$seen) {
+			$unused_external_roles[] = $r ;
 		}
-
-		sortRoleList ($used_external_roles, $group, 'composite') ;
-		sortRoleList ($unused_external_roles, $group, 'composite') ;
-
 	}
+	$used_external_roles = array () ;
+	foreach ($group->getRoles() as $r) {
+		if ($r->getHomeProject() == NULL
+		    || $r->getHomeProject()->getID() != $group_id) {
+			$used_external_roles[] = $r ;
+		}
+	}
+
+	sortRoleList ($used_external_roles, $group, 'composite') ;
+	sortRoleList ($unused_external_roles, $group, 'composite') ;
+
 }
 
 cache_external_roles () ;
@@ -187,31 +185,27 @@ if (getStringFromRequest('submit')) {
 		}
 	} else if (getStringFromRequest('linkrole')) {
 		/* link a role to this project */
-		if (USE_PFO_RBAC) {
-			$role_id = getIntFromRequest('role_id');
-			foreach ($unused_external_roles as $r) {
-				if ($r->getID() == $role_id) {
-					if (!$r->linkProject($group)) {
-						$error_msg = $r->getErrorMessage();
-					} else {
-						$feedback = _("Role linked successfully");
-						cache_external_roles () ;
-					}
+		$role_id = getIntFromRequest('role_id');
+		foreach ($unused_external_roles as $r) {
+			if ($r->getID() == $role_id) {
+				if (!$r->linkProject($group)) {
+					$error_msg = $r->getErrorMessage();
+				} else {
+					$feedback = _("Role linked successfully");
+					cache_external_roles () ;
 				}
 			}
 		}
 	} else if (getStringFromRequest('unlinkrole')) {
 		/* unlink a role from this project */
-		if (USE_PFO_RBAC) {
-			$role_id = getIntFromRequest('role_id');
-			foreach ($used_external_roles as $r) {
-				if ($r->getID() == $role_id) {
-					if (!$r->unLinkProject($group)) {
-						$error_msg = $r->getErrorMessage();
-					} else {
-						$feedback = _("Role unlinked successfully");
-						cache_external_roles () ;
-					}
+		$role_id = getIntFromRequest('role_id');
+		foreach ($used_external_roles as $r) {
+			if ($r->getID() == $role_id) {
+				if (!$r->unLinkProject($group)) {
+					$error_msg = $r->getErrorMessage();
+				} else {
+					$feedback = _("Role unlinked successfully");
+					cache_external_roles () ;
 				}
 			}
 		}
@@ -431,16 +425,13 @@ echo '<tr><td colspan="2">
 
 echo '</tbody></table>' ;
 
-if (!USE_PFO_RBAC) {
-		echo '
+echo '
         <form action="roleedit.php?group_id='. $group_id .'&amp;role_id=observer" method="post">
         <p><input type="submit" name="edit" value="'._("Edit Observer").'" /></p>
         </form>';
-}
 
-if (USE_PFO_RBAC) {
-	if (count ($used_external_roles)) {
-		echo $HTML->boxMiddle(_("Currently used external roles"));
+if (count ($used_external_roles)) {
+	echo $HTML->boxMiddle(_("Currently used external roles"));
 echo '<table width="100%"><thead><tr>';
 echo '<th>'._('Role name').'</th>';
 echo '<th style="text-align:right">'._('Action').'</th>';
@@ -491,7 +482,6 @@ echo '
 </td></tr>';
 echo '</tbody></table>' ;
 	}
-}
 
 echo $HTML->boxBottom();
 ?></td>

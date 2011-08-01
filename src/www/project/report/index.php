@@ -153,19 +153,15 @@ foreach ($group->getUsers() as $member) {
 		util_make_link ('/sendmessage.php?touser='.$member->getId(),
 				sprintf (_('Contact %s'),$member->getRealName())).'
 			</td>';
-	if (USE_PFO_RBAC) {
-		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($member) ;
-		sortRoleList ($roles) ;
-		$role_names = array () ;
-		foreach ($roles as $role) {
-			if ($role->getHomeProject() && $role->getHomeProject()->getID() == $group->getID()) {
-				$role_names[] = $role->getName() ;
-			}
+	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($member) ;
+	sortRoleList ($roles) ;
+	$role_names = array () ;
+	foreach ($roles as $role) {
+		if ($role->getHomeProject() && $role->getHomeProject()->getID() == $group->getID()) {
+			$role_names[] = $role->getName() ;
 		}
-		$role_string = implode (', ', $role_names) ;
-	} else {
-		$role_string = $user->getRole ($group)->getName() ;
 	}
+	$role_string = implode (', ', $role_names) ;
 
 				echo '
 			<td align="center">'.$role_string.'

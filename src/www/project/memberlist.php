@@ -84,19 +84,15 @@ foreach ($members as $user) {
         print '<span property="fusionforge:has_job" content="'.$role_string.'">';
         echo '</span>';*/
 
-	if (USE_PFO_RBAC) {
-		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
-		sortRoleList ($roles) ;
-		$role_names = array () ;
-		foreach ($roles as $role) {
-			if ($role->getHomeProject() && $role->getHomeProject()->getID() == $project->getID()) {
-				$role_names[] = $role->getName() ;
-			}
+	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+	sortRoleList ($roles) ;
+	$role_names = array () ;
+	foreach ($roles as $role) {
+		if ($role->getHomeProject() && $role->getHomeProject()->getID() == $project->getID()) {
+			$role_names[] = $role->getName() ;
 		}
-		$role_string = implode (', ', $role_names) ;
-	} else {
-		$role_string = $user->getRole ($project)->getName() ;
 	}
+	$role_string = implode (', ', $role_names) ;
 
 	echo '<td>';
 	echo util_display_user($user->getUnixName(),$user->getID(),$user->getUnixName(), 's');

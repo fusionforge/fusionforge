@@ -196,27 +196,13 @@ while ($row_grp = db_fetch_array($res_grp)) {
 		print "<p>" ._('Pending reason:'). "</p><span class=\"important\">".$row_grp['status_comment']."</span>";
 	}
 
-	if (USE_PFO_RBAC) {
-		$submitter = NULL ;
-		$project = group_get_object ($row_grp['group_id']) ;
-		foreach (get_group_join_requests ($project) as $gjr) {
-			$submitter = user_get_object($gjr->getUserID()) ;
-			echo '<p>'
-				.sprintf(_('Submitted by %1$s (%2$s)'), $submitter->getRealName(), $submitter->getUnixName())
-				.'</p>';
-		}
-	} else {
-		$res = db_query_params("SELECT u.user_id
-			 FROM users u, user_group ug
-			 WHERE ug.group_id=$1 AND u.user_id=ug.user_id;", array($row_grp['group_id']));
-
-		if (db_numrows($res) >= 1) {
-			$submitter =& user_get_object(db_result($res,0,'user_id'));
-
-			echo '<p>'
+	$submitter = NULL ;
+	$project = group_get_object ($row_grp['group_id']) ;
+	foreach (get_group_join_requests ($project) as $gjr) {
+		$submitter = user_get_object($gjr->getUserID()) ;
+		echo '<p>'
 			.sprintf(_('Submitted by %1$s (%2$s)'), $submitter->getRealName(), $submitter->getUnixName())
-			.'</p>' ;
-		}
+			.'</p>';
 	}
 
 	if ($row_grp['built_from_template']) {
