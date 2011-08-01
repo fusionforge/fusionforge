@@ -194,23 +194,15 @@ function FusionForgeMWAuth( $user, &$result ) {
 		$user->loadGroups() ;
 		$current_groups = $user->getGroups() ;
 
-		if (USE_PFO_RBAC) {
-			$available_roles = RBACEngine::getInstance()->getAvailableRoles() ;
-			$rs = array () ;
-			foreach ($available_roles as $r) {
-				$linked_projects = $r->getLinkedProjects () ;
-
-				foreach ($linked_projects as $lp) {
-					if ($lp->getID() == $g->getID()) {
-						$rs[] = $r ;
-					}
+		$available_roles = RBACEngine::getInstance()->getAvailableRoles() ;
+		$rs = array () ;
+		foreach ($available_roles as $r) {
+			$linked_projects = $r->getLinkedProjects () ;
+			
+			foreach ($linked_projects as $lp) {
+				if ($lp->getID() == $g->getID()) {
+					$rs[] = $r ;
 				}
-			}
-		} else {
-			$perm =& $g->getPermission ();
-			$r = $u->getRole($g) ;
-			if (isset ($r) && $r && !$r->isError()) {
-				$rs = array ($r) ;
 			}
 		}
 

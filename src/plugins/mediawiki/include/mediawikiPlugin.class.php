@@ -188,19 +188,12 @@ class MediaWikiPlugin extends Plugin {
 			$new_sa =& $params['new_sa'] ;
 			$new_pa =& $params['new_pa'] ;
 
-			if (USE_PFO_RBAC) {
-				$projects = $role->getLinkedProjects() ;
-				foreach ($projects as $p) {
-					$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_read', $p->getID()) ;
-					$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_edit', $p->getID()) ;
-					$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_upload', $p->getID()) ;
-					$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_admin', $p->getID()) ;
-				}
-			} else {
-				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_read') ;
-				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_edit') ;
-				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_upload') ;
-				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_admin') ;
+			$projects = $role->getLinkedProjects() ;
+			foreach ($projects as $p) {
+				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_read', $p->getID()) ;
+				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_edit', $p->getID()) ;
+				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_upload', $p->getID()) ;
+				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_admin', $p->getID()) ;
 			}
 		} elseif ($hookname == "role_translate_strings") {
 			$right = new PluginSpecificRoleSetting ($role,
