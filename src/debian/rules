@@ -112,7 +112,9 @@ debian/$(PACKAGE)-%.docs:
 
 debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*)
 	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
-	for dir in $(CURDIR)/plugins/* ; do plugin=$${dir##$(CURDIR)/plugins/} ; [ -e $$dir/packaging/control/[1-9][0-9][0-9]plugin-$$plugin ] && ([ ! -e $$dir/etc/$$plugin.ini ] || [ "$$(confget -f $$dir/etc/$$plugin.ini plugin_status)" = valid ]) && ls $$dir/packaging/control/[1-9][0-9][0-9]plugin-$$plugin ; done | grep -v shortdesc | grep -v scmcpold | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) >> $@
+	@echo Enabled plugins: $(ENABLED_PLUGINS)
+	@echo Skipped plugins: $(shell $(CURDIR)/utils/list-enabled-plugins.sh --disabled)
+	for plugin in $(ENABLED_PLUGINS) ; do ls plugins/$$plugin/packaging/control/[1-9][0-9][0-9]plugin-$$plugin ; done | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) >> $@
 
 debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
 	@debconf-updatepo --podir=debian/dsf-po
