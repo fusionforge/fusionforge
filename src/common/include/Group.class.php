@@ -347,31 +347,10 @@ class Group extends Error {
 				return false;
 			}
 
-			if (USE_PFO_RBAC) {
-				$gjr = new GroupJoinRequest($this);
-				$gjr->create($user->getID(),
-					     'Fake GroupJoinRequest to store the creator of a project',
-					     false);
-			} else {
-			//
-			// Now, make the user an admin
-			//
-			$res=db_query_params('INSERT INTO user_group (user_id, group_id, admin_flags,
-				cvs_flags, artifact_flags, forum_flags, role_id)
-				VALUES ($1, $2, $3, $4, $5, $6, $7)',
-					      array($user->getID(),
-						    $id,
-						    'A',
-						    1,
-						    2,
-						    2,
-						    1));
-			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(sprintf(_('ERROR: Could not add admin to newly created group: %s'),db_error()));
-				db_rollback();
-				return false;
-			}
-			}
+			$gjr = new GroupJoinRequest($this);
+			$gjr->create($user->getID(),
+				     'Fake GroupJoinRequest to store the creator of a project',
+				     false);
 
 			$hook_params = array();
 			$hook_params['group'] = $this;
@@ -988,36 +967,16 @@ class Group extends Error {
 	 * @return	boolean	enable_scm.
 	 */
 	function enableAnonSCM() {
-		if (USE_PFO_RBAC) {
-			$r = RoleAnonymous::getInstance();
-			return $r->hasPermission('scm', $this->getID(), 'read');
-		} else {
-			if ($this->isPublic() && $this->usesSCM()) {
-				return $this->data_array['enable_anonscm'];
-			} else {
-				return false;
-			}
-		}
+		$r = RoleAnonymous::getInstance();
+		return $r->hasPermission('scm', $this->getID(), 'read');
 	}
 
 	function SetUsesAnonSCM($booleanparam) {
 		db_begin();
 		$booleanparam = $booleanparam ? 1 : 0;
-		if (USE_PFO_RBAC) {
-			$r = RoleAnonymous::getInstance();
-			$r->setSetting('scm', $this->getID(), $booleanparam);
-			db_commit();
-		} else {
-			$res = db_query_params('UPDATE groups SET enable_anonscm=$1 WHERE group_id=$2',
-					array($booleanparam, $this->getID()));
-			if ($res) {
-				$this->data_array['enable_anonscm'] = $booleanparam;
-				db_commit();
-			} else {
-				db_rollback();
-				return false;
-			}
-		}
+		$r = RoleAnonymous::getInstance();
+		$r->setSetting('scm', $this->getID(), $booleanparam);
+		db_commit();
 	}
 
 	/**
@@ -1928,119 +1887,22 @@ class Group extends Error {
 				return false;
 			}
 
-			if (USE_PFO_RBAC) {
-				$role->addUser(user_get_object($user_id)) ;
-				if (!$SYS->sysCheckCreateGroup($this->getID())){
-					$this->setError($SYS->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-				if (!$SYS->sysCheckCreateUser($user_id)) {
-					$this->setError($SYS->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-				if (!$SYS->sysGroupCheckUser($this->getID(),$user_id)) {
-					$this->setError($SYS->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-			} else { // NOT USE_PFO_RBAC
-
-				//
-				//	if not already a member, add them
-				//
-				$res_member = db_query_params('SELECT user_id
-				FROM user_group
-				WHERE user_id=$1 AND group_id=$2',
-				array($user_id, $this->getID()));
-
-				if (db_numrows($res_member) < 1) {
-					//
-					//	Create this user's row in the user_group table
-					//
-					$res = db_query_params('INSERT INTO user_group
-						(user_id,group_id,admin_flags,forum_flags,project_flags,
-						doc_flags,cvs_flags,member_role,release_flags,artifact_flags)
-						VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
-						array($user_id,
-							$this->getID(),
-							'',
-							0,
-							0,
-							0,
-							1,
-							100,
-							0,
-							0));
-
-					//verify the insert worked
-					if (!$res || db_affected_rows($res) < 1) {
-						$this->setError(sprintf(_('ERROR: Could Not Add User To Group: %s'),db_error()));
-						db_rollback();
-						return false;
-					}
-					//
-					//	check and create if group doesn't exists
-					//
-					//echo "<h2>Group::addUser SYS->sysCheckCreateGroup(".$this->getID().")</h2>";
-					if (!$SYS->sysCheckCreateGroup($this->getID())){
-						$this->setError($SYS->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-					//
-					//	check and create if user doesn't exists
-					//
-					//echo "<h2>Group::addUser SYS->sysCheckCreateUser($user_id)</h2>";
-					if (!$SYS->sysCheckCreateUser($user_id)) {
-						$this->setError($SYS->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-					//
-					//	Role setup
-					//
-					//echo "<h2>Group::addUser role->setUser($user_id)</h2>";
-					if (!$role->setUser($user_id)) {
-						$this->setError('addUser::role::setUser'.$role->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-				} else {
-					//
-					//  user was already a member
-					//  make sure they are set up
-					//
-					$user= user_get_object($user_id,$res_newuser);
-					$user->fetchData($user->getID());
-					$role = new Role($this,$role_id);
-					if (!$role || !is_object($role)) {
-						$this->setError(_('Error Getting Role Object'));
-						db_rollback();
-						return false;
-					} elseif ($role->isError()) {
-						$this->setError('addUser::roleget::'.$role->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-					//echo "<h2>Already Member Group::addUser role->setUser($user_id)</h2>";
-					if (!$role->setUser($user_id)) {
-						$this->setError('addUser::role::setUser'.$role->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-					//
-					//	set up their system info
-					//
-					//echo "<h2>Already Member Group::addUser SYS->sysCheckCreateUser($user_id)</h2>";
-					if (!$SYS->sysCheckCreateUser($user_id)) {
-						$this->setError($SYS->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-				}
-			} // USE_PFO_RBAC
+			$role->addUser(user_get_object($user_id)) ;
+			if (!$SYS->sysCheckCreateGroup($this->getID())){
+				$this->setError($SYS->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+			if (!$SYS->sysCheckCreateUser($user_id)) {
+				$this->setError($SYS->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+			if (!$SYS->sysGroupCheckUser($this->getID(),$user_id)) {
+				$this->setError($SYS->getErrorMessage());
+				db_rollback();
+				return false;
+			}
 		} else {
 			//
 			//	user doesn't exist
@@ -2083,39 +1945,27 @@ class Group extends Error {
 
 		db_begin();
 
-		if (USE_PFO_RBAC) {
-			$user = user_get_object($user_id);
-			$roles = RBACEngine::getInstance()->getAvailableRolesForUser($user);
-			$found_role = NULL;
-			foreach ($roles as $role) {
-				if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
-					$found_role = $role;
-					break;
-				}
-			}
-			if ($found_role == NULL) {
-				$this->setError(sprintf(_('ERROR: User not removed: %s')));
-				db_rollback();
-				return false;
-			}
-			$found_role->removeUser($user);
-			if (!$SYS->sysGroupCheckUser($this->getID(), $user_id)) {
-				$this->setError($SYS->getErrorMessage());
-				db_rollback();
-				return false;
-			}
-
-		} else {
-			$res = db_query_params('DELETE FROM user_group WHERE group_id=$1 AND user_id=$2',
-						array($this->getID(),
-						      $user_id));
-			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(_('ERROR: User not removed:').' '.db_error());
-				db_rollback();
-				return false;
+		$user = user_get_object($user_id);
+		$roles = RBACEngine::getInstance()->getAvailableRolesForUser($user);
+		$found_role = NULL;
+		foreach ($roles as $role) {
+			if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
+				$found_role = $role;
+				break;
 			}
 		}
-
+		if ($found_role == NULL) {
+			$this->setError(sprintf(_('ERROR: User not removed: %s')));
+			db_rollback();
+			return false;
+		}
+		$found_role->removeUser($user);
+		if (!$SYS->sysGroupCheckUser($this->getID(), $user_id)) {
+			$this->setError($SYS->getErrorMessage());
+			db_rollback();
+			return false;
+		}
+		
 		//
 		//	reassign open artifacts to id=100
 		//
@@ -2203,50 +2053,34 @@ class Group extends Error {
 			return false;
 		}
 
-		if (USE_PFO_RBAC) {
-			$newrole = RBACEngine::getInstance()->getRoleById ($role_id) ;
-			if (!$newrole || !is_object($newrole)) {
-				$this->setError(_('Could Not Get Role'));
-				return false;
-			} elseif ($newrole->isError()) {
-				$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
-				return false;
-			} elseif ($newrole->getHomeProject() == NULL
-				  || $newrole->getHomeProject()->getID() != $this->getID()) {
-				$this->setError(_('Wrong destination role'));
-				return false;
-			}
-			$user = user_get_object ($user_id) ;
-			$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
-			$found_role = NULL ;
-			foreach ($roles as $role) {
-				if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
-					$found_role = $role ;
-					break ;
-				}
-			}
-			if ($found_role == NULL) {
-				$this->setError(sprintf(_('ERROR: User not removed: %s')));
-				db_rollback();
-				return false;
-			}
-			$found_role->removeUser ($user) ;
-			$newrole->addUser ($user) ;
-		} else {
-		$role = new Role($this,$role_id);
-		if (!$role || !is_object($role)) {
+		$newrole = RBACEngine::getInstance()->getRoleById ($role_id) ;
+		if (!$newrole || !is_object($newrole)) {
 			$this->setError(_('Could Not Get Role'));
 			return false;
-		} elseif ($role->isError()) {
+		} elseif ($newrole->isError()) {
 			$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
 			return false;
-		}
-//echo "<h3>Group::updateUser role->setUser($user_id)</h3>";
-		if (!$role->setUser($user_id)) {
-			$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
+		} elseif ($newrole->getHomeProject() == NULL
+			  || $newrole->getHomeProject()->getID() != $this->getID()) {
+			$this->setError(_('Wrong destination role'));
 			return false;
 		}
+		$user = user_get_object ($user_id) ;
+		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+		$found_role = NULL ;
+		foreach ($roles as $role) {
+			if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
+				$found_role = $role ;
+				break ;
+			}
 		}
+		if ($found_role == NULL) {
+			$this->setError(sprintf(_('ERROR: User not removed: %s')));
+			db_rollback();
+			return false;
+		}
+		$found_role->removeUser ($user) ;
+		$newrole->addUser ($user) ;
 
 		$this->addHistory('Updated User',$user_id);
 		return true;
@@ -2283,7 +2117,6 @@ class Group extends Error {
 			Activate member(s) of the project
 		*/
 
-		if (USE_PFO_RBAC) {
 		$members = $this->getUsers (true) ;
 
 		foreach ($members as $member) {
@@ -2297,16 +2130,6 @@ class Group extends Error {
 				}
 			}
 
-		}
-		} else {
-			$res_member = db_query_params('SELECT user_id,role_id FROM user_group WHERE group_id=$1',
-						       array ($this->getID()));
-			while ($row_member = db_fetch_array($res_member)) {
-				$u = user_get_object($row_member['user_id']);
-				if (!$this->addUser($u->getUnixName(),$row_member['role_id'])) {
-					return false;
-				}
-			}
 		}
 
 		return true;
@@ -2361,28 +2184,13 @@ class Group extends Error {
 		setup_gettext_from_sys_lang();
 
 		// Create default roles
-		if (USE_PFO_RBAC) {
-			$idadmin_group = NULL;
-			foreach (get_group_join_requests ($this) as $gjr) {
-				$idadmin_group = $gjr->getUserID();
-				break ;
-			}
-			if ($idadmin_group == NULL) {
-				$idadmin_group = $user->getID();
-			}
-		} else {
-			$admin_group = db_query_params('SELECT user_id FROM user_group WHERE group_id=$1 AND admin_flags=$2',
-							array($this->getID(),
-							       'A'));
-			if (db_numrows($admin_group) > 0) {
-				$idadmin_group = db_result($admin_group,0,'user_id');
-			} else {
-				$idadmin_group = $user->getID();
-				db_query_params('INSERT INTO user_group (user_id, group_id, admin_flags) VALUES ($1, $2, $3)',
-						 array($idadmin_group,
-							$this->getID(),
-							'A')) ;
-			}
+		$idadmin_group = NULL;
+		foreach (get_group_join_requests ($this) as $gjr) {
+			$idadmin_group = $gjr->getUserID();
+			break ;
+		}
+		if ($idadmin_group == NULL) {
+			$idadmin_group = $user->getID();
 		}
 
 		$template = $this->getTemplateProject();
@@ -2414,12 +2222,10 @@ class Group extends Error {
 			$role_id = $role->create ('Admin', $adminperms, true) ;
 		}
 
-		if (USE_PFO_RBAC) {
-			$roles = $this->getRoles() ;
-			foreach ($roles as $r) {
-				if ($r->getSetting ('project_admin', $this->getID())) {
-					$r->addUser(user_get_object ($idadmin_group));
-				}
+		$roles = $this->getRoles() ;
+		foreach ($roles as $r) {
+			if ($r->getSetting ('project_admin', $this->getID())) {
+				$r->addUser(user_get_object ($idadmin_group));
 			}
 		}
 
@@ -2664,16 +2470,8 @@ if there is anything we can do to help you.
 	 */
 	function sendRejectionEmail($response_id, $message="zxcv") {
 		$submitters = array () ;
-		if (USE_PFO_RBAC) {
-			foreach (get_group_join_requests ($this) as $gjr) {
-				$submitters[] = user_get_object($gjr->getUserID());
-			}
-		} else {
-			$res = db_query_params("SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND u.user_id=ug.user_id",
-					       $this->getID());
-			while ($arr = db_fetch_array($res)) {
-				$submitter[] = user_get_object($arr['user_id']);
-			}
+		foreach (get_group_join_requests ($this) as $gjr) {
+			$submitters[] = user_get_object($gjr->getUserID());
 		}
 
 		if (count ($submitters) < 1) {
@@ -2723,16 +2521,8 @@ Reasons for negative decision:
 	function sendNewProjectNotificationEmail() {
 		// Get the user who wants to register the project
 		$submitters = array();
-		if (USE_PFO_RBAC) {
-			foreach (get_group_join_requests ($this) as $gjr) {
-				$submitters[] = user_get_object($gjr->getUserID());
-			}
-		} else {
-			$res = db_query_params("SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND u.user_id=ug.user_id",
-					       $this->getID());
-			while ($arr = db_fetch_array ($res)) {
-				$submitter[] = user_get_object($arr['user_id']);
-			}
+		foreach (get_group_join_requests ($this) as $gjr) {
+			$submitters[] = user_get_object($gjr->getUserID());
 		}
 		if (count ($submitters) < 1) {
 			$this->setError(_("Could not find user who has submitted the project."));
@@ -2828,23 +2618,15 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	function getRolesId() {
 		$role_ids = array();
 
-		if (USE_PFO_RBAC) {
-			$res = db_query_params('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
-						array($this->getID()));
-			while ($arr = db_fetch_array($res)) {
-				$role_ids[] = $arr['role_id'];
-			}
-			$res = db_query_params('SELECT role_id FROM role_project_refs WHERE group_id=$1',
-						array($this->getID()));
-			while ($arr = db_fetch_array($res)) {
-				$role_ids[] = $arr['role_id'];
-			}
-		} else {
-			$res = db_query_params('SELECT role_id FROM role WHERE group_id=$1',
-							    array($this->getID()));
-			while ($arr = db_fetch_array($res)) {
-				$role_ids[] = $arr['role_id'];
-			}
+		$res = db_query_params('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
+				       array($this->getID()));
+		while ($arr = db_fetch_array($res)) {
+			$role_ids[] = $arr['role_id'];
+		}
+		$res = db_query_params('SELECT role_id FROM role_project_refs WHERE group_id=$1',
+				       array($this->getID()));
+		while ($arr = db_fetch_array($res)) {
+			$role_ids[] = $arr['role_id'];
 		}
 
 		return array_unique($role_ids);
@@ -2859,15 +2641,9 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		$result = array();
 
 		$roles = $this->getRolesId();
-		if (USE_PFO_RBAC) {
-			$engine = RBACEngine::getInstance();
-			foreach ($roles as $role_id) {
-				$result[] = $engine->getRoleById ($role_id);
-			}
-		} else {
-			foreach ($roles as $role_id) {
-				$result[] = new Role ($this, $role_id);
-			}
+		$engine = RBACEngine::getInstance();
+		foreach ($roles as $role_id) {
+			$result[] = $engine->getRoleById ($role_id);
 		}
 
 		return $result;
@@ -2944,38 +2720,22 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		if (!isset($this->membersArr)) {
 			$this->membersArr = array () ;
 
-			if (USE_PFO_RBAC) {
-				$ids = array () ;
-				foreach ($this->getRoles() as $role) {
-					if ($onlylocal
-					    && ($role->getHomeProject() == NULL || $role->getHomeProject()->getID() != $this->getID())) {
-						continue ;
-					}
-					foreach ($role->getUsers() as $user) {
-						$ids[] = $user->getID() ;
-					}
+			$ids = array () ;
+			foreach ($this->getRoles() as $role) {
+				if ($onlylocal
+				    && ($role->getHomeProject() == NULL || $role->getHomeProject()->getID() != $this->getID())) {
+					continue ;
 				}
-				$ids = array_unique ($ids) ;
-				foreach ($ids as $id) {
-					$u = user_get_object ($id) ;
-					if ($u->isActive()) {
-						$this->membersArr[] = $u ;
-					}
+				foreach ($role->getUsers() as $user) {
+					$ids[] = $user->getID() ;
 				}
-			} else {
-
-				$users_group_res = db_query_params ('SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND ug.user_id=u.user_id AND u.status=$2',
-								    array ($this->getID(),
-									   'A'));
-				if (!$users_group_res) {
-					$this->setError(_('Error: Enable to get users from group'). ' ' . $this->getID() . ' ' .db_error());
-					return false;
+			}
+			$ids = array_unique ($ids) ;
+			foreach ($ids as $id) {
+				$u = user_get_object ($id) ;
+				if ($u->isActive()) {
+					$this->membersArr[] = $u ;
 				}
-
-				for ($i=0; $i<db_numrows($users_group_res); $i++) {
-					$this->membersArr[$i] = new GFUser(db_result($users_group_res,$i,'user_id'),false);
-				}
-
 			}
 		}
 		return $this->membersArr;

@@ -24,12 +24,7 @@
 
 require "PFO-RBAC.interface.php";
 
-// TODO : remove this which is security issue ?
-if (true || file_exists ('/tmp/fusionforge-use-pfo-rbac')) {
-	define ('USE_PFO_RBAC', true);
-} else {
-	define ('USE_PFO_RBAC', false);
-}
+define ('USE_PFO_RBAC', true);
 
 // Code shared between classes
 
@@ -58,191 +53,99 @@ abstract class BaseRole extends Error {
 	// var $setting_array;
 
 	public function BaseRole() {
-		if (USE_PFO_RBAC) {
-			// TODO: document these tables
-			// $gfcommon.'include/rbac_texts.php' may provide some hints...
-			$this->role_values = array(
-				'forge_admin' => array(0, 1),
-				'approve_projects' => array(0, 1),
-				'approve_news' => array(0, 1),
-				'forge_stats' => array(0, 1, 2),
+		// TODO: document these tables
+		// $gfcommon.'include/rbac_texts.php' may provide some hints...
+		$this->role_values = array(
+			'forge_admin' => array(0, 1),
+			'approve_projects' => array(0, 1),
+			'approve_news' => array(0, 1),
+			'forge_stats' => array(0, 1, 2),
 
-				'project_read' => array(0, 1),
-				'project_admin' => array(0, 1),
+			'project_read' => array(0, 1),
+			'project_admin' => array(0, 1),
 
-				'tracker_admin' => array(0, 1),
-				'pm_admin' => array(0, 1),
-				'forum_admin' => array(0, 1),
+			'tracker_admin' => array(0, 1),
+			'pm_admin' => array(0, 1),
+			'forum_admin' => array(0, 1),
 
-				'tracker' => array(0, 1, 3, 5, 7),
-				'pm' => array(0, 1, 3, 5, 7),
-				'forum' => array(0, 1, 2, 3, 4),
+			'tracker' => array(0, 1, 3, 5, 7),
+			'pm' => array(0, 1, 3, 5, 7),
+			'forum' => array(0, 1, 2, 3, 4),
 
-				'new_tracker' => array(0, 1, 3, 5, 7),
-				'new_pm' => array(0, 1, 3, 5, 7),
-				'new_forum' => array(0, 1, 2, 3, 4),
+			'new_tracker' => array(0, 1, 3, 5, 7),
+			'new_pm' => array(0, 1, 3, 5, 7),
+			'new_forum' => array(0, 1, 2, 3, 4),
 
-				'scm' => array (0, 1, 2),
-				'docman' => array (0, 1, 2, 3, 4),
-				'frs' => array (0, 1, 2, 3),
+			'scm' => array (0, 1, 2),
+			'docman' => array (0, 1, 2, 3, 4),
+			'frs' => array (0, 1, 2, 3),
 
-				'webcal' => array(0, 1, 2),
-				);
+			'webcal' => array(0, 1, 2),
+			);
 
-			// Global permissions
-			$this->global_settings = array(
-				'forge_admin', // “God mode”: all actions allowed
-				'approve_projects', // Ability to approve pending projects
-				'approve_news', // Ability to approve news bits to the forge front page
-				'forge_stats'
-				);
+		// Global permissions
+		$this->global_settings = array(
+			'forge_admin', // “God mode”: all actions allowed
+			'approve_projects', // Ability to approve pending projects
+			'approve_news', // Ability to approve news bits to the forge front page
+			'forge_stats'
+			);
 
-			// TODO: document these	(Project-related permissions ?)
-			$this->defaults = array(
-				'Admin' => array(            'project_admin'=> 1,
-							     'project_read' => 1,
-							     'frs' => 2,
-							     'scm' => 2,
-							     'docman' => 3,
-							     'forum_admin' => 1,
-							     'new_forum' => 3,
-							     'tracker_admin' => 1,
-							     'new_tracker' => 7,
-							     'pm_admin' => 1,
-							     'new_pm' => 7,
-							     'webcal' => 2,
-					),
-				'Senior Developer' => array( 'project_read' => 1,
-							     'frs' => 2,
-							     'scm' => 2,
-							     'docman' => 3,
-							     'forum_admin' => 1,
-							     'new_forum' => 3,
-							     'tracker_admin' => 1,
-							     'new_tracker' => 7,
-							     'pm_admin' => 1,
-							     'new_pm' => 7,
-							     'webcal' => 2,
-					),
-				'Junior Developer' => array( 'project_read' => 1,
-							     'frs' => 2,
-							     'scm' => 2,
-							     'docman' => 2,
-							     'new_forum' => 3,
-							     'new_tracker' => 3,
-							     'new_pm' => 3,
-							     'webcal' => 2,
-					),
-				'Doc Writer' => array(       'project_read' => 1,
-							     'frs' => 2,
-						       	     'docman' => 4,
-						       	     'new_forum' => 3,
-						       	     'new_tracker' => 1,
-						       	     'new_pm' => 1,
-						       	     'webcal' => 2,
-					),
-				'Support Tech' => array(     'project_read' => 1,
-							     'frs' => 2,
-							     'docman' => 1,
-							     'new_forum' => 3,
-							     'tracker_admin' => 1,
-							     'new_tracker' => 3,
-							     'pm_admin' => 1,
-							     'new_pm' => 7,
-							     'webcal' => 2,
-					),
-				);
-		} else {
-			$this->role_values = array(
-				'projectadmin'	=> array ('0','A'),
-				'frs'		=> array ('0','1'),
-				'scm'		=> array ('-1','0','1'),
-				'docman'	=> array ('0','1'),
-				'forumadmin'	=> array ('0','2'),
-				'forum'		=> array ('-1','0','1','2'),
-				'newforum'	=> array ('-1','0','1','2'),
-				'trackeradmin'	=> array ('0','2'),
-				'tracker'	=> array ('-1','0','1','2','3'),
-				'newtracker'	=> array ('-1','0','1','2','3'),
-				'pmadmin'	=> array ('0','2'),
-				'pm'		=> array ('-1','0','1','2','3'),
-				'newpm'		=> array ('-1','0','1','2','3'),
-				'webcal'	=> array ('0','1','2'));
-
-			$this->defaults = array(
-				'Admin'		  => array( 'projectadmin'=>'A',
-							    'frs'=>'1',
-							    'scm'=>'1',
-							    'docman'=>'1',
-							    'forumadmin'=>'2',
-							    'forum'=>'2',
-							    'newforum'=>'2',
-							    'trackeradmin'=>'2',
-							    'tracker'=>'2',
-							    'newtracker'=>'2',
-							    'pmadmin'=>'2',
-							    'pm'=>'2',
-							    'newpm'=>'2',
-							    'webcal'=>'1' ),
-				'Senior Developer'=> array( 'projectadmin'=>'0',
-							    'frs'=>'1',
-							    'scm'=>'1',
-							    'docman'=>'1',
-							    'forumadmin'=>'2',
-							    'forum'=>'2',
-							    'newforum'=>'2',
-							    'trackeradmin'=>'2',
-							    'tracker'=>'2',
-							    'newtracker'=>'2',
-							    'pmadmin'=>'2',
-							    'pm'=>'2',
-							    'newpm'=>'2',
-							    'webcal'=>'2' ),
-				'Junior Developer'=> array( 'projectadmin'=>'0',
-							    'frs'=>'0',
-							    'scm'=>'1',
-							    'docman'=>'0',
-							    'forumadmin'=>'0',
-							    'forum'=>'1',
-							    'newforum'=>'1',
-							    'trackeradmin'=>'0',
-							    'tracker'=>'1',
-							    'newtracker'=>'1',
-							    'pmadmin'=>'0',
-							    'pm'=>'1',
-							    'newpm'=>'1',
-							    'webcal'=>'2' ),
-				'Doc Writer'	  => array( 'projectadmin'=>'0',
-							    'frs'=>'0',
-							    'scm'=>'0',
-							    'docman'=>'1',
-							    'forumadmin'=>'0',
-							    'forum'=>'1',
-							    'newforum'=>'1',
-							    'trackeradmin'=>'0',
-							    'tracker'=>'0',
-							    'newtracker'=>'0',
-							    'pmadmin'=>'0',
-							    'pm'=>'0' ,
-							    'newpm'=>'0' ,
-							    'webcal'=>'2'),
-				'Support Tech'	  => array( 'projectadmin'=>'0',
-							    'frs'=>'0',
-							    'scm'=>'0',
-							    'docman'=>'1',
-							    'forumadmin'=>'0',
-							    'forum'=>'1',
-							    'newforum'=>'1',
-							    'trackeradmin'=>'0',
-							    'tracker'=>'2',
-							    'newtracker'=>'2',
-							    'pmadmin'=>'0',
-							    'pm'=>'0' ,
-							    'newpm'=>'0' ,
-							    'webcal'=>'2')
-				);
-
-		}
+		// TODO: document these	(Project-related permissions ?)
+		$this->defaults = array(
+			'Admin' => array(            'project_admin'=> 1,
+						     'project_read' => 1,
+						     'frs' => 2,
+						     'scm' => 2,
+						     'docman' => 3,
+						     'forum_admin' => 1,
+						     'new_forum' => 3,
+						     'tracker_admin' => 1,
+						     'new_tracker' => 7,
+						     'pm_admin' => 1,
+						     'new_pm' => 7,
+						     'webcal' => 2,
+				),
+			'Senior Developer' => array( 'project_read' => 1,
+						     'frs' => 2,
+						     'scm' => 2,
+						     'docman' => 3,
+						     'forum_admin' => 1,
+						     'new_forum' => 3,
+						     'tracker_admin' => 1,
+						     'new_tracker' => 7,
+						     'pm_admin' => 1,
+						     'new_pm' => 7,
+						     'webcal' => 2,
+				),
+			'Junior Developer' => array( 'project_read' => 1,
+						     'frs' => 2,
+						     'scm' => 2,
+						     'docman' => 2,
+						     'new_forum' => 3,
+						     'new_tracker' => 3,
+						     'new_pm' => 3,
+						     'webcal' => 2,
+				),
+			'Doc Writer' => array(       'project_read' => 1,
+						     'frs' => 2,
+						     'docman' => 4,
+						     'new_forum' => 3,
+						     'new_tracker' => 1,
+						     'new_pm' => 1,
+						     'webcal' => 2,
+				),
+			'Support Tech' => array(     'project_read' => 1,
+						     'frs' => 2,
+						     'docman' => 1,
+						     'new_forum' => 3,
+						     'tracker_admin' => 1,
+						     'new_tracker' => 3,
+						     'pm_admin' => 1,
+						     'new_pm' => 7,
+						     'webcal' => 2,
+				),
+			);
 	}
 
 	public function getUsers() {
@@ -347,182 +250,28 @@ abstract class BaseRole extends Error {
 		unset($this->setting_array);
 		unset($this->perms_array);
 
-		if (USE_PFO_RBAC) {
-			$res = db_query_params('SELECT * FROM pfo_role WHERE role_id=$1',
-						array ($role_id)) ;
-			if (!$res || db_numrows($res) < 1) {
-				$this->setError('BaseRole::fetchData()::'.db_error());
-				return false;
-			}
-			$this->data_array = db_fetch_array($res);
-			if ($this->data_array['is_public'] == 't') {
-				$this->data_array['is_public'] = true;
-			} else {
-				$this->data_array['is_public'] = false;
-			}
-			$res = db_query_params('SELECT section_name, ref_id, perm_val FROM pfo_role_setting WHERE role_id=$1',
-						array($role_id));
-			if (!$res) {
-				$this->setError('BaseRole::fetchData()::'.db_error());
-				return false;
-			}
-			// TODO: document perms_array
-			$this->perms_array=array();
-			while ($arr = db_fetch_array($res)) {
-				$this->perms_array[$arr['section_name']][$arr['ref_id']] = $arr['perm_val'];
-			}
+		$res = db_query_params('SELECT * FROM pfo_role WHERE role_id=$1',
+				       array ($role_id)) ;
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('BaseRole::fetchData()::'.db_error());
+			return false;
+		}
+		$this->data_array = db_fetch_array($res);
+		if ($this->data_array['is_public'] == 't') {
+			$this->data_array['is_public'] = true;
 		} else {
-			if ($this instanceof RoleAnonymous) {
-				$res = db_query_params ('SELECT group_id, enable_anonscm FROM groups WHERE is_public=1',
-							array ()) ;
-				while ($arr = db_fetch_array($res)) {
-					$this->perms_array['project_read'][$arr['group_id']] = 1 ;
-					$this->perms_array['frs'][$arr['group_id']] = 1 ;
-					$this->perms_array['scm'][$arr['group_id']] = $arr['enable_anonscm'] ;
-				}
-
-				$res = db_query_params ('SELECT t.group_artifact_id FROM artifact_group_list t, groups g WHERE t.is_public=1 AND t.allow_anon=1 AND g.is_public=1 AND t.group_id = g.group_id',
-							array ()) ;
-				while ($arr = db_fetch_array($res)) {
-					$this->perms_array['tracker'][$arr['group_artifact_id']] = 1 ;
-				}
-
-				$res = db_query_params ('SELECT p.group_project_id FROM project_group_list p, groups g WHERE p.is_public=1 AND g.is_public=1 AND p.group_id = g.group_id',
-							array ()) ;
-				while ($arr = db_fetch_array($res)) {
-					$this->perms_array['pm'][$arr['group_project_id']] = 1 ;
-				}
-
-				$res = db_query_params ('SELECT f.group_forum_id, f.allow_anonymous, f.moderation_level FROM forum_group_list f, groups g WHERE f.is_public=1 AND g.is_public=1 AND f.group_id = g.group_id',
-							array ()) ;
-				while ($arr = db_fetch_array($res)) {
-					if ($arr['allow_anonymous'] == 1) {
-						if ($arr['moderation_level'] == 0) {
-							$this->perms_array['forum'][$arr['group_forum_id']] = 3 ;
-						} else {
-							$this->perms_array['forum'][$arr['group_forum_id']] = 2 ;
-						}
-					} else {
-						$this->perms_array['forum'][$arr['group_forum_id']] = 1 ;
-					}
-				}
-			} elseif ($this instanceof RoleLoggedIn) {
-				$res = db_query_params ('SELECT group_id, enable_anonscm FROM groups WHERE is_public=1',
-							array ()) ;
-				while ($arr = db_fetch_array($res)) {
-					$this->perms_array['project_read'][$arr['group_id']] = 1 ;
-					$this->perms_array['frs'][$arr['group_id']] = 1 ;
-					$this->perms_array['scm'][$arr['group_id']] = $arr['enable_anonscm'] ;
-				}
-
-				$res = db_query_params ('SELECT t.group_artifact_id FROM artifact_group_list t, groups g WHERE t.is_public=1 AND g.is_public=1 AND t.group_id = g.group_id',
-							array ()) ;
-				while ($arr = db_fetch_array($res)) {
-					$this->perms_array['tracker'][$arr['group_artifact_id']] = 1 ;
-				}
-
-				$res = db_query_params ('SELECT p.group_project_id FROM project_group_list p, groups g WHERE p.is_public=1 AND g.is_public=1 AND p.group_id = g.group_id',
-							array ()) ;
-				while ($arr = db_fetch_array($res)) {
-					$this->perms_array['pm'][$arr['group_project_id']] = 1 ;
-				}
-
-				$res = db_query_params ('SELECT f.group_forum_id, f.moderation_level FROM forum_group_list f, groups g WHERE f.is_public=1 AND g.is_public=1 AND f.group_id = g.group_id',
-							array ()) ;
-				while ($arr = db_fetch_array($res)) {
-					if ($arr['moderation_level'] == 0) {
-						$this->perms_array['forum'][$arr['group_forum_id']] = 3 ;
-					} else {
-						$this->perms_array['forum'][$arr['group_forum_id']] = 2 ;
-					}
-				}
-			} else {
-			$res = db_query_params ('SELECT * FROM role WHERE role_id=$1',
-						array ($role_id)) ;
-			if (!$res || db_numrows($res) < 1) {
-				$this->setError('BaseRole::fetchData()::'.db_error());
-				return false;
-			}
-			$this->data_array = db_fetch_array($res);
-
-			// Load pre-PFO RBAC settings...
-			$res = db_query_params ('SELECT * FROM role_setting WHERE role_id=$1',
-						array ($role_id)) ;
-			if (!$res) {
-				$this->setError('BaseRole::fetchData()::'.db_error());
-				return false;
-			}
-			$this->setting_array=array();
-			while ($arr = db_fetch_array($res)) {
-				$this->setting_array[$arr['section_name']][$arr['ref_id']] = $arr['value'];
-			}
-
-			// ...and map section names and values to the new values
-
-			if ($this->data_array['group_id'] == forge_get_config ('stats_group')) {
-				$this->perms_array['forge_stats'][-1] = 2 ;
-			}
-
-			$this->perms_array=array();
-			$tohandle = array () ;
-			$gid = $this->data_array['group_id'] ;
-        		if ($gid == 1 && count ($this->setting_array) == 0) {
-				$tohandle[] = array ('forge_admin', -1) ;
-			}
-			foreach ($this->setting_array as $oldsection => $t) {
-				switch ($oldsection) {
-				case 'projectadmin':
-					$tohandle[] = array ('project_admin', $gid) ;
-					if ($this->data_array['group_id'] == 1 && $t[0] == 'A') {
-						$tohandle[] = array ('forge_admin', -1) ;
-					}
-					if ($this->data_array['group_id'] == forge_get_config ('news_group') && $t[0] == 'A') {
-						$tohandle[] = array ('approve_news', -1) ;
-					}
-					if ($this->data_array['group_id'] == forge_get_config ('stats_group') && $t[0] == 'A') {
-						$tohandle[] = array ('forge_stats', -1) ;
-					}
-					break ;
-				case 'trackeradmin':
-					$tohandle[] = array ('tracker_admin', $gid) ;
-					break ;
-				case 'pmadmin':
-					$tohandle[] = array ('pm_admin', $gid) ;
-					break ;
-				case 'forumadmin':
-					$tohandle[] = array ('forum_admin', $gid) ;
-					break ;
-
-				case 'newtracker':
-					$tohandle[] = array ('new_tracker', $gid) ;
-					break ;
-				case 'newpm':
-					$tohandle[] = array ('new_pm', $gid) ;
-					break ;
-				case 'newforum':
-					$tohandle[] = array ('new_forum', $gid) ;
-					break ;
-
-				default:
-					foreach ($t as $oldreference => $oldvalue) {
-						$tohandle[] = array ($oldsection, $oldreference) ;
-						break ;
-					}
-				}
-			}
-
-			foreach ($tohandle as $t) {
-				$nsec = $t[0] ;
-				$nref = $t[1] ;
-
-				$res = db_query_params ('SELECT pfo_rbac_permissions_from_old($1,$2,$3)',
-							array ($role_id, $nsec, $nref)) ;
-				if ($res) {
-					$arr = db_fetch_array($res) ;
-					$this->perms_array[$nsec][$nref] = $arr[0] ;
-				}
-			}
-			} // Explicit role (not Anonymous or LoggedIn)
+			$this->data_array['is_public'] = false;
+		}
+		$res = db_query_params('SELECT section_name, ref_id, perm_val FROM pfo_role_setting WHERE role_id=$1',
+				       array($role_id));
+		if (!$res) {
+			$this->setError('BaseRole::fetchData()::'.db_error());
+			return false;
+		}
+		// TODO: document perms_array
+		$this->perms_array=array();
+		while ($arr = db_fetch_array($res)) {
+			$this->perms_array[$arr['section_name']][$arr['ref_id']] = $arr['perm_val'];
 		}
 
 		return true;
@@ -547,16 +296,9 @@ abstract class BaseRole extends Error {
 		$result = array () ;
 		$group_id = $project->getID() ;
 
-		if (USE_PFO_RBAC) {
-			$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
-			foreach ($sections as $section) {
-				$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
-			}
-		} else {
-			$sections = array ('projectadmin', 'frs', 'scm', 'docman', 'trackeradmin', 'newtracker', 'forumadmin', 'newforum', 'pmadmin', 'newpm', 'webcal') ;
-			foreach ($sections as $section) {
-				$result[$section][0] = $this->getVal ($section, 0) ;
-			}
+		$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
+		foreach ($sections as $section) {
+			$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
 		}
 
 		$atf = new ArtifactTypeFactory ($project) ;
@@ -581,19 +323,17 @@ abstract class BaseRole extends Error {
 		$sections[] = 'pm' ;
 
 
-		if (USE_PFO_RBAC) {
-			// Add settings not yet listed so far (probably plugins)
-			// Currently handled:
-			// - global settings (ignored here)
-			// - project-wide settings (core and plugins)
-			// - settings for multiple-instance tools coming from the core (trackers/pm/forums)
-			// TODO:
-			// - settings for multiple-instance tools from plugins
-			foreach (array_keys ($this->perms_array) as $section) {
-				if (!in_array ($section, $sections)) {
-					if (!in_array ($section, $this->global_settings)) {
-						$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
-					}
+		// Add settings not yet listed so far (probably plugins)
+		// Currently handled:
+		// - global settings (ignored here)
+		// - project-wide settings (core and plugins)
+		// - settings for multiple-instance tools coming from the core (trackers/pm/forums)
+		// TODO:
+		// - settings for multiple-instance tools from plugins
+		foreach (array_keys ($this->perms_array) as $section) {
+			if (!in_array ($section, $sections)) {
+				if (!in_array ($section, $this->global_settings)) {
+					$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
 				}
 			}
 		}
@@ -761,15 +501,7 @@ abstract class BaseRole extends Error {
 		if (!$ref_id) {
 			$ref_id=0;
 		}
-		if (USE_PFO_RBAC) {
-			return $this->getSetting($section, $ref_id) ;
-		} else {
-			if (array_key_exists($section, $this->setting_array)) {
-				return $this->setting_array[$section][$ref_id];
-			} else {
-				return 0 ;
-			}
-		}
+		return $this->getSetting($section, $ref_id) ;
 	}
 
 	/**
@@ -939,29 +671,14 @@ abstract class BaseRole extends Error {
 	 */
 	function update($role_name,$data,$check_perms=true) {
 		global $SYS;
-		if (USE_PFO_RBAC) {
-			if ($check_perms) {
-				if ($this->getHomeProject() == NULL) {
-					if (!forge_check_global_perm ('forge_admin')) {
-						$this->setPermissionDeniedError();
-						return false;
-					}
-				} elseif (!forge_check_perm ('project_admin', $this->getHomeProject()->getID())) {
+		if ($check_perms) {
+			if ($this->getHomeProject() == NULL) {
+				if (!forge_check_global_perm ('forge_admin')) {
 					$this->setPermissionDeniedError();
 					return false;
 				}
-			}
-		} else {
-			$perm =& $this->Group->getPermission ();
-			if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
+			} elseif (!forge_check_perm ('project_admin', $this->getHomeProject()->getID())) {
 				$this->setPermissionDeniedError();
-				return false;
-			}
-			//
-			//	Cannot update role_id=1
-			//
-			if ($this->getID() == 1) {
-				$this->setError('Cannot Update Default Role');
 				return false;
 			}
 		}
@@ -969,200 +686,24 @@ abstract class BaseRole extends Error {
 		db_begin();
 
 
-		if (USE_PFO_RBAC) {
-			if ($role_name != $this->getName()) {
-				$this->setName($role_name) ;
+		if ($role_name != $this->getName()) {
+			$this->setName($role_name) ;
+		}
+		
+		foreach ($data as $sect => $refs) {
+			foreach ($refs as $refid => $value) {
+				$this->setSetting ($sect, $refid, $value) ;
 			}
-
-			foreach ($data as $sect => $refs) {
-				foreach ($refs as $refid => $value) {
-					$this->setSetting ($sect, $refid, $value) ;
-				}
-				if ($sect == 'scm') {
-					foreach ($this->getUsers() as $u) {
-						if (!$SYS->sysGroupCheckUser($refid,$u->getID())) {
-							$this->setError($SYS->getErrorMessage());
-							db_rollback();
-							return false;
-						}
+			if ($sect == 'scm') {
+				foreach ($this->getUsers() as $u) {
+					if (!$SYS->sysGroupCheckUser($refid,$u->getID())) {
+						$this->setError($SYS->getErrorMessage());
+						db_rollback();
+						return false;
 					}
 				}
-			}
-		} else {
-			if (! $this->setName($role_name)) {
-				db_rollback();
-				return false;
-			}
-
-		// Delete extra settings
-		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name <> ALL ($2)',
-				 array ($this->getID(),
-					db_string_array_to_any_clause (array_keys ($this->role_values)))) ;
-		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
-				 array ($this->getID(),
-					'tracker',
-					db_int_array_to_any_clause (array_keys ($data['tracker'])))) ;
-		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
-				 array ($this->getID(),
-					'forum',
-					db_int_array_to_any_clause (array_keys ($data['forum'])))) ;
-		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
-				 array ($this->getID(),
-					'pm',
-					db_int_array_to_any_clause (array_keys ($data['pm'])))) ;
-
-
-
-
-
-
-
-
-
-
-////$data['section_name']['ref_id']=$val
-		$arr1 = array_keys($data);
-		for ($i=0; $i<count($arr1); $i++) {
-		//	array_values($Report->adjust_days)
-			$arr2 = array_keys($data[$arr1[$i]]);
-			for ($j=0; $j<count($arr2); $j++) {
-				$usection_name=$arr1[$i];
-				$uref_id=$arr2[$j];
-				$uvalue=$data[$usection_name][$uref_id];
-				if (!$uref_id) {
-					$uref_id=0;
-				}
-				if (!$uvalue) {
-					$uvalue=0;
-				}
-				//
-				//	See if this setting changed. If so, then update it
-				//
-//				if ($this->getVal($usection_name,$uref_id) != $uvalue) {
-					$res = db_query_params ('UPDATE role_setting SET value=$1 WHERE role_id=$2 AND section_name=$3 AND ref_id=$4',
-								array ($uvalue,
-								       $this->getID(),
-								       $usection_name,
-								       $uref_id)) ;
-					if (!$res || db_affected_rows($res) < 1) {
-						$res = db_query_params ('INSERT INTO role_setting (role_id, section_name, ref_id, value) VALUES ($1, $2, $3, $4)',
-									array ($this->getID(),
-									       $usection_name,
-									       $uref_id,
-									       $uvalue)) ;
-						if (!$res) {
-							$this->setError('update::rolesettinginsert::'.db_error());
-							db_rollback();
-							return false;
-						}
-					}
-					if ($usection_name == 'frs') {
-						$update_usergroup=true;
-					} elseif ($usection_name == 'scm') {
-						//$update_usergroup=true;
-
-						//iterate all users with this role
-						$res = db_query_params ('SELECT user_id	FROM user_group WHERE role_id=$1',
-									array ($this->getID())) ;
-						for ($z=0; $z<db_numrows($res); $z++) {
-
-							//TODO - Shell should be separate flag
-							//  If user acquired admin access to CVS,
-							//  one to be given normal shell on CVS machine,
-							//  else - restricted.
-							//
-							$cvs_flags=$data['scm'][0];
-							$res2 = db_query_params ('UPDATE user_group SET cvs_flags=$1 WHERE user_id=$2',
-										 array ($cvs_flags,
-											db_result($res,$z,'user_id')));
-							if (!$res2) {
-								$this->setError('update::scm::'.db_error());
-								db_rollback();
-								return false;
-							}
-							// I have doubt the following is usefull
-							// This is probably buggy if used
-							if ($cvs_flags>1) {
-								if (!$SYS->sysUserSetAttribute(db_result($res,$z,'user_id'),"debGforgeCvsShell","/bin/bash")) {
-									$this->setError($SYS->getErrorMessage());
-									db_rollback();
-									return false;
-								}
-							} else {
-								if (!$SYS->sysUserSetAttribute(db_result($res,$z,'user_id'),"debGforgeCvsShell","/bin/cvssh")) {
-									$this->setError($SYS->getErrorMessage());
-									db_rollback();
-									return false;
-								}
-							}
-
-							//
-							//  If user acquired at least commit access to CVS,
-							//  one to be promoted to CVS group, else, demoted.
-							//
-							if ($uvalue>0) {
-								if (!$SYS->sysGroupAddUser($this->Group->getID(),db_result($res,$z,'user_id'),1)) {
-									$this->setError($SYS->getErrorMessage());
-									db_rollback();
-									return false;
-								}
-							} else {
-								if (!$SYS->sysGroupRemoveUser($this->Group->getID(),db_result($res,$z,'user_id'),1)) {
-									$this->setError($SYS->getErrorMessage());
-									db_rollback();
-									return false;
-								}
-							}
-
-
-						}
-					} elseif ($usection_name == 'docman') {
-						$update_usergroup=true;
-					} elseif ($usection_name == 'forumadmin') {
-						$update_usergroup=true;
-					} elseif ($usection_name == 'trackeradmin') {
-						$update_usergroup=true;
-					} elseif ($usection_name == 'projectadmin') {
-						$update_usergroup=true;
-					} elseif ($usection_name == 'pmadmin') {
-						$update_usergroup=true;
-					}
-	//			}
 			}
 		}
-//		if ($update_usergroup) {
-			$keys = array ('forumadmin', 'pmadmin', 'trackeradmin', 'docman', 'scm', 'frs', 'projectadmin') ;
-			foreach ($keys as $k) {
-				if (!array_key_exists ($k, $data)) {
-					$data[$k] = array(0);
-				}
-			}
-			$res = db_query_params ('UPDATE user_group
-                               SET admin_flags=$1,
-   				   forum_flags=$2,
-   				   project_flags=$3,
-   				   doc_flags=$4,
-   				   cvs_flags=$5,
-   				   release_flags=$6,
-   				   artifact_flags=$7
-   				WHERE role_id=$8',
-   						array ($data['projectadmin'][0],
-						       $data['forumadmin'][0],
-						       $data['pmadmin'][0],
-						       $data['docman'][0],
-						       $data['scm'][0],
-						       $data['frs'][0],
-						       $data['trackeradmin'][0],
-						       $this->getID())) ;
-			if (!$res) {
-				$this->setError('::update::usergroup::'.db_error());
-				db_rollback();
-				return false;
-			}
-
-//		}
-
-		} // USE_PFO_RBAC
 
 		$hook_params = array ();
 		$hook_params['role'] =& $this;
@@ -1251,24 +792,17 @@ abstract class BaseRole extends Error {
 
 		// Add missing settings
 		// ...project-wide settings
-		if (USE_PFO_RBAC) {
-			$arr = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'webcal') ;
-			foreach ($projects as $p) {
-				foreach ($arr as $section) {
-					$this->normalizePermsForSection ($new_pa, $section, $p->getID()) ;
-				}
-			}
-			$this->normalizePermsForSection ($new_pa, 'forge_admin', -1) ;
-			$this->normalizePermsForSection ($new_pa, 'approve_projects', -1) ;
-			$this->normalizePermsForSection ($new_pa, 'approve_news', -1) ;
-			$this->normalizePermsForSection ($new_pa, 'forge_stats', -1) ;
-		} else {
-			$arr = array ('projectadmin', 'frs', 'scm', 'docman', 'forumadmin', 'trackeradmin', 'newtracker', 'pmadmin', 'newpm', 'webcal') ;
+		$arr = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'webcal') ;
+		foreach ($projects as $p) {
 			foreach ($arr as $section) {
-				$this->normalizeDataForSection ($new_sa, $section) ;
+				$this->normalizePermsForSection ($new_pa, $section, $p->getID()) ;
 			}
 		}
-
+		$this->normalizePermsForSection ($new_pa, 'forge_admin', -1) ;
+		$this->normalizePermsForSection ($new_pa, 'approve_projects', -1) ;
+		$this->normalizePermsForSection ($new_pa, 'approve_news', -1) ;
+		$this->normalizePermsForSection ($new_pa, 'forge_stats', -1) ;
+		
 		$hook_params = array ();
 		$hook_params['role'] =& $this;
 		$hook_params['new_sa'] =& $new_sa ;
@@ -1282,21 +816,12 @@ abstract class BaseRole extends Error {
 			$atf = new ArtifactTypeFactory ($p) ;
 			$trackerids = $atf->getAllArtifactTypeIds () ;
 			foreach ($trackerids as $tid) {
-				if (USE_PFO_RBAC) {
-					if (array_key_exists ('tracker', $this->perms_array)
-					    && array_key_exists ($tid, $this->perms_array['tracker']) ) {
-						$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid] ;
-					} elseif (array_key_exists ('new_tracker', $this->perms_array)
-					    && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
-						$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()] ;
-					}
-				} else {
-					if (array_key_exists ('tracker', $this->setting_array)
-					    && array_key_exists ($tid, $this->setting_array['tracker']) ) {
-						$new_sa['tracker'][$tid] = $this->setting_array['tracker'][$tid] ;
-					} else {
-						$new_sa['tracker'][$tid] = $new_sa['newtracker'][0] ;
-					}
+				if (array_key_exists ('tracker', $this->perms_array)
+				    && array_key_exists ($tid, $this->perms_array['tracker']) ) {
+					$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid] ;
+				} elseif (array_key_exists ('new_tracker', $this->perms_array)
+					  && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
+					$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()] ;
 				}
 			}
 		}
@@ -1308,23 +833,13 @@ abstract class BaseRole extends Error {
 			$ff = new ForumFactory ($p) ;
 			$fids = $ff->getAllForumIds () ;
 			foreach ($fids as $fid) {
-				if (USE_PFO_RBAC) {
-					if (array_key_exists ('forum', $this->perms_array)
-					    && array_key_exists ($fid, $this->perms_array['forum']) ) {
-						$new_pa['forum'][$fid] = $this->perms_array['forum'][$fid] ;
-					} elseif (array_key_exists ('new_forum', $this->perms_array)
-					    && array_key_exists ($p->getID(), $this->perms_array['new_forum']) ) {
-						$new_pa['forum'][$fid] = $new_pa['new_forum'][$p->getID()] ;
-					}
-				} else {
-					if (array_key_exists ('forum', $this->setting_array)
-					    && array_key_exists ($fid, $this->setting_array['forum']) ) {
-						$new_sa['forum'][$fid] = $this->setting_array['forum'][$fid] ;
-					} else {
-						$new_sa['forum'][$fid] = $new_sa['newforum'][0] ;
-					}
+				if (array_key_exists ('forum', $this->perms_array)
+				    && array_key_exists ($fid, $this->perms_array['forum']) ) {
+					$new_pa['forum'][$fid] = $this->perms_array['forum'][$fid] ;
+				} elseif (array_key_exists ('new_forum', $this->perms_array)
+					  && array_key_exists ($p->getID(), $this->perms_array['new_forum']) ) {
+					$new_pa['forum'][$fid] = $new_pa['new_forum'][$p->getID()] ;
 				}
-			}
 		}
 
 		// ...pm-related settings
@@ -1334,31 +849,18 @@ abstract class BaseRole extends Error {
 			$pgf = new ProjectGroupFactory ($p) ;
 			$pgids = $pgf->getAllProjectGroupIds () ;
 			foreach ($pgids as $gid) {
-				if (USE_PFO_RBAC) {
-					if (array_key_exists ('pm', $this->perms_array)
-					    && array_key_exists ($gid, $this->perms_array['pm']) ) {
-						$new_pa['pm'][$gid] = $this->perms_array['pm'][$gid] ;
-					} elseif (array_key_exists ('new_pm', $this->perms_array)
-					    && array_key_exists ($p->getID(), $this->perms_array['new_pm']) ) {
-						$new_pa['pm'][$gid] = $new_pa['new_pm'][$p->getID()] ;
-					}
-				} else {
-					if (array_key_exists ('pm', $this->setting_array)
-					    && array_key_exists ($gid, $this->setting_array['pm']) ) {
-						$new_sa['pm'][$gid] = $this->setting_array['pm'][$gid] ;
-					} else {
-						$new_sa['pm'][$gid] = $new_sa['newpm'][0] ;
-					}
+				if (array_key_exists ('pm', $this->perms_array)
+				    && array_key_exists ($gid, $this->perms_array['pm']) ) {
+					$new_pa['pm'][$gid] = $this->perms_array['pm'][$gid] ;
+				} elseif (array_key_exists ('new_pm', $this->perms_array)
+					  && array_key_exists ($p->getID(), $this->perms_array['new_pm']) ) {
+					$new_pa['pm'][$gid] = $new_pa['new_pm'][$p->getID()] ;
 				}
 			}
 		}
 
 		// Save
-		if (USE_PFO_RBAC) {
-			$this->update ($this->getName(), $new_pa, false) ;
-		} else {
-			$this->update ($this->getName(), $new_sa) ;
-		}
+		$this->update ($this->getName(), $new_pa, false) ;
 		return true;
 	}
 }

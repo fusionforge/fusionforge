@@ -59,17 +59,10 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			$this->_cached_available_roles[] = RoleLoggedIn::getInstance() ;
 			$user = session_get_user() ;
 
-			if (USE_PFO_RBAC) {
-				$res = db_query_params ('SELECT role_id FROM pfo_user_role WHERE user_id=$1',
+			$res = db_query_params ('SELECT role_id FROM pfo_user_role WHERE user_id=$1',
 						array ($user->getID()));
-				while ($arr = db_fetch_array($res)) {
-					$this->_cached_available_roles[] = $this->getRoleById ($arr['role_id']) ;
-				}
-			} else {
-				$groups = $user->getGroups() ;
-				foreach ($groups as $g) {
-					$this->_cached_available_roles[] = $user->getRole($g) ;
-				}
+			while ($arr = db_fetch_array($res)) {
+				$this->_cached_available_roles[] = $this->getRoleById ($arr['role_id']) ;
 			}
 		}
 
@@ -121,12 +114,10 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 
 		$this->_cached_global_roles = array () ;
 
-		if (USE_PFO_RBAC) {
-			$res = db_query_params ('SELECT role_id FROM pfo_role WHERE home_group_id IS NULL',
-						array ());
-			while ($arr = db_fetch_array($res)) {
-				$this->_cached_global_roles[] = $this->getRoleById ($arr['role_id']) ;
-			}
+		$res = db_query_params ('SELECT role_id FROM pfo_role WHERE home_group_id IS NULL',
+					array ());
+		while ($arr = db_fetch_array($res)) {
+			$this->_cached_global_roles[] = $this->getRoleById ($arr['role_id']) ;
 		}
 
 		return $this->_cached_global_roles ;
@@ -139,12 +130,10 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 
 		$this->_cached_public_roles = array () ;
 
-		if (USE_PFO_RBAC) {
-			$res = db_query_params ('SELECT role_id FROM pfo_role WHERE is_public=$1',
-						array ('true'));
-			while ($arr = db_fetch_array($res)) {
-				$this->_cached_public_roles[] = $this->getRoleById ($arr['role_id']) ;
-			}
+		$res = db_query_params ('SELECT role_id FROM pfo_role WHERE is_public=$1',
+					array ('true'));
+		while ($arr = db_fetch_array($res)) {
+			$this->_cached_public_roles[] = $this->getRoleById ($arr['role_id']) ;
 		}
 
 		return $this->_cached_public_roles ;
@@ -162,18 +151,10 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		$result[] = RoleAnonymous::getInstance() ;
 		$result[] = RoleLoggedIn::getInstance() ;
 
-		if (USE_PFO_RBAC) {
-			$res = db_query_params ('SELECT role_id FROM pfo_user_role WHERE user_id=$1',
-						array ($user->getID()));
-			while ($arr = db_fetch_array($res)) {
-				$result[] = $this->getRoleById ($arr['role_id']) ;
-			}
-		} else {
-			$res = db_query_params ('SELECT role_id FROM user_group WHERE user_id=$1',
-						array ($user->getID()));
-			while ($arr = db_fetch_array($res)) {
-				$result[] = $this->getRoleById ($arr['role_id']) ;
-			}
+		$res = db_query_params ('SELECT role_id FROM pfo_user_role WHERE user_id=$1',
+					array ($user->getID()));
+		while ($arr = db_fetch_array($res)) {
+			$result[] = $this->getRoleById ($arr['role_id']) ;
 		}
 
 		return $result ;
@@ -214,38 +195,27 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		if (array_key_exists ($role_id, $this->_cached_roles)) {
 			return $this->_cached_roles[$role_id] ;
 		}
-		if (USE_PFO_RBAC) {
-			$res = db_query_params ('SELECT c.class_name, r.home_group_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND r.role_id = $1',
-						array ($role_id)) ;
-			if (!$res || !db_numrows($res)) {
-				return NULL ;
-			}
+		$res = db_query_params ('SELECT c.class_name, r.home_group_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND r.role_id = $1',
+					array ($role_id)) ;
+		if (!$res || !db_numrows($res)) {
+			return NULL ;
+		}
 
-			$class_id = db_result ($res, 0, 'class_name') ;
-			switch ($class_id) {
-			case 'PFO_RoleExplicit':
-				$group_id = db_result ($res, 0, 'home_group_id') ;
-				$group = group_get_object ($group_id) ;
-				$this->_cached_roles[$role_id] = new Role ($group, $role_id) ;
-				return $this->_cached_roles[$role_id] ;
-			case 'PFO_RoleAnonymous':
-				$this->_cached_roles[$role_id] = RoleAnonymous::getInstance() ;
-				return $this->_cached_roles[$role_id] ;
-			case 'PFO_RoleLoggedIn':
-				$this->_cached_roles[$role_id] = RoleLoggedIn::getInstance() ;
-				return $this->_cached_roles[$role_id] ;
-			default:
-				throw new Exception ("Not implemented") ;
-			}
-		} else {
-			$res = db_query_params ('SELECT group_id FROM role r WHERE role_id = $1',
-						array ($role_id)) ;
-			if (!$res || !db_numrows($res)) {
-				return NULL ;
-			}
-			$group_id = db_result ($res, 0, 'group_id') ;
+		$class_id = db_result ($res, 0, 'class_name') ;
+		switch ($class_id) {
+		case 'PFO_RoleExplicit':
+			$group_id = db_result ($res, 0, 'home_group_id') ;
 			$group = group_get_object ($group_id) ;
-			return new Role ($group, $role_id) ;
+			$this->_cached_roles[$role_id] = new Role ($group, $role_id) ;
+			return $this->_cached_roles[$role_id] ;
+		case 'PFO_RoleAnonymous':
+			$this->_cached_roles[$role_id] = RoleAnonymous::getInstance() ;
+			return $this->_cached_roles[$role_id] ;
+		case 'PFO_RoleLoggedIn':
+			$this->_cached_roles[$role_id] = RoleLoggedIn::getInstance() ;
+			return $this->_cached_roles[$role_id] ;
+		default:
+			throw new Exception ("Not implemented") ;
 		}
 	}
 
