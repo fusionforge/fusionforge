@@ -840,6 +840,7 @@ abstract class BaseRole extends Error {
 					  && array_key_exists ($p->getID(), $this->perms_array['new_forum']) ) {
 					$new_pa['forum'][$fid] = $new_pa['new_forum'][$p->getID()] ;
 				}
+			}
 		}
 
 		// ...pm-related settings
