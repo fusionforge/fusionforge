@@ -316,20 +316,6 @@ Description: Extratabs plugin for FusionForge
  This plugin allows each project to define extra tabs with arbitrary
  titles and links.
 
-Package: fusionforge-plugin-forumml
-Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, fusionforge-plugin-mailman, php5-cli, php-mail, php-mail-mime, php-mail-mbox, php-mail-mimedecode, python-iniparse, ${misc:Depends}
-Description: collaborative development tool - ForumML plugin
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This plugin contains the ForumML subsystem of FusionForge. It allows each
- FusionForge project to have its own ForumML, and gives some
- control over it to the project's administrator.
-
 Package: fusionforge-plugin-globalsearch
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${misc:Depends}

@@ -108,7 +108,7 @@ scp -r $WORKSPACE/build/debian root@$HOST:/
 gpg --export --armor | ssh root@$HOST "apt-key add -"
 sleep 5
 ssh root@$HOST "apt-get update"
-ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -y --force-yes install postgresql-contrib fusionforge-plugin-forumml fusionforge-full"
+ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -y --force-yes install postgresql-contrib fusionforge-full"
 echo "Set forge admin password"
 ssh root@$HOST "/usr/share/gforge/bin/forge_set_password admin myadmin"
 #ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload ; LANG=C touch /tmp/fusionforge-use-pfo-rbac"
