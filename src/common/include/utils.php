@@ -1539,6 +1539,19 @@ function util_html_secure($s) {
 	    ENT_QUOTES, "UTF-8");
 }
 
+/* return an array from an array of arrays of arrays of ... */
+function array_flatten($array) {
+	$returnedValue = array();
+	foreach ($array as $value) {
+		if(is_array($value)) {
+			$returnedValue = array_flatten($value);
+		} else {
+			$returnedValue[] = $value;
+		}
+	}
+	return $returnedValue;
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
