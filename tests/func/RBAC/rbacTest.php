@@ -242,7 +242,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Temporary role") ;
 		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
-		$this->click ("//a[contains(@href,'/users/trainee')]/../../td/input[@type='checkbox']") ;
+		$this->click ("//a[contains(@href,'/users/toto')]/../../td/input[@type='checkbox']") ;
 		$this->click ("//input[@name='reallyremove']") ;
 		$this->click ("//input[@name='dormusers']") ;
 		$this->waitForPageToLoad("30000");
@@ -542,7 +542,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Temporary role");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
-		$this->click ("//td/form/div[contains(.,'Temporary role')]/../div/input[@value='Delete role']") ;
+		$this->click ("//td/form/div[contains(.,'Temporary role')]/../../formdiv/input[@value='Delete role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->click ("//input[@type='checkbox' and @name='sure']") ;
 		$this->click ("//input[@value='Submit']") ;
