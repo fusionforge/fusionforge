@@ -172,45 +172,6 @@ plugins/coclico/codendi-specific/common/dao/include/diffDataAccessObject -text
 plugins/coclico/codendi-specific/env.inc.php -text
 plugins/coclico/codendi-specific/extendcodendi.py -text
 plugins/coclico/codendi-specific/www/include/plugins_utils.php -text
-plugins/coclico/soapadmin/README.txt -text
-plugins/coclico/soapadmin/bin/db-delete.pl -text svneol=unset#text/x-perl
-plugins/coclico/soapadmin/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-plugins/coclico/soapadmin/bin/sayhello -text
-plugins/coclico/soapadmin/common/soapadmin-init.php -text
-plugins/coclico/soapadmin/cronjobs/manage_soapadmin.php -text
-plugins/coclico/soapadmin/db/soapadmin-init.sql -text
-plugins/coclico/soapadmin/debian/README.Debian -text
-plugins/coclico/soapadmin/debian/README.source -text
-plugins/coclico/soapadmin/debian/changelog -text
-plugins/coclico/soapadmin/debian/compat -text
-plugins/coclico/soapadmin/debian/control -text
-plugins/coclico/soapadmin/debian/copyright -text
-plugins/coclico/soapadmin/debian/docs -text
-plugins/coclico/soapadmin/debian/dsf-in/plugin-soapadmin.postinst -text
-plugins/coclico/soapadmin/debian/dsf-in/plugin-soapadmin.prerm -text
-plugins/coclico/soapadmin/debian/po/templates.pot -text
-plugins/coclico/soapadmin/debian/rules -text
-plugins/coclico/soapadmin/debian/source/format -text
-plugins/coclico/soapadmin/etc/httpd.d/62plugin-soapadmin -text
-plugins/coclico/soapadmin/etc/plugins/soapadmin/config.php -text
-plugins/coclico/soapadmin/include/soapadminPlugin.class.php -text
-plugins/coclico/soapadmin/packaging/control/000source -text
-plugins/coclico/soapadmin/packaging/control/222plugin-soapadmin -text
-plugins/coclico/soapadmin/packaging/control/222plugin-soapadmin.shortdesc -text
-plugins/coclico/soapadmin/packaging/dirs/plugin-soapadmin -text
-plugins/coclico/soapadmin/packaging/docs/plugin-soapadmin -text
-plugins/coclico/soapadmin/packaging/install/plugin-soapadmin -text
-plugins/coclico/soapadmin/packaging/links/plugin-soapadmin -text
-plugins/coclico/soapadmin/translations/en.po -text
-plugins/coclico/soapadmin/translations/gforge.pot -text
-plugins/coclico/soapadmin/utils/manage-translations.sh -text svneol=unset#text/x-sh
-plugins/coclico/soapadmin/www/admin/index.php -text
-plugins/coclico/soapadmin/www/coreapi/FusionforgeCoreApi.wsdl -text
-plugins/coclico/soapadmin/www/coreapi/coreapi.php -text
-plugins/coclico/soapadmin/www/coreapi/coreapiobjects.php -text
-plugins/coclico/soapadmin/www/coreapi/coreapiservice.php -text
-plugins/coclico/soapadmin/www/index.php -text
-plugins/coclico/soapadmin/www/log4php.properties -text
 plugins/old/webcalendar/AUTHORS -text
 plugins/old/webcalendar/COPYING -text
 plugins/old/webcalendar/ChangeLog -text
@@ -415,44 +376,6 @@ plugins/old/webcalendar/www/ws/get_events.php -text
 plugins/old/webcalendar/www/ws/get_reminders.php -text
 plugins/old/webcalendar/www/ws/login.php -text
 plugins/old/webcalendar/www/year.php -text
-plugins/templates/helloworld/NAME -text
-plugins/templates/helloworld/README -text
-plugins/templates/helloworld/bin/db-delete.pl -text svneol=unset#text/x-perl
-plugins/templates/helloworld/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-plugins/templates/helloworld/cronjobs/manage_helloworld.php -text
-plugins/templates/helloworld/debian/README.Debian -text
-plugins/templates/helloworld/debian/README.source -text
-plugins/templates/helloworld/debian/changelog -text
-plugins/templates/helloworld/debian/compat -text
-plugins/templates/helloworld/debian/control -text
-plugins/templates/helloworld/debian/copyright -text
-plugins/templates/helloworld/debian/docs -text
-plugins/templates/helloworld/debian/dsf-in/plugin-helloworld.postinst -text
-plugins/templates/helloworld/debian/dsf-in/plugin-helloworld.prerm -text
-plugins/templates/helloworld/debian/po/templates.pot -text
-plugins/templates/helloworld/debian/rules -text
-plugins/templates/helloworld/debian/source/format -text
-plugins/templates/helloworld/etc/helloworld.ini -text
-plugins/templates/helloworld/etc/httpd.d/62plugin-helloworld -text
-plugins/templates/helloworld/packaging/control/000source -text
-plugins/templates/helloworld/packaging/control/222plugin-helloworld -text
-plugins/templates/helloworld/packaging/control/222plugin-helloworld.shortdesc -text
-plugins/templates/helloworld/packaging/dirs/plugin-helloworld -text
-plugins/templates/helloworld/packaging/docs/plugin-helloworld -text
-plugins/templates/helloworld/packaging/install/plugin-helloworld -text
-plugins/templates/helloworld/packaging/links/plugin-helloworld -text
-plugins/templates/helloworld/translations/en.po -text
-plugins/templates/helloworld/translations/gforge.pot -text
-plugins/templates/helloworld/utils/manage-translations.sh -text svneol=unset#text/x-sh
-plugins/templates/helloworld/www/admin/index.php -text
-plugins/templates/scmcpold/NAME -text
-plugins/templates/scmcpold/common/CpoldPlugin.class.php -text
-plugins/templates/scmcpold/common/scmcpold-init.php -text
-plugins/templates/scmcpold/etc/plugins/scmcpold/config.php -text
-plugins/templates/scmcpold/packaging/control/137plugin-scmcpold -text
-plugins/templates/scmcpold/packaging/control/137plugin-scmcpold.shortdesc -text
-plugins/templates/scmcpold/packaging/dirs/plugin-scmcpold -text
-plugins/templates/scmcpold/packaging/install/plugin-scmcpold -text
 src/AUTHORS -text
 src/CHANGES -text
 src/COPYING.php -text
@@ -1736,6 +1659,36 @@ src/plugins/gravatar/packaging/control/223plugin-gravatar -text
 src/plugins/gravatar/packaging/control/223plugin-gravatar.shortdesc -text
 src/plugins/gravatar/packaging/dirs/plugin-gravatar -text
 src/plugins/gravatar/packaging/install/plugin-gravatar -text
+src/plugins/helloworld/NAME -text
+src/plugins/helloworld/README -text
+src/plugins/helloworld/bin/db-delete.pl -text svneol=unset#text/x-perl
+src/plugins/helloworld/bin/db-upgrade.pl -text svneol=unset#text/x-perl
+src/plugins/helloworld/cronjobs/manage_helloworld.php -text
+src/plugins/helloworld/debian/README.Debian -text
+src/plugins/helloworld/debian/README.source -text
+src/plugins/helloworld/debian/changelog -text
+src/plugins/helloworld/debian/compat -text
+src/plugins/helloworld/debian/control -text
+src/plugins/helloworld/debian/copyright -text
+src/plugins/helloworld/debian/docs -text
+src/plugins/helloworld/debian/dsf-in/plugin-helloworld.postinst -text
+src/plugins/helloworld/debian/dsf-in/plugin-helloworld.prerm -text
+src/plugins/helloworld/debian/po/templates.pot -text
+src/plugins/helloworld/debian/rules -text
+src/plugins/helloworld/debian/source/format -text
+src/plugins/helloworld/etc/helloworld.ini -text
+src/plugins/helloworld/etc/httpd.d/62plugin-helloworld -text
+src/plugins/helloworld/packaging/control/000source -text
+src/plugins/helloworld/packaging/control/222plugin-helloworld -text
+src/plugins/helloworld/packaging/control/222plugin-helloworld.shortdesc -text
+src/plugins/helloworld/packaging/dirs/plugin-helloworld -text
+src/plugins/helloworld/packaging/docs/plugin-helloworld -text
+src/plugins/helloworld/packaging/install/plugin-helloworld -text
+src/plugins/helloworld/packaging/links/plugin-helloworld -text
+src/plugins/helloworld/translations/en.po -text
+src/plugins/helloworld/translations/gforge.pot -text
+src/plugins/helloworld/utils/manage-translations.sh -text svneol=unset#text/x-sh
+src/plugins/helloworld/www/admin/index.php -text
 src/plugins/hudson/NAME -text
 src/plugins/hudson/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/hudson/bin/db-upgrade.pl -text svneol=unset#text/x-perl
@@ -2448,6 +2401,14 @@ src/plugins/scmccase/etc/plugins/scmccase/config.pl svneol=native#text/x-perl
 src/plugins/scmccase/etc/scmccase.ini -text
 src/plugins/scmccase/packaging/docs/plugin-scmccase -text
 src/plugins/scmccase/packaging/install/plugin-scmccase -text
+src/plugins/scmcpold/NAME -text
+src/plugins/scmcpold/common/CpoldPlugin.class.php -text
+src/plugins/scmcpold/common/scmcpold-init.php -text
+src/plugins/scmcpold/etc/plugins/scmcpold/config.php -text
+src/plugins/scmcpold/packaging/control/137plugin-scmcpold -text
+src/plugins/scmcpold/packaging/control/137plugin-scmcpold.shortdesc -text
+src/plugins/scmcpold/packaging/dirs/plugin-scmcpold -text
+src/plugins/scmcpold/packaging/install/plugin-scmcpold -text
 src/plugins/scmcvs/NAME -text
 src/plugins/scmcvs/bin/cvssh.pl svneol=native#text/x-perl
 src/plugins/scmcvs/bin/install.sh -text svneol=unset#text/x-sh
@@ -2525,6 +2486,45 @@ src/plugins/scmsvn/packaging/control/131plugin-scmsvn.shortdesc -text
 src/plugins/scmsvn/packaging/dirs/plugin-scmsvn -text
 src/plugins/scmsvn/packaging/docs/plugin-scmsvn -text
 src/plugins/scmsvn/packaging/install/plugin-scmsvn -text
+src/plugins/soapadmin/README.txt -text
+src/plugins/soapadmin/bin/db-delete.pl -text svneol=unset#text/x-perl
+src/plugins/soapadmin/bin/db-upgrade.pl -text svneol=unset#text/x-perl
+src/plugins/soapadmin/bin/sayhello -text
+src/plugins/soapadmin/common/soapadmin-init.php -text
+src/plugins/soapadmin/cronjobs/manage_soapadmin.php -text
+src/plugins/soapadmin/db/soapadmin-init.sql -text
+src/plugins/soapadmin/debian/README.Debian -text
+src/plugins/soapadmin/debian/README.source -text
+src/plugins/soapadmin/debian/changelog -text
+src/plugins/soapadmin/debian/compat -text
+src/plugins/soapadmin/debian/control -text
+src/plugins/soapadmin/debian/copyright -text
+src/plugins/soapadmin/debian/docs -text
+src/plugins/soapadmin/debian/dsf-in/plugin-soapadmin.postinst -text
+src/plugins/soapadmin/debian/dsf-in/plugin-soapadmin.prerm -text
+src/plugins/soapadmin/debian/po/templates.pot -text
+src/plugins/soapadmin/debian/rules -text
+src/plugins/soapadmin/debian/source/format -text
+src/plugins/soapadmin/etc/httpd.d/62plugin-soapadmin -text
+src/plugins/soapadmin/etc/plugins/soapadmin/config.php -text
+src/plugins/soapadmin/include/soapadminPlugin.class.php -text
+src/plugins/soapadmin/packaging/control/000source -text
+src/plugins/soapadmin/packaging/control/222plugin-soapadmin -text
+src/plugins/soapadmin/packaging/control/222plugin-soapadmin.shortdesc -text
+src/plugins/soapadmin/packaging/dirs/plugin-soapadmin -text
+src/plugins/soapadmin/packaging/docs/plugin-soapadmin -text
+src/plugins/soapadmin/packaging/install/plugin-soapadmin -text
+src/plugins/soapadmin/packaging/links/plugin-soapadmin -text
+src/plugins/soapadmin/translations/en.po -text
+src/plugins/soapadmin/translations/gforge.pot -text
+src/plugins/soapadmin/utils/manage-translations.sh -text svneol=unset#text/x-sh
+src/plugins/soapadmin/www/admin/index.php -text
+src/plugins/soapadmin/www/coreapi/FusionforgeCoreApi.wsdl -text
+src/plugins/soapadmin/www/coreapi/coreapi.php -text
+src/plugins/soapadmin/www/coreapi/coreapiobjects.php -text
+src/plugins/soapadmin/www/coreapi/coreapiservice.php -text
+src/plugins/soapadmin/www/index.php -text
+src/plugins/soapadmin/www/log4php.properties -text
 src/plugins/svncommitemail/bin/commit-email.php -text
 src/plugins/svncommitemail/bin/commit-email.pl svneol=native#text/x-perl
 src/plugins/svncommitemail/etc/svncommitemail.ini -text
