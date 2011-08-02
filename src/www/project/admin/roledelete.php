@@ -67,9 +67,7 @@ if (getStringFromRequest('submit')) {
 		$error_msg = _('Error: Please check "I\'m Sure" to confirm or return to previous page to cancel.');
 	}
 
-	if (!isset($error_msg)) {
-		session_redirect('/project/admin/users.php?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
-	}
+	session_redirect('/project/admin/users.php?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
 }
 
 $title = sprintf(_('Permanently Delete Role %s'), $role->getName());

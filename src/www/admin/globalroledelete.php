@@ -58,7 +58,5 @@ if (getStringFromRequest('submit')) {
 		$error_msg = _('Error: Please confirm the deletion of the role.');
 	}
 
-	if (!isset($error_msg)) {
-		session_redirect('/admin/globalroleedit.php?role_id='.$role_id.'&error_msg='.urlencode($error_msg));
-	}
+	session_redirect('/admin/globalroleedit.php?role_id='.$role_id.'&error_msg='.urlencode($error_msg));
 }
