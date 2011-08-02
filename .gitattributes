@@ -415,7 +415,6 @@ plugins/old/webcalendar/www/ws/get_events.php -text
 plugins/old/webcalendar/www/ws/get_reminders.php -text
 plugins/old/webcalendar/www/ws/login.php -text
 plugins/old/webcalendar/www/year.php -text
-plugins/templates/createplugin.sh -text svneol=unset#text/x-sh
 plugins/templates/helloworld/NAME -text
 plugins/templates/helloworld/README -text
 plugins/templates/helloworld/bin/db-delete.pl -text svneol=unset#text/x-perl
@@ -4573,6 +4572,7 @@ src/translations/th.po -text
 src/translations/zh_CN.po -text
 src/translations/zh_TW.po -text
 src/utils/apply-coding-style.sh -text
+src/utils/createplugin.sh -text svneol=unset#text/x-sh
 src/utils/cvs1/cvscreate.sh svneol=native#text/x-sh
 src/utils/cvs1/cvstar_genlist.pl svneol=native#text/x-perl
 src/utils/cvs1/cvstar_superscript.pl svneol=native#text/x-perl
