@@ -118,7 +118,6 @@ class CpoldPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots ($params) {
-		global $sys_scm_tarballs_path ;
 
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
