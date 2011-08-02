@@ -347,10 +347,7 @@ class projects_hierarchyPlugin extends Plugin {
 	function add($group_id) {
 		if (!$this->exists($group_id)) {
 			$globalConf = $this->getGlobalconf();
-			var_dump((int)$globalConf['tree']);
 			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id, tree, docman, delegate) VALUES ($1, $2, $3, $4)', array($group_id, (int)$globalConf['tree'], (int)$globalConf['docman'], (int)$globalConf['delegate']));
-			echo db_error();
-			die();
 			if (!$res)
 				return false;
 		}
