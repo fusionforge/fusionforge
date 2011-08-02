@@ -247,6 +247,15 @@ echo $HTML->listTableBottom();
 echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
 </form>';
 
+echo '
+<form action="'.util_make_url('/admin/globalroledelete.php').'" method="post">';
+echo '<input type="hidden" name="role_id" value="'.$role_id.'" />';
+		
+echo '<p><strong>'._('Delete role').'</strong></p>';
+echo '<p><input type="checkbox" name="sure" value="1"/> '._("Really delete this role?");
+echo '<input type="submit" name="submit" value="'._('Submit').'" /></p>
+</form>';
+
 site_admin_footer(array());
 
 // Local Variables:
