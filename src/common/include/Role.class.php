@@ -380,9 +380,10 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				return false;
 			}
 
+			db_begin();
 			$res=db_query_params('DELETE FROM pfo_user_role WHERE role_id=$1',
 					     array($this->getID())) ;
-			if (!$res || db_affected_rows($res) < 1) {
+			if (!$res) {
 				$this->setError('delete::name::'.db_error());
 				db_rollback();
 				return false;
@@ -390,7 +391,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			
 			$res=db_query_params('DELETE FROM role_project_refs WHERE role_id=$1',
 					     array($this->getID())) ;
-			if (!$res || db_affected_rows($res) < 1) {
+			if (!$res) {
 				$this->setError('delete::name::'.db_error());
 				db_rollback();
 				return false;
@@ -398,7 +399,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			
 			$res=db_query_params('DELETE FROM pfo_role_setting WHERE role_id=$1',
 					     array($this->getID())) ;
-			if (!$res || db_affected_rows($res) < 1) {
+			if (!$res) {
 				$this->setError('delete::name::'.db_error());
 				db_rollback();
 				return false;
@@ -406,11 +407,13 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			
 			$res=db_query_params('DELETE FROM pfo_role WHERE role_id=$1',
 					     array($this->getID())) ;
-			if (!$res || db_affected_rows($res) < 1) {
+			if (!$res) {
 				$this->setError('delete::name::'.db_error());
 				db_rollback();
 				return false;
 			}
+			db_commit();
+			return true;
 		} else {
 			if (!is_numeric($this->getID())) {
 				$this->setError('Role::delete() role_id is not an integer');
