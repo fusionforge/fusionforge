@@ -37,7 +37,7 @@ if (sizeof($childs)) {
 	foreach ($childs as $child) {
 		$childGroup = group_get_object($child[0][0]);
 		echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=removeChild&id='.$group_id.'&child_id='.$childGroup->getID().'">';
-		echo util_make_link('/project/'.$childGroup->getUnixName(),$childGroup->getPublicName(),array('title'=>_('Browse this project'), 'class'=>'tabtitle-nw'));
+		echo util_make_link('/projects/'.$childGroup->getUnixName(),$childGroup->getPublicName(),array('title'=>_('Browse this project'), 'class'=>'tabtitle-nw'));
 		echo '<input type="submit" value="'._('Remove child project').'">';
 		echo '</form>';
 	}
@@ -47,7 +47,7 @@ $parent = $projectsHierarchy->getFamily($group_id, 'parent', false, 'validated')
 if (sizeof($parent)) {
 	$parentGroup = group_get_object($parent[0][0]);
 	echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=removeParent&id='.$group_id.'&parent_id='.$parentGroup->getID().'">';
-	echo util_make_link('/project/'.$parentGroup->getUnixName(),$parentGroup->getPublicName(),array('title'=>_('Browse this project'), 'class'=>'tabtitle-nw'));
+	echo util_make_link('/projects/'.$parentGroup->getUnixName(),$parentGroup->getPublicName(),array('title'=>_('Browse this project'), 'class'=>'tabtitle-nw'));
 	echo '<input type="submit" value="'._('Remove parent project').'">';
 	echo '</form>';
 }
