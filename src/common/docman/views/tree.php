@@ -41,7 +41,7 @@ $dm = new DocumentManager($g);
 $dm->getTree($dirid, $linkmenu);
 if ($g->usesPlugin('projects_hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects_hierarchy');
-	$projectIDsArray = $projectsHierarchy->getFamilyID($group_id, 'child', false, 'validated');
+	$projectIDsArray = $projectsHierarchy->getFamily($group_id, 'child', true, 'validated');
 }
 if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 	foreach ($projectIDsArray as $key=>$projectID) {
