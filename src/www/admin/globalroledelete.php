@@ -23,14 +23,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('../../env.inc.php');
+require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'project/admin/project_admin_utils.php';
-require_once $gfcommon.'include/Role.class.php';
 
 $role_id = getIntFromRequest('role_id');
 
-session_require_perm ('forge_admin') ;
+session_require_global_perm ('forge_admin') ;
 
 if (!$role_id) {
 	session_redirect('/admin');

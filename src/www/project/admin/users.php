@@ -420,9 +420,7 @@ foreach ($roles as $r) {
 	
 	if ($r->getHomeProject() != NULL && $r->getHomeProject()->getId() == $group_id) {
 		echo '<form action="roledelete.php?group_id='. $group_id .'" method="post">
-	<div style="float:left;">
-		'.$r->getDisplayableName($group).'
-	</div><div style="float:right;">
+        <div style="float:right;">
 		<input type="hidden" name="role_id" value="'.$r->getID().'" />
 		<input type="submit" name="delete" value="'._("Delete role").'" />
 	</div>

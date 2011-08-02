@@ -61,6 +61,7 @@ if (getStringFromRequest('submit')) {
 			$error_msg = _('ERROR: ').$role->getErrorMessage();
 		} else {
 			$feedback = _('Successfully Deleted Role');
+			session_redirect('/project/admin/users.php?group_id='.$group_id.'&feedback='.urlencode($feedback));
 		}
 	} else {
 		$error_msg = _('Error: Please check "I\'m Sure" to confirm or return to previous page to cancel.');

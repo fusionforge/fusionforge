@@ -253,7 +253,7 @@ echo '<input type="hidden" name="role_id" value="'.$role_id.'" />';
 		
 echo '<p><strong>'._('Delete role').'</strong></p>';
 echo '<p><input type="checkbox" name="sure" value="1"/> '._("Really delete this role?");
-echo '<input type="submit" name="submit" value="'._('Submit').'" /></p>
+echo '<input type="submit" name="submit" value="'._('Delete role').'" /></p>
 </form>';
 
 site_admin_footer(array());
