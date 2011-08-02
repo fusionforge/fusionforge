@@ -32,7 +32,7 @@ if (sizeof($parent) || sizeof($childs)) {
 	echo $HTML->boxTop(_('Linked projects'));
 	if (sizeof($parent)) {
 		echo '<ul>';
-		$parentGroup = group_get_object($parent[0][0]);
+		$parentGroup = group_get_object($parent[0]);
 		echo '<li>'._('Parent Project:').' '.util_make_link('/projects/'.$parentGroup->getUnixName(), $parentGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
 		echo '</ul>';
 	}
@@ -42,7 +42,7 @@ if (sizeof($parent) || sizeof($childs)) {
 
 		echo '<ul>';
 		foreach ($childs as $child) {
-			$childGroup = group_get_object($child[0][0]);
+			$childGroup = group_get_object($child[0]);
 			echo '<li>'._('Child project').' '.util_make_link('/projects/'.$childGroup->getUnixName(), $childGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
 		}
 		echo '</ul>';

@@ -227,30 +227,20 @@ class projects_hierarchyPlugin extends Plugin {
 		}
 		if ($res && db_numrows($res) > 0) {
 			while ($arr = db_fetch_array($res)) {
-				$localFamily[] = array($arr['id']);
+				$localFamily[] = $arr['id'];
 			}
 		}
 
 		if ($deep) {
+			$nextFamily = array();
 			for ( $i = 0; $i < count($localFamily); $i++) {
-				$localFamily[$i][] = $this->getFamily($localFamily[$i], $order, $deep, $status);
+				$nextFamily = $this->getFamily($localFamily[$i], $order, $deep, $status);
 			}
 		}
-		return $localFamily;
-	}
+		if (isset($nextFamily) && sizeof($nextFamily))
+			$localFamily = array_merge($localFamily, $nextFamily);
 
-	/**
-	 * getFamilyID - returns a flatted array containing all ids of the family, based on getFamily function.
-	 *
-	 * @param	integer	group_id to search for
-	 * @param	string	parent or child ?
-	 * @param	boolean	recurcive or not ?
-	 * @param	string	validated or pending or any relation ?
-	 * @return	array	flatted array with group_id of parent or childs
-	 * @access	public
-	 */
-	function getFamilyID($group_id, $order, $deep = false, $status = 'any') {
-		return array_flatten($this->getFamily($group_id, $order, $deep, $status));
+		return $localFamily;
 	}
 
 	/**
@@ -474,28 +464,59 @@ class projects_hierarchyPlugin extends Plugin {
 	 *
 	 * @param	integer	group_id
 	 * @param	integer	sub_group_id
+	 * @param	string	type of relation
 	 * @param	integer	status of the relation
 	 * @return	boolean	true on success
 	 * @access	public
 	 */
-	function validateRelationship($project_id, $sub_project_id, $status) {
+	function validateRelationship($project_id, $sub_project_id, $relation, $status) {
 		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
 			if ($this->hasRelation($project_id, $sub_project_id)) {
 				if ($status) {
-					$res = db_query_params('UPDATE plugin_projects_hierarchy_relationship
-								SET status = $1
-								WHERE project_id = $2 AND sub_project_id = $3',
-								array($status, $project_id, $sub_project_id));
+					$qpa = db_construct_qpa(false, 'UPDATE plugin_projects_hierarchy_relationship SET status = $1
+								WHERE ', array($status));
+					switch ($relation) {
+						case "parent": {
+							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
+										array($sub_project_id, $project_id));
+							break;
+						}
+						case "child": {
+							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
+										array($project_id, $sub_project_id));
+							break;
+						}
+						default: {
+							return false;
+							break;
+						}
+					}
+					$res = db_query_qpa($qpa);
 					if (!$res)
 						return false;
 
 					if (db_affected_rows($res))
 						return true;
 				} else {
-					$res = db_query_params('DELETE FROM plugin_projects_hierarchy_relationship
-								WHERE project_id = $1 AND sub_project_id = $2',
-								array($project_id, $sub_project_id));
-
+					$qpa = db_construct_qpa(false, 'DELETE FROM plugin_projects_hierarchy_relationship WHERE ',
+								array($status));
+					switch ($relation) {
+						case "parent": {
+							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
+										array($project_id, $sub_project_id));
+							break;
+						}
+						case "child": {
+							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
+										array($sub_project_id, $project_id));
+							break;
+						}
+						default: {
+							return false;
+							break;
+						}
+					}
+					$res = db_query_qpa($qpa);
 					if (!$res)
 						return false;
 
@@ -669,14 +690,13 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @access	public
 	 */
 	function son_box($group_id, $name, $selected = 'xzxzxz') {
-		$sons = $this->getFamilyID($group_id, 'child', true, 'any');
-		$parent = $this->getFamilyID($group_id, 'parent', true, 'any');
+		$sons = $this->getFamily($group_id, 'child', true, 'any');
+		$parent = $this->getFamily($group_id, 'parent', true, 'any');
 		$family = array_merge($parent, $sons);
 		$son = db_query_params('SELECT group_id, group_name FROM groups
 					WHERE status = $1
 					AND group_id != $2
 					AND group_id <> ALL ($3)
-					AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy_relationship)
 					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $4);',
 					array('A',
 						$group_id,
