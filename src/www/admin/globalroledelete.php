@@ -1,11 +1,8 @@
 <?php
 /**
- * Role Delete Page
+ * Global Role Delete Page
  *
- * Copyright 2010 (c) Alcatel-Lucent
- *
- * @author Alain Peyrat
- * @date 2010-05-18
+ * Copyright 2011, Roland Mas
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the

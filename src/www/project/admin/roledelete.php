@@ -3,6 +3,7 @@
  * Role Delete Page
  *
  * Copyright 2010 (c) Alcatel-Lucent
+ * Copyright 2011, Roland Mas
  *
  * @author Alain Peyrat
  * @date 2010-05-18

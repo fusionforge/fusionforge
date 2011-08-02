@@ -2,7 +2,7 @@
 /**
  * Role Editing Page
  *
- * Copyright 2010, Roland Mas
+ * Copyright 2010-2011, Roland Mas
  * Copyright (c) 2011 Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;

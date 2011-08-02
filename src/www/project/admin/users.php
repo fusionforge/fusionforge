@@ -6,6 +6,7 @@
  * Copyright 2006 federicot
  * Copyright © 2011
  *	Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2011, Roland Mas
  * All rights reserved.
  *
  * This file is part of FusionForge. FusionForge is free software;
