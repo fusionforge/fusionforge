@@ -250,10 +250,7 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @access	public
 	 */
 	function getFamilyID($group_id, $order, $deep = false, $status = 'any') {
-		$familyFlatArray = array();
-		$familyArray = $this->getFamily($group_id, $order, $deep, $status);
-		array_walk_recursive($familyArray, create_function('$val, $key, $obj', 'array_push($obj, $val);'), $familyFlatArray);
-		return $familyFlatArray;
+		return array_flatten($this->getFamily($group_id, $order, $deep, $status));
 	}
 
 	/**
