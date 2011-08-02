@@ -324,13 +324,17 @@ class projects_hierarchyPlugin extends Plugin {
 		$group = group_get_object($params['group']);
 		$flag = strtolower('use_'.$this->name);
 		if ( getIntFromRequest($flag) == 1 ) {
-			$group->setPluginUse($this->name);
-			$this->add($group->getID());
+			if ($this->add($group->getID())) {
+				$group->setPluginUse($this->name);
+				return true;
+			}
 		} else {
-			$group->setPluginUse($this->name, false);
-			$this->remove($group->getID());
+			if ($this->remove($group->getID())) {
+				$group->setPluginUse($this->name, false);
+				return true;
+			}
 		}
-		return true;
+		return false;
 	}
 
 	/**
@@ -342,8 +346,11 @@ class projects_hierarchyPlugin extends Plugin {
 	 */
 	function add($group_id) {
 		if (!$this->exists($group_id)) {
-			$globalConf = $this->getGlobalConf();
-			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id, tree, docman, delegate) VALUES ($1)', array($group_id, $globalConf['tree'], $globalConf['docman'], $globalConf['delegate']));
+			$globalConf = $this->getGlobalconf();
+			var_dump((int)$globalConf['tree']);
+			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id, tree, docman, delegate) VALUES ($1, $2, $3, $4)', array($group_id, (int)$globalConf['tree'], (int)$globalConf['docman'], (int)$globalConf['delegate']));
+			echo db_error();
+			die();
 			if (!$res)
 				return false;
 		}
