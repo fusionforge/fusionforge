@@ -228,7 +228,6 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Temporary role") ;
 		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
-
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "toto") ;
 		$this->click ("//input[@value='Add User']") ;
 		$this->waitForPageToLoad("30000");
@@ -247,6 +246,13 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//input[@name='dormusers']") ;
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//option[.='Temporary role']"));
+		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Temporary role") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click ("//input[@type='checkbox' and @name='sure']") ;
+		$this->click ("//input[@value='Delete role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isElementPresent("//option[.='Temporary role']"));
 	}
