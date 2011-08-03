@@ -4,8 +4,9 @@ fusionforge (5.1-1+) UNRELEASED; urgency=low
   * Point Vcs-*: header at the upstream Subversion repository.
   * Wrap long lines in package descriptions.
   * Add Depends: php5-cli to fusionforge-plugin-oslc.
+  * Use the Simplepie library provided by Debian rather than a local copy.
 
- -- Roland Mas <lolando@debian.org>  Wed, 03 Aug 2011 21:03:09 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 03 Aug 2011 21:39:45 +0200
 
 fusionforge (5.1-1) unstable; urgency=low
 

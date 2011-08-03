@@ -1,5 +1,5 @@
 Package: @OLDPACKAGE@-common
 Architecture: all
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, cpio, lockfile-progs, adduser, php5-cli, python, ${misc:Depends}
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, cpio, lockfile-progs, adduser, php5-cli, libphp-simplepie, python, ${misc:Depends}
 Conflicts: sourceforge, @OLDPACKAGE@-plugin-scmcvs (<< 4.1), @OLDPACKAGE@-plugin-scmsvn (<< 4.1), @OLDPACKAGE@-plugin-scmccase (<< 4.1), @OLDPACKAGE@-theme-starterpack (<< 4.0)
 Description: collaborative development tool - shared files
