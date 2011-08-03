@@ -81,6 +81,14 @@ class FusionForgeTemplate extends QuickTemplate {
 		<meta http-equiv="Content-Type" content="<?php $this->text('mimetype') ?>; charset=<?php $this->text('charset') ?>" />
 		<?php $this->html('headlinks') ?>
 		<title><?php $this->text('pagetitle') ?></title>
+        	<!-- FUSIONFORGE Stylesheet BEGIN -->
+		<?php if (!$GLOBALS['sys_use_mwframe'] && !$this->data['printable']){
+		$GLOBALS['HTML']->headerFavIcon();
+		$GLOBALS['HTML']->headerRSS();
+		$GLOBALS['HTML']->headerSearch();
+	} ?>
+		<?php if (!$GLOBALS['sys_use_mwframe'] && !$this->data['printable']){ $GLOBALS['HTML']->headerCSS(); } ?>
+        	<!-- FUSIONFORGE Stylesheet END -->
 		<?php $this->html('csslinks') ?>
 
 		<!--[if lt IE 7]><script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath') ?>/common/IEFixes.js?<?php echo $GLOBALS['wgStyleVersion'] ?>"></script>
