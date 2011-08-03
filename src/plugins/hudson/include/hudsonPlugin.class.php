@@ -85,7 +85,7 @@ class hudsonPlugin extends Plugin {
 
 	function groupisactivecheckbox (&$params) {
 		$group = group_get_object($params['group']);
-		if ($group->usesPlugin('scmsvn')) {
+		if ($group->usesPlugin($this->name)) {
 			parent::groupisactivecheckbox($params);
 		}
 	}
