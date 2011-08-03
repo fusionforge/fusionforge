@@ -197,7 +197,7 @@ for ($i=0; $i<count($keys); $i++) {
 		continue;
 	}
 
-	if (preg_match("/^plugin_(.*)/", $keys[$i], $matches)) {
+	if (preg_match("/^plugin_([a-z]*)/", $keys[$i], $matches)) {
 		$p = $matches[1];
 		if (!$group->usesPlugin($p)) {
 			// We don't display settings for unused plugins either
