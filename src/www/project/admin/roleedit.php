@@ -193,14 +193,22 @@ for ($i=0; $i<count($keys); $i++) {
                 (!$group->usesFRS() && preg_match("/frs/", $keys[$i])) ||
                 (!$group->usesSCM() && preg_match("/scm/", $keys[$i])) ||
                 (!$group->usesDocman() && preg_match("/docman/", $keys[$i]))) {
+                // We don't display modules not used
+		continue;
+	}
 
-                //We don't display modules not used
+	if (preg_match("/^plugin_(.*)/", $keys[$i], $matches)) {
+		$p = $matches[1];
+		if (!$group->usesPlugin($p)) {
+			// We don't display settings for unused plugins either
+			continue;
+		}
+	}
 
-
-//
-//	Handle forum settings for all roles
-//
-	} elseif ($keys[$i] == 'forum' || $keys[$i] == 'forumpublic' || $keys[$i] == 'forumanon') {
+	if ($keys[$i] == 'forum' || $keys[$i] == 'forumpublic' || $keys[$i] == 'forumanon') {
+		//
+		//	Handle forum settings for all roles
+		//
 
 		if ($keys[$i] == 'forumanon') {
 			//skip as we have special case below
