@@ -1,3 +1,2 @@
 plugins/scmhg/common/*             usr/share/gforge/plugins/scmhg/common/
-plugins/scmhg/etc/plugins/scmhg/* etc/gforge/plugins/scmhg/
 plugins/scmhg/etc/*.ini		  etc/@PACKAGE@/config.ini.d/

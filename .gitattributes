@@ -2384,7 +2384,6 @@ src/plugins/quota_management/www/quota_project.php -text
 src/plugins/scmarch/NAME -text
 src/plugins/scmarch/common/ArchPlugin.class.php -text
 src/plugins/scmarch/common/scmarch-init.php -text
-src/plugins/scmarch/etc/plugins/scmarch/config.php -text
 src/plugins/scmarch/etc/scmarch.ini -text
 src/plugins/scmarch/packaging/control/136plugin-scmarch -text
 src/plugins/scmarch/packaging/control/136plugin-scmarch.shortdesc -text
@@ -2393,14 +2392,12 @@ src/plugins/scmarch/packaging/install/plugin-scmarch -text
 src/plugins/scmbzr/NAME -text
 src/plugins/scmbzr/common/BzrPlugin.class.php -text
 src/plugins/scmbzr/common/scmbzr-init.php -text
-src/plugins/scmbzr/etc/plugins/scmbzr/config.php -text
 src/plugins/scmbzr/etc/plugins/scmbzr/serve-branches.conf -text
 src/plugins/scmbzr/etc/scmbzr.ini -text
 src/plugins/scmbzr/packaging/control/132plugin-scmbzr -text
 src/plugins/scmbzr/packaging/control/132plugin-scmbzr.shortdesc -text
 src/plugins/scmbzr/packaging/dirs/plugin-scmbzr -text
 src/plugins/scmbzr/packaging/install/plugin-scmbzr -text
-src/plugins/scmccase/etc/plugins/scmccase/config.pl svneol=native#text/x-perl
 src/plugins/scmccase/etc/scmccase.ini -text
 src/plugins/scmccase/packaging/docs/plugin-scmccase -text
 src/plugins/scmccase/packaging/install/plugin-scmccase -text
@@ -2430,7 +2427,6 @@ src/plugins/scmdarcs/bin/db-upgrade.pl -text
 src/plugins/scmdarcs/common/DarcsPlugin.class.php -text
 src/plugins/scmdarcs/common/scmdarcs-init.php -text
 src/plugins/scmdarcs/db/scmdarcs-init.sql -text
-src/plugins/scmdarcs/etc/plugins/scmdarcs/config.php -text
 src/plugins/scmdarcs/etc/scmdarcs.ini -text
 src/plugins/scmdarcs/packaging/control/135plugin-scmdarcs -text
 src/plugins/scmdarcs/packaging/control/135plugin-scmdarcs.shortdesc -text
@@ -2444,7 +2440,6 @@ src/plugins/scmgit/common/GitPlugin.class.php -text
 src/plugins/scmgit/common/scmgit-init.php -text
 src/plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php -text
 src/plugins/scmgit/db/scmgit-init.sql -text
-src/plugins/scmgit/etc/plugins/scmgit/config.php -text
 src/plugins/scmgit/etc/scmgit.ini -text
 src/plugins/scmgit/packaging/control/133plugin-scmgit -text
 src/plugins/scmgit/packaging/control/133plugin-scmgit.shortdesc -text
@@ -2455,7 +2450,6 @@ src/plugins/scmgit/www/index.php -text
 src/plugins/scmhg/NAME -text
 src/plugins/scmhg/common/HgPlugin.class.php -text
 src/plugins/scmhg/common/scmhg-init.php -text
-src/plugins/scmhg/etc/plugins/scmhg/config.php -text
 src/plugins/scmhg/etc/scmhg.ini -text
 src/plugins/scmhg/packaging/control/134plugin-scmhg -text
 src/plugins/scmhg/packaging/control/134plugin-scmhg.shortdesc -text
