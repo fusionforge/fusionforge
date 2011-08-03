@@ -42,8 +42,10 @@ then
 	export USEVZCTL=true
 	export SELENIUM_RC_HOST=localhost
 	export SELENIUM_RC_URL=http://`hostname -f`$BASEDIR/reports
+	#export FFORGE_RPM_REPO=http://`hostname -f`$BASEDIR/build/packages
 else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
+	#export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
 	export VZTEMPLATE=centos-5-x86
 fi
 export DB_NAME=gforge
