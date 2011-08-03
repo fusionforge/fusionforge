@@ -175,8 +175,9 @@ class SearchQuery extends Error {
 			$qpa = $this->getQuery();
 		}
 		if (forge_get_config('use_fti')) {
-			db_query_params('select set_curcfg($1)',
-					 array ('default'));
+			db_query_params('SELECT set_config($1, $2, false)', 
+					 array('default_text_search_config',
+					       'simple'));
 		}
 		$this->result = db_query_qpa(
 			$qpa,

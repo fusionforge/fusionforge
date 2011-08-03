@@ -1938,7 +1938,7 @@ class Group extends Error {
 		global $SYS;
 
 		if ($user_id != user_getid()
-		    || !forge_check_perm('project_admin', $this->getID())) {
+		    && !forge_check_perm('project_admin', $this->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
