@@ -1,3 +1,12 @@
+fusionforge (5.1-1+) UNRELEASED; urgency=low
+
+  * Bumped Standards-Version to 3.9.2 (no changes).
+  * Point Vcs-*: header at the upstream Subversion repository.
+  * Wrap long lines in package descriptions.
+  * Add Depends: php5-cli to fusionforge-plugin-oslc.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 03 Aug 2011 21:03:09 +0200
+
 fusionforge (5.1-1) unstable; urgency=low
 
   [ Roland Mas ]

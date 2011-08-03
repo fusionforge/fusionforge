@@ -2,28 +2,33 @@ Package: @OLDPACKAGE@-plugin-extratabs
 Architecture: all
 Depends: @PACKAGE@-plugin-extratabs, ${misc:Depends}
 Description: Extratabs plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be safely removed.
+ This package is only present for transitional purposes and can be
+ safely removed.
 
 Package: @OLDPACKAGE@-plugin-globalsearch
 Architecture: all
 Depends: @PACKAGE@-plugin-globalsearch, ${misc:Depends}
 Description: Globalsearch plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be safely removed.
+ This package is only present for transitional purposes and can be
+ safely removed.
 
 Package: @OLDPACKAGE@-plugin-mediawiki
 Architecture: all
 Depends: @PACKAGE@-plugin-mediawiki, ${misc:Depends}
 Description: Mediawiki plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be safely removed.
+ This package is only present for transitional purposes and can be
+ safely removed.
 
 Package: @OLDPACKAGE@-plugin-projectlabels
 Architecture: all
 Depends: @PACKAGE@-plugin-projectlabels, ${misc:Depends}
 Description: Projectlabels plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be safely removed.
+ This package is only present for transitional purposes and can be
+ safely removed.
 
 Package: @OLDPACKAGE@-plugin-scmgit
 Architecture: all
 Depends: @PACKAGE@-plugin-scmgit, ${misc:Depends}
 Description: Git plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be safely removed.
+ This package is only present for transitional purposes and can be
+ safely removed.
