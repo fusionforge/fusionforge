@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010, Roland Mas
+ * Copyright 2010-2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
@@ -213,6 +213,42 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=First TotoNews") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse ($this->isPermissionDenied()) ;
+
+		// Non-regression test for Adacore ticket K802-005
+		// (Deletion of global roles)
+		$this->switchUser("admin");
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='role_name']", "Temporary role") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Create Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//option[.='Temporary role']"));
+		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->waitForPageToLoad("30000");
+
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "toto") ;
+		$this->click ("//input[@value='Add User']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("toto Lastname"));
+		$this->click ("//input[@type='checkbox' and @name='sure']") ;
+		$this->click ("//input[@value='Delete role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Cannot remove a non empty role"));
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Temporary role") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click ("//a[contains(@href,'/users/trainee')]/../../td/input[@type='checkbox']") ;
+		$this->click ("//input[@name='reallyremove']") ;
+		$this->click ("//input[@name='dormusers']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isElementPresent("//option[.='Temporary role']"));
 	}
 
 	function testProjectRolesAndPermissions()
@@ -487,6 +523,39 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Role created by guru')]/../div/input[@value='Edit Permissions']")) ;
+
+		// Non-regression test for Adacore ticket K802-005
+		// (Deletion of project-wide roles)
+		$this->switchUser("admin");
+		$this->gotoProject ("MetaProject") ;
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'roleedit.php')]/..//input[@name='role_name']", "Temporary role") ;
+		$this->click ("//input[@value='Create Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Temporary role"));
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Temporary role");
+		$this->click ("//input[@value='Add Member']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click ("//td/form/div[contains(.,'Temporary role')]/../div/input[@value='Delete role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click ("//input[@type='checkbox' and @name='sure']") ;
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Cannot remove a non empty role"));
+		$this->click("//tr/td/div[contains(.,'Temporary role')]/../div/form/input[@name='username' and @value='trainee']/../input[@value='Remove']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click ("//td/form/div[contains(.,'Temporary role')]/../div/input[@value='Delete role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click ("//input[@type='checkbox' and @name='sure']") ;
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("Temporary role"));
 	}
 }
 ?>

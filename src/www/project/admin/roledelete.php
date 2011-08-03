@@ -3,6 +3,7 @@
  * Role Delete Page
  *
  * Copyright 2010 (c) Alcatel-Lucent
+ * Copyright 2011, Roland Mas
  *
  * @author Alain Peyrat
  * @date 2010-05-18
@@ -39,11 +40,20 @@ if (!$role_id) {
 
 $group = group_get_object($group_id);
 
-$role = new Role($group,$role_id);
+$role = RBACEngine::getInstance()->getRoleById($role_id);
+
 if (!$role || !is_object($role)) {
 	exit_error(_('Could Not Get Role'),'admin');
 } elseif ($role->isError()) {
 	exit_error($role->getErrorMessage(),'admin');
+}
+
+if ($role->getHomeProject() == NULL) {
+	exit_error(_("You can't delete a global role from here."),'admin');
+}
+
+if ($role->getHomeProject()->getID() != $group_id) {
+	exit_error(_("You can't delete a role belonging to another project."),'admin');
 }
 
 if (getStringFromRequest('submit')) {
@@ -52,19 +62,13 @@ if (getStringFromRequest('submit')) {
 			$error_msg = _('ERROR: ').$role->getErrorMessage();
 		} else {
 			$feedback = _('Successfully Deleted Role');
+			session_redirect('/project/admin/users.php?group_id='.$group_id.'&feedback='.urlencode($feedback));
 		}
 	} else {
 		$error_msg = _('Error: Please check "I\'m Sure" to confirm or return to previous page to cancel.');
 	}
 
-	//plugin webcal
-	//change assistant for webcal
-	$params = getIntFromRequest('group_id');
-	plugin_hook('change_cal_permission_auto',$params);
-
-	if (!isset($error_msg)) {
-		session_redirect('/project/admin/users.php?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
-	}
+	session_redirect('/project/admin/users.php?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
 }
 
 $title = sprintf(_('Permanently Delete Role %s'), $role->getName());

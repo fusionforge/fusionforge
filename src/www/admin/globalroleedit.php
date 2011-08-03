@@ -2,7 +2,7 @@
 /**
  * Role Editing Page
  *
- * Copyright 2010, Roland Mas
+ * Copyright 2010-2011, Roland Mas
  * Copyright (c) 2011 Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -245,6 +245,15 @@ for ($i=0; $i<count($keys); $i++) {
 echo $HTML->listTableBottom();
 
 echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
+</form>';
+
+echo '
+<form action="'.util_make_url('/admin/globalroledelete.php').'" method="post">';
+echo '<input type="hidden" name="role_id" value="'.$role_id.'" />';
+		
+echo '<p><strong>'._('Delete role').'</strong></p>';
+echo '<p><input type="checkbox" name="sure" value="1"/> '._("Really delete this role?");
+echo '<input type="submit" name="submit" value="'._('Delete role').'" /></p>
 </form>';
 
 site_admin_footer(array());

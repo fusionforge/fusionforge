@@ -3,7 +3,7 @@
  * FusionForge roles
  *
  * Copyright 2004, GForge, LLC
- * Copyright 2009-2010, Roland Mas
+ * Copyright 2009-2011, Roland Mas
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -303,10 +303,11 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			$this->setError(_('Cannot remove a non empty role.'));
 			return false;
 		}
-
+		
+		db_begin();
 		$res=db_query_params('DELETE FROM pfo_user_role WHERE role_id=$1',
 				     array($this->getID())) ;
-		if (!$res || db_affected_rows($res) < 1) {
+		if (!$res) {
 			$this->setError('delete::name::'.db_error());
 			db_rollback();
 			return false;
@@ -314,7 +315,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 		$res=db_query_params('DELETE FROM role_project_refs WHERE role_id=$1',
 				     array($this->getID()));
-		if (!$res || db_affected_rows($res) < 1) {
+		if (!$res) {
 			$this->setError('delete::name::'.db_error());
 			db_rollback();
 			return false;
@@ -322,7 +323,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 		$res=db_query_params('DELETE FROM pfo_role_setting WHERE role_id=$1',
 				     array($this->getID()));
-		if (!$res || db_affected_rows($res) < 1) {
+		if (!$res) {
 			$this->setError('delete::name::'.db_error());
 			db_rollback();
 			return false;
@@ -330,12 +331,14 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 		$res=db_query_params('DELETE FROM pfo_role WHERE role_id=$1',
 				     array($this->getID()));
-		if (!$res || db_affected_rows($res) < 1) {
+		if (!$res) {
 			$this->setError('delete::name::'.db_error());
 			db_rollback();
 			return false;
 		}
 
+		db_commit();
+		return true;
 	}
 
 	/**

@@ -6,6 +6,7 @@
  * Copyright 2006 federicot
  * Copyright © 2011
  *	Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2011, Roland Mas
  * All rights reserved.
  * http://fusionforge.org
  *
@@ -408,8 +409,18 @@ foreach ($roles as $r) {
 		<input type="hidden" name="role_id" value="'.$r->getID().'" />
 		<input type="submit" name="edit" value="'._("Edit Permissions").'" />
 	</div>
-	</form>
-</td></tr>';
+	</form>';
+	
+	if ($r->getHomeProject() != NULL && $r->getHomeProject()->getId() == $group_id) {
+		echo '<form action="roledelete.php?group_id='. $group_id .'" method="post">
+        <div style="float:right;">
+		<input type="hidden" name="role_id" value="'.$r->getID().'" />
+		<input type="submit" name="delete" value="'._("Delete role").'" />
+	</div>
+	</form>';
+	}
+
+	echo '</td></tr>';
 }
 
 /* note: we cannot put the form outside of a td here */
