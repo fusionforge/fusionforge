@@ -4582,6 +4582,7 @@ src/utils/cvs1/cvstar_genlist.pl svneol=native#text/x-perl
 src/utils/cvs1/cvstar_superscript.pl svneol=native#text/x-perl
 src/utils/decode_images.sh svneol=native#text/x-sh
 src/utils/fill-in-the-blanks.pl svneol=native#text/x-perl
+src/utils/fixscripts/fix_default_role.php -text
 src/utils/fixscripts/populate_template_project.php -text
 src/utils/forge_get_compressed_extension -text
 src/utils/forge_get_compressor -text
@@ -4597,6 +4598,7 @@ src/utils/install-nsspgsql.sh -text svneol=unset#text/x-sh
 src/utils/ldap/sql2ldif.pl svneol=native#text/x-perl
 src/utils/ldap/sql2ldifadd.pl -text svneol=unset#text/x-perl
 src/utils/ldap/sql2ldifmod.pl -text svneol=unset#text/x-perl
+src/utils/list-enabled-plugins.sh -text
 src/utils/manage-apache-config.sh -text svneol=unset#text/x-sh
 src/utils/manage-translations.sh -text svneol=unset#text/x-sh
 src/utils/migrate-to-ini-files.sh -text svneol=unset#text/x-sh

@@ -28,56 +28,35 @@ include /usr/share/dpatch/dpatch.make
 
 # The substitutions bellow can be quite tricky, so use 'debian/rules testpat' to check if it's OK
 
-# generate a list of all .postinst filenames for all plugins which contain a 'NAME' file
-PPOSTINST=$(patsubst plugins/%/NAME, debian/$(PACKAGE)-plugin-%.postinst, $(wildcard plugins/*/NAME))
+ENABLED_PLUGINS=$(shell $(CURDIR)/utils/list-enabled-plugins.sh)
 
-# generate a list of all .prerm filenames for all plugins which contain a 'NAME' file
-PPRERM=$(patsubst plugins/%/NAME, debian/$(PACKAGE)-plugin-%.prerm, $(wildcard plugins/*/NAME))
+PPOSTINST=$(foreach i,$(ENABLED_PLUGINS),debian/$(PACKAGE)-plugin-$i.postinst)
+PPRERM=$(foreach i,$(ENABLED_PLUGINS),debian/$(PACKAGE)-plugin-$i.prerm)
 
-# 'cron.d' files
-CRONDFILES=$(patsubst packaging/cron.d/%, debian/$(OLDPACKAGE)-%.cron.d, $(wildcard packaging/cron.d/[a-z]*))
+CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(OLDPACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
+PCRONDFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/cron.d/[a-z]*),debian/$(PACKAGE)-plugin-$i.cron.d))
 
-# plugins 'cron.d' files
-PCRONDFILES=$(patsubst %, debian/$(PACKAGE)-%.cron.d, $(shell ls  plugins/*/packaging/cron.d/[a-z]* | sed 's,.*/,,'))
+DIRSFILES=$(patsubst packaging/dirs/%,debian/$(OLDPACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
+PDIRSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/dirs/[a-z]*),debian/$(PACKAGE)-plugin-$i.dirs))
 
+LINKSFILES=$(patsubst packaging/links/%,debian/$(OLDPACKAGE)-%.links,$(wildcard packaging/links/[a-z]*))
+PLINKSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/links/[a-z]*),debian/$(PACKAGE)-plugin-$i.links))
 
-# 'dirs' files
-DIRSFILES=$(patsubst packaging/dirs/%, debian/$(OLDPACKAGE)-%.dirs, $(wildcard packaging/dirs/[a-z]*))
+INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
+PINSTALLFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/install/[a-z]*),debian/$(PACKAGE)-plugin-$i.install))
 
-# plugins 'dirs' files
-PDIRSFILES=$(patsubst %, debian/$(PACKAGE)-%.dirs, $(shell ls  plugins/*/packaging/dirs/[a-z]* | sed 's,.*/,,'))
+DOCSFILES=$(patsubst packaging/docs/%,debian/$(OLDPACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*)) \
+		$(patsubst packaging/docs/%,debian/$(PACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*))
+PDOCSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/docs/[a-z]*),debian/$(PACKAGE)-plugin-$i.docs))
 
+PEXAMPLESSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/examples/[a-z]*),debian/$(PACKAGE)-plugin-$i.examples))
 
-# 'links' files
-LINKSFILES=$(patsubst packaging/links/%, debian/$(OLDPACKAGE)-%.links, $(wildcard packaging/links/[a-z]*))
-
-# plugins 'links' files
-PLINKSFILES=$(patsubst %, debian/$(PACKAGE)-%.links, $(shell ls  plugins/*/packaging/links/[a-z]* | sed 's,.*/,,'))
-
-
-# 'install' files
-INSTALLFILES=$(patsubst packaging/install/%, debian/$(OLDPACKAGE)-%.install, $(wildcard packaging/install/[a-z]*))
-
-# plugins 'install' files
-PINSTALLFILES=$(patsubst %, debian/$(PACKAGE)-%.install, $(shell ls  plugins/*/packaging/install/[a-z]* | sed 's,.*/,,'))
-
-
-# 'docs' files
-DOCSFILES=$(patsubst packaging/docs/%, debian/$(OLDPACKAGE)-%.docs, $(wildcard packaging/docs/[a-z]*)) \
-		$(patsubst packaging/docs/%, debian/$(PACKAGE)-%.docs, $(wildcard packaging/docs/[a-z]*))
-
-# plugins 'docs' files
-PDOCSFILES=$(patsubst %, debian/$(PACKAGE)-%.docs, $(shell ls  plugins/*/packaging/docs/[a-z]* | sed 's,.*/,,'))
-
-# 'examples' files
-PEXAMPLESFILES=$(patsubst %, debian/$(PACKAGE)-%.examples, $(shell ls  plugins/*/packaging/examples/[a-z]* | sed 's,.*/,,'))
-
-
-# po files
-POFILES=$(patsubst debian/dsf-po/%, debian/po/%, $(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
+POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
 # Displays the variables to check if globbing and substitutions are correct
 testpat:
+	@echo "ENABLED_PLUGINS=$(ENABLED_PLUGINS)"
+	@echo ""
 	@echo "PPOSTINST=$(PPOSTINST)"
 	@echo "PPRERM=$(PPRERM)"
 	@echo ""
@@ -148,17 +127,11 @@ debian/$(PACKAGE)-plugin-%.examples:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/examples/plugin-$* > $@
 
 # Construct the control file
-debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*) 
-	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* $(CURDIR)/plugins/*/packaging/control/[1-9][0-9][0-9]* | grep -v shortdesc | grep -v scmcpold | \
-		while read file ; \
-			do cat $${file}; \
-			if [ -f $${file}.shortdesc ] ; then \
-				cat $(CURDIR)/packaging/control/AAAdesc; \
-				echo ' .'; \
-				cat $${file}.shortdesc; \
-			fi; \
-			echo ''; \
-		done | $(SED_REPLACE) > $@
+debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*)
+	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
+	@echo Enabled plugins: $(ENABLED_PLUGINS)
+	@echo Skipped plugins: $(shell $(CURDIR)/utils/list-enabled-plugins.sh --disabled)
+	for plugin in $(ENABLED_PLUGINS) ; do ls plugins/$$plugin/packaging/control/[1-9][0-9][0-9]plugin-$$plugin ; done | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) >> $@
 
 # Update the translation of package descriptions fields
 debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)

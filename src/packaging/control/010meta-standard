@@ -3,6 +3,6 @@ Architecture: all
 Conflicts: sourceforge, @OLDPACKAGE@-cvs, @OLDPACKAGE@-common (<< ${source:Version})
 Replaces: @OLDPACKAGE@
 Provides: @OLDPACKAGE@
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, @OLDPACKAGE@-common (=${source:Version}), @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-mta-exim4 | @OLDPACKAGE@-mta, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, @PACKAGE@-plugin-mailman | @OLDPACKAGE@-lists-mailman | @OLDPACKAGE@-lists, ${misc:Depends}
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, @OLDPACKAGE@-common (=${source:Version}), @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-mta-exim4 | @OLDPACKAGE@-mta, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, @OLDPACKAGE@-lists-mailman | @OLDPACKAGE@-lists, ${misc:Depends}
 Recommends: @PACKAGE@-plugin-scmsvn | @PACKAGE@-plugin-scm
 Description: FusionForge collaborative development tool - standard metapackage
