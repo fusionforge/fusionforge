@@ -38,7 +38,7 @@ class hudsonPlugin extends Plugin {
 		$this->_addHook('ajax_reference_tooltip', 'ajax_reference_tooltip', false);
 	}
 	function CallHook ($hookname, &$params) {
-		global $use_hudsonplugin,$G_SESSION,$HTML,$gfcommon,$gfwww,$gfplugins;
+		global $G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("hudson")) {
@@ -84,14 +84,7 @@ class hudsonPlugin extends Plugin {
 
 		}
 	}
-
-	function groupisactivecheckbox (&$params) {
-		$group = group_get_object($params['group']);
-		if ($group->usesPlugin('scmsvn')) {
-			parent::groupisactivecheckbox($params);
-		}
-	}
-
+	
 	function &getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'hudsonPluginInfo')) {
 			require_once('hudsonPluginInfo.class.php');
