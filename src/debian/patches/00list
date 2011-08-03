@@ -1,8 +1,10 @@
 # List of patches to apply
 disable-tracker-reply-by-email
-use-snoopy-from-distro
 disable-dav
+
+use-snoopy-from-distro
 use-nusoap-from-distro
 use-jquery-from-distro
+use-simplepie-from-distro
 
 production-environment

@@ -1,7 +1,23 @@
-fusionforge (5.1-0) UNRELEASED; urgency=low
+fusionforge (5.1.50~) UNRELEASED; urgency=low
+
+  * Bump version number, on the road to 5.2.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 03 Aug 2011 21:42:25 +0200
+
+fusionforge (5.1-1+) UNRELEASED; urgency=low
+
+  * Bumped Standards-Version to 3.9.2 (no changes).
+  * Point Vcs-*: header at the upstream Subversion repository.
+  * Wrap long lines in package descriptions.
+  * Add Depends: php5-cli to fusionforge-plugin-oslc.
+  * Use the Simplepie library provided by Debian rather than a local copy.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 03 Aug 2011 21:39:45 +0200
+
+fusionforge (5.1-1) unstable; urgency=low
 
   [ Roland Mas ]
-  * New upstream release.
+  * New upstream release.  Many new features and plugins.
   * Fixed chroot generation error in case of some files not always present
     (closes: #634169).
   * Apache configuration is now split into several snippets rather than in
@@ -17,7 +33,7 @@ fusionforge (5.1-0) UNRELEASED; urgency=low
   * Update copyright file
   * Fix broken link in /usr/share/fusionforge (Evolvis [#1638])
 
- -- Roland Mas <lolando@debian.org>  Fri, 29 Jul 2011 18:40:00 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 03 Aug 2011 20:09:56 +0200
 
 fusionforge (5.0.3-1) unstable; urgency=low
 
