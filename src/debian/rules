@@ -127,7 +127,7 @@ debian/$(PACKAGE)-plugin-%.examples:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/examples/plugin-$* > $@
 
 # Construct the control file
-debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*)
+debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*) $(wildcard plugins/*/etc/*.ini)
 	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
 	@echo Enabled plugins: $(ENABLED_PLUGINS)
 	@echo Skipped plugins: $(shell $(CURDIR)/utils/list-enabled-plugins.sh --disabled)
