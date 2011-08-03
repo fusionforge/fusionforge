@@ -1946,6 +1946,8 @@ eval {
     &update_with_sql("20110405-forum_attachment_fix-bug284","5.0.51-12");
     &update_with_sql("20110408-anonymous-read-news","5.0.51-13");
     &update_with_sql("20110414-move-news-forums-to-own-project","5.0.51-14");
+    &update_with_sql("20110701-gforge-5.1","5.1-1");
+    &update_with_sql("20110728-fix-mta-lists-view","5.1-2");
     &update_with_sql("20110118-user-tooltips","5.1.51-1");
     &update_with_sql("20110211-docman-activityvw","5.1.51-2");
     &update_with_sql("20110222-pluginify-auth","5.1.51-3");
