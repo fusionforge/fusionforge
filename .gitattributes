@@ -2407,6 +2407,7 @@ src/plugins/scmcpold/NAME -text
 src/plugins/scmcpold/common/CpoldPlugin.class.php -text
 src/plugins/scmcpold/common/scmcpold-init.php -text
 src/plugins/scmcpold/etc/plugins/scmcpold/config.php -text
+src/plugins/scmcpold/etc/scmcpold.ini -text
 src/plugins/scmcpold/packaging/control/137plugin-scmcpold -text
 src/plugins/scmcpold/packaging/control/137plugin-scmcpold.shortdesc -text
 src/plugins/scmcpold/packaging/dirs/plugin-scmcpold -text
