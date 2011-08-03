@@ -25,7 +25,7 @@ default:
 
 include /usr/share/dpatch/dpatch.make
 
-ENABLED_PLUGINS=$(shell $(CURDIR)/utils/list-enabled-plugins.sh)
+ENABLED_PLUGINS=$(shell sh $(CURDIR)/utils/list-enabled-plugins.sh)
 
 PPOSTINST=$(foreach i,$(ENABLED_PLUGINS),debian/$(PACKAGE)-plugin-$i.postinst)
 PPRERM=$(foreach i,$(ENABLED_PLUGINS),debian/$(PACKAGE)-plugin-$i.prerm)
