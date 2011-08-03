@@ -7,7 +7,7 @@ Build-Depends-Indep: sharutils, docbook-to-man, devscripts, gettext
 Build-Depends: debhelper (>= 7), dpatch, perl, confget
 Standards-Version: 3.9.2
 Homepage: http://fusionforge.org/
-Vcs-Subversion: svn://scm.fusionforge.org/scmrepos/svn/fusionforge/trunk
+Vcs-Svn: svn://scm.fusionforge.org/scmrepos/svn/fusionforge/trunk
 
 Package: fusionforge-standard
 Architecture: all
@@ -70,7 +70,7 @@ Description: Dummy upgrade package for FusionForge
 
 Package: gforge-common
 Architecture: all
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, cpio, lockfile-progs, adduser, php5-cli, python, ${misc:Depends}
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, cpio, lockfile-progs, adduser, php5-cli, libphp-simplepie, python, ${misc:Depends}
 Conflicts: sourceforge, gforge-plugin-scmcvs (<< 4.1), gforge-plugin-scmsvn (<< 4.1), gforge-plugin-scmccase (<< 4.1), gforge-theme-starterpack (<< 4.0)
 Description: collaborative development tool - shared files
  FusionForge provides many tools to aid collaboration in a
