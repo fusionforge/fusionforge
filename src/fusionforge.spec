@@ -842,7 +842,6 @@ fi
 %{FORGE_DIR}/www/plugins/quota_management
 
 %files plugin-scmarch
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/scmarch/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmarch.ini
 %{FORGE_DIR}/plugins/scmarch
 
@@ -852,23 +851,19 @@ fi
 %{FORGE_DIR}/plugins/scmbzr
 
 %files plugin-scmdarcs
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/scmdarcs/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmdarcs.ini
 %{FORGE_DIR}/plugins/scmdarcs
 
 %files plugin-scmgit
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/scmgit/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmgit.ini
 %{FORGE_DIR}/plugins/scmgit
 %{FORGE_DIR}/www/plugins/scmgit
 
 %files plugin-scmhg
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/scmhg/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmhg.ini
 %{FORGE_DIR}/plugins/scmhg
 
 %files plugin-scmccase
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/scmccase/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmccase.ini
 %{FORGE_DIR}/plugins/scmccase
 
