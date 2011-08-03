@@ -5,9 +5,9 @@ Maintainer: Roland Mas <lolando@debian.org>
 Uploaders: Christian Bayle <bayle@debian.org>
 Build-Depends-Indep: sharutils, docbook-to-man, devscripts, gettext
 Build-Depends: debhelper (>= 7), dpatch, perl, confget
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 Homepage: http://fusionforge.org/
-Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/
+Vcs-Subversion: svn://scm.fusionforge.org/scmrepos/svn/fusionforge/trunk
 
 Package: fusionforge-standard
 Architecture: all
@@ -246,31 +246,36 @@ Package: gforge-plugin-extratabs
 Architecture: all
 Depends: fusionforge-plugin-extratabs, ${misc:Depends}
 Description: Extratabs plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be safely removed.
+ This package is only present for transitional purposes and can be
+ safely removed.
 
 Package: gforge-plugin-globalsearch
 Architecture: all
 Depends: fusionforge-plugin-globalsearch, ${misc:Depends}
 Description: Globalsearch plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be safely removed.
+ This package is only present for transitional purposes and can be
+ safely removed.
 
 Package: gforge-plugin-mediawiki
 Architecture: all
 Depends: fusionforge-plugin-mediawiki, ${misc:Depends}
 Description: Mediawiki plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be safely removed.
+ This package is only present for transitional purposes and can be
+ safely removed.
 
 Package: gforge-plugin-projectlabels
 Architecture: all
 Depends: fusionforge-plugin-projectlabels, ${misc:Depends}
 Description: Projectlabels plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be safely removed.
+ This package is only present for transitional purposes and can be
+ safely removed.
 
 Package: gforge-plugin-scmgit
 Architecture: all
 Depends: fusionforge-plugin-scmgit, ${misc:Depends}
 Description: Git plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be safely removed.
+ This package is only present for transitional purposes and can be
+ safely removed.
 
 Package: fusionforge-plugin-blocks
 Architecture: all
@@ -376,7 +381,7 @@ Description: Mediawiki plugin for FusionForge
 Package: fusionforge-plugin-oslc
 Homepage: http://picoforge.int-evry.fr/cgi-bin/twiki/view/Oslc/Web/FusionForgeOslcServer
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, zendframework (>> 1.10), php-pear, php-http (>= 1.4.1), ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, zendframework (>> 1.10), php5-cli, php-pear, php-http (>= 1.4.1), ${misc:Depends}
 Description: OSLC-CM compatible plugin for FusionForge tracker system.
  OSLC-CM is a standard specification for APIs in Change Management
  applications. It is based on Web technologies such as REST, RDF, or AJAX.
