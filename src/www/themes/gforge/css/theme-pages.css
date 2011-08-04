@@ -1,4 +1,4 @@
-/* 
+/*
  * Stylesheet for FusionForge default theme.
  *
  * Copyright 2009 Matthieu FAURE // Open-S: global clean-up
@@ -19,15 +19,15 @@
  * You should have received a copy of the GNU General Public License along
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- * 
+ *
  * CONTENT: all page-related styles
  * ========================================================
  */
 
-/* 
+/*
  * PAGE: home page
  * ========================================================
- */ 
+ */
 
 /* =bd (main body)
 ----------------------------------------------- */
@@ -45,17 +45,17 @@
 }
 
 #title-home-page {
-	text-align: center;	
+	text-align: center;
 }
 
 #Latest_News h3 {
     margin-top: 0px;
     margin-bottom: 0px;
-    font-weight: bold;	
+    font-weight: bold;
 }
 
 #Latest_News em {
-    padding-left: 1em;  
+    padding-left: 1em;
 }
 
 /* remove inherited background-image */
@@ -72,11 +72,11 @@
 }
 
 #Associated_Forges td {
-    padding-right: 1em;  
+    padding-right: 1em;
 }
 
 #Associated_Forges .align-right {
-    text-align: right;	
+    text-align: right;
 }
 
 #Recently_Registered_Projects td {
@@ -94,10 +94,10 @@
     padding-left: 5px;
 }
 
-/* 
+/*
  * PAGE: project home
  * ========================================================
- */ 
+ */
 #project-summary-and-devs {
 	margin-top: 0.5em;
 }
@@ -110,7 +110,7 @@
     margin: 1em 0.5em;
 }
 
-/* 
+/*
  * PAGE: frs
  * ========================================================
  */
@@ -165,12 +165,12 @@
 	width: 12%;
 }
 
-/* 
+/*
  * PAGE: user_home (eg: http://fusionforge/user/<username>)
  * ========================================================
  */
 #user-profile-homepage {
-    
+
 }
 
 /*
@@ -222,4 +222,8 @@
     border-width: 1px;
     border-collapse: collapse;
     padding: 3px;
+}
+
+.docman_editfile_nodisplay {
+	display: none;
 }

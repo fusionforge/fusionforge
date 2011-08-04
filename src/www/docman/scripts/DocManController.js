@@ -135,7 +135,7 @@ DocManListFileController.prototype =
 	 * @param	string	id of the div
 	 */
 	toggleEditFileView: function(id) {
-		var divid	= '#editfile'+id,
+		var divid	= '#docid'+id,
 		el		= jQuery(divid);
 
 		if (!el.is(":visible")) {
@@ -145,17 +145,19 @@ DocManListFileController.prototype =
 				group_id:	this.params.groupId,
 				action:		'lockfile',
 				lock:		1,
-				fileid:		id
+				fileid:		id,
+				childgroup_id:	this.params.childGroupId
 			});
 
-			this.lockInterval[id] = setInterval("jQuery.get('" + this.params.docManURL + "', {group_id:"+this.params.groupId+",action:'lockfile',lock:1,fileid:"+id+"})",this.params.lockIntervalDelay);
+			this.lockInterval[id] = setInterval("jQuery.get('" + this.params.docManURL + "', {group_id:"+this.params.groupId+",action:'lockfile',lock:1,fileid:"+id+",childgroup_id:"+this.params.childGroupId+"})",this.params.lockIntervalDelay);
 		} else {
 			el.hide();
 			jQuery.get(this.params.docManURL, {
 				group_id:	this.params.groupId,
 				action:		'lockfile',
 				lock:		0,
-				fileid:		id
+				fileid:		id,
+				childgroup_id:	this.params.childGroupId
 			});
 
 			clearInterval(this.lockInterval[id]);

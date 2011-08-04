@@ -73,11 +73,27 @@ if ($dgh->isError())
 
 $df->setDocGroupID($dirid);
 
-/**
- * var must be named d_arr & nested_groups
- * because used by tree.php
- */
-$d_arr =& $df->getDocuments();
+$df->setStateID('1');
+$d_arr_active =& $df->getDocuments();
+if ($d_arr_active != NULL)
+	$d_arr = $d_arr_active;
+
+$df->setStateID('4');
+$d_arr_hidden =& $df->getDocuments();
+if ($d_arr != NULL && $d_arr_hidden != NULL) {
+	$d_arr = array_merge($d_arr, $d_arr_hidden);
+} else if ($d_arr_hidden != NULL) {
+	$d_arr = $d_arr_hidden;
+}
+
+$df->setStateID('5');
+$d_arr_private =& $df->getDocuments();
+if ($d_arr != NULL && $d_arr_private != NULL) {
+	$d_arr = array_merge($d_arr, $d_arr_private);
+} else if ($d_arr_private != NULL) {
+		$d_arr = $d_arr_private;
+}
+
 $nested_groups = $dgf->getNested();
 
 $nested_docs = array();
@@ -107,7 +123,6 @@ if ($d_arr != NULL ) {
 }
 
 $df->setStateID('3');
-
 $d_pending_arr =& $df->getDocuments();
 $nested_pending_groups =& $dgf->getNested();
 
@@ -138,6 +153,7 @@ jQuery(document).ready(function() {
 		divLeft:		jQuery('#left'),
 		divHandle:		jQuery('#handle'),
 		divRight:		jQuery('#right'),
+		childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>
 	});
 });
 
@@ -147,7 +163,12 @@ jQuery(document).ready(function() {
 echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
 echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
 if ($DocGroupName) {
-	echo '<h4>'._('Path:').'&nbsp;<i>'.$dgpath.'</i></h4>';
+	$headerPath = '<h4>';
+	if ($childgroup_id)
+		$headerPath .= _('Subproject').' '.':'.' '.util_make_link('/docman/?group_id='.$g->getID(),$g->getPublicName()).' ';
+
+	$headerPath .= _('Path:').'&nbsp;<i>'.$dgpath.'</i></h4>';
+	echo $headerPath;
 	echo '<h3 class="docman_h3" >'._('Document Folder:').' <i>'.$DocGroupName.'</i>&nbsp;';
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		echo '<a href="#" class="tabtitle" id="docman-editdirectory" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
@@ -212,7 +233,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				break;
 			}
 			default: {
-				$docurl = util_make_uri('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
+				$docurl = util_make_uri('/docman/view.php/'.$d->Group->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()));
 			}
 		}
 		echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'._('View this document').'" >';
@@ -303,6 +324,11 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			echo '</td>';
 		}
 		echo '</tr>'."\n";
+		if (forge_check_perm('docman', $d->Group->getID(), 'approve')) {
+			echo '<tr id="docid'.$d->getID().'" class="docman_editfile_nodisplay" ><td colspan="10" >';
+			$d->editFile();
+			echo '</td></tr>';
+		}
 	}
 	echo $HTML->listTableBottom();
 	echo '<p>';
@@ -330,7 +356,6 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 }
 if (forge_check_perm('docman', $group_id, 'approve') && $DocGroupName) {
 	include ($gfcommon.'docman/views/pendingfiles.php');
-	include ($gfcommon.'docman/views/editfile.php');
 }
 echo '</div>';
 echo '<div style="clear: both;" />';

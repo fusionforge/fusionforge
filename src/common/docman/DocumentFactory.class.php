@@ -292,11 +292,9 @@ class DocumentFactory extends Error {
 					if (!$perm || !is_object($perm)) {
 						if ($doc->getStateID() != 1) {
 							$valid = false;
-							echo 'LA';
 						}
 						if ($perm->isEditor()) {
 							$valid = true;
-							echo 'ICI';
 						}
 					}
 				} else {

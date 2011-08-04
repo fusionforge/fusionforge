@@ -237,6 +237,10 @@
 	margin: 2px;
 }
 
+.docman_editfile_nodisplay {
+	display: none;
+}
+
 /*
     tracker
 */

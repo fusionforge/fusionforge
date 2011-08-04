@@ -426,7 +426,6 @@ src/common/docman/views/additem.php -text
 src/common/docman/views/addsubdocgroup.php -text
 src/common/docman/views/admin.php -text
 src/common/docman/views/editdocgroup.php -text
-src/common/docman/views/editfile.php -text
 src/common/docman/views/help.php -text
 src/common/docman/views/listfile.php -text
 src/common/docman/views/listtrashfile.php -text

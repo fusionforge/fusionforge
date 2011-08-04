@@ -65,7 +65,7 @@ $nested_docs = array();
 $DocGroupName = 0;
 
 if ($dirid) {
-	$ndg = new DocumentGroup($g,$dirid);
+	$ndg = new DocumentGroup($g, $dirid);
 	$DocGroupName = $ndg->getName();
 	if (!$DocGroupName) {
 		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
@@ -75,7 +75,6 @@ if ($dirid) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&error_msg='.urlencode($error_msg));
 	}
 }
-
 
 if ($d_arr != NULL ) {
 	if (!$d_arr || count($d_arr) > 0) {
@@ -194,8 +193,11 @@ jQuery(document).ready(function() {
 			echo '<a class="tabtitle" href="?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
 			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListTrash.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 			echo '</td>';
+			echo '</tr>'."\n";
+			echo '<tr id="docid'.$d->getID().'" class="docman_editfile_nodisplay" ><td colspan="10" >';
+			$d->editFile();
+			echo '</td></tr>';
 		}
-		echo '</tr>';
 		echo $HTML->listTableBottom();
 		echo '<p>';
 		echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
@@ -206,7 +208,6 @@ jQuery(document).ready(function() {
 		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
 		echo '</span>';
 		echo '</p>';
-		include ($gfcommon.'docman/views/editfile.php');
 		echo '</div>';
 	} else {
 		if ($dirid) {

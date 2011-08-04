@@ -997,6 +997,143 @@ class Document extends Error {
 	function deleteVersion() {
 
 	}
+
+	function editFile() {
+		$editfileaction = '?action=editfile&amp;fromview=listfile&amp;dirid='.$this->getDocGroupID();
+		if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
+			$editfileaction .= '&amp;childgroup_id='.$GLOBALS['childgroup_id'];
+		}
+		$editfileaction .= '&amp;group_id='.$GLOBALS['group_id'];
+?>
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+	function doItEditData<?php echo $this->getID(); ?>() {
+		document.getElementById('editdata<?php echo $this->getID(); ?>').submit();
+		document.getElementById('submiteditdata<?php echo $this->getID(); ?>').disabled = true;
+	}
+/* ]]> */</script>
+<h3><?php echo _('Document Edit') ?></h3>
+<hr/>
+<p>
+<strong><?php echo _('Document Title:') ?></strong>
+<?php echo _('Refers to the relatively brief title of the document (e.g. How to use the download server).') ?>
+</p>
+<p>
+<strong><?php echo _('Description:') ?></strong>
+<?php echo _('A brief description to be placed just under the title.') ?>
+</p>
+<?php
+	if ($this->Group->useDocmanSearch())
+		echo '<p>'. _('Both fields are used by document search engine.'). '</p>';
+?>
+
+	<form id="editdata<?php echo $this->getID(); ?>" name="editdata<?php echo $this->getID(); ?>" action="<?php echo $editfileaction ?>" method="post" enctype="multipart/form-data">
+
+<table border="0">
+	<tr>
+		<td>
+			<strong><?php echo _('Document Title:') ?> </strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 5) ?><br />
+			<input type="text" name="title" size="40" maxlength="255" value="<?php echo $this->getName(); ?>" />
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<strong><?php echo _('Description:') ?> </strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 10) ?><br />
+			<input type="text" name="description" size="50" maxlength="255" value="<?php echo $this->getDescription(); ?>" />
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<strong><?php echo _('File')?></strong><?php echo utils_requiredField(); ?><br />
+			<?php if ($this->isURL()) {
+				echo '<a href="'.inputSpecialchars($this->getFileName()).'">['. _('View File URL') .']</a>';
+				} else { ?>
+			<a target="_blank" href="view.php/<?php echo $this->Group->getID().'/'.$this->getID().'/'.urlencode($this->getFileName()) ?>"><?php echo $this->getFileName(); ?></a>
+			<?php } ?>
+		</td>
+	</tr>
+
+<?php
+
+	if ((!$this->isURL()) && ($this->isText()) && $this->getStateID() != '2') {
+		if ($this->Group->useCreateOnline()) {
+			echo '<tr>
+				<td>';
+			echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
+			switch ($this->getFileType()) {
+				case "text/html": {
+					$GLOBALS['editor_was_set_up']=false;
+					$params = array() ;
+					/* name must be != data then nothing is displayed */
+					$params['name'] = 'details'.$this->getID();
+					$params['height'] = "300";
+					$params['group'] = $group_id;
+					$params['body'] = $this->getFileData();
+					plugin_hook("text_editor",$params);
+					if (!$GLOBALS['editor_was_set_up']) {
+						echo '<textarea name="details'.$this->getID().'" rows="15" cols="70">'. $this->getFileData() .'</textarea><br />';
+					}
+					unset($GLOBALS['editor_was_set_up']);
+					echo '<input type="hidden" name="filetype" value="text/html">';
+					break;
+				}
+				default: {
+					echo '<textarea name="details'.$this->getID().'" rows="15" cols="70">'. $this->getFileData() .'</textarea><br />';
+					echo '<input type="hidden" name="filetype" value="text/plain">';
+				}
+			}
+			echo '	</td>
+			</tr>';
+		}
+	}
+?>
+	<tr>
+		<td>
+			<strong><?php echo _('Folder that document belongs in') ?></strong><br />
+			<?php
+				$newdgf = new DocumentGroupFactory($this->Group);
+				$newdgh = new DocumentGroupHTML($this->Group);
+				if ($this->getStateID() == 2) {
+					$newdgh->showSelectNestedGroups($newdgf->getNested(), 'doc_group', false, false);
+				} else {
+					$newdgh->showSelectNestedGroups($newdgf->getNested(), 'doc_group', false, $this->getDocGroupID());
+				}
+		?></td>
+	</tr>
+	<tr>
+		<td>
+			<strong><?php echo _('State') ?>:</strong><br />
+			<?php
+				if ($this->getStateID() == 2) {
+					doc_get_state_box('xzxz', $this->getStateID());
+				} else {
+					doc_get_state_box('xzxz');
+				}
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<?php	if ($this->getStateID() != '2') {
+				if ($this->isURL()) { ?>
+		<strong><?php echo _('Specify an outside URL where the file will be referenced') ?> :</strong><?php echo utils_requiredField(); ?><br />
+		<input type="text" name="file_url" size="50" value="<?php echo $this->getFileName() ?>" />
+		<?php 		} else { ?>
+		<strong><?php echo _('OPTIONAL: Upload new file') ?></strong><br />
+		<input type="file" name="uploaded_data" size="30" />
+		<?php
+				}
+			}
+		?>
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="docid" value="<?php echo $this->getID(); ?>" />
+<input type="button" id="submiteditdata<?php echo $this->getID(); ?>" value="<?php echo _('Submit Edit') ?>" onclick="javascript:doItEditData<?php echo $this->getID(); ?>()" />
+</form>
+<?php
+	}
 }
 
 // Local Variables:

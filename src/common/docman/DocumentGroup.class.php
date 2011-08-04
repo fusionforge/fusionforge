@@ -474,6 +474,7 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function getPath($url = false, $includename = true) {
+
 		$returnPath = '';
 		if ($this->getParentID()) {
 			$parentDg = new DocumentGroup($this->Group, $this->getParentID());
@@ -481,7 +482,12 @@ class DocumentGroup extends Error {
 		}
 		if ($includename) {
 			if ($url) {
-				$returnPath .= '/'.util_make_link('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getID(),$this->getName(), array('title' => _('Browse this folder'), 'class' => 'tabtitle'));
+				$browselink = '/docman/?view=listfile&dirid='.$this->getID();
+				if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
+					$browselink .= '&childgroup_id='.$GLOBALS['childgroup_id'];
+				}
+				$browselink .= '&group_id='.$GLOBALS['group_id'];
+				$returnPath .= '/'.util_make_link($browselink, $this->getName(), array('title' => _('Browse this folder'), 'class' => 'tabtitle'));
 			} else {
 				$returnPath .= '/'.$this->getName();
 			}

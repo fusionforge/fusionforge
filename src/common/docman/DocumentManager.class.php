@@ -159,13 +159,17 @@ class DocumentManager extends Error {
 				}
 				$nbDocsLabel = '';
 				$nbDocs = $localDg->getNumberOfDocuments($stateId);
-				if ($stateId == 1 && forge_check_perm('docman', $this->Group->getID(), 'approve'))
+				if ($stateId == 1 && forge_check_perm('docman', $this->Group->getID(), 'approve')) {
 					$nbDocsPending = $localDg->getNumberOfDocuments(3);
+					$nbDocsHidden = $localDg->getNumberOfDocuments(4);
+					$nbDocsPrivate = $localDg->getNumberOfDocuments(5);
+				}
 
-				if ($nbDocs && (!isset($nbDocsPending) || $nbDocsPending == 0)) {
-					$nbDocsLabel = '('.$nbDocs.')';
-				} elseif (isset($nbDocsPending) && $nbDocsPending) {
-					$nbDocsLabel = '('.$nbDocs.'/'.$nbDocsPending.')';
+				if ($nbDocs && (!isset($nbDocsPending) || $nbDocsPending == 0) && (!isset($nbDocsHidden) || $nbDocsHidden == 0) && (!isset($nbDocsPrivate) || $nbDocsPrivate)) {
+					$nbDocsLabel = '<span class="tabtitle" title="'._('Number of documents in this folder').'" >('.$nbDocs.')</span>';
+				}
+				if (isset($nbDocsPending) && isset($nbDocsHidden) && isset($nbDocsPrivate)) {
+					$nbDocsLabel = '<span class="tabtitle" title="'._('Number of documents in this folder per status. active/pending/hidden/private').'" >('.$nbDocs.'/'.$nbDocsPending.'/'.$nbDocsHidden.'/'.$nbDocsPrivate.')';
 				}
 				echo '<li class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel.'</li>';
 				$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);

@@ -112,8 +112,11 @@ jQuery(document).ready(function() {
 			echo '<td>';
 			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListPending.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png', 22, 22, array('alt'=>_('Edit this document'))). '</a>';
 			echo '</td>';
+			echo '</tr>';
+			echo '<tr id="docid'.$d->getID().'" class="docman_editfile_nodisplay" ><td colspan="10" >';
+			$d->editFile();
+			echo '</td></tr>';
 		}
-		echo '</tr>';
 		echo $HTML->listTableBottom();
 		echo '<p>';
 		echo '<span id="docman-massactionpendingmessage" class="tabtitle-nw" title="'. _('Actions availables for checked files, you need to check at least one file to get actions') . '">';
