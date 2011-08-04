@@ -1,3 +1,3 @@
-/usr/lib/cgi-bin/gitweb.cgi /usr/share/gforge/plugins/scmgit/cgi-bin/gitweb.cgi
-/usr/share/gitweb /usr/share/gforge/www/plugins/scmgit
-/usr/share/gforge/plugins/scmgit/www /usr/share/gforge/www/plugins/scmgit
+/usr/lib/cgi-bin/gitweb.cgi /usr/share/@OLDPACKAGE@/plugins/scmgit/cgi-bin/gitweb.cgi
+/usr/share/gitweb /usr/share/@OLDPACKAGE@/www/plugins/scmgit
+/usr/share/@OLDPACKAGE@/plugins/scmgit/www /usr/share/@OLDPACKAGE@/www/plugins/scmgit

@@ -1,1 +1,1 @@
-/usr/share/gforge/plugins/blocks/www /usr/share/gforge/www/plugins/blocks
+/usr/share/@OLDPACKAGE@/plugins/blocks/www /usr/share/@OLDPACKAGE@/www/plugins/blocks
