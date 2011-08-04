@@ -1,4 +1,4 @@
-fusionforge (5.1-1+) UNRELEASED; urgency=low
+fusionforge (5.1-2) unstable; urgency=low
 
   * Bumped Standards-Version to 3.9.2 (no changes).
   * Point Vcs-*: header at the upstream Subversion repository.
@@ -6,7 +6,7 @@ fusionforge (5.1-1+) UNRELEASED; urgency=low
   * Add Depends: php5-cli to fusionforge-plugin-oslc.
   * Use the Simplepie library provided by Debian rather than a local copy.
 
- -- Roland Mas <lolando@debian.org>  Wed, 03 Aug 2011 21:39:45 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 04 Aug 2011 10:31:34 +0200
 
 fusionforge (5.1-1) unstable; urgency=low
 
