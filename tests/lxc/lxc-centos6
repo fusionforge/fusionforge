@@ -135,23 +135,24 @@ EOF
 #end script
 #EOF
 
-#    cat <<EOF > $rootfs/etc/init/console.conf
-## console - getty
-##
-## This service maintains a console on tty1 from the point the system is
-## started until it is shut down again.
+    cat <<EOF > $rootfs/etc/init/console.conf
+# console - getty
 #
-#start on stopped rc RUNLEVEL=[2345]
-#stop on runlevel [!2345]
-#
-#respawn
+# This service maintains a console on tty1 from the point the system is
+# started until it is shut down again.
+
+start on stopped rc RUNLEVEL=[2345]
+stop on runlevel [!2345]
+
+respawn
 #exec /sbin/getty -8 38400 /dev/console
-#EOF
+exec /sbin/mingetty console
+EOF
 
 # Enable console
-cat <<EOF >> $rootfs/etc/inittab
-0:2345:respawn:/sbin/mingetty console
-EOF
+#CB#cat <<EOF >> $rootfs/etc/inittab
+#CB#0:2345:respawn:/sbin/mingetty console
+#CB#EOF
 
 #    cat <<EOF > $rootfs/lib/init/fstab
 ## /lib/init/fstab: lxc system fstab
@@ -161,12 +162,14 @@ EOF
 #none            /lib/init/rw              tmpfs           mode=0755,nosuid,optional         0 0
 #EOF
 cat <<EOF > $rootfs/etc/fstab
-# NOT MOUNTING IN LXC
-#none /dev/pts devpts defaults 0 0
-#none /proc    proc   defaults 0 0
+#none /proc    proc   nodev,noexec,nosuid 0 0
+none /dev/pts devpts defaults 0 0
 #none /sys     sysfs  defaults 0 0
 #none /dev/shm tmpfs  defaults 0 0
 EOF
+
+    # suppress log level output for udev
+#    sed -i "s/=\"err\"/=0/" $rootfs/etc/udev/udev.conf
 
     # reconfigure some services
 #    if [ -z "$LANG" ]; then
@@ -180,6 +183,7 @@ EOF
     # remove pointless services in a container
 #    chroot $rootfs /usr/sbin/update-rc.d -f ondemand remove
 
+[ ! -f $rootfs/etc/init/kexec-disable.conf ] || mv $rootfs/etc/init/kexec-disable.conf $rootfs/etc/init/kexec-disable.conf.orig
 #    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls u*.conf); do mv $f $f.orig; done'
 #    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls tty[2-9].conf); do mv $f $f.orig; done'
 #    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls plymouth*.conf); do mv $f $f.orig; done'
@@ -189,7 +193,10 @@ EOF
     echo "Please change root-password !"
     echo "root:root" | chroot $rootfs chpasswd
 
-sed -i -e '/start_udev/d' $rootfs/etc/rc.d/rc.sysinit
+sed -i -e 's:/sbin/start_udev:#/sbin/start_udev:' $rootfs/etc/rc.d/rc.sysinit
+#CB#chroot $rootfs chkconfig udev-post off
+#chroot $rootfs chkconfig network on
+
 
     # fix avahi
     if [ -f $rootfs/etc/init.d/avahi-daemon ]
@@ -198,27 +205,27 @@ sed -i -e '/start_udev/d' $rootfs/etc/rc.d/rc.sysinit
         sed -i -e "s!-D!-D --no-rlimits!" $rootfs/etc/init.d/avahi-daemon
     fi
 
-mv $rootfs/dev $rootfs/dev.old
-mkdir $rootfs/dev
-test -e $rootfs/dev/null    || mknod -m 666 $rootfs/dev/null c 1 3
-test -e $rootfs/dev/zero    || mknod -m 666 $rootfs/dev/zero c 1 5
+#CB#mv $rootfs/dev $rootfs/dev.old
+#CB#mkdir $rootfs/dev
+#CB#test -e $rootfs/dev/null    || mknod -m 666 $rootfs/dev/null c 1 3
+#CB#test -e $rootfs/dev/zero    || mknod -m 666 $rootfs/dev/zero c 1 5
 test -e $rootfs/dev/random  || mknod -m 666 $rootfs/dev/random c 1 8
 test -e $rootfs/dev/urandom || mknod -m 666 $rootfs/dev/urandom c 1 9
 test -e $rootfs/dev/pts     || mkdir -m 755 $rootfs/dev/pts
-test -e $rootfs/dev/shm     || mkdir -m 1777 $rootfs/dev/shm
+#test -e $rootfs/dev/shm     || mkdir -m 1777 $rootfs/dev/shm
 test -e $rootfs/dev/tty     || mknod -m 666 $rootfs/dev/tty c 5 0
-test -e $rootfs/dev/console || mknod -m 600 $rootfs/dev/console c 5 1
 test -e $rootfs/dev/tty0    || mknod -m 666 $rootfs/dev/tty0 c 4 0
+test -e $rootfs/dev/tty1    || mknod -m 666 $rootfs/dev/tty1 c 4 1
+test -e $rootfs/dev/tty2    || mknod -m 666 $rootfs/dev/tty2 c 4 2
+test -e $rootfs/dev/tty3    || mknod -m 666 $rootfs/dev/tty3 c 4 3
+test -e $rootfs/dev/tty4    || mknod -m 666 $rootfs/dev/tty4 c 4 4
+test -e $rootfs/dev/tty5    || mknod -m 666 $rootfs/dev/tty5 c 4 5
+test -e $rootfs/dev/tty6    || mknod -m 666 $rootfs/dev/tty6 c 4 6
+test -e $rootfs/dev/console || mknod -m 600 $rootfs/dev/console c 5 1
 test -e $rootfs/dev/full    || mknod -m 666 $rootfs/dev/full c 1 7
 test -e $rootfs/dev/initctl || mknod -m 600 $rootfs/dev/initctl p
-test -e $rootfs/dev/ptmx    || mknod -m 666 $rootfs/dev/ptmx c 5 2
+#CB#test -e $rootfs/dev/ptmx    || mknod -m 666 $rootfs/dev/ptmx c 5 2
 
-test -e $rootfs/dev/tty1 || mknod -m 666 $rootfs/dev/tty1 c 4 1
-test -e $rootfs/dev/tty2 || mknod -m 666 $rootfs/dev/tty2 c 4 2
-test -e $rootfs/dev/tty3 || mknod -m 666 $rootfs/dev/tty3 c 4 3
-test -e $rootfs/dev/tty4 || mknod -m 666 $rootfs/dev/tty4 c 4 4
-#test -e $rootfs/dev/tty5 || mknod -m 666 $rootfs/dev/tty5 c 4 5
-#test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
 
     return 0
 }
@@ -426,7 +433,7 @@ copy_configuration()
 lxc.network.hwaddr = $macaddr
 # lxc.utsname = $name
 
-lxc.tty = 4
+#CB#lxc.tty = 4
 lxc.pts = 1024
 lxc.rootfs = $rootfs
 # lxc.mount  = $path/fstab
@@ -437,11 +444,18 @@ lxc.cgroup.devices.deny = a
 # /dev/null and zero
 lxc.cgroup.devices.allow = c 1:3 rwm
 lxc.cgroup.devices.allow = c 1:5 rwm
+# /dev/full
+lxc.cgroup.devices.allow = c 1:7 rwm
 # consoles
 lxc.cgroup.devices.allow = c 5:1 rwm
 lxc.cgroup.devices.allow = c 5:0 rwm
 lxc.cgroup.devices.allow = c 4:0 rwm
 lxc.cgroup.devices.allow = c 4:1 rwm
+lxc.cgroup.devices.allow = c 4:2 rwm
+lxc.cgroup.devices.allow = c 4:3 rwm
+lxc.cgroup.devices.allow = c 4:4 rwm
+lxc.cgroup.devices.allow = c 4:5 rwm
+lxc.cgroup.devices.allow = c 4:6 rwm
 # /dev/{,u}random
 lxc.cgroup.devices.allow = c 1:9 rwm
 lxc.cgroup.devices.allow = c 1:8 rwm
@@ -451,9 +465,9 @@ lxc.cgroup.devices.allow = c 5:2 rwm
 lxc.cgroup.devices.allow = c 254:0 rwm
 
 # mounts point
-lxc.mount.entry=proc $rootfs/proc proc nodev,noexec,nosuid 0 0
-lxc.mount.entry=devpts $rootfs/dev/pts devpts defaults 0 0
-lxc.mount.entry=sysfs $rootfs/sys sysfs defaults  0 0
+#CB#lxc.mount.entry=proc $rootfs/proc proc nodev,noexec,nosuid 0 0
+#CB#lxc.mount.entry=devpts $rootfs/dev/pts devpts defaults 0 0
+#CB#lxc.mount.entry=sysfs $rootfs/sys sysfs defaults  0 0
 EOF
 
 #    cat <<EOF > $path/fstab
