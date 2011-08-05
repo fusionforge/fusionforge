@@ -441,6 +441,8 @@ lxc.cgroup.devices.deny = a
 # /dev/null and zero
 lxc.cgroup.devices.allow = c 1:3 rwm
 lxc.cgroup.devices.allow = c 1:5 rwm
+# /dev/full
+lxc.cgroup.devices.allow = c 1:7 rwm
 # consoles
 lxc.cgroup.devices.allow = c 5:1 rwm
 lxc.cgroup.devices.allow = c 5:0 rwm
