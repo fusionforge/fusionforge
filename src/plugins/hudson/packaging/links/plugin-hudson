@@ -1,1 +1,1 @@
-/usr/share/gforge/plugins/hudson/www /usr/share/gforge/www/plugins/hudson
+/usr/share/@OLDPACKAGE@/plugins/hudson/www /usr/share/@OLDPACKAGE@/www/plugins/hudson

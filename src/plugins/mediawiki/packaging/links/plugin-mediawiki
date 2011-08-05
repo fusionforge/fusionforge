@@ -1,17 +1,19 @@
-usr/share/mediawiki/api.php			usr/share/gforge/plugins/mediawiki/www/api.php
-usr/share/mediawiki/extensions			usr/share/gforge/plugins/mediawiki/www/extensions
-usr/share/mediawiki/img_auth.php		usr/share/gforge/plugins/mediawiki/www/img_auth.php
-usr/share/mediawiki/includes			usr/share/gforge/plugins/mediawiki/www/includes
-usr/share/mediawiki/index.php			usr/share/gforge/plugins/mediawiki/www/index.php
-usr/share/mediawiki/languages			usr/share/gforge/plugins/mediawiki/www/languages
-usr/share/mediawiki/maintenance			usr/share/gforge/plugins/mediawiki/www/maintenance
-usr/share/mediawiki/opensearch_desc.php		usr/share/gforge/plugins/mediawiki/www/opensearch_desc.php
-usr/share/mediawiki/profileinfo.php		usr/share/gforge/plugins/mediawiki/www/profileinfo.php
-usr/share/mediawiki/redirect.php		usr/share/gforge/plugins/mediawiki/www/redirect.php
-usr/share/mediawiki/StartProfiler.php		usr/share/gforge/plugins/mediawiki/www/StartProfiler.php
-usr/share/mediawiki/thumb.php			usr/share/gforge/plugins/mediawiki/www/thumb.php
-usr/share/mediawiki/trackback.php		usr/share/gforge/plugins/mediawiki/www/trackback.php
+usr/share/mediawiki/api.php			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/api.php
+usr/share/mediawiki/extensions			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/extensions
+usr/share/mediawiki/img_auth.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/img_auth.php
+usr/share/mediawiki/includes			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/includes
+usr/share/mediawiki/index.php			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/index.php
+usr/share/mediawiki/languages			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/languages
+usr/share/mediawiki/maintenance			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/maintenance
+usr/share/mediawiki/opensearch_desc.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/opensearch_desc.php
+usr/share/mediawiki/profileinfo.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/profileinfo.php
+usr/share/mediawiki/redirect.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/redirect.php
+usr/share/mediawiki/StartProfiler.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/StartProfiler.php
+usr/share/mediawiki/thumb.php			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/thumb.php
+usr/share/mediawiki/trackback.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/trackback.php
 
-usr/share/mediawiki/skins			usr/share/gforge/plugins/mediawiki/www/skins
+usr/share/mediawiki/skins			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/skins
 
-usr/share/mediawiki				var/lib/gforge/plugins/mediawiki/master
+usr/share/mediawiki				var/lib/@OLDPACKAGE@/plugins/mediawiki/master
+
+/usr/share/@OLDPACKAGE@/plugins/mediawiki/www /usr/share/@OLDPACKAGE@/www/plugins/mediawiki

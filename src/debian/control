@@ -7,7 +7,7 @@ Build-Depends-Indep: sharutils, docbook-to-man, devscripts, gettext
 Build-Depends: debhelper (>= 7), dpatch, perl, confget
 Standards-Version: 3.9.2
 Homepage: http://fusionforge.org/
-Vcs-Subversion: svn://scm.fusionforge.org/scmrepos/svn/fusionforge/trunk
+Vcs-Svn: svn://scm.fusionforge.org/scmrepos/svn/fusionforge/trunk
 
 Package: fusionforge-standard
 Architecture: all

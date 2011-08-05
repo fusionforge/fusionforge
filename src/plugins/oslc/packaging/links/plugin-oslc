@@ -1,1 +1,1 @@
-/usr/share/gforge/plugins/oslc/www /usr/share/gforge/www/plugins/oslc
+/usr/share/@OLDPACKAGE@/plugins/oslc/www /usr/share/@OLDPACKAGE@/www/plugins/oslc
