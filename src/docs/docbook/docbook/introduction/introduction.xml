@@ -9,6 +9,10 @@
     <para>
       This manual groups several guides bundled together into one single document: <xref linkend="installation_guide" />, <xref linkend="administration_guide" />, <xref linkend="user_guide" /> and <xref linkend="contribution_guide" />. Each guide is intended for a particular audience, and is also available separately.
     </para>
+    <section>
+      <title>Copyright and license</title>
+      <para>This manual is copyrighted by the different authors and released under a FIXME license</para>
+    </section>
   </section>
   <section>
     <title>About FusionForge</title>
