@@ -1,7 +1,10 @@
+
+#XSLTPROC = xsltproc -v
+XSLTPROC = xsltproc
 SRC = docbook/
 TARGET = build/
 XSL = xsl/
-DOCBOOK_XSL = ${XSL}docbook/
+DOCBOOK_XSL = ${XSL}docbook
 DB2LATEX_XSL = ${XSL}db2latex/
 XSLFOP = /usr/share/xml/docbook/stylesheet/docbook-xsl/fo/
 FOP = fop
@@ -19,13 +22,13 @@ html: validate prepare
 	#
 	@for book in ${BOOKS}; do \
 		echo '# . Generating HTML output for book '$$book; \
-		xsltproc --xinclude --output ${TARGET}$$book/$$book.plain.html ${XSL}book_html.xsl ${SRC}$$book.xml; \
+		$(XSLTPROC) --xinclude --output ${TARGET}$$book/$$book.plain.html ${XSL}book_html.xsl ${SRC}$$book.xml; \
 		tar -czf ${TARGET}$$book/$$book.plain.tar.gz ${TARGET}$$book/$$book.plain.html; \
 	done;
 
 	@for article in ${ARTICLES}; do \
 		echo '# . Generating HTML output for article '$$article; \
-		xsltproc --xinclude --output ${TARGET}$$article/$$article.plain.html ${XSL}article_html.xsl ${SRC}$$article/$$article.xml; \
+		$(XSLTPROC) --xinclude --output ${TARGET}$$article/$$article.plain.html ${XSL}article_html.xsl ${SRC}$$article/$$article.xml; \
 		tar -czf ${TARGET}$$article/$$article.plain.tar.gz ${TARGET}$$article/$$article.plain.html; \
 	done;
 	#
@@ -39,14 +42,14 @@ html-chunk: validate prepare
 	@for book in ${BOOKS}; do \
 		echo '# . Generating HTML chunked output for book '$$book; \
 		test -d ${TARGET}$$book/$$book || mkdir ${TARGET}$$book/$$book.chunk; \
-		xsltproc --xinclude --stringparam base.dir ${TARGET}$$book/$$book.chunk/ ${XSL}book_html_chunk.xsl ${SRC}$$book.xml ${DEVNULL}; \
+		$(XSLTPROC) --xinclude --stringparam base.dir ${TARGET}$$book/$$book.chunk/ ${XSL}book_html_chunk.xsl ${SRC}$$book.xml ${DEVNULL}; \
 		tar -czf ${TARGET}$$book/$$book.chunk.tar.gz ${TARGET}$$book/$$book.chunk; \
 	done;
 
 	@for article in ${ARTICLES}; do \
 		echo '# . Generating HTML chunked output for article '$$article; \
 		test -d ${TARGET}$$article/$$article || mkdir ${TARGET}$$article/$$article.chunk; \
-		xsltproc --xinclude --stringparam base.dir ${TARGET}$$article/$$article.chunk/ ${XSL}article_html_chunk.xsl ${SRC}$$article/$$article.xml ${DEVNULL}; \
+		$(XSLTPROC) --xinclude --stringparam base.dir ${TARGET}$$article/$$article.chunk/ ${XSL}article_html_chunk.xsl ${SRC}$$article/$$article.xml ${DEVNULL}; \
 		tar -czf ${TARGET}$$article/$$article.chunk.tar.gz ${TARGET}$$article/$$article.chunk; \
 	done;
 	#
@@ -57,7 +60,7 @@ html-chunk: validate prepare
 # and saved in /usr/share/gforge/www/help/guide/
 html-guide: $(SRC)/user_guide/user_guide.xml
 	rm -f guide/ug_* guide/bk*
-	xsltproc --xinclude --stringparam use.id.as.filename 1 --stringparam chunk.section.depth 2 --stringparam chunker.output.indent yes --stringparam chunker.output.encoding UTF-8 --stringparam base.dir guide/ --stringparam html.stylesheet docbook.css ${XSL}article_html_chunk.xsl $<
+	$(XSLTPROC) --xinclude --stringparam use.id.as.filename 1 --stringparam chunk.section.depth 2 --stringparam chunker.output.indent yes --stringparam chunker.output.encoding UTF-8 --stringparam base.dir guide/ --stringparam html.stylesheet docbook.css ${XSL}article_html_chunk.xsl $<
 	cp css/docbook.css guide/docbook.css
 #	rm -f guide/images/*
 #	cp -p images/* guide/images/
@@ -71,13 +74,13 @@ pdffop: validate prepare
 	#$(FOP) -fo tmp.fo -pdf help_guide/user_guide.pdf
 	@for book in ${BOOKS}; do \
 		echo '# . Generating PDF output for book '$$book; \
-		xsltproc --xinclude --output ${TARGET}$$book/$$book.fo ${XSLFOP}docbook.xsl ${SRC}$$book.xml ${DEVNULL}; \
+		$(XSLTPROC) --xinclude --output ${TARGET}$$book/$$book.fo ${XSLFOP}docbook.xsl ${SRC}$$book.xml ${DEVNULL}; \
 		(cd ${TARGET}$$book; $(FOP) -fo $$book.fo -pdf $$book.pdf ${DEVNULL};); \
 	done;
 
 	@for article in ${ARTICLES}; do \
 		echo '# . Generating PDF output for article '$$article; \
-		xsltproc --xinclude --output ${TARGET}$$article/$$article.fo ${XSLFOP}docbook.xsl ${SRC}$$article/$$article.xml ${DEVNULL}; \
+		$(XSLTPROC) --xinclude --output ${TARGET}$$article/$$article.fo ${XSLFOP}docbook.xsl ${SRC}$$article/$$article.xml ${DEVNULL}; \
 		(cd ${TARGET}$$article; $(FOP) -fo $$article.fo -pdf $$article.pdf ${DEVNULL};); \
 	done;
 	#
@@ -90,7 +93,7 @@ pdf: validate prepare
 	#
 	@for book in ${BOOKS}; do \
 		echo '# . Generating PDF output for book '$$book; \
-		xsltproc --xinclude --output ${TARGET}$$book/$$book.tex ${XSL}book_pdf.xsl ${SRC}$$book.xml ${DEVNULL}; \
+		$(XSLTPROC) --xinclude --output ${TARGET}$$book/$$book.tex ${XSL}book_pdf.xsl ${SRC}$$book.xml ${DEVNULL}; \
 		(cd ${TARGET}$$book; pdflatex -interaction=batchmode $$book.tex ${DEVNULL};); \
 		(cd ${TARGET}$$book; pdflatex -interaction=batchmode $$book.tex ${DEVNULL};); \
 		(cd ${TARGET}$$book; pdflatex -interaction=batchmode $$book.tex ${DEVNULL};); \
@@ -99,7 +102,7 @@ pdf: validate prepare
 
 	@for article in ${ARTICLES}; do \
 		echo '# . Generating PDF output for article '$$article; \
-		xsltproc --xinclude --output ${TARGET}$$article/$$article.tex ${XSL}article_pdf.xsl ${SRC}$$article/$$article.xml ${DEVNULL}; \
+		$(XSLTPROC) --xinclude --output ${TARGET}$$article/$$article.tex ${XSL}article_pdf.xsl ${SRC}$$article/$$article.xml ${DEVNULL}; \
 		(cd ${TARGET}$$article; pdflatex -interaction=batchmode $$article.tex ${DEVNULL};); \
 		(cd ${TARGET}$$article; pdflatex -interaction=batchmode $$article.tex ${DEVNULL};); \
 		(cd ${TARGET}$$article; pdflatex -interaction=batchmode $$article.tex ${DEVNULL};); \
@@ -158,12 +161,19 @@ clean:
 	# Cleaning build environment
 	#
 	@-rm -rf $(TARGET)*
+	@-rm -rf guide/
 	# Done
 	##
+
+clobber: clean
+	##
+	# Hard cleaning build environment
+	#
 	@[ -L xsl/docbook ] && rm xsl/docbook || true
 	@[ -L xsl/db2latex/xsl ] && rm xsl/db2latex/xsl || true
 	@[ -d xsl/db2latex ] && rmdir xsl/db2latex || true
-
+	# Done
+	##
 
 debian: debianhtml debianpdf
 
@@ -171,7 +181,15 @@ debianhtml:
 	@echo "=====> Intalling necessary packages"
 	@sudo apt-get install docbook-xml docbook-xsl libxml2-utils xsltproc
 	@echo "=====> Link to docbook"
-	@[ ! -L xsl/docbook ] && ln -s /usr/share/xml/docbook/stylesheet/nwalsh xsl/docbook || echo "docbook link already done"
+	@if [ ! -L $(DOCBOOK_XSL) ]; then \
+		if [ -d /usr/share/xml/docbook/stylesheet/nwalsh ]; then \
+			ln -s /usr/share/xml/docbook/stylesheet/nwalsh $(DOCBOOK_XSL) ; \
+		elif [ -d /usr/share/xml/docbook/stylesheet/docbook-xsl ]; then \
+			ln -s /usr/share/xml/docbook/stylesheet/docbook-xsl $(DOCBOOK_XSL) ; \
+		fi; \
+	else \
+		echo "docbook link already done" ; \
+	fi
 	@make html
 
 debianpdfold:
