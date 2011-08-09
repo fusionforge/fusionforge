@@ -19,7 +19,7 @@
    For instance, an installation of FusionForge hosts over 450 users and over 140 projects on a single CPU Pentium 2.4GHz machine with 512 MB of RAM.
   </para>
     <para>
-   You can find additionnal information about hardware used by several installations of FusionForge in the <ulink url="http://fusionforge.org/docman/view.php/1/52/gforge-sites.html">FusionForge sites list maintained by Tom Copeland</ulink>.
+   You can find additionnal information about hardware used by several installations of GForge in the <ulink url="http://gforge.org/gf/download/docmanfileversion/105/1798/gforge-sites.html">old GForge sites list that used to be maintained by Tom Copeland</ulink>.
   </para>
   </section>
   <section>
@@ -29,7 +29,7 @@
   </para>
     <orderedlist>
       <listitem>
-        <para>Linux Operating System</para>
+        <para>GNU/Linux Operating System</para>
       </listitem>
       <listitem>
         <para><ulink url="http://www.postgresql.org/">PostgreSQL</ulink> 8.3 or later (8.1, 8.2 should work)</para>
@@ -96,7 +96,7 @@
     <section>
       <title>Overview</title>
       <important>
-        <para>The <filename>INSTALL</filename> file in FusionForge package and <filename>README</filename> files in plugin directories are the authoritive sources for installation instructions and they should have more precedence over this guide.</para>
+        <para>The <filename>INSTALL</filename> file in FusionForge package and <filename>README</filename> files in plugin directories are the authoritative sources for installation instructions and they should have more precedence over this guide.</para>
       </important>
       <note>
         <para>This installation guide is for FusionForge 5.0.</para>
@@ -107,6 +107,7 @@
     </section>
     <section>
       <title>Installing FusionForge on Debian</title>
+      <!-- FIXME : this is absolete now and should be fixed -->
       <para>
     You can simply add lines found at <ulink url="http://debian.fusionforge.org/"/> to <filename>/etc/apt/sources.list</filename> and type <command>apt-get install fusionforge</command> to install a working FusionForge system, thanks to Christian Bayle and Roland Mas.
    </para>
@@ -133,6 +134,7 @@
       <section>
         <title>Getting the source</title>
         <para>There is two ways to get the sources from FusionForge : </para>
+	<!-- FIXME : this is absolete now and should be fixed -->
         <screen>
  # <userinput>tar -xjvf fusionforge-5.0.tar.bz2</userinput>
  # <userinput>cd fusionforge-5.0</userinput>
@@ -255,6 +257,7 @@ tcpip_socket = true
       <section>
         <title>Importing Database</title>
         <para>Create FusionForge database user:</para>
+	<!-- TODO : should probably use fusionforge and not gforge below, now -->
         <screen>
 # <userinput>su - postgres</userinput>
 $ <userinput>psql template1</userinput>
@@ -288,7 +291,7 @@ ERROR:  permission denied for schema public
     </section>
     <section>
       <title>Configuring DNS Server (BIND)</title>
-      <para>FusionForge needs its own domain.  In example FusionForge configuration file, it&apos;s <literal>gforge.<replaceable>company.com</replaceable></literal>.  You should search for <replaceable>company.com</replaceable> in example FusionForge configuration file and replace it with your domain name.</para>
+      <para>FusionForge needs its own domain.  In example FusionForge configuration file, it&apos;s <literal>gforge.<replaceable>company.com</replaceable></literal><!-- TODO: s/gforge/fusionforge/g -->.  You should search for <replaceable>company.com</replaceable> in example FusionForge configuration file and replace it with your domain name.</para>
       <para>Here some example configuration files for BIND are presented that can help you if you are not familiar with BIND but it&apos;s not meant to be complete. Don&apos;t ask BIND-related questions in FusionForge forums, consult documentation that come with your distribution and search in Internet.  Distributions put files in different places and so there are no file locations here.  The example configuration below is only quick start example and doesn&apos;t include reverse mapping.</para>
       <para>For DNS, you need to have the bind package installed</para>
       <para>New subdomain in <literal>gforge.<replaceable>company.com</replaceable></literal> should be created.  In <replaceable>company.com</replaceable> zone file, it may look like that:</para>
@@ -526,6 +529,7 @@ DirectoryIndex index.php
 noreply: /dev/null
 </programlisting>
       <para>Make sure that the following domain names are accepted as local destinations by mail transport agent:</para>
+      <!-- TODO: s/gforge/fusionforge/g -->
       <itemizedlist>
         <listitem>
           <para><literal>gforge.<replaceable>company.com</replaceable></literal></para>
@@ -865,7 +869,7 @@ $ <userinput>psql -U gforge -W -h localhost -f FTI-20050530.sql gforge</userinpu
         </itemizedlist>
       </section>
       <section>
-        <title>JPGraph</title>
+        <title>JPGraph (Gantt Charting and Graphing Support)</title>
         <para>PHP must be compiled with <literal>--with-gd</literal>, or appropriate package must be installed.  Extra fonts for JPGraph are not necessary.  Be sure your <filename>/etc/gforge/local.inc</filename> file contains the proper path to the <filename class="directory">jpgraph/src/</filename> directory.</para>
         <para>Manual installation can be done like this:</para>
         <screen>
@@ -911,7 +915,7 @@ $sys_dbpasswd = &apos;p455w0rd&apos; ;
   <section>
     <title>Plugins</title>
     <note>
-      <para>Since FusionForge 4.0, plugins are necessary as source code management is now provided by plugins (SCM* plugins).</para>
+      <para>Since GForge 4.0, plugins are necessary as source code management is now provided by plugins (SCM* plugins).</para>
     </note>
     <para>For each plugin, you can find an <filename>INSTALL</filename> file in the plugin tarball.</para>
     <section>

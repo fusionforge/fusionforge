@@ -20,7 +20,7 @@
    FusionForge is a software for collaborative development for the software community. It provides a full configured development system with versioning, a project web site and tools for communication between members of a development team.  The tools provided by FusionForge allows team members to communicate and organize their work; this allows the creation of a knowledgebase.
   </para>
     <para>
-   A complete configurated FusionForge system will give you the following features:
+   A complete configurated FusionForge system will give you the following features <!-- TODO : this should rather point to the list of features in the user guide, maybe -->:
   </para>
     <orderedlist>
       <listitem>
