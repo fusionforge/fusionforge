@@ -7,7 +7,7 @@
       This manual is probably obsolete in many parts, as it has unfortunately not been updated as frequently as the source code.
     </para>
     <para>
-      This manual groups several guides bundled together into one single document: "FusionForge Installation Guide", "FusionForge Administration Guide", "FusionForge User Guide" and "FusionForge Contribution Guide". Each guide is intended for a particular audience, and is also available separately.
+      This manual groups several guides bundled together into one single document: <xref linkend="installation_guide" />, <xref linkend="administration_guide" />, <xref linkend="user_guide" /> and <xref linkend="contribution_guide" />. Each guide is intended for a particular audience, and is also available separately.
     </para>
   </section>
   <section>
