@@ -170,7 +170,7 @@ if ($DocGroupName) {
 	$headerPath .= _('Path:').'&nbsp;<i>'.$dgpath.'</i></h4>';
 	echo $headerPath;
 	echo '<h3 class="docman_h3" >'._('Document Folder:').' <i>'.$DocGroupName.'</i>&nbsp;';
-	if (forge_check_perm('docman', $group_id, 'approve')) {
+	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo '<a href="#" class="tabtitle" id="docman-editdirectory" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 		echo '<a href="'.$actionlistfileurl.'&amp;action=trashdir" class="tabtitle" id="docman-trashdirectory" title="'._('Move this folder and his content to trash').'" >'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
 		if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]) && !isset($nested_pending_docs[$dirid])) {
@@ -186,17 +186,17 @@ if ($DocGroupName) {
 	if (forge_check_perm('docman', $group_id, 'approve'))
 		$numPendingFiles = $ndg->getNumberOfDocuments(3);
 	if ($numFiles || (isset($numPendingFiles) && $numPendingFiles))
-		echo '<a href="/docman/view.php/'.$group_id.'/zip/full/'.$dirid.'" class="tabtitle" title="'. _('Download this folder as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
+		echo '<a href="/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid.'" class="tabtitle" title="'. _('Download this folder as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
 
 	echo '</h3>';
 
-	if (forge_check_perm('docman', $group_id, 'approve')) {
+	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
 		echo '<h4 class="docman_h4">'. _('Edit this folder') .'</h4>';
 		include ($gfcommon.'docman/views/editdocgroup.php');
 		echo '</div>';
 	}
-	if (forge_check_perm('docman', $group_id, 'submit')) {
+	if (forge_check_perm('docman', $ndg->Group->getID(), 'submit')) {
 		echo '<div class="docman_div_include" id="additem" style="display:none">';
 		echo '<h4 class="docman_h4">'. _('Add a new item') .'</h4>';
 		include ($gfcommon.'docman/views/additem.php');
@@ -207,7 +207,7 @@ if ($DocGroupName) {
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	$tabletop = array('<input id="checkallactive" type="checkbox" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" onchange="controllerListFile.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'));
 	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '');
-	if (forge_check_perm('docman', $group_id, 'approve')) {
+	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		$tabletop[] = _('Actions');
 		$classth[] = 'unsortable';
 	}
@@ -302,7 +302,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				}
 			} else {
 				if (session_loggedin() && $d->getReservedBy() != $u->getID()) {
-					if (forge_check_perm('docman', $group_id, 'admin')) {
+					if (forge_check_perm('docman', $ndg->Group->getID(), 'admin')) {
 						echo '<a class="docman-enforcereservation" href="'.$actionlistfileurl.'&amp;action=enforcereserve&amp;fileid='.$d->getID().'" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
 					}
 				} else {
@@ -336,7 +336,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo _('Mass actions for selected documents:');
 	echo '</span>';
 	echo '<span id="massactionactive" style="display: none;" >';
-	if (forge_check_perm('docman', $group_id, 'approve')) {
+	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Move to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash'))). '</a>';
 		if (session_loggedin()) {
 			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=reservefile&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Reserve for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve'))). '</a>';
