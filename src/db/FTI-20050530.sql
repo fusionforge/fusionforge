@@ -6,7 +6,7 @@ CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS S
 	BEGIN
 	IF $3 <> \'\' THEN
 		IF $4 THEN
-			FOR data IN SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
+			FOR data IN SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
 			FROM forum, users, forum_group_list, to_tsquery($1) AS q
 			WHERE users.user_id = forum.posted_by 
 			AND forum_group_list.group_forum_id = forum.group_forum_id 
@@ -17,7 +17,7 @@ CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS S
 				RETURN NEXT data;
 			END LOOP;
 		ELSE
-			FOR data IN SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
+			FOR data IN SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
 			FROM forum, users, forum_group_list, to_tsquery($1) AS q
 			WHERE users.user_id = forum.posted_by 
 			AND forum_group_list.group_forum_id = forum.group_forum_id 
@@ -31,7 +31,7 @@ CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS S
 		END IF;
 	ELSE
 		IF $4 THEN
-			FOR data IN SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
+			FOR data IN SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
 			FROM forum, users, forum_group_list, to_tsquery($1) AS q
 			WHERE users.user_id = forum.posted_by 
 			AND forum_group_list.group_forum_id = forum.group_forum_id 
@@ -41,7 +41,7 @@ CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS S
 				RETURN NEXT data;
 			END LOOP;
 		ELSE
-			FOR data IN SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
+			FOR data IN SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name
 			FROM forum, users, forum_group_list, to_tsquery($1) AS q
 			WHERE users.user_id = forum.posted_by 
 			AND forum_group_list.group_forum_id = forum.group_forum_id 
