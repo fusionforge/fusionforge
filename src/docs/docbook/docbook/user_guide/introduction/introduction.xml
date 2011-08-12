@@ -70,6 +70,7 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
+			  <!-- TODO: this is now SCM -->
                                 <term><link linkend="ug_project_cvs">CVS</link></term>
                                 <listitem>
                                         <para>This section describes how to manage CVS repositories for your project.</para>

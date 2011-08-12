@@ -1,4 +1,5 @@
 <section id="ug_project_cvs">
+  <!-- FIXME : this is now SCM -->
 	<title>CVS</title>
 	<para>
 		The CVS button shows a page that contains information on how to access the CVS repository. Use this information to configure your client for CVS access. 

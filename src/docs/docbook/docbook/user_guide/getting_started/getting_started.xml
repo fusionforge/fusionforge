@@ -9,7 +9,7 @@
 	<section id="ug_getting_started_new_user">
 		<title>Registering as a new user</title>
 		<para>
-			To register a new user, click on the New Account link on the top right side of the browser window.
+			To register a new user, click on the <emphasis>New Account</emphasis> link on the top right side of the browser window.
 		</para>
 		<para>
 			To register as a user, you need to fill out the form with the following data:
@@ -75,7 +75,7 @@
 	<section id="ug_getting_started_new_project">
 		<title>Registering a new project</title>
 		<para>To register a new project, connect to FusionForge,
-		login and go to My Page section. You have a <emphasis>Register
+		login and go to <emphasis>My Page</emphasis> section. You have a <emphasis>Register
 		Project</emphasis> link in the menu at the top of the
 		page.</para>
 		<para>You need to insert the following information to

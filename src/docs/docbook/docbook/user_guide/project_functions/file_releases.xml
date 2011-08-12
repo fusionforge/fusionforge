@@ -7,13 +7,13 @@
    The File Releases System (FRS) is used to upload files to the FusionForge site and to make these files available to the users in an easy and efficient way.
   </para>
     <para>
-   Files can be divided in different packages, and every single package can be monitored by the users; these users will receive an email every time a new file has been added to the package.
+   Files can be divided in different <emphasis>packages</emphasis>, and every single package can be monitored by the users; these users will receive an email every time a new file has been added to the package.
   </para>
   </section>
   <section id="ug_project_file_releases_administration">
     <title>Administration</title>
     <para>
-   The FRS system allows you to upload file to FusionForge and make this file available to the public.
+   The FRS system allows you to upload a file to FusionForge and make this file available to the public.
   </para>
     <para>
    You have to define a package before you can release a file. A package should have a descriptive name for the project, e.g. gforge3.
