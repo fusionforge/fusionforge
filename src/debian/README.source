@@ -1,9 +1,31 @@
-This package uses dpatch.  For more details, install the dpatch package and
-consult /usr/share/doc/dpatch/README.source.gz.
+The Debian-specific package sources are managed in upstream's
+repository (Debian maintainers are currently also usptream
+developers).
 
-The Debian-specific package sources are managed in upstream's repository.
+Source Package Format is 1.0.
 
 Orig tarball is constructed from upstream's sources top-level dir
 using 'make orig'.
 
- -- Olivier Berger <olivier.berger@it-sudparis.eu>, Sat,  3 Apr 2010 19:38:08 +0200
+fusionforge_5.1.orig.tar.gz is in sync with upstream's "v5.1" svn tag (rev. 13667)
+
+
+Packages of 5.1 are snapshots of the upstream svn branch "Branch_5_1",
+i.e. the source package's diffs include "non packaging" changes
+outside debian/ too, as direct patches to upstream sources.
+
+More precisely :
+ - fusionforge-5.1-3 is in sync with upstream SVN contents as of rev. 14089;
+ - fusionforge-5.1-2 is in sync with upstream SVN contents as of rev. 14087;
+ - fusionforge-5.1-1 is in sync with upstream SVN contents as of rev. 14081.
+
+
+In addition to the above, this package uses dpatch.  For more
+details, install the dpatch package and consult
+/usr/share/doc/dpatch/README.source.gz.
+
+The following may provide more details on variations between the
+upstream main version and Debian's packaging :
+http://patch-tracker.debian.org/package/fusionforge
+
+ -- Olivier Berger <obergix@debian.org>, Fri, 12 Aug 2011 13:33:32 +0200
