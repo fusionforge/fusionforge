@@ -1948,6 +1948,12 @@ eval {
     &update_with_sql("20110414-move-news-forums-to-own-project","5.0.51-14");
     &update_with_sql("20110701-gforge-5.1","5.1-1");
     &update_with_sql("20110728-fix-mta-lists-view","5.1-2");
+    &update_with_sql("FTI","5.1-3");
+    &update_with_sql("FTI-20050315","5.1-4");
+    &update_with_sql("FTI-20050401","5.1-5");
+    &update_with_sql("FTI-20050530","5.1-6");
+    &update_with_sql("FTI-20060130","5.1-7");
+    &update_with_sql("FTI-20061025","5.1-8");
 
     ########################### INSERT HERE #################################
 
