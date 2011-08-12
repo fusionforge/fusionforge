@@ -2,7 +2,7 @@ Source: fusionforge
 Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
-Uploaders: Christian Bayle <bayle@debian.org>
+Uploaders: Christian Bayle <bayle@debian.org>, Olivier Berger <obergix@debian.org>
 Build-Depends-Indep: sharutils, docbook-to-man, devscripts, gettext
 Build-Depends: debhelper (>= 7), dpatch, perl, confget
 Standards-Version: 3.9.2
