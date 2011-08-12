@@ -52,7 +52,7 @@ class ProjectSearchQuery extends SearchQuery {
 			if (count ($this->words)) {
 				$words = $this->getFormattedWords();
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT DISTINCT ON (rank(vectors, q), group_name) type_id, g.group_id, headline(group_name, q) as group_name, unix_group_name, headline(short_description, q) as short_description FROM groups AS g, to_tsquery($1) AS q, groups_idx as i WHERE g.status in ($2, $3) ',
+							 'SELECT DISTINCT ON (rank(vectors, q), group_name) type_id, g.group_id, ts_headline(group_name, q) as group_name, unix_group_name, headline(short_description, q) as short_description FROM groups AS g, to_tsquery($1) AS q WHERE g.status in ($2, $3) ',
 							 array ($words,
 								'A',
 								'H')) ;
@@ -76,12 +76,15 @@ class ProjectSearchQuery extends SearchQuery {
 				$qpa = $this->addMatchCondition($qpa, 'unix_group_name');
 				$qpa = db_construct_qpa ($qpa,
 							 ') ') ;
-			}
+			} else {
+				$qpa = db_construct_qpa ($qpa,
+							 'TRUE') ;
+			}				
 			$qpa = db_construct_qpa ($qpa,
 						 ') ') ;
 			if (count ($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'AND g.group_id = i.group_id ORDER BY rank(vectors, q) DESC, group_name') ;
+							 'ORDER BY rank(vectors, q) DESC, group_name') ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
 							 'ORDER BY group_name') ;
