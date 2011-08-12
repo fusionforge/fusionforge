@@ -52,21 +52,21 @@ class ProjectSearchQuery extends SearchQuery {
 			if (count ($this->words)) {
 				$words = $this->getFormattedWords();
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT DISTINCT ON (rank(vectors, q), group_name) type_id, g.group_id, headline(group_name, q) as group_name, unix_group_name, headline(short_description, q) as short_description FROM groups AS g, to_tsquery($1) AS q, groups_idx as i WHERE g.status in ($2, $3) ',
+							 'SELECT DISTINCT ON (ts_rank(vectors, q), group_name) type_id, g.group_id, ts_headline(group_name, q) as group_name, unix_group_name, ts_headline(short_description, q) as short_description FROM groups AS g, to_tsquery($1) AS q, groups_idx as i WHERE g.status in ($2, $3) ',
 							 array ($words,
 								'A',
 								'H')) ;
 				$qpa = db_construct_qpa ($qpa,
-							 'AND (vectors @@ q AND ') ;
+							 'AND vectors @@ q ') ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT DISTINCT ON (group_name) type_id, g.group_id, group_name, unix_group_name, short_description FROM groups AS g WHERE g.status in ($1, $2) AND (',
+							 'SELECT DISTINCT ON (group_name) type_id, g.group_id, group_name, unix_group_name, short_description FROM groups AS g WHERE g.status in ($1, $2) ',
 							 array ('A',
 								'H')) ;
 			}
 			if (count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
-							 '(') ;
+							 ' AND ((') ;
 				$qpa = $this->addMatchCondition($qpa, 'group_name');
 				$qpa = db_construct_qpa ($qpa,
 							 ') OR (') ;
@@ -75,13 +75,11 @@ class ProjectSearchQuery extends SearchQuery {
 							 ') OR (') ;
 				$qpa = $this->addMatchCondition($qpa, 'unix_group_name');
 				$qpa = db_construct_qpa ($qpa,
-							 ') ') ;
-			}
-			$qpa = db_construct_qpa ($qpa,
-						 ') ') ;
+							 ')) ') ;
+			}				
 			if (count ($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'AND g.group_id = i.group_id ORDER BY rank(vectors, q) DESC, group_name') ;
+							 'AND g.group_id = i.group_id ORDER BY ts_rank(vectors, q) DESC, group_name') ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
 							 'ORDER BY group_name') ;

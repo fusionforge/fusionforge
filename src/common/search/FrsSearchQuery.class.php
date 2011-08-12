@@ -72,7 +72,7 @@ class FrsSearchQuery extends SearchQuery {
 			if(count($this->words)) {
 				$qpa = db_construct_qpa () ;
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT headline(frs_package.name, q) AS package_name, headline(frs_release.name, q) as release_name, frs_release.release_date, frs_release.release_id, users.realname FROM frs_file, frs_release, users, frs_package, to_tsquery($1) AS q, frs_release_idx r, frs_file_idx f WHERE frs_release.released_by = users.user_id AND r.release_id = frs_release.release_id AND f.file_id = frs_file.file_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id=$2 ',
+							 'SELECT ts_headline(frs_package.name, q) AS package_name, ts_headline(frs_release.name, q) as release_name, frs_release.release_date, frs_release.release_id, users.realname FROM frs_file, frs_release, users, frs_package, to_tsquery($1) AS q, frs_release_idx r, frs_file_idx f WHERE frs_release.released_by = users.user_id AND r.release_id = frs_release.release_id AND f.file_id = frs_file.file_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id=$2 ',
 							 array ($this->getFormattedWords(),
 								 $this->groupId)) ;
 			} else {

@@ -74,7 +74,7 @@ class TasksSearchQuery extends SearchQuery {
 				$words = $this->getFormattedWords();
 
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT project_task.project_task_id, project_task.percent_complete, headline(project_task.summary, q) AS summary, project_task.start_date,project_task.end_date,users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id FROM project_task, users, project_group_list, to_tsquery($2) AS q, project_task_idx WHERE project_task.created_by = users.user_id AND project_task.project_task_id = project_task_idx.project_task_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id=$3 ',
+							 'SELECT project_task.project_task_id, project_task.percent_complete, ts_headline(project_task.summary, q) AS summary, project_task.start_date,project_task.end_date,users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id FROM project_task, users, project_group_list, to_tsquery($2) AS q, project_task_idx WHERE project_task.created_by = users.user_id AND project_task.project_task_id = project_task_idx.project_task_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id=$3 ',
 							 array (' ',
 								$words,
 								$this->groupId)) ;
@@ -110,7 +110,7 @@ class TasksSearchQuery extends SearchQuery {
 			}
 			if (count ($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY project_group_list.project_name, rank(vectors, q) DESC, project_task.project_task_id') ;
+							 'ORDER BY project_group_list.project_name, ts_rank(vectors, q) DESC, project_task.project_task_id') ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
 							 'ORDER BY project_group_list.project_name, project_task.project_task_id') ;

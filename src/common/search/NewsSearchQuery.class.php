@@ -62,12 +62,12 @@ class NewsSearchQuery extends SearchQuery {
 			if (count ($this->words)) {
 				$words = $this->getFormattedWords();
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT headline(news_bytes.summary, q) as summary, news_bytes.post_date, news_bytes.forum_id, users.realname FROM news_bytes, users, to_tsquery($1) AS q, news_bytes_idx WHERE (news_bytes.group_id=$2 AND news_bytes.is_approved <> 4 AND news_bytes_idx.id = news_bytes.id AND news_bytes.submitted_by=users.user_id) AND (vectors @@ q ',
+							 'SELECT ts_headline(news_bytes.summary, q) as summary, news_bytes.post_date, news_bytes.forum_id, users.realname FROM news_bytes, users, to_tsquery($1) AS q, news_bytes_idx WHERE (news_bytes.group_id=$2 AND news_bytes.is_approved <> 4 AND news_bytes_idx.id = news_bytes.id AND news_bytes.submitted_by=users.user_id) AND (vectors @@ q ',
 							 array ($words,
 								$group_id)) ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT summary, news_bytes.post_date, news_bytes.forum_id, users.realname FROM news_bytes, users WHERE (news_bytes.group_id=$1 AND news_bytes.is_approved <> 4 AND news_bytes.submitted_by=users.user_id) AND (',
+							 'SELECT summary, news_bytes.post_date, news_bytes.forum_id, users.realname FROM news_bytes, users WHERE (news_bytes.group_id=$1 AND news_bytes.is_approved <> 4 AND news_bytes.submitted_by=users.user_id) ',
 							 array ($group_id)) ;
 			}
 			if (count ($this->phrases)) {
@@ -76,17 +76,17 @@ class NewsSearchQuery extends SearchQuery {
 								 $this->getOperator()) ;
 				}
 				$qpa = db_construct_qpa ($qpa,
-							 ' (') ;
+							 ' ((') ;
 				$qpa = $this->addMatchCondition ($qpa, 'summary') ;
 				$qpa = db_construct_qpa ($qpa,
 							 ') OR (') ;
 				$qpa = $this->addMatchCondition ($qpa, 'details') ;
 				$qpa = db_construct_qpa ($qpa,
-							 ')') ;
+							 '))') ;
 			}
 			if (count ($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
-							 ') ORDER BY rank(vectors, q) DESC, post_date DESC') ;
+							 ') ORDER BY ts_rank(vectors, q) DESC, post_date DESC') ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
 							 ') ORDER BY post_date DESC') ;
