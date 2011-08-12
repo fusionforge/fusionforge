@@ -66,7 +66,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 		$i = 0;
 		
 		while ($row = db_fetch_array($result)) {
-			if (!forge_check_perm ('project_read', $row_top['group_id'])) {
+			if (!forge_check_perm ('project_read', $row['group_id'])) {
 				continue ;
 			}
 			$i++;
