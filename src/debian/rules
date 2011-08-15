@@ -196,7 +196,7 @@ install: build
 	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini-fhs $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini
 	cp -r $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf.d-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d
 	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf
-	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(OLDPACKAGE)/templates/httpd.vhosts $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2-vhosts/etc/$(OLDPACKAGE)/templates/
+	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/$(OLDPACKAGE)/etc/templates/httpd.vhosts $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2-vhosts/etc/$(OLDPACKAGE)/templates/
 
 # Remove those that need to be generated at install time
 	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/secrets.inc

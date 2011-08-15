@@ -2,5 +2,5 @@ usr/share/@OLDPACKAGE@/etc/httpd.d
 usr/share/@OLDPACKAGE@/bin
 var/lib/@OLDPACKAGE@/etc
 var/lib/@OLDPACKAGE@/etc/templates
-etc/@OLDPACKAGE@
+etc/@OLDPACKAGE@/templates
 etc/logrotate.d
