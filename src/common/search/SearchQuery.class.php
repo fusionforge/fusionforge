@@ -333,6 +333,7 @@ class SearchQuery extends Error {
 		} else {
 			$words = implode('|', $this->words);
 		}
+		return $words;
 	}
 }
 
