@@ -1,4 +1,5 @@
 usr/share/@OLDPACKAGE@/bin
 var/lib/@OLDPACKAGE@/etc
-etc/@OLDPACKAGE@
+var/lib/@OLDPACKAGE@/etc/templates
+etc/@OLDPACKAGE@/templates
 etc/logrotate.d

@@ -13,7 +13,7 @@ require ("/usr/share/gforge/lib/include.pl") ;
 
 &db_connect ;
 
-$ifile = '/usr/share/gforge/etc/templates/httpd.vhosts' ;
+$ifile = '/etc/gforge/templates/httpd.vhosts' ;
 $ofile = '/var/lib/gforge/etc/templates/httpd.vhosts' ;
 
 open (IFILE, $ifile)
