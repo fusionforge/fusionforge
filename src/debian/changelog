@@ -4,7 +4,13 @@ fusionforge (5.1.50~) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Fri, 05 Aug 2011 13:41:04 +0200
 
-fusionforge (5.1-3+) UNRELEASED; urgency=low
+fusionforge (5.1-4+) UNRELEASED; urgency=low
+
+  * 
+
+ -- Roland Mas <lolando@debian.org>  Tue, 16 Aug 2011 16:32:30 +0200
+
+fusionforge (5.1-4) unstable; urgency=low
 
   [ Olivier Berger ]
   * Make sure /usr/share/gforge/db/20110701-gforge-5.1.sql is actually
@@ -15,7 +21,7 @@ fusionforge (5.1-3+) UNRELEASED; urgency=low
   * Ship httpd.vhosts template as a conffile, so as not to overwrite local
     changes.
 
- -- Roland Mas <lolando@debian.org>  Mon, 15 Aug 2011 11:05:03 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 16 Aug 2011 16:18:44 +0200
 
 fusionforge (5.1-3) unstable; urgency=low
 
