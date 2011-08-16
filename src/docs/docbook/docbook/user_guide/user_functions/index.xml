@@ -3,7 +3,7 @@
 	<section id="ug_user_homepage">
 		<title>User Homepage</title>
 		<para>
-			The User home page appears after the user has performed the <link linkend="ug_getting_started_login">login</link> or when he clicks the My Page tab.
+			The User home page appears after the user has performed the <link linkend="ug_getting_started_login">login</link> or when he clicks the <emphasis>My Page</emphasis> tab.
 		</para>
 
                 <para>The User Homepage contains a 4 links and 5 tabs.</para>
@@ -11,13 +11,14 @@
                 <para>The four links are the following:</para>
                 <itemizedlist>
                     <listitem><para>My Personal Page</para></listitem>
+                    <listitem><para>Trackers dashboard</para></listitem>
                     <listitem><para>Diary &amp; Notes</para></listitem>
                     <listitem><para>Account Maintenance</para></listitem>
                     <listitem><para>Register Project</para></listitem>
                  </itemizedlist>
 
 		<para>
-			The five tabs contain the following information:
+			The five tabs contain the following information:<!-- TODO: this is no longer exactly like this in 5.0 : (codendi) widgets appeared -->
 		</para>
 		<variablelist>
 			<varlistentry>
@@ -69,7 +70,7 @@
                 <para>You have two possibilities:</para>
                 <orderedlist>
                     <listitem><para>If you want to change the language for your account, then go to
-                                    My Page -&gt; Account Maintenance and then, select &lt;your language&gt; 
+                                    <emphasis>My Page</emphasis> -&gt; Account Maintenance and then, select &lt;your language&gt; 
                                     as language. And submit.</para></listitem>
                     <listitem><para>If you want your language for accessing FusionForge (even without being logged), 
                                     then it's defined in the configuration of your browser. You should 

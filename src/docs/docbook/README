@@ -1,7 +1,15 @@
 build/		:	where generated documents will be put
+guide/		:	same
 docbook/	:	docbook sources
 xsl/		:	xsl stylesheets
 xsl/db2latex	:	link to db2latex stylesheets
 xsl/docbook	:	link to docbook stylesheets
 
 Please DO NOT generate docs in your local CVS tree.
+
+Note to Debian users : you may need to issue :
+ $ make debianhtml
+instead of  :
+ $ make html
+or simply :
+ $ make debian

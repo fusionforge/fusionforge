@@ -2,12 +2,25 @@
 <chapter id="gm_introduction">
   <title>Introduction</title>
   <section>
+    <title>About this manual</title>
+    <para>
+      This manual is probably obsolete in many parts, as it has unfortunately not been updated as frequently as the source code.
+    </para>
+    <para>
+      This manual groups several guides bundled together into one single document: <xref linkend="installation_guide" />, <xref linkend="administration_guide" />, <xref linkend="user_guide" /> and <xref linkend="contribution_guide" />. Each guide is intended for a particular audience, and is also available separately.
+    </para>
+    <section>
+      <title>Copyright and license</title>
+      <para>This manual is copyrighted by the different authors and released under a FIXME license</para>
+    </section>
+  </section>
+  <section>
     <title>About FusionForge</title>
     <para>
    FusionForge is a software for collaborative development for the software community. It provides a full configured development system with versioning, a project web site and tools for communication between members of a development team.  The tools provided by FusionForge allows team members to communicate and organize their work; this allows the creation of a knowledgebase.
   </para>
     <para>
-   A complete configurated FusionForge system will give you the following features:
+   A complete configurated FusionForge system will give you the following features <!-- TODO : this should rather point to the list of features in the user guide, maybe -->:
   </para>
     <orderedlist>
       <listitem>
@@ -62,31 +75,10 @@
   <section>
     <title>FusionForge History</title>
     <para>
-   FusionForge is a fork of the 2.61 SourceForge code, which was only available via anonymous CVS from VA (Research|Linux|Software). <ulink url="http://gforge.org">gforge.org</ulink> is not a project hosting platform, it is merely an implementation of the FusionForge code. We believe that the FusionForge functionality is important not only to the Open Source community, but to the wider business community.
-  </para>
+      To avoid confusion with the proprietary versions of GForge (known as GForge Advanced Server, GForge Express Edition and GForge Community Edition), the free/libre/opensource codebase was renamed/forked, to be separately maintained under the name FusionForge by the main developers of the free GForge 4.x codebase.
+    </para>
     <para>
-   Since VA has not released the source in over one year, despite their promises to the contrary, a fork was necessary to ensure a viable open source version of the codebase.
+   GForge was itself a fork of the 2.61 SourceForge code, which was only available via anonymous CVS from VA (Research|Linux|Software). Since VA had not released the source in over one year, despite their promises to the contrary, a fork was necessary to ensure a viable open source version of the codebase. The GForge project was formed and maintained by Tim Perdue, the original author of much of the original SourceForge web code.
   </para>
-    <para>
-   The FusionForge project was formed and is maintained by Tim Perdue, the original author of much of the original SourceForge web code.
-  </para>
-    <para>Major changes are present in the current FusionForge codebase:</para>
-    <itemizedlist>
-      <listitem>
-        <para>Jabber Support - System events, such as bug submissions, are optionally sent via jabber and email</para>
-      </listitem>
-      <listitem>
-        <para>Radically easier to install - By removing SF.net-specific code, like caching and image servers, many install dependencies have been eliminated.</para>
-      </listitem>
-      <listitem>
-        <para>New interface - The interface makes it easier to navigate as well as know your present location.</para>
-      </listitem>
-      <listitem>
-        <para>Code cleanup - Since FusionForge does not need to scale to 500,000+ users, many hacks and optimizations have been removed</para>
-      </listitem>
-      <listitem>
-        <para>Foundries and related nonsense have been removed</para>
-      </listitem>
-    </itemizedlist>
   </section>
 </chapter>

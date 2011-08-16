@@ -41,9 +41,9 @@ Template: @PACKAGE@/shared/admin_password
 Type: password
 _Description: @FORGENAME@ administrator password:
  The @FORGENAME@ administrator account will have full privileges on the
- system. It will be used to approve the creation of new projects.
+ forge. It will be used to approve the creation of new projects.
  .
- Please choose the password for this account.
+ Please choose the password for this forge account.
 
 Template: @PACKAGE@/shared/admin_password_confirm
 Type: password

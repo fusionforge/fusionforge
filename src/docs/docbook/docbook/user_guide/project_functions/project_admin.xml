@@ -1,7 +1,7 @@
 <section id="ug_project_project_admin">
 	<title>Project Administration</title>
 	<para>
-		The Project Administration section allows you to administer the project.
+		The <emphasis>Project Administration</emphasis> section allows you to administer the project.
 	</para>
 	<section id="ug_project_project_admin_page">
 		<title>The Project Admin Page</title>
@@ -9,7 +9,7 @@
 			The Project Admin web page is where all the administration of the project is done from. To get there, log into FusionForge, and select the project from your personal page. This will bring you to the <guimenuitem>Project Summary</guimenuitem> page.
 		</para>
 		<para>
-			The Project admin page is available by clicking on the Admin tab.
+			The Project admin page is available by clicking on the <emphasis>Admin</emphasis> tab.
 		</para>
 		<para>
 			Clicking here will present you with links to Admin, User Permissions, Edit Public Info, Project History, VHOSTS, Post Jobs, Edit Jobs, Edit MultiMedia Data, Database Admin and Stats. The Project Admin page is only accessible to members of the project who have been granted administrator privileges. By default, the person who registers the project is given admin privileges. Other members can be granted admin rights by the project administrator(s).
@@ -42,7 +42,7 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>Tool Admin</term>
+				<term>Tools Admin</term>
 				<listitem>
 					<para>This section shows the links to the tools describes the tools listed under the Tool Admin section on the Project Admin page.</para>
 				</listitem>
