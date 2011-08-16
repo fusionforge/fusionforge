@@ -5122,6 +5122,7 @@ tests/func/PluginsOnlineHelp/contextualHelpTest.php -text
 tests/func/PluginsSvnTracker/trackerTest.php -text
 tests/func/RBAC/rbacTest.php -text
 tests/func/README.TXT -text
+tests/func/Search/searchTest.php -text
 tests/func/Site/loginTest.php -text
 tests/func/Site/projectsTest.php -text
 tests/func/Site/topTest.php -text
