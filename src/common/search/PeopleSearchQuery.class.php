@@ -51,7 +51,7 @@ class PeopleSearchQuery extends SearchQuery {
 			if (count ($this->words)) {
 				$words = $this->getFormattedWords();
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT users.user_id, user_name, headline(realname, q) as realname FROM users, to_tsquery($1) AS q, users_idx WHERE status=$2 AND users_idx.user_id = users.user_id AND (vectors @@ q ',
+							 'SELECT users.user_id, user_name, ts_headline(realname, q) as realname FROM users, to_tsquery($1) AS q, users_idx WHERE status=$2 AND users_idx.user_id = users.user_id AND (vectors @@ q ',
 							 array ($words,
 								'A'));
 			} else {
@@ -75,7 +75,7 @@ class PeopleSearchQuery extends SearchQuery {
 			}
 			if (count ($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
-							 ') ORDER BY rank(vectors, q) DESC, user_name') ;
+							 ') ORDER BY ts_rank(vectors, q) DESC, user_name') ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
 							 ') ORDER BY user_name') ;

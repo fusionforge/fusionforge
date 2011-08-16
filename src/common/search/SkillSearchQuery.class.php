@@ -51,7 +51,7 @@ class SkillSearchQuery extends SearchQuery {
 			if(count($this->words)) {
 				$words = $this->getFormattedWords();
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT skills_data.skills_data_id, skills_data.type, skills_data.start, skills_data.finish, headline(skills_data.title, q) as title, headline(skills_data.keywords, q) as keywords FROM skills_data, users, skills_data_types, to_tsquery($1) AS q, skills_data_idx WHERE (vectors @@ q ',
+							 'SELECT skills_data.skills_data_id, skills_data.type, skills_data.start, skills_data.finish, ts_headline(skills_data.title, q) as title, ts_headline(skills_data.keywords, q) as keywords FROM skills_data, users, skills_data_types, to_tsquery($1) AS q, skills_data_idx WHERE (vectors @@ q ',
 							 array ($words)) ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
@@ -82,7 +82,7 @@ class SkillSearchQuery extends SearchQuery {
 						 'AND (skills_data.user_id=users.user_id) AND (skills_data.type=skills_data_types.type_id) ') ;
 			if (count ($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY rank(vectors, q) DESC, finish DESC') ;
+							 'ORDER BY ts_rank(vectors, q) DESC, finish DESC') ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
 							 'ORDER BY finish DESC') ;

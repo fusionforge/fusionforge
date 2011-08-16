@@ -72,10 +72,10 @@ class ArtifactSearchQuery extends SearchQuery {
 
 			if (count($words)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT a.group_artifact_id, a.artifact_id, headline(summary, $1) AS summary, ',
+							 'SELECT a.group_artifact_id, a.artifact_id, ts_headline(summary, $1) AS summary, ',
 							 array ($this->getFormattedWords())) ;
 				$qpa = db_construct_qpa ($qpa,
-							 'a.open_date, users.realname, rank FROM (SELECT a.artifact_id, SUM (RANK(ai.vectors, q) + RANK(ami.vectors, q)) AS rank FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)') ;
+							 'a.open_date, users.realname, rank FROM (SELECT a.artifact_id, SUM (ts_rank(ai.vectors, q) + ts_rank(ami.vectors, q)) AS rank FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)') ;
 
 				$qpa = db_construct_qpa ($qpa,
 							 ', artifact_idx ai, artifact_message_idx ami, to_tsquery($1) q',
@@ -90,7 +90,7 @@ class ArtifactSearchQuery extends SearchQuery {
 					$qpa = db_construct_qpa ($qpa,
 								 $this->getOperator()) ;
 					$qpa = db_construct_qpa ($qpa,
-								 '(') ;
+								 '((') ;
 					$qpa = $this->addMatchCondition($qpa, 'a.details');
 					$qpa = db_construct_qpa ($qpa,
 								 ') OR (') ;
@@ -99,7 +99,7 @@ class ArtifactSearchQuery extends SearchQuery {
 								 ') OR (') ;
 					$qpa = $this->addMatchCondition($qpa, 'am.body');
 					$qpa = db_construct_qpa ($qpa,
-								 ')') ;
+								 '))') ;
 				}
 				$qpa = db_construct_qpa ($qpa,
 							 ') GROUP BY a.artifact_id) x, artifact a, users WHERE a.artifact_id=x.artifact_id AND users.user_id=a.submitted_by ORDER BY group_artifact_id ASC, rank DESC, a.artifact_id ASC') ;
@@ -113,9 +113,7 @@ class ArtifactSearchQuery extends SearchQuery {
 
 				if (count($this->phrases)) {
 					$qpa = db_construct_qpa ($qpa,
-								 ' AND (') ;
-					$qpa = db_construct_qpa ($qpa,
-								 '(') ;
+								 ' AND ((') ;
 					$qpa = $this->addMatchCondition($qpa, 'a.details');
 					$qpa = db_construct_qpa ($qpa,
 								 ') OR (') ;

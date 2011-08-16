@@ -48,7 +48,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 			$words = $this->getFormattedWords();
 			if(count($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT headline(unix_group_name, q) as unix_group_name, headline(short_description, q) as short_description, type_id, groups.group_id, license, register_time FROM groups, groups_idx, to_tsquery($1) q ',
+							 'SELECT ts_headline(unix_group_name, q) as unix_group_name, ts_headline(short_description, q) as short_description, type_id, groups.group_id, license, register_time FROM groups, groups_idx, to_tsquery($1) q ',
 							 array (implode (' ', $words))) ;
 				$qpa = db_construct_qpa ($qpa,
 							 'WHERE status IN ($1, $2) AND short_description <> $3 AND groups.group_id = groups_idx.group_id',
@@ -73,7 +73,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 								 ')') ;
 				}
 				$qpa = db_construct_qpa ($qpa,
-							 ') ORDER BY rank(vectors, q) DESC, group_name ASC') ;
+							 ') ORDER BY ts_rank(vectors, q) DESC, group_name ASC') ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
 							 'SELECT unix_group_name, short_description, type_id, groups.group_id, license, register_time FROM groups ') ;
@@ -84,9 +84,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 								'')) ;
 				if (count($this->phrases)) {
 					$qpa = db_construct_qpa ($qpa,
-								 ' AND (' ) ;
-					$qpa = db_construct_qpa ($qpa,
-								 '(') ;
+								 ' AND ((' ) ;
 					$qpa = $this->addMatchCondition($qpa, 'group_name');
 					$qpa = db_construct_qpa ($qpa,
 								 ') OR (') ;

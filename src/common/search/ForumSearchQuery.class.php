@@ -71,7 +71,7 @@ class ForumSearchQuery extends SearchQuery {
 
 			if(count($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname FROM forum, users, to_tsquery($1) AS q, forum_idx as fi WHERE forum.group_forum_id = $2 AND forum.posted_by = users.user_id AND fi.msg_id = forum.msg_id AND vectors @@ q ',
+							 'SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname FROM forum, users, to_tsquery($1) AS q, forum_idx as fi WHERE forum.group_forum_id = $2 AND forum.posted_by = users.user_id AND fi.msg_id = forum.msg_id AND vectors @@ q ',
 							 array ($words,
 								$this->forumId)) ;
 				$phraseOp = $this->getOperator();
@@ -93,7 +93,7 @@ class ForumSearchQuery extends SearchQuery {
 			}
 			if(count($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY rank(vectors, q) DESC') ;
+							 'ORDER BY ts_rank(vectors, q) DESC') ;
 			} else {
 				$qpa = db_construct_qpa ($qpa,
 							 'ORDER BY post_date DESC') ;

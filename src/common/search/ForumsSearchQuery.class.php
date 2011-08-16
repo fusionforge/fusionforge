@@ -80,7 +80,7 @@ class ForumsSearchQuery extends SearchQuery {
 			}
 
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name FROM forum, users, forum_group_list, forum_idx, to_tsquery($1) as q ',
+						 'SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name FROM forum, users, forum_group_list, forum_idx, to_tsquery($1) as q ',
 						 array ($this->getFormattedWords())) ;
 			$qpa = db_construct_qpa ($qpa,
 						 'WHERE users.user_id = forum.posted_by AND vectors @@ q AND forum.msg_id = forum_idx.msg_id AND forum_group_list.group_forum_id = forum.group_forum_id AND forum_group_list.is_public <> 9 AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $1) ',
@@ -95,7 +95,7 @@ class ForumsSearchQuery extends SearchQuery {
 							 'AND forum_group_list.is_public = 1 ') ;
 			}
 			$qpa = db_construct_qpa ($qpa,
-						 'ORDER BY forum_group_list.forum_name ASC, forum.msg_id ASC, rank(vectors, q) DESC') ;
+						 'ORDER BY forum_group_list.forum_name ASC, forum.msg_id ASC, ts_rank(vectors, q) DESC') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name FROM forum, users, forum_group_list WHERE users.user_id = forum.posted_by AND forum_group_list.group_forum_id = forum.group_forum_id AND forum_group_list.is_public <> 9 AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $1) ',
