@@ -46,8 +46,8 @@ define('DB_INIT_CMD', "/root/tests/func/db_reload.sh >>/var/log/db_reload_seleni
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'myadmin')
 define ('FORGE_ADMIN_USERNAME', 'admin');
-define ('FORGE_ADMIN_PASSWORD', $ADMIN_PASSWORD);
-define ('FORGE_OTHER_PASSWORD', $OTHER_PASSWORD);
+define ('FORGE_ADMIN_PASSWORD', '$ADMIN_PASSWORD');
+define ('FORGE_OTHER_PASSWORD', '$OTHER_PASSWORD');
 
 // Where CLI is installed
 define ('CLI_CMD', '/opt/gforge/acde/tools/gforge-cli/gforge.php');
