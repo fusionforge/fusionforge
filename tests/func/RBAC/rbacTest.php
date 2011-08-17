@@ -51,7 +51,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 	function testGlobalRolesAndPermissions()
 	{
-		$this->login("admin");
+		$this->login(FORGE_ADMIN_USERNAME);
 
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
@@ -216,7 +216,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 		// Non-regression test for Adacore ticket K802-005
 		// (Deletion of global roles)
-		$this->switchUser("admin");
+		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='role_name']", "Temporary role") ;
@@ -532,7 +532,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 		// Non-regression test for Adacore ticket K802-005
 		// (Deletion of project-wide roles)
-		$this->switchUser("admin");
+		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->gotoProject ("MetaProject") ;
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");

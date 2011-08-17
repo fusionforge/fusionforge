@@ -52,7 +52,7 @@ class CreateProject extends FForge_SeleniumTestCase
 	function testSimpleCreate()
 	{
 		// "Manual" procedure
-		$this->login ('admin');
+		$this->login (FORGE_ADMIN_USERNAME);
 		$this->click("link=My Page");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Register Project");
@@ -84,7 +84,7 @@ class CreateProject extends FForge_SeleniumTestCase
 
 	function testCharsCreateTestCase()
 	{
-		$this->login('admin');
+		$this->login(FORGE_ADMIN_USERNAME);
 		$this->click("link=My Page");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Register Project");
@@ -225,7 +225,7 @@ class CreateProject extends FForge_SeleniumTestCase
 	// Test removal of project.
 	function testRemoveProject()
 	{
-		$this->login('admin');
+		$this->login(FORGE_ADMIN_USERNAME);
 
 		// Create project as a different user
 		// Non-regression test for Adacore ticket K720-005
@@ -242,7 +242,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("toto Lastname"));
 
 		$this->registerProject('testal1','toto');
-		$this->approveProject('testal1','admin');
+		$this->approveProject('testal1',FORGE_ADMIN_USERNAME);
 
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");

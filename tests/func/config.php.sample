@@ -27,9 +27,9 @@ define('DB_PASSWORD', '@@FFDB_PASS@@');
 define('DB_INIT_CMD', 'php '.dirname(__FILE__).'/db_reload.php');
 
 // this should be an existing user of the forge together with its password
-// (the password should be different from 'xxxxxx')
-define ('EXISTING_USER', 'admin');
-define ('PASSWD_OF_EXISTING_USER', 'xxxxx');
+define ('FORGE_ADMIN_USERNAME', 'admin');
+define ('FORGE_ADMIN_PASSWORD', 'xxxxx');
+define ('FORGE_OTHER_PASSWORD', 'yyyyy');
 
 // Enter true when file is configured.
 define('CONFIGURED', false);

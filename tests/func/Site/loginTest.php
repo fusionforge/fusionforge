@@ -65,8 +65,8 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertRegExp($url_regexp, $location, 
 				    "You may need to set 'HOST' setting in test suite's config file to something compatible with 'web_host' defined in ini file");
 
-		$this->type("form_loginname", "admin");
-		$this->type("form_pw", "myadmin");
+		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
+		$this->type("form_pw", FORGE_ADMIN_PASSWORD);
 		$this->click("login");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
@@ -79,7 +79,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->open( ROOT );
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
-		$this->type("form_loginname", "admin");
+		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
 		$this->type("form_pw", "");
 		$this->click("login");
 		$this->waitForPageToLoad("30000");
@@ -91,7 +91,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->open( ROOT );
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
-		$this->type("form_loginname", "admin");
+		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
 		$this->type("form_pw", "awrongpassword");
 		$this->click("login");
 		$this->waitForPageToLoad("30000");
@@ -100,7 +100,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Log In"));
 		
 		// Test factored code.
-		$this->login('admin');
+		$this->login(FORGE_ADMIN_USERNAME);
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
 
@@ -108,16 +108,16 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Display Full User List/Edit Users");
 		$this->click("//table/tbody/tr/td/a[contains(@href,'useredit.php') and contains(.,'(admin)')]/../..//a[contains(@href, 'passedit.php?user_id=')]");
 		$this->waitForPageToLoad("30000");
-		$this->type("passwd","tototata");
-		$this->type("passwd2","tototata");
+		$this->type("passwd", FORGE_OTHER_PASSWORD);
+		$this->type("passwd2", FORGE_OTHER_PASSWORD);
 		$this->clickAndWait("submit");
 		$this->logout();
 
 		$this->open( ROOT );
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
-		$this->type("form_loginname", "admin");
-		$this->type("form_pw", "tototata");
+		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
+		$this->type("form_pw", FORGE_OTHER_PASSWORD);
 		$this->click("login");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Forge Admin"));

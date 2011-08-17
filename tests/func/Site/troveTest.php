@@ -26,7 +26,7 @@ class Trove extends FForge_SeleniumTestCase
 	function testTroveAdmin()
 	{
 		$this->open( ROOT );
-		$this->login('admin');
+		$this->login(FORGE_ADMIN_USERNAME);
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Display Trove Map");

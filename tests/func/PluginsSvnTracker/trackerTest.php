@@ -56,7 +56,7 @@ class SvnCommit2Tracker extends FForge_SeleniumTestCase
 		$this->populateStandardTemplate('trackers');
 		$this->initSvn();
 		$this->activatePlugin('svntracker');
-		$this->login('admin');
+		$this->login(FORGE_ADMIN_USERNAME);
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
@@ -87,7 +87,7 @@ class SvnCommit2Tracker extends FForge_SeleniumTestCase
 		system("rm -fr /tmp/svn.test");
 		mkdir("/tmp/svn.test");
 
-		system("cd /tmp/svn.test; $svn --username admin --password myadmin co $url >/dev/null", $ret);
+		system("cd /tmp/svn.test; $svn --username ".FORGE_ADMIN_USERNAME." --password ".FORGE_ADMIN_PASSWORD." co $url >/dev/null", $ret);
 		$this->assertEquals($ret, 0);
 
 		system("echo 'this is a simple text' > /tmp/svn.test/projecta/mytext.txt");
@@ -95,12 +95,12 @@ class SvnCommit2Tracker extends FForge_SeleniumTestCase
 		system("cd /tmp/svn.test/projecta; $svn add mytext.txt >/dev/null", $ret);
 		$this->assertEquals($ret, 0);
 		
-		system("cd /tmp/svn.test/projecta; $svn --username admin --password myadmin ci -m 'Fixed [#1] added mytext' >/dev/null", $ret);
+		system("cd /tmp/svn.test/projecta; $svn --username ".FORGE_ADMIN_USERNAME." --password ".FORGE_ADMIN_PASSWORD." ci -m 'Fixed [#1] added mytext' >/dev/null", $ret);
 		$this->assertEquals($ret, 0);
 		
 		system("echo 'with a new line' >> /tmp/svn.test/projecta/mytext.txt");
 
-		system("cd /tmp/svn.test/projecta; $svn --username admin --password myadmin ci -m 'Improved [#1] updated mytext' >/dev/null", $ret);
+		system("cd /tmp/svn.test/projecta; $svn --username ".FORGE_ADMIN_USERNAME." --password ".FORGE_ADMIN_PASSWORD." ci -m 'Improved [#1] updated mytext' >/dev/null", $ret);
 		$this->assertEquals($ret, 0);
 
 		system("rm -fr /tmp/svn.test");

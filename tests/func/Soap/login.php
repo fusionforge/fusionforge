@@ -156,7 +156,7 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	{
 	  $this->assertNotNull($this->soapclient);
 
-	  $userid = EXISTING_USER;
+	  $userid = FORGE_ADMIN_USERNAME;
 	  
 	  try {
 	    $response = $this->soapclient->login($userid, 'xxxxxx');
@@ -177,8 +177,8 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	 */
 	function testLoginSuccesful()
 	{
-	  $userid = EXISTING_USER;
-	  $passwd = PASSWD_OF_EXISTING_USER;
+	  $userid = FORGE_ADMIN_USERNAME;
+	  $passwd = FORGE_ADMIN_PASSWORD;
 
 	  $response = $this->login($userid, $passwd);
 
