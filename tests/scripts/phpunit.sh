@@ -16,7 +16,7 @@ then
 fi
 
 WORKSPACE=/root
-[ ! -f $WORKSPACE/config/default ] || . $WORKSPACE/config/default
+[ ! -f config/default ] || . config/default
 [ ! -f $WORKSPACE/config/phpunit ] || . $WORKSPACE/config/phpunit
 SELENIUM_RC_DIR=/var/log
 SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
