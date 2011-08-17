@@ -1,4 +1,7 @@
 #! /bin/sh
+
+set -x
+
 if [ $# -ge 1 ]
 then
         testsuite=$1
@@ -16,7 +19,7 @@ then
 fi
 
 WORKSPACE=/root
-[ ! -f config/default ] || . config/default
+[ ! -f tests/config/default ] || . tests/config/default
 [ ! -f $WORKSPACE/config/phpunit ] || . $WORKSPACE/config/phpunit
 SELENIUM_RC_DIR=/var/log
 SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
