@@ -1,7 +1,5 @@
 SET client_min_messages TO warning;
 
-BEGIN;
-
 DROP FUNCTION update_vectors() CASCADE;
 
 CREATE OR REPLACE FUNCTION update_vectors() RETURNS TRIGGER AS '
@@ -147,5 +145,3 @@ FOR EACH ROW EXECUTE PROCEDURE update_vectors('skills_data');
 
 CREATE TRIGGER users_ts_update AFTER UPDATE OR INSERT OR DELETE ON users
 FOR EACH ROW EXECUTE PROCEDURE update_vectors('users');
-
-COMMIT;
