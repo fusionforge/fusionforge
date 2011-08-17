@@ -40,5 +40,6 @@ DNSDOMAIN=local
 DEBMIRROR=http://cdn.debian.net/debian/
 DEBMIRRORSEC=http://security.debian.org/
 
+FORGE_ADMIN_USERNAME=admin
 FORGE_ADMIN_PASSWORD=myadmin
 FORGE_OTHER_PASSWORD=tototata
