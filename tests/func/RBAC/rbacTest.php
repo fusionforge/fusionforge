@@ -33,7 +33,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Project Information"));
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Members of ProjectA"));
+		$this->assertTrue($this->isTextPresent("Current Project Members"));
 		$this->click("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
