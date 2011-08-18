@@ -62,7 +62,7 @@ class CreateTrackerRelation extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "Depends on");
 		$this->type("alias", "depends_on");
-		$this->click("document.forms[2].field_type[7]");
+		$this->click("//input[@name='field_type' and @value=9]");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Depends on"));

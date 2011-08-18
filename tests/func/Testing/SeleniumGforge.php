@@ -128,7 +128,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->waitForPageToLoad("30000");
 			$this->type("name", "URL");
 			$this->type("alias", "url");
-			$this->click("document.forms[2].field_type[3]");
+			$this->click("//input[@name='field_type' and @value=4]");
 			$this->click("post_changes");
 			$this->waitForPageToLoad("30000");
 			
