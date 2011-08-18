@@ -64,7 +64,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->type("summary", "Summary1");
 		$this->type("details", "Description1");
-		$this->click("document.forms[2].submit[1]");
+		$this->click("//form[@id='trackeraddform']//input[@type='submit']");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Summary1"));
 		$this->click("link=Summary1");
