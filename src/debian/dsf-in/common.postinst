@@ -80,7 +80,8 @@ EOF
 ; These values should not go into world-readable files!
 
 [core]
-database_host=""
+; 127.0.0.1 instead of "" in order to avoid the need to modifying pg_hba.conf
+database_host=127.0.0.1
 database_name=gforge
 database_user=gforge
 database_port=5432
