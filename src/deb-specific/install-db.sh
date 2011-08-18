@@ -116,7 +116,7 @@ case "$target" in
 	rm -f $cur
 	
 	cur=$(mktemp /tmp/$pattern)
-	perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nlocal $db_name $db_user md5\nlocal $db_name ${db_user}_nss trust\nlocal $db_name list ident\nlocal $db_name ${db_user}_mta md5\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
+	perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nlocal $db_name $db_user md5\n# user which is used by libnss to access the DB (see \/etc\/nss-pgsql.conf)\nlocal $db_name ${db_user}_nss trust\nlocal $db_name list ident\nlocal $db_name ${db_user}_mta md5\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
 	cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 	rm -f $cur
 	
