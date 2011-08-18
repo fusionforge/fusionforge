@@ -60,7 +60,14 @@ case "$1" in
 
         # Patch DB configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-db.sh configure-files
-	ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new ${pg_hba_dir}/pg_hba.conf
+	ucf_package=`ucfq -w ${pg_hba_dir}/pg_hba.conf | cut -d ':' -f 2`
+	if [ "x$ucf_package" != "x@OLDPACKAGE@-db-postgresql" ]
+	then
+	    ucf --debconf-ok --debconf-template fusionforge/ucfchangeprompt ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new ${pg_hba_dir}/pg_hba.conf
+	else
+	    ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new ${pg_hba_dir}/pg_hba.conf
+	fi
+	ucfr @OLDPACKAGE@-db-postgresql /etc/postgresql/9.0/main/pg_hba.conf
 	rm ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new
 
 	# Make sure the database accepts connections from these new users
