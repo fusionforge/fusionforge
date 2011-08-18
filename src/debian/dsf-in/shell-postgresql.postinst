@@ -31,9 +31,27 @@ case "$1" in
 
         # Patch NSS configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-nsspgsql.sh configure-files
+
+	# There's probably no /etc/nss-pgsql.conf yet (none provided by default with libnss-pgsql2)
+	if [ ! -f /etc/nss-pgsql.conf ]; then
+	    # Install default version, identical to the one managed with ucf : ucf won't prompt us this time
+            cp /etc/nss-pgsql.conf.gforge-new /etc/nss-pgsql.conf
+        fi
 	ucf --debconf-ok /etc/nss-pgsql.conf.@OLDPACKAGE@-new /etc/nss-pgsql.conf
+	ucfr @OLDPACKAGE@-shell-postgresql /etc/nss-pgsql.conf
+
+        # There's probably no /etc/nss-pgsql.conf yet (none provided by default with libnss-pgsql2)
+	if [ ! -f /etc/nss-pgsql-root.conf ]; then
+	    # Install default version, identical to the one managed with ucf : ucf won't prompt this time
+            cp /etc/nss-pgsql-root.conf.@OLDPACKAGE@-new /etc/nss-pgsql-root.conf
+	fi
 	ucf --debconf-ok /etc/nss-pgsql-root.conf.@OLDPACKAGE@-new /etc/nss-pgsql-root.conf
+	ucfr @OLDPACKAGE@-shell-postgresql /etc/nss-pgsql-root.conf
+
+	# There should be a nsswitch.conf, so we have to manage it
 	ucf --debconf-ok /etc/nsswitch.conf.@OLDPACKAGE@-new /etc/nsswitch.conf
+	ucfr @OLDPACKAGE@-shell-postgresql /etc/nsswitch.conf
+
 	rm /etc/nss-pgsql.conf.@OLDPACKAGE@-new
 	rm /etc/nss-pgsql-root.conf.@OLDPACKAGE@-new
 	rm /etc/nsswitch.conf.@OLDPACKAGE@-new
