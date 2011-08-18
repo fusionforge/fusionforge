@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# Configure LDAP for GForge
+# Configure NSS for PostGreSQL for GForge
 # Christian Bayle, Roland Mas
 # Initially written for debian-sf (Sourceforge for Debian)
 # Adapted as time went by for Gforge then for FusionForge
@@ -37,7 +37,7 @@ modify_pam_pgsql(){
     # echo "Nothing to do"
 }
 
-# Check/Modify /etc/libnss-ldap.conf
+# Check/Modify /etc/libnss-pgsql.conf
 configure_libnss_pgsql(){
     cat > /etc/nss-pgsql.conf.gforge-new <<EOF
 ### NSS Configuration for Gforge
