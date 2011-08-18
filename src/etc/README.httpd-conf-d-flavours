@@ -1,0 +1,8 @@
+The different httpd.conf.d-*/ directories are *generated* out of
+contents of httpd.conf.d/.
+
+See src/utils/manage-apache-config.sh
+
+Please make modifications in the source files inside httpd.conf.d/.
+
+-- Olivier Berger

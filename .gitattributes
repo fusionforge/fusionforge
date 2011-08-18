@@ -704,6 +704,7 @@ src/docs/docbook/docbook/user_guide/user_functions/index.xml svneol=native#text/
 src/docs/docbook/docbook/user_guide/user_guide.xml svneol=native#text/xml
 src/docs/fusionforge.doxygen -text
 src/docs/list_of_public_fusionforge -text
+src/etc/README.httpd-conf-d-flavours -text
 src/etc/config.ini-fhs -text
 src/etc/config.ini-opt -text
 src/etc/config.ini-usrlocal -text
@@ -732,6 +733,7 @@ src/etc/httpd.conf.d-fhs/10-vhosts-main.conf -text
 src/etc/httpd.conf.d-fhs/20-vhosts-lists.conf -text
 src/etc/httpd.conf.d-fhs/30-vhosts-projects.conf -text
 src/etc/httpd.conf.d-fhs/40-vhosts-extra.conf -text
+src/etc/httpd.conf.d-fhs/README.generated -text
 src/etc/httpd.conf.d-fhs/auth-main.inc -text
 src/etc/httpd.conf.d-fhs/auth-projects.inc -text
 src/etc/httpd.conf.d-fhs/block-trace.inc -text
@@ -758,6 +760,7 @@ src/etc/httpd.conf.d-opt/10-vhosts-main.conf -text
 src/etc/httpd.conf.d-opt/20-vhosts-lists.conf -text
 src/etc/httpd.conf.d-opt/30-vhosts-projects.conf -text
 src/etc/httpd.conf.d-opt/40-vhosts-extra.conf -text
+src/etc/httpd.conf.d-opt/README.generated -text
 src/etc/httpd.conf.d-opt/auth-main.inc -text
 src/etc/httpd.conf.d-opt/auth-projects.inc -text
 src/etc/httpd.conf.d-opt/block-trace.inc -text
@@ -785,6 +788,7 @@ src/etc/httpd.conf.d-usrlocal/10-vhosts-main.conf -text
 src/etc/httpd.conf.d-usrlocal/20-vhosts-lists.conf -text
 src/etc/httpd.conf.d-usrlocal/30-vhosts-projects.conf -text
 src/etc/httpd.conf.d-usrlocal/40-vhosts-extra.conf -text
+src/etc/httpd.conf.d-usrlocal/README.generated -text
 src/etc/httpd.conf.d-usrlocal/auth-main.inc -text
 src/etc/httpd.conf.d-usrlocal/auth-projects.inc -text
 src/etc/httpd.conf.d-usrlocal/block-trace.inc -text
