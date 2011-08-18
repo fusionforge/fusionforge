@@ -60,6 +60,10 @@ case "$1" in
 
         # Patch DB configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-db.sh configure-files
+
+	# At first, the pg_hba.conf file is not yet handled by ucf, so
+	# we don't display the usual template, but instead a custom
+	# one (fusionforge/ucfchangeprompt)
 	ucf_package=`ucfq -w ${pg_hba_dir}/pg_hba.conf | cut -d ':' -f 2`
 	if [ "x$ucf_package" != "x@OLDPACKAGE@-db-postgresql" ]
 	then
@@ -67,6 +71,7 @@ case "$1" in
 	else
 	    ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new ${pg_hba_dir}/pg_hba.conf
 	fi
+	# register it with ucfr/ucfq so that next time the normal ucf template is used, in case of user changes (or another package's)
 	ucfr @OLDPACKAGE@-db-postgresql /etc/postgresql/9.0/main/pg_hba.conf
 	rm ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new
 
