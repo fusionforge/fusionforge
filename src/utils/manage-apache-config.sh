@@ -1,5 +1,13 @@
 #! /bin/bash -e
 
+# Generates contents of the apache configuration files based on the sources in src/etc/httpd.conf.d/ :
+#  - src/etc/httpd.conf.d-fhs/ : for FHS like paths (/usr, ...)
+#  - src/etc/httpd.conf.d-opt/ : for /opt like paths
+#  - src/etc/httpd.conf.d-usrlocal/ : for /usr/local like paths
+#
+# See the thread at : http://lists.fusionforge.org/pipermail/fusionforge-general/2010-June/001067.html for some more details
+#
+
 case $1 in
     build)
 	if [ -e src/etc/httpd.conf.d ] ; then # We're in the parent dir
@@ -13,6 +21,7 @@ case $1 in
 	    exit 1
 	fi
 
+	# FHS like paths (for Debian packages, etc.)
 	mkdir -p httpd.conf.d-fhs
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
 	    sed -e 's,{core/config_path},/etc/gforge,g' \
@@ -27,7 +36,8 @@ case $1 in
 		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
 		$i > httpd.conf.d-fhs/$(basename $i)
 	done
-	
+
+	# /opt like paths
 	mkdir -p httpd.conf.d-opt
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
 	    sed -e 's,{core/config_path},/etc/gforge,g' \
@@ -43,6 +53,7 @@ case $1 in
 		$i > httpd.conf.d-opt/$(basename $i)
 	done
 	
+	# /usr/local like paths
 	mkdir -p httpd.conf.d-usrlocal
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
 	    sed -e 's,{core/config_path},/etc/gforge,g' \
