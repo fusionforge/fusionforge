@@ -3,8 +3,12 @@ fusionforge (5.1-4+) UNRELEASED; urgency=low
   [ Olivier Berger ]
   * Better document in README.source how the package is build vs upstream
     SVN repo.
+  * Manage pg_hba.conf with custom ucf template that should be less
+    ambiguous.
+  * Use explicit db host connection on 127.0.0.1 in order to avoid some
+    changes in pg_hba.conf.
 
- -- Olivier Berger <olivier.berger@it-sudparis.eu>  Tue, 16 Aug 2011 22:26:12 +0200
+ -- Olivier Berger <obergix@debian.org>  Wed, 17 Aug 2011 13:04:43 +0200
 
 fusionforge (5.1-4) unstable; urgency=low
 
