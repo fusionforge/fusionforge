@@ -1,3 +1,6 @@
+# Settings for configuration variables that are normally kept in a configuration file unreadable to www-data
+# Restart Apache after changing these
+
 #RequestHeader unset GForgeDbhost
 #RequestHeader append GForgeDbhost "{core/database_host}"
 

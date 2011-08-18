@@ -79,6 +79,10 @@ EOF
 ; You can edit the values here or move them to other files.
 ; These values should not go into world-readable files!
 
+; ATTENTION : these configuration variables may not be used directly
+; by the PHP scripts run by apache.
+; See contents of secrets.inc which is loaded by Apache conf files too
+
 [core]
 ; 127.0.0.1 instead of "" in order to avoid the need to modifying pg_hba.conf
 database_host=127.0.0.1
