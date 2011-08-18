@@ -1,0 +1,17 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
+Template: @PACKAGE@/ucfchangeprompt
+Type: select
+__Choices: install the new version configured by @PACKAGE@, keep the local version currently installed, show the differences between the versions, show a side-by-side difference between the versions, start a new shell to examine the situation
+Choices-C: install_new, keep_current, diff, sdiff, shell
+Default: install_new
+_Description: What do you want to do about configuration file ${BASENAME}?
+ The configuration file ${FILE} needs to be modified by @PACKAGE@,
+ whereas it is also a configuration file of the postgresql package.
