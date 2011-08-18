@@ -132,7 +132,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->init();
 		$this->click("link=Mailing Lists");
 		$this->waitForPageToLoad("30000");
-		$this->click("//body/div[@id='maindiv']/p[1]/strong/a[2]");
+		$this->click("//body//div[@id='maindiv']/p[1]/strong/a[2]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Add Mailing List");
 		$this->waitForPageToLoad("30000");
@@ -143,7 +143,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("List Added"));
 		$this->click("link=Forums");
 		$this->waitForPageToLoad("30000");
-		$this->click("//body/div[@id='maindiv']/p[1]/strong/a[2]");
+		$this->click("//body//div[@id='maindiv']/p[1]/strong/a[2]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Add forum");
 		$this->waitForPageToLoad("30000");
