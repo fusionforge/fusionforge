@@ -7,6 +7,7 @@ fusionforge (5.1-4+) UNRELEASED; urgency=low
     ambiguous, including a proper default value.
   * Use explicit db host connection on 127.0.0.1 in order to avoid some
     changes in pg_hba.conf.
+  * Fix bits around ucf (using ucfr / ucfq)
 
  -- Olivier Berger <obergix@debian.org>  Wed, 17 Aug 2011 13:04:43 +0200
 
