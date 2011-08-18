@@ -14,7 +14,7 @@ then
 	pg_version=`pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
 	if [ "x$pg_version" != "x" ] 
 	then 
-		export pg_hba_dir=/etc/postgresql/${pg_version}/main/
+		export pg_hba_dir=/etc/postgresql/${pg_version}/main
 	else
 		echo "No database found online on port 5432"
 		echo "Couldn't initialize or upgrade @OLDPACKAGE@ database."
