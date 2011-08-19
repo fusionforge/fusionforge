@@ -58,8 +58,13 @@ EOF
 	    fi
 	    if [ ! -e /etc/gforge/config.ini.d/debian-install-secrets.ini ] ; then
 		t=$(mktemp /etc/gforge/config.ini.d/debian-install-secrets.ini.XXXXXX)
-		db_get @PACKAGE@/shared/db_password || true
-		pw=$RET
+		pw=
+		db_fget @PACKAGE@/shared/db_password seen || true
+		seen="$RET"
+		if [ "$seen" = "true" ]; then
+		    db_get @PACKAGE@/shared/db_password || true
+		    pw=$RET
+		fi
 		if [ "$pw" = "" ] ; then
 		    if [ -c /dev/urandom ]; then  # ...using /dev/urandom when possible
 			pw=$(dd if=/dev/urandom count=1 bs=16 2> /dev/null | md5sum | cut -c-32)
@@ -79,8 +84,13 @@ EOF
 ; You can edit the values here or move them to other files.
 ; These values should not go into world-readable files!
 
+; ATTENTION : these configuration variables may not be used directly
+; by the PHP scripts run by apache.
+; See contents of secrets.inc which is loaded by Apache conf files too
+
 [core]
-database_host=""
+; 127.0.0.1 instead of "" in order to avoid the need to modifying pg_hba.conf
+database_host=127.0.0.1
 database_name=gforge
 database_user=gforge
 database_port=5432

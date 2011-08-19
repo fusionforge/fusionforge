@@ -29,9 +29,12 @@ case "$1" in
 	rm /etc/nss-pgsql.conf.@OLDPACKAGE@-new
 	rm /etc/nss-pgsql-root.conf.@OLDPACKAGE@-new
 	rm /etc/nsswitch.conf.@OLDPACKAGE@-new
-	ucf --purge /etc/libnss-pgsql.conf
-	ucf --purge /etc/libnss-pgsql-root.conf
+	ucf --purge /etc/nss-pgsql.conf
+	ucfr --purge @OLDPACKAGE@-shell-postgresql /etc/nss-pgsql.conf
+	ucf --purge /etc/nss-pgsql-root.conf
+	ucfr --purge @OLDPACKAGE@-shell-postgresql /etc/nss-pgsql-root.conf
 	ucf --purge /etc/nsswitch.conf
+	ucfr --purge @OLDPACKAGE@-shell-postgresql /etc/nsswitch.conf
 
 	# Clean debconf after ourselves
 	db_stop

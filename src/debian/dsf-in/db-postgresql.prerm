@@ -14,7 +14,7 @@ then
 	pg_version=`pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
 	if [ "x$pg_version" != "x" ] 
 	then 
-		export pg_hba_dir=/etc/postgresql/${pg_version}/main/
+		export pg_hba_dir=/etc/postgresql/${pg_version}/main
 	else
 		echo "No database found online on port 5432"
 		echo "Couldn't initialize or upgrade @OLDPACKAGE@ database."
@@ -53,6 +53,7 @@ case "$1" in
 	ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new ${pg_hba_dir}/pg_hba.conf
 	rm ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new
 	ucf --purge ${pg_hba_dir}/pg_hba.conf
+	ucfr --purge @OLDPACKAGE@-db-postgresql ${pg_hba_dir}/pg_hba.conf
 
 	pg_name=postgresql-$pg_version
 	# Trying "postgresql" init script...

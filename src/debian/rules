@@ -160,7 +160,7 @@ build: patch remove-binary-files debian/po/templates.pot conffiles
 # 	Build gettext *.mo files
 	utils/manage-translations.sh build
 
-# 	Build FHS-compatible Apache config files
+# Build FHS-compatible Apache config files (generates contents of etc/httpd.conf.d-fhs/ etc.)
 	utils/manage-apache-config.sh build
 
 # 	Preprocess files with DSF-Helper

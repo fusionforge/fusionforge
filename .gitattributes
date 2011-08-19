@@ -629,6 +629,7 @@ src/deb-specific/user_dump_update.pl svneol=native#text/x-perl
 src/debian/NEWS.Debian -text
 src/debian/README.source -text
 src/debian/compat -text
+src/debian/dsf-helper/ucf-choices.templates -text
 src/debian/dsf-in/plugin-mailman.postrm -text
 src/debian/dsf-in/plugin-mailman.preinst -text
 src/debian/dsf-in/plugin-scmbzr.init.d -text
@@ -707,6 +708,7 @@ src/docs/docbook/docbook/user_guide/user_guide.xml svneol=native#text/xml
 src/docs/fusionforge.doxygen -text
 src/docs/list_of_public_fusionforge -text
 src/etc/README -text
+src/etc/README.httpd-conf-d-flavours -text
 src/etc/config.ini-fhs -text
 src/etc/config.ini-opt -text
 src/etc/config.ini-usrlocal -text

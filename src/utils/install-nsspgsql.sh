@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# Configure LDAP for GForge
+# Configure NSS for PostGreSQL for GForge
 # Christian Bayle, Roland Mas
 # Initially written for debian-sf (Sourceforge for Debian)
 # Adapted as time went by for Gforge then for FusionForge
@@ -37,13 +37,14 @@ modify_pam_pgsql(){
     # echo "Nothing to do"
 }
 
-# Check/Modify /etc/libnss-ldap.conf
+# Check/Modify /etc/libnss-pgsql.conf
 configure_libnss_pgsql(){
     cat > /etc/nss-pgsql.conf.gforge-new <<EOF
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
-connectionstring = user=$db_user_nss dbname=$db_name
+connectionstring = user=$db_user_nss dbname=$db_name hostaddr=127.0.0.1
+
 
 #----------------- NSS queries
 getpwnam        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE login = \$1
@@ -59,7 +60,7 @@ EOF
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
-shadowconnectionstring = user=$sys_dbuser_nss dbname=$db_name
+shadowconnectionstring = user=$sys_dbuser_nss dbname=$db_name hostaddr=127.0.0.1
 
 #----------------- NSS queries
 shadowbyname    = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd WHERE login = \$1

@@ -3,5 +3,5 @@ Architecture: all
 Conflicts: sourceforge, @OLDPACKAGE@-cvs, @OLDPACKAGE@-common (<< ${source:Version}), @OLDPACKAGE@
 Replaces: @OLDPACKAGE@
 Provides: @OLDPACKAGE@
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, @OLDPACKAGE@-common (=${source:Version}), @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, ${misc:Depends}
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, @OLDPACKAGE@-common (>=${source:Version}), @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, ${misc:Depends}
 Description: FusionForge collaborative development tool - minimal metapackage

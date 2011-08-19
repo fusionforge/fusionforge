@@ -37,7 +37,7 @@ common ones are:
      /lib/libnss_hesiod.so.X  implements `hesiod' source for glibc2
      /lib/libnss_nis.so.X     implements `nis' source for glibc2
      /lib/libnss_nisplus.so.2 implements `nisplus' source for glibc 2.1
-the one we uses is:
+the one we use is:
      /lib/libnss_pgsql.so.2.0.0
 
 Configuration files:

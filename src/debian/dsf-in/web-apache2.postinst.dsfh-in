@@ -83,7 +83,7 @@ case "$1" in
 	if [ -e /etc/apache2/conf.d/@OLDPACKAGE@.httpd.conf ] ; then
 	    rm -f /etc/apache2/conf.d/@OLDPACKAGE@.httpd.conf
 	fi
-	if [ -d /etc/apache2/sites-available ] && [ ! -e /etc/apache2/sites-available/@OLDPACKAGE@ ] ; then
+	if [ -d /etc/apache2/sites-available ] && [ ! -h /etc/apache2/sites-available/@OLDPACKAGE@ ] ; then
 	    ln -s /etc/@OLDPACKAGE@/httpd.conf /etc/apache2/sites-available/@OLDPACKAGE@
 	fi
 	a2ensite @OLDPACKAGE@
