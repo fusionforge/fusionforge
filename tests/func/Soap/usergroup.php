@@ -77,8 +77,8 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 
 	function testLoginSuccesful()
 	{
-		$userid = EXISTING_USER;
-		$passwd = PASSWD_OF_EXISTING_USER;
+		$userid = FORGE_ADMIN_USERNAME;
+		$passwd = FORGE_ADMIN_PASSWORD;
 
 		$response = $this->login($userid, $passwd);
 
@@ -122,7 +122,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	function testGetGroupsByNameEmpty()
 	{
 
-		$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
+		$this->login(FORGE_ADMIN_USERNAME, FORGE_ADMIN_PASSWORD);
 
 		$this->assertNotNull($this->session);
 
@@ -147,7 +147,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	 */
 	function testGetGroupsByName()
 	{
-		$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
+		$this->login(FORGE_ADMIN_USERNAME, FORGE_ADMIN_PASSWORD);
 
 		$this->assertNotNull($this->session);
 
@@ -223,7 +223,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	// function testGetPublicProjectNamesLoggedIn()
 	// {
 
-	// 	$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
+	// 	$this->login(FORGE_ADMIN_USERNAME, FORGE_ADMIN_PASSWORD);
 	// 	$this->assertNotNull($this->loggedIn);
 	// 	$this->assertNotNull($this->session);
 
@@ -288,7 +288,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	 */
 	function testGetUsersByNameEmpty()
 	{
-		$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
+		$this->login(FORGE_ADMIN_USERNAME, FORGE_ADMIN_PASSWORD);
 
 		$this->assertNotNull($this->session);
 
@@ -313,15 +313,15 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	 */
 	function testGetUsersByNameBug63()
 	{
-	  $this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
+	  $this->login(FORGE_ADMIN_USERNAME, FORGE_ADMIN_PASSWORD);
 
 	  $this->assertNotNull($this->session);
 
 	  // corner case, but a dangerous ? one : the way the SOAP
 	  // server works allow to trick it in returning several
 	  // values at a time : this one may be fixed some day and we'd then
-	  $users = array('admin", "None' => array( 'count' => 2,
-						   'user_names' => array('admin', 'None')));
+	  $users = array('admin", "None' => array( 'count' => 2, 
+						   'user_names' => array(FORGE_ADMIN_USERNAME, 'None')));
 
 	  foreach (array_keys($users) as $user_name) {
 	    $response = $this->soapclient->getUsersByName($this->session,array($user_name));
@@ -340,13 +340,12 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	 */
 	function testGetUsersByName()
 	{
-		$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
+		$this->login(FORGE_ADMIN_USERNAME, FORGE_ADMIN_PASSWORD);
 
 		$this->assertNotNull($this->session);
 
-		$users = array('admin'=>'admin',
-			       'None'=>'None',
-			       EXISTING_USER => EXISTING_USER);
+		$users = array('None'=>'None', 
+			       FORGE_ADMIN_USERNAME => FORGE_ADMIN_USERNAME);
 
 		foreach (array_keys($users) as $user_name) {
 			//	    print_r($user_name);
@@ -378,7 +377,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 				$this->assertEquals(0,count($response));
 			}
 
-			if ($user->user_name == 'admin') {
+			if ($user->user_name == FORGE_ADMIN_USERNAME) {
 
 				$adminGroups = array('template','stats','peerrating','siteadmin','newsadmin');
 

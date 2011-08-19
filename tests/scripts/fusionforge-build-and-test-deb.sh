@@ -76,7 +76,7 @@ fi
 (cd tests/scripts ; ./start_vm.sh $HOST)
 
 # Transfer preseeding
-cat tests/preseed/* | ssh root@$HOST "LANG=C debconf-set-selections"
+cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
 
 # Setup debian repo
 ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
@@ -105,8 +105,8 @@ sleep 5
 ssh root@$HOST "apt-get update"
 ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -y --force-yes install rsync postgresql-contrib fusionforge-full"
 echo "Set forge admin password"
-ssh root@$HOST "/usr/share/gforge/bin/forge_set_password admin myadmin"
-ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload"
+ssh root@$HOST "/usr/share/gforge/bin/forge_set_password $FORGE_ADMIN_USERNAME $FORGE_ADMIN_PASSWORD"
+#ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload ; LANG=C touch /tmp/fusionforge-use-pfo-rbac"
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini"
 #ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"

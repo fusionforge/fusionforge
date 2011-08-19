@@ -1,4 +1,7 @@
 #! /bin/sh
+
+set -x
+
 if [ $# -ge 1 ]
 then
         testsuite=$1
@@ -16,7 +19,8 @@ then
 fi
 
 WORKSPACE=/root
-[ ! -f $WORKSPACE/config/phpunit ] || . $WORKSPACE/config/phpunit 
+[ ! -f tests/config/default ] || . tests/config/default
+[ ! -f $WORKSPACE/config/phpunit ] || . $WORKSPACE/config/phpunit
 SELENIUM_RC_DIR=/var/log
 SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
 SELENIUM_RC_HOST=`hostname -f`
@@ -44,8 +48,9 @@ define('DB_INIT_CMD', "/root/tests/func/db_reload.sh >>/var/log/db_reload_seleni
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'myadmin')
-define ('EXISTING_USER', 'admin');
-define ('PASSWD_OF_EXISTING_USER', 'myadmin');
+define ('FORGE_ADMIN_USERNAME', '$FORGE_ADMIN_USERNAME');
+define ('FORGE_ADMIN_PASSWORD', '$FORGE_ADMIN_PASSWORD');
+define ('FORGE_OTHER_PASSWORD', '$FORGE_OTHER_PASSWORD');
 
 // Where CLI is installed
 define ('CLI_CMD', '/opt/gforge/acde/tools/gforge-cli/gforge.php');

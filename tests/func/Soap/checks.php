@@ -41,8 +41,8 @@ class SoapChecksProcess extends PHPUnit_Framework_TestCase
   function testExistingUserPasswordConfigured()
   {
 
-    $this->assertNotEquals('xxxxx', PASSWD_OF_EXISTING_USER);
-
+    $this->assertNotEquals('xxxxx', FORGE_ADMIN_PASSWORD);
+    
   }
 
   // This checks that the WSDL URL looks fine

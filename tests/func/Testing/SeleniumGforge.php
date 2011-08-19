@@ -94,9 +94,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		} elseif (!is_array($what)) {
 			$what = array($what) ;
 		}
-		$this->switchUser ('admin') ;
+		$this->switchUser (FORGE_ADMIN_USERNAME) ;
 
-		$this->approveProject ('Template', 'admin');
+		$this->approveProject ('Template', FORGE_ADMIN_USERNAME);
 		$this->open( ROOT . '/projects/template') ;
 		$this->waitForPageToLoad("30000");
 
@@ -230,7 +230,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 	}
 
-	protected function initSvn($project='ProjectA', $user='admin')
+	protected function initSvn($project='ProjectA', $user=FORGE_ADMIN_USERNAME)
 	{
 		// Remove svnroot directory before creating the project.
 		$repo = '/var/lib/gforge/chroot/scmrepos/svn/'.strtolower($project);
@@ -256,10 +256,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function triggeredLogin($username)
 	{
-		if ($username == 'admin') {
-			$password = 'myadmin';
+		if ($username == FORGE_ADMIN_USERNAME) {
+			$password = FORGE_ADMIN_PASSWORD;
 		} else {
-			$password = 'password';
+			$password = FORGE_OTHER_PASSWORD;
 		}
 
 		$this->type("form_loginname", $username);
@@ -336,12 +336,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function createProject ($name) {
 		$unix_name = strtolower($name);
 
-		$this->switchUser ('admin') ;
-
+		$this->switchUser (FORGE_ADMIN_USERNAME) ;
+		
 		// Create a simple project.
 		if ((!defined('PROJECTA')) || ($unix_name != "projecta")) {
-			$this->registerProject ($name, 'admin') ;
-			$this->approveProject ($name, 'admin') ;
+			$this->registerProject ($name, FORGE_ADMIN_USERNAME) ;
+			$this->approveProject ($name, FORGE_ADMIN_USERNAME) ;
 		}
 	}
 
@@ -356,8 +356,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->clickAndWait("link=Site Admin");
 		$this->clickAndWait("link=Register a New User");
 		$this->type("unix_name", $login);
-		$this->type("password1", "password");
-		$this->type("password2", "password");
+		$this->type("password1", FORGE_OTHER_PASSWORD);
+		$this->type("password2", FORGE_OTHER_PASSWORD);
 		$this->type("firstname", $login);
 		$this->type("lastname", "Lastname");
 		$this->type("email", $login."@debug.log");
@@ -369,7 +369,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	protected function activatePlugin($pluginName) {
-		$this->switchUser('admin');
+		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->open( ROOT . '/admin/pluginman.php?update='.$pluginName.'&action=deactivate');
 		$this->waitForPageToLoad("30000");
 		$this->open( ROOT . '/admin/pluginman.php?update='.$pluginName.'&action=activate');

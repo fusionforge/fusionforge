@@ -144,7 +144,7 @@ class Surveys extends FForge_SeleniumTestCase
 		$this->assertTextPresent("My first survey: L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 
 //		// Set survey to private
-//		$this->login("admin");
+//		$this->login(FORGE_ADMIN_USERNAME);
 //
 //		$this->open("/survey/?group_id=6");
 //		$this->clickAndWait("link=Surveys");

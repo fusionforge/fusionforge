@@ -70,3 +70,6 @@ fgcos51src=lxc:centos5::
 fgcos51=lxc:centos5::
 fgdeb51=lxc:debian6::
 
+FORGE_ADMIN_USERNAME=admin
+FORGE_ADMIN_PASSWORD=myadmin
+FORGE_OTHER_PASSWORD=tototata

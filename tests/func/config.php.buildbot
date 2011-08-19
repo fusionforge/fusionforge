@@ -27,9 +27,9 @@ define('DB_PASSWORD', '@@FFDB_PASS@@');
 define('DB_INIT_CMD', "ssh root@".HOST." '/root/tests/func/db_reload.sh ".DB_NAME." >/dev/null;'");
 
 // this should be an existing user of the forge together with its password
-// (the password should be different from 'myadmin')
-define ('EXISTING_USER', 'admin');
-define ('PASSWD_OF_EXISTING_USER', 'myadmin');
+define ('FORGE_ADMIN_USERNAME', 'admin');
+define ('FORGE_ADMIN_PASSWORD', 'myadmin');
+define ('FORGE_OTHER_PASSWORD', 'myotherpass');
 
 // Where CLI is installed
 define ('CLI_CMD', '/opt/gforge/acde/tools/gforge-cli/gforge.php');

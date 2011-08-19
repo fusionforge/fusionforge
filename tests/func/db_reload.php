@@ -87,9 +87,6 @@ system("echo \"GRANT ALL ON SCHEMA public TO ".DB_USER.";\" | psql -q -Upostgres
 system("psql -q -U".DB_USER." ".DB_NAME." -f $forge_root/db/gforge.sql >> /var/log/fusionforge-init.log 2>&1");
 system("php $forge_root/db/upgrade-db.php >> /var/log/gforge-upgrade-db.log 2>&1");
 
-$adminPassword = 'myadmin';
-$adminEmail = 'nobody@nowhere.com';
-
 $session_hash = '000TESTSUITE000';
 
 require_once $forge_root.'/www/env.inc.php';
@@ -106,8 +103,9 @@ system("echo \"VACUUM FULL ANALYZE;\" | psql -q -Upostgres ".DB_NAME);
 // Create the initial admin account and activate it directly.
 //
 $user = new GFUser();
-$user_id = $user->create('admin', 'Forge', 'Admin', $adminPassword, $adminPassword,
-	$adminEmail, 1, 1, 1,'GMT','',0,1,'', '','','','','','US',false);
+
+$user_id = $user->create(FORGE_ADMIN_USERNAME, 'Forge', 'Admin', FORGE_ADMIN_PASSWORD, FORGE_ADMIN_PASSWORD, 
+	'nobody@nowhere.com', 1, 1, 1,'GMT','',0,1,'', '','','','','','US',false);
 
 if (!$user_id) {
 	print "ERROR: Creating user: ".$user->getErrorMessage().':'.db_error()."\n";
