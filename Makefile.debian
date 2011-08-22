@@ -14,37 +14,37 @@
 
 FUSIONFORGE=FusionForge
 PKGDIR=src
-PKGNAME=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/ .*//')
-PKGLETTER=$(shell echo $(PKGNAME) | cut -c1)
+PKGNAME:=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/ .*//')
+PKGLETTER:=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.fusionforge.org
 # BRANCH set to 'svn' if checkout from trunk or 'brc' otherwise
-BRANCH=$(shell [ "$(shell echo $(basename $(CURDIR)) | sed 's/.*runk.*/trunk/')" = "trunk" ] && echo svn || echo brc)
+BRANCH:=$(shell [ "$(shell echo $(basename $(CURDIR)) | sed 's/.*runk.*/trunk/')" = "trunk" ] && echo svn || echo brc)
 #
 ifeq (,$(shell echo "$$BUILDERDIR"))
 BUILDERDIR=$(CURDIR)/builder
 else
-BUILDERDIR=$(shell echo $$BUILDERDIR)
+BUILDERDIR:=$(shell echo $$BUILDERDIR)
 endif
 ifeq (,$(shell echo "$$BUILDRESULT"))
 BUILDRESULT=$(CURDIR)/result
 else
-BUILDRESULT=$(shell echo $$BUILDRESULT)
+BUILDRESULT:=$(shell echo $$BUILDRESULT)
 endif
 #
 ifeq (,$(shell echo "$$UBUMIRROR"))
 UBUMIRROR=http://archive.ubuntu.com/ubuntu
 else
-UBUMIRROR=$(shell echo $$UBUMIRROR)
+UBUMIRROR:=$(shell echo $$UBUMIRROR)
 endif
 ifeq (,$(shell echo "$$DEBMIRROR"))
 DEBMIRROR=http://ftp.fr.debian.org/debian
 else
-DEBMIRROR=$(shell echo $$DEBMIRROR)
+DEBMIRROR:=$(shell echo $$DEBMIRROR)
 endif
 ifeq (,$(shell echo "$$DEBEMAIL"))
 DEBEMAIL=buildbot@$(shell hostname -f)
 else
-DEBEMAIL=$(shell echo $$DEBEMAIL)
+DEBEMAIL:=$(shell echo $$DEBEMAIL)
 endif
 #
 TARBALLS=$(CURDIR)/tarballs
@@ -66,7 +66,7 @@ LOCALREPODEB=/var/www/debian-fusionforge-$(BRANCH)
 LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
 #
 XDISTRIB:=3sid
-DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
+DISTRIB:=$(shell echo $(XDISTRIB) | cut -c2-)
 SIGNKEY=$(DEBEMAIL)
 BOTKEY=botkey
 DEBIANLIST=1lenny 2squeeze 3sid
@@ -83,9 +83,9 @@ DEBIANOP=--mirror $(DEBMIRROR) --debootstrapopts --include=apt --debootstrap deb
 ASKPASS=--ask-passphrase
 ASKPASS=
 
-MAJOR=$(shell dpkg-parsechangelog -l$(PKGDIR)/debian/changelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
+MAJOR:=$(shell dpkg-parsechangelog -l$(PKGDIR)/debian/changelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
 # SMAJOR is MAJOR without epoch if any
-SMAJOR=$(shell echo $(MAJOR) | sed 's/^.://')
+SMAJOR:=$(shell echo $(MAJOR) | sed 's/^.://')
 
 in_svn_repo:= $(wildcard .svn/) 
 ifeq ($(strip $(in_svn_repo)),) 
@@ -101,7 +101,7 @@ else
 	svnrev=bzr$(shell bzr revno)
 endif # bzr
 else
-	svnrev=$(shell LANG=C svn info 2>&1 | grep Revision | cut -d: -f2| sed 's/ //g')
+	svnrev:=$(shell LANG=C svn info 2>&1 | grep Revision | cut -d: -f2| sed 's/ //g')
 endif # svn
 
 MINOR=-1
@@ -110,7 +110,7 @@ MINOR=-$(BRANCH)$(svnrev)+$(XDISTRIB)
 DEBUG=--debug
 DEBUG=
 DEBBUILDOPTS=--debbuildopts -sa 
-ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
+ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
 
 # Some doc found there http://wiki.debian.org/cowbuilder
 # Hook are not anymore necessary, but I keep as an example
