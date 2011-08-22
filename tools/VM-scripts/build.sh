@@ -52,6 +52,13 @@ allowed_distributions = local
 EOF
 fi
 
+if [ ! -f /root/.devscripts ]; then
+    cat > /root/.devscripts <<EOF
+
+DEBRELEASE_UPLOADER=dput
+DEBUILD_DPKG_BUILDPACKAGE_OPTS=-i
+EOF
+
 mini-dinstall -b
 
 cd /root/fusionforge/src
