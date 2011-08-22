@@ -15,7 +15,11 @@ fusionforge (5.1-4+) UNRELEASED; urgency=low
     changes in pg_hba.conf.
   * Fix bits around ucf (using ucfr / ucfq)
 
- -- Olivier Berger <obergix@debian.org>  Wed, 17 Aug 2011 13:04:43 +0200
+  [ Roland Mas ]
+  * Switch dependency on PostgreSQL packages to the metapackage, as
+    requested by the PostgreSQL maintainer.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 22 Aug 2011 10:36:35 +0200
 
 fusionforge (5.1-4) unstable; urgency=low
 
