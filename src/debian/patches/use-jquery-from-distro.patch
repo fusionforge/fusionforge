@@ -1,12 +1,7 @@
-#! /bin/sh /usr/share/dpatch/dpatch-run
-## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org> and/or Roland Mas <lolando@debian.org>
-##
-## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
-
-@DPATCH@
---- src/www/include/html.php	(revision 13309)
-+++ src/www/include/html.php	(working copy)
+Author: Roland Mas <lolando@debian.org>
+Description: Use JQuery as provided by the libjs-jquery Debian package
+--- src.orig/www/include/html.php
++++ src/www/include/html.php
 @@ -358,14 +358,14 @@
  }
  

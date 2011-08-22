@@ -12,8 +12,10 @@ fusionforge (5.1-4+) UNRELEASED; urgency=low
   [ Roland Mas ]
   * Switch dependency on PostgreSQL packages to the metapackage, as
     requested by the PostgreSQL maintainer.
+  * Switch from dpatch to quilt, since the former is being deprecated by
+    its author.
 
- -- Roland Mas <lolando@debian.org>  Mon, 22 Aug 2011 10:36:35 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 22 Aug 2011 16:23:07 +0200
 
 fusionforge (5.1-4) unstable; urgency=low
 

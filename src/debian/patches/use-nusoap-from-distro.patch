@@ -1,0 +1,14 @@
+Author: Olivier Berger <olivier.berger@it-sudparis.eu>
+Description: Use NUSOAP as provided by the libnusoap-php Debian package
+--- src.orig/www/soap/index.php
++++ src/www/soap/index.php
+@@ -13,7 +13,8 @@
+ 
+ $uri = 'http://'.forge_get_config('web_host');
+ // 1. include client and server
+-require_once $gfwww.'soap/nusoap.php';
++#require_once $gfwww.'soap/nusoap.php';
++require_once '/usr/share/php/nusoap/nusoap.php';
+ //$debug = true;
+ // 2. instantiate server object
+ $server = new soap_server();

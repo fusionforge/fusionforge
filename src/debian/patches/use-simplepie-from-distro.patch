@@ -1,13 +1,7 @@
-#! /bin/sh /usr/share/dpatch/dpatch-run
-## use-simplepie-from-distro.dpatch by Roland Mas <lolando@debian.org>
-##
-## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
-
-@DPATCH@
-diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/common/rss/simplepie.inc src/common/rss/simplepie.inc
---- src~/common/rss/simplepie.inc	2011-05-19 14:39:45.000000000 +0200
-+++ src/common/rss/simplepie.inc	1970-01-01 01:00:00.000000000 +0100
+Author: Roland Mas <lolando@debian.org>
+Description: Use SimplePie as provided by the libphp-simplepie Debian package
+--- src.orig/common/rss/simplepie.inc
++++ /dev/null
 @@ -1,13724 +0,0 @@
 -<?php
 -/**
@@ -13733,9 +13727,8 @@ diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' 
 -}
 -
 -?>
-diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/common/widget/Widget_Rss.class.php src/common/widget/Widget_Rss.class.php
---- src~/common/widget/Widget_Rss.class.php	2011-04-11 17:25:20.000000000 +0200
-+++ src/common/widget/Widget_Rss.class.php	2011-08-03 21:24:00.645883485 +0200
+--- src.orig/common/widget/Widget_Rss.class.php
++++ src/common/widget/Widget_Rss.class.php
 @@ -45,7 +45,7 @@
  					return idn_to_unicode($param);
  				}
