@@ -1,0 +1,18 @@
+Author: Roland Mas <lolando@debian.org>
+Description: Disable SVN-over-WebDAV
+Index: src/plugins/scmsvn/etc/scmsvn.ini
+===================================================================
+--- src.orig/plugins/scmsvn/etc/scmsvn.ini	2011-08-03 15:14:30.181495000 +0200
++++ src/plugins/scmsvn/etc/scmsvn.ini	2011-08-22 21:08:16.804150640 +0200
+@@ -7,9 +7,9 @@
+ ; is available in installation_environment = development only.
+ plugin_status = valid
+ 
+-use_dav = yes
++use_dav = no
+ use_ssl = "$core/use_ssl"
+-use_ssh = no
++use_ssh = yes
+ anonsvn_login = anonsvn
+ anonsvn_password = anonsvn
+ default_server = "$core/web_host"

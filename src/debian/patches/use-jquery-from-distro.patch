@@ -1,0 +1,15 @@
+Author: Roland Mas <lolando@debian.org>
+Description: Use JQuery as provided by the libjs-jquery Debian package
+Index: src/www/include/html.php
+===================================================================
+--- src.orig/www/include/html.php	2011-07-18 13:27:58.000000000 +0200
++++ src/www/include/html.php	2011-08-22 21:10:24.521994301 +0200
+@@ -365,7 +365,7 @@
+ }
+ 
+ function html_use_jquery() {
+-	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
++	use_javascript('/scripts/jquery/jquery.min.js');
+ }
+ 
+ function html_use_tooltips() {

@@ -21,12 +21,12 @@ More precisely :
  - fusionforge-5.1-1 is in sync with upstream SVN contents as of rev. 14081.
 
 
-In addition to the above, this package uses dpatch.  For more
-details, install the dpatch package and consult
-/usr/share/doc/dpatch/README.source.gz.
+In addition to the above, this package uses quilt.  For more details,
+install the quilt package and consult
+/usr/share/doc/quilt/README.source.
 
 The following may provide more details on variations between the
 upstream main version and Debian's packaging :
 http://patch-tracker.debian.org/package/fusionforge
 
- -- Olivier Berger <obergix@debian.org>, Tue, 16 Aug 2011 17:14:45 +0200
+ -- Roland Mas <lolando@debian.org>, Mon, 22 Aug 2011 17:49:07 +0200

@@ -1,0 +1,7 @@
+disable-tracker-reply-by-email.patch
+disable-dav.patch
+use-snoopy-from-distro.patch
+use-nusoap-from-distro.patch
+use-jquery-from-distro.patch
+use-simplepie-from-distro.patch
+production-environment.patch

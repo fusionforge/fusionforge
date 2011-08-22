@@ -376,7 +376,7 @@ function html_use_tooltips() {
 }
 
 function html_use_storage() {
-	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+	html_use_jquery();
 	use_javascript('/scripts/jquery-storage/jquery.Storage.js');
 }
 

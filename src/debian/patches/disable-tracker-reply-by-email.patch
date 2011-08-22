@@ -1,0 +1,18 @@
+Author: Roland Mas <lolando@debian.org>
+Description: Disable the blurb about replying to a bug via email
+at least until this is made to work.
+Index: src/common/tracker/Artifact.class.php
+===================================================================
+--- src.orig/common/tracker/Artifact.class.php	2011-08-22 21:07:40.557440659 +0200
++++ src/common/tracker/Artifact.class.php	2011-08-22 21:08:08.155687398 +0200
+@@ -1541,10 +1541,6 @@
+ 			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
+ 					    "&aid=". $this->getID() .
+ 					    "&group_id=". $this->ArtifactType->Group->getID()) .
+-			"\nOr by replying to this e-mail entering your response between the following markers: ".
+-			"\n".ARTIFACT_MAIL_MARKER.
+-			"\n(enter your response here, only in plain text format)".
+-			"\n".ARTIFACT_MAIL_MARKER.
+ 			"\n\n".
+ 			$this->marker('status',$changes).
+ 			 "Status: ". $this->getStatusName() ."\n".

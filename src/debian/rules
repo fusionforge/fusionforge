@@ -24,10 +24,7 @@ SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g
 default:
 	@echo $(PACKAGE)
 
-include /usr/share/dpatch/dpatch.make
-
 # The substitutions bellow can be quite tricky, so use 'debian/rules testpat' to check if it's OK
-
 ENABLED_PLUGINS=$(shell sh $(CURDIR)/utils/list-enabled-plugins.sh)
 
 PPOSTINST=$(foreach i,$(ENABLED_PLUGINS),debian/$(PACKAGE)-plugin-$i.postinst)
@@ -140,10 +137,8 @@ debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcar
 debian/po/%:
 	cat $(patsubst debian/po/%, debian/dsf-po/%, $@) | $(SED_REPLACE) > $@
 
-.PHONY: patch
-
-build: patch remove-binary-files debian/po/templates.pot conffiles
-	dh $@
+build: remove-binary-files debian/po/templates.pot conffiles
+	dh --with quilt $@
 
 # 	Build man pages from Docbook sources
 	cat debian/dsf-in/config.sgml | $(SED_REPLACE) > debian/$(PACKAGE)-config.sgml
@@ -166,9 +161,8 @@ build: patch remove-binary-files debian/po/templates.pot conffiles
 # 	Preprocess files with DSF-Helper
 	perl $(CURDIR)/deb-specific/dsf-helper.pl
 
-
-clean: remove-binary-files unpatch
-	dh $@
+clean: remove-binary-files
+	dh --with quilt $@
 
 	rm -f $(CURDIR)/debian/*.cron.d
 	rm -f $(CURDIR)/debian/*.dirs
@@ -188,7 +182,7 @@ clean: remove-binary-files unpatch
 
 
 install: build
-	dh $@
+	dh --with quilt $@
 
 	sed \
 	    -e 's!@PKGNAME@!${WHICH_FORGE}!g' \
@@ -245,4 +239,4 @@ install: build
 binary: install
 
 %:
-	dh $@
+	dh --with quilt $@

@@ -1,0 +1,22 @@
+Author: Roland Mas <lolando@debian.org>
+Description: Default deployment is production, not development
+Index: src/etc/config.ini.d/debug.ini
+===================================================================
+--- src.orig/etc/config.ini.d/debug.ini	2011-08-22 16:33:30.157637214 +0200
++++ src/etc/config.ini.d/debug.ini	2011-08-22 16:33:34.283860208 +0200
+@@ -1,12 +1,12 @@
+ [core]
+ 
+-; Switch to "production" to remove extra debugging
+-installation_environment = development
++; Switch to "development" or "integration" to add extra debugging
++installation_environment = production
+ 
+ ; fine-grained control over debugging
+ 
+ ; enable debugging at all (overlay the page with pink box)
+-sysdebug_enable = true
++sysdebug_enable = false
+ 
+ ; enable the PHP Error Handler (default if sysdebug_enable)
+ sysdebug_phphandler = true

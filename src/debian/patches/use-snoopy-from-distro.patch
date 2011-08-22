@@ -1,0 +1,36 @@
+Author: Roland Mas <lolando@debian.org>
+Description: Use Snoopy as provided by the libphp-snoopy Debian package
+instead of shipping a local one.
+--- src.orig/plugins/cvstracker/bin/post.php
++++ src/plugins/cvstracker/bin/post.php
+@@ -32,7 +32,7 @@
+ require dirname(__FILE__).'/../../env.inc.php';
+ require_once $gfcommon.'include/pre.php';
+ require_once ($gfcommon.'common/include/utils.php');
+-require_once ($gfplugins.'cvstracker/common/Snoopy.class.php');
++require_once ('/usr/share/php/libphp-snoopy/Snoopy.class.php');
+ 
+ $cvs_binary_version = get_cvs_binary_version () ;
+ 
+--- src.orig/plugins/scmcvs/bin/aclcheck.php
++++ src/plugins/scmcvs/bin/aclcheck.php
+@@ -31,7 +31,7 @@
+ require_once $gfcommon. 'include/pre.php';
+ require_once $gfcommon.'include/utils.php';
+ require_once $gfconfig.'plugins/scmcvs/config.php';
+-require_once $gfplugins.'scmcvs/common/Snoopy.class.php';
++require_once '/usr/share/php/libphp-snoopy/Snoopy.class.php';
+ 
+ // Input cleansing
+ $env_cvsroot = (string) $_ENV['CVSROOT'];
+--- src.orig/plugins/svntracker/bin/post.php
++++ src/plugins/svntracker/bin/post.php
+@@ -31,7 +31,7 @@
+ 
+ require_once dirname(__FILE__)."/../../env.inc.php";
+ require_once $gfcommon.'include/pre.php';
+-require $gfplugins.'svntracker/common/Snoopy.class.php';
++require '/usr/share/php/libphp-snoopy/Snoopy.class.php';
+ 
+ /**
+  * It returns the usage and exit program
