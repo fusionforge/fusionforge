@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+	ServerName {vhost_name}
+	VirtualDocumentRoot {docdir}
+        VirtualScriptAlias {cgidir}
+        <Directory {gforge_chroot}{groupdir}>
+               Options Indexes FollowSymlinks
+               AllowOverride All
+               order allow,deny
+               allow from all
+       </Directory>
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>

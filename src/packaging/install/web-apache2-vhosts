@@ -1,3 +1,4 @@
 deb-specific/create-vhosts.sh       usr/share/@OLDPACKAGE@/bin/
 deb-specific/prepare-vhosts-file.pl usr/share/@OLDPACKAGE@/bin/
 deb-specific/@OLDPACKAGE@.logrotate       etc/logrotate.d/@OLDPACKAGE@-web-apache2
+etc/templates/httpd.vhosts          etc/@OLDPACKAGE@/templates/
