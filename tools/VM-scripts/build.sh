@@ -17,6 +17,41 @@
 # Pupulate the repo
 rm -rf /root/debian-repository
 mkdir -p /root/debian-repository
+
+if [ ! -f /root/.mini-dinstall.conf ]; then
+    cat >/root/.mini-dinstall.conf <<EOF
+
+[DEFAULT]
+
+archivedir = /root/debian-repository
+archive_style = flat
+
+architectures = all, i386, source
+generate_release = 1
+verify_sigs = 0
+
+max_retry_time = 3600
+
+mail_on_success = false
+
+[local]
+EOF
+fi
+
+if [ ! -f /root/.dput.cf ]; then
+    cat > /root/.dput.cf <<EOF
+
+[local]
+fqdn = localhost
+incoming = /root/debian-repository/mini-dinstall/incoming 
+method = local
+run_dinstall = 0
+allow_unsigned_uploads = yes
+post_upload_command = mini-dinstall -b
+allowed_distributions = local
+EOF
+fi
+
 mini-dinstall -b
 
 cd /root/fusionforge/src
