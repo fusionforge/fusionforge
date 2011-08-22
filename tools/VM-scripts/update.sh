@@ -14,7 +14,7 @@ aptitude update
 aptitude dist-upgrade
 
 # Make sure to add tools needed for build.sh
-aptitude install bzr mini-dinstall devscripts dpatch sharutils docbook-to-man
+aptitude install bzr mini-dinstall devscripts dpatch sharutils docbook-to-man confget dupload
 
 set -e
 
