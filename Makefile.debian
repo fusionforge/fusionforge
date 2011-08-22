@@ -83,7 +83,7 @@ DEBIANOP=--mirror $(DEBMIRROR) --debootstrapopts --include=apt --debootstrap deb
 ASKPASS=--ask-passphrase
 ASKPASS=
 
-MAJOR=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
+MAJOR=$(shell dpkg-parsechangelog -l$(PKGDIR)/debian/changelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
 # SMAJOR is MAJOR without epoch if any
 SMAJOR=$(shell echo $(MAJOR) | sed 's/^.://')
 
