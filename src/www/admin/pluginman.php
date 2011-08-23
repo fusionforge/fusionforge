@@ -103,9 +103,13 @@ if (getStringFromRequest('update')) {
 			$pm->LoadPlugin($pluginname);
 
 			$plugin = $pm->GetPluginObject($pluginname);
-			$plugin->installCode();
-			$plugin->installConfig();
-			$plugin->installDatabase();
+			if (!$plugin || $plugin->isError()) {
+				exit_error(_("Couldn't get plugin object"), 'admin');
+			} else {
+				$plugin->installCode();
+				$plugin->installConfig();
+				$plugin->installDatabase();
+			}
 		}
 	}
 }
