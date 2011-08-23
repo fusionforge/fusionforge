@@ -560,9 +560,10 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * getHeader - initialize header and js
 	 * @param	string	type : user, project (aka group)
+	 * @param       array   params
 	 * @return	bool	success or not
 	 */
-	function getHeader($type) {
+	function getHeader($type, $params=NULL) {
 		global $gfplugins;
 		$returned = false;
 		switch ($type) {
@@ -576,7 +577,6 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 			case 'admin':
 			default: {
-				$params['toptab']=$this->name;
                                 site_project_header($params);
 				$returned = true;
 				break;

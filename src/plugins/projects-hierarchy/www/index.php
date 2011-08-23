@@ -115,7 +115,11 @@ switch ($type) {
 				break;
 			}
 		}
-		$projectsHierarchy->getHeader('admin');
+		// params needed by site_project_header() inside getHeader()
+		$params = array(
+			'toptab' => $projectsHierarchy->name,
+			'group' => $id);
+		$projectsHierarchy->getHeader('admin', $params);
 		$projectsHierarchy->getProjectAdminView();
 		$projectsHierarchy->getFooter('admin');
 	}
