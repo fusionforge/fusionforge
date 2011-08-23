@@ -1,4 +1,3 @@
 plugins/projects-hierarchy/common/*                  usr/share/@OLDPACKAGE@/plugins/projects-hierarchy/common/
 plugins/projects-hierarchy/www/*                     usr/share/@OLDPACKAGE@/plugins/projects-hierarchy/www/
-plugins/projects-hierarchy/etc/plugins/projects-hierarchy/*        etc/@OLDPACKAGE@/plugins/projects-hierarchy/
 plugins/projects-hierarchy/etc/*.ini 	   			etc/@PACKAGE@/config.ini.d/
