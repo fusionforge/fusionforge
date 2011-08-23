@@ -58,6 +58,7 @@ if [ ! -f /root/.devscripts ]; then
 DEBRELEASE_UPLOADER=dput
 DEBUILD_DPKG_BUILDPACKAGE_OPTS=-i
 EOF
+fi
 
 mini-dinstall -b
 
