@@ -2343,6 +2343,8 @@ src/plugins/projects-hierarchy/actions/removeChild.php -text
 src/plugins/projects-hierarchy/actions/removeParent.php -text
 src/plugins/projects-hierarchy/actions/updateGlobalConf.php -text
 src/plugins/projects-hierarchy/actions/validateRelationship.php -text
+src/plugins/projects-hierarchy/bin/db-delete.pl -text
+src/plugins/projects-hierarchy/bin/db-upgrade.pl -text
 src/plugins/projects-hierarchy/common/projects_hierarchy-init.php -text
 src/plugins/projects-hierarchy/common/projects_hierarchyPlugin.class.php -text
 src/plugins/projects-hierarchy/db/projects_hierarchy-init.sql -text
