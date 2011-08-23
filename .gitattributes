@@ -2348,8 +2348,8 @@ src/plugins/projects-hierarchy/common/projects_hierarchyPlugin.class.php -text
 src/plugins/projects-hierarchy/db/projects_hierarchy-init.sql -text
 src/plugins/projects-hierarchy/etc/projects_hierarchy.ini -text
 src/plugins/projects-hierarchy/include/hierarchy_utils.php -text
-src/plugins/projects-hierarchy/packaging/control/100plugin-projects_hierarchy -text
-src/plugins/projects-hierarchy/packaging/control/100plugin-projects_hierarchy.shortdesc -text
+src/plugins/projects-hierarchy/packaging/control/100plugin-projects-hierarchy -text
+src/plugins/projects-hierarchy/packaging/control/100plugin-projects-hierarchy.shortdesc -text
 src/plugins/projects-hierarchy/packaging/install/plugin-projects-hierarchy -text
 src/plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php -text
 src/plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php -text
