@@ -844,10 +844,19 @@ class Layout extends Error {
 
 		$return = '';
 		for ($i=0; $i<$count; $i++) {
-			$return .= util_make_link($links_arr[$i],$title_arr[$i],$attr_arr[$i]).' | ';
+			$return .= util_make_link($links_arr[$i],$title_arr[$i],$attr_arr[$i]). $this->subMenuSeparator();
 		}
 		$return .= util_make_link($links_arr[$i],$title_arr[$i],$attr_arr[$i]);
 		return $return;
+	}
+
+        /**
+	 * subMenuSeparator() - returns the separator used between submenus
+	 *
+	 * @return	string	Html to build a submenu separator.
+	 */
+	function subMenuSeparator() {
+		return '';
 	}
 
 	/**
