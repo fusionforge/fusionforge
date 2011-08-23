@@ -122,6 +122,7 @@ switch ($type) {
 		$projectsHierarchy->getHeader('admin', $params);
 		$projectsHierarchy->getProjectAdminView();
 		$projectsHierarchy->getFooter('admin');
+		break;
 	}
 	default: {
 		exit_error("No TYPE specified", 'home');
