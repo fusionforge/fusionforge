@@ -21,7 +21,7 @@ case "$1" in
     remove|deconfigure)
 	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
-		/usr/share/@OLDPACKAGE@/bin/unregister-plugin @PLUGSHORTNAME@
+		/usr/share/@OLDPACKAGE@/bin/unregister-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g')
 		if [ -f /usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-delete.pl ]
 		then
 			/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-delete.pl

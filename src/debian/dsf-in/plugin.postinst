@@ -30,7 +30,7 @@ case "$1" in
 	then
 		/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl
 	fi
-	/usr/share/@OLDPACKAGE@/bin/register-plugin @PLUGSHORTNAME@ "@PLUGLONGNAME@"
+	/usr/share/@OLDPACKAGE@/bin/register-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g') "@PLUGLONGNAME@"
 	# Restart apache if there is some change in config
 	if [ -f /etc/gforge/httpd.conf.d/plugin-@PLUGSHORTNAME@.inc ]
 	then
