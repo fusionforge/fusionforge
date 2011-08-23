@@ -2346,7 +2346,7 @@ src/plugins/projects-hierarchy/actions/validateRelationship.php -text
 src/plugins/projects-hierarchy/common/projects_hierarchy-init.php -text
 src/plugins/projects-hierarchy/common/projects_hierarchyPlugin.class.php -text
 src/plugins/projects-hierarchy/db/projects_hierarchy-init.sql -text
-src/plugins/projects-hierarchy/etc/projects_hierarchy.ini -text
+src/plugins/projects-hierarchy/etc/projects-hierarchy.ini -text
 src/plugins/projects-hierarchy/include/hierarchy_utils.php -text
 src/plugins/projects-hierarchy/packaging/control/100plugin-projects-hierarchy -text
 src/plugins/projects-hierarchy/packaging/control/100plugin-projects-hierarchy.shortdesc -text
