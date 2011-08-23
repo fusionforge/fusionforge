@@ -33,7 +33,7 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->_addHook('display_hierarchy'); // to see the tree of projects
 		$this->_addHook('group_delete'); // clean tables on delete
 		$this->_addHook('project_admin_plugins'); // to show up in the admin page fro group
-		$this->_addHook('site_admin_option_hook');
+		$this->_addHook('site_admin_option_hook');  // to provide a link to the site wide administrative pages of plugin
 	}
 
 	function CallHook($hookname, &$params) {
@@ -78,6 +78,7 @@ class projects_hierarchyPlugin extends Plugin {
 				break;
 			}
 			case "site_admin_option_hook": {
+				// Use this to provide a link to the site wide administrative pages for your plugin
 				echo '<li>'.$this->getAdminOptionLink().'</li>';
 				$returned = true;
 				break;
