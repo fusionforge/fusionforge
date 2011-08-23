@@ -55,17 +55,19 @@ if(count($t_consumers)>0)	{
     <td><?php 
 	echo ( $t_consumer->secret);
 	?></td>
-	<td class="center">
-      <?php 
-	if ( $t_can_manage ) {	  
+	<?php 
+
+	if ( $t_can_manage ) { ?>
+          <td class="center">
 	  print util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?consumer_id=' . $t_consumer->getId() , _('Manage'));
+	  ?></td><?php
 	}
-      ?>
-    </td>
-    <td class="center">
-      <?php 
-	if ( $t_can_manage ) {
+
+	if ( $t_can_manage ) { ?>
+          <td class="center">
 	  print util_make_link('/plugins/'.$pluginname.'/consumer_delete.php?consumer_id=' . $t_consumer->getId() . '&plugin_oauthprovider_consumer_delete_token='.form_generate_key(), _('Delete'));
+          ?></td><?php
+
 	}
     } 
     echo $HTML->listTableBottom();
