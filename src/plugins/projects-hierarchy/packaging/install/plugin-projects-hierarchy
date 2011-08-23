@@ -1,3 +1,8 @@
 plugins/projects-hierarchy/common/*                  usr/share/@OLDPACKAGE@/plugins/projects-hierarchy/common/
+plugins/projects-hierarchy/view/*                  usr/share/@OLDPACKAGE@/plugins/projects-hierarchy/view/
+plugins/projects-hierarchy/actions/*                  usr/share/@OLDPACKAGE@/plugins/projects-hierarchy/actions/
+plugins/projects-hierarchy/include/*                  usr/share/@OLDPACKAGE@/plugins/projects-hierarchy/include/
 plugins/projects-hierarchy/www/*                     usr/share/@OLDPACKAGE@/plugins/projects-hierarchy/www/
 plugins/projects-hierarchy/etc/*.ini 	   			etc/@PACKAGE@/config.ini.d/
+plugins/projects-hierarchy/db/*                      usr/share/@OLDPACKAGE@/plugins/projects-hierarchy/db/
+plugins/projects-hierarchy/bin/*                     usr/share/gforge/plugins/projects-hierarchy/bin/

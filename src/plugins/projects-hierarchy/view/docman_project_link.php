@@ -23,7 +23,7 @@
 
 global $g; //group object
 global $group_id; // id of the group
-$projectsHierarchy = plugin_get_object('projects_hierarchy');
+$projectsHierarchy = plugin_get_object('projects-hierarchy');
 
 echo '<form id="projectsHierarchyDocman" name="projectsHierarchyDocman" method="post" action="/plugins/'.$projectsHierarchy->name.'/?action=projectsHierarchyDocman&id='.$group_id.'&type=group" >';
 echo '<ul>';

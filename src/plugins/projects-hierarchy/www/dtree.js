@@ -54,20 +54,20 @@ function dTree(objName) {
 	}
 
 	this.icon = {
-		root		: '/plugins/projects_hierarchy/img/base.gif',
-		folder		: '/plugins/projects_hierarchy/img/folder.gif',
-		folderOpen	: '/plugins/projects_hierarchy/img/folderopen.gif',
-		node		: '/plugins/projects_hierarchy/img/page.gif',
-		empty		: '/plugins/projects_hierarchy/img/empty.gif',
-		line		: '/plugins/projects_hierarchy/img/line.gif',
-		join		: '/plugins/projects_hierarchy/img/join.gif',
-		joinBottom	: '/plugins/projects_hierarchy/img/joinbottom.gif',
-		plus		: '/plugins/projects_hierarchy/img/plus.gif',
-		plusBottom	: '/plugins/projects_hierarchy/img/plusbottom.gif',
-		minus		: '/plugins/projects_hierarchy/img/minus.gif',
-		minusBottom	: '/plugins/projects_hierarchy/img/minusbottom.gif',
-		nlPlus		: '/plugins/projects_hierarchy/img/nolines_plus.gif',
-		nlMinus		: '/plugins/projects_hierarchy/img/nolines_minus.gif'
+		root		: '/plugins/projects-hierarchy/img/base.gif',
+		folder		: '/plugins/projects-hierarchy/img/folder.gif',
+		folderOpen	: '/plugins/projects-hierarchy/img/folderopen.gif',
+		node		: '/plugins/projects-hierarchy/img/page.gif',
+		empty		: '/plugins/projects-hierarchy/img/empty.gif',
+		line		: '/plugins/projects-hierarchy/img/line.gif',
+		join		: '/plugins/projects-hierarchy/img/join.gif',
+		joinBottom	: '/plugins/projects-hierarchy/img/joinbottom.gif',
+		plus		: '/plugins/projects-hierarchy/img/plus.gif',
+		plusBottom	: '/plugins/projects-hierarchy/img/plusbottom.gif',
+		minus		: '/plugins/projects-hierarchy/img/minus.gif',
+		minusBottom	: '/plugins/projects-hierarchy/img/minusbottom.gif',
+		nlPlus		: '/plugins/projects-hierarchy/img/nolines_plus.gif',
+		nlMinus		: '/plugins/projects-hierarchy/img/nolines_minus.gif'
 	};
 
 	this.obj = objName;

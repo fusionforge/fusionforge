@@ -30,7 +30,7 @@ function link_box($group_id, $name, $selected = 'xzxzxz') {
 					AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE project_id = $2 )
 					AND group_id NOT IN (SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $2 )
 					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $3);',
-					array('A', $group_id, 'projects_hierarchy'));
+					array('A', $group_id, 'projects-hierarchy'));
 	}
 	return html_build_select_box($link, $name, $selected, false);
 }

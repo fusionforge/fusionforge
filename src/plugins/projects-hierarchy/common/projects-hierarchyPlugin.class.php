@@ -107,8 +107,8 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function dTreeJS() {
-		echo '<link rel="StyleSheet" href="/plugins/projects_hierarchy/dtree.css" type="text/css" />
-			<script type="text/javascript" src="/plugins/projects_hierarchy/dtree.js"></script>';
+		echo '<link rel="StyleSheet" href="/plugins/projects-hierarchy/dtree.css" type="text/css" />
+			<script type="text/javascript" src="/plugins/projects-hierarchy/dtree.js"></script>';
 	}
 
 	function buildTree() {
@@ -575,7 +575,8 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 			case 'admin':
 			default: {
-				site_project_header();
+				$params['toptab']=$this->name;
+                                site_project_header($params);
 				$returned = true;
 				break;
 			}

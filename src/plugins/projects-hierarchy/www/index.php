@@ -31,7 +31,7 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 }
 
 $type = getStringFromRequest('type');
-$projectsHierarchy = plugin_get_object('projects_hierarchy');
+$projectsHierarchy = plugin_get_object('projects-hierarchy');
 
 if (!$type) {
 	exit_error("Cannot Process your request: No TYPE specified", 'home'); // you can create items in Base.tab and customize this messages
@@ -50,7 +50,7 @@ switch ($type) {
 		if ( !$group) {
 			exit_error("Invalid Project", 'home');
 		}
-		if (!$group->usesPlugin($projectsHierarchy->name)) {//check if the group has the projects_hierarchy plugin active
+		if (!$group->usesPlugin($projectsHierarchy->name)) {//check if the group has the projects-hierarchy plugin active
 			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $projectsHierarchy->name), 'home');
 		}
 		session_require_perm('project_admin', $id);
@@ -95,8 +95,8 @@ switch ($type) {
 		if (!session_loggedin()) {
 			exit_not_logged_in();
 		}
-		session_require_perm('project_admin', $id);
 		$id = getStringFromRequest('group_id');
+		session_require_perm('project_admin', $id);
 		if (!$id) {
 			exit_error("Cannot Process your request: No ID specified", 'home');
 		}
@@ -104,7 +104,7 @@ switch ($type) {
 		if ( !$group) {
 			exit_error("Invalid Project", 'home');
 		}
-		if (!$group->usesPlugin($projectsHierarchy->name)) {//check if the group has the projects_hierarchy plugin active
+		if (!$group->usesPlugin($projectsHierarchy->name)) {//check if the group has the projects-hierarchy plugin active
 			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $projectsHierarchy->name), 'home');
 		}
 		$action = getStringFromRequest('action');

@@ -23,7 +23,7 @@
  */
 
 global $group_id;
-$projectsHierarchy = plugin_get_object('projects_hierarchy');
+$projectsHierarchy = plugin_get_object('projects-hierarchy');
 
 echo '<h3>'._('Modify the hierarchy').'</h3>';
 echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=addChild&id='.$group_id.'">';

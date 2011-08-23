@@ -22,7 +22,7 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'projects_hierarchy/common/projects_hierarchyPlugin.class.php';
+require_once $gfplugins.'projects-hierarchy/common/projects-hierarchyPlugin.class.php';
 
 $projects_hierarchyPluginObject = new projects_hierarchyPlugin;
 

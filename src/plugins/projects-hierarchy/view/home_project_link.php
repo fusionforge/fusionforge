@@ -24,7 +24,7 @@
 
 global $g; //group object
 global $group_id; // id of the group
-$projectsHierarchy = plugin_get_object('projects_hierarchy');
+$projectsHierarchy = plugin_get_object('projects-hierarchy');
 
 $parent = $projectsHierarchy->getFamily($group_id, 'parent', false, 'validated');
 $childs = $projectsHierarchy->getFamily($group_id, 'child', false, 'validated');
