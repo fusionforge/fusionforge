@@ -821,7 +821,7 @@ function site_user_header($params) {
 
 	echo ($HTML->printSubMenu($arr_t, $arr_l, $arr_attr));
 	if ( plugin_hook_listeners("usermenu") > 0 ) {
-		echo $HTML->printSubMenuSeparator();
+		echo $HTML->subMenuSeparator();
 	}
 	plugin_hook("usermenu", false);
 	echo ($HTML->endSubMenu());
