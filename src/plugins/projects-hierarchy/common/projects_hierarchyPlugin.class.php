@@ -25,7 +25,7 @@
 class projects_hierarchyPlugin extends Plugin {
 	function projects_hierarchyPlugin() {
 		$this->Plugin();
-		$this->name = 'projects_hierarchy';
+		$this->name = 'projects-hierarchy';
 		$this->text = _('Project Hierarchy'); // To show in the tabs, use...
 		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook('groupisactivecheckboxpost');

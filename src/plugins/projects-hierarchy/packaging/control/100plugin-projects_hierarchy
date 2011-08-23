@@ -1,0 +1,5 @@
+Package: @PACKAGE@-plugin-projects-hierarchy
+Homepage: https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/ProjectsHierarchyPlugin
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, ${misc:Depends}
+Description: Projects Hierarchy plugin for FusionForge

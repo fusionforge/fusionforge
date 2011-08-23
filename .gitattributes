@@ -2336,6 +2336,7 @@ src/plugins/projectlabels/packaging/links/plugin-projectlabels -text
 src/plugins/projectlabels/www/index.php -text
 src/plugins/projects-hierarchy/AUTHORS -text
 src/plugins/projects-hierarchy/COPYING -text
+src/plugins/projects-hierarchy/NAME -text
 src/plugins/projects-hierarchy/actions/addChild.php -text
 src/plugins/projects-hierarchy/actions/projectsHierarchyDocman.php -text
 src/plugins/projects-hierarchy/actions/removeChild.php -text
@@ -2347,6 +2348,9 @@ src/plugins/projects-hierarchy/common/projects_hierarchyPlugin.class.php -text
 src/plugins/projects-hierarchy/db/projects_hierarchy-init.sql -text
 src/plugins/projects-hierarchy/etc/projects_hierarchy.ini -text
 src/plugins/projects-hierarchy/include/hierarchy_utils.php -text
+src/plugins/projects-hierarchy/packaging/control/100plugin-projects_hierarchy -text
+src/plugins/projects-hierarchy/packaging/control/100plugin-projects_hierarchy.shortdesc -text
+src/plugins/projects-hierarchy/packaging/install/plugin-projects-hierarchy -text
 src/plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php -text
 src/plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php -text
 src/plugins/projects-hierarchy/view/admin_project_link.php -text
