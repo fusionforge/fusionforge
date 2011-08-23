@@ -125,10 +125,30 @@ debian/$(PACKAGE)-plugin-%.examples:
 
 # Construct the control file
 debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*) $(wildcard plugins/*/etc/*.ini)
-	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
+	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | \
+	while read file ; do \
+		cat $${file}; \
+		if [ -f $${file}.shortdesc ] ; then \
+			cat $(CURDIR)/packaging/control/AAAdesc; \
+			echo ' .'; \
+			cat $${file}.shortdesc; \
+		fi; \
+		echo ''; \
+	done | $(SED_REPLACE) > $@
 	@echo Enabled plugins: $(ENABLED_PLUGINS)
 	@echo Skipped plugins: $(shell $(CURDIR)/utils/list-enabled-plugins.sh --disabled)
-	for plugin in $(ENABLED_PLUGINS) ; do ls plugins/$$plugin/packaging/control/[1-9][0-9][0-9]plugin-$$plugin ; done | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) >> $@
+	for plugin in $(ENABLED_PLUGINS) ; do \
+		ls plugins/$$plugin/packaging/control/[1-9][0-9][0-9]plugin-$$plugin ; \
+	done | \
+	while read file ; do \
+		cat $${file}; \
+		if [ -f $${file}.shortdesc ] ; then \
+			cat $(CURDIR)/packaging/control/AAAdesc; \
+			echo ' .'; \
+			cat $${file}.shortdesc; \
+		fi; \
+		echo ''; \
+	done | $(SED_REPLACE) >> $@
 
 # Update the translation of package descriptions fields
 debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
