@@ -2334,48 +2334,48 @@ src/plugins/projectlabels/packaging/docs/plugin-projectlabels -text
 src/plugins/projectlabels/packaging/install/plugin-projectlabels -text
 src/plugins/projectlabels/packaging/links/plugin-projectlabels -text
 src/plugins/projectlabels/www/index.php -text
-src/plugins/projects_hierarchy/AUTHORS -text
-src/plugins/projects_hierarchy/COPYING -text
-src/plugins/projects_hierarchy/actions/addChild.php -text
-src/plugins/projects_hierarchy/actions/projectsHierarchyDocman.php -text
-src/plugins/projects_hierarchy/actions/removeChild.php -text
-src/plugins/projects_hierarchy/actions/removeParent.php -text
-src/plugins/projects_hierarchy/actions/updateGlobalConf.php -text
-src/plugins/projects_hierarchy/actions/validateRelationship.php -text
-src/plugins/projects_hierarchy/common/projects_hierarchy-init.php -text
-src/plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php -text
-src/plugins/projects_hierarchy/db/projects_hierarchy-init.sql -text
-src/plugins/projects_hierarchy/etc/projects_hierarchy.ini -text
-src/plugins/projects_hierarchy/include/hierarchy_utils.php -text
-src/plugins/projects_hierarchy/view/admin/viewGlobalConfiguration.php -text
-src/plugins/projects_hierarchy/view/admin/viewProjectConfiguration.php -text
-src/plugins/projects_hierarchy/view/admin_project_link.php -text
-src/plugins/projects_hierarchy/view/docman_project_link.php -text
-src/plugins/projects_hierarchy/view/home_project_link.php -text
-src/plugins/projects_hierarchy/www/add_link.php -text
-src/plugins/projects_hierarchy/www/dtree.css -text svneol=unset#text/css
-src/plugins/projects_hierarchy/www/dtree.js -text
-src/plugins/projects_hierarchy/www/img/base.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/cd.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/empty.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/folder.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/folderopen.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/globe.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/imgfolder.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/join.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/joinbottom.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/line.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/minus.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/minusbottom.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/musicfolder.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/nolines_minus.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/nolines_plus.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/page.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/plus.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/plusbottom.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/question.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/img/trash.gif -text svneol=unset#image/gif
-src/plugins/projects_hierarchy/www/index.php -text
+src/plugins/projects-hierarchy/AUTHORS -text
+src/plugins/projects-hierarchy/COPYING -text
+src/plugins/projects-hierarchy/actions/addChild.php -text
+src/plugins/projects-hierarchy/actions/projectsHierarchyDocman.php -text
+src/plugins/projects-hierarchy/actions/removeChild.php -text
+src/plugins/projects-hierarchy/actions/removeParent.php -text
+src/plugins/projects-hierarchy/actions/updateGlobalConf.php -text
+src/plugins/projects-hierarchy/actions/validateRelationship.php -text
+src/plugins/projects-hierarchy/common/projects_hierarchy-init.php -text
+src/plugins/projects-hierarchy/common/projects_hierarchyPlugin.class.php -text
+src/plugins/projects-hierarchy/db/projects_hierarchy-init.sql -text
+src/plugins/projects-hierarchy/etc/projects_hierarchy.ini -text
+src/plugins/projects-hierarchy/include/hierarchy_utils.php -text
+src/plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php -text
+src/plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php -text
+src/plugins/projects-hierarchy/view/admin_project_link.php -text
+src/plugins/projects-hierarchy/view/docman_project_link.php -text
+src/plugins/projects-hierarchy/view/home_project_link.php -text
+src/plugins/projects-hierarchy/www/add_link.php -text
+src/plugins/projects-hierarchy/www/dtree.css -text svneol=unset#text/css
+src/plugins/projects-hierarchy/www/dtree.js -text
+src/plugins/projects-hierarchy/www/img/base.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/cd.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/empty.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/folder.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/folderopen.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/globe.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/imgfolder.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/join.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/joinbottom.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/line.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/minus.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/minusbottom.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/musicfolder.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/nolines_minus.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/nolines_plus.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/page.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/plus.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/plusbottom.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/question.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/img/trash.gif -text svneol=unset#image/gif
+src/plugins/projects-hierarchy/www/index.php -text
 src/plugins/quota_management/INSTALL -text
 src/plugins/quota_management/common/quota_management-init.php -text
 src/plugins/quota_management/common/quota_managementPlugin.class.php -text
