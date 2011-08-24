@@ -419,5 +419,3 @@ BEGIN
 	PERFORM migrate_role_observer_to_pfo_rbac () ;
 END ;
 $$ LANGUAGE plpgsql ;
-
-SELECT pfo_rbac_full_migration () ;
