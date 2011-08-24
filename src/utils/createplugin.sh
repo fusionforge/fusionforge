@@ -7,7 +7,7 @@
 path=$(dirname $0)
 modelfullname=HelloWorld
 modelminus=`echo $modelfullname | tr '[A-Z]' '[a-z]'`
-modelplugdir=$path/$modelminus
+modelplugdir=$path/../plugins/$modelminus
 dopackage=0
 
 usage() {
@@ -30,6 +30,11 @@ else
 	fullname=$1
 	minus=`echo $1 | tr '[A-Z]' '[a-z]'`
 	plugdir=$minus
+	current_dir=`pwd`
+	if [ "`basename $current_dir`" != "plugins" ]; then
+	    echo "Please launch the script from withing the src/plugins/ dir"
+	    exit 1
+	fi
 	[ ! -d $modelplugdir/debian/fusionforge-plugin-$modelminus ] || (cd $modelplugdir ; debclean)
 	echo "Creating $1 plugin"
 	echo "Creating directory $plugdir"
