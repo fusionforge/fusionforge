@@ -47,7 +47,7 @@ echo '<div id="left" style="float:left; width:17%; min-width: 50px; overflow: au
 include ($gfcommon.'docman/views/tree.php');
 echo '</div>';
 
-// plugin projects_hierarchy
+// plugin projects-hierarchy
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	if (!forge_check_perm('docman', $childgroup_id, 'read')) {

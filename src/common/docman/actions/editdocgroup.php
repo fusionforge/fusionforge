@@ -38,7 +38,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 
 $urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
 
-// plugin projects_hierarchy handler
+// plugin projects-hierarchy handler
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&childgroup_id='.$childgroup_id;

@@ -31,7 +31,7 @@ global $g; // group object
 global $group_id; // id of the group
 global $dirid; //id of the doc_group
 
-// plugin projects_hierarchy
+// plugin projects-hierarchy
 $actionurl = '?group_id='.$group_id.'&amp;action=addfile&amp;dirid='.$dirid;
 $redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
 if ($childgroup_id) {

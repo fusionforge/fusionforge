@@ -48,7 +48,7 @@ if (!$doc_group) {
 $baseurl = '/docman/?group_id='.$group_id;
 $redirecturl = $baseurl.'&view=listfile&dirid='.$doc_group;
 
-// plugin hierarchy handler
+// plugin projects-hierarchy handler
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$redirecturl .= '&childgroup_id='.$childgroup_id;

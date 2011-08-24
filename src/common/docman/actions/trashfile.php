@@ -35,6 +35,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
 }
 
+// plugin projects-hierarchy handler
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	if (!forge_check_perm('docman', $childgroup_id, 'approve')) {

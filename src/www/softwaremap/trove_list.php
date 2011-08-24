@@ -60,7 +60,7 @@ echo '<div id="project-tree" class="underline-link">' . "\n";
 echo '<h2>' . _('Project tree') . '</h2>' . "\n";
 
 $res1 = db_query_params('SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = $1 and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id',
-	array('projects_hierarchy'));
+	array('projects-hierarchy'));
 if ($res1) {
 	if (db_numrows($res1) > 0) {
 		$res2 = db_query_params('SELECT count(*) as used FROM plugin_projects_hierarchy_relationship',array());

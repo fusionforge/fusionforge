@@ -39,8 +39,8 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 echo '<div id="documenttree" style="height:100%">';
 $dm = new DocumentManager($g);
 $dm->getTree($dirid, $linkmenu);
-if ($g->usesPlugin('projects_hierarchy')) {
-	$projectsHierarchy = plugin_get_object('projects_hierarchy');
+if ($g->usesPlugin('projects-hierarchy')) {
+	$projectsHierarchy = plugin_get_object('projects-hierarchy');
 	$projectIDsArray = $projectsHierarchy->getFamily($group_id, 'child', true, 'validated');
 }
 if (isset($projectIDsArray) && is_array($projectIDsArray)) {

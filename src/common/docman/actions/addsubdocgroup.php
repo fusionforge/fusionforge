@@ -36,6 +36,8 @@ if ($dirid) {
 } else {
 	$urlredirect = '/docman/?group_id='.$group_id;
 }
+
+// plugin projects-hierarchy handler
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);

@@ -38,7 +38,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
-// plugin projects_hierarchy
+// plugin projects-hierarchy
 $actionurl = '?group_id='.$group_id.'&amp;action=editdocgroup';
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
