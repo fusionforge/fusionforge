@@ -737,7 +737,7 @@ src/etc/config.ini.d/mediawiki.ini -text
 src/etc/config.ini.d/online_help.ini -text
 src/etc/config.ini.d/oslc.ini -text
 src/etc/config.ini.d/projectlabels.ini -text
-src/etc/config.ini.d/projects_hierarchy.ini -text
+src/etc/config.ini.d/projects-hierarchy.ini -text
 src/etc/config.ini.d/quota_management.ini -text
 src/etc/config.ini.d/scmarch.ini -text
 src/etc/config.ini.d/scmbzr.ini -text
