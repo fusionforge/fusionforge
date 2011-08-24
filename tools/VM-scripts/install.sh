@@ -9,8 +9,16 @@
 
 # Prerequisite : running 'build.sh' and its prerequisites
 
+
+#set -x
+grep -q debian-repository /etc/apt/sources.list
+if [ $? -ne 0 ]; then
+    echo "You probably need to add the following in /etc/apt/sources.list :"
+    echo "deb file:///root/debian-repository local/"
+    exit 1
+fi
+
 set -e
-set -x
 
 aptitude update
 if dpkg -l fusionforge-full | grep -q ^ii ; then
