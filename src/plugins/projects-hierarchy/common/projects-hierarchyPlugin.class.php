@@ -628,6 +628,39 @@ class projects_hierarchyPlugin extends Plugin {
 		return $returnArr;
 	}
 
+	/**
+	 * getConf - return the configuration defined at project level
+	 *
+	 * @param	integer	the group id
+	 * @return	array	the configuration array
+	 */
+	function getConf($project_id) {
+		$resConf = db_query_params('SELECT * from plugin_projects_hierarchy where project_id=$1',array($project_id));
+		if (!$resConf) {
+			return false;
+		}
+
+		$row = db_numrows($resConf);
+
+		if ($row == null || count($row) > 2) {
+			return false;
+		}
+
+		$resArr = db_fetch_array($resConf);
+		$returnArr = array();
+
+		foreach($resArr as $column => $value) {
+			if ($value == 't') {
+				$returnArr[$column] = true;
+			} else {
+				$returnArr[$column] = false;
+			}
+		}
+
+		return $returnArr;
+	}
+
+
 	function getProjectAdminView() {
 		global $gfplugins, $use_tooltips;
 		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';

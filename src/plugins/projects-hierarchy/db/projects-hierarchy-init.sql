@@ -2,7 +2,8 @@ CREATE TABLE plugin_projects_hierarchy (
 	project_id integer DEFAULT 0 NOT NULL,
 	tree boolean DEFAULT true,
 	docman boolean DEFAULT false,
-	delegate boolean DEFAULT false
+	delegate boolean DEFAULT false,
+	globalconf boolean DEFAULT false
 );
 
 CREATE TABLE plugin_projects_hierarchy_global (

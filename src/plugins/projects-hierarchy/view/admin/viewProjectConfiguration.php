@@ -24,32 +24,45 @@
 global $HTML;
 global $projectsHierarchy;
 global $use_tooltips;
+global $group_id;
 
-$projectsHierarchyGlobalConf = $projectsHierarchy->getGlobalconf();
+$projectsHierarchyProjectConf = $projectsHierarchy->getConf($group_id);
+if (!$projectsHierarchyProjectConf) {
+	echo '<div class="error">'._('Cannot retrieve data from DB').'</div>';
+} else {
+	echo $HTML->boxTop(_('Manage project configuration'));
+	echo '<form method="post" action="?type=admin&&pluginname='.$projectsHierarchy->name.'&action=updateProjectConf">';
+	echo '<table>';
 
-echo $HTML->boxTop(_('Manage project configuration'));
-echo '<form method="post" action="?type=admin&&pluginname='.$projectsHierarchy->name.'&action=updateProjectConf">';
-echo '<table>';
+	echo '<tr><td><label id="projectsHierarchy-tree" ';
+	if ($use_tooltips)
+		echo 'title="'._('Enable visibily in hierarchy tree.').'"';
+	echo ' >'._('Enable tree').'</label></td><td><input type="checkbox" name="tree" value="1"';
+	if ($projectsHierarchyProjectConf['tree'])
+		echo 'checked="checked" ';
 
-echo '<tr><td><label id="projectsHierarchy-delegate" ';
-if ($use_tooltips)
-	echo 'title="'._('Enable full rights and configuration delegation to parent.').'"';
-echo ' >'._('Enable delegate').'</label></td><td><input type="checkbox" name="delegate" value="1"';
-if ($projectsHierarchyProjectConf['delegate'])
-	echo 'checked="checked" ';
+	echo '/></td></tr>';
 
-echo '/></td></tr>';
-echo '<tr><td><label id="projectsHierarchy-globalconf" ';
-if ($use_tooltips)
-	echo 'title="'._('Use forge global configuration. Superseed any configuration done at project level.').'"';
-echo ' >'._('Use forge global configuration').'</label></td><td><input type="checkbox" name="globalconf" value="1"';
-if ($projectsHierarchyProjectConf['globalconf'])
-	echo 'checked="checked" ';
+	echo '<tr><td><label id="projectsHierarchy-delegate" ';
+	if ($use_tooltips)
+		echo 'title="'._('Enable full rights and configuration delegation to parent.').'"';
+	echo ' >'._('Enable delegate').'</label></td><td><input type="checkbox" name="delegate" value="1"';
+	if ($projectsHierarchyProjectConf['delegate'])
+		echo 'checked="checked" ';
 
-echo '/></td></tr>';
+	echo '/></td></tr>';
+	echo '<tr><td><label id="projectsHierarchy-globalconf" ';
+	if ($use_tooltips)
+		echo 'title="'._('Use forge global configuration. Superseed any configuration done at project level.').'"';
+	echo ' >'._('Use forge global configuration').'</label></td><td><input type="checkbox" name="globalconf" value="1"';
+	if ($projectsHierarchyProjectConf['globalconf'])
+		echo 'checked="checked" ';
 
-echo '</table>';
-echo '<input type="submit" value="'._('Update').'" />';
-echo '</form>';
-echo $HTML->boxBottom();
+	echo '/></td></tr>';
+
+	echo '</table>';
+	echo '<input type="submit" value="'._('Update').'" />';
+	echo '</form>';
+	echo $HTML->boxBottom();
+}
 ?>
