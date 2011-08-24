@@ -125,6 +125,7 @@ function tag_cloud($params = '') {
 	if (count($tag_count) > 0) {
 		$count_min = 0;
 		$count_max = 0;
+		$nb = 0;
 		foreach ($available_counts as $count) {
 			if ($count_min == 0 || $count < $count_min) $count_min = $count;
 			if ($count > $count_max) $count_max = $count;
