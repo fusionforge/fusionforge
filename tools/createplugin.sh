@@ -2,7 +2,7 @@
 
 # TODO : missing copyright
 
-# You should instead probably use ../plugins/templates/createplugin.sh that is more up-to-date
+# You should instead probably use ../src/utils/createplugin.sh that is more up-to-date
 
 usage() {
 	echo Usage: $0 PluginName
