@@ -526,7 +526,18 @@ function db_string_array_to_any_clause ($arr) {
 	return $res ;
 }
 
+/**
+ * db_construct_qpa() - Constructs a query+params array to be used by db_query_qpa()
+ * Can be called several times in a row to extend the query, until db_query_qpa will be finally invoked.
+ *  
+ * @param array $old_qpa array(SQL query, array(parameters...), oldmax) of previous calls
+ * @param string $new_sql SQL instructions added to the query
+ * @param array $new_params new params matching the new query instructions
+ * @return array  array(SQL query, array(parameters...), newmax)
+ */
 function db_construct_qpa ($old_qpa = false, $new_sql = '', $new_params = array ()) {
+	
+	// can be invoked for the first time, starting with no previous query
 	if (!is_array($old_qpa) || count ($old_qpa) < 3) {
 		$old_qpa = array ('', array(), 0) ;
 	}
@@ -538,6 +549,7 @@ function db_construct_qpa ($old_qpa = false, $new_sql = '', $new_params = array 
 	$params = $old_params ;
 	$max = $old_max ;
 
+	// renumber the $n params substitution placeholders to be able to concatenate
 	foreach ($new_params as $index => $value) {
 		$i = count ($new_params) - $index ;
 		$new_sql = preg_replace ('/\\$'.$i.'(?!\d)/', '$_'.($i + $old_max), $new_sql) ;
