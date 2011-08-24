@@ -213,12 +213,12 @@ Project import plugin for FusionForge
 This plugin allows the import of a project data previously exported
 with ForgePlucker, or a compatible tool.
 
-%package plugin-projects_hierarchy
-Summary: projects_hierarchy plugin for FusionForge
+%package plugin-projects-hierarchy
+Summary: projects-hierarchy plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
-%description plugin-projects_hierarchy
-This is a projects_hierarchy plugin within FusionForge.
+%description plugin-projects-hierarchy
+This is a projects-hierarchy plugin within FusionForge.
 
 %package plugin-quota_management
 Summary: quota_management plugin for FusionForge
@@ -548,8 +548,8 @@ WHICH_VERSION=%{version}-%{release}
 # plugin: online_help
 %{__ln_s} ../../plugins/online_help/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/online_help
 
-# plugin: projects_hierarchy
-%{__ln_s} ../../plugins/projects_hierarchy/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projects_hierarchy
+# plugin: projects-hierarchy
+%{__ln_s} ../../plugins/projects-hierarchy/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projects-hierarchy
 
 # plugin: quota_management
 %{__ln_s} ../../plugins/quota_management/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/quota_management
@@ -810,12 +810,12 @@ fi
 %{FORGE_DIR}/www/trove
 %{FORGE_DIR}/www/widgets
 #%{FORGE_DIR}/www/plugins/online_help
-#%{FORGE_DIR}/www/plugins/projects_hierarchy
+#%{FORGE_DIR}/www/plugins/projects-hierarchy
 #%{FORGE_DIR}/www/plugins/quota_management
 %dir %{FORGE_DIR}/plugins
 %{FORGE_DIR}/plugins/env.inc.php
 #%{FORGE_DIR}/plugins/online_help
-#%{FORGE_DIR}/plugins/projects_hierarchy
+#%{FORGE_DIR}/plugins/projects-hierarchy
 #%{FORGE_DIR}/plugins/quota_management
 %{FORGE_LANG_DIR}
 %dir %{FORGE_CONF_DIR}
@@ -934,10 +934,10 @@ fi
 %{FORGE_DIR}/plugins/projectimport
 %{FORGE_DIR}/www/plugins/projectimport
 
-%files plugin-projects_hierarchy
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projects_hierarchy.ini
-%{FORGE_DIR}/plugins/projects_hierarchy
-%{FORGE_DIR}/www/plugins/projects_hierarchy
+%files plugin-projects-hierarchy
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projects-hierarchy.ini
+%{FORGE_DIR}/plugins/projects-hierarchy
+%{FORGE_DIR}/www/plugins/projects-hierarchy
 
 %files plugin-quota_management
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/quota_management.ini
