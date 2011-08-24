@@ -119,6 +119,7 @@ class projects_hierarchyPlugin extends Plugin {
 					where p1.group_id=plugin_projects_hierarchy_relationship.project_id
 					and p2.group_id=plugin_projects_hierarchy_relationship.sub_project_id
 					and plugin_projects_hierarchy_relationship.status=$1
+					and (select tree from plugin_projects_hierarchy where project_id = p2.group_id)
 					order by father_name, son_name',
 					array('t'));
 		echo db_error();
@@ -161,7 +162,7 @@ class projects_hierarchyPlugin extends Plugin {
 			$returnTree .= '<table ><tr><td>';
 			$returnTree .= '<script type="text/javascript">';
 			$returnTree .= 'd = new dTree(\'d\');';
-			$returnTree .= 'd.add(0,-1,\'Project Tree\');';
+			$returnTree .= 'd.add(0,-1,\'Project Hierarchy Tree\');';
 			reset($arbre);
 			//construction automatique de l'arbre format : (num_fils, num_pere,nom,nom_unix)
 			while (list($key2, $sons2) = each($arbre)) {
