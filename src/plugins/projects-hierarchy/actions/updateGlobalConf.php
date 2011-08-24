@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $projectsHierarchy; // the mantisbt object
+global $projectsHierarchy; // the projects-hierarchy plugin object
 
 $confArr = array();
 $confArr['tree'] = getIntFromRequest('tree');

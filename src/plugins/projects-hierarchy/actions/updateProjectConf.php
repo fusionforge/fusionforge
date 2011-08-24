@@ -1,7 +1,6 @@
 <?php
 /**
  * Projects Hierarchy plugin
- * action: removeParent
  *
  * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
@@ -23,13 +22,19 @@
  */
 
 global $projectsHierarchy; // the projects-hierarchy plugin object
-global $_SERVER;
-global $id;
+global $group_id;
 
-$parent_id = getIntFromRequest('parent_id');
+$confArr = array();
+$confArr['tree'] = getIntFromRequest('tree');
+$confArr['docman'] = getIntFromRequest('docman');
+$confArr['delegate'] = 0;
+$confArr['globalconf'] = getIntFromRequest('globalconf');
 
-if ($parent_id && $projectsHierarchy->removeParent($id, $parent_id))
-	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Successfully removed parent'));
+if (!$projectsHierarchy->updateConf($group_id, $confArr)) {
+	$error_msg = _('Failed to update configuration.');
+	session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name.'&error_msg='.urlencode($error_msg));
+}
 
-$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Failed to removed parent'));
+$feedback = _('Projects Hierarchy configuration successfully updated.');
+session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name.'&feedback='.urlencode($feedback));
 ?>

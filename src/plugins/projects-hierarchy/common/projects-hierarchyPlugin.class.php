@@ -89,7 +89,7 @@ class projects_hierarchyPlugin extends Plugin {
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('Hierarchy Admin'));
+					echo util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('Hierarchy Admin'), array('class'=>'tabtitle', 'title'=>_('Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)')));
 					echo '</p>';
 				}
 				$returned = true;
@@ -554,7 +554,7 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @access	public
 	 */
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name,_('Global Hierarchy admin'));
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name,_('Global Hierarchy admin'), array('class'=>'tabtitle', 'title'=>_('Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)')));
 	}
 
 	/**
@@ -707,7 +707,33 @@ class projects_hierarchyPlugin extends Plugin {
 					array(
 						$confArr['tree'],
 						$confArr['docman'],
+						$confArr['delegate']
+					));
+		if (!$res)
+			return false;
+
+		return true;
+	}
+
+	/**
+	 * updateConf - update the configuration in database for this project
+	 *
+	 * @param	array	configuration array (tree, docman, delegate)
+	 * @return	bool	true on success
+	 */
+	function updateConf($project_id, $confArr) {
+		if (!isset($confArr['tree']) || !isset($confArr['docman']) || !isset($confArr['delegate']) || !isset($confArr['globalconf']))
+			return false;
+
+		$res = db_query_params('update plugin_projects_hierarchy
+					set (tree, docman, delegate, globalconf) = ($1, $2, $3, $4)
+					where project_id = $5',
+					array(
+						$confArr['tree'],
+						$confArr['docman'],
 						$confArr['delegate'],
+						$confArr['globalconf'],
+						$project_id
 					));
 		if (!$res)
 			return false;

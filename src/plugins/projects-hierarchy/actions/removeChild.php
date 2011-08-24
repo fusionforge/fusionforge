@@ -22,7 +22,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $projectsHierarchy;
+global $projectsHierarchy; // the projects-hierarchy plugin object
 global $_SERVER;
 global $id;
 
