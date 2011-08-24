@@ -1092,7 +1092,7 @@ function util_make_base_url() {
 		$url = "http://" ;
 	}
 	$url .= forge_get_config('web_host') ;
-	if (forge_get_config('https_port') != 443) {
+	if (forge_get_config('https_port') && (forge_get_config('https_port') != 443)) {
 		$url .= ":".forge_get_config('https_port') ;
 	}
 	return $url;
