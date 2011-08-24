@@ -500,8 +500,7 @@ class projects_hierarchyPlugin extends Plugin {
 					if (db_affected_rows($res))
 						return true;
 				} else {
-					$qpa = db_construct_qpa(false, 'DELETE FROM plugin_projects_hierarchy_relationship WHERE ',
-								array($status));
+					$qpa = db_construct_qpa(false, 'DELETE FROM plugin_projects_hierarchy_relationship WHERE ');
 					switch ($relation) {
 						case "parent": {
 							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
