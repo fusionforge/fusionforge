@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-24 14:23+0200\n"
-"PO-Revision-Date: 2011-04-15 11:27+0200\n"
+"PO-Revision-Date: 2011-08-24 14:44+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -8234,6 +8234,8 @@ msgid ""
 "You are now a registered user on %1$s, the online development environment "
 "for Open Source projects."
 msgstr ""
+"Vous avez maintenant un compte sur %1$s, l'environnement de\n"
+"développement pour projets Open Source."
 
 #: www/account/first.php:33
 #, fuzzy, php-format
@@ -8576,23 +8578,15 @@ msgstr ""
 msgid ""
 "Hey... losing your password is serious business. It compromises the security "
 "of your account, your projects, and this site."
-msgstr ""
+msgstr "Hmm.  La perte d'un mot de passe n'est pas à prendre à la légère.  Elle compromet la sécurité de votre compte, de vos projets, et la sécurité globale du site."
 
 #: www/account/lostpw.php:83
-#, fuzzy
 msgid ""
 "Clicking \"Send Lost PW Hash\" below will email a URL to the email address "
 "we have on file for you. In this URL is a 128-bit confirmation hash for your "
 "account. Visiting the URL will allow you to change your password online and "
 "login."
-msgstr ""
-"<p>Hmm.  La perte d'un mot de passe n'est pas à prendre à la légère.  Elle "
-"compromet la sécurité de votre compte, de vos projets, et la sécurité "
-"globale du site.</p><p>Si vous cliquez sur « Envoyer une clé de hachage pour "
-"mot de passe perdu » ci-dessous, vous recevrez un email (à l'adresse que "
-"nous avons enregistrée pour votre compte).  Ce message contiendra une URL "
-"avec une clé de hachage de 128 bits qui vous permettra de débloquer votre "
-"compte et de changer votre mot de passe.</p>"
+msgstr "Si vous cliquez sur « Envoyer une clé de hachage pour mot de passe perdu » ci-dessous, vous recevrez un email (à l'adresse que nous avons enregistrée pour votre compte).  Ce message contiendra une URL avec une clé de hachage de 128 bits qui vous permettra de débloquer votre compte et de changer votre mot de passe."
 
 #: www/account/lostpw.php:93
 msgid "Send Lost PW Hash"
@@ -8650,6 +8644,9 @@ msgid ""
 "Error during user activation but after user registration (user is now in "
 "pending state and will not get a notification eMail!)"
 msgstr ""
+"Erreur entre l'enregistrement d'un utilisateur et son activation ;\n"
+"l'utilisateur est dans l'état « en attente » et ne recevra pas de\n"
+"notification."
 
 #: www/account/register.php:101
 #, fuzzy, php-format
@@ -8659,18 +8656,13 @@ msgstr "Impossible d'activer le compte"
 #: www/account/register.php:108
 #, php-format
 msgid "You have registered the %1$s account on %2$s."
-msgstr ""
+msgstr "Vous avez créé le compte %1$s sur %2$s."
 
 #: www/account/register.php:112
-#, fuzzy
 msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
-msgstr ""
-"<p>Félicitations. Vous venez de vous enregistrer sur %1$s.</p><p>Vous allez "
-"recevoir un courrier électronique de confirmation pour vérifier votre "
-"adresse e-mail. Suivez le lien qui vous a été envoyé pour activer votre "
-"compte.</p>"
+msgstr "Vous allez recevoir un courrier électronique de confirmation pour vérifier votre adresse e-mail. Suivez le lien qui vous a été envoyé pour activer votre compte."
 
 #: www/account/register.php:115
 #, php-format
@@ -8678,11 +8670,12 @@ msgid ""
 "You have registered and activated user %1$s on %2$s. They will not receive "
 "an eMail about this fact."
 msgstr ""
+"Vous venez de créer et d'activer l'utilisateur %1$s sur %2$s.  Cet\n"
+"utilisateur ne recevra pas de notification."
 
 #: www/account/register.php:136
-#, fuzzy
 msgid "User Account Registration"
-msgstr "%1$s - Inscription"
+msgstr "Enregistrement de compte utilisateur"
 
 #: www/account/register.php:144
 msgid ""
@@ -8736,7 +8729,7 @@ msgstr ""
 
 #: www/account/register.php:236
 msgid "Activate this user immediately"
-msgstr ""
+msgstr "Activer cet utilisateur immédiatement"
 
 #: www/account/register.php:240
 #, php-format
@@ -9060,7 +9053,7 @@ msgstr "Proposé par %1$s (%2$s)"
 #: www/admin/approve-pending.php:221
 #, php-format
 msgid "Based on template project: %s (%s)"
-msgstr ""
+msgstr "Construit en prenant le projet %s (%s) pour modèle"
 
 #: www/admin/approve-pending.php:236
 msgid "Approve All On This Page"
@@ -9162,7 +9155,7 @@ msgstr "Nom Unix du projet :"
 
 #: www/admin/globalroledelete.php:43
 msgid "You can only delete a global role from here."
-msgstr ""
+msgstr "Vous ne pouvez supprimer qu'un rôle global depuis cette page."
 
 #: www/admin/globalroledelete.php:49 www/project/admin/roledelete.php:62
 msgid "ERROR: "
@@ -9174,7 +9167,7 @@ msgstr "Rôle correctement supprimé."
 
 #: www/admin/globalroledelete.php:55
 msgid "Error: Please confirm the deletion of the role."
-msgstr ""
+msgstr "Erreur : veuillez confirmer la suppression de ce rôle."
 
 #: www/admin/globalroleedit.php:81 www/project/admin/roleedit.php:120
 msgid "Successfully Created New Role"
@@ -9199,12 +9192,12 @@ msgstr "Impossible d'ajouter un utilisateur à un rôle de ce type."
 
 #: www/admin/globalroleedit.php:115
 msgid "ERROR: You did not tick the “really remove” box!"
-msgstr ""
+msgstr "Erreur : vous n'avez pas coché la case « réellement supprimer »."
 
 #: www/admin/globalroleedit.php:123
-#, fuzzy, php-format
+#, php-format
 msgid "User %s removed successfully"
-msgstr "Utilisateur supprimé avec succès"
+msgstr "Utilisateur %s enlevé avec succès"
 
 #: www/admin/globalroleedit.php:127
 #, fuzzy, php-format
@@ -9227,9 +9220,8 @@ msgid "User name"
 msgstr "Nom d'utilisateur"
 
 #: www/admin/globalroleedit.php:172
-#, fuzzy
 msgid "Really remove ticked users from role?"
-msgstr "Erreur lors de la révocation d'un rôle d'un utilisateur."
+msgstr "Réellement supprimer ce rôle pour l'utilisateur ?"
 
 #: www/admin/globalroleedit.php:179
 msgid "No users currently have this role"
@@ -9466,7 +9458,7 @@ msgstr "Projets privés"
 
 #: www/admin/index.php:159
 msgid "Pending news (moderation for front-page)"
-msgstr ""
+msgstr "Nouvelles en attente d'approbation (modération pour la page d'accueil)"
 
 #: www/admin/index.php:164
 msgid "Site-Wide Stats"
@@ -9626,7 +9618,7 @@ msgstr "Id du dernier utilisateur contacté"
 
 #: www/admin/massmail.php:167
 msgid "No deliveries active."
-msgstr ""
+msgstr "Pas de livraisons en cours."
 
 #: www/admin/passedit.php:78
 #, fuzzy
@@ -9661,7 +9653,7 @@ msgstr "Administration du site : Informations Utilisateur"
 #: www/admin/passedit.php:89
 #, php-format
 msgid "Changing password for user #%1$s \"%2$s\" (%3$s)…"
-msgstr ""
+msgstr "Changement de mot de passe pour l'utilisateur n°%1$s « %2$s » (%3$s)…"
 
 #: www/admin/pending-news.php:62 www/admin/pending-news.php:132
 #: www/news/admin/index.php:66 www/news/admin/index.php:120
@@ -10328,17 +10320,13 @@ msgstr "L'utilisateur est maintenant suivi"
 
 #: www/developer/monitor.php:63
 msgid "You will now be emailed this user's diary entries."
-msgstr ""
+msgstr "Vous allez à présent recevoir les entrées de journal de cet utilisateur."
 
 #: www/developer/monitor.php:64
-#, fuzzy
 msgid ""
 "To turn off monitoring, simply click the <strong>Monitor user</strong> link "
 "again."
-msgstr ""
-"<p>Vous recevrez désormais un e-mail sur l 'activité journalière du "
-"développeur.</p><p>Pour arrêter le suivi, cliquez à nouveau sur le lien "
-"« Suivre cet utilisateur »</p>"
+msgstr "Pour arrêter le suivi, cliquez à nouveau sur le lien « Suivre cet utilisateur »."
 
 #: www/developer/monitor.php:71
 msgid "Monitoring has been turned off"
@@ -11274,7 +11262,7 @@ msgstr ""
 #: www/frs/admin/qrs.php:197
 #, php-format
 msgid "You can probably not upload files larger than about %.2f MiB in size."
-msgstr ""
+msgstr "Vous ne pourrez probablement pas publier de fichiers de plus de %0.2f Mo."
 
 #: www/frs/admin/qrs.php:205
 msgid "Choose an FTP file instead of uploading:"
@@ -12423,7 +12411,7 @@ msgstr "Réduire"
 #: www/my/my_utils.php:133
 #, php-format
 msgid "%s new items"
-msgstr ""
+msgstr "%s nouveaux éléments"
 
 #: www/my/rmproject.php:61
 #, php-format
@@ -12731,7 +12719,7 @@ msgstr ""
 
 #: www/people/editjob.php:107
 msgid "Job Inventory"
-msgstr ""
+msgstr "Liste des postes"
 
 #: www/people/editjob.php:114
 #, php-format
@@ -12750,7 +12738,7 @@ msgstr ""
 
 #: www/people/editjob.php:128
 msgid "Job ID"
-msgstr ""
+msgstr "Identifiant de poste"
 
 #: www/people/editjob.php:134
 #, php-format
@@ -12796,7 +12784,7 @@ msgstr ""
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
-msgstr ""
+msgstr "Toutes les annonces sont automatiquement fermées après deux semaines."
 
 #: www/people/editjob.php:175
 msgid "Update Descriptions"
@@ -13051,6 +13039,8 @@ msgid ""
 "The %1$s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"Le système d'annonces de %1$s permet de publier des postes pour des\n"
+"volontaires.  Toute utilisation commerciale est interdite."
 
 #: www/people/index.php:65
 msgid ""
@@ -13058,22 +13048,31 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Les annonces restent actives au plus deux semaines, mais peuvent être\n"
+"fermées plus tôt à la convenance de leur auteur.  Les administrateurs\n"
+"de projet peuvent toujours réouvrir des annonces expirées."
 
 #: www/people/index.php:69
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Naviguez dans le menu des catégories pour trouver des projets qui\n"
+"recherchent votre aide."
 
 #: www/people/index.php:73
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Si vous êtes un administrateur de projet, connectez-vous et publiez\n"
+"des annonces à travers la page d'administration de votre projet."
 
 #: www/people/index.php:77
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Pour suggérer de nouvelles catégories de poste, soumettez une requête\n"
+"par le gestionnaire de support."
 
 #: www/people/index.php:82
 msgid "Last posts"
@@ -13484,12 +13483,12 @@ msgstr "Vous pouvez ajouter des tâches en utilisant le lien ci-dessus."
 #: www/pm/browse_task.php:179
 #, php-format
 msgid "Displaying results %1$d‒%2$d."
-msgstr ""
+msgstr "Affichage des résultats %1$d‒%2$d."
 
 #: www/pm/browse_task.php:182 www/tracker/browse.php:266
 #, php-format
 msgid "Displaying %2$s results."
-msgstr ""
+msgstr "Affichage de %2$s résultats."
 
 #: www/pm/browse_task.php:184 www/top/topusers.php:67
 #: www/tracker/browse.php:268
