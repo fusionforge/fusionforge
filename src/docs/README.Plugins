@@ -486,4 +486,6 @@ TODO : document Auth plugins :
 
 TODO: document content_negociated_user_home and content_negociated_project_home
 
+TODO (nerville) : document display_hierarchy
+
   -- Roland Mas <lolando@debian.org>
