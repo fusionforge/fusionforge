@@ -2557,6 +2557,10 @@ src/plugins/svntracker/packaging/docs/plugin-svntracker -text
 src/plugins/svntracker/postcommit.example -text
 src/plugins/svntracker/rpm-specific/cron.d/gforge-plugin-svntracker -text
 src/plugins/svntracker/www/newcommit.php -text
+src/plugins/twitter/NAME -text
+src/plugins/twitter/README -text
+src/plugins/twitter/common/twitter-init.php -text
+src/plugins/twitter/etc/twitter.ini -text
 src/plugins/wiki/README -text
 src/plugins/wiki/common/WikiGroupSearchEngine.class.php -text
 src/plugins/wiki/common/WikiHtmlSearchRenderer.class.php -text
