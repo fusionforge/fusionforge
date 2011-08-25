@@ -110,16 +110,26 @@ function tag_cloud($params = '') {
 			$tag_count[$row['name']]++;
 		}
 	}
+
+	$count_to_tags = array();
+	foreach ($tag_count as $name => $count) {
+		if (!isset($count_to_tags[$count])) {
+			$count_to_tags[$count] = array();
+		}
+		$count_to_tags[$count][] = $name;
+	}
+	
+	$available_counts = array_keys($count_to_tags);
+	rsort ($available_counts, SORT_NUMERIC);
+
 	if (count($tag_count) > 0) {
 		$count_min = 0;
 		$count_max = 0;
-		$nb = 1;
-		// Search upper and lower tag frequencies; stop when maximum tag number to display is reached
-		foreach ($tag_count as $name => $count) {
+		foreach ($available_counts as $count) {
 			if ($count_min == 0 || $count < $count_min) $count_min = $count;
 			if ($count > $count_max) $count_max = $count;
+			$nb = $nb + count($count_to_tags[$count]);
 			if ($params['nb_max'] && $nb >= $params['nb_max']) break; // no limit if nb_max == 0
-			$nb++;
 		}
 
 		// Compute 'A' parameter of the function
@@ -136,6 +146,7 @@ function tag_cloud($params = '') {
 
 		ksort($tag_count, SORT_STRING);
 		foreach ($tag_count as $name => $count) {
+			if ($count < $count_min) continue;
 			$size = intval(1 + ($count - $count_min) * $a);
 			$return .= '<a href="/softwaremap/tag_cloud.php?tag='
 			. urlencode($name)
