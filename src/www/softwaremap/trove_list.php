@@ -59,6 +59,8 @@ if (db_numrows($res_trove_cat) < 1) {
 echo '<div id="project-tree" class="underline-link">' . "\n";
 echo '<h2>' . _('Project tree') . '</h2>' . "\n";
 
+// TODO : move part of this code to a proper hook managed by projects-hierarchy plugin instead of having such checks in the general code
+// display_hierarchy hook seems to be ready just for this
 $res1 = db_query_params('SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = $1 and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id',
 	array('projects-hierarchy'));
 if ($res1) {
