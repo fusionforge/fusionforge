@@ -1,0 +1,5 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/twitter
+usr/share/gforge/plugins/twitter/cgi-bin
+usr/share/gforge/plugins/twitter/common
+usr/share/gforge/plugins/twitter/www

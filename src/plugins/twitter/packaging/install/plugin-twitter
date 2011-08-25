@@ -1,0 +1,9 @@
+plugins/twitter/common/*                  usr/share/@OLDPACKAGE@/plugins/twitter/common/
+plugins/twitter/include/*                 usr/share/@OLDPACKAGE@/plugins/twitter/include/
+plugins/twitter/db/*                      usr/share/@OLDPACKAGE@/plugins/twitter/db/
+plugins/twitter/bin/*                     usr/share/@OLDPACKAGE@/plugins/twitter/bin/
+plugins/twitter/www/*                     usr/share/@OLDPACKAGE@/plugins/twitter/www/
+plugins/twitter/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
+plugins/twitter/etc/plugins/twitter/*     etc/@OLDPACKAGE@/plugins/twitter/
+plugins/twitter/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/
+plugins/twitter/etc/twitter.ini	             etc/@PACKAGE@/config.ini.d/
