@@ -4,6 +4,5 @@ plugins/helloworld/db/*                      usr/share/@OLDPACKAGE@/plugins/hell
 plugins/helloworld/bin/*                     usr/share/@OLDPACKAGE@/plugins/helloworld/bin/
 plugins/helloworld/www/*                     usr/share/@OLDPACKAGE@/plugins/helloworld/www/
 plugins/helloworld/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
-plugins/helloworld/etc/plugins/helloworld/*     etc/@OLDPACKAGE@/plugins/helloworld/
 plugins/helloworld/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/
 plugins/helloworld/etc/helloworld.ini	             etc/@PACKAGE@/config.ini.d/
