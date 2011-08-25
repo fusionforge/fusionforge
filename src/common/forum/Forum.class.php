@@ -435,6 +435,7 @@ class Forum extends Error {
 	/**
 	 *	setMonitor - Add the current user to the list of people monitoring the forum.
 	 *
+	 *	@param	int	user id of the user which will be set to monitor this forum. Defaults to 0, meaning the current logged in user will be used.
 	 *	@return	boolean	success.
 	 */
 	function setMonitor ($u = -1) {
@@ -445,6 +446,7 @@ class Forum extends Error {
 			}
 			$u = user_getid() ;
 		}
+
 		$result = db_query_params ('SELECT * FROM forum_monitored_forums WHERE user_id=$1 AND forum_id=$2',
 					   array ($u,
 						  $this->getID())) ;
@@ -455,7 +457,7 @@ class Forum extends Error {
 			*/
 			$result = db_query_params ('INSERT INTO forum_monitored_forums (forum_id,user_id) VALUES ($1,$2)',
 						   array ($this->getID(),
-							  user_getid())) ;
+							  $user_id)) ;
 
 			if (!$result) {
 				$this->setError(_('Unable To Add Monitor').' : '.db_error());
