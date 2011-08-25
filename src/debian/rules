@@ -175,7 +175,7 @@ build: remove-binary-files debian/po/templates.pot conffiles
 # 	Build gettext *.mo files
 	utils/manage-translations.sh build
 
-# Build FHS-compatible Apache config files (generates contents of etc/httpd.conf.d-fhs/ etc.)
+#       Build FHS-compatible Apache config files (generates contents of etc/httpd.conf.d-fhs/ etc.)
 	utils/manage-apache-config.sh build
 
 # 	Preprocess files with DSF-Helper
@@ -200,6 +200,9 @@ clean: remove-binary-files
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 
+	rm -f $(PPOSTINST)
+	rm -f $(PPRERM)
+	rm -fr $(CURDIR)/etc/httpd.conf.d-fhs/ $(CURDIR)/etc/httpd.conf.d-opt/ $(CURDIR)/etc/httpd.conf.d-usrlocal/
 
 install: build
 	dh --with quilt $@
