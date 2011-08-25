@@ -1,9 +1,2 @@
 plugins/oauthconsumer/common/*                  usr/share/@OLDPACKAGE@/plugins/oauthconsumer/common/
-plugins/oauthconsumer/include/*                 usr/share/@OLDPACKAGE@/plugins/oauthconsumer/include/
-plugins/oauthconsumer/db/*                      usr/share/@OLDPACKAGE@/plugins/oauthconsumer/db/
-plugins/oauthconsumer/bin/*                     usr/share/@OLDPACKAGE@/plugins/oauthconsumer/bin/
-plugins/oauthconsumer/www/*                     usr/share/@OLDPACKAGE@/plugins/oauthconsumer/www/
-plugins/oauthconsumer/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
-plugins/oauthconsumer/etc/plugins/oauthconsumer/*     etc/@OLDPACKAGE@/plugins/oauthconsumer/
-plugins/oauthconsumer/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/
 plugins/oauthconsumer/etc/oauthconsumer.ini	             etc/@PACKAGE@/config.ini.d/
