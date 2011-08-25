@@ -1990,6 +1990,11 @@ src/plugins/oauthconsumer/NAME -text
 src/plugins/oauthconsumer/README -text
 src/plugins/oauthconsumer/common/oauthconsumer-init.php -text
 src/plugins/oauthconsumer/etc/oauthconsumer.ini -text
+src/plugins/oauthconsumer/packaging/control/222plugin-oauthconsumer -text
+src/plugins/oauthconsumer/packaging/control/222plugin-oauthconsumer.shortdesc -text
+src/plugins/oauthconsumer/packaging/dirs/plugin-oauthconsumer -text
+src/plugins/oauthconsumer/packaging/install/plugin-oauthconsumer -text
+src/plugins/oauthconsumer/packaging/links/plugin-oauthconsumer -text
 src/plugins/oauthprovider/3rd-party/README -text
 src/plugins/oauthprovider/3rd-party/oauth-php/CHANGELOG.txt -text
 src/plugins/oauthprovider/3rd-party/oauth-php/LICENSE.txt -text
