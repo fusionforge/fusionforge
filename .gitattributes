@@ -1687,7 +1687,6 @@ src/plugins/helloworld/etc/helloworld.ini -text
 src/plugins/helloworld/etc/httpd.d/62plugin-helloworld -text
 src/plugins/helloworld/include/HelloWorldPluginDescriptor.class.php -text
 src/plugins/helloworld/include/HelloWorldPluginInfo.class.php -text
-src/plugins/helloworld/packaging/control/000source -text
 src/plugins/helloworld/packaging/control/222plugin-helloworld -text
 src/plugins/helloworld/packaging/control/222plugin-helloworld.shortdesc -text
 src/plugins/helloworld/packaging/dirs/plugin-helloworld -text
