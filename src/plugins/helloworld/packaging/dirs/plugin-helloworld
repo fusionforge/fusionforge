@@ -1,5 +1,4 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/helloworld
-usr/share/gforge/plugins/helloworld/cgi-bin
 usr/share/gforge/plugins/helloworld/common
 usr/share/gforge/plugins/helloworld/www
