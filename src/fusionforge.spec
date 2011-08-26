@@ -95,12 +95,12 @@ Requires: %{name} >= %{version}, php, postgresql
 %description plugin-authhttpd
 External HTTPD authentication plugin for FusionForge.
 
-%package plugin-authopenid
-Summary: External OpenID authentication plugin for FusionForge.
-Group: Development/Tools
-Requires: %{name} >= %{version}, php, postgresql
-%description plugin-authopenid
-External OpenID authentication plugin for FusionForge.
+# %package plugin-authopenid
+# Summary: External OpenID authentication plugin for FusionForge.
+# Group: Development/Tools
+# Requires: %{name} >= %{version}, php, postgresql
+# %description plugin-authopenid
+# External OpenID authentication plugin for FusionForge.
 
 %package plugin-cvssyncmail
 Summary: Provides email notifications of changes to CVS repositories
@@ -499,7 +499,7 @@ WHICH_VERSION=%{version}-%{release}
 %{__ln_s} ../../plugins/authhttpd/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authhttpd
 
 # plugin: authopenid
-%{__ln_s} ../../plugins/authopenid/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authopenid
+# %{__ln_s} ../../plugins/authopenid/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authopenid
 
 # plugin: cvssyncmail
 
@@ -843,7 +843,6 @@ fi
 /bin/cvssh.pl
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authbuiltin.ini
 %{FORGE_DIR}/plugins/authbuiltin
-%{FORGE_DIR}/www/plugins/authbuiltin
 
 %files plugin-aselectextauth
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/aselectextauth.ini
@@ -859,10 +858,9 @@ fi
 %{FORGE_DIR}/plugins/authhttpd
 %{FORGE_DIR}/www/plugins/authhttpd
 
-%files plugin-authopenid
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authopenid.ini
-%{FORGE_DIR}/plugins/authopenid
-%{FORGE_DIR}/www/plugins/authopenid
+# %files plugin-authopenid
+# %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authopenid.ini
+# %{FORGE_DIR}/plugins/authopenid
 
 %files plugin-cvssyncmail
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvssyncmail.ini
