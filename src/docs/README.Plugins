@@ -493,8 +493,20 @@ TODO : document Auth plugins :
   Parameters : $params['widget'] provides the widget name
   Description: returns in $params['instance'] an instance of the new Widget subclass
 
+  Hook Name  : script_accepted_types
+  Parameters : $params['script'] == 'project_home' or 'user_home' depending on whether providing alternate accept types for such pages
+  Description: appends to $params['accepted_types'] alternate HTTP Accept Content-types supported by a plugin for the 
+               /projects or /users/ pages rendered through content-negociation
 
-TODO: document content_negociated_user_home and content_negociated_project_home
+  Hook Name  : content_negociated_project_home
+  Parameters : $params['accept'] provides the content-type to be rendered, $params['groupname'] the project name
+  Description: returns in $params['content'] an alternate content for /projects/ page and 
+               in $params['content_type'] the actual content-type to return
+		
+  Hook Name  : content_negociated_user_home
+  Parameters : $params['accept'] provides the content-type to be rendered, $params['username'] the user name
+  Description: returns in $params['content'] an alternate content for /users/ page and 
+               in $params['content_type'] the actual content-type to return
 
 TODO (nerville) : document display_hierarchy
 
