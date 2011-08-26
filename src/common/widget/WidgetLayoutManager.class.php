@@ -236,15 +236,18 @@ class WidgetLayoutManager {
 		while($data = db_fetch_array($res)) {
 			$used_widgets[] = $data['name'];
 		}
+		// display contextual toolbar
 		echo '<ul class="widget_toolbar">';
 		$url = "/widgets/widgets.php?owner=".HTTPRequest::instance()->get('owner').
 			"&amp;layout_id=".HTTPRequest::instance()->get('layout_id');
 
 		if ($update_layout = HTTPRequest::instance()->get('update') == 'layout') {
+			// customized selected
 			echo '<li><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
 			echo '<li class="current"><a href="'. $url.'&amp;update=layout' .'">'. _("Customize layout") .'</a></li>';
 			$action = 'layout';
 		} else {
+			// add selected, or default when first displayed
 			echo '<li class="current"><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
 			echo '<li><a href="'. $url.'&amp;update=layout' .'">'. _("Customize layout") .'</a></li>';
 			$action = 'widget';
