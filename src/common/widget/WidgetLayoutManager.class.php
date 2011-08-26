@@ -241,7 +241,8 @@ class WidgetLayoutManager {
 		$url = "/widgets/widgets.php?owner=".HTTPRequest::instance()->get('owner').
 			"&amp;layout_id=".HTTPRequest::instance()->get('layout_id');
 
-		if ($update_layout = HTTPRequest::instance()->get('update') == 'layout') {
+		$update_layout = (HTTPRequest::instance()->get('update') == 'layout');
+		if ($update_layout) {
 			// customized selected
 			echo '<li><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
 			echo '<li class="current"><a href="'. $url.'&amp;update=layout' .'">'. _("Customize layout") .'</a></li>';
