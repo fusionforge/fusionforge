@@ -41,7 +41,7 @@ use_javascript('/scripts/codendi/LayoutManager.js');
 use_javascript('/scripts/codendi/ReorderColumns.js');
 
 $request =& HTTPRequest::instance();
-$request->set('group_id',$group_id);
+$request->set('group_id', $group_id);
 
 $params['submenu'] = '';
 
@@ -53,6 +53,7 @@ if (session_loggedin()) {
 		exit_error($group->getErrorMessage(), 'home');
 	}
 
+	// Display with the preferred layout/theme of the user (if logged-in)
 	$perm =& $group->getPermission( session_get_user() );
 	if ($perm && is_object($perm) && $perm->isAdmin()) {
 		$sql = "SELECT l.*
