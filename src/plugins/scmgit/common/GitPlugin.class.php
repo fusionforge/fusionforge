@@ -596,6 +596,11 @@ class GitPlugin extends SCMPlugin {
 		system ("rm -rf $tmp") ;
 	}
 
+	/**
+	 * widgets - 'widgets' hook handler
+	 * @param array $params
+	 * @return boolean
+	 */
 	function widgets($params) {
  		require_once('common/widget/WidgetLayoutManager.class.php');
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
@@ -607,6 +612,10 @@ class GitPlugin extends SCMPlugin {
 		return true;
 	}
 
+	/**
+	 * Process the 'widget_instance' hook to create instances of the widgets
+	 * @param array $params
+	 */
 	function myPageBox($params) {
 		global $gfplugins;
 		$user = UserManager::instance()->getCurrentUser();
