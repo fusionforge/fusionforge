@@ -360,7 +360,7 @@ function db_rollback($dbserver = NULL) {
  */
 
 function db_numrows($qhandle) {
-	return @pg_numrows($qhandle);
+	return @pg_num_rows($qhandle);
 }
 
 /**
@@ -369,7 +369,7 @@ function db_numrows($qhandle) {
  *	@param		int		Query result set handle.
  */
 function db_free_result($qhandle) {
-	return @pg_freeresult($qhandle);
+	return @pg_free_result($qhandle);
 }
 
 /**
@@ -381,7 +381,7 @@ function db_free_result($qhandle) {
  *	@return contents of field from database.
  */
 function db_result($qhandle,$row,$field) {
-	return @pg_result($qhandle,$row,$field);
+	return @pg_fetch_result($qhandle,$row,$field);
 }
 
 /**
@@ -390,7 +390,7 @@ function db_result($qhandle,$row,$field) {
  *	@param		int		Query result set handle.
  */
 function db_numfields($lhandle) {
-	return @pg_numfields($lhandle);
+	return @pg_num_fields($lhandle);
 }
 
 /**
@@ -401,7 +401,7 @@ function db_numfields($lhandle) {
  *	@return text name of the field.
  */
 function db_fieldname($lhandle,$fnumber) {
-	return @pg_fieldname($lhandle,$fnumber);
+	return @pg_field_name($lhandle,$fnumber);
 }
 
 /**
@@ -411,7 +411,7 @@ function db_fieldname($lhandle,$fnumber) {
  *	@return int number of affected rows.
  */
 function db_affected_rows($qhandle) {
-	return @pg_cmdtuples($qhandle);
+	return @pg_affected_rows($qhandle);
 }
 
 /**
