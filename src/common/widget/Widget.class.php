@@ -59,8 +59,10 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 
 /**
- * Widget
- */
+* "Codendi" Layout Widget
+*
+*/
+        
 /* abstract */ class Widget {
 
 	var $content_id;
@@ -83,6 +85,10 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 	function getTitle() {
 		return '';
 	}
+	/**
+	 * TODO : Enter description here ...
+	 * @return string
+	 */
 	function getContent() {
 		return '';
 	}
@@ -160,6 +166,11 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 	}
 	function destroy($id) {
 	}
+	/**
+	 * getInstance - Returns an instance of a widget given its name
+	 * @param string $widget_name
+	 * @return Widget instance
+	 */
 	static  function & getInstance($widget_name) {
 		$o = null;
 		switch($widget_name) {
@@ -265,6 +276,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 			default:
 				//$em = EventManager::instance();
 				//$em->processEvent('widget_instance', array('widget' => $widget_name, 'instance' => &$o));
+				// calls the plugin's hook to get an instance of the widget
 				plugin_hook('widget_instance', array('widget' => $widget_name, 'instance' => &$o));
 				break;
 		}
@@ -273,6 +285,11 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 		}
 		return $o;
 	}
+	/**
+	 * getCodendiWidgets - Static
+	 * @param unknown_type $owner_type
+	 * @return multitype:
+	 */
 	static function getCodendiWidgets($owner_type) {
 		switch ($owner_type) {
 			case WidgetLayoutManager::OWNER_TYPE_USER:
@@ -283,6 +300,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:
+				// project home widgets
 				$widgets = array('projectdescription', 'projectmembers', 'projectinfo',
 						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
 						'projectlatestsvncommits', 'projectlatestcvscommits', 'projecttwitterfollow',
@@ -297,6 +315,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 				break;
 		}
 
+		// add widgets of the plugins, declared through hooks
 		$plugins_widgets = array();
 		//$em =& EventManager::instance();
 		//$em->processEvent('widgets', array('codendi_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));

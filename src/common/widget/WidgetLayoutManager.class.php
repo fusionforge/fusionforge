@@ -30,6 +30,10 @@ require_once $gfcommon.'include/preplugins.php';
  */
 class WidgetLayoutManager {
 	const OWNER_TYPE_USER  = 'u';
+	/**
+	 * Layout for project home
+	 * @var string
+	 */
 	const OWNER_TYPE_GROUP = 'g';
 	const OWNER_TYPE_HOME  = 'h';
 
@@ -213,13 +217,14 @@ class WidgetLayoutManager {
 	}
 
 	/**
-	 * displayAvailableWidgets - Display all widget that the user can add to the layout
+	 * displayAvailableWidgets - Display all widgets that the user can add to the layout
 	 *
 	 * @param	int	owner_id
 	 * @param	char	owner_type
 	 * @param	int	layout_id
 	 */
 	function displayAvailableWidgets($owner_id, $owner_type, $layout_id) {
+		// select already used widgets
 		$used_widgets = array();
 		$sql = "SELECT *
 			FROM layouts_contents
@@ -310,6 +315,7 @@ class WidgetLayoutManager {
 			echo '</table>';
 			echo '<input type="submit" id="save" value="'. _("Submit") .'" />';
 		} else {
+			// display the widget selection form
 			$after = '';
 			echo '<table cellpadding="0" cellspacing="0">
 				<tbody>
@@ -453,7 +459,7 @@ class WidgetLayoutManager {
 	}
 
 	/**
-	 * _displayWidgetsSelectionForm
+	 * _displayWidgetsSelectionForm - displays a widget selection form
 	 *
 	 * @param  title
 	 * @param  widgets
@@ -467,6 +473,7 @@ class WidgetLayoutManager {
 			$categs = $this->getCategories($widgets);
 			$widget_rows = array();
 			if (count($categs)) {
+				// display the categories selector in left panel
 				foreach($categs as $c => $ws) {
 					$widget_rows[$c] = '<a class="widget-categ-switcher" href="#widget-categ-'. $c .'"><span>'.  str_replace('-',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))  .'</span></a>';
 				}
@@ -504,6 +511,7 @@ class WidgetLayoutManager {
 				foreach($categs as $c => $ws) {
 					$i = 0;
 					$widget_rows = array();
+					// display widgets of the category
 					foreach($ws as $widget_name => $widget) {
 						$row = '';
 						$row .= '<div class="widget-preview '. $widget->getPreviewCssClass() .'">';
@@ -530,6 +538,13 @@ class WidgetLayoutManager {
 		}
 		return $additionnal_html;
 	}
+	
+	/**
+	 * getCategories - sort the widgets in their different categories
+	 * 
+	 * @param array $widgets
+	 * @return array (category => widgets)
+	 */
 	function getCategories($widgets) {
 		$categ = array();
 		foreach($widgets as $widget_name) {
