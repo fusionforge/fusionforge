@@ -484,6 +484,16 @@ TODO : document Auth plugins :
   Description: what GFUser is logged in?
                it returns a user object in passed $params['results']
 
+  Hook Name  : widgets
+  Parameters : $params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP or WidgetLayoutManager::OWNER_TYPE_USER
+  Description: appends to $params['fusionforge_widgets'] (or 'codendi_widgets') names 
+  			   of widgets it provides depending on the project home or user home context
+
+  Hook Name  : widget_instance
+  Parameters : $params['widget'] provides the widget name
+  Description: returns in $params['instance'] an instance of the new Widget subclass
+
+
 TODO: document content_negociated_user_home and content_negociated_project_home
 
 TODO (nerville) : document display_hierarchy
