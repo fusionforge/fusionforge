@@ -619,6 +619,12 @@ WHICH_VERSION=%{version}-%{release}
 # plugin: oauthprovider
 #%{__ln_s} ../../plugins/oauthprovider/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oauthprovider
 
+for i in utils/list-enabled-plugins.sh --disabled ; do
+    %{__rm} -rf $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/$i
+    %{__rm} -f $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/$i.ini
+    %{__rm} -f $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.d/[0-9][0-9]$i
+done
+
 ### END OF PLUGIN SETUP ###
 
 %pre

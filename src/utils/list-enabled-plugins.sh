@@ -23,8 +23,13 @@ for name in plugins/*/NAME ; do
 	if [ ! -e $dir/etc/$plugin.ini ] ; then
 	    enabled="$enabled $plugin"
 	else
+	    if [ -x /usr/bin/confget ] ; then
+		status=$(confget -f $dir/etc/$plugin.ini plugin_status | sed -r 's/[ \t]*;.*//g')
+	    else
+		status=$(awk -d= '/^[ \t]*plugin_status[ \t]*=/ { print $2 }' $dir/etc/$plugin.ini | sed -r 's/[ ^t]*;.*//g')
+	    fi
 	    # confget returns litteral semi-colons after values, so get rid of comments
-	    if [ "$(confget -f $dir/etc/$plugin.ini plugin_status | sed -r 's/[ ^t]*;.*//g')" = "valid" ] ; then
+	    if [ "$status" = "valid" ] ; then
 		enabled="$enabled $plugin"
 	    else
 		disabled="$disabled $plugin"
