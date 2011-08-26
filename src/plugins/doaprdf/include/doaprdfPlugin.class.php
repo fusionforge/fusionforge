@@ -154,7 +154,7 @@ class doaprdfPlugin extends Plugin {
 				<rdf:RDF
       				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
       				xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-      				xmlns:doap=http://usefulinc.com/ns/doap#">
+      				xmlns:doap="http://usefulinc.com/ns/doap#">
 
       			<doap:Project rdf:about="">
       				<doap:name>'. $projectname .'</doap:name>
