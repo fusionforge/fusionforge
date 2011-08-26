@@ -63,6 +63,8 @@ Requires: php-pecl-zip
  
 # BuildRequires: sed, perl
 
+BuildRequires: python
+
 Provides: gforge = %{version}
 
 %description

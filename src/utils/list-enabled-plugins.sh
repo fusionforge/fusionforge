@@ -23,10 +23,16 @@ for name in plugins/*/NAME ; do
 	if [ ! -e $dir/etc/$plugin.ini ] ; then
 	    enabled="$enabled $plugin"
 	else
-	    if [ -x /usr/bin/confget ] ; then
+	    if [ -x /usr/aubin/confget ] ; then
 		status=$(confget -f $dir/etc/$plugin.ini plugin_status | sed -r 's/[ \t]*;.*//g')
 	    else
-		status=$(awk -d= '/^[ \t]*plugin_status[ \t]*=/ { print $2 }' $dir/etc/$plugin.ini | sed -r 's/[ ^t]*;.*//g')
+		status=$(python 2>/dev/null <<EOF
+import ConfigParser
+config = ConfigParser.ConfigParser()
+config.read("plugins/$plugin/etc/$plugin.ini")
+print config.get("$plugin","plugin_status").strip()
+EOF
+) || status=error		
 	    fi
 	    # confget returns litteral semi-colons after values, so get rid of comments
 	    if [ "$status" = "valid" ] ; then
