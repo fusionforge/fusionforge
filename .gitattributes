@@ -2507,6 +2507,7 @@ src/plugins/scmsvn/packaging/control/131plugin-scmsvn.shortdesc -text
 src/plugins/scmsvn/packaging/dirs/plugin-scmsvn -text
 src/plugins/scmsvn/packaging/docs/plugin-scmsvn -text
 src/plugins/scmsvn/packaging/install/plugin-scmsvn -text
+src/plugins/soapadmin/NAME -text
 src/plugins/soapadmin/README.txt -text
 src/plugins/soapadmin/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/soapadmin/bin/db-upgrade.pl -text svneol=unset#text/x-perl
@@ -2528,6 +2529,7 @@ src/plugins/soapadmin/debian/rules -text
 src/plugins/soapadmin/debian/source/format -text
 src/plugins/soapadmin/etc/httpd.d/62plugin-soapadmin -text
 src/plugins/soapadmin/etc/plugins/soapadmin/config.php -text
+src/plugins/soapadmin/etc/soapadmin.ini -text
 src/plugins/soapadmin/include/soapadminPlugin.class.php -text
 src/plugins/soapadmin/packaging/control/000source -text
 src/plugins/soapadmin/packaging/control/222plugin-soapadmin -text
