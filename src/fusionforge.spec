@@ -136,12 +136,12 @@ your users to search your FusionForge site through external search engines
 which have indexed it. You can define search engines you want to use in
 the configuration file.
 
-%package plugin-forumml
-Summary: Mailman to forums plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php
-%description plugin-forumml
-ForumML integes mailing lists as forums in FusionForge
+# %package plugin-forumml
+# Summary: Mailman to forums plugin for FusionForge
+# Group: Development/Tools
+# Requires: %{name} >= %{version}, php
+# %description plugin-forumml
+# ForumML integes mailing lists as forums in FusionForge
 
 %package plugin-fckeditor
 Summary: FCKEditor plugin for FusionForge
@@ -204,21 +204,21 @@ applications. It is based on Web technologies such as REST, RDF, or AJAX.
 This package provides an OSLC-CM V2 compatible plugin for FusionForge
 tracker system.
 
-%package plugin-projectimport
-Summary: Project Import plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php
-%description plugin-projectimport
-Project import plugin for FusionForge
-This plugin allows the import of a project data previously exported
-with ForgePlucker, or a compatible tool.
+# %package plugin-projectimport
+# Summary: Project Import plugin for FusionForge
+# Group: Development/Tools
+# Requires: %{name} >= %{version}, php
+# %description plugin-projectimport
+# Project import plugin for FusionForge
+# This plugin allows the import of a project data previously exported
+# with ForgePlucker, or a compatible tool.
 
-%package plugin-projects-hierarchy
-Summary: projects-hierarchy plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php
-%description plugin-projects-hierarchy
-This is a projects-hierarchy plugin within FusionForge.
+# %package plugin-projects-hierarchy
+# Summary: projects-hierarchy plugin for FusionForge
+# Group: Development/Tools
+# Requires: %{name} >= %{version}, php
+# %description plugin-projects-hierarchy
+# This is a projects-hierarchy plugin within FusionForge.
 
 %package plugin-quota_management
 Summary: quota_management plugin for FusionForge
@@ -361,26 +361,26 @@ Requires: %{name} >= %{version}, php, postgresql
 %description plugin-globalsearch
 globalsearch plugin for FusionForge. 
 
-%package plugin-mailman
-Summary: Mailman plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php
-%description plugin-mailman
-Mailman plugin for FusionForge. 
+# %package plugin-mailman
+# Summary: Mailman plugin for FusionForge
+# Group: Development/Tools
+# Requires: %{name} >= %{version}, php
+# %description plugin-mailman
+# Mailman plugin for FusionForge. 
 
-%package plugin-mantisbt
-Summary: mantisbt plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php, postgresql
-%description plugin-mantisbt
-mantisbt plugin for FusionForge. 
+# %package plugin-mantisbt
+# Summary: mantisbt plugin for FusionForge
+# Group: Development/Tools
+# Requires: %{name} >= %{version}, php, postgresql
+# %description plugin-mantisbt
+# mantisbt plugin for FusionForge. 
 
-%package plugin-oauthprovider
-Summary: oauthprovider plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php, postgresql
-%description plugin-oauthprovider
-oauthprovider plugin for FusionForge. 
+# %package plugin-oauthprovider
+# Summary: oauthprovider plugin for FusionForge
+# Group: Development/Tools
+# Requires: %{name} >= %{version}, php, postgresql
+# %description plugin-oauthprovider
+# oauthprovider plugin for FusionForge. 
 
 %prep
 %setup -q
@@ -516,7 +516,7 @@ WHICH_VERSION=%{version}-%{release}
 %{__ln_s} ../../plugins/fckeditor/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/fckeditor
 
 # plugin: forumml
-%{__ln_s} ../../plugins/forumml/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/forumml
+# %{__ln_s} ../../plugins/forumml/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/forumml
 
 # plugin: hudson
 %{__ln_s} ../../plugins/hudson/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/hudson
@@ -549,7 +549,7 @@ WHICH_VERSION=%{version}-%{release}
 %{__ln_s} ../../plugins/online_help/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/online_help
 
 # plugin: projects-hierarchy
-%{__ln_s} ../../plugins/projects-hierarchy/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projects-hierarchy
+# %{__ln_s} ../../plugins/projects-hierarchy/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projects-hierarchy
 
 # plugin: quota_management
 %{__ln_s} ../../plugins/quota_management/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/quota_management
@@ -599,7 +599,7 @@ WHICH_VERSION=%{version}-%{release}
 %{__ln_s} ../../plugins/oslc/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oslc
 
 # plugin : projectimport
-%{__ln_s} ../../plugins/projectimport/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectimport
+# %{__ln_s} ../../plugins/projectimport/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectimport
 
 # plugin: projectlabels
 %{__ln_s} ../../plugins/projectlabels/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectlabels
@@ -611,10 +611,10 @@ WHICH_VERSION=%{version}-%{release}
 %{__ln_s} ../../plugins/globalsearch/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/globalsearch
 
 # plugin: mailman
-%{__ln_s} ../../plugins/mailman/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mailman
+# %{__ln_s} ../../plugins/mailman/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mailman
 
 # plugin: mantisbt
-%{__ln_s} ../../plugins/mantisbt/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mantisbt
+# %{__ln_s} ../../plugins/mantisbt/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mantisbt
 
 # plugin: oauthprovider
 #%{__ln_s} ../../plugins/oauthprovider/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oauthprovider
@@ -886,10 +886,10 @@ fi
 %{FORGE_DIR}/plugins/fckeditor
 %{FORGE_DIR}/www/plugins/fckeditor
 
-%files plugin-forumml
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/forumml.ini
-%{FORGE_DIR}/plugins/forumml
-%{FORGE_DIR}/www/plugins/forumml
+# %files plugin-forumml
+# %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/forumml.ini
+# %{FORGE_DIR}/plugins/forumml
+# %{FORGE_DIR}/www/plugins/forumml
 
 %files plugin-gravatar
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/gravatar.ini
@@ -932,16 +932,16 @@ fi
 %{FORGE_DIR}/plugins/oslc
 %{FORGE_DIR}/www/plugins/oslc
 
-%files plugin-projectimport
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projectimport.ini
-%{FORGE_DIR}/plugins/projectimport
-%{FORGE_DIR}/www/plugins/projectimport
+# %files plugin-projectimport
+# %config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
+# %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projectimport.ini
+# %{FORGE_DIR}/plugins/projectimport
+# %{FORGE_DIR}/www/plugins/projectimport
 
-%files plugin-projects-hierarchy
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projects-hierarchy.ini
-%{FORGE_DIR}/plugins/projects-hierarchy
-%{FORGE_DIR}/www/plugins/projects-hierarchy
+# %files plugin-projects-hierarchy
+# %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projects-hierarchy.ini
+# %{FORGE_DIR}/plugins/projects-hierarchy
+# %{FORGE_DIR}/www/plugins/projects-hierarchy
 
 %files plugin-quota_management
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/quota_management.ini
@@ -1039,29 +1039,29 @@ fi
 %{FORGE_DIR}/plugins/globalsearch
 %{FORGE_DIR}/www/plugins/globalsearch
 
-%files plugin-mailman
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/mailman/
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mailman.ini
-%{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
-%{FORGE_CONF_DIR}/httpd.d/62plugin-list-mailman
-%{FORGE_CONF_DIR}/httpd.d/200list.vhost
-%{FORGE_CONF_DIR}/httpd.d/20list
-%{FORGE_CONF_DIR}/httpd.d/20zlist.vhost
-%{FORGE_CONF_DIR}/httpd.d/21list.vhost.ssl
-%{FORGE_DIR}/plugins/mailman
-%{FORGE_DIR}/www/plugins/mailman
+# %files plugin-mailman
+# %config(noreplace) %{FORGE_CONF_DIR}/plugins/mailman/
+# %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mailman.ini
+# %{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
+# %{FORGE_CONF_DIR}/httpd.d/62plugin-list-mailman
+# %{FORGE_CONF_DIR}/httpd.d/200list.vhost
+# %{FORGE_CONF_DIR}/httpd.d/20list
+# %{FORGE_CONF_DIR}/httpd.d/20zlist.vhost
+# %{FORGE_CONF_DIR}/httpd.d/21list.vhost.ssl
+# %{FORGE_DIR}/plugins/mailman
+# %{FORGE_DIR}/www/plugins/mailman
 
-%files plugin-mantisbt
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/mantisbt/
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mantisbt.ini
-%{FORGE_DIR}/plugins/mantisbt
-%{FORGE_DIR}/www/plugins/mantisbt
+# %files plugin-mantisbt
+# %config(noreplace) %{FORGE_CONF_DIR}/plugins/mantisbt/
+# %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mantisbt.ini
+# %{FORGE_DIR}/plugins/mantisbt
+# %{FORGE_DIR}/www/plugins/mantisbt
 
-%files plugin-oauthprovider
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/oauthprovider.ini
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/oauthprovider/
-%{FORGE_CONF_DIR}/httpd.d/62plugin-oauthprovider
-%{FORGE_DIR}/plugins/oauthprovider
+# %files plugin-oauthprovider
+# %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/oauthprovider.ini
+# %config(noreplace) %{FORGE_CONF_DIR}/plugins/oauthprovider/
+# %{FORGE_CONF_DIR}/httpd.d/62plugin-oauthprovider
+# %{FORGE_DIR}/plugins/oauthprovider
 
 %changelog
 * Tue May 17 2011 - Thorsten Glaser <t.glaser@tarent.de> - 5.0.50-2
