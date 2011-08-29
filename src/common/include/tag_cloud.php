@@ -96,6 +96,7 @@ function tag_cloud($params = '') {
 
 	$return = '';
 
+	// count tag occurrence
 	$res = db_query_params ('SELECT project_tags.name,project_tags.group_id
 					 FROM project_tags, groups
 					 WHERE project_tags.group_id = groups.group_id
@@ -104,13 +105,15 @@ function tag_cloud($params = '') {
 	$tag_count = array();
 	while ($row = db_fetch_array($res)) {
 		if (forge_check_perm ('project_read', $row['group_id'])) {
-			if (!isset ($tag_count[$row['name']])) {
-				$tag_count[$row['name']] = 0;
+			$tagname = $row['name'];
+			if (!isset ($tag_count[$tagname])) {
+				$tag_count[$tagname] = 0;
 			}
-			$tag_count[$row['name']]++;
+			$tag_count[$tagname]++;
 		}
 	}
 
+	// order tags by popularity
 	$count_to_tags = array();
 	foreach ($tag_count as $name => $count) {
 		if (!isset($count_to_tags[$count])) {
