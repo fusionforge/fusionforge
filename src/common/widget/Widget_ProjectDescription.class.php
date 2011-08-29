@@ -37,7 +37,7 @@ class Widget_ProjectDescription extends Widget {
         $group_id = $request->get('group_id');
         $pm = ProjectManager::instance();
         $project = $pm->getProject($group_id);
-        $hp = Codendi_HTMLPurifier::instance();
+        //$hp = Codendi_HTMLPurifier::instance();
 
 	$pluginManager = plugin_manager_get_object();
 		if (! $pluginManager->PluginIsInstalled('blocks') || !plugin_hook ("blocks", 'summary_description')) {
