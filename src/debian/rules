@@ -20,6 +20,8 @@ WHICH_VERSION:=$(shell dpkg-parsechangelog | sed -n '/^Version: /s///p')
 
 SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' -e 's/@OLDPACKAGE@/$(OLDPACKAGE)/g' -e 's/@FORGENAME@/$(FORGENAME)/g'
 
+DH=dh --with quilt
+
 default:
 	@echo $(PACKAGE)
 
@@ -121,7 +123,7 @@ debian/po/%:
 	cat $(patsubst debian/po/%,debian/dsf-po/%,$@) | $(SED_REPLACE) > $@
 
 build: remove-binary-files debian/po/templates.pot conffiles
-	dh --with quilt $@
+	$(DH) $@
 
 # Build man pages from Docbook sources
 	cat debian/dsf-in/config.sgml | $(SED_REPLACE) > debian/$(PACKAGE)-config.sgml
@@ -145,7 +147,7 @@ build: remove-binary-files debian/po/templates.pot conffiles
 	perl $(CURDIR)/deb-specific/dsf-helper.pl
 
 clean: remove-binary-files
-	dh --with quilt $@
+	$(DH) $@
 
 	rm -f $(CURDIR)/debian/*.cron.d
 	rm -f $(CURDIR)/debian/*.dirs
@@ -163,7 +165,7 @@ clean: remove-binary-files
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 
 install: build
-	dh --with quilt $@
+	$(DH) $@
 
 	sed \
 	    -e 's!@PKGNAME@!${WHICH_FORGE}!g' \
@@ -220,4 +222,4 @@ install: build
 binary: install
 
 %:
-	dh --with quilt $@
+	$(DH) $@
