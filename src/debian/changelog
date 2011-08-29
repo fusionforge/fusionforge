@@ -1,4 +1,4 @@
-fusionforge (5.1-4+) UNRELEASED; urgency=low
+fusionforge (5.1-5) unstable; urgency=low
 
   [ Olivier Berger ]
   * Better document in README.source how the package is build vs upstream
@@ -16,7 +16,7 @@ fusionforge (5.1-4+) UNRELEASED; urgency=low
     its author.
   * Tweaked package relationships to help transitioning to testing.
 
- -- Roland Mas <lolando@debian.org>  Mon, 29 Aug 2011 17:46:15 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 29 Aug 2011 17:49:00 +0200
 
 fusionforge (5.1-4) unstable; urgency=low
 
