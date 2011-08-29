@@ -25,6 +25,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once('common/include/ProjectManager.class.php');
+
 class doaprdfPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
@@ -144,24 +146,46 @@ class doaprdfPlugin extends Plugin {
 	 * @param unknown_type $params
 	 */
 	function content_negociated_project_home (&$params) {
+		global $group_id;	
+	
 		$projectname = $params['groupname'];
 		$accept = $params['accept'];
 
 		if($accept == 'application/rdf+xml') {
-				$params['content_type'] = 'application/rdf+xml';
+			$pm = ProjectManager::instance();
+			$project = $pm->getProject($group_id);
+			$project_description = $project->getDescription();
+			$tags_list = NULL;
+			if (forge_get_config('use_project_tags')) {
+				$group = group_get_object($group_id);
+				$tags_list = $group->getTags();
+			}
+			
+			$params['content_type'] = 'application/rdf+xml';
 
-				$params['content'] = '<?xml version="1.0"?>
+			$xml = '<?xml version="1.0"?>
 				<rdf:RDF
       				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
       				xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-      				xmlns:doap="http://usefulinc.com/ns/doap#">
+      				xmlns:doap="http://usefulinc.com/ns/doap#"
+      				xmlns:dcterms="http://purl.org/dc/terms/">
 
       			<doap:Project rdf:about="">
-      				<doap:name>'. $projectname .'</doap:name>
-      			</doap:Project>
-
+      				<doap:name>'. $projectname .'</doap:name>';
+			if($project_description) {
+				$xml .= '<doap:shortdesc>'. $project_description . '</doap:shortdesc>';
+			}
+			if($tags_list) {
+				$tags = split(', ',$tags_list);
+				foreach($tags as $tag) {
+					$xml .= '<dcterms:subject>'.$tag.'</dcterms:subject>';
+				}
+			}
+			
+			$xml .='</doap:Project>
     			</rdf:RDF>';
-
+			
+			$params['content'] = $xml;
 		}
 	}
 }
