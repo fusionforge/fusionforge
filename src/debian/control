@@ -309,6 +309,7 @@ Description: Contribution tracker plugin for FusionForge
 Package: fusionforge-plugin-extratabs
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
+Provides: gforge-plugin-extratabs
 Conflicts: gforge-plugin-extratabs (<< 5.0.51-2)
 Replaces: gforge-plugin-extratabs (<< 5.0.51-2)
 Description: Extratabs plugin for FusionForge
@@ -324,6 +325,7 @@ Description: Extratabs plugin for FusionForge
 Package: fusionforge-plugin-globalsearch
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${misc:Depends}
+Provides: gforge-plugin-globalsearch
 Conflicts: gforge-plugin-globalsearch (<< 5.0.51-2)
 Replaces: gforge-plugin-globalsearch (<< 5.0.51-2)
 Description: Globalsearch plugin for FusionForge
@@ -367,6 +369,7 @@ Description: collaborative development tool - Hudson plugin
 Package: fusionforge-plugin-mediawiki
 Architecture: all
 Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, postgresql-contrib | mysql-server, mediawiki (>= 1:1.15~), php5-cli, php5-gd, ${misc:Depends}
+Provides: gforge-plugin-mediawiki
 Conflicts: gforge-plugin-mediawiki (<< 5.0.51-2)
 Replaces: gforge-plugin-mediawiki (<< 5.0.51-2)
 Description: Mediawiki plugin for FusionForge
@@ -398,8 +401,8 @@ Description: OSLC-CM compatible plugin for FusionForge tracker system.
 Package: fusionforge-plugin-projectlabels
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
-Conflicts: gforge-plugin-projectlabels
-Replaces: gforge-plugin-projectlabels
+Conflicts: gforge-plugin-projectlabels (<< 5.0.51-2)
+Replaces: gforge-plugin-projectlabels (<< 5.0.51-2)
 Provides: gforge-plugin-projectlabels
 Description: Projectlabels plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
@@ -482,7 +485,7 @@ Description: collaborative development tool - Darcs plugin
 Package: fusionforge-plugin-scmgit
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git (>= 1:1.7) | git-core, gitweb (>= 1:1.7), php5-cli, ${misc:Depends}
-Provides: fusionforge-plugin-scm
+Provides: fusionforge-plugin-scm, fusionforge-plugin-scmgit
 Conflicts: gforge-plugin-scmgit (<< 5.0.51-2)
 Replaces: gforge-plugin-scmgit (<< 5.0.51-2)
 Description: collaborative development tool - Git plugin

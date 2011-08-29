@@ -14,8 +14,9 @@ fusionforge (5.1-4+) UNRELEASED; urgency=low
     requested by the PostgreSQL maintainer.
   * Switch from dpatch to quilt, since the former is being deprecated by
     its author.
+  * Tweaked package relationships to help transitioning to testing.
 
- -- Roland Mas <lolando@debian.org>  Mon, 22 Aug 2011 16:23:07 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 29 Aug 2011 17:46:15 +0200
 
 fusionforge (5.1-4) unstable; urgency=low
 
