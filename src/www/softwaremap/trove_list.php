@@ -59,29 +59,7 @@ if (db_numrows($res_trove_cat) < 1) {
 echo '<div id="project-tree" class="underline-link">' . "\n";
 echo '<h2>' . _('Project tree') . '</h2>' . "\n";
 
-// TODO : move part of this code to a proper hook managed by projects-hierarchy plugin instead of having such checks in the general code
-// display_hierarchy hook seems to be ready just for this
-$res1 = db_query_params('SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = $1 and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id',
-	array('projects-hierarchy'));
-if ($res1) {
-	if (db_numrows($res1) > 0) {
-		$res2 = db_query_params('SELECT count(*) as used FROM plugin_projects_hierarchy_relationship',array());
-		if ($res2)
-			$row = db_fetch_array($res2);
-			if ($row['used']) {
-				$hierarchy_used = true;
-			}
-	}
-}
-if (isset($hierarchy_used)) {
-	$hierarMenuTitle[] = _('Per Category');
-	$hierarMenuTitle[] = _('Per Hierarchy');
-	$hierarMenuAttr[] = array('title' => _('Browse per category the available projects. Some projects might not appear here they do not choose any categories'), 'class' => 'tabtitle-nw');
-	$hierarMenuAttr[] = array('title' => _('Browse per hierarchy. Projects can share relationship between projects, as father and sons'), 'class' => 'tabtitle');
-	$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=c';
-	$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=h';
-	echo ($HTML->subMenu($hierarMenuTitle, $hierarMenuUrl, $hierarMenuAttr));
-}
+plugin_hook('display_hierarchy_submenu');
 
 if ( $cat === 'c' ) {
 	$row_trove_cat = db_fetch_array($res_trove_cat);
