@@ -63,18 +63,21 @@ foreach ($members as $user) {
 	echo '<tr '.$HTML->boxGetAltRowStyle($i++).'>'."\n";
 	// RDFa
 	$member_uri = util_make_url_u ($user->getUnixName(),$user->getID());
+	echo "		<td>\n";
 	print '<div about="'. $member_uri .'" typeof="sioc:UserAccount">';
 	print '<span rev="sioc:has_member" resource="'. $usergroup_stdzd_uri .'"></span>';
 	print '<span property="sioc:name" content="'. $user->getUnixName() .'"></span>';
 	if ( RBACEngine::getInstance()->isActionAllowedForUser($user,'project_admin',$project->getID())) {
 //                echo '<div rev="doap:developer" typeof="doap:Project" xmlns:doap="http://usefulinc.com/ns/doap#">';
-		echo '		<td><strong>'.$user->getRealName().'</strong></td>';
+		echo '<strong>'.$user->getRealName().'</strong>';
 //                echo '</div>';
 	} else {
 //		echo '<div rev="doap:maintainer" typeof="doap:Project" xmlns:doap="http://usefulinc.com/ns/doap#">';
-		echo '		<td>'.$user->getRealName().'</td>';
+		echo $user->getRealName();
 //                echo '</div>';
 	}
+	echo "</div>\n";
+	echo '</td>';
 
 	/*
         print '<span property ="dc:Identifier" content="'.$user->getID().'">';
@@ -101,7 +104,6 @@ foreach ($members as $user) {
 	if(forge_get_config('use_people')) {
 		echo '<td align="center">'.util_make_link ('/people/viewprofile.php?user_id='.$user->getID(),_('View')).'</td>';
 	}
-	print '</div>';
    	echo '</tr>';
 }
 // end of community member description block
