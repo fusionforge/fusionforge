@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-24 14:23+0200\n"
-"PO-Revision-Date: 2011-08-24 14:44+0200\n"
+"PO-Revision-Date: 2011-08-30 14:26+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -50,9 +50,8 @@ msgid "Error Adding Document: No Storage API"
 msgstr "Erreur lors de l'ajoud d'un document : pas d'API de stockage."
 
 #: common/docman/Document.class.php:201
-#, fuzzy
 msgid "Error fetching Document"
-msgstr "Erreur lors de la suppression d'un document :"
+msgstr "Erreur lors de la récupération d'un document."
 
 #: common/docman/Document.class.php:220
 msgid "Document:: Invalid docid"
@@ -67,14 +66,12 @@ msgid "Unable To Add Monitor"
 msgstr "Impossible d'ajouter la surveillance"
 
 #: common/docman/Document.class.php:612
-#, fuzzy
 msgid "Document lock failed"
-msgstr "Titre du document"
+msgstr "Erreur lors du verrouillage du document :"
 
 #: common/docman/Document.class.php:640
-#, fuzzy
 msgid "Document reservation failed"
-msgstr "Action non permise."
+msgstr "Erreur lors de la réservation du document :"
 
 #: common/docman/Document.class.php:760
 msgid "No Storage API"
@@ -119,50 +116,42 @@ msgid "Error Deleting Document:"
 msgstr "Erreur lors de la suppression d'un document :"
 
 #: common/docman/Document.class.php:827
-#, fuzzy
 msgid "Error Deleting Document: No Storage API"
-msgstr "Erreur lors de la suppression de documents : "
+msgstr "Erreur lors de la suppression de documents : pas d'API de stockage."
 
 #: common/docman/DocumentFactory.class.php:57
-#, fuzzy
 msgid "ProjectGroup:: No Valid Group Object"
-msgstr "Forum:: Pas d'objet groupe valide"
+msgstr "ProjectGroup:: Pas d'objet groupe valide"
 
 #: common/docman/DocumentFactory.class.php:156
 msgid "No Documents Found"
 msgstr "Aucun document trouvé."
 
 #: common/docman/DocumentGroup.class.php:60
-#, fuzzy
 msgid "Document Directory: No Valid Project"
-msgstr "Forum:: Pas d'objet groupe valide"
+msgstr "Répertoire de document : Pas d'objet groupe valide"
 
 #: common/docman/DocumentGroup.class.php:65
-#, fuzzy
 msgid "Document Directory:"
-msgstr "Titre du document"
+msgstr "Répertoire de document :"
 
 #: common/docman/DocumentGroup.class.php:98
-#, fuzzy
 msgid "Name is required"
-msgstr "Ce nom est réservé."
+msgstr "Un nom est requis."
 
 #: common/docman/DocumentGroup.class.php:107
 #: common/docman/DocumentGroup.class.php:279
-#, fuzzy
 msgid "Invalid Document Directory parent ID"
-msgstr "DocumentGroup: ID parent non valable."
+msgstr "Identifiant du répertoire parent invalide."
 
 #: common/docman/DocumentGroup.class.php:128
 #: common/docman/DocumentGroup.class.php:292
-#, fuzzy
 msgid "Directory name already exists"
-msgstr "Le nom du groupe est déjà pris."
+msgstr "Ce nom de répertoire est déjà pris."
 
 #: common/docman/DocumentGroup.class.php:141
-#, fuzzy
 msgid "Error Adding Directory:"
-msgstr "Erreur lors de l'ajout d'un document :"
+msgstr "Erreur lors de l'ajout d'un répertoire de document :"
 
 #: common/docman/DocumentGroup.class.php:202
 #, fuzzy
@@ -2621,7 +2610,7 @@ msgstr "Documentations"
 #: common/include/pre.php:269
 #, php-format
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
-msgstr ""
+msgstr "La taille des données fournies (%1$s) dépasse la limite autorisée (%2$s)."
 
 #: common/include/rbac_texts.php:43 common/include/rbac_texts.php:55
 #: common/include/rbac_texts.php:58 common/include/rbac_texts.php:60
@@ -4422,6 +4411,18 @@ msgid ""
 "you want, but a boxTop has to be closed by a boxBottom and a boxHeader has "
 "to be closed by a boxFooter.</p>"
 msgstr ""
+"<p>Vous pouvez créer des boîtes comme celles de la page de\n"
+"résumé, en vous inspirant dans le contenu des exemples suivants :</p>\n"
+"<ul><li>{boxTop Coucou}: la partie haute de la boîte utilisera Coucou\n"
+"comme titre.</li>\n"
+"<li>{boxMiddle Blabla}: la boîte comportera Blabla comme titre\n"
+"intermédiaire (optionnel).</li>\n"
+"<li>{boxBottom}: fin de boîte.</li></ul><p />\n"
+"<ul><li>{boxHeader}: en-tête avant un texte.</li>\n"
+"<li>{boxFooter}: pied-de-page après un texte.</li></ul>\n"
+"<p>Vous pouvez créer autant de boîtes que vous souhaitez, mais à\n"
+"chaque boxTop doit correspondre un boxBottom, et à chaque boxHeader\n"
+"doit correspondre un boxFooter.</p>"
 
 #: plugins/blocks/www/index.php:390
 msgid "Block configuration saved"
@@ -5540,7 +5541,7 @@ msgstr "Greffon Gravatar"
 #: plugins/hudson/include/HudsonTestResult.class.php:39
 #, php-format
 msgid "Wrong Job URL: %s"
-msgstr ""
+msgstr "Mauvaise URL de tâche Hudson : %s"
 
 #: plugins/hudson/include/HudsonBuild.class.php:61
 #: plugins/hudson/include/HudsonJob.class.php:91
@@ -5571,9 +5572,8 @@ msgid "In progress"
 msgstr "En cours"
 
 #: plugins/hudson/include/HudsonJob.class.php:145
-#, fuzzy
 msgid "Unstable"
-msgstr "Activée"
+msgstr "Instable"
 
 #: plugins/hudson/include/HudsonJob.class.php:153
 msgid "Failure"
@@ -5609,14 +5609,13 @@ msgstr "Hudson"
 #: plugins/hudson/include/hudson.class.php:60
 #: plugins/hudson/include/hudson.class.php:86
 msgid "Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)"
-msgstr ""
+msgstr "URL manquante pour la tâche Hudson (par exemple http://myCIserver:8080/hudson/job/MyJob)."
 
 #: plugins/hudson/include/hudson.class.php:64
 #: plugins/hudson/include/hudson.class.php:76
 #: plugins/hudson/include/hudson.class.php:93
 #: plugins/hudson/include/hudson.class.php:106
 #: plugins/hudson/include/hudson.class.php:130
-#, fuzzy
 msgid "Permission Denied"
 msgstr "Permission refusée"
 
@@ -5624,7 +5623,7 @@ msgstr "Permission refusée"
 #: plugins/hudson/include/hudson.class.php:89
 #: plugins/hudson/include/hudson.class.php:102
 msgid "Missing Hudson job ID"
-msgstr ""
+msgstr "Numéro de tâche Hudson manquant."
 
 #: plugins/hudson/include/hudson.class.php:134
 #, fuzzy
@@ -5643,26 +5642,26 @@ msgstr "Impossible d'ajouter la surveillance"
 
 #: plugins/hudson/include/hudsonActions.class.php:55
 msgid "Hudson job added."
-msgstr ""
+msgstr "Tâche Hudson ajoutée."
 
 #: plugins/hudson/include/hudsonActions.class.php:56
 #: plugins/hudson/include/hudsonActions.class.php:85
 msgid "Please wait 1 hour for triggers to be updated."
-msgstr ""
+msgstr "Veuillez attendre une heure pour que les déclencheurs soient activés."
 
 #: plugins/hudson/include/hudsonActions.class.php:71
 msgid "Spaces are not allowed in job name. They were replaced by \"_\"."
 msgstr ""
+"Les caractères d'espacement ne sont pas autorisés dans les noms de\n"
+"tâches. Ils ont été remplacés par « _ »."
 
 #: plugins/hudson/include/hudsonActions.class.php:82
-#, fuzzy
 msgid "Unable to update Hudson job"
-msgstr "Incapable de mettre à jour les favoris"
+msgstr "Erreur lors de la mise à jour de la tâche Hudson."
 
 #: plugins/hudson/include/hudsonActions.class.php:84
-#, fuzzy
 msgid "Hudson job updated."
-msgstr "Nom du champ modifié"
+msgstr "Tâche Hudson modifiée."
 
 #: plugins/hudson/include/hudsonActions.class.php:95
 #, fuzzy
@@ -5676,15 +5675,15 @@ msgstr "Supprimé avec succès (sauf la configuration)"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:202
 msgid "Hudson Build"
-msgstr ""
+msgstr "Construction Hudson"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:203
 msgid "Hudson Job"
-msgstr ""
+msgstr "Tâche Hudson"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:233
 msgid "Build performed on:"
-msgstr ""
+msgstr "Date de la construction :"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:234
 #: www/export/rssAboTask.php:145
@@ -5748,7 +5747,7 @@ msgstr "Aide"
 
 #: plugins/hudson/include/hudsonViews.class.php:212
 msgid "Back to jobs list"
-msgstr ""
+msgstr "Retour à la liste des tâches"
 
 #: plugins/hudson/include/hudsonViews.class.php:214
 #, fuzzy
@@ -5764,7 +5763,7 @@ msgstr "URL de l'acteur :"
 #: plugins/hudson/include/hudsonViews.class.php:221
 #: plugins/hudson/include/hudsonViews.class.php:398
 msgid "eg: http://myCIserver/hudson/job/myJob"
-msgstr ""
+msgstr "exemple : http://myCIserver/hudson/job/myJob"
 
 #: plugins/hudson/include/hudsonViews.class.php:224
 #, fuzzy
@@ -5774,7 +5773,7 @@ msgstr "Nom du rôle :"
 #: plugins/hudson/include/hudsonViews.class.php:228
 #, php-format
 msgid "Name (with no space) used to make a reference to this job. Eg: job #%s"
-msgstr ""
+msgstr "Nom (sans espace) utilisé pour faire référence à cette tâche."
 
 #: plugins/hudson/include/hudsonViews.class.php:232
 #, fuzzy
@@ -5789,7 +5788,7 @@ msgstr "Liens vers les envois CVS pertinents"
 #: plugins/hudson/include/hudsonViews.class.php:254
 #: plugins/hudson/include/hudsonViews.class.php:413
 msgid "with (optional) token:"
-msgstr ""
+msgstr "utiliser un jeton (optionnel) :"
 
 #: plugins/hudson/include/hudsonViews.class.php:262
 #, fuzzy
@@ -5819,45 +5818,44 @@ msgstr "NVR&nbsp;"
 
 #: plugins/hudson/include/hudsonViews.class.php:295
 msgid "SVN trigger"
-msgstr ""
+msgstr "Déclencheur SVN"
 
 #: plugins/hudson/include/hudsonViews.class.php:298
 msgid "CVS trigger"
-msgstr ""
+msgstr "Déclencheur CVS"
 
 #: plugins/hudson/include/hudsonViews.class.php:320
 #, php-format
 msgid "Show job %s"
-msgstr ""
+msgstr "Montrer la tâche %s"
 
 #: plugins/hudson/include/hudsonViews.class.php:322
 #: plugins/hudson/include/hudsonViews.class.php:327
 #, php-format
 msgid "Show build #%s of job %s"
-msgstr ""
+msgstr "Montrer la construction n°%s de la tâche %s"
 
 #: plugins/hudson/include/hudsonViews.class.php:322
 #: plugins/hudson/include/hudsonViews.class.php:327
 msgid "build"
-msgstr ""
+msgstr "construction"
 
 #: plugins/hudson/include/hudsonViews.class.php:331
 #, php-format
 msgid "RSS feed of all builds for %s job"
-msgstr ""
+msgstr "Flux RSS de toutes les constructions de la tâche %s"
 
 #: plugins/hudson/include/hudsonViews.class.php:335
 msgid "SVN commit will trigger a build"
-msgstr ""
+msgstr "Une validation SVN déclenchera une construction."
 
 #: plugins/hudson/include/hudsonViews.class.php:342
 msgid "CVS commit will trigger a build"
-msgstr ""
+msgstr "Une validation CVS déclenchera une construction."
 
 #: plugins/hudson/include/hudsonViews.class.php:360
-#, fuzzy
 msgid "Edit this job"
-msgstr "[Modifier ce label]"
+msgstr "Modifier cette tâche"
 
 #: plugins/hudson/include/hudsonViews.class.php:366
 #, fuzzy, php-format
@@ -5874,19 +5872,20 @@ msgid ""
 "No Hudson jobs associated with this project. To add a job, select the link "
 "just below."
 msgstr ""
+"Ce projet n'a pas encore de tâches Hudson associées.  Pour en ajouter,\n"
+"utilisez le lien ci-dessous."
 
 #: plugins/hudson/include/hudsonViews.class.php:389
-#, fuzzy
 msgid "Add job"
-msgstr "Ajouter un onglet"
+msgstr "Ajouter une tâche"
 
 #: plugins/hudson/include/hudsonViews.class.php:402
 msgid "Trigger a build after commits:"
-msgstr ""
+msgstr "Déclencher une construction après validation :"
 
 #: plugins/hudson/include/hudsonViews.class.php:404
 msgid "SVN"
-msgstr ""
+msgstr "SVN"
 
 #: plugins/hudson/include/hudsonViews.class.php:408
 #: www/project/stats/project_stats_utils.php:83
@@ -5898,12 +5897,11 @@ msgstr "CVS"
 #: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:46
 #, php-format
 msgid "%s Builds History"
-msgstr ""
+msgstr "Historique des constructions de %s"
 
 #: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:48
-#, fuzzy
 msgid "Builds History"
-msgstr "Historique"
+msgstr "Historique des constructions"
 
 #: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:54
 msgid ""
@@ -5911,15 +5909,17 @@ msgid ""
 "each build of the list, you can see the build number, the status and the "
 "date the build has been scheduled."
 msgstr ""
+"Affiche l'historique de construction de la tâche sélectionnée, sous la\n"
+"forme d'un flux RSS. Pour chaque construction de la liste sont listés\n"
+"son numéro, son résultat et sa date de déclenchement."
 
 #: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:89
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:106
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:102
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:107
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:102
-#, fuzzy
 msgid "Job not found."
-msgstr "Forum non trouvé"
+msgstr "Tâche non trouvée"
 
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:49
 #, fuzzy, php-format
@@ -5935,17 +5935,16 @@ msgstr "Mes éléments"
 msgid ""
 "Show the last successfully published artifacts of one job. To display "
 "something, your job needs to publish artifacts."
-msgstr ""
+msgstr "Affiche les derniers artefacts publiés par une tâche (si la tâche en publie)."
 
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:46
 #, php-format
 msgid "%s Last Builds"
-msgstr ""
+msgstr "%s dernières constructions"
 
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:48
-#, fuzzy
 msgid "Last Builds"
-msgstr "La dernière semaine"
+msgstr "Dernières constructions"
 
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:54
 msgid ""
@@ -5953,22 +5952,25 @@ msgid ""
 "and the weather report. The trend is represented by a weather report (sun, "
 "thunder, etc.) meaning that the trend is good or not."
 msgstr ""
+"Affiche les dernières constructions pour une tâche (la dernière, la\n"
+"dernière réussie, la dernière en échec) et la tendance.  La\n"
+"tendance est représentée comme un bulletin météo (soleil, orages,\n"
+"etc.) selon qu'elle est généralement bonne ou pas."
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:49
 #, php-format
 msgid "%1$s Test Results (%2$s / %3$s)"
-msgstr ""
+msgstr "Résultats des tests de %1$s (%2$s / %3$s)"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:52
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s Test Results"
-msgstr "Résultats suivants"
+msgstr "Résultats des tests de %1$s"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:54
 #: plugins/hudson/www/test_result_pie_chart.php:19
-#, fuzzy
 msgid "Test Results"
-msgstr "Résultats suivants"
+msgstr "Résultats des tests"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:60
 msgid ""
@@ -5976,23 +5978,25 @@ msgid ""
 "something, your job needs to execute tests and publish them. The result is "
 "shown on a pie chart."
 msgstr ""
+"Affiche les résultats des tests de la dernière construction pour la\n"
+"tâche sélectionnée.  La tâche doit pour cela exécuter des tests et\n"
+"publier les résultats.  Ceux-ci sont représentés sous forme de\n"
+"diagramme-camembert."
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:105
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:100
-#, fuzzy
 msgid "No test found for this job."
-msgstr "Aucun résultat trouvé pour %1$s."
+msgstr "Aucun test trouvé pour cette tâche."
 
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:47
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:94
 #, php-format
 msgid "%s Test Result Trend"
-msgstr ""
+msgstr "Tendance des résultats de tests pour %s"
 
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:49
-#, fuzzy
 msgid "Test Result Trend"
-msgstr "Résultats suivants"
+msgstr "Tendance des résultats de tests"
 
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:54
 msgid ""
@@ -6001,20 +6005,24 @@ msgid ""
 "successfull) along  time. The number of tests is increasing while the number "
 "of build and commits are increasing too."
 msgstr ""
+"Affiche la tendance des résultats de tests pour la tâche sélectionnée,\n"
+"qui doit avoir des tests.  Le graphique représente l'évolution dans le\n"
+"temps du nombre de tests réussis et en échec.  Le nombre de tests\n"
+"s'accroît en même temps que le nombre de constructions et de validations."
 
 #: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:85
 #: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:63
 msgid "One or more failure or pending job"
-msgstr ""
+msgstr "Au moins un échec, ou tâche en attente."
 
 #: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:88
 #: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:66
 msgid "One or more unstable job"
-msgstr ""
+msgstr "Au moins une tâche instable."
 
 #: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:101
 msgid "My Hudson Jobs"
-msgstr ""
+msgstr "Mes tâches Hudson"
 
 #: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:106
 msgid ""
@@ -6022,41 +6030,45 @@ msgid ""
 "can of course select the jobs you wish to display by selecting the "
 "preferences link of the widget."
 msgstr ""
+"Affiche un résumé de toutes les tâches de tous les projets dont vous\n"
+"êtes membre.  Vous pouvez bien sûr choisir les tâches à afficher, en\n"
+"utilisant le lien de préférences du widget."
 
 #: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:142
-#, fuzzy
 msgid "Monitored jobs:"
-msgstr "Forums que vous surveillez"
+msgstr "Tâches que vous surveillez :"
 
 #: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:158
 msgid "Use global status:"
-msgstr ""
+msgstr "Utiliser le statut global :"
 
 #: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:79
-#, fuzzy
 msgid "Hudson Jobs"
-msgstr "Nouveau poste"
+msgstr "Tâches Hudson"
 
 #: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:84
 msgid ""
 "Shows an overview of all the jobs associated with this project. You can "
 "always choose the ones you want to display in the widget (preferences link)."
 msgstr ""
+"Affiche un résumé de toutes les tâches associées à ce projet.  Vous\n"
+"pouvez toujours choisir les tâches à afficher en utilisant le lien de\n"
+"préférences du widget."
 
 #: plugins/hudson/www/test_result_pie_chart.php:22
-#, fuzzy, php-format
+#, php-format
 msgid "Pass (%s)"
-msgstr "%s (%s)"
+msgstr "Succès (%s)"
 
 #: plugins/hudson/www/test_result_pie_chart.php:23
-#, fuzzy, php-format
+#, php-format
 msgid "Fail (%s)"
-msgstr "%s (%s)"
+msgstr "Échec (%s)"
 
 #: plugins/hudson/www/test_result_pie_chart.php:24
-#, fuzzy, php-format
+#, php-format
 msgid "Skip (%s)"
-msgstr "%s (%s)"
+msgstr "Non exécuté (%s)"
 
 #: plugins/mailman/include/MailmanList.class.php:166
 #, php-format
@@ -9749,12 +9761,19 @@ msgid ""
 "plugins/ folder. Then, you should activate them also per project, per user "
 "or whatever the plugin specifically applies to."
 msgstr ""
+"Cette page permet d'activer ou désactiver des greffons.  Il faudra\n"
+"ensuite les configurer pour chaque projet désirant les utiliser (ou\n"
+"pour chaque utilisateur, ou pour d'autres contextes selon les\n"
+"spécificités des greffons)."
 
 #: www/admin/pluginman.php:115
 msgid ""
 "Be careful because some projects/users can be using the plugin. Deactivating "
 "it will remove the plugin from all users/projects."
 msgstr ""
+"Attention, certains utilisateurs ou projets peuvent utiliser ce\n"
+"greffon.  Désactiver le greffon supprimera la fonctionnalité de tous\n"
+"ces utilisateurs et projets."
 
 #: www/admin/pluginman.php:117
 msgid "Plugin Name"
@@ -10386,28 +10405,27 @@ msgstr ""
 
 #: www/docman/view.php:102
 msgid "Unable to open zip archive for backup"
-msgstr ""
+msgstr "Erreur lors de l'ouverture de l'archive Zip pour sauvegarde."
 
 #: www/docman/view.php:106
 msgid "Unable to fill zip archive for backup"
-msgstr ""
+msgstr "Erreur lors du remplissage de l'archive Zip pour sauvegarde."
 
 #: www/docman/view.php:109
 msgid "Unable to close zip archive for backup"
-msgstr ""
+msgstr "Erreur lors de la fermeture de l'archive Zip pour sauvegarde."
 
 #: www/docman/view.php:117
-#, fuzzy
 msgid "No documents to backup."
-msgstr "Pas de données dans le document"
+msgstr "Pas de document à sauvegarder."
 
 #: www/docman/view.php:129
 msgid "Webdav Access Canceled by user"
-msgstr ""
+msgstr "Accès WebDAV annulé par l'utilisateur."
 
 #: www/docman/view.php:135
 msgid "No webdav interface enabled."
-msgstr ""
+msgstr "Aucune interface WebDAV active."
 
 #: www/docman/view.php:139
 msgid "No document to display - invalid or inactive document number."
@@ -10450,11 +10468,11 @@ msgstr "Aucune tâche trouvée."
 #: www/export/rssAboTask.php:139
 #, php-format
 msgid "Update history of the task with the name %1$s and the ID %2$d."
-msgstr ""
+msgstr "Mettre à jour l'historique de la tâche de nom %1$s et d'identifiant %2$d."
 
 #: www/export/rssAboTask.php:140
 msgid "Current values of the task’s…"
-msgstr ""
+msgstr "Valeurs actuelles de la tâche :"
 
 #: www/export/rssAboTask.php:142
 msgid "Subproject:"
@@ -11516,16 +11534,16 @@ msgstr "Toutes les activités de projet"
 #: www/include/filechecks.php:62
 #, php-format
 msgid "Failed tar/gz integrity check. Output follows: <p>$s</p>"
-msgstr ""
+msgstr "Erreur lors de la vérification d'intégrité tar/gz : <p>$s</p>"
 
 #: www/include/filechecks.php:77
 #, php-format
 msgid "Failed gzip integrity check. Output follows: <p>$s</p>"
-msgstr ""
+msgstr "Erreur lors de la vérification d'intégrité gzip : <p>$s</p>"
 
 #: www/include/filechecks.php:170
 msgid "This file does not have a system-recognized filename type."
-msgstr ""
+msgstr "Ce fichier n'a pas de type reconnu par le système."
 
 #: www/include/filechecks.php:174
 msgid "File does not exist. You must supply a filename."
@@ -11535,6 +11553,8 @@ msgstr "Ce fichier n'existe pas. Vous devez fournir un nom de fichier."
 #, php-format
 msgid "File does not exist. File %s is not in incoming FTP directory."
 msgstr ""
+"Ce fichier n'existe pas.  Le fichier %s n'est pas dans le répertoire\n"
+"entrant."
 
 #: www/include/html.php:316 www/include/html.php:449 www/include/html.php:634
 #: www/pm/browse_task.php:327 www/pm/browse_task.php:354
@@ -11642,6 +11662,10 @@ msgid ""
 "solutions. Please, be as precise as possible to avoid misunderstanding. If "
 "relevant, screenshots or documents can be added as attached files."
 msgstr ""
+"Vous pouvez ajouter des commentaires, des informations\n"
+"supplémentaires, des réponses et des solutions.  Veuillez être le plus\n"
+"précis possible pour éviter des malentendus.  Des copies d'écran ou\n"
+"des documents peuvent être ajoutés en pièce jointe lorsque c'est pertinent."
 
 #: www/include/html.php:347
 msgid "Enter the complete description."
@@ -11655,6 +11679,12 @@ msgid ""
 "strong>: Wiki page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum post."
 "</div>"
 msgstr ""
+"<div align=\"left\"><b>Astuces pour\n"
+"l'édition :</b><br/><strong>http,https ou ftp</strong>:\n"
+"Hyperliens.<br/><strong>[#NNN]</strong> : Item n°NNN dans un outil de\n"
+"suivi.<br/><strong>[TNNN]</strong> : Item n°NNN dans un gestionnaire\n"
+"de tâches.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Page\n"
+"wiki.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Article de forum.</div>"
 
 #: www/include/html.php:351
 msgid ""
@@ -11849,6 +11879,9 @@ msgid ""
 "the following criteria. Keep in mind, that your rating will be visible to "
 "the user and others."
 msgstr ""
+"Si vous connaissez cet utilisateur, veuillez prendre un moment pour le\n"
+"noter selon les critères suivants.  Gardez à l'esprit que votre\n"
+"évaluation sera visible pour cet utilisateur et d'autres."
 
 #: www/include/user_home.php:262
 #, php-format
@@ -11857,6 +11890,9 @@ msgid ""
 "advogato.com/\">Advogato.</a> The system has been re-implemented and "
 "expanded in a few ways."
 msgstr ""
+"Le système d'évaluation par les pairs de %s reprend des concepts d'<a\n"
+"href=\"http://www.advogato.com/\">Advogato</a>, mais il a été repris et\n"
+"étendu."
 
 #: www/include/user_home.php:270
 #, php-format
@@ -11982,40 +12018,48 @@ msgid "A powerful plugin system to add new features."
 msgstr "Un système de greffons pour ajouter des fonctionnalités."
 
 #: www/index_std.php:27
-#, fuzzy
 msgid "What's new in FusionForge 5.1"
-msgstr "Les nouveautés de FusionForge 5.0"
+msgstr "Les nouveautés de FusionForge 5.1"
 
 #: www/index_std.php:29
 msgid "New Funky Theme (Capgemini)."
-msgstr ""
+msgstr "Un nouveau thème, Funky (Capgemini)."
 
 #: www/index_std.php:30
 msgid ""
 "New UI and features for the document manager (download as zip, locking, "
 "referencing documents by URL) (Capgemini)."
 msgstr ""
+"Une nouvelle interface et de nouvelles fonctionnalités pour le\n"
+"gestionnaire de documents (télécharger dans une archive Zip,\n"
+"verrouillage, référencement de documents par URL) (Capgemini)."
 
 #: www/index_std.php:31
 msgid ""
 "New progress bar displaying completion state of trackers using a custom "
 "status field."
 msgstr ""
+"Une barre de progression pour afficher de taux de complétion des\n"
+"outils de suivi qui utilisent un champ personnalisé pour le statut."
 
 #: www/index_std.php:32
 msgid "Improved sorting in trackers (Alcatel-Lucent)."
-msgstr ""
+msgstr "Le tri dans les outils de suivi a été amélioré (Alcatel-Lucent)."
 
 #: www/index_std.php:33
 msgid ""
 "More flexible and more powerful role-based access control system (Coclico)."
 msgstr ""
+"Le système de contrôle d'accès par role a été rendu plus flexible et\n"
+"plus puissant (Coclico)."
 
 #: www/index_std.php:34
 msgid ""
 "New unobtrusive tooltip system based on jquery and tipsy to replace old help "
 "window (Alcatel-Lucent)"
 msgstr ""
+"Un nouveau système d'affichage d'astuces, utilisant Jquery et Tipsy,\n"
+"pour remplacer l'ancienne fenêtre d'aide (Alcatel-Lucent)."
 
 #: www/index_std.php:35
 msgid ""
@@ -12023,10 +12067,16 @@ msgid ""
 "project; Gravatar, to display user faces; OSLC, implementing the OSLC-CM API "
 "for tracker interoperability with external tools."
 msgstr ""
+"Nouveaux greffons : Blocks, pour ajouter des blocs de HTML libres dans\n"
+"les pages d'un projet ; Gravatar, pour afficher les visages des\n"
+"utilisateurs ; OSLC, une implémentation de l'interface OSLC-CM\n"
+"d'interopérabilité entre les outils de suivi et des outils externes."
 
 #: www/index_std.php:36
 msgid "scmgit plugin: Personal Git repositories for project members (AdaCore)."
 msgstr ""
+"Le greffon scmgit propose désormais des dépôts Git personnels aux\n"
+"membres de projets (AdaCore)."
 
 #: www/index_std.php:37
 msgid ""
@@ -12034,18 +12084,23 @@ msgid ""
 "projects can pick which template to clone from for their new projects "
 "(Coclico)."
 msgstr ""
+"Plusieurs projets modèles peuvent être définis, et les utilisateurs\n"
+"créant de nouveaux projets peuvent choisir sur quel modèle le nouveau\n"
+"projet sera calqué (Coclico)."
 
 #: www/index_std.php:38
 msgid "Simplified configuration system, using standard *.ini files."
 msgstr ""
+"Le système de configuration a été simplifié, et utilise des fichiers\n"
+"*.ini standard."
 
 #: www/index_std.php:39
 msgid "Reorganised, modular Apache configuration."
-msgstr ""
+msgstr "La configuration d'Apache a été réorganisée pour être plus modulaire."
 
 #: www/index_std.php:40
 msgid "RPM packages for Red Hat (and derived) distributions."
-msgstr ""
+msgstr "Des paquets RPM sont fournis pour les distributions Red Hat et dérivées."
 
 #: www/index_std.php:43
 msgid "What's new in FusionForge 5.0"
@@ -13963,7 +14018,7 @@ msgstr "Identifiant de tâche"
 
 #: www/pm/t_follow.php:42
 msgid "no task with id :"
-msgstr ""
+msgstr "Aucune tâche d'identifiant :"
 
 #: www/pm/t_lookup.php:35
 msgid "Task ID"
@@ -13971,7 +14026,7 @@ msgstr "Identifiant de tâche"
 
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
-msgstr ""
+msgstr "Aucune tâche d'identifiant :"
 
 #: www/pm/task.php:69
 msgid "Group ID"
@@ -13992,7 +14047,7 @@ msgstr "Erreur lors de la création de l'objet ProjectTask."
 
 #: www/pm/task.php:130 www/pm/task.php:180
 msgid "Illegal format for hours: must be an integer or a float number."
-msgstr ""
+msgstr "Format invalide pour les heures : il doit s'agir d'un nombre."
 
 #: www/pm/task.php:152
 msgid "Task Created Successfully"
@@ -14094,7 +14149,7 @@ msgstr "Nom de fichier invalide."
 
 #: www/project/admin/editimages.php:101
 msgid "ERROR: DB: Cannot store multimedia file : "
-msgstr ""
+msgstr "Erreur de base de données lors du stockage d'un fichier multimédia : "
 
 #: www/project/admin/editimages.php:103
 msgid "Multimedia File Uploaded"
@@ -14107,6 +14162,8 @@ msgstr "Le nom de fichier et la description sont requis"
 #: www/project/admin/editimages.php:139
 msgid "ERROR: DB: Cannot delete multimedia file: "
 msgstr ""
+"Erreur de base de données lors de la suppression d'un fichier\n"
+"multimédia : "
 
 #: www/project/admin/editimages.php:141
 msgid "Multimedia File Deleted"
@@ -14119,6 +14176,8 @@ msgstr "Description de fichier requise"
 #: www/project/admin/editimages.php:163
 msgid "ERROR: DB: Cannot update multimedia file"
 msgstr ""
+"Erreur de base de données lors de la mise à jour d'un fichier\n"
+"multimédia : "
 
 #: www/project/admin/editimages.php:165
 msgid "Multimedia File Properties Updated"
@@ -14190,6 +14249,10 @@ msgid ""
 "categories. If the project does not require any or all of these locations, "
 "simply select \"None Selected\"."
 msgstr ""
+"Vous pouvez choisir jusqu'à trois catégorisations pour ce projet dans\n"
+"chacune des catégories racines.  Si le projet n'a pas de\n"
+"classification pertinente dans une catégorie racine, vous pouvez n'en\n"
+"choisir aucune."
 
 #: www/project/admin/group_trove.php:78
 msgid ""
@@ -14242,33 +14305,30 @@ msgid "Descriptive Project Name"
 msgstr "Nom précis du projet"
 
 #: www/project/admin/index.php:140
-#, fuzzy
 msgid "Maximum 255 characters, HTML will be stripped from this description"
-msgstr "Courte description (255 caractères maximum)"
+msgstr "255 caractères maximum, sans HTML"
 
 #: www/project/admin/index.php:149
-#, fuzzy
 msgid "Project tags"
-msgstr "Projet %s"
+msgstr "Étiquettes de projet"
 
 #: www/project/admin/index.php:151
-#, fuzzy
 msgid "Add tags (use comma as separator): "
-msgstr "Étiquettes (séparées par des virgules)"
+msgstr "Ajouter des étiquettes (séparées par des virgules) :"
 
 #: www/project/admin/index.php:158
 msgid "Or pick a tag from those used by other projects: "
 msgstr ""
+"Vous pouvez aussi choisir parmi les étiquettes déjà utilisées par\n"
+"d'autres projets :"
 
 #: www/project/admin/index.php:191
-#, fuzzy
 msgid "Trove Categorization"
-msgstr "Éditer la catégorisation"
+msgstr "Catégorisation dans l'arbre des projets"
 
 #: www/project/admin/index.php:193
-#, fuzzy
 msgid "Edit Trove"
-msgstr "Modifier un rôle"
+msgstr "Éditer la catégorisation"
 
 #: www/project/admin/index.php:196
 msgid "Homepage Link"
@@ -14331,7 +14391,7 @@ msgstr "Avec succès"
 
 #: www/project/admin/massfinish.php:58
 msgid "No IDs Were Passed"
-msgstr ""
+msgstr "Aucun identifiant passé"
 
 #: www/project/admin/massfinish.php:70
 msgid "Choose the role for each user and then press &quot;Add All&quot;."
@@ -14413,17 +14473,19 @@ msgstr ""
 
 #: www/project/admin/roledelete.php:52
 msgid "You can't delete a global role from here."
-msgstr ""
+msgstr "Vous ne pouvez pas supprimer un rôle global depuis cette page."
 
 #: www/project/admin/roledelete.php:56
 msgid "You can't delete a role belonging to another project."
-msgstr ""
+msgstr "Vous ne pouvez pas supprimer depuis cette page un rôle qui appartient à un autre projet."
 
 #: www/project/admin/roledelete.php:68
 msgid ""
 "Error: Please check \"I'm Sure\" to confirm or return to previous page to "
 "cancel."
 msgstr ""
+"Veuillez confirmer en cochant la case « Je suis sûr », ou retourner à\n"
+"la page précédente pour annuler."
 
 #: www/project/admin/roledelete.php:74
 #, php-format
@@ -14680,6 +14742,10 @@ msgid ""
 "<em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not "
 "currently host mail (i.e. cannot be an MX) or DNS</strong>."
 msgstr ""
+"Pour ajouter un nouvel hôte virtuel, il vous suffit de définir\n"
+"<em>votre.domaine.org</em> comme un <strong>CNAME</strong> vers\n"
+"<strong>%1$s.%2$s</strong>.  %3$s n'héberge pas de messagerie\n"
+"électronique (MX) ni de DNS."
 
 #: www/project/admin/vhost.php:112
 #, php-format
@@ -14688,6 +14754,10 @@ msgid ""
 "will be synced to the project webservers - such that <em>yourhost.org</em> "
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""
+"Un clic sur « Créer » déclenchera la procédure de création de l'hôte\n"
+"virtuel.  Cet hôte virtuel sera un alias pour le site web du projet,\n"
+"c'est-à-dire que <em>votre.domaine.org</em> aura le même contenu que\n"
+"<em>%1$s.%2$s</ em>."
 
 #: www/project/admin/vhost.php:120
 msgid "New Virtual Host <em>(e.g. vhost.org)</em>"
@@ -15016,11 +15086,14 @@ msgid ""
 "configuration as the template (same roles and permissions, same trackers, "
 "same set of enabled plugins, and so on)."
 msgstr ""
+"Vous pouvez soit partir d'un projet vide, soit choisir un projet qui\n"
+"servira de modèle pour le vôtre, auquel cas votre projet aura\n"
+"initialement la même configuration que son modèle : mêmes rôles et\n"
+"permissions, mêmes outils de suivi, même jeu de greffons actifs, etc."
 
 #: www/register/index.php:240 www/register/index.php:260
-#, fuzzy
 msgid "Start from empty project"
-msgstr "Tous les outils de suivi de mes projets"
+msgstr "Partir d'un projet vide"
 
 #: www/register/index.php:242
 #, php-format
@@ -15029,6 +15102,10 @@ msgid ""
 "will initially have the same configuration as the template (same roles and "
 "permissions, same trackers, same set of enabled plugins, and so on)."
 msgstr ""
+"Veuillez choisir un projet qui servira de modèle pour le vôtre.  Votre\n"
+"projet aura initialement la même configuration que son modèle : mêmes\n"
+"rôles et permissions, mêmes outils de suivi, même jeu de greffons\n"
+"actifs, etc."
 
 #: www/register/index.php:254
 #, php-format
@@ -15038,6 +15115,10 @@ msgid ""
 "as the template (same roles and permissions, same trackers, same set of "
 "enabled plugins, and so on)."
 msgstr ""
+"Vous pouvez soit partir d'un projet vide, soit utiliser le projet %s\n"
+"comme modèle, auquel cas votre projet aura initialement la même\n"
+"configuration : mêmes rôles et permissions, mêmes outils de suivi,\n"
+"même jeu de greffons actifs, etc."
 
 #: www/register/index.php:266
 #, php-format
@@ -15046,11 +15127,14 @@ msgid ""
 "(same roles and permissions, same trackers, same set of enabled plugins, and "
 "so on)."
 msgstr ""
+"Votre projet aura initialement la même configuration que le projet\n"
+"modèle %s : mêmes rôles et permissions, mêmes outils de suivi, même\n"
+"jeu de greffons actifs, etc."
 
 #: www/register/index.php:273
 #, php-format
 msgid "Since no template project is available, your project will start empty."
-msgstr ""
+msgstr "Comme aucun projet modèle n'est disponible, votre projet commencera vide."
 
 #: www/reporting/groupadded.php:51 www/reporting/groupcum.php:50
 #: www/reporting/projectact.php:53 www/reporting/projecttime.php:53
@@ -15247,7 +15331,7 @@ msgstr "Suivi temporel global"
 
 #: www/reporting/timeadd.php:65
 msgid "INTERNAL ERROR: delete: "
-msgstr ""
+msgstr "Erreur interne : suppression : "
 
 #: www/reporting/timeadd.php:91
 msgid "All Fields Are Required."
@@ -15264,7 +15348,7 @@ msgstr "Projet/Tâche"
 
 #: www/reporting/timeadd.php:138
 msgid "Hours worked"
-msgstr ""
+msgstr "Heures travaillées"
 
 #: www/reporting/timeadd.php:179
 msgid "Total Hours"
@@ -15631,12 +15715,16 @@ msgstr "Le message a été envoyé"
 #: www/sendmessage.php:124
 msgid "In an attempt to reduce spam, we are using this form to send email."
 msgstr ""
+"Pour limiter la quantité de spam, nous utilisons ce formulaire pour\n"
+"envoyer des e-mails."
 
 #: www/sendmessage.php:128
 msgid ""
 "Fill it out accurately and completely or the receiver may not be able to "
 "respond."
 msgstr ""
+"Veuillez le remplir de manière complète et précise, afin que le\n"
+"destinataire puisse répondre le cas échéant."
 
 #: www/sendmessage.php:132
 msgid ""
@@ -15717,17 +15805,17 @@ msgstr "Paquet :"
 msgid ""
 "You can use this form repeatedly to keep adding snippets to your package."
 msgstr ""
+"Vous pouvez réutiliser ce formulaire pour ajouter d'autres extraits de\n"
+"code à votre paquet."
 
 #: www/snippet/add_snippet_to_package.php:132
-#, fuzzy
 msgid ""
 "The \"Snippet Version ID\" is the unique ID number that is shown next to a "
 "specific version of a snippet on the browse pages."
 msgstr ""
-"Vous pouvez utiliser ce formulaire plusieurs fois, pour ajouter plusieurs "
-"extraits de code à votre paquet.</p><p>L'identifiant de version est le "
-"numéro unique d'identification qui s'affiche à côté d'une version spécifiqie "
-"d'un extrait de code sur les pages de navigation."
+"L'identifiant de version est le numéro unique d'identification qui\n"
+"s'affiche à côté d'une version spécifique d'un extrait de code sur les\n"
+"pages de navigation."
 
 #: www/snippet/add_snippet_to_package.php:141
 msgid "Add This Snippet Version ID:"
@@ -15960,12 +16048,16 @@ msgid ""
 "The purpose of this archive is to let you share your code snippets, scripts, "
 "and functions with the Open Source Software Community."
 msgstr ""
+"Cette section a pour but de vous permettre de partager des extraits de\n"
+"code, des scripts, et des fonctions avec la communauté."
 
 #: www/snippet/index.php:52
 msgid ""
 "You can create a \"new snippet\", then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
+"Vous pouvez créer un nouvel échantillon, puis le faire évoluer en\n"
+"publiant facilement de nouvelles versions."
 
 #: www/snippet/index.php:54
 msgid ""
@@ -15973,15 +16065,17 @@ msgid ""
 "snippets. That package can contain multiple, specific versions of other "
 "snippets."
 msgstr ""
+"Une fois que des échantillons ont été publiés, il est possible de les\n"
+"rassembler en « paquets ».  Chaque paquet peut contenir différentes\n"
+"versions de différents échantillons de code."
 
 #: www/snippet/index.php:56
-#, fuzzy
 msgid "Browse Snippets"
-msgstr "Échantillons"
+msgstr "Parcourir les échantillons"
 
 #: www/snippet/index.php:58
 msgid "You can browse the snippet library quickly:"
-msgstr ""
+msgstr "Vous pouvez naviguer rapidement dans la bibliothèque d'échantillons :"
 
 #: www/snippet/index.php:64
 msgid "Browse by Language"
@@ -16018,16 +16112,22 @@ msgid ""
 "interface. Before creating your package, make sure all your snippets are in "
 "place and you have made a note of the snippet ID's."
 msgstr ""
+"Cette interface vous permet de grouper des échantillons existants en\n"
+"paquets.  Avant de créer des paquets, assurez-vous que les\n"
+"échantillons que vous voulez regrouper sont en place, et notez leurs\n"
+"identifiants."
 
 #: www/snippet/package.php:136
 msgid "Create the package using this form."
-msgstr ""
+msgstr "Créez un paquet à l'aide de ce formulaire."
 
 #: www/snippet/package.php:137
 msgid ""
 "<strong>Then</strong> use the \"Add Snippets to Package\" link to add files "
 "to your package."
 msgstr ""
+"<strong>Puis</strong> utilisez le lien « Ajouter des échantillons »\n"
+"pour ajouter des fichiers à votre paquet."
 
 #: www/snippet/package.php:139
 msgid ""
@@ -16036,6 +16136,10 @@ msgid ""
 "package. You should only use this page if you are submitting an entirely new "
 "package."
 msgstr ""
+"<span class=\"important\">Note :</span> Vous pouvez soumettre une \n"
+"nouvelle version d'un paquet existant en navigant dans la bibliothèque et \n"
+"en utilisant le lien présent près du paquet existant.  Cette page-ci ne \n"
+"sert qu'à créer de nouveaux paquets."
 
 #: www/snippet/package.php:157 www/snippet/submit.php:125
 #: www/stats/i18n.php:33
@@ -16468,23 +16572,25 @@ msgstr "Vous n'avez pas les droits d'administration sur ce projet."
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "Créer un sondage est simple."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Créez des questions en utilisant les formulaires ci-dessus."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Créez un sondage, en indiquant la liste ordonnées des questions\n"
+"(prises dans <strong>votre</strong> liste de questions)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid ""
 "Link to the survey using this format: %1$s where XX is the survey number"
-msgstr ""
+msgstr "L'URL du sondage est %1$s où XX est le numéro du sondage."
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -16496,7 +16602,6 @@ msgstr ""
 "sondages existants%2$s"
 
 #: www/survey/admin/question.php:52
-#, fuzzy
 msgid "Edit a Question"
 msgstr "Éditer une question"
 
@@ -16652,7 +16757,7 @@ msgstr "Type de la question"
 #: www/survey/include/SurveyHTML.class.php:153
 #, php-format
 msgid "Please %1$s create a question %2$s before creating a survey"
-msgstr ""
+msgstr "Veuillez %1$scréer une question%2$s avant de créer un sondage."
 
 #: www/survey/include/SurveyHTML.class.php:161
 msgid "Add this Survey"
@@ -16725,7 +16830,7 @@ msgstr "Nombre de votes"
 
 #: www/survey/include/SurveyHTML.class.php:353
 msgid "Did I Vote?"
-msgstr ""
+msgstr "Ai-je voté ?"
 
 #: www/survey/include/SurveyHTML.class.php:359
 #: www/survey/include/SurveyHTML.class.php:427
@@ -16778,6 +16883,9 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"Les informations collectées par ces sondages ne seront jamais vendues\n"
+"à des tiers ou utilisées pour solliciter de vous l'achat de biens ou\n"
+"de services."
 
 #: www/survey/privacy.php:39
 msgid ""
@@ -16785,24 +16893,35 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Les informations sont rassemblées pour construire un profil des\n"
+"projets et des développeurs. Ce profil aidera les visiteurs du site à\n"
+"mesurer la qualité d'un projet donné."
 
 #: www/survey/privacy.php:42
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"Les identifiants de ceux qui ont répondu aux questions sont effacés et\n"
+"ne sont visibles, ni par les administrateurs du projet, ni par les\n"
+"visiteurs, ni par des tiers."
 
 #: www/survey/privacy.php:45
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"L'information collectée est utilisée seulement sous forme agrégée, et\n"
+"non pour singulariser des utilisateurs ou des développeurs."
 
 #: www/survey/privacy.php:48
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Si des changements sont effectués dans ces règles, ils ne pourront\n"
+"avoir d'effet que sur des données futures et les utilisateurs auront\n"
+"évidemment la faculté de désistement."
 
 #: www/survey/privacy.php:53
 #, php-format
@@ -16811,7 +16930,7 @@ msgstr "L'équipe de %1$s"
 
 #: www/survey/rating_resp.php:57
 msgid "Error in insert"
-msgstr "Erreur lors d' insertion"
+msgstr "Erreur lors d'une insertion"
 
 #: www/survey/rating_resp.php:60
 msgid "Vote registered"
@@ -16819,7 +16938,7 @@ msgstr "Vote Enregisté"
 
 #: www/survey/rating_resp.php:61
 msgid "If you vote again, your old vote will be erased."
-msgstr "Si vous votez à nouveau"
+msgstr "Si vous votez à nouveau, votre vote précédent sera supprimé."
 
 #: www/survey/rating_resp.php:65
 msgid "Vote ID"
@@ -17425,7 +17544,7 @@ msgstr ""
 
 #: www/tracker/admin/form-workflow.php:34
 msgid "Internal error: Illegal number of status fields (WKFL01)."
-msgstr ""
+msgstr "Erreur interne : nombre de champs de statut invalide."
 
 #: www/tracker/admin/form-workflow.php:37
 msgid "Configure workflow"
@@ -17731,7 +17850,7 @@ msgstr "Le mois dernier"
 #: www/tracker/browse.php:263
 #, php-format
 msgid "Displaying results %1$d‒%2$d out of %3$d total."
-msgstr ""
+msgstr "Affichage des résultats %1$d‒%2$d (sur un total de %3$d)."
 
 #: www/tracker/browse.php:318
 msgid "Advanced queries"
@@ -17966,7 +18085,7 @@ msgstr "Requête effacée."
 
 #: www/tracker/query.php:148
 msgid "Missing Build Query Action"
-msgstr ""
+msgstr "Action manquante"
 
 #: www/tracker/query.php:277 www/tracker/query.php:286
 msgid "Name and Save Query"
@@ -18065,7 +18184,7 @@ msgstr "Erreur lors de la création de l'objet ArtifactFileHtml."
 
 #: www/tracker/tracker.php:151
 msgid "Could Not Attach File to Item: "
-msgstr ""
+msgstr "Erreur lors de la création de la pièce jointe : "
 
 #: www/tracker/tracker.php:155
 #, php-format
@@ -18083,12 +18202,12 @@ msgstr "Commentaire ajouté"
 #: www/tracker/tracker.php:353
 #, php-format
 msgid "ERROR: Skipping attachment %d: file is too large."
-msgstr ""
+msgstr "La pièce jointe $d a été ignorée car trop volumineuse."
 
 #: www/tracker/tracker.php:357
 #, php-format
 msgid "ERROR: Skipping attachment %d: transfer interrupted."
-msgstr ""
+msgstr "La pièce jointe %d a été ignorée (transfert interrompu)."
 
 #: www/tracker/tracker.php:381
 msgid "File Upload: Error"
@@ -18595,25 +18714,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Main Page"
 #~ msgstr "Page principale"
-
-#~ msgid ""
-#~ "<p>The purpose of this archive is to let you share your code snippets, "
-#~ "scripts,\tand functions with the Open Source Software Community.</"
-#~ "p><p>You can create a \"new snippet\", then post additional versions of "
-#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
-#~ "can then create a \"Package\" of snippets. That package can contain "
-#~ "multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse "
-#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
-#~ msgstr ""
-#~ "<p>Cette section a pour but de vous permettre de partager des "
-#~ "échantillons de code, des scripts et des fonctions avec le reste de la "
-#~ "communauté.</p><p>Vous pouvez créer un nouvel échantillon, puis le faire "
-#~ "évoluer en publiant facilement de nouvelles versions.</p><p>Une fois que "
-#~ "des échantillons ont été publiés, il est possible de les rassembler en "
-#~ "« paquets ».  Chaque paquet peut contenir différentes versions de "
-#~ "différents échantillons de code.</p><h3>Naviguer dans les échantillons</"
-#~ "h3><p>Vous pouvez naviguer rapidement dans la bibliothèque "
-#~ "d'échantillons :</p>"
 
 #~ msgid ""
 #~ "<p>You can group together existing snippets into a package using this "
