@@ -232,5 +232,3 @@ BEGIN
 
 END ;
 $$ LANGUAGE plpgsql ;
-
-SELECT pfo_rbac_full_migration () ;
