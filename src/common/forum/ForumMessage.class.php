@@ -246,10 +246,13 @@ class ForumMessage extends Error {
 	 *	@param	int	The message_id of the parent message, if any.
 	 *	@param 	int	The id of the user that is posting the message
 	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
+	 *	@param	int	The timestamp of the message to insert, defaults to 0. 
 	 *	@return	boolean success.
 	*/
-
-	function insertmsg($subject, $body, $thread_id='', $is_followup_to='',$user_id,$has_attach=false) {
+	function insertmsg($subject, $body, $thread_id='', $is_followup_to='',$user_id,$has_attach=false,$timestamp=0) {
+		if ($timestamp == 0){
+			$timestamp = time();
+		}
 		if (!$thread_id) {
 			$thread_id=$this->Forum->getNextThreadID();
 			$is_followup_to=0;
@@ -259,28 +262,41 @@ class ForumMessage extends Error {
 				return false;
 			}
 		} else {
-			//
-			//  increment the parent's followup count if necessary
-			//
-			$res4 = db_query_params ('UPDATE forum SET most_recent_date=$1 WHERE thread_id=$2 AND is_followup_to=0',
-						 array (time(),
+			$most_recent_lookup = db_query_params ('SELECT most_recent_date FROM forum WHERE thread_id=$1 AND is_followup_to=0',array($thread_id));
+			if (db_result($most_recent_lookup, 0, 'most_recent_date') <= $timestamp) {
+				//
+				//  increment the parent's followup count if necessary
+				//
+				$res4 = db_query_params ('UPDATE forum SET most_recent_date=$1 WHERE thread_id=$2 AND is_followup_to=0',
+						 array ($timestamp,
 							$thread_id)) ;
-			if (!$res4 || db_affected_rows($res4) < 1) {
-				$this->setError(_('Couldn\'t Update Master Thread parent with current time'));
-				db_rollback();
-				return false;
-			} else {
-				//
-				//  mark the parent with followups as an optimization later
-				//
-				$res3 = db_query_params ('UPDATE forum SET has_followups=1,most_recent_date=$1 WHERE msg_id=$2',
-							 array (time(),
-								$is_followup_to)) ;
-				if (!$res3) {
-					$this->setError(_('Could Not Update Parent'));
+				if (!$res4 || db_affected_rows($res4) < 1) {
+					$this->setError(_('Couldn\'t Update Master Thread parent with current time'));
 					db_rollback();
 					return false;
+				} else {
+					//
+					//  Only update the time if set time < timestamp (set to current time if not done for an import)
+					//
+					$res3 = db_query_params ('UPDATE forum SET most_recent_date=$1 WHERE msg_id=$2',
+								 array ($timestamp,
+									$is_followup_to)) ;
+					if (!$res3) {
+						$this->setError(_('Could Not Update Parent'));
+						db_rollback();
+						return false;
+					}
 				}
+			}
+			//
+			//  mark the parent with followups as an optimization later
+			//
+			$res3 = db_query_params ('UPDATE forum SET has_followups=1 WHERE msg_id=$1',
+						 array ($is_followup_to)) ;
+			if (!$res3) {
+				$this->setError(_('Could Not Update Parent'));
+				db_rollback();
+				return false;
 			}
 		}
 
@@ -289,10 +305,10 @@ class ForumMessage extends Error {
 						  $user_id,
 						  htmlspecialchars($subject),
 						  $body,
-						  time(),
+						  $timestamp,
 						  $is_followup_to,
 						  $thread_id,
-						  time())) ;
+						  $timestamp)) ;
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
 			db_rollback();
@@ -331,9 +347,10 @@ class ForumMessage extends Error {
 	 *	@param	int	The thread_id of the message, if known.
 	 *	@param	int	The message_id of the parent message, if any.
 	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
+	 *	@param	int	The timestamp of the message to create. Defaults to 0, meaning the timestamp used for this message will be "time()"
 	 *	@return	boolean success.
 	 */
-	function create($subject, $body, $thread_id='', $is_followup_to='',$has_attach=false) {
+	function create($subject, $body, $thread_id='', $is_followup_to='',$has_attach=false, $timestamp = 0) {
 		if (!$body || !$subject) {
 			$this->setError(_('Must Include A Message Body And Subject'));
 			return false;
@@ -368,7 +385,7 @@ class ForumMessage extends Error {
 		//now we check the moderation status of the forum and act accordingly
 		if (forge_check_perm ('forum', $this->Forum->getID(), 'unmoderated_post')) {
 			//no moderation
-			return $this->insertmsg($subject, $body, $thread_id, $is_followup_to,$user_id,$has_attach);
+			return $this->insertmsg($subject, $body, $thread_id, $is_followup_to,$user_id,$has_attach,$timestamp);
 		} else {
 			return $this->insertmoderated($subject, $body, $thread_id, $is_followup_to,$user_id);
 		}

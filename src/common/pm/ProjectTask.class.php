@@ -133,10 +133,11 @@ class ProjectTask extends Error {
 	 *	@param	array	An array of project_task_id's that this task depends on.
 	 *	@param	int	The duration of the task in days.
 	 *	@param	int	The id of the parent task, if any.
+	 *	@param	array	An array ('user' => user_id)
 	 *	@return	boolean success.
 	 */
 	function create($summary,$details,$priority,$hours,$start_date,$end_date,
-			$category_id,$percent_complete,&$assigned_arr,&$depend_arr,$duration=0,$parent_id=0) {
+			$category_id,$percent_complete,&$assigned_arr,&$depend_arr,$duration=0,$parent_id=0, $importData = array()) {
 		$v = new Validator();
 		$v->check($summary, "summary");
 		$v->check($details, "details");
@@ -160,6 +161,12 @@ class ProjectTask extends Error {
 			return false;
 		}
 
+		if(array_key_exists('user', $importData)){
+			$uid = $importData['user'];
+		} else {
+			$uid = user_getid();
+		}
+		
 		db_begin();
 		$res = db_query_params ('SELECT nextval($1) AS id',
 					array ('project_task_pk_seq'));
@@ -174,7 +181,7 @@ class ProjectTask extends Error {
 		$result = db_query_params ('INSERT INTO project_task (project_task_id,group_project_id,created_by,summary,details,start_date,end_date,status_id,category_id,priority,percent_complete,hours,duration,parent_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)',
 					   array ($project_task_id,
 						  $this->ProjectGroup->getID(),
-						  user_getid(),
+						  $uid,
 						  htmlspecialchars($summary),
 						  htmlspecialchars($details),
 						  $start_date,
@@ -622,10 +629,11 @@ class ProjectTask extends Error {
 	/**
 	 * addMessage - Handle the addition of a followup message to this task.
 	 *
-	 * @param	   string  The message.
+	 * @param	string  The message.
+	 * @param	array	Specific data for import (user id and time)
 	 * @returns	boolean	success.
 	 */
-	function addMessage($message) {
+	function addMessage($message, $importData = array()) {
 		//prevent posting the same message
 		if ($this->getDetails() == htmlspecialchars($message)) {
 			return true;
@@ -636,11 +644,22 @@ class ProjectTask extends Error {
 					array ($this->getID(),
 					       htmlspecialchars($message))) ;
 		if (!$res || db_numrows($res) < 1) {
+			//Uses importData
+			if(array_key_exists('user', $importData)){
+				$uid = $importData['user'];
+			} else {
+				$uid = user_getid();
+			}
+			if(array_key_exists('time', $importData)){
+				$time = $importData['time'];
+			} else {
+				$time = time();
+			}
 			$res = db_query_params ('INSERT INTO project_messages (project_task_id,body,posted_by,postdate) VALUES ($1,$2,$3,$4)',
 						array ($this->getID(),
 						       htmlspecialchars($message),
-						       user_getid(),
-						       time())) ;
+						       $uid,
+						       $time)) ;
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError('AddMessage():: '.db_error());
 				return false;
@@ -657,15 +676,27 @@ class ProjectTask extends Error {
 	 *
 	 * @param	string  The field name.
 	 * @param	string  The old value.
+	 * @param	array	Specific data for import (user id and time)
 	 * @returns	boolean	success.
 	 */
-	function addHistory ($field_name,$old_value) {
+	function addHistory ($field_name,$old_value,$importData=array()) {
+		//Uses importData
+		if(array_key_exists('user', $importData)){
+			$uid = $importData['user'];
+		} else {
+			$uid = user_getid();
+		}
+		if(array_key_exists('time', $importData)){
+			$time = $importData['time'];
+		} else {
+			$time = time();
+		}
 		$result = db_query_params ('INSERT INTO project_history (project_task_id,field_name,old_value,mod_by,mod_date) VALUES ($1,$2,$3,$4,$5)',
 					   array ($this->getID(),
 						  $field_name,
 						  $old_value,
-						  user_getid(),
-						  time())) ;
+						  $uid,
+						  $time)) ;
 		if (!$result) {
 			$this->setError('ERROR IN AUDIT TRAIL - '.db_error());
 			return false;

@@ -104,20 +104,21 @@ class ProjectCategory extends Error {
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
-			return true;
-		} else {
-			$this->setError(db_error());
-			return false;
-		}
+		
+			$id=db_insertid($result,'project_category','category_id');
 
-/*
 			//
 			//	Now set up our internal data structures
 			//
 			if (!$this->fetchData($id)) {
 				return false;
+			} else {
+				return true;
 			}
-*/
+		} else {
+			$this->setError(db_error());
+			return false;
+		}
 	}
 
 	/**
