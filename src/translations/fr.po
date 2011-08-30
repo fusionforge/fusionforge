@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-24 14:23+0200\n"
-"PO-Revision-Date: 2011-08-30 15:29+0200\n"
+"PO-Revision-Date: 2011-08-30 15:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -5654,7 +5654,9 @@ msgstr "Nom de la tâche :"
 #: plugins/hudson/include/hudsonViews.class.php:228
 #, php-format
 msgid "Name (with no space) used to make a reference to this job. Eg: job #%s"
-msgstr "Nom (sans espace) utilisé pour faire référence à cette tâche."
+msgstr ""
+"Nom (sans espace) utilisé pour faire référence à cette tâche.  Par\n"
+"exemple : tâche n°%s."
 
 #: plugins/hudson/include/hudsonViews.class.php:232
 msgid "Trigger a build after SVN commits:"
@@ -17937,7 +17939,7 @@ msgstr "Commentaire ajouté"
 #: www/tracker/tracker.php:353
 #, php-format
 msgid "ERROR: Skipping attachment %d: file is too large."
-msgstr "La pièce jointe $d a été ignorée car trop volumineuse."
+msgstr "La pièce jointe %d a été ignorée car trop volumineuse."
 
 #: www/tracker/tracker.php:357
 #, php-format
