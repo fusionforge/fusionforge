@@ -12,7 +12,7 @@ no locale ;
 use Text::ParseWords;
 
 @allowed_options = ('-c', '-e') ;
-@allowed_commands = ('cvs','scp','svnserve','bzr','git-upload-pack','git-receive-pack','git-upload-archive') ;
+@allowed_commands = ('cvs','scp','/usr/lib/openssh/sftp-server','svnserve','bzr','git-upload-pack','git-receive-pack','git-upload-archive') ;
 
 # Clean up our environment
 delete @ENV{qw(IFS CDPATH ENV BASH_ENV PATH)};
