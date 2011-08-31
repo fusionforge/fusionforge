@@ -168,6 +168,25 @@ function install()
 	}
 	show(" ...using '$gforge_user'");
 
+	show(' * Storing Database configuration...');
+	require_once ("$fusionforge_src_dir/common/include/utils.php");
+	$p = md5(util_randbytes(10));
+	$k = md5(util_randbytes(10));
+
+	$dbini = fopen("$fusionforge_etc_dir/secrets.ini",'w');
+	fwrite($dbini, "[core]
+database_host = 
+database_name = $gforge_db
+database_user = $gforge_user
+database_port = 
+database_password = $p
+
+session_key = $k
+");
+	fclose($dbini);
+	chmod("$fusionforge_etc_dir/secrets.ini", 0660);
+
+
 	show(" * Modifying DB Access Permissions...");
 	if (!file_exists("$PGHBA.fforge.backup")) {
 		run("cp $PGHBA $PGHBA.fforge.backup", true);
