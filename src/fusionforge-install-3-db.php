@@ -263,82 +263,6 @@ database_port=5432
 //	run("su $susufix $gforge_user -c \"psql $gforge_db < $fusionforge_src_dir/db/FTI-20060130.sql\" >> /tmp/gforge-import.log");
 //	run("su $susufix $gforge_user -c \"psql $gforge_db < $fusionforge_src_dir/db/FTI-20061025.sql\" >> /tmp/gforge-import.log");
 
-	show(" * Enter the Admin Username (fforgeadmin): ");
-	if (getenv('FFORGE_ADMIN_USER')) {
-		$admin_user = getenv('FFORGE_ADMIN_USER');
-	} else {
-		$admin_user = trim(fgets($STDIN));
-
-		if (strlen($admin_user) == 0) {
-			$admin_user = 'fforgeadmin';
-		}
-	}
-	show(" ...using '$admin_user'");
-
-	if (getenv('FFORGE_ADMIN_PASSWORD')) {
-		$bad_pwd = false;
-		$pwd1 = getenv('FFORGE_ADMIN_PASSWORD');
-	} else {
-		$retries = 0;
-		$bad_pwd = true;
-		$pwd1 = '';
-		$pwd2 = '';
-		$error = '';
-		while ($bad_pwd && $retries < 5) {
-			if ($bad_pwd && $retries > 0) {
-				show(' * ' . $error);
-			}
-			$pwd1 = readMasked(" * Enter the Site Admin Password:");
-			$error = validatePassword($pwd1);
-			if ($error != '') {
-				$bad_pwd = true;
-			} else {
-				$pwd2 = readMasked(" * Please enter it again: \n");
-				if ($pwd1 == $pwd2) {
-					$bad_pwd = false;
-				} else {
-					$error = 'Passwords don\'t match. Please try again.';
-				}
-			}
-			$retries++;
-		}
-	}
-
-	if ($bad_pwd) {
-		show('Passwords didn\'t match! Aborting.');
-		die();
-	} else {
-		$pw_md5 = md5($pwd1);
-		$pw_crypt = crypt($pwd1);
-		$pw_crypt = str_replace('$', '\\\\\\$', $pw_crypt);
-		//run(	'su - postgres -c "psql ' .
-		//	$gforge_db .
-		//	' -c \\"UPDATE \\\\\"user\\\\\" SET unix_name=\'' .
-		//	$admin_user . '\', password_md5=\'' .
-		//	$pw_md5 . '\', password_crypt=\'' .
-		//	$pw_crypt . '\' WHERE user_id=101;\\""'); // MODIFIQUE ESTO
-
-		//run(	'su - postgres -c "psql ' .
-		//	$gforge_db .
-		//	' -c \\"UPDATE \\\\\"users\\\\\" SET user_name=\'' .
-		//	$admin_user . '\', user_pw=\'' .
-		//	$pw_md5 . '\', unix_pw=\'' .
-		//	$pw_crypt . '\' WHERE user_id=101;\\""');
-//echo "BREAKPOINT 1\n";
-//$t = trim(fgets($STDIN));
-
-//	run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, user_pw, unix_pw) VALUES ('$admin_user', '$pw_md5', '$pw_crypt')\\\"\"");
-		run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A'); INSERT INTO pfo_user_role (user_id, role_id) VALUES (currval('users_pk_seq'), 3)\\\"\"");
-
-//echo "BREAKPOINT 2\n";
-//$t = trim(fgets($STDIN));
-
-//	run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A')\\\"\"" );
-
-//echo "BREAKPOINT 3\n";
-//$t = trim(fgets($STDIN));
-
-	}
 	if (!is_dir($fusionforge_etc_dir)) {
 		mkdir($fusionforge_etc_dir);
 	}
@@ -392,69 +316,8 @@ function uninstall() {
 }
 */
 
-function validatePassword($password) {
-	if (strlen($password)<6) {
-		return 'Password is too short. Please try again.';
-	}
-	if (!preg_match('/[[:alnum:]]*/', $password)) {
-		return 'Password contains invalid characters. Please try again.';
-	}
-	return '';
-}
-
-function readMasked($prompt) {
-	global $STDIN;
-	if (strtolower(php_uname('s')) == 'sunos') {
-	    show($prompt);
-	    $text_entered = fgets($STDIN);
-	} else {
-	    $options="-er -s -p";
-	    $returned=popen("read $options \"".GREEN.$prompt.NORMAL."\n\"; echo \$REPLY", 'r');
-	    $text_entered=fgets($returned, 100);
-	    pclose($returned);
-	    $text_entered=substr($text_entered, 0, strlen($text_entered));
-	    @ob_flush();
-	    flush();
-	}
-	return trim($text_entered);
-}
-
 function finish() {
 	show(NORMAL."Done.\nYou are ready to run install-gforge-3.php");
-}
-
-function show($text, $newLine = true) {
-	global $STDOUT;
-
-	$hd = fopen ("/tmp/gforge-import.log", "a+");
-	fwrite($hd, "*** $text\n");
-	fclose($hd);
-
-	if ($newLine) {
-		$text = GREEN.$text .NORMAL."\n";
-	}
-	fwrite($STDOUT, $text);
-}
-
-function run($command, $ignore = false) {
-
-	$hd = fopen ("/tmp/gforge-import.log", "a+");
-	fwrite($hd, "CMD ".$command."\n");
-	fclose($hd);
-
-	system($command, $ret);
-	if ($ignore) {
-		if ($ret != 0) {
-			return false;
-		} else {
-			return true;
-		}
-	} else {
-		if ($ret != 0) {
-			echo RED.'An error ocurred running the last command... aborting.'.NORMAL."\n";
-			die();
-		}
-	}
 }
 
 install();
