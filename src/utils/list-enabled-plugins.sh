@@ -23,7 +23,7 @@ for name in plugins/*/NAME ; do
 	if [ ! -e $dir/etc/$plugin.ini ] ; then
 	    enabled="$enabled $plugin"
 	else
-	    if [ -x /usr/aubin/confget ] ; then
+	    if [ -x /usr/bin/confget ] ; then
 		status=$(confget -f $dir/etc/$plugin.ini plugin_status | sed -r 's/[ \t]*;.*//g')
 	    else
 		status=$(python 2>/dev/null <<EOF
