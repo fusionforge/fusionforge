@@ -23,6 +23,9 @@ if (empty($fusionforge_data_dir))
 	$fusionforge_data_dir = '/var/lib/gforge';
 }
 
+$STDOUT = fopen('php://stdout','w');
+$STDIN = fopen('php://stdin','r');
+
 function show($text, $newLine = true) {
 	global $STDOUT;
 

@@ -29,8 +29,7 @@ define ('GREEN', "\033[01;32m" );
 define ('NORMAL', "\033[00m" );
 define ('RED', "\033[01;31m" );
 
-$STDOUT = fopen('php://stdout','w');
-$STDIN = fopen('php://stdin','r');
+require_once 'install-common.inc' ;
 
 show("\n-=# Welcome to FusionForge DB-Installer #=-");
 
@@ -75,8 +74,6 @@ if ($pgservice == '/etc/init.d/postgresql') {
 
 // Might fail if it's already running, so we'll ingnore the result
 run("$pgservice start", true);
-
-require_once 'install-common.inc' ;
 
 if (!is_dir($fusionforge_src_dir))
 {
