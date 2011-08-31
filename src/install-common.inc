@@ -26,6 +26,10 @@ if (empty($fusionforge_data_dir))
 $STDOUT = fopen('php://stdout','w');
 $STDIN = fopen('php://stdin','r');
 
+define ('GREEN', "\033[01;32m" );
+define ('NORMAL', "\033[00m" );
+define ('RED', "\033[01;31m" );
+
 function show($text, $newLine = true) {
 	global $STDOUT;
 

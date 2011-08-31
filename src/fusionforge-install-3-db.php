@@ -25,10 +25,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-define ('GREEN', "\033[01;32m" );
-define ('NORMAL', "\033[00m" );
-define ('RED', "\033[01;31m" );
-
 require_once 'install-common.inc' ;
 
 show("\n-=# Welcome to FusionForge DB-Installer #=-");
