@@ -89,7 +89,6 @@ EOF
 ; See contents of secrets.inc which is loaded by Apache conf files too
 
 [core]
-; 127.0.0.1 instead of "" in order to avoid the need to modifying pg_hba.conf
 database_host=127.0.0.1
 database_name=gforge
 database_user=gforge

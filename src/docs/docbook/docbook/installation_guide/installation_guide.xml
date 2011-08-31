@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. -->
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "../../../dtd/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "../../../dtd/docbookx.dtd" [
  <!ENTITY % authors SYSTEM "../entities/authors.ent">
  %authors;
 ]>
@@ -107,8 +106,7 @@
     </section>
     <section>
       <title>Installing FusionForge on Debian</title>
-      <!-- FIXME : this is absolete now and should be fixed -->
-      <para>
+<!-- FIXME : this is absolete now and should be fixed -->      <para>
     You can simply add lines found at <ulink url="http://debian.fusionforge.org/"/> to <filename>/etc/apt/sources.list</filename> and type <command>apt-get install fusionforge</command> to install a working FusionForge system, thanks to Christian Bayle and Roland Mas.
    </para>
       <para>
@@ -116,7 +114,7 @@
    </para>
     </section>
     <section>
-      <title>Installing Gforge on RPM-based systems</title>
+      <title>Installing FusionForge on RPM-based systems</title>
       <para>RPM should be available soon, see <ulink url="http://fusionforge.org/"/> website for availability.</para>
     </section>
     <section>
@@ -134,8 +132,7 @@
       <section>
         <title>Getting the source</title>
         <para>There is two ways to get the sources from FusionForge : </para>
-	<!-- FIXME : this is absolete now and should be fixed -->
-        <screen>
+<!-- FIXME : this is absolete now and should be fixed -->        <screen>
  # <userinput>tar -xjvf fusionforge-5.0.tar.bz2</userinput>
  # <userinput>cd fusionforge-5.0</userinput>
  # <userinput>mkdir -p /opt/gforge</userinput>
@@ -257,8 +254,7 @@ tcpip_socket = true
       <section>
         <title>Importing Database</title>
         <para>Create FusionForge database user:</para>
-	<!-- TODO : should probably use fusionforge and not gforge below, now -->
-        <screen>
+<!-- TODO : should probably use fusionforge and not gforge below, now -->        <screen>
 # <userinput>su - postgres</userinput>
 $ <userinput>psql template1</userinput>
 template1=# <userinput>CREATE USER gforge NOCREATEUSER NOCREATEDB</userinput>
@@ -529,8 +525,7 @@ DirectoryIndex index.php
 noreply: /dev/null
 </programlisting>
       <para>Make sure that the following domain names are accepted as local destinations by mail transport agent:</para>
-      <!-- TODO: s/gforge/fusionforge/g -->
-      <itemizedlist>
+<!-- TODO: s/gforge/fusionforge/g -->      <itemizedlist>
         <listitem>
           <para><literal>gforge.<replaceable>company.com</replaceable></literal></para>
         </listitem>
@@ -725,7 +720,7 @@ gforge-&gt; <userinput>VALUES (<replaceable>102</replaceable>,1,&apos;A&apos;);<
           <para>Set <varname>$sys_custom_path</varname> configuration variable to <filename class="directory">/etc/gforge/custom</filename>.</para>
         </listitem>
         <listitem>
-          <para>Copy <filename><replaceable>/var/www/gforge</replaceable>/www/index_std.php</filename> to <filename>/etc/gforge/custom/index_std.php</filename> and edit it as you like.</para>
+          <para>Copy <filename><replaceable>/usr/share/gforge</replaceable>/www/index_std.php</filename> to <filename>/etc/gforge/custom/index_std.php</filename> and edit it as you like.</para>
         </listitem>
       </orderedlist>
     </section>
