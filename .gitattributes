@@ -1989,6 +1989,7 @@ src/plugins/message/www/js/message.js -text
 src/plugins/oauthconsumer/NAME -text
 src/plugins/oauthconsumer/README -text
 src/plugins/oauthconsumer/common/oauthconsumer-init.php -text
+src/plugins/oauthconsumer/db/oauthconsumer-init.sql -text
 src/plugins/oauthconsumer/etc/oauthconsumer.ini -text
 src/plugins/oauthconsumer/packaging/control/222plugin-oauthconsumer -text
 src/plugins/oauthconsumer/packaging/control/222plugin-oauthconsumer.shortdesc -text
