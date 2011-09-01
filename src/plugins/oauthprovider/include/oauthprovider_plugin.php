@@ -61,7 +61,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 		if ($G_SESSION->usesPlugin("oauthprovider")) {
 			$param = '?type=user&id=' . $G_SESSION->getId(); // we indicate the part we're calling is the user one
 			echo  $HTML->PrintSubMenu (array ($text),
-					  array ('/plugins/oauthprovider/index.php'. $param) );				
+					  array ('/plugins/oauthprovider/index.php'. $param) , NULL);				
 		}
 	}
 	function groupmenu($params) {
