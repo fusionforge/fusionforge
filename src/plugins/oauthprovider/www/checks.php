@@ -95,8 +95,7 @@ function oauthprovider_CheckUser() {
 	$user = session_get_user(); // get the session user
 
 	if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
-		exit_error("Invalid User, Cannot Process your request for trequire_once $gfwww.'admin/admin_utils.php';
-		his user.", $pluginname);
+		exit_error("Invalid User, Cannot Process your request for this user.", $pluginname);
 	}
 
 	$id = $user->getID();
