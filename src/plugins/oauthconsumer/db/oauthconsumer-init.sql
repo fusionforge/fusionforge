@@ -4,9 +4,9 @@ CREATE TABLE plugin_oauthconsumer_provider (id	INTEGER PRIMARY KEY DEFAULT NEXTV
 				description VARCHAR(500) NOT NULL,
                                 consumer_key VARCHAR(250) NOT NULL,
                                 consumer_secret VARCHAR(250) NOT NULL,
-				request_token_url VARCHAR(250) NOT NULL,
-				authorize_url VARCHAR(250) NOT NULL,
-				access_token_url VARCHAR(250) NOT NULL
+				request_token_url VARCHAR(250),
+				authorize_url VARCHAR(250),
+				access_token_url VARCHAR(250)
 );
 CREATE UNIQUE INDEX idx_oauthconsumer_provider_name on plugin_oauthconsumer_provider(name);
 CREATE UNIQUE INDEX idx_oauthconsumer_provider_consumer_key on plugin_oauthconsumer_provider(consumer_key);
@@ -19,7 +19,7 @@ CREATE TABLE plugin_oauthconsumer_access_token (id INTEGER PRIMARY KEY DEFAULT N
 				user_id	INTEGER	NOT NULL,
 				time_stamp INTEGER NOT NULL,
 				CHECK (user_id>=0),
-				CHECK (consumer_id>=0),
+				CHECK (provider_id>=0),
 				CHECK (time_stamp>=0)
 );
 CREATE UNIQUE INDEX idx_oauthconsumer_access_token_key on plugin_oauthconsumer_access_token(token_key);

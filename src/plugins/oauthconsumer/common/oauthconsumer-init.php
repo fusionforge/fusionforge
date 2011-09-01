@@ -21,6 +21,8 @@
 
 global $gfplugins;
 require_once $gfplugins.'oauthconsumer/include/oauthconsumerPlugin.class.php' ;
+require_once $gfplugins.'oauthconsumer/include/fusionforge_oauth_datastore.php';
+require_once $gfplugins.'oauthconsumer/include/provider_api.php';
 
 $oauthconsumerPluginObject = new oauthconsumerPlugin ;
 
