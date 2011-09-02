@@ -42,10 +42,11 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");
 		$this->_addHook("content_negociated_project_home");
+		$this->_addHook("project_rdf_metadata"); // will provide some RDF metadata for the project's DOAP profile to 'doaprdf' plugin
 	}
 
 	function CallHook ($hookname, &$params) {
-		global $use_oslcplugin,$G_SESSION,$HTML;
+		global $use_oslcplugin,$G_SESSION,$HTML, $group_id;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("oslc")) {
@@ -227,6 +228,15 @@ class oslcPlugin extends Plugin {
   </oslc:Compact>
 </rdf:RDF>';
 			}
+		}
+		elseif($hookname == "project_rdf_metadata") {
+			
+			$serviceprovider = util_make_url ("/plugins/oslc/cm/oslc-cm-services/".$group_id);
+
+			if (! $params['prefixes']['http://open-services.net/ns/core#']) {
+				$params['prefixes']['http://open-services.net/ns/core#'] = 'oslc';
+			}
+			$params['xml'][] = '<oslc:serviceProvider rdf:resource="'.$serviceprovider.'"/>';
 		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
