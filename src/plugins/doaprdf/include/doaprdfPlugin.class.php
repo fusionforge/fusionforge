@@ -163,12 +163,26 @@ class doaprdfPlugin extends Plugin {
 			
 			$params['content_type'] = 'application/rdf+xml';
 
+			// invoke the 'project_rdf_metadata' hook so as to complement the RDF description
+			// Invoke plugins' hooks 'script_accepted_types' to discover which alternate content types they would accept for /users/...
+			$hook_params = array();
+			$hook_params['prefixes'] = array(
+							'http://www.w3.org/1999/02/22-rdf-syntax-ns#' => 'rdf',
+							'http://www.w3.org/2000/01/rdf-schema#' => 'rdfs',
+							'http://usefulinc.com/ns/doap#' => 'doap',
+							'http://purl.org/dc/terms/' => 'dcterms'
+			);
+			$hook_params['xml'] = array();
+			
+			plugin_hook_by_reference('project_rdf_metadata', $hook_params);
+			
 			$xml = '<?xml version="1.0"?>
-				<rdf:RDF
-      				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-      				xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-      				xmlns:doap="http://usefulinc.com/ns/doap#"
-      				xmlns:dcterms="http://purl.org/dc/terms/">
+				<rdf:RDF';
+			foreach($hook_params['prefixes'] as $url => $prefix) {
+				$xml .= ' xmlns:'. $prefix . '="'. $url .'"';
+			}
+      		
+      		$xml .='>
 
       			<doap:Project rdf:about="">
       				<doap:name>'. $projectname .'</doap:name>';
@@ -179,6 +193,12 @@ class doaprdfPlugin extends Plugin {
 				$tags = split(', ',$tags_list);
 				foreach($tags as $tag) {
 					$xml .= '<dcterms:subject>'.$tag.'</dcterms:subject>';
+				}
+			}
+			
+			if (count($hook_params['xml'])) {
+				foreach($hook_params['xml'] as $fragment) {
+					$xml .= $fragment;
 				}
 			}
 			

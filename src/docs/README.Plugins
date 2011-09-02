@@ -508,6 +508,10 @@ TODO : document Auth plugins :
   Description: returns in $params['content'] an alternate content for /users/ page and 
                in $params['content_type'] the actual content-type to return
 
+  Hook Name  : project_rdf_metadata
+  Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, $params['xml'] already returned xml bits
+  Description: returns in $params['prefixes'] and $params['xml'] added prefixes and added bits of RDF+XML to be included in the project's DOAP description 
+
 TODO (nerville) : document display_hierarchy
 
   -- Roland Mas <lolando@debian.org>
