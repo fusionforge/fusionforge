@@ -43,7 +43,10 @@ case "$1" in
 	perl -e '
 chomp($domain_name=`/usr/share/gforge/bin/forge_get_config web_host`);
 my $l;
-while (($l = <>) !~ /^\s*mydestination/) { print $l; };
+while ($l = <>) { 
+  last if l =~ /^\s*mydestination/) ;
+  print $l;
+};
 chomp $l;
 $l .= ", users.$domain_name" unless ($l =~ /^[^#]*users.$domain_name/);
 print "$l\n";
@@ -168,17 +171,19 @@ if ($seen_transport_maps == 0) {
 	perl -e '
 chomp($domain_name=`/usr/share/gforge/bin/forge_get_config web_host`);
 chomp($sys_lists_host=`/usr/share/gforge/bin/forge_get_config lists_host`);
-while (($l = <>) !~ /^\s*mydestination/) {
+while ($l = <>) { 
+  last if l =~ /^\s*mydestination/) ;
   print $l;
 };
 chomp $l ;
-$l =~ /^(\s*mydestination\s*=\s*)(\S.*)/ ;
-$head = $1 ;
-$dests = $2 ;
-$dests =~ s/, users.$domain_name// ;
-$dests =~ s/, $sys_lists_host// ;
-$l = $head . $dests ;
-print "$l\n" ;
+if ($l =~ /^(\s*mydestination\s*=\s*)(\S.*)/) {
+  $head = $1 ;
+  $dests = $2 ;
+  $dests =~ s/, users.$domain_name// ;
+  $dests =~ s/, $sys_lists_host// ;
+  $l = $head . $dests ;
+  print "$l\n" ;
+}
 while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
 	grep -q '^[[:space:]]*relay_domains' $tmp1 && perl -i -e '
