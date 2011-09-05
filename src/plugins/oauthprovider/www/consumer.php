@@ -59,13 +59,13 @@ if(count($t_consumers)>0)	{
 
 	if ( $t_can_manage ) { ?>
           <td class="center">
-	  print util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?consumer_id=' . $t_consumer->getId() , _('Manage'));
+	  <?php print util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?consumer_id=' . $t_consumer->getId() , _('Manage'));
 	  ?></td><?php
 	}
 
 	if ( $t_can_manage ) { ?>
           <td class="center">
-	  print util_make_link('/plugins/'.$pluginname.'/consumer_delete.php?consumer_id=' . $t_consumer->getId() . '&plugin_oauthprovider_consumer_delete_token='.form_generate_key(), _('Delete'));
+	  <?php print util_make_link('/plugins/'.$pluginname.'/consumer_delete.php?consumer_id=' . $t_consumer->getId() . '&plugin_oauthprovider_consumer_delete_token='.form_generate_key(), _('Delete'));
           ?></td><?php
 
 	}

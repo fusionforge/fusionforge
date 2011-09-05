@@ -36,6 +36,7 @@ require_once('token_api.php');
 class OauthAuthzRequestToken extends OauthAuthzToken {
 
   protected $authorized; // if a user has authorized the token
+  protected $verifier; //the oauth verifier code
   protected $role_id; //access level granted
 
   const TOKEN_TYPE = 'request';
@@ -48,15 +49,20 @@ class OauthAuthzRequestToken extends OauthAuthzToken {
    * @param int $p_user_id
    * @param int $p_time_stamp
    */
-  function __construct( $p_consumer_id, $p_key, $p_secret, $p_authorized=false, $p_user_id=null, $p_role_id=null, $p_time_stamp=null) {
+  function __construct( $p_consumer_id, $p_key, $p_secret, $p_authorized=false, $p_verifier=FALSE, $p_user_id=null, $p_role_id=null, $p_time_stamp=null) {
     parent::__construct( $p_consumer_id, $p_key, $p_secret, $p_user_id, $p_time_stamp);
 
     $this->authorized = $p_authorized;
+    $this->verifier = $p_verifier;
     $this->role_id = $p_role_id;
   }
 
   public function getAuthorized() {
   	return $this->authorized;
+  }
+  
+  public function getVerifier()	{
+  	return $this->verifier;
   }
 
   public function getRoleId() {
@@ -69,7 +75,7 @@ class OauthAuthzRequestToken extends OauthAuthzToken {
    * @return OauthAuthzRequestToken
    */
   static function row_to_new_token ($t_row) {
-    $t_token = new OauthAuthzRequestToken( $t_row['consumer_id'], $t_row['token_key'], $t_row['token_secret'], $t_row['authorized'], $t_row['user_id'], $t_row['role_id'], $t_row['time_stamp'] );
+    $t_token = new OauthAuthzRequestToken( $t_row['consumer_id'], $t_row['token_key'], $t_row['token_secret'], $t_row['authorized'], $t_row['verifier'], $t_row['user_id'], $t_row['role_id'], $t_row['time_stamp'] );
 
     $t_token->id = $t_row['id'];
 
@@ -120,9 +126,17 @@ class OauthAuthzRequestToken extends OauthAuthzToken {
 
   public function authorize($user_id, $role_id) {
   	$this->authorized = 1;
+  	$this->verifier = substr(sha1(util_randbytes(32)),-10,12);
   	$this->user_id = $user_id;
-  	$this->role_id = $role_id;
+  	$this->role_id = $role_id;   	
   	$this->save();
+  	return $this->verifier;
+  }
+  
+  public function check_verifier($verifier)	{
+  	if(!$this->verifier || ($this->verifier!=$verifier))	 {
+  		throw new OAuthException("Incorrect OAuth verification code provided.");
+  	}
   }
 
 

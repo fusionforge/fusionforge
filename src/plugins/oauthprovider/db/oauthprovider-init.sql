@@ -16,6 +16,7 @@ CREATE TABLE plugin_oauthprovider_request_token (id INTEGER PRIMARY KEY DEFAULT 
                                 token_key VARCHAR(250) NOT NULL,
                                 token_secret VARCHAR(250) NOT NULL,
 				authorized INTEGER NOT NULL DEFAULT 0,
+				verifier VARCHAR (150) NOT NULL DEFAULT 0,
 				user_id	INTEGER NULL,
 				role_id INTEGER NOT NULL DEFAULT 0,
 				time_stamp INTEGER NOT NULL,

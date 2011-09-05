@@ -44,10 +44,10 @@ $pluginname = 'oauthprovider';
 try {
 
 	$req = OAuthRequest::from_request();
-	//  print_r($req);
+	 //print_r($req);
 
 	$p_token = $req->get_parameter('oauth_token');
-	//  echo "token : $p_token";
+	//echo "token : $p_token";
 
 	$t_request_token = OauthAuthzRequestToken::load_by_key($p_token);
 
@@ -64,18 +64,10 @@ try {
 	foreach (RBACEngine::getInstance()->getAvailableRolesForUser($user) as $role) {
 
 		if ($role->getHomeProject()) {
-			if($groupname) {
-				if ($role->getHomeProject()->getID() == $group->getID()) {
+			if ($role->getHomeProject()->getID() == $group->getID()) {
 					//print_r('role1 :');
 					$roles[] = $role ;
-				}
-			}
-			else {
-				//print_r('role2 :');
-				//print_r($role);
-				$roles[] = $role ;
-			}
-
+			}			
 		}
 	}
 

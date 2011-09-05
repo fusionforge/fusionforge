@@ -581,8 +581,8 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 
 			$token_id = db_insertid($t_result, $t_token_table, 'id');
 		} else { # update
-			$t_query = "UPDATE $t_token_table SET consumer_id=$1, token_key=$2, token_secret=$3, authorized=$4, user_id=$5, role_id=$6, time_stamp=$7 WHERE id=$8";
-			db_query_params( $t_query, array( $token->getConsumerId(), $token->key, $token->secret, $token->getAuthorized(), $token->getUserId(), $token->getRoleId(), $token->gettime_stamp(), $token->getId() ) );
+			$t_query = "UPDATE $t_token_table SET consumer_id=$1, token_key=$2, token_secret=$3, authorized=$4, verifier=$5, user_id=$6, role_id=$7, time_stamp=$8 WHERE id=$9";
+			db_query_params( $t_query, array( $token->getConsumerId(), $token->key, $token->secret, $token->getAuthorized(), $token->getVerifier(), $token->getUserId(), $token->getRoleId(), $token->gettime_stamp(), $token->getId() ) );
 		}
 		return $token_id;
 	}

@@ -53,13 +53,13 @@ try {
 		//    echo "user : $user_id";
 
 		// mark as authorized by the user in the DB
-		$t_token->authorize($user_id, $f_role_id);
+		$verifier = $t_token->authorize($user_id, $f_role_id);
 
 		form_release_key(getStringFromRequest('plugin_oauthprovider_token_authorize_token'));
 
 		if($f_callback_url) {
 		//echo "Redirect : $callback_url?oauth_token=$p_token \n";exit;
-		Header("Location: $f_callback_url?oauth_token=$p_token");
+		Header("Location: $f_callback_url?oauth_token=$p_token&oauth_verifier=$verifier");
 		//session_redirect( $f_callback_url . "?oauthprovider_token=$p_token" );
 		}
 		else {
