@@ -7,5 +7,5 @@ ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) {core/groupdir_prefix}/$1/cgi-bin/$2
   Options Indexes FollowSymlinks
   AllowOverride All
   
-  Include {core/config_path}/httpd.conf.d/auth.projects.inc
+  Include {core/config_path}/httpd.conf.d/auth-projects.inc
 </Directory>
