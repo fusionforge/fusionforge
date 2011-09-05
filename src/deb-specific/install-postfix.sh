@@ -48,7 +48,11 @@ while ($l = <>) {
   print $l;
 };
 chomp $l;
-$l .= ", users.$domain_name" unless ($l =~ /^[^#]*users.$domain_name/);
+if ($l =~ /^(\s*mydestination\s*=\s*)(\S.*)/) {
+  $l .= ", users.$domain_name" unless ($l =~ /users.$domain_name/);
+} else {
+  $l = "mydestination = users.$domain_name"
+}
 print "$l\n";
 while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
