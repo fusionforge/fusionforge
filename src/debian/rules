@@ -116,7 +116,7 @@ debian/$(PACKAGE)-%.docs:
 debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*)
 	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
 	@echo Enabled plugins: $(ENABLED_PLUGINS)
-	@echo Skipped plugins: $$(sh $(CURDIR)/utils/list-enabled-plugins.sh --disabled)
+	@echo Skipped plugins: $(shell sh $(CURDIR)/utils/list-enabled-plugins.sh --disabled)
 	for plugin in $(ENABLED_PLUGINS) ; do ls plugins/$$plugin/packaging/control/[1-9][0-9][0-9]plugin-$$plugin ; done | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) >> $@
 
 debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
