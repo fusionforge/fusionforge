@@ -8,7 +8,10 @@ fusionforge (5.1-5+) UNRELEASED; urgency=low
     Caron (closes: #639947).
   * Fixed Provides: in -plugin-scmgit.
 
- -- Roland Mas <lolando@debian.org>  Mon, 05 Sep 2011 11:12:53 +0200
+  [ Thorsten Glaser ]
+  * Check for presence of dependencies before regenerating control.
+
+ -- Thorsten Glaser <t.glaser@tarent.de>  Mon, 05 Sep 2011 13:06:44 +0200
 
 fusionforge (5.1-5) unstable; urgency=low
 

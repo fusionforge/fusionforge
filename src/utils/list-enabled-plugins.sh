@@ -1,5 +1,10 @@
 #! /bin/sh
 
+if ! confget -h >/dev/null 2>&1; then
+	echo >&2 Aborting, confget not installed
+	exit 255
+fi
+
 if [ -e plugins ] ; then
     cd .
 elif [ -e ../src/plugins ] ; then
