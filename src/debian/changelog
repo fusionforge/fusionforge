@@ -6,8 +6,9 @@ fusionforge (5.1-5+) UNRELEASED; urgency=low
   [ Roland Mas ]
   * Fixed possible infinite loop in install-postfix.sh, thanks to Vincent
     Caron (closes: #639947).
+  * Fixed Provides: in -plugin-scmgit.
 
- -- Roland Mas <lolando@debian.org>  Mon, 05 Sep 2011 11:07:11 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 05 Sep 2011 11:12:53 +0200
 
 fusionforge (5.1-5) unstable; urgency=low
 
