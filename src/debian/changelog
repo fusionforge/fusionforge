@@ -1,4 +1,4 @@
-fusionforge (5.1-5+) UNRELEASED; urgency=low
+fusionforge (5.1-6) unstable; urgency=low
 
   [ Olivier Berger ]
   * Fix invalid XHTML+RDFa (Closes: #635373).
@@ -13,7 +13,7 @@ fusionforge (5.1-5+) UNRELEASED; urgency=low
     contains scripts requiring it, which are called from its postinst.
   * Check for presence of dependencies before regenerating control.
 
- -- Thorsten Glaser <tg@mirbsd.de>  Mon, 05 Sep 2011 13:07:45 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 06 Sep 2011 15:41:43 +0200
 
 fusionforge (5.1-5) unstable; urgency=low
 
