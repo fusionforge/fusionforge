@@ -70,7 +70,7 @@ Description: Dummy upgrade package for FusionForge
 
 Package: gforge-common
 Architecture: all
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, cpio, lockfile-progs, adduser, php5-cli, libphp-simplepie, python, ${misc:Depends}
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, cpio, lockfile-progs, adduser, php5-cli, php-htmlpurifier (>= 4.0), libphp-simplepie, python, ${misc:Depends}
 Conflicts: sourceforge, gforge-plugin-scmcvs (<< 4.1), gforge-plugin-scmsvn (<< 4.1), gforge-plugin-scmccase (<< 4.1), gforge-theme-starterpack (<< 4.0)
 Description: collaborative development tool - shared files
  FusionForge provides many tools to aid collaboration in a
@@ -84,7 +84,7 @@ Description: collaborative development tool - shared files
 
 Package: gforge-web-apache2
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, php-htmlpurifier (>= 4.0), libphp-simplepie, libjs-yui, libjs-scriptaculous, libjs-jquery, libjs-jquery-tipsy, libphp-jpgraph, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, libphp-simplepie, libjs-yui, libjs-scriptaculous, libjs-jquery, libjs-jquery-tipsy, libphp-jpgraph, ${misc:Depends}
 Recommends: locales | locales-all
 Provides: gforge-web
 Conflicts: gforge-web
@@ -126,7 +126,7 @@ Description: transition package to gforge-web-apache2
 
 Package: gforge-db-postgresql
 Architecture: all
-Depends: gforge-common, postgresql (>= 8.4), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, libsort-versions-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli, php5-pgsql, php-htmlpurifier, ${misc:Depends}
+Depends: gforge-common, postgresql (>= 8.4), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, libsort-versions-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli, php5-pgsql, ${misc:Depends}
 Provides: gforge-db
 Conflicts: gforge-db
 Description: collaborative development tool - database (using PostgreSQL)
@@ -466,6 +466,21 @@ Description: OSLC-CM compatible plugin for FusionForge tracker system.
  integrated into one web site and managed through a web interface.
  .
  OSLC-CM compatible plugin for FusionForge tracker system.
+
+Package: fusionforge-plugin-projectimport
+Homepage: https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Project_Import_plugin
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, libarc-php, ${misc:Depends}
+Description: Project Import plugin for FusionForge
+ This plugin allows the import of a project data previously exported
+ with ForgePlucker, or a compatible tool.
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ Project Import plugin for FusionForge
 
 Package: fusionforge-plugin-projectlabels
 Architecture: all

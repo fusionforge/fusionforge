@@ -44,7 +44,7 @@ case "$1" in
 chomp($domain_name=`/usr/share/gforge/bin/forge_get_config web_host`);
 my $l;
 while ($l = <>) { 
-  last if l =~ /^\s*mydestination/) ;
+  last if l =~ /^\s*mydestination/ ;
   print $l;
 };
 chomp $l;
@@ -176,7 +176,7 @@ if ($seen_transport_maps == 0) {
 chomp($domain_name=`/usr/share/gforge/bin/forge_get_config web_host`);
 chomp($sys_lists_host=`/usr/share/gforge/bin/forge_get_config lists_host`);
 while ($l = <>) { 
-  last if l =~ /^\s*mydestination/) ;
+  last if l =~ /^\s*mydestination/ ;
   print $l;
 };
 chomp $l ;

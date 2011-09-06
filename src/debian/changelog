@@ -4,7 +4,13 @@ fusionforge (5.1.50~-0) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Fri, 05 Aug 2011 13:41:04 +0200
 
-fusionforge (5.1-5+) UNRELEASED; urgency=low
+fusionforge (5.1-6+) UNRELEASED; urgency=low
+
+  * 
+
+ -- Roland Mas <lolando@debian.org>  Tue, 06 Sep 2011 15:51:19 +0200
+
+fusionforge (5.1-6) unstable; urgency=low
 
   [ Olivier Berger ]
   * Fix invalid XHTML+RDFa (Closes: #635373).
@@ -14,7 +20,12 @@ fusionforge (5.1-5+) UNRELEASED; urgency=low
     Caron (closes: #639947).
   * Fixed Provides: in -plugin-scmgit.
 
- -- Roland Mas <lolando@debian.org>  Mon, 05 Sep 2011 11:12:53 +0200
+  [ Thorsten Glaser ]
+  * Move php-htmlpurifier dependency into gforge-common because it
+    contains scripts requiring it, which are called from its postinst.
+  * Check for presence of dependencies before regenerating control.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 06 Sep 2011 15:41:43 +0200
 
 fusionforge (5.1-5) unstable; urgency=low
 

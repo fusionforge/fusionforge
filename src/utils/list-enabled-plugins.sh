@@ -3,6 +3,10 @@
 # Lists which plugins are enabled or disabled.
 
 # Takes into account the 'plugin_status = valid' values if the plugin's etc/pluginname.ini file exists
+if ! type confget >/dev/null 2>&1 && ! type python >/dev/null 2>&1 ; then
+	echo >&2 Aborting, neither confget nor python are available
+	exit 255
+fi
 
 if [ -e plugins ] ; then
     cd .
