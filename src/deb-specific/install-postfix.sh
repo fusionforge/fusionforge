@@ -44,7 +44,7 @@ case "$1" in
 require ("/etc/gforge/local.pl") ;
 my $l;
 while ($l = <>) { 
-  last if l =~ /^\s*mydestination/) ;
+  last if l =~ /^\s*mydestination/ ;
   print $l;
 };
 chomp $l;
@@ -173,7 +173,7 @@ if ($seen_transport_maps == 0) {
 	perl -e '
 require ("/etc/gforge/local.pl") ;
 while ($l = <>) { 
-  last if l =~ /^\s*mydestination/) ;
+  last if l =~ /^\s*mydestination/ ;
   print $l;
 };
 chomp $l ;
