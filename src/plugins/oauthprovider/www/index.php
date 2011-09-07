@@ -26,7 +26,15 @@ require_once('../../env.inc.php');
 require_once 'checks.php';
 
 $pluginname = 'oauthprovider';
-if($type == 'group') oauthprovider_CheckGroup();
+if($type == 'group') {
+	oauthprovider_CheckGroup();
+	if($name)	{
+		$suffix = "?type=group&name=$name";
+	}
+	else if($id) {
+		$suffix = "?type=group&id=$id";
+	}
+}
 else oauthprovider_CheckUser();
 
 ?>
@@ -42,7 +50,7 @@ else oauthprovider_CheckUser();
 
 <ul>
   <li><b>Request Token URL:</b> <tt><?php echo $http_url . '/plugins/'.$pluginname.'/request_token.php' ?></tt> (GET)</li>
-  <li><b>User Authorization URL:</b> <tt><?php echo $http_url . '/plugins/'.$pluginname.'/authorize.php' ?></tt></li>
+  <li><b>User Authorization URL:</b> <tt><?php echo $http_url . '/plugins/'.$pluginname.'/authorize.php'.$suffix ?></tt></li>
   <li><b>Access Token URL:</b> <tt><?php echo $http_url . '/plugins/'.$pluginname.'/access_token.php' ?></tt></li>
 </ul>
 
