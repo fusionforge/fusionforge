@@ -3,7 +3,9 @@
 require_once('../../env.inc.php');
 require_once 'checks.php';
 
-form_key_is_valid(getStringFromRequest('plugin_oauthprovider_consumer_delete_token'));
+if (!form_key_is_valid(getStringFromRequest('plugin_oauthprovider_consumer_delete_token'))) 	{
+	exit_form_double_submit('admin');
+}
 
 oauthconsumer_CheckForgeAdminExit();
 

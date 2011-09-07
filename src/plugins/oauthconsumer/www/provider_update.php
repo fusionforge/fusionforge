@@ -3,7 +3,9 @@
 require_once('../../env.inc.php');
 require_once 'checks.php';
 
-form_key_is_valid(getStringFromRequest( 'plugin_oauthconsumer_provider_update_token' ));
+if(!form_key_is_valid(getStringFromRequest( 'plugin_oauthconsumer_provider_update_token' )))	    {
+	exit_form_double_submit('admin');
+}
 
 session_require_global_perm('forge_admin');
 

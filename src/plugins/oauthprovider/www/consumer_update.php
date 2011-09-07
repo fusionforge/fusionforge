@@ -29,7 +29,9 @@ require_once 'checks.php';
 
 $pluginname = 'oauthprovider';
 
-form_key_is_valid(getStringFromRequest( 'plugin_oauthprovider_consumer_update_token' ));
+if(!form_key_is_valid(getStringFromRequest( 'plugin_oauthprovider_consumer_update_token' )))	{
+	exit_form_double_submit('admin');
+}
 
 //access_ensure_global_level( plugin_config_get( 'manage_threshold' ) ); // equivalent function to be added later for ff
 session_require_global_perm('forge_admin');
