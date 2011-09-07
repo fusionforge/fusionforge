@@ -5161,6 +5161,7 @@ tests/config/atom330 -text
 tests/config/christian -text
 tests/config/default -text
 tests/config/g-dellm65-1 -text
+tests/config/g-quadri1 -text
 tests/config/g-virtual05 -text
 tests/config/vladimir -text
 tests/func/AllTests.php -text

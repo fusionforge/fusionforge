@@ -1,0 +1,21 @@
+#
+# In this file you can find vars that are useable 
+# both as an include in a Makefile or
+# be sourced in a shell
+# So it should only be stuffs like VAR=value
+#
+
+SSHPUBKEY=~/.ssh/id_rsa.pub
+
+DEBMIRROR=http://g-rub.rd.francetelecom.fr:3142/debian
+DEBMIRRORSEC=http://g-rub.rd.francetelecom.fr:3142/debian-security
+DAG_RPMFORGE_REPO=http://g-virtual02.rd.francetelecom.fr/dag/redhat
+EPEL_REPO=http://g-virtual02.rd.francetelecom.fr/epel
+
+VMENGINE=lxc
+REMOTESELENIUM=true
+KEEPVM=true
+DNSDOMAIN=rd.francetelecom.fr
+
+coclicocdd40=lxc:centos5::
+coclicofftrk=lxc:centos5::
