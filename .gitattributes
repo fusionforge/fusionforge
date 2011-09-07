@@ -1991,6 +1991,7 @@ src/plugins/oauthconsumer/README -text
 src/plugins/oauthconsumer/common/oauthconsumer-init.php -text
 src/plugins/oauthconsumer/db/oauthconsumer-init.sql -text
 src/plugins/oauthconsumer/etc/oauthconsumer.ini -text
+src/plugins/oauthconsumer/include/access_token_api.php -text
 src/plugins/oauthconsumer/include/fusionforge_oauth_datastore.php -text
 src/plugins/oauthconsumer/include/oauthconsumerPlugin.class.php -text
 src/plugins/oauthconsumer/include/provider_api.php -text
@@ -1999,7 +2000,11 @@ src/plugins/oauthconsumer/packaging/control/222plugin-oauthconsumer.shortdesc -t
 src/plugins/oauthconsumer/packaging/dirs/plugin-oauthconsumer -text
 src/plugins/oauthconsumer/packaging/install/plugin-oauthconsumer -text
 src/plugins/oauthconsumer/packaging/links/plugin-oauthconsumer -text
+src/plugins/oauthconsumer/www/access_token_delete.php -text
+src/plugins/oauthconsumer/www/access_tokens.php -text
+src/plugins/oauthconsumer/www/callback.php -text
 src/plugins/oauthconsumer/www/checks.php -text
+src/plugins/oauthconsumer/www/get_access_token.php -text
 src/plugins/oauthconsumer/www/index.php -text
 src/plugins/oauthconsumer/www/provider_add.php -text
 src/plugins/oauthconsumer/www/provider_delete.php -text

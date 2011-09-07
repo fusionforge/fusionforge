@@ -9,7 +9,6 @@
 require_once $gfwww.'include/pre.php';
 
 $pluginname = 'oauthconsumer';
-
 // the header that displays for the user portion of the plugin
 function oauthconsumer_User_Header($params) {
 	global $DOCUMENT_ROOT,$HTML, $user_id, $pluginname;
@@ -45,7 +44,7 @@ function oauthconsumer_CheckUser() {
 	if (!($realuser) || !($realuser->usesPlugin($pluginname))) { //check if user has activated the plugin
 		exit_error("First activate the User's $pluginname plugin through Account Maintenance Page", $pluginname);
 	}
-	
+
 	//displays the page header
 	oauthconsumer_User_Header(array('title'=>'Personal page for OAuth','pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));    
 	
