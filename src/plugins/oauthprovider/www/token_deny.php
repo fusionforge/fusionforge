@@ -31,7 +31,9 @@ require_once 'checks.php';
 $pluginname = 'oauthprovider';
 
 // deletes a request token if the users refuses to authorize it for a consumer
-form_key_is_valid(getStringFromRequest('plugin_oauthprovider_token_deny_token'));
+if(!form_key_is_valid(getStringFromRequest('plugin_oauthprovider_token_deny_token')))	{
+	exit_form_double_submit();
+}
 
 try {
 

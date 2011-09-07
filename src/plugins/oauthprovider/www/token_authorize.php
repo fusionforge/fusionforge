@@ -28,7 +28,9 @@ require_once 'checks.php';
 
 
 // invoked when the user decides to authorize a request token
-form_key_is_valid(getStringFromRequest('plugin_oauthprovider_token_authorize_token'));
+if(!form_key_is_valid(getStringFromRequest('plugin_oauthprovider_token_authorize_token')))	{
+	exit_form_double_submit();
+}
 
 try {
 
