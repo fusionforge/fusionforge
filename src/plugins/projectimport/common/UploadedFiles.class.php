@@ -59,7 +59,7 @@ class AbstractFilesDirectory extends Error {
 
 	protected static function finfo() {
 		if (!isset(self::$finfo)) {
-			self::$finfo = new finfo(FILEINFO_MIME, forge_get_config('libmagic_db', 'projectimport-plugin'));
+			self::$finfo = new finfo(FILEINFO_MIME, forge_get_config('libmagic_db', 'projectimport'));
 		}
 		return self::$finfo;
 	}
@@ -73,7 +73,7 @@ class AbstractFilesDirectory extends Error {
 		$this->html_generator = $HTML;
 
 		if (!isset(self::$finfo)) {
-			self::$finfo = new finfo(FILEINFO_MIME, forge_get_config('libmagic_db', 'projectimport-plugin'));
+			self::$finfo = new finfo(FILEINFO_MIME, forge_get_config('libmagic_db', 'projectimport'));
 		}
 
 		if(! $storage_base) {
@@ -236,7 +236,7 @@ class AbstractFilesDirectory extends Error {
 /**
  * Specialized file storage management class for site-level files
  *
- * Files are stored inside $storage_base/projectimport-plugin (for instance '$core/data_path/plugins/projectimport/)
+ * Files are stored inside $projectimport/storage_base (for instance '$core/data_path/plugins/projectimport/)
  *
  * @author Olivier Berger
  *
@@ -244,7 +244,7 @@ class AbstractFilesDirectory extends Error {
 class SiteAdminFilesDirectory extends AbstractFilesDirectory {
 	public function SiteAdminFilesDirectory($HTML) {
 
-		$storage_base = forge_get_config('storage_base', 'projectimport-plugin');
+		$storage_base = forge_get_config('storage_base', 'projectimport');
 
 		parent::AbstractFilesDirectory($HTML, $storage_base);
 
@@ -254,7 +254,7 @@ class SiteAdminFilesDirectory extends AbstractFilesDirectory {
 /**
  * Specialized file storage management class for project-level files
  *
- * Files are stored inside subdirs of $storage_base/projectimport-plugin (for instance '$core/data_path/plugins/projectimport/_projname_/)
+ * Files are stored inside subdirs of $projectimport/storage_base (for instance '$core/data_path/plugins/projectimport/_projname_/)
  *
  * @author Olivier Berger
  *
@@ -270,7 +270,7 @@ class ProjectFilesDirectory extends AbstractFilesDirectory {
 
 		// store the project files inside a group unix name's subdir
 		$group = group_get_object($group_id);
-		$storage_base = forge_get_config('storage_base', 'projectimport-plugin');
+		$storage_base = forge_get_config('storage_base', 'projectimport');
 		$storage_base .= '/'. $group->getUnixName().'/';
 
 		parent::AbstractFilesDirectory($HTML, $storage_base);

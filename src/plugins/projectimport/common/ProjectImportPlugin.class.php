@@ -19,8 +19,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item('storage_base','projectimport-plugin','$core/data_path/plugins/projectimport/');
-forge_define_config_item('libmagic_db','projectimport-plugin','/usr/share/misc/magic.mgc');
+forge_define_config_item('storage_base','projectimport','$core/data_path/plugins/projectimport/');
+forge_define_config_item('libmagic_db','projectimport','/usr/share/misc/magic.mgc');
 
 class ProjectImportPlugin extends Plugin {
 	function ProjectImportPlugin () {
