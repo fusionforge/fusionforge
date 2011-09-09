@@ -95,6 +95,9 @@ scp $WORKSPACE/$CDXVERS/codendi_tools/localconf root@$HOST:
 ssh root@$HOST chmod +x codendi_install.sh
 ssh root@$HOST yum install -y $CDXPACKAGES
 
+# Disable SELINUX
+ssh root@$HOST perl -pi -e 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+
 ssh root@$HOST /root/codendi_install.sh
 ssh root@$HOST /usr/share/codendi/src/utils/generate_ssl_certificate.sh <<-FIN
 y
