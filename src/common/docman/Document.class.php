@@ -1068,7 +1068,7 @@ class Document extends Error {
 					/* name must be != data then nothing is displayed */
 					$params['name'] = 'details'.$this->getID();
 					$params['height'] = "300";
-					$params['group'] = $group_id;
+					$params['group'] = $this->Group->getID();
 					$params['body'] = $this->getFileData();
 					plugin_hook("text_editor",$params);
 					if (!$GLOBALS['editor_was_set_up']) {
