@@ -30,18 +30,28 @@ global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 
-if (!forge_check_perm('docman', $group_id, 'approve')) {
+$urlredirect = '/docman/?group_id='.$group_id;
+
+// plugin projects-hierarchy handler
+$childgroup_id = getIntFromRequest('childgroup_id');
+if ($childgroup_id) {
+	$g = group_get_object($childgroup_id);
+	$urlredirect .= '&childgroup_id='.$childgroup_id;
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$return_msg = _('Document Manager Action Denied.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 }
 
 $dg = new DocumentGroup($g, $dirid);
+
 if ($dg->isError())
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+	session_redirect($urlredirect.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 
-if (!$dg->delete($dirid, $group_id))
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+if (!$dg->delete($dirid, $g->getID()))
+	session_redirect($urlredirect.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 if ($dg->getState() != 2) {
 	$parentId = $dg->getParentID();
@@ -52,5 +62,5 @@ if ($dg->getState() != 2) {
 }
 
 $return_msg = sprintf(_('Document folder %s deleted successfully.'),$dg->getName());
-session_redirect('/docman/?group_id='.$group_id.'&view='.$view.'&dirid='.$parentId.'&feedback='.urlencode($return_msg));
+session_redirect($urlredirect.'&view='.$view.'&dirid='.$parentId.'&feedback='.urlencode($return_msg));
 ?>

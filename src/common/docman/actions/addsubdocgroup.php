@@ -44,7 +44,7 @@ if ($childgroup_id) {
 	$urlredirect .= '&childgroup_id='.$childgroup_id;
 }
 
-if (!forge_check_perm('docman', $group_id, 'approve')) {
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$return_msg = _('Document Manager Action Denied.');
 	session_redirect($urlredirect.'&warning_msg='.urlencode($return_msg));
 }

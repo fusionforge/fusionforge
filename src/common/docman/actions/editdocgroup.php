@@ -30,18 +30,17 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 global $childgroup_id; // plugin projects hierarchy handler
 
-
-if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
-}
-
 $urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
 
 // plugin projects-hierarchy handler
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&childgroup_id='.$childgroup_id;
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
+	$return_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 }
 
 $groupname = getStringFromRequest('groupname');

@@ -59,7 +59,7 @@ if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 }
 
-if (!forge_check_perm('docman', $group_id, 'submit')) {
+if (!forge_check_perm('docman', $g->getID(), 'submit')) {
 	$return_msg = _('Document Manager Action Denied.');
 	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
 }
