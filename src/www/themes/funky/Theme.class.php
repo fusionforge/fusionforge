@@ -434,8 +434,10 @@ class Theme extends Layout {
 		echo '<script type="text/javascript" src="/scripts/jquery/jquery-1.4.2.min.js"></script>';
 		echo '<script type="text/javascript" src="/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js"></script>';
 		echo '<script type="text/javascript" src="/scripts/jquery-storage/jquery.Storage.js"></script>';
+		echo '<script type="text/javascript" src="/scripts/jquery-simpletreemenu/js/jquery-simpleTreeMenu-1.1.0.js"></script>';
 		echo '<script type="text/javascript" src="/js/tooltips.js"></script>';
 		echo '<link rel="stylesheet" href="/scripts/jquery-tipsy/src/stylesheets/tipsy.css" type="text/css">';
+		echo '<link rel="stylesheet" href="/scripts/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.1.0.css" type="text/css">';
 		?>
 		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 		jQuery.noConflict();

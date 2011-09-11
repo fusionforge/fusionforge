@@ -145,7 +145,6 @@ class DocumentManager extends Error {
 		}
 		$subGroupIdArr = $dg->getSubgroup($docGroupId, $stateId);
 		if (sizeof($subGroupIdArr)) {
-			echo '<ul>';
 			foreach ($subGroupIdArr as $subGroupIdValue) {
 				$localDg = new DocumentGroup($this->Group, $subGroupIdValue);
 				$liclass = 'docman_li_treecontent';
@@ -169,12 +168,16 @@ class DocumentManager extends Error {
 					$nbDocsLabel = '<span class="tabtitle" title="'._('Number of documents in this folder').'" >('.$nbDocs.')</span>';
 				}
 				if (isset($nbDocsPending) && isset($nbDocsHidden) && isset($nbDocsPrivate)) {
-					$nbDocsLabel = '<span class="tabtitle" title="'._('Number of documents in this folder per status. active/pending/hidden/private').'" >('.$nbDocs.'/'.$nbDocsPending.'/'.$nbDocsHidden.'/'.$nbDocsPrivate.')';
+					$nbDocsLabel = '<span class="tabtitle" title="'._('Number of documents in this folder per status. active/pending/hidden/private').'" >('.$nbDocs.'/'.$nbDocsPending.'/'.$nbDocsHidden.'/'.$nbDocsPrivate.')</span>';
 				}
-				echo '<li class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel.'</li>';
-				$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
+				echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel;
+				if ($dg->getSubgroup($subGroupIdValue, $stateId)) {
+					echo '<ul>';
+					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
+					echo '</ul>';
+				}
+				echo '</li>';
 			}
-			echo '</ul>';
 		}
 	}
 }

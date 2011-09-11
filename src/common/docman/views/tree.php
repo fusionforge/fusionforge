@@ -38,7 +38,16 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 
 echo '<div id="documenttree" style="height:100%">';
 $dm = new DocumentManager($g);
+echo '<ul id="'.$g->getUnixname().'-tree">';
 $dm->getTree($dirid, $linkmenu);
+echo '</ul>';
+echo '
+<script type="text/javascript">
+	$(document).ready(function() {
+		jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu();
+	});
+</script>
+';
 if ($g->usesPlugin('projects-hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects-hierarchy');
 	$projectIDsArray = $projectsHierarchy->getFamily($group_id, 'child', true, 'validated');
@@ -51,9 +60,36 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 			echo '<hr>';
 			echo '<h5>'._('Child project: ').util_make_link('/docman/?group_id='.$groupObject->getID(),$groupObject->getPublicName(), array('class'=>'tabtitle', 'title'=>_('Browse document manager in this project'))).'</h5>';
 			$dm = new DocumentManager($groupObject);
+			echo '<ul id="'.$groupObject->getUnixname().'-tree">';
 			$dm->getTree($dirid, $linkmenu);
+			echo '</ul>';
+			echo '
+			<script type="text/javascript">
+				$(document).ready(function() {
+					jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu();
+				});
+			</script>
+			';
 		}
 	}
+}
+if (isset($childgroup_id) && $childgroup_id) {
+	$groupObject = group_get_object($childgroup_id);
+	echo '
+		<script type="text/javascript">
+			$(document).ready(function() {
+				jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
+			});
+		</script>
+	';
+} else {
+	echo '
+		<script type="text/javascript">
+			$(document).ready(function() {
+				jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
+			});
+		</script>
+	';
 }
 echo '</div>';
 ?>
