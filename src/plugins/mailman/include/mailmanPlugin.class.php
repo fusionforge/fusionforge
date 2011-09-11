@@ -127,7 +127,7 @@ class mailmanPlugin extends Plugin {
 				$group->setPluginUse ( $this->name, false );
 			}
 		} elseif ($hookname == "user_personal_links") {
-			// this displays the link in the user�s profile page to it�s personal mailman (if you want other sto access it, youll have to change the permissions in the index.php
+			// this displays the link in the user's profile page to it's personal mailman (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
 			//check if the user has the plugin activated
@@ -139,11 +139,11 @@ class mailmanPlugin extends Plugin {
 				echo '</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it�s  mailman administration
+			// this displays the link in the project admin options page to it's  mailman administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<p>'.util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&amp;type=admin&amp;pluginname='.$this->name,
+				echo '<p>'.util_make_link ("/plugins/".$this->name."/index.php?id=".$group->getID().'&amp;type=admin&amp;pluginname='.$this->name,
 									 _('View the mailman Administration')).'</p>';
 			}
 		}
