@@ -33,7 +33,7 @@ echo '<table><tr>';
 echo $HTML->boxTop(_('Add a new version'));
 echo '<td>';
 echo '<label>'._('Name').'</label><input name="version" type="text" size="10" />';
-if ($group->usesPlugin('projects_hierarchy')) {
+if ($group->usesPlugin('projects-hierarchy')) {
 	echo '<input name="transverse" type="checkbox" value="1" >'. _('Cross version (son included)') .'</input>';
 }
 echo '</td>';

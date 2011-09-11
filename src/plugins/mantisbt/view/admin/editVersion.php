@@ -83,7 +83,7 @@ if (!isset($errorPage)){
 	echo	'</tr>';
 	echo	'</tbody>';
 	echo '</table>';
-	if ($group->usesPlugin('projects_hierarchy')) {
+	if ($group->usesPlugin('projects-hierarchy')) {
 		echo '<input type="checkbox" name="transverse" value="1">'._('Cross version (son included)').'</input>';
 	}
 	echo '<input type="hidden" name="version_id" value="'.$idVersion.'"></input>';
