@@ -4,3 +4,8 @@ usr/share/javascript/prototype usr/share/@OLDPACKAGE@/www/scripts/prototype
 usr/share/javascript/scriptaculous usr/share/@OLDPACKAGE@/www/scripts/scriptaculous
 usr/share/javascript/jquery usr/share/@OLDPACKAGE@/www/scripts/jquery
 usr/share/javascript/jquery-tipsy usr/share/@OLDPACKAGE@/www/scripts/jquery-tipsy
+usr/share/javascript/yui usr/share/@OLDPACKAGE@/lib/vendor/yui
+usr/share/javascript/prototype usr/share/@OLDPACKAGE@/lib/vendor/prototype
+usr/share/javascript/scriptaculous usr/share/@OLDPACKAGE@/lib/vendor/scriptaculous
+usr/share/javascript/jquery usr/share/@OLDPACKAGE@/lib/vendor/jquery
+usr/share/javascript/jquery-tipsy usr/share/@OLDPACKAGE@/lib/vendor/jquery-tipsy
