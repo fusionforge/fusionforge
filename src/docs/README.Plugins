@@ -513,5 +513,7 @@ TODO : document Auth plugins :
   Description: returns in $params['prefixes'] and $params['xml'] added prefixes and added bits of RDF+XML to be included in the project's DOAP description 
 
 TODO (nerville) : document display_hierarchy
+TODO (lolando ?) : document role_normalize, role_translate_strings, role_has_permission, role_get_setting, list_roles_by_permission 
+TODO : document project_link_with_tooltip
 
   -- Roland Mas <lolando@debian.org>
