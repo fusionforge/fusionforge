@@ -175,7 +175,7 @@ class CompactPreviewPlugin extends Plugin {
     <oslc:shortTitle>'. $username . '</oslc:shortTitle>
     <oslc:smallPreview>
       <oslc:Preview>
-        <oslc:document rdf:ressource="/plugins/'.$this->name.'/compact/user/'. $username .'/type/small"/>
+        <oslc:document rdf:ressource="/plugins/'.$this->name.'/user.php?user='. $username .'"/>
         <oslc:hintWidth>500px</oslc:hintWidth>
         <oslc:hintHeight>150px</oslc:hintHeight>
       </oslc:Preview>
