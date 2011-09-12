@@ -34,15 +34,6 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
-/*		$this->_addHook("user_link_with_tooltip"); // override the way user links are done (for user compact preview support)
-		$this->_addHook("project_link_with_tooltip");
-		$this->_addHook("javascript_file"); // Add js files for oslc plugin
-		$this->_addHook("javascript"); // Add js initialization code
-		$this->_addHook("cssfile");
-		$this->_addHook("script_accepted_types");
-		$this->_addHook("content_negociated_user_home");
-		$this->_addHook("content_negociated_project_home");
-		*/
 		$this->_addHook("project_rdf_metadata"); // will provide some RDF metadata for the project's DOAP profile to 'doaprdf' plugin
 	}
 
@@ -160,79 +151,6 @@ class oslcPlugin extends Plugin {
 						     _('oslc Admin')).'</p>' ;
 			}
 		}
-		/*
-		elseif ($hookname == "user_link_with_tooltip"){
-			// override util_display_user() with modified version to display compact preview popup on user links
-			require_once dirname( __FILE__ ) . '/CompactResource.class.php';
-			$cR = CompactResource::createCompactResource($params);
-			$params['user_link'] = $cR->getResourceLink();
-		}
-		elseif ($hookname == "project_link_with_tooltip") {
-			require_once dirname( __FILE__ ) . '/CompactResource.class.php';
-			$cR = CompactResource::createCompactResource($params);
-			$params['group_link'] = $cR->getResourceLink();
-		}
-		elseif ($hookname == "javascript_file") {
-			// The userTooltip.js script is used by the compact preview feature (see content_negociated_user_home)
-			use_javascript('/scripts/jquery/jquery.js');
-			// provides support for the popup for compact preview
-			use_javascript('/plugins/oslc/scripts/oslcTooltip.js');
-		}
-		elseif ($hookname == "javascript") {
-			// make sure jquery won't conflict with prototype
-			$params['return'] = 'jQuery.noConflict();';
-		}
-		elseif ($hookname == "cssfile") {
-			use_stylesheet('/plugins/oslc/css/oslcTooltipStyle.css');
-		}
-		elseif($hookname == "script_accepted_types"){
-			$script = $params['script'];
-			if ($script == 'user_home' || $script == 'project_home') {
-				$params['accepted_types'][] = 'application/x-oslc-compact+xml';
-			}
-		}
-		elseif($hookname == "content_negociated_user_home") {
-			$username = $params['username'];
-			$accept = $params['accept'];
-			if($accept == 'application/x-oslc-compact+xml') {
-				$params['content_type'] = 'application/x-oslc-compact+xml';
-				$params['content'] = '<?xml version="1.0"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oslc="http://open-services.net/ns/core#">
-  <oslc:Compact rdf:about="/plugins/oslc/compact/user/'. $username .'">
-    <dcterms:title>'. $username . '</dcterms:title>
-    <oslc:shortTitle>'. $username . '</oslc:shortTitle>
-    <oslc:smallPreview>
-      <oslc:Preview>
-        <oslc:document rdf:ressource="/plugins/oslc/compact/user/'. $username .'/type/small"/>
-        <oslc:hintWidth>500px</oslc:hintWidth>
-        <oslc:hintHeight>150px</oslc:hintHeight>
-      </oslc:Preview>
-    </oslc:smallPreview>
-  </oslc:Compact>
-</rdf:RDF>';
-			}
-		}
-		elseif($hookname == "content_negociated_project_home") {
-			$projectname = $params['groupname'];
-			$accept = $params['accept'];
-			if($accept == 'application/x-oslc-compact+xml') {
-				$params['content_type'] = 'application/x-oslc-compact+xml';
-				$params['content'] = '<?xml version="1.0"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oslc="http://open-services.net/ns/core#">
-  <oslc:Compact rdf:about="/plugins/oslc/compact/project/'. $projectname .'">
-    <dcterms:title>'. $projectname . '</dcterms:title>
-    <oslc:shortTitle>'. $projectname . '</oslc:shortTitle>
-    <oslc:smallPreview>
-      <oslc:Preview>
-        <oslc:document rdf:ressource="/plugins/oslc/compact/project/'. $projectname .'/type/small"/>
-        <oslc:hintWidth>500px</oslc:hintWidth>
-        <oslc:hintHeight>150px</oslc:hintHeight>
-      </oslc:Preview>
-    </oslc:smallPreview>
-  </oslc:Compact>
-</rdf:RDF>';
-			}
-		}*/
 		elseif($hookname == "project_rdf_metadata") {
 			
 			$serviceprovider = util_make_url ("/plugins/oslc/cm/oslc-cm-services/".$group_id);
