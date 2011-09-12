@@ -27,128 +27,25 @@
  * Assumes $user object for displayed user is present
  */
 
+
+require_once $gfwww.'include/user_profile.php';
+
 require_once $gfwww.'include/vote_function.php';
 
 $title = _('User Profile');
 $HTML->header(array('title'=>$title));
 
-echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
+echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); 
+
+?>
 
 <div about="" typeof="sioc:UserAccount">
 
-<table width="100%" cellpadding="2" cellspacing="2" border="0">
-<tr>
-	<td width="150"><?php plugin_hook("user_logo", array('user_id' => $user_id, 'size' => 'l')); ?></td>
-	<td>
-
-<table class="my-layout-table" id="user-profile-personal-info">
-<tr>
-	<td>
-		<?php echo _('User Id:') ?>
-	</td>
-	<td>
-		<strong>
-<?php
-//print '<div property ="foaf:member" content="fusionforge:ForgeCommunity">';
-//echo '</div>';
-// description as a FusionForge Community member
-//print '<div property ="dc:Identifier" content="'.$user_id.'">';
-
-	if (session_loggedin() && user_ismember(1)) {
-		echo util_make_link('/admin/useredit.php?user_id='.$user_id, $user_id);
-	} else {
-		echo $user_id;
-//echo '</div>';
-	}
-?>
-		</strong><?php if(forge_get_config('use_people')) { ?>( <?php echo util_make_link ('/people/viewprofile.php?user_id='.$user_id,'<strong>'._('Skills Profile').'</strong>'); ?> )<?php } ?>
-	</td>
-</tr>
-
-<tr>
-	<td><?php echo _('Login name:') ?></td>
-	<td><strong><span property="sioc:name"><?php
-		print $user->getUnixName();
-		?></span></strong></td>
-</tr>
-
-<tr>
-	<td><?php echo _('Real Name:') ?> </td>
-	<td>
-		<div rev="foaf:account">
-			<div about="#me" typeof="foaf:Person">
-				<strong><span property="foaf:name"><?php
-				$user_title = $user->getTitle();
-				print($user_title ? $user_title .' ' :'').$user->getRealName();
-				?></span></strong>
-			</div>
-		</div>
-	</td>
-</tr>
-
-<?php if(!isset($GLOBALS['sys_show_contact_info']) || $GLOBALS['sys_show_contact_info']) { ?>
-<tr>
-	<td><?php echo _('Email Address:') ?>: </td>
-	<td>
-	<strong><?php
-		$user_mail=$user->getEmail();
-		$user_mailsha1=$user->getSha1Email();
-		// Removed for privacy reasons
-		//print '<span property="sioc:email" content="'. $user_mail .'">';
-		print '<span property="sioc:email_sha1" content="'. $user_mailsha1 .'">';
-		echo util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user_mail));
-		echo '</span>';
-	?></strong>
-	</td>
-</tr>
-<?php if ($user->getJabberAddress()) { ?>
-<tr>
-	<td><?php echo _('Jabber Address') ?></td>
-	<td>
-	<a href="jabber:<?php print $user->getJabberAddress(); ?>"><strong><?php print $user->getJabberAddress(); ?></strong></a>
-	</td>
-</tr>
-<?php } ?>
-
-<?php if ($user->getAddress() || $user->getAddress2()) { ?>
-<tr>
-	<td><?php echo _('Address:'); ?></td>
-	<td><?php echo $user->getAddress().'<br/>'.$user->getAddress2(); ?></td>
-</tr>
-<?php } ?>
-
-<?php if ($user->getPhone()) { ?>
-<tr>
-	<td><?php echo _('Phone:'); ?></td>
-	<td><?php
-//print '<div property="foaf:phone" content="'.$user->getPhone().'">';
-echo $user->getPhone();
-//echo '</div>';
-?></td>
-</tr>
-<?php } ?>
-
-<?php if ($user->getFax()) { ?>
-<tr>
-	<td><?php echo _('FAX:'); ?></td>
-	<td><?php echo $user->getFax(); ?></td>
-</tr>
-<?php } ?>
-<?php } ?>
-
-<tr>
-	<td>
-	<?php echo _('Site Member Since:') ?>
-	</td>
-	<td><strong><?php print date(_('Y-m-d H:i'), $user->getAddDate()); ?></strong>
-    </td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
 
 	<?php
+	
+	echo user_personal_information($user);
+	
 	if (forge_get_config('use_ratings')) {
 		echo $HTML->boxMiddle(_('Peer Rating'), _('Peer Rating'));
         echo '<table class="my-layout-table" id="user-profile-rating">';
