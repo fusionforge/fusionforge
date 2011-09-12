@@ -2142,7 +2142,7 @@ src/plugins/oslc/cronjobs/manage_oslc.php -text
 src/plugins/oslc/etc/httpd.d/plugin-oslc.inc -text
 src/plugins/oslc/etc/oslc.ini -text
 src/plugins/oslc/etc/plugins/oslc/config.php -text
-src/plugins/oslc/include/compactResource.class.php -text
+src/plugins/oslc/include/CompactResource.class.php -text
 src/plugins/oslc/include/oslc-zend/application/Bootstrap.php -text
 src/plugins/oslc/include/oslc-zend/application/basic-pwd.txt -text
 src/plugins/oslc/include/oslc-zend/application/configs/application.ini -text

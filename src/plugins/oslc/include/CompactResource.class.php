@@ -24,21 +24,33 @@
  */
 
 /**
- * Enter description here ...
+ * TODO Enter description here ...
  * @param unknown_type $params
  */
-class compactResource {
+class CompactResource {
 	public $params;
 
 
+	/**
+	 * Constructor
+	 * @param unknown_type $params
+	 */
 	public function __construct($params) {
 		$this->params = $params;
 	}
 
+	/**
+	 * TODO Enter description here ... to be overloaded in subclasses
+	 */
 	public function getResourceLink() {
 		// TBD.
 	}
 
+	/**
+	 * Enter description here ...
+	 * @param array $params : 'resource_type' => 'user' | 'group', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'user_link' => ''
+	 * @return UserCompactResource|GroupCompactResource|CompatResource|string
+	 */
 	public static function createCompactResource($params) {
 		switch ($params['resource_type']) {
 			case 'user' :
@@ -48,7 +60,7 @@ class compactResource {
 				return new GroupCompactResource($params);
 				break;
 			case 'artifact' :
-				return new compatResource($params);
+				return new CompatResource($params);
 				break;
 			default :
 				return 'Unknown resource type !';
@@ -57,7 +69,12 @@ class compactResource {
 	}
 }
 
-class UserCompactResource extends compactResource {
+/**
+ * Enter description here ...
+ * @author olivier
+ *
+ */
+class UserCompactResource extends CompactResource {
 
 	public function getResourceLink() {
 		$username = $this->params['username'];
@@ -68,7 +85,7 @@ class UserCompactResource extends compactResource {
         plugin_hook_by_reference('user_logo', $logo_params);
 
         $html = '';
-        // construct a link that is the base for a hover popup.
+        // construct a link that is the base for a hover popup (see oslcTooltip.js)
         $url = '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
 				'" rel="user,' . $username . '">'. $username . '</a>';
         if ($logo_params['content']) {
@@ -82,7 +99,12 @@ class UserCompactResource extends compactResource {
 
 }
 
-class GroupCompactResource extends compactResource {
+/**
+ * Enter description here ...
+ * @author olivier
+ *
+ */
+class GroupCompactResource extends CompactResource {
 
 	public function getResourceLink() {
 		$group_name = $this->params['group_name'];

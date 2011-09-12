@@ -160,13 +160,14 @@ class oslcPlugin extends Plugin {
 			}
 		}
 		elseif ($hookname == "user_link_with_tooltip"){
-			require_once dirname( __FILE__ ) . '/compactResource.class.php';
-			$cR = compactResource::createCompactResource($params);
+			// override util_display_user() with modified version to display compact preview popup on user links
+			require_once dirname( __FILE__ ) . '/CompactResource.class.php';
+			$cR = CompactResource::createCompactResource($params);
 			$params['user_link'] = $cR->getResourceLink();
 		}
 		elseif ($hookname == "project_link_with_tooltip") {
-			require_once dirname( __FILE__ ) . '/compactResource.class.php';
-			$cR = compactResource::createCompactResource($params);
+			require_once dirname( __FILE__ ) . '/CompactResource.class.php';
+			$cR = CompactResource::createCompactResource($params);
 			$params['group_link'] = $cR->getResourceLink();
 		}
 		elseif ($hookname == "javascript_file") {
