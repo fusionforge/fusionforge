@@ -78,6 +78,7 @@ jQuery(function(){
 
 		jQuery('#resourcePopupContent').html('<i>...loading '+ resource +' compact preview...</i>');
 
+		// Fetch the OSLC compact preview representation of the resource
 		jQuery.ajax({  
 			type: 'GET',
 			url: '/'+ resource +'/' + resourceId + '/',

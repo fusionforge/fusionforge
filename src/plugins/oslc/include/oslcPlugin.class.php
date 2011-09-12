@@ -34,7 +34,7 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
-		$this->_addHook("user_link_with_tooltip");
+		$this->_addHook("user_link_with_tooltip"); // override the way user links are done (for user compact preview support)
 		$this->_addHook("project_link_with_tooltip");
 		$this->_addHook("javascript_file"); // Add js files for oslc plugin
 		$this->_addHook("javascript"); // Add js initialization code
@@ -172,6 +172,7 @@ class oslcPlugin extends Plugin {
 		elseif ($hookname == "javascript_file") {
 			// The userTooltip.js script is used by the compact preview feature (see content_negociated_user_home)
 			use_javascript('/scripts/jquery/jquery.js');
+			// provides support for the popup for compact preview
 			use_javascript('/plugins/oslc/scripts/oslcTooltip.js');
 		}
 		elseif ($hookname == "javascript") {
