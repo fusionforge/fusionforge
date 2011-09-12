@@ -25,6 +25,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $g;
+global $group_id;
+global $gfcommon;
+
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
@@ -93,8 +97,11 @@ if (getStringFromPost('cmd') == "search") {
 		$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid != 2');
 	}
 
-	$qpa = db_construct_qpa($qpa, 'AND group_id = $1',
-				array(getIntFromRequest('group_id')));
+	$qpa = db_construct_qpa($qpa, ' AND group_id = $1', array($group_id));
+	$params['group_id'] = $group_id;
+	$params['qpa'] = $qpa;
+	plugin_hook('docmansearch_has_hierarchy', $params);
+
 	$qpa = db_construct_qpa($qpa, 'ORDER BY updatedate, createdate');
 	$resarr = array();
 	$result = db_query_qpa($qpa);

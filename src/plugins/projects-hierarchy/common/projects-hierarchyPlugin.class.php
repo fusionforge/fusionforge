@@ -35,6 +35,7 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->_addHook('project_admin_plugins'); // to show up in the admin page fro group
 		$this->_addHook('site_admin_option_hook'); // to provide a link to the site wide administrative pages of plugin
 		$this->_addHook('display_hierarchy_submenu'); // to display a submenu in software map if projects-hierarchy plugin is used
+		$this->_addHook('docmansearch_has_hierarchy'); // used by the search menu in docman
 	}
 
 	function CallHook($hookname, &$params) {
@@ -119,6 +120,15 @@ class projects_hierarchyPlugin extends Plugin {
 					$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=c';
 					$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=h';
 					echo ($HTML->subMenu($hierarMenuTitle, $hierarMenuUrl, $hierarMenuAttr));
+				}
+				$returned = true;
+				break;
+			}
+			case "docmansearch_has_hierarchy": {
+				$group_id = $params['group_id'];
+				$group = group_get_object($group_id);
+				if ($group->usesPlugin($this->name)) {
+					$qpa = $params['qpa'];
 				}
 				$returned = true;
 				break;
