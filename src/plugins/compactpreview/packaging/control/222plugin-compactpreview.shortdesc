@@ -1,3 +1,2 @@
- This plugin contains the CompactPreview subsystem of FusionForge. It allows each
- FusionForge project to have its own CompactPreview, and gives some
- control over it to the project's administrator.
+ This plugin adds support for user and project compact-preview
+ (popups) compatible with the OSLC specifications.
