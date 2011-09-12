@@ -29,28 +29,13 @@ global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 
-
-$urlparam = '';
+$urlparam = '/docman/?group_id='.$group_id;
 if (isset($childgroup_id) && $childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$urlparam .= '&childgroup_id='.$childgroup_id;
 }
 
-if (!forge_check_perm('docman', $g->getID(), 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
-}
-
 $doc_group = getIntFromRequest('doc_group');
-$docid = getIntFromRequest('docid');
-$title = getStringFromRequest('title');
-$description = getStringFromRequest('description');
-$data = getStringFromRequest('details'.$docid);
-$file_url = getStringFromRequest('file_url');
-$uploaded_data = getUploadedFile('uploaded_data');
-$stateid = getIntFromRequest('stateid');
-$filetype = getStringFromRequest('filetype');
-$editor = getStringFromRequest('editor');
 $fromview = getStringFromRequest('fromview');
 
 switch ($fromview) {
@@ -64,9 +49,24 @@ switch ($fromview) {
 	}
 }
 
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
+	$return_msg = _('Document Manager Action Denied.');
+	session_redirect($urlparam.'&warning_msg='.urlencode($return_msg));
+}
+
+$docid = getIntFromRequest('docid');
+$title = getStringFromRequest('title');
+$description = getStringFromRequest('description');
+$data = getStringFromRequest('details'.$docid);
+$file_url = getStringFromRequest('file_url');
+$uploaded_data = getUploadedFile('uploaded_data');
+$stateid = getIntFromRequest('stateid');
+$filetype = getStringFromRequest('filetype');
+$editor = getStringFromRequest('editor');
+
 $d= new Document($g, $docid);
 if ($d->isError())
-	session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
+	session_redirect($urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 
 $sanitizer = new TextSanitizer();
 $data = $sanitizer->SanitizeHtml($data);
@@ -78,7 +78,7 @@ if (($editor) && ($d->getFileData()!=$data) && (!$uploaded_data['name'])) {
 } elseif (!empty($uploaded_data) && $uploaded_data['name']) {
 	if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 		$return_msg = sprintf(_('Invalid file attack attempt %1$s.'), $uploaded_data['name']);
-		session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($return_msg));
+		session_redirect($urlparam.'&error_msg='.urlencode($return_msg));
 	}
 	$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
 	$filename = $uploaded_data['name'];
@@ -97,8 +97,8 @@ if (($editor) && ($d->getFileData()!=$data) && (!$uploaded_data['name'])) {
 	$filetype = $d->getFileType();
 }
 if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid))
-	session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
+	session_redirect($urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 
 $return_msg = sprintf(_('Document %s updated successfully.'),$d->getFilename());
-session_redirect('/docman/?group_id='.$group_id.$urlparam.'&feedback='.urlencode($return_msg));
+session_redirect($urlparam.'&feedback='.urlencode($return_msg));
 ?>
