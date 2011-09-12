@@ -994,6 +994,7 @@ src/plugins/compactpreview/www/images/Tooltip/balloon_top.png -text
 src/plugins/compactpreview/www/images/Tooltip/balloon_topLeft.png -text
 src/plugins/compactpreview/www/images/Tooltip/balloon_topRight.png -text
 src/plugins/compactpreview/www/images/Tooltip/oslc.png -text
+src/plugins/compactpreview/www/project.php -text
 src/plugins/compactpreview/www/scripts/oslcTooltip.js -text
 src/plugins/compactpreview/www/user.php -text
 src/plugins/contribtracker/INSTALL -text

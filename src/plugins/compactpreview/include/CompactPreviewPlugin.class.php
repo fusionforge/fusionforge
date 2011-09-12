@@ -197,7 +197,7 @@ class CompactPreviewPlugin extends Plugin {
     <oslc:shortTitle>'. $projectname . '</oslc:shortTitle>
     <oslc:smallPreview>
       <oslc:Preview>
-        <oslc:document rdf:ressource="/plugins/'.$this->name.'/compact/project/'. $projectname .'/type/small"/>
+        <oslc:document rdf:ressource="/plugins/'.$this->name.'/project.php?project='. $projectname .'"/>
         <oslc:hintWidth>500px</oslc:hintWidth>
         <oslc:hintHeight>150px</oslc:hintHeight>
       </oslc:Preview>
