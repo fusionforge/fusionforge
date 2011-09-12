@@ -34,7 +34,7 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
-		$this->_addHook("user_link_with_tooltip"); // override the way user links are done (for user compact preview support)
+/*		$this->_addHook("user_link_with_tooltip"); // override the way user links are done (for user compact preview support)
 		$this->_addHook("project_link_with_tooltip");
 		$this->_addHook("javascript_file"); // Add js files for oslc plugin
 		$this->_addHook("javascript"); // Add js initialization code
@@ -42,6 +42,7 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");
 		$this->_addHook("content_negociated_project_home");
+		*/
 		$this->_addHook("project_rdf_metadata"); // will provide some RDF metadata for the project's DOAP profile to 'doaprdf' plugin
 	}
 
@@ -159,6 +160,7 @@ class oslcPlugin extends Plugin {
 						     _('oslc Admin')).'</p>' ;
 			}
 		}
+		/*
 		elseif ($hookname == "user_link_with_tooltip"){
 			// override util_display_user() with modified version to display compact preview popup on user links
 			require_once dirname( __FILE__ ) . '/CompactResource.class.php';
@@ -230,7 +232,7 @@ class oslcPlugin extends Plugin {
   </oslc:Compact>
 </rdf:RDF>';
 			}
-		}
+		}*/
 		elseif($hookname == "project_rdf_metadata") {
 			
 			$serviceprovider = util_make_url ("/plugins/oslc/cm/oslc-cm-services/".$group_id);
