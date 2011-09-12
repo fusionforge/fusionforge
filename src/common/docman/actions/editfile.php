@@ -29,7 +29,14 @@ global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 
-if (!forge_check_perm('docman', $group_id, 'approve')) {
+
+$urlparam = '';
+if (isset($childgroup_id) && $childgroup_id) {
+	$g = group_get_object($childgroup_id);
+	$urlparam .= '&childgroup_id='.$childgroup_id;
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$return_msg = _('Document Manager Action Denied.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 }
@@ -45,13 +52,14 @@ $stateid = getIntFromRequest('stateid');
 $filetype = getStringFromRequest('filetype');
 $editor = getStringFromRequest('editor');
 $fromview = getStringFromRequest('fromview');
+
 switch ($fromview) {
 	case 'listrashfile': {
-		$urlparam = '&view='.$fromview;
+		$urlparam .= '&view='.$fromview;
 		break;
 	}
 	default: {
-		$urlparam = '&view=listfile&dirid='.$doc_group;
+		$urlparam .= '&view=listfile&dirid='.$doc_group;
 		break;
 	}
 }
