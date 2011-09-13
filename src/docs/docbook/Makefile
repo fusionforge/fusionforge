@@ -9,7 +9,7 @@ DB2LATEX_XSL = ${XSL}db2latex/
 XSLFOP = /usr/share/xml/docbook/stylesheet/docbook-xsl/fo/
 FOP = fop
 #DEVNULL = >>/tmp/debug 2>&1
-DEVNULL = &> /dev/null
+DEVNULL = >/dev/null 2>&1
 
 BOOKS=gforge_manual
 ARTICLES=administration_guide user_guide contribution_guide installation_guide
