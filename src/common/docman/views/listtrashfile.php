@@ -85,12 +85,6 @@ if ($d_arr != NULL ) {
 		}
 	}
 }
-
-// $nested_groups has a system directory : .trash => so count < 2
-if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) < 2)) {
-	echo '<p class="information">'._('Trash is empty.').'</p>';
-} else {
-
 ?>
 <script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 var controllerListTrash;
@@ -109,113 +103,112 @@ jQuery(document).ready(function() {
 });
 /* ]]> */</script>
 <?php
-	echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&amp;action=emptytrash" >';
-	echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents and folders with deleted status.') .'" >';
-	echo '</form></div>';
+echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&amp;action=emptytrash" >';
+echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents and folders with deleted status.') .'" >';
+echo '</form></div>';
 
-	echo '<div id="left" style="float:left; width:17%; min-width: 50px;">';
-	include ($gfcommon.'docman/views/tree.php');
-	echo '</div>';
-	echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
-	echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
-	if ($DocGroupName) {
-		echo '<h3 class="docman_h3" >'._('Documents folder:').' <i>'.$DocGroupName.'</i>&nbsp;';
-		if ($DocGroupName != '.trash') {
-			echo '<a href="#" id="docman-editdirectory" class="tabtitle" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-			echo '<a href="?group_id='.$group_id.'&amp;action=deldir&amp;dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Delete permanently this folder and his content.').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
-		}
-		echo '</h3>';
-		echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
-		echo '<h4 class="docman_h4">'. _('Edit this folder') .'</h4>';
-		include ($gfcommon.'docman/views/editdocgroup.php');
-		echo '</div>';
+echo '<div id="left" style="float:left; width:17%; min-width: 50px;">';
+include ($gfcommon.'docman/views/tree.php');
+echo '</div>';
+echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
+echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
+if ($DocGroupName) {
+	echo '<h3 class="docman_h3" >'._('Documents folder:').' <i>'.$DocGroupName.'</i>&nbsp;';
+	if ($DocGroupName != '.trash') {
+		echo '<a href="#" id="docman-editdirectory" class="tabtitle" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
+		echo '<a href="?group_id='.$group_id.'&amp;action=deldir&amp;dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Delete permanently this folder and his content.').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 	}
-
-	if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-		$tabletop = array('<input id="checkallactive" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" type="checkbox" onchange="controllerListTrash.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
-		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
-		echo '<div class="docmanDiv">';
-		echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
-		$time_new = 604800;
-		foreach ($nested_docs[$dirid] as $d) {
-			echo '<tr>';
-			echo '<td>';
-			echo '<input title="'._('Select / Deselect this document for massaction').'" class="checkeddocidactive tabtitle-w" type="checkbox" value="'.$d->getID().'" onchange="controllerListTrash.checkgeneral(\'active\')" />';
-			echo '</td>';
-			switch ($d->getFileType()) {
-				case "URL": {
-					$docurl = $d->getFileName();
-					break;
-				}
-				default: {
-					$docurl = util_make_uri('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
-				}
-			}
-			echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'._('View this document').'" >';
-			echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
-			echo '</a></td>';
-			echo '<td>';
-			if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
-				$html_image_attr = array();
-				$html_image_attr['alt'] = _('new');
-				$html_image_attr['class'] = 'docman-newdocument';
-				$html_image_attr['title'] = _('Updated since less than 7 days');
-				echo html_image('docman/new.png', '14', '14', $html_image_attr);
-			}
-			echo '&nbsp;'.$d->getFileName();
-			echo '</td>';
-			echo '<td>'.$d->getName().'</td>';
-			echo '<td>'.$d->getDescription().'</td>';
-			echo '<td>'.make_user_link($d->getCreatorUserName(), $d->getCreatorRealName()).'</td>';
-			echo '<td>';
-			if ( $d->getUpdated() ) {
-				echo date(_('Y-m-d H:i'), $d->getUpdated());
-			} else {
-				echo date(_('Y-m-d H:i'), $d->getCreated());
-			}
-			echo '</td>';
-			echo '<td>';
-			echo $d->getStateName().'</td>';
-			echo '<td>';
-			switch ($d->getFileType()) {
-				case "URL": {
-					echo "--";
-					break;
-				}
-				default: {
-					echo human_readable_bytes($d->getFileSize());
-					break;
-				}
-			}
-			echo '</td>';
-
-			echo '<td>';
-			echo '<a class="tabtitle" href="?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
-			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListTrash.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
-			echo '</td>';
-			echo '</tr>'."\n";
-			echo '<tr id="docid'.$d->getID().'" class="docman_editfile_nodisplay" ><td colspan="10" >';
-			$d->editFile();
-			echo '</td></tr>';
-		}
-		echo $HTML->listTableBottom();
-		echo '<p>';
-		echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
-		echo _('Mass actions for selected documents:');
-		echo '</span>';
-		echo '<span id="massactionactive" style="display: none;" >';
-		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&amp;fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Delete permanently.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
-		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
-		echo '</span>';
-		echo '</p>';
-		echo '</div>';
-	} else {
-		if ($dirid) {
-			echo '<p class="information">'._('No documents.').'</p>';
-		}
-	}
-
+	echo '</h3>';
+	echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
+	echo '<h4 class="docman_h4">'. _('Edit this folder') .'</h4>';
+	include ($gfcommon.'docman/views/editdocgroup.php');
 	echo '</div>';
-	echo '<div style="clear: both;" />';
 }
+
+if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
+	$tabletop = array('<input id="checkallactive" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" type="checkbox" onchange="controllerListTrash.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
+	echo '<div class="docmanDiv">';
+	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
+	$time_new = 604800;
+	foreach ($nested_docs[$dirid] as $d) {
+		echo '<tr>';
+		echo '<td>';
+		echo '<input title="'._('Select / Deselect this document for massaction').'" class="checkeddocidactive tabtitle-w" type="checkbox" value="'.$d->getID().'" onchange="controllerListTrash.checkgeneral(\'active\')" />';
+		echo '</td>';
+		switch ($d->getFileType()) {
+			case "URL": {
+				$docurl = $d->getFileName();
+				break;
+			}
+			default: {
+				$docurl = util_make_uri('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
+			}
+		}
+		echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'._('View this document').'" >';
+		echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
+		echo '</a></td>';
+		echo '<td>';
+		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
+			$html_image_attr = array();
+			$html_image_attr['alt'] = _('new');
+			$html_image_attr['class'] = 'docman-newdocument';
+			$html_image_attr['title'] = _('Updated since less than 7 days');
+			echo html_image('docman/new.png', '14', '14', $html_image_attr);
+		}
+		echo '&nbsp;'.$d->getFileName();
+		echo '</td>';
+		echo '<td>'.$d->getName().'</td>';
+		echo '<td>'.$d->getDescription().'</td>';
+		echo '<td>'.make_user_link($d->getCreatorUserName(), $d->getCreatorRealName()).'</td>';
+		echo '<td>';
+		if ( $d->getUpdated() ) {
+			echo date(_('Y-m-d H:i'), $d->getUpdated());
+		} else {
+			echo date(_('Y-m-d H:i'), $d->getCreated());
+		}
+		echo '</td>';
+		echo '<td>';
+		echo $d->getStateName().'</td>';
+		echo '<td>';
+		switch ($d->getFileType()) {
+			case "URL": {
+				echo "--";
+				break;
+			}
+			default: {
+				echo human_readable_bytes($d->getFileSize());
+				break;
+			}
+		}
+		echo '</td>';
+
+		echo '<td>';
+		echo '<a class="tabtitle" href="?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
+		echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListTrash.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
+		echo '</td>';
+		echo '</tr>'."\n";
+		echo '<tr id="docid'.$d->getID().'" class="docman_editfile_nodisplay" ><td colspan="10" >';
+		$d->editFile();
+		echo '</td></tr>';
+	}
+	echo $HTML->listTableBottom();
+	echo '<p>';
+	echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
+	echo _('Mass actions for selected documents:');
+	echo '</span>';
+	echo '<span id="massactionactive" style="display: none;" >';
+	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&amp;fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Delete permanently.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
+	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
+	echo '</span>';
+	echo '</p>';
+	echo '</div>';
+} else {
+	if ($dirid) {
+		echo '<p class="information">'._('No documents.').'</p>';
+	}
+}
+
+echo '</div>';
+echo '<div style="clear: both;" />';
 ?>
