@@ -64,12 +64,14 @@ if ($dg->isError())
 if ($dg->getState() == 2) {
 	$newdgf = new DocumentGroupFactory($g);
 	$dgh->showSelectNestedGroups($newdgf->getNested(), 'parent_dirid', false, false);
+	$labelSubmit = _('Restore');
 } else {
 	$dgh->showSelectNestedGroups($dgf->getNested(), 'parent_dirid', true, $dg->getParentId(), array($dg->getID()));
+	$labelSubmit = _('Edit');
 }
 ?>
 				</td>
-				<td><input type="submit" value="<?php echo _('Edit') ?>" name="submit" /></td>
+				<td><input type="submit" value="<?php echo $labelSubmit ?>" name="submit" /></td>
 			</tr>
 		</table>
 		<p>
