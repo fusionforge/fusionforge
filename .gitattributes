@@ -984,16 +984,16 @@ src/plugins/compactpreview/packaging/docs/plugin-compactpreview -text
 src/plugins/compactpreview/packaging/install/plugin-compactpreview -text
 src/plugins/compactpreview/packaging/links/plugin-compactpreview -text
 src/plugins/compactpreview/www/css/oslcTooltipStyle.css -text svneol=unset#text/css
-src/plugins/compactpreview/www/images/Tooltip/balloon_bottom.png -text
-src/plugins/compactpreview/www/images/Tooltip/balloon_bottomLeft.png -text
-src/plugins/compactpreview/www/images/Tooltip/balloon_bottomRight.png -text
-src/plugins/compactpreview/www/images/Tooltip/balloon_left.png -text
-src/plugins/compactpreview/www/images/Tooltip/balloon_right.png -text
-src/plugins/compactpreview/www/images/Tooltip/balloon_tail.png -text
-src/plugins/compactpreview/www/images/Tooltip/balloon_top.png -text
-src/plugins/compactpreview/www/images/Tooltip/balloon_topLeft.png -text
-src/plugins/compactpreview/www/images/Tooltip/balloon_topRight.png -text
-src/plugins/compactpreview/www/images/Tooltip/oslc.png -text
+src/plugins/compactpreview/www/images/Tooltip/balloon_bottom.png -text svneol=unset#image/png
+src/plugins/compactpreview/www/images/Tooltip/balloon_bottomLeft.png -text svneol=unset#image/png
+src/plugins/compactpreview/www/images/Tooltip/balloon_bottomRight.png -text svneol=unset#image/png
+src/plugins/compactpreview/www/images/Tooltip/balloon_left.png -text svneol=unset#image/png
+src/plugins/compactpreview/www/images/Tooltip/balloon_right.png -text svneol=unset#image/png
+src/plugins/compactpreview/www/images/Tooltip/balloon_tail.png -text svneol=unset#image/png
+src/plugins/compactpreview/www/images/Tooltip/balloon_top.png -text svneol=unset#image/png
+src/plugins/compactpreview/www/images/Tooltip/balloon_topLeft.png -text svneol=unset#image/png
+src/plugins/compactpreview/www/images/Tooltip/balloon_topRight.png -text svneol=unset#image/png
+src/plugins/compactpreview/www/images/Tooltip/oslc.png -text svneol=unset#image/png
 src/plugins/compactpreview/www/project.php -text
 src/plugins/compactpreview/www/scripts/oslcTooltip.js -text
 src/plugins/compactpreview/www/user.php -text
@@ -4104,10 +4104,10 @@ src/plugins/wiki/www/themes/Sidebar/hyperapplet.php -text
 src/plugins/wiki/www/themes/Sidebar/hyperwiki.jar -text
 src/plugins/wiki/www/themes/Sidebar/hyperwiki.php -text
 src/plugins/wiki/www/themes/Sidebar/images/UEB16.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/Sidebar/images/bullet.png -text
+src/plugins/wiki/www/themes/Sidebar/images/bullet.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Sidebar/images/logo.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Sidebar/images/mini_help.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/Sidebar/images/wikiuser.png -text
+src/plugins/wiki/www/themes/Sidebar/images/wikiuser.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Sidebar/jscalendar/README -text
 src/plugins/wiki/www/themes/Sidebar/jscalendar/calendar-phpwiki.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Sidebar/jscalendar/calendar-setup.js -text
@@ -4207,7 +4207,7 @@ src/plugins/wiki/www/themes/blog/Kubrick-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/blog/Kubrick.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/blog/Makefile -text
 src/plugins/wiki/www/themes/blog/images/Edit-chalk-10bo12.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/blog/images/UEB16.png -text
+src/plugins/wiki/www/themes/blog/images/UEB16.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/blog/images/actionbarbg.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/blog/images/bottom_sidebar_round.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/blog/images/crumb.png -text svneol=unset#image/png
@@ -4978,7 +4978,7 @@ src/www/themes/funky/images/ic/rss.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/save.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/spinner.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/ic/survey16b.png -text svneol=unset#image/png
-src/www/themes/funky/images/ic/tag.png -text svneol=unset#unset
+src/www/themes/funky/images/ic/tag.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/taskman20g.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/taskman20w.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/toggle_minus.png -text svneol=unset#image/png
@@ -5107,7 +5107,7 @@ src/www/themes/gforge/images/ic/rss.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/save.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/spinner.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/ic/survey16b.png -text svneol=unset#image/png
-src/www/themes/gforge/images/ic/tag.png -text svneol=unset#unset
+src/www/themes/gforge/images/ic/tag.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/taskman20g.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/taskman20w.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/toggle_minus.png -text svneol=unset#image/png
