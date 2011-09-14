@@ -24,14 +24,13 @@
 global $pluginExtSubProj;
 global $group_id;
 
-$confArr = array();
-$confArr['newsubprojecturl'] = getStringFromRequest('newsubprojecturl');
+$url = urldecode(getStringFromRequest('url'));
 
-if (!$pluginExtSubProj->addExtSubProj($group_id, $confArr['newsubprojecturl'])) {
-	$error_msg = _('Failed to add subproject.');
+if (!$pluginExtSubProj->delExtSubProj($group_id, $url)) {
+	$error_msg = _('Failed to delete subproject.');
 	session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name.'&error_msg='.urlencode($error_msg));
 }
 
-$feedback = _('Sub project succesfully added.');
+$feedback = _('Sub project succesfully deleted.');
 session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name.'&feedback='.urlencode($feedback));
 ?>

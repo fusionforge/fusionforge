@@ -117,15 +117,18 @@ switch ($type) {
 			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $pluginExtSubProj->name), 'home');
 		}
 		$action = getStringFromRequest('action');
-		switch ($action) {
-			case 'addExtSubProj': {
-				global $gfplugins;
-				include($gfplugins.$pluginExtSubProj->name.'/actions/'.$action.'.php');
-				break;
-			}
-			default: {
-				// do nothing, see getProjectAdminView() below
-				break;
+		if($action) {
+			switch ($action) {
+				case 'delExtSubProj':
+				case 'addExtSubProj': {
+					global $gfplugins;
+					include($gfplugins.$pluginExtSubProj->name.'/actions/'.$action.'.php');
+					break;
+				}
+				default: {
+					$pluginExtSubProj->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Unknown action.'));
+					break;
+				}
 			}
 		}
 		// params needed by site_project_header() inside getHeader()

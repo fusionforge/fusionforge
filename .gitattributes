@@ -1057,6 +1057,7 @@ src/plugins/extratabs/www/index.php -text
 src/plugins/extsubproj/NAME -text
 src/plugins/extsubproj/README -text
 src/plugins/extsubproj/actions/addExtSubProj.php -text
+src/plugins/extsubproj/actions/delExtSubProj.php -text
 src/plugins/extsubproj/bin/db-delete.pl -text
 src/plugins/extsubproj/bin/db-upgrade.pl -text
 src/plugins/extsubproj/common/extsubproj-init.php -text

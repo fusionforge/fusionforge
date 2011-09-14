@@ -76,6 +76,9 @@ class extsubprojPlugin extends Plugin {
 	function getProjectAdminAddExtSubProjAction($group_id) {
 		return '?group_id='.$group_id.'&type=admin&pluginname='.$this->name.'&action=addExtSubProj';
 	}
+	function getProjectAdminDelExtSubProjAction($group_id, $url) {
+		return '?group_id='.$group_id.'&type=admin&pluginname='.$this->name.'&action=delExtSubProj&url='.urlencode($url);
+	}
 	/**
 	* getHeader - initialize header and js
 	* @param	string	type : user, project (aka group)
@@ -172,13 +175,55 @@ class extsubprojPlugin extends Plugin {
 		return true;
 	}
 	
+	function getSubProjects($project_id) {
+		$res = db_query_params('SELECT sub_project_url from plugin_extsubproj_subprojects where project_id=$1', array($project_id));
+		if (!$res) {
+			return false;
+		}
+		$returnArr = array();
+		while ($row = db_fetch_array($res)) {
+			$returnArr[] = $row['sub_project_url'];
+		}		
+		return $returnArr;
+	}
+	
+	function addExtSubProj($project_id, $url) {
+		// TODO verify URL
+		// check if not already in the existing subprojects (even for another project)
+		// TODO first check with HTTP then check with HTTPS
+		$res = db_query_params('SELECT count(*) from plugin_extsubproj_subprojects where sub_project_url=$1', array($url));	
+		if ($res && db_result($res, 0, 'count') == '0') {
+			$res = db_query_params('INSERT INTO plugin_extsubproj_subprojects (project_id, sub_project_url) VALUES ($1, $2)', 
+				array($project_id, $url));
+			if (!$res) {
+				return false;
+			}
+			return true;
+		}
+	}
+	
+	function delExtSubProj($project_id, $url) {
+		// TODO verify URL
+		// check if not already in the existing subprojects (even for another project)
+		// TODO first check with HTTP then check with HTTPS
+		$res = db_query_params('SELECT count(*) from plugin_extsubproj_subprojects where sub_project_url=$1', array($url));
+		if ($res && db_result($res, 0, 'count') > '0') {
+			$res = db_query_params('DELETE FROM plugin_extsubproj_subprojects WHERE project_id=$1 AND sub_project_url=$2',
+				array($project_id, $url));
+			if (!$res) {
+				return false;
+			}
+			return true;
+		}
+	}
+	
 	/**
 	* getConf - return the configuration defined at project level
 	*
 	* @param	integer	the group id
 	* @return	array	the configuration array
 	*/
-	function getConf($project_id) {
+	/*function getConf($project_id) {
 		$resConf = db_query_params('SELECT * from plugin_extsubproj_subprojects where project_id=$1',array($project_id));
 		if (!$resConf) {
 			return false;
@@ -203,7 +248,7 @@ class extsubprojPlugin extends Plugin {
 	
 		return $returnArr;
 	}
-	
+	*/
 	
 //	function CallHook ($hookname, &$params) {
 //		global $use_extsubprojplugin,$G_SESSION,$HTML;

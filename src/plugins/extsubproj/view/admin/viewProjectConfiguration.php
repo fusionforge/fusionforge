@@ -26,26 +26,41 @@ global $pluginExtSubProj;
 global $use_tooltips;
 global $group_id;
 
-/*$pluginExtSubProjProjectConf = $pluginExtSubProj->getConf($group_id);
-if (!$pluginExtSubProjProjectConf) {
-	echo '<div class="error">'._('Cannot retrieve data from DB').'</div>';
-} else {
-*/
-	echo $HTML->boxTop(_("Manage project's external subprojects"));
-	
-	echo '<form method="post" action="'.$pluginExtSubProj->getProjectAdminAddExtSubProjAction($group_id).'">';
-	echo '<table>';
+$subProjects = $pluginExtSubProj->getSubProjects($group_id);
 
-	echo '<tr><td><label id="extSubProj-newsubprojecturl" ';
-	if ($use_tooltips)
-		echo 'class="tabtitle-nw" title="'._('URL of the new subproject.').'"';
-	echo ' >'._('URL').'</label></td><td><input type="text" name="newsubprojecturl"';
-	echo '/></td></tr>';
+if(is_array($subProjects)) {
+	$tablearr = array(_('Subproject URL'),'');
+	echo $HTML->listTableTop($tablearr);
 
-	echo '</table>';
-	echo '<input type="submit" value="'._('Add').'" />';
-	echo '</form>';
-	
-	echo $HTML->boxBottom();
-//}
+	foreach ($subProjects as $url) {
+		echo '
+		<tr>
+			<td>'.$url.'
+			</td>
+			<td>
+				<a href="'. $pluginExtSubProj->getProjectAdminDelExtSubProjAction($group_id, $url) .'">'._('delete').'</a>
+			</td>
+		</tr>';
+	}
+
+	echo $HTML->listTableBottom();
+}
+
+echo $HTML->boxTop(_("Manage project's external subprojects"));
+
+echo '<form method="post" action="'.$pluginExtSubProj->getProjectAdminAddExtSubProjAction($group_id).'">';
+echo '<table>';
+
+echo '<tr><td><label id="extSubProj-newsubprojecturl" ';
+if ($use_tooltips)
+	echo 'class="tabtitle-nw" title="'._('URL of the new subproject.').'"';
+echo ' >'._('URL').'</label></td><td><input type="text" name="newsubprojecturl"';
+echo '/></td></tr>';
+
+echo '</table>';
+echo '<input type="submit" value="'._('Add').'" />';
+echo '</form>';
+
+echo $HTML->boxBottom();
+
 ?>
