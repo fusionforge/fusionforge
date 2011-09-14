@@ -31,7 +31,8 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 }
 
 $type = getStringFromRequest('type');
-$plugin = plugin_get_object('extsubproj');
+global $pluginExtSubProj;
+$pluginExtSubProj = plugin_get_object('extsubproj');
 
 if (!$type) {
 	exit_error("Cannot Process your request: No TYPE specified", 'home'); // you can create items in Base.tab and customize this messages
@@ -50,8 +51,8 @@ switch ($type) {
 		if ( !$group) {
 			exit_error("Invalid Project", 'home');
 		}
-		if (!$group->usesPlugin($plugin->name)) {//check if the group has the projects-hierarchy plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $plugin->name), 'home');
+		if (!$group->usesPlugin($pluginExtSubProj->name)) {//check if the group has the projects-hierarchy plugin active
+			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $pluginExtSubProj->name), 'home');
 		}
 		session_require_perm('project_admin', $id);
 
@@ -64,11 +65,11 @@ switch ($type) {
 			case "removeChild":
 			case "removeParent":
 			case "validateRelationship": {
-				include($gfplugins.$plugin->name.'/actions/'.$action.'.php');
+				include($gfplugins.$pluginExtSubProj->name.'/actions/'.$action.'.php');
 				break;
 			}*/
 			default: {
-				$plugin->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Unknown action.'));
+				$pluginExtSubProj->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Unknown action.'));
 				break;
 			}
 		}
@@ -84,7 +85,7 @@ switch ($type) {
 			/*
 			case 'updateGlobalConf': {
 				global $gfplugins;
-				include($gfplugins.$plugin->name.'/actions/'.$action.'.php');
+				include($gfplugins.$pluginExtSubProj->name.'/actions/'.$action.'.php');
 				break;
 			}*/
 			default: {
@@ -93,11 +94,12 @@ switch ($type) {
 			}
 				
 		}
-		$plugin->getHeader('globaladmin');
-		$plugin->getGlobalAdminView();
-		$plugin->getFooter('globaladmin');
+		$pluginExtSubProj->getHeader('globaladmin');
+		$pluginExtSubProj->getGlobalAdminView();
+		$pluginExtSubProj->getFooter('globaladmin');
 		break;
 	}
+	// project admin
 	case "admin": {
 		if (!session_loggedin()) {
 			exit_not_logged_in();
@@ -111,30 +113,28 @@ switch ($type) {
 		if ( !$group) {
 			exit_error("Invalid Project", 'home');
 		}
-		if (!$group->usesPlugin($plugin->name)) {//check if the group has the projects-hierarchy plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $plugin->name), 'home');
+		if (!$group->usesPlugin($pluginExtSubProj->name)) {//check if the group has the projects-hierarchy plugin active
+			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $pluginExtSubProj->name), 'home');
 		}
 		$action = getStringFromRequest('action');
 		switch ($action) {
-			/*
-			case 'updateProjectConf': {
+			case 'addExtSubProj': {
 				global $gfplugins;
-				include($gfplugins.$plugin->name.'/actions/'.$action.'.php');
+				include($gfplugins.$pluginExtSubProj->name.'/actions/'.$action.'.php');
 				break;
 			}
-			*/
 			default: {
+				// do nothing, see getProjectAdminView() below
 				break;
 			}
 		}
 		// params needed by site_project_header() inside getHeader()
 		$params = array(
-			'toptab' => $plugin->name,
+			'toptab' => $pluginExtSubProj->name,
 			'group' => $id);
-		$plugin->getHeader('admin', $params);
-		//$plugin->getProjectAdminView();
-		$plugin->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Unknown action.'));
-		$plugin->getFooter('admin');
+		$pluginExtSubProj->getHeader('admin', $params);
+		$pluginExtSubProj->getProjectAdminView();
+		$pluginExtSubProj->getFooter('admin');
 		break;
 	}
 	default: {

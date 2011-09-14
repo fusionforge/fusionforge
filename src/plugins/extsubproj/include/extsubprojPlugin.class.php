@@ -30,12 +30,13 @@ class extsubprojPlugin extends Plugin {
 		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu");
 		$this->_addHook("groupmenu");	// To put into the project tabs
-		$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
-		$this->_addHook("groupisactivecheckboxpost"); //
+		
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
-		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		*/
+		$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
+		$this->_addHook("groupisactivecheckboxpost"); //
+		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook('site_admin_option_hook');  // to provide a link to the site wide administrative pages of plugin
 	}
 
@@ -43,6 +44,17 @@ class extsubprojPlugin extends Plugin {
 		// Use this to provide a link to the site wide administrative pages for your plugin
 		echo '<li>'.$this->getAdminOptionLink().'</li>';
 	}
+	
+	function project_admin_plugins(&$params) {
+		$group_id = $params['group_id'];
+		$group = group_get_object($group_id);
+		if ($group->usesPlugin($this->name)) {
+			echo '<p>';
+			echo $this->getProjectAdminLink($group_id);
+			echo '</p>';
+		}
+	}
+	
 	/**
 	* getAdminOptionLink - return the admin link url
 	*
@@ -52,7 +64,18 @@ class extsubprojPlugin extends Plugin {
 	function getAdminOptionLink() {
 		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name,_('External subprojects admin'), array('class'=>'tabtitle', 'title'=>_('Configure the External subprojects plugin')));
 	}
-	
+	/**
+	* getProjectAdminLink - return the project admin link url
+	*
+	* @return	string	html url
+	* @access	public
+	*/
+	function getProjectAdminLink($group_id) {
+		return util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('External subprojects Admin'), array('class'=>'tabtitle', 'title'=>_('Configure the External subprojects plugin')));
+	}
+	function getProjectAdminAddExtSubProjAction($group_id) {
+		return '?group_id='.$group_id.'&type=admin&pluginname='.$this->name.'&action=addExtSubProj';
+	}
 	/**
 	* getHeader - initialize header and js
 	* @param	string	type : user, project (aka group)
@@ -138,6 +161,49 @@ class extsubprojPlugin extends Plugin {
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
 	}
+	
+	/**
+	 * getProjectAdminView - display the project admin view
+	 * @return boolean
+	 */
+	function getProjectAdminView() {
+		global $gfplugins, $use_tooltips;
+		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';
+		return true;
+	}
+	
+	/**
+	* getConf - return the configuration defined at project level
+	*
+	* @param	integer	the group id
+	* @return	array	the configuration array
+	*/
+	function getConf($project_id) {
+		$resConf = db_query_params('SELECT * from plugin_extsubproj_subprojects where project_id=$1',array($project_id));
+		if (!$resConf) {
+			return false;
+		}
+	
+		$row = db_numrows($resConf);
+	
+		if ($row == null || count($row) > 2) {
+			return false;
+		}
+	
+		$resArr = db_fetch_array($resConf);
+		$returnArr = array();
+	
+		foreach($resArr as $column => $value) {
+			if ($value == 't') {
+				$returnArr[$column] = true;
+			} else {
+				$returnArr[$column] = false;
+			}
+		}
+	
+		return $returnArr;
+	}
+	
 	
 //	function CallHook ($hookname, &$params) {
 //		global $use_extsubprojplugin,$G_SESSION,$HTML;
