@@ -798,7 +798,7 @@ src/install/detect_os -text
 src/install/install2 -text
 src/install/install3 -text
 src/install/install4 -text
-src/lib/vendor/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.1.0.css -text
+src/lib/vendor/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.1.0.css -text svneol=unset#text/css
 src/lib/vendor/jquery-simpletreemenu/css/simpleTreeMenu/menu-arrow-down.png -text svneol=unset#image/png
 src/lib/vendor/jquery-simpletreemenu/css/simpleTreeMenu/menu-arrow-right.png -text svneol=unset#image/png
 src/lib/vendor/jquery-simpletreemenu/css/simpleTreeMenu/menu-dot.png -text svneol=unset#image/png
@@ -983,7 +983,7 @@ src/plugins/compactpreview/packaging/dirs/plugin-compactpreview -text
 src/plugins/compactpreview/packaging/docs/plugin-compactpreview -text
 src/plugins/compactpreview/packaging/install/plugin-compactpreview -text
 src/plugins/compactpreview/packaging/links/plugin-compactpreview -text
-src/plugins/compactpreview/www/css/oslcTooltipStyle.css -text
+src/plugins/compactpreview/www/css/oslcTooltipStyle.css -text svneol=unset#text/css
 src/plugins/compactpreview/www/images/Tooltip/balloon_bottom.png -text
 src/plugins/compactpreview/www/images/Tooltip/balloon_bottomLeft.png -text
 src/plugins/compactpreview/www/images/Tooltip/balloon_bottomRight.png -text
@@ -1993,7 +1993,7 @@ src/plugins/mantisbt/www/img/up.gif -text svneol=unset#image/gif
 src/plugins/mantisbt/www/img/update.png -text svneol=unset#image/png
 src/plugins/mantisbt/www/index.php -text
 src/plugins/mantisbt/www/scripts/MantisBTController.js -text
-src/plugins/mantisbt/www/style.css -text
+src/plugins/mantisbt/www/style.css -text svneol=unset#text/css
 src/plugins/mantisbt/www/user/index.php -text
 src/plugins/mediawiki/NAME -text
 src/plugins/mediawiki/README -text
