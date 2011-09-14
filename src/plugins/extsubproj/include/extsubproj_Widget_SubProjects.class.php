@@ -21,8 +21,10 @@
 require_once('common/widget/Widget.class.php');
 require_once('common/widget/WidgetLayoutManager.class.php');
 
+
 class extsubproj_Widget_SubProjects extends Widget {
-	function extsubproj_Widget_SubProjects($owner_type) {
+	function extsubproj_Widget_SubProjects($owner_type, $plugin) {
+		$this->plugin = $plugin;
 		$this->Widget('plugin_extsubproj_project_subprojects');
 	}
 
@@ -39,6 +41,27 @@ class extsubproj_Widget_SubProjects extends Widget {
 	}
 
 	function getContent() {
+		global $pluginExtSubProj;
+		global $group_id;
+		global $HTML;
+		
+		$subProjects = $this->plugin->getSubProjects($group_id);
+		
+		$html='';
+		if(is_array($subProjects)) {
+			$tablearr = array(_('Sub projects'),'');
+			$html .= $HTML->listTableTop($tablearr);
+		
+			foreach ($subProjects as $url) {
+				$html = $html . '
+				<tr>
+					<td><a href="'.$url.'">'.$url.'</a>
+					</td>
+				</tr>';
+			}
+		
+			$html .= $HTML->listTableBottom();
+		}
 		/*
 		$user = UserManager::instance()->getCurrentUser();
 		$scmgitplugin = plugin_get_object('scmgit');
@@ -55,7 +78,7 @@ class extsubproj_Widget_SubProjects extends Widget {
 			return '<p class="information">'._('No personal git repository').'</p>';
 		}
 		*/
-		return 'COIN!';
+		return $html;
 	}
 /*
 	function getMyRepositoriesList() {

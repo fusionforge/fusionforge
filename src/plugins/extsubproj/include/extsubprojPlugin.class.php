@@ -245,7 +245,7 @@ class extsubprojPlugin extends Plugin {
 		require_once('common/widget/WidgetLayoutManager.class.php');
 		if ($params['widget'] == 'plugin_extsubproj_project_subprojects') {
 			require_once $gfplugins.$this->name.'/include/extsubproj_Widget_SubProjects.class.php';
-			$params['instance'] = new extsubproj_Widget_SubProjects(WidgetLayoutManager::OWNER_TYPE_GROUP);
+			$params['instance'] = new extsubproj_Widget_SubProjects(WidgetLayoutManager::OWNER_TYPE_GROUP, $this);
 		}
 	}
 	/**
