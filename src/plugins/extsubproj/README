@@ -1,1 +1,9 @@
 extsubproj plugin : manages external subprojects on remote forges
+
+For the moment, manages URLs that can be displayed in a widget in the project home page.
+
+TODO : provide compact-preview of the remote projects
+
+Note : may be interfaced with extratabs to provide each sub-project with its own tab, in mostly empty super projects otherwise
+
+This project was implemented in the frame of the COCLICO project as a POC of distributed forges (WP2).
