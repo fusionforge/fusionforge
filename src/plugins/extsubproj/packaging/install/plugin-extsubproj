@@ -1,0 +1,8 @@
+plugins/extsubproj/common/*                  usr/share/@OLDPACKAGE@/plugins/extsubproj/common/
+plugins/extsubproj/include/*                 usr/share/@OLDPACKAGE@/plugins/extsubproj/include/
+plugins/extsubproj/db/*                      usr/share/@OLDPACKAGE@/plugins/extsubproj/db/
+plugins/extsubproj/bin/*                     usr/share/@OLDPACKAGE@/plugins/extsubproj/bin/
+plugins/extsubproj/www/*                     usr/share/@OLDPACKAGE@/plugins/extsubproj/www/
+plugins/extsubproj/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
+plugins/extsubproj/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/
+plugins/extsubproj/etc/extsubproj.ini	             etc/@PACKAGE@/config.ini.d/

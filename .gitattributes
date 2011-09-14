@@ -1054,6 +1054,15 @@ src/plugins/extratabs/packaging/install/plugin-extratabs -text
 src/plugins/extratabs/packaging/links/plugin-extratabs -text
 src/plugins/extratabs/www/iframe.php -text
 src/plugins/extratabs/www/index.php -text
+src/plugins/extsubproj/NAME -text
+src/plugins/extsubproj/README -text
+src/plugins/extsubproj/common/extsubproj-init.php -text
+src/plugins/extsubproj/etc/extsubproj.ini -text
+src/plugins/extsubproj/packaging/control/222plugin-extsubproj -text
+src/plugins/extsubproj/packaging/control/222plugin-extsubproj.shortdesc -text
+src/plugins/extsubproj/packaging/dirs/plugin-extsubproj -text
+src/plugins/extsubproj/packaging/install/plugin-extsubproj -text
+src/plugins/extsubproj/packaging/links/plugin-extsubproj -text
 src/plugins/fckeditor/common/fckeditorPlugin.class.php -text
 src/plugins/fckeditor/etc/fckeditor.ini -text
 src/plugins/fckeditor/packaging/docs/plugin-fckeditor -text

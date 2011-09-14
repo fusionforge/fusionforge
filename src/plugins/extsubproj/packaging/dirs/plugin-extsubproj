@@ -1,0 +1,4 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/extsubproj
+usr/share/gforge/plugins/extsubproj/common
+usr/share/gforge/plugins/extsubproj/www
