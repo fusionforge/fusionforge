@@ -1064,6 +1064,7 @@ src/plugins/extsubproj/common/extsubproj-init.php -text
 src/plugins/extsubproj/db/extsubproj-init.sql -text
 src/plugins/extsubproj/etc/extsubproj.ini -text
 src/plugins/extsubproj/include/extsubprojPlugin.class.php -text
+src/plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php -text
 src/plugins/extsubproj/packaging/control/222plugin-extsubproj -text
 src/plugins/extsubproj/packaging/control/222plugin-extsubproj.shortdesc -text
 src/plugins/extsubproj/packaging/dirs/plugin-extsubproj -text

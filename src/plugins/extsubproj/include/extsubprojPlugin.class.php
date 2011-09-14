@@ -38,6 +38,8 @@ class extsubprojPlugin extends Plugin {
 		$this->_addHook("groupisactivecheckboxpost"); //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook('site_admin_option_hook');  // to provide a link to the site wide administrative pages of plugin
+		$this->_addHook('widget_instance'); // creates widgets when requested
+		$this->_addHook('widgets'); // declares which widgets are provided by the plugin
 	}
 
 	function site_admin_option_hook(&$params) {
@@ -217,6 +219,35 @@ class extsubprojPlugin extends Plugin {
 		}
 	}
 	
+	/**
+	* widgets - 'widgets' hook handler
+	* @param array $params
+	* @return boolean
+	*/
+	function widgets($params) {
+		require_once('common/widget/WidgetLayoutManager.class.php');
+		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
+			$params['fusionforge_widgets'][] = 'plugin_extsubproj_project_subprojects';
+		}/*
+		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
+			$params['fusionforge_widgets'][] = 'plugin_scmgit_user_myrepositories';
+		}*/
+		return true;
+	}
+	
+	/**
+	 * Process the 'widget_instance' hook to create instances of the widgets
+	 * @param array $params
+	 */
+	function widget_instance($params) {
+		global $gfplugins;
+		//$user = UserManager::instance()->getCurrentUser();
+		require_once('common/widget/WidgetLayoutManager.class.php');
+		if ($params['widget'] == 'plugin_extsubproj_project_subprojects') {
+			require_once $gfplugins.$this->name.'/include/extsubproj_Widget_SubProjects.class.php';
+			$params['instance'] = new extsubproj_Widget_SubProjects(WidgetLayoutManager::OWNER_TYPE_GROUP);
+		}
+	}
 	/**
 	* getConf - return the configuration defined at project level
 	*
