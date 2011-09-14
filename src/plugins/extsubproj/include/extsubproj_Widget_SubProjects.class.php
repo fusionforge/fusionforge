@@ -39,7 +39,7 @@ class extsubproj_Widget_SubProjects extends Widget {
 	function getDescription() {
 		return _("Displays links to external subprojects of the project");
 	}
-
+	
 	function getContent() {
 		global $pluginExtSubProj;
 		global $group_id;
@@ -53,9 +53,32 @@ class extsubproj_Widget_SubProjects extends Widget {
 			$html .= $HTML->listTableTop($tablearr);
 		
 			foreach ($subProjects as $url) {
+				
+				include_once("arc/ARC2.php");
+				require_once('plugins/extsubproj/include/Graphite.php');
+				
+				
+				$parser = ARC2::getRDFParser();
+				//$parser->parse('https://vm2.localdomain/projects/coinsuper/');
+				$parser->parse($url);
+				//print_r($parser);
+				$triples = $parser->getTriples();
+				//print_r($triples);
+				$turtle = $parser->toTurtle($triples);
+				$datauri = $parser->toDataURI($turtle);
+				
+				
+				$graph = new Graphite();
+				//$graph->setDebug(1);
+				$graph->ns( "doap", "http://usefulinc.com/ns/doap#" );
+				$graph->load( $datauri );
+				//print $graph->resource('https://vm2.localdomain/projects/coinsuper/')->dumpText();
+				$projname = $graph->resource( $url )->get( "doap:name" );
+				
+				
 				$html = $html . '
 				<tr>
-					<td><a href="'.$url.'">'.$url.'</a>
+					<td><a href="'.$url.'">'.$projname.'</a>
 					</td>
 				</tr>';
 			}

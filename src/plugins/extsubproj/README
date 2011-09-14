@@ -1,6 +1,8 @@
-extsubproj plugin : manages external subprojects on remote forges
+extsubproj plugin : manages links to external subprojects on remote forges
 
 For the moment, manages URLs that can be displayed in a widget in the project home page.
+
+If the remote subprojects are on a FusionForge running the doaprdf plugin (or any compatible forge ;-), fetches the project's doap:name dynamically to render the link.
 
 TODO : provide compact-preview of the remote projects
 
