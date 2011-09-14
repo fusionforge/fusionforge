@@ -4783,9 +4783,9 @@ src/www/images/smiles/icon_smile.gif -text svneol=unset#image/gif
 src/www/images/smiles/icon_surprised.gif -text svneol=unset#image/gif
 src/www/images/smiles/icon_twisted.gif -text svneol=unset#image/gif
 src/www/images/smiles/icon_wink.gif -text svneol=unset#image/gif
-src/www/images/sort_down.gif -text
-src/www/images/sort_none.gif -text
-src/www/images/sort_up.gif -text
+src/www/images/sort_down.gif -text svneol=unset#image/gif
+src/www/images/sort_none.gif -text svneol=unset#image/gif
+src/www/images/sort_up.gif -text svneol=unset#image/gif
 src/www/images/t.png -text svneol=unset#image/png
 src/www/images/t2.png -text svneol=unset#image/png
 src/www/images/widget/widget-header.png -text svneol=unset#image/png
