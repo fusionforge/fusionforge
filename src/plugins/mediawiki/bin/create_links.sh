@@ -4,8 +4,15 @@ scriptdir=`dirname $0`
 absolutedir=`cd $scriptdir;pwd`
 plugindir=`dirname $absolutedir`
 
+if [ -e /usr/share/codendi ]
+then 
+	OLDPACKAGE=codendi
+else
+	OLDPACKAGE=gforge
+fi
+
 LINKS=$plugindir/packaging/links/plugin-mediawiki
-cat $LINKS | while read src dest
+cat $LINKS | sed "s/@OLDPACKAGE@/$OLDPACKAGE/g" | while read src dest
 do
 	if [ ! -e /$src ]
 	then
