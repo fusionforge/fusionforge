@@ -42,13 +42,19 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
     {
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
 		$output = `find $root/src $root/tests -name '*.php' -type f | xargs isutf8`;
-	    $this->assertEquals('', $output);
-	    $output = `find $root/src $root/tests -name '*.sql' -type f | xargs isutf8`;
-	    $this->assertEquals('', $output);
-	    $output = `find $root/src $root/tests -name '*.sh' -type f | xargs isutf8`;
-	    $this->assertEquals('', $output);
-	    $output = `find $root/src $root/tests -name '*.pl' -type f | xargs isutf8`;
-	    $this->assertEquals('', $output);
+		$this->assertEquals('', $output);
+		$output = `find $root/src $root/tests -name '*.css' -type f | xargs isutf8`;
+		$this->assertEquals('', $output);
+		$output = `find $root/src $root/tests -name '*.sql' -type f | xargs isutf8`;
+		$this->assertEquals('', $output);
+		$output = `find $root/src $root/tests -name '*.sh' -type f | xargs isutf8`;
+		$this->assertEquals('', $output);
+		$output = `find $root/src $root/tests -name '*.pl' -type f | xargs isutf8`;
+		$this->assertEquals('', $output);
+		$output = `find $root/src $root/tests -name '*.tmpl' -type f | xargs isutf8`;
+		$this->assertEquals('', $output);
+		$output = `find $root/src $root/tests -name '*.xml' -type f | xargs isutf8`;
+		$this->assertEquals('', $output); 
     }
 
     /**
