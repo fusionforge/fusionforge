@@ -190,7 +190,10 @@ class extsubprojPlugin extends Plugin {
 	}
 	
 	function addExtSubProj($project_id, $url) {
-		// TODO verify URL
+		// verify URL
+		if(!util_check_url($url)) {
+			return false;
+		}
 		// check if not already in the existing subprojects (even for another project)
 		// TODO first check with HTTP then check with HTTPS
 		$res = db_query_params('SELECT count(*) from plugin_extsubproj_subprojects where sub_project_url=$1', array($url));	
