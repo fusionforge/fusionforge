@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -25,8 +26,9 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 require_once $gfwww.'admin/admin_utils.php';
+require_once $gfwww.'include/role_utils.php';
 
-session_require_global_perm ('forge_admin');
+session_require_global_perm('forge_admin');
 
 $unix_status2str = array(
 	'N'=>_('No Unix account (N)'),
@@ -55,8 +57,9 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 	$email = getStringFromRequest('email');
 	$shell = getStringFromRequest('shell');
 	$status = getStringFromRequest('status');
+	$addToProjectArray =getStringFromRequest('group_id_add_member');
 
-    //XXX use_shell
+	//XXX use_shell
 	if (!$u->setEmail($email)
 		|| (forge_get_config('use_shell') && !$u->setShell($shell))
 		|| !$u->setStatus($status)) {
@@ -74,10 +77,34 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 		}
 	}
 
+	foreach($addToProjectArray as $project_id_to_add) {
+		$feedbackMembership = '';
+		$error_msgMembership = '';
+		$projectRoleid = getIntFromRequest('role_id-'.$project_id_to_add);
+		$projectObjectAction = group_get_object($project_id_to_add);
+		if (!$projectObjectAction->addUser((int)$u->getID(), $projectRoleid)) {
+			echo $projectObjectAction->getErrorMessage().$u->getID();
+			$error_msgMembership .= $projectObjectAction->getErrorMessage().'<br/>';
+		} else {
+			$feedbackMembership .= _("Added Successfully to project ").$projectObjectAction->getPublicName().'<br/>';
+			//if the user have requested to join this group
+			//we should remove him from the request list
+			//since it has already been added
+			$gjr = new GroupJoinRequest($projectObjectAction, $u->getID());
+			if ($gjr || is_object($gjr) || !$gjr->isError()) {
+				$gjr->delete(true);
+			}
+		}
+	}
+
 	if ($u->isError()) {
 		$error_msg = $u->getErrorMessage();
+		if (isset($error_msgMembership) && sizeof($error_msgMembership))
+			$error_msg .= '<br/>'.$error_msgMembership;
 	} else {
 		$feedback = _('Updated');
+		if (isset($feedbackMembership) && sizeof($feedbackMembership))
+			$feedback .= '<br/>'.$feedbackMembership;
 	}
 
 }
@@ -218,8 +245,6 @@ echo html_build_select_box_from_arrays(
 	} //end of sys_use_shell condition
 ?>
 
-</form>
-
 <hr />
 
 <h2><?php echo _('Projects Membership'); ?></h2>
@@ -228,14 +253,15 @@ echo html_build_select_box_from_arrays(
 /*
 	Iterate and show projects this user is in
 */
-$projects = $u->getGroups() ;
+$projects = $u->getGroups();
 
-$title=array();
-$title[]=_('Name');
-$title[]=_('Unix name');
-$title[]=_('Operations');
+$title = array();
+$title[] = _('Name');
+$title[] = _('Unix name');
+$title[] = _('Operations');
 
-$i = 0 ;
+$i = 0;
+$userProjectsIdArray = array();
 foreach ($projects as $p) {
 	if ($i == 0) {
 		echo $GLOBALS['HTML']->listTableTop($title);
@@ -244,9 +270,10 @@ foreach ($projects as $p) {
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>'.util_unconvert_htmlspecialchars(htmlspecialchars($p->getPublicName())).'</td>
 		<td>'.$p->getUnixName().'</td>
-		<td width="40%">'.util_make_link ('/project/admin/?group_id='.$p->getID(),_('[Project Admin]')).'</td>
+		<td width="40%">'.util_make_link('/project/admin/?group_id='.$p->getID(),_('[Project Admin]')).'</td>
 		</tr>
 	';
+	$userProjectsIdArray[] = $p->getID();
 	$i++;
 }
 
@@ -255,7 +282,35 @@ if ($i > 0) {
 } else {
 	echo '<p>'._('This user is not a member of any project.').'</p>';
 }
-echo '<br />';
+
+echo '<h2>'._('Add membership to new projects').'</h2>';
+$addToNewProjectsTableTitle = array();
+$addToNewProjectsTableTitle[] = '';
+$addToNewProjectsTableTitle[] = _('Name');
+$addToNewProjectsTableTitle[] = _('Unix name');
+$addToNewProjectsTableTitle[] = _('Operations');
+$addToNewProjectsTableTitle[] = _('Select role');
+$fullListProjectsQueryResult = db_query_params('SELECT group_id from groups where status = $1', array('A'));
+if ($fullListProjectsQueryResult) {
+	echo $GLOBALS['HTML']->listTableTop($addToNewProjectsTableTitle);
+	while ($projectQueryResult = db_fetch_array($fullListProjectsQueryResult)) {
+		$projectObject = group_get_object($projectQueryResult['group_id']);
+		if (!in_array($projectObject->getID(), $userProjectsIdArray)) {
+			print '
+				<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
+				<td><input type="checkbox" name="group_id_add_member[]" value="'.$projectObject->getID().'">
+				<td>'.util_unconvert_htmlspecialchars(htmlspecialchars($projectObject->getPublicName())).'</td>
+				<td>'.$projectObject->getUnixName().'</td>
+				<td>'.util_make_link ('/project/admin/?group_id='.$projectObject->getID(),_('[Project Admin]')).'</td>
+				<td>'.role_box($projectObject->getID(),'role_id-'.$projectObject->getID()).'</td>
+				</tr>
+			';
+		}
+	}
+	echo $GLOBALS['HTML']->listTableBottom();
+}
+echo '<br/><input type="submit" name="submit" value="'. _('Update').'" />';
+echo '</form>';
 
 site_admin_footer(array());
 
