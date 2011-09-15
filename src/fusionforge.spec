@@ -110,6 +110,14 @@ Requires: %{name} >= %{version}, %{name}-plugin-scmcvs, python, php
 This plugin adds the capability to notify users of changes to CVS repositories
 in FusionForge.
 
+%package plugin-compactpreview
+Summary: Provides a preview mecanism
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-compactpreview
+This plugin adds support for user and project compact-preview
+(popups) compatible with the OSLC specifications.
+
 %package plugin-cvstracker
 Summary: Links CVS log messages to trackers and tasks.
 Group: Development/Tools
@@ -135,6 +143,13 @@ This plugin adds a new search engine to your FusionForge site. It allows
 your users to search your FusionForge site through external search engines
 which have indexed it. You can define search engines you want to use in
 the configuration file.
+
+%package plugin-extsubproj
+Summary: external sub project plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-extsubproj
+Manages links to external subprojects on remote forges.
 
 # %package plugin-forumml
 # Summary: Mailman to forums plugin for FusionForge
@@ -204,14 +219,14 @@ applications. It is based on Web technologies such as REST, RDF, or AJAX.
 This package provides an OSLC-CM V2 compatible plugin for FusionForge
 tracker system.
 
-# %package plugin-projectimport
-# Summary: Project Import plugin for FusionForge
-# Group: Development/Tools
-# Requires: %{name} >= %{version}, php
-# %description plugin-projectimport
-# Project import plugin for FusionForge
-# This plugin allows the import of a project data previously exported
-# with ForgePlucker, or a compatible tool.
+%package plugin-projectimport
+Summary: Project Import plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-projectimport
+Project import plugin for FusionForge
+This plugin allows the import of a project data previously exported
+with ForgePlucker, or a compatible tool.
 
 # %package plugin-projects-hierarchy
 # Summary: projects-hierarchy plugin for FusionForge
@@ -505,6 +520,9 @@ done
 # plugin: authopenid
 # %{__ln_s} ../../plugins/authopenid/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authopenid
 
+# plugin: compactpreview
+%{__ln_s} ../../plugins/compactpreview/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/compactpreview
+
 # plugin: cvssyncmail
 
 # plugin: cvstracker
@@ -515,6 +533,9 @@ done
 %{__rm} -rf $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/cvstracker/rpm-specific
 
 # plugin: externalsearch
+
+# plugin: extsubproj
+%{__ln_s} ../../plugins/extsubproj/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/extsubproj
 
 # plugin: fckeditor
 %{__ln_s} ../../plugins/fckeditor/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/fckeditor
@@ -603,7 +624,7 @@ done
 %{__ln_s} ../../plugins/oslc/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oslc
 
 # plugin : projectimport
-# %{__ln_s} ../../plugins/projectimport/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectimport
+%{__ln_s} ../../plugins/projectimport/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectimport
 
 # plugin: projectlabels
 %{__ln_s} ../../plugins/projectlabels/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectlabels
@@ -871,6 +892,16 @@ fi
 %{FORGE_DIR}/www/plugins/cvstracker
 %attr(-,%{httpduser},%{httpdgroup}) %{FORGE_CONF_DIR}/plugins/cvstracker
 
+%files plugin-compactpreview
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/compactpreview.ini
+%{FORGE_DIR}/plugins/compactpreview
+
+%files plugin-cvstracker
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvstracker.ini
+%{FORGE_DIR}/plugins/cvstracker
+%{FORGE_DIR}/www/plugins/cvstracker
+%attr(-,%{httpduser},%{httpdgroup}) %{FORGE_CONF_DIR}/plugins/cvstracker
+
 %files plugin-doaprdf
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/doaprdf.ini
 %{FORGE_DIR}/plugins/doaprdf
@@ -879,6 +910,10 @@ fi
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/externalsearch/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/externalsearch.ini
 %{FORGE_DIR}/plugins/externalsearch
+
+%files plugin-extsubproj
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/extsubproj.ini
+%{FORGE_DIR}/plugins/extsubproj
 
 %files plugin-fckeditor
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/fckeditor.ini
@@ -931,11 +966,11 @@ fi
 %{FORGE_DIR}/plugins/oslc
 %{FORGE_DIR}/www/plugins/oslc
 
-# %files plugin-projectimport
-# %config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
-# %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projectimport.ini
-# %{FORGE_DIR}/plugins/projectimport
-# %{FORGE_DIR}/www/plugins/projectimport
+%files plugin-projectimport
+%config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projectimport.ini
+%{FORGE_DIR}/plugins/projectimport
+%{FORGE_DIR}/www/plugins/projectimport
 
 # %files plugin-projects-hierarchy
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projects-hierarchy.ini
