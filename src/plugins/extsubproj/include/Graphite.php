@@ -1175,4 +1175,3 @@ function graphite_sort_list_cmp( $a, $b )
 	}
 	return 0;
 }
-
