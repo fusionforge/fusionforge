@@ -77,22 +77,24 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 		}
 	}
 
-	foreach($addToProjectArray as $project_id_to_add) {
-		$feedbackMembership = '';
-		$error_msgMembership = '';
-		$projectRoleid = getIntFromRequest('role_id-'.$project_id_to_add);
-		$projectObjectAction = group_get_object($project_id_to_add);
-		if (!$projectObjectAction->addUser((int)$u->getID(), $projectRoleid)) {
-			echo $projectObjectAction->getErrorMessage().$u->getID();
-			$error_msgMembership .= $projectObjectAction->getErrorMessage().'<br/>';
-		} else {
-			$feedbackMembership .= _("Added Successfully to project ").$projectObjectAction->getPublicName().'<br/>';
-			//if the user have requested to join this group
-			//we should remove him from the request list
-			//since it has already been added
-			$gjr = new GroupJoinRequest($projectObjectAction, $u->getID());
-			if ($gjr || is_object($gjr) || !$gjr->isError()) {
-				$gjr->delete(true);
+	if (is_array($addToProjectArray)) {
+		foreach($addToProjectArray as $project_id_to_add) {
+			$feedbackMembership = '';
+			$error_msgMembership = '';
+			$projectRoleid = getIntFromRequest('role_id-'.$project_id_to_add);
+			$projectObjectAction = group_get_object($project_id_to_add);
+			if (!$projectObjectAction->addUser((int)$u->getID(), $projectRoleid)) {
+				echo $projectObjectAction->getErrorMessage().$u->getID();
+				$error_msgMembership .= $projectObjectAction->getErrorMessage().'<br/>';
+			} else {
+				$feedbackMembership .= _("Added Successfully to project ").$projectObjectAction->getPublicName().'<br/>';
+				//if the user have requested to join this group
+				//we should remove him from the request list
+				//since it has already been added
+				$gjr = new GroupJoinRequest($projectObjectAction, $u->getID());
+				if ($gjr || is_object($gjr) || !$gjr->isError()) {
+					$gjr->delete(true);
+				}
 			}
 		}
 	}
