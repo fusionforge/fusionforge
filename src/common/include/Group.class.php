@@ -2611,7 +2611,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 
 
 	/**
-	 * getRoles - Get the roles of the group.
+	 * getRolesId - Get Ids of the roles of the group.
 	 *
 	 * @return	array	Role ids of this group.
 	 */
