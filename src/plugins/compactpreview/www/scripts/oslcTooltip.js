@@ -77,7 +77,7 @@ jQuery(function(){
 			top: pos.top - 5 + 'px'  
 		});
 
-		jQuery('#resourcePopupContent').html('<i>...loading '+ resource +' compact preview...</i>');
+		jQuery('#resourcePopupContent').html('<i>...loading compact preview...</i>');
 
 		// Fetch the OSLC compact preview representation of the resource
 		//url: '/'+ resource +'/' + resourceId + '/',
