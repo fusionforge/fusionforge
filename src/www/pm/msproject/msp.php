@@ -113,7 +113,7 @@ function &MSPDownload($session_hash,$group_project_id) {
 		$array['success']=false;
 		$array['errormessage']='Could Not Get ProjectGroup: '.$pg->getErrorMessage();
 	} else {
-		$ptf =& new ProjectTaskFactory($pg);
+		$ptf = new ProjectTaskFactory($pg);
 		if (!$ptf || !is_object($ptf)) {
 			$array['success']=false;
 			$array['errormessage']='Could Not Get ProjectTaskFactory';

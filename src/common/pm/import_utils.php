@@ -340,7 +340,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 			//
 			printr($was_error,'Right before deleting unreferenced tasks');
 			if (!$was_error) {
-				$ptf =& new ProjectTaskFactory($pg);
+				$ptf = new ProjectTaskFactory($pg);
 				$pt_arr=& $ptf->getTasks();
 				for ($i=0; $i<count($pt_arr); $i++) {
 					if (is_object($pt_arr[$i])) {

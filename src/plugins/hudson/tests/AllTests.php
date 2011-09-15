@@ -20,7 +20,7 @@ class HudsonGroupTest extends GroupTest {
     }
 }
 if (CODENDI_RUNNER === __FILE__) {
-    $test =& new HudsonGroupTest();
+    $test = new HudsonGroupTest();
     $test->run(new CodendiReporter());
  }
 ?>

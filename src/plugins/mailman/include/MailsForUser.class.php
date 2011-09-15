@@ -71,8 +71,8 @@ class MailsForUser extends Error {
 		for ($i=0; $i<$rows; $i++) {
 			$group_id = db_result($result,$i,'group_id');
 			$list_id = db_result($result,$i,'group_list_id');
-			$group =& group_get_object($group_id);
-			$list =& new MailmanList($group,$list_id);
+			$group = group_get_object($group_id);
+			$list = new MailmanList($group,$list_id);
 			if ($list->isError()) {
 				$this->setError($list->getErrorMessage());
 			} else {
