@@ -86,8 +86,11 @@ class UserCompactResource extends CompactResource {
 
         $html = '';
         // construct a link that is the base for a hover popup (see oslcTooltip.js)
-        $url = '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
-				'" rel="user,' . $username . '">'. $username . '</a>';
+        //$url = '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
+		//		'" rel="user,' . $username . '">'. $username . '</a>';
+		$resource_url = util_make_url_u ($username, $user_id);
+        $url = '<a class="resourcePopupTrigger" href="'. $resource_url .
+        				'" rel="'. $resource_url .'">'. $username . '</a>';
         if ($logo_params['content']) {
         	$html = $logo_params['content'] . $url .'<div class="new_line"></div>';
         }
@@ -110,8 +113,9 @@ class GroupCompactResource extends CompactResource {
 		$group_name = $this->params['group_name'];
 		$group_id = $this->params['group_id'];
 		$link_text = $this->params['link_text'];
-		return '<a class="resourcePopupTrigger" href="'. util_make_url_g ($group_name, $group_id) .
-				'" rel="project,' . $group_name . '">'. $link_text . '</a>';
+		$resource_url = util_make_url_g ($group_name, $group_id);
+		return '<a class="resourcePopupTrigger" href="'. $resource_url .
+				'" rel="' . $resource_url . '">'. $link_text . '</a>';
 	}
 
 }

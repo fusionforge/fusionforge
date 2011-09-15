@@ -76,11 +76,14 @@ class extsubproj_Widget_SubProjects extends Widget {
 				$projname = $graph->resource( $url )->get( "doap:name" );
 				
 				
-				$html = $html . '
-				<tr>
-					<td><a href="'.$url.'">'.$projname.'</a>
-					</td>
-				</tr>';
+ 				$html = $html . '
+ 				<tr>
+ 					<td>';
+//<a href="'.$url.'">'.$projname.'</a>
+				$html .= '<a class="resourcePopupTrigger" href="'. $url .
+								'" rel="' . $url . '">'. $projname . '</a>';
+				$html = $html . '</td>
+ 				</tr>';
 			}
 		
 			$html .= $HTML->listTableBottom();

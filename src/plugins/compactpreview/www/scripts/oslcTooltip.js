@@ -55,17 +55,18 @@ jQuery(function(){
 	jQuery('body').append(container);
 	
 	jQuery('.resourcePopupTrigger').live('mouseover', function() {
-		var params = jQuery(this).attr('rel').split(',');
-		var resourceType = params[0];
-		var resourceId = params[1];
-
-		if(resourceType == 'user') {
-			resource = 'users';
-		}
-		if(resourceType == 'project'){
-			resource = 'projects';
-		}
-
+//		var params = jQuery(this).attr('rel').split(',');
+//		var resourceType = params[0];
+//		var resourceId = params[1];
+//
+//		if(resourceType == 'user') {
+//			resource = 'users';
+//		}
+//		if(resourceType == 'project'){
+//			resource = 'projects';
+//		}
+		var url = jQuery(this).attr('rel');
+		
 		if (hideTimer) {
 			clearTimeout(hideTimer);  
 		}
@@ -79,9 +80,10 @@ jQuery(function(){
 		jQuery('#resourcePopupContent').html('<i>...loading '+ resource +' compact preview...</i>');
 
 		// Fetch the OSLC compact preview representation of the resource
+		//url: '/'+ resource +'/' + resourceId + '/',
 		jQuery.ajax({  
 			type: 'GET',
-			url: '/'+ resource +'/' + resourceId + '/',
+			url: url,
 			dataType: 'xml',
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("Accept","application/x-oslc-compact+xml");
