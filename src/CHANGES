@@ -11,6 +11,9 @@ FusionForge-5.x:
 * New Widget: smcgit personal URL of cloned repositories. Currently just
   a list of URLs of your personal repository cloned from project you
    belong. (Capgemini)
+* Docman: interaction with the projects-hierarchy plugin to enable hierarchical
+  browsing. (Capgemini)
+* Admin: User add membership to multiples projects in one shot (Capgemini)
 
 FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)
