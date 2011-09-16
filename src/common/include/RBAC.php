@@ -941,13 +941,13 @@ abstract class BaseRole extends Error {
 			foreach ($data as $sect => $refs) {
 				foreach ($refs as $refid => $value) {
 					$this->setSetting ($sect, $refid, $value) ;
-				}
-				if ($sect == 'scm') {
-					foreach ($this->getUsers() as $u) {
-						if (!$SYS->sysGroupCheckUser($refid,$u->getID())) {
-							$this->setError($SYS->getErrorMessage());
-							db_rollback();
-							return false;
+					if ($sect == 'scm') {
+						foreach ($this->getUsers() as $u) {
+							if (!$SYS->sysGroupCheckUser($refid,$u->getID())) {
+								$this->setError($SYS->getErrorMessage());
+								db_rollback();
+								return false;
+							}
 						}
 					}
 				}
