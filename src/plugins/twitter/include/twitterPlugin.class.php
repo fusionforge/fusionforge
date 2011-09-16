@@ -51,4 +51,3 @@ class twitterPlugin extends ForgeAuthPlugin {
 // End:
 
 ?>
-
