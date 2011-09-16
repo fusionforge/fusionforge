@@ -1,3 +1,3 @@
 plugins/twitter/common/*                  usr/share/@OLDPACKAGE@/plugins/twitter/common/
-plugins/twitter/include/*                  usr/share/@OLDPACKAGE@/plugins/include/common/
+plugins/twitter/include/*                  usr/share/@OLDPACKAGE@/plugins/twitter/include
 plugins/twitter/etc/twitter.ini	             etc/@PACKAGE@/config.ini.d/
