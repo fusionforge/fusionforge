@@ -2628,11 +2628,14 @@ src/plugins/twitter/NAME -text
 src/plugins/twitter/README -text
 src/plugins/twitter/common/twitter-init.php -text
 src/plugins/twitter/etc/twitter.ini -text
+src/plugins/twitter/include/twitterPlugin.class.php -text
 src/plugins/twitter/packaging/control/222plugin-twitter -text
 src/plugins/twitter/packaging/control/222plugin-twitter.shortdesc -text
 src/plugins/twitter/packaging/dirs/plugin-twitter -text
 src/plugins/twitter/packaging/install/plugin-twitter -text
 src/plugins/twitter/packaging/links/plugin-twitter -text
+src/plugins/twitter/www/checks.php -text
+src/plugins/twitter/www/index.php -text
 src/plugins/wiki/README -text
 src/plugins/wiki/common/WikiGroupSearchEngine.class.php -text
 src/plugins/wiki/common/WikiHtmlSearchRenderer.class.php -text

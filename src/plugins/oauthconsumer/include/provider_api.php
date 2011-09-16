@@ -102,6 +102,13 @@ class OAuthProvider	{
 		return $provider;
 	}
 	
+	static function get_provider_by_name($name) {
+		$conn = FFOAuthDataStore::singleton();
+		$row = $conn->find_provider_from_name($name);
+		$provider = self::convert_row_to_object($row);
+		return $provider;
+	}
+	
 	static function get_all_oauthproviders()	{
 		$conn = FFOAuthDataStore::singleton();
 		$rows = $conn->find_all_providers();
