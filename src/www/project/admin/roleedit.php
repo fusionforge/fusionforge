@@ -142,7 +142,7 @@ if ($role_id=='observer') {
 	} else {
 		$title= _('Edit Role');
 	}
-	$msg = _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the the Anonymous role has read access to a forum, all other roles will have it too.');
+	$msg = _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the Anonymous role has read access to a forum, all other roles will have it too.');
 }
 
 project_admin_header(array('title'=> $title,'group'=>$group_id));
