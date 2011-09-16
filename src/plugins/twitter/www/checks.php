@@ -90,7 +90,7 @@ function twitter_get_access_token()	{
 			$twitter_token = $access_tokens[0];
 			for ($i=1; $i<count($access_tokens); $i++)	{
 				//get the latest access token
-				if($access_token[$i]->get_time_stamp()>$twitter_token->get_time_stamp())	{
+				if($access_tokens[$i]->get_time_stamp()>$twitter_token->get_time_stamp())	{
 					$twitter_token = $access_tokens[$i];
 				}
 			}
