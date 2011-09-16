@@ -1,2 +1,3 @@
 plugins/oauthconsumer/common/*                  usr/share/@OLDPACKAGE@/plugins/oauthconsumer/common/
+plugins/oauthconsumer/include/*                  usr/share/@OLDPACKAGE@/plugins/oauthconsumer/include/
 plugins/oauthconsumer/etc/oauthconsumer.ini	             etc/@PACKAGE@/config.ini.d/
