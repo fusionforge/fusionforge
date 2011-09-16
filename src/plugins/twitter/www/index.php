@@ -24,9 +24,8 @@ $response_array = json_decode($response);
 	
 echo '<table cellpadding="10">';
 foreach ($response_array as $tweet)	{
-	echo '<tr><th rowspan="2"><img src="'.$tweet->user->profile_image_url.'" alt="twitter"></th>';
-	echo '<th valign="bottom">'.$tweet->user->name.'</th></tr>';
-	echo '<tr><td valign="top">'.$tweet->text.'</th></tr>';
+	echo '<tr><th><img src="'.$tweet->user->profile_image_url.'" alt="twitter"></th>';
+	echo '<td valign="top"><b>'.$tweet->user->name.'</b><br>'.$tweet->text.'</th></tr>';
 }
 echo '</table>';
 	
