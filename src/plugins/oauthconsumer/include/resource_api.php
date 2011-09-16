@@ -1,5 +1,7 @@
 <?php
 
+// FIXME : missing copyright
+
 require_once('OAuth.php');
 
 class OAuthResource	{

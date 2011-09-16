@@ -22,6 +22,8 @@
 global $gfplugins;
 require_once $gfplugins.'twitter/include/twitterPlugin.class.php' ;
 
+// TODO check on installed oauthconsumer dependency
+
 //oauthconsumer dependencies
 require_once $gfplugins.'oauthconsumer/include/fusionforge_oauth_datastore.php';
 require_once $gfplugins.'oauthconsumer/include/provider_api.php';
