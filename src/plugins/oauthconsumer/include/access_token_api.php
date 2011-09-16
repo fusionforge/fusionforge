@@ -71,6 +71,17 @@ class OAuthAccessToken extends OAuthToken {
 		return $access_tokens;
 	}
 	
+	static function get_all_access_tokens_by_provider($provider_id, $user_id) {
+		$conn = FFOAuthDataStore::singleton();
+		$rows = $conn->find_access_tokens_by_provider($provider_id, $user_id);
+		$access_tokens = array();
+		foreach ($rows as $row)	{
+			$access_token = OAuthAccessToken::convert_row_to_object($row);
+			$access_tokens[] = $access_token;
+		}
+		return $access_tokens;
+	}
+	
 	function write_to_db() {
 		if ( strlen(trim( $this->get_provider_id() ))==0 || strlen(trim( $this->get_user_id() ))==0 || strlen(trim( $this->get_token_key() ))==0 || strlen(trim( $this->get_token_secret() ))==0 ) {
 			exit_error( "Error trying to add the access token. Some required parameters are not set.", 'oauthconsumer' );

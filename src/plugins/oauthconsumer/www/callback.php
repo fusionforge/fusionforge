@@ -8,7 +8,7 @@ $verifier = $_GET['oauth_verifier']?$_GET['oauth_verifier']:getStringFromPost('o
 $token = $_GET['oauth_token']?$_GET['oauth_token']:getStringFromPost('oauth_token');
 
 if(!$verifier || !$token)	{
-	exit_error("OAuth parameters not found.");
+	echo $HTML->error_msg(htmlspecialchars("OAuth parameters not found."));
 }
 ?>
 <form action="callback.php" method="post">
@@ -18,7 +18,7 @@ if(!$verifier || !$token)	{
 	echo '<input type="hidden" name="provider_id" value="'.$_COOKIE['PROVIDER'].'"/>';
 	echo _('<b>Step 3: </b>Exchange the authorized request token for an access token');?>
 	<br>
-	<input type="submit" value="<?php echo _('Go') ?>"
+	<input type="submit" value="<?php echo _('Go') ?>" />
 </form>
 <?php 
 $f_provider_id = getStringFromPost('provider_id');
@@ -36,6 +36,8 @@ if($f_provider_id)	{
 	
 	$ff_consumer = new OAuthConsumer($consumer_key, $consumer_secret);
 	$oauth_request_token = new OAuthToken($_COOKIE['OAUTH_TOKEN'], $_COOKIE['OAUTH_TOKEN_SECRET']);
+	setcookie('OAUTH_TOKEN', '', time()-3600);
+	setcookie('OAUTH_TOKEN_SECRET', '', time()-3600);
 	
 	$ff_request2 = OAuthRequest::from_consumer_and_token($ff_consumer, false, "GET", $access_token_url, $parameters);
 	$hmac = new OAuthSignatureMethod_HMAC_SHA1();
@@ -47,13 +49,21 @@ if($f_provider_id)	{
 	curl_setopt($curl, CURLOPT_URL, $ff_request2->to_url());
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	
+	//temporary workaround for untrusted security certificates
+	$not_verify_ssl = $_COOKIE['NOT_VERIFY_SSL']?$_COOKIE['NOT_VERIFY_SSL']:0;
+	if($not_verify_ssl)	{
+		curl_setopt ($curl, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, 0);
+	}
+	setcookie('NOT_VERIFY_SSL', '', time()-3600);
+	
 	$access_token_string = curl_exec ($curl);
 	curl_close ($curl);
 	
 	parse_str($access_token_string, $access_token_array);
 	$userid = session_get_user()->getID();
 	if(!$access_token_array['oauth_token'] || !$access_token_array['oauth_token_secret'])	{
-		exit_error("Access Token not received.");
+		echo $HTML->error_msg(htmlspecialchars("Access Token not received."));
 	}
 	$new_access_token = new OAuthAccessToken($f_provider_id, $access_token_array['oauth_token'], $access_token_array['oauth_token_secret'], $userid);
 	$new_access_token->write_to_db();
@@ -63,3 +73,11 @@ if($f_provider_id)	{
 	echo _("Access Token Secret : ".$access_token_array['oauth_token_secret']."<br>");
 		
 }
+
+echo'<br><br>';
+
+echo util_make_link('/plugins/'.$pluginname.'/providers.php', _('OAuth Providers')). ' <br />';
+echo util_make_link('/plugins/'.$pluginname.'/get_access_token.php', _('Get Access tokens')).'<br /> ';
+echo util_make_link('/plugins/'.$pluginname.'/access_tokens.php', _('Access tokens')).'<br /> ';
+
+site_user_footer(array());

@@ -113,4 +113,10 @@ if ($admin_access) {
 	<?php
 }
 
+echo'<br><br>';
+
+echo util_make_link('/plugins/'.$pluginname.'/get_access_token.php', _('Get Access tokens')).'<br /> ';
+echo util_make_link('/plugins/'.$pluginname.'/access_tokens.php', _('Access tokens')).'<br /> ';
+
+
 site_user_footer(array());

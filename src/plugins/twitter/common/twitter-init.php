@@ -22,6 +22,12 @@
 global $gfplugins;
 require_once $gfplugins.'twitter/include/twitterPlugin.class.php' ;
 
+//oauthconsumer dependencies
+require_once $gfplugins.'oauthconsumer/include/fusionforge_oauth_datastore.php';
+require_once $gfplugins.'oauthconsumer/include/provider_api.php';
+require_once $gfplugins.'oauthconsumer/include/access_token_api.php';
+require_once $gfplugins.'oauthconsumer/include/resource_api.php';
+
 $twitterPluginObject = new twitterPlugin ;
 
 register_plugin ($twitterPluginObject) ;

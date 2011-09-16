@@ -2046,6 +2046,7 @@ src/plugins/oauthconsumer/include/access_token_api.php -text
 src/plugins/oauthconsumer/include/fusionforge_oauth_datastore.php -text
 src/plugins/oauthconsumer/include/oauthconsumerPlugin.class.php -text
 src/plugins/oauthconsumer/include/provider_api.php -text
+src/plugins/oauthconsumer/include/resource_api.php -text
 src/plugins/oauthconsumer/packaging/control/222plugin-oauthconsumer -text
 src/plugins/oauthconsumer/packaging/control/222plugin-oauthconsumer.shortdesc -text
 src/plugins/oauthconsumer/packaging/dirs/plugin-oauthconsumer -text
@@ -2062,6 +2063,7 @@ src/plugins/oauthconsumer/www/provider_delete.php -text
 src/plugins/oauthconsumer/www/provider_edit.php -text
 src/plugins/oauthconsumer/www/provider_update.php -text
 src/plugins/oauthconsumer/www/providers.php -text
+src/plugins/oauthconsumer/www/response.php -text
 src/plugins/oauthprovider/3rd-party/README -text
 src/plugins/oauthprovider/3rd-party/oauth-php/CHANGELOG.txt -text
 src/plugins/oauthprovider/3rd-party/oauth-php/LICENSE.txt -text

@@ -67,17 +67,23 @@ if(count($providers)>0)	{
 		</tr>
 		
 	</table><br>
-	
 	<?php
+	if((strcasecmp(substr($f_request_token_url, 0, 5),"https")==0) ||
+		(strcasecmp(substr($f_authorization_url, 0, 5),"https")==0) ||
+		(strcasecmp(substr($f_access_token_url, 0, 5),"https")==0))	{?>
+		<input type="checkbox" name="not_verify_ssl">Do not verify SSL Certificate</input>	<br><br>
+	<?php
+	}
 	$url_string = $f_request_token_url?"(from ".$f_request_token_url.")":""; 
 	echo _('<b>Step 1: </b>Get Request Token '.$url_string) ?>
 	<br>
-	<input type="submit" value="<?php echo _('Go') ?>"
+	<input type="submit" value="<?php echo _('Go') ?>" />
 	</form>
 	
 	<?php
 	$form_key = getStringFromPost('plugin_oauthconsumer_get_request_token');
 	$f_provider_id = getStringFromPost('providers');
+	$f_not_verify_ssl = getStringFromPost('not_verify_ssl');
 	if($form_key && $f_provider_id && form_key_is_valid($form_key))	{
 		form_release_key($form_key);
 		
@@ -106,24 +112,39 @@ if(count($providers)>0)	{
 		curl_setopt($curl, CURLOPT_URL, $ff_request1->to_url());
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		
+		//workaround for untrusted security certificates
+		if($f_not_verify_ssl)	{
+			curl_setopt ($curl, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, 0);
+			session_set_cookie('NOT_VERIFY_SSL', 1, 0, '', '', false, true);
+		}
+		
 		$request_token_string = curl_exec ($curl);
+				
+		if($request_token_string === false)
+		{
+			trigger_error('Error in curl : '.curl_error($curl), E_USER_WARNING);
+		}
 		curl_close ($curl);
-		
+		//print_r($request_token_string);
 		parse_str($request_token_string, $request_token);
-		echo _("New request token received!<br>");
-		echo _("Request Token Key : ".$request_token['oauth_token']."<br>");
-		echo _("Request Token Secret : ".$request_token['oauth_token_secret']."<br><br>");
-		//print_r($request_token);
-		session_set_cookie('PROVIDER', $f_provider_id, '', 10*60);
-		session_set_cookie('OAUTH_TOKEN', $request_token['oauth_token'], '', 10*60);
-		session_set_cookie('OAUTH_TOKEN_SECRET', $request_token['oauth_token_secret'], '', 10*60);
-		$oauth_request_token = new OAuthToken($request_token['oauth_token'], $request_token['oauth_token_secret']);
 		
-		$separator = "?";
-		if (strpos($f_authorize_url,"?")!=false) $separator = "&";
+		if(array_key_exists('oauth_token', $request_token)&&array_key_exists('oauth_token_secret', $request_token))	{
+			echo _("New request token received!<br>");
+			echo _("Request Token Key : ".$request_token['oauth_token']."<br>");
+			echo _("Request Token Secret : ".$request_token['oauth_token_secret']."<br><br>");
+			//print_r($request_token);
+			setcookie('PROVIDER', $f_provider_id, 0, '', '', false, true);
+			setcookie('OAUTH_TOKEN', $request_token['oauth_token'], 0, '', '', false, true);
+			setcookie('OAUTH_TOKEN_SECRET', $request_token['oauth_token_secret'], 0, '', '', false, true);
+			$oauth_request_token = new OAuthToken($request_token['oauth_token'], $request_token['oauth_token_secret']);
+			
+			$separator = "?";
+			if (strpos($f_authorize_url,"?")!=false) $separator = "&";
+			
+			$new_user_authorization_url = $f_authorize_url . $separator . "oauth_token=".$request_token['oauth_token']."&oauth_callback=".$callback_url;
+			//print_r($new_user_authorization_url);
 		
-		$new_user_authorization_url = $f_authorize_url . $separator . "oauth_token=".$request_token['oauth_token']."&oauth_callback=".$callback_url;
-		//print_r($new_user_authorization_url);
 		?>
 		
 		<form action="get_access_token.php" method="post">
@@ -131,10 +152,14 @@ if(count($providers)>0)	{
 		<?php 
 		echo _('<b>Step 2: </b>Authorize the Request Token (from '.$f_authorize_url.")") ?>
 		<br>
-		<input type="submit" value="<?php echo _('Go') ?>"
+		<input type="submit" value="<?php echo _('Go') ?>" />
 		</form>
 		<?php 
 		//header("Location:".$new_user_authorization_url);
+		}else 	{
+			echo $HTML->error_msg(htmlspecialchars("Error in retrieving request token"));
+				
+		}
 	}
 	
 	$f_authorization_url = getStringFromPost('authorization_url');
@@ -144,5 +169,10 @@ if(count($providers)>0)	{
 }else 	{
 	echo '<p>'. _('There are no OAuth Providers registered in the database currently. Please ask your forge administer to create one.').'</p>';
 }
+
+echo'<br><br>';
+
+echo util_make_link('/plugins/'.$pluginname.'/providers.php', _('OAuth Providers')). ' <br />';
+echo util_make_link('/plugins/'.$pluginname.'/access_tokens.php', _('Access tokens')).'<br /> ';
 
 site_user_footer(array());

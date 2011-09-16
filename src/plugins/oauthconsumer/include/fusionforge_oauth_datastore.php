@@ -312,5 +312,36 @@ class FFOAuthDataStore extends OAuthDataStore {
 		db_commit();
 		return true;
 	}
+	
+	/**
+	* Saves an OAuthResource to the DB
+	*
+	* @param OAuthResource $resource
+	* @return int the resource ID in the DB
+	*/
+	public function save_oauth_resource($resource) {
+	
+		$t_resource_table = "plugin_oauthconsumer_resource";
+		$id = $resource->get_id();
+		if ( 0 == $id ) { # create
+
+			db_begin();
+			$result = db_query_params ("INSERT INTO $t_resource_table".' ( url, provider_id, http_method) VALUES ($1,$2,$3)',
+						   array ( $resource->get_url(), $resource->get_provider_id(), $resource->get_http_method())) ;
+			if (!$result) {
+				db_rollback();
+				return false;
+			}
+			$resource_id = db_insertid($result, $t_resource_table, 'id' );
+
+			db_commit();
+
+		} else { # update
+			$t_query = "UPDATE $t_resource_table SET url=$1, provider_id=$2, http_method=$3 WHERE id=$4";
+			db_query_params( $t_query, array ($resource->get_url(), $resource->get_provider_id(), $resource->get_http_method(), $resource->get_id()) );
+		}
+		return $provider_id;
+	
+	}
 
 }
