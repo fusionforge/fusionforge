@@ -237,7 +237,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			}
 		}
 		echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'._('View this document').'" >';
-		echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
+		echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));
 		echo '</a></td>'."\n";
 		echo '<td>';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
