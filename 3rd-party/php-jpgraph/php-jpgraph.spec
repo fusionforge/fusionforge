@@ -11,7 +11,8 @@ License: GPL
 Group: Development/Languages
 URL: http://www.aditus.nu/jpgraph/
 
-Source: http://members.chello.se/jpgraph/jpgdownloads/jpgraph-%{version}.tar.gz
+#Source: http://members.chello.se/jpgraph/jpgdownloads/jpgraph-%{version}.tar.gz
+Source: libphp-jpgraph_%{version}.orig.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildArch: noarch
