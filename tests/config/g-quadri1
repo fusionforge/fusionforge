@@ -19,3 +19,10 @@ DNSDOMAIN=rd.francetelecom.fr
 
 coclicocdd40=lxc:centos5::
 coclicofftrk=lxc:centos5::
+
+ffcos5trksrc=lxc:centos5::
+ffcos5trkrpm=lxc:centos5::
+
+ffdeb6trksrc=lxc:debian6::
+ffdeb6trkdeb=lxc:debian6::
+
