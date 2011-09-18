@@ -379,7 +379,6 @@ plugins/old/webcalendar/www/year.php -text
 src/AUTHORS -text
 src/CHANGES -text
 src/COPYING.php -text
-src/INSTALL.restricted -text
 src/NEWS -text
 src/backend/DatabaseDump.pl svneol=native#text/x-perl
 src/backend/include.pl svneol=native#text/x-perl
@@ -784,7 +783,6 @@ src/etc/templates/httpd.vhosts -text
 src/fusionforge-install-2.php -text
 src/fusionforge-install-3-db.php -text
 src/fusionforge-install-4-config.php -text
-src/gforge-restricted.sh svneol=native#text/x-sh
 src/image-sources/README -text
 src/image-sources/fusionforge-logo.xcf -text
 src/image-sources/pow-fusionforge.xcf -text
