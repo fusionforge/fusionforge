@@ -239,8 +239,9 @@ unset($GLOBALS['editor_was_set_up']);
 		</td>
 	</tr>
 	<?php
-		$hookParams['task_id']=$project_task_id;
-		plugin_hook("task_extra_detail",$hookParams);
+		$hookParams['task_id'] = $project_task_id;
+		$hookParams['group_id'] = $group_id;
+		plugin_hook("task_extra_detail", $hookParams);
 	?>
 	<tr>
 		<td colspan="3">

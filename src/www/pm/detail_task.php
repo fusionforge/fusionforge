@@ -172,8 +172,9 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 		</td>
 	</tr>
 	<?php
-		$hookParams['task_id']=$project_task_id;
-		plugin_hook("task_extra_detail",$hookParams);
+		$hookParams['task_id'] = $project_task_id;
+		$hookParams['group_id'] = $group_id;
+		plugin_hook("task_extra_detail", $hookParams);
 	?>
 	<tr>
 		<td colspan="2">
