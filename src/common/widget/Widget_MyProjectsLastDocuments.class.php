@@ -94,7 +94,6 @@ class Widget_MyProjectsLastDocuments extends Widget {
 						for ($i=0; $i < $count; $i++) {
 							$doc =& $df->Documents[$key][$i];
 							$html .= '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
-							$html .= '<td>'.html_image($doc->getFileTypeImage(), '22', '22', array('alt'=>$doc->getFileType())).'</td>';
 							switch ($doc->getFileType()) {
 								case "URL": {
 									$docurl = $doc->getFileName();
@@ -104,7 +103,8 @@ class Widget_MyProjectsLastDocuments extends Widget {
 									$docurl = util_make_url('/docman/view.php/'.$g->getID().'/'.$doc->getID().'/'.urlencode($doc->getFileName()));
 								}
 							}
-							$html .= '<td><a href="'.$docurl.'">'.$doc->getFilename().'</a></td>';
+							$html .= '<td><a href="'.$docurl.'">'.html_image($doc->getFileTypeImage(), '22', '22', array('alt'=>$doc->getFileType())).'</a></td>';
+							$html .= '<td>'.$doc->getFilename().'</td>';
 							$html .= '<td>'.make_user_link($doc->getCreatorUserName(), $doc->getCreatorRealName()).'</td>';
 							if ( $doc->getUpdated() ) {
 								$html .= '<td>'.date(_('Y-m-d H:i'), $doc->getUpdated()).'</td>';
