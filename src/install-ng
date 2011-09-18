@@ -70,7 +70,7 @@ scriptdir=`cd \`dirname $0\`; pwd`
 # Call to detect_os, this will set $type and $distrib
 os=$(detect_os)
 
-if [ $DEPS -o $DEFAULT ]
+if $DEPS || $DEFAULT
 then
 	# Load deps script and run the appropriate one
 	. $scriptdir/install/deps
@@ -116,91 +116,103 @@ fi
 echo "Install type = $type"
 case $type in 
 	redhat)
-	if [ $DEFAULT -o $FILES ]
+	if $DEFAULT || $FILES
 	then
 		echo "Running install2_files "$hostname" apache apache"
 		install2_files "$hostname" apache apache
 	fi
 	if [ "$mode" = "install" ]
 	then
-		if [ $DEFAULT -o $DATABASE ]
+		if $DEFAULT || $DATABASE
 		then
 			echo "Running install3_db"
 			install3_db
 		fi
-		if [ $DEFAULT -o $CONFIG ]
+		if $DEFAULT || $CONFIG
 		then
 			echo "Running install4_config"
 			install4_config
 		fi
-		# Post installation fixes.
-		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
-		# Disable ssl
-		perl -spi -e "s/^Include/#Include/" /etc/gforge/httpd.conf.d/ssl-on.inc
-
-		chkconfig httpd on
-		chkconfig postgresql on
-		chkconfig iptables off
-
-		service httpd restart
-		service iptables stop
-		msg="IMPORTANT: Service iptables (firewall) disabled, please reconfigure after"
-
-		cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
-		cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
-		service crond reload
+		if $DEFAULT
+		then
+			# Post installation fixes.
+			perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
+			# Disable ssl
+			perl -spi -e "s/^Include/#Include/" /etc/gforge/httpd.conf.d/ssl-on.inc
+	
+			chkconfig httpd on
+			chkconfig postgresql on
+			chkconfig iptables off
+	
+			service httpd restart
+			service iptables stop
+			msg="IMPORTANT: Service iptables (firewall) disabled, please reconfigure after"
+	
+			cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
+			cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
+			service crond reload
+		fi
 	else
-		echo "Running php db/upgrade-db.php"
-		cd $scriptdir; php db/upgrade-db.php
-		echo "Running php utils/normalize_roles.php"
-		cd $scriptdir; php utils/normalize_roles.php
+		if $DEFAULT
+		then
+			echo "Running php db/upgrade-db.php"
+			cd $scriptdir; php db/upgrade-db.php
+			echo "Running php utils/normalize_roles.php"
+			cd $scriptdir; php utils/normalize_roles.php
+		fi
 	fi
 	;;
 
 	suse)
-	if [ $DEFAULT -o $FILES ]
+	if $DEFAULT || $FILES
 	then
 		install2_files "$hostname" wwwrun www
 	fi
 	if [ $mode = "install" ]
 	then
-		if [ $DEFAULT -o $DATABASE ]
+		if $DEFAULT || $DATABASE
 		then
 			echo "Running install3_db"
 			install3_db
 		fi
-		if [ $DEFAULT -o $CONFIG ]
+		if $DEFAULT || $CONFIG
 		then
 			echo "Running install4_config"
 			install4_config
 		fi
-		# Post installation fixes.
-		#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
+		if $DEFAULT
+		then
+			# Post installation fixes.
+			#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
+	
+			chkconfig -s apache2 on
+			chkconfig -s postgresql on
+	
+			# Apache settings: modules
+			for m in dav dav_svn authz_svn ssl; do
+				a2enmod $m
+				a2enflag $m
+			done
+			echo "Virtual hosts for ${hostname}:"
+			httpd2 -S -DSSL 2>&1 | grep ${hostname}
 
-		chkconfig -s apache2 on
-		chkconfig -s postgresql on
+			rcapache2 restart
 
-		# Apache settings: modules
-		for m in dav dav_svn authz_svn ssl; do
-			a2enmod $m
-			a2enflag $m
-		done
-		echo "Virtual hosts for ${hostname}:"
-		httpd2 -S -DSSL 2>&1 | grep ${hostname}
+			rcSuSEfirewall2 stop
+			msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
 
-		rcapache2 restart
-
-		rcSuSEfirewall2 stop
-		msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
-
-		cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
-		cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
-		rccron reload
+			cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
+			cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
+			rccron reload
+		fi
 	else
-		echo "Running php db/upgrade-db.php"
-		cd $scriptdir; php db/upgrade-db.php
-		echo "Running php utils/normalize_roles.php"
-		cd $scriptdir; php utils/normalize_roles.php
+		if $DEFAULT
+		then
+			echo "Running php db/upgrade-db.php"
+			cd $scriptdir; php db/upgrade-db.php
+			echo "Running php utils/normalize_roles.php"
+			cd $scriptdir; php utils/normalize_roles.php
+		fi
 	fi
 	;;
 
