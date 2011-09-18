@@ -679,10 +679,10 @@ if [ "$1" -eq "1" ]; then
 	        FFORGE_ADMIN_PASSWORD=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-8)
 	    fi
 	    export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD
-	    /usr/bin/php %{FORGE_DIR}/fusionforge-install-3-db.php >>/var/log/%{name}-install.log 2>&1
+	    /bin/sh %{FORGE_DIR}/install-ng --database >>/var/log/%{name}-install.log 2>&1
 	else
 	    echo "Database %{dbname} already exists. Will not proceed with database setup." >>/var/log/%{name}-install.log 2>&1
-	    echo "Please see %{FORGE_DIR}/fusionforge-install-3-db.php and run it manually" >>/var/log/%{name}-install.log 2>&1
+	    echo "Please see %{FORGE_DIR}/install-ng --database and run it manually" >>/var/log/%{name}-install.log 2>&1
 	    echo "if deemed necessary." >>/var/log/%{name}-install.log 2>&1
 	fi
 
@@ -695,7 +695,7 @@ if [ "$1" -eq "1" ]; then
 	[ -d %{FORGE_VAR_LIB}/etc ] || mkdir %{FORGE_VAR_LIB}/etc
 	touch %{FORGE_VAR_LIB}/etc/httpd.vhosts
 
-	/usr/bin/php %{FORGE_DIR}/fusionforge-install-4-config.php >>/var/log/%{name}-install.log 2>&1
+	/bin/sh %{FORGE_DIR}/install-ng --config >>/var/log/%{name}-install.log 2>&1
 
 	/etc/init.d/httpd restart >/dev/null 2>&1
 
@@ -770,10 +770,6 @@ fi
 %{FORGE_DIR}/NEWS
 %{FORGE_DIR}/README*
 %{FORGE_DIR}/fusionforge.spec
-%{FORGE_DIR}/fusionforge-install*
-%{FORGE_DIR}/gforge-restricted.sh
-%{FORGE_DIR}/install.sh
-%{FORGE_DIR}/install-common.inc
 %{FORGE_DIR}/install-ng
 # Directories under %{FORGE_DIR}
 %{FORGE_DIR}/backend
