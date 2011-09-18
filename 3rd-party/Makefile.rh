@@ -5,8 +5,9 @@
 # Once built, packages are in $RPM_TMP
 
 #RPM_TMP=$(HOME)/rpmbuild
-RPM_TMP=$(shell cd ..; pwd)/tmp
-BUILDRESULT=$(HOME)/fusionforge_repo
+FORGE_HOME=$(shell cd ..; pwd)
+RPM_TMP=$(FORGE_HOME)/tmp
+BUILDRESULT=$(FORGE_HOME)/build/packages
 
 HTMLPURIFYER_DIR=$(CURDIR)/php-htmlpurifier
 HTMLPURIFIER_VERSION=4.3.0
