@@ -87,13 +87,12 @@ class Widget_MyProjects extends Widget {
 					$html_my_projects .= '</td><td>&nbsp;</td></tr>';
 				}
 			}
-
+			$html_my_projects .= '</table>';
 			if (isset($private_shown) && $private_shown) {
 				$html_my_projects .= '
-					<tr><td colspan="2" class="small">'.
-					'(*)&nbsp;'._("<em>Private project</em>").'</td></tr>';
+					<span>(*)&nbsp;'._("<em>Private project</em>").'</span>';
 			}
-			$html_my_projects .= '</table>';
+
 		}
 		return $html_my_projects;
 	}
