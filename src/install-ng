@@ -15,10 +15,10 @@
 #         Christian Bayle <bayle@debian.org>
 #
 usage(){
-	echo "Usage: $1 [-r|-h|-a|--reinit|--help|--auto] [<hostname>]"
+	echo "Usage: $1 [-r|-h|-a|--reinit|--help|--auto|--deps|--files|--database|--config] [<hostname>]"
 }
 
-options=`getopt -o rha -l reinit,help,auto -- "$@"`
+options=`getopt -o rha -l reinit,help,auto,deps,files,database,config -- "$@"`
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; usage $0 ;exit 1 ; fi
 
@@ -26,12 +26,29 @@ eval set -- "$options"
 
 REINIT=false
 AUTO=false
+
+# Install dependancies files database config by default
+DEFAULT=true
+
+# Install dependancies
+DEPS=false
+# Install files
+FILES=false
+# Install database
+DATABASE=false
+# Install config
+CONFIG=false
+	
 while true
 do
     case "$1" in
         -r|--reinit)    REINIT=true; shift 1;;
         -h|--help)      usage $0 ; exit 0; shift 1;;
         -a|--auto)      AUTO=true ; shift 1;;
+	--deps)		DEFAULT=false ; DEPS=true ; shift 1;;
+	--files)	DEFAULT=false ; FILES=true ; shift 1;;
+	--database)	DEFAULT=false ; DATABASE=true ; shift 1;;
+	--config)	DEFAULT=false ; CONFIG=true ; shift 1;;
 	--)		shift 1; break;;
         *)              break ;;
     esac
@@ -53,9 +70,12 @@ scriptdir=`cd \`dirname $0\`; pwd`
 # Call to detect_os, this will set $type and $distrib
 os=$(detect_os)
 
-# Load deps script and run the appropriate one
-. $scriptdir/install/deps
-deps_$os
+if [ $DEPS -o $DEFAULT ]
+then
+	# Load deps script and run the appropriate one
+	. $scriptdir/install/deps
+	deps_$os
+fi
 
 # Load install scripts
 . $scriptdir/install/install2
@@ -96,15 +116,23 @@ fi
 echo "Install type = $type"
 case $type in 
 	redhat)
-	echo "Running install2_files "$hostname" apache apache"
-	install2_files "$hostname" apache apache
+	if [ $DEFAULT -o $FILES ]
+	then
+		echo "Running install2_files "$hostname" apache apache"
+		install2_files "$hostname" apache apache
+	fi
 	if [ "$mode" = "install" ]
 	then
-		echo "Running install3_db"
-		install3_db
-		echo "Running install4_config"
-		install4_config
-
+		if [ $DEFAULT -o $DATABASE ]
+		then
+			echo "Running install3_db"
+			install3_db
+		fi
+		if [ $DEFAULT -o $CONFIG ]
+		then
+			echo "Running install4_config"
+			install4_config
+		fi
 		# Post installation fixes.
 		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
 		# Disable ssl
@@ -130,14 +158,22 @@ case $type in
 	;;
 
 	suse)
-	install2_files "$hostname" wwwrun www
+	if [ $DEFAULT -o $FILES ]
+	then
+		install2_files "$hostname" wwwrun www
+	fi
 	if [ $mode = "install" ]
 	then
-		echo "Running install3_db"
-		install3_db
-		echo "Running install4_config"
-		install4_config
-
+		if [ $DEFAULT -o $DATABASE ]
+		then
+			echo "Running install3_db"
+			install3_db
+		fi
+		if [ $DEFAULT -o $CONFIG ]
+		then
+			echo "Running install4_config"
+			install4_config
+		fi
 		# Post installation fixes.
 		#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
 
