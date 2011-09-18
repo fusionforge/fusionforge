@@ -69,6 +69,7 @@ scriptdir=`cd \`dirname $0\`; pwd`
 
 # Call to detect_os, this will set $type and $distrib
 os=$(detect_os)
+type=$(detect_type)
 
 if $DEPS || $DEFAULT
 then

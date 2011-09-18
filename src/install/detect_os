@@ -59,3 +59,20 @@ detect_os(){
 	fi
 	echo $os
 }
+
+detect_type()
+{
+	os=$(detect_os)
+	case $os in
+		suse|opensuse)
+			type=suse
+			;;
+		debian|ubuntu|ark)
+			type=debian	
+			;;
+		centos|rhel|redhat_unknown|fedora)
+			type=redhat
+			;;
+	esac
+	echo $type
+}
