@@ -40,7 +40,6 @@ msg(){
 
 
 deps_redhat() {
-	type=redhat
 	if [ ! -f /tmp/done_yum ]
 	then
 		set -e
@@ -54,7 +53,6 @@ deps_redhat() {
 }
 
 deps_debian() {
-	type=debian
 	msg green "Installing packages: Executing apt-get. Please wait..."
 	apt-get -y install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release php-htmlpurifier
 	a2enmod headers
@@ -68,7 +66,6 @@ deps_debian() {
 
 # http://www.arklinux.org/
 deps_ark() {
-	type=debian
 	msg green "Installing packages: Executing apt-get. Please wait..."
 	apt-get update
 	apt-get -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion subversion-server-httpd postfix rcs mod_ssl wget ssh
@@ -81,7 +78,6 @@ deps_ark() {
 }
 
 deps_suse() {
-	type=suse
 	msg green "Installing Packages with yast"
 	yast -i php5 apache2-prefork php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php4-pgsql subversion apache-mod_dav_svn ssh postfix rcs php4-gd mod_ssl perl-IPC-Run php4-curl wget subversion-server apache2-mod_php4
 
@@ -103,7 +99,6 @@ deps_suse() {
 }
 
 deps_opensuse() {
-	type=suse
 	msg green "Installing Packages with yast"
 	yast -i php5 apache2-prefork apache2-mod_php5 cvs mailman perl-IPC-Run perl-URI php5 php5-curl php5-gd php5-gettext php5-pgsql postfix postgresql postgresql-contrib postgresql-libs postgresql-server rcs openssh subversion subversion-server wget viewvc
 
