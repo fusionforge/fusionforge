@@ -90,7 +90,7 @@ class Widget_MyProjects extends Widget {
 
 			if (isset($private_shown) && $private_shown) {
 				$html_my_projects .= '
-					<tr '. $HTML->boxGetAltRowStyle($i) .'"><td colspan="2" class="small">'.
+					<tr><td colspan="2" class="small">'.
 					'(*)&nbsp;'._("<em>Private project</em>").'</td></tr>';
 			}
 			$html_my_projects .= '</table>';
