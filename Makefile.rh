@@ -4,8 +4,10 @@
 # TODO : document the role of this Makefile
 #
 
-RPM_TMP=~/rpmbuild
-BUILDRESULT=~/fusionforge_repo
+FORGE_HOME=$(CURDIR)
+RPM_TMP=$(FORGE_HOME)/tmp
+BUILDRESULT=$(FORGE_HOME)/build/packages
+RPMBUILD=rpmbuild --define='_topdir $(RPM_TMP)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' --define='_rpmdir $(BUILDRESULT)'
 
 VER=$(shell LC_ALL=C sed -n '/>software_version/s/^.*'\''\([0-9.]*\)'\''.*$$/\1/p' src/common/include/FusionForge.class.php)
 in_svn_repo:= $(wildcard .svn/)
@@ -34,33 +36,23 @@ list:
 all: 3rd-party fusionforge dist
 src: 3rd-party dist
 
-rpmprep:
-	-rm -Rf $(RPM_TMP)/*
-	-rm -Rf ~/.rpmmacros
-	sh tools/rpmdev-setuptree
-	echo '%_tmppath %{_topdir}/TMP' >> ~/.rpmmacros
-	echo '%_buildroot %{_tmppath}/%{name}-root' >> ~/.rpmmacros
-	echo '%_sysconfdir /etc' >> ~/.rpmmacros
-	mkdir $(RPM_TMP)/TMP
-
 dist:
-	-mkdir -p $(BUILDRESULT)
-	cp $(RPM_TMP)/RPMS/noarch/*.rpm $(BUILDRESULT)
-	createrepo $(BUILDRESULT)
+	createrepo $(BUILDRESULT)/noarch
 
 clean:		# Clean files of fusionforge build                         #
 	cd $(RPM_TMP)/SOURCES/; rm -rf fusionforge-$(version).tar.bz2 fusionforge-$(version)
 
-fusionforge: rpmprep		# Build rpm fusionforge packages                               #
+fusionforge: # Build rpm fusionforge packages                               #
 	cd src; find . -type f -or -type l | grep -v '/.svn/' | grep -v '/debian/' | cpio -pdumB --quiet $(RPM_TMP)/SOURCES/fusionforge-$(version)
 	cd $(RPM_TMP)/SOURCES/fusionforge-$(version)/; utils/manage-translations.sh build ; utils/manage-apache-config.sh build
 	rm -f $(RPM_TMP)/SOURCES/fusionforge-$(version)/utils/fusionforge-shell-postgresql.spec
 	cd $(RPM_TMP)/SOURCES/; cp fusionforge-$(version)/rpm-specific/patches/* .
 	cd $(RPM_TMP)/SOURCES/; tar cjf fusionforge-$(version).tar.bz2 fusionforge-$(version)
-	sed -e 's/@@VERSION@@/$(version)/g' < src/fusionforge.spec > $(RPM_TMP)/TMP/fusionforge.spec
-	rpmbuild -bb $(RPM_TMP)/TMP/fusionforge.spec
+	[ -d $(RPM_TMP)/SPECS ] || mkdir $(RPM_TMP)/SPECS
+	sed -e 's/@@VERSION@@/$(version)/g' < src/fusionforge.spec > $(RPM_TMP)/SPECS/fusionforge.spec
+	$(RPMBUILD) -bb $(RPM_TMP)/SPECS/fusionforge.spec
 
 3rd-party:
-	cd 3rd-party; $(MAKE) -f Makefile.rh all
+	$(MAKE) -C 3rd-party -f Makefile.rh all
 
 .PHONY : 3rd-party
