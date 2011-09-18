@@ -56,6 +56,14 @@ class scmhookPlugin extends Plugin {
 				}
 				break;
 			}
+			case "task_extra_detail": {
+				$group_id = $params['group_id'];
+				$group = &group_get_object($group_id);
+				if ($group->usesPlugin($this->name)) {
+					$this->task_extra_detail($params);
+				}
+				break;
+			}
 		}
 		return true;
 	}
