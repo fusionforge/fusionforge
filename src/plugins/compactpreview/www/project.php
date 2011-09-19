@@ -29,14 +29,14 @@ require_once $gfwww.'include/pre.php';
 
 
 
-global $pluginCompatPreview;
+global $pluginCompactPreview;
 $pluginCompactPreview = plugin_get_object('compactpreview');
 
 $project = getStringFromRequest('project');
 
 $title = _("OSLC Project Compact Preview");
 
-echo $pluginCompatPreview->display_project_html_compact_preview($project, $title);
+echo $pluginCompactPreview->display_project_html_compact_preview($project, $title);
 
 // Local Variables:
 // mode: php

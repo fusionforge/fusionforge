@@ -1573,7 +1573,7 @@ function util_negociate_alternate_content_types($script, $default_content_type) 
 
 		// negociate accepted content-type depending on the preferred ones declared by client
 		$http=new HTTP();
-		$content_type = $http->negotiateMimeType($accepted_types);
+		$content_type = $http->negotiateMimeType($accepted_types, false);
 	} else {
 		$content_type = $default_content_type;
 	}
