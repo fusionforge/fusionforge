@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011, Olivier Berger - Institut Telecom
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -57,26 +57,42 @@ class extsubproj_Widget_SubProjects extends Widget {
 				include_once("arc/ARC2.php");
 				require_once('plugins/extsubproj/include/Graphite.php');
 				
+				$reader = $reader = ARC2::getComponent('Reader');
 				
 				$parser = ARC2::getRDFParser();
+
+				$reader->setAcceptHeader('Accept: application/rdf+xml');
+				$parser->setReader($reader);
+				
 				//$parser->parse('https://vm2.localdomain/projects/coinsuper/');
 				$parser->parse($url);
-				//print_r($parser);
-				$triples = $parser->getTriples();
-				//print_r($triples);
-				$turtle = $parser->toTurtle($triples);
-				$datauri = $parser->toDataURI($turtle);
 				
-				
-				$graph = new Graphite();
-				//$graph->setDebug(1);
-				$graph->ns( "doap", "http://usefulinc.com/ns/doap#" );
-				$graph->load( $datauri );
-				//print $graph->resource('https://vm2.localdomain/projects/coinsuper/')->dumpText();
-				$projname = $graph->resource( $url )->get( "doap:name" );
-				
+				if(! $parser->reader->errors) {
+					//print_r($parser);
+					$triples = $parser->getTriples();
+					//print_r($triples);
+					$turtle = $parser->toTurtle($triples);
+					$datauri = $parser->toDataURI($turtle);
+					
+					
+					$graph = new Graphite();
+					//$graph->setDebug(1);
+					$graph->ns( "doap", "http://usefulinc.com/ns/doap#" );
+					$graph->load( $datauri );
+					//print $graph->resource('https://vm2.localdomain/projects/coinsuper/')->dumpText();
+					$projname = $graph->resource( $url )->get( "doap:name" );
+				}
+				else {
+					/*
+					foreach ($parser->reader->errors as $error) {
+						$html .= $error;
+					}
+					*/
+					$projname = $url;
+				}
 				require_once ('plugins/compactpreview/include/CompactResource.class.php');
-				$params = array('group_name' => $projname);
+				$params = array('name' => $projname,
+								'url' => $url);
 				
 				$cR = new OslcGroupCompactResource($params);
 				
@@ -91,40 +107,9 @@ class extsubproj_Widget_SubProjects extends Widget {
 		
 			$html .= $HTML->listTableBottom();
 		}
-		/*
-		$user = UserManager::instance()->getCurrentUser();
-		$scmgitplugin = plugin_get_object('scmgit');
-		$GitRepositories = $this->getMyRepositoriesList();
-		if (count($GitRepositories)) {
-			$returnhtml = '<table>';
-			foreach ($GitRepositories as $GitRepository) {
-				$project = group_get_object($GitRepository);
-				$returnhtml .= '<tr><td><tt>git clone git+ssh://'.$user->getUnixName().'@' . $scmgitplugin->getBoxForProject($project) . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</tt></p></td><tr>';
-			}
-			$returnhtml .= '</table>';
-			return $returnhtml;
-		} else {
-			return '<p class="information">'._('No personal git repository').'</p>';
-		}
-		*/
+		
 		return $html;
 	}
-/*
-	function getMyRepositoriesList() {
-		$returnedArray = array();
-		$res = db_query_params('SELECT p.group_id FROM plugin_scmgit_personal_repos p, users u WHERE u.user_id=p.user_id AND u.unix_status = $1 AND u.user_id = $2',
-					array('A',$this->owner_id));
-		if (!$res) {
-			return $returnedArray;
-		} else {
-			$rows = db_numrows($res);
-			for ($i=0; $i<$rows; $i++) {
-				$returnedArray[] = db_result($res,$i,'group_id');
-			}
-		}
-		return $returnedArray;
-	}
-	*/
 }
 
 ?>
