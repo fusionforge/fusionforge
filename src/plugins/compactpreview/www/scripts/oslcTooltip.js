@@ -54,18 +54,8 @@ jQuery(function(){
 
 	jQuery('body').append(container);
 	
-	jQuery('.resourcePopupTrigger').live('mouseover', function() {
-//		var params = jQuery(this).attr('rel').split(',');
-//		var resourceType = params[0];
-//		var resourceId = params[1];
-//
-//		if(resourceType == 'user') {
-//			resource = 'users';
-//		}
-//		if(resourceType == 'project'){
-//			resource = 'projects';
-//		}
-		var url = jQuery(this).attr('rel');
+	jQuery('.resourceLocalPopupTrigger').live('mouseover', function() {
+		var url = jQuery(this).attr('href');
 		
 		if (hideTimer) {
 			clearTimeout(hideTimer);  
@@ -77,8 +67,39 @@ jQuery(function(){
 			top: pos.top - 5 + 'px'  
 		});
 
-		jQuery('#resourcePopupContent').html('<i>...loading compact preview...</i>');
+		jQuery.ajax({  
+			type: 'GET',
+			url: url,
+			dataType: 'html',
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("Accept","application/x-fusionforge-compact+html");
+			},
+			
+			success: function(data) { 
+				jQuery('#resourcePopupContent').html(data);
+			}
+		}
+		);  
 
+		container.css('display', 'block');  
+	});  
+
+	jQuery('.resourceOslcPopupTrigger').live('mouseover', function() {
+		var url = jQuery(this).attr('href');
+		
+		if (hideTimer) {
+			clearTimeout(hideTimer);  
+		}
+		var pos = jQuery(this).offset();
+		var width = jQuery(this).width();
+		container.css({  
+			left: (pos.left + width) + 'px',  
+			top: pos.top - 5 + 'px'  
+		});
+
+		// if remote URL, do some OSLC compact-preview fetching
+		jQuery('#resourcePopupContent').html('<i>...loading compact preview...</i>');
+	
 		// Fetch the OSLC compact preview representation of the resource
 		//url: '/'+ resource +'/' + resourceId + '/',
 		jQuery.ajax({  
@@ -103,13 +124,24 @@ jQuery(function(){
 						}
 					}
 				}
-			}  
+			}
 		});  
 
 		container.css('display', 'block');  
 	});  
 
-	jQuery('.resourcePopupTrigger').live('mouseout', function() { 
+	jQuery('.resourceLocalPopupTrigger').live('mouseout', function() { 
+		if (hideTimer) { 
+			clearTimeout(hideTimer);
+		}
+		hideTimer = setTimeout(function() {  
+			container.css('display', 'none');  
+			}, 
+			hideDelay
+		);  
+	});
+
+	jQuery('.resourceOslcPopupTrigger').live('mouseout', function() { 
 		if (hideTimer) { 
 			clearTimeout(hideTimer);
 		}
@@ -121,14 +153,32 @@ jQuery(function(){
 	});
 
 	// Allow mouse over of details without hiding details  
-	jQuery('#resourcePopupContainer').mouseover(function() {  
+	jQuery('#resourceLocalPopupContainer').mouseover(function() {  
+		if (hideTimer) { 
+			clearTimeout(hideTimer);
+		}
+	});  
+
+	// Allow mouse over of details without hiding details  
+	jQuery('#resourceOslcPopupContainer').mouseover(function() {  
 		if (hideTimer) { 
 			clearTimeout(hideTimer);
 		}
 	});  
 
 	// Hide after mouseout  
-	jQuery('#resourcePopupContainer').mouseout(function() {  
+	jQuery('#resourceLocalPopupContainer').mouseout(function() {  
+		if (hideTimer){  
+			clearTimeout(hideTimer);
+		}
+		hideTimer = setTimeout(function() {  
+				container.css('display', 'none');  
+			},
+			hideDelay
+		);  
+	});  
+	// Hide after mouseout  
+	jQuery('#resourceOslcPopupContainer').mouseout(function() {  
 		if (hideTimer){  
 			clearTimeout(hideTimer);
 		}

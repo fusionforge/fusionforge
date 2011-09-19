@@ -54,7 +54,7 @@ class CompactResource {
 	public static function createCompactResource($params) {
 		switch ($params['resource_type']) {
 			case 'user' :
-				return new UserCompactResource($params);
+				return new LocalUserCompactResource($params);
 				break;
 			case 'group' :
 				return new GroupCompactResource($params);
@@ -76,6 +76,10 @@ class CompactResource {
  */
 class UserCompactResource extends CompactResource {
 
+	protected function getCssClass() {
+		// TBD
+	}
+	
 	public function getResourceLink() {
 		$username = $this->params['username'];
 		$user_id = $this->params['user_id'];
@@ -89,8 +93,13 @@ class UserCompactResource extends CompactResource {
         //$url = '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
 		//		'" rel="user,' . $username . '">'. $username . '</a>';
 		$resource_url = util_make_url_u ($username, $user_id);
-        $url = '<a class="resourcePopupTrigger" href="'. $resource_url .
-        				'" rel="'. $resource_url .'">'. $username . '</a>';
+
+        //$url = '<a class="resourcePopupTrigger" href="'. $resource_url .
+        //				'" rel="'. $resource_url .'">'. $username . '</a>';
+		$css_class = $this->getCssClass();
+		
+        $url = '<a class="'. $css_class .'" href="'. $resource_url .
+                				'">'. $username . '</a>';
         if ($logo_params['content']) {
         	$html = $logo_params['content'] . $url .'<div class="new_line"></div>';
         }
@@ -102,22 +111,53 @@ class UserCompactResource extends CompactResource {
 
 }
 
+class LocalUserCompactResource extends UserCompactResource {
+	protected function getCssClass() {
+		return 'resourceLocalPopupTrigger';
+	}
+}
+
+class OslcUserCompactResource extends UserCompactResource {
+	protected function getCssClass() {
+		return 'resourceOslcPopupTrigger';
+	}
+}
+
+
 /**
  * Enter description here ...
  * @author olivier
  *
  */
 class GroupCompactResource extends CompactResource {
-
+	
+	protected function getCssClass() {
+	// TBD
+	}
+	
+	
 	public function getResourceLink() {
 		$group_name = $this->params['group_name'];
 		$group_id = $this->params['group_id'];
 		$link_text = $this->params['link_text'];
 		$resource_url = util_make_url_g ($group_name, $group_id);
-		return '<a class="resourcePopupTrigger" href="'. $resource_url .
+		$css_class = $this->getCssClass();
+		return '<a class="'.$css_class .'" href="'. $resource_url .
 				'" rel="' . $resource_url . '">'. $link_text . '</a>';
 	}
 
+}
+
+class LocalGroupCompactResource extends GroupCompactResource {
+	protected function getCssClass() {
+		return 'resourceLocalPopupTrigger';
+	}
+}
+
+class OslcGroupCompactResource extends GroupCompactResource {
+	protected function getCssClass() {
+		return 'resourceOslcPopupTrigger';
+	}
 }
 
 ?>

@@ -26,32 +26,12 @@
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-$user = getStringFromRequest('user');
+global $pluginCompatPreview;
+$pluginCompactPreview = plugin_get_object('compactpreview');
 
-$user_obj = user_get_object_by_name($user);
+$username = getStringFromRequest('user');
 
-require_once $gfwww.'include/user_profile.php';
-
-$user_real_name = $user_obj->getRealName();
-$user_id = $user_obj->getID();
-
-?>
-<html>
-<head>
-<title>User: <?php echo $user_real_name;?> (Identifier: <?php echo $user_id;?>)</title>
-</head>
-<body>
-
-
-<?php
-$compact = true;
-echo user_personal_information($user_obj, $compact);
-?>
-
-</body>
-</html>
-
-<?php
+echo $pluginCompatPreview->display_user_html_compact_preview($username);
 
 // Local Variables:
 // mode: php
