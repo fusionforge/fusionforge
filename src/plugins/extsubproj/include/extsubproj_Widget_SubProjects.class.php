@@ -75,13 +75,16 @@ class extsubproj_Widget_SubProjects extends Widget {
 				//print $graph->resource('https://vm2.localdomain/projects/coinsuper/')->dumpText();
 				$projname = $graph->resource( $url )->get( "doap:name" );
 				
+				require_once ('plugins/compactpreview/include/CompactResource.class.php');
+				$params = array('group_name' => $projname);
+				
+				$cR = new OslcGroupCompactResource($params);
 				
  				$html = $html . '
  				<tr>
  					<td>';
 //<a href="'.$url.'">'.$projname.'</a>
-				$html .= '<a class="resourcePopupTrigger" href="'. $url .
-								'" rel="' . $url . '">'. $projname . '</a>';
+				$html .= $cR->getResourceLink();
 				$html = $html . '</td>
  				</tr>';
 			}
