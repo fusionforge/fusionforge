@@ -37,26 +37,9 @@ if (!$expl_pathinfo[2]) {
 
 $default_content_type = 'text/html';
 
-// Invoke plugins' hooks 'script_accepted_types' to discover which alternate content types they would accept for /users/...
-$hook_params = array();
-$hook_params['script'] = 'user_home';
-$hook_params['accepted_types'] = array();
-plugin_hook_by_reference('script_accepted_types', $hook_params);
-if(count($hook_params['accepted_types'])){
-	// By default, text/html is accepted
-	$accepted_types = array($default_content_type);
-	$new_accepted_types = $hook_params['accepted_types'];
-	$accepted_types = array_merge($accepted_types, $new_accepted_types);
-
-	// PEAR::HTTP (for negotiateMimeType())
-	require_once('HTTP.php');
-
-	// negociate accepted content-type depending on the preferred ones declared by client
-	$http=new HTTP();
-	$content_type = $http->negotiateMimeType($accepted_types, 'text/html');
-} else {
-	$content_type = $default_content_type;
-}
+$default_content_type = 'text/html';
+$script='user_home';
+$content_type = util_negociate_alternate_content_types($script, $default_content_type);
 
 $username = urldecode($expl_pathinfo[2]);
 
@@ -78,6 +61,10 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 		if($hook_params['content_type'] != ''){
 				header('Content-type: '. $hook_params['content_type']);
 				echo $hook_params['content'];
+		}
+		else {
+				header('HTTP/1.1 406 Not Acceptable',true,406);
+				exit(0);
 		}
 	} else { // default HTML view
 		$user_id = $user->getID();
