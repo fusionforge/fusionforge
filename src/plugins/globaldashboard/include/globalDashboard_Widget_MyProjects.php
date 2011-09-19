@@ -112,11 +112,13 @@ class globalDashboard_Widget_MyProjects extends Widget {
 				$fetch_method = $this->getProjectsFetchMethodForAccount($account['account_id']);
 				switch ($fetch_method) {
 					case USER_PROJECTS_FETCH_METHOD_SOAP:
-						$soap_client = new SoapClient($account['forge_account_soap_wsdl_uri'], array('trace'=>false, 'exceptions'=>false));
-						$session_ser = $soap_client->__soapCall("login", array("userid" => $account['forge_account_login_name'], "passwd" => $account['forge_account_password']));
-						$result = $soap_client->__soapCall("userGetGroups", array("session_ser" => $session_ser, "user_id" => $user_id));
-						if (!is_a($result, "SoapFault")) {
-							$projects[] = soapToArray($result);
+						$soap_client = new SoapClient($account['forge_account_soap_wsdl_uri'], array('trace'=>true, 'exceptions'=>true));
+						if ($soap_client) {
+							$session_ser = $soap_client->__soapCall("login", array("userid" => $account['forge_account_login_name'], "passwd" => $account['forge_account_password']));
+							$result = $soap_client->__soapCall("userGetGroups", array("session_ser" => $session_ser, "user_id" => $user_id));
+							if (!is_a($result, "SoapFault") || !$result) {
+								$projects[] = soapToArray($result);
+							}
 						}
 						break;
 					case USER_PROJECTS_FETCH_METHOD_OSLC:
