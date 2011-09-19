@@ -157,18 +157,6 @@ class globalDashboard_Widget_MyProjects extends Widget {
 	function getProjectsFetchMethodForAccount($account_id) {
 		return getDBFetchMethod($account_id, 'projects');
 	} 
-	
-	/**
-	*
-	* Returns fetch method of remote artifacts related to an account
-	*
-	* @param integer $account_id
-	*
-	* @return integer $method value corresponding to fetch method
-	*/
-	function getProjectsFetchMethodForAccount($account_id) {
-		return getDBFetchMethod($account_id, 'artifacts');
-	}
 }
 
 ?>
