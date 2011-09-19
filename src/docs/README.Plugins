@@ -499,7 +499,7 @@ TODO : document Auth plugins :
                /projects or /users/ pages rendered through content-negociation
 
   Hook Name  : content_negociated_project_home
-  Parameters : $params['accept'] provides the content-type to be rendered, $params['groupname'] the project name
+  Parameters : $params['accept'] provides the content-type to be rendered, $params['groupname'] the project name, $params['group_id'] the project ID
   Description: returns in $params['content'] an alternate content for /projects/ page and 
                in $params['content_type'] the actual content-type to return
 		

@@ -65,6 +65,7 @@ if (!$group_id || !$project) {
 			$hook_params['accept'] = $content_type;
 			$hook_params['return'] = '';
 			$hook_params['content_type'] = '';
+			$hook_params['group_id'] = $project->getID();
 			plugin_hook_by_reference('content_negociated_project_home', $hook_params);
 			if($hook_params['content_type'] != ''){
 				header('Content-type: '. $hook_params['content_type']);

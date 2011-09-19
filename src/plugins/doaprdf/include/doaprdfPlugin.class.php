@@ -146,10 +146,9 @@ class doaprdfPlugin extends Plugin {
 	 * @param unknown_type $params
 	 */
 	function content_negociated_project_home (&$params) {
-		global $group_id;	
-	
 		$projectname = $params['groupname'];
 		$accept = $params['accept'];
+		$group_id = $params['group_id'];
 
 		if($accept == 'application/rdf+xml') {
 			$pm = ProjectManager::instance();
@@ -173,6 +172,7 @@ class doaprdfPlugin extends Plugin {
 							'http://purl.org/dc/terms/' => 'dcterms'
 			);
 			$hook_params['xml'] = array();
+			$hook_params['group'] = $group_id;
 			
 			plugin_hook_by_reference('project_rdf_metadata', $hook_params);
 			

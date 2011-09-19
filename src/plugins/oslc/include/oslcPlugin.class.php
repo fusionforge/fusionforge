@@ -38,7 +38,7 @@ class oslcPlugin extends Plugin {
 	}
 
 	function CallHook ($hookname, &$params) {
-		global $use_oslcplugin,$G_SESSION,$HTML, $group_id;
+		global $use_oslcplugin,$G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("oslc")) {
@@ -153,6 +153,7 @@ class oslcPlugin extends Plugin {
 		}
 		elseif($hookname == "project_rdf_metadata") {
 			
+			$group_id=$params['group'];
 			$serviceprovider = util_make_url ("/plugins/oslc/cm/oslc-cm-services/".$group_id);
 
 			if (! $params['prefixes']['http://open-services.net/ns/core#']) {
