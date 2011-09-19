@@ -47,7 +47,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 		$html = '<table>';
 		if($title) {
 			$html .= '<tr>
-						<td>'. $title . '</td>
+						<td colspan="2">'. $title . '</td>
 					  </tr>';
 		}
 	} else {

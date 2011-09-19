@@ -34,7 +34,9 @@ $pluginCompactPreview = plugin_get_object('compactpreview');
 
 $project = getStringFromRequest('project');
 
-echo $pluginCompatPreview->display_project_html_compact_preview($project);
+$title = _("OSLC Project Compact Preview");
+
+echo $pluginCompatPreview->display_project_html_compact_preview($project, $title);
 
 // Local Variables:
 // mode: php

@@ -115,7 +115,7 @@ class CompactPreviewPlugin extends Plugin {
 				
 	}
 	
-	function display_project_html_compact_preview($project) {
+	function display_project_html_compact_preview($project, $title) {
 		
 		$project_obj = group_get_object_by_name($project);
 		
@@ -156,7 +156,7 @@ class CompactPreviewPlugin extends Plugin {
 			<table>
 		
 				<tr>
-					<td colspan="2"><i>Project Compact Preview</i></td>
+					<td colspan="2"><i>'. $title .'</i></td>
 				</tr>
 				<tr>
 					'/* <td rowspan="8"><img src="/plugins/compactpreview/images/userTooltip/oslc.png" />
@@ -285,7 +285,8 @@ class CompactPreviewPlugin extends Plugin {
 			// if want direct compact-preview rendering
 			case 'application/x-fusionforge-compact+html' : {
 				$params['content_type'] = 'text/html';
-				$params['content'] = $this->display_project_html_compact_preview($projectname);
+				$title = _('Compact preview of local project');
+				$params['content'] = $this->display_project_html_compact_preview($projectname, $title);
 				break;
 			}
 		}
