@@ -67,6 +67,24 @@ function getDBStoredRemoteAccountById($account_id) {
 }
 
 /**
+*
+* Fetches Forge Software for a remote account identified by its id.
+*
+* @param integer $account_id
+*/
+function getDBForgeSoftwareByAccountId($account_id) {
+	$t_account_table = "plugin_globaldashboard_user_forge_account";
+	$t_result = db_query_params(
+			"SELECT forge_software FROM $t_account_table ".
+			"WHERE account_id=$1", array((int) $account_id)
+	);
+	if (db_numrows($t_result)) {
+		$forge_software = db_result($t_result, 0, 'forge_software');
+	}
+	return $forge_software;
+}
+
+/**
  * 
  * Fetches account discovery params from DB knowing account id
  * 

@@ -53,7 +53,8 @@ class globalDashboard_Widget_MyProjects extends Widget {
 			$tablearr = array(_('My remote projects'),'');
 			$html .= $HTML->listTableTop($tablearr);
 
-			foreach ($MyProjects as $remote_account_projs) {
+			foreach ($MyProjects as $account_id => $remote_account_projs) {
+				//$remote_account_projs = array("Proj1", "Proj2");
 				/*include_once("arc/ARC2.php");
 				require_once('plugins/extsubproj/include/Graphite.php');
 
@@ -72,24 +73,25 @@ class globalDashboard_Widget_MyProjects extends Widget {
 				$graph->ns( "doap", "http://usefulinc.com/ns/doap#" );
 				$graph->load( $datauri );
 				//print $graph->resource('https://vm2.localdomain/projects/coinsuper/')->dumpText();
-				$projname = $graph->resource( $url )->get( "doap:name" );
+				$projname = $graph->resource( $url )->get( "dosoapToArray()ap:name" );
 			*/
-/* 				$html = $html . '
-				<tr>
-				<td>
-					<!--<a href="http://'.$proj->getHomePage().'">'.$proj->getUnixName().'</a>
-				</td>
-				</tr>'; */
+				$account = getDBStoredRemoteAccountById($account_id);
+				if ($account['forge_software'] == REMOTE_FORGE_SOFTWARE_FUSIONFORGE) {
+					$favicon_url = $account['forge_account_domain'] . '/images/icon.png';
+				} elseif ($account['forge_software'] == REMOTE_FORGE_SOFTWARE_CODENDI) {
+					$favicon_url = $account['forge_account_domain'] . '/favicon.ico';
+				}
+				 
+				$i = 0;
 				foreach ($remote_account_projs as $remote_proj) {
+					$project_url = $account['forge_account_domain'] . '/projects/'. $remote_proj['unix_group_name'];
 					$html = $html . '
 					<tr>
 						<td>
-							'.print_r($remote_proj).'
+							<img src="'. $favicon_url.'" />    <a href="'. $project_url .'">'. $remote_proj['group_name'] .'</a>
 						</td>
 					</tr>';
 				}
-				//print_r($proj);
-				
 			}
 			$html .= $HTML->listTableBottom();
 		}
@@ -112,21 +114,42 @@ class globalDashboard_Widget_MyProjects extends Widget {
 				$fetch_method = $this->getProjectsFetchMethodForAccount($account['account_id']);
 				switch ($fetch_method) {
 					case USER_PROJECTS_FETCH_METHOD_SOAP:
-						$soap_client = new SoapClient($account['forge_account_soap_wsdl_uri'], array('trace'=>true, 'exceptions'=>true));
-						if ($soap_client) {
-							$session_ser = $soap_client->__soapCall("login", array("userid" => $account['forge_account_login_name'], "passwd" => $account['forge_account_password']));
-							$result = $soap_client->__soapCall("userGetGroups", array("session_ser" => $session_ser, "user_id" => $user_id));
-							if (!is_a($result, "SoapFault") || !$result) {
-								$projects[] = soapToArray($result);
-							}
-						}
+						$projects = $this->getAccountRemoteProjectsBySOAP($account, $projects);
 						break;
 					case USER_PROJECTS_FETCH_METHOD_OSLC:
+						//$projects = $this->getAccountRemoteProjectsByOSLC($account);
 						break;
 					default:
 						break;
 				}
 			}
+		}
+		return $projects;
+	}
+	
+	function getAccountRemoteProjectsBySOAP($account, $projects) {
+		switch ($account['forge_software']) {
+			case REMOTE_FORGE_SOFTWARE_FUSIONFORGE:
+				$soap_client = new SoapClient($account['forge_account_soap_wsdl_uri'], array('trace'=>true, 'exceptions'=>true));
+				if ($soap_client) {
+					$session_ser = $soap_client->__soapCall("login", array("userid" => $account['forge_account_login_name'], "passwd" => $account['forge_account_password']));
+					//@FIXME: user_id here should be the one in the remote forge !!! Need extra soap call to get that id
+					$results = $soap_client->__soapCall("userGetGroups", array("session_ser" => $session_ser, "user_id" => $account['user_id']));
+					if (!is_a($results, "SoapFault") && $results) {
+						$projects[$account['account_id']] = $this->soapToArray($results);
+					}
+				}
+				break;
+			case REMOTE_FORGE_SOFTWARE_CODENDI:
+				$soap_client = new SoapClient($account['forge_account_soap_wsdl_uri'], array('trace'=>true, 'exceptions'=>true));
+				if ($soap_client) {
+					$session = $soap_client->__soapCall("login", array("loginname" => $account['forge_account_login_name'], "passwd" => $account['forge_account_password']));
+					$results = $soap_client->__soapCall("getMyProjects", array("sessionKey" => $session->session_hash));
+					if (!is_a($results, "SoapFault") && $results) {
+						$projects[$account['account_id']] = $this->soapToArray($results);
+					}
+				}
+				break;
 		}
 		return $projects;
 	}
@@ -138,14 +161,15 @@ class globalDashboard_Widget_MyProjects extends Widget {
 	 * 
 	 * @return array $array
 	 */
-	function soapToArray(stdClass $result) {
-		$result = (array)$result;
-		foreach($result as $key => $value){
-			if(is_object($value)&&get_class($value)==='stdClass'){
-				$result[$key] = self::soapToArray($value);
-			}
+	function soapToArray($results) {
+		$array = array();
+		$i=0;
+		foreach($results as $result){
+			$i++;
+			$array[$i]['group_name'] = $result->group_name;
+			$array[$i]['unix_group_name'] = $result->unix_group_name;
 		}
-		return $result;
+		return $array;
 	}
 	
 	/**
