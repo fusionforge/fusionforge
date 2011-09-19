@@ -14,7 +14,7 @@ CREATE TABLE plugin_globaldashboard_user_forge_account (
 CREATE SEQUENCE plugin_globaldashboard_account_discovery_pk_seq start 1 increment 1 minvalue 1 cache 1 ;
 CREATE TABLE plugin_globaldashboard_account_discovery (
 	account_discovery_id integer PRIMARY KEY DEFAULT NEXTVAL('plugin_globaldashboard_account_discovery_pk_seq') ,
-	account_id integer NOT NULL REFERENCES plugin_globaldashboard_user_forge_account(account_id) ,
+	account_id integer NOT NULL REFERENCES plugin_globaldashboard_user_forge_account(account_id) ON DELETE CASCADE ,
 	projects_discovery_method integer DEFAULT NULL ,
 	artifacts_discovery_method integer DEFAULT NULL 
 ) ;
