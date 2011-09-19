@@ -31,7 +31,8 @@ $pluginCompactPreview = plugin_get_object('compactpreview');
 
 $username = getStringFromRequest('user');
 
-echo $pluginCompatPreview->display_user_html_compact_preview($username);
+$title = _('OSLC Compact preview of user');
+echo $pluginCompatPreview->display_user_html_compact_preview($username, $title);
 
 // Local Variables:
 // mode: php

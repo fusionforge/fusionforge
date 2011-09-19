@@ -90,7 +90,7 @@ class CompactPreviewPlugin extends Plugin {
 		}
 	}
 	
-	function display_user_html_compact_preview($username) {
+	function display_user_html_compact_preview($username, $title = false) {
 		global $gfwww;
 		
 		require_once $gfwww.'include/user_profile.php';
@@ -107,7 +107,7 @@ class CompactPreviewPlugin extends Plugin {
 						</head>
 						<body>';
 		$compact = true;
-		$html .= user_personal_information($user_obj, $compact);
+		$html .= user_personal_information($user_obj, $compact, $title);
 		$html .= '</body>
 						</html>';
 		
@@ -251,7 +251,8 @@ class CompactPreviewPlugin extends Plugin {
 			// if want direct compact-preview rendering
 			case 'application/x-fusionforge-compact+html' : {
 				$params['content_type'] = 'text/html';
-				$params['content'] = $this->display_user_html_compact_preview($username);
+				$title = _('Compact preview of local user');
+				$params['content'] = $this->display_user_html_compact_preview($username, $title);
 				break;
 			}
 		}

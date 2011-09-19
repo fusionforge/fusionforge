@@ -32,7 +32,7 @@
 * @param boolean $compact
 * @return string HTML
 */
-function user_personal_information($user, $compact = false) {
+function user_personal_information($user, $compact = false, $title = false) {
 
 	$user_id = $user->getID();
 
@@ -45,6 +45,11 @@ function user_personal_information($user, $compact = false) {
 
 	if($compact) {
 		$html = '<table>';
+		if($title) {
+			$html .= '<tr>
+						<td>'. $title . '</td>
+					  </tr>';
+		}
 	} else {
 		$html = '<table width="100%" cellpadding="2" cellspacing="2" border="0">';
 	}
