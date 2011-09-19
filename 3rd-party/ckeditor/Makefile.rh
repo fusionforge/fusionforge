@@ -1,0 +1,13 @@
+#! /usr/bin/make -f
+#
+# Once built, packages are in $RPM_TMP
+
+RPM_TMP=~/rpmbuild
+VERSION=3.5.3
+
+ckeditor: $(RPM_TMP)/SOURCES/ckeditor_$(VERSION).tar.gz
+	rpmbuild --quiet --clean -ba ckeditor.spec
+
+$(RPM_TMP)/SOURCES/ckeditor_$(VERSION).tar.gz:
+	mkdir -p $(RPM_TMP)/SOURCES/
+	cd $(RPM_TMP)/SOURCES/; wget -q -N http://download.cksource.com/CKEditor/CKEditor/CKEditor%20$(VERSION)/ckeditor_$(VERSION).tar.gz

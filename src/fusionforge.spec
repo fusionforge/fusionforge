@@ -26,6 +26,9 @@
 
 %define reloadhttpd() /etc/init.d/httpd httpd reload >/dev/null 2>&1
 
+# Disable debug binary detection & generation to speed up process.
+%global debug_package %{nil}
+
 # RPM spec preamble
 Summary: FusionForge Collaborative Development Environment
 Name: fusionforge
@@ -101,6 +104,13 @@ External HTTPD authentication plugin for FusionForge.
 # Requires: %{name} >= %{version}, php, postgresql
 # %description plugin-authopenid
 # External OpenID authentication plugin for FusionForge.
+
+%package plugin-ckeditor
+Summary: CKEditor plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, ckeditor
+%description plugin-ckeditor
+CKEditor is a WYSIWYG text editor that displays within a web browser.
 
 %package plugin-cvssyncmail
 Summary: Provides email notifications of changes to CVS repositories
@@ -877,6 +887,9 @@ fi
 # %files plugin-authopenid
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authopenid.ini
 # %{FORGE_DIR}/plugins/authopenid
+
+%files plugin-ckeditor
+%{FORGE_DIR}/plugins/ckeditor
 
 %files plugin-cvssyncmail
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvssyncmail.ini
