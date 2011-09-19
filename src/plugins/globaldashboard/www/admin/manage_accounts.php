@@ -127,6 +127,18 @@ function createNewAccountForm($user_id) {
 					</td>
 				</tr>
 				<tr>
+					<td>' . _('Remote Forge Software') . ': <span class="requiredfield">*</span> </td>
+					<td>  
+						<select name="forge_software">
+							<option value="'. REMOTE_FORGE_SOFTWARE_FUSIONFORGE .'" selected="selected"> FusionForge </option>
+							<option value="'. REMOTE_FORGE_SOFTWARE_CODENDI .'"> Codendi </option>
+							<option value="'. REMOTE_FORGE_SOFTWARE_TULEAP .'"> Tuleap </option>
+							<option value="'. REMOTE_FORGE_SOFTWARE_REDMINE .'"> Redmine </option>
+							<option value="'. REMOTE_FORGE_SOFTWARE_TRACK .'"> Track </option>
+						</select>
+					</td>
+				</tr>
+				<tr>
 					<td>' . _('Account domain') . ': <span class="requiredfield">*</span> </td>
 					<td>  
 						<input type="text" size="60" name="account_domain">

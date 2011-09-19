@@ -89,6 +89,38 @@ function editRemoteAccount($account_id) {
 				</td>
 			</tr>
 			<tr>
+				<td>' . _('Remote Forge Software') . ': </td>
+				<td>  
+					<select name="forge_software">
+						<option value="'. REMOTE_FORGE_SOFTWARE_FUSIONFORGE .'"';
+						if ($account['forge_software'] == REMOTE_FORGE_SOFTWARE_FUSIONFORGE){
+							echo ' selected="selected"';
+						}
+						echo '> FusionForge </option>
+						<option value="'. REMOTE_FORGE_SOFTWARE_CODENDI .'"';
+						if ($account['forge_software'] == REMOTE_FORGE_SOFTWARE_CODENDI){
+							echo 'selected="selected"';
+						}
+						echo '> Codendi </option>
+						<option value="'. REMOTE_FORGE_SOFTWARE_TULEAP .'"';
+						if ($account['forge_software'] == REMOTE_FORGE_SOFTWARE_TULEAP) {
+							echo 'selected="selected"';
+						}
+						echo '> Tuleap </option>
+						<option value="'. REMOTE_FORGE_SOFTWARE_REDMINE .'"';
+						if ($account['forge_software'] == REMOTE_FORGE_SOFTWARE_REDMINE) {
+							echo 'selected="selected"';
+						}
+						echo '> Redmine </option>
+						<option value="'. REMOTE_FORGE_SOFTWARE_TRACK .'"';
+						if ($account['forge_software'] == REMOTE_FORGE_SOFTWARE_TRACK) {
+							echo 'selected="selected"';
+						}
+						echo '> Track </option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td>' . _('Account domain') . ': </td>
 				<td>  
 					<input type="text" size="60" value="'.$account["forge_account_domain"].'" name="account_domain">

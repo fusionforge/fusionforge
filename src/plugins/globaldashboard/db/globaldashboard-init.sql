@@ -4,6 +4,7 @@ CREATE TABLE plugin_globaldashboard_user_forge_account (
 	user_id integer NOT NULL REFERENCES users(user_id) ,
 	forge_account_login_name varchar(32) DEFAULT '' NOT NULL ,
 	forge_account_password varchar(32) DEFAULT '' NOT NULL ,
+	forge_software integer DEFAULT 1 NOT NULL ,
 	forge_account_domain varchar(250) DEFAULT '' NOT NULL ,
 	forge_account_uri varchar(250) DEFAULT '' NOT NULL ,
 	forge_oslc_discovery_uri varchar(250) DEFAULT NULL ,

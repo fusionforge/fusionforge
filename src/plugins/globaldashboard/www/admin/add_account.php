@@ -26,6 +26,7 @@ require_once $gfwww.'include/pre.php';
 $user_id = getIntFromPost('user_id');
 $login_name = getStringFromPost('login_name');
 $account_password = getStringFromPost('account_password');
+$forge_software = getIntFromPost('forge_software');
 $account_domain = getStringFromPost('account_domain');
 $account_uri = getStringFromPost('account_uri');
 $oslc_uri = getStringFromPost('oslc_uri');
@@ -33,6 +34,7 @@ $rss_uri = getStringFromPost('rss_uri');
 $soap_wsdl = getStringFromPost('soap_wsdl');
 $projects_discovery = getIntFromPost('projects_discovery_method');
 $artifacts_discovery = getIntFromPost('artifacts_discovery_method');
+
 
 $user = session_get_user();
 if($user->getID() != $user_id) {
@@ -45,14 +47,15 @@ $t_query = "INSERT INTO $t_account_table "
 		." ( user_id, " 
 		."forge_account_login_name, "
 		."forge_account_password, " 
+		."forge_software, "
 		."forge_account_domain, "
 		."forge_account_uri, " 
 		."forge_oslc_discovery_uri, " 
 		."forge_account_rss_uri, "
 		."forge_account_soap_wsdl_uri ) "
-		."VALUES ( $1, $2, $3, $4, $5, $6, $7, $8 )";
+		."VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9 )";
 
-$result = db_query_params($t_query, array($user_id, $login_name, $account_password, $account_domain, $account_uri, $oslc_uri, $rss_uri, $soap_wsdl));
+$result = db_query_params($t_query, array($user_id, $login_name, $account_password, $forge_software, $account_domain, $account_uri, $oslc_uri, $rss_uri, $soap_wsdl));
 
 if($result) {
 	$t_discovery_table = "plugin_globaldashboard_account_discovery";

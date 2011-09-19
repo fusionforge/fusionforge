@@ -27,6 +27,7 @@ $account_id = getIntFromPost('account_id');
 $user_id = getIntFromPost('user_id');
 $login_name = getStringFromPost('login_name');
 $account_password = getStringFromPost('account_password');
+$forge_software = getIntFromPost('forge_software');
 $account_domain = getStringFromPost('account_domain');
 $account_uri = getStringFromPost('account_uri');
 $oslc_uri = getStringFromPost('oslc_uri');
@@ -45,15 +46,16 @@ $t_account_table = "plugin_globaldashboard_user_forge_account";
 $t_acc_query = 	 "UPDATE $t_account_table ".
 			" SET forge_account_login_name=$1,".
 			"	  forge_account_password=$2,".
-			"	  forge_account_domain=$3,".
-			"	  forge_account_uri=$4,".
-			"	  forge_oslc_discovery_uri=$5,".
-			"	  forge_account_rss_uri=$6,".
-			"	  forge_account_soap_wsdl_uri=$7".
-			" WHERE account_id=$8".
-			" AND   user_id=$9";
+			"	  forge_software=$3,".
+			"	  forge_account_domain=$4,".
+			"	  forge_account_uri=$5,".
+			"	  forge_oslc_discovery_uri=$6,".
+			"	  forge_account_rss_uri=$7,".
+			"	  forge_account_soap_wsdl_uri=$8".
+			" WHERE account_id=$9".
+			" AND   user_id=$10";
 
-$result = db_query_params( $t_acc_query, array( $login_name, $account_password, $account_domain, $account_uri, $oslc_uri, 
+$result = db_query_params( $t_acc_query, array( $login_name, $account_password, $forge_software, $account_domain, $account_uri, $oslc_uri, 
 								  $rss_uri, $soap_wsdl, $account_id, $user_id 
 						   ) 
 				);
