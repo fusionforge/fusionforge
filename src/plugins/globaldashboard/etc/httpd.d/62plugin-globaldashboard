@@ -1,0 +1,12 @@
+# 62plugin-globaldashboard begin
+#	AddHandler cgi-script .cgi
+
+#	ScriptAlias /cgi-bin/globaldashboard/ /var/lib/globaldashboard/cgi-bin/
+#	ScriptAlias /globaldashboard/ /var/lib/globaldashboard/cgi-bin/
+
+#	Alias /images/globaldashboard /usr/share/images/globaldashboard
+#	<Location /images/globaldashboard>
+#		order allow,deny
+#		allow from all
+#	</Location>
+# 62plugin-globaldashboard end
