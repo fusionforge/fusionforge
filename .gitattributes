@@ -656,6 +656,7 @@ src/debian/patches/use-jquery-from-distro.patch -text
 src/debian/patches/use-nusoap-from-distro.patch -text
 src/debian/patches/use-simplepie-from-distro.patch -text
 src/debian/patches/use-snoopy-from-distro.patch -text
+src/debian/patches/use-yui-from-distro -text
 src/debian/po/README -text
 src/debian/source/format -text
 src/debian/watch -text
