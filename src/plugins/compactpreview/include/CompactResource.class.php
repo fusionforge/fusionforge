@@ -57,7 +57,7 @@ class CompactResource {
 				return new LocalUserCompactResource($params);
 				break;
 			case 'group' :
-				return new GroupCompactResource($params);
+				return new LocalGroupCompactResource($params);
 				break;
 			case 'artifact' :
 				return new CompatResource($params);
@@ -98,8 +98,8 @@ class UserCompactResource extends CompactResource {
         //				'" rel="'. $resource_url .'">'. $username . '</a>';
 		$css_class = $this->getCssClass();
 		
-        $url = '<a class="'. $css_class .'" href="'. $resource_url .
-                				'">'. $username . '</a>';
+        $url = '<a class="'. $css_class .
+        		'" href="'. $resource_url .'">'. $username .'</a>';
         if ($logo_params['content']) {
         	$html = $logo_params['content'] . $url .'<div class="new_line"></div>';
         }
@@ -134,17 +134,6 @@ class GroupCompactResource extends CompactResource {
 	protected function getCssClass() {
 	// TBD
 	}
-	
-	
-	public function getResourceLink() {
-		$group_name = $this->params['group_name'];
-		$group_id = $this->params['group_id'];
-		$link_text = $this->params['link_text'];
-		$resource_url = util_make_url_g ($group_name, $group_id);
-		$css_class = $this->getCssClass();
-		return '<a class="'.$css_class .'" href="'. $resource_url .
-				'" rel="' . $resource_url . '">'. $link_text . '</a>';
-	}
 
 }
 
@@ -152,11 +141,27 @@ class LocalGroupCompactResource extends GroupCompactResource {
 	protected function getCssClass() {
 		return 'resourceLocalPopupTrigger';
 	}
+	public function getResourceLink() {
+		$group_name = $this->params['group_name'];
+		$group_id = $this->params['group_id'];
+		$link_text = $this->params['link_text'];
+		$resource_url = util_make_url_g ($group_name, $group_id);
+		$css_class = $this->getCssClass();
+		return '<a class="'.$css_class .'" href="'. $resource_url .
+					'">'. $link_text . '</a>';
+	}
 }
 
 class OslcGroupCompactResource extends GroupCompactResource {
 	protected function getCssClass() {
 		return 'resourceOslcPopupTrigger';
+	}
+	public function getResourceLink() {
+		$name = $this->params['name'];
+		$resource_url = $this->params['url'];
+		$css_class = $this->getCssClass();
+		return '<a class="'.$css_class .'" href="'. $resource_url .
+					'">'. $name . '</a>';
 	}
 }
 

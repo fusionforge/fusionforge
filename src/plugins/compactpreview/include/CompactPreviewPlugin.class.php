@@ -91,10 +91,11 @@ class CompactPreviewPlugin extends Plugin {
 	}
 	
 	function display_user_html_compact_preview($username) {
-
+		global $gfwww;
+		
 		require_once $gfwww.'include/user_profile.php';
 		
-		$user_obj = user_get_object_by_name($user);
+		$user_obj = user_get_object_by_name($username);
 
 		
 		$user_real_name = $user_obj->getRealName();
@@ -110,6 +111,113 @@ class CompactPreviewPlugin extends Plugin {
 		$html .= '</body>
 						</html>';
 		
+		return $html;
+				
+	}
+	
+	function display_project_html_compact_preview($project) {
+		
+		$project_obj = group_get_object_by_name($project);
+		
+		$public_name = $project_obj->getPublicName();
+		$unix_name = $project_obj->getUnixName();
+		$id = $project_obj->getID();
+		$home_page = util_make_url ("/projects/$unix_name/");
+		$description = $project_obj->getDescription();
+		$start_date = $project_obj->getStartDate();
+		$status = $project_obj->getStatus();
+		switch ($status){
+			case 'A':
+				$project_status = 'Active';
+				break;
+			case 'H':
+				$project_status = 'Hold';
+				break;
+			case 'P':
+				$project_status = 'Pending';
+				break;
+			case 'I':
+				$project_status = 'Incomplete';
+				break;
+			default:
+				break;
+		}
+		if ($project_obj->isPublic()) {
+			$public = 'Yes';
+		} else {
+			$public = 'No';
+		}
+		
+		$html='<html>
+		<head>
+		<title>Project: '. $public_name .' ('. $unix_name .')</title>
+		</head>
+		<body>
+			<table>
+		
+				<tr>
+					<td colspan="2"><i>Project Compact Preview</i></td>
+				</tr>
+				<tr>
+					'/* <td rowspan="8"><img src="/plugins/compactpreview/images/userTooltip/oslc.png" />
+					</td>*/.'
+					<td><b>Project name:</b>
+					
+					
+					
+					 '. $public_name .'</td>
+				</tr>
+				<tr>
+					<td><b>Project short name:</b>
+					
+					
+					
+					 '. $unix_name .'</td>
+				</tr>
+				<tr>
+					<td><b>Identifier:</b>
+					
+					
+					
+					  '. $id .'</td>
+				</tr>
+				<tr>
+					<td><b>Started since:</b>
+					
+					
+					
+					 '. date(_('Y-m-d H:i'), $start_date) .'</td>
+				</tr>
+				<tr>
+					<td><b>Status:</b>
+					
+					
+					
+					  '. $project_status .'</td>
+				</tr>
+				<tr>
+					<td><b>Is Public:</b>
+					
+					
+					
+					  '. $public .'</td>
+				</tr>
+				<tr>
+					<td><b>Description:</b>
+					
+					
+					
+					  '. $description .'</td>
+				</tr>
+				<tr>
+					<td><small><b>Home Page:</b> <a href="'. $home_page .'">'. $home_page .'
+						</a> </small></td>
+				</tr>
+		
+			</table>
+		</body>
+		</html>';
+	
 		return $html;
 				
 	}
@@ -143,7 +251,7 @@ class CompactPreviewPlugin extends Plugin {
 			// if want direct compact-preview rendering
 			case 'application/x-fusionforge-compact+html' : {
 				$params['content_type'] = 'text/html';
-				$params['content'] = display_user_html_compact_preview($username);
+				$params['content'] = $this->display_user_html_compact_preview($username);
 				break;
 			}
 		}
@@ -153,26 +261,34 @@ class CompactPreviewPlugin extends Plugin {
 
 		$projectname = $params['groupname'];
 		$accept = $params['accept'];
-		if($accept == 'application/x-oslc-compact+xml') {
-			$params['content_type'] = 'application/x-oslc-compact+xml';
-			$params['content'] = '<?xml version="1.0"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oslc="http://open-services.net/ns/core#">
-  <oslc:Compact rdf:about="/plugins/oslc/compact/project/'. $projectname .'">
-    <dcterms:title>'. $projectname . '</dcterms:title>
-    <oslc:shortTitle>'. $projectname . '</oslc:shortTitle>
-    <oslc:smallPreview>
-      <oslc:Preview>
-        <oslc:document rdf:ressource="/plugins/'.$this->name.'/project.php?project='. $projectname .'"/>
-        <oslc:hintWidth>500px</oslc:hintWidth>
-        <oslc:hintHeight>150px</oslc:hintHeight>
-      </oslc:Preview>
-    </oslc:smallPreview>
-  </oslc:Compact>
-</rdf:RDF>';
+		switch ($accept) {
+			// if want some OSLC compact-preview, provide the document pointing to the compact-preview
+			case 'application/x-oslc-compact+xml' : {
+				$params['content_type'] = 'application/x-oslc-compact+xml';
+				$params['content'] = '<?xml version="1.0"?>
+					<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oslc="http://open-services.net/ns/core#">
+  						<oslc:Compact rdf:about="/plugins/oslc/compact/project/'. $projectname .'">
+    						<dcterms:title>'. $projectname . '</dcterms:title>
+    						<oslc:shortTitle>'. $projectname . '</oslc:shortTitle>
+    						<oslc:smallPreview>
+      							<oslc:Preview>
+        							<oslc:document rdf:ressource="/plugins/'.$this->name.'/project.php?project='. $projectname .'"/>
+        							<oslc:hintWidth>500px</oslc:hintWidth>
+        							<oslc:hintHeight>150px</oslc:hintHeight>
+      							</oslc:Preview>
+    						</oslc:smallPreview>
+  						</oslc:Compact>
+					</rdf:RDF>';
+				break;
+			}
+			// if want direct compact-preview rendering
+			case 'application/x-fusionforge-compact+html' : {
+				$params['content_type'] = 'text/html';
+				$params['content'] = $this->display_project_html_compact_preview($projectname);
+				break;
+			}
 		}
 	}
-
-
 }
 
 // Local Variables:
