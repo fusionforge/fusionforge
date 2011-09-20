@@ -928,12 +928,22 @@ function valid_hostname($hostname = "xyz") {
  * @param array     labels  strings associated to each 2^10 or
  *                  10^3(base10==true) multiple of base units
  */
-function human_readable_bytes($bytes, $base10=false, $round=0, $labels=array(' bytes',  ' KB', ' MB', ' GB')) {
-	if ($bytes <= 0 || !is_array($labels) || (count($labels) <= 0)) {
-		return null;
+function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array()) {
+	if ($bytes == 0) {
+        return "0";
+    }
+	if ($bytes < 0) {
+		return "-" . human_readable_bytes(-$bytes, $base10, $round);
 	}
-	$step = $base10 ? 3 : 10;
-	$base = $base10 ? 10 : 2;
+    if ($base10) {
+        $labels = array(_('bytes'), _('kB'), _('MB'), _('GB'), _('TB'));
+	    $step = 3;
+	    $base = 10;
+    } else {
+        $labels = array(_('bytes'), _('KiB'), _('MiB'), _('GiB'), _('TiB'));
+	    $step = 10;
+	    $base = 2;
+    }
 	$log = (int)(log10($bytes)/log10($base));
 	krsort($labels);
 	foreach ($labels as $p=>$lab) {
@@ -941,10 +951,10 @@ function human_readable_bytes($bytes, $base10=false, $round=0, $labels=array(' b
 		if ($log < $pow) {
 			continue;
 		}
-		if ($lab == " MB" or $lab == " GB") {
+		if ($lab != _("bytes") and $lab != _("kB") and $lab != _("KiB")) {
 			$round = 2;
 		}
-		$text = round($bytes/pow($base,$pow),$round).$lab;
+		$text = round($bytes/pow($base,$pow),$round) . " " . $lab;
 		break;
 	}
 	return $text;
