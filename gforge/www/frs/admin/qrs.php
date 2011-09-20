@@ -139,7 +139,7 @@ if (getStringFromRequest('submit')) {
 					} elseif ($frsf->isError()) {
 						exit_error('Error',$frsf->getErrorMessage());
 					} else {
-						if (!$frsf->create($userfile_name,$userfile,$type_id,$processor_id,$release_date)) {
+						if (!$frsf->create($userfile_name,$userfile['tmp_name'],$type_id,$processor_id,$release_date)) {
 							db_rollback();
 							exit_error('Error',$frsf->getErrorMessage());
 						}
