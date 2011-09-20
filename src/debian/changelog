@@ -1,8 +1,8 @@
-fusionforge (5.1-6+) UNRELEASED; urgency=low
+fusionforge (5.1-7) unstable; urgency=low
 
-  * 
+  * New snapshot from upstream SVN.
 
- -- Roland Mas <lolando@debian.org>  Tue, 06 Sep 2011 15:51:19 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 20 Sep 2011 11:11:32 +0200
 
 fusionforge (5.1-6) unstable; urgency=low
 
