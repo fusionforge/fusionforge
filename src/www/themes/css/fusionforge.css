@@ -829,3 +829,11 @@ div.layout-manager-column-remove_hover {
    width:99%;
    padding: 4px;
 }
+
+.good_value {
+   color: green;
+}
+.wrong_value {
+   color: red;
+}
+

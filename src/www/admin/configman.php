@@ -30,6 +30,50 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+$config_depends_on = array(
+	'ftp_upload_dir' => 'use_ftp',
+	'https_port' => 'use_ssl',
+	'images_secure_url' => 'use_ssl',
+	'jabber_host' => 'use_jabber',
+	'jabber_port' => 'use_jabber',
+	'jabber_password' => 'use_jabber',
+	'jabber_user' => 'use_jabber',
+	'project_auto_approval_user' => 'project_auto_approval',
+	'shell_host' => 'use_shell',
+);
+
+class configCheck {
+	static function account_manager_type($v) { return ($v === 'pgsql'); }
+	static function chroot($v) { return is_dir($v); }
+	static function config_path($v) { return is_dir($v); }
+	static function data_path($v) { return is_dir($v); }
+	static function default_theme($v) { return db_numrows(db_query_params('SELECT * FROM themes WHERE dirname=$1', array($v))) === 1; }
+	static function extra_config_dirs($v) { return is_dir($v); }
+	static function ftp_upload_dir($v) { return is_dir($v); }
+	static function gitweb_cmd($v) { return is_file($v); }
+	static function groupdir_prefix($v) { return is_dir($v); }
+	static function homedir_prefix($v) { return is_dir($v); }
+	static function installation_environment($v) { return in_array($v, array('production', 'integration', 'development')); }
+	static function jpgraph_path($v) { return is_dir($v); }
+	static function log_path($v) { return is_dir($v); }
+	static function mailman_path($v) { return is_dir($v); }
+	static function plugins_path($v) { return is_dir($v); }
+	static function project_auto_approval_user($v) { return db_numrows(db_query_params('SELECT * FROM users WHERE user_name=$1', array($v))) === 1; }
+	static function repos_path($v) { return is_dir($v); }
+	static function scm_snapshots_path($v) { return is_dir($v); }
+	static function scm_tarballs_path($v) { return is_dir($v); }
+	static function sendmail_path($v) { return is_file($v); }
+	static function session_key($v) { return ($v !== 'foobar'); }
+	static function source_path($v) { return is_dir($v); }
+	static function news_group($v) { return db_numrows(db_query_params('SELECT * FROM groups WHERE group_id=$1', array($v))) === 1; }
+	static function stats_group($v) { return db_numrows(db_query_params('SELECT * FROM groups WHERE group_id=$1', array($v))) === 1; }
+	static function template_group($v) { return db_numrows(db_query_params('SELECT * FROM groups WHERE group_id=$1', array($v))) === 1; }
+	static function peer_rating_group($v) { return db_numrows(db_query_params('SELECT * FROM groups WHERE group_id=$1', array($v))) === 1; }
+	static function themes_root($v) { return is_dir($v); }
+	static function upload_dir($v) { return is_dir($v); }
+	static function url_root($v) { return is_dir($v); }
+}
+
 site_admin_header(array('title'=>_('Configuration Manager')));
 
 echo "<h2>".sprintf (_('Configuration from the config API (*.ini files)'))."</h2>" ;
@@ -55,14 +99,24 @@ foreach ($sections as $section) {
 	$variables = $c->get_variables ($section) ;
 	natsort($variables) ;
 	foreach ($variables as $var) {
+		if (isset($config_depends_on[$var]) &&
+			(!$c->get_value($section, $config_depends_on[$var]))) {
+			continue;
+		}
+		$v = $c->get_value ($section, $var) ;
+
+		if (method_exists('configCheck', $var)) {
+			$class = configCheck::$var($v)? 'class="good_value"': 'class="wrong_value"';
+		} else {
+			$class = '';
+		}
 		echo '<tr '. $HTML->boxGetAltRowStyle($counter++) .'><td>'.$var ;
 		if ($c->is_bool ($section, $var)) {
 			print " (boolean)" ;
 		}
 		print "</td><td>" ;
 		print htmlspecialchars($c->get_raw_value ($section, $var)) ;
-		print "</td><td>" ;
-		$v = $c->get_value ($section, $var) ;
+		print "</td><td $class>" ;
 		if ($c->is_bool ($section, $var)) {
 			if ($v) {
 				print "true" ;
@@ -72,7 +126,7 @@ foreach ($sections as $section) {
 		} else {
 			print htmlspecialchars($v);
 		}
-		print "</td></tr>" ;
+		print "</td></tr>\n" ;
 	}
 }
 
