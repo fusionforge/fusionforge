@@ -71,7 +71,7 @@ if (getStringFromRequest('submit')) {
 		//$cmd = escapeshellcmd("$sys_ftp_upload_chowner $ftp_filename");
 		//exec($cmd,$output);
 		$userfile_name=$ftp_filename;
-		$userfile=$upload_dir.'/'.$ftp_filename;
+		$userfile['tmp_name']=$upload_dir.'/'.$ftp_filename;
 		//echo $cmd.'***'.$output.'***'.$userfile;
 	}
 	if (!$release_name) {
