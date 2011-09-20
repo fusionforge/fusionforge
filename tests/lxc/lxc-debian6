@@ -66,6 +66,7 @@ EOF
         lxc_network_ipv4=`grep ^lxc.network.ipv4 $path/config | cut -d= -f2`
         address=`echo $lxc_network_ipv4 | cut -d/ -f1`
         netmask=`netmask -s $lxc_network_ipv4 | cut -d/ -f2`
+	gateway=`grep ^\#lxc.network.ipv4.gw $path/config | cut -d= -f2`
 	if [ -e $rootfs/etc/network/interfaces ]
 	then
 		cat <<EOF > $rootfs/etc/network/interfaces
@@ -76,8 +77,13 @@ auto eth0
 iface eth0 inet static
 	address $address
 	netmask $netmask
-
 EOF
+		if [ !  -z "$gateway" ]
+		then
+			cat <<EOF >> $rootfs/etc/network/interfaces
+	gateway $gateway
+EOF
+		fi
 		cat <<EOF >> $rootfs/etc/hosts
 $address	$hostname
 EOF
