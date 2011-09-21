@@ -57,7 +57,7 @@ class extsubproj_Widget_SubProjects extends Widget {
 				include_once("arc/ARC2.php");
 				require_once('plugins/extsubproj/include/Graphite.php');
 				
-				$reader = $reader = ARC2::getComponent('Reader');
+				$reader = ARC2::getComponent('Reader');
 				
 				$parser = ARC2::getRDFParser();
 
