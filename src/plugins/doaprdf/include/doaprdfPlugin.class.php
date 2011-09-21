@@ -114,7 +114,12 @@ class doaprdfPlugin extends Plugin {
 			$xml .='</doap:Project>
     			</rdf:RDF>';
 			
-			$params['content'] = $xml;
+			$doc = new DOMDocument();
+			$doc->preserveWhiteSpace = false;
+			$doc->formatOutput   = true;
+			$doc->loadXML($xml);
+			 
+			$params['content'] = $doc->saveXML();
 		}
 	}
 }
