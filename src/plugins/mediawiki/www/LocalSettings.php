@@ -334,7 +334,7 @@ SetupPermissionsFromRoles();
 
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
-ini_set ('memory_limit', '50M') ;
+ini_set ('memory_limit', '100M') ;
 
 // LOAD THE SITE-WIDE AND PROJECT-SPECIFIC EXTRA-SETTINGS
 if (is_file(forge_get_config('config_path')."/plugins/mediawiki/LocalSettings.php")) {
