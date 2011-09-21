@@ -195,7 +195,8 @@ echo $ah->showMessages($sort_comments_chronologically);
 <table border="0" width="80%">
 <tr><td colspan="2"><!-- dummy in case the hook is empty --></td></tr>
 	<?php
-		$hookParams['artifact_id']=$aid;
+		$hookParams['artifact_id'] = $aid;
+		$hookParams['group_id'] = $group_id;
 		plugin_hook("artifact_extra_detail",$hookParams);
 	?>
 </table>
