@@ -64,28 +64,97 @@ class foafprofilesPlugin extends Plugin {
 				$mbox = 'mailto:'.$user_email;
 				$mbox_sha1sum = sha1($mbox);
 
-				$params['content'] = '<?xml version="1.0"?>
+				$projects = $user_obj->getGroups() ;
+				sortProjectList($projects) ;
+				$roles = RBACEngine::getInstance()->getAvailableRolesForUser($user_obj) ;
+				sortRoleList($roles) ;
+				
+				$member_of_xml='';
+
+				$groups_xml='';
+				
+				$projects_xml ='';
+				
+				// see if there were any groups
+				if (count($projects) >= 1) {
+					foreach ($projects as $p) {
+						// TODO : report also private projects if authenticated, for instance through OAuth
+						if($p->isPublic()) {
+							$project_link = util_make_link_g ($p->getUnixName(),$p->getID(),$p->getPublicName());
+							$project_uri = util_make_url_g ($p->getUnixName(),$p->getID());
+							// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/
+							$usergroup_uri = $project_uri .'members/';
+	
+							$group_roles_xml = '';
+							
+							$role_names = array () ;
+							foreach ($roles as $r) {
+								if ($r instanceof RoleExplicit
+								&& $r->getHomeProject() != NULL
+								&& $r->getHomeProject()->getID() == $p->getID()) {
+									$role_names[$r->getID()] = $r->getName() ;
+									$role_uri = $project_uri .'roles/'.$r->getID();
+									$group_roles_xml .= '<planetforge:group_has_function rdf:resource="'. $role_uri .'" />';
+								}
+							}
+							
+							$member_of_xml .= '<sioc:member_of rdf:resource="'. $usergroup_uri .'" />';
+							$groups_xml .= '<sioc:UserGroup rdf:about="'. $usergroup_uri .'">
+			      					<sioc:usergroup_of rdf:resource="'. $project_uri .'"/>';
+							
+							$groups_xml .= $group_roles_xml;
+							
+	      					$groups_xml .= '</sioc:UserGroup>';
+							$projects_xml .= '<planetforge:ForgeProject rdf:about="'. $project_uri .'">
+	      						<doap:name>'. $p->getUnixName() .'</doap:name>
+	      						</planetforge:ForgeProject>';
+							
+							foreach ($role_names as $id => $name) {
+								$projects_xml .= '<sioc:Role rdf:about="'. $project_uri .'roles/'.$id .'">
+									<sioc:name>'. $name .'</sioc:name>
+								</sioc:Role>';
+							}
+						}	
+					}
+				} // end if groups
+								
+				$xml_content = '<?xml version="1.0"?>
 				<rdf:RDF
       				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
       				xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
       				xmlns:foaf="http://xmlns.com/foaf/0.1/"
-      				xmlns:sioc="http://rdfs.org/sioc/ns#">
+      				xmlns:sioc="http://rdfs.org/sioc/ns#"
+      				xmlns:doap="http://usefulinc.com/ns/doap#"
+      				xmlns:planetforge="http://coclico-project.org/ontology/planetforge#">
 
       			<foaf:OnlineAccount rdf:about="">
       				<foaf:accountServiceHomepage rdf:resource="/"/>
       				<foaf:accountName>'. $username .'</foaf:accountName>
       				<sioc:account_of rdf:resource="#person" />
-      				<foaf:accountProfilePage rdf:resource="" />
-    			</foaf:OnlineAccount>
+      				<foaf:accountProfilePage rdf:resource="" />';
+				
+      			$xml_content .= $member_of_xml;
 
+      			$xml_content .= '</foaf:OnlineAccount>
+				
       			<foaf:Person rdf:ID="person">
-      				<foaf:name>'. $username .'</foaf:name>
+      				<foaf:name>'. $user_real_name .'</foaf:name>
 					<foaf:holdsAccount rdf:resource="" />
 					<foaf:mbox_sha1sum>'. $mbox_sha1sum .'</foaf:mbox_sha1sum>
-    			</foaf:Person>
-
-    			</rdf:RDF>';
-
+    			</foaf:Person>';
+      			
+      			$xml_content .= $groups_xml;
+      			
+      			$xml_content .= $projects_xml;
+      			 
+      			$xml_content .= '</rdf:RDF>';
+      			
+      			$doc = new DOMDocument();
+      			$doc->preserveWhiteSpace = false;
+      			$doc->formatOutput   = true;
+      			$doc->loadXML($xml_content);
+      			
+    			$params['content'] = $doc->saveXML();
 		}
 	}
 }
