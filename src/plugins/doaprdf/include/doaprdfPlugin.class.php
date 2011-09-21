@@ -60,6 +60,7 @@ class doaprdfPlugin extends Plugin {
 		if($accept == 'application/rdf+xml') {
 			$pm = ProjectManager::instance();
 			$project = $pm->getProject($group_id);
+			$project_shortdesc = $project->getPublicName();
 			$project_description = $project->getDescription();
 			$tags_list = NULL;
 			if (forge_get_config('use_project_tags')) {
@@ -93,8 +94,9 @@ class doaprdfPlugin extends Plugin {
 
       			<doap:Project rdf:about="">
       				<doap:name>'. $projectname .'</doap:name>';
-			if($project_description) {
-				$xml .= '<doap:shortdesc>'. $project_description . '</doap:shortdesc>';
+			$xml .= '<doap:shortdesc>'. $project_shortdesc . '</doap:shortdesc>';
+      		if($project_description) {
+				$xml .= '<doap:description>'. $project_description . '</doap:description>';
 			}
 			if($tags_list) {
 				$tags = split(', ',$tags_list);
