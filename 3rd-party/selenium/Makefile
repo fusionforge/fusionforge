@@ -7,11 +7,11 @@
 
 S_VERSION=2.6.0
 
-run: selenium-server-standalone-$(S_VERSION).jar
-	LANG=C java -jar selenium-server-standalone-$(S_VERSION).jar -interactive
+run: selenium-server.jar
+	LANG=C java -jar selenium-server-standalone.jar -interactive
 
-selenium-server-standalone-$(S_VERSION).jar:
-	wget -c http://selenium.googlecode.com/files/selenium-server-standalone-$(S_VERSION).jar
+selenium-server.jar:
+	wget -c -O $@ http://selenium.googlecode.com/files/selenium-server-standalone-$(S_VERSION).jar
 
 svnexport:
 	svn export http://selenium.googlecode.com/svn/trunk/remote/server selenium-server
@@ -19,3 +19,5 @@ svnexport:
 
 getpackage:
 	sudo apt-get install maven-debian-helper
+
+getselenium: selenium-server.jar
