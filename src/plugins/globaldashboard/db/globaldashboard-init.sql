@@ -7,6 +7,7 @@ CREATE TABLE plugin_globaldashboard_user_forge_account (
 	forge_software integer DEFAULT 1 NOT NULL ,
 	forge_account_domain varchar(250) DEFAULT '' NOT NULL ,
 	forge_account_uri varchar(250) DEFAULT '' NOT NULL ,
+	forge_account_is_foaf integer DEFAULT 0 ,
 	forge_oslc_discovery_uri varchar(250) DEFAULT NULL ,
 	forge_account_rss_uri varchar(250) DEFAULT NULL ,
 	forge_account_soap_wsdl_uri varchar(250) DEFAULT NULL

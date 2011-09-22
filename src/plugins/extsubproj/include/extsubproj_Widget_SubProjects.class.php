@@ -90,6 +90,8 @@ class extsubproj_Widget_SubProjects extends Widget {
 					*/
 					$projname = $url;
 				}
+				
+				//@TODO: check plugin compactpreview is installed through the right functions...
 				require_once ('plugins/compactpreview/include/CompactResource.class.php');
 				$params = array('name' => $projname,
 								'url' => $url);

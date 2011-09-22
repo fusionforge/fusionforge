@@ -88,7 +88,7 @@ class globalDashboard_Widget_MyProjects extends Widget {
 					$html = $html . '
 					<tr>
 						<td>
-							<img src="'. $favicon_url.'" />    <a href="'. $project_url .'">'. $remote_proj['group_name'] .'</a>
+							<img src="'. $favicon_url.'" />    <a class="resourceOslcPopupTrigger" href="'. $project_url .'">'. $remote_proj['group_name'] .'</a>
 						</td>
 					</tr>';
 				}
@@ -111,13 +111,16 @@ class globalDashboard_Widget_MyProjects extends Widget {
 		$accounts = getDBStoredRemoteAccountsByUserId($user_id);
 		if (count($accounts) > 0) {
 			foreach ($accounts as $account) {
-				$fetch_method = $this->getProjectsFetchMethodForAccount($account['account_id']);
+				$fetch_method = $this->getProjectsFetchMethodForAccount($account["account_id"]);
 				switch ($fetch_method) {
 					case USER_PROJECTS_FETCH_METHOD_SOAP:
 						$projects = $this->getAccountRemoteProjectsBySOAP($account, $projects);
 						break;
 					case USER_PROJECTS_FETCH_METHOD_OSLC:
 						//$projects = $this->getAccountRemoteProjectsByOSLC($account);
+						break;
+					case USER_PROJECTS_FETCH_METHOD_FOAF:
+						$projects = $this->getAccountRemoteProjectsByFOAF($account);
 						break;
 					default:
 						break;
@@ -150,6 +153,72 @@ class globalDashboard_Widget_MyProjects extends Widget {
 					}
 				}
 				break;
+		}
+		return $projects;
+	}
+	/**
+	 * 
+	 * Gets the list of remote projects relative to an account from the account 
+	 * foaf profile.
+	 * Projects are described using planetForge ontology in remote user account.
+	 * 
+	 * @param array $account array of a DB stored remote account.
+	 * 
+	 * @return array $projects array of remote projects.
+	 */
+	function getAccountRemoteProjectsByFOAF($account){
+		$projects = array();
+		
+		include_once("arc/ARC2.php");
+		require_once('plugins/globaldashboard/include/Graphite.php');
+		
+		$reader = ARC2::getComponent('Reader');
+		
+		$parser = ARC2::getRDFParser();
+		
+		$reader->setAcceptHeader('Accept: application/rdf+xml');
+		$parser->setReader($reader);
+		
+		$parser->parse($account['forge_account_uri']);
+		
+		if(! $parser->reader->errors) {
+			//print_r($parser); die();
+			$triples = $parser->getTriples();
+			
+			$turtle = $parser->toTurtle($triples);
+			$datauri = $parser->toDataURI($turtle);
+
+				
+			$graph = new Graphite();
+			//$graph->setDebug(1);
+			$graph->ns( "doap", "http://usefulinc.com/ns/doap#" );
+			$graph->ns( "planetforge", "http://coclico-project.org/ontology/planetforge#");
+			$graph->load( $datauri );
+			print $graph->resource( $account['forge_account_uri'] )->dumpText();
+			$project_name = $graph->resource( $account['forge_account_uri'] )->get( "doap:name" );
+			$project_url =  $graph->resource( $account['forge_account_uri'] )->get( "planetforge:ForgeProject");
+			$projects[] = array("project_name" => $project_name, "project_url" => $project_url);
+		}
+		else {
+			foreach ($parser->reader->errors as $error) {
+				print_r($error);
+			}
+			die();
+			//$projname = $account_url;
+		}
+		if (count($projects)){
+			$pm = PluginManager::instance();
+			$compact_preview_plugin = $pm->GetPluginObject('compactpreview');
+			if ($pm->isPluginAvailable($compact_preview_plugin)) {
+				if ($pm->PluginIsInstalled('compactpreview')) {
+					require_once ('plugins/compactpreview/include/CompactResource.class.php');
+					foreach ($projects as $project) {
+						$params = array('name' => $project["project_name"], 'url' => $project["project_url"]);
+						$cR = new OslcGroupCompactResource($params);
+						$project["project_link"] = $cR->getResourceLink(); 
+					}
+				}
+			}
 		}
 		return $projects;
 	}

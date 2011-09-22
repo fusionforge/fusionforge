@@ -148,6 +148,7 @@ function createNewAccountForm($user_id) {
 					<td>' . _('Account URI') . ': <span class="requiredfield">*</span> </td>
 					<td>
 						<input type="text" size="60" name="account_uri">
+						<input type="checkbox" name="account_is_foaf"> '. _("Is account foaf enabled ?").'
 					</td>
 				</tr>
 				<tr>
@@ -178,9 +179,10 @@ function createNewAccountForm($user_id) {
 					<td>' . _('Projects discovery method') . ': </td>
 					<td>
 						<select name="projects_discovery_method">
-							<option value"'. USER_PROJECTS_FETCH_METHOD_NONE .'" selected="selected"> None </option>
+							<option value="'. USER_PROJECTS_FETCH_METHOD_NONE .'" selected="selected"> None </option>
 							<option value="'. USER_PROJECTS_FETCH_METHOD_SOAP .'"> SOAP </option>
 							<option value="'. USER_PROJECTS_FETCH_METHOD_OSLC .'"> OSLC-CM </option>
+							<option value="'. USER_PROJECTS_FETCH_METHOD_FOAF .'"> FOAF </option>
 						</select>
 					</td>
 				</tr>

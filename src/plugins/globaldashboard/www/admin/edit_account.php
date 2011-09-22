@@ -30,6 +30,7 @@ $account_password = getStringFromPost('account_password');
 $forge_software = getIntFromPost('forge_software');
 $account_domain = getStringFromPost('account_domain');
 $account_uri = getStringFromPost('account_uri');
+$account_is_foaf = getIntFromPost('account_is_foaf');
 $oslc_uri = getStringFromPost('oslc_uri');
 $rss_uri = getStringFromPost('rss_uri');
 $soap_wsdl = getStringFromPost('soap_wsdl');
@@ -49,13 +50,14 @@ $t_acc_query = 	 "UPDATE $t_account_table ".
 			"	  forge_software=$3,".
 			"	  forge_account_domain=$4,".
 			"	  forge_account_uri=$5,".
-			"	  forge_oslc_discovery_uri=$6,".
-			"	  forge_account_rss_uri=$7,".
-			"	  forge_account_soap_wsdl_uri=$8".
-			" WHERE account_id=$9".
-			" AND   user_id=$10";
+			"	  forge_account_is_foaf=$6,".
+			"	  forge_oslc_discovery_uri=$7,".
+			"	  forge_account_rss_uri=$8,".
+			"	  forge_account_soap_wsdl_uri=$9".
+			" WHERE account_id=$10".
+			" AND   user_id=$11";
 
-$result = db_query_params( $t_acc_query, array( $login_name, $account_password, $forge_software, $account_domain, $account_uri, $oslc_uri, 
+$result = db_query_params( $t_acc_query, array( $login_name, $account_password, $forge_software, $account_domain, $account_uri, $account_is_foaf, $oslc_uri, 
 								  $rss_uri, $soap_wsdl, $account_id, $user_id 
 						   ) 
 				);

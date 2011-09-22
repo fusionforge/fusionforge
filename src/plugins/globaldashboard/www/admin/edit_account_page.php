@@ -131,7 +131,12 @@ function editRemoteAccount($account_id) {
 				<td>' . _('Account URI') . ': </td>
 				<td>
 					<input type="text" size="60" value="'.$account["forge_account_uri"].'" name="account_uri">
-					</input>
+					<input type="checkbox" name="account_is_foaf"';
+					if($account['forge_account_is_foaf']) {
+						echo 'checked="yes"';
+					}
+					echo '> ';
+					echo _('Is account FOAF enabled ?') . ' 
 				</td>
 			</tr>
 		</table>	
@@ -186,6 +191,11 @@ function editRemoteAccount($account_id) {
 							echo 'selected="selected"';
 						}
 						echo '> OSLC-CM </option>
+						<option value="' . USER_PROJECTS_FETCH_METHOD_FOAF . '"';
+						if ($discovery['projects_discovery_method'] == USER_PROJECTS_FETCH_METHOD_FOAF) {
+							echo 'selected="selected"';
+						}
+						echo '> FOAF </option>
 					</select>
 				</td>
 			</tr>

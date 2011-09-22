@@ -1698,6 +1698,7 @@ src/plugins/globaldashboard/db/globaldashboard-init.sql -text
 src/plugins/globaldashboard/etc/globaldashboard.ini -text
 src/plugins/globaldashboard/etc/httpd.d/62plugin-globaldashboard -text
 src/plugins/globaldashboard/etc/plugins/globaldashboard/config.php -text
+src/plugins/globaldashboard/include/Graphite.php -text
 src/plugins/globaldashboard/include/globalDashboardConstants.php -text
 src/plugins/globaldashboard/include/globalDashboard_Widget_MyArtifacts.php -text
 src/plugins/globaldashboard/include/globalDashboard_Widget_MyProjects.php -text
