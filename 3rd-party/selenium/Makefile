@@ -8,7 +8,7 @@
 S_VERSION=2.6.0
 
 run: selenium-server.jar
-	LANG=C java -jar selenium-server-standalone.jar -interactive
+	LANG=C java -jar selenium-server.jar -interactive
 
 selenium-server.jar:
 	wget -c -O $@ http://selenium.googlecode.com/files/selenium-server-standalone-$(S_VERSION).jar
