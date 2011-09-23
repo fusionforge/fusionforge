@@ -884,23 +884,33 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 		$already_there = array();
 		$res = db_query_params('SELECT user_id FROM pfo_user_role WHERE user_id=ANY($1) AND role_id=$2',
 					array(db_int_array_to_any_clause($ids), $this->getID()));
+		if (!$res) {
+			return false;
+		}
 		while ($arr = db_fetch_array($res)) {
 			$already_there[] = $arr['user_id'] ;
 		}
 
 		foreach ($ids as $id) {
 			if (!in_array ($id, $already_there)) {
-			db_query_params ('INSERT INTO pfo_user_role (user_id, role_id) VALUES ($1, $2)',
-					 array ($id,
-						$this->getID())) ;
+				$res = db_query_params ('INSERT INTO pfo_user_role (user_id, role_id) VALUES ($1, $2)',
+							array ($id,
+							       $this->getID())) ;
+				if (!$res) {
+					return false;
+				}
 			}
 		}
 
 		foreach ($this->getLinkedProjects() as $p) {
 			foreach ($ids as $uid) {
-				$SYS->sysGroupCheckUser($p->getID(),$uid) ;
+				if (!$SYS->sysGroupCheckUser($p->getID(),$uid)) {
+					return false;
+				}
 			}
 		}
+
+		return true;
 	}
 
 	public function addUser ($user) {
