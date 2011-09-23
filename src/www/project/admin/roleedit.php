@@ -28,7 +28,6 @@ require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfcommon.'include/Role.class.php';
-require_once $gfcommon.'include/RoleObserver.class.php';
 require_once $gfcommon.'include/rbac_texts.php';
 
 $group_id = getIntFromRequest('group_id');
@@ -43,28 +42,6 @@ if (getStringFromRequest('delete')) {
 	session_redirect('/project/admin/roledelete.php?group_id='.$group_id.'&role_id='.$role_id);
 }
 
-//
-//	The observer is a special role, which is actually
-//	just controlling the is_public/allow anon flags
-//
-//	Get observer role instead of regular role
-//
-if ($role_id=='observer') {
-	$role = new RoleObserver($group);
-	if (!$role || !is_object($role)) {
-		exit_error(_('Could Not Get RoleObserver'),'admin');
-	} elseif ($role->isError()) {
-		exit_error($role->getErrorMessage(),'admin');
-	}
-
-	if (getStringFromRequest('submit')) {
-		if (!$role->update($data)) {
-			$error_msg = $role->getErrorMessage();
-		} else {
-			$feedback = _('Successfully Updated Role');
-		}
-	}
-} else {
 	if (getStringFromRequest('add')) {
 		$role_name = trim(getStringFromRequest('role_name')) ;
 		$role = new Role ($group) ;
@@ -131,19 +108,13 @@ if ($role_id=='observer') {
 			plugin_hook('change_cal_permission_auto',$params);
 		}
 	}
-}
 
-if ($role_id=='observer') {
-	$title= _('Edit Observer');
-	$msg = _('Use this page to edit the permissions and access levels of non-members of your project. Non-members includes users who are not logged in.');
-} else {
 	if (!$role_id) {
 		$title= _('New Role');
 	} else {
 		$title= _('Edit Role');
 	}
 	$msg = _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the Anonymous role has read access to a forum, all other roles will have it too.');
-}
 
 project_admin_header(array('title'=> $title,'group'=>$group_id));
 
