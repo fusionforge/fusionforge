@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-26 14:10+0200\n"
-"PO-Revision-Date: 2011-09-26 14:36+0200\n"
+"PO-Revision-Date: 2011-09-26 14:49+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -8879,7 +8879,7 @@ msgstr "Motif de l'attente :"
 #: www/admin/approve-pending.php:202
 #, php-format
 msgid "Submitted by: %s"
-msgstr "Proposé par : $s"
+msgstr "Proposé par : %s"
 
 #: www/admin/approve-pending.php:214
 #, php-format
