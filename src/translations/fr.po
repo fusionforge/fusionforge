@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-26 14:10+0200\n"
-"PO-Revision-Date: 2011-08-30 15:32+0200\n"
+"PO-Revision-Date: 2011-09-26 14:14+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -5037,7 +5037,6 @@ msgid "Cc :"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:563
-#, fuzzy
 msgid "Reply"
 msgstr "répondre"
 
@@ -5047,9 +5046,8 @@ msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:586 plugins/forumml/www/index.php:117
 #: plugins/forumml/www/scripts/cc_attach_js.php:50
-#, fuzzy
 msgid "Attach :"
-msgstr "Joindre des fichiers"
+msgstr "Joindre :"
 
 #: plugins/forumml/www/forumml_utils.php:604 plugins/forumml/www/index.php:127
 msgid "Erase"
@@ -8881,7 +8879,7 @@ msgstr "Motif de l'attente :"
 #: www/admin/approve-pending.php:202
 #, fuzzy, php-format
 msgid "Submitted by: %s"
-msgstr "Proposée par"
+msgstr "Proposé par: $s"
 
 #: www/admin/approve-pending.php:214
 #, php-format
@@ -16730,7 +16728,7 @@ msgstr "Réponse"
 
 #: www/survey/rating_resp.php:65
 msgid "Flag"
-msgstr ""
+msgstr "Drapeau"
 
 #: www/survey/survey.php:51
 #, php-format
