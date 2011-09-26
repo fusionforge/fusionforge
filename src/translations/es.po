@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-24 14:23+0200\n"
+"POT-Creation-Date: 2011-09-26 14:10+0200\n"
 "PO-Revision-Date: 2010-10-06 14:24+0200\n"
 "Last-Translator: Luis Cañas Díaz <lcanas@libresoft.es>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -64,7 +64,7 @@ msgstr "Documento:: docid inválido"
 msgid "Unable To Remove Monitor"
 msgstr "No es posible eliminar la monitorización"
 
-#: common/docman/Document.class.php:560 common/forum/Forum.class.php:461
+#: common/docman/Document.class.php:560 common/forum/Forum.class.php:463
 msgid "Unable To Add Monitor"
 msgstr "No es posible monitorizar."
 
@@ -368,7 +368,7 @@ msgstr "Grupo de documento: ID del grupo de documento inválido"
 #: common/docman/include/utils.php:196 common/docman/include/utils.php:197
 #: common/docman/views/listfile.php:204 common/docman/views/listfile.php:206
 #: common/forum/ForumHTML.class.php:67 common/forum/ForumHTML.class.php:215
-#: common/forum/ForumHTML.class.php:458 common/pm/ProjectTask.class.php:1143
+#: common/forum/ForumHTML.class.php:458 common/pm/ProjectTask.class.php:1175
 #: common/tracker/Artifact.class.php:1516
 #: common/tracker/Artifact.class.php:1518
 #: common/tracker/Artifact.class.php:1522
@@ -1007,15 +1007,15 @@ msgstr "Fichero subido con éxito"
 msgid "Forums: No Valid Group Object"
 msgstr "Forums: objeto Group inválido"
 
-#: common/forum/Forum.class.php:150 common/forum/Forum.class.php:559
+#: common/forum/Forum.class.php:150 common/forum/Forum.class.php:561
 msgid "Forum Name Must Be At Least 3 Characters"
 msgstr "El nombre del foro tiene que tener al menos 3 carácteres."
 
-#: common/forum/Forum.class.php:154 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:154 common/forum/Forum.class.php:565
 msgid "Forum Description Must Be At Least 10 Characters"
 msgstr "La descripción del foro tiene que tener al menos 10 carácteres."
 
-#: common/forum/Forum.class.php:158 common/forum/Forum.class.php:567
+#: common/forum/Forum.class.php:158 common/forum/Forum.class.php:569
 msgid "Illegal Characters in Forum Name"
 msgstr "El nombre del foro contiene carácteres ilegales."
 
@@ -1037,21 +1037,21 @@ msgstr "Bienvenido a %1$s"
 msgid "Invalid forum group identifier"
 msgstr "Identificador de grupo de foro inválido"
 
-#: common/forum/Forum.class.php:443 common/forum/Forum.class.php:477
+#: common/forum/Forum.class.php:444 common/forum/Forum.class.php:479
 #: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:301
 #: common/tracker/ArtifactType.class.php:543
 msgid "You can only monitor if you are logged in"
 msgstr "Sólo puede monitorizar si está autenticado."
 
-#: common/forum/Forum.class.php:510
+#: common/forum/Forum.class.php:512
 msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr "Sólo puede guardar su lugar si ha iniciado su sesión."
 
-#: common/forum/Forum.class.php:528
+#: common/forum/Forum.class.php:530
 msgid "Forum::savePlace()"
 msgstr "Forum::savePlace()"
 
-#: common/forum/Forum.class.php:603 common/mail/MailingList.class.php:251
+#: common/forum/Forum.class.php:605 common/mail/MailingList.class.php:251
 #: plugins/mailman/include/MailmanList.class.php:250
 #: plugins/mailman/include/MailmanList.class.php:377
 #: plugins/mailman/include/MailmanList.class.php:394
@@ -1060,17 +1060,17 @@ msgstr "Forum::savePlace()"
 msgid "Error On Update:"
 msgstr "Error en la actualización:"
 
-#: common/forum/Forum.class.php:618 common/frs/FRSPackage.class.php:447
+#: common/forum/Forum.class.php:620 common/frs/FRSPackage.class.php:447
 #: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1614
 #: common/mail/MailingList.class.php:382 common/pm/ProjectGroup.class.php:370
-#: common/pm/ProjectTask.class.php:504 common/tracker/Artifact.class.php:505
+#: common/pm/ProjectTask.class.php:511 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:429
 #: common/tracker/ArtifactType.class.php:805
 msgid "Please tick all checkboxes."
 msgstr "Por favor marque todos los checkboxes."
 
-#: common/forum/Forum.class.php:629 common/forum/Forum.class.php:637
-#: common/forum/Forum.class.php:645
+#: common/forum/Forum.class.php:631 common/forum/Forum.class.php:639
+#: common/forum/Forum.class.php:647
 #, fuzzy
 msgid "Error Deleting Forum"
 msgstr "Error borrando el Foro."
@@ -1190,7 +1190,7 @@ msgstr "Mensaje pendiente liberado"
 
 #: common/forum/ForumAdmin.class.php:458
 #: common/forum/ForumMessage.class.php:181
-#: common/forum/ForumMessage.class.php:269
+#: common/forum/ForumMessage.class.php:275
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "No se pudo actualizar el hilo padre con la hora actual"
 
@@ -1405,46 +1405,47 @@ msgstr ""
 "objeto Forum"
 
 #: common/forum/ForumMessage.class.php:111
-#: common/forum/ForumMessage.class.php:257
+#: common/forum/ForumMessage.class.php:261
 msgid "Getting next thread_id failed"
 msgstr "La obtención del siguiente thread_id falló"
 
 #: common/forum/ForumMessage.class.php:128
 #: common/forum/ForumMessage.class.php:213
 #: common/forum/ForumMessage.class.php:219
-#: common/forum/ForumMessage.class.php:297
+#: common/forum/ForumMessage.class.php:314
 msgid "ForumMessage::create() Posting Failed"
 msgstr "ForumMessage::create() publicación fallida"
 
 #: common/forum/ForumMessage.class.php:139
 #: common/forum/ForumMessage.class.php:224
-#: common/forum/ForumMessage.class.php:309
+#: common/forum/ForumMessage.class.php:326
 msgid "ForumMessage::create() Unable to get new message id"
 msgstr "ForumMessage::create() No se pudo obtener un nuevo message id"
 
 #: common/forum/ForumMessage.class.php:192
-#: common/forum/ForumMessage.class.php:280
+#: common/forum/ForumMessage.class.php:286
+#: common/forum/ForumMessage.class.php:298
 msgid "Could Not Update Parent"
 msgstr "No se pudo actualizar el padre"
 
-#: common/forum/ForumMessage.class.php:338
+#: common/forum/ForumMessage.class.php:356
 msgid "Must Include A Message Body And Subject"
 msgstr "Se deben añadir Contenido y Asunto al Mensaje"
 
-#: common/forum/ForumMessage.class.php:354
+#: common/forum/ForumMessage.class.php:372
 msgid "ForumMessage::create() No Valid ParentMessage Object"
 msgstr "ForumMessage::create() Objeto ParentMessage no válido"
 
-#: common/forum/ForumMessage.class.php:388
-#: common/forum/ForumMessage.class.php:407
+#: common/forum/ForumMessage.class.php:406
+#: common/forum/ForumMessage.class.php:425
 msgid "ForumMessage::fetchData() Invalid MessageID"
 msgstr "ForumMessage::fetchData() MessageID Inválido"
 
-#: common/forum/ForumMessage.class.php:560
+#: common/forum/ForumMessage.class.php:578
 msgid "Invalid Message ID"
 msgstr "Identificador de mensaje inválido"
 
-#: common/forum/ForumMessage.class.php:641
+#: common/forum/ForumMessage.class.php:659
 #, php-format
 msgid ""
 "\n"
@@ -1455,7 +1456,7 @@ msgstr ""
 "Leer y responder a este mensaje a: \n"
 "%s"
 
-#: common/forum/ForumMessage.class.php:643
+#: common/forum/ForumMessage.class.php:661
 #, php-format
 msgid ""
 "\n"
@@ -1472,7 +1473,7 @@ msgstr ""
 "(ingrese su respuesta aquí)\n"
 "%1$s"
 
-#: common/forum/ForumMessage.class.php:649
+#: common/forum/ForumMessage.class.php:667
 #, php-format
 msgid ""
 "\n"
@@ -1485,11 +1486,11 @@ msgstr ""
 "\n"
 "Por: %s\n"
 
-#: common/forum/ForumMessage.class.php:654
+#: common/forum/ForumMessage.class.php:672
 msgid "A file has been uploaded with this message."
 msgstr "Un archivo ha sido adjuntado con este mensaje."
 
-#: common/forum/ForumMessage.class.php:665
+#: common/forum/ForumMessage.class.php:683
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -2287,12 +2288,12 @@ msgstr ""
 msgid "%s (in project %s)"
 msgstr "%1$s proyectos"
 
-#: common/include/RBAC.php:1463
+#: common/include/RBAC.php:1473
 #, fuzzy
 msgid "Anonymous/not logged in"
 msgstr "Primero debe ingresar"
 
-#: common/include/RBAC.php:1511
+#: common/include/RBAC.php:1521
 #, fuzzy
 msgid "Any user logged in"
 msgstr "Primero debe ingresar"
@@ -3105,11 +3106,11 @@ msgid "ProjectCategory: name and assignee are Required"
 msgstr ""
 "Categoría de Proyecto: El nombre y la asignación son campos obligatorios"
 
-#: common/pm/ProjectTask.class.php:687
+#: common/pm/ProjectTask.class.php:719
 msgid "Circular Dependency Detected'"
 msgstr "Se ha detectado una dependencia circular'"
 
-#: common/pm/ProjectTask.class.php:1155
+#: common/pm/ProjectTask.class.php:1187
 #, php-format
 msgid "[%1$s - %2$s] [Task #%3$d] "
 msgstr ""
@@ -3588,7 +3589,8 @@ msgid "Add widgets"
 msgstr "Añadir widgets"
 
 #: common/widget/WidgetLayoutManager.class.php:243
-#: common/widget/WidgetLayoutManager.class.php:247 www/my/index.php:55
+#: common/widget/WidgetLayoutManager.class.php:247
+#: www/include/project_home.php:73 www/my/index.php:55
 #: www/widgets/widgets.php:71
 #, fuzzy
 msgid "Customize layout"
@@ -9001,7 +9003,12 @@ msgstr "Otra Licencia:"
 msgid "Pending reason:"
 msgstr "Razón por la que está Pendiente:"
 
-#: www/admin/approve-pending.php:202 www/admin/approve-pending.php:214
+#: www/admin/approve-pending.php:202
+#, fuzzy, php-format
+msgid "Submitted by: %s"
+msgstr "Enviado por"
+
+#: www/admin/approve-pending.php:214
 #, php-format
 msgid "Submitted by %1$s (%2$s)"
 msgstr "Enviado por %1$s (%2$s)"
@@ -11742,10 +11749,6 @@ msgstr "Registrar un nuevo proyecto"
 msgid "Project Home"
 msgstr "Nuevo Nombre del Subproyecto"
 
-#: www/include/project_home.php:73
-msgid "Customize Layout"
-msgstr "Personalizar apariencia"
-
 #: www/include/tool_reports.php:65 www/pm/index.php:101
 #: www/reporting/usersummary.php:54 www/tracker/ind.php:65
 msgid "Open"
@@ -14428,8 +14431,8 @@ msgstr "Nuevo rol"
 msgid ""
 "Use this page to edit the permissions attached to each role.  Note that each "
 "role has at least as much access as the Anonymous and LoggedIn roles.  For "
-"example, if the the Anonymous role has read access to a forum, all other "
-"roles will have it too."
+"example, if the Anonymous role has read access to a forum, all other roles "
+"will have it too."
 msgstr ""
 "Use esta página para editar los roles de su proyecto. Cada miembro tiene al "
 "menos acceso como observador ( solo lectura ). Por ejemplo, si el observador "
@@ -14702,7 +14705,7 @@ msgstr "Cargo(s)/Posición(es)"
 msgid "Skills"
 msgstr "Cualidades"
 
-#: www/project/memberlist.php:106 www/project/report/index.php:175
+#: www/project/memberlist.php:110 www/project/report/index.php:175
 msgid "View"
 msgstr "Ver"
 
@@ -18165,6 +18168,9 @@ msgstr[1] ""
 msgid "No User Name Provided"
 msgstr "No ha proporcionado el nombre de usuario"
 
+#~ msgid "Customize Layout"
+#~ msgstr "Personalizar apariencia"
+
 #, fuzzy
 #~ msgid "DocumentGroup: name is Required"
 #~ msgstr "DocumentGroup: se require un nombre"
@@ -18645,10 +18651,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, fuzzy
 #~ msgid "Include child projects:"
 #~ msgstr "Projectos Pendientes:"
-
-#, fuzzy
-#~ msgid "Submitted by:"
-#~ msgstr "Enviado por"
 
 #, fuzzy
 #~ msgid "Assigned to:"

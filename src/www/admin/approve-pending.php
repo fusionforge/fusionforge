@@ -201,7 +201,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	foreach (get_group_join_requests ($project) as $gjr) {
 		$submitter = user_get_object($gjr->getUserID()) ;
 		echo '<p>'
-			.sprintf(_('Submitted by %1$s (%2$s)'), $submitter->getRealName(), $submitter->getUnixName())
+			.sprintf(_('Submitted by: %s'), make_user_link($submitter->getUnixName(),$submitter->getRealName()))
 			.'</p>';
 	}
 
