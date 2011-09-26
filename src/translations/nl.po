@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-24 14:23+0200\n"
+"POT-Creation-Date: 2011-09-26 14:10+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -61,7 +61,7 @@ msgstr "Document: Ongeldig document ID"
 msgid "Unable To Remove Monitor"
 msgstr "Kan geen monitor toevoegen"
 
-#: common/docman/Document.class.php:560 common/forum/Forum.class.php:461
+#: common/docman/Document.class.php:560 common/forum/Forum.class.php:463
 msgid "Unable To Add Monitor"
 msgstr "Kan geen monitor toevoegen"
 
@@ -372,7 +372,7 @@ msgstr "Documentgroep: Ongeldig documentgroep ID"
 #: common/docman/include/utils.php:196 common/docman/include/utils.php:197
 #: common/docman/views/listfile.php:204 common/docman/views/listfile.php:206
 #: common/forum/ForumHTML.class.php:67 common/forum/ForumHTML.class.php:215
-#: common/forum/ForumHTML.class.php:458 common/pm/ProjectTask.class.php:1143
+#: common/forum/ForumHTML.class.php:458 common/pm/ProjectTask.class.php:1175
 #: common/tracker/Artifact.class.php:1516
 #: common/tracker/Artifact.class.php:1518
 #: common/tracker/Artifact.class.php:1522
@@ -1014,15 +1014,15 @@ msgstr ""
 msgid "Forums: No Valid Group Object"
 msgstr "Forum:: Geen geldig groep object"
 
-#: common/forum/Forum.class.php:150 common/forum/Forum.class.php:559
+#: common/forum/Forum.class.php:150 common/forum/Forum.class.php:561
 msgid "Forum Name Must Be At Least 3 Characters"
 msgstr "Forum naam moet minstens 3 tekens lang zijn"
 
-#: common/forum/Forum.class.php:154 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:154 common/forum/Forum.class.php:565
 msgid "Forum Description Must Be At Least 10 Characters"
 msgstr "Forum omschrijving moet minstens 10 tekens lang zijn"
 
-#: common/forum/Forum.class.php:158 common/forum/Forum.class.php:567
+#: common/forum/Forum.class.php:158 common/forum/Forum.class.php:569
 msgid "Illegal Characters in Forum Name"
 msgstr "Niet-toegestane tekens in de forum naam"
 
@@ -1044,22 +1044,22 @@ msgstr "Welkom bij %1$s"
 msgid "Invalid forum group identifier"
 msgstr ""
 
-#: common/forum/Forum.class.php:443 common/forum/Forum.class.php:477
+#: common/forum/Forum.class.php:444 common/forum/Forum.class.php:479
 #: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:301
 #: common/tracker/ArtifactType.class.php:543
 #, fuzzy
 msgid "You can only monitor if you are logged in"
 msgstr "Je kunt alleen monitoren als je bent ingelogd"
 
-#: common/forum/Forum.class.php:510
+#: common/forum/Forum.class.php:512
 msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr "Je kunt je positie alleen opslaan als je bent ingelogd"
 
-#: common/forum/Forum.class.php:528
+#: common/forum/Forum.class.php:530
 msgid "Forum::savePlace()"
 msgstr "Forum::savePlace()"
 
-#: common/forum/Forum.class.php:603 common/mail/MailingList.class.php:251
+#: common/forum/Forum.class.php:605 common/mail/MailingList.class.php:251
 #: plugins/mailman/include/MailmanList.class.php:250
 #: plugins/mailman/include/MailmanList.class.php:377
 #: plugins/mailman/include/MailmanList.class.php:394
@@ -1068,17 +1068,17 @@ msgstr "Forum::savePlace()"
 msgid "Error On Update:"
 msgstr "Fout bij bewerken:"
 
-#: common/forum/Forum.class.php:618 common/frs/FRSPackage.class.php:447
+#: common/forum/Forum.class.php:620 common/frs/FRSPackage.class.php:447
 #: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1614
 #: common/mail/MailingList.class.php:382 common/pm/ProjectGroup.class.php:370
-#: common/pm/ProjectTask.class.php:504 common/tracker/Artifact.class.php:505
+#: common/pm/ProjectTask.class.php:511 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:429
 #: common/tracker/ArtifactType.class.php:805
 msgid "Please tick all checkboxes."
 msgstr ""
 
-#: common/forum/Forum.class.php:629 common/forum/Forum.class.php:637
-#: common/forum/Forum.class.php:645
+#: common/forum/Forum.class.php:631 common/forum/Forum.class.php:639
+#: common/forum/Forum.class.php:647
 #, fuzzy
 msgid "Error Deleting Forum"
 msgstr "Fout bij het toevoegen van een forum"
@@ -1206,7 +1206,7 @@ msgstr "Reden in behandeling:"
 
 #: common/forum/ForumAdmin.class.php:458
 #: common/forum/ForumMessage.class.php:181
-#: common/forum/ForumMessage.class.php:269
+#: common/forum/ForumMessage.class.php:275
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "Kan master thread parent niet aanpassen met huidige tijd"
 
@@ -1419,46 +1419,47 @@ msgstr ""
 "Groep forum ID in database resultaat komt niet overeen met forum object"
 
 #: common/forum/ForumMessage.class.php:111
-#: common/forum/ForumMessage.class.php:257
+#: common/forum/ForumMessage.class.php:261
 msgid "Getting next thread_id failed"
 msgstr "Ophalen van volgend thread ID niet gelukt"
 
 #: common/forum/ForumMessage.class.php:128
 #: common/forum/ForumMessage.class.php:213
 #: common/forum/ForumMessage.class.php:219
-#: common/forum/ForumMessage.class.php:297
+#: common/forum/ForumMessage.class.php:314
 msgid "ForumMessage::create() Posting Failed"
 msgstr "ForumMessage::create() Plaatsen van bericht niet gelukt"
 
 #: common/forum/ForumMessage.class.php:139
 #: common/forum/ForumMessage.class.php:224
-#: common/forum/ForumMessage.class.php:309
+#: common/forum/ForumMessage.class.php:326
 msgid "ForumMessage::create() Unable to get new message id"
 msgstr "ForumMessage::create() Kan geen nieuw bericht ID krijgen"
 
 #: common/forum/ForumMessage.class.php:192
-#: common/forum/ForumMessage.class.php:280
+#: common/forum/ForumMessage.class.php:286
+#: common/forum/ForumMessage.class.php:298
 msgid "Could Not Update Parent"
 msgstr "Kan parent niet aanpassen"
 
-#: common/forum/ForumMessage.class.php:338
+#: common/forum/ForumMessage.class.php:356
 msgid "Must Include A Message Body And Subject"
 msgstr "Berichttekst en -onderwerp verplicht"
 
-#: common/forum/ForumMessage.class.php:354
+#: common/forum/ForumMessage.class.php:372
 msgid "ForumMessage::create() No Valid ParentMessage Object"
 msgstr "ForumMessage::create() Geen geldig ParentMessage object"
 
-#: common/forum/ForumMessage.class.php:388
-#: common/forum/ForumMessage.class.php:407
+#: common/forum/ForumMessage.class.php:406
+#: common/forum/ForumMessage.class.php:425
 msgid "ForumMessage::fetchData() Invalid MessageID"
 msgstr "ForumMessage::fetchData() Ongeldig bericht ID"
 
-#: common/forum/ForumMessage.class.php:560
+#: common/forum/ForumMessage.class.php:578
 msgid "Invalid Message ID"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:641
+#: common/forum/ForumMessage.class.php:659
 #, php-format
 msgid ""
 "\n"
@@ -1466,7 +1467,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:643
+#: common/forum/ForumMessage.class.php:661
 #, php-format
 msgid ""
 "\n"
@@ -1477,7 +1478,7 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:649
+#: common/forum/ForumMessage.class.php:667
 #, php-format
 msgid ""
 "\n"
@@ -1486,11 +1487,11 @@ msgid ""
 "By: %s\n"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:654
+#: common/forum/ForumMessage.class.php:672
 msgid "A file has been uploaded with this message."
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:665
+#: common/forum/ForumMessage.class.php:683
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -2274,12 +2275,12 @@ msgstr ""
 msgid "%s (in project %s)"
 msgstr "%1$s projecten"
 
-#: common/include/RBAC.php:1463
+#: common/include/RBAC.php:1473
 #, fuzzy
 msgid "Anonymous/not logged in"
 msgstr "Je moet eerst ingelogd zijn"
 
-#: common/include/RBAC.php:1511
+#: common/include/RBAC.php:1521
 #, fuzzy
 msgid "Any user logged in"
 msgstr "Je moet eerst ingelogd zijn"
@@ -3093,11 +3094,11 @@ msgstr "Fout bij ophalen %1$s"
 msgid "ProjectCategory: name and assignee are Required"
 msgstr "Projectcategorie: naam en toegewezen-aan zijn verplicht"
 
-#: common/pm/ProjectTask.class.php:687
+#: common/pm/ProjectTask.class.php:719
 msgid "Circular Dependency Detected'"
 msgstr "Circulaire verwijzing gevonden"
 
-#: common/pm/ProjectTask.class.php:1155
+#: common/pm/ProjectTask.class.php:1187
 #, php-format
 msgid "[%1$s - %2$s] [Task #%3$d] "
 msgstr ""
@@ -3579,7 +3580,8 @@ msgid "Add widgets"
 msgstr "Datum toevoegen"
 
 #: common/widget/WidgetLayoutManager.class.php:243
-#: common/widget/WidgetLayoutManager.class.php:247 www/my/index.php:55
+#: common/widget/WidgetLayoutManager.class.php:247
+#: www/include/project_home.php:73 www/my/index.php:55
 #: www/widgets/widgets.php:71
 #, fuzzy
 msgid "Customize layout"
@@ -8965,7 +8967,12 @@ msgstr "Licentie anders:"
 msgid "Pending reason:"
 msgstr "Reden in behandeling:"
 
-#: www/admin/approve-pending.php:202 www/admin/approve-pending.php:214
+#: www/admin/approve-pending.php:202
+#, fuzzy, php-format
+msgid "Submitted by: %s"
+msgstr "Ingediend door"
+
+#: www/admin/approve-pending.php:214
 #, fuzzy, php-format
 msgid "Submitted by %1$s (%2$s)"
 msgstr "Ingediend door"
@@ -11738,11 +11745,6 @@ msgstr "Registreer project"
 msgid "Project Home"
 msgstr "Nieuwe projectnaam"
 
-#: www/include/project_home.php:73
-#, fuzzy
-msgid "Customize Layout"
-msgstr "Extra veld aangepast"
-
 #: www/include/tool_reports.php:65 www/pm/index.php:101
 #: www/reporting/usersummary.php:54 www/tracker/ind.php:65
 msgid "Open"
@@ -14441,8 +14443,8 @@ msgstr "Nieuwe rol"
 msgid ""
 "Use this page to edit the permissions attached to each role.  Note that each "
 "role has at least as much access as the Anonymous and LoggedIn roles.  For "
-"example, if the the Anonymous role has read access to a forum, all other "
-"roles will have it too."
+"example, if the Anonymous role has read access to a forum, all other roles "
+"will have it too."
 msgstr ""
 "Deze pagina is bedoeld om de rollen in je project vast te leggen. Let erop "
 "dat ieder lid ten minste evenveel toegangsrechten heeft als een Waarnemer. "
@@ -14743,7 +14745,7 @@ msgstr "Rol/Positie"
 msgid "Skills"
 msgstr "Vaardigheden"
 
-#: www/project/memberlist.php:106 www/project/report/index.php:175
+#: www/project/memberlist.php:110 www/project/report/index.php:175
 msgid "View"
 msgstr "View"
 
@@ -18258,6 +18260,10 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Gebruikersnaam"
+
+#, fuzzy
+#~ msgid "Customize Layout"
+#~ msgstr "Extra veld aangepast"
 
 #~ msgid "DocumentGroup: name is Required"
 #~ msgstr "Documentgroep: Naam is verplicht"

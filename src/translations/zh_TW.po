@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-24 14:23+0200\n"
+"POT-Creation-Date: 2011-09-26 14:10+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -61,7 +61,7 @@ msgstr "文件：無效的文件編號"
 msgid "Unable To Remove Monitor"
 msgstr "無法新增監視"
 
-#: common/docman/Document.class.php:560 common/forum/Forum.class.php:461
+#: common/docman/Document.class.php:560 common/forum/Forum.class.php:463
 msgid "Unable To Add Monitor"
 msgstr "無法新增監視"
 
@@ -372,7 +372,7 @@ msgstr "文件分組：無效的分組編號"
 #: common/docman/include/utils.php:196 common/docman/include/utils.php:197
 #: common/docman/views/listfile.php:204 common/docman/views/listfile.php:206
 #: common/forum/ForumHTML.class.php:67 common/forum/ForumHTML.class.php:215
-#: common/forum/ForumHTML.class.php:458 common/pm/ProjectTask.class.php:1143
+#: common/forum/ForumHTML.class.php:458 common/pm/ProjectTask.class.php:1175
 #: common/tracker/Artifact.class.php:1516
 #: common/tracker/Artifact.class.php:1518
 #: common/tracker/Artifact.class.php:1522
@@ -1013,15 +1013,15 @@ msgstr ""
 msgid "Forums: No Valid Group Object"
 msgstr "討論區::無效的群組物件"
 
-#: common/forum/Forum.class.php:150 common/forum/Forum.class.php:559
+#: common/forum/Forum.class.php:150 common/forum/Forum.class.php:561
 msgid "Forum Name Must Be At Least 3 Characters"
 msgstr "討論區名稱必須至少3個字元"
 
-#: common/forum/Forum.class.php:154 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:154 common/forum/Forum.class.php:565
 msgid "Forum Description Must Be At Least 10 Characters"
 msgstr "討論區描述必須至少10個字元"
 
-#: common/forum/Forum.class.php:158 common/forum/Forum.class.php:567
+#: common/forum/Forum.class.php:158 common/forum/Forum.class.php:569
 msgid "Illegal Characters in Forum Name"
 msgstr "討論區名稱包含不合法字元"
 
@@ -1043,22 +1043,22 @@ msgstr "歡迎來到 %1$s"
 msgid "Invalid forum group identifier"
 msgstr ""
 
-#: common/forum/Forum.class.php:443 common/forum/Forum.class.php:477
+#: common/forum/Forum.class.php:444 common/forum/Forum.class.php:479
 #: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:301
 #: common/tracker/ArtifactType.class.php:543
 #, fuzzy
 msgid "You can only monitor if you are logged in"
 msgstr "只有登入後才能監視"
 
-#: common/forum/Forum.class.php:510
+#: common/forum/Forum.class.php:512
 msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr "只有登入後才能保存位置"
 
-#: common/forum/Forum.class.php:528
+#: common/forum/Forum.class.php:530
 msgid "Forum::savePlace()"
 msgstr "討論區：savePlace()"
 
-#: common/forum/Forum.class.php:603 common/mail/MailingList.class.php:251
+#: common/forum/Forum.class.php:605 common/mail/MailingList.class.php:251
 #: plugins/mailman/include/MailmanList.class.php:250
 #: plugins/mailman/include/MailmanList.class.php:377
 #: plugins/mailman/include/MailmanList.class.php:394
@@ -1067,17 +1067,17 @@ msgstr "討論區：savePlace()"
 msgid "Error On Update:"
 msgstr "更新時錯誤："
 
-#: common/forum/Forum.class.php:618 common/frs/FRSPackage.class.php:447
+#: common/forum/Forum.class.php:620 common/frs/FRSPackage.class.php:447
 #: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1614
 #: common/mail/MailingList.class.php:382 common/pm/ProjectGroup.class.php:370
-#: common/pm/ProjectTask.class.php:504 common/tracker/Artifact.class.php:505
+#: common/pm/ProjectTask.class.php:511 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:429
 #: common/tracker/ArtifactType.class.php:805
 msgid "Please tick all checkboxes."
 msgstr ""
 
-#: common/forum/Forum.class.php:629 common/forum/Forum.class.php:637
-#: common/forum/Forum.class.php:645
+#: common/forum/Forum.class.php:631 common/forum/Forum.class.php:639
+#: common/forum/Forum.class.php:647
 #, fuzzy
 msgid "Error Deleting Forum"
 msgstr "新增討論區錯誤"
@@ -1205,7 +1205,7 @@ msgstr "未審核原因："
 
 #: common/forum/ForumAdmin.class.php:458
 #: common/forum/ForumMessage.class.php:181
-#: common/forum/ForumMessage.class.php:269
+#: common/forum/ForumMessage.class.php:275
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "目前無法更新 Master Thread parent"
 
@@ -1417,46 +1417,47 @@ msgid "Group_forum_id in db result does not match Forum Object"
 msgstr "資料庫中的 Group_forum_id 和 Forum 物件不一致"
 
 #: common/forum/ForumMessage.class.php:111
-#: common/forum/ForumMessage.class.php:257
+#: common/forum/ForumMessage.class.php:261
 msgid "Getting next thread_id failed"
 msgstr "無法獲取下一個 thread_id"
 
 #: common/forum/ForumMessage.class.php:128
 #: common/forum/ForumMessage.class.php:213
 #: common/forum/ForumMessage.class.php:219
-#: common/forum/ForumMessage.class.php:297
+#: common/forum/ForumMessage.class.php:314
 msgid "ForumMessage::create() Posting Failed"
 msgstr "ForumMessage::create() 張貼失敗"
 
 #: common/forum/ForumMessage.class.php:139
 #: common/forum/ForumMessage.class.php:224
-#: common/forum/ForumMessage.class.php:309
+#: common/forum/ForumMessage.class.php:326
 msgid "ForumMessage::create() Unable to get new message id"
 msgstr "ForumMessage::create() 無法獲得文章編號"
 
 #: common/forum/ForumMessage.class.php:192
-#: common/forum/ForumMessage.class.php:280
+#: common/forum/ForumMessage.class.php:286
+#: common/forum/ForumMessage.class.php:298
 msgid "Could Not Update Parent"
 msgstr "無法更新上層文章"
 
-#: common/forum/ForumMessage.class.php:338
+#: common/forum/ForumMessage.class.php:356
 msgid "Must Include A Message Body And Subject"
 msgstr "必須包括文章標題和內容"
 
-#: common/forum/ForumMessage.class.php:354
+#: common/forum/ForumMessage.class.php:372
 msgid "ForumMessage::create() No Valid ParentMessage Object"
 msgstr "ForumMessage::create() 無效的 ParentMessage 物件"
 
-#: common/forum/ForumMessage.class.php:388
-#: common/forum/ForumMessage.class.php:407
+#: common/forum/ForumMessage.class.php:406
+#: common/forum/ForumMessage.class.php:425
 msgid "ForumMessage::fetchData() Invalid MessageID"
 msgstr "ForumMessage::fetchData() 無效的文章編號"
 
-#: common/forum/ForumMessage.class.php:560
+#: common/forum/ForumMessage.class.php:578
 msgid "Invalid Message ID"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:641
+#: common/forum/ForumMessage.class.php:659
 #, php-format
 msgid ""
 "\n"
@@ -1464,7 +1465,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:643
+#: common/forum/ForumMessage.class.php:661
 #, php-format
 msgid ""
 "\n"
@@ -1475,7 +1476,7 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:649
+#: common/forum/ForumMessage.class.php:667
 #, php-format
 msgid ""
 "\n"
@@ -1484,11 +1485,11 @@ msgid ""
 "By: %s\n"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:654
+#: common/forum/ForumMessage.class.php:672
 msgid "A file has been uploaded with this message."
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:665
+#: common/forum/ForumMessage.class.php:683
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -2260,12 +2261,12 @@ msgstr ""
 msgid "%s (in project %s)"
 msgstr "%1$s 個專案"
 
-#: common/include/RBAC.php:1463
+#: common/include/RBAC.php:1473
 #, fuzzy
 msgid "Anonymous/not logged in"
 msgstr "請先登入"
 
-#: common/include/RBAC.php:1511
+#: common/include/RBAC.php:1521
 #, fuzzy
 msgid "Any user logged in"
 msgstr "請先登入"
@@ -3068,11 +3069,11 @@ msgstr "取得 %1$s 時錯誤"
 msgid "ProjectCategory: name and assignee are Required"
 msgstr "專案分類：需要名字和被指定人"
 
-#: common/pm/ProjectTask.class.php:687
+#: common/pm/ProjectTask.class.php:719
 msgid "Circular Dependency Detected'"
 msgstr "發現迴圈依賴'"
 
-#: common/pm/ProjectTask.class.php:1155
+#: common/pm/ProjectTask.class.php:1187
 #, php-format
 msgid "[%1$s - %2$s] [Task #%3$d] "
 msgstr ""
@@ -3550,7 +3551,8 @@ msgid "Add widgets"
 msgstr "新增日期"
 
 #: common/widget/WidgetLayoutManager.class.php:243
-#: common/widget/WidgetLayoutManager.class.php:247 www/my/index.php:55
+#: common/widget/WidgetLayoutManager.class.php:247
+#: www/include/project_home.php:73 www/my/index.php:55
 #: www/widgets/widgets.php:71
 #, fuzzy
 msgid "Customize layout"
@@ -8894,7 +8896,12 @@ msgstr "其他授權："
 msgid "Pending reason:"
 msgstr "未審核原因："
 
-#: www/admin/approve-pending.php:202 www/admin/approve-pending.php:214
+#: www/admin/approve-pending.php:202
+#, fuzzy, php-format
+msgid "Submitted by: %s"
+msgstr "發表人"
+
+#: www/admin/approve-pending.php:214
 #, fuzzy, php-format
 msgid "Submitted by %1$s (%2$s)"
 msgstr "發表人"
@@ -11623,11 +11630,6 @@ msgstr "註冊專案"
 msgid "Project Home"
 msgstr "新專案名稱"
 
-#: www/include/project_home.php:73
-#, fuzzy
-msgid "Customize Layout"
-msgstr "訂製欄位已刪除"
-
 #: www/include/tool_reports.php:65 www/pm/index.php:101
 #: www/reporting/usersummary.php:54 www/tracker/ind.php:65
 msgid "Open"
@@ -14281,8 +14283,8 @@ msgstr "新角色"
 msgid ""
 "Use this page to edit the permissions attached to each role.  Note that each "
 "role has at least as much access as the Anonymous and LoggedIn roles.  For "
-"example, if the the Anonymous role has read access to a forum, all other "
-"roles will have it too."
+"example, if the Anonymous role has read access to a forum, all other roles "
+"will have it too."
 msgstr ""
 "透過這一頁來編輯您的專案角色，每個使用者至少可以像匿名者存取。例如，如果匿名"
 "者可以讀取 CVS，那麼這個專案的其他角色也可以"
@@ -14579,7 +14581,7 @@ msgstr "角色/職位"
 msgid "Skills"
 msgstr "技術"
 
-#: www/project/memberlist.php:106 www/project/report/index.php:175
+#: www/project/memberlist.php:110 www/project/report/index.php:175
 msgid "View"
 msgstr "瀏覽"
 
@@ -18035,6 +18037,10 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帳號"
+
+#, fuzzy
+#~ msgid "Customize Layout"
+#~ msgstr "訂製欄位已刪除"
 
 #~ msgid "DocumentGroup: name is Required"
 #~ msgstr "文件分組：請輸入名字"
