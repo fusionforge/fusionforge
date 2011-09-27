@@ -5303,22 +5303,18 @@ tests/preseed/mailman -text
 tests/preseed/postgresql -text
 tests/scripts/catch_mail.php -text
 tests/scripts/cdx40-build-and-test-source.sh -text
+tests/scripts/common-functions -text
+tests/scripts/destroy_vm -text
 tests/scripts/fusionforge-build-and-test-deb.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-rpm.sh -text svneol=unset#text/x-sh
-tests/scripts/fusionforge-build-and-test-source.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-src-cos.sh -text
-tests/scripts/fusionforge-trunk-build-rpm.sh -text svneol=unset#text/x-sh
-tests/scripts/fusionforge-trunk-test-rpm.sh -text svneol=unset#text/x-sh
+tests/scripts/fusionforge-build-and-test-src-deb.sh -text
+tests/scripts/fusionforge-build-and-test-tgz-cos.sh -text svneol=unset#text/x-sh
+tests/scripts/fusionforge-build-and-test-tgz-deb.sh -text
 tests/scripts/phpunit.sh -text
 tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
-tests/scripts/start_lxc.sh -text
 tests/scripts/start_vm -text
-tests/scripts/start_vm.sh -text svneol=unset#text/x-sh
-tests/scripts/start_vz.sh -text svneol=unset#text/x-sh
-tests/scripts/stop_lxc.sh -text
 tests/scripts/stop_vm -text
-tests/scripts/stop_vm.sh -text svneol=unset#text/x-sh
-tests/scripts/stop_vz.sh -text svneol=unset#text/x-sh
 tests/unit/config/ConfigTest.php -text
 tests/unit/utils/DbUtilsTest.php -text
 tests/unit/utils/HtmlPurifierTest.php -text

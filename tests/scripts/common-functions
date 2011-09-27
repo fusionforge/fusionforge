@@ -1,0 +1,95 @@
+get_config()
+{
+	. tests/config/default
+	if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
+	if [ ! -z "$1" ]
+	then
+        	export HOST="$1"
+	fi
+}
+
+prepare_workspace()
+{
+	export CURDIR=`pwd`
+	WORKDIR=$(cd $CURDIR/..; pwd)
+	export WORKSPACE=${WORKSPACE:-$WORKDIR}
+	export RPM_TMP=$WORKDIR/tmp
+	export BUILDRESULT=$WORKSPACE/build/packages
+	# Create place to build package if necessary
+	[ ! -d $WORKSPACE/build/packages ] || mkdir -p $WORKSPACE/build/packages
+	# Erase config
+	[ ! -d $WORKSPACE/build/config ] || rm -fr $WORKSPACE/build/config
+	mkdir -p $WORKSPACE/build/config
+	# Erase reports
+	[ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
+	mkdir -p $WORKSPACE/reports/coverage
+	# Erase apidocs
+	[ ! -d $WORKSPACE/apidocs ] || rm -fr $WORKSPACE/apidocs
+	mkdir -p $WORKSPACE/apidocs
+}
+
+destroy_vm()
+{
+	HOST=$1
+	tests/scripts/destroy_vm $HOST || true
+}
+
+start_vm_if_not_keeped()
+{
+	HOST=$1
+	if $KEEPVM
+	then
+		# VM can already exist
+		echo "Starting vm $HOST"
+		tests/scripts/start_vm $HOST
+	else
+		# Destroy the VM if found
+		echo "Destroying vm $HOST"
+		tests/scripts/stop_vm $HOST || true
+		tests/scripts/start_vm $HOST || echo "Could not start VM"; exit 2
+	fi
+}
+
+stop_vm_if_not_keeped()
+{
+	HOST=$1
+	if $KEEPVM
+	then
+        	echo "Keeping vm $HOST alive"
+	else
+        	tests/scripts/stop_vm $HOST
+	fi
+}
+
+setup_dag_repo()
+{
+HOST=$1
+# DAG REPO
+if [ ! -z "$DAG_RPMFORGE_REPO" ] ; then
+        echo "Installing specific DAG REPO $DAG_RPMFORGE_REPO"
+        cp src/rpm-specific/dag-rpmforge.repo $WORKSPACE/build/packages/dag-rpmforge.repo
+        sed -i "s#http://apt.sw.be/redhat#${DAG_RPMFORGE_REPO}#" $WORKSPACE/build/packages/dag-rpmforge.repo
+        scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
+else
+        echo "Installing standart DAG REPO from src/rpm-specific/dag-rpmforge.repo"
+        scp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
+fi
+}
+
+setup_ff_repo()
+{
+HOST=$1
+# FUSIONFORGE REPO
+if [ ! -z "$FFORGE_RPM_REPO" ]
+then
+        echo "Installing specific FUSIONFORGE REPO $FFORGE_RPM_REPO"
+        cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
+        sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
+        sed -i "s#baseurl = .*#baseurl = ${FFORGE_RPM_REPO}/#" $WORKSPACE/build/packages/fusionforge.repo
+        scp $WORKSPACE/build/packages/fusionforge.repo root@$HOST:/etc/yum.repos.d/
+else
+        rsync -a --delete $BUILDRESULT/ root@$HOST:/root/fusionforge_repo/
+        echo "Installing standart FUSIONFORGE REPO from src/rpm-specific/fusionforge.repo"
+        scp src/rpm-specific/fusionforge.repo root@$HOST:/etc/yum.repos.d/
+fi
+}

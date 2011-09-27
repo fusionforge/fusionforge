@@ -1,7 +1,5 @@
 #! /bin/sh
 
-set -x
-
 if [ $# -ge 1 ]
 then
         testsuite=$1
@@ -18,15 +16,17 @@ then
         exit 1
 fi
 
-WORKSPACE=/root
+scriptdir=$(dirname $0)
+FORGE_HOME=$(cd $scriptdir/../..; pwd)
+cd $FORGE_HOME
 [ ! -f tests/config/default ] || . tests/config/default
-[ ! -f $WORKSPACE/config/phpunit ] || . $WORKSPACE/config/phpunit
+[ ! -f tests/config/phpunit ] || . tests/config/phpunit
 SELENIUM_RC_DIR=/var/log
 SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
 SELENIUM_RC_HOST=`hostname -f`
 HOST=`hostname -f`
 CONFIG_PHP=func/config.php
-export SELENIUM_RC_DIR WORKSPACE SELENIUM_RC_URL SELENIUM_RC_HOST HOST DB_NAME DB_USER CONFIG_PHP
+export SELENIUM_RC_DIR SELENIUM_RC_URL SELENIUM_RC_HOST HOST DB_NAME DB_USER CONFIG_PHP
 
 cat <<-EOF >tests/func/config.php
 <?php
@@ -44,7 +44,7 @@ define ('ROOT', '');
 define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASSWORD', '@@FFDB_PASS@@');
-define('DB_INIT_CMD', "/root/tests/func/db_reload.sh >>/var/log/db_reload_selenium.log 2>>/var/log/db_reload_selenium.errlog");
+define('DB_INIT_CMD', "$FORGE_HOME/tests/func/db_reload.sh >>/var/log/db_reload_selenium.log 2>>/var/log/db_reload_selenium.errlog");
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'myadmin')
@@ -53,10 +53,10 @@ define ('FORGE_ADMIN_PASSWORD', '$FORGE_ADMIN_PASSWORD');
 define ('FORGE_OTHER_PASSWORD', '$FORGE_OTHER_PASSWORD');
 
 // Where CLI is installed
-define ('CLI_CMD', '/opt/gforge/acde/tools/gforge-cli/gforge.php');
+define ('CLI_CMD', '$FORGE_HOME/acde/tools/gforge-cli/gforge.php');
 
 // Where Java CLI is installed
-define ('JAGOSI_CMD', '/opt/gforge/acde/tools/gforge-java-cli/');
+define ('JAGOSI_CMD', '$FORGE_HOME/acde/tools/gforge-java-cli/');
 
 // Enter true when file is configured.
 define('CONFIGURED', getenv('CONFIGURED'));
@@ -78,7 +78,16 @@ EOF
 retcode=0
 echo "This will run phpunit tests"
 killall -9 java
-LANG=C java -jar selenium-server.jar -browserSessionReuse -singleWindow >/dev/null &
+rm -f /var/log/selenium.log
+PATH=/usr/lib/iceweasel:$PATH
+export PATH
+LANG=C java -jar $FORGE_HOME/tests/selenium-server.jar -browserSessionReuse -singleWindow >/var/log/selenium.log &
+while ! grep -q org.openqa.jetty /var/log/selenium.log
+do
+	echo "Waiting Selenium"
+	sleep 1
+done
+
 #LANG=C java -jar selenium-server.jar -singleWindow >/dev/null &
 cd tests
 phpunit --verbose --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ $testsuite || retcode=$?
