@@ -3,8 +3,16 @@ if [ $# -eq 1 ]
 then
 	database=$1
 else
-	export PATH=$PATH:/usr/share/gforge/bin/:/usr/share/gforge/utils:/opt/gforge/utils
-	database=`FUSIONFORGE_NO_PLUGINS=true forge_get_config database_name`
+	scriptdir=$(dirname $0)
+	UTILS_PATH=$(cd $scriptdir/../../src ; pwd)
+	export PATH=$PATH:$UTILS_PATH/utils:$UTILS_PATH/bin
+	if type forge_get_config
+	then
+		database=`FUSIONFORGE_NO_PLUGINS=true forge_get_config database_name`
+	else
+		echo "$0: FATAL ERROR : COULD NOT FIND forge_get_config"
+		exit 1 
+	fi
 fi
 if [ "x$database" = "x" ]
 then
