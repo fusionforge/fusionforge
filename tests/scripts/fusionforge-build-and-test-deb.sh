@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/sh
 . tests/scripts/common-functions
 
 export FORGE_HOME=/usr/share/gforge
