@@ -1,7 +1,7 @@
 [core]
 forge_name = FusionForge
 
-source_path = /opt/gforge
+source_path = /opt/gforge/src
 data_path = /var/lib/gforge
 config_path = /etc/gforge
 log_path = /var/log/gforge
