@@ -37,6 +37,7 @@ configure_centos()
     echo 0 > $rootfs/selinux/enforce
 
     # configure localhost
+    touch $rootfs/etc/hosts
     if ! grep -q "^127.0.0.1" $rootfs/etc/hosts
     then
 	cat <<EOF >> $rootfs/etc/hosts
