@@ -6,8 +6,8 @@
 
 #RPM_TMP=$(HOME)/rpmbuild
 FORGE_HOME=$(shell cd ..; pwd)
-RPM_TMP=$(FORGE_HOME)/tmp
-BUILDRESULT=$(FORGE_HOME)/build/packages
+RPM_TMP=$(FORGE_HOME)/../tmp
+BUILDRESULT=$(FORGE_HOME)/../build/packages
 
 HTMLPURIFYER_DIR=$(CURDIR)/php-htmlpurifier
 HTMLPURIFIER_VERSION=4.3.0
@@ -38,7 +38,7 @@ WEBDAV_SERVER_RPM=noarch/php-pear-HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION)-1.
 # _srcrpmdir	%{_topdir}/SRPMS
 # _topdir	%{getenv:HOME}/rpmbuild
 
-RPMBUILD=rpmbuild --define='_topdir $(RPM_TMP)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' --define='_rpmdir $(BUILDRESULT)'
+RPMBUILD=rpmbuild --quiet --define='_topdir $(RPM_TMP)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' --define='_rpmdir $(BUILDRESULT)'
 
 default: $(HTMLPURIFYER_DIR) $(JPGRAPH_DIR) $(WEBDAV_SERVER_DIR) dist getselenium
 
