@@ -5,9 +5,9 @@
 #
 
 FORGE_HOME=$(CURDIR)
-RPM_TMP=$(FORGE_HOME)/tmp
-BUILDRESULT=$(FORGE_HOME)/build/packages
-RPMBUILD=rpmbuild --define='_topdir $(RPM_TMP)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' --define='_rpmdir $(BUILDRESULT)'
+RPM_TMP=$(FORGE_HOME)/../tmp
+BUILDRESULT=$(FORGE_HOME)/../build/packages
+RPMBUILD=rpmbuild --quiet --define='_topdir $(RPM_TMP)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' --define='_rpmdir $(BUILDRESULT)'
 
 VER=$(shell LC_ALL=C sed -n '/>software_version/s/^.*'\''\([0-9.]*\)'\''.*$$/\1/p' src/common/include/FusionForge.class.php)
 in_svn_repo:= $(wildcard .svn/)
@@ -16,7 +16,7 @@ ifeq ($(strip $(in_svn_repo)),)
 	URL=unknown
 	TAG=unknown
 else
-	ID=$(shell LANG=C svnversion)
+	ID=$(shell LANG=C svnversion|cut -d: -f1)
 	URL=$(shell LANG=C svn info | grep 'Root:' | awk '{print $$3}')
 	TAG=$(shell LANG=C svn log $(URL) -r $(ID) -l 1 2>/dev/null | awk '{ if ($$1=="Tag-Release") print $$1}')
 endif
@@ -50,9 +50,9 @@ fusionforge: # Build rpm fusionforge packages                               #
 	cd $(RPM_TMP)/SOURCES/; tar cjf fusionforge-$(version).tar.bz2 fusionforge-$(version)
 	[ -d $(RPM_TMP)/SPECS ] || mkdir $(RPM_TMP)/SPECS
 	sed -e 's/@@VERSION@@/$(version)/g' < src/fusionforge.spec > $(RPM_TMP)/SPECS/fusionforge.spec
-	$(RPMBUILD) -bb $(RPM_TMP)/SPECS/fusionforge.spec
+	$(RPMBUILD) -bb $(RPM_TMP)/SPECS/fusionforge.spec 2>&1| grep -v '/etc/magic'
 
 3rd-party:
-	$(MAKE) -C 3rd-party -f Makefile.rh all
+	$(MAKE) -C 3rd-party -f Makefile.rh BUILDRESULT=$(BUILDRESULT) all
 
 .PHONY : 3rd-party
