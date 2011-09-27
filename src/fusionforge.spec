@@ -19,7 +19,7 @@
 
 %define fforge_admin    fforgeadmin
 
-%define FORGE_DIR       %{_datadir}/gforge
+%define FORGE_DIR       %{_datadir}/gforge/src
 %define FORGE_CONF_DIR  %{_sysconfdir}/gforge
 %define FORGE_LANG_DIR  %{_datadir}/locale
 %define FORGE_VAR_LIB   %{_var}/lib/gforge
