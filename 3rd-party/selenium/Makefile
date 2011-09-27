@@ -5,7 +5,7 @@
 # see tests/func/README.TXT
 #
 
-S_VERSION=2.6.0
+S_VERSION=2.7.0
 
 run: selenium-server.jar
 	LANG=C java -jar selenium-server.jar -interactive
