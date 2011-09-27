@@ -10,6 +10,9 @@
 
 case $1 in
     build)
+	# Change to the script directory
+        cd $(dirname $0)
+	# Guess where is Apache config directory
 	if [ -e src/etc/httpd.conf.d ] ; then # We're in the parent dir
 	    cd src/etc
 	elif [ -e etc/httpd.conf.d ] ; then # probably in src/ (or a renamed gforge/)
@@ -25,7 +28,7 @@ case $1 in
 	mkdir -p httpd.conf.d-fhs
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
 	    sed -e 's,{core/config_path},/etc/gforge,g' \
-		-e 's,{core/source_path},/usr/share/gforge,g' \
+		-e 's,{core/source_path},/usr/share/gforge/src,g' \
 		-e 's,{core/data_path},/var/lib/gforge,g' \
 		-e 's,{core/log_path},/var/log/gforge,g' \
 		-e 's,{core/chroot},/var/lib/gforge/chroot,g' \
@@ -41,7 +44,7 @@ case $1 in
 	mkdir -p httpd.conf.d-opt
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
 	    sed -e 's,{core/config_path},/etc/gforge,g' \
-		-e 's,{core/source_path},/opt/gforge,g' \
+		-e 's,{core/source_path},/opt/gforge/src,g' \
 		-e 's,{core/data_path},/var/lib/gforge,g' \
 		-e 's,{core/log_path},/var/log/gforge,g' \
 		-e 's,{core/chroot},/var/lib/gforge/chroot,g' \
@@ -57,7 +60,7 @@ case $1 in
 	mkdir -p httpd.conf.d-usrlocal
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
 	    sed -e 's,{core/config_path},/etc/gforge,g' \
-		-e 's,{core/source_path},/usr/local/share/gforge,g' \
+		-e 's,{core/source_path},/usr/local/share/gforge/src,g' \
 		-e 's,{core/data_path},/var/local/lib/gforge,g' \
 		-e 's,{core/log_path},/var/log/gforge,g' \
 		-e 's,{core/chroot},/var/local/lib/gforge/chroot,g' \
