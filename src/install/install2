@@ -48,7 +48,7 @@ install2_files(){
 		msg red "Usage: $0 fusionforge.org apacheuser apachegroup"
 		exit 127
 	else
-		msg green "Validating arguments: OK"
+		msg green "Running install2_files $hostname $apacheuser $apachegroup"
 	fi
 
 	CHECK=`echo $hostname | grep -E "[^[:alnum:]\-]"`
@@ -153,6 +153,7 @@ install2_files(){
 	chmod 755 /bin/cvssh.pl
 
 	# Create default location for gforge config files
+	# TODO BEGIN : could this be replaced by $fusionforge_dir/utils/manage-apache-config.sh install ?
 	mkdir -p $fusionforge_etc_dir
 	if [ ! -f $fusionforge_etc_dir/httpd.conf ]
 	then
@@ -167,6 +168,7 @@ install2_files(){
 
 	cp $fusionforge_dir/etc/config.ini-opt $fusionforge_etc_dir/config.ini
 	cp -rL $fusionforge_dir/etc/config.ini.d $fusionforge_etc_dir/
+	# TODO END
 
 	# Install default configuration files for all plugins.
 	mkdir -p $fusionforge_etc_dir/plugins/
@@ -245,4 +247,37 @@ install2_files(){
 	cd $fusionforge_etc_dir && find -type f -exec perl -pi -e "s/apachegroup/$apachegroup/" {} \;
 	cd $fusionforge_etc_dir && find -type f -exec perl -pi -e "s/gforge.company.com/$hostname/" {} \;
 	echo "noreply:	/dev/null" >> /etc/aliases
+}
+
+install2_files_redhat()
+{
+	install2_files $1 apache apache
+}
+
+install2_files_suse()
+{
+	install2_files $1 wwwrun www
+}
+
+install2_files_ubuntu()
+{
+	echo "--"
+	echo "For ubuntu, rather use ubuntu package"
+	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/UbuntuRepositories"
+	echo "--"
+}
+
+install2_files_debian()
+{
+	echo "--"
+	echo "For debian, rather use debian package"
+	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/DebianRepositories"
+	echo "--"
+}
+
+install2_files_unknown()
+{
+	echo "Only Red Hat, Fedora or CentOS and OpenSUSE are supported by this script.";
+	echo "See INSTALL for normal installation";
+	exit 1
 }

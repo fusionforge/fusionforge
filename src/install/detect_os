@@ -78,11 +78,17 @@ detect_type()
 		suse|opensuse)
 			type=suse
 			;;
-		debian|ubuntu|ark)
+		debian|ark)
 			type=debian	
+			;;
+		ubuntu)
+			type=ubuntu
 			;;
 		centos|rhel|redhat_unknown|fedora)
 			type=redhat
+			;;
+		*)
+			type=unknown
 			;;
 	esac
 	echo $type

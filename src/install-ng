@@ -4,7 +4,7 @@
 #
 # Usage: ./install-ng <hostname>
 #
-# This will install all the fusionforge code in /opt/gforge
+# This will install all the fusionforge code in $FORGE_HOME
 # Configuration is stored in /etc/gforge
 #
 # Currently supported:
@@ -14,6 +14,8 @@
 # Author: Alain Peyrat <aljeux@free.fr>
 #         Christian Bayle <bayle@debian.org>
 #
+FORGE_HOME=/opt/gforge
+
 usage(){
 	echo "Usage: $1 [-r|-h|-a|--reinit|--help|--auto|--deps|--files|--database|--config] [<hostname>]"
 }
@@ -65,7 +67,14 @@ echo "Using hostname=$hostname"
 # Load some script
 scriptdir=`cd \`dirname $0\`; pwd`
 . $scriptdir/install/detect_os
-. $scriptdir/install/config
+
+FUSIONFORGE_DEFAULT_SRC_DIR=$(cd $(dirname $0); pwd)
+FUSIONFORGE_DEFAULT_DIR=$FUSIONFORGE_DEFAULT_SRC_DIR
+fusionforge_src_dir=${FUSIONFORGE_SRC_DIR:-$FUSIONFORGE_DEFAULT_SRC_DIR}
+fusionforge_dir=${FUSIONFORGE_DIR:-$FUSIONFORGE_DEFAULT_DIR}
+fusionforge_data_dir=${FUSIONFORGE_DATA_DIR:-/var/lib/gforge}
+fusionforge_log_dir=${FUSIONFORGE_LOG_DIR:-/var/log/gforge}
+fusionforge_etc_dir=${FUSIONFORGE_ETC_DIR:-/etc/gforge}
 
 # Call to detect_os, this will set $type and $distrib
 os=$(detect_os)
@@ -82,6 +91,8 @@ fi
 . $scriptdir/install/install2
 . $scriptdir/install/install3
 . $scriptdir/install/install4
+. $scriptdir/install/install5_post
+. $scriptdir/install/install6_upgrade
 
 if $AUTO
 then
@@ -99,7 +110,7 @@ then
 	dropdbifexists $FFORGE_DB
 fi
 
-if [ -d "/opt/gforge" ]
+if [ -d "$FORGE_HOME" ]
 then
 	if [ -f "/etc/gforge/install_completed" ]
 	then
@@ -115,128 +126,35 @@ else
 fi
 
 echo "Install type = $type"
-case $type in 
-	redhat)
-	if $DEFAULT || $FILES
+if $DEFAULT || $FILES
+then
+	install2_files_$type "$hostname"
+fi
+
+if [ "$mode" = "install" ]
+then
+	if $DEFAULT || $DATABASE
 	then
-		echo "Running install2_files "$hostname" apache apache"
-		install2_files "$hostname" apache apache
+		echo "Running install3_db_$type"
+		install3_db_$type
 	fi
-	if [ "$mode" = "install" ]
+	if $DEFAULT || $CONFIG
 	then
-		if $DEFAULT || $DATABASE
-		then
-			echo "Running install3_db"
-			install3_db
-		fi
-		if $DEFAULT || $CONFIG
-		then
-			echo "Running install4_config"
-			install4_config
-		fi
-		if $DEFAULT
-		then
-			# Post installation fixes.
-			perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
-			# Disable ssl
-			perl -spi -e "s/^Include/#Include/" /etc/gforge/httpd.conf.d/ssl-on.inc
-	
-			chkconfig httpd on
-			chkconfig postgresql on
-			chkconfig iptables off
-	
-			service httpd restart
-			service iptables stop
-			msg="IMPORTANT: Service iptables (firewall) disabled, please reconfigure after"
-	
-			cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
-			cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
-			service crond reload
-		fi
-	else
-		if $DEFAULT
-		then
-			echo "Running php db/upgrade-db.php"
-			cd $scriptdir; php db/upgrade-db.php
-			echo "Running php utils/normalize_roles.php"
-			cd $scriptdir; php utils/normalize_roles.php
-		fi
+		echo "Running install4_config_$type"
+		install4_config_$type
 	fi
-	;;
-
-	suse)
-	if $DEFAULT || $FILES
+	if $DEFAULT
 	then
-		install2_files "$hostname" wwwrun www
+		echo "Running install5_post_$type"
+		install5_post_$type "$hostname"
 	fi
-	if [ $mode = "install" ]
+else
+	if $DEFAULT
 	then
-		if $DEFAULT || $DATABASE
-		then
-			echo "Running install3_db"
-			install3_db
-		fi
-		if $DEFAULT || $CONFIG
-		then
-			echo "Running install4_config"
-			install4_config
-		fi
-		if $DEFAULT
-		then
-			# Post installation fixes.
-			#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
-	
-			chkconfig -s apache2 on
-			chkconfig -s postgresql on
-	
-			# Apache settings: modules
-			for m in dav dav_svn authz_svn ssl; do
-				a2enmod $m
-				a2enflag $m
-			done
-			echo "Virtual hosts for ${hostname}:"
-			httpd2 -S -DSSL 2>&1 | grep ${hostname}
-
-			rcapache2 restart
-
-			rcSuSEfirewall2 stop
-			msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
-
-			cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
-			cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
-			rccron reload
-		fi
-	else
-		if $DEFAULT
-		then
-			echo "Running php db/upgrade-db.php"
-			cd $scriptdir; php db/upgrade-db.php
-			echo "Running php utils/normalize_roles.php"
-			cd $scriptdir; php utils/normalize_roles.php
-		fi
+		echo "Running install6_upgrade_$type"
+		install6_upgrade_$type
 	fi
-	;;
-
-	ubuntu)
-	echo "--"
-	echo "For ubuntu, rather use ubuntu $distrib package"
-	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/UbuntuRepositories"
-	echo "--"
-	;;
-
-	debian)
-	echo "--"
-	echo "For debian, rather use debian $distrib package"
-	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/DebianRepositories"
-	echo "--"
-	;;
-	
-	*)
-	echo "Only Red Hat, Fedora or CentOS and OpenSUSE are supported by this script.";
-	echo "See INSTALL for normal installation";
-	exit 1
-	;;
-esac
+fi
 
 echo "check /etc/gforge/local.inc for $hostname specific FusionForge settings"
 echo "Write INSTALL COMPLETED"

@@ -1,0 +1,66 @@
+install5_post_redhat()
+{
+	hostname=$1
+
+	# Post installation fixes.
+	perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
+	# Disable ssl
+	perl -spi -e "s/^Include/#Include/" /etc/gforge/httpd.conf.d/ssl-on.inc
+	
+	chkconfig httpd on
+	chkconfig postgresql on
+	chkconfig iptables off
+	
+	service httpd restart
+	service iptables stop
+	msg="IMPORTANT: Service iptables (firewall) disabled, please reconfigure after"
+	
+	cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
+	cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
+	service crond reload
+}
+
+install5_post_suse()
+{
+	hostname=$1
+
+	# Post installation fixes.
+	#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
+
+	chkconfig -s apache2 on
+	chkconfig -s postgresql on
+
+	# Apache settings: modules
+	for m in dav dav_svn authz_svn ssl; do
+		a2enmod $m
+		a2enflag $m
+	done
+	echo "Virtual hosts for ${hostname}:"
+	httpd2 -S -DSSL 2>&1 | grep ${hostname}
+
+	rcapache2 restart
+
+	rcSuSEfirewall2 stop
+	msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
+
+	cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
+	cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
+	rccron reload
+}
+
+install5_post_debian()
+{
+	echo "TODO"
+}
+
+install5_post_ubuntu()
+{
+	echo "TODO"
+}
+
+install5_post_unknown()
+{
+	echo "TODO"
+}
+
+

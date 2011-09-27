@@ -123,7 +123,6 @@ find_tsearch(){
 }
 
 forge_save_db_config(){
-
 	if [ -z "$FFORGE_DB" ]
 	then
 		while test -z "$FFORGE_DB"
@@ -349,4 +348,29 @@ install3_db(){
 	forge_save_db_config
 	installandrundb
 	msg green "Done."
+}
+
+install3_db_redhat()
+{
+	install3_db
+}
+
+install3_db_suse()
+{
+	install3_db
+}
+
+install3_db_debian()
+{
+	echo "Install 3 db not implemented for debian"
+}
+
+install3_db_ubuntu()
+{
+	echo "Install 3 db not implemented for ubuntu"
+}
+
+install3_db_unknown()
+{
+	echo "Install 3 db not implemented"
 }
