@@ -68,7 +68,7 @@ find_psql_init(){
 		
 psql_startdb(){
 	# Fedora9 (an maybe newer) requires running initdb
-	if [ "$pgservice" == '/etc/init.d/postgresql' ]
+	if [ "$pgservice" = '/etc/init.d/postgresql' ]
 	then
 		if [ -d /var/lib/pgsql/data/base ]
 		then
@@ -297,7 +297,7 @@ EOF
 			then
 				msg noreturn green " * Please enter it again:"
 				read -s FFORGE_ADMIN_PASSWORD2
-				if [ "$FFORGE_ADMIN_PASSWORD1" == "$FFORGE_ADMIN_PASSWORD2" ]
+				if [ "$FFORGE_ADMIN_PASSWORD1" = "$FFORGE_ADMIN_PASSWORD2" ]
 				then
 					FFORGE_ADMIN_PASSWORD="$FFORGE_ADMIN_PASSWORD1"
 				else
@@ -329,7 +329,7 @@ validatePassword() {
 		return 1
 	fi
         CHECK=`echo $password | grep -E "[[:alnum:]]*"`
-        if [ "$CHECK" == "" ]
+        if [ "$CHECK" = "" ]
         then
                 msg red "Password contains invalid characters. Please try again."
 		return 2
