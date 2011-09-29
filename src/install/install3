@@ -262,14 +262,23 @@ EOF
 	then
 		susufix=''
 	else
-		susufix='-'
+		susufix='- -s /bin/sh'
 	fi
 
 	msg green " * Creating $gforge_db Database..."
 	su $susufix $gforge_user -c "createdb --encoding UNICODE $gforge_db"
 
 	# Detect postgresql version, load tsearch2 for pg < 8.3
-	pgv=`postgres --version | cut -d" " -f3`
+	pgv=
+	for i in postgres psql ; do
+	    if [ "$(type -p $i)" != '' ] ; then
+		pgv=$($i --version | cut -d" " -f3)
+	    fi
+	done
+	if [ "$pgv" = '' ] ; then
+		msg red "Error: Can't find command-line PostgreSQL client."
+		exit 2
+	fi	    
 	case $pgv in
 		7.*|8.1*|8.2*)
 			msg green " * Loading tsearch2 Database Into $gforge_db DB"
