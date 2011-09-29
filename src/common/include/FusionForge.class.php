@@ -47,7 +47,7 @@ class FusionForge extends Error {
 		if (isset($forge_pkg_version)) {
 			$this->software_version = $forge_pkg_version;
 		} else {
-			$this->software_version = '5.1' ;
+			$this->software_version = '5.1.1' ;
 		}
 
 		if (isset($forge_pkg_type)) {
