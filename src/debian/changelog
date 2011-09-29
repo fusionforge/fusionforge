@@ -4,11 +4,11 @@ fusionforge (5.1.50~-0) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Fri, 05 Aug 2011 13:41:04 +0200
 
-fusionforge (5.1-7+) unstable; urgency=low
+fusionforge (5.1.1-1) unstable; urgency=low
 
-  * 
+  * New upstream release.
 
- -- Roland Mas <lolando@debian.org>  Tue, 20 Sep 2011 11:20:51 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 29 Sep 2011 14:07:08 +0200
 
 fusionforge (5.1-7) unstable; urgency=low
 

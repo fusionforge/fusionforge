@@ -15,7 +15,8 @@ i.e. the source package's diffs include "non packaging" changes
 outside debian/ too, as direct patches to upstream sources.
 
 More precisely :
- - fusionforge-5.1-6 is in sync with upstream SVN contents as of rev. 14445;
+ - fusionforge-5.1.1-1 is in sync with upstream SVN contents as of rev. 14498;
+ - fusionforge-5.1-7 is in sync with upstream SVN contents as of rev. 14445;
  - fusionforge-5.1-6 is in sync with upstream SVN contents as of rev. 14319;
  - fusionforge-5.1-5 is in sync with upstream SVN contents as of rev. 14267;
  - fusionforge-5.1-4 is in sync with upstream SVN contents as of rev. 14120;
@@ -32,4 +33,4 @@ The following may provide more details on variations between the
 upstream main version and Debian's packaging :
 http://patch-tracker.debian.org/package/fusionforge
 
- -- Roland Mas <lolando@debian.org>, Tue, 20 Sep 2011 11:11:58 +0200
+ -- Roland Mas <lolando@debian.org>, Thu, 29 Sep 2011 14:07:27 +0200
