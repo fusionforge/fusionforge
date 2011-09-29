@@ -23,6 +23,8 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+PG_VERSIONS="8.2 8.3 8.4 9.0 9.1"
+
 msg(){
 	GREEN="[01;32m"
 	NORMAL="[00m"
@@ -52,12 +54,16 @@ create_db_admin_user(){
 }
 
 find_psql_init(){
-	initpsql=""
-	for initpsql in /etc/init.d/postgresql /etc/init.d/postgresql-8.2 /etc/init.d/postgresql-8.3 /etc/init.d/postgresql-8.4 /etc/init.d/cswpostgres
+	initpsql="/etc/init.d/postgresql"
+	for v in $PG_VERSIONS ; do
+	    initpsql="$initpsql postgresql-$v"
+	done
+	initpsql="$initpsql /etc/init.d/cswpostgres"
+	for i in $initpsql
 	do
-		if [ -f $initpsql ]
+		if [ -f $i ]
 		then
-			pgservice=$initpsql
+			pgservice=$i
 		fi
 	done
 	if [ -z "$pgservice" ]
@@ -90,12 +96,16 @@ get_config(){
 
 # Where the pghba config file is
 find_pghba(){
-	pghbafile=""
-	for pghbafile in /var/lib/pgsql/data/pg_hba.conf /etc/postgresql/8.2/main/pg_hba.conf /etc/postgresql/8.3/main/pg_hba.conf /etc/postgresql/8.4/main/pg_hba.conf /opt/csw/var/pgdata/pg_hba.conf
+	pghbafile="/var/lib/pgsql/data/pg_hba.conf"
+	for v in $PG_VERSIONS ; do
+	    pghbafile="$pghbafile /etc/postgresql/$v/main/pg_hba.conf"
+	done
+	pghbafile="$pghbafile /opt/csw/var/pgdata/pg_hba.conf"
+	for i in $pghbafile
 	do
-		if [ -f $pghbafile ]
+		if [ -f $i ]
 		then
-			pghba="$pghbafile"
+			pghba="$i"
 		fi
 	done
 	if [ -z "$pghba" ]
@@ -107,12 +117,16 @@ find_pghba(){
 
 # Where the tsearch sql config file is
 find_tsearch(){
-	tsearchfile=""
-	for tsearchfile in /usr/share/pgsql/contrib/tsearch2.sql /usr/share/postgresql/8.2/contrib/tsearch2.sql /usr/share/postgresql/8.3/contrib/tsearch2.sql /usr/share/postgresql/8.4/contrib/tsearch2.sql /opt/csw/postgresql/share/contrib/tsearch2.sql
+	tsearchfile="/usr/share/pgsql/contrib/tsearch2.sql"
+	for v in $PG_VERSIONS ; do
+	    tsearchfile="$tsearchfile /usr/share/postgresql/$v/contrib/tsearch2.sql"
+	done
+	tsearchfile="$tsearchfile /opt/csw/postgresql/share/contrib/tsearch2.sql"
+	for i in $tsearchfile
 	do
-		if [ -f $tsearchfile ]
+		if [ -f $i ]
 		then
-			tsearch="$tsearchfile"
+			tsearch="$i"
 		fi
 	done
 	if [ -z "$tsearch" ]
@@ -259,6 +273,7 @@ EOF
 	case $pgv in
 		7.*|8.1*|8.2*)
 			msg green " * Loading tsearch2 Database Into $gforge_db DB"
+			find_tsearch
 			su - postgres -c "psql $gforge_db < $tsearch" >> /tmp/gforge-import.log
 			for table in pg_ts_cfg pg_ts_cfgmap pg_ts_dict pg_ts_parser
 			do
@@ -344,7 +359,6 @@ install3_db(){
 	psql_startdb
 	get_config
 	find_pghba
-	find_tsearch
 	forge_save_db_config
 	installandrundb
 	msg green "Done."
