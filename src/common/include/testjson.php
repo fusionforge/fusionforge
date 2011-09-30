@@ -28,7 +28,7 @@ error_reporting(-1);
 
 /* $s_orig [parse] print_r->$s_printr [encode] $s_ecompact or $s_epadded */
 
-/* $s_e* [decode] print_r ->$s_printre (no object slot when value==null) */
+/* $s_e* [decode] print_r ->$s_printr */
 
 $s_orig = '[
     "JSON Test Pattern pass1",
@@ -191,108 +191,7 @@ $s_printr = 'Array
 )
 ';
 
-$s_printre = 'Array
-(
-    [0] => JSON Test Pattern pass1
-    [1] => Array
-        (
-            [object with 1 member] => Array
-                (
-                    [0] => array with 1 element
-                )
-
-        )
-
-    [2] => Array
-        (
-        )
-
-    [3] => Array
-        (
-        )
-
-    [4] => -42
-    [5] => 1
-    [6] => 
-    [7] => 
-    [8] => Array
-        (
-            [integer] => 1234567890
-            [real] => -9876.54321
-            [e] => 1.23456789E-13
-            [E] => 1.23456789E+34
-            [] => 2.3456789012E+76
-            [zero] => 0
-            [one] => 1
-            [space] =>  
-            [quote] => "
-            [backslash] => \\
-            [controls] => 
-	
-            [slash] => / & /
-            [alpha] => abcdefghijklmnopqrstuvwyz
-            [ALPHA] => ABCDEFGHIJKLMNOPQRSTUVWYZ
-            [digit] => 0123456789
-            [0123456789] => digit
-            [special] => `1~!@#$%^&*()_+-={\':[,]}|;.</>?
-            [hex] => ģ䕧覫췯ꯍ
-            [true] => 1
-            [false] => 
-            [array] => Array
-                (
-                )
-
-            [object] => Array
-                (
-                )
-
-            [address] => 50 St. James Street
-            [url] => http://www.JSON.org/
-            [comment] => // /* <!-- --
-            [# -- --> */] =>  
-            [ s p a c e d ] => Array
-                (
-                    [0] => 1
-                    [1] => 2
-                    [2] => 3
-                    [3] => 4
-                    [4] => 5
-                    [5] => 6
-                    [6] => 7
-                )
-
-            [compact] => Array
-                (
-                    [0] => 1
-                    [1] => 2
-                    [2] => 3
-                    [3] => 4
-                    [4] => 5
-                    [5] => 6
-                    [6] => 7
-                )
-
-            [jsontext] => {"object with 1 member":["array with 1 element"]}
-            [quotes] => &#34; " %22 0x22 034 &#x22;
-            [/\\"쫾몾ꮘﳞ볚
-	`1~!@#$%^&*()_+-=[]{}|;:\',./<>?] => A key can be any string
-        )
-
-    [9] => 0.5
-    [10] => 98.6
-    [11] => 99.44
-    [12] => 1066
-    [13] => 10
-    [14] => 1
-    [15] => 0.1
-    [16] => 1
-    [17] => 2
-    [18] => 2
-    [19] => rosebud
-)
-';
-
-$s_ecompact = '["JSON Test Pattern pass1",{"object with 1 member":["array with 1 element"]},[],[],-42,true,false,null,{"integer":1234567890,"real":-9.87654321E+3,"e":1.23456789E-13,"E":1.23456789E+34,"":2.3456789012E+76,"zero":0,"one":1,"space":" ","quote":"\\"","backslash":"\\\\","controls":"\\b\\f\\n\\r\\t","slash":"/ & /","alpha":"abcdefghijklmnopqrstuvwyz","ALPHA":"ABCDEFGHIJKLMNOPQRSTUVWYZ","digit":"0123456789","0123456789":"digit","special":"`1~!@#$%^&*()_+-={\':[,]}|;.</>?","hex":"ģ䕧覫췯ꯍ","true":true,"false":false,"array":[],"object":[],"address":"50 St. James Street","url":"http://www.JSON.org/","comment":"// /* <!-- --","# -- --> */":" "," s p a c e d ":[1,2,3,4,5,6,7],"compact":[1,2,3,4,5,6,7],"jsontext":"{\\"object with 1 member\\":[\\"array with 1 element\\"]}","quotes":"&#34; \\" %22 0x22 034 &#x22;","/\\\\\\"쫾몾ꮘﳞ볚\\b\\f\\n\\r\\t`1~!@#$%^&*()_+-=[]{}|;:\',./<>?":"A key can be any string"},5.0E-1,9.86E+1,9.944E+1,1066,1.0E+1,1.0,1.0E-1,1.0,2.0,2.0,"rosebud"]';
+$s_ecompact = '["JSON Test Pattern pass1",{"object with 1 member":["array with 1 element"]},[],[],-42,true,false,null,{"integer":1234567890,"real":-9.87654321E+3,"e":1.23456789E-13,"E":1.23456789E+34,"":2.3456789012E+76,"zero":0,"one":1,"space":" ","quote":"\\"","backslash":"\\\\","controls":"\\b\\f\\n\\r\\t","slash":"/ & /","alpha":"abcdefghijklmnopqrstuvwyz","ALPHA":"ABCDEFGHIJKLMNOPQRSTUVWYZ","digit":"0123456789","0123456789":"digit","special":"`1~!@#$%^&*()_+-={\':[,]}|;.</>?","hex":"ģ䕧覫췯ꯍ","true":true,"false":false,"null":null,"array":[],"object":[],"address":"50 St. James Street","url":"http://www.JSON.org/","comment":"// /* <!-- --","# -- --> */":" "," s p a c e d ":[1,2,3,4,5,6,7],"compact":[1,2,3,4,5,6,7],"jsontext":"{\\"object with 1 member\\":[\\"array with 1 element\\"]}","quotes":"&#34; \\" %22 0x22 034 &#x22;","/\\\\\\"쫾몾ꮘﳞ볚\\b\\f\\n\\r\\t`1~!@#$%^&*()_+-=[]{}|;:\',./<>?":"A key can be any string"},5.0E-1,9.86E+1,9.944E+1,1066,1.0E+1,1.0,1.0E-1,1.0,2.0,2.0,"rosebud"]';
 $s_epadded = '[
   "JSON Test Pattern pass1",
   {
@@ -331,6 +230,7 @@ $s_epadded = '[
     "hex": "ģ䕧覫췯ꯍ",
     "true": true,
     "false": false,
+    "null": null,
     "array": [
 
     ],
@@ -430,7 +330,7 @@ test_eq("can-reparse-compact", true, $presult);
 if (!$reparsed || $reparsed == 'bla')
 	echo "FAIL reparse-compact-basic\n";
 $printrd = print_r($reparsed, true);
-test_eq("reparsed-compact", $s_printre, $printrd);
+test_eq("reparsed-compact", $s_printr, $printrd);
 
 $encoded = minijson_encode($parsed);
 test_eq("encode-padded", $s_epadded, $encoded);
@@ -440,7 +340,7 @@ test_eq("can-reparse-padded", true, $presult);
 if (!$reparsed || $reparsed == 'bla')
 	echo "FAIL reparse-padded-basic\n";
 $printrd = print_r($reparsed, true);
-test_eq("reparsed-padded", $s_printre, $printrd);
+test_eq("reparsed-padded", $s_printr, $printrd);
 
 echo "Total failed: " . $failed . "/" . $tnum . "\n";
 echo "Total passed: " . $passed . "/" . $tnum . "\n";

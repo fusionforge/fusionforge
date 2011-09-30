@@ -1,6 +1,6 @@
 <?php
 /**
- * Minimal JSON generator and parser for FusionForge
+ * Minimal complete JSON generator and parser for FusionForge
  *
  * Copyright © 2010, 2011
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
@@ -35,11 +35,11 @@
 /**
  * Encodes an array (indexed or associative) as JSON.
  *
- * in:	array x
+ * in:	array-reference x (Value to be encoded)
  * in:	string indent or bool false to skip beautification
  * out:	string encoded
  */
-function minijson_encode($x, $ri="") {
+function minijson_encode(&$x, $ri="") {
 	if (!isset($x) || is_null($x) || (is_float($x) &&
 	    (is_nan($x) || is_infinite($x))))
 		return "null";
@@ -189,10 +189,6 @@ function minijson_encode($x, $ri="") {
 		if ($ri !== false)
 			$rs .= "\n";
 		foreach ($k as $v) {
-			if (!isset($x[$v])) {
-				continue;
-			}
-
 			if ($first)
 				$first = false;
 			else if ($ri === false)
@@ -201,7 +197,8 @@ function minijson_encode($x, $ri="") {
 				$rs .= ",\n";
 			if ($si !== false)
 				$rs .= $si;
-			$rs .= minijson_encode((string)$v, false);
+			$c = (string)$v;
+			$rs .= minijson_encode($c, false);
 			if ($ri === false)
 				$rs .= ":";
 			else
@@ -216,8 +213,10 @@ function minijson_encode($x, $ri="") {
 
 	/* treat everything else as array or string */
 	if (!is_scalar($x))
-		return minijson_encode((array)$x, $ri);
-	return minijson_encode((string)$x, $ri);
+		$c = (array)$x;
+	else
+		$c = (string)$x;
+	return minijson_encode($c, $ri);
 }
 
 /**
