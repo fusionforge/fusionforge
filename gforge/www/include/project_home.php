@@ -436,7 +436,11 @@ if ($project->usesFTP()) {
 		echo '<div class="public-area-box">';
 		
 		$link_content = $HTML->getFtpPic('') . '&nbsp;' . _('Anonymous FTP Space');
-        print util_make_link('ftp://' . $project->getUnixName() . '.' . $GLOBALS['sys_default_domain'] . '/pub/'. $project->getUnixName(), $link_content, false, true);
+		if ($GLOBALS['sys_use_project_vhost']) {
+		        print util_make_link('ftp://' . $project->getUnixName() . '.' . $GLOBALS['sys_default_domain'] . '/pub/'. $project->getUnixName(), $link_content, false, true);
+		} else {
+        		print util_make_link('ftp://' . $GLOBALS['sys_default_domain'] . '/pub/'. $project->getUnixName(), $link_content, false, true);
+		}
 		echo '</div>';
 	}
 }
