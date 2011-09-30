@@ -134,7 +134,7 @@ if ( $num_packages < 1) {
                 // Switch whether release_id exists and/or release_id is current one
                 if ( ! $release_id || $release_id==$package_release['release_id'] ) {
                     // no release_id OR release_id is current one
-                    $release_title = util_make_link ( 'frs/shownotes.php?release_id=' . $package_release['release_id'], $package_name.' '.$package_release['name']);
+                    $release_title = util_make_link ( 'frs/shownotes.php?release_id=' . $package_release['release_id'], $package_name.' '.$package_release['name'].' ('.date(_('Y-m-d H:i'),$package_release['release_date']).')');
                     echo $GLOBALS['HTML']->boxTop($release_title, $package_name . '_' . $package_release['name'])."\n";
                 } elseif ( $release_id!=$package_release['release_id'] ) {
                     // release_id but not current one
@@ -192,7 +192,7 @@ if ( $num_packages < 1) {
                             $file_release = db_fetch_array( $res_file );
 
                             $tmp_col1 = util_make_link ('/frs/download.php/'.$file_release['file_id'].'/'.$file_release['filename'], $file_release['filename']);
-                            $tmp_col2 = date(_('Y-m-d H:i'), $package_release['release_date'] );
+                            $tmp_col2 = date(_('Y-m-d H:i'), $file_release['release_time'] );
                             $tmp_col3 = human_readable_bytes($file_release['file_size']);
                             $tmp_col4 = ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0');
                             $tmp_col5 = $file_release['processor'];
