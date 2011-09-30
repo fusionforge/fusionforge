@@ -206,7 +206,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 					if ($from_admin) {
 						$link = "index.php?editdoc=1&amp;docid=".$docs[$j]->getID()."&amp;group_id=".$docs[$j]->Group->getID();
 					} else {
-						$link = (( $docs[$j]->isURL() ) ? $docs[$j]->getFileName() : "view.php/".$docs[$j]->Group->getID()."/".$docs[$j]->getID()."/".$docs[$j]->getFileName() );
+						$link = (( $docs[$j]->isURL() ) ? $docs[$j]->getFileName() : "view.php/".$docs[$j]->Group->getID()."/".$docs[$j]->getID()."/".urlencode($docs[$j]->getFileName()) );
 					}
 					$tooltip = $docs[$j]->getFileName() . " (" .
 								($docs[$j]->getUpdated() ?
