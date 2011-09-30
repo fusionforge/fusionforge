@@ -75,7 +75,6 @@ if (!$SPAN) {
 	if ($delta > 365) $SPAN=3;
 }
 
-$area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads')) ;
 if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }
 if ($start && !is_numeric($start)) { $start = false; }
 if ($end && !is_numeric($end)) { $end = false; }

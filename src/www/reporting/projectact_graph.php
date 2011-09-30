@@ -33,8 +33,6 @@ $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 $g_id = getIntFromRequest('g_id');
 
-$area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads')) ;
-
 //
 //	Create Report
 //
