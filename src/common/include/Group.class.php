@@ -318,9 +318,9 @@ class Group extends Error {
 
 			// Check if sys_use_project_vhost for homepage
 			if (forge_get_config('use_project_vhost')) {
-				$homepage = $unix_name.".".$GLOBALS['sys_default_domain'];
+				$homepage = $unix_name.".".forge_get_config('web_host');
 			} else {
-				$homepage = $GLOBALS['sys_default_domain']."/www/".$unix_name."/";
+				$homepage = forge_get_config('web_host')."/www/".$unix_name."/";
 			}
 
 
