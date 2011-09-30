@@ -35,11 +35,11 @@
 /**
  * Encodes an array (indexed or associative) as JSON.
  *
- * in:	array-reference x (Value to be encoded)
+ * in:	array x (Value to be encoded)
  * in:	string indent or bool false to skip beautification
  * out:	string encoded
  */
-function minijson_encode(&$x, $ri="") {
+function minijson_encode($x, $ri="") {
 	if (!isset($x) || is_null($x) || (is_float($x) &&
 	    (is_nan($x) || is_infinite($x))))
 		return "null";
@@ -197,8 +197,7 @@ function minijson_encode(&$x, $ri="") {
 				$rs .= ",\n";
 			if ($si !== false)
 				$rs .= $si;
-			$c = (string)$v;
-			$rs .= minijson_encode($c, false);
+			$rs .= minijson_encode((string)$v, false);
 			if ($ri === false)
 				$rs .= ":";
 			else
@@ -213,10 +212,8 @@ function minijson_encode(&$x, $ri="") {
 
 	/* treat everything else as array or string */
 	if (!is_scalar($x))
-		$c = (array)$x;
-	else
-		$c = (string)$x;
-	return minijson_encode($c, $ri);
+		return minijson_encode((array)$x, $ri);
+	return minijson_encode((string)$x, $ri);
 }
 
 /**
