@@ -317,6 +317,13 @@ class Group extends Error {
 			srand((double)microtime()*1000000);
 			$random_num = rand(0,1000000);
 	
+			// Check if sys_use_project_vhost for homepage
+			if ($GLOBALS['sys_use_project_vhost']) {
+				$homepage = $unix_name.".".$GLOBALS['sys_default_domain'];
+			} else {
+				$homepage = $GLOBALS['sys_default_domain']."/www/".$unix_name."/";
+			}
+
 			db_begin();
 	
 			$res = db_query_params ('
@@ -341,7 +348,7 @@ class Group extends Error {
 						       $unix_name,
 						       htmlspecialchars($description),
 						       $unix_name.".".$GLOBALS['sys_default_domain'],
-						       $unix_name.".".$GLOBALS['sys_default_domain'],
+						       $homepage,
 						       'P',
 						       $unix_box,
 						       $scm_box,
