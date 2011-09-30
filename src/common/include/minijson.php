@@ -55,8 +55,8 @@ function minijson_encode($x, $ri="") {
 		$x = (string)$x;
 	}
 	if (is_float($x)) {
-		$rs = sprintf("%.14E", $x);
-		$v = explode("E", $rs);
+		$rs = sprintf("%.14e", $x);
+		$v = explode("e", $rs);
 		$rs = rtrim($v[0], "0");
 		if (substr($rs, -1) == ".") {
 			$rs .= "0";
