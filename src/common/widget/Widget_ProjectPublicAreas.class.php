@@ -185,7 +185,11 @@ class Widget_ProjectPublicAreas extends Widget {
 
 										$link_content = $HTML->getFtpPic('') . ' ' . _('Anonymous FTP Space');
 										//		print '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName() .'/">';
-										print util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
+										if (forge_get_config('use_project_vhost')) {
+											print util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
+										} else {
+											print util_make_link('ftp://' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
+										}
 										echo "\n</div>\n";
 									}
 								}
