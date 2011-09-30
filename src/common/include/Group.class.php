@@ -316,6 +316,14 @@ class Group extends Error {
 			return false;
 		} else {
 
+			// Check if sys_use_project_vhost for homepage
+			if (forge_get_config('use_project_vhost')) {
+				$homepage = $unix_name.".".$GLOBALS['sys_default_domain'];
+			} else {
+				$homepage = $GLOBALS['sys_default_domain']."/www/".$unix_name."/";
+			}
+
+
 			db_begin();
 	
 			$res = db_query_params ('
@@ -339,7 +347,7 @@ class Group extends Error {
 						       $unix_name,
 						       htmlspecialchars($description),
 						       $unix_name.".".forge_get_config('web_host'),
-						       $unix_name.".".forge_get_config('web_host'),
+						       $homepage,
 						       'P',
 						       $unix_box,
 						       $scm_box,
