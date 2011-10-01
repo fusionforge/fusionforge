@@ -5276,6 +5276,7 @@ tests/func/config.php.sample -text
 tests/func/config.php.tests -text
 tests/func/db_reload.php -text
 tests/func/db_reload.sh -text
+tests/jenkins/Makefile -text
 tests/lxc/Makefile -text
 tests/lxc/config.centos5 -text
 tests/lxc/config.centos6 -text
