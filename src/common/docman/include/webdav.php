@@ -65,6 +65,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				}
 			}
 		}
+
 		return false;
 	}
 
@@ -104,9 +105,16 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		if ($g->isError())
 			return false;
 
+		/* 4 is coming from the url: http://yourforge/docman/6/webdav/the/directory
+			1 = http://yourforge
+			2 = docman
+			3 = id group
+			4 = webdav
+			the rest is the path /the/directory
+		*/
 		if ( 4 < count($arr_path)) {
 			$subpath = '';
-			for ($i=5; $i<count($arr_path); $i++){
+			for ($i = 5; $i < count($arr_path); $i++){
 				$subpath .= '/'.$arr_path[$i];
 			}
 		}
@@ -115,36 +123,41 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			$subpath = '/';
 		}
 
-		$analysed_path = $this->analyse($subpath,$group_id);
+		$analysed_path = $this->analyse($subpath, $group_id);
 
 		if ($analysed_path['isdir']) {
 			$i = 0;
 			$files["files"] = array();
 			$path = $options['path'];
-			$name = basename($path);
+			$res = db_query_params('select * from doc_groups where group_id = $1 and doc_group = $2',
+						array($group_id, $analysed_path['doc_group']));
+			if (!$res)
+				return false;
+
+			$arr = db_fetch_array($res);
 			$files["files"][$i] = array();
 			$files["files"][$i]["path"] = $path;
 			$files["files"][$i]["props"] = array();
-			$files["files"][$i]["props"][] = $this->mkprop("displayname", $name);
-			$files["files"][$i]["props"][] = $this->mkprop("creationdate", '');
-			$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", '');
+			$files["files"][$i]["props"][] = $this->mkprop("displayname", $arr['groupname']);
+			$files["files"][$i]["props"][] = $this->mkprop("creationdate", $arr['createdate']);
+			$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", $arr['updatedate']);
 			$files["files"][$i]["props"][] = $this->mkprop("lastaccessed", '');
 			$files["files"][$i]["props"][] = $this->mkprop("ishidden", false);
 			$files["files"][$i]["props"][] = $this->mkprop("resourcetype", "collection");
 			$files["files"][$i]["props"][] = $this->mkprop("getcontenttype", "httpd/unix-directory");
 			$res = db_query_params('select * from doc_groups where group_id = $1 and parent_doc_group = $2',
 						array($group_id, $analysed_path['doc_group']));
-			if (!$res) {
+			if (!$res)
 				return false;
-			}
+
 			while ($arr = db_fetch_array($res)) {
 				$i++;
 				$files["files"][$i] = array();
 				$files["files"][$i]["path"]  = $path.'/'.$arr['groupname'];
 				$files["files"][$i]["props"] = array();
 				$files["files"][$i]["props"][] = $this->mkprop("displayname", $arr['groupname']);
-				$files["files"][$i]["props"][] = $this->mkprop("creationdate", '');
-				$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", '');
+				$files["files"][$i]["props"][] = $this->mkprop("creationdate", $arr['createdate']);
+				$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", $arr['updatedate']);
 				$files["files"][$i]["props"][] = $this->mkprop("lastaccessed", '');
 				$files["files"][$i]["props"][] = $this->mkprop("ishidden", false);
 				$files["files"][$i]["props"][] = $this->mkprop("resourcetype","collection");
@@ -152,9 +165,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			}
 			$res = db_query_params('select filename,filetype,filesize,createdate,updatedate from doc_data where group_id = $1 and doc_group = $2',
 				array($group_id, $analysed_path['doc_group']));
-			if (!$res) {
+			if (!$res)
 				return false;
-			}
+
 			while ($arr = db_fetch_array($res)) {
 				$i++;
 				$files["files"][$i] = array();
@@ -169,6 +182,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				$files["files"][$i]["props"][] = $this->mkprop("getcontenttype", $arr['filetype']);
 			}
 		}
+
 		return true;
 	}
 
@@ -285,6 +299,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			}
 			$analysed_path = $this->whatIsIt($path_arr[$i], $group_id, $analysed_path);
 		}
+
 		return $analysed_path;
 	}
 

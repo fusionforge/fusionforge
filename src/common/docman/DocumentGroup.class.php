@@ -134,11 +134,12 @@ class DocumentGroup extends Error {
 			return false;
 		}
 
-		$result = db_query_params('INSERT INTO doc_groups (group_id,groupname,parent_doc_group,stateid) VALUES ($1, $2, $3, $4)',
+		$result = db_query_params('INSERT INTO doc_groups (group_id,groupname,parent_doc_group,stateid,createdate) VALUES ($1, $2, $3, $4, $5)',
 						array ($this->Group->getID(),
 							htmlspecialchars($name),
 							$parent_doc_group,
-							'1')
+							'1',
+							time())
 						);
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
