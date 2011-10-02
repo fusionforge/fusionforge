@@ -1,0 +1,18 @@
+BUILDLIST=php-mail-mbox selenium jquery-goodies
+BUILDTARGET=$(patsubst %,build_%,$(BUILDLIST))
+CLEANTARGET=$(patsubst %,clean_%,$(BUILDLIST))
+
+botbuild: $(BUILDTARGET)
+	@echo $@ 
+
+botclean: $(CLEANTARGET)
+	@echo $@ 
+
+build_%:
+	@echo "$*"
+	$(MAKE) -C $(CURDIR)/$* BUILDRESULT=$(BUILDRESULT) LOCALREPODEB=$(LOCALREPODEB) BUILDDIST=$(DIST) DEBMIRROR=$(DEBMIRROR) botbuild
+
+clean_%:
+	@echo "$*"
+	$(MAKE) -C $(CURDIR)/$* BUILDRESULT=$(BUILDRESULT) LOCALREPODEB=$(LOCALREPODEB) BUILDDIST=$(DIST) botclean
+
