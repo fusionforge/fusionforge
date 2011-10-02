@@ -20,6 +20,8 @@
 3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1-6.2.diff.gz -text svneol=unset#application/gzip
 3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1-6.2.dsc -text
 3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1.orig.tar.gz -text svneol=unset#application/gzip
+3rd-party/jquery-goodies/Makefile -text
+3rd-party/jquery-goodies/Makefile.debian -text
 3rd-party/mailman/Makefile -text
 3rd-party/mailman/Makefile.debian -text
 3rd-party/mailman/mailman_2.1.13-2.diff.gz -text svneol=unset#application/gzip
