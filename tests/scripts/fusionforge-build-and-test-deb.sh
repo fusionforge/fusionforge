@@ -8,11 +8,8 @@ prepare_workspace
 destroy_vm $@
 start_vm_if_not_keeped $@
 
-make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian clean
-(cd 3rd-party/php-mail-mbox ; dpkg-source -x php-mail-mbox_0.6.3-1coclico1.dsc)
-(cd 3rd-party/php-mail-mbox ; make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rsqueeze)
-(cd 3rd-party/selenium ; make getselenium)
-make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rsqueeze
+# Build 3rd-party 
+make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
 
 # Transfer preseeding
 cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
@@ -20,22 +17,6 @@ cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh 
 # Setup debian repo
 ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
 ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
-
-# Temporary hack to grab libjs-jquery-tipsy from unstable until it reaches testing/backports
-if [ $DIST = squeeze ] ; then
-    ssh root@$HOST "echo \"deb $DEBMIRROR unstable main\" >> /etc/apt/sources.list"
-    ssh root@$HOST "cat >> /etc/apt/apt.conf.d/unstable" <<EOF
-APT::Default-Release "$DIST";
-EOF
-    ssh root@$HOST "cat >> /etc/apt/preferences.d/unstable" <<EOF
-Package: *
-Pin: release a=unstable
-Pin-Priority: 50
-
-EOF
-    ssh root@$HOST "apt-get update"
-    ssh root@$HOST "apt-get install -y --force-yes -t unstable libjs-jquery-tipsy"
-fi
 
 ssh root@$HOST "echo \"deb file:/debian $DIST main\" >> /etc/apt/sources.list"
 scp -r $WORKSPACE/build/debian root@$HOST:/ 
