@@ -28,4 +28,4 @@ botbuild:
 	@make -f Makefile.$(DIST) $(PARAM) r$(BUILDDIST)
 
 botclean: clean
-	@make -f Makefile.$(DIST) $(PARAM) botclean
+	@echo "CLEAN DONE"
