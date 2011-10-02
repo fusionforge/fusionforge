@@ -23,15 +23,23 @@ scp -r $WORKSPACE/build/debian root@$HOST:/
 gpg --export --armor | ssh root@$HOST "apt-key add -"
 sleep 5
 ssh root@$HOST "apt-get update"
+
+# Install fusionforge
 ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -y --force-yes install rsync postgresql-contrib fusionforge-full"
 echo "Set forge admin password"
 ssh root@$HOST "/usr/share/gforge/bin/forge_set_password $FORGE_ADMIN_USERNAME $FORGE_ADMIN_PASSWORD"
 ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload"
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini"
-#ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
+
+# Dump database
+echo "Dump freshly installed database"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
+
+# Stop cron
+echo "Stop cron daemon"
 ssh root@$HOST "invoke-rc.d cron stop" || true
 
+# Install selenium tests
 ssh root@$HOST mkdir $FORGE_HOME/tests
 cp 3rd-party/selenium/selenium-server.jar tests/
 rsync -a --delete tests/ root@$HOST:$FORGE_HOME/tests/
@@ -41,6 +49,7 @@ HUDSON_URL=$HUDSON_URL
 JOB_NAME=$JOB_NAME
 EOF
 
+# Run tests
 retcode=0
 echo "Run phpunit test on $HOST in $FORGE_HOME"
 if xterm -e "sh -c exit" 2>/dev/null
