@@ -23,3 +23,9 @@ $(PKGDIR):
 
 clean:
 	rm -rf $(PKGDIR)
+
+botbuild:
+	@make -f Makefile.$(DIST) $(PARAM) r$(BUILDDIST)
+
+botclean: clean
+	@make -f Makefile.$(DIST) $(PARAM) botclean
