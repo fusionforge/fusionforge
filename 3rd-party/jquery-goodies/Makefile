@@ -19,6 +19,9 @@ default: $(PKGDIR)
 %: $(PKGDIR)
 	@make -f Makefile.$(DIST) $(PARAM) $@
 
+$(PKGDIR):
+	echo "Nothing to do for $@"
+
 botbuild:
 	@make -f Makefile.$(DIST) $(PARAM) r$(BUILDDIST)
 
