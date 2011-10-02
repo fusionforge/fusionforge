@@ -21,3 +21,11 @@ getpackage:
 	sudo apt-get install maven-debian-helper
 
 getselenium: selenium-server.jar
+
+clean:
+	rm -f selenium-server.jar
+
+botbuild: getselenium
+
+botclean:
+	@echo "Nothing to do"
