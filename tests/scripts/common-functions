@@ -46,7 +46,11 @@ start_vm_if_not_keeped()
 		# Destroy the VM if found
 		echo "Destroying vm $HOST"
 		tests/scripts/stop_vm $HOST || true
-		tests/scripts/start_vm $HOST || echo "Could not start VM"; exit 2
+		if ! tests/scripts/start_vm $HOST
+		then
+			echo "Could not start VM";
+			exit 2
+		fi
 	fi
 }
 
