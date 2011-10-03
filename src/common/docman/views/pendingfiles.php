@@ -24,11 +24,12 @@
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
 global $group_id; // id of the group
+global $g; // the group object
 global $dirid; // id of doc_group
 global $HTML; // Layout object
 global $nested_pending_docs;
 
-if (!forge_check_perm('docman', $group_id, 'approve')) {
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
@@ -68,7 +69,7 @@ jQuery(document).ready(function() {
 					break;
 				}
 				default: {
-					$docurl = util_make_uri('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
+					$docurl = util_make_uri('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()));
 				}
 			}
 			echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'._('View this document').'" >';
@@ -123,7 +124,7 @@ jQuery(document).ready(function() {
 		echo _('Mass actions for selected pending files:');
 		echo '</span>';
 		echo '<span id="massactionpending" class="docman-massaction-hide" style="display:none;" >';
-		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>'Download as Zip')). '</a>';
+		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$g->getID().'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>'Download as Zip')). '</a>';
 		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=validatefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Activate in this directory') . '" >' . html_image('docman/validate.png', 22, 22, array('alt'=>'Activate in this directory')). '</a>';
 		echo '</span>';
 		echo '</p>';
