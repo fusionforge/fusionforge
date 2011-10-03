@@ -27,9 +27,17 @@ global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 
-if (!forge_check_perm('docman', $group_id, 'approve')) {
+$urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
+// plugin projects-hierarchy handler
+$childgroup_id = getIntFromRequest('childgroup_id');
+if ($childgroup_id) {
+	$g = group_get_object($childgroup_id);
+	$urlredirect .= '&childgroup_id='.$childgroup_id;
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	session_redirect($urlredirect.'&warning_msg='.urlencode($return_msg));
 }
 
 $arr_fileid = explode(',',getStringFromRequest('fileid'));
@@ -40,15 +48,15 @@ foreach ($arr_fileid as $fileid) {
 		$return_msg .= $d->getFilename().' ';
 
 		if ($d->isError())
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+			session_redirect($urlredirect.'&error_msg='.urlencode($d->getErrorMessage()));
 
 		if (!$d->setState('1'))
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+			session_redirect($urlredirect.'&error_msg='.urlencode($d->getErrorMessage()));
 	} else {
 		$warning_msg = _('No action to perform');
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+		session_redirect($urlredirect.'&warning_msg='.urlencode($warning_msg));
 	}
 }
 $return_msg .= _('activated successfully.');
-//session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
+session_redirect($urlredirect.'&feedback='.urlencode($return_msg));
 ?>

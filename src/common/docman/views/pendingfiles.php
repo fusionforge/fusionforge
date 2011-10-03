@@ -28,10 +28,12 @@ global $g; // the group object
 global $dirid; // id of doc_group
 global $HTML; // Layout object
 global $nested_pending_docs;
+global $redirecturl; // built url from listfile.php (handle the hierarchy)
+global $actionlistfileurl; // built action url from listfile.php (handle the hierarchy)
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
 }
 
 if (!isset($nested_pending_docs)) {
@@ -125,7 +127,7 @@ jQuery(document).ready(function() {
 		echo '</span>';
 		echo '<span id="massactionpending" class="docman-massaction-hide" style="display:none;" >';
 		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$g->getID().'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>'Download as Zip')). '</a>';
-		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=validatefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Activate in this directory') . '" >' . html_image('docman/validate.png', 22, 22, array('alt'=>'Activate in this directory')). '</a>';
+		echo '<a class="tabtitle" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=validatefile&fileid=\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Activate in this directory') . '" >' . html_image('docman/validate.png', 22, 22, array('alt'=>'Activate in this directory')). '</a>';
 		echo '</span>';
 		echo '</p>';
 		echo '</div>';
