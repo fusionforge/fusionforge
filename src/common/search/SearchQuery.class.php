@@ -198,26 +198,30 @@ class SearchQuery extends Error {
 	}
 
 	function addMatchCondition($qpa, $fieldName) {
-		if(!count($arr)) {
+		if(!count($this->phrases)) {
 			$qpa = db_construct_qpa ($qpa, 'TRUE') ;
-		} else {
-			$regexs = str_replace(' ', "\\\s+", $arr);
-			for ($i = 0; $i < count ($regexs); $i++) {
-				if ($i > 0) {
-					$qpa = db_construct_qpa ($qpa,
-								 $this->operator) ;
-				}
+			return $qpa;
+		}
+
+		$regexs = array_map ('strtolower',
+				     array_merge ($this->phrases,
+						  str_replace(' ', "\s+", $this->phrases)));
+	
+		for ($i = 0; $i < count ($regexs); $i++) {
+			if ($i > 0) {
 				$qpa = db_construct_qpa ($qpa,
-							 $fieldName.' ~* $1',
-							 array ($regexs[$i])) ;
+							 $this->operator) ;
 			}
+			$qpa = db_construct_qpa ($qpa,
+						 $fieldName.' ~* $1',
+							 array ($regexs[$i])) ;
 		}
 		return $qpa;
 	}
 
 	function addIlikeCondition($qpa, $fieldName) {
 		$wordArgs = array_map ('strtolower',
-				       array_merge($this->words, str_replace(' ', "\\\s+", $this->phrases)));
+				       array_merge($this->words, $this->phrases));
 
 		for ($i = 0; $i < count ($wordArgs); $i++) {
 			if ($i > 0) {
