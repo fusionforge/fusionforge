@@ -70,24 +70,12 @@ class TrackersSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {
-			if (count ($this->words)) {
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT DISTINCT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, (ts_rank(artifact_idx.vectors, q)+ts_rank(artifact_message_idx.vectors, q)) AS rank FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list, to_tsquery($1) q, artifact_idx, artifact_message_idx WHERE users.user_id = artifact.submitted_by AND artifact_idx.artifact_id = artifact.artifact_id AND artifact_message_idx.id = artifact_message.id AND artifact_message_idx.artifact_id = artifact_message_idx.artifact_id AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $2 ',
-							 
-							 array ($this->getFormattedWords(),
-								$this->groupId)) ;
-				$tsmatch = "(artifact_idx.vectors @@ q OR artifact_message_idx.vectors @@ q)";
-				$phraseOp = $this->getOperator();
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT DISTINCT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 ',
-							 array ($this->groupId)) ;
-
-
-				$tsmatch = "";
-				$orderBy = "";
-				$phraseOp = "";
-			}
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT DISTINCT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, (ts_rank(artifact_idx.vectors, q)+ts_rank(artifact_message_idx.vectors, q)) AS rank FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list, to_tsquery($1) q, artifact_idx, artifact_message_idx WHERE users.user_id = artifact.submitted_by AND artifact_idx.artifact_id = artifact.artifact_id AND artifact_message_idx.id = artifact_message.id AND artifact_message_idx.artifact_id = artifact_message_idx.artifact_id AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $2 ',
+						 array ($this->getFTIwords(),
+							$this->groupId)) ;
+			$tsmatch = "(artifact_idx.vectors @@ q OR artifact_message_idx.vectors @@ q)";
+			$phraseOp = $this->getOperator();
 
 			if (count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
@@ -113,10 +101,8 @@ class TrackersSearchQuery extends SearchQuery {
 			}
 			$qpa = db_construct_qpa ($qpa,
 						 ') x') ;
-			if (count ($this->words)) {
-				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY rank DESC') ;
-			}
+			$qpa = db_construct_qpa ($qpa,
+						 'ORDER BY rank DESC') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT DISTINCT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 ',

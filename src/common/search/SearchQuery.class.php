@@ -102,7 +102,7 @@ class SearchQuery extends Error {
 		}
 		if (is_array ($this->phrases)){
 			$this->phrases = array_map ('addslashes',$this->phrases);
-		} else{
+		} else {
 			$this->phrases = array();
 		}
 		$this->rowsPerPage = $rowsPerPage;
@@ -334,17 +334,21 @@ class SearchQuery extends Error {
 	}
 
 	/**
-	 * getFormattedWords - get words formatted in order to be used in the FTI stored procedures
+	 * getFTIwords - get words formatted in order to be used in the FTI stored procedures
 	 *
-	 * @return string words we are searching for, separated by a pipe
+	 * @return string words we are searching for, separated by 
 	 */	
-	function getFormattedWords() {
-		if ($this->isExact) {
-			$words = implode('&', $this->words);
-		} else {
-			$words = implode('|', $this->words);
+	function getFTIwords() {
+		$bits = $this->words;
+		foreach ($this->phrases as $p) {
+			$bits[] = '('.implode ('&', explode (' ', $p)).')';
 		}
-		return $words;
+		if ($this->isExact) {
+			$query = implode('&', $bits);
+		} else {
+			$query = implode('|', $bits);
+		}
+		return $query;
 	}
 }
 

@@ -98,80 +98,45 @@ class DocsSearchQuery extends SearchQuery {
 	}
 	
 	function getFTIQuery() {
-		$words = $this->getFormattedWords();
+		$words = $this->getFTIwords();
 		$group_id=$this->groupId;
 
 		$qpa = db_construct_qpa () ;
-		if(count($this->words)) {
+
+		$qpa = db_construct_qpa ($qpa,
+					 'SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description doc_groups.groupname FROM doc_data, doc_groups, doc_data_idx, to_tsquery($1) q',
+					 array (implode (' ', $words))) ;
+		$qpa = db_construct_qpa ($qpa,
+					 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ q') ;
+		if (count($this->phrases)) {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description doc_groups.groupname FROM doc_data, doc_groups, doc_data_idx, to_tsquery($1) q',
-						 array (implode (' ', $words))) ;
+						 $this->getOperator()) ;
 			$qpa = db_construct_qpa ($qpa,
-						 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ q') ;
-			if (count($this->phrases)) {
-				$qpa = db_construct_qpa ($qpa,
-							 $this->getOperator()) ;
-				$qpa = db_construct_qpa ($qpa,
-							 '(') ;
-				$qpa = $this->addMatchCondition($qpa, 'title');
-				$qpa = db_construct_qpa ($qpa,
-							 ') OR (') ;
-				$qpa = $this->addMatchCondition($qpa, 'description');
-				$qpa = db_construct_qpa ($qpa,
-							 ')') ;
-			}
+						 '(') ;
+			$qpa = $this->addMatchCondition($qpa, 'title');
 			$qpa = db_construct_qpa ($qpa,
-						 ') AND doc_data.group_id = $1',
-						 array ($group_id)) ;
-			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_groups.doc_group = ANY ($1)',
-							 db_int_array_to_any_clause ($this->sections)) ;
-			}
-			if ($this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_data.stateid IN (1, 4, 5)') ;
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_data.stateid = 1') ;
-			}
+						 ') OR (') ;
+			$qpa = $this->addMatchCondition($qpa, 'description');
 			$qpa = db_construct_qpa ($qpa,
-						 ' ORDER BY ts_rank(vectors, q) DESC, groupname ASC') ;
+						 ')') ;
+		}
+		$qpa = db_construct_qpa ($qpa,
+					 ') AND doc_data.group_id = $1',
+					 array ($group_id)) ;
+		if ($this->sections != SEARCH__ALL_SECTIONS) {
+			$qpa = db_construct_qpa ($qpa,
+						 ' AND doc_groups.doc_group = ANY ($1)',
+						 db_int_array_to_any_clause ($this->sections)) ;
+		}
+		if ($this->showNonPublic) {
+			$qpa = db_construct_qpa ($qpa,
+						 ' AND doc_data.stateid IN (1, 4, 5)') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT doc_data.docid, title, filename, description doc_groups.groupname FROM doc_data, doc_groups') ;
-			$qpa = db_construct_qpa ($qpa,
-						 'WHERE doc_data.doc_group = doc_groups.doc_group') ;
-			if (count($this->phrases)) {
-				$qpa = db_construct_qpa ($qpa,
-							 $this->getOperator()) ;
-				$qpa = db_construct_qpa ($qpa,
-							 '((') ;
-				$qpa = $this->addMatchCondition($qpa, 'title');
-				$qpa = db_construct_qpa ($qpa,
-							 ') OR (') ;
-				$qpa = $this->addMatchCondition($qpa, 'description');
-				$qpa = db_construct_qpa ($qpa,
-							 '))') ;
-			}
-			$qpa = db_construct_qpa ($qpa,
-						 ') AND doc_data.group_id = $1',
-						 array ($group_id)) ;
-			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa ($qpa,
-							 'AND doc_groups.doc_group = ANY ($1) ',
-							 db_int_array_to_any_clause ($this->sections)) ;
-			}
-			if ($this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_data.stateid IN (1, 4, 5)') ;
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND doc_data.stateid = 1') ;
-			}
-			$qpa = db_construct_qpa ($qpa,
-						 ' ORDER BY groupname') ;
+						 ' AND doc_data.stateid = 1') ;
 		}
+		$qpa = db_construct_qpa ($qpa,
+					 ' ORDER BY ts_rank(vectors, q) DESC, groupname ASC') ;
 		return $qpa ;
 	}
 

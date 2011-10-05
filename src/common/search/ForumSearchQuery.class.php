@@ -66,20 +66,12 @@ class ForumSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {
-			$words = $this->getFormattedWords();
-			
-
-			if(count($this->words)) {
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname FROM forum, users, to_tsquery($1) AS q, forum_idx as fi WHERE forum.group_forum_id = $2 AND forum.posted_by = users.user_id AND fi.msg_id = forum.msg_id AND vectors @@ q ',
-							 array ($words,
-								$this->forumId)) ;
-				$phraseOp = $this->getOperator();
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT forum.msg_id, subject, forum.post_date, users.realname FROM forum, users WHERE forum.group_forum_id = $1 AND forum.posted_by = users.user_id ',
-							 array ($this->forumId)) ;
-			}
+			$words = $this->getFTIwords();
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname FROM forum, users, to_tsquery($1) AS q, forum_idx as fi WHERE forum.group_forum_id = $2 AND forum.posted_by = users.user_id AND fi.msg_id = forum.msg_id AND vectors @@ q ',
+						 array ($words,
+							$this->forumId)) ;
+			$phraseOp = $this->getOperator();
 
 			if(count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
@@ -91,13 +83,8 @@ class ForumSearchQuery extends SearchQuery {
 				$qpa = db_construct_qpa ($qpa,
 							 ')) ') ;
 			}
-			if(count($this->words)) {
-				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY ts_rank(vectors, q) DESC') ;
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY post_date DESC') ;
-			}
+			$qpa = db_construct_qpa ($qpa,
+						 'ORDER BY ts_rank(vectors, q) DESC') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname FROM forum,users WHERE users.user_id=forum.posted_by AND ((') ;
