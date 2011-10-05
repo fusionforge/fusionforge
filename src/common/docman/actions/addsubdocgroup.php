@@ -38,7 +38,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 		session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 	}
 } else {
-	$groupname = $_POST['groupname'];
+	$groupname = trim(getStringFromRequest('groupname'));
 
 	$dg = new DocumentGroup($g);
 
