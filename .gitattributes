@@ -602,7 +602,6 @@ src/deb-specific/fileforge.pl svneol=native#text/x-perl
 src/deb-specific/fix-mailing-lists.pl svneol=native#text/x-perl
 src/deb-specific/fusionforge.rsyslog -text
 src/deb-specific/gforge-inject.pl svneol=native#text/x-perl
-src/deb-specific/gforge.logrotate -text
 src/deb-specific/group_dump_update.pl svneol=native#text/x-perl
 src/deb-specific/install-chroot.sh svneol=native#text/x-sh
 src/deb-specific/install-db.sh svneol=native#text/x-sh
@@ -632,6 +631,7 @@ src/debian/dsf-in/plugin-mailman.preinst -text
 src/debian/dsf-in/plugin-scmbzr.init.d -text
 src/debian/dsf-in/plugin.postinst -text
 src/debian/dsf-in/plugin.prerm -text
+src/debian/dsf-in/web-apache2-vhosts.logrotate -text
 src/debian/dsf-in/web-apache2-vhosts.postinst.dsfh-in -text
 src/debian/dsf-in/web-apache2-vhosts.postrm.dsfh-in -text
 src/debian/dsf-in/web-apache2.config.dsfh-in -text

@@ -1,4 +1,4 @@
-/var/log/gforge/vhosts/*/access.log {
+/var/log/@OLDPACKAGE@/vhosts/*/access.log {
        weekly
        missingok
        rotate 52
