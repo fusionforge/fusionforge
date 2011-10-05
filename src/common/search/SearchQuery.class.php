@@ -312,6 +312,15 @@ class SearchQuery extends Error {
 	}
 	
 	/**
+	 * getPhrases - returns the array containing phrases we are searching for
+	 *
+	 * @return array phrases we are searching for
+	 */
+	function getPhrases() {
+		return $this->phrases;
+	}
+	
+	/**
 	 * setSections - set the sections list
 	 *
 	 * @param $sections mixed array of sections or SEARCH__ALL_SECTIONS

@@ -182,7 +182,13 @@ class HtmlSearchRenderer extends SearchRenderer {
 		if (empty($text)) {
 			return '&nbsp;';
 		}
-		$regexp = implode($this->searchQuery->getWords(), '|');
+		$words = $this->searchQuery->getWords();
+		foreach ($this->searchQuery->getPhrases() as $p) {
+			foreach (explode(' ',$p) as $w) {
+				$words[] = $w;
+			}
+		}
+		$regexp = implode('|',$words);
 		return preg_replace('/('.str_replace('/', '\/', $regexp).')/i','<span class="selected">\1</span>', $text);
 	}
 
