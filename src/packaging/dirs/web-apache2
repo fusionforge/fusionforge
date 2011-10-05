@@ -1,7 +1,6 @@
 etc/@OLDPACKAGE@/custom
 etc/@OLDPACKAGE@/languages-local
 etc/@OLDPACKAGE@/templates
-etc/logrotate.d
 usr/share/@OLDPACKAGE@/bin
 usr/share/@OLDPACKAGE@/plugins
 usr/share/@OLDPACKAGE@/www
