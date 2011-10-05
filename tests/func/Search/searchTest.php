@@ -46,7 +46,7 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->open(ROOT) ;
 		$this->waitForPageToLoad("30000");
-		$this->type("//input[@name='words']", "description projecta");
+		$this->type("//input[@name='words']", "description public projecta");
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
@@ -55,7 +55,34 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->open(ROOT) ;
 		$this->waitForPageToLoad("30000");
-		$this->type("//input[@name='words']", "public description");
+		$this->type("//input[@name='words']", "description 'public projecta'");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("No matches found for"));
+		$this->assertFalse($this->isTextPresent("public description for ProjectA"));
+		$this->assertFalse($this->isTextPresent("public description for projectb"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "description public");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertTrue($this->isTextPresent("public description for projectb"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "'description public'");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("No matches found for"));
+		$this->assertFalse($this->isTextPresent("public description for ProjectA"));
+		$this->assertFalse($this->isTextPresent("public description for projectb"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "'public description'");
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
