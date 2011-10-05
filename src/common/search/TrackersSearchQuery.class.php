@@ -93,7 +93,7 @@ class TrackersSearchQuery extends SearchQuery {
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$qpa = db_construct_qpa ($qpa,
 							 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
-							 db_int_array_to_any_clause ($this->sections)) ;
+							 array( db_int_array_to_any_clause ($this->sections))) ;
 			}
 			if (!$this->showNonPublic) {
 				$qpa = db_construct_qpa ($qpa,
@@ -110,7 +110,7 @@ class TrackersSearchQuery extends SearchQuery {
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$qpa = db_construct_qpa ($qpa,
 							 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
-							 db_int_array_to_any_clause ($this->sections)) ;
+							 array(db_int_array_to_any_clause ($this->sections))) ;
 			}
 			if (!$this->showNonPublic) {
 				$qpa = db_construct_qpa ($qpa,
@@ -162,7 +162,7 @@ class TrackersSearchQuery extends SearchQuery {
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
 			$qpa = db_construct_qpa ($qpa,
 						 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
-						 db_int_array_to_any_clause ($this->sections)) ;
+						 array( db_int_array_to_any_clause ($this->sections))) ;
 		}
 		if (!$this->showNonPublic) {
 			$qpa = db_construct_qpa ($qpa,

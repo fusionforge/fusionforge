@@ -76,7 +76,7 @@ class DocsSearchQuery extends SearchQuery {
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$qpa = db_construct_qpa ($qpa,
 							 'AND doc_groups.doc_group = ANY ($1) ',
-							 db_int_array_to_any_clause ($this->sections)) ;
+							 array( db_int_array_to_any_clause ($this->sections))) ;
 			}
 			if ($this->showNonPublic) {
 				$qpa = db_construct_qpa ($qpa,
@@ -126,7 +126,7 @@ class DocsSearchQuery extends SearchQuery {
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
 			$qpa = db_construct_qpa ($qpa,
 						 ' AND doc_groups.doc_group = ANY ($1)',
-						 db_int_array_to_any_clause ($this->sections)) ;
+						 array( db_int_array_to_any_clause ($this->sections))) ;
 		}
 		if ($this->showNonPublic) {
 			$qpa = db_construct_qpa ($qpa,

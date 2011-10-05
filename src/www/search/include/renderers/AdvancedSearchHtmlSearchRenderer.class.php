@@ -110,7 +110,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function getResult() {
 		$html = '';
-		
+
 		if (in_array('short_forum', $this->selectedParentSections)) {
 			$renderer = new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_forum'));
 			$html .= $this->getPartResult($renderer, 'short_forum', _('Forum Search Results'));
@@ -191,9 +191,9 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$result .= $renderer->getRows();			
 			$result .= $GLOBALS['HTML']->listTableBottom();			
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> - No sections available (check your permissions)'), $query['words']).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> - No sections available (check your permissions)'), $this->words).'</p>';
 		} else {
-			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em>'), $query['words']).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em>'), $this->words).'</p>';
 		}
 		return $result;
 	}
