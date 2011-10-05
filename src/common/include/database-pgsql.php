@@ -593,6 +593,15 @@ function db_join_qpa ($old_qpa = false, $new_qpa = false) {
 	return db_construct_qpa ($old_qpa, $new_qpa[0], $new_qpa[1]) ;
 }
 
+function db_qpa_to_string ($qpa) {
+	$sql = $qpa[0];
+	$params = $qpa[1];
+	foreach ($params as $index => $value) {
+		$sql = preg_replace('/\\$'.($index+1).'(?!\d)/', "'".$value."'", $sql);
+	}
+	return $sql;
+}	
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
