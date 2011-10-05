@@ -136,8 +136,8 @@ class SearchQuery extends Error {
 			$inQuote = false;
 			foreach(explode(' ', quotemeta($words)) as $word) {
 				if($inQuote) {
-					if(substr($word, -3) == "\\\\'") {
-						$word = substr($word, 0, -3);
+					if(substr($word, -1) == "'") {
+						$word = substr($word, 0, -1);
 						$inQuote = false;
 						$phrase .= ' '.$word;
 						$this->phrases[] = $phrase;
@@ -145,14 +145,14 @@ class SearchQuery extends Error {
 						$phrase .= ' '.$word;
 					}
 				} else {
-					if(substr($word, 0, 3) == "\\\\'") {
-						$word = substr($word, 3);
+					if(substr($word, 0, 1) == "'") {
+						$word = substr($word, 1);
 						$inQuote = true;
-						if(substr($word, -3) == "\\\\'") {
+						if(substr($word, -1) == "'") {
 							// This is a special case where the phrase is just one word
-							$word = substr($word, 0, -3);
+							$word = substr($word, 0, -1);
 							$inQuote = false;
-							$this->phrases[] = $word;
+							$this->words[] = $word;
 						} else {
 							$phrase = $word;
 						}
