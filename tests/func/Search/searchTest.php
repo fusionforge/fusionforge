@@ -26,16 +26,41 @@ class Search extends FForge_SeleniumTestCase
 	function testProjectSearch()
 	{
 		$this->init();
+		$this->createProject('projectb');
+
 		$this->open(ROOT) ;
 		$this->waitForPageToLoad("30000");
 		$this->type("//input[@name='words']", "XXXXXXXXXXXXXXXXXXXXXXXXXX");
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("No matches found for"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
 		$this->type("//input[@name='words']", "projecta");
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertFalse($this->isTextPresent("public description for projectb"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "description projecta");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertFalse($this->isTextPresent("public description for projectb"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "public description");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertTrue($this->isTextPresent("public description for projectb"));
 	}
 
 }
