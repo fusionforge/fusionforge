@@ -744,7 +744,7 @@ class Artifact extends Error {
 			$user_id=user_getid();
 			$user =& user_get_object($user_id);
 			if (!$user || !is_object($user)) {
-				$this->setError('ERROR - Logged In User Bug Could Not Get User Object');
+				$this->setError('ERROR - Logged In User But Could Not Get User Object');
 				return false;
 			}
 			//	we'll store this email even though it will likely never be used - 
@@ -803,7 +803,7 @@ class Artifact extends Error {
 		return db_query_params ('INSERT INTO artifact_history(artifact_id,field_name,old_value,mod_by,entrydate) VALUES ($1,$2,$3,$4,$5)',
 					array ($this->getID(),
 					       $field_name,
-					       addslashes($old_value),
+					       $old_value,
 					       $user,
 					       $time)) ;
 	}
@@ -1334,7 +1334,7 @@ class Artifact extends Error {
 					} else {
 						continue;
 					}
-				} elseif (addslashes(db_result($resd,0,'field_data')) == htmlspecialchars($extra_fields[$efid])) {
+				} elseif (db_result($resd,0,'field_data') == htmlspecialchars($extra_fields[$efid])) {
 					//element did not change
 					continue;
 				} else {
