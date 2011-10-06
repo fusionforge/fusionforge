@@ -28,10 +28,10 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/note.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFile.class.php';
-require_once $gfwww.'tracker/include/ArtifactFileHtml.class.php';
+require_once $gfcommon.'tracker/include/ArtifactFileHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactType.class.php';
-require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
-require_once $gfwww.'tracker/include/ArtifactHtml.class.php';
+require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
+require_once $gfcommon.'tracker/include/ArtifactHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactCanned.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 
@@ -69,10 +69,10 @@ if ($group->isError()) {
 }
 
 if ($group_id && $atid) {
-	include $gfwww.'tracker/tracker.php';
+	include $gfcommon.'tracker/actions/tracker.php';
 
 } elseif ($group_id) {
-	include $gfwww.'tracker/ind.php';
+	include $gfcommon.'tracker/actions/ind.php';
 
 }
 

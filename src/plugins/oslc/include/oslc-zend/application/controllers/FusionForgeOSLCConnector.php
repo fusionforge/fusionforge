@@ -39,7 +39,7 @@ require_once($model_dir . 'fusionforge.inc.php');
 require(APPLICATION_PATH.'/../../../../../common/include/env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
+require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';

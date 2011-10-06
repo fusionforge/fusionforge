@@ -61,7 +61,7 @@ switch (getStringFromRequest('func')) {
 		if (!$ath->allowsAnon() && !session_loggedin()) {
 			exit_permission_denied('tracker');
 		}
-		include $gfwww.'tracker/add.php';
+		include $gfcommon.'tracker/actions/add.php';
 		break;
 	}
 	case 'postadd' : {
@@ -154,7 +154,7 @@ switch (getStringFromRequest('func')) {
 				}
 				$feedback .= sprintf(_('Item %s successfully created'),'[#'.$ah->getID().']');
 				$feedback .= $ext_feedback;
-				include $gfwww.'tracker/browse.php';
+				include $gfcommon.'tracker/actions/browse.php';
 			}
 		}
 		break;
@@ -246,7 +246,7 @@ switch (getStringFromRequest('func')) {
 			$feedback = _('Updated Successfully');			}
 		}
 		unset ($extra_fields_choice);
-		include $gfwww.'tracker/browse.php';
+		include $gfcommon.'tracker/actions/browse.php';
 		break;
 	}
 	case 'postmod' : {
@@ -431,7 +431,7 @@ switch (getStringFromRequest('func')) {
 					$feedback = sprintf(_('Item %s successfully updated'),'[#'.$ah->getID().']');
 				}
 				$feedback .= $ext_feedback;
-				include $gfwww.'tracker/browse.php';
+				include $gfcommon.'tracker/actions/browse.php';
 				break;
 			}
 		}
@@ -462,7 +462,7 @@ switch (getStringFromRequest('func')) {
 						$ah->setMonitor();
 						$error_msg = $ah->getErrorMessage();
 					}
-					include $gfwww.'tracker/browse.php';
+					include $gfcommon.'tracker/actions/browse.php';
 				}
 			} else {
 				$at=new ArtifactType($group,$atid);
@@ -480,7 +480,7 @@ switch (getStringFromRequest('func')) {
 						$feedback=$at->getErrorMessage();
 						$at->clearError();
 					}
-					include $gfwww.'tracker/browse.php';
+					include $gfcommon.'tracker/actions/browse.php';
 				}
 			}
 			break;
@@ -500,7 +500,7 @@ switch (getStringFromRequest('func')) {
 			} elseif ($ah->isError()) {
 				exit_error($ah->getErrorMessage(),'tracker');
 			}
-			include $gfwww.'tracker/deleteartifact.php';
+			include $gfcommon.'tracker/actions/deleteartifact.php';
 			break;
 		}
 
@@ -531,25 +531,25 @@ switch (getStringFromRequest('func')) {
 					$feedback .= _('Artifact Deleted Successfully');
 				}
 			}
-			include $gfwww.'tracker/browse.php';
+			include $gfcommon.'tracker/actions/browse.php';
 			break;
 		}
 
 
 		case 'taskmgr' : {
-			include $gfwww.'tracker/taskmgr.php';
+			include $gfcommon.'tracker/actions/taskmgr.php';
 			break;
 		}
 		case 'browse' : {
-			include $gfwww.'tracker/browse.php';
+			include $gfcommon.'tracker/actions/browse.php';
 			break;
 		}
 		case 'query' : {
-			include $gfwww.'tracker/query.php';
+			include $gfcommon.'tracker/actions/query.php';
 			break;
 		}
 		case 'downloadcsv' : {
-			include $gfwww.'tracker/downloadcsv.php';
+			include $gfcommon.'tracker/actions/downloadcsv.php';
 			break;
 		}
 		case 'download' : {
@@ -571,17 +571,17 @@ switch (getStringFromRequest('func')) {
 				exit_error($ah->getErrorMessage(),'tracker');
 			} else {
 				if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
-					include $gfwww.'tracker/mod.php';
+					include $gfcommon.'tracker/actions/mod.php';
 				} elseif (forge_check_perm ('tracker', $ath->getID(), 'tech')) {
-					include $gfwww.'tracker/mod-limited.php';
+					include $gfcommon.'tracker/actions/mod-limited.php';
 				} else {
-					include $gfwww.'tracker/detail.php';
+					include $gfcommon.'tracker/actions/detail.php';
 				}
 			}
 			break;
 		}
 		default : {
-			include $gfwww.'tracker/browse.php';
+			include $gfcommon.'tracker/actions/browse.php';
 			break;
 		}
 	}

@@ -496,6 +496,12 @@ src/common/search/DocsAllSearchQuery.class.php -text
 src/common/system_event/SystemEvent.class.php -text
 src/common/system_event/SystemEventManager.class.php -text
 src/common/tracker/ArtifactWorkflow.class.php -text
+src/common/tracker/include/ArtifactTypeFactoryHtml.class.php -text
+src/common/tracker/include/build_submission_form.php -text
+src/common/tracker/views/form-customizelist.php -text
+src/common/tracker/views/form-deleteextrafieldelement.php -text
+src/common/tracker/views/form-workflow.php -text
+src/common/tracker/views/form-workflow_roles.php -text
 src/common/valid/Rule.class.php -text
 src/common/valid/Valid.class.php -text
 src/common/valid/ValidFactory.class.php -text
@@ -5208,12 +5214,6 @@ src/www/themes/gforge/viewvc/images/text.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/up.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/view.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/styles.css -text svneol=unset#text/css
-src/www/tracker/admin/form-customizelist.php -text
-src/www/tracker/admin/form-deleteextrafieldelement.php -text
-src/www/tracker/admin/form-workflow.php -text
-src/www/tracker/admin/form-workflow_roles.php -text
-src/www/tracker/build_submission_form.php -text
-src/www/tracker/include/ArtifactTypeFactoryHtml.class.php -text
 src/www/trove/TroveCategory.class.php -text
 src/www/trove/TroveCategoryAdmin.class.php -text
 src/www/trove/TroveCategoryFactory.class.php -text

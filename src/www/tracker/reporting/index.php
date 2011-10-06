@@ -27,8 +27,8 @@ require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
-require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
-require_once $gfwww.'tracker/include/ArtifactTypeFactoryHtml.class.php';
+require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
+require_once $gfcommon.'tracker/include/ArtifactTypeFactoryHtml.class.php';
 
 if (!session_loggedin()) {
 	exit_not_logged_in();

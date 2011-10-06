@@ -26,11 +26,11 @@ require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFile.class.php';
-require_once $gfwww.'tracker/include/ArtifactFileHtml.class.php';
+require_once $gfcommon.'tracker/include/ArtifactFileHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
-require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
-require_once $gfwww.'tracker/include/ArtifactHtml.class.php';
+require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
+require_once $gfcommon.'tracker/include/ArtifactHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactCanned.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
@@ -75,7 +75,7 @@ if ($group_id && $atid) {
 		getStringFromRequest('updownorder_opt') ||
 		getStringFromRequest('post_changes_order') ||
 		getStringFromRequest('post_changes_alphaorder')) {
-		include $gfwww.'tracker/admin/updates.php';
+		include $gfcommon.'tracker/actions/admin-updates.php';
 
 	} elseif (getStringFromRequest('deletetemplate')) {
 		db_query_params ('UPDATE artifact_group_list SET custom_renderer=$1 WHERE group_artifact_id=$2',
@@ -107,42 +107,42 @@ if ($group_id && $atid) {
 
 	if ($action == 'add_extrafield') {
 
-		include $gfwww.'tracker/admin/form-addextrafield.php';
+		include $gfcommon.'tracker/views/form-addextrafield.php';
 
 	} elseif ($action == 'customize_list') {
 
-		include $gfwww.'tracker/admin/form-customizelist.php';
+		include $gfcommon.'tracker/views/form-customizelist.php';
 
 	} elseif ($action == 'workflow') {
 
-		include $gfwww.'tracker/admin/form-workflow.php';
+		include $gfcommon.'tracker/views/form-workflow.php';
 
 	} elseif ($action == 'workflow_roles') {
 
-		include $gfwww.'tracker/admin/form-workflow_roles.php';
+		include $gfcommon.'tracker/views/form-workflow_roles.php';
 
 	} elseif ($action == 'add_opt' ||
 			  $action == 'updownorder_opt' ||
 			  $action == 'post_changes_order' ||
 			  $action == 'post_changes_alphaorder') {
 
-		include $gfwww.'tracker/admin/form-addextrafieldoption.php';
+		include $gfcommon.'tracker/views/form-addextrafieldoption.php';
 
 	} elseif ($action == 'copy_opt') {
 
-		include $gfwww.'tracker/admin/form-extrafieldcopy.php';
+		include $gfcommon.'tracker/views/form-extrafieldcopy.php';
 
 	} elseif ($action == 'add_canned') {
 
-		include $gfwww.'tracker/admin/form-addcanned.php';
+		include $gfcommon.'tracker/views/form-addcanned.php';
 
 	} elseif ($action == 'clone_tracker') {
 
-		include $gfwww.'tracker/admin/form-clonetracker.php';
+		include $gfcommon.'tracker/views/form-clonetracker.php';
 
 	} elseif ($action == 'uploadtemplate') {
 
-		include $gfwww.'tracker/admin/form-uploadtemplate.php';
+		include $gfcommon.'tracker/views/form-uploadtemplate.php';
 
 	} elseif ($action == 'downloadtemplate') {
 
@@ -154,35 +154,35 @@ if ($group_id && $atid) {
 
 	} elseif ($action == 'update_canned') {
 
-		include $gfwww.'tracker/admin/form-updatecanned.php';
+		include $gfcommon.'tracker/views/form-updatecanned.php';
 
 	} elseif ($action == 'update_box') {
 
-		include $gfwww.'tracker/admin/form-updateextrafield.php';
+		include $gfcommon.'tracker/views/form-updateextrafield.php';
 
 	} elseif ($action == 'update_opt') {
 
-		include $gfwww.'tracker/admin/form-updateextrafieldelement.php';
+		include $gfcommon.'tracker/views/form-updateextrafieldelement.php';
 
 	} elseif ($action == 'delete_opt') {
 
-		include $gfwww.'tracker/admin/form-deleteextrafieldelement.php';
+		include $gfcommon.'tracker/views/form-deleteextrafieldelement.php';
 
 	} elseif ($action == 'delete') {
 
-		include $gfwww.'tracker/admin/form-deletetracker.php';
+		include $gfcommon.'tracker/views/form-deletetracker.php';
 
 	} elseif ($action == 'deleteextrafield') {
 
-		include $gfwww.'tracker/admin/form-deleteextrafield.php';
+		include $gfcommon.'tracker/views/form-deleteextrafield.php';
 
 	} elseif ($action == 'update_type') {
 
-		include $gfwww.'tracker/admin/form-updatetracker.php';
+		include $gfcommon.'tracker/views/form-updatetracker.php';
 
 	} else {
 
-		include $gfwww.'tracker/admin/tracker.php';
+		include $gfcommon.'tracker/actions/admin-tracker.php';
 
 	}
 
@@ -191,8 +191,7 @@ if ($group_id && $atid) {
 		$feedback .= _('Successfully Deleted.');
 	}
 
-	include $gfwww.'tracker/admin/ind.php';
-
+	include $gfcommon.'tracker/actions/admin-ind.php';
 }
 
 // Local Variables:
