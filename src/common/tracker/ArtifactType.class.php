@@ -604,7 +604,6 @@ class ArtifactType extends Error {
 	 */
 	function getExtraFields($types=array()) {
 		$filter=implode (',',$types);
-		$types = explode(',', $filter);
 		if (!isset($this->extra_fields["$filter"])) {
 			$this->extra_fields["$filter"] = array();
 			if (count($types)) {
