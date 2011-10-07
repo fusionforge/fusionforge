@@ -85,7 +85,7 @@ class TrackersSearchQuery extends SearchQuery {
 						 array ()) ;
 		}
 		$qpa = db_construct_qpa ($qpa, 
-					 ' WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 ',
+					 ' WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 AND artifact_message.artifact_id = artifact.artifact_id ',
 						 array ($this->groupId)) ;
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
 			$qpa = db_construct_qpa ($qpa,
