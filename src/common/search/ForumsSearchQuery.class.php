@@ -82,7 +82,7 @@ class ForumsSearchQuery extends SearchQuery {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name, forum.subject||$2||forum.body as full_string_agg FROM forum, users, forum_group_list, forum_idx, to_tsquery($1) as q ',
 						 array ($this->getFTIwords(),
-							' //// ')) ;
+							$this->field_separator)) ;
 			$qpa = db_construct_qpa ($qpa,
 						 'WHERE users.user_id = forum.posted_by AND vectors @@ q AND forum.msg_id = forum_idx.msg_id AND forum_group_list.group_forum_id = forum.group_forum_id AND forum_group_list.is_public <> 9 AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $1) ',
 						 array ($this->groupId));
@@ -109,7 +109,7 @@ class ForumsSearchQuery extends SearchQuery {
 		} else {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT x.* FROM (SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name, forum.subject||$1||forum.body as full_string_agg FROM forum, users, forum_group_list WHERE users.user_id = forum.posted_by AND forum_group_list.group_forum_id = forum.group_forum_id AND forum_group_list.is_public <> 9 AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $2) ',
-						 array (' //// ',
+						 array ($this->field_separator,
 							$this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$qpa = db_construct_qpa ($qpa,

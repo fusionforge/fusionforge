@@ -83,6 +83,9 @@ class SearchQuery extends Error {
 
 	var $phrases = array();
 
+	// Something that's hopefully not going to end up in real data
+	var $field_separator = ' ioM0Thu6_fieldseparator_kaeph9Ee ';
+
 	/**
 	 * Constructor
 	 *

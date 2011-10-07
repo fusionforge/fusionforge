@@ -70,7 +70,7 @@ class ForumSearchQuery extends SearchQuery {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname FROM forum, users, to_tsquery($1) AS q, forum_idx as fi, forum.subject||$2||forum.body as full_string_agg WHERE forum.group_forum_id = $3 AND forum.posted_by = users.user_id AND fi.msg_id = forum.msg_id AND vectors @@ q ',
 						 array ($words,
-							' //// ',
+							$this->field_separator,
 							$this->forumId)) ;
 			$phraseOp = $this->getOperator();
 
@@ -86,7 +86,7 @@ class ForumSearchQuery extends SearchQuery {
 		} else {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum.subject||$1||forum.body as full_string_agg FROM forum,users WHERE users.user_id=forum.posted_by AND (',
-						 array (' //// ')) ;
+						 array ($this->field_separator)) ;
 			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
 			$qpa = db_construct_qpa ($qpa,
 						 ') AND forum.group_forum_id=$1 GROUP BY msg_id, subject, post_date, realname',

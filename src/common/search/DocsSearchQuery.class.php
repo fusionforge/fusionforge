@@ -72,7 +72,7 @@ class DocsSearchQuery extends SearchQuery {
 			$qpa = db_construct_qpa () ;
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description AS full_string_agg FROM doc_data, doc_groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = $2',
-						 array (' //// ',
+						 array ($this->field_separator,
 							$this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$qpa = db_construct_qpa ($qpa,
@@ -103,7 +103,7 @@ class DocsSearchQuery extends SearchQuery {
 
 		$qpa = db_construct_qpa ($qpa,
 					 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, title||$1||description AS full_string_agg, doc_data_idx.vectors FROM doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q',
-					 array (' //// ',
+					 array ($this->field_separator,
 						$words)) ;
 		$qpa = db_construct_qpa ($qpa,
 					 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ $1',
