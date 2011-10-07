@@ -1954,6 +1954,7 @@ eval {
     &update_with_sql("FTI-20050530","5.1-6");
     &update_with_sql("FTI-20060130","5.1-7");
     &update_with_sql("FTI-20061025","5.1-8");
+    &update_with_sql("20111007-fti-aggregate-functions","5.1-9");
 
     ########################### INSERT HERE #################################
 
