@@ -1,8 +1,8 @@
 CREATE OR REPLACE FUNCTION ff_tsvector_add (tsvector, tsvector)
 RETURNS tsvector
-AS $$
+AS '
    SELECT $1 || $2
-$$ LANGUAGE SQL
+' LANGUAGE SQL
 IMMUTABLE
 RETURNS NULL ON NULL INPUT;
 
