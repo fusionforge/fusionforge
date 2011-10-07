@@ -158,18 +158,21 @@ class Search extends FForge_SeleniumTestCase
 		$this->type("details", "brebis outremanchienne");
 		$this->clickAndWait("//form[@id='trackeraddform']//input[@type='submit']");
 		$this->clickAndWait("link=Bug1 boustrophédon");
-		$this->type("details", 'Ceci était une référence au « Génie des Alpages »');
+		$this->type("details", 'Ceci était une référence au « Génie des Alpages », rien à voir avec Charlie');
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Bug1 boustrophédon");
 		$this->type("details", 'This is the needle');
 		$this->clickAndWait("submit");
 
 		$this->clickAndWait("link=Tracker");
-		$this->clickAndWait("link=Bugs");
+		$this->clickAndWait("link=Patches");
 		$this->clickAndWait("link=Submit New");
 		$this->type("summary", "Bug2 gratapouêt");
 		$this->type("details", "cthulhu was here");
 		$this->clickAndWait("//form[@id='trackeraddform']//input[@type='submit']");
+		$this->clickAndWait("link=Bug2 gratapouêt");
+		$this->type("details", 'Charlie was here too');
+		$this->clickAndWait("submit");
 
 		// Search in trackers
 
@@ -202,6 +205,32 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("No matches found for"));
 		$this->assertFalse($this->isTextPresent("Bug1"));
+		$this->assertFalse($this->isTextPresent("Bug2"));
+
+		// Search in one particular tracker
+		
+		$this->select("type_of_search", "label=This project's trackers");
+		$this->type("//input[@name='words']", "charlie");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Bug1"));
+		$this->assertTrue($this->isTextPresent("Bug2"));
+
+		$this->clickAndWait("link=Tracker");
+		$this->clickAndWait("link=Bugs");
+		$this->select("type_of_search", "label=Bugs");
+		$this->type("//input[@name='words']", "charlie");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Bug1"));
+		$this->assertFalse($this->isTextPresent("Bug2"));
+
+		$this->clickAndWait("link=Bugs");
+		$this->select("type_of_search", "label=Bugs");
+		$this->type("//input[@name='words']", "charlie boustrophédon");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Bug1"));
 		$this->assertFalse($this->isTextPresent("Bug2"));
 
 		// Create some tasks
@@ -253,12 +282,12 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("link=Start New Thread");
 		$this->waitForPageToLoad("30000");
 		$this->type("subject", "Message1 in a bottle");
-		$this->type("body", "ninetynine of them on the wall");
+		$this->type("body", "ninetynine of them on Charlie's wall");
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Message1 in a bottle");
 		$this->clickAndWait("link=[ reply ]");
 		$this->type("subject", "Message2 in a bottle");
-		$this->type("body", "ninetyeight of them in the fridge");
+		$this->type("body", "ninetyeight of them in Charlie's fridge");
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Message1 in a bottle");
 		$this->clickAndWait("link=[ reply ]");
@@ -266,10 +295,12 @@ class Search extends FForge_SeleniumTestCase
 		$this->type("body", "and yet another needle for the forums");
 		$this->clickAndWait("submit");
 
+		$this->clickAndWait("link=Forums");
+		$this->clickAndWait("link=developers-discussion");
 		$this->click("link=Start New Thread");
 		$this->waitForPageToLoad("30000");
 		$this->type("subject", "Message4 in an envelope");
-		$this->type("body", "not the same thing as an antilope (and different thread anyway)");
+		$this->type("body", "not the same thing as an antilope (and different thread anyway) (but still related to Charlie)");
 		$this->clickAndWait("submit");
 
 		// Search in Forums
@@ -290,6 +321,40 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("Message1"));
 		$this->assertTrue($this->isTextPresent("Message2"));
 		$this->assertFalse($this->isTextPresent("Message3"));
+		$this->assertFalse($this->isTextPresent("Message4"));
+
+		// Search in one particular forum
+
+		$this->select("type_of_search", "label=This project's forums");
+		$this->type("//input[@name='words']", "charlie");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Message1"));
+		$this->assertTrue($this->isTextPresent("Message2"));
+		$this->assertFalse($this->isTextPresent("Message3"));
+		$this->assertTrue($this->isTextPresent("Message4"));
+
+		$this->clickAndWait("link=Forums");
+		$this->clickAndWait("link=open-discussion");
+		$this->select("type_of_search", "label=This forum");
+		$this->type("//input[@name='words']", "charlie");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Message1"));
+		$this->assertTrue($this->isTextPresent("Message2"));
+		$this->assertFalse($this->isTextPresent("Message3"));
+		$this->assertFalse($this->isTextPresent("Message4"));
+
+		$this->clickAndWait("link=Forums");
+		$this->clickAndWait("link=open-discussion");
+		$this->select("type_of_search", "label=This forum");
+		$this->type("//input[@name='words']", "charlie fridge");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		// Only one result => threaded view => need to check on bodies, not subjects
+		$this->assertFalse($this->isTextPresent("wall"));
+		$this->assertTrue($this->isTextPresent("fridge"));
+		$this->assertFalse($this->isTextPresent("needle"));
 		$this->assertFalse($this->isTextPresent("Message4"));
 
 		// Create some documents

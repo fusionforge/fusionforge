@@ -68,7 +68,7 @@ class ForumSearchQuery extends SearchQuery {
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFTIwords();
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname FROM forum, users, to_tsquery($1) AS q, forum_idx as fi, forum.subject||$2||forum.body as full_string_agg WHERE forum.group_forum_id = $3 AND forum.posted_by = users.user_id AND fi.msg_id = forum.msg_id AND vectors @@ q ',
+						 'SELECT x.* FROM (SELECT forum.msg_id, ts_headline(forum.subject, $1::tsquery) AS subject, forum.post_date, users.realname, forum.subject||$2||forum.body as full_string_agg, forum_idx.vectors FROM forum, users, to_tsquery($1) AS q, forum_idx WHERE forum.group_forum_id = $3 AND forum.posted_by = users.user_id AND forum_idx.msg_id = forum.msg_id GROUP BY forum.msg_id, subject, post_date, realname, forum_idx.vectors) AS x WHERE vectors @@ $1::tsquery ',
 						 array ($words,
 							$this->field_separator,
 							$this->forumId)) ;
@@ -82,15 +82,16 @@ class ForumSearchQuery extends SearchQuery {
 							 ') ') ;
 			}
 			$qpa = db_construct_qpa ($qpa,
-						 'ORDER BY ts_rank(vectors, q) DESC') ;
+						 'ORDER BY ts_rank(vectors, $1) DESC',
+						 array($words)) ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum.subject||$1||forum.body as full_string_agg FROM forum,users WHERE users.user_id=forum.posted_by AND (',
-						 array ($this->field_separator)) ;
+						 'SELECT x.* FROM (SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum.subject||$1||forum.body as full_string_agg FROM forum,users WHERE users.user_id=forum.posted_by AND forum.group_forum_id=$2 GROUP BY msg_id, subject, post_date, realname) AS x WHERE ',
+						 array ($this->field_separator,
+							$this->forumId)) ;
 			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
 			$qpa = db_construct_qpa ($qpa,
-						 ') AND forum.group_forum_id=$1 GROUP BY msg_id, subject, post_date, realname',
-						 array ($this->forumId)) ;
+						 ' ');
 		}
 		return $qpa ;
 	}
