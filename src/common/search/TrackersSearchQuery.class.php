@@ -67,14 +67,14 @@ class TrackersSearchQuery extends SearchQuery {
 	function getQuery() {
 		$qpa = db_construct_qpa () ;
 
-		$words = $this->getFTIwords();
-
 		$qpa = db_construct_qpa ($qpa,
 					 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, artifact.summary||$1||artifact.details||$1||coalesce(string_agg(artifact_message.body, $1), $2) as full_string_agg',
 						 array (' //// ', ' '));
 		if (forge_get_config('use_fti')) {
+			$words = $this->getFTIwords();
 			$qpa = db_construct_qpa ($qpa,
-						 ', (artifact_idx.vectors || coalesce(ff_tsvector_agg(artifact_message_idx.vectors), $2::tsvector)) AS full_vector_agg');
+						 ', (artifact_idx.vectors || coalesce(ff_tsvector_agg(artifact_message_idx.vectors), $1::tsvector)) AS full_vector_agg',
+						 array (''));
 						 }
 		$qpa = db_construct_qpa ($qpa, 
 					 ' FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list',
