@@ -104,8 +104,8 @@ class DocsSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa () ;
 
 		$qpa = db_construct_qpa ($qpa,
-					 'SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description doc_groups.groupname FROM doc_data, doc_groups, doc_data_idx, to_tsquery($1) q',
-					 array (implode (' ', $words))) ;
+					 'SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname FROM doc_data, doc_groups, doc_data_idx, to_tsquery($1) AS q',
+					 array ($words)) ;
 		$qpa = db_construct_qpa ($qpa,
 					 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ q') ;
 		if (count($this->phrases)) {

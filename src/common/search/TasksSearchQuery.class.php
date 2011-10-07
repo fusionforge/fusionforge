@@ -86,9 +86,11 @@ class TasksSearchQuery extends SearchQuery {
 				$qpa = db_construct_qpa ($qpa,
 							 'AND project_group_list.is_public = 1 ') ;
 			}
+			$qpa = db_construct_qpa ($qpa,
+						 'AND vectors @@ q ') ;
 			if (count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'AND (vectors @@ q AND (') ;
+							 'AND ((') ;
 				$qpa = $this->addMatchCondition($qpa, 'summary');
 				$qpa = db_construct_qpa ($qpa,
 							 ') OR (') ;
