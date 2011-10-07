@@ -187,9 +187,8 @@ class Search extends FForge_SeleniumTestCase
 		$this->select("type_of_search", "label=This project's trackers");
 		$this->type("//input[@name='words']", "boustrophédon brebis alpages");
 		$this->clickAndWait("//input[@name='Search']");
-		// Searches should work across fields
-		// $this->assertFalse($this->isTextPresent("No matches found for"));
-		// $this->assertTrue($this->isTextPresent("Bug1"));
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Bug1"));
 
 		$this->select("type_of_search", "label=This project's trackers");
 		$this->type("//input[@name='words']", "'boustrophédon brebis'");
@@ -242,9 +241,8 @@ class Search extends FForge_SeleniumTestCase
 		$this->select("type_of_search", "label=This project's tasks");
 		$this->type("//input[@name='words']", "brain pinky");
 		$this->clickAndWait("//input[@name='Search']");
-		// Searches should work across fields
-		// $this->assertFalse($this->isTextPresent("No matches found for"));
-		// $this->assertTrue($this->isTextPresent("Task1"));
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Task1"));
 
 		// Post some messages in a forum
 		
@@ -287,12 +285,11 @@ class Search extends FForge_SeleniumTestCase
 		$this->select("type_of_search", "label=This project's forums");
 		$this->type("//input[@name='words']", "bottle fridge");
 		$this->clickAndWait("//input[@name='Search']");
-		// Searches should work across fields
-		// $this->assertFalse($this->isTextPresent("No matches found for"));
-		// $this->assertFalse($this->isTextPresent("Message1"));
-		// $this->assertTrue($this->isTextPresent("Message2"));
-		// $this->assertFalse($this->isTextPresent("Message3"));
-		// $this->assertFalse($this->isTextPresent("Message4"));
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertFalse($this->isTextPresent("Message1"));
+		$this->assertTrue($this->isTextPresent("Message2"));
+		$this->assertFalse($this->isTextPresent("Message3"));
+		$this->assertFalse($this->isTextPresent("Message4"));
 
 		// Create some documents
 
@@ -324,10 +321,9 @@ class Search extends FForge_SeleniumTestCase
 		$this->select("type_of_search", "label=This project's documents");
 		$this->type("//input[@name='words']", "vladimir jenkins");
 		$this->clickAndWait("//input[@name='Search']");
-		// Searches should work across fields
-		// $this->assertFalse($this->isTextPresent("No matches found for"));
-		// $this->assertTrue($this->isTextPresent("Doc1"));
-		// $this->assertTrue($this->isTextPresent("Doc2"));
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Doc1"));
+		$this->assertTrue($this->isTextPresent("Doc2"));
 
 		// Create some news
 
@@ -355,9 +351,8 @@ class Search extends FForge_SeleniumTestCase
 		$this->select("type_of_search", "label=This project's news");
 		$this->type("//input[@name='words']", "daily newspaper");
 		$this->clickAndWait("//input[@name='Search']");
-		// Searches should work across fields
-		// $this->assertFalse($this->isTextPresent("No matches found for"));
-		// $this->assertTrue($this->isTextPresent("News1"));
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("News1"));
 
 		// Search in entire project
 
@@ -367,8 +362,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
 		$this->assertFalse($this->isTextPresent("Bug2"));
-		// Task search should search in messages
-		// $this->assertTrue($this->isTextPresent("Task1"));
+		$this->assertTrue($this->isTextPresent("Task1"));
 		$this->assertFalse($this->isTextPresent("Task2"));
 		$this->assertFalse($this->isTextPresent("Message1"));
 		$this->assertFalse($this->isTextPresent("Message2"));
