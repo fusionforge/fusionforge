@@ -239,7 +239,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("Task1"));
 
 		$this->select("type_of_search", "label=This project's tasks");
-		$this->type("//input[@name='words']", "brain pinky");
+		$this->type("//input[@name='words']", "brain pinky needle");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("Task1"));
@@ -323,7 +323,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("Doc1"));
-		$this->assertTrue($this->isTextPresent("Doc2"));
+		$this->assertFalse($this->isTextPresent("Doc2"));
 
 		// Create some news
 
