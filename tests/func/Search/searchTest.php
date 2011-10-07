@@ -142,10 +142,11 @@ class Search extends FForge_SeleniumTestCase
 	{
 		$this->populateStandardTemplate();
 		$this->createProject('projecta');
-		$this->createProject('projectb');
 
-		$this->createUser('piperade');
-		$this->createUser('cassoulet');
+		// TODO: check that search results vary according to what items are visible to the user
+		// $this->createProject('projectb');
+		// $this->createUser('piperade');
+		// $this->createUser('cassoulet');
 
 		// Prepare some tracker items
 
