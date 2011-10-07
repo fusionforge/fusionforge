@@ -92,7 +92,7 @@ class Search extends FForge_SeleniumTestCase
 
 	function testPeopleSearch()
 	{
-		$this->switchUser('admin');
+		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->createUser('ratatouille');
 		$this->createUser('tartiflette');
 
@@ -136,6 +136,248 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("ratatouille Lastname"));
 		$this->assertTrue($this->isTextPresent("tartiflette Lastname"));
 
+	}
+	
+	function testSearchInTools()
+	{
+		$this->populateStandardTemplate();
+		$this->createProject('projecta');
+		$this->createProject('projectb');
+
+		$this->createUser('piperade');
+		$this->createUser('cassoulet');
+
+		// Prepare some tracker items
+
+		$this->gotoProject('projecta');
+		$this->clickAndWait("link=Tracker");
+		$this->clickAndWait("link=Bugs");
+		$this->clickAndWait("link=Submit New");
+		$this->type("summary", "Bug1 boustrophédon");
+		$this->type("details", "brebis outremanchienne");
+		$this->clickAndWait("//form[@id='trackeraddform']//input[@type='submit']");
+		$this->clickAndWait("link=Bug1 boustrophédon");
+		$this->type("details", 'Ceci était une référence au « Génie des Alpages »');
+		$this->clickAndWait("submit");
+		$this->clickAndWait("link=Bug1 boustrophédon");
+		$this->type("details", 'This is the needle');
+		$this->clickAndWait("submit");
+
+		$this->clickAndWait("link=Tracker");
+		$this->clickAndWait("link=Bugs");
+		$this->clickAndWait("link=Submit New");
+		$this->type("summary", "Bug2 gratapouêt");
+		$this->type("details", "cthulhu was here");
+		$this->clickAndWait("//form[@id='trackeraddform']//input[@type='submit']");
+
+		// Search in trackers
+
+		$this->select("type_of_search", "label=This project's trackers");
+		$this->type("//input[@name='words']", "brebis");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Bug1"));
+
+		$this->select("type_of_search", "label=This project's trackers");
+		$this->type("//input[@name='words']", "alpages");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Bug1"));
+
+		$this->select("type_of_search", "label=This project's trackers");
+		$this->type("//input[@name='words']", "boustrophédon brebis alpages");
+		$this->clickAndWait("//input[@name='Search']");
+		// Searches should work across fields
+		// $this->assertFalse($this->isTextPresent("No matches found for"));
+		// $this->assertTrue($this->isTextPresent("Bug1"));
+
+		$this->select("type_of_search", "label=This project's trackers");
+		$this->type("//input[@name='words']", "'boustrophédon brebis'");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("No matches found for"));
+		$this->assertFalse($this->isTextPresent("Bug1"));
+
+		$this->select("type_of_search", "label=This project's trackers");
+		$this->type("//input[@name='words']", "boustrophédon cthulhu");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("No matches found for"));
+		$this->assertFalse($this->isTextPresent("Bug1"));
+		$this->assertFalse($this->isTextPresent("Bug2"));
+
+		// Create some tasks
+
+		$this->gotoProject('projecta');
+		$this->clickAndWait("link=Tasks");
+		$this->clickAndWait("link=To Do");
+		$this->clickAndWait("link=Add Task");
+		$this->type("summary", "Task1 the brain");
+		$this->type("details", "The same thing we do every night, Pinky—try to take over the world!");
+		$this->type("hours", "199");
+		$this->clickAndWait("submit");
+		
+		$this->clickAndWait("link=Task1 the brain");
+		$this->type("details", 'This is the needle for tasks');
+		$this->clickAndWait("submit");
+
+		$this->clickAndWait("link=Add Task");
+		$this->type("summary", "Task2 world peace");
+		$this->type("details", "Otherwise WW4 will be fought with sticks");
+		$this->type("hours", "199");
+		$this->clickAndWait("submit");
+			      
+		// Search in Tasks
+
+		$this->select("type_of_search", "label=This project's tasks");
+		$this->type("//input[@name='words']", "pinky");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Task1"));
+
+		$this->select("type_of_search", "label=This project's tasks");
+		$this->type("//input[@name='words']", "cortex");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("No matches found for"));
+		$this->assertFalse($this->isTextPresent("Task1"));
+
+		$this->select("type_of_search", "label=This project's tasks");
+		$this->type("//input[@name='words']", "brain pinky");
+		$this->clickAndWait("//input[@name='Search']");
+		// Searches should work across fields
+		// $this->assertFalse($this->isTextPresent("No matches found for"));
+		// $this->assertTrue($this->isTextPresent("Task1"));
+
+		// Post some messages in a forum
+		
+		$this->gotoProject('projecta');
+		$this->clickAndWait("link=Forums");
+		$this->clickAndWait("link=open-discussion");
+		$this->click("link=Start New Thread");
+		$this->waitForPageToLoad("30000");
+		$this->type("subject", "Message1 in a bottle");
+		$this->type("body", "ninetynine of them on the wall");
+		$this->clickAndWait("submit");
+		$this->clickAndWait("link=Message1 in a bottle");
+		$this->clickAndWait("link=[ reply ]");
+		$this->type("subject", "Message2 in a bottle");
+		$this->type("body", "ninetyeight of them in the fridge");
+		$this->clickAndWait("submit");
+		$this->clickAndWait("link=Message1 in a bottle");
+		$this->clickAndWait("link=[ reply ]");
+		$this->type("subject", "Message3 in a bottle");
+		$this->type("body", "and yet another needle for the forums");
+		$this->clickAndWait("submit");
+
+		$this->click("link=Start New Thread");
+		$this->waitForPageToLoad("30000");
+		$this->type("subject", "Message4 in an envelope");
+		$this->type("body", "not the same thing as an antilope (and diferent thread anyway)");
+		$this->clickAndWait("submit");
+
+		// Search in Forums
+
+		$this->select("type_of_search", "label=This project's forums");
+		$this->type("//input[@name='words']", "bottle");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Message1"));
+		$this->assertTrue($this->isTextPresent("Message2"));
+		$this->assertTrue($this->isTextPresent("Message3"));
+		$this->assertFalse($this->isTextPresent("Message4"));
+
+		$this->select("type_of_search", "label=This project's forums");
+		$this->type("//input[@name='words']", "bottle fridge");
+		$this->clickAndWait("//input[@name='Search']");
+		// Searches should work across fields
+		// $this->assertFalse($this->isTextPresent("No matches found for"));
+		// $this->assertFalse($this->isTextPresent("Message1"));
+		// $this->assertTrue($this->isTextPresent("Message2"));
+		// $this->assertFalse($this->isTextPresent("Message3"));
+		// $this->assertFalse($this->isTextPresent("Message4"));
+
+		// Create some documents
+
+		$this->gotoProject('projecta');
+		$this->clickAndWait("link=Docs");
+		$this->clickAndWait("link=Submit new documentation");
+		$this->type("title", "Doc1 Vladimir");
+		$this->type("description", "Jenkins buildbot");
+		$this->click("//input[@name='type' and @value='pasteurl']");
+		$this->type("file_url", "http://buildbot3.fusionforge.org/");
+		$this->clickAndWait("submit");
+
+		$this->clickAndWait("link=Submit new documentation");
+		$this->type("title", "Doc2 Astromir");
+		$this->type("description", "Hudson (the needle)");
+		$this->click("//input[@name='type' and @value='pasteurl']");
+		$this->type("file_url", "http://buildbot.fusionforge.org/");
+		$this->clickAndWait("submit");
+
+		// Search in Documents
+
+		$this->select("type_of_search", "label=This project's documents");
+		$this->type("//input[@name='words']", "jenkins");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("Doc1"));
+		$this->assertFalse($this->isTextPresent("Doc2"));
+
+		$this->select("type_of_search", "label=This project's documents");
+		$this->type("//input[@name='words']", "vladimir jenkins");
+		$this->clickAndWait("//input[@name='Search']");
+		// Searches should work across fields
+		// $this->assertFalse($this->isTextPresent("No matches found for"));
+		// $this->assertTrue($this->isTextPresent("Doc1"));
+		// $this->assertTrue($this->isTextPresent("Doc2"));
+
+		// Create some news
+
+		$this->gotoProject('projecta');
+		$this->clickAndWait("link=News");
+		$this->clickAndWait("link=Submit");
+		$this->type("summary", "News1 daily planet");
+		$this->type("details", "Clark Kent's newspaper");
+		$this->clickAndWait("submit");
+
+		$this->clickAndWait("link=Submit");
+		$this->type("summary", "News2 usenet");
+		$this->type("details", "alt.sysadmin.recovery (needle)");
+		$this->clickAndWait("submit");
+		$this->clickAndWait("link=News");
+
+		// Search in news
+
+		$this->select("type_of_search", "label=This project's news");
+		$this->type("//input[@name='words']", "sysadmin");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("News2"));
+
+		$this->select("type_of_search", "label=This project's news");
+		$this->type("//input[@name='words']", "daily newspaper");
+		$this->clickAndWait("//input[@name='Search']");
+		// Searches should work across fields
+		// $this->assertFalse($this->isTextPresent("No matches found for"));
+		// $this->assertTrue($this->isTextPresent("News1"));
+
+		// Search in entire project
+
+		$this->gotoProject('projecta');
+		$this->select("type_of_search", "label=Search the entire project");
+		$this->type("//input[@name='words']", "needle");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("Bug1"));
+		$this->assertFalse($this->isTextPresent("Bug2"));
+		// Task search should search in messages
+		// $this->assertTrue($this->isTextPresent("Task1"));
+		$this->assertFalse($this->isTextPresent("Task2"));
+		$this->assertFalse($this->isTextPresent("Message1"));
+		$this->assertFalse($this->isTextPresent("Message2"));
+		$this->assertTrue($this->isTextPresent("Message3"));
+		$this->assertFalse($this->isTextPresent("Message4"));
+		$this->assertFalse($this->isTextPresent("Doc1"));
+		$this->assertTrue($this->isTextPresent("Doc2"));
+		$this->assertFalse($this->isTextPresent("News1"));
+		$this->assertTrue($this->isTextPresent("News2"));
 	}
 
 }
