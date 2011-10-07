@@ -4939,6 +4939,7 @@ src/www/search/include/engines/TrackersGroupSearchEngine.class.php -text svneol=
 src/www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php -text
 src/www/softwaremap/full_list.php -text
 src/www/softwaremap/tag_cloud.php -text
+src/www/support/tracker.php -text
 src/www/tabber/example-ajax-0.html -text
 src/www/tabber/example-ajax-1.html -text
 src/www/tabber/example-ajax-2.html -text
