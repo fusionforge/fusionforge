@@ -586,6 +586,7 @@ src/db/20110408-anonymous-read-news.sql -text
 src/db/20110414-move-news-forums-to-own-project.sql -text
 src/db/20110701-gforge-5.1.sql -text
 src/db/20110728-fix-mta-lists-view.sql -text
+src/db/20111007-add-fti-for-task-messages.sql -text
 src/db/20111007-fti-aggregate-functions.sql -text
 src/db/FTI-20061025.sql -text
 src/db/SQL_2.6/replicate.sh svneol=native#text/x-sh
