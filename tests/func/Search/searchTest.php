@@ -270,7 +270,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("link=Start New Thread");
 		$this->waitForPageToLoad("30000");
 		$this->type("subject", "Message4 in an envelope");
-		$this->type("body", "not the same thing as an antilope (and diferent thread anyway)");
+		$this->type("body", "not the same thing as an antilope (and different thread anyway)");
 		$this->clickAndWait("submit");
 
 		// Search in Forums
@@ -340,7 +340,7 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->clickAndWait("link=Submit");
 		$this->type("summary", "News2 usenet");
-		$this->type("details", "alt.sysadmin.recovery (needle)");
+		$this->type("details", "alt sysadmin recovery (needle)");
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=News");
 
