@@ -65,63 +65,72 @@ class TasksSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */
 	function getQuery() {
-
-
 		$qpa = db_construct_qpa () ;
-		
+
+		$qpa = db_construct_qpa ($qpa,
+					 'SELECT x.* FROM (SELECT project_task.project_task_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task.summary||$1||project_task.details||$1||coalesce(string_agg(project_messages.body, $1), $2) as full_string_agg',
+					 array (' //// ', ' '));
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFTIwords();
-			
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT project_task.project_task_id, project_task.percent_complete, ts_headline(project_task.summary, q) AS summary, project_task.start_date,project_task.end_date,users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id FROM project_task, users, project_group_list, to_tsquery($2) AS q, project_task_idx WHERE project_task.created_by = users.user_id AND project_task.project_task_id = project_task_idx.project_task_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id=$3 ',
-						 array (' ',
-							$words,
-							$this->groupId)) ;
-			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa ($qpa,
-							 'AND project_group_list.group_project_id = ANY ($1) ',
-							 array(db_int_array_to_any_clause ($this->sections))) ;
-			}
-			if (!$this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
-							 'AND project_group_list.is_public = 1 ') ;
-			}
+						 ', (project_task_idx.vectors || coalesce(ff_tsvector_agg(project_messages_idx.vectors), $1::tsvector)) AS full_vector_agg',
+						 array (''));
+		}
+		$qpa = db_construct_qpa ($qpa, 
+					 ' FROM project_task LEFT OUTER JOIN project_messages USING (project_task_id), users, project_group_list',
+					 array ()) ;
+		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa, 
+						 ', project_task_idx, project_messages_idx',
+						 array ()) ;
+		}
+		$qpa = db_construct_qpa ($qpa, 
+					 ' WHERE project_task.created_by = users.user_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $1 AND project_messages.project_task_id = project_task.project_task_id ',
+					 array ($this->groupId)) ;
+		if ($this->sections != SEARCH__ALL_SECTIONS) {
 			$qpa = db_construct_qpa ($qpa,
-						 'AND vectors @@ q ') ;
+						 'AND project_group_list.group_project_id = ANY ($1) ',
+						 array (db_int_array_to_any_clause ($this->sections))) ;
+		}
+		if (!$this->showNonPublic) {
+			$qpa = db_construct_qpa ($qpa,
+						 'AND project_group_list.is_public = 1 ') ;
+		}
+
+		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa, 
+						 'AND project_task.project_task_id = project_task_idx.project_task_id AND project_messages.project_message_id = project_messages_idx.id ',
+						 array ()) ;
+		}
+		$qpa = db_construct_qpa ($qpa,
+					 'GROUP BY project_task.project_task_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name') ;
+		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa, 
+						 ', project_task_idx.vectors',
+						 array ()) ;
+		}
+		$qpa = db_construct_qpa ($qpa, 
+					 ') AS x WHERE ') ;
+
+		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa,
+						 'full_vector_agg @@ $1 ',
+						 array($words));
 			if (count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'AND ((') ;
-				$qpa = $this->addMatchCondition($qpa, 'summary');
+							 'AND (') ;
+				$qpa = $this->addMatchCondition ($qpa, 'x.full_string_agg') ;
 				$qpa = db_construct_qpa ($qpa,
-							 ') OR (') ;
-				$qpa = $this->addMatchCondition($qpa, 'details');
-				$qpa = db_construct_qpa ($qpa,
-							 ')) ') ;
+							 ') ') ;
 			}
 			$qpa = db_construct_qpa ($qpa,
-						 'ORDER BY project_group_list.project_name, ts_rank(vectors, q) DESC, project_task.project_task_id') ;
+						 'ORDER BY ts_rank(full_vector_agg, $1) DESC',
+						 array($words)) ;
+			
 		} else {
+			$qpa = $this->addIlikeCondition ($qpa, 'x.full_string_agg') ;
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT project_task.project_task_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id FROM project_task, users, project_group_list WHERE project_task.created_by = users.user_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $2 ',
-						 array (' ',
-							$this->groupId)) ;
-			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa ($qpa,
-							 'AND project_group_list.group_project_id = ANY ($1) ',
-							 array( db_int_array_to_any_clause ($this->sections))) ;
-			}
-			if (!$this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
-							 'AND project_group_list.is_public = 1 ') ;
-			}
-			$qpa = db_construct_qpa ($qpa,
-						 ' AND ((') ;
-			$qpa = $this->addIlikeCondition ($qpa, 'summary') ;
-			$qpa = db_construct_qpa ($qpa,
-						 ') OR (') ;
-			$qpa = $this->addIlikeCondition ($qpa, 'details') ;
-			$qpa = db_construct_qpa ($qpa,
-						 ')) ORDER BY project_group_list.project_name, project_task.project_task_id') ;
+						 ' ORDER BY x.project_name, x.project_task_id') ;
 		}
 		return $qpa ;
 	}
