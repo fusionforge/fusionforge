@@ -71,8 +71,9 @@ class DocsSearchQuery extends SearchQuery {
 		} else {
 			$qpa = db_construct_qpa () ;
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname FROM doc_data, doc_groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = $1',
-						 array ($this->groupId)) ;
+						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description AS full_string_agg FROM doc_data, doc_groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = $2',
+						 array (' //// ',
+							$this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$qpa = db_construct_qpa ($qpa,
 							 'AND doc_groups.doc_group = ANY ($1) ',
@@ -86,13 +87,10 @@ class DocsSearchQuery extends SearchQuery {
 							 ' AND doc_data.stateid = 1') ;
 			}
 			$qpa = db_construct_qpa ($qpa,
-						 ' AND ((') ;
-			$qpa = $this->addIlikeCondition ($qpa, 'title') ;
+						 ') AS x WHERE ') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
 			$qpa = db_construct_qpa ($qpa,
-						 ') OR (') ;
-			$qpa = $this->addIlikeCondition ($qpa, 'description') ;
-			$qpa = db_construct_qpa ($qpa,
-						 ')) ORDER BY doc_groups.groupname, doc_data.docid') ;
+						 ' ORDER BY x.groupname, x.docid') ;
 		}
 		return $qpa;
 	}
@@ -104,22 +102,12 @@ class DocsSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa () ;
 
 		$qpa = db_construct_qpa ($qpa,
-					 'SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname FROM doc_data, doc_groups, doc_data_idx, to_tsquery($1) AS q',
-					 array ($words)) ;
+					 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, title||$1||description AS full_string_agg, doc_data_idx.vectors FROM doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q',
+					 array (' //// ',
+						$words)) ;
 		$qpa = db_construct_qpa ($qpa,
-					 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ q') ;
-		if (count($this->phrases)) {
-			$qpa = db_construct_qpa ($qpa,
-						 $this->getOperator()) ;
-			$qpa = db_construct_qpa ($qpa,
-						 '(') ;
-			$qpa = $this->addMatchCondition($qpa, 'title');
-			$qpa = db_construct_qpa ($qpa,
-						 ') OR (') ;
-			$qpa = $this->addMatchCondition($qpa, 'description');
-			$qpa = db_construct_qpa ($qpa,
-						 ')') ;
-		}
+					 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ $1',
+					 array ($words)) ;
 		$qpa = db_construct_qpa ($qpa,
 					 ') AND doc_data.group_id = $1',
 					 array ($group_id)) ;
@@ -136,7 +124,14 @@ class DocsSearchQuery extends SearchQuery {
 						 ' AND doc_data.stateid = 1') ;
 		}
 		$qpa = db_construct_qpa ($qpa,
-					 ' ORDER BY ts_rank(vectors, q) DESC, groupname ASC') ;
+					 ') AS x ') ;
+		if (count($this->phrases)) {
+			$qpa = db_construct_qpa ('WHERE ') ;
+			$qpa = $this->addMatchCondition($qpa, 'full_string_agg');
+		}
+		$qpa = db_construct_qpa ($qpa,
+					 ' ORDER BY ts_rank(vectors, $1) DESC, groupname ASC',
+					 array($words)) ;
 		return $qpa ;
 	}
 
