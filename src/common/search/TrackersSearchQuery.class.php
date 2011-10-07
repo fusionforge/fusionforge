@@ -71,11 +71,9 @@ class TrackersSearchQuery extends SearchQuery {
 
 		if (forge_get_config('use_fti')) {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT DISTINCT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, (ts_rank(artifact_idx.vectors, q)+ts_rank(artifact_message_idx.vectors, q)) AS rank FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list, to_tsquery($1) q, artifact_idx, artifact_message_idx WHERE users.user_id = artifact.submitted_by AND artifact_idx.artifact_id = artifact.artifact_id AND artifact_message_idx.id = artifact_message.id AND artifact_message_idx.artifact_id = artifact_message_idx.artifact_id AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $2 ',
+						 'SELECT DISTINCT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, (ts_rank(artifact_idx.vectors, q)+ts_rank(artifact_message_idx.vectors, q)) AS rank FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list, to_tsquery($1) q, artifact_idx, artifact_message_idx WHERE users.user_id = artifact.submitted_by AND artifact_idx.artifact_id = artifact.artifact_id AND artifact_message_idx.id = artifact_message.id AND artifact_message_idx.artifact_id = artifact_message_idx.artifact_id AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $2 AND (artifact_idx.vectors @@ q OR artifact_message_idx.vectors @@ q)',
 						 array ($this->getFTIwords(),
 							$this->groupId)) ;
-			$tsmatch = "(artifact_idx.vectors @@ q OR artifact_message_idx.vectors @@ q)";
-			$phraseOp = $this->getOperator();
 
 			if (count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
@@ -100,7 +98,7 @@ class TrackersSearchQuery extends SearchQuery {
 							 'AND artifact_group_list.is_public = 1 ') ;
 			}
 			$qpa = db_construct_qpa ($qpa,
-						 ') x') ;
+						 ') AS x ') ;
 			$qpa = db_construct_qpa ($qpa,
 						 'ORDER BY rank DESC') ;
 		} else {
