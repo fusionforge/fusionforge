@@ -834,6 +834,7 @@ fi
 %{FORGE_DIR}/www/softwaremap
 %{FORGE_DIR}/www/squal
 %{FORGE_DIR}/www/stats
+%{FORGE_DIR}/www/support
 %{FORGE_DIR}/www/survey
 %{FORGE_DIR}/www/tabber
 %{FORGE_DIR}/www/themes
