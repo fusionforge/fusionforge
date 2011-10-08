@@ -29,6 +29,7 @@ class DEBDebian60Tests
 		$suite->addTestFiles(glob("func/PluginsBlocks/*Test.php"));
 		$suite->addTestFiles(glob("func/RBAC/*Test.php"));
 		$suite->addTestFiles(glob("func/Surveys/*Test.php"));
+		$suite->addTestFiles(glob("func/Search/*Test.php"));
 
 		return $suite;
 	}
