@@ -8,7 +8,6 @@ $$ LANGUAGE plpgsql
 IMMUTABLE
 RETURNS NULL ON NULL INPUT;
 
-DROP AGGREGATE IF EXISTS ff_string_agg (text);
 CREATE AGGREGATE ff_string_agg (
        basetype = text,
        sfunc = ff_string_add,
