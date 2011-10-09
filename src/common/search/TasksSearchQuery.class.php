@@ -68,8 +68,8 @@ class TasksSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa () ;
 
 		$qpa = db_construct_qpa ($qpa,
-					 'SELECT x.* FROM (SELECT project_task.project_task_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task.summary||$1||project_task.details||$1||coalesce(string_agg(project_messages.body, $1), $2) as full_string_agg',
-					 array ($this->field_separator, ' '));
+					 'SELECT x.* FROM (SELECT project_task.project_task_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task.summary||$1||project_task.details||$1||coalesce(ff_string_agg(project_messages.body), $1) as full_string_agg',
+					 array (''));
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFTIwords();
 			$qpa = db_construct_qpa ($qpa,

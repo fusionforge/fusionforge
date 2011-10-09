@@ -68,8 +68,8 @@ class TrackersSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa () ;
 
 		$qpa = db_construct_qpa ($qpa,
-					 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, artifact.summary||$1||artifact.details||$1||coalesce(string_agg(artifact_message.body, $1), $2) as full_string_agg',
-						 array ($this->field_separator, ' '));
+					 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg',
+						 array (''));
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFTIwords();
 			$qpa = db_construct_qpa ($qpa,

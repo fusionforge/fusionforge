@@ -67,8 +67,8 @@ class ArtifactSearchQuery extends SearchQuery {
 		$words = $this->getFTIwords();
 
 		$qpa = db_construct_qpa ($qpa,
-					 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(string_agg(artifact_message.body, $1), $2) as full_string_agg',
-						 array ($this->field_separator, ' '));
+					 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg',
+						 array (''));
 		if (forge_get_config('use_fti')) {
 			$qpa = db_construct_qpa ($qpa,
 						 ', (artifact_idx.vectors || coalesce(ff_tsvector_agg(artifact_message_idx.vectors), $1::tsvector)) AS full_vector_agg',
@@ -138,9 +138,8 @@ class ArtifactSearchQuery extends SearchQuery {
 						 'SELECT a.group_artifact_id, a.artifact_id, ts_headline(summary, $1) AS summary, ',
 						 array ($words)) ;
 			$qpa = db_construct_qpa ($qpa,
-						 'a.open_date, users.realname, rank FROM (SELECT a.artifact_id, SUM (ts_rank(ai.vectors, q) + ts_rank(ami.vectors, q)) AS rank, artifact.summary||$1||artifact.details||$1||coalesce(string_agg(artifact_message.body, $1), $2) as full_string_agg FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)',
-						 array($this->field_separator,
-						       '')) ;
+						 'a.open_date, users.realname, rank FROM (SELECT a.artifact_id, SUM (ts_rank(ai.vectors, q) + ts_rank(ami.vectors, q)) AS rank, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)',
+						 array('')) ;
 
 			$qpa = db_construct_qpa ($qpa,
 						 ', artifact_idx ai, artifact_message_idx ami, to_tsquery($1) q',

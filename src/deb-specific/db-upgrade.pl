@@ -1956,6 +1956,7 @@ eval {
     &update_with_sql("FTI-20061025","5.1-8");
     &update_with_sql("20111007-fti-aggregate-functions","5.1-9");
     &update_with_sql("20111007-add-fti-for-task-messages","5.1-10");
+    &update_with_sql("20111009-string-aggregate-function","5.1-11");
 
     ########################### INSERT HERE #################################
 
