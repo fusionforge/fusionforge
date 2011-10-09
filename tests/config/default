@@ -37,7 +37,7 @@ VMENGINE=vz
 REMOTESELENIUM=false
 KEEPVM=false
 DNSDOMAIN=local
-DEBMIRROR=http://cdn.debian.net/debian/
+DEBMIRROR=http://ftp.debian.org/debian/
 DEBMIRRORSEC=http://security.debian.org/
 
 FORGE_ADMIN_USERNAME=admin
