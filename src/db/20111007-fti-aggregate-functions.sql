@@ -8,7 +8,8 @@ $$ LANGUAGE plpgsql
 IMMUTABLE
 RETURNS NULL ON NULL INPUT;
 
-CREATE AGGREGATE ff_tsvector_agg (tsvector) (
+CREATE AGGREGATE ff_tsvector_agg (
+       basetype = tsvector,
        sfunc = ff_tsvector_add,
        stype = tsvector
 );
