@@ -86,7 +86,7 @@ class ForumSearchQuery extends SearchQuery {
 						 array($words)) ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT x.* FROM (SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum.subject||$1||forum.body as full_string_agg FROM forum,users WHERE users.user_id=forum.posted_by AND forum.group_forum_id=$2 GROUP BY msg_id, subject, post_date, realname) AS x WHERE ',
+						 'SELECT x.* FROM (SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum.subject||$1||forum.body as full_string_agg FROM forum,users WHERE users.user_id=forum.posted_by AND forum.group_forum_id=$2 GROUP BY msg_id, subject, post_date, realname, body) AS x WHERE ',
 						 array ($this->field_separator,
 							$this->forumId)) ;
 			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
