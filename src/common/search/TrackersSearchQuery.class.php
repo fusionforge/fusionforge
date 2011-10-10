@@ -130,7 +130,7 @@ class TrackersSearchQuery extends SearchQuery {
 		} else {
 			$qpa = $this->addIlikeCondition ($qpa, 'x.full_string_agg') ;
 			$qpa = db_construct_qpa ($qpa,
-						 'ORDER BY x.name, x.artifact_id') ;
+						 ' ORDER BY x.name, x.artifact_id') ;
 		}
 		return $qpa ;
 	}

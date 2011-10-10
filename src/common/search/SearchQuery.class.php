@@ -332,7 +332,7 @@ class SearchQuery extends Error {
 	 */
 	function setSections($sections) {
 		if(is_array($sections)) {
-			$this->sections = array_keys ($sections) ;
+			$this->sections = array_values ($sections) ;
 		} else {
 			$this->sections = $sections;
 		}
