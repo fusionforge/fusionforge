@@ -1958,6 +1958,13 @@ eval {
     &update_with_sql("20110211-docman-activityvw","5.1.51-2");
     &update_with_sql("20110222-pluginify-auth","5.1.51-3");
 
+    &update_with_sql("20110310-docman-trashdir","5.1.51-4");
+    &update_with_sql("20110405-forum_attachment_fix-bug284","5.1.51-5");
+    &update_with_sql("20110408-anonymous-read-news","5.1.51-6");
+    &update_with_sql("20110728-fix-mta-lists-view","5.1.51-7");
+    &update_with_sql("20110824-plugin-projects-hierarchy-rename","5.1.51-8");
+    &update_with_sql("20111002-docman-doc_groups-createdate-updatedate","5.1.51-9");
+
     ########################### INSERT HERE #################################
 
     # There should be a commit at the end of every block above.
