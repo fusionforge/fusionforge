@@ -112,7 +112,7 @@ ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt
 echo "Set forge admin password"
 ssh root@$HOST "/usr/share/gforge/bin/forge_set_password admin $FORGE_ADMIN_PASSWORD"
 #ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload ; LANG=C touch /tmp/fusionforge-use-pfo-rbac"
-ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-buildbot.ini"
+ssh root@$HOST "(echo [core];echo use_ssl=no;echo sysdebug_dbquery=yes) > /etc/gforge/config.ini.d/zzz-buildbot.ini"
 #ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 ssh root@$HOST "a2dissite default"
