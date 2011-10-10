@@ -292,6 +292,7 @@ function createTables() {
 
 	$sql[]="DROP VIEW rep_site_act_oa_vw";
 	$sql[]="CREATE VIEW rep_site_act_oa_vw AS
+	SELECT
 	sum(tracker_opened) AS tracker_opened,
 	sum(tracker_closed) AS tracker_closed,
 	sum(forum) AS forum,
