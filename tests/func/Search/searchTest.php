@@ -438,6 +438,29 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Doc2"));
 		$this->assertFalse($this->isTextPresent("News1"));
 		$this->assertTrue($this->isTextPresent("News2"));
+
+		// Advanced search
+		$this->gotoProject('projecta');
+		$this->clickAndWait('Link=Advanced search');
+		$this->click("//a[contains(@href,'short_forum') and .='all']");
+		$this->click("//a[contains(@href,'short_tracker') and .='all']");
+		$this->click("//a[contains(@href,'short_pm') and .='all']");
+		$this->click("//a[contains(@href,'short_docman') and .='all']");
+		$this->click("//a[contains(@href,'short_news') and .='all']");
+		$this->type("//div[@id='maindiv']//input[@name='words']", "needle");
+		$this->clickAndWait("//input[@name='submitbutton']");
+		$this->assertTrue($this->isTextPresent("Bug1"));
+		$this->assertFalse($this->isTextPresent("Bug2"));
+		$this->assertTrue($this->isTextPresent("Task1"));
+		$this->assertFalse($this->isTextPresent("Task2"));
+		$this->assertFalse($this->isTextPresent("Message1"));
+		$this->assertFalse($this->isTextPresent("Message2"));
+		$this->assertTrue($this->isTextPresent("Message3"));
+		$this->assertFalse($this->isTextPresent("Message4"));
+		$this->assertFalse($this->isTextPresent("Doc1"));
+		$this->assertTrue($this->isTextPresent("Doc2"));
+		$this->assertFalse($this->isTextPresent("News1"));
+		$this->assertTrue($this->isTextPresent("News2"));
 	}
 
 }
