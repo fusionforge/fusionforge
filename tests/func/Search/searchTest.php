@@ -240,7 +240,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=To Do");
 		$this->clickAndWait("link=Add Task");
 		$this->type("summary", "Task1 the brain");
-		$this->type("details", "The same thing we do every night, Pinky—try to take over the world!");
+		$this->type("details", "The same thing we do every night, Pinky - try to take over the world!");
 		$this->type("hours", "199");
 		$this->clickAndWait("submit");
 		
