@@ -91,7 +91,7 @@ class ArtifactSearchQuery extends SearchQuery {
 						 array ()) ;
 		}
 		$qpa = db_construct_qpa ($qpa,
-					 'GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname') ;
+					 'GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.details') ;
 
 		if (forge_get_config('use_fti')) {
 			$qpa = db_construct_qpa ($qpa, 
