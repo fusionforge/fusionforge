@@ -99,11 +99,15 @@ function db_connect() {
 	define('SYS_DB_TROVE', $gfconn2);
 	define('SYS_DB_SEARCH', $gfconn2);
 
-	if (forge_get_config('use_fti')) {
-		db_query_params ('SELECT set_config($1, $2, false)', 
-				 array('default_text_search_config',
-				       'simple'));
+	$res = db_query_params ('SELECT set_config($1, $2, false)', 
+				array('default_text_search_config',
+				      'simple'));
+	if (!$res) {
+		// Cope with PostgreSQL < 8.3
+		db_query_params ('SELECT set_curcfg($1)', 
+				array('simple'));
 	}
+
 	// Register top-level "finally" handler to abort current
 	// transaction in case of error
 	register_shutdown_function("system_cleanup");
