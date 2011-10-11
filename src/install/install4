@@ -48,12 +48,12 @@ install4_config_suse()
 
 install4_config_debian()
 {
-	echo "TODO"
+	install4_config
 }
 
 install4_config_ubuntu()
 {
-	echo "TODO"
+	install4_config
 }
 
 install4_config_unknown()
