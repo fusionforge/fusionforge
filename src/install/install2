@@ -236,7 +236,7 @@ install2_files(){
 	cd $fusionforge_dir
 	if [ ! -d $fusionforge_etc_dir ]
 	then
-		msg red "/etc/gforge didn't exist - error - make sure you've got permission"
+		msg red "$fusionforge_etc_dir didn't exist - error - make sure you've got permission"
 		exit 2
 	fi
 	
@@ -261,23 +261,17 @@ install2_files_suse()
 
 install2_files_ubuntu()
 {
-	echo "--"
-	echo "For ubuntu, rather use ubuntu package"
-	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/UbuntuRepositories"
-	echo "--"
+	install2_files $1 www-data www-data
 }
 
 install2_files_debian()
 {
-	echo "--"
-	echo "For debian, rather use debian package"
-	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/DebianRepositories"
-	echo "--"
+	install2_files $1 www-data www-data
 }
 
 install2_files_unknown()
 {
-	echo "Only Red Hat, Fedora or CentOS and OpenSUSE are supported by this script.";
+	echo "Only Debian, Ubuntu, Red Hat, Fedora or CentOS and OpenSUSE are supported by this script.";
 	echo "See INSTALL for normal installation";
 	exit 1
 }
