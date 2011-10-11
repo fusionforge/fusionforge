@@ -637,6 +637,10 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	function widgets($params) {
+		$group = group_get_object($GLOBALS['group_id']);
+		if ( !$group || !$group->usesPlugin ( $this->name ) ) {
+			return false;
+		}
  		require_once('common/widget/WidgetLayoutManager.class.php');
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
 			$params['fusionforge_widgets'][] = 'plugin_mantisbt_project_latestissues';
