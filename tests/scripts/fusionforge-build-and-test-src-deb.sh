@@ -1,12 +1,11 @@
 #!/bin/sh
 . tests/scripts/common-functions
 
-echo "WORK IN PROGRESS: NOT WORKING RIGHT NOW"
-exit 0
-
-export FORGE_HOME=/opt/fusionforge
+export FORGE_HOME=/opt/gforge
+export DIST=squeeze
 get_config $@
 prepare_workspace
+destroy_vm $@
 start_vm_if_not_keeped $@
 
 # Build 3rd-party 
@@ -22,15 +21,14 @@ gpg --export --armor | ssh root@$HOST "apt-key add -"
 sleep 5
 ssh root@$HOST "apt-get update"
 
+echo "Sync code on root@$HOST:$FORGE_HOME"
+#ssh root@$HOST mkdir -p $FORGE_HOME
+rsync -a --delete . root@$HOST:$FORGE_HOME
 
-cat > tests/build/config/phpunit <<-EOF
+ssh root@$HOST "cat > $FORGE_HOME/tests/config/phpunit" <<-EOF
 HUDSON_URL=$HUDSON_URL
 JOB_NAME=$JOB_NAME
 EOF
-
-echo "Sync code on root@$HOST:$FORGE_HOME"
-ssh root@$HOST mkdir -p $FORGE_HOME
-rsync -a --delete . root@$HOST:$FORGE_HOME
 
 echo "Run Install on $HOST"
 ssh root@$HOST "$FORGE_HOME/src/install-ng --auto --reinit"
@@ -38,6 +36,9 @@ ssh root@$HOST "$FORGE_HOME/src/install-ng --auto --reinit"
 # Dump database
 echo "Dump freshly installed database"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
+
+echo "Set use_ssl=no"
+ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
 
 # Stop cron
 echo "Stop cron daemon"
