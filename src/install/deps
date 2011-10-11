@@ -52,7 +52,10 @@ deps_redhat() {
 
 deps_debian() {
 	msg green "Installing packages: Executing apt-get. Please wait..."
-	apt-get -y install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release php-htmlpurifier
+	DEBIAN_FRONTEND=noninteractive
+	export DEBIAN_FRONTEND
+	apt-get -y update
+	apt-get -y --force-yes install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release php-htmlpurifier
 	a2enmod headers
 	a2enmod proxy
 	a2enmod ssl
