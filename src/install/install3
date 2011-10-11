@@ -266,7 +266,20 @@ EOF
 	fi
 
 	msg green " * Creating $gforge_db Database..."
-	su $susufix $gforge_user -c "createdb --encoding UNICODE $gforge_db"
+	su $susufix $gforge_user -c "createdb $dboption --encoding UNICODE $gforge_db"
+
+	# Enable plpgsql language
+        if [ -f /usr/bin/createlang ]
+        then
+                if [ `su -s /bin/sh postgres -c "/usr/bin/createlang -l $gforge_db | grep plpgsql | wc -l"` != 1 ]
+                then
+                        su -s /bin/sh postgres -c "/usr/bin/createlang plpgsql $gforge_db"
+                else
+                        echo "Procedural language on $gforge_db already enabled"
+                fi
+        else
+                echo "No way found to enable plpgsql on $gforge_db here" 
+        fi
 
 	# Detect postgresql version, load tsearch2 for pg < 8.3
 	pgv=
@@ -385,12 +398,14 @@ install3_db_suse()
 
 install3_db_debian()
 {
-	echo "Install 3 db not implemented for debian"
+	export dboption="--template=template0"
+	install3_db
 }
 
 install3_db_ubuntu()
 {
-	echo "Install 3 db not implemented for ubuntu"
+	export dboption="--template=template0"
+	install3_db
 }
 
 install3_db_unknown()
