@@ -105,7 +105,7 @@ echo "Dump freshly installed database"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 
 echo "Set use_ssl=no"
-ssh root@$HOST "(echo [core];echo use_ssl=no;echo use_fti=no;echo sysdebug_dbquery=yes) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
+ssh root@$HOST "(echo [core];echo use_ssl=no;echo use_fti=no) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
 #  Install a fake sendmail to catch all outgoing emails.
 # ssh root@$HOST "perl -spi -e s#/usr/sbin/sendmail#/opt/tests/scripts/catch_mail.php# /etc/gforge/local.inc"
 
