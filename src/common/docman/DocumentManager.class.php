@@ -164,11 +164,18 @@ class DocumentManager extends Error {
 					$nbDocsPrivate = $localDg->getNumberOfDocuments(5);
 				}
 
-				if ($nbDocs && (!isset($nbDocsPending) || $nbDocsPending == 0) && (!isset($nbDocsHidden) || $nbDocsHidden == 0) && (!isset($nbDocsPrivate) || $nbDocsPrivate)) {
-					$nbDocsLabel = '<span class="tabtitle" title="'._('Number of documents in this folder').'" >('.$nbDocs.')</span>';
+				if ($stateId == 2 && forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+					$nbDocsTrashed = $localDg->getNumberOfDocuments(2);
+				}
+
+				if ($nbDocs && (!isset($nbDocsPending) || $nbDocsPending == 0) && (!isset($nbDocsHidden) || $nbDocsHidden == 0) && (!isset($nbDocsPrivate) || $nbDocsPrivate) && (!isset($nbDocsTrashed) || $nbDocsTrashed)) {
+					$nbDocsLabel = '<span class="tabtitle-nw" title="'._('Number of documents in this folder').'" >('.$nbDocs.')</span>';
 				}
 				if (isset($nbDocsPending) && isset($nbDocsHidden) && isset($nbDocsPrivate)) {
-					$nbDocsLabel = '<span class="tabtitle" title="'._('Number of documents in this folder per status. active/pending/hidden/private').'" >('.$nbDocs.'/'.$nbDocsPending.'/'.$nbDocsHidden.'/'.$nbDocsPrivate.')</span>';
+					$nbDocsLabel = '<span class="tabtitle-nw" title="'._('Number of documents in this folder per status. active/pending/hidden/private').'" >('.$nbDocs.'/'.$nbDocsPending.'/'.$nbDocsHidden.'/'.$nbDocsPrivate.')</span>';
+				}
+				if (isset($nbDocsTrashed)) {
+					$nbDocsLabel = '<span class="tabtitle-nw" title="'._('Number of deleted documents in this folder').'" >('.$nbDocsTrashed.')</span>';
 				}
 				echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel;
 				if ($dg->getSubgroup($subGroupIdValue, $stateId)) {
