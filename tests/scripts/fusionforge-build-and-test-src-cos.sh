@@ -35,8 +35,15 @@ export CONFIGURED=true
 
 export BUILDRESULT=$WORKSPACE/build/packages
 
+
 # Create place to build package if necessary
-[ ! -d $WORKSPACE/build/packages ] || mkdir -p $WORKSPACE/build/packages
+if [ ! -d $WORKSPACE/build/packages ]
+then
+	mkdir -p $WORKSPACE/build/packages
+else
+	# Clean only old fusionforge packages
+	rm -f $WORKSPACE/build/packages/fusionforge*rpm || true
+fi
 
 # Erase config
 [ ! -d $WORKSPACE/build/config ] || rm -fr $WORKSPACE/build/config
