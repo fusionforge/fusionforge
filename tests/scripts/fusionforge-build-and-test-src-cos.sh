@@ -40,9 +40,11 @@ ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-zbu
 echo "Stop cron daemon"
 ssh root@$HOST "service crond stop" || true
 
-retcode=0
+# Copy selenium
 rsync -a 3rd-party/selenium/selenium-server.jar root@$HOST:$FORGE_HOME/tests/selenium-server.jar
 
+# Run tests
+retcode=0
 echo "Run phpunit test on $HOST in $FORGE_HOME"
 if xterm -e "sh -c exit" 2>/dev/null
 then
