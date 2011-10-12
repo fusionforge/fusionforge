@@ -12,8 +12,10 @@ KEEPVM=true
 # VM for trunk
 fgcostrksrc=lxc:centos5::
 fgcostrk=lxc:centos5::
-fgdebtrk=lxc:debian6::
 fgrpmtrk=lxc:centos5::
+
+fgdebtrksrc=lxc:debian6::
+fgdebtrk=lxc:debian6::
 
 # VM for Branch 5.1
 fgcos51src=lxc:centos5::
