@@ -547,7 +547,7 @@ class SVNPlugin extends SCMPlugin {
 		$params['group_id'] = $group->getID();
 		$params['repos'] = $repos;
 		$params['hooks'] = &$hooks;
-		plugin_hook('cmd_for_post_commit_hook', $params);
+		plugin_hook_by_reference('cmd_for_post_commit_hook', $params);
 
 		foreach ($params['hooks'] as $plugin => $cmd ) {
 			if (getenv('sys_localinc')) {
