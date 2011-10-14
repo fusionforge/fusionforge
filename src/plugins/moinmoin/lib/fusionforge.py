@@ -158,7 +158,7 @@ class FusionForgeSessionAuth(BaseAuth):
                          AND prs.section_name = '%s'
                          AND groups.unix_group_name = '%s'
                          AND prs.perm_val %s
-                         AND pr.home_group_id = groups.group_id""" \
+                         AND prs.ref_id = groups.group_id""" \
                     % (ucond, section, project_name, condition)
         logging.debug ("get_perm_entries: " + query)
         cur.execute(query)
