@@ -2094,6 +2094,8 @@ src/plugins/moinmoin/common/moinmoin-init.php -text
 src/plugins/moinmoin/cronjobs/create-wikis.php -text
 src/plugins/moinmoin/etc/farmconfig.py -text
 src/plugins/moinmoin/etc/moinmoin.ini -text
+src/plugins/moinmoin/lib/farmconfig.py -text
+src/plugins/moinmoin/lib/ff_groups.py -text
 src/plugins/moinmoin/lib/fusionforge.py -text
 src/plugins/moinmoin/packaging/control/161plugin-moinmoin -text
 src/plugins/moinmoin/packaging/control/161plugin-moinmoin.shortdesc -text
