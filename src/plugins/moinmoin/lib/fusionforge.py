@@ -58,6 +58,11 @@ class FusionForgeLink():
                                           user=self.database_user,
                                           port=self.database_port,
                                           password=self.database_password)
+
+        # We never want to start transactions, all accesses here are read-only
+        # anyway.
+        self._conn.set_isolation_level \
+          (psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
         logging.debug ("FusionForgeLink: __init__ done")
 
     def __del__(self):
