@@ -26,16 +26,116 @@ class Search extends FForge_SeleniumTestCase
 	function testProjectSearch()
 	{
 		$this->init();
+		$this->createProject('projectb');
+
 		$this->open(ROOT) ;
 		$this->waitForPageToLoad("30000");
 		$this->type("//input[@name='words']", "XXXXXXXXXXXXXXXXXXXXXXXXXX");
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("No matches found for"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
 		$this->type("//input[@name='words']", "projecta");
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertFalse($this->isTextPresent("public description for projectb"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "description public projecta");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertFalse($this->isTextPresent("public description for projectb"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "description 'public projecta'");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("No matches found for"));
+		$this->assertFalse($this->isTextPresent("public description for ProjectA"));
+		$this->assertFalse($this->isTextPresent("public description for projectb"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "description public");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertTrue($this->isTextPresent("public description for projectb"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "'description public'");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("No matches found for"));
+		$this->assertFalse($this->isTextPresent("public description for ProjectA"));
+		$this->assertFalse($this->isTextPresent("public description for projectb"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "'public description'");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertTrue($this->isTextPresent("public description for projectb"));
+	}
+
+	function testPeopleSearch()
+	{
+		$this->switchUser('admin');
+		$this->createUser('ratatouille');
+		$this->createUser('tartiflette');
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->select("type_of_search", "label=People");
+		$this->type("//input[@name='words']", "tartempion");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("No matches found for"));
+		$this->assertFalse($this->isTextPresent("ratatouille Lastname"));
+		$this->assertFalse($this->isTextPresent("tartiflette Lastname"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->select("type_of_search", "label=People");
+		$this->type("//input[@name='words']", "ratatouille");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("ratatouille Lastname"));
+		$this->assertFalse($this->isTextPresent("tartiflette Lastname"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->select("type_of_search", "label=People");
+		$this->type("//input[@name='words']", "lastname ratatouille");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("ratatouille Lastname"));
+		$this->assertFalse($this->isTextPresent("tartiflette Lastname"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->select("type_of_search", "label=People");
+		$this->type("//input[@name='words']", "Lastname");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("ratatouille Lastname"));
+		$this->assertTrue($this->isTextPresent("tartiflette Lastname"));
+
 	}
 
 }

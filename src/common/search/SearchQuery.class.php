@@ -102,7 +102,7 @@ class SearchQuery extends Error {
 		}
 		if (is_array ($this->phrases)){
 			$this->phrases = array_map ('addslashes',$this->phrases);
-		} else{
+		} else {
 			$this->phrases = array();
 		}
 		$this->rowsPerPage = $rowsPerPage;
@@ -136,8 +136,8 @@ class SearchQuery extends Error {
 			$inQuote = false;
 			foreach(explode(' ', quotemeta($words)) as $word) {
 				if($inQuote) {
-					if(substr($word, -3) == "\\\\'") {
-						$word = substr($word, 0, -3);
+					if(substr($word, -1) == "'") {
+						$word = substr($word, 0, -1);
 						$inQuote = false;
 						$phrase .= ' '.$word;
 						$this->phrases[] = $phrase;
@@ -145,14 +145,14 @@ class SearchQuery extends Error {
 						$phrase .= ' '.$word;
 					}
 				} else {
-					if(substr($word, 0, 3) == "\\\\'") {
-						$word = substr($word, 3);
+					if(substr($word, 0, 1) == "'") {
+						$word = substr($word, 1);
 						$inQuote = true;
-						if(substr($word, -3) == "\\\\'") {
+						if(substr($word, -1) == "'") {
 							// This is a special case where the phrase is just one word
-							$word = substr($word, 0, -3);
+							$word = substr($word, 0, -1);
 							$inQuote = false;
-							$this->phrases[] = $word;
+							$this->words[] = $word;
 						} else {
 							$phrase = $word;
 						}
@@ -174,12 +174,8 @@ class SearchQuery extends Error {
 		} else {
 			$qpa = $this->getQuery();
 		}
-		if (forge_get_config('use_fti')) {
-			db_query_params('SELECT set_config($1, $2, false)', 
-					 array('default_text_search_config',
-					       'simple'));
-		}
-		$this->result = db_query_qpa(
+
+		$this->result = db_query_qpa (
 			$qpa,
 			$this->rowsPerPage + 1,
 			$this->offset,
@@ -200,26 +196,30 @@ class SearchQuery extends Error {
 	}
 
 	function addMatchCondition($qpa, $fieldName) {
-		if(!count($arr)) {
+		if(!count($this->phrases)) {
 			$qpa = db_construct_qpa ($qpa, 'TRUE') ;
-		} else {
-			$regexs = str_replace(' ', "\\\s+", $arr);
-			for ($i = 0; $i < count ($regexs); $i++) {
-				if ($i > 0) {
-					$qpa = db_construct_qpa ($qpa,
-								 $this->operator) ;
-				}
+			return $qpa;
+		}
+
+		$regexs = array_map ('strtolower',
+				     array_merge ($this->phrases,
+						  str_replace(' ', "\s+", $this->phrases)));
+	
+		for ($i = 0; $i < count ($regexs); $i++) {
+			if ($i > 0) {
 				$qpa = db_construct_qpa ($qpa,
-							 $fieldName.' ~* $1',
-							 array ($regexs[$i])) ;
+							 $this->operator) ;
 			}
+			$qpa = db_construct_qpa ($qpa,
+						 $fieldName.' ~* $1',
+							 array ($regexs[$i])) ;
 		}
 		return $qpa;
 	}
 
 	function addIlikeCondition($qpa, $fieldName) {
 		$wordArgs = array_map ('strtolower',
-				       array_merge($this->words, str_replace(' ', "\\\s+", $this->phrases)));
+				       array_merge($this->words, $this->phrases));
 
 		for ($i = 0; $i < count ($wordArgs); $i++) {
 			if ($i > 0) {
@@ -310,6 +310,15 @@ class SearchQuery extends Error {
 	}
 
 	/**
+	 * getPhrases - returns the array containing phrases we are searching for
+	 *
+	 * @return array phrases we are searching for
+	 */
+	function getPhrases() {
+		return $this->phrases;
+	}
+	
+	/**
 	 * setSections - set the sections list
 	 *
 	 * @param $sections mixed array of sections or SEARCH__ALL_SECTIONS
@@ -323,17 +332,21 @@ class SearchQuery extends Error {
 	}
 
 	/**
-	 * getFormattedWords - get words formatted in order to be used in the FTI stored procedures
+	 * getFTIwords - get words formatted in order to be used in the FTI stored procedures
 	 *
-	 * @return string words we are searching for, separated by a pipe
-	 */
-	function getFormattedWords() {
-		if ($this->isExact) {
-			$words = implode('&', $this->words);
-		} else {
-			$words = implode('|', $this->words);
+	 * @return string words we are searching for, separated by 
+	 */	
+	function getFTIwords() {
+		$bits = $this->words;
+		foreach ($this->phrases as $p) {
+			$bits[] = '('.implode ('&', explode (' ', $p)).')';
 		}
-		return $words;
+		if ($this->isExact) {
+			$query = implode('&', $bits);
+		} else {
+			$query = implode('|', $bits);
+		}
+		return $query;
 	}
 }
 

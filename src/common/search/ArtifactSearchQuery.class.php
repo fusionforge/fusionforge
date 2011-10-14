@@ -62,71 +62,44 @@ class ArtifactSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */
 	function getQuery() {
-
-
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {
-			$words=$this->getFormattedWords();
+			$words=$this->getFTIwords();
 			$artifactId = $this->artifactId;
 
-			if (count($words)) {
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT a.group_artifact_id, a.artifact_id, ts_headline(summary, $1) AS summary, ',
-							 array ($this->getFormattedWords())) ;
-				$qpa = db_construct_qpa ($qpa,
-							 'a.open_date, users.realname, rank FROM (SELECT a.artifact_id, SUM (ts_rank(ai.vectors, q) + ts_rank(ami.vectors, q)) AS rank FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)') ;
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT a.group_artifact_id, a.artifact_id, ts_headline(summary, $1) AS summary, ',
+						 array ($words)) ;
+			$qpa = db_construct_qpa ($qpa,
+						 'a.open_date, users.realname, rank FROM (SELECT a.artifact_id, SUM (ts_rank(ai.vectors, q) + ts_rank(ami.vectors, q)) AS rank FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)') ;
 
-				$qpa = db_construct_qpa ($qpa,
-							 ', artifact_idx ai, artifact_message_idx ami, to_tsquery($1) q',
-							 array ($words)) ;
-				$qpa = db_construct_qpa ($qpa,
-							 'WHERE a.group_artifact_id=$1',
-							 array ($artifactId)) ;
-				$qpa = db_construct_qpa ($qpa,
-							 ' AND ai.artifact_id = a.artifact_id AND ami.id = am.id AND ((ai.vectors @@ q OR ami.vectors @@ q) ') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ', artifact_idx ai, artifact_message_idx ami, to_tsquery($1) q',
+						 array ($words)) ;
+			$qpa = db_construct_qpa ($qpa,
+						 'WHERE a.group_artifact_id=$1',
+						 array ($artifactId)) ;
+			$qpa = db_construct_qpa ($qpa,
+						 ' AND ai.artifact_id = a.artifact_id AND ami.id = am.id AND ((ai.vectors @@ q OR ami.vectors @@ q) ') ;
 
-				if (count($this->phrases)) {
-					$qpa = db_construct_qpa ($qpa,
-								 $this->getOperator()) ;
-					$qpa = db_construct_qpa ($qpa,
-								 '((') ;
-					$qpa = $this->addMatchCondition($qpa, 'a.details');
-					$qpa = db_construct_qpa ($qpa,
-								 ') OR (') ;
-					$qpa = $this->addMatchCondition($qpa, 'a.summary');
-					$qpa = db_construct_qpa ($qpa,
-								 ') OR (') ;
-					$qpa = $this->addMatchCondition($qpa, 'am.body');
-					$qpa = db_construct_qpa ($qpa,
-								 '))') ;
-				}
+			if (count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
-							 ') GROUP BY a.artifact_id) x, artifact a, users WHERE a.artifact_id=x.artifact_id AND users.user_id=a.submitted_by ORDER BY group_artifact_id ASC, rank DESC, a.artifact_id ASC') ;
-			} else {
+							 $this->getOperator()) ;
 				$qpa = db_construct_qpa ($qpa,
-							 'SELECT a.group_artifact_id, a.artifact_id, summary, a.open_date, users.realname, rank FROM (SELECT a.artifact_id, 0 AS rank FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)') ;
-
+							 '((') ;
+				$qpa = $this->addMatchCondition($qpa, 'a.details');
 				$qpa = db_construct_qpa ($qpa,
-							 'WHERE a.group_artifact_id=$1',
-							 array ($artifactId)) ;
-
-				if (count($this->phrases)) {
-					$qpa = db_construct_qpa ($qpa,
-								 ' AND ((') ;
-					$qpa = $this->addMatchCondition($qpa, 'a.details');
-					$qpa = db_construct_qpa ($qpa,
-								 ') OR (') ;
-					$qpa = $this->addMatchCondition($qpa, 'a.summary');
-					$qpa = db_construct_qpa ($qpa,
-								 ') OR (') ;
-					$qpa = $this->addMatchCondition($qpa, 'am.body');
-					$qpa = db_construct_qpa ($qpa,
-								 '))') ;
-				}
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'a.summary');
 				$qpa = db_construct_qpa ($qpa,
-							 ' GROUP BY a.artifact_id) x, artifact a, users WHERE a.artifact_id=x.artifact_id AND users.user_id=a.submitted_by ORDER BY group_artifact_id ASC, rank DESC, a.artifact_id ASC') ;
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'am.body');
+				$qpa = db_construct_qpa ($qpa,
+							 '))') ;
 			}
+			$qpa = db_construct_qpa ($qpa,
+						 ') GROUP BY a.artifact_id) x, artifact a, users WHERE a.artifact_id=x.artifact_id AND users.user_id=a.submitted_by ORDER BY group_artifact_id ASC, rank DESC, a.artifact_id ASC') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname ') ;

@@ -70,20 +70,13 @@ class TasksSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {
-			if (count ($this->words)) {
-				$words = $this->getFormattedWords();
-
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT project_task.project_task_id, project_task.percent_complete, ts_headline(project_task.summary, q) AS summary, project_task.start_date,project_task.end_date,users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id FROM project_task, users, project_group_list, to_tsquery($2) AS q, project_task_idx WHERE project_task.created_by = users.user_id AND project_task.project_task_id = project_task_idx.project_task_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id=$3 ',
-							 array (' ',
-								$words,
-								$this->groupId)) ;
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT project_task.project_task_id, project_task.percent_complete, summary, project_task.start_date,project_task.end_date,users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id  FROM project_task, users, project_group_list WHERE project_task.created_by = users.user_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $2 ',
-							 array (' ',
-								$this->groupId)) ;
-			}
+			$words = $this->getFTIwords();
+			
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT project_task.project_task_id, project_task.percent_complete, ts_headline(project_task.summary, q) AS summary, project_task.start_date,project_task.end_date,users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id FROM project_task, users, project_group_list, to_tsquery($2) AS q, project_task_idx WHERE project_task.created_by = users.user_id AND project_task.project_task_id = project_task_idx.project_task_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id=$3 ',
+						 array (' ',
+							$words,
+							$this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$qpa = db_construct_qpa ($qpa,
 							 'AND project_group_list.group_project_id = ANY ($1) ',
@@ -94,13 +87,8 @@ class TasksSearchQuery extends SearchQuery {
 							 'AND project_group_list.is_public = 1 ') ;
 			}
 			if (count($this->phrases)) {
-				if (count ($this->words)) {
-					$qpa = db_construct_qpa ($qpa,
-								 'AND (vectors @@ q AND (') ;
-				} else {
-					$qpa = db_construct_qpa ($qpa,
-								 'AND ((') ;
-				}
+				$qpa = db_construct_qpa ($qpa,
+							 'AND (vectors @@ q AND (') ;
 				$qpa = $this->addMatchCondition($qpa, 'summary');
 				$qpa = db_construct_qpa ($qpa,
 							 ') OR (') ;
@@ -108,13 +96,8 @@ class TasksSearchQuery extends SearchQuery {
 				$qpa = db_construct_qpa ($qpa,
 							 ')) ') ;
 			}
-			if (count ($this->words)) {
-				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY project_group_list.project_name, ts_rank(vectors, q) DESC, project_task.project_task_id') ;
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY project_group_list.project_name, project_task.project_task_id') ;
-			}
+			$qpa = db_construct_qpa ($qpa,
+						 'ORDER BY project_group_list.project_name, ts_rank(vectors, q) DESC, project_task.project_task_id') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT project_task.project_task_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id FROM project_task, users, project_group_list WHERE project_task.created_by = users.user_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $2 ',

@@ -44,26 +44,17 @@ class ProjectSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */
 	function getQuery() {
-		global  $LUSER;
-
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {
-			if (count ($this->words)) {
-				$words = $this->getFormattedWords();
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT DISTINCT ON (ts_rank(vectors, q), group_name) type_id, g.group_id, ts_headline(group_name, q) as group_name, unix_group_name, ts_headline(short_description, q) as short_description FROM groups AS g, to_tsquery($1) AS q, groups_idx as i WHERE g.status in ($2, $3) ',
-							 array ($words,
-								'A',
-								'H')) ;
-				$qpa = db_construct_qpa ($qpa,
-							 'AND vectors @@ q ') ;
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT DISTINCT ON (group_name) type_id, g.group_id, group_name, unix_group_name, short_description FROM groups AS g WHERE g.status in ($1, $2) ',
-							 array ('A',
-								'H')) ;
-			}
+			$words = $this->getFTIwords();
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT DISTINCT ON (ts_rank(vectors, q), group_name) type_id, g.group_id, ts_headline(group_name, q) as group_name, unix_group_name, ts_headline(short_description, q) as short_description FROM groups AS g, to_tsquery($1) AS q, groups_idx as i WHERE g.status in ($2, $3) ',
+						 array ($words,
+							'A',
+							'H')) ;
+			$qpa = db_construct_qpa ($qpa,
+						 'AND vectors @@ q ') ;
 			if (count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
 							 ' AND ((') ;
@@ -77,13 +68,8 @@ class ProjectSearchQuery extends SearchQuery {
 				$qpa = db_construct_qpa ($qpa,
 							 ')) ') ;
 			}				
-			if (count ($this->words)) {
-				$qpa = db_construct_qpa ($qpa,
-							 'AND g.group_id = i.group_id ORDER BY ts_rank(vectors, q) DESC, group_name') ;
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY group_name') ;
-			}
+			$qpa = db_construct_qpa ($qpa,
+						 'AND g.group_id = i.group_id ORDER BY ts_rank(vectors, q) DESC, group_name') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT g.group_name AS group_name, g.unix_group_name AS unix_group_name, g.type_id AS type_id, g.group_id AS group_id, g.short_description AS short_description FROM groups g WHERE g.status IN ($1, $2) AND ((',

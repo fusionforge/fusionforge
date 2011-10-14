@@ -43,27 +43,17 @@ class PeopleSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */
 	function getQuery() {
-
-
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {
-			if (count ($this->words)) {
-				$words = $this->getFormattedWords();
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT users.user_id, user_name, ts_headline(realname, q) as realname FROM users, to_tsquery($1) AS q, users_idx WHERE status=$2 AND users_idx.user_id = users.user_id AND (vectors @@ q ',
-							 array ($words,
-								'A'));
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT users.user_id, user_name, realname FROM users WHERE status=$1 AND users_idx.user_id = users.user_id AND (',
-							 array ('A'));
-			}
+			$words = $this->getFTIwords();
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT users.user_id, user_name, ts_headline(realname, q) as realname FROM users, to_tsquery($1) AS q, users_idx WHERE status=$2 AND users_idx.user_id = users.user_id AND (vectors @@ q ',
+						 array ($words,
+							'A'));
 			if (count ($this->phrases)) {
-				if (count ($this->words)) {
-					$qpa = db_construct_qpa ($qpa,
-								 $this->getOperator()) ;
-				}
+				$qpa = db_construct_qpa ($qpa,
+							 $this->getOperator()) ;
 				$qpa = db_construct_qpa ($qpa,
 							 '(') ;
 				$qpa = $this->addMatchCondition($qpa, 'user_name');
@@ -73,13 +63,8 @@ class PeopleSearchQuery extends SearchQuery {
 				$qpa = db_construct_qpa ($qpa,
 							 ')') ;
 			}
-			if (count ($this->words)) {
-				$qpa = db_construct_qpa ($qpa,
-							 ') ORDER BY ts_rank(vectors, q) DESC, user_name') ;
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 ') ORDER BY user_name') ;
-			}
+			$qpa = db_construct_qpa ($qpa,
+						 ') ORDER BY ts_rank(vectors, q) DESC, user_name') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT user_name,user_id,realname FROM users WHERE ((') ;

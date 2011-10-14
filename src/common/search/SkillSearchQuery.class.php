@@ -48,21 +48,13 @@ class SkillSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {
-			if(count($this->words)) {
-				$words = $this->getFormattedWords();
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT skills_data.skills_data_id, skills_data.type, skills_data.start, skills_data.finish, ts_headline(skills_data.title, q) as title, ts_headline(skills_data.keywords, q) as keywords FROM skills_data, users, skills_data_types, to_tsquery($1) AS q, skills_data_idx WHERE (vectors @@ q ',
-							 array ($words)) ;
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 'SELECT skills_data.skills_data_id, skills_data.type, skills_data.start, skills_data.finish, FROM skills_data, users, skills_data_types  WHERE (vectors @@ q ') ;
-			}
-
+			$words = $this->getFTIwords();
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT skills_data.skills_data_id, skills_data.type, skills_data.start, skills_data.finish, ts_headline(skills_data.title, q) as title, ts_headline(skills_data.keywords, q) as keywords FROM skills_data, users, skills_data_types, to_tsquery($1) AS q, skills_data_idx WHERE (vectors @@ q ',
+						 array ($words)) ;
 			if (count ($this->phrases)) {
-				if (count ($this->words)) {
-					$qpa = db_construct_qpa ($qpa,
-								 $this->getOperator()) ;
-				}
+				$qpa = db_construct_qpa ($qpa,
+							 $this->getOperator()) ;
 				$qpa = db_construct_qpa ($qpa,
 							 ' ((') ;
 				$qpa = $this->addMatchCondition ($qpa, 'skills_data.title') ;
@@ -74,19 +66,12 @@ class SkillSearchQuery extends SearchQuery {
 			}
 			$qpa = db_construct_qpa ($qpa,
 						 ')') ;
-			if (count ($this->words)) {
-				$qpa = db_construct_qpa ($qpa,
-							 'AND skills_data.skills_data_id = skills_data_idx.skills_data_id ') ;
-			}
+			$qpa = db_construct_qpa ($qpa,
+						 'AND skills_data.skills_data_id = skills_data_idx.skills_data_id ') ;
 			$qpa = db_construct_qpa ($qpa,
 						 'AND (skills_data.user_id=users.user_id) AND (skills_data.type=skills_data_types.type_id) ') ;
-			if (count ($this->words)) {
-				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY ts_rank(vectors, q) DESC, finish DESC') ;
-			} else {
-				$qpa = db_construct_qpa ($qpa,
-							 'ORDER BY finish DESC') ;
-			}
+			$qpa = db_construct_qpa ($qpa,
+						 'ORDER BY ts_rank(vectors, q) DESC, finish DESC') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
 						 'SELECT * FROM skills_data, users, skills_data_types WHERE ((') ;
