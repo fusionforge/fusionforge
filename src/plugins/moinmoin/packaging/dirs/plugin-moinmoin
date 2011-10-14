@@ -1,0 +1,6 @@
+etc/gforge/plugins/moinmoin
+usr/share/gforge/plugins/moinmoin/bin
+usr/share/gforge/plugins/moinmoin/common
+usr/share/gforge/plugins/moinmoin/cronjobs
+usr/share/gforge/plugins/moinmoin/www
+var/lib/gforge/plugins/moinmoin/wikidata
