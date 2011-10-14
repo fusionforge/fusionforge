@@ -3,6 +3,8 @@
 from MoinMoin.config import multiconfig
 import fusionforge
 import string
+import logging
+import os
 
 class FarmConfig(multiconfig.DefaultConfig):
 
@@ -20,7 +22,6 @@ class FarmConfig(multiconfig.DefaultConfig):
 
     sitename = u'ForgeWiki' # [Unicode]
     interwikiname = u'ForgeWiki' # [Unicode]
-
     acl_rights_default = \
       string.join (map (lambda u: u+":read,write,delete,revert,admin",
                         ffsa.admins)
@@ -32,6 +33,11 @@ class FarmConfig(multiconfig.DefaultConfig):
         self.interwikiname = u'%s' % project_name
         self.data_dir = '/var/lib/gforge/plugins/moinmoin/wikidata/%s/data' % project_name
         self.data_underlay_dir = '/var/lib/gforge/plugins/moinmoin/wikidata/%s/underlay' % project_name
+
+        page_header1_file = '/var/lib/gforge/chroot/home/groups/%s/plugins/moinmoin/page_header1.html' % project_name
+        if os.path.exists(page_header1_file):
+            with open(page_header1_file) as f:
+                self.page_header1 = f.read()
 
         self.acl_rights_default = self.ffsa.get_moinmoin_acl_string(project_name)
 
