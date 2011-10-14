@@ -49,7 +49,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	session_redirect($urlredirect.'&warning_msg='.urlencode($return_msg));
 }
 
-$groupname = getStringFromRequest('groupname');
+$groupname = trim(getStringFromRequest('groupname'));
 
 $dg = new DocumentGroup($g);
 

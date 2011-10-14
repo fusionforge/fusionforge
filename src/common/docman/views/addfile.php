@@ -127,7 +127,7 @@ if ($dgf->getNested() == NULL) {
 					<td style="text-align:right;">
 						<strong>'. _('Type of Document') .'</strong>'.utils_requiredField()
 					.'</td><td>
-					<input type="radio" name="type" value="httpupload" onclick="javascript:displayRowFile()" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onclick="javascript:displayRowUrl()" />'. _('URL');
+					<input type="radio" name="type" value="httpupload" onclick="javascript:displayRowFile()" checked="checked" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onclick="javascript:displayRowUrl()" />'. _('URL');
 	if (forge_get_config('use_manual_uploads')) {
 					echo '<input type="radio" name="type" value="manualupload" onclick="javascript:displayRowManual()" />'. _('Already-uploaded file');
 	}
@@ -136,7 +136,7 @@ if ($dgf->getNested() == NULL) {
 	}
 	echo '				</td>
 				</tr>
-				<tr id="filerow" style="display:none">
+				<tr id="filerow">
 					<td style="text-align:right;">
 						<strong>'. _('Upload File') .'</strong>'. utils_requiredField()
 					.'</td><td>'
