@@ -15,7 +15,7 @@ use diagnostics ;
 ###
 # STATIC DATA
 
-@known_files = qw/ config templates preinst postinst prerm postrm links init.d / ;
+@known_files = qw/ config templates preinst postinst prerm postrm links init.d logrotate / ;
 
 ###
 # HELPER FUNCTIONS

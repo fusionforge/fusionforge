@@ -1,4 +1,4 @@
-/var/log/gforge/vhosts/*/access.log {
+/var/log/@OLDPACKAGE@/access.log /var/log/@OLDPACKAGE@/awstats.log {
        weekly
        missingok
        rotate 52
@@ -8,3 +8,4 @@
        create 640 root adm
        sharedscripts
 }
+

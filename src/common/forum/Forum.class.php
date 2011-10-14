@@ -455,7 +455,7 @@ class Forum extends Error {
 			*/
 			$result = db_query_params('INSERT INTO forum_monitored_forums (forum_id,user_id) VALUES ($1,$2)',
 						  array($this->getID(),
-							$user_id));
+							$u));
 
 			if (!$result) {
 				$this->setError(_('Unable To Add Monitor').' : '.db_error());
