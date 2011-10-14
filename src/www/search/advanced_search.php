@@ -31,6 +31,8 @@ $offset = getIntFromRequest('offset');
 $words = getStringFromRequest('words');
 $mode = getStringFromRequest('mode', SEARCH__MODE_AND);
 
+html_use_jquery();
+
 if ($mode == SEARCH__MODE_AND) {
 	$exact = true;
 } else {

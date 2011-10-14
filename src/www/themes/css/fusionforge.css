@@ -256,10 +256,17 @@ up {
 .align-right {text-align: right;}
 .align-center {text-align:center;}
 
+.top {vertical-align: top;}
+
+.nowrap {white-space: nowrap;}
+
 .bgcolor-grey {background-color: #e5e5e5;}
 .bgcolor-white {background-color: white;}
 
 .width-100p100 {width: 100%;}
+.fullwidth {width: 100%;}
+
+.halfwidth {width: 50%;}
 
 .selected {background-color:pink; }
 
@@ -820,6 +827,10 @@ div.layout-manager-column-remove_hover {
 	margin-bottom: 1px;
 }
 
+legend {
+	font-weight: bold;
+	font-size: 130%;
+}
 #message_box {
    display:none;
    background:#ffc;
@@ -837,3 +848,20 @@ div.layout-manager-column-remove_hover {
    color: red;
 }
 
+
+.float_left {
+	float: left;
+}
+
+aside.left {
+	float: left;
+}
+
+aside.right {
+	float: right;
+}
+
+fieldset {
+	border: 1px solid #ccc;
+	padding: 5px;
+}

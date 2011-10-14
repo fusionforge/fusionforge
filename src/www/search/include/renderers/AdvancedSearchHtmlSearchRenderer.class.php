@@ -85,7 +85,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-		site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, 'toptab'=>'none'));
+		site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, 'toptab' => 'none'));
 		$sectionarray = $this->getSectionArray();
 		$this->handleTransferInformation($sectionarray);
 
@@ -97,7 +97,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function writeBody() {
 		if (strlen($this->words) < 3) {
-			echo '<div class="error">'._('Error: Under min length search').'</div>';
+			echo '<p class="error">'._('Error: Under min length search').'</p>';
 		} else {
 			echo $this->getResult();
 		}
@@ -132,7 +132,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 
 		if (in_array('short_files', $this->selectedParentSections)) {
-			$renderer = new FilesHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_files'));
+			$renderer = new FrsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_files'));
 			$html .= $this->getPartResult($renderer, 'short_files', _('Files Search Results'));
 		}
 
@@ -323,7 +323,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
         <input class="ff" type="hidden" name="search" value="1"/>
         <input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
         <div align="center"><br />
-            <table border="0">
+            <table>
                 <tr class="ff">
                     <td class="ff" colspan ="2">
                         <input class="ff" type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
@@ -331,32 +331,31 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
                     </td>
                 </tr>
                 <tr class="ff">
-                    <td class="ff" valign="top">
+                    <td class="ff top">
                         <input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
                     </td>
                     <td class="ff">
                         <input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
                     </td>
                 </tr>
-            </table><br /></div>'
+            </table><br />'
 			. $this->createSubSections($sectionsArray) .'
-        </form>';
+        </div></form>
+';
 
-
-		//create javascript methods for select none/all
-		$res .= '
-            <!-- method for disable/enable checkboxes -->
-	<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
-            function setCheckBoxes(parent, checked) {
-
-
-                for (var i = 0; i < document.advancedsearch.elements.length; i++)
-                    if (document.advancedsearch.elements[i].type == "checkbox")
-                            if (document.advancedsearch.elements[i].name.substr(0, parent.length) == parent)
-                                document.advancedsearch.elements[i].checked = checked;
-                }
-	/* ]]> */</script>
-        ';
+		// Add jquery javascript method for select none/all
+		$res .= <<< EOS
+<script type="text/javascript">
+jQuery(function () {
+	jQuery('.checkall').click(function () {
+		jQuery(this).parents('fieldset:eq(0)').find(':checkbox').attr('checked', this.checked);
+	});
+	jQuery('.checkthemall').click(function () {
+		jQuery('#advsearch').find(':checkbox').attr('checked', this.checked);
+	});
+});
+</script>
+EOS;
 		return $res;
 	}
 
@@ -380,18 +379,13 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
  		$countCol = 1;
 
 		$return = '
-			<table width="100%" border="0" cellspacing="0" cellpadding="1">
-				<tr class="tableheader">
-					<td>
-						<table width="100%" cellspacing="0" border="0">
+			<table cellspacing="10" cellpadding="1" id="advsearch">
 							<tr class="tablecontent">
-								<!--<td colspan="2">'._('Search in').':</td-->
-								<td align="right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('none').'</a></td>
+								<td colspan="3" class="align-center">
+									<input type="checkbox" class="checkthemall">'._('Search All').'</a>
+								</td>
 							</tr>
-							<tr class="tablecontent">
-								<td colspan="3">&nbsp;</td>
-							</tr>
-							<tr valign="top" class="tablecontent align-center">
+							<tr class="top tablecontent">
 								<td>';
 		foreach($sectionsArray as $key => $section) {
 			$oldcountlines = $countLines;
@@ -411,37 +405,28 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				}
 			}
 
-			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0">
-							<tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
-							<tr>
-								<td cellspacing="0">
-									<a href="#'.$key.'">'.$group_subsection_names[$key].'</a>'
-				.'	</td>
-								<td align="right">'
-				._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('none').'</a>
-								</td>
-							</tr>
-							<tr class="tablecontent">
-								<td colspan="2">';
+			$return .= '<fieldset>'."\n";
+			$return .= '<legend>';
+			$return .= '<input type="checkbox" name="'.$key.'_checkall"';
+			if (getStringFromRequest($key.'_checkall')) $return .= ' checked="checked"';
+			$return .= ' class="checkall"><a href="#'.$key.'">'.$group_subsection_names[$key].'</a>';
+			$return .= "\n";
+			$return .= '</legend>';
 
 			if (!is_array($section)) {
-				$return .= '		<input type="checkbox" name="'.urlencode($key).'"';
-				if (isset($GLOBALS[urlencode($key)]))
-					$return .= ' checked="checked" ';
-				$return .= ' /></input>'.$group_subsection_names[$key].'<br />';
-			}
-			else
+				$return .= '		<input type="checkbox" name="'.$key.'"';
+				if (getStringFromRequest($key))	$return .= ' checked="checked"';
+				$return .= ' class="childCheckBox" />'.$group_subsection_names[$key].'<br />'."\n";
+			} else {
 				foreach($section as $underkey => $undersection) {
-					$return .= '	<input type="checkbox" name="'.urlencode($key.$underkey).'"';
-					if (isset($GLOBALS[urlencode($key.$underkey)]))
-						$return .= ' checked="checked" ';
-					$return .= ' />'.$undersection.'<br />';
+					$return .= '	<input type="checkbox" name="'.$key.$underkey.'"';
+					if (getStringFromRequest($key.$underkey)) $return .= ' checked="checked"';
+					$return .= ' />'.$undersection.'<br />'."\n";
+				}
 
 				}
 
-			$return .=		'	</td>
-							</tr>
-						</table></td></tr></table><br />';
+			$return .= '</fieldset>';
 
 			if ($countLines >= $break) {
 				if (($countLines - $break) < ($break - $countLines)) {
@@ -453,7 +438,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		return $return.'		</td>
 							</tr>
-						</table></td></tr></table>';
+						</table>';
 
 	}
 
