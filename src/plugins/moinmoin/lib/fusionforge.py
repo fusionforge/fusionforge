@@ -16,27 +16,16 @@ import psycopg2
 from MoinMoin import user
 from MoinMoin.auth import _PHPsessionParser, BaseAuth
 
-class FusionForgeSessionAuth(BaseAuth):
-    """ FusionForge session cookie authentication """
-
-    name = 'fusionforge_session'
-
-    def __getconfig(self, varname):
-        return subprocess.Popen(["/usr/share/gforge/bin/forge_get_config", varname], stdout = subprocess.PIPE).communicate()[0].rstrip('\n')
+class FusionForgeLink():
+    def get_config(self, varname, secname='core'):
+        return subprocess.Popen(["/usr/share/gforge/bin/forge_get_config", varname, secname], stdout = subprocess.PIPE).communicate()[0].rstrip('\n')
 
     def __init__(self, cookies=['session_ser'], autocreate=True):
-        """ @param cookie: Names of the cookies to parse.
-        """
-        BaseAuth.__init__(self)
-        self.cookies = cookies
-        self.autocreate = autocreate
-
-        self.database_host = self.__getconfig('database_host')
-        self.database_name = self.__getconfig('database_name')
-        self.database_user = self.__getconfig('database_user')
-        self.database_port = self.__getconfig('database_port')
-        self.database_password = self.__getconfig('database_password')
-        self.session_key = self.__getconfig('session_key')
+        self.database_host = self.get_config('database_host')
+        self.database_name = self.get_config('database_name')
+        self.database_user = self.get_config('database_user')
+        self.database_port = self.get_config('database_port')
+        self.database_password = self.get_config('database_password')
 
         if (self.database_host != ''):
             self.conn = psycopg2.connect(database=self.database_name,
@@ -49,6 +38,33 @@ class FusionForgeSessionAuth(BaseAuth):
                                          user=self.database_user,
                                          port=self.database_port,
                                          password=self.database_password)
+
+    def get_connection(self):
+        return self.conn
+
+    def get_projects(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = 'moinmoin'")
+        projects = []
+        for record in cur:
+            projects.append(record[0])
+        return projects
+
+class FusionForgeSessionAuth(BaseAuth):
+    """ FusionForge session cookie authentication """
+
+    name = 'fusionforge_session'
+
+    def __init__(self, cookies=['session_ser'], autocreate=True):
+        """ @param cookie: Names of the cookies to parse.
+        """
+        BaseAuth.__init__(self)
+        self.cookies = cookies
+        self.autocreate = autocreate
+
+        self.fflink = FusionForgeLink()
+        self.conn = self.fflink.get_connection()
+        self.session_key = self.fflink.get_config('session_key')
 
     def get_super_users(self):
         cur = self.conn.cursor()

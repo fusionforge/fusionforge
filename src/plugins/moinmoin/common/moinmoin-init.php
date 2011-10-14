@@ -20,11 +20,11 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'mediawiki/common/MediaWikiPlugin.class.php' ;
+require_once $gfplugins.'moinmoin/common/MoinMoinPlugin.class.php' ;
 
-$MediaWikiPluginObject = new MediaWikiPlugin ;
+$MoinMoinPluginObject = new MoinMoinPlugin ;
 
-register_plugin ($MediaWikiPluginObject) ;
+register_plugin ($MoinMoinPluginObject) ;
 
 // Local Variables:
 // mode: php
