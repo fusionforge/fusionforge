@@ -50,6 +50,14 @@ class FusionForgeSessionAuth(BaseAuth):
                                          port=self.database_port,
                                          password=self.database_password)
 
+    def get_super_users(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT distinct(u.user_name) from users u, pfo_user_role pur, pfo_role pr, pfo_role_setting prs WHERE u.user_id = pur.user_id AND pur.role_id = pr.role_id AND pr.role_id = prs.role_id AND prs.section_name='forge_admin'")
+        admins = []
+        for record in cur:
+            admins.append(record[0])
+        return admins
+
     def request(self, request, user_obj, **kw):
         cookies = kw.get('cookie')
         if cookies is None or cookies == {}:
