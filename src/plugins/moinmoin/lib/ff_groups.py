@@ -30,9 +30,9 @@ class FFLazyGroup(LazyGroup):
 
 class FFLazyGroups(LazyGroupsBackend):
 
-    permdict = { "Admins":  ("project_admin", "> 0"),
-                 "Writers": ("scm", "= 2"),
-                 "Readers": ("scm", "= 1") }
+    permdict = { "Admins":  ("plugin_moinmoin_access", "= 3"),
+                 "Writers": ("plugin_moinmoin_access", "= 2"),
+                 "Readers": ("plugin_moinmoin_access", "= 1") }
 
     def __init__(self, request, ffsa):
         super(FFLazyGroups, self).__init__(request)

@@ -38,9 +38,7 @@ class MoinMoinPlugin extends Plugin {
 		$this->hooks[] = "role_get";
 		$this->hooks[] = "role_normalize";
 		$this->hooks[] = "role_translate_strings";
-		$this->hooks[] = "role_has_permission";
 		$this->hooks[] = "role_get_setting";
-		$this->hooks[] = "list_roles_by_permission";
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
 		$this->hooks[] = "clone_project_from_template" ;
 	}
@@ -120,6 +118,59 @@ class MoinMoinPlugin extends Plugin {
 				print 'MoinMoin';
 				print '</a>';
 				echo '</div>';
+			}
+		} elseif ($hookname == "role_get") {
+			$role =& $params['role'] ;
+
+			// MoinMoin access
+			// 0 - None
+			// 1 - Read
+			// 2 - Write
+			// 3 - Admin
+			$right = new PluginSpecificRoleSetting ($role,
+								'plugin_moinmoin_access') ;
+			$right->SetAllowedValues (array ('0', '1', '2', '3')) ;
+			$right->SetDefaultValues (array ('Admin' => '3',
+							 'Senior Developer' => '2',
+							 'Junior Developer' => '2',
+							 'Doc Writer' => '2',
+							 'Support Tech' => '1')) ;
+			
+		} elseif ($hookname == "role_normalize") {
+			$role =& $params['role'] ;
+			$new_sa =& $params['new_sa'] ;
+			$new_pa =& $params['new_pa'] ;
+
+			if (USE_PFO_RBAC) {
+				$projects = $role->getLinkedProjects() ;		
+				foreach ($projects as $p) {
+					$role->normalizePermsForSection ($new_pa, 'plugin_moinmoin_access', $p->getID()) ;
+				}
+			} else {
+				$role->normalizeDataForSection ($new_sa, 'plugin_moinmoin_access') ;
+			}
+		} elseif ($hookname == "role_translate_strings") {
+			$right = new PluginSpecificRoleSetting ($role,
+							       'plugin_moinmoin_access') ;
+			$right->setDescription (_('MoinMoin Wiki access')) ;
+			$right->setValueDescriptions (array ('0' => _('No access'),
+							     '1' => _('Read access'),
+							     '2' => _('Write access'),
+							     '3' => _('Admin access'))) ;
+
+		} elseif ($hookname == "role_get_setting") {
+			$role = $params['role'] ;
+			$reference = $params['reference'] ;
+			$value = $params['value'] ;
+
+			switch ($params['section']) {
+			case 'plugin_moinmoin_access':
+				if ($role->hasPermission('project_admin', $reference)) {
+					$params['result'] = 3 ;
+				} else {
+					$params['result'] =  $value ;
+				}
+				break ;
 			}
 		}
 	}
