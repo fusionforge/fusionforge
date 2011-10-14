@@ -60,6 +60,7 @@ class FusionForgeSessionAuth(BaseAuth):
     """ FusionForge session cookie authentication """
 
     name = 'fusionforge_session'
+    logout_possible = False
 
     def __init__(self, cookies=['session_ser'], autocreate=True):
         """ @param cookie: Names of the cookies to parse.
@@ -84,7 +85,7 @@ class FusionForgeSessionAuth(BaseAuth):
     def request(self, request, user_obj, **kw):
         cookies = kw.get('cookie')
         if cookies is None or cookies == {}:
-            return user_obj, False
+            return None, False
 
         for cookiename in cookies:
             if cookiename not in self.cookies:
@@ -119,6 +120,6 @@ class FusionForgeSessionAuth(BaseAuth):
             if u and self.autocreate:
                 u.create_or_update(True)
             if u and u.valid:
-                return u, True # True to get other methods called, too
-        return user_obj, False # continue with next method in auth list
+                return u, False
+        return None, False
 
