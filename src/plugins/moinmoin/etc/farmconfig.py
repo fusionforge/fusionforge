@@ -16,6 +16,10 @@ class FarmConfig(multiconfig.DefaultConfig):
     auth = [ffsa]
     superuser = ffsa.get_super_users()
 
+    acl_rights_default = u'All:'
+    for i in superuser:
+        acl_rights_default = i+':read,write,delete,revert,admin ' + acl_rights_default
+
 ff_link = fusionforge.FusionForgeLink()
 ff_host = ff_link.get_config('web_host')
 wikis = []
