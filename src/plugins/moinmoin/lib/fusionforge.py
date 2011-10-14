@@ -18,15 +18,20 @@ from MoinMoin.auth import _PHPsessionParser, BaseAuth
 
 class FusionForgeLink():
     def get_config(self, varname, secname='core'):
-        return subprocess.Popen(["/usr/share/gforge/bin/forge_get_config", varname, secname], stdout = subprocess.PIPE).communicate()[0].rstrip('\n')
+        if secname not in self.cachedconfig:
+            self.cachedconfig[secname] = {}
+        if varname not in self.cachedconfig[secname]:
+            self.cachedconfig[secname][varname] = subprocess.Popen(["/usr/share/gforge/bin/forge_get_config", varname, secname], stdout = subprocess.PIPE).communicate()[0].rstrip('\n')
+        return self.cachedconfig[secname][varname]
 
     def __init__(self, cookies=['session_ser'], autocreate=True):
+        self.cachedconfig = {}
         self.database_host = self.get_config('database_host')
         self.database_name = self.get_config('database_name')
         self.database_user = self.get_config('database_user')
         self.database_port = self.get_config('database_port')
         self.database_password = self.get_config('database_password')
-
+        
         if (self.database_host != ''):
             self.conn = psycopg2.connect(database=self.database_name,
                                          user=self.database_user,
