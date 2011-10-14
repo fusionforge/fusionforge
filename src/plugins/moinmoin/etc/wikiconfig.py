@@ -1,6 +1,7 @@
 # -*- coding: iso-8859-1 mode:python -*-
 
 from MoinMoin.config import multiconfig
+import fusionforge_session
 class Config(multiconfig.DefaultConfig):
 
     # basic options (you normally need to change these)
@@ -18,7 +19,7 @@ class Config(multiconfig.DefaultConfig):
     data_dir = '/var/lib/gforge/plugins/moinmoin/wikidata/data'
     data_underlay_dir = '/var/lib/gforge/plugins/moinmoin/wikidata/underlay'
 
-    ffsa = FusionForgeSessionAuth()
+    ffsa = fusionforge_session.FusionForgeSessionAuth()
 
     auth = [ffsa]
     superuser = ffsa.get_super_users()
