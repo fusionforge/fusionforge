@@ -38,7 +38,7 @@ echo "Dump freshly installed database"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 
 echo "Set use_ssl=no"
-ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
+ssh root@$HOST "(echo [core];echo use_ssl=no;use_fti=no) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
 
 # Stop cron
 echo "Stop cron daemon"
