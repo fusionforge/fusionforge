@@ -75,7 +75,7 @@ class FusionForgeSessionAuth(BaseAuth):
     def get_super_users(self):
         conn = self.fflink.get_connection()
         cur = conn.cursor()
-        cur.execute("SELECT distinct(u.user_name) from users u, pfo_user_role pur, pfo_role pr, pfo_role_setting prs WHERE u.user_id = pur.user_id AND pur.role_id = pr.role_id AND pr.role_id = prs.role_id AND prs.section_name='forge_admin'")
+        cur.execute("SELECT distinct(u.user_name) from users u, pfo_user_role pur, pfo_role pr, pfo_role_setting prs WHERE u.user_id = pur.user_id AND pur.role_id = pr.role_id AND pr.role_id = prs.role_id AND prs.section_name='forge_admin' AND prs.perm_val >= 1")
         admins = []
         for record in cur:
             admins.append(record[0])
