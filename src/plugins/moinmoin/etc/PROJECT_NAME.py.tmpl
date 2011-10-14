@@ -1,0 +1,21 @@
+# This is a template to instantiate a wiki for a given project
+# The only parameter is the project name which should correspond
+# to the unix_group_name associated with the project in the forge
+
+from farmconfig import FarmConfig
+import fusionforge
+
+class Config(FarmConfig):
+    project_name = "@PROJECT_NAME@"
+    # Substituted by create-wikis.php
+
+    sitename = u'%s' % project_name
+    interwikiname = u'%s' % project_name
+    page_front_page = u'FrontPage'
+
+    data_dir = '/var/lib/gforge/plugins/moinmoin/wikidata/%s/data' % project_name
+    data_underlay_dir = '/var/lib/gforge/plugins/moinmoin/wikidata/%s/underlay' % project_name
+
+    ffsa = fusionforge.FusionForgeSessionAuth()
+    acl_rights_default = ffsa.get_moinmoin_acl_string(project_name)
+    

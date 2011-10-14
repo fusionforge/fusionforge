@@ -58,18 +58,8 @@ while ( $row = db_fetch_array($project_res) ) {
 		mkdir($project_dir, 0755, true);
 		system("cp -r /usr/share/moin/data /usr/share/moin/underlay $project_dir/");
 		system("chown -R gforge:gforge $project_dir");
-		$f = fopen ("$wikidata/$project.py","w");
-		fwrite ($f, "from farmconfig import FarmConfig
-class Config(FarmConfig):
-    sitename = u'$project'
-    interwikiname = u'$project'
-    page_front_page = u'FrontPage'
+		system("sed s/@PROJECT_NAME@/$project/ < /etc/fusionforge/plugins/moinmoin/PROJECT_NAME.py.tmpl > $wikidata/$project.py");
 
-    data_dir = '$project_dir/data'
-    data_underlay_dir = '$project_dir/underlay'
-");
-		fclose($f);
-		       
 		$need_reload = true;
 	} 
 }
