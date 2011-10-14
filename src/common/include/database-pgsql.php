@@ -99,10 +99,15 @@ function db_connect() {
 	define('SYS_DB_TROVE', $gfconn2);
 	define('SYS_DB_SEARCH', $gfconn2);
 
-	db_query_params ('SELECT set_config($1, $2, false)', 
-			 array('default_text_search_config',
-			       'simple'));
-	
+	$res = db_query_params ('SELECT set_config($1, $2, false)', 
+				array('default_text_search_config',
+				      'simple'));
+	if (!$res) {
+		// Cope with PostgreSQL < 8.3
+		db_query_params ('SELECT set_curcfg($1)', 
+				array('simple'));
+	}
+
 	// Register top-level "finally" handler to abort current
 	// transaction in case of error
 	register_shutdown_function("system_cleanup");
@@ -220,6 +225,7 @@ function db_query_params($qstring, $params, $limit = '-1', $offset = 0, $dbserve
 	if ($sysdebug_dbquery) {
 		ffDebug('trace', "tracing call of db_query_params():\n",
 		    debug_string_backtrace());
+		error_log('SQL: '.db_query_to_string($qstring,$params).'; ');
 	}
 
 	$res = @pg_query_params($dbconn,$qstring,$params);
@@ -571,13 +577,15 @@ function db_join_qpa ($old_qpa = false, $new_qpa = false) {
 	return db_construct_qpa ($old_qpa, $new_qpa[0], $new_qpa[1]) ;
 }
 
-function db_qpa_to_string ($qpa) {
-	$sql = $qpa[0];
-	$params = $qpa[1];
+function db_query_to_string ($sql, $params = array()) {
 	foreach ($params as $index => $value) {
 		$sql = preg_replace('/\\$'.($index+1).'(?!\d)/', "'".$value."'", $sql);
 	}
 	return $sql;
+}	
+
+function db_qpa_to_string ($qpa) {
+	return db_query_to_string($qpa[0], $qpa[1]);
 }	
 
 // Local Variables:

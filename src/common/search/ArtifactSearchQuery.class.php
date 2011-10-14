@@ -64,6 +64,72 @@ class ArtifactSearchQuery extends SearchQuery {
 	function getQuery() {
 		$qpa = db_construct_qpa () ;
 
+		$words = $this->getFTIwords();
+
+		$qpa = db_construct_qpa ($qpa,
+					 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg',
+						 array (''));
+		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa,
+						 ', (artifact_idx.vectors || coalesce(ff_tsvector_agg(artifact_message_idx.vectors), $1::tsvector)) AS full_vector_agg',
+						 array(''));
+						 }
+		$qpa = db_construct_qpa ($qpa, 
+					 ' FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users',
+						 array ()) ;
+		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa, 
+						 ', artifact_idx, artifact_message_idx',
+						 array ()) ;
+		}
+		$qpa = db_construct_qpa ($qpa, 
+					 ' WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = $1 ',
+					 array ($this->artifactId)) ;
+		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa, 
+						 'AND artifact.artifact_id = artifact_idx.artifact_id AND artifact_message.id = artifact_message_idx.id ',
+						 array ()) ;
+		}
+		$qpa = db_construct_qpa ($qpa,
+					 'GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.details') ;
+
+		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa, 
+						 ', artifact_idx.vectors',
+						 array ()) ;
+		}
+		$qpa = db_construct_qpa ($qpa, 
+					 ') AS x WHERE ') ;
+		
+		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa,
+						 'full_vector_agg @@ $1 ',
+						 array($words));
+			if (count($this->phrases)) {
+				$qpa = db_construct_qpa ($qpa,
+							 'AND (') ;
+				$qpa = $this->addMatchCondition ($qpa, 'x.full_string_agg') ;
+				$qpa = db_construct_qpa ($qpa,
+							 ') ') ;
+			}
+			$qpa = db_construct_qpa ($qpa,
+						 'ORDER BY ts_rank(full_vector_agg, $1) DESC',
+						 array($words)) ;
+			
+		} else {
+			$qpa = $this->addIlikeCondition ($qpa, 'x.full_string_agg') ;
+			$qpa = db_construct_qpa ($qpa,
+						 'ORDER BY x.artifact_id') ;
+		}
+		return $qpa ;
+
+
+
+
+
+
+		$qpa = db_construct_qpa () ;
+
 		if (forge_get_config('use_fti')) {
 			$words=$this->getFTIwords();
 			$artifactId = $this->artifactId;
@@ -72,7 +138,8 @@ class ArtifactSearchQuery extends SearchQuery {
 						 'SELECT a.group_artifact_id, a.artifact_id, ts_headline(summary, $1) AS summary, ',
 						 array ($words)) ;
 			$qpa = db_construct_qpa ($qpa,
-						 'a.open_date, users.realname, rank FROM (SELECT a.artifact_id, SUM (ts_rank(ai.vectors, q) + ts_rank(ami.vectors, q)) AS rank FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)') ;
+						 'a.open_date, users.realname, rank FROM (SELECT a.artifact_id, SUM (ts_rank(ai.vectors, q) + ts_rank(ami.vectors, q)) AS rank, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)',
+						 array('')) ;
 
 			$qpa = db_construct_qpa ($qpa,
 						 ', artifact_idx ai, artifact_message_idx ami, to_tsquery($1) q',

@@ -83,6 +83,9 @@ class SearchQuery extends Error {
 
 	var $phrases = array();
 
+	// Something that's hopefully not going to end up in real data
+	var $field_separator = ' ioM0Thu6_fieldseparator_kaeph9Ee ';
+
 	/**
 	 * Constructor
 	 *
@@ -92,6 +95,8 @@ class SearchQuery extends Error {
 	 * @param	int	$rowsPerPage number of rows per page
 	 */
 	function SearchQuery($words, $offset, $isExact, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE) {
+		$this->field_separator = ' ioM0Thu6_fieldseparator_kaeph9Ee ';
+
 		$this->cleanSearchWords($words);
 		//We manual escap because every Query in Search escap parameters
 		$words = addslashes($words);
@@ -325,7 +330,7 @@ class SearchQuery extends Error {
 	 */
 	function setSections($sections) {
 		if(is_array($sections)) {
-			$this->sections = array_keys($sections);
+			$this->sections = array_values($sections) ;
 		} else {
 			$this->sections = $sections;
 		}
