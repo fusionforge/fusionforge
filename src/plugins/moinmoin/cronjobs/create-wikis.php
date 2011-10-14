@@ -64,6 +64,7 @@ class Config(FarmConfig):
     sitename = u'$project'
     interwikiname = u'$project'
     page_front_page = u'FrontPage'
+    acl_rights_default = u'All:'
 
     data_dir = '$project_dir/data'
     data_underlay_dir = '$project_dir/underlay'
