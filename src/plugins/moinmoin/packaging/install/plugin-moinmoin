@@ -6,4 +6,4 @@ plugins/moinmoin/lib/*            usr/share/gforge/plugins/moinmoin/lib/
 plugins/moinmoin/www/*            usr/share/gforge/plugins/moinmoin/www/
 plugins/moinmoin/wsgi/moin.wsgi   usr/share/gforge/plugins/moinmoin/wsgi
 plugins/moinmoin/etc/*.ini 	  etc/@PACKAGE@/config.ini.d/
-plugins/moinmoin/etc/wikiconfig.py		  etc/@PACKAGE@/plugins/moinmoin
+plugins/moinmoin/etc/farmconfig.py		  etc/@PACKAGE@/plugins/moinmoin

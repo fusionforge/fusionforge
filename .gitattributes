@@ -2092,15 +2092,15 @@ src/plugins/moinmoin/bin/install.sh -text
 src/plugins/moinmoin/common/MoinMoinPlugin.class.php -text
 src/plugins/moinmoin/common/moinmoin-init.php -text
 src/plugins/moinmoin/cronjobs/create-wikis.php -text
+src/plugins/moinmoin/etc/farmconfig.py -text
 src/plugins/moinmoin/etc/moinmoin.ini -text
-src/plugins/moinmoin/etc/wikiconfig.py -text
 src/plugins/moinmoin/lib/fusionforge.py -text
 src/plugins/moinmoin/packaging/control/161plugin-moinmoin -text
 src/plugins/moinmoin/packaging/control/161plugin-moinmoin.shortdesc -text
 src/plugins/moinmoin/packaging/cron.d/plugin-moinmoin -text
 src/plugins/moinmoin/packaging/dirs/plugin-moinmoin -text
 src/plugins/moinmoin/packaging/install/plugin-moinmoin -text
-src/plugins/moinmoin/packaging/links/plugin-mediawiki -text
+src/plugins/moinmoin/packaging/links/plugin-moinmoin -text
 src/plugins/moinmoin/wsgi/moin.wsgi -text
 src/plugins/moinmoin/www/LocalSettings.php -text
 src/plugins/moinmoin/www/frame.php -text

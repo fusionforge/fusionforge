@@ -8,7 +8,7 @@
 
 import sys, os
 
-sys.path.insert(0, '/etc/fusionforge/plugins/moinmoin')
+sys.path.insert(0, '/var/lib/gforge/plugins/moinmoin/wikidata')
 sys.path.insert(0, '/usr/share/gforge/plugins/moinmoin/lib')
 from MoinMoin.web.serving import make_application
 application = make_application(shared=True)

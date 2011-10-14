@@ -1,0 +1,2 @@
+etc/@PACKAGE@/plugins/moinmoin/farmconfig.py	var/lib/gforge/plugins/moinmoin/wikidata/farmconfig.py
+usr/share/gforge/plugins/moinmoin/wsgi/moin.wsgi	var/lib/gforge/plugins/moinmoin/wikidata/moin.wsgi

@@ -65,7 +65,8 @@ class Config(FarmConfig):
     interwikiname = u'$project'
     page_front_page = u'FrontPage'
 
-    data_dir = '$project_dir'
+    data_dir = '$project_dir/data'
+    data_underlay_dir = '$project_dir/underlay'
 ");
 		fclose($f);
 		       
