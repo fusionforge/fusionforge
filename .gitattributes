@@ -2098,7 +2098,7 @@ src/plugins/moinmoin/cronjobs/create-imagedirs.php -text
 src/plugins/moinmoin/cronjobs/create-wikis.php -text
 src/plugins/moinmoin/etc/moinmoin.ini -text
 src/plugins/moinmoin/etc/wikiconfig.py -text
-src/plugins/moinmoin/fusionforge_session.py -text
+src/plugins/moinmoin/lib/fusionforge_session.py -text
 src/plugins/moinmoin/packaging/control/161plugin-moinmoin -text
 src/plugins/moinmoin/packaging/control/161plugin-moinmoin.shortdesc -text
 src/plugins/moinmoin/packaging/cron.d/plugin-mediawiki -text

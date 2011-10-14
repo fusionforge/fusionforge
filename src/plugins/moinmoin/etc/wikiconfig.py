@@ -17,3 +17,5 @@ class Config(multiconfig.DefaultConfig):
 
     data_dir = '/var/lib/gforge/plugins/moinmoin/wikidata/data'
     data_underlay_dir = '/var/lib/gforge/plugins/moinmoin/wikidata/underlay'
+
+    auth = [FusionForgeSessionAuth()]

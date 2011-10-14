@@ -11,6 +11,7 @@ case "$1" in
 		chown -R gforge:gforge $prefix/$i
 	    fi
 	done
+	chown gforge /etc/fusionforge/config.ini.d/debian-install-secrets.ini
 	;;
     purge)
 	;;
