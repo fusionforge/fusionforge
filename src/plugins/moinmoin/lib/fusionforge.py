@@ -122,9 +122,12 @@ class FusionForgeSessionAuth(BaseAuth):
         # Check whether this is a public project
         # anomymous users and registered users that are not part of the project
 
-        val = cur.execute("""SELECT is_public
-                             FROM groups
-                             WHERE unix_group_name='%s'""" % project_name)
+        val = cur.execute("""SELECT prs.perm_val
+                             FROM pfo_role_setting prs, groups g
+                             WHERE prs.role_id=1
+                               AND prs.section_name='project_read'
+                               AND prs.ref_id = g.group_id
+                               AND g.unix_group_name='%s'""" % project_name)
         val = cur.fetchone()
         is_public = val != None and val[0] != 0
         cur.close ()
