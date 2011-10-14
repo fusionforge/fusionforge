@@ -21,7 +21,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item('src_path','moinmoin', "/usr/share/moin");
 forge_define_config_item('wiki_data_path','moinmoin', '$core/data_path/plugins/moinmoin/wikidata');
 forge_define_config_item('use_frame', 'moinmoin', false);
 forge_set_config_item_bool('use_frame', 'moinmoin');

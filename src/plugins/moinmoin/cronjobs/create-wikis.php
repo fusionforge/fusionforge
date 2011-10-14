@@ -31,8 +31,6 @@ require_once (dirname(__FILE__) . '/../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
-$data_path = forge_get_config('data_path');
-$src_path = forge_get_config('src_path', 'moinmoin');
 $wikidata = forge_get_config('wiki_data_path', 'moinmoin');
 
 // Get all projects that use the mediawiki plugin
