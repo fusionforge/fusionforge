@@ -111,5 +111,5 @@ class FusionForgeSessionAuth(BaseAuth):
                 u.create_or_update(True)
             if u and u.valid:
                 return u, True # True to get other methods called, too
-            return user_obj, False # continue with next method in auth list
+        return user_obj, False # continue with next method in auth list
 
