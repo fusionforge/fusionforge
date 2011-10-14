@@ -1,4 +1,3 @@
-plugins/moinmoin/*                usr/share/gforge/plugins/moinmoin/
 plugins/moinmoin/bin/*            usr/share/gforge/plugins/moinmoin/bin/
 plugins/moinmoin/common/*         usr/share/gforge/plugins/moinmoin/common/
 plugins/moinmoin/cronjobs/*       usr/share/gforge/plugins/moinmoin/cronjobs/
