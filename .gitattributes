@@ -2106,9 +2106,7 @@ src/plugins/moinmoin/packaging/dirs/plugin-moinmoin -text
 src/plugins/moinmoin/packaging/install/plugin-moinmoin -text
 src/plugins/moinmoin/packaging/links/plugin-moinmoin -text
 src/plugins/moinmoin/wsgi/moin.wsgi -text
-src/plugins/moinmoin/www/LocalSettings.php -text
 src/plugins/moinmoin/www/frame.php -text
-src/plugins/moinmoin/www/plugin_admin.php -text
 src/plugins/oauthconsumer/NAME -text
 src/plugins/oauthconsumer/README -text
 src/plugins/oauthconsumer/common/oauthconsumer-init.php -text
