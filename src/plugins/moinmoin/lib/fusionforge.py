@@ -32,27 +32,28 @@ class FusionForgeLink():
         self.database_port = self.get_config('database_port')
         self.database_password = self.get_config('database_password')
         
-        if (self.database_host != ''):
-            self.conn = psycopg2.connect(database=self.database_name,
-                                         user=self.database_user,
-                                         port=self.database_port,
-                                         password=self.database_password,
-                                         host=self.database_host)
-        else:
-            self.conn = psycopg2.connect(database=self.database_name,
-                                         user=self.database_user,
-                                         port=self.database_port,
-                                         password=self.database_password)
 
     def get_connection(self):
-        return self.conn
+        if (self.database_host != ''):
+            return psycopg2.connect(database=self.database_name,
+                                    user=self.database_user,
+                                    port=self.database_port,
+                                    password=self.database_password,
+                                    host=self.database_host)
+        else:
+            return psycopg2.connect(database=self.database_name,
+                                    user=self.database_user,
+                                    port=self.database_port,
+                                    password=self.database_password)
 
     def get_projects(self):
-        cur = self.conn.cursor()
+        conn = self.get_connection()
+        cur = conn.cursor()
         cur.execute("SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = 'moinmoin'")
         projects = []
         for record in cur:
             projects.append(record[0])
+        conn.close()
         return projects
 
 class FusionForgeSessionAuth(BaseAuth):
@@ -68,15 +69,16 @@ class FusionForgeSessionAuth(BaseAuth):
         self.autocreate = autocreate
 
         self.fflink = FusionForgeLink()
-        self.conn = self.fflink.get_connection()
         self.session_key = self.fflink.get_config('session_key')
 
     def get_super_users(self):
-        cur = self.conn.cursor()
+        conn = self.fflink.get_connection()
+        cur = conn.cursor()
         cur.execute("SELECT distinct(u.user_name) from users u, pfo_user_role pur, pfo_role pr, pfo_role_setting prs WHERE u.user_id = pur.user_id AND pur.role_id = pr.role_id AND pr.role_id = prs.role_id AND prs.section_name='forge_admin'")
         admins = []
         for record in cur:
             admins.append(record[0])
+        conn.close()
         return admins
 
     def request(self, request, user_obj, **kw):
@@ -103,10 +105,12 @@ class FusionForgeSessionAuth(BaseAuth):
                 continue
             (user_id, time, ip, user_agent) = m.group(1, 2, 3, 4)
 
-            cur = self.conn.cursor()
+            conn = self.fflink.get_connection()
+            cur = conn.cursor()
             cur.execute("SELECT user_name, realname FROM users WHERE user_id=%s", [user_id])
             (loginname, realname) = cur.fetchone()
             cur.close()
+            conn.close()
 
             # MoinMoin doesn't enforce unicity of realnames
             u = user.User(request, name=loginname, auth_username=loginname,
