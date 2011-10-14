@@ -1,0 +1,15 @@
+AliasMatch "^/moin_static[0-9]*/applets/FCKeditor/(.*)" "/usr/share/fckeditor/$1"
+<Directory "/usr/share/fckeditor/">
+  Options None
+  AllowOverride None
+</Directory>
+
+# The path to static contents changes (named after moinmoin version).
+AliasMatch "^/moin_static[0-9]*/(.*)" "/usr/share/moin/htdocs/$1"
+<Directory "/usr/share/moin/htdocs/">
+  Options -Indexes -FollowSymlinks
+  AllowOverride None
+</Directory>
+
+WSGIProcessGroup fusionforge-plugin-moinmoin
+WSGIScriptAlias /plugins/moinmoin "/usr/share/gforge/plugins/moinmoin/wsgi/moin.wsgi"

@@ -1,0 +1,8 @@
+plugins/moinmoin/*                usr/share/gforge/plugins/moinmoin/
+plugins/moinmoin/bin/*            usr/share/gforge/plugins/moinmoin/bin/
+plugins/moinmoin/common/*         usr/share/gforge/plugins/moinmoin/common/
+plugins/moinmoin/cronjobs/*       usr/share/gforge/plugins/moinmoin/cronjobs/
+plugins/moinmoin/www/*            usr/share/gforge/plugins/moinmoin/www/
+plugins/moinmoin/wsgi/moin.wsgi   usr/share/gforge/plugins/moinmoin/wsgi
+plugins/moinmoin/etc/*.ini 	  etc/@PACKAGE@/config.ini.d/
+plugins/moinmoin/etc/wikiconfig.py		  etc/@PACKAGE@/plugins/moinmoin

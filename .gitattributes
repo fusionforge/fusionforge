@@ -776,6 +776,7 @@ src/etc/httpd.conf.d/10-vhosts-main.conf -text
 src/etc/httpd.conf.d/20-vhosts-lists.conf -text
 src/etc/httpd.conf.d/30-vhosts-projects.conf -text
 src/etc/httpd.conf.d/40-vhosts-extra.conf -text
+src/etc/httpd.conf.d/50-wsgi-moinmoin.conf -text
 src/etc/httpd.conf.d/auth-main.inc -text
 src/etc/httpd.conf.d/auth-projects.inc -text
 src/etc/httpd.conf.d/block-trace.inc -text
@@ -785,6 +786,7 @@ src/etc/httpd.conf.d/plugin-authhttpd.inc -text
 src/etc/httpd.conf.d/plugin-fckeditor.inc -text
 src/etc/httpd.conf.d/plugin-generic.inc -text
 src/etc/httpd.conf.d/plugin-mediawiki.inc -text
+src/etc/httpd.conf.d/plugin-moinmoin.inc -text
 src/etc/httpd.conf.d/plugin-scmbzr.inc -text
 src/etc/httpd.conf.d/plugin-scmdarcs.inc -text
 src/etc/httpd.conf.d/plugin-scmgit.inc -text
@@ -2086,6 +2088,7 @@ src/plugins/message/db/message-init.sql -text
 src/plugins/message/www/index.php -text
 src/plugins/message/www/js/message.js -text
 src/plugins/moinmoin/NAME -text
+src/plugins/moinmoin/bin/install.sh -text
 src/plugins/moinmoin/bin/mw-drop-wikis.php -text
 src/plugins/moinmoin/bin/mw-plugin-init.php -text
 src/plugins/moinmoin/bin/mw-wrapper.php -text
@@ -2093,14 +2096,16 @@ src/plugins/moinmoin/common/MediaWikiPlugin.class.php -text
 src/plugins/moinmoin/common/mediawiki-init.php -text
 src/plugins/moinmoin/cronjobs/create-imagedirs.php -text
 src/plugins/moinmoin/cronjobs/create-wikis.php -text
-src/plugins/moinmoin/etc/httpd.d/61plugin-mediawiki -text
+src/plugins/moinmoin/etc/moinmoin.ini -text
+src/plugins/moinmoin/etc/wikiconfig.py -text
 src/plugins/moinmoin/fusionforge_session.py -text
 src/plugins/moinmoin/packaging/control/161plugin-moinmoin -text
 src/plugins/moinmoin/packaging/control/161plugin-moinmoin.shortdesc -text
 src/plugins/moinmoin/packaging/cron.d/plugin-mediawiki -text
 src/plugins/moinmoin/packaging/dirs/plugin-moinmoin -text
-src/plugins/moinmoin/packaging/install/plugin-mediawiki -text
+src/plugins/moinmoin/packaging/install/plugin-moinmoin -text
 src/plugins/moinmoin/packaging/links/plugin-mediawiki -text
+src/plugins/moinmoin/wsgi/moin.wsgi -text
 src/plugins/moinmoin/www/LocalSettings.php -text
 src/plugins/moinmoin/www/frame.php -text
 src/plugins/moinmoin/www/plugin_admin.php -text
