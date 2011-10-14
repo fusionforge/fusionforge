@@ -14,6 +14,7 @@ FusionForge-5.x:
 * Docman: interaction with the projects-hierarchy plugin to enable hierarchical
   browsing. (Capgemini)
 * Admin: User add membership to multiples projects in one shot (Capgemini)
+* New MoinMoinWiki plugin (AdaCore)
 
 FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)
