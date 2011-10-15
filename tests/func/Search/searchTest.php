@@ -23,9 +23,14 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class Search extends FForge_SeleniumTestCase
 {
-	function testProjectSearch()
+	function testSearch()
 	{
-		$this->init();
+		/*
+		 * Search for projects
+		 */
+
+		$this->populateStandardTemplate();
+		$this->createProject('projecta');
 		$this->createProject('projectb');
 
 		$this->open(ROOT) ;
@@ -88,11 +93,11 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
 		$this->assertTrue($this->isTextPresent("public description for projectb"));
-	}
 
-	function testPeopleSearch()
-	{
-		$this->switchUser(FORGE_ADMIN_USERNAME);
+		/*
+		 * Search for people
+		 */
+
 		$this->createUser('ratatouille');
 		$this->createUser('tartiflette');
 
@@ -136,17 +141,9 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("ratatouille Lastname"));
 		$this->assertTrue($this->isTextPresent("tartiflette Lastname"));
 
-	}
-	
-	function testSearchInTools()
-	{
-		$this->populateStandardTemplate();
-		$this->createProject('projecta');
-
-		// TODO: check that search results vary according to what items are visible to the user
-		// $this->createProject('projectb');
-		// $this->createUser('piperade');
-		// $this->createUser('cassoulet');
+		/*
+		 * Search inside a project
+		 */
 
 		// Prepare some tracker items
 
@@ -442,6 +439,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("News2"));
 
 		// Advanced search
+
 		$this->gotoProject('projecta');
 		$this->clickAndWait('Link=Advanced search');
 		$this->click("//a[contains(@href,'short_forum') and .='all']");
