@@ -11,5 +11,7 @@ AliasMatch "^/moin_static[0-9]*/(.*)" "/usr/share/moin/htdocs/$1"
   AllowOverride None
 </Directory>
 
-WSGIProcessGroup fusionforge-plugin-moinmoin
-WSGIScriptAliasMatch /plugins/moinmoin/[-_a-zA-Z0-9]*/(.*) "/var/lib/gforge/plugins/moinmoin/wikidata/moin.wsgi/$1"
+<IfModule wsgi>
+  WSGIProcessGroup fusionforge-plugin-moinmoin
+  WSGIScriptAliasMatch /plugins/moinmoin/[-_a-zA-Z0-9]*/(.*) "/var/lib/gforge/plugins/moinmoin/wikidata/moin.wsgi/$1"
+</IfModule>
