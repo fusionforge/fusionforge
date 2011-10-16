@@ -203,6 +203,13 @@ Requires: %{name} >= %{version}, php, mediawiki
 %description plugin-mediawiki
 This is a plugin to integrate MediaWiki within FusionForge.
 
+%package plugin-moinmoin
+Summary: MoinMoinWiki plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description plugin-moinmoin
+This is a plugin to integrate MediaWiki within FusionForge.
+
 %package plugin-message
 Summary: Global Information Message plugin for FusionForge
 Group: Development/Tools
@@ -576,6 +583,9 @@ done
 #%{__cp} -f %{SOURCE2} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/usr/share/mediawiki/LocalSettings.php
 # insert our own README file
 %{__cp} -f %{SOURCE1} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/README.jlbond
+
+# plugin: moinmoin
+%{__ln_s} ../../plugins/moinmoin/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/moinmoin
 
 # plugin: message
 %{__ln_s} ../../plugins/message/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/message
@@ -959,6 +969,11 @@ fi
 /usr/share/mediawiki/skins/gforge
 /usr/share/mediawiki/skins/GForge.deps.php
 /usr/share/mediawiki/skins/GForge.php
+
+%files plugin-moinmoin
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/moinmoin.ini
+%{FORGE_DIR}/plugins/moinmoin/
+%{FORGE_DIR}/www/plugins/moinmoin
 
 %files plugin-message
 %{FORGE_DIR}/plugins/message
