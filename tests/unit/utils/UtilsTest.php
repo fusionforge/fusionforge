@@ -1,7 +1,8 @@
 <?php
 
 require_once 'PHPUnit/Framework/TestCase.php';
-require_once dirname(__FILE__) . '/../../../src/common/include/utils.php';
+require_once dirname(dirname(__FILE__)) . '/../../src/common/include/utils.php';
+require_once dirname(dirname(__FILE__)) . '/../../src/common/include/escapingUtils.php';
 
 /**
  * Simple tests for the utils library.
@@ -37,6 +38,22 @@ class Utils_Tests extends PHPUnit_Framework_TestCase
 		$this->assertFalse(valid_hostname('my host.com'), 'my host.com is not a valid hostname');
 
 		$this->assertFalse(valid_hostname('O@O'), 'O@O is not a valid hostname');
+	}
+
+	/**
+	 * test the util_check_url function.
+	 */
+	public function testUtilCheckUrl()
+	{
+		$this->assertTrue(util_check_url('http://fusionforge.org/'), 'http://fusionforge.org/ is a valid URL.');
+
+		$this->assertTrue(util_check_url('https://fusionforge.org/'), 'https://fusionforge.org/ is a valid URL.');
+
+		$this->assertTrue(util_check_url('ftp://fusionforge.org/'), 'ftp://fusionforge.org/ is a valid URL.');
+
+		$this->assertFalse(util_check_url('webdav://toto'), 'webdav://toto is not a valid URL.');
+
+		$this->assertFalse(util_check_url('fusionforge.org'), 'fusionforge.org is not a valid URL');
 	}
 
 	/**
