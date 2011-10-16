@@ -38,4 +38,37 @@ class Utils_Tests extends PHPUnit_Framework_TestCase
 
 		$this->assertFalse(valid_hostname('O@O'), 'O@O is not a valid hostname');
 	}
+
+	/**
+	 * test the util_strip_accents() function.
+	 */
+	public function testStripAccents()
+	{
+		$this->assertEquals(util_strip_accents('aléiât'), 'aleiat');
+
+		$this->assertEquals(util_strip_accents('ààéééïï'), 'aaeeeii');
+
+		$this->assertEquals(util_strip_accents('alain'), 'alain');
+	}
+
+	/**
+	 * test the human_readable_bytes() function.
+	 */
+	public function testHumanReadableBytes()
+	{
+		$this->assertEquals('0', human_readable_bytes(0));
+		$this->assertEquals('12 bytes', human_readable_bytes(12));
+		$this->assertEquals('-12 bytes', human_readable_bytes(-12));
+		$this->assertEquals('1 KiB', human_readable_bytes(1024));
+		$this->assertEquals('1 kB', human_readable_bytes(1000, true));
+		$this->assertEquals('2 KiB', human_readable_bytes(2*1024));
+		$this->assertEquals('2 kB', human_readable_bytes(2000, true));
+		$this->assertEquals('2 kB', human_readable_bytes(2012, true));
+		$this->assertEquals('1 MiB', human_readable_bytes(1024*1024));
+		$this->assertEquals('1 MB', human_readable_bytes(1000000, true));
+		$this->assertEquals('1 GiB', human_readable_bytes(1024*1024*1024));
+		$this->assertEquals('1 GB', human_readable_bytes(1000000000, true));
+		$this->assertEquals('1 TiB', human_readable_bytes(1024*1024*1024*1024));
+		$this->assertEquals('1 TB', human_readable_bytes(1000000000000, true));
+	}
 }
