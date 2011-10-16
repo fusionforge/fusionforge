@@ -37,7 +37,7 @@ class DatabaseInstaller extends Error {
 
 		$init = "$path/$name-init.sql";
 		if (is_file($init)) {
-			$ret = $this->runScript($init);
+			$ret = $this->_runScript($init);
 			if (!$ret) {
 				return false;
 			}
@@ -62,7 +62,7 @@ class DatabaseInstaller extends Error {
 			$date   = $this->getDatabaseDate();
 		}
 
-		$scripts = $this->getScripts($path);
+		$scripts = $this->_getScripts($path);
 		$output  = '';
 		foreach ($scripts as $script) {
 			if ((int) $script['date'] > $date) {
@@ -103,7 +103,7 @@ class DatabaseInstaller extends Error {
 		return false;
 	}
 
-	private function runScript($file) {
+	private function _runScript($file) {
 		// If a condition statement if found, then run the script only if true.
 		$content = file($file);
 		if (preg_match('/^-- TRUE\? (.+)/', $content[0], $match)) {
@@ -124,7 +124,7 @@ class DatabaseInstaller extends Error {
 		return true;
 	}
 
-	private static function getScripts($dir) {
+	private static function _getScripts($dir) {
 		$data = array();
 		if (is_dir($dir)) {
 			if ($dh = opendir($dir)) {
@@ -144,13 +144,13 @@ class DatabaseInstaller extends Error {
 				}
 				closedir($dh);
 			}
-			usort($data, array('DatabaseInstaller', 'compare_scripts'));
+			usort($data, array('DatabaseInstaller', '_compare_scripts'));
 			reset($data);
 		}
 		return $data;
 	}
 
-	private static function compare_scripts($script1, $script2) {
-		return strcmp($script1['filename'], $script2['filename']);
+	private static function _compare_scripts($a, $b) {
+		return strcmp($a['filename'], $b['filename']);
 	}
 }
