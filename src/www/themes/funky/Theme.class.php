@@ -252,7 +252,7 @@ class Theme extends Layout {
 					);
 				}
 			/* ]]> */</script>
-			<?
+			<?php
 		}
 
 		$return = '<!-- start tabs -->';
