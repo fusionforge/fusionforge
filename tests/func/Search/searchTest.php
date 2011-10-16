@@ -46,7 +46,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
-		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertTrue($this->isTextPresent("public description for projecta"));
 		$this->assertFalse($this->isTextPresent("public description for projectb"));
 
 		$this->open(ROOT) ;
@@ -55,7 +55,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
-		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertTrue($this->isTextPresent("public description for projecta"));
 		$this->assertFalse($this->isTextPresent("public description for projectb"));
 
 		$this->open(ROOT) ;
@@ -64,7 +64,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("No matches found for"));
-		$this->assertFalse($this->isTextPresent("public description for ProjectA"));
+		$this->assertFalse($this->isTextPresent("public description for projecta"));
 		$this->assertFalse($this->isTextPresent("public description for projectb"));
 
 		$this->open(ROOT) ;
@@ -73,7 +73,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
-		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertTrue($this->isTextPresent("public description for projecta"));
 		$this->assertTrue($this->isTextPresent("public description for projectb"));
 
 		$this->open(ROOT) ;
@@ -82,7 +82,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("No matches found for"));
-		$this->assertFalse($this->isTextPresent("public description for ProjectA"));
+		$this->assertFalse($this->isTextPresent("public description for projecta"));
 		$this->assertFalse($this->isTextPresent("public description for projectb"));
 
 		$this->open(ROOT) ;
@@ -91,7 +91,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("//input[@name='Search']");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
-		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertTrue($this->isTextPresent("public description for projecta"));
 		$this->assertTrue($this->isTextPresent("public description for projectb"));
 
 		/*
