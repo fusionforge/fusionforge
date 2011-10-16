@@ -442,11 +442,7 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->gotoProject('projecta');
 		$this->clickAndWait('Link=Advanced search');
-		$this->click("//a[contains(@href,'short_forum') and .='all']");
-		$this->click("//a[contains(@href,'short_tracker') and .='all']");
-		$this->click("//a[contains(@href,'short_pm') and .='all']");
-		$this->click("//a[contains(@href,'short_docman') and .='all']");
-		$this->click("//a[contains(@href,'short_news') and .='all']");
+		$this->click("//input[@class='checkthemall']");
 		$this->type("//div[@id='maindiv']//input[@name='words']", "needle");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
