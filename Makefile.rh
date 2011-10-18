@@ -7,7 +7,7 @@
 FORGE_HOME=$(CURDIR)
 RPM_TMP=$(FORGE_HOME)/../tmp
 BUILDRESULT=$(FORGE_HOME)/../build/packages
-RPMBUILD=rpmbuild --quiet --define='_topdir $(RPM_TMP)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' --define='_rpmdir $(BUILDRESULT)'
+RPMBUILD=rpmbuild --define='_topdir $(RPM_TMP)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' --define='_rpmdir $(BUILDRESULT)'
 
 VER=$(shell LC_ALL=C sed -n '/>software_version/s/^.*'\''\([0-9.]*\)'\''.*$$/\1/p' src/common/include/FusionForge.class.php)
 in_svn_repo:= $(wildcard .svn/)
