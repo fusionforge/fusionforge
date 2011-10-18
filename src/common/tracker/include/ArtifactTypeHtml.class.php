@@ -688,6 +688,8 @@ class ArtifactTypeHtml extends ArtifactType {
 			$names[]=$extra_name;
 		}
 
+		sortUserList($techs);
+
 		if ($multiple) {
 			if (!is_array($checked)) {
 				$checked = explode(',',$checked);
