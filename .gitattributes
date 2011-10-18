@@ -382,6 +382,7 @@ plugins/old/webcalendar/www/ws/get_events.php -text
 plugins/old/webcalendar/www/ws/get_reminders.php -text
 plugins/old/webcalendar/www/ws/login.php -text
 plugins/old/webcalendar/www/year.php -text
+/specs.watchr -text
 src/AUTHORS -text
 src/CHANGES -text
 src/COPYING.php -text
