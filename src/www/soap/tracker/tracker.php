@@ -585,7 +585,7 @@ function arrangeExtraFields($extra_fields, $extra_field_info) {
 			if (array_key_exists($efid, $extra_field_info)) {
 				if ($extra_field_info[$efid]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
 						$extra_field_info[$efid]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
-					$data = split(",", $data);
+					$data = explode(',', $data);
 				}
 			}
 

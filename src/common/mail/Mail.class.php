@@ -130,27 +130,27 @@ class Mail {
      * @return list of email separated by ,
      */
     function _validateRecipient($list) {
-        $recipArray = split('[;,]', $list);
-        $retArray = array();
-	foreach($recipArray as $email) {
-		$email = trim($email);
-		if(!empty($email)) {
-			$user = UserManager::instance()->getUserByEmail($email);
-			if ($user) {
-				$allowed_status = array('A', 'R', 'P', 'V', 'W');
-				$one_with_status_allowed_found = false;
-				while ( !$one_with_status_allowed_found) {
-					if (in_array($user->getStatus(), $allowed_status)) {
-						$retArray[] = '"'.$this->_encodeHeader($user->getRealName(), $this->getHeaderCharset()).'" <'.$user->getEmail().'>';
-						$one_with_status_allowed_found = true;
-					}
-				}
-			} else {
-				$retArray[] = $email;
-			}
-		}
-	}
-	return implode(', ', $retArray);
+    	$recipArray = preg_split('/[;,]/', $list);
+    	$retArray = array();
+    	foreach($recipArray as $email) {
+    		$email = trim($email);
+    		if(!empty($email)) {
+    			$user = UserManager::instance()->getUserByEmail($email);
+    			if ($user) {
+    				$allowed_status = array('A', 'R', 'P', 'V', 'W');
+    				$one_with_status_allowed_found = false;
+    				while ( !$one_with_status_allowed_found) {
+    					if (in_array($user->getStatus(), $allowed_status)) {
+    						$retArray[] = '"'.$this->_encodeHeader($user->getRealName(), $this->getHeaderCharset()).'" <'.$user->getEmail().'>';
+    						$one_with_status_allowed_found = true;
+    					}
+    				}
+    			} else {
+    				$retArray[] = $email;
+    			}
+    		}
+    	}
+    	return implode(', ', $retArray);
     }
 
     var $_to;
