@@ -312,7 +312,7 @@ class GFUser extends Error {
 			// ...based on the email address:
 			$email_array = explode ('@', $email, 2) ;
 			$email_u = $email_array [0];
-			$l = ereg_replace('[^a-z0-9]', '', $email_u);
+			$l = preg_replace('/[^a-z0-9]/', '', $email_u);
 			$l = substr ($l, 0, 15);
 			// Is the user part of the email address okay?
 			if (account_namevalid($l)

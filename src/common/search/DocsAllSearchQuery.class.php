@@ -87,19 +87,6 @@ class DocsAllSearchQuery extends SearchQuery {
 
 }
 
-function prepare_search_text ($text) {
-	$rep = $text;
-	$rep = utf8_decode($rep);
-	$rep = ereg_replace ("é", "e", $rep);
-	$rep = ereg_replace ("è", "e", $rep);
-	$rep = ereg_replace ("ê", "e", $rep);
-	$rep = ereg_replace ("à", "a", $rep);
-	$rep = ereg_replace ("ù", "u", $rep);
-	$rep = ereg_replace ("ç", "c", $rep);
-	$rep = ereg_replace ("é", "e", $rep);
-	$rep = strtolower ($rep);
-	return $rep;
-}
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

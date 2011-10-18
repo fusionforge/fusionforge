@@ -304,7 +304,7 @@ if (forge_get_config('database_name')!=""){
 			if (getStringFromServer('REQUEST_URI')!='/' && $expl_pathinfo[1]!='account' && $expl_pathinfo[1]!='export' ) exit_not_logged_in();
 			// Show proj* export even if not logged in when force login
 			// If not default web project page would be broken
-			if ($expl_pathinfo[1]=='export' && !ereg("^proj", $expl_pathinfo[2])) exit_not_logged_in();
+			if ($expl_pathinfo[1]=='export' && !preg_match('/^proj/', $expl_pathinfo[2])) exit_not_logged_in();
 		}
 
 		// Insert this page view into the database
