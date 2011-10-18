@@ -678,6 +678,8 @@ class ArtifactTypeHtml extends ArtifactType {
 		$ids = array () ;
 		$names = array () ;
 
+		sortUserList($techs);
+
 		foreach ($techs as $tech) {
 			$ids[] = $tech->getID() ;
 			$names[] = $tech->getRealName() ;
@@ -687,8 +689,6 @@ class ArtifactTypeHtml extends ArtifactType {
 			$ids[]=$extra_id;
 			$names[]=$extra_name;
 		}
-
-		sortUserList($techs);
 
 		if ($multiple) {
 			if (!is_array($checked)) {
