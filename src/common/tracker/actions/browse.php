@@ -348,7 +348,7 @@ if (db_numrows($res)>0) {
 	$optgroup['values'][0] = 'Private queries';
 	$optgroup['values'][1] = 'Project queries';
 	echo '<span style="font-size:smaller">';
-	echo '<select name="query_id">';
+	echo '<select name="query_id" id="query_id">';
 	echo '<option value="100">Select One</option>';
 	$current = '';
 	$selected = $af->getDefaultQuery();
@@ -369,11 +369,18 @@ if (db_numrows($res)>0) {
 		echo '</optgroup>';
 	echo '</select>';
 	echo '</span>
-	<input type="submit" name="run" value="'._('Power Query').'" />
+	<noscript><input type="submit" name="run" value="'._('Power Query').'" /></noscript>
 	&nbsp;&nbsp;<a href="/tracker/?atid='. $ath->getID().'&amp;group_id='.$group_id.'&amp;func=query">'.
 	_('Build Query').'</a>
 	</td></tr></table>
 	</form>';
+	?>
+		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+		$('#query_id').change(function() {
+			location.href = '<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id=' ?>'+$('#query_id').val();
+		});
+		/* ]]> */</script>
+	<?php
 } else {
 	echo '<strong>
 	<a href="/tracker/?atid='. $ath->getID().'&amp;group_id='.$group_id.'&amp;func=query">'._('Build Query').'</a></strong>';
