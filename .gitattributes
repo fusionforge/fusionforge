@@ -5332,6 +5332,7 @@ tests/openvz/local.rinse.api -text
 tests/preseed/lists -text
 tests/preseed/mailman -text
 tests/preseed/postgresql -text
+tests/ruleset.xml -text
 tests/scripts/catch_mail.php -text
 tests/scripts/cdx40-build-and-test-source.sh -text
 tests/scripts/common-functions -text

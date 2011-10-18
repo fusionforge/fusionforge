@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="FusionForge">
+ <description>Initial phpcs coding standard.</description>
+
+ <!-- Include some sniffs from all around the place -->
+ <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+ <rule ref="Generic.PHP.DeprecatedFunctions"/>
+
+ <!-- Use Unix newlines -->
+ <rule ref="Generic.Files.LineEndings">
+  <properties>
+   <property name="eolChar" value="\n"/>
+  </properties>
+ </rule>
+
+</ruleset>
