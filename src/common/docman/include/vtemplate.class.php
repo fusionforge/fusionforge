@@ -8,7 +8,7 @@
  * 
  * Authors: 
  *   + THIEBAUT Jean-Baptiste(J.Baptiste@leweby.com)  -  http://www.leweby.com .
- *   + CAMPANA François (grem@concept-w.net).
+ *   + CAMPANA FranÃ§ois (grem@concept-w.net).
  * Licence: GPL.
  * 
  * 
@@ -18,7 +18,7 @@
 
 if ( !isset($DEFINE_VTEMPLATE) ){
 define("ALL",1);
-define("VARTAG","{#"); // Tag d'ouverture des variables : vous pouvez changer ce paramètre.
+define("VARTAG","{#"); // Tag d'ouverture des variables : vous pouvez changer ce paramÃ¨tre.
 define("VTEMPLATE_VERSION","1.3.3");
 define("VTEMPLATE_TYPE","BA");
 define("VTEMPLATE_BUILD","1");
@@ -32,73 +32,73 @@ function error($errno,$arg="",$code=0,$disp=0){
 // Gestion des erreurs
 switch($errno){
   case 1:
-    $this->titre="Erreur de session n° $code";
-    $this->msg = "La zone $arg est déjà ouverte.Avant d'ajouter une session sur cette zone, vous devez la fermer à l'aide de la fonction closeSession().<br>"	;
+    $this->titre="Erreur de session nÂ° $code";
+    $this->msg = "La zone $arg est dÃ©jÃ  ouverte.Avant d'ajouter une session sur cette zone, vous devez la fermer Ã  l'aide de la fonction closeSession().<br>"	;
   break;
   case 2:
-    $this->titre="Erreur de session n° $code";
+    $this->titre="Erreur de session nÂ° $code";
     $this->msg = "Vous tentez de fermer une session de la zone $arg alors qu'aucune session pour cette zone n'existe.Pour ouvrir une session, utilisez la fonction addSession().<br>";
   break;
   case 3:
-    $this->titre="Erreur de session n° $code";
+    $this->titre="Erreur de session nÂ° $code";
 	$var = $arg[1];
 	$zone = $arg[0];
-    $this->msg = "Vous essayez de valoriser la variable $var sans avoir créer de session de la zone $zone.Utilisez la fonction addSession() pour créer une session, puis setvar pour valoriser une variable.<br>";
+    $this->msg = "Vous essayez de valoriser la variable $var sans avoir crÃ©er de session de la zone $zone.Utilisez la fonction addSession() pour crÃ©er une session, puis setvar pour valoriser une variable.<br>";
   break;
   case 4:
-    $this->titre="Erreur de session n° $code";
+    $this->titre="Erreur de session nÂ° $code";
 	$var = $arg[1];
 	$zone = $arg[0];
     $this->msg = "La variable $var que vous souhaitez valoriser n'existe pas dans la zone $zone.<br>";
   break;
   case 5:
-    $this->titre="Erreur de parsing n° $code";
-    $this->msg = "Vous utilisez des caractère non autorisés pour déclarer vos zones.Vous pouvez utiliser tous les caractères à l'exception de \'{\' , \'#\' \'}\' et \'|\'.<br>";
+    $this->titre="Erreur de parsing nÂ° $code";
+    $this->msg = "Vous utilisez des caractÃ¨re non autorisÃ©s pour dÃ©clarer vos zones.Vous pouvez utiliser tous les caractÃ¨res Ã  l'exception de \'{\' , \'#\' \'}\' et \'|\'.<br>";
   break;
   case 6:
-    $this->titre="Erreur de parsing n° $code";
-    $this->msg = "Vous ne pouvez pas utiliser le même nom ($arg)de zone plusieurs fois.<br>";
+    $this->titre="Erreur de parsing nÂ° $code";
+    $this->msg = "Vous ne pouvez pas utiliser le mÃªme nom ($arg)de zone plusieurs fois.<br>";
   break;
   case 7:
-    $this->titre="Erreur de parsing n° $code";
-    $this->msg = "Vous avez oublié de fermer la zone $arg.<br>";
+    $this->titre="Erreur de parsing nÂ° $code";
+    $this->msg = "Vous avez oubliÃ© de fermer la zone $arg.<br>";
   break;
   case 8:
-    $this->titre="Erreur de traitement n° $code";
+    $this->titre="Erreur de traitement nÂ° $code";
     $this->msg = "Le fichier template $arg est introuvable.<br>";
   break;
   case 9:
-    $this->titre="Erreur de traitement n° $code";
-    $this->msg = "Impossible d'ouvrir le fichier $arg.Vérifiez les droits de ce fichier.<br>";
+    $this->titre="Erreur de traitement nÂ° $code";
+    $this->msg = "Impossible d'ouvrir le fichier $arg.VÃ©rifiez les droits de ce fichier.<br>";
   break;
   case 10:
-    $this->titre="Erreur de traitement n° $code";
+    $this->titre="Erreur de traitement nÂ° $code";
     $this->msg = "Impossible de lire le fichier template $arg.<br>";	
   break;
   case 11:
-    $this->titre="Erreur de traitement n° $code";
-    $this->msg = "La zone $arg est introuvable.Vérifiez la syntaxe de cette zone.<br>"; 
+    $this->titre="Erreur de traitement nÂ° $code";
+    $this->msg = "La zone $arg est introuvable.VÃ©rifiez la syntaxe de cette zone.<br>"; 
   break;
   case 12:  
-    $this->titre="Erreur de traitement n° $code";
-    $this->msg = "La variable $arg est introuvable .Vérifiez la syntaxe de la variable.<br>";	
+    $this->titre="Erreur de traitement nÂ° $code";
+    $this->msg = "La variable $arg est introuvable .VÃ©rifiez la syntaxe de la variable.<br>";	
   break;
   case 13:
-    $this->titre="Erreur de traitement n° $code";
-    $this->msg = "L'identifiant de fichier spécifié n'existe pas.Vérifiez les fonctions Open() de votre script.<br>";
+    $this->titre="Erreur de traitement nÂ° $code";
+    $this->msg = "L'identifiant de fichier spÃ©cifiÃ© n'existe pas.VÃ©rifiez les fonctions Open() de votre script.<br>";
   break;  
   case 14:
-    $this->titre="Erreur de traitement n° $code";
+    $this->titre="Erreur de traitement nÂ° $code";
 	$var = $arg[1];
 	$file = $arg[0];
-    $this->msg = "La variable $var dans le fichier $file est introuvable.Vérifiez la syntaxe de la variable.<br>";	
+    $this->msg = "La variable $var dans le fichier $file est introuvable.VÃ©rifiez la syntaxe de la variable.<br>";	
   break;  
   case 15:
-    $this->titre="Erreur de traitement n° $code";
+    $this->titre="Erreur de traitement nÂ° $code";
 	$var = $arg[2];
 	$zone = $arg[1];
 	$fichier = $arg[0];
-    $this->msg = "La variable $var dans la zone $zone du fichier $fichier est introuvable.Vérifiez la syntaxe de la variable et du nom de la zone.<br>";	
+    $this->msg = "La variable $var dans la zone $zone du fichier $fichier est introuvable.VÃ©rifiez la syntaxe de la variable et du nom de la zone.<br>";	
   break; 
   default:
 	 $this->titre = "Erreur inconnue $code";	 
@@ -134,10 +134,10 @@ function Session($name,$source,$stored){
 }
 
 function parseVar(){
- // Récupération des noms des variables
+ // RÃ©cupÃ©ration des noms des variables
  $regle = "|".VARTAG."(.*)}|sU"; 
  preg_match_all ($regle,$this->source,$var1);
- // Création du tableau de variable  à partir de la liste parsée.
+ // CrÃ©ation du tableau de variable  Ã  partir de la liste parsÃ©e.
  $this->varlist=array_merge($this->varlist,$var1[1]);
 return 1;
 } 
@@ -249,14 +249,14 @@ function getNom($code){
 
    preg_match("(<!--VTP_([^()]+)-->)sU",$code,$reg);
    
-   // Tester la présence des caratère invalides dans le nom ( | et {});
+   // Tester la prÃ©sence des caratÃ¨re invalides dans le nom ( | et {});
    if (@count(explode("|",$reg[1]))>1 || @count(explode("{",$reg[1]))>1 || @count(explode("}",$reg[1]))>1) exit($this->error(5,$reg[1],"PARSE1",1));
    
    return @$reg[1];
 }
 
 function endTag($code,$nom){
-// Renvoie TRUE(1) si le tag de fermeture est présent.
+// Renvoie TRUE(1) si le tag de fermeture est prÃ©sent.
 
    preg_match("(<!--/VTP_$nom-->)sU",$code,$reg);
 
@@ -272,8 +272,8 @@ return $reg[$type][0];
 }
 
 function parseZone($code_source,$nom_zone="|root|"){
-// Fonction récursive de parsing du fichier template
-   // Vérification que la zone n'existe pas
+// Fonction rÃ©cursive de parsing du fichier template
+   // VÃ©rification que la zone n'existe pas
    if (isset($this->sources[$nom_zone])) exit($this->error(6,$nom_zone,"PARSE2",1));
 
    // Enregistrement du code source
@@ -282,7 +282,7 @@ function parseZone($code_source,$nom_zone="|root|"){
    // Rappel de la fonction pour chaque fils.
    while($nom_fils=$this->getNom($this->sources[$nom_zone]["source"])){
 
-     // Vérification que le tag de fin est présent.
+     // VÃ©rification que le tag de fin est prÃ©sent.
      if (!$this->endTag($code_source,$nom_fils)) exit($this->error(7,$nom_fils,"PARSE3",1));
 
      // Parse le fils
@@ -291,7 +291,7 @@ function parseZone($code_source,$nom_zone="|root|"){
      // Enregistre le nom du fils dans la liste des fils
      $this->sources[$nom_zone]["fils"][]=$nom_fils;
 
-     // Remplace le code du fils dans le source du père
+     // Remplace le code du fils dans le source du pÃ¨re
      $this->sources[$nom_zone]["source"]=str_replace(
 				     $this->getSource($this->sources[$nom_zone]["source"],$nom_fils,0),
 				     "|$nom_fils|",
@@ -374,11 +374,11 @@ class VTemplate extends VTemplate_Private{
 
 function Open($nomfichier){
 // Ouverture d'un fichier source et retourne le handle de ce fichier
-// Création du handle:
+// CrÃ©ation du handle:
 $handle =  "{".count($this->sessions)."}" ;
 
 
-// Récupération du source à parser
+// RÃ©cupÃ©ration du source Ã  parser
 if (!@file_exists($nomfichier)) return $this->error(8,$nomfichier,"TTT1",1);
 if (!$f_id=@fopen($nomfichier,"r")) return $this->error(9,$nomfichier,"TTT2",1);
 if (!$source=@fread($f_id, filesize($nomfichier))) return $this->error(10,$nomfichier,"TTT3",1);
@@ -391,7 +391,7 @@ $this->file_name[$handle]=$nomfichier;
 // Parse les zones
 $this->parseZone($source);
 
-// Création du tableau de session
+// CrÃ©ation du tableau de session
 $this->createSession($handle);
 
 //Nettoyage des variables temporaires
@@ -472,7 +472,7 @@ function setVarF($handle,$zone_var,$file){
 // Fonction qui ouvre le fichier file et copie ce qu'il y a dedans dans une variable.
 $tab=explode(".",$zone_var);
 
-// Récupération nom de la zone et de la variable.
+// RÃ©cupÃ©ration nom de la zone et de la variable.
  if(count($tab)==2){
    $zone=$tab[0];
    $var=$tab[1];
@@ -485,7 +485,7 @@ $tab=explode(".",$zone_var);
 // Teste l'existence de la zone dans la liste
  if (!is_object($this->sessions[$handle][$zone])) return $this->error(11,array($handle,$zone),"TTT12",1);
 
- // Récupération du source à lire
+ // RÃ©cupÃ©ration du source Ã  lire
 if (!@file_exists($file)) return $this->error(8,$file,"TTT13",1);
 if (!$f_id=@fopen($file,"r")) return $this->error(9,$file,"TTT14",1);
 if (!$val=@fread($f_id, filesize($file))) return $this->error(10,$file,"TTT15",1);
@@ -516,7 +516,7 @@ function Display($handle="{0}",$display=1,$zone="|root|"){
 /*
 * 
 On peut l'utiliser : 
-- SetVarTab($array): tout les couples clef/valeur sont valorisées 
+- SetVarTab($array): tout les couples clef/valeur sont valorisÃ©es 
 - SetVarTab($array,$index) seuls les couples clef/valeur dont la clef est dans le tableau index ou dont la valeur == $index (si pas tableau) 
 Si $index contient ou est une clef de type zone.clef, la clef sera extraite du texte est servira d'index pour $array 
 
@@ -602,4 +602,3 @@ function setGlobalVarTab($handle,$zones,$index = array()){
 $DEFINE_VTEMPLATE = 1;
 }
 ?>
-
