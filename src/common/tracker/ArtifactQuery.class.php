@@ -600,7 +600,7 @@ class ArtifactQuery extends Error {
 	 *	@return	string	Assignee ID
 	 */
 	function getAssignee() {
-		if (!isset($this->element_array))
+		if (!isset($this->element_array[ARTIFACT_QUERY_ASSIGNEE]))
 			return false;
 		return $this->element_array[ARTIFACT_QUERY_ASSIGNEE][0];
 	}
