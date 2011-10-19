@@ -81,31 +81,31 @@ function setconfigfromoldsources ($sec, $var, $serv, $env, $glob) {
 	}
 }
 
-if (file_exists ($gfcgfile)) {
+if (isset($gfcgfile) && file_exists ($gfcgfile)) {
 	require_once $gfcgfile ;
+
+	setconfigfromoldsources ('core', 'database_host',
+				 'GForgeDbhost', 'sys_gfdbhost', 'sys_dbhost') ;
+	setconfigfromoldsources ('core', 'database_port',
+				 'GForgeDbport', 'sys_gfdbport', 'sys_dbport') ;
+	setconfigfromoldsources ('core', 'database_name',
+				 'GForgeDbname', 'sys_gfdbname', 'sys_dbname') ;
+	setconfigfromoldsources ('core', 'database_user',
+				 'GForgeDbuser', 'sys_gfdbuser', 'sys_dbuser') ;
+	setconfigfromoldsources ('core', 'database_password',
+				 'GForgeDbpasswd', 'sys_gfdbpasswd', 'sys_dbpasswd') ;
+	setconfigfromoldsources ('core', 'ldap_password',
+				 'GForgeLdapPasswd', 'sys_gfldap_passwd', NULL) ;
+	setconfigfromoldsources ('core', 'jabber_password',
+				 'GForgeJabberPasswd', 'sys_gfjabber_pass', NULL) ;
+
+	forge_define_config_item ('source_path', 'core', $fusionforge_basedir) ;
+	forge_define_config_item ('data_path', 'core', '/var/lib/gforge') ;
+	forge_define_config_item ('chroot', 'core', '$core/data_path/chroot') ;
+	forge_define_config_item ('config_path', 'core', '/etc/gforge') ;
+
+	require_once $gfcommon.'include/config-vars.php';
 }
-
-setconfigfromoldsources ('core', 'database_host',
-			 'GForgeDbhost', 'sys_gfdbhost', 'sys_dbhost') ;
-setconfigfromoldsources ('core', 'database_port',
-			 'GForgeDbport', 'sys_gfdbport', 'sys_dbport') ;
-setconfigfromoldsources ('core', 'database_name',
-			 'GForgeDbname', 'sys_gfdbname', 'sys_dbname') ;
-setconfigfromoldsources ('core', 'database_user',
-			 'GForgeDbuser', 'sys_gfdbuser', 'sys_dbuser') ;
-setconfigfromoldsources ('core', 'database_password',
-			 'GForgeDbpasswd', 'sys_gfdbpasswd', 'sys_dbpasswd') ;
-setconfigfromoldsources ('core', 'ldap_password',
-			 'GForgeLdapPasswd', 'sys_gfldap_passwd', NULL) ;
-setconfigfromoldsources ('core', 'jabber_password',
-			 'GForgeJabberPasswd', 'sys_gfjabber_pass', NULL) ;
-
-forge_define_config_item ('source_path', 'core', $fusionforge_basedir) ;
-forge_define_config_item ('data_path', 'core', '/var/lib/gforge') ;
-forge_define_config_item ('chroot', 'core', '$core/data_path/chroot') ;
-forge_define_config_item ('config_path', 'core', '/etc/gforge') ;
-
-require_once $gfcommon.'include/config-vars.php';
 
 forge_read_config_file ($gfconfig.'/config.ini') ;
 forge_read_config_dir ($gfconfig.'/config.ini.d/') ;
