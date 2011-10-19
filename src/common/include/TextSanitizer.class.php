@@ -45,7 +45,7 @@
 
 require_once('HTMLPurifier.auto.php');
 
-Class TextSanitizer extends Error {
+class TextSanitizer extends Error {
 
 
 	/**
@@ -221,12 +221,24 @@ Class TextSanitizer extends Error {
 	}
 
 	function stripTags ($text, $allowed='br,p,li,ul') {
+		// Try apc caching first (if possible).
+		if (function_exists('apc_fetch')) {
+			$key = 'stripTags.'.md5($text);
+			$cached = apc_fetch($key);
+			if ($cached) {
+				return $cached;
+			}
+		}
+
 		$config = HTMLPurifier_Config::createDefault();
 		$config->set('Cache.DefinitionImpl', NULL);
 		$config->set('HTML.Allowed', $allowed);
 		$purifier = new HTMLPurifier($config);
 		$text = $purifier->purify($text);
 
+		if (function_exists('apc_store') && $key) {
+			apc_store($key, $text, 3600);
+		}
 		return $text;
 	}
 
