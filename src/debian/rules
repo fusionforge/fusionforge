@@ -249,7 +249,8 @@ install: build
 # 	Remove Windows files
 	rm -rf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows
 
-	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/themes/$(OLDPACKAGE)/COPYING
+# Remove extra copies of the GNU GPLv2
+	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/themes/*/COPYING
 
 # 	Remove Snoopy class from binary packages (provided by libphp-snoopy)
 	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name Snoopy.class.php | xargs -r rm
