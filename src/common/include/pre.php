@@ -55,7 +55,7 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 }
 
 // Database access and other passwords when on the web
-function setconfigfromoldsources ($sec, $var, $serv, $env, $glob) {
+function setconfigfromenv ($sec, $var, $serv, $env) {
 	if (getenv ('SERVER_SOFTWARE')) {
 		if (function_exists ('apache_request_headers')) {
 			$headers = apache_request_headers() ;
@@ -66,19 +66,27 @@ function setconfigfromoldsources ($sec, $var, $serv, $env, $glob) {
 		if (isset ($headers[$serv])) {
 			forge_define_config_item ($var, $sec,
 						  $headers[$serv]) ;
-			return ;
+			return true;
 		}
 	}
 	if (isset ($_ENV[$env])) {
 		forge_define_config_item ($var, $sec,
 					  getenv($env)) ;
-		return ;
+		return true;
+	}
+	return false;
+}
+
+function setconfigfromoldsources ($sec, $var, $serv, $env, $glob) {
+	if (setconfigfromenv($sec, $var, $serv, $env)) {
+		return true;
 	}
 	if (isset ($GLOBALS[$glob])) {
 		forge_define_config_item ($var, $sec,
 					  $GLOBALS[$glob]) ;
-		return ;
+		return true;
 	}
+	return false;
 }
 
 if (isset($gfcgfile) && file_exists ($gfcgfile)) {
@@ -105,6 +113,21 @@ if (isset($gfcgfile) && file_exists ($gfcgfile)) {
 	forge_define_config_item ('config_path', 'core', '/etc/gforge') ;
 
 	require_once $gfcommon.'include/config-vars.php';
+} else {
+	setconfigfromenv ('core', 'database_host',
+				 'GForgeDbhost', 'sys_gfdbhost') ;
+	setconfigfromenv ('core', 'database_port',
+				 'GForgeDbport', 'sys_gfdbport') ;
+	setconfigfromenv ('core', 'database_name',
+				 'GForgeDbname', 'sys_gfdbname') ;
+	setconfigfromenv ('core', 'database_user',
+				 'GForgeDbuser', 'sys_gfdbuser') ;
+	setconfigfromenv ('core', 'database_password',
+				 'GForgeDbpasswd', 'sys_gfdbpasswd') ;
+	setconfigfromenv ('core', 'ldap_password',
+				 'GForgeLdapPasswd', 'sys_gfldap_passwd') ;
+	setconfigfromenv ('core', 'jabber_password',
+				 'GForgeJabberPasswd', 'sys_gfjabber_pass') ;
 }
 
 forge_read_config_file ($gfconfig.'/config.ini') ;
