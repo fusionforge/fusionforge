@@ -20,10 +20,13 @@
 
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 
+$headers = getIntFromRequest('headers');
+$sep = getStringFromRequest('sep', ',');
+
 $date = date('Y-m-d');
 
 header('Content-type: text/csv');
-header('Content-disposition: filename="tracker_report-'.$date.'.csv"');
+header('Content-disposition: filename="trackers-'.$date.'.csv"');
 
 session_require_perm ('tracker', $ath->getID(), 'read') ;
 
@@ -47,15 +50,30 @@ $af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$
 
 $at_arr = $af->getArtifacts();
 
-echo 'artifact_id;status_id;status_name;priority;submitter_id;submitter_name;assigned_to_id;assigned_to_name;open_date;close_date;last_modified_date;summary;details';
+if ($headers) {
+	echo 'artifact_id'.$sep.
+		'status_id'.$sep.
+		'status_name'.$sep.
+		'priority'.$sep.
+		'submitter_id'.$sep.
+		'submitter_name'.$sep.
+		'assigned_to_id'.$sep.
+		'assigned_to_name'.$sep.
+		'open_date'.$sep.
+		'close_date'.$sep.
+		'last_modified_date'.$sep.
+		'summary'.$sep.
+		'details';
 
-//
-//	Show the extra fields
-//
-$ef = $ath->getExtraFields();
-$keys=array_keys($ef);
-for ($i=0; $i<count($keys); $i++) {
-	echo ';"'.$ef[$keys[$i]]['field_name'].'"';
+	//
+	//	Show the extra fields
+	//
+	$ef = $ath->getExtraFields();
+	$keys=array_keys($ef);
+	for ($i=0; $i<count($keys); $i++) {
+		echo $sep.'"'.$ef[$keys[$i]]['field_name'].'"';
+	}
+	echo "\n";
 }
 
 for ($i=0; $i<count($at_arr); $i++) {
@@ -64,19 +82,19 @@ for ($i=0; $i<count($at_arr); $i++) {
 	$update_date = $at_arr[$i]->getLastModifiedDate() ? date(_('Y-m-d H:i'),$at_arr[$i]->getLastModifiedDate()) : '';
 	$close_date  = $at_arr[$i]->getCloseDate()? date(_('Y-m-d H:i'),$at_arr[$i]->getCloseDate()): '';
 
-	echo "\n".$at_arr[$i]->getID().';'.
-		$at_arr[$i]->getStatusID().';"'.
-		$at_arr[$i]->getStatusName().'";'.
-		$at_arr[$i]->getPriority().';'.
-		$at_arr[$i]->getSubmittedBy().';"'.
-		$at_arr[$i]->getSubmittedRealName().'";'.
-		$at_arr[$i]->getAssignedTo().';"'.
-		$at_arr[$i]->getAssignedRealName().'";"'.
-		$open_date.'";"'.
-		$close_date.'";"'.
-		$update_date.'";"'.
-		fix4csv($at_arr[$i]->getSummary()).'";"'.
-		fix4csv($at_arr[$i]->getDetails()).'"';
+	echo $at_arr[$i]->getID().$sep.
+		$at_arr[$i]->getStatusID().$sep.
+		'"'.$at_arr[$i]->getStatusName().'"'.$sep.
+		$at_arr[$i]->getPriority().$sep.
+		$at_arr[$i]->getSubmittedBy().$sep.
+		'"'.$at_arr[$i]->getSubmittedRealName().'"'.$sep.
+		$at_arr[$i]->getAssignedTo().$sep.
+		'"'.$at_arr[$i]->getAssignedRealName().'"'.$sep.
+		'"'.$open_date.'"'.$sep.
+		'"'.$close_date.'"'.$sep.
+		'"'.$update_date.'"'.$sep.
+		'"'.fix4csv($at_arr[$i]->getSummary()).'"'.$sep.
+		'"'.fix4csv($at_arr[$i]->getDetails()).'"';
 
 	//
 	//	Show the extra fields
@@ -84,8 +102,9 @@ for ($i=0; $i<count($at_arr); $i++) {
  	$efd = $at_arr[$i]->getExtraFieldDataText();
  	foreach ( $efd as $efd_pair ) {
  		$value = $efd_pair["value"];
- 		echo ';"'. fix4csv($value) .'"';
+ 		echo $sep.'"'. fix4csv($value) .'"';
  	}
+ 	echo "\n";
 }
 
 function fix4csv ($value) {
