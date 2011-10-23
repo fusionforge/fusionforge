@@ -48,9 +48,26 @@
 
 pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
 
-$headers = getIntFromRequest('headers', 1);
-$full = getIntFromRequest('full', 1);
-$sep = getStringFromRequest('sep', ',');
+$default = array('headers' => 1, 'full' => 1, 'sep' => ',');
+
+if (session_loggedin()) {
+	$u = session_get_user();
+	$pref = $u->getPreference('csv');
+	if ($pref) {
+		$default = array_merge($default, unserialize($pref));
+	}
+}
+
+$headers = getIntFromRequest('headers', $default['headers']);
+$full = getIntFromRequest('full', $default['full']);
+$sep = getStringFromRequest('sep', $default['sep']);
+
+if (session_loggedin()) {
+	if ( ($sep !== $default['sep']) || ($headers !== $default['headers']) ) {
+		$pref = array_merge( $default, array('headers' => $headers, 'full' => $full, 'sep' => $sep));
+		$u->setPreference('csv', serialize($pref));
+	}
+}
 
 $url_set_format = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=format_csv&amp;sep='.urlencode($sep).'&amp;full='.$full.'&amp;headers='.$headers;
 
