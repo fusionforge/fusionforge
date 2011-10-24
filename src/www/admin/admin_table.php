@@ -113,8 +113,8 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 		$result = db_numrows(db_query_params ('SELECT processor_id FROM frs_file WHERE processor_id = $1',
 			array($id)));
 		if ($result > 0) {
-			echo '<div class="warning_msg">'.sprintf(_('You can\'t delete the processor %1$s since it\'s currently referenced in a file release.'), db_result(db_query_params ('select name from frs_processor where processor_id = $1',
-			array($id)), 0, 0)).'</div>';
+			echo '<p class="warning_msg">'.sprintf(_('You can\'t delete the processor %1$s since it\'s currently referenced in a file release.'), db_result(db_query_params ('select name from frs_processor where processor_id = $1',
+			array($id)), 0, 0)).'</p>';
 			return;
 		}
 	}
@@ -245,9 +245,9 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 				 array ($id)) ;
 
 	if (db_query_qpa($qpa)) {
-        print('<p class="feedback">');
+		print('<p class="feedback">');
 		printf(_('%1$s successfully modified.'), ucfirst(getUnitLabel($unit)));
-        print('</p>');
+		print('</p>');
 	} else {
 		echo db_error();
 	}
@@ -267,9 +267,9 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 	$qpa = db_construct_qpa ($qpa, implode (',', $v).')', $values) ;
 
 	if (db_query_qpa($qpa)) {
-        print('<div class="feedback">');
+        print('<p class="feedback">');
 		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
-        print('</div>');
+        print('</p>');
 	} else {
 		form_release_key(getStringFromRequest('form_key'));
 		echo db_error();
@@ -297,22 +297,22 @@ function admin_table_show($table, $unit, $primary_key) {
 		$cell_data[]=array(ucwords(getUnitLabel($unit)).' <a href="'.getStringFromServer('PHP_SELF').'?function=add">['._('add new').']</a>',
 			'colspan="'.($cols+1).'"');
 
-                echo '<table border="0" width="100%">';
+		echo '<table border="0" width="100%">';
 		echo $HTML->multiTableRow('',$cell_data, TRUE);
 
-                echo '
+		echo '
 			<tr><td width="5%"></td>';
-                for ($i = 0; $i < $cols; $i++) {
+		for ($i = 0; $i < $cols; $i++) {
 			echo '<td><strong>'.db_fieldname($result,$i).'</strong></td>';
 		}
 		echo '</tr>';
 
-                for ($j = 0; $j < $rows; $j++) {
+		for ($j = 0; $j < $rows; $j++) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 
-                        $id = db_result($result,$j,0);
-                        echo '<td><a href="'.getStringFromServer('PHP_SELF').'?function=edit&amp;id='.$id.'">['._('Edit').']</a>';
-                        echo '<a href="'.getStringFromServer('PHP_SELF').'?function=confirmdelete&amp;id='.$id.'">['._('Delete').']</a> </td>';
+			$id = db_result($result,$j,0);
+			echo '<td><a href="'.getStringFromServer('PHP_SELF').'?function=edit&amp;id='.$id.'">['._('Edit').']</a>';
+			echo '<a href="'.getStringFromServer('PHP_SELF').'?function=confirmdelete&amp;id='.$id.'">['._('Delete').']</a> </td>';
 			for ($i = 0; $i < $cols; $i++) {
 				echo '<td>'. db_result($result, $j, $i) .'</td>';
 			}

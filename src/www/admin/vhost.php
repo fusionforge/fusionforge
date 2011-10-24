@@ -117,7 +117,7 @@ site_admin_header(array('title'=>_('Site admin')));
 
 <strong><?php echo _('Add Virtual Host'); ?></strong>
 
-<table border="0">
+<table>
 
 <tr>
 <td><?php echo _('Project Unix Name'); ?></td>
@@ -140,7 +140,7 @@ site_admin_header(array('title'=>_('Site admin')));
 <br />
 
 <form name="tweak" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
-<table border="0">
+<table>
 <tr>
    <td><?php echo _('Virtual Host:'); ?></td><td><input type="text" name="vhost_name" /></td>
    <td><input type="submit" value="<?php echo _('Get Info'); ?>" /></td>
@@ -168,7 +168,7 @@ if (getStringFromRequest('tweak')) {
 
 		$row_vh = db_fetch_array($res_vh);
 
-		print '<div class="feedback">'._('Update Record:').'</div>';
+		print '<p class="feedback">'._('Update Record:').'</p>';
 
 		$title=array();
 		$title[]=_('VHOST ID');
@@ -194,7 +194,7 @@ if (getStringFromRequest('tweak')) {
 			</form>
 		';
 	} else {
-		echo '<div class="warning">'._('No such VHOST: ') . $vhost_name.'</div>';
+		echo '<p class="warning">'._('No such VHOST: ') . $vhost_name.'</p>';
 	}
 
 }
