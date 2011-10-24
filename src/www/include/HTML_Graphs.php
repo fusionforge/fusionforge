@@ -421,19 +421,19 @@ function end_graph()
 */
 function hv_graph_defaults($vals)
    {
-    if (! $vals["vfcolor"]) { $vals["vfcolor"]="#000000"; }
-    if (! $vals["hfcolor"]) { $vals["hfcolor"]="#000000"; }
-    if (! $vals["vbgcolor"]) { $vals["vbgcolor"]="#ffffff"; }
-    if (! $vals["hbgcolor"]) { $vals["hbgcolor"]="#ffffff"; }
-    if (! $vals["cellpadding"]) { $vals["cellpadding"]=0; }
-    if (! $vals["cellspacing"]) { $vals["cellspacing"]=0; }
-    if (! $vals["border"]) { $vals["border"]=0; }
-    if (! $vals["scale"]) { $vals["scale"]=1; }
-    if (! $vals["namebgcolor"]) { $vals["namebgcolor"]="#ffffff"; }
-    if (! $vals["valuebgcolor"]) { $vals["valuebgcolor"]="#ffffff"; }
-    if (! $vals["namefcolor"]) { $vals["namefcolor"]="#000000"; }
-    if (! $vals["valuefcolor"]) { $vals["valuefcolor"]="#000000"; }
-    if (! $vals["doublefcolor"]) { $vals["doublefcolor"]="#886666"; }
+    if (!isset($vals["vfcolor"]))      { $vals["vfcolor"]="#000000"; }
+    if (!isset($vals["hfcolor"]))      { $vals["hfcolor"]="#000000"; }
+    if (!isset($vals["vbgcolor"]))     { $vals["vbgcolor"]="#ffffff"; }
+    if (!isset($vals["hbgcolor"]))     { $vals["hbgcolor"]="#ffffff"; }
+    if (!isset($vals["cellpadding"]))  { $vals["cellpadding"]=0; }
+    if (!isset($vals["cellspacing"]))  { $vals["cellspacing"]=0; }
+    if (!isset($vals["border"]))       { $vals["border"]=0; }
+    if (!isset($vals["scale"]))        { $vals["scale"]=1; }
+    if (!isset($vals["namebgcolor"]))  { $vals["namebgcolor"]="#ffffff"; }
+    if (!isset($vals["valuebgcolor"])) { $vals["valuebgcolor"]="#ffffff"; }
+    if (!isset($vals["namefcolor"]))   { $vals["namefcolor"]="#000000"; }
+    if (!isset($vals["valuefcolor"]))  { $vals["valuefcolor"]="#000000"; }
+    if (!isset($vals["doublefcolor"])) { $vals["doublefcolor"]="#886666"; }
 
     return ($vals);
    }
