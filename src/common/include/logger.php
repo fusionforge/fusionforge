@@ -135,11 +135,6 @@ $res_logger = db_query_params ($sql, array(date('Ymd'), date('H'),
 	$log_group, browser_get_agent(), browser_get_version(), browser_get_platform(),
 	time(), getStringFromServer('PHP_SELF'), '0'));
 
-//
-//	temp hack
-//
-$sys_db_is_dirty=false;
-
 if (!$res_logger) {
 	echo "An error occured in the logger.\n";
 	echo htmlspecialchars(db_error());
