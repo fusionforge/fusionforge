@@ -15,7 +15,7 @@ $func = getStringFromRequest ('func') ;
 
 if ($func == 'addlabel') {
 	$label_name = addslashes (getStringFromRequest ('label_name')) ;
-	$label_text = addslashes (getStringFromRequest ('label_text')) ;
+	$label_text = getStringFromRequest ('label_text') ;
 	$res = db_query_params ('INSERT INTO plugin_projectlabels_labels (label_name, label_text)
                          VALUES($1,$2)',
 			array($label_name,
@@ -93,7 +93,7 @@ if ($func == 'removelabelfromproject') {
 if ($func == 'editlabel') {
 	$label_id = getIntFromRequest ('label_id', 0) ;
 	$label_name = addslashes (getStringFromRequest ('label_name')) ;
-	$label_text = addslashes (getStringFromRequest ('label_text')) ;
+	$label_text = getStringFromRequest ('label_text') ;
 	$res = db_query_params ('UPDATE plugin_projectlabels_labels SET label_name = $1, label_text = $2
 		         WHERE label_id=$3',
 			array($label_name,
@@ -121,8 +121,8 @@ if ($func == 'edit') {
 <input type="text" size="15" maxlength="32" name="label_name" value="<?php echo stripslashes ($row['label_name']) ; ?>"/> <br/>
 						  <?php echo _('Displayed text (or HTML) for the label:') ; ?><br/>
 <textarea tabindex='1' accesskey="," name="label_text" rows='5'
-														       cols='80'><?php echo stripslashes($row['label_text']) ; ?></textarea><br/>
-																							   <?php echo _('This label currently looks like this:') ." " . stripslashes($row['label_text']) ; ?>
+														       cols='80'><?php echo $row['label_text'] ; ?></textarea><br/>
+																							   <?php echo _('This label currently looks like this:') ." " . $row['label_text'] ; ?>
 <input type="submit" value="<?php echo _('Save this label') ?>" />
 </form>
 <?php
@@ -143,7 +143,7 @@ if (db_numrows($res) >= 1) {
 	while ($row = db_fetch_array($res)) {
 		echo "<h3>".stripslashes ($row['label_name'])."</h3>" ;
 		echo "<br />" . _('This label currently looks like this:') ." ";
-		echo stripslashes ($row['label_text']) . "<br />" ;
+		echo $row['label_text'] . "<br />" ;
 		
 		$res2 = db_query_params ('SELECT groups.unix_group_name, groups.group_name, groups.group_id FROM groups, plugin_projectlabels_group_labels
                  WHERE plugin_projectlabels_group_labels.group_id = groups.group_id
