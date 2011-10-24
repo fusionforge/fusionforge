@@ -39,12 +39,16 @@ function util_gen_cross_ref ($text, $group_id) {
 	$text = preg_replace('/\[\T(\d+)\]/e', "_taskid2url('\\1')", $text);
 
 	// Handle [wiki:<pagename>] syntax
-	$text = preg_replace('/\[wiki:(\S+)\]/', "<a href=\"/wiki/g/$prj/\\1\">\\1</a>", $text);
+	$text = preg_replace('/\[wiki:(.*?)\]/e', "_page2url('$prj','\\1')", $text);
 
 	// Handle [forum:<thread_id>] Syntax => links to forum.
 	$text = preg_replace('/\[forum:(\d+)\]/e', "_forumid2url('\\1')", $text);
 
 	return $text;
+}
+
+function _page2url($prj,$page) {
+	return '<a href="/wiki/g/'.$prj.'/'.rawurlencode($page).'">'.$page.'</a>';
 }
 
 function _artifactid2url ($id, $mode='') {
