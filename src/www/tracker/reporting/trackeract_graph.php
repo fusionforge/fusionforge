@@ -102,7 +102,7 @@ $lineplot3 ->SetLegend("Total Still Open");
 //
 $graph->title->Set("Tracker Activity For: ".$group->getPublicName().
 	" (".date('Y-m-d',$report->getStartDate()) ." to ". date('Y-m-d',$report->getEndDate()) .")");
-$graph->subtitle->Set($report_company_name);
+$graph->subtitle->Set(forge_get_config('forge_name'));
 //$graph->xaxis-> title->Set("Date" );
 //$graph->yaxis-> title->Set("Number" );
 
