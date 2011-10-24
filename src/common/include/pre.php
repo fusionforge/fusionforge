@@ -336,7 +336,7 @@ if (forge_get_config('database_name')!=""){
 		}
 
 		// Insert this page view into the database
-		require_once $gfwww.'include/logger.php';
+		require_once $gfcommon.'include/logger.php';
 
 		// If logged in, set up a $LUSER var referencing
 		// the logged in user's object
