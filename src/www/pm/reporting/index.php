@@ -30,6 +30,8 @@ require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 require_once $gfcommon.'pm/ProjectCategory.class.php';
 require_once $gfwww.'project/stats/project_stats_utils.php';
 require_once $gfwww.'include/tool_reports.php';
+require_once $gfwww.'include/HTML_Graphs.php';
+
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
@@ -74,8 +76,6 @@ function pm_quick_report($group_id,$title,$subtitle1,$qpa1,$subtitle2,$qpa2,$com
 	pm_footer(array());
 }
 
-
-include_once $gfwww.'include/HTML_Graphs.php';
 
 $what = getStringFromRequest('what');
 if ($what) {
