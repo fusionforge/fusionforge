@@ -79,6 +79,9 @@ if (session_loggedin()) {
 site_project_header(array('title'=>$title, 'h1' => '', 'group'=>$group_id, 'toptab' => 'home',
 	'submenu' => $params['submenu']));
 
+$params = array('group_id' => $group_id);
+plugin_hook('project_before_widgets', $params);
+
 $lm = new WidgetLayoutManager();
 $lm->displayLayout($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP);
 
