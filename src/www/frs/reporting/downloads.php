@@ -107,7 +107,7 @@ $report=new ReportDownloads($group_id,$package_id,$start,$end);
 $data = $report->getData();
 
 if (count($data) == 0) {
-    echo '<p>';
+    echo '<p class="information">';
     echo _('There have been no downloads for this package.');
     echo '</p>';
 } else {

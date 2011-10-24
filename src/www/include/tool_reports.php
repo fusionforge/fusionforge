@@ -67,7 +67,7 @@ function reports_quick_graph($title,$qpa1,$qpa2,$bar_colors) {
 		print '<p />';
 //      		GraphResult($result,$title);
 	} else {
-		echo "<p class='warning_msg'>"._('No data found to report')."</p>";
+		echo "<p class='information'>"._('No data found to report')."</p>";
 	}
 }
 
