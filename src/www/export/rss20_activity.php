@@ -57,7 +57,7 @@ if ($group_id) {
        ';
 	print " <channel>\n";
 	print "  <title>".forge_get_config ('forge_name')." $title Activity</title>\n";
-	print "  <link>$url/activity/$link</link>\n";
+	print "  <link>".util_make_url("/activity/$link")."</link>\n";
 	print "  <description>".forge_get_config ('forge_name')." Project Activity$description</description>\n";
 	print "  <language>en-us</language>\n";
 	print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
