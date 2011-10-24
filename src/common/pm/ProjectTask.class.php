@@ -90,11 +90,11 @@ class ProjectTask extends Error {
 	function ProjectTask(&$ProjectGroup, $project_task_id=false, $arr=false) {
 		$this->Error();
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {
-			$this->setError('ProjectTask:: No Valid ProjectGroup Object');
+			$this->setError('No Valid ProjectGroup Object');
 			return false;
 		}
 		if ($ProjectGroup->isError()) {
-			$this->setError('ProjectTask:: '.$ProjectGroup->getErrorMessage());
+			$this->setError($ProjectGroup->getErrorMessage());
 			return false;
 		}
 		$this->ProjectGroup =& $ProjectGroup;
@@ -139,15 +139,15 @@ class ProjectTask extends Error {
 	function create($summary,$details,$priority,$hours,$start_date,$end_date,
 			$category_id,$percent_complete,&$assigned_arr,&$depend_arr,$duration=0,$parent_id=0, $importData = array()) {
 		$v = new Validator();
-		$v->check($summary, "summary");
-		$v->check($details, "details");
-		$v->check($priority, "priority");
-		$v->check($hours, "hours");
-		$v->check($start_date, "start date");
-		$v->check($end_date, "end date");
-		$v->check($category_id, "category");
+		$v->check($summary, _("summary"));
+		$v->check($details, _("details"));
+		$v->check($priority, _("priority"));
+		$v->check($hours, _("hours"));
+		$v->check($start_date, _("start date"));
+		$v->check($end_date, _("end date"));
+		$v->check($category_id, _("category"));
 		if (!$v->isClean()) {
-			$this->setError($v->formErrorMsg("Must include "));
+			$this->setError($v->formErrorMsg(_("Must include ")));
 			return false;
  		}
 		if (!$parent_id) {
@@ -195,7 +195,7 @@ class ProjectTask extends Error {
 						  $parent_id)) ;
 
 		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError('ProjectTask::create() Posting Failed '.db_error());
+			$this->setError('Posting Failed '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -230,7 +230,7 @@ class ProjectTask extends Error {
 					array ($project_task_id,
 					       $this->ProjectGroup->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('ProjectTask::fetchData() Invalid Task ID'.db_error());
+			$this->setError('Invalid Task ID'.db_error());
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -661,7 +661,7 @@ class ProjectTask extends Error {
 						       $uid,
 						       $time)) ;
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError('AddMessage():: '.db_error());
+				$this->setError(db_error());
 				return false;
 			} else {
 				return true;
@@ -765,7 +765,7 @@ class ProjectTask extends Error {
 						 array ($this->getID(),
 							$del_arr[$i])) ;
 				if (db_error()) {
-					$this->setError('setDependentOn()-1:: '.db_error());
+					$this->setError(db_error());
 					return false;
 				}
 			}
@@ -785,7 +785,7 @@ class ProjectTask extends Error {
 							$add_arr[$i],
 							$lnk)) ;
 				if (db_error()) {
-					$this->setError('setDependentOn()-2:: '.db_error().$sql);
+					$this->setError(db_error());
 					return false;
 				}
 			}
@@ -865,7 +865,7 @@ class ProjectTask extends Error {
 						 array ($this->getID(),
 							$del_arr[$i])) ;
 				if (db_error()) {
-					$this->setError('setAssignedTo()-1:: '.db_error());
+					$this->setError(db_error());
 					return false;
 				}
 			}
@@ -874,7 +874,7 @@ class ProjectTask extends Error {
 						 array ($this->getID(),
 							$add_arr[$i])) ;
 				if (db_error()) {
-					$this->setError('setAssignedTo()-2:: '.db_error());
+					$this->setError(db_error());
 					return false;
 				}
 			}
@@ -929,15 +929,15 @@ class ProjectTask extends Error {
 		entries that changed and will be sended by E-Mail (sendNotice()) */
 
 		$v = new Validator();
-		$v->check($summary, "summary");
-		$v->check($priority, "priority");
-		$v->check($hours, "hours");
-		$v->check($start_date, "start date");
-		$v->check($end_date, "end date");
-		$v->check($status_id, "status");
-		$v->check($category_id, "category");
+		$v->check($summary, _("summary"));
+		$v->check($priority, _("priority"));
+		$v->check($hours, _("hours"));
+		$v->check($start_date, _("start date"));
+		$v->check($end_date, _("end date"));
+		$v->check($status_id, _("status"));
+		$v->check($category_id, _("category"));
 		if (!$v->isClean()) {
-			$this->setError($v->formErrorMsg("Must include "));
+			$this->setError($v->formErrorMsg(_("Must include ")));
 			return false;
 		}
 		if (!$parent_id) {
@@ -1105,12 +1105,12 @@ class ProjectTask extends Error {
 						       $group_project_id,
 						       $this->getID())) ;
 			if (!$res) {
-				$this->setError('Error On ProjectTask::update-5: '.db_error().$sql);
+				$this->setError(db_error());
 				db_rollback();
 				return false;
 			} else {
 				if (!$this->fetchData($this->getID())) {
-					$this->setError('Error On ProjectTask::update-6: '.db_error());
+					$this->setError(db_error());
 					db_rollback();
 					return false;
 				} else {
