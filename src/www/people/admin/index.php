@@ -91,17 +91,18 @@ if (user_ismember(1,'A')) {
 			echo db_error();
 		}
 		?>
-		<p>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+		<p>
 		<input type="hidden" name="people_cat" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-		<h4>New Category Name:</h4>
-		<input type="text" name="cat_name" value="" size="15" maxlength="30" /><br />
-		<div class="warning">Once you add a category, it cannot be deleted</div>
+		<strong>New Category Name:</strong>
+		<input type="text" name="cat_name" value="" size="15" maxlength="30" />
+		</p>
+		<p class="warning">Once you add a category, it cannot be deleted</p>
 		<p>
 		<input type="submit" name="submit" value="SUBMIT"></p>
-		</form></p>
+		</form>
 		<?php
 
 		people_footer(array());
@@ -124,17 +125,18 @@ if (user_ismember(1,'A')) {
 			echo "\n<h2>No Skills Found</h2>";
 		}
 		?>
-		<p>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+		<p>
 		<input type="hidden" name="people_skills" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-		<h4>New Skill Name:</h4>
-		<input type="text" name="skill_name" value="" size="15" maxlength="30" /><br />
-		<div class="warning">Once you add a skill, it cannot be deleted</div>
+		<strong>New Skill Name:</strong>
+		<input type="text" name="skill_name" value="" size="15" maxlength="30" />
+		</p>
+		<p class="warning">Once you add a skill, it cannot be deleted</p>
 		<p>
 		<input type="submit" name="submit" value="SUBMIT"></p>
-		</form></p>
+		</form>
 		<?php
 
 		people_footer(array());
