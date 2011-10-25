@@ -9,13 +9,6 @@
 
 // Attempt to set up the include path, to fix problems with relative includes
 $fusionforge_basedir = dirname(dirname(dirname( __FILE__ ))) ;
-$include_path = join(PATH_SEPARATOR,
-	array("/etc/gforge/custom", "/etc/gforge", ".",
-		"$fusionforge_basedir/common", "$fusionforge_basedir/www",
-		"$fusionforge_basedir/plugins", "$fusionforge_basedir",
-		"$fusionforge_basedir/www/include",
-		"$fusionforge_basedir/common/include",
-		"/usr/share/php","/usr/share/pear"));
 
 // By default, the include_path is changed to include path needed by Gforge.
 // If this does not work, then set defines to real path directly.
@@ -44,14 +37,32 @@ if (getenv('sys_localinc')) {
 } elseif (file_exists('/etc/gforge/local.inc')) {
 	$gfcgfile = '/etc/gforge/local.inc';
 	$gfconfig = '/etc/gforge/';
+} elseif (file_exists('/etc/gforge/config.ini')) {
+	$gfconfig = '/etc/gforge/';
 } else {
 	$gfcgfile = 'local.inc';
 	if (is_dir('/etc/gforge')){
-                $gfconfig = '/etc/gforge/';
-        } else {
+		$gfconfig = '/etc/gforge/';
+	} else {
 		$gfconfig = '';
 	}
 }
+
+$include_path = join(PATH_SEPARATOR,
+	array(
+		$gfconfig.'/custom',
+		$gfconfig,
+		$fusionforge_basedir.'/common',
+		$fusionforge_basedir.'/www',
+		$fusionforge_basedir.'/plugins',
+		$fusionforge_basedir,
+		$fusionforge_basedir.'/www/include',
+		$fusionforge_basedir.'/common/include',
+		'.',
+		'/usr/share/php',
+		'/usr/share/pear'
+	)
+);
 
 if( !ini_set('include_path', $include_path ) && !set_include_path( $include_path )) {
 	$gfcommon = $fusionforge_basedir.'/common/';
