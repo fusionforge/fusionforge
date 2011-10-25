@@ -278,6 +278,11 @@ abstract class BaseRole extends Error {
 	}
 
 	function setSetting ($section, $reference, $value) {
+		$cur = $this->getSettingRaw($section, $reference);
+		if (($value == $cur) && ($cur != NULL)) {
+			return true;
+		}
+
 		$role_id = $this->getID () ;
 
 		$res = db_query_params ('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
@@ -371,6 +376,14 @@ abstract class BaseRole extends Error {
      * @return number|boolean
      */
     function getSetting($section, $reference) {
+	    $r = $this->getSettingRaw($section, $reference);
+	    if ($r == NULL) {
+		    return 0;
+	    }
+	    return $r;
+    }
+
+    function getSettingRaw($section, $reference) {
         if (isset ($this->perms_array[$section][$reference])) {
 			$value = $this->perms_array[$section][$reference] ;
 		} else {
@@ -482,7 +495,7 @@ abstract class BaseRole extends Error {
 			$hook_params['section'] = $section ;
 			$hook_params['reference'] = $reference ;
 			$hook_params['value'] = $value ;
-			$hook_params['result'] = 0 ;
+			$hook_params['result'] = NULL ;
 			plugin_hook_by_reference ("role_get_setting", $hook_params);
 			return $hook_params['result'] ;
 			break ;
