@@ -5,7 +5,7 @@ class ProjectLabelsPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "projectlabels" ;
 		$this->text = "Project labels";
-		$this->hooks[] = "project_before_description" ;
+		$this->hooks[] = "project_before_widgets" ;
 		$this->hooks[] = "site_admin_option_hook" ;
 	}
 
@@ -15,7 +15,7 @@ class ProjectLabelsPlugin extends Plugin {
 		if ($hookname == "site_admin_option_hook") {
 			echo '<li>' . util_make_link ('/plugins/projectlabels/index.php',
 						      _('Project labels'). ' [' . _('Project labels plugin') . ']') . '</li>';
-		} elseif ($hookname == "project_before_description") {
+		} elseif ($hookname == "project_before_widgets") {
 			$group_id=$params['group_id'];
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project))
