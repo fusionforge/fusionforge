@@ -92,7 +92,7 @@ class Document extends Error {
 				}
 			}
 		}
-		$this->engine_path = $engine;
+		$this->engine_path = $engine."/";
 		return true;
 	}
 
