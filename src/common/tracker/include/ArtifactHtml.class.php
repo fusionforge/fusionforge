@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  *
  * SourceForge Generic Tracker facility
  *

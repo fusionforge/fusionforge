@@ -46,56 +46,44 @@
 //
 
 
-pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
+//pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
+$ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
 
-$headers = getIntFromRequest('headers', 1);
-$full = getIntFromRequest('full', 1);
-$sep = getStringFromRequest('sep', ',');
+$default = array('headers' => 1, 'sep' => ',');
 
+if (session_loggedin()) {
+	$u = session_get_user();
+	$pref = $u->getPreference('csv');
+	if ($pref) {
+		$default = unserialize($pref);
+	}
+}
+
+$headers = getIntFromRequest('headers', $default['headers']);
+$sep = getStringFromRequest('sep', $default['sep']);
+
+if (session_loggedin()) {
+	if ( ($sep !== $default['sep']) || ($headers !== $default['headers']) ) {
+		$pref = array_merge( $default, array('headers' => $headers, 'sep' => $sep));
+		$u->setPreference('csv', serialize($pref));
+	}
+}
+
+$url_set_format = '/tracker/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;func=format_csv&amp;sep='.urlencode($sep).'&amp;headers='.$headers;
+
+$url_export = '/tracker/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;func=downloadcsv&amp;sep='.urlencode($sep).'&amp;headers='.$headers;
+
+$format = $headers ? ' with headers' : ' without headers';
+$format .= " using '$sep' as separator.";
 ?>
-<center>
-<table>
-	<tr>
-		<td>
-		<fieldset><legend><b>CSV Format</b></legend>
-		<form action="/pm/task.php" method="get"><input type="hidden"
-			name="group_id" value="<?php echo $group_id ?>" /> <input
-			type="hidden" name="group_project_id"
-			value="<?php echo $group_project_id ?>" /> <input type="hidden"
-			name="func" value="csv" />
-		<table>
-			<tr>
-				<td class="top"><b>Content :</b></td>
-				<td><input type="radio" name="full" value="1"<?php if ($full) echo ' checked="checked"' ?>/>Full<br />
-				<input type="radio" name="full" value="0"<?php if (!$full) echo ' checked="checked"' ?> />Normal</td>
-			</tr>
-			<tr><td colspan="2"></td></tr>
-			<tr>
-				<td class="top"><b>Separator :</b></td>
-				<td><input type="radio" name="sep" value=","<?php if ($sep==',') echo ' checked="checked"' ?>/>Comma (char: ',')<br />
-				<input type="radio" name="sep" value=";"<?php if ($sep==';') echo ' checked="checked"' ?>/>Semi-colon (char: ';')</td>
-			</tr>
-			<tr><td colspan="2"></td></tr>
-			<tr>
-				<td class="top"><b>Header :</b></td>
-				<td><input type="radio" name="headers" value="1"<?php if ($headers) echo ' checked="checked"' ?>/>Included<br />
-				<input type="radio" name="headers" value="0"<?php if (!$headers) echo ' checked="checked"' ?>/>None</td>
-			</tr>
-		</table>
-		<input type="submit" name="Submit" /></form>
-		</fieldset>
-		</td>
-	</tr>
-</table>
-</center>
-<p><strong>Notes:</strong></p>
-<div>
-<ul>
-<li><strong>Full/Normal :</strong> In Full, the category is also exported.</li>
-<li><strong>Comma/Semi-colon :</strong> Some international version of MS Excel uses ';' instead of ','.</li>
-<li><strong>Headers Included or not :</strong> Add a line with the name of the fields at the fist line.</li>
-</ul>
-</div>
+<p><?php echo _('This page allows you to export the items using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view your entries using MS Excel.'); ?></p>
+<h2><?php echo _('Export as a CSV file'); ?></h2>
+
+<strong><?php echo _('Selected CSV Format :'); ?></strong> CSV<?php echo $format ?> <a href="<?php echo $url_set_format ?>">(Change)</a>
+
+<p><a href="<?php echo $url_export ?>"><?php echo _('Download CSV file'); ?></a></p>
+
+<p />
 <?php
-pm_footer(array());
+$ath->footer(array());
 ?>

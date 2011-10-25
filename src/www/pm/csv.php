@@ -102,7 +102,7 @@ $format .= " using '$sep' as separator.";
 
 <h2>Record Layout</h2>
 
-<table align="center" border="1" cellspacing="0" cellpadding="3">
+<table align="center" border="1" cellpadding="3">
 <tr><td><strong>Field Name</strong></td><td><strong>Description</strong></td></tr>
 <tr><td>project_task_id</td><td>this is the ID in gforge database</td></tr>
 <tr><td>external_task_id</td><td>optional, the equivalent of project_task_id but determined by

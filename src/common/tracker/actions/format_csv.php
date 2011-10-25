@@ -46,10 +46,10 @@
 //
 
 
-pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
+//pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
+$ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
 
 $headers = getIntFromRequest('headers', 1);
-$full = getIntFromRequest('full', 1);
 $sep = getStringFromRequest('sep', ',');
 
 ?>
@@ -58,18 +58,11 @@ $sep = getStringFromRequest('sep', ',');
 	<tr>
 		<td>
 		<fieldset><legend><b>CSV Format</b></legend>
-		<form action="/pm/task.php" method="get"><input type="hidden"
-			name="group_id" value="<?php echo $group_id ?>" /> <input
-			type="hidden" name="group_project_id"
-			value="<?php echo $group_project_id ?>" /> <input type="hidden"
-			name="func" value="csv" />
+		<form action="/tracker/" method="get">
+			<input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
+			<input type="hidden" name="atid" value="<?php echo $ath->getID() ?>" />
+			<input type="hidden" name="func" value="csv" />
 		<table>
-			<tr>
-				<td class="top"><b>Content :</b></td>
-				<td><input type="radio" name="full" value="1"<?php if ($full) echo ' checked="checked"' ?>/>Full<br />
-				<input type="radio" name="full" value="0"<?php if (!$full) echo ' checked="checked"' ?> />Normal</td>
-			</tr>
-			<tr><td colspan="2"></td></tr>
 			<tr>
 				<td class="top"><b>Separator :</b></td>
 				<td><input type="radio" name="sep" value=","<?php if ($sep==',') echo ' checked="checked"' ?>/>Comma (char: ',')<br />
@@ -91,11 +84,10 @@ $sep = getStringFromRequest('sep', ',');
 <p><strong>Notes:</strong></p>
 <div>
 <ul>
-<li><strong>Full/Normal :</strong> In Full, the category is also exported.</li>
 <li><strong>Comma/Semi-colon :</strong> Some international version of MS Excel uses ';' instead of ','.</li>
 <li><strong>Headers Included or not :</strong> Add a line with the name of the fields at the fist line.</li>
 </ul>
 </div>
 <?php
-pm_footer(array());
+$ath->footer(array());
 ?>

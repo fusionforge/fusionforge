@@ -64,8 +64,8 @@ class ArtifactTypeHtml extends ArtifactType {
 		$labels[] = $this->getName();
 		$links[]  = '/tracker/?func=browse&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
 		$attr[]   = array('title' => _('Browse this tracker.'), 'class' => 'tabtitle');
-		$labels[] = _('Download .csv');
-		$links[]  = '/tracker/?func=downloadcsv&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
+		$labels[] = _('Export CSV');
+		$links[]  = '/tracker/?func=csv&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
 		$attr[]   = array('title' => _('Download data from this tracker as csv file.'), 'class' => 'tabtitle');
 		if ($this->allowsAnon() || session_loggedin()) {
 			$labels[] = _('Submit New');

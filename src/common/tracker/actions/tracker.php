@@ -548,6 +548,14 @@ switch (getStringFromRequest('func')) {
 			include $gfcommon.'tracker/actions/query.php';
 			break;
 		}
+		case 'csv' : {
+			include $gfcommon.'tracker/actions/csv.php';
+			break;
+		}
+		case 'format_csv' : {
+			include $gfcommon.'tracker/actions/format_csv.php';
+			break;
+		}
 		case 'downloadcsv' : {
 			include $gfcommon.'tracker/actions/downloadcsv.php';
 			break;
