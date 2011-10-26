@@ -4744,6 +4744,7 @@ src/utils/decode_images.sh svneol=native#text/x-sh
 src/utils/fill-in-the-blanks.pl svneol=native#text/x-perl
 src/utils/fixscripts/fix_default_role.php -text
 src/utils/fixscripts/populate_template_project.php -text
+src/utils/forge.php -text
 src/utils/forge_get_compressed_extension -text
 src/utils/forge_get_compressor -text
 src/utils/forge_get_config -text
