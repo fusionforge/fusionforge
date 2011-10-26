@@ -55,14 +55,3 @@ When an account has its email address with the form 'log:[a-z]+', then
 emails are not sent but written in the data/logs directory instead.
 This is useful to avoid sending/flooding with emails when tests are
 executed, this has required a small hack in the Gforge code (see utils.php).
-
-MYSQL:
-* testMyTestCase(CreateForum) is failing on forum.php:80
-=> Seems to be a bug in the mysql port.
-
-PSQL:
-* Requires patch: tests/use_non_persistent_connect.patch.
-Description:
-Adds a new configuration variable '$sys_db_persistent', when set to
-false, then connection to postgres will be performed with normal
-pg_connect instead of pg_pconnect. This is to allow to drop the database.
