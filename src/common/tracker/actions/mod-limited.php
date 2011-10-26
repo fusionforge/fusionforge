@@ -152,7 +152,7 @@ if (session_loggedin()) {
 <div class="tabbertab" title="<?php echo _('Followups');?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<br /><strong><?php echo _('OR Attach A Comment') ?>: <?php echo notepad_button('document.forms.trackermodlimitedform.details') ?></strong><br />
+		<br /><strong><?php echo _('Add A Comment') ?>: <?php echo notepad_button('document.forms.trackermodlimitedform.details') ?></strong><br />
 		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea>
 		<p>
 		<h2><?php echo _('Followups: ') ;

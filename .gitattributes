@@ -497,6 +497,7 @@ src/common/search/DocsAllSearchQuery.class.php -text
 src/common/system_event/SystemEvent.class.php -text
 src/common/system_event/SystemEventManager.class.php -text
 src/common/tracker/ArtifactWorkflow.class.php -text
+src/common/tracker/actions/ajax.php -text
 src/common/tracker/actions/csv.php -text
 src/common/tracker/actions/format_csv.php -text
 src/common/tracker/include/ArtifactTypeFactoryHtml.class.php -text

@@ -68,6 +68,11 @@ if ($group->isError()) {
 	}
 }
 
+if (getStringFromRequest('rtype') == 'ajax') {
+	include $gfcommon.'tracker/actions/ajax.php';
+	exit;
+}
+
 if ($group_id && $atid) {
 	include $gfcommon.'tracker/actions/tracker.php';
 

@@ -197,8 +197,25 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		echo $ath->cannedResponseBox('canned_response');
 		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1','('._('Admin').')');
 		?>
+		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+			$('#tracker-canned_response').change(function() {
+				$.ajax({
+					type: 'POST',
+					url: 'index.php',
+					data: 'rtype=ajax&function=get_canned_response&group_id=<?php echo $group_id ?>&canned_response_id='+$('#tracker-canned_response').val(),
+					success: function(rep){
+						// the following line is not the best but works with IE6
+						$('#tracker-canned_response option').each(function() {$(this).attr("selected", "selected"); return false;});
+						if ($('#tracker-comment').val()) {
+							rep = "\n" + rep
+						}
+						$('#tracker-comment').val($('#tracker-comment').val() + rep);
+					}
+				});
+			});
+		/* ]]> */</script>
 		<p>
-		<strong><?php echo _('OR Attach A Comment') ?>:<?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
+		<strong><?php echo _('Add A Comment') ?>:<?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
 		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
 		<h2><?php echo _('Followups: ') ;
 		if ($sort_comments_chronologically) {
