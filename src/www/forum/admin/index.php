@@ -103,21 +103,7 @@ if (getStringFromRequest('add_forum')) {
 			<strong>'._('Description').':</strong><br />
 			<input type="text" name="description" value="" size="40" maxlength="80" />
 			</p>
-			<p>
-			<strong>'._('Is Public?').'</strong><br />
-			<input type="radio" name="is_public" value="1" checked="checked" />'._('Yes').' <br />
-			<input type="radio" name="is_public" value="0" />'._('No').'
-			</p>
-			<p>
-			<strong>'._('Allow Anonymous Posts?').'</strong><br />
-			<input type="radio" name="allow_anonymous" value="1" />'._('Yes').'<br />
-			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'._('No').'
-			</p>
-			<p>'.
-
-		html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",0) . '
-				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
-
+                        <p>
 			<strong>'._('Email All Posts To:').'</strong><br />
 			<input type="text" name="send_all_posts_to" value="" size="60" />
 			</p>
@@ -147,21 +133,6 @@ if (getStringFromRequest('add_forum')) {
 				<input type="hidden" name="change_status" value="y" />
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
 				<input type="hidden" name="group_id" value="'.$group_id.'" />
-
-				<strong>'._('Allow Anonymous Posts?').'</strong><br />
-				<input type="radio" name="allow_anonymous" value="1"'.(($f->AllowAnonymous() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
-				<input type="radio" name="allow_anonymous" value="0"'.(($f->AllowAnonymous() == 0)?' checked="checked"':'').'/> '._('No').'
-				</p>
-				<p>
-				<strong>'._('Is Public?').'</strong><br />
-				<input type="radio" name="is_public" value="1"'.(($f->isPublic() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
-				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '._('No').'<br />
-				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'._('Suspended').'<br />
-				<p>' .
-		html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",$f->getModerationLevel()) . '
-				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
-
-
 				<strong>'._('Forum Name').':</strong><br />
 				<input type="text" name="forum_name" value="'. $f->getName() .'" size="20" maxlength="30" />
 				</p>
