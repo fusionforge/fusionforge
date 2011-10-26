@@ -406,7 +406,7 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 	echo '
 	<table>
     <form action="/developer/rate.php" method="post">
-
+';
 	for ($i=1; $i<=count($USER_RATING_QUESTIONS); $i++) {
 		$popup="USER_RATING_POPUP$i";
 		if (!isset($prev_vote[$i])) {
