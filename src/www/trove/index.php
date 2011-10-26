@@ -86,9 +86,9 @@ if($filter) {
 // We display the trove
 
 ?>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr valign="top">
-		<td width="50%">
+<table class="fullwidth">
+	<tr class="top">
+		<td class="halfwidth">
 		<?php
 			// here we print list of root level categories, and use open folder for current
 			$rootCategories = TroveCategoryFactory::getRootCategories();
@@ -114,7 +114,7 @@ if($filter) {
 			}
 		?>
 		</td>
-		<td width="50%">
+		<td class="halfwidth">
 		<?php
 			$currentIndent='';
 			$parentCategories =& $category->getParents();
@@ -199,10 +199,10 @@ $html_limit .= '</span>';
 
 print $html_limit."<hr />\n";
 
-?><table border="0" cellpadding="0" width="100%"><?php
+?><table class="fullwidth"><?php
 while($project = db_fetch_array($projectsResult)) {
 	?>
-		<tr valign="top">
+		<tr class="top">
 			<td colspan="2"><?php
 	echo $count.'. ' ;
 	echo util_make_link_g ($project['unix_group_name'],
@@ -215,12 +215,12 @@ while($project = db_fetch_array($projectsResult)) {
 			<br />&nbsp;
 			</td>
 		</tr>
-		<tr valign="top">
+		<tr class="top">
 			<td><?php
 				// list all trove categories
 				//print trove_getcatlisting($row_grp['group_id'],1,0);
 			?></td>
-			<td align="right">
+			<td class="align-right">
 				Activity Percentile: <strong><?php echo number_format($project['percentile'],2) ?></strong>
 				<br />Activity Ranking: <strong><?php echo number_format($project['ranking'],2) ?></strong>
 				<br />Register Date: <strong><?php echo date($sys_datefmt, $project['register_time']) ?></strong>

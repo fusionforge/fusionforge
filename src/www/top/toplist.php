@@ -71,7 +71,7 @@ while ($row_top = db_fetch_array($res_top)) {
 	$display_rank++;
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$display_rank
 		.'</td><td>'.util_make_link_g (strtolower($row_top['unix_group_name']),@$row_top['group_id'],stripslashes($row_top['group_name']))
-		.'</td><td align="right">'.$row_top['items']
+		.'</td><td class="align-right">'.$row_top['items']
 		.'&nbsp;&nbsp;&nbsp;</td>'
 		.'</tr>
 ';

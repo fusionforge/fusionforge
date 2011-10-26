@@ -50,12 +50,12 @@ if ($group_id) {
 $result = db_query_params ('SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id=$1 and fg.group_forum_id=mon.forum_id',
 			   array ($user_id));
 if (!$result) {
-    echo '<div class="error">Database error :'.db_error().'</div>';
+    echo '<p class="error">Database error :'.db_error().'</p>';
     forum_footer(array());
     exit;
 }
 if ( db_numrows($result) < 1) {
-    echo '<div class="feedback">'._('You have no monitored forums').'</div>';
+    echo '<p class="information">'._('You have no monitored forums').'</p>';
     forum_footer(array());
     exit;
 }

@@ -64,7 +64,6 @@ if ($group_id && $atid) {
 	//
 	//  Add checks to see if they have perms to view this
 	//
-	;
 	if (!session_check_perm ('tracker', $atid)) {
 		endOnError('Permission Denied');
 		$errors = true;

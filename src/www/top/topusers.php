@@ -75,10 +75,10 @@ while ($row_top = db_fetch_array($res_top)) {
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$row_top['ranking']
 		.'</td><td>'.util_make_link_u ($row_top['user_name'],$row_top['user_id'],$row_top['user_name']).'</td>'
 		.'<td>'.$row_top['realname'].'</td>'
-		.'</td><td align="right">'.sprintf('%.2f', $row_top['metric'])
-		.'&nbsp;&nbsp;&nbsp;</td><td align="right">'.$row_top['old_ranking']
+		.'</td><td class="align-right">'.sprintf('%.2f', $row_top['metric'])
+		.'&nbsp;&nbsp;&nbsp;</td><td class="align-right">'.$row_top['old_ranking']
 		.'&nbsp;&nbsp;&nbsp;</td>'
-		.'<td align="right">';
+		.'<td class="align-right">';
 
 	// calculate change
 	$diff = $row_top["old_ranking"] - $row_top["ranking"];

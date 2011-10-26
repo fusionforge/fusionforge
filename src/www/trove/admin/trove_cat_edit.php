@@ -74,7 +74,7 @@ switch($do) {
 site_admin_header(array('title'=>_('Site Admin: Trove - Category List'))) ;
 ?>
 
-<table width="100%" border="0">
+<table class="fullwidth">
 	<tr>
 		<td width="60%" valign="top">
 		  <h3><?php echo _('Site Admin: Trove - Edit Category'); ?></h3>
