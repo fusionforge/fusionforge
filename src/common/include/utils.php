@@ -561,7 +561,7 @@ function util_make_links($data='') {
 function show_priority_colors_key() {
 	echo '<p /><strong> '._('Priority Colors').':</strong><br />
 
-		<table border="0"><tr>';
+		<table><tr>';
 
 	for ($i=1; $i<6; $i++) {
 		echo '
@@ -752,7 +752,7 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
 		$rows  =  db_numrows($result);
 		$cols  =  db_numfields($result);
 
-		echo '<table border="0" width="100%">';
+		echo '<table width="100%">';
 
 		/*  Create  the  headers  */
 		$headersCellData = array();

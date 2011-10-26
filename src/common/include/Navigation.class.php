@@ -232,7 +232,7 @@ class Navigation extends Error {
 		$menu['tooltips'][] = _('Main Page');
 
 		// My Page
-		$menu['titles'][] = _('My&nbsp;Page');
+                $menu['titles'][] = _('My Page');
 		$menu['urls'][] = util_make_uri('/my/');
 		$menu['tooltips'][] = _('Your Page, widgets selected by you to follow your items.');
 		if (strstr($request_uri, util_make_uri('/my/'))
@@ -254,7 +254,7 @@ class Navigation extends Error {
 		}
 
 		if (forge_get_config('use_snippet')) {
-			$menu['titles'][] = _('Code&nbsp;Snippets');
+			$menu['titles'][] = _('Code Snippets');
 			$menu['urls'][] = util_make_uri('/snippet/');
 			$menu['tooltips'][] = _('Tooling library. Small coding tips.');
 			if (strstr($request_uri, util_make_uri('/snippet/'))) {
@@ -263,7 +263,7 @@ class Navigation extends Error {
 		}
 
 		if (forge_get_config('use_people')) {
-			$menu['titles'][] = _('Project&nbsp;Openings');
+			$menu['titles'][] = _('Project Openings');
 			$menu['urls'][] = util_make_uri('/people/');
 			$menu['tooltips'][] = _('Hiring Market Place.');
 			if (strstr($request_uri, util_make_uri('/people/'))) {

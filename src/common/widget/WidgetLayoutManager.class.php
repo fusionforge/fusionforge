@@ -294,7 +294,7 @@ class WidgetLayoutManager {
 			$sql = 'SELECT * FROM layouts_rows WHERE layout_id = $1 ORDER BY rank';
 			$req_rows = db_query_params($sql,array($layout_id));
 			while ($data = db_fetch_array($req_rows)) {
-				echo '<table class="layout-manager-row" cellspacing="5" cellpadding="2" border="0">
+				echo '<table class="layout-manager-row" cellspacing="5" cellpadding="2">
 					<tr>
 					<td class="layout-manager-column-add">+</td>';
 				$sql = 'SELECT * FROM layouts_rows_columns WHERE layout_row_id = $1';

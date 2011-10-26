@@ -62,7 +62,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 * "Codendi" Layout Widget
 *
 */
-        
+
 /* abstract */ class Widget {
 
 	var $content_id;

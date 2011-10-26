@@ -194,7 +194,7 @@ abstract class SCMPlugin extends Plugin {
 		if ($project->usesPlugin ($this->name)) {
 
 			// Table for summary info
-			print '<table width="100%"><tr valign="top"><td width="65%">'."\n" ;
+			print '<table class="fullwidth"><tr valign="top"><td style="width:65%">'."\n" ;
 			print $this->getBlurb ()."\n" ;
 
 			// Instructions for anonymous access
@@ -205,18 +205,21 @@ abstract class SCMPlugin extends Plugin {
 			// Instructions for developer access
 			print $this->getInstructionsForRW ($project) ;
 
+			if ($this->browserDisplayable ($project)) {
+				echo $this->getBrowserLinkBlock ($project) ;
+			}
+
 			// Snapshot
 			if ($this->browserDisplayable ($project)) {
 				print $this->getSnapshotPara ($project) ;
 			}
-			print '</td>'."\n".'<td width="35%" valign="top">'."\n" ;
+			print '</td>'."\n".'<td style="width:35%" class="top">'."\n" ;
 
 			// Browsing
 			echo $HTML->boxTop(_('Repository History'));
 			echo _('Data about current and past states of the repository') ;
 			if ($this->browserDisplayable($project)) {
 				echo $this->getStatsBlock($project);
-				echo $this->getBrowserLinkBlock($project);
 			}
 
 			echo $HTML->boxBottom();
