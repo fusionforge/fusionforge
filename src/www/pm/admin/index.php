@@ -67,14 +67,13 @@ if (getStringFromRequest('post_changes')) {
 	if (getStringFromRequest('addproject')) {
 		$project_name = getStringFromRequest('project_name');
 		$description = getStringFromRequest('description');
-		$is_public = getStringFromRequest('is_public');
 		$send_all_posts_to = getStringFromRequest('send_all_posts_to');
 
 		/*
 			Add new subproject
 		*/
 		session_require_perm ('pm_admin', $group_id) ;
-		if (!$pg->create($project_name,$description,$is_public,$send_all_posts_to)) {
+		if (!$pg->create($project_name,$description,0,$send_all_posts_to)) {
 			exit_error($pg->getErrorMessage(),'pm');
 		} else {
 			$feedback .= _('Subproject Inserted');
@@ -281,10 +280,6 @@ if ($add_cat && $group_project_id) {
 	<p>
 	<input type="hidden" name="addproject" value="y" />
 	<input type="hidden" name="post_changes" value="y" />
-	<strong><?php echo _('Is Public?')?></strong><br />
-	<input type="radio" name="is_public" value="1" checked="checked" /><?php echo _('Yes') ?><br />
-	<input type="radio" name="is_public" value="0" /><?php echo _('No') ?>
-	</p>
 	<strong><?php echo _('New Subproject Name').utils_requiredField()?></strong>
 	<br />
 	<input type="text" name="project_name" value="" size="15" maxlength="30" />
@@ -322,14 +317,6 @@ if ($add_cat && $group_project_id) {
 	<input type="hidden" name="update_pg" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
 	<table border="0">
-<!--	<tr>
-		<td>
-			<strong><?php echo _('Is Public?')?></strong><br />
-			<input type="radio" name="is_public" value="1"<?php echo (($pg->isPublic()=='1')?' checked="checked"':''); ?> /> <?php echo _('Yes') ?><br />
-			<input type="radio" name="is_public" value="0"<?php echo (($pg->isPublic()=='0')?' checked="checked"':''); ?> /> <?php echo _('No') ?><br />
-			<input type="radio" name="is_public" value="9"<?php echo (($pg->isPublic()=='9')?' checked="checked"':''); ?> /> <?php echo _('Deleted')?><br />
-		</td>
-	</tr> -->
 	<tr>
 		<td><strong><?php echo _('Subproject Name').utils_requiredField() ?>:</strong><br />
 			<input type="text" name="project_name" value="<?php echo $pg->getName() ?>" />
