@@ -55,7 +55,7 @@ if ($diary_user) {
 	}
 
 	echo $HTML->boxTop(_('Existing Diary And Note Entries'));
-	echo '<table cellspacing="2" cellpadding="0" width="100%" border="0">';
+	echo '<table cellspacing="2" width="100%">';
 	/*
 		List all diary entries
 	*/

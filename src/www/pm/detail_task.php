@@ -33,7 +33,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 
 ?>
 
-<table border="0" width="100%">
+<table class="fullwidth">
 
         <tr>
                 <td><strong><?php echo _('Submitted by') ?>:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
@@ -112,7 +112,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 	</tr>
 
 	<tr>
-		<td valign="top">
+		<td class="top">
 		<?php
 		/*
 			Get the list of ids this is assigned to and convert to array
@@ -125,7 +125,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 		ShowResultSet($result2,_('Assigned to'), false, false);
 		?>
 		</td>
-		<td valign="top">
+		<td class="top">
 		<?php
 		/*
 			Get the list of ids this is dependent on and convert to array

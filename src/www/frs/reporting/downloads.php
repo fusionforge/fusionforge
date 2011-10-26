@@ -86,6 +86,13 @@ frs_header(array('title'=>_('File Release Reporting'),
 		 'pagename'=>'project_showfiles',
 		 'sectionvals'=>group_getname($group_id)));
 
+$report=new ReportDownloads($group_id,$package_id,$start,$end);
+if ($report->isError()) {
+	echo '<p class="information">'.$report->getErrorMessage().'</p>';
+	frs_footer();
+	exit;
+}
+
 ?>
 
 <form action="<?php echo util_make_url('/frs/reporting/downloads.php') ?>" method="get">
@@ -103,7 +110,6 @@ frs_header(array('title'=>_('File Release Reporting'),
 
 <?php
 
-$report=new ReportDownloads($group_id,$package_id,$start,$end);
 $data = $report->getData();
 
 if (count($data) == 0) {
@@ -123,7 +129,7 @@ if (count($data) == 0) {
 		'<td>'. $data[$i][1] .'</td>'.
 		'<td>'. basename($data[$i][2]) .'</td>'.
 		'<td><a href="/users/'.urlencode($data[$i][5]).'/">'. $data[$i][3] .'</a></td>'.
-		'<td align="center">'. $date .'</td></tr>';
+		'<td class="align-center">'. $date .'</td></tr>';
 
     }
 

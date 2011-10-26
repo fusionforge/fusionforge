@@ -404,8 +404,8 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 
 	global $USER_RATING_VALUES,$USER_RATING_QUESTIONS,$USER_RATING_POPUP1,$USER_RATING_POPUP2,$USER_RATING_POPUP3,$USER_RATING_POPUP4,$USER_RATING_POPUP5;
 	echo '
+	<table>
     <form action="/developer/rate.php" method="post">
-	<table class="align-left">';
 
 	for ($i=1; $i<=count($USER_RATING_QUESTIONS); $i++) {
 		$popup="USER_RATING_POPUP$i";

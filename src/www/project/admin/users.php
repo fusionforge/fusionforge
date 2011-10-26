@@ -91,9 +91,7 @@ cache_external_roles () ;
 
 if (getStringFromRequest('submit')) {
 	if (getStringFromRequest('adduser')) {
-		/*
-			add user to this project
-			*/
+		/* Add user to this project */
 		$form_unix_name = getStringFromRequest('form_unix_name');
 		$user_object = &user_get_object_by_name($form_unix_name);
 		if ($user_object === false) {
@@ -119,7 +117,7 @@ if (getStringFromRequest('submit')) {
 			}
 		}
 	} else if (getStringFromRequest('rmuser')) {
-		/* remove a member from this project */
+		/* Remove a member from this project */
 		$user_id = getIntFromRequest('user_id');
 		$role_id = getIntFromRequest('role_id');
 		$role = RBACEngine::getInstance()->getRoleById($role_id) ;
@@ -148,9 +146,7 @@ if (getStringFromRequest('submit')) {
 			}
 		}
 	} elseif (getStringFromRequest('acceptpending')) {
-		/*
-			add user to this project
-			*/
+		/* Add user to this project */
 		$role_id = getIntFromRequest('role_id');
 		if (!$role_id) {
 			$warning_msg .= _("Role not selected");
@@ -170,9 +166,7 @@ if (getStringFromRequest('submit')) {
 			}
 		}
 	} elseif (getStringFromRequest('rejectpending')) {
-		/*
-			reject adding user to this project
-			*/
+		/* Reject adding user to this project */
 		$form_userid = getIntFromRequest('form_userid');
 		$gjr=new GroupJoinRequest($group,$form_userid);
 		if (!$gjr || !is_object($gjr) || $gjr->isError()) {

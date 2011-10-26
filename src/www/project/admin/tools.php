@@ -105,9 +105,9 @@ if (getStringFromRequest('submit')) {
 
 project_admin_header(array('title'=>_('Tools'),'group'=>$group->getID()));
 
-echo '<table width="100%">';
-echo '<tr valign="top">';
-echo '<td width="50%">';
+echo '<table class="fullwidth">';
+echo '<tr class="top">';
+echo '<td class="halfwidth">';
 
 echo $HTML->boxTop(_('Active Tools').'');
 ?>

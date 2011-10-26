@@ -58,7 +58,7 @@ pm_header(array('title'=>sprintf(_('Subprojects for %1$s'), $g->getPublicName())
 plugin_hook("blocks", "tasks index");
 
 if (count($pg_arr) < 1 || $pg_arr == false) {
-	echo '<p class="warning_msg">'._('No Subprojects Found').'</p>';
+	echo '<p class="information">'._('No Subprojects Found').'</p>';
 	echo '<p>'._('No subprojects have been set up, or you cannot view them.').'</p>';
 	echo '<p class="important">'._('The Admin for this project will have to set up subprojects using the admin page.').'</p>';
 } else {

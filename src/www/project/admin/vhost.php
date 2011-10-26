@@ -115,7 +115,7 @@ print '</p>';
 ?>
 
 <form name="new_vhost" action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&amp;createvhost=1'; ?>" method="post">
-<table border="0">
+<table>
 <tr>
 	<td> <?php echo _('New Virtual Host <em>(e.g. vhost.org)</em>') ?> </td>
 	<td> <input type="text" size="15" maxlength="255" name="vhost_name" /> </td>

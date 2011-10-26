@@ -173,7 +173,7 @@ if (!session_loggedin()) {
 
 //second column of "my" page
 
-	echo '</td><td valign="top"></td></tr>
+	echo '</td><td class="top"></td></tr>
 
 	<!--  Bottom Row   -->
 <!--

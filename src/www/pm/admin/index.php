@@ -138,13 +138,12 @@ if (getStringFromRequest('post_changes')) {
 		if (!$pg->update($project_name,$description,$send_all_posts_to)) {
 			exit_error($pg->getErrorMessage(),'pm');
 		} else {
-			$feedback .= _('Updated successfully');
+			$feedback .= _('Subproject Updated successfully');
 		}
 
 	} else if ($delete) {
 		$sure = getStringFromRequest('sure');
 		$really_sure = getStringFromRequest('really_sure');
-
 
 		/*
 			Delete a subproject
@@ -154,7 +153,7 @@ if (getStringFromRequest('post_changes')) {
 		if (!$pg->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
 			exit_error($pg->getErrorMessage(),'pm');
 		} else {
-			$feedback .= _('Successfully Deleted');
+			$feedback .= _('Subproject Successfully Deleted');
 			$group_project_id=0;
 			$delete=false;
 		}
@@ -184,7 +183,6 @@ if ($add_cat && $group_project_id) {
 		List of possible categories for this ArtifactType
 	*/
 	$result=$pg->getCategories();
-	echo "<p />";
 	$rows=db_numrows($result);
 	if ($result && $rows > 0) {
 		$title_arr=array();
@@ -204,20 +202,19 @@ if ($add_cat && $group_project_id) {
 		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
-		echo "\n<p class=\"warning_msg\">"._('No categories defined')."</p>";
+		echo "\n<p class=\"information\">"._('No categories defined')."</p>";
 	}
 
 	?>
-	<p />
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
+	<p>
 	<input type="hidden" name="add_cat" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
 	<strong><?php echo _('Category Name') ?>:</strong><br />
-	<input type="text" name="name" value="" size="15" maxlength="30" /><br />
-	<p />
-	<span class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></span>
-	<p />
-	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
+	<input type="text" name="name" value="" size="15" maxlength="30" />
+	</p>
+	<p class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
+	<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 	</form>
 	<?php
 
@@ -280,15 +277,14 @@ if ($add_cat && $group_project_id) {
 	?>
 	<p><?php echo _('Add a new subproject to the Tasks. <strong>This is different than adding a task to a subproject.</strong>') ?></p>
 
-	<p />
 	<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post">
+	<p>
 	<input type="hidden" name="addproject" value="y" />
 	<input type="hidden" name="post_changes" value="y" />
-	<p />
 	<strong><?php echo _('Is Public?')?></strong><br />
 	<input type="radio" name="is_public" value="1" checked="checked" /><?php echo _('Yes') ?><br />
-	<input type="radio" name="is_public" value="0" /><?php echo _('No') ?><p />
-	<p />
+	<input type="radio" name="is_public" value="0" /><?php echo _('No') ?>
+	</p>
 	<strong><?php echo _('New Subproject Name').utils_requiredField()?></strong>
 	<br />
 	<input type="text" name="project_name" value="" size="15" maxlength="30" />
@@ -370,7 +366,6 @@ if ($add_cat && $group_project_id) {
 
 } else if ($delete && $group_project_id) {
 
-
 	$pg = new ProjectGroup($g,$group_project_id);
 	if (!$pg || !is_object($pg)) {
 		exit_error(_('Could Not Get ProjectGroup'),'pm');
@@ -427,7 +422,7 @@ if ($add_cat && $group_project_id) {
 	$pg_arr = $pgf->getProjectGroups();
 
 	if (count($pg_arr) < 1 || $pg_arr == false) {
-		echo '<h2>' . _('No Subprojects Found in this Project') . '</h2>';
+		echo '<p class="information">' . _('No Subprojects Found in this Project') . '</p>';
 		echo '<p>' . _('You may add new Subprojects using the "Add a Subproject" link above.') . '</p>';
 		echo db_error();
 	} else {
