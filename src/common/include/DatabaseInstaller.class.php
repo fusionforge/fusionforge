@@ -72,7 +72,7 @@ class DatabaseInstaller extends Error {
 					return $this->setError("ERROR-2: ".db_error());
 				} else if (db_numrows($res) == 0) {
 					$output .= "Running script: {$script['filename']}\n";
-					$result = $this->runScript($path.'/'.$script['filename']);
+					$result = $this->_runScript($path.'/'.$script['filename']);
 					if ($result) {
 						$res = db_query_params ('INSERT INTO database_changes (filename) VALUES ($1)',
 							array ($prefix.$script['filename'])) ;
