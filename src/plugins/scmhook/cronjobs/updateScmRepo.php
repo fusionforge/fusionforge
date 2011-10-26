@@ -23,8 +23,7 @@
  */
 
 require dirname(__FILE__).'/../../env.inc.php';
-
-require $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 require_once $gfplugins.'scmhook/common/scmhookPlugin.class.php';
 
@@ -82,7 +81,7 @@ while ($row = db_fetch_array($res)) {
 			break;
 		}
 		default: {
-			cron_debug("WARNING No scm plugin found for this project ".$group->getUnixName()." or no cronjobs for thi type");
+			cron_debug("WARNING No scm plugin found for this project ".$group->getUnixName()." or no cronjobs for this type");
 			$returnvalue = false;
 			break;
 		}

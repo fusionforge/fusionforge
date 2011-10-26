@@ -144,7 +144,7 @@ class ProjectGroup extends Error {
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError(_('Document Description Must Be At Least 10 Characters'));
+			$this->setError(_('Subproject Description Must Be At Least 10 Characters'));
 			return false;
 		}
 		if ($send_all_posts_to) {
@@ -325,7 +325,7 @@ class ProjectGroup extends Error {
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError(_('Document Description Must Be At Least 10 Characters'));
+			$this->setError(_('Subproject Description Must Be At Least 10 Characters'));
 			return false;
 		}
 

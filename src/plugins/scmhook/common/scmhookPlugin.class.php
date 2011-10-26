@@ -134,7 +134,7 @@ class scmhookPlugin extends Plugin {
 			if ($statusDeploy)
 				echo '<p class="warning">'._('Hooks management update process waiting ...').'</p>';
 
-			echo '<h3>'._('Enable Repository Hooks').'</h3>';
+			echo '<h2>'._('Enable Repository Hooks').'</h2>';
 			$hooksPreCommit = array();
 			$hooksPostCommit = array();
 			foreach ($hooksAvailable as $hook) {
@@ -155,7 +155,7 @@ class scmhookPlugin extends Plugin {
 				}
 			}
 			if (count($hooksPreCommit)) {
-				echo '<h4>'._('pre-commit Hooks').'</h4>';
+				echo '<h3>'._('pre-commit Hooks').'</h3>';
 				$tabletop = array('', _('Hook Name'), _('Description'));
 				$classth = array('unsortable', '', '');
 				echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
@@ -179,7 +179,7 @@ class scmhookPlugin extends Plugin {
 				echo $HTML->listTableBottom();
 			}
 			if (count($hooksPostCommit)) {
-				echo '<h4>'._('post-commit Hooks').'</h4>';
+				echo '<h3>'._('post-commit Hooks').'</h3>';
 				$tabletop = array('', _('Hook Name'), _('Description'));
 				$classth = array('unsortable', '', '');
 				echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_postcommit', 'sortable', $classth);
@@ -202,7 +202,7 @@ class scmhookPlugin extends Plugin {
 				}
 				echo $HTML->listTableBottom();
 			}
-			echo '</div>';
+			echo '</div><p />';
 		} else {
 			echo '<p class="information">'._('No hooks available').'</p>';
 		}
