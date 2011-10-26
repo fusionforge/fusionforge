@@ -57,8 +57,8 @@ if ($forum_id && $group_id) {
 		exit_error($fh->getErrorMessage(),'forums');
 	}
 
-	if (session_loggedin() || $f->allowAnonymous()) {
-		if (!$f->allowAnonymous() && !$f->savePlace()) {
+	if (forge_check_perm('forum', $f->getID(), 'post')) {
+		if (session_loggedin() && !$f->savePlace()) {
 			exit_error($f->getErrorMessage(),'forums');
 		} else {
 			forum_header(array('title'=> _('Start New Thread for: ') . $f->getName(),'forum_id'=>$forum_id));

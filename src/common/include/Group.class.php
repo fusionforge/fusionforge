@@ -2273,7 +2273,7 @@ class Group extends Error {
 					$oldff = new ForumFactory($template) ;
 					foreach ($oldff->getForums() as $o) {
 						$f = new Forum($this);
-						$f->create($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->getSendAllPostsTo(),1,$o->allowAnonymous(),$o->getModerationLevel());
+						$f->create($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),0,$o->getSendAllPostsTo(),1,0,0);
 						$id_mappings['forum'][$o->getID()] = $f->getID();
 					}
 				}

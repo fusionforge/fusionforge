@@ -159,9 +159,6 @@ class ForumAdmin extends Error {
 			$forum_name = getStringFromRequest('forum_name');
 			$description = getStringFromRequest('description');
 			$send_all_posts_to = getStringFromRequest('send_all_posts_to');
-			$allow_anonymous = getIntFromRequest('allow_anonymous');
-			$is_public = getIntFromRequest('is_public');
-			$moderation_level = getIntFromRequest('moderation_level');
 			$group_forum_id = getIntFromRequest('group_forum_id');
 			/*
 				Change a forum
@@ -175,7 +172,7 @@ class ForumAdmin extends Error {
 
 			session_require_perm ('forum_admin', $f->Group->getID()) ;
 
-			if (!$f->update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to,$moderation_level)) {
+			if (!$f->update($forum_name,$description,0,0,$send_all_posts_to,0)) {
 				exit_error($f->getErrorMessage(),'forums');
 			} else {
 				$feedback = _('Forum Info Updated Successfully');
@@ -185,10 +182,7 @@ class ForumAdmin extends Error {
 		if ($action == "add_forum") { //add forum
 			$forum_name = getStringFromRequest('forum_name');
 			$description = getStringFromRequest('description');
-			$is_public = getStringFromRequest('is_public');
 			$send_all_posts_to = getStringFromRequest('send_all_posts_to');
-			$allow_anonymous = getStringFromRequest('allow_anonymous');
-			$moderation_level = getIntFromRequest('moderation_level');
 			/*
 				Adding forums to this group
 			*/
@@ -204,7 +198,7 @@ class ForumAdmin extends Error {
 				form_release_key(getStringFromRequest("form_key"));
 				exit_error($f->getErrorMessage(),'forums');
 			}
-			if (!$f->create($forum_name,$description,$is_public,$send_all_posts_to,1,$allow_anonymous,$moderation_level)) {
+			if (!$f->create($forum_name,$description,0,$send_all_posts_to,1,0,0)) {
 				form_release_key(getStringFromRequest("form_key"));
 				exit_error($f->getErrorMessage(),'forums');
 			} else {

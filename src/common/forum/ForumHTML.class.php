@@ -552,6 +552,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 
 	$body = '';
 
+	$rl = RoleLoggedIn::getInstance() ;
 	if (forge_check_perm ('forum', $this->Forum->getID(), 'post')) {
 		if ($subject) {
 			//if this is a followup, put a RE: before it if needed
@@ -614,7 +615,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 </div>
 			<?php
 
-} elseif ($this->Forum->allowAnonymous()) {
+} elseif ($rl->hasPermission('forum', $this->Forum->getID(), 'post')) {
 	echo '<span class="error">';
 	printf(_('You could post if you were <a href="%1$s">logged in</a>.'), util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
 	echo '</span>';

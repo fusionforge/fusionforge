@@ -70,23 +70,23 @@ function populateProject($project) {
 	}
 
 	if (forge_get_config ('use_forum')) {
-		$f = new Forum($project);
-		if (!$f->create(_('Open-Discussion'),_('General Discussion'),1,'',1,0)) {
-			$project->setError(sprintf (_('F%d: %s'), 1, $f->getErrorMessage()));
+		$f1 = new Forum($project);
+		if (!$f1->create(_('Open-Discussion'),_('General Discussion'),1,'',1,0)) {
+			$project->setError(sprintf (_('F%d: %s'), 1, $f1->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
 			return false;
 		}
-		$f = new Forum($project);
-		if (!$f->create(_('Help'),_('Get Public Help'),1,'',1,0)) {
-			$project->setError(sprintf (_('F%d: %s'), 2, $f->getErrorMessage()));
+		$f2 = new Forum($project);
+		if (!$f2->create(_('Help'),_('Get Public Help'),1,'',1,0)) {
+			$project->setError(sprintf (_('F%d: %s'), 2, $f2->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
 			return false;
 		}
-		$f = new Forum($project);
-		if (!$f->create(_('Developers-Discussion'),_('Project Developer Discussion'),0,'',1,0)) {
-			$project->setError(sprintf (_('F%d: %s'), 3, $f->getErrorMessage()));
+		$f3 = new Forum($project);
+		if (!$f3->create(_('Developers-Discussion'),_('Project Developer Discussion'),0,'',1,0)) {
+			$project->setError(sprintf (_('F%d: %s'), 3, $f3->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
 			return false;
@@ -144,27 +144,12 @@ function populateProject($project) {
 	$ra->setSetting ('docman', $project->getID(), 1) ;
 	$rl->setSetting ('docman', $project->getID(), 1) ;
 
-	$ff = new ForumFactory ($project) ;
-	foreach ($ff->getAllForumIds() as $fid) {
-		$f = forum_get_object ($fid) ;
-		if ($f->isPublic()) {
-			$l = $f->getModerationLevel() ;
-			if ($l == 0) {
-				$rl->setSetting ('forum', $fid, 3) ;
-			} else {
-				$rl->setSetting ('forum', $fid, 2) ;
-			}
-			if ($f->allowAnonymous()) {
-				if ($l == 0) {
-					$ra->setSetting ('forum', $fid, 3) ;
-				} else {
-					$ra->setSetting ('forum', $fid, 2) ;
-				}
-			} else {
-				$ra->setSetting ('forum', $fid, 1) ;
-			}
-		}
-	}
+	$ra->setSetting ('forum', $f1->getID(), 3) ;
+	$rl->setSetting ('forum', $f1->getID(), 3) ;
+
+	$ra->setSetting ('forum', $f2->getID(), 3) ;
+	$rl->setSetting ('forum', $f2->getID(), 3) ;
+
 	$pgf = new ProjectGroupFactory ($project) ;
 	foreach ($pgf->getAllProjectGroupIds() as $pgid) {
 		$pg = projectgroup_get_object ($pgid) ;
