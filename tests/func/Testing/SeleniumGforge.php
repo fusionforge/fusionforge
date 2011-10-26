@@ -203,7 +203,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 			$this->type("forum_name", "Developers-Discussion");
 			$this->type("description", "Project Developer Discussion");
-			$this->click("//input[@name='is_public' and @value='0']");
 			$this->click("submit");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Forum added successfully"));
