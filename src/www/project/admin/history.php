@@ -29,7 +29,16 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 $group_id = getIntFromRequest('group_id');
 session_require_perm ('project_admin', $group_id) ;
 
-project_admin_header(array('title'=>_('Project History'),'group'=>$group_id));
+// get current information
+$group = group_get_object($group_id);
+if (!$group || !is_object($group)) {
+	exit_no_group();
+} elseif ($group->isError()) {
+	exit_error($group->getErrorMessage(),'admin');
+}
+
+project_admin_header(array('title'=>sprintf(_('Project History of %s'), $group->getPublicName()),
+						   'group'=>$group_id));
 
 echo show_grouphistory($group_id);
 

@@ -35,7 +35,7 @@ echo notepad_func();
 <input type="hidden" name="func" value="postaddtask" />
 <input type="hidden" name="add_artifact_id[]" value="<?php echo $related_artifact_id; ?>" />
 
-<table border="0" width="100%">
+<table class="fullwidth">
 <tbody>
 	<tr>
 		<td>
@@ -124,13 +124,13 @@ unset($GLOBALS['editor_was_set_up']);
 	</tr>
 
 	<tr>
-		<td valign="top">
+		<td class="top">
 		<strong><?php echo _('Assigned to') ?>:</strong><br />
 		<?php
 		echo $pt->multipleAssignedBox();
 		?>
 		</td>
-		<td valign="top">
+		<td class="top">
 		<strong><?php echo _('Dependent on task') ?>:</strong><br />
 		<?php
 		echo $pt->multipleDependBox();

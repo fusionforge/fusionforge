@@ -118,9 +118,9 @@ project_admin_header(array('title'=>_('Project Information'), 'group'=>$group->g
 
 if (forge_get_config('use_shell')) {
 ?>
-<p><?php echo _('Group shell (SSH) server:&nbsp;') ?><strong><?php echo $group->getUnixName().'.'.forge_get_config('web_host'); ?></strong></p>
-<p><?php echo _('Group directory on shell server:&nbsp;') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
-<p><?php echo _('Project WWW directory on shell server:&nbsp;') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></strong></p>
+<p><?php echo _('Group shell (SSH) server:') ?> <strong><?php echo $group->getUnixName().'.'.forge_get_config('web_host'); ?></strong></p>
+<p><?php echo _('Group directory on shell server:') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
+<p><?php echo _('Project WWW directory on shell server:') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></strong></p>
 <?php
 	} //end of use_shell condition
 ?>
