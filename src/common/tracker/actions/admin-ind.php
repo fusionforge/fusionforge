@@ -27,8 +27,6 @@
 if (getStringFromRequest('post_changes')) {
 	$name = getStringFromRequest('name');
 	$description = getStringFromRequest('description');
-	$is_public = getStringFromRequest('is_public');
-	$allow_anon = getStringFromRequest('allow_anon');
 	$email_all = getStringFromRequest('email_all');
 	$email_address = getStringFromRequest('email_address');
 	$due_period = getStringFromRequest('due_period');
@@ -42,7 +40,7 @@ if (getStringFromRequest('post_changes')) {
 
 	if (getStringFromRequest('add_at')) {
 		$res=new ArtifactTypeHtml($group);
-		if (!$res->create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
+		if (!$res->create($name,$description,0,0,$email_all,$email_address,
 			$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
 			exit_error($res->getErrorMessage(),'tracker');
 		} else {
@@ -142,9 +140,6 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	<p>
 	<strong><?php echo _('Description') ?>:</strong><br />
 	<input type="text" name="description" value="" size="50" /></p>
-	<p>
-	<input type="checkbox" name="is_public" value="1" /> <strong><?php echo _('Publicly Available') ?></strong><br />
-	<input type="checkbox" name="allow_anon" value="1" /> <strong><?php echo _('Allow non-logged-in postings') ?></strong></p>
 	<p>
 	<strong><?php echo _('Send email on new submission to address') ?>:</strong><br />
 	<input type="text" name="email_address" value="" /></p>
