@@ -77,7 +77,6 @@ $server->wsdl->addComplexType(
 	'title' => array('name'=>'title', 'type' => 'xsd:string'),
 	'description' => array('name'=>'description', 'type' => 'xsd:string'),
 	'stateid' => array('name'=>'stateid', 'type' => 'xsd:int'),
-	'language_id' => array('name'=>'language_id', 'type' => 'xsd:int'),
 	'filesize' => array('name'=>'filesize', 'type' => 'xsd:int')
 	)
 );
@@ -201,82 +200,6 @@ function validateState($state_id){
 	}
 }
 
-
-
-//
-// DocumentLanguage
-//
-$server->wsdl->addComplexType(
-	'DocumentLanguage',
-	'complexType',
-	'struct',
-	'sequence',
-	'',
-	array(
-	'language_id' => array('name'=>'language_id', 'type' => 'xsd:int'),
-	'description' => array('name'=>'description', 'type' => 'xsd:string')
-
-	)
-);
-
-//
-// DocumentLanguage Array
-//
-
-$server->wsdl->addComplexType(
-	'ArrayOfDocumentLanguage',
-	'complexType',
-	'array',
-	'',
-	'SOAP-ENC:Array',
-	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:DocumentLanguage[]')),
-	'tns:DocumentLanguage');
-
-//
-//getDocumentLanguages
-//
-$server->register(
-	'getDocumentLanguages',
-	array(
-		'session_ser'=>'xsd:string'
-		),
-	array('getDocumentLanguagesResponse'=>'tns:ArrayOfDocumentLanguage'),
-	$uri,$uri.'#getDocumentLanguages','rpc','encoded');
-
-
-//
-//getDocumentLanguages
-//
-function &getDocumentLanguages($session_ser) {
-	continue_session($session_ser);
-	$return = array();
-
-	$languages = db_query_params ('select language_id, classname from supported_languages',
-			array ());
-	for ($row=0; $row<db_numrows($languages); $row++) {
-			$return[]=array(
-				'language_id'=>db_result($languages,$row,'language_id'),
-				'description'=>db_result($languages,$row,'classname')
-			);
-		}
-	return $return;
-}
-
-//
-// validateLanguage is used to validate that the language_id that is provided is valid.
-//
-
-function validateLanguage($language_id){
-	$res = db_query_params ('SELECT classname FROM supported_languages WHERE language_id=$1',
-			array ($language_id));
-	if(db_numrows($res)==1){
-		return true;
-	}else{
-		return false;
-	}
-}
-
 //
 //addDocument
 //
@@ -288,7 +211,6 @@ $server->register(
 		'doc_group'=>'xsd:int',
 		'title'=>'xsd:string',
 		'description'=>'xsd:string',
-		'language_id'=>'xsd:int',
 		'base64_contents'=>'xsd:string',
 		'filename'=>'xsd:string',
 		'file_url'=>'xsd:string'
@@ -297,7 +219,7 @@ $server->register(
 	$uri,$uri.'#addDocument','rpc','encoded'
 );
 
-function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$language_id, $base64_contents,$filename,$file_url) {
+function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$base64_contents,$filename,$file_url) {
 	continue_session($session_ser);
 
 	$g = group_get_object($group_id);
@@ -314,10 +236,6 @@ function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$lan
 		return new soap_fault ('','addDocument',$d->getErrorMessage(),$d->getErrorMessage());
 	}
 
-	if(!validateLanguage($language_id)){
-		return new soap_fault ('','addDocument','Invalid Language ID','Invalid Language ID');
-	}
-
 	if ($base64_contents) {
 		$data = base64_decode($base64_contents);
 		$file_url='';
@@ -328,7 +246,7 @@ function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$lan
 		$uploaded_data_type='URL';
 	}
 
-	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description)) {
+	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$description)) {
 		return new soap_fault ('','addDocument',$d->getErrorMessage(),$d->getErrorMessage());
 	} else {
 		return $d->getID();
@@ -348,7 +266,6 @@ $server->register(
 		'doc_id'=>'xsd:int',
 		'title'=>'xsd:string',
 		'description'=>'xsd:string',
-		'language_id'=>'xsd:int',
 		'base64_contents'=>'xsd:string',
 		'filename'=>'xsd:string',
 		'file_url'=>'xsd:string',
@@ -361,7 +278,7 @@ $server->register(
 //
 //updateDocument
 //
-function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$description,$language_id, $base64_contents,$filename,$file_url,$state_id) {
+function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$description, $base64_contents,$filename,$file_url,$state_id) {
 	continue_session($session_ser);
 
 	$g = group_get_object($group_id);
@@ -378,14 +295,6 @@ function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$descr
 		return new soap_fault ('','updateDocument',$d->getErrorMessage(),$d->getErrorMessage());
 	}
 
-
-	if(($language_id)){
-		if(!validateLanguage($language_id)){
-			return new soap_fault ('','updateDocument','Invalid Language ID','Invalid Language ID');
-		}
-	}else{
-		$language_id=$d->getLanguageID();
-	}
 
 	if($state_id){
 		if(!validateState($state_id)){
@@ -428,7 +337,7 @@ function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$descr
 	}
 
 
-	if (!$d->update($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description,$state_id)) {
+	if (!$d->update($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$description,$state_id)) {
 		return new soap_fault ('','updateDocument',$d->getErrorMessage(),$d->getErrorMessage());
 	} else {
 		return true;
@@ -590,7 +499,6 @@ function documents_to_soap($d_arr) {
 				'title'=>$d_arr[$i]->data_array['title'],
 				'description'=>$d_arr[$i]->data_array['description'],
 				'stateid'=>$d_arr[$i]->data_array['stateid'],
-				'language_id'=>$d_arr[$i]->data_array['language_id'],
 				'filesize'=>$d_arr[$i]->data_array['filesize']
 			);
 		}
