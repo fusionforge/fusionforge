@@ -41,6 +41,7 @@ if (getStringFromRequest('submit')) {
 		exit_form_double_submit('my');
 	}
 
+
 	$firstname = getStringFromRequest('firstname');
 	$lastname = getStringFromRequest('lastname');
 	$language = getIntFromRequest('language');
@@ -118,16 +119,16 @@ echo $HTML->boxTop(_('Account Maintenance'));
 &nbsp;<br />
 <table width="100%" border="0">
 
-<tr valign="top">
+<tr class="top">
 <td><?php echo _('Member since:'); ?> </td>
 <td><strong><?php print date(_('Y-m-d H:i'),$u->getAddDate()); ?></strong></td>
 </tr>
-<tr valign="top">
+<tr class="top">
 <td><?php echo _('User Id:'); ?> </td>
 <td><strong><?php print $u->getID(); ?></strong></td>
 </tr>
 
-<tr valign="top">
+<tr class="top">
 <td><?php echo _('Login name:'); ?> </td>
 <td><strong><?php print $u->getUnixName(); ?></strong>
 <br /><a href="change_pw.php">[<?php echo _('Change Password'); ?>]</a>

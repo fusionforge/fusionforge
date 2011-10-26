@@ -31,7 +31,7 @@ require_once $gfwww.'include/features_boxes.php';
 $HTML->header(array('title'=> _('Terms of use')));
 ?>
 
-<table width="100%" cellpadding="5" cellspacing="0" border="0">
+<table class="fullwidth" cellpadding="5">
 <tr><td width="65%" valign="top">
 	<h3><?php printf (_('%1$s Terms of Use'), forge_get_config ('forge_name')); ?></h3>
 <p>

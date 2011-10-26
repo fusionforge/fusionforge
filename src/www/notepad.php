@@ -85,7 +85,7 @@ if ($form) {
   </head>
   <body onLoad="load_initial_value();" >
     <form name="form1" action="">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <table class="fullwidth">
         <tr>
           <td><input type="button" name="ok" value="OK"
                      onClick="set_and_close()"/>
