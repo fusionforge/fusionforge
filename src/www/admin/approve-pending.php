@@ -52,7 +52,7 @@ function activate_group($group_id) {
 	}
 
 	if ($group->approve(session_get_user())) {
-		$feedback .= sprintf(_('Approving Project: %1$s'), $group->getUnixName());
+		$feedback .= sprintf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
 	} else {
 		$error_msg .= sprintf(_('Error when approving Project: %1$s'), $group->getUnixName()).'<br />';
 		$error_msg .= $group->getErrorMessage();
@@ -114,7 +114,7 @@ $res_grp = db_query_params("SELECT * FROM groups WHERE status='P'", array(), $LI
 $rows = db_numrows($res_grp);
 
 if ($rows < 1) {
-	print '<p class="warning_msg">'._('No Pending Projects to Approve').'</p>';
+	print '<p class="information">'._('No Pending Projects to Approve').'</p>';
 	site_admin_footer(array());
 	exit;
 }

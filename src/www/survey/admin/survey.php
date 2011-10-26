@@ -97,7 +97,7 @@ echo ($sh->ShowAddSurveyForm($s));
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo '<p class="warning_msg">' . _('No Survey Question is found') . '</p>';
+    echo '<p class="information">' . _('No Survey is found') . '</p>';
 } else {
     echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1));
 }

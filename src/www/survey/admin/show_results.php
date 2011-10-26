@@ -56,7 +56,7 @@ $title = _('Survey Results');
 $sh->header(array('title'=>$title));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo '<div class="error">'._('Permission denied').'</div>';
+	echo '<p class="error">'._('Permission denied').'</p>';
 	$sh->footer(array());
 	exit;
 }
@@ -66,11 +66,11 @@ if ($survey_id) {
     $s = new Survey($g, $survey_id);
 
     if (!$s || !is_object($s)) {
-		echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey') ."</div>";
+		echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey') ."</p>";
 		$sh->footer(array());
 		exit;
     } else if ( $s->isError()) {
-		echo '<div class="error">'._('Error'). $s->getErrorMessage() ."</div>";
+		echo '<p class="error">'._('Error'). $s->getErrorMessage() ."</p>";
 		$sh->footer(array());
 		exit;
     }
@@ -81,18 +81,18 @@ if ($survey_id) {
 		/* Create a Survey Question for general purpose */
 		$sq = new SurveyQuestion($g, $question_id);
 		if (!$sq || !is_object($sq)) {
-	    	echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</div>";
+	    	echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</p>";
 		} else if ( $sq->isError()) {
-	    	echo '<div class="error">'._('Error'). $sq->getErrorMessage() ."</div>";
+	    	echo '<p class="error">'._('Error'). $sq->getErrorMessage() ."</p>";
 		} else {
 	    	showResult($sh, $s, $sq, 1, 0, $graph);
 		}
 
     } else {
-		echo '<h2>'.$s->getTitle().' ( '. $s->getNumberOfVotes() .' Votes )</h2><p/>';
+		echo '<h2>'.$s->getTitle().' ('. $s->getNumberOfVotes() .' ' . _("Votes") . ')'. '</h2>';
 
 		/* Get questions of this survey */
-		$questions = & $s->getQuestionInstances();
+		$questions = $s->getQuestionInstances();
 
 		$question_number = 1;
 		for ($i=0; $i<count($questions); $i++) {
@@ -112,7 +112,7 @@ if ($survey_id) {
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo '<p class="warning_msg">' . _('No Survey Question is found') . '</p>';
+    echo '<p class="information">' . _('No Survey Question is found') . '</p>';
 } else {
     echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
 }
@@ -130,9 +130,9 @@ function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
     /* Get results */
     $srf = new SurveyResponseFactory($Survey, $Question);
     if (!$srf || !is_object($srf)) {
-	echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey Response Factory') ."</div>";
+	echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Response Factory') ."</p>";
     } else if ( $srf->isError()) {
-	echo '<div class="error">'._('Error'). $srf->getErrorMessage() ."</div>";
+	echo '<p class="error">'._('Error'). $srf->getErrorMessage() ."</p>";
     } else {
         /* Show result in HTML*/
 	echo ($SurveyHTML->showResult($srf, $show_comment, $q_num, $graph));

@@ -86,7 +86,7 @@ echo $HTML->listTableBottom();
 if($totalCount > ADMIN_CRONMAN_ROWS) {
 ?>
 <br />
-<table class="tablegetmore" width="100%" cellpadding="5" cellspacing="0">
+<table class="tablegetmore" width="100%" cellpadding="5">
 	<tr>
 		<td><?php
 		if ($offset != 0) {
@@ -97,7 +97,7 @@ if($totalCount > ADMIN_CRONMAN_ROWS) {
 		} else {
 			echo '&nbsp;';
 		}
-		echo '</td><td align="right">';
+		echo '</td><td class="align-right">';
 		if ($totalCount > $offset + ADMIN_CRONMAN_ROWS) {
 			$nextUrl = 'cronman.php?which='.$which.'&amp;offset='.($offset + ADMIN_CRONMAN_ROWS);
 			echo '<a href="'.$nextUrl.'" class="next">'

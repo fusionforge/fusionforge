@@ -182,17 +182,18 @@ class SurveyHTML extends Error {
 
 		$ret = $warning_msg;
 		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
-		$ret.='<input type="hidden" name="post" value="Y" />';
+		$ret.='<p><input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="survey_id" value="'.$survey_id.'" />';
 		$ret.='<input type="hidden" name="survey_questions" value="'.$survey_questions.'" />';
-		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '">';
-		$ret.='<strong>'. _('Name Of Survey:').'</strong>' .utils_requiredField();
-		$ret.= '<input type="text" name="survey_title" value="'.$survey_title.'" length="60" maxlength="150" /><p>';
+		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '" />';
+		$ret.='<strong>'. _('Survey Title: ').'</strong>' .utils_requiredField();
+		$ret.= '<input type="text" name="survey_title" value="'.$survey_title.'" size="60" maxlength="150" /></p>';
 
 		$ret.='<p><strong>'. _('Is Active?').'</strong>';
 		$ret.='<br /><input type="radio" name="is_active" value="1"' .$active. '/>'._('Yes');
 		$ret.='<br /><input type="radio" name="is_active" value="0"' .$inactive. '/>'._('No');
+		$ret.='</p>';
 
 		$arr_to_add = & $s->getAddableQuestionInstances();
 		$arr_to_del = & $s->getQuestionInstances();
@@ -238,8 +239,8 @@ class SurveyHTML extends Error {
 
 		/* Deletable questions */
 		if (count($arr_to_del) > 0) {
-			$ret.='<p><strong>'. _('Questions in this Survey').'</strong></p>';
-			$title_arr = array('Question ID', 'Question', 'Type', 'Order', 'Delete from this Survey');
+			$ret.='<h2>'. _('Questions in this Survey').'</h2>';
+			$title_arr = array(_('Question'), _('Type'), _('Order'), _('Delete from this Survey'));
 			$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
 		}
 
@@ -416,7 +417,7 @@ class SurveyHTML extends Error {
 				/* Edit/Delete Link */
 				$ret.= '<td>['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&amp;survey_id='. $surveys[$i]->getID(),_('Edit')).'] ';
 
-				/* We don;t support delete yet. Need to delete all results as well */
+				/* We don't support delete yet. Need to delete all results as well */
 				/*
 				$ret.= '['.util_make_link ('/survey/admin/survey.php?delete=Y&amp;group_id='.$group_id.'&amp;survey_id='. $surveys[$i]->getID(),_('Delete')).']';
                                 */
@@ -462,7 +463,7 @@ class SurveyHTML extends Error {
 			'<input type="hidden" name="group_id" value="'.$group_id.'" />'.
 			'<input type="hidden" name="survey_id" value="'.$survey_id. '" />';
 
-		$ret.= '<table border="0">';
+		$ret.= '<table>';
 
 		/* Keep question numbers */
 		$index = 1;
@@ -478,9 +479,9 @@ class SurveyHTML extends Error {
 
 			if ($question_type == '4') {
 				/* Don't show question number if it's just a comment */
-				$ret.='<tr><td valign="top">&nbsp;</td><td>';
+				$ret.='<tr><td class="top">&nbsp;</td><td>';
 			} else {
-				$ret.= '<tr><td valign="top"><strong>';
+				$ret.= '<tr><td class="top"><strong>';
 				/* If it's a 1-5 question box and first in series, move Quest number down a bit	*/
 				if (($question_type != $last_question_type) && (($question_type == '1') || ($question_type == '3'))) {
 					$ret.= '&nbsp;<br />';
@@ -542,7 +543,6 @@ class SurveyHTML extends Error {
 
 		return $ret;
 	}
-
 
 	/**
          * Show survey Result
@@ -670,7 +670,7 @@ class SurveyHTML extends Error {
 					'&amp;question_id='.$Question->getID().
 					'&amp;group_id='.$group_id.'">'.
 					sprintf(ngettext('View All %1$s Comment', 'View All %1$s Comments', $totalCount), $totalCount).
-					'</a></ul><p/>';
+					'</a></li></ul>';
 			}
 
 			break;

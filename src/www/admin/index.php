@@ -52,7 +52,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	?></li>
 </ul>
 <ul>
-	<li><a href="userlist.php"><?php echo _('Display Full User List/Edit Users'); ?></a>&nbsp;&nbsp;</li>
+	<li><a href="userlist.php"><?php echo _('Display Full User List/Edit Users'); ?></a></li>
 	<li><?php
 	echo _('Display Users Beginning with:').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
@@ -95,7 +95,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 
 		echo '<form action="globalroleedit.php" method="post"><p>';
 		echo global_role_box('role_id');
-		echo '&nbsp;<input type="submit" name="edit" value="'._("Edit Role").'" /></p></form>';
+		echo '<input type="submit" name="edit" value="'._("Edit Role").'" /></p></form>';
 ?>
 </li>
 <li>
@@ -103,7 +103,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 
 		echo '<form action="globalroleedit.php" method="post"><p>';
 		echo '<input type="text" name="role_name" size="10" value="" />';
-		echo '&nbsp;<input type="submit" name="add" value="'._("Create Role").'" /></p></form>';
+		echo '<input type="submit" name="add" value="'._("Create Role").'" /></p></form>';
 	?></li>
 </ul>
 <h2><?php echo _('Project Maintenance'); ?></h2>
@@ -220,7 +220,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<li><a href="database.php"><?php echo _('Project Database Administration'); ?></a></li>
 	<?php }
 	if(forge_get_config('use_people')) { ?>
-        <li><a href="<?php echo util_make_url ('/people/admin/'); ?>"><?php echo _('Job / Categories Administration'); ?></a></li>
+		<li><a href="<?php echo util_make_url ('/people/admin/'); ?>"><?php echo _('Job / Categories Administration'); ?></a></li>
 	<?php } ?>
 </ul>
 <?php }

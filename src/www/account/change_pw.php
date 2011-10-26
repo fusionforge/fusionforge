@@ -75,9 +75,9 @@ if (getStringFromRequest('submit')) {
 	printf(_('%1$s Password Change Confirmation'), forge_get_config ('forge_name'));
 	print '</h2>';
 
-	print '<div class="feedback">';
+	print '<p class="feedback">';
 	print _('Congratulations. You have changed your password.');
-	print '</div>';
+	print '</p>';
 	?>
 
 	<p>
