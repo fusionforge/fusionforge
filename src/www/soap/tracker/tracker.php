@@ -734,7 +734,7 @@ function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$s
 	if ($artifacts === false) {
 		return new soap_fault ('','getArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
 	}
-	return artifacts_to_soap($artifacts);
+	return util_strip_unprintable(artifacts_to_soap($artifacts));
 
 }
 
