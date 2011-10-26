@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge Plugin SVNHudson Class
+ * FusionForge Plugin Message Class
  *
  * Copyright 2009 (c) Alain Peyrat <alain.peyrat@alcatel-lucent.com>
  *
@@ -21,8 +21,7 @@
  */
 
 /**
- * The svnhudsonPlugin class. It implements the Hooks for the presentation
- *  of table in hudson and task in detailed mode.
+ * The messagePlugin class.
  *
  */
 
@@ -38,7 +37,7 @@ class messagePlugin extends Plugin {
 	}
 
 	function htmlhead() {
-		use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+		html_use_jquery();
 		use_javascript('/plugins/message/js/message.js');
 	}
 
@@ -50,7 +49,7 @@ class messagePlugin extends Plugin {
 		$res = db_query_params('SELECT message FROM plugin_message', array());
 		if ($res && db_numrows($res)>0) {
 			echo '<div id="message_box">';
-			echo html_image('ic/close.png','','', array('id' => 'message_close', 'style' => 'float:right;cursor:pointer'));
+			echo '<img id="message_close" style="float:right;cursor:pointer"  src="/themes/acos/images/ic/close.png" alt="'._('Close').'" />';
 			echo db_result($res, 0, 'message');
 			echo '</div>';
 		}
