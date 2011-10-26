@@ -146,10 +146,7 @@ AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id
 AND snippet_package_item.snippet_package_version_id=$1", array($version));
 
 	$rows=db_numrows($result);
-	echo '
-	<p>&nbsp;</p>
-	<h3>' ._('Snippets In This Package:').':</h3>
-	<p>&nbsp;</p>';
+	echo '<h3>' ._('Snippets In This Package:').'</h3>';
 
 	$title_arr=array();
 	$title_arr[]= _('Snippet ID');
@@ -190,7 +187,7 @@ function snippet_show_package_details($id) {
 
 	echo '
 	<p>
-	<table width="100%" border="0" cellspacing="1" cellpadding="2">
+	<table class="fullwidth" cellspacing="1" cellpadding="2">
 
 	<tr><td colspan="2">
 	<h2>'. db_result($result,0,'name').'</h2>
@@ -206,7 +203,7 @@ function snippet_show_package_details($id) {
 		</td>
 	</tr>
 
-	<tr><td colspan="2">&nbsp;<br /><strong>Description:</strong><br />
+	<tr><td colspan="2"><br /><strong>Description:</strong><br />
 	'. util_make_links(nl2br(db_result($result,0,'description'))).'
 	</td></tr>
 
@@ -221,7 +218,7 @@ function snippet_show_snippet_details($id) {
 
 	echo '
 	<p>
-	<table width="100%" border="0" cellspacing="1" cellpadding="2">
+	<table class="fullwidth" cellspacing="1" cellpadding="2">
 
 	<tr><td colspan="2">
 	<h2>'. db_result($result,0,'name').'</h2>
@@ -239,7 +236,7 @@ function snippet_show_snippet_details($id) {
 		'.$SCRIPT_LANGUAGE[db_result($result,0,'language')].'
 	</td></tr>
 
-	<tr><td colspan="2">&nbsp;<br />
+	<tr><td colspan="2"><br />
 	<strong>Description:</strong><br />
 	'. util_make_links(nl2br(db_result($result,0,'description'))).'
 	</td></tr>

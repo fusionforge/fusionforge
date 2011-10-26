@@ -34,8 +34,8 @@ $HTML->header(array('title'=>sprintf(_('%1$s Sitewide Statistics Graphs'), forge
 
 <hr />
 
-<table width="100%" cellpadding="0" cellspacing="0" border="0">
-<tr align="center">
+<table class="fullwidth">
+<tr class="align-center">
 <td><a href="index.php"><?php echo _('OVERVIEW STATS'); ?></a></td>
 <td><a href="projects.php"><?php echo _('PROJECT STATS'); ?></a></td>
 <td><strong><?php echo _('SITE GRAPHS'); ?></strong></td>

@@ -241,9 +241,9 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 	if ( db_numrows( $res ) > 1 ) {
 
 		?>
-		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+		<table class="fullwidth">
 
-		<tr valign="top" align="right" class="tableheading">
+		<tr class="align-right top tableheading">
 			<td><strong><?php echo _('Project Name'); ?></strong></td>
 			<td colspan="2"><strong><?php echo _('Page Views'); ?></strong></td>
 			<?php if (forge_get_config('use_frs')) { ?>
@@ -277,7 +277,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		$uri_string .= "&amp;orderby=";
 
 		?>
-		<tr valign="top" align="right" class="tableheading">
+		<tr class="align-right top tableheading">
 			<td>&nbsp;</td>
 			<td><a href="<?php echo $uri_string; ?>site_views"><?php echo _('Site'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>subdomain_views"><?php echo _('Subdomain'); ?></a></td>
@@ -344,7 +344,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		}
 
 		?>
-		</table></p>
+		</table>
 		<?php
 
 	} else {
@@ -373,8 +373,8 @@ function stats_site_projects_daily( $span ) {
 
 		?>
 		<h2><?php printf(_('Statistics for the past %1$s days'), $valid_days); ?></h2>
-		<table width="100%" cellpadding="0" cellspacing="0" border="0">
-			<tr valign="top" align="right">
+		<table class="fullwidth">
+			<tr class="top" align="right">
 			<td><strong><?php echo _('Day'); ?></strong></td>
 			<td><strong><?php echo _('Site Views'); ?></strong></td>
 			<td><strong><?php echo _('Subdomain Views'); ?></strong></td>
@@ -427,8 +427,8 @@ function stats_site_projects_monthly() {
 		?>
 
 		<h2><?php printf(_('Statistics for the past %1$s months'), $valid_months); ?></h2>
-		<table width="100%" cellpadding="0" cellspacing="0" border="0">
-			<tr valign="top" align="right">
+		<table class="fullwidth">
+			<tr class="top" align="right">
 			<td><strong><?php echo _('Month'); ?>Month</strong></td>
 			<td><strong><?php echo _('Site Views'); ?></strong></td>
 			<td><strong><?php echo _('Subdomain Views'); ?></strong></td>
@@ -487,8 +487,8 @@ function stats_site_aggregate( ) {
 	?>
 	<h2><?php echo _('Current Aggregate Statistics for All Time'); ?></h2>
 
-	<table width="100%" cellpadding="0" cellspacing="0" border="0">
-	<tr valign="top">
+	<table class="fullwidth">
+	<tr class="top">
 		<td><strong><?php echo _('Site Views'); ?></strong></td>
 		<td><strong><?php echo _('Subdomain Views'); ?></strong></td>
 		<td><strong><?php echo _('Downloads'); ?></strong></td>

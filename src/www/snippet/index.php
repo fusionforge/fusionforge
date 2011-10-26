@@ -57,7 +57,7 @@ function snippet_mainpage() {
       . '</h3><p>'
       . _('You can browse the snippet library quickly:').'
 	</p>
-	<table width="100%" border="0">
+	<table class="fullwidth">
 	<tr><td>
 	</td></tr>
 	<tr><td>

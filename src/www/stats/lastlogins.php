@@ -45,7 +45,7 @@ $HTML->header(array('title'=>_('Most Recent Opened Sessions')));
 
 ?>
 
-<table  width="100%" cellspacing="0" cellpadding="0">
+<table  width="100%">
 <tr class="tableheading">
 <th><?php echo _('Date'); ?></th>
 <th><?php echo _('Username'); ?></th>
