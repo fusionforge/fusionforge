@@ -175,10 +175,15 @@ if (forge_get_config('require_unique_email')) {
 <?php echo _('Timezone:'); ?><br />
 <?php echo html_get_timezone_popup('timezone', $timezone); ?>
 </p>
+<?php
+$toDisplay = html_get_theme_popup('theme_id', $theme_id);
+if($toDisplay != "") {
+?>
 <p>
 <?php echo _('Theme'); ?><br />
-<?php echo html_get_theme_popup('theme_id', $theme_id); ?>
+<?php echo $toDisplay; ?>
 </p>
+<?php } ?>
 <p>
 <?php echo _('Country:'); ?><br />
 <?php echo html_get_ccode_popup('ccode', $ccode); ?>
