@@ -147,11 +147,11 @@ function handle_multi_edit($skill_ids = array()) {
 			$finishY = substr($finish, 0, 4);
 			$finishM = substr($finish, 4, 2);
 
-			echo '<table border="0">'.
+			echo '<table>'.
 				'<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
 				'<td><h3>'.db_result($result, $i,'title').'</h3></td></tr>'.
 				'<tr><td>'.
-				'<table border="0" >'.
+				'<table>'.
 					'<tr class="tableheading">'.
 						'<td >'._('Type').'</td>'.
 						'<td >'._('Start Date').'</td>'.
@@ -168,7 +168,7 @@ function handle_multi_edit($skill_ids = array()) {
 				'</td></tr>'.
 
 				'<tr '.$HTML->boxGetAltRowStyle($i+1).'><td>'.
-				'<table border="0">'.
+				'<table>'.
 					'<tr class="tableheading">'.
 						'<td>'._('Title (max 100 characters)').'</td>'.
 					'</tr>'.

@@ -74,7 +74,6 @@ WHERE user_id=$4 AND id=$5',
 			}
 		} else if (getStringFromRequest('add')) {
 			//inserting a new diary entry
-
 			$res=db_query_params ('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES
 								($1,$2,$3,$4,$5)',
 								array(user_getid() ,
@@ -188,7 +187,7 @@ To stop monitoring this user, visit the following link:
 	<input type="hidden" name="form_key" value="'.form_generate_key().'"/>
 	<input type="hidden" name="'. $proc_str .'" value="1" />
 	<input type="hidden" name="diary_id" value="'. $_diary_id .'" />
-	<table width="100%">
+	<table class="fullwidth">
 	<tr><td colspan="2"><strong>'._('Summary').':</strong><br />
 		<input type="text" name="summary" size="60" maxlength="60" value="'. $_summary .'" />
 	</td></tr>
@@ -197,7 +196,7 @@ To stop monitoring this user, visit the following link:
 		$params['content'].'</td></tr>
 	<tr><td colspan="2">
 		<p>
-		<input type="submit" name="submit" value="'._('SUBMIT ONLY ONCE').'" />
+		<input type="submit" name="submit" value="'._('Submit').'" />
 		&nbsp; <input type="checkbox" name="is_public" value="1" '. (($_is_public)?'checked="checked"':'') .' /> '._('Is Public').'
 		</p>
 		<p>'._('If marked as public, your entry will be mailed to any monitoring users when it is first submitted.').'

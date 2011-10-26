@@ -164,7 +164,7 @@ if (db_numrows($result) > 0) {
 	$quest_array=explode(',', $questions);
 	$count=count($quest_array);
 	echo '
-		<table border="0">';
+		<table>';
 	$q_num=1;
 
 	for ($i=0; $i<$count; $i++) {
@@ -182,11 +182,11 @@ if (db_numrows($result) > 0) {
 			*/
 
 			echo '
-				<tr><td valign="top">&nbsp;</td><td>';
+				<tr><td class="top">&nbsp;</td><td>';
 
 		} else {
 			echo '
-				<tr><td valign="top"><strong>';
+				<tr><td class="top"><strong>';
 			/*
 				If it's a 1-5 question box and first in series, move Quest
 				number down a bit

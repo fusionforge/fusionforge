@@ -60,7 +60,7 @@ array($job_id, $group_id));
 //		<h2>'. db_result($result,0,'category_name') .' wanted for '. db_result($result,0,'group_name') .'</h2>
 		echo '
 		<p />
-		<table border="0" width="100%">
+		<table class="fullwidth">
                 <tr><td colspan="2">
 			<strong>'. db_result($result,0,'title') .'</strong>
 		</td></tr>

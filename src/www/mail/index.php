@@ -64,7 +64,7 @@ if ($group_id) {
 
 	$mlCount = count($mlArray);
 	if($mlCount == 0) {
-		echo '<p>'.sprintf(_('No Lists found for %1$s'), $group->getPublicName()) .'</p>';
+		echo '<p class="information">'.sprintf(_('No Lists found for %1$s'), $group->getPublicName()) .'</p>';
 		echo '<p>'._('Project administrators use the admin link to request mailing lists.').'</p>';
 		mail_footer(array());
 		exit;

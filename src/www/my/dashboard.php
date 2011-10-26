@@ -38,8 +38,8 @@ if (!session_loggedin()) {
 	site_user_header(array('title'=>sprintf(_('Personal Page For %s'), $u->getRealName())));
 	?>
 
-	<table width="100%" border="0">
-	<tr><td valign="top" width="100%">
+	<table class="fullwidth">
+	<tr><td class="top" width="100%">
 	<?php
 
 	echo $HTML->boxTop(_('All trackers for my projects'), false, false);

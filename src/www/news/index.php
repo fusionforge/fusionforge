@@ -69,9 +69,9 @@ if ($rows>$limit) {
 
 if ($rows < 1) {
 	if ($group_id) {
-		echo '<p class="warning_msg">'.sprintf(_('No News Found for %s'),group_getname($group_id)).'</p>';
+		echo '<p class="information">'.sprintf(_('No News Found for %s'),group_getname($group_id)).'</p>';
 	} else {
-		echo '<p class="warning_msg">'._('No News Found').'</p>';
+		echo '<p class="information">'._('No News Found').'</p>';
 	}
 	echo db_error();
 } else {
