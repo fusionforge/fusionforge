@@ -1482,6 +1482,15 @@ function util_html_secure($s) {
 	    ENT_QUOTES, "UTF-8");
 }
 
+/**
+ * Codendi compatibility code.
+ *
+ * @deprecated
+ */
+function user_is_super_user() {
+	return forge_check_global_perm('forge_admin');
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
