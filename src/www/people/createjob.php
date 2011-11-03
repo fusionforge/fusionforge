@@ -33,7 +33,7 @@ if (!forge_get_config('use_people')) {
 
 $group_id = getIntFromRequest('group_id');
 
-if ($group_id && (user_ismember($group_id, 'A'))) {
+if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 
 	project_admin_header(array());
 

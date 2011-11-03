@@ -227,10 +227,11 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 				$o = new Widget_MyWikiPage();
 				break;
 				case 'mysystemevent':
-				if (user_is_super_user()) { //This widget is only for super admin
-				$o = new Widget_MySystemEvent();
-				}
-				break;
+					// This widget is only for super admin
+					if (forge_check_global_perm('forge_admin')) {
+						$o = new Widget_MySystemEvent();
+					}
+					break;
 				case 'projectclassification':
 				$o = new Widget_ProjectClassification();
 				break;*/

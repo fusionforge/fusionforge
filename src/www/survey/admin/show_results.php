@@ -55,7 +55,7 @@ $sh = new  SurveyHtml();
 $title = _('Survey Results');
 $sh->header(array('title'=>$title));
 
-if (!session_loggedin() || !user_ismember($group_id,'A')) {
+if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	echo '<p class="error">'._('Permission denied').'</p>';
 	$sh->footer(array());
 	exit;

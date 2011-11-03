@@ -1678,7 +1678,9 @@ Enjoy the site.
 
 /**
  * user_ismember() - DEPRECATED; DO NOT USE! (TODO: document what should be used instead)
- *  May need to be replaced by forge_check_perm ('project_admin', $group_id) if checking for project admin
+ *  Replace user_ismember(1[, 'A']) with forge_check_global_perm('forge_admin')
+ *  Replace user_ismember($group_id, 'A') with forge_check_perm('project_admin', $group_id)
+ *  For now, keep user_ismember($group_id) alone
  * @param		int		The Group ID
  * @param		int		The Type
  * @deprecated

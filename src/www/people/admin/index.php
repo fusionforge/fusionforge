@@ -34,7 +34,7 @@ if (!forge_get_config('use_people')) {
 $group_id = getIntFromRequest('group_id');
 $job_id = getIntFromRequest('job_id');
 
-if (user_ismember(1,'A')) {
+if (forge_check_global_perm('forge_admin')) {
 
 	if (getStringFromRequest('post_changes')) {
 		/*

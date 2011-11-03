@@ -29,7 +29,7 @@ require_once $gfwww.'include/HTML_Graphs.php';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 
-if (!session_loggedin() || !user_ismember($group_id,'A')) {
+if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
         echo '<div class="error">'._('Permission denied').'</div>';
 	exit;
 }

@@ -48,7 +48,7 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
-if ( !user_ismember($group_id,'A')) {
+if ( !forge_check_perm('project_admin', $group_id)) {
 	exit_permission_denied(_('You are not a Project admin'),'surveys');
 }
 

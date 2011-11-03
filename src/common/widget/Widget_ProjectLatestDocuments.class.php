@@ -53,7 +53,8 @@ class Widget_ProjectLatestDocuments extends Widget {
 						AND stateid=$2',
 					array($group_id, '1'));
 
-		if (session_loggedin() && (user_ismember($group_id) || user_ismember(1,'A'))) {
+		if (session_loggedin() && (user_ismember($group_id) ||
+		    forge_check_global_perm('forge_admin'))) {
 			$qpa = db_construct_qpa($qpa, ' OR stateid=$1 OR stateid=$2 OR stateid=$3', array('3','4','5'));
 		}
 
@@ -67,7 +68,8 @@ class Widget_ProjectLatestDocuments extends Widget {
 			echo '<div class="warning">'._('This Project Has Not Published Any Documents').'</div>';
 		} else {
 			$tabletop = array(_('Date'), _('Filename'), _('Title'), _('Author'));
-			if (session_loggedin() && (user_ismember($group_id) || user_ismember(1,'A'))) {
+			if (session_loggedin() && (user_ismember($group_id) ||
+			    forge_check_global_perm('forge_admin'))) {
 				$tabletop[] = _('Status');
 			}
 			echo $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile', 'sortable');
@@ -95,7 +97,8 @@ class Widget_ProjectLatestDocuments extends Widget {
 						<td >'
 							. make_user_link($user_name, $realname) .
 						'</td>';
-				if (session_loggedin() && (user_ismember($group_id) || user_ismember(1,'A'))) {
+				if (session_loggedin() && (user_ismember($group_id) ||
+				    forge_check_global_perm('forge_admin'))) {
 					echo	'<td>'
 							. $statename .
 						'</td>';

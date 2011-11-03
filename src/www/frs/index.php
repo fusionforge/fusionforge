@@ -42,7 +42,7 @@ if (!$cur_group) {
 //	Non-members can only see public packages
 //
 if (session_loggedin()) {
-	if (user_ismember($group_id) || user_ismember(1,'A')) {
+	if (user_ismember($group_id) || forge_check_global_perm('forge_admin')) {
 		$pub_sql='';
 	} else {
 		$pub_sql=' AND is_public=1 ';

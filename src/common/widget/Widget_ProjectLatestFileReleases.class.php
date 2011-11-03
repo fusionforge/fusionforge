@@ -74,7 +74,7 @@ $HTML=$GLOBALS['HTML'];
 		//
 		$public_required = 1;
 		if (session_loggedin() &&
-		    (user_ismember($group_id) || user_ismember(1,'A'))) {
+		    (user_ismember($group_id) || forge_check_global_perm('forge_admin'))) {
 			$public_required = 0 ;
 		}
 

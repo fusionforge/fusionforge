@@ -118,7 +118,7 @@ class WidgetLayoutManager {
 				}
 				break;
 			case self::OWNER_TYPE_GROUP:
-				if (UserManager::instance()->getCurrentUser()->is_super_user==true || user_ismember($request->get('group_id'), 'A')) { //Only project admin
+				if (UserManager::instance()->getCurrentUser()->is_super_user==true || forge_check_perm('project_admin', $request->get('group_id'))) { //Only project admin
 					$readonly = false;
 				}
 				break;

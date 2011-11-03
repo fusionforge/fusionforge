@@ -69,7 +69,7 @@ $details = getStringFromRequest('details');
 
 if (session_loggedin()) {
 
-	if (!user_ismember($group_id,'A')) {
+	if (!forge_check_perm('project_admin', $group_id)) {
 		exit_permission_denied(_('You cannot submit news for a project unless you are an admin on that project'),'home');
 	}
 

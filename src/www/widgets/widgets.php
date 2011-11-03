@@ -64,7 +64,8 @@ if (isLogged()) {
 					$group_id = $owner_id;
 					$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
 					$request->params['group_id'] = $group_id; //bad!
-					if (user_ismember($group_id, 'A') || user_is_super_user()) {
+					if (forge_check_perm('project_admin', $group_id) ||
+					    forge_check_global_perm('forge_admin')) {
 						if (HTTPRequest::instance()->get('update') == 'layout') {
 							$title = _("Customize layout");
 						} else {

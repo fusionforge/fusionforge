@@ -49,7 +49,8 @@ if ($owner) {
                 $_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
                 $request->params['group_id'] = $group_id; //bad!
                 $redirect = '/projects/'. $project->getUnixName().'/';
-                if (!user_ismember($group_id, 'A') && !user_is_super_user()) {
+		if (!forge_check_perm('project_admin', $group_id) &&
+		    !forge_check_global_perm('forge_admin')) {
                     $GLOBALS['Response']->redirect($redirect);
                 }
                 $good = true;

@@ -46,7 +46,8 @@ if (!$result || db_numrows($result) < 1) {
 	//  Members of projects can see all packages
 	//  Non-members can only see public packages
 	if(!$is_public) {
-		if (!session_loggedin() || (!user_ismember($group_id) && !user_ismember(1,'A'))) {
+		if (!session_loggedin() || (!user_ismember($group_id) &&
+		    !forge_check_global_perm('forge_admin'))) {
 			exit_permission_denied();
 		}
 	}
