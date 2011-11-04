@@ -23,6 +23,9 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
+// Some variables are overridden if installed from a package
+@include_once $gfcommon.'pkginfo.inc.php';
+
 class FusionForge extends Error {
 
 	var $software_name ;
@@ -33,10 +36,9 @@ class FusionForge extends Error {
 	 *	FusionForge - FusionForge object constructor
 	 */
 	function FusionForge() {
-		$this->Error();
+		global $forge_pkg_name, $forge_pkg_version, $forge_pkg_type;
 
-		// Some variables are overridden if installed from a package
-		@include_once $gfcommon.'pkginfo.inc.php';
+		$this->Error();
 
 		if (isset($forge_pkg_name)) {
 			$this->software_name = $forge_pkg_name;
