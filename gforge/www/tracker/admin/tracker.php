@@ -36,8 +36,8 @@ echo _('Create/change generic response messages for the tracker.') ;
 echo '</p>';
 
 echo '<p>' . util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;clone_tracker=1',
-			     '<strong>'._('Clone Tracker').'</strong>').'<br />' ;
-echo _('Create a new tracker as a copy of this one.') ;
+			     '<strong>'._('Apply Template Tracker').'</strong>').'<br />' ;
+echo _('Duplicate parameters and fields from a template trackers in this one.') ;
 echo '</p>';
 
 echo '<p>' . util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;delete=1',
