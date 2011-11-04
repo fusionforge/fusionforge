@@ -2445,7 +2445,7 @@ class Group extends Error {
 
 		$template = $this->getTemplateProject() ;
 		$id_mappings = array ();
-		$seen_local_roles = false ;
+		$seen_admin_role = false ;
 		if ($template) {
 			// Copy roles from template project
 			foreach ($template->getRoles() as $oldrole) {
@@ -2455,7 +2455,9 @@ class Group extends Error {
 					// Need to use a different role name so that the permissions aren't set from the hardcoded defaults
 					$role->create ('TEMPORARY ROLE NAME', $data, true) ;
 					$role->setName ($oldrole->getName()) ;
-					$seen_local_roles = true ;
+					if ($oldrole->getSetting ('project_admin', $template->getID())) {
+						$seen_admin_role = true ;
+					}
 				} else {
 					$role = $oldrole ;
 					$role->linkProject ($this) ;
@@ -2466,7 +2468,7 @@ class Group extends Error {
 			}
 		}
 
-		if (!$seen_local_roles) {
+		if (!$seen_admin_role) {
 			$role = new Role($this);
 			$adminperms = array ('project_admin' => array ($this->getID() => 1)) ;
 			$role_id = $role->create ('Admin', $adminperms, true) ;
@@ -2475,6 +2477,9 @@ class Group extends Error {
 		if (USE_PFO_RBAC) {
 			$roles = $this->getRoles() ;
 			foreach ($roles as $r) {
+				if ($r->getHomeProject() == NULL) {
+					continue;
+				}
 				if ($r->getSetting ('project_admin', $this->getID())) {
 					$r->addUser (user_get_object ($idadmin_group)) ;
 				}
