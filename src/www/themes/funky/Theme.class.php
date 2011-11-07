@@ -420,7 +420,6 @@ class Theme extends Layout {
 		echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
 
 		plugin_hook("javascript_file", false);
-		echo $this->getJavascripts();
 
 		// invoke the 'javascript' hook for custom javascript addition
 		$params = array('return' => false);
@@ -434,6 +433,8 @@ class Theme extends Layout {
 		html_use_tooltips();
 		html_use_storage();
 		html_use_simplemenu();
+		echo $this->getJavascripts();
+		echo $this->getStylesheets();
 		?>
 		<script language="JavaScript" type="text/javascript">//<![CDATA[
 		jQuery.noConflict();
