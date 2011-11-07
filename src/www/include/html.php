@@ -380,6 +380,12 @@ function html_use_storage() {
 	use_javascript('/scripts/jquery-storage/jquery.Storage.js');
 }
 
+function html_use_simplemenu() {
+	html_use_jquery();
+	use_javascript('/scripts/jquery-simpletreemenu/js/jquery-simpleTreeMenu-1.1.0.js');
+	use_stylesheet('/scripts/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.1.0.css');
+}
+
 /**
  * html_build_select_box_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.

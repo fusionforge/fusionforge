@@ -103,6 +103,7 @@ if (session_loggedin()) {
 }
 
 html_use_storage();
+html_use_simplemenu();
 use_javascript('scripts/DocManController.js');
 use_javascript('/js/sortable.js');
 

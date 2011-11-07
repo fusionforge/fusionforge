@@ -42,11 +42,13 @@ echo '<ul id="'.$g->getUnixname().'-tree">';
 $dm->getTree($dirid, $linkmenu);
 echo '</ul>';
 echo '
-<script type="text/javascript">
-	$(document).ready(function() {
-		jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu();
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+	jQuery(document).ready(function() {
+		if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
+			jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu();
+		}
 	});
-</script>
+/* ]]> */</script>
 ';
 if ($g->usesPlugin('projects-hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects-hierarchy');
@@ -64,11 +66,13 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 			$dm->getTree($dirid, $linkmenu);
 			echo '</ul>';
 			echo '
-			<script type="text/javascript">
-				$(document).ready(function() {
-					jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu();
+			<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+				jQuery(document).ready(function() {
+					if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
+						jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu();
+					}
 				});
-			</script>
+			/* ]]> */</script>
 			';
 		}
 	}
@@ -76,19 +80,23 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 if (isset($childgroup_id) && $childgroup_id) {
 	$groupObject = group_get_object($childgroup_id);
 	echo '
-		<script type="text/javascript">
-			$(document).ready(function() {
-				jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
+		<script  language="JavaScript" type="text/javascript">/* <![CDATA[ */
+			jQuery(document).ready(function() {
+				if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
+					jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
+				}
 			});
-		</script>
+		/* ]]> */</script>
 	';
 } else {
 	echo '
-		<script type="text/javascript">
-			$(document).ready(function() {
-				jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
+		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+			jQuery(document).ready(function() {
+				if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
+					jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
+				}
 			});
-		</script>
+		/* ]]> */</script>
 	';
 }
 echo '</div>';
