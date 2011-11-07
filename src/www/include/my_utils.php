@@ -31,8 +31,6 @@ Output:
 */
 function my_hide_url ($svc, $db_item_id, $item_id, $count, $hide) {
 
-    global $Language;
-
     $pref_name = 'my_hide_'.$svc.$db_item_id;
     $old_hide = $old_count = $old_pref_value = UserManager::instance()->getCurrentUser()->getPreference($pref_name);
     if ($old_pref_value) {
@@ -129,7 +127,6 @@ function my_format_as_flag2($assignee, $submitter) {
 }
 
 function my_item_count($total, $new) {
-    global $Language;
     return '['.$total.($new ? ", <b>".vsprintf(_('%s new items'), array($new))."</b>]" : ']');
 }
 
