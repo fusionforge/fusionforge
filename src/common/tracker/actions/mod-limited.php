@@ -139,7 +139,7 @@ if (session_loggedin()) {
 		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
 			<span id="tracker-summary" title="<?php echo util_html_secure(html_get_tooltip_description('summary')) ?>">
 			<?php echo $ah->getSummary(); ?>
-			<span>
+			</span>
 		</td>
 	</tr>
 
