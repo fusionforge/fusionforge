@@ -166,7 +166,7 @@ echo notepad_func();
 </table>
 </div>
 <div class="tabbertab" title="<?php echo _('Changes'); ?>">
-<table border="0" width="80%">
+<table width="80%">
 	<tr>
 	<td colspan="2">
 	<h2><?php echo _('Changes') ?>:</h2>
