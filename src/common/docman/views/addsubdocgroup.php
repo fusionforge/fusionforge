@@ -42,12 +42,12 @@ if ($childgroup_id) {
 }
 
 ?>
-<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+<script language="JavaScript" type="text/javascript">//<![CDATA[
 function doItAddSubGroup() {
 	document.getElementById('addsubgroup').submit();
 	document.getElementById('submitaddsubgroup').disabled = true;
 }
-/* ]]> */</script>
+//]]></script>
 <?php
 echo '<div class="docmanDivIncluded" >';
 echo '<form id="addsubgroup" name="addsubgroup" method="post" action="'.$actionurl.'">';

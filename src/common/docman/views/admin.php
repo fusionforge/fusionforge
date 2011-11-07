@@ -36,12 +36,12 @@ if ( !forge_check_perm ('docman', $group_id, 'admin')) {
 ?>
 
 <div id="principalAdminDiv" class="docmanDivIncluded">
-<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+<script language="JavaScript" type="text/javascript">//<![CDATA[
 function doIt(formid) {
 	document.getElementById(formid).submit();
 	document.getElementById('submit'+formid).disabled = true;
 }
-/* ]]> */</script>
+//]]></script>
 <?php
 if (extension_loaded('zip')) {
 	echo '<form id="backup" name="backup" method="post" action="'. util_make_uri('/docman/view.php/'.$group_id.'/backup') .'" >';

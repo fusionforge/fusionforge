@@ -138,7 +138,7 @@ if ($d_pending_arr != NULL ) {
 
 ?>
 
-<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+<script language="JavaScript" type="text/javascript">//<![CDATA[
 var controllerListFile;
 
 jQuery(document).ready(function() {
@@ -157,7 +157,7 @@ jQuery(document).ready(function() {
 	});
 });
 
-/* ]]> */</script>
+//]]></script>
 
 <?php
 echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';

@@ -237,7 +237,7 @@ class Theme extends Layout {
 
 		if ($use_tooltips) {
 			?>
-			<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+			<script language="JavaScript" type="text/javascript">//<![CDATA[
 				if (typeof(jQuery(window).tipsy) == 'function') {
 					jQuery(document).ready(
 						function() {
@@ -251,7 +251,7 @@ class Theme extends Layout {
 						}
 					);
 				}
-			/* ]]> */</script>
+			//]]></script>
 			<?php
 		}
 
@@ -427,21 +427,21 @@ class Theme extends Layout {
 		plugin_hook("javascript", $params);
 		$javascript = $params['return'];
 		if($javascript) {
-			echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */'."\n";
+			echo '<script language="JavaScript" type="text/javascript">//<![CDATA['."\n";
 			echo $javascript;
-			echo "\n/* ]]> */</script>\n";
+			echo "\n//]]></script>\n";
 		}
 		html_use_tooltips();
 		html_use_storage();
 		html_use_simplemenu();
 		?>
-		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+		<script language="JavaScript" type="text/javascript">//<![CDATA[
 		jQuery.noConflict();
 		jQuery(window).load(function(){
 			jQuery(".quicknews").hide();
 					setTimeout("jQuery('.feedback').hide('slow')", 5000);
 		});
-		/* ]]> */</script>
+		//]]></script>
 		<?php
 	}
 }

@@ -33,7 +33,7 @@ if (!forge_check_perm('docman', $group_id, 'submit')) {
 }
 ?>
 
-<script type="text/javascript">
+<script language="Javascript" type="text/javascript">//<![CDATA[
 var controllerAddItem;
 
 jQuery(document).ready(function() {
@@ -47,13 +47,13 @@ jQuery(document).ready(function() {
 	});
 });
 
-</script>
-<script type="text/javascript">
+//]]></script>
+<script language="Javascript"  type="text/javascript">//<![CDATA[
 function doItInject() {
 	document.getElementById('injectzip').submit();
 	document.getElementById('submitinjectzip').disabled = true;
 }
-</script>
+//]]></script>
 <?php
 echo '<div class="docmanDivIncluded" >';
 echo '<input id="buttonDoc" type="radio" name="type" value="document" />';

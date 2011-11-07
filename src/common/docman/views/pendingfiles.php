@@ -41,7 +41,7 @@ if (!isset($nested_pending_docs)) {
 } else {
 
 ?>
-<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+<script language="JavaScript" type="text/javascript">//<![CDATA[
 var controllerListPending;
 
 jQuery(document).ready(function() {
@@ -51,7 +51,7 @@ jQuery(document).ready(function() {
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
 	});
 });
-/* ]]> */</script>
+//]]></script>
 <?php
 	if (isset($nested_pending_docs[$dirid]) && is_array($nested_pending_docs[$dirid])) {
 		echo '<div class="docmanDiv">';
