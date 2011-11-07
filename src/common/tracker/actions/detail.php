@@ -100,8 +100,12 @@ echo notepad_func();
 		</td></tr>
 </table>
 <div id="tabber" class="tabber">
-<div class="tabbertab" title="<?php echo _('Followups'); ?>">
-	<table border="0" width="80%">
+<?php
+$count=db_numrows($ah->getMessages());
+$nb = $count? ' ('.$count.')' : '';
+?>
+<div class="tabbertab" title="<?php echo _('Followups').$nb; ?>">
+	<table width="80%">
 		<tr><td colspan="2">
 			<?php if ($ath->allowsAnon() || session_loggedin()) { ?>
 			<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
@@ -133,8 +137,14 @@ echo notepad_func();
 		</td></tr>
 </table>
 </div>
-<div class="tabbertab" title="<?php echo _('Attachments'); ?>">
-<table border="0" width="80%">
+<?php
+$tabcnt=0;
+$file_list = $ah->getFiles();
+$count=count($file_list);
+$nb = $count? ' ('.$count.')' : '';
+?>
+<div class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
+<table width="80%">
 	<tr><td colspan="2">
 	<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
 		<strong><?php echo _('Attach Files'); ?></strong><br />

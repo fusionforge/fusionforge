@@ -149,8 +149,12 @@ if (session_loggedin()) {
 	</td></tr>
 </table>
 <div id="tabber" class="tabber">
-<div class="tabbertab" title="<?php echo _('Followups');?>">
-<table border="0" width="80%">
+<?php
+$count=db_numrows($ah->getMessages());
+$nb = $count? ' ('.$count.')' : '';
+?>
+<div class="tabbertab" title="<?php echo _('Followups').$nb; ?>">
+<table width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo _('Add A Comment') ?>: <?php echo notepad_button('document.forms.trackermodlimitedform.details') ?></strong><br />
 		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea>
@@ -171,8 +175,15 @@ echo $ah->showMessages($sort_comments_chronologically);
 	</td></tr>
 </table>
 </div>
-<div class="tabbertab" title="<?php echo _('Attachments'); ?>">
-<table border="0" width="80%">
+<?php
+$tabcnt=0;
+$file_list = $ah->getFiles();
+$count=count($file_list);
+$nb = $count? ' ('.$count.')' : '';
+?>
+<div class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
+		<h2><?php echo _('Existing Files') ?>:</h2>
+<table width="80%">
 	<tr><td colspan="2">
 		<?php echo _('Attach Files') ?><br />
 		<input type="file" name="input_file0" size="30" /><br />

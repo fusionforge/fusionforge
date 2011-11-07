@@ -187,8 +187,12 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 	</td></tr>
 </table>
 <div id="tabber" class="tabber">
-<div class="tabbertab" title="<?php echo _('Followups'); ?>">
-<table border="0" width="80%">
+<?php
+$count=db_numrows($ah->getMessages());
+$nb = $count? ' ('.$count.')' : '';
+?>
+<div class="tabbertab" title="<?php echo _('Followups').$nb; ?>">
+<table width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo _('Use Canned Response') ?>:</strong><br />
 		<?php
@@ -240,9 +244,15 @@ if ($group->usesPM()) {
 	?>
 </div>
 <?php } ?>
-<div class="tabbertab" title="<?php echo _('Attachments'); ?>">
+<?php
+$tabcnt=0;
+$file_list = $ah->getFiles();
+$count=count($file_list);
+$nb = $count? ' ('.$count.')' : '';
+?>
+<div class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
 		<h2><?php echo _('Existing Files') ?>:</h2>
-<table border="0" width="80%">
+<table width="80%">
 	<tr><td colspan="2">
         <strong><?php echo _('Attach Files') ?>:</strong><br />
         <input type="file" name="input_file0" size="30" /><br />
