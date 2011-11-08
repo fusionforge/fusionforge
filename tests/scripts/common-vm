@@ -1,0 +1,141 @@
+#! /bin/sh
+
+usage_vm()
+{
+    cat <<EOF
+$1 -h|--host=<hostname> -e|--engine=<vmengine> -c|--config=<config> -t|--template=<template>
+config use the syntax used in test/config/default file
+hostname=vmengine:template:address/mask:gateway
+EOF
+    return 0
+}
+
+read_param_vm()
+{
+options=`getopt -o h:e:c:t: -l host:,engine:,config:,template: -- "$@"`
+if [ $? -ne 0 ]; then
+        usage_vm `basename $0`
+        exit 1
+fi
+eval set -- "$options"
+
+while true
+do
+    case "$1" in
+        -e|--engine)    VMENGINE=$2; shift 2;;
+        -h|--host)      HOST=$2; shift 2;;
+        -c|--config)    CONFIG=$2; shift 2;;
+        -t|--template)  VMTEMPLATE=$2; shift 2;;
+        --)             shift 1; break ;;
+        *)              break ;;
+    esac
+done
+
+# Loading default config
+if [ -f $configdir/default ]
+then
+	. $configdir/default
+else
+	echo "Something went wrong, could not find default config: $configdir/default"
+	exit 1
+fi
+
+# Loading specific config
+if [ -f $configdir/`hostname` ]
+then
+        echo "Using specific config: $configdir/`hostname`"
+        . $configdir/`hostname`
+else
+        echo "Using default config"
+fi
+
+# Host can be defined by env var
+if [ -z "$HOST" ]
+then
+	echo "host not defined"
+	usage_vm
+	exit 2	
+fi
+
+BASEHOST=`echo $HOST|cut -d. -f1`
+# Config as a param
+if [ ! -z "$CONFIG" ]
+then
+	eval "$BASEHOST=$CONFIG"
+fi	
+
+# Now let's look if host/engine is defined in config
+IFS=: ; VARS=`eval echo \\\$$BASEHOST` ; unset IFS ;
+if [ ! -z "$VARS" ]
+then 
+	set $VARS
+	VMENGINE=$1
+	VMTEMPLATE=$2
+	CIDR=$3
+	IPGW=$4
+	echo "$BASEHOST=`eval echo \\\$$BASEHOST`"
+fi
+
+export HOST BASEHOST $BASEHOST SSHPUBKEY 
+
+if [ -z "$VMENGINE" ]
+then
+        # Try to guess the vmengine
+	if [ -x /usr/sbin/vzctl ]
+	then
+		VMENGINE=openvz
+	fi
+	if [ -x /usr/bin/lxc-start ]
+	then
+		VMENGINE=lxc
+	fi
+        if [ -z "$VMENGINE" ]
+        then
+                echo "VM engine not defined"
+		usage_vm
+                exit 3
+        fi
+fi
+
+if [ -z "$VMTEMPLATE" ]
+then
+	echo "Template not defined"
+	usage_vm
+	exit 4
+fi
+
+export VMTEMPLATE VMENGINE CIDR IPGW
+}
+
+destroy_vm()
+{
+	tests/scripts/destroy_vm $@ || true
+}
+
+start_vm_if_not_keeped()
+{
+	if $KEEPVM
+	then
+		# VM can already exist
+		tests/scripts/start_vm $@
+	else
+		# Destroy the VM if found
+		tests/scripts/stop_vm $@ || true
+		if ! tests/scripts/start_vm $@
+		then
+			echo "Could not start VM";
+			exit 2
+		fi
+	fi
+}
+
+stop_vm_if_not_keeped()
+{
+	if $KEEPVM
+	then
+        	echo "Keeping vm $@ alive"
+	else
+        	tests/scripts/stop_vm $@
+	fi
+}
+

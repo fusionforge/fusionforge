@@ -5344,6 +5344,7 @@ tests/ruleset.xml -text
 tests/scripts/catch_mail.php -text
 tests/scripts/cdx40-build-and-test-source.sh -text
 tests/scripts/common-functions -text
+tests/scripts/common-vm -text
 tests/scripts/destroy_vm -text
 tests/scripts/fusionforge-build-and-test-deb.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-rpm.sh -text svneol=unset#text/x-sh
