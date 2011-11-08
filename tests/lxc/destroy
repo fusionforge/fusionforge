@@ -1,12 +1,9 @@
-#! /bin/sh -x
+#! /bin/sh
+echo "==== DESTROY ===="
+echo "VMENGINE=$VMENGINE VMTEMPLATE=$VMTEMPLATE CIDR=$CIDR IPGW=$IPGW"
 
 lxcdir=`dirname $0`
-
-IFS=: ; VARS=`eval echo \\\$$BASEHOST` ; unset IFS ; set $VARS
-VMENGINE=$1
-TEMPLATE=$2
-CIDR=$3
-IPGW=$4
+export TEMPLATE=$VMTEMPLATE
 
 sudo /usr/bin/lxc-stop -n $HOST
 sudo /usr/bin/lxc-destroy -n $HOST

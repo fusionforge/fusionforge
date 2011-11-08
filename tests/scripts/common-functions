@@ -1,3 +1,4 @@
+#! /bin/sh
 get_config()
 {
 	. tests/config/default
@@ -26,42 +27,11 @@ prepare_workspace()
 	# Erase apidocs
 	[ ! -d $WORKSPACE/apidocs ] || rm -fr $WORKSPACE/apidocs
 	mkdir -p $WORKSPACE/apidocs
-}
-
-destroy_vm()
-{
-	HOST=$1
-	tests/scripts/destroy_vm $HOST || true
-}
-
-start_vm_if_not_keeped()
-{
-	HOST=$1
-	if $KEEPVM
+	if [ "$HOME" = "/var/lib/jenkins" ]
 	then
-		# VM can already exist
-		echo "Starting vm $HOST"
-		tests/scripts/start_vm $HOST
-	else
-		# Destroy the VM if found
-		echo "Destroying vm $HOST"
-		tests/scripts/stop_vm $HOST || true
-		if ! tests/scripts/start_vm $HOST
-		then
-			echo "Could not start VM";
-			exit 2
-		fi
-	fi
-}
-
-stop_vm_if_not_keeped()
-{
-	HOST=$1
-	if $KEEPVM
-	then
-        	echo "Keeping vm $HOST alive"
-	else
-        	tests/scripts/stop_vm $HOST
+		BUILDERDIR="/var/lib/jenkins/builder"
+		export BUILDERDIR
+		echo "Building in $BUILDERDIR"
 	fi
 }
 
