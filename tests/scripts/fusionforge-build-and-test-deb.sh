@@ -1,12 +1,13 @@
-#!/bin/sh
+#!/bin/sh +x
 . tests/scripts/common-functions
+. tests/scripts/common-vm
 
 export FORGE_HOME=/usr/share/gforge
 export DIST=squeeze
 get_config $@
 prepare_workspace
-destroy_vm $@
-start_vm_if_not_keeped $@
+destroy_vm -t debian6 $@
+start_vm_if_not_keeped -t debian6 $@
 
 # Build 3rd-party 
 make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
@@ -64,6 +65,6 @@ else
         retcode=2
 fi
 
-stop_vm_if_not_keeped $@
+stop_vm_if_not_keeped -t debian6 $@
 exit $retcode
 
