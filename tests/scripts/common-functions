@@ -27,6 +27,7 @@ prepare_workspace()
 	# Erase apidocs
 	[ ! -d $WORKSPACE/apidocs ] || rm -fr $WORKSPACE/apidocs
 	mkdir -p $WORKSPACE/apidocs
+	# When in jenkins reuse same space for pbuilder
 	if [ "$HOME" = "/var/lib/jenkins" ]
 	then
 		BUILDERDIR="/var/lib/jenkins/builder"
