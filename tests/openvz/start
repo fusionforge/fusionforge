@@ -1,0 +1,4 @@
+#! /bin/sh
+echo "==== START ===="
+echo "VMENGINE=$VMENGINE VMTEMPLATE=$VMTEMPLATE CIDR=$CIDR IPGW=$IPGW"
+
