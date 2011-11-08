@@ -137,7 +137,7 @@ AND snippet_package_version.snippet_package_version_id=$1',
 	<input type="hidden" name="suppress_nav" value="<?php echo $suppress_nav; ?>" />
 
 	<table>
-	<tr><td colspan="2" style="text-align:center">
+	<tr><td colspan="2" class="align-center">
 		<strong><?php echo _('Add This Snippet Version ID:'); ?></strong><br />
  <select name="snippet_version_id">
 <?php
@@ -162,7 +162,7 @@ for ($i=0; $i<$combolistrows; $i++)
 </select>
 	</td></tr>
 
-	<tr><td colspan="2" style="text-align:center">
+	<tr><td colspan="2" class="align-center">
 		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 		<br />
 		<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
@@ -187,7 +187,7 @@ AND snippet_package_item.snippet_package_version_id=$1',
 		echo $HTML->boxTop(_('Snippets In This Package'));
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td style="text-align:center">
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="align-center">
 				<a href="'.util_make_url ('/snippet/delete.php?type=frompackage&snippet_version_id='.db_result($result,$i,'snippet_version_id').'&snippet_package_version_id='.$snippet_package_version_id).
 				'">' . html_image("ic/trash.png","16","16") . '</a></td><td width="99%">'.
 				db_result($result,$i,'name').' '.db_result($result,$i,'version')."</td></tr>";

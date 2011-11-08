@@ -291,7 +291,7 @@ if (count ($template_projects) >= 1) {
 }
 ?>
 
-<p style="text-align: center">
+<p class="align-center">
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>"/>
 <input type="submit" name="i_disagree" value="<?php echo _('Cancel') ?>"/>
 </p>

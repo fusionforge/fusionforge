@@ -79,7 +79,7 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 				util_make_link ('/snippet/download.php?type=snippet&amp;id='.db_result($result,$i,'snippet_version_id'),'<strong>'. db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.
-				'<td style="text-align:center"><a href="'.util_make_url ('/snippet/delete.php?type=snippet&amp;snippet_version_id='.db_result($result,$i,'snippet_version_id')).'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
+				'<td class="align-center"><a href="'.util_make_url ('/snippet/delete.php?type=snippet&amp;snippet_version_id='.db_result($result,$i,'snippet_version_id')).'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
 
 				if ($i != ($rows - 1)) {
 					echo '
@@ -168,7 +168,7 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 			util_make_link ('/snippet/detail.php?type=packagever&amp;id='.db_result($result,$i,'snippet_package_version_id'),'<strong>'.db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.
-				'<td style="text-align:center"><a href="'.util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id')).
+				'<td class="align-center"><a href="'.util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id')).
 				'">' . html_image("ic/pencil.png","20","25") .
 				'</a> &nbsp; &nbsp; &nbsp; <a href="'.
 				util_make_url ('/snippet/delete.php?type=package&snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id')).

@@ -94,11 +94,11 @@ for ($i=0; $i<$count; $i++) {
 			Don't show question number if it's just a comment
 		*/
 
-		echo "\n<tr><td valign=\"top\">&nbsp;</td>\n<td>";
+		echo "\n<tr><td class=\"top\">&nbsp;</td>\n<td>"; 
 
 	} else {
 
-		echo "\n<tr><td valign=\"top\"><strong>";
+		echo "\n<tr><td class=\"top\"><strong>";
 
 		/*
 			If it's a 1-5 question box and first in series, move Quest

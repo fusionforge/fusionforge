@@ -536,7 +536,7 @@ class SurveyHTML extends Error {
 			$last_question_type=$question_type;
 		}
 
-		$ret.='<tr><td style="text-align:center" colspan="2">'.
+		$ret.='<tr><td class="align-center" colspan="2">'.
 			'<input type="submit" name="submit" value="'._('Submit').'" />'.
 			'<br />'.util_make_link ('/survey/privacy.php',_('Survey Privacy')).
 			'</td></tr></form></table>';
@@ -590,15 +590,15 @@ class SurveyHTML extends Error {
 					$url.='&amp;legend[]='.urlencode($arr_name[$j].' ('. $percent.')');
 					$url.='&amp;value[]='.urlencode($results[$j]);
 				}
-				$ret.= '<img border="0"  src="'.$url.'" alt="Graph of '.$Question->getQuestion().'"></img>';
+				$ret.= '<img src="'.$url.'" alt="Graph of '.$Question->getQuestion().'"></img>';
 			} else {
-				$ret.= '<dd><table border="0" cellspacing="0" cellpadding="0" width=100%>';
+				$ret.= '<table style="padding-left: 3em" width="100%">';
 
 				for ($j=5; $j>=0; $j--) {
 					$percent = (float)$results[$j]*100/$votes;
 					$ret.= $this->_makeBar($arr_name[$j].' ('.$results[$j].')', $percent, $arr_color[$j]);
 				}
-				$ret.= '</table></dd>';
+				$ret.= '</table>';
 			}
 			$ret.='<p/>';
 			break;
@@ -618,14 +618,14 @@ class SurveyHTML extends Error {
 					$url.='&amp;legend[]='.urlencode($arr_name[$j].'('.$res[$j].')');
 					$url.='&amp;value[]='.urlencode($res[$j]);
 				}
-				$ret.= '<img border="0"  src="'.$url.'" alt="Graph of '.$Question->getQuestion().'"></img>';
+				$ret.= '<img src="'.$url.'" alt="Graph of '.$Question->getQuestion().'"></img>';
 			} else {
-				$ret.= '<dd><table border="0" cellspacing="0" cellpadding="0" width=100%>';
+				$ret.= '<table style="padding-left: 3em" width="100%">';
 				for ($j=1; $j<=3; $j++) {
 					$result_per[$j] = (float)$res[$j]*100/$votes;
 					$ret.= $this->_makeBar($arr_name[$j].' ('.$res[$j].')', $result_per[$j], $arr_color[$j]);
 				}
-				$ret.= '</table></dd>';
+				$ret.= '</table>';
 			}
 			$ret.='<p/>';
 			break;
@@ -705,7 +705,7 @@ class SurveyHTML extends Error {
 	 */
 	function _makeBar($name, $percent, $color) {
 		$ret = '<tr><td width="30%">'.$name.'</td><td>';
-		$ret.= '<table width="'.$percent.'%" border="0"  cellspacing="0" cellpadding="0"><tr>';
+		$ret.= '<table width="'.$percent.'%"><tr>';
 		if ($percent) {
 			$ret.='<td width="90%" bgcolor="'.$color.'">&nbsp;</td>';
 		}

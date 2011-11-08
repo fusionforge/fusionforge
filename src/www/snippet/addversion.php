@@ -103,7 +103,7 @@ if (session_loggedin()) {
 			<textarea name="code" rows="30" cols="85"></textarea>
 		</td></tr>
 
-		<tr><td colspan="2" style="text-align:center">
+		<tr><td colspan="2" class="align-center">
 			<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 			<br />
 			<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
@@ -222,7 +222,7 @@ function show_add_snippet_box() {
 			<textarea name="changes" rows="5" cols="45"></textarea>
 		</td></tr>
 
-		<tr><td colspan="2" style="text-align:center">
+		<tr><td colspan="2" class="align-center">
 			<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 			<br />
 			<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />

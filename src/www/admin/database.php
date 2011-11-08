@@ -105,7 +105,7 @@ if (db_numrows($res_db) > 0) {
 
 	while ($row_db = db_fetch_array($res_db)) {
 
-		print '<tr><td style="text-align:center"><a href="'.getStringFromServer('PHP_SELF').'?displaydb=1&dbstate='.$row_db['stateid'].'">'.$row_db['statename'].'</a></td><td style="text-align:center">'.$row_db['count'].'</td></tr>';
+		print '<tr><td class="align-center"><a href="'.getStringFromServer('PHP_SELF').'?displaydb=1&dbstate='.$row_db['stateid'].'">'.$row_db['statename'].'</a></td><td class="align-center">'.$row_db['count'].'</td></tr>';
 
 	}
 

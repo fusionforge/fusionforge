@@ -54,7 +54,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 		if($searchQuery->isError()) {
 			$this->writeHeader();
-			echo '<div class="error">'.$searchQuery->getErrorMessage().'</div>';
+			echo '<p class="error">'.$searchQuery->getErrorMessage().'</p>';
 			$this->writeFooter();
 		} else {
 			$searchQuery->executeQuery();

@@ -185,7 +185,7 @@ WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE
 				<td>'.format_name($row['unix_group_name'], $row['status']).'</td>
 				<td>'.$row['group_name'].'</td>
 				<td>'.date(_('Y-m-d H:i'), $row['register_time']).'</td>
-				<td style="text-align:center">'.format_name($row['status'].$extra_status, $row['status']).'</td>
+				<td class="align-center">'.format_name($row['status'].$extra_status, $row['status']).'</td>
 				</tr>
 			';
 
