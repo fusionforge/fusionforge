@@ -31,10 +31,10 @@ DEBMIRRORSEC=http://security.debian.org/
 # The following is for static ip config samples
 # hostname=vmengine:template:address/mask:gateway
 # OpenVZ
-#vzdebian6=vz:debian6:192.168.222.105/24:192.168.222.1
-#vzdebian6src=vz:debian6:192.168.222.120/24:192.168.222.1
-#vzcentos5=vz:centos5:192.168.222.110/24:192.168.222.1
-#vzcentos5src=vz:centos5:192.168.222.115/24:192.168.222.1
+#vzdebian6=openvz:debian6:192.168.222.105/24:192.168.222.1
+#vzdebian6src=openvz:debian6:192.168.222.120/24:192.168.222.1
+#vzcentos5=openvz:centos5:192.168.222.110/24:192.168.222.1
+#vzcentos5src=openvz:centos5:192.168.222.115/24:192.168.222.1
 
 # LXC
 #debian6=lxc:debian6:192.168.222.105/24:192.168.222.1
