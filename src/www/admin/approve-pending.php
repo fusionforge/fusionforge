@@ -219,7 +219,7 @@ $group_list = implode($arr, ',');
 
 echo '
 	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-	<p style="text-align: center;">
+	<p class="align-center">
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="'.$group_list.'" />
 	<input type="submit" name="submit" value="'._('Approve All On This Page').'" />

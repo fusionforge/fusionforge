@@ -276,7 +276,7 @@ if (db_numrows($result) > 0) {
 	}
 
 	?>
-	<tr><td style="text-align:center" colspan="2">
+	<tr><td class="align-center" colspan="2">
 
 	<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 	<br />
