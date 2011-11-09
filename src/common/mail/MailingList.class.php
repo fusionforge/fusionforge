@@ -122,6 +122,10 @@ class MailingList extends Error {
 		}
 
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
+		if (!preg_match('/^[a-z0-9\-_\.]*$/', $realListName)) {
+			$this->setError(_('Invalid List Name') . ': ' .$realListName);
+			return false;
+		}
 
 		// '|' or '/' are valid chars in emails but are not allowed by mailman.
 		if( preg_match('/[|\/]/', $realListName) ||
@@ -384,6 +388,10 @@ Thank you for registering your project with %1$s.
 		}
 		if (!forge_check_perm ('project_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
+			return false;
+		}
+		if (!$this->getID() || !$this->getName()) {
+			$this->setError('ID or Name null in MailingList object');
 			return false;
 		}
 		$res = db_query_params ('INSERT INTO deleted_mailing_lists (mailing_list_name,delete_date,isdeleted) VALUES ($1,$2,$3)',
