@@ -88,4 +88,16 @@ class Utils_Tests extends PHPUnit_Framework_TestCase
 		$this->assertEquals('1 TiB', human_readable_bytes(1024*1024*1024*1024));
 		$this->assertEquals('1 TB', human_readable_bytes(1000000000000, true));
 	}
+
+	public function testGetFilteredStringFromRequest()
+	{
+		$_REQUEST=array('arg' => 'good');
+		$this->assertEquals(getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'), 'good');
+
+		$_REQUEST=array('arg' => 'BaD');
+		$this->assertEquals(getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'), 'default');
+
+		$_REQUEST=array('no_arg' => 'BaD');
+		$this->assertEquals(getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'), 'default');
+	}
 }
