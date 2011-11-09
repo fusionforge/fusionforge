@@ -371,7 +371,7 @@ function html_use_jquery() {
 function html_use_tooltips() {
 	html_use_jquery();
 	use_javascript('/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js');
-	use_javascript('/js/tooltips.js');
+	use_javascript('/js/jquery-common.js');
 	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
 }
 

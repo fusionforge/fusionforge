@@ -4913,8 +4913,8 @@ src/www/include/pre.php -text
 src/www/include/unicode.php -text
 src/www/include/user_profile.php -text
 src/www/js/common.js -text
+src/www/js/jquery-common.js -text
 src/www/js/sortable.js -text
-src/www/js/tooltips.js -text
 src/www/my/dashboard.php -text
 src/www/pm/csv.php -text
 src/www/pm/format_csv.php -text
