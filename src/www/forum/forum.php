@@ -34,6 +34,7 @@ require_once $gfcommon.'forum/ForumMessage.class.php';
 require_once $gfcommon.'forum/AttachManager.class.php'; //attachent manager
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
+$group_id = getIntFromRequest('group_id');
 $forum_id = getIntFromRequest('forum_id');
 $style = getStringFromRequest('style');
 $thread_id = getIntFromRequest('thread_id');
@@ -43,17 +44,17 @@ $set = getStringFromRequest('set');
 
 if ($forum_id) {
 
-	/*
-		Get the group_id based on this forum_id
-	*/
-	$result=db_query_params('SELECT group_id
-		FROM forum_group_list
-		WHERE group_forum_id=$1',
-			array($forum_id));
-	if (!$result || db_numrows($result) < 1) {
-		exit_error(_('Error forum not found: ').db_error(), 'forums');
+	if (!$group_id) {
+		// Get the group_id based on this forum_id
+		$result=db_query_params ('SELECT group_id
+			FROM forum_group_list
+			WHERE group_forum_id=$1',
+				array($forum_id));
+		if (!$result || db_numrows($result) < 1) {
+			exit_error(_('Error forum not found: ').db_error(),'forums');
+		}
+		$group_id=db_result($result,0,'group_id');
 	}
-	$group_id = db_result($result,0,'group_id');
 
 	//
 	//	Set up local objects
