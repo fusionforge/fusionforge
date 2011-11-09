@@ -386,6 +386,13 @@ function html_use_simplemenu() {
 	use_stylesheet('/scripts/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.1.0.css');
 }
 
+function html_use_coolfieldset() {
+	html_use_jquery();
+	use_javascript('/scripts/coolfieldset/js/jquery.coolfieldset.js');
+	use_javascript('/js/jquery-common.js');
+	use_stylesheet('/scripts/coolfieldset/css/jquery.coolfieldset.css');
+}
+
 /**
  * html_build_select_box_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.
