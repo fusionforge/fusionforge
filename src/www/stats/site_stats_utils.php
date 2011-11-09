@@ -143,7 +143,7 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 	global $allowed_orderby_vals ;
 
 	print '<form action="projects.php" method="get">' . "\n";
-	print '<table width="100%" cellpadding="0" cellspacing="0" class="tableheading">' . "\n";
+	print '<table class="tableheading fullwidth">' . "\n";
 
 	print '<tr><td><strong>'._('Projects in trove category:').'</strong></td><td>';
 	stats_generate_trove_pulldown( $trovecat );
@@ -172,7 +172,7 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 	print html_build_select_box_from_arrays ( $allowed_orderby_vals, $allowed_orderby_vals, "orderby", $orderby, false );
 	print '</td></tr>';
 
-	print '<tr><td colspan="2" style="text-align:center"> <input type="submit" value="'._('Generate Report').'" /> </td></tr>';
+	print '<tr><td colspan="2" class="align-center"> <input type="submit" value="'._('Generate Report').'" /> </td></tr>';
 
 	print '</table>' . "\n";
 	print '</form>' . "\n";

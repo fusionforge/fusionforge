@@ -189,7 +189,7 @@ if ($forum_id) {
 	//now show the popup boxes in a form
 	$ret_val = '
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="get">
-	<table border="0" width="33%">
+	<table>
 		<tr><td>
 	<input type="hidden" name="set" value="custom" />
 	<input type="hidden" name="forum_id" value="'.$forum_id.'" />
@@ -198,7 +198,8 @@ if ($forum_id) {
 			'</td><td><input type="submit" name="submit" value="'.
 			_('Change View').'" />
 		</td></tr>
-	</table></form>';
+	</table>
+	</form>';
 
 	$am = new AttachManager();
 	$ret_val .= $am->PrintHelperFunctions();
@@ -207,7 +208,7 @@ if ($forum_id) {
 		$msg_arr =& $fmf->nestArray($fmf->getNested());
 
 		if ($fmf->isError()) {
-			echo '<div class="error">'.$fmf->getErrorMessage().'</div>';
+			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
 	        forum_footer(array());
             exit;
 		}
@@ -242,7 +243,7 @@ if ($forum_id) {
 
 		$msg_arr =& $fmf->nestArray($fmf->getThreaded());
 		if ($fmf->isError()) {
-			echo '<div class="error">'.$fmf->getErrorMessage().'</div>';
+			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
 	        forum_footer(array());
             exit;
 		}
@@ -299,7 +300,7 @@ if ($forum_id) {
 
 		$msg_arr =& $fmf->getFlat($thread_id);
 		if ($fmf->isError()) {
-			echo '<div class="error">'.$fmf->getErrorMessage().'</div>';
+			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
 	        forum_footer(array());
             exit;
 		}
@@ -344,7 +345,7 @@ ORDER BY f.most_recent_date DESC',
 				$ret_val .= '
 					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.util_make_uri('/forum/forum.php?thread_id='.
 															$row['thread_id'].'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">'.
-					html_image('ic/cfolder15.png') . '  &nbsp; ';
+					html_image('ic/cfolder15.png') . ' ';
 				/*
 						See if this message is new or not
 						If so, highlite it in bold
@@ -375,17 +376,17 @@ ORDER BY f.most_recent_date DESC',
 		This code puts the nice next/prev.
 	*/
 	if (($offset != 0) or ($avail_rows > $max_rows)) {
-		$ret_val .= '<table width="100%" border="0">
-			<tr class="tablecontent"><td width="50%">';
+		$ret_val .= '<table class="fullwidth">
+			<tr class="tablecontent"><td class="halfwidth">';
 		if ($offset != 0) {
 			$ret_val .= '<span class="prev">
 			<a href="javascript:history.back()"><strong>' .
 				html_image('t2.png',"15","15") ._('Newer Messages').'</strong></a></span>';
 		} else {
-			$ret_val .= '&nbsp;';
+			$ret_val .= ' ';
 		}
 
-		$ret_val .= '</td><td>&nbsp;</td><td align="right" width="50%">';
+		$ret_val .= '</td><td></td><td class="halfwidth align-right">';
 
 		if ($avail_rows > $max_rows) {
 			$ret_val .= '<span class="next">
@@ -394,23 +395,12 @@ ORDER BY f.most_recent_date DESC',
 			<strong> '._('Older Messages') .
 				html_image('t.png',"15","15") . '</strong></a></span>';
 		} else {
-			$ret_val .= '&nbsp;';
+			$ret_val .= ' ';
 		}
 		$ret_val .= '</td></tr></table>';
 	}
 
 	echo $ret_val;
-/*
-	echo '<p>&nbsp;<p>';
-
-	if (!$thread_id) {
-		//
-		//	Viewing an entire message forum in a given format
-		//
-		echo '<center><h3>'._('Start New Thread').'</h3></center>';
-		$fh->showPostForm();
-	}
-*/
 	forum_footer(array());
 
 } else {

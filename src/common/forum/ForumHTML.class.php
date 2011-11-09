@@ -200,7 +200,7 @@ class ForumHTML extends Error {
 		$ret_val = $am->PrintHelperFunctions();
 		html_feedback_top(_('This is the content of the pending message'));
 		$ret_val .= '
-		<table border="0">
+		<table>
 			<tr>
 				<td class="tablecontent" style="white-space: nowrap;">'._('By:').
 		$msg->getPosterRealName().
@@ -211,7 +211,7 @@ class ForumHTML extends Error {
 					<br />
 					'.
 		html_image('ic/msg.png') .
-		$bold_begin. $msg->getSubject() . $bold_end .'&nbsp; '.
+		$bold_begin. $msg->getSubject() . $bold_end .
 		'<br />'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'
 				</td>
 			</tr>
@@ -249,9 +249,9 @@ class ForumHTML extends Error {
 		$fa = new ForumAdmin($msgforum->Group->getID());
 		$url = util_make_uri('/forum/message.php?msg_id='. $msg->getID() .'&amp;group_id='.$group_id);
 		$ret_val =
-		'<table border="0" width="100%" cellspacing="0">
+		'<table class="fullwidth">
 			<tr>
-				<td class="tablecontent" style="white-space: nowrap;" valign="top">';
+				<td class="tablecontent top" style="white-space: nowrap;">';
 
 		$params = array('user_id' => $msg->getPosterID(), 'size' => 's', 'content' => '');
 		plugin_hook_by_reference("user_logo", $params);
@@ -433,7 +433,7 @@ class ForumHTML extends Error {
 					If it this is the message being displayed, don't show a link to it
 				*/
 				if ($current_message != $msg_arr[$msg_id][$i]->getID()) {
-					$ah_begin='<a href="'.util_make_url ('/forum/message.php?msg_id='. $msg_arr[$msg_id][$i]->getID() .'&amp;group_id='.$group_id).'">';
+					$ah_begin='<a href="'.util_make_uri('/forum/message.php?msg_id='. $msg_arr[$msg_id][$i]->getID() .'&amp;group_id='.$group_id).'">';
 					$ah_end='</a>';
 				} else {
 					$ah_begin='';
@@ -617,11 +617,11 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 
 } elseif ($rl->hasPermission('forum', $this->Forum->getID(), 'post')) {
 	echo '<span class="error">';
-	printf(_('You could post if you were <a href="%1$s">logged in</a>.'), util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
+			printf(_('You could post if you were <a href="%1$s">logged in</a>.'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
 	echo '</span>';
 } elseif (!session_loggedin()) {
 	echo '<span class="error">';
-	printf(_('Please <a href="%1$s">log in</a>'), util_make_url('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
+			printf(_('Please <a href="%1$s">log in</a>'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
 	echo '</span><br/></p>';
 } else {
 	//do nothing
