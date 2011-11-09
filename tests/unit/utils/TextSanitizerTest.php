@@ -46,4 +46,23 @@ class TextSanitizerTests extends PHPUnit_Framework_TestCase
 	{
 		$this->assertEquals('Hacker ', $this->s->purify('Hacker <script>hello</script>'));
 	}
+
+	/**
+	 * test purify on other html piece of code.
+	 */
+	public function testPurifyOnMiscCode()
+	{
+		$in  = "</div>\n<div>&gt; rep &gt; rep</div>\n<div>";
+		$out = "\n<div>&gt; rep &gt; rep</div>\n";
+		$this->assertEquals($out, $this->s->purify($in));
+	}
+	
+	/**
+	 * test purify on other html piece of code.
+	 */
+	public function testPurifyOnMiscCode2()
+	{
+		$text = '<b>ceci</b> <i>est</i> <u>une</u> <font color="#cc0000">reponse</font>';
+		$this->assertEquals($text, $this->s->purify($text));
+	}
 }
