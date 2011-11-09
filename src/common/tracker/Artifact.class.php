@@ -139,13 +139,13 @@ class Artifact extends Error {
 
 		//was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
-			$this->setError('Artifact: No Valid ArtifactType');
+			$this->setError(_('No Valid Artifact Type'));
 			return false;
 		}
 
 		//did ArtifactType have an error?
 		if ($ArtifactType->isError()) {
-			$this->setError('Artifact: '.$ArtifactType->getErrorMessage());
+			$this->setError($ArtifactType->getErrorMessage());
 			return false;
 		}
 
@@ -153,7 +153,7 @@ class Artifact extends Error {
 		//	make sure this person has permission to view artifacts
 		//
 		if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'read')) {
-			$this->setError(_('Artifact: Only group members can view private artifact types'));
+			$this->setError(_('Only project members can view private artifact types'));
 			return false;
 		}
 
@@ -201,7 +201,7 @@ class Artifact extends Error {
 //
 // ape: Disabled, private means only restricted to members. So, no special rules #2503.
 //			if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
-//				$this->setError(_('Artifact: Only Artifact Admins Can Modify Private ArtifactTypes'));
+//				$this->setError(_('Only Artifact Admins Can Modify Private ArtifactTypes'));
 //				return false;
 //			}
 		}
@@ -209,7 +209,6 @@ class Artifact extends Error {
 		//
 		//	get the user_id
 		//
-
 		if(array_key_exists('user', $importData)){
 				$user = $importData['user'];
 		} else {
@@ -219,22 +218,21 @@ class Artifact extends Error {
 				if ($this->ArtifactType->allowsAnon()) {
 					$user=100;
 				} else {
-					$this->setError(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
+					$this->setError(_('This Artifact Type Does Not Allow Anonymous Submissions. Please Login.'));
 					return false;
 				}
 			}
 		}
 
-
 		//
 		//	data validation
 		//
 		if (!$summary) {
-			$this->setError(_('Artifact: Message Summary Is Required'));
+			$this->setError(_('Message Summary Is Required'));
 			return false;
 		}
 		if (!$details) {
-			$this->setError(_('Artifact: Message Body Is Required'));
+			$this->setError(_('Message Body Is Required'));
 			return false;
 		}
 		if (!$assigned_to) {
@@ -253,7 +251,7 @@ class Artifact extends Error {
 		//
 		$status_id=$this->ArtifactType->remapStatus($status_id,$extra_fields);
 		if (!$status_id) {
-			$this->setError(_('Artifact: Error remapping status'));
+			$this->setError(_('Error remapping status'));
 			return false;
 		}
 
@@ -276,7 +274,7 @@ class Artifact extends Error {
 					       htmlspecialchars($summary),
 					       htmlspecialchars($details))) ;
 		if (!$res) {
-			$this->setError('Artifact: '.db_error());
+			$this->setError(db_error());
 			db_rollback();
 			return false;
 		}
@@ -284,7 +282,7 @@ class Artifact extends Error {
 		$artifact_id=db_insertid($res,'artifact','artifact_id');
 
 		if (!$res || !$artifact_id) {
-			$this->setError('Artifact: '.db_error());
+			$this->setError(db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -324,7 +322,7 @@ class Artifact extends Error {
 					array ($artifact_id,
 					       $this->ArtifactType->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('Artifact: Invalid ArtifactID');
+			$this->setError(_('Invalid Artifact ID'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -513,42 +511,42 @@ class Artifact extends Error {
 		$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError('Error deleting extra field data: '.db_error());
+			$this->setError(_('Error deleting extra field data: ').db_error());
 			db_rollback();
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM artifact_file WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError('Error deleting file from db: '.db_error());
+			$this->setError(_('Error deleting file from db: ').db_error());
 			db_rollback();
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM artifact_message WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError('Error deleting message: '.db_error());
+			$this->setError(_('Error deleting message: ').db_error());
 			db_rollback();
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM artifact_history WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError('Error deleting history: '.db_error());
+			$this->setError(_('Error deleting history: ').db_error());
 			db_rollback();
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM artifact_monitor WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError('Error deleting monitor: '.db_error());
+			$this->setError(_('Error deleting monitor: ').db_error());
 			db_rollback();
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM artifact WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError('Error deleting artifact: '.db_error());
+			$this->setError(_('Error deleting artifact: ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -558,7 +556,7 @@ class Artifact extends Error {
 				WHERE group_artifact_id=$1',
 						array ($this->getID())) ;
 			if (!$res) {
-				$this->setError('Error updating artifact_counts_agg (1): '.db_error());
+				$this->setError(_('Error updating artifact counts: ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -567,7 +565,7 @@ class Artifact extends Error {
 				WHERE group_artifact_id=$1',
 						array ($this->getID())) ;
 			if (!$res) {
-				$this->setError('Error updating artifact_counts_agg (2): '.db_error());
+				$this->setError(_('Error updating artifact counts: ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -595,7 +593,7 @@ class Artifact extends Error {
 
 		} else {
 
-			$this->setError(_('SetMonitor::Valid Email Address Required'));
+			$this->setError(_('Valid Email Address Required'));
 			return false;
 
 		}
@@ -752,7 +750,7 @@ class Artifact extends Error {
 			//	since we have their correct user_id, we can join the USERS table to get email
 			$by=$user->getEmail();
 		} elseif (!$this->ArtifactType->allowsAnon()) {
-			$this->setError(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
+			$this->setError(_('This Artifact Type Does Not Allow Anonymous Submissions. Please Login.'));
 			return false;
 		} else {
 			$user_id=100;
@@ -899,11 +897,10 @@ class Artifact extends Error {
 			return false;
 		}
 
-
 		// Check that assigned_to is a tech for the tracker
 		if ($assigned_to != 100) {
 			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
-				$this->setError("Invalid assigned_to (assigned person is not a technician)");
+				$this->setError(_("Invalid assigned_to (assigned person is not a technician)"));
 				return false;
 			}
 		}
@@ -927,7 +924,7 @@ class Artifact extends Error {
 		if ($new_artifact_type_id != $artifact_type_id) {
 			$newArtifactType= new ArtifactType($this->ArtifactType->getGroup(), $new_artifact_type_id);
 			if (!is_object($newArtifactType) || $newArtifactType->isError()) {
-				$this->setError('Artifact: Could not move to new ArtifactType'. $newArtifactType->getErrorMessage());
+				$this->setError(_('Could not move to new Artifact Type'). $newArtifactType->getErrorMessage());
 				db_rollback();
 				return false;
 			}
@@ -1005,12 +1002,13 @@ class Artifact extends Error {
 					$new_extra_fields[$custom_status_id] = $nodes[0];
 				}
 			}
+
 			$extra_fields = $new_extra_fields;
 
 			$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
 						array ($this->getID()));
 			if (!$res) {
-				$this->setError('Removal of old artifact_extra_field_data failed: '.db_error());
+				$this->setError(_('Removal of old artifact_extra_field_data failed: ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -1090,7 +1088,7 @@ class Artifact extends Error {
 		  $result = db_query_qpa($qpa);
 
 			if (!$result || db_affected_rows($result) < 1) {
-				$this->setError('Error - update failed!'.db_error());
+				$this->setError(_('Error - update failed!').db_error());
 				db_rollback();
 				return false;
 			} else {
@@ -1118,9 +1116,9 @@ class Artifact extends Error {
 			//don't care if this response is for this group - could be hacked
 			$acr=new ArtifactCanned($this->ArtifactType,$canned_response);
 			if (!$acr || !is_object($acr)) {
-				$this->setError('Artifact: Could Not Create Canned Response Object');
+				$this->setError(_('Could Not Create Canned Response Object'));
 			} elseif ($acr->isError()) {
-				$this->setError('Artifact: '.$acr->getErrorMessage());
+				$this->setError($acr->getErrorMessage());
 			} else {
 				$body = $acr->getBody();
 				if ($body) {
@@ -1131,7 +1129,7 @@ class Artifact extends Error {
 						$send_message=true;
 					}
 				} else {
-					$this->setError('Artifact: Unable to Use Canned Response');
+					$this->setError(_('Unable to Use Canned Response'));
 					return false;
 				}
 			}
@@ -1179,7 +1177,7 @@ class Artifact extends Error {
 		$res = db_query_params ('UPDATE artifact SET assigned_to=$1 WHERE artifact_id=$2',
 								array ($user_id, $this->getID())) ;
 		if (!$res) {
-			$this->setError('Error updating assigned_to in artifact: '.db_error());
+			$this->setError(_('Error updating assigned_to in artifact: ').db_error());
 			return false;
 		}
 		$this->fetchData($this->getID());
@@ -1226,7 +1224,6 @@ class Artifact extends Error {
 			$type=$ef[$efid]['field_type'];
 			if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 				// Get previous value.
-
 				$res = db_query_params ('SELECT field_data FROM artifact_extra_field_data
 						WHERE artifact_id=$1 AND extra_field_id=$2',
 			array($this->getID(),
@@ -1235,7 +1232,7 @@ class Artifact extends Error {
 				if ($old != $extra_fields[$efid]) {
 					$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
 					if (!$atw->checkEvent($old, $extra_fields[$efid])) {
-						$this->setError('Workflow error: You are not authorized to change the Status');
+						$this->setError('Workflow error: You are not authorized to change the Status ('.$old.' => '.$extra_fields[$efid].')');
 						return false;
 					}
 				}
@@ -1251,7 +1248,7 @@ class Artifact extends Error {
 			if ($ef[$efid]['is_required']) {
 				if (!array_key_exists($efid, $extra_fields)) {
 					if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
-						$this->setError('Status Custom Field Must Be Set');
+						$this->setError(_('Status Custom Field Must Be Set'));
 					}
 					else {
 						$this->setMissingParamsError($ef[$efid]['field_name']);
@@ -1261,7 +1258,7 @@ class Artifact extends Error {
 				else {
 					if ($extra_fields[$efid] === '') {
 						if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
-							$this->setError('Status Custom Field Must Be Set');
+							$this->setError(_('Status Custom Field Must Be Set'));
 						}
 						else {
 							$this->setMissingParamsError($ef[$efid]['field_name']);
@@ -1298,6 +1295,7 @@ class Artifact extends Error {
 					continue;
 				}
 			}
+
 			//
 			//	get the old rows of data
 			//
@@ -1731,7 +1729,6 @@ class Artifact extends Error {
 
 		return $return;
 	}
-
 }
 
 class ArtifactComparator {
