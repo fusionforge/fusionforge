@@ -113,9 +113,11 @@ echo($sh->showAddQuestionForm($sq));
 /* Show existing questions (if any)
  */
 $sqf = new SurveyQuestionFactory($g);
-$sqs = & $sqf->getSurveyQuestions();
+$sqs = $sqf->getSurveyQuestions();
 if (!$sqs) {
+	echo '<p class="information">';
     echo (_('No questions found'));
+	echo '</p>';
 } else {
     echo($sh->showQuestions($sqs));
 }
