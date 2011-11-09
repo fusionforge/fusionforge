@@ -888,12 +888,24 @@ class Artifact extends Error {
 		if (count($extra_fields) > 0) {
 			$status_id=$this->ArtifactType->remapStatus($status_id,$extra_fields);
 		}
-		if (!$this->getID()
-			|| !$assigned_to
-			|| !$status_id
-			|| !$canned_response
-			|| !$new_artifact_type_id) {
-			$this->setMissingParamsError();
+		if (!$this->getID()) {
+			$this->setMissingParamsError('ID');
+			return false;
+		}
+		if (!$assigned_to) {
+			$this->setMissingParamsError(_('Assigned to'));
+			return false;
+		}
+		if (!$status_id) {
+			$this->setMissingParamsError(_('State'));
+			return false;
+		}
+		if (!$canned_response) {
+			$this->setMissingParamsError(_('Canned Response'));
+			return false;
+		}
+		if (!$new_artifact_type_id) {
+			$this->setMissingParamsError(_('Data Type'));
 			return false;
 		}
 
