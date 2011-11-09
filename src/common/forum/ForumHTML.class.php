@@ -63,8 +63,8 @@ function forum_header($params) {
 				exit_no_group();
 			}
 			echo '<p>
-				<strong>'._('Posted by').':</strong> '.$user->getRealName().'<br />
-				<strong>'._('Date').':</strong> '. date(_('Y-m-d H:i'),db_result($result,0,'post_date')).'<br />
+				<strong>'._('Posted by:').'</strong> '.$user->getRealName().'<br />
+				<strong>'._('Date').':</strong> '. relative_date(db_result($result,0,'post_date')).'<br />
 				<strong>'._('Summary').':</strong>'.
 				util_make_link('/forum/forum.php?forum_id='.db_result($result, 0, 'forum_id').'&amp;group_id='.$group_id,
 						db_result($result, 0, 'summary')).'<br/>
@@ -455,7 +455,7 @@ class ForumHTML extends Error {
 
 				$ret_val .= $bold_begin.$msg_arr[$msg_id][$i]->getSubject() .$bold_end.$ah_end.'</td>'.
 					'<td>'.util_display_user($msg_arr[$msg_id][$i]->getPosterName(),$msg_arr[$msg_id][$i]->getPosterID(),$msg_arr[$msg_id][$i]->getPosterRealName()) .'</td>'.
-					'<td>'.date(_('Y-m-d H:i'), $msg_arr[$msg_id][$i]->getPostDate() ).'</td></tr>';
+					'<td>'.relative_date($msg_arr[$msg_id][$i]->getPostDate()).'</td></tr>';
 
 				if ($msg_arr[$msg_id][$i]->hasFollowups() > 0) {
 					/*

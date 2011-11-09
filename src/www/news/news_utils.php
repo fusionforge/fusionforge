@@ -156,7 +156,7 @@ ORDER BY post_date DESC',
 				$return .= $t_thread_author;
 				$return .= '</em>';
 				$return .= ' - ';
-				$return .= date(_('Y-m-d H:i'),db_result($result,$i,'post_date'));
+				$return .= relative_date(db_result($result,$i,'post_date'));
 				$return .= ' - ';
 				$return .= $proj_name ;
 				$return .= "</div>\n";

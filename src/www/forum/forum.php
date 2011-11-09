@@ -285,7 +285,7 @@ if ($forum_id) {
 			*/
 			$ret_val .= $bold_begin.$msg->getSubject() .$bold_end.'</a></td>'.
 				'<td>'.util_display_user($msg->getPosterName(), $msg->getPosterID(), $msg->getPosterRealName()).'</td>'.
-				'<td>'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'</td></tr>';
+				'<td>'.relative_date($msg->getPostDate()).'</td></tr>';
 
 			if ($msg->hasFollowups()) {
 				$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);
@@ -362,7 +362,7 @@ ORDER BY f.most_recent_date DESC',
 				$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</a></td>'.
 				'<td>'.util_display_user($row['user_name'], $row['user_id'], $row['realname']).'</td>'.
 					'<td>'. $row['followups'] .'</td>'.
-					'<td>'.date(_('Y-m-d H:i'),$row['recent']).'</td></tr>';
+					'<td>'. relative_date($row['recent']).'</td></tr>';
 				$i++;
 			}
 
