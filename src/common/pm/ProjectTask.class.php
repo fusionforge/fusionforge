@@ -924,9 +924,14 @@ class ProjectTask extends Error {
 		$new_group_project_id,$duration=0,$parent_id=0) {
 		$has_changes = false; // if any of the values passed is different from
 
-		$arrChangedAndInNotice = array("details"=>"","summary"=>"",
-		"complete"=>"","status"=>"","subproject"=>""); /* includes only
-		entries that changed and will be sended by E-Mail (sendNotice()) */
+		$arrChangedAndInNotice = array(
+			'details'=>'',
+			'summary'=>'',
+			'assigned'=>'',
+			'complete'=>'',
+			'status'=>'',
+			'subproject'=>''
+		);
 
 		$v = new Validator();
 		$v->check($summary, _("summary"));
@@ -1054,19 +1059,27 @@ class ProjectTask extends Error {
 		}
 
 		$old_assigned = $this->getAssignedTo();
-		$diff_assigned_array=array_diff($old_assigned, $assigned_arr);
-		if (count($diff_assigned_array)>0) {
-				for ($tmp=0;$tmp<count($old_assigned);$tmp++) {
-					$this->addHistory('assigned_to_id',$old_assigned[$tmp]);
+		if ($assigned_arr == '' || !$assigned_arr) {
+			$assigned_arr = array();
+			$assigned_arr[0] = 100;
+		}
+		$removed=array_diff($old_assigned, $assigned_arr);
+		$added=array_diff($assigned_arr, $old_assigned);
+		if (count($removed)>0 || count($added)>0) {
+			$assigned = array();
+			foreach ($old_assigned as $user_id) {
+				$assigned[] = user_get_object($user_id)->getRealName();
 				}
+			$this->addHistory('assigned_to', join(', ', $assigned));
+			$arrChangedAndInNotice['assigned'] = ">";
 				$has_changes = true;
 		}
+
 		$old_array = array_keys($this->getDependentOn());
-		$diff_array=array_diff($old_array,array_keys($depend_arr));
-		if (count($diff_array)>0) {
-			for ($tmp=0;$tmp<count($old_array);$tmp++) {
-				$this->addHistory('dependent_on_id', $old_array[$tmp]);
-			}
+		$removed=array_diff($old_array,array_keys($depend_arr));
+		$added=array_diff(array_keys($depend_arr), $old_array);
+		if (count($removed)>0 || count($added)>0) {
+			$this->addHistory('dependent_on', join(', ', $old_array));
 			$has_changes = true;
 		}
 
@@ -1104,7 +1117,7 @@ class ProjectTask extends Error {
 						       $parent_id,
 						       $group_project_id,
 						       $this->getID())) ;
-			if (!$res) {
+			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(db_error());
 				db_rollback();
 				return false;
@@ -1145,8 +1158,15 @@ class ProjectTask extends Error {
 			return true;
 		}
 
-		$body = "Task #". $this->getID() ." has been updated. ".
+		if (session_loggedin()) {
+			$user = session_get_user()->getRealName();
+		} else {
+			$user = '';
+		}
+
+		$body = "Task #". $this->getID() ." has been updated by $user.".
 			"\n\nProject: ". $this->ProjectGroup->Group->getPublicName();
+
 			if (isset($arrChangedAndInNotice['subproject']))
 				$body .= "\n". $arrChangedAndInNotice['subproject']."Subproject: ". $this->ProjectGroup->getName();
 
@@ -1158,6 +1178,14 @@ class ProjectTask extends Error {
 
 			if (isset($arrChangedAndInNotice['status']))
 				$body .= "\n". $arrChangedAndInNotice['status']. "Status: ". $this->getStatusName();
+
+		if (isset($arrChangedAndInNotice['assigned'])) {
+			$assigned = array();
+			foreach ($this->getAssignedTo() as $user_id) {
+				$assigned[] = user_get_object($user_id)->getRealName();
+			}
+			$body .= "\n". $arrChangedAndInNotice['assigned']. "Assigned: ". join(', ', $assigned);
+		}
 
 			$body .= "\n\nDescription: ". util_unconvert_htmlspecialchars( $this->getDetails() );
 
