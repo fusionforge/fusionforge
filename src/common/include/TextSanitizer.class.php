@@ -245,6 +245,16 @@ class TextSanitizer extends Error {
 	static function purify ($text) {
 		// Remove string like "<![if !supportLists]>" or "<![endif]>"
 		$text = preg_replace('/<!\[.+?\]>/', '', $text);
+		// Remove non opened tags at the begining
+		$count = 1;
+		while ($count) {
+			$text = preg_replace('/^(<\/[^>]+>)/', '', $text, -1, $count);
+		}
+		// Remove non closed tags at the end
+		$count = 1;
+		while ($count) {
+			$text = preg_replace('/(<[^\/][^>]+>)$/', '', $text, -1, $count);
+		}
 		$config = HTMLPurifier_Config::createDefault();
 		//$config->set('HTML.Allowed','a[href|title],strike,sub,span,font,hr,br,tbody,tr,td,table,div,u,p,ul,li,ol,blockquote,em,strong,sup,input,img,textarea,h1,h2,h3,h4,h5,h6,pre,address');
 		$config->set('Cache.DefinitionImpl', NULL);
