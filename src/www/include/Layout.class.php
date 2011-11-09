@@ -158,13 +158,15 @@ class Layout extends Error {
 	}
 
 	/**
-	 * Constructs a list of Javascript files followed by some timestamp
+	 * Build the list of required Javascript files.
 	 *
-	 * TODO document the purpose of this : probably to avoid caching versions updated on the server
+	 * If js file is found, then a timestamp is automatically added to ensure
+	 * that file is cached only if not changed.
+	 *
 	 * @param string $js path to the JS file
 	 */
 	function addJavascript($js) {
-		// TODO : what's the point of this ? ... unused ?
+		// If a minified version of the javascript is available, then use it.
 		if (isset($this->js_min[$js])) {
 			$js = $this->js_min[$js];
 		}
@@ -548,7 +550,7 @@ class Layout extends Error {
 			<tr class="align-center">
 			<td colspan="2" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
 			</tr>
-			<tr align="left">
+			<tr class="align-left">
 			<td colspan="2">
 			<!-- Box Middle End -->';
 	}
@@ -730,7 +732,7 @@ class Layout extends Error {
 				//		$rowspan=(($issel)?'rowspan="2" ' : '');
 
 				$return .= '
-					<td '.$rowspan.'valign="top" width="10" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png)">'.
+					<td '.$rowspan.'class="top" width="10" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="25" width="10" alt="" /></td>'.
 					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
 			} elseif ($i==$count-1) {
@@ -745,14 +747,14 @@ class Layout extends Error {
 				//	Build image between current and prior tab
 				//
 				$return .= '
-					<td '.$rowspan.'colspan="2" valign="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
+					<td '.$rowspan.'colspan="2" class="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="20" alt="" /></td>'.
 					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($TABS_DIRS[$i], $TABS_TITLES[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
 				//
 				//	Last graphic on right-side
 				//
 				$return .= '
-					<td '.$rowspan.'valign="top" width="10" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($issel) ? '' : 'not').'selected-end.png)">'.
+					<td '.$rowspan.'class="top" width="10" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($issel) ? '' : 'not').'selected-end.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="10" alt="" /></td>';
 
 			} else {
@@ -767,7 +769,7 @@ class Layout extends Error {
 				//	Build image between current and prior tab
 				//
 				$return .= '
-					<td '.$rowspan.'colspan="2" valign="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
+					<td '.$rowspan.'colspan="2" class="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="20" alt="" /></td>'.
 					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($TABS_DIRS[$i], $TABS_TITLES[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
 
@@ -927,7 +929,7 @@ class Layout extends Error {
 			return '';
 		} else {
 			return '
-				<div class="feedback">'.strip_tags($feedback, '<br>').'</div>';
+			<p class="feedback">'.strip_tags($feedback, '<br>').'</p>';
 		}
 	}
 	/**
@@ -941,7 +943,7 @@ class Layout extends Error {
 			return '';
 		} else {
 			return '
-				<div class="warning_msg">'.strip_tags($msg, '<br>').'</div>';
+			<p class="warning_msg">'.strip_tags($msg, '<br>').'</p>';
 		}
 	}
 
@@ -962,6 +964,20 @@ class Layout extends Error {
 		}
 	}
 
+	/**
+	 * information() - returns the htmlized information string.
+	 *
+	 * @param string msg string
+	 * @return string htmlized information
+	 */
+	function information($msg) {
+		if (!$msg) {
+			return '';
+		} else {
+			return '
+			<p class="information">'.strip_tags($msg, '<br>').'</p>';
+		}
+	}
 
 	/**
 	 * getThemeIdFromName()
