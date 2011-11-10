@@ -5561,7 +5561,7 @@ class wsdl extends nusoap_base {
 					} else {
 						$enc_style = '';
 					}
-					$binding_xml .= "\n" . '    <input><soap:body use="' . $opParts['input']['use'] . '" namespace="' . $opParts['input']['namespace'] . '"' . $enc_style . '/></input>';
+					$binding_xml .= "\n" . '    <input><soap:body use="' . $opParts['input']['use'] . '" namespace="' . $opParts['input']['namespace'] . '"' . $enc_style . '/>';
 					if (isset($opParts['output']['encodingStyle']) && $opParts['output']['encodingStyle'] != '') {
 						$enc_style = ' encodingStyle="' . $opParts['output']['encodingStyle'] . '"';
 					} else {
