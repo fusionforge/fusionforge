@@ -1,5 +1,5 @@
 #! /bin/sh
-echo "==== STOP ===="
+echo "==== STOP $HOST ===="
 echo "VMENGINE=$VMENGINE VMTEMPLATE=$VMTEMPLATE CIDR=$CIDR IPGW=$IPGW"
 
 lxcdir=`dirname $0`
