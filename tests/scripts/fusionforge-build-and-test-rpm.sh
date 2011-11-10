@@ -1,11 +1,12 @@
 #!/bin/sh
 . tests/scripts/common-functions
+. tests/scripts/common-vm
 
 export FORGE_HOME=/usr/share/gforge
 get_config $@
 prepare_workspace
-destroy_vm $@
-start_vm_if_not_keeped $@
+destroy_vm -t centos5 $@
+start_vm_if_not_keeped -t centos5 $@
 
 # BUILD FUSIONFORGE REPO
 echo "Build FUSIONFORGE REPO in $BUILDRESULT"
@@ -47,5 +48,5 @@ else
         retcode=2
 fi
 
-stop_vm_if_not_keeped $@
+stop_vm_if_not_keeped -t centos5 $@
 exit $retcode

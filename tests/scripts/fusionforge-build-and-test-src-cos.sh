@@ -1,10 +1,11 @@
 #!/bin/sh
 . tests/scripts/common-functions
+. tests/scripts/common-vm
 
 export FORGE_HOME=/opt/gforge
 get_config $@
 prepare_workspace
-start_vm_if_not_keeped $@
+start_vm_if_not_keeped -t centos5 $@
 
 #[ ! -e $HOME/doxygen-1.6.3/bin/doxygen ] || make build-doc DOCSDIR=$WORKSPACE/apidocs DOXYGEN=$HOME/doxygen-1.6.3/bin/doxygen
 #make BUILDRESULT=$WORKSPACE/build/packages buildtar
@@ -55,5 +56,5 @@ else
         retcode=2
 fi
 
-stop_vm_if_not_keeped $@
+stop_vm_if_not_keeped -t centos5 $@
 exit $retcode
