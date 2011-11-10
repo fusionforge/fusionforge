@@ -225,7 +225,7 @@ function display_month($m, $y) {
 					}
 				}
 				if ($cell_contents == '') {
-					$cell_contents = '<br /><br /><br />';
+					$cell_contents = '<br />';
 				}
 				print "$cell_contents</td>\n";
 			} else {

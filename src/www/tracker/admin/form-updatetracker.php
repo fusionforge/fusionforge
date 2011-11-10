@@ -63,7 +63,7 @@ $ath->adminHeader(array ('title'=>sprintf(_('Update settings for %s'),$ath->getN
 		<strong><?php echo _('Send email on new submission to address') ?>:</strong><br />
 		<input type="text" name="email_address" value="<?php echo $email_address; ?>" /></p>
 		<p>
-		<input type="checkbox" name="email_all" value="1" <?php echo (($email_all)?'checked="checked"':''); ?> /> <strong><?php echo _('Send email on all changes') ?></strong><br /></p>
+		<input type="checkbox" name="email_all" value="1" <?php echo (($email_all)?'checked="checked"':''); ?> /> <strong><?php echo _('Send email on all changes') ?></strong></p>
 		<p>
 		<strong><?php echo _('Days till considered overdue') ?>:</strong><br />
 		<input type="text" name="due_period" value="<?php echo $due_period; ?>" /></p>

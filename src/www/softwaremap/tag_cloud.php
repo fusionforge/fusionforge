@@ -55,7 +55,7 @@ $HTML->printSoftwareMapLinks();
 $selected_tag = getStringFromRequest('tag');
 $page = getIntFromRequest('page', 1);
 
-echo '<br />' . tag_cloud(array('selected' => $selected_tag, 'nb_max' => 100)) . '<br /><br />';
+echo '<br />' . tag_cloud(array('selected' => $selected_tag, 'nb_max' => 100)) . '<br />';
 
 if ($selected_tag) {
 	$res_grp = db_query_params('

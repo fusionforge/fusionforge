@@ -152,7 +152,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<input type="hidden" name="group_id" value="<?php print $row_grp['group_id']; ?>" />
 	<?php echo _('Canned responses'); ?><br />
 	<?php print get_canned_responses(); ?> <a href="responses_admin.php"><?php echo _('(manage responses)'); ?></a>
-	<br /><br />
+	<br />
 	<?php echo _('Custom response title and text'); ?><br />
 	<input type="text" name="response_title" size="30" maxlength="25" /><br />
 	<textarea name="response_text" rows="10" cols="50"></textarea>

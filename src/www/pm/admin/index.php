@@ -213,8 +213,7 @@ if ($add_cat && $group_project_id) {
 	<input type="hidden" name="add_cat" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
 	<strong><?php echo _('Category Name') ?>:</strong><br />
-	<input type="text" name="name" value="" size="15" maxlength="30" /><br />
-	<p />
+	<input type="text" name="name" value="" size="15" maxlength="30" /><p />
 	<span class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></span>
 	<p />
 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
@@ -297,8 +296,7 @@ if ($add_cat && $group_project_id) {
 	<input type="text" name="description" value="" size="40" maxlength="80" />
 	<p />
 	<strong><?php echo _('Send All Updates To')?>:</strong><br />
-	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80" /><br />
-	<p />
+	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80" /><p />
 	<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 	</form>
 	<?php

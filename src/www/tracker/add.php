@@ -41,7 +41,7 @@ $ath->header(array ('title'=>_('Submit New')));
 	            <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />';
 	if (!session_loggedin()) {
 		echo '
-		<span class="warning_msg">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</span><br /><br />
+		<span class="warning_msg">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</span><br />
 		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
 		<input type="text" name="user_email" size="50" maxlength="255" /></p>
 		';
@@ -100,14 +100,14 @@ $ath->header(array ('title'=>_('Submit New')));
 
 	<tr>
 		<td colspan="2">
-		<a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=attach_file'); ?>')"><strong>(?)</strong></a><br />
+		<a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=attach_file'); ?>')"><strong>(?)</strong></a>
 		<p>
 		<strong><?php echo _('Attach Files') ?>:</strong><br />
 		<input type="file" name="input_file0" size="30" /><br />
 		<input type="file" name="input_file1" size="30" /><br />
 		<input type="file" name="input_file2" size="30" /><br />
 		<input type="file" name="input_file3" size="30" /><br />
-		<input type="file" name="input_file4" size="30" /><br />
+		<input type="file" name="input_file4" size="30" />
 		</p>
 		</td>
 	</tr>

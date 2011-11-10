@@ -234,7 +234,7 @@ class Jabber
 		
 		if ($this->enable_logging) {
 			echo "<h2>logging enabled, logged events below:</h2>\n";
-			echo (count($this->logfile) > 0) ? implode("<br /><br />\n", $this->logfile) : "No logged events.";
+			echo (count($this->logfile) > 0) ? implode("<br />\n", $this->logfile) : "No logged events.";
 		}
 	}
 

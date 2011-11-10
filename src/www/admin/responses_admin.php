@@ -51,7 +51,7 @@ function check_select_value($value, $type) {
 <?php  echo _('Yes, I\'m sure'); ?>
 </form>
 
-<br /><br />
+<br />
 
 <?php
 

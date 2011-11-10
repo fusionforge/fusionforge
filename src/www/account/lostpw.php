@@ -89,7 +89,6 @@ echo '<p>' . _('Clicking "Send Lost PW Hash" below will email a URL to the email
 <br />
 <input type="text" name="loginname" />
 <br />
-<br />
 <input type="submit" name="submit" value="<?php echo _('Send Lost PW Hash'); ?>" />
 </p>
 </form>
