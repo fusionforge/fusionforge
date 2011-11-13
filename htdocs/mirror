@@ -1,14 +1,29 @@
 #! /bin/sh
+if [ ! -z "$1" ] 
+then
+	MIRVERS=$1
+fi
+
+DEBDIST=squeeze
+MIRVERS=${MIRVERS:-trk}
+MIRBASE=/var/lib/gforge/chroot/home/groups/fusionforge/htdocs/deb/$MIRVERS
+MIRHOST=buildbot3.debian.org
+MIRDIR=job/fusionforge-$MIRVERS-build-and-test-deb/ws/build/debian
+DISTDEBTRK=squeeze
+
+echo debmirror --dry-run $MIRBASE --method=http --host=$MIRHOST -r $MIRDIR -d $DISTDEBTRK -a i386,amd64 -s main -v --progress
+
+oldsync()
+{
 DISTUBUBRC=jaunty,karmic,lucid
 DISTUBUTRK=jaunty,karmic,lucid
 
 DISTDEBBRC=lenny,squeeze,sid
 DISTDEBTRK=lenny,squeeze,sid
 
-MIRBASE=/var/lib/gforge/chroot/home/groups/fusionforge/htdocs
-
 debmirror $MIRBASE/debian-trk --method=http --host=debian.fusionforge.org -r debian-trk -d $DISTDEBTRK -a i386,amd64 -s main -v --progress
 debmirror $MIRBASE/ubuntu-trk --method=http --host=debian.fusionforge.org -r ubuntu-trk -d $DISTUBUTRK -a i386,amd64 -s main -v --progress
 
 debmirror $MIRBASE/debian-brc --method=http --host=debian.fusionforge.org -r debian-brc -d $DISTDEBBRC -a i386,amd64 -s main -v --progress
 debmirror $MIRBASE/ubuntu-brc --method=http --host=debian.fusionforge.org -r ubuntu-brc -d $DISTUBUBRC -a i386,amd64 -s main -v --progress
+}
