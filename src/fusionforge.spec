@@ -33,7 +33,7 @@
 Summary: FusionForge Collaborative Development Environment
 Name: fusionforge
 Version: @@VERSION@@
-Release: 2%{?dist}
+Release: 1%{?dist}
 BuildArch: noarch
 License: GPL
 Group: Development/Tools
