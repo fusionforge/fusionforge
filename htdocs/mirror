@@ -12,6 +12,7 @@ MIRDIR=job/fusionforge-$MIRVERS-build-and-test-deb/ws/build/debian
 DISTDEBTRK=squeeze
 
 echo debmirror --dry-run $MIRBASE --method=http --host=$MIRHOST -r $MIRDIR -d $DISTDEBTRK -a i386,amd64 -s main -v --progress
+debmirror --dry-run $MIRBASE --method=http --host=$MIRHOST -r $MIRDIR -d $DISTDEBTRK -a i386,amd64 -s main -v --progress
 
 oldsync()
 {
