@@ -46,7 +46,7 @@ if [ ! -z "$DAG_RPMFORGE_REPO" ] ; then
         sed -i "s#http://apt.sw.be/redhat#${DAG_RPMFORGE_REPO}#" $WORKSPACE/build/packages/dag-rpmforge.repo
         scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 else
-        echo "Installing standart DAG REPO from src/rpm-specific/dag-rpmforge.repo"
+        echo "Installing standard DAG REPO from src/rpm-specific/dag-rpmforge.repo"
         scp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 fi
 }
@@ -64,7 +64,7 @@ then
         scp $WORKSPACE/build/packages/fusionforge.repo root@$HOST:/etc/yum.repos.d/
 else
         rsync -a --delete $BUILDRESULT/ root@$HOST:/root/fusionforge_repo/
-        echo "Installing standart FUSIONFORGE REPO from src/rpm-specific/fusionforge.repo"
+        echo "Installing standard FUSIONFORGE REPO from src/rpm-specific/fusionforge.repo"
         scp src/rpm-specific/fusionforge.repo root@$HOST:/etc/yum.repos.d/
 fi
 }
