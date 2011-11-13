@@ -16,6 +16,11 @@ prepare_workspace()
 	export WORKSPACE=${WORKSPACE:-$WORKDIR}
 	export RPM_TMP=$WORKDIR/tmp
 	export BUILDRESULT=$WORKSPACE/build/packages
+	# Delete existing packages
+	if [ -d $WORKSPACE/build/packages ] 
+	then 
+		rm $WORKSPACE/build/packages/*
+	fi
 	# Create place to build package if necessary
 	[ ! -d $WORKSPACE/build/packages ] || mkdir -p $WORKSPACE/build/packages
 	# Erase config
