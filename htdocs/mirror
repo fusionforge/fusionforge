@@ -7,9 +7,6 @@ DISTDEBTRK=lenny,squeeze,sid
 
 MIRBASE=/var/lib/gforge/chroot/home/groups/fusionforge/htdocs
 
-debmirror $MIRBASE/debian --method=http --host=debian.fusionforge.org -r debian -d $DISTDEBTRK -a i386,amd64 -s main -v --progress
-debmirror $MIRBASE/ubuntu --method=http --host=debian.fusionforge.org -r ubuntu -d $DISTUBUTRK -a i386,amd64 -s main -v --progress
-
 debmirror $MIRBASE/debian-trk --method=http --host=debian.fusionforge.org -r debian-trk -d $DISTDEBTRK -a i386,amd64 -s main -v --progress
 debmirror $MIRBASE/ubuntu-trk --method=http --host=debian.fusionforge.org -r ubuntu-trk -d $DISTUBUTRK -a i386,amd64 -s main -v --progress
 
