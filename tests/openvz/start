@@ -2,3 +2,14 @@
 echo "==== START $HOST ===="
 echo "VMENGINE=$VMENGINE VMTEMPLATE=$VMTEMPLATE CIDR=$CIDR IPGW=$IPGW"
 
+sudo /root/start_vz.sh $VMTEMPLATE $HOST
+
+ssh -o 'StrictHostKeyChecking=no' root@$HOST uname -a
+ret=$?
+
+if [ $ret -ne 0 ];then
+	sleep 10;
+	ssh -o 'StrictHostKeyChecking=no' root@$HOST uname -a
+fi
+
+sleep 1

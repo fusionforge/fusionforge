@@ -1,3 +1,5 @@
 #! /bin/sh
 echo "==== STOP $HOST ===="
 echo "VMENGINE=$VMENGINE VMTEMPLATE=$VMTEMPLATE CIDR=$CIDR IPGW=$IPGW"
+
+sudo /root/stop_vz.sh $HOST
