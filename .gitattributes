@@ -5359,6 +5359,7 @@ tests/scripts/fusionforge-build-and-test-src-cos.sh -text
 tests/scripts/fusionforge-build-and-test-src-deb.sh -text
 tests/scripts/fusionforge-build-and-test-tgz-cos.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-tgz-deb.sh -text
+tests/scripts/fusionforge-prepare-vm-centos5.sh -text
 tests/scripts/phpunit.sh -text
 tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
 tests/scripts/start_vm -text
