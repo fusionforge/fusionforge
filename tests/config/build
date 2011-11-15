@@ -1,0 +1,25 @@
+
+#
+# In this file you can find vars that are useable 
+# both as an include in a Makefile or
+# be sourced in a shell
+# So it should only be stuffs like VAR=value
+#
+VMENGINE=openvz
+REMOTESELENIUM=true
+KEEPVM=true
+
+# VM for trunk
+fgcostrksrc=openvz:centos-5-x86::
+fgcostrk=openvz:centos-5-x86::
+fgrpmtrk=openvz:centos-5-x86::
+
+centos5=openvz:centos-5-x86-test::
+
+fgdebtrksrc=openvz:debian6::
+fgdebtrk=openvz:debian6::
+
+# VM for Branch 5.1
+fgcos51src=openvz:centos-5-x86::
+fgcos51=openvz:centos-5-x86::
+fgdeb51=openvz:debian6::
