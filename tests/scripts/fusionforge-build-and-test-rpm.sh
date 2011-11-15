@@ -21,7 +21,7 @@ ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=$FORGE_A
 ssh root@$HOST '(echo [core];echo use_ssl=no;echo use_fti=no) > /etc/gforge/config.ini.d/zzz-buildbot.ini'
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 # Install a fake sendmail to catch all outgoing emails.
-# ssh root@".HOST." 'perl -spi -e s#/usr/sbin/sendmail#$FORGE_HOME/tests/scripts/catch_mail.php# /etc/gforge/local.inc'
+ssh root@$HOST 'perl -spi -e s#/usr/sbin/sendmail#$FORGE_HOME/tests/scripts/catch_mail.php# /etc/gforge/config.ini.d/defaults.ini'
 
 ssh root@$HOST "service crond stop" || true
 
