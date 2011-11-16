@@ -1222,7 +1222,7 @@ Enjoy the site.
 		$res = db_query_params ('DELETE FROM user_preferences WHERE user_id=$1 AND preference_name=$2',
 					array ($this->getID(),
 					       $preference_name)) ;
-		return $res;
+		return ((!$res || db_affected_rows($res) < 1) ? false : true);
 	}
 
 	/**
@@ -1253,9 +1253,9 @@ Enjoy the site.
 								  $preference_name,
 								  $value,
 								  time())) ;
-				return $result;
 			}
 		}
+		return ((!$result || db_affected_rows($result) < 1) ? false : true);
 	}
 
 	/**
