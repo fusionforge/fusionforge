@@ -47,6 +47,9 @@ function printrcomplete() {
 }
 
 function &pm_import_tasks($group_project_id,&$tasks) {
+	$was_error = false;
+	$foo = "";
+
 	printr($tasks,'MSPCheckin::in-array');
 	printr(getenv('TZ'),'MSPCheckin::entry TZ');
 
@@ -200,7 +203,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 				} else {
 					//update existing task
 					//create the task
-					$pt = &projecttask_get_object($tasks[$i]['id']);
+					$pt = projecttask_get_object($tasks[$i]['id']);
 					if (!$pt || !is_object($pt)) {
 						printr($tasks[$i]['id'],'Could not get task');
 					//	$array['success']=false;
@@ -319,7 +322,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 						$deps[$id]=$darr[$dcount]['link_type'];
 					}
 					printr($deps,'Deps for task id: '.$tasks[$i]['id']);
-					if (is_object($tasks[$i]['obj'])) {
+					if (isset($tasks[$i]['obj']) && is_object($tasks[$i]['obj'])) {
 						printr($deps,'11 Done Setting deps for task id: '.$tasks[$i]['id']);
 						if (!$tasks[$i]['obj']->setDependentOn($deps)) {
 							$was_error=true;
@@ -347,7 +350,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 				$pt_arr=& $ptf->getTasks();
 				for ($i=0; $i<count($pt_arr); $i++) {
 					if (is_object($pt_arr[$i])) {
-						if (!$completed[$pt_arr[$i]->getID()]) {
+						if (!util_ifsetor($completed[$pt_arr[$i]->getID()])) {
 							printr($pt_arr[$i]->getID(),'Deleting task');
 							if (!$pt_arr[$i]->delete(true)) {
 								echo $pt_arr[$i]->getErrorMessage();

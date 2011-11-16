@@ -70,7 +70,7 @@ if(!$objProjectGroup || !is_object($objProjectGroup)) {
 	exit_error('Error',_('No project group was found for this task.'));
 }
 
-$objProjectTask = &projecttask_get_object($project_task_id);
+$objProjectTask = projecttask_get_object($project_task_id);
 if(!$objProjectTask || !is_object($objProjectTask)) {
 	exit_error('Error',_('No project task was found.'));
 }
