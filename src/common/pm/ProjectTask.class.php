@@ -1060,7 +1060,10 @@ class ProjectTask extends Error {
 				}
 				$has_changes = true;
 		}
-		$old_array = array_keys($this->getDependentOn());			
+		$old_array = array_keys($this->getDependentOn());
+		if (!is_array($depend_arr)) {
+			$depend_arr = array();
+		}
 		$diff_array=array_diff($old_array,array_keys($depend_arr));
 		if (count($diff_array)>0) { 
 			for ($tmp=0;$tmp<count($old_array);$tmp++) {
