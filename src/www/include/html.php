@@ -388,6 +388,8 @@ function html_use_tooltips() {
  * @param		array	Array of all allowed values from the full list.
  */
 function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any', $allowed=false) {
+	$have_a_subelement = false;
+
 	if ($text_100=='none'){
 		$text_100=_('None');
 	}
@@ -415,11 +417,13 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 	if ($show_any) {
 		$return .= '
 		<option value=""'.(($checked_val=='') ? ' selected="selected"' : '').'>'. util_html_secure($text_any) .'</option>';
+		$have_a_subelement = true;
 	}
 	//we don't always want the default 100 row shown
 	if ($show_100) {
 		$return .= '
 		<option value="100"'.(($checked_val==100) ? ' selected="selected"' : '').'>'. util_html_secure($text_100) .'</option>';
+		$have_a_subelement = true;
 	}
 
 	$checked_found=false;
@@ -438,6 +442,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 				$return .= ' disabled="disabled" class="option_disabled"';
 			}
 			$return .= '>'.util_html_secure($texts[$i]).'</option>';
+			$have_a_subelement = true;
 		}
 	}
 	//
@@ -447,6 +452,12 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
 		$return .= '
 		<option value="'.util_html_secure($checked_val).'" selected="selected">'._('No Change').'</option>';
+		$have_a_subelement = true;
+	}
+
+	if (!$have_a_subelement) {
+		/* <select></select> without <option/> in between is invalid */
+		return '<!-- select without options -->';
 	}
 
 	$return .= '
