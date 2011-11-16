@@ -7,7 +7,7 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 require_once 'func/Testing/TarSeleniumRemoteSuite.php';
 
-class TarCentos52Tests
+class TarCentosTests
 {
 	public static function main()
 	{

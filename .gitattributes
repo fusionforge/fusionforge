@@ -5271,7 +5271,7 @@ tests/CDXCentos52Tests.php -text
 tests/DEBDebian60Tests.php -text
 tests/RPMCentosTests.php -text
 tests/SeleniumTests.php -text
-tests/TarCentos52Tests.php -text
+tests/TarCentosTests.php -text
 tests/build/documentation/DocumentationTest.php -text
 tests/build/packages/BuildTest.php -text
 tests/code/deprecations/DeprecationsTest.php -text

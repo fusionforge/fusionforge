@@ -8,7 +8,7 @@ else
         echo "You must give the testsuite to run :"
 	echo "	- DEBDebian60Tests.php"
 	echo "	- RPMCentosTests.php"
-	echo "	- TarCentos52Tests.php"
+	echo "	- TarCentosTests.php"
 fi
 if [ "x$testsuite" = "x" ]
 then

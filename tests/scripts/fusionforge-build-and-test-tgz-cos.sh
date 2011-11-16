@@ -119,10 +119,10 @@ retcode=0
 if $REMOTESELENIUM
 then
 	echo "Run phpunit test on $HOST"
-	ssh -X root@$HOST "tests/scripts/phpunit.sh TarCentos52Tests.php" || retcode=$?
+	ssh -X root@$HOST "tests/scripts/phpunit.sh TarCentosTests.php" || retcode=$?
 else
 	cd tests
-	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml TarCentos52Tests.php || retcode=$?
+	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml TarCentosTests.php || retcode=$?
 	cd ..
 fi
 if [ "x$SELENIUM_RC_DIR" != "x" ]
