@@ -109,14 +109,14 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 		}
 		$res=&pm_import_tasks($group_project_id, $tasks);
 
-	} else {
-		$res['errormessage'] = 'Parameter error';
 	}
-	
-	if ($res['success']) {
-		$feedback .= 'Import Was Successful';
-	} else {
-		$error_msg .= $res['errormessage'];
-	}
+} else {
+	$res['errormessage'] = 'Parameter error';
+}
+
+if ($res['success']) {
+	$feedback .= 'Import Was Successful';
+} else {
+	$error_msg .= $res['errormessage'];
 }
 ?>
