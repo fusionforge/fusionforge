@@ -93,7 +93,10 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 		//
 		if (count($invalid_names)) {
 			$array['success']=false;
-			$array['errormessage']='Invalid Resource Name';
+			$array['errormessage']='Invalid Resource Name:';
+			foreach ($invalid_names as $i) {
+				$array['errormessage'] .= ' ' . $i;
+			}
 			$array['resourcename']=$invalid_names;
 			for ($i=0; $i<$tcount; $i++) {
 				$array['usernames'][$techs[$i]->getID()]=$techs[$i]->getUnixName();
