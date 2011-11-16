@@ -31,6 +31,13 @@
 pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
 
 ?>
+
+<div style="border:5px red groove;">
+<h2><?php echo _('Warning!'); ?></h2>
+<p><?php echo _('This function will <em>replace</em> all tasks in the currently selected subproject with these uploaded from the CSV file.'); ?></p>
+<p><?php echo _('FAQ: Attaching files to Tasks is not possible, only Tracker Items (Bugs, Feature Requests, …) support that functionality.'); ?></p>
+</div>
+
 <p>
 <?php echo _('This page lets you choose a file, in .csv format, and upload it so it can be inserted in the current subproject.'); ?>
 </p>
