@@ -5269,7 +5269,7 @@ tests/AllFullTests.php -text
 tests/AllTests.php -text
 tests/CDXCentos52Tests.php -text
 tests/DEBDebian60Tests.php -text
-tests/RPMCentos52Tests.php -text
+tests/RPMCentosTests.php -text
 tests/SeleniumTests.php -text
 tests/TarCentos52Tests.php -text
 tests/build/documentation/DocumentationTest.php -text

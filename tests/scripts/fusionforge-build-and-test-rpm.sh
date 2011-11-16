@@ -39,7 +39,7 @@ retcode=0
 echo "Run phpunit test on $HOST in $FORGE_HOME"
 if xterm -e "sh -c exit" 2>/dev/null
 then
-        ssh -X root@$HOST "$FORGE_HOME/tests/scripts/phpunit.sh RPMCentos52Tests.php" || retcode=$?
+        ssh -X root@$HOST "$FORGE_HOME/tests/scripts/phpunit.sh RPMCentosTests.php" || retcode=$?
         rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 else
         echo "No display is available, NOT RUNNING TESTS"

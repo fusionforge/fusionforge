@@ -7,7 +7,7 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 require_once 'func/Testing/RPMSeleniumRemoteSuite.php';
 
-class RPMCentos52Tests
+class RPMCentosTests
 {
 	public static function main()
 	{
