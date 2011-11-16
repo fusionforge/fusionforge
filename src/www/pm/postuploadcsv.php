@@ -43,7 +43,8 @@
 require_once $gfcommon.'pm/import_utils.php';
 
 $input_file = getUploadedFile('userfile');
-if (is_uploaded_file($input_file['tmp_name'])) {
+if (isset($input_file) && isset($input_file['tmp_name']) &&
+    is_uploaded_file($input_file['tmp_name'])) {
 	$handle = fopen($input_file['tmp_name'], 'r');
 	$tasks = array();
 	
@@ -106,8 +107,11 @@ if (is_uploaded_file($input_file['tmp_name'])) {
 					'dependenton'=>$dependentOn,
 					'notes'=>$cols[11]);
 		}
+		$res=&pm_import_tasks($group_project_id, $tasks);
+
+	} else {
+		$res['errormessage'] = 'Parameter error';
 	}
-	$res=&pm_import_tasks($group_project_id, $tasks);
 	
 	if ($res['success']) {
 		$feedback .= 'Import Was Successful';
