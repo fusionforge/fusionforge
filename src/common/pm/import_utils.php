@@ -79,7 +79,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 			$resrc = $tasks[$i]['resources'];
 			for ($j=0; $j<count($resrc); $j++) {
 				//validate user - see if they really exist as techs in this subproject
-				if (!$tarr[strtolower($resrc[$j]['user_name'])]) {
+				if (!util_ifsetor($tarr[strtolower($resrc[$j]['user_name'])])) {
 					//create list of bogus names to send back
 					if (array_search(strtolower($resrc[$j]['user_name']),$invalid_names) === false) {
 						$invalid_names[]=$resrc[$j]['user_name'];
@@ -340,7 +340,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 			//
 			printr($was_error,'Right before deleting unreferenced tasks');
 			if (!$was_error) {
-				$ptf =& new ProjectTaskFactory($pg);
+				$ptf = new ProjectTaskFactory($pg);
 				$pt_arr=& $ptf->getTasks();
 				for ($i=0; $i<count($pt_arr); $i++) {
 					if (is_object($pt_arr[$i])) {
