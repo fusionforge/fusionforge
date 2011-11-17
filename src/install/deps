@@ -45,7 +45,14 @@ deps_redhat() {
 		addFusionForgeYumRepo
 		addDagRPMForgeYumRepo
 		msg green "Installing packages: Executing YUM. Please wait..."
-		yum --enablerepo=fusionforge --enablerepo=dag-rpmforge  -y --skip-broken install httpd php mailman cvs postgresql84 postgresql84-libs postgresql84-server postgresql84-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring php-jpgraph-1.5.2 poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync
+		case $(yum info postgresql | grep ^Version | cut -d: -f2) in
+		    8.3*|8.4*|9*)
+			pg=postgresql
+			;;
+		    *)
+			pg=postgresql84
+		esac
+		yum --enablerepo=fusionforge --enablerepo=dag-rpmforge -y --skip-broken install httpd php mailman cvs $pg $pg-libs $pg-server $pg-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring php-jpgraph-1.5.2 poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync
 		touch /tmp/done_yum
 	fi
 }
