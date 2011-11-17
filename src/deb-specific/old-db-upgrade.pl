@@ -43,6 +43,7 @@ eval {
 	&debug ("Database maintenance already moved to unified script,") ;
 	&debug ("nothing to do in old upgrader.") ;
     }
+
     elsif (! &table_exists ($dbh, 'groups')) {	# No 'groups' table
 	# Installing SF 2.6 from scratch
 	&debug ("Creating initial Sourceforge database from files.") ;
@@ -1991,6 +1992,14 @@ eval {
         @reqlist = () ;
 
         &update_db_version ($target) ;
+        &debug ("...OK.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    if ($version eq "5.1.51-11") {
+	&debug ("Dropping debian_meta_data table.") ;
+	&drop_table_if_exists ($dbh, 'debian_meta_data') ;
         &debug ("...OK.") ;
         $dbh->commit () ;
     }
