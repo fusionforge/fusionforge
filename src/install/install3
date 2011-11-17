@@ -23,7 +23,7 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-PG_VERSIONS="8.2 8.3 8.4 9.0 9.1"
+PG_VERSIONS="8.3 8.4 9.0 9.1"
 
 msg(){
 	GREEN="[01;32m"
@@ -111,27 +111,6 @@ find_pghba(){
 	if [ -z "$pghba" ]
 	then
 		msg red "ERROR: Could not find pg_hba.conf file"
-		exit 1
-	fi
-}
-
-# Where the tsearch sql config file is
-find_tsearch(){
-	tsearchfile="/usr/share/pgsql/contrib/tsearch2.sql"
-	for v in $PG_VERSIONS ; do
-	    tsearchfile="$tsearchfile /usr/share/postgresql/$v/contrib/tsearch2.sql"
-	done
-	tsearchfile="$tsearchfile /opt/csw/postgresql/share/contrib/tsearch2.sql"
-	for i in $tsearchfile
-	do
-		if [ -f $i ]
-		then
-			tsearch="$i"
-		fi
-	done
-	if [ -z "$tsearch" ]
-	then
-		msg red "ERROR: Could not find tsearch2.sql file"
 		exit 1
 	fi
 }
@@ -281,7 +260,7 @@ EOF
                 echo "No way found to enable plpgsql on $gforge_db here" 
         fi
 
-	# Detect postgresql version, load tsearch2 for pg < 8.3
+	# Detect postgresql version, require at least 8.3
 	pgv=
 	for i in postgres psql ; do
 	    if [ "$(type -p $i)" != '' ] ; then
@@ -294,14 +273,8 @@ EOF
 	fi	    
 	case $pgv in
 		7.*|8.1*|8.2*)
-			msg green " * Loading tsearch2 Database Into $gforge_db DB"
-			find_tsearch
-			su - postgres -c "psql $gforge_db < $tsearch" >> /tmp/gforge-import.log
-			for table in pg_ts_cfg pg_ts_cfgmap pg_ts_dict pg_ts_parser
-			do
-				su - postgres -c "psql $gforge_db -c \"GRANT ALL on $table TO $gforge_user\";"
-			done
-			su - postgres -c "psql $gforge_db -c \"UPDATE pg_ts_cfg SET locale='en_US.UTF-8' WHERE ts_name='default'\""
+			msg red " * Unsupported PostgreSQL version; 8.3 or later is required"
+			exit 2
 			;;
 	esac
 
