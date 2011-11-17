@@ -27,3 +27,6 @@ ALTER TABLE activity_log ALTER COLUMN ver SET DEFAULT 0::double precision;
 ALTER TABLE users DROP COLUMN sys_state;
 ALTER TABLE groups DROP COLUMN sys_state;
 ALTER TABLE user_group DROP COLUMN sys_state;
+
+ALTER TABLE project_task ALTER COLUMN hours SET DEFAULT 0::double precision;
+ALTER TABLE survey_rating_aggregate ALTER COLUMN response SET DEFAULT 0::double precision;

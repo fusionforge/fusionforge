@@ -13,6 +13,7 @@ ALTER TABLE forum_attachment DROP CONSTRAINT "$1";
 ALTER TABLE forum_attachment DROP CONSTRAINT "$2";
 
 ALTER SEQUENCE supported_langu_language_id_seq RENAME TO supported_languages_pk_seq;
+ALTER TABLE supported_languages ALTER COLUMN language_id SET DEFAULT nextval(('supported_languages_pk_seq'::text)::regclass;)
 ALTER SEQUENCE group_cvs_history_id_seq RENAME TO group_cvs_history_pk_seq;
 ALTER TABLE group_cvs_history ALTER COLUMN id SET DEFAULT nextval(('group_cvs_history_pk_seq'::text)::regclass);
 ALTER TABLE group_cvs_history ADD CONSTRAINT group_cvs_history_pkey PRIMARY KEY (id);
@@ -53,9 +54,11 @@ ALTER SEQUENCE project_messages_project_message_id_seq OWNED BY project_messages
 
 DROP SEQUENCE themes_pk_seq;
 ALTER SEQUENCE themes_theme_id_seq RENAME TO themes_pk_seq;
+ALTER TABLE themes ALTER COLUMN theme_id SET DEFAULT nextval(('themes_pk_seq'::text)::regclass);
 
 DROP SEQUENCE trove_treesums_pk_seq;
 ALTER SEQUENCE trove_treesum_trove_treesum_seq RENAME TO trove_treesums_pk_seq;
+ALTER TABLE trove_treesums ALTER COLUMN trove_treesums_id SET DEFAULT nextval(('trove_treesums_pk_seq'::text)::regclass);
 
 ALTER SEQUENCE group_cvs_history_pk_seq MAXVALUE 2147483647;
 ALTER SEQUENCE supported_languages_pk_seq MAXVALUE 2147483647;
@@ -91,3 +94,9 @@ INSERT INTO "people_skill" (skill_id, name) VALUES ('9', 'SQL');
 
 ALTER TABLE frs_dlstats_filetotal_agg ALTER COLUMN file_id SET DEFAULT 0;
 ALTER TABLE frs_dlstats_filetotal_agg ALTER COLUMN downloads SET DEFAULT 0;
+ALTER TABLE frs_dlstats_filetotal_agg ALTER COLUMN downloads SET NOT NULL;
+
+CREATE INDEX projecttaskartifact_projecttaskid ON project_task_artifact USING btree (project_task_id);
+ALTER TABLE project_tags ALTER COLUMN text SET DEFAULT ''::text;
+
+CREATE TABLE user_preferences DROP COLUMN dead1;
