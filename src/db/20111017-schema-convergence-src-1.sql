@@ -124,3 +124,27 @@ ALTER TABLE users ADD CONSTRAINT users_themeid FOREIGN KEY (theme_id) REFERENCES
 
 CREATE OR REPLACE VIEW stats_project_all_vw AS SELECT stats_project_months.group_id, (avg(stats_project_months.developers))::integer AS developers, (avg(stats_project_months.group_ranking))::integer AS group_ranking, avg(stats_project_months.group_metric) AS group_metric, sum(stats_project_months.logo_showings) AS logo_showings, sum(stats_project_months.downloads) AS downloads, sum(stats_project_months.site_views) AS site_views, sum(stats_project_months.subdomain_views) AS subdomain_views, sum(stats_project_months.page_views) AS page_views, sum(stats_project_months.file_releases) AS file_releases, sum(stats_project_months.msg_posted) AS msg_posted, (avg(stats_project_months.msg_uniq_auth))::integer AS msg_uniq_auth, sum(stats_project_months.bugs_opened) AS bugs_opened, sum(stats_project_months.bugs_closed) AS bugs_closed, sum(stats_project_months.support_opened) AS support_opened, sum(stats_project_months.support_closed) AS support_closed, sum(stats_project_months.patches_opened) AS patches_opened, sum(stats_project_months.patches_closed) AS patches_closed, sum(stats_project_months.artifacts_opened) AS artifacts_opened, sum(stats_project_months.artifacts_closed) AS artifacts_closed, sum(stats_project_months.tasks_opened) AS tasks_opened, sum(stats_project_months.tasks_closed) AS tasks_closed, sum(stats_project_months.help_requests) AS help_requests, sum(stats_project_months.cvs_checkouts) AS cvs_checkouts, sum(stats_project_months.cvs_commits) AS cvs_commits, sum(stats_project_months.cvs_adds) AS cvs_adds FROM stats_project_months GROUP BY stats_project_months.group_id;
 CREATE OR REPLACE VIEW stats_project_vw AS SELECT spd.group_id, spd.month, spd.day, spd.developers, spm.ranking AS group_ranking, spm.percentile AS group_metric, salbg.count AS logo_showings, fdga.downloads, sasbg.count AS site_views, ssp.pages AS subdomain_views, (COALESCE(sasbg.count, 0) + COALESCE(ssp.pages, 0)) AS page_views, sp.file_releases, sp.msg_posted, sp.msg_uniq_auth, sp.bugs_opened, sp.bugs_closed, sp.support_opened, sp.support_closed, sp.patches_opened, sp.patches_closed, sp.artifacts_opened, sp.artifacts_closed, sp.tasks_opened, sp.tasks_closed, sp.help_requests, scg.checkouts AS cvs_checkouts, scg.commits AS cvs_commits, scg.adds AS cvs_adds FROM (((((((stats_project_developers spd LEFT JOIN stats_project sp USING (month, day, group_id)) LEFT JOIN stats_project_metric spm USING (month, day, group_id)) LEFT JOIN stats_cvs_group scg USING (month, day, group_id)) LEFT JOIN stats_agg_site_by_group sasbg USING (month, day, group_id)) LEFT JOIN stats_agg_logo_by_group salbg USING (month, day, group_id)) LEFT JOIN stats_subd_pages ssp USING (month, day, group_id)) LEFT JOIN frs_dlstats_group_vw fdga USING (month, day, group_id));
+
+CREATE TABLE artifact_idx ( artifact_id integer, group_artifact_id integer, vectors tsvector );
+CREATE TABLE artifact_message_idx ( id integer, artifact_id integer, vectors tsvector );
+CREATE TABLE doc_data_idx ( docid integer, group_id integer, vectors tsvector );
+CREATE TABLE forum_idx ( msg_id integer, group_id integer, vectors tsvector );
+CREATE TABLE frs_file_idx ( file_id integer, release_id integer, vectors tsvector );
+CREATE TABLE frs_release_idx ( release_id integer, vectors tsvector );
+CREATE TABLE groups_idx ( group_id integer, vectors tsvector );
+CREATE TABLE news_bytes_idx ( id integer, vectors tsvector );
+CREATE TABLE project_task_idx ( project_task_id integer, vectors tsvector );
+CREATE TABLE skills_data_idx ( skills_data_id integer, vectors tsvector );
+CREATE TABLE users_idx ( user_id integer, vectors tsvector );
+
+CREATE INDEX artifact_idxfti ON artifact_idx USING gist (vectors);
+CREATE INDEX artifact_message_idxfti ON artifact_message_idx USING gist (vectors);
+CREATE INDEX doc_data_idxfti ON doc_data_idx USING gist (vectors);
+CREATE INDEX forum_idxfti ON forum_idx USING gist (vectors);
+CREATE INDEX frs_file_idxfti ON frs_file_idx USING gist (vectors);
+CREATE INDEX frs_release_idxfti ON frs_release_idx USING gist (vectors);
+CREATE INDEX groups_idxfti ON groups_idx USING gist (vectors);
+CREATE INDEX news_bytes_idxfti ON news_bytes_idx USING gist (vectors);
+CREATE INDEX project_task_idxfti ON project_task_idx USING gist (vectors);
+CREATE INDEX skills_data_idxfti ON skills_data_idx USING gist (vectors);
+CREATE INDEX users_idxfti ON users_idx USING gist (vectors);
