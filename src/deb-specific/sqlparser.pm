@@ -51,6 +51,7 @@ sub parse_sql_file ( $ ) {
 		  'IN_DOLDOL' => 12,
 		  'DONE' => 999) ;
     my ($state, $l, $par_level, $com_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_field_list, $copy_rest, @copy_data, @copy_data_tmp, $copy_field, @doldolstack) ;
+    $l = $sql = $chunk = $rest = '';
 
     # Init the state machine
 
