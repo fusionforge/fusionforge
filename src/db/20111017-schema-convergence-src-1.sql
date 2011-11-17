@@ -99,4 +99,4 @@ ALTER TABLE frs_dlstats_filetotal_agg ALTER COLUMN downloads SET NOT NULL;
 CREATE INDEX projecttaskartifact_projecttaskid ON project_task_artifact USING btree (project_task_id);
 ALTER TABLE project_tags ALTER COLUMN name SET DEFAULT ''::text;
 
-CREATE TABLE user_preferences DROP COLUMN dead1;
+ALTER TABLE user_preferences DROP COLUMN dead1;
