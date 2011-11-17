@@ -18,6 +18,8 @@ ALTER SEQUENCE project_messa_project_messa_seq RENAME TO project_messages_projec
 ALTER TABLE activity_log ALTER COLUMN ver SET DEFAULT 0::double precision;
 ALTER TABLE artifact_extra_field_data ALTER COLUMN data_id SET DEFAULT nextval('artifact_extra_field_data_data_id_seq'::regclass);
 ALTER TABLE artifact_extra_field_list ALTER COLUMN extra_field_id SET DEFAULT nextval('artifact_extra_field_list_extra_field_id_seq'::regclass);
+ALTER TABLE artifact_extra_field_elements ALTER COLUMN element_id SET DEFAULT nextval('artifact_extra_field_elements_element_id_seq'::regclass);
+
 ALTER TABLE db_images ALTER COLUMN upload_date SET DEFAULT 0;
 ALTER TABLE db_images ALTER COLUMN version SET DEFAULT 0;
 
@@ -43,3 +45,14 @@ ALTER TABLE role ADD CONSTRAINT role_group_id_fkey FOREIGN KEY (group_id) REFERE
 
 ALTER TABLE ONLY themes ADD CONSTRAINT themes_pkey PRIMARY KEY (theme_id);
 ALTER TABLE project_messages ALTER COLUMN project_message_id SET DEFAULT nextval('project_messages_project_message_id_seq'::regclass);
+
+DROP SEQUENCE themes_pk_seq;
+ALTER SEQUENCE themes_theme_id_seq RENAME TO themes_pk_seq;
+
+DROP SEQUENCE trove_treesums_pk_seq;
+ALTER SEQUENCE trove_treesum_trove_treesum_seq RENAME TO trove_treesums_pk_seq;
+
+ALTER SEQUENCE group_cvs_history_pk_seq MAXVALUE 2147483647;
+ALTER SEQUENCE supported_languages_pk_seq MAXVALUE 2147483647;
+
+ALTER TABLE project_category ALTER COLUMN category_id SET DEFAULT nextval('project_categor_category_id_seq'::regclass);

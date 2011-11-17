@@ -16,3 +16,9 @@ ALTER TABLE ONLY project_task_external_order ADD CONSTRAINT project_task_externa
 
 DROP SEQUENCE foundry_projects_pk_seq;
 DROP SEQUENCE foundry_preferred_projec_pk_seq;
+DROP SEQUENCE artifact_perm_id_seq;
+
+ALTER TABLE forum_attachment ALTER COLUMN mimetype SET NOT NULL;
+ALTER TABLE forum_pending_attachment ALTER COLUMN mimetype SET NOT NULL;
+
+ALTER TABLE project_category ALTER COLUMN category_id SET DEFAULT nextval('project_categor_category_id_seq'::regclass);
