@@ -1975,7 +1975,7 @@ eval {
 
         @reqlist = ( "CREATE TABLE database_changes (filename text)",
 		     "CREATE TABLE database_startpoint (db_version character varying(10), db_start_date integer)",
-		     "INSERT INTO database_startpoint (db_version, db_start_date) VALUES ('5.1.51', 20110923)",
+		     "INSERT INTO database_startpoint (db_version, db_start_date) VALUES ('5.1.51', 20111009)",
                    ) ;
         foreach my $s (@reqlist) {
             $query = $s ;
