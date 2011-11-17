@@ -21,22 +21,21 @@
 
 require (dirname(__FILE__).'/../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require $gfcommon.'include/cron_utils.php';
+require_once $gfcommon.'include/cron_utils.php';
 
 $err='';
 
 $today_formatted=date('Ymd',(time()-(30*60*60*24)));
-$sql='';
 
 db_begin();
 
-$rel = db_query_params ('DELETE FROM activity_log WHERE day < $1',
+db_query_params ('DELETE FROM activity_log WHERE day < $1',
 			array ($today_formatted));
 $err .= db_error();
 
 db_commit();
 
-$err .= " Done: ".date('Ymd H:i').' - '.db_error();
+if (!$err) $err = 'Done';
 
 cron_entry(10,$err);
 
