@@ -38,10 +38,12 @@ $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
 eval {
     my ($sth, @array, $version, $path, $target) ;
-
-    # Do we have at least the basic schema?
-    # Create Sourceforge database
-    if (! &table_exists ($dbh, 'groups')) {	# No 'groups' table
+    # Is this script still relevant?
+    if (&table_exists ($dbh, 'database_startpoint')) {	
+	&debug ("Database maintenance already moved to unified script,") ;
+	&debug ("nothing to do in old upgrader.") ;
+    }
+    elsif (! &table_exists ($dbh, 'groups')) {	# No 'groups' table
 	# Installing SF 2.6 from scratch
 	&debug ("Creating initial Sourceforge database from files.") ;
 
