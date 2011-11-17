@@ -519,11 +519,14 @@ function db_check_index_exists ($tn) {
 	return db_check_foo_exists($tn, 'i');
 }
 
-function db_drop_table_if_exists ($tn) {
+function db_drop_table_if_exists ($tn, $cascade=false) {
 	if (!db_check_table_exists($tn)) {
 		return true;
 	}
 	$sql = "DROP TABLE $name";
+	if ($cascade) {
+		$sql .= " CASCADE";
+	}
 	$res = db_query_params ($sql, array ());
 	if (!$res) {
 		echo db_error();
