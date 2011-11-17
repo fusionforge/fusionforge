@@ -34,13 +34,15 @@ ALTER TABLE user_group DROP COLUMN sys_cvs_state;
 
 ALTER TABLE project_task ALTER COLUMN hours SET DEFAULT 0::double precision;
 ALTER TABLE survey_rating_aggregate ALTER COLUMN response SET DEFAULT 0::double precision;
+
+ALTER TABLE user_metric ALTER COLUMN avg_raters_importance SET DEFAULT 0::double precision;
 ALTER TABLE user_metric ALTER COLUMN avg_rating SET DEFAULT 0::double precision;
+ALTER TABLE user_metric ALTER COLUMN importance_factor SET DEFAULT 0::double precision;
 ALTER TABLE user_metric ALTER COLUMN metric SET DEFAULT 0::double precision;
 ALTER TABLE user_metric ALTER COLUMN percentile SET DEFAULT 0::double precision;
-ALTER TABLE user_metric ALTER COLUMN importance_factor SET DEFAULT 0::double precision;
 
 ALTER TABLE user_metric0 ALTER COLUMN avg_raters_importance SET DEFAULT 0::double precision;
 ALTER TABLE user_metric0 ALTER COLUMN avg_rating SET DEFAULT 0::double precision;
+ALTER TABLE user_metric0 ALTER COLUMN importance_factor SET DEFAULT 0::double precision;
 ALTER TABLE user_metric0 ALTER COLUMN metric SET DEFAULT 0::double precision;
 ALTER TABLE user_metric0 ALTER COLUMN percentile SET DEFAULT 0::double precision;
-ALTER TABLE user_metric0 ALTER COLUMN importance_factor SET DEFAULT 0::double precision;

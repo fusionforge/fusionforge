@@ -33,6 +33,7 @@ ALTER TABLE group_join_request ADD CONSTRAINT group_join_request_group_id_fkey F
 ALTER TABLE group_join_request ADD CONSTRAINT group_join_request_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
 ALTER TABLE groups ADD CONSTRAINT groups_license FOREIGN KEY (license) REFERENCES licenses(license_id) MATCH FULL;
 ALTER TABLE groups ALTER COLUMN unix_box SET DEFAULT 'shell'::character varying;
+ALTER TABLE users ALTER COLUMN unix_box SET DEFAULT 'shell'::character varying;
 
 DROP INDEX plugins_plugin_name_key;
 ALTER TABLE plugins ADD CONSTRAINT plugins_plugin_name_key UNIQUE (plugin_name);
@@ -103,3 +104,10 @@ ALTER TABLE project_tags ALTER COLUMN name SET DEFAULT ''::text;
 ALTER TABLE user_preferences DROP COLUMN dead1;
 
 ALTER TABLE user_group ALTER COLUMN artifact_flags SET DEFAULT 0;
+
+DROP TABLE IF EXISTS project_metric_tmp1;
+
+ALTER TABLE user_preferences ADD COLUMN set_date_new integer DEFAULT 0 NOT NULL;
+UPDATE user_preferences SET set_date_new = set_date;
+ALTER TABLE user_preferences DROP COLUMN set_date;
+ALTER TABLE user_preferences ALTER COLUMN set_date_new RENAME TO set_date;
