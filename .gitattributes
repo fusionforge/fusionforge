@@ -674,6 +674,7 @@ src/debian/patches/disable-dav.patch -text
 src/debian/patches/disable-tracker-reply-by-email.patch -text
 src/debian/patches/production-environment.patch -text
 src/debian/patches/series -text
+src/debian/patches/upgrade-db-location -text
 src/debian/patches/use-jquery-from-distro.patch -text
 src/debian/patches/use-nusoap-from-distro.patch -text
 src/debian/patches/use-simplepie-from-distro.patch -text
