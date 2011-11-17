@@ -55,6 +55,7 @@ if ($argc == 1 || $argv[1] == 'all') {
 				exit(1);
 			} else if (db_numrows($res) == 0) {
 				show("Running script: {$script['filename']}\n");
+				db_begin();
 				$result = run_script($script);
 				if ($result) {
 					$res = db_query_params ('INSERT INTO database_changes (filename) VALUES ($1)',
@@ -64,6 +65,7 @@ if ($argc == 1 || $argv[1] == 'all') {
 						show("ERROR-3: ".db_error()."\n");
 						exit(1);
 					}
+					db_commit();
 				} else {
 					// error
 					exit(1);
