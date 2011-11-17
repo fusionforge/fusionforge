@@ -31,16 +31,8 @@ if (count($argv) < 2) {
 
 function check_tables() {
 	db_begin();
-	$res = db_query_params ('SELECT COUNT(*) AS exists FROM pg_class WHERE relname = $1 AND relkind = $2',
-			array('database_startpoint',
-			'r')) ;
 
-	if (!$res) { // db error
-		echo "DB-ERROR-1: ".db_error()."\n";
-		db_rollback();
-		return false;
-	}
-	if (db_result($res, 0, 'exists') == '0') {
+	if (!db_check_table_exists('database_startpoint')) {
 		$res = db_query_params ('CREATE TABLE database_startpoint (db_version varchar(10), db_start_date int)',
 			array()) ;
 
@@ -50,16 +42,8 @@ function check_tables() {
 			return false;
 		}
 	}
-	$res = db_query_params ('SELECT COUNT(*) AS exists FROM pg_class WHERE relname = $1 AND relkind = $2',
-			array('database_changes',
-			'r')) ;
 
-	if (!$res) { // db error
-		echo "DB-ERROR-3: ".db_error()."\n";
-		db_rollback();
-		return false;
-	}
-	if (db_result($res, 0, 'exists') == '0') {
+	if (!db_check_table_exists('database_changes')) {
 		$res = db_query_params ('CREATE TABLE database_changes (filename text)',
 			array()) ;
 
@@ -69,6 +53,7 @@ function check_tables() {
 			return false;
 		}
 	}
+
 	db_commit();
 	return true;
 }
