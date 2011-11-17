@@ -80,7 +80,6 @@ switch (getStringFromRequest('func')) {
 
 		/*
 			Create a new Artifact
-
 		*/
 		$ah=new ArtifactHtml($ath);
 		$feedback = '';
@@ -296,10 +295,8 @@ switch (getStringFromRequest('func')) {
 				}
 			}
 			/*
-
 				The following logic causes fields to be overridden
 				in the event that someone tampered with the HTML form
-
 			*/
 			if (forge_check_perm ('tracker', $ath->getID(), 'tech')
 					|| forge_check_perm ('tracker', $ath->getID(), 'manager')) {
