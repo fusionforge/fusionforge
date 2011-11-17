@@ -15,6 +15,8 @@ ALTER TABLE forum_attachment DROP CONSTRAINT "$2";
 ALTER SEQUENCE supported_langu_language_id_seq RENAME TO supported_languages_pk_seq;
 ALTER SEQUENCE group_cvs_history_id_seq RENAME TO group_cvs_history_pk_seq;
 ALTER TABLE group_cvs_history ALTER COLUMN id SET DEFAULT nextval(('group_cvs_history_pk_seq'::text)::regclass);
+ALTER TABLE group_cvs_history ADD CONSTRAINT group_cvs_history_pkey PRIMARY KEY (id);
+
 ALTER SEQUENCE project_messa_project_messa_seq RENAME TO project_messages_project_message_id_seq;
 ALTER TABLE activity_log ALTER COLUMN ver SET DEFAULT 0::double precision;
 ALTER TABLE artifact_extra_field_data ALTER COLUMN data_id SET DEFAULT nextval('artifact_extra_field_data_data_id_seq'::regclass);
@@ -47,6 +49,7 @@ ALTER TABLE role ADD CONSTRAINT role_group_id_fkey FOREIGN KEY (group_id) REFERE
 
 ALTER TABLE ONLY themes ADD CONSTRAINT themes_pkey PRIMARY KEY (theme_id);
 ALTER TABLE project_messages ALTER COLUMN project_message_id SET DEFAULT nextval('project_messages_project_message_id_seq'::regclass);
+ALTER SEQUENCE project_messages_project_message_id_seq OWNED BY project_messages.project_message_id;
 
 DROP SEQUENCE themes_pk_seq;
 ALTER SEQUENCE themes_theme_id_seq RENAME TO themes_pk_seq;
