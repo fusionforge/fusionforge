@@ -100,3 +100,5 @@ CREATE INDEX projecttaskartifact_projecttaskid ON project_task_artifact USING bt
 ALTER TABLE project_tags ALTER COLUMN name SET DEFAULT ''::text;
 
 ALTER TABLE user_preferences DROP COLUMN dead1;
+
+ALTER TABLE user_group ALTER COLUMN artifact_flags SET DEFAULT 0;
