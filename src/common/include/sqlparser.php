@@ -75,8 +75,8 @@ function parse_sql_file($filename) {
 	$copy_field = '';
 	
 	while ($state != $states['DONE']) {
-		error_log("STATE_LOOP: state=$names[$state], l=".RED.$l.NORMAL.", chunk=".RED.$chunk.NORMAL.", rest=".RED.$rest.NORMAL);
-		error_log(RED."<".GREEN.$sql.RED.">".NORMAL);
+		// error_log("STATE_LOOP: state=$names[$state], l=".RED.$l.NORMAL.", chunk=".RED.$chunk.NORMAL.", rest=".RED.$rest.NORMAL);
+		// error_log(RED."<".GREEN.$sql.RED.">".NORMAL);
 		$matches = array();
 
 		switch ($state) {
@@ -296,7 +296,7 @@ function parse_sql_file($filename) {
 				continue;
 			} else {
 				array_push($sql_list, $sql);
-				error_log(RED."---->".$sql.NORMAL);
+				// error_log(RED."---->".$sql.NORMAL);
 				$sql = '';
 				$l = $rest;
 				$state = $states['SCAN'];
@@ -330,32 +330,27 @@ function parse_sql_file($filename) {
 		case $states['IN_QUOTE']:
 			// error_log('IN_QUOTE');
 			if (preg_match("/^'/", $rest)) {
-				error_log(1);
 				$sql .= "'";
 				$rest = substr($rest, 1);
 				$l = $rest;
 				$state = $states['SQL_SCAN'];
 				continue;
 			} elseif (preg_match("/^\\\'/", $rest)) {
-				error_log(2);
 				$sql .= "''";
 				$rest = substr($rest, 2);
 				$state = $states['IN_QUOTE'];
 				continue;
 			} elseif (preg_match("/^\\\[^\\\]/", $rest)) {
-				error_log(3);
 				$sql .= '\\';
 				$rest = substr($rest, 1);
 				$state = $states['IN_QUOTE'];
 				continue;
 			} elseif (preg_match('/^\\\$/', $rest)) {
-				error_log(4);
 				$sql .= "\n";
 				$rest = substr($rest, 1);
 				$state = $states['IN_QUOTE'];
 				continue;
 			} else {
-				error_log(5);
 				$l = $rest;
 				$state = $states['QUOTE_SCAN'];
 				continue;
@@ -460,7 +455,7 @@ function parse_sql_file($filename) {
 				$sql .= implode (', ', $copy_data);
 				$sql .= ")";
 				array_push($sql_list, $sql);
-				error_log(RED."---->".$sql.NORMAL);
+				// error_log(RED."---->".$sql.NORMAL);
 				$l = get_next_line($f);
 				if ($l === false) {
 					error_log("End of file reached during a COPY statement");
