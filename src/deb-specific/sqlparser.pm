@@ -558,7 +558,7 @@ sub parse_sql_file ( $ ) {
 	  START_COPY_STATE_SWITCH: {
 	      ($l =~ m/\s*copy\s+\"[\w_]+\"\s*(\([\w, "]+\))?\s*from\s+stdin\s*;/i) && do {
 		  sql_parser_debug "HERE1";
-		  ($copy_table, $copy_field_list, $copy_rest) = ($l =~ /\s*copy\s+\"([\w_]+)\"\s*(\([\w, "]+\))?\s*from\s+stdin\s*;(.*)/i) ;
+		  ($copy_table, $copy_field_list, undef, $copy_rest) = ($l =~ /\s*copy\s+\"([\w_]+)\"\s*((\([\w, "]+\))?)\s*from\s+stdin\s*;(.*)/i) ;
 		  $copy_field_list =~ s/^\s+//;
 		  $copy_field_list =~ s/\s+$//;
 		  $copy_field_list = ' '.$copy_field_list unless $copy_field_list eq '';
@@ -576,7 +576,7 @@ sub parse_sql_file ( $ ) {
 
 	      ($l =~ m/\s*copy\s+[\w_]+\s*(\([\w, "]+\))?\s*from\s+stdin\s*;/i) && do {
 		  sql_parser_debug "HERE2";
-		  ($copy_table, $copy_field_list, $copy_rest) = ($l =~ /\s*copy\s+([\w_]+)\s*(\([\w, "]+\))?\s*from\s+stdin\s*;(.*)/i) ;
+		  ($copy_table, $copy_field_list, undef, $copy_rest) = ($l =~ /\s*copy\s+([\w_]+)\s*((\([\w, "]+\))?)\s*from\s+stdin\s*;(.*)/i) ;
 		  $copy_field_list =~ s/^\s+//;
 		  $copy_field_list =~ s/\s+$//;
 		  $copy_field_list = ' '.$copy_field_list unless $copy_field_list eq '';		      
