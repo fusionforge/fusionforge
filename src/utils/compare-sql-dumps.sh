@@ -10,4 +10,4 @@ if [ "$s" = "" ] ; then
     exit 1
 fi
 
-diff -b -u50 <($s $1) <($s $2)
+diff -b -u10 <($s $1) <($s $2)
