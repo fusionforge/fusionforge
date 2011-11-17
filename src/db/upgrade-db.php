@@ -67,6 +67,7 @@ if ($argc == 1 || $argv[1] == 'all') {
 					}
 					db_commit();
 				} else {
+					db_rollback();
 					// error
 					exit(1);
 				}
