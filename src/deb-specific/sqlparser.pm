@@ -50,7 +50,7 @@ sub parse_sql_file ( $ ) {
 		  'IN_SQL_COMMENT' => 11,
 		  'IN_DOLDOL' => 12,
 		  'DONE' => 999) ;
-    my ($state, $l, $par_level, $com_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_rest, @copy_data, @copy_data_tmp, $copy_field, @doldolstack) ;
+    my ($state, $l, $par_level, $com_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_field_list, $copy_rest, @copy_data, @copy_data_tmp, $copy_field, @doldolstack) ;
 
     # Init the state machine
 
@@ -60,6 +60,7 @@ sub parse_sql_file ( $ ) {
     
   STATE_LOOP: while ($state != $states{DONE}) { # State machine main loop
       sql_parser_debug "STATE_LOOP: state = $state" ;
+      sql_parser_debug "l=$l, sql=$sql, chunk=$chunk, rest=$rest";
     STATE_SWITCH: {		# State machine step processing
 	$state == $states{INIT} && do {
 	    sql_parser_debug "State = INIT" ;
@@ -68,7 +69,7 @@ sub parse_sql_file ( $ ) {
 	    @doldolstack = () ;
 	    $l = $sql = $chunk = $rest = "" ;	 
 	    @sql_list = () ;
-	    $copy_table = $copy_rest = "" ;
+	    $copy_table = $copy_field_list = $copy_rest = "" ;
 	    @copy_data = @copy_data_tmp = () ;
 	    $copy_field = "" ;
 	    
@@ -90,8 +91,8 @@ sub parse_sql_file ( $ ) {
 		  last SCAN_STATE_SWITCH ;
 	      } ;
 
-	      ( ($l =~ m/\s*copy\s+\"[\w_]+\"\s+from\s+stdin\s*;/i) 
-		or ($l =~ m/\s*copy\s+[\w_]+\s+from\s+stdin\s*;/i) ) && do {
+	      ( ($l =~ m/\s*copy\s+\"[\w_]+\"\s*(\([\w, "]+\))?\s*from\s+stdin\s*;/i) 
+		or ($l =~ m/\s*copy\s+[\w_]+\s*(\([\w, "]+\))?\s*from\s+stdin\s*;/i) ) && do {
 		    # Nothing to do
 		    
 		    $state = $states{START_COPY} ;
@@ -555,8 +556,12 @@ sub parse_sql_file ( $ ) {
 	$state == $states{START_COPY} && do {
 	    sql_parser_debug "State = START_COPY" ;
 	  START_COPY_STATE_SWITCH: {
-	      ($l =~ m/\s*copy\s+\"[\w_]+\"\s+from\s+stdin\s*;/i) && do {
-		  ($copy_table, $copy_rest) = ($l =~ /\s*copy\s+\"([\w_]+)\"\s+from\s+stdin\s*;(.*)/i) ;
+	      ($l =~ m/\s*copy\s+\"[\w_]+\"\s*(\([\w, "]+\))?\s*from\s+stdin\s*;/i) && do {
+		  sql_parser_debug "HERE1";
+		  ($copy_table, $copy_field_list, $copy_rest) = ($l =~ /\s*copy\s+\"([\w_]+)\"\s*(\([\w, "]+\))?\s*from\s+stdin\s*;(.*)/i) ;
+		  $copy_field_list =~ s/^\s+//;
+		  $copy_field_list =~ s/\s+$//;
+		  $copy_field_list = ' '.$copy_field_list unless $copy_field_list eq '';
 		  $l = <F> ;
 		  unless ($l) {
 		      sql_parser_debug "Detected end of file within a COPY statement." ;
@@ -569,8 +574,12 @@ sub parse_sql_file ( $ ) {
 		  last START_COPY_STATE_SWITCH ;
 	      } ;
 
-	      ($l =~ m/\s*copy\s+[\w_]+\s+from\s+stdin\s*;/i) && do {
-		  ($copy_table, $copy_rest) = ($l =~ /\s*copy\s+([\w_]+)\s+from\s+stdin\s*;(.*)/i) ;
+	      ($l =~ m/\s*copy\s+[\w_]+\s*(\([\w, "]+\))?\s*from\s+stdin\s*;/i) && do {
+		  sql_parser_debug "HERE2";
+		  ($copy_table, $copy_field_list, $copy_rest) = ($l =~ /\s*copy\s+([\w_]+)\s*(\([\w, "]+\))?\s*from\s+stdin\s*;(.*)/i) ;
+		  $copy_field_list =~ s/^\s+//;
+		  $copy_field_list =~ s/\s+$//;
+		  $copy_field_list = ' '.$copy_field_list unless $copy_field_list eq '';		      
 		  $l = <F> ;
 		  unless ($l) {
 		      sql_parser_debug "Detected end of file within a COPY statement." ;
@@ -584,6 +593,7 @@ sub parse_sql_file ( $ ) {
 	      } ;
 	      
 	      ( 1 ) && do {
+		  sql_parser_debug "HERE3";
 		  sql_parser_debug "Unknown event in START_COPY state." ;
 		  $state = $states{ERROR} ;
 		  last START_COPY_STATE_SWITCH ;
@@ -615,7 +625,7 @@ sub parse_sql_file ( $ ) {
 		      }
 		      push @copy_data, $copy_field ;
 		  }
-		  $sql = "INSERT INTO \"$copy_table\" VALUES (" ;
+		  $sql = "INSERT INTO \"$copy_table\"$copy_field_list VALUES (" ;
 		  $sql .= join (", ", @copy_data) ;
 		  $sql .= ")" ;
 		  push @sql_list, $sql ;
