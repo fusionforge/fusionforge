@@ -492,7 +492,7 @@ function system_cleanup() {
 	}
 }
 
-function db_drop_foo_if_exists ($name, $t, $type) {
+function db_check_foo_exists ($name, $t) {
 	$res = db_query_params ('SELECT COUNT(*) FROM pg_class WHERE relname=$1 and relkind=$2',
 				array ($name, $t));
 	if (!$res) {
@@ -500,11 +500,14 @@ function db_drop_foo_if_exists ($name, $t, $type) {
 		return false;
 	}
 	$count = db_result($res,0,0);
-	if ($count == 0) {
+	return ($count == 0)
+}
+
+function db_drop_table_if_exists ($tn) {
+	if (!db_check_foo_exists($tn, 'r')) {
 		return true;
 	}
-
-	$sql = "DROP $type $name";
+	$sql = "DROP TABLE $name";
 	$res = db_query_params ($sql, array ());
 	if (!$res) {
 		echo db_error();
@@ -513,20 +516,43 @@ function db_drop_foo_if_exists ($name, $t, $type) {
 	return true;
 }
 
-function db_drop_table_if_exists ($tn) {
-	return db_drop_foo_if_exists($tn, 'r', 'TABLE');
-}
-
 function db_drop_sequence_if_exists ($tn) {
-	return db_drop_foo_if_exists($tn, 'S', 'SEQUENCE');
+	if (!db_check_foo_exists($tn, 'S')) {
+		return true;
+	}
+	$sql = "DROP SEQUENCE $name";
+	$res = db_query_params ($sql, array ());
+	if (!$res) {
+		echo db_error();
+		return false;
+	}
+	return true;
 }
 
 function db_drop_view_if_exists ($tn) {
-	return db_drop_foo_if_exists($tn, 'v', 'VIEW');
+	if (!db_check_foo_exists($tn, 'v')) {
+		return true;
+	}
+	$sql = "DROP VIEW $name";
+	$res = db_query_params ($sql, array ());
+	if (!$res) {
+		echo db_error();
+		return false;
+	}
+	return true;
 }
 
 function db_drop_index_if_exists ($tn) {
-	return db_drop_foo_if_exists($tn, 'i', 'INDEX');
+	if (!db_check_foo_exists($tn, 'i')) {
+		return true;
+	}
+	$sql = "DROP INDEX $name";
+	$res = db_query_params ($sql, array ());
+	if (!$res) {
+		echo db_error();
+		return false;
+	}
+	return true;
 }
 
 function db_bump_sequence_to ($seqname, $target) {
