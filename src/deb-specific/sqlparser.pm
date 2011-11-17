@@ -557,7 +557,6 @@ sub parse_sql_file ( $ ) {
 	    sql_parser_debug "State = START_COPY" ;
 	  START_COPY_STATE_SWITCH: {
 	      ($l =~ m/\s*copy\s+\"[\w_]+\"\s*(\([\w, "]+\))?\s*from\s+stdin\s*;/i) && do {
-		  sql_parser_debug "HERE1";
 		  ($copy_table, $copy_field_list, undef, $copy_rest) = ($l =~ /\s*copy\s+\"([\w_]+)\"\s*((\([\w, "]+\))?)\s*from\s+stdin\s*;(.*)/i) ;
 		  $copy_field_list =~ s/^\s+//;
 		  $copy_field_list =~ s/\s+$//;
@@ -575,7 +574,6 @@ sub parse_sql_file ( $ ) {
 	      } ;
 
 	      ($l =~ m/\s*copy\s+[\w_]+\s*(\([\w, "]+\))?\s*from\s+stdin\s*;/i) && do {
-		  sql_parser_debug "HERE2";
 		  ($copy_table, $copy_field_list, undef, $copy_rest) = ($l =~ /\s*copy\s+([\w_]+)\s*((\([\w, "]+\))?)\s*from\s+stdin\s*;(.*)/i) ;
 		  $copy_field_list =~ s/^\s+//;
 		  $copy_field_list =~ s/\s+$//;
@@ -593,7 +591,6 @@ sub parse_sql_file ( $ ) {
 	      } ;
 	      
 	      ( 1 ) && do {
-		  sql_parser_debug "HERE3";
 		  sql_parser_debug "Unknown event in START_COPY state." ;
 		  $state = $states{ERROR} ;
 		  last START_COPY_STATE_SWITCH ;
