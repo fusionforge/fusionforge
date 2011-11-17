@@ -44,6 +44,7 @@ ALTER TABLE project_task_external_order DROP CONSTRAINT "$1";
 ALTER TABLE project_task_external_order ADD CONSTRAINT project_task_external_order_project_task_id_fkey FOREIGN KEY (project_task_id) REFERENCES project_task(project_task_id) MATCH FULL ON DELETE CASCADE;
 
 ALTER TABLE project_weekly_metric ADD CONSTRAINT project_weekly_metric_pkey PRIMARY KEY (ranking);
+DROP SEQUENCE project_metric_wee_ranking1_seq;
 
 ALTER TABLE role DROP CONSTRAINT "$1";
 ALTER TABLE role ADD CONSTRAINT role_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
