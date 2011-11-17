@@ -110,4 +110,4 @@ DROP TABLE IF EXISTS project_metric_tmp1;
 ALTER TABLE user_preferences ADD COLUMN set_date_new integer DEFAULT 0 NOT NULL;
 UPDATE user_preferences SET set_date_new = set_date;
 ALTER TABLE user_preferences DROP COLUMN set_date;
-ALTER TABLE user_preferences ALTER COLUMN set_date_new RENAME TO set_date;
+ALTER TABLE user_preferences RENAME COLUMN set_date_new TO set_date;
