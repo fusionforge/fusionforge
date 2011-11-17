@@ -492,27 +492,53 @@ function system_cleanup() {
 	}
 }
 
-function db_drop_table_if_exists ($tn) {
-	$rel = db_query_params ('SELECT COUNT(*) FROM pg_class WHERE relname=$1 and relkind=$2',
-				array ($tn, 'r'));
-	echo db_error();
-	$count = db_result($rel,0,0);
-	if ($count != 0) {
-		$sql = "DROP TABLE $tn";
-		$rel = db_query_params ($sql, array ());
+function db_drop_foo_if_exists ($name, $t, $type) {
+	$res = db_query_params ('SELECT COUNT(*) FROM pg_class WHERE relname=$1 and relkind=$2',
+				array ($name, $t));
+	if (!$res) {
 		echo db_error();
+		return false;
 	}
+	$count = db_result($res,0,0);
+	if ($count == 0) {
+		return true;
+	}
+
+	$sql = "DROP $type $name";
+	$res = db_query_params ($sql, array ());
+	if (!$res) {
+		echo db_error();
+		return false;
+	}
+	return true;
+}
+
+function db_drop_table_if_exists ($tn) {
+	return db_drop_foo_if_exists($tn, 'r', 'TABLE');
 }
 
 function db_drop_sequence_if_exists ($tn) {
-	$rel = db_query_params ('SELECT COUNT(*) FROM pg_class WHERE relname=$1 and relkind=$2',
-				array ($tn, 'S'));
-	echo db_error();
-	$count = db_result($rel,0,0);
-	if ($count != 0) {
-		$sql = "DROP SEQUENCE $tn";
-		$rel = db_query_params ($sql, array ());
-		echo db_error();
+	return db_drop_foo_if_exists($tn, 'S', 'SEQUENCE');
+}
+
+function db_drop_view_if_exists ($tn) {
+	return db_drop_foo_if_exists($tn, 'v', 'VIEW');
+}
+
+function db_drop_index_if_exists ($tn) {
+	return db_drop_foo_if_exists($tn, 'i', 'INDEX');
+}
+
+function db_bump_sequence_to ($seqname, $target) {
+	$current = -1;
+	while ($current < $target) {
+		$res = db_query_params('SELECT nextval($1)',
+				       array($seqname));
+		if (!$res || db_numrows($res) != 1) {
+			echo db_error();
+			return false;
+		}
+		$current = db_result($res,0,0);
 	}
 }
 
