@@ -37,7 +37,6 @@ ALTER TABLE users ALTER COLUMN unix_box SET DEFAULT 'shell'::character varying;
 
 DROP INDEX plugins_plugin_name_key;
 ALTER TABLE plugins ADD CONSTRAINT plugins_plugin_name_key UNIQUE (plugin_name);
-ALTER TABLE project_category ADD CONSTRAINT project_category_pkey PRIMARY KEY (category_id);
 ALTER TABLE project_tags ADD CONSTRAINT project_tags_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL;
 ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f FOREIGN KEY (group_project_id) REFERENCES project_group_list(group_project_id) MATCH FULL;
 
@@ -50,7 +49,6 @@ DROP SEQUENCE project_metric_wee_ranking1_seq;
 ALTER TABLE role DROP CONSTRAINT "$1";
 ALTER TABLE role ADD CONSTRAINT role_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
 
-ALTER TABLE ONLY themes ADD CONSTRAINT themes_pkey PRIMARY KEY (theme_id);
 ALTER TABLE project_messages ALTER COLUMN project_message_id SET DEFAULT nextval('project_messages_project_message_id_seq'::regclass);
 ALTER SEQUENCE project_messages_project_message_id_seq OWNED BY project_messages.project_message_id;
 
@@ -113,5 +111,12 @@ UPDATE user_preferences SET set_date_new = set_date;
 ALTER TABLE user_preferences DROP COLUMN set_date;
 ALTER TABLE user_preferences RENAME COLUMN set_date_new TO set_date;
 
+ALTER TABLE project_task DROP CONSTRAINT project_task_category_id_fkey;
 DROP INDEX project_categor_category_id_key;
+ALTER TABLE project_category ADD CONSTRAINT project_category_pkey PRIMARY KEY (category_id);
+ALTER TABLE project_task ADD CONSTRAINT project_task_category_id_fkey FOREIGN KEY (category_id) REFERENCES project_category(category_id);
+
+ALTER TABLE users DROP CONSTRAINT users_themeid;
 DROP INDEX themes_theme_id_key;
+ALTER TABLE themes ADD CONSTRAINT themes_pkey PRIMARY KEY (theme_id);
+ALTER TABLE users ADD CONSTRAINT users_themeid FOREIGN KEY (theme_id) REFERENCES themes(theme_id) MATCH FULL;
