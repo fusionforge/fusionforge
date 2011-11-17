@@ -1968,14 +1968,16 @@ eval {
     &update_with_sql("20110824-plugin-projects-hierarchy-rename","5.1.51-8");
     &update_with_sql("20111002-docman-doc_groups-createdate-updatedate","5.1.51-9");
 
+    &update_with_sql("schema-convergence-deb-1","5.1.51-10");
+
     $version = &get_db_version ;
-    $target = "5.1.51-10" ;
+    $target = "5.1.51-11" ;
     if (&is_lesser ($version, $target)) {
         &debug ("Creating database_startpoint and database_changes") ;
 
         @reqlist = ( "CREATE TABLE database_changes (filename text)",
 		     "CREATE TABLE database_startpoint (db_version character varying(10), db_start_date integer)",
-		     "INSERT INTO database_startpoint (db_version, db_start_date) VALUES ('5.1.51', 20111009)",
+		     "INSERT INTO database_startpoint (db_version, db_start_date) VALUES ('5.1.51', 20111017)",
                    ) ;
         foreach my $s (@reqlist) {
             $query = $s ;

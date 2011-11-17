@@ -62,6 +62,7 @@ db/20090507-browse_list.sql		usr/share/@OLDPACKAGE@/db/
 db/2010*.sql				usr/share/@OLDPACKAGE@/db/
 db/2011*.sql				usr/share/@OLDPACKAGE@/db/
 db/FTI*.sql				usr/share/@OLDPACKAGE@/db/
+db/schema-convergence*.sql		usr/share/@OLDPACKAGE@/db/
 #
 db/upgrade-db.php			usr/share/@OLDPACKAGE@/bin/
 utils/inject-users.php usr/share/@OLDPACKAGE@/bin/
