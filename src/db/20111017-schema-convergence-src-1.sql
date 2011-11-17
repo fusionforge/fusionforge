@@ -11,5 +11,3 @@ ALTER TABLE ONLY forum_attachment ADD CONSTRAINT forum_attachment_userid_fkey FO
 
 ALTER TABLE forum_attachment DROP CONSTRAINT "$1";
 ALTER TABLE forum_attachment DROP CONSTRAINT "$2";
-
-ALTER TABLE ONLY forum_attachment_type ADD CONSTRAINT forum_attachment_type_pkey PRIMARY KEY (extension);
