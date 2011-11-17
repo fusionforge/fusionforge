@@ -173,3 +173,9 @@ CREATE TYPE project_task_results AS ( project_task_id integer, summary text, per
 CREATE TYPE skills_data_results AS ( skills_data_id integer, type integer, title text, start integer, finish integer, keywords text );
 CREATE TYPE trackers_results AS ( artifact_id integer, group_artifact_id integer, summary text, open_date integer, realname character varying(32), name text );
 CREATE TYPE users_results AS ( user_name text, user_id integer, realname text );
+
+DELETE FROM project_messages_idx;
+
+INSERT INTO project_messages_idx (id, project_task_id, vectors)
+SELECT project_message_id, project_task_id, to_tsvector(coalesce(body,'')) AS vectors
+FROM project_messages ORDER BY project_message_id;
