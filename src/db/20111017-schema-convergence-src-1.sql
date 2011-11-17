@@ -148,3 +148,28 @@ CREATE INDEX news_bytes_idxfti ON news_bytes_idx USING gist (vectors);
 CREATE INDEX project_task_idxfti ON project_task_idx USING gist (vectors);
 CREATE INDEX skills_data_idxfti ON skills_data_idx USING gist (vectors);
 CREATE INDEX users_idxfti ON users_idx USING gist (vectors);
+
+CREATE TRIGGER artifact_ts_update AFTER INSERT OR DELETE OR UPDATE ON artifact FOR EACH ROW EXECUTE PROCEDURE update_vectors('artifact');
+CREATE TRIGGER artifactmessage_ts_update AFTER INSERT OR DELETE OR UPDATE ON artifact_message FOR EACH ROW EXECUTE PROCEDURE update_vectors('artifact_message');
+CREATE TRIGGER doc_data_ts_update AFTER INSERT OR DELETE OR UPDATE ON doc_data FOR EACH ROW EXECUTE PROCEDURE update_vectors('doc_data');
+CREATE TRIGGER forum_update AFTER INSERT OR DELETE OR UPDATE ON forum FOR EACH ROW EXECUTE PROCEDURE update_vectors('forum');
+CREATE TRIGGER frs_file_ts_update AFTER INSERT OR DELETE OR UPDATE ON frs_file FOR EACH ROW EXECUTE PROCEDURE update_vectors('frs_file');
+CREATE TRIGGER frs_release_ts_update AFTER INSERT OR DELETE OR UPDATE ON frs_release FOR EACH ROW EXECUTE PROCEDURE update_vectors('frs_release');
+CREATE TRIGGER groups_ts_update AFTER INSERT OR DELETE OR UPDATE ON groups FOR EACH ROW EXECUTE PROCEDURE update_vectors('groups');
+CREATE TRIGGER news_bytes_ts_update AFTER INSERT OR DELETE OR UPDATE ON news_bytes FOR EACH ROW EXECUTE PROCEDURE update_vectors('news_bytes');
+CREATE TRIGGER project_task_ts_update AFTER INSERT OR DELETE OR UPDATE ON project_task FOR EACH ROW EXECUTE PROCEDURE update_vectors('project_task');
+CREATE TRIGGER skills_data_ts_update AFTER INSERT OR DELETE OR UPDATE ON skills_data FOR EACH ROW EXECUTE PROCEDURE update_vectors('skills_data');
+CREATE TRIGGER users_ts_update AFTER INSERT OR DELETE OR UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE update_vectors('users');
+
+CREATE TYPE artifact_results AS ( group_artifact_id integer, artifact_id integer, summary text, open_date integer, realname character varying(32));
+CREATE TYPE doc_data_results AS ( docid integer, title text, description text, groupname character varying(255));
+CREATE TYPE export_groups_results AS ( group_name text, unix_group_name text, type_id integer, group_id integer, short_description text, license integer, register_time integer );
+CREATE TYPE forum_results AS ( msg_id integer, subject text, post_date integer, realname character varying(32));
+CREATE TYPE forums_results AS ( msg_id integer, subject text, post_date integer, realname character varying(32), forum_name text );
+CREATE TYPE frs_results AS ( package_name text, release_name text, release_date integer, release_id integer, realname character varying(32));
+CREATE TYPE groups_results AS ( group_name text, unix_group_name text, type_id integer, group_id integer, short_description text );
+CREATE TYPE news_bytes_results AS ( summary text, post_date integer, forum_id integer, realname text );
+CREATE TYPE project_task_results AS ( project_task_id integer, summary text, percent_complete integer, start_date integer, end_date integer, realname text, project_name text, group_project_id integer );
+CREATE TYPE skills_data_results AS ( skills_data_id integer, type integer, title text, start integer, finish integer, keywords text );
+CREATE TYPE trackers_results AS ( artifact_id integer, group_artifact_id integer, summary text, open_date integer, realname character varying(32), name text );
+CREATE TYPE users_results AS ( user_name text, user_id integer, realname text );
