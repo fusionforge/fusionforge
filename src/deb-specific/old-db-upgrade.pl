@@ -1989,8 +1989,8 @@ eval {
 		"CREATE INDEX plugin_cvstracker_group_artifact_id ON plugin_cvstracker_data_artifact USING btree (group_artifact_id)",
 		
 		"ALTER TABLE ONLY plugin_cvstracker_data_artifact ADD CONSTRAINT plugin_cvstracker_artifact_pkey PRIMARY KEY (id)",
-		"ALTER TABLE ONLY plugin_cvstracker_data_master ADD CONSTRAINT "$1" FOREIGN KEY (holder_id) REFERENCES plugin_cvstracker_data_artifact(id)",
-		"ALTER TABLE ONLY plugin_cvstracker_data_master ADD CONSTRAINT "$2" FOREIGN KEY (author) REFERENCES users(user_name)",
+		'ALTER TABLE ONLY plugin_cvstracker_data_master ADD CONSTRAINT "$1" FOREIGN KEY (holder_id) REFERENCES plugin_cvstracker_data_artifact(id)',
+		'ALTER TABLE ONLY plugin_cvstracker_data_master ADD CONSTRAINT "$2" FOREIGN KEY (author) REFERENCES users(user_name)',
 		"ALTER TABLE ONLY plugin_cvstracker_data_master ADD CONSTRAINT plugin_cvstracker_master_pkey PRIMARY KEY (id)",
 		) ;
 	    foreach my $s (@reqlist) {
