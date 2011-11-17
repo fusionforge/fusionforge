@@ -6,4 +6,5 @@ use-jquery-from-distro.patch
 use-simplepie-from-distro.patch
 use-yui-from-distro
 upgrade-db-location
+upgrade-db-noninteractive
 production-environment.patch
