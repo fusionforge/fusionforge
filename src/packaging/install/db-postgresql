@@ -27,7 +27,7 @@ cronjobs/get_news_notapproved.pl	usr/share/@OLDPACKAGE@/cronjobs/
 #
 deb-specific/stats_projects_logparse.pl usr/share/@OLDPACKAGE@/bin/
 deb-specific/install-db.sh              usr/share/@OLDPACKAGE@/bin/
-deb-specific/db-upgrade.pl              usr/share/@OLDPACKAGE@/bin/
+deb-specific/old-db-upgrade.pl              usr/share/@OLDPACKAGE@/bin/
 deb-specific/sqlparser.pm               usr/share/@OLDPACKAGE@/lib/
 deb-specific/sqlhelper.pm               usr/share/@OLDPACKAGE@/lib/
 deb-specific/sf-add-skill               usr/share/@OLDPACKAGE@/bin/
@@ -63,6 +63,7 @@ db/2010*.sql				usr/share/@OLDPACKAGE@/db/
 db/2011*.sql				usr/share/@OLDPACKAGE@/db/
 db/FTI*.sql				usr/share/@OLDPACKAGE@/db/
 #
+db/upgrade-db.php			usr/share/@OLDPACKAGE@/bin/
 utils/inject-users.php usr/share/@OLDPACKAGE@/bin/
 utils/inject-groups.php usr/share/@OLDPACKAGE@/bin/
 utils/inject-files.php usr/share/@OLDPACKAGE@/bin/

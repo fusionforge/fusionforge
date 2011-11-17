@@ -270,12 +270,14 @@ EOF
 	fi
 
 	# Install/upgrade the database contents (tables and data)
-	/usr/share/gforge/bin/db-upgrade.pl 2>&1 | grep -v ^NOTICE: | grep -v ^DETAIL: | grep -v ^WARNING: \
+	/usr/share/gforge/bin/old-db-upgrade.pl 2>&1 | grep -v ^NOTICE: | grep -v ^DETAIL: | grep -v ^WARNING: \
 	    && p=${PIPESTATUS[0]} \
 	    || p=${PIPESTATUS[0]}
 	if [ $p != 0 ] ; then
 	    exit $p
 	fi
+
+	/usr/share/gforge/bin/upgrade-db.php
 
 	if [ "$need_admin_pw" = "true" ] ; then
 	    exit 100
