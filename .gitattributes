@@ -4744,6 +4744,7 @@ src/translations/th.po -text
 src/translations/zh_CN.po -text
 src/translations/zh_TW.po -text
 src/utils/apply-coding-style.sh -text
+src/utils/compare-sql-dumps.sh -text
 src/utils/createplugin.sh -text svneol=unset#text/x-sh
 src/utils/cvs1/cvscreate.sh svneol=native#text/x-sh
 src/utils/cvs1/cvstar_genlist.pl svneol=native#text/x-perl
