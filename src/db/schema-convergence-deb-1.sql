@@ -46,3 +46,8 @@ ALTER TABLE user_metric0 ALTER COLUMN avg_rating SET DEFAULT 0::double precision
 ALTER TABLE user_metric0 ALTER COLUMN importance_factor SET DEFAULT 0::double precision;
 ALTER TABLE user_metric0 ALTER COLUMN metric SET DEFAULT 0::double precision;
 ALTER TABLE user_metric0 ALTER COLUMN percentile SET DEFAULT 0::double precision;
+
+DROP INDEX group_unix_uniq;
+CREATE UNIQUE INDEX group_unix_uniq ON groups USING btree (unix_group_name);
+
+CREATE UNIQUE INDEX project_messa_project_messa_key ON project_messages USING btree (project_message_id);

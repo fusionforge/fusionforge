@@ -106,8 +106,12 @@ ALTER TABLE user_preferences DROP COLUMN dead1;
 ALTER TABLE user_group ALTER COLUMN artifact_flags SET DEFAULT 0;
 
 DROP TABLE IF EXISTS project_metric_tmp1;
+DROP SEQUENCE IF EXISTS project_metric_tmp1_pk_seq;
 
 ALTER TABLE user_preferences ADD COLUMN set_date_new integer DEFAULT 0 NOT NULL;
 UPDATE user_preferences SET set_date_new = set_date;
 ALTER TABLE user_preferences DROP COLUMN set_date;
 ALTER TABLE user_preferences RENAME COLUMN set_date_new TO set_date;
+
+DROP INDEX project_categor_category_id_key;
+DROP INDEX themes_theme_id_key;
