@@ -28,6 +28,8 @@ foreach (parse_sql_file($file) as $q) {
 	$q = trim($q);
 	$q = preg_replace('/\s+/', ' ', $q);
 
+	if (preg_match("/^INSERT INTO /", $q)) continue ;
+
 	if (preg_match('/^COMMENT/', $q)) continue;
 	if (preg_match('/^SET/', $q)) continue;
 	if (preg_match('/^\\\connect/', $q)) continue;
