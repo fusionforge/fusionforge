@@ -441,52 +441,6 @@ function &util_result_column_to_array($result, $col=0) {
 }
 
 /**
- * util_wrap_find_space() - Find the first space in a string
- *
- * @param		string	The string in which to find the space (must be UTF8!)
- * @param		int		The number of characters to wrap - Default is 80
- * @returns The position of the first space
- *
- */
-function util_wrap_find_space($string,$wrap) {
-	//echo"\n";
-	$start=$wrap-5;
-	$try=1;
-	$found=false;
-
-	while (!$found) {
-		//find the first space starting at $start
-		$pos=@strpos($string,' ',$start);
-
-		//if that space is too far over, go back and start more to the left
-		if (($pos > ($wrap+5)) || !$pos) {
-			$try++;
-			$start=($wrap-($try*5));
-			//if we've gotten so far left , just truncate the line
-			if ($start<=20) {
-				while ($wrap >= 1) {
-					$code = ord(substr($string,$wrap,1));
-					if ($code <= 0x7F ||
-					    $code >= 0xC0) {
-						//Here is single byte character
-						//or head of multi byte character
-						return $wrap;
-					}
-					//Do not break multi byte character
-					$wrap--;
-				}
-				return $wrap;
-			}
-			$found=false;
-		} else {
-			$found=true;
-		}
-	}
-
-	return $pos;
-}
-
-/**
  * util_line_wrap() - Automatically linewrap text
  *
  * @param		string	The text to wrap
@@ -496,29 +450,7 @@ function util_wrap_find_space($string,$wrap) {
  *
  */
 function util_line_wrap ($text, $wrap = 80, $break = "\n") {
-	$paras = explode("\n", $text);
-
-	$result = array();
-	$i = 0;
-	while ($i < count($paras)) {
-		if (strlen($paras[$i]) <= $wrap) {
-			$result[] = $paras[$i];
-			$i++;
-		} else {
-			$pos=util_wrap_find_space($paras[$i],$wrap);
-
-			$result[] = substr($paras[$i], 0, $pos);
-
-			$new = trim(substr($paras[$i], $pos, strlen($paras[$i]) - $pos));
-			if ($new != '') {
-				$paras[$i] = $new;
-				$pos=util_wrap_find_space($paras[$i],$wrap);
-			} else {
-				$i++;
-			}
-		}
-	}
-	return implode($break, $result);
+	return wordwrap($text, $wrap, $break, false);
 }
 
 /**
