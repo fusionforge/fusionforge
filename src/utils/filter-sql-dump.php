@@ -42,13 +42,19 @@ foreach (parse_sql_file($file) as $q) {
 				       'groups',
 				       'mail_group_list',
 				       'nss_groups',
+				       'plugins',
 				       'pfo_role',
+				       'pfo_user_role',
 				       'pfo_role_setting',
+				       'project_task',
 				       'role',
 				       'role_project_refs',
 				       'role_setting',
 				       'user_group',
 				       'users',
+				       'user_session',
+				       'themes',
+				       '[a-z]*_idx',
 		);
 	foreach ($ignored_insert_tables as $i) {
 		if (preg_match("/INSERT INTO \"$i\" /", $q)) continue 2;
