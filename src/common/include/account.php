@@ -40,11 +40,19 @@ function account_pwvalid($pw) {
  * account_namevalid() - Validates a login username
  *
  * @param		string	The username string
+ * @param		bool	Check for an unix username
  * @returns		true on success/false on failure
  *
  */
-function account_namevalid($name) {
+function account_namevalid($name, $unix=0) {
 
+	if (!$unix) {
+		// If accounts comes from ldap and no shell access, then disable controls.
+		$pluginManager = plugin_manager_get_object();
+		if (!forge_get_config('use_shell') && $pluginManager->PluginIsInstalled('authldap')) {
+			return 1;
+		}
+	}
 
 	// no spaces
 	if (strrpos($name,' ') > 0) {
@@ -62,7 +70,7 @@ function account_namevalid($name) {
 		return 0;
 	}
 
-	if (!preg_match('/^[a-z][-a-z0-9_]+$/', $name)) {
+	if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+$/', $name)) {
 		$GLOBALS['register_error'] = _('Illegal character in name.');
 		return 0;
 	}
@@ -101,7 +109,7 @@ function account_namevalid($name) {
  *
  */
 function account_groupnamevalid($name) {
-	if (!account_namevalid($name)) return 0;
+	if (!account_namevalid($name, 1)) return 0;
 
 	// illegal names
 	$regExpReservedGroupNames = "^(www[0-9]?|cvs[0-9]?|shell[0-9]?|ftp[0-9]?|"
