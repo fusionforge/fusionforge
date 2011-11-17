@@ -58,7 +58,8 @@ ALTER SEQUENCE supported_languages_pk_seq MAXVALUE 2147483647;
 ALTER TABLE project_category ALTER COLUMN category_id SET DEFAULT nextval('project_categor_category_id_seq'::regclass);
 
 CREATE VIEW mta_users AS SELECT users.user_name AS login, users.email FROM users WHERE (users.status = 'A'::bpchar);
-CREATE OR REPLACE VIEW nss_shadow AS SELECT users.user_name AS login, users.unix_pw AS passwd, 'n'::character(1) AS expired, 'n'::character(1) AS pwchange FROM users WHERE (users.unix_status = 'A'::bpchar);
+DROP VIEW nss_shadow;
+CREATE VIEW nss_shadow AS SELECT users.user_name AS login, users.unix_pw AS passwd, 'n'::character(1) AS expired, 'n'::character(1) AS pwchange FROM users WHERE (users.unix_status = 'A'::bpchar);
 
 INSERT INTO "project_status" (status_id, status_name) VALUES ('3', 'Deleted');
 INSERT INTO "supported_languages" (language_id, name, filename, classname, language_code) VALUES ('13', 'Esperanto', 'Esperanto.class', 'Esperanto', 'eo ');
