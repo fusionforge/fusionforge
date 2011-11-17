@@ -19,7 +19,7 @@ $version = '';
 // Check if table 'database_startpoint' exists
 if (!db_check_table_exists('database_startpoint')) {
 	show("ERROR: table 'database_startpoint' does not exist.\nRun startpoint.php first.\n");
-	exit();
+	exit(1);
 }
 
 // Check if table 'database_startpoint' has proper values
@@ -28,10 +28,10 @@ $res = db_query_params('SELECT * FROM database_startpoint',
 
 if (!$res) { // db error
 	show("DB-ERROR-3: ".db_error()."\n");
-	exit();
+	exit(1);
 } else if (db_numrows($res) == 0) { // table 'database_startpoint' is empty
 	show("ERROR: table 'database_startpoint' is empty.\nRun startpoint.php first.\n");
-	exit();
+	exit(1);
 } else { // get the start date from the db
 	$date = (int) db_result($res, 0, 'db_start_date');
 	$version = db_result($res, 0, 'db_version');
@@ -39,7 +39,7 @@ if (!$res) { // db error
 
 if (!apply_fixes($version)) {
 	show("ERROR applying fixes to version $version!\n");
-	exit();
+	exit(1);
 }
 
 // Upgrade main database if no argument or if all)
@@ -52,7 +52,7 @@ if ($argc == 1 || $argv[1] == 'all') {
 			if (!$res) {
 				// error
 				show("ERROR-2: ".db_error()."\n");
-				exit();
+				exit(1);
 			} else if (db_numrows($res) == 0) {
 				show("Running script: {$script['filename']}\n");
 				$result = run_script($script);
@@ -62,11 +62,11 @@ if ($argc == 1 || $argv[1] == 'all') {
 					if (!$res)
 					{
 						show("ERROR-3: ".db_error()."\n");
-						exit();
+						exit(1);
 					}
 				} else {
 					// error
-					exit();
+					exit(1);
 				}
 			} else {
 	//			show("Skipping script: {$script['filename']}\n");
@@ -265,7 +265,7 @@ function apply_fixes($version) {
 			show("Applying fixes for version 3.0pre5\n");
 			if (!run_sql_script('fix-gforge3.0pre5.sql')) {
 				show("Error applying fixes for version 3.0pre5\n");
-				//exit();
+				//exit(1);
 			}
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('3.0pre5fixes')";
 		}
