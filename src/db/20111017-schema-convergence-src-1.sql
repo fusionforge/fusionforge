@@ -13,7 +13,7 @@ ALTER TABLE forum_attachment DROP CONSTRAINT "$1";
 ALTER TABLE forum_attachment DROP CONSTRAINT "$2";
 
 ALTER SEQUENCE supported_langu_language_id_seq RENAME TO supported_languages_pk_seq;
-ALTER TABLE supported_languages ALTER COLUMN language_id SET DEFAULT nextval(('supported_languages_pk_seq'::text)::regclass;)
+ALTER TABLE supported_languages ALTER COLUMN language_id SET DEFAULT nextval(('supported_languages_pk_seq'::text)::regclass);
 ALTER SEQUENCE group_cvs_history_id_seq RENAME TO group_cvs_history_pk_seq;
 ALTER TABLE group_cvs_history ALTER COLUMN id SET DEFAULT nextval(('group_cvs_history_pk_seq'::text)::regclass);
 ALTER TABLE group_cvs_history ADD CONSTRAINT group_cvs_history_pkey PRIMARY KEY (id);
