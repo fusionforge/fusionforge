@@ -491,15 +491,11 @@ function util_make_links($data='') {
  *
  */
 function show_priority_colors_key() {
-	echo '<p /><strong> '._('Priority Colors').':</strong><br />
-
-		<table><tr>';
-
+	echo '<p><strong> '._('Priority Colors')._(':').'</strong>';
 	for ($i=1; $i<6; $i++) {
-		echo '
-			<td class="priority'.$i.'">'.$i.'</td>';
+		echo ' <span class="priority'.$i.'">'.$i.'</span>';
 	}
-	echo '</tr></table>';
+	echo '</p>';
 }
 
 /**
