@@ -22,3 +22,8 @@ ALTER TABLE forum_attachment ALTER COLUMN mimetype SET NOT NULL;
 ALTER TABLE forum_pending_attachment ALTER COLUMN mimetype SET NOT NULL;
 
 ALTER TABLE project_category ALTER COLUMN category_id SET DEFAULT nextval('project_categor_category_id_seq'::regclass);
+ALTER TABLE activity_log ALTER COLUMN ver SET DEFAULT 0::double precision;
+
+ALTER TABLE users DROP COLUMN sys_state;
+ALTER TABLE groups DROP COLUMN sys_state;
+ALTER TABLE user_group DROP COLUMN sys_state;

@@ -14,6 +14,7 @@ ALTER TABLE forum_attachment DROP CONSTRAINT "$2";
 
 ALTER SEQUENCE supported_langu_language_id_seq RENAME TO supported_languages_pk_seq;
 ALTER SEQUENCE group_cvs_history_id_seq RENAME TO group_cvs_history_pk_seq;
+ALTER TABLE group_cvs_history ALTER COLUMN id SET DEFAULT nextval(('group_cvs_history_pk_seq'::text)::regclass);
 ALTER SEQUENCE project_messa_project_messa_seq RENAME TO project_messages_project_message_id_seq;
 ALTER TABLE activity_log ALTER COLUMN ver SET DEFAULT 0::double precision;
 ALTER TABLE artifact_extra_field_data ALTER COLUMN data_id SET DEFAULT nextval('artifact_extra_field_data_data_id_seq'::regclass);
@@ -28,6 +29,7 @@ ALTER TABLE group_join_request DROP CONSTRAINT "$2";
 ALTER TABLE group_join_request ADD CONSTRAINT group_join_request_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
 ALTER TABLE group_join_request ADD CONSTRAINT group_join_request_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
 ALTER TABLE groups ADD CONSTRAINT groups_license FOREIGN KEY (license) REFERENCES licenses(license_id) MATCH FULL;
+ALTER TABLE groups ALTER COLUMN unix_box SET DEFAULT 'shell'::character varying;
 
 DROP INDEX plugins_plugin_name_key;
 ALTER TABLE plugins ADD CONSTRAINT plugins_plugin_name_key UNIQUE (plugin_name);
@@ -83,3 +85,6 @@ INSERT INTO "people_skill" (skill_id, name) VALUES ('6', 'Perl');
 INSERT INTO "people_skill" (skill_id, name) VALUES ('7', 'PHP');
 INSERT INTO "people_skill" (skill_id, name) VALUES ('8', 'Python');
 INSERT INTO "people_skill" (skill_id, name) VALUES ('9', 'SQL');
+
+ALTER TABLE frs_dlstats_filetotal_agg ALTER COLUMN file_id SET DEFAULT 0;
+ALTER TABLE frs_dlstats_filetotal_agg ALTER COLUMN downloads SET DEFAULT 0;
