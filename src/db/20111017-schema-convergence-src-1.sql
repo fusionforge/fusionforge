@@ -54,6 +54,7 @@ ALTER SEQUENCE trove_treesum_trove_treesum_seq RENAME TO trove_treesums_pk_seq;
 
 ALTER SEQUENCE group_cvs_history_pk_seq MAXVALUE 2147483647;
 ALTER SEQUENCE supported_languages_pk_seq MAXVALUE 2147483647;
+ALTER SEQUENCE themes_pk_seq MAXVALUE 2147483647;
 
 ALTER TABLE project_category ALTER COLUMN category_id SET DEFAULT nextval('project_categor_category_id_seq'::regclass);
 
