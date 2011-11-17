@@ -31,7 +31,7 @@
         <para>GNU/Linux Operating System</para>
       </listitem>
       <listitem>
-        <para><ulink url="http://www.postgresql.org/">PostgreSQL</ulink> 8.3 or later (8.1, 8.2 should work)</para>
+        <para><ulink url="http://www.postgresql.org/">PostgreSQL</ulink> 8.3 or later</para>
       </listitem>
       <listitem>
         <para><ulink url="http://www.apache.org/">Apache</ulink> 2.2 or later</para>

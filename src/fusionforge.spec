@@ -47,7 +47,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Packager: Alain Peyrat <aljeux@free.fr>
 
 Requires: httpd, mod_dav_svn, mod_ssl, php, php-pgsql, php-gd, php-mbstring, mailman
-Requires: postgresql, postgresql-libs, postgresql-server, postgresql-contrib
+Requires: postgresql >= 8.3 or postgresql84, postgresql-libs, postgresql-server, postgresql-contrib
 Requires: postfix, openssh, inetd, which
 
 Requires: /bin/sh, /bin/bash
