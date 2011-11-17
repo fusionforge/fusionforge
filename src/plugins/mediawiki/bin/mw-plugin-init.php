@@ -70,7 +70,7 @@ if (!($dh = opendir($src_path))) {
 		't' => true,
 		);
 	while ($file = readdir($dh)) {
-		if (!$ignore_file[$file]) {
+		if (!isset($ignore_file[$file]) || !$ignore_file[$file]) {
 			$from = "$src_path/$file";
 			$to = "$master_path/$file";
 			mysymlink($from, $to);
@@ -108,7 +108,7 @@ $to = "$todir/fusionforge.css";
 mysymlink($from, $to);
 
 // link the rest of the files from monobook skin
-$fromdir = "$mediawiki_src_path/skins/monobook";
+$fromdir = "$src_path/skins/monobook";
 
 $dh = opendir($fromdir);
 $ignore_file = array(
@@ -116,7 +116,7 @@ $ignore_file = array(
 	'..' => true,
 	);
 while ($file = readdir($dh)) {
-	if (!$ignore_file[$file]) {
+	if (!isset($ignore_file[$file]) || !$ignore_file[$file]) {
 		$from = "$fromdir/$file";
 		$to = "$todir/$file";
 		mysymlink($from, $to);
