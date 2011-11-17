@@ -31,6 +31,27 @@ foreach (parse_sql_file($file) as $q) {
 	if (preg_match('/^COMMENT/', $q)) continue;
 	if (preg_match('/^SET/', $q)) continue;
 	if (preg_match('/^\\\connect/', $q)) continue;
+	
+	$ignored_insert_tables = array('artifact_extra_field_elements',
+				       'artifact_extra_field_list',
+				       'database_changes',
+				       'doc_groups',
+				       'database_startpoint',
+				       'group_plugin',
+				       'groups',
+				       'mail_group_list',
+				       'nss_groups',
+				       'pfo_role',
+				       'pfo_role_setting',
+				       'role',
+				       'role_project_refs',
+				       'role_setting',
+				       'user_group',
+				       'users',
+		);
+	foreach ($ignored_insert_tables as $i) {
+		if (preg_match("/INSERT INTO \"$i\" /", $q)) continue 2;
+	}
 
 	$queries[] = $q;
 }
