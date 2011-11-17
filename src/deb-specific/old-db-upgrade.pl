@@ -1973,8 +1973,44 @@ eval {
 
     &update_with_sql("schema-convergence-deb-1","5.1.51-10");
 
+
     $version = &get_db_version ;
     $target = "5.1.51-11" ;
+    if (&is_lesser ($version, $target)) {
+	if (!&table_exists ($dbh, 'plugin_cvstracker_data_artifact')) {	
+	    &debug ("Conditional part of the database schema convergence") ;
+
+	    @reqlist = (
+		"CREATE SEQUENCE plugin_cvstracker_artifact_seq START WITH 1 INCREMENT BY 1 NO MINVALUE MAXVALUE 2147483647 CACHE 1",
+		"CREATE SEQUENCE plugin_cvstracker_master_seq START WITH 1 INCREMENT BY 1 NO MINVALUE MAXVALUE 2147483647 CACHE 1",
+
+		"CREATE TABLE plugin_cvstracker_data_artifact ( id integer DEFAULT nextval(('plugin_cvstracker_artifact_seq'::text)::regclass) NOT NULL, kind integer DEFAULT 0 NOT NULL, group_artifact_id integer, project_task_id integer )",
+		"CREATE TABLE plugin_cvstracker_data_master ( id integer DEFAULT nextval(('plugin_cvstracker_master_seq'::text)::regclass) NOT NULL, holder_id integer NOT NULL, log_text text DEFAULT ''::text, file text DEFAULT ''::text NOT NULL, prev_version text DEFAULT ''::text, actual_version text DEFAULT ''::text, author text DEFAULT ''::text NOT NULL, cvs_date integer NOT NULL )",
+		
+		"CREATE INDEX plugin_cvstracker_group_artifact_id ON plugin_cvstracker_data_artifact USING btree (group_artifact_id)",
+		
+		"ALTER TABLE ONLY plugin_cvstracker_data_artifact ADD CONSTRAINT plugin_cvstracker_artifact_pkey PRIMARY KEY (id)",
+		"ALTER TABLE ONLY plugin_cvstracker_data_master ADD CONSTRAINT "$1" FOREIGN KEY (holder_id) REFERENCES plugin_cvstracker_data_artifact(id)",
+		"ALTER TABLE ONLY plugin_cvstracker_data_master ADD CONSTRAINT "$2" FOREIGN KEY (author) REFERENCES users(user_name)",
+		"ALTER TABLE ONLY plugin_cvstracker_data_master ADD CONSTRAINT plugin_cvstracker_master_pkey PRIMARY KEY (id)",
+		) ;
+	    foreach my $s (@reqlist) {
+		$query = $s ;
+		# debug $query ;
+		$sth = $dbh->prepare ($query) ;
+		$sth->execute () ;
+		$sth->finish () ;
+	    }
+	    @reqlist = () ;
+	}
+
+	&update_db_version ($target) ;
+        &debug ("...OK.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "5.1.51-12" ;
     if (&is_lesser ($version, $target)) {
         &debug ("Creating database_startpoint and database_changes") ;
 
