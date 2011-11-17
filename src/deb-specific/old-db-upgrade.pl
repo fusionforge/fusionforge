@@ -1971,8 +1971,7 @@ eval {
     &update_with_sql("20110824-plugin-projects-hierarchy-rename","5.1.51-8");
     &update_with_sql("20111002-docman-doc_groups-createdate-updatedate","5.1.51-9");
 
-    &update_with_sql("schema-convergence-deb-1","5.1.51-10");
-
+    &update_with_sql("schema-convergence-from-debian","5.1.51-10");
 
     $version = &get_db_version ;
     $target = "5.1.51-11" ;
