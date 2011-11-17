@@ -2032,7 +2032,7 @@ eval {
     }
 
     $version = &get_db_version ;
-    if ($version eq "5.1.51-11") {
+    if ($version eq "5.1.51-12") {
 	&debug ("Dropping debian_meta_data table.") ;
 	&drop_table_if_exists ($dbh, 'debian_meta_data') ;
         &debug ("...OK.") ;
