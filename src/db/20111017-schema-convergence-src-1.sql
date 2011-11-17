@@ -56,3 +56,28 @@ ALTER SEQUENCE group_cvs_history_pk_seq MAXVALUE 2147483647;
 ALTER SEQUENCE supported_languages_pk_seq MAXVALUE 2147483647;
 
 ALTER TABLE project_category ALTER COLUMN category_id SET DEFAULT nextval('project_categor_category_id_seq'::regclass);
+
+CREATE VIEW mta_users AS SELECT users.user_name AS login, users.email FROM users WHERE (users.status = 'A'::bpchar);
+CREATE OR REPLACE VIEW nss_shadow AS SELECT users.user_name AS login, users.unix_pw AS passwd, 'n'::character(1) AS expired, 'n'::character(1) AS pwchange FROM users WHERE (users.unix_status = 'A'::bpchar);
+
+INSERT INTO "project_status" (status_id, status_name) VALUES ('3', 'Deleted');
+INSERT INTO "supported_languages" (language_id, name, filename, classname, language_code) VALUES ('13', 'Esperanto', 'Esperanto.class', 'Esperanto', 'eo ');
+INSERT INTO "supported_languages" (language_id, name, filename, classname, language_code) VALUES ('15', 'Polish', 'Polish.class', 'Polish', 'pl ');
+INSERT INTO "supported_languages" (language_id, name, filename, classname, language_code) VALUES ('18', 'Portuguese', 'Portuguese.class', 'Portuguese', 'pt ');
+INSERT INTO "supported_languages" (language_id, name, filename, classname, language_code) VALUES ('19', 'Greek', 'Greek.class', 'Greek', 'el ');
+INSERT INTO "supported_languages" (language_id, name, filename, classname, language_code) VALUES ('21', 'Indonesian', 'Indonesian.class', 'Indonesian', 'id ');
+INSERT INTO "supported_languages" (language_id, name, filename, classname, language_code) VALUES ('25', 'Latin', 'Latin.class', 'Latin', 'la ');
+INSERT INTO "supported_languages" (language_id, name, filename, classname, language_code) VALUES ('3', 'Hebrew', 'Hebrew.class', 'Hebrew', 'iw ');
+INSERT INTO "supported_languages" (language_id, name, filename, classname, language_code) VALUES ('9', 'Norwegian', 'Norwegian.class', 'Norwegian', 'no ');
+
+INSERT INTO "artifact_status" (id, status_name) VALUES ('3', 'Deleted');
+
+INSERT INTO "people_skill" (skill_id, name) VALUES ('1', 'Ada');
+INSERT INTO "people_skill" (skill_id, name) VALUES ('2', 'C');
+INSERT INTO "people_skill" (skill_id, name) VALUES ('3', 'C++');
+INSERT INTO "people_skill" (skill_id, name) VALUES ('4', 'HTML');
+INSERT INTO "people_skill" (skill_id, name) VALUES ('5', 'LISP');
+INSERT INTO "people_skill" (skill_id, name) VALUES ('6', 'Perl');
+INSERT INTO "people_skill" (skill_id, name) VALUES ('7', 'PHP');
+INSERT INTO "people_skill" (skill_id, name) VALUES ('8', 'Python');
+INSERT INTO "people_skill" (skill_id, name) VALUES ('9', 'SQL');
