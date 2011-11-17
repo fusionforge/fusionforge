@@ -23,9 +23,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('../../env.inc.php');
+require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
+
+$cmd = getStringFromRequest('cmd');
 
 $quota_management = plugin_get_object('quota_management');
 
@@ -44,7 +46,7 @@ site_admin_header(array('title'=>_('Site admin')));
 <?php
 
 // quota update
-if ($_POST["cmd"] == "maj")
+if ($cmd == "maj")
 {
 	$qs = $_POST["qs"] * $_quota_block_size;
 	$qh = $_POST["qh"] * $_quota_block_size;

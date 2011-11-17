@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('../../env.inc.php');
+require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 
 // the header that displays for the project portion of the plugin
@@ -42,9 +42,9 @@ $pluginname = getStringFromRequest('pluginname');
 $quota_management = plugin_get_object($pluginname);
 
 if (!$type) {
-	exit_missing_params($_SERVER['HTTP_REFERER'],array(_('No TYPE specified')), 'home');
+	exit_missing_param($_SERVER['HTTP_REFERER'],array(_('No TYPE specified')),'home');
 } elseif (!$id) {
-	exit_missing_params($_SERVER['HTTP_REFERER'],array(_('No ID specified')), 'home');
+	exit_missing_param($_SERVER['HTTP_REFERER'],array(_('No ID specified')),'home');
 } else {
 	if ($type == 'group') {
 		$group = group_get_object($id);

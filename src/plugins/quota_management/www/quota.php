@@ -23,7 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('../../env.inc.php');
+require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
@@ -163,7 +163,7 @@ foreach ($users as $u)
 				<?php echo _('Ftp, Home'); ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<?php echo _('scm'); ?>* :
-				<?php echo _('Cvs, Svn'); ?>
+				<?php echo _('CVS, SVN'); ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<?php echo _('others'); ?>* :
 				<?php echo _('Download - without quota control'); ?>

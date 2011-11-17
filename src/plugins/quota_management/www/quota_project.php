@@ -26,12 +26,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $id;
-global $quota_management;
-
-require_once('../../env.inc.php');
+require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
+
+$id = getIntFromRequest('group_id');
+$quota_management = plugin_get_object('quota_management');
 
 session_require_perm('project_admin', $id);
 
@@ -302,7 +302,7 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 	</tr>
 	<tr style="background:<?php echo $color2; ?>">
 		<td style="border-top:thin solid #808080">
-			<?php echo _('Cvs, Svn'); ?>
+			<?php echo _('CVS, SVN'); ?>
 		</td>
 		<td style="border-top:thin solid #808080;font-weight:bold;color:red" align="right">
 			<?php echo $msg2; ?>

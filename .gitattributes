@@ -2530,7 +2530,6 @@ src/plugins/projects-hierarchy/www/img/question.gif -text svneol=unset#image/gif
 src/plugins/projects-hierarchy/www/img/trash.gif -text svneol=unset#image/gif
 src/plugins/projects-hierarchy/www/index.php -text
 src/plugins/quota_management/INSTALL -text
-src/plugins/quota_management/common/quota_management-init.php -text
 src/plugins/quota_management/common/quota_managementPlugin.class.php -text
 src/plugins/quota_management/cronjobs/quota_update.pl -text svneol=unset#text/x-perl
 src/plugins/quota_management/db/quota_management-init.sql -text
