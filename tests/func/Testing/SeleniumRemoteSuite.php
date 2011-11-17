@@ -14,10 +14,5 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
 		}
 	}
-
-	protected function tearDown()
-	{
-		echo "tearDown\n";
-	}
 }
 ?>
