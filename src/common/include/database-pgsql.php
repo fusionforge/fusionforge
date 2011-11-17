@@ -500,7 +500,7 @@ function db_check_foo_exists ($name, $t) {
 		return false;
 	}
 	$count = db_result($res,0,0);
-	return ($count == 0)
+	return ($count == 0);
 }
 
 function db_check_table_exists ($tn) {
