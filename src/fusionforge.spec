@@ -669,6 +669,10 @@ done
 ### END OF PLUGIN SETUP ###
 
 %pre
+if [ ! -d "/var/lib/pgsql/data/base" ]; then
+	/sbin/service postgresql initdb  >>/var/log/%{name}-install.log 2>&1
+fi
+
 # we will need postgresql to be running. we start it, even if it already is running
 # this won't hurt anything, just ensure we have a running database
 /sbin/service postgresql start >>/var/log/%{name}-install.log 2>&1
