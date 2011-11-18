@@ -45,8 +45,8 @@ deps_redhat() {
 		addFusionForgeYumRepo
 		addDagRPMForgeYumRepo
 		msg green "Installing packages: Executing YUM. Please wait..."
-		case $(yum info postgresql | grep ^Version | cut -d: -f2) in
-		    7*|8.0*|8.1*|8.2*)
+		case $(yum info postgresql | awk '/^Version/ {print $3}') in
+		    7.*|8.0*|8.1*|8.2*)
 			pg=postgresql84
 			;;
 		    *)
