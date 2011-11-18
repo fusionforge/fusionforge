@@ -79,6 +79,7 @@ fusionforge_etc_dir=${FUSIONFORGE_ETC_DIR:-/etc/gforge}
 # Call to detect_os, this will set $type and $distrib
 os=$(detect_os)
 type=$(detect_type)
+echo "Install type = $type"
 
 if $DEPS || $DEFAULT
 then
@@ -125,7 +126,6 @@ else
 	echo "Installing FusionForge ...";
 fi
 
-echo "Install type = $type"
 if $DEFAULT || $FILES
 then
 	install2_files_$type "$hostname"
