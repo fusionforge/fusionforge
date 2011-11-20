@@ -4849,6 +4849,7 @@ tests/build/documentation/DocumentationTest.php -text
 tests/build/packages/BuildTest.php -text
 tests/code/deprecations/DeprecationsTest.php -text
 tests/code/syntax/SyntaxTest.php -text
+tests/config/build -text
 tests/config/christian -text
 tests/config/default -text
 tests/config/g-dellm65-1 -text

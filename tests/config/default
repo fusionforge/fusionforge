@@ -28,6 +28,7 @@ IPCOSGW=192.168.222.1
 VZPRIVATEDIR=/var/lib/vz/private
 # You shouldn't change the next line, don't really work
 VZTEMPLATEDIR=/var/lib/vz/template
+VZTEMPLATE=centos-5-x86
 
 SSHPUBKEY=~/.ssh/id_rsa.pub
 HOSTKEYDIR=~/ssh

@@ -26,8 +26,7 @@ export IPDNS=$IPCOSDNS
 export IPMASK=$IPCOSMASK
 export IPGW=$IPCOSGW
 
-ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
-export VZTEMPLATE=centos-$COSVERS-$ARCH-minimal
+export VZTEMPLATE
 export VZPRIVATEDIR
 export DEBMIRROR
 
@@ -44,7 +43,6 @@ then
 	export SELENIUM_RC_URL=http://`hostname -f`$BASEDIR/reports
 else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
-	export VZTEMPLATE=centos-5-x86
 fi
 export DB_NAME=gforge
 export CONFIGURED=true
