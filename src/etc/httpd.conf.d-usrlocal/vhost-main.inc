@@ -1,3 +1,6 @@
+
+# We are inside <VirtualHost ...>
+
 ServerName {core/web_host}
 ServerAlias www.{core/web_host}
 ServerAdmin webmaster@{core/web_host}
@@ -8,6 +11,7 @@ DirectoryIndex index.html index.php
   UserDir disabled
 </IfModule>
 
+# Define configuration/env variables for passing passwords and other secrets to PHP
 <Directory /usr/local/share/gforge/www>
   Include /etc/gforge/httpd.conf.d/secrets.inc
 </Directory>

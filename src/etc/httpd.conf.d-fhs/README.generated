@@ -1,4 +1,6 @@
-Attention : contents of this directory are *generated files*.
+Attention developers : contents of this directory are *generated
+files* for FHS like paths.
 
 See ../README.httpd-conf-d-flavours for more details
 
+-- OlivierBerger

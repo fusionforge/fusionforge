@@ -1,4 +1,4 @@
-# per-project vhost content
+# per-project vhost content : myproject1.myforge.com, myproject2.myforge.com, etc.
 
 ServerName siteadmin.{core/web_host}
 ServerAlias *.{core/web_host}
