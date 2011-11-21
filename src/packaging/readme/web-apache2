@@ -1,0 +1,17 @@
+This file documents the Apache 2 Web server configuration for
+@PACKAGE@ in Debian.
+
+See /usr/share/doc/@OLDPACKAGE@-common/README.Debian(.gz) for more
+generic documentation about @PACKAGE@ packaging in Debian.
+
+See
+http://lists.fusionforge.org/pipermail/fusionforge-general/2010-June/001074.html
+which gives some hints on the design principle behind the Web server
+configuration files adopted for this packaging.
+
+ -- Olivier Berger <obergix@debian.org>, Mon, 21 Nov 2011 16:58:44 +0100
+
+# Local Variables:
+# mode: readme-debian
+# End:
+
