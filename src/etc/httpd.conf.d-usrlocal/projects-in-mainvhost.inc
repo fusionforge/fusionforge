@@ -7,5 +7,5 @@ ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /var/local/lib/gforge/chroot/home/groups
   Options Indexes FollowSymlinks
   AllowOverride All
   
-  Include /etc/gforge/httpd.conf.d/auth.projects.inc
+  Include /etc/gforge/httpd.conf.d/auth-projects.inc
 </Directory>
