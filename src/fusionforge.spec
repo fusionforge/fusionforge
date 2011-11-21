@@ -35,10 +35,6 @@ BuildArch: noarch
 License: GPL
 Group: Development/Tools
 Source0: %{name}-%{version}.tar.bz2
-Source1: README.mediawiki.jlbond
-Source2: LocalSettings.php
-Patch1: fusionforge-4.8.3-mediawiki.patch
-Patch2: fusionforge-4.8.3-register_globals.patch
 URL: http://www.fusionforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Packager: Alain Peyrat <aljeux@free.fr>
@@ -330,9 +326,6 @@ mantisbt plugin for FusionForge.
 
 %prep
 %setup -q
-#%patch1 -p1
-#%patch2 -p1
-#%patch3 -p1
 
 %build
 # empty build section
@@ -362,6 +355,7 @@ mantisbt plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/dumps
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/chroot/scmrepos/svn
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/chroot/scmrepos/cvs
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/plugins/mediawiki
 %{__install} -m 755 -d $RPM_BUILD_ROOT/home/groups
 # mock mediawiki directory because we symlink GForge skin to Monobook
 %{__install} -m 755 -d $RPM_BUILD_ROOT/usr/share/mediawiki/skins
@@ -473,24 +467,23 @@ WHICH_VERSION=%{version}-%{release}
 
 # plugin: mediawiki
 %{__ln_s} ../../plugins/mediawiki/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mediawiki
-# create symlink for apache configuration for mediawiki plugin
-## first, delete the php_admin_value include_path
-%{__sed} -i -e "/^.*php_admin_value[[:space:]]*include_path.*/d" $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki
-%{__ln_s} %{FORGE_DIR}/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.d/03mediawiki.conf
-# this is pre-activated, so create the config symlink
-#%{__ln_s} %{FORGE_DIR}/plugins/mediawiki/etc/plugins/mediawiki $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/plugins/mediawiki
-# create symlinks to use MonoBook as the GForge skin
-%{__ln_s} monobook $RPM_BUILD_ROOT/usr/share/mediawiki/skins/gforge
-%{__ln_s} MonoBook.deps.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/GForge.deps.php
-%{__ln_s} MonoBook.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/GForge.php
-# sort out the GForge skin files and remove obsolete code
-%{__rm} -rf $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/mediawiki-skin
-%{__rm} -rf $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/usr/share/gforge
-%{__rm} -rf $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/usr/share/mediawiki/skins
-# insert our own LocalSettings.php
-#%{__cp} -f %{SOURCE2} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/usr/share/mediawiki/LocalSettings.php
-# insert our own README file
-%{__cp} -f %{SOURCE1} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/README.jlbond
+%{__ln_s} /usr/share/mediawiki/api.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/extensions $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/img_auth.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/includes $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/index.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/languages $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/maintenance/ $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/opensearch_desc.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/profileinfo.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/redirect.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/StartProfiler.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/thumb.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/trackback.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/skins $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki $RPM_BUILD_ROOT/var/lib/gforge/plugins/mediawiki/master
+%{__ln_s} /usr/share/gforge/src/plugins/mediawiki/mediawiki-skin/FusionForge.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
+%{__ln_s} /usr/share/gforge/src/plugins/mediawiki/mediawiki-skin/fusionforge $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
 
 # plugin: online_help
 %{__ln_s} ../../plugins/online_help/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/online_help
@@ -815,13 +808,13 @@ fi
 
 %files plugin-mediawiki
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mediawiki.ini
-%config(noreplace) %{FORGE_CONF_DIR}/httpd.d/03mediawiki.conf
+%{_sysconfdir}/cron.d/fusionforge-plugin-mediawiki
 %{FORGE_CONF_DIR}/httpd.d/61plugin-mediawiki
 %{FORGE_DIR}/plugins/mediawiki/
 %{FORGE_DIR}/www/plugins/mediawiki
-/usr/share/mediawiki/skins/gforge
-/usr/share/mediawiki/skins/GForge.deps.php
-/usr/share/mediawiki/skins/GForge.php
+%{FORGE_VAR_LIB}/plugins/mediawiki
+/usr/share/mediawiki/skins/FusionForge.php
+/usr/share/mediawiki/skins/fusionforge
 
 %files plugin-online_help
 %{FORGE_DIR}/plugins/online_help

@@ -1895,6 +1895,7 @@ src/plugins/mediawiki/common/MediaWikiPlugin.class.php -text
 src/plugins/mediawiki/common/mediawiki-init.php -text
 src/plugins/mediawiki/cronjobs/create-imagedirs.php -text
 src/plugins/mediawiki/cronjobs/create-wikis.php -text
+src/plugins/mediawiki/etc/cron.d/fusionforge-plugin-mediawiki -text
 src/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki -text
 src/plugins/mediawiki/etc/mediawiki.ini -text
 src/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
