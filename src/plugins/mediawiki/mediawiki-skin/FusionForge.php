@@ -82,12 +82,12 @@ class FusionForgeTemplate extends QuickTemplate {
 		<?php $this->html('headlinks') ?>
 		<title><?php $this->text('pagetitle') ?></title>
         	<!-- FUSIONFORGE Stylesheet BEGIN -->
-		<?php if (!$GLOBALS['sys_use_mwframe'] && !$this->data['printable']){
+		<?php if (!forge_get_config('use_frame', 'mediawiki') && !$this->data['printable']){
 		$GLOBALS['HTML']->headerFavIcon();
 		$GLOBALS['HTML']->headerRSS();
 		$GLOBALS['HTML']->headerSearch();
 	} ?>
-		<?php if (!$GLOBALS['sys_use_mwframe'] && !$this->data['printable']){ $GLOBALS['HTML']->headerCSS(); } ?>
+		<?php if (!forge_get_config('use_frame', 'mediawiki') && !$this->data['printable']){ $GLOBALS['HTML']->headerCSS(); } ?>
         	<!-- FUSIONFORGE Stylesheet END -->
 		<?php $this->html('csslinks') ?>
 
@@ -116,7 +116,7 @@ class FusionForgeTemplate extends QuickTemplate {
 <?php	}
 		if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
         	<!-- FUSIONFORGE Stylesheet BEGIN -->
-		<?php if (!$GLOBALS['sys_use_mwframe'] && !$this->data['printable']){ $GLOBALS['HTML']->displayStylesheetElements(); } ?>
+		<?php if (!forge_get_config('use_frame', 'mediawiki') && !$this->data['printable']){ $GLOBALS['HTML']->headerCSS(); } ?>
         	<!-- FUSIONFORGE Stylesheet END -->
 	</head>
 <body id="mydoc" <?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
@@ -124,10 +124,10 @@ class FusionForgeTemplate extends QuickTemplate {
  class="mediawiki <?php $this->text('dir') ?> <?php $this->text('pageclass') ?> <?php $this->text('skinnameclass') ?>">
         <!-- FUSIONFORGE BodyHeader BEGIN -->
         <?php
-	if (!$GLOBALS['sys_use_mwframe'] && !$this->data['printable']){
+	if (!forge_get_config('use_frame', 'mediawiki') && !$this->data['printable']){
         	$project=group_get_object_by_name($GLOBALS['fusionforgeproject']);
         	if ($project) {
-			$GLOBALS['group_id']=$project->getID();
+                	$GLOBALS['group_id']=$project->getID();
                 	$params['group']=$GLOBALS['group_id'];
                 	$params['toptab']='mediawiki';
                 	$GLOBALS['HTML']->bodyHeader($params);
@@ -268,7 +268,7 @@ class FusionForgeTemplate extends QuickTemplate {
 -->
 <?php endif; ?>
         <!-- FUSIONFORGE Footer BEGIN -->
-<?php	if (!$GLOBALS['sys_use_mwframe'] && !$this->data['printable']){
+<?php	if (!forge_get_config('use_frame', 'mediawiki') && !$this->data['printable']){
 		$GLOBALS['HTML']->footer($params);
 	} else { ?>
 </body></html>
