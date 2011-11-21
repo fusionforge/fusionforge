@@ -2074,6 +2074,7 @@ src/plugins/mediawiki/cronjobs/create-wikis-mysql.php -text
 src/plugins/mediawiki/cronjobs/create-wikis.php -text
 src/plugins/mediawiki/cronjobs/dump-wikis.php -text
 src/plugins/mediawiki/db/mediawiki-init.sql -text
+src/plugins/mediawiki/etc/cron.d/fusionforge-plugin-mediawiki -text
 src/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki -text
 src/plugins/mediawiki/etc/mediawiki.ini -text
 src/plugins/mediawiki/include/MediaWikiPluginDescriptor.class.php -text
