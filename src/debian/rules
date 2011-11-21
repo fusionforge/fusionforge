@@ -49,6 +49,9 @@ DOCSFILES=$(patsubst packaging/docs/%,debian/$(OLDPACKAGE)-%.docs,$(wildcard pac
 		$(patsubst packaging/docs/%,debian/$(PACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*))
 PDOCSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/docs/[a-z]*),debian/$(PACKAGE)-plugin-$i.docs))
 
+READMEFILES=$(patsubst packaging/readme/%,debian/$(OLDPACKAGE)-%.README.Debian,$(wildcard packaging/readme/[a-z]*)) \
+		$(patsubst packaging/readme/%,debian/$(PACKAGE)-%.README.Debian,$(wildcard packaging/readme/[a-z]*))
+
 POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
 testpat:
@@ -62,6 +65,7 @@ testpat:
 	@echo "LINKSFILES=$(LINKSFILES)"
 	@echo "INSTALLFILES=$(INSTALLFILES)"
 	@echo "DOCSFILES=$(DOCSFILES)"
+	@echo "READMEFILES=$(READMEFILES)"
 	@echo ""
 	@echo "PCRONDFILES=$(PCRONDFILES)"
 	@echo "PDIRSFILES=$(PDIRSFILES)"
@@ -73,7 +77,7 @@ remove-binary-files:
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 
 .PHONY: conffiles
-conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) debian/control
+conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(READMEFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) debian/control
 
 debian/$(PACKAGE)-plugin-%.postinst:
 	export PLUGLONGNAME="`cat $(CURDIR)/plugins/$*/NAME`"; $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.postinst > $@
@@ -112,6 +116,11 @@ debian/$(OLDPACKAGE)-%.docs:
 	$(SED_REPLACE) $(CURDIR)/packaging/docs/$* > $@
 debian/$(PACKAGE)-%.docs:
 	$(SED_REPLACE) $(CURDIR)/packaging/docs/$* > $@
+
+debian/$(OLDPACKAGE)-%.README.Debian:
+	$(SED_REPLACE) $(CURDIR)/packaging/readme/$* > $@
+debian/$(PACKAGE)-%.README.Debian:
+	$(SED_REPLACE) $(CURDIR)/packaging/readme/$* > $@
 
 debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*)
 	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
@@ -157,6 +166,7 @@ clean: remove-binary-files
 	rm -f $(CURDIR)/debian/*.links
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
+	rm -f $(CURDIR)/debian/*.README.Debian
 	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
 	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-common.manpages
 	rm -f cvssh.1 $(PACKAGE)-config.1
