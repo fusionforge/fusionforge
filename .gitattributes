@@ -928,6 +928,7 @@ src/packaging/install/web-apache2 -text
 src/packaging/install/web-apache2-vhosts -text
 src/packaging/links/common -text
 src/packaging/links/web-apache2 -text
+src/packaging/readme/web-apache2 -text
 src/plugins/README -text
 src/plugins/aselectextauth/etc/aselectextauth.ini -text
 src/plugins/authbuiltin/common/AuthBuiltinPlugin.class.php -text

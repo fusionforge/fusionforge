@@ -52,6 +52,8 @@ DOCSFILES=$(patsubst packaging/docs/%,debian/$(OLDPACKAGE)-%.docs,$(wildcard pac
 PDOCSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/docs/[a-z]*),debian/$(PACKAGE)-plugin-$i.docs))
 
 PEXAMPLESSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/examples/[a-z]*),debian/$(PACKAGE)-plugin-$i.examples))
+READMEFILES=$(patsubst packaging/readme/%,debian/$(OLDPACKAGE)-%.README.Debian,$(wildcard packaging/readme/[a-z]*)) \
+		$(patsubst packaging/readme/%,debian/$(PACKAGE)-%.README.Debian,$(wildcard packaging/readme/[a-z]*))
 
 POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
@@ -67,6 +69,7 @@ testpat:
 	@echo "LINKSFILES=$(LINKSFILES)"
 	@echo "INSTALLFILES=$(INSTALLFILES)"
 	@echo "DOCSFILES=$(DOCSFILES)"
+	@echo "READMEFILES=$(READMEFILES)"
 	@echo ""
 	@echo "PCRONDFILES=$(PCRONDFILES)"
 	@echo "PDIRSFILES=$(PDIRSFILES)"
@@ -79,7 +82,7 @@ remove-binary-files:
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 
 .PHONY: conffiles
-conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) $(PEXAMPLESFILES) debian/control
+conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(READMEFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) $(PEXAMPLESFILES) debian/control
 
 # Construct the plugin's 'postinst' script out of a template in debian/dsf-in/plugin.postinst
 debian/$(PACKAGE)-plugin-%.postinst:
@@ -127,6 +130,11 @@ debian/$(PACKAGE)-%.docs:
 
 debian/$(PACKAGE)-plugin-%.examples:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/examples/plugin-$* > $@
+
+debian/$(OLDPACKAGE)-%.README.Debian:
+	$(SED_REPLACE) $(CURDIR)/packaging/readme/$* > $@
+debian/$(PACKAGE)-%.README.Debian:
+	$(SED_REPLACE) $(CURDIR)/packaging/readme/$* > $@
 
 # Construct the control file
 debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*) $(wildcard plugins/*/etc/*.ini)
@@ -195,6 +203,7 @@ clean: remove-binary-files
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
 	rm -f $(CURDIR)/debian/*.examples
+	rm -f $(CURDIR)/debian/*.README.Debian
 	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
 	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-common.manpages
 	rm -f cvssh.1 $(PACKAGE)-config.1
@@ -237,7 +246,9 @@ install: build
 
 # 	Rename config files
 	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini-fhs $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini
-	cp -r $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf.d-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d
+	mkdir -p $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d
+	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf.d-fhs/*.conf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
+	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf.d-fhs/*.inc $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
 	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf
 
 # 	Remove those that need to be generated at install time

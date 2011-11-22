@@ -1,12 +1,16 @@
 #! /bin/bash -e
 
-# Generates contents of the apache configuration files based on the sources in src/etc/httpd.conf.d/ :
+# Generates contents of the apache configuration files based on the
+# sources in src/etc/httpd.conf.d/ for 3 different flavours :
 #  - src/etc/httpd.conf.d-fhs/ : for FHS like paths (/usr, ...)
 #  - src/etc/httpd.conf.d-opt/ : for /opt like paths
 #  - src/etc/httpd.conf.d-usrlocal/ : for /usr/local like paths
 #
 # See the thread at : http://lists.fusionforge.org/pipermail/fusionforge-general/2010-June/001067.html for some more details
 #
+
+# invoke with utils/manage-apache-config.sh build to regenerate the config files
+# or with utils/manage-apache-config.sh install to ...(TODO: document this)...
 
 case $1 in
     build)
@@ -39,6 +43,15 @@ case $1 in
 		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
 		$i > httpd.conf.d-fhs/$(basename $i)
 	done
+	message="FHS like paths"
+	cat > httpd.conf.d-fhs/README.generated <<EOF
+Attention developers : contents of this directory are *generated
+files* for $message.
+
+See ../README.httpd-conf-d-flavours for more details
+
+-- OlivierBerger
+EOF
 
 	# /opt like paths
 	mkdir -p httpd.conf.d-opt
@@ -55,6 +68,15 @@ case $1 in
 		-e 's,{scmsvn/repos_path},/var/lib/gforge/svnroot,g' \
 		$i > httpd.conf.d-opt/$(basename $i)
 	done
+	message="/opt like paths"
+	cat > httpd.conf.d-opt/README.generated <<EOF
+Attention developers : contents of this directory are *generated
+files* for $message.
+
+See ../README.httpd-conf-d-flavours for more details
+
+-- OlivierBerger
+EOF
 	
 	# /usr/local like paths
 	mkdir -p httpd.conf.d-usrlocal
@@ -71,6 +93,15 @@ case $1 in
 		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
 		$i > httpd.conf.d-usrlocal/$(basename $i)
 	done
+	message="/usr/local like paths"
+	cat > httpd.conf.d-usrlocal/README.generated <<EOF
+Attention developers : contents of this directory are *generated
+files* for $message.
+
+See ../README.httpd-conf-d-flavours for more details
+
+-- OlivierBerger
+EOF
 	;;
 	
     install)
@@ -107,6 +138,7 @@ case $1 in
     
     *)
 	echo "Unknown operation"
+	echo "invoke with $0 [build|install]"
 	exit 1
 	;;
 esac
