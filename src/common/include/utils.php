@@ -518,7 +518,7 @@ function utils_buildcheckboxarray($options, $name, $checked_array) {
 				echo ' checked';
 			}
 		}
-		echo '> '.$options[$i];
+		echo ' /> '.$options[$i];
 	}
 }
 
