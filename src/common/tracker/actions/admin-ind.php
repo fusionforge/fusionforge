@@ -144,7 +144,7 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	<strong><?php echo _('Send email on new submission to address') ?>:</strong><br />
 	<input type="text" name="email_address" value="" /></p>
 	<p>
-	<input type="checkbox" name="email_all" value="1" /> <strong><?php echo _('Send email on all changes') ?></strong><br /></p>
+	<input type="checkbox" name="email_all" value="1" /> <strong><?php echo _('Send email on all changes') ?></strong></p>
 	<p>
 	<strong><?php echo _('Days till considered overdue') ?>:</strong><br />
 	<input type="text" name="due_period" value="30" /></p>

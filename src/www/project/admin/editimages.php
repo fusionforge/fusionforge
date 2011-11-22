@@ -255,7 +255,7 @@ if ($mode == "edit") {
 	<strong>'._('Description').':</strong>'.utils_requiredField().'<br />
 	<input type="text" name="description" size="40" maxlength="255" /></p><p>
 	<input type="hidden" name="add" value="1" />
-	<input type="submit" value="'._('Add File').'" name="submit" /><br /></p>
+	<input type="submit" value="'._('Add File').'" name="submit" /></p>
 	</form></p>
 	';
 }

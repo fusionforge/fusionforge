@@ -217,7 +217,7 @@
       [if-index commits.files last]
 	<tr class="vc_row_[if-index commits even]even[else]odd[end]">
 	  <td>&nbsp;</td>
-	  <td colspan=5><b>Log:</b><br>
+	  <td colspan=5><b>Log:</b><br />
 	    <pre class="vc_log">[commits.desc]</pre></td>
 	</tr>
       [end]

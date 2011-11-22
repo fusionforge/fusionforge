@@ -393,7 +393,7 @@ if (getStringFromRequest('add_forum')) {
 							<input type="hidden" name="msg_id" value="'.$msg_id.'" />
 							<input type="hidden" name="return_to_message" value="'.$return_to_message.'" />' .
 			html_build_select_box_from_assoc($forums,'new_forum_id',$forum_id) .
-			'<br /><br />
+			'<br />
 							<input type="submit" name="ok" value="' . _("Submit") . '" />
 							<input type="submit" name="cancel" value="' . _("Cancel") . '" />
 							</p>

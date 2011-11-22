@@ -510,7 +510,7 @@ class ForumHTML extends Error {
 			<br />
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
-		<br /><br />
+		<br />
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms.ForumEditForm.body') ?><?php echo utils_requiredField(); ?><br />
 		<?php
 		$GLOBALS['editor_was_set_up']=false;
@@ -526,7 +526,7 @@ class ForumHTML extends Error {
 		}
 		unset($GLOBALS['editor_was_set_up']);
 				?>
-			<br /><br />
+			<br />
 
 				<p>
 				<?php //$this->LinkAttachForm();?>
@@ -575,7 +575,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 			<br />
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
-			<br /><br />
+			<br />
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms.ForumPostForm.body') ?><?php echo utils_requiredField(); ?><br />
 
 		<?php

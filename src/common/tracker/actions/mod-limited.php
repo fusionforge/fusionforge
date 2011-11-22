@@ -190,7 +190,7 @@ $nb = $count? ' ('.$count.')' : '';
 		<input type="file" name="input_file1" size="30" /><br />
 		<input type="file" name="input_file2" size="30" /><br />
 		<input type="file" name="input_file3" size="30" /><br />
-		<input type="file" name="input_file4" size="30" /><br />
+		<input type="file" name="input_file4" size="30" />
 		<p>
 		<h2><?php echo _('Attached Files') ?>:</h2>
 		<?php

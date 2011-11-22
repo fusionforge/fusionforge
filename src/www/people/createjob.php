@@ -46,7 +46,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		<form action="'.util_make_url ('/people/editjob.php').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="form_key" value="' . form_generate_key() . '">
-		<strong>'._('Category').'</strong>'.utils_requiredField().'<br /></p>
+		<strong>'._('Category').'</strong>'.utils_requiredField().'</p>
 		'. people_job_category_box('category_id') .'
 		<p>
 		<strong>'._('Short Description').':</strong>'.utils_requiredField().'<br />

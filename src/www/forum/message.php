@@ -116,7 +116,7 @@ if ($msg_id) {
 
 	$url = util_make_url('/forum/message.php?msg_id='. $msg_id .'&amp;group_id='.$group_id);
 
-	echo '<br /><br /><table border="0" width="100%" cellspacing="0">';
+	echo '<br /><table border="0" width="100%" cellspacing="0">';
 	echo '<tr class="tablecontent"><td valign="top">'."\n";
 	echo '<strong>'.$fm->getSubject() .'</strong>';
 	if (!$reply) {

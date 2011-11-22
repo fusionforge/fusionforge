@@ -184,13 +184,13 @@ if ($group_id) {
 			<input type="hidden" name="add_list" value="y" />
 			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
 			<p><strong><?php echo _('Mailing List Name:'); ?></strong><br />
-			<strong><?php echo $group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php echo forge_get_config('lists_host'); ?></strong><br /></p>
+			<strong><?php echo $group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php echo forge_get_config('lists_host'); ?></strong></p>
 			<p>
 			<strong><?php echo _('Is Public?'); ?></strong><br />
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PUBLIC; ?>" checked="checked" /> <?php echo _('Yes'); ?><br />
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PRIVATE; ?>" /> <?php echo _('No'); ?></p><p>
 			<strong><?php echo _('Description:'); ?></strong><br />
-			<input type="text" name="description" value="" size="40" maxlength="80" /><br /></p>
+			<input type="text" name="description" value="" size="40" maxlength="80" /></p>
 			<p>
 			<input type="submit" name="submit" value="<?php echo _('Add This List'); ?>" /></p>
 		</form>
@@ -222,7 +222,7 @@ if ($group_id) {
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PRIVATE; ?>"<?php echo ($mailingList->isPublic() == MAIL__MAILING_LIST_IS_PRIVATE ? ' checked="checked"' : ''); ?> /> <?php echo _('No'); ?>
 			</p>
 			<p><strong><?php echo _('Description:'); ?></strong><br />
-			<input type="text" name="description" value="<?php echo inputSpecialChars($mailingList->getDescription()); ?>" size="40" maxlength="80" /><br /></p>
+			<input type="text" name="description" value="<?php echo inputSpecialChars($mailingList->getDescription()); ?>" size="40" maxlength="80" /></p>
 			<p>
 			<input type="submit" name="submit" value="<?php echo _('Update'); ?>" /></p>
 		</form>
