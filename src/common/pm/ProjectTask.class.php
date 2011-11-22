@@ -27,7 +27,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/Validator.class.php';
 
-function &projecttask_get_object($project_task_id,$data=false) {
+function projecttask_get_object($project_task_id,$data=false) {
 		global $PROJECTTASK_OBJ;
 		if (!isset($PROJECTTASK_OBJ["_".$project_task_id."_"])) {
 			if ($data) {

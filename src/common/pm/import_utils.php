@@ -47,6 +47,9 @@ function printrcomplete() {
 }
 
 function &pm_import_tasks($group_project_id,&$tasks) {
+	$was_error = false;
+	$foo = "";
+
 	printr($tasks,'MSPCheckin::in-array');
 	printr(getenv('TZ'),'MSPCheckin::entry TZ');
 
@@ -79,7 +82,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 			$resrc = $tasks[$i]['resources'];
 			for ($j=0; $j<count($resrc); $j++) {
 				//validate user - see if they really exist as techs in this subproject
-				if (!$tarr[strtolower($resrc[$j]['user_name'])]) {
+				if (!util_ifsetor($tarr[strtolower($resrc[$j]['user_name'])])) {
 					//create list of bogus names to send back
 					if (array_search(strtolower($resrc[$j]['user_name']),$invalid_names) === false) {
 						$invalid_names[]=$resrc[$j]['user_name'];
@@ -93,7 +96,10 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 		//
 		if (count($invalid_names)) {
 			$array['success']=false;
-			$array['errormessage']='Invalid Resource Name';
+			$array['errormessage']='Invalid Resource Name:';
+			foreach ($invalid_names as $i) {
+				$array['errormessage'] .= ' ' . $i;
+			}
 			$array['resourcename']=$invalid_names;
 			for ($i=0; $i<$tcount; $i++) {
 				$array['usernames'][$techs[$i]->getID()]=$techs[$i]->getUnixName();
@@ -197,7 +203,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 				} else {
 					//update existing task
 					//create the task
-					$pt = &projecttask_get_object($tasks[$i]['id']);
+					$pt = projecttask_get_object($tasks[$i]['id']);
 					if (!$pt || !is_object($pt)) {
 						printr($tasks[$i]['id'],'Could not get task');
 					//	$array['success']=false;
@@ -316,7 +322,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 						$deps[$id]=$darr[$dcount]['link_type'];
 					}
 					printr($deps,'Deps for task id: '.$tasks[$i]['id']);
-					if (is_object($tasks[$i]['obj'])) {
+					if (isset($tasks[$i]['obj']) && is_object($tasks[$i]['obj'])) {
 						printr($deps,'11 Done Setting deps for task id: '.$tasks[$i]['id']);
 						if (!$tasks[$i]['obj']->setDependentOn($deps)) {
 							$was_error=true;
@@ -344,7 +350,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 				$pt_arr=& $ptf->getTasks();
 				for ($i=0; $i<count($pt_arr); $i++) {
 					if (is_object($pt_arr[$i])) {
-						if (!$completed[$pt_arr[$i]->getID()]) {
+						if (!util_ifsetor($completed[$pt_arr[$i]->getID()])) {
 							printr($pt_arr[$i]->getID(),'Deleting task');
 							if (!$pt_arr[$i]->delete(true)) {
 								echo $pt_arr[$i]->getErrorMessage();
