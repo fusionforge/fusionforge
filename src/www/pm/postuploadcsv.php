@@ -108,15 +108,14 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 					'notes'=>$cols[11]);
 		}
 		$res=&pm_import_tasks($group_project_id, $tasks);
-
-	} else {
-		$res['errormessage'] = 'Parameter error';
 	}
+} else {
+	$res['errormessage'] = 'Parameter error';
+}
 
-	if ($res['success']) {
-		$feedback .= 'Import Was Successful';
-	} else {
-		$error_msg .= $res['errormessage'];
-	}
+if ($res['success']) {
+	$feedback .= 'Import Was Successful';
+} else {
+	$error_msg .= $res['errormessage'];
 }
 ?>
