@@ -220,7 +220,7 @@ if (forge_get_config('use_jabber')) {
 	echo '<tr valign="top">
 <td>'. _('Jabber Address:') .'</td>
 <td>
-	<input size=30 type="text" name="jabber_address" value="'. $u->getJabberAddress() .'" /><p />
+	<input size="30" type="text" name="jabber_address" value="'. $u->getJabberAddress() .'" /><p />
 	<input type="checkbox" name="jabber_only" value="1" '.(($u->getJabberOnly()) ? 'checked="CHECKED"' : '' ).' />
 	'._('Send auto-generated notices only to my Jabber address').'.
 </td></tr>';

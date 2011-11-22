@@ -1076,6 +1076,9 @@ class ProjectTask extends Error {
 		}
 
 		$old_array = array_keys($this->getDependentOn());
+		if (!is_array($depend_arr)) {
+			$depend_arr = array();
+		}
 		$removed=array_diff($old_array,array_keys($depend_arr));
 		$added=array_diff(array_keys($depend_arr), $old_array);
 		if (count($removed)>0 || count($added)>0) {
