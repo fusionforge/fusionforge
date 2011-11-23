@@ -43,6 +43,34 @@ function getStringFromRequest($key, $defaultValue = '') {
 }
 
 /**
+ * getHtmlStringFromRequest - get an htmlified string from REQUEST
+ *
+ * @param string $key key of the wanted value
+ * @param string $defaultValue if we can't find the wanted value, it returns the default value
+ * @return string the value
+ */
+function getHtmlStringFromRequest($key, $defaultValue = '') {
+	return htmlspecialchars(getStringFromRequest($key, $defaultValue));
+}
+
+/**
+ * getHtmlTextFromRequest - get an htmlified text string from REQUEST (same as string but for textarea)
+ *
+ * @param string $key key of the wanted value
+ * @param string $defaultValue if we can't find the wanted value, it returns the default value
+ * @return string the value
+ */
+function getHtmlTextFromRequest($key, $defaultValue = '') {
+	$text = _getStringFromArray(_getRequestArray(), $key, $defaultValue);
+
+	if (getStringFromRequest('_'.$key.'_content_type') == 'html') {
+		return TextSanitizer::purify($text);
+	} else {
+		return htmlspecialchars($text);
+	}
+}
+
+/**
  * getArrayFromRequest - get an array from REQUEST
  * @param	string $key	Key of the wanted value
  * @param	string $defaultValue	if we can't find the wanted value, it returns the default value
