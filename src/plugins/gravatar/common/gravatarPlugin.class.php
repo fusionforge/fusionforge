@@ -70,7 +70,11 @@ class gravatarPlugin extends Plugin {
 
 			$url .= $hash.'?s='. $usize;
 			$class = 'img-shadow-'.$size;
-			return '<div class="'.$class.'"><img src="'.$url.'" class="gravatar" alt="" /></div>';
+			$code = '<div class="'.$class.'"><img src="'.$url.'" class="gravatar" alt="" /></div>';
+			if ($size == 'l') {
+				$code .= '<div class="align-center"><i><a href="http://www.gravatar.com/">'._('Change face').'</a></i></div>';
+			}
+			return $code;
 		}
 		return '';
 	}
