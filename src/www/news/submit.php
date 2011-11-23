@@ -65,7 +65,8 @@ if (!$group || !is_object($group)) {
 }
 
 $summary = getStringFromRequest('summary');
-$details = getStringFromRequest('details');
+$details = getHtmlTextFromRequest('details');
+
 
 if (session_loggedin()) {
 
@@ -84,12 +85,6 @@ if (session_loggedin()) {
 
 		//check to make sure both fields are there
 		if ($summary && $details) {
-			if (getStringFromRequest('_details_content_type') == 'html') {
-				$details = TextSanitizer::purify($details);
-			} else {
-				$details = htmlspecialchars($details);
-			}
-
 			/*
 			  create a new discussion forum without a default msg
 			  if one isn't already there
@@ -152,19 +147,16 @@ if (session_loggedin()) {
 		<p>
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms.newssubmitform.details').utils_requiredField().'</p>';
 
-	$GLOBALS['editor_was_set_up']=false;
 	$params = array() ;
 	$params['name'] = 'details';
 	$params['width'] = "800";
 	$params['height'] = "500";
 	$params['body'] = $details;
 	$params['group'] = $group_id;
-	plugin_hook("text_editor",$params);
-	if (!$GLOBALS['editor_was_set_up']) {
-		//if we don't have any plugin for text editor, display a simple textarea edit box
-		echo '<textarea name="details" rows="5" cols="50">'.$details.'</textarea><br />';
-	}
-	unset($GLOBALS['editor_was_set_up']);
+	$params['content'] = '<textarea name="details" rows="5" cols="50">'.$details.'</textarea>';
+	plugin_hook_by_reference("text_editor",$params);
+
+	echo $params['content'].'<br />';
 	echo '<div><input type="submit" name="submit" value="'._('Submit').'" />
 		</div></form>';
 
