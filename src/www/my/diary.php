@@ -43,17 +43,9 @@ if (!session_loggedin()) {
 			exit_form_double_submit('my');
 		}
 
-		$summary = getStringFromRequest('summary');
-		$details = getStringFromRequest('details');
+		$summary   = getHtmlStringFromRequest('summary');
+		$details   = getHtmlTextFromRequest('details');
 		$is_public = getIntFromRequest('is_public', 0);
-
-		// Secure code sent by user.
-		$summary = htmlspecialchars($summary);
-		if (getStringFromRequest('_details_content_type') == 'html') {
-			$details = TextSanitizer::purify($details);
-		} else {
-			$details = htmlspecialchars($details);
-		}
 
 		//make changes to the database
 		if (getStringFromRequest('update')) {
@@ -219,10 +211,11 @@ To stop monitoring this user, visit the following link:
 	} else {
 		echo '&nbsp;</td></tr>';
 		for ($i=0; $i<$rows; $i++) {
+			$date   = relative_date(db_result($result,$i,'date_posted'));
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. getStringFromServer('PHP_SELF') .'?diary_id='.
 				db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a></td>'.
-				'<td>'. date(_('Y-m-d H:i'), db_result($result,$i,'date_posted')).'</td></tr>';
+				'<td>'. $date.'</td></tr>';
 		}
 		echo '
 		<tr><td colspan="2" class="tablecontent">';
