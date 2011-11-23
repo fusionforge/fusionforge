@@ -160,7 +160,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 	$html .= '
 			<tr>
 				<td>'. _('Site Member Since:') .'</td>
-				<td><strong>'. date(_('Y-m-d H:i'), $user->getAddDate()). '</strong>
+				<td><strong>'. relative_date($user->getAddDate()). '</strong>
     			</td>
 			</tr>';
 	if($compact) {
