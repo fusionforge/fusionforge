@@ -37,7 +37,7 @@ $post_changes = getStringFromRequest('post_changes');
 $approve = getStringFromRequest('approve');
 $status = getIntFromRequest('status');
 $summary = getStringFromRequest('summary');
-$details = getStringFromRequest('details');
+$details = getHtmlTextFromRequest('details');
 $id = getIntFromRequest('id');
 $for_group = getIntFromRequest('for_group');
 
@@ -81,12 +81,6 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 			}
 			if (!$details) {
 				$details='(none)';
-			}
-
-			if (getStringFromRequest('_details_content_type') == 'html') {
-				$details = TextSanitizer::purify($details);
-			} else {
-				$details = htmlspecialchars($details);
 			}
 
 			$result = db_query_params("UPDATE news_bytes SET is_approved=$1, summary=$2,
@@ -142,20 +136,16 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="60" maxlength="60" /><br />
 		<strong>'._('Details').'</strong>'.notepad_button('document.forms.newsadminform.details').'<br />';
 
-		$GLOBALS['editor_was_set_up']=false;
 		$params = array () ;
 		$params['name'] = 'details';
 		$params['width'] = "600";
 		$params['height'] = "300";
 		$params['group'] = $group_id;
 		$params['body'] = db_result($result,0,'details');
-		plugin_hook("text_editor",$params);
-		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><br />';
-		}
-		unset($GLOBALS['editor_was_set_up']);
+		$params['content'] = '<textarea name="details" rows="5" cols="50">'.$params['body'].'</textarea>';
+		plugin_hook_by_reference("text_editor",$params);
 
+		echo $params['content'].'<br/>';
 		echo '<p>
 		<strong>'.sprintf(_('If this item is on the %1$s home page and you edit it, it will be removed from the home page.'), forge_get_config ('forge_name')).'</strong></p>
 		<input type="submit" name="submit" value="'._('Submit').'" />
