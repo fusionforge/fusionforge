@@ -107,7 +107,7 @@ if ($atid) {
 	$h = new ArtifactTypeFactoryHtml($group);
 }
 
-$h->header(array('title' => _('Project Activity')));
+$h->header(array('title' => _('Tracker Activity Reporting')));
 
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
@@ -115,15 +115,16 @@ $h->header(array('title' => _('Project Activity')));
 <tr>
 <td>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<strong>Tracker:</strong><br /><?php echo html_build_select_box($restracker,'atid',$atid,false); ?></td>
-<td><strong>Area:</strong><br /><?php echo html_build_select_box_from_arrays($vals, $labels, 'area',$area,false); ?></td>
-<td><strong>Type:</strong><br /><?php echo report_span_box('SPAN',$SPAN,true); ?></td>
-<td><strong>Start:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong>End:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="Refresh" /></td>
-</tr></table>
+<strong><?php echo _('Tracker:') ?></strong><br /><?php echo html_build_select_box($restracker,'atid',$atid,false); ?></td>
+<td><strong><?php echo _('Area:') ?></strong><br /><?php echo html_build_select_box_from_arrays($vals, $labels, 'area',$area,false); ?></td>
+<td><strong><?php echo _('Type:') ?></strong><br /><?php echo report_span_box('SPAN',$SPAN,true); ?></td>
+<td><strong><?php echo _('Start:') ?></strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo _('End:') ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><input type="submit" name="submit" value="<?php echo _("Refresh") ?>" /></td>
+</tr>
+</table>
 </form>
-<p>
+<p class="align-center">
 <?php if ($atid) {
 		if (!$area || $area == 'activity') {
 	?>
