@@ -668,14 +668,25 @@ function session_continue($sessionKey) {
 	$session_ser = $sessionKey;
 	session_set();
 	setup_gettext_from_context();
+	setup_tz_from_context();
 	$LUSER =& session_get_user();
 	if (!is_object($LUSER) || $LUSER->isError()) {
 		return false;
 	} else {
-		putenv('TZ='. $LUSER->getTimeZone());
 		return true;
 	}
 }
+
+function setup_tz_from_context() {
+	$LUSER =& session_get_user();
+	if (!is_object($LUSER) || $LUSER->isError()) {
+		$tz = forge_get_config('default_timezone');
+	} else {
+		$tz = $LUSER->getTimeZone();
+	}
+	putenv ('TZ='. $tz);
+	date_default_timezone_set($tz);
+}	
 
 /**
  *	session_get_user() - Wrapper function to return the User object for the logged in user.

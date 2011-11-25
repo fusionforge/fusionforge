@@ -1505,7 +1505,8 @@ class Group extends Error {
 			$sql = 'INSERT INTO project_tags (group_id,name) VALUES ($1, $2)';
 			$res = db_query_params($sql, array($this->getID(), $tag));
 			if (!$res) {
-				$this->setError(_('Setting tags: ').db_error());
+				$this->setError(_('Setting tags:') . ' ' .
+				    db_error());
 				db_rollback();
 				return false;
 			}

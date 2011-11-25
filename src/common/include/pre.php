@@ -344,7 +344,6 @@ if (forge_get_config('database_name')!=""){
 		if (session_loggedin()) {
 			$LUSER =& session_get_user();
 			$use_tooltips = $LUSER->usesTooltips();
-			putenv ('TZ='. $LUSER->getTimeZone());
 			header ('Cache-Control: private');
 			require_once forge_get_config('themes_root').'/'.$LUSER->setUpTheme().'/Theme.class.php';
 		} else {
@@ -360,6 +359,7 @@ if (forge_get_config('database_name')!=""){
 	require_once $gfcommon.'include/gettext.php';
 	require_once $gfcommon.'include/group_section_texts.php';
 
+	setup_tz_from_context();
 	setup_gettext_from_context();
 }
 
