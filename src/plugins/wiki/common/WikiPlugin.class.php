@@ -40,6 +40,7 @@ class GforgeWikiPlugin extends Plugin {
 		$this->hooks[] = 'cssfile';
 		$this->hooks[] = 'project_public_area';
 		$this->hooks[] = 'activity';
+		$this->hooks[] = 'site_admin_option_hook';
 	}
 
 	function CallHook ($hookname, & $params) {
@@ -72,7 +73,7 @@ class GforgeWikiPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<p><a href="/wiki/wikiadmin.php?id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _('Wiki Admin') . '</a></p>';
+				echo '<p><a href="/wiki/wikiadmin.php?group_id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _('Wiki Admin') . '</a></p>';
 			}
 		} elseif ($hookname == 'search_engines') {
 			// FIXME: when the hook is called, the group_id is not set.
@@ -111,11 +112,11 @@ class GforgeWikiPlugin extends Plugin {
 		} elseif ($hookname == 'cssfile') {
 			if (defined('PHPWIKI_BASE_URL')) {
 				use_stylesheet('/wiki/themes/fusionforge/fusionforge.css');
+				use_stylesheet('/wiki/themes/fusionforge/fusionforge-print.css', 'print');
 				echo '<link rel="alternate" type="application/x-wiki" title="Edit this page!" href="'.$_SERVER['PHP_SELF'].'?action=edit" />';
 				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-fullscreen.css" media="screen" title="Fullscreen" />';
 				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-autonumbering.css" title="Autonumbering" />';
 				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-rereading.css" title="Rereading Mode" />';
-				echo "\n".'<link rel="stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-print.css" media="print" />';
 				echo "\n".'<base href="'.PHPWIKI_BASE_URL.'" />';
 				echo "\n";
 			}
@@ -136,7 +137,13 @@ class GforgeWikiPlugin extends Plugin {
 				echo '</div>';
 			}
 		} elseif ($hookname == 'activity') {
-			$group = group_get_object($group_id);
+			$group = group_get_object($params['group_id']);
+			if (!$group || !is_object($group)) {
+				return;
+			}
+			if ($group->isError()) {
+				return;
+			}
 			if ($group->usesPlugin ( $this->name)) {
 				// Add activities from the wiki plugin if active.
 				// Only major edits are included.
@@ -191,6 +198,10 @@ class GforgeWikiPlugin extends Plugin {
 				}
 			}
 		}
+	}
+
+	function site_admin_option_hook($params) {
+		echo '<li>'.util_make_link('/wiki/wikilist.php', _('List of active wikis in Forge')).'</li>';
 	}
 }
 

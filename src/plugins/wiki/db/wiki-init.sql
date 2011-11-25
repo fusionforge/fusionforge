@@ -213,10 +213,16 @@ $_$
     LANGUAGE sql;
 
 ALTER TABLE plugin_wiki_version ADD COLUMN idxFTI tsvector;
-UPDATE plugin_wiki_version SET idxFTI=to_tsvector('default', content);
-CREATE INDEX idxFTI_idx ON plugin_wiki_version USING gist(idxFTI);
-CREATE TRIGGER tsvectorupdate BEFORE UPDATE OR INSERT ON plugin_wiki_version
-     FOR EACH ROW EXECUTE PROCEDURE tsearch2(idxFTI, content);
+-- For PostgreSQL < 8.3 (FTI based on tsearch2)
+-- UPDATE plugin_wiki_version SET idxFTI=to_tsvector('default', content);
+-- CREATE INDEX idxFTI_idx ON plugin_wiki_version USING gist(idxFTI);
+-- CREATE TRIGGER tsvectorupdate BEFORE UPDATE OR INSERT ON plugin_wiki_version
+--     FOR EACH ROW EXECUTE PROCEDURE tsearch2(idxFTI, content);
+
+-- For PostgreSQL >= 8.3 (FTI internal)
+UPDATE plugin_wiki_version SET idxFTI=to_tsvector(content);
+CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON plugin_wiki_version
+     FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(idxFTI, 'pg_catalog.english', 'content');
 
 -- ALTER FUNCTION public.plugin_wiki_update_recent(integer, integer) OWNER TO gforge;
 
@@ -251,28 +257,4 @@ CREATE TRIGGER tsvectorupdate BEFORE UPDATE OR INSERT ON plugin_wiki_version
 -- REVOKE ALL ON TABLE plugin_wiki_session FROM PUBLIC;
 -- REVOKE ALL ON TABLE plugin_wiki_session FROM gforge;
 -- GRANT ALL ON TABLE plugin_wiki_session TO gforge;
-
-CREATE TABLE plugin_wiki_config
-(
-  group_id integer NOT NULL,
-  config_name character varying(40) NOT NULL,
-  config_value integer NOT NULL DEFAULT 0,
-  CONSTRAINT plugin_wiki_config_pkey PRIMARY KEY (group_id, config_name)
-)
-WITH OIDS;
-ALTER TABLE plugin_wiki_config OWNER TO gforge;
-
--- For existing wikis, we enable wikiwords as before.
--- Not doing it could break links.
-INSERT INTO plugin_wiki_config
-  SELECT group_id AS group_id, 'DISABLE_MARKUP_WIKIWORD' AS config_name, '0' AS config_value
-  FROM group_plugin, plugins
-  WHERE group_plugin.plugin_id = plugins.plugin_id AND plugin_name = 'wiki';
-
--- For existing wikis, we disable spam prevention.
--- This is a change, but cannot be a problem.
-INSERT INTO plugin_wiki_config
-  SELECT group_id AS group_id, 'NUM_SPAM_LINKS' AS config_name, '0' AS config_value
-  FROM group_plugin, plugins
-  WHERE group_plugin.plugin_id = plugins.plugin_id AND plugin_name = 'wiki';
 
