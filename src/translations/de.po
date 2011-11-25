@@ -8160,7 +8160,7 @@ msgstr ""
 
 #: www/account/change_email.php:78
 msgid "Email change"
-msgstr "EMail-Änderung "
+msgstr "EMail-Änderung"
 
 #: www/account/change_email.php:80
 msgid ""
@@ -9151,7 +9151,7 @@ msgstr "andere Lizenz:"
 
 #: www/admin/approve-pending.php:193
 msgid "Pending reason:"
-msgstr "Wartegrund: "
+msgstr "Wartegrund:"
 
 #: www/admin/approve-pending.php:202
 #, fuzzy, php-format
@@ -9452,7 +9452,7 @@ msgstr "SCM Box:"
 
 #: www/admin/groupedit.php:230
 msgid "Resend New Project Instruction Email"
-msgstr "Sende erneut neue Email mit Projekt-Anweisungen "
+msgstr "Sende erneut neue Email mit Projekt-Anweisungen"
 
 #: www/admin/grouplist.php:27 www/include/Layout.class.php:1312
 msgid "Project List"
