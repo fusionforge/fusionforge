@@ -310,12 +310,12 @@ if (isset($_SERVER['SERVER_SOFTWARE'])) { // We're on the web
 	// and setup theme
 	if (session_loggedin()) {
 		$LUSER =& session_get_user();
-		putenv ('TZ='. $LUSER->getTimeZone());
 		header ('Cache-Control: private');
 		require_once forge_get_config('themes_root').'/'.$LUSER->setUpTheme().'/Theme.class.php';
 	} else {
 		require_once forge_get_config('themes_root').'/'.forge_get_config('default_theme').'/Theme.class.php';
 	}
+	setup_tz_from_context();
 	$HTML = new Theme () ;
 } else {		     // Script run from cron or a command line
 	require_once $gfcommon.'include/squal_exit.php';
