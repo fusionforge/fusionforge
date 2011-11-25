@@ -152,7 +152,7 @@ class ForumAdmin extends Error {
 	 *  @param  string	 action to execute.
 	 */
 	function ExecuteAction ($action) {
-        global $HTML;
+		global $HTML;
 
 		$feedback='';
 		if ($action == "change_status") { //change a forum

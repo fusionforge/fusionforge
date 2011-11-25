@@ -121,7 +121,7 @@ class DocumentGroup extends Error {
 			if (!$perm || !$perm->isDocEditor()) {
 				$this->setPermissionDeniedError();
 				return false;
-				}
+			}
 		}
 
 		$res = db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
@@ -353,7 +353,7 @@ class DocumentGroup extends Error {
 			$this->fetchData($this->getID()) ;
 			return true;
 		} else {
-			$this->setOnUpdateError(_('DocumentGroup:').' '.db_error());
+			$this->setOnUpdateError(_('Error') . _(': ') .db_error());
 			return false;
 		}
 	}

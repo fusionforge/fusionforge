@@ -35,11 +35,11 @@ class DocumentGroupHTML extends Error {
 		$this->Error();
 
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('DocumentGroupHTML:: Invalid Project'));
+			$this->setError(_('Invalid Project'));
 			return false;
 		}
 		if ($Group->isError()) {
-			$this->setError('DocumentGroupHTML:: '.$Group->getErrorMessage());
+			$this->setError(_('Error') . _(': ') . $Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;
