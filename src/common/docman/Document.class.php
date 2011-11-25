@@ -137,6 +137,13 @@ class Document extends Error {
 			return false;
 		}
 
+		$result = db_query_params('SELECT title FROM docdata_vw where title = $1 AND doc_group = $2',
+			array($title, $doc_group));
+		if (!$result || db_numrows($result) > 0) {
+			$this->setError(_('Document already published in this directory'));
+			return false;
+		}
+
 		// If $filetype is "text/plain", $body convert UTF-8 encoding.
 		if (strcasecmp($filetype,"text/plain") === 0 &&
 			function_exists('mb_convert_encoding') &&
@@ -216,7 +223,7 @@ class Document extends Error {
 		$res = db_query_params('SELECT * FROM docdata_vw WHERE docid=$1 AND group_id=$2',
 					array($docid, $this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('Document:: Invalid docid'));
+			$this->setError(_('Document: Invalid docid'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
