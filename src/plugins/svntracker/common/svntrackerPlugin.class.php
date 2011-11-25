@@ -31,7 +31,7 @@ class svntrackerPlugin extends Plugin {
 	function svntrackerPlugin () {
 		$this->Plugin() ;
 		$this->name = "svntracker" ;
-		$this->text = "Source Code and Tracker Integration";
+		$this->text = "Source Code and Tracker/Task Integration";
 		$this->hooks[] = "groupisactivecheckbox";
 		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "artifact_extra_detail";
