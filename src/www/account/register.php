@@ -145,15 +145,15 @@ if (forge_get_config('require_unique_email')) {
 } else {
 	echo _('Login Name (do not use uppercase letters):'); echo utils_requiredField();
 } ?><br />
-<input type="text" name="unix_name" value="<?php print(htmlspecialchars($unix_name)); ?>" />
+<input type="text" required="required" name="unix_name" value="<?php print(htmlspecialchars($unix_name)); ?>" />
 </p>
 <p>
 <?php echo _('Password (min. 6 chars):'); echo utils_requiredField(); ?><br />
-<input type="password" name="password1" />
+<input type="password" required="required" name="password1" />
 </p>
 <p>
 <?php echo _('Password (repeat):'); echo utils_requiredField(); ?><br />
-<input type="password" name="password2" />
+<input type="password" required="required" name="password2" />
 </p
 ><p>
 <?php echo _('Title:'); ?><br />
@@ -161,11 +161,11 @@ if (forge_get_config('require_unique_email')) {
 </p>
 <p>
 <?php echo _('First Name:'); echo utils_requiredField(); ?><br />
-<input size="30" type="text" name="firstname" value="<?php print(htmlspecialchars($firstname)); ?>" />
+<input required="required" size="30" type="text" name="firstname" value="<?php print(htmlspecialchars($firstname)); ?>" />
 </p>
 <p>
 <?php echo _('Last Name:'); echo utils_requiredField(); ?><br />
-<input size="30" type="text" name="lastname" value="<?php print(htmlspecialchars($lastname)); ?>" />
+<input required="required" size="30" type="text" name="lastname" value="<?php print(htmlspecialchars($lastname)); ?>" />
 </p>
 <p>
 <?php echo _('Language Choice:'); ?><br />
