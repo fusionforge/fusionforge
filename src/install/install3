@@ -76,7 +76,7 @@ psql_startdb(){
 	# Fedora9 (an maybe newer) requires running initdb
 	if [ "$pgservice" = '/etc/init.d/postgresql' ]
 	then
-		if [ -d /var/lib/pgsql/data/base ]
+		if [ ! -d /var/lib/pgsql/data/base ]
 		then
 			service postgresql initdb &>/dev/null
 		fi
