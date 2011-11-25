@@ -286,7 +286,7 @@ for ($i=0; $i<$rows; $i++) {
 
 	echo '
 	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
-	.'<td style="text-align:center">'
+	.'<td class="align-center">'
 	 .'<a href="'. getStringFromServer('PHP_SELF') .'?submit=1&amp;group_id='.$group_id.'&amp;remove=1&amp;id='
 	 .db_result($result,$i,'id').'">'
 	 .'['._('Del').']'.'</a>'
@@ -301,8 +301,8 @@ for ($i=0; $i<$rows; $i++) {
 
 	.'<td>'.util_make_link ('/dbimage.php?id='.db_result($result,$i,'id'), db_result($result,$i,'filename')).'</td>'
 	.'<td>'.db_result($result,$i,'filetype').'</td>'
-	.'<td style="text-align:right">'.db_result($result,$i,'filesize').'</td>'
-	.'<td style="text-align:right">'.$dims.'</td>'
+	.'<td class="align-right">'.db_result($result,$i,'filesize').'</td>'
+	.'<td class="align-right">'.$dims.'</td>'
 	.'<td>'.db_result($result,$i,'description').'</td>'
 	.'</tr>';
 }
