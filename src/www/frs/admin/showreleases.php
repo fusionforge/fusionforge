@@ -85,7 +85,7 @@ if ($func=='delete_release' && $release_id) {
 /*
 	Get the releases of this package
 */
-$rs =& $frsp->getReleases();
+$rs = $frsp->getReleases();
 if (count($rs) < 1) {
 	exit_error(_('No Releases Of This Package Are Available'),'frs');
 }
