@@ -244,7 +244,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		</td>
 	</tr>
 	<tr>
-		<td valign="top">
+		<td class="top">
 			<strong><?php echo _('Release Notes') ?>:</strong>
 		</td>
 		<td>
@@ -252,7 +252,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		</td>
 	</tr>
 	<tr>
-		<td valign="top">
+		<td class="top">
 			<strong><?php echo _('Change Log') ?>:</strong>
 		</td>
 		<td>
