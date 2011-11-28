@@ -78,7 +78,7 @@ EOF
 retcode=0
 echo "This will run phpunit tests"
 killall -9 java
-rm -f /var/log/selenium.log
+cat /dev/null >/var/log/selenium.log
 PATH=/usr/lib/iceweasel:$PATH
 export PATH
 LANG=C java -jar $FORGE_HOME/tests/selenium-server.jar -browserSessionReuse -singleWindow >/var/log/selenium.log &
@@ -88,7 +88,6 @@ do
 	sleep 1
 done
 
-#LANG=C java -jar selenium-server.jar -singleWindow >/dev/null &
 cd tests
 phpunit --verbose --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ $testsuite || retcode=$?
 cd ..
