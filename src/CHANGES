@@ -1,4 +1,4 @@
-FusionForge-5.x:
+FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)
 * Widget: New User Widget: Last 5 documents published in my project (Capgemini)
 * Docman: mass action (Capgemini)
@@ -15,6 +15,7 @@ FusionForge-5.x:
   browsing. (Capgemini)
 * Admin: User add membership to multiples projects in one shot (Capgemini)
 * New MoinMoinWiki plugin (AdaCore)
+* Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)
 
 FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)

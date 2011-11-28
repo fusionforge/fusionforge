@@ -603,7 +603,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *	@return		radio multiselectbox
 	 */
 	function renderMultiSelectBox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
-		$arr =$this->getExtraFieldElements($extra_field_id);
+		$arr = $this->getExtraFieldElements($extra_field_id);
 		if (!$checked) {
 			$checked=array();
 		}

@@ -4804,6 +4804,7 @@ src/www/export/rssAboTask.php -text
 src/www/export/search_plugin.php -text
 src/www/favicon.ico svneol=native#unset
 src/www/frs/reporting/downloads.php -text
+src/www/images/ajax-loader.gif -text
 src/www/images/blank.png -text svneol=unset#image/png
 src/www/images/clear.png -text svneol=unset#image/png
 src/www/images/debian-sf-icon.png -text svneol=unset#image/png
@@ -5052,6 +5053,7 @@ src/www/themes/funky/images/ic/close.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/close_hover.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/cvs16b.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/docman16b.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/file-txt.png -text
 src/www/themes/funky/images/ic/forum20g.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/forum20w.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/forum_add.gif -text svneol=unset#image/gif
@@ -5181,6 +5183,7 @@ src/www/themes/gforge/images/ic/check.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/close.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/cvs16b.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/docman16b.png -text svneol=unset#image/png
+src/www/themes/gforge/images/ic/file-txt.png -text
 src/www/themes/gforge/images/ic/forum20g.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/forum20w.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/forum_add.gif -text svneol=unset#image/gif

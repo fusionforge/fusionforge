@@ -56,7 +56,7 @@ if (getStringFromRequest('post_changes')) {
 //
 //	Display existing artifact types
 //
-$atf = new ArtifactTypeFactory($group);
+$atf = new ArtifactTypeFactoryHtml($group);
 if (!$atf || !is_object($atf) || $atf->isError()) {
 	exit_error(_('Could Not Get ArtifactTypeFactory'),'tracker');
 }
@@ -83,7 +83,7 @@ if(isset($page_title)){
 	$params['title'] = '';
 }
 
-site_project_header($params);
+$atf->header( array('title' => _('Trackers Administration')));
 echo $HTML->subMenu(
 	array(
 		_('Report'),
@@ -163,7 +163,7 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	<?php
 	}
 
-site_project_footer(array());
+$atf->footer();
 
 // Local Variables:
 // mode: php

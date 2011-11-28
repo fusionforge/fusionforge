@@ -47,6 +47,9 @@ class ArtifactTypeFactoryHtml extends ArtifactTypeFactory {
 		$labels = array(_('View Trackers'));
 		$links  = array('/tracker/?group_id='.$group_id);
 		$attr   = array(array('title' => _('Get the list of available trackers'), 'class' => 'tabtitle-nw'));
+		$labels[] = _('Roadmap');
+		$links[]  = '/tracker/roadmap.php?group_id='.$group_id;
+		$attr[]   = array('title' => _('Display configured roadmaps'), 'class' => 'tabtitle');
 		if (session_loggedin()) {
 			$labels[] = _('Reporting');
 			$links[]  = '/tracker/reporting/?group_id='.$group_id;
@@ -68,13 +71,13 @@ class ArtifactTypeFactoryHtml extends ArtifactTypeFactory {
 		site_project_footer($params);
 	}
 
-//     function adminHeader($params=array()) {
-//             return $this->header($params);
-//     }
+//	function adminHeader($params=array()) {
+//		return $this->header($params);
+//	}
 //
-//     function adminFooter($params=array()) {
-//             return $this->footer($params);
-//     }
+//	function adminFooter($params=array()) {
+//		return $this->footer($params);
+//	}
 }
 
 // Local Variables:

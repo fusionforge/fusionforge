@@ -22,7 +22,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-$atf = new ArtifactTypeFactory($group);
+$atf = new ArtifactTypeFactoryHtml($group);
 if (!$group || !is_object($group) || $group->isError()) {
 	exit_error(_('Could Not Get ArtifactTypeFactory'),'tracker');
 }
@@ -39,8 +39,6 @@ $params['group']=$group_id;
 $params['title']=sprintf(_('Trackers for %1$s'), $group->getPublicName());
 $params['toptab']='tracker';
 
-site_project_header($params);
-
 if (forge_check_perm('tracker_admin', $group_id)) {
 	$menu_text = array();
 	$menu_links = array();
@@ -50,6 +48,7 @@ if (forge_check_perm('tracker_admin', $group_id)) {
 	echo $HTML->subMenu($menu_text, $menu_links, $menu_attr);
 }
 
+$atf->header();
 
 if (!$at_arr || count($at_arr) < 1) {
 	echo '<div class="warning">'._('No Accessible Trackers Found').'</div>';
@@ -75,7 +74,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		} else {
 			echo '
 		<tr>
-			<td><a href="'.util_make_url ('/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse').'">'.
+			<td><a href="'.util_make_uri('/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse').'">'.
  				html_image("ic/tracker20w.png","20","20").' &nbsp;'.
 				$at_arr[$j]->getName() .'</a>
 			</td>
@@ -91,7 +90,7 @@ if (!$at_arr || count($at_arr) < 1) {
 	echo $HTML->listTableBottom();
 }
 
-site_project_footer(array());
+$atf->footer();
 
 // Local Variables:
 // mode: php

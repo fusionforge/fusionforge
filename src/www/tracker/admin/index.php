@@ -29,6 +29,7 @@ require_once $gfcommon.'tracker/ArtifactFile.class.php';
 require_once $gfcommon.'tracker/include/ArtifactFileHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
+require_once $gfcommon.'tracker/include/ArtifactTypeFactoryHtml.class.php';
 require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
 require_once $gfcommon.'tracker/include/ArtifactHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactCanned.class.php';
@@ -191,7 +192,20 @@ if ($group_id && $atid) {
 		$feedback .= _('Successfully Deleted.');
 	}
 
-	include $gfcommon.'tracker/actions/admin-ind.php';
+	if (getIntFromRequest('new_tracker')) {
+
+		include $gfcommon.'tracker/views/form-newtracker.php';
+
+	} elseif (getStringFromRequest('clone_tracker')) {
+		$ath = new ArtifactTypeFactoryHtml($group);
+		include $gfcommon.'tracker/views/form-clonetracker.php';
+
+	} elseif (getStringFromRequest('admin_roadmap')) {
+		include $gfcommon.'tracker/views/form-adminroadmap.php';
+	
+	} else {
+		include $gfcommon.'tracker/actions/admin-ind.php';
+	}
 }
 
 // Local Variables:

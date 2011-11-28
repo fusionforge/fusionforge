@@ -457,7 +457,7 @@ class Layout extends Error {
 			<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
 			<td valign="top" width="99%" class="projecttab">
 
-			<?php
+		<?php
 
 	}
 

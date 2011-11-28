@@ -34,6 +34,7 @@ require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
 require_once $gfcommon.'tracker/include/ArtifactHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactCanned.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
+require_once $gfcommon.'tracker/include/ArtifactTypeFactoryHtml.class.php';
 
 if (!forge_get_config('use_tracker')) {
 	exit_disabled('home');
@@ -58,7 +59,7 @@ if ($aid && (!$group_id && !$atid)) {
 
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
-        exit_no_group();
+	exit_no_group();
 }
 if ($group->isError()) {
 	if($group->isPermissionDeniedError()) {

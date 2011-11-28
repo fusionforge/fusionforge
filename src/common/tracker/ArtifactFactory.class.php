@@ -451,6 +451,40 @@ class ArtifactFactory extends Error {
 		return $this->artifacts;
 	}
 
+	/**
+	 *	getArtifactsByReleases - get an array of Artifact objects.
+	 *
+	 *	@return	array	The array of Artifact objects.
+	 */
+	function getArtifactsByReleases($extra_field_id, $releases) {
+		$artifacts = array();
+
+		$sql = 'SELECT a.* 
+		FROM artifact_extra_field_data aefd, artifact_extra_field_elements aefe, artifact_vw a 
+		WHERE aefd.extra_field_id=aefe.extra_field_id 
+		AND CAST (aefd.field_data AS integer)=aefe.element_id 
+		AND aefd.artifact_id=a.artifact_id 
+		AND aefd.extra_field_id=$1';
+
+		$query_params = array($extra_field_id);
+
+		if ($releases) {
+			$query_params[] = db_string_array_to_any_clause($releases);
+			$sql .= ' AND aefe.element_name = ANY ($2)';
+		}
+
+		$sql .= ' ORDER BY a.artifact_id';
+
+		$result = db_query_params($sql, $query_params);
+		if ($result && db_numrows($result)) {
+			while ($arr = db_fetch_array($result)) {
+				$artifacts[] = new Artifact($this->ArtifactType, $arr);
+			}
+		}
+		
+		return $artifacts;
+	}
+
 }
 
 // Local Variables:
