@@ -229,49 +229,45 @@ class GitPlugin extends SCMPlugin {
 		return $b ;
 	}
 
-// 	function getStatsBlock ($project) {
-// 		global $HTML ;
-// 		$b = '' ;
+	function getStatsBlock ($project) {
+		global $HTML ;
+		$b = '' ;
 
-// 		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
-// 					  array ($project->getID()));
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+			array ($project->getID()));
 
-// 		if (db_numrows($result) > 0) {
-// 			$b .= $HTML->boxMiddle(_('Repository Statistics'));
+		if (db_numrows($result) > 0) {
+//			$b .= $HTML->boxMiddle(_('Repository Statistics'));
 
-// 			$tableHeaders = array(
-// 				_('Name'),
-// 				_('Adds'),
-// 				_('Commits')
-// 				);
-// 			$b .= $HTML->listTableTop($tableHeaders);
+			$tableHeaders = array(
+			_('Name'),
+			_('Adds'),
+			_('Updates')
+			);
+			$b .= $HTML->listTableTop($tableHeaders, false, '', 'repo-history');
 
-// 			$i = 0;
-// 			$total = array('adds' => 0, 'commits' => 0);
+			$i = 0;
+			$total = array('adds' => 0, 'commits' => 0);
 
-// 			while($data = db_fetch_array($result)) {
-// 				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-// 				$b .= '<td width="50%">' ;
-// 				$b .= util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
-// 				$b .= '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
-// 					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
-// 				$total['adds'] += $data['adds'];
-// 				$total['commits'] += $data['commits'];
-// 				$i++;
-// 			}
-// 			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-// 			$b .= '<td width="50%"><strong>'._('Total').':</strong></td>'.
-// 				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
-// 				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
-// 			$b .= '</tr>';
-// 			$b .= $HTML->listTableBottom();
-// 		}
+			while($data = db_fetch_array($result)) {
+				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+				$b .= '<td class="halfwidth">' ;
+				$b .= util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
+				$b .= '</td><td class="onequarterwidth align-right">'.$data['adds']. '</td>'.
+					'<td class="onequarterwidth align-right">'.$data['commits'].'</td></tr>';
+				$total['adds'] += $data['adds'];
+				$total['commits'] += $data['commits'];
+				$i++;
+			}
+			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+			$b .= '<td class="halfwidth"><strong>'._('Total').':</strong></td>'.
+				'<td class="onequarterwidth align-right"><strong>'.$total['adds']. '</strong></td>'.
+				'<td class="onequarterwidth align-right"><strong>'.$total['commits'].'</strong></td>';
+			$b .= '</tr>';
+			$b .= $HTML->listTableBottom();
+		}
 
-// 		return $b ;
-// 	}
-
-	function getStatsBlock($project) {
-		return ;
+		return $b ;
 	}
 
 	function createOrUpdateRepo($params) {
