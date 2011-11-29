@@ -46,6 +46,7 @@ if (getStringFromRequest('submit')) {
 		$query_name = trim(getStringFromRequest('query_name'));
 		$query_type = getStringFromRequest('query_type',0);
 		$_status = getStringFromRequest('_status');
+		$_submitted_by = getStringFromRequest('_submitted_by');
 		$_assigned_to = getStringFromRequest('_assigned_to');
 		$_sort_col = getStringFromRequest('_sort_col');
 		$_sort_ord = getStringFromRequest('_sort_ord');
@@ -58,7 +59,7 @@ if (getStringFromRequest('submit')) {
 		$_followups = getStringFromRequest('_followups');
 		$query_options = array_keys(getArrayFromRequest('query_options'));
 		if (!$aq->create($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,
-			$_summary,$_description,$_followups,$query_type, $query_options)) {
+			$_summary,$_description,$_followups,$query_type, $query_options, $_submitted_by)) {
 			form_release_key(getStringFromRequest('form_key'));
 			exit_error($aq->getErrorMessage(),'tracker');
 		} else {
@@ -95,6 +96,7 @@ if (getStringFromRequest('submit')) {
 		$query_name = getStringFromRequest('query_name');
 		$query_type = getStringFromRequest('query_type',0);
 		$_status = getStringFromRequest('_status');
+		$_submitted_by = getStringFromRequest('_submitted_by');
 		$_assigned_to = getStringFromRequest('_assigned_to');
 		$_sort_col = getStringFromRequest('_sort_col');
 		$_sort_ord = getStringFromRequest('_sort_ord');
@@ -107,7 +109,7 @@ if (getStringFromRequest('submit')) {
 		$extra_fields = getStringFromRequest('extra_fields');
 		$query_options = array_keys(getArrayFromRequest('query_options'));
 		if (!$aq->update($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,
-			$_summary,$_description,$_followups,$query_type, $query_options)) {
+			$_summary,$_description,$_followups,$query_type, $query_options, $_submitted_by)) {
 			exit_error($aq->getErrorMessage(),'tracker');
 		} else {
 			$feedback .= _('Query Updated');
@@ -161,6 +163,7 @@ if (getStringFromRequest('submit')) {
 //
 //  setup the query
 //
+$_submitted_by=$aq->getSubmitter();
 $_assigned_to=$aq->getAssignee();
 $_status=$aq->getStatus();
 $extra_fields=$aq->getExtraFields();
@@ -174,6 +177,8 @@ $_description=$aq->getDescription();
 $_followups=$aq->getFollowups();
 $query_type=$aq->getQueryType();
 //
+//	creating a submitter box
+$submitter_box = $ath->submitterBox('_submitted_by[]',$_submitted_by,true,'none','-1',false,true);
 //	creating a custom technician box which includes "any" and "unassigned"
 $tech_box=$ath->technicianBox ('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
 
@@ -326,13 +331,17 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		</td>
 	</tr>';
 }
+	if (!$ath->usesCustomStatuses()) {
+		echo '<tr>
+				<td class="top">
+				<strong>'._('State').':</strong><br />'. $ath->statusBox('_status',$_status,true,_('Any')).'
+				</td>
+				<td></td>
+			  </tr>';
+	}
 	echo '<tr>
-		<td><strong>'._('Assignee').':</strong><br />'. $tech_box .'</td>
-		<td valign="top">';
-		if (!$ath->usesCustomStatuses()) {
-			echo '<strong>'._('State').':</strong><br />'. $ath->statusBox('_status',$_status,true,_('Any'));
-		}
-		echo '</td>
+		<td class="top"><strong>'._('Submitter').':</strong><br />'. $submitter_box .'</td>
+		<td class="top"><strong>'._('Assignee').':</strong><br />'. $tech_box .'</td>
 	</tr>';
 	$ath->renderExtraFields($extra_fields,true,'None',true,'Any',array(),false,'QUERY');
 
@@ -352,16 +361,16 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	}
 	array_multisort($order_name_arr, $order_arr);
 
-	$tips = '<i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
+	$tips = '<i>'._('(%% for wildcards)').'</i>';
 
 echo '
 	<tr>
 		<td colspan="2" nowrap="nowrap">'.
-		'<strong>'._('Last Modified Date range').':</strong> <i>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</i><br />
+		'<strong>'._('Last Modified Date range').':</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
 		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /><p/>
-		<strong>'._('Open Date range').':</strong> <i>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</i><br />
+		<strong>'._('Open Date range').':</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
 		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'" /><p/>
-		<strong>'._('Close Date range').':</strong> <i>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</i><br />
+		<strong>'._('Close Date range').':</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
 		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'" />
 		</td>
 	</tr>
@@ -379,7 +388,7 @@ echo '
 		<td><strong>'._('Order by').':</strong><br />
 		'.
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .'</td>
-		<td>&nbsp;<br />
+		<td><br />
 		'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .'</td>
 	</tr>';
 echo '<tr>

@@ -58,6 +58,7 @@ define('ARTIFACT_QUERY_CLOSEDATE',8);
 define('ARTIFACT_QUERY_SUMMARY',9);
 define('ARTIFACT_QUERY_DESCRIPTION',10);
 define('ARTIFACT_QUERY_FOLLOWUPS',11);
+define('ARTIFACT_QUERY_SUBMITTER',12);
 
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 
@@ -127,7 +128,7 @@ class ArtifactQuery extends Error {
 	 *  @return 	true on success / false on failure.
 	 */
 	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0,
-		$summary,$description,$followups,$query_type=0,$query_options=array()) {
+		$summary,$description,$followups,$query_type=0,$query_options=array(),$submitter='') {
 		//
 		//	data validation
 		//
@@ -174,7 +175,7 @@ class ArtifactQuery extends Error {
 				db_rollback();
 				return false;
 			} else {
-				if (!$this->insertElements($id,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups)) {
+				if (!$this->insertElements($id,$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups)) {
 					db_rollback();
 					return false;
 				}
@@ -240,7 +241,7 @@ class ArtifactQuery extends Error {
 	 *
 	 *
 	 */
-	function insertElements($id,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups) {
+	function insertElements($id,$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups) {
 		$res = db_query_params ('DELETE FROM artifact_query_fields WHERE artifact_query_id=$1',
 					array ($id)) ;
 		if (!$res) {
@@ -256,6 +257,15 @@ class ArtifactQuery extends Error {
 		if (!$res) {
 			$this->setError('Setting Status: '.db_error());
 			return false;
+		}
+
+		if (is_array($submitter)) {
+				for($e=0; $e<count($submitter); $e++) {
+					$submitter[$e]=intval($submitter[$e]); 
+				}
+				$submitter=implode(',',$submitter);
+		} else {
+			$submitter = intval($submitter);
 		}
 
 		if (is_array($assignee)) {
@@ -277,16 +287,32 @@ class ArtifactQuery extends Error {
 			return false;
 		}
 
-		//CSV LIST OF ASSIGNEES
-		$res = db_query_params ('INSERT INTO artifact_query_fields
-			(artifact_query_id,query_field_type,query_field_id,query_field_values)
-			VALUES ($1,$2,0,$3)',
+		//CSV LIST OF SUBMITTERS
+		if ($submitter) {
+			$res = db_query_params ('INSERT INTO artifact_query_fields
+									(artifact_query_id,query_field_type,query_field_id,query_field_values)
+									VALUES ($1,$2,0,$3)',
 					array ($id,
-					       ARTIFACT_QUERY_ASSIGNEE,
-					       $assignee)) ;
-		if (!$res) {
-			$this->setError('Setting Assignee: '.db_error());
-			return false;
+					       ARTIFACT_QUERY_SUBMITTER,
+					       $submitter)) ;
+			if (!$res) {
+				$this->setError('Setting Submitter: '.db_error());
+				return false;
+			}
+		}
+
+		//CSV LIST OF ASSIGNEES
+		if ($assignee) {
+			$res = db_query_params ('INSERT INTO artifact_query_fields
+				(artifact_query_id,query_field_type,query_field_id,query_field_values)
+				VALUES ($1,$2,0,$3)',
+						array ($id,
+							   ARTIFACT_QUERY_ASSIGNEE,
+							   $assignee)) ;
+			if (!$res) {
+				$this->setError('Setting Assignee: '.db_error());
+				return false;
+			}
 		}
 
 		//MOD DATE RANGE  YYYY-MM-DD YYYY-MM-DD format
@@ -606,6 +632,17 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
+	 *	getSubmitter
+	 *
+	 *	@return	string	Submitter ID
+	 */
+	function getSubmitter() {
+		if (!isset($this->element_array[ARTIFACT_QUERY_SUBMITTER]))
+			return false;
+		return $this->element_array[ARTIFACT_QUERY_SUBMITTER][0];
+	}
+
+	/**
 	 *	getStatus
 	 *
 	 *	@return	string	Status ID
@@ -648,7 +685,7 @@ class ArtifactQuery extends Error {
 	 *  @return	boolean	success.
 	 */
 	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='',
-		$summary,$description,$followups,$query_type=0,$query_options=array()) {
+		$summary,$description,$followups,$query_type=0,$query_options=array(),$submitter='') {
 		if (!$name) {
 			$this->setMissingParamsError();
 			return false;
@@ -686,7 +723,7 @@ class ArtifactQuery extends Error {
 						  join('|', $query_options),
 						  $this->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
-			if (!$this->insertElements($this->getID(),$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups)) {
+			if (!$this->insertElements($this->getID(),$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups)) {
 				db_rollback();
 				return false;
 			} else {

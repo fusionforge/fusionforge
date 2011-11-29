@@ -701,6 +701,29 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 	}
 
+	function submitterBox ($name='submitted_by[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
+		if ($text_100=='none'){
+			$text_100=_('Nobody');
+		}
+		$result = $this->getSubmitters();
+		$ids =& util_result_column_to_array($result,0);
+		$names =& util_result_column_to_array($result,1);
+		if ($extra_id != '-1') {
+			$ids[]=$extra_id;
+			$names[]=$extra_name;
+		}
+			
+		if ($multiple) {
+			if (!is_array($checked)) {
+				$checked = explode(',',$checked);
+			}
+			$size = min( count($ids)+1, 15);
+			return html_build_multiple_select_box_from_arrays ($ids,$names,$name,$checked,$size,$show_100,$text_100);
+		} else {
+			return html_build_select_box_from_arrays ($ids,$names,$name,$checked,$show_100,$text_100);
+		}
+	}
+
 	function cannedResponseBox ($name='canned_response',$checked='xzxz') {
 		return html_build_select_box ($this->getCannedResponses(),$name,$checked);
 	}

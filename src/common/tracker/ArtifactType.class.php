@@ -99,6 +99,13 @@ class ArtifactType extends Error {
 	var $technicians_res;
 
 	/**
+	 * Submitters db resource ID.
+	 *
+	 * @var		int		$submitters_res.
+	 */
+	var $submitters_res;
+
+	/**
 	 * Status db resource ID.
 	 *
 	 * @var		int		$status_res.
@@ -879,6 +886,22 @@ class ArtifactType extends Error {
 		return true;
 	}
 
+	/**
+	 *	getSubmitters - returns a result set of submitters.
+	 *
+	 *	@return database result set.
+	 */
+	function getSubmitters() {
+		if (!isset($this->submitters_res)) {
+			$this->submitters_res = db_query_params ('SELECT DISTINCT submitted_by, submitted_realname
+				FROM artifact_vw
+				WHERE group_artifact_id=$1
+				ORDER BY submitted_realname',
+				array ($this->getID()));
+		}
+		return $this->submitters_res;
+	}
+	
 	/**
 	 *	getCannedResponses - returns a result set of canned responses.
 	 *

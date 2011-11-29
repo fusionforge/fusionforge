@@ -46,6 +46,7 @@ class ArtifactFactory extends Error {
 	var $status;
 	var $changed_from;
 	var $last_changed;
+	var $submitted_by;
 	var $assigned_to;
 	var $offset;
 	var $max_rows;
@@ -179,6 +180,7 @@ class ArtifactFactory extends Error {
 
 			if ($this->query_type == 'query') {
 				$aq = new ArtifactQuery($this->ArtifactType, $this->query_id);
+				$this->submitted_by=$aq->getSubmitter();
 				$_assigned_to=$aq->getAssignee();
 				$_status=$aq->getStatus();
 				$_extra_fields=$aq->getExtraFields();
@@ -344,6 +346,18 @@ class ArtifactFactory extends Error {
 			//for open tasks, add status=100 to make sure we show all
 			$wheresql .= ' AND status_id=$'.$paramcount++ ;
 			$params[] = $this->status;
+		}
+
+		// Add filter if submitted_by is selected. 
+		if ($this->submitted_by) {
+			if (is_array($this->submitted_by)) {
+				$wheresql .= ' AND submitted_by = ANY ($'.$paramcount++ ;
+				$params[] = db_int_array_to_any_clause ($this->submitted_by) ;
+				$wheresql .= ')' ;
+			} else {
+				$wheresql .= ' AND submitted_by = $'.$paramcount++ ;
+				$params[] = $this->submitted_by ;
+			}
 		}
 
 		//if assigned to selected, and more to where clause
