@@ -254,9 +254,10 @@ up {
 ----------------------------------------------- */
 .align-left {text-align: left;}
 .align-right {text-align: right;}
-.align-center {text-align:center;}
+.align-center {text-align: center;}
 
 .top {vertical-align: top;}
+.bottom {vertical-align: bottom;}
 
 .nowrap {white-space: nowrap;}
 
