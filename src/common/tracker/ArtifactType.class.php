@@ -674,7 +674,7 @@ class ArtifactType extends Error {
 		foreach ($efs as $ef) {
 			//new field in this tracker
 			$nef = new ArtifactExtraField($this);
-			if (!$nef->create( addslashes(util_unconvert_htmlspecialchars($ef['field_name'])), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'])) {
+			if (!$nef->create( util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'])) {
 				$this->setError('Error Creating New Extra Field: '.$nef->getErrorMessage());
 				db_rollback();
 				return false;
@@ -687,7 +687,7 @@ class ArtifactType extends Error {
 			while ($el = db_fetch_array($resel)) {
 				//new element
 				$nel = new ArtifactExtraFieldElement($nef);
-				if (!$nel->create( addslashes(util_unconvert_htmlspecialchars($el['element_name'])), $el['status_id'] )) {
+				if (!$nel->create( util_unconvert_htmlspecialchars($el['element_name']), $el['status_id'] )) {
 					db_rollback();
 					$this->setError('Error Creating New Extra Field Element: '.$nel->getErrorMessage());
 					return false;
