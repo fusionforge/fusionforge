@@ -185,7 +185,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 
 <h2><?php echo $index++.'. '. _('Project Public Description') ?></h2>
 <p>
-<?php echo _('This is the description of your project which will be shown on the Project Summary page, in search results, etc. Maximum length is 255 chars.') ?>
+<?php echo _('This is the description of your project which will be shown on the Project Summary page, in search results, etc.') ?>
 </p>
 
 <textarea name="description" cols="70" rows="5">

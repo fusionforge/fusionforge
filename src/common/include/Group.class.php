@@ -293,9 +293,6 @@ class Group extends Error {
 		} else if (strlen($description)<10) {
 			$this->setError(_('Describe in a more comprehensive manner your project.'));
 			return false;
-		} else if (strlen($description)>255) {
-			$this->setError(_('Your project description is too long. Please make it smaller than 256 bytes.'));
-			return false;
 		} else {
 
 			// Check if sys_use_project_vhost for homepage
