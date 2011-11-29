@@ -848,6 +848,9 @@ legend {
    color: red;
 }
 
+.coolfieldset {
+	margin-top: 1em;
+}
 
 .float_left {
 	float: left;
