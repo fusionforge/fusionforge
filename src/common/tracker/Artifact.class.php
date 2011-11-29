@@ -1231,21 +1231,24 @@ class Artifact extends Error {
 		$efk=array_keys($ef);
 
 		// If there is a status field, then check against the workflow.
-		for ($i=0; $i<count($efk); $i++) {
-			$efid=$efk[$i];
-			$type=$ef[$efid]['field_type'];
-			if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
-				// Get previous value.
-				$res = db_query_params ('SELECT field_data FROM artifact_extra_field_data
-						WHERE artifact_id=$1 AND extra_field_id=$2',
-			array($this->getID(),
-				$efid));
-				$old = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
-				if ($old != $extra_fields[$efid]) {
-					$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
-					if (!$atw->checkEvent($old, $extra_fields[$efid])) {
-						$this->setError('Workflow error: You are not authorized to change the Status ('.$old.' => '.$extra_fields[$efid].')');
-						return false;
+		// Unless if we change type.
+		if (! isset($changes['Type']) || !$changes['Type']) {
+			for ($i=0; $i<count($efk); $i++) {
+				$efid=$efk[$i];
+				$type=$ef[$efid]['field_type'];
+				if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+					// Get previous value.
+					$res = db_query_params ('SELECT field_data FROM artifact_extra_field_data
+							WHERE artifact_id=$1 AND extra_field_id=$2',
+				array($this->getID(),
+					$efid));
+					$old = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
+					if ($old != $extra_fields[$efid]) {
+						$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
+						if (!$atw->checkEvent($old, $extra_fields[$efid])) {
+							$this->setError('Workflow error: You are not authorized to change the Status ('.$old.' => '.$extra_fields[$efid].')');
+							return false;
+						}
 					}
 				}
 			}
