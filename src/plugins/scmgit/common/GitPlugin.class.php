@@ -282,13 +282,15 @@ class GitPlugin extends SCMPlugin {
 
 		$project_name = $project->getUnixName();
 		$root = forge_get_config('repos_path', 'scmgit') . '/' . $project_name ;
-		$unix_group = 'scm_' . $project_name;
-                system ("mkdir -p $root");
+		system ("mkdir -p $root");
 
 		$main_repo = $root . '/' .  $project_name . '.git' ;
 		if (!is_file ("$main_repo/HEAD") && !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs")) {
-			system ("GIT_DIR=\"$main_repo\" git init --bare --shared=group") ;
-			system ("GIT_DIR=\"$main_repo\" git update-server-info") ;
+			exec ("GIT_DIR=\"$main_repo\" git init --bare --shared=group", $result) ;
+			$output .= join("<br />", $result);
+			$result = '';
+			exec ("GIT_DIR=\"$main_repo\" git update-server-info", $result) ;
+			$output .= join("<br />", $result);
 			if (is_file ("$main_repo/hooks/post-update.sample")) {
 				rename ("$main_repo/hooks/post-update.sample",
 					"$main_repo/hooks/post-update") ;
@@ -304,14 +306,22 @@ class GitPlugin extends SCMPlugin {
 			system ("echo \"Git repository for $project_name\" > $main_repo/description") ;
 			system ("find $main_repo -type d | xargs chmod g+s") ;
 		}
-		system ("chgrp -R $unix_group $root") ;
-		system ("chmod g+s $root") ;
-		if ($project->enableAnonSCM()) {
-			system ("chmod g+wX,o+rX-w $root") ;
-			system ("chmod -R g+wX,o+rX-w $main_repo") ;
+		if (forge_get_config('use_ssh','scmgit')) {
+			$unix_group = 'scm_' . $project_name ;
+			system ("chgrp -R $unix_group $root") ;
+			system ("chmod g+s $root") ;
+			if ($project->enableAnonSCM()) {
+				system ("chmod g+wX,o+rX-w $root") ;
+				system ("chmod -R g+wX,o+rX-w $main_repo") ;
+			} else {
+				system ("chmod g+wX,o-rwx $root") ;
+				system ("chmod -R g+wX,o-rwx $main_repo") ;
+			}
 		} else {
-			system ("chmod g+wX,o-rwx $root") ;
-			system ("chmod -R g+wX,o-rwx $main_repo") ;
+			$unix_user = forge_get_config('apache_user');
+			$unix_group = forge_get_config('apache_group');
+			system ("chown -R $unix_user:$unix_group $main_repo") ;
+			system ("chmod -R g-rwx,o-rwx $main_repo") ;
 		}
 
 		$result = db_query_params ('SELECT u.user_name FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
@@ -349,6 +359,7 @@ class GitPlugin extends SCMPlugin {
 				system ("chmod -R g+rX-w,o-rwx $root/users") ;
 			}
 		}
+		$params['output'] = $output;
 	}
 
 	function updateRepositoryList($params) {
@@ -471,6 +482,7 @@ class GitPlugin extends SCMPlugin {
 					if ($result) {
 						// Author line
 						$last_user = $matches['name'];
+						$user2email[$last_user] = strtolower($matches['mail']);
 					} else {
 						// Short-commit stats line
 						preg_match("/^(?<mode>[AM])\s+(?<file>.+)$/", $line, $matches);
@@ -507,12 +519,18 @@ class GitPlugin extends SCMPlugin {
 			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
 
 			foreach ( $user_list as $user ) {
-				// trying to get user id from user name
+				// Trying to get user id from user name or email
 				$u = &user_get_object_by_name ($user) ;
 				if ($u) {
 					$user_id = $u->getID();
 				} else {
-					continue;
+					$res=db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR email=$2',
+						array (strtolower($user), $user2email[$user]));
+					if ($res && db_numrows($res) > 0) {
+						$user_id = db_result($res,0,'user_id');
+					} else {
+						continue;
+					}
 				}
 
 				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0 ;
