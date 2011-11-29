@@ -88,7 +88,7 @@ class ArtifactCanned extends Error {
 		//	data validation
 		//
 		if (!$title || !$body) {
-			$this->setError(_('ArtifactCanned: name and assignee are Required'));
+			$this->setError(_('Title and Message Body are required'));
 			return false;
 		}
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {

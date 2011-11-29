@@ -105,7 +105,7 @@ WHERE groups.group_id=artifact_group_list.group_id
 AND groups.status =$1
 AND artifact_group_list.group_artifact_id=artifact_type_monitor.group_artifact_id
 AND artifact_type_monitor.user_id=$2
-ORDER BY group_name DESC',
+ORDER BY group_name ASC',
 					 array('A',
 					       $this->User->getID()));
 		$rows=db_numrows($result);

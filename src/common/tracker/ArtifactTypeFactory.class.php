@@ -102,7 +102,7 @@ class ArtifactTypeFactory extends Error {
 	 *
 	 *	@return	array	The array of ArtifactType objects.
 	 */
-	function &getArtifactTypes() {
+	function getArtifactTypes() {
 		if ($this->ArtifactTypes) {
 			return $this->ArtifactTypes;
 		}
