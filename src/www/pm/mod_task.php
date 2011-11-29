@@ -43,6 +43,8 @@ echo notepad_func();
 <form id="modtaskform" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
 <input type="hidden" name="func" value="postmodtask" />
 <input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>" />
+<input type="hidden" name="duration" value="<?php echo $pt->getDuration(); ?>" />
+<input type="hidden" name="parent_id" value="<?php echo $pt->getParentID(); ?>" />
 
 <table class="fullwidth mod_task">
 
@@ -201,8 +203,6 @@ unset($GLOBALS['editor_was_set_up']);
 		<?php
 		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
 		?>
-		<input type="hidden" name="duration" value="<?php echo $pt->getDuration(); ?>" />
-		<input type="hidden" name="parent_id" value="<?php echo $pt->getParentID(); ?>" />
 		</td>
 	</tr>
 <!--
