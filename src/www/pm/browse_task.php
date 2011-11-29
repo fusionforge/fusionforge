@@ -357,19 +357,6 @@ if ($rows < 1) {
 		$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'assigned_to',
 		'100',true,_('No Change'));
 
-		echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
-	function checkAll(val) {
-		al=document.taskList;
-		len = al.elements.length;
-		var i=0;
-		for( i=0 ; i<len ; i++) {
-			if (al.elements[i].name==\'project_task_id_list[]\') {
-				al.elements[i].checked=val;
-			}
-		}
-	}
-	/* ]]> */</script>';
-
 		echo '<fieldset id="fieldset1_closed" class="coolfieldset">
 			<legend>'._('Mass Update').'</legend>
 			<div>

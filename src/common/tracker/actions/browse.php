@@ -704,19 +704,6 @@ if ($art_arr && $art_cnt > 0) {
 		Mass Update Code
 	*/
 	if ($IS_ADMIN) {
-		echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
-	function checkAll(val) {
-		al=document.artifactList;
-		len = al.elements.length;
-		var i=0;
-		for( i=0 ; i<len ; i++) {
-			if (al.elements[i].name==\'artifact_id_list[]\') {
-				al.elements[i].checked=val;
-			}
-		}
-	}
-	/* ]]> */</script>';
-
 		echo '<fieldset id="fieldset1_closed" class="coolfieldset">
 	<legend>'._('Mass Update').'</legend>
 	<div>
