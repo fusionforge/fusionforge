@@ -159,7 +159,7 @@ $type = getStringFromRequest('type');
 $id = getStringFromRequest('id');
 $pluginname = getStringFromRequest('pluginname');
 $name = getStringFromRequest('name');
-$body = getStringFromRequest('body');
+$body = getHtmlTextFromRequest('body');
 $activate = getArrayFromRequest('activate');
 
 $blocks_text = array(
@@ -347,12 +347,9 @@ if (!$type) {
 		$params['width'] = "800";
 		$params['height'] = "500";
 		$params['group'] = $id;
-		plugin_hook("text_editor",$params);
-		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="body"  rows="20" cols="80">' . $body . '</textarea>';
-		}
-		unset($GLOBALS['editor_was_set_up']);
+		$params['content'] = '<textarea name="body"  rows="20" cols="80">'.$body.'</textarea>';
+		plugin_hook_by_reference("text_editor", $params);
+		echo $params['content'];
 
 		print "<br /><input type=\"submit\" value=\"" .
 			_("Save") .
