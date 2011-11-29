@@ -54,7 +54,7 @@ class SurveyHTML extends Error {
 
 		if ($project = group_get_object($group_id)){
 			if (!$project->usesSurvey()) {
-			exit_disabled();
+				exit_disabled();
 			}
 
 			if ($is_admin_page && $group_id) {
@@ -93,10 +93,10 @@ class SurveyHTML extends Error {
 	}
 
 	/**
-         * Show Add/Modify Question Forums
-         * @param Survey Question Question Object
-         * Return string
-         */
+	 * Show Add/Modify Question Forums
+	 * @param Survey Question Question Object
+	 * Return string
+	 */
 	function showAddQuestionForm( &$q ) {
 		global $group_id;
 
@@ -139,11 +139,11 @@ class SurveyHTML extends Error {
 		return $ret;
 	}
 
-        /**
-         * Show Add/Modify Question Forums
-         * @param Survey Question Question Object
-         * Return string
-         */
+	/**
+	 * Show Add/Modify Question Forums
+	 * @param Survey Question Question Object
+	 * Return string
+	 */
 	function showAddSurveyForm( &$s) {
 		global $group_id;
 		global $survey_id;
@@ -188,7 +188,7 @@ class SurveyHTML extends Error {
 		$ret.='<input type="hidden" name="survey_questions" value="'.$survey_questions.'" />';
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '" />';
 		$ret.='<strong>'. _('Survey Title: ').'</strong>' .utils_requiredField();
-		$ret.= '<input type="text" name="survey_title" value="'.$survey_title.'" size="60" maxlength="150" /></p>';
+		$ret.= '<input required="required" type="text" name="survey_title" value="'.$survey_title.'" size="60" maxlength="150" /></p>';
 
 		$ret.='<p><strong>'. _('Is Active?').'</strong>';
 		$ret.='<br /><input type="radio" name="is_active" value="1"' .$active. '/>'._('Yes');
