@@ -64,7 +64,7 @@ echo ngettext('You can request to join a project by clicking the submit button. 
 <p>
 <?php echo ngettext('You must send a comment to the administrator:', 'You must send a comment to the administrators:',$nbadmins); echo utils_requiredField(); ?>
 </p>
-<textarea name="comments" rows="15" cols="60"><?php echo $comments ?></textarea>
+<textarea name="comments" required="required" rows="15" cols="60"><?php echo $comments ?></textarea>
 <p>
 	<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 </p>
