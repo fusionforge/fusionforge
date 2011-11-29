@@ -220,8 +220,8 @@ if ( !forge_get_config ('project_auto_approval') ) {
 </p>
 
 <?php
-	$SCMFactory = new SCMFactory() ;
-$scm_plugins=$SCMFactory->getSCMs() ;
+$SCMFactory = new SCMFactory();
+$scm_plugins=$SCMFactory->getSCMs();
 if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 	echo '<h2>'.$index++.'. '._('Source Code').'</h2>';
 	echo '<p>' . _('You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.')."</p>\n";

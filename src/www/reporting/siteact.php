@@ -52,7 +52,7 @@ if ($start == $end) {
 	$error_msg .= _('Start and end dates must be different');
 }
 
-$area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads')) ;
+$area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads', 'pageviews')) ;
 
 report_header(_('Site-Wide Activity'));
 

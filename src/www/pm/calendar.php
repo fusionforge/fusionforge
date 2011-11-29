@@ -249,7 +249,7 @@ function display_month($m, $y) {
 
 ?>
 	<form action="/pm/calendar.php" method="get">
-	<table width="100%">
+	<table class="fullwidth">
 		<tr>
 			<td><?php echo _('Period'); ?><br />
 				<select name="type">
@@ -303,7 +303,7 @@ function display_month($m, $y) {
 ?>
 
 	</form>
-	<table width="100%">
+	<table class="fullwidth">
 		<tr>
 			<td width="20px" class="selected"></td>
 			<td><?php echo _('today\'s date') ?></td>
