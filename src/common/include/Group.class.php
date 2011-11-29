@@ -1535,7 +1535,7 @@ class Group extends Error {
 			$this->setError(_('Cannot Delete System Group'));
 			return false;
 		}
-		$perm =& $this->getPermission();
+		$perm = $this->getPermission();
 		if (!$perm || !is_object($perm)) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -1547,11 +1547,11 @@ class Group extends Error {
 			return false;
 		}
 
-		//db_begin();
+		db_begin();
 		//
 		//	Remove all the members
 		//
-		$members =& $this->getMembers();
+		$members = $this->getMembers();
 		foreach ($members as $i) {
 			if(!$this->removeUser($i->getID())) {
 				$this->setError(_('Could not properly remove member:').' '.$i->getID());
@@ -1573,7 +1573,7 @@ class Group extends Error {
 		//	Delete Trackers
 		//
 		$atf = new ArtifactTypeFactory($this);
-		$at_arr =& $atf->getArtifactTypes();
+		$at_arr = $atf->getArtifactTypes();
 		foreach ($at_arr as $i) {
 			if (!is_object($i)) {
 				continue;
@@ -1587,7 +1587,7 @@ class Group extends Error {
 		//	Delete Forums
 		//
 		$ff = new ForumFactory($this);
-		$f_arr =& $ff->getForums();
+		$f_arr = $ff->getForums();
 		foreach ($f_arr as $i) {
 			if (!is_object($i)) {
 				continue;
@@ -1601,7 +1601,7 @@ class Group extends Error {
 		//	Delete Subprojects
 		//
 		$pgf = new ProjectGroupFactory($this);
-		$pg_arr =& $pgf->getProjectGroups();
+		$pg_arr = $pgf->getProjectGroups();
 		foreach ($pg_arr as $i) {
 			if (!is_object($i)) {
 				continue;
@@ -1616,6 +1616,12 @@ class Group extends Error {
 		//
 		$res = db_query_params('SELECT * FROM frs_package WHERE group_id=$1',
 					array($this->getID()));
+		if (!$res) {
+			$this->setError(_('Error FRS Packages: ').db_error());
+			db_rollback();
+			return false;
+		}
+
 		while ($arr = db_fetch_array($res)) {
 			$frsp=new FRSPackage($this, $arr['package_id'], $arr);
 			if (!$frsp->delete(1, 1)) {
@@ -1797,6 +1803,7 @@ class Group extends Error {
 			return false;
 		}
 
+		// Delete entry in groups.
 		$res = db_query_params('DELETE FROM groups WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
@@ -1837,7 +1844,7 @@ class Group extends Error {
 	/*
 		Basic functions to add/remove users to/from a group
 		and update their permissions
-		*/
+	*/
 
 	/**
 	 * addUser - controls adding a user to a group.
