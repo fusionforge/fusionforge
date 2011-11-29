@@ -341,27 +341,16 @@
 			}
 
 		//
-		//	Upload template
+		//	Update a template
 		//
-		} elseif (getStringFromRequest('uploadtemplate')) {
+		} elseif (getStringFromRequest('update_template')) {
 
-			$input_file = getUploadedFile('input_file');
-			$size = $input_file['size'];
-			if ($size != 0 ) {
-				if (!util_check_fileupload($input_file['tmp_name'])) {
-					echo ('Invalid filename :'.$input_file['tmp_name']);
-					exit;
-				}
-				$input_data = addslashes(fread(fopen($input_file['tmp_name'], 'r'), $size));
+			$body = getStringFromRequest('body');
+			$body = preg_replace('/^\s*<table>(.*)<\/table>\s*$/s', '\\1', $body);
 
 				db_query_params ('UPDATE artifact_group_list SET custom_renderer=$1 WHERE group_artifact_id=$2',
-					 	array ($input_data,
-						$ath->getID()));
-				echo db_error();
-				$feedback .= _('Renderer Uploaded');
-			} else {
-				$error_msg .= _('Renderer File empty');
-			}
+				array($body, $ath->getID()));
+			$feedback .= _('Renderer Updated');
 		//
 		//	Up or down elements
 		//

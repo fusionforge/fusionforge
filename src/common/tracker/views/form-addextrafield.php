@@ -35,7 +35,6 @@ $ath->adminHeader(array ('title'=>$title));
 		$efarr = $ath->getExtraFields();
 		$eftypes=ArtifactExtraField::getAvailableTypes();
 		$keys=array_keys($efarr);
-		echo "<br />";
 		$rows=count($keys);
 		if ($rows > 0) {
 
@@ -48,7 +47,8 @@ $ath->adminHeader(array ('title'=>$title));
 
 			for ($k=0; $k < $rows; $k++) {
 				$i=$keys[$k];
-				echo '<tr id="field-'.$efarr[$i]['alias'].'" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+				$id=str_replace('@','',$efarr[$i]['alias']);
+				echo '<tr id="field-'.$id.'" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .">\n".
 					'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').'<a href="'.getStringFromServer('PHP_SELF').'?update_box=1&amp;id='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 						' ['._('Edit').']</a>'.
@@ -58,8 +58,8 @@ $ath->adminHeader(array ('title'=>$title));
 					'<a href="'.getStringFromServer('PHP_SELF').'?copy_opt=1&amp;id='.
                         $efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
                         ' ['._('Copy').']</a>'.
-					'</td>';
-				echo '<td>'.$eftypes[$efarr[$i]['field_type']].'</td>';
+					"</td>\n";
+				echo '<td>'.$eftypes[$efarr[$i]['field_type']]."</td>\n";
 				/*
 		  			List of possible options for a user built Selection Box
 		  		*/
@@ -149,11 +149,10 @@ $ath->adminHeader(array ('title'=>$title));
 		</form>
 		<?php
 
-		echo "<h2>"._('Custom Field Rendering Template')."</h2><p>";
+		echo "<h2>"._('Custom Field Rendering Template')."</h2>";
 
 		echo "<p>";
-		echo '<a href="'.getStringFromServer('PHP_SELF').'?downloadtemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Download default template').'</a><br />';
-		echo '<a href="'.getStringFromServer('PHP_SELF').'?uploadtemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Add/Update template').'</a><br />';
+		echo '<a href="'.getStringFromServer('PHP_SELF').'?edittemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Edit template').'</a><br />';
 		echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
 		echo "</p>";
 

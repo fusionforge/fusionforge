@@ -78,12 +78,33 @@ if ($group_id && $atid) {
 		getStringFromRequest('post_changes_alphaorder')) {
 		include $gfcommon.'tracker/actions/admin-updates.php';
 
+	} elseif (getStringFromRequest('edittemplate')) {
+
+		include $gfcommon.'tracker/views/form-edittemplate.php';
+
 	} elseif (getStringFromRequest('deletetemplate')) {
+
+		$confirm = getStringFromRequest('confirm');
+		$cancel = getStringFromRequest('cancel');
+
+		if ($cancel) {
+			header ("Location: /tracker/admin/?group_id=$group_id&atid=$atid");
+			exit;
+		}
+		if (!$confirm) {
+			$ath->adminHeader(array ('title'=>_('Delete Layout Template')));
+			echo $HTML->confirmBox(_('You are about to delete your current Layout Template')
+				. '<br/><br/>' . _('Do you really want to do that?'),
+				array('group_id' => $group_id, 'atid' => $atid, 'deletetemplate' => 1),
+				array('confirm' => _('Delete'), 'cancel' => _('Cancel')));
+			$ath->footer(array());
+			exit;
+		}
+
 		db_query_params ('UPDATE artifact_group_list SET custom_renderer=$1 WHERE group_artifact_id=$2',
 				 array ('',
 					$ath->getID()));
-		echo db_error();
-		$feedback .= _('Renderer Deleted');
+		$feedback .= _('Layout Template Deleted');
 		$next = 'add_extrafield';
 	}
 
@@ -95,7 +116,7 @@ if ($group_id && $atid) {
 	} else {
 		$actions = array('add_extrafield', 'customize_list', 'workflow', 'workflow_roles', 'add_opt',
 			'updownorder_opt', 'post_changes_order', 'post_changes_alphaorder', 'copy_opt', 'add_canned',
-			'clone_tracker', 'uploadtemplate', 'downloadtemplate', 'downloadcurrenttemplate',
+			'clone_tracker', 'edittemplate',
 			'update_canned', 'update_box', 'update_opt', 'delete', 'delete_opt', 'deleteextrafield','update_type');
 		$action = '';
 		foreach ($actions as $a) {
@@ -140,18 +161,6 @@ if ($group_id && $atid) {
 	} elseif ($action == 'clone_tracker') {
 
 		include $gfcommon.'tracker/views/form-clonetracker.php';
-
-	} elseif ($action == 'uploadtemplate') {
-
-		include $gfcommon.'tracker/views/form-uploadtemplate.php';
-
-	} elseif ($action == 'downloadtemplate') {
-
-		echo $ath->getRenderHTML();
-
-	} elseif ($action == 'downloadcurrenttemplate') {
-
-		echo $ath->getRenderHTML(array(),'DETAIL');
 
 	} elseif ($action == 'update_canned') {
 
