@@ -218,7 +218,7 @@ class PluginManager extends Error {
 		}
 		$p_name = $pluginobject->GetName() ;
 		$this->plugins_objects[$p_name] =& $pluginobject;
-		$this->plugins_to_hooks[$p_name] = $pluginobject->GetHooks();
+		$this->plugins_to_hooks[$p_name] = array_unique($pluginobject->GetHooks ()) ;
 		return true;
 	}
 
