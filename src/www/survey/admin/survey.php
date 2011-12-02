@@ -89,7 +89,7 @@ if ($s->isError()) {
 }
 
 $title = $survey_id ? _('Edit a Survey') : _('Add a Survey');
-$sh->header(array('title'=>$title));
+$sh->header(array('title'=>$title, 'modal'=>1));
 
 echo ($sh->ShowAddSurveyForm($s));
 

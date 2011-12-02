@@ -201,7 +201,7 @@ class Artifact extends Error {
 //
 // ape: Disabled, private means only restricted to members. So, no special rules #2503.
 //			if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
-//				$this->setError(_('Only Artifact Admins Can Modify Private ArtifactTypes'));
+//				$this->setError(_('Only Artifact Admins Can Modify Private Artifact Types'));
 //				return false;
 //			}
 		}

@@ -50,7 +50,7 @@ $is_admin_page='y';
 $sh = new SurveyHtml();
 
 $title = $question_id ? _('Edit a Question') : _('Add a Question');
-$sh->header(array('title'=>$title));
+$sh->header(array('title'=>$title, 'modal'=>1));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
     echo '<div class="error">'._('Permission denied').'</div>';

@@ -55,6 +55,13 @@ class SurveyResponseFactory extends Error {
 	var $Result;
 
 	/**
+	 * The Aggregated Results array for all questions.
+	 *
+	 * @var	 array	Response
+	 */
+	var $Results;
+
+	/**
 	 *  Constructor.
 	 *
 	 *	@param	object	The Survey object
@@ -150,10 +157,43 @@ class SurveyResponseFactory extends Error {
 		return $this->Responses;
 	}
 
+	/**
+	 *	getSurveyAllResponses - get an array of Survey Response objects
+	 *		for the Survey and Question
+	 *
+	 *	@return	array	The array of Survey Response objects.
+	 */
+	function &getSurveyAllResponses() {
+		/* We alread have it */
+		if ($this->Responses) {
+			return $this->Responses;
+		}
+
+		$group = $this->getGroup();
+		$group_id = $group->GetID();
+		$survey = $this->getSurvey();
+		$survey_id = $survey->GetID();
+		$question = $this->getQuestion();
+		$question_id = $question->GetID();
+
+		$result = db_query_params('SELECT * FROM survey_responses WHERE survey_id=$1 AND group_id=$2 ORDER BY post_date DESC',
+			array($survey_id, $group_id));
+		if (!$result) {
+			$this->setError(_('No Survey Response is found').db_error());
+			return false;
+		} else {
+			while ($arr = db_fetch_array($result)) {
+				$this->Responses[] = new SurveyResponse($this->getGroup(), $arr);
+			}
+			db_free_result($result);
+		}
+		return $this->Responses;
+	}
+
 
 	/**
 	 *	getNumberOfSurveyResponses - get the number of Survey Responses
-         *
+	 *
  	 *	@return	int      the number of survey responses
 	 */
 	function getNumberOfSurveyResponses() {
@@ -167,11 +207,11 @@ class SurveyResponseFactory extends Error {
 
 	/**
 	 *	getResults - get the array of result for yes/no and 1-5 question
-         *
- 	 *	@return	int      the array of result
-         *              for the yes/no question, it returns counts in arr[1] and arr[5];
-         *              for the 1-5 question, it returns counts in arr[1], arr[1], ..., arr[5];
-         *              for comments, we return arr[1], ...arr[n] with comments
+	 *
+	 *	@return	int      the array of result
+	 *              for the yes/no question, it returns counts in arr[1] and arr[5];
+	 *              for the 1-5 question, it returns counts in arr[1], arr[1], ..., arr[5];
+	 *              for comments, we return arr[1], ...arr[n] with comments
 	 */
 	function &getResults() {
 		if ($this->Result) {
@@ -211,6 +251,35 @@ class SurveyResponseFactory extends Error {
 			}
 		}
 
+		return $this->Result;
+	}
+
+	/**
+	 *	getDetailResults - get the array of result
+	 *
+	 *	@return	int      the array of result
+	 *		return all responses for one survey
+	 */
+	function &getDetailResults() {
+		if ($this->Results) {
+			return $this->Results;
+		}
+		$arr = &$this->getSurveyAllResponses();
+		if (!$arr || !is_array($arr)) {
+			return false;
+		}
+		$count = count($arr);
+
+		for($i=0; $i<$count; $i++) {
+			$id = $arr[$i]->getUserId();
+			$qid = $arr[$i]->GetQuestionID();
+			if ($arr[$i]->isError()) {
+				echo $arr[$i]->getErrorMessage();
+				continue;
+			}
+			$response = $arr[$i]->getResponse();
+			$this->Result[$id][$qid] = $response;
+		}
 		return $this->Result;
 	}
 }

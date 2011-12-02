@@ -53,7 +53,7 @@ $is_admin_page='y';
 $sh = new  SurveyHtml();
 
 $title = _('Survey Results');
-$sh->header(array('title'=>$title));
+$sh->header(array('title' => $title, 'modal' => 1));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	echo '<p class="error">'._('Permission denied').'</p>';
@@ -82,7 +82,7 @@ if ($survey_id) {
 		$sq = new SurveyQuestion($g, $question_id);
 		if (!$sq || !is_object($sq)) {
 	    	echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</p>";
-		} else if ( $sq->isError()) {
+		} else if ($sq->isError()) {
 	    	echo '<p class="error">'._('Error'). $sq->getErrorMessage() ."</p>";
 		} else {
 	    	showResult($sh, $s, $sq, 1, 0, $graph);

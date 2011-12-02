@@ -288,7 +288,7 @@ class SurveyHTML extends Error {
 		$ret = "<h2>" . sprintf(ngettext("%d question found", "%d questions found", $n), $n)."</h2>";
 
 		/* Head information */
-		$title_arr = array ('Question ID', 'Question', 'Type', 'Edit/Delete');
+		$title_arr = array('Question ID', 'Question', 'Type', 'Edit/Delete');
 		$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for($i = 0;  $i  <  count($questions);  $i++)  {
@@ -318,21 +318,22 @@ class SurveyHTML extends Error {
 
 	/**
 	 * Show list of surveys
-         *
-         * Show surveys with many options
-         * have to set $user_id to get the right show_vote option
-         *
-         *
-         */
-	function  ShowSurveys(&$surveys, $show_id=0, $show_questions=0,
+	 *
+	 * Show surveys with many options
+	 * have to set $user_id to get the right show_vote option
+	 *
+	 */
+	function showSurveys(&$surveys, $show_id=0, $show_questions=0,
 			      $show_number_questions=0, $show_number_votes=0,
 			      $show_vote=0, $show_edit=0, $show_result=0,
 			      $show_result_graph=0, $show_result_comment=0,
+			      $show_result_csv=0,
 			      $show_inactive=0 ) {
 		global $user_id;
 		global $group_id;
 
-		$ret = '<h2>'. ngettext('Existing Survey', 'Existing Surveys', count($surveys)). '</h2>';
+		$ret = '';
+		$displaycount = 0;
 
 		/* Head information */
 		if ($show_id) {
@@ -365,6 +366,9 @@ class SurveyHTML extends Error {
 		if ($show_result_comment) {
 			$title_arr[] = _('Result with Graph and Comments');
 		}
+		if ($show_result_csv) {
+			$title_arr[] = _("CSV");
+		}
 
 		$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -388,6 +392,8 @@ class SurveyHTML extends Error {
 				$strike_close="";
 
 			}
+
+			$displaycount++;
 
 			$ret.= "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($color_index++) .">\n";
 			if ($show_id) {
@@ -435,17 +441,25 @@ class SurveyHTML extends Error {
 				/* Edit/Delete Link */
 				$ret.= '<td>['.util_make_link ('/survey/admin/show_results.php?graph=yes&amp;show_comment=yes&amp;group_id='.$group_id.'&amp;survey_id='.$surveys[$i]->getID(),_('Result with Graph and Comments')).']</td>';
 			}
+			if ($show_result_csv) {
+				/* Csv Link */
+				$ret.= "<td>[<a href=\"/survey/admin/show_csv.php?group_id=$group_id&amp;survey_id=".$surveys[$i]->getID().'">';
+				$ret.= _("CSV").'</a>]</td>';
+			}
 			$ret.= "</tr>\n";
 		}
 
 		$ret.= $GLOBALS['HTML']->listTableBottom();
+		if ($displaycount == 0) {
+			return '<p class="information">' . (_('No Survey is found')) . '</p>';
+		}
 		return $ret;
 	}
 
 	/**
-         * Show survey form - Show all forums of Survey
+	 * Show survey form - Show all forums of Survey
 	 */
-	function ShowSurveyForm( &$s ) {
+	function showSurveyForm( &$s ) {
 		global $group_id;
 		global $survey_id;
 
@@ -487,7 +501,7 @@ class SurveyHTML extends Error {
 					$ret.= '&nbsp;<br />';
 				}
 
-				$ret.= $index++.'&nbsp;&nbsp;&nbsp;&nbsp;<br /></td><td>';
+				$ret.= $index++.'&nbsp;&nbsp;&nbsp;&nbsp;<br /></strong></td><td>';
 			}
 
 			switch($question_type) {
@@ -545,11 +559,11 @@ class SurveyHTML extends Error {
 	}
 
 	/**
-         * Show survey Result
-         *
-         *    @param Object a Survey Response Factory
+	 * Show survey Result
+	 *
+	 *    @param Object a Survey Response Factory
 	 */
-	function ShowResult( &$sr, $show_comment=0, $q_num="", $show_graph=0) {
+	function showResult( &$sr, $show_comment=0, $q_num="", $show_graph=0) {
 		global $group_id;
 
 		$Survey = $sr->getSurvey();
@@ -682,25 +696,25 @@ class SurveyHTML extends Error {
 	}
 
 	/**
-         * split_str - works as str_split of PHP5 -  Converts a string to an array.
+	 * split_str - works as str_split of PHP5 -  Converts a string to an array.
 	 *
 	 * @param String str
-         * @param int length of chunk
+	 * @param int length of chunk
 	 * @return array array of chunks of the string
 	 */
-		function split_str($str,$split_lengt=1) {
-			$cnt = strlen($str);
-			for ($i=0;$i<$cnt;$i+=$split_lengt) {
-				$rslt[]= substr($str,$i,$split_lengt);
-			}
-	 		return $rslt;
+	function split_str($str,$split_lengt=1) {
+		$cnt = strlen($str);
+		for ($i=0;$i<$cnt;$i+=$split_lengt) {
+			$rslt[]= substr($str,$i,$split_lengt);
 		}
+ 		return $rslt;
+	}
 
 	/**
-         * _makeBar - make Precentage bar as a cell in a table. Starts with <tr> and ends with </tr>
+	 * _makeBar - make Precentage bar as a cell in a table. Starts with <tr> and ends with </tr>
 	 *
 	 * @param String name Name
-         * @param int percentage of the name
+	 * @param int percentage of the name
 	 * @return string
 	 */
 	function _makeBar($name, $percent, $color) {
