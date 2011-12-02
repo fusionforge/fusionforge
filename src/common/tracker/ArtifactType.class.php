@@ -25,6 +25,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
+require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 
 	/**
 	* Gets an ArtifactType object from the artifact type id
@@ -666,7 +667,6 @@ class ArtifactType extends Error {
 		}
 		$efs = $at->getExtraFields();
 
-
 		//
 		//	Iterate list of extra fields
 		//
@@ -846,6 +846,13 @@ class ArtifactType extends Error {
 			WHERE group_artifact_id=$1',
 				 array ($this->getID())) ;
 //echo '5'.db_error();
+
+		ArtifactStorage::instance()->deleteFromQuery('SELECT id FROM artifact_file
+			WHERE EXISTS (SELECT artifact_id FROM artifact
+			WHERE group_artifact_id=$1
+			AND artifact.artifact_id=artifact_file.artifact_id)',
+				array ($this->getID())) ;
+
 		db_query_params ('DELETE FROM artifact_file
 			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
@@ -880,6 +887,7 @@ class ArtifactType extends Error {
 //echo '11'.db_error();
 
 		db_commit();
+		ArtifactStorage::instance()->commit();
 
 		$this->Group->normalizeAllRoles () ;
 
