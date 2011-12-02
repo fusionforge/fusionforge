@@ -21,6 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 require_once $gfcommon.'include/Error.class.php';
 
 /**
@@ -109,12 +110,12 @@ class ArtifactFile extends Error {
 	 *	@param	string	Filename of the item.
 	 *	@param	string	Item filetype.
 	 *	@param	string	Item filesize.
-	 *	@param	binary	Binary item data.
+	 *	@param	binary	file to store.
 	 *	@param	string	Item description.
 	 *	@param	array	Array of data to change submitter and time of submit like: array('user' => 127, 'time' => 1234556789)
-	 *  	@return id on success / false on failure.
+	 *	@return id on success / false on failure.
 	 */
-	function create($filename, $filetype, $filesize, $bin_data, $description='None', $importData = array()) {
+	function create($filename, $filetype, $filesize, $file, $description='None', $importData = array()) {
 		// Some browsers don't supply mime type if they don't know it
 		if (!$filetype) {
 			// Let's be on safe side?
@@ -124,9 +125,9 @@ class ArtifactFile extends Error {
 		//
 		//	data validation
 		//
-		if (!$filename || !$filetype || !$filesize || !$bin_data) {
-			//echo '<p>|'.$filename.'|'.$filetype.'|'.$filesize.'|'.$bin_data.'|';
-			$this->setError(_('ArtifactFile: File name, type, size, and data are required'));
+		if (!$filename || !$filetype || !$filesize || !$file) {
+			//echo '<p>|'.$filename.'|'.$filetype.'|'.$filesize.'|'.$file.'|';
+			$this->setError(_('ArtifactFile: File, name, type, size are required'));
 			return false;
 		}
 
@@ -162,7 +163,7 @@ class ArtifactFile extends Error {
 			VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 					array ($this->Artifact->getID(),
 					       $description,
-					       base64_encode($bin_data),
+					       '',
 					       $filename,
 					       $filesize,
 					       $filetype,
@@ -171,12 +172,16 @@ class ArtifactFile extends Error {
 
 		$id=db_insertid($res,'artifact_file','id');
 
+		ArtifactStorage::instance()->store($id, $file);
+
 		if (!$res || !$id) {
 			db_rollback();
+			ArtifactStorage::instance()->rollback();
 			$this->setError('ArtifactFile: '.db_error());
 			return false;
 		} else {
 			db_commit();
+			ArtifactStorage::instance()->commit();
 
 			//
 			//	Now set up our internal data structures
@@ -211,6 +216,8 @@ class ArtifactFile extends Error {
 			$this->setError('ArtifactFile: Unable to Delete');
 			return false;
 		} else {
+			ArtifactStorage::instance()->delete($this->getID())->commit();
+
 			$this->Artifact->addHistory('File Deleted',$this->getID().': '.$this->getName());
 			return true;
 		}
@@ -271,12 +278,21 @@ class ArtifactFile extends Error {
 	}
 
 	/**
-	 *	getData - get the binary data from the db.
+	 *	getData - return the content of the attached file.
 	 *
-	 *	@return binary.
+	 *	@return string content of file.
 	 */
 	function getData() {
-		return base64_decode($this->data_array['bin_data']);
+		return file_get_contents($this->getFile());
+	}
+
+	/**
+	 *	getFile - get the file.
+	 *
+	 *	@return string full pathname of file in storage.
+	 */
+	function getFile() {
+		return ArtifactStorage::instance()->get($this->getID());
 	}
 
 	/**

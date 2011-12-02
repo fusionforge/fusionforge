@@ -712,7 +712,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$ids[]=$extra_id;
 			$names[]=$extra_name;
 		}
-			
+
 		if ($multiple) {
 			if (!is_array($checked)) {
 				$checked = explode(',',$checked);
