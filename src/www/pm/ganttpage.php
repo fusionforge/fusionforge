@@ -150,7 +150,7 @@ $size_box=html_build_select_box_from_arrays ($size_col_arr,$size_title_arr,'_siz
 		<?php
 
 echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=ganttpage" method="post">
-	<table width="10%" border="0" class="tableheading">
+	<table width="10%" class="tableheading">
 	<tr>
 		<td>'._('Assignee').'<br />'. $tech_box .'</td>
 		<td>'._('Status').'<br />'. $status_box .'</td>

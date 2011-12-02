@@ -150,6 +150,8 @@ if (!$art_arr && $af->isError()) {
 //same for status
 use_javascript('/tabber/tabber.js');
 
+html_use_coolfieldset();
+
 $ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
 
 /**
@@ -524,6 +526,16 @@ if ($art_arr && $art_cnt > 0) {
 		<input type="hidden" name="func" value="massupdate" />';
 	}
 
+	$check_all = '';
+	if ($IS_ADMIN) {
+		$check_all = '
+		<a href="javascript:checkAllArtifacts(1)">'._('Check all').'</a>
+		-
+  		<a href="javascript:checkAllArtifacts(0)">'._('Clear all').'</a>';
+	}
+
+	$pager = '';
+
 	$browse_fields = explode(',', "id,".$ath->getBrowseList());
 	$title_arr=array();
 	foreach ($browse_fields as $f) {
@@ -666,31 +678,39 @@ if ($art_arr && $art_cnt > 0) {
 		}
 	}
 
+	echo '<div style="display:table;width:100%">';
+	echo '<div style="display:table-row">';
+
+	echo '<div style="display:table-cell">';
+	printf(_('* Denotes requests > %1$s Days Old'), ($ath->getDuePeriod()/86400));
+	echo '</div>';
+
+	if (in_array('priority', $browse_fields)) {
+		echo '<div style="display:table-cell;text-align:right">';
+		show_priority_colors_key();
+		echo '</div>';
+	}
+	echo '</div>';
+
+	echo '<div style="display:table-row">';
+
+	echo '<div style="display:table-cell">'.$check_all.'</div>';
+	echo '<div style="display:table-cell;text-align:right">'.$pager.'</div>'."\n";
+
+	echo '</div>';
+	echo '</div>';
+
 	/*
 		Mass Update Code
 	*/
 	if ($IS_ADMIN) {
-		echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
-	function checkAll(val) {
-		al=document.artifactList;
-		len = al.elements.length;
-		var i=0;
-		for( i=0 ; i<len ; i++) {
-			if (al.elements[i].name==\'artifact_id_list[]\') {
-				al.elements[i].checked=val;
-			}
-		}
-	}
-	/* ]]> */</script>
-
-			<table width="100%" border="0" id="admin_mass_update">
+		echo '<fieldset id="fieldset1_closed" class="coolfieldset">
+	<legend>'._('Mass Update').'</legend>
+	<div>
+		<table class="fullwidth" id="admin_mass_update">
 			<tr><td colspan="2">
-
-<a href="javascript:checkAll(1)">'._('Check &nbsp;all').'</a>
--
-  <a href="javascript:checkAll(0)">'._('Clear &nbsp;all').'</a>
-
-<div class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</div>
+		<p>
+		<span class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</span></p>
 			</td></tr>';
 
 		//
@@ -731,17 +751,15 @@ if ($art_arr && $art_cnt > 0) {
 				$ath->cannedResponseBox ('canned_response') .'</td></tr>
 
 			<tr><td colspan="3" align="center"><input type="submit" name="submit" value="'._('Mass update').'" /></td></tr>
-			</table>
+			</table>';
+		echo '</div>
+		</fieldset>';
+		echo '
 		</form>';
 	}
 
-	printf(_('* Denotes requests > %1$s Days Old'), ($ath->getDuePeriod()/86400));
-
-	if (in_array('priority', $browse_fields)) {
-		show_priority_colors_key();
-	}
 } else {
-	echo '<p class="warning_msg">'._('No items found').'</p>';
+	echo '<p class="information">'._('No items found').'</p>';
 	echo db_error();
 }
 

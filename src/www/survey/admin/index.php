@@ -32,16 +32,16 @@ $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>_('Survey Administration')));
+$sh->header(array('title'=>_('Surveys Administration')));
 
 if (!$group_id) {
-    exit_no_group();
+	exit_no_group();
 }
 $group=group_get_object($group_id);
 if (!$group || !is_object($group)) {
-    exit_no_group();
+	exit_no_group();
 } elseif ($group->isError()) {
-    exit_error($group->getErrorMessage(),'surveys');
+	exit_error($group->getErrorMessage(),'surveys');
 }
 
 if (!session_loggedin()) {

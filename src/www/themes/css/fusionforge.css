@@ -254,9 +254,10 @@ up {
 ----------------------------------------------- */
 .align-left {text-align: left;}
 .align-right {text-align: right;}
-.align-center {text-align:center;}
+.align-center {text-align: center;}
 
 .top {vertical-align: top;}
+.bottom {vertical-align: bottom;}
 
 .nowrap {white-space: nowrap;}
 
@@ -265,8 +266,18 @@ up {
 
 .width-100p100 {width: 100%;}
 .fullwidth {width: 100%;}
-
 .halfwidth {width: 50%;}
+.onethirdwidth {width: 33%;}
+.twothirdswidth {width: 66%;}
+.onequarterwidth {width: 25%;}
+
+/* A table with two columns, first one right-aligned and bold */
+table.infotable tr { vertical-align: top; }
+table.infotable td:first-child { font-weight: bold; text-align: right; padding-right: 4px;}
+
+table.full {
+	width: 100%;
+}
 
 .selected {background-color:pink; }
 
@@ -848,6 +859,9 @@ legend {
    color: red;
 }
 
+.coolfieldset {
+	margin-top: 1em;
+}
 
 .float_left {
 	float: left;

@@ -34,25 +34,13 @@ if ($at_arr === false) {
 
 use_javascript('/js/sortable.js');
 
-//required params for site_project_header();
-$params['group']=$group_id;
-$params['title']=sprintf(_('Trackers for %1$s'), $group->getPublicName());
-$params['toptab']='tracker';
-
-if (forge_check_perm('tracker_admin', $group_id)) {
-	$menu_text = array();
-	$menu_links = array();
-	$menu_text[] = _('Administration');
-	$menu_links[] = '/tracker/admin/?group_id='.$group_id;
-	$menu_attr[] = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'), 'class' => 'tabtitle-nw');
-	echo $HTML->subMenu($menu_text, $menu_links, $menu_attr);
-}
-
 $atf->header();
 
 if (!$at_arr || count($at_arr) < 1) {
-	echo '<div class="warning">'._('No Accessible Trackers Found').'</div>';
-	printf(_('<p><strong>No trackers have been set up, or you cannot view them.</strong></p><p><span class="important">The Admin for this project will have to set up data types using the %1$s admin page %2$s</span></p>'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>');
+	echo '<p class="information">'._('No trackers have been set up, or you cannot view them.').'</p>';
+	echo '<p>';
+	echo sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>');
+	echo "</p>";
 } else {
 
 	plugin_hook ("blocks", "tracker index");
@@ -64,7 +52,7 @@ if (!$at_arr || count($at_arr) < 1) {
 	*/
 	$tablearr = array(_('Tracker'),_('Description'),_('Open'),_('Total'));
 
-	echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
+	echo $HTML->listTableTop($tablearr, false, 'full sortable_table_tracker', 'sortable_table_tracker');
 
 	for ($j = 0; $j < count($at_arr); $j++) {
 		if (!is_object($at_arr[$j])) {
@@ -73,9 +61,9 @@ if (!$at_arr || count($at_arr) < 1) {
 			echo $at_arr[$j]->getErrorMessage();
 		} else {
 			echo '
-		<tr>
+		<tr '. $HTML->boxGetAltRowStyle($j) . '>
 			<td><a href="'.util_make_uri('/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse').'">'.
- 				html_image("ic/tracker20w.png","20","20").' &nbsp;'.
+ 				html_image("ic/tracker20w.png","20","20").' '.
 				$at_arr[$j]->getName() .'</a>
 			</td>
 			<td>' .  $at_arr[$j]->getDescription() .'

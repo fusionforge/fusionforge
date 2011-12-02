@@ -61,7 +61,7 @@ if (count($newids) > 0) {
 $accumulated_ids = array_unique($accumulated_ids);
 
 if (getStringFromRequest('finished')) {
-    session_redirect('/project/admin/massfinish.php?group_id='.$group_id.'&accumulated_ids='.implode(',',$accumulated_ids));
+	session_redirect('/project/admin/massfinish.php?group_id='.$group_id.'&accumulated_ids='.implode(',',$accumulated_ids));
 }
 
 project_admin_header(array('title'=>_('Add Users From List'),'group'=>$group_id));

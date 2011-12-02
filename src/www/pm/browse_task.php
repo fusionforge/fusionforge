@@ -85,6 +85,8 @@ $_order=$ptf->order;
 $_category_id=$ptf->category;
 $_view=$ptf->view_type;
 
+html_use_coolfieldset();
+
 pm_header(array('title'=>_('Browse tasks'),'group_project_id'=>$group_project_id));
 
 /*
@@ -152,14 +154,14 @@ $view_box=html_build_select_box_from_arrays ($view_col_arr,$view_arr,'_view',$_v
 */
 echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'" method="post">
 	<input type="hidden" name="set" value="custom" />
-	<table width="10%" border="0">
+	<table>
 	<tr>
 		<td>'._('Assignee').'<br />'. $tech_box .'</td>
 		<td>'._('Status').'<br />'. $pg->statusBox('_status',$_status,true, _('Any')) .'</td>
 		<td>'._('Category').'<br />'. $cat_box .'</td>
 		<td>'._('Sort On').'<br />'. $order_box .'</td>
 		<td>'._('Detail View').'<br />'. $view_box .'</td>
-		<td>&nbsp;<br /><input type="submit" name="submit" value="'._('Browse').'" /></td>
+		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
 	</tr></table></form><p />';
 
 
@@ -203,6 +205,13 @@ if ($rows < 1) {
 		echo '
 		<form name="taskList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$pg->getID().'" method="post">
 		<input type="hidden" name="func" value="massupdate" />';
+
+		$check_all = '
+		<a href="javascript:checkAllTasks(1)">'._('Check all').'</a>
+		-
+		<a href="javascript:checkAllTasks(0)">'._('Clear all').'</a>';
+	} else {
+		$check_all = '';
 	}
 
 //this array can be customized to display whichever columns you want
@@ -306,6 +315,27 @@ if ($rows < 1) {
 
 	echo $GLOBALS['HTML']->listTableBottom();
 
+	echo '<div style="display:table;width:100%">';
+	echo '<div style="display:table-row">';
+
+	echo '<div style="display:table-cell">';
+	echo _('* Denotes overdue tasks');
+	echo '</div>';
+
+	echo '<div style="display:table-cell;text-align:right">';
+	show_priority_colors_key();
+	echo '</div>';
+
+	echo '</div>';
+
+	echo '<div style="display:table-row">';
+
+	echo '<div style="display:table-cell">'.$check_all.'</div>';
+//	echo '<div style="display:table-cell;text-align:right">'.$pager.'</div>'."\n";
+
+	echo '</div>';
+	echo '</div>';
+
 	if ($IS_ADMIN) {
 		/*
 			creating a custom technician box which includes "No Change" and "Nobody"
@@ -327,26 +357,14 @@ if ($rows < 1) {
 		$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'assigned_to',
 		'100',true,_('No Change'));
 
-		echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
-	function checkAll(val) {
-		al=document.taskList;
-		len = al.elements.length;
-		var i=0;
-		for( i=0 ; i<len ; i++) {
-			if (al.elements[i].name==\'project_task_id_list[]\') {
-				al.elements[i].checked=val;
-			}
-		}
-	}
-	/* ]]> */</script>
-			<table width="100%" border="0">
+		echo '<fieldset id="fieldset1_closed" class="coolfieldset">
+			<legend>'._('Mass Update').'</legend>
+			<div>
+			<table class="fullwidth">
 			<tr><td colspan="2">
-
-<a href="javascript:checkAll(1)">'._('Check &nbsp;all').'</a>
--
-   <a href="javascript:checkAll(0)">'._('Clear &nbsp;all').'</a>
-
-<div class="warning">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</div>
+			<p>
+			<span class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</span>
+			</p>
 			</td></tr>
 
 			<tr>
@@ -369,15 +387,13 @@ if ($rows < 1) {
 			<tr><td><strong>'._('Subproject').'</strong><br />
 			'.$pg->groupProjectBox('new_group_project_id',$group_project_id,false).'</td>
 			<td><input type="submit" name="submit" value="'.
-			_('Mass update').'" /></td></tr>
+			_('Mass Update').'" /></td></tr>
 
 			</table>
+			</div>
+			</fieldset>
 		</form>';
 	}
-
-	echo '<p />'._('* Denotes overdue tasks');
-	show_priority_colors_key();
-
 }
 
 pm_footer(array());

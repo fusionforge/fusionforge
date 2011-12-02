@@ -47,7 +47,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 }
 
 $is_admin_page='y';
-$sh = new  SurveyHtml();
+$sh = new SurveyHtml();
 
 $title = $question_id ? _('Edit a Question') : _('Add a Question');
 $sh->header(array('title'=>$title));
@@ -116,10 +116,10 @@ $sqf = new SurveyQuestionFactory($g);
 $sqs = $sqf->getSurveyQuestions();
 if (!$sqs) {
 	echo '<p class="information">';
-    echo (_('No questions found'));
+	echo (_('No questions found'));
 	echo '</p>';
 } else {
-    echo($sh->showQuestions($sqs));
+	echo($sh->showQuestions($sqs));
 }
 
 $sh->footer(array());

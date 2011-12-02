@@ -42,7 +42,7 @@ if (!$start) {
 	$start = $z[0];
 }
 if (!$end) {
-	$end=$z[count($z)-1];
+	$end = $z[count($z)-1];
 }
 if ($end < $start) list($start, $end) = array($end, $start);
 
@@ -59,7 +59,7 @@ $l[]='1';
 $l[]='2';
 
 report_header(_('User Summary Report'));
-	?>
+?>
 	<p>
 	<?php echo _('Choose the range from the pop-up boxes below. The report will list all tasks with an open date in that range.'); ?>
 	</p>

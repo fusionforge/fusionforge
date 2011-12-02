@@ -58,6 +58,28 @@ function switch2edit (a,show,edit) {
   }
 }
 
+function checkAllArtifacts(val) {
+  al=document.artifactList;
+  len = al.elements.length;
+  var i=0;
+  for( i=0 ; i<len ; i++) {
+    if (al.elements[i].name=='artifact_id_list[]') {
+      al.elements[i].checked=val;
+    }
+  }
+}
+
+function checkAllTasks(val) {
+  al=document.taskList;
+  len = al.elements.length;
+  var i=0;
+  for( i=0 ; i<len ; i++) {
+    if (al.elements[i].name=='project_task_id_list[]') {
+      al.elements[i].checked=val;
+    }
+  }
+}
+
 function flipAll(formObj) {
   var isFirstSet = -1;
   for (var i=0; i < formObj.length; i++) {

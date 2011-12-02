@@ -64,14 +64,14 @@ function pm_reporting_header($group_id) {
 }
 
 function pm_quick_report($group_id,$title,$subtitle1,$qpa1,$subtitle2,$qpa2,$comment="") {
-		global $bar_colors;
+	global $bar_colors;
 
-	   	pm_header(array ("title"=>$title));
-	   	pm_reporting_header($group_id);
+	pm_header(array ("title"=>$title));
+	pm_reporting_header($group_id);
 
-		reports_quick_graph($subtitle1,$qpa1,$qpa2,$bar_colors);
+	reports_quick_graph($subtitle1,$qpa1,$qpa2,$bar_colors);
 
-		if ($comment) echo $comment;
+	if ($comment) echo $comment;
 
 	pm_footer(array());
 }
@@ -240,7 +240,7 @@ GROUP BY Technician',
 		  _('Tasks By Assignee'),
 		  _('Open Tasks By Assignee'), $qpa1,
 		  _('All Tasks By Assignee'), $qpa2,
-		  _('<p>Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>'));
+		  '<p>' . _('Note that same task can be assigned to several technicians. Such task will be counted for each of them.') . '</p>');
 
 	} else {
 		exit_missing_param('','','pm');

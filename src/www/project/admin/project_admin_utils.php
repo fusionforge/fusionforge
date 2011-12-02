@@ -125,7 +125,7 @@ function project_admin_footer($params=array()) {
 */
 
 function group_get_history ($group_id=false) {
-return db_query_params("SELECT group_history.field_name,group_history.old_value,group_history.adddate,users.user_name
+	return db_query_params("SELECT group_history.field_name,group_history.old_value,group_history.adddate,users.user_name
 FROM group_history,users
 WHERE group_history.mod_by=users.user_id
 AND group_id=$1 ORDER BY group_history.adddate DESC", array($group_id));
