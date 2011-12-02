@@ -162,9 +162,9 @@ while ($row = db_fetch_array($res)) {
 }
 
 if ($seen) {
-       echo $GLOBALS['HTML']->listTableBottom();
+	echo $GLOBALS['HTML']->listTableBottom();
 } else {
-       echo '<p>' . _('No deliveries active.') . "</p>\n";
+	echo '<p>' . _('No deliveries active.') . "</p>\n";
 }
 
 site_admin_footer(array());

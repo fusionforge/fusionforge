@@ -158,12 +158,12 @@ if ($displaydb) {
 
 <tr>
 <td><?php echo _('Project Unix Name:'); ?><?php echo utils_requiredField(); ?></td>
-<td><input type="text" name="groupname" /></td>
+<td><input type="text" required="required" name="groupname" /></td>
 </tr>
 
 <tr>
 <td>Database Name:<?php echo utils_requiredField(); ?></td>
-<td><input type="text" name="dbname" /></td>
+<td><input type="text" required="required" name="dbname" /></td>
 </tr>
 
 </table>

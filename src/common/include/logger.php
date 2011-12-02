@@ -108,7 +108,7 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 		$subpage2 = @$expl_pathinfo[5];
 
 		//set up the group_id
-	   	$group_id=db_result($res_grp,0,'group_id');
+		$group_id=db_result($res_grp,0,'group_id');
 		//set up a foundry object for reference all over the place
 		if ($group_id) {
 			$grp = group_get_object($group_id,$res_grp);
