@@ -52,7 +52,7 @@ require_once('Widget.class.php');
 			$rss = new SimplePie($this->rss_url, forge_get_config('sys_var_path') .'/rss', null, forge_get_config('sys_proxy'));
 			$max_items = 10;
 			$items = array_slice($rss->get_items(), 0, $max_items);
-			$content .= '<table width="100%">';
+			$content .= '<table class="fullwidth">';
 			$i = 0;
 			foreach($items as $item){
 				if ($i % 2 == 0) {

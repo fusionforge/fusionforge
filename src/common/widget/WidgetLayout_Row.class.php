@@ -37,7 +37,7 @@ class WidgetLayout_Row {
         $c->setRow($this);
     }
     function display($readonly, $owner_id, $owner_type) {
-        echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+        echo '<table width="100%">';
         echo '<tr style="vertical-align:top;">';
         $last = count($this->columns) - 1;
         $i = 0;
