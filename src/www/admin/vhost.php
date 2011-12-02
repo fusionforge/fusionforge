@@ -78,9 +78,9 @@ if (getStringFromRequest('add')) {
 		} else {
 			$error_msg .= _('Vhost not valid');
 		}
-    } else {
+	} else {
 		$warning_msg .=	_('Missing group name');
-    }
+	}
 }
 
 if (getStringFromRequest('tweakcommit')) {

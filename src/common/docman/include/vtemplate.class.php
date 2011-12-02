@@ -73,33 +73,33 @@ switch($errno){
   break;
   case 10:
     $this->titre="Erreur de traitement n° $code";
-    $this->msg = "Impossible de lire le fichier template $arg.<br>";	
+    $this->msg = "Impossible de lire le fichier template $arg.<br>";
   break;
   case 11:
     $this->titre="Erreur de traitement n° $code";
-    $this->msg = "La zone $arg est introuvable.Vérifiez la syntaxe de cette zone.<br>"; 
+    $this->msg = "La zone $arg est introuvable.Vérifiez la syntaxe de cette zone.<br>";
   break;
-  case 12:  
+  case 12:
     $this->titre="Erreur de traitement n° $code";
-    $this->msg = "La variable $arg est introuvable .Vérifiez la syntaxe de la variable.<br>";	
+    $this->msg = "La variable $arg est introuvable .Vérifiez la syntaxe de la variable.<br>";
   break;
   case 13:
     $this->titre="Erreur de traitement n° $code";
     $this->msg = "L'identifiant de fichier spécifié n'existe pas.Vérifiez les fonctions Open() de votre script.<br>";
-  break;  
+  break;
   case 14:
     $this->titre="Erreur de traitement n° $code";
 	$var = $arg[1];
 	$file = $arg[0];
-    $this->msg = "La variable $var dans le fichier $file est introuvable.Vérifiez la syntaxe de la variable.<br>";	
-  break;  
+    $this->msg = "La variable $var dans le fichier $file est introuvable.Vérifiez la syntaxe de la variable.<br>";
+  break;
   case 15:
     $this->titre="Erreur de traitement n° $code";
 	$var = $arg[2];
 	$zone = $arg[1];
 	$fichier = $arg[0];
-    $this->msg = "La variable $var dans la zone $zone du fichier $fichier est introuvable.Vérifiez la syntaxe de la variable et du nom de la zone.<br>";	
-  break; 
+    $this->msg = "La variable $var dans la zone $zone du fichier $fichier est introuvable.Vérifiez la syntaxe de la variable et du nom de la zone.<br>";
+  break;
   default:
 	 $this->titre = "Erreur inconnue $code";	 
      $this->msg = "Veuillez le rapporter aux auteurs de la classe.";
@@ -108,7 +108,7 @@ $this->titre .= ": <br>";
 if ($disp){
 	$web = "Pour plus d'informations, consultez la <a href=\"http://www.virtual-solution.net/vtemplate/docs/debug-mod.php?version=".VTEMPLATE_VERSION."&build=".VTEMPLATE_BUILD."&type=".VTEMPLATE_TYPE."&error=$code\" target=\"_blank\">doc en ligne</a>";
 	echo "<font face=verdana size=2 color=red><u>$this->titre</u><i>$this->msg</i>$web<br><br></font>";
-} 
+}
 return -1;
 }
 // Fin classe

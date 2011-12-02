@@ -143,7 +143,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 
 		if (! $html && ! $validLength) {
-			$html .= '<div class="error">'._('Error: search query too short').'</div>';
+			$html .= '<p class="error">'._('Error: search query too short').'</p>';
 		}
 
 		plugin_hook('full_search_engines', $this);

@@ -166,7 +166,7 @@ if (!$group_id) {
 	show_users_list (user_get_objects(util_result_column_to_array($res,0)),$filter);
 } else {
 	/*
-		Show list for one group
+		Show list for one project
 	*/
 	$project = group_get_object($group_id) ;
 	print "<strong>" . $project->getPublicName() . "</strong></p>";

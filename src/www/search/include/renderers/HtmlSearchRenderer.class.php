@@ -123,7 +123,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 
 		$html = '<br />';
-		$html .= '<table class="tablecontent" width="100%" cellpadding="5" cellspacing="0">';
+		$html .= '<table class="tablecontent" width="100%" cellpadding="5">';
 		$html .= '<tr>';
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {
@@ -133,7 +133,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		} else {
 			$html .= '&nbsp;';
 		}
-		$html .= '</td><td align="right">';
+		$html .= '</td><td class="align-right">';
 		if ($searchQuery->getRowsTotalCount() > $searchQuery->getRowsCount()) {
 			$html .= '<a href="'.$this->getNextResultsUrl().'" class="next">'
 				._('Next Results').' '
