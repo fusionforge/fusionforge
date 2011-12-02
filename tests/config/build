@@ -14,7 +14,11 @@ fgcostrksrc=openvz:centos-5-x86::
 fgcostrk=openvz:centos-5-x86::
 fgrpmtrk=openvz:centos-5-x86::
 
-centos5=openvz:centos-5-x86-test::
+centos5=openvz:centos-5-x86::
+centos5test=openvz:centos-5-x86-test::
+
+centos6=openvz:centos-6-x86::
+centos6test=openvz:centos-6-x86-test::
 
 fgdebtrksrc=openvz:debian6::
 fgdebtrk=openvz:debian6::
