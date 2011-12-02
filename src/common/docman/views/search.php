@@ -63,8 +63,8 @@ $vtp->SetVar($handle,"FORMSEARCH.SEARCH_ALL_WORDS",_('With all the words'));
 $vtp->SetVar($handle,"FORMSEARCH.SEARCH_ONE_WORD",_('With at least one of words'));
 $vtp->CloseSession($handle,"FORMSEARCH");
 
-if (getStringFromPost('cmd') == "search") {
-	$textsearch = getStringFromPost("textsearch");
+if ((getStringFromPost('cmd') == "search") && trim(getStringFromPost("textsearch"))) {
+	$textsearch = trim(getStringFromPost("textsearch"));
 	$textsearch = prepare_search_text($textsearch);
 	$mots = preg_split("/[\s,]+/",$textsearch);
 	$qpa = db_construct_qpa(false, 'SELECT filename, filetype, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, group_id FROM doc_data JOIN doc_states ON doc_data.stateid = doc_states.stateid') ;
