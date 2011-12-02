@@ -146,11 +146,11 @@ function show_add_snippet_box() {
 	<table>
 
 	<tr><td colspan="2"><strong><?php echo _('Title:'); ?></strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="name" size="45" maxlength="60" />
+		<input type="text" required="required" name="name" size="45" maxlength="60" />
 	</td></tr>
 
 	<tr><td colspan="2"><strong><?php echo _('Description:'); ?></strong><?php echo utils_requiredField(); ?><br />
-		<textarea name="description" rows="5" cols="45"></textarea>
+		<textarea name="description" required="required" rows="5" cols="45"></textarea>
 	</td></tr>
 
 	<tr>
@@ -168,7 +168,7 @@ function show_add_snippet_box() {
 	</tr>
 
 	<tr><td colspan="2"><strong><?php echo _('Version') ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="version" size="10" maxlength="15" />
+		<input type="text" required="required" name="version" size="10" maxlength="15" />
 	</td></tr>
 
 	<tr><td colspan="2" class="align-center">
