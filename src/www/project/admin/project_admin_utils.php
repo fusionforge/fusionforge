@@ -73,25 +73,25 @@ function project_admin_header($params) {
 	if(forge_get_config('use_project_multimedia')) {
 		$labels[] = _('Edit Multimedia Data');
 		//TODO: set the title.
-		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
+		$attr_r[] = array('class' => 'tabtitle', 'title' => '');
 		$links[] = '/project/admin/editimages.php?group_id='.$group_id;
 	}
 	if(forge_get_config('use_project_vhost')) {
 		$labels[] = _('VHOSTs');
 		//TODO: set the title.
-		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
+		$attr_r[] = array('class' => 'tabtitle', 'title' => '');
 		$links[] = '/project/admin/vhost.php?group_id='.$group_id;
 	}
 	if(forge_get_config('use_project_database')) {
 		$labels[] = _('Database Admin');
 		//TODO: set the title.
-		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
+		$attr_r[] = array('class' => 'tabtitle', 'title' => '');
 		$links[] = '/project/admin/database.php?group_id='.$group_id;
 	}
 	if ($project->usesStats()) {
 		$labels[] = _('Stats');
 		//TODO: set the title.
-		$attr_r[] = array('class' => 'tabtitle', 'title' => _(''));
+		$attr_r[] = array('class' => 'tabtitle', 'title' => '');
 		$links[] = '/project/stats/?group_id='.$group_id;
 	}
 
