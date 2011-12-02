@@ -295,7 +295,7 @@ echo '
 	}
 	echo '
 		</td>
-		<td valign="top">
+		<td class="top">
 		<input type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30" /></td>
 	</tr>
 </table>';

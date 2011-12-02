@@ -24,13 +24,13 @@ $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $
 <input type="hidden" name="func" value="postdeleteartifact" />
 <input type="hidden" name="atid" value="<?php echo $atid; ?>" />
 
-<table border="0" align="center">
+<table align="center">
 
 	<tr>
 		<td class="veryimportant"><?php echo _('Are you sure you want to delete this artifact?'); ?></td>
 	</tr>
-	<tr align="center">
-		<td align="center"><input type="checkbox" value="1" name="confirm_delete" /> <?php echo _('Yes, I want to delete this artifact'); ?></td>
+	<tr class="align-center">
+		<td class="align-center"><input type="checkbox" value="1" name="confirm_delete" /> <?php echo _('Yes, I want to delete this artifact'); ?></td>
 	</tr>
 	<tr>
 		<td style="text-align:center"><input type="submit" value="<?php echo _('Delete'); ?>" name="submit" /></td>

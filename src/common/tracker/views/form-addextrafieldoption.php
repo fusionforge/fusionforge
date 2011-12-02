@@ -52,16 +52,15 @@
 
 			for ($i=0; $i < $rows; $i++) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-					'<td align="right">'.
-					($i + 1).'&nbsp;--&gt;&nbsp;<input type="text" name="order['. $efearr[$i]['element_id'] .']" value="" size="3" maxlength="3" />'.
-					'</td>'."\n".'<td align="center">'.'&nbsp;&nbsp;&nbsp;'.
+					'<td class="align-right">'.
+					($i + 1).' --&gt; <input type="text" name="order['. $efearr[$i]['element_id'] .']" value="" size="3" maxlength="3" />'.
+					'</td>'."\n".'<td class="align-center">'.
 					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid.'&amp;id='.$efearr[$i]['element_id'].
 					'&amp;updownorder_opt=1&amp;new_pos='.(($i == 0)? $i + 1 : $i).'">'.html_image('ic/btn_up.png','19','18',array('alt'=>"Up")).'</a>'.
-					'&nbsp;&nbsp;'.
 					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid.'&amp;id='.$efearr[$i]['element_id'].
 					'&amp;updownorder_opt=1&amp;new_pos='.(($i == $rows - 1)? $i + 1 : $i + 2).'">'.html_image('ic/btn_down.png','19','18',array('alt'=>"Down")).'</a>'.
-					'</td>'."\n".'<td>'.'&nbsp;&nbsp;&nbsp;'.$efearr[$i]['element_name'].
-					'</td>'."\n".'<td align="center">'.
+					'</td>'."\n".'<td>'.$efearr[$i]['element_name'].
+					'</td>'."\n".'<td class="align-center">'.
 					'<a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
 					$efearr[$i]['element_id'].'&amp;boxid='.
 					$boxid.'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
@@ -71,14 +70,13 @@
 //			echo $GLOBALS['HTML']->listTableBottom();
 			?>
 			<tr class="noborder">
-			<td align="right">
+			<td class="align-right">
 			<input type="submit" name="post_changes_order" value="<?php echo _('Reorder') ?>" />
 			</td>
 			<td>
 			</td>
-			<td align="left">
+			<td class="align-left">
 			<input type="submit" name="post_changes_alphaorder" value="<?php echo _('Alphabetical order') ?>" />
-			<br />&nbsp;
 			</td>
 			</tr>
 			<?php echo $GLOBALS['HTML']->listTableBottom(); ?>
@@ -98,10 +96,10 @@
 		Show a pop-up box to choose the possible statuses that this element will map to
 		-->
 		<?php if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) { ?>
-		<strong>&nbsp;&nbsp;<?php echo _('Status'); ?></strong>
+		<strong><?php echo _('Status'); ?></strong>
 		<?php echo $ath->statusBox('status_id',1,false,false); ?>
 		<?php } ?>
-		&nbsp;&nbsp;<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
+		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 		</form>
 		<?php
 		$ath->footer(array());
