@@ -32,7 +32,7 @@ global $group_id; // id of group
 global $dirid;
 
 $doc_group = getIntFromRequest('doc_group');
-$title = getStringFromRequest('title');
+$title = trim(getStringFromRequest('title'));
 $description = getStringFromRequest('description');
 $file_url = getStringFromRequest('file_url');
 $uploaded_data = getUploadedFile('uploaded_data');
