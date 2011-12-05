@@ -117,7 +117,7 @@ if ($group_id && $atid) {
 		$actions = array('add_extrafield', 'customize_list', 'workflow', 'workflow_roles', 'add_opt',
 			'updownorder_opt', 'post_changes_order', 'post_changes_alphaorder', 'copy_opt', 'add_canned',
 			'clone_tracker', 'edittemplate',
-			'update_canned', 'update_box', 'update_opt', 'delete', 'delete_opt', 'deleteextrafield','update_type');
+			'update_canned', 'delete_canned', 'update_box', 'update_opt', 'delete', 'delete_opt', 'deleteextrafield','update_type');
 		$action = '';
 		foreach ($actions as $a) {
 			if (getStringFromRequest($a)) {
@@ -156,6 +156,39 @@ if ($group_id && $atid) {
 
 	} elseif ($action == 'add_canned') {
 
+		include $gfcommon.'tracker/views/form-addcanned.php';
+
+	} elseif ($action == 'delete_canned') {
+
+		$confirm = getStringFromRequest('confirm');
+		$cancel = getStringFromRequest('cancel');
+		$id = getIntFromRequest('id');
+
+		if ($cancel) {
+			header ("Location: /tracker/admin/?group_id=$group_id&atid=$atid&add_canned=1");
+			exit;
+		}
+		if (!$confirm) {
+			$ath->adminHeader(array ('title'=>_('Delete Canned Response'), 'modal' => 1));
+			echo $HTML->confirmBox(_('You are about to delete your canned response')
+				. '<br/><br/>' . _('Do you really want to do that?'),
+				array('group_id' => $group_id, 'atid' => $atid, 'delete_canned' => 1, 'id' => $id),
+				array('confirm' => _('Delete'), 'cancel' => _('Cancel')));
+			$ath->footer(array());
+			exit;
+		}
+
+		$acr = $acr = new ArtifactCanned($ath,$id);
+		if (!$acr || !is_object($acr)) {
+			$error_msg .= _('Unable to create ArtifactCanned Object');
+		} else {
+			if (!$acr->delete()) {
+				$error_msg .= _('Error') . _(': ') . $acr->getErrorMessage();
+				$acr->clearError();
+			} else {
+				$feedback .= _('Canned Response Deleted');
+			}
+		}
 		include $gfcommon.'tracker/views/form-addcanned.php';
 
 	} elseif ($action == 'clone_tracker') {

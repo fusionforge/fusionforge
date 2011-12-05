@@ -33,7 +33,7 @@ $return_to = getStringFromRequest('return_to');
 //      Validate return_to
 //
 if ($return_to) {
-        $tmpreturn = explode('?',$return_to);
+	$tmpreturn = explode('?',$return_to);
 	$rtpath = $tmpreturn[0] ;
 
 	if (@is_file(forge_get_config('url_root').$rtpath)

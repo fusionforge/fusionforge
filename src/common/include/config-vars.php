@@ -245,7 +245,7 @@ if (file_exists ($gfconfig.'plugins/scmsvn/config.php')) {
 		forge_define_config_item ('repos_path', 'scmsvn', $svn_root) ;
 	} else {
 		forge_define_config_item ('repos_path', 'scmsvn',
-					  forge_get_config('chroot').'/scmrepos/svn') ;
+			forge_get_config('chroot').'/scmrepos/svn') ;
 	}
 
 	forge_define_config_item ('use_ssh', 'scmsvn', $use_ssh ? 1 : 0) ;

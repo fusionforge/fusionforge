@@ -204,6 +204,32 @@ class ArtifactCanned extends Error {
 			return false;
 		}
 	}
+
+	/**
+	 *  delete - delete an ArtifactCanned message.
+	 *
+	 *  @return	boolean	success.
+	 */
+	function delete() {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		if (!$this->getID()) {
+			$this->setError('Internal error: No ID given');
+			return false;
+		}
+
+		$result = db_query_params('DELETE FROM artifact_canned_responses WHERE ID=$1',
+					   array ($this->getID()));
+
+		if ($result && db_affected_rows($result) > 0) {
+			return true;
+		} else {
+			$this->setError(db_error());
+			return false;
+		}
+	}
 }
 
 // Local Variables:

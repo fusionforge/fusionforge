@@ -100,7 +100,7 @@ $title_arr[]=_('Package name');
 $title_arr[]=_('Release name');
 $title_arr[]=_('Date');
 
-echo $GLOBALS['HTML']->listTableTop ($title_arr);
+echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 for ($i=0; $i<count($rs); $i++) {
 	echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>

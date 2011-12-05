@@ -349,6 +349,15 @@ class Artifact extends Error {
 	}
 
 	/**
+	 *	getStringID - get a string display for this ArtifactID.
+	 *
+	 *	@return	string	The artifact_id #.
+	 */
+	function getStringID() {
+		return '[#'.$this->data_array['artifact_id'].']';
+	}
+
+	/**
 	 *	getStatusID - get open/closed/deleted flag.
 	 *
 	 *	@return	int	Status: (1) Open, (2) Closed, (3) Deleted.

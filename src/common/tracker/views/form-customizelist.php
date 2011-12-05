@@ -40,17 +40,17 @@ $browse_fields = explode(',',$ath->getBrowseList());
 <?php
 // Display regular fields.
 $fields = array (
-		'summary' => _('Summary'),
-		'open_date' => _('Open Date'),
-		'status_id' => _('State'),
-		'priority'  => _('Priority'),
-		'assigned_to' => _('Assigned To'),
-		'submitted_by' => _('Submitted By'),
-		'close_date' => _('Close Date'),
-		'details' => _('Detailed description'),
+	'summary' => _('Summary'),
+	'open_date' => _('Open Date'),
+	'status_id' => _('State'),
+	'priority'  => _('Priority'),
+	'assigned_to' => _('Assigned To'),
+	'submitted_by' => _('Submitted By'),
+	'close_date' => _('Close Date'),
+	'details' => _('Detailed description'),
 	'related_tasks' => _('Related tasks'),
 	'last_modified_date' => _('Last Modified Date')
-	);
+);
 
 if(count($ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS))) > 0) {
 	unset($fields['status_id']);

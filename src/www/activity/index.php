@@ -154,13 +154,12 @@ foreach ($show as $showthis) {
 		exit_error(_('Invalid Data Passed to query'), 'home');
 	}
 }
-$multiselect = html_build_multiple_select_box_from_arrays($ids, $texts, 'show[]', $show, 5, false);
-
+$multiselect = html_build_multiple_select_box_from_arrays($ids, $texts, 'show[]', $show, count($texts), false);
 ?>
-<br />
+
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<table border="0" cellspacing="0" cellpadding="3">
+<table>
 	<tr>
 		<td><strong><?php echo _('Activity') ?></strong></td>
 		<td><strong><?php echo _('Start') ?></strong></td>
@@ -169,18 +168,19 @@ $multiselect = html_build_multiple_select_box_from_arrays($ids, $texts, 'show[]'
 	</tr>
 	<tr>
 		<td><?php echo $multiselect; ?></td>
-		<td valign="top"><input name="start_date"
+		<td class="top"><input name="start_date"
 			value="<?php echo $rendered_begin; ?>" size="10" maxlength="10" /></td>
-		<td valign="top"><input name="end_date"
+		<td class="top"><input name="end_date"
 			value="<?php echo $rendered_end; ?>" size="10" maxlength="10" /></td>
-		<td valign="top"><input type="submit" name="submit"
-			value="<?php echo _('Submit'); ?>" /></td>
+		<td class="top">
+			<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
+		</td>
 	</tr>
 </table>
 </form>
 <?php
 if (count($results) < 1) {
-	echo '<p class="warning_msg">' . _('No Activity Found') . '</p>';
+	echo '<p class="information">' . _('No Activity Found') . '</p>';
 } else {
 
 	function date_compare($a, $b)
@@ -253,38 +253,38 @@ if (count($results) < 1) {
 		}
 		switch (@$arr['section']) {
 			case 'commit': {
-				$icon = html_image("ic/cvs16b.png","20","20",array("alt"=>"SCM"));
+				$icon = html_image('ic/cvs16b.png','','',array('alt'=>'Source Code'));
 				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Commit for Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description']);
 				break;
 			}
 			case 'trackeropen': {
-				$icon = html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
-				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].' '.$arr['description'].' ] '._('Opened'));
+				$icon = html_image('ic/tracker20g.png','','',array('alt'=>'Trackers'));
+				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Opened'));
 				break;
 			}
 			case 'trackerclose': {
-				$icon = html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
-				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].' '.$arr['description'].' ] '._('Closed'));
+				$icon = html_image('ic/tracker20g.png','','',array('alt'=>'Trackers'));
+				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Closed'));
 				break;
 			}
 			case 'frsrelease': {
-				$icon = html_image("ic/cvs16b.png","20","20",array("alt"=>"SCM"));
+				$icon = html_image('ic/cvs16b.png','','',array('alt'=>'Files'));
 				$url = util_make_link('/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
 				break;
 			}
 			case 'forumpost': {
-				$icon = html_image("ic/forum20g.png","20","20",array("alt"=>"Forum"));
+				$icon = html_image('ic/forum20g.png','','',array("alt"=>'Forum'));
 				$url = util_make_link('/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Forum Post ').' '.$arr['description']);
 				break;
 			}
 			case 'news': {
-				$icon = html_image("ic/write16w.png","20","20",array("alt"=>"News"));
+				$icon = html_image('ic/write16w.png','','',array('alt'=>'News'));
 				$url = util_make_link('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
 				break;
 			}
 			case 'docmannew':
 			case 'docmanupdate': {
-				$icon = html_image("ic/docman16b.png", "20", "20", array("alt"=>"Documents"));
+				$icon = html_image("ic/docman16b.png", '', '', array("alt"=>"Documents"));
 				$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['ref_id'],_('Document').' '.$arr['description']);
 				break;
 			}
@@ -294,9 +294,8 @@ if (count($results) < 1) {
 			}
 		}
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;'.date('H:i:s',$arr['activity_date']).'</td>
-		<td>'.$icon .' '.$url.'</td><td>';
-
+			<td>'.date('H:i:s',$arr['activity_date']).'</td>
+			<td>'.$icon .' '.$url.'</td><td>';
 		if (isset($arr['user_name']) && $arr['user_name']) {
 			echo util_display_user($arr['user_name'], $arr['user_id'],$arr['realname']);
 		} else {

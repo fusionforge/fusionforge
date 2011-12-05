@@ -240,7 +240,6 @@ class ArtifactWorkflow extends Error {
 		return true;
 	}
 
-
 	function _removeEvent($from, $to) {
 		$event_id = $this->_getEventId($from, $to);
 

@@ -666,7 +666,6 @@ class ArtifactType extends Error {
 		}
 		$efs = $at->getExtraFields();
 
-
 		//
 		//	Iterate list of extra fields
 		//

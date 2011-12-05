@@ -89,9 +89,9 @@ function admin_table_postadd($table, $unit, $primary_key) {
 	$qpa = db_construct_qpa ($qpa, implode (',', $v).')', $values) ;
 
 	if (db_query_qpa($qpa)) {
-        print('<p class="feedback">');
+		print('<p class="feedback">');
 		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
-        print('</p>');
+		print('</p>');
 	} else {
 		print('<p class="error">');
 		echo db_error();
@@ -297,11 +297,11 @@ function admin_table_show($table, $unit, $primary_key) {
 		$cell_data[]=array(ucwords(getUnitLabel($unit)).' <a href="'.getStringFromServer('PHP_SELF').'?function=add">['._('add new').']</a>',
 			'colspan="'.($cols+1).'"');
 
-		echo '<table border="0" width="100%">';
+		echo '<table class="listing full">';
 		echo $HTML->multiTableRow('',$cell_data, TRUE);
 
 		echo '
-			<tr><td width="5%"></td>';
+			<tr><td></td>';
 		for ($i = 0; $i < $cols; $i++) {
 			echo '<td><strong>'.db_fieldname($result,$i).'</strong></td>';
 		}

@@ -258,7 +258,7 @@ class WidgetLayoutManager {
 		if ($update_layout) {
 			$sql = "SELECT * FROM layouts WHERE scope='S' ORDER BY id ";
 			$req_layouts = db_query_params($sql,array());
-			echo '<table cellspacing="0" cellpadding="0">';
+			echo '<table>';
 			$is_custom = true;
 			while ($data = db_fetch_array($req_layouts)) {
 				$checked = $layout_id == $data['id'] ? 'checked="checked"' : '';
@@ -287,14 +287,14 @@ class WidgetLayoutManager {
 			echo '<label for="layout_custom"><strong>'. 'Custom' .'</strong><br />';
 			echo 'Define your own layout:';
 			echo '</label>';
-			echo '<table id="layout-manager" cellpadding="0" cellspacing="0">
+			echo '<table id="layout-manager">
 				<tr>
 				<td>
 				<div class="layout-manager-row-add">+</div>';
 			$sql = 'SELECT * FROM layouts_rows WHERE layout_id = $1 ORDER BY rank';
 			$req_rows = db_query_params($sql,array($layout_id));
 			while ($data = db_fetch_array($req_rows)) {
-				echo '<table class="layout-manager-row" cellspacing="5" cellpadding="2">
+				echo '<table class="layout-manager-row">
 					<tr>
 					<td class="layout-manager-column-add">+</td>';
 				$sql = 'SELECT * FROM layouts_rows_columns WHERE layout_row_id = $1';
@@ -321,11 +321,11 @@ class WidgetLayoutManager {
 		} else {
 			// display the widget selection form
 			$after = '';
-			echo '<table cellpadding="0" cellspacing="0">
+			echo '<table>
 				<tbody>
-				<tr valign="top">
+				<tr class="top">
 				<td>';
-			echo '<table cellpadding="2" cellspacing="0">
+			echo '<table>
 				<tbody>';
 			$after .= $this->_displayWidgetsSelectionForm(sprintf(_("%s Widgets"),  forge_get_config('forge_name')), Widget::getCodendiWidgets($owner_type), $used_widgets);
 			echo '</tbody>
@@ -495,7 +495,7 @@ class WidgetLayoutManager {
 						if ($widget->isAvailable()) {
 							$row = '';
 							$row .= '<td>'. $widget->getTitle() . $widget->getInstallPreferences() .'</td>';
-							$row .= '<td align="right">';
+							$row .= '<td class="align-right">';
 							if ($widget->isUnique() && in_array($widget_name, $used_widgets)) {
 								$row .= '<em>'. _("Already used") .'</em>';
 							} else {
