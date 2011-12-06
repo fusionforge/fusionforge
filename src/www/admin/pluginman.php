@@ -106,9 +106,9 @@ if (getStringFromRequest('update')) {
 			if (!$plugin || $plugin->isError()) {
 				exit_error(_("Couldn't get plugin object"), 'admin');
 			} else {
-				$plugin->installCode();
-				$plugin->installConfig();
-				$plugin->installDatabase();
+				if (method_exists($plugin, 'install')) {
+					$plugin->install();
+				}
 			}
 		}
 	}
@@ -151,8 +151,8 @@ $filelist = array();
 if($handle = opendir(forge_get_config('plugins_path'))) {
 	while (($filename = readdir($handle)) !== false) {
 		if ($filename != '..' && $filename != '.' && $filename != ".svn" && $filename != "CVS" &&
-		    is_dir(forge_get_config('plugins_path').'/'.$filename) &&
-		    !in_array($filename, $plugins_disabled)) {
+			is_dir(forge_get_config('plugins_path').'/'.$filename) &&
+			!in_array($filename, $plugins_disabled)) {
 			$addPlugin = 1;
 			if (forge_get_config('plugin_status', $filename) !== 'valid') {
 				$addPlugin = 0;
@@ -246,11 +246,11 @@ foreach ($filelist as $filename) {
 	$title = _('Current plugin status:'). ' ' .forge_get_config('plugin_status', $filename);
 	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 		'<td title="'. $title .'" >'. $filename.'</td>'.
-		'<td class="'.$status.'" style="text-align:center">'. $msg .'</td>'.
-		'<td style="text-align:center;">'. $link .'</td>'.
-		'<td style="text-align:left;">'. $users .'</td>'.
-		'<td style="text-align:left;">'. $groups .'</td>'.
-		'<td style="text-align:left;">'. $adminlink .'</td></tr>'."\n";
+		'<td class="'.$status.'" class="align-center">'. $msg .'</td>'.
+		'<td class="align-center">'. $link .'</td>'.
+		'<td class="align-left">'. $users .'</td>'.
+		'<td class="align-left">'. $groups .'</td>'.
+		'<td class="align-left">'. $adminlink .'</td></tr>'."\n";
 	$j++;
 }
 
