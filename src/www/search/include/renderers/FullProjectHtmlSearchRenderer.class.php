@@ -146,9 +146,29 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$html .= '<p class="error">'._('Error: search query too short').'</p>';
 		}
 
-		plugin_hook('full_search_engines', $this);
-		$plugin = plugin_manager_get_object();
-		$html .= $plugin->getReturnedValue('full_search_engines');
+		// This is quite complex but the goal is to extract all the
+		// registered plugins to the hook 'search_engines' and call
+		// them.
+		$pluginManager = plugin_manager_get_object();
+		$searchManager = getSearchManager();
+		$engines = $searchManager->getAvailableSearchEngines();
+
+		if (isset($pluginManager->hooks_to_plugins['full_search_engines'])) {
+			$p_list = $pluginManager->hooks_to_plugins['full_search_engines'];
+			foreach ($p_list as $p_name) {
+				$p_obj = $pluginManager->GetPluginObject($p_name);
+				$name = $p_obj->text;
+				reset($engines);
+				foreach($engines as $e) {
+					if ($e->type == $p_name) {
+						$renderer = $e->getSearchRenderer($this->words,
+							$this->offset, $this->isExact, $this->groupId);
+						$html .= $this->getPartResult($renderer, 'short_'.$p_name,
+													  sprintf(_("%s Search Results"), $name));
+					}
+				}
+			}
+		}
 
 /*
 		$renderer = new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
@@ -198,7 +218,6 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		return $result;
 	}
-
 }
 
 // Local Variables:

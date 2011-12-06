@@ -25,7 +25,7 @@ class PluginManager extends Error {
 	var $plugins_objects;
 	var $plugins_to_hooks;
 	var $hooks_to_plugins;
-	var $returned_value = array();
+	var $returned_values = array();
 
 	/**
 	 * PluginManager() - constructor
@@ -241,16 +241,28 @@ class PluginManager extends Error {
 				} else {
 					$returned = $p_obj->CallHook($hookname, $params);
 				}
-				$this->returned_value[$hookname] = $returned;
+				$this->returned_values[$hookname][$p_name] = $returned;
 				$result = $result && $returned;
 			}
 		}
 		// Return true only if all the plugins have returned true.
 		return $result;
 	}
+	
+	function getReturnedValues($hookname) {
+		return $this->returned_values[$hookname];
+	}
 
-	function getReturnedValue($hookname) {
-		return $this->returned_value[$hookname];
+	function getReturnedValuesAsString($hookname) {
+		$return = '';
+		
+		if (isset($this->returned_values[$hookname])) {
+			foreach ($this->returned_values[$hookname] as $value) {
+				$return .= $value;
+			}
+		}
+		
+		return $return;
 	}
 
 	/**
