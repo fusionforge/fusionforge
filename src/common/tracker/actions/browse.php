@@ -297,7 +297,8 @@ if ($ath->usesCustomStatuses()) {
 	} else {
 		$aux_extra_fields = $_extra_fields;
 	}
-	$status_box=$ath->renderSelect ($ath->getCustomStatusField(),$aux_extra_fields[$ath->getCustomStatusField()],false,'',true,_('Any'));
+	$checked_status = isset($aux_extra_fields[$ath->getCustomStatusField()]) ? $aux_extra_fields[$ath->getCustomStatusField()] : '';
+	$status_box=$ath->renderSelect ($ath->getCustomStatusField(), $checked_status, false, '', true, _('Any'));
 } else {
 	if (is_array($_status)) {
 		$_status='';
