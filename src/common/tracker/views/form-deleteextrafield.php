@@ -22,7 +22,7 @@
  */
 
 
-$ath->adminHeader(array ('title'=>sprintf(_('Delete a custom field for %s'),$ath->getName())));
+$ath->adminHeader(array('title'=>sprintf(_('Delete a custom field for %s'),$ath->getName())));
 
 $id = getStringFromRequest('id');
 

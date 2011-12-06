@@ -75,7 +75,7 @@ if (!session_loggedin()) {
 		$HTML->footer (array());
 	} else {
 		$HTML->header(array('title'=>_('Error - Choose a User To Monitor First')));
-		$HTML->footer (array());
+		$HTML->footer(array());
 	}
 
 }

@@ -61,7 +61,7 @@ if ($forum_id && $group_id) {
 		if (session_loggedin() && !$f->savePlace()) {
 			exit_error($f->getErrorMessage(),'forums');
 		} else {
-			forum_header(array('title'=> _('Start New Thread for: ') . $f->getName(),'forum_id'=>$forum_id));
+			forum_header(array('title'=> _('Start New Topic for: ') . $f->getName(), 'forum_id'=>$forum_id, 'modal' => 1));
 			$fh->showPostForm();
 			forum_footer(array());
 		}

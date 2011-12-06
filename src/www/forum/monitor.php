@@ -30,56 +30,56 @@ require_once $gfcommon.'forum/Forum.class.php';
 
 session_require_login();
 
-	$forum_id = getIntFromRequest('forum_id');
-	$group_id = getIntFromRequest('group_id');
+$forum_id = getIntFromRequest('forum_id');
+$group_id = getIntFromRequest('group_id');
 
-	if ($forum_id && $group_id) {
-		//
-		//  Set up local objects
-		//
+if ($forum_id && $group_id) {
+	//
+	//  Set up local objects
+	//
 	$g = group_get_object($group_id);
-		if (!$g || !is_object($g) || $g->isError()) {
-			exit_no_group();
-		}
+	if (!$g || !is_object($g) || $g->isError()) {
+		exit_no_group();
+	}
 
-		$f=new Forum($g,$forum_id);
-		if (!$f || !is_object($f)) {
-			exit_error(_('Error Getting Forum'),'forums');
-		} elseif ($f->isError()) {
-			exit_error($f->getErrorMessage(),'forums');
-		}
+	$f=new Forum($g,$forum_id);
+	if (!$f || !is_object($f)) {
+		exit_error(_('Error Getting Forum'),'forums');
+	} elseif ($f->isError()) {
+		exit_error($f->getErrorMessage(),'forums');
+	}
 
-		if (getStringFromRequest('stop')) {
-			$confirm = getStringFromRequest('confirm');
-			$cancel = getStringFromRequest('cancel');
-			if ($cancel) {
-                session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id);
-			}
-			if (!$confirm) {
-				forum_header(array('title'=>_('Stop Monitoring')));
+	if (getStringFromRequest('stop')) {
+		$confirm = getStringFromRequest('confirm');
+		$cancel = getStringFromRequest('cancel');
+		if ($cancel) {
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id);
+		}
+		if (!$confirm) {
+			forum_header(array('title'=>_('Stop Monitoring'), 'modal' => 1));
 			echo $HTML->confirmBox(
 				sprintf(_('You are about to stop monitoring the %1$s forum.'),$f->getName()).
 					'<br/><br/>'.
 					_('Do you really want to unsubscribe ?'),
-					array('group_id' => $group_id, 'forum_id' => $forum_id, 'stop' => 1),
-			array('confirm' => _('Unsubscribe'), 'cancel' => _('Cancel')) );
-				forum_footer(array());
-				exit;
-			}
-			if (!$f->stopMonitor()) {
-				exit_error($f->getErrorMessage(),'forums');
-			} else {
-				session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum monitoring deactivated')));
-			}
-		} elseif(getIntFromRequest('start')) {
-			if (!$f->setMonitor()) {
-				exit_error($f->getErrorMessage(),'forums');
-			} else {
-				session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum monitoring started')));
-			}
+				array('group_id' => $group_id, 'forum_id' => $forum_id, 'stop' => 1),
+				array('confirm' => _('Unsubscribe'), 'cancel' => _('Cancel')) );
+			forum_footer(array());
+			exit;
 		}
-	} else {
-		exit_missing_param('',array(_('Forum ID'),_('Project ID')),'forums');
+		if (!$f->stopMonitor()) {
+			exit_error($f->getErrorMessage(),'forums');
+		} else {
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum monitoring deactivated')));
+		}
+	} elseif(getIntFromRequest('start')) {
+		if (!$f->setMonitor()) {
+			exit_error($f->getErrorMessage(),'forums');
+		} else {
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum monitoring started')));
+		}
+	}
+} else {
+	exit_missing_param('',array(_('Forum ID'),_('Project ID')),'forums');
 }
 
 ?>

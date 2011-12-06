@@ -851,7 +851,7 @@ class ProjectTask extends Error {
 		$arr2 = $this->getAssignedTo();
 		$this->assignedto =& $arr;
 
-		//If no one is assigned, then assign it to "100" - NOBODY
+		// If no one is assigned, then assign it to "100" - NOBODY
 		if (!$arr || count($arr) < 1 || ((count($arr)==1) && ($arr[0]==''))) {
 			$arr=array('100');
 		}
@@ -1069,10 +1069,10 @@ class ProjectTask extends Error {
 			$assigned = array();
 			foreach ($old_assigned as $user_id) {
 				$assigned[] = user_get_object($user_id)->getRealName();
-				}
+			}
 			$this->addHistory('assigned_to', join(', ', $assigned));
 			$arrChangedAndInNotice['assigned'] = ">";
-				$has_changes = true;
+			$has_changes = true;
 		}
 
 		$old_array = array_keys($this->getDependentOn());
@@ -1170,17 +1170,17 @@ class ProjectTask extends Error {
 		$body = "Task #". $this->getID() ." has been updated by $user.".
 			"\n\nProject: ". $this->ProjectGroup->Group->getPublicName();
 
-			if (isset($arrChangedAndInNotice['subproject']))
-				$body .= "\n". $arrChangedAndInNotice['subproject']."Subproject: ". $this->ProjectGroup->getName();
+		if (isset($arrChangedAndInNotice['subproject']))
+			$body .= "\n". $arrChangedAndInNotice['subproject']."Subproject: ". $this->ProjectGroup->getName();
 
-			if (isset($arrChangedAndInNotice['summary']))
-				$body .= "\n". $arrChangedAndInNotice['summary']. "Summary: ".util_unconvert_htmlspecialchars( $this->getSummary() );
+		if (isset($arrChangedAndInNotice['summary']))
+			$body .= "\n". $arrChangedAndInNotice['summary']. "Summary: ".util_unconvert_htmlspecialchars( $this->getSummary() );
 
-			if (isset($arrChangedAndInNotice['complete']))
-				$body .= "\n". $arrChangedAndInNotice['complete']. "Complete: ". $this->getPercentComplete() ."%";
+		if (isset($arrChangedAndInNotice['complete']))
+			$body .= "\n". $arrChangedAndInNotice['complete']. "Complete: ". $this->getPercentComplete() ."%";
 
-			if (isset($arrChangedAndInNotice['status']))
-				$body .= "\n". $arrChangedAndInNotice['status']. "Status: ". $this->getStatusName();
+		if (isset($arrChangedAndInNotice['status']))
+			$body .= "\n". $arrChangedAndInNotice['status']. "Status: ". $this->getStatusName();
 
 		if (isset($arrChangedAndInNotice['assigned'])) {
 			$assigned = array();
@@ -1190,7 +1190,7 @@ class ProjectTask extends Error {
 			$body .= "\n". $arrChangedAndInNotice['assigned']. "Assigned: ". join(', ', $assigned);
 		}
 
-			$body .= "\n\nDescription: ". util_unconvert_htmlspecialchars( $this->getDetails() );
+		$body .= "\n\nDescription: ". util_unconvert_htmlspecialchars( $this->getDetails() );
 
 		/*
 			Now get the followups to this task

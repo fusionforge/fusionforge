@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-$ath->adminHeader(array ('title'=>_('Customize Browse List'),'pagename'=>'tracker_admin_customize_liste','titlevals'=>array($ath->getName())));
+$ath->adminHeader(array('title'=>_('Customize Browse List'),'pagename'=>'tracker_admin_customize_liste','titlevals'=>array($ath->getName())));
 
 /*
 	List of possible user built Selection Boxes for an ArtifactType
