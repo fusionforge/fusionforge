@@ -41,9 +41,9 @@ $group_id = getIntFromRequest("group_id");
 
 // If the link comes from the project, display the project header. If it comes from the user page, display the normal site header
 if ($group_id) {
-    forum_header(array('title'=>_('My Monitored Forums')));
+	forum_header(array('title'=>_('My Monitored Forums')));
 } else {
-    site_header(array('title'=>_('My Monitored Forums'), 'user_id' => $user_id));
+	site_header(array('title'=>_('My Monitored Forums'), 'user_id' => $user_id));
 }
 
 //get the user monitored forums
@@ -86,22 +86,22 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 	}
 	if (!is_object($f)) {
 		//just skip it - this object should never have been placed here
-	}	elseif ($f->isError()) {
+	} elseif ($f->isError()) {
 		echo $f->getErrorMessage();
-	}	else {
+	} else {
 		//check if the forum has new content
 
 		$fh = new ForumHTML($f);
 		if (!$fh || !is_object($fh)) {
 			exit_error(_('Error getting new ForumHTML'),'forums');
-		}	elseif ($fh->isError()) {
+		} elseif ($fh->isError()) {
 			exit_error($fh->getErrorMessage(),'forums');
 		}
 
 		$fmf = new ForumMessageFactory($f);
 		if (!$fmf || !is_object($fmf)) {
 			exit_error(_('Error getting new ForumMessageFactory'),'forums');
-		}	elseif ($fmf->isError()) {
+		} elseif ($fmf->isError()) {
 			exit_error($fmf->getErrorMessage(),'forums');
 		}
 
@@ -124,18 +124,18 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 		//anything that's new ( new thread or followup) is considered to be a "new thing" and the forum
 		//is considered to have new contents
 		if (!empty($msg_arr)) {
-		foreach ($msg_arr as $forum_msg_arr) {
-			foreach ($forum_msg_arr as $forum_msg) {
-				if ($f->getSavedDate() < $forum_msg->getPostDate()) {
-				//we've got ourselves a new message or followup for this forum. note that, exit the search
+			foreach ($msg_arr as $forum_msg_arr) {
+				foreach ($forum_msg_arr as $forum_msg) {
+					if ($f->getSavedDate() < $forum_msg->getPostDate()) {
+						//we've got ourselves a new message or followup for this forum. note that, exit the search
 						$newcontent = "<center>" . html_image('ic/new.png','', '', array('alt' => 'new')) . "</center>";
-				break;
+						break;
+					}
+				}
+				if ($newcontent != '&nbsp;') {
+					break;
 				}
 			}
-				if ($newcontent != '&nbsp;') {
-				break;
-			}
-		}
 		}
 		/*while (($j < $rows) && ($total_rows < $max_rows)) {
 			$msg =& $msg_arr["0"][$j];
@@ -156,9 +156,9 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			html_image('ic/forum20w.png') .
 			'&nbsp;' .
 			$f->getName() .'</a></td>
-			<td style="text-align:center">'.$f->getThreadCount().'</td>
-			<td style="text-align:center">'. $f->getMessageCount() .'</td>
-			<td style="text-align:center">'. $date .'</td>
+			<td class="align-center">'.$f->getThreadCount().'</td>
+			<td class="align-center">'. $f->getMessageCount() .'</td>
+			<td class="align-center">'. $date .'</td>
 			<td>' . $newcontent . '</td></tr>';
 	}
 }

@@ -30,32 +30,32 @@ require_once $gfcommon.'forum/Forum.class.php';
 // User obviously has to be logged in to save place
 session_require_login();
 
-	$forum_id = getIntFromRequest('forum_id');
-	$group_id = getIntFromRequest('group_id');
+$forum_id = getIntFromRequest('forum_id');
+$group_id = getIntFromRequest('group_id');
 
-	if ($forum_id && $group_id) {
-		//
-		//  Set up local objects
-		//
-		$g = group_get_object($group_id);
-		if (!$g || !is_object($g) || $g->isError()) {
-			exit_no_group();
-		}
+if ($forum_id && $group_id) {
+	//
+	//  Set up local objects
+	//
+	$g = group_get_object($group_id);
+	if (!$g || !is_object($g) || $g->isError()) {
+		exit_no_group();
+	}
 
-		$f=new Forum($g,$forum_id);
-		if (!$f || !is_object($f)) {
-			exit_error(_('Error Getting Forum'),'forums');
-		} elseif ($f->isError()) {
-			exit_error($f->getErrorMessage(),'forums');
-		}
+	$f=new Forum($g,$forum_id);
+	if (!$f || !is_object($f)) {
+		exit_error(_('Error Getting Forum'),'forums');
+	} elseif ($f->isError()) {
+		exit_error($f->getErrorMessage(),'forums');
+	}
 
-		if (!$f->savePlace()) {
-			exit_error($f->getErrorMessage(),'forums');
-		} else {
-			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum Position Saved. New messages will be highlighted when you return')));
-		}
+	if (!$f->savePlace()) {
+		exit_error($f->getErrorMessage(),'forums');
 	} else {
-		exit_missing_param('',array(_('Forum ID'),_('Project ID')),'forums');
+		session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum Position Saved. New messages will be highlighted when you return')));
+	}
+} else {
+	exit_missing_param('',array(_('Forum ID'),_('Project ID')),'forums');
 }
 
 ?>
