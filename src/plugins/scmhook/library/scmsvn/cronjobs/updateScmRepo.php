@@ -73,7 +73,7 @@ function updateScmRepo($params) {
 
 		foreach($hooksPostCommit as $hookPostCommit) {
 			if ($hookPostCommit->needCopy()) {
-				foreach($hookPostCommit->getFiles as $hookPostCommitFile) {
+				foreach($hookPostCommit->getFiles() as $hookPostCommitFile) {
 					@unlink($svndir_root.'/hooks/'.basename($hookPostCommitFile));
 				}
 			}
