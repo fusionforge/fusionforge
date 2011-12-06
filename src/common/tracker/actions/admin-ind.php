@@ -84,20 +84,6 @@ if(isset($page_title)){
 }
 
 $atf->header( array('title' => _('Trackers Administration')));
-echo $HTML->subMenu(
-	array(
-		_('Report'),
-		_('Admin')
-	),
-	array(
-		'/tracker/reporting/?group_id='.$group_id,
-		'/tracker/admin/?group_id='.$group_id
-	),
-	array(
-		array('title' => _('Various graph about statistics'), 'class' => 'tabtitle-nw'),
-		array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'), 'class' => 'tabtitle')
-	)
-);
 
 if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	echo '<div class="warning">'._('No trackers found').'</div>';
