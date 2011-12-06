@@ -3,8 +3,8 @@
 . tests/scripts/common-vm
 
 get_config $@
-destroy_vm -t centos5 $@
-start_vm_if_not_keeped -t centos5 $@
+destroy_vm -t centos6 $@
+start_vm_if_not_keeped -t centos6 $@
 
 setup_dag_repo $@
 
@@ -26,6 +26,6 @@ ssh root@$HOST 'yum clean all'
 
 ssh root@$HOST 'perl -spi -e "s/^X11Forwarding no/X11Forwarding yes/" /etc/ssh/sshd_config'
 
-sudo /root/save_as_template_vz.sh centos-5-x86-test
+sudo /root/save_as_template_vz.sh centos-6-x86-test
 
-stop_vm_if_not_keeped -t centos5 $@
+stop_vm_if_not_keeped -t centos6 $@

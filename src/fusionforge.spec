@@ -475,6 +475,11 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__cp} -a etc/httpd.conf-fhs $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
 #%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
 #%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
+
+%{__sed} -i -e "s!www-data!apache!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e "s!use_shell = yes!use_shell = no!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e "s!use_webdav = no!use_webdav = yes!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+
 # install fusionforge crontab
 %{__install} -m 644 packaging/cron.d/cron.fusionforge $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/%{name}
 
