@@ -8,7 +8,12 @@ if (!isset($ffErrors))
 // error handler function
 function ffErrorHandler($errno, $errstr, $errfile, $errline)
 {
-	global $ffErrors, $sysdebug_ignored;
+	global $ffErrors, $sysdebug_ignored, $sysdebug__aborted;
+
+	if ($sysdebug__aborted) {
+		/* inside the exception handler, ignore everything */
+		return true;
+	}
 
 	if (!$sysdebug_ignored && error_reporting() == 0)
 		/* prepended @ to statement => ignore */
@@ -61,11 +66,18 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 
 
 function ffOutputHandler($buffer) {
-	global $ffErrors, $sysdebug_enable, $sysdebug_lazymode_on,
-	    $sysdebug_doframe, $gfcommon, $sysDTDs, $sysXMLNSs, $HTML;
+	global $ffErrors, $sysdebug_enable, $sysdebug__aborted,
+	    $sysdebug_lazymode_on, $sysdebug_doframe, $gfcommon,
+	    $sysDTDs, $sysXMLNSs, $HTML;
 
-	if (! getenv ('SERVER_SOFTWARE')) {
-		return $buffer ;
+	if ($sysdebug__aborted) {
+		/* called from exception handler, discard */
+		$p = strrpos($buffer, "\r\n");
+		return (($p === false) ? "" : substr($buffer, $p + 2));
+	}
+
+	if (!getenv('SERVER_SOFTWARE')) {
+		return $buffer;
 	}
 
 	/* in case we’re aborted */
@@ -267,13 +279,36 @@ function ffOutputHandler($buffer) {
 	}
 }
 
+function ffExceptionHandler($e) {
+	global $sysdebug__aborted;
+
+	/* drop output buffers and error handler */
+	$sysdebug__aborted = true;
+	while (ob_get_length() > 0 && ob_end_clean()) {
+		/* loop */ ;
+	}
+	restore_error_handler();
+
+	/* issue exception information */
+	header('HTTP/1.0 500 Exception not handled');
+	header('Content-type: text/plain');
+	echo "\r\nUncaught exception:\n" . str_replace("\r", "",
+	    $e->getMessage() . "\n\nBacktrace:\n" . $e->getTraceAsString()) .
+	    "\n";
+	exit(1);
+}
+
+
 if (forge_get_config('sysdebug_phphandler')) {
 	// set to the user defined error handler
 	set_error_handler("ffErrorHandler");
 }
 
+set_exception_handler("ffExceptionHandler");
+
 $sysdebug_lazymode_on = false;
 $sysdebug_doframe = false;
+$sysdebug__aborted = false;
 ob_start("ffOutputHandler", 0, false);
 
 function sysdebug_ajaxbody($enable=true) {
