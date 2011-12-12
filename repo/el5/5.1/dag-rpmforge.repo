@@ -1,0 +1,17 @@
+# Name: RPMforge RPM Repository for Red Hat Enterprise 5 - dag
+# URL: http://rpmforge.net/
+[dag-rpmforge]
+name = Red Hat Enterprise $releasever - RPMforge.net - dag
+baseurl = http://apt.sw.be/redhat/el5/en/$basearch/dag
+#mirrorlist = http://apt.sw.be/redhat/el5/en/mirrors-rpmforge
+enabled = 1
+protect = 0
+gpgcheck = 0
+
+[dag-rpmforge-extra]
+name = Red Hat Enterprise $releasever - RPMforge.net - extra
+baseurl = http://apt.sw.be/redhat/el5/en/$basearch/extras
+#mirrorlist = http://apt.sw.be/redhat/el5/en/mirrors-rpmforge
+enabled = 0
+protect = 0
+gpgcheck = 0
