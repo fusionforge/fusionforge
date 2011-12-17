@@ -22,6 +22,7 @@
  */
 
 require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/User.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 
 class DocumentManager extends Error {
@@ -177,7 +178,9 @@ class DocumentManager extends Error {
 				if (isset($nbDocsTrashed)) {
 					$nbDocsLabel = '<span class="tabtitle-nw" title="'._('Number of deleted documents in this folder').'" >('.$nbDocsTrashed.')</span>';
 				}
-				echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel;
+				$user = user_get_object($localDg->getCreated_by());
+				$lititle = _('Created_by:').$user->getRealName()._('; Last modified:').date(_('Y-m-d H:i'), $localDg->getLastModifyDate());
+				echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName(), array('class'=>'tabtitle-nw', 'title'=>$lititle)).$nbDocsLabel;
 				if ($dg->getSubgroup($subGroupIdValue, $stateId)) {
 					echo '<ul>';
 					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);

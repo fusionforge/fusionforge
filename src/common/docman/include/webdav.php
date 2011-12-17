@@ -135,12 +135,17 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				return false;
 
 			$arr = db_fetch_array($res);
+			if ($arr['updatedate']) {
+				$lastmodifieddate = $arr['updatedate'];
+			} else {
+				$lastmodifieddate = $arr['createdate'];
+			}
 			$files["files"][$i] = array();
 			$files["files"][$i]["path"] = $path;
 			$files["files"][$i]["props"] = array();
 			$files["files"][$i]["props"][] = $this->mkprop("displayname", $arr['groupname']);
 			$files["files"][$i]["props"][] = $this->mkprop("creationdate", $arr['createdate']);
-			$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", $arr['updatedate']);
+			$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", $lastmodifieddate);
 			$files["files"][$i]["props"][] = $this->mkprop("lastaccessed", '');
 			$files["files"][$i]["props"][] = $this->mkprop("ishidden", false);
 			$files["files"][$i]["props"][] = $this->mkprop("resourcetype", "collection");
@@ -152,12 +157,17 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 			while ($arr = db_fetch_array($res)) {
 				$i++;
+				if ($arr['updatedate']) {
+					$lastmodifieddate = $arr['updatedate'];
+				} else {
+					$lastmodifieddate = $arr['createdate'];
+				}
 				$files["files"][$i] = array();
 				$files["files"][$i]["path"]  = $path.'/'.$arr['groupname'];
 				$files["files"][$i]["props"] = array();
 				$files["files"][$i]["props"][] = $this->mkprop("displayname", $arr['groupname']);
 				$files["files"][$i]["props"][] = $this->mkprop("creationdate", $arr['createdate']);
-				$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", $arr['updatedate']);
+				$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", $lastmodifieddate);
 				$files["files"][$i]["props"][] = $this->mkprop("lastaccessed", '');
 				$files["files"][$i]["props"][] = $this->mkprop("ishidden", false);
 				$files["files"][$i]["props"][] = $this->mkprop("resourcetype","collection");
@@ -170,12 +180,17 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 			while ($arr = db_fetch_array($res)) {
 				$i++;
+				if ($arr['updatedate']) {
+					$lastmodifieddate = $arr['updatedate'];
+				} else {
+					$lastmodifieddate = $arr['createdate'];
+				}
 				$files["files"][$i] = array();
 				$files["files"][$i]["path"] = $path.'/'.$arr['filename'];
 				$files["files"][$i]["props"] = array();
 				$files["files"][$i]["props"][] = $this->mkprop("displayname", $arr['filename']);
 				$files["files"][$i]["props"][] = $this->mkprop("creationdate", $arr['createdate']);
-				$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", $arr['updatedate']);
+				$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", $lastmodifieddate);
 				$files["files"][$i]["props"][] = $this->mkprop("lastaccessed", '');
 				$files["files"][$i]["props"][] = $this->mkprop("ishidden", false);
 				$files["files"][$i]["props"][] = $this->mkprop("getcontentlength", $arr['filesize']);

@@ -29,6 +29,8 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'docman/Parsedata.class.php';
 require_once $gfcommon.'docman/DocumentManager.class.php';
+require_once $gfcommon.'docman/DocumentGroup.class.php';
+
 
 class Document extends Error {
 
@@ -205,6 +207,13 @@ class Document extends Error {
 
 		if (!$this->fetchData($docid)) {
 			$this->setError(_('Error fetching Document'));
+			db_rollback();
+			return false;
+		}
+
+		$localDg = new DocumentGroup($this->Group, $doc_group);
+		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
+			$this->setError(_('Error updating document group:').$localDg->getErrorMessage());
 			db_rollback();
 			return false;
 		}

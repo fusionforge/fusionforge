@@ -289,15 +289,15 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			if ($d->getLocked()) {
 				if ($d->getLockedBy() == $u->getID()) {
 					$d->setLock(0);
-					/* if you change the 60000 value above, please update here too */
+				/* if you change the 60000 value above, please update here too */
 				} elseif ((time() - $d->getLockdate()) > 600) {
 					$d->setLock(0);
 				}
 			}
 			if (!$d->getLocked() && !$d->getReserved()) {
 				echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=trashfile&fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
+				echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListFile.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 				if (session_loggedin()) {
-					echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListFile.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 					echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=reservefile&amp;fileid='.$d->getID().'" title="'. _('Reserve this document for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
 				}
 			} else {

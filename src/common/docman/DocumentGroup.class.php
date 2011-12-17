@@ -134,12 +134,14 @@ class DocumentGroup extends Error {
 			return false;
 		}
 
-		$result = db_query_params('INSERT INTO doc_groups (group_id,groupname,parent_doc_group,stateid,createdate) VALUES ($1, $2, $3, $4, $5)',
+		$user_id = ((session_loggedin()) ? user_getid() : 100);
+		$result = db_query_params('INSERT INTO doc_groups (group_id, groupname, parent_doc_group, stateid, createdate, created_by) VALUES ($1, $2, $3, $4, $5, $6)',
 						array ($this->Group->getID(),
 							htmlspecialchars($name),
 							$parent_doc_group,
 							'1',
-							time())
+							time(),
+							$user_id)
 						);
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -153,6 +155,12 @@ class DocumentGroup extends Error {
 		// Now set up our internal data structures
 		if (!$this->fetchData($doc_group)) {
 			return false;
+		}
+
+		if ($parent_doc_group) {
+			/* update the parent */
+			$parentDg = new DocumentGroup($this->Group, $parent_doc_group);
+			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, 0);
 		}
 
 		return true;
@@ -182,6 +190,13 @@ class DocumentGroup extends Error {
 
 		db_commit();
 
+		if (!$result) {
+			return false;
+		}
+
+		/* update the parent */
+		$parentDg = new DocumentGroup($this->Group, $this->getParentID());
+		$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, 1);
 		/* is there any subdir ? */
 		$subdir = db_query_params('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
 					array($doc_groupid, $project_group_id));
@@ -190,9 +205,6 @@ class DocumentGroup extends Error {
 			$this->delete($arr['doc_group'], $project_group_id);
 		}
 
-		if (!$result) {
-			return false;
-		}
 		return true;
 	}
 
@@ -303,14 +315,62 @@ class DocumentGroup extends Error {
 	}
 
 	/**
+	 * getCreatedate - get the creation date.
+	 *
+	 * @return	integer	The creation date.
+	 * @access	public
+	 */
+	function getCreatedate() {
+		return $this->data_array['createdate'];
+	}
+
+	/**
+	 * getUpdatedate - get the update date.
+	 *
+	 * @return	integer	The update date.
+	 * @access	public
+	 */
+	function getUpdatedate() {
+		return $this->data_array['updatedate'];
+	}
+
+	/**
+	 * getLastModifyDate - get the bigger value between update date and creation date.
+	 *
+	 * @return	integer	The last modified date.
+	 * @access	public
+	 */
+	function getLastModifyDate() {
+		if($this->data_array['updatedate']) {
+			return $this->data_array['updatedate'];
+		} else {
+			return $this->data_array['createdate'];
+		}
+
+	}
+
+
+
+	/**
+	 * getCreated_by - get the creator (user) id.
+	 *
+	 * @return	integer	The User id.
+	 * @access	public
+	 */
+	function getCreated_by() {
+		return $this->data_array['created_by'];
+	}
+
+	/**
 	 * update - update a DocumentGroup.
 	 *
 	 * @param	string	Name of the category.
 	 * @param	integer	the doc_group id of the parent. default = 0
+	 * @param	integer	update only the metadata : created_by, updatedate
 	 * @return	boolean	success or not
 	 * @access	public
 	 */
-	function update($name, $parent_doc_group = 0) {
+	function update($name, $parent_doc_group = 0, $metadata = 0) {
 		$perm =& $this->Group->getPermission();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
@@ -333,24 +393,33 @@ class DocumentGroup extends Error {
 			}
 		}
 
-		$res=db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
-					array($name,
-						$parent_doc_group,
-						$this->Group->getID())
-					);
-		if ($res && db_numrows($res) > 0) {
-			$this->setError(_('Documents Folder name already exists'));
-			return false;
+		if (!$metadata) {
+			$res = db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
+						array($name,
+							$parent_doc_group,
+							$this->Group->getID())
+						);
+			if ($res && db_numrows($res) > 0) {
+				$this->setError(_('Documents Folder name already exists'));
+				return false;
+			}
 		}
 
-		$result = db_query_params('UPDATE doc_groups SET groupname=$1, parent_doc_group=$2 WHERE doc_group=$3 AND group_id=$4',
+		$user_id = ((session_loggedin()) ? user_getid() : 100);
+		$result = db_query_params('UPDATE doc_groups SET groupname=$1, parent_doc_group=$2, updatedate=$3, created_by=$4 WHERE doc_group=$5 AND group_id=$6',
 						array(htmlspecialchars($name),
 							$parent_doc_group,
+							time(),
+							$user_id,
 							$this->getID(),
 							$this->Group->getID())
 					);
 		if ($result && db_affected_rows($result) > 0) {
-			$this->fetchData($this->getID()) ;
+			$parentDg = new DocumentGroup($this->Group, $parent_doc_group);
+			if ($parentDg->getParentID())
+				$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
+
+			$this->fetchData($this->getID());
 			return true;
 		} else {
 			$this->setOnUpdateError(_('Error') . _(': ') .db_error());
