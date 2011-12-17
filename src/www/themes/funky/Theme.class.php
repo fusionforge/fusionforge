@@ -433,6 +433,7 @@ class Theme extends Layout {
 		html_use_tooltips();
 		html_use_storage();
 		html_use_simplemenu();
+		html_use_coolfieldset();
 		echo $this->getJavascripts();
 		echo $this->getStylesheets();
 		?>
