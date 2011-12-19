@@ -1,5 +1,5 @@
 
-YUICOMPRESSOR = java -jar plugins/wiki/www/themes/default/yuicompressor-2.4.2.jar
+YUICOMPRESSOR = java -jar plugins/wiki/www/themes/default/yuicompressor-2.4.7.jar
 
 all: gettext js
 
