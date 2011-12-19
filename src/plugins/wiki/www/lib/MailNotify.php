@@ -1,5 +1,5 @@
 <?php
-// $Id: MailNotify.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: MailNotify.php 8171 2011-11-02 14:32:49Z vargenau $
 /* Copyright (C) 2006-2007,2009 Reini Urban
  * Copyright (C) 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -212,7 +212,11 @@ class MailNotify {
         if (!$ok && isset($ErrorManager->_postponed_errors[count($ErrorManager->_postponed_errors)-1])) {
             // get last error message
             $last_err = $ErrorManager->_postponed_errors[count($ErrorManager->_postponed_errors)-1];
-            fwrite($f, "\nX-MailFailure: " . $last_err);
+            fwrite($f, "\nX-MailFailure: " .
+                       "errno: " . $last_err->errno . ", " .
+                       "errstr: " . $last_err->errstr . ", " .
+                       "errfile: " . $last_err->errfile . ", " .
+                       "errline: " . $last_err->errline);
         }
         fwrite($f, "\nDate: " . CTime());
         fwrite($f, "\nSubject: $encoded_subject");
@@ -376,7 +380,7 @@ class MailNotify {
         while(!empty($data[$id])) { // id collision
             $id = rand_ascii_readable(16);
         }
-        $subject = _("E-Mail address confirmation");
+        $subject = _("E-mail address confirmation");
         $ip = $request->get('REMOTE_HOST');
         $expire_date = time() + 7*86400;
         $content = fmt("Someone, probably you from IP address %s, has registered an

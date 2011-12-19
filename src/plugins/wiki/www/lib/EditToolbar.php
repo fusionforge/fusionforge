@@ -1,5 +1,5 @@
 <?php
-// $Id: EditToolbar.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: EditToolbar.php 8159 2011-10-03 12:41:45Z vargenau $
 /* Copyright 2004-2010 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -71,11 +71,10 @@ msg_repl_close     = '"._("Close")."'
             $js = JavaScript('',array('src' => $WikiTheme->_findData("toolbar.js")));
             if (empty($WikiTheme->_headers_printed)) {
                 $WikiTheme->addMoreHeaders($js);
-            }
-        else { // from an actionpage: WikiBlog, AddComment, WikiForum
+            } else { // from an actionpage: WikiBlog, AddComment, WikiForum
                 printXML($js);
                 printXML(JavaScript('define_f()'));
-        }
+            }
         }
 
         require_once("lib/WikiPluginCached.php");
@@ -314,8 +313,8 @@ msg_repl_close     = '"._("Close")."'
             $more_buttons = HTML::img(array('class'=> "toolbar",
                         'id' => 'tb-categories',
                                             'src'  => $WikiTheme->getImageURL("ed_category.png"),
-                                            'title'=>_("AddCategory"),
-                                            'alt'=>"AddCategory", // to detect this at js
+                                            'title'=>_("Insert Categories"),
+                                            'alt'=>"Insert Categories", // to detect this at js
                                             'onclick'=>"showPulldown('".
                                             _("Insert Categories")
                                             ."',[".join(",",$categories)."],'"
@@ -364,8 +363,8 @@ msg_repl_close     = '"._("Close")."'
             $more_buttons = HTML::img(array('class'=>"toolbar",
                         'id' => 'tb-plugins',
                                             'src'  => $WikiTheme->getImageURL("ed_plugins.png"),
-                                            'title'=>_("AddPlugin"),
-                                            'alt'=>_("AddPlugin"),
+                                            'title'=>_("Insert Plugin"),
+                                            'alt'=>_("Insert Plugin"),
                                             'onclick'=>"showPulldown('".
                                             _("Insert Plugin")
                                             ."',[".$plugin_js."],'"
@@ -394,8 +393,8 @@ msg_repl_close     = '"._("Close")."'
             return HTML("\n", HTML::img(array('class'=>"toolbar",
                           'id' => 'tb-pages',
                                               'src'  => $WikiTheme->getImageURL("ed_pages.png"),
-                                              'title'=>_("AddPageLink"),
-                                              'alt'=>_("AddPageLink"),
+                                              'title'=>_("Insert PageLink"),
+                                              'alt'=>_("Insert PageLink"),
                                               'onclick'=>"showPulldown('".
                                               _("Insert PageLink")
                                               ."',[".join(",",$pages)."],'"
@@ -432,8 +431,8 @@ msg_repl_close     = '"._("Close")."'
             $more_buttons = HTML::img(array('class'=>"toolbar",
                         'id' => 'tb-images',
                                             'src'  => $WikiTheme->getImageURL("ed_image.png"),
-                                            'title'=>_("Add Image or Video"),
-                                            'alt'=>_("Add Image or Video"),
+                                            'title'=>_("Insert Image or Video"),
+                                            'alt'=>_("Insert Image or Video"),
                                             'onclick'=>"showPulldown('".
                                             _("Insert Image or Video")
                                             ."',[".$image_js."],'"
@@ -467,8 +466,8 @@ msg_repl_close     = '"._("Close")."'
                             (array('class'=>"toolbar",
                    'id' => 'tb-templates',
                                    'src'  => $WikiTheme->getImageURL("ed_template.png"),
-                                   'title'=>_("AddTemplate"),
-                                   'alt'=>_("AddTemplate"),
+                                   'title'=>_("Insert Template"),
+                                   'alt'=>_("Insert Template"),
                                    'onclick'=>"showPulldown('".
                                    _("Insert Template")
                                    ."',[".$pages_js."],'"

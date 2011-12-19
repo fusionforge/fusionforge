@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: actionbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+// $Id: actionbar.tmpl 8148 2011-10-03 09:16:57Z vargenau $
 ?>
 
 <div id="actionbar">
@@ -7,7 +7,7 @@
 <?php
   if ((!$page->get('locked') || $user->isAdmin()) and $revision)
       $EditB = Button("edit",
-                      $revision->isCurrent() ? _("Edit this page") : _("Edit old revision"));
+                      $revision->isCurrent() ? _("Edit this page") : _("Edit Old Revision"));
   else
       $EditB = Button("viewsource", _("View Source"));
   // $EditB = fmt("%s of this page", $EditB);

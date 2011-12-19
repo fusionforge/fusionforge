@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: CreateToc.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: CreateToc.php 8212 2011-12-16 13:26:15Z vargenau $
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -252,16 +252,16 @@ extends WikiPlugin
             if (preg_match('/^\s*{\|/', $content[$i])) {
                $insidetable = true;
                continue;
-            } else if (preg_match('/^\s*{{{/', $content[$i])
-                    || preg_match('/^\s*<pre>/', $content[$i])
+            } else if (preg_match('/^\s*{{{/', $content[$i]) 
+                    || preg_match('/^\s*<pre>/', $content[$i]) 
                     || preg_match('/^\s*<verbatim>/', $content[$i])) {
                $insideverbatim = true;
                continue;
             } else if (preg_match('/^\s*\|}/', $content[$i])) {
                $insidetable = false;
                continue;
-            } else if (preg_match('/^\s*}}}/', $content[$i])
-                    || preg_match('/^\s*<\/pre>/', $content[$i])
+            } else if (preg_match('/^\s*}}}/', $content[$i]) 
+                    || preg_match('/^\s*<\/pre>/', $content[$i]) 
                     || preg_match('/^\s*<\/verbatim>/', $content[$i])) {
                $insideverbatim = false;
                continue;
@@ -375,7 +375,7 @@ extends WikiPlugin
             $pagename = $page->name;
         }
         if (!$pagename) {
-            return $this->error(_("No page specified."));
+            return $this->error(sprintf(_("A required argument '%s' is missing."), 'pagename'));
         }
         if (isBrowserIE() and browserDetect("Mac")) {
             $jshide = 0;
@@ -383,7 +383,7 @@ extends WikiPlugin
         if (($notoc) or ($liststyle == 'ol')) {
             $with_counter = 1;
         }
-        if ($firstlevelstyle and ($firstlevelstyle != 'number')
+        if ($firstlevelstyle and ($firstlevelstyle != 'number') 
                              and ($firstlevelstyle != 'letter')
                              and ($firstlevelstyle != 'roman')) {
             return $this->error(_("Error: firstlevelstyle must be 'number', 'letter' or 'roman'"));

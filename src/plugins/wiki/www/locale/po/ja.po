@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0RC1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-18 20:17+0200\n"
+"POT-Creation-Date: 2011-12-16 14:29+0100\n"
 "PO-Revision-Date: 2003-06-07 09:01+0900\n"
 "Last-Translator: Tadashi Jokagi <webmaster@elf.no-ip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,26 +15,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../lib/CachedMarkup.php:536
+#: ../lib/CachedMarkup.php:535
 msgid "BAD semantic relation link"
 msgstr ""
 
-#: ../lib/CachedMarkup.php:568
+#: ../lib/CachedMarkup.php:566
 #, php-format
 msgid "Attribute %s, base value: %s"
 msgstr ""
 
-#: ../lib/CachedMarkup.php:569
+#: ../lib/CachedMarkup.php:567
 #, php-format
 msgid "Attribute %s, value: %s"
 msgstr ""
 
-#: ../lib/CachedMarkup.php:577
-#, fuzzy, php-format
+#: ../lib/CachedMarkup.php:574
+#, php-format
 msgid "Relation %s to page %s"
-msgstr "バージョン %s"
+msgstr ""
 
-#: ../lib/CachedMarkup.php:632
+#: ../lib/CachedMarkup.php:629
 msgid "Found by "
 msgstr ""
 
@@ -52,9 +52,9 @@ msgid "The DBA handler %s is unsupported!"
 msgstr ""
 
 #: ../lib/DbaDatabase.php:21
-#, fuzzy, php-format
+#, php-format
 msgid "Supported handlers are: %s"
-msgstr "サポートテーマ一覧"
+msgstr ""
 
 #: ../lib/DbSession.php:41
 #, php-format
@@ -144,12 +144,22 @@ msgstr ""
 msgid "Older page:"
 msgstr ""
 
+#: ../lib/diff.php:320
+#, php-format
+msgid "Content of versions %1$s and %2$s is identical."
+msgstr ""
+
+#: ../lib/diff.php:327
+#, php-format
+msgid "Version %1$s was created because: %2$s"
+msgstr ""
+
 # This entry is important for French punctuation rules which stipulate
 # a space before each colon.
-#: ../lib/display.php:55 ../lib/display.php:321
-#: ../lib/plugin/HelloWorld.php:65 ../lib/plugin/PageGroup.php:158
-#: ../lib/plugin/PageGroup.php:169 ../lib/plugin/PageGroup.php:185
-#: ../lib/plugin/PageGroup.php:192 ../lib/plugin/PageHistory.php:236
+#: ../lib/display.php:74 ../lib/display.php:344
+#: ../lib/plugin/HelloWorld.php:65 ../lib/plugin/PageGroup.php:154
+#: ../lib/plugin/PageGroup.php:165 ../lib/plugin/PageGroup.php:181
+#: ../lib/plugin/PageGroup.php:188 ../lib/plugin/PageHistory.php:236
 #: ../lib/plugin/UnfoldSubpages.php:154 ../themes/Crao/templates/head.tmpl:40
 #: ../themes/default/templates/head.tmpl:46
 #: ../themes/default/templates/top.tmpl:11
@@ -163,12 +173,12 @@ msgstr ""
 msgid "%s: %s"
 msgstr ""
 
-#: ../lib/display.php:86 ../lib/display.php:187 ../lib/display.php:425
+#: ../lib/display.php:105 ../lib/display.php:206 ../lib/display.php:448
 #: ../lib/plugin/LinkDatabase.php:42
 msgid "LinkDatabase"
 msgstr ""
 
-#: ../lib/display.php:151 ../lib/display.php:387 ../lib/loadsave.php:1579
+#: ../lib/display.php:170 ../lib/display.php:410 ../lib/loadsave.php:1574
 #: ../lib/plugin/RecentChanges.php:62 ../lib/plugin/RecentChanges.php:210
 #: ../lib/plugin/RecentChanges.php:217 ../lib/plugin/RecentChanges.php:393
 #: ../lib/plugin/RecentChanges.php:681 ../lib/plugin/RecentChanges.php:1160
@@ -191,13 +201,13 @@ msgstr ""
 msgid "RecentChanges"
 msgstr "変更履歴"
 
-#: ../lib/display.php:188 ../lib/display.php:426
-#: ../lib/plugin/FileInfo.php:124 ../lib/TextSearchQuery.php:115
-#, fuzzy, php-format
+#: ../lib/display.php:207 ../lib/display.php:449
+#: ../lib/plugin/FileInfo.php:126 ../lib/TextSearchQuery.php:115
+#, php-format
 msgid "Unsupported argument: %s=%s"
-msgstr "サポート言語一覧"
+msgstr ""
 
-#: ../lib/display.php:258 ../lib/display.php:265
+#: ../lib/display.php:276 ../lib/display.php:283
 #: ../lib/plugin/BackLinks.php:29 ../lib/plugin/_WikiTranslation.php:50
 #: ../themes/blog/templates/navbar.tmpl:11
 #: ../themes/Crao/templates/navbar.tmpl:18
@@ -210,17 +220,17 @@ msgstr "サポート言語一覧"
 msgid "BackLinks"
 msgstr ""
 
-#: ../lib/display.php:261 ../lib/display.php:268
+#: ../lib/display.php:279 ../lib/display.php:286
 #, php-format
 msgid "BackLinks for %s"
 msgstr ""
 
-#: ../lib/display.php:276
+#: ../lib/display.php:294
 #, php-format
 msgid "(Redirected from %s)"
 msgstr ""
 
-#: ../lib/display.php:344 ../themes/Crao/templates/head.tmpl:63
+#: ../lib/display.php:367 ../themes/Crao/templates/head.tmpl:63
 #: ../themes/Crao/templates/head.tmpl:64
 #: ../themes/default/templates/head.tmpl:71
 #: ../themes/default/templates/head.tmpl:72
@@ -269,29 +279,25 @@ msgid "Page now unlocked."
 msgstr "ページはロック解除中です。"
 
 #: ../lib/editpage.php:259
-#, fuzzy
 msgid "Page now public."
-msgstr "ページはロック解除中です。"
+msgstr ""
 
 #: ../lib/editpage.php:260
-#, fuzzy
 msgid "Page now not-public."
-msgstr "ページはロック解除中です。"
+msgstr ""
 
 #: ../lib/editpage.php:269
-#, fuzzy
 msgid "Page now external."
-msgstr "ページはロック解除中です。"
+msgstr ""
 
 #: ../lib/editpage.php:270
-#, fuzzy
 msgid "Page now not-external."
-msgstr "ページはロック解除中です。"
+msgstr ""
 
 #: ../lib/editpage.php:379
-#, fuzzy, php-format
+#, php-format
 msgid "Saved: %s"
-msgstr "保存しました: 5s"
+msgstr "保存しました: %s"
 
 #: ../lib/editpage.php:433
 msgid "Too many external links."
@@ -342,16 +348,15 @@ msgid ""
 "save your text in a text editor.)"
 msgstr ""
 
-#: ../lib/editpage.php:568 ../lib/editpage.php:569 ../lib/main.php:800
-#: ../lib/main.php:1167 ../lib/plugin/ModeratedPage.php:42
-#: ../lib/plugin/ModeratedPage.php:146 ../lib/plugin/ModeratedPage.php:216
-#: ../lib/plugin/ModeratedPage.php:256 ../lib/plugin/ModeratedPage.php:259
-#: ../lib/plugin/ModeratedPage.php:261 ../lib/plugin/ModeratedPage.php:263
-#: ../lib/plugin/ModeratedPage.php:347 ../lib/plugin/ModeratedPage.php:351
-#: ../lib/plugin/ModeratedPage.php:406 ../lib/plugin/ModeratedPage.php:431
-#, fuzzy
+#: ../lib/editpage.php:568 ../lib/editpage.php:569 ../lib/main.php:808
+#: ../lib/main.php:1175 ../lib/plugin/ModeratedPage.php:42
+#: ../lib/plugin/ModeratedPage.php:147 ../lib/plugin/ModeratedPage.php:217
+#: ../lib/plugin/ModeratedPage.php:257 ../lib/plugin/ModeratedPage.php:260
+#: ../lib/plugin/ModeratedPage.php:262 ../lib/plugin/ModeratedPage.php:264
+#: ../lib/plugin/ModeratedPage.php:348 ../lib/plugin/ModeratedPage.php:352
+#: ../lib/plugin/ModeratedPage.php:407 ../lib/plugin/ModeratedPage.php:432
 msgid "ModeratedPage"
-msgstr "ページを作成しています。"
+msgstr ""
 
 #: ../lib/editpage.php:569
 #, php-format
@@ -362,7 +367,7 @@ msgstr ""
 
 #: ../lib/editpage.php:571 ../lib/plugin/PasswordReset.php:154
 #: ../lib/plugin/UserPreferences.php:39 ../lib/plugin/WatchPage.php:122
-#: ../lib/plugin/WatchPage.php:142 ../themes/blog/templates/navbar.tmpl:17
+#: ../lib/plugin/WatchPage.php:144 ../themes/blog/templates/navbar.tmpl:17
 #: ../themes/Crao/templates/head.tmpl:79 ../themes/Crao/templates/head.tmpl:80
 #: ../themes/Crao/templates/navbar.tmpl:24
 #: ../themes/default/templates/head.tmpl:87
@@ -417,24 +422,22 @@ msgid ""
 msgstr ""
 
 #: ../lib/editpage.php:669 ../lib/plugin/HtmlConverter.php:66
-#, fuzzy
 msgid "Convert"
-msgstr "コンテンツ"
+msgstr ""
 
-#: ../lib/editpage.php:698 ../lib/EditToolbar.php:211
-#: ../lib/EditToolbar.php:213 ../lib/WysiwygEdit/Wikiwyg.php:79
+#: ../lib/editpage.php:698 ../lib/EditToolbar.php:210
+#: ../lib/EditToolbar.php:212 ../lib/WysiwygEdit/Wikiwyg.php:79
 msgid "Preview"
 msgstr "プレビューする"
 
-#: ../lib/editpage.php:705 ../lib/EditToolbar.php:204
-#: ../lib/EditToolbar.php:206 ../lib/WysiwygEdit/Wikiwyg.php:80
+#: ../lib/editpage.php:705 ../lib/EditToolbar.php:203
+#: ../lib/EditToolbar.php:205 ../lib/WysiwygEdit/Wikiwyg.php:80
 msgid "Save"
 msgstr "保存する"
 
 #: ../lib/editpage.php:709
-#, fuzzy
 msgid "Changes"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../lib/editpage.php:713 ../lib/plugin/UpLoad.php:161
 #: ../lib/plugin/UpLoad.php:166 ../lib/plugin/WikiForm.php:101
@@ -469,9 +472,8 @@ msgid "Undo"
 msgstr ""
 
 #: ../lib/EditToolbar.php:50
-#, fuzzy
 msgid "Undo disabled"
-msgstr "プラグイン %s は無効になっています。"
+msgstr ""
 
 #: ../lib/EditToolbar.php:51
 msgid "Operation undone"
@@ -482,17 +484,16 @@ msgid "Substring \"\\1\" found \\2 times. Replace with \"\\3\"?"
 msgstr ""
 
 #: ../lib/EditToolbar.php:53
-#, fuzzy, php-format
+#, php-format
 msgid "String \"%s\" not found."
-msgstr "ページはロック解除中です。"
+msgstr ""
 
-#: ../lib/EditToolbar.php:54 ../lib/EditToolbar.php:256
-#: ../lib/EditToolbar.php:257 ../lib/plugin/WikiAdminSearchReplace.php:193
+#: ../lib/EditToolbar.php:54 ../lib/EditToolbar.php:255
+#: ../lib/EditToolbar.php:256 ../lib/plugin/WikiAdminSearchReplace.php:193
 msgid "Search & Replace"
 msgstr ""
 
 #: ../lib/EditToolbar.php:55
-#, fuzzy
 msgid "Search for"
 msgstr "検索"
 
@@ -502,214 +503,181 @@ msgstr ""
 
 #: ../lib/EditToolbar.php:57 ../lib/plugin/SyncWiki.php:299
 #: ../lib/plugin/SyncWiki.php:325 ../lib/plugin/SyncWiki.php:348
-#: ../lib/plugin/WikiPoll.php:220 ../lib/upgrade.php:195
-#: ../lib/upgrade.php:398 ../lib/upgrade.php:412 ../lib/upgrade.php:432
-#: ../lib/upgrade.php:441 ../lib/upgrade.php:465 ../lib/upgrade.php:493
-#: ../lib/upgrade.php:543 ../lib/upgrade.php:546 ../lib/upgrade.php:578
-#: ../lib/upgrade.php:580 ../lib/upgrade.php:607 ../lib/upgrade.php:667
-#: ../lib/upgrade.php:692 ../lib/upgrade.php:835 ../lib/upgrade.php:838
-#: ../lib/upgrade.php:905
+#: ../lib/plugin/WikiPoll.php:221 ../lib/stdlib.php:1954
+#: ../lib/upgrade.php:195 ../lib/upgrade.php:398 ../lib/upgrade.php:412
+#: ../lib/upgrade.php:432 ../lib/upgrade.php:441 ../lib/upgrade.php:465
+#: ../lib/upgrade.php:493 ../lib/upgrade.php:543 ../lib/upgrade.php:546
+#: ../lib/upgrade.php:578 ../lib/upgrade.php:580 ../lib/upgrade.php:607
+#: ../lib/upgrade.php:667 ../lib/upgrade.php:692 ../lib/upgrade.php:835
+#: ../lib/upgrade.php:838 ../lib/upgrade.php:905
 msgid "OK"
 msgstr ""
 
-#: ../lib/EditToolbar.php:58 ../lib/EditToolbar.php:323
-#: ../lib/EditToolbar.php:373 ../lib/EditToolbar.php:403
-#: ../lib/EditToolbar.php:441 ../lib/EditToolbar.php:476
+#: ../lib/EditToolbar.php:58 ../lib/EditToolbar.php:322
+#: ../lib/EditToolbar.php:372 ../lib/EditToolbar.php:402
+#: ../lib/EditToolbar.php:440 ../lib/EditToolbar.php:475
 msgid "Close"
 msgstr ""
 
-#: ../lib/EditToolbar.php:126
+#: ../lib/EditToolbar.php:125
 msgid "Bold text"
 msgstr ""
 
-#: ../lib/EditToolbar.php:127
+#: ../lib/EditToolbar.php:126
 msgid "Bold text [alt-b]"
 msgstr ""
 
-#: ../lib/EditToolbar.php:131
+#: ../lib/EditToolbar.php:130
 msgid "Italic text"
 msgstr ""
 
-#: ../lib/EditToolbar.php:132
+#: ../lib/EditToolbar.php:131
 msgid "Italic text [alt-i]"
 msgstr ""
 
-#: ../lib/EditToolbar.php:136
+#: ../lib/EditToolbar.php:135
 msgid "Strike-through text"
 msgstr ""
 
-#: ../lib/EditToolbar.php:137
-#, fuzzy
+#: ../lib/EditToolbar.php:136
 msgid "Strike"
-msgstr "サイズ:"
+msgstr ""
 
-#: ../lib/EditToolbar.php:141
+#: ../lib/EditToolbar.php:140
 msgid "Color text"
 msgstr ""
 
-#: ../lib/EditToolbar.php:142
+#: ../lib/EditToolbar.php:141
 msgid "Color"
 msgstr ""
 
-#: ../lib/EditToolbar.php:146
+#: ../lib/EditToolbar.php:145
 msgid "PageName|optional label"
 msgstr ""
 
-#: ../lib/EditToolbar.php:147
-#, fuzzy
+#: ../lib/EditToolbar.php:146
 msgid "Link to page"
-msgstr "ページのロックを解除中です。"
+msgstr ""
 
-#: ../lib/EditToolbar.php:151
+#: ../lib/EditToolbar.php:150
 msgid "http://www.example.com|optional label"
 msgstr ""
 
-#: ../lib/EditToolbar.php:152
+#: ../lib/EditToolbar.php:151
 msgid "External link (remember http:// prefix)"
 msgstr ""
 
-#: ../lib/EditToolbar.php:156
+#: ../lib/EditToolbar.php:155
 msgid "Headline text"
 msgstr ""
 
-#: ../lib/EditToolbar.php:157
+#: ../lib/EditToolbar.php:156
 msgid "Level 1 headline"
 msgstr ""
 
-#: ../lib/EditToolbar.php:161
+#: ../lib/EditToolbar.php:160
 msgid "Insert non-formatted text here"
 msgstr ""
 
-#: ../lib/EditToolbar.php:162
+#: ../lib/EditToolbar.php:161
 msgid "Ignore wiki formatting"
 msgstr ""
 
-#: ../lib/EditToolbar.php:167
+#: ../lib/EditToolbar.php:166
 msgid "Your signature"
 msgstr ""
 
-#: ../lib/EditToolbar.php:172
+#: ../lib/EditToolbar.php:171
 msgid "Horizontal line"
 msgstr ""
 
-#: ../lib/EditToolbar.php:177
+#: ../lib/EditToolbar.php:176
 msgid "Sample table"
 msgstr ""
 
-#: ../lib/EditToolbar.php:182
-#, fuzzy
+#: ../lib/EditToolbar.php:181
 msgid "Enumeration"
-msgstr "メールアドレスを確認出来ました。"
+msgstr ""
 
-#: ../lib/EditToolbar.php:187
-#, fuzzy
+#: ../lib/EditToolbar.php:186
 msgid "List"
-msgstr "最後へ"
+msgstr ""
 
-#: ../lib/EditToolbar.php:192 ../lib/plugin/CreateToc.php:479
-#: ../lib/plugin/CreateToc.php:494
-#, fuzzy
+#: ../lib/EditToolbar.php:191 ../lib/plugin/CreateToc.php:479
+#: ../lib/plugin/CreateToc.php:494 ../lib/WysiwygEdit/Wikiwyg.php:75
 msgid "Table of Contents"
-msgstr "コンテンツ"
+msgstr ""
 
-#: ../lib/EditToolbar.php:196 ../lib/PageList.php:491
+#: ../lib/EditToolbar.php:195 ../lib/PageList.php:491
 #: ../lib/plugin/AuthorHistory.php:152 ../lib/plugin/WantedPagesOld.php:143
 msgid "Page Name"
 msgstr "ページ名"
 
-#: ../lib/EditToolbar.php:197 ../themes/default/templates/redirect.tmpl:17
+#: ../lib/EditToolbar.php:196 ../themes/default/templates/redirect.tmpl:17
 #: ../themes/default/templates/redirect.tmpl:40
 msgid "Redirect"
 msgstr "転送"
 
-#: ../lib/EditToolbar.php:201
-#, fuzzy
+#: ../lib/EditToolbar.php:200
 msgid "Template Name"
-msgstr "テーマ"
+msgstr ""
 
-#: ../lib/EditToolbar.php:202 ../lib/plugin/PopularTags.php:57
+#: ../lib/EditToolbar.php:201 ../lib/plugin/PopularTags.php:57
 #: ../lib/plugin/Template.php:61
-#, fuzzy
 msgid "Template"
-msgstr "テーマ"
+msgstr ""
 
-#: ../lib/EditToolbar.php:234
+#: ../lib/EditToolbar.php:233
 msgid "Click a button to get an example text"
 msgstr ""
 
-#: ../lib/EditToolbar.php:248 ../lib/EditToolbar.php:249
+#: ../lib/EditToolbar.php:247 ../lib/EditToolbar.php:248
 msgid "Undo Search & Replace"
 msgstr ""
 
-#: ../lib/EditToolbar.php:317
-#, fuzzy
-msgid "AddCategory"
-msgstr "ホームページ作成:"
-
-#: ../lib/EditToolbar.php:320
-#, fuzzy
+#: ../lib/EditToolbar.php:316 ../lib/EditToolbar.php:319
 msgid "Insert Categories"
-msgstr "ホームページ作成:"
+msgstr ""
 
-#: ../lib/EditToolbar.php:322 ../lib/EditToolbar.php:372
-#: ../lib/EditToolbar.php:402 ../lib/EditToolbar.php:440
-#: ../lib/EditToolbar.php:475
+#: ../lib/EditToolbar.php:321 ../lib/EditToolbar.php:371
+#: ../lib/EditToolbar.php:401 ../lib/EditToolbar.php:439
+#: ../lib/EditToolbar.php:474
 msgid "Insert"
 msgstr ""
 
-#: ../lib/EditToolbar.php:367 ../lib/EditToolbar.php:368
-#, fuzzy
-msgid "AddPlugin"
-msgstr "プラグイン"
-
-#: ../lib/EditToolbar.php:370
-#, fuzzy
+#: ../lib/EditToolbar.php:366 ../lib/EditToolbar.php:367
+#: ../lib/EditToolbar.php:369
 msgid "Insert Plugin"
-msgstr "このプラグインを使う"
+msgstr "プラグインを追加"
 
-#: ../lib/EditToolbar.php:397 ../lib/EditToolbar.php:398
-#, fuzzy
-msgid "AddPageLink"
-msgstr "ページを編集しています。"
-
-#: ../lib/EditToolbar.php:400
-#, fuzzy
+#: ../lib/EditToolbar.php:396 ../lib/EditToolbar.php:397
+#: ../lib/EditToolbar.php:399
 msgid "Insert PageLink"
-msgstr "ページを編集しています。"
-
-#: ../lib/EditToolbar.php:435 ../lib/EditToolbar.php:436
-#, fuzzy
-msgid "Add Image or Video"
-msgstr "ページを編集しています。"
-
-#: ../lib/EditToolbar.php:438
-#, fuzzy
-msgid "Insert Image or Video"
-msgstr "ページを編集しています。"
-
-#: ../lib/EditToolbar.php:470 ../lib/EditToolbar.php:471
-msgid "AddTemplate"
 msgstr ""
 
-#: ../lib/EditToolbar.php:473
-#, fuzzy
+#: ../lib/EditToolbar.php:434 ../lib/EditToolbar.php:435
+#: ../lib/EditToolbar.php:437
+msgid "Insert Image or Video"
+msgstr ""
+
+#: ../lib/EditToolbar.php:469 ../lib/EditToolbar.php:470
+#: ../lib/EditToolbar.php:472
 msgid "Insert Template"
-msgstr "テーマ"
+msgstr ""
 
 #: ../lib/ErrorManager.php:220
 #, php-format
 msgid "%s: error while handling error:"
 msgstr ""
 
-#: ../lib/FileFinder.php:187 ../lib/loadsave.php:1158
+#: ../lib/FileFinder.php:187 ../lib/loadsave.php:1153
 #, php-format
 msgid "%s: file not found"
 msgstr "%s: ファイルが見つかりません。"
 
 #: ../lib/IniConfig.php:993
-#, fuzzy
 msgid "CategoryGroup"
-msgstr "ホームページ作成:"
+msgstr ""
 
 #: ../lib/IniConfig.php:995
 msgid "An unnamed PhpWiki"
@@ -717,7 +685,7 @@ msgstr ""
 
 #: ../lib/IniConfig.php:997 ../lib/upgrade.php:70
 #: ../themes/blog/templates/browse-footer.tmpl:6
-#: ../themes/default/templates/userprefs.tmpl:132
+#: ../themes/default/templates/userprefs.tmpl:130
 #: ../themes/fusionforge/templates/navbar.tmpl:9
 #: ../themes/Wordpress/templates/actionbar.tmpl:21
 msgid "HomePage"
@@ -727,8 +695,8 @@ msgstr "ホームページ"
 msgid "Invalid [] syntax ignored"
 msgstr ""
 
-#: ../lib/InlineParser.php:344 ../lib/plugin/ModeratedPage.php:256
-#: ../lib/plugin/ModeratedPage.php:259 ../lib/plugin/ModeratedPage.php:351
+#: ../lib/InlineParser.php:344 ../lib/plugin/ModeratedPage.php:257
+#: ../lib/plugin/ModeratedPage.php:260 ../lib/plugin/ModeratedPage.php:352
 #: ../lib/plugin/SemanticSearch.php:157 ../lib/plugin/SemanticSearch.php:240
 #: ../lib/plugin/SpellCheck.php:178 ../lib/plugin/WikiAdminRename.php:268
 #: ../lib/plugin/WikiAdminRename.php:272
@@ -739,12 +707,21 @@ msgstr ""
 #: ../lib/upgrade.php:1112 ../themes/blog/templates/blogform.tmpl:10
 #: ../themes/default/templates/blogform.tmpl:10
 #: ../themes/fusionforge/templates/blogform.tmpl:10
-#: ../themes/fusionforge/themeinfo.php:55
-#, fuzzy
+#: ../themes/fusionforge/themeinfo.php:51
 msgid ": "
-msgstr "%s バイト"
+msgstr ""
 
-#: ../lib/InlineParser.php:911
+#: ../lib/InlineParser.php:394 ../lib/main.php:769 ../lib/stdlib.php:970
+#, fuzzy
+msgid "Page name too long"
+msgstr "%s から読込まれました。"
+
+#: ../lib/InlineParser.php:399 ../lib/main.php:776
+#, fuzzy, php-format
+msgid "Illegal character '%s' in page name."
+msgstr "ページ名が正しくありません。"
+
+#: ../lib/InlineParser.php:923
 #, php-format
 msgid "unknown color %s ignored"
 msgstr ""
@@ -754,12 +731,12 @@ msgid "ZIP files of database"
 msgstr ""
 
 #: ../lib/loadsave.php:74
-#, fuzzy
 msgid "Dump to directory"
-msgstr "ディレクトリ '%s' を作成出来ません。"
+msgstr ""
 
 #: ../lib/loadsave.php:75 ../themes/fusionforge/templates/navbar.tmpl:19
-#, fuzzy
+#: ../themes/MonoBook/templates/navbar.tmpl:61
+#: ../themes/Sidebar/templates/navbar.tmpl:51
 msgid "Upload File"
 msgstr "ファイル読込み"
 
@@ -768,18 +745,16 @@ msgid "Load File"
 msgstr "ファイル読込み"
 
 #: ../lib/loadsave.php:77
-#, fuzzy
 msgid "Upgrade"
-msgstr "アップロード"
+msgstr ""
 
 #: ../lib/loadsave.php:79
-#, fuzzy
 msgid "Dump pages as XHTML"
 msgstr "XHTMLで出力"
 
 #: ../lib/loadsave.php:85 ../lib/loadsave.php:475 ../lib/loadsave.php:1037
-#: ../lib/loadsave.php:1043 ../lib/loadsave.php:1051 ../lib/main.php:1063
-#: ../lib/main.php:1185 ../lib/main.php:1197 ../lib/PagePerm.php:190
+#: ../lib/loadsave.php:1043 ../lib/loadsave.php:1051 ../lib/main.php:1071
+#: ../lib/main.php:1193 ../lib/main.php:1205 ../lib/PagePerm.php:190
 #: ../lib/PagePerm.php:191 ../lib/plugin/WikiAdminRename.php:142
 #: ../lib/plugin/WikiAdminSelect.php:218
 #: ../themes/blog/templates/navbar.tmpl:14
@@ -801,15 +776,14 @@ msgstr "XHTMLで出力"
 msgid "PhpWikiAdministration"
 msgstr ""
 
-#: ../lib/loadsave.php:96 ../lib/MailNotify.php:288 ../lib/MailNotify.php:305
-#, fuzzy, php-format
+#: ../lib/loadsave.php:96 ../lib/MailNotify.php:292 ../lib/MailNotify.php:309
+#, php-format
 msgid "Edited by: %s"
 msgstr "編集: %s"
 
 #: ../lib/loadsave.php:98 ../lib/loadsave.php:99
-#, fuzzy
 msgid "LoadDump"
-msgstr "ページグループ"
+msgstr ""
 
 #: ../lib/loadsave.php:102
 #, php-format
@@ -861,7 +835,7 @@ msgstr "ディレクトリ '%s' を使用しています。"
 msgid "Dumping Pages"
 msgstr ""
 
-#: ../lib/loadsave.php:367 ../lib/loadsave.php:630 ../lib/stdlib.php:1020
+#: ../lib/loadsave.php:367 ../lib/loadsave.php:630 ../lib/stdlib.php:1027
 msgid "Skipped."
 msgstr ""
 
@@ -889,35 +863,33 @@ msgstr ""
 
 #: ../lib/loadsave.php:687 ../lib/loadsave.php:763 ../lib/loadsave.php:798
 #: ../lib/loadsave.php:828
-#, fuzzy, php-format
+#, php-format
 msgid "... not copied to %s"
-msgstr "%s: ファイルが見つかりません。"
+msgstr ""
 
 #: ../lib/loadsave.php:708
-#, fuzzy
 msgid "saved as "
-msgstr "%s を保存しました。"
+msgstr "を保存しました。"
 
 #: ../lib/loadsave.php:771 ../lib/loadsave.php:806 ../lib/loadsave.php:837
-#, fuzzy
 msgid "... not found"
-msgstr "%s: ファイルが見つかりません。"
+msgstr ""
 
 #: ../lib/loadsave.php:897
 msgid "Empty pagename!"
 msgstr "ページ名が未指定です!"
 
-#: ../lib/loadsave.php:907
-#, fuzzy
-msgid "Invalid pagename!"
-msgstr "ユーザーIDかパスワードが無効です。"
+#: ../lib/loadsave.php:907 ../lib/WikiTheme.php:688
+#, php-format
+msgid "'%s': Bad page name"
+msgstr "'%s': ページ名が正しくありません"
 
-#: ../lib/loadsave.php:913 ../lib/loadsave.php:1560 ../lib/PageType.php:136
+#: ../lib/loadsave.php:913 ../lib/loadsave.php:1555 ../lib/PageType.php:136
 #: ../lib/plugin/InterWikiSearch.php:52 ../lib/plugin/WantedPagesOld.php:73
-#: ../lib/plugin/WantedPages.php:51 ../themes/default/templates/info.tmpl:160
-#: ../themes/default/templates/info.tmpl:161
-#: ../themes/MonoBook/templates/info.tmpl:168
-#: ../themes/MonoBook/templates/info.tmpl:169
+#: ../lib/plugin/WantedPages.php:51 ../themes/default/templates/info.tmpl:158
+#: ../themes/default/templates/info.tmpl:159
+#: ../themes/MonoBook/templates/info.tmpl:164
+#: ../themes/MonoBook/templates/info.tmpl:165
 msgid "InterWikiMap"
 msgstr ""
 
@@ -926,7 +898,7 @@ msgstr ""
 msgid "from %s"
 msgstr "%s から"
 
-#: ../lib/loadsave.php:979 ../lib/MailNotify.php:284
+#: ../lib/loadsave.php:979 ../lib/MailNotify.php:288
 #: ../lib/plugin/RecentChanges.php:137
 #, fuzzy
 msgid "New page"
@@ -954,17 +926,17 @@ msgstr ""
 msgid "- saved to database as version %d"
 msgstr ""
 
-#: ../lib/loadsave.php:1027 ../lib/loadsave.php:1298
+#: ../lib/loadsave.php:1027 ../lib/loadsave.php:1293
 #, php-format
 msgid "MIME file %s"
 msgstr "MIMEファイル %s"
 
-#: ../lib/loadsave.php:1028 ../lib/loadsave.php:1309
+#: ../lib/loadsave.php:1028 ../lib/loadsave.php:1304
 #, php-format
 msgid "Serialized file %s"
 msgstr "シリアライズファイル %s"
 
-#: ../lib/loadsave.php:1029 ../lib/loadsave.php:1331
+#: ../lib/loadsave.php:1029 ../lib/loadsave.php:1326
 #, php-format
 msgid "plain file %s"
 msgstr "プレインファイル %s"
@@ -985,37 +957,24 @@ msgstr ""
 msgid " Sorry, cannot merge."
 msgstr ""
 
-#: ../lib/loadsave.php:1077 ../lib/loadsave.php:1087 ../lib/loadsave.php:1094
-#: ../lib/loadsave.php:1101 ../themes/default/templates/actionbar.tmpl:31
-#: ../themes/fusionforge/templates/actionbar.tmpl:77
-#: ../themes/fusionforge/templates/userprefs.tmpl:253
-#: ../themes/MonoBook/templates/actionbar.tmpl:73
-#: ../themes/Sidebar/templates/actionbar.tmpl:47
-#: ../themes/smaller/templates/actionbar.tmpl:31
-#: ../themes/Wordpress/templates/actionbar.tmpl:60
-#, fuzzy
-msgid "Revert"
-msgstr "転送"
-
-#: ../lib/loadsave.php:1078
-msgid "missing required version argument"
+#: ../lib/loadsave.php:1080
+msgid "Revert: missing required version argument"
 msgstr ""
 
-#: ../lib/loadsave.php:1086
-#, fuzzy
-msgid "no page content"
-msgstr "コンテンツ"
+#: ../lib/loadsave.php:1087
+msgid "No revert: no page content"
+msgstr ""
 
-#: ../lib/loadsave.php:1093
+#: ../lib/loadsave.php:1092
 #, fuzzy
-msgid "same version page"
+msgid "No revert: same version page"
 msgstr "ユーザーページ"
 
-#: ../lib/loadsave.php:1100
-msgid "Cancelled"
+#: ../lib/loadsave.php:1097
+msgid "Revert cancelled"
 msgstr ""
 
-#: ../lib/loadsave.php:1112 ../lib/plugin/PasswordReset.php:102
+#: ../lib/loadsave.php:1106 ../lib/plugin/PasswordReset.php:102
 #: ../lib/plugin/PasswordReset.php:145 ../lib/plugin/UserPreferences.php:116
 #: ../lib/plugin/WatchPage.php:83 ../lib/plugin/WikiAdminChmod.php:141
 #: ../lib/plugin/WikiAdminChown.php:170 ../lib/plugin/WikiAdminMarkup.php:162
@@ -1023,85 +982,85 @@ msgstr ""
 #: ../lib/plugin/WikiAdminRename.php:208
 #: ../lib/plugin/WikiAdminSearchReplace.php:187
 #: ../lib/plugin/WikiAdminSetAcl.php:197
-#: ../themes/default/templates/info.tmpl:134
+#: ../themes/default/templates/info.tmpl:132
 msgid "Yes"
 msgstr ""
 
-#: ../lib/loadsave.php:1114 ../lib/plugin/PasswordReset.php:105
+#: ../lib/loadsave.php:1108 ../lib/plugin/PasswordReset.php:105
 #: ../lib/plugin/PasswordReset.php:148 ../lib/plugin/TranslateText.php:113
 #: ../lib/plugin/UserPreferences.php:118 ../lib/plugin/WatchPage.php:85
 #: ../lib/plugin/WatchPage.php:90 ../lib/plugin/WikiAdminChmod.php:154
-#: ../lib/plugin/WikiAdminChown.php:183 ../lib/plugin/WikiAdminMarkup.php:175
-#: ../lib/plugin/WikiAdminPurge.php:154 ../lib/plugin/WikiAdminRemove.php:219
+#: ../lib/plugin/WikiAdminChown.php:184 ../lib/plugin/WikiAdminMarkup.php:176
+#: ../lib/plugin/WikiAdminPurge.php:155 ../lib/plugin/WikiAdminRemove.php:220
 #: ../lib/plugin/WikiAdminRename.php:231
 #: ../lib/plugin/WikiAdminSearchReplace.php:199
 #: ../lib/plugin/WikiAdminSelect.php:148 ../lib/plugin/WikiAdminSetAcl.php:210
 #: ../lib/plugin/WikiAdminSetExternal.php:131
 #: ../lib/plugin/WikiAdminUtils.php:293 ../lib/plugin/WikiFormRich.php:307
-#: ../lib/purgepage.php:23 ../lib/removepage.php:23 ../lib/upgrade.php:791
+#: ../lib/purgepage.php:25 ../lib/removepage.php:25 ../lib/upgrade.php:791
 #: ../themes/default/templates/login.tmpl:88
-#: ../themes/default/templates/userprefs.tmpl:278
-#: ../themes/fusionforge/templates/userprefs.tmpl:367
+#: ../themes/default/templates/userprefs.tmpl:291
+#: ../themes/fusionforge/templates/userprefs.tmpl:391
 msgid "Cancel"
 msgstr ""
 
-#: ../lib/loadsave.php:1128
+#: ../lib/loadsave.php:1122
 #, fuzzy, php-format
 msgid "revert to version %d"
 msgstr "バージョン %d"
 
-#: ../lib/loadsave.php:1134
-#, fuzzy, php-format
+#: ../lib/loadsave.php:1129
+#, php-format
 msgid "Revert: %s"
-msgstr "転送"
+msgstr ""
 
-#: ../lib/loadsave.php:1135
+#: ../lib/loadsave.php:1130
 #, php-format
 msgid "- version %d saved to database as version %d"
 msgstr ""
 
-#: ../lib/loadsave.php:1153 ../lib/WikiGroup.php:838
+#: ../lib/loadsave.php:1148 ../lib/WikiGroup.php:838
 #, php-format
 msgid "%s: not defined"
 msgstr "%s: 未定義でした。"
 
-#: ../lib/loadsave.php:1163
+#: ../lib/loadsave.php:1158
 msgid "Default InterWiki map file not loaded."
 msgstr ""
 
-#: ../lib/loadsave.php:1170 ../lib/PageType.php:298
+#: ../lib/loadsave.php:1165 ../lib/PageType.php:298
 #, php-format
 msgid "Loading InterWikiMap from external file %s."
 msgstr ""
 
-#: ../lib/loadsave.php:1346 ../lib/loadsave.php:1359
+#: ../lib/loadsave.php:1341 ../lib/loadsave.php:1354
 msgid "Skipping"
 msgstr ""
 
-#: ../lib/loadsave.php:1460
+#: ../lib/loadsave.php:1455
 #, php-format
 msgid "Empty or not existing source. Unable to load: %s"
 msgstr ""
 
-#: ../lib/loadsave.php:1467
+#: ../lib/loadsave.php:1462
 #, php-format
 msgid "Bad file type: %s"
 msgstr ""
 
-#: ../lib/loadsave.php:1484
+#: ../lib/loadsave.php:1479
 #, php-format
 msgid "Loading '%s'"
 msgstr "'%s' を読込み中です。"
 
-#: ../lib/loadsave.php:1516
+#: ../lib/loadsave.php:1511
 msgid "Loading up virgin wiki"
 msgstr ""
 
-#: ../lib/loadsave.php:1572
+#: ../lib/loadsave.php:1567
 msgid "No uploaded file to upload?"
 msgstr ""
 
-#: ../lib/loadsave.php:1575
+#: ../lib/loadsave.php:1570
 #, php-format
 msgid "Uploading %s"
 msgstr "%s をアップロード中です。"
@@ -1111,42 +1070,42 @@ msgstr "%s をアップロード中です。"
 msgid "PageChange Notification of %s"
 msgstr "メール通知"
 
-#: ../lib/MailNotify.php:229
+#: ../lib/MailNotify.php:233
 #, fuzzy, php-format
 msgid "sent to %s"
 msgstr "%s に戻る"
 
-#: ../lib/MailNotify.php:235
+#: ../lib/MailNotify.php:239
 #, fuzzy, php-format
 msgid "Error: Couldn't send %s to %s"
 msgstr "メール通知"
 
-#: ../lib/MailNotify.php:257
+#: ../lib/MailNotify.php:261
 #, fuzzy
 msgid "Page change"
 msgstr "変更しませんでした。"
 
-#: ../lib/MailNotify.php:289
+#: ../lib/MailNotify.php:293
 #, fuzzy, php-format
 msgid "Summary: %s"
 msgstr "要約"
 
-#: ../lib/MailNotify.php:306
+#: ../lib/MailNotify.php:310
 #, fuzzy, php-format
 msgid "Page rename %s to %s"
 msgstr "%s から読込まれました。"
 
-#: ../lib/MailNotify.php:343
+#: ../lib/MailNotify.php:347
 #, fuzzy, php-format
 msgid "User %s removed page %s"
 msgstr "ページをロックしました。"
 
-#: ../lib/MailNotify.php:379
-#, fuzzy
-msgid "E-Mail address confirmation"
-msgstr "メールアドレスを確認出来ました。"
+#: ../lib/MailNotify.php:383 ../lib/plugin/WikiAdminUtils.php:113
+#: ../lib/WikiUserNew.php:1782
+msgid "E-mail address confirmation"
+msgstr ""
 
-#: ../lib/MailNotify.php:382
+#: ../lib/MailNotify.php:386
 #, php-format
 msgid ""
 "Someone, probably you from IP address %s, has registered an\n"
@@ -1196,19 +1155,16 @@ msgid "%s is disallowed on this wiki."
 msgstr ""
 
 #: ../lib/main.php:514
-#, fuzzy
 msgid "authenticated"
-msgstr "%s を保存しました。"
+msgstr ""
 
 #: ../lib/main.php:514
-#, fuzzy
 msgid "not authenticated"
-msgstr "%s を保存しました。"
+msgstr ""
 
 #: ../lib/main.php:516
-#, fuzzy
 msgid "Missing PagePermission:"
-msgstr "ページバージョン:"
+msgstr ""
 
 #: ../lib/main.php:515
 #, php-format
@@ -1236,9 +1192,8 @@ msgid "view this page"
 msgstr "新規ページ"
 
 #: ../lib/main.php:560
-#, fuzzy
 msgid "diff this page"
-msgstr "ページを編集しています。"
+msgstr ""
 
 #: ../lib/main.php:561
 #, fuzzy
@@ -1251,7 +1206,6 @@ msgid "dump serial pages"
 msgstr "シリアライズページを出力しています。"
 
 #: ../lib/main.php:563
-#, fuzzy
 msgid "edit this page"
 msgstr "ページを編集しています。"
 
@@ -1274,14 +1228,12 @@ msgid "load files into this wiki"
 msgstr ""
 
 #: ../lib/main.php:568
-#, fuzzy
 msgid "lock this page"
-msgstr "ページのロックを解除中です。"
+msgstr ""
 
 #: ../lib/main.php:569
-#, fuzzy
 msgid "purge this page"
-msgstr "ページを作成しています。"
+msgstr ""
 
 #: ../lib/main.php:570
 #, fuzzy
@@ -1289,9 +1241,8 @@ msgid "remove this page"
 msgstr "ページ削除"
 
 #: ../lib/main.php:571
-#, fuzzy
 msgid "unlock this page"
-msgstr "ページのロックを解除中です。"
+msgstr ""
 
 #: ../lib/main.php:572
 msgid "upload a zip dump"
@@ -1403,59 +1354,49 @@ msgstr ""
 msgid "Downloading html zip dumps"
 msgstr ""
 
-#: ../lib/main.php:769
-#, fuzzy
-msgid "Illegal character '"
-msgstr "ページ名が正しくありません。"
-
-#: ../lib/main.php:769
-#, fuzzy
-msgid "' in page name."
-msgstr "'%s': ページ名が正しくありません"
-
-#: ../lib/main.php:788
+#: ../lib/main.php:796
 #, php-format
 msgid "%s: action forwarded to a moderator."
 msgstr ""
 
-#: ../lib/main.php:791
+#: ../lib/main.php:799
 msgid "This action requires moderator approval. Please be patient."
 msgstr ""
 
-#: ../lib/main.php:796
+#: ../lib/main.php:804
 msgid "You must wait for moderator approval."
 msgstr ""
 
-#: ../lib/main.php:816 ../lib/plugin/ModeratedPage.php:308
+#: ../lib/main.php:824 ../lib/plugin/ModeratedPage.php:309
 #, php-format
 msgid "%s: Bad action"
 msgstr "%s: 正しくない操作です。"
 
-#: ../lib/main.php:833
+#: ../lib/main.php:841
 msgid "Fatal PhpWiki Error"
 msgstr "致命的なPhpWikiのエラーです。"
 
-#: ../lib/main.php:1084
+#: ../lib/main.php:1092
 #, fuzzy
 msgid "Chown"
 msgstr "カウント"
 
-#: ../lib/main.php:1088
+#: ../lib/main.php:1096
 msgid "SetAcl"
 msgstr ""
 
-#: ../lib/main.php:1092
+#: ../lib/main.php:1100
 msgid "SetAclSimple"
 msgstr ""
 
-#: ../lib/main.php:1096 ../lib/PagePerm.php:190
+#: ../lib/main.php:1104 ../lib/PagePerm.php:190
 #: ../lib/plugin/WikiAdminRename.php:142 ../lib/plugin/WikiAdminRename.php:268
 #: ../themes/fusionforge/templates/actionbar.tmpl:120
 #, fuzzy
 msgid "Rename"
 msgstr "名称"
 
-#: ../lib/main.php:1100 ../lib/main.php:1105 ../lib/plugin/PageDump.php:56
+#: ../lib/main.php:1108 ../lib/main.php:1113 ../lib/plugin/PageDump.php:56
 #: ../themes/Crao/templates/actionbar.tmpl:32
 #: ../themes/default/templates/actionbar.tmpl:40
 #: ../themes/MonoBook/templates/actionbar.tmpl:80
@@ -1464,17 +1405,16 @@ msgstr "名称"
 #: ../themes/smaller/templates/actionbar.tmpl:41
 #: ../themes/smaller/templates/info.tmpl:14
 #: ../themes/Wordpress/templates/actionbar.tmpl:78
-#, fuzzy
 msgid "PageDump"
-msgstr "ページグループ"
+msgstr ""
 
-#: ../lib/main.php:1123 ../lib/plugin/FullTextSearch.php:46
+#: ../lib/main.php:1131 ../lib/plugin/FullTextSearch.php:46
 #: ../lib/plugin/WantedPagesOld.php:126
 msgid "FullTextSearch"
 msgstr "全文検索"
 
-#: ../lib/main.php:1131 ../lib/plugin/RecentChanges.php:808
-#: ../lib/plugin/TitleSearch.php:44 ../lib/WikiTheme.php:1475
+#: ../lib/main.php:1139 ../lib/plugin/RecentChanges.php:808
+#: ../lib/plugin/TitleSearch.php:44 ../lib/WikiTheme.php:1472
 #: ../themes/Crao/templates/navbar.tmpl:5
 #: ../themes/Crao/templates/navbar.tmpl:9
 #: ../themes/Crao/templates/navbar.tmpl:52
@@ -1488,35 +1428,35 @@ msgstr "全文検索"
 msgid "TitleSearch"
 msgstr "タイトル検索"
 
-#: ../lib/main.php:1305 ../lib/main.php:1318 ../lib/Request.php:821
+#: ../lib/main.php:1313 ../lib/main.php:1326 ../lib/Request.php:821
 #, php-format
 msgid "%s is not writable."
 msgstr ""
 
-#: ../lib/main.php:1306
+#: ../lib/main.php:1314
 msgid "The session.save_path directory"
 msgstr ""
 
-#: ../lib/main.php:1308 ../lib/Request.php:823
+#: ../lib/main.php:1316 ../lib/Request.php:823
 #, php-format
 msgid "Please ensure that %s is writable, or redefine %s in config/config.ini."
 msgstr ""
 
-#: ../lib/main.php:1309
+#: ../lib/main.php:1317
 #, fuzzy, php-format
 msgid "the session.save_path directory '%s'"
 msgstr "ディレクトリ '%s' を使用しています。"
 
-#: ../lib/main.php:1313
+#: ../lib/main.php:1321
 #, php-format
 msgid "Attempting to use the directory '%s' instead."
 msgstr ""
 
-#: ../lib/main.php:1320
+#: ../lib/main.php:1328
 msgid "Users will not be able to sign in."
 msgstr ""
 
-#: ../lib/main.php:1332
+#: ../lib/main.php:1340
 msgid "Your PHP version is too old. You must have at least PHP 4.3.9"
 msgstr ""
 
@@ -1526,9 +1466,8 @@ msgid "Sort by %s"
 msgstr "%sでソートします。"
 
 #: ../lib/PageList.php:120
-#, fuzzy
 msgid "reverse"
-msgstr "転送"
+msgstr ""
 
 #: ../lib/PageList.php:131
 msgid "Click to reverse sort order"
@@ -1554,27 +1493,26 @@ msgid " ... around %s"
 msgstr ""
 
 #: ../lib/PageList.php:412 ../lib/plugin/AppendText.php:55
-#, fuzzy, php-format
+#, php-format
 msgid "%s not found"
-msgstr "%s: ファイルが見つかりません。"
+msgstr ""
 
 #: ../lib/PageList.php:530 ../lib/plugin/WikiAdminSetAcl.php:242
 #: ../themes/default/templates/info.tmpl:73
-#: ../themes/MonoBook/templates/info.tmpl:87
+#: ../themes/MonoBook/templates/info.tmpl:86
 #, php-format
 msgid "page permission inherited from %s"
 msgstr ""
 
 #: ../lib/PageList.php:532 ../lib/plugin/WikiAdminSetAcl.php:244
 #: ../themes/default/templates/info.tmpl:75
-#: ../themes/MonoBook/templates/info.tmpl:89
-#, fuzzy
+#: ../themes/MonoBook/templates/info.tmpl:88
 msgid "individual page permission"
-msgstr "ページバージョン:"
+msgstr ""
 
 #: ../lib/PageList.php:534 ../lib/plugin/WikiAdminSetAcl.php:246
 #: ../themes/default/templates/info.tmpl:77
-#: ../themes/MonoBook/templates/info.tmpl:91
+#: ../themes/MonoBook/templates/info.tmpl:90
 msgid "default page permission"
 msgstr ""
 
@@ -1584,7 +1522,6 @@ msgstr "<一致しません>"
 
 #: ../lib/PageList.php:1164 ../lib/plugin/FullTextSearch.php:86
 #: ../lib/plugin/WikiAdminSearchReplace.php:178
-#, fuzzy
 msgid "Content"
 msgstr "コンテンツ"
 
@@ -1596,6 +1533,8 @@ msgstr "バージョン"
 
 #: ../lib/PageList.php:1178 ../lib/plugin/WikiAdminSetAcl.php:193
 #: ../lib/plugin/WikiAdminSetAcl.php:248
+#: ../themes/default/templates/info.tmpl:140
+#: ../themes/MonoBook/templates/info.tmpl:146
 msgid "ACL"
 msgstr ""
 
@@ -1604,24 +1543,27 @@ msgid "All"
 msgstr ""
 
 #: ../lib/PageList.php:1184 ../themes/default/templates/info.tmpl:57
-#: ../themes/MonoBook/templates/info.tmpl:72
+#: ../themes/MonoBook/templates/info.tmpl:71
 msgid "Last Modified"
 msgstr "最終更新日時"
 
-#: ../lib/PageList.php:1186
+#: ../lib/PageList.php:1186 ../themes/default/templates/info.tmpl:116
+#: ../themes/MonoBook/templates/info.tmpl:128
 msgid "Hits"
 msgstr "ヒット"
 
 #: ../lib/PageList.php:1188 ../themes/Crao/templates/editpage.tmpl:38
 #: ../themes/default/templates/editpage.tmpl:40
+#: ../themes/default/templates/info.tmpl:111
 #: ../themes/fusionforge/templates/editpage.tmpl:35
+#: ../themes/MonoBook/templates/info.tmpl:123
 #: ../themes/Wordpress/templates/editpage.tmpl:39
 #, fuzzy
 msgid "Size"
 msgstr "サイズ:"
 
 #: ../lib/PageList.php:1191 ../themes/default/templates/info.tmpl:59
-#: ../themes/MonoBook/templates/info.tmpl:74
+#: ../themes/MonoBook/templates/info.tmpl:73
 msgid "Last Summary"
 msgstr "最終要約"
 
@@ -1631,7 +1573,7 @@ msgid "Version"
 msgstr "バージョン"
 
 #: ../lib/PageList.php:1196 ../themes/default/templates/info.tmpl:58
-#: ../themes/MonoBook/templates/info.tmpl:73
+#: ../themes/MonoBook/templates/info.tmpl:72
 msgid "Last Author"
 msgstr "最終編集者"
 
@@ -1645,9 +1587,9 @@ msgstr ""
 
 #: ../lib/PageList.php:1206 ../themes/Crao/templates/editpage.tmpl:62
 #: ../themes/default/templates/editpage.tmpl:81
-#: ../themes/default/templates/info.tmpl:129
+#: ../themes/default/templates/info.tmpl:127
 #: ../themes/fusionforge/templates/editpage.tmpl:62
-#: ../themes/MonoBook/templates/info.tmpl:143
+#: ../themes/MonoBook/templates/info.tmpl:139
 #: ../themes/Wordpress/templates/editpage.tmpl:62
 msgid "Locked"
 msgstr "ロックしました"
@@ -1672,7 +1614,8 @@ msgstr ""
 msgid "minor"
 msgstr ""
 
-#: ../lib/PageList.php:1215
+#: ../lib/PageList.php:1215 ../themes/default/templates/info.tmpl:107
+#: ../themes/MonoBook/templates/info.tmpl:119
 msgid "Markup"
 msgstr "マークアップ"
 
@@ -1687,9 +1630,8 @@ msgid "Columns: %s."
 msgstr ""
 
 #: ../lib/PagePerm.php:191
-#, fuzzy
 msgid "SearchReplace"
-msgstr "テーマ"
+msgstr ""
 
 #: ../lib/PagePerm.php:321
 #, fuzzy
@@ -1705,14 +1647,12 @@ msgid "Edit this page and all subpages"
 msgstr ""
 
 #: ../lib/PagePerm.php:324
-#, fuzzy
 msgid "Create a new (sub)page"
-msgstr "ホームページ作成:"
+msgstr ""
 
 #: ../lib/PagePerm.php:325
-#, fuzzy
 msgid "Download page contents"
-msgstr "コンテンツ"
+msgstr ""
 
 #: ../lib/PagePerm.php:326
 msgid "Change page attributes"
@@ -1738,9 +1678,8 @@ msgid "Access"
 msgstr ""
 
 #: ../lib/PagePerm.php:585
-#, fuzzy
 msgid "Group/User"
-msgstr "ページグループ"
+msgstr ""
 
 #: ../lib/PagePerm.php:586
 msgid "Grant"
@@ -1779,7 +1718,7 @@ msgstr ""
 msgid "WARNING: InterWikiMap page is unlocked, so not using those links."
 msgstr ""
 
-#: ../lib/PageType.php:259 ../lib/PageType.php:262 ../lib/stdlib.php:834
+#: ../lib/PageType.php:259 ../lib/PageType.php:262 ../lib/stdlib.php:841
 #: ../themes/default/templates/navbar.tmpl:8
 #: ../themes/default/templates/navbar.tmpl:10
 #: ../themes/fusionforge/templates/actionbar.tmpl:16
@@ -1792,9 +1731,8 @@ msgstr ""
 #: ../themes/MonoBook/templates/actionbar.tmpl:32
 #: ../themes/wikilens/templates/navbar.tmpl:9
 #: ../themes/wikilens/templates/navbar.tmpl:11
-#, fuzzy
 msgid "Discussion"
-msgstr "バージョン"
+msgstr ""
 
 #: ../lib/PageType.php:396
 msgid "Moniker"
@@ -1814,26 +1752,32 @@ msgstr "コメント追加"
 msgid "Show and add comments for %s"
 msgstr ""
 
-#: ../lib/plugin/AddComment.php:73 ../lib/plugin/WikiForum.php:71
-#, fuzzy
-msgid "No pagename specified"
-msgstr "変更点が見つかりませんでした。"
+#: ../lib/plugin/AddComment.php:73 ../lib/plugin/Chart.php:77
+#: ../lib/plugin/CreateBib.php:111 ../lib/plugin/CreateToc.php:378
+#: ../lib/plugin/FileInfo.php:61 ../lib/plugin/FileInfo.php:64
+#: ../lib/plugin/GoogleMaps.php:91 ../lib/plugin/GoogleMaps.php:94
+#: ../lib/plugin/IncludePage.php:78 ../lib/plugin/ModeratedPage.php:63
+#: ../lib/plugin/PageGroup.php:95 ../lib/plugin/SyncWiki.php:70
+#: ../lib/plugin/SyntaxHighlighter.php:126 ../lib/plugin/Template.php:108
+#: ../lib/plugin/WikiFormRich.php:173 ../lib/plugin/WikiFormRich.php:190
+#: ../lib/plugin/WikiForum.php:71 ../lib/plugin/WikiPoll.php:143
+#, php-format
+msgid "A required argument '%s' is missing."
+msgstr ""
 
-#: ../lib/plugin/AddComment.php:98
+#: ../lib/plugin/AddComment.php:99
 msgid "Click to hide the comments"
 msgstr ""
 
-#: ../lib/plugin/AddComment.php:101
-#, fuzzy
+#: ../lib/plugin/AddComment.php:102
 msgid "Click to display all comments"
-msgstr "ページのロックを解除中です。"
+msgstr ""
 
-#: ../lib/plugin/AddComment.php:106 ../lib/plugin/CreateToc.php:492
-#, fuzzy
+#: ../lib/plugin/AddComment.php:107 ../lib/plugin/CreateToc.php:492
 msgid "Click to display"
-msgstr "ページのロックを解除中です。"
+msgstr ""
 
-#: ../lib/plugin/AddComment.php:108
+#: ../lib/plugin/AddComment.php:109
 #, fuzzy
 msgid "Comments"
 msgstr "コメント"
@@ -1847,32 +1791,32 @@ msgstr "全ページ"
 msgid "List all pages in this wiki."
 msgstr ""
 
-#: ../lib/plugin/AllPages.php:69
+#: ../lib/plugin/AllPages.php:68
 #, fuzzy, php-format
 msgid "All pages in this wiki (%d total):"
 msgstr "%s のページ履歴一覧"
 
-#: ../lib/plugin/AllPages.php:75
+#: ../lib/plugin/AllPages.php:74
 #, fuzzy, php-format
 msgid "List of user-created pages (%d total):"
 msgstr "%s のページ履歴一覧"
 
-#: ../lib/plugin/AllPages.php:84 ../lib/plugin/LinkDatabase.php:81
+#: ../lib/plugin/AllPages.php:83 ../lib/plugin/LinkDatabase.php:81
 #, php-format
 msgid "List of pages owned by [%s] (%d total):"
 msgstr ""
 
-#: ../lib/plugin/AllPages.php:97 ../lib/plugin/LinkDatabase.php:88
+#: ../lib/plugin/AllPages.php:96 ../lib/plugin/LinkDatabase.php:88
 #, php-format
 msgid "List of pages last edited by [%s] (%d total):"
 msgstr ""
 
-#: ../lib/plugin/AllPages.php:110 ../lib/plugin/LinkDatabase.php:95
+#: ../lib/plugin/AllPages.php:109 ../lib/plugin/LinkDatabase.php:95
 #, php-format
 msgid "List of pages created by [%s] (%d total):"
 msgstr ""
 
-#: ../lib/plugin/AllPages.php:140 ../lib/plugin/AllUsers.php:102
+#: ../lib/plugin/AllPages.php:139 ../lib/plugin/AllUsers.php:102
 #, php-format
 msgid "Elapsed time: %s s"
 msgstr ""
@@ -2017,7 +1961,7 @@ msgstr ""
 
 #: ../lib/plugin/AppendText.php:89
 #, php-format
-msgid "Page could not be updated. %s doesn't exist!\n"
+msgid "Page could not be updated. %s doesn't exist!"
 msgstr ""
 
 #: ../lib/plugin/AppendText.php:123
@@ -2056,14 +2000,12 @@ msgid "AtomFeed"
 msgstr ""
 
 #: ../lib/plugin/AtomFeed.php:36
-#, fuzzy
 msgid "Atom Aggregator Plugin"
-msgstr "編集者:"
+msgstr ""
 
 #: ../lib/plugin/_AuthInfo.php:35
-#, fuzzy
 msgid "AuthInfo"
-msgstr "編集者:"
+msgstr ""
 
 #: ../lib/plugin/_AuthInfo.php:39
 msgid "Display general and user specific auth information."
@@ -2084,12 +2026,11 @@ msgstr ""
 
 #: ../lib/plugin/AuthorHistory.php:65 ../themes/blog/templates/info.tmpl:6
 #: ../themes/MonoBook/templates/actionbar.tmpl:78
-#: ../themes/MonoBook/templates/info.tmpl:187
+#: ../themes/MonoBook/templates/info.tmpl:183
 #: ../themes/Sidebar/templates/actionbar.tmpl:57
 #: ../themes/smaller/templates/info.tmpl:10
-#, fuzzy
 msgid "AuthorHistory"
-msgstr "編集者:"
+msgstr ""
 
 #: ../lib/plugin/AuthorHistory.php:69
 #, php-format
@@ -2105,17 +2046,16 @@ msgstr ""
 #: ../lib/plugin/AuthorHistory.php:113
 #: ../themes/default/templates/info.tmpl:63
 #: ../themes/default/templates/wikiforum.tmpl:22
-#: ../themes/MonoBook/templates/info.tmpl:78
-#, fuzzy
+#: ../themes/MonoBook/templates/info.tmpl:77
 msgid "Author"
-msgstr "編集者:"
+msgstr "編集者"
 
 #: ../lib/plugin/AuthorHistory.php:114 ../lib/plugin/AuthorHistory.php:156
 #: ../themes/Crao/templates/editpage.tmpl:49
 #: ../themes/default/templates/editpage.tmpl:51
 #: ../themes/default/templates/info.tmpl:64
 #: ../themes/fusionforge/templates/editpage.tmpl:42
-#: ../themes/MonoBook/templates/info.tmpl:79
+#: ../themes/MonoBook/templates/info.tmpl:78
 #: ../themes/Portland/templates/editpage.tmpl:37
 #: ../themes/Wordpress/templates/editpage.tmpl:47
 msgid "Summary"
@@ -2139,7 +2079,7 @@ msgstr ""
 #: ../lib/plugin/_BackendInfo.php:30 ../lib/plugin/_WikiTranslation.php:53
 #: ../themes/Crao/templates/actionbar.tmpl:31
 #: ../themes/default/templates/actionbar.tmpl:39
-#: ../themes/MonoBook/templates/info.tmpl:193
+#: ../themes/MonoBook/templates/info.tmpl:189
 #: ../themes/Portland/templates/actionbar.tmpl:18
 #: ../themes/smaller/templates/info.tmpl:17
 #: ../themes/Wordpress/templates/actionbar.tmpl:77
@@ -2206,9 +2146,8 @@ msgid "One page links to %s:"
 msgstr ""
 
 #: ../lib/plugin/BackLinks.php:162
-#, fuzzy
 msgid "Those"
-msgstr "テーマ"
+msgstr ""
 
 #: ../lib/plugin/BackLinks.php:161
 #, php-format
@@ -2274,7 +2213,7 @@ msgid "Edit %s"
 msgstr "%s を編集"
 
 #: ../lib/plugin/Calendar.php:41 ../lib/plugin/Calendar.php:45
-#: ../lib/WikiTheme.php:1530 ../lib/WikiUser.php:478
+#: ../lib/WikiTheme.php:1527 ../lib/WikiUser.php:478
 #: ../themes/blog/templates/sidebar.tmpl:16
 #: ../themes/Crao/templates/head.tmpl:83
 #: ../themes/Crao/templates/navbar.tmpl:29
@@ -2301,9 +2240,8 @@ msgid "Wk"
 msgstr "幅"
 
 #: ../lib/plugin/CategoryPage.php:44
-#, fuzzy
 msgid "CategoryPage"
-msgstr "ホームページ作成:"
+msgstr ""
 
 #: ../lib/plugin/CategoryPage.php:48
 #, fuzzy
@@ -2335,11 +2273,6 @@ msgstr "作成: %s"
 msgid "Automatically create a Bibtex file from linked pages"
 msgstr ""
 
-#: ../lib/plugin/CreateBib.php:111 ../lib/plugin/IncludePage.php:78
-#: ../lib/plugin/RateIt.php:212
-msgid "no page specified"
-msgstr ""
-
 #: ../lib/plugin/CreatePage.php:42
 #, fuzzy
 msgid "CreatePage"
@@ -2351,9 +2284,8 @@ msgid "Create a Wiki page by the provided name."
 msgstr "ページを作成しています。"
 
 #: ../lib/plugin/CreatePage.php:66
-#, fuzzy
 msgid "Cannot create page with empty name!"
-msgstr "ディレクトリ '%s' を作成出来ません。"
+msgstr ""
 
 #: ../lib/plugin/CreatePage.php:70
 #, fuzzy
@@ -2397,19 +2329,14 @@ msgstr "作成: %s"
 msgid "Create a Table of Contents and automatically link to headers"
 msgstr ""
 
-#: ../lib/plugin/CreateToc.php:378 ../lib/plugin/Template.php:108
-#, fuzzy
-msgid "No page specified."
-msgstr "変更点が見つかりませんでした。"
-
 #: ../lib/plugin/CreateToc.php:389
 msgid "Error: firstlevelstyle must be 'number', 'letter' or 'roman'"
 msgstr ""
 
 #: ../lib/plugin/CreateToc.php:394 ../lib/plugin/Template.php:129
-#, fuzzy, php-format
+#, php-format
 msgid "Page '%s' does not exist."
-msgstr "プラグイン %s は無効になっています。"
+msgstr ""
 
 #: ../lib/plugin/CreateToc.php:399 ../lib/plugin/Diff.php:86
 #: ../lib/plugin/PageDump.php:85
@@ -2422,7 +2349,7 @@ msgid "Error: version must be a positive integer."
 msgstr ""
 
 #: ../lib/plugin/CreateToc.php:411 ../lib/plugin/IncludePage.php:107
-#: ../lib/plugin/PageGroup.php:124 ../lib/plugin/Template.php:145
+#: ../lib/plugin/PageGroup.php:120 ../lib/plugin/Template.php:145
 #, php-format
 msgid "%s: no such revision %d."
 msgstr ""
@@ -2432,14 +2359,12 @@ msgid "CreateToc disabled for old markup."
 msgstr ""
 
 #: ../lib/plugin/CreateToc.php:485
-#, fuzzy
 msgid "Click to display to TOC"
-msgstr "ページのロックを解除中です。"
+msgstr ""
 
 #: ../lib/plugin/CurrentTime.php:57
-#, fuzzy
 msgid "CurrentTime"
-msgstr "現在のテーマ: %s"
+msgstr ""
 
 #: ../lib/plugin/CurrentTime.php:61
 msgid "A simple plugin that displays current time and date"
@@ -2450,7 +2375,7 @@ msgstr ""
 msgid "DeadEndPages"
 msgstr "ランダムページ"
 
-#: ../lib/plugin/Diff.php:36 ../lib/WikiTheme.php:1031
+#: ../lib/plugin/Diff.php:36 ../lib/WikiTheme.php:1028
 #: ../themes/blog/themeinfo.php:67
 msgid "Diff"
 msgstr "差分"
@@ -2460,9 +2385,8 @@ msgid "Display differences between revisions"
 msgstr ""
 
 #: ../lib/plugin/Diff.php:182
-#, fuzzy
 msgid "Content of versions "
-msgstr "バージョン %d"
+msgstr ""
 
 #: ../lib/plugin/Diff.php:183
 msgid " and "
@@ -2473,7 +2397,6 @@ msgid " is identical."
 msgstr ""
 
 #: ../lib/plugin/Diff.php:188
-#, fuzzy
 msgid "Version "
 msgstr "バージョン"
 
@@ -2501,9 +2424,8 @@ msgstr "%s バイト"
 #: ../lib/plugin/NewPagesPerUser.php:109 ../lib/plugin/NewPagesPerUser.php:110
 #: ../lib/plugin/RecentChanges.php:1362 ../lib/plugin/RecentChanges.php:1363
 #: ../themes/Sidebar/themeinfo.php:58 ../themes/Sidebar/themeinfo.php:59
-#, fuzzy
 msgid "Click to hide/show"
-msgstr "ページのロックを解除中です。"
+msgstr ""
 
 #: ../lib/plugin/EditMetaData.php:48 ../lib/plugin/_WikiTranslation.php:54
 msgid "EditMetaData"
@@ -2553,32 +2475,24 @@ msgid ""
 msgstr ""
 
 #: ../lib/plugin/FileInfo.php:40
-#, fuzzy
 msgid "FileInfo"
-msgstr "編集者:"
+msgstr ""
 
 #: ../lib/plugin/FileInfo.php:44
 msgid "Display file information like version, size, date... of uploaded files."
 msgstr ""
 
-#: ../lib/plugin/FileInfo.php:61 ../lib/plugin/FileInfo.php:63
-#: ../lib/plugin/PageGroup.php:98 ../lib/plugin/SyncWiki.php:70
-#: ../lib/plugin/WikiFormRich.php:173 ../lib/plugin/WikiFormRich.php:190
+#: ../lib/plugin/FileInfo.php:78
 #, php-format
-msgid "A required argument '%s' is missing."
-msgstr ""
-
-#: ../lib/plugin/FileInfo.php:76
-#, fuzzy, php-format
 msgid "File '%s' not found."
 msgstr "%s: ファイルが見つかりません。"
 
-#: ../lib/plugin/FileInfo.php:90
+#: ../lib/plugin/FileInfo.php:92
 msgid ""
 "Output suppressed. FileInfoPlugin with local files require a locked page."
 msgstr ""
 
-#: ../lib/plugin/FileInfo.php:91
+#: ../lib/plugin/FileInfo.php:93
 #, fuzzy
 msgid "page not locked"
 msgstr "ページはロック中です。"
@@ -2618,7 +2532,7 @@ msgstr ""
 #: ../lib/plugin/FoafViewer.php:142
 #, fuzzy
 msgid "Title"
-msgstr "タイトル検索"
+msgstr "タイトル"
 
 #: ../lib/plugin/FrameInclude.php:52
 msgid "FrameInclude"
@@ -2642,9 +2556,9 @@ msgid "Plugin not run: not in browse mode"
 msgstr ""
 
 #: ../lib/plugin/FrameInclude.php:89 ../lib/plugin/Template.php:123
-#, fuzzy, php-format
+#, php-format
 msgid "Recursive inclusion of page %s"
-msgstr "バージョン %s"
+msgstr ""
 
 #: ../lib/plugin/FrameInclude.php:95
 #, php-format
@@ -2731,15 +2645,12 @@ msgid ""
 "Displays a marker with further infos (when clicking) on given coordinates"
 msgstr ""
 
-#: ../lib/plugin/GoogleMaps.php:91 ../lib/plugin/GoogleMaps.php:94
-#: ../lib/plugin/Transclude.php:73
-#, php-format
-msgid "%s parameter missing"
-msgstr ""
-
-#: ../lib/plugin/GoogleMaps.php:103
+#: ../lib/plugin/GoogleMaps.php:103 ../lib/plugin/YouTube.php:104
+#: ../lib/plugin/YouTube.php:106 ../lib/plugin/YouTube.php:108
+#: ../lib/plugin/YouTube.php:110 ../lib/plugin/YouTube.php:134
+#: ../lib/plugin/YouTube.php:136
 #, fuzzy, php-format
-msgid "invalid argument %s"
+msgid "Invalid argument %s"
 msgstr "インライン画像一覧"
 
 #: ../lib/plugin/GoogleMaps.php:123
@@ -2747,9 +2658,8 @@ msgid "new&nbsp;window"
 msgstr ""
 
 #: ../lib/plugin/GooglePlugin.php:43
-#, fuzzy
 msgid "GooglePlugin"
-msgstr "プラグイン"
+msgstr "Googleプラグイン"
 
 #: ../lib/plugin/GooglePlugin.php:47
 msgid "Make use of the Google API"
@@ -2792,7 +2702,7 @@ msgid "No dot graph given"
 msgstr ""
 
 #: ../lib/plugin/GraphViz.php:278 ../lib/plugin/GraphViz.php:286
-#: ../lib/plugin/SpellCheck.php:139 ../lib/plugin/SyntaxHighlighter.php:142
+#: ../lib/plugin/SpellCheck.php:139 ../lib/plugin/SyntaxHighlighter.php:144
 #, php-format
 msgid "Couldn't start commandline '%s'"
 msgstr ""
@@ -2910,9 +2820,8 @@ msgid "IncludeTree"
 msgstr "インライン画像一覧"
 
 #: ../lib/plugin/IncludeTree.php:43
-#, fuzzy
 msgid "Dynamic Category Tree"
-msgstr "ホームページ作成:"
+msgstr ""
 
 #: ../lib/plugin/InterWikiSearch.php:31
 msgid "InterWikiSearch"
@@ -2953,18 +2862,16 @@ msgid "Simple jabber presence plugin"
 msgstr ""
 
 #: ../lib/plugin/LdapSearch.php:54
-#, fuzzy
 msgid "LdapSearch"
-msgstr "検索"
+msgstr "LDAP検索"
 
 #: ../lib/plugin/LdapSearch.php:57
 msgid "Search an LDAP directory"
 msgstr ""
 
 #: ../lib/plugin/LdapSearch.php:76
-#, fuzzy
 msgid "Missing ldap extension"
-msgstr "ページバージョン:"
+msgstr ""
 
 #: ../lib/plugin/LdapSearch.php:99
 msgid "Failed to connect to LDAP host"
@@ -3022,9 +2929,9 @@ msgid "Links"
 msgstr "ログイン"
 
 #: ../lib/plugin/LinkDatabase.php:170
-#, fuzzy, php-format
+#, php-format
 msgid "Unsupported format argument %s"
-msgstr "サポートテーマ一覧"
+msgstr ""
 
 #: ../lib/plugin/LinkSearch.php:35 ../lib/plugin/LinkSearch.php:109
 #, fuzzy
@@ -3119,16 +3026,15 @@ msgid "Layout tables using a Mediawiki-like markup style."
 msgstr ""
 
 #: ../lib/plugin/ModeratedPage.php:45
-#, fuzzy
 msgid "Support moderated pages"
-msgstr "サポート言語一覧"
+msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:150 ../lib/plugin/ModeratedPage.php:175
-#: ../lib/plugin/ModeratedPage.php:221
+#: ../lib/plugin/ModeratedPage.php:151 ../lib/plugin/ModeratedPage.php:176
+#: ../lib/plugin/ModeratedPage.php:222
 msgid "ModeratedPage: No emails for the moderators defined"
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:156
+#: ../lib/plugin/ModeratedPage.php:157
 #, php-format
 msgid ""
 "ModeratedPage status update:\n"
@@ -3136,12 +3042,12 @@ msgid ""
 "  require_access: '%s'"
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:161
+#: ../lib/plugin/ModeratedPage.php:162
 #, php-format
 msgid "'%s' is no ModeratedPage anymore."
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:181
+#: ../lib/plugin/ModeratedPage.php:182
 #, php-format
 msgid ""
 "ModeratedPage status update: '%s' is now a ModeratedPage.\n"
@@ -3149,46 +3055,45 @@ msgid ""
 "  require_access: '%s'"
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:248
+#: ../lib/plugin/ModeratedPage.php:249
 #, php-format
 msgid "%s: action forwarded to moderator %s"
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:274
+#: ../lib/plugin/ModeratedPage.php:275
 msgid "ModeratedPage Notification Error: Couldn't send email"
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:353
+#: ../lib/plugin/ModeratedPage.php:354
 #, php-format
 msgid "%s approved your wiki action from %s"
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:365
+#: ../lib/plugin/ModeratedPage.php:366
 msgid "Please approve or reject this request:"
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:401
+#: ../lib/plugin/ModeratedPage.php:402
 msgid "Reason: "
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:402
+#: ../lib/plugin/ModeratedPage.php:403
 msgid "Approve"
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:404
-#, fuzzy
+#: ../lib/plugin/ModeratedPage.php:405
 msgid "Reject"
-msgstr "転送"
+msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:432 ../lib/plugin/ModeratedPage.php:439
+#: ../lib/plugin/ModeratedPage.php:433 ../lib/plugin/ModeratedPage.php:440
 #, php-format
 msgid "<<ModeratedPage ... >> not found in first line of %s"
 msgstr ""
 
-#: ../lib/plugin/ModeratedPage.php:435
-#, fuzzy, php-format
+#: ../lib/plugin/ModeratedPage.php:436
+#, php-format
 msgid "%s is not locked!"
-msgstr "%s: ファイルが見つかりません。"
+msgstr ""
 
 #: ../lib/plugin/MostPopular.php:30
 msgid "MostPopular"
@@ -3265,9 +3170,9 @@ msgid "View a single page dump online."
 msgstr ""
 
 #: ../lib/plugin/PageDump.php:80
-#, fuzzy, php-format
+#, php-format
 msgid "Page %s not found."
-msgstr "ページはロック解除中です。"
+msgstr ""
 
 #: ../lib/plugin/PageDump.php:149
 msgid "Download for Subversion"
@@ -3345,30 +3250,30 @@ msgstr "ページグループ"
 msgid "PageGroup for %s"
 msgstr ""
 
-#: ../lib/plugin/PageGroup.php:56 ../lib/plugin/PageGroup.php:103
+#: ../lib/plugin/PageGroup.php:56 ../lib/plugin/PageGroup.php:99
 #: ../lib/plugin/PrevNext.php:65
 msgid "Contents"
 msgstr "コンテンツ"
 
-#: ../lib/plugin/PageGroup.php:87 ../lib/stdlib.php:2175
+#: ../lib/plugin/PageGroup.php:87 ../lib/stdlib.php:2182
 #, php-format
 msgid "<%s: no such section>"
 msgstr ""
 
-#: ../lib/plugin/PageGroup.php:101 ../lib/plugin/PrevNext.php:62
+#: ../lib/plugin/PageGroup.php:97 ../lib/plugin/PrevNext.php:62
 #: ../themes/default/templates/pagelink.tmpl:26
 msgid "Next"
 msgstr "次へ"
 
-#: ../lib/plugin/PageGroup.php:102 ../lib/plugin/PrevNext.php:61
+#: ../lib/plugin/PageGroup.php:98 ../lib/plugin/PrevNext.php:61
 msgid "Previous"
 msgstr "前へ"
 
-#: ../lib/plugin/PageGroup.php:104 ../lib/plugin/PrevNext.php:60
+#: ../lib/plugin/PageGroup.php:100 ../lib/plugin/PrevNext.php:60
 msgid "First"
 msgstr "最初へ"
 
-#: ../lib/plugin/PageGroup.php:105 ../lib/plugin/PrevNext.php:63
+#: ../lib/plugin/PageGroup.php:101 ../lib/plugin/PrevNext.php:63
 msgid "Last"
 msgstr "最後へ"
 
@@ -3399,7 +3304,7 @@ msgstr ""
 #: ../themes/Crao/templates/actionbar.tmpl:26
 #: ../themes/default/templates/actionbar.tmpl:34
 #: ../themes/MonoBook/templates/actionbar.tmpl:43
-#: ../themes/MonoBook/templates/info.tmpl:186
+#: ../themes/MonoBook/templates/info.tmpl:182
 #: ../themes/Portland/templates/actionbar.tmpl:15
 #: ../themes/Portland/templates/viewsource.tmpl:19
 #: ../themes/shamino_com/templates/actionbar.tmpl:22
@@ -3629,7 +3534,7 @@ msgid "shell commands not allowed in Ploticus"
 msgstr ""
 
 #: ../lib/plugin/Ploticus.php:266 ../lib/plugin/SpellCheck.php:119
-#: ../lib/plugin/SyntaxHighlighter.php:147
+#: ../lib/plugin/SyntaxHighlighter.php:149
 #, fuzzy
 msgid "empty source"
 msgstr "ソースを見る"
@@ -3700,14 +3605,12 @@ msgid "List the most popular tags."
 msgstr ""
 
 #: ../lib/plugin/PopularTags.php:52 ../lib/plugin/_WikiTranslation.php:51
-#, fuzzy
 msgid "CategoryCategory"
-msgstr "ホームページ作成:"
+msgstr ""
 
 #: ../lib/plugin/PopularTags.php:71
-#, fuzzy
 msgid "Category"
-msgstr "ホームページ作成:"
+msgstr ""
 
 #: ../lib/plugin/PopularTags.php:72
 msgid "Topic"
@@ -3741,16 +3644,15 @@ msgid "Total Units"
 msgstr "総ヒット数: %s"
 
 #: ../lib/plugin/PreferenceApp.php:201
-#, fuzzy
 msgid "Total Voters"
-msgstr "総テーマ数: %d"
+msgstr ""
 
 #: ../lib/plugin/PreferenceApp.php:272
 msgid "Total Budget"
 msgstr ""
 
 #: ../lib/plugin/_PreferencesInfo.php:30
-#: ../themes/default/templates/userprefs.tmpl:13
+#: ../themes/default/templates/userprefs.tmpl:11
 #: ../themes/fusionforge/templates/userprefs.tmpl:11
 msgid "PreferencesInfo"
 msgstr ""
@@ -3778,9 +3680,8 @@ msgid "Index"
 msgstr "インデックス"
 
 #: ../lib/plugin/Processing.php:31
-#, fuzzy
 msgid "Processing"
-msgstr "バージョン"
+msgstr ""
 
 #: ../lib/plugin/Processing.php:35
 msgid "Render inline Processing"
@@ -3811,14 +3712,12 @@ msgid "Rating: %.1f (%d votes)"
 msgstr ""
 
 #: ../lib/plugin/RateIt.php:148
-#, fuzzy
 msgid "Your current rating: "
-msgstr "現在のバージョン"
+msgstr ""
 
 #: ../lib/plugin/RateIt.php:149
-#, fuzzy
 msgid "Your current prediction: "
-msgstr "現在のバージョンを表示する"
+msgstr ""
 
 #: ../lib/plugin/RateIt.php:150
 msgid "Change your rating from "
@@ -3840,15 +3739,19 @@ msgstr ""
 msgid "Rating deleted!"
 msgstr ""
 
+#: ../lib/plugin/RateIt.php:212
+msgid "no page specified"
+msgstr ""
+
 #: ../lib/plugin/RateIt.php:259 ../lib/plugin/RateIt.php:263
 #, php-format
 msgid "Your rating was %.1f"
 msgstr ""
 
 #: ../lib/plugin/RateIt.php:269
-#, fuzzy, php-format
+#, php-format
 msgid "Prediction: %s"
-msgstr "編集: %s"
+msgstr ""
 
 #: ../lib/plugin/RateIt.php:273
 #, php-format
@@ -3889,9 +3792,8 @@ msgstr "ユーザー統計"
 #: ../lib/plugin/RecentChanges.php:59
 #: ../themes/MonoBook/templates/navbar.tmpl:18
 #: ../themes/Sidebar/templates/navbar.tmpl:46
-#, fuzzy
 msgid "RecentNewPages"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../lib/plugin/RecentChanges.php:61 ../lib/plugin/RecentChanges.php:393
 #: ../lib/plugin/RecentChanges.php:681 ../lib/plugin/RecentEdits.php:29
@@ -4082,19 +3984,16 @@ msgid "Major modifications only"
 msgstr ""
 
 #: ../lib/plugin/RecentChanges.php:1472
-#, fuzzy
 msgid "All modifications"
-msgstr "メールアドレスを確認出来ました。"
+msgstr ""
 
 #: ../lib/plugin/RecentChanges.php:1483
-#, fuzzy
 msgid "Page once only"
-msgstr "コンテンツ"
+msgstr ""
 
 #: ../lib/plugin/RecentChanges.php:1483
-#, fuzzy
 msgid "Full changes"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../lib/plugin/RecentChanges.php:1494
 #, fuzzy
@@ -4126,9 +4025,8 @@ msgid "List all recent edits in this wiki."
 msgstr ""
 
 #: ../lib/plugin/RecentEdits.php:54
-#, fuzzy
 msgid "Recent Edits"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../lib/plugin/RecentReferrers.php:33
 msgid "RecentReferrers"
@@ -4181,15 +4079,13 @@ msgid "List of changes on all pages which are linked to from this page."
 msgstr ""
 
 #: ../lib/plugin/RelatedChanges.php:57 ../lib/plugin/RelatedChanges.php:86
-#, fuzzy
 msgid "Related Changes"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../lib/plugin/RelatedChanges.php:86 ../themes/Crao/templates/navbar.tmpl:16
 #: ../themes/MonoBook/templates/navbar.tmpl:55
-#, fuzzy
 msgid "RelatedChanges"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../lib/plugin/_Retransform.php:30
 msgid "Retransform CachedMarkup"
@@ -4249,14 +4145,13 @@ msgstr ""
 
 #: ../lib/plugin/SemanticRelations.php:88
 #: ../lib/plugin/SemanticRelations.php:108 ../lib/plugin/SemanticSearch.php:58
-#, fuzzy
 msgid "SemanticSearch"
-msgstr "InterWiki検索"
+msgstr ""
 
 #: ../lib/plugin/SemanticRelations.php:94
-#, fuzzy, php-format
+#, php-format
 msgid "Semantic relations for %s"
-msgstr "%s のMETAデータの編集"
+msgstr ""
 
 #: ../lib/plugin/SemanticRelations.php:122
 #, php-format
@@ -4274,9 +4169,8 @@ msgstr ""
 
 #: ../lib/plugin/SemanticSearchAdvanced.php:62
 #: ../lib/plugin/SemanticSearch.php:220
-#, fuzzy
 msgid "SemanticSearchAdvanced"
-msgstr "InterWiki検索"
+msgstr ""
 
 #: ../lib/plugin/SemanticSearchAdvanced.php:65
 msgid "Parse and execute a full query expression"
@@ -4319,9 +4213,8 @@ msgid "Filter by this relation. With autocompletion."
 msgstr ""
 
 #: ../lib/plugin/SemanticSearch.php:122
-#, fuzzy
 msgid "Relations"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../lib/plugin/SemanticSearch.php:130 ../lib/plugin/SemanticSearch.php:209
 msgid "Add an AND query"
@@ -4368,9 +4261,8 @@ msgid "No relations nor attributes in the whole wikidb defined!"
 msgstr ""
 
 #: ../lib/plugin/SemanticSearch.php:287
-#, fuzzy
 msgid "Help:SemanticRelations"
-msgstr "%s のMETAデータの編集"
+msgstr ""
 
 #: ../lib/plugin/SemanticSearch.php:335
 #, php-format
@@ -4511,14 +4403,14 @@ msgid "skipped"
 msgstr ""
 
 #: ../lib/plugin/SyncWiki.php:294 ../lib/plugin/SyncWiki.php:318
-#, fuzzy
 msgid "same content"
-msgstr "コンテンツ"
+msgstr ""
 
 #: ../lib/plugin/SyncWiki.php:301 ../lib/plugin/SyncWiki.php:327
 #: ../lib/plugin/SyncWiki.php:329 ../lib/plugin/SyncWiki.php:350
 #: ../lib/plugin/SyncWiki.php:352 ../lib/upgrade.php:197
-#: ../lib/upgrade.php:538 ../lib/upgrade.php:576 ../lib/upgrade.php:1110
+#: ../lib/upgrade.php:538 ../lib/upgrade.php:576 ../lib/upgrade.php:681
+#: ../lib/upgrade.php:889 ../lib/upgrade.php:1110
 msgid "FAILED"
 msgstr ""
 
@@ -4531,11 +4423,7 @@ msgstr "PHP構文ハイライト"
 msgid "Source code syntax highlighter (via http://www.andre-simon.de)"
 msgstr ""
 
-#: ../lib/plugin/SyntaxHighlighter.php:125
-msgid "Syntax language not specified."
-msgstr ""
-
-#: ../lib/plugin/SyntaxHighlighter.php:134
+#: ../lib/plugin/SyntaxHighlighter.php:136
 #, php-format
 msgid "invalid %s ignored"
 msgstr ""
@@ -4811,9 +4699,9 @@ msgid "Search the titles of all pages in this wiki."
 msgstr ""
 
 #: ../lib/plugin/TitleSearch.php:92
-#, fuzzy, php-format
+#, php-format
 msgid "Title search results for '%s' (%d total)"
-msgstr "%s のページ履歴一覧"
+msgstr ""
 
 #: ../lib/plugin/TitleSearch.php:94
 #, php-format
@@ -4830,6 +4718,11 @@ msgstr ""
 
 #: ../lib/plugin/Transclude.php:60
 msgid "Transcluded page"
+msgstr ""
+
+#: ../lib/plugin/Transclude.php:73
+#, php-format
+msgid "%s parameter missing"
 msgstr ""
 
 #: ../lib/plugin/Transclude.php:103
@@ -5217,7 +5110,7 @@ msgstr ""
 msgid "The page %s is already watched!"
 msgstr ""
 
-#: ../lib/plugin/WatchPage.php:88 ../lib/WikiTheme.php:1030
+#: ../lib/plugin/WatchPage.php:88 ../lib/WikiTheme.php:1027
 #: ../themes/blog/templates/actionbar.tmpl:19 ../themes/blog/themeinfo.php:66
 #: ../themes/Crao/templates/actionbar.tmpl:5
 #: ../themes/default/templates/actionbar.tmpl:16
@@ -5244,7 +5137,12 @@ msgstr "%s としてサインインしました"
 msgid "ERROR: No email defined! You need to do this in your "
 msgstr ""
 
-#: ../lib/plugin/WatchPage.php:158
+#: ../lib/plugin/WatchPage.php:138
+#, fuzzy
+msgid "WatchPage cancelled"
+msgstr "幅"
+
+#: ../lib/plugin/WatchPage.php:160
 msgid ""
 "E-Mail Notification for the current page successfully stored in your "
 "preferences."
@@ -5259,7 +5157,7 @@ msgid "Show summary information of the current user sessions."
 msgstr ""
 
 #: ../lib/plugin/WhoIsOnline.php:75
-msgid "Who is online"
+msgid "Who is Online"
 msgstr ""
 
 #: ../lib/plugin/WhoIsOnline.php:78
@@ -5390,22 +5288,26 @@ msgstr "変更しませんでした。"
 msgid "PhpWikiAdministration/Chown"
 msgstr ""
 
-#: ../lib/plugin/WikiAdminChown.php:173
+#: ../lib/plugin/WikiAdminChown.php:171
+msgid "Confirm ownership change"
+msgstr ""
+
+#: ../lib/plugin/WikiAdminChown.php:174
 #, fuzzy
 msgid "Are you sure you want to change the owner of the selected pages?"
 msgstr "選択ページを全て削除"
 
-#: ../lib/plugin/WikiAdminChown.php:177
+#: ../lib/plugin/WikiAdminChown.php:178
 #, fuzzy
 msgid "Change owner of selected pages"
 msgstr "選択ページを全て削除"
 
-#: ../lib/plugin/WikiAdminChown.php:178
+#: ../lib/plugin/WikiAdminChown.php:179
 #, fuzzy
 msgid "Select the pages to change the owner"
 msgstr "貴方個人の言語を選択"
 
-#: ../lib/plugin/WikiAdminChown.php:200
+#: ../lib/plugin/WikiAdminChown.php:201
 #, fuzzy
 msgid "Change owner to: "
 msgstr "国名変更"
@@ -5438,22 +5340,26 @@ msgstr "'%s' の削除に成功しました。"
 msgid "PhpWikiAdministration/Markup"
 msgstr ""
 
-#: ../lib/plugin/WikiAdminMarkup.php:165
+#: ../lib/plugin/WikiAdminMarkup.php:163
+msgid "Confirm markup change"
+msgstr ""
+
+#: ../lib/plugin/WikiAdminMarkup.php:166
 #, fuzzy
 msgid "Are you sure you want to change the markup type of the selected files?"
 msgstr "選択ページを全て削除"
 
-#: ../lib/plugin/WikiAdminMarkup.php:169
+#: ../lib/plugin/WikiAdminMarkup.php:170
 #, fuzzy
 msgid "Change markup type"
 msgstr "国名変更"
 
-#: ../lib/plugin/WikiAdminMarkup.php:170
+#: ../lib/plugin/WikiAdminMarkup.php:171
 #, fuzzy
 msgid "Select the pages to change the markup type"
 msgstr "貴方個人の言語を選択"
 
-#: ../lib/plugin/WikiAdminMarkup.php:192
+#: ../lib/plugin/WikiAdminMarkup.php:193
 #, fuzzy
 msgid "Change markup to: "
 msgstr "パスワード変更"
@@ -5467,7 +5373,7 @@ msgstr ""
 msgid "Permanently purge all selected pages."
 msgstr "選択ページを全て削除"
 
-#: ../lib/plugin/WikiAdminPurge.php:67 ../lib/purgepage.php:53
+#: ../lib/plugin/WikiAdminPurge.php:67 ../lib/purgepage.php:56
 #, fuzzy, php-format
 msgid "Purged page '%s' successfully."
 msgstr "'%s' の削除に成功しました。"
@@ -5496,16 +5402,20 @@ msgstr "変更しませんでした。"
 msgid "PhpWikiAdministration/Purge"
 msgstr ""
 
-#: ../lib/plugin/WikiAdminPurge.php:146
+#: ../lib/plugin/WikiAdminPurge.php:145 ../lib/purgepage.php:27
+msgid "Confirm purge"
+msgstr ""
+
+#: ../lib/plugin/WikiAdminPurge.php:147
 msgid "Are you sure you want to permanently purge the following files?"
 msgstr ""
 
-#: ../lib/plugin/WikiAdminPurge.php:149
+#: ../lib/plugin/WikiAdminPurge.php:150
 #, fuzzy
 msgid "Permanently purge selected pages"
 msgstr "選択ページを全て削除"
 
-#: ../lib/plugin/WikiAdminPurge.php:150
+#: ../lib/plugin/WikiAdminPurge.php:151
 #, fuzzy
 msgid "Select the files to purge"
 msgstr "貴方個人の言語を選択"
@@ -5518,7 +5428,7 @@ msgstr ""
 msgid "Permanently remove all selected pages."
 msgstr ""
 
-#: ../lib/plugin/WikiAdminRemove.php:111 ../lib/removepage.php:53
+#: ../lib/plugin/WikiAdminRemove.php:111 ../lib/removepage.php:56
 #, fuzzy, php-format
 msgid "Removed page '%s' successfully."
 msgstr "'%s' の削除に成功しました。"
@@ -5547,31 +5457,34 @@ msgstr "変更点が見つかりませんでした。"
 msgid "PhpWikiAdministration/Remove"
 msgstr ""
 
-#: ../lib/plugin/WikiAdminRemove.php:192 ../lib/plugin/WikiAdminRemove.php:237
+#: ../lib/plugin/WikiAdminRemove.php:192 ../lib/plugin/WikiAdminRemove.php:238
 #: ../themes/blog/themeinfo.php:72
 #, fuzzy
 msgid "Remove"
 msgstr "ページ削除"
 
-#: ../lib/plugin/WikiAdminRemove.php:199
+#: ../lib/plugin/WikiAdminRemove.php:198 ../lib/removepage.php:27
+msgid "Confirm removal"
+msgstr ""
+
+#: ../lib/plugin/WikiAdminRemove.php:200
 msgid "Are you sure you want to remove the selected files?"
 msgstr ""
 
-#: ../lib/plugin/WikiAdminRemove.php:202
+#: ../lib/plugin/WikiAdminRemove.php:203
 msgid "Remove selected pages"
 msgstr "選択ページを全て削除"
 
-#: ../lib/plugin/WikiAdminRemove.php:203
-#, fuzzy
+#: ../lib/plugin/WikiAdminRemove.php:204
 msgid "Select the files to remove"
-msgstr "あなたの個人のテーマを選択:"
+msgstr ""
 
-#: ../lib/plugin/WikiAdminRemove.php:206
+#: ../lib/plugin/WikiAdminRemove.php:207
 #, php-format
 msgid "Also pages which have been deleted at least %s days."
 msgstr ""
 
-#: ../lib/plugin/WikiAdminRemove.php:213
+#: ../lib/plugin/WikiAdminRemove.php:214
 #, php-format
 msgid "Pages which have been deleted at least %s days are already checked."
 msgstr ""
@@ -5595,19 +5508,14 @@ msgstr ""
 msgid "Access denied to rename page '%s'."
 msgstr "全ページ一覧"
 
-#: ../lib/plugin/WikiAdminRename.php:92
+#: ../lib/plugin/WikiAdminRename.php:92 ../lib/plugin/WikiAdminRename.php:107
 #, fuzzy, php-format
-msgid "Renamed page from '%s' to '%s'"
+msgid "Renamed page from '%s' to '%s'."
 msgstr "'%s' の削除に成功しました。"
 
 #: ../lib/plugin/WikiAdminRename.php:101
 #, fuzzy, php-format
 msgid "Renaming created redirect page from '%s' to '%s'"
-msgstr "'%s' の削除に成功しました。"
-
-#: ../lib/plugin/WikiAdminRename.php:107
-#, fuzzy, php-format
-msgid "Renamed page '%s' to '%s'."
 msgstr "'%s' の削除に成功しました。"
 
 #: ../lib/plugin/WikiAdminRename.php:111 ../lib/plugin/WikiAdminRename.php:115
@@ -5639,14 +5547,14 @@ msgid "Are you sure you want to rename the selected pages?"
 msgstr ""
 
 #: ../lib/plugin/WikiAdminRename.php:215 ../lib/plugin/WikiAdminRename.php:241
+#: ../lib/WikiTheme.php:1031
 #, fuzzy
-msgid "Rename page"
+msgid "Rename Page"
 msgstr "ページ削除"
 
 #: ../lib/plugin/WikiAdminRename.php:225
-#, fuzzy
 msgid "Select the pages to rename:"
-msgstr "あなたの個人のテーマを選択:"
+msgstr ""
 
 #: ../lib/plugin/WikiAdminRename.php:268
 #, fuzzy
@@ -5715,9 +5623,8 @@ msgid "Replace all occurences of the given string in the content of all pages."
 msgstr ""
 
 #: ../lib/plugin/WikiAdminSearchReplace.php:231
-#, fuzzy
 msgid "Replace"
-msgstr "テーマ"
+msgstr ""
 
 #: ../lib/plugin/WikiAdminSearchReplace.php:235
 msgid "by"
@@ -5803,9 +5710,8 @@ msgid "Select the pages where to change access rights"
 msgstr "貴方個人の言語を選択"
 
 #: ../lib/plugin/WikiAdminSetAcl.php:236
-#, fuzzy
 msgid "Selected Pages: "
-msgstr "保存しました: 5s"
+msgstr ""
 
 #: ../lib/plugin/WikiAdminSetAcl.php:247
 #, fuzzy
@@ -5834,9 +5740,8 @@ msgid "WikiAdminSetExternal"
 msgstr ""
 
 #: ../lib/plugin/WikiAdminSetExternal.php:39
-#, fuzzy
 msgid "Mark selected pages as external."
-msgstr "あなたの個人のテーマを選択:"
+msgstr ""
 
 #: ../lib/plugin/WikiAdminSetExternal.php:71
 #, fuzzy, php-format
@@ -5848,14 +5753,12 @@ msgid "PhpWikiAdministration/SetExternal"
 msgstr ""
 
 #: ../lib/plugin/WikiAdminSetExternal.php:127
-#, fuzzy
 msgid "Set pages to external"
-msgstr "あなたの個人のテーマを選択:"
+msgstr ""
 
 #: ../lib/plugin/WikiAdminSetExternal.php:128
-#, fuzzy
 msgid "Select the pages to set as external"
-msgstr "あなたの個人のテーマを選択:"
+msgstr ""
 
 #: ../lib/plugin/WikiAdminUtils.php:39
 msgid "WikiAdminUtils"
@@ -5899,11 +5802,6 @@ msgstr ""
 msgid "Access Restrictions"
 msgstr ""
 
-#: ../lib/plugin/WikiAdminUtils.php:113 ../lib/WikiUserNew.php:1782
-#, fuzzy
-msgid "Email Verification"
-msgstr "メールアドレスを確認出来ました。"
-
 #: ../lib/plugin/WikiAdminUtils.php:114
 msgid "Convert cached_html"
 msgstr ""
@@ -5925,9 +5823,9 @@ msgid "No pages with bad names had to be deleted."
 msgstr ""
 
 #: ../lib/plugin/WikiAdminUtils.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Deleted %d pages with invalid names:"
-msgstr "あなたの個人のテーマを選択:"
+msgstr ""
 
 #: ../lib/plugin/WikiAdminUtils.php:170
 msgid "[purged]"
@@ -5967,8 +5865,10 @@ msgid "Sorry. Access Restrictions not yet implemented"
 msgstr ""
 
 #: ../lib/plugin/WikiAdminUtils.php:232
-#: ../themes/default/templates/userprefs.tmpl:133
-msgid "E-Mail"
+#: ../themes/default/templates/userprefs.tmpl:131
+#: ../themes/default/templates/userprefs.tmpl:151
+#, fuzzy
+msgid "E-mail"
 msgstr "メール"
 
 #: ../lib/plugin/WikiAdminUtils.php:234
@@ -6018,10 +5918,16 @@ msgstr ""
 msgid "Provide generic WikiForm input buttons"
 msgstr ""
 
-#: ../lib/plugin/WikiForm.php:74 ../themes/MonoBook/templates/signin.tmpl:19
+#: ../lib/plugin/WikiForm.php:74 ../lib/WikiTheme.php:1030
+#: ../lib/WikiUserNew.php:510 ../lib/WikiUser.php:228
+#: ../themes/blog/themeinfo.php:69 ../themes/Crao/templates/signin.tmpl:53
+#: ../themes/default/templates/login.tmpl:71
+#: ../themes/default/templates/login.tmpl:86
+#: ../themes/MonoBook/templates/signin.tmpl:19
 #: ../themes/Sidebar/templates/signin.tmpl:17
-msgid "Login"
-msgstr "ログイン"
+#: ../themes/smaller/templates/signin.tmpl:54
+msgid "Sign In"
+msgstr "サインイン"
 
 #: ../lib/plugin/WikiForm.php:82
 msgid "Dump Pages"
@@ -6057,34 +5963,33 @@ msgstr ""
 msgid "argument '%s' not declared by plugin"
 msgstr ""
 
-#: ../lib/plugin/WikiPoll.php:157 ../lib/plugin/WikiPoll.php:226
+#: ../lib/plugin/WikiPoll.php:158 ../lib/plugin/WikiPoll.php:227
 msgid "Sorry! You must wait at least 20 minutes until you can vote again!"
 msgstr ""
 
-#: ../lib/plugin/WikiPoll.php:183
+#: ../lib/plugin/WikiPoll.php:184
 msgid "Not enough questions answered!"
 msgstr ""
 
-#: ../lib/plugin/WikiPoll.php:192 ../lib/plugin/WikiPoll.php:253
+#: ../lib/plugin/WikiPoll.php:193 ../lib/plugin/WikiPoll.php:254
 #, php-format
 msgid "Missing %s for %s"
 msgstr ""
 
-#: ../lib/plugin/WikiPoll.php:223
-#, fuzzy
+#: ../lib/plugin/WikiPoll.php:224
 msgid "Reset"
-msgstr "転送"
+msgstr ""
 
-#: ../lib/plugin/WikiPoll.php:269 ../lib/plugin/WikiPoll.php:283
+#: ../lib/plugin/WikiPoll.php:270 ../lib/plugin/WikiPoll.php:284
 #, php-format
 msgid "  %d%% (%d/%d)"
 msgstr ""
 
-#: ../lib/plugin/WikiPoll.php:299 ../lib/plugin/WikiPoll.php:301
+#: ../lib/plugin/WikiPoll.php:300 ../lib/plugin/WikiPoll.php:302
 msgid "The result of this poll so far:"
 msgstr ""
 
-#: ../lib/plugin/WikiPoll.php:299
+#: ../lib/plugin/WikiPoll.php:300
 msgid "Thanks for participating!"
 msgstr ""
 
@@ -6102,9 +6007,8 @@ msgid "AllPagesOwnedByMe"
 msgstr "全ページ"
 
 #: ../lib/plugin/_WikiTranslation.php:52
-#, fuzzy
 msgid "CategoryHomePages"
-msgstr "ホームページ作成:"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:55 ../themes/Crao/templates/head.tmpl:29
 #: ../themes/Crao/templates/head.tmpl:30
@@ -6126,14 +6030,12 @@ msgid "FindPage"
 msgstr "ページ検索"
 
 #: ../lib/plugin/_WikiTranslation.php:56
-#, fuzzy
 msgid "FullRecentChanges"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:57
-#, fuzzy
 msgid "Help/AddingPages"
-msgstr "ページを編集しています。"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:58
 #, fuzzy
@@ -6141,9 +6043,8 @@ msgid "Help/AddCommentPlugin"
 msgstr "コメント"
 
 #: ../lib/plugin/_WikiTranslation.php:59
-#, fuzzy
 msgid "Help/AuthorHistoryPlugin"
-msgstr "編集者:"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:60
 #, fuzzy
@@ -6180,14 +6081,12 @@ msgid "Help/FoafViewerPlugin"
 msgstr "カレンダー"
 
 #: ../lib/plugin/_WikiTranslation.php:67
-#, fuzzy
 msgid "Help/FrameIncludePlugin"
-msgstr "プラグイン"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:68
-#, fuzzy
 msgid "Help/HelloWorldPlugin"
-msgstr "プラグイン"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:69
 #, fuzzy
@@ -6235,19 +6134,16 @@ msgid "Help/PloticusPlugin"
 msgstr "フォトアルバム"
 
 #: ../lib/plugin/_WikiTranslation.php:79
-#, fuzzy
 msgid "Help/RawHtmlPlugin"
-msgstr "プラグイン"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:80
-#, fuzzy
 msgid "Help/RedirectToPlugin"
-msgstr "転送"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:81
-#, fuzzy
 msgid "Help/RichTablePlugin"
-msgstr "有効なプラグイン一覧"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:82
 #, fuzzy
@@ -6255,32 +6151,28 @@ msgid "Help/SystemInfoPlugin"
 msgstr "システム情報"
 
 #: ../lib/plugin/_WikiTranslation.php:83
-#, fuzzy
 msgid "Help/TranscludePlugin"
-msgstr "プラグイン"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:84
 msgid "Help/UnfoldSubpagesPlugin"
 msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:85
-#, fuzzy
 msgid "Help/UpLoadPlugin"
-msgstr "アップロード"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:86
 msgid "Help/WabiSabi"
 msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:87
-#, fuzzy
 msgid "Help/WikiBlogPlugin"
-msgstr "プラグイン"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:88
-#, fuzzy
 msgid "Help/WikiPlugin"
-msgstr "プラグイン"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:89
 msgid "Help/WikiWikiWeb"
@@ -6292,9 +6184,8 @@ msgid "HomePageAlias"
 msgstr "ホームページ"
 
 #: ../lib/plugin/_WikiTranslation.php:91
-#, fuzzy
 msgid "InterWiki"
-msgstr "InterWiki検索"
+msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:93
 msgid "PhpWikiAdministration/Chmod"
@@ -6333,7 +6224,6 @@ msgstr ""
 #: ../themes/fusionforge/templates/navbar.tmpl:19
 #: ../themes/MonoBook/templates/navbar.tmpl:61
 #: ../themes/Sidebar/templates/navbar.tmpl:51
-#, fuzzy
 msgid "UpLoad"
 msgstr "アップロード"
 
@@ -6366,36 +6256,34 @@ msgid "Embed YouTube videos"
 msgstr ""
 
 #: ../lib/plugin/YouTube.php:67
-#, fuzzy, php-format
+#, php-format
 msgid "Required argument %s missing"
-msgstr "サポート言語一覧"
+msgstr ""
 
-#: ../lib/plugin/YouTube.php:104 ../lib/plugin/YouTube.php:106
-#: ../lib/plugin/YouTube.php:108 ../lib/plugin/YouTube.php:110
-#: ../lib/plugin/YouTube.php:134 ../lib/plugin/YouTube.php:136
-#, fuzzy, php-format
-msgid "Invalid argument %s"
-msgstr "インライン画像一覧"
+#: ../lib/purgepage.php:13
+#, fuzzy
+msgid "Purge cancelled"
+msgstr "マークアップキャッシュの破棄"
 
-#: ../lib/purgepage.php:18 ../lib/removepage.php:18
+#: ../lib/purgepage.php:20 ../lib/removepage.php:20
 msgid "Sorry, this page does not exist."
 msgstr ""
 
-#: ../lib/purgepage.php:22 ../lib/purgepage.php:56 ../lib/WikiTheme.php:1038
+#: ../lib/purgepage.php:24 ../lib/purgepage.php:59 ../lib/WikiTheme.php:1035
 #, fuzzy
 msgid "Purge Page"
 msgstr "変更しませんでした。"
 
-#: ../lib/purgepage.php:25
+#: ../lib/purgepage.php:28
 #, php-format
 msgid "You are about to purge '%s'!"
 msgstr ""
 
-#: ../lib/purgepage.php:44 ../lib/removepage.php:44
+#: ../lib/purgepage.php:47 ../lib/removepage.php:47
 msgid "Someone has edited the page!"
 msgstr ""
 
-#: ../lib/purgepage.php:45
+#: ../lib/purgepage.php:48
 #, php-format
 msgid ""
 "Since you started the purge process, someone has saved a new version of %s.  "
@@ -6403,16 +6291,21 @@ msgid ""
 "the database."
 msgstr ""
 
-#: ../lib/removepage.php:22 ../lib/removepage.php:56 ../lib/WikiTheme.php:1037
+#: ../lib/removepage.php:13
+#, fuzzy
+msgid "Remove cancelled"
+msgstr "ページ削除"
+
+#: ../lib/removepage.php:24 ../lib/removepage.php:59 ../lib/WikiTheme.php:1034
 msgid "Remove Page"
 msgstr "ページ削除"
 
-#: ../lib/removepage.php:25
+#: ../lib/removepage.php:28
 #, php-format
 msgid "You are about to remove '%s'!"
 msgstr ""
 
-#: ../lib/removepage.php:45
+#: ../lib/removepage.php:48
 #, php-format
 msgid ""
 "Since you started the deletion process, someone has saved a new version of "
@@ -6445,139 +6338,135 @@ msgstr ""
 msgid "the file '%s'"
 msgstr "MIMEファイル %s"
 
-#: ../lib/stdlib.php:389 ../lib/stdlib.php:423
-msgid "BAD URL -- remove all of <, >, \""
+#: ../lib/stdlib.php:391
+msgid "Bad URL -- remove all of <, >, \""
 msgstr ""
 
-#: ../lib/stdlib.php:475
+#: ../lib/stdlib.php:425
+msgid "Bad URL for image -- remove all of <, >, \""
+msgstr ""
+
+#: ../lib/stdlib.php:482
 #, fuzzy, php-format
-msgid "Invalid image attribute \"%s\" %s=%s"
+msgid "Invalid attribute %s=%s for image %s"
 msgstr "インライン画像一覧"
 
-#: ../lib/stdlib.php:487
+#: ../lib/stdlib.php:494
 #, php-format
 msgid "Invalid image link fixed %s => %s. Spaces must be quoted with %%20."
 msgstr ""
 
-#: ../lib/stdlib.php:493
+#: ../lib/stdlib.php:500
 #, php-format
 msgid ""
 "Invalid image link fixed \"%s\" => \"%s\".\n"
 " Spaces must be quoted with %%20."
 msgstr ""
 
-#: ../lib/stdlib.php:512 ../lib/stdlib.php:549
+#: ../lib/stdlib.php:519 ../lib/stdlib.php:556
 #, fuzzy
 msgid "Invalid image size"
 msgstr "インライン画像一覧"
 
-#: ../lib/stdlib.php:723
+#: ../lib/stdlib.php:730
 msgid "BAD phpwiki: URL"
 msgstr ""
 
-#: ../lib/stdlib.php:761
+#: ../lib/stdlib.php:768
 msgid "Lock page to enable link"
 msgstr ""
 
-#: ../lib/stdlib.php:891
+#: ../lib/stdlib.php:898
 #, php-format
 msgid "'%s': Bad page name: %s"
 msgstr ""
 
-#: ../lib/stdlib.php:921 ../lib/stdlib.php:952
+#: ../lib/stdlib.php:928 ../lib/stdlib.php:959
 #, php-format
 msgid "Leading %s not allowed"
 msgstr ""
 
-#: ../lib/stdlib.php:936
+#: ../lib/stdlib.php:943
 msgid "White space converted to single space"
 msgstr ""
 
-#: ../lib/stdlib.php:942
+#: ../lib/stdlib.php:949
 msgid "Control characters not allowed"
 msgstr ""
 
-#: ../lib/stdlib.php:963
-msgid "too long"
-msgstr "長すぎます。"
-
-#: ../lib/stdlib.php:972
+#: ../lib/stdlib.php:979
 #, fuzzy, php-format
 msgid "Illegal chars %s removed"
 msgstr "ページ名が正しくありません。"
 
-#: ../lib/stdlib.php:1018
+#: ../lib/stdlib.php:1025
 msgid "The CreateTocPlugin is not yet old markup compatible! "
 msgstr ""
 
-#: ../lib/stdlib.php:1019
+#: ../lib/stdlib.php:1026
 msgid ""
 "Please remove the CreateToc line to be able to reformat this page to old "
 "markup. "
 msgstr ""
 
-#: ../lib/stdlib.php:1282
+#: ../lib/stdlib.php:1289
 msgid "Revision Not Found"
 msgstr "リビジョンが見つかりません"
 
-#: ../lib/stdlib.php:1283
+#: ../lib/stdlib.php:1290
 #, php-format
 msgid "I'm sorry.  Version %d of %s is not in the database."
 msgstr ""
 
-#: ../lib/stdlib.php:1286
+#: ../lib/stdlib.php:1293
 msgid "Bad Version"
 msgstr "バージョンが正しくありません。"
 
-#: ../lib/stdlib.php:1422
+#: ../lib/stdlib.php:1429
 msgid "-???"
 msgstr ""
 
-#: ../lib/stdlib.php:1425
+#: ../lib/stdlib.php:1432
 #, php-format
 msgid "%s B"
 msgstr ""
 
-#: ../lib/stdlib.php:1427 ../themes/MonoBook/templates/info.tmpl:30
+#: ../lib/stdlib.php:1434 ../themes/MonoBook/templates/info.tmpl:30
 #, php-format
 msgid "%s bytes"
 msgstr "%s バイト"
 
-#: ../lib/stdlib.php:1432
+#: ../lib/stdlib.php:1439
 #, php-format
 msgid "%s KiB"
 msgstr ""
 
-#: ../lib/stdlib.php:1434 ../themes/MonoBook/templates/info.tmpl:33
+#: ../lib/stdlib.php:1441 ../themes/MonoBook/templates/info.tmpl:33
 #, fuzzy, php-format
 msgid "%s KiB (%s bytes)"
 msgstr "%s キロバイト(%s バイト)"
 
-#: ../lib/stdlib.php:1521 ../lib/XmlElement.php:487
+#: ../lib/stdlib.php:1528 ../lib/XmlElement.php:487
 #, php-format
 msgid "Can't mix '%s' with '%s' type format strings"
 msgstr ""
 
-#: ../lib/stdlib.php:1530
+#: ../lib/stdlib.php:1537
 #, php-format
 msgid "%s: argument index out of range"
 msgstr ""
 
-#: ../lib/stdlib.php:1609 ../themes/Hawaiian/lib/random.php:20
+#: ../lib/stdlib.php:1616 ../themes/Hawaiian/lib/random.php:20
 #, php-format
 msgid "%s is empty."
 msgstr "%s が空です。"
 
-#: ../lib/stdlib.php:1616
+#: ../lib/stdlib.php:1623
 #, php-format
 msgid "Unable to open directory '%s' for reading"
 msgstr ""
 
-#: ../lib/stdlib.php:1947
-msgid "Okay"
-msgstr "おっけー"
-
-#: ../lib/stdlib.php:2132 ../lib/stdlib.php:2145
+#: ../lib/stdlib.php:2139 ../lib/stdlib.php:2152
 #, php-format
 msgid "... (first %s words)"
 msgstr ""
@@ -6720,9 +6609,9 @@ msgid "Check for mysql LOCK TABLE privilege"
 msgstr ""
 
 #: ../lib/upgrade.php:550
-#, fuzzy, php-format
+#, php-format
 msgid "version <em>%s</em> not affected"
-msgstr "バージョン %s"
+msgstr ""
 
 #: ../lib/upgrade.php:559
 msgid "Check for mysql page.id auto_increment flag"
@@ -6733,14 +6622,13 @@ msgid "Check for mysql 4.1.x/5.0.0 binary search on windows problem"
 msgstr ""
 
 #: ../lib/upgrade.php:599 ../lib/upgrade.php:615 ../lib/upgrade.php:636
-#, fuzzy, php-format
+#, php-format
 msgid "version <em>%s</em>"
-msgstr "バージョン %s"
+msgstr "バージョン <em>%s</em>"
 
 #: ../lib/upgrade.php:600
-#, fuzzy
 msgid "not affected"
-msgstr "%s を保存しました。"
+msgstr ""
 
 #: ../lib/upgrade.php:616 ../lib/upgrade.php:637 ../lib/upgrade.php:665
 #: ../lib/upgrade.php:1102
@@ -6757,10 +6645,6 @@ msgstr ""
 
 #: ../lib/upgrade.php:678
 msgid "FIXING"
-msgstr ""
-
-#: ../lib/upgrade.php:681 ../lib/upgrade.php:889
-msgid "FAIL"
 msgstr ""
 
 #: ../lib/upgrade.php:770
@@ -6806,14 +6690,14 @@ msgid "plugin argument"
 msgstr "インライン画像一覧"
 
 #: ../lib/upgrade.php:957
-#, fuzzy, php-format
+#, php-format
 msgid "file %s not found"
 msgstr "%s: ファイルが見つかりません。"
 
 #: ../lib/upgrade.php:984
-#, fuzzy, php-format
+#, php-format
 msgid "%s not found in %s"
-msgstr "%s: ファイルが見つかりません。"
+msgstr ""
 
 #: ../lib/upgrade.php:991
 #, php-format
@@ -6821,9 +6705,9 @@ msgid "couldn't move %s to %s"
 msgstr ""
 
 #: ../lib/upgrade.php:995
-#, fuzzy, php-format
+#, php-format
 msgid "file %s is not writable"
-msgstr "%s: ファイルが見つかりません。"
+msgstr ""
 
 #: ../lib/upgrade.php:1005 ../lib/upgrade.php:1015 ../lib/upgrade.php:1025
 #, php-format
@@ -7042,9 +6926,9 @@ msgid "Plugin %s disabled."
 msgstr "プラグイン %s は無効になっています。"
 
 #: ../lib/WikiPlugin.php:486 ../lib/WikiPlugin.php:503
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin '%s' does not exist."
-msgstr "プラグイン %s は無効になっています。"
+msgstr ""
 
 #: ../lib/WikiPlugin.php:506
 #, php-format
@@ -7066,16 +6950,11 @@ msgid "%s at %s"
 msgstr ""
 
 #: ../lib/WikiTheme.php:460 ../lib/WikiTheme.php:471
-#, fuzzy, php-format
+#, php-format
 msgid "Version %s, saved on %s"
-msgstr "バージョン %d"
+msgstr ""
 
-#: ../lib/WikiTheme.php:462
-#, fuzzy, php-format
-msgid "Last edited %s"
-msgstr "最終編集日時"
-
-#: ../lib/WikiTheme.php:473
+#: ../lib/WikiTheme.php:462 ../lib/WikiTheme.php:473
 #, fuzzy, php-format
 msgid "Last edited on %s"
 msgstr "最終編集日時: %s"
@@ -7108,12 +6987,8 @@ msgstr "作成: %s"
 msgid "Google:%s"
 msgstr ""
 
-#: ../lib/WikiTheme.php:688
-#, php-format
-msgid "'%s': Bad page name"
-msgstr "'%s': ページ名が正しくありません"
-
-#: ../lib/WikiTheme.php:1032 ../themes/Crao/templates/signin.tmpl:14
+#: ../lib/WikiTheme.php:1029 ../themes/blog/themeinfo.php:68
+#: ../themes/Crao/templates/signin.tmpl:14
 #: ../themes/Crao/templates/signin.tmpl:30
 #: ../themes/default/templates/signin.tmpl:16
 #: ../themes/default/templates/signin.tmpl:27
@@ -7126,33 +7001,20 @@ msgstr "'%s': ページ名が正しくありません"
 msgid "Sign Out"
 msgstr "サインサウト"
 
-#: ../lib/WikiTheme.php:1033 ../lib/WikiUserNew.php:510
-#: ../lib/WikiUser.php:228 ../themes/Crao/templates/signin.tmpl:53
-#: ../themes/default/templates/login.tmpl:71
-#: ../themes/default/templates/login.tmpl:86
-#: ../themes/smaller/templates/signin.tmpl:54
-msgid "Sign In"
-msgstr "サインイン"
-
-#: ../lib/WikiTheme.php:1034
-#, fuzzy
-msgid "Rename Page"
-msgstr "ページ削除"
-
-#: ../lib/WikiTheme.php:1035 ../themes/MacOSX/themeinfo.php:136
+#: ../lib/WikiTheme.php:1032 ../themes/MacOSX/themeinfo.php:136
 msgid "Lock Page"
 msgstr "ページロック"
 
-#: ../lib/WikiTheme.php:1036 ../themes/MacOSX/themeinfo.php:137
+#: ../lib/WikiTheme.php:1033 ../themes/MacOSX/themeinfo.php:137
 msgid "Unlock Page"
 msgstr "ページロック解除"
 
-#: ../lib/WikiTheme.php:1208
+#: ../lib/WikiTheme.php:1205
 msgid ""
 "Some action(page) wanted to add more headers, but they were already printed."
 msgstr ""
 
-#: ../lib/WikiTheme.php:1305 ../themes/Hawaiian/themeinfo.php:34
+#: ../lib/WikiTheme.php:1302 ../themes/Hawaiian/themeinfo.php:34
 #: ../themes/MacOSX/themeinfo.php:105 ../themes/MonoBook/themeinfo.php:109
 #: ../themes/Portland/themeinfo.php:63 ../themes/shamino_com/themeinfo.php:59
 #: ../themes/Sidebar/themeinfo.php:120 ../themes/SpaceWiki/themeinfo.php:46
@@ -7160,13 +7022,13 @@ msgstr ""
 msgid "Printer"
 msgstr "プリンター"
 
-#: ../lib/WikiTheme.php:1306 ../themes/MacOSX/themeinfo.php:106
+#: ../lib/WikiTheme.php:1303 ../themes/MacOSX/themeinfo.php:106
 #: ../themes/MonoBook/themeinfo.php:110 ../themes/shamino_com/themeinfo.php:60
 #: ../themes/wikilens/themeinfo.php:32
 msgid "Top & bottom toolbars"
 msgstr "上部と下部のツールバー"
 
-#: ../lib/WikiTheme.php:1307 ../themes/Hawaiian/themeinfo.php:35
+#: ../lib/WikiTheme.php:1304 ../themes/Hawaiian/themeinfo.php:35
 #: ../themes/MonoBook/themeinfo.php:111 ../themes/Portland/themeinfo.php:64
 #: ../themes/shamino_com/themeinfo.php:61 ../themes/Sidebar/themeinfo.php:121
 #: ../themes/SpaceWiki/themeinfo.php:47 ../themes/wikilens/themeinfo.php:33
@@ -7174,16 +7036,16 @@ msgstr "上部と下部のツールバー"
 msgid "Modern"
 msgstr ""
 
-#: ../lib/WikiTheme.php:1808
-#, fuzzy, php-format
+#: ../lib/WikiTheme.php:1805
+#, php-format
 msgid "Plugin %s: undefined"
-msgstr "プラグイン %s が失敗しました。"
+msgstr ""
 
-#: ../lib/WikiTheme.php:1831
+#: ../lib/WikiTheme.php:1828
 msgid "Related Links"
 msgstr ""
 
-#: ../lib/WikiTheme.php:1852
+#: ../lib/WikiTheme.php:1849
 msgid "External Links"
 msgstr ""
 
@@ -7251,9 +7113,8 @@ msgid "Could not search in LDAP"
 msgstr ""
 
 #: ../lib/WikiUser/LDAP.php:173
-#, fuzzy
 msgid "User not found in LDAP"
-msgstr "%s: ファイルが見つかりません。"
+msgstr ""
 
 #: ../lib/WikiUser/LDAP.php:208
 #, fuzzy
@@ -7386,9 +7247,8 @@ msgid "Please contact your PhpWiki administrator for assistance."
 msgstr ""
 
 #: ../lib/WikiUser.php:456 ../themes/default/templates/homepage.tmpl:37
-#, fuzzy
 msgid "CategoryHomepage"
-msgstr "ホームページ作成:"
+msgstr ""
 
 #: ../lib/WikiUser.php:488 ../themes/Crao/templates/navbar.tmpl:24
 #: ../themes/default/templates/navbar.tmpl:27
@@ -7423,26 +7283,21 @@ msgstr ""
 #: ../lib/WysiwygEdit/Wikiwyg.php:71
 #, fuzzy
 msgid "Title 1"
-msgstr "タイトル検索"
+msgstr "タイトル"
 
 #: ../lib/WysiwygEdit/Wikiwyg.php:72
 #, fuzzy
 msgid "Title 2"
-msgstr "タイトル検索"
+msgstr "タイトル"
 
 #: ../lib/WysiwygEdit/Wikiwyg.php:73
 #, fuzzy
 msgid "Title 3"
-msgstr "タイトル検索"
+msgstr "タイトル"
 
 #: ../lib/WysiwygEdit/Wikiwyg.php:74
 msgid "Verbatim"
 msgstr ""
-
-#: ../lib/WysiwygEdit/Wikiwyg.php:75
-#, fuzzy
-msgid "Table of content"
-msgstr "コンテンツ"
 
 #: ../lib/WysiwygEdit/Wikiwyg.php:76
 msgid "Insert Wikitext section"
@@ -7517,7 +7372,7 @@ msgstr "編集者:"
 #: ../themes/default/templates/head.tmpl:46
 #: ../themes/fusionforge/templates/actionbar.tmpl:62
 #: ../themes/MonoBook/templates/actionbar.tmpl:38
-#: ../themes/MonoBook/templates/info.tmpl:185
+#: ../themes/MonoBook/templates/info.tmpl:181
 #: ../themes/Portland/templates/actionbar.tmpl:9
 #: ../themes/Sidebar/templates/actionbar.tmpl:25
 #: ../themes/Sidebar/templates/actionbar.tmpl:55
@@ -7537,9 +7392,8 @@ msgstr ""
 #: ../themes/blog/templates/blogform.tmpl:18
 #: ../themes/default/templates/blogform.tmpl:18
 #: ../themes/fusionforge/templates/blogform.tmpl:18
-#, fuzzy
 msgid "Add Entry"
-msgstr "ホームページ作成:"
+msgstr ""
 
 #: ../themes/blog/templates/blogform.tmpl:24
 #: ../themes/Crao/templates/editpage.tmpl:93
@@ -7625,13 +7479,18 @@ msgid "You are viewing an old revision of this page."
 msgstr ""
 
 #: ../themes/blog/templates/browse.tmpl:8
+#: ../themes/blog/templates/viewsource.tmpl:13
 #: ../themes/Crao/templates/browse.tmpl:8
 #: ../themes/default/templates/browse.tmpl:8
+#: ../themes/default/templates/viewsource.tmpl:12
+#: ../themes/fusionforge/templates/browse.tmpl:10
+#: ../themes/fusionforge/templates/browse.tmpl:16
 #: ../themes/MonoBook/templates/browse.tmpl:8
+#: ../themes/MonoBook/templates/viewsource.tmpl:11
 #: ../themes/Portland/templates/browse.tmpl:10
-#: ../themes/Wordpress/templates/browse.tmpl:10
+#: ../themes/Portland/templates/viewsource.tmpl:10
 #: ../themes/Wordpress/templates/viewsource.tmpl:15
-msgid "View the current version"
+msgid "View the current version."
 msgstr "現在のバージョンを表示する"
 
 #: ../themes/blog/templates/debug.tmpl:6
@@ -7645,14 +7504,14 @@ msgid "Page Execution took %s seconds"
 msgstr ""
 
 #: ../themes/blog/templates/info.tmpl:8
-#: ../themes/MonoBook/templates/info.tmpl:189
+#: ../themes/MonoBook/templates/info.tmpl:185
 #: ../themes/smaller/templates/info.tmpl:12
 #, fuzzy
 msgid "Diff previous Revision"
 msgstr "前のリビジョン"
 
 #: ../themes/blog/templates/info.tmpl:9
-#: ../themes/MonoBook/templates/info.tmpl:190
+#: ../themes/MonoBook/templates/info.tmpl:186
 #: ../themes/smaller/templates/info.tmpl:13
 #, fuzzy
 msgid "Diff previous Author"
@@ -7689,16 +7548,6 @@ msgstr "ページ名"
 msgid "This page has been locked and cannot be edited."
 msgstr ""
 
-#: ../themes/blog/templates/viewsource.tmpl:13
-#: ../themes/default/templates/viewsource.tmpl:12
-#: ../themes/fusionforge/templates/browse.tmpl:10
-#: ../themes/fusionforge/templates/browse.tmpl:16
-#: ../themes/MonoBook/templates/viewsource.tmpl:11
-#: ../themes/Portland/templates/viewsource.tmpl:10
-#, fuzzy
-msgid "View the current version."
-msgstr "現在のバージョンを表示する"
-
 #: ../themes/blog/templates/wikiblog.tmpl:20
 #: ../themes/Crao/templates/wikiblog.tmpl:21
 #, php-format
@@ -7712,19 +7561,9 @@ msgstr ""
 msgid "Comments on %s by %s."
 msgstr ""
 
-#: ../themes/blog/themeinfo.php:68
-#, fuzzy
-msgid "SignOut"
-msgstr "サインサウト"
-
-#: ../themes/blog/themeinfo.php:69
-#, fuzzy
-msgid "SignIn"
-msgstr "サインイン"
-
 #: ../themes/blog/themeinfo.php:70
 #: ../themes/fusionforge/templates/actionbar.tmpl:101
-#: ../themes/fusionforge/templates/userprefs.tmpl:265
+#: ../themes/fusionforge/templates/userprefs.tmpl:266
 #, fuzzy
 msgid "Lock"
 msgstr "ロックしました"
@@ -7752,12 +7591,13 @@ msgstr "(差分)"
 #: ../themes/shamino_com/templates/actionbar.tmpl:8
 #: ../themes/Sidebar/templates/actionbar.tmpl:20
 #: ../themes/smaller/templates/actionbar.tmpl:18
+#: ../themes/Wordpress/templates/actionbar.tmpl:10
 msgid "Edit Old Revision"
 msgstr "古いリビジョンを編集する"
 
 #: ../themes/Crao/templates/actionbar.tmpl:34
 #: ../themes/default/templates/actionbar.tmpl:44
-#: ../themes/MonoBook/templates/info.tmpl:196
+#: ../themes/MonoBook/templates/info.tmpl:192
 #: ../themes/Sidebar/templates/actionbar.tmpl:63
 #: ../themes/smaller/templates/info.tmpl:20
 #, fuzzy
@@ -7767,7 +7607,7 @@ msgstr "マークアップキャッシュの破棄"
 #: ../themes/Crao/templates/actionbar.tmpl:35
 #: ../themes/default/templates/actionbar.tmpl:45
 #: ../themes/MonoBook/templates/actionbar.tmpl:84
-#: ../themes/MonoBook/templates/info.tmpl:197
+#: ../themes/MonoBook/templates/info.tmpl:193
 #: ../themes/Sidebar/templates/actionbar.tmpl:64
 #: ../themes/smaller/templates/info.tmpl:21
 msgid ""
@@ -7838,9 +7678,8 @@ msgid "Adjust"
 msgstr "調整"
 
 #: ../themes/Crao/templates/editpage.tmpl:44
-#, fuzzy
 msgid "Page Content: "
-msgstr "コンテンツ"
+msgstr ""
 
 #: ../themes/Crao/templates/editpage.tmpl:59
 #: ../themes/default/templates/editpage.tmpl:63
@@ -7908,6 +7747,16 @@ msgstr "%s としてサインインしました"
 #: ../themes/Wordpress/templates/signin.tmpl:41
 msgid "Enter your UserId to sign in"
 msgstr "ユーザーIDを入力してサインインしてください。"
+
+#: ../themes/default/templates/actionbar.tmpl:31
+#: ../themes/fusionforge/templates/actionbar.tmpl:77
+#: ../themes/fusionforge/templates/userprefs.tmpl:254
+#: ../themes/MonoBook/templates/actionbar.tmpl:73
+#: ../themes/Sidebar/templates/actionbar.tmpl:47
+#: ../themes/smaller/templates/actionbar.tmpl:31
+#: ../themes/Wordpress/templates/actionbar.tmpl:60
+msgid "Revert"
+msgstr ""
 
 #: ../themes/default/templates/addcomment.tmpl:15
 #, fuzzy
@@ -8010,88 +7859,117 @@ msgstr "バージョン %s"
 msgid "Original (1.2 or 1.0)"
 msgstr ""
 
+#: ../themes/default/templates/info.tmpl:57
+#: ../themes/default/templates/info.tmpl:58
+#: ../themes/default/templates/info.tmpl:59
 #: ../themes/default/templates/info.tmpl:62
+#: ../themes/default/templates/info.tmpl:63
+#: ../themes/default/templates/info.tmpl:64
+#: ../themes/default/templates/info.tmpl:85
+#: ../themes/default/templates/info.tmpl:103
+#: ../themes/default/templates/info.tmpl:107
+#: ../themes/default/templates/info.tmpl:111
+#: ../themes/default/templates/info.tmpl:116
+#: ../themes/default/templates/info.tmpl:131
+#: ../themes/default/templates/info.tmpl:136
+#: ../themes/default/templates/info.tmpl:140
+#: ../themes/default/templates/info.tmpl:167
+#: ../themes/default/templates/userprefs.tmpl:142
+#: ../themes/default/templates/userprefs.tmpl:145
+#: ../themes/default/templates/userprefs.tmpl:155
+#: ../themes/default/templates/userprefs.tmpl:164
+#: ../themes/default/templates/userprefs.tmpl:244
+#: ../themes/default/templates/userprefs.tmpl:251
+#: ../themes/fusionforge/templates/userprefs.tmpl:343
+#: ../themes/fusionforge/templates/userprefs.tmpl:350
+#: ../themes/MonoBook/templates/info.tmpl:71
+#: ../themes/MonoBook/templates/info.tmpl:72
+#: ../themes/MonoBook/templates/info.tmpl:73
+#: ../themes/MonoBook/templates/info.tmpl:76
 #: ../themes/MonoBook/templates/info.tmpl:77
-msgid "Saved on:"
+#: ../themes/MonoBook/templates/info.tmpl:78
+#: ../themes/MonoBook/templates/info.tmpl:98
+#: ../themes/MonoBook/templates/info.tmpl:115
+#: ../themes/MonoBook/templates/info.tmpl:119
+#: ../themes/MonoBook/templates/info.tmpl:123
+#: ../themes/MonoBook/templates/info.tmpl:128
+#: ../themes/MonoBook/templates/info.tmpl:142
+#: ../themes/MonoBook/templates/info.tmpl:146
+#: ../themes/MonoBook/templates/info.tmpl:173
+msgid ":"
+msgstr ""
+
+#: ../themes/default/templates/info.tmpl:62
+#: ../themes/MonoBook/templates/info.tmpl:76
+msgid "Saved on"
 msgstr ""
 
 #: ../themes/default/templates/info.tmpl:67
-#: ../themes/MonoBook/templates/info.tmpl:82
+#: ../themes/MonoBook/templates/info.tmpl:81
 #, php-format
 msgid "Statistics about %s."
 msgstr ""
 
-#: ../themes/default/templates/info.tmpl:87
-#: ../themes/MonoBook/templates/info.tmpl:102
-msgid "Supplanted on:"
+#: ../themes/default/templates/info.tmpl:85
+#: ../themes/MonoBook/templates/info.tmpl:98
+msgid "Supplanted on"
 msgstr ""
 
-#: ../themes/default/templates/info.tmpl:105
-#: ../themes/MonoBook/templates/info.tmpl:119
-msgid "Page Version:"
-msgstr "ページバージョン:"
+#: ../themes/default/templates/info.tmpl:103
+#: ../themes/MonoBook/templates/info.tmpl:115
+msgid "Page Version"
+msgstr "ページバージョン"
 
-#: ../themes/default/templates/info.tmpl:109
-#: ../themes/MonoBook/templates/info.tmpl:123
-msgid "Markup:"
-msgstr "マークアップ:"
-
-#: ../themes/default/templates/info.tmpl:113
-#: ../themes/MonoBook/templates/info.tmpl:127
-msgid "Size:"
-msgstr "サイズ:"
-
-#: ../themes/default/templates/info.tmpl:118
-#: ../themes/MonoBook/templates/info.tmpl:132
-msgid "Hits:"
-msgstr "ヒット数:"
-
-#: ../themes/default/templates/info.tmpl:133
-msgid "Is External:"
+#: ../themes/default/templates/info.tmpl:131
+msgid "Is External"
 msgstr ""
 
-#: ../themes/default/templates/info.tmpl:134
+#: ../themes/default/templates/info.tmpl:132
 #, fuzzy
 msgid "No"
 msgstr "なし"
 
-#: ../themes/default/templates/info.tmpl:138
+#: ../themes/default/templates/info.tmpl:136
+#: ../themes/MonoBook/templates/info.tmpl:142
 #, fuzzy
-msgid "ACL type:"
+msgid "ACL type"
 msgstr "データベースタイプ"
 
-#: ../themes/default/templates/info.tmpl:142
-msgid "ACL:"
-msgstr ""
-
-#: ../themes/default/templates/info.tmpl:149
-#: ../themes/MonoBook/templates/info.tmpl:157
-msgid "home page"
+#: ../themes/default/templates/info.tmpl:147
+#: ../themes/fusionforge/templates/navbar.tmpl:9
+#: ../themes/MonoBook/templates/info.tmpl:153
+#: ../themes/MonoBook/templates/navbar.tmpl:15
+#, fuzzy
+msgid "Home Page"
 msgstr "ホームページ"
 
-#: ../themes/default/templates/info.tmpl:152
-#: ../themes/MonoBook/templates/info.tmpl:160
+#: ../themes/default/templates/info.tmpl:150
+#: ../themes/MonoBook/templates/info.tmpl:156
 msgid "User page"
 msgstr "ユーザーページ"
 
-#: ../themes/default/templates/info.tmpl:155
-#: ../themes/MonoBook/templates/info.tmpl:163
-msgid "Action page"
+#: ../themes/default/templates/info.tmpl:153
+#: ../themes/fusionforge/templates/actionbar.tmpl:20
+#: ../themes/fusionforge/templates/actionbar.tmpl:40
+#: ../themes/MonoBook/templates/info.tmpl:159
+#, fuzzy
+msgid "Action Page"
 msgstr "操作ページ"
 
-#: ../themes/default/templates/info.tmpl:158
-#: ../themes/MonoBook/templates/info.tmpl:166
+#: ../themes/default/templates/info.tmpl:156
+#: ../themes/MonoBook/templates/info.tmpl:162
 msgid "Blog page"
 msgstr "Blogページ"
 
-#: ../themes/default/templates/info.tmpl:164
-#: ../themes/MonoBook/templates/info.tmpl:172
+#: ../themes/default/templates/info.tmpl:162
+#: ../themes/MonoBook/templates/info.tmpl:168
 msgid "Subpage"
 msgstr "サブページ"
 
-#: ../themes/default/templates/info.tmpl:169
-#: ../themes/MonoBook/templates/info.tmpl:177
-msgid "Page Type:"
+#: ../themes/default/templates/info.tmpl:167
+#: ../themes/MonoBook/templates/info.tmpl:173
+#, fuzzy
+msgid "Page Type"
 msgstr "ページの種類<:"
 
 #: ../themes/default/templates/login.tmpl:49
@@ -8248,9 +8126,9 @@ msgstr "全文検索"
 #: ../themes/default/templates/signin.tmpl:25
 #: ../themes/shamino_com/templates/signin.tmpl:24
 #: ../themes/Wordpress/templates/signin.tmpl:20
-#, fuzzy, php-format
+#, php-format
 msgid "Authenticated as %s"
-msgstr "%s を保存しました。"
+msgstr ""
 
 #: ../themes/default/templates/signin.tmpl:37
 #: ../themes/Wordpress/templates/signin.tmpl:44
@@ -8270,257 +8148,254 @@ msgstr "%sでソートします。"
 msgid "Sign in as:"
 msgstr "サインイン"
 
+#: ../themes/default/templates/userprefs.tmpl:70
 #: ../themes/default/templates/userprefs.tmpl:72
-#: ../themes/default/templates/userprefs.tmpl:74
 #: ../themes/fusionforge/templates/userprefs.tmpl:134
 #: ../themes/fusionforge/templates/userprefs.tmpl:136
 msgid "<system theme>"
 msgstr "<システムテーマ>"
 
-#: ../themes/default/templates/userprefs.tmpl:83
-#: ../themes/default/templates/userprefs.tmpl:109
+#: ../themes/default/templates/userprefs.tmpl:81
+#: ../themes/default/templates/userprefs.tmpl:107
 #: ../themes/fusionforge/templates/userprefs.tmpl:145
 #: ../themes/fusionforge/templates/userprefs.tmpl:171
 msgid "Personal theme:"
 msgstr "個人テーマ"
 
+#: ../themes/default/templates/userprefs.tmpl:87
 #: ../themes/default/templates/userprefs.tmpl:89
-#: ../themes/default/templates/userprefs.tmpl:91
 #: ../themes/fusionforge/templates/userprefs.tmpl:151
 #: ../themes/fusionforge/templates/userprefs.tmpl:153
 msgid "<system language>"
 msgstr "<システム言語>"
 
-#: ../themes/default/templates/userprefs.tmpl:100
-#: ../themes/default/templates/userprefs.tmpl:110
+#: ../themes/default/templates/userprefs.tmpl:98
+#: ../themes/default/templates/userprefs.tmpl:108
 #: ../themes/fusionforge/templates/userprefs.tmpl:162
 #: ../themes/fusionforge/templates/userprefs.tmpl:172
 msgid "Personal language:"
 msgstr "個人言語"
 
-#: ../themes/default/templates/userprefs.tmpl:118
+#: ../themes/default/templates/userprefs.tmpl:116
 #: ../themes/fusionforge/templates/userprefs.tmpl:181
 #, fuzzy, php-format
 msgid "User preferences for user %s"
 msgstr "ユーザー設定"
 
-#: ../themes/default/templates/userprefs.tmpl:127
+#: ../themes/default/templates/userprefs.tmpl:125
 msgid "UserId"
 msgstr "ユーザーID"
 
-#: ../themes/default/templates/userprefs.tmpl:131
+#: ../themes/default/templates/userprefs.tmpl:129
 msgid "Auth Level"
 msgstr "認証レベル"
 
-#: ../themes/default/templates/userprefs.tmpl:131
+#: ../themes/default/templates/userprefs.tmpl:129
 msgid "Auth Method"
 msgstr "認証方法"
 
-#: ../themes/default/templates/userprefs.tmpl:135
+#: ../themes/default/templates/userprefs.tmpl:133
 msgid "Theme"
 msgstr "テーマ"
 
-#: ../themes/default/templates/userprefs.tmpl:135
+#: ../themes/default/templates/userprefs.tmpl:133
 msgid "Current Theme"
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:136
+#: ../themes/default/templates/userprefs.tmpl:134
 msgid "Language"
 msgstr "言語"
 
-#: ../themes/default/templates/userprefs.tmpl:136
+#: ../themes/default/templates/userprefs.tmpl:134
 msgid "Current Language"
 msgstr "現在の言語"
 
-#: ../themes/default/templates/userprefs.tmpl:142
+#: ../themes/default/templates/userprefs.tmpl:140
 msgid "Change Password"
 msgstr "パスワード変更"
 
-#: ../themes/default/templates/userprefs.tmpl:142
+#: ../themes/default/templates/userprefs.tmpl:140
 #, fuzzy
 msgid "Set Password"
 msgstr "パスワード:"
 
-#: ../themes/default/templates/userprefs.tmpl:144
+#: ../themes/default/templates/userprefs.tmpl:142
 msgid "New password"
 msgstr "新規パスワード"
 
-#: ../themes/default/templates/userprefs.tmpl:147
+#: ../themes/default/templates/userprefs.tmpl:145
 msgid "Type it again"
 msgstr "もう一度入力"
 
-#: ../themes/default/templates/userprefs.tmpl:153
-#, fuzzy
-msgid "E-mail"
-msgstr "メール"
-
 #: ../themes/default/templates/userprefs.tmpl:155
-msgid "Your E-Mail:"
+#, fuzzy
+msgid "Your E-Mail"
 msgstr "あなたのメールアドレス:"
 
-#: ../themes/default/templates/userprefs.tmpl:163
-msgid "Status:"
+#: ../themes/default/templates/userprefs.tmpl:164
+#, fuzzy
+msgid "Status"
 msgstr "状況:"
 
-#: ../themes/default/templates/userprefs.tmpl:165
+#: ../themes/default/templates/userprefs.tmpl:166
 msgid "Email verified."
 msgstr "メールアドレスを確認出来ました。"
 
-#: ../themes/default/templates/userprefs.tmpl:167
+#: ../themes/default/templates/userprefs.tmpl:168
 msgid "Email not yet verified."
 msgstr "メールアドレスを確認出来ませんでした。"
 
-#: ../themes/default/templates/userprefs.tmpl:169
+#: ../themes/default/templates/userprefs.tmpl:171
 msgid "Note, that user accounts with bouncing emails will be disabled."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:172
+#: ../themes/default/templates/userprefs.tmpl:174
 #: ../themes/fusionforge/templates/userprefs.tmpl:195
 msgid "Get an email notification at changes of the following pages:"
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:177
-#: ../themes/fusionforge/templates/userprefs.tmpl:200
+#: ../themes/default/templates/userprefs.tmpl:179
+#: ../themes/fusionforge/templates/userprefs.tmpl:201
 msgid ""
 "Enter pages seperated by space or comma. Wildcards (fileglobbing) allowed."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:185
-#: ../themes/fusionforge/templates/userprefs.tmpl:218
-msgid "Do not send my own modifications:"
+#: ../themes/default/templates/userprefs.tmpl:189
+#: ../themes/fusionforge/templates/userprefs.tmpl:221
+msgid "Do not send my own modifications"
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:191
-#: ../themes/fusionforge/templates/userprefs.tmpl:224
+#: ../themes/default/templates/userprefs.tmpl:193
+#: ../themes/fusionforge/templates/userprefs.tmpl:225
 msgid "Check if you do not want to be notified of your own modifications."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:197
-#: ../themes/fusionforge/templates/userprefs.tmpl:230
-msgid "Do not send minor modifications:"
+#: ../themes/default/templates/userprefs.tmpl:201
+#: ../themes/fusionforge/templates/userprefs.tmpl:233
+msgid "Do not send minor modifications"
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:203
-#: ../themes/fusionforge/templates/userprefs.tmpl:236
+#: ../themes/default/templates/userprefs.tmpl:205
+#: ../themes/fusionforge/templates/userprefs.tmpl:237
 msgid "Check if you do not want to be notified of minor modifications."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:209
-#: ../themes/fusionforge/templates/userprefs.tmpl:305
+#: ../themes/default/templates/userprefs.tmpl:211
+#: ../themes/fusionforge/templates/userprefs.tmpl:309
 msgid "Appearance"
 msgstr "外観"
 
-#: ../themes/default/templates/userprefs.tmpl:211
-#: ../themes/fusionforge/templates/userprefs.tmpl:307
+#: ../themes/default/templates/userprefs.tmpl:213
+#: ../themes/fusionforge/templates/userprefs.tmpl:311
 msgid "Here you can override site-specific default values."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:215
-#: ../themes/default/templates/userprefs.tmpl:218
+#: ../themes/default/templates/userprefs.tmpl:219
+#: ../themes/default/templates/userprefs.tmpl:224
 msgid "System default:"
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:219
-#: ../themes/fusionforge/templates/userprefs.tmpl:311
-#, fuzzy, php-format
-msgid "Hide %s:"
-msgstr "ヒット数:"
+#: ../themes/default/templates/userprefs.tmpl:227
+#: ../themes/fusionforge/templates/userprefs.tmpl:325
+#, php-format
+msgid "Hide %s"
+msgstr "ヒット数"
 
-#: ../themes/default/templates/userprefs.tmpl:221
+#: ../themes/default/templates/userprefs.tmpl:229
 msgid ""
 "Hide or show LinkIcons (if supported by the current theme). Useful for text-"
 "only browsers or slow connections."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:222
-#: ../themes/fusionforge/templates/userprefs.tmpl:314
-#, fuzzy, php-format
-msgid "Add %s:"
-msgstr "ヒット数:"
+#: ../themes/default/templates/userprefs.tmpl:232
+#: ../themes/fusionforge/templates/userprefs.tmpl:334
+#, php-format
+msgid "Add %s"
+msgstr "ヒット数"
 
-#: ../themes/default/templates/userprefs.tmpl:224
-#: ../themes/fusionforge/templates/userprefs.tmpl:316
+#: ../themes/default/templates/userprefs.tmpl:234
+#: ../themes/fusionforge/templates/userprefs.tmpl:337
 #, php-format
 msgid ""
 "Add Google links to unknown pages behind the '?', and the create action "
 "behind the pagename instead. See %s."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:225
+#: ../themes/default/templates/userprefs.tmpl:237
 msgid "Enable DoubleClick Edit"
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:227
+#: ../themes/default/templates/userprefs.tmpl:239
 #, php-format
 msgid ""
 "Enabled makes it hard to double-click words and sentences for cut and paste. "
 "See %s."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:230
-#: ../themes/fusionforge/templates/userprefs.tmpl:318
+#: ../themes/default/templates/userprefs.tmpl:241
+#: ../themes/fusionforge/templates/userprefs.tmpl:340
 #: ../themes/Portland/templates/editpage.tmpl:46
 msgid "Edit Area Size"
 msgstr "編集エリアのサイズ"
 
-#: ../themes/default/templates/userprefs.tmpl:233
-#: ../themes/fusionforge/templates/userprefs.tmpl:321
+#: ../themes/default/templates/userprefs.tmpl:244
+#: ../themes/fusionforge/templates/userprefs.tmpl:343
 msgid "Height"
 msgstr "高さ"
 
-#: ../themes/default/templates/userprefs.tmpl:240
-#: ../themes/fusionforge/templates/userprefs.tmpl:328
+#: ../themes/default/templates/userprefs.tmpl:251
+#: ../themes/fusionforge/templates/userprefs.tmpl:350
 msgid "Width"
 msgstr "幅"
 
-#: ../themes/default/templates/userprefs.tmpl:249
-#: ../themes/fusionforge/templates/userprefs.tmpl:337
+#: ../themes/default/templates/userprefs.tmpl:260
+#: ../themes/fusionforge/templates/userprefs.tmpl:359
 msgid ""
 "Note that many browsers will automatically adjust the width of the editing "
 "area so that it fills the browser window.  In this case, the width "
 "preference will be ignored."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:252
-#: ../themes/fusionforge/templates/userprefs.tmpl:340
+#: ../themes/default/templates/userprefs.tmpl:263
+#: ../themes/fusionforge/templates/userprefs.tmpl:362
 msgid "Time Zone"
 msgstr "タイムゾーン"
 
-#: ../themes/default/templates/userprefs.tmpl:255
-#: ../themes/fusionforge/templates/userprefs.tmpl:343
+#: ../themes/default/templates/userprefs.tmpl:266
+#: ../themes/fusionforge/templates/userprefs.tmpl:365
 #, php-format
 msgid "Add %s hours to the server's local time when reporting times."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:259
-#: ../themes/fusionforge/templates/userprefs.tmpl:347
+#: ../themes/default/templates/userprefs.tmpl:270
+#: ../themes/fusionforge/templates/userprefs.tmpl:369
 #, php-format
 msgid "The current time at the server is %s."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:261
-#: ../themes/fusionforge/templates/userprefs.tmpl:349
+#: ../themes/default/templates/userprefs.tmpl:272
+#: ../themes/fusionforge/templates/userprefs.tmpl:371
 #, php-format
 msgid "With the current offset, this would be reported as %s."
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:266
-#: ../themes/fusionforge/templates/userprefs.tmpl:354
+#: ../themes/default/templates/userprefs.tmpl:277
+#: ../themes/fusionforge/templates/userprefs.tmpl:376
 msgid "Date Format"
 msgstr "データフォーマット"
 
-#: ../themes/default/templates/userprefs.tmpl:269
-#: ../themes/fusionforge/templates/userprefs.tmpl:357
+#: ../themes/default/templates/userprefs.tmpl:282
+#: ../themes/fusionforge/templates/userprefs.tmpl:381
 msgid "Show relative dates using 'Today' and 'Yesterday'"
 msgstr ""
 
-#: ../themes/default/templates/userprefs.tmpl:276
-#: ../themes/fusionforge/templates/userprefs.tmpl:365
+#: ../themes/default/templates/userprefs.tmpl:289
+#: ../themes/fusionforge/templates/userprefs.tmpl:389
 msgid "Update Preferences"
 msgstr "設定を更新しました"
 
-#: ../themes/default/templates/userprefs.tmpl:277
-#: ../themes/fusionforge/templates/userprefs.tmpl:366
+#: ../themes/default/templates/userprefs.tmpl:290
+#: ../themes/fusionforge/templates/userprefs.tmpl:390
 #, fuzzy
 msgid "Reset Preferences"
 msgstr "参照一覧"
@@ -8542,20 +8417,13 @@ msgstr "ユーザーID:"
 #: ../themes/fusionforge/templates/actionbar.tmpl:20
 #: ../themes/fusionforge/templates/actionbar.tmpl:40
 #, fuzzy
-msgid "Action Page"
-msgstr "操作ページ"
-
-#: ../themes/fusionforge/templates/actionbar.tmpl:20
-#: ../themes/fusionforge/templates/actionbar.tmpl:40
-#, fuzzy
 msgid "Page"
 msgstr "ホームページ"
 
 #: ../themes/fusionforge/templates/actionbar.tmpl:32
 #: ../themes/MonoBook/templates/actionbar.tmpl:25
-#, fuzzy
 msgid "Template/Talk"
-msgstr "テーマ"
+msgstr ""
 
 #: ../themes/fusionforge/templates/actionbar.tmpl:54
 #: ../themes/MonoBook/templates/actionbar.tmpl:35
@@ -8572,7 +8440,7 @@ msgid "History"
 msgstr "ページ履歴"
 
 #: ../themes/fusionforge/templates/actionbar.tmpl:72
-#: ../themes/fusionforge/templates/userprefs.tmpl:248
+#: ../themes/fusionforge/templates/userprefs.tmpl:249
 #, fuzzy
 msgid "Last Difference"
 msgstr "設定を更新しました"
@@ -8588,13 +8456,13 @@ msgid "Back Links"
 msgstr "ログイン"
 
 #: ../themes/fusionforge/templates/actionbar.tmpl:108
-#: ../themes/fusionforge/templates/userprefs.tmpl:270
+#: ../themes/fusionforge/templates/userprefs.tmpl:271
 #, fuzzy
 msgid "Change Owner"
 msgstr "国名変更"
 
 #: ../themes/fusionforge/templates/actionbar.tmpl:113
-#: ../themes/fusionforge/templates/userprefs.tmpl:275
+#: ../themes/fusionforge/templates/userprefs.tmpl:276
 msgid "Access Rights"
 msgstr ""
 
@@ -8621,19 +8489,12 @@ msgid "Make the page public?"
 msgstr ""
 
 #: ../themes/fusionforge/templates/editpage.tmpl:67
-#, fuzzy
 msgid "Make the page external?"
-msgstr "あなたの個人のテーマを選択:"
-
-#: ../themes/fusionforge/templates/navbar.tmpl:9
-#, fuzzy
-msgid "Home Page"
-msgstr "ホームページ"
+msgstr ""
 
 #: ../themes/fusionforge/templates/navbar.tmpl:10
-#, fuzzy
 msgid "Recent Changes"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../themes/fusionforge/templates/navbar.tmpl:11
 #, fuzzy
@@ -8646,13 +8507,14 @@ msgid "Special Pages"
 msgstr "シリアライズページを出力しています。"
 
 #: ../themes/fusionforge/templates/navbar.tmpl:14
-#: ../themes/fusionforge/templates/userprefs.tmpl:288
+#: ../themes/fusionforge/templates/userprefs.tmpl:294
+#: ../themes/MonoBook/templates/navbar.tmpl:20
 #, fuzzy
 msgid "Random Page"
 msgstr "ランダムページ"
 
 #: ../themes/fusionforge/templates/navbar.tmpl:17
-#: ../themes/fusionforge/templates/userprefs.tmpl:293
+#: ../themes/fusionforge/templates/userprefs.tmpl:299
 #, fuzzy
 msgid "Like Pages"
 msgstr "ページロック"
@@ -8668,9 +8530,10 @@ msgid "My User Page"
 msgstr "ユーザーページ"
 
 #: ../themes/fusionforge/templates/navbar.tmpl:27
+#: ../themes/MonoBook/templates/signin.tmpl:11
 #, fuzzy
-msgid "User Preferences"
-msgstr "ユーザー設定"
+msgid "My Preferences"
+msgstr "参照一覧"
 
 #: ../themes/fusionforge/templates/userprefs.tmpl:189
 #, fuzzy
@@ -8678,60 +8541,58 @@ msgid "User preferences for this project"
 msgstr "ユーザー設定"
 
 #: ../themes/fusionforge/templates/userprefs.tmpl:192
-#: ../themes/fusionforge/templates/userprefs.tmpl:214
-#, fuzzy
+#: ../themes/fusionforge/templates/userprefs.tmpl:215
 msgid "E-mail Notification"
-msgstr "メールアドレスを確認出来ました。"
+msgstr ""
 
-#: ../themes/fusionforge/templates/userprefs.tmpl:210
+#: ../themes/fusionforge/templates/userprefs.tmpl:211
 #, fuzzy
 msgid "Global user preferences (for all projects)"
 msgstr "ユーザー設定"
 
-#: ../themes/fusionforge/templates/userprefs.tmpl:240
+#: ../themes/fusionforge/templates/userprefs.tmpl:241
 msgid "Menus"
 msgstr ""
 
-#: ../themes/fusionforge/templates/userprefs.tmpl:244
+#: ../themes/fusionforge/templates/userprefs.tmpl:245
 msgid "Top Menu"
 msgstr ""
 
-#: ../themes/fusionforge/templates/userprefs.tmpl:259
+#: ../themes/fusionforge/templates/userprefs.tmpl:260
 msgid "PDF"
 msgstr ""
 
-#: ../themes/fusionforge/templates/userprefs.tmpl:284
+#: ../themes/fusionforge/templates/userprefs.tmpl:283
+msgid "Check menu items to display."
+msgstr ""
+
+#: ../themes/fusionforge/templates/userprefs.tmpl:290
 msgid "Left Menu"
 msgstr ""
 
-#: ../themes/fusionforge/templates/userprefs.tmpl:301
-#, fuzzy
-msgid "Check menu items to display."
-msgstr "ページのロックを解除中です。"
-
-#: ../themes/fusionforge/templates/userprefs.tmpl:308
+#: ../themes/fusionforge/templates/userprefs.tmpl:316
 #, fuzzy
 msgid "Show Page Trail"
 msgstr "ページ名"
 
-#: ../themes/fusionforge/templates/userprefs.tmpl:310
+#: ../themes/fusionforge/templates/userprefs.tmpl:319
 msgid "Show Page Trail at top of page."
 msgstr ""
 
-#: ../themes/fusionforge/templates/userprefs.tmpl:313
+#: ../themes/fusionforge/templates/userprefs.tmpl:328
 msgid "Hide or show LinkIcons."
 msgstr ""
 
-#: ../themes/fusionforge/themeinfo.php:73
+#: ../themes/fusionforge/themeinfo.php:69
 #, fuzzy
 msgid "This page is external."
 msgstr "'%s' の削除に成功しました。"
 
-#: ../themes/fusionforge/themeinfo.php:75
+#: ../themes/fusionforge/themeinfo.php:71
 msgid "This project is shared with third-party users"
 msgstr ""
 
-#: ../themes/fusionforge/themeinfo.php:76
+#: ../themes/fusionforge/themeinfo.php:72
 #, php-format
 msgid " (non %s users)."
 msgstr ""
@@ -8764,9 +8625,8 @@ msgid "Author history"
 msgstr "編集者:"
 
 #: ../themes/MonoBook/templates/actionbar.tmpl:80
-#, fuzzy
 msgid "Page dump"
-msgstr "ページグループ"
+msgstr ""
 
 #: ../themes/MonoBook/templates/actionbar.tmpl:83
 #, fuzzy
@@ -8783,15 +8643,9 @@ msgstr ""
 msgid "GeneralDisclaimer"
 msgstr ""
 
-#: ../themes/MonoBook/templates/navbar.tmpl:15
-#, fuzzy
-msgid "Home page"
-msgstr "ホームページ"
-
 #: ../themes/MonoBook/templates/navbar.tmpl:16
-#, fuzzy
 msgid "Recent changes"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../themes/MonoBook/templates/navbar.tmpl:16
 #: ../themes/Sidebar/templates/navbar.tmpl:45
@@ -8804,19 +8658,13 @@ msgid "Recent comments"
 msgstr "コメント"
 
 #: ../themes/MonoBook/templates/navbar.tmpl:18
-#, fuzzy
 msgid "Recent new pages"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../themes/MonoBook/templates/navbar.tmpl:19
 #, fuzzy
 msgid "Like pages"
 msgstr "ページロック"
-
-#: ../themes/MonoBook/templates/navbar.tmpl:20
-#, fuzzy
-msgid "Random page"
-msgstr "ランダムページ"
 
 #: ../themes/MonoBook/templates/navbar.tmpl:30
 #, fuzzy
@@ -8824,9 +8672,8 @@ msgid "Find page"
 msgstr "ページ検索"
 
 #: ../themes/MonoBook/templates/navbar.tmpl:36
-#, fuzzy
 msgid "Search:"
-msgstr "検索"
+msgstr "検索:"
 
 #: ../themes/MonoBook/templates/navbar.tmpl:48
 #: ../themes/Sidebar/templates/navbar.tmpl:42
@@ -8839,20 +8686,13 @@ msgid "What links here"
 msgstr ""
 
 #: ../themes/MonoBook/templates/navbar.tmpl:55
-#, fuzzy
 msgid "Related changes"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../themes/MonoBook/templates/navbar.tmpl:58
 #: ../themes/Sidebar/templates/navbar.tmpl:71
 msgid "Administration"
 msgstr ""
-
-#: ../themes/MonoBook/templates/navbar.tmpl:61
-#: ../themes/Sidebar/templates/navbar.tmpl:51
-#, fuzzy
-msgid "Upload file"
-msgstr "ファイル読込み"
 
 #: ../themes/MonoBook/templates/navbar.tmpl:61
 #: ../themes/Sidebar/templates/navbar.tmpl:51
@@ -8863,9 +8703,8 @@ msgstr ""
 #: ../themes/MonoBook/templates/navbar.tmpl:69
 #: ../themes/Sidebar/templates/navbar.tmpl:55
 #: ../themes/Sidebar/templates/navbar.tmpl:60
-#, fuzzy
 msgid "Printable version"
-msgstr "現在のバージョン"
+msgstr ""
 
 #: ../themes/MonoBook/templates/navbar.tmpl:74
 #: ../themes/Sidebar/templates/navbar.tmpl:65
@@ -8877,20 +8716,13 @@ msgstr ""
 msgid "My Discussion"
 msgstr "バージョン"
 
-#: ../themes/MonoBook/templates/signin.tmpl:11
-#, fuzzy
-msgid "My Preferences"
-msgstr "参照一覧"
-
 #: ../themes/MonoBook/templates/signin.tmpl:12
-#, fuzzy
 msgid "MyRecentChanges"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../themes/MonoBook/templates/signin.tmpl:12
-#, fuzzy
 msgid "My Changes"
-msgstr "変更履歴"
+msgstr ""
 
 #: ../themes/MonoBook/templates/signin.tmpl:13
 #: ../themes/Sidebar/templates/signin.tmpl:10
@@ -8928,11 +8760,6 @@ msgstr ""
 msgid "View Page"
 msgstr "ページロック"
 
-#: ../themes/Sidebar/templates/actionbar.tmpl:15
-#, fuzzy
-msgid "View the page"
-msgstr "新規ページ"
-
 #: ../themes/Sidebar/templates/actionbar.tmpl:20
 msgid "You can edit this page. Please use the preview button before saving."
 msgstr ""
@@ -8951,14 +8778,12 @@ msgid "Add/Remove this to/from the list of pages you're monitoring for changes"
 msgstr ""
 
 #: ../themes/Sidebar/templates/navbar.tmpl:23
-#, fuzzy
 msgid "Main Categories"
-msgstr "ホームページ作成:"
+msgstr ""
 
 #: ../themes/Sidebar/templates/search.tmpl:36
-#, fuzzy
 msgid "Search term(s)"
-msgstr "検索"
+msgstr ""
 
 #: ../themes/Sidebar/templates/signin.tmpl:19
 msgid "Login required..."
@@ -8969,258 +8794,28 @@ msgid "Sidebar"
 msgstr "スライドバー"
 
 #: ../themes/Wordpress/templates/actionbar.tmpl:10
-#, fuzzy
 msgid "Edit this page"
 msgstr "ページを編集しています。"
 
-#: ../themes/Wordpress/templates/actionbar.tmpl:10
-#, fuzzy
-msgid "Edit old revision"
-msgstr "古いリビジョンを編集する"
+#: ../themes/Wordpress/templates/browse.tmpl:10
+msgid "View the current version"
+msgstr "現在のバージョンを表示する"
 
 #, fuzzy
-#~ msgid "Server rejected address: "
-#~ msgstr "選択ページを全て削除"
-
-#, fuzzy
-#~ msgid "Next >>"
-#~ msgstr "次へ"
-
-#, fuzzy
-#~ msgid "Version %s, saved %s"
-#~ msgstr "バージョン %s"
-
-#, fuzzy
-#~ msgid "PageGroupTest"
-#~ msgstr "ページグループ"
-
-#, fuzzy
-#~ msgid "PageGroupTest/Four"
-#~ msgstr "ページグループ"
-
-#, fuzzy
-#~ msgid "PageGroupTest/One"
-#~ msgstr "ページグループ"
-
-#, fuzzy
-#~ msgid "PageGroupTest/Three"
-#~ msgstr "ページグループ"
-
-#, fuzzy
-#~ msgid "PageGroupTest/Two"
-#~ msgstr "ページグループ"
-
-#, fuzzy
-#~ msgid "%s b"
-#~ msgstr "%s バイト"
-
-#, fuzzy
-#~ msgid "/Discussion"
-#~ msgstr "バージョン"
-
-#, fuzzy
-#~ msgid "HasHomePage"
-#~ msgstr "ホームページ"
-
-#, fuzzy
-#~ msgid "List of pages created by [%s] ({total} total):"
-#~ msgstr "%s のページ履歴一覧"
-
-#, fuzzy
-#~ msgid "Include of '%s' failed."
-#~ msgstr "%s のインクルードに失敗しました。"
-
-#, fuzzy
-#~ msgid "Removed by: %s"
-#~ msgstr "編集: %s"
-
-#, fuzzy
-#~ msgid "Change page owner from %s to %s"
-#~ msgstr "%s から読込まれました。"
-
-#, fuzzy
-#~ msgid "Purge selected pages"
-#~ msgstr "選択ページを全て削除"
-
-#, fuzzy
-#~ msgid "List all pages."
-#~ msgstr "全ページ一覧"
-
-#, fuzzy
-#~ msgid "Page history"
-#~ msgstr "ページ履歴"
-
-#, fuzzy
-#~ msgid "User preferences for user '%s':"
-#~ msgstr "ユーザー設定"
-
-#, fuzzy
-#~ msgid "Full Search"
-#~ msgstr "全文検索"
-
-#, fuzzy
-#~ msgid "User: %s"
-#~ msgstr "ユーザーID:"
-
-#, fuzzy
-#~ msgid "(User: %s)"
-#~ msgstr "保存しました: 5s"
-
-#, fuzzy
-#~ msgid "mode"
-#~ msgstr "ページ削除"
-
-#, fuzzy
-#~ msgid "period"
-#~ msgstr "バージョン %d"
-
-#, fuzzy
-#~ msgid "WatchList"
-#~ msgstr "幅"
-
-#, fuzzy
-#~ msgid "name"
-#~ msgstr "名称"
-
-#, fuzzy
-#~ msgid "Back to the previous page."
-#~ msgstr "ページを作成しています。"
-
-#~ msgid "Add a Comment"
-#~ msgstr "コメント追加"
-
-#, fuzzy
-#~ msgid "Photos"
-#~ msgstr "フォトアルバム"
-
-#, fuzzy
-#~ msgid "Reverted page '%s' to version '%s'."
-#~ msgstr "'%s' の削除に成功しました。"
-
-#, fuzzy
-#~ msgid "Ok"
-#~ msgstr "おっけー"
-
-#~ msgid "Warning!"
-#~ msgstr "警告!"
-
-#, fuzzy
-#~ msgid "Signed as %s"
-#~ msgstr "%s を保存しました。"
-
-#, fuzzy
-#~ msgid "Sign in:"
-#~ msgstr "サインイン"
-
-#~ msgid "db backend:"
-#~ msgstr "データベースバックエンド"
-
-#~ msgid "dba handler:"
-#~ msgstr "dbaハンドラー"
-
-#~ msgid "timeout:"
-#~ msgstr "タイムアウト"
-
-#, fuzzy
-#~ msgid "Replaced link in %s."
-#~ msgstr "プレインファイル %s"
-
-#, fuzzy
-#~ msgid "Description: "
-#~ msgstr "説明"
-
-#, fuzzy
-#~ msgid "BlockQuote"
-#~ msgstr "ロックしました"
-
-#~ msgid "Last Modified:"
-#~ msgstr "最終更新日時"
-
-#~ msgid "Last Author:"
-#~ msgstr "最終編集者"
-
-#~ msgid "Author:"
-#~ msgstr "編集者:"
-
-#~ msgid "The PhpWiki Programming Team"
-#~ msgstr "PukiWikiプログラミングチーム"
-
-#, fuzzy
-#~ msgid "Continue"
-#~ msgstr "コンテンツ"
-
-#, fuzzy
-#~ msgid "Selected Pages: %s"
-#~ msgstr "保存しました: 5s"
-
-#, fuzzy
-#~ msgid "Update Settings"
-#~ msgstr "設定を更新しました"
-
-#~ msgid "Remove page"
-#~ msgstr "ページ削除"
-
-#, fuzzy
-#~ msgid "_PreferencesInfo"
-#~ msgstr "ユーザー設定"
-
-#~ msgid "Edit Area Size:"
-#~ msgstr "編集エリアサイズ"
-
-#, fuzzy
-#~ msgid "PhpWiki News"
-#~ msgstr "Wiki名"
-
-#, fuzzy
-#~ msgid "by \"%s\""
-#~ msgstr "%s バイト"
-
-#, fuzzy
-#~ msgid "Owner: \"%s\""
-#~ msgstr "ユーザーID:"
-
-#~ msgid "Comment:"
-#~ msgstr "コメント"
-
-#~ msgid "Last Summary:"
-#~ msgstr "最終概要"
-
-#, fuzzy
-#~ msgid "no schema %s found"
+#~ msgid "No pagename specified"
 #~ msgstr "変更点が見つかりませんでした。"
 
 #, fuzzy
-#~ msgid "Your home page is: "
-#~ msgstr "ホームページ"
+#~ msgid "No page specified."
+#~ msgstr "変更点が見つかりませんでした。"
+
+#~ msgid "too long"
+#~ msgstr "長すぎます。"
 
 #, fuzzy
-#~ msgid "Last Post"
-#~ msgstr "最後へ"
+#~ msgid "Invalid pagename!"
+#~ msgstr "ユーザーIDかパスワードが無効です。"
 
 #, fuzzy
-#~ msgid "User-ID:"
-#~ msgstr "ユーザーID:"
-
-#, fuzzy
-#~ msgid "E-Mail:"
-#~ msgstr "メール"
-
-#, fuzzy
-#~ msgid "First Name:"
-#~ msgstr "最初へ"
-
-#, fuzzy
-#~ msgid "Last Name:"
-#~ msgstr "ページ名"
-
-#~ msgid "Selected"
-#~ msgstr "選択しました"
-
-#~ msgid "Notify"
-#~ msgstr "通知"
-
-#~ msgid "Default system theme:"
-#~ msgstr "デフォルトシステムテーマ"
-
-#~ msgid "Default system language:"
-#~ msgstr "デフォルトシステム言語"
+#~ msgid "' in page name."
+#~ msgstr "'%s': ページ名が正しくありません"

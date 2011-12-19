@@ -1,4 +1,4 @@
-<?php
+<?php // -*-php-*- $Id: g 8196 2011-11-29 11:13:40Z vargenau $
 
 /*
  * Copyright (C) 2008-2010 Alcatel-Lucent
@@ -51,6 +51,11 @@ require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfplugins.'wiki/common/wikiconfig.class.php';
 
+html_use_jquery();
+if (forge_get_config('use_jquery_form_navigate')) {
+	use_javascript('/scripts/jquery-formnavigate/jquery.FormNavigate-min.js');
+}
+
 if (!$group_id || !$project) {
     exit_no_group();
 } else if (!($project->usesPlugin("wiki"))) {
@@ -70,6 +75,9 @@ if (!$group_id || !$project) {
 
     define('VIRTUAL_PATH', '/wiki/g/'.$group_name);
     define('PAGE_PREFIX', '_g'.$group_id.'_');
+
+    // We have to use a smaller value than Phpwiki due to page prefix
+    define('MAX_PAGENAME_LENGTH', 92);
 
     define('THEME', 'fusionforge');
 

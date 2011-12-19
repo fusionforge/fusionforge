@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: WikiForm.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: WikiForm.php 8158 2011-10-03 12:40:18Z vargenau $
 /**
  * Copyright 1999, 2000, 2001, 2002, 2004 $ThePhpWikiProgrammingTeam
  *
@@ -71,7 +71,7 @@ extends WikiPlugin
         case 'login':
             $input['name'] = 'source';
             if (!$buttontext)
-                $buttontext = _("Login");
+                $buttontext = _("Sign In");
             $class = 'wikiadmin';
             break;
         case 'dumpserial':

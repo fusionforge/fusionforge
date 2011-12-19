@@ -1,5 +1,5 @@
 <?php
-// $Id: display.php 8086 2011-05-20 12:58:49Z vargenau $
+// $Id: display.php 8173 2011-11-04 09:23:48Z vargenau $
 /* Copyright (C) 2004-2011 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
@@ -295,7 +295,12 @@ function displayPage(&$request, $template=false) {
                                            RedirectorLink($redirect_from)));
     // abuse the $redirected template var for some status update notice
     } elseif ($request->getArg('errormsg')) {
-        $redirect_message = $request->getArg('errormsg');
+        $redirect_message = HTML::p(array('class' => 'error'),
+                                          $request->getArg('errormsg'));
+        $request->setArg('errormsg', false);
+    } elseif ($request->getArg('warningmsg')) {
+        $redirect_message = HTML::p(array('class' => 'warning_msg'),
+                                          $request->getArg('warningmsg'));
         $request->setArg('errormsg', false);
     }
 

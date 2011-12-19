@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: actionbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+// $Id: actionbar.tmpl 8149 2011-10-03 10:12:40Z vargenau $
   $dbh = $request->getDbh();
   $isAdmin = $user->isAdmin();
   $pagename = $page->getName();
@@ -12,7 +12,7 @@
   <h5><?php echo _("Views") ?></h5>
   <ul>
     <?php if ($request->getArg('action') != "") { ?>
-      <?php echo ActionButton("browse", _("View Page"), false, array('title' => _("View the page")." [alt-c]")) ?>
+      <?php echo ActionButton("browse", _("View Page"), false, array('title' => _("View Page")." [alt-c]")) ?>
     <?php } else { ?>
       <li class="selected"><a class="named-wiki" name="browse"><?php echo _("View Page") ?></a></li>
     <?php } ?>

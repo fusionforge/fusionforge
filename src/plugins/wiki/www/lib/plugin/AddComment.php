@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: AddComment.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: AddComment.php 8212 2011-12-16 13:26:15Z vargenau $
 /*
  * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
  *
@@ -69,8 +69,9 @@ extends WikiPlugin_WikiBlog
 
     function run($dbi, $argstr, &$request, $basepage) {
         $args = $this->getArgs($argstr, $request);
-        if (!$args['pagename'])
-            return $this->error(_("No pagename specified"));
+        if (!$args['pagename']) {
+            return $this->error(sprintf(_("A required argument '%s' is missing."), 'pagename'));
+        }
 
         // Get our form args.
         $comment = $request->getArg("comment");

@@ -4564,7 +4564,7 @@ src/plugins/wiki/www/themes/default/toolbar.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/toolbar.js -text
 src/plugins/wiki/www/themes/default/wikicommon-min.js -text
 src/plugins/wiki/www/themes/default/wikicommon.js -text
-src/plugins/wiki/www/themes/default/yuicompressor-2.4.2.jar -text
+src/plugins/wiki/www/themes/default/yuicompressor-2.4.7.jar -text
 src/plugins/wiki/www/themes/fusionforge/Makefile -text
 src/plugins/wiki/www/themes/fusionforge/buttons/asc_order.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/fusionforge/buttons/desc_order.png -text svneol=unset#image/png

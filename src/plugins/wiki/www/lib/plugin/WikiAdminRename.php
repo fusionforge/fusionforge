@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: WikiAdminRename.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: WikiAdminRename.php 8166 2011-10-03 14:49:15Z vargenau $
 /*
  * Copyright 2004,2005,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -89,7 +89,7 @@ extends WikiPlugin_WikiAdminSelect
                     $version = $current->getVersion();
                     $meta = $current->_data;
                     $text = $current->getPackedContent();
-                    $meta['summary'] = sprintf(_("Renamed page from '%s' to '%s'"), $name, $newname);
+                    $meta['summary'] = sprintf(_("Renamed page from '%s' to '%s'."), $name, $newname);
                     $meta['is_minor_edit'] = 1;
                     $meta['author'] = $request->_user->UserName();
                     unset($meta['mtime']); // force new date
@@ -104,7 +104,7 @@ extends WikiPlugin_WikiAdminSelect
                         $meta['author'] = $request->_user->UserName();
                         $page->save($text, 1, $meta);
                     }
-                    $ul->pushContent(HTML::li(fmt("Renamed page '%s' to '%s'.",
+                    $ul->pushContent(HTML::li(fmt("Renamed page from '%s' to '%s'.",
                                                   $name, WikiLink($newname))));
                     $count++;
                 } else {
@@ -212,7 +212,7 @@ extends WikiPlugin_WikiAdminSelect
             $header = $this->renameForm($header, $post_args, $singlepage);
         } else {
             if ($singlepage === true) {
-                $button_label = _("Rename page");
+                $button_label = _("Rename Page");
             } else {
                 $button_label = _("Rename selected pages");
             }
@@ -238,7 +238,7 @@ extends WikiPlugin_WikiAdminSelect
         return HTML::form(array('action' => $request->getPostURL(),
                                 'method' => 'post'),
                           HTML::fieldset(
-                              HTML::legend(_("Rename page")),
+                              HTML::legend(_("Rename Page")),
                               $header,
                               $buttons,
                               $list,

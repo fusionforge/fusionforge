@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: ModeratedPage.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: ModeratedPage.php 8212 2011-12-16 13:26:15Z vargenau $
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -59,8 +59,9 @@ extends WikiPlugin
 
         // Handle moderation request from urls sent by email
         if (!empty($args['id']) and !empty($args['pass'])) {
-            if (!$args['page'])
-                return $this->error("No page specified");
+            if (!$args['page']) {
+                return $this->error(sprintf(_("A required argument '%s' is missing."), 'page'));
+            }
             $page = $dbi->getPage($args['page']);
             if ($moderated = $page->get("moderated")) {
                 if (array_key_exists($args['id'], $moderated['data'])) {

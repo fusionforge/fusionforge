@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: CreateBib.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: CreateBib.php 8212 2011-12-16 13:26:15Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -108,7 +108,7 @@ extends WikiPlugin
             $pagename = $page->name;
         }
         if (!$pagename) {
-            return $this->error(_("no page specified"));
+            return $this->error(sprintf(_("A required argument '%s' is missing."), 'pagename'));
         }
 
         // Get the links page contents
@@ -149,9 +149,7 @@ extends WikiPlugin
             // Yes, we want to dump this somewhere
             // Get the contents of this page
             $p = $dbi->getPage($pagename);
-            $c = $p->getCurrentRevision();
-            $pagedata = $c->getContent();
-            $this->dumpFile($pagedata, $request->getArg('file'));
+            return $this->dumpFile($p, $request->getArg('file'));
         }
 
         return $html;

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: viewsource.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+// $Id: viewsource.tmpl 8155 2011-10-03 12:33:36Z vargenau $
 ?>
 
 <div class="wikitext" id="viewform">
@@ -12,7 +12,7 @@ if ($page->get('locked') && !$user->isAdmin()) { ?>
 <?php } ?>
 <?php if (! $revision->isCurrent()) { ?>
   <p class="warning_msg"><?php echo _("You are viewing an old revision of this page.")?>
-  <?php echo Button('viewsource', _("View the current version"), $page)?>.</p>
+  <?php echo Button('viewsource', _("View the current version."), $page)?></p>
 <?php } ?>
 <textarea class="wikiedit"
           name="content"

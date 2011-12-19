@@ -1,5 +1,5 @@
 <?php
-// $Id: InlineParser.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: InlineParser.php 8194 2011-11-29 10:07:03Z vargenau $
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004-2010 Reini Urban
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -387,8 +387,20 @@ function LinkBracketLink($bracketlink) {
         if (preg_match("/%2F(%20)+\./i", $rawlink)) {
             $rawlink = preg_replace("/%2F(%20)+\./i","%2F.",$rawlink);
         }
-    } else
+    } else {
+        // Check page name lenght
+        if (strlen($rawlink) > MAX_PAGENAME_LENGTH) {
+            return HTML::span(array('class' => 'error'),
+                                    _('Page name too long'));
+        }
+        // Check illegal characters in page names: <>[]{}|"
+        if (preg_match("/[<\[\{\|\"\}\]>]/", $rawlink, $matches) > 0) {
+            return HTML::span(array('class' => 'error'),
+                         sprintf(_("Illegal character '%s' in page name."),
+                                 $matches[0]));
+        }
         $link  = UnWikiEscape($rawlink);
+    }
 
     /* Relatives links by Joel Schaubert.
      * Recognize [../bla] or [/bla] as relative links, without needing http://
@@ -1084,7 +1096,9 @@ class Markup_template_plugin  extends SimpleMarkup
 
         // It's not a Mediawiki template, it's a Wikicreole image
         if (is_image($imagename)) {
-            if ($imagename[0] == '/') {
+            if ((strpos($imagename, "http://") === 0) || (strpos($imagename, "https://") === 0)) {
+                return LinkImage($imagename, $alt);
+            } else if ($imagename[0] == '/') {
                 return LinkImage(DATA_PATH . '/' . $imagename, $alt);
             } else {
                 return LinkImage(getUploadDataPath() . $imagename, $alt);

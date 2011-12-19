@@ -1,5 +1,5 @@
 /**
- *  $Id: main.css 7989 2011-03-10 13:04:24Z vargenau $
+ *  $Id: main.css 8114 2011-09-23 12:18:10Z vargenau $
  */
 
 /*
@@ -218,6 +218,20 @@ pre {
     background-color: #f9f9f9;
     line-height: 1.1em;
 }
+
+/* generic classes ----------------------------------------------- */
+
+.align-left {text-align: left;}
+.align-right {text-align: right;}
+.align-center {text-align: center;}
+  
+.top {vertical-align: top;}
+
+.nowrap {white-space: nowrap;}
+
+.fullwidth { width: 100%; }
+
+/* --------------------------------------------------------------- */
 
 /*
 ** the main content area
@@ -1776,6 +1790,8 @@ blockquote.mail-style-quote {
 .mail-style-quote blockquote.mail-style-quote {
   margin-left: -0.6em;
 }
+
+/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
 
 /*
  * table class="boxed"

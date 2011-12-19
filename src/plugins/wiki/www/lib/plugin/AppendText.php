@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: AppendText.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: AppendText.php 8162 2011-10-03 12:52:28Z vargenau $
 /*
  * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
  *
@@ -86,7 +86,7 @@ extends WikiPlugin
         $message = HTML();
 
         if (!$page->exists()) { // We might want to create it?
-            $message->pushContent(sprintf(_("Page could not be updated. %s doesn't exist!\n"),
+            $message->pushContent(sprintf(_("Page could not be updated. %s doesn't exist!"),
                                             $pagename));
             return $message;
         }

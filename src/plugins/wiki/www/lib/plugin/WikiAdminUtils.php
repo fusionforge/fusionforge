@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: WikiAdminUtils.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: WikiAdminUtils.php 8160 2011-10-03 12:42:28Z vargenau $
 /**
  * Copyright 2003,2004,2006 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -110,7 +110,7 @@ extends WikiPlugin
                         'purge-bad-pagenames'         => _("Purge all Pages With Invalid Names"),
                         'purge-empty-pages'         => _("Purge all empty, unreferenced Pages"),
                         'access-restrictions'         => _("Access Restrictions"),
-                        'email-verification'         => _("Email Verification"),
+                        'email-verification'         => _("E-mail address confirmation"),
                         'convert-cached-html'         => _("Convert cached_html"),
                         'db-check'                 => _("DB Check"),
                         'db-rebuild'                 => _("Db Rebuild")
@@ -229,7 +229,7 @@ extends WikiPlugin
         $dbi = $request->getDbh();
         $pagelist = new PageList('pagename',0,$args);
         //$args['return_url'] = 'action=email-verification-verified';
-        $email = new _PageList_Column_email('email',_("E-Mail"),'left');
+        $email = new _PageList_Column_email('email',_("E-mail"),'left');
         $emailVerified = new _PageList_Column_emailVerified('emailVerified',
                                                             _("Verification Status"),'center');
         $pagelist->_columns[0]->_heading = _("Username");

@@ -1,4 +1,4 @@
-<?php // $Id: WikiTheme.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php // $Id: WikiTheme.php 8170 2011-11-02 13:08:16Z vargenau $
 /* Copyright (C) 2002,2004,2005,2006,2008,2009,2010 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
@@ -446,7 +446,7 @@ class WikiTheme {
 
         $mtime = $revision->get('mtime');
         if ($mtime <= EPOCH)
-            return fmt("Never edited");
+            return _("Never edited");
 
         if ($show_version == 'auto')
             $show_version = !$revision->isCurrent();
@@ -459,7 +459,7 @@ class WikiTheme {
             if ($show_version)
                 return fmt("Version %s, saved on %s", $revision->getVersion(), $date);
             else
-                return fmt("Last edited %s", $date);
+                return fmt("Last edited on %s", $date);
         }
 
         if ($this->_showModTime)
@@ -1015,9 +1015,6 @@ class WikiTheme {
                 $page = $page_or_rev;
             }
             $pagename = $page->getName();
-        }
-        elseif (is_numeric($page_or_rev)) {
-            $version = $page_or_rev;
         }
         else {
             $pagename = (string) $page_or_rev;

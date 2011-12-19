@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// $Id: themeinfo.php 7968 2011-03-07 13:39:47Z vargenau $
+// $Id: themeinfo.php 8150 2011-10-03 10:15:16Z vargenau $
 
 /**
  * This file defines a blog theme for PhpWiki,
@@ -65,8 +65,8 @@ class WikiTheme_blog extends WikiTheme {
         switch ($action) {
             case 'edit':   return _("Edit");
             case 'diff':   return _("Diff");
-            case 'logout': return _("SignOut");
-            case 'login':  return _("SignIn");
+            case 'logout': return _("Sign Out");
+            case 'login':  return _("Sign In");
             case 'lock':   return _("Lock");
             case 'unlock': return _("Unlock");
             case 'remove': return _("Remove");

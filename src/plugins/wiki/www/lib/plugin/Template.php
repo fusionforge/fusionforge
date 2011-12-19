@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: Template.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: Template.php 8212 2011-12-16 13:26:15Z vargenau $
 /*
  * Copyright 2005,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -105,7 +105,7 @@ extends WikiPlugin
             $page = $page->name;
         }
         if (!$page) {
-            return $this->error(_("No page specified."));
+            return $this->error(sprintf(_("A required argument '%s' is missing."), 'page'));
         }
 
         // If "Template:$page" exists, use it

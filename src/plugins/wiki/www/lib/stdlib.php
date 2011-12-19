@@ -1,4 +1,4 @@
-<?php // $Id: stdlib.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php // $Id: stdlib.php 8197 2011-11-29 11:18:41Z vargenau $
 /*
  * Copyright 1999-2008 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -108,7 +108,9 @@
 if (defined('_PHPWIKI_STDLIB_LOADED')) return;
 else define('_PHPWIKI_STDLIB_LOADED', true);
 
-define('MAX_PAGENAME_LENGTH', 100);
+if (!defined('MAX_PAGENAME_LENGTH')) {
+    define('MAX_PAGENAME_LENGTH', 100);
+}
 
 /**
  * Convert string to a valid XML identifier.
@@ -386,7 +388,7 @@ function IsSafeURL($url) {
 function LinkURL($url, $linktext = '') {
     // FIXME: Is this needed (or sufficient?)
     if(! IsSafeURL($url)) {
-        $link = HTML::span(array('class' => 'error'), _("BAD URL -- remove all of <, >, \""));
+        $link = HTML::span(array('class' => 'error'), _('Bad URL -- remove all of <, >, "'));
         return $link;
     }
     else {
@@ -420,7 +422,7 @@ function LinkImage($url, $alt = "") {
     if (empty($alt)) $alt = "";
 
     if (! IsSafeURL($url)) {
-        $link = HTML::span(array('class' => 'error'), _("BAD URL -- remove all of <, >, \""));
+        $link = HTML::span(array('class' => 'error'), _('Bad URL for image -- remove all of <, >, "'));
         return $link;
     }
     // spaces in inline images must be %20 encoded!
@@ -430,9 +432,9 @@ function LinkImage($url, $alt = "") {
     $arr = parse_attributes(strstr($url, " "));
     foreach ($arr as $attr => $value) {
         // strip attr=... url suffix
+        $link->setAttr('src', $url);
         $i = strpos($url, $attr);
         $url = substr($url, 0, $i-1);
-        $link->setAttr('src', $url);
         // These attributes take strings: lang, id, title, alt
         if (($attr == "lang")
           || ($attr == "id")
@@ -441,13 +443,18 @@ function LinkImage($url, $alt = "") {
             $link->setAttr($attr, $value);
         }
         // align = bottom|middle|top|left|right
+        // we allow "center" as synonym for "middle"
         elseif (($attr == "align")
           && (($value == "bottom")
             || ($value == "middle")
+            || ($value == "center")
             || ($value == "top")
             || ($value == "left")
             || ($value == "right"))) {
-            $link->setAttr($attr, $value);
+                if ($value == "center") {
+                    $value = "middle";
+                }
+                $link->setAttr($attr, $value);
         }
         // These attributes take a number (pixels): border, hspace, vspace
         elseif ((($attr == "border") || ($attr == "hspace") || ($attr == "vspace"))
@@ -469,11 +476,11 @@ function LinkImage($url, $alt = "") {
                 $link->setAttr('width',$m[1]);
                 $link->setAttr('height',$m[2]);
             }
-        }
-        else {
+        } else {
+            $url = substr(strrchr($ori_url, "/"), 1);
             $link = HTML::span(array('class' => 'error'),
-                          sprintf(_("Invalid image attribute \"%s\" %s=%s"),
-                                  $url, $attr, $value));
+                          sprintf(_("Invalid attribute %s=%s for image %s"),
+                                  $attr, $value, $url));
             return $link;
         }
     }
@@ -557,7 +564,7 @@ function LinkImage($url, $alt = "") {
      * png|jpg|gif|jpeg|bmp|pl|cgi.  If no image it is an object to embed.
      * Note: Allow cgi's (pl,cgi) returning images.
      */
-    if (!preg_match("/\.(".$force_img.")/i", $url)) {
+    if (!preg_match("/\.(".$force_img.")/i", $ori_url)) {
         // HTML::img(array('src' => $url, 'alt' => $alt, 'title' => $alt));
         // => HTML::object(array('src' => $url)) ...;
         return ImgObject($link, $ori_url);
@@ -820,7 +827,7 @@ class WikiPageName
             $this->shortName = $name;
             if (strstr($name, ':')) {
                 list($moniker, $shortName) = explode (":", $name, 2);
-          $map = getInterwikiMap(); // allow overrides to custom maps
+                $map = getInterwikiMap(); // allow overrides to custom maps
                 if (isset($map->_map[$moniker])) {
                     $url = $map->_map[$moniker];
                     if (strstr($url, '%s'))
@@ -839,17 +846,17 @@ class WikiPageName
                     }
                     if (strstr($shortName, '?')) {
                         list($shortName, $dummy) = explode("\?", $shortName, 2);
-            }
+                    }
                     $this->shortName = $shortName;
                 }
             }
-        // FIXME: We should really fix the cause for "/PageName" in the WikiDB
+            // FIXME: We should really fix the cause for "/PageName" in the WikiDB
             if ($name == '' or $name[0] == SUBPAGE_SEPARATOR) {
                 if ($basename)
                     $name = $this->_pagename($basename) . $name;
                 else {
                     $name = $this->_normalize_bad_pagename($name);
-            $this->shortName = $name;
+                    $this->shortName = $name;
                 }
             }
         }
@@ -893,20 +900,20 @@ class WikiPageName
     }
 
     function _pagename($page) {
-    if (isa($page, 'WikiDB_Page'))
-        return $page->getName();
+        if (isa($page, 'WikiDB_Page'))
+            return $page->getName();
         elseif (isa($page, 'WikiDB_PageRevision'))
-        return $page->getPageName();
+            return $page->getPageName();
         elseif (isa($page, 'WikiPageName'))
-        return $page->name;
+            return $page->name;
         // '0' or e.g. '1984' should be allowed though
         if (!is_string($page) and !is_integer($page)) {
             trigger_error(sprintf("Non-string pagename '%s' (%s)(%s)",
                                   $page, gettype($page), get_class($page)),
                           E_USER_NOTICE);
         }
-    //assert(is_string($page));
-    return $page;
+        //assert(is_string($page));
+        return $page;
     }
 
     function _normalize_bad_pagename($name) {
@@ -960,7 +967,7 @@ class WikiPageName
         // not only for SQL, also to restrict url length
         if (strlen($pagename) > MAX_PAGENAME_LENGTH) {
             $pagename = substr($pagename, 0, MAX_PAGENAME_LENGTH);
-            $this->_errors[] = _("too long");
+            $this->_errors[] = _("Page name too long");
         }
 
         // disallow some chars only on file and cvs
@@ -1944,7 +1951,7 @@ class Alert {
 
         $buttons = $this->_buttons;
         if (!$buttons)
-            $buttons = array(_("Okay") => $request->getURLtoSelf());
+            $buttons = array(_("OK") => $request->getURLtoSelf());
 
         global $WikiTheme;
         foreach ($buttons as $label => $url)

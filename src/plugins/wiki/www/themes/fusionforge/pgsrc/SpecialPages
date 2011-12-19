@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:47:11 +0000
+Date: Fri,  1 Jul 2011 10:08:24 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: SpecialPages 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: SpecialPages 8099 2011-07-01 08:10:26Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=SpecialPages;
   flags=EXTERNAL_PAGE;
@@ -8,8 +8,8 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-{| cellpadding=5
-|- valign=top
+{| cellpadding="5"
+|- valign="top"
 |
 == Help ==
 * [[Help:../Help|Help]]
@@ -37,6 +37,9 @@ Content-Transfer-Encoding: binary
 
 == Categories ==
 * [[CategoryCategory]]
+
+== Interwikis ==
+* [[InterWikiMap]]
 |
 == Changes ==
 * [[RecentChanges]]

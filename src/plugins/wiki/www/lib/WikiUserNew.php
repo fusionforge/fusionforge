@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-//$Id: WikiUserNew.php 8072 2011-05-18 15:45:03Z vargenau $
+//$Id: WikiUserNew.php 8160 2011-10-03 12:42:28Z vargenau $
 /* Copyright (C) 2004,2005,2006,2007,2009,2010 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright (C) 2009-2010 Roger Guignard, Alcatel-Lucent
@@ -1779,7 +1779,7 @@ extends _UserPreference
             return;
         if (!empty($value) and !$verified) {
             list($ok,$msg) = ValidateMail($value);
-            if ($ok and mail($value,"[".WIKI_NAME ."] "._("Email Verification"),
+            if ($ok and mail($value,"[".WIKI_NAME ."] "._("E-mail address confirmation"),
                      sprintf(_("Welcome to %s!\nYour email account is verified and\nwill be used to send page change notifications.\nSee %s"),
                              WIKI_NAME, WikiURL($GLOBALS['request']->getArg('pagename'),'',true)))) {
                 $this->set('emailVerified',1);

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: GoogleMaps.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: GoogleMaps.php 8212 2011-12-16 13:26:15Z vargenau $
 /**
  * Copyright 2005 $ThePhpWikiProgrammingTeam
  *
@@ -88,10 +88,10 @@ extends WikiPlugin
         extract($args);
 
         if ($Longitude === '') {
-            return $this->error(fmt("%s parameter missing", "'Longitude'"));
+            return $this->error(sprintf(_("A required argument '%s' is missing."), 'Longitude'));
         }
         if ($Latitude === '') {
-            return $this->error(fmt("%s parameter missing", "'Latitude'"));
+            return $this->error(sprintf(_("A required argument '%s' is missing."), 'Latitude'));
         }
 
         $maps = JavaScript('',array('src'=>"http://maps.google.com/maps?file=api&v=1&key=" . GOOGLE_LICENSE_KEY));
@@ -100,7 +100,7 @@ extends WikiPlugin
         case "Satellite": $type = "_SATELLITE_TYPE"; break;
         case "Map":       $type = "_MAP_TYPE"; break;
         case "Hybrid":    $type = "_HYBRID_TYPE"; break;
-        default: return $this->error(sprintf(_("invalid argument %s"), $MapType));
+        default: return $this->error(sprintf(_("Invalid argument %s"), $MapType));
         }
         $div = HTML::div(array('id'=>$id,'style'=>'width: '.$width.'; height: '.$height));
 

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: WhoIsOnline.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: WhoIsOnline.php 8166 2011-10-03 14:49:15Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -72,7 +72,7 @@ extends WikiPlugin
     function box($args=false, $request=false, $basepage=false) {
         if (!$request) $request =& $GLOBALS['request'];
         $stats = $this->getStats($request->_dbi,$request,'summary');
-        return $this->makeBox(_("Who is online"),
+        return $this->makeBox(_("Who is Online"),
                               HTML(HTML::Raw('&middot; '),
                                    WikiLink(_("WhoIsOnline"),'auto',
                                             fmt("%d online users", $stats['NUM_USERS']))));

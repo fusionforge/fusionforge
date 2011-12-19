@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: WikiPoll.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: WikiPoll.php 8212 2011-12-16 13:26:15Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-lucent
@@ -139,8 +139,9 @@ extends WikiPlugin
             $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
             $request->setArg('nocache','purge');
         $args = $this->getArgs($argstr, $request);
-        if (!$args['page'])
-            return $this->error("No page specified");
+        if (!$args['page']) {
+            return $this->error(sprintf(_("A required argument '%s' is missing."), 'page'));
+        }
         if (!empty($args['admin']) and $request->_user->isAdmin()) {
             // reset statistics
             return $this->doPollAdmin($dbi, $request, $page);

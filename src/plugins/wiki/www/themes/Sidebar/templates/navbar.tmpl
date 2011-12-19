@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: navbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+// $Id: navbar.tmpl 8166 2011-10-03 14:49:15Z vargenau $
 ?>
 <?php
 // With MonoBook it is similar to Sidebar, named boxes at the left.
@@ -48,7 +48,7 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
       <li id="t-whatlinkshere"><?php echo Button(array('action'=>_("BackLinks")), _("What links here"), $page->getName()) ?></li>
     <?php } ?>
     <?php if (!empty($user) && $user->isSignedIn()) { ?>
-      <li><? $link = WikiLink(_("UpLoad"),"",_("Upload file")); $link->setAttr("accesskey","u"); $link->addTooltip(_("Upload images or media files")." [$p-u]"); ?><?php echo $link ?></li>
+      <li><? $link = WikiLink(_("UpLoad"),"",_("Upload File")); $link->setAttr("accesskey","u"); $link->addTooltip(_("Upload images or media files")." [$p-u]"); ?><?php echo $link ?></li>
       <li><?php echo WikiLink(_("UserPreferences"), "",_("Preferences")) ?></li>
     <?php } ?>
     <li>

@@ -1,5 +1,5 @@
 <?php
-// $Id: purgepage.php 8065 2011-05-04 10:27:44Z vargenau $
+// $Id: purgepage.php 8181 2011-11-22 16:53:45Z vargenau $
 require_once('lib/Template.php');
 
 function PurgePage (&$request) {
@@ -9,7 +9,9 @@ function PurgePage (&$request) {
     $pagelink = WikiLink($page);
 
     if ($request->getArg('cancel')) {
-        $request->redirect(WikiURL($page)); // noreturn
+        $request->redirect(WikiURL($page,
+                           array('warningmsg' => _('Purge cancelled'))));
+        // noreturn
     }
 
     $current = $page->getCurrentRevision();
@@ -22,7 +24,8 @@ function PurgePage (&$request) {
         $purgeB = Button('submit:verify', _("Purge Page"), 'wikiadmin');
         $cancelB = Button('submit:cancel', _("Cancel"), 'button'); // use generic wiki button look
 
-        $fieldset = HTML::fieldset(HTML::p(fmt("You are about to purge '%s'!", $pagelink)),
+        $fieldset = HTML::fieldset(HTML::legend(_('Confirm purge')),
+                                   HTML::p(fmt("You are about to purge '%s'!", $pagelink)),
                      HTML::form(array('method' => 'post',
                                       'action' => $request->getPostURL()),
                                 HiddenInputs(array('currentversion' => $version,

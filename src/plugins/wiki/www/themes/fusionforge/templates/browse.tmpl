@@ -1,17 +1,17 @@
 <?php // -*-php-*-
-// $Id: browse.tmpl 7720 2010-10-22 18:38:33Z vargenau $
+// $Id: browse.tmpl 8204 2011-11-29 13:38:06Z vargenau $
 
 $curuserprefs = $user->getPreferences();
 ?>
 
 <?php if ($page->exists() and $revision and $revision->hasDefaultContents()) { ?>
-  <p class="error"><strong><?php echo _("Error:")?></strong>
+  <p class="error"><?php echo _("Error:")?>
   <?php echo _("This revision of the page does not exist.")?>
   <?php echo Button('browse', _("View the current version."), $page)?>
   </p>
 <?php } else { ?>
 <?php if ($revision and !$revision->isCurrent()) { ?>
-  <p class="warning_msg"><strong><?php echo _("Note:")?></strong>
+  <p class="warning_msg"><?php echo _("Note:")?>
   <?php echo _("You are viewing an old revision of this page.")?>
   <?php echo Button('browse', _("View the current version."), $page)?>
   </p>

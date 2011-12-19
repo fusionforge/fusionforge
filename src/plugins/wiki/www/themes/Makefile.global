@@ -1,4 +1,4 @@
-# $Id: Makefile.global 7664 2010-08-31 15:42:34Z vargenau $
+# $Id: Makefile.global 8202 2011-11-29 13:08:05Z vargenau $
 #
 # themes/Makefile.global
 #
@@ -9,7 +9,7 @@
 THEMES = default MonoBook wikilens Sidebar SpaceWiki blog MacOSX fusionforge
 
 # http://developer.yahoo.com/yui/compressor/
-YUICOMPRESSOR = java -jar ../default/yuicompressor-2.4.2.jar
+YUICOMPRESSOR = java -jar ../default/yuicompressor-2.4.7.jar
 
 css: $(CSS_FILES)
 

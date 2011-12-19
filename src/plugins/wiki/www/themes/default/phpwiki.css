@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki.css 7965 2011-03-07 09:47:31Z vargenau $
+ * $Id: phpwiki.css 8114 2011-09-23 12:18:10Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up.
@@ -31,6 +31,19 @@ caption {
   width: 100%;
 }
 
+/* generic classes ----------------------------------------------- */
+
+.align-left {text-align: left;}
+.align-right {text-align: right;}
+.align-center {text-align: center;}
+  
+.top {vertical-align: top;}
+
+.nowrap {white-space: nowrap;}
+
+.fullwidth { width: 100%; }
+
+/* --------------------------------------------------------------- */
 
 /**
  * Wiki
@@ -323,25 +336,6 @@ textarea.wikiedit {
 }
 #LSResult .evenrow {
   background-color: #f0f0f0;
-}
-#LSREsult .oddrow {
-}
-.LSEnd {
-  text-align: right;
-}
-.LSRow:hover {
-  background-color: white;
-}
-.LSRow {
-  padding: 1px;
-}
-ul.LSRes {
-  margin: 0px;
-  padding: 0px;
-}
-li.LSRow {
-  margin: 0px;
-  list-style-image: none;
 }
 
 /* IncludePage plugin ================================================= */
@@ -984,6 +978,8 @@ a.wikibutton, a.wikibutton:visited, input.wikibutton  {
   padding-left: 1px;
   padding-right: 1px;
 }
+
+/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
 
 /*
  * table class="boxed"

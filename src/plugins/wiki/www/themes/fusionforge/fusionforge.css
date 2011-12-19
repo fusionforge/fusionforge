@@ -1,5 +1,5 @@
 /**
- * $Id: fusionforge.css 8071 2011-05-18 14:56:14Z vargenau $
+ * $Id: fusionforge.css 8112 2011-09-13 07:22:20Z vargenau $
  *
  * Copyright (C) 2002-2007 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Alcatel-Lucent
@@ -48,17 +48,14 @@
  */
 
 body {
-	margin: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #565c5e; /* Alcatel-Lucent grey */
 }
 
 form { margin: 0; }
 
-img { border: 0; vertical-align: middle; }
-
-body {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #565c5e; /* Alcatel-Lucent grey */
-}
+img { border: 0; vertical-align: baseline; }
 
 h1 { font-size: 1.8em; }
 h2 { font-size: 1.6em; line-height:1.1em;}
@@ -69,36 +66,36 @@ h6 { font-size: 0.6em; }
 
 /* Titles in the page. */
 h1, .titlebar, .widget_titlebar {
-	background: url(/themes/alcatel-lucent/images/bgrd_hpage_header.gif) white;
-	background-position: bottom;
-	background-repeat: repeat-x;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 4px;
-	padding-bottom: 6px;
-	border-top:1px solid #dddddd;
-	border-bottom:1px solid #dddddd;
-	vertical-align: middle;
-	font-family: 'trebuchet MS', Arial, Helvetica, sans-serif;
-	color: #554295; /* Alcatel-Lucent violet */
-	font-weight: normal;
-	font-size: 1.8em;
-	line-height: 1.3em;
-	text-align: left;
-	height: 24px;
-	margin-top: 4px;
+    background: url(/themes/base-alcatel-lucent/images/bgrd_hpage_header.gif) white;
+    background-position: bottom;
+    background-repeat: repeat-x;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 6px;
+    border-top:1px solid #dddddd;
+    border-bottom:1px solid #dddddd;
+    vertical-align: middle;
+    font-family: 'trebuchet MS', Arial, Helvetica, sans-serif;
+    color: #554295; /* Alcatel-Lucent violet */
+    font-weight: normal;
+    font-size: 1.8em;
+    line-height: 1.3em;
+    text-align: left;
+    height: 24px;
+    margin-top: 4px;
 }
 
 /* Hack for the wiki that inserts an unneccessary </p> */
 .titlebar p {
-	color: #554295; /* Alcatel-Lucent violet */
-	font-size: 1em;
-	margin-bottom: 0;
-	margin-top: 0;
+    color: #554295; /* Alcatel-Lucent violet */
+    font-size: 1em;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 .titlebar a {
-	padding-left: 10px;
+    padding-left: 10px;
 }
 
 /* Because in some cases there is a <p> in nested lists */
@@ -106,7 +103,6 @@ li p { margin:0; }
 
 div.wikitext table p { margin-top: 0.3em;  margin-bottom: 0.3em;}
 
-img { vertical-align: baseline; }
 input { margin: 0.1em; }
 input.numeric { text-align: right; }
 
@@ -118,10 +114,6 @@ legend {
     border: 1px solid #d8d8e7;
     background-color: white;
 }
-
-img { border: 0; }
-
-form { margin: 0ex; }
 
 table {
     /* For Mozilla */
@@ -136,7 +128,7 @@ caption {
 
 /**
  * Wiki Forms
- * 
+ *
  * The div inside the wikiadmin upload form does not
  * have a class yet, so it must be referenced indirectly
  */
@@ -180,8 +172,8 @@ img.inlineimage { vertical-align: middle; }
  * Wiki
  */
 
-div.wikitext pre { 
-  font-family: monospace; 
+div.wikitext pre {
+  font-family: monospace;
   border-width: 1px;
   border-color: navy;
   border-style: dashed;
@@ -257,10 +249,10 @@ h1 .backlinks { text-decoration: none; color: inherit; }
 .interwiki, i.interwiki .wikipage, em .interwiki .wikipage { font-style: oblique; }
 .interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
 
-table.wikipaging { 
+table.wikipaging {
     border-width: 1px;
-    border-style: solid; 
-    border-color: black; 
+    border-style: solid;
+    border-color: black;
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -284,8 +276,8 @@ div.toc p { margin: 0; }
 /**
  * headings
  */
-div.toc p.toctitle, h2, h3, h4, h5, h6 { 
-    font-family: Verdana, Arial, Helvetica, sans-serif; 
+div.toc p.toctitle, h2, h3, h4, h5, h6 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
     padding-top: .5em;
     padding-bottom: .17em;
     border-bottom: 1px solid #aaaaaa;
@@ -327,8 +319,8 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 /**
  * Toolbar
  */
-.toolbar, input.button { 
-    font-family: Verdana, Arial, Helvetica, sans-serif; 
+.toolbar, input.button {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 .toolbar {
@@ -448,34 +440,12 @@ textarea.wikiedit {
   display: none;
   z-index: 100;
   background-color: white;
-  border: 1px solid #d0d0d0; 
+  border: 1px solid #d0d0d0;
   font-size: 9px;
   overflow: hidden;
 }
-#LSHighlight {
-  background-color: #f08000;
-}
 #LSResult .evenrow {
   background-color: #f0f0f0;
-} 
-#LSREsult .oddrow {
-} 
-.LSEnd {
-  text-align: right;
-}
-.LSRow:hover {
-  background-color: white;
-}
-.LSRow {
-  padding: 1px;
-} 
-ul.LSRes {
-  margin: 0px;
-  padding: 0px;
-}
-li.LSRow {
-  margin: 0px;
-  list-style-image: none;
 }
 
 /* PageTrail plugin =================================================== */
@@ -494,14 +464,14 @@ li.LSRow {
   text-decoration: underline;
   margin-bottom: 0.25ex;
   margin-right:  0.25em;
-} 
+}
 .transclusion, .wiki-edithelp {
   font-size: smaller;
 }
 .transclusion {
   border: 1px solid gray;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
+  padding-left:  0.8em;
+  padding-right: 0.8em;
   padding-top:     0px;
   padding-bottom:  0px;
   margin-left:   0.25em;
@@ -538,13 +508,13 @@ table.cal {
   padding: 1px;
   /* For Mozilla */
   empty-cells: hide;
-} 
+}
 
 /* cells */
 table.cal td {
   background: white;
   text-align: right;
-} 
+}
 
 /* Month-name header */
 table.cal-header { font-size: larger; }
@@ -622,7 +592,7 @@ table.cal td.cal-today a.cal-hide {  }
   border-left: 1px #e8e6df solid;
   border-bottom: 1px #d2d2d2 solid;
   border-right:  1px #b2b2b2 solid;
-  padding-left:  0em; 
+  padding-left:  0em;
   padding-right: 0em;
   padding-top:    0ex;
   padding-bottom: 0ex;
@@ -700,13 +670,13 @@ div.success, div.feedback, div.warning, div.warning_msg, div.error, div.informat
    background-color: #BDE5F8;
 }
 
-p.success, p.feedback, 
-p.warning, p.warning_msg, 
-p.error, 
+p.success, p.feedback,
+p.warning, p.warning_msg,
+p.error,
 p.information,
-div.success, div.feedback, 
-div.warning, div.warning_msg, 
-div.error, 
+div.success, div.feedback,
+div.warning, div.warning_msg,
+div.error,
 div.information {
    text-align: left;
    background-repeat: no-repeat;
@@ -768,7 +738,7 @@ p.information {
 }
 
 .hint {
-    background-color: #eeeeee; 
+    background-color: #eeeeee;
     border-color: black;
 }
 
@@ -817,8 +787,8 @@ span.redirectfrom {
 .wiki-dl-table tr {
   border-top: 2px #444 solid;
   border-bottom: 2px #444 solid;
-  border-left: none; 
-  border-right: none; 
+  border-left: none;
+  border-right: none;
 }
 .wiki-dl-table th,
 .wiki-dl-table td {
@@ -844,7 +814,7 @@ blockquote.mail-style-quote {
     margin-bottom: 1em;
     border: 1px solid #284;
     padding: 0.5em;
-} 
+}
 .mail-style-quote blockquote.mail-style-quote {
     margin-left: 0.3em;
     margin-bottom : 0em;
@@ -1007,8 +977,8 @@ table.sqlresult td {
 
 /* TeX2png plugin ===================================================== */
 
-img.tex { 
-  vertical-align: middle; 
+img.tex {
+  vertical-align: middle;
 }
 
 /* PhotoAlbum plugin ================================================== */
@@ -1034,6 +1004,8 @@ img.tex {
     vertical-align: bottom;
     font-style: italic;
 }
+
+/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
 
 /*
  * table class="boxed"
@@ -1078,11 +1050,11 @@ table.boxed th, table.bordered th {
 
 div.boxright {
   background-color: #e9fbff;
-  width: 200px; 
+  width: 200px;
   right: 10px;
-  padding: 0.5em; 
-  float: right; 
-  border: thin solid; 
+  padding: 0.5em;
+  float: right;
+  border: thin solid;
   padding: 0.5em;
 }
 

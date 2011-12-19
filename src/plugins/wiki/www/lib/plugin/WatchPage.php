@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: WatchPage.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: WatchPage.php 8175 2011-11-04 10:04:45Z vargenau $
 /**
  * Copyright (C) 2006 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -135,7 +135,9 @@ extends WikiPlugin
                     $errmsg = '';
                 if ($request->getArg('cancel')) {
                     $request->redirect(WikiURL($request->getArg('pagename'),
-                                               false, 'absolute_url')); // noreturn
+                        array('warningmsg' => _('WatchPage cancelled')),
+                        'absolute_url'));
+                    // noreturn
                     return;
                 }
                 if ($request->getArg('edit')) {

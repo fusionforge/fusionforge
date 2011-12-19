@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// $Id: upgrade.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: upgrade.php 8156 2011-10-03 12:35:43Z vargenau $
 /*
  * Copyright 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -678,7 +678,7 @@ CREATE TABLE $log_tbl (
             echo "<b>",_("FIXING"),"remote_host</b>"," ... ";
             $this->dbi->genericSqlQuery("ALTER TABLE $accesslog_tbl CHANGE remote_host VARCHAR(100)");
         } else {
-            echo _("FAIL");
+            echo _("FAILED");
         }
         echo "<br />\n";
         }
@@ -886,7 +886,7 @@ CREATE TABLE $log_tbl (
                 $this->dbi->genericSqlQuery("ALTER TABLE $link_tbl ADD relation INT DEFAULT 0;");
                 $this->dbi->genericSqlQuery("CREATE INDEX link_relation ON $link_tbl (relation);");
             } else {
-                echo _("FAIL");
+                echo _("FAILED");
             }
             echo "<br />\n";
         }

@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// $Id: main.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: main.php 8205 2011-11-30 17:04:01Z vargenau $
 /*
  * Copyright 1999-2008 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -763,10 +763,18 @@ class WikiRequest extends Request {
         require_once("lib/Template.php");
         $page = $this->getPage();
         $pagename = $page->getName();
+        if (strlen($pagename) > MAX_PAGENAME_LENGTH) {
+            $pagename = substr($pagename, 0, MAX_PAGENAME_LENGTH-1) . '…';
+            $CONTENT = HTML::div(array('class' => 'error'),
+                                    _('Page name too long'));
+            GeneratePage($CONTENT, $pagename);
+            $this->finish();
+        }
         if (preg_match("/[<\[\{\|\"\}\]>]/", $pagename, $matches) > 0) {
             $CONTENT = HTML::div(
                          array('class' => 'error'),
-                         _("Illegal character '"). $matches[0] . _("' in page name."));
+                         sprintf(_("Illegal character '%s' in page name."),
+                                 $matches[0]));
             GeneratePage($CONTENT, $pagename);
             $this->finish();
         }
@@ -1026,7 +1034,7 @@ class WikiRequest extends Request {
             require_once("lib/plugin/_WikiTranslation.php");
             $trans = new WikiPlugin__WikiTranslation();
             $trans->lang = $LANG;
-        $default = $trans->translate_to_en($action, $LANG);
+            $default = $trans->translate_to_en($action, $LANG);
             if ($default and isActionPage($default))
                 return $cache[$action] = $default;
         } else {

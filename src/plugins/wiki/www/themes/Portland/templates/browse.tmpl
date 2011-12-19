@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: browse.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+// $Id: browse.tmpl 8155 2011-10-03 12:33:36Z vargenau $
 ?>
 
 <br class="clear-floats" />
@@ -7,7 +7,7 @@
 <?php if ($revision and !$revision->isCurrent()) { ?>
   <p><strong><?php echo _("Note:")?></strong>
      <?php echo _("You are viewing an old revision of this page.")?>
-     <?php echo WikiLink($page, 'existing', _("View the current version"))?>.</p>
+     <?php echo WikiLink($page, 'existing', _("View the current version."))?></p>
   <hr class="ignore" />
 <?php } ?>
 

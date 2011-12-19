@@ -1,19 +1,19 @@
-/*   
+/*
   Kubrick v1.2.5  for PhpWiki, by Rui Carmo - http://the.taoofmac.com
   Based on Michael Heilemann's excellent work for WordPress 1.2
   http://binarybonsai.com/kubrick/
-  
+
   This is a work in progress - some of the original CSS may need collapsing
 */
 
 body {
   margin: 20px auto;
-  padding: 0; 
+  padding: 0;
   font-size: 75%; /* Resets 1em to 10px */
   font-family: 'Lucida Grande', Verdana, Arial, sans-serif;
   background-color: #d5d6d7;
   color: #333;
-  background: url("images/kubrickbgcolor.png"); 
+  background: url("images/kubrickbgcolor.png");
 }
 
 #header {
@@ -34,7 +34,7 @@ body {
   background-color: transparent;
   font: bolder 67px/50px  Verdana, Arial, Helvetica, sans-serif;
   letter-spacing: -0.1em;
-  /*font-variant: condensed;*/ 
+  /*font-variant: condensed;*/
 }
 
 #yoursiteheader a:hover, #yoursiteheader a:link, #yoursiteheader a:visited {
@@ -61,7 +61,7 @@ div.actionbuttons a#btn-edit {
   display: none;
   z-index: 100;
   background-color: white;
-  border: 1px solid #d0d0d0; 
+  border: 1px solid #d0d0d0;
   font-size: 9px;
   overflow: hidden;
 }
@@ -72,27 +72,6 @@ div.actionbuttons a#btn-edit {
 
 #LSResult .evenrow {
   background-color: #f0f0f0;
-} 
-
-#LSREsult .oddrow {
-} 
-
-.LSEnd {
-  text-align: right;
-}
-.LSRow:hover {
-  background-color: white;
-}
-.LSRow {
-  padding: 1px;
-} 
-ul.LSRes {
-  margin: 0px;
-  padding: 0px;
-}
-li.LSRow {
-  margin: 0px;
-  list-style-image: none;
 }
 
 #sitemeter {
@@ -123,14 +102,14 @@ li.LSRow {
 #editarea-size input {
   font-size: 9px;
 }
- 
+
 #actionbuttons a {
   padding-right: 0px;
   font-size: 11px; /* we need pixel units here to match the background */
 }
 
 #pagetrail {
-  margin-left: 19px; 
+  margin-left: 19px;
   width: 540px;
 }
 
@@ -143,7 +122,7 @@ li.LSRow {
 
 #page {
   background-color: white;
-  background: url("images/kubrickbg.png"); 
+  background: url("images/kubrickbg.png");
   margin: 20px auto;
   padding: 0;
   width: 760px;
@@ -184,7 +163,6 @@ pre {
 
 .transclusion-title {
   margin: 0px;
-  
 }
 
 .transclusion {
@@ -233,7 +211,7 @@ div.comments {
 .widecolumn {
   line-height: 1.6em;
 }
-  
+
 .narrowcolumn .postmetadata {
   text-align: center;
   }
@@ -243,6 +221,20 @@ div.comments {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 }
+
+/* generic classes ----------------------------------------------- */
+
+.align-left {text-align: left;}
+.align-right {text-align: right;}
+.align-center {text-align: center;}
+
+.top {vertical-align: top;}
+
+.nowrap {white-space: nowrap;}
+
+.fullwidth { width: 100%; }
+
+/* --------------------------------------------------------------- */
 
 small {
   font-family: Arial, Helvetica, sans-serif;
@@ -377,7 +369,7 @@ tr.evenrow {
 small, #sidebar ul ul li, #sidebar ul ol li, .nocomments, .postmetadata, blockquote, strike {
   color: #777;
   }
-  
+
 code {
   font: 1.1em 'Courier New', Courier, monospace;
 }
@@ -402,7 +394,7 @@ a.namedurl {
   padding-right: 6px;
   margin-right: 0px;
   background: url("images/http.png") right top no-repeat;
-} 
+}
 /* https links */
 a.namedurl[href*="https"] {
   padding-right: 6px;
@@ -414,16 +406,16 @@ a.namedurl[href*="https"] {
 a.namedurl[href*="the.taoofmac.com"] {
   padding-right: 0px;
   background: none;
-} 
+}
 */
 /* interwiki */
 a.named-interwiki {
   padding-right: 6px;
   margin-right: 0px;
   background: url("images/interwiki.png") right top no-repeat;
-} 
+}
 
-#xhtml-validator { 
+#xhtml-validator {
   padding-bottom: 0;
   vertical-align: middle;
 }
@@ -463,10 +455,10 @@ a.named-interwiki {
   width: 710px;
   overflow: visible;
 }
-.wiki-edithelp { 
-  font-size: 0.81em; 
+.wiki-edithelp {
+  font-size: 0.81em;
 }
-#wikiblog-form div.wiki-edithelp { 
+#wikiblog-form div.wiki-edithelp {
   width: 550px;
   font-size:8pt;
 }
@@ -476,7 +468,7 @@ a.named-interwiki {
   margin: 5px auto;
   width: 450px;
 }
-  
+
 .post {
   margin: 0 0 40px;
   text-align: justify;
@@ -493,7 +485,7 @@ a.named-interwiki {
 .widecolumn .postmetadata {
   margin: 30px 0;
 }
-  
+
 
 /*  Begin Headers */
 h1 {
@@ -511,7 +503,7 @@ div.box-title, div.box-title a, div.box-title a:visited, div.box-title a:link {
   color: black;
 }
 div.box-data, div.box-data a, div.box-data a:visited, div.box-data a:link {
-  font-size:8pt; 
+  font-size:8pt;
 }
 
 #sidebar h2, #sidebar .box-title {
@@ -545,13 +537,13 @@ p img {
   thought?!) align the image to the right. And using 'class="centered',
   will of course center the image. This is much better than using
   align="center", being much more futureproof (and valid) */
-  
+
 img.centered {
   display: block;
   margin-left: auto;
   margin-right: auto;
   }
-  
+
 img.alignright {
   padding: 4px;
   margin: 0 0 2px 7px;
@@ -567,7 +559,7 @@ img.alignleft {
 .alignright {
   float: right;
   }
-  
+
 .alignleft {
   float: left
   }
@@ -584,7 +576,7 @@ html>body ul {
   list-style: none;
   padding-left: 10px;
   text-indent: -10px;
-  } 
+  }
 
 html>body li {
   margin: 0 0 0 10px;
@@ -609,7 +601,7 @@ html>body li {
   list-style-type: none;
   list-style-image: none;
 }
-  
+
 #sidebar ul, #sidebar ul ol {
   margin: 0;
   padding: 0;
@@ -648,7 +640,7 @@ ol li, #sidebar ul ol li {
   text-align: right;
   display: inline;
 }
-#wikiblog-summary { 
+#wikiblog-summary {
   font-weight: bold;
 }
 /* End Form Elements */
@@ -731,7 +723,7 @@ hr {
   border-left: 1px #e8e6df solid;
   border-bottom: 1px #d2d2d2 solid;
   border-right:  1px #b2b2b2 solid;
-  padding-left:  0em; 
+  padding-left:  0em;
   padding-right: 0em;
   padding-top:    0ex;
   padding-bottom: 0ex;
@@ -791,11 +783,11 @@ td.pageinfo { font-weight: bold; }
 /* plugin BoxRight */
 div.boxright {
   background-color: #e9fbff;
-  width: 200px; 
+  width: 200px;
   right: 10px;
-  padding: 0.5em; 
-  float: right; 
-  border: thin solid #888888; 
+  padding: 0.5em;
+  float: right;
+  border: thin solid #888888;
   padding: 0.5em;
 }
 
@@ -806,7 +798,7 @@ div.itemdesc {  padding-left: 1em; }
 div.rssitem { border-top: thin dashed #aaa; }
 
 /* SqlResult */
-table.sqlresult { 
+table.sqlresult {
   border: 1px outset gray;
   background: white;
   margin: 0.5ex 0.5em;
@@ -822,8 +814,8 @@ table.sqlresult td {
 /**
  * TeX2png plugin
  */
-img.tex { 
-  vertical-align: middle; 
+img.tex {
+  vertical-align: middle;
 }
 
 /**
@@ -888,6 +880,8 @@ span.wikiwyg_control_link a {
     padding: .2em;
     vertical-align: top;
 }
+
+/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
 
 /*
  * table class="boxed"

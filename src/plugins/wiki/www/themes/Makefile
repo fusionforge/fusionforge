@@ -1,4 +1,4 @@
-# $Id: Makefile 7664 2010-08-31 15:42:34Z vargenau $
+# $Id: Makefile 8202 2011-11-29 13:08:05Z vargenau $
 #
 # themes/Makefile
 #
@@ -11,7 +11,7 @@ THEMES = default MonoBook wikilens Sidebar SpaceWiki blog MacOSX fusionforge \
 	Portland shamino_com Crao Wordpress smaller Hawaiian
 
 # http://developer.yahoo.com/yui/compressor/
-YUICOMPRESSOR = java -jar default/yuicompressor-2.4.2.jar
+YUICOMPRESSOR = java -jar default/yuicompressor-2.4.7.jar
 
 all: 
 	$(foreach dir,$(THEMES),make -C $(dir);)

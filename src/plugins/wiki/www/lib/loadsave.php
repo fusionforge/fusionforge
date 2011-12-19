@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// $Id: loadsave.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: loadsave.php 8192 2011-11-29 09:52:45Z vargenau $
 
 /*
  * Copyright 1999,2000,2001,2002,2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
@@ -904,7 +904,7 @@ function SavePage (&$request, &$pageinfo, $source, $filename)
     // remove invalid backend specific chars. utf8 issues mostly
     $pagename_check = new WikiPagename($pageinfo['pagename']);
     if (!$pagename_check->isValid()) {
-        PrintXML(HTML::p(HTML::strong(_("Invalid pagename!")." ".$pageinfo['pagename'])));
+        PrintXML(HTML::p(HTML::strong(sprintf(_("'%s': Bad page name"), $pageinfo['pagename']))));
         return;
     }
     $pagename = $pagename_check->getName();
@@ -1073,35 +1073,29 @@ function RevertPage (&$request)
     $mesg = HTML::div();
     $pagename = $request->getArg('pagename');
     $version = $request->getArg('version');
-    if (!$version) {
-        PrintXML(HTML::p(fmt("Revert")," ",WikiLink($pagename)),
-                 HTML::p(_("missing required version argument")));
-        return;
-    }
     $dbi =& $request->_dbi;
     $page = $dbi->getPage($pagename);
+    if (!$version) {
+        $request->redirect(WikiURL($page,
+                           array('warningmsg' => _('Revert: missing required version argument'))));
+        // noreturn
+    }
     $current = $page->getCurrentRevision();
     $currversion = $current->getVersion();
     if ($currversion == 0) {
-        $mesg->pushContent(' ', _("no page content"));
-        PrintXML(HTML::p(fmt("Revert")," ",WikiLink($pagename)),
-                 $mesg);
-        flush();
-        return;
+        $request->redirect(WikiURL($page,
+                           array('errormsg' => _('No revert: no page content'))));
+        // noreturn
     }
     if ($currversion == $version) {
-        $mesg->pushContent(' ', _("same version page"));
-        PrintXML(HTML::p(fmt("Revert")," ",WikiLink($pagename)),
-                 $mesg);
-        flush();
-        return;
+        $request->redirect(WikiURL($page,
+                           array('warningmsg' => _('No revert: same version page'))));
+        // noreturn
     }
     if ($request->getArg('cancel')) {
-        $mesg->pushContent(' ', _("Cancelled"));
-        PrintXML(HTML::p(fmt("Revert")," ",WikiLink($pagename)),
-                 $mesg);
-        flush();
-        return;
+        $request->redirect(WikiURL($page,
+                           array('warningmsg' => _('Revert cancelled'))));
+        // noreturn
     }
     if (!$request->getArg('verify')) {
         $mesg->pushContent(HTML::p(fmt("Are you sure to revert %s to version $version?", WikiLink($pagename))),
@@ -1126,6 +1120,7 @@ function RevertPage (&$request)
     $content = $rev->getPackedContent();
     $versiondata = $rev->_data;
     $versiondata['summary'] = sprintf(_("revert to version %d"), $version);
+    $versiondata['mtime'] = time();
     $new = $page->save($content, $currversion + 1, $versiondata);
     $dbi->touch();
 

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: WikiAdminRemove.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: WikiAdminRemove.php 8184 2011-11-28 14:04:37Z vargenau $
 /*
  * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -195,6 +195,7 @@ extends WikiPlugin_WikiAdminSelect
         $header = HTML::fieldset();
         if ($next_action == 'verify') {
             $button_label = _("Yes");
+            $header->pushContent(HTML::legend(_("Confirm removal")));
             $header->pushContent(HTML::p(HTML::strong(
                 _("Are you sure you want to remove the selected files?"))));
         }

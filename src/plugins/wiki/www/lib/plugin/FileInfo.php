@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: FileInfo.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: FileInfo.php 8212 2011-12-16 13:26:15Z vargenau $
 /*
  * Copyright 2005,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -50,17 +50,19 @@ extends WikiPlugin
                      'display'   => false, // version,phonysize,size,date,mtime,owner,name,path,dirname,link.  (required)
                      'format'    => false, // printf format string with %s only, all display modes
                      'quiet'     => false  // print no error if file not found
-                                                // from above vars return strings (optional)
+                                           // from above vars return strings (optional)
                     );
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-            $args = $this->getArgs($argstr, $request);
+        $args = $this->getArgs($argstr, $request);
         extract($args);
-        if (!$file)
+        if (!$file) {
             return $this->error(sprintf(_("A required argument '%s' is missing."), 'file'));
-        if (!$display)
+        }
+        if (!$display) {
             return $this->error(sprintf(_("A required argument '%s' is missing."), 'display'));
+        }
         if (string_starts_with($file, "Upload:")) {
             $file = preg_replace("/^Upload:(.*)$/", getUploadFilePath()."\\1", $file);
             $is_Upload = 1;

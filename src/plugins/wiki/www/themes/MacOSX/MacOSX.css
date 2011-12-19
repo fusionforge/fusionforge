@@ -1,5 +1,5 @@
 /*
- $Id: MacOSX.css 7851 2011-01-21 13:17:59Z vargenau $
+ $Id: MacOSX.css 8114 2011-09-23 12:18:10Z vargenau $
 
  Classes:
 
@@ -58,6 +58,20 @@ div.wikiadmin input[type=text],
 form.wikiadmin input[type=file] {
   margin-right: 0.5em;
 }
+
+/* generic classes ----------------------------------------------- */
+
+.align-left {text-align: left;}
+.align-right {text-align: right;}
+.align-center {text-align: center;}
+  
+.top {vertical-align: top;}
+
+.nowrap {white-space: nowrap;}
+
+.fullwidth { width: 100%; }
+
+/* --------------------------------------------------------------- */
 
 /**
  * Wiki
@@ -413,7 +427,7 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   display: none;
   z-index: 100;
   background-color: white;
-  border: 1px solid #d0d0d0; 
+  border: 1px solid #d0d0d0;
   font-size: 9px;
   overflow: hidden;
 }
@@ -422,25 +436,6 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 }
 #LSResult .evenrow {
   background-color: #f0f0f0;
-} 
-#LSREsult .oddrow {
-} 
-.LSEnd {
-  text-align: right;
-}
-.LSRow:hover {
-  background-color: white;
-}
-.LSRow {
-  padding: 1px;
-} 
-ul.LSRes {
-  margin: 0px;
-  padding: 0px;
-}
-li.LSRow {
-  margin: 0px;
-  list-style-image: none;
 }
 
 .clear-floats {
@@ -472,8 +467,8 @@ dt a.wiki, dt a.named-wiki {
 dl>dt:first-child {
   margin-top: 0ex;
 }
-/* underline each dd.
-   use display:table to shrink width */
+/* underline each dd. */
+/* use display:table to shrink width */
 dd {
 /* overflows wide text beyond containing dl */
 /* in most browsers :( Would have been nice */
@@ -693,11 +688,11 @@ td.sidebar { border-spacing: 0px; margin: 0ex;}
 /* plugin BoxRight */
 div.boxright {
   background-color: #e9fbff;
-  width: 200px; 
+  width: 200px;
   right: 10px;
-  padding: 0.5em; 
-  float: right; 
-  border: thin solid #888888; 
+  padding: 0.5em;
+  float: right;
+  border: thin solid #888888;
   padding: 0.5em;
 }
 
@@ -708,7 +703,7 @@ div.itemdesc {  padding-left: 1em; }
 div.rssitem { border-top: thin dashed #aaa; }
 
 /* SqlResult */
-table.sqlresult { 
+table.sqlresult {
   border: 1px outset gray;
   background: white;
   margin: 0.5ex 0.5em;
@@ -724,8 +719,8 @@ table.sqlresult td {
 /**
  * TeX2png plugin
  */
-img.tex { 
-  vertical-align: middle; 
+img.tex {
+  vertical-align: middle;
 }
 
 /**
@@ -797,8 +792,8 @@ textarea.wikiedit, input.wikitext, textarea.summary {
   border-left:   1px solid #c3c3c3;
   border-bottom: 1px solid #dddddd;
   border-right:  1px solid #c3c3c3;
-  padding-left: 0.8em; 
-  padding-right: 0.8em; 
+  padding-left: 0.8em;
+  padding-right: 0.8em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   margin: 0.5ex 0px;
@@ -844,7 +839,7 @@ img.linkicon  {
 .diff .block div {
   position: relative;
   padding-left: 1.5em;
-} 
+}
 .diff .prefix {
   position: absolute;
   left: 0;
@@ -856,6 +851,8 @@ img.linkicon  {
   padding-left: 0.5ex;
   padding-right: 0.5ex;
 }
+
+/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
 
 /*
  * table class="boxed"
@@ -878,10 +875,10 @@ table.boxed, table.bordered, table.bordered th, table.bordered td {
 
 table.boxed td, table.bordered td,
 table.boxed th, table.bordered th {
-    padding-left: 5px; 
-    padding-right: 5px; 
-    padding-top: 0px; 
-    padding-bottom: 0px; 
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 table.boxed caption, table.bordered caption {

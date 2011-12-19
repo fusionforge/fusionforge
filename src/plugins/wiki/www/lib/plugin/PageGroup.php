@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: PageGroup.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: PageGroup.php 8212 2011-12-16 13:26:15Z vargenau $
 /**
  * Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -92,11 +92,7 @@ extends WikiPlugin
         $args = $this->getArgs($argstr, $request);
         extract($args);
         if (empty($parent)) {
-            // FIXME: WikiPlugin has no way to report when
-            // required args are missing?
-            $error_text = sprintf("%s: ", "WikiPlugin_" .$this->getName());
-            $error_text .= sprintf(_("A required argument '%s' is missing."), 'parent');
-            return HTML::div(array('class' => "error"), $error_text);
+            return $this->error(sprintf(_("A required argument '%s' is missing."), 'parent'));
         }
         $directions = array ('next'     => _("Next"),
                              'previous' => _("Previous"),

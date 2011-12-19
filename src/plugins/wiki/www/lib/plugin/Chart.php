@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: Chart.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: Chart.php 8212 2011-12-16 13:26:15Z vargenau $
 /*
  * Copyright 2007 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -62,7 +62,7 @@ extends WikiPlugin
                      // 'ylabel' => 'y', // TODO
                      'color' => 'green',
                      // 'legend' => false, // TODO
-                     'data' => false // mandatory
+                     'data' => false // required
                      );
     }
     function handle_plugin_args_cruft(&$argstr, &$args) {
@@ -73,7 +73,11 @@ extends WikiPlugin
 
         global $WikiTheme;
         $args = $this->getArgs($argstr, $request);
+        if (!$args['data']) {
+            return $this->error(sprintf(_("A required argument '%s' is missing."), 'data'));
+        }
         extract($args);
+
         $html = HTML();
         $js = JavaScript('', array ('src' => $WikiTheme->_findData('ASCIIsvg.js')));
         $html->pushContent($js);

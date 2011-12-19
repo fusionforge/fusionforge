@@ -1,6 +1,6 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
+Date: Fri, 16 Dec 2011 12:51:22 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FFileInfoPlugin 7757 2010-12-09 13:53:00Z vargenau $
+X-Rcs-Id: $Id: Help%2FFileInfoPlugin 8211 2011-12-16 11:54:21Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FFileInfoPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -32,11 +32,11 @@ For exe files the **version** argument might work to display the VERSIONINFO res
 |-
 | **file**
 | Relative path from PHPWIKI_DIR.
-| (required)
+| //None// (required argument)
 |-
 | **display**
 | Comma-seperated string of version, size, phonysize, date, mtime, owner, name, path, dirname, link, mime-typ, magic.
-| (required)
+| //None// (required argument)
 |-
 | **format**
 | printf format string with %s only, all display modes from above vars return strings

@@ -1,9 +1,9 @@
 // Toolbar JavaScript support functions. Taken from mediawiki 
-// $Id: toolbar.js 7686 2010-09-13 12:41:32Z vargenau $
+// $Id: toolbar.js 8113 2011-09-21 13:14:50Z vargenau $
 
 // Some "constants"
 var doctype = '<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">';
-var cssfile = '<link rel="stylesheet" type="text/css" href="'+data_path+'/themes/default/toolbar.css" />'
+var cssfile = '<link rel="stylesheet" type="text/css" href="'+data_path+'/themes/default/toolbar.css" />';
 
 // Un-trap us from framesets
 if( window.top != window ) window.top.location = window.location;
@@ -65,7 +65,7 @@ function do_pulldown(text,fromid) {
     // do special actions dependent on fromid: tb-categories
     if (fromid == 'tb-categories') {
 	var txtarea = document.getElementById('edit-content');
-	text = unescapeSpecial(text)
+	text = unescapeSpecial(text);
 	txtarea.value += '\n'+text;
     } else {
 	insertTags(text, '', '\n');
@@ -126,7 +126,7 @@ function insertTags(tagOpen, tagClose, sampleText) {
   //f=document.getElementById('editpage');
   var txtarea = document.getElementById('edit-content');
   // var txtarea = document.editpage.edit[content];
-  tagOpen = unescapeSpecial(tagOpen)
+  tagOpen = unescapeSpecial(tagOpen);
 
   if(document.selection) {
     var theSelection = document.selection.createRange().text;
@@ -175,21 +175,21 @@ function insertTags(tagOpen, tagClose, sampleText) {
 var f, sr_undo, replacewin, undo_buffer=new Array(), undo_buffer_index=0;
 
 function define_f() {
-   f=document.getElementById('editpage')
-   f.editarea=document.getElementById('edit-content')
-   sr_undo=document.getElementById('sr_undo')
-   undo_enable(false)
-   f.editarea.focus()
+   f=document.getElementById('editpage');
+   f.editarea=document.getElementById('edit-content');
+   sr_undo=document.getElementById('sr_undo');
+   undo_enable(false);
+   f.editarea.focus();
 }
 function undo_enable(bool) {
    if (bool) {
-     sr_undo.src=uri_undo_btn
-     sr_undo.alt=msg_undo_alt
-     sr_undo.disabled = false
+     sr_undo.src=uri_undo_btn;
+     sr_undo.alt=msg_undo_alt;
+     sr_undo.disabled = false;
    } else {
-       sr_undo.src=uri_undo_d_btn
-       sr_undo.alt=msg_undo_d_alt
-       sr_undo.disabled = true
+       sr_undo.src=uri_undo_d_btn;
+       sr_undo.alt=msg_undo_d_alt;
+       sr_undo.disabled = true;
        if(sr_undo.blur) sr_undo.blur();
    }
 }
@@ -208,9 +208,9 @@ function replace() {
    return false;
 }
 function do_replace() {
-   var txt = undo_buffer[undo_buffer_index]=f.editarea.value
-   var searchinput = new RegExp(replacewin.document.forms[0].searchinput.value,'g')
-   var replaceinput = replacewin.document.forms[0].replaceinput.value
+   var txt = undo_buffer[undo_buffer_index]=f.editarea.value;
+   var searchinput = new RegExp(replacewin.document.forms[0].searchinput.value,'g');
+   var replaceinput = replacewin.document.forms[0].replaceinput.value;
    if (searchinput==''||searchinput==null) {
       if (replacewin) replacewin.window.document.forms[0].searchinput.focus();
       return;
@@ -218,8 +218,8 @@ function do_replace() {
    var z_repl=txt.match(searchinput)? txt.match(searchinput).length : 0;
    txt=txt.replace(searchinput,replaceinput);
    searchinput=searchinput.toString().substring(1,searchinput.toString().length-2);
-   msg_replfound = msg_replfound.replace('\1', searchinput).replace('\2', z_repl).replace('\3', replaceinput)
-   msg_replnot = msg_replnot.replace('%s', searchinput)
+   msg_replfound = msg_replfound.replace('\1', searchinput).replace('\2', z_repl).replace('\3', replaceinput);
+   msg_replnot = msg_replnot.replace('%s', searchinput);
    result(z_repl, msg_replfound, txt, msg_replnot);
    replacewin.window.focus();
    replacewin.window.document.forms[0].searchinput.focus();
