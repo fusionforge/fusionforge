@@ -4706,6 +4706,7 @@ src/plugins/wiki/www/themes/wikilens/wikilens.js -text
 src/plugins/wiki/www/uploads/index.php -text
 src/plugins/wiki/www/wiki -text
 src/plugins/wiki/www/wikiadmin.php -text
+src/plugins/wiki/www/wikilist.php -text
 src/rpm-specific/Makefile -text
 src/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 src/rpm-specific/dag-rpmforge.repo -text
