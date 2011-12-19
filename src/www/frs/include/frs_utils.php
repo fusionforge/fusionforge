@@ -196,7 +196,7 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 
 
 	$group_unix_name = $release->getFRSPackage()->getGroup()->getUnixName() ;
-	$incoming = "forge_get_config('groupdir_prefix')/$group_unix_name/incoming" ;
+	$incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming" ;
 
 	$filechecks = false ;
 
