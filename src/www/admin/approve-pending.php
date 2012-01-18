@@ -109,7 +109,7 @@ if ($action == 'activate') {
 site_admin_header(array('title'=>_('Approving Pending Projects')), 'approve_projects');
 
 // get current information
-$res_grp = db_query_params("SELECT * FROM groups WHERE status='P'", array(), $LIMIT);
+$res_grp = db_query_params("SELECT * FROM groups WHERE status='P' AND is_template!=1", array(), $LIMIT);
 
 $rows = db_numrows($res_grp);
 
