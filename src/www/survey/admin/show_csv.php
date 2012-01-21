@@ -21,8 +21,8 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with FusionForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * along with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 require_once('../../env.inc.php');
@@ -42,7 +42,7 @@ $show_comment = getStringFromRequest('show_comment');
 
 $html = getStringFromRequest('html');
 
-/* We need a group_id */ 
+/* We need a group_id */
 if (!$group_id) {
     exit_no_group();
 }
@@ -76,7 +76,7 @@ if ($survey_id) {
 	    $types[$qid]=$type;
 	}
 
-    $one_question = $questions[0]; 
+    $one_question = $questions[0];
     $srf = new SurveyResponseFactory($s, $one_question);
     if (!$srf || !is_object($srf)) {
 		echo '<p class="error">'._("Error"). ' ' . _('Cannot get Survey Response Factory') ."</p>";
