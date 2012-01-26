@@ -52,6 +52,12 @@ class LdapextauthPlugin extends Plugin {
 		if (isset($user_dn)) {
 			$this->user_dn = $user_dn ;
 		}
+		if (isset($ldap_server)) {
+			$this->ldap_server = $ldap_server ;
+		}
+		if (isset($ldap_port)) {
+			$this->ldap_port = $ldap_port ;
+		}
 		if (isset($ldap_altserver)) {
 			$this->ldap_altserver = $ldap_altserver ;
 		}
@@ -60,6 +66,9 @@ class LdapextauthPlugin extends Plugin {
 		}
 		if (isset($ldap_start_tls)) {
 			$this->ldap_start_tls = $ldap_start_tls ;
+		}
+		if (isset($ldap_bind_dn)) {
+			$this->ldap_bind_dn = $ldap_bind_dn;
 		}
 		if (isset($ldap_bind_pwd)) {
 			$this->ldap_bind_pwd = $ldap_bind_pwd;
