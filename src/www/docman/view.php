@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -192,7 +193,7 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 				$docs = $df->getDocuments(1);	// no caching
 				if (is_array($docs) && count($docs) > 0) {	// this group has documents
 					foreach ($docs as $doc) {
-						if (!$zip->addFromString($doc->getFileName(),$doc->getFileData()))
+						if (!$zip->addFromString($doc->getFileName(), $doc->getFileData()))
 							exit_error(_('Unable to fill zipfile.'), 'docman');
 					}
 				}
