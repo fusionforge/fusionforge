@@ -34,7 +34,7 @@ forge_define_config_item ('anonsvn_login','scmsvn', 'anonsvn');
 forge_define_config_item ('anonsvn_password','scmsvn', 'anonsvn');
 
 class SVNPlugin extends SCMPlugin {
-	function SVNPlugin () {
+	function SVNPlugin() {
 		$this->SCMPlugin () ;
 		$this->name = 'scmsvn';
 		$this->text = 'Subversion';
@@ -45,23 +45,23 @@ class SVNPlugin extends SCMPlugin {
 		}
 		$this->svn_root_dav = '/svn';
 		$this->hooks[] = 'scm_browser_page';
-		$this->hooks[] = 'scm_update_repolist' ;
-		$this->hooks[] = 'scm_generate_snapshots' ;
-		$this->hooks[] = 'scm_gather_stats' ;
+		$this->hooks[] = 'scm_update_repolist';
+		$this->hooks[] = 'scm_generate_snapshots';
+		$this->hooks[] = 'scm_gather_stats';
 
 		$this->provides['svn'] = true;
 
-		$this->register () ;
+		$this->register();
 	}
 
 	function getDefaultServer() {
 		return forge_get_config('default_server', 'scmsvn') ;
 	}
 
-	function printShortStats ($params) {
-		$project = $this->checkParams ($params) ;
+	function printShortStats($params) {
+		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
 
 		if ($project->usesPlugin($this->name)) {
@@ -83,7 +83,7 @@ class SVNPlugin extends SCMPlugin {
 		return '<p>' . _('Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.') . '</p>';
 	}
 
-	function topModule ($project) {
+	function topModule($project) {
 		// Check toplevel module presence
 		$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$project->getUnixName().'/';
 		$res = array ();
@@ -96,7 +96,7 @@ class SVNPlugin extends SCMPlugin {
 		return '/'.$module;
 	}
 
-	function getInstructionsForAnon ($project) {
+	function getInstructionsForAnon($project) {
 		$b = '<h2>' . _('Anonymous Subversion Access') . '</h2>';
 		$b .= '<p>';
 		$b .= _("This project's SVN repository can be checked out through anonymous access with the following command(s).");
@@ -115,7 +115,7 @@ class SVNPlugin extends SCMPlugin {
 		return $b ;
 	}
 
-	function getInstructionsForRW ($project) {
+	function getInstructionsForRW($project) {
 		$b = '' ;
 
 		$module = $this->topModule($project);
@@ -164,11 +164,11 @@ class SVNPlugin extends SCMPlugin {
 		return $b ;
 	}
 
-	function getSnapshotPara ($project) {
+	function getSnapshotPara($project) {
 		return ;
 	}
 
-	function getBrowserLinkBlock ($project) {
+	function getBrowserLinkBlock($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Subversion Repository Browser'));
 		$b .= '<p>';
@@ -182,7 +182,7 @@ class SVNPlugin extends SCMPlugin {
 		return $b ;
 	}
 
-	function getStatsBlock ($project) {
+	function getStatsBlock($project) {
 		global $HTML ;
 		$b = '' ;
 
@@ -220,17 +220,17 @@ class SVNPlugin extends SCMPlugin {
 			$b .= $HTML->listTableBottom();
 		}
 
-		return $b ;
+		return $b;
 	}
 
-	function printBrowserPage ($params) {
-		$project = $this->checkParams ($params) ;
+	function printBrowserPage($params) {
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return false ;
 		}
 
-		if ($project->usesPlugin ($this->name)) {
-			if ($this->browserDisplayable ($project)) {
+		if ($project->usesPlugin($this->name)) {
+			if ($this->browserDisplayable($project)) {
 				session_redirect("/scm/viewvc.php/?root=".$project->getUnixName());
 			}
 		}
@@ -272,18 +272,18 @@ class SVNPlugin extends SCMPlugin {
 		}
 	}
 
-	function updateRepositoryList ($params) {
-		$groups = $this->getGroups () ;
+	function updateRepositoryList($params) {
+		$groups = $this->getGroups();
 
 		// Update WebDAV stuff
 		if (!forge_get_config('use_dav', 'scmsvn')) {
 			return true ;
 		}
 
-		$access_data = '' ;
-		$password_data = '' ;
+		$access_data = '';
+		$password_data = '';
 
-		$svnusers = array () ;
+		$svnusers = array();
 		foreach ($groups as $project) {
 			if ( !$project->isActive()) {
 				continue;
@@ -338,7 +338,7 @@ class SVNPlugin extends SCMPlugin {
 		rename ($fname.'.new', $fname) ;
 	}
 
-	function gatherStats ($params) {
+	function gatherStats($params) {
 		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
 			$adds, $deletes, $updates, $commits, $date_key,
 			$usr_adds, $usr_deletes, $usr_updates;
@@ -470,34 +470,34 @@ class SVNPlugin extends SCMPlugin {
 		}
 	}
 
-	function generateSnapshots ($params) {
+	function generateSnapshots($params) {
 
-		$project = $this->checkParams ($params) ;
+		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
 
-		$group_name = $project->getUnixName() ;
+		$group_name = $project->getUnixName();
 
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
-		if (! $project->usesPlugin ($this->name)) {
+		if (! $project->usesPlugin($this->name)) {
 			return false;
 		}
 
 		if (! $project->enableAnonSCM()) {
 			if (is_file($snapshot)) {
-				unlink ($snapshot) ;
+				unlink ($snapshot);
 			}
 			if (is_file($tarball)) {
-				unlink ($tarball) ;
+				unlink ($tarball);
 			}
 			return false;
 		}
 
-		$toprepo = forge_get_config('repos_path', 'scmsvn') ;
-		$repo = $toprepo . '/' . $project->getUnixName() ;
+		$toprepo = forge_get_config('repos_path', 'scmsvn');
+		$repo = $toprepo . '/' . $project->getUnixName();
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			if (is_file($snapshot)) {
