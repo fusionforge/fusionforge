@@ -184,7 +184,7 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 				$filename = 'docman-'.$g->getUnixName().'-'.$dg->getID().'.zip';
 				$file = forge_get_config('data_path').'/'.$filename;
 				$zip = new ZipArchive;
-				if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE))
+				if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE))
 					exit_error(_('Unable to open zip archive for download as zip'), 'docman');
 
 				// ugly workaround to get the files at doc_group_id level
@@ -192,8 +192,8 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 				$docs = $df->getDocuments(1);	// no caching
 				if (is_array($docs) && count($docs) > 0) {	// this group has documents
 					foreach ($docs as $doc) {
-						if ( !$zip->addFromString($doc->getFileName(),$doc->getFileData()))
-							return false;
+						if (!$zip->addFromString($doc->getFileName(),$doc->getFileData()))
+							exit_error(_('Unable to fill zipfile.'), 'docman');
 					}
 				}
 				if ( !docman_fill_zip($zip, $nested_groups, $df, $dg->getID()))
@@ -223,7 +223,7 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 			$filename = 'docman-'.$g->getUnixName().'-selected-'.time().'.zip';
 			$file = forge_get_config('data_path').'/'.$filename;
 			$zip = new ZipArchive;
-			if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE))
+			if (!$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE))
 				exit_error(_('Unable to open zip archive for download as zip'), 'docman');
 
 			foreach($arr_fileid as $docid) {
@@ -235,8 +235,8 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 						exit_error($d->getErrorMessage(), 'docman');
 					}
 
-					if ( !$zip->addFromString($d->getFileName(),$d->getFileData()))
-						return false;
+					if (!$zip->addFromString($d->getFileName(), $d->getFileData()))
+						exit_error(_('Unable to fill zipfile.'), 'docman');
 				} else {
 					$zip->close();
 					unlink($file);
