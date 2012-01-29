@@ -9,7 +9,8 @@
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://codex.xerox.com
  *
- * Copyright 2010 (c), Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -77,7 +78,7 @@ $scm_box = $Group->getSCMBox();
 //$external_scm = (gethostbyname(forge_get_config('web_host')) != gethostbyname($scm_box));
 $external_scm = !$sys_scm_single_host;
 
-if (!forge_check_perm ('scm', $Group->getID(), 'read')) {
+if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 	exit_permission_denied('scm');
 }
 
@@ -88,7 +89,7 @@ if ($external_scm) {
 	$server_script = preg_replace("/^\\//", "", $server_script);
 
 	// pass the parameters passed to this script to the remote script in the same fashion
-	$script_url = "http://".$scm_box."/".$server_script.$_SERVER["PATH_INFO"]."?".$_SERVER["QUERY_STRING"];
+	$script_url = "http://".$scm_box."/".$server_script.$_SERVER["PATH_INFO"]."?".preg_replace('/group_id=[0-9]+&/','',$_SERVER["QUERY_STRING"]);
 	$fh = @fopen($script_url, "r");
 	if (!$fh) {
 		exit_error(sprintf(_('Could not open script %s.'),$script_url),'home');
