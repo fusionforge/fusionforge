@@ -4,6 +4,7 @@
  *
  * Copyright 2004-2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -28,7 +29,7 @@ abstract class SCMPlugin extends Plugin {
 	 * SCMPlugin() - constructor
 	 *
 	 */
-	function SCMPlugin () {
+	function SCMPlugin() {
 		$this->Plugin() ;
 		$this->_addHook('scm_plugin');
 		$this->_addHook('scm_page');
@@ -44,8 +45,8 @@ abstract class SCMPlugin extends Plugin {
 		# scm_update_repolist
 	}
 
-	function CallHook ($hookname, &$params) {
-		global $HTML ;
+	function CallHook($hookname, &$params) {
+		global $HTML;
 
 		switch ($hookname) {
 			case 'scm_plugin': {
@@ -54,15 +55,15 @@ abstract class SCMPlugin extends Plugin {
 				break;
 			}
 			case 'scm_page': {
-				$this->printPage ($params) ;
+				$this->printPage($params);
 				break ;
 			}
 			case 'scm_browser_page': {
-				$this->printBrowserPage ($params) ;
+				$this->printBrowserPage($params);
 				break ;
 			}
 			case 'scm_admin_page': {
-				$this->printAdminPage ($params) ;
+				$this->printAdminPage($params);
 				break ;
 			}
 			case 'scm_admin_update': {
@@ -70,7 +71,7 @@ abstract class SCMPlugin extends Plugin {
 				break ;
 			}
 			case 'scm_stats': {
-				$this->printShortStats ($params) ;
+				$this->printShortStats($params);
 				break;
 			}
 			case 'scm_create_repo': {
@@ -79,18 +80,18 @@ abstract class SCMPlugin extends Plugin {
 				break;
 			}
 			case 'scm_update_repolist': {
-				session_set_admin () ;
-				$this->updateRepositoryList ($params) ;
+				session_set_admin();
+				$this->updateRepositoryList($params);
 				break;
 			}
 			case 'scm_generate_snapshots': {// Optional
-				session_set_admin () ;
-				$this->generateSnapshots ($params) ;
+				session_set_admin();
+				$this->generateSnapshots($params);
 				break;
 			}
 			case 'scm_gather_stats': { // Optional
-				session_set_admin () ;
-				$this->gatherStats ($params) ;
+				session_set_admin();
+				$this->gatherStats($params);
 				break;
 			}
 			case "widgets": { // Optional
@@ -106,31 +107,30 @@ abstract class SCMPlugin extends Plugin {
 		}
 	}
 
-	final function register () {
-		global $scm_list ;
+	final function register() {
+		global $scm_list;
 
-		$scm_list[] = $this->name ;
+		$scm_list[] = $this->name;
 	}
 
 	function browserDisplayable($project) {
-		if ($project->usesSCM()
-		    && $project->usesPlugin($this->name)
-		    && $project->enableAnonSCM()) {
-			return true;
-		} else {
-			return false;
+		if ($project->usesSCM() && $project->usesPlugin($this->name)) {
+			if ($project->enableAnonSCM() || forge_check_perm('scm', $project->getID(), 'read')) {
+				return true;
+			}
 		}
+		return false;
 	}
 
-	abstract function createOrUpdateRepo ($params) ;
+	abstract function createOrUpdateRepo($params);
 
-	function printShortStats ($params) {
-		$project = $this->checkParams ($params) ;
+	function printShortStats($params) {
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return false ;
 		}
 
-		if ($project->usesPlugin ($this->name)) {
+		if ($project->usesPlugin($this->name)) {
 			echo ' ('.$this->text.')' ;
 		}
 	}
@@ -151,7 +151,7 @@ abstract class SCMPlugin extends Plugin {
 		return '<p>' . _('Instructions for snapshot access for unimplemented SCM plugin.') . '</p>';
 	}
 
-	function getBrowserLinkBlock ($project) {
+	function getBrowserLinkBlock($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Repository Browser'));
 		$b .= '<p>';
@@ -165,7 +165,7 @@ abstract class SCMPlugin extends Plugin {
 		return $b ;
 	}
 
-	function getBrowserBlock ($project) {
+	function getBrowserBlock($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Repository Browser'));
 		$b .= '<p>';
@@ -174,7 +174,7 @@ abstract class SCMPlugin extends Plugin {
 		return $b ;
 	}
 
-	function getStatsBlock ($project) {
+	function getStatsBlock($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Repository Statistics'));
 		$b .= '<p>';
@@ -183,41 +183,41 @@ abstract class SCMPlugin extends Plugin {
 		return $b ;
 	}
 
-	function printPage ($params) {
+	function printPage($params) {
 		global $HTML;
 
-		$project = $this->checkParams ($params) ;
+		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
 
-		if ($project->usesPlugin ($this->name)) {
+		if ($project->usesPlugin($this->name)) {
 
 			// Table for summary info
-			print '<table class="fullwidth"><tr valign="top"><td style="width:65%">'."\n" ;
-			print $this->getBlurb ()."\n" ;
+			print '<table class="fullwidth"><tr valign="top"><td style="width:65%">'."\n";
+			print $this->getBlurb()."\n";
 
 			// Instructions for anonymous access
 			if ($project->enableAnonSCM()) {
-				print $this->getInstructionsForAnon ($project) ;
+				print $this->getInstructionsForAnon($project);
 			}
 
 			// Instructions for developer access
-			print $this->getInstructionsForRW ($project) ;
+			print $this->getInstructionsForRW($project);
 
-			if ($this->browserDisplayable ($project)) {
-				echo $this->getBrowserLinkBlock ($project) ;
+			if ($this->browserDisplayable($project)) {
+				echo $this->getBrowserLinkBlock($project);
 			}
 
 			// Snapshot
-			if ($this->browserDisplayable ($project)) {
-				print $this->getSnapshotPara ($project) ;
+			if ($this->browserDisplayable($project)) {
+				print $this->getSnapshotPara($project);
 			}
-			print '</td>'."\n".'<td style="width:35%" class="top">'."\n" ;
+			print '</td>'."\n".'<td style="width:35%" class="top">'."\n";
 
 			// Browsing
 			echo $HTML->boxTop(_('Repository History'));
-			echo _('Data about current and past states of the repository') ;
+			echo _('Data about current and past states of the repository');
 			if ($this->browserDisplayable($project)) {
 				echo $this->getStatsBlock($project);
 			}
@@ -230,7 +230,7 @@ abstract class SCMPlugin extends Plugin {
 	function printBrowserPage($params) {
 		global $HTML;
 
-		$project = $this->checkParams ($params) ;
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return false ;
 		}
