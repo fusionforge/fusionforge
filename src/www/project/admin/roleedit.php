@@ -42,81 +42,81 @@ if (getStringFromRequest('delete')) {
 	session_redirect('/project/admin/roledelete.php?group_id='.$group_id.'&role_id='.$role_id);
 }
 
-	if (getStringFromRequest('add')) {
-		$role_name = trim(getStringFromRequest('role_name')) ;
-		$role = new Role ($group) ;
-		$role_id=$role->createDefault($role_name) ;
-	} else {
-		$role = RBACEngine::getInstance()->getRoleById($role_id) ;
-	}
-	if (!$role || !is_object($role)) {
-		exit_error(_('Could Not Get Role'),'admin');
-	} elseif ($role->isError()) {
-		exit_error($role->getErrorMessage(),'admin');
-	}
+if (getStringFromRequest('add')) {
+	$role_name = trim(getStringFromRequest('role_name')) ;
+	$role = new Role ($group) ;
+	$role_id=$role->createDefault($role_name) ;
+} else {
+	$role = RBACEngine::getInstance()->getRoleById($role_id) ;
+}
+if (!$role || !is_object($role)) {
+	exit_error(_('Could Not Get Role'),'admin');
+} elseif ($role->isError()) {
+	exit_error($role->getErrorMessage(),'admin');
+}
 
-	$old_data = $role->getSettingsForProject ($group) ;
-	$new_data = array () ;
+$old_data = $role->getSettingsForProject ($group) ;
+$new_data = array () ;
 
-	if (!is_array ($data)) {
-		$data = array () ;
+if (!is_array ($data)) {
+	$data = array () ;
+}
+foreach ($old_data as $section => $values) {
+	if (!array_key_exists ($section, $data)) {
+		continue ;
 	}
-	foreach ($old_data as $section => $values) {
-		if (!array_key_exists ($section, $data)) {
+	foreach ($values as $ref_id => $val) {
+		if (!array_key_exists ($ref_id, $data[$section])) {
 			continue ;
 		}
-		foreach ($values as $ref_id => $val) {
-			if (!array_key_exists ($ref_id, $data[$section])) {
-				continue ;
-			}
-			$new_data[$section][$ref_id] = $data[$section][$ref_id] ;
-		}
+		$new_data[$section][$ref_id] = $data[$section][$ref_id] ;
 	}
-	$data = $new_data ;
-	if (getStringFromRequest('submit')) {
-		if (($role->getHomeProject() != NULL)
-		    && ($role->getHomeProject()->getID() == $group_id)) {
-			$role_name = trim(getStringFromRequest('role_name'));
-			$public = getIntFromRequest('public') ? true : false ;
-		} else {
-			$role_name = $role->getName() ;
-			$public = $role->isPublic() ;
-		}
-		if (!$role_name) {
-			$error_msg .= ' Missing Role Name ';
-		} else {
-			if (!$role_id) {
-				$role_id=$role->create($role_name,$data);
-				if (!$role_id) {
-					$error_msg .= $role->getErrorMessage();
-				} else {
-					$feedback = _('Successfully Created New Role');
-				}
-			} else {
-				if ($role instanceof RoleExplicit) {
-					$role->setPublic($public) ;
-				}
-				if (!$role->update($role_name,$data,false)) {
-					$error_msg .= $role->getErrorMessage();
-				} else {
-					$feedback = _('Successfully Updated Role');
-				}
-			}
-			//plugin webcal
-			//change assistant for webcal
-			$params = getIntFromRequest('group_id');
-			plugin_hook('change_cal_permission_auto',$params);
-		}
-	}
-
-	if (!$role_id) {
-		$title= _('New Role');
+}
+$data = $new_data ;
+if (getStringFromRequest('submit')) {
+	if (($role->getHomeProject() != NULL)
+		&& ($role->getHomeProject()->getID() == $group_id)) {
+		$role_name = trim(getStringFromRequest('role_name'));
+		$public = getIntFromRequest('public') ? true : false ;
 	} else {
-		$title= _('Edit Role');
+		$role_name = $role->getName() ;
+		$public = $role->isPublic() ;
 	}
-	$msg = _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the Anonymous role has read access to a forum, all other roles will have it too.');
+	if (!$role_name) {
+		$error_msg .= ' Missing Role Name ';
+	} else {
+		if (!$role_id) {
+			$role_id = $role->create($role_name, $data);
+			if (!$role_id) {
+				$error_msg .= $role->getErrorMessage();
+			} else {
+				$feedback = _('Successfully Created New Role');
+			}
+		} else {
+			if ($role instanceof RoleExplicit) {
+				$role->setPublic($public) ;
+			}
+			if (!$role->update($role_name, $data, false)) {
+				$error_msg .= $role->getErrorMessage();
+			} else {
+				$feedback = _('Successfully Updated Role');
+			}
+		}
+		//plugin webcal
+		//change assistant for webcal
+		$params = getIntFromRequest('group_id');
+		plugin_hook('change_cal_permission_auto', $params);
+	}
+}
 
-project_admin_header(array('title'=> $title,'group'=>$group_id));
+if (!$role_id) {
+	$title= _('New Role');
+} else {
+	$title= _('Edit Role');
+}
+$msg = _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the Anonymous role has read access to a forum, all other roles will have it too.');
+
+project_admin_header(array('title'=> $title, 'group'=>$group_id));
 
 echo '<p>'.$msg.'</p>';
 echo '
@@ -139,7 +139,7 @@ $titles[]=_('Section');
 $titles[]=_('Subsection');
 $titles[]=_('Setting');
 
-setup_rbac_strings () ;
+setup_rbac_strings();
 
 echo $HTML->listTableTop($titles);
 
