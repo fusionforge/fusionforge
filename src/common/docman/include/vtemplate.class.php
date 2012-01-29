@@ -10,10 +10,10 @@
  *   + THIEBAUT Jean-Baptiste(J.Baptiste@leweby.com)  -  http://www.leweby.com .
  *   + CAMPANA François (grem@concept-w.net).
  * Licence: GPL.
- * 
+ *
  * 
  *
- *			  
+ *  
  *****************************************************************/ 
 
 if ( !isset($DEFINE_VTEMPLATE) ){
@@ -404,10 +404,10 @@ $this->addSession($handle);
 return $handle;
 }
 
-function newSession($handle="{0}",$nom_zone = "|root|"){
-if ( $this->sessions[$handle][$nom_zone]->used ) $this->closeSession($handle,$nom_zone);
-$this->addSession($handle,$nom_zone,$cache,$time,$num_session);
-return 1;
+function newSession($handle="{0}", $nom_zone = "|root|"){
+	if ( $this->sessions[$handle][$nom_zone]->used ) $this->closeSession($handle,$nom_zone);
+	$this->addSession($handle,$nom_zone);
+	return 1;
 }
 
 function addSession($handle="{0}",$nom_zone = "|root|"){
