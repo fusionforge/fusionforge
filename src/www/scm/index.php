@@ -29,7 +29,7 @@ $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 }
-scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
+scm_header(array('title'=>_('SCM Repository'), 'group'=>$group_id));
 
 plugin_hook("blocks", "scm index");
 
