@@ -75,7 +75,9 @@ if ($owner) {
                                 switch($action) {
                                     case 'remove':
                                         $instance_id = (int)$param[$name][$action];
-                                        $lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
+                                        if(forge_check_perm ('project_admin', $owner_id, NULL)) {
+                                               $lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
+                                        }
                                         break;
                                     case 'add':
                                     default:
