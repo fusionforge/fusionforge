@@ -2,6 +2,8 @@
 <?php
 /**
  * Copyright 2010 Roland Mas
+ * Copyright © 2012
+ *	Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -30,6 +32,33 @@ require_once('common/include/PluginManager.class.php') ;
 
 setup_plugin_manager () ;
 session_set_admin () ;
+
+function usage($rc=1) {
+	echo "Usage:\n";
+	echo "\t.../populate_template_project.php 5\n";
+	echo "\t.../populate_template_project.php new unixname groupname\n";
+	echo "The first syntax populates an existing group, with its ID given.\n";
+	echo "The second syntax creates a new template froup.\n";
+	exit($rc);
+}
+
+function hasmailinglist($project, $listname) {
+	$mlFactory = new MailingListFactory($project);
+	if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
+		return false;
+	}
+	$mlArray = $mlFactory->getMailingLists();
+	if ($mlFactory->isError()) {
+		return false;
+	}
+	$listname = $project->getUnixName() . '-' . $listname;
+	foreach ($mlArray as $mlEntry) {
+		if ($mlEntry->getName() == $listname) {
+			return true;
+		}
+	}
+	return false;
+}
 
 function populateProject($project) {
 	db_begin();
@@ -185,7 +214,8 @@ function populateProject($project) {
 
 	if (forge_get_config('use_mail')) {
 		$mlist = new MailingList($project);
-		if (!$mlist->create('commits',_('Commits'),1,session_get_user()->getID())) {
+		if (!hasmailinglist($project, 'commits') &&
+		    !$mlist->create('commits',_('Commits'),1,session_get_user()->getID())) {
 			$project->setError(sprintf(_('ML: %s'),$mlist->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
@@ -198,11 +228,52 @@ function populateProject($project) {
 
 	return true;
 }
- 
-$project = group_get_object(5);
 
-if (!populateProject($project)) {
-	echo "Error when populating template project!\n";
-	exit(1);
+if (count($argv) < 2) {
+	usage();
+} else if (in_array($argv[1], array('-h', '-?', '--help'))) {
+	usage(0);
+} else if (count($argv) == 2) {
+	if (!($gid = util_nat0($argv[1]))) {
+		usage();
+	}
+	if (!($project = group_get_object($gid))) {
+		printf("Group #%d not found!\n", $gid);
+		usage();
+	}
+	if (!populateProject($project)) {
+		printf("Error: could not populate new group: %s\n",
+		    $project->getErrorMessage());
+		exit(1);
+	}
+} else if (count($argv) == 4 && $argv[1] == "new") {
+	db_begin();
+	$project = new Group();
+	$desc = sprintf("Template project %s (%s) populated on %s",
+	    $argv[2], $argv[3], date("r"));
+	if (!$project->create(session_get_user(), $argv[3], $argv[2],
+	    $desc, $desc)) {
+		db_rollback();
+		printf("Error: could not create group: %s\n",
+		    $project->getErrorMessage());
+		exit(1);
+	}
+	if (!$project->setAsTemplate(true)) {
+		db_rollback();
+		printf("Error: could not mark group as template: %s\n",
+		    db_error());
+		exit(1);
+	}
+	if (!populateProject($project)) {
+		printf("Error: could not populate new group: %s\n",
+		    $project->getErrorMessage());
+		exit(1);
+	}
+	db_commit();
+} else {
+	usage();
 }
-?>
+
+printf("Group #%d %s (%s) populated successfully.\n", $project->getID(),
+    $project->getUnixName(), $project->getPublicName());
+exit(0);
