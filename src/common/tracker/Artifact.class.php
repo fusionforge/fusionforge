@@ -900,7 +900,7 @@ class Artifact extends Error {
 
 		// Check that assigned_to is a tech for the tracker
 		if ($assigned_to != 100) {
-			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
+			if (!forge_check_perm_for_user ($assigned_to, 'tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setError("Invalid assigned_to (assigned person is not a technician)");
 				return false;
 			}
