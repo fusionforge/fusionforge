@@ -69,7 +69,6 @@ function make_arg_cmd_safe($arg) {
 function viewcvs_execute($repos_name, $repos_type) {
 	$request_uri = getStringFromServer('REQUEST_URI');
 	$query_string = getStringFromServer('QUERY_STRING');
-	$query_string = preg_replace('/group_id=[0-9]+&/','',$query_string);
 	$viewcvs_path = forge_get_config('url_root').'/scm/viewvc';
 
 	// this is very important ...
