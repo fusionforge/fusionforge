@@ -312,7 +312,7 @@ class Navigation extends Error {
 		if (isset($GLOBALS['group_id'])) {
 			// get group info using the common result set
 			$project =& group_get_object($GLOBALS['group_id']);
-			if ($project == 0) {
+			if (is_int($project) && $project == 0) {
 				if (preg_match('/root=/',$request_uri)) {
 					$project_name = preg_replace('/.*?root=/', '', $request_uri);
 					$project =& group_get_object_by_name($project_name);
