@@ -237,7 +237,7 @@ require_once $gfcommon.'include/Error.class.php';
 
 // Database abstraction
 // From here database is required
-if (forge_get_config('database_name')!=""){
+if (forge_get_config('database_name') != "") {
 	require_once $gfcommon.'include/database-pgsql.php';
 
 	// Authentication and access control

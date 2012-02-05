@@ -156,10 +156,10 @@ class FusionForgeConfig {
 		return false ;
 	}
 
-  }
+}
 
 if (!isset ($fusionforge_config)) {
-	$fusionforge_config = new FusionForgeConfig () ;
+	$fusionforge_config = new FusionForgeConfig();
 }
 
 /**
