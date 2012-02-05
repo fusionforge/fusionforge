@@ -434,8 +434,8 @@ class Forum extends Error {
 	/**
 	 * setMonitor - Add the current user to the list of people monitoring the forum.
 	 *
-	 *	@param	int	user id of the user which will be set to monitor this forum. Defaults to 0, meaning the current logged in user will be used.
-	 *	@return	boolean	success.
+	 * @param	int	user id of the user which will be set to monitor this forum. Defaults to 0, meaning the current logged in user will be used.
+	 * @return	boolean	success.
 	 */
 	function setMonitor($u = -1) {
 		if ($u == -1) {
