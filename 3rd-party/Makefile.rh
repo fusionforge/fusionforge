@@ -8,7 +8,7 @@ RPM_TMP=$(HOME)/rpmbuild
 DEPOT=$(HOME)/depot
 BUILDRESULT=$(HOME)/fusionforge_repo
 
-HTMLPURIFIER_VERSION=4.3.0
+HTMLPURIFIER_VERSION=4.4.0
 HTMLPURIFIER_SPEC=php-htmlpurifier/php-htmlpurifier.spec
 HTMLPURIFIER_TBZ=htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
 HTMLPURIFIER_RPM=php-htmlpurifier-$(HTMLPURIFIER_VERSION)-1.noarch.rpm
