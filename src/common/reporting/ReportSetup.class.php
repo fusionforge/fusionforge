@@ -534,15 +534,13 @@ function users_added_weekly($week) {
  */
 function backfill_users_added_weekly($count=10000) {
 
-	$arr =& $this->getWeekStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 	for ($i=0; $i<count($arr); $i++) {
 		if (!$this->users_added_weekly($arr[$i])) {
 			$this->setError('backfill_users_added_weekly:: Error adding weekly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -575,15 +573,13 @@ function groups_added_weekly($week) {
  */
 function backfill_groups_added_weekly($count=10000) {
 
-	$arr =& $this->getWeekStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 	for ($i=0; $i<count($arr); $i++) {
 		if (!$this->groups_added_weekly($arr[$i])) {
 			$this->setError('backfill_groups_added_weekly:: Error adding weekly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -617,16 +613,14 @@ function users_added_monthly($month,$end) {
  */
 function backfill_users_added_monthly($count=10000) {
 
-	$arr =& $this->getMonthStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 //skipping first one
 	for ($i=1; $i<count($arr); $i++) {
 		if (!$this->users_added_monthly($arr[$i],($arr[$i-1]-1))) {
 			$this->setError('backfill_users_added_monthly:: Error adding monthly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -660,16 +654,14 @@ function groups_added_monthly($month,$end) {
  */
 function backfill_groups_added_monthly($count=10000) {
 
-	$arr =& $this->getMonthStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 //skipping first one
 	for ($i=1; $i<count($arr); $i++) {
 		if (!$this->groups_added_monthly($arr[$i],($arr[$i-1]-1))) {
 			$this->setError('backfill_groups_added_monthly:: Error adding monthly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -802,15 +794,13 @@ function users_cum_weekly($week) {
  */
 function backfill_users_cum_weekly($count=10000) {
 
-	$arr =& $this->getWeekStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 	for ($i=0; $i<count($arr); $i++) {
 		if (!$this->groups_cum_weekly($arr[$i])) {
 			$this->setError('backfill_users_cum_weekly:: Error adding weekly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -843,15 +833,13 @@ function groups_cum_weekly($week) {
  */
 function backfill_groups_cum_weekly($count=10000) {
 
-	$arr =& $this->getWeekStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 	for ($i=0; $i<count($arr); $i++) {
 		if (!$this->users_cum_weekly($arr[$i])) {
 			$this->setError('backfill_groups_cum_weekly:: Error adding weekly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -884,16 +872,14 @@ function users_cum_monthly($month,$end) {
  */
 function backfill_users_cum_monthly($count=10000) {
 
-	$arr =& $this->getMonthStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 //skip first one
 	for ($i=1; $i<count($arr); $i++) {
 		if (!$this->users_cum_monthly($arr[$i],($arr[$i-1]-1))) {
 			$this->setError('backfill_users_cum_monthly:: Error adding monthly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -926,16 +912,14 @@ function groups_cum_monthly($month,$end) {
  */
 function backfill_groups_cum_monthly($count=10000) {
 
-	$arr =& $this->getMonthStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 //skip first one
 	for ($i=1; $i<count($arr); $i++) {
 		if (!$this->groups_cum_monthly($arr[$i],($arr[$i-1]-1))) {
 			$this->setError('backfill_groups_cum_monthly:: Error adding monthly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -1080,15 +1064,13 @@ GROUP BY user_id,week',
  */
 function backfill_user_act_weekly($count=10000) {
 
-	$arr =& $this->getWeekStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 	for ($i=0; $i<count($arr); $i++) {
 		if (!$this->user_act_weekly($arr[$i])) {
 			$this->setError('backfill_user_act_weekly:: Error adding weekly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -1125,15 +1107,13 @@ GROUP BY user_id, month',
  */
 function backfill_user_act_monthly($count=10000) {
 
-	$arr =& $this->getMonthStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 	for ($i=1; $i<count($arr); $i++) {
 		if (!$this->user_act_monthly($arr[$i],($arr[$i-1]-1))) {
 			$this->setError('backfill_user_act_monthly:: Error adding monthly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -1300,15 +1280,13 @@ GROUP BY group_id, week',
  */
 function backfill_group_act_weekly($count=10000) {
 
-	$arr =& $this->getWeekStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 	for ($i=0; $i<count($arr); $i++) {
 		if (!$this->group_act_weekly($arr[$i])) {
 			$this->setError('backfill_user_act_weekly:: Error adding weekly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
@@ -1348,15 +1326,13 @@ GROUP BY group_id,month',
  */
 function backfill_group_act_monthly($count=10000) {
 
-	$arr =& $this->getMonthStartArr();
+	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+	rsort($arr);
 
 	for ($i=1; $i<count($arr); $i++) {
 		if (!$this->group_act_monthly($arr[$i],($arr[$i-1]-1))) {
 			$this->setError('backfill_group_act_monthly:: Error adding monthly row: '.db_error());
 			return false;
-		}
-		if ($i >= $count) {
-			break;
 		}
 	}
 	return true;
