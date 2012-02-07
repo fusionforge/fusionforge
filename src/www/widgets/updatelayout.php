@@ -76,7 +76,13 @@ if ($owner) {
                                 switch($action) {
                                     case 'remove':
                                         $instance_id = (int)$param[$name][$action];
-                                        $lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
+					if ($owner_type == WidgetLayoutManager::OWNER_TYPE_GROUP) {
+						if (forge_check_perm ('project_admin', $owner_id, NULL)) {
+							$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
+						}
+					} else {
+						$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
+					}
                                         break;
                                     case 'add':
                                     default:

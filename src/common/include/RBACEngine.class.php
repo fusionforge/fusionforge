@@ -150,9 +150,11 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 
 		$result[] = RoleAnonymous::getInstance() ;
 		$result[] = RoleLoggedIn::getInstance() ;
+		
+		$uid = is_object($user) ? $user->getID() : $user;
 
 		$res = db_query_params ('SELECT role_id FROM pfo_user_role WHERE user_id=$1',
-					array ($user->getID()));
+					array ($uid));
 		while ($arr = db_fetch_array($res)) {
 			$result[] = $this->getRoleById ($arr['role_id']) ;
 		}
