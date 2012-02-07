@@ -169,6 +169,11 @@ function FusionForgeMWAuth( $user, &$result ) {
 			foreach ($available_roles as $r) {
 				$linked_projects = $r->getLinkedProjects () ;
 
+				if ($r->hasGlobalPermission('forge_admin')) {
+					$rs[] = $r ;
+					continue ;
+				}
+
 				foreach ($linked_projects as $lp) {
 					if ($lp->getID() == $g->getID()) {
 						$rs[] = $r ;
