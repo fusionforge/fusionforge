@@ -199,9 +199,15 @@ function FusionForgeMWAuth( $user, &$result ) {
 		foreach ($available_roles as $r) {
 			$linked_projects = $r->getLinkedProjects () ;
 			
+			if ($r->hasGlobalPermission('forge_admin')) {
+				$rs[] = $r ;
+				continue ;
+			}
+				
 			foreach ($linked_projects as $lp) {
 				if ($lp->getID() == $g->getID()) {
 					$rs[] = $r ;
+					continue ;
 				}
 			}
 		}
@@ -240,7 +246,18 @@ function SetupPermissionsFromRoles () {
 
 	$g = group_get_object_by_name ($fusionforgeproject) ;
 	// Setup rights for all roles referenced by project
-	$rs = $g->getRoles() ;
+	$rids = $g->getRolesID() ;
+	$e = RBACEngine::getInstance();
+	$grs = $e->getGlobalRoles();
+	foreach ($grs as $r) {
+		$rids[] = $r->getID();
+	}
+	$rids = array_unique($rids);
+	$rs = array();
+	foreach ($rids as $rid) {
+		$rs[] = $e->getRoleById($rid);
+	}
+	
 	foreach ($rs as $r) {
 		$gr = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
 
@@ -271,11 +288,6 @@ function SetupPermissionsFromRoles () {
 		$wgGroupPermissions[$gr]['import']        = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
 		$wgGroupPermissions[$gr]['importupload']  = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
 		$wgGroupPermissions[$gr]['siteadmin']     = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
-	}
-
-	$rs = RBACEngine::getInstance()->getGlobalRoles();
-	foreach ($rs as $r) {
-		$gr = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
 
 		// Interwiki management restricted to forge admins
 		$wgGroupPermissions[$gr]['interwiki'] = $r->hasGlobalPermission ('forge_admin') ;
