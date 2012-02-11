@@ -1,5 +1,6 @@
+#! /usr/bin/php -f
 <?php
-/*
+/**
  *
  * Script for creating unix users and group permissions that
  * correspond to the FusionForge users and groups
@@ -27,14 +28,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * This script creates user and group permissions by generating
  * the /etc/passwd, /etc/shadow and /etc/group files
  */
 
-require (dirname(__FILE__).'/../www/env.inc.php');
+require dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require $gfcommon.'/include/cron_utils.php';
+require_once $gfcommon.'include/cron_utils.php';
 
 // Default shell
 $default_shell = "/bin/bash";

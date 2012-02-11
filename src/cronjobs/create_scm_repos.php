@@ -32,9 +32,9 @@ require_once $gfcommon.'include/PluginManager.class.php' ;
 // SCM-specific plugins subsystem
 require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
-setup_plugin_manager () ;
+setup_plugin_manager();
 
-$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1 AND use_scm=1 ORDER BY group_id DESC',
+$res = db_query_params('SELECT group_id FROM groups WHERE status=$1 AND use_scm=1 ORDER BY group_id DESC',
 			array ('A'));
 if (!$res) {
 	$this->setError('Unable to get list of projects using SCM: '.db_error());
@@ -42,12 +42,12 @@ if (!$res) {
 }
 
 while ($data = db_fetch_array ($res)) {
-	$hook_params = array ('group_id' => $data['group_id']) ;
-	plugin_hook ('scm_create_repo', $hook_params) ;
+	$hook_params = array('group_id' => $data['group_id']);
+	plugin_hook('scm_create_repo', $hook_params);
 }
 
-$hook_params = array () ;
-plugin_hook ('scm_update_repolist', $hook_params) ;
+$hook_params = array();
+plugin_hook('scm_update_repolist', $hook_params);
 
 // Local Variables:
 // mode: php
