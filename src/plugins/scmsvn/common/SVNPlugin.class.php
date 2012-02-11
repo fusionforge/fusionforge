@@ -4,6 +4,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -22,20 +23,20 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item ('default_server', 'scmsvn', forge_get_config ('web_host')) ;
-forge_define_config_item ('repos_path', 'scmsvn', forge_get_config('chroot').'/scmrepos/svn') ;
-forge_define_config_item ('use_ssh', 'scmsvn', false) ;
-forge_set_config_item_bool ('use_ssh', 'scmsvn') ;
-forge_define_config_item ('use_dav', 'scmsvn', true) ;
-forge_set_config_item_bool ('use_dav', 'scmsvn') ;
-forge_define_config_item ('use_ssl', 'scmsvn', true) ;
-forge_set_config_item_bool ('use_ssl', 'scmsvn') ;
-forge_define_config_item ('anonsvn_login','scmsvn', 'anonsvn');
-forge_define_config_item ('anonsvn_password','scmsvn', 'anonsvn');
+forge_define_config_item('default_server', 'scmsvn', forge_get_config ('web_host'));
+forge_define_config_item('repos_path', 'scmsvn', forge_get_config('chroot').'/scmrepos/svn');
+forge_define_config_item('use_ssh', 'scmsvn', false);
+forge_set_config_item_bool('use_ssh', 'scmsvn');
+forge_define_config_item('use_dav', 'scmsvn', true);
+forge_set_config_item_bool('use_dav', 'scmsvn');
+forge_define_config_item('use_ssl', 'scmsvn', true);
+forge_set_config_item_bool('use_ssl', 'scmsvn');
+forge_define_config_item('anonsvn_login','scmsvn', 'anonsvn');
+forge_define_config_item('anonsvn_password','scmsvn', 'anonsvn');
 
 class SVNPlugin extends SCMPlugin {
 	function SVNPlugin() {
-		$this->SCMPlugin () ;
+		$this->SCMPlugin();
 		$this->name = 'scmsvn';
 		$this->text = 'Subversion';
 		$this->svn_root_fs = '/scmrepos/svn';
@@ -44,10 +45,10 @@ class SVNPlugin extends SCMPlugin {
 			    $this->name);
 		}
 		$this->svn_root_dav = '/svn';
-		$this->hooks[] = 'scm_browser_page';
-		$this->hooks[] = 'scm_update_repolist';
-		$this->hooks[] = 'scm_generate_snapshots';
-		$this->hooks[] = 'scm_gather_stats';
+		$this->_addHook('scm_browser_page');
+		$this->_addHook('scm_update_repolist');
+		$this->_addHook('scm_generate_snapshots');
+		$this->_addHook('scm_gather_stats');
 
 		$this->provides['svn'] = true;
 
@@ -79,7 +80,7 @@ class SVNPlugin extends SCMPlugin {
 		}
 	}
 
-	function getBlurb () {
+	function getBlurb() {
 		return '<p>' . _('Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.') . '</p>';
 	}
 
@@ -112,16 +113,16 @@ class SVNPlugin extends SCMPlugin {
 			$b .= _('The password is ').forge_get_config('anonsvn_password', 'scmsvn').'<br />';
 		}
 		$b .= '</p>';
-		return $b ;
+		return $b;
 	}
 
 	function getInstructionsForRW($project) {
-		$b = '' ;
+		$b = '';
 
 		$module = $this->topModule($project);
 
 		if (session_loggedin()) {
-			$u =& user_get_object(user_getid()) ;
+			$u =& user_get_object(user_getid());
 			$d = $u->getUnixName() ;
 			if (forge_get_config('use_ssh', 'scmsvn')) {
 				$b .= '<h2>';
@@ -161,7 +162,7 @@ class SVNPlugin extends SCMPlugin {
 				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project) . $this->svn_root_dav .'/'.$project->getUnixName().$module.'</tt></p>' ;
 			}
 		}
-		return $b ;
+		return $b;
 	}
 
 	function getSnapshotPara($project) {
@@ -239,7 +240,7 @@ class SVNPlugin extends SCMPlugin {
 	function createOrUpdateRepo($params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
 
 		if (! $project->usesPlugin($this->name)) {
@@ -249,26 +250,26 @@ class SVNPlugin extends SCMPlugin {
 		$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
-			system ("svnadmin create $repo") ;
-			system ("svn mkdir -m 'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null");
+			system("svnadmin create $repo") ;
+			system("svn mkdir -m 'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null");
 		}
 
 		$this->installOrUpdateCmds($project, $project->getUnixName(), $repo);
 
 		if (forge_get_config('use_ssh', 'scmsvn')) {
-			$unix_group = 'scm_' . $project->getUnixName() ;
-			system ("find $repo -type d | xargs chmod g+s") ;
-			system ("chgrp -R $unix_group $repo") ;
-			if ($project->enableAnonSCM()) {
-				system ("chmod -R g+wX,o+rX-w $repo") ;
+			$unix_group = 'scm_' . $project->getUnixName();
+			system("find $repo -type d | xargs chmod g+s");
+			system("chgrp -R $unix_group $repo");
+			if ($project->enableAnonSCM() || forge_get_config('use_dav', 'scmsvn')) {
+				system("chmod -R g+wX,o+rX-w $repo");
 			} else {
-				system ("chmod -R g+wX,o-rwx $repo") ;
+				system("chmod -R g+wX,o-rwx $repo");
 			}
 		} else {
 			$unix_user = forge_get_config('apache_user');
 			$unix_group = forge_get_config('apache_group');
-			system ("chown -R $unix_user:$unix_group $repo") ;
-			system ("chmod -R g-rwx,o-rwx $repo") ;
+			system("chown -R $unix_user:$unix_group $repo");
+			system("chmod -R g-rwx,o-rwx $repo");
 		}
 	}
 
@@ -277,7 +278,7 @@ class SVNPlugin extends SCMPlugin {
 
 		// Update WebDAV stuff
 		if (!forge_get_config('use_dav', 'scmsvn')) {
-			return true ;
+			return true;
 		}
 
 		$access_data = '';
@@ -291,51 +292,51 @@ class SVNPlugin extends SCMPlugin {
 			if ( !$project->usesSCM()) {
 				continue;
 			}
-			$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
+			$access_data .= '[' . $project->getUnixName() . ":/]\n";
 
-			$users = $project->getMembers () ;
+			$users = $project->getMembers();
 			foreach ($users as $user) {
-				if (forge_check_perm_for_user ($user,
+				if (forge_check_perm_for_user($user,
 							       'scm',
 							       $project->getID(),
 							       'write')) {
-					$access_data .= $user->getUnixName() . "= rw\n" ;
-					$svnusers[$user->getID()] = $user ;
-				} elseif (forge_check_perm_for_user ($user,
+					$access_data .= $user->getUnixName() . "= rw\n";
+					$svnusers[$user->getID()] = $user;
+				} elseif (forge_check_perm_for_user($user,
 								     'scm',
 								     $project->getID(),
 								     'read')) {
-					$access_data .= $user->getUnixName() . "= r\n" ;
-					$svnusers[$user->getID()] = $user ;
+					$access_data .= $user->getUnixName() . "= r\n";
+					$svnusers[$user->getID()] = $user;
 				}
 			}
 
-			if ( $project->enableAnonSCM() ) {
-				$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = r\n" ;
-				$access_data .= "* = r\n" ;
-
+			if ($project->enableAnonSCM()) {
+				$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = r\n";
+				$access_data .= "* = r\n";
 			}
-			$access_data .= "\n" ;
+
+			$access_data .= "\n";
 		}
 
 		foreach ($svnusers as $user_id => $user) {
-			$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n" ;
+			$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n";
 		}
 		$password_data .= forge_get_config('anonsvn_login', 'scmsvn').":".htpasswd_apr1_md5(forge_get_config('anonsvn_password', 'scmsvn'))."\n";
 
-		$fname = forge_get_config('data_path').'/svnroot-authfile' ;
-		$f = fopen ($fname.'.new', 'w') ;
-		fwrite ($f, $password_data) ;
-		fclose ($f) ;
-		chmod ($fname.'.new', 0644) ;
-		rename ($fname.'.new', $fname) ;
+		$fname = forge_get_config('data_path').'/svnroot-authfile';
+		$f = fopen($fname.'.new', 'w');
+		fwrite($f, $password_data);
+		fclose($f);
+		chmod($fname.'.new', 0644);
+		rename($fname.'.new', $fname);
 
-		$fname = forge_get_config('data_path').'/svnroot-access' ;
-		$f = fopen ($fname.'.new', 'w') ;
-		fwrite ($f, $access_data) ;
-		fclose ($f) ;
-		chmod ($fname.'.new', 0644) ;
-		rename ($fname.'.new', $fname) ;
+		$fname = forge_get_config('data_path').'/svnroot-access';
+		$f = fopen($fname.'.new', 'w');
+		fwrite($f, $access_data);
+		fclose($f);
+		chmod($fname.'.new', 0644);
+		rename($fname.'.new', $fname);
 	}
 
 	function gatherStats($params) {
@@ -343,53 +344,53 @@ class SVNPlugin extends SCMPlugin {
 			$adds, $deletes, $updates, $commits, $date_key,
 			$usr_adds, $usr_deletes, $usr_updates;
 
-		$time_ok = true ;
+		$time_ok = true;
 
-		$project = $this->checkParams ($params) ;
+		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
 
-		if (! $project->usesPlugin ($this->name)) {
+		if (! $project->usesPlugin($this->name)) {
 			return false;
 		}
 
 		if ($params['mode'] == 'day') {
 			db_begin();
 
-			$year = $params ['year'] ;
-			$month = $params ['month'] ;
-			$day = $params ['day'] ;
-			$month_string = sprintf( "%04d%02d", $year, $month );
-			$start_time = gmmktime( 0, 0, 0, $month, $day, $year);
+			$year = $params['year'];
+			$month = $params['month'];
+			$day = $params['day'];
+			$month_string = sprintf("%04d%02d", $year, $month);
+			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
 
-			$adds    = 0 ;
-			$updates = 0 ;
-			$usr_adds    = array () ;
-			$usr_updates = array () ;
+			$adds    = 0;
+			$updates = 0;
+			$usr_adds    = array();
+			$usr_updates = array();
 
 			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName() ;
 			if (!is_dir ($repo) || !is_file ("$repo/format")) {
-				echo "No repository\n" ;
-				db_rollback () ;
-				return false ;
+				echo "No repository\n";
+				db_rollback();
+				return false;
 			}
 
-			$d1 = date ('Y-m-d', $start_time - 150000) ;
-			$d2 = date ('Y-m-d', $end_time + 150000) ;
+			$d1 = date('Y-m-d', $start_time - 150000);
+			$d2 = date('Y-m-d', $end_time + 150000);
 
 			$pipe = popen ("svn log file://$repo --xml -v -q -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' ) ;
 
 			// cleaning stats_cvs_* table for the current day
-			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
-						array ($month_string,
+			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
+						array($month_string,
 						       $day,
-						       $project->getID())) ;
+						       $project->getID()));
 			if(!$res) {
 				echo "Error while cleaning stats_cvs_group\n" ;
-				db_rollback () ;
-				return false ;
+				db_rollback();
+				return false;
 			}
 
 			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
