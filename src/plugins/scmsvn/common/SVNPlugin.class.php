@@ -626,13 +626,12 @@ class SVNPlugin extends SCMPlugin {
 
 // End of class, helper functions now
 
-function SVNPluginCharData ($parser, $chars) {
+function SVNPluginCharData($parser, $chars) {
 	global $last_tag, $last_user, $last_time, $start_time, $end_time,
 		$time_ok, $user_list;
 	switch ($last_tag) {
 	case "AUTHOR":
-		$last_user = ereg_replace ('[^a-z0-9_-]', '',
-					   strtolower (trim ($chars))) ;
+		$last_user = preg_replace('/[^a-z0-9_-]/', '', strtolower(trim($chars)));
 		break;
 	case "DATE":
 		$chars = preg_replace('/T(\d\d:\d\d:\d\d)\.\d+Z?$/', ' ${1}', $chars);
@@ -674,7 +673,7 @@ function SVNPluginStartElement($parser, $name, $attrs) {
 	}
 }
 
-function SVNPluginEndElement ($parser, $name) {
+function SVNPluginEndElement($parser, $name) {
 	global $time_ok, $last_tag, $commits;
 	if ($name == "LOGENTRY" && $time_ok) {
 		$commits++;
