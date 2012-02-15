@@ -127,6 +127,8 @@ class FusionForgeTemplate extends QuickTemplate {
 			$GLOBALS['group_id']=$project->getID();
                 	$params['group']=$GLOBALS['group_id'];
                 	$params['toptab']='mediawiki';
+                	$params['h1']='';
+                	$params['title']='';
                 	$GLOBALS['HTML']->bodyHeader($params);
         	}
 	}
