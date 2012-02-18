@@ -2,7 +2,7 @@
 /**
  * FusionForge document manager
  *
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -190,6 +190,83 @@ class DocumentManager extends Error {
 			}
 		}
 	}
+
+	/**
+	 * getStatusNameList - get all status for documents
+	 *
+	 * @param	string	format of the return values. json returns : { name: id, }. Default is DB object.
+	 * @param	string	skipped status id
+	 */
+	function getStatusNameList($format = '', $removedval = '') {
+		if (!empty($removedval)) {
+			$stateQuery = db_query_params('select * from doc_states where stateid not in ($1) order by stateid', array($removedval));
+		} else {
+			$stateQuery = db_query_params('select * from doc_states order by stateid', array());
+		}
+		switch ($format) {
+			case 'json': {
+				$returnString = '{';
+				while ($stateArr = db_fetch_array($stateQuery)) {
+					$returnString .= util_html_secure($stateArr['name']).': \''.$stateArr['stateid'].'\',';
+				}
+				$returnString .= '}';
+				return $returnString;
+				break;
+			}
+			default: {
+				return $stateQuery;
+			}
+		}
+	}
+
+	function getDocGroupList($nested_groups, $format = '', $allow_none = true, $selected_id = 0, $dont_display = array()) {
+		$id_array = array();
+		$text_array = array();
+		$this->buildArrays($nested_groups, $id_array, $text_array, $dont_display);
+		$rows = count($id_array);
+		switch ($format) {
+			case "json": {
+				$returnString = '{';
+				for ($i=0; $i<$rows; $i++) {
+					$returnString .= '\''.util_html_secure($text_array[$i]).'\':'.$id_array[$i].',';
+				}
+				$returnString .= '}';
+				break;
+			}
+		}
+		return $returnString;
+	}
+
+	/**
+	 * buildArrays - Build the arrays to call html_build_select_box_from_arrays()
+	 *
+	 * @param	array	Array of groups.
+	 * @param	array	Reference to the array of ids that will be build
+	 * @param	array	Reference to the array of group names
+	 * @param	array	Array of IDs of groups that should not be displayed
+	 * @param	int	The ID of the parent whose childs are being showed (0 for root groups)
+	 * @param	int	The current level
+	 */
+	function buildArrays($group_arr, &$id_array, &$text_array, &$dont_display, $parent = 0, $level = 0) {
+		if (!is_array($group_arr) || !array_key_exists("$parent", $group_arr)) return;
+
+		$child_count = count($group_arr["$parent"]);
+		for ($i = 0; $i < $child_count; $i++) {
+			$doc_group =& $group_arr["$parent"][$i];
+
+			// Should we display this element?
+			if (in_array($doc_group->getID(), $dont_display)) continue;
+
+			$margin = str_repeat("--", $level);
+
+			$id_array[] = $doc_group->getID();
+			$text_array[] = $margin.$doc_group->getName();
+
+			// Show childs (if any)
+			$this->buildArrays($group_arr, $id_array, $text_array, $dont_display, $doc_group->getID(), $level+1);
+		}
+	}
+
 }
 
 ?>

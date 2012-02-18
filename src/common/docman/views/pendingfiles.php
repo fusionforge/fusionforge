@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,6 +29,7 @@ global $g; // the group object
 global $dirid; // id of doc_group
 global $HTML; // Layout object
 global $nested_pending_docs;
+global $nested_groups;
 global $redirecturl; // built url from listfile.php (handle the hierarchy)
 global $actionlistfileurl; // built action url from listfile.php (handle the hierarchy)
 
@@ -49,6 +51,8 @@ jQuery(document).ready(function() {
 		groupId:		<?php echo $group_id ?>,
 		docManURL:		'<?php util_make_uri("docman") ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
+		divEditFile:		jQuery('#editFile'),
+		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
 	});
 });
 //]]></script>
@@ -68,13 +72,15 @@ jQuery(document).ready(function() {
 			switch ($d->getFileType()) {
 				case "URL": {
 					$docurl = $d->getFileName();
+					$docurltitle = _('Visit this link');
 					break;
 				}
 				default: {
 					$docurl = util_make_uri('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()));
+					$docurltitle = _('View this document');
 				}
 			}
-			echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'._('View this document').'" >';
+			echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'.$docurltitle.'" >';
 			echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
 			echo '</a></td>';
 			echo '<td>';
@@ -113,12 +119,14 @@ jQuery(document).ready(function() {
 			echo '</td>';
 
 			echo '<td>';
-			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListPending.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png', 22, 22, array('alt'=>_('Edit this document'))). '</a>';
+			$editfileaction = '?action=editfile&amp;fromview=listfile&amp;dirid='.$d->getDocGroupID();
+			if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
+				$editfileaction .= '&amp;childgroup_id='.$GLOBALS['childgroup_id'];
+			}
+			$editfileaction .= '&amp;group_id='.$GLOBALS['group_id'];
+			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListPending.toggleEditFileView({action:\''.$editfileaction.'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.htmlspecialchars($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.htmlspecialchars($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png', 22, 22, array('alt'=>_('Edit this document'))). '</a>';
 			echo '</td>';
 			echo '</tr>';
-			echo '<tr id="docid'.$d->getID().'" class="docman_editfile_nodisplay" ><td colspan="10" >';
-			$d->editFile();
-			echo '</td></tr>';
 		}
 		echo $HTML->listTableBottom();
 		echo '<p>';

@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -58,7 +58,6 @@ if ($dgh->isError())
 $df->setStateID('2');
 
 $d_arr =& $df->getDocuments();
-$nested_groups =& $dgf->getNested('2');
 $linkmenu = 'listtrashfile';
 
 $nested_docs = array();
@@ -99,6 +98,8 @@ jQuery(document).ready(function() {
 		divLeft:		jQuery('#left'),
 		divHandle:		jQuery('#handle'),
 		divRight:		jQuery('#right'),
+		divEditFile:		jQuery('#editFile'),
+		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
 	});
 });
 //]]></script>
@@ -139,13 +140,15 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		switch ($d->getFileType()) {
 			case "URL": {
 				$docurl = $d->getFileName();
+				$docurltitle = _('Visit this link');
 				break;
 			}
 			default: {
 				$docurl = util_make_uri('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
+				$docurltitle = _('View this document');
 			}
 		}
-		echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'._('View this document').'" >';
+		echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'.$docurltitle.'" >';
 		echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
 		echo '</a></td>';
 		echo '<td>';
@@ -184,13 +187,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '</td>';
 
 		echo '<td>';
+		$newdgf = new DocumentGroupFactory($d->Group);
+		$editfileaction = '?action=editfile&amp;fromview=listfile&amp;dirid='.$d->getDocGroupID().'&amp;group_id='.$group_id;
 		echo '<a class="tabtitle" href="?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
-		echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListTrash.toggleEditFileView(\''.$d->getID().'\')" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
+		echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListTrash.toggleEditFileView({action:\''.$editfileaction.'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json','2').', docgroupDict:'.$dm->getDocGroupList($newdgf->getNested(), 'json').', title:\''.$d->getName().'\', filename:\''.$d->getFilename().'\', description:\''.$d->getDescription().'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 		echo '</td>';
 		echo '</tr>'."\n";
-		echo '<tr id="docid'.$d->getID().'" class="docman_editfile_nodisplay" ><td colspan="10" >';
-		$d->editFile();
-		echo '</td></tr>';
 	}
 	echo $HTML->listTableBottom();
 	echo '<p>';
@@ -211,4 +213,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 
 echo '</div>';
 echo '<div style="clear: both;" />';
+if (forge_check_perm('docman', $g->getID(), 'approve')) {
+	include ($gfcommon.'docman/views/editfile.php');
+}
 ?>

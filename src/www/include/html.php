@@ -6,7 +6,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -393,6 +393,12 @@ function html_use_coolfieldset() {
 	use_stylesheet('/scripts/coolfieldset/css/jquery.coolfieldset.css');
 }
 
+function html_use_jqueryui() {
+	html_use_jquery();
+	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.8.17.custom.min.js');
+	use_stylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.8.17.custom.css');
+}
+
 /**
  * html_build_select_box_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.
@@ -434,7 +440,6 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 		}
 	}
 
-	$title = html_get_tooltip_description($select_name);
 	$return .= '
 		<select'.$id.' name="'.$select_name.'" title="'.util_html_secure($title).'">';
 

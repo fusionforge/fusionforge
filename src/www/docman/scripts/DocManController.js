@@ -3,7 +3,7 @@
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * Copyright 2011, Alain Peyrat
  * http://fusionforge.org
  *
@@ -33,6 +33,7 @@ DocManListFileController = function(params)
 	this.bindControls();
 	this.resizableDiv();
 	this.initSize();
+	this.initModalEditWindow();
 };
 
 DocManAddItemController = function(params)
@@ -54,7 +55,7 @@ DocManListFileController.prototype =
 		}
 	},
 
-	resizableDiv:function() {
+	resizableDiv: function() {
 		if (typeof(this.params.divHandle) != 'undefined') {
 			this.params.divHandle.mousedown(jQuery.proxy(this, "dragging"));
 			var params = this.params;
@@ -71,7 +72,7 @@ DocManListFileController.prototype =
 		}
 	},
 
-	initSize:function() {
+	initSize: function() {
 		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
 			if (this.params.divLeft.height() > this.params.divRight.height()) {
 				this.params.divHandle.css('height', this.params.divLeft.height());
@@ -84,6 +85,42 @@ DocManListFileController.prototype =
 				this.params.divRight.css('width', w - this.params.divLeft.width());
 			}
 		}
+	},
+
+	initModalEditWindow: function() {
+		var modalId = this.params.divEditFile;
+		jQuery(modalId).dialog({
+			autoOpen: false,
+			height: 350,
+			width: 450,
+			modal: true,
+			title: this.params.divEditTitle,
+			buttons: {
+				Save: function() {
+					jQuery('#editdocdata').submit();
+// 					jQuery.get(this.params.docManURL, {
+// 						group_id:	this.params.groupId,
+// 						action:		'lockfile',
+// 						lock:		0,
+// 						fileid:		id,
+// 						childgroup_id:	this.params.childGroupId
+// 					});
+// 					clearInterval(this.lockInterval[id]);
+					jQuery(modalId).dialog( "close" );
+				},
+				Cancel: function() {
+// 					jQuery.get(this.params.docManURL, {
+// 						group_id:	this.params.groupId,
+// 						action:		'lockfile',
+// 						lock:		0,
+// 						fileid:		id,
+// 						childgroup_id:	this.params.childGroupId
+// 					});
+// 					clearInterval(this.lockInterval[id]);
+					jQuery(modalId).dialog( "close" );
+				},
+			},
+		});
 	},
 
 	dragging: function() {
@@ -132,43 +169,51 @@ DocManListFileController.prototype =
 
 	/*! toggle add file edit view div visibility and play with lock
 	 *
-	 * @param	string	id of the div
+	 * @param id the docid
 	 */
-	toggleEditFileView: function(id) {
-		var divid	= '#docid'+id,
-		el		= jQuery(divid);
-
-		if (!el.is(":visible")) {
-			el.show();
-
-			jQuery.get(this.params.docManURL, {
-				group_id:	this.params.groupId,
-				action:		'lockfile',
-				lock:		1,
-				fileid:		id,
-				childgroup_id:	this.params.childGroupId
-			});
-
-			this.lockInterval[id] = setInterval("jQuery.get('" + this.params.docManURL + "', {group_id:"+this.params.groupId+",action:'lockfile',lock:1,fileid:"+id+",childgroup_id:"+this.params.childGroupId+"})",this.params.lockIntervalDelay);
+	toggleEditFileView: function(docparams) {
+		this.docparams = docparams;
+		jQuery('#title').attr('value', this.docparams.title);
+		jQuery('#description').attr('value', this.docparams.description);
+		jQuery('#docid').attr('value', this.docparams.id);
+		if (this.docparams.isURL) {
+			jQuery('#uploadnewroweditfile').hide();
 		} else {
-			el.hide();
-			jQuery.get(this.params.docManURL, {
-				group_id:	this.params.groupId,
-				action:		'lockfile',
-				lock:		0,
-				fileid:		id,
-				childgroup_id:	this.params.childGroupId
-			});
-
-			clearInterval(this.lockInterval[id]);
+			jQuery('#fileurlroweditfile').hide();
 		}
-		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
-			if (this.params.divLeft.height() > this.params.divRight.height()) {
-				this.params.divHandle.css('height', this.params.divLeft.height());
+		if (!this.docparams.useCreateOnline || !this.docparams.isText) {
+			jQuery('#editonlineroweditfile').hide();
+		}
+		jQuery('#filelink').text(this.docparams.filename);
+		if (this.docparams.statusId != 2) {
+			if (this.docparams.isURL) {
+				jQuery('#filelink').attr('href', this.docparams.filename);
 			} else {
-				this.params.divHandle.css('height', this.params.divRight.height());
+				jQuery('#filelink').attr('href', this.docparams.docManURL + '/view.php/' + this.docparams.groupId + '/' + this.docparams.id + '/' + this.docparams.filename);
 			}
 		}
+		jQuery('#doc_group').empty();
+		jQuery.each(this.docparams.docgroupDict, function(key, value) {
+			jQuery('#doc_group').append(jQuery("<option>").text(key).attr("value",value));
+		});
+		jQuery('#doc_group option[value='+this.docparams.docgroupId+']').attr("selected", "selected");
+		jQuery('#stateid').empty();
+		jQuery.each(this.docparams.statusDict, function(key, value) {
+			jQuery('#stateid').append(jQuery("<option>").text(key).attr("value",value));
+		});
+		jQuery('#stateid option[value='+this.docparams.statusId+']').attr("selected", "selected");
+		jQuery('#editdocdata').attr('action', this.docparams.action);
+		
+// 		jQuery.get(this.docparams.docManURL, {
+// 				group_id:	this.docparams.groupId,
+// 				action:		'lockfile',
+// 				lock:		1,
+// 				fileid:		this.docparams.id,
+// 				childgroup_id:	this.docparams.childGroupId
+// 			});		
+// 		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lockfile',lock:1,fileid:"+this.docparams.id+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
+		jQuery(this.params.divEditFile).dialog("open");
+
 		return false;
 	},
 
@@ -210,16 +255,6 @@ DocManListFileController.prototype =
 			}
 		}
 	},
-
-	computeDocumentsData: function() {
-		/*
-		TODO:
-		build the array in php is not dynamic, and clearly, this sucks.
-		It would be better to be able to ask JSON data containing the contents of a dir
-		etc. and compute this data with Javascript in order to build the table.
-		This will avoids to reload the page when you simply want to lock / remove / add a file etc.
-		*/
-	}
 }
 
 DocManAddItemController.prototype =

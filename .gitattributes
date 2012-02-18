@@ -432,6 +432,7 @@ src/common/docman/views/additem.php -text
 src/common/docman/views/addsubdocgroup.php -text
 src/common/docman/views/admin.php -text
 src/common/docman/views/editdocgroup.php -text
+src/common/docman/views/editfile.php -text
 src/common/docman/views/help.php -text
 src/common/docman/views/listfile.php -text
 src/common/docman/views/listtrashfile.php -text
@@ -847,6 +848,22 @@ src/lib/vendor/jquery-tipsy/docs/src/tipsy-docs.css -text svneol=unset#text/css
 src/lib/vendor/jquery-tipsy/src/images/tipsy.gif -text svneol=unset#image/gif
 src/lib/vendor/jquery-tipsy/src/javascripts/jquery.tipsy.js -text
 src/lib/vendor/jquery-tipsy/src/stylesheets/tipsy.css -text svneol=unset#text/css
+src/lib/vendor/jquery-ui/css/overcast/images/ui-bg_flat_0_aaaaaa_40x100.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-bg_flat_0_eeeeee_40x100.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-bg_flat_55_c0402a_40x100.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-bg_flat_55_eeeeee_40x100.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-bg_glass_100_f8f8f8_1x400.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-bg_glass_35_dddddd_1x400.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-bg_glass_60_eeeeee_1x400.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-bg_inset-hard_75_999999_1x100.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-bg_inset-soft_50_c9c9c9_1x100.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-icons_3383bb_256x240.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-icons_454545_256x240.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-icons_70b2e1_256x240.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-icons_999999_256x240.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/images/ui-icons_fbc856_256x240.png -text svneol=unset#image/png
+src/lib/vendor/jquery-ui/css/overcast/jquery-ui-1.8.17.custom.css -text
+src/lib/vendor/jquery-ui/js/jquery-ui-1.8.17.custom.min.js -text
 src/lib/vendor/jquery/jquery-1.4.2.min.js -text
 src/lib/vendor/prototype/prototype.js -text
 src/lib/vendor/scriptaculous/builder.js -text

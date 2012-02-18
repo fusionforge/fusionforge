@@ -104,6 +104,7 @@ if (session_loggedin()) {
 
 html_use_storage();
 html_use_simplemenu();
+html_use_jqueryui();
 use_javascript('scripts/DocManController.js');
 use_javascript('/js/sortable.js');
 
