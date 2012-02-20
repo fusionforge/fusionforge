@@ -2,6 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -47,7 +48,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 		$group_id = $request->get('group_id');
 
 		$qpa = db_construct_qpa();
-		$qpa = db_construct_qpa($qpa, 'SELECT filename, title, updatedate, createdate, realname, user_name, state_name
+		$qpa = db_construct_qpa($qpa, 'SELECT filename, title, updatedate, createdate, realname, user_name, state_name, filetype, docid
 						FROM docdata_vw
 						WHERE group_id=$1
 						AND stateid=$2',
@@ -83,13 +84,24 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$realname = db_result($res_files,$f,'realname');
 				$user_name = db_result($res_files,$f,'user_name');
 				$statename = db_result($res_files,$f,'state_name');
+				$filetype = db_result($res_files,$f,'filetype');
+				$docid = db_result($res_files,$f,'docid');
+				switch ($filetype) {
+					case "URL": {
+						$docurl = $filename;
+						break;
+					}
+					default: {
+						$docurl = util_make_url('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($filename));
+					}
+				}
 				echo '
 					<tr '. $HTML->boxGetAltRowStyle($f+1) .'>
 						<td>'
 							. $displaydate["month"] . ' ' . $displaydate["mday"] . ', ' . $displaydate["year"] .
 						'</td>
 						<td>
-							<strong>' . $filename . '</strong>
+							<a href="'.$docurl.'" ><strong>' . $filename . '</strong></a>
 						</td>
 						<td>'
 							.$title.'
