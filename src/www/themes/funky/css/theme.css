@@ -546,7 +546,6 @@ a.topTabSelected:hover {
 /*  margin-bottom: 1em;*/
     background-color: #F7F7F7;
     border: 1px solid #E2E3E4;
-    border-bottom: none;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     margin-bottom: 0px;
