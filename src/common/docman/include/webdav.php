@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -21,14 +22,23 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/* webdav extended class based on pear package */
-/* http://pear.php.net/package/HTTP_WebDAV_Server/ */
+/**
+ * webdav extended class based on pear package
+ * http://pear.php.net/package/HTTP_WebDAV_Server/
+ */
+
+/**
+ * INFORMATION : this PHP Webdav implementation is based on experience only.
+ * I did not find any helpful php documentation.
+ * I added as much as possible comments to explain how it works.
+ * Feel free to add you on input.
+ */
 
 require_once "HTTP/WebDAV/Server.php";
 
 class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
-	/*
+	/**
 	 * checkAuth - implement checkAuth called by HTTP_WebDAV_Server
 	 * to ensure authentification against user and pass
 	 *
@@ -38,38 +48,17 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 * @return	bool	success
 	 */
 	function checkAuth($group_id, $user, $pass) {
-		$g = group_get_object($group_id);
-		if (!$g || !is_object($g))
-			return false;
-
-		/* is this group using docman ? */
-		if (!$g->usesDocman())
-			return false;
-
-		if (!$g->useWebdav())
-			return false;
-
-		if ($g->isError())
-			return false;
-
-		if (!session_login_valid($user,$pass)) {
-			if (forge_check_perm('docman',$group_id,'read')) {
+		$this->doWeUseDocman($group_id);
+		if (session_login_valid($user, $pass)) {
+			if (forge_check_perm('docman', $group_id, 'read')) {
 				return true;
 			}
 			return false;
-		} else {
-			$u = &user_get_object_by_name($user);
-			foreach ($u->getGroups() as $key => $memberOfThisGroup) {
-				if ($memberOfThisGroup->getID() == $group_id) {
-					return true;
-				}
-			}
 		}
-
 		return false;
 	}
 
-	/*
+	/**
 	 * HEAD - unused
 	 * @todo Do a correct implementation
 	 */
@@ -77,7 +66,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		return true;
 	}
 
-	/*
+	/**
 	 * PROPFIND - use by any webdav client like cadaver
 	 * called by HTTP_WebDAV_Server
 	 *
@@ -88,30 +77,16 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$arr_path = explode('/',$options['path']);
 		$group_id = $arr_path[3];
 
-		if (!$group_id)
-			return false;
+		$this->doWeUseDocman($group_id);
 
-		$g = group_get_object($group_id);
-		if (!$g || !is_object($g))
-			return false;
-
-		/* is this group using docman ? */
-		if (!$g->usesDocman())
-			return false;
-
-		if (!$g->useWebdav())
-			return false;
-
-		if ($g->isError())
-			return false;
-
-		/* 4 is coming from the url: http://yourforge/docman/6/webdav/the/directory
-			1 = http://yourforge
-			2 = docman
-			3 = id group
-			4 = webdav
-			the rest is the path /the/directory
-		*/
+		/**
+		 * 4 is coming from the url: http://yourforge/docman/6/webdav/the/directory
+		 * 1 = http://yourforge
+		 * 2 = docman
+		 * 3 = id group
+		 * 4 = webdav
+		 * the rest is the path /the/directory
+		 */
 		if ( 4 < count($arr_path)) {
 			$subpath = '';
 			for ($i = 5; $i < count($arr_path); $i++){
@@ -201,7 +176,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		return true;
 	}
 
-	/*
+	/**
 	 * GET - use by http webdav client like your browser firefox
 	 * called by HTTP_WebDAV_Server
 	 *
@@ -211,22 +186,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$arr_path = explode('/', $options['path']);
 		$group_id = $arr_path[3];
 
-		if (!$group_id)
-			exit_no_group();
-
-		$g = group_get_object($group_id);
-		if (!$g || !is_object($g))
-			exit_no_group();
-
-		/* is this group using docman ? */
-		if (!$g->usesDocman())
-			exit_disabled();
-
-		if (!$g->useWebdav())
-			exit_disabled();
-
-		if ($g->isError())
-			exit_error($g->getErrorMessage(), 'docman');
+		$this->doWeUseDocman($group_id);
 
 		if ( 4 < count($arr_path)) {
 			$subpath = '';
@@ -292,7 +252,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		exit;
 	}
 
-	/*
+	/**
 	 * analyse - find if the path is a file or a directory
 	 *
 	 * @param	string	the path to analyse
@@ -318,7 +278,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		return $analysed_path;
 	}
 
-	/*
+	/**
 	 * whatIsIt - do the analyse
 	 *
 	 * @param	string	the path to analyse
@@ -351,6 +311,28 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		}
 
 		return $return_path_array;
+	}
+
+	/**
+	 * doWeUseDocman - verify if this group_id is using docman and webdav extension
+	 * @param	int	group_id
+	 * @return	bool	true on success
+	 */
+	function doWeUseDocman($group_id) {
+		$g = group_get_object($group_id);
+		if (!$g || !is_object($g))
+			exit_no_group();
+
+		if (!$g->usesDocman())
+			exit_disabled();
+
+		if (!$g->useWebdav())
+			exit_disabled();
+
+		if ($g->isError())
+			exit_error($g->getErrorMessage(), 'docman');
+
+		return true;
 	}
 }
 ?>
