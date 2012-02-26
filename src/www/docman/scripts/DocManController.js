@@ -178,8 +178,10 @@ DocManListFileController.prototype =
 		jQuery('#docid').attr('value', this.docparams.id);
 		if (this.docparams.isURL) {
 			jQuery('#uploadnewroweditfile').hide();
+			jQuery('#fileurlroweditfile').show();
 		} else {
 			jQuery('#fileurlroweditfile').hide();
+			jQuery('#uploadnewroweditfile').show();
 		}
 		if (!this.docparams.useCreateOnline || !this.docparams.isText) {
 			jQuery('#editonlineroweditfile').hide();
@@ -202,6 +204,11 @@ DocManListFileController.prototype =
 			jQuery('#stateid').append(jQuery("<option>").text(key).attr("value",value));
 		});
 		jQuery('#stateid option[value='+this.docparams.statusId+']').attr("selected", "selected");
+		if (this.docparams.isText) {
+			jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=getfile&fileid=' + this.docparams.id , jQuery.proxy(function(data){
+			jQuery('#defaulteditzone').text(data.body);
+			}, this));
+		}
 		jQuery('#editdocdata').attr('action', this.docparams.action);
 		
 // 		jQuery.get(this.docparams.docManURL, {

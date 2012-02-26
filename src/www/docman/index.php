@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -77,6 +78,7 @@ switch ($action) {
 	case "emptytrash":
 	case "enforcereserve":
 	case "forcereindexenginesearch":
+	case "getfile":
 	case "injectzip":
 	case "lockfile":
 	case "monitorfile":

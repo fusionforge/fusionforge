@@ -52,14 +52,14 @@ echo '		<td><strong>'. _('File:') .'</strong>';
 echo '			<a id="filelink" />';
 echo '		</td>';
 echo '	</tr>';
-// if ($g->useCreateOnline()) {
-// 	echo '	<tr id="editonlineroweditfile" >';
-// 	echo '		<td>'. _('Edit the contents to your desire or leave them as they are to remain unmodified.') .'<br />';
-// 	echo '			<textarea id="defaulteditzone" name="details" rows="15" cols="70"></textarea><br />';
-// 	echo '			<input id="defaulteditfiletype" type="hidden" name="filetype" value="text/plain" />';
-// 	echo '		</td>';
-// 	echo '	</tr>';
-// }
+if ($g->useCreateOnline()) {
+	echo '	<tr id="editonlineroweditfile" >';
+	echo '		<td>'. _('Edit the contents to your desire or leave them as they are to remain unmodified.') .'<br />';
+	echo '			<textarea id="defaulteditzone" name="details" rows="15" cols="70"></textarea><br />';
+	echo '			<input id="defaulteditfiletype" type="hidden" name="filetype" value="text/plain" />';
+	echo '		</td>';
+	echo '	</tr>';
+}
 echo '	<tr>';
 echo '		<td><strong>'. _('Folder that document belongs in:') .'</strong><br />';
 echo '			<select name="doc_group" id="doc_group" />';

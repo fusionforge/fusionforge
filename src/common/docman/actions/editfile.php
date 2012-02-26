@@ -58,7 +58,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 $docid = getIntFromRequest('docid');
 $title = getStringFromRequest('title');
 $description = getStringFromRequest('description');
-$data = getStringFromRequest('details'.$docid);
+$data = getStringFromRequest('details');
 $file_url = getStringFromRequest('file_url');
 $uploaded_data = getUploadedFile('uploaded_data');
 $stateid = getIntFromRequest('stateid');
