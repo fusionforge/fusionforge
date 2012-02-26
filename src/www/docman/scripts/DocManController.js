@@ -96,29 +96,31 @@ DocManListFileController.prototype =
 			modal: true,
 			title: this.params.divEditTitle,
 			buttons: {
-				Save: function() {
+				Save: jQuery.proxy(function() {
 					jQuery('#editdocdata').submit();
-// 					jQuery.get(this.params.docManURL, {
-// 						group_id:	this.params.groupId,
-// 						action:		'lockfile',
-// 						lock:		0,
-// 						fileid:		id,
-// 						childgroup_id:	this.params.childGroupId
-// 					});
-// 					clearInterval(this.lockInterval[id]);
+					var id = jQuery('#docid').attr('value');
+					jQuery.get(this.params.docManURL, {
+						group_id:	this.params.groupId,
+						action:		'lockfile',
+						lock:		0,
+						fileid:		id,
+						childgroup_id:	this.params.childGroupId
+					});
+					clearInterval(this.lockInterval[id]);
 					jQuery(modalId).dialog( "close" );
-				},
-				Cancel: function() {
-// 					jQuery.get(this.params.docManURL, {
-// 						group_id:	this.params.groupId,
-// 						action:		'lockfile',
-// 						lock:		0,
-// 						fileid:		id,
-// 						childgroup_id:	this.params.childGroupId
-// 					});
-// 					clearInterval(this.lockInterval[id]);
+				}, this),
+				Cancel: jQuery.proxy(function() {
+					var id = jQuery('#docid').attr('value');
+					jQuery.get(this.params.docManURL, {
+						group_id:	this.params.groupId,
+						action:		'lockfile',
+						lock:		0,
+						fileid:		id,
+						childgroup_id:	this.params.childGroupId
+					});
+					clearInterval(this.lockInterval[id]);
 					jQuery(modalId).dialog( "close" );
-				},
+				}, this),
 			},
 		});
 	},
@@ -211,14 +213,14 @@ DocManListFileController.prototype =
 		}
 		jQuery('#editdocdata').attr('action', this.docparams.action);
 		
-// 		jQuery.get(this.docparams.docManURL, {
-// 				group_id:	this.docparams.groupId,
-// 				action:		'lockfile',
-// 				lock:		1,
-// 				fileid:		this.docparams.id,
-// 				childgroup_id:	this.docparams.childGroupId
-// 			});		
-// 		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lockfile',lock:1,fileid:"+this.docparams.id+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
+		jQuery.get(this.docparams.docManURL, {
+				group_id:	this.docparams.groupId,
+				action:		'lockfile',
+				lock:		1,
+				fileid:		this.docparams.id,
+				childgroup_id:	this.docparams.childGroupId
+			});		
+		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lockfile',lock:1,fileid:"+this.docparams.id+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
 		jQuery(this.params.divEditFile).dialog("open");
 
 		return false;
