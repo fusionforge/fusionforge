@@ -7,6 +7,7 @@
  * Copyright 2002-2004, GForge Team
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -82,6 +83,38 @@ function docman_recursive_stateid($docgroup, $nested_groups, $nested_docs, $stat
 			$d->setState($stateid);
 		}
 	}
+}
+
+function get_path_document($groupsarr, $doc_group, $group_id) {
+	$rep = "";
+	foreach ($groupsarr as $group) {
+		if ($group["doc_group"] == $doc_group) {
+			if ($group["parent_doc_group"] == 0) {
+				$href = util_make_uri("docman/?group_id=$group_id&amp;view=listfile&amp;dirid=$group[doc_group]");
+				$rep .= "<a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
+				break;
+			}
+			$s = get_path_document($groupsarr, $group["parent_doc_group"], $group_id);
+			$href = util_make_uri("docman/?group_id=$group_id&amp;view=listfile&amp;dirid=$group[doc_group]");
+			$rep .= "$s / <a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
+			break;
+		}
+	}
+	return $rep;
+}
+
+function prepare_search_text($text) {
+	$rep = $text;
+	$rep = utf8_decode($rep);
+	$rep = preg_replace("/é/", "/e/", $rep);
+	$rep = preg_replace("/è/", "/e/", $rep);
+	$rep = preg_replace("/ê/", "/e/", $rep);
+	$rep = preg_replace("/à/", "/a/", $rep);
+	$rep = preg_replace("/ù/", "/u/", $rep);
+	$rep = preg_replace("/ç/", "/c/", $rep);
+	$rep = preg_replace("/é/", "/e/", $rep);
+	$rep = strtolower($rep);
+	return $rep;
 }
 
 ?>

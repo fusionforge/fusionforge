@@ -125,10 +125,15 @@ class projects_hierarchyPlugin extends Plugin {
 				break;
 			}
 			case "docmansearch_has_hierarchy": {
-				$group_id = $params['group_id'];
-				$group = group_get_object($group_id);
-				if ($group->usesPlugin($this->name)) {
-					$qpa = $params['qpa'];
+				if ($params['includesubprojects']) {
+					$group_id = $params['group_id'];
+					$group = group_get_object($group_id);
+					if ($group->usesPlugin($this->name)) {
+						$arrayChilds= $this->getFamily($group_id, 'child', true, 'validated');
+						foreach ( $arrayChilds as $childId ) {
+							$params['qpa'] = db_construct_qpa($params['qpa'], ' OR group_id = $1', array($childId));
+						}
+					}
 				}
 				$returned = true;
 				break;

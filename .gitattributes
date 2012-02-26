@@ -425,9 +425,7 @@ src/common/docman/engine/parser_pdf.php -text
 src/common/docman/engine/parser_text.inc.php -text
 src/common/docman/engine/parser_text.php -text
 src/common/docman/include/utils.php -text
-src/common/docman/include/vtemplate.class.php -text
 src/common/docman/include/webdav.php -text
-src/common/docman/templates/search.tpl.html -text
 src/common/docman/views/addfile.php -text
 src/common/docman/views/additem.php -text
 src/common/docman/views/addsubdocgroup.php -text
