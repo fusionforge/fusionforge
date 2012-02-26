@@ -25,7 +25,6 @@
 /* global variables used */
 global $dirid; //id of doc_group
 global $group_id; // id of group
-global $LUSER; // User object
 
 $sysdebug_enable = false;
 
@@ -62,7 +61,7 @@ if ($childgroup_id) {
 }
 $d = new Document($g, $fileid);
 if ($d->isError())
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+	session_redirect($urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 
 $filearray = array();
 if ($details) {
