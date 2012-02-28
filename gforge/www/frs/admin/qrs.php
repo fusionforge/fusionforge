@@ -245,7 +245,8 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		<?php if ($sys_use_ftpuploads) {
 
 			echo '<p>';
-			printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';
+			printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host);
+			echo '<br />';
 			echo _('Choose an FTP file instead of uploading:').'<br />';
 			$arr[]='';
 			$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
