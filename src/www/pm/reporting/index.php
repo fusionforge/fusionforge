@@ -196,7 +196,7 @@ AND start_date >= $2
 GROUP BY Subproject',
 					  array ($group_id,
 						 $period_threshold)) ;
-		$qpa2 = db_construct_qpa ('SELECT project_group_list.project_name AS Subproject, count(*) AS Count 
+		$qpa2 = db_construct_qpa(false, 'SELECT project_group_list.project_name AS Subproject, count(*) AS Count 
 FROM project_group_list,project_task 
 WHERE project_group_list.group_project_id=project_task.group_project_id 
 AND project_task.status_id <> 3
@@ -212,7 +212,7 @@ GROUP BY Subproject',
 			  _('All Tasks By Category'), $qpa2);
 
 	} else if ($what=="tech") {
-		$qpa1 = db_construct_qpa ('SELECT users.user_name AS Technician, count(*) AS Count 
+		$qpa1 = db_construct_qpa(false, 'SELECT users.user_name AS Technician, count(*) AS Count 
 FROM users,project_group_list,project_task,project_assigned_to 
 WHERE users.user_id=project_assigned_to.assigned_to_id 
 AND project_assigned_to.project_task_id=project_task.project_task_id 
@@ -224,7 +224,7 @@ GROUP BY Technician',
 					  array ($group_id,
 						 $period_threshold)) ;
 
-		$qpa2 = db_construct_qpa ('SELECT users.user_name AS Technician, count(*) AS Count 
+		$qpa2 = db_construct_qpa(false, 'SELECT users.user_name AS Technician, count(*) AS Count 
 FROM users,project_group_list,project_task,project_assigned_to 
 WHERE users.user_id=project_assigned_to.assigned_to_id 
 AND project_assigned_to.project_task_id=project_task.project_task_id 
