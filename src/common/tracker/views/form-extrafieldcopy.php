@@ -43,7 +43,6 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 			artifact_extra_field_list aefl
 			WHERE g.group_id=ANY($1)
 			AND g.group_id=agl.group_id
-			AND agl.group_artifact_id=ap.group_artifact_id
 			AND aefl.group_artifact_id=agl.group_artifact_id
 			AND aefl.extra_field_id != $2
 			AND aefl.field_type IN (1,2,3,5,7)',
