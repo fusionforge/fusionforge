@@ -236,7 +236,7 @@ if ($editdoc && $docid) {
 
 	<?php
 
-	if ((!$d->isURL()) && ($d->isText())) {
+	if ((!$d->isURL()) && ($d->isText()) && (!$d->isHtml())) {
 		echo '<tr>
 				<td>
 				';

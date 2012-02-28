@@ -269,6 +269,9 @@ class Document extends Error {
 		if (preg_match('/html/i',$doctype)) {
 			return true;
 		}	
+		if (preg_match('/xml/i',$doctype)) {
+			return true;
+		}	
 		return false;
 	}	
 
