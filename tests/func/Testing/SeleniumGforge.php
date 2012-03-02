@@ -96,8 +96,19 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 		$this->switchUser (FORGE_ADMIN_USERNAME) ;
 
-		$this->approveProject ('Template', FORGE_ADMIN_USERNAME);
-		$this->open( ROOT . '/projects/template') ;
+		$this->createProject ('Tmpl');
+
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Display Full Project List/Edit Projects");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Tmpl");
+		$this->waitForPageToLoad("30000");
+		$this->select ("//select[@name='form_template']", "label=Yes") ;
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+
+		$this->open( ROOT . '/projects/tmpl') ;
 		$this->waitForPageToLoad("30000");
 
 		$this->click("link=Admin");
@@ -308,6 +319,11 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->type("description", "This is the public description for $name.");
 		$this->type("unix_name", $unix_name);
 		$this->click("//input[@name='scm' and @value='scmsvn']");
+
+		if ($this->isElementPresent("//select[@name='built_from_template']/option[.='Tmpl']")) {
+			$this->select("//select[@name='built_from_template']", "label=Tmpl");
+		}
+
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Your project has been submitted"));

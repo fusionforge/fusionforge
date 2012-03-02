@@ -146,7 +146,7 @@ class CreateProject extends FForge_SeleniumTestCase
 	{
 		$this->populateStandardTemplate('trackers');
 
-		$this->open( ROOT . '/projects/template') ;
+		$this->open( ROOT . '/projects/tmpl') ;
 		$this->waitForPageToLoad("30000");
 
 		$this->click("link=Admin");
@@ -170,7 +170,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Tracker for ProjectA (projecta)"));
 
 		// Test for fusionforge.org bug #245
-		$this->open( ROOT . '/projects/template') ;
+		$this->open( ROOT . '/projects/tmpl') ;
 		$this->waitForPageToLoad("30000");
 
 		$this->click("link=Admin");
