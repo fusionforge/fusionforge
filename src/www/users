@@ -36,12 +36,35 @@ if (!$expl_pathinfo[2]) {
 }
 
 $default_content_type = 'text/html';
-
-$default_content_type = 'text/html';
 $script='user_home';
 $content_type = util_negociate_alternate_content_types($script, $default_content_type);
 
 $username = urldecode($expl_pathinfo[2]);
+
+// If restricted mode, display only people who are sharing a project with the current user.
+if (forge_get_config('restrict_users_visibility')) {
+	if (!session_loggedin()) {
+		exit_permission_denied();
+	}
+
+	$s  = session_get_user();
+	$u1 = $s->getID();
+
+	$user = user_get_object_by_name($username);
+	if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
+		exit_permission_denied();
+	}
+	$u2 = $user->getID();
+
+	$res = db_query_params('SELECT g1.group_id FROM user_group g1, user_group g2
+		WHERE g1.user_id=$1
+		  AND g2.user_id=$2
+		  AND g1.group_id=g2.group_id',
+		array($u1,$u2));
+	if (db_numrows($res) < 1) {
+		exit_permission_denied();
+	}
+}
 
 //get the user object based on the user_name in the URL
 $user =& user_get_object_by_name($username);
