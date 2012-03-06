@@ -68,7 +68,7 @@ if ($error_msg) {
 	session_redirect($baseurl.'&error_msg='.urlencode($error_msg));
 }
 
-if (!$doc_group || $doc_group == 100) {
+if (!$doc_group) {
 	//cannot add a doc unless an appropriate group is provided
 	$return_msg = _('No valid Directory was selected.');
 	session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
