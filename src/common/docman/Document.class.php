@@ -896,10 +896,11 @@ class Document extends Error {
 			$BCC .= $this->getMonitoredUserEmailAddress();
 		}
 		if (strlen($BCC) > 0) {
+			$sess = session_get_user();
 			if ($new) {
 				$status = _('New document');
 			} else {
-				$status = _('Updated document');
+				$status = _('Updated document').' '._('by').' ' . $sess->getRealName();
 			}
 			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
 			$body = _('Project:').' '.$this->Group->getPublicName()."\n";
@@ -907,9 +908,12 @@ class Document extends Error {
 			$body .= _('Document title:').' '.$this->getName()."\n";
 			$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
 			$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
+			if (!$new) {
+				$body .= _('Updated By:').' '. $sess->getRealName ();
+			}
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').
-				"\n\n" . util_make_uri('/docman/?group_id='.$this->Group->getID().'&amp;view=listfile&amp;dirid='.$this->getDocGroupID());
+				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
 
 			util_send_message('', $subject, $body, '', $BCC);
 		}
