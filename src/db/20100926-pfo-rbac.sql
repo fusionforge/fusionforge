@@ -251,7 +251,7 @@ BEGIN
 
 	INSERT INTO pfo_role (SELECT nextval ('pfo_role_seq'), role_name, 1, group_id, false, role_id FROM role) ;
 
-	INSERT INTO pfo_user_role (SELECT ug.user_id, r.role_id FROM user_group ug, pfo_role r WHERE ug.role_id = r.old_role_id AND r.old_role_id != 1) ;
+	INSERT INTO pfo_user_role (SELECT DISTINCT ug.user_id, r.role_id FROM user_group ug, pfo_role r WHERE ug.role_id = r.old_role_id AND r.old_role_id != 1) ;
 
 	PERFORM migrate_rbac_permissions_to_pfo_rbac () ;
 	PERFORM migrate_role_observer_to_pfo_rbac () ;
