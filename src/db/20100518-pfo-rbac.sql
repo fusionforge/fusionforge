@@ -191,7 +191,6 @@ BEGIN
 			   PERFORM insert_pfo_role_setting (1, 'tracker', t.group_artifact_id, 1) ;
 			END IF ;
 
-			PERFORM insert_pfo_role_setting (1, 'tracker', t.group_artifact_id, 1) ;
 			PERFORM insert_pfo_role_setting (2, 'tracker', t.group_artifact_id, 1) ;
 		END LOOP ;
 		
