@@ -1,8 +1,10 @@
 Author: Roland Mas <lolando@debian.org>
 Description: Use Snoopy as provided by the libphp-snoopy Debian package
 instead of shipping a local one.
---- src.orig/plugins/cvstracker/bin/post.php
-+++ src/plugins/cvstracker/bin/post.php
+Index: src/plugins/cvstracker/bin/post.php
+===================================================================
+--- src.orig/plugins/cvstracker/bin/post.php	2012-03-09 14:49:42.031526433 +0100
++++ src/plugins/cvstracker/bin/post.php	2012-03-09 14:50:01.243905701 +0100
 @@ -32,7 +32,7 @@
  require dirname(__FILE__).'/../../env.inc.php';
  require_once $gfcommon.'include/pre.php';
@@ -12,8 +14,10 @@ instead of shipping a local one.
  
  $cvs_binary_version = get_cvs_binary_version () ;
  
---- src.orig/plugins/scmcvs/bin/aclcheck.php
-+++ src/plugins/scmcvs/bin/aclcheck.php
+Index: src/plugins/scmcvs/bin/aclcheck.php
+===================================================================
+--- src.orig/plugins/scmcvs/bin/aclcheck.php	2012-03-09 14:49:42.031526433 +0100
++++ src/plugins/scmcvs/bin/aclcheck.php	2012-03-09 14:50:01.247905800 +0100
 @@ -31,7 +31,7 @@
  require_once $gfcommon. 'include/pre.php';
  require_once $gfcommon.'include/utils.php';
@@ -23,8 +27,10 @@ instead of shipping a local one.
  
  // Input cleansing
  $env_cvsroot = (string) $_ENV['CVSROOT'];
---- src.orig/plugins/svntracker/bin/post.php
-+++ src/plugins/svntracker/bin/post.php
+Index: src/plugins/svntracker/bin/post.php
+===================================================================
+--- src.orig/plugins/svntracker/bin/post.php	2012-03-09 14:49:42.031526433 +0100
++++ src/plugins/svntracker/bin/post.php	2012-03-09 14:50:01.255905998 +0100
 @@ -31,7 +31,7 @@
  
  require_once dirname(__FILE__)."/../../env.inc.php";
