@@ -2,8 +2,8 @@ Author: Roland Mas <lolando@debian.org>
 Description: Disable SVN-over-WebDAV
 Index: src/plugins/scmsvn/etc/scmsvn.ini
 ===================================================================
---- src.orig/plugins/scmsvn/etc/scmsvn.ini	2012-03-09 14:49:42.271529992 +0100
-+++ src/plugins/scmsvn/etc/scmsvn.ini	2012-03-09 14:50:00.375884399 +0100
+--- src.orig/plugins/scmsvn/etc/scmsvn.ini	2012-03-09 14:56:05.510535136 +0100
++++ src/plugins/scmsvn/etc/scmsvn.ini	2012-03-09 15:00:19.597480071 +0100
 @@ -7,9 +7,9 @@
  ; is available in installation_environment = development only.
  plugin_status = valid
@@ -16,3 +16,39 @@ Index: src/plugins/scmsvn/etc/scmsvn.ini
  anonsvn_login = anonsvn
  anonsvn_password = anonsvn
  default_server = "$core/web_host"
+Index: src/etc/httpd.conf.d/plugin-scmsvn.inc
+===================================================================
+--- src.orig/etc/httpd.conf.d/plugin-scmsvn.inc	2012-03-09 14:56:05.514535198 +0100
++++ src/etc/httpd.conf.d/plugin-scmsvn.inc	2012-03-09 15:00:44.098700088 +0100
+@@ -1,15 +1,16 @@
+-<Location /svn>
+-  <IfModule mod_dav_svn.c>
+-  DAV svn
+-  SVNParentPath {scmsvn/repos_path}
+-  
+-  # how to authenticate a user
+-  AuthzSVNAccessFile {core/data_path}/svnroot-access
+-  AuthType Basic
+-  AuthName "Document repository"
+-  AuthUserFile {core/data_path}/svnroot-authfile
+-  </IfModule>
+-  
+-  # only authenticated users may access the repository
+-  Require valid-user
+-</Location>
++# Disabled by disable-dav.patch
++# <Location /svn>
++#   <IfModule mod_dav_svn.c>
++#   DAV svn
++#   SVNParentPath {scmsvn/repos_path}
++#   
++#   # how to authenticate a user
++#   AuthzSVNAccessFile {core/data_path}/svnroot-access
++#   AuthType Basic
++#   AuthName "Document repository"
++#   AuthUserFile {core/data_path}/svnroot-authfile
++#   </IfModule>
++#   
++#   # only authenticated users may access the repository
++#   Require valid-user
++# </Location>
