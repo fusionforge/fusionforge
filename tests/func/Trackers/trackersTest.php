@@ -60,6 +60,15 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Feature Requests"));
 		$this->click("link=Bugs");
 		$this->waitForPageToLoad("30000");
+		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Manage Custom Fields");
+		$this->waitForPageToLoad("30000");
+		$this->type("name", "URL");
+		$this->type("alias", "url");
+		$this->click("//input[@name='field_type' and @value='4']");
+		$this->click("post_changes");
+		$this->waitForPageToLoad("30000");
 		$this->click("link=Submit New");
 		$this->waitForPageToLoad("30000");
 		$this->type("summary", "Summary1");
