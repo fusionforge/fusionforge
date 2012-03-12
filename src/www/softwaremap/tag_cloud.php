@@ -104,7 +104,7 @@ if ($selected_tag) {
 		for ($i=1 ;$i <= ceil($querytotalcount/$TROVE_BROWSELIMIT); $i++) {
 			$html_limit .= ' ';
 			if ($page != $i) {
-				$html_limit .= util_make_link ('/softwaremap/tag_cloud.php?tag='.$selected_tag.'&page='.$i,
+				$html_limit .= util_make_link ('/softwaremap/tag_cloud.php?tag='.$selected_tag.'&amp;page='.$i,
 							       '&lt;'.$i.'&gt;');
 			} else {
 				$html_limit .= '<strong>&lt;'.$i.'&gt;</strong>';
@@ -165,7 +165,7 @@ if ($selected_tag) {
 			print '</td></tr>';
 			/*
 			 if ($row_grp['jobs_count']) {
-			 print '<tr><td colspan="2" align="center">'
+			 print '<tr><td colspan="2" class="align-center">'
 			 .util_make_link ('/people/?group_id='.$row_grp['group_id'],_("[This project needs help]")).'</td></td>';
 			 }
 			*/

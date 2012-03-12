@@ -101,7 +101,7 @@ if (session_loggedin()) {
 			$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details)
  VALUES ($1, $2, $3, $4, $5, $6, $7)';
 			$result=db_query_params($sql,
-						array($group_id, user_getid(), 0, time(), $new_id, htmlspecialchars($summary), $details));
+				array($group_id, user_getid(), 0, time(), $new_id, htmlspecialchars($summary), $details));
 			if (!$result) {
 				db_rollback();
 				form_release_key(getStringFromRequest('form_key'));
@@ -143,7 +143,7 @@ if (session_loggedin()) {
 		<p><strong>'._('For project').' '.$group->getPublicName().'</strong></p>
 		<p>
 		<strong>'._('Subject').':</strong>'.utils_requiredField().'<br />
-		<input type="text" name="summary" value="'.$summary.'" size="60" maxlength="60" /></p>
+		<input required="required" type="text" name="summary" value="'.$summary.'" size="60" maxlength="60" /></p>
 		<p>
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms.newssubmitform.details').utils_requiredField().'</p>';
 

@@ -167,7 +167,7 @@ site_header(array('title'=>_('Register Project')));
 </p>
 <p>
 <?php echo _('Full Name:') ?><br/>
-<input size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars($full_name); ?>"/>
+<input required="required" size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars($full_name); ?>"/>
 </p>
 
 <?php
@@ -177,7 +177,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 	echo '<p>';
 	printf(_('Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.'), forge_get_config ('forge_name'));
 	echo '</p>';
-	echo '<textarea name="purpose" cols="70" rows="10">';
+	echo '<textarea required="required" name="purpose" cols="70" rows="10">';
 	echo htmlspecialchars($purpose);
 	echo '</textarea>';
 }
@@ -188,7 +188,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 <?php echo _('This is the description of your project which will be shown on the Project Summary page, in search results, etc.') ?>
 </p>
 
-<textarea name="description" cols="70" rows="5">
+<textarea required="required" name="description" cols="70" rows="5">
 <?php echo htmlspecialchars($description); ?>
 </textarea>
 
@@ -209,14 +209,14 @@ if ( !forge_get_config ('project_auto_approval') ) {
 <li><?php printf(_('a web site at <tt>unixname.%1$s</tt>,'), forge_get_config('web_host')) ?></li>
 <li><?php echo _('the URL of your source code repository,') ?></li>
 <?php if (forge_get_config('use_shell')) { ?>
-<li><?php printf(_('shell access to <tt>unixname.%1$s</tt>,'), forge_get_config('web_host')) ?></li>
+<li><?php printf(_('shell access to <span class="tt">unixname.%1$s</span>,'), forge_get_config('web_host')) ?></li>
 <?php } ?>
 <li><?php echo _('search engines throughout the site.') ?></li>
 </ul>
 <p>
 <?php echo _('Unix Name:') ?>
 <br />
-<input type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>"/>
+<input required="required" type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>"/>
 </p>
 
 <?php

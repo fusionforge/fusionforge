@@ -61,21 +61,12 @@ function format_name($name, $status) {
 	Main code
 */
 if ($usersearch) {
-	if (is_numeric($search)) {
-		$result = db_query_params ('SELECT DISTINCT * FROM users
-WHERE user_id = $1
-OR lower(user_name) LIKE $2
-OR lower(email) LIKE $2
-OR lower(realname) LIKE $2',
-					   array ($search,
-						  strtolower("%$search%")));
-	} else {
-		$result = db_query_params ('SELECT DISTINCT * FROM users
-WHERE lower(user_name) LIKE $1
-OR lower(email) LIKE $1
-OR lower(realname) LIKE $1',
-					   array (strtolower("%$search%")));
-	}
+	$result = db_query_params ('SELECT DISTINCT * FROM users
+		WHERE cast(user_id as text) LIKE $1
+		OR lower(user_name) LIKE $1
+		OR lower(email) LIKE $1
+		OR lower(realname) LIKE $1',
+		array (strtolower("%$search%")));
 
 	print '<p><strong>' .sprintf(ngettext('User search with criteria <em>%1$s</em>: %2$s match', 'User search with criteria <em>%1$s</em>: %2$s matches', db_numrows($result)), $search, db_numrows($result)).'</strong></p>';
 
@@ -103,7 +94,7 @@ OR lower(realname) LIKE $1',
 				<td>'.$row['realname'].'</td>
 				<td>'.$row['email'].'</td>
 				<td>'.date(_('Y-m-d H:i'), $row['add_date']).'</td>
-				<td style="text-align:center">'.format_name($row['status'].'/'.$row['unix_status'], $row['status']).'</td>
+				<td class="align-center">'.format_name($row['status'].'/'.$row['unix_status'], $row['status']).'</td>
 				</tr>
 			';
 		}

@@ -60,43 +60,40 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 			$field_id_arr[] = $efearr[$i]['element_id'];
 			$field_arr[] = $efearr[$i]['element_name'];
 		}
-		?>
+?>
 		<form action="<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post" >
 		<table>
 		<tr>
-		<td></td><td><center><strong>
+		<td></td><th>
 		<?php echo _('Copy From') ?>
-		<br />
 		<?php echo $fb->getName() ?>
-		</strong></center></td>
-		<td></td>
-		<td><center><strong>
+		</th><td></td><th>
 		<?php echo _('Into trackers and custom fields') ?>
-		</strong></center></td></tr>
-		<tr><td></td>
-		<td valign="top">
+		</th></tr><tr><th>
+		</th>
+		<td class="top">
 		<input type="hidden" name="copy_opt" value="copy" />
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
-		<?php
+<?php
 		echo html_build_multiple_select_box_from_arrays($field_id_arr,$field_arr,'copyid[]',array(),10,false);
-		echo '</td><td><center><strong>';
+		echo '</td><th>';
 
 		while($arr =db_fetch_array($res)) {
 				$name_arr[]=$arr['unix_group_name']. '::'. $arr['tracker_name'] . '::'. $arr['field_name'];
 				$id_arr[]=$arr['extra_field_id'];
 		}
-		echo '</strong></center></td>';
-		echo '<td valign="top">';
+		echo '</th>';
+		echo '<td class="top">';
 
 		echo html_build_select_box_from_arrays($id_arr,$name_arr,'selectid',$selectid,false);
 		echo '</td></tr>';
 		echo '<tr><td>';
-		?>
+?>
 		<br />
 	 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 		</td></tr></table></form>
 
-		<?php
+<?php
 		$ath->footer(array());
 
 // Local Variables:

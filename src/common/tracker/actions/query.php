@@ -365,7 +365,7 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 
 echo '
 	<tr>
-		<td colspan="2" nowrap="nowrap">'.
+		<td colspan="2" style="white-space: nowrap;">'.
 		'<strong>'._('Last Modified Date range').':</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
 		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /><p/>
 		<strong>'._('Open Date range').':</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
@@ -393,10 +393,10 @@ echo '
 	</tr>';
 echo '<tr>
 		<td colspan="2">'.
-		'<p/><strong>Options:</strong><br />
+		'<p><strong>'._('Options')._(':').'</strong><br />
 		<input type="checkbox" name="query_options[bargraph]" '.
 	((in_array('bargraph', $aq->getQueryOptions())) ? 'checked="checked"' : '')
-.'/> Display a short summary box on top of the list (roadmap status).<p/>
+.'/>'._('Display a short summary box on top of the list (roadmap status).').'</p>
 		</td>
 	</tr>';
 echo '

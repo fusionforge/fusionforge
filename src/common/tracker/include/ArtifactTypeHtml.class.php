@@ -430,17 +430,17 @@ class ArtifactTypeHtml extends ArtifactType {
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
 
 				$return .= '
-					<td width="50%" valign="top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
+					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
 
 				$return .= '
-					<td width="50%" valign="top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
+					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
 
 				$return .= '
-					<td width="50%" valign="top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
+					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
@@ -449,14 +449,14 @@ class ArtifactTypeHtml extends ArtifactType {
 				if (($col_count == 1) && ($efarr[$i]['attribute1'] > 30)) {
 					$colspan=2;
 					$return .= '
-					<td>&nbsp;</td>
+					<td></td>
 			</tr>
 			<tr>';
 				} else {
 					$colspan=1;
 				}
 				$return .= '
-					<td width="'.(50*$colspan).'%" colspan="'.$colspan.'" valign="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
+					<td style="width:'.(50*$colspan).'%" colspan="'.$colspan.'" class="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 
@@ -464,24 +464,24 @@ class ArtifactTypeHtml extends ArtifactType {
 				if (($col_count == 1) && ($efarr[$i]['attribute2'] > 30)) {
 					$colspan=2;
 					$return .= '
-					<td>&nbsp;</td>
+					<td></td>
 			</tr>
 			<tr>';
 				} else {
 					$colspan=1;
 				}
 				$return .= '
-					<td width="'.(50*$colspan).'%" colspan="'.$colspan.'" valign="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
+					<td style="width:'.(50*$colspan).'%" colspan="'.$colspan.'" class="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 
 				$return .= '
-					<td width="50%" valign="top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
+					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 
 				$return .= '
-					<td width="50%" valign="top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
+					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 
@@ -489,14 +489,14 @@ class ArtifactTypeHtml extends ArtifactType {
 				if (($col_count == 1) && ($efarr[$i]['attribute1'] > 30)) {
 					$colspan=2;
 					$return .= '
-					<td>&nbsp;</td>
+					<td></td>
 			</tr>
 			<tr>';
 				} else {
 					$colspan=1;
 				}
 				$return .= '
-					<td width="'.(50*$colspan).'%" colspan="'.$colspan.'" valign="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
+					<td style="width:'.(50*$colspan).'%" colspan="'.$colspan.'" class="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			}
 			$col_count++;
@@ -510,7 +510,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 		if ($col_count == 1) {
 			$return .= '
-					<td>&nbsp;</td>';
+					<td></td>';
 		}
 		$return .= '
 			</tr>
@@ -583,12 +583,12 @@ class ArtifactTypeHtml extends ArtifactType {
 		if ($show_100) {
 			$return .= '
 				<input type="checkbox" name="extra_fields['.$extra_field_id.'][]" value="100" '.
-			((in_array(100,$checked)) ? 'checked="checked"' : '').'/>&nbsp;'.$text_100.'<br />';
+			((in_array(100,$checked)) ? 'checked="checked"' : '').'/> '.$text_100.'<br />';
 		}
 		for ($i=0; $i<count($arr); $i++) {
 			$return .= '
 				<input type="checkbox" name="extra_fields['.$extra_field_id.'][]" value="'.$arr[$i]['element_id'].'" '.
-			((in_array($arr[$i]['element_id'],$checked)) ? 'checked="checked"' : '').'/>&nbsp;'.$arr[$i]['element_name'].'<br />';
+			((in_array($arr[$i]['element_id'],$checked)) ? 'checked="checked"' : '').'/> '.$arr[$i]['element_name'].'<br />';
 		}
 		return $return;
 	}
@@ -712,7 +712,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$ids[]=$extra_id;
 			$names[]=$extra_name;
 		}
-			
+
 		if ($multiple) {
 			if (!is_array($checked)) {
 				$checked = explode(',',$checked);

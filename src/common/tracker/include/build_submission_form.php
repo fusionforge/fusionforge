@@ -30,14 +30,13 @@ function artifact_submission_form($ath, $group) {
 ?>
 
 	<form id="trackeraddform" action="<?php echo getStringFromServer('PHP_SELF') . '?group_id='.$group->getID().'&amp;atid='.$ath->getID(); ?>" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
+	<input type="hidden" name="func" value="postadd" />
 	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 	<table>
 
 	<tr>
-		<td valign="top">
-	            <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
-	            <input type="hidden" name="func" value="postadd" />
-	            <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+		<td class="top">
 <?php
 	if (!session_loggedin()) {
 		echo '<div class="login_warning_msg">
@@ -50,8 +49,8 @@ function artifact_submission_form($ath, $group) {
 		</td>
 	</tr>
 	<tr>
-		<td valign="top"><strong><?php echo _('For project'); ?></strong><br /><?php echo $group->getPublicName(); ?></td>
-		<td valign="top"><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></td>
+		<td class="top"><strong><?php echo _('For project'); ?></strong><br /><?php echo $group->getPublicName(); ?></td>
+		<td class="top"><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></td>
 	</tr>
 
 <?php
@@ -119,7 +118,7 @@ function artifact_submission_form($ath, $group) {
 		</td>
 	</tr>
 
-	<tr><td colspan="2"><br/><?php  echo utils_requiredField(); echo _('Indicates required fields.'); ?></td></tr>
+	<tr><td colspan="2"><br/><?php echo utils_requiredField(); echo _('Indicates required fields.'); ?></td></tr>
 	</table></form>
 <?php
 }

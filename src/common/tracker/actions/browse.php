@@ -343,7 +343,7 @@ if (db_numrows($res)>0) {
 	echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
 	echo '<input type="hidden" name="atid" value="'.$ath->getID().'" />';
 	echo '<input type="hidden" name="power_query" value="1" />';
-	echo '	<table width="100%" cellspacing="0">
+	echo '	<table class="fullwidth">
 	<tr>
 	<td>
 	';
@@ -394,15 +394,15 @@ echo '
 	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
 	<input type="hidden" name="query_id" value="-1" />
 	<input type="hidden" name="set" value="custom" />
-	<table width="100%" cellspacing="0">
+	<table class="fullwidth">
 	<tr>
 	<td>
-	'._('Assignee').':&nbsp;'. $tech_box .'
+	'._('Assignee').': '. $tech_box .'
 	</td>
-	<td align="center">
-	'._('State').':&nbsp;'. $status_box .'
+	<td class="align-center">
+	'._('State').': '. $status_box .'
 	</td>
-	<td align="right">';
+	<td class="align-right">';
 
 // Compute the list of fields which can be sorted.
 $efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
