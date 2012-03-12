@@ -225,14 +225,19 @@ class GroupJoinRequest extends Error {
 			setup_gettext_for_user ($admins[$i]) ;
 
 			$email=$admins[$i]->getEmail();
-			$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
+			$subject = sprintf(_('Request to Join Project %1$s from %2$s (%3$s)'),
+					   $this->Group->getPublicName(),
+					   $user->getRealName(),
+					   $user->getUnixName()
+				);
 			$comments = util_unconvert_htmlspecialchars($this->data_array["comments"]);
-			$body = sprintf(_('%1$s has requested to join your project.
-You can approve this request here: %2$s
+			$body = sprintf(_('%1$s (%2$s) has requested to join your project. 
+You can approve this request here: %3$s 
 
 Comments by the user:
-%3$s'),
+%4$s'),
 					$user->getRealName(),
+					$user->getUnixName(),
 					util_make_url ('/project/admin/users.php?group_id='.$this->Group->getId()),
 					$comments);
 			$body = str_replace("\\n","\n",$body);
