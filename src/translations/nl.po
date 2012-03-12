@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 22:08+0100\n"
+"POT-Creation-Date: 2012-03-11 22:50+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -223,54 +223,10 @@ msgstr "Unixnaam is al in gebruik"
 
 #: common/docman/DocumentGroup.class.php:425
 #: common/docman/include/DocumentGroupHTML.class.php:42
-#: common/survey/SurveyResponse.class.php:89
-#: common/tracker/actions/tracker.php:292
-#: common/tracker/views/form-adminroadmap.php:56
-#: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:62
-#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
-#: plugins/mailman/www/admin/index.php:53
-#: plugins/mailman/www/admin/index.php:73
-#: plugins/mailman/www/admin/index.php:75
-#: plugins/mailman/www/admin/index.php:83
-#: plugins/mailman/www/admin/index.php:94
-#: plugins/mailman/www/admin/index.php:96
-#: plugins/mailman/www/admin/index.php:104
-#: plugins/mailman/www/admin/index.php:125
-#: plugins/mailman/www/admin/index.php:131
-#: plugins/mailman/www/admin/index.php:164
-#: plugins/mailman/www/admin/index.php:166
-#: plugins/mailman/www/admin/index.php:196
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:26
-#: plugins/mailman/www/index.php:33 plugins/mailman/www/index.php:36
-#: plugins/mailman/www/index.php:48 www/admin/passedit.php:53
-#: www/admin/passedit.php:61 www/admin/passedit.php:69
-#: www/forum/admin/pendingmsgdetail.php:51
-#: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:152
-#: www/mail/admin/index.php:248 www/snippet/download.php:45
-#: www/survey/admin/question.php:64 www/survey/admin/question.php:66
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_csv.php:84
-#: www/survey/admin/show_results.php:69 www/survey/admin/show_results.php:73
-#: www/survey/admin/show_results.php:84 www/survey/admin/show_results.php:86
-#: www/survey/admin/show_results.php:133 www/survey/admin/show_results.php:135
 #: www/tracker/admin/index.php:186
-#: www/tracker/reporting/trackeract_graph.php:49
-#: www/tracker/reporting/trackerpie_graph.php:63 www/tracker/roadmap.php:175
-#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
-#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
-msgid "Error"
+#, fuzzy, php-format
+msgid "Error: %s"
 msgstr "Fout"
-
-#: common/docman/DocumentGroup.class.php:425
-#: common/docman/include/DocumentGroupHTML.class.php:42
-#: common/tracker/views/form-adminroadmap.php:69
-#: common/tracker/views/form-adminroadmap.php:192
-#: www/tracker/admin/index.php:186 www/tracker/roadmap.php:175
-#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
-#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
-#: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
-#: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
-msgid ": "
-msgstr ""
 
 #: common/docman/DocumentGroup.class.php:560
 #, fuzzy
@@ -4035,6 +3991,40 @@ msgstr "Fout bij het vinden van de vraag"
 msgid "No Survey Question is found"
 msgstr "Geen enqu&ecirc;tevraag gevonden"
 
+#: common/survey/SurveyResponse.class.php:89
+#: common/tracker/actions/tracker.php:292
+#: common/tracker/views/form-adminroadmap.php:56
+#: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:62
+#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
+#: plugins/mailman/www/admin/index.php:53
+#: plugins/mailman/www/admin/index.php:73
+#: plugins/mailman/www/admin/index.php:75
+#: plugins/mailman/www/admin/index.php:83
+#: plugins/mailman/www/admin/index.php:94
+#: plugins/mailman/www/admin/index.php:96
+#: plugins/mailman/www/admin/index.php:104
+#: plugins/mailman/www/admin/index.php:125
+#: plugins/mailman/www/admin/index.php:131
+#: plugins/mailman/www/admin/index.php:164
+#: plugins/mailman/www/admin/index.php:166
+#: plugins/mailman/www/admin/index.php:196
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:26
+#: plugins/mailman/www/index.php:33 plugins/mailman/www/index.php:36
+#: plugins/mailman/www/index.php:48 www/admin/passedit.php:53
+#: www/admin/passedit.php:61 www/admin/passedit.php:69
+#: www/forum/admin/pendingmsgdetail.php:51
+#: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:152
+#: www/mail/admin/index.php:248 www/snippet/download.php:45
+#: www/survey/admin/question.php:64 www/survey/admin/question.php:66
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_csv.php:84
+#: www/survey/admin/show_results.php:69 www/survey/admin/show_results.php:73
+#: www/survey/admin/show_results.php:84 www/survey/admin/show_results.php:86
+#: www/survey/admin/show_results.php:133 www/survey/admin/show_results.php:135
+#: www/tracker/reporting/trackeract_graph.php:49
+#: www/tracker/reporting/trackerpie_graph.php:63
+msgid "Error"
+msgstr "Fout"
+
 #: common/survey/SurveyResponseFactory.class.php:75
 msgid "No valid Survey Object"
 msgstr "Geen geldig Enqu&ecirc;te Object"
@@ -5456,7 +5446,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:50
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:364
 #: www/tracker/roadmap.php:89 www/tracker/roadmap.php:155
-#: www/tracker/roadmap.php:405 www/tracker/roadmap.php:414
+#: www/tracker/roadmap.php:405
 msgid "Roadmap"
 msgstr ""
 
@@ -5558,7 +5548,6 @@ msgid "Average completion rate: %d%%"
 msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:367
-#: common/tracker/views/form-adminroadmap.php:192
 #: plugins/blocks/www/index.php:225
 #: plugins/mantisbt/view/admin/addCategory.php:32
 #: plugins/mantisbt/view/admin/addVersion.php:35
@@ -5820,13 +5809,9 @@ msgid "Could Not Get ArtifactTypeFactoryHtml"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
 #: common/tracker/views/form-adminroadmap.php:69
-msgid "Can't create or rename roadmap"
-msgstr ""
-
-#: common/tracker/views/form-adminroadmap.php:69
 #, fuzzy
-msgid "name is empty"
-msgstr "Toegevoegd"
+msgid "Can't create or rename roadmap: name is empty"
+msgstr "Kan geen database element toevoegen"
 
 #: common/tracker/views/form-adminroadmap.php:76
 #, php-format
@@ -5918,6 +5903,11 @@ msgstr "Cre&euml;er een bundel"
 msgid "Update roadmap"
 msgstr "Aanpassen"
 
+#: common/tracker/views/form-adminroadmap.php:192
+#, fuzzy
+msgid "Name: "
+msgstr "Naam"
+
 #: common/tracker/views/form-adminroadmap.php:201 www/tracker/roadmap.php:257
 #, fuzzy
 msgid "No trackers have been set up."
@@ -5928,8 +5918,7 @@ msgstr "Geen aan de tracker gerelateerde items toegevoegd"
 msgid "Not used"
 msgstr "Niets gevonden"
 
-#: common/tracker/views/form-adminroadmap.php:251 www/tracker/roadmap.php:201
-#: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
+#: common/tracker/views/form-adminroadmap.php:251
 #, fuzzy, php-format
 msgid "roadmap %s is not available"
 msgstr "Informatie niet beschikbaar"
@@ -21766,7 +21755,7 @@ msgstr ""
 
 #: www/tracker/roadmap.php:175
 #, fuzzy
-msgid "could Not Get ArtifactTypeFactoryHtml"
+msgid "Error: could Not Get ArtifactTypeFactoryHtml"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
 #: www/tracker/roadmap.php:190 www/tracker/roadmap.php:230
@@ -21787,9 +21776,15 @@ msgid ""
 "\">create roadmaps</a>."
 msgstr ""
 
+#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
+#: www/tracker/roadmap.php:223
+#, fuzzy, php-format
+msgid "Error: roadmap %s is not available"
+msgstr "Informatie niet beschikbaar"
+
 #: www/tracker/roadmap.php:238
 #, fuzzy, php-format
-msgid "release %s is not available"
+msgid "Error: release %s is not available"
 msgstr "Informatie niet beschikbaar"
 
 #: www/tracker/roadmap.php:409
@@ -21797,9 +21792,14 @@ msgstr "Informatie niet beschikbaar"
 msgid "Display options"
 msgstr "Verwijder deze taak"
 
+#: www/tracker/roadmap.php:414
+#, fuzzy
+msgid "Roadmap: "
+msgstr "Echte naam"
+
 #: www/tracker/roadmap.php:422
 #, fuzzy
-msgid "Number of release(s) to display"
+msgid "Number of release(s) to display: "
 msgstr "Aantal vragen"
 
 #: www/tracker/roadmap.php:431 www/tracker/roadmap.php:648
@@ -21809,7 +21809,7 @@ msgstr ""
 
 #: www/tracker/roadmap.php:435
 #, fuzzy
-msgid "Display graphs"
+msgid "Display graphs: "
 msgstr "Toon Trove overzicht"
 
 #: www/tracker/roadmap.php:437
@@ -21820,6 +21820,10 @@ msgstr ""
 #, fuzzy
 msgid "No release available"
 msgstr "Geen statistieken beschikbaar"
+
+#: www/tracker/roadmap.php:468
+msgid ": "
+msgstr ""
 
 #: www/tracker/roadmap.php:471
 #, fuzzy
@@ -21930,6 +21934,10 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Gebruikersnaam"
+
+#, fuzzy
+#~ msgid "name is empty"
+#~ msgstr "Toegevoegd"
 
 #, fuzzy
 #~ msgid "Document Edit"

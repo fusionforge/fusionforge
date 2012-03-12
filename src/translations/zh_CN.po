@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 22:08+0100\n"
+"POT-Creation-Date: 2012-03-11 22:50+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -225,54 +225,10 @@ msgstr "Unix名称重复"
 
 #: common/docman/DocumentGroup.class.php:425
 #: common/docman/include/DocumentGroupHTML.class.php:42
-#: common/survey/SurveyResponse.class.php:89
-#: common/tracker/actions/tracker.php:292
-#: common/tracker/views/form-adminroadmap.php:56
-#: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:62
-#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
-#: plugins/mailman/www/admin/index.php:53
-#: plugins/mailman/www/admin/index.php:73
-#: plugins/mailman/www/admin/index.php:75
-#: plugins/mailman/www/admin/index.php:83
-#: plugins/mailman/www/admin/index.php:94
-#: plugins/mailman/www/admin/index.php:96
-#: plugins/mailman/www/admin/index.php:104
-#: plugins/mailman/www/admin/index.php:125
-#: plugins/mailman/www/admin/index.php:131
-#: plugins/mailman/www/admin/index.php:164
-#: plugins/mailman/www/admin/index.php:166
-#: plugins/mailman/www/admin/index.php:196
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:26
-#: plugins/mailman/www/index.php:33 plugins/mailman/www/index.php:36
-#: plugins/mailman/www/index.php:48 www/admin/passedit.php:53
-#: www/admin/passedit.php:61 www/admin/passedit.php:69
-#: www/forum/admin/pendingmsgdetail.php:51
-#: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:152
-#: www/mail/admin/index.php:248 www/snippet/download.php:45
-#: www/survey/admin/question.php:64 www/survey/admin/question.php:66
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_csv.php:84
-#: www/survey/admin/show_results.php:69 www/survey/admin/show_results.php:73
-#: www/survey/admin/show_results.php:84 www/survey/admin/show_results.php:86
-#: www/survey/admin/show_results.php:133 www/survey/admin/show_results.php:135
 #: www/tracker/admin/index.php:186
-#: www/tracker/reporting/trackeract_graph.php:49
-#: www/tracker/reporting/trackerpie_graph.php:63 www/tracker/roadmap.php:175
-#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
-#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
-msgid "Error"
+#, fuzzy, php-format
+msgid "Error: %s"
 msgstr "错误"
-
-#: common/docman/DocumentGroup.class.php:425
-#: common/docman/include/DocumentGroupHTML.class.php:42
-#: common/tracker/views/form-adminroadmap.php:69
-#: common/tracker/views/form-adminroadmap.php:192
-#: www/tracker/admin/index.php:186 www/tracker/roadmap.php:175
-#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
-#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
-#: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
-#: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
-msgid ": "
-msgstr ""
 
 #: common/docman/DocumentGroup.class.php:560
 #, fuzzy
@@ -4002,6 +3958,40 @@ msgstr "找寻问题错误"
 msgid "No Survey Question is found"
 msgstr "没有发现问卷问题"
 
+#: common/survey/SurveyResponse.class.php:89
+#: common/tracker/actions/tracker.php:292
+#: common/tracker/views/form-adminroadmap.php:56
+#: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:62
+#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
+#: plugins/mailman/www/admin/index.php:53
+#: plugins/mailman/www/admin/index.php:73
+#: plugins/mailman/www/admin/index.php:75
+#: plugins/mailman/www/admin/index.php:83
+#: plugins/mailman/www/admin/index.php:94
+#: plugins/mailman/www/admin/index.php:96
+#: plugins/mailman/www/admin/index.php:104
+#: plugins/mailman/www/admin/index.php:125
+#: plugins/mailman/www/admin/index.php:131
+#: plugins/mailman/www/admin/index.php:164
+#: plugins/mailman/www/admin/index.php:166
+#: plugins/mailman/www/admin/index.php:196
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:26
+#: plugins/mailman/www/index.php:33 plugins/mailman/www/index.php:36
+#: plugins/mailman/www/index.php:48 www/admin/passedit.php:53
+#: www/admin/passedit.php:61 www/admin/passedit.php:69
+#: www/forum/admin/pendingmsgdetail.php:51
+#: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:152
+#: www/mail/admin/index.php:248 www/snippet/download.php:45
+#: www/survey/admin/question.php:64 www/survey/admin/question.php:66
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_csv.php:84
+#: www/survey/admin/show_results.php:69 www/survey/admin/show_results.php:73
+#: www/survey/admin/show_results.php:84 www/survey/admin/show_results.php:86
+#: www/survey/admin/show_results.php:133 www/survey/admin/show_results.php:135
+#: www/tracker/reporting/trackeract_graph.php:49
+#: www/tracker/reporting/trackerpie_graph.php:63
+msgid "Error"
+msgstr "错误"
+
 #: common/survey/SurveyResponseFactory.class.php:75
 msgid "No valid Survey Object"
 msgstr "没有有效的问卷对象"
@@ -5414,7 +5404,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:50
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:364
 #: www/tracker/roadmap.php:89 www/tracker/roadmap.php:155
-#: www/tracker/roadmap.php:405 www/tracker/roadmap.php:414
+#: www/tracker/roadmap.php:405
 msgid "Roadmap"
 msgstr ""
 
@@ -5516,7 +5506,6 @@ msgid "Average completion rate: %d%%"
 msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:367
-#: common/tracker/views/form-adminroadmap.php:192
 #: plugins/blocks/www/index.php:225
 #: plugins/mantisbt/view/admin/addCategory.php:32
 #: plugins/mantisbt/view/admin/addVersion.php:35
@@ -5772,13 +5761,9 @@ msgid "Could Not Get ArtifactTypeFactoryHtml"
 msgstr "无法完成执行"
 
 #: common/tracker/views/form-adminroadmap.php:69
-msgid "Can't create or rename roadmap"
-msgstr ""
-
-#: common/tracker/views/form-adminroadmap.php:69
 #, fuzzy
-msgid "name is empty"
-msgstr "上传"
+msgid "Can't create or rename roadmap: name is empty"
+msgstr "无法增加数据库分类"
 
 #: common/tracker/views/form-adminroadmap.php:76
 #, php-format
@@ -5870,6 +5855,11 @@ msgstr "创建一个软件包"
 msgid "Update roadmap"
 msgstr "更新"
 
+#: common/tracker/views/form-adminroadmap.php:192
+#, fuzzy
+msgid "Name: "
+msgstr "名称"
+
 #: common/tracker/views/form-adminroadmap.php:201 www/tracker/roadmap.php:257
 #, fuzzy
 msgid "No trackers have been set up."
@@ -5880,8 +5870,7 @@ msgstr "没有相关的跟踪项被添加"
 msgid "Not used"
 msgstr "没有发现"
 
-#: common/tracker/views/form-adminroadmap.php:251 www/tracker/roadmap.php:201
-#: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
+#: common/tracker/views/form-adminroadmap.php:251
 #, fuzzy, php-format
 msgid "roadmap %s is not available"
 msgstr "信息未提供"
@@ -21528,7 +21517,7 @@ msgstr ""
 
 #: www/tracker/roadmap.php:175
 #, fuzzy
-msgid "could Not Get ArtifactTypeFactoryHtml"
+msgid "Error: could Not Get ArtifactTypeFactoryHtml"
 msgstr "无法完成执行"
 
 #: www/tracker/roadmap.php:190 www/tracker/roadmap.php:230
@@ -21549,9 +21538,15 @@ msgid ""
 "\">create roadmaps</a>."
 msgstr ""
 
+#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
+#: www/tracker/roadmap.php:223
+#, fuzzy, php-format
+msgid "Error: roadmap %s is not available"
+msgstr "信息未提供"
+
 #: www/tracker/roadmap.php:238
 #, fuzzy, php-format
-msgid "release %s is not available"
+msgid "Error: release %s is not available"
 msgstr "信息未提供"
 
 #: www/tracker/roadmap.php:409
@@ -21559,9 +21554,14 @@ msgstr "信息未提供"
 msgid "Display options"
 msgstr "删除样板"
 
+#: www/tracker/roadmap.php:414
+#, fuzzy
+msgid "Roadmap: "
+msgstr "真实姓名"
+
 #: www/tracker/roadmap.php:422
 #, fuzzy
-msgid "Number of release(s) to display"
+msgid "Number of release(s) to display: "
 msgstr "问题数"
 
 #: www/tracker/roadmap.php:431 www/tracker/roadmap.php:648
@@ -21571,7 +21571,7 @@ msgstr ""
 
 #: www/tracker/roadmap.php:435
 #, fuzzy
-msgid "Display graphs"
+msgid "Display graphs: "
 msgstr "显示软件地图"
 
 #: www/tracker/roadmap.php:437
@@ -21582,6 +21582,10 @@ msgstr ""
 #, fuzzy
 msgid "No release available"
 msgstr "没有统计信息"
+
+#: www/tracker/roadmap.php:468
+msgid ": "
+msgstr ""
 
 #: www/tracker/roadmap.php:471
 #, fuzzy
@@ -21692,6 +21696,10 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帐号"
+
+#, fuzzy
+#~ msgid "name is empty"
+#~ msgstr "上传"
 
 #, fuzzy
 #~ msgid "Document Edit"
