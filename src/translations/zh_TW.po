@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-02 10:45+0100\n"
+"POT-Creation-Date: 2012-03-11 22:08+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 
-#: common/docman/Document.class.php:77
+#: common/docman/Document.class.php:79
 #: common/docman/DocumentGroup.class.php:75 common/forum/Forum.class.php:115
 #: common/include/Error.class.php:189 common/mail/MailingList.class.php:79
 #: common/survey/Survey.class.php:79 common/survey/SurveyQuestion.class.php:70
@@ -24,202 +24,133 @@ msgstr ""
 msgid "Group_id in db result does not match Group Object"
 msgstr "資料庫中的群組編號與群組物件不一致"
 
-#: common/docman/Document.class.php:109 common/docman/Document.class.php:782
+#: common/docman/Document.class.php:111 common/docman/Document.class.php:791
 #: common/pm/ProjectGroup.class.php:143 common/pm/ProjectGroup.class.php:324
 msgid "Title Must Be At Least 5 Characters"
 msgstr "標題必須至少5個字元"
 
-#: common/docman/Document.class.php:113 common/docman/Document.class.php:787
+#: common/docman/Document.class.php:115 common/docman/Document.class.php:796
 msgid "Document Description Must Be At Least 10 Characters"
 msgstr "文件說明必須至少10個字元"
 
-#: common/docman/Document.class.php:136 common/docman/Document.class.php:143
-#: common/docman/Document.class.php:796
+#: common/docman/Document.class.php:138 common/docman/Document.class.php:145
+#: common/docman/Document.class.php:805
 msgid "Document already published in this directory"
 msgstr ""
 
-#: common/docman/Document.class.php:181 common/docman/Document.class.php:193
+#: common/docman/Document.class.php:183 common/docman/Document.class.php:195
 #, fuzzy
 msgid "Error Adding Document:"
 msgstr "新增討論區錯誤"
 
-#: common/docman/Document.class.php:200
+#: common/docman/Document.class.php:202
 #, fuzzy
 msgid "Error Adding Document: No Storage API"
 msgstr "錯誤插入一個組成元件"
 
-#: common/docman/Document.class.php:207
+#: common/docman/Document.class.php:209
 #, fuzzy
 msgid "Error fetching Document"
 msgstr "錯誤插入一個組成元件"
 
-#: common/docman/Document.class.php:226
+#: common/docman/Document.class.php:216
+#, fuzzy
+msgid "Error updating document group:"
+msgstr "新增討論區錯誤"
+
+#: common/docman/Document.class.php:235
 #, fuzzy
 msgid "Document: Invalid docid"
 msgstr "文件：無效的文件編號"
 
-#: common/docman/Document.class.php:545
+#: common/docman/Document.class.php:554
 #, fuzzy
 msgid "Unable To Remove Monitor"
 msgstr "無法新增監視"
 
-#: common/docman/Document.class.php:566 common/forum/Forum.class.php:461
+#: common/docman/Document.class.php:575 common/forum/Forum.class.php:461
 msgid "Unable To Add Monitor"
 msgstr "無法新增監視"
 
-#: common/docman/Document.class.php:627
+#: common/docman/Document.class.php:636
 #, fuzzy
 msgid "Document lock failed"
 msgstr "文件標題"
 
-#: common/docman/Document.class.php:655
+#: common/docman/Document.class.php:664
 #, fuzzy
 msgid "Document reservation failed"
 msgstr "查看文件"
 
-#: common/docman/Document.class.php:869
+#: common/docman/Document.class.php:878
 msgid "No Storage API"
 msgstr ""
 
-#: common/docman/Document.class.php:891
+#: common/docman/Document.class.php:901
 #, fuzzy
 msgid "New document"
 msgstr "增加新專案"
 
-#: common/docman/Document.class.php:893
+#: common/docman/Document.class.php:903
 #, fuzzy
 msgid "Updated document"
 msgstr "增加新專案"
 
-#: common/docman/Document.class.php:896
+#: common/docman/Document.class.php:903
+#: common/widget/Widget_MyLatestSvnCommits.class.php:66
+msgid "by"
+msgstr ""
+
+#: common/docman/Document.class.php:906
 #: plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
 #, fuzzy
 msgid "Project:"
 msgstr "專案"
 
-#: common/docman/Document.class.php:897
+#: common/docman/Document.class.php:907
 #, fuzzy
 msgid "Directory:"
 msgstr "新專案名稱"
 
-#: common/docman/Document.class.php:898
+#: common/docman/Document.class.php:908
 #, fuzzy
 msgid "Document title:"
 msgstr "文件標題"
 
-#: common/docman/Document.class.php:899
+#: common/docman/Document.class.php:909
 #, fuzzy
 msgid "Document description:"
 msgstr "說明："
 
-#: common/docman/Document.class.php:900
+#: common/docman/Document.class.php:910
 #, fuzzy
 msgid "Submitter:"
 msgstr "發表人"
 
-#: common/docman/Document.class.php:902
+#: common/docman/Document.class.php:912
+#, fuzzy
+msgid "Updated By:"
+msgstr "已更新"
+
+#: common/docman/Document.class.php:915
 msgid "For more info, visit:"
 msgstr ""
 
-#: common/docman/Document.class.php:926
+#: common/docman/Document.class.php:939
 #, fuzzy
 msgid "Error Deleting Document:"
 msgstr "錯誤插入一個組成元件"
 
-#: common/docman/Document.class.php:936
+#: common/docman/Document.class.php:949
 #, fuzzy
 msgid "Error Deleting Document: No Storage API"
 msgstr "錯誤插入一個組成元件"
 
-#: common/docman/Document.class.php:993
-#: common/docman/DocumentGroup.class.php:639
+#: common/docman/Document.class.php:1006
+#: common/docman/DocumentGroup.class.php:708
 msgid "wrong column name"
 msgstr ""
-
-#: common/docman/Document.class.php:1021
-#, fuzzy
-msgid "Document Edit"
-msgstr "文件標題"
-
-#: common/docman/Document.class.php:1024 common/docman/Document.class.php:1041
-#: common/docman/views/addfile.php:103
-#, fuzzy
-msgid "Document Title:"
-msgstr "文件標題"
-
-#: common/docman/Document.class.php:1025 common/docman/views/addfile.php:103
-msgid ""
-"Refers to the relatively brief title of the document (e.g. How to use the "
-"download server)."
-msgstr ""
-
-#: common/docman/Document.class.php:1028 common/docman/Document.class.php:1048
-#: common/docman/views/addfile.php:104 plugins/contribtracker/www/index.php:46
-#: plugins/contribtracker/www/index.php:142
-#: plugins/contribtracker/www/project_admin.php:293
-#: plugins/mailman/www/admin/index.php:150
-#: plugins/mailman/www/admin/index.php:183 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:224 www/snippet/package.php:152
-msgid "Description:"
-msgstr "說明："
-
-#: common/docman/Document.class.php:1029 common/docman/views/addfile.php:104
-msgid "A brief description to be placed just under the title."
-msgstr ""
-
-#: common/docman/Document.class.php:1033
-msgid "Both fields are used by document search engine."
-msgstr ""
-
-#: common/docman/Document.class.php:1041 common/docman/Document.class.php:1048
-#: common/docman/views/addfile.php:115 common/docman/views/addfile.php:123
-#, fuzzy, php-format
-msgid "(at least %1$s characters)"
-msgstr "密碼至少要6個字元"
-
-#: common/docman/Document.class.php:1055 common/docman/views/addfile.php:130
-#: common/docman/views/addfile.php:155
-msgid "File"
-msgstr "文件:"
-
-#: common/docman/Document.class.php:1057
-#, fuzzy
-msgid "View File URL"
-msgstr "新發佈"
-
-#: common/docman/Document.class.php:1070
-msgid ""
-"Edit the contents to your desire or leave them as they are to remain "
-"unmodified."
-msgstr ""
-
-#: common/docman/Document.class.php:1100
-#, fuzzy
-msgid "Folder that document belongs in"
-msgstr "文件所屬的分組"
-
-#: common/docman/Document.class.php:1113 common/tracker/Artifact.class.php:900
-#: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:557
-#: common/tracker/actions/browse.php:744 common/tracker/actions/detail.php:72
-#: common/tracker/actions/mod-limited.php:125
-#: common/tracker/actions/mod.php:157 common/tracker/actions/query.php:337
-#: common/tracker/views/form-customizelist.php:45 www/pm/browse_task.php:383
-#: www/project/admin/database.php:208
-msgid "State"
-msgstr "狀態"
-
-#: common/docman/Document.class.php:1127
-msgid "Specify an outside URL where the file will be referenced"
-msgstr "或者指定一個文件能夠參考的外部URL"
-
-#: common/docman/Document.class.php:1130
-msgid "OPTIONAL: Upload new file"
-msgstr "可選項：上傳新的文件"
-
-#: common/docman/Document.class.php:1140
-msgid "Submit Edit"
-msgstr "送出編輯"
 
 #: common/docman/DocumentFactory.class.php:89
 #, fuzzy
@@ -260,37 +191,37 @@ msgstr "文件群組：無效的文件群組父編號"
 msgid "Folder name already exists"
 msgstr "帳號已存在"
 
-#: common/docman/DocumentGroup.class.php:147
+#: common/docman/DocumentGroup.class.php:149
 #, fuzzy
 msgid "Error Adding Folder:"
 msgstr "新增討論區錯誤"
 
-#: common/docman/DocumentGroup.class.php:208
+#: common/docman/DocumentGroup.class.php:220
 #: common/docman/actions/addfile.php:118 common/docman/actions/addfile.php:142
 #, fuzzy
 msgid "Invalid file name."
 msgstr "全名錯誤"
 
-#: common/docman/DocumentGroup.class.php:228
+#: common/docman/DocumentGroup.class.php:240
 msgid "Unsupported injected file:"
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:246
+#: common/docman/DocumentGroup.class.php:258
 #, fuzzy
 msgid "Invalid Document Folder ID"
 msgstr "文件分組：無效的分組編號"
 
-#: common/docman/DocumentGroup.class.php:331
+#: common/docman/DocumentGroup.class.php:391
 #, fuzzy
 msgid "Invalid Documents Folder parent ID"
 msgstr "文件群組：無效的文件群組父編號"
 
-#: common/docman/DocumentGroup.class.php:342
+#: common/docman/DocumentGroup.class.php:403
 #, fuzzy
 msgid "Documents Folder name already exists"
 msgstr "Unix名稱重複"
 
-#: common/docman/DocumentGroup.class.php:356
+#: common/docman/DocumentGroup.class.php:425
 #: common/docman/include/DocumentGroupHTML.class.php:42
 #: common/survey/SurveyResponse.class.php:89
 #: common/tracker/actions/tracker.php:292
@@ -317,9 +248,11 @@ msgstr "Unix名稱重複"
 #: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:152
 #: www/mail/admin/index.php:248 www/snippet/download.php:45
 #: www/survey/admin/question.php:64 www/survey/admin/question.php:66
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_csv.php:84
 #: www/survey/admin/show_results.php:69 www/survey/admin/show_results.php:73
 #: www/survey/admin/show_results.php:84 www/survey/admin/show_results.php:86
 #: www/survey/admin/show_results.php:133 www/survey/admin/show_results.php:135
+#: www/tracker/admin/index.php:186
 #: www/tracker/reporting/trackeract_graph.php:49
 #: www/tracker/reporting/trackerpie_graph.php:63 www/tracker/roadmap.php:175
 #: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
@@ -327,10 +260,11 @@ msgstr "Unix名稱重複"
 msgid "Error"
 msgstr "錯誤"
 
-#: common/docman/DocumentGroup.class.php:356
+#: common/docman/DocumentGroup.class.php:425
 #: common/docman/include/DocumentGroupHTML.class.php:42
 #: common/tracker/views/form-adminroadmap.php:69
-#: common/tracker/views/form-adminroadmap.php:192 www/tracker/roadmap.php:175
+#: common/tracker/views/form-adminroadmap.php:192
+#: www/tracker/admin/index.php:186 www/tracker/roadmap.php:175
 #: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
@@ -338,67 +272,143 @@ msgstr "錯誤"
 msgid ": "
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:491
+#: common/docman/DocumentGroup.class.php:560
 #, fuzzy
 msgid "Browse this folder"
 msgstr "編輯 %1$s 表格"
 
-#: common/docman/DocumentGroup.class.php:541
+#: common/docman/DocumentGroup.class.php:610
 msgid "Unable inject zipfile."
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:545
+#: common/docman/DocumentGroup.class.php:614
 msgid "Unable to extract zipfile."
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:550
+#: common/docman/DocumentGroup.class.php:619
 msgid "Unable to open zipfile."
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:580
-#: common/docman/DocumentGroup.class.php:606
+#: common/docman/DocumentGroup.class.php:649
+#: common/docman/DocumentGroup.class.php:675
 msgid "Unable to open directory for inject into tree"
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:596
+#: common/docman/DocumentGroup.class.php:665
 #, fuzzy
 msgid "Unable to add document from zip injection."
 msgstr "無法新增監視"
 
-#: common/docman/DocumentGroupFactory.class.php:58
+#: common/docman/DocumentGroupFactory.class.php:59
 #, fuzzy
 msgid "DocumentGroupFactory:: Invalid Project"
 msgstr "文件：無效的文件編號"
 
-#: common/docman/DocumentGroupFactory.class.php:86
+#: common/docman/DocumentGroupFactory.class.php:87
 #: common/docman/DocumentGroupFactory.class.php:121
 #, fuzzy
 msgid "No Documents Folder Found"
 msgstr "沒有發現文件"
 
-#: common/docman/DocumentManager.class.php:172
+#: common/docman/DocumentManager.class.php:173
 #, fuzzy
 msgid "Number of documents in this folder"
 msgstr "問題數"
 
-#: common/docman/DocumentManager.class.php:175
+#: common/docman/DocumentManager.class.php:176
 msgid ""
 "Number of documents in this folder per status. active/pending/hidden/private"
 msgstr ""
 
-#: common/docman/DocumentManager.class.php:178
+#: common/docman/DocumentManager.class.php:179
 msgid "Number of deleted documents in this folder"
 msgstr ""
+
+#: common/docman/DocumentManager.class.php:182
+#, fuzzy
+msgid "Created_by:"
+msgstr "創造者"
+
+#: common/docman/DocumentManager.class.php:182
+#, fuzzy
+msgid "; Last modified:"
+msgstr "已經新增通信論壇"
+
+#: common/docman/DocumentManager.class.php:182
+#: common/docman/views/listfile.php:261 common/docman/views/listfile.php:263
+#: common/docman/views/listtrashfile.php:169
+#: common/docman/views/listtrashfile.php:171
+#: common/docman/views/pendingfiles.php:101
+#: common/docman/views/pendingfiles.php:103
+#: common/forum/ForumHTML.class.php:215 common/pm/ProjectTask.class.php:1207
+#: common/tracker/Artifact.class.php:1542
+#: common/tracker/Artifact.class.php:1544
+#: common/tracker/Artifact.class.php:1551
+#: common/tracker/Artifact.class.php:1557
+#: common/tracker/Artifact.class.php:1657
+#: common/tracker/actions/browse.php:602 common/tracker/actions/browse.php:613
+#: common/tracker/actions/browse.php:633 common/tracker/actions/detail.php:67
+#: common/tracker/actions/downloadcsv.php:81
+#: common/tracker/actions/downloadcsv.php:82
+#: common/tracker/actions/downloadcsv.php:83
+#: common/tracker/actions/mod-limited.php:95
+#: common/tracker/actions/mod-limited.php:100
+#: common/tracker/actions/mod.php:97 common/tracker/actions/mod.php:102
+#: common/tracker/include/ArtifactHtml.class.php:90
+#: common/tracker/include/ArtifactHtml.class.php:145
+#: common/tracker/include/ArtifactHtml.class.php:154
+#: common/tracker/include/ArtifactTypeHtml.class.php:337
+#: common/tracker/include/ArtifactTypeHtml.class.php:338
+#: common/tracker/include/ArtifactTypeHtml.class.php:377
+#: common/widget/Widget_MyLatestSvnCommits.class.php:65
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:110
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:112
+#: common/widget/Widget_ProjectInfo.class.php:66
+#: common/widget/Widget_Rss.class.php:74
+#: cronjobs/send_pending_items_mail.php:98
+#: plugins/compactpreview/include/CompactPreviewPlugin.class.php:189
+#: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
+#: plugins/hudson/include/HudsonBuild.class.php:110 www/account/index.php:124
+#: www/admin/cronman.php:78 www/admin/grouplist.php:118
+#: www/admin/massmail.php:158 www/admin/search.php:105
+#: www/admin/search.php:187 www/admin/userlist.php:111
+#: www/developer/diary.php:51 www/developer/diary.php:82
+#: www/export/tracker.php:108 www/forum/index.php:89 www/forum/message.php:127
+#: www/forum/message.php:204 www/forum/myforums.php:152 www/frs/index.php:145
+#: www/frs/index.php:204 www/include/html.php:915
+#: www/include/stats_function.php:77 www/include/stats_function.php:98
+#: www/news/news_utils.php:147 www/news/news_utils.php:267
+#: www/people/people_utils.php:422 www/people/viewjob.php:78
+#: www/pm/browse_task.php:265 www/pm/browse_task.php:275
+#: www/pm/include/ProjectTaskHTML.class.php:122
+#: www/pm/include/ProjectTaskHTML.class.php:175
+#: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
+#: www/project/admin/project_admin_utils.php:180
+#: www/reporting/usersummary.php:127
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:71
+#: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:64
+#: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:68
+#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:62
+#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:62
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:62
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:65
+#: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:63
+#: www/snippet/detail.php:80 www/snippet/detail.php:169
+#: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:148
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:299
+#: www/stats/lastlogins.php:61
+msgid "Y-m-d H:i"
+msgstr "Y-m-d H:i"
 
 #: common/docman/actions/addfile.php:56 common/docman/actions/addfile.php:63
 #: common/docman/actions/addsubdocgroup.php:48
 #: common/docman/actions/deldir.php:43 common/docman/actions/delfile.php:31
 #: common/docman/actions/editdocgroup.php:42
-#: common/docman/actions/editfile.php:53
+#: common/docman/actions/editfile.php:54
 #: common/docman/actions/emptytrash.php:31
 #: common/docman/actions/enforcereserve.php:31
-#: common/docman/actions/injectzip.php:30
-#: common/docman/actions/lockfile.php:31
+#: common/docman/actions/getfile.php:52 common/docman/actions/injectzip.php:30
+#: common/docman/actions/lockfile.php:34
 #: common/docman/actions/monitorfile.php:31
 #: common/docman/actions/releasefile.php:31
 #: common/docman/actions/reservefile.php:32
@@ -473,7 +483,7 @@ msgstr "使用討論區"
 #: common/docman/actions/monitorfile.php:51
 #: common/docman/actions/monitorfile.php:71
 #: common/docman/actions/trashfile.php:62
-#: common/docman/actions/validatefile.php:56 www/docman/view.php:243
+#: common/docman/actions/validatefile.php:56 www/docman/view.php:244
 #, fuzzy
 msgid "No action to perform"
 msgstr "找不到資料可以報告"
@@ -493,12 +503,17 @@ msgstr "文件已提交成功"
 msgid "on project %s"
 msgstr "專案"
 
-#: common/docman/actions/editfile.php:80
+#: common/docman/actions/editfile.php:69
+#, fuzzy
+msgid "No document found to update"
+msgstr "無文件資料"
+
+#: common/docman/actions/editfile.php:85
 #, fuzzy, php-format
 msgid "Invalid file attack attempt %1$s."
 msgstr "全名錯誤"
 
-#: common/docman/actions/editfile.php:102
+#: common/docman/actions/editfile.php:107
 #, fuzzy, php-format
 msgid "Document %s updated successfully."
 msgstr "更新成功"
@@ -606,13 +621,38 @@ msgstr "更新成功"
 msgid "Invalid Project"
 msgstr "不正確會員"
 
-#: common/docman/include/webdav.php:246 common/docman/include/webdav.php:257
-#: common/docman/include/webdav.php:319
+#: common/docman/include/webdav.php:221 common/docman/include/webdav.php:232
+#: common/docman/include/webdav.php:294
 msgid "webdav db error:"
 msgstr ""
 
 #: common/docman/views/addfile.php:67
 msgid "You MUST first create at least one directory to store your document."
+msgstr ""
+
+#: common/docman/views/addfile.php:103 common/docman/views/editfile.php:38
+#, fuzzy
+msgid "Document Title:"
+msgstr "文件標題"
+
+#: common/docman/views/addfile.php:103
+msgid ""
+"Refers to the relatively brief title of the document (e.g. How to use the "
+"download server)."
+msgstr ""
+
+#: common/docman/views/addfile.php:104 common/docman/views/editfile.php:42
+#: plugins/contribtracker/www/index.php:46
+#: plugins/contribtracker/www/index.php:142
+#: plugins/contribtracker/www/project_admin.php:293
+#: plugins/mailman/www/admin/index.php:150
+#: plugins/mailman/www/admin/index.php:183 www/mail/admin/index.php:192
+#: www/mail/admin/index.php:224 www/snippet/package.php:152
+msgid "Description:"
+msgstr "說明："
+
+#: common/docman/views/addfile.php:104
+msgid "A brief description to be placed just under the title."
 msgstr ""
 
 #: common/docman/views/addfile.php:106
@@ -623,12 +663,17 @@ msgstr ""
 msgid "Document Title"
 msgstr "文件標題"
 
-#: common/docman/views/addfile.php:120 common/docman/views/listfile.php:208
-#: common/docman/views/listtrashfile.php:129
-#: common/docman/views/pendingfiles.php:59
-#: common/tracker/actions/admin-ind.php:112
-#: common/tracker/actions/admin-ind.php:141
-#: common/tracker/actions/browse.php:551 common/tracker/actions/ind.php:53
+#: common/docman/views/addfile.php:115 common/docman/views/addfile.php:123
+#, fuzzy, php-format
+msgid "(at least %1$s characters)"
+msgstr "密碼至少要6個字元"
+
+#: common/docman/views/addfile.php:120 common/docman/views/listfile.php:210
+#: common/docman/views/listtrashfile.php:130
+#: common/docman/views/pendingfiles.php:63
+#: common/tracker/actions/admin-ind.php:98
+#: common/tracker/actions/admin-ind.php:127
+#: common/tracker/actions/browse.php:552 common/tracker/actions/ind.php:53
 #: common/tracker/views/form-updatetracker.php:52
 #: plugins/blocks/www/index.php:231
 #: plugins/contribtracker/www/global_admin.php:244
@@ -668,6 +713,10 @@ msgstr "說明"
 #, fuzzy
 msgid "Type of Document"
 msgstr "使用討論區"
+
+#: common/docman/views/addfile.php:130 common/docman/views/addfile.php:155
+msgid "File"
+msgstr "文件:"
 
 #: common/docman/views/addfile.php:130 common/docman/views/addfile.php:148
 #: plugins/contribtracker/www/global_admin.php:242
@@ -732,10 +781,11 @@ msgstr "送出資訊"
 
 #: common/docman/views/additem.php:31
 #: common/docman/views/addsubdocgroup.php:33 common/docman/views/admin.php:33
-#: common/docman/views/editdocgroup.php:37 common/docman/views/help.php:30
-#: common/docman/views/listfile.php:42 common/docman/views/listfile.php:54
+#: common/docman/views/editdocgroup.php:37 common/docman/views/editfile.php:30
+#: common/docman/views/help.php:30 common/docman/views/listfile.php:44
+#: common/docman/views/listfile.php:56
 #: common/docman/views/listtrashfile.php:37 common/docman/views/menu.php:35
-#: common/docman/views/pendingfiles.php:35 common/docman/views/search.php:33
+#: common/docman/views/pendingfiles.php:37 common/docman/views/search.php:34
 #: common/docman/views/tree.php:35 common/docman/views/views.php:24
 #, fuzzy
 msgid "Document Manager Access Denied"
@@ -874,8 +924,8 @@ msgstr ""
 #: www/people/skills_utils.php:45 www/people/skills_utils.php:103
 #: www/project/admin/editimages.php:264 www/project/admin/editimages.php:295
 #: www/survey/include/SurveyHTML.class.php:309
-#: www/survey/include/SurveyHTML.class.php:357
-#: www/survey/include/SurveyHTML.class.php:418
+#: www/survey/include/SurveyHTML.class.php:358
+#: www/survey/include/SurveyHTML.class.php:424
 #: www/trove/admin/trove_cat_list.php:46
 msgid "Edit"
 msgstr "編輯"
@@ -887,6 +937,42 @@ msgid ""
 "correspondingly."
 msgstr "分組名稱將被用作標題，所以它應該相應的格式化。"
 
+#: common/docman/views/editfile.php:47
+msgid "Both fields are used by document search engine."
+msgstr ""
+
+#: common/docman/views/editfile.php:51
+#: plugins/mantisbt/view/addAttachment.php:32
+#, fuzzy
+msgid "File:"
+msgstr "文件:"
+
+#: common/docman/views/editfile.php:57
+msgid ""
+"Edit the contents to your desire or leave them as they are to remain "
+"unmodified."
+msgstr ""
+
+#: common/docman/views/editfile.php:64
+#, fuzzy
+msgid "Folder that document belongs in:"
+msgstr "文件所屬的分組"
+
+#: common/docman/views/editfile.php:69
+#, fuzzy
+msgid "State:"
+msgstr "狀態"
+
+#: common/docman/views/editfile.php:74
+#, fuzzy
+msgid "Specify an new outside URL where the file will be referenced:"
+msgstr "或者指定一個文件能夠參考的外部URL"
+
+#: common/docman/views/editfile.php:79
+#, fuzzy
+msgid "OPTIONAL: Upload new file:"
+msgstr "可選項：上傳新的文件"
+
 #: common/docman/views/help.php:37
 #, fuzzy
 msgid "Documents parsing is also available thru webdav"
@@ -896,65 +982,72 @@ msgstr "資訊未提供"
 msgid "Direct Webdav URL"
 msgstr ""
 
-#: common/docman/views/listfile.php:110
+#: common/docman/views/listfile.php:112
 #, fuzzy
 msgid "Invalid folder"
 msgstr "不正確會員"
 
-#: common/docman/views/listfile.php:168 www/pm/browse_task.php:387
+#: common/docman/views/listfile.php:158
+#: common/docman/views/listtrashfile.php:102
+#: common/docman/views/pendingfiles.php:55
+#, fuzzy
+msgid "Edit document dialog box"
+msgstr "編輯分組"
+
+#: common/docman/views/listfile.php:170 www/pm/browse_task.php:387
 #: www/pm/mod_task.php:66
 msgid "Subproject"
 msgstr "子專案"
 
-#: common/docman/views/listfile.php:170
+#: common/docman/views/listfile.php:172
 msgid "Path:"
 msgstr ""
 
-#: common/docman/views/listfile.php:172
+#: common/docman/views/listfile.php:174
 #, fuzzy
 msgid "Document Folder:"
 msgstr "文件標題"
 
-#: common/docman/views/listfile.php:174 common/docman/views/listfile.php:195
-#: common/docman/views/listtrashfile.php:118
-#: common/docman/views/listtrashfile.php:123
+#: common/docman/views/listfile.php:176 common/docman/views/listfile.php:197
+#: common/docman/views/listtrashfile.php:119
+#: common/docman/views/listtrashfile.php:124
 #, fuzzy
 msgid "Edit this folder"
 msgstr "編輯 %1$s 表格"
 
-#: common/docman/views/listfile.php:175
+#: common/docman/views/listfile.php:177
 #, fuzzy
 msgid "Move this folder and his content to trash"
 msgstr "無文件資料"
 
-#: common/docman/views/listfile.php:177
+#: common/docman/views/listfile.php:179
 #, fuzzy
 msgid "Permanently delete this folder"
 msgstr "永久的刪除這份文件"
 
-#: common/docman/views/listfile.php:182
+#: common/docman/views/listfile.php:184
 #, fuzzy
 msgid "Add a new item in this folder"
 msgstr "增加新技能"
 
-#: common/docman/views/listfile.php:189
+#: common/docman/views/listfile.php:191
 msgid "Download this folder as a zip"
 msgstr ""
 
-#: common/docman/views/listfile.php:201
+#: common/docman/views/listfile.php:203
 #, fuzzy
 msgid "Add a new item"
 msgstr "增加新技能"
 
-#: common/docman/views/listfile.php:208
-#: common/docman/views/listtrashfile.php:129
+#: common/docman/views/listfile.php:210
+#: common/docman/views/listtrashfile.php:130
 msgid "Select / Deselect all documents for massaction"
 msgstr ""
 
-#: common/docman/views/listfile.php:208
-#: common/docman/views/listtrashfile.php:129
-#: common/docman/views/pendingfiles.php:59
-#: common/widget/Widget_ProjectLatestDocuments.class.php:70
+#: common/docman/views/listfile.php:210
+#: common/docman/views/listtrashfile.php:130
+#: common/docman/views/pendingfiles.php:63
+#: common/widget/Widget_ProjectLatestDocuments.class.php:71
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:49
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:116
@@ -963,13 +1056,13 @@ msgstr ""
 msgid "Filename"
 msgstr "檔案名稱"
 
-#: common/docman/views/listfile.php:208
-#: common/docman/views/listtrashfile.php:129
-#: common/docman/views/pendingfiles.php:59
-#: common/tracker/views/form-addcanned.php:42
-#: common/tracker/views/form-addcanned.php:63
+#: common/docman/views/listfile.php:210
+#: common/docman/views/listtrashfile.php:130
+#: common/docman/views/pendingfiles.php:63
+#: common/tracker/views/form-addcanned.php:41
+#: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-updatecanned.php:43
-#: common/widget/Widget_ProjectLatestDocuments.class.php:70
+#: common/widget/Widget_ProjectLatestDocuments.class.php:71
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:36
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
@@ -985,10 +1078,10 @@ msgstr "檔案名稱"
 msgid "Title"
 msgstr "標題"
 
-#: common/docman/views/listfile.php:208
-#: common/docman/views/listtrashfile.php:129
-#: common/docman/views/pendingfiles.php:59
-#: common/widget/Widget_ProjectLatestDocuments.class.php:70
+#: common/docman/views/listfile.php:210
+#: common/docman/views/listtrashfile.php:130
+#: common/docman/views/pendingfiles.php:63
+#: common/widget/Widget_ProjectLatestDocuments.class.php:71
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:113
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:70
 #: plugins/forumml/www/forumml_utils.php:64
@@ -1003,22 +1096,22 @@ msgstr "標題"
 msgid "Author"
 msgstr "作者"
 
-#: common/docman/views/listfile.php:208
-#: common/docman/views/listtrashfile.php:129
-#: common/docman/views/pendingfiles.php:59
+#: common/docman/views/listfile.php:210
+#: common/docman/views/listtrashfile.php:130
+#: common/docman/views/pendingfiles.php:63
 #, fuzzy
 msgid "Last time"
 msgstr "姓氏："
 
-#: common/docman/views/listfile.php:208
-#: common/docman/views/listtrashfile.php:129
-#: common/docman/views/pendingfiles.php:59
+#: common/docman/views/listfile.php:210
+#: common/docman/views/listtrashfile.php:130
+#: common/docman/views/pendingfiles.php:63
 #: common/tracker/ArtifactExtraField.class.php:326
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: common/tracker/views/form-addextrafield.php:132
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:99
 #: common/tracker/views/form-updateextrafieldelement.php:60
-#: common/widget/Widget_ProjectLatestDocuments.class.php:73
+#: common/widget/Widget_ProjectLatestDocuments.class.php:74
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:218
 #: plugins/mantisbt/view/editIssue.php:130
 #: plugins/mantisbt/view/viewIssue.php:80
@@ -1035,17 +1128,17 @@ msgstr "姓氏："
 msgid "Status"
 msgstr "狀態"
 
-#: common/docman/views/listfile.php:208
-#: common/docman/views/listtrashfile.php:129
-#: common/docman/views/pendingfiles.php:59
+#: common/docman/views/listfile.php:210
+#: common/docman/views/listtrashfile.php:130
+#: common/docman/views/pendingfiles.php:63
 #: common/tracker/include/ArtifactTypeHtml.class.php:366 www/frs/index.php:176
 #: www/pm/ganttpage.php:160 www/project/admin/editimages.php:269
 msgid "Size"
 msgstr "大小"
 
-#: common/docman/views/listfile.php:211
-#: common/docman/views/listtrashfile.php:129
-#: common/docman/views/pendingfiles.php:59
+#: common/docman/views/listfile.php:213
+#: common/docman/views/listtrashfile.php:130
+#: common/docman/views/pendingfiles.php:63
 #: common/tracker/views/form-adminroadmap.php:491
 #: plugins/contribtracker/www/global_admin.php:246
 #: plugins/contribtracker/www/global_admin.php:302
@@ -1057,224 +1150,165 @@ msgstr "大小"
 msgid "Actions"
 msgstr "網路拍賣"
 
-#: common/docman/views/listfile.php:221 common/docman/views/listfile.php:226
-#: common/docman/views/listtrashfile.php:137
+#: common/docman/views/listfile.php:223 common/docman/views/listfile.php:228
+#: common/docman/views/listtrashfile.php:138
 msgid "Select / Deselect this document for massaction"
 msgstr ""
 
-#: common/docman/views/listfile.php:239
+#: common/docman/views/listfile.php:235
+#: common/docman/views/listtrashfile.php:143
+#: common/docman/views/pendingfiles.php:75
+msgid "Visit this link"
+msgstr ""
+
+#: common/docman/views/listfile.php:240
 #: common/docman/views/listtrashfile.php:148
-#: common/docman/views/pendingfiles.php:77
+#: common/docman/views/pendingfiles.php:80
 #, fuzzy
 msgid "View this document"
 msgstr "查看文件"
 
-#: common/docman/views/listfile.php:245
-#: common/docman/views/listtrashfile.php:154
-#: common/docman/views/pendingfiles.php:83
+#: common/docman/views/listfile.php:249
+#: common/docman/views/listtrashfile.php:157
+#: common/docman/views/pendingfiles.php:89
 #, fuzzy
 msgid "new"
 msgstr "新聞"
 
-#: common/docman/views/listfile.php:247
-#: common/docman/views/pendingfiles.php:85
+#: common/docman/views/listfile.php:251
+#: common/docman/views/pendingfiles.php:91
 msgid "Created or updated since less than 7 days"
 msgstr ""
 
-#: common/docman/views/listfile.php:257 common/docman/views/listfile.php:259
-#: common/docman/views/listtrashfile.php:166
-#: common/docman/views/listtrashfile.php:168
-#: common/docman/views/pendingfiles.php:95
-#: common/docman/views/pendingfiles.php:97
-#: common/forum/ForumHTML.class.php:215 common/pm/ProjectTask.class.php:1207
-#: common/tracker/Artifact.class.php:1533
-#: common/tracker/Artifact.class.php:1535
-#: common/tracker/Artifact.class.php:1542
-#: common/tracker/Artifact.class.php:1548
-#: common/tracker/Artifact.class.php:1648
-#: common/tracker/actions/browse.php:601 common/tracker/actions/browse.php:612
-#: common/tracker/actions/browse.php:632 common/tracker/actions/detail.php:67
-#: common/tracker/actions/downloadcsv.php:81
-#: common/tracker/actions/downloadcsv.php:82
-#: common/tracker/actions/downloadcsv.php:83
-#: common/tracker/actions/mod-limited.php:95
-#: common/tracker/actions/mod-limited.php:100
-#: common/tracker/actions/mod.php:97 common/tracker/actions/mod.php:102
-#: common/tracker/include/ArtifactHtml.class.php:90
-#: common/tracker/include/ArtifactHtml.class.php:145
-#: common/tracker/include/ArtifactHtml.class.php:154
-#: common/tracker/include/ArtifactTypeHtml.class.php:337
-#: common/tracker/include/ArtifactTypeHtml.class.php:338
-#: common/tracker/include/ArtifactTypeHtml.class.php:377
-#: common/widget/Widget_MyLatestSvnCommits.class.php:65
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:110
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:112
-#: common/widget/Widget_ProjectInfo.class.php:66
-#: common/widget/Widget_Rss.class.php:74
-#: cronjobs/send_pending_items_mail.php:98
-#: plugins/compactpreview/include/CompactPreviewPlugin.class.php:189
-#: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
-#: plugins/hudson/include/HudsonBuild.class.php:110 www/account/index.php:124
-#: www/admin/cronman.php:78 www/admin/grouplist.php:118
-#: www/admin/massmail.php:158 www/admin/search.php:105
-#: www/admin/search.php:187 www/admin/userlist.php:111
-#: www/developer/diary.php:51 www/developer/diary.php:82
-#: www/export/tracker.php:108 www/forum/index.php:89 www/forum/message.php:127
-#: www/forum/message.php:204 www/forum/myforums.php:152 www/frs/index.php:145
-#: www/frs/index.php:204 www/include/html.php:910
-#: www/include/stats_function.php:77 www/include/stats_function.php:98
-#: www/news/news_utils.php:147 www/news/news_utils.php:267
-#: www/people/people_utils.php:422 www/people/viewjob.php:78
-#: www/pm/browse_task.php:265 www/pm/browse_task.php:275
-#: www/pm/include/ProjectTaskHTML.class.php:122
-#: www/pm/include/ProjectTaskHTML.class.php:175
-#: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
-#: www/project/admin/project_admin_utils.php:180
-#: www/reporting/usersummary.php:127
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:71
-#: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:64
-#: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:68
-#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:62
-#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:62
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:62
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:65
-#: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:63
-#: www/snippet/detail.php:80 www/snippet/detail.php:169
-#: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:148
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:299
-#: www/stats/lastlogins.php:61
-msgid "Y-m-d H:i"
-msgstr "Y-m-d H:i"
-
-#: common/docman/views/listfile.php:265 common/docman/views/listfile.php:267
+#: common/docman/views/listfile.php:269 common/docman/views/listfile.php:271
 #, fuzzy
 msgid "Reserved Document"
 msgstr "使用討論區"
 
-#: common/docman/views/listfile.php:298 common/docman/views/listfile.php:309
+#: common/docman/views/listfile.php:307 common/docman/views/listfile.php:318
 #, fuzzy
 msgid "Move this document to trash"
 msgstr "無文件資料"
 
-#: common/docman/views/listfile.php:298 common/docman/views/listfile.php:309
+#: common/docman/views/listfile.php:307 common/docman/views/listfile.php:318
 #, fuzzy
 msgid "Move to trash this document"
 msgstr "永久的刪除這份文件"
 
-#: common/docman/views/listfile.php:300 common/docman/views/listfile.php:310
-#: common/docman/views/listtrashfile.php:188
-#: common/docman/views/pendingfiles.php:116
+#: common/docman/views/listfile.php:308 common/docman/views/listfile.php:319
+#: common/docman/views/listtrashfile.php:193
+#: common/docman/views/pendingfiles.php:127
 #, fuzzy
 msgid "Edit this document"
 msgstr "編輯分組"
 
-#: common/docman/views/listfile.php:301
+#: common/docman/views/listfile.php:310
 msgid "Reserve this document for later edition"
 msgstr ""
 
-#: common/docman/views/listfile.php:301
+#: common/docman/views/listfile.php:310
 #, fuzzy
 msgid "Reserve this document"
 msgstr "永久的刪除這份文件"
 
-#: common/docman/views/listfile.php:306
+#: common/docman/views/listfile.php:315
 msgid "Enforce reservation"
 msgstr ""
 
-#: common/docman/views/listfile.php:311 common/docman/views/listfile.php:343
+#: common/docman/views/listfile.php:320 common/docman/views/listfile.php:347
 #, fuzzy
 msgid "Release reservation"
 msgstr "釋出新檔案版本"
 
-#: common/docman/views/listfile.php:317
+#: common/docman/views/listfile.php:326
 #, fuzzy
 msgid "Stop monitoring this document"
 msgstr "訂閱這個集合"
 
-#: common/docman/views/listfile.php:320
+#: common/docman/views/listfile.php:329
 #, fuzzy
 msgid "Start monitoring this document"
 msgstr "訂閱這個集合"
 
-#: common/docman/views/listfile.php:335
-#: common/docman/views/listtrashfile.php:197
+#: common/docman/views/listfile.php:339
+#: common/docman/views/listtrashfile.php:199
 msgid ""
 "Actions availables for selected documents, you need to check at least one "
 "document to get actions"
 msgstr ""
 
-#: common/docman/views/listfile.php:336
-#: common/docman/views/listtrashfile.php:198
+#: common/docman/views/listfile.php:340
+#: common/docman/views/listtrashfile.php:200
 msgid "Mass actions for selected documents:"
 msgstr ""
 
-#: common/docman/views/listfile.php:340
+#: common/docman/views/listfile.php:344
 #, fuzzy
 msgid "Move to trash"
 msgstr "永久的刪除這份文件"
 
-#: common/docman/views/listfile.php:342
+#: common/docman/views/listfile.php:346
 msgid "Reserve for later edition"
 msgstr ""
 
-#: common/docman/views/listfile.php:342
+#: common/docman/views/listfile.php:346
 #, fuzzy
 msgid "Reserve"
 msgstr "匿名者"
 
-#: common/docman/views/listfile.php:344
+#: common/docman/views/listfile.php:348
 #, fuzzy
 msgid "Start monitoring"
 msgstr "停止監視"
 
-#: common/docman/views/listfile.php:345
-#: common/widget/Widget_MyMonitoredForums.class.php:111
+#: common/docman/views/listfile.php:349
+#: common/widget/Widget_MyMonitoredForums.class.php:112
 #, fuzzy
 msgid "Stop monitoring"
 msgstr "停止監視"
 
-#: common/docman/views/listfile.php:348
-#: common/docman/views/listtrashfile.php:202
-#: common/docman/views/pendingfiles.php:129
+#: common/docman/views/listfile.php:352
+#: common/docman/views/listtrashfile.php:204
+#: common/docman/views/pendingfiles.php:137
 #, fuzzy
 msgid "Download as a zip"
 msgstr "下載作為CSV"
 
-#: common/docman/views/listfile.php:354
-#: common/docman/views/listtrashfile.php:208
+#: common/docman/views/listfile.php:358
+#: common/docman/views/listtrashfile.php:210
 #, fuzzy
 msgid "No documents."
 msgstr "增加新專案"
 
-#: common/docman/views/listtrashfile.php:74
+#: common/docman/views/listtrashfile.php:73
 #, fuzzy
 msgid "Invalid folder."
 msgstr "不正確會員"
 
-#: common/docman/views/listtrashfile.php:107
+#: common/docman/views/listtrashfile.php:108
 msgid "Delete permanently all documents and folders with deleted status."
 msgstr ""
 
-#: common/docman/views/listtrashfile.php:116
+#: common/docman/views/listtrashfile.php:117
 #, fuzzy
 msgid "Documents folder:"
 msgstr "討論區管理"
 
-#: common/docman/views/listtrashfile.php:119
+#: common/docman/views/listtrashfile.php:120
 #, fuzzy
 msgid "Delete permanently this folder and his content."
 msgstr "刪除整個的討論區和所有的內容"
 
-#: common/docman/views/listtrashfile.php:156
+#: common/docman/views/listtrashfile.php:159
 msgid "Updated since less than 7 days"
 msgstr ""
 
-#: common/docman/views/listtrashfile.php:187
+#: common/docman/views/listtrashfile.php:192
 #, fuzzy
 msgid "Delete permanently this document."
 msgstr "永久的刪除這份文件"
 
-#: common/docman/views/listtrashfile.php:201
+#: common/docman/views/listtrashfile.php:203
 #, fuzzy
 msgid "Delete permanently."
 msgstr "刪除樣板"
@@ -1300,7 +1334,7 @@ msgid ""
 "Add a new item such as file, create directory, inject a zip at root level."
 msgstr ""
 
-#: common/docman/views/menu.php:55 common/docman/views/search.php:56
+#: common/docman/views/menu.php:55
 msgid "Search in documents"
 msgstr ""
 
@@ -1317,9 +1351,8 @@ msgstr "管理"
 msgid "Recover or delete permanently files with deleted status."
 msgstr ""
 
-#: common/docman/views/menu.php:67 common/include/Navigation.class.php:395
-#: common/tracker/actions/admin-ind.php:90 common/tracker/actions/mod.php:141
-#: common/tracker/actions/mod.php:200
+#: common/docman/views/menu.php:67 common/include/Navigation.class.php:401
+#: common/tracker/actions/mod.php:141 common/tracker/actions/mod.php:200
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:74
 #: www/include/Layout.class.php:679
@@ -1331,32 +1364,37 @@ msgstr "管理"
 msgid "Docman module administration."
 msgstr "文件管理員管理"
 
-#: common/docman/views/pendingfiles.php:40
+#: common/docman/views/pendingfiles.php:42
 #, fuzzy
 msgid "No pending documents."
 msgstr "沒有未決定的請求"
 
-#: common/docman/views/pendingfiles.php:58
+#: common/docman/views/pendingfiles.php:62
 #, fuzzy
 msgid "Pending files"
 msgstr "等待中的請求"
 
-#: common/docman/views/pendingfiles.php:125
+#: common/docman/views/pendingfiles.php:133
 msgid ""
 "Actions availables for checked files, you need to check at least one file to "
 "get actions"
 msgstr ""
 
-#: common/docman/views/pendingfiles.php:126
+#: common/docman/views/pendingfiles.php:134
 msgid "Mass actions for selected pending files:"
 msgstr ""
 
-#: common/docman/views/pendingfiles.php:130
+#: common/docman/views/pendingfiles.php:138
 #, fuzzy
 msgid "Activate in this directory"
 msgstr "編輯分組"
 
-#: common/docman/views/search.php:61 common/include/Navigation.class.php:171
+#: common/docman/views/search.php:61
+#, fuzzy
+msgid "Query: "
+msgstr "日記已更新"
+
+#: common/docman/views/search.php:63 common/include/Navigation.class.php:171
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:330
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:65
@@ -1364,19 +1402,45 @@ msgstr "編輯分組"
 msgid "Search"
 msgstr "搜尋"
 
-#: common/docman/views/search.php:62
+#: common/docman/views/search.php:65
+msgid "All searched words are mandatory"
+msgstr ""
+
+#: common/docman/views/search.php:65
 msgid "With all the words"
 msgstr ""
 
-#: common/docman/views/search.php:63
+#: common/docman/views/search.php:66
+msgid "At least one word must be found"
+msgstr ""
+
+#: common/docman/views/search.php:66
 msgid "With at least one of words"
 msgstr ""
 
-#: common/docman/views/search.php:110
+#: common/docman/views/search.php:68
+msgid "Filename and contents are used to match searched words"
+msgstr ""
+
+#: common/docman/views/search.php:68
+#, fuzzy
+msgid "Inside documents"
+msgstr "使用討論區"
+
+#: common/docman/views/search.php:75
+msgid "search into childs following project hierarchy"
+msgstr ""
+
+#: common/docman/views/search.php:75
+#, fuzzy
+msgid "Include child projects"
+msgstr "未審核專案："
+
+#: common/docman/views/search.php:128
 msgid "Database query error"
 msgstr ""
 
-#: common/docman/views/search.php:114
+#: common/docman/views/search.php:131
 msgid "Your search did not match any documents"
 msgstr ""
 
@@ -1403,10 +1467,12 @@ msgstr "無法更新上層文章"
 #: common/tracker/actions/deleteartifact.php:36
 #: common/tracker/actions/mod.php:74
 #: common/tracker/include/ArtifactTypeHtml.class.php:140
+#: common/tracker/views/form-addcanned.php:54
 #: common/tracker/views/form-addextrafield.php:57
 #: common/tracker/views/form-addextrafield.php:82
-#: common/tracker/views/form-deleteextrafield.php:41
-#: common/tracker/views/form-deletetracker.php:34
+#: common/tracker/views/form-deleteextrafield.php:43
+#: common/tracker/views/form-deleteextrafieldelement.php:64
+#: common/tracker/views/form-deletetracker.php:36
 #: plugins/contribtracker/www/global_admin.php:274
 #: plugins/contribtracker/www/global_admin.php:317
 #: plugins/contribtracker/www/global_admin.php:356
@@ -1440,7 +1506,7 @@ msgstr "無法更新上層文章"
 #: www/pm/admin/index.php:364 www/pm/admin/index.php:375
 #: www/project/admin/vhost.php:145 www/reporting/timeadd.php:157
 #: www/snippet/detail.php:66 www/survey/include/SurveyHTML.class.php:311
-#: www/tracker/admin/index.php:99
+#: www/tracker/admin/index.php:99 www/tracker/admin/index.php:176
 msgid "Delete"
 msgstr "刪除"
 
@@ -1553,9 +1619,9 @@ msgstr "更新時錯誤："
 #: common/forum/Forum.class.php:618 common/frs/FRSPackage.class.php:450
 #: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1528
 #: common/mail/MailingList.class.php:386 common/pm/ProjectGroup.class.php:370
-#: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:503
+#: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:512
 #: common/tracker/ArtifactExtraField.class.php:429
-#: common/tracker/ArtifactType.class.php:817
+#: common/tracker/ArtifactType.class.php:816
 msgid "Please tick all checkboxes."
 msgstr ""
 
@@ -1749,7 +1815,7 @@ msgstr "張貼者"
 #: common/tracker/include/ArtifactHtml.class.php:89
 #: common/tracker/include/ArtifactHtml.class.php:123
 #: common/tracker/include/ArtifactTypeHtml.class.php:368
-#: common/widget/Widget_ProjectLatestDocuments.class.php:70
+#: common/widget/Widget_ProjectLatestDocuments.class.php:71
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:58
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:111
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:109
@@ -1772,8 +1838,8 @@ msgstr "張貼者"
 msgid "Date"
 msgstr "日期"
 
-#: common/forum/ForumHTML.class.php:68 common/include/Navigation.class.php:377
-#: common/tracker/actions/browse.php:191 common/tracker/actions/browse.php:549
+#: common/forum/ForumHTML.class.php:68 common/include/Navigation.class.php:383
+#: common/tracker/actions/browse.php:191 common/tracker/actions/browse.php:550
 #: common/tracker/actions/detail.php:95
 #: common/tracker/actions/mod-limited.php:139
 #: common/tracker/actions/mod.php:172 common/tracker/actions/query.php:192
@@ -1901,6 +1967,7 @@ msgstr "訊息："
 #: www/people/editprofile.php:158 www/people/editprofile.php:217
 #: www/pm/mod_task.php:289 www/register/index.php:296
 #: www/reporting/timeadd.php:174 www/tracker/admin/index.php:99
+#: www/tracker/admin/index.php:176
 msgid "Cancel"
 msgstr "取消"
 
@@ -2625,30 +2692,34 @@ msgid ""
 msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:228
-#: common/include/GroupJoinRequest.class.php:254
-#: common/include/GroupJoinRequest.class.php:268
-#, php-format
-msgid "Request to Join Project %1$s"
+#, fuzzy, php-format
+msgid "Request to Join Project %1$s from %2$s (%3$s)"
 msgstr "請求參與專案 %1$s"
 
-#: common/include/GroupJoinRequest.class.php:230
+#: common/include/GroupJoinRequest.class.php:234
 #, fuzzy, php-format
 msgid ""
-"%1$s has requested to join your project.\n"
-"You can approve this request here: %2$s\n"
+"%1$s (%2$s) has requested to join your project. \n"
+"You can approve this request here: %3$s \n"
 "\n"
 "Comments by the user:\n"
-"%3$s"
+"%4$s"
 msgstr ""
 "%1$s 已經請求參與您的專案。\n"
 "你能在這裡核准這一個請求：http://%2$s/project/admin/?group_id=%3$s"
 
-#: common/include/GroupJoinRequest.class.php:255
+#: common/include/GroupJoinRequest.class.php:259
+#: common/include/GroupJoinRequest.class.php:273
+#, php-format
+msgid "Request to Join Project %1$s"
+msgstr "請求參與專案 %1$s"
+
+#: common/include/GroupJoinRequest.class.php:260
 #, fuzzy, php-format
 msgid "Your request to join the %1$s project was denied by an administrator."
 msgstr "您提出希望加入專案 %1$s 的請求被管理者拒絕了。"
 
-#: common/include/GroupJoinRequest.class.php:269
+#: common/include/GroupJoinRequest.class.php:274
 #, fuzzy, php-format
 msgid "Your request to join the %1$s project was granted by an administrator."
 msgstr "您提出希望加入專案 %1$s 的請求被管理者拒絕了。"
@@ -2744,63 +2815,63 @@ msgstr "報告"
 msgid "Statistics about visits, users & projects in time frame."
 msgstr ""
 
-#: common/include/Navigation.class.php:320
+#: common/include/Navigation.class.php:326
 msgid "Project home page, widgets selected to follow specific items."
 msgstr ""
 
-#: common/include/Navigation.class.php:378
+#: common/include/Navigation.class.php:384
 #, fuzzy
 msgid "Project Homepage. Widgets oriented"
 msgstr "專案檔案列表"
 
-#: common/include/Navigation.class.php:396
+#: common/include/Navigation.class.php:402
 #, fuzzy
 msgid "Project Administration."
 msgstr "專案資料庫管理"
 
-#: common/include/Navigation.class.php:411 www/activity/index.php:83
-#: www/activity/index.php:165 www/activity/index.php:236
+#: common/include/Navigation.class.php:417 www/activity/index.php:83
+#: www/activity/index.php:164 www/activity/index.php:236
 #: www/export/rss_project.php:97
 msgid "Activity"
 msgstr ""
 
-#: common/include/Navigation.class.php:412
+#: common/include/Navigation.class.php:418
 msgid "Last activities per category."
 msgstr ""
 
-#: common/include/Navigation.class.php:421
+#: common/include/Navigation.class.php:427
 #: common/include/group_section_texts.php:28
 #: common/reporting/report_utils.php:147 plugins/blocks/www/index.php:166
 #: plugins/quota_management/www/quota_project.php:87
 msgid "Forums"
 msgstr "討論區"
 
-#: common/include/Navigation.class.php:422
+#: common/include/Navigation.class.php:428
 msgid "Tech & help forums."
 msgstr ""
 
-#: common/include/Navigation.class.php:436 common/include/rbac_texts.php:144
+#: common/include/Navigation.class.php:442 common/include/rbac_texts.php:144
 #: common/reporting/report_utils.php:143
-#: common/tracker/actions/admin-ind.php:112 common/tracker/actions/ind.php:53
+#: common/tracker/actions/admin-ind.php:98 common/tracker/actions/ind.php:53
 #: common/widget/Widget_ProjectPublicAreas.class.php:49
 #: www/pm/include/ProjectTaskHTML.class.php:109
 msgid "Tracker"
 msgstr "追蹤"
 
-#: common/include/Navigation.class.php:437
+#: common/include/Navigation.class.php:443
 msgid "Issues, tickets, bugs."
 msgstr ""
 
-#: common/include/Navigation.class.php:454 plugins/blocks/www/index.php:168
+#: common/include/Navigation.class.php:460 plugins/blocks/www/index.php:168
 msgid "Lists"
 msgstr "通信論壇"
 
-#: common/include/Navigation.class.php:455
+#: common/include/Navigation.class.php:461
 #, fuzzy
 msgid "Mailing Lists."
 msgstr "通信論壇"
 
-#: common/include/Navigation.class.php:469
+#: common/include/Navigation.class.php:475
 #: common/include/group_section_texts.php:30 common/include/rbac_texts.php:145
 #: common/reporting/report_utils.php:155 common/reporting/report_utils.php:193
 #: common/widget/Widget_ProjectPublicAreas.class.php:128
@@ -2813,33 +2884,33 @@ msgstr "通信論壇"
 msgid "Tasks"
 msgstr "任務"
 
-#: common/include/Navigation.class.php:470
+#: common/include/Navigation.class.php:476
 #, fuzzy
 msgid "Project Management."
 msgstr "新專案名稱"
 
-#: common/include/Navigation.class.php:484
+#: common/include/Navigation.class.php:490
 #: common/reporting/report_utils.php:151 plugins/blocks/www/index.php:170
 #: www/reporting/projectact_graph.php:103
 msgid "Docs"
 msgstr "文件"
 
-#: common/include/Navigation.class.php:485 www/index_std.php:18
+#: common/include/Navigation.class.php:491 www/index_std.php:18
 #, fuzzy
 msgid "Document Management."
 msgstr "查看文件"
 
-#: common/include/Navigation.class.php:499
+#: common/include/Navigation.class.php:505
 #: common/widget/Widget_ProjectPublicAreas.class.php:152
 #: plugins/blocks/www/index.php:171
 msgid "Surveys"
 msgstr "調查"
 
-#: common/include/Navigation.class.php:500
+#: common/include/Navigation.class.php:506
 msgid "Online surveys, project needs your point of view."
 msgstr ""
 
-#: common/include/Navigation.class.php:514
+#: common/include/Navigation.class.php:520
 #: common/include/group_section_texts.php:33 plugins/blocks/www/index.php:172
 #: plugins/quota_management/www/quota_project.php:74
 #: www/activity/index.php:102 www/activity/index.php:282
@@ -2847,12 +2918,12 @@ msgstr ""
 msgid "News"
 msgstr "新聞"
 
-#: common/include/Navigation.class.php:515
+#: common/include/Navigation.class.php:521
 #, fuzzy
 msgid "Flash head line from the project."
 msgstr "該專案沒有這樣的文章"
 
-#: common/include/Navigation.class.php:529 common/include/rbac_texts.php:152
+#: common/include/Navigation.class.php:535 common/include/rbac_texts.php:152
 #: plugins/blocks/www/index.php:173
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:35
 #: www/stats/site_stats_utils.php:262 www/stats/site_stats_utils.php:386
@@ -2860,21 +2931,21 @@ msgstr "該專案沒有這樣的文章"
 msgid "SCM"
 msgstr "原始碼版本管理系統"
 
-#: common/include/Navigation.class.php:530
+#: common/include/Navigation.class.php:536
 msgid "Source Content Management, peer-review and source discovery."
 msgstr ""
 
-#: common/include/Navigation.class.php:561
+#: common/include/Navigation.class.php:567
 #: common/include/group_section_texts.php:32 common/include/rbac_texts.php:154
 #: plugins/blocks/www/index.php:174
 msgid "Files"
 msgstr "檔案"
 
-#: common/include/Navigation.class.php:562
+#: common/include/Navigation.class.php:568
 msgid "All published files organized per version."
 msgstr ""
 
-#: common/include/Navigation.class.php:631
+#: common/include/Navigation.class.php:637
 msgid "Show source"
 msgstr "顯示程式碼"
 
@@ -2975,7 +3046,7 @@ msgstr "尚未啟動"
 #: common/include/SCMPlugin.class.php:179
 #: plugins/scmcvs/common/CVSPlugin.class.php:148
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:193
-#: plugins/scmsvn/common/SVNPlugin.class.php:193
+#: plugins/scmsvn/common/SVNPlugin.class.php:194
 #, fuzzy
 msgid "Repository Statistics"
 msgstr "使用統計"
@@ -3533,7 +3604,10 @@ msgstr ""
 msgid "Priority Colors"
 msgstr "優先權顏色"
 
-#: common/include/utils.php:494
+#: common/include/utils.php:494 common/tracker/views/form-addcanned.php:68
+#: common/tracker/views/form-addcanned.php:71
+#: common/tracker/views/form-updatecanned.php:43
+#: common/tracker/views/form-updatecanned.php:46
 msgid ":"
 msgstr ""
 
@@ -3903,7 +3977,8 @@ msgid "Delete failed"
 msgstr "刪除失敗"
 
 #: common/survey/Survey.class.php:252 common/survey/SurveyFactory.class.php:89
-#: www/survey/admin/survey.php:100 www/survey/index.php:56
+#: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:454
+#: www/survey/index.php:56
 msgid "No Survey is found"
 msgstr "沒有發現問卷"
 
@@ -3914,8 +3989,8 @@ msgstr "沒有有效的群組物件"
 
 #: common/survey/SurveyFactory.class.php:58
 #: common/survey/SurveyQuestionFactory.class.php:56
-#: common/survey/SurveyResponseFactory.class.php:72
-#: common/survey/SurveyResponseFactory.class.php:80
+#: common/survey/SurveyResponseFactory.class.php:79
+#: common/survey/SurveyResponseFactory.class.php:87
 msgid "Survey"
 msgstr "問卷"
 
@@ -3937,15 +4012,16 @@ msgstr "找尋問題錯誤"
 msgid "No Survey Question is found"
 msgstr "沒有發現問卷問題"
 
-#: common/survey/SurveyResponseFactory.class.php:68
+#: common/survey/SurveyResponseFactory.class.php:75
 msgid "No valid Survey Object"
 msgstr "沒有有效的問卷物件"
 
-#: common/survey/SurveyResponseFactory.class.php:76
+#: common/survey/SurveyResponseFactory.class.php:83
 msgid "No valid Question Object"
 msgstr "沒有有效的問題物件"
 
-#: common/survey/SurveyResponseFactory.class.php:142
+#: common/survey/SurveyResponseFactory.class.php:149
+#: common/survey/SurveyResponseFactory.class.php:182
 msgid "No Survey Response is found"
 msgstr "沒有發現問卷回應"
 
@@ -3958,7 +4034,7 @@ msgstr ""
 msgid "Only project members can view private artifact types"
 msgstr "自訂：只有群組成員可以瀏覽私人自訂類型"
 
-#: common/tracker/Artifact.class.php:221 common/tracker/Artifact.class.php:753
+#: common/tracker/Artifact.class.php:221 common/tracker/Artifact.class.php:762
 #, fuzzy
 msgid "This Artifact Type Does Not Allow Anonymous Submissions. Please Login."
 msgstr "自訂: 這個自訂類型不允許匿名者發表，請登入。"
@@ -3983,56 +4059,56 @@ msgstr "自訂：重新對應狀態時發生錯誤"
 msgid "Invalid Artifact ID"
 msgstr "無效的編號"
 
-#: common/tracker/Artifact.class.php:514
+#: common/tracker/Artifact.class.php:523
 #, fuzzy
 msgid "Error deleting extra field data: "
 msgstr "錯誤插入一個組成元件"
 
-#: common/tracker/Artifact.class.php:521
+#: common/tracker/Artifact.class.php:530
 #, fuzzy
 msgid "Error deleting file from db: "
 msgstr "建立群組物件時發生錯誤"
 
-#: common/tracker/Artifact.class.php:528
+#: common/tracker/Artifact.class.php:537
 #, fuzzy
 msgid "Error deleting message: "
 msgstr "新增討論區錯誤"
 
-#: common/tracker/Artifact.class.php:535
+#: common/tracker/Artifact.class.php:544
 #, fuzzy
 msgid "Error deleting history: "
 msgstr "專案類別"
 
-#: common/tracker/Artifact.class.php:542
+#: common/tracker/Artifact.class.php:551
 #, fuzzy
 msgid "Error deleting monitor: "
 msgstr "建立群組物件時發生錯誤"
 
-#: common/tracker/Artifact.class.php:549
+#: common/tracker/Artifact.class.php:558
 #, fuzzy
 msgid "Error deleting artifact: "
 msgstr "建立群組物件時發生錯誤"
 
-#: common/tracker/Artifact.class.php:559 common/tracker/Artifact.class.php:568
+#: common/tracker/Artifact.class.php:568 common/tracker/Artifact.class.php:577
 #, fuzzy
 msgid "Error updating artifact counts: "
 msgstr "專案類別"
 
-#: common/tracker/Artifact.class.php:596
+#: common/tracker/Artifact.class.php:605
 #, fuzzy
 msgid "Valid Email Address Required"
 msgstr "設定監視::合法Email信箱是必須的"
 
-#: common/tracker/Artifact.class.php:614
+#: common/tracker/Artifact.class.php:623
 msgid "Now Monitoring Artifact"
 msgstr "現在監視自訂類型中"
 
-#: common/tracker/Artifact.class.php:624
+#: common/tracker/Artifact.class.php:633
 msgid "Artifact Monitoring Deactivated"
 msgstr "現在沒有監視自訂類型"
 
-#: common/tracker/Artifact.class.php:896 common/tracker/actions/browse.php:561
-#: common/tracker/actions/browse.php:740 common/tracker/actions/detail.php:86
+#: common/tracker/Artifact.class.php:905 common/tracker/actions/browse.php:562
+#: common/tracker/actions/browse.php:741 common/tracker/actions/detail.php:86
 #: common/tracker/actions/mod-limited.php:111
 #: common/tracker/actions/mod.php:138
 #: common/tracker/include/build_submission_form.php:62
@@ -4046,53 +4122,63 @@ msgstr "現在沒有監視自訂類型"
 msgid "Assigned to"
 msgstr "指定給"
 
-#: common/tracker/Artifact.class.php:904 common/tracker/actions/browse.php:750
+#: common/tracker/Artifact.class.php:909 common/tracker/actions/browse.php:403
+#: common/tracker/actions/browse.php:558 common/tracker/actions/browse.php:745
+#: common/tracker/actions/detail.php:72
+#: common/tracker/actions/mod-limited.php:125
+#: common/tracker/actions/mod.php:157 common/tracker/actions/query.php:337
+#: common/tracker/views/form-customizelist.php:45 www/pm/browse_task.php:383
+#: www/project/admin/database.php:208
+msgid "State"
+msgstr "狀態"
+
+#: common/tracker/Artifact.class.php:913 common/tracker/actions/browse.php:751
 msgid "Canned Response"
 msgstr "預設回應"
 
-#: common/tracker/Artifact.class.php:908 common/tracker/actions/mod.php:109
+#: common/tracker/Artifact.class.php:917 common/tracker/actions/mod.php:109
 msgid "Data Type"
 msgstr "資料類型"
 
-#: common/tracker/Artifact.class.php:915
+#: common/tracker/Artifact.class.php:924
 msgid "Invalid assigned_to (assigned person is not a technician)"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:939
+#: common/tracker/Artifact.class.php:948
 #, fuzzy
 msgid "Could not move to new Artifact Type"
 msgstr "無法完成執行"
 
-#: common/tracker/Artifact.class.php:1023
+#: common/tracker/Artifact.class.php:1032
 msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1103
+#: common/tracker/Artifact.class.php:1112
 #, fuzzy
 msgid "Error - update failed!"
 msgstr "更新時發生錯誤"
 
-#: common/tracker/Artifact.class.php:1131
+#: common/tracker/Artifact.class.php:1140
 #, fuzzy
 msgid "Could Not Create Canned Response Object"
 msgstr "無法更新上層文章"
 
-#: common/tracker/Artifact.class.php:1144
+#: common/tracker/Artifact.class.php:1153
 #, fuzzy
 msgid "Unable to Use Canned Response"
 msgstr "使用預設的回應"
 
-#: common/tracker/Artifact.class.php:1159
+#: common/tracker/Artifact.class.php:1168
 msgid "Nothing Changed - Update Cancelled"
 msgstr "沒有異動 - 取消更新"
 
-#: common/tracker/Artifact.class.php:1192
+#: common/tracker/Artifact.class.php:1201
 #, fuzzy
 msgid "Error updating assigned_to in artifact: "
 msgstr "專案類別"
 
-#: common/tracker/Artifact.class.php:1266
-#: common/tracker/Artifact.class.php:1276
+#: common/tracker/Artifact.class.php:1275
+#: common/tracker/Artifact.class.php:1285
 #, fuzzy
 msgid "Status Custom Field Must Be Set"
 msgstr "訂製欄位已刪除"
@@ -4212,13 +4298,13 @@ msgid "Query does not exist"
 msgstr "查詢不存在"
 
 #: common/tracker/ArtifactType.class.php:211
-#: common/tracker/ArtifactType.class.php:982
+#: common/tracker/ArtifactType.class.php:981
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr "自訂類型: 名稱，說明，適當期間與狀態暫停是必須的"
 
 #: common/tracker/ArtifactType.class.php:218
-#: common/tracker/ArtifactType.class.php:1000
+#: common/tracker/ArtifactType.class.php:999
 msgid "E-mail address(es) appeared invalid"
 msgstr "E-mail位址明顯無效"
 
@@ -4230,7 +4316,7 @@ msgstr "正在監視"
 msgid "Tracker Monitoring Deactivated"
 msgstr "監視已取消"
 
-#: common/tracker/ArtifactType.class.php:993
+#: common/tracker/ArtifactType.class.php:992
 #, fuzzy
 msgid "Tracker name already used"
 msgstr "Unix名稱重複"
@@ -4265,31 +4351,17 @@ msgid "Trackers Administration"
 msgstr "問卷管理"
 
 #: common/tracker/actions/admin-ind.php:89
-msgid "Report"
-msgstr "報告"
-
-#: common/tracker/actions/admin-ind.php:97
-msgid "Various graph about statistics"
-msgstr ""
-
-#: common/tracker/actions/admin-ind.php:98
-#: common/tracker/include/ArtifactTypeFactoryHtml.class.php:61
-#: common/tracker/include/ArtifactTypeHtml.class.php:93
-msgid "Global administration for trackers. Create, clone, workflow, fields ..."
-msgstr ""
-
-#: common/tracker/actions/admin-ind.php:103
 #, fuzzy
 msgid "No trackers found"
 msgstr "未發現符合項目"
 
-#: common/tracker/actions/admin-ind.php:107
+#: common/tracker/actions/admin-ind.php:93
 msgid ""
 "Choose a data type and you can set up prefs, categories, groups, users, and "
 "permissions"
 msgstr "選擇一個資料類型後您可以設定偏好、群組、使用者與權限"
 
-#: common/tracker/actions/admin-ind.php:134
+#: common/tracker/actions/admin-ind.php:120
 msgid ""
 "<h3>Create a new tracker</h3><p>You can use this system to track virtually "
 "any kind of data, with each tracker having separate user, group, category, "
@@ -4301,53 +4373,52 @@ msgid ""
 "for each type, which can get time-consuming.</p>"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:138
+#: common/tracker/actions/admin-ind.php:124
 msgid ""
 "<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)"
 msgstr "<strong> 名稱：</strong> (範例：會議紀錄、測試結果、參考說明文件)"
 
-#: common/tracker/actions/admin-ind.php:144
+#: common/tracker/actions/admin-ind.php:130
 #: common/tracker/views/form-updatetracker.php:63
 msgid "Send email on new submission to address"
 msgstr "若有發表寄送Email至下列信箱"
 
-#: common/tracker/actions/admin-ind.php:147
+#: common/tracker/actions/admin-ind.php:133
 #: common/tracker/views/form-updatetracker.php:66
 msgid "Send email on all changes"
 msgstr "全部若有任何異動寄送Email"
 
-#: common/tracker/actions/admin-ind.php:149
+#: common/tracker/actions/admin-ind.php:135
 #: common/tracker/views/form-updatetracker.php:68
 msgid "Days till considered overdue"
 msgstr "討論逾期的天數"
 
-#: common/tracker/actions/admin-ind.php:152
+#: common/tracker/actions/admin-ind.php:138
 #: common/tracker/views/form-updatetracker.php:71
 msgid "Days till pending tracker items time out"
 msgstr "未決定追蹤項目的逾期天數"
 
-#: common/tracker/actions/admin-ind.php:155
+#: common/tracker/actions/admin-ind.php:141
 #: common/tracker/views/form-updatetracker.php:74
 msgid "Free form text for the \"submit new item\" page"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:158
+#: common/tracker/actions/admin-ind.php:144
 #: common/tracker/views/form-updatetracker.php:77
 msgid "Free form text for the \"browse items\" page"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:161
+#: common/tracker/actions/admin-ind.php:147
 #: common/tracker/include/build_submission_form.php:54
 #: common/tracker/include/build_submission_form.php:118
-#: common/tracker/views/form-addcanned.php:69
+#: common/tracker/views/form-addcanned.php:74
 #: common/tracker/views/form-addextrafield.php:147
-#: common/tracker/views/form-addextrafieldoption.php:104
+#: common/tracker/views/form-addextrafieldoption.php:102
 #: common/tracker/views/form-adminroadmap.php:233
 #: common/tracker/views/form-clonetracker.php:59
 #: common/tracker/views/form-customizelist.php:92
-#: common/tracker/views/form-deleteextrafieldelement.php:63
 #: common/tracker/views/form-edittemplate.php:26
-#: common/tracker/views/form-extrafieldcopy.php:97
+#: common/tracker/views/form-extrafieldcopy.php:96
 #: common/tracker/views/form-updatecanned.php:49
 #: common/tracker/views/form-updateextrafield.php:79
 #: common/tracker/views/form-updateextrafieldelement.php:67
@@ -4363,7 +4434,7 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:603 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
-#: www/account/pending-resend.php:75 www/activity/index.php:177
+#: www/account/pending-resend.php:75 www/activity/index.php:176
 #: www/admin/admin_table.php:212 www/admin/cronman.php:37
 #: www/admin/globalroleedit.php:247 www/admin/index.php:163
 #: www/admin/pending-news.php:172 www/forum/admin/index.php:397
@@ -4376,7 +4447,7 @@ msgstr ""
 #: www/pm/deletetask.php:44 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:237 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:306 www/project/request.php:69
-#: www/register/index.php:295 www/survey/include/SurveyHTML.class.php:540
+#: www/register/index.php:295 www/survey/include/SurveyHTML.class.php:554
 #: www/tracker/roadmap.php:444
 msgid "Submit"
 msgstr "提交"
@@ -4493,6 +4564,7 @@ msgstr "組成元件已插入"
 
 #: common/tracker/actions/admin-updates.php:117
 #: common/tracker/actions/admin-updates.php:139
+#: www/tracker/admin/index.php:183
 #, fuzzy
 msgid "Unable to create ArtifactCanned Object"
 msgstr "建立群組物件時發生錯誤"
@@ -4608,8 +4680,8 @@ msgstr "元件更新了"
 msgid "Could Not Get Factory"
 msgstr "無法完成執行"
 
-#: common/tracker/actions/browse.php:177 common/tracker/actions/browse.php:300
-#: common/tracker/actions/browse.php:305 common/tracker/actions/query.php:337
+#: common/tracker/actions/browse.php:177 common/tracker/actions/browse.php:301
+#: common/tracker/actions/browse.php:306 common/tracker/actions/query.php:337
 #: www/pm/browse_task.php:106 www/pm/browse_task.php:117
 #: www/pm/browse_task.php:160 www/pm/ganttpage.php:56 www/pm/ganttpage.php:58
 #: www/pm/ganttpage.php:60 www/pm/ganttpage.php:62
@@ -4622,16 +4694,16 @@ msgstr "任何"
 msgid "Unassigned"
 msgstr "不能指定"
 
-#: common/tracker/actions/browse.php:189 common/tracker/actions/browse.php:547
+#: common/tracker/actions/browse.php:189 common/tracker/actions/browse.php:548
 #: common/tracker/actions/query.php:190
-#: common/tracker/views/form-addcanned.php:41 www/admin/massmail.php:136
+#: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
 #: www/admin/search.php:89 www/admin/search.php:167 www/my/dashboard.php:62
 #: www/pm/index.php:98 www/project/admin/editimages.php:265
 msgid "ID"
 msgstr "編號"
 
-#: common/tracker/actions/browse.php:190 common/tracker/actions/browse.php:559
-#: common/tracker/actions/browse.php:732 common/tracker/actions/detail.php:68
+#: common/tracker/actions/browse.php:190 common/tracker/actions/browse.php:560
+#: common/tracker/actions/browse.php:733 common/tracker/actions/detail.php:68
 #: common/tracker/actions/mod-limited.php:116
 #: common/tracker/actions/mod.php:144 common/tracker/actions/query.php:191
 #: common/tracker/include/build_submission_form.php:66
@@ -4645,7 +4717,7 @@ msgstr "編號"
 msgid "Priority"
 msgstr "優先權"
 
-#: common/tracker/actions/browse.php:192 common/tracker/actions/browse.php:553
+#: common/tracker/actions/browse.php:192 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:193
 #: common/tracker/views/form-customizelist.php:44 www/people/viewjob.php:77
 #: www/pm/include/ProjectTaskHTML.class.php:111
@@ -4653,14 +4725,14 @@ msgstr "優先權"
 msgid "Open Date"
 msgstr "啟用日期"
 
-#: common/tracker/actions/browse.php:193 common/tracker/actions/browse.php:567
+#: common/tracker/actions/browse.php:193 common/tracker/actions/browse.php:568
 #: common/tracker/actions/query.php:194
 #: common/tracker/views/form-customizelist.php:52
 #, fuzzy
 msgid "Last Modified Date"
 msgstr "已經新增通信論壇"
 
-#: common/tracker/actions/browse.php:194 common/tracker/actions/browse.php:555
+#: common/tracker/actions/browse.php:194 common/tracker/actions/browse.php:556
 #: common/tracker/actions/query.php:195
 #: common/tracker/views/form-customizelist.php:49
 msgid "Close Date"
@@ -4671,7 +4743,7 @@ msgstr "結束日期"
 msgid "Submitter"
 msgstr "發表人"
 
-#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:399
+#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:400
 #: common/tracker/actions/query.php:197 common/tracker/actions/query.php:344
 #: www/pm/browse_task.php:159 www/pm/ganttpage.php:155
 msgid "Assignee"
@@ -4721,54 +4793,54 @@ msgstr ""
 msgid "Change"
 msgstr "更新"
 
-#: common/tracker/actions/browse.php:322
+#: common/tracker/actions/browse.php:323
 #, fuzzy
 msgid "Advanced queries"
 msgstr "進階搜尋"
 
-#: common/tracker/actions/browse.php:374
+#: common/tracker/actions/browse.php:375
 msgid "Power Query"
 msgstr "執行"
 
-#: common/tracker/actions/browse.php:376 common/tracker/actions/browse.php:388
+#: common/tracker/actions/browse.php:377 common/tracker/actions/browse.php:389
 #: common/tracker/actions/query.php:249 common/tracker/actions/query.php:253
 msgid "Build Query"
 msgstr "建立查詢"
 
-#: common/tracker/actions/browse.php:392
+#: common/tracker/actions/browse.php:393
 msgid "Simple Filtering and Sorting"
 msgstr ""
 
-#: common/tracker/actions/browse.php:420 common/tracker/actions/query.php:388
+#: common/tracker/actions/browse.php:421 common/tracker/actions/query.php:388
 msgid "Order by"
 msgstr "排序"
 
-#: common/tracker/actions/browse.php:423
+#: common/tracker/actions/browse.php:424
 msgid "Quick Browse"
 msgstr ""
 
-#: common/tracker/actions/browse.php:432
+#: common/tracker/actions/browse.php:433
 #: common/tracker/views/form-adminroadmap.php:488
 msgid "Default"
 msgstr ""
 
-#: common/tracker/actions/browse.php:433
+#: common/tracker/actions/browse.php:434
 msgid ""
 "Viewing only opened records by default, use 'Advanced queries' or 'Simple "
 "Filtering and Sorting' to change."
 msgstr ""
 
-#: common/tracker/actions/browse.php:532 www/pm/browse_task.php:210
+#: common/tracker/actions/browse.php:533 www/pm/browse_task.php:210
 #, fuzzy
 msgid "Check all"
 msgstr "全選"
 
-#: common/tracker/actions/browse.php:534 www/pm/browse_task.php:212
+#: common/tracker/actions/browse.php:535 www/pm/browse_task.php:212
 #, fuzzy
 msgid "Clear all"
 msgstr "全部清除"
 
-#: common/tracker/actions/browse.php:563 common/tracker/actions/detail.php:77
+#: common/tracker/actions/browse.php:564 common/tracker/actions/detail.php:77
 #: common/tracker/actions/mod-limited.php:83 common/tracker/actions/mod.php:86
 #: www/admin/pending-news.php:146 www/my/dashboard.php:74
 #: www/news/admin/index.php:127 www/pm/detail_task.php:39
@@ -4778,49 +4850,49 @@ msgstr "全部清除"
 msgid "Submitted by"
 msgstr "發表人"
 
-#: common/tracker/actions/browse.php:565
+#: common/tracker/actions/browse.php:566
 #: common/tracker/views/form-customizelist.php:51
 #, fuzzy
 msgid "Related tasks"
 msgstr "相關的追蹤項"
 
-#: common/tracker/actions/browse.php:685
+#: common/tracker/actions/browse.php:686
 #, php-format
 msgid "* Denotes requests > %1$s Days Old"
 msgstr "* 指示請求 > %1$s 天之久"
 
-#: common/tracker/actions/browse.php:708 www/pm/browse_task.php:361
+#: common/tracker/actions/browse.php:709 www/pm/browse_task.php:361
 #: www/pm/browse_task.php:390
 #, fuzzy
 msgid "Mass Update"
 msgstr "大量更新"
 
-#: common/tracker/actions/browse.php:713 www/pm/browse_task.php:366
+#: common/tracker/actions/browse.php:714 www/pm/browse_task.php:366
 msgid ""
 "<strong>Admin:</strong> If you wish to apply changes to all items selected "
 "above, use these controls to change their properties and click once on "
 "\"Mass Update\"."
 msgstr ""
 
-#: common/tracker/actions/browse.php:730 common/tracker/actions/browse.php:741
-#: common/tracker/actions/browse.php:745 www/include/html.php:318
-#: www/include/html.php:479 www/include/html.php:670
+#: common/tracker/actions/browse.php:731 common/tracker/actions/browse.php:742
+#: common/tracker/actions/browse.php:746 www/include/html.php:318
+#: www/include/html.php:484 www/include/html.php:675
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:373
 #: www/pm/browse_task.php:384
 msgid "No Change"
 msgstr "沒有異動"
 
-#: common/tracker/actions/browse.php:741
+#: common/tracker/actions/browse.php:742
 #: common/tracker/include/ArtifactTypeHtml.class.php:672
 #: common/tracker/include/ArtifactTypeHtml.class.php:706
 msgid "Nobody"
 msgstr "Nobody"
 
-#: common/tracker/actions/browse.php:753
+#: common/tracker/actions/browse.php:754
 msgid "Mass update"
 msgstr "大量更新"
 
-#: common/tracker/actions/browse.php:762
+#: common/tracker/actions/browse.php:763
 msgid "No items found"
 msgstr "沒有任何項目"
 
@@ -4943,8 +5015,8 @@ msgstr "附加檔案"
 #: common/tracker/actions/mod.php:272
 #: plugins/scmcvs/common/CVSPlugin.class.php:153
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:198
-#: plugins/scmsvn/common/SVNPlugin.class.php:198
-#: utils/fixscripts/populate_template_project.php:173
+#: plugins/scmsvn/common/SVNPlugin.class.php:199
+#: utils/fixscripts/populate_template_project.php:203
 #: www/stats/site_stats_utils.php:303
 msgid "Commits"
 msgstr ""
@@ -4985,7 +5057,7 @@ msgstr "開啟"
 #: plugins/scmcvs/common/CVSPlugin.class.php:171
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:216
 #: plugins/scmgit/common/GitPlugin.class.php:263
-#: plugins/scmsvn/common/SVNPlugin.class.php:216 www/pm/index.php:102
+#: plugins/scmsvn/common/SVNPlugin.class.php:217 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:285
 msgid "Total"
 msgstr "總共"
@@ -5362,6 +5434,11 @@ msgstr ""
 msgid "Various graph of statistics."
 msgstr ""
 
+#: common/tracker/include/ArtifactTypeFactoryHtml.class.php:61
+#: common/tracker/include/ArtifactTypeHtml.class.php:93
+msgid "Global administration for trackers. Create, clone, workflow, fields ..."
+msgstr ""
+
 #: common/tracker/include/ArtifactTypeHtml.class.php:66
 #, fuzzy
 msgid "Browse this tracker."
@@ -5460,7 +5537,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:151
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:196
 #: plugins/scmgit/common/GitPlugin.class.php:243
-#: plugins/scmsvn/common/SVNPlugin.class.php:196 www/admin/useredit.php:261
+#: plugins/scmsvn/common/SVNPlugin.class.php:197 www/admin/useredit.php:261
 #: www/admin/useredit.php:291 www/project/admin/editimages.php:267
 #: www/reporting/usersummary.php:101
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
@@ -5482,8 +5559,8 @@ msgstr "下載"
 #: common/widget/Widget_MyArtifacts.class.php:116 www/admin/pluginman.php:210
 #: www/admin/pluginman.php:229 www/admin/pluginman.php:241
 #: www/admin/pluginman.php:242 www/include/html.php:277
-#: www/include/html.php:419 www/include/html.php:505 www/include/html.php:522
-#: www/include/html.php:556 www/include/html.php:597 www/pm/ganttpage.php:62
+#: www/include/html.php:425 www/include/html.php:510 www/include/html.php:527
+#: www/include/html.php:561 www/include/html.php:602 www/pm/ganttpage.php:62
 #: www/tracker/roadmap.php:440
 msgid "None"
 msgstr "無"
@@ -5522,25 +5599,35 @@ msgstr "所有項都必須填寫！"
 
 #: common/tracker/views/form-addcanned.php:27
 #, fuzzy, php-format
-msgid "Add/Update Canned Responses to %s"
+msgid "Manage Canned Responses to %s"
 msgstr "新增/更新 預設回應"
 
-#: common/tracker/views/form-addcanned.php:39
+#: common/tracker/views/form-addcanned.php:38
 msgid "Existing Responses"
 msgstr "已存在回應"
 
-#: common/tracker/views/form-addcanned.php:57
+#: common/tracker/views/form-addcanned.php:42 plugins/blocks/www/index.php:234
+#, fuzzy
+msgid "Operation"
+msgstr "動作"
+
+#: common/tracker/views/form-addcanned.php:60
 msgid "No responses set up in this group"
 msgstr "在本群組回應未設定"
 
-#: common/tracker/views/form-addcanned.php:60
+#: common/tracker/views/form-addcanned.php:63
+#, fuzzy
+msgid "Add New Canned Response"
+msgstr "使用預設的回應"
+
+#: common/tracker/views/form-addcanned.php:65
 #: common/tracker/views/form-updatecanned.php:39
 msgid ""
 "Creating useful generic messages can save you a lot of time when handling "
 "common artifact requests."
 msgstr "創造有用的一般回應訊息可以節省您很多時間，尤其在處理同樣的自訂要求。"
 
-#: common/tracker/views/form-addcanned.php:66
+#: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-updatecanned.php:46
 msgid "Message Body"
 msgstr "預設回應訊息主要部份"
@@ -5669,21 +5756,21 @@ msgstr "版本"
 msgid "Up/Down positions"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:75
+#: common/tracker/views/form-addextrafieldoption.php:74
 #: common/tracker/views/form-adminroadmap.php:411
 #, fuzzy
 msgid "Reorder"
 msgstr "移除"
 
-#: common/tracker/views/form-addextrafieldoption.php:80
+#: common/tracker/views/form-addextrafieldoption.php:79
 msgid "Alphabetical order"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:89
+#: common/tracker/views/form-addextrafieldoption.php:87
 msgid "You have not defined any elements"
 msgstr "您沒有定義任何的組成元件"
 
-#: common/tracker/views/form-addextrafieldoption.php:95
+#: common/tracker/views/form-addextrafieldoption.php:93
 msgid "Add New Element"
 msgstr "新增新組成元件"
 
@@ -5777,7 +5864,7 @@ msgstr ""
 #: www/mail/admin/index.php:221 www/people/editprofile.php:247
 #: www/survey/admin/show_results_aggregate.php:193
 #: www/survey/include/SurveyHTML.class.php:194
-#: www/survey/include/SurveyHTML.class.php:411
+#: www/survey/include/SurveyHTML.class.php:417
 msgid "Yes"
 msgstr "是"
 
@@ -5928,22 +6015,31 @@ msgstr "發表人"
 msgid "Delete a custom field for %s"
 msgstr "訂製欄位類型"
 
-#: common/tracker/views/form-deleteextrafield.php:34
+#: common/tracker/views/form-deleteextrafield.php:31
+#, fuzzy
+msgid "Delete Custom Field"
+msgstr "訂製欄位類型"
+
+#: common/tracker/views/form-deleteextrafield.php:36
 msgid ""
 "You are about to permanently and irretrievably delete this custom field and "
 "all its contents!"
 msgstr "您正在永久且不能挽回地刪除這個訂製欄位和它所有的內容！"
 
-#: common/tracker/views/form-deleteextrafield.php:37
-#: common/tracker/views/form-deleteextrafieldelement.php:59
-#: common/tracker/views/form-deletetracker.php:31
-msgid "I'm Sure."
+#: common/tracker/views/form-deleteextrafield.php:39
+#: common/tracker/views/form-deleteextrafieldelement.php:61
+#: common/tracker/views/form-deletetracker.php:33
+#: www/forum/admin/index.php:168 www/frs/admin/deletepackage.php:67
+#: www/frs/admin/deleterelease.php:75 www/frs/admin/editrelease.php:382
+#: www/pm/admin/index.php:372 www/project/admin/roledelete.php:81
+msgid "I'm Sure"
 msgstr "我確定"
 
-#: common/tracker/views/form-deleteextrafield.php:38
-#: common/tracker/views/form-deleteextrafieldelement.php:60
-#: common/tracker/views/form-deletetracker.php:32
-msgid "I'm Really Sure."
+#: common/tracker/views/form-deleteextrafield.php:40
+#: common/tracker/views/form-deletetracker.php:34
+#: www/forum/admin/index.php:169 www/frs/admin/deletepackage.php:70
+#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:373
+msgid "I'm Really Sure"
 msgstr "我非常確定"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:47
@@ -5951,7 +6047,12 @@ msgstr "我非常確定"
 msgid "Delete a custom field element in: %s"
 msgstr "更新自訂欄位時發生錯誤"
 
-#: common/tracker/views/form-deleteextrafieldelement.php:56
+#: common/tracker/views/form-deleteextrafieldelement.php:51
+#, fuzzy
+msgid "Delete Custom Field Element"
+msgstr "更新自訂欄位時發生錯誤"
+
+#: common/tracker/views/form-deleteextrafieldelement.php:58
 #: common/tracker/views/form-updateextrafieldelement.php:54
 msgid "Element"
 msgstr "組成元件"
@@ -5961,7 +6062,12 @@ msgstr "組成元件"
 msgid "Permanently Delete Tracker %s"
 msgstr "永久地刪除這個追蹤系統。"
 
-#: common/tracker/views/form-deletetracker.php:29
+#: common/tracker/views/form-deletetracker.php:28
+#, fuzzy
+msgid "Delete Tracker"
+msgstr "刪除一個任務"
+
+#: common/tracker/views/form-deletetracker.php:31
 msgid ""
 "You are about to permanently and irretrievably delete this tracker and all "
 "its contents!"
@@ -5976,21 +6082,21 @@ msgstr "新增/更新樣板"
 msgid "Notes:"
 msgstr "記錄："
 
-#: common/tracker/views/form-extrafieldcopy.php:53
+#: common/tracker/views/form-extrafieldcopy.php:52
 #, fuzzy
 msgid "Cannot find a destination tracker where you have administration rights."
 msgstr "文件管理員管理"
 
-#: common/tracker/views/form-extrafieldcopy.php:56
+#: common/tracker/views/form-extrafieldcopy.php:55
 #, fuzzy, php-format
 msgid "Copy choices from custom field %1$s"
 msgstr "訂製欄位類型"
 
-#: common/tracker/views/form-extrafieldcopy.php:69
+#: common/tracker/views/form-extrafieldcopy.php:68
 msgid "Copy From"
 msgstr "複製從"
 
-#: common/tracker/views/form-extrafieldcopy.php:75
+#: common/tracker/views/form-extrafieldcopy.php:74
 msgid "Into trackers and custom fields"
 msgstr "到追蹤者與訂製欄位"
 
@@ -6238,10 +6344,6 @@ msgstr ""
 msgid "on"
 msgstr "無"
 
-#: common/widget/Widget_MyLatestSvnCommits.class.php:66
-msgid "by"
-msgstr ""
-
 #: common/widget/Widget_MyLatestSvnCommits.class.php:88
 msgid "Maximum number of SVN commits to display per project"
 msgstr ""
@@ -6278,7 +6380,7 @@ msgid "STOP MONITORING"
 msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:101
-#: common/widget/Widget_MyMonitoredForums.class.php:115
+#: common/widget/Widget_MyMonitoredForums.class.php:116
 #: common/widget/Widget_MySurveys.class.php:107
 #, fuzzy, php-format
 msgid "%s new"
@@ -6291,32 +6393,32 @@ msgid ""
 "label."
 msgstr ""
 
-#: common/widget/Widget_MyMonitoredForums.class.php:34
+#: common/widget/Widget_MyMonitoredForums.class.php:36
 msgid "Monitored Forums"
 msgstr "監視的討論區"
 
-#: common/widget/Widget_MyMonitoredForums.class.php:57
+#: common/widget/Widget_MyMonitoredForums.class.php:60
 msgid "You are not monitoring any forums."
 msgstr "您沒有監視任何討論區"
 
-#: common/widget/Widget_MyMonitoredForums.class.php:57
+#: common/widget/Widget_MyMonitoredForums.class.php:60
 msgid ""
 "If you monitor forums, you will be sent new posts in the form of an email, "
 "with a link to the new message."
 msgstr ""
 
-#: common/widget/Widget_MyMonitoredForums.class.php:57
+#: common/widget/Widget_MyMonitoredForums.class.php:60
 msgid ""
 "You can monitor forums by clicking on the appropriate menu item in the "
 "discussion forum itself."
 msgstr ""
 
-#: common/widget/Widget_MyMonitoredForums.class.php:109
+#: common/widget/Widget_MyMonitoredForums.class.php:110
 #, fuzzy
 msgid "Stop monitoring this Forum?"
 msgstr "訂閱這個集合"
 
-#: common/widget/Widget_MyMonitoredForums.class.php:127
+#: common/widget/Widget_MyMonitoredForums.class.php:129
 msgid ""
 "List forums that you are currently monitoring, by project.<br />To cancel "
 "any of the monitored items just click on the trash icon next to the item "
@@ -6507,21 +6609,21 @@ msgstr[1] "需要協助：這個專案正在找尋"
 msgid "Some infos about the project."
 msgstr "%1$s 排行榜"
 
-#: common/widget/Widget_ProjectLatestDocuments.class.php:36
+#: common/widget/Widget_ProjectLatestDocuments.class.php:37
 msgid "5 Latest Published Documents"
 msgstr ""
 
-#: common/widget/Widget_ProjectLatestDocuments.class.php:68
+#: common/widget/Widget_ProjectLatestDocuments.class.php:69
 #, fuzzy
 msgid "This Project Has Not Published Any Documents"
 msgstr "該專案沒有發佈任何檔案"
 
-#: common/widget/Widget_ProjectLatestDocuments.class.php:110
+#: common/widget/Widget_ProjectLatestDocuments.class.php:122
 #, fuzzy
 msgid "Browse Documents Manager"
 msgstr "查看文件"
 
-#: common/widget/Widget_ProjectLatestDocuments.class.php:126
+#: common/widget/Widget_ProjectLatestDocuments.class.php:138
 msgid " List the 5 most recent documents published by team project."
 msgstr ""
 
@@ -6670,7 +6772,7 @@ msgstr "問卷"
 #: plugins/scmgit/www/index.php:23 plugins/scmgit/www/index.php:36
 #: www/register/index.php:228 www/scm/admin/index.php:72
 #: www/scm/admin/index.php:89 www/scm/browser.php:30 www/scm/index.php:32
-#: www/scm/viewvc.php:148
+#: www/scm/viewvc.php:149
 msgid "SCM Repository"
 msgstr "原始碼版本控制系統資料庫"
 
@@ -6951,7 +7053,7 @@ msgstr ""
 #: www/account/pending-resend.php:35 www/account/unsubscribe.php:54
 #: www/account/verify.php:45 www/admin/database.php:60
 #: www/admin/unsubscribe.php:74 www/admin/useredit.php:43
-#: www/admin/userlist.php:43 www/docman/index.php:99
+#: www/admin/userlist.php:43 www/docman/index.php:101
 #: www/reporting/useract_graph.php:55
 #, fuzzy
 msgid "Could Not Get User"
@@ -7118,11 +7220,6 @@ msgstr ""
 msgid "Active"
 msgstr "啟用"
 
-#: plugins/blocks/www/index.php:234
-#, fuzzy
-msgid "Operation"
-msgstr "動作"
-
 #: plugins/blocks/www/index.php:257
 #, fuzzy
 msgid "Save Blocks"
@@ -7169,7 +7266,7 @@ msgstr ""
 msgid "Block configuration saved"
 msgstr "不正確的確認編碼"
 
-#: plugins/ckeditor/common/ckeditorPlugin.class.php:38
+#: plugins/ckeditor/common/ckeditorPlugin.class.php:37
 msgid "HTML editor (ckeditor)"
 msgstr ""
 
@@ -8272,7 +8369,7 @@ msgstr ""
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:43
 #: plugins/hudson/include/hudsonViews.class.php:59
-#: utils/fixscripts/populate_template_project.php:81
+#: utils/fixscripts/populate_template_project.php:110
 msgid "Help"
 msgstr ""
 
@@ -8538,7 +8635,7 @@ msgstr "您確定要刪除這個自訂類型？"
 #: www/mail/admin/index.php:222 www/people/editprofile.php:246
 #: www/survey/admin/show_results_aggregate.php:207
 #: www/survey/include/SurveyHTML.class.php:195
-#: www/survey/include/SurveyHTML.class.php:413
+#: www/survey/include/SurveyHTML.class.php:419
 msgid "No"
 msgstr "否"
 
@@ -9265,7 +9362,7 @@ msgid "Not Object: MailmanList: %d"
 msgstr "沒有發現問卷問題"
 
 #: plugins/mailman/include/mailmanPlugin.class.php:211
-#: utils/fixscripts/populate_template_project.php:174
+#: utils/fixscripts/populate_template_project.php:204
 #, php-format
 msgid "ML: %s"
 msgstr ""
@@ -9811,11 +9908,6 @@ msgstr "版本："
 #: plugins/mantisbt/view/roadmap.php:96 plugins/mantisbt/view/roadmap.php:145
 msgid "Milestone"
 msgstr ""
-
-#: plugins/mantisbt/view/addAttachment.php:32
-#, fuzzy
-msgid "File:"
-msgstr "文件:"
 
 #: plugins/mantisbt/view/addIssue.php:70
 #: plugins/mantisbt/view/admin/viewCategorie.php:49
@@ -11393,7 +11485,7 @@ msgid "Hierarchy Admin"
 msgstr "專案管理"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:94
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:595
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:600
 msgid ""
 "Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf "
 "features)"
@@ -11421,12 +11513,12 @@ msgid ""
 "father and sons"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:595
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:600
 #, fuzzy
 msgid "Global Hierarchy admin"
 msgstr "搜尋"
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:612
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:617
 #, fuzzy
 msgid "Site Global Hierarchy Admin"
 msgstr "搜尋"
@@ -11842,7 +11934,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:64
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:82
 #: plugins/scmgit/common/GitPlugin.class.php:62
-#: plugins/scmsvn/common/SVNPlugin.class.php:78
+#: plugins/scmsvn/common/SVNPlugin.class.php:79
 #, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
 msgstr ""
@@ -11893,8 +11985,8 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:106
 #: plugins/scmgit/common/GitPlugin.class.php:140
 #: plugins/scmgit/common/GitPlugin.class.php:149
-#: plugins/scmsvn/common/SVNPlugin.class.php:152
-#: plugins/scmsvn/common/SVNPlugin.class.php:161
+#: plugins/scmsvn/common/SVNPlugin.class.php:153
+#: plugins/scmsvn/common/SVNPlugin.class.php:162
 msgid "developername"
 msgstr ""
 
@@ -12062,7 +12154,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:152
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:197
 #: plugins/scmgit/common/GitPlugin.class.php:244
-#: plugins/scmsvn/common/SVNPlugin.class.php:197
+#: plugins/scmsvn/common/SVNPlugin.class.php:198
 #: www/stats/site_stats_utils.php:304
 msgid "Adds"
 msgstr "新增"
@@ -12380,75 +12472,75 @@ msgstr "無法新增已經啟用的資料庫"
 msgid "Links to related SVN commits"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:83
+#: plugins/scmsvn/common/SVNPlugin.class.php:84
 msgid ""
 "Documentation for Subversion (sometimes referred to as \"SVN\") is available "
 "<a href=\"http://svnbook.red-bean.com/\">here</a>."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:100
+#: plugins/scmsvn/common/SVNPlugin.class.php:101
 msgid "Anonymous Subversion Access"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:102
+#: plugins/scmsvn/common/SVNPlugin.class.php:103
 msgid ""
 "This project's SVN repository can be checked out through anonymous access "
 "with the following command(s)."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:112
+#: plugins/scmsvn/common/SVNPlugin.class.php:113
 #, fuzzy
 msgid "The password is "
 msgstr "更新密碼"
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:128
-#: plugins/scmsvn/common/SVNPlugin.class.php:147
+#: plugins/scmsvn/common/SVNPlugin.class.php:129
+#: plugins/scmsvn/common/SVNPlugin.class.php:148
 msgid "Developer Subversion Access via SSH"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:131
+#: plugins/scmsvn/common/SVNPlugin.class.php:132
 msgid ""
 "Only project developers can access the SVN tree via this method. SSH must be "
 "installed on your client machine. Enter your site password when prompted."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:137
-#: plugins/scmsvn/common/SVNPlugin.class.php:156
+#: plugins/scmsvn/common/SVNPlugin.class.php:138
+#: plugins/scmsvn/common/SVNPlugin.class.php:157
 msgid "Developer Subversion Access via DAV"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:140
+#: plugins/scmsvn/common/SVNPlugin.class.php:141
 msgid ""
 "Only project developers can access the SVN tree via this method. Enter your "
 "site password when prompted."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:150
+#: plugins/scmsvn/common/SVNPlugin.class.php:151
 msgid ""
 "Only project developers can access the SVN tree via this method. SSH must be "
 "installed on your client machine. Substitute <i>developername</i> with the "
 "proper values. Enter your site password when prompted."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:159
+#: plugins/scmsvn/common/SVNPlugin.class.php:160
 msgid ""
 "Only project developers can access the SVN tree via this method. Substitute "
 "<i>developername</i> with the proper values. Enter your site password when "
 "prompted."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:173
+#: plugins/scmsvn/common/SVNPlugin.class.php:174
 msgid "Subversion Repository Browser"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:175
+#: plugins/scmsvn/common/SVNPlugin.class.php:176
 msgid ""
 "Browsing the Subversion tree gives you a view into the current status of "
 "this project's code. You may also view the complete histories of any file in "
 "the repository."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:179
+#: plugins/scmsvn/common/SVNPlugin.class.php:180
 msgid "Browse Subversion Repository"
 msgstr ""
 
@@ -12473,87 +12565,87 @@ msgid ""
 "in the OAuth Consumer plugin"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:40
+#: utils/fixscripts/populate_template_project.php:69
 #, php-format
 msgid "R%d: %s"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:54
+#: utils/fixscripts/populate_template_project.php:83
 #, fuzzy
 msgid "Error creating ArtifactTypes object"
 msgstr "建立群組物件時發生錯誤"
 
-#: utils/fixscripts/populate_template_project.php:59
-#: utils/fixscripts/populate_template_project.php:65
+#: utils/fixscripts/populate_template_project.php:88
+#: utils/fixscripts/populate_template_project.php:94
 #, php-format
 msgid "ATS%d: %s"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:74
+#: utils/fixscripts/populate_template_project.php:103
 #, fuzzy
 msgid "Open-Discussion"
 msgstr "討論版："
 
-#: utils/fixscripts/populate_template_project.php:74
+#: utils/fixscripts/populate_template_project.php:103
 msgid "General Discussion"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:75
-#: utils/fixscripts/populate_template_project.php:82
-#: utils/fixscripts/populate_template_project.php:89
+#: utils/fixscripts/populate_template_project.php:104
+#: utils/fixscripts/populate_template_project.php:111
+#: utils/fixscripts/populate_template_project.php:118
 #, php-format
 msgid "F%d: %s"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:81
+#: utils/fixscripts/populate_template_project.php:110
 msgid "Get Public Help"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:88
+#: utils/fixscripts/populate_template_project.php:117
 #, fuzzy
 msgid "Developers-Discussion"
 msgstr "所有專案開發員"
 
-#: utils/fixscripts/populate_template_project.php:88
+#: utils/fixscripts/populate_template_project.php:117
 #, fuzzy
 msgid "Project Developer Discussion"
 msgstr "所有專案開發員"
 
-#: utils/fixscripts/populate_template_project.php:98
+#: utils/fixscripts/populate_template_project.php:127
 #, fuzzy
 msgid "Uncategorized Submissions"
 msgstr "新文件送出"
 
-#: utils/fixscripts/populate_template_project.php:99
+#: utils/fixscripts/populate_template_project.php:128
 #, php-format
 msgid "DG: %s"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:109
+#: utils/fixscripts/populate_template_project.php:138
 #, php-format
 msgid "FRSP: %s"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:118
+#: utils/fixscripts/populate_template_project.php:147
 msgid "To Do"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:118
+#: utils/fixscripts/populate_template_project.php:147
 msgid "Things We Have To Do"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:119
-#: utils/fixscripts/populate_template_project.php:126
+#: utils/fixscripts/populate_template_project.php:148
+#: utils/fixscripts/populate_template_project.php:155
 #, php-format
 msgid "PG%d: %s"
 msgstr ""
 
-#: utils/fixscripts/populate_template_project.php:125
+#: utils/fixscripts/populate_template_project.php:154
 #, fuzzy
 msgid "Next Release"
 msgstr "最近更新"
 
-#: utils/fixscripts/populate_template_project.php:125
+#: utils/fixscripts/populate_template_project.php:154
 #, fuzzy
 msgid "Items For Our Next Release"
 msgstr "最新發佈專案"
@@ -12814,7 +12906,7 @@ msgstr "%1$s 團隊"
 msgid "Updated"
 msgstr "已更新"
 
-#: www/account/index.php:97 www/account/index.php:102 www/include/html.php:835
+#: www/account/index.php:97 www/account/index.php:102 www/include/html.php:840
 msgid "Account Maintenance"
 msgstr "帳號維護"
 
@@ -12991,7 +13083,7 @@ msgstr ""
 msgid "New Password (min. 6 chars)"
 msgstr "新密碼（至少6個字元）"
 
-#: www/account/lostpw.php:44 www/users:51
+#: www/account/lostpw.php:44 www/users:74
 #, fuzzy
 msgid "That user does not exist."
 msgstr "查詢不存在"
@@ -13263,7 +13355,7 @@ msgstr "增加新專案"
 msgid "Invalid Data Passed to query"
 msgstr "無效的密碼："
 
-#: www/activity/index.php:166 www/frs/reporting/downloads.php:103
+#: www/activity/index.php:165 www/frs/reporting/downloads.php:103
 #: www/project/stats/index.php:100 www/reporting/groupadded.php:61
 #: www/reporting/groupcum.php:60 www/reporting/projectact.php:65
 #: www/reporting/projecttime.php:76 www/reporting/siteact.php:65
@@ -13274,7 +13366,7 @@ msgstr "無效的密碼："
 msgid "Start"
 msgstr "開始"
 
-#: www/activity/index.php:167 www/frs/reporting/downloads.php:105
+#: www/activity/index.php:166 www/frs/reporting/downloads.php:105
 #: www/project/stats/index.php:101 www/reporting/groupadded.php:62
 #: www/reporting/groupcum.php:61 www/reporting/projectact.php:66
 #: www/reporting/projecttime.php:77 www/reporting/siteact.php:66
@@ -14842,78 +14934,82 @@ msgid ""
 "submitting the info."
 msgstr "您可以重新評價某個人。只需要回到他們的評價頁面，重新送出資訊即可。"
 
-#: www/docman/index.php:110
+#: www/docman/index.php:113
 #, fuzzy
 msgid "Documents for "
 msgstr "討論區管理"
 
-#: www/docman/view.php:56 www/docman/view.php:233
+#: www/docman/view.php:57 www/docman/view.php:234
 #, fuzzy
 msgid "Document is not available."
 msgstr "資訊未提供"
 
-#: www/docman/view.php:84
+#: www/docman/view.php:85
 msgid "No document to display - invalid or inactive document number"
 msgstr ""
 
-#: www/docman/view.php:117
+#: www/docman/view.php:118
 msgid "Unable to open zip archive for backup"
 msgstr ""
 
-#: www/docman/view.php:121
+#: www/docman/view.php:122
 msgid "Unable to fill zip archive for backup"
 msgstr ""
 
-#: www/docman/view.php:124
+#: www/docman/view.php:125
 msgid "Unable to close zip archive for backup"
 msgstr ""
 
-#: www/docman/view.php:133
+#: www/docman/view.php:134
 msgid "Unable to download backup file"
 msgstr ""
 
-#: www/docman/view.php:138
+#: www/docman/view.php:139
 #, fuzzy
 msgid "No documents to backup."
 msgstr "無文件資料"
 
-#: www/docman/view.php:142
+#: www/docman/view.php:143
 msgid "Zip extension is missing: no backup function"
 msgstr ""
 
-#: www/docman/view.php:154
+#: www/docman/view.php:155
 msgid "Webdav Access Canceled by user"
 msgstr ""
 
-#: www/docman/view.php:160
+#: www/docman/view.php:161
 msgid "No webdav interface enabled."
 msgstr ""
 
-#: www/docman/view.php:188 www/docman/view.php:227
+#: www/docman/view.php:189 www/docman/view.php:228
 msgid "Unable to open zip archive for download as zip"
 msgstr ""
 
-#: www/docman/view.php:200
+#: www/docman/view.php:197 www/docman/view.php:240
+msgid "Unable to fill zipfile."
+msgstr ""
+
+#: www/docman/view.php:201
 msgid "Unable to fill zip archive for download as zip"
 msgstr ""
 
-#: www/docman/view.php:203 www/docman/view.php:248
+#: www/docman/view.php:204 www/docman/view.php:249
 msgid "Unable to close zip archive for download as zip"
 msgstr ""
 
-#: www/docman/view.php:212 www/docman/view.php:257
+#: www/docman/view.php:213 www/docman/view.php:258
 msgid "Unable to download zip archive"
 msgstr ""
 
-#: www/docman/view.php:217
+#: www/docman/view.php:218
 msgid "This documents folder is empty."
 msgstr ""
 
-#: www/docman/view.php:262 www/docman/view.php:268
+#: www/docman/view.php:263 www/docman/view.php:269
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
 
-#: www/docman/view.php:265
+#: www/docman/view.php:266
 msgid "PHP extension is missing."
 msgstr ""
 
@@ -15080,17 +15176,6 @@ msgid ""
 "You are about to permanently and irretrievably delete this entire forum and "
 "all its contents!"
 msgstr "你將永久地刪除這整個的討論區和它所有的內容，而且不能挽回！"
-
-#: www/forum/admin/index.php:168 www/frs/admin/deletepackage.php:67
-#: www/frs/admin/deleterelease.php:75 www/frs/admin/editrelease.php:382
-#: www/pm/admin/index.php:372 www/project/admin/roledelete.php:81
-msgid "I'm Sure"
-msgstr "我確定"
-
-#: www/forum/admin/index.php:169 www/frs/admin/deletepackage.php:70
-#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:373
-msgid "I'm Really Sure"
-msgstr "我非常確定"
 
 #: www/forum/admin/index.php:188 www/forum/admin/index.php:202
 msgid "Delete a Message"
@@ -15363,7 +15448,7 @@ msgstr "新帳號"
 
 #: www/forum/new.php:64
 #, fuzzy
-msgid "Start New Thread for: "
+msgid "Start New Topic for: "
 msgstr "建立新主題"
 
 #: www/forum/save.php:55
@@ -16152,93 +16237,93 @@ msgid ""
 "will also get emails for those reasons as well!"
 msgstr ""
 
-#: www/include/html.php:672
+#: www/include/html.php:677
 msgid "Lowest"
 msgstr "最低"
 
-#: www/include/html.php:676
+#: www/include/html.php:681
 msgid "Highest"
 msgstr "最高"
 
-#: www/include/html.php:762
+#: www/include/html.php:767
 #, fuzzy, php-format
 msgid "Project access problem: %s"
 msgstr "專案管理：%1$s"
 
-#: www/include/html.php:764
+#: www/include/html.php:769
 #, fuzzy, php-format
 msgid "Project Problem: %s"
 msgstr "專案管理：%1$s"
 
-#: www/include/html.php:819 www/my/bookmark_add.php:28
+#: www/include/html.php:824 www/my/bookmark_add.php:28
 msgid "My Personal Page"
 msgstr "我的個人首頁"
 
-#: www/include/html.php:821
+#: www/include/html.php:826
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:824
+#: www/include/html.php:829
 #, fuzzy
 msgid "Trackers dashboard"
 msgstr "追蹤更新"
 
-#: www/include/html.php:826
+#: www/include/html.php:831
 #, fuzzy
 msgid "View your tasks and artifacts."
 msgstr "您沒有日記或筆記"
 
-#: www/include/html.php:830
+#: www/include/html.php:835
 msgid "Diary &amp; Notes"
 msgstr "日記和筆記"
 
-#: www/include/html.php:832
+#: www/include/html.php:837
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:837
+#: www/include/html.php:842
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:841 www/register/index.php:155
+#: www/include/html.php:846 www/register/index.php:155
 msgid "Register Project"
 msgstr "註冊專案"
 
-#: www/include/html.php:843
+#: www/include/html.php:848
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:892
+#: www/include/html.php:897
 #, fuzzy, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "上個月"
 msgstr[1] "上個月"
 
-#: www/include/html.php:896
+#: www/include/html.php:901
 #, fuzzy, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "上個月"
 msgstr[1] "上個月"
 
-#: www/include/html.php:900
+#: www/include/html.php:905
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:904
+#: www/include/html.php:909
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:908
+#: www/include/html.php:913
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -16438,17 +16523,17 @@ msgid "URI:"
 msgstr ""
 
 #: www/include/vote_function.php:210
-#: www/survey/include/SurveyHTML.class.php:497
+#: www/survey/include/SurveyHTML.class.php:511
 msgid "Low"
 msgstr "低"
 
 #: www/include/vote_function.php:210
-#: www/survey/include/SurveyHTML.class.php:499
+#: www/survey/include/SurveyHTML.class.php:513
 msgid "High"
 msgstr "高"
 
 #: www/include/vote_function.php:283
-#: www/survey/include/SurveyHTML.class.php:541 www/survey/privacy.php:31
+#: www/survey/include/SurveyHTML.class.php:555 www/survey/privacy.php:31
 msgid "Survey Privacy"
 msgstr "問卷隱私聲明"
 
@@ -17001,7 +17086,7 @@ msgstr "使用新聞"
 msgid "No News Items Found"
 msgstr "沒有發現新聞"
 
-#: www/news/news_utils.php:179 www/survey/include/SurveyHTML.class.php:640
+#: www/news/news_utils.php:179 www/survey/include/SurveyHTML.class.php:654
 msgid "Comments"
 msgstr "評論"
 
@@ -19737,7 +19822,7 @@ msgstr ""
 msgid "View Source Code"
 msgstr "來源 IP"
 
-#: www/scm/include/viewvc_utils.php:81
+#: www/scm/include/viewvc_utils.php:98
 msgid ""
 "The repository for this project isn't created yet. It will be created in the "
 "next few minutes."
@@ -19753,7 +19838,7 @@ msgstr "根據使用者"
 msgid "SCM Repository Reporting"
 msgstr "原始碼版本控制系統資料庫"
 
-#: www/scm/viewvc.php:94
+#: www/scm/viewvc.php:95
 #, fuzzy, php-format
 msgid "Could not open script %s."
 msgstr "無法獲得許可權"
@@ -19841,7 +19926,7 @@ msgid "Note: only the first %d results for this category are displayed."
 msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:194
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:195
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:215
 #, fuzzy, php-format
 msgid ""
 "No matches found for <em>%s</em> - No sections available (check your "
@@ -19849,7 +19934,7 @@ msgid ""
 msgstr "未發現符合項目 - 沒有部份提供(檢查您的權限)"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:196
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:197
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:217
 #, fuzzy, php-format
 msgid "No matches found for <em>%s</em>"
 msgstr "找不到關於 <em>%1$s</em> 的資料"
@@ -19889,6 +19974,11 @@ msgstr "張貼日期"
 #, fuzzy
 msgid "Entire project search"
 msgstr "進階搜尋"
+
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:167
+#, fuzzy, php-format
+msgid "%s Search Results"
+msgstr "%1$s 搜尋結果"
 
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #, php-format
@@ -20505,7 +20595,7 @@ msgstr "程式碼類型"
 msgid "Paste the Code Here"
 msgstr "在這裡貼上程式碼"
 
-#: www/soap/index.php:157
+#: www/soap/index.php:158
 msgid "en_US"
 msgstr "zh_TW"
 
@@ -20860,8 +20950,8 @@ msgstr "編輯一個問題"
 msgid "Add a Question"
 msgstr "新增一個問題"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_questions.php:35
-#: www/survey/admin/show_results.php:59
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/show_questions.php:35 www/survey/admin/show_results.php:59
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
 #: www/survey/admin/show_results_csv.php:33
@@ -20891,6 +20981,11 @@ msgstr "更新成功"
 #, fuzzy
 msgid "No questions found"
 msgstr "找到 %1$s 個問題"
+
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#, fuzzy
+msgid "Cannot get Survey Response Factory"
+msgstr "沒有發現問卷回應"
 
 #: www/survey/admin/show_questions.php:32
 msgid "Survey Questions"
@@ -20924,11 +21019,6 @@ msgstr "編輯一個問卷"
 #, fuzzy
 msgid "Votes"
 msgstr "評分"
-
-#: www/survey/admin/show_results.php:133
-#, fuzzy
-msgid "Cannot get Survey Response Factory"
-msgstr "沒有發現問卷回應"
 
 #: www/survey/admin/show_results_aggregate.php:32
 msgid "Survey Aggregate Results"
@@ -21047,7 +21137,7 @@ msgid "Addable Questions"
 msgstr "可新增問題"
 
 #: www/survey/include/SurveyHTML.class.php:204
-#: www/survey/include/SurveyHTML.class.php:345
+#: www/survey/include/SurveyHTML.class.php:346
 msgid "Questions"
 msgstr "問題"
 
@@ -21081,61 +21171,60 @@ msgid_plural "%d questions found"
 msgstr[0] "找到 %1$s 個問題"
 msgstr[1] "找到 %1$s 個問題"
 
-#: www/survey/include/SurveyHTML.class.php:335
-#, fuzzy
-msgid "Existing Survey"
-msgid_plural "Existing Surveys"
-msgstr[0] "已經存在的問卷"
-msgstr[1] "已經存在的問卷"
-
-#: www/survey/include/SurveyHTML.class.php:339
+#: www/survey/include/SurveyHTML.class.php:340
 msgid "Survey ID"
 msgstr "問卷編號"
 
-#: www/survey/include/SurveyHTML.class.php:342
+#: www/survey/include/SurveyHTML.class.php:343
 msgid "Survey Title"
 msgstr "問卷標題"
 
-#: www/survey/include/SurveyHTML.class.php:348
+#: www/survey/include/SurveyHTML.class.php:349
 msgid "Number of Questions"
 msgstr "問題數"
 
-#: www/survey/include/SurveyHTML.class.php:351
+#: www/survey/include/SurveyHTML.class.php:352
 msgid "Number of Votes"
 msgstr "評分數"
 
-#: www/survey/include/SurveyHTML.class.php:354
+#: www/survey/include/SurveyHTML.class.php:355
 msgid "Did I Vote?"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:360
-#: www/survey/include/SurveyHTML.class.php:428
+#: www/survey/include/SurveyHTML.class.php:361
+#: www/survey/include/SurveyHTML.class.php:434
 msgid "Result"
 msgstr "結果"
 
-#: www/survey/include/SurveyHTML.class.php:363
-#: www/survey/include/SurveyHTML.class.php:432
+#: www/survey/include/SurveyHTML.class.php:364
+#: www/survey/include/SurveyHTML.class.php:438
 msgid "Result with Graph"
 msgstr "統計圖"
 
-#: www/survey/include/SurveyHTML.class.php:366
-#: www/survey/include/SurveyHTML.class.php:436
+#: www/survey/include/SurveyHTML.class.php:367
+#: www/survey/include/SurveyHTML.class.php:442
 msgid "Result with Graph and Comments"
 msgstr "圖形與評論的結果"
 
-#: www/survey/include/SurveyHTML.class.php:453
+#: www/survey/include/SurveyHTML.class.php:370
+#: www/survey/include/SurveyHTML.class.php:447
+#, fuzzy
+msgid "CSV"
+msgstr "CVS"
+
+#: www/survey/include/SurveyHTML.class.php:467
 msgid "Error - you can't vote for inactive survey"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:460
+#: www/survey/include/SurveyHTML.class.php:474
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr "警告 - 您在本問卷大概投了兩次票。"
 
-#: www/survey/include/SurveyHTML.class.php:574
+#: www/survey/include/SurveyHTML.class.php:588
 msgid "No Votes"
 msgstr "沒有評分"
 
-#: www/survey/include/SurveyHTML.class.php:672
+#: www/survey/include/SurveyHTML.class.php:686
 #, fuzzy, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -21372,7 +21461,7 @@ msgstr "刪除樣板"
 msgid "You are about to delete your current Layout Template"
 msgstr ""
 
-#: www/tracker/admin/index.php:97
+#: www/tracker/admin/index.php:97 www/tracker/admin/index.php:174
 #, fuzzy
 msgid "Do you really want to do that?"
 msgstr "您確定要刪除這個任務嗎？"
@@ -21382,7 +21471,22 @@ msgstr "您確定要刪除這個任務嗎？"
 msgid "Layout Template Deleted"
 msgstr "訂製欄位已刪除"
 
-#: www/tracker/admin/index.php:201
+#: www/tracker/admin/index.php:172
+#, fuzzy
+msgid "Delete Canned Response"
+msgstr "刪除的回應"
+
+#: www/tracker/admin/index.php:173
+#, fuzzy
+msgid "You are about to delete your canned response"
+msgstr "你正要永久地刪除這一份文件。"
+
+#: www/tracker/admin/index.php:189
+#, fuzzy
+msgid "Canned Response Deleted"
+msgstr "預設回應已插入"
+
+#: www/tracker/admin/index.php:234
 msgid "Successfully Deleted."
 msgstr "已成功刪除"
 
@@ -21601,6 +21705,36 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帳號"
+
+#, fuzzy
+#~ msgid "Document Edit"
+#~ msgstr "文件標題"
+
+#, fuzzy
+#~ msgid "View File URL"
+#~ msgstr "新發佈"
+
+#~ msgid "Submit Edit"
+#~ msgstr "送出編輯"
+
+#~ msgid "Report"
+#~ msgstr "報告"
+
+#, fuzzy
+#~ msgid "Add/Update Canned Responses to %s"
+#~ msgstr "新增/更新 預設回應"
+
+#~ msgid "I'm Sure."
+#~ msgstr "我確定"
+
+#~ msgid "I'm Really Sure."
+#~ msgstr "我非常確定"
+
+#, fuzzy
+#~ msgid "Existing Survey"
+#~ msgid_plural "Existing Surveys"
+#~ msgstr[0] "已經存在的問卷"
+#~ msgstr[1] "已經存在的問卷"
 
 #, fuzzy
 #~ msgid "Error Adding Directory:"
@@ -22145,10 +22279,6 @@ msgstr "帳號"
 
 #~ msgid "Top Projects"
 #~ msgstr "專案排行榜"
-
-#, fuzzy
-#~ msgid "Add/Change Canned Responses to %s"
-#~ msgstr "新增/更新 預設回應"
 
 #~ msgid "Once you add a new element, it cannot be deleted"
 #~ msgstr "只要您新增一個新組成元件，它就無法被刪除"
