@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-11 22:08+0100\n"
-"PO-Revision-Date: 2011-09-26 14:49+0200\n"
+"PO-Revision-Date: 2012-03-11 22:31+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -4967,14 +4967,14 @@ msgstr "Suites"
 #: common/tracker/actions/mod.php:226
 #: www/pm/include/ProjectTaskHTML.class.php:147
 msgid "Sort comments antichronologically"
-msgstr ""
+msgstr "Trier les commentaires par ordre chronologique inverse"
 
 #: common/tracker/actions/detail.php:131
 #: common/tracker/actions/mod-limited.php:170
 #: common/tracker/actions/mod.php:230
 #: www/pm/include/ProjectTaskHTML.class.php:151
 msgid "Sort comments chronologically"
-msgstr ""
+msgstr "Trier les commentaires par ordre chronologique"
 
 #: common/tracker/actions/detail.php:146
 #: common/tracker/actions/mod-limited.php:184
@@ -5392,7 +5392,7 @@ msgstr "Voir les outils de suivi"
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:49
 #: common/tracker/include/ArtifactTypeHtml.class.php:63
 msgid "Get the list of available trackers"
-msgstr ""
+msgstr "Lister les outils de suivi disponibles"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:50
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:364
@@ -5403,11 +5403,11 @@ msgstr "Feuille de route"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:52
 msgid "Display configured roadmaps"
-msgstr ""
+msgstr "Afficher les feuilles de route configurées"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:56
 msgid "Various graph of statistics."
-msgstr ""
+msgstr "Divers graphiques de statistiques"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:61
 #: common/tracker/include/ArtifactTypeHtml.class.php:93
@@ -5415,27 +5415,24 @@ msgid "Global administration for trackers. Create, clone, workflow, fields ..."
 msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:66
-#, fuzzy
 msgid "Browse this tracker."
-msgstr "Afficher les tâches"
+msgstr "Parcourir cet outil de suivi."
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:67
-#, fuzzy
 msgid "Export CSV"
 msgstr "Exporter un fichier CSV"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:69
 msgid "Download data from this tracker as csv file."
-msgstr ""
+msgstr "Télécharger les données de cet outil de suivi sous forme d'un fichier CSV."
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:73
-#, fuzzy
 msgid "Add a new issue."
-msgstr "Ajout d'une tâche"
+msgstr "Ajout d'un ticket"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:79
 msgid "Various graph about statistics."
-msgstr ""
+msgstr "Divers graphiques de statistiques"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:81
 msgid "Stop Monitor"
@@ -5443,12 +5440,12 @@ msgstr "Arrêter la surveillance"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:83
 msgid "Remove this tracker from your monitoring."
-msgstr ""
+msgstr "Arrêter de surveiller cet outil de suivi."
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:87
 #: common/tracker/include/ArtifactTypeHtml.class.php:98
 msgid "Add this tracker from your monitoring."
-msgstr ""
+msgstr "Ajouter cet outil de suivi à votre liste de surveillance."
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:137
 #: common/tracker/views/form-clonetracker.php:48
@@ -5496,7 +5493,7 @@ msgstr "Supprimer la relation"
 #: common/tracker/include/ArtifactTypeHtml.class.php:352
 #, php-format
 msgid "Average completion rate: %d%%"
-msgstr ""
+msgstr "Taux de complétion moyen : %d%%"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:367
 #: common/tracker/views/form-adminroadmap.php:192
@@ -5768,16 +5765,16 @@ msgstr "La corbeille est vide."
 #: common/tracker/views/form-adminroadmap.php:76
 #, php-format
 msgid "Roadmap %s created"
-msgstr ""
+msgstr "Feuille de route %s créée"
 
 #: common/tracker/views/form-adminroadmap.php:79
 msgid "Can't create roadmap: "
-msgstr ""
+msgstr "Erreur lors de la création de la feuille de route : "
 
 #: common/tracker/views/form-adminroadmap.php:87
 #, php-format
 msgid "Roadmap %s renamed to %s"
-msgstr ""
+msgstr "Feuille de route %s renommée en %s"
 
 #: common/tracker/views/form-adminroadmap.php:90
 #, fuzzy
@@ -5846,30 +5843,26 @@ msgid "Yes"
 msgstr "Oui"
 
 #: common/tracker/views/form-adminroadmap.php:183
-#, fuzzy
 msgid "Create a new roadmap"
-msgstr "Créer un nouvel outil de suivi."
+msgstr "Créer une nouvelle feuille de route"
 
 #: common/tracker/views/form-adminroadmap.php:186
-#, fuzzy
 msgid "Update roadmap"
-msgstr "Mettre à jour la tâche"
+msgstr "Mettre à jour la feuille de route"
 
 #: common/tracker/views/form-adminroadmap.php:201 www/tracker/roadmap.php:257
-#, fuzzy
 msgid "No trackers have been set up."
-msgstr "Aucun envoi n'a été fait dans CVS."
+msgstr "Aucun outil de suivi n'est actuellement configuré."
 
 #: common/tracker/views/form-adminroadmap.php:220
-#, fuzzy
 msgid "Not used"
-msgstr "Aucune nouvelle trouvée"
+msgstr "Non utilisé"
 
 #: common/tracker/views/form-adminroadmap.php:251 www/tracker/roadmap.php:201
 #: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
-#, fuzzy, php-format
+#, php-format
 msgid "roadmap %s is not available"
-msgstr "Document indisponible."
+msgstr "La feuille de route %s n'est pas disponible."
 
 #: common/tracker/views/form-adminroadmap.php:279
 #: common/tracker/views/form-adminroadmap.php:366
@@ -5913,38 +5906,32 @@ msgid "You can <a href=\"%s\">select tracker(s) for this roadmap</a>."
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:427
-#, fuzzy
 msgid "Return to list of roadmaps"
-msgstr "Retourner au forum"
+msgstr "Retourner à la liste des feuilles de route"
 
 #: common/tracker/views/form-adminroadmap.php:435
-#, fuzzy
 msgid "Manage roadmaps"
-msgstr "Gestion des labels"
+msgstr "Gestion des feuilles de route"
 
 #: common/tracker/views/form-adminroadmap.php:437
 msgid "You can define a new roadmap or edit an existing one here."
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:471
-#, fuzzy
 msgid "Modify roadmap"
-msgstr "Modifier l'onglet"
+msgstr "Modifier la feuille de route"
 
 #: common/tracker/views/form-adminroadmap.php:486
-#, fuzzy
 msgid "Enable"
-msgstr "Activée"
+msgstr "Activer"
 
 #: common/tracker/views/form-adminroadmap.php:487
-#, fuzzy
 msgid "Roadmap name"
-msgstr "Feuille de route"
+msgstr "Nom de la feuille de route"
 
 #: common/tracker/views/form-adminroadmap.php:502
-#, fuzzy
 msgid "New Roadmap"
-msgstr "Feuille de route"
+msgstr "Nouvelle feuille de route"
 
 #: common/tracker/views/form-clonetracker.php:32
 msgid "Unable to Create Template Group Object"
@@ -6491,7 +6478,7 @@ msgstr ""
 
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:37
 msgid "The 5 Last Documents in My Projects"
-msgstr ""
+msgstr "Les 5 derniers documents de mes projets"
 
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:87
 #, fuzzy
@@ -7058,13 +7045,12 @@ msgid "Login via HTTP authentication"
 msgstr ""
 
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:207
-#, fuzzy
 msgid "LDAP Login name:"
-msgstr "Nom du compte :"
+msgstr "Nom du compte LDAP :"
 
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
-msgstr ""
+msgstr "Serveur LDAP inaccessible"
 
 #: plugins/authldap/www/post-login.php:109
 #, php-format
@@ -7084,9 +7070,8 @@ msgstr ""
 "confirmation]</a><br><hr><p>"
 
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:86
-#, fuzzy
 msgid "Login via OpenID"
-msgstr "Nom du compte"
+msgstr "Connexion par OpenID"
 
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:179
 msgid "coin pan"
@@ -7133,6 +7118,8 @@ msgstr ""
 #: plugins/authopenid/www/index.php:88
 msgid "ERROR: identity already used by a forge user."
 msgstr ""
+"Erreur : cette identité est déjà enregistrée par un autre utilisateur\n"
+"de la forge."
 
 #: plugins/authopenid/www/index.php:114
 #, fuzzy, php-format
@@ -7151,12 +7138,11 @@ msgstr "Gestion des onglets supplémentaires pour le projet %1$s"
 
 #: plugins/authopenid/www/index.php:125
 msgid "My OpenID identities"
-msgstr ""
+msgstr "Mes identités OpenID"
 
 #: plugins/authopenid/www/index.php:128 plugins/authopenid/www/index.php:134
-#, fuzzy
 msgid "Add new identity"
-msgstr "Ajouter un document"
+msgstr "Ajouter une nouvelle identité"
 
 #: plugins/authopenid/www/index.php:130
 #, fuzzy
@@ -7167,17 +7153,15 @@ msgstr ""
 
 #: plugins/authopenid/www/index.php:138
 msgid "OpenID identity URL:"
-msgstr ""
+msgstr "URL d'identité OpenID :"
 
 #: plugins/authopenid/www/index.php:143
-#, fuzzy
 msgid "Add identity"
-msgstr "Ajouter des widgets"
+msgstr "Ajouter l'identité"
 
 #: plugins/authopenid/www/index.php:149
-#, fuzzy
 msgid "Identity"
-msgstr "quantité"
+msgstr "Identité"
 
 #: plugins/authopenid/www/post-login.php:66
 msgid "No such OpenID identity registered yet"
@@ -7343,11 +7327,11 @@ msgstr "Éditeur HTML"
 
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:254
 msgid "Compact preview of local user"
-msgstr ""
+msgstr "Aperçu compact d'un utilisateur"
 
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:288
 msgid "Compact preview of local project"
-msgstr ""
+msgstr "Aperçu compact d'un projet"
 
 #: plugins/compactpreview/www/project.php:37
 #, fuzzy
@@ -7356,16 +7340,15 @@ msgstr "Les projets les plus visités"
 
 #: plugins/compactpreview/www/user.php:34
 msgid "OSLC Compact preview of user"
-msgstr ""
+msgstr "Aperçu compact OSLC d'un utilisateur"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:52
 msgid "Contribution tracker"
 msgstr "Suivi des contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:53
-#, fuzzy
 msgid "Follow the contributions by contributors to this project"
-msgstr "Ce projet n'a pas encore de contributions."
+msgstr "Suivre les contributions à ce projet"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:74
 msgid "Use the Contribution Tracker plugin"
