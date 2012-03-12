@@ -40,14 +40,14 @@ $end = getIntFromRequest('end');
 //
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
-        exit_no_group();
+	exit_no_group();
 }
 if ($group->isError()) {
-        if($group->isPermissionDeniedError()) {
-                exit_permission_denied($group->getErrorMessage());
-        } else {
-                exit_error(_('Error'), $group->getErrorMessage());
-        }
+	if($group->isPermissionDeniedError()) {
+		exit_permission_denied($group->getErrorMessage());
+	} else {
+		exit_error(_('Error'), $group->getErrorMessage());
+	}
 }
 
 //

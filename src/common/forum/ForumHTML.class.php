@@ -72,13 +72,13 @@ function forum_header($params) {
 				util_make_link_g($group->getUnixName(),db_result($result, 0, 'group_id'),$group->getPublicName()).'<br />
 				</p>
 				';
-			$body = db_result($result,0,'details');
-			$body = TextSanitizer::purify($body);
-			if (!strstr($body,'<')) {
-				//backwards compatibility for non html messages
-				echo util_make_links(nl2br($body));
-			} else {
-				echo util_make_links($body);
+				$body = db_result($result,0,'details');
+				$body = TextSanitizer::purify($body);
+				if (!strstr($body,'<')) {
+					//backwards compatibility for non html messages
+					echo util_make_links(nl2br($body));
+				} else {
+					echo util_make_links($body);
 			}
 
 			// display classification

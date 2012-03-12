@@ -103,7 +103,7 @@ if (session_loggedin()) {
 		</td>
 	</tr>
 
-    <?php
+	<?php
 		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any',array(),false,'UPDATE');
 		?>
 

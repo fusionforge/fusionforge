@@ -1249,8 +1249,8 @@ class Artifact extends Error {
 					// Get previous value.
 					$res = db_query_params ('SELECT field_data FROM artifact_extra_field_data
 							WHERE artifact_id=$1 AND extra_field_id=$2',
-				array($this->getID(),
-					$efid));
+						array($this->getID(),
+							$efid));
 					$old = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
 					if ($old != $extra_fields[$efid]) {
 						$atw = new ArtifactWorkflow($this->ArtifactType, $efid);

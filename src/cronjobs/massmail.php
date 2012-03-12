@@ -36,10 +36,10 @@ $err='';
 
 if (!cron_create_lock(__FILE__)) {
 	$err = "Massmail already running...exiting";
-		if (!cron_entry(6,$err)) {
-			// rely on crond to report the error
-			echo "cron_entry error: ".db_error()."\n";
-		}
+	if (!cron_entry(6,$err)) {
+		// rely on crond to report the error
+		echo "cron_entry error: ".db_error()."\n";
+	}
 	exit();
 }
 

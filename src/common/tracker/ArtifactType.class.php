@@ -622,7 +622,7 @@ class ArtifactType extends Error {
 				$res = db_query_params ('SELECT *
 				FROM artifact_extra_field_list
 				WHERE group_artifact_id=$1
-                                AND field_type = ANY ($2)
+				AND field_type = ANY ($2)
 				ORDER BY field_type ASC',
 							array ($this->getID(),
 							       db_int_array_to_any_clause ($types))) ;
