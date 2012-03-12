@@ -422,7 +422,7 @@ class DocumentGroup extends Error {
 			$this->fetchData($this->getID());
 			return true;
 		} else {
-			$this->setOnUpdateError(_('Error') . _(': ') .db_error());
+			$this->setOnUpdateError(sprintf(_('Error: %s'), db_error()));
 			return false;
 		}
 	}

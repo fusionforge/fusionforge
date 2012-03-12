@@ -183,7 +183,7 @@ if ($group_id && $atid) {
 			$error_msg .= _('Unable to create ArtifactCanned Object');
 		} else {
 			if (!$acr->delete()) {
-				$error_msg .= _('Error') . _(': ') . $acr->getErrorMessage();
+				$error_msg .= sprintf(_('Error: %s'), $acr->getErrorMessage());
 				$acr->clearError();
 			} else {
 				$feedback .= _('Canned Response Deleted');

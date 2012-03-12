@@ -39,7 +39,7 @@ class DocumentGroupHTML extends Error {
 			return false;
 		}
 		if ($Group->isError()) {
-			$this->setError(_('Error') . _(': ') . $Group->getErrorMessage());
+			$this->setError(sprintf(_('Error: %s'), $Group->getErrorMessage()));
 			return false;
 		}
 		$this->Group =& $Group;
