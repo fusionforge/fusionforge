@@ -49,6 +49,7 @@ class SVNPlugin extends SCMPlugin {
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
+		$this->_addHook('activity');
 
 		$this->provides['svn'] = true;
 
@@ -374,8 +375,8 @@ class SVNPlugin extends SCMPlugin {
 			$updates = 0;
 			$usr_adds    = array();
 			$usr_updates = array();
-
-			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName() ;
+ 
+			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
 			if (!is_dir ($repo) || !is_file ("$repo/format")) {
 				echo "No repository\n";
 				db_rollback();
@@ -386,7 +387,7 @@ class SVNPlugin extends SCMPlugin {
 			$d2 = date('Y-m-d', $end_time + 150000);
 
 			$pipe = popen ("svn log file://$repo --xml -v -q -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' ) ;
-
+ 
 			// cleaning stats_cvs_* table for the current day
 			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
 						array($month_string,
@@ -397,7 +398,7 @@ class SVNPlugin extends SCMPlugin {
 				db_rollback();
 				return false;
 			}
-
+ 
 			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
 						array ($month_string,
 						       $day,
@@ -407,15 +408,14 @@ class SVNPlugin extends SCMPlugin {
 				db_rollback () ;
 				return false ;
 			}
-
+ 
 			$xml_parser = xml_parser_create();
 			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
 			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
-
+ 
 			// Analyzing history stream
 			while (!feof($pipe) &&
-			       $data = fgets ($pipe, 4096)) {
-
+				$data = fgets ($pipe, 4096)) {
 				if (!xml_parse ($xml_parser, $data, feof ($pipe))) {
 					debug("Unable to parse XML with error " .
 					      xml_error_string(xml_get_error_code($xml_parser)) .
@@ -427,11 +427,11 @@ class SVNPlugin extends SCMPlugin {
 				}
 			}
 
-			xml_parser_free ($xml_parser);
+			xml_parser_free($xml_parser);
 
 			// inserting group results in stats_cvs_groups
 			if ($updates > 0 || $adds > 0) {
-				if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 						      array ($month_string,
 							     $day,
 							     $project->getID(),
@@ -439,14 +439,14 @@ class SVNPlugin extends SCMPlugin {
 							     $updates,
 							     $adds))) {
 					echo "Error while inserting into stats_cvs_group\n" ;
-					db_rollback () ;
-					return false ;
+					db_rollback();
+					return false;
 				}
 			}
 
 			// building the user list
 			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
-
+ 
 			foreach ( $user_list as $user ) {
 				// trying to get user id from user name
 				$u = &user_get_object_by_name ($user) ;
@@ -544,6 +544,60 @@ class SVNPlugin extends SCMPlugin {
 		system ("rm -rf $tmp") ;
 	}
 
+	function activity($params) {
+		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
+			$adds, $deletes, $updates, $commits, $date_key,
+			$usr_adds, $usr_deletes, $usr_updates,
+			$messages, $last_message, $times;
+		$group_id = $params['group'];
+		$project = group_get_object($group_id);
+		if (! $project->usesPlugin($this->name)) {
+			return false;
+		}
+
+		if (in_array('scm', $params['show'])) {
+			$start_time = $params['begin'];
+			$end_time = $params['end'];
+			$d1 = date('Y-m-d', $start_time - 80000);
+			$d2 = date('Y-m-d', $end_time + 80000);
+
+			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
+			$pipe = popen("svn log file://$repo --xml -v -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' );
+			$xml_parser = xml_parser_create();
+			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+			while (!feof($pipe) && $data = fgets($pipe, 4096)) {
+				if (!xml_parse($xml_parser, $data, feof ($pipe))) {
+					debug("Unable to parse XML with error " .
+						xml_error_string(xml_get_error_code($xml_parser)) .
+						" on line " .
+						xml_get_current_line_number($xml_parser));
+					return false;
+					break;
+				}
+			}
+			xml_parser_free($xml_parser);
+			if ($adds > 0 || $updates > 0) {
+				$i = 0;
+				foreach ($messages as $message) {
+					$result = array();
+					$result['section'] = 'scm';
+					$result['group_id'] = $group_id;
+					$result['ref_id'] = 'viewvc.php/?root='.$project->getUnixName();
+					$result['description'] = $message;
+					$result['realname'] = '';
+					$result['activity_date'] = $times[$i];
+					$result['subref_id'] = 0;
+					$params['results'][] = $result;
+					$i++;
+				}
+			}
+		}
+		$params['ids'][] = 'scm';
+		$params['texts'][] = _('SCM SVN Commits');
+		return true;
+	}
+
 	function installOrUpdateCmds($project, $unix_group_name, $repos) {
 
 		$hooks = array();
@@ -628,48 +682,57 @@ class SVNPlugin extends SCMPlugin {
 
 function SVNPluginCharData($parser, $chars) {
 	global $last_tag, $last_user, $last_time, $start_time, $end_time,
-		$time_ok, $user_list;
+		$time_ok, $user_list, $last_message, $messages, $times;
 	switch ($last_tag) {
-	case "AUTHOR":
-		$last_user = preg_replace('/[^a-z0-9_-]/', '', strtolower(trim($chars)));
-		break;
-	case "DATE":
-		$chars = preg_replace('/T(\d\d:\d\d:\d\d)\.\d+Z?$/', ' ${1}', $chars);
-		$last_time = strtotime($chars);
-		if ($start_time <= $last_time && $last_time < $end_time) {
-			$time_ok = true;
-		} else {
-			$time_ok = false;
+		case "AUTHOR": {
+			$last_user = preg_replace('/[^a-z0-9_-]/', '', strtolower(trim($chars)));
+			break;
 		}
-		break;
+		case "DATE": {
+			$chars = preg_replace('/T(\d\d:\d\d:\d\d)\.\d+Z?$/', ' ${1}', $chars);
+			$last_time = strtotime($chars);
+			if ($start_time <= $last_time && $last_time < $end_time) {
+				$time_ok = true;
+			} else {
+				$time_ok = false;
+			}
+			$times[] = $last_time;
+			break;
+		}
+		case "MSG": {
+			$messages[] = $chars;
+			break;
+		}
 	}
 }
 
 function SVNPluginStartElement($parser, $name, $attrs) {
 	global $last_user, $last_time, $last_tag, $time_ok,
-		$adds, $updates, $usr_adds, $usr_updates;
+		$adds, $updates, $usr_adds, $usr_updates, $last_message, $messages, $times;
 	$last_tag = $name;
 	switch($name) {
-	case "LOGENTRY":
-		// Make sure we clean up before doing a new log entry
-		$last_user = "";
-		$last_time = "";
-		break;
-	case "PATH":
-		if ($time_ok) {
-			if ($attrs['ACTION'] == "M") {
-				$updates++;
-				if ($last_user) {
-					$usr_updates[$last_user] = isset($usr_updates[$last_user]) ? ($usr_updates[$last_user]+1) : 0 ;
-				}
-			} elseif ($attrs['ACTION'] == "A") {
-				$adds++;
-				if ($last_user) {
-					$usr_adds[$last_user] = isset($usr_adds[$last_user]) ? ($usr_adds[$last_user]+1) : 0 ;
+		case "LOGENTRY": {
+			// Make sure we clean up before doing a new log entry
+			$last_user = "";
+			$last_time = "";
+			break;
+		}
+		case "PATH": {
+			if ($time_ok) {
+				if ($attrs['ACTION'] == "M") {
+					$updates++;
+					if ($last_user) {
+						$usr_updates[$last_user] = isset($usr_updates[$last_user]) ? ($usr_updates[$last_user]+1) : 0 ;
+					}
+				} elseif ($attrs['ACTION'] == "A") {
+					$adds++;
+					if ($last_user) {
+						$usr_adds[$last_user] = isset($usr_adds[$last_user]) ? ($usr_adds[$last_user]+1) : 0 ;
+					}
 				}
 			}
+			break;
 		}
-		break;
 	}
 }
 

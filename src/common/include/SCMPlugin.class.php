@@ -84,7 +84,7 @@ abstract class SCMPlugin extends Plugin {
 				$this->updateRepositoryList($params);
 				break;
 			}
-			case 'scm_generate_snapshots': {// Optional
+			case 'scm_generate_snapshots': { // Optional
 				session_set_admin();
 				$this->generateSnapshots($params);
 				break;
@@ -100,6 +100,10 @@ abstract class SCMPlugin extends Plugin {
 			}
 			case "widget_instance": { // Optional
 				$this->myPageBox($params);
+				break;
+			}
+			case "activity": { //Optional
+				$this->activity($params);
 				break;
 			}
 			default: { // Forgot something

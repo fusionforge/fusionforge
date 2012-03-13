@@ -5,6 +5,7 @@
  * Copyright 1999 dtype
  * Copyright 2006 (c) GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -75,7 +76,7 @@ if ($begin > $end) {
 if (!$group_id) {
 	exit_no_group();
 }
-$group=group_get_object($group_id);
+$group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_permission_denied('home');
 }
@@ -91,6 +92,10 @@ if (forge_get_config('use_forum') && $group->usesForum()) {
 }
 
 if (forge_get_config('use_tracker') && $group->usesTracker()) {
+// These lines are currently commented due to lack of explanations.
+// We need to enable these lines only if you use the commit tracker plugin I suppose.
+// 	$ids[]		= 'commit';
+// 	$texts[]	= _('Commit Tracking');
 	$ids[]		= 'trackeropen';
 	$texts[]	= _('Tracker Opened');
 	$ids[]		= 'trackerclose';
@@ -149,6 +154,7 @@ plugin_hook("activity", $hookParams);
 if (count($show) < 1) {
 	$show = $ids;
 }
+
 foreach ($show as $showthis) {
 	if (array_search($showthis, $ids) === false) {
 		exit_error(_('Invalid Data Passed to query'), 'home');
@@ -200,6 +206,10 @@ if (count($results) < 1) {
 
 		if (!isset($cached_perms[$s][$ref])) {
 			switch ($s) {
+				case 'scm': {
+					$cached_perms[$s][$ref] = forge_check_perm('scm', $ref, 'read');
+					break;
+				}
 				case 'commit':
 				case 'trackeropen':
 				case 'trackerclose': {
@@ -245,13 +255,18 @@ if (count($results) < 1) {
 		if (!check_perm_for_activity($arr)) {
 			continue;
 		}
-		if ($last_day != strftime($date_format,$arr['activity_date'])) {
+		if ($last_day != strftime($date_format, $arr['activity_date'])) {
 			//	echo $HTML->listTableBottom($theader);
-			echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format,$arr['activity_date']).'</td></tr>';
+			echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
 			//	echo $HTML->listTableTop($theader);
-			$last_day=strftime($date_format,$arr['activity_date']);
+			$last_day=strftime($date_format, $arr['activity_date']);
 		}
 		switch (@$arr['section']) {
+			case 'scm': {
+				$icon = html_image('ic/cvs16b.png','','',array('alt'=>'Source Code'));
+				$url = util_make_link($arr['ref_id'],_('scm commit: ').$arr['description']);
+				break;
+			}
 			case 'commit': {
 				$icon = html_image('ic/cvs16b.png','','',array('alt'=>'Source Code'));
 				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Commit for Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description']);
