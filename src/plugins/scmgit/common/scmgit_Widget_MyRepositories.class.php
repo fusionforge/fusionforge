@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,7 +33,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 	}
 
 	function getCategory() {
-		return _('SCM');
+		return _('scm');
 	}
 
 	function getDescription() {
