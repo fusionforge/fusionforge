@@ -66,7 +66,7 @@ if ($group_id) {
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 	print "  <generator>".forge_get_config ('forge_name')." RSS generator</generator>\n";
 
-	$res = db_query_params ('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2 AND group_id=$3 ORDER BY activity_date DESC',
+	$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2 AND group_id=$3 ORDER BY activity_date DESC',
 				array(time() - 30*86400,
 				      time(),
 				      $group_id),

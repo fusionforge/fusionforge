@@ -321,6 +321,12 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 	return $return;
 }
 
+/**
+ * html_get_tooltip_description() - Get the tooltip description of the element
+ *
+ * @param		string	element name
+ */
+
 function html_get_tooltip_description($element_name) {
 	global $use_tooltips;
 	if ($use_tooltips) {

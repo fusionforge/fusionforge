@@ -1,14 +1,14 @@
 <?php
 /**
-  *
-  * SourceForge Exports: Export front page news in RSS
-  *
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  */
+ *
+ * SourceForge Exports: Export front page news in RSS
+ *
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ */
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -39,7 +39,7 @@ function getres ($gid, $l) {
 	AND u.user_id=news_bytes.submitted_by
 	AND g.status=$1
 	AND g.group_id=$2
-	ORDER BY post_date desc',
+	ORDER BY post_date DESC',
 					array('A',
 					      $gid),
 					$l);
@@ -50,7 +50,7 @@ function getres ($gid, $l) {
 	AND u.user_id=news_bytes.submitted_by
 	AND g.status=$1
 	AND is_approved=1
-	ORDER BY post_date desc',
+	ORDER BY post_date DESC',
 					array('A'),
 					$l);
 	}

@@ -472,16 +472,16 @@ function util_make_links($data='') {
 		// angle brackets in the URL
 		// (RFC2396; http://www.w3.org/Addressing/URL/5.1_Wrappers.html)
 		$line = str_replace('&gt;', "\1", $line);
-		$line = preg_replace( "/([ \t]|^)www\./i", " http://www.", $line);
-		$text = preg_replace( "/([[:alnum:]]+):\/\/([^[:space:]<\1]*)([[:alnum:]#?\/&=])/i",
+		$line = preg_replace("/([ \t]|^)www\./i", " http://www.", $line);
+		$line = preg_replace("/([[:alnum:]]+):\/\/([^[:space:]<\1]*)([[:alnum:]#?\/&=])/i",
 			"<a href=\"\\1://\\2\\3\" target=\"_new\">\\1://\\2\\3</a>", $line);
-		$text = preg_replace(
+		$line = preg_replace(
 			"/([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))/i",
 			"\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>",
-			$text
+			$line
 			);
-		$text = str_replace("\1", '&gt;', $text);
-		$newText .= $text;
+		$line = str_replace("\1", '&gt;', $line);
+		$newText .= $line;
 	}
 	return $newText;
 }
@@ -574,7 +574,7 @@ function GraphResult($result, $title) {
  *
  */
 function GraphIt($name_string, $value_string, $title) {
-	GLOBAL $HTML;
+	global $HTML;
 
 	$counter = count($name_string);
 
@@ -1121,7 +1121,7 @@ function util_make_link($path, $text, $extra_params = false, $absolute = false) 
  * @return string
  */
 function util_make_link_u ($username, $user_id,$text) {
-	return '<a href="' . util_make_url_u ($username, $user_id) . '">' . $text . '</a>' ;
+	return '<a href="' . util_make_url_u ($username, $user_id) . '">' . $text . '</a>';
 }
 
 /**
@@ -1180,14 +1180,14 @@ function util_make_url_u ($username, $user_id) {
 function util_make_link_g ($groupname, $group_id,$text) {
 	$hook_params =array();
 	$hook_params['resource_type']  = 'group';
-        $hook_params['group_name'] = $groupname;
+	$hook_params['group_name'] = $groupname;
 	$hook_params['group_id'] = $group_id;
 	$hook_params['link_text'] = $text;
-        $hook_params['group_link'] = '';
-        plugin_hook_by_reference('project_link_with_tooltip', $hook_params);
-        if($hook_params['group_link'] != '') {
-                return $hook_params['group_link'];
-        }
+	$hook_params['group_link'] = '';
+	plugin_hook_by_reference('project_link_with_tooltip', $hook_params);
+	if($hook_params['group_link'] != '') {
+		return $hook_params['group_link'];
+	}
 
 	return '<a href="' . util_make_url_g ($groupname, $group_id) . '">' . $text . '</a>' ;
 }

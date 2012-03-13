@@ -32,7 +32,7 @@ $HTML->header(array('title'=> _('Terms of use')));
 ?>
 
 <table class="fullwidth" cellpadding="5">
-<tr><td width="65%" valign="top">
+<tr><td class="twothirdswidth top">
 	<h3><?php printf (_('%1$s Terms of Use'), forge_get_config ('forge_name')); ?></h3>
 <p>
 
@@ -44,7 +44,7 @@ $HTML->header(array('title'=> _('Terms of use')));
 
 </td>
 
-<td width="35%" valign="top">
+<td class="onethirdwidth top">
 </td></tr></table>
 
 <?php

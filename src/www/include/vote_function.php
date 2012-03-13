@@ -405,25 +405,25 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 	global $USER_RATING_VALUES,$USER_RATING_QUESTIONS,$USER_RATING_POPUP1,$USER_RATING_POPUP2,$USER_RATING_POPUP3,$USER_RATING_POPUP4,$USER_RATING_POPUP5;
 	echo '
 	<table>
-    <form action="/developer/rate.php" method="post">
+		<form action="/developer/rate.php" method="post">
+		<input type="hidden" name="rated_user" value="'.$user_id.'" />
 ';
 	for ($i=1; $i<=count($USER_RATING_QUESTIONS); $i++) {
 		$popup="USER_RATING_POPUP$i";
 		if (!isset($prev_vote[$i])) {
 			$prev_vote[$i] = '';
-        }
+		}
 		echo '
-            <tr>
-                <td><strong>'. $USER_RATING_QUESTIONS[$i] .':</strong></td>
-                <td>'. html_build_select_box_from_arrays($USER_RATING_VALUES,$$popup,"Q_$i",$prev_vote[$i]/*'xzxz'*/,true,'Unrated').'</td>
-            </tr>';
+			<tr>
+				<td><strong>'. $USER_RATING_QUESTIONS[$i] .':</strong></td>
+				<td>'. html_build_select_box_from_arrays($USER_RATING_VALUES,$$popup,"Q_$i",$prev_vote[$i]/*'xzxz'*/,true,'Unrated').'</td>
+			</tr>';
 	}
 
 	echo '
 		<tr><td colspan="2">
-            <input type="submit" name="submit" value="Rate User" />
-            <input type="hidden" name="rated_user" value="'.$user_id.'" />
-        </td></tr>
+			<input type="submit" name="submit" value="Rate User" />
+		</td></tr>
 		</table>
 	</form>';
 }

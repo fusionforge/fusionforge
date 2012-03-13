@@ -58,15 +58,15 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
 		if (!forge_check_perm ('project_read', $row['group_id'])) {
 			continue ;
 		}
-                if ($callback) {
-                	$addendum=$callback($row);
-                }
+		if ($callback) {
+			$addendum=$callback($row);
+		}
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
 		print "   <link>".util_make_url_g ($row['unix_group_name'],$row['group_id'])."</link>\n";
 		print "   <description>";
 		print ereg_replace(" *\r*\n *"," ",rss_description($row['short_description']));
-                print $addendum;
+		print $addendum;
 		print "</description>\n";
 		print "  </item>\n";
 	}

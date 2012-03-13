@@ -853,7 +853,7 @@ class Layout extends Error {
 		return $return;
 	}
 
-        /**
+	/**
 	 * subMenuSeparator() - returns the separator used between submenus
 	 *
 	 * @return	string	Html to build a submenu separator.

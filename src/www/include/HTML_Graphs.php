@@ -454,7 +454,7 @@ function horizontal_graph($names, $values, $bars, $vals)
 ?>
 
 	<tr>
-	<td align="right" <?php
+	<td class="align-right" <?php
         // If a background was choosen don't print cell BGCOLOR
         if (! $vals["background"]) { print ' style="background-color:' . $vals["namebgcolor"] . '"'; }
 ?>>
@@ -478,7 +478,7 @@ function horizontal_graph($names, $values, $bars, $vals)
            {
 ?>
 
-		<table align="left" cellpadding="0" cellspacing="0" style="background-color:<?php echo $bars[$i] ?>" width="<?php echo $values[$i] * $vals["scale"] ?>">
+		<table align="left" style="background-color:<?php echo $bars[$i] ?>" width="<?php echo $values[$i] * $vals["scale"] ?>">
 			<tr><td>&nbsp;</td></tr>
 		</table>
 
@@ -558,7 +558,7 @@ function vertical_graph($names, $values, $bars, $vals)
     for( $i=0;$i<SizeOf($values);$i++ )
        {
 ?>
-        <td align="center" valign="top"
+        <td class="align-center" valign="top"
 
 <?php
         // If a background was choosen don't print cell BGCOLOR
@@ -590,7 +590,7 @@ function double_horizontal_graph($names, $values, $bars, $vals, $dvalues, $dbars
        {
 ?>
        <tr>
-        <td align="right"
+        <td class="align-right"
 <?php
         // If a background was choosen don't print cell BGCOLOR
         if (! $vals["background"]) { print ' style="background-color:' . $vals["namebgcolor"] . '"'; }
@@ -606,7 +606,7 @@ function double_horizontal_graph($names, $values, $bars, $vals, $dvalues, $dbars
         if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
 ?>
          >
-         <table align="left" cellpadding="0" cellspacing="0" width="<?php echo $dvalues[$i] * $vals["scale"] ?>">
+         <table align="left" width="<?php echo $dvalues[$i] * $vals["scale"] ?>">
           <tr><td
 <?php
         // Set background to a color if it starts with # or
@@ -620,7 +620,7 @@ function double_horizontal_graph($names, $values, $bars, $vals, $dvalues, $dbars
 		if (preg_match("/^#/", $bars[$i]))
            {
 ?>
-            <table align="left" cellpadding="0" cellspacing="0"
+            <table align="left" 
              style="background-color:"<?php echo $bars[$i] ?>"
              width="<?php echo $values[$i] * $vals["scale"] ?>">
              <tr><td>&nbsp</td></tr>
@@ -676,12 +676,12 @@ function double_vertical_graph($names, $values, $bars, $vals, $dvalues, $dbars)
     for( $i=0;$i<SizeOf($values);$i++ )
        {
 
-        print '<td align="center" valign="bottom" ';
+        print '<td class="align-center" valign="bottom" ';
         // If a background was choosen don't print cell BGCOLOR
         if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
         print ">";
 
-	print '<table><tr><td align="center" valign="bottom" ';
+	print '<table><tr><td class="align-center" valign="bottom" ';
 
         // If a background was choosen don't print cell BGCOLOR
         if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
@@ -698,7 +698,7 @@ function double_vertical_graph($names, $values, $bars, $vals, $dvalues, $dbars)
          <img src="<?php echo $bars[$i] ?>" width="10" height="<?php if ($values[$i]!=0){
 		echo $values[$i] * $vals["scale"];
 		} else { echo "1";} ?>" alt="" />
-         </td><td align="center" valign="bottom"
+         </td><td class="align-center" valign="bottom"
 <?php
          // If a background was choosen don't print cell BGCOLOR
         if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
@@ -725,7 +725,7 @@ function double_vertical_graph($names, $values, $bars, $vals, $dvalues, $dbars)
     for( $i=0;$i<SizeOf($values);$i++ )
        {
 ?>
-        <td align="center" valign="top"
+        <td class="align-center" valign="top"
 
 <?php
         // If a background was choosen don't print cell BGCOLOR
@@ -749,10 +749,10 @@ function double_vertical_graph($names, $values, $bars, $vals, $dvalues, $dbars)
 #  Function:  horizontal_absolute_multi_graph($names, $multi_rows,
 #                                             $colors, $vals,
 #                                             $additive)
-#	      $multi_rows - array of arrays of values (may be seen as
+#     $multi_rows - array of arrays of values (may be seen as
 #             array of columns - column for first color, for second, etc.)
 #             $colors - array of color names or codes
-#	      $additive - treat data as absolute values (will be
+#	  $additive - treat data as absolute values (will be
 #             differentiated for drawing, and hence should be non-decreasing
 #             sequence) or additive (just stick one on another).
 #
@@ -769,7 +769,7 @@ function horizontal_multisection_graph($names, $multi_rows, $colors, $vals, $add
 ?>
 
 	<tr>
-	<td align="right" <?php
+	<td class="align-right" <?php
         // If a background was choosen don't print cell BGCOLOR
         if (! $vals["background"]) { print ' style="background-color:' . $vals["namebgcolor"] . '"'; }
 ?>>
@@ -785,7 +785,7 @@ function horizontal_multisection_graph($names, $multi_rows, $colors, $vals, $add
 
 	echo ">";
 
-        echo '<table align="left" border="0" cellpadding="0" cellspacing="0"><tr>'."\n";
+        echo '<table align="left"><tr>'."\n";
         $prev_val=0;
         $shown=0;
 	for( $j=0;$j<$subbars_num;$j++ ) {
