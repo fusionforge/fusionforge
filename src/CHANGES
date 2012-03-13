@@ -16,7 +16,8 @@ FusionForge-5.2:
 * Admin: User add membership to multiples projects in one shot (Capgemini)
 * New MoinMoinWiki plugin (AdaCore)
 * Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)
-* scmsvn: private project can now be browsed with viewvc using user rights management.
+* scmsvn: private project can now be browsed with viewvc using user rights management (TrivialDev).
+* scmsvn: basic activity support (TrivialDev).
 
 FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)
