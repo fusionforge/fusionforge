@@ -548,7 +548,7 @@ class SVNPlugin extends SCMPlugin {
 		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
 			$adds, $deletes, $updates, $commits, $date_key,
 			$usr_adds, $usr_deletes, $usr_updates,
-			$messages, $last_message, $times;
+			$messages, $last_message, $times, $revisions;
 		$group_id = $params['group'];
 		$project = group_get_object($group_id);
 		if (! $project->usesPlugin($this->name)) {
@@ -584,10 +584,10 @@ class SVNPlugin extends SCMPlugin {
 					$result['section'] = 'scm';
 					$result['group_id'] = $group_id;
 					$result['ref_id'] = 'viewvc.php/?root='.$project->getUnixName();
-					$result['description'] = $message;
+					$result['description'] = $message.' (r'.$revisions[$i].')';
 					$result['realname'] = '';
 					$result['activity_date'] = $times[$i];
-					$result['subref_id'] = 0;
+					$result['subref_id'] = '&view=rev&revision='.$revisions[$i];
 					$params['results'][] = $result;
 					$i++;
 				}
@@ -708,13 +708,14 @@ function SVNPluginCharData($parser, $chars) {
 
 function SVNPluginStartElement($parser, $name, $attrs) {
 	global $last_user, $last_time, $last_tag, $time_ok,
-		$adds, $updates, $usr_adds, $usr_updates, $last_message, $messages, $times;
+		$adds, $updates, $usr_adds, $usr_updates, $last_message, $messages, $times, $revisions;
 	$last_tag = $name;
 	switch($name) {
 		case "LOGENTRY": {
 			// Make sure we clean up before doing a new log entry
 			$last_user = "";
 			$last_time = "";
+			$revisions[] = $attrs['REVISION'];
 			break;
 		}
 		case "PATH": {

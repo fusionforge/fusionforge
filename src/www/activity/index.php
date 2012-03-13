@@ -264,7 +264,7 @@ if (count($results) < 1) {
 		switch (@$arr['section']) {
 			case 'scm': {
 				$icon = html_image('ic/cvs16b.png','','',array('alt'=>'Source Code'));
-				$url = util_make_link($arr['ref_id'],_('scm commit: ').$arr['description']);
+				$url = util_make_link('/scm/'.$arr['ref_id'].$arr['subref_id'],_('scm commit: ').$arr['description']);
 				break;
 			}
 			case 'commit': {
