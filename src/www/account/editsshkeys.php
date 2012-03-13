@@ -25,6 +25,10 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 
+if (!forge_get_config('use_ssh')) {
+	exit_permission_denied();
+}
+
 /**
  * Simple function that tries to check the validity of public ssh keys with a regexp.
  * Exits with an error message if an invalid key is found.
