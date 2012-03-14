@@ -57,9 +57,6 @@ while ( $row = db_fetch_array($project_res) ) {
 	if (is_dir($project_dir)) {
 		cron_debug("  Project dir $project_dir exists, so I assumen the project already exists.");
 	} else {
-		cron_debug("  Creating project dir $project_dir.");
-		mkdir($project_dir, 0775, true);
-
 		// Create the DB
 		$schema = "plugin_mediawiki_$project";
 		// Sanitize schema name
@@ -126,6 +123,9 @@ while ( $row = db_fetch_array($project_res) ) {
 			cron_entry(23,$err);
 			exit;
 		}
+
+		cron_debug("  Creating project dir $project_dir.");
+		mkdir($project_dir, 0775, true);
 
 		$mwwrapper = forge_get_config('source_path')."/plugins/mediawiki/bin/mw-wrapper.php" ;
 		$dumpfile = forge_get_config('config_path')."/mediawiki/initial-content.xml" ;
