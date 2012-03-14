@@ -232,6 +232,7 @@ class PluginManager extends Error {
 	 */
 	function RunHooks($hookname, & $params) {
 		$result = true;
+		$this->returned_values[$hookname] = array();
 		if (isset($this->hooks_to_plugins[$hookname])) {
 			$p_list = $this->hooks_to_plugins[$hookname];
 			foreach ($p_list as $p_name) {
