@@ -156,7 +156,7 @@ if (getStringFromRequest('delete_roadmap')) {
 
 	?>
 	<p>
-	<strong><?php echo sprintf(_('Are you sure you want to delete %s roadmap'), $roadmap_name)._('?') ?></strong>
+	<strong><?php echo sprintf(_('Are you sure you want to delete the %s roadmap?'), $roadmap_name) ?></strong>
 	</p>
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;admin_roadmap=1' ?>" method="post">
 	<input type="hidden" name="admin_roadmap" value="1" />

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-11 22:50+0100\n"
-"PO-Revision-Date: 2012-03-11 22:31+0100\n"
+"PO-Revision-Date: 2012-03-14 20:03+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -2080,7 +2080,7 @@ msgstr ""
 
 #: common/frs/FRSPackage.class.php:518
 msgid "Cannot open the file archive."
-msgstr ""
+msgstr "Erreur lors de l'ouverture de l'archive."
 
 #: common/frs/FRSRelease.class.php:285
 #, php-format
@@ -2653,12 +2653,12 @@ msgstr ""
 "d'attendre leur réponse."
 
 #: common/include/GroupJoinRequest.class.php:228
-#, fuzzy, php-format
+#, php-format
 msgid "Request to Join Project %1$s from %2$s (%3$s)"
-msgstr "Demande pour rejoindre le projet %1$s"
+msgstr "Demande pour rejoindre le projet %1$s de la part de %2$s (%3$s)"
 
 #: common/include/GroupJoinRequest.class.php:234
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "%1$s (%2$s) has requested to join your project. \n"
 "You can approve this request here: %3$s \n"
@@ -2666,11 +2666,10 @@ msgid ""
 "Comments by the user:\n"
 "%4$s"
 msgstr ""
-"%1$s a demandé à rejoindre votre projet. Vous pouvez approuver sa demande "
-"ici: %2$s\n"
+"%1$s (%2$s) a demandé à rejoindre votre projet. Vous pouvez approuver sa demande ici: %3$s\n"
 "\n"
 "Commentaires de l'utilisateur :\n"
-"%3$s"
+"%4$s"
 
 #: common/include/GroupJoinRequest.class.php:259
 #: common/include/GroupJoinRequest.class.php:273
@@ -2723,13 +2722,12 @@ msgid "Main Page"
 msgstr "Page principale"
 
 #: common/include/Navigation.class.php:235
-#, fuzzy
 msgid "My Page"
-msgstr "Page principale"
+msgstr "Ma page"
 
 #: common/include/Navigation.class.php:237
 msgid "Your Page, widgets selected by you to follow your items."
-msgstr ""
+msgstr "Votre page, contenant des widgets de votre choix pour suivre vos tâches."
 
 #: common/include/Navigation.class.php:248 www/project/admin/index.php:161
 #: www/reporting/index.php:42 www/stats/site_stats_utils.php:496
@@ -2738,25 +2736,23 @@ msgstr "Projets"
 
 #: common/include/Navigation.class.php:250
 msgid "Map of projects, by categories or types."
-msgstr ""
+msgstr "Carte des projets, triés par catégories."
 
 #: common/include/Navigation.class.php:257
-#, fuzzy
 msgid "Code Snippets"
-msgstr "Parcourir les échantillons"
+msgstr "Échantillons de code"
 
 #: common/include/Navigation.class.php:259
 msgid "Tooling library. Small coding tips."
-msgstr ""
+msgstr "Bibliothèqe d'outils et de petits exemples de code."
 
 #: common/include/Navigation.class.php:266
-#, fuzzy
 msgid "Project Openings"
 msgstr "Demande d'aide"
 
 #: common/include/Navigation.class.php:268
 msgid "Hiring Market Place."
-msgstr ""
+msgstr "Place de marché pour recruter des collaborateurs."
 
 #: common/include/Navigation.class.php:295 www/admin/globalroleedit.php:138
 #: www/admin/index.php:38
@@ -2767,6 +2763,8 @@ msgstr "Administration du site"
 msgid ""
 "Administration Submenu to handle global configuration, users & projects."
 msgstr ""
+"Sous-menu d'adminsitration, pour gérer la configuration globale, les\n"
+"utilisateurs et les projets."
 
 #: common/include/Navigation.class.php:303
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:54
@@ -2781,20 +2779,22 @@ msgstr "Rapport"
 #: common/include/Navigation.class.php:305
 msgid "Statistics about visits, users & projects in time frame."
 msgstr ""
+"Statistiques sur les nombres de visites, d'utilisateurs et de projets\n"
+"au fil du temps."
 
 #: common/include/Navigation.class.php:326
 msgid "Project home page, widgets selected to follow specific items."
 msgstr ""
+"Page de résumé du projet, avec des widgets séléctionnés pour résumer\n"
+"différents aspects du projet."
 
 #: common/include/Navigation.class.php:384
-#, fuzzy
 msgid "Project Homepage. Widgets oriented"
-msgstr "Label de projet supprimé."
+msgstr "Résumé du projet, construit à partir de widgets."
 
 #: common/include/Navigation.class.php:402
-#, fuzzy
 msgid "Project Administration."
-msgstr "Administration du projet"
+msgstr "Administration du projet."
 
 #: common/include/Navigation.class.php:417 www/activity/index.php:83
 #: www/activity/index.php:164 www/activity/index.php:236
@@ -2804,7 +2804,7 @@ msgstr "Activité"
 
 #: common/include/Navigation.class.php:418
 msgid "Last activities per category."
-msgstr ""
+msgstr "Activités récentes, triées par catégorie."
 
 #: common/include/Navigation.class.php:427
 #: common/include/group_section_texts.php:28
@@ -2815,7 +2815,7 @@ msgstr "Forums"
 
 #: common/include/Navigation.class.php:428
 msgid "Tech & help forums."
-msgstr ""
+msgstr "Forums techniques ou d'entr'aide."
 
 #: common/include/Navigation.class.php:442 common/include/rbac_texts.php:144
 #: common/reporting/report_utils.php:143
@@ -2827,16 +2827,15 @@ msgstr "Outil de suivi"
 
 #: common/include/Navigation.class.php:443
 msgid "Issues, tickets, bugs."
-msgstr ""
+msgstr "Problèmes, tickets, bugs etc."
 
 #: common/include/Navigation.class.php:460 plugins/blocks/www/index.php:168
 msgid "Lists"
 msgstr "Listes"
 
 #: common/include/Navigation.class.php:461
-#, fuzzy
 msgid "Mailing Lists."
-msgstr "Listes de diffusion"
+msgstr "Listes de diffusion."
 
 #: common/include/Navigation.class.php:475
 #: common/include/group_section_texts.php:30 common/include/rbac_texts.php:145
@@ -2852,9 +2851,8 @@ msgid "Tasks"
 msgstr "Tâches"
 
 #: common/include/Navigation.class.php:476
-#, fuzzy
 msgid "Project Management."
-msgstr "Nom du projet"
+msgstr "Gestion de projet et de tâches."
 
 #: common/include/Navigation.class.php:490
 #: common/reporting/report_utils.php:151 plugins/blocks/www/index.php:170
@@ -2874,7 +2872,7 @@ msgstr "Sondages"
 
 #: common/include/Navigation.class.php:506
 msgid "Online surveys, project needs your point of view."
-msgstr ""
+msgstr "Sondages en ligne, pour donner votre point de vue sur un projet."
 
 #: common/include/Navigation.class.php:520
 #: common/include/group_section_texts.php:33 plugins/blocks/www/index.php:172
@@ -2885,9 +2883,8 @@ msgid "News"
 msgstr "Annonces"
 
 #: common/include/Navigation.class.php:521
-#, fuzzy
 msgid "Flash head line from the project."
-msgstr "Le label a été enlevé du projet."
+msgstr "Nouvelles rapides à propos du projet."
 
 #: common/include/Navigation.class.php:535 common/include/rbac_texts.php:152
 #: plugins/blocks/www/index.php:173
@@ -2899,7 +2896,7 @@ msgstr "Sources"
 
 #: common/include/Navigation.class.php:536
 msgid "Source Content Management, peer-review and source discovery."
-msgstr ""
+msgstr "Gestion de sources pour la publication et la revue de code."
 
 #: common/include/Navigation.class.php:567
 #: common/include/group_section_texts.php:32 common/include/rbac_texts.php:154
@@ -2909,7 +2906,7 @@ msgstr "Fichiers"
 
 #: common/include/Navigation.class.php:568
 msgid "All published files organized per version."
-msgstr ""
+msgstr "Les fichiers publiés, organisés par version."
 
 #: common/include/Navigation.class.php:637
 msgid "Show source"
@@ -2929,12 +2926,12 @@ msgstr ""
 
 #: common/include/Plugin.class.php:228 common/include/Plugin.class.php:279
 msgid "current plugin status is:"
-msgstr ""
+msgstr "L'état actuel du plugin est :"
 
 #: common/include/Plugin.class.php:253 common/include/Plugin.class.php:300
 #, php-format
 msgid "Use %s Plugin"
-msgstr ""
+msgstr "Utiliser le plugin %s"
 
 #: common/include/PluginManager.class.php:217
 msgid ""
@@ -3554,35 +3551,35 @@ msgstr "octets"
 
 #: common/include/utils.php:879 common/include/utils.php:894
 msgid "kB"
-msgstr ""
+msgstr "Ko"
 
 #: common/include/utils.php:879
 msgid "MB"
-msgstr ""
+msgstr "Mo"
 
 #: common/include/utils.php:879
 msgid "GB"
-msgstr ""
+msgstr "Go"
 
 #: common/include/utils.php:879
 msgid "TB"
-msgstr ""
+msgstr "To"
 
 #: common/include/utils.php:883 common/include/utils.php:894
 msgid "KiB"
-msgstr ""
+msgstr "Kio"
 
 #: common/include/utils.php:883
 msgid "MiB"
-msgstr ""
+msgstr "Mio"
 
 #: common/include/utils.php:883
 msgid "GiB"
-msgstr ""
+msgstr "Gio"
 
 #: common/include/utils.php:883
 msgid "TiB"
-msgstr ""
+msgstr "Tio"
 
 #: common/include/utils.php:1233
 msgid "Error: a mailing list with the same email address already exists."
@@ -4115,22 +4112,19 @@ msgstr "Erreur lors de la création de l'objet ArtifactTypeFactory."
 
 #: common/tracker/Artifact.class.php:1032
 msgid "Removal of old artifact_extra_field_data failed: "
-msgstr ""
+msgstr "Erreur lors de la suppression de l'ancien artifact_extra_field_data : "
 
 #: common/tracker/Artifact.class.php:1112
-#, fuzzy
 msgid "Error - update failed!"
 msgstr "Erreur de mise à jour"
 
 #: common/tracker/Artifact.class.php:1140
-#, fuzzy
 msgid "Could Not Create Canned Response Object"
-msgstr "Erreur lors de la création de l'objet ArtifactFileHtml."
+msgstr "Erreur lors de la création de la réponse-type."
 
 #: common/tracker/Artifact.class.php:1153
-#, fuzzy
 msgid "Unable to Use Canned Response"
-msgstr "Utiliser une réponse type"
+msgstr "Erreur lors de l'utilisation d'une réponse-type."
 
 #: common/tracker/Artifact.class.php:1168
 msgid "Nothing Changed - Update Cancelled"
@@ -5403,6 +5397,8 @@ msgstr "Divers graphiques de statistiques"
 #: common/tracker/include/ArtifactTypeHtml.class.php:93
 msgid "Global administration for trackers. Create, clone, workflow, fields ..."
 msgstr ""
+"Administration globale des outils de suivi.  Création, flux de\n"
+"travail, champs supplémentaires, etc."
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:66
 msgid "Browse this tracker."
@@ -5774,37 +5770,34 @@ msgstr "Échec lors du changement de type : %s"
 
 #: common/tracker/views/form-adminroadmap.php:121
 msgid "Can't set roadmap state: "
-msgstr ""
+msgstr "Erreur lors de la sauvegarde de l'état de la feuille de route : "
 
 #: common/tracker/views/form-adminroadmap.php:125
 msgid "Can't set default value: "
-msgstr ""
+msgstr "Erreur lors du réglage de la valeur par défaut : "
 
 #: common/tracker/views/form-adminroadmap.php:128
-#, fuzzy
 msgid "Roadmap configuration is updated"
-msgstr "Configuration des blocs sauvegardée"
+msgstr "Configuration de la feuille de route sauvegardée."
 
 #: common/tracker/views/form-adminroadmap.php:140
 #, php-format
 msgid "Roadmap %s is deleted"
-msgstr ""
+msgstr "La feuille de route %s est supprimée."
 
 #: common/tracker/views/form-adminroadmap.php:143
-#, fuzzy
 msgid "Can't delete roadmap: "
-msgstr "Échec lors de la suppression d'un label : %s"
+msgstr "Échec lors de la suppression d'une feuille de route : "
 
 #: common/tracker/views/form-adminroadmap.php:155
 #: common/tracker/views/form-adminroadmap.php:477
-#, fuzzy
 msgid "Delete roadmap"
-msgstr "Effacer le groupe"
+msgstr "Effacer la feuille de route"
 
 #: common/tracker/views/form-adminroadmap.php:159
-#, fuzzy, php-format
+#, php-format
 msgid "Are you sure you want to delete %s roadmap"
-msgstr "Etes-vous sûr de vouloir supprimer cette tâche ?"
+msgstr "Etes-vous sûr de vouloir supprimer la feuille de route %s ?"
 
 #: common/tracker/views/form-adminroadmap.php:159
 msgid "?"
@@ -5883,17 +5876,18 @@ msgstr "Versions"
 
 #: common/tracker/views/form-adminroadmap.php:408
 msgid "Auto order"
-msgstr ""
+msgstr "Ordonnancement automatique"
 
 #: common/tracker/views/form-adminroadmap.php:420
-#, fuzzy
 msgid "No tracker is selected for this roadmap"
-msgstr "Ce groupe n'a pas de forums modérés."
+msgstr "Aucun outil de suivi n'a été sélectionné pour cette feuille de route."
 
 #: common/tracker/views/form-adminroadmap.php:421
 #, php-format
 msgid "You can <a href=\"%s\">select tracker(s) for this roadmap</a>."
 msgstr ""
+"Vous pouvez <a href=\"%s\">choisir un (des) outil(s) de suivi</a> pour\n"
+"cette feuille de route."
 
 #: common/tracker/views/form-adminroadmap.php:427
 msgid "Return to list of roadmaps"
@@ -5905,7 +5899,7 @@ msgstr "Gestion des feuilles de route"
 
 #: common/tracker/views/form-adminroadmap.php:437
 msgid "You can define a new roadmap or edit an existing one here."
-msgstr ""
+msgstr "Vous pouvez définir une nouvelle feuille de route, ou en modifier une existante."
 
 #: common/tracker/views/form-adminroadmap.php:471
 msgid "Modify roadmap"
@@ -6483,6 +6477,12 @@ msgid ""
 "be per directory ordered. Selecting any of directory links will brings you "
 "to the corresponding Project Document Manager Listing Directory page"
 msgstr ""
+"Liste les 5 derniers documents publiés par les projets dont vous êtes\n"
+"membre, avec leur nom, leur auteur et leur date de dernière\n"
+"modification. Le choix de ces projets vous mènera à la page de gestion\n"
+"de documentation concernée. Les documents sont triés par dossier, et\n"
+"les liens de ces dossiers mènent aux pages correspondant à ces\n"
+"dossiers dans le gestionnaire de documentation."
 
 #: common/widget/Widget_MyRss.class.php:35
 #: common/widget/Widget_ProjectRss.class.php:41
@@ -7026,13 +7026,12 @@ msgstr ""
 "support</a>.</p><p>Merci, <br><br>l'équipe de %1$s.</p>"
 
 #: plugins/authcas/include/AuthCASPlugin.class.php:91
-#, fuzzy
 msgid "Login via CAS"
-msgstr "Connexion avec SSL"
+msgstr "Connexion avec CAS"
 
 #: plugins/authhttpd/include/AuthHTTPDPlugin.class.php:67
 msgid "Login via HTTP authentication"
-msgstr ""
+msgstr "Connexion par l'authentification HTTP"
 
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:207
 msgid "LDAP Login name:"
@@ -7081,22 +7080,20 @@ msgstr "Erreur lors de la récupération de l'objet User."
 
 #: plugins/authopenid/www/index.php:54
 msgid "User has canceled authentication. Identity not added."
-msgstr ""
+msgstr "L'utilisateur a annulé l'authentification; son identité n'a pas été ajoutée."
 
 #: plugins/authopenid/www/index.php:64
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot insert new identity: %s"
-msgstr "Impossible d'ajouter un nouvel onglet : %s"
+msgstr "Erreur lors de l'ajout d'une identité : %s."
 
 #: plugins/authopenid/www/index.php:67
-#, fuzzy
 msgid "Identity successfully added"
-msgstr "Onglet ajouté avec succès."
+msgstr "Identité ajoutée avec succès."
 
 #: plugins/authopenid/www/index.php:81
-#, fuzzy
 msgid "ERROR: Missing URL for the new identity"
-msgstr "Erreur : il manque le nom ou l'adresse du nouvel onglet."
+msgstr "Erreur : il manque l'URL de la nouvelle identité."
 
 #: plugins/authopenid/www/index.php:83 plugins/extratabs/www/index.php:68
 #: plugins/extratabs/www/index.php:168
@@ -7155,15 +7152,15 @@ msgstr "Identité"
 
 #: plugins/authopenid/www/post-login.php:66
 msgid "No such OpenID identity registered yet"
-msgstr ""
+msgstr "Cette identité OpenID n'est pas encore enregistrée."
 
 #: plugins/authopenid/www/post-login.php:72
 msgid "User has canceled authentication"
-msgstr ""
+msgstr "L'utilisateur a annulé l'authentification."
 
 #: plugins/authopenid/www/post-login.php:90
 msgid "OpenID plugin not activated for the user account"
-msgstr ""
+msgstr "L'authentification par OpenID n'est pas activée pour cet utilisateur."
 
 #: plugins/authopenid/www/post-login.php:105
 #, php-format
@@ -8718,9 +8715,8 @@ msgid "Gravatar Plugin"
 msgstr "Greffon Gravatar"
 
 #: plugins/gravatar/common/gravatarPlugin.class.php:75
-#, fuzzy
 msgid "Change face"
-msgstr "Changer de visualisation"
+msgstr "Changer d'avatar"
 
 #: plugins/helloworld/include/HelloWorldPluginDescriptor.class.php:30
 msgid "HelloWorld"
@@ -10236,18 +10232,16 @@ msgid "Manage your mantisbt account."
 msgstr ""
 
 #: plugins/mediawiki/include/MediaWikiPluginDescriptor.class.php:30
-#, fuzzy
 msgid "Mediawiki"
-msgstr "wiki"
+msgstr "Mediawiki"
 
 #: plugins/mediawiki/include/MediaWikiPluginDescriptor.class.php:30
 msgid "Mediawiki integration in the forge"
-msgstr ""
+msgstr "Intégration de Mediawiki dans la forge"
 
 #: plugins/mediawiki/include/mediawikiPlugin.class.php:96
-#, fuzzy
 msgid "Mediawiki Space"
-msgstr "Accès en lecture à Mediawiki"
+msgstr "Espace Mediawiki"
 
 #: plugins/mediawiki/include/mediawikiPlugin.class.php:202
 msgid "Mediawiki read access"
@@ -10306,9 +10300,8 @@ msgid "MediaWiki Plugin admin"
 msgstr "Administration du plugin Mediawiki"
 
 #: plugins/mediawiki/include/mediawikiPlugin.class.php:372
-#, fuzzy
 msgid "Mediawiki plugin"
-msgstr "Administration du plugin Mediawiki"
+msgstr "Plugin Mediawiki"
 
 #: plugins/mediawiki/www/LocalSettings.php:59
 #, php-format
@@ -10386,12 +10379,12 @@ msgstr "Erreur inconnue lors de la transmission du fichier."
 
 #: plugins/mediawiki/www/plugin_admin.php:147
 msgid "Nightly XML dump"
-msgstr ""
+msgstr "Sauvegarde XML quotidienne"
 
 #: plugins/mediawiki/www/plugin_admin.php:149
 #, php-format
 msgid "<a href=\"%s\">Download</a> the nightly created XML dump (backup) here."
-msgstr ""
+msgstr "<a href=\"%s\">Télécharger</a> la sauvegarde XML quotidienne."
 
 #: plugins/mediawiki/www/plugin_admin.php:156
 msgid "Current logo:"
@@ -10454,22 +10447,19 @@ msgid "Upload new logo"
 msgstr "Télécharger un nouveau logo"
 
 #: plugins/message/common/messagePlugin.class.php:45
-#, fuzzy
 msgid "Configure Global Message"
-msgstr "Valeur configurée"
+msgstr "Configurer le message global"
 
 #: plugins/message/common/messagePlugin.class.php:52
-#, fuzzy
 msgid "Close"
-msgstr "Fermé"
+msgstr "Fermer"
 
 #: plugins/message/www/index.php:64
-#, fuzzy
 msgid ""
 "Edit the message as you want. If you activate the HTML editor, you will be "
 "able to use WYSIWYG formatting (bold, colors...)"
 msgstr ""
-"Éditez le bloc à votre convenance.  Si vous activez l'éditeur HTML,\n"
+"Éditez le message à votre convenance.  Si vous activez l'éditeur HTML,\n"
 "vous pourrez utiliser du formatage visuel « WYSIWYG » (texte en gras,\n"
 "couleurs, etc.)."
 
@@ -10905,25 +10895,22 @@ msgid "oslc Admin"
 msgstr "Administration OSLC"
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:171
-#, fuzzy
 msgid "Import projects"
-msgstr "Pour le projet"
+msgstr "Importer des projets"
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:171
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:183
-#, fuzzy
 msgid "Project import plugin"
-msgstr "Description du projet"
+msgstr "Plugin d'import de projet"
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:183
-#, fuzzy
 msgid "Import users"
-msgstr "Utilisateurs les mieux classés"
+msgstr "Import d'utilisateurs"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:101
-#, fuzzy, php-format
+#, php-format
 msgid "File %s cannot be moved to the storage location %s"
-msgstr "Le fichier ne peut pas être déplacé vers sa destination"
+msgstr "Le fichier %s ne peut pas être déplacé vers l'espace de stockage %s"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:133
 msgid "Opening fileinfo database failed"
@@ -10957,9 +10944,8 @@ msgid "Please select only one file"
 msgstr "Vous devez sélectionner un fichier"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:368
-#, fuzzy
 msgid "File not found on server"
-msgstr "Fichier non trouvé à l'adresse %s"
+msgstr "Fichier non trouvé sur le serveur."
 
 #: plugins/projectimport/common/UploadedFiles.class.php:381
 msgid "Please either select existing file OR upload new file"
@@ -10981,7 +10967,6 @@ msgid ""
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:405
-#, fuzzy
 msgid "The uploaded file was only partially uploaded"
 msgstr "Le fichier n'a été que partiellement transmis."
 
@@ -10990,18 +10975,17 @@ msgid "Missing a temporary folder"
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:411
-#, fuzzy
 msgid "Failed to write file to disk"
-msgstr "Échec lors de l'ajout de la compétence : %s."
+msgstr "Erreur lors de l'écriture du fichier sur disque."
 
 #: plugins/projectimport/common/UploadedFiles.class.php:413
 msgid "File upload stopped by extension"
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:415
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown upload error %d"
-msgstr "Erreur inconnue lors de la transmission du fichier."
+msgstr "Erreur %d inconnue lors de la transmission du fichier."
 
 #: plugins/projectimport/www/index.php:151
 #: plugins/projectimport/www/projectsimport.php:187
@@ -11010,14 +10994,13 @@ msgid "Please select an existing file to process, or upload a new one"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:163
-#, fuzzy
 msgid "Project importer"
-msgstr "Projet modèle"
+msgstr "Importeur de projet"
 
 #: plugins/projectimport/www/index.php:176
 #: plugins/projectimport/www/usersimport.php:196
 msgid "Users found in imported file"
-msgstr ""
+msgstr "Utilisateurs listés dans le fichier importé"
 
 #: plugins/projectimport/www/index.php:282
 #, php-format
@@ -11079,9 +11062,8 @@ msgid "Imported user email"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:395
-#, fuzzy
 msgid "Initial role"
-msgstr "Valeurs initiales"
+msgstr "Rôle initial"
 
 #: plugins/projectimport/www/index.php:397
 msgid "Map to existing user (role)"
@@ -11106,7 +11088,6 @@ msgid "Imported users mapped to it"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:427
-#, fuzzy
 msgid "New role"
 msgstr "Nouveau rôle"
 
@@ -11129,9 +11110,8 @@ msgstr "Liste des membres du projet : "
 
 #: plugins/projectimport/www/index.php:568
 #: plugins/projectimport/www/projectsimport.php:267
-#, fuzzy
 msgid "Project summary"
-msgstr "Historique du projet"
+msgstr "Résumé du projet"
 
 #: plugins/projectimport/www/index.php:579
 #, fuzzy
@@ -11148,9 +11128,8 @@ msgid "Import space ?"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:633
-#, fuzzy
 msgid "parsing problem"
-msgstr "Rôles existants"
+msgstr "Erreur d'analyse du fichier."
 
 #: plugins/projectimport/www/index.php:686
 msgid "Confirm selected file or upload a new one"
@@ -11177,14 +11156,12 @@ msgid "Projects importer"
 msgstr "Projet parent"
 
 #: plugins/projectimport/www/projectsimport.php:257
-#, fuzzy
 msgid "Failed to create project"
-msgstr "Erreur lors de la création du projet modèle."
+msgstr "Erreur lors de la création du projet"
 
 #: plugins/projectimport/www/projectsimport.php:263
-#, fuzzy
 msgid "Created project"
-msgstr "Projet privé"
+msgstr "Projet créé"
 
 #: plugins/projectimport/www/usersimport.php:72
 #, fuzzy
@@ -11207,9 +11184,8 @@ msgid "Project labels"
 msgstr "Labels de projet"
 
 #: plugins/projectlabels/common/ProjectLabelsPlugin.class.php:17
-#, fuzzy
 msgid "Project labels plugin"
-msgstr "Labels de projet"
+msgstr "Plugin de labels de projet"
 
 #: plugins/projectlabels/www/index.php:25
 #, php-format
@@ -12294,6 +12270,8 @@ msgstr ""
 msgid ""
 "Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled"
 msgstr ""
+"La méthode d'accès est manquante dans le fichier de configuration\n"
+"scmgit.ini : use_ssh et use_dav sont tous les deux désactivés."
 
 #: plugins/scmgit/common/GitPlugin.class.php:138
 msgid ""
@@ -12375,12 +12353,11 @@ msgstr "Créer un dépôt personnel"
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:39
 msgid ""
 "Get the list of URLS of your personal Git repository cloned from projects."
-msgstr ""
+msgstr "Liste les URL de vos dépôts personnels clonés depuis des dépôts de projets."
 
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:55
-#, fuzzy
 msgid "No personal git repository"
-msgstr "Créer un dépôt personnel"
+msgstr "Pas de dépôt personnel."
 
 #: plugins/scmgit/www/index.php:24
 msgid ""
@@ -13639,7 +13616,7 @@ msgstr "Description proposée :"
 
 #: www/admin/approve-pending.php:189
 msgid "Purpose of submission:"
-msgstr ""
+msgstr "Objectifs du projet :"
 
 #: www/admin/approve-pending.php:192
 msgid "License Other:"
@@ -15930,11 +15907,13 @@ msgstr "Pas de version"
 
 #: www/frs/index.php:132
 msgid "Download latest release as zip:"
-msgstr ""
+msgstr "Télécharger la dernière version sous forme d'archive Zip :"
 
 #: www/frs/index.php:135
 msgid "This link always points to the newest release as a zip file."
 msgstr ""
+"Ce lien pointe toujours sur la dernière version, sous forme d'une\n"
+"archive au format Zip."
 
 #: www/frs/index.php:177
 msgid "D/L"
@@ -15945,14 +15924,12 @@ msgid "Arch"
 msgstr "Archive"
 
 #: www/frs/index.php:180
-#, fuzzy
 msgid "Latest"
-msgstr "Dernières annonces"
+msgstr "Dernière"
 
 #: www/frs/index.php:209
-#, fuzzy
 msgid "Latest version"
-msgstr "Dernières annonces"
+msgstr "Dernière version"
 
 #: www/frs/monitor.php:49
 msgid "Error Getting FRSPackage"

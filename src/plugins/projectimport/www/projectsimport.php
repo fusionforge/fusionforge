@@ -73,7 +73,7 @@ class ProjectsImportPage extends FileManagerPage {
 		global $feedback;
 
 		$params= array();
-		$params['title']=_('Projects importer');
+		$params['title']=_('Project importer');
 		$params['toptab']='projectimport';
 
 		site_admin_header($params);
