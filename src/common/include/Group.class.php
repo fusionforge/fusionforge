@@ -1432,6 +1432,7 @@ class Group extends Error {
 						      $plugin_id));
 			return $res;
 		}
+		$this->normalizeAllRoles () ;
 	}
 
 	/**
