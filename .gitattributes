@@ -659,6 +659,7 @@ src/debian/patches/use-nusoap-from-distro.patch -text
 src/debian/patches/use-simplepie-from-distro.patch -text
 src/debian/patches/use-snoopy-from-distro.patch -text
 src/debian/po/README -text
+src/debian/source/format -text
 src/debian/watch -text
 src/docs/README.gettext -text
 src/docs/architecture/stats/stats-process.sda svneol=native#unset
