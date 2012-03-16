@@ -182,7 +182,7 @@ class Tasks{
 				$uid =user_get_object_by_name($a['submitter'])->getID();
 				$dependentTemp = array();
 //				new dBug(array($a['summary'], $a['description'], $a['priority'], $a['hours'], $start, $end, $cats[$a['category']], $a['percent_complete'], &$assigned, &$dependentTemp, 0, 0, array('user' => $uid)));
-				if(!$artifact->create($a['summary'], $a['description'], $a['priority'], $a['hours'], $start, $end, $cats[$a['category']], $a['percent_complete'], &$assigned, &$dependentTemp, 0, 0, array('user' => $uid))){
+				if(!$artifact->create($a['summary'], $a['description'], $a['priority'], $a['hours'], $start, $end, $cats[$a['category']], $a['percent_complete'], $assigned, $dependentTemp, 0, 0, array('user' => $uid))){
 					return false;
 				} else {
 
