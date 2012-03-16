@@ -102,17 +102,8 @@ while ($row = db_fetch_array($res)) {
 	print "   <description>".rss_description($row['details'])."</description>\n";
 	print "   <author>".$row['user_name']."@".forge_get_config('users_host')." (".$row['realname'].")</author>\n";
 	print "   <pubDate>".rss_date($row['post_date'])."</pubDate>\n";
-	if ($row['group_id'] != forge_get_config('news_group')) {
-		print "   <guid>http://".forge_get_config('web_host')."/forum/forum.php?forum_id=".$row['forum_id']."</guid>\n";
-	} else {
-		print "   <guid>http://".forge_get_config('web_host')."/</guid>\n";
-	}
-	// if news group, comment is main page
-	if ($row['group_id'] != forge_get_config('news_group')) {
-		print "   <comments>http://".forge_get_config('web_host')."/forum/forum.php?forum_id=".$row['forum_id']."</comments>\n";
-	} else {
-		print "   <comments>http://".forge_get_config('web_host')."/</comments>\n";
-	}
+	print "   <guid>$link</guid>\n";
+	print "   <comments>$link</comments>\n";
 	print "  </item>\n";
 }
 // ## end output
