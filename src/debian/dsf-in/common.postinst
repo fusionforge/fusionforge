@@ -103,7 +103,6 @@ EOF
 	    echo "Migrating existing configuration to *.ini files"
 	    PATH=$PATH:/usr/share/gforge/bin migrate-to-ini-files.sh
 	fi 
-
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
