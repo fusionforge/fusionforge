@@ -2,9 +2,9 @@ Author: Roland Mas <lolando@debian.org>
 Description: Use JQuery as provided by the libjs-jquery Debian package
 Index: src/www/include/html.php
 ===================================================================
---- src.orig/www/include/html.php	2012-03-09 14:49:41.531519275 +0100
-+++ src/www/include/html.php	2012-03-09 14:50:03.535963843 +0100
-@@ -365,7 +365,7 @@
+--- src.orig/www/include/html.php
++++ src/www/include/html.php
+@@ -371,7 +371,7 @@
  }
  
  function html_use_jquery() {

@@ -2,8 +2,8 @@ Author: Olivier Berger <olivier.berger@it-sudparis.eu>
 Description: Use NUSOAP as provided by the libnusoap-php Debian package
 Index: src/www/soap/index.php
 ===================================================================
---- src.orig/www/soap/index.php	2012-03-09 14:49:41.787522930 +0100
-+++ src/www/soap/index.php	2012-03-09 14:50:02.391934493 +0100
+--- src.orig/www/soap/index.php
++++ src/www/soap/index.php
 @@ -14,7 +14,8 @@
  
  $uri = 'http://'.forge_get_config('web_host');

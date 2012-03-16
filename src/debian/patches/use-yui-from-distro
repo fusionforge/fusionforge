@@ -1,7 +1,7 @@
 Index: src/etc/httpd.conf.d/vhost-main.inc
 ===================================================================
---- src.orig/etc/httpd.conf.d/vhost-main.inc	2012-03-09 14:49:41.059512532 +0100
-+++ src/etc/httpd.conf.d/vhost-main.inc	2012-03-09 14:50:05.976028594 +0100
+--- src.orig/etc/httpd.conf.d/vhost-main.inc
++++ src/etc/httpd.conf.d/vhost-main.inc
 @@ -32,7 +32,7 @@
  Alias /scripts/jquery-simpletreemenu/ {core/source_path}/lib/vendor/jquery-simpletreemenu/
  Alias /scripts/prototype/ {core/source_path}/lib/vendor/prototype/

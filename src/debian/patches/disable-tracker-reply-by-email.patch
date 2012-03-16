@@ -3,8 +3,8 @@ Description: Disable the blurb about replying to a bug via email
 at least until this is made to work.
 Index: src/common/tracker/Artifact.class.php
 ===================================================================
---- src.orig/common/tracker/Artifact.class.php	2012-03-09 14:49:42.515533608 +0100
-+++ src/common/tracker/Artifact.class.php	2012-03-09 14:49:59.151854974 +0100
+--- src.orig/common/tracker/Artifact.class.php
++++ src/common/tracker/Artifact.class.php
 @@ -1563,10 +1563,6 @@
  			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
  					    "&aid=". $this->getID() .

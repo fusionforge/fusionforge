@@ -1,7 +1,7 @@
 Index: src/db/upgrade-db.php
 ===================================================================
---- src.orig/db/upgrade-db.php	2012-03-09 14:50:06.596045595 +0100
-+++ src/db/upgrade-db.php	2012-03-09 14:50:07.212062603 +0100
+--- src.orig/db/upgrade-db.php
++++ src/db/upgrade-db.php
 @@ -197,16 +197,7 @@
  		if (!$res) {
  			show(db_error()."\n");

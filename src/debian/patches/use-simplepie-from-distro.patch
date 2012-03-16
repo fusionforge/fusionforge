@@ -2,8 +2,8 @@ Author: Roland Mas <lolando@debian.org>
 Description: Use SimplePie as provided by the libphp-simplepie Debian package
 Index: src/common/rss/simplepie.inc
 ===================================================================
---- src.orig/common/rss/simplepie.inc	2012-03-09 14:49:41.299515960 +0100
-+++ /dev/null	1970-01-01 00:00:00.000000000 +0000
+--- src.orig/common/rss/simplepie.inc
++++ /dev/null
 @@ -1,13724 +0,0 @@
 -<?php
 -/**
@@ -13731,8 +13731,8 @@ Index: src/common/rss/simplepie.inc
 -?>
 Index: src/common/widget/Widget_Rss.class.php
 ===================================================================
---- src.orig/common/widget/Widget_Rss.class.php	2012-03-09 14:49:41.299515960 +0100
-+++ src/common/widget/Widget_Rss.class.php	2012-03-09 14:50:04.803997124 +0100
+--- src.orig/common/widget/Widget_Rss.class.php
++++ src/common/widget/Widget_Rss.class.php
 @@ -45,7 +45,7 @@
  					return idn_to_unicode($param);
  				}

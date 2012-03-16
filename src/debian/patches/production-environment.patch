@@ -2,8 +2,8 @@ Author: Roland Mas <lolando@debian.org>
 Description: Default deployment is production, not development
 Index: src/etc/config.ini.d/debug.ini
 ===================================================================
---- src.orig/etc/config.ini.d/debug.ini	2012-03-09 14:49:40.199500696 +0100
-+++ src/etc/config.ini.d/debug.ini	2012-03-09 14:50:07.876081153 +0100
+--- src.orig/etc/config.ini.d/debug.ini
++++ src/etc/config.ini.d/debug.ini
 @@ -1,12 +1,12 @@
  [core]
  
