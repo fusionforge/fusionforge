@@ -6,8 +6,9 @@ fusionforge (5.1.1-3) UNRELEASED; urgency=low
   [ Roland Mas ]
   * Use common/include/env.inc.php rather than www/env.inc.php for offline
     scripts (closes: #663602).
+  * More comprehensive purge for -common package (closes: #638167).
 
- -- Roland Mas <lolando@debian.org>  Fri, 16 Mar 2012 10:10:17 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 16 Mar 2012 10:42:43 +0100
 
 fusionforge (5.1.1-2) unstable; urgency=low
 
