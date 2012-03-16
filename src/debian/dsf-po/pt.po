@@ -6,11 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@ 4.6.99+svn6387-1\n"
-"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2009-06-12 23:23+0200\n"
+"Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
+"POT-Creation-Date: 2012-03-16 10:20+0100\n"
 "PO-Revision-Date: 2010-10-03 21:23+0200\n"
 "Last-Translator: Ricardo Silva <ardoric@gmail.com>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -71,44 +72,13 @@ msgstr "Não deve ser o mesmo que o host principal do @FORGENAME@."
 #. Type: string
 #. Description
 #: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#, fuzzy
-#| msgid "@FORGENAME@ administrator login:"
-msgid "@FORGENAME@ administrator login:"
-msgstr "Login do administrador do @FORGENAME@:"
-
-#. Type: string
-#. Description
-#. Type: password
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-#, fuzzy
-#| msgid ""
-#| "The @FORGENAME@ administrator account will have full privileges on the "
-#| "system. It will be used to approve the creation of new projects."
-msgid ""
-"The @FORGENAME@ administrator account will have full privileges on the "
-"system. It will be used to approve the creation of new projects."
-msgstr ""
-"A conta de administrador do @FORGENAME@ terá privilégios totais sobre o "
-"sistema. Será usada para aprovar a criação de novos projectos."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-msgid "Please choose the username for this account."
-msgstr "Por favor escolha o nome de utilizador para esta conta."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr "Endereço IP:"
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 #: ../dsf-helper/host-variables.templates:2001
 #, fuzzy
 #| msgid ""
@@ -123,14 +93,14 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr "Isto é necessário para a configuração de 'virtual hosts' do Apache."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #, fuzzy
 #| msgid "@FORGENAME@ administrator password:"
 msgid "@FORGENAME@ administrator password:"
@@ -138,61 +108,45 @@ msgstr "Palavra-passe do administrador do @FORGENAME@:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-msgid "Please choose the password for this account."
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#, fuzzy
+#| msgid ""
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
+msgstr ""
+"A conta de administrador do @FORGENAME@ terá privilégios totais sobre o "
+"sistema. Será usada para aprovar a criação de novos projectos."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#, fuzzy
+#| msgid "Please choose the password for this account."
+msgid "Please choose the password for this forge account."
 msgstr "Por favor escolha a palavra-passe para esta conta."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
 msgstr "Confirmação da palavra-passe:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Por favor, reescreva a palavra-passe para confirmação."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-msgid "Initial list of skills:"
-msgstr "Lista inicial de competências:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-#, fuzzy
-#| msgid ""
-#| "@FORGENAME@ allows users to define a list of their skills, to be chosen "
-#| "from those present in the database. This list is the initial list of "
-#| "skills that will enter the database."
-msgid ""
-"@FORGENAME@ allows users to define a list of their skills, to be chosen from "
-"those present in the database. This list is the initial list of skills that "
-"will enter the database."
-msgstr ""
-"O @FORGENAME@ permite que os utilizadores definam uma lista com as suas "
-"competências, a serem escolhidas de entre aquelas que estão na base de "
-"dados. Esta lista é a lista inicial de competências que irão figurar na base "
-"de dados."
-
-#. Type: string
-#. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
-msgid "Please enter a semicolon-separated list of skill names."
-msgstr ""
-"Por favor introduza uma lista de nomes de capacidades, separadas pelo "
-"símbolo ponto-e-vírgula (;)."
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
 msgid "Do you want a simple DNS setup for @FORGENAME@?"
 msgstr "Deseja uma configuração simples de DNS no @FORGENAME@?"
 
@@ -200,7 +154,7 @@ msgstr "Deseja uma configuração simples de DNS no @FORGENAME@?"
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -217,7 +171,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -242,8 +196,8 @@ msgstr "Deseja que o mail para ${noreply} seja apagado?"
 #| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
 #| "\"${noreply}\" address."
 msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}"
-"\" address."
+"@FORGENAME@ sends and receives plenty of e-mail to and from the "
+"\"${noreply}\" address."
 msgstr ""
 "O @FORGENAME@ envia e recebe bastante e-mail para e a partir do endereço "
 "\"${noreply}\"."
@@ -393,7 +347,8 @@ msgstr "Por favor escolha a palavra-passe da ligação."
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
 msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ packages."
+"Please enter the host name of the server that will host the @FORGENAME@ "
+"packages."
 msgstr ""
 "Por favor introduza o nome do servidor que irá guardar os pacotes do "
 "@FORGENAME@."
@@ -444,8 +399,8 @@ msgstr "Servidor de listas de email:"
 #. Description
 #: ../dsf-helper/lists-variables.templates:2001
 msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ mailing "
-"lists."
+"Please enter the host name of the server that will host the @FORGENAME@ "
+"mailing lists."
 msgstr ""
 "Por favor introduza o nome do servidor que irá guardar as listas de email do "
 "@FORGENAME@."
@@ -660,6 +615,37 @@ msgid ""
 msgstr ""
 "Por favor escolha o tema pré-definido para as páginas web. Tem de introduzir "
 "um nome válido."
+
+#, fuzzy
+#~| msgid "@FORGENAME@ administrator login:"
+#~ msgid "@FORGENAME@ administrator login:"
+#~ msgstr "Login do administrador do @FORGENAME@:"
+
+#~ msgid "Please choose the username for this account."
+#~ msgstr "Por favor escolha o nome de utilizador para esta conta."
+
+#~ msgid "Initial list of skills:"
+#~ msgstr "Lista inicial de competências:"
+
+#, fuzzy
+#~| msgid ""
+#~| "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~| "from those present in the database. This list is the initial list of "
+#~| "skills that will enter the database."
+#~ msgid ""
+#~ "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~ "from those present in the database. This list is the initial list of "
+#~ "skills that will enter the database."
+#~ msgstr ""
+#~ "O @FORGENAME@ permite que os utilizadores definam uma lista com as suas "
+#~ "competências, a serem escolhidas de entre aquelas que estão na base de "
+#~ "dados. Esta lista é a lista inicial de competências que irão figurar na "
+#~ "base de dados."
+
+#~ msgid "Please enter a semicolon-separated list of skill names."
+#~ msgstr ""
+#~ "Por favor introduza uma lista de nomes de capacidades, separadas pelo "
+#~ "símbolo ponto-e-vírgula (;)."
 
 #~ msgid "admin"
 #~ msgstr "admin"

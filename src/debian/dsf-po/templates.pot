@@ -6,12 +6,13 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2009-06-12 23:23+0200\n"
+"Project-Id-Version: fusionforge\n"
+"Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
+"POT-Creation-Date: 2012-03-16 10:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,36 +59,13 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-msgid "@FORGENAME@ administrator login:"
-msgstr ""
-
-#. Type: string
-#. Description
-#. Type: password
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-msgid ""
-"The @FORGENAME@ administrator account will have full privileges on the "
-"system. It will be used to approve the creation of new projects."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-msgid "Please choose the username for this account."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 #: ../dsf-helper/host-variables.templates:2001
 msgid ""
 "Please enter the IP address of the server that will host the @FORGENAME@ "
@@ -96,56 +74,43 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 msgid "@FORGENAME@ administrator password:"
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-msgid "Please choose the password for this account."
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+msgid "Please choose the password for this forge account."
+msgstr ""
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-msgid "Initial list of skills:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-msgid ""
-"@FORGENAME@ allows users to define a list of their skills, to be chosen from "
-"those present in the database. This list is the initial list of skills that "
-"will enter the database."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-msgid "Please enter a semicolon-separated list of skill names."
 msgstr ""
 
 #. Type: boolean
@@ -189,8 +154,8 @@ msgstr ""
 #. Description
 #: ../dsf-in/mta-postfix.templates.dsfh-in:3001
 msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}"
-"\" address."
+"@FORGENAME@ sends and receives plenty of e-mail to and from the "
+"\"${noreply}\" address."
 msgstr ""
 
 #. Type: boolean

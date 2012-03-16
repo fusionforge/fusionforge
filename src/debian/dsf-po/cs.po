@@ -14,11 +14,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
-"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2009-06-12 23:23+0200\n"
+"Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
+"POT-Creation-Date: 2012-03-16 10:20+0100\n"
 "PO-Revision-Date: 2008-03-30 14:36+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -76,44 +77,13 @@ msgstr "Měl by to být jiný počítač než je hlavní server @FORGENAME@."
 #. Type: string
 #. Description
 #: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#, fuzzy
-#| msgid "@FORGENAME@ administrator login:"
-msgid "@FORGENAME@ administrator login:"
-msgstr "Přihlašovací jméno správce @FORGENAME@:"
-
-#. Type: string
-#. Description
-#. Type: password
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-#, fuzzy
-#| msgid ""
-#| "The @FORGENAME@ administrator account will have full privileges on the "
-#| "system. It will be used to approve the creation of new projects."
-msgid ""
-"The @FORGENAME@ administrator account will have full privileges on the "
-"system. It will be used to approve the creation of new projects."
-msgstr ""
-"Správce @FORGENAME@ bude mít v systému @FORGENAME@ všechna práva. Používá se "
-"například pro schvalování vytváření nových projektů."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-msgid "Please choose the username for this account."
-msgstr "Zadejte prosím přihlašovací jméno tohoto účtu."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr "IP adresa:"
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 #: ../dsf-helper/host-variables.templates:2001
 #, fuzzy
 #| msgid ""
@@ -127,14 +97,14 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr "To je vyžadováno pro nastavení virtuálních hostů v Apachi."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #, fuzzy
 #| msgid "@FORGENAME@ administrator password:"
 msgid "@FORGENAME@ administrator password:"
@@ -142,52 +112,39 @@ msgstr "Heslo správce @FORGENAME@:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-msgid "Please choose the password for this account."
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#, fuzzy
+#| msgid ""
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
+msgstr ""
+"Správce @FORGENAME@ bude mít v systému @FORGENAME@ všechna práva. Používá se "
+"například pro schvalování vytváření nových projektů."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#, fuzzy
+#| msgid "Please choose the password for this account."
+msgid "Please choose the password for this forge account."
 msgstr "Zadejte prosím heslo pro tento účet."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
 msgstr "Potvrzení hesla:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Zadejte heslo ještě jednou pro potvrzení."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-msgid "Initial list of skills:"
-msgstr "Počáteční seznam schopností:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-#, fuzzy
-#| msgid ""
-#| "@FORGENAME@ allows users to define a list of their skills, to be chosen "
-#| "from those present in the database. This list is the initial list of "
-#| "skills that will enter the database."
-msgid ""
-"@FORGENAME@ allows users to define a list of their skills, to be chosen from "
-"those present in the database. This list is the initial list of skills that "
-"will enter the database."
-msgstr ""
-"@FORGENAME@ umožňuje uživatelům, aby si ze seznamu schopností definovali své "
-"dovednosti. Seznam, který zde zadáte, bude uložen v databázi jako výchozí "
-"seznam schopností."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-msgid "Please enter a semicolon-separated list of skill names."
-msgstr "Jednotlivé položky seznamu schopností oddělte středníky."
 
 #. Type: boolean
 #. Description
@@ -243,8 +200,8 @@ msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
 #| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
 #| "\"${noreply}\" address."
 msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}"
-"\" address."
+"@FORGENAME@ sends and receives plenty of e-mail to and from the "
+"\"${noreply}\" address."
 msgstr ""
 "@FORGENAME@ využívá adresu „${noreply}“ k odesílání i příjmu velkého "
 "množství pošty."
@@ -678,3 +635,31 @@ msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr ""
 "Vyberte prosím výchozí téma pro webové stránky. Musí to být platný název."
+
+#, fuzzy
+#~| msgid "@FORGENAME@ administrator login:"
+#~ msgid "@FORGENAME@ administrator login:"
+#~ msgstr "Přihlašovací jméno správce @FORGENAME@:"
+
+#~ msgid "Please choose the username for this account."
+#~ msgstr "Zadejte prosím přihlašovací jméno tohoto účtu."
+
+#~ msgid "Initial list of skills:"
+#~ msgstr "Počáteční seznam schopností:"
+
+#, fuzzy
+#~| msgid ""
+#~| "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~| "from those present in the database. This list is the initial list of "
+#~| "skills that will enter the database."
+#~ msgid ""
+#~ "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~ "from those present in the database. This list is the initial list of "
+#~ "skills that will enter the database."
+#~ msgstr ""
+#~ "@FORGENAME@ umožňuje uživatelům, aby si ze seznamu schopností definovali "
+#~ "své dovednosti. Seznam, který zde zadáte, bude uložen v databázi jako "
+#~ "výchozí seznam schopností."
+
+#~ msgid "Please enter a semicolon-separated list of skill names."
+#~ msgstr "Jednotlivé položky seznamu schopností oddělte středníky."

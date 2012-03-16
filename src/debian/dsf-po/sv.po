@@ -7,11 +7,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGENAME@_4.6.99+svn6580-1_sv\n"
-"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2009-06-12 23:23+0200\n"
+"Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
+"POT-Creation-Date: 2012-03-16 10:20+0100\n"
 "PO-Revision-Date: 2008-07-29 18:44+0200\n"
 "Last-Translator: Martin Ågren <martin.agren@gmail.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,38 +66,13 @@ msgstr "Det ska inte vara samma som huvudvärden för @FORGENAME@."
 #. Type: string
 #. Description
 #: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-msgid "@FORGENAME@ administrator login:"
-msgstr "@FORGENAME@-administratörens användarnamn:"
-
-#. Type: string
-#. Description
-#. Type: password
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-msgid ""
-"The @FORGENAME@ administrator account will have full privileges on the "
-"system. It will be used to approve the creation of new projects."
-msgstr ""
-"Administratörskontot för @FORGENAME@ kommer att ha alla rättigheter i "
-"@FORGENAME@-systemet. Det behövs för att godkänna skapandet av projekten."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-msgid "Please choose the username for this account."
-msgstr "Ange användarnamnet för detta konto."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr "IP-adress:"
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 #: ../dsf-helper/host-variables.templates:2001
 msgid ""
 "Please enter the IP address of the server that will host the @FORGENAME@ "
@@ -107,60 +83,52 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr "Detta krävs för att konfigurera Apaches virtuella värd."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 msgid "@FORGENAME@ administrator password:"
 msgstr "@FORGENAME@-administratörens lösenord:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-msgid "Please choose the password for this account."
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#, fuzzy
+#| msgid ""
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
+msgstr ""
+"Administratörskontot för @FORGENAME@ kommer att ha alla rättigheter i "
+"@FORGENAME@-systemet. Det behövs för att godkänna skapandet av projekten."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#, fuzzy
+#| msgid "Please choose the password for this account."
+msgid "Please choose the password for this forge account."
 msgstr "Mata in lösenordet för detta konto."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
 msgstr "Lösenordsbekräftelse:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Mata in lösenordet igen för bekräftelse."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-msgid "Initial list of skills:"
-msgstr "Initiala listan över färdigheter:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-msgid ""
-"@FORGENAME@ allows users to define a list of their skills, to be chosen from "
-"those present in the database. This list is the initial list of skills that "
-"will enter the database."
-msgstr ""
-"@FORGENAME@ låter användarna definiera en lista över sina färdigheter, som "
-"kan väljas av de som finns i databasen.  Denna lista är den initiala listan "
-"som kommer att läggas in i databasen."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
-msgid "Please enter a semicolon-separated list of skill names."
-msgstr "Mata in namn på färdigheter, separerade med semikolon."
 
 #. Type: boolean
 #. Description
@@ -211,8 +179,8 @@ msgstr "Vill du att e-post till ${noreply} ska tas bort?"
 #. Description
 #: ../dsf-in/mta-postfix.templates.dsfh-in:3001
 msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}"
-"\" address."
+"@FORGENAME@ sends and receives plenty of e-mail to and from the "
+"\"${noreply}\" address."
 msgstr ""
 "@FORGENAME@ skickar och tar emot en mängd e-postmeddelanden till och från "
 "adressen \"${noreply}\"."
@@ -598,3 +566,24 @@ msgstr "Standardtema:"
 msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr "Ange standardtemat för webbsidorna. Detta måste vara ett giltigt namn."
+
+#~ msgid "@FORGENAME@ administrator login:"
+#~ msgstr "@FORGENAME@-administratörens användarnamn:"
+
+#~ msgid "Please choose the username for this account."
+#~ msgstr "Ange användarnamnet för detta konto."
+
+#~ msgid "Initial list of skills:"
+#~ msgstr "Initiala listan över färdigheter:"
+
+#~ msgid ""
+#~ "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~ "from those present in the database. This list is the initial list of "
+#~ "skills that will enter the database."
+#~ msgstr ""
+#~ "@FORGENAME@ låter användarna definiera en lista över sina färdigheter, "
+#~ "som kan väljas av de som finns i databasen.  Denna lista är den initiala "
+#~ "listan som kommer att läggas in i databasen."
+
+#~ msgid "Please enter a semicolon-separated list of skill names."
+#~ msgstr "Mata in namn på färdigheter, separerade med semikolon."
