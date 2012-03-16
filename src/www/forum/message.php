@@ -116,15 +116,15 @@ if ($msg_id) {
 
 	$url = util_make_url('/forum/message.php?msg_id='. $msg_id .'&amp;group_id='.$group_id);
 
-	echo '<br /><table border="0" width="100%" cellspacing="0">';
-	echo '<tr class="tablecontent"><td valign="top">'."\n";
+	echo '<br /><br /><table class="fullwidth">';
+	echo '<tr class="tablecontent"><td class="top">'."\n";
 	echo '<strong>'.$fm->getSubject() .'</strong>';
 	if (!$reply) {
 		echo ' <a href="'.$url.'&amp;reply=1">[ '._("reply").' ]</a>';
 	}
 	echo '<br />';
 	echo _("By:").' '. util_make_link_u($fm->getPosterName(), $fm->getPosterID(), $fm->getPosterRealName());
-	echo ' on '. date(_('Y-m-d H:i'), $fm->getPostDate()) .'</td><td align="right">';
+	echo ' on '. date(_('Y-m-d H:i'), $fm->getPostDate()) .'</td><td class="align-right">';
 	echo '<a href="'.$url.'">[forum:'.$msg_id.']</a><br/>';
 	$fa = new ForumAdmin($f->Group->getID());
 	if (forge_check_perm ('forum_admin', $f->Group->getID())) {
@@ -133,7 +133,6 @@ if ($msg_id) {
 	$am = new AttachManager();
 	echo $am->PrintHelperFunctions();
 	echo $am->PrintAttachLink($fm,$group_id,$forum_id) . '</td></tr><tr><td colspan="2"><br/><br />';
-
 
 	if (strpos($fm->getBody(), '>') === false) {
 		echo util_make_links(nl2br($fm->getBody())); //backwards compatibility for non html messages
@@ -200,8 +199,8 @@ if ($msg_id) {
 			show the subject and poster
 		*/
 		$ret_val .= $bold_begin . $msg->getSubject() . $bold_end.$ah_end.'</td>'.
-			'<td><a href="/users/'.$msg->getPosterName().'">'. $msg->getPosterRealName() .'</a></td>'.
-			'<td>'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'</td></tr>';
+			'<td>'. util_display_user($msg->getPosterName(), $msg->getPosterID(), $msg->getPosterRealName()).'</td>'.
+			'<td>'. relative_date($msg->getPostDate()) .'</td></tr>';
 
 		if ($msg->hasFollowups()) {
 			$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);
