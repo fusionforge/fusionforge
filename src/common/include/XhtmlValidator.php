@@ -805,7 +805,7 @@ class XhtmlValidator
     function XhtmlValidator()
     {
         $this->_parser = xml_parser_create('');
-        xml_set_object($this->_parser, &$this);
+        xml_set_object($this->_parser, $this);
         xml_set_element_handler($this->_parser, 'tagOpen', 'tagClose');
         xml_set_character_data_handler($this->_parser, 'cdata');
         xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, false);
