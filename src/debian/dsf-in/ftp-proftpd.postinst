@@ -27,8 +27,6 @@ set -e
 
 case "$1" in
     configure)
-	@PACKAGE@-config
-
         # Patch Proftpd configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-ftp.sh configure-files
 	if [ -f /etc/proftpd/proftpd.conf.@OLDPACKAGE@-new ]

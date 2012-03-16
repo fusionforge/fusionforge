@@ -27,8 +27,6 @@ set -e
 
 case "$1" in
     configure)
-	@PACKAGE@-config
-
 	# Patch Bind configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-dns.sh configure-files
 	ucf --debconf-ok /etc/bind/named.conf.@OLDPACKAGE@-new /etc/bind/named.conf
