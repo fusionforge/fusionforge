@@ -21,128 +21,432 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item ('forge_name', 'core', $GLOBALS['sys_name']) ;
-forge_define_config_item ('force_login', 'core', $GLOBALS['sys_force_login']) ;
+if (isset ($GLOBALS['sys_name'])) {
+	forge_define_config_item ('forge_name', 'core', $GLOBALS['sys_name']) ;
+} else {
+	forge_define_config_item ('forge_name', 'core', 'FusionForge') ;
+}
+if (isset ($GLOBALS['sys_force_login'])) {
+	forge_define_config_item ('force_login', 'core', $GLOBALS['sys_force_login']) ;
+} else {
+	forge_define_config_item ('force_login', 'core', false) ;
+}
 forge_set_config_item_bool ('force_login', 'core') ;
-forge_define_config_item ('user_registration_restricted', 'core', $GLOBALS['sys_user_reg_restricted']) ;
+if (isset ($GLOBALS['sys_user_reg_restricted'])) {
+	forge_define_config_item ('user_registration_restricted', 'core', $GLOBALS['sys_user_reg_restricted']) ;
+} else {
+	forge_define_config_item ('user_registration_restricted', 'core', false) ;
+}
 forge_set_config_item_bool ('user_registration_restricted', 'core') ;
-forge_define_config_item ('project_registration_restricted', 'core', $GLOBALS['sys_project_reg_restricted']) ;
+if (isset ($GLOBALS['sys_project_reg_restricted'])) {
+	forge_define_config_item ('project_registration_restricted', 'core', $GLOBALS['sys_project_reg_restricted']) ;
+} else {
+	forge_define_config_item ('project_registration_restricted', 'core', false) ;
+}
 forge_set_config_item_bool ('project_registration_restricted', 'core') ;
 forge_define_config_item ('project_auto_approval', 'core', false) ;
 forge_set_config_item_bool ('project_auto_approval', 'core') ;
 forge_define_config_item ('project_auto_approval_user', 'core', 'admin') ;
 forge_define_config_item ('allow_project_without_template', 'core', true) ;
 forge_set_config_item_bool ('allow_project_without_template', 'core') ;
-forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
+if (isset ($GLOBALS['sys_default_domain'])) {
+	forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
+} else {
+	forge_define_config_item ('web_host', 'core', '') ;
+}
 forge_define_config_item ('http_port', 'core', 80) ;
 forge_define_config_item ('https_port', 'core', 443) ;
-forge_define_config_item ('apache_user', 'core', $GLOBALS['sys_apache_user']) ;
-forge_define_config_item ('apache_group', 'core', $GLOBALS['sys_apache_group']) ;
+if (isset ($GLOBALS['sys_apache_user'])) {
+	forge_define_config_item ('apache_user', 'core', $GLOBALS['sys_apache_user']) ;
+} else {
+	forge_define_config_item ('apache_user', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_apache_group'])) {
+	forge_define_config_item ('apache_group', 'core', $GLOBALS['sys_apache_group']) ;
+} else {
+	forge_define_config_item ('apache_group', 'core', '') ;
+}
 forge_define_config_item ('scm_tarballs_path', 'core', '$core/data_path/scmtarballs') ;
 forge_define_config_item ('scm_snapshots_path', 'core', '$core/data_path/scmsnapshots') ;
 forge_define_config_item ('plugins_path', 'core', '$core/source_path/plugins') ;
 forge_define_config_item ('themes_root', 'core', '$core/source_path/www/themes') ;
-forge_define_config_item ('default_theme', 'core', $GLOBALS['sys_theme']) ;
-forge_define_config_item ('default_language', 'core', $GLOBALS['sys_lang']) ;
-forge_define_config_item ('default_timezone', 'core', $GLOBALS['sys_default_timezone']) ;
-forge_define_config_item ('default_country_code', 'core', $GLOBALS['sys_default_country_code']) ;
-forge_define_config_item ('use_scm', 'core', $GLOBALS['sys_use_scm']) ;
+if (isset ($GLOBALS['sys_theme'])) {
+	forge_define_config_item ('default_theme', 'core', $GLOBALS['sys_theme']) ;
+} else {
+	forge_define_config_item ('default_theme', 'core', 'gforge') ;
+}
+if (isset ($GLOBALS['sys_lang'])) {
+	forge_define_config_item ('default_language', 'core', $GLOBALS['sys_lang']) ;
+} else {
+	forge_define_config_item ('default_language', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_default_timezone'])) {
+	forge_define_config_item ('default_timezone', 'core', $GLOBALS['sys_default_timezone']) ;
+} else {
+	forge_define_config_item ('default_timezone', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_default_country_code'])) {
+	forge_define_config_item ('default_country_code', 'core', $GLOBALS['sys_default_country_code']) ;
+} else {
+	forge_define_config_item ('default_country_code', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_use_scm'])) {
+	forge_define_config_item ('use_scm', 'core', $GLOBALS['sys_use_scm']) ;
+} else {
+	forge_define_config_item ('use_scm', 'core', true) ;
+}
 forge_set_config_item_bool ('use_scm', 'core') ;
-forge_define_config_item ('use_dav', 'core', @$GLOBALS['sys_use_dav']) ;
+if (isset ($GLOBALS['sys_use_dav'])) {
+	forge_define_config_item ('use_dav', 'core', $GLOBALS['sys_use_dav']) ;
+} else {
+	forge_define_config_item ('use_dav', 'core', true) ;
+}
 forge_set_config_item_bool ('use_dav', 'core') ;
-forge_define_config_item ('use_tracker', 'core', $GLOBALS['sys_use_tracker']) ;
+if (isset ($GLOBALS['sys_use_tracker'])) {
+	forge_define_config_item ('use_tracker', 'core', $GLOBALS['sys_use_tracker']) ;
+} else {
+	forge_define_config_item ('use_tracker', 'core', true) ;
+}
 forge_set_config_item_bool ('use_tracker', 'core') ;
-forge_define_config_item ('use_forum', 'core', $GLOBALS['sys_use_forum']) ;
+if (isset ($GLOBALS['sys_use_forum'])) {
+	forge_define_config_item ('use_forum', 'core', $GLOBALS['sys_use_forum']) ;
+} else {
+	forge_define_config_item ('use_forum', 'core', true) ;
+}
 forge_set_config_item_bool ('use_forum', 'core') ;
-forge_define_config_item ('use_pm', 'core', $GLOBALS['sys_use_pm']) ;
+if (isset ($GLOBALS['sys_use_pm'])) {
+	forge_define_config_item ('use_pm', 'core', $GLOBALS['sys_use_pm']) ;
+} else {
+	forge_define_config_item ('use_pm', 'core', true) ;
+}
 forge_set_config_item_bool ('use_pm', 'core') ;
-forge_define_config_item ('use_docman', 'core', $GLOBALS['sys_use_docman']) ;
+if (isset ($GLOBALS['sys_use_docman'])) {
+	forge_define_config_item ('use_docman', 'core', $GLOBALS['sys_use_docman']) ;
+} else {
+	forge_define_config_item ('use_docman', 'core', true) ;
+}
 forge_set_config_item_bool ('use_docman', 'core') ;
-forge_define_config_item ('use_diary', 'core', $GLOBALS['sys_use_diary']) ;
+if (isset ($GLOBALS['sys_use_diary'])) {
+	forge_define_config_item ('use_diary', 'core', $GLOBALS['sys_use_diary']) ;
+} else {
+	forge_define_config_item ('use_diary', 'core', false) ;
+}
 forge_set_config_item_bool ('use_diary', 'core') ;
-forge_define_config_item ('use_news', 'core', $GLOBALS['sys_use_news']) ;
+if (isset ($GLOBALS['sys_use_news'])) {
+	forge_define_config_item ('use_news', 'core', $GLOBALS['sys_use_news']) ;
+} else {
+	forge_define_config_item ('use_news', 'core', true) ;
+}
 forge_set_config_item_bool ('use_news', 'core') ;
-forge_define_config_item ('use_mail', 'core', $GLOBALS['sys_use_mail']) ;
+if (isset ($GLOBALS['sys_use_mail'])) {
+	forge_define_config_item ('use_mail', 'core', $GLOBALS['sys_use_mail']) ;
+} else {
+	forge_define_config_item ('use_mail', 'core', true) ;
+}
 forge_set_config_item_bool ('use_mail', 'core') ;
-forge_define_config_item ('use_survey', 'core', $GLOBALS['sys_use_survey']) ;
+if (isset ($GLOBALS['sys_use_survey'])) {
+	forge_define_config_item ('use_survey', 'core', $GLOBALS['sys_use_survey']) ;
+} else {
+	forge_define_config_item ('use_survey', 'core', true) ;
+}
 forge_set_config_item_bool ('use_survey', 'core') ;
-forge_define_config_item ('use_frs', 'core', $GLOBALS['sys_use_frs']) ;
+if (isset ($GLOBALS['sys_use_frs'])) {
+	forge_define_config_item ('use_frs', 'core', $GLOBALS['sys_use_frs']) ;
+} else {
+	forge_define_config_item ('use_frs', 'core', true) ;
+}
 forge_set_config_item_bool ('use_frs', 'core') ;
-forge_define_config_item ('use_project_tags', 'core', $GLOBALS['sys_use_project_tags']) ;
+if (isset ($GLOBALS['sys_use_project_tags'])) {
+	forge_define_config_item ('use_project_tags', 'core', $GLOBALS['sys_use_project_tags']) ;
+} else {
+	forge_define_config_item ('use_project_tags', 'core', true) ;
+}
 forge_set_config_item_bool ('use_project_tags', 'core') ;
-forge_define_config_item ('use_project_full_list', 'core', $GLOBALS['sys_use_project_full_list']) ;
+if (isset ($GLOBALS['sys_use_project_full_list'])) {
+	forge_define_config_item ('use_project_full_list', 'core', $GLOBALS['sys_use_project_full_list']) ;
+} else {
+	forge_define_config_item ('use_project_full_list', 'core', true) ;
+}
 forge_set_config_item_bool ('use_project_full_list', 'core') ;
-forge_define_config_item ('use_fti', 'core', $GLOBALS['sys_use_fti']) ;
+if (isset ($GLOBALS['sys_use_fti'])) {
+	forge_define_config_item ('use_fti', 'core', $GLOBALS['sys_use_fti']) ;
+} else {
+	forge_define_config_item ('use_fti', 'core', true) ;
+}
 forge_set_config_item_bool ('use_fti', 'core') ;
-forge_define_config_item ('use_ftp', 'core', $GLOBALS['sys_use_ftp']) ;
+if (isset ($GLOBALS['sys_use_ftp'])) {
+	forge_define_config_item ('use_ftp', 'core', $GLOBALS['sys_use_ftp']) ;
+} else {
+	forge_define_config_item ('use_ftp', 'core', false) ;
+}
 forge_set_config_item_bool ('use_ftp', 'core') ;
-forge_define_config_item ('use_trove', 'core', $GLOBALS['sys_use_trove']) ;
+if (isset ($GLOBALS['sys_use_trove'])) {
+	forge_define_config_item ('use_trove', 'core', $GLOBALS['sys_use_trove']) ;
+} else {
+	forge_define_config_item ('use_trove', 'core', true) ;
+}
 forge_set_config_item_bool ('use_trove', 'core') ;
-forge_define_config_item ('use_snippet', 'core', $GLOBALS['sys_use_snippet']) ;
+if (isset ($GLOBALS['sys_use_snippet'])) {
+	forge_define_config_item ('use_snippet', 'core', $GLOBALS['sys_use_snippet']) ;
+} else {
+	forge_define_config_item ('use_snippet', 'core', true) ;
+}
 forge_set_config_item_bool ('use_snippet', 'core') ;
-forge_define_config_item ('use_ssl', 'core', $GLOBALS['sys_use_ssl']) ;
+if (isset ($GLOBALS['sys_use_ssl'])) {
+	forge_define_config_item ('use_ssl', 'core', $GLOBALS['sys_use_ssl']) ;
+} else {
+	forge_define_config_item ('use_ssl', 'core', true) ;
+}
 forge_set_config_item_bool ('use_ssl', 'core') ;
-forge_define_config_item ('use_people', 'core', $GLOBALS['sys_use_people']) ;
+if (isset ($GLOBALS['sys_use_people'])) {
+	forge_define_config_item ('use_people', 'core', $GLOBALS['sys_use_people']) ;
+} else {
+	forge_define_config_item ('use_people', 'core', false) ;
+}
 forge_set_config_item_bool ('use_people', 'core') ;
-forge_define_config_item ('use_shell', 'core', $GLOBALS['sys_use_shell']) ;
+if (isset ($GLOBALS['sys_use_shell'])) {
+	forge_define_config_item ('use_shell', 'core', $GLOBALS['sys_use_shell']) ;
+} else {
+	forge_define_config_item ('use_shell', 'core', true) ;
+}
 forge_set_config_item_bool ('use_shell', 'core') ;
-forge_define_config_item ('use_ratings', 'core', $GLOBALS['sys_use_ratings']) ;
+if (isset ($GLOBALS['sys_use_ratings'])) {
+	forge_define_config_item ('use_ratings', 'core', $GLOBALS['sys_use_ratings']) ;
+} else {
+	forge_define_config_item ('use_ratings', 'core', true) ;
+}
 forge_set_config_item_bool ('use_ratings', 'core') ;
-forge_define_config_item ('use_ftp_uploads', 'core', $GLOBALS['sys_use_ftpuploads']) ;
+if (isset ($GLOBALS['sys_use_ftpuploads'])) {
+	forge_define_config_item ('use_ftp_uploads', 'core', $GLOBALS['sys_use_ftpuploads']) ;
+} else {
+	forge_define_config_item ('use_ftp_uploads', 'core', true) ;
+}
 forge_set_config_item_bool ('use_ftp_uploads', 'core') ;
-forge_define_config_item ('ftp_upload_dir', 'core', $GLOBALS['sys_ftp_upload_dir']) ;
-forge_define_config_item ('upload_dir', 'core', $GLOBALS['sys_upload_dir']) ;
+if (isset ($GLOBALS['sys_ftp_upload_dir'])) {
+	forge_define_config_item ('ftp_upload_dir', 'core', $GLOBALS['sys_ftp_upload_dir']) ;
+} else {
+	forge_define_config_item ('ftp_upload_dir', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_upload_dir'])) {
+	forge_define_config_item ('upload_dir', 'core', $GLOBALS['sys_upload_dir']) ;
+} else {
+	forge_define_config_item ('upload_dir', 'core', '') ;
+}
 forge_define_config_item ('use_manual_uploads', 'core', isset ($GLOBALS['sys_use_manual_uploads']) ? $GLOBALS['sys_use_manual_uploads'] : false) ;
 forge_set_config_item_bool ('use_manual_uploads', 'core') ;
-forge_define_config_item ('use_gateways', 'core', $GLOBALS['sys_use_gateways']) ;
+if (isset ($GLOBALS['sys_use_gateways'])) {
+	forge_define_config_item ('use_gateways', 'core', $GLOBALS['sys_use_gateways']) ;
+} else {
+	forge_define_config_item ('use_gateways', 'core', true) ;
+}
 forge_set_config_item_bool ('use_gateways', 'core') ;
-forge_define_config_item ('use_project_vhost', 'core', $GLOBALS['sys_use_project_vhost']) ;
+if (isset ($GLOBALS['sys_use_project_vhost'])) {
+	forge_define_config_item ('use_project_vhost', 'core', $GLOBALS['sys_use_project_vhost']) ;
+} else {
+	forge_define_config_item ('use_project_vhost', 'core', true) ;
+}
 forge_set_config_item_bool ('use_project_vhost', 'core') ;
-forge_define_config_item ('use_project_database', 'core', $GLOBALS['sys_use_project_database']) ;
+if (isset ($GLOBALS['sys_use_project_database'])) {
+	forge_define_config_item ('use_project_database', 'core', $GLOBALS['sys_use_project_database']) ;
+} else {
+	forge_define_config_item ('use_project_database', 'core', false) ;
+}
 forge_set_config_item_bool ('use_project_database', 'core') ;
-forge_define_config_item ('use_project_multimedia', 'core', $GLOBALS['sys_use_project_multimedia']) ;
+if (isset ($GLOBALS['sys_use_project_multimedia'])) {
+	forge_define_config_item ('use_project_multimedia', 'core', $GLOBALS['sys_use_project_multimedia']) ;
+} else {
+	forge_define_config_item ('use_project_multimedia', 'core', false) ;
+}
 forge_set_config_item_bool ('use_project_multimedia', 'core') ;
-forge_define_config_item ('download_host', 'core', $GLOBALS['sys_download_host']) ;
-forge_define_config_item ('shell_host', 'core', $GLOBALS['sys_shell_host']) ;
-forge_define_config_item ('users_host', 'core', $GLOBALS['sys_users_host']) ;
-forge_define_config_item ('lists_host', 'core', $GLOBALS['sys_lists_host']) ;
-forge_define_config_item ('scm_host', 'core', $GLOBALS['sys_scm_host']) ;
-forge_define_config_item ('forum_return_domain', 'core', $GLOBALS['sys_forum_return_domain']) ;
-forge_define_config_item ('use_jabber', 'core', $GLOBALS['sys_use_jabber']) ;
+if (isset ($GLOBALS['sys_download_host'])) {
+	forge_define_config_item ('download_host', 'core', $GLOBALS['sys_download_host']) ;
+} else {
+	forge_define_config_item ('download_host', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_shell_host'])) {
+	forge_define_config_item ('shell_host', 'core', $GLOBALS['sys_shell_host']) ;
+} else {
+	forge_define_config_item ('shell_host', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_users_host'])) {
+	forge_define_config_item ('users_host', 'core', $GLOBALS['sys_users_host']) ;
+} else {
+	forge_define_config_item ('users_host', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_lists_host'])) {
+	forge_define_config_item ('lists_host', 'core', $GLOBALS['sys_lists_host']) ;
+} else {
+	forge_define_config_item ('lists_host', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_scm_host'])) {
+	forge_define_config_item ('scm_host', 'core', $GLOBALS['sys_scm_host']) ;
+} else {
+	forge_define_config_item ('scm_host', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_forum_return_domain'])) {
+	forge_define_config_item ('forum_return_domain', 'core', $GLOBALS['sys_forum_return_domain']) ;
+} else {
+	forge_define_config_item ('forum_return_domain', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_use_jabber'])) {
+	forge_define_config_item ('use_jabber', 'core', $GLOBALS['sys_use_jabber']) ;
+} else {
+	forge_define_config_item ('use_jabber', 'core', false) ;
+}
 forge_set_config_item_bool ('use_jabber', 'core') ;
-forge_define_config_item ('jabber_host', 'core', $GLOBALS['sys_jabber_server']) ;
-forge_define_config_item ('jabber_port', 'core', $GLOBALS['sys_jabber_port']) ;
-forge_define_config_item ('jabber_user', 'core', $GLOBALS['sys_jabber_user']) ;
+if (isset ($GLOBALS['sys_jabber_server'])) {
+	forge_define_config_item ('jabber_host', 'core', $GLOBALS['sys_jabber_server']) ;
+} else {
+	forge_define_config_item ('jabber_host', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_jabber_port'])) {
+	forge_define_config_item ('jabber_port', 'core', $GLOBALS['sys_jabber_port']) ;
+} else {
+	forge_define_config_item ('jabber_port', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_jabber_user'])) {
+	forge_define_config_item ('jabber_user', 'core', $GLOBALS['sys_jabber_user']) ;
+} else {
+	forge_define_config_item ('jabber_user', 'core', '') ;
+}
 forge_define_config_item ('jabber_password', 'core', isset($GLOBALS['sys_jabber_pass']) ? $GLOBALS['sys_jabber_pass'] : '') ;
-forge_define_config_item ('ldap_host', 'core', $GLOBALS['sys_ldap_host']) ;
-forge_define_config_item ('ldap_port', 'core', $GLOBALS['sys_ldap_port']) ;
-forge_define_config_item ('ldap_version', 'core', $GLOBALS['sys_ldap_version']) ;
-forge_define_config_item ('ldap_base_dn', 'core', $GLOBALS['sys_ldap_base_dn']) ;
-forge_define_config_item ('ldap_bind_dn', 'core', $GLOBALS['sys_ldap_bind_dn']) ;
-forge_define_config_item ('ldap_admin_dn', 'core', $GLOBALS['sys_ldap_admin_dn']) ;
+if (isset ($GLOBALS['sys_ldap_host'])) {
+	forge_define_config_item ('ldap_host', 'core', $GLOBALS['sys_ldap_host']) ;
+} else {
+	forge_define_config_item ('ldap_host', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_ldap_port'])) {
+	forge_define_config_item ('ldap_port', 'core', $GLOBALS['sys_ldap_port']) ;
+} else {
+	forge_define_config_item ('ldap_port', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_ldap_version'])) {
+	forge_define_config_item ('ldap_version', 'core', $GLOBALS['sys_ldap_version']) ;
+} else {
+	forge_define_config_item ('ldap_version', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_ldap_base_dn'])) {
+	forge_define_config_item ('ldap_base_dn', 'core', $GLOBALS['sys_ldap_base_dn']) ;
+} else {
+	forge_define_config_item ('ldap_base_dn', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_ldap_bind_dn'])) {
+	forge_define_config_item ('ldap_bind_dn', 'core', $GLOBALS['sys_ldap_bind_dn']) ;
+} else {
+	forge_define_config_item ('ldap_bind_dn', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_ldap_admin_dn'])) {
+	forge_define_config_item ('ldap_admin_dn', 'core', $GLOBALS['sys_ldap_admin_dn']) ;
+} else {
+	forge_define_config_item ('ldap_admin_dn', 'core', '') ;
+}
 forge_define_config_item ('ldap_password', 'core', isset($GLOBALS['sys_ldap_passwd']) ? $GLOBALS['sys_ldap_passwd'] : '') ;
-forge_define_config_item ('news_group', 'core', $GLOBALS['sys_news_group']) ;
-forge_define_config_item ('stats_group', 'core', $GLOBALS['sys_stats_group']) ;
-forge_define_config_item ('peer_rating_group', 'core', $GLOBALS['sys_peer_rating_group']) ;
-forge_define_config_item ('template_group', 'core', $GLOBALS['sys_template_group']) ;
-forge_define_config_item ('sendmail_path', 'core', $GLOBALS['sys_sendmail_path']) ;
-forge_define_config_item ('mailman_path', 'core', $GLOBALS['sys_path_to_mailman']) ;
-forge_define_config_item ('jpgraph_path', 'core', $GLOBALS['sys_path_to_jpgraph']) ;
-forge_define_config_item ('account_manager_type', 'core', $GLOBALS['sys_account_manager_type']) ;
-forge_define_config_item ('unix_cipher', 'core', $GLOBALS['unix_cipher']) ;
-forge_define_config_item ('homedir_prefix', 'core', $GLOBALS['homedir_prefix']) ;
-forge_define_config_item ('groupdir_prefix', 'core', $GLOBALS['groupdir_prefix']) ;
-forge_define_config_item ('url_root', 'core', $GLOBALS['sys_urlroot']) ;
-forge_define_config_item ('url_prefix', 'core', $GLOBALS['sys_urlprefix']) ;
-forge_define_config_item ('images_url', 'core', $GLOBALS['sys_images_url']) ;
-forge_define_config_item ('images_secure_url', 'core', $GLOBALS['sys_images_secure_url']) ;
-forge_define_config_item ('admin_email', 'core', $GLOBALS['sys_admin_email']) ;
-forge_define_config_item ('session_key', 'core', $GLOBALS['sys_session_key']) ;
-forge_define_config_item ('session_expire', 'core', $GLOBALS['sys_session_expire']) ;
-forge_define_config_item ('show_source', 'core', $GLOBALS['sys_show_source']) ;
+if (isset ($GLOBALS['sys_news_group'])) {
+	forge_define_config_item ('news_group', 'core', $GLOBALS['sys_news_group']) ;
+} else {
+	forge_define_config_item ('news_group', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_stats_group'])) {
+	forge_define_config_item ('stats_group', 'core', $GLOBALS['sys_stats_group']) ;
+} else {
+	forge_define_config_item ('stats_group', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_peer_rating_group'])) {
+	forge_define_config_item ('peer_rating_group', 'core', $GLOBALS['sys_peer_rating_group']) ;
+} else {
+	forge_define_config_item ('peer_rating_group', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_template_group'])) {
+	forge_define_config_item ('template_group', 'core', $GLOBALS['sys_template_group']) ;
+} else {
+	forge_define_config_item ('template_group', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_sendmail_path'])) {
+	forge_define_config_item ('sendmail_path', 'core', $GLOBALS['sys_sendmail_path']) ;
+} else {
+	forge_define_config_item ('sendmail_path', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_path_to_mailman'])) {
+	forge_define_config_item ('mailman_path', 'core', $GLOBALS['sys_path_to_mailman']) ;
+} else {
+	forge_define_config_item ('mailman_path', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_path_to_jpgraph'])) {
+	forge_define_config_item ('jpgraph_path', 'core', $GLOBALS['sys_path_to_jpgraph']) ;
+} else {
+	forge_define_config_item ('jpgraph_path', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_account_manager_type'])) {
+	forge_define_config_item ('account_manager_type', 'core', $GLOBALS['sys_account_manager_type']) ;
+} else {
+	forge_define_config_item ('account_manager_type', 'core', '') ;
+}
+if (isset ($GLOBALS['unix_cipher'])) {
+	forge_define_config_item ('unix_cipher', 'core', $GLOBALS['unix_cipher']) ;
+} else {
+	forge_define_config_item ('unix_cipher', 'core', '') ;
+}
+if (isset ($GLOBALS['homedir_prefix'])) {
+	forge_define_config_item ('homedir_prefix', 'core', $GLOBALS['homedir_prefix']) ;
+} else {
+	forge_define_config_item ('homedir_prefix', 'core', '') ;
+}
+if (isset ($GLOBALS['groupdir_prefix'])) {
+	forge_define_config_item ('groupdir_prefix', 'core', $GLOBALS['groupdir_prefix']) ;
+} else {
+	forge_define_config_item ('groupdir_prefix', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_urlroot'])) {
+	forge_define_config_item ('url_root', 'core', $GLOBALS['sys_urlroot']) ;
+} else {
+	forge_define_config_item ('url_root', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_urlprefix'])) {
+	forge_define_config_item ('url_prefix', 'core', $GLOBALS['sys_urlprefix']) ;
+} else {
+	forge_define_config_item ('url_prefix', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_images_url'])) {
+	forge_define_config_item ('images_url', 'core', $GLOBALS['sys_images_url']) ;
+} else {
+	forge_define_config_item ('images_url', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_images_secure_url'])) {
+	forge_define_config_item ('images_secure_url', 'core', $GLOBALS['sys_images_secure_url']) ;
+} else {
+	forge_define_config_item ('images_secure_url', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_admin_email'])) {
+	forge_define_config_item ('admin_email', 'core', $GLOBALS['sys_admin_email']) ;
+} else {
+	forge_define_config_item ('admin_email', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_session_key'])) {
+	forge_define_config_item ('session_key', 'core', $GLOBALS['sys_session_key']) ;
+} else {
+	forge_define_config_item ('session_key', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_session_expire'])) {
+	forge_define_config_item ('session_expire', 'core', $GLOBALS['sys_session_expire']) ;
+} else {
+	forge_define_config_item ('session_expire', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_show_source'])) {
+	forge_define_config_item ('show_source', 'core', $GLOBALS['sys_show_source']) ;
+} else {
+	forge_define_config_item ('show_source', 'core', true) ;
+}
 forge_set_config_item_bool ('show_source', 'core') ;
-forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
-forge_define_config_item ('user_registration_accept_conditions', 'core', $GLOBALS['sys_require_accept_conditions']);
+if (isset ($GLOBALS['default_trove_cat'])) {
+	forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
+} else {
+	forge_define_config_item ('default_trove_cat', 'core', '') ;
+}
+if (isset ($GLOBALS['sys_require_accept_conditions'])) {
+	forge_define_config_item ('user_registration_accept_conditions', 'core', $GLOBALS['sys_require_accept_conditions']);
+} else {
+	forge_define_config_item ('user_registration_accept_conditions', 'core', false);
+}
 forge_set_config_item_bool ('user_registration_accept_conditions', 'core') ;
 
 // Arch plugin
