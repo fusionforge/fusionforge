@@ -4,12 +4,59 @@
 ##############################
 # Global Variables
 ##############################
-$config_file	=	"/etc/gforge/local.pl";	# Local Include file for database username and password
-
 $dummy_uid      =       getpwnam('scm-gforge');                  # UserID of the dummy user that will own group's files
 $date           =       int(time()/3600/24);    # Get the number of days since 1/1/1970 for /etc/shadow
 
-require $config_file;
+@possible_paths = (
+    '/usr/share/gforge/bin',
+    '/usr/share/fusionforge/bin',
+    '/usr/local/share/gforge/bin',
+    '/usr/local/share/fusionforge/bin',
+    '/opt/gforge/bin',
+    '/opt/fusionforge/bin',
+    '/usr/bin',
+    '/usr/local/bin') ;
+foreach $p (@possible_paths) {
+    if (-x "$p/forge_get_config") {
+	$fgc = "$p/forge_get_config";
+	last;
+    }
+}
+
+%forge_config_cache = ();
+
+sub forge_get_config ($$) {
+    my $var = shift;
+    my $sec = shift || 'core';
+
+    if (!defined $forge_config_cache{$sec}{$var}) {
+	$forge_config_cache{$sec}{$var} = qx!$fgc $var $sec!;
+	chomp $forge_config_cache{$sec}{$var};
+    }
+    return $forge_config_cache{$sec}{$var};
+}
+
+$sys_default_domain = &forge_get_config ('web_host') ;
+$sys_scm_host = &forge_get_config ('web_host') ;
+$domain_name = &forge_get_config ('web_host') ;
+$sys_users_host = &forge_get_config ('users_host') ;
+$sys_lists_host = &forge_get_config ('lists_host') ;
+$sys_name = &forge_get_config ('forge_name') ;
+$sys_themeroot = &forge_get_config ('themes_root') ;
+$sys_news_group = &forge_get_config ('news_group') ;
+$sys_dbhost = &forge_get_config ('database_host') ;
+$sys_dbport = &forge_get_config ('database_port') ;
+$sys_dbname = &forge_get_config ('database_name') ;
+$sys_dbuser = &forge_get_config ('database_user') ;
+$sys_dbpasswd = &forge_get_config ('database_password') ;
+$sys_ldap_base_dn = &forge_get_config ('ldap_base_dn') ;
+$sys_ldap_host = &forge_get_config ('ldap_host') ;
+$server_admin = &forge_get_config ('admin_email') ;
+$peerrating_groupid = &forge_get_config ('peer_rating_group') ;
+$chroot_prefix = &forge_get_config ('chroot') ;
+$homedir_prefix = &forge_get_config ('homedir_prefix') ;
+$grpdir_prefix = &forge_get_config ('groupdir_prefix') ;
+$file_dir = &forge_get_config ('data_path') ;
 
 ##############################
 # Database Connect Functions

@@ -74,8 +74,6 @@ eval {
     if (is_lesser $version, $target) {
 	debug "Adding local data." ;
 	
-	do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
-	
 	my $ip_address = qx/host $domain_name | awk '{print \}'/ ;
 	
 	@reqlist = (

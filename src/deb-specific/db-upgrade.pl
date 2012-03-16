@@ -23,7 +23,6 @@ use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
     $server_admin $domain_name $newsadmin_groupid $statsadmin_groupid
     $libdir $sqldir/ ;
 
-require ("/etc/gforge/local.pl") ; 
 $libdir="/usr/share/gforge/lib";
 $sqldir="/usr/share/gforge/db";
 require ("$libdir/sqlparser.pm") ; # Our magic SQL parser
@@ -115,8 +114,6 @@ eval {
 	  $target = "2.5.9999.2+local+data+done" ;
 	  if (&is_lesser ($version, $target)) {
 	      &debug ("Adding local data.") ;
-
-	      do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
 
 	      my ($login, $md5pwd, $unixpwd, $email, $noreplymail, $date) ;
 

@@ -77,8 +77,6 @@ eval {
     if (is_lesser $version, $target) {
     debug "Adding local data." ;
         
-    do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
-
     my $packed_ip = gethostbyname("$domain_name");
     my $ip_address ;
     if (defined $packed_ip) {

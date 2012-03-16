@@ -14,7 +14,6 @@ use vars qw// ;
 
 sub debug ( $ ) ;
 
-require ("/etc/gforge/local.pl") ;
 require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
 
 &db_connect ;
