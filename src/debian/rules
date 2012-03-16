@@ -173,7 +173,7 @@ clean: remove-binary-files
 	rm -f $(CURDIR)/debian/README.Debian
 	rm -rf locales
 
-	rm -f $(POFILES)
+	rm -f $(POFILES) $(PPOSTINST) $(PPRERM)
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 
