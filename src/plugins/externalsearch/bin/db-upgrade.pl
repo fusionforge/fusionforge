@@ -74,8 +74,6 @@ eval {
     if (is_lesser $version, $target) {
 	debug "Adding local data." ;
 	
-	chomp($domain_name=`/usr/share/gforge/bin/forge_get_config web_host`);
-	
 	my $ip_address = qx/host $domain_name | awk '{print \}'/ ;
 	
 	@reqlist = (
