@@ -83,7 +83,7 @@ if (!session_loggedin()) {
 			//  get the Project object
 			//
 			$atf = new ArtifactTypeFactory($p);
-			$at_arr =& $atf->getArtifactTypes();
+			$at_arr = $atf->getArtifactTypes();
 
 			$art_found = 0;
 
