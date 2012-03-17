@@ -200,7 +200,7 @@ To stop monitoring this user, visit the following link:
 	<p />';
 
 	echo $HTML->boxTop(_('Existing Diary And Note Entries'));
-
+	echo '</p><table class="fullwidth">';
 	$result=db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 ORDER BY id DESC',
 			array(user_getid() ));
 	$rows=db_numrows($result);
@@ -209,18 +209,18 @@ To stop monitoring this user, visit the following link:
 			<strong>'._('You Have No Diary Entries').'</strong>';
 		echo db_error();
 	} else {
-		echo '&nbsp;</td></tr>';
 		for ($i=0; $i<$rows; $i++) {
 			$date   = relative_date(db_result($result,$i,'date_posted'));
+			$public = db_result($result,$i,'is_public')? '(public)':'(private)';
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. getStringFromServer('PHP_SELF') .'?diary_id='.
 				db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a></td>'.
-				'<td>'. $date.'</td></tr>';
+				'<td>'. $date .'</td>'.
+				'<td>'. $public .'</td>'.
+			'</tr>';
 		}
-		echo '
-		<tr><td colspan="2" class="tablecontent">';
 	}
-
+	echo '</table>';
 	echo $HTML->boxBottom();
 
 	site_user_footer(array());
