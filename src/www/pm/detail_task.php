@@ -24,9 +24,9 @@
  */
 
 if (getStringFromRequest('commentsort') == 'anti') {
-       $sort_comments_chronologically = false;
+	$sort_comments_chronologically = false;
 } else {
-       $sort_comments_chronologically = true;
+	$sort_comments_chronologically = true;
 }
 
 pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id));

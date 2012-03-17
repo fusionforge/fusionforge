@@ -29,9 +29,9 @@ require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 
 if (getStringFromRequest('commentsort') == 'anti') {
-       $sort_comments_chronologically = false;
+	$sort_comments_chronologically = false;
 } else {
-       $sort_comments_chronologically = true;
+	$sort_comments_chronologically = true;
 }
 
 pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));

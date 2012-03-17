@@ -58,8 +58,8 @@ if (!$ah || !is_object($ah)) {
 	} else if ($afh->isError()) {
 		exit_error($afh->getErrorMessage(),'tracker');
 	} else {
-		Header ('Content-disposition: filename="'.str_replace('"', '', $afh->getName()).'"');
-		Header ("Content-type: ".$afh->getType());
+		Header('Content-disposition: filename="'.str_replace('"', '', $afh->getName()).'"');
+		Header("Content-type: ".$afh->getType());
 		echo $afh->getData();
 	}
 }
