@@ -282,7 +282,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 		$cell_data[] = array(_('Type'));
 		$cell_data[] = array(_('Start Date'));
 		$cell_data[] = array(_('End Date'));
-		echo "<table border=0 >".
+		echo "<table>".
 
 				$HTML->multiTableRow('',$cell_data,TRUE);
 
@@ -294,7 +294,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 						html_build_select_box_from_arrays($yearArray,$yearArray, "endY", 0, false, "")."</td>
 </tr>
 </table>
-<table border=0 >";
+<table>";
 
 				$cell_data = array();
 				$cell_data[] = array(_('Title (max 100 characters)'));
@@ -318,7 +318,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 
 
 		echo '<h2>'._('Edit/Delete Your Skills').'</h2>
-		<table border="0" width="100%">';
+		<table class="fullwidth">';
 		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 		displayUserSkills(user_getid(), 1);
 		echo '</form>';

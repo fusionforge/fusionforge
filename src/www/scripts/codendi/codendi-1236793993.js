@@ -8141,7 +8141,7 @@ codendi.layout_manager = {
         this.loadColRemove(rm);
     },
     addRow: function(row) {
-        var new_row = '<table class="layout-manager-row" cellspacing="5" cellpadding="2" border="0"><tr><td>+</td></tr></table>';
+        var new_row = '<table class="layout-manager-row" cellspacing="5" cellpadding="2"><tr><td>+</td></tr></table>';
         row.insert({after: new_row});
 
         var new_col = row.next().down('td');

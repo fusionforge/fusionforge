@@ -78,7 +78,9 @@ if (!$group_id) {
 }
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_permission_denied('home');
+	exit_no_group();
+} elseif ($group->isError()) {
+	exit_error($group->getErrorMessage(), 'home');
 }
 
 site_project_header(array('title'=>_('Activity'), 'group'=>$group_id, 'toptab'=>'activity'));

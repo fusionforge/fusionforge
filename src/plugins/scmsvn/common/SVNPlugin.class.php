@@ -228,7 +228,7 @@ class SVNPlugin extends SCMPlugin {
 	function printBrowserPage($params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
 
 		if ($project->usesPlugin($this->name)) {
@@ -387,7 +387,7 @@ class SVNPlugin extends SCMPlugin {
 			$d2 = date('Y-m-d', $end_time + 150000);
 
 			$pipe = popen ("svn log file://$repo --xml -v -q -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' ) ;
- 
+
 			// cleaning stats_cvs_* table for the current day
 			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
 						array($month_string,
@@ -412,7 +412,7 @@ class SVNPlugin extends SCMPlugin {
 			$xml_parser = xml_parser_create();
 			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
 			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
- 
+
 			// Analyzing history stream
 			while (!feof($pipe) &&
 				$data = fgets ($pipe, 4096)) {
@@ -446,7 +446,7 @@ class SVNPlugin extends SCMPlugin {
 
 			// building the user list
 			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
- 
+
 			foreach ( $user_list as $user ) {
 				// trying to get user id from user name
 				$u = &user_get_object_by_name ($user) ;
