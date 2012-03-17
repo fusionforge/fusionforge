@@ -169,7 +169,7 @@ if (session_loggedin()) {
 */
 					?>
 
-<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+<script type="text/javascript">/* <![CDATA[ */
 function show_add_snippet_box() {
 	newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
 	newWindow.location=('/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php
