@@ -59,7 +59,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$result = $this->searchQuery->getResult();
 		$dateFormat = _('Y-m-d H:i');
 
 		$return = '';
