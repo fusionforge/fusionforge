@@ -44,10 +44,10 @@ $HTML->header(array('title'=>sprintf(_('%1$s Sitewide Statistics Graphs'), forge
 
 <hr />
 
-<p style="text-align: center;">
+<p class="align-center">
 <img src="views_graph.php?monthly=1" alt="" />
 </p>
-<p style="text-align: center;">
+<p class="align-center">
 <img src="users_graph.php" alt="" />
 </p>
 

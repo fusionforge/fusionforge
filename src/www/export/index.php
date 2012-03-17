@@ -72,7 +72,7 @@ RSS/XML Exports
 <!-- Disabled Until Security Audited and Using Proper Accessor Functions
 <h4>Project Information</h4>
 <p>
-All links below require <tt>?group_id=</tt> parameter with id of specific
+All links below require <span class="tt">?group_id=</span> parameter with id of specific
 group. Exports which provide en masse access to data which otherwise
 project property, require project admin privilege.
 </p>
