@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,6 +24,13 @@
  */
 
 use_javascript('/tabber/tabber.js');
+
+global $ath;
+global $ah;
+global $group_id;
+global $group;
+global $aid;
+global $atid;
 
 if (getStringFromRequest('commentsort') == 'anti') {
        $sort_comments_chronologically = false;

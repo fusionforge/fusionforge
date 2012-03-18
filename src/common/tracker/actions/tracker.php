@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,28 +23,15 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $group;
+global $atid;
 
 html_use_tooltips();
 
 //
-//	get the Group object
-//
-$group =& group_get_object($group_id);
-if (!$group || !is_object($group)) {
-	exit_no_group();
-}
-if ($group->isError()) {
-	if($group->isPermissionDeniedError()) {
-		exit_permission_denied($group->getErrorMessage(),'tracker');
-	} else {
-		exit_error($group->getErrorMessage(),'tracker');
-	}
-}
-
-//
 //	Create the ArtifactType object
 //
-$ath = new ArtifactTypeHtml($group,$atid);
+$ath = new ArtifactTypeHtml($group, $atid);
 
 if (!$ath || !is_object($ath)) {
 	exit_error(_('ArtifactType could not be created'),'tracker');

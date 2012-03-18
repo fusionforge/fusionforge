@@ -25,6 +25,13 @@
 
 use_javascript('/tabber/tabber.js');
 
+global $ath;
+global $ah;
+global $group_id;
+global $group;
+global $aid;
+global $atid;
+
 if (getStringFromRequest('commentsort') == 'anti') {
        $sort_comments_chronologically = false;
 } else {

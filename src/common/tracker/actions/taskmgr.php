@@ -4,6 +4,7 @@
  *
  * Copyright 2003 GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,11 +26,16 @@
 require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 
+global $group;
+global $ath;
+global $group_id;
+
 $group_project_id = getIntFromRequest('group_project_id');
 $project_task_id = getIntFromRequest('project_task_id');
 $aid = getIntFromRequest('aid');
 
-$a=new Artifact($ath,$aid);
+$a = new Artifact($ath, $aid);
+
 if (!$a || !is_object($a)) {
 	exit_error(_('Artifact Could Not Be Created'),'tracker');
 }
@@ -124,14 +130,14 @@ if (getStringFromRequest('add_to_task')) {
 //
 } elseif (getStringFromRequest('new_task')) {
 
-	session_redirect ('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=addtask&related_artifact_summary='. urlencode($a->getSummary()) .'&related_artifact_id='. $a->getID());
+	session_redirect('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=addtask&related_artifact_summary='. urlencode($a->getSummary()) .'&related_artifact_id='. $a->getID());
 
 //
 //	Show the list of ProjectGroups available
 //
 } else {
 
-	$pgf=new ProjectGroupFactory($group);
+	$pgf = new ProjectGroupFactory($group);
 	if (!$pgf || !is_object($pgf)) {
 		exit_error(_('Could Not Get Factory'),'tracker');
 	} elseif ($pgf->isError()) {

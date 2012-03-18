@@ -4,6 +4,7 @@
  *
  * Copyright 2002 GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -21,6 +22,12 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+global $ath;
+global $ah;
+global $group_id;
+global $aid;
+global $atid;
 
 $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
 

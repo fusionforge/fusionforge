@@ -4,6 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,8 +23,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $group;
+global $HTML;
+
 $atf = new ArtifactTypeFactoryHtml($group);
-if (!$group || !is_object($group) || $group->isError()) {
+if (!$atf || !is_object($atf) || $atf->isError()) {
 	exit_error(_('Could Not Get ArtifactTypeFactory'),'tracker');
 }
 

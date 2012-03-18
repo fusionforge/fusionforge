@@ -20,6 +20,8 @@
 
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 
+global $ath;
+
 $headers = getIntFromRequest('headers');
 $sep = getStringFromRequest('sep', ',');
 

@@ -3,6 +3,7 @@
  * Copyright 2005 (c) GForge Group, LLC; Anthony J. Pugliese,
  * Copyright 2010 (c) Fusionforge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,6 +23,12 @@
  */
 
 require_once $gfcommon.'tracker/ArtifactQuery.class.php';
+
+global $ath;
+global $feedback;
+global $error_msg;
+global $group_id;
+global $atid;
 
 if (!session_loggedin()) {
 	exit_not_logged_in();

@@ -3,6 +3,7 @@
  * Tracker Links
  *
  * Copyright 2010, FusionForge Team
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -20,6 +21,9 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+global $group_id;
+global $ath;
 
 //
 //  SHOW LINKS TO FUNCTIONS

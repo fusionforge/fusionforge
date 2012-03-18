@@ -1,6 +1,7 @@
 <?php
-/*
+/**
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -18,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The provided file ("Contribution") has not been tested and/or
@@ -44,6 +45,10 @@
 //	This page contains a form with a file-upload button
 //	so a user can choose a file to upload a .csv file and store it in task mgr
 //
+
+
+global $ath;
+global $group_id;
 
 
 //pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));

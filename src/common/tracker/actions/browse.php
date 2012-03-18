@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -24,6 +25,11 @@
 
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactQuery.class.php';
+
+global $ath;
+global $group_id;
+global $group;
+
 //
 //  make sure this person has permission to view artifacts
 //
