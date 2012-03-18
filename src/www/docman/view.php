@@ -77,12 +77,9 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 	 * theses links may redirect to the same document with another
 	 * name, this way a search engine may loop and stress the
 	 * server.
-	 *
-	 * A workaround is to serve only the document if the given
-	 * name is correct.
 	 */
 	if ($d->getFileName() != $docname) {
-		exit_error(_('No document to display - invalid or inactive document number'), 'docman');
+		session_redirect('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($d->getFileName()));
 	}
 
 	header('Content-disposition: attachment; filename="'.str_replace('"', '', $d->getFileName()) . '"');
