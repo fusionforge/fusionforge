@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2011, Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -20,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The Roadmap ("Contribution") has not been tested and/or
@@ -152,7 +153,6 @@ function color_gradient($colors, $nb_colors) {
 html_use_jquery();
 
 if (!forge_get_config('use_tracker')) {
-	$atfh->header(array('title' => _('Roadmap'), 'modal' => 1));
 	exit_disabled('home');
 }
 
