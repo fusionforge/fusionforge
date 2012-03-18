@@ -2,7 +2,8 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
  * This file is a part of FusionForge.
  *
@@ -47,7 +48,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 			$html_my_projects .= '<div class="warning">'. _("You're not a member of any project") .'</div>';
 		} else {
 			sortProjectList($groups);
-			$request =& HTTPRequest::instance();
+			$request = HTTPRequest::instance();
 			$vItemId = new Valid_UInt('hide_item_id');
 			$vItemId->required();
 			if($request->valid($vItemId)) {

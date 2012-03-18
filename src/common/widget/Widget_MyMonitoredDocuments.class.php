@@ -2,7 +2,8 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
  * This file is a part of FusionForge.
  *
@@ -46,18 +47,18 @@ class Widget_MyMonitoredDocuments extends Widget {
 		} else {
 			$request =& HTTPRequest::instance();
 			$html_my_monitored_documents .= '<table style="width:100%">';
+			$vItemId = new Valid_UInt('hide_item_id');
+			$vItemId->required();
+			if($request->valid($vItemId)) {
+				$hide_item_id = $request->get('hide_item_id');
+			} else {
+				$hide_item_id = null;
+			}
 			for ($j=0; $j<$rows; $j++) {
 				$group_id = db_result($result,$j,'group_id');
 				$sql2 = "select docdata_vw.docid, docdata_vw.doc_group, docdata_vw.filename, docdata_vw.filetype, docdata_vw.description from docdata_vw,docdata_monitored_docman where docdata_vw.docid = docdata_monitored_docman.doc_id and docdata_vw.group_id = $1 and docdata_monitored_docman.user_id = $2 limit 100";
 				$result2 = db_query_params($sql2,array($group_id,user_getid()));
 				$rows2 = db_numrows($result2);
-				$vItemId = new Valid_UInt('hide_item_id');
-				$vItemId->required();
-				if($request->valid($vItemId)) {
-					$hide_item_id = $request->get('hide_item_id');
-				} else {
-					$hide_item_id = null;
-				}
 
 				$vDocument = new Valid_WhiteList('hide_document', array(0, 1));
 				$vDocument->required();
@@ -112,19 +113,6 @@ class Widget_MyMonitoredDocuments extends Widget {
 
 	function getDescription() {
 		return _("List documents that you are currently monitoring, by project.<br />To cancel any of the monitored items just click on the trash icon next to the item label.");
-	}
-
-	function isAjax() {
-		return true;
-	}
-
-	function getAjaxUrl($owner_id, $owner_type) {
-		$request =& HTTPRequest::instance();
-		$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
-		if ($request->exist('hide_item_id') || $request->exist('hide_document')) {
-			$ajax_url .= '&amp;hide_item_id=' . $request->get('hide_item_id') . '&amp;hide_document=' . $request->get('hide_document');
-		}
-		return $ajax_url;
 	}
 }
 ?>
