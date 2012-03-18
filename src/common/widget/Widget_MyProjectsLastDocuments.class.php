@@ -48,17 +48,17 @@ class Widget_MyProjectsLastDocuments extends Widget {
 		} else {
 			sortProjectList($groups);
 			$request =& HTTPRequest::instance();
+			$vItemId = new Valid_UInt('hide_item_id');
+			$vItemId->required();
+			if($request->valid($vItemId)) {
+				$hide_item_id = $request->get('hide_item_id');
+			} else {
+				$hide_item_id = null;
+			}
 			$html_my_projects .= '<table style="width:100%">';
 			$i = 0;
 			foreach ($groups as $g) {
 				$i++;
-				$vItemId = new Valid_UInt('hide_item_id');
-				$vItemId->required();
-				if($request->valid($vItemId)) {
-					$hide_item_id = $request->get('hide_item_id');
-				} else {
-					$hide_item_id = null;
-				}
 
 				$vWhiteList = new Valid_WhiteList('hide_docmanproject', array(0, 1));
 				$vWhiteList->required();
