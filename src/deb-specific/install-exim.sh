@@ -14,8 +14,8 @@ case "$1" in
     configure-files)
 	cp -a /etc/aliases /etc/aliases.gforge-new
 	# Redirect "noreply" mail to the bit bucket (if need be)
-	noreply_to_bitbucket=$(perl -e'require "/etc/gforge/local.pl"; print "$noreply_to_bitbucket\n";')
-	if [ "$noreply_to_bitbucket" = "true" ] ; then
+	noreply_to_bitbucket=$(/usr/share/gforge/bin/forge_get_config noreply_to_bitbucket)
+	if [ "$noreply_to_bitbucket" != "no" ] ; then
 	    if ! grep -q "^noreply:" /etc/aliases.gforge-new ; then
 		echo "### Next line inserted by GForge install" >> /etc/aliases.gforge-new
 		echo "noreply: /dev/null" >> /etc/aliases.gforge-new
@@ -23,7 +23,7 @@ case "$1" in
 	fi
 
 	# Redirect "gforge" mail to the site admin
-	server_admin=$(perl -e'require "/etc/gforge/local.pl"; print "$server_admin\n";')
+	server_admin=$(/usr/share/gforge/bin/forge_get_config admin_email)
 	if ! grep -q "^gforge:" /etc/aliases.gforge-new ; then
 	    echo "### Next line inserted by GForge install" >> /etc/aliases.gforge-new
 	    echo "gforge: $server_admin" >> /etc/aliases.gforge-new
@@ -35,7 +35,7 @@ case "$1" in
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, get the list of local domains right
 	perl -e '
-require ("/etc/gforge/local.pl") ;
+require ("/usr/share/gforge/lib/include.pl") ;
 $seen_sf_domains = 0 ;
 while (($l = <>) !~ /^\s*local_domains/) {
   print $l;
@@ -51,7 +51,7 @@ while ($l = <>) { print $l; };
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, insinuate our forwarding rules in the directors section
 	perl -e '
-require ("/etc/gforge/local.pl") ;
+require ("/usr/share/gforge/lib/include.pl") ;
 
 $sf_block = "# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #
 # You may move this block around to accomodate your local needs as long as you
@@ -210,8 +210,8 @@ while ($l = <>) { print $l; };
 	tmp1=$(mktemp /tmp/$pattern)
 	cp -a /etc/aliases /etc/aliases.gforge-new
 	# Redirect "noreply" mail to the bit bucket (if need be)
-	noreply_to_bitbucket=$(perl -e'require "/etc/gforge/local.pl"; print "$noreply_to_bitbucket\n";')
-	if [ "$noreply_to_bitbucket" = "true" ] ; then
+	noreply_to_bitbucket=$(/usr/share/gforge/bin/forge_get_config noreply_to_bitbucket)
+	if [ "$noreply_to_bitbucket" != "no" ] ; then
 	    grep -v "^noreply:" /etc/aliases.gforge-new > $tmp1
 	    cat $tmp1 > /etc/aliases.gforge-new
 	fi
