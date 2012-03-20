@@ -78,17 +78,17 @@ if (isset ($GLOBALS['sys_theme'])) {
 if (isset ($GLOBALS['sys_lang'])) {
 	forge_define_config_item ('default_language', 'core', $GLOBALS['sys_lang']) ;
 } else {
-	forge_define_config_item ('default_language', 'core', '') ;
+	forge_define_config_item ('default_language', 'core', 'en') ;
 }
 if (isset ($GLOBALS['sys_default_timezone'])) {
 	forge_define_config_item ('default_timezone', 'core', $GLOBALS['sys_default_timezone']) ;
 } else {
-	forge_define_config_item ('default_timezone', 'core', '') ;
+	forge_define_config_item ('default_timezone', 'core', 'UTC') ;
 }
 if (isset ($GLOBALS['sys_default_country_code'])) {
 	forge_define_config_item ('default_country_code', 'core', $GLOBALS['sys_default_country_code']) ;
 } else {
-	forge_define_config_item ('default_country_code', 'core', '') ;
+	forge_define_config_item ('default_country_code', 'core', 'US') ;
 }
 if (isset ($GLOBALS['sys_use_scm'])) {
 	forge_define_config_item ('use_scm', 'core', $GLOBALS['sys_use_scm']) ;
@@ -323,7 +323,7 @@ if (isset ($GLOBALS['sys_ldap_port'])) {
 if (isset ($GLOBALS['sys_ldap_version'])) {
 	forge_define_config_item ('ldap_version', 'core', $GLOBALS['sys_ldap_version']) ;
 } else {
-	forge_define_config_item ('ldap_version', 'core', '') ;
+	forge_define_config_item ('ldap_version', 'core', 3) ;
 }
 if (isset ($GLOBALS['sys_ldap_base_dn'])) {
 	forge_define_config_item ('ldap_base_dn', 'core', $GLOBALS['sys_ldap_base_dn']) ;
@@ -344,27 +344,27 @@ forge_define_config_item ('ldap_password', 'core', isset($GLOBALS['sys_ldap_pass
 if (isset ($GLOBALS['sys_news_group'])) {
 	forge_define_config_item ('news_group', 'core', $GLOBALS['sys_news_group']) ;
 } else {
-	forge_define_config_item ('news_group', 'core', '') ;
+	forge_define_config_item ('news_group', 'core', 2) ;
 }
 if (isset ($GLOBALS['sys_stats_group'])) {
 	forge_define_config_item ('stats_group', 'core', $GLOBALS['sys_stats_group']) ;
 } else {
-	forge_define_config_item ('stats_group', 'core', '') ;
+	forge_define_config_item ('stats_group', 'core', 3) ;
 }
 if (isset ($GLOBALS['sys_peer_rating_group'])) {
 	forge_define_config_item ('peer_rating_group', 'core', $GLOBALS['sys_peer_rating_group']) ;
 } else {
-	forge_define_config_item ('peer_rating_group', 'core', '') ;
+	forge_define_config_item ('peer_rating_group', 'core', 4) ;
 }
 if (isset ($GLOBALS['sys_template_group'])) {
 	forge_define_config_item ('template_group', 'core', $GLOBALS['sys_template_group']) ;
 } else {
-	forge_define_config_item ('template_group', 'core', '') ;
+	forge_define_config_item ('template_group', 'core', 5) ;
 }
 if (isset ($GLOBALS['sys_sendmail_path'])) {
 	forge_define_config_item ('sendmail_path', 'core', $GLOBALS['sys_sendmail_path']) ;
 } else {
-	forge_define_config_item ('sendmail_path', 'core', '') ;
+	forge_define_config_item ('sendmail_path', 'core', '/usr/sbin/sendmail') ;
 }
 if (isset ($GLOBALS['sys_path_to_mailman'])) {
 	forge_define_config_item ('mailman_path', 'core', $GLOBALS['sys_path_to_mailman']) ;
@@ -429,7 +429,7 @@ if (isset ($GLOBALS['sys_session_key'])) {
 if (isset ($GLOBALS['sys_session_expire'])) {
 	forge_define_config_item ('session_expire', 'core', $GLOBALS['sys_session_expire']) ;
 } else {
-	forge_define_config_item ('session_expire', 'core', '') ;
+	forge_define_config_item ('session_expire', 'core', 0) ;
 }
 if (isset ($GLOBALS['sys_show_source'])) {
 	forge_define_config_item ('show_source', 'core', $GLOBALS['sys_show_source']) ;
@@ -440,7 +440,7 @@ forge_set_config_item_bool ('show_source', 'core') ;
 if (isset ($GLOBALS['default_trove_cat'])) {
 	forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
 } else {
-	forge_define_config_item ('default_trove_cat', 'core', '') ;
+	forge_define_config_item ('default_trove_cat', 'core', 18) ;
 }
 if (isset ($GLOBALS['sys_require_accept_conditions'])) {
 	forge_define_config_item ('user_registration_accept_conditions', 'core', $GLOBALS['sys_require_accept_conditions']);
