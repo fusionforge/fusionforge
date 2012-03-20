@@ -73,7 +73,6 @@ form { margin: 0; }
 .vc_log {
   /* unfortunately, white-space: pre-wrap isn't widely supported ... */
   white-space: -moz-pre-wrap; /* Mozilla based browsers */
-  white-space: -pre-wrap;     /* Opera 4 - 6 */
   white-space: -o-pre-wrap;   /* Opera >= 7 */
   white-space: pre-wrap;      /* CSS3 */
   word-wrap: break-word;      /* IE 5.5+ */
@@ -185,7 +184,6 @@ table.vc_idiff tbody {
   font-family: monospace; 
   /* unfortunately, white-space: pre-wrap isn't widely supported ... */
   white-space: -moz-pre-wrap; /* Mozilla based browsers */
-  white-space: -pre-wrap;     /* Opera 4 - 6 */
   white-space: -o-pre-wrap;   /* Opera >= 7 */
   white-space: pre-wrap;      /* CSS3 */
   word-wrap: break-word;      /* IE 5.5+ */
