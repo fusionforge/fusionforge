@@ -1,3 +1,9 @@
+fusionforge (5.1.1-5) UNRELEASED; urgency=low
+
+  * 
+
+ -- Roland Mas <lolando@debian.org>  Tue, 20 Mar 2012 17:17:28 +0100
+
 fusionforge (5.1.1-4) unstable; urgency=low
 
   * Removed one more call to fusionforge-config.
