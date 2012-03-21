@@ -7066,7 +7066,7 @@ class SimplePie_Enclosure
 			}
 			else
 			{
-				$embed .= '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */' .
+				$embed .= '<script type="text/javascript">/* <![CDATA[ */' .
 				    "embed_flash('$bgcolor', '$width', '$height', '" . $this->get_link() . "', '$loop', '$type');/* ]]> */</script>";
 			}
 		}
@@ -7082,7 +7082,7 @@ class SimplePie_Enclosure
 			}
 			else
 			{
-				$embed .= '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */' .
+				$embed .= '<script type="text/javascript">/* <![CDATA[ */' .
 				    "embed_flv('$width', '$height', '" . rawurlencode($this->get_link().'?file_extension=.'.$this->get_extension()) . "', '$placeholder', '$loop', '$mediaplayer');/* ]]> */</script>";
 			}
 		}
@@ -7103,7 +7103,7 @@ class SimplePie_Enclosure
 			}
 			else
 			{
-				$embed .= '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */' .
+				$embed .= '<script type="text/javascript">/* <![CDATA[ */' .
 				    "embed_quicktime('$type', '$bgcolor', '$width', '$height', '" . $this->get_link() . "', '$placeholder', '$loop');/* ]]> */</script>";
 			}
 		}
@@ -7118,7 +7118,7 @@ class SimplePie_Enclosure
 			}
 			else
 			{
-				$embed .= '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */' .
+				$embed .= '<script type="text/javascript">/* <![CDATA[ */' .
 				    "embed_wmedia('$width', '$height', '" . $this->get_link() . "');/* ]]> */</script>";
 			}
 		}
