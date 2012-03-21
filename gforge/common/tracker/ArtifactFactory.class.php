@@ -400,7 +400,7 @@ class ArtifactFactory extends Error {
 		}
 		//add constraint on the followups string.
 		if ($this->followups) {
-			$wheresql .= 'LEFT OUTER JOIN artifact_message am USING (artifact_id)
+			$wheresql .= ' LEFT OUTER JOIN artifact_message am USING (artifact_id)
 						WHERE am.body LIKE $'.$paramcount++;
 			$params[] = $this->followups;
 		}
