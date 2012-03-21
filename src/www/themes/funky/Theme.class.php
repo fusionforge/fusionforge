@@ -237,7 +237,7 @@ class Theme extends Layout {
 
 		if ($use_tooltips) {
 			?>
-			<script language="JavaScript" type="text/javascript">//<![CDATA[
+			<script type="text/javascript">//<![CDATA[
 				if (typeof(jQuery(window).tipsy) == 'function') {
 					jQuery(document).ready(
 						function() {
@@ -426,7 +426,7 @@ class Theme extends Layout {
 		plugin_hook("javascript", $params);
 		$javascript = $params['return'];
 		if($javascript) {
-			echo '<script language="JavaScript" type="text/javascript">//<![CDATA['."\n";
+			echo '<script type="text/javascript">//<![CDATA['."\n";
 			echo $javascript;
 			echo "\n//]]></script>\n";
 		}
@@ -438,7 +438,7 @@ class Theme extends Layout {
 		echo $this->getJavascripts();
 		echo $this->getStylesheets();
 		?>
-		<script language="JavaScript" type="text/javascript">//<![CDATA[
+		<script type="text/javascript">//<![CDATA[
 		jQuery.noConflict();
 		jQuery(window).load(function(){
 			jQuery(".quicknews").hide();
