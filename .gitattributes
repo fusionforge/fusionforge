@@ -590,6 +590,7 @@ src/db/20110728-fix-mta-lists-view.sql -text
 src/db/20111007-add-fti-for-task-messages.sql -text
 src/db/20111007-fti-aggregate-functions.sql -text
 src/db/20111009-string-aggregate-function.sql -text
+src/db/20120321-add-news-in-activity_vw.sql -text
 src/db/FTI-20061025.sql -text
 src/db/SQL_2.6/replicate.sh svneol=native#text/x-sh
 src/db/gforge-data-mysql.sql -text
