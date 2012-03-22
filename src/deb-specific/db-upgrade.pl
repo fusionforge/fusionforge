@@ -2056,6 +2056,7 @@ sub get_db_version () {
 sub update_with_sql ( $$ ) {
     my $sqlfile = shift or die "Not enough arguments" ;
     my $target = shift or die "Not enough arguments" ;
+    $sqlfile =~ s/\.sql$//;
     my $version = &get_db_version ;
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading database with $sqlfile.sql") ;
