@@ -113,7 +113,7 @@ function setDates($result,$column) {
 	if(isset($this->span) && $this->span == REPORT_TYPE_MONTHLY) {
 		$format = 'M Y';
 	} else {
-	    $format = 'M d';
+		$format = 'M d';
 	}
 
 	for ($i=0; $i<count($arr); $i++) {

@@ -7053,7 +7053,7 @@ class SimplePie_Enclosure
 			}
 			else
 			{
-				$embed .= '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */embed_odeo("' . $this->get_link() . '");/* ]]> */</script>';
+				$embed .= '<script type="text/javascript">/* <![CDATA[ */embed_odeo("' . $this->get_link() . '");/* ]]> */</script>';
 			}
 		}
 

@@ -80,7 +80,7 @@ if (!$has_error) {
 		$value = in_array($s['element_id'], $next)? ' checked="checked"' : '';
 		$str = '<input type="checkbox" name="'.$name.'"'.$value.' />';
 		$str .= ' '.html_image('spacer.gif', 20, 20);
-		echo '<td align="center">'.$str.'</td>'."\n";
+		echo '<td class="align-center">'.$str.'</td>'."\n";
 	}
 	echo '</tr>'."\n";
 	echo $GLOBALS['HTML']->listTableBottom();
@@ -111,7 +111,7 @@ if (!$has_error) {
 				$str = '<input type="checkbox" checked="checked" disabled="disabled" />';
 				$str .= ' '.html_image('spacer.gif', 20, 20);
 			}
-			echo '<td align="center">'.$str.'</td>'."\n";
+			echo '<td class="align-center">'.$str.'</td>'."\n";
 		}
 		echo '</tr>'."\n";
 	}
