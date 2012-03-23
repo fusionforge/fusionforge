@@ -37,8 +37,8 @@ require_once $gfcommon.'docman/include/utils.php';
 $sysdebug_enable = false;
 
 $arr = explode('/', getStringFromServer('REQUEST_URI'));
-$group_id = $arr[3];
-$docid = $arr[4];
+$group_id = (int) $arr[3];
+$docid = isset($arr[4])? $arr[4]: '';
 
 $g = group_get_object($group_id);
 if (!$g || !is_object($g)) {
@@ -47,7 +47,7 @@ if (!$g || !is_object($g)) {
 	exit_error($g->getErrorMessage(), 'docman');
 }
 
-if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
+if (is_numeric($docid)) {
 	session_require_perm('docman', $group_id, 'read');
 	$docname = urldecode($arr[5]);
 
