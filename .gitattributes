@@ -814,6 +814,7 @@ src/etc/httpd.conf.d/vhost-main.inc -text
 src/etc/httpd.conf.d/vhost-projects.inc -text
 src/etc/templates/httpd.vhosts -text
 src/image-sources/README -text
+src/image-sources/fusionforge-logo-noversion.xcf -text svneol=unset#unset
 src/image-sources/fusionforge-logo.xcf -text
 src/image-sources/pow-fusionforge.xcf -text
 src/image-sources/top-logo.xcf -text

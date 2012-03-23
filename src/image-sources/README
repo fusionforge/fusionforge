@@ -1,5 +1,8 @@
 fusionforge-logo.xcf:
-* resized to 700x175, gives www/images/fusionforge-resized.png
+* can be used to regenerate www/images/icon.png too
+
+fusionforge-logo-noversion.xcf:
+* resized to 630x175, gives www/images/fusionforge-resized.png
 * can be used to regenerate www/images/icon.png too
 
 pow-fusionforge.xcf:
