@@ -148,7 +148,7 @@ class ArtifactType extends Error {
 	 *  @param	array	The associative array of data.
 	 *	@return boolean	success.
 	 */
-	function ArtifactType($Group,$artifact_type_id=false, $arr=false) {
+	function __construct($Group,$artifact_type_id=false, $arr=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError('No Valid Group Object');

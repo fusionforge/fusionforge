@@ -29,7 +29,7 @@ class ArtifactFromID extends Error {
 	var $ArtifactType;
 	var $Artifact;
 
-	function ArtifactFromID($id, $data = false) {
+	function __construct($id, $data = false) {
 		if ($data) {
 			$art_arr =& $data;
 		} else {

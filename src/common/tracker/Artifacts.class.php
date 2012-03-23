@@ -57,7 +57,7 @@ class Artifacts extends Error {
 	 *  @param	int		(primary key from database).
 	 *  @return	boolean	success.
 	 */
-	function Artifacts(&$ArtifactType) {
+	function __construct(&$ArtifactType) {
 		$this->Error();
 
 		$this->ArtifactType =& $ArtifactType;

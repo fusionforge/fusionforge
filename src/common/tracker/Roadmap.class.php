@@ -59,7 +59,7 @@ class Roadmap extends Error {
 
 	var $data_array;
 
-	function Roadmap($group, $roadmap_id=0, $data=false) {
+	function __construct($group, $roadmap_id=0, $data=false) {
 		$this->Error();
 
 		if (is_object($group)) {

@@ -48,7 +48,7 @@ class ArtifactTypes extends Error {
 	 *	@param	object	The Group object.
 	 *	@return	boolean	success.
 	 */
-	function ArtifactTypes(&$Group) {
+	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError('No Valid Group Object');

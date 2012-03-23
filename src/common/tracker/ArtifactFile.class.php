@@ -74,7 +74,7 @@ class ArtifactFile extends Error {
 	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
 	 *  @return	boolean	success.
 	 */
-	function ArtifactFile(&$Artifact, $data=false) {
+	function __construct(&$Artifact, $data=false) {
 		$this->Error();
 
 		//was Artifact legit?

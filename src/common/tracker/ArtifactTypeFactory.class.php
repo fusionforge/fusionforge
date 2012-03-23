@@ -53,7 +53,7 @@ class ArtifactTypeFactory extends Error {
 	 *	@param	object	The Group object to which this ArtifactTypeFactory is associated
 	 *	@return	boolean	success.
 	 */
-	function ArtifactTypeFactory(&$Group) {
+	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError('ArtifactTypeFactory:: No Valid Group Object');
@@ -122,16 +122,6 @@ class ArtifactTypeFactory extends Error {
 		}
 		return $this->ArtifactTypes;
 	}
-
-	/**
-	 * getPublicFlag - a utility method to load up the current user's permissions
- 	 *
-	 * @return 	string 	The public_flag field to plug into a SQL string
-	 */
-	function &getPublicFlag() {
-		return $public_flag;
-	}
-
 }
 
 // Local Variables:

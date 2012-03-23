@@ -38,7 +38,7 @@ class ArtifactsForUser extends Error {
 	*
 	* @param	user	the User object for which to collect artifacts
 	*/
-	function ArtifactsForUser(&$user) {
+	function __construct(&$user) {
 		$this->User =& $user;
 		return true;
 	}
@@ -57,9 +57,9 @@ class ArtifactsForUser extends Error {
 			return $artifacts;
 		}
 		for ($i=0; $i < $rows; $i++) {
-			$id  = db_result($result,$i,'artifact_id');
+			$artifact_id = db_result($result,$i,'artifact_id');
 			$arr = db_fetch_array($result);
-			$afi = new ArtifactFromID($id,$arr);
+			$afi = new ArtifactFromID($artifact_id,$arr);
 			if ($afi->isError()) {
 				$this->setError($afi->getErrorMessage());
 			} elseif($afi->Artifact->ArtifactType->Group->getStatus() == 'A') {
@@ -117,7 +117,6 @@ ORDER BY group_name ASC',
 			$group_artifact_id = db_result($result,$i,'group_artifact_id');
 			$group = group_get_object($group_id);
 			$artifact = new ArtifactType($group,$group_artifact_id);
-			$ag = $artifact->getGroup();
 			if ($artifact->isError()) {
 				$this->setError($artifact->getErrorMessage());
 			} else {

@@ -46,7 +46,7 @@ class ArtifactMessage extends Error {
 	 *  @param	array	(all fields from artifact_history_user_vw) OR id from database.
 	 *  @return	boolean	success.
 	 */
-	function ArtifactMessage(&$Artifact, $data=false) {
+	function __construct(&$Artifact, $data=false) {
 		$this->Error();
 
 		//was Artifact legit?

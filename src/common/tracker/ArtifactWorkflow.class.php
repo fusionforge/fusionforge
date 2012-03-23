@@ -29,7 +29,7 @@ class ArtifactWorkflow extends Error {
 	var $artifact_id;
 	var $field_id;
 
-	function ArtifactWorkflow($artifact, $field_id) {
+	function __construct($artifact, $field_id) {
 		$this->ath = $artifact;
 		$this->artifact_id = (int)$artifact->getID();
 		$this->field_id = (int)$field_id;

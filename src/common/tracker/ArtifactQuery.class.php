@@ -91,7 +91,7 @@ class ArtifactQuery extends Error {
 	 *	@param
 	 *  	@return	boolean	success.
 	 */
-	function ArtifactQuery(&$ArtifactType, $data = false) {
+	function __construct(&$ArtifactType, $data = false) {
 		$this->Error();
 
 		//was ArtifactType legit?

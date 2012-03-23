@@ -45,7 +45,7 @@ class ArtifactQueryFactory extends Error {
 	 *	@param	object	The Group object to which this ArtifactQueryFactory is associated
 	 *	@return	boolean	success.
 	 */
-	function ArtifactQueryFactory(&$ArtifactType) {
+	function __construct(&$ArtifactType) {
 		$this->Error();
 		if (!$ArtifactType || !is_object($ArtifactType)) {
 			$this->setError('ArtifactQueryFactory:: No ArtifactType Object');

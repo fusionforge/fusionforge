@@ -31,19 +31,6 @@ require_once $gfcommon.'include/utils_crossref.php';
 class ArtifactHtml extends Artifact {
 
 	/**
-	 *  ArtifactHtml() - constructor
-	 *
-	 *  Use this constructor if you are modifying an existing artifact
-	 *
-	 *  @param $ArtifactType object
-	 *  @param $artifact_id integer (primary key from database)
-	 *  @return true/false
-	 */
-	function ArtifactHtml(&$ArtifactType,$artifact_id=false) {
-		return $this->Artifact($ArtifactType,$artifact_id);
-	}
-
-	/**
 	 * show details preformatted (like followups)
 	 */
 	function showDetails($editable = false) {

@@ -28,19 +28,6 @@ require_once $gfcommon.'tracker/ArtifactFile.class.php';
 
 class ArtifactFileHtml extends ArtifactFile {
 
-	/**
-	 *  ArtifactFileHtml() - constructor
-	 *
-	 *  Use this constructor if you are modifying an existing artifact
-	 *
-	 *	@param $Artifact object
-	 *  @param $data associative array (all fields from artifact_file_user_vw) OR id from database
-	 *  @return true/false
-	 */
-	function ArtifactFileHtml(&$Artifact, $data=false) {
-		return $this->ArtifactFile($Artifact,$data);
-	}
-
 	function upload($input_file,$input_file_name,$input_file_type,$description) {
 		if (!util_check_fileupload($input_file)) {
 			$this->setError('ArtifactFile: Invalid filename');

@@ -2060,7 +2060,6 @@ class Group extends Error {
 	 * @return	boolean	success.
 	 */
 	function updateUser($user_id,$role_id) {
-		global $SYS;
 
 		if (!forge_check_perm ('project_admin', $this->getID())) {
 			$this->setPermissionDeniedError();
@@ -2384,9 +2383,8 @@ class Group extends Error {
 			plugin_hook_by_reference ('clone_project_from_template', $params) ;
 		} else {
 			// Disable everything
-			$res = db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_scm=0, use_news=0, use_docman=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
-
-						array ($this->getID())) ;
+			db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_scm=0, use_news=0, use_docman=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
+				array ($this->getID())) ;
 		}
 
 		$this->normalizeAllRoles();
@@ -2559,10 +2557,6 @@ Reasons for negative decision:
 			$admin_email = $admin->getEmail () ;
 			setup_gettext_for_user ($admin) ;
 
-			foreach ($submitters as $u) {
-				$submitter_names[] = $u->getRealName() ;
-			}
-
 			$message = sprintf(_('New %1$s Project Submitted
 
 Project Full Name:  %2$s
@@ -2621,7 +2615,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		} else if (strlen(htmlspecialchars($group_name))>50) {
 			$this->setError(_('Group name is too long'));
 			return false;
-		} else if ($group=group_get_object_by_publicname($group_name)) {
+		} else if (group_get_object_by_publicname($group_name)) {
 			$this->setError(_('Group name already taken'));
 			return false;
 		}

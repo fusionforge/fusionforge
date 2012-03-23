@@ -45,7 +45,7 @@ class ArtifactBoxOptions extends Error {
 	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
 	 *  @return	boolean	success.
 	 */
-	function ArtifactBoxOptions(&$ArtifactType,$data=false) {
+	function __construct(&$ArtifactType,$data=false) {
 		$this->Error();
 
 		//was ArtifactType legit?
@@ -55,7 +55,7 @@ class ArtifactBoxOptions extends Error {
 		}
 		//did ArtifactType have an error?
 		if ($ArtifactType->isError()) {
-			$this->setError('ArtifactSelectionBox: '.$Artifact->getErrorMessage());
+			$this->setError('ArtifactSelectionBox: '.$ArtifactType->getErrorMessage());
 			return false;
 		}
 		$this->ArtifactType =& $ArtifactType;

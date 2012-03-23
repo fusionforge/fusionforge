@@ -54,7 +54,7 @@ class RoadmapFactory extends Error {
 
 	var $roadmaps;
 
-	function RoadmapFactory($group) {
+	function __construct($group) {
 		$this->Error();
 
 		if (is_object($group)) {
@@ -102,13 +102,13 @@ class RoadmapFactory extends Error {
 		return $this->roadmaps;
 	}
 
-	public function getRoadmapByID($id, $enable_only=false) {
+	public function getRoadmapByID($roadmap_id, $enable_only=false) {
 		$roadmaps = $this->getRoadmaps($enable_only);
 		foreach ($roadmaps as $roadmap) {
 			if($roadmap->isError()) {
 				$this->setError($roadmap->getErrorMessage());
 			} else {
-				if ($roadmap->getID() == $id) {
+				if ($roadmap->getID() == $roadmap_id) {
 					return $roadmap;
 				}
 			}

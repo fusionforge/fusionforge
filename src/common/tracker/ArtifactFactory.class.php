@@ -69,7 +69,7 @@ class ArtifactFactory extends Error {
 	 *	@param	object	The ArtifactType object to which this ArtifactFactory is associated.
 	 *	@return	boolean	success.
 	 */
-	function ArtifactFactory(&$ArtifactType) {
+	function __construct(&$ArtifactType) {
 		$this->Error();
 		if (!$ArtifactType || !is_object($ArtifactType)) {
 			$this->setError('ArtifactFactory:: No Valid ArtifactType Object');

@@ -69,7 +69,7 @@ class ArtifactExtraFieldElement extends Error {
 	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
 	 *  @return	boolean	success.
 	 */
-	function ArtifactExtraFieldElement(&$ArtifactExtraField,$data=false) {
+	function __construct(&$ArtifactExtraField,$data=false) {
 		$this->Error();
 
 		//was ArtifactExtraField legit?

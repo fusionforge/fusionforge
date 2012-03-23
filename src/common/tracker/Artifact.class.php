@@ -132,7 +132,7 @@ class Artifact extends Error {
 	 *		ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
 	 *  @return	boolean	success.
 	 */
-	function Artifact(&$ArtifactType, $data=false) {
+	function __construct(&$ArtifactType, $data=false) {
 		$this->Error();
 
 		$this->ArtifactType =& $ArtifactType;

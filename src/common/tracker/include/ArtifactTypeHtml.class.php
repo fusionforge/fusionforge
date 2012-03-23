@@ -32,16 +32,6 @@ require_once $gfcommon.'include/utils_crossref.php';
 
 class ArtifactTypeHtml extends ArtifactType {
 
-	/**
-	 *  ArtifactType() - constructor
-	 *
-	 *  @param $group object
-	 *  @param $artifact_type_id - the id # assigned to this artifact type in the db
-	 */
-	function ArtifactTypeHtml(&$group,$artifact_type_id=false, $arr=false) {
-		return $this->ArtifactType($group,$artifact_type_id,$arr);
-	}
-
 	function header($params) {
 		global $HTML;
 		if (!forge_get_config('use_tracker')) {
