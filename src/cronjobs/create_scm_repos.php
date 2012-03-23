@@ -32,6 +32,8 @@ require_once $gfcommon.'include/PluginManager.class.php' ;
 // SCM-specific plugins subsystem
 require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
+session_set_admin ();
+
 setup_plugin_manager();
 
 $res = db_query_params('SELECT group_id FROM groups WHERE status=$1 AND use_scm=1 ORDER BY group_id DESC',
@@ -41,13 +43,18 @@ if (!$res) {
 	return false;
 }
 
+$output = '';
 while ($data = db_fetch_array ($res)) {
-	$hook_params = array('group_id' => $data['group_id']);
-	plugin_hook('scm_create_repo', $hook_params);
+	$hook_params = array('group_id' => $data['group_id'], 'output' => '') ;
+	plugin_hook_by_reference ('scm_create_repo', $hook_params) ;
+	$output .= $hook_params['output'];
 }
 
-$hook_params = array();
-plugin_hook('scm_update_repolist', $hook_params);
+$hook_params = array ('output' => '') ;
+plugin_hook_by_reference ('scm_update_repolist', $hook_params) ;
+$output .= $hook_params['output'];
+
+cron_entry(27, $output);
 
 // Local Variables:
 // mode: php
