@@ -30,8 +30,7 @@ require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
-$engine_path = dirname(__FILE__).'/../common/docman/engine/';
-$p = new Parsedata($engine_path);
+$p = new Parsedata();
 
 $timestarttrait = microtime_float();
 // documents list
@@ -53,13 +52,13 @@ $errorFlag = 0;
 foreach ($resarr as $item) {
 	$compt++;
 	$timestart = microtime_float();
-	$doc_dataData = db_query_params('SELECT data from doc_data where docid = $1', array($item["docid"]));
-	if (!$doc_dataData) {
+	$res = db_query_params('SELECT data from doc_data where docid = $1', array($item["docid"]));
+	if (!$res) {
 		die("unable to get data: ".db_error());
 	}
-	$data1 = base64_decode($doc_dataData["data"]);
-	$lenin = strlen($data1);
-	$res = $p->get_parse_data($data1, $item["title"], $item["description"], $item["filetype"]);
+	$data = base64_decode(db_result($res, 0, 'data'));
+	$lenin = strlen($data);
+	$res = $p->get_parse_data($data, $item["title"], $item["description"], $item["filetype"]);
 	$len = strlen($res);
 	$resUp = db_query_params('UPDATE doc_data SET data_words=$1 WHERE docid=$2',
 			 array ($res, $item["docid"]));
@@ -68,7 +67,7 @@ foreach ($resarr as $item) {
 	}
 	$timeend = microtime_float();
 	$timetrait = $timeend - $timestart;
-	echo "analyze $item[filename]  type=$item[filetype]  octets in=$lenin  octets out=$len  time=$timetrait sec";
+	echo "Analyzed $item[filename] : type=$item[filetype]  octets in=$lenin  octets out=$len  time=$timetrait sec\n";
 }
 $timeendtrait = microtime_float();
 $timetot = $timeendtrait - $timestarttrait;
