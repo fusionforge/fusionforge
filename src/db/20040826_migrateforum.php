@@ -42,7 +42,7 @@ if (!$res) {
 for ($i=0; $i<db_numrows($res); $i++) {
 
 	$res2 = db_query_params ('UPDATE forum_group_list SET forum_name=$1 WHERE group_forum_id=$2',
-				 array (ereg_replace('[^_\.0-9a-z-]','-', strtolower(db_result($res,$i,'forum_name'))),
+				 array (preg_replace('/[^_\.0-9a-z-]/','-', strtolower(db_result($res,$i,'forum_name'))),
 					db_result($res,$i,'group_forum_id'))) ;
 	if (!$res2) {
 		echo db_error();

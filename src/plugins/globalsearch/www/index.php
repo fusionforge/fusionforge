@@ -68,7 +68,7 @@ $HTML->header(array('title'=>'Search','pagename'=>'search'));
 echo "<p>";
 
 $gwords = htmlspecialchars(trim($gwords));
-$gwords = ereg_replace("[ \t]+", ' ', $gwords);
+$gwords = preg_replace("/\s+/", ' ', $gwords);
 
 // show search box which will return results on
 // this very page (default is to open new window)
