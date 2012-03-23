@@ -245,6 +245,8 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 	}
 
 	if ($filechecks) {
+		if (strlen($fname) < 3)
+			exit_error('Error',_('FRSFile Name Must Be At Least 3 Characters'));
 		if (!$move) {
 			$tmp = tempnam ('', '') ;
 			copy ($infile, $tmp) ;
@@ -265,6 +267,17 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 	} else {
 		return _('Unknown file upload error.') ;
 	}
+}
+
+/* filter utils.php:&ls() output for additional constraints from FRS */
+function frs_filterfiles($in) {
+	$out = array();
+	for ($i = 0; $i < count($in); $i++) {
+		if (strlen($in[$i]) < 3)
+			continue;
+		$out[] = $in[$i];
+	}
+	return $out;
 }
 
 // Local Variables:

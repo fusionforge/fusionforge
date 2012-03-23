@@ -203,7 +203,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 			printf(_('Alternatively, you can use FTP to upload a new file at %1$s.'), forge_get_config('ftp_upload_host'));
 			echo '<br />';
 			echo _('Choose an FTP file instead of uploading:').'<br />';
-			$ftp_files_arr=ls($upload_dir,true);
+			$ftp_files_arr=frs_filterfiles(ls($upload_dir,true));
 			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename',''); ?>
 
 		</p>
@@ -216,7 +216,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	       $incoming, "sftp://" . forge_get_config ('web_host') . $incoming . "/");
 	echo ' ' . _('This direct <tt>sftp://</tt> link only works with some browsers, such as Konqueror.') . '<br />';
 	echo _('Choose an already uploaded file:').'<br />';
-	$manual_files_arr=ls($incoming,true);
+	$manual_files_arr=frs_filterfiles(ls($incoming,true));
 	echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'manual_filename',''); ?>
 	</p>
 <?php } ?>
