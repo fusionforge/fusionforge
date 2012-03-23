@@ -90,7 +90,6 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	 */
 	function redirectToResult() {
 
-
 		$project_name = $this->getResultId('unix_group_name');
 		$project_id = $this->getResultId('group_id');
 

@@ -52,10 +52,10 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ARTIFACT, $words, $isExact, $searchQuery, $groupId, 'tracker');
 
 		$this->tableHeaders = array(
-			_('#'),
+			_('ID'),
 			_('Summary'),
 			_('Submitted by'),
-			_('Date')
+			_('Open Date')
 		);
 	}
 
@@ -66,7 +66,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$result = $this->searchQuery->getResult();
 		$groupId = $this->groupId;
 		$dateFormat = _('Y-m-d H:i');
 

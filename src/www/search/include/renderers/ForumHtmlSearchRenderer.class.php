@@ -69,7 +69,7 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td width="50%"><a href="'.util_make_url ('/forum/message.php?msg_id=' . db_result($result, $i, 'msg_id')).'">'
+			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="halfwidth"><a href="'.util_make_url ('/forum/message.php?msg_id=' . db_result($result, $i, 'msg_id')).'">'
 				. html_image('ic/msg.png', '10', '12')
 				. ' '.db_result($result, $i, 'subject').'</a></td>'
 				. '<td width="30%">'.db_result($result, $i, 'realname').'</td>'
