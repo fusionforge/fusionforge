@@ -234,7 +234,7 @@ for($k = 0; $k < $rows; $k++) {
 	}
 	if($success) {
 		$res1 = db_query_params('UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = $1',
-					array($deleted_mail_list));
+			array($deleted_mail_list));
 		$err .= db_error();
 	} else {
 		$err .= "Could not remove the list $deleted_mail_list \n";
