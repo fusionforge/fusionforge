@@ -333,7 +333,8 @@ class ForumGateway extends Error {
  */
 function DBG($str) {
 	global $debug;
-system("echo \"forum: ".$str."\n\" >> /tmp/forum.log");
+
+	file_put_contents('/tmp/forum.log', "forum: ".$str."\n", FILE_APPEND);
 
 	if ($debug==1) {
 		syslog(LOG_DEBUG, "forum_gateway: ". $str);
