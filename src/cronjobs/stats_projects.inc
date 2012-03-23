@@ -277,11 +277,11 @@ OR help_requests > 0;',
 			       '2',
 			       '3',
 			       '3'));
-	
-		echo db_error();
-		
-		db_commit();
-  }
+
+	echo db_error();
+
+	db_commit();
+}
 
 // Local Variables:
 // mode: php

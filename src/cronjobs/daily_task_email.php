@@ -27,14 +27,13 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 require_once $gfcommon.'include/cron_utils.php';
 
-session_set_admin() ;
+session_set_admin();
 
 // Get user id's from users who have open tasks
 $res = db_query_params ('SELECT DISTINCT u.user_id, u.realname, u.email FROM users u, project_assigned_to pat, project_task_vw ptv
 		WHERE u.user_id > 100 AND u.user_id=pat.assigned_to_id AND pat.project_task_id=ptv.project_task_id
 		AND ptv.status_id=1 ORDER BY u.user_id;',
 			array()) ;
-
 
 $now = time();
 $today = date("n/j/y");
