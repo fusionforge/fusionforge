@@ -24,6 +24,30 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('A powerful plugin system to add new features.'); ?></li>
 </ul>
 
+<h3><?php print _("What's new in FusionForge 5.2"); ?></h3>
+<ul>
+
+<li><?php print _('Docman: inject zip as a tree (Capgemini)') ?></li>
+<li><?php print _('Widget: New User Widget: Last 5 documents published in my project (Capgemini)') ?></li>
+<li><?php print _('Docman: mass action (Capgemini)') ?></li>
+<li><?php print _('New Message plugin to display global messages like planned upgrade or outage
+  (Alcatel-Lucent).') ?></li>
+<li><?php print _('Docman: complete rewritten of trash and pending view (Capgemini)') ?></li>
+<li><?php print _('New Scmhook: complete library to handle hooks for any scm available in
+  fusionforge. Currently supporting post-commit and pre-commit hook.
+  scmsvn pre-commit and post-commit library is provided (Capgemini)') ?></li>
+<li><?php print _('New Widget: smcgit personal URL of cloned repositories. Currently just
+  a list of URLs of your personal repository cloned from project you
+   belong. (Capgemini)') ?></li>
+<li><?php print _('Docman: interaction with the projects-hierarchy plugin to enable hierarchical
+  browsing. (Capgemini)') ?></li>
+<li><?php print _('Admin: User add membership to multiples projects in one shot (Capgemini)') ?></li>
+<li><?php print _('New MoinMoinWiki plugin (AdaCore)') ?></li>
+<li><?php print _('Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)') ?></li>
+<li><?php print _('scmsvn: private project can now be browsed with viewvc using user rights management (TrivialDev).') ?></li>
+<li><?php print _('scmsvn: basic activity support (TrivialDev).') ?></li>
+</ul>
+
 <h3><?php print _("What's new in FusionForge 5.1"); ?></h3>
 <ul>
 <li><?php print _('New Funky Theme (Capgemini).'); ?></li>
