@@ -318,7 +318,7 @@ notified in the future, please login to %7$s and click this link:
 					      $this->getNotes(),
 					      $this->getChanges(),
 					      util_make_url ("/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID()),
-					      forge_get_config ('forge_name'),
+					      forge_get_config('forge_name'),
 					      util_make_url ("/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1")));
 //		$text = util_line_wrap($text);
 		if (count($arr)) {

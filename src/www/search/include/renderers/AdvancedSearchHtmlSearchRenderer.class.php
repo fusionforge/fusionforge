@@ -409,7 +409,7 @@ EOS;
 			$return .= '<legend>';
 			$return .= '<input type="checkbox" name="'.$key.'_checkall"';
 			if (getStringFromRequest($key.'_checkall')) $return .= ' checked="checked"';
-			$return .= ' class="checkall"><a href="#'.$key.'">'.$group_subsection_names[$key].'</a>';
+			$return .= ' class="checkall" /><a href="#'.$key.'">'.$group_subsection_names[$key].'</a>';
 			$return .= "\n";
 			$return .= '</legend>';
 
@@ -423,8 +423,7 @@ EOS;
 					if (getStringFromRequest($key.$underkey)) $return .= ' checked="checked"';
 					$return .= ' />'.$undersection.'<br />'."\n";
 				}
-
-				}
+			}
 
 			$return .= '</fieldset>';
 
