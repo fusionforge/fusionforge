@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 22:50+0100\n"
+"POT-Creation-Date: 2012-03-23 15:53+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -305,23 +305,23 @@ msgstr "Zerrenda Gehitua"
 #: common/tracker/Artifact.class.php:1551
 #: common/tracker/Artifact.class.php:1557
 #: common/tracker/Artifact.class.php:1657
-#: common/tracker/actions/browse.php:602 common/tracker/actions/browse.php:613
-#: common/tracker/actions/browse.php:633 common/tracker/actions/detail.php:67
-#: common/tracker/actions/downloadcsv.php:81
-#: common/tracker/actions/downloadcsv.php:82
+#: common/tracker/actions/browse.php:608 common/tracker/actions/browse.php:619
+#: common/tracker/actions/browse.php:639 common/tracker/actions/detail.php:73
 #: common/tracker/actions/downloadcsv.php:83
-#: common/tracker/actions/mod-limited.php:95
-#: common/tracker/actions/mod-limited.php:100
-#: common/tracker/actions/mod.php:97 common/tracker/actions/mod.php:102
-#: common/tracker/include/ArtifactHtml.class.php:90
-#: common/tracker/include/ArtifactHtml.class.php:145
-#: common/tracker/include/ArtifactHtml.class.php:154
-#: common/tracker/include/ArtifactTypeHtml.class.php:337
-#: common/tracker/include/ArtifactTypeHtml.class.php:338
-#: common/tracker/include/ArtifactTypeHtml.class.php:377
+#: common/tracker/actions/downloadcsv.php:84
+#: common/tracker/actions/downloadcsv.php:85
+#: common/tracker/actions/mod-limited.php:103
+#: common/tracker/actions/mod-limited.php:108
+#: common/tracker/actions/mod.php:104 common/tracker/actions/mod.php:109
+#: common/tracker/include/ArtifactHtml.class.php:77
+#: common/tracker/include/ArtifactHtml.class.php:132
+#: common/tracker/include/ArtifactHtml.class.php:141
+#: common/tracker/include/ArtifactTypeHtml.class.php:327
+#: common/tracker/include/ArtifactTypeHtml.class.php:328
+#: common/tracker/include/ArtifactTypeHtml.class.php:367
 #: common/widget/Widget_MyLatestSvnCommits.class.php:65
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:110
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:112
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:111
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:113
 #: common/widget/Widget_ProjectInfo.class.php:66
 #: common/widget/Widget_Rss.class.php:74
 #: cronjobs/send_pending_items_mail.php:98
@@ -329,12 +329,11 @@ msgstr "Zerrenda Gehitua"
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:110 www/account/index.php:124
 #: www/admin/cronman.php:78 www/admin/grouplist.php:118
-#: www/admin/massmail.php:158 www/admin/search.php:105
-#: www/admin/search.php:187 www/admin/userlist.php:111
-#: www/developer/diary.php:51 www/developer/diary.php:82
-#: www/export/tracker.php:108 www/forum/index.php:89 www/forum/message.php:127
-#: www/forum/message.php:204 www/forum/myforums.php:152 www/frs/index.php:145
-#: www/frs/index.php:204 www/include/html.php:915
+#: www/admin/massmail.php:158 www/admin/search.php:96 www/admin/search.php:178
+#: www/admin/userlist.php:111 www/developer/diary.php:51
+#: www/developer/diary.php:82 www/export/tracker.php:108
+#: www/forum/index.php:89 www/forum/message.php:127 www/forum/myforums.php:152
+#: www/frs/index.php:145 www/frs/index.php:204 www/include/html.php:921
 #: www/include/stats_function.php:77 www/include/stats_function.php:98
 #: www/news/news_utils.php:147 www/news/news_utils.php:267
 #: www/people/people_utils.php:422 www/people/viewjob.php:78
@@ -442,7 +441,7 @@ msgstr "Foroak erabili"
 #: common/docman/actions/monitorfile.php:51
 #: common/docman/actions/monitorfile.php:71
 #: common/docman/actions/trashfile.php:62
-#: common/docman/actions/validatefile.php:56 www/docman/view.php:244
+#: common/docman/actions/validatefile.php:56 www/docman/view.php:241
 #, fuzzy
 msgid "No action to perform"
 msgstr "Ez daude daturik txostenean"
@@ -630,9 +629,9 @@ msgstr "Pasahitza egokia eman behar duzu (gutxienez 6 karakterekoa)."
 #: common/docman/views/addfile.php:120 common/docman/views/listfile.php:210
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
-#: common/tracker/actions/admin-ind.php:98
-#: common/tracker/actions/admin-ind.php:127
-#: common/tracker/actions/browse.php:552 common/tracker/actions/ind.php:53
+#: common/tracker/actions/admin-ind.php:100
+#: common/tracker/actions/admin-ind.php:129
+#: common/tracker/actions/browse.php:558 common/tracker/actions/ind.php:57
 #: common/tracker/views/form-updatetracker.php:52
 #: plugins/blocks/www/index.php:231
 #: plugins/contribtracker/www/global_admin.php:244
@@ -1043,7 +1042,7 @@ msgstr "Izenburua"
 #: plugins/forumml/www/forumml_utils.php:189
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:121
 #: plugins/svntracker/common/svntrackerPlugin.class.php:105
-#: www/forum/forum.php:254 www/forum/message.php:161
+#: www/forum/forum.php:254 www/forum/message.php:160
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:49
 #: www/snippet/detail.php:65 www/snippet/detail.php:154
@@ -1062,7 +1061,7 @@ msgstr "Abizena:"
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/ArtifactExtraField.class.php:326
-#: common/tracker/include/ArtifactTypeHtml.class.php:325
+#: common/tracker/include/ArtifactTypeHtml.class.php:315
 #: common/tracker/views/form-addextrafield.php:132
 #: common/tracker/views/form-addextrafieldoption.php:99
 #: common/tracker/views/form-updateextrafieldelement.php:60
@@ -1072,7 +1071,7 @@ msgstr "Abizena:"
 #: plugins/mantisbt/view/viewIssue.php:80
 #: plugins/mantisbt/view/viewIssues.php:305 www/admin/groupedit.php:107
 #: www/admin/grouplist.php:68 www/admin/pluginman.php:128
-#: www/admin/search.php:94 www/admin/search.php:171
+#: www/admin/search.php:85 www/admin/search.php:162
 #: www/frs/admin/editrelease.php:235 www/frs/admin/index.php:154
 #: www/my/dashboard.php:68 www/news/admin/index.php:131
 #: www/people/editjob.php:74 www/people/editjob.php:166
@@ -1086,7 +1085,7 @@ msgstr ""
 #: common/docman/views/listfile.php:210
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
-#: common/tracker/include/ArtifactTypeHtml.class.php:366 www/frs/index.php:176
+#: common/tracker/include/ArtifactTypeHtml.class.php:356 www/frs/index.php:176
 #: www/pm/ganttpage.php:160 www/project/admin/editimages.php:269
 msgid "Size"
 msgstr "Tamaina"
@@ -1306,8 +1305,8 @@ msgid "Recover or delete permanently files with deleted status."
 msgstr ""
 
 #: common/docman/views/menu.php:67 common/include/Navigation.class.php:401
-#: common/tracker/actions/mod.php:141 common/tracker/actions/mod.php:200
-#: common/tracker/include/build_submission_form.php:64
+#: common/tracker/actions/mod.php:148 common/tracker/actions/mod.php:207
+#: common/tracker/include/build_submission_form.php:63
 #: common/widget/Widget_MyProjects.class.php:74
 #: www/include/Layout.class.php:679
 msgid "Admin"
@@ -1417,16 +1416,16 @@ msgstr "Ezin dut mezu nagusia eguneratu"
 
 #: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:62 common/forum/ForumAdmin.class.php:325
-#: common/tracker/actions/admin-tracker.php:66
-#: common/tracker/actions/deleteartifact.php:36
-#: common/tracker/actions/mod.php:74
-#: common/tracker/include/ArtifactTypeHtml.class.php:140
+#: common/tracker/actions/admin-tracker.php:70
+#: common/tracker/actions/deleteartifact.php:57
+#: common/tracker/actions/mod.php:81
+#: common/tracker/include/ArtifactTypeHtml.class.php:130
 #: common/tracker/views/form-addcanned.php:54
 #: common/tracker/views/form-addextrafield.php:57
 #: common/tracker/views/form-addextrafield.php:82
 #: common/tracker/views/form-deleteextrafield.php:43
 #: common/tracker/views/form-deleteextrafieldelement.php:64
-#: common/tracker/views/form-deletetracker.php:36
+#: common/tracker/views/form-deletetracker.php:35
 #: plugins/contribtracker/www/global_admin.php:274
 #: plugins/contribtracker/www/global_admin.php:317
 #: plugins/contribtracker/www/global_admin.php:356
@@ -1569,7 +1568,7 @@ msgid "Error On Update:"
 msgstr "Akatsa eguneratzean"
 
 #: common/forum/Forum.class.php:618 common/frs/FRSPackage.class.php:450
-#: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1528
+#: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1529
 #: common/mail/MailingList.class.php:386 common/pm/ProjectGroup.class.php:370
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:512
 #: common/tracker/ArtifactExtraField.class.php:429
@@ -1643,7 +1642,7 @@ msgid "Forum Name"
 msgstr "Foroaren izena"
 
 #: common/forum/ForumAdmin.class.php:312
-#: common/tracker/include/ArtifactHtml.class.php:79
+#: common/tracker/include/ArtifactHtml.class.php:66
 #: plugins/message/common/messagePlugin.class.php:33 www/admin/cronman.php:44
 #: www/sendmessage.php:154
 msgid "Message"
@@ -1679,7 +1678,7 @@ msgstr "Bertsioak"
 #: plugins/mantisbt/view/editIssue.php:227
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:52
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
-#: www/account/editsshkeys.php:85 www/account/index.php:308
+#: www/account/editsshkeys.php:89 www/account/index.php:308
 #: www/account/lostlogin.php:100 www/admin/groupedit.php:230
 #: www/admin/trove/trove_cat_edit.php:152 www/admin/useredit.php:233
 #: www/admin/useredit.php:314 www/admin/vhost.php:189
@@ -1762,10 +1761,10 @@ msgstr "Foroa"
 msgid "Posted by:"
 msgstr "Lanak argitaratu"
 
-#: common/forum/ForumHTML.class.php:67 common/tracker/actions/detail.php:67
-#: common/tracker/include/ArtifactHtml.class.php:89
-#: common/tracker/include/ArtifactHtml.class.php:123
-#: common/tracker/include/ArtifactTypeHtml.class.php:368
+#: common/forum/ForumHTML.class.php:67 common/tracker/actions/detail.php:73
+#: common/tracker/include/ArtifactHtml.class.php:76
+#: common/tracker/include/ArtifactHtml.class.php:110
+#: common/tracker/include/ArtifactTypeHtml.class.php:358
 #: common/widget/Widget_ProjectLatestDocuments.class.php:71
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:58
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:111
@@ -1774,7 +1773,7 @@ msgstr "Lanak argitaratu"
 #: plugins/svntracker/common/svntrackerPlugin.class.php:101
 #: www/admin/cronman.php:42 www/admin/massmail.php:139
 #: www/developer/diary.php:76 www/forum/forum.php:255
-#: www/forum/message.php:162 www/frs/admin/showreleases.php:101
+#: www/forum/message.php:161 www/frs/admin/showreleases.php:101
 #: www/frs/index.php:175 www/news/admin/news_admin_utils.php:55
 #: www/pm/calendar.php:268 www/pm/include/ProjectTaskHTML.class.php:157
 #: www/pm/include/ProjectTaskHTML.class.php:203
@@ -1790,12 +1789,12 @@ msgid "Date"
 msgstr "Data"
 
 #: common/forum/ForumHTML.class.php:68 common/include/Navigation.class.php:383
-#: common/tracker/actions/browse.php:191 common/tracker/actions/browse.php:550
-#: common/tracker/actions/detail.php:95
-#: common/tracker/actions/mod-limited.php:139
-#: common/tracker/actions/mod.php:172 common/tracker/actions/query.php:192
-#: common/tracker/actions/query.php:379
-#: common/tracker/include/build_submission_form.php:72
+#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:556
+#: common/tracker/actions/detail.php:101
+#: common/tracker/actions/mod-limited.php:147
+#: common/tracker/actions/mod.php:179 common/tracker/actions/query.php:199
+#: common/tracker/actions/query.php:386
+#: common/tracker/include/build_submission_form.php:71
 #: common/tracker/views/form-customizelist.php:43
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/editIssue.php:213
@@ -1822,7 +1821,7 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:91
 #: common/widget/Widget_ProjectLatestNews.class.php:42
-#: www/export/projnews.php:72 www/index_std.php:75
+#: www/export/projnews.php:72 www/index_std.php:99
 msgid "Latest News"
 msgstr "Azken albisteak"
 
@@ -1836,9 +1835,9 @@ msgid "Discussion Forums:"
 msgstr "Eztabaidatzeko foroak:"
 
 #: common/forum/ForumHTML.class.php:111 common/forum/ForumHTML.class.php:117
-#: common/tracker/actions/admin-tracker.php:28
+#: common/tracker/actions/admin-tracker.php:32
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:59
-#: common/tracker/include/ArtifactTypeHtml.class.php:91
+#: common/tracker/include/ArtifactTypeHtml.class.php:81
 #: plugins/mailman/www/mailman_utils.php:208
 #: plugins/mailman/www/mailman_utils.php:211
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:374
@@ -2146,7 +2145,7 @@ msgstr "Datu basearen manipulazioa"
 msgid "Permission denied."
 msgstr "Baimena ukatu da"
 
-#: common/include/Error.class.php:147 common/tracker/actions/tracker.php:97
+#: common/include/Error.class.php:147 common/tracker/actions/tracker.php:85
 msgid "Invalid Email Address"
 msgstr "Posta elektronikoaren helbidea baliogabea da"
 
@@ -2266,135 +2265,135 @@ msgstr "Ezin da SCM_BOX txertatu datu-basean"
 msgid "SCM Box can't be empty"
 msgstr "SCM kutxa ezin da hutsik egon"
 
-#: common/include/Group.class.php:1496
+#: common/include/Group.class.php:1497
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
 
-#: common/include/Group.class.php:1505
+#: common/include/Group.class.php:1506
 #, fuzzy
 msgid "Setting tags:"
 msgstr "Ezaugarriak"
 
-#: common/include/Group.class.php:1535
+#: common/include/Group.class.php:1536
 msgid "Cannot Delete System Group"
 msgstr "Rzin da sistema taldea ezabatu"
 
-#: common/include/Group.class.php:1557
+#: common/include/Group.class.php:1558
 msgid "Could not properly remove member:"
 msgstr ""
 
-#: common/include/Group.class.php:1582
+#: common/include/Group.class.php:1583
 msgid "Could not properly delete the tracker:"
 msgstr ""
 
-#: common/include/Group.class.php:1596
+#: common/include/Group.class.php:1597
 #, fuzzy
 msgid "Could not properly delete the forum:"
 msgstr "Ezin da berri foroa ezabatu: %d"
 
-#: common/include/Group.class.php:1610
+#: common/include/Group.class.php:1611
 #, fuzzy
 msgid "Could not properly delete the ProjectGroup:"
 msgstr "Ezin dut mezu nagusia eguneratu"
 
-#: common/include/Group.class.php:1620
+#: common/include/Group.class.php:1621
 #, fuzzy
 msgid "Error FRS Packages: "
 msgstr "Foroa sortzean gertatutako akatsa"
 
-#: common/include/Group.class.php:1628
+#: common/include/Group.class.php:1629
 #, fuzzy
 msgid "Could not properly delete the FRSPackage:"
 msgstr "Ezin izan da rola eskuratu"
 
-#: common/include/Group.class.php:1639 common/include/Group.class.php:1654
+#: common/include/Group.class.php:1640 common/include/Group.class.php:1655
 #, fuzzy
 msgid "Error Deleting News: "
 msgstr "Foroa sortzean gertatutako akatsa"
 
-#: common/include/Group.class.php:1647
+#: common/include/Group.class.php:1648
 #, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr "Ezin da berri foroa ezabatu: %d"
 
-#: common/include/Group.class.php:1665 common/include/Group.class.php:1673
+#: common/include/Group.class.php:1666 common/include/Group.class.php:1674
 #, fuzzy
 msgid "Error Deleting Documents: "
 msgstr "Errorea elementu bat txertatzerakoan"
 
-#: common/include/Group.class.php:1683
+#: common/include/Group.class.php:1684
 #, fuzzy
 msgid "Error Deleting Tags: "
 msgstr "Errorea elementu bat txertatzerakoan"
 
-#: common/include/Group.class.php:1694
+#: common/include/Group.class.php:1695
 #, fuzzy
 msgid "Error Deleting Project History: "
 msgstr "Errorea proiektu argibideak eguneratzean: %s"
 
-#: common/include/Group.class.php:1705
+#: common/include/Group.class.php:1706
 #, fuzzy
 msgid "Error Deleting Project Plugins: "
 msgstr "Errorea partaide objektua eskuratzean: %s"
 
-#: common/include/Group.class.php:1716
+#: common/include/Group.class.php:1717
 #, fuzzy
 msgid "Error Deleting SCM Statistics: "
 msgstr "Akatsa %1$s lortzean"
 
-#: common/include/Group.class.php:1731
+#: common/include/Group.class.php:1732
 msgid "Could not properly delete the survey"
 msgstr ""
 
-#: common/include/Group.class.php:1746
+#: common/include/Group.class.php:1747
 msgid "Could not properly delete the survey questions"
 msgstr ""
 
-#: common/include/Group.class.php:1761
+#: common/include/Group.class.php:1762
 #: plugins/mailman/include/mailmanPlugin.class.php:200
 msgid "Could not properly delete the mailing list"
 msgstr ""
 
-#: common/include/Group.class.php:1772 common/include/Group.class.php:1780
+#: common/include/Group.class.php:1773 common/include/Group.class.php:1781
 #, fuzzy
 msgid "Error Deleting Trove: "
 msgstr "Akatsa taldea sortzen"
 
-#: common/include/Group.class.php:1791
+#: common/include/Group.class.php:1792
 #, fuzzy
 msgid "Error Deleting Counters: "
 msgstr "Akatsa taldea sortzen"
 
-#: common/include/Group.class.php:1801 common/include/Group.class.php:1810
+#: common/include/Group.class.php:1802 common/include/Group.class.php:1811
 #, fuzzy
 msgid "Error Deleting Project:"
 msgstr "Errorea partaide objektua eskuratzean: %s"
 
-#: common/include/Group.class.php:1882
+#: common/include/Group.class.php:1883
 msgid "User is not active. Only active users can be added."
 msgstr ""
 
-#: common/include/Group.class.php:1894
+#: common/include/Group.class.php:1895
 msgid "Error Getting Role Object"
 msgstr "Errorea arau objektua eskuratzean"
 
-#: common/include/Group.class.php:1923
+#: common/include/Group.class.php:1924
 msgid "ERROR: User does not exist"
 msgstr "ERROREA: Erabiltzailea ez da existitzen"
 
-#: common/include/Group.class.php:1971 common/include/Group.class.php:2091
+#: common/include/Group.class.php:1972 common/include/Group.class.php:2091
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr "ERROREA: Erabiltzailea ez da ezabatu: %s"
 
-#: common/include/Group.class.php:1993
+#: common/include/Group.class.php:1994
 #, fuzzy
 msgid "ERROR: DB: artifact:"
 msgstr "ERROREA: DB: Artefaktua: %s"
 
-#: common/include/Group.class.php:2014 common/include/Group.class.php:2027
+#: common/include/Group.class.php:2015 common/include/Group.class.php:2028
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr ""
@@ -2418,11 +2417,11 @@ msgstr ""
 msgid "Group already active"
 msgstr "Taldea dagoeneko aktibo dago"
 
-#: common/include/Group.class.php:2425 common/include/Group.class.php:2496
+#: common/include/Group.class.php:2424 common/include/Group.class.php:2495
 msgid "Group does not have any administrators."
 msgstr "Taldeak ez du administratzailerik."
 
-#: common/include/Group.class.php:2433
+#: common/include/Group.class.php:2432
 #, fuzzy, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -2505,12 +2504,12 @@ msgstr ""
 "\n"
 "-- %7$s taldea"
 
-#: common/include/Group.class.php:2469
+#: common/include/Group.class.php:2468
 #, php-format
 msgid "%1$s Project Approved"
 msgstr "%1$s -ek onartutako proiektua"
 
-#: common/include/Group.class.php:2503
+#: common/include/Group.class.php:2502
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -2529,20 +2528,20 @@ msgstr ""
 "Ukatzearen arrazoiak hauek dira:\n"
 "\n"
 
-#: common/include/Group.class.php:2522
+#: common/include/Group.class.php:2521
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "%1$s -ek egitasmoa ukatu du"
 
-#: common/include/Group.class.php:2546
+#: common/include/Group.class.php:2545
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2553
+#: common/include/Group.class.php:2552
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2565
+#: common/include/Group.class.php:2560
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -2559,12 +2558,12 @@ msgstr ""
 "Mesedez, bisita ezazu helbide hau egitasmoa onartzeko ala baztertzeko:\n"
 "%5$s"
 
-#: common/include/Group.class.php:2575
+#: common/include/Group.class.php:2570
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Nork bidalia"
 
-#: common/include/Group.class.php:2581
+#: common/include/Group.class.php:2576
 #, php-format
 msgid ""
 "\n"
@@ -2572,12 +2571,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2585 common/include/Group.class.php:2600
+#: common/include/Group.class.php:2580 common/include/Group.class.php:2595
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "%1$s -en egitasmoa onartzeke dago."
 
-#: common/include/Group.class.php:2593
+#: common/include/Group.class.php:2588
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -2597,42 +2596,42 @@ msgstr ""
 "%1$s administratzeko taldeak zure proposamena aztertuko du orain. "
 "Erabakiaren berri emango zaizu."
 
-#: common/include/Group.class.php:2618
+#: common/include/Group.class.php:2613
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Galdera motzegia da"
 
-#: common/include/Group.class.php:2621
+#: common/include/Group.class.php:2616
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Taldearen izena (editatzeko sakatu)"
 
-#: common/include/Group.class.php:2624
+#: common/include/Group.class.php:2619
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unix izen hau hartua dago"
 
-#: common/include/Group.class.php:2706
+#: common/include/Group.class.php:2701
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2769
+#: common/include/Group.class.php:2764
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2787
+#: common/include/Group.class.php:2782
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group UseWebdab Status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2805
+#: common/include/Group.class.php:2800
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group UseDocmanSearch Status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2823
+#: common/include/Group.class.php:2818
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group force_docman_reindex %s"
 msgstr "ERROREA: DB: Ezin dira talde baimenak aldatu: %s"
@@ -2763,7 +2762,7 @@ msgstr ""
 
 #: common/include/Navigation.class.php:303
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:54
-#: common/tracker/include/ArtifactTypeHtml.class.php:77
+#: common/tracker/include/ArtifactTypeHtml.class.php:67
 #: www/frs/include/frs_utils.php:77
 #: www/pm/include/ProjectGroupHTML.class.php:91
 #: www/pm/include/ProjectGroupHTML.class.php:96
@@ -2789,8 +2788,8 @@ msgstr "Fitxero zerrenda"
 msgid "Project Administration."
 msgstr "Proiektuen datu baseen administrazioa"
 
-#: common/include/Navigation.class.php:417 www/activity/index.php:83
-#: www/activity/index.php:164 www/activity/index.php:236
+#: common/include/Navigation.class.php:417 www/activity/index.php:86
+#: www/activity/index.php:172 www/activity/index.php:248
 #: www/export/rss_project.php:97
 msgid "Activity"
 msgstr ""
@@ -2812,7 +2811,7 @@ msgstr ""
 
 #: common/include/Navigation.class.php:442 common/include/rbac_texts.php:144
 #: common/reporting/report_utils.php:143
-#: common/tracker/actions/admin-ind.php:98 common/tracker/actions/ind.php:53
+#: common/tracker/actions/admin-ind.php:100 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:49
 #: www/pm/include/ProjectTaskHTML.class.php:109
 msgid "Tracker"
@@ -2873,7 +2872,7 @@ msgstr ""
 #: common/include/Navigation.class.php:520
 #: common/include/group_section_texts.php:33 plugins/blocks/www/index.php:172
 #: plugins/quota_management/www/quota_project.php:74
-#: www/activity/index.php:102 www/activity/index.php:282
+#: www/activity/index.php:109 www/activity/index.php:299
 #: www/admin/index.php:182 www/news/index.php:34
 msgid "News"
 msgstr "Albisteak"
@@ -2884,10 +2883,8 @@ msgid "Flash head line from the project."
 msgstr "Proiektu honetan ez dago horrelako argitalpenik"
 
 #: common/include/Navigation.class.php:535 common/include/rbac_texts.php:152
-#: plugins/blocks/www/index.php:173
-#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:35
-#: www/stats/site_stats_utils.php:262 www/stats/site_stats_utils.php:386
-#: www/stats/site_stats_utils.php:441
+#: plugins/blocks/www/index.php:173 www/stats/site_stats_utils.php:262
+#: www/stats/site_stats_utils.php:386 www/stats/site_stats_utils.php:441
 msgid "SCM"
 msgstr "SCM"
 
@@ -2970,58 +2967,58 @@ msgstr "Lehenengo izenpetu behar duzu"
 msgid "Cannot remove a non empty role."
 msgstr "Datu basearen sarrera ezin dut gehitu"
 
-#: common/include/SCMPlugin.class.php:139
+#: common/include/SCMPlugin.class.php:143
 msgid "Unimplemented SCM plugin."
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:143
+#: common/include/SCMPlugin.class.php:147
 msgid "Instructions for anonymous access for unimplemented SCM plugin."
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:147
+#: common/include/SCMPlugin.class.php:151
 msgid "Instructions for read-write access for unimplemented SCM plugin."
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:151
+#: common/include/SCMPlugin.class.php:155
 msgid "Instructions for snapshot access for unimplemented SCM plugin."
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:156
-#: common/include/SCMPlugin.class.php:170
+#: common/include/SCMPlugin.class.php:160
+#: common/include/SCMPlugin.class.php:174
 #, fuzzy
 msgid "Repository Browser"
 msgstr "SCM errepositorioa"
 
-#: common/include/SCMPlugin.class.php:158
-#: common/include/SCMPlugin.class.php:172
+#: common/include/SCMPlugin.class.php:162
+#: common/include/SCMPlugin.class.php:176
 msgid "Browsing the SCM tree is not yet implemented for this SCM plugin."
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:162
+#: common/include/SCMPlugin.class.php:166
 msgid "Not implemented yet"
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:179
+#: common/include/SCMPlugin.class.php:183
 #: plugins/scmcvs/common/CVSPlugin.class.php:148
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:193
-#: plugins/scmsvn/common/SVNPlugin.class.php:194
+#: plugins/scmsvn/common/SVNPlugin.class.php:195
 #, fuzzy
 msgid "Repository Statistics"
 msgstr "Estatistikaka erabili"
 
-#: common/include/SCMPlugin.class.php:181
+#: common/include/SCMPlugin.class.php:185
 msgid "Not implemented for this SCM plugin yet."
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:219
+#: common/include/SCMPlugin.class.php:223
 msgid "Repository History"
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:220
+#: common/include/SCMPlugin.class.php:224
 msgid "Data about current and past states of the repository"
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:250
+#: common/include/SCMPlugin.class.php:254
 #, fuzzy
 msgid "Enable Anonymous Read Access"
 msgstr "FTP espazioa anonimoa"
@@ -3570,7 +3567,8 @@ msgstr ""
 msgid "Priority Colors"
 msgstr "Prioritateen koloreak"
 
-#: common/include/utils.php:494 common/tracker/views/form-addcanned.php:68
+#: common/include/utils.php:494 common/tracker/actions/query.php:403
+#: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-updatecanned.php:43
 #: common/tracker/views/form-updatecanned.php:46
@@ -3977,7 +3975,7 @@ msgid "No Survey Question is found"
 msgstr "Ez da inkesta galderarik topatu"
 
 #: common/survey/SurveyResponse.class.php:89
-#: common/tracker/actions/tracker.php:292
+#: common/tracker/actions/tracker.php:280
 #: common/tracker/views/form-adminroadmap.php:56
 #: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:62
 #: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
@@ -4108,11 +4106,11 @@ msgstr "Monitorizazio berria"
 msgid "Artifact Monitoring Deactivated"
 msgstr "Moritorizazioa desaktibatua"
 
-#: common/tracker/Artifact.class.php:905 common/tracker/actions/browse.php:562
-#: common/tracker/actions/browse.php:741 common/tracker/actions/detail.php:86
-#: common/tracker/actions/mod-limited.php:111
-#: common/tracker/actions/mod.php:138
-#: common/tracker/include/build_submission_form.php:62
+#: common/tracker/Artifact.class.php:905 common/tracker/actions/browse.php:568
+#: common/tracker/actions/browse.php:747 common/tracker/actions/detail.php:92
+#: common/tracker/actions/mod-limited.php:119
+#: common/tracker/actions/mod.php:145
+#: common/tracker/include/build_submission_form.php:61
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
 #: plugins/mantisbt/view/viewIssue.php:77 www/my/dashboard.php:72
@@ -4123,21 +4121,21 @@ msgstr "Moritorizazioa desaktibatua"
 msgid "Assigned to"
 msgstr "Nori esleitua"
 
-#: common/tracker/Artifact.class.php:909 common/tracker/actions/browse.php:403
-#: common/tracker/actions/browse.php:558 common/tracker/actions/browse.php:745
-#: common/tracker/actions/detail.php:72
-#: common/tracker/actions/mod-limited.php:125
-#: common/tracker/actions/mod.php:157 common/tracker/actions/query.php:337
+#: common/tracker/Artifact.class.php:909 common/tracker/actions/browse.php:409
+#: common/tracker/actions/browse.php:564 common/tracker/actions/browse.php:751
+#: common/tracker/actions/detail.php:78
+#: common/tracker/actions/mod-limited.php:133
+#: common/tracker/actions/mod.php:164 common/tracker/actions/query.php:344
 #: common/tracker/views/form-customizelist.php:45 www/pm/browse_task.php:383
 #: www/project/admin/database.php:208
 msgid "State"
 msgstr "Egoera"
 
-#: common/tracker/Artifact.class.php:913 common/tracker/actions/browse.php:751
+#: common/tracker/Artifact.class.php:913 common/tracker/actions/browse.php:757
 msgid "Canned Response"
 msgstr "Aurretik jarritako erantzuna"
 
-#: common/tracker/Artifact.class.php:917 common/tracker/actions/mod.php:109
+#: common/tracker/Artifact.class.php:917 common/tracker/actions/mod.php:116
 msgid "Data Type"
 msgstr "Datu motak"
 
@@ -4207,8 +4205,8 @@ msgstr "Erabiltzailea dagoeneko existitzen da"
 
 #: common/tracker/ArtifactExtraField.class.php:186
 #: common/tracker/ArtifactExtraField.class.php:192
-#: common/tracker/actions/admin-updates.php:100
-#: common/tracker/actions/admin-updates.php:199
+#: common/tracker/actions/admin-updates.php:107
+#: common/tracker/actions/admin-updates.php:206
 msgid "Error inserting an element"
 msgstr "Errorea elementu bat txertatzerakoan"
 
@@ -4329,36 +4327,36 @@ msgstr "Unix izen hau hartua dago"
 msgid "\"%s\" roadmap already exists"
 msgstr "Erabiltzailea dagoeneko existitzen da"
 
-#: common/tracker/actions/add.php:26
-#: common/tracker/include/ArtifactTypeHtml.class.php:71
+#: common/tracker/actions/add.php:30
+#: common/tracker/include/ArtifactTypeHtml.class.php:61
 msgid "Submit New"
 msgstr "Artikulu berria sortu"
 
-#: common/tracker/actions/admin-ind.php:47
+#: common/tracker/actions/admin-ind.php:49
 #, fuzzy
 msgid "Tracker created successfully"
 msgstr "Ongi sortutako ataza"
 
-#: common/tracker/actions/admin-ind.php:49 www/pm/admin/index.php:80
+#: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:80
 msgid "Please configure also the roles (by default, it's 'No Access')"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:61 common/tracker/actions/ind.php:27
+#: common/tracker/actions/admin-ind.php:63 common/tracker/actions/ind.php:31
 #, fuzzy
 msgid "Could Not Get ArtifactTypeFactory"
 msgstr "Ezin izan da eragiketa gauzatu"
 
-#: common/tracker/actions/admin-ind.php:86
+#: common/tracker/actions/admin-ind.php:88
 #, fuzzy
 msgid "Trackers Administration"
 msgstr "Inkesten administrazioa"
 
-#: common/tracker/actions/admin-ind.php:89
+#: common/tracker/actions/admin-ind.php:91
 #, fuzzy
 msgid "No trackers found"
 msgstr "Ez dira erregistroak aurkitzen"
 
-#: common/tracker/actions/admin-ind.php:93
+#: common/tracker/actions/admin-ind.php:95
 msgid ""
 "Choose a data type and you can set up prefs, categories, groups, users, and "
 "permissions"
@@ -4366,7 +4364,7 @@ msgstr ""
 "Datu mota bat aukeratu ezazu lehentasunak, kategoriak, taldeak, "
 "erabiltzaileak eta baimenak sartzeko"
 
-#: common/tracker/actions/admin-ind.php:120
+#: common/tracker/actions/admin-ind.php:122
 msgid ""
 "<h3>Create a new tracker</h3><p>You can use this system to track virtually "
 "any kind of data, with each tracker having separate user, group, category, "
@@ -4378,46 +4376,46 @@ msgid ""
 "for each type, which can get time-consuming.</p>"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:124
+#: common/tracker/actions/admin-ind.php:126
 msgid ""
 "<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)"
 msgstr ""
 "<strong>Izena:</strong> (adibideak: bilerak, test erantzunak, dokumentuak, "
 "eta abar.)"
 
-#: common/tracker/actions/admin-ind.php:130
+#: common/tracker/actions/admin-ind.php:132
 #: common/tracker/views/form-updatetracker.php:63
 msgid "Send email on new submission to address"
 msgstr "Posta bidali helbide berria badago"
 
-#: common/tracker/actions/admin-ind.php:133
+#: common/tracker/actions/admin-ind.php:135
 #: common/tracker/views/form-updatetracker.php:66
 msgid "Send email on all changes"
 msgstr "Posta bidali aldaketa guztiekin"
 
-#: common/tracker/actions/admin-ind.php:135
+#: common/tracker/actions/admin-ind.php:137
 #: common/tracker/views/form-updatetracker.php:68
 msgid "Days till considered overdue"
 msgstr "Zaharkitua dagoela erabakitzeko egunak"
 
-#: common/tracker/actions/admin-ind.php:138
+#: common/tracker/actions/admin-ind.php:140
 #: common/tracker/views/form-updatetracker.php:71
 msgid "Days till pending tracker items time out"
 msgstr "Zintzilik dauden erregistroentzako denbora mugatu egunetan"
 
-#: common/tracker/actions/admin-ind.php:141
+#: common/tracker/actions/admin-ind.php:143
 #: common/tracker/views/form-updatetracker.php:74
 msgid "Free form text for the \"submit new item\" page"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:144
+#: common/tracker/actions/admin-ind.php:146
 #: common/tracker/views/form-updatetracker.php:77
 msgid "Free form text for the \"browse items\" page"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:147
-#: common/tracker/include/build_submission_form.php:54
-#: common/tracker/include/build_submission_form.php:118
+#: common/tracker/actions/admin-ind.php:149
+#: common/tracker/include/build_submission_form.php:53
+#: common/tracker/include/build_submission_form.php:117
 #: common/tracker/views/form-addcanned.php:74
 #: common/tracker/views/form-addextrafield.php:147
 #: common/tracker/views/form-addextrafieldoption.php:102
@@ -4425,13 +4423,13 @@ msgstr ""
 #: common/tracker/views/form-clonetracker.php:59
 #: common/tracker/views/form-customizelist.php:92
 #: common/tracker/views/form-edittemplate.php:26
-#: common/tracker/views/form-extrafieldcopy.php:96
+#: common/tracker/views/form-extrafieldcopy.php:93
 #: common/tracker/views/form-updatecanned.php:49
 #: common/tracker/views/form-updateextrafield.php:79
 #: common/tracker/views/form-updateextrafieldelement.php:67
 #: common/tracker/views/form-updatetracker.php:80
-#: common/tracker/views/form-workflow.php:121
-#: common/tracker/views/form-workflow_roles.php:76
+#: common/tracker/views/form-workflow.php:123
+#: common/tracker/views/form-workflow_roles.php:78
 #: common/widget/Widget.class.php:102
 #: common/widget/WidgetLayoutManager.class.php:320
 #: plugins/contribtracker/www/global_admin.php:383
@@ -4441,7 +4439,7 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:603 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
-#: www/account/pending-resend.php:75 www/activity/index.php:176
+#: www/account/pending-resend.php:75 www/activity/index.php:184
 #: www/admin/admin_table.php:212 www/admin/cronman.php:37
 #: www/admin/globalroleedit.php:247 www/admin/index.php:163
 #: www/admin/pending-news.php:172 www/forum/admin/index.php:397
@@ -4459,91 +4457,91 @@ msgstr ""
 msgid "Submit"
 msgstr "Bidali"
 
-#: common/tracker/actions/admin-tracker.php:31
-#: common/tracker/include/ArtifactTypeHtml.class.php:119
+#: common/tracker/actions/admin-tracker.php:35
+#: common/tracker/include/ArtifactTypeHtml.class.php:109
 msgid "New Tracker"
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:32
+#: common/tracker/actions/admin-tracker.php:36
 #, fuzzy
 msgid "Create a new tracker."
 msgstr "Pakete bat sortu"
 
-#: common/tracker/actions/admin-tracker.php:36
-#: common/tracker/include/ArtifactTypeHtml.class.php:122
+#: common/tracker/actions/admin-tracker.php:40
+#: common/tracker/include/ArtifactTypeHtml.class.php:112
 msgid "Update Settings"
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:37
+#: common/tracker/actions/admin-tracker.php:41
 #, fuzzy
 msgid "Set up preferences like expiration times, email addresses."
 msgstr "Zure lehentasunak aukeratu: iraungitze denbora, posta elektronikoa"
 
-#: common/tracker/actions/admin-tracker.php:41
-#: common/tracker/include/ArtifactTypeHtml.class.php:125
+#: common/tracker/actions/admin-tracker.php:45
+#: common/tracker/include/ArtifactTypeHtml.class.php:115
 msgid "Manage Custom Fields"
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:42
+#: common/tracker/actions/admin-tracker.php:46
 msgid ""
 "Add new boxes like Phases, Quality Metrics, Components, etc.  Once added "
 "they can be used with other selection boxes (for example, Categories or "
 "Groups) to describe and browse bugs or other artifact types."
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:46
-#: common/tracker/include/ArtifactTypeHtml.class.php:128
+#: common/tracker/actions/admin-tracker.php:50
+#: common/tracker/include/ArtifactTypeHtml.class.php:118
 msgid "Manage Workflow"
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:47
+#: common/tracker/actions/admin-tracker.php:51
 msgid "Edit tracker workflow."
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:51
-#: common/tracker/include/ArtifactTypeHtml.class.php:131
+#: common/tracker/actions/admin-tracker.php:55
+#: common/tracker/include/ArtifactTypeHtml.class.php:121
 msgid "Customize List"
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:52
+#: common/tracker/actions/admin-tracker.php:56
 msgid "Customize display for the tracker."
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:56
-#: common/tracker/include/ArtifactTypeHtml.class.php:134
+#: common/tracker/actions/admin-tracker.php:60
+#: common/tracker/include/ArtifactTypeHtml.class.php:124
 msgid "Add/Update Canned Responses"
 msgstr "Gehitu/Eguneratu aurretik jarritako erantzunak"
 
-#: common/tracker/actions/admin-tracker.php:57
+#: common/tracker/actions/admin-tracker.php:61
 #, fuzzy
 msgid "Create/change generic response messages for the tracker."
 msgstr ""
 "Erregistro honentzako aukeratuak izan diren erantzun generikoen mezuak sortu/"
 "aldatu."
 
-#: common/tracker/actions/admin-tracker.php:61
+#: common/tracker/actions/admin-tracker.php:65
 #, fuzzy
 msgid "Apply Template Tracker"
 msgstr "Erlazionatuak dauden erregistroko elementuak"
 
-#: common/tracker/actions/admin-tracker.php:62
+#: common/tracker/actions/admin-tracker.php:66
 msgid "Duplicate parameters and fields from a template trackers in this one."
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:67
+#: common/tracker/actions/admin-tracker.php:71
 msgid "Permanently delete this tracker."
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:39
-#: common/tracker/actions/admin-updates.php:58
-#: common/tracker/actions/admin-updates.php:87
-#: common/tracker/actions/admin-updates.php:181
-#: common/tracker/actions/admin-updates.php:223
-#: common/tracker/actions/admin-updates.php:246
-#: common/tracker/actions/admin-updates.php:363
-#: common/tracker/actions/admin-updates.php:383
-#: common/tracker/actions/admin-updates.php:406
-#: common/tracker/actions/admin-updates.php:458
+#: common/tracker/actions/admin-updates.php:46
+#: common/tracker/actions/admin-updates.php:65
+#: common/tracker/actions/admin-updates.php:94
+#: common/tracker/actions/admin-updates.php:188
+#: common/tracker/actions/admin-updates.php:230
+#: common/tracker/actions/admin-updates.php:253
+#: common/tracker/actions/admin-updates.php:371
+#: common/tracker/actions/admin-updates.php:391
+#: common/tracker/actions/admin-updates.php:415
+#: common/tracker/actions/admin-updates.php:470
 #: common/tracker/views/form-addextrafieldoption.php:31
 #: common/tracker/views/form-deleteextrafieldelement.php:35
 #: common/tracker/views/form-updateextrafield.php:36
@@ -4551,141 +4549,141 @@ msgstr ""
 msgid "Unable to create ArtifactExtraField Object"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:44
+#: common/tracker/actions/admin-updates.php:51
 msgid "Error inserting a custom field"
 msgstr "Errorea pertsonalizatutako eremua txertatzerakoan"
 
-#: common/tracker/actions/admin-updates.php:47
+#: common/tracker/actions/admin-updates.php:54
 msgid "Extra field inserted"
 msgstr "Eremu gehigarria txertatua"
 
-#: common/tracker/actions/admin-updates.php:74
+#: common/tracker/actions/admin-updates.php:81
 msgid "Custom Field Deleted"
 msgstr "Eremu pertsonalizatua ezabatua"
 
-#: common/tracker/actions/admin-updates.php:103
+#: common/tracker/actions/admin-updates.php:110
 msgid "Element inserted"
 msgstr "Elementua txertatua"
 
-#: common/tracker/actions/admin-updates.php:117
-#: common/tracker/actions/admin-updates.php:139
+#: common/tracker/actions/admin-updates.php:124
+#: common/tracker/actions/admin-updates.php:146
 #: www/tracker/admin/index.php:183
 #, fuzzy
 msgid "Unable to create ArtifactCanned Object"
 msgstr "Akatsa taldea sortzen"
 
-#: common/tracker/actions/admin-updates.php:122
+#: common/tracker/actions/admin-updates.php:129
 msgid "Error inserting"
 msgstr "Akatsa txertatzean"
 
-#: common/tracker/actions/admin-updates.php:125
+#: common/tracker/actions/admin-updates.php:132
 msgid "Canned Response Inserted"
 msgstr "Aurretik jarritako erantzuna sartua izan da."
 
-#: common/tracker/actions/admin-updates.php:144
-#: common/tracker/actions/admin-updates.php:300
-#: common/tracker/actions/admin-updates.php:324
-#: common/tracker/actions/admin-updates.php:338
+#: common/tracker/actions/admin-updates.php:151
+#: common/tracker/actions/admin-updates.php:307
+#: common/tracker/actions/admin-updates.php:331
+#: common/tracker/actions/admin-updates.php:345
 msgid "Error updating"
 msgstr "Akatsa eguneratzean"
 
-#: common/tracker/actions/admin-updates.php:147
+#: common/tracker/actions/admin-updates.php:154
 msgid "Canned Response Updated"
 msgstr "Aurretik jarritako erantzuna eguneratua"
 
-#: common/tracker/actions/admin-updates.php:170
-#: common/tracker/actions/tracker.php:49 www/tracker/admin/index.php:68
+#: common/tracker/actions/admin-updates.php:177
+#: common/tracker/actions/tracker.php:37 www/tracker/admin/index.php:68
 #: www/tracker/download.php:43
 msgid "ArtifactType could not be created"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:177
+#: common/tracker/actions/admin-updates.php:184
 #, fuzzy
 msgid "Copy into Tracker: "
 msgstr "Erregistroaren artikulua."
 
-#: common/tracker/actions/admin-updates.php:228
-#: common/tracker/actions/admin-updates.php:259
-#: common/tracker/actions/admin-updates.php:368
-#: common/tracker/actions/admin-updates.php:391
-#: common/tracker/actions/admin-updates.php:411
+#: common/tracker/actions/admin-updates.php:235
+#: common/tracker/actions/admin-updates.php:266
+#: common/tracker/actions/admin-updates.php:376
+#: common/tracker/actions/admin-updates.php:399
+#: common/tracker/actions/admin-updates.php:420
 msgid "Error updating a custom field"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:231
+#: common/tracker/actions/admin-updates.php:238
 msgid "Custom Field updated"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:252
-#: common/tracker/actions/admin-updates.php:464
+#: common/tracker/actions/admin-updates.php:259
+#: common/tracker/actions/admin-updates.php:476
 #: common/tracker/views/form-deleteextrafieldelement.php:42
 #: common/tracker/views/form-updateextrafieldelement.php:40
 msgid "Unable to create ArtifactExtraFieldElement Object"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:262
+#: common/tracker/actions/admin-updates.php:269
 msgid "Element updated"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:275
+#: common/tracker/actions/admin-updates.php:282
 msgid "Clone ID"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:278
+#: common/tracker/actions/admin-updates.php:285
 #, fuzzy
 msgid "Error cloning fields: "
 msgstr "Errorea pertsonalizatutako eremua txertatzerakoan"
 
-#: common/tracker/actions/admin-updates.php:280
+#: common/tracker/actions/admin-updates.php:287
 #, fuzzy
 msgid "Successfully Cloned Tracker Fields "
 msgstr "Successfully Erregistroaren zerrenda ongi gehitu da"
 
-#: common/tracker/actions/admin-updates.php:303
-#: common/tracker/actions/admin-updates.php:327
-#: common/tracker/actions/admin-updates.php:371
-#: common/tracker/actions/admin-updates.php:400
-#: common/tracker/actions/admin-updates.php:414
+#: common/tracker/actions/admin-updates.php:310
+#: common/tracker/actions/admin-updates.php:334
+#: common/tracker/actions/admin-updates.php:379
+#: common/tracker/actions/admin-updates.php:408
+#: common/tracker/actions/admin-updates.php:423
 msgid "Tracker Updated"
 msgstr "Erregistroa eguneratua"
 
-#: common/tracker/actions/admin-updates.php:353
+#: common/tracker/actions/admin-updates.php:360
 #, fuzzy
 msgid "Renderer Updated"
 msgstr "Karga"
 
-#: common/tracker/actions/admin-updates.php:427
+#: common/tracker/actions/admin-updates.php:437
 msgid "ERROR: Initial values not saved, no initial state given."
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:431
+#: common/tracker/actions/admin-updates.php:441
 msgid "Initial values saved."
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:440
-#: common/tracker/actions/admin-updates.php:449
+#: common/tracker/actions/admin-updates.php:450
+#: common/tracker/actions/admin-updates.php:460
 msgid "Workflow saved"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:467
+#: common/tracker/actions/admin-updates.php:479
 #, fuzzy
 msgid "Error deleting an element"
 msgstr "Errorea elementu bat txertatzerakoan"
 
-#: common/tracker/actions/admin-updates.php:470
+#: common/tracker/actions/admin-updates.php:482
 #, fuzzy
 msgid "Element deleted"
 msgstr "Elementua txertatua"
 
-#: common/tracker/actions/browse.php:88 common/tracker/actions/taskmgr.php:136
+#: common/tracker/actions/browse.php:94 common/tracker/actions/taskmgr.php:142
 #: www/pm/admin/index.php:386 www/pm/index.php:46 www/pm/task.php:86
 #: www/tracker/roadmap.php:333
 #, fuzzy
 msgid "Could Not Get Factory"
 msgstr "Ezin izan da eragiketa gauzatu"
 
-#: common/tracker/actions/browse.php:177 common/tracker/actions/browse.php:301
-#: common/tracker/actions/browse.php:306 common/tracker/actions/query.php:337
+#: common/tracker/actions/browse.php:183 common/tracker/actions/browse.php:307
+#: common/tracker/actions/browse.php:312 common/tracker/actions/query.php:344
 #: www/pm/browse_task.php:106 www/pm/browse_task.php:117
 #: www/pm/browse_task.php:160 www/pm/ganttpage.php:56 www/pm/ganttpage.php:58
 #: www/pm/ganttpage.php:60 www/pm/ganttpage.php:62
@@ -4693,24 +4691,24 @@ msgstr "Ezin izan da eragiketa gauzatu"
 msgid "Any"
 msgstr "Edozein"
 
-#: common/tracker/actions/browse.php:182 www/pm/browse_task.php:108
+#: common/tracker/actions/browse.php:188 www/pm/browse_task.php:108
 #: www/pm/browse_task.php:355 www/pm/ganttpage.php:58
 msgid "Unassigned"
 msgstr "Esleitu gabea"
 
-#: common/tracker/actions/browse.php:189 common/tracker/actions/browse.php:548
-#: common/tracker/actions/query.php:190
+#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
+#: common/tracker/actions/query.php:197
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
-#: www/admin/search.php:89 www/admin/search.php:167 www/my/dashboard.php:62
+#: www/admin/search.php:80 www/admin/search.php:158 www/my/dashboard.php:62
 #: www/pm/index.php:98 www/project/admin/editimages.php:265
 msgid "ID"
 msgstr "ID-a"
 
-#: common/tracker/actions/browse.php:190 common/tracker/actions/browse.php:560
-#: common/tracker/actions/browse.php:733 common/tracker/actions/detail.php:68
-#: common/tracker/actions/mod-limited.php:116
-#: common/tracker/actions/mod.php:144 common/tracker/actions/query.php:191
-#: common/tracker/include/build_submission_form.php:66
+#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:566
+#: common/tracker/actions/browse.php:739 common/tracker/actions/detail.php:74
+#: common/tracker/actions/mod-limited.php:124
+#: common/tracker/actions/mod.php:151 common/tracker/actions/query.php:198
+#: common/tracker/include/build_submission_form.php:65
 #: common/tracker/views/form-customizelist.php:46
 #: plugins/mantisbt/view/addIssue.php:73
 #: plugins/mantisbt/view/editIssue.php:128
@@ -4721,131 +4719,131 @@ msgstr "ID-a"
 msgid "Priority"
 msgstr "Lehentasuna"
 
-#: common/tracker/actions/browse.php:192 common/tracker/actions/browse.php:554
-#: common/tracker/actions/query.php:193
+#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:560
+#: common/tracker/actions/query.php:200
 #: common/tracker/views/form-customizelist.php:44 www/people/viewjob.php:77
 #: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:137
 msgid "Open Date"
 msgstr "Bidali zen data"
 
-#: common/tracker/actions/browse.php:193 common/tracker/actions/browse.php:568
-#: common/tracker/actions/query.php:194
+#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:574
+#: common/tracker/actions/query.php:201
 #: common/tracker/views/form-customizelist.php:52
 #, fuzzy
 msgid "Last Modified Date"
 msgstr "Zerrenda Gehitua"
 
-#: common/tracker/actions/browse.php:194 common/tracker/actions/browse.php:556
-#: common/tracker/actions/query.php:195
+#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:562
+#: common/tracker/actions/query.php:202
 #: common/tracker/views/form-customizelist.php:49
 msgid "Close Date"
 msgstr "Irtenbidea aurkitu zen data"
 
-#: common/tracker/actions/browse.php:195 common/tracker/actions/query.php:196
-#: common/tracker/actions/query.php:343
+#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
+#: common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr "Nork bidalia"
 
-#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:400
-#: common/tracker/actions/query.php:197 common/tracker/actions/query.php:344
+#: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:406
+#: common/tracker/actions/query.php:204 common/tracker/actions/query.php:351
 #: www/pm/browse_task.php:159 www/pm/ganttpage.php:155
 msgid "Assignee"
 msgstr "Nork esleitua"
 
-#: common/tracker/actions/browse.php:213 common/tracker/actions/query.php:214
+#: common/tracker/actions/browse.php:219 common/tracker/actions/query.php:221
 msgid "Ascending"
 msgstr "Goranzko"
 
-#: common/tracker/actions/browse.php:214 common/tracker/actions/query.php:215
+#: common/tracker/actions/browse.php:220 common/tracker/actions/query.php:222
 msgid "Descending"
 msgstr "Beheranzko"
 
-#: common/tracker/actions/browse.php:224 common/tracker/actions/query.php:226
+#: common/tracker/actions/browse.php:230 common/tracker/actions/query.php:233
 #, fuzzy
 msgid "Any changes"
 msgstr "Aldaketak"
 
-#: common/tracker/actions/browse.php:225 common/tracker/actions/query.php:227
+#: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:234
 msgid "Last 24H"
 msgstr "Azken 24 orduak"
 
-#: common/tracker/actions/browse.php:226 common/tracker/actions/query.php:228
+#: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:235
 msgid "Last 7days"
 msgstr "Azken 7 egunak"
 
-#: common/tracker/actions/browse.php:227 common/tracker/actions/query.php:229
+#: common/tracker/actions/browse.php:233 common/tracker/actions/query.php:236
 msgid "Last 2weeks"
 msgstr "Azken 2 asteak"
 
-#: common/tracker/actions/browse.php:228 common/tracker/actions/query.php:230
+#: common/tracker/actions/browse.php:234 common/tracker/actions/query.php:237
 msgid "Last 1month"
 msgstr "Azken hilabetea"
 
-#: common/tracker/actions/browse.php:267
+#: common/tracker/actions/browse.php:273
 #, php-format
 msgid "Displaying results %1$d‒%2$d out of %3$d total."
 msgstr ""
 
-#: common/tracker/actions/browse.php:270 www/pm/browse_task.php:185
+#: common/tracker/actions/browse.php:276 www/pm/browse_task.php:185
 #, php-format
 msgid "Displaying %2$s results."
 msgstr ""
 
-#: common/tracker/actions/browse.php:272 www/pm/browse_task.php:187
+#: common/tracker/actions/browse.php:278 www/pm/browse_task.php:187
 #: www/top/topusers.php:67
 msgid "Change"
 msgstr "Aldatu"
 
-#: common/tracker/actions/browse.php:323
+#: common/tracker/actions/browse.php:329
 #, fuzzy
 msgid "Advanced queries"
 msgstr "Kategoriak gehitu"
 
-#: common/tracker/actions/browse.php:375
+#: common/tracker/actions/browse.php:381
 msgid "Power Query"
 msgstr ""
 
-#: common/tracker/actions/browse.php:377 common/tracker/actions/browse.php:389
-#: common/tracker/actions/query.php:249 common/tracker/actions/query.php:253
+#: common/tracker/actions/browse.php:383 common/tracker/actions/browse.php:395
+#: common/tracker/actions/query.php:256 common/tracker/actions/query.php:260
 msgid "Build Query"
 msgstr ""
 
-#: common/tracker/actions/browse.php:393
+#: common/tracker/actions/browse.php:399
 msgid "Simple Filtering and Sorting"
 msgstr ""
 
-#: common/tracker/actions/browse.php:421 common/tracker/actions/query.php:388
+#: common/tracker/actions/browse.php:427 common/tracker/actions/query.php:395
 msgid "Order by"
 msgstr "Nola antolatu"
 
-#: common/tracker/actions/browse.php:424
+#: common/tracker/actions/browse.php:430
 msgid "Quick Browse"
 msgstr ""
 
-#: common/tracker/actions/browse.php:433
+#: common/tracker/actions/browse.php:439
 #: common/tracker/views/form-adminroadmap.php:488
 msgid "Default"
 msgstr ""
 
-#: common/tracker/actions/browse.php:434
+#: common/tracker/actions/browse.php:440
 msgid ""
 "Viewing only opened records by default, use 'Advanced queries' or 'Simple "
 "Filtering and Sorting' to change."
 msgstr ""
 
-#: common/tracker/actions/browse.php:533 www/pm/browse_task.php:210
+#: common/tracker/actions/browse.php:539 www/pm/browse_task.php:210
 #, fuzzy
 msgid "Check all"
 msgstr "Denak aukeratu"
 
-#: common/tracker/actions/browse.php:535 www/pm/browse_task.php:212
+#: common/tracker/actions/browse.php:541 www/pm/browse_task.php:212
 #, fuzzy
 msgid "Clear all"
 msgstr "Denak ezabatu"
 
-#: common/tracker/actions/browse.php:564 common/tracker/actions/detail.php:77
-#: common/tracker/actions/mod-limited.php:83 common/tracker/actions/mod.php:86
+#: common/tracker/actions/browse.php:570 common/tracker/actions/detail.php:83
+#: common/tracker/actions/mod-limited.php:91 common/tracker/actions/mod.php:93
 #: www/admin/pending-news.php:146 www/my/dashboard.php:74
 #: www/news/admin/index.php:127 www/pm/detail_task.php:39
 #: www/pm/mod_task.php:52
@@ -4854,243 +4852,244 @@ msgstr "Denak ezabatu"
 msgid "Submitted by"
 msgstr ""
 
-#: common/tracker/actions/browse.php:566
+#: common/tracker/actions/browse.php:572
 #: common/tracker/views/form-customizelist.php:51
 #, fuzzy
 msgid "Related tasks"
 msgstr "Erlazionatuak dauden erregistroko elementuak"
 
-#: common/tracker/actions/browse.php:686
+#: common/tracker/actions/browse.php:692
 #, php-format
 msgid "* Denotes requests > %1$s Days Old"
 msgstr "* Duela %1$s egun erregistratu zela esan nahi du"
 
-#: common/tracker/actions/browse.php:709 www/pm/browse_task.php:361
+#: common/tracker/actions/browse.php:715 www/pm/browse_task.php:361
 #: www/pm/browse_task.php:390
 #, fuzzy
 msgid "Mass Update"
 msgstr "Eguneratze masiboa"
 
-#: common/tracker/actions/browse.php:714 www/pm/browse_task.php:366
+#: common/tracker/actions/browse.php:720 www/pm/browse_task.php:366
 msgid ""
 "<strong>Admin:</strong> If you wish to apply changes to all items selected "
 "above, use these controls to change their properties and click once on "
 "\"Mass Update\"."
 msgstr ""
 
-#: common/tracker/actions/browse.php:731 common/tracker/actions/browse.php:742
-#: common/tracker/actions/browse.php:746 www/include/html.php:318
-#: www/include/html.php:484 www/include/html.php:675
+#: common/tracker/actions/browse.php:737 common/tracker/actions/browse.php:748
+#: common/tracker/actions/browse.php:752 www/include/html.php:318
+#: www/include/html.php:490 www/include/html.php:681
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:373
 #: www/pm/browse_task.php:384
 msgid "No Change"
 msgstr "Ez aldatu"
 
-#: common/tracker/actions/browse.php:742
-#: common/tracker/include/ArtifactTypeHtml.class.php:672
-#: common/tracker/include/ArtifactTypeHtml.class.php:706
+#: common/tracker/actions/browse.php:748
+#: common/tracker/include/ArtifactTypeHtml.class.php:662
+#: common/tracker/include/ArtifactTypeHtml.class.php:696
 msgid "Nobody"
 msgstr "Inor"
 
-#: common/tracker/actions/browse.php:754
+#: common/tracker/actions/browse.php:760
 msgid "Mass update"
 msgstr "Eguneratze masiboa"
 
-#: common/tracker/actions/browse.php:763
+#: common/tracker/actions/browse.php:769
 msgid "No items found"
 msgstr "Ez dira erregistroak aurkitzen"
 
-#: common/tracker/actions/csv.php:79
+#: common/tracker/actions/csv.php:84
 msgid ""
 "This page allows you to export the items using a CSV (<a href=\"http://en."
 "wikipedia.org/wiki/Comma-separated_values\">Comma Separated Values</a>) "
 "File. This format can be used to view your entries using MS Excel."
 msgstr ""
 
-#: common/tracker/actions/csv.php:80
+#: common/tracker/actions/csv.php:85
 #, fuzzy
 msgid "Export as a CSV file"
 msgstr "Estatistikak ez daude eskuragarri"
 
-#: common/tracker/actions/csv.php:82 www/pm/csv.php:83
+#: common/tracker/actions/csv.php:87 www/pm/csv.php:83
 msgid "Selected CSV Format :"
 msgstr ""
 
-#: common/tracker/actions/csv.php:84
+#: common/tracker/actions/csv.php:89
 #, fuzzy
 msgid "Download CSV file"
 msgstr "Bertsioa deskargatu"
 
-#: common/tracker/actions/deleteartifact.php:11
+#: common/tracker/actions/deleteartifact.php:32
 msgid "Delete artifact"
 msgstr "Ezabatu artefaktua"
 
-#: common/tracker/actions/deleteartifact.php:21
+#: common/tracker/actions/deleteartifact.php:42
 #, fuzzy
 msgid "Confirm Deletion"
 msgstr "Ezabapena baieztatu"
 
-#: common/tracker/actions/deleteartifact.php:30
+#: common/tracker/actions/deleteartifact.php:51
 msgid "Are you sure you want to delete this artifact?"
 msgstr "Ziur zaude artefaktu hau ezabatu nahi duzula?"
 
-#: common/tracker/actions/deleteartifact.php:33
+#: common/tracker/actions/deleteartifact.php:54
 msgid "Yes, I want to delete this artifact"
 msgstr "Bai, artefaktu hau ezabatu nahi dut"
 
-#: common/tracker/actions/detail.php:48
-#: common/tracker/actions/mod-limited.php:55 common/tracker/actions/mod.php:54
+#: common/tracker/actions/detail.php:54
+#: common/tracker/actions/mod-limited.php:63 common/tracker/actions/mod.php:61
 #, fuzzy
 msgid "Stop monitor"
 msgstr "Monitorizatzeaz gelditu"
 
-#: common/tracker/actions/detail.php:52
-#: common/tracker/actions/mod-limited.php:59 common/tracker/actions/mod.php:58
-#: common/tracker/include/ArtifactTypeHtml.class.php:85
-#: common/tracker/include/ArtifactTypeHtml.class.php:96
+#: common/tracker/actions/detail.php:58
+#: common/tracker/actions/mod-limited.php:67 common/tracker/actions/mod.php:65
+#: common/tracker/include/ArtifactTypeHtml.class.php:75
+#: common/tracker/include/ArtifactTypeHtml.class.php:86
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:64
 msgid "Monitor"
 msgstr ""
 
-#: common/tracker/actions/detail.php:60
-#: common/tracker/actions/mod-limited.php:75 common/tracker/actions/mod.php:77
-#: common/tracker/actions/query.php:262
+#: common/tracker/actions/detail.php:66
+#: common/tracker/actions/mod-limited.php:83 common/tracker/actions/mod.php:84
+#: common/tracker/actions/query.php:269
 msgid "Save Changes"
 msgstr "Gorde aldaketak"
 
-#: common/tracker/actions/detail.php:107
-#: common/tracker/actions/mod-limited.php:156
-#: common/tracker/actions/mod.php:194 common/tracker/actions/query.php:383
+#: common/tracker/actions/detail.php:113
+#: common/tracker/actions/mod-limited.php:164
+#: common/tracker/actions/mod.php:201 common/tracker/actions/query.php:390
 msgid "Followups"
 msgstr ""
 
-#: common/tracker/actions/detail.php:116
-#: common/tracker/actions/mod-limited.php:159
-#: common/tracker/actions/mod.php:220 www/pm/mod_task.php:126
+#: common/tracker/actions/detail.php:122
+#: common/tracker/actions/mod-limited.php:167
+#: common/tracker/actions/mod.php:227 www/pm/mod_task.php:126
 msgid "Add A Comment"
 msgstr "Azalpena gehitu"
 
-#: common/tracker/actions/detail.php:123
-#: common/tracker/actions/mod-limited.php:162
-#: common/tracker/actions/mod.php:222
+#: common/tracker/actions/detail.php:129
+#: common/tracker/actions/mod-limited.php:170
+#: common/tracker/actions/mod.php:229
 #: www/pm/include/ProjectTaskHTML.class.php:142
 #, fuzzy
 msgid "Followups: "
 msgstr "Azalpenak"
 
-#: common/tracker/actions/detail.php:127
-#: common/tracker/actions/mod-limited.php:166
-#: common/tracker/actions/mod.php:226
+#: common/tracker/actions/detail.php:133
+#: common/tracker/actions/mod-limited.php:174
+#: common/tracker/actions/mod.php:233
 #: www/pm/include/ProjectTaskHTML.class.php:147
 msgid "Sort comments antichronologically"
 msgstr ""
 
-#: common/tracker/actions/detail.php:131
-#: common/tracker/actions/mod-limited.php:170
-#: common/tracker/actions/mod.php:230
+#: common/tracker/actions/detail.php:137
+#: common/tracker/actions/mod-limited.php:178
+#: common/tracker/actions/mod.php:237
 #: www/pm/include/ProjectTaskHTML.class.php:151
 msgid "Sort comments chronologically"
 msgstr ""
 
-#: common/tracker/actions/detail.php:146
-#: common/tracker/actions/mod-limited.php:184
-#: common/tracker/actions/mod.php:253
-#: common/tracker/include/ArtifactTypeHtml.class.php:364
+#: common/tracker/actions/detail.php:152
+#: common/tracker/actions/mod-limited.php:192
+#: common/tracker/actions/mod.php:260
+#: common/tracker/include/ArtifactTypeHtml.class.php:354
 #: www/forum/attachment.php:41 www/forum/attachment.php:125
 #: www/forum/attachment.php:153
 msgid "Attachments"
 msgstr ""
 
-#: common/tracker/actions/detail.php:150
-#: common/tracker/actions/mod-limited.php:188
-#: common/tracker/actions/mod.php:257
-#: common/tracker/include/build_submission_form.php:106
+#: common/tracker/actions/detail.php:156
+#: common/tracker/actions/mod-limited.php:196
+#: common/tracker/actions/mod.php:264
+#: common/tracker/include/build_submission_form.php:105
 msgid "Attach Files"
 msgstr ""
 
-#: common/tracker/actions/detail.php:158
-#: common/tracker/actions/mod-limited.php:195
+#: common/tracker/actions/detail.php:164
+#: common/tracker/actions/mod-limited.php:203
 msgid "Attached Files"
 msgstr "Erantsitako fitxategiak"
 
-#: common/tracker/actions/detail.php:168
-#: common/tracker/actions/mod-limited.php:205
-#: common/tracker/actions/mod.php:272
+#: common/tracker/actions/detail.php:174
+#: common/tracker/actions/mod-limited.php:213
+#: common/tracker/actions/mod.php:279
 #: plugins/scmcvs/common/CVSPlugin.class.php:153
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:198
-#: plugins/scmsvn/common/SVNPlugin.class.php:199
+#: plugins/scmsvn/common/SVNPlugin.class.php:200
 #: utils/fixscripts/populate_template_project.php:203
 #: www/stats/site_stats_utils.php:303
 msgid "Commits"
 msgstr ""
 
-#: common/tracker/actions/detail.php:178 common/tracker/actions/detail.php:182
-#: common/tracker/actions/mod-limited.php:215
-#: common/tracker/actions/mod.php:282 common/tracker/actions/mod.php:286
-#: common/tracker/include/ArtifactHtml.class.php:191
+#: common/tracker/actions/detail.php:184 common/tracker/actions/detail.php:188
+#: common/tracker/actions/mod-limited.php:223
+#: common/tracker/actions/mod.php:289 common/tracker/actions/mod.php:293
+#: common/tracker/include/ArtifactHtml.class.php:178
 msgid "Changes"
 msgstr "Aldaketak"
 
-#: common/tracker/actions/ind.php:40
+#: common/tracker/actions/ind.php:44
 msgid "No trackers have been set up, or you cannot view them."
 msgstr ""
 
-#: common/tracker/actions/ind.php:42
+#: common/tracker/actions/ind.php:46
 #, php-format
 msgid ""
 "The Admin for this project will have to set up data types using the %1$s "
 "admin page %2$s"
 msgstr ""
 
-#: common/tracker/actions/ind.php:48
+#: common/tracker/actions/ind.php:52
 msgid "Choose a tracker and you can browse/edit/add items to it."
 msgstr ""
 "Erregistro bat aukeratu bertan nabigatu/argitaratu/elementuak gehitu ahal "
 "izateko."
 
-#: common/tracker/actions/ind.php:53
+#: common/tracker/actions/ind.php:57
 #: plugins/mantisbt/view/admin/StatPerStatus.php:48
 #: www/include/tool_reports.php:65 www/pm/index.php:101
 #: www/reporting/usersummary.php:54
 msgid "Open"
 msgstr ""
 
-#: common/tracker/actions/ind.php:53
+#: common/tracker/actions/ind.php:57
 #: plugins/mantisbt/view/admin/StatPerStatus.php:51
 #: plugins/quota_management/www/quota_project.php:185
 #: plugins/quota_management/www/quota_project.php:230
 #: plugins/scmcvs/common/CVSPlugin.class.php:171
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:216
 #: plugins/scmgit/common/GitPlugin.class.php:263
-#: plugins/scmsvn/common/SVNPlugin.class.php:217 www/pm/index.php:102
+#: plugins/scmsvn/common/SVNPlugin.class.php:218 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:285
 msgid "Total"
 msgstr "Orotara"
 
-#: common/tracker/actions/mod-limited.php:70 common/tracker/actions/mod.php:69
+#: common/tracker/actions/mod-limited.php:78 common/tracker/actions/mod.php:76
 msgid "Build Task Relation"
 msgstr "Erlazionaturiko ataza sortu"
 
-#: common/tracker/actions/mod-limited.php:93 common/tracker/actions/mod.php:95
+#: common/tracker/actions/mod-limited.php:101
+#: common/tracker/actions/mod.php:102
 msgid "Date Submitted"
 msgstr "Bidaltze data"
 
-#: common/tracker/actions/mod-limited.php:99
-#: common/tracker/actions/mod.php:101
+#: common/tracker/actions/mod-limited.php:107
+#: common/tracker/actions/mod.php:108
 msgid "Date Closed"
 msgstr "Ixte data"
 
-#: common/tracker/actions/mod-limited.php:185
-#: common/tracker/actions/mod.php:254
+#: common/tracker/actions/mod-limited.php:193
+#: common/tracker/actions/mod.php:261
 msgid "Existing Files"
 msgstr "Fitxeroak"
 
-#: common/tracker/actions/mod-limited.php:218 www/frs/admin/qrs.php:256
+#: common/tracker/actions/mod-limited.php:226 www/frs/admin/qrs.php:256
 #: www/frs/shownotes.php:77
 msgid "Change Log"
 msgstr "Aldaketen historia"
 
-#: common/tracker/actions/mod.php:173 www/include/html.php:345
+#: common/tracker/actions/mod.php:180 www/include/html.php:351
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
@@ -5098,175 +5097,184 @@ msgstr ""
 "Laburpen laukiak erregistroa deskribatzen du motzean. Erabilgarria "
 "erregistroko elementu ugaritan nabigatzen denean."
 
-#: common/tracker/actions/mod.php:180 common/tracker/actions/query.php:381
-#: common/tracker/include/ArtifactHtml.class.php:58
-#: common/tracker/include/ArtifactHtml.class.php:63
-#: common/tracker/include/build_submission_form.php:79
+#: common/tracker/actions/mod.php:187 common/tracker/actions/query.php:388
+#: common/tracker/include/ArtifactHtml.class.php:45
+#: common/tracker/include/ArtifactHtml.class.php:50
+#: common/tracker/include/build_submission_form.php:78
 #: common/tracker/views/form-customizelist.php:50
 msgid "Detailed description"
 msgstr "Deskribapena"
 
-#: common/tracker/actions/mod.php:197
+#: common/tracker/actions/mod.php:204
 msgid "Use Canned Response"
 msgstr "Aurretik jarritako erantzuna erabili"
 
-#: common/tracker/actions/mod.php:241
-#: common/tracker/include/ArtifactTypeHtml.class.php:319
+#: common/tracker/actions/mod.php:248
+#: common/tracker/include/ArtifactTypeHtml.class.php:309
 msgid "Related Tasks"
 msgstr ""
 
-#: common/tracker/actions/query.php:66
+#: common/tracker/actions/query.php:73
 #, fuzzy
 msgid "Query Successfully Created"
 msgstr "Arrakastaz sortutako artikulua"
 
-#: common/tracker/actions/query.php:115
+#: common/tracker/actions/query.php:122
 #, fuzzy
 msgid "Query Updated"
 msgstr "Arrakastaz eguneratutako egunkaria"
 
-#: common/tracker/actions/query.php:144
+#: common/tracker/actions/query.php:151
 #, fuzzy
 msgid "Query Deleted"
 msgstr "Ezabatutako fitxeroa"
 
-#: common/tracker/actions/query.php:151
+#: common/tracker/actions/query.php:158
 msgid "Missing Build Query Action"
 msgstr ""
 
-#: common/tracker/actions/query.php:285 common/tracker/actions/query.php:294
+#: common/tracker/actions/query.php:292 common/tracker/actions/query.php:301
 msgid "Name and Save Query"
 msgstr ""
 
-#: common/tracker/actions/query.php:286
+#: common/tracker/actions/query.php:293
 msgid "Load Query"
 msgstr ""
 
-#: common/tracker/actions/query.php:289
+#: common/tracker/actions/query.php:296
 msgid "Update Query"
 msgstr ""
 
-#: common/tracker/actions/query.php:290
+#: common/tracker/actions/query.php:297
 msgid "Delete Query"
 msgstr ""
 
-#: common/tracker/actions/query.php:314
+#: common/tracker/actions/query.php:321
 #, php-format
 msgid "Note: The default project query is currently '%1$s'."
 msgstr ""
 
-#: common/tracker/actions/query.php:317
+#: common/tracker/actions/query.php:324
 msgid "Note: There is no default project query defined."
 msgstr ""
 
-#: common/tracker/actions/query.php:322
+#: common/tracker/actions/query.php:329
 #, fuzzy
 msgid "Type of query"
 msgstr "Eremu pertsonalizatu mota"
 
-#: common/tracker/actions/query.php:324
+#: common/tracker/actions/query.php:331
 #, fuzzy
 msgid "Private query"
 msgstr "Pribatua"
 
-#: common/tracker/actions/query.php:326
+#: common/tracker/actions/query.php:333
 msgid "Project level query (query is public)"
 msgstr ""
 
-#: common/tracker/actions/query.php:328
+#: common/tracker/actions/query.php:335
 msgid "Default project query (for project level query only)"
 msgstr ""
 
-#: common/tracker/actions/query.php:364
-#: common/tracker/include/ArtifactTypeHtml.class.php:253
-#: common/tracker/include/ArtifactTypeHtml.class.php:260
+#: common/tracker/actions/query.php:371
+#: common/tracker/include/ArtifactTypeHtml.class.php:243
+#: common/tracker/include/ArtifactTypeHtml.class.php:250
 #, php-format
 msgid "(%% for wildcards)"
 msgstr ""
 
-#: common/tracker/actions/query.php:369
+#: common/tracker/actions/query.php:376
 msgid "Last Modified Date range"
 msgstr ""
 
-#: common/tracker/actions/query.php:371
+#: common/tracker/actions/query.php:378
 msgid "Open Date range"
 msgstr ""
 
-#: common/tracker/actions/query.php:373
+#: common/tracker/actions/query.php:380
 msgid "Close Date range"
 msgstr ""
 
-#: common/tracker/actions/taskmgr.php:34 common/tracker/actions/tracker.php:88
-#: common/tracker/actions/tracker.php:279
-#: common/tracker/actions/tracker.php:450
-#: common/tracker/actions/tracker.php:467
-#: common/tracker/actions/tracker.php:496
-#: common/tracker/actions/tracker.php:517
-#: common/tracker/actions/tracker.php:574 www/tracker/download.php:51
+#: common/tracker/actions/query.php:403
+#, fuzzy
+msgid "Options"
+msgstr "Eragiketak"
+
+#: common/tracker/actions/query.php:406
+msgid "Display a short summary box on top of the list (roadmap status)."
+msgstr ""
+
+#: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:76
+#: common/tracker/actions/tracker.php:267
+#: common/tracker/actions/tracker.php:438
+#: common/tracker/actions/tracker.php:455
+#: common/tracker/actions/tracker.php:484
+#: common/tracker/actions/tracker.php:505
+#: common/tracker/actions/tracker.php:562 www/tracker/download.php:51
 msgid "Artifact Could Not Be Created"
 msgstr ""
 
-#: common/tracker/actions/taskmgr.php:53 www/pm/admin/index.php:301
+#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:301
 #: www/pm/admin/index.php:357
 #, fuzzy
 msgid "Could Not Get ProjectGroup"
 msgstr "Ezin dut mezu nagusia eguneratu"
 
-#: common/tracker/actions/taskmgr.php:60 www/pm/browse_task.php:43
+#: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
 #: www/pm/downloadcsv.php:96 www/pm/gantt.php:35
 msgid "Could Not Get ProjectTaskFactory"
 msgstr ""
 
-#: common/tracker/actions/taskmgr.php:75 common/tracker/actions/taskmgr.php:92
+#: common/tracker/actions/taskmgr.php:81 common/tracker/actions/taskmgr.php:98
 #, fuzzy
 msgid "No Available Tasks Found"
 msgstr "Erregistroak ez daude ikusgai"
 
-#: common/tracker/actions/taskmgr.php:97
-#: common/tracker/actions/taskmgr.php:152
+#: common/tracker/actions/taskmgr.php:103
+#: common/tracker/actions/taskmgr.php:158
 #, fuzzy
 msgid "Build Relationship Between Tracker Items and Tasks"
 msgstr "Ataza baten eta erregistroaren artikuluaren lotura egin."
 
-#: common/tracker/actions/taskmgr.php:101
-#: common/tracker/actions/taskmgr.php:155
-#: common/tracker/actions/tracker.php:308 www/activity/index.php:262
-#: www/activity/index.php:267
+#: common/tracker/actions/taskmgr.php:107
+#: common/tracker/actions/taskmgr.php:161
+#: common/tracker/actions/tracker.php:296 www/activity/index.php:279
+#: www/activity/index.php:284
 msgid "Tracker Item"
 msgstr "Erregistroaren artikulua."
 
-#: common/tracker/actions/taskmgr.php:102
-#: common/tracker/actions/taskmgr.php:156 www/reporting/timeadd.php:195
+#: common/tracker/actions/taskmgr.php:108
+#: common/tracker/actions/taskmgr.php:162 www/reporting/timeadd.php:195
 #, fuzzy
 msgid "Tasks Project"
 msgstr "Ataza multzoa."
 
-#: common/tracker/actions/taskmgr.php:106 www/project/report/index.php:233
+#: common/tracker/actions/taskmgr.php:112 www/project/report/index.php:233
 #: www/reporting/usersummary.php:102
 msgid "Task"
 msgstr "Ataza"
 
-#: common/tracker/actions/taskmgr.php:112
+#: common/tracker/actions/taskmgr.php:118
 #, fuzzy
 msgid "Add Relationship to Selected Task"
 msgstr "Aukeratutako atazarekin lotura egin."
 
-#: common/tracker/actions/taskmgr.php:146
+#: common/tracker/actions/taskmgr.php:152
 #, fuzzy
 msgid "No Existing Project Groups Found"
 msgstr "Ez da proiektuaren taldea aurkitu"
 
-#: common/tracker/actions/taskmgr.php:163
+#: common/tracker/actions/taskmgr.php:169
 #, fuzzy
 msgid "Add Relation to Existing Task"
 msgstr "Badagoen ataza batekin lotura egin."
 
-#: common/tracker/actions/taskmgr.php:164
+#: common/tracker/actions/taskmgr.php:170
 msgid "Create New Task"
 msgstr "Ataza berria sortu."
 
-#: common/tracker/actions/tracker.php:90
-#: common/tracker/actions/tracker.php:283
+#: common/tracker/actions/tracker.php:78
+#: common/tracker/actions/tracker.php:271
 msgid ""
 "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
 "Login."
@@ -5274,135 +5282,135 @@ msgstr ""
 "Erregistroak: Erregistro honek ez ditu bidalketa anonimoak bidaltzen uzten. "
 "Mesedez, sisteman sar zaitez."
 
-#: common/tracker/actions/tracker.php:136
-#: common/tracker/actions/tracker.php:380
+#: common/tracker/actions/tracker.php:124
+#: common/tracker/actions/tracker.php:368
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "Ezin dut mezu nagusia eguneratu"
 
-#: common/tracker/actions/tracker.php:144
-#: common/tracker/actions/tracker.php:386 www/project/admin/editimages.php:59
+#: common/tracker/actions/tracker.php:132
+#: common/tracker/actions/tracker.php:374 www/project/admin/editimages.php:59
 #, fuzzy
 msgid "Invalid filename"
 msgstr "Izen osoa baliogabea"
 
-#: common/tracker/actions/tracker.php:150
+#: common/tracker/actions/tracker.php:138
 msgid "Could Not Attach File to Item: "
 msgstr ""
 
-#: common/tracker/actions/tracker.php:154
+#: common/tracker/actions/tracker.php:142
 #, fuzzy, php-format
 msgid "Item %s successfully created"
 msgstr "Arrakastaz sortutako artikulua"
 
-#: common/tracker/actions/tracker.php:245
+#: common/tracker/actions/tracker.php:233
 #, fuzzy
 msgid "Updated Successfully"
 msgstr "Arrakastaz eguneratua"
 
-#: common/tracker/actions/tracker.php:292
+#: common/tracker/actions/tracker.php:280
 #, fuzzy, php-format
 msgid "Could not get Project Task for %d"
 msgstr "Ezin dut mezu nagusia eguneratu"
 
-#: common/tracker/actions/tracker.php:318
-#: common/tracker/actions/tracker.php:337
+#: common/tracker/actions/tracker.php:306
+#: common/tracker/actions/tracker.php:325
 msgid "Comment added"
 msgstr "Iruzkina gehiturik"
 
-#: common/tracker/actions/tracker.php:361
+#: common/tracker/actions/tracker.php:349
 #, php-format
 msgid "ERROR: Skipping attachment %d: file is too large."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:365
+#: common/tracker/actions/tracker.php:353
 #, php-format
 msgid "ERROR: Skipping attachment %d: transfer interrupted."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:389
+#: common/tracker/actions/tracker.php:377
 msgid "File Upload: Error"
 msgstr "Fitxategi igoera: Errorea"
 
-#: common/tracker/actions/tracker.php:392
+#: common/tracker/actions/tracker.php:380
 msgid "File Upload: Successful"
 msgstr "Fitxategi igoera: Arrakasta"
 
-#: common/tracker/actions/tracker.php:409
+#: common/tracker/actions/tracker.php:397
 #, fuzzy
 msgid "Could Not Create File Object::"
 msgstr "Ezin dut mezu nagusia eguneratu"
 
-#: common/tracker/actions/tracker.php:414
+#: common/tracker/actions/tracker.php:402
 msgid "File Delete:"
 msgstr "Fitxategia ezabatu:"
 
-#: common/tracker/actions/tracker.php:417
+#: common/tracker/actions/tracker.php:405
 msgid "File Delete: Successful"
 msgstr "Fitxategi ezabatzea: Arrakasta"
 
-#: common/tracker/actions/tracker.php:428
+#: common/tracker/actions/tracker.php:416
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "Arrakastaz sortutako artikulua"
 
-#: common/tracker/actions/tracker.php:455
-#: common/tracker/actions/tracker.php:472
+#: common/tracker/actions/tracker.php:443
+#: common/tracker/actions/tracker.php:460
 #, fuzzy
 msgid "Monitoring Started"
 msgstr "Hasitako monitorizazioa"
 
-#: common/tracker/actions/tracker.php:457
-#: common/tracker/actions/tracker.php:474
+#: common/tracker/actions/tracker.php:445
+#: common/tracker/actions/tracker.php:462
 #, fuzzy
 msgid "Monitoring Deactivated"
 msgstr "Moritorizazioa desaktibatua"
 
-#: common/tracker/actions/tracker.php:522
+#: common/tracker/actions/tracker.php:510
 msgid "Confirmation failed. Artifact not deleted"
 msgstr "Berrespenak huts egin du. Artefaktua ez da ezabatu"
 
-#: common/tracker/actions/tracker.php:526
+#: common/tracker/actions/tracker.php:514
 msgid "Artifact Delete Failed"
 msgstr "Huts artefaktua ezabatzean"
 
-#: common/tracker/actions/tracker.php:528
+#: common/tracker/actions/tracker.php:516
 msgid "Artifact Deleted Successfully"
 msgstr "Artefaktua behar bezala ezabatu da"
 
-#: common/tracker/include/ArtifactHtml.class.php:91
+#: common/tracker/include/ArtifactHtml.class.php:78
 msgid "Sender"
 msgstr "Nork bidalia"
 
-#: common/tracker/include/ArtifactHtml.class.php:109
+#: common/tracker/include/ArtifactHtml.class.php:96
 msgid "No Followups Have Been Posted"
 msgstr "Ez dira azalpenik bidali"
 
-#: common/tracker/include/ArtifactHtml.class.php:121
+#: common/tracker/include/ArtifactHtml.class.php:108
 #: www/pm/include/ProjectTaskHTML.class.php:201
 #: www/project/admin/project_admin_utils.php:159
 msgid "Field"
 msgstr "Eremua"
 
-#: common/tracker/include/ArtifactHtml.class.php:122
+#: common/tracker/include/ArtifactHtml.class.php:109
 #: www/pm/include/ProjectTaskHTML.class.php:202
 #: www/project/admin/project_admin_utils.php:160
 msgid "Old Value"
 msgstr "Balio zaharra"
 
-#: common/tracker/include/ArtifactHtml.class.php:124
-#: common/tracker/include/ArtifactTypeHtml.class.php:369
-#: www/activity/index.php:237 www/pm/include/ProjectTaskHTML.class.php:158
+#: common/tracker/include/ArtifactHtml.class.php:111
+#: common/tracker/include/ArtifactTypeHtml.class.php:359
+#: www/activity/index.php:249 www/pm/include/ProjectTaskHTML.class.php:158
 #: www/pm/include/ProjectTaskHTML.class.php:204
 #: www/project/admin/project_admin_utils.php:162
 msgid "By"
 msgstr "Noiztik"
 
-#: common/tracker/include/ArtifactHtml.class.php:162
+#: common/tracker/include/ArtifactHtml.class.php:149
 msgid "No Changes Have Been Made to This Item"
 msgstr "Erregistro honetan ez dago aldaketik"
 
-#: common/tracker/include/ArtifactHtml.class.php:187
+#: common/tracker/include/ArtifactHtml.class.php:174
 #, fuzzy
 msgid "Backward Relations"
 msgstr "Erlazionaturiko ataza sortu"
@@ -5413,20 +5421,19 @@ msgid "Trackers for %1$s"
 msgstr "Foroak zertarako"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:47
-#: common/tracker/include/ArtifactTypeHtml.class.php:61
+#: common/tracker/include/ArtifactTypeHtml.class.php:51
 #, fuzzy
 msgid "View Trackers"
 msgstr "Erregistroa erabili"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:49
-#: common/tracker/include/ArtifactTypeHtml.class.php:63
+#: common/tracker/include/ArtifactTypeHtml.class.php:53
 msgid "Get the list of available trackers"
 msgstr ""
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:50
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:364
-#: www/tracker/roadmap.php:89 www/tracker/roadmap.php:155
-#: www/tracker/roadmap.php:405
+#: www/tracker/roadmap.php:90 www/tracker/roadmap.php:405
 msgid "Roadmap"
 msgstr ""
 
@@ -5439,58 +5446,58 @@ msgid "Various graph of statistics."
 msgstr ""
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:61
-#: common/tracker/include/ArtifactTypeHtml.class.php:93
+#: common/tracker/include/ArtifactTypeHtml.class.php:83
 msgid "Global administration for trackers. Create, clone, workflow, fields ..."
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:66
+#: common/tracker/include/ArtifactTypeHtml.class.php:56
 #, fuzzy
 msgid "Browse this tracker."
 msgstr "Atazak gainetik irakurri"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:67
+#: common/tracker/include/ArtifactTypeHtml.class.php:57
 #, fuzzy
 msgid "Export CSV"
 msgstr "Estatistikak ez daude eskuragarri"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:69
+#: common/tracker/include/ArtifactTypeHtml.class.php:59
 msgid "Download data from this tracker as csv file."
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:73
+#: common/tracker/include/ArtifactTypeHtml.class.php:63
 #, fuzzy
 msgid "Add a new issue."
 msgstr "Taza bat sortu"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:79
+#: common/tracker/include/ArtifactTypeHtml.class.php:69
 msgid "Various graph about statistics."
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:81
+#: common/tracker/include/ArtifactTypeHtml.class.php:71
 msgid "Stop Monitor"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:83
+#: common/tracker/include/ArtifactTypeHtml.class.php:73
 msgid "Remove this tracker from your monitoring."
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:87
-#: common/tracker/include/ArtifactTypeHtml.class.php:98
+#: common/tracker/include/ArtifactTypeHtml.class.php:77
+#: common/tracker/include/ArtifactTypeHtml.class.php:88
 msgid "Add this tracker from your monitoring."
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:137
+#: common/tracker/include/ArtifactTypeHtml.class.php:127
 #: common/tracker/views/form-clonetracker.php:48
 msgid "Clone Tracker"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:321
+#: common/tracker/include/ArtifactTypeHtml.class.php:311
 #: www/pm/browse_task.php:125 www/pm/browse_task.php:229
 #: www/pm/ganttpage.php:68 www/pm/include/ProjectTaskHTML.class.php:73
 msgid "Task Id"
 msgstr "Atazaren ID-a"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:322
+#: common/tracker/include/ArtifactTypeHtml.class.php:312
 #: www/pm/add_task.php:66 www/pm/browse_task.php:126
 #: www/pm/browse_task.php:231 www/pm/detail_task.php:94
 #: www/pm/ganttpage.php:69 www/pm/include/ProjectTaskHTML.class.php:74
@@ -5498,7 +5505,7 @@ msgstr "Atazaren ID-a"
 msgid "Task Summary"
 msgstr "Atazaren deskribapena"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:323
+#: common/tracker/include/ArtifactTypeHtml.class.php:313
 #: www/people/editprofile.php:283 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:157 www/pm/add_task.php:99
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:233
@@ -5507,7 +5514,7 @@ msgstr "Atazaren deskribapena"
 msgid "Start Date"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:324
+#: common/tracker/include/ArtifactTypeHtml.class.php:314
 #: www/people/editprofile.php:284 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:158 www/pm/add_task.php:114
 #: www/pm/browse_task.php:128 www/pm/browse_task.php:235
@@ -5517,17 +5524,17 @@ msgstr ""
 msgid "End Date"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:326
+#: common/tracker/include/ArtifactTypeHtml.class.php:316
 #: www/pm/include/ProjectTaskHTML.class.php:112
 msgid "Remove Relation"
 msgstr "Erlazioa ezabatu"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:352
+#: common/tracker/include/ArtifactTypeHtml.class.php:342
 #, php-format
 msgid "Average completion rate: %d%%"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:367
+#: common/tracker/include/ArtifactTypeHtml.class.php:357
 #: plugins/blocks/www/index.php:225
 #: plugins/mantisbt/view/admin/addCategory.php:32
 #: plugins/mantisbt/view/admin/addVersion.php:35
@@ -5540,7 +5547,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:151
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:196
 #: plugins/scmgit/common/GitPlugin.class.php:243
-#: plugins/scmsvn/common/SVNPlugin.class.php:197 www/admin/useredit.php:261
+#: plugins/scmsvn/common/SVNPlugin.class.php:198 www/admin/useredit.php:261
 #: www/admin/useredit.php:291 www/project/admin/editimages.php:267
 #: www/reporting/usersummary.php:101
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
@@ -5548,7 +5555,7 @@ msgstr ""
 msgid "Name"
 msgstr "Izena"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:370
+#: common/tracker/include/ArtifactTypeHtml.class.php:360
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:67
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:143
 #: plugins/mantisbt/view/viewAttachment.php:56
@@ -5556,47 +5563,47 @@ msgstr "Izena"
 msgid "Download"
 msgstr "Deskargatu"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:533
-#: common/tracker/include/ArtifactTypeHtml.class.php:576
-#: common/tracker/include/ArtifactTypeHtml.class.php:738
-#: common/widget/Widget_MyArtifacts.class.php:116 www/admin/pluginman.php:210
+#: common/tracker/include/ArtifactTypeHtml.class.php:523
+#: common/tracker/include/ArtifactTypeHtml.class.php:566
+#: common/tracker/include/ArtifactTypeHtml.class.php:728
+#: common/widget/Widget_MyArtifacts.class.php:113 www/admin/pluginman.php:210
 #: www/admin/pluginman.php:229 www/admin/pluginman.php:241
 #: www/admin/pluginman.php:242 www/include/html.php:277
-#: www/include/html.php:425 www/include/html.php:510 www/include/html.php:527
-#: www/include/html.php:561 www/include/html.php:602 www/pm/ganttpage.php:62
+#: www/include/html.php:431 www/include/html.php:516 www/include/html.php:533
+#: www/include/html.php:567 www/include/html.php:608 www/pm/ganttpage.php:62
 #: www/tracker/roadmap.php:440
 msgid "None"
 msgstr "Bat ere ez"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:652
+#: common/tracker/include/ArtifactTypeHtml.class.php:642
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
 
-#: common/tracker/include/build_submission_form.php:44
-#: common/tracker/include/build_submission_form.php:89
+#: common/tracker/include/build_submission_form.php:43
+#: common/tracker/include/build_submission_form.php:88
 #, php-format
 msgid "Please %1$s login %2$s"
 msgstr "Mesedez %1$s sartu %2$s -ra"
 
-#: common/tracker/include/build_submission_form.php:45
-#: common/tracker/include/build_submission_form.php:90
+#: common/tracker/include/build_submission_form.php:44
+#: common/tracker/include/build_submission_form.php:89
 msgid ""
 "If you <strong>cannot</strong> login, then enter your email address here"
 msgstr ""
 "<strong>Ez</strong> bazara sistemara sartu, idatzi zure posta elektronikoa "
 "hemen:"
 
-#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:143
+#: common/tracker/include/build_submission_form.php:52 www/news/submit.php:143
 #: www/people/viewjob.php:80
 msgid "For project"
 msgstr "Proiektuarentzat"
 
-#: common/tracker/include/build_submission_form.php:97
+#: common/tracker/include/build_submission_form.php:96
 msgid "DO NOT enter passwords or confidential information in your message!"
 msgstr "¡Ez erabili pasahitzik edo informazio sekreturik zure mezuan!"
 
-#: common/tracker/include/build_submission_form.php:122
+#: common/tracker/include/build_submission_form.php:121
 #: common/tracker/views/form-addextrafield.php:105
 #, fuzzy
 msgid "Indicates required fields."
@@ -5845,12 +5852,8 @@ msgstr "Ezabatu"
 
 #: common/tracker/views/form-adminroadmap.php:159
 #, fuzzy, php-format
-msgid "Are you sure you want to delete %s roadmap"
+msgid "Are you sure you want to delete the %s roadmap?"
 msgstr "Ziur zaude artefaktu hau ezabatu nahi duzula?"
-
-#: common/tracker/views/form-adminroadmap.php:159
-msgid "?"
-msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:165
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:98
@@ -6033,7 +6036,7 @@ msgstr ""
 
 #: common/tracker/views/form-deleteextrafield.php:39
 #: common/tracker/views/form-deleteextrafieldelement.php:61
-#: common/tracker/views/form-deletetracker.php:33
+#: common/tracker/views/form-deletetracker.php:32
 #: www/forum/admin/index.php:168 www/frs/admin/deletepackage.php:67
 #: www/frs/admin/deleterelease.php:75 www/frs/admin/editrelease.php:382
 #: www/pm/admin/index.php:372 www/project/admin/roledelete.php:81
@@ -6041,7 +6044,7 @@ msgid "I'm Sure"
 msgstr "Ziur nago"
 
 #: common/tracker/views/form-deleteextrafield.php:40
-#: common/tracker/views/form-deletetracker.php:34
+#: common/tracker/views/form-deletetracker.php:33
 #: www/forum/admin/index.php:169 www/frs/admin/deletepackage.php:70
 #: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:373
 msgid "I'm Really Sure"
@@ -6062,17 +6065,17 @@ msgstr "Eremu pertsonalizatu izena"
 msgid "Element"
 msgstr ""
 
-#: common/tracker/views/form-deletetracker.php:25
+#: common/tracker/views/form-deletetracker.php:24
 #, fuzzy, php-format
 msgid "Permanently Delete Tracker %s"
 msgstr "Erlazionatuak dauden erregistroko elementuak"
 
-#: common/tracker/views/form-deletetracker.php:28
+#: common/tracker/views/form-deletetracker.php:27
 #, fuzzy
 msgid "Delete Tracker"
 msgstr "Erregistroa erabili"
 
-#: common/tracker/views/form-deletetracker.php:31
+#: common/tracker/views/form-deletetracker.php:30
 msgid ""
 "You are about to permanently and irretrievably delete this tracker and all "
 "its contents!"
@@ -6101,7 +6104,7 @@ msgstr ""
 msgid "Copy From"
 msgstr ""
 
-#: common/tracker/views/form-extrafieldcopy.php:74
+#: common/tracker/views/form-extrafieldcopy.php:71
 msgid "Into trackers and custom fields"
 msgstr ""
 
@@ -6175,32 +6178,32 @@ msgstr ""
 msgid "Configure workflow"
 msgstr ""
 
-#: common/tracker/views/form-workflow.php:55
+#: common/tracker/views/form-workflow.php:57
 #, php-format
 msgid "Allowed initial values for the %1$s field"
 msgstr ""
 
-#: common/tracker/views/form-workflow.php:61
+#: common/tracker/views/form-workflow.php:63
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:48
 msgid "From"
 msgstr "Zeinek"
 
-#: common/tracker/views/form-workflow.php:62
+#: common/tracker/views/form-workflow.php:64
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:49
 msgid "To"
 msgstr "Zeini"
 
-#: common/tracker/views/form-workflow.php:63
+#: common/tracker/views/form-workflow.php:65
 #, fuzzy
 msgid "Initial values"
 msgstr "Parametro baliogabea"
 
-#: common/tracker/views/form-workflow.php:66
+#: common/tracker/views/form-workflow.php:68
 #, fuzzy
 msgid "From Value"
 msgstr "Balio zaharra"
 
-#: common/tracker/views/form-workflow.php:119 www/project/admin/users.php:378
+#: common/tracker/views/form-workflow.php:121 www/project/admin/users.php:378
 msgid "Edit Roles"
 msgstr "Rolak Aldatu"
 
@@ -6273,35 +6276,35 @@ msgstr ""
 msgid "Site News Approval"
 msgstr "%1$s -ek onartutako proiektua"
 
-#: common/widget/Widget_MyArtifacts.class.php:46
+#: common/widget/Widget_MyArtifacts.class.php:48
 msgid "My Artifacts"
 msgstr ""
 
-#: common/widget/Widget_MyArtifacts.class.php:81
+#: common/widget/Widget_MyArtifacts.class.php:83
 #, fuzzy
 msgid "Display artifacts:"
 msgstr "Ezabatu artefaktua"
 
-#: common/widget/Widget_MyArtifacts.class.php:82
+#: common/widget/Widget_MyArtifacts.class.php:84
 #, fuzzy
 msgid "assigned to me [A]"
 msgstr "Nori esleitua"
 
-#: common/widget/Widget_MyArtifacts.class.php:83
+#: common/widget/Widget_MyArtifacts.class.php:85
 #, fuzzy
 msgid "submitted by me [S]"
 msgstr "Nork bidalia"
 
-#: common/widget/Widget_MyArtifacts.class.php:84
+#: common/widget/Widget_MyArtifacts.class.php:86
 msgid "assigned to or submitted by me [AS]"
 msgstr ""
 
-#: common/widget/Widget_MyArtifacts.class.php:114
+#: common/widget/Widget_MyArtifacts.class.php:111
 #, fuzzy
 msgid "You have no artifacts"
 msgstr "Ez daude apunterik zure egunkarian"
 
-#: common/widget/Widget_MyArtifacts.class.php:258
+#: common/widget/Widget_MyArtifacts.class.php:255
 msgid "List artifacts you have submitted or assigned to you, by project."
 msgstr ""
 
@@ -6352,41 +6355,41 @@ msgstr ""
 msgid "List SVN commits you have done, by project."
 msgstr ""
 
-#: common/widget/Widget_MyMonitoredDocuments.class.php:37
+#: common/widget/Widget_MyMonitoredDocuments.class.php:38
 #, fuzzy
 msgid "Monitored Documents"
 msgstr "Monitorizatutako foroak"
 
-#: common/widget/Widget_MyMonitoredDocuments.class.php:45
+#: common/widget/Widget_MyMonitoredDocuments.class.php:46
 #, fuzzy
 msgid "You are not monitoring any documents."
 msgstr "Ez zaude fororik monitorizatzen"
 
-#: common/widget/Widget_MyMonitoredDocuments.class.php:45
+#: common/widget/Widget_MyMonitoredDocuments.class.php:46
 msgid ""
 "If you monitor documents, you will be sent new update in the form of an "
 "email."
 msgstr ""
 
-#: common/widget/Widget_MyMonitoredDocuments.class.php:45
+#: common/widget/Widget_MyMonitoredDocuments.class.php:46
 msgid ""
 "You can monitor documents by clicking on the appropriate icon action in the "
 "directory itself."
 msgstr ""
 
-#: common/widget/Widget_MyMonitoredDocuments.class.php:97
+#: common/widget/Widget_MyMonitoredDocuments.class.php:98
 #: common/widget/Widget_MyMonitoredFp.class.php:106
 msgid "STOP MONITORING"
 msgstr ""
 
-#: common/widget/Widget_MyMonitoredDocuments.class.php:101
+#: common/widget/Widget_MyMonitoredDocuments.class.php:102
 #: common/widget/Widget_MyMonitoredForums.class.php:116
 #: common/widget/Widget_MySurveys.class.php:107
 #, php-format
 msgid "%s new"
 msgstr ""
 
-#: common/widget/Widget_MyMonitoredDocuments.class.php:114
+#: common/widget/Widget_MyMonitoredDocuments.class.php:115
 msgid ""
 "List documents that you are currently monitoring, by project.<br />To cancel "
 "any of the monitored items just click on the trash icon next to the item "
@@ -6466,7 +6469,7 @@ msgstr "Nere proiektuak"
 
 #: common/widget/Widget_MyProjects.class.php:49
 #: common/widget/Widget_MyProjects.class.php:119
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:47
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:48
 #, fuzzy
 msgid "You're not a member of any project"
 msgstr "Ez zara aktiboa dagoen inungo proiektukoa"
@@ -6487,16 +6490,16 @@ msgid ""
 "to the corresponding Project Summary page."
 msgstr ""
 
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:37
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:38
 msgid "The 5 Last Documents in My Projects"
 msgstr ""
 
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:87
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
 #, fuzzy
 msgid "No documents"
 msgstr "Azpi proiektu bat gehitu"
 
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:129
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:130
 msgid ""
 "List the last 5 documents (with filename, author and last modification time) "
 "published in projects you belong to. Selecting any of these projects brings "
@@ -7029,7 +7032,7 @@ msgstr ""
 
 #: plugins/authopenid/www/index.php:38
 #: www/account/change_email-complete.php:52 www/account/change_email.php:46
-#: www/account/change_pw.php:32 www/account/editsshkeys.php:57
+#: www/account/change_pw.php:32 www/account/editsshkeys.php:61
 #: www/account/index.php:34 www/account/lostlogin.php:54
 #: www/account/pending-resend.php:35 www/account/unsubscribe.php:54
 #: www/account/verify.php:45 www/admin/database.php:60
@@ -7318,7 +7321,7 @@ msgstr "Proiektu honetan ez dago horrelako argitalpenik"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:134
 #: plugins/contribtracker/www/index.php:43
 #: plugins/contribtracker/www/project_admin.php:26
-#: plugins/contribtracker/www/project_admin.php:290 www/activity/index.php:36
+#: plugins/contribtracker/www/project_admin.php:290 www/activity/index.php:37
 msgid "%Y-%m-%d"
 msgstr ""
 
@@ -7455,7 +7458,7 @@ msgstr "Izen laburra"
 #: plugins/oauthprovider/www/consumer.php:115
 #: plugins/oauthprovider/www/consumer_manage.php:71
 #: plugins/oauthprovider/www/consumer_update_page.php:70
-#: www/admin/search.php:92 www/admin/unsubscribe.php:115
+#: www/admin/search.php:83 www/admin/unsubscribe.php:115
 #: www/forum/admin/monitor.php:61 www/sendmessage.php:69
 msgid "Email"
 msgstr "Posta"
@@ -8062,7 +8065,7 @@ msgstr "Foroa"
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:64
 #: plugins/forumml/www/forumml_utils.php:58
 #: plugins/forumml/www/forumml_utils.php:139 www/forum/forum.php:253
-#: www/forum/message.php:160
+#: www/forum/message.php:159
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
 msgid "Thread"
@@ -9948,7 +9951,7 @@ msgstr ""
 msgid "Fixed"
 msgstr ""
 
-#: plugins/mantisbt/view/admin/StatPerStatus.php:50 www/activity/index.php:267
+#: plugins/mantisbt/view/admin/StatPerStatus.php:50 www/activity/index.php:284
 #: www/reporting/usersummary.php:55 www/stats/site_stats_utils.php:289
 #: www/stats/site_stats_utils.php:291 www/stats/site_stats_utils.php:293
 #: www/stats/site_stats_utils.php:295 www/stats/site_stats_utils.php:299
@@ -10080,7 +10083,7 @@ msgid "Reporter"
 msgstr "Txostenak"
 
 #: plugins/mantisbt/view/editIssue.php:129
-#: plugins/mantisbt/view/viewIssue.php:79 www/include/html.php:343
+#: plugins/mantisbt/view/viewIssue.php:79 www/include/html.php:349
 #: www/pm/ganttpage.php:159
 msgid "Resolution"
 msgstr "Erabakia"
@@ -11031,6 +11034,7 @@ msgid "Please select an existing file to process, or upload a new one"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:163
+#: plugins/projectimport/www/projectsimport.php:76
 #, fuzzy
 msgid "Project importer"
 msgstr "Azpiproiektuaren izen berria"
@@ -11190,11 +11194,6 @@ msgstr "Haria"
 #, fuzzy
 msgid "You cannot import project unless you are an admin on that project"
 msgstr "Proiektu baten berriak ezin dira bidali administraria ez bazara"
-
-#: plugins/projectimport/www/projectsimport.php:76
-#, fuzzy
-msgid "Projects importer"
-msgstr "Azpiproiektuaren izen berria"
 
 #: plugins/projectimport/www/projectsimport.php:257
 #, fuzzy
@@ -11695,6 +11694,7 @@ msgstr ""
 
 #: plugins/quota_management/www/quota.php:165
 #: plugins/quota_management/www/quota.php:189
+#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:36
 msgid "scm"
 msgstr ""
 
@@ -11895,7 +11895,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:64
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:82
 #: plugins/scmgit/common/GitPlugin.class.php:62
-#: plugins/scmsvn/common/SVNPlugin.class.php:79
+#: plugins/scmsvn/common/SVNPlugin.class.php:80
 #, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
 msgstr ""
@@ -11946,8 +11946,8 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:106
 #: plugins/scmgit/common/GitPlugin.class.php:140
 #: plugins/scmgit/common/GitPlugin.class.php:149
-#: plugins/scmsvn/common/SVNPlugin.class.php:153
-#: plugins/scmsvn/common/SVNPlugin.class.php:162
+#: plugins/scmsvn/common/SVNPlugin.class.php:154
+#: plugins/scmsvn/common/SVNPlugin.class.php:163
 msgid "developername"
 msgstr ""
 
@@ -12115,7 +12115,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:152
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:197
 #: plugins/scmgit/common/GitPlugin.class.php:244
-#: plugins/scmsvn/common/SVNPlugin.class.php:198
+#: plugins/scmsvn/common/SVNPlugin.class.php:199
 #: www/stats/site_stats_utils.php:304
 msgid "Adds"
 msgstr "Adds"
@@ -12323,16 +12323,16 @@ msgstr "SCM errepositorioa"
 msgid "Updates"
 msgstr "Eguneratua"
 
-#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:31
+#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:32
 msgid "My Git personal Repositories List"
 msgstr ""
 
-#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:39
+#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:40
 msgid ""
 "Get the list of URLS of your personal Git repository cloned from projects."
 msgstr ""
 
-#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:55
+#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:56
 #, fuzzy
 msgid "No personal git repository"
 msgstr "Kolaboratzaileak (proban dago)"
@@ -12433,76 +12433,80 @@ msgstr "Ez da posible aktibatutako datu basea gehitzea"
 msgid "Links to related SVN commits"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:84
+#: plugins/scmsvn/common/SVNPlugin.class.php:85
 msgid ""
 "Documentation for Subversion (sometimes referred to as \"SVN\") is available "
 "<a href=\"http://svnbook.red-bean.com/\">here</a>."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:101
+#: plugins/scmsvn/common/SVNPlugin.class.php:102
 msgid "Anonymous Subversion Access"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:103
+#: plugins/scmsvn/common/SVNPlugin.class.php:104
 msgid ""
 "This project's SVN repository can be checked out through anonymous access "
 "with the following command(s)."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:113
+#: plugins/scmsvn/common/SVNPlugin.class.php:114
 #, fuzzy
 msgid "The password is "
 msgstr "Pasahitza eguneratu"
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:129
-#: plugins/scmsvn/common/SVNPlugin.class.php:148
+#: plugins/scmsvn/common/SVNPlugin.class.php:130
+#: plugins/scmsvn/common/SVNPlugin.class.php:149
 msgid "Developer Subversion Access via SSH"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:132
+#: plugins/scmsvn/common/SVNPlugin.class.php:133
 msgid ""
 "Only project developers can access the SVN tree via this method. SSH must be "
 "installed on your client machine. Enter your site password when prompted."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:138
-#: plugins/scmsvn/common/SVNPlugin.class.php:157
+#: plugins/scmsvn/common/SVNPlugin.class.php:139
+#: plugins/scmsvn/common/SVNPlugin.class.php:158
 msgid "Developer Subversion Access via DAV"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:141
+#: plugins/scmsvn/common/SVNPlugin.class.php:142
 msgid ""
 "Only project developers can access the SVN tree via this method. Enter your "
 "site password when prompted."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:151
+#: plugins/scmsvn/common/SVNPlugin.class.php:152
 msgid ""
 "Only project developers can access the SVN tree via this method. SSH must be "
 "installed on your client machine. Substitute <i>developername</i> with the "
 "proper values. Enter your site password when prompted."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:160
+#: plugins/scmsvn/common/SVNPlugin.class.php:161
 msgid ""
 "Only project developers can access the SVN tree via this method. Substitute "
 "<i>developername</i> with the proper values. Enter your site password when "
 "prompted."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:174
+#: plugins/scmsvn/common/SVNPlugin.class.php:175
 msgid "Subversion Repository Browser"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:176
+#: plugins/scmsvn/common/SVNPlugin.class.php:177
 msgid ""
 "Browsing the Subversion tree gives you a view into the current status of "
 "this project's code. You may also view the complete histories of any file in "
 "the repository."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:180
+#: plugins/scmsvn/common/SVNPlugin.class.php:181
 msgid "Browse Subversion Repository"
+msgstr ""
+
+#: plugins/scmsvn/common/SVNPlugin.class.php:597
+msgid "SCM SVN Commits"
 msgstr ""
 
 #: plugins/soapadmin/include/soapadminPlugin.class.php:138
@@ -12785,19 +12789,19 @@ msgstr "Pasahitza berria (errepika ezazu)"
 msgid "Update password"
 msgstr "Pasahitza eguneratu"
 
-#: www/account/editsshkeys.php:44
+#: www/account/editsshkeys.php:48
 #, php-format
 msgid ""
 "The following key has a wrong format: |%s|.  Please, correct it by going "
 "back to the previous page."
 msgstr ""
 
-#: www/account/editsshkeys.php:67
+#: www/account/editsshkeys.php:71
 #, fuzzy, php-format
 msgid "Could not update SSH authorized keys: %s"
 msgstr "ERROREA: Ezin da taldea sortu: %s"
 
-#: www/account/editsshkeys.php:75
+#: www/account/editsshkeys.php:79
 msgid ""
 "To avoid having to type your password every time for your CVS/SSH developer "
 "account, you may upload your public key(s) here and they will be placed on "
@@ -12805,7 +12809,7 @@ msgid ""
 "job, so it may not happen immediately.  Please allow for a one hour delay."
 msgstr ""
 
-#: www/account/editsshkeys.php:76
+#: www/account/editsshkeys.php:80
 msgid ""
 "To generate a public key, run the program 'ssh-keygen' (you can use both "
 "protocol 1 or 2). The public key will be placed at '~/.ssh/identity."
@@ -12814,7 +12818,7 @@ msgid ""
 "information on sharing keys."
 msgstr ""
 
-#: www/account/editsshkeys.php:80
+#: www/account/editsshkeys.php:84
 msgid ""
 "Authorized keys:<br /><em>Important: Make sure there are no line breaks "
 "except between keys. After submitting, verify that the number of keys in "
@@ -12857,7 +12861,7 @@ msgstr "%1$s -en lantaldea"
 msgid "Updated"
 msgstr "Eguneratua"
 
-#: www/account/index.php:97 www/account/index.php:102 www/include/html.php:840
+#: www/account/index.php:97 www/account/index.php:102 www/include/html.php:846
 msgid "Account Maintenance"
 msgstr "Kontuaren mantentze lana"
 
@@ -13284,38 +13288,38 @@ msgstr ""
 "<p>Zure izenematea bukatzeko autentifikatu zaitez orain. Horrela zure kontua "
 "aktibatuko da.</p>"
 
-#: www/activity/index.php:90
+#: www/activity/index.php:93
 msgid "Forum Post"
 msgstr ""
 
-#: www/activity/index.php:95
+#: www/activity/index.php:102
 msgid "Tracker Opened"
 msgstr ""
 
-#: www/activity/index.php:97
+#: www/activity/index.php:104
 msgid "Tracker Closed"
 msgstr ""
 
-#: www/activity/index.php:107 www/activity/index.php:272
+#: www/activity/index.php:114 www/activity/index.php:289
 msgid "FRS Release"
 msgstr ""
 
-#: www/activity/index.php:112
+#: www/activity/index.php:119
 #, fuzzy
 msgid "New Documents"
 msgstr "Azpi proiektu bat gehitu"
 
-#: www/activity/index.php:114
+#: www/activity/index.php:121
 #, fuzzy
 msgid "Updated Documents"
 msgstr "Azpi proiektu bat gehitu"
 
-#: www/activity/index.php:154
+#: www/activity/index.php:162
 #, fuzzy
 msgid "Invalid Data Passed to query"
 msgstr "Pasahitzak gutxienez sei karaktere izan behar ditu"
 
-#: www/activity/index.php:165 www/frs/reporting/downloads.php:103
+#: www/activity/index.php:173 www/frs/reporting/downloads.php:103
 #: www/project/stats/index.php:100 www/reporting/groupadded.php:61
 #: www/reporting/groupcum.php:60 www/reporting/projectact.php:65
 #: www/reporting/projecttime.php:76 www/reporting/siteact.php:65
@@ -13326,7 +13330,7 @@ msgstr "Pasahitzak gutxienez sei karaktere izan behar ditu"
 msgid "Start"
 msgstr ""
 
-#: www/activity/index.php:166 www/frs/reporting/downloads.php:105
+#: www/activity/index.php:174 www/frs/reporting/downloads.php:105
 #: www/project/stats/index.php:101 www/reporting/groupadded.php:62
 #: www/reporting/groupcum.php:61 www/reporting/projectact.php:66
 #: www/reporting/projecttime.php:77 www/reporting/siteact.php:66
@@ -13337,33 +13341,38 @@ msgstr ""
 msgid "End"
 msgstr ""
 
-#: www/activity/index.php:183
+#: www/activity/index.php:191
 msgid "No Activity Found"
 msgstr ""
 
-#: www/activity/index.php:235 www/reporting/projecttime.php:89
+#: www/activity/index.php:247 www/reporting/projecttime.php:89
 #: www/reporting/sitetime.php:88 www/reporting/sitetimebar.php:90
 msgid "Time"
 msgstr ""
 
-#: www/activity/index.php:257
+#: www/activity/index.php:269
+#, fuzzy
+msgid "scm commit: "
+msgstr "Azalpenak"
+
+#: www/activity/index.php:274
 #, fuzzy
 msgid "Commit for Tracker Item"
 msgstr "Erregistroaren artikulua."
 
-#: www/activity/index.php:262 www/stats/site_stats_utils.php:288
+#: www/activity/index.php:279 www/stats/site_stats_utils.php:288
 #: www/stats/site_stats_utils.php:290 www/stats/site_stats_utils.php:292
 #: www/stats/site_stats_utils.php:294 www/stats/site_stats_utils.php:298
 #, fuzzy
 msgid "Opened"
 msgstr "Irekitze data"
 
-#: www/activity/index.php:277
+#: www/activity/index.php:294
 #, fuzzy
 msgid "Forum Post "
 msgstr "Foroak"
 
-#: www/activity/index.php:288
+#: www/activity/index.php:305
 #, fuzzy
 msgid "Document"
 msgstr "Foroak erabili"
@@ -13696,7 +13705,7 @@ msgstr ""
 msgid "Current users with this role"
 msgstr "Bertsioa"
 
-#: www/admin/globalroleedit.php:149 www/admin/search.php:90
+#: www/admin/globalroleedit.php:149 www/admin/search.php:81
 #: www/admin/unsubscribe.php:113 www/project/admin/users.php:300
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/top/topusers.php:63
@@ -13837,7 +13846,7 @@ msgstr "Taldearen izena (editatzeko sakatu)"
 msgid "Register Time"
 msgstr ""
 
-#: www/admin/grouplist.php:67 www/admin/search.php:168
+#: www/admin/grouplist.php:67 www/admin/search.php:159
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:80
 #, fuzzy
@@ -14367,14 +14376,14 @@ msgstr ""
 msgid "Admin Search Results"
 msgstr "Administrazioa. Bilaketaren erantzuna."
 
-#: www/admin/search.php:80
+#: www/admin/search.php:71
 #, fuzzy, php-format
 msgid "User search with criteria <em>%1$s</em>: %2$s match"
 msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] "Erabiltzaileak bilatu hirizpide hauen arabera"
 msgstr[1] "Erabiltzaileak bilatu hirizpide hauen arabera"
 
-#: www/admin/search.php:91 www/admin/unsubscribe.php:114
+#: www/admin/search.php:82 www/admin/unsubscribe.php:114
 #: www/admin/useredit.php:145 www/project/admin/massadd.php:90
 #: www/project/admin/massfinish.php:79
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
@@ -14382,22 +14391,22 @@ msgstr[1] "Erabiltzaileak bilatu hirizpide hauen arabera"
 msgid "Real name"
 msgstr "Benetazko izena"
 
-#: www/admin/search.php:93
+#: www/admin/search.php:84
 msgid "Member since"
 msgstr "Noiztik bazkide"
 
-#: www/admin/search.php:164
+#: www/admin/search.php:155
 #, fuzzy, php-format
 msgid "Group search with criteria <em>%s</em>: %d match"
 msgid_plural "Group search with criteria <em>%s</em>: %d matches"
 msgstr[0] "Erabiltzaileak bilatu hirizpide hauen arabera"
 msgstr[1] "Erabiltzaileak bilatu hirizpide hauen arabera"
 
-#: www/admin/search.php:169
+#: www/admin/search.php:160
 msgid "Full Name"
 msgstr "Izen osoa"
 
-#: www/admin/search.php:170
+#: www/admin/search.php:161
 msgid "Registered"
 msgstr "Erregistratua"
 
@@ -14911,77 +14920,73 @@ msgstr ""
 msgid "Documents for "
 msgstr "Foroen administrazioa"
 
-#: www/docman/view.php:57 www/docman/view.php:234
+#: www/docman/view.php:57 www/docman/view.php:231
 #, fuzzy
 msgid "Document is not available."
 msgstr "Informazioa ez dago eskuragarri"
 
-#: www/docman/view.php:85
-msgid "No document to display - invalid or inactive document number"
-msgstr ""
-
-#: www/docman/view.php:118
+#: www/docman/view.php:115
 msgid "Unable to open zip archive for backup"
 msgstr ""
 
-#: www/docman/view.php:122
+#: www/docman/view.php:119
 msgid "Unable to fill zip archive for backup"
 msgstr ""
 
-#: www/docman/view.php:125
+#: www/docman/view.php:122
 msgid "Unable to close zip archive for backup"
 msgstr ""
 
-#: www/docman/view.php:134
+#: www/docman/view.php:131
 msgid "Unable to download backup file"
 msgstr ""
 
-#: www/docman/view.php:139
+#: www/docman/view.php:136
 #, fuzzy
 msgid "No documents to backup."
 msgstr "Ez dago daturik dokumentu honetan"
 
-#: www/docman/view.php:143
+#: www/docman/view.php:140
 msgid "Zip extension is missing: no backup function"
 msgstr ""
 
-#: www/docman/view.php:155
+#: www/docman/view.php:152
 msgid "Webdav Access Canceled by user"
 msgstr ""
 
-#: www/docman/view.php:161
+#: www/docman/view.php:158
 msgid "No webdav interface enabled."
 msgstr ""
 
-#: www/docman/view.php:189 www/docman/view.php:228
+#: www/docman/view.php:186 www/docman/view.php:225
 msgid "Unable to open zip archive for download as zip"
 msgstr ""
 
-#: www/docman/view.php:197 www/docman/view.php:240
+#: www/docman/view.php:194 www/docman/view.php:237
 msgid "Unable to fill zipfile."
 msgstr ""
 
-#: www/docman/view.php:201
+#: www/docman/view.php:198
 msgid "Unable to fill zip archive for download as zip"
 msgstr ""
 
-#: www/docman/view.php:204 www/docman/view.php:249
+#: www/docman/view.php:201 www/docman/view.php:246
 msgid "Unable to close zip archive for download as zip"
 msgstr ""
 
-#: www/docman/view.php:213 www/docman/view.php:258
+#: www/docman/view.php:210 www/docman/view.php:255
 msgid "Unable to download zip archive"
 msgstr ""
 
-#: www/docman/view.php:218
+#: www/docman/view.php:215
 msgid "This documents folder is empty."
 msgstr ""
 
-#: www/docman/view.php:263 www/docman/view.php:269
+#: www/docman/view.php:260 www/docman/view.php:266
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
 
-#: www/docman/view.php:266
+#: www/docman/view.php:263
 msgid "PHP extension is missing."
 msgstr ""
 
@@ -15379,15 +15384,15 @@ msgstr "Azalpenak"
 msgid "This message does not (any longer) exist"
 msgstr "Mezu hau ez da ageri"
 
-#: www/forum/message.php:152
+#: www/forum/message.php:151
 msgid "Thread View"
 msgstr "Elkarrizketa ikusi"
 
-#: www/forum/message.php:220
+#: www/forum/message.php:219
 msgid "Post a followup to this message"
 msgstr "Mezu honi erantzun bat bidali"
 
-#: www/forum/message.php:225 www/forum/message.php:226
+#: www/forum/message.php:224 www/forum/message.php:225
 #, fuzzy
 msgid "You Must Choose a Message First"
 msgstr "Lehenengo mezua aukeratu behar duzu"
@@ -16107,14 +16112,14 @@ msgstr "Izena derrigorrezkoa da"
 msgid "File does not exist. File %s is not in incoming FTP directory."
 msgstr ""
 
-#: www/include/html.php:329
+#: www/include/html.php:335
 msgid ""
 "This drop-down box represents the person to which a tracker item is assigned."
 msgstr ""
 "Lehio honetan proiektuaren administraria ageri da. Honi erregistroaren "
 "elementu bat esleitzen zaio."
 
-#: www/include/html.php:331
+#: www/include/html.php:337
 msgid ""
 "This drop-down box represents the current status of a tracker item.<br /"
 "><br />You can set the status to 'Pending' if you are waiting for a response "
@@ -16130,17 +16135,17 @@ msgstr ""
 "(14 egun defektuz) erantzuten orduan elementuari \"Ezabatua\" egoera jartzen "
 "zaio."
 
-#: www/include/html.php:333
+#: www/include/html.php:339
 #, fuzzy
 msgid "Tracker category"
 msgstr "Erregistroaren artikulua."
 
-#: www/include/html.php:335
+#: www/include/html.php:341
 #, fuzzy
 msgid "Tracker group"
 msgstr "Erregistroa"
 
-#: www/include/html.php:337
+#: www/include/html.php:343
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
 "<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, "
@@ -16152,7 +16157,7 @@ msgstr ""
 "Laburpena, Zabaltze data, Ixte data, Nork bidalia edo Nori esleitua. Aldi "
 "berean, alfabetikoki goranzka edo beheranzka antolatu dezakezu."
 
-#: www/include/html.php:339
+#: www/include/html.php:345
 msgid ""
 "The Data Type option determines the type of tracker item this is.  Since the "
 "tracker rolls into one the bug, patch, support, etc... managers you need to "
@@ -16164,7 +16169,7 @@ msgstr ""
 "adabakien, eskaeren... kudeatzaileetako batetara joango denez zehaztu egin "
 "behar duzu."
 
-#: www/include/html.php:341
+#: www/include/html.php:347
 msgid ""
 "The priority option allows a user to define a tracker item priority (ranging "
 "from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs "
@@ -16176,7 +16181,7 @@ msgstr ""
 "oso erabilgarria da gehienbat akatsentzako eta sostengu eskaerentzako, non "
 "erabiltzaileak arazo larria eduki lezake bere proiektuan."
 
-#: www/include/html.php:347
+#: www/include/html.php:353
 msgid ""
 "The canned response drop-down represents a list of project admin-defined "
 "canned responses to common support or bug submission.<br /><br /> If you are "
@@ -16189,19 +16194,19 @@ msgstr ""
 "administraria bazara (administrazioa) lotura sakatu gordetako zure ohiko "
 "erantzunak finkatzeko."
 
-#: www/include/html.php:349
+#: www/include/html.php:355
 msgid ""
 "Anyone can add here comments to give additional information, answers and "
 "solutions. Please, be as precise as possible to avoid misunderstanding. If "
 "relevant, screenshots or documents can be added as attached files."
 msgstr ""
 
-#: www/include/html.php:351
+#: www/include/html.php:357
 #, fuzzy
 msgid "Enter the complete description."
 msgstr "Deskribapena"
 
-#: www/include/html.php:352
+#: www/include/html.php:358
 msgid ""
 "<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</"
 "strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/"
@@ -16210,7 +16215,7 @@ msgid ""
 "</div>"
 msgstr ""
 
-#: www/include/html.php:355
+#: www/include/html.php:361
 msgid ""
 "When you wish to attach a file to a tracker item you must check this "
 "checkbox before submitting changes."
@@ -16218,7 +16223,7 @@ msgstr ""
 "Erregistro bati fitxero bat atxeki nahi diozunean laukitxoa aukeratu behar "
 "duzu aldaketak bidali baino lehen."
 
-#: www/include/html.php:357
+#: www/include/html.php:363
 msgid ""
 "You can monitor or un-monitor this item by clicking the \"Monitor\" button. "
 "<br /><br /><strong>Note!</strong> this will send you additional email. If "
@@ -16226,93 +16231,93 @@ msgid ""
 "will also get emails for those reasons as well!"
 msgstr ""
 
-#: www/include/html.php:677
+#: www/include/html.php:683
 msgid "Lowest"
 msgstr "Behea"
 
-#: www/include/html.php:681
+#: www/include/html.php:687
 msgid "Highest"
 msgstr "Altua"
 
-#: www/include/html.php:767
+#: www/include/html.php:773
 #, fuzzy, php-format
 msgid "Project access problem: %s"
 msgstr "Administrazioaren laburpena"
 
-#: www/include/html.php:769
+#: www/include/html.php:775
 #, fuzzy, php-format
 msgid "Project Problem: %s"
 msgstr "Administrazioaren laburpena"
 
-#: www/include/html.php:824 www/my/bookmark_add.php:28
+#: www/include/html.php:830 www/my/bookmark_add.php:28
 msgid "My Personal Page"
 msgstr "Nere orri pertsonala"
 
-#: www/include/html.php:826
+#: www/include/html.php:832
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:829
+#: www/include/html.php:835
 #, fuzzy
 msgid "Trackers dashboard"
 msgstr "Erregistroa eguneratua"
 
-#: www/include/html.php:831
+#: www/include/html.php:837
 #, fuzzy
 msgid "View your tasks and artifacts."
 msgstr "Ez daude apunterik zure egunkarian"
 
-#: www/include/html.php:835
+#: www/include/html.php:841
 msgid "Diary &amp; Notes"
 msgstr "Egunkaria eta Oharrak"
 
-#: www/include/html.php:837
+#: www/include/html.php:843
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:842
+#: www/include/html.php:848
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:846 www/register/index.php:155
+#: www/include/html.php:852 www/register/index.php:155
 msgid "Register Project"
 msgstr "Proiektu berria erregistratu"
 
-#: www/include/html.php:848
+#: www/include/html.php:854
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:897
+#: www/include/html.php:903
 #, fuzzy, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "Azken hilabetea(k)"
 msgstr[1] "Azken hilabetea(k)"
 
-#: www/include/html.php:901
+#: www/include/html.php:907
 #, fuzzy, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "Azken hilabetea(k)"
 msgstr[1] "Azken hilabetea(k)"
 
-#: www/include/html.php:905
+#: www/include/html.php:911
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:909
+#: www/include/html.php:915
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:913
+#: www/include/html.php:919
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -16581,168 +16586,242 @@ msgid "A powerful plugin system to add new features."
 msgstr ""
 
 #: www/index_std.php:27
-msgid "What's new in FusionForge 5.1"
-msgstr ""
-
-#: www/index_std.php:29
-msgid "New Funky Theme (Capgemini)."
+msgid "What's new in FusionForge 5.2"
 msgstr ""
 
 #: www/index_std.php:30
+msgid "Docman: inject zip as a tree (Capgemini)"
+msgstr ""
+
+#: www/index_std.php:31
+msgid ""
+"Widget: New User Widget: Last 5 documents published in my project (Capgemini)"
+msgstr ""
+
+#: www/index_std.php:32
+#, fuzzy
+msgid "Docman: mass action (Capgemini)"
+msgstr "Dokumentuak irakurri."
+
+#: www/index_std.php:33
+msgid ""
+"New Message plugin to display global messages like planned upgrade or "
+"outage\n"
+"  (Alcatel-Lucent)."
+msgstr ""
+
+#: www/index_std.php:35
+msgid "Docman: complete rewritten of trash and pending view (Capgemini)"
+msgstr ""
+
+#: www/index_std.php:36
+msgid ""
+"New Scmhook: complete library to handle hooks for any scm available in\n"
+"  fusionforge. Currently supporting post-commit and pre-commit hook.\n"
+"  scmsvn pre-commit and post-commit library is provided (Capgemini)"
+msgstr ""
+
+#: www/index_std.php:39
+msgid ""
+"New Widget: smcgit personal URL of cloned repositories. Currently just\n"
+"  a list of URLs of your personal repository cloned from project you\n"
+"   belong. (Capgemini)"
+msgstr ""
+
+#: www/index_std.php:42
+msgid ""
+"Docman: interaction with the projects-hierarchy plugin to enable "
+"hierarchical\n"
+"  browsing. (Capgemini)"
+msgstr ""
+
+#: www/index_std.php:44
+msgid ""
+"Admin: User add membership to multiples projects in one shot (Capgemini)"
+msgstr ""
+
+#: www/index_std.php:45
+msgid "New MoinMoinWiki plugin (AdaCore)"
+msgstr ""
+
+#: www/index_std.php:46
+msgid ""
+"Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)"
+msgstr ""
+
+#: www/index_std.php:47
+msgid ""
+"scmsvn: private project can now be browsed with viewvc using user rights "
+"management (TrivialDev)."
+msgstr ""
+
+#: www/index_std.php:48
+msgid "scmsvn: basic activity support (TrivialDev)."
+msgstr ""
+
+#: www/index_std.php:51
+msgid "What's new in FusionForge 5.1"
+msgstr ""
+
+#: www/index_std.php:53
+msgid "New Funky Theme (Capgemini)."
+msgstr ""
+
+#: www/index_std.php:54
 msgid ""
 "New UI and features for the document manager (download as zip, locking, "
 "referencing documents by URL) (Capgemini)."
 msgstr ""
 
-#: www/index_std.php:31
+#: www/index_std.php:55
 msgid ""
 "New progress bar displaying completion state of trackers using a custom "
 "status field."
 msgstr ""
 
-#: www/index_std.php:32
+#: www/index_std.php:56
 msgid "Improved sorting in trackers (Alcatel-Lucent)."
 msgstr ""
 
-#: www/index_std.php:33
+#: www/index_std.php:57
 msgid ""
 "More flexible and more powerful role-based access control system (Coclico)."
 msgstr ""
 
-#: www/index_std.php:34
+#: www/index_std.php:58
 msgid ""
 "New unobtrusive tooltip system based on jquery and tipsy to replace old help "
 "window (Alcatel-Lucent)"
 msgstr ""
 
-#: www/index_std.php:35
+#: www/index_std.php:59
 msgid ""
 "New plugins: Blocks, to add free HTML blocks on top of each tool of the "
 "project; Gravatar, to display user faces; OSLC, implementing the OSLC-CM API "
 "for tracker interoperability with external tools."
 msgstr ""
 
-#: www/index_std.php:36
+#: www/index_std.php:60
 msgid "scmgit plugin: Personal Git repositories for project members (AdaCore)."
 msgstr ""
 
-#: www/index_std.php:37
+#: www/index_std.php:61
 msgid ""
 "Template projects: there can be several of them, and users registering new "
 "projects can pick which template to clone from for their new projects "
 "(Coclico)."
 msgstr ""
 
-#: www/index_std.php:38
+#: www/index_std.php:62
 msgid "Simplified configuration system, using standard *.ini files."
 msgstr ""
 
-#: www/index_std.php:39
+#: www/index_std.php:63
 msgid "Reorganised, modular Apache configuration."
 msgstr ""
 
-#: www/index_std.php:40
+#: www/index_std.php:64
 msgid "RPM packages for Red Hat (and derived) distributions."
 msgstr ""
 
-#: www/index_std.php:43
+#: www/index_std.php:67
 msgid "What's new in FusionForge 5.0"
 msgstr ""
 
-#: www/index_std.php:45
+#: www/index_std.php:69
 msgid ""
 "Many improvements to the trackers: configurable display, workflow "
 "management, links between artifacts, better searches, and more"
 msgstr ""
 
-#: www/index_std.php:46
+#: www/index_std.php:70
 msgid "Rewritten SCM subsystem, with new plugins for Bazaar, Darcs and Git"
 msgstr ""
 
-#: www/index_std.php:47
+#: www/index_std.php:71
 msgid ""
 "New version of Mediawiki plugin, providing independent wikis for each project"
 msgstr ""
 
-#: www/index_std.php:48
+#: www/index_std.php:72
 msgid "Various new plugins: projectlabels, globalsearch, extratabs"
 msgstr ""
 
-#: www/index_std.php:49
+#: www/index_std.php:73
 msgid ""
 "An in-depth rewrite of the theme for better accessibility and XHTML "
 "conformance"
 msgstr ""
 
-#: www/index_std.php:52
+#: www/index_std.php:76
 msgid "What's new in FusionForge 4.8"
 msgstr ""
 
-#: www/index_std.php:54
+#: www/index_std.php:78
 msgid "New project classification by tags (tag cloud)."
 msgstr ""
 
-#: www/index_std.php:55
+#: www/index_std.php:79
 msgid "New reporting item for the File Release System: downloads per package."
 msgstr ""
 
-#: www/index_std.php:56
+#: www/index_std.php:80
 msgid "List of all projects added in Project List"
 msgstr ""
 
-#: www/index_std.php:57
+#: www/index_std.php:81
 msgid "New version of phpWiki plugin, using lastest svn code"
 msgstr ""
 
-#: www/index_std.php:60
+#: www/index_std.php:84
 msgid "What's new in FusionForge 4.7"
 msgstr ""
 
-#: www/index_std.php:62
+#: www/index_std.php:86
 msgid "A new name to avoid confusion with proprietary versions of GForge."
 msgstr ""
 
-#: www/index_std.php:63
+#: www/index_std.php:87
 msgid "Support for PHP5."
 msgstr ""
 
-#: www/index_std.php:64
+#: www/index_std.php:88
 msgid "Support for PostgreSQL 8.x."
 msgstr ""
 
-#: www/index_std.php:65
+#: www/index_std.php:89
 msgid "Translations are now managed by gettext."
 msgstr ""
 
-#: www/index_std.php:66
+#: www/index_std.php:90
 msgid "Support for several configurations running on the same code."
 msgstr ""
 
-#: www/index_std.php:67
+#: www/index_std.php:91
 msgid "Improved security, no need for PHP register_globals."
 msgstr ""
 
-#: www/index_std.php:68
+#: www/index_std.php:92
 msgid "Available as full install CD."
 msgstr ""
 
-#: www/index_std.php:69
+#: www/index_std.php:93
 msgid "New wiki plugins (using MediaWiki or phpWiki)."
 msgstr ""
 
-#: www/index_std.php:70
+#: www/index_std.php:94
 msgid "New online_help plugin."
 msgstr ""
 
-#: www/index_std.php:71
+#: www/index_std.php:95
 msgid "New phpwebcalendar plugin."
 msgstr ""
 
-#: www/index_std.php:72
+#: www/index_std.php:96
 msgid "New project hierarchy plugin."
 msgstr ""
 
-#: www/index_std.php:92
+#: www/index_std.php:116
 #, php-format
 msgid "This site is running %1$s version %2$s"
 msgstr ""
@@ -19435,7 +19514,7 @@ msgstr ""
 
 #: www/register/index.php:212
 #, php-format
-msgid "shell access to <tt>unixname.%1$s</tt>,"
+msgid "shell access to <span class=\"tt\">unixname.%1$s</span>,"
 msgstr ""
 
 #: www/register/index.php:214
@@ -21747,6 +21826,10 @@ msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
 
 #, fuzzy
+#~ msgid "Projects importer"
+#~ msgstr "Azpiproiektuaren izen berria"
+
+#, fuzzy
 #~ msgid "name is empty"
 #~ msgstr "Karga"
 
@@ -21785,10 +21868,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy
 #~ msgid "No Document Directory Found"
 #~ msgstr "Ez dira dokumentuak aurkitu"
-
-#, fuzzy
-#~ msgid "Docman Action Denied."
-#~ msgstr "Dokumentuak irakurri."
 
 #, fuzzy
 #~ msgid "Document Directory Updated successfully."
