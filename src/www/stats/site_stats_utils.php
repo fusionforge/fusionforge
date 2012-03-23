@@ -38,26 +38,6 @@ $allowed_orderby_vals = array('downloads',
 			      'cvs_commits',
 			      'cvs_adds');
 
-// week_to_dates
-function week_to_dates( $week, $year = 0 ) {
-
-	if ( $year == 0 ) {
-		$year = gmstrftime("%Y", time() );
-	}
-
-	   // One second into the New Year!
-	$beginning = gmmktime(0,0,0,1,1,$year);
-	while ( gmstrftime("%U", $beginning) < 1 ) {
-		   // 86,400 seconds? That's almost exactly one day!
-		$beginning += 86400;
-	}
-	$beginning += (86400 * 7 * ($week - 1));
-	$end = $beginning + (86400 * 6);
-
-	return array( $beginning, $end );
-}
-
-
 function stats_util_sum_array( $sum, $add ) {
 	if (!is_array($sum)) {
 		$sum = array();
