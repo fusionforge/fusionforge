@@ -5,6 +5,8 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002, GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (c) 2011, 2012
+ *	Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -160,6 +162,8 @@ function db_switcher($dbserver = NULL) {
  *  @return int result set handle.
  */
 function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
+	global $sysdebug_dbquery, $sysdebug_dberrors;
+
 	db_connect_if_needed();
 	$dbconn = db_switcher($dbserver) ;
 
@@ -168,7 +172,17 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
 
 	$qstring = file_get_contents($file);
 	if (!$qstring) {
-		error_log('db_query_from_file(): Cannot read file $file!');
+		if ($sysdebug_dbquery) {
+			ffDebug("warning",
+			    "aborted call of db_query_from_file():",
+			    "Cannot read file: " . $file .
+			    "\n\n" . debug_string_backtrace());
+		} else if ($sysdebug_dberrors) {
+			ffDebug("warning", "db_query_from_file() aborted (" .
+			    "Cannot read file: " . $file . ")", false);
+		} else {
+			error_log("db_query_from_file(): Cannot read file: " . $file);
+		}
 		return false;
 	}
 	if (!$limit || !is_numeric($limit) || $limit < 0) {
@@ -180,9 +194,19 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
 		}
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
 	}
-	$res = @pg_query($dbconn,$qstring);
-	if (!$res) {
-		error_log('SQL: ' . preg_replace('/\n\t+/', ' ',$qstring));
+	$res = @pg_query($dbconn, $qstring);
+	if ($res) {
+		if ($sysdebug_dbquery) {
+			ffDebug("trace",
+			    "successful call of db_query_from_file(), SQL: " .
+			    $qstring, debug_string_backtrace());
+		}
+	} else if ($sysdebug_dbquery || $sysdebug_dberrors) {
+		ffDebug("warning", "db_query_from_file() failed (" .
+		    db_error($dbserver) . "), SQL: " . $qstring,
+		    $sysdebug_dbquery ? debug_string_backtrace() : false);
+	} else {
+		error_log('SQL: ' . preg_replace('/\n\t+/', ' ', $qstring));
 		error_log('SQL> ' . db_error($dbserver));
 	}
 	return $res;
@@ -199,7 +223,7 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
  *	@return int result set handle.
  */
 function db_query_params($qstring, $params, $limit = '-1', $offset = 0, $dbserver = NULL) {
-	global $sysdebug_dbquery;
+	global $sysdebug_dbquery, $sysdebug_dberrors;
 
 	db_connect_if_needed();
 	$dbconn = db_switcher($dbserver) ;
@@ -217,16 +241,23 @@ function db_query_params($qstring, $params, $limit = '-1', $offset = 0, $dbserve
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
 	}
 
-	$res = @pg_query_params($dbserver,$qstring,$params);
-	if ($sysdebug_dbquery) {
-		ffDebug('trace', "tracing " .
-		    ($res ? "successful" : sprintf("failed(%s)", db_error())) .
-		    " call of db_query_params():\n", debug_string_backtrace());
-		ffDebug('SQL: '.db_query_to_string($qstring,$params).'; ');
-	}
-	if (!$res) {
-		error_log('SQL: ' . preg_replace('/\n\t+/', ' ',$qstring));
-		error_log('SQL> '.db_error($dbserver));
+	$res = @pg_query_params($dbserver, $qstring, $params);
+	if ($res) {
+		if ($sysdebug_dbquery) {
+			ffDebug("trace",
+			    "successful call of db_query_params():",
+			    debug_string_backtrace());
+		}
+	} else if ($sysdebug_dbquery) {
+		ffDebug("warning", "failed call of db_query_params():",
+		    db_error($dbserver) . "\n\n" . debug_string_backtrace());
+	} else if ($sysdebug_dberrors) {
+		ffDebug("warning", "db_query_params() failed (" .
+		    db_error($dbserver) . "), SQL: " . $qstring,
+		    print_r(array("params" => $params), 1));
+	} else {
+		error_log('SQL: ' . preg_replace('/\n\t+/', ' ', $qstring));
+		error_log('SQL> ' . db_error($dbserver));
 	}
 	return $res;
 }
