@@ -217,13 +217,13 @@ function db_query_params($qstring, $params, $limit = '-1', $offset = 0, $dbserve
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
 	}
 
+	$res = @pg_query_params($dbserver,$qstring,$params);
 	if ($sysdebug_dbquery) {
-		ffDebug('trace', "tracing call of db_query_params():\n",
-		    debug_string_backtrace());
-		error_log('SQL: '.db_query_to_string($qstring,$params).'; ');
+		ffDebug('trace', "tracing " .
+		    ($res ? "successful" : sprintf("failed(%s)", db_error())) .
+		    " call of db_query_params():\n", debug_string_backtrace());
+		ffDebug('SQL: '.db_query_to_string($qstring,$params).'; ');
 	}
-
-	$res = @pg_query_params($dbconn,$qstring,$params);
 	if (!$res) {
 		error_log('SQL: ' . preg_replace('/\n\t+/', ' ',$qstring));
 		error_log('SQL> '.db_error($dbserver));
