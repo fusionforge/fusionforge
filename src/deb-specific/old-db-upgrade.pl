@@ -42,6 +42,7 @@ eval {
     if (&table_exists ($dbh, 'database_startpoint')) {	
 	&debug ("Database maintenance already moved to unified script,") ;
 	&debug ("nothing to do in old upgrader.") ;
+	exit 0;
     }
 
     elsif (! &table_exists ($dbh, 'groups')) {	# No 'groups' table
