@@ -469,7 +469,6 @@ src/common/include/RBAC.php -text
 src/common/include/RBACEngine.class.php -text
 src/common/include/TextSanitizer.class.php -text
 src/common/include/UserManager.class.php -text
-src/common/include/XhtmlValidator.php -text
 src/common/include/config-vars.php -text
 src/common/include/config.php -text
 src/common/include/env.inc.php -text
