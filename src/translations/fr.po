@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-23 15:53+0100\n"
+"POT-Creation-Date: 2012-03-26 20:11+0200\n"
 "PO-Revision-Date: 2012-03-14 20:03+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1752,9 +1752,7 @@ msgstr "Posté par"
 #: www/frs/index.php:175 www/news/admin/news_admin_utils.php:55
 #: www/pm/calendar.php:268 www/pm/include/ProjectTaskHTML.class.php:157
 #: www/pm/include/ProjectTaskHTML.class.php:203
-#: www/project/admin/project_admin_utils.php:161
-#: www/project/stats/project_stats_utils.php:74 www/reporting/timeadd.php:137
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
+#: www/project/admin/project_admin_utils.php:161 www/reporting/timeadd.php:137
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:56
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:51
@@ -2040,7 +2038,7 @@ msgstr ""
 "Pour interrompre la surveillance, connectez-vous à %s et suivez ce lien :\n"
 "%s\n"
 
-#: common/frs/FRSFile.class.php:118
+#: common/frs/FRSFile.class.php:118 www/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
 msgstr "Le nom du fichier doit compter au moins 3 caractères"
 
@@ -2731,7 +2729,7 @@ msgstr ""
 "Votre page, contenant des widgets de votre choix pour suivre vos tâches."
 
 #: common/include/Navigation.class.php:248 www/project/admin/index.php:161
-#: www/reporting/index.php:42 www/stats/site_stats_utils.php:496
+#: www/reporting/index.php:42 www/stats/site_stats_utils.php:476
 msgid "Projects"
 msgstr "Projets"
 
@@ -2843,11 +2841,8 @@ msgstr "Listes de diffusion."
 #: common/reporting/report_utils.php:155 common/reporting/report_utils.php:193
 #: common/widget/Widget_ProjectPublicAreas.class.php:128
 #: plugins/blocks/www/index.php:169 www/my/dashboard.php:76
-#: www/project/stats/project_stats_utils.php:82
-#: www/project/stats/project_stats_utils.php:141
-#: www/project/stats/project_stats_utils.php:196
-#: www/stats/site_stats_utils.php:259 www/stats/site_stats_utils.php:385
-#: www/stats/site_stats_utils.php:440
+#: www/stats/site_stats_utils.php:239 www/stats/site_stats_utils.php:365
+#: www/stats/site_stats_utils.php:420
 msgid "Tasks"
 msgstr "Tâches"
 
@@ -2888,8 +2883,8 @@ msgid "Flash head line from the project."
 msgstr "Nouvelles rapides à propos du projet."
 
 #: common/include/Navigation.class.php:535 common/include/rbac_texts.php:152
-#: plugins/blocks/www/index.php:173 www/stats/site_stats_utils.php:262
-#: www/stats/site_stats_utils.php:386 www/stats/site_stats_utils.php:441
+#: plugins/blocks/www/index.php:173 www/stats/site_stats_utils.php:242
+#: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:421
 msgid "SCM"
 msgstr "Sources"
 
@@ -3297,7 +3292,7 @@ msgstr "Outil de suivi"
 msgid "Documentations"
 msgstr "Documentations"
 
-#: common/include/pre.php:302
+#: common/include/pre.php:303
 #, php-format
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
@@ -3809,9 +3804,9 @@ msgid "Y-m"
 msgstr "m/Y"
 
 #: common/reporting/report_utils.php:159 common/reporting/report_utils.php:197
-#: www/reporting/projectact_graph.php:114 www/stats/site_stats_utils.php:250
-#: www/stats/site_stats_utils.php:381 www/stats/site_stats_utils.php:435
-#: www/stats/site_stats_utils.php:494 www/top/toplist.php:36
+#: www/reporting/projectact_graph.php:114 www/stats/site_stats_utils.php:230
+#: www/stats/site_stats_utils.php:361 www/stats/site_stats_utils.php:415
+#: www/stats/site_stats_utils.php:474 www/top/toplist.php:36
 #: www/top/toplist.php:52
 msgid "Downloads"
 msgstr "Téléchargement"
@@ -3820,30 +3815,18 @@ msgstr "Téléchargement"
 msgid "Page views"
 msgstr "Pages vues"
 
-#: common/reporting/report_utils.php:177
-#: www/project/stats/project_stats_utils.php:78
-#: www/project/stats/project_stats_utils.php:137
-#: www/project/stats/project_stats_utils.php:192
-#: www/stats/site_stats_utils.php:253 www/stats/site_stats_utils.php:382
-#: www/stats/site_stats_utils.php:436
+#: common/reporting/report_utils.php:177 www/stats/site_stats_utils.php:233
+#: www/stats/site_stats_utils.php:362 www/stats/site_stats_utils.php:416
 msgid "Bugs"
 msgstr "Bogues"
 
-#: common/reporting/report_utils.php:178
-#: www/project/stats/project_stats_utils.php:79
-#: www/project/stats/project_stats_utils.php:138
-#: www/project/stats/project_stats_utils.php:193
-#: www/stats/site_stats_utils.php:254 www/stats/site_stats_utils.php:383
-#: www/stats/site_stats_utils.php:437
+#: common/reporting/report_utils.php:178 www/stats/site_stats_utils.php:234
+#: www/stats/site_stats_utils.php:363 www/stats/site_stats_utils.php:417
 msgid "Support"
 msgstr "Support technique"
 
-#: common/reporting/report_utils.php:179
-#: www/project/stats/project_stats_utils.php:80
-#: www/project/stats/project_stats_utils.php:139
-#: www/project/stats/project_stats_utils.php:194
-#: www/stats/site_stats_utils.php:255 www/stats/site_stats_utils.php:384
-#: www/stats/site_stats_utils.php:438
+#: common/reporting/report_utils.php:179 www/stats/site_stats_utils.php:235
+#: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
 msgid "Patches"
 msgstr "Patches"
 
@@ -4665,6 +4648,7 @@ msgstr "Personne"
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
 #: www/admin/search.php:80 www/admin/search.php:158 www/my/dashboard.php:62
 #: www/pm/index.php:98 www/project/admin/editimages.php:265
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:55
 msgid "ID"
 msgstr "Identifiant"
 
@@ -4688,6 +4672,7 @@ msgstr "Priorité"
 #: common/tracker/views/form-customizelist.php:44 www/people/viewjob.php:77
 #: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:137
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
 msgid "Open Date"
 msgstr "Date d'ouverture"
 
@@ -4988,7 +4973,7 @@ msgstr "Fichiers joints"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:198
 #: plugins/scmsvn/common/SVNPlugin.class.php:200
 #: utils/fixscripts/populate_template_project.php:203
-#: www/stats/site_stats_utils.php:303
+#: www/stats/site_stats_utils.php:283
 msgid "Commits"
 msgstr "Envois"
 
@@ -5036,7 +5021,7 @@ msgstr "Ouvert"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:216
 #: plugins/scmgit/common/GitPlugin.class.php:263
 #: plugins/scmsvn/common/SVNPlugin.class.php:218 www/pm/index.php:102
-#: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:285
+#: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
 msgid "Total"
 msgstr "Total"
 
@@ -8576,10 +8561,7 @@ msgstr "Activée"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:100
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:152
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:219
-#: www/project/stats/project_stats_utils.php:75
-#: www/project/stats/project_stats_utils.php:134
-#: www/project/stats/project_stats_utils.php:189 www/top/mostactive.php:51
-#: www/top/toplist.php:56 www/top/topusers.php:62
+#: www/top/mostactive.php:51 www/top/toplist.php:56 www/top/topusers.php:62
 msgid "Rank"
 msgstr "Rang"
 
@@ -8700,7 +8682,7 @@ msgstr "Résultats de la recherche de %1$s."
 #: plugins/globalsearch/www/index.php:168
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:44
-#: www/stats/site_stats_utils.php:247
+#: www/stats/site_stats_utils.php:227
 msgid "Project Name"
 msgstr "Nom du projet"
 
@@ -9074,9 +9056,6 @@ msgid "SVN"
 msgstr "SVN"
 
 #: plugins/hudson/include/hudsonViews.class.php:408
-#: www/project/stats/project_stats_utils.php:83
-#: www/project/stats/project_stats_utils.php:142
-#: www/project/stats/project_stats_utils.php:197
 msgid "CVS"
 msgstr "CVS"
 
@@ -9933,9 +9912,9 @@ msgid "Fixed"
 msgstr ""
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:50 www/activity/index.php:284
-#: www/reporting/usersummary.php:55 www/stats/site_stats_utils.php:289
-#: www/stats/site_stats_utils.php:291 www/stats/site_stats_utils.php:293
-#: www/stats/site_stats_utils.php:295 www/stats/site_stats_utils.php:299
+#: www/reporting/usersummary.php:55 www/stats/site_stats_utils.php:269
+#: www/stats/site_stats_utils.php:271 www/stats/site_stats_utils.php:273
+#: www/stats/site_stats_utils.php:275 www/stats/site_stats_utils.php:279
 msgid "Closed"
 msgstr "Fermé"
 
@@ -10381,7 +10360,7 @@ msgstr "Le fichier n'a été que partiellement transmis."
 
 #: plugins/mediawiki/www/plugin_admin.php:113
 #: plugins/mediawiki/www/plugin_admin.php:124
-#: www/frs/include/frs_utils.php:230 www/frs/include/frs_utils.php:266
+#: www/frs/include/frs_utils.php:230 www/frs/include/frs_utils.php:268
 msgid "Unknown file upload error."
 msgstr "Erreur inconnue lors de la transmission du fichier."
 
@@ -12114,7 +12093,7 @@ msgstr "Parcourir le dépôt CVS"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:197
 #: plugins/scmgit/common/GitPlugin.class.php:244
 #: plugins/scmsvn/common/SVNPlugin.class.php:199
-#: www/stats/site_stats_utils.php:304
+#: www/stats/site_stats_utils.php:284
 msgid "Adds"
 msgstr "Ajouts"
 
@@ -13458,9 +13437,9 @@ msgstr "envoi"
 msgid "Commit for Tracker Item"
 msgstr "Validation pour l'élément de suivi"
 
-#: www/activity/index.php:279 www/stats/site_stats_utils.php:288
-#: www/stats/site_stats_utils.php:290 www/stats/site_stats_utils.php:292
-#: www/stats/site_stats_utils.php:294 www/stats/site_stats_utils.php:298
+#: www/activity/index.php:279 www/stats/site_stats_utils.php:268
+#: www/stats/site_stats_utils.php:270 www/stats/site_stats_utils.php:272
+#: www/stats/site_stats_utils.php:274 www/stats/site_stats_utils.php:278
 msgid "Opened"
 msgstr "Ouvert"
 
@@ -14776,7 +14755,7 @@ msgstr "[Changer le mot de passe]"
 msgid "User list for project: "
 msgstr "Liste des membres du projet : "
 
-#: www/admin/userlist.php:146 www/stats/site_stats_utils.php:90
+#: www/admin/userlist.php:146 www/stats/site_stats_utils.php:70
 msgid "All Projects"
 msgstr "Tous les projets"
 
@@ -15532,7 +15511,7 @@ msgid "File Released"
 msgstr "Fichier mis à jour"
 
 #: www/frs/admin/editrelease.php:182 www/frs/admin/editrelease.php:199
-#: www/frs/include/frs_utils.php:255
+#: www/frs/include/frs_utils.php:257
 msgid "Could Not Get FRSFile"
 msgstr "Erreur lors de l'accès au fichier."
 
@@ -18339,7 +18318,7 @@ msgstr "Mois"
 msgid "Weeks"
 msgstr "Semaines"
 
-#: www/pm/ganttpage.php:92 www/project/stats/project_stats_utils.php:201
+#: www/pm/ganttpage.php:92
 msgid "Days"
 msgstr "Jours"
 
@@ -18448,7 +18427,7 @@ msgstr "Suivi du temps"
 msgid "Week"
 msgstr "Semaine"
 
-#: www/pm/mod_task.php:266 www/stats/site_stats_utils.php:378
+#: www/pm/mod_task.php:266 www/stats/site_stats_utils.php:358
 msgid "Day"
 msgstr "Jour"
 
@@ -19394,51 +19373,6 @@ msgstr "Statistiques de projet"
 msgid "Areas"
 msgstr "Outil"
 
-#: www/project/stats/project_stats_utils.php:70
-#: www/stats/site_stats_utils.php:375
-#, php-format
-msgid "Statistics for the past %1$s days"
-msgstr "statistiques pour les %1$s derniers jours"
-
-#: www/project/stats/project_stats_utils.php:76
-#: www/project/stats/project_stats_utils.php:135
-#: www/project/stats/project_stats_utils.php:190
-#: www/reporting/projectact_graph.php:143 www/stats/site_stats_utils.php:248
-msgid "Page Views"
-msgstr "pages"
-
-#: www/project/stats/project_stats_utils.php:77
-#: www/project/stats/project_stats_utils.php:136
-#: www/project/stats/project_stats_utils.php:191
-msgid "D/l"
-msgstr "D/l"
-
-#: www/project/stats/project_stats_utils.php:81
-#: www/project/stats/project_stats_utils.php:140
-#: www/project/stats/project_stats_utils.php:195
-#: www/stats/site_stats_utils.php:256 www/stats/site_stats_utils.php:439
-msgid "All Trkr"
-msgstr "Tous les suivis"
-
-#: www/project/stats/project_stats_utils.php:110
-#: www/project/stats/project_stats_utils.php:169
-msgid "Project did not exist on this date."
-msgstr "Le projet n'existait pas à cette date."
-
-#: www/project/stats/project_stats_utils.php:129
-#, php-format
-msgid "Statistics for the past %1$s months."
-msgstr "Statistiques sur %1$s mois"
-
-#: www/project/stats/project_stats_utils.php:133
-#: www/project/stats/project_stats_utils.php:188
-msgid "Lifespan"
-msgstr "mois"
-
-#: www/project/stats/project_stats_utils.php:184
-msgid "Statistics for All Time"
-msgstr "Statistiques cumulées"
-
 #: www/register/index.php:48
 #, php-format
 msgid ""
@@ -19834,6 +19768,10 @@ msgstr "Tâche ouverte"
 msgid "Task Close"
 msgstr "Tâche fermée"
 
+#: www/reporting/projectact_graph.php:143 www/stats/site_stats_utils.php:228
+msgid "Page Views"
+msgstr "pages"
+
 #: www/reporting/projecttime.php:56
 msgid "Time Tracking By Project"
 msgstr "Suivi du temps par projet"
@@ -20180,17 +20118,16 @@ msgstr "au moins un mot"
 msgid "Search All"
 msgstr "Rechercher"
 
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:55
+#: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:72
+#, fuzzy
+msgid "Search for documents"
+msgstr "Chercher à l'intérieur des documents"
+
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:48
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:48
 msgid "#"
 msgstr "#"
-
-#: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:72
-#, fuzzy
-msgid "Search for documents"
-msgstr "Chercher à l'intérieur des documents"
 
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
@@ -21034,91 +20971,100 @@ msgstr "IP source"
 msgid "%1$s Site Project Statistical Comparisons"
 msgstr "Comparaison statistiques des projets"
 
-#: www/stats/site_stats_utils.php:91
+#: www/stats/site_stats_utils.php:71
 msgid "Special Projects"
 msgstr "Projets spéciaux"
 
-#: www/stats/site_stats_utils.php:116
+#: www/stats/site_stats_utils.php:96
 #, php-format
 msgid " (no category found with ID %d)"
 msgstr " (aucune catégorie trouvée avec l'identifiant %d)"
 
-#: www/stats/site_stats_utils.php:148
+#: www/stats/site_stats_utils.php:128
 msgid "Projects in trove category:"
 msgstr "Catégorie de projets :"
 
-#: www/stats/site_stats_utils.php:152
+#: www/stats/site_stats_utils.php:132
 msgid "OR enter Special Project List:"
 msgstr "OU entrez une liste spéciale&nbsp:"
 
-#: www/stats/site_stats_utils.php:154
+#: www/stats/site_stats_utils.php:134
 msgid "<strong>comma separated</strong> group_id's)"
 msgstr "numéros de groupes <strong>séparés par des virgules</strong>"
 
-#: www/stats/site_stats_utils.php:156
+#: www/stats/site_stats_utils.php:136
 msgid "Report:"
 msgstr "Rapport d'activité"
 
-#: www/stats/site_stats_utils.php:163
+#: www/stats/site_stats_utils.php:143
 msgid "last_30"
 msgstr "30 derniers"
 
-#: www/stats/site_stats_utils.php:164
+#: www/stats/site_stats_utils.php:144
 msgid "all"
 msgstr "Tout"
 
-#: www/stats/site_stats_utils.php:170
+#: www/stats/site_stats_utils.php:150
 msgid "View by:"
 msgstr "Voir par :"
 
-#: www/stats/site_stats_utils.php:175
+#: www/stats/site_stats_utils.php:155
 msgid "Generate Report"
 msgstr "Produire le rapport d'activité"
 
-#: www/stats/site_stats_utils.php:282
+#: www/stats/site_stats_utils.php:236 www/stats/site_stats_utils.php:419
+msgid "All Trkr"
+msgstr "Tous les suivis"
+
+#: www/stats/site_stats_utils.php:262
 msgid "Site"
 msgstr "Site"
 
-#: www/stats/site_stats_utils.php:283
+#: www/stats/site_stats_utils.php:263
 msgid "Subdomain"
 msgstr "Sous-domaines"
 
-#: www/stats/site_stats_utils.php:302
+#: www/stats/site_stats_utils.php:282
 msgid "Checkouts"
 msgstr "Extractions"
 
-#: www/stats/site_stats_utils.php:351
+#: www/stats/site_stats_utils.php:331
 msgid "Query returned no valid data."
 msgstr "La requête ne retourne pas de données valides."
 
-#: www/stats/site_stats_utils.php:379 www/stats/site_stats_utils.php:433
-#: www/stats/site_stats_utils.php:492
+#: www/stats/site_stats_utils.php:355
+#, php-format
+msgid "Statistics for the past %1$s days"
+msgstr "statistiques pour les %1$s derniers jours"
+
+#: www/stats/site_stats_utils.php:359 www/stats/site_stats_utils.php:413
+#: www/stats/site_stats_utils.php:472
 msgid "Site Views"
 msgstr "sites"
 
-#: www/stats/site_stats_utils.php:380 www/stats/site_stats_utils.php:434
-#: www/stats/site_stats_utils.php:493
+#: www/stats/site_stats_utils.php:360 www/stats/site_stats_utils.php:414
+#: www/stats/site_stats_utils.php:473
 msgid "Subdomain Views"
 msgstr "sous-domaines"
 
-#: www/stats/site_stats_utils.php:411 www/stats/site_stats_utils.php:467
+#: www/stats/site_stats_utils.php:391 www/stats/site_stats_utils.php:447
 msgid "No Data"
 msgstr "Aucune données"
 
-#: www/stats/site_stats_utils.php:429
+#: www/stats/site_stats_utils.php:409
 #, php-format
 msgid "Statistics for the past %1$s months"
 msgstr "statistiques pour les %1$s derniers mois"
 
-#: www/stats/site_stats_utils.php:432
+#: www/stats/site_stats_utils.php:412
 msgid "Month"
 msgstr "Mois"
 
-#: www/stats/site_stats_utils.php:488
+#: www/stats/site_stats_utils.php:468
 msgid "Current Aggregate Statistics for All Time"
 msgstr "Statistiques agrégées depuis le début"
 
-#: www/stats/site_stats_utils.php:495
+#: www/stats/site_stats_utils.php:475
 msgid "Developers"
 msgstr "Développeurs"
 
@@ -21963,6 +21909,21 @@ msgstr[1] ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#~ msgid "D/l"
+#~ msgstr "D/l"
+
+#~ msgid "Project did not exist on this date."
+#~ msgstr "Le projet n'existait pas à cette date."
+
+#~ msgid "Statistics for the past %1$s months."
+#~ msgstr "Statistiques sur %1$s mois"
+
+#~ msgid "Lifespan"
+#~ msgstr "mois"
+
+#~ msgid "Statistics for All Time"
+#~ msgstr "Statistiques cumulées"
 
 #, fuzzy
 #~ msgid "Projects importer"

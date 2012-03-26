@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-23 15:53+0100\n"
+"POT-Creation-Date: 2012-03-26 20:11+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1782,9 +1782,7 @@ msgstr "Опубликовал:"
 #: www/frs/index.php:175 www/news/admin/news_admin_utils.php:55
 #: www/pm/calendar.php:268 www/pm/include/ProjectTaskHTML.class.php:157
 #: www/pm/include/ProjectTaskHTML.class.php:203
-#: www/project/admin/project_admin_utils.php:161
-#: www/project/stats/project_stats_utils.php:74 www/reporting/timeadd.php:137
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
+#: www/project/admin/project_admin_utils.php:161 www/reporting/timeadd.php:137
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:56
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:51
@@ -2052,7 +2050,7 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: common/frs/FRSFile.class.php:118
+#: common/frs/FRSFile.class.php:118 www/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
 msgstr "FRS Имя файла минимум из 3 букв"
 
@@ -2726,7 +2724,7 @@ msgid "Your Page, widgets selected by you to follow your items."
 msgstr ""
 
 #: common/include/Navigation.class.php:248 www/project/admin/index.php:161
-#: www/reporting/index.php:42 www/stats/site_stats_utils.php:496
+#: www/reporting/index.php:42 www/stats/site_stats_utils.php:476
 msgid "Projects"
 msgstr "Проекты"
 
@@ -2838,11 +2836,8 @@ msgstr "Списки рассылки"
 #: common/reporting/report_utils.php:155 common/reporting/report_utils.php:193
 #: common/widget/Widget_ProjectPublicAreas.class.php:128
 #: plugins/blocks/www/index.php:169 www/my/dashboard.php:76
-#: www/project/stats/project_stats_utils.php:82
-#: www/project/stats/project_stats_utils.php:141
-#: www/project/stats/project_stats_utils.php:196
-#: www/stats/site_stats_utils.php:259 www/stats/site_stats_utils.php:385
-#: www/stats/site_stats_utils.php:440
+#: www/stats/site_stats_utils.php:239 www/stats/site_stats_utils.php:365
+#: www/stats/site_stats_utils.php:420
 msgid "Tasks"
 msgstr "Задачи"
 
@@ -2886,8 +2881,8 @@ msgid "Flash head line from the project."
 msgstr "Выделенный объект не имеет пакетов"
 
 #: common/include/Navigation.class.php:535 common/include/rbac_texts.php:152
-#: plugins/blocks/www/index.php:173 www/stats/site_stats_utils.php:262
-#: www/stats/site_stats_utils.php:386 www/stats/site_stats_utils.php:441
+#: plugins/blocks/www/index.php:173 www/stats/site_stats_utils.php:242
+#: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:421
 msgid "SCM"
 msgstr "SCM"
 
@@ -3307,7 +3302,7 @@ msgstr "Трекеры"
 msgid "Documentations"
 msgstr "Документация"
 
-#: common/include/pre.php:302
+#: common/include/pre.php:303
 #, php-format
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
@@ -3851,9 +3846,9 @@ msgid "Y-m"
 msgstr ""
 
 #: common/reporting/report_utils.php:159 common/reporting/report_utils.php:197
-#: www/reporting/projectact_graph.php:114 www/stats/site_stats_utils.php:250
-#: www/stats/site_stats_utils.php:381 www/stats/site_stats_utils.php:435
-#: www/stats/site_stats_utils.php:494 www/top/toplist.php:36
+#: www/reporting/projectact_graph.php:114 www/stats/site_stats_utils.php:230
+#: www/stats/site_stats_utils.php:361 www/stats/site_stats_utils.php:415
+#: www/stats/site_stats_utils.php:474 www/top/toplist.php:36
 #: www/top/toplist.php:52
 msgid "Downloads"
 msgstr "Загрузки"
@@ -3863,30 +3858,18 @@ msgstr "Загрузки"
 msgid "Page views"
 msgstr "Виды страниц"
 
-#: common/reporting/report_utils.php:177
-#: www/project/stats/project_stats_utils.php:78
-#: www/project/stats/project_stats_utils.php:137
-#: www/project/stats/project_stats_utils.php:192
-#: www/stats/site_stats_utils.php:253 www/stats/site_stats_utils.php:382
-#: www/stats/site_stats_utils.php:436
+#: common/reporting/report_utils.php:177 www/stats/site_stats_utils.php:233
+#: www/stats/site_stats_utils.php:362 www/stats/site_stats_utils.php:416
 msgid "Bugs"
 msgstr "Ошибки"
 
-#: common/reporting/report_utils.php:178
-#: www/project/stats/project_stats_utils.php:79
-#: www/project/stats/project_stats_utils.php:138
-#: www/project/stats/project_stats_utils.php:193
-#: www/stats/site_stats_utils.php:254 www/stats/site_stats_utils.php:383
-#: www/stats/site_stats_utils.php:437
+#: common/reporting/report_utils.php:178 www/stats/site_stats_utils.php:234
+#: www/stats/site_stats_utils.php:363 www/stats/site_stats_utils.php:417
 msgid "Support"
 msgstr "Поддержка"
 
-#: common/reporting/report_utils.php:179
-#: www/project/stats/project_stats_utils.php:80
-#: www/project/stats/project_stats_utils.php:139
-#: www/project/stats/project_stats_utils.php:194
-#: www/stats/site_stats_utils.php:255 www/stats/site_stats_utils.php:384
-#: www/stats/site_stats_utils.php:438
+#: common/reporting/report_utils.php:179 www/stats/site_stats_utils.php:235
+#: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
 msgid "Patches"
 msgstr "Патчи"
 
@@ -4727,6 +4710,7 @@ msgstr "Неназначено"
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
 #: www/admin/search.php:80 www/admin/search.php:158 www/my/dashboard.php:62
 #: www/pm/index.php:98 www/project/admin/editimages.php:265
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:55
 msgid "ID"
 msgstr "<small><u>категория</u> :</small>"
 
@@ -4750,6 +4734,7 @@ msgstr "Приоритет"
 #: common/tracker/views/form-customizelist.php:44 www/people/viewjob.php:77
 #: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:137
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
 msgid "Open Date"
 msgstr "Дата открытия"
 
@@ -5044,7 +5029,7 @@ msgstr "Прикрепленные файлы"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:198
 #: plugins/scmsvn/common/SVNPlugin.class.php:200
 #: utils/fixscripts/populate_template_project.php:203
-#: www/stats/site_stats_utils.php:303
+#: www/stats/site_stats_utils.php:283
 msgid "Commits"
 msgstr "Коммитов"
 
@@ -5089,7 +5074,7 @@ msgstr "Открыто"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:216
 #: plugins/scmgit/common/GitPlugin.class.php:263
 #: plugins/scmsvn/common/SVNPlugin.class.php:218 www/pm/index.php:102
-#: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:285
+#: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
 msgid "Total"
 msgstr "Всего"
 
@@ -8695,10 +8680,7 @@ msgstr "Закончено"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:100
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:152
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:219
-#: www/project/stats/project_stats_utils.php:75
-#: www/project/stats/project_stats_utils.php:134
-#: www/project/stats/project_stats_utils.php:189 www/top/mostactive.php:51
-#: www/top/toplist.php:56 www/top/topusers.php:62
+#: www/top/mostactive.php:51 www/top/toplist.php:56 www/top/topusers.php:62
 msgid "Rank"
 msgstr "Ранг"
 
@@ -8834,7 +8816,7 @@ msgstr "Результат поиска для <em>%1$s</em>"
 #: plugins/globalsearch/www/index.php:168
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:44
-#: www/stats/site_stats_utils.php:247
+#: www/stats/site_stats_utils.php:227
 #, fuzzy
 msgid "Project Name"
 msgstr "Название проекта"
@@ -9235,9 +9217,6 @@ msgid "SVN"
 msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:408
-#: www/project/stats/project_stats_utils.php:83
-#: www/project/stats/project_stats_utils.php:142
-#: www/project/stats/project_stats_utils.php:197
 msgid "CVS"
 msgstr ""
 
@@ -10083,9 +10062,9 @@ msgid "Fixed"
 msgstr ""
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:50 www/activity/index.php:284
-#: www/reporting/usersummary.php:55 www/stats/site_stats_utils.php:289
-#: www/stats/site_stats_utils.php:291 www/stats/site_stats_utils.php:293
-#: www/stats/site_stats_utils.php:295 www/stats/site_stats_utils.php:299
+#: www/reporting/usersummary.php:55 www/stats/site_stats_utils.php:269
+#: www/stats/site_stats_utils.php:271 www/stats/site_stats_utils.php:273
+#: www/stats/site_stats_utils.php:275 www/stats/site_stats_utils.php:279
 #, fuzzy
 msgid "Closed"
 msgstr "закрыто"
@@ -10553,7 +10532,7 @@ msgstr "Файл загружен не полностью."
 
 #: plugins/mediawiki/www/plugin_admin.php:113
 #: plugins/mediawiki/www/plugin_admin.php:124
-#: www/frs/include/frs_utils.php:230 www/frs/include/frs_utils.php:266
+#: www/frs/include/frs_utils.php:230 www/frs/include/frs_utils.php:268
 msgid "Unknown file upload error."
 msgstr "Неизвестная ошибка загрузки файла."
 
@@ -12353,7 +12332,7 @@ msgstr "Обзор CVS-репозитория"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:197
 #: plugins/scmgit/common/GitPlugin.class.php:244
 #: plugins/scmsvn/common/SVNPlugin.class.php:199
-#: www/stats/site_stats_utils.php:304
+#: www/stats/site_stats_utils.php:284
 msgid "Adds"
 msgstr "Добавлены"
 
@@ -13744,9 +13723,9 @@ msgstr "коментарий"
 msgid "Commit for Tracker Item"
 msgstr "Часть трекера"
 
-#: www/activity/index.php:279 www/stats/site_stats_utils.php:288
-#: www/stats/site_stats_utils.php:290 www/stats/site_stats_utils.php:292
-#: www/stats/site_stats_utils.php:294 www/stats/site_stats_utils.php:298
+#: www/activity/index.php:279 www/stats/site_stats_utils.php:268
+#: www/stats/site_stats_utils.php:270 www/stats/site_stats_utils.php:272
+#: www/stats/site_stats_utils.php:274 www/stats/site_stats_utils.php:278
 #, fuzzy
 msgid "Opened"
 msgstr "Открыто"
@@ -15110,7 +15089,7 @@ msgstr "Изменить неделю"
 msgid "User list for project: "
 msgstr "Список участников для группы:"
 
-#: www/admin/userlist.php:146 www/stats/site_stats_utils.php:90
+#: www/admin/userlist.php:146 www/stats/site_stats_utils.php:70
 msgid "All Projects"
 msgstr "Все проекты"
 
@@ -15901,7 +15880,7 @@ msgid "File Released"
 msgstr "Выпущенные файлы"
 
 #: www/frs/admin/editrelease.php:182 www/frs/admin/editrelease.php:199
-#: www/frs/include/frs_utils.php:255
+#: www/frs/include/frs_utils.php:257
 #, fuzzy
 msgid "Could Not Get FRSFile"
 msgstr "Ошибка, не указана роль"
@@ -18700,7 +18679,7 @@ msgstr "Месяцы"
 msgid "Weeks"
 msgstr "Недели"
 
-#: www/pm/ganttpage.php:92 www/project/stats/project_stats_utils.php:201
+#: www/pm/ganttpage.php:92
 msgid "Days"
 msgstr "Дней"
 
@@ -18807,7 +18786,7 @@ msgstr "Истечение времени"
 msgid "Week"
 msgstr "Неделя"
 
-#: www/pm/mod_task.php:266 www/stats/site_stats_utils.php:378
+#: www/pm/mod_task.php:266 www/stats/site_stats_utils.php:358
 msgid "Day"
 msgstr "День"
 
@@ -19793,51 +19772,6 @@ msgstr "Использовать статистику"
 msgid "Areas"
 msgstr "Области"
 
-#: www/project/stats/project_stats_utils.php:70
-#: www/stats/site_stats_utils.php:375
-#, php-format
-msgid "Statistics for the past %1$s days"
-msgstr "Статистика за последние %1$s дней"
-
-#: www/project/stats/project_stats_utils.php:76
-#: www/project/stats/project_stats_utils.php:135
-#: www/project/stats/project_stats_utils.php:190
-#: www/reporting/projectact_graph.php:143 www/stats/site_stats_utils.php:248
-msgid "Page Views"
-msgstr "Просмотров страницы"
-
-#: www/project/stats/project_stats_utils.php:77
-#: www/project/stats/project_stats_utils.php:136
-#: www/project/stats/project_stats_utils.php:191
-msgid "D/l"
-msgstr "Загрузок"
-
-#: www/project/stats/project_stats_utils.php:81
-#: www/project/stats/project_stats_utils.php:140
-#: www/project/stats/project_stats_utils.php:195
-#: www/stats/site_stats_utils.php:256 www/stats/site_stats_utils.php:439
-msgid "All Trkr"
-msgstr "Все трекеры"
-
-#: www/project/stats/project_stats_utils.php:110
-#: www/project/stats/project_stats_utils.php:169
-msgid "Project did not exist on this date."
-msgstr "На эту дату проект не существовал"
-
-#: www/project/stats/project_stats_utils.php:129
-#, php-format
-msgid "Statistics for the past %1$s months."
-msgstr "Статистика за последние %1$s месяцы."
-
-#: www/project/stats/project_stats_utils.php:133
-#: www/project/stats/project_stats_utils.php:188
-msgid "Lifespan"
-msgstr "Возраст"
-
-#: www/project/stats/project_stats_utils.php:184
-msgid "Statistics for All Time"
-msgstr "Статистика всего периода"
-
 #: www/register/index.php:48
 #, php-format
 msgid ""
@@ -20220,6 +20154,10 @@ msgstr "Трекер открыт"
 msgid "Task Close"
 msgstr "Трекер закрыт"
 
+#: www/reporting/projectact_graph.php:143 www/stats/site_stats_utils.php:228
+msgid "Page Views"
+msgstr "Просмотров страницы"
+
 #: www/reporting/projecttime.php:56
 msgid "Time Tracking By Project"
 msgstr "Прослеживание времени по проектам"
@@ -20560,17 +20498,16 @@ msgstr "в одно слово"
 msgid "Search All"
 msgstr "Поиск"
 
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:55
+#: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:72
+#, fuzzy
+msgid "Search for documents"
+msgstr "Поиск в документах"
+
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:48
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:48
 msgid "#"
 msgstr ""
-
-#: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:72
-#, fuzzy
-msgid "Search for documents"
-msgstr "Поиск в документах"
 
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
@@ -21410,92 +21347,101 @@ msgstr ""
 msgid "%1$s Site Project Statistical Comparisons"
 msgstr "Статистика сравнения проектов"
 
-#: www/stats/site_stats_utils.php:91
+#: www/stats/site_stats_utils.php:71
 msgid "Special Projects"
 msgstr "Специальные проекты"
 
-#: www/stats/site_stats_utils.php:116
+#: www/stats/site_stats_utils.php:96
 #, php-format
 msgid " (no category found with ID %d)"
 msgstr " (нет категорий с идентификатором %d)"
 
-#: www/stats/site_stats_utils.php:148
+#: www/stats/site_stats_utils.php:128
 msgid "Projects in trove category:"
 msgstr "Проекты в категории хранилища:"
 
-#: www/stats/site_stats_utils.php:152
+#: www/stats/site_stats_utils.php:132
 msgid "OR enter Special Project List:"
 msgstr "Или укажите специальный лист проекта"
 
-#: www/stats/site_stats_utils.php:154
+#: www/stats/site_stats_utils.php:134
 msgid "<strong>comma separated</strong> group_id's)"
 msgstr "<strong>разделение запятой</strong> группы идент)"
 
-#: www/stats/site_stats_utils.php:156
+#: www/stats/site_stats_utils.php:136
 msgid "Report:"
 msgstr "Отчет:"
 
-#: www/stats/site_stats_utils.php:163
+#: www/stats/site_stats_utils.php:143
 msgid "last_30"
 msgstr "30 последних"
 
-#: www/stats/site_stats_utils.php:164
+#: www/stats/site_stats_utils.php:144
 msgid "all"
 msgstr "все"
 
-#: www/stats/site_stats_utils.php:170
+#: www/stats/site_stats_utils.php:150
 msgid "View by:"
 msgstr "Просмотр по:"
 
-#: www/stats/site_stats_utils.php:175
+#: www/stats/site_stats_utils.php:155
 msgid "Generate Report"
 msgstr "Генерирование отчета"
 
-#: www/stats/site_stats_utils.php:282
+#: www/stats/site_stats_utils.php:236 www/stats/site_stats_utils.php:419
+msgid "All Trkr"
+msgstr "Все трекеры"
+
+#: www/stats/site_stats_utils.php:262
 msgid "Site"
 msgstr "Сайт"
 
-#: www/stats/site_stats_utils.php:283
+#: www/stats/site_stats_utils.php:263
 msgid "Subdomain"
 msgstr "Субдомен"
 
-#: www/stats/site_stats_utils.php:302
+#: www/stats/site_stats_utils.php:282
 #, fuzzy
 msgid "Checkouts"
 msgstr "Отмечено"
 
-#: www/stats/site_stats_utils.php:351
+#: www/stats/site_stats_utils.php:331
 msgid "Query returned no valid data."
 msgstr "Ответ на запрос искажен"
 
-#: www/stats/site_stats_utils.php:379 www/stats/site_stats_utils.php:433
-#: www/stats/site_stats_utils.php:492
+#: www/stats/site_stats_utils.php:355
+#, php-format
+msgid "Statistics for the past %1$s days"
+msgstr "Статистика за последние %1$s дней"
+
+#: www/stats/site_stats_utils.php:359 www/stats/site_stats_utils.php:413
+#: www/stats/site_stats_utils.php:472
 msgid "Site Views"
 msgstr "Просмотры сайта"
 
-#: www/stats/site_stats_utils.php:380 www/stats/site_stats_utils.php:434
-#: www/stats/site_stats_utils.php:493
+#: www/stats/site_stats_utils.php:360 www/stats/site_stats_utils.php:414
+#: www/stats/site_stats_utils.php:473
 msgid "Subdomain Views"
 msgstr "Просмотры субдоменов"
 
-#: www/stats/site_stats_utils.php:411 www/stats/site_stats_utils.php:467
+#: www/stats/site_stats_utils.php:391 www/stats/site_stats_utils.php:447
 msgid "No Data"
 msgstr "Нет данных"
 
-#: www/stats/site_stats_utils.php:429
+#: www/stats/site_stats_utils.php:409
 #, php-format
 msgid "Statistics for the past %1$s months"
 msgstr "Статистика за последние %1$s месяцев"
 
-#: www/stats/site_stats_utils.php:432
+#: www/stats/site_stats_utils.php:412
 msgid "Month"
 msgstr "Месяц"
 
-#: www/stats/site_stats_utils.php:488
+#: www/stats/site_stats_utils.php:468
 msgid "Current Aggregate Statistics for All Time"
 msgstr "Текущая статистика сервисов за все время"
 
-#: www/stats/site_stats_utils.php:495
+#: www/stats/site_stats_utils.php:475
 msgid "Developers"
 msgstr "Разработчики"
 
@@ -22348,6 +22294,21 @@ msgstr[2] ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#~ msgid "D/l"
+#~ msgstr "Загрузок"
+
+#~ msgid "Project did not exist on this date."
+#~ msgstr "На эту дату проект не существовал"
+
+#~ msgid "Statistics for the past %1$s months."
+#~ msgstr "Статистика за последние %1$s месяцы."
+
+#~ msgid "Lifespan"
+#~ msgstr "Возраст"
+
+#~ msgid "Statistics for All Time"
+#~ msgstr "Статистика всего периода"
 
 #, fuzzy
 #~ msgid "Projects importer"

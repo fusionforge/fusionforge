@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-23 15:53+0100\n"
+"POT-Creation-Date: 2012-03-26 20:11+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1782,9 +1782,7 @@ msgstr "Enviat per"
 #: www/frs/index.php:175 www/news/admin/news_admin_utils.php:55
 #: www/pm/calendar.php:268 www/pm/include/ProjectTaskHTML.class.php:157
 #: www/pm/include/ProjectTaskHTML.class.php:203
-#: www/project/admin/project_admin_utils.php:161
-#: www/project/stats/project_stats_utils.php:74 www/reporting/timeadd.php:137
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
+#: www/project/admin/project_admin_utils.php:161 www/reporting/timeadd.php:137
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:56
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:51
@@ -2049,7 +2047,7 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: common/frs/FRSFile.class.php:118
+#: common/frs/FRSFile.class.php:118 www/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
 msgstr "El nom del fitxer ha de tenir com a mínim 3 caràcters"
 
@@ -2736,7 +2734,7 @@ msgid "Your Page, widgets selected by you to follow your items."
 msgstr ""
 
 #: common/include/Navigation.class.php:248 www/project/admin/index.php:161
-#: www/reporting/index.php:42 www/stats/site_stats_utils.php:496
+#: www/reporting/index.php:42 www/stats/site_stats_utils.php:476
 msgid "Projects"
 msgstr "Projectes"
 
@@ -2848,11 +2846,8 @@ msgstr "Llistes d'enviament de correus"
 #: common/reporting/report_utils.php:155 common/reporting/report_utils.php:193
 #: common/widget/Widget_ProjectPublicAreas.class.php:128
 #: plugins/blocks/www/index.php:169 www/my/dashboard.php:76
-#: www/project/stats/project_stats_utils.php:82
-#: www/project/stats/project_stats_utils.php:141
-#: www/project/stats/project_stats_utils.php:196
-#: www/stats/site_stats_utils.php:259 www/stats/site_stats_utils.php:385
-#: www/stats/site_stats_utils.php:440
+#: www/stats/site_stats_utils.php:239 www/stats/site_stats_utils.php:365
+#: www/stats/site_stats_utils.php:420
 msgid "Tasks"
 msgstr "Tasques"
 
@@ -2896,8 +2891,8 @@ msgid "Flash head line from the project."
 msgstr "No hi ha tal missatge per aquest projecte"
 
 #: common/include/Navigation.class.php:535 common/include/rbac_texts.php:152
-#: plugins/blocks/www/index.php:173 www/stats/site_stats_utils.php:262
-#: www/stats/site_stats_utils.php:386 www/stats/site_stats_utils.php:441
+#: plugins/blocks/www/index.php:173 www/stats/site_stats_utils.php:242
+#: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:421
 msgid "SCM"
 msgstr "SCM"
 
@@ -3314,7 +3309,7 @@ msgstr "Rastrejadors"
 msgid "Documentations"
 msgstr "Visualitza la documentació"
 
-#: common/include/pre.php:302
+#: common/include/pre.php:303
 #, php-format
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
@@ -3860,9 +3855,9 @@ msgid "Y-m"
 msgstr "Y-m"
 
 #: common/reporting/report_utils.php:159 common/reporting/report_utils.php:197
-#: www/reporting/projectact_graph.php:114 www/stats/site_stats_utils.php:250
-#: www/stats/site_stats_utils.php:381 www/stats/site_stats_utils.php:435
-#: www/stats/site_stats_utils.php:494 www/top/toplist.php:36
+#: www/reporting/projectact_graph.php:114 www/stats/site_stats_utils.php:230
+#: www/stats/site_stats_utils.php:361 www/stats/site_stats_utils.php:415
+#: www/stats/site_stats_utils.php:474 www/top/toplist.php:36
 #: www/top/toplist.php:52
 msgid "Downloads"
 msgstr "Descàrregues"
@@ -3872,30 +3867,18 @@ msgstr "Descàrregues"
 msgid "Page views"
 msgstr "Visites de la pàgina"
 
-#: common/reporting/report_utils.php:177
-#: www/project/stats/project_stats_utils.php:78
-#: www/project/stats/project_stats_utils.php:137
-#: www/project/stats/project_stats_utils.php:192
-#: www/stats/site_stats_utils.php:253 www/stats/site_stats_utils.php:382
-#: www/stats/site_stats_utils.php:436
+#: common/reporting/report_utils.php:177 www/stats/site_stats_utils.php:233
+#: www/stats/site_stats_utils.php:362 www/stats/site_stats_utils.php:416
 msgid "Bugs"
 msgstr "Errors"
 
-#: common/reporting/report_utils.php:178
-#: www/project/stats/project_stats_utils.php:79
-#: www/project/stats/project_stats_utils.php:138
-#: www/project/stats/project_stats_utils.php:193
-#: www/stats/site_stats_utils.php:254 www/stats/site_stats_utils.php:383
-#: www/stats/site_stats_utils.php:437
+#: common/reporting/report_utils.php:178 www/stats/site_stats_utils.php:234
+#: www/stats/site_stats_utils.php:363 www/stats/site_stats_utils.php:417
 msgid "Support"
 msgstr "Suport"
 
-#: common/reporting/report_utils.php:179
-#: www/project/stats/project_stats_utils.php:80
-#: www/project/stats/project_stats_utils.php:139
-#: www/project/stats/project_stats_utils.php:194
-#: www/stats/site_stats_utils.php:255 www/stats/site_stats_utils.php:384
-#: www/stats/site_stats_utils.php:438
+#: common/reporting/report_utils.php:179 www/stats/site_stats_utils.php:235
+#: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
 msgid "Patches"
 msgstr "Pedaços"
 
@@ -4724,6 +4707,7 @@ msgstr "No assignat"
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
 #: www/admin/search.php:80 www/admin/search.php:158 www/my/dashboard.php:62
 #: www/pm/index.php:98 www/project/admin/editimages.php:265
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:55
 msgid "ID"
 msgstr "ID"
 
@@ -4747,6 +4731,7 @@ msgstr "Prioritat"
 #: common/tracker/views/form-customizelist.php:44 www/people/viewjob.php:77
 #: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:137
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
 msgid "Open Date"
 msgstr "Data oberta"
 
@@ -5042,7 +5027,7 @@ msgstr "Fitxers adjuntats"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:198
 #: plugins/scmsvn/common/SVNPlugin.class.php:200
 #: utils/fixscripts/populate_template_project.php:203
-#: www/stats/site_stats_utils.php:303
+#: www/stats/site_stats_utils.php:283
 msgid "Commits"
 msgstr ""
 
@@ -5083,7 +5068,7 @@ msgstr "Obert"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:216
 #: plugins/scmgit/common/GitPlugin.class.php:263
 #: plugins/scmsvn/common/SVNPlugin.class.php:218 www/pm/index.php:102
-#: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:285
+#: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
 msgid "Total"
 msgstr "Total"
 
@@ -8640,10 +8625,7 @@ msgstr "Final"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:100
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:152
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:219
-#: www/project/stats/project_stats_utils.php:75
-#: www/project/stats/project_stats_utils.php:134
-#: www/project/stats/project_stats_utils.php:189 www/top/mostactive.php:51
-#: www/top/toplist.php:56 www/top/topusers.php:62
+#: www/top/mostactive.php:51 www/top/toplist.php:56 www/top/topusers.php:62
 msgid "Rank"
 msgstr "Classificació"
 
@@ -8778,7 +8760,7 @@ msgstr "Resultats de cerca per <em>%1$s</em>"
 #: plugins/globalsearch/www/index.php:168
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:44
-#: www/stats/site_stats_utils.php:247
+#: www/stats/site_stats_utils.php:227
 #, fuzzy
 msgid "Project Name"
 msgstr "Nom del nou projecte"
@@ -9176,9 +9158,6 @@ msgid "SVN"
 msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:408
-#: www/project/stats/project_stats_utils.php:83
-#: www/project/stats/project_stats_utils.php:142
-#: www/project/stats/project_stats_utils.php:197
 msgid "CVS"
 msgstr "CVS"
 
@@ -10022,9 +10001,9 @@ msgid "Fixed"
 msgstr ""
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:50 www/activity/index.php:284
-#: www/reporting/usersummary.php:55 www/stats/site_stats_utils.php:289
-#: www/stats/site_stats_utils.php:291 www/stats/site_stats_utils.php:293
-#: www/stats/site_stats_utils.php:295 www/stats/site_stats_utils.php:299
+#: www/reporting/usersummary.php:55 www/stats/site_stats_utils.php:269
+#: www/stats/site_stats_utils.php:271 www/stats/site_stats_utils.php:273
+#: www/stats/site_stats_utils.php:275 www/stats/site_stats_utils.php:279
 #, fuzzy
 msgid "Closed"
 msgstr "tancat"
@@ -10486,7 +10465,7 @@ msgstr "El fitxer carregat només estava carregat parcialment."
 
 #: plugins/mediawiki/www/plugin_admin.php:113
 #: plugins/mediawiki/www/plugin_admin.php:124
-#: www/frs/include/frs_utils.php:230 www/frs/include/frs_utils.php:266
+#: www/frs/include/frs_utils.php:230 www/frs/include/frs_utils.php:268
 msgid "Unknown file upload error."
 msgstr "Error de pujada de fitxer desconegut."
 
@@ -12194,7 +12173,7 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:197
 #: plugins/scmgit/common/GitPlugin.class.php:244
 #: plugins/scmsvn/common/SVNPlugin.class.php:199
-#: www/stats/site_stats_utils.php:304
+#: www/stats/site_stats_utils.php:284
 msgid "Adds"
 msgstr "Afegits"
 
@@ -13461,9 +13440,9 @@ msgstr "Comentari"
 msgid "Commit for Tracker Item"
 msgstr "Element del rastrejador"
 
-#: www/activity/index.php:279 www/stats/site_stats_utils.php:288
-#: www/stats/site_stats_utils.php:290 www/stats/site_stats_utils.php:292
-#: www/stats/site_stats_utils.php:294 www/stats/site_stats_utils.php:298
+#: www/activity/index.php:279 www/stats/site_stats_utils.php:268
+#: www/stats/site_stats_utils.php:270 www/stats/site_stats_utils.php:272
+#: www/stats/site_stats_utils.php:274 www/stats/site_stats_utils.php:278
 #, fuzzy
 msgid "Opened"
 msgstr "Obert"
@@ -14822,7 +14801,7 @@ msgstr "Canvia la setmana"
 msgid "User list for project: "
 msgstr "Llista d'usuaris per grup:"
 
-#: www/admin/userlist.php:146 www/stats/site_stats_utils.php:90
+#: www/admin/userlist.php:146 www/stats/site_stats_utils.php:70
 #, fuzzy
 msgid "All Projects"
 msgstr "Tots els administradors de projecte"
@@ -15625,7 +15604,7 @@ msgid "File Released"
 msgstr "Fitxer publicat"
 
 #: www/frs/admin/editrelease.php:182 www/frs/admin/editrelease.php:199
-#: www/frs/include/frs_utils.php:255
+#: www/frs/include/frs_utils.php:257
 #, fuzzy
 msgid "Could Not Get FRSFile"
 msgstr "No s'ha pogut completar l'operació"
@@ -18369,7 +18348,7 @@ msgstr "Mesos"
 msgid "Weeks"
 msgstr "Setmanes"
 
-#: www/pm/ganttpage.php:92 www/project/stats/project_stats_utils.php:201
+#: www/pm/ganttpage.php:92
 msgid "Days"
 msgstr "Dies"
 
@@ -18478,7 +18457,7 @@ msgstr ""
 msgid "Week"
 msgstr "Setmana"
 
-#: www/pm/mod_task.php:266 www/stats/site_stats_utils.php:378
+#: www/pm/mod_task.php:266 www/stats/site_stats_utils.php:358
 msgid "Day"
 msgstr "Dia"
 
@@ -19443,51 +19422,6 @@ msgstr "Usa les estadístiques"
 msgid "Areas"
 msgstr "Àrees"
 
-#: www/project/stats/project_stats_utils.php:70
-#: www/stats/site_stats_utils.php:375
-#, php-format
-msgid "Statistics for the past %1$s days"
-msgstr "Estadístiques dels últims %1$s dies"
-
-#: www/project/stats/project_stats_utils.php:76
-#: www/project/stats/project_stats_utils.php:135
-#: www/project/stats/project_stats_utils.php:190
-#: www/reporting/projectact_graph.php:143 www/stats/site_stats_utils.php:248
-msgid "Page Views"
-msgstr "Visites de la pàgina"
-
-#: www/project/stats/project_stats_utils.php:77
-#: www/project/stats/project_stats_utils.php:136
-#: www/project/stats/project_stats_utils.php:191
-msgid "D/l"
-msgstr "Bx."
-
-#: www/project/stats/project_stats_utils.php:81
-#: www/project/stats/project_stats_utils.php:140
-#: www/project/stats/project_stats_utils.php:195
-#: www/stats/site_stats_utils.php:256 www/stats/site_stats_utils.php:439
-msgid "All Trkr"
-msgstr "Tots els rastr"
-
-#: www/project/stats/project_stats_utils.php:110
-#: www/project/stats/project_stats_utils.php:169
-msgid "Project did not exist on this date."
-msgstr "El projecte no existia en aquesta data."
-
-#: www/project/stats/project_stats_utils.php:129
-#, php-format
-msgid "Statistics for the past %1$s months."
-msgstr "Estadístiques dels passats %1$s mesos."
-
-#: www/project/stats/project_stats_utils.php:133
-#: www/project/stats/project_stats_utils.php:188
-msgid "Lifespan"
-msgstr "Lifespan"
-
-#: www/project/stats/project_stats_utils.php:184
-msgid "Statistics for All Time"
-msgstr "Estadístiques de tot el temps"
-
 #: www/register/index.php:48
 #, php-format
 msgid ""
@@ -19869,6 +19803,10 @@ msgstr "Id de la tasca"
 msgid "Task Close"
 msgstr "Data tancada"
 
+#: www/reporting/projectact_graph.php:143 www/stats/site_stats_utils.php:228
+msgid "Page Views"
+msgstr "Visites de la pàgina"
+
 #: www/reporting/projecttime.php:56
 msgid "Time Tracking By Project"
 msgstr "Control de temps per projecte"
@@ -20211,17 +20149,16 @@ msgstr "amb una paraula"
 msgid "Search All"
 msgstr "Cerca"
 
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:55
+#: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:72
+#, fuzzy
+msgid "Search for documents"
+msgstr "Documents d'aquest projecte"
+
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:48
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:48
 msgid "#"
 msgstr "#"
-
-#: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:72
-#, fuzzy
-msgid "Search for documents"
-msgstr "Documents d'aquest projecte"
 
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
@@ -21053,92 +20990,101 @@ msgstr "Font IP"
 msgid "%1$s Site Project Statistical Comparisons"
 msgstr "Comparacions estadístiques de projectes"
 
-#: www/stats/site_stats_utils.php:91
+#: www/stats/site_stats_utils.php:71
 #, fuzzy
 msgid "Special Projects"
 msgstr "Projectes millor classificats"
 
-#: www/stats/site_stats_utils.php:116
+#: www/stats/site_stats_utils.php:96
 #, php-format
 msgid " (no category found with ID %d)"
 msgstr ""
 
-#: www/stats/site_stats_utils.php:148
+#: www/stats/site_stats_utils.php:128
 msgid "Projects in trove category:"
 msgstr "Projectes en la categoria:"
 
-#: www/stats/site_stats_utils.php:152
+#: www/stats/site_stats_utils.php:132
 msgid "OR enter Special Project List:"
 msgstr "O entreu llista de projecte especial:"
 
-#: www/stats/site_stats_utils.php:154
+#: www/stats/site_stats_utils.php:134
 msgid "<strong>comma separated</strong> group_id's)"
 msgstr "id's de grup <strong>separats per comes</strong>)"
 
-#: www/stats/site_stats_utils.php:156
+#: www/stats/site_stats_utils.php:136
 msgid "Report:"
 msgstr "Informe:"
 
-#: www/stats/site_stats_utils.php:163
+#: www/stats/site_stats_utils.php:143
 msgid "last_30"
 msgstr "últims_30"
 
-#: www/stats/site_stats_utils.php:164
+#: www/stats/site_stats_utils.php:144
 msgid "all"
 msgstr "tots"
 
-#: www/stats/site_stats_utils.php:170
+#: www/stats/site_stats_utils.php:150
 msgid "View by:"
 msgstr "Visita per:"
 
-#: www/stats/site_stats_utils.php:175
+#: www/stats/site_stats_utils.php:155
 msgid "Generate Report"
 msgstr "Genera un informe"
 
-#: www/stats/site_stats_utils.php:282
+#: www/stats/site_stats_utils.php:236 www/stats/site_stats_utils.php:419
+msgid "All Trkr"
+msgstr "Tots els rastr"
+
+#: www/stats/site_stats_utils.php:262
 msgid "Site"
 msgstr "Lloc"
 
-#: www/stats/site_stats_utils.php:283
+#: www/stats/site_stats_utils.php:263
 msgid "Subdomain"
 msgstr "Subdomini"
 
-#: www/stats/site_stats_utils.php:302
+#: www/stats/site_stats_utils.php:282
 msgid "Checkouts"
 msgstr ""
 
-#: www/stats/site_stats_utils.php:351
+#: www/stats/site_stats_utils.php:331
 msgid "Query returned no valid data."
 msgstr "La consulta no ha retornat dades vàlides."
 
-#: www/stats/site_stats_utils.php:379 www/stats/site_stats_utils.php:433
-#: www/stats/site_stats_utils.php:492
+#: www/stats/site_stats_utils.php:355
+#, php-format
+msgid "Statistics for the past %1$s days"
+msgstr "Estadístiques dels últims %1$s dies"
+
+#: www/stats/site_stats_utils.php:359 www/stats/site_stats_utils.php:413
+#: www/stats/site_stats_utils.php:472
 msgid "Site Views"
 msgstr "Visites del lloc"
 
-#: www/stats/site_stats_utils.php:380 www/stats/site_stats_utils.php:434
-#: www/stats/site_stats_utils.php:493
+#: www/stats/site_stats_utils.php:360 www/stats/site_stats_utils.php:414
+#: www/stats/site_stats_utils.php:473
 msgid "Subdomain Views"
 msgstr "Visites del subdomini"
 
-#: www/stats/site_stats_utils.php:411 www/stats/site_stats_utils.php:467
+#: www/stats/site_stats_utils.php:391 www/stats/site_stats_utils.php:447
 msgid "No Data"
 msgstr "No hi ha dades"
 
-#: www/stats/site_stats_utils.php:429
+#: www/stats/site_stats_utils.php:409
 #, php-format
 msgid "Statistics for the past %1$s months"
 msgstr "Estadístiques dels últims %1$s mesos"
 
-#: www/stats/site_stats_utils.php:432
+#: www/stats/site_stats_utils.php:412
 msgid "Month"
 msgstr "Mes"
 
-#: www/stats/site_stats_utils.php:488
+#: www/stats/site_stats_utils.php:468
 msgid "Current Aggregate Statistics for All Time"
 msgstr "Estadístiques agregades per tot el temps"
 
-#: www/stats/site_stats_utils.php:495
+#: www/stats/site_stats_utils.php:475
 msgid "Developers"
 msgstr "Desenvolupadors"
 
@@ -21994,6 +21940,21 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Nom d'usuari"
+
+#~ msgid "D/l"
+#~ msgstr "Bx."
+
+#~ msgid "Project did not exist on this date."
+#~ msgstr "El projecte no existia en aquesta data."
+
+#~ msgid "Statistics for the past %1$s months."
+#~ msgstr "Estadístiques dels passats %1$s mesos."
+
+#~ msgid "Lifespan"
+#~ msgstr "Lifespan"
+
+#~ msgid "Statistics for All Time"
+#~ msgstr "Estadístiques de tot el temps"
 
 #, fuzzy
 #~ msgid "Projects importer"
