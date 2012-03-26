@@ -167,8 +167,6 @@ forge_define_config_item ('sysdebug_dbquery', 'core', 'false') ;
 forge_set_config_item_bool ('sysdebug_dbquery', 'core') ;
 forge_define_config_item ('sysdebug_xmlstarlet', 'core', 'false') ;
 forge_set_config_item_bool ('sysdebug_xmlstarlet', 'core') ;
-forge_define_config_item ('sysdebug_akelos', 'core', 'false') ;
-forge_set_config_item_bool ('sysdebug_akelos', 'core') ;
 // Load extra func to add extras func like debug
 $sysdebug_enable = forge_get_config('sysdebug_enable');
 

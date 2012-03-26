@@ -190,7 +190,8 @@ function ffOutputHandler($buffer) {
 
 	/* generate buffer for checking */
 	$cbuf = str_ireplace('http://www.w3.org/TR/xhtml1/DTD/',
-	    'file://' . $dtdpath, $buffer);
+	    'file://' . $dtdpath, str_ireplace('http://evolvis.org/DTD/',
+	    'file://' . $dtdpath, $buffer));
 	if ($has_div) {
 		$cbuf .= "\n</div></div>";
 	}
@@ -240,38 +241,12 @@ function ffOutputHandler($buffer) {
 		}
 	}
 
-	$sysdebug_akelos = forge_get_config('sysdebug_akelos');
-	if ($sysdebug_akelos) {
-		/* Akelos XHTML Validator (most other stuff) */
-		require_once($gfcommon . "include/XhtmlValidator.php");
-		$XhtmlValidator = new XhtmlValidator();
-		$sbuf = explode("<html", $cbuf, 2);
-		$sbuf[1] = "<html" . $sbuf[1];
-		$vbuf = $sbuf[1];
-		if ($XhtmlValidator->validate($vbuf) === false) {
-			//$vbuf = $XhtmlValidator->highlightErrors($sbuf[1]);
-			$errs = '<ul><li>' . join("</li>\n<li>",
-			    $XhtmlValidator->getErrors()) . '</li></ul>';
-			$valck[] = array(
-				'msg' => "Akelos XHTML Validator found some errors on this document!",
-				'extra' => $errs,
-				'type' => "error",
-			    );
-			$appsrc = true;
-		}
-	}
-
 	/* append XHTML source code, if validation failed */
 	if ($appsrc) {
-		if (!$sysdebug_akelos || $vbuf == $sbuf[1]) {
-			$vbuf = "<ol><li>" . $pre_tag .
-			    join(" </pre></li>\n<li>" . $pre_tag,
-			    explode("\n", htmlentities(rtrim($cbuf)))) .
-			    " </pre></li></ol>";
-		} else {
-			$vbuf = $pre_tag . htmlentities(rtrim($sbuf[0])) .
-			    "</pre>" . $vbuf;
-		}
+		$vbuf = "<ol><li>" . $pre_tag .
+		    join(" </pre></li>\n<li>" . $pre_tag,
+		    explode("\n", htmlentities(rtrim($cbuf)))) .
+		    " </pre></li></ol>";
 		$valck[] = array(
 			'msg' => "Since XHTML validation failed, here’s the checked document for you to look at:",
 			'extra' => $vbuf,
