@@ -173,13 +173,13 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
 	$qstring = file_get_contents($file);
 	if (!$qstring) {
 		if ($sysdebug_dbquery) {
-			ffDebug("warning",
+			ffDebug("database",
 			    "aborted call of db_query_from_file():",
 			    "Cannot read file: " . $file .
 			    "\n\n" . debug_string_backtrace());
 		} else if ($sysdebug_dberrors) {
-			ffDebug("warning", "db_query_from_file() aborted (" .
-			    "Cannot read file: " . $file . ")", false);
+			ffDebug("database", "db_query_from_file() aborted (" .
+			    "Cannot read file: " . $file . ")");
 		} else {
 			error_log("db_query_from_file(): Cannot read file: " . $file);
 		}
@@ -202,7 +202,7 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
 			    $qstring, debug_string_backtrace());
 		}
 	} else if ($sysdebug_dbquery || $sysdebug_dberrors) {
-		ffDebug("warning", "db_query_from_file() failed (" .
+		ffDebug("database", "db_query_from_file() failed (" .
 		    db_error($dbserver) . "), SQL: " . $qstring,
 		    $sysdebug_dbquery ? debug_string_backtrace() : false);
 	} else {
@@ -249,10 +249,10 @@ function db_query_params($qstring, $params, $limit = '-1', $offset = 0, $dbserve
 			    debug_string_backtrace());
 		}
 	} else if ($sysdebug_dbquery) {
-		ffDebug("warning", "failed call of db_query_params():",
+		ffDebug("database", "failed call of db_query_params():",
 		    db_error($dbserver) . "\n\n" . debug_string_backtrace());
 	} else if ($sysdebug_dberrors) {
-		ffDebug("warning", "db_query_params() failed (" .
+		ffDebug("database", "db_query_params() failed (" .
 		    db_error($dbserver) . "), SQL: " . $qstring,
 		    print_r(array("params" => $params), 1));
 	} else {

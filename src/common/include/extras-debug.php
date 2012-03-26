@@ -1,14 +1,15 @@
 <?php
 
+// initialise globals used by the debugging code
 $sysdebug_dberrors = forge_get_config('sysdebug_dberrors');
 $sysdebug_dbquery = forge_get_config('sysdebug_dbquery');
 $sysdebug_ignored = forge_get_config('sysdebug_ignored');
-if (!isset($ffErrors))
+if (!isset($ffErrors)) {
 	$ffErrors = array();
+}
 
 // error handler function
-function ffErrorHandler($errno, $errstr, $errfile, $errline)
-{
+function ffErrorHandler($errno, $errstr, $errfile, $errline) {
 	global $ffErrors, $sysdebug_ignored, $sysdebug__aborted;
 
 	if ($sysdebug__aborted) {
@@ -16,56 +17,62 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 		return true;
 	}
 
-	if (!$sysdebug_ignored && error_reporting() == 0)
+	if (!$sysdebug_ignored && error_reporting() == 0) {
 		/* prepended @ to statement => ignore */
 		return false;
+	}
 
 	$msg = "[$errno] $errstr ($errfile at $errline)";
 
-	// Display messages only once.
+	// display messages only once
 	foreach ($ffErrors as $m) {
-		if ($m['message'] == $msg)
+		if ($m['message'] == $msg) {
 			return true;
+		}
 	}
 
 	switch ($errno) {
-		case E_USER_ERROR:
-		case E_ERROR:
-			$type = 'error';
-			break;
+	case E_USER_ERROR:
+	case E_ERROR:
+		$type = 'error';
+		break;
 
-		case E_USER_WARNING:
-		case E_WARNING:
-			$type = 'warning';
-			break;
+	case E_USER_WARNING:
+	case E_WARNING:
+		$type = 'warning';
+		break;
 
-		case E_USER_NOTICE:
-		case E_NOTICE:
-			$type = 'notice';
-			break;
+	case E_USER_NOTICE:
+	case E_NOTICE:
+		$type = 'notice';
+		break;
 
-		case E_STRICT:
-		case E_USER_DEPRECATED:
-		case E_DEPRECATED:
-			$type = "strict";
-			break;
+	case E_STRICT:
+	case E_USER_DEPRECATED:
+	case E_DEPRECATED:
+		$type = "strict";
+		break;
 
-		default:
-			$type = 'unknown';
-			break;
+	default:
+		$type = 'unknown';
+		break;
 	}
 
-	if (forge_get_config('sysdebug_backtraces'))
+	if (forge_get_config('sysdebug_backtraces')) {
 		$msg .= "\n" .
 		    '<pre style="font-weight:normal; font-size:90%; color:#000066; line-height:100%;">' .
 		    htmlentities(debug_string_backtrace()) . "</pre>";
+	}
 
-	$ffErrors[] = array('type' => $type, 'message' => $msg);
+	$ffErrors[] = array(
+		'type' => $type,
+		'message' => $msg,
+	    );
 	/* Don't execute PHP internal error handler */
 	return true;
 }
 
-
+// output buffer finaliser function
 function ffOutputHandler($buffer) {
 	global $ffErrors, $sysdebug_enable, $sysdebug__aborted,
 	    $sysdebug_lazymode_on, $sysdebug_doframe, $gfcommon,
@@ -82,19 +89,22 @@ function ffOutputHandler($buffer) {
 	}
 
 	/* in case we’re aborted */
-	if (!$sysdebug_enable)
+	if (!$sysdebug_enable) {
 		return $buffer;
+	}
 
 	/* if content-type != text/html* assume abortion */
 	if ($sysdebug_lazymode_on) {
 		$thdr = 'content-type:';
 		$tstr = 'content-type: text/html';
 		foreach (headers_list() as $h) {
-			if (strncasecmp($h, $thdr, strlen($thdr)))
+			if (strncasecmp($h, $thdr, strlen($thdr))) {
 				continue;
-			if (strncasecmp($h, $tstr, strlen($tstr)))
+			}
+			if (strncasecmp($h, $tstr, strlen($tstr))) {
 				/* application/something, maybe */
 				return $buffer;
+			}
 		}
 	}
 
@@ -120,8 +130,7 @@ function ffOutputHandler($buffer) {
 	    '<a href="javascript:toggle_ffErrors();">Click to toggle</a>' .
 	    "\n<div id=\"ffErrorsBlock\">";
 
-	$doctype = util_ifsetor($HTML->doctype);
-	if (!$doctype) {
+	if (!($doctype = util_ifsetor($HTML->doctype))) {
 		$doctype = 'transitional';
 	}
 
@@ -139,25 +148,33 @@ function ffOutputHandler($buffer) {
 	$bufend = array(false, substr($buffer, -100));
 	if (substr($buffer, -strlen("</html>")) != "</html>") {
 		$bufend[0] = true;
-		$ffErrors[] = array('type' => "error",
-		    'message' => htmlentities("does not end with </html> tag"));
+		$ffErrors[] = array(
+			'type' => "error",
+			'message' => htmlentities("does not end with </html> tag"),
+		    );
 		$buffer = str_ireplace("</html>", "", $buffer);
-	} else
+	} else {
 		$buffer = substr($buffer, 0, -strlen("</html>"));
+	}
 	$buffer = rtrim($buffer);	/* spaces, newlines, etc. */
 	if (substr($buffer, -strlen("</body>")) != "</body>") {
 		$bufend[0] = true;
-		$ffErrors[] = array('type' => "error",
-		    'message' => htmlentities("does not end with </body> tag"));
+		$ffErrors[] = array(
+			'type' => "error",
+			'message' => htmlentities("does not end with </body> tag"),
+		    );
 		$buffer = str_ireplace("</body>", "", $buffer);
-	} else
+	} else {
 		$buffer = substr($buffer, 0, -strlen("</body>"));
+	}
 	$buffer = rtrim($buffer);	/* spaces, newlines, etc. */
 
 	if ($bufend[0]) {
-		$ffErrors[] = array('type' => "info",
-		    'message' => "The output has ended thus: " .
-		    htmlentities($bufend[1]));
+		$ffErrors[] = array(
+			'type' => "info",
+			'message' => "The output has ended thus: " .
+			    htmlentities($bufend[1]),
+		   );
 	}
 
 	/* append errors, if any */
@@ -174,8 +191,9 @@ function ffOutputHandler($buffer) {
 	/* generate buffer for checking */
 	$cbuf = str_ireplace('http://www.w3.org/TR/xhtml1/DTD/',
 	    'file://' . $dtdpath, $buffer);
-	if ($has_div)
+	if ($has_div) {
 		$cbuf .= "\n</div></div>";
+	}
 	$cbuf .= "\n</body></html>\n";
 
 	/* now check XHTML validity… two means */
@@ -205,16 +223,18 @@ function ffOutputHandler($buffer) {
 			$serr = join("\n", preg_grep(
 			    '/^-:[0-9]*: Entity'." 'nbsp' ".'not defined$/',
 			    explode("\n", $serr), PREG_GREP_INVERT));
-		} else
+		} else {
 			$valck[] = array(
-				'msg' => "could not run xmlstarlet"
+				'msg' => "could not run xmlstarlet",
 			    );
+		}
 		if ($rv) {
 			$valck[] = array(
 				'msg' => "xmlstarlet found that this document is not valid (errorlevel $rv)!",
-				'extra' => $pre_tag . htmlspecialchars(trim($serr .
+				'extra' => $pre_tag .
+				    htmlspecialchars(trim($serr .
 				    "\n\n" . $sout)) . "</pre>",
-				'type' => "error"
+				'type' => "error",
 			    );
 			$appsrc = true;
 		}
@@ -235,7 +255,7 @@ function ffOutputHandler($buffer) {
 			$valck[] = array(
 				'msg' => "Akelos XHTML Validator found some errors on this document!",
 				'extra' => $errs,
-				'type' => "error"
+				'type' => "error",
 			    );
 			$appsrc = true;
 		}
@@ -243,14 +263,19 @@ function ffOutputHandler($buffer) {
 
 	/* append XHTML source code, if validation failed */
 	if ($appsrc) {
-		if (!$sysdebug_akelos || $vbuf == $sbuf[1])
-			$vbuf = "<ol><li>" . $pre_tag . join(" </pre></li>\n<li>" . $pre_tag, explode("\n", htmlentities(rtrim($cbuf)))) . " </pre></li></ol>";
-		else
-			$vbuf = $pre_tag . htmlentities(rtrim($sbuf[0])) . "</pre>" . $vbuf;
+		if (!$sysdebug_akelos || $vbuf == $sbuf[1]) {
+			$vbuf = "<ol><li>" . $pre_tag .
+			    join(" </pre></li>\n<li>" . $pre_tag,
+			    explode("\n", htmlentities(rtrim($cbuf)))) .
+			    " </pre></li></ol>";
+		} else {
+			$vbuf = $pre_tag . htmlentities(rtrim($sbuf[0])) .
+			    "</pre>" . $vbuf;
+		}
 		$valck[] = array(
 			'msg' => "Since XHTML validation failed, here’s the checked document for you to look at:",
 			'extra' => $vbuf,
-			'type' => 'normal'
+			'type' => 'normal',
 		    );
 	}
 
@@ -263,16 +288,19 @@ function ffOutputHandler($buffer) {
 		if (!isset($msg['type']) || !$msg['type']) {
 			$msg['type'] = 'unknown';
 		}
-		$buffer .= "\n	<div class=\"" . $msg['type'] . '">' . $msg['msg'];
-		if (isset($msg['extra']))
+		$buffer .= "\n	<div class=\"" . $msg['type'] . '">' .
+		    $msg['msg'];
+		if (isset($msg['extra'])) {
 			$buffer .= "\n		<div style=\"font-weight:normal; font-size:90%; color:#333333;\">" .
 			    $msg['extra'] . "</div>\n	";
+		}
 		$buffer .= "</div>";
 	}
 
 	/* return final buffer */
-	if ($has_div)
+	if ($has_div) {
 		$buffer .= "\n</div></div>";
+	}
 	if ($sysdebug_doframe) {
 		return substr($buffer, $bufferstrip);
 	} else {
@@ -280,6 +308,7 @@ function ffOutputHandler($buffer) {
 	}
 }
 
+// exception handler function
 function ffExceptionHandler($e) {
 	global $sysdebug__aborted;
 
@@ -319,14 +348,35 @@ function sysdebug_ajaxbody($enable=true) {
 }
 
 function sysdebug_off($hdr=false, $replace=true, $resp=false) {
-	global $sysdebug_enable;
+	global $ffErrors, $sysdebug_enable;
 
 	if ($sysdebug_enable) {
 		$sysdebug_enable = false;
-		$buf = ob_get_flush();
+		$buf = @ob_get_flush();
 
 		if ($buf === false) {
 			$buf = "";
+		}
+
+		/* if we had any old errors, log them */
+		$olderrors = "";
+		foreach ($ffErrors as $msg) {
+			$olderrors .= "\n(" . $msg['type'] . ") " .
+			    $msg['message'];
+		}
+		if ($olderrors) {
+			if (!forge_get_config('sysdebug_backtraces')) {
+				$olderrors .= "\n" . debug_string_backtrace();
+			}
+			$olderrors = rtrim($olderrors);
+			$pfx = "";
+			foreach (explode("\n",
+			    "sysdebug_off: previous errors found:" . $olderrors)
+			    as $olderrorline) {
+				error_log($pfx . $olderrorline);
+				/* followup lines get indented */
+				$pfx = ">>> ";
+			}
 		}
 	} else {
 		$buf = false;
@@ -349,7 +399,7 @@ function sysdebug_lazymode($enable) {
 	$sysdebug_lazymode_on = $enable ? true : false;
 }
 
-function ffDebug($type,$intro,$pretext) {
+function ffDebug($type, $intro, $pretext=false) {
 	global $ffErrors;
 
 	if (!$type) {
