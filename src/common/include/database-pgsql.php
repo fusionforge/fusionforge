@@ -241,7 +241,7 @@ function db_query_params($qstring, $params, $limit = '-1', $offset = 0, $dbserve
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
 	}
 
-	$res = @pg_query_params($dbserver, $qstring, $params);
+	$res = @pg_query_params($dbconn, $qstring, $params);
 	if ($res) {
 		if ($sysdebug_dbquery) {
 			ffDebug("trace",
