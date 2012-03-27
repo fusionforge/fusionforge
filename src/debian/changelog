@@ -4,17 +4,23 @@ fusionforge (5.2.50~-1) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Mon, 26 Mar 2012 20:10:13 +0200
 
-fusionforge (5.1.50~-0) UNRELEASED; urgency=low
+fusionforge (5.1.50+svn15228-2) UNRELEASED; urgency=low
 
-  * Bump version number, on the road to 5.2.
+  * 
 
- -- Roland Mas <lolando@debian.org>  Fri, 05 Aug 2011 13:41:04 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 27 Mar 2012 21:05:15 +0200
 
-fusionforge (5.1.1-5) UNRELEASED; urgency=low
+fusionforge (5.1.50+svn15228-1) experimental; urgency=low
 
-  * Remove config files on purge (detected by piuparts).
+  * New upstream SVN snapshot from the 5.2 stabilisation branch.
 
- -- Roland Mas <lolando@debian.org>  Tue, 27 Mar 2012 10:08:11 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 27 Mar 2012 20:57:28 +0200
+
+fusionforge (5.1.1-5) unstable; urgency=low
+
+  * Remove more config files on purge (detected by piuparts).
+
+ -- Roland Mas <lolando@debian.org>  Tue, 27 Mar 2012 20:34:57 +0200
 
 fusionforge (5.1.1-4) unstable; urgency=low
 
