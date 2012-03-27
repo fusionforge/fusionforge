@@ -170,6 +170,8 @@ debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcar
 debian/po/%:
 	cat $(patsubst debian/po/%, debian/dsf-po/%, $@) | $(SED_REPLACE) > $@
 
+override_dh_auto_build:
+
 build: remove-binary-files debian/po/templates.pot conffiles
 	$(DH) $@
 
