@@ -21,7 +21,7 @@ case "$1" in
 	rm -rf /var/lib/@OLDPACKAGE@
 	[ -d /etc/@OLDPACKAGE@ ] && rm -rf /etc/@OLDPACKAGE@
 	for i in config.ini.d/debian-install-secrets.ini config.ini.d/debian-install.ini fusionforge.conf ; do
-	    [ -e @PACKAGE@/$i ] && rm @PACKAGE@/$i
+	    [ -e /etc/@PACKAGE@/$i ] && rm /etc/@PACKAGE@/$i
 	done
 	;;
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
