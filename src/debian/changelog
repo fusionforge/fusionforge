@@ -1,3 +1,9 @@
+fusionforge (5.1.50+svn15228-2) UNRELEASED; urgency=low
+
+  * 
+
+ -- Roland Mas <lolando@debian.org>  Tue, 27 Mar 2012 21:05:15 +0200
+
 fusionforge (5.1.50+svn15228-1) experimental; urgency=low
 
   * New upstream SVN snapshot from the 5.2 stabilisation branch.
