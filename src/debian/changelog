@@ -1,8 +1,8 @@
-fusionforge (5.1.50~-0) UNRELEASED; urgency=low
+fusionforge (5.1.50+svn15228-1) experimental; urgency=low
 
-  * Bump version number, on the road to 5.2.
+  * New upstream SVN snapshot from the 5.2 stabilisation branch.
 
- -- Roland Mas <lolando@debian.org>  Fri, 05 Aug 2011 13:41:04 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 27 Mar 2012 20:57:28 +0200
 
 fusionforge (5.1.1-5) unstable; urgency=low
 
