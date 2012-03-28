@@ -364,7 +364,7 @@ HTML extratabs plugin for FusionForge.
 %package plugin-wiki
 Summary: Wiki plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, postgresql
+Requires: %{name} >= %{version}, php, postgresql, units
 %description plugin-wiki
 Wiki plugin for FusionForge. Allows for one wiki per project, integrated search,
 page edits displayed on activity tab, and multi-project wiki preferences.
