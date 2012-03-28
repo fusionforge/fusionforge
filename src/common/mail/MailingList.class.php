@@ -332,6 +332,10 @@ Thank you for registering your project with %1$s.
 		return $this->dataArray['status'];
 	}
 
+	function getListEmail() {
+		return $this->getName().'@'.forge_get_config('lists_host');
+	}
+
 	/**
 	 * getArchivesUrl - get the url to see the archives of the list
 	 *
