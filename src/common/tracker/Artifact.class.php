@@ -1513,15 +1513,15 @@ class Artifact extends Error {
 		$sess = session_get_user() ;
 		if ($type == 1) { // Initial opening
 			if ($sess) {
-				$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) . " by " . $sess->getRealName () ;
+				$body = $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) . " by " . $sess->getRealName () ;
 			} else {
-				$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) ;
+				$body = $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) ;
 			}
 		} else {
 			if ($sess) {
-				$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was changed at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) . " by " . $sess->getRealName ();
+				$body = $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() ." item #". $this->getID() .", was changed at ". date( _('Y-m-d H:i'), time() ) . " by " . $sess->getRealName ();
 			} else {
-				$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was changed at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) ;
+				$body = $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() ." item #". $this->getID() .", was changed at ". date( _('Y-m-d H:i'), time() ) ;
 			}
 		}
 			      
