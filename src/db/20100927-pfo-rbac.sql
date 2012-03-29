@@ -200,37 +200,54 @@ BEGIN
 		   PERFORM insert_pfo_role_setting (2, 'scm', g.group_id, 1) ;
 		END IF ;
 
-		FOR t IN SELECT * FROM artifact_group_list WHERE group_id = g.group_id AND is_public = 1
+		FOR t IN SELECT * FROM artifact_group_list WHERE group_id = g.group_id
 		LOOP
-			IF t.allow_anon = 1 THEN
-			   PERFORM insert_pfo_role_setting (1, 'tracker', t.group_artifact_id, 1) ;
-			END IF ;
+			IF t.is_public = 1 THEN
+			   IF t.allow_anon = 1 THEN
+			      PERFORM insert_pfo_role_setting (1, 'tracker', t.group_artifact_id, 1) ;
+			   ELSE
+			      PERFORM insert_pfo_role_setting (1, 'tracker', t.group_artifact_id, 0) ;
+			   END IF ;
 
-			PERFORM insert_pfo_role_setting (2, 'tracker', t.group_artifact_id, 1) ;
+			   PERFORM insert_pfo_role_setting (2, 'tracker', t.group_artifact_id, 1) ;
+			ELSE
+			   PERFORM insert_pfo_role_setting (1, 'tracker', t.group_artifact_id, 0) ;
+			   PERFORM insert_pfo_role_setting (2, 'tracker', t.group_artifact_id, 0) ;
+			END IF ;
 		END LOOP ;
 		
-		FOR p IN SELECT * FROM project_group_list WHERE group_id = g.group_id AND is_public = 1
+		FOR p IN SELECT * FROM project_group_list WHERE group_id = g.group_id
 		LOOP
-			PERFORM insert_pfo_role_setting (1, 'pm', p.group_project_id, 1) ;
-			PERFORM insert_pfo_role_setting (2, 'pm', p.group_project_id, 1) ;
+			IF p.is_public = 1 THEN
+			   PERFORM insert_pfo_role_setting (1, 'pm', p.group_project_id, 1) ;
+			   PERFORM insert_pfo_role_setting (2, 'pm', p.group_project_id, 1) ;
+			ELSE
+			   PERFORM insert_pfo_role_setting (1, 'pm', p.group_project_id, 0) ;
+			   PERFORM insert_pfo_role_setting (2, 'pm', p.group_project_id, 0) ;
+			END IF ;
 		END LOOP ;
 		
 		FOR f IN SELECT * FROM forum_group_list WHERE group_id = g.group_id AND is_public = 1
 		LOOP
-			IF f.allow_anonymous = 1 THEN
-			   IF f.moderation_level = 0 THEN
-			      PERFORM insert_pfo_role_setting (1, 'forum', f.group_forum_id, 3) ;
+			IF f.is_public = 1 THEN
+			   IF f.allow_anonymous = 1 THEN
+			      IF f.moderation_level = 0 THEN
+			         PERFORM insert_pfo_role_setting (1, 'forum', f.group_forum_id, 3) ;
+			      ELSE
+			         PERFORM insert_pfo_role_setting (1, 'forum', f.group_forum_id, 2) ;
+			      END IF ;
 			   ELSE
-			      PERFORM insert_pfo_role_setting (1, 'forum', f.group_forum_id, 2) ;
+			      PERFORM insert_pfo_role_setting (1, 'forum', f.group_forum_id, 1) ;
+			   END IF ;
+			   
+			   IF f.moderation_level = 0 THEN
+			      PERFORM insert_pfo_role_setting (2, 'forum', f.group_forum_id, 3) ;
+			   ELSE
+			      PERFORM insert_pfo_role_setting (2, 'forum', f.group_forum_id, 2) ;
 			   END IF ;
 			ELSE
-			   PERFORM insert_pfo_role_setting (1, 'forum', f.group_forum_id, 1) ;
-			END IF ;
-
-			IF f.moderation_level = 0 THEN
-			   PERFORM insert_pfo_role_setting (2, 'forum', f.group_forum_id, 3) ;
-			ELSE
-			   PERFORM insert_pfo_role_setting (2, 'forum', f.group_forum_id, 2) ;
+			   PERFORM insert_pfo_role_setting (1, 'forum', f.group_forum_id, 0) ;
+			   PERFORM insert_pfo_role_setting (2, 'forum', f.group_forum_id, 0) ;
 			END IF ;
 		END LOOP ;
 		
