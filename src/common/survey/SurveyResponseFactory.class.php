@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Sung Kim/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -68,7 +69,7 @@ class SurveyResponseFactory extends Error {
 	 *	@param	object	The Question object to which this survey Response is associated.
          *      @param  int     The survey_id
 	 */
-	function SurveyResponseFactory(&$Survey, &$Question ) {
+	function __construct(&$Survey, &$Question ) {
 		$this->Error();
 
 		if (!$Survey || !is_object($Survey)) {
@@ -90,8 +91,6 @@ class SurveyResponseFactory extends Error {
 
 		$this->Survey = &$Survey;
 		$this->Question = &$Question;
-
-		return true;
 	}
 
 	/**
@@ -173,8 +172,6 @@ class SurveyResponseFactory extends Error {
 		$group_id = $group->GetID();
 		$survey = $this->getSurvey();
 		$survey_id = $survey->GetID();
-		$question = $this->getQuestion();
-		$question_id = $question->GetID();
 
 		$result = db_query_params('SELECT * FROM survey_responses WHERE survey_id=$1 AND group_id=$2 ORDER BY post_date DESC',
 			array($survey_id, $group_id));
@@ -271,14 +268,14 @@ class SurveyResponseFactory extends Error {
 		$count = count($arr);
 
 		for($i=0; $i<$count; $i++) {
-			$id = $arr[$i]->getUserId();
+			$user_id = $arr[$i]->getUserId();
 			$qid = $arr[$i]->GetQuestionID();
 			if ($arr[$i]->isError()) {
 				echo $arr[$i]->getErrorMessage();
 				continue;
 			}
 			$response = $arr[$i]->getResponse();
-			$this->Result[$id][$qid] = $response;
+			$this->Result[$user_id][$qid] = $response;
 		}
 		return $this->Result;
 	}

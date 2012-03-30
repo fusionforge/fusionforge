@@ -3,6 +3,7 @@
  * Gravatar Plugin
  *
  * Copyright 2010 (c) Alain Peyrat <aljeux@free.fr>
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge
  *
@@ -23,7 +24,7 @@
 
 class gravatarPlugin extends Plugin {
 
-	function gravatarPlugin () {
+	function __construct() {
 		$this->Plugin() ;
 		$this->name = "gravatar" ;
 		$this->text = _('Gravatar Plugin');

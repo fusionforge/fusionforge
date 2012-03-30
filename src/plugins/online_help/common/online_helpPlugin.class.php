@@ -4,6 +4,7 @@
  * online_helpPlugin Class
  *
  * Copyright 2008 Alain Peyrat <aljeux@free.fr>
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -30,7 +31,7 @@
 
 class online_helpPlugin extends Plugin {
 
-	function online_helpPlugin () {
+	function __construct() {
 		$this->Plugin() ;
 		$this->name = "online_help" ;
 		$this->text = "online_help!" ; // To show in the tabs, use...
@@ -38,7 +39,6 @@ class online_helpPlugin extends Plugin {
 	}
 
 	function CallHook ($hookname, &$params) {
-		global $G_SESSION,$HTML;
 		if ($hookname == "headermenu") {
 			$guide = util_make_url('/plugins/online_help/');
 

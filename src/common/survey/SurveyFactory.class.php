@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Sung Kim/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -47,7 +48,7 @@ class SurveyFactory extends Error {
 	 * @param	object	The Group object to which this survey is associated.
 	 * @param	int	The survey_id
 	 */
-	function SurveyFactory(&$Group) {
+	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No valid Group Object'));
@@ -59,7 +60,6 @@ class SurveyFactory extends Error {
 			return false;
 		}
 		$this->Group =& $Group;
-		return true;
 	}
 
 	/**

@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011-2012, Franck Villaume - TrivialDev
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -56,7 +56,7 @@ class Document extends Error {
 	 * @param	array	The associative array of data.
 	 * @return	boolean	success.
 	 */
-	function Document(&$Group, $docid = false, $arr = false) {
+	function __construct(&$Group, $docid = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setNotValidGroupObjectError();
@@ -91,7 +91,6 @@ class Document extends Error {
 				}
 			}
 		}
-		return true;
 	}
 
 	/**

@@ -4,6 +4,7 @@
  *
  * Copyright 2002 GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,7 +32,7 @@ require_once $gfwww.'include/note.php';
 class DocumentGroupHTML extends Error {
 	var $Group;
 
-	function DocumentGroupHTML(&$Group) {
+	function __construct(&$Group) {
 		$this->Error();
 
 		if (!$Group || !is_object($Group)) {
@@ -43,8 +44,6 @@ class DocumentGroupHTML extends Error {
 			return false;
 		}
 		$this->Group =& $Group;
-
-		return true;
 	}
 
 	/**

@@ -3,6 +3,7 @@
  * FusionForge Plugin CKeditor Plugin Class
  *
  * Copyright 2011 (c) Alcatel-Lucent
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge-plugin-ckeditor
  *
@@ -31,7 +32,7 @@ class ckeditorPlugin extends Plugin {
 
 	var $toolBar = array();
 
-	function ckeditorPlugin () {
+	function __construct() {
 		$this->Plugin() ;
 		$this->name = "ckeditor" ;
 		$this->text = _("HTML editor (ckeditor)");
@@ -75,7 +76,6 @@ class ckeditorPlugin extends Plugin {
 	 *
 	 */
 	function CallHook ($hookname, &$params) {
-		global $group_id;
 
 		if ($hookname == "user_create") {
 			// Activate the plugin by default for new user.
@@ -115,15 +115,15 @@ class ckeditorPlugin extends Plugin {
 			$editor->config['toolbar'] = $this->toolBar['complete'];
 		}
 		$editor->returnOutput = true;
-		$h = '<input type="hidden" name="_'.$name.'_content_type" value="html" />'."\n";
-		$h .= $editor->editor($name, $params['body']) ;
+		$content = '<input type="hidden" name="_'.$name.'_content_type" value="html" />'."\n";
+		$content .= $editor->editor($name, $params['body']) ;
 
 		// If content is present, return the html code in content.
 		if (isset($params['content'])) {
-			$params['content'] = $h;
+			$params['content'] = $content;
 		} else {
 			$GLOBALS['editor_was_set_up'] = true;
-			echo $h ;
+			echo $content ;
 		}
 	}
 }

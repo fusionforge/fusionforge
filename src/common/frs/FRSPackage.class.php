@@ -4,7 +4,7 @@
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -179,8 +179,8 @@ class FRSPackage extends Error {
 			}
 
 			// this 2 should normally silently fail (because it's called with the apache user) but if it's root calling the create() method, then the owner and group for the directory should be changed
-			@chown($newdirlocation,forge_get_config('apache_user'));
-			@chgrp($newdirlocation,forge_get_config('apache_group'));
+			@chown($newdirlocation, forge_get_config('apache_user'));
+			@chgrp($newdirlocation, forge_get_config('apache_group'));
 			db_commit();
 			return true;
 		}

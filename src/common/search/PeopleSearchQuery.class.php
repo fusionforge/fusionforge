@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc
  * Copyright 2004, Guillaume Smet/Open Wide
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,17 +26,6 @@
 require_once $gfcommon.'search/SearchQuery.class.php';
 
 class PeopleSearchQuery extends SearchQuery {
-
-	/**
-	 * Constructor
-	 *
-	 * @param string $words words we are searching for
-	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
-	 */
-	function PeopleSearchQuery($words, $offset, $isExact) {
-		$this->SearchQuery($words, $offset, $isExact);
-	}
 
 	/**
 	 * getQuery - get the query built to get the search results

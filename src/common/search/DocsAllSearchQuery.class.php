@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Dominik Haas
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -42,10 +43,10 @@ class DocsAllSearchQuery extends SearchQuery {
 	 * @param	array	$sections sections to search in
 	 * @param	boolean	$showNonPublic flag if private sections are searched too
 	 */
-	function DocsAllSearchQuery($words, $offset, $isExact = true, $sections=SEARCH__ALL_SECTIONS, $parametersValues, $showNonPublic = false) {
+	function __construct($words, $offset, $isExact = true, $sections=SEARCH__ALL_SECTIONS, $parametersValues, $showNonPublic = false) {
 		$this->parametersValues = $parametersValues;
 		$this->showNonPublic = $showNonPublic;
-		$this->SearchQuery($words, $offset, $isExact);
+		parent::__construct($words, $offset, $isExact);
 	}
 
 	/**

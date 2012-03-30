@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc
  * Copyright 2004, Guillaume Smet/Open Wide
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -48,12 +49,12 @@ class ArtifactSearchQuery extends SearchQuery {
 	 * @param int $groupId group id
 	 * @param int $artifactId artifact id
 	 */
-	function ArtifactSearchQuery($words, $offset, $isExact, $groupId, $artifactId) {
+	function __construct($words, $offset, $isExact, $groupId, $artifactId) {
 		//TODO: Why is groupId an arg and var since it isn't used anywhere?
 		$this->groupId = $groupId;
 		$this->artifactId = $artifactId;
 
-		$this->SearchQuery($words, $offset, $isExact);
+		parent::__construct($words, $offset, $isExact);
 	}
 
 	/**

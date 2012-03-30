@@ -4,6 +4,7 @@
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,12 +26,11 @@
 require_once $gfcommon.'include/config.php';
 
 function parser_text($fichin) {
-	$tstart = microtime_float();
 	if (!is_file($fichin))
 		return "";
 
-	$fp = fopen($fichin, "r");
-	$buff = fread($fp, filesize($fichin));
+	$handle = fopen($fichin, "r");
+	$buff = fread($handle, filesize($fichin));
 
 	// tout en minuscules
 	if (function_exists('mb_strtolower')) {
@@ -48,11 +48,11 @@ function parser_text($fichin) {
 	// et caractères spéciaux
 	$buff = suppression_diacritics($buff);
 	// tous les mots dans un tableau
-	$a = explode(" ", $buff);
+	$words = explode(" ", $buff);
 	// élimination des doublons
-	$a = array_unique($a);
+	$words = array_unique($words);
 	// envoi du résultat sur stdout
-	$rep = print_list($a);
+	$rep = print_list($words);
 	return $rep;
 }
 
@@ -65,10 +65,9 @@ function print_list($list) {
 }
 
 function suppression_diacritics($text) {
-	$b = $text;
-	$b = iconv('UTF-8', 'US-ASCII//TRANSLIT', $b) ;
-	$b = strtr($b, "\t\r\n?.*'\":;,#![]()", "                 ");
-	return $b;
+	$text = iconv('UTF-8', 'US-ASCII//TRANSLIT', $text) ;
+	$text = strtr($text, "\t\r\n?.*'\":;,#![]()", "                 ");
+	return $text;
 }
 
 function microtime_float() {

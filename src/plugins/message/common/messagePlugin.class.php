@@ -3,6 +3,7 @@
  * FusionForge Plugin Message Class
  *
  * Copyright 2009 (c) Alain Peyrat <alain.peyrat@alcatel-lucent.com>
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -27,7 +28,7 @@
 
 class messagePlugin extends Plugin {
 
-	function messagePlugin () {
+	function __construct() {
 		$this->Plugin() ;
 		$this->name = "message" ;
 		$this->text = _('Message');

@@ -1008,7 +1008,6 @@ src/plugins/authopenid/packaging/links/plugin-authopenid -text
 src/plugins/authopenid/www/index.php -text
 src/plugins/authopenid/www/post-login.php -text
 src/plugins/blocks/NAME -text
-src/plugins/blocks/common/blocks-init.php -text
 src/plugins/blocks/common/blocksPlugin.class.php -text
 src/plugins/blocks/db/blocks-init.sql -text
 src/plugins/blocks/etc/blocks.ini -text

@@ -6,7 +6,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -53,7 +53,7 @@ class DocumentGroup extends Error {
 	 * @return	boolean	True on success.
 	 * @access	public
 	 */
-	function DocumentGroup(&$Group, $data = false) {
+	function __construct(&$Group, $data = false) {
 		$this->Error();
 
 		//was Group legit?
@@ -85,7 +85,6 @@ class DocumentGroup extends Error {
 				}
 			}
 		}
-		return true;
 	}
 
 	/**

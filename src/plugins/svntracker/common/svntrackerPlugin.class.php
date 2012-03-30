@@ -4,6 +4,7 @@
  *
  * Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2005 (c) Guillaume Smet <guillaume-gforge@smet.org>
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of GForge-plugin-svntracker
  *
@@ -28,7 +29,8 @@
  */
 
 class svntrackerPlugin extends Plugin {
-	function svntrackerPlugin () {
+
+	function __construct() {
 		$this->Plugin() ;
 		$this->name = "svntracker" ;
 		$this->text = "Source Code and Tracker/Task Integration";
@@ -234,7 +236,7 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	function CallHook ($hookname, &$params) {
-		global $group_id, $G_SESSION, $HTML, $use_svntrackerplugin,$aid ;
+		global $group_id, $aid;
 
 		if ($hookname == "artifact_extra_detail") {
 			$DBResult = db_query_params ('SELECT * FROM plugin_svntracker_data_master,

@@ -3,6 +3,7 @@
 /*
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -46,7 +47,8 @@
 forge_define_config_item('templates_file','blocks','$core/source_path/plugins/blocks/etc/templates.json');
 
 class blocksPlugin extends Plugin {
-	function blocksPlugin () {
+
+	function __construct() {
 		$this->Plugin() ;
 		$this->name = "blocks" ;
 		$this->text = "Blocks" ; // To show in the tabs, use...
@@ -74,9 +76,9 @@ class blocksPlugin extends Plugin {
 		$group = group_get_object($GLOBALS['group_id']);
 		if ( $group && $group->usesPlugin ( $this->name ) ) {
 
-			$c = $this->renderBlock($params);
-			if ($c !== false) {
-				echo $c;
+			$content = $this->renderBlock($params);
+			if ($content !== false) {
+				echo $content;
 				return true;
 			}
 		}
@@ -104,22 +106,22 @@ class blocksPlugin extends Plugin {
 		}
 	}
 
-	function parseContent($t) {
+	function parseContent($text) {
 		global $HTML;
 
-		$t = preg_replace('/<p>{boxTop (.*?)}<\/p>/ie', '$HTML->boxTop(\'$1\')', $t);
-		$t = preg_replace('/{boxTop (.*?)}/ie', '$HTML->boxTop(\'$1\')', $t);
-		$t = preg_replace('/<p>{boxMiddle (.*?)}<\/p>/ie', '$HTML->boxMiddle(\'$1\')', $t);
-		$t = preg_replace('/{boxMiddle (.*?)}/ie', '$HTML->boxMiddle(\'$1\')', $t);
-		$t = preg_replace('/<p>{boxBottom}<\/p>/i', $HTML->boxBottom(), $t);
-		$t = preg_replace('/{boxBottom}/i', $HTML->boxBottom(), $t);
+		$text = preg_replace('/<p>{boxTop (.*?)}<\/p>/ie', '$HTML->boxTop(\'$1\')', $text);
+		$text = preg_replace('/{boxTop (.*?)}/ie', '$HTML->boxTop(\'$1\')', $text);
+		$text = preg_replace('/<p>{boxMiddle (.*?)}<\/p>/ie', '$HTML->boxMiddle(\'$1\')', $text);
+		$text = preg_replace('/{boxMiddle (.*?)}/ie', '$HTML->boxMiddle(\'$1\')', $text);
+		$text = preg_replace('/<p>{boxBottom}<\/p>/i', $HTML->boxBottom(), $text);
+		$text = preg_replace('/{boxBottom}/i', $HTML->boxBottom(), $text);
 
-		$t = preg_replace('/<p>{boxHeader}/i', '<hr />', $t);
-		$t = preg_replace('/{boxHeader}/i', '<hr />', $t);
-		$t = preg_replace('/{boxFooter}<\/p>/i', '<hr />', $t);
-		$t = preg_replace('/{boxFooter}/i', '<hr />', $t);
+		$text = preg_replace('/<p>{boxHeader}/i', '<hr />', $text);
+		$text = preg_replace('/{boxHeader}/i', '<hr />', $text);
+		$text = preg_replace('/{boxFooter}<\/p>/i', '<hr />', $text);
+		$text = preg_replace('/{boxFooter}/i', '<hr />', $text);
 
-		return $t;
+		return $text;
 	}
 }
 

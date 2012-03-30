@@ -3,6 +3,7 @@
  * FusionForge search engine
  *
  * Copyright 2004, Dominik Haas
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -40,10 +41,10 @@ class NewsSearchQuery extends SearchQuery {
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 */
-	function NewsSearchQuery($words, $offset, $isExact, $groupId) {
+	function __construct($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
 
-		$this->SearchQuery($words, $offset, $isExact);
+		parent::__construct($words, $offset, $isExact);
 	}
 
 	/**

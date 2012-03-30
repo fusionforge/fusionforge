@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Sung Kim/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -56,7 +57,7 @@ class Survey extends Error {
 	 * @param	array	The associative array of data.
 	 * @return	boolean	success.
 	 */
-	function Survey(&$Group, $survey_id = false, $arr = false) {
+	function __construct(&$Group, $survey_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), "Survey"));
@@ -82,7 +83,6 @@ class Survey extends Error {
 				}
 			}
 		}
-		return true;
 	}
 
 	/**

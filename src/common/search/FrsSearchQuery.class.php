@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Dominik Haas
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -49,11 +50,11 @@ class FrsSearchQuery extends SearchQuery {
 	 * @param int $groupId group id
 	 * @param array $sections sections to search in
 	 */
-	function FrsSearchQuery($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
+	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
 
-		$this->SearchQuery($words, $offset, $isExact);
+		parent::__construct($words, $offset, $isExact);
 
 		$this->setSections($sections);
 	}

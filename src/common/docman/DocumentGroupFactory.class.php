@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -52,7 +53,7 @@ class DocumentGroupFactory extends Error {
 	 *
 	 * @return	boolean	success.
 	 */
-	function DocumentGroupFactory(&$Group) {
+	function __construct(&$Group) {
 		$this->Error();
 
 		if (!$Group || !is_object($Group)) {
@@ -64,8 +65,6 @@ class DocumentGroupFactory extends Error {
 			return false;
 		}
 		$this->Group =& $Group;
-
-		return true;
 	}
 
 	/**
@@ -81,7 +80,6 @@ class DocumentGroupFactory extends Error {
 
 		$result = db_query_params('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
 						array($this->Group->getID(), $stateid));
-		$rows = db_numrows($result);
 
 		if (!$result) {
 			$this->setError(_('No Documents Folder Found').' '.db_error());

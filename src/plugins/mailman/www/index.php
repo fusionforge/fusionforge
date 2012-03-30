@@ -9,6 +9,7 @@
  * This is an example to watch things in action. You can obviously modify things and logic as you see fit
  *
  * Portions Copyright 2010 (c) Mélanie Le Bail
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  */
 require_once ('env.inc.php');
 require_once 'pre.php';
@@ -66,7 +67,7 @@ if (isset ($group_id)) {
 			echo _('You seem to have mailman account with a different name or password. If you want to update mailman information, click on ');
 			echo '<a href="index.php?group_id=' . $group_id . '&action=update">' . _('Update') . '</a>';
 			echo '</p>';
-	}
+		}
 	}
 
 	echo '<p>';

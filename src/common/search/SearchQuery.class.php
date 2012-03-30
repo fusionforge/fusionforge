@@ -6,6 +6,7 @@
  * Copyright 2004, Guillaume Smet/Open Wide
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -94,7 +95,7 @@ class SearchQuery extends Error {
 	 * @param	boolean	$isExact if we want to search for all the words or if only one is sufficient
 	 * @param	int	$rowsPerPage number of rows per page
 	 */
-	function SearchQuery($words, $offset, $isExact, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE) {
+	function __construct($words, $offset, $isExact, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE) {
 		$this->field_separator = ' ioM0Thu6_fieldseparator_kaeph9Ee ';
 
 		$this->cleanSearchWords($words);

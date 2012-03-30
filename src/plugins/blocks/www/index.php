@@ -3,6 +3,7 @@
 /*
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -135,7 +136,7 @@ function getAvailableBlocks($group) {
 
 // the header that displays for the user portion of the plugin
 function blocks_Project_Header($params) {
-	global $DOCUMENT_ROOT,$HTML,$id;
+	global $id;
 	$params['toptab']='blocks';
 	$params['group']=$id;
 	/*

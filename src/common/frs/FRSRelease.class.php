@@ -4,6 +4,7 @@
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -297,20 +298,12 @@ Change note:
 
 
 You can download it by following this link:
-
 %6$s
 
 You receive this email because you requested to be notified when new
 versions of this package were released. If you don\'t wish to be
 notified in the future, please login to %7$s and click this link:
-
-%8$s
-
-
-
-
-
-'
+%8$s'
 ),
 					      $this->FRSPackage->Group->getPublicName(),
 					      $this->FRSPackage->Group->getUnixName(),

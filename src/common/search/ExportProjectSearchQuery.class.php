@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc
  * Copyright 2004, Guillaume Smet/Open Wide
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -32,8 +33,8 @@ class ExportProjectSearchQuery extends SearchQuery {
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
-	function ExportProjectSearchQuery($words, $offset, $isExact) {
-		$this->SearchQuery($words, $offset, $isExact, 200);
+	function __construct($words, $offset, $isExact) {
+		parent::__construct($words, $offset, $isExact, 200);
 	}
 
 	/**

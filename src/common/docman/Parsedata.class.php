@@ -5,7 +5,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2010, Franck Villaume - Capgemini
  * Copyright 2011, Franck Villaume - TrivialDev
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,10 +36,9 @@ class Parsedata {
 	 * @param	string	path to the parser list file
 	 * @return	boolean	true
 	 */
-	function Parsedata() {
+	function __construct() {
 		$this->p_path = dirname(__FILE__).'/engine/';
 		$this->parsers = $this->get_parser_list($this->p_path);
-		return true;
 	}
 
 	function get_parse_data($data, $title, $description, $filetype) {
@@ -50,9 +49,9 @@ class Parsedata {
 			// parse data if good parser exists
 			$parser = $this->p_path.$this->parsers[$filetype];
 			$filename = tempnam("/tmp/", "tmp");
-			$fp = fopen($filename, "w");
-			fwrite($fp, $data1);
-			fclose($fp);
+			$handle = fopen($filename, "w");
+			fwrite($handle, $data1);
+			fclose($handle);
 			$cmd = "php -f $parser $filename";
 			$rep = shell_exec($cmd);
 			if (file_exists($filename)) {
@@ -63,9 +62,9 @@ class Parsedata {
 		$data2 = utf8_decode("$title $description");
 		// temporary file for treatement
 		$filename = tempnam("/tmp", "tmp");
-		$fp = fopen($filename, "w");
-		fwrite($fp, $data2);
-		fclose($fp);
+		$handle = fopen($filename, "w");
+		fwrite($handle, $data2);
+		fclose($handle);
 		$cmd = $this->p_path.$this->parsers["text/plain"];
 		$cmd = "php -f $cmd $filename";
 		$rep1 = shell_exec($cmd);
@@ -76,11 +75,11 @@ class Parsedata {
 	function get_parser_list($parser_path) {
 		$file = $parser_path."parser_list.txt";
 		$rep = array();
-		$fp = fopen($file, "r");
-		if ($fp) {
-			$buff = fread($fp, 2048);
-			$a1 = explode("\n", $buff);
-			foreach ($a1 as $a) {
+		$handle = fopen($file, "r");
+		if ($handle) {
+			$buff = fread($handle, 2048);
+			$lines = explode("\n", $buff);
+			foreach ($lines as $a) {
 				if (trim($a) != "" && substr($a, 0,1) != "#") {
 					$a2 = explode ("|", $a);
 					$rep[$a2[0]] = $a2[1];

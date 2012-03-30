@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -83,7 +84,7 @@ class DocumentFactory extends Error {
 	 * @return	boolean	success.
 	 * @access	public
 	 */
-	function DocumentFactory(&$Group) {
+	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('ProjectGroup:: No Valid Group Object'));
@@ -96,7 +97,6 @@ class DocumentFactory extends Error {
 		}
 
 		$this->Group =& $Group;
-		return true;
 	}
 
 	/**

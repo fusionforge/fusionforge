@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc
  * Copyright 2004, Guillaume Smet/Open Wide
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -48,11 +49,11 @@ class ForumSearchQuery extends SearchQuery {
 	 * @param int $groupId group id
 	 * @param int $forumId forum id
 	 */
-	function ForumSearchQuery($words, $offset, $isExact, $groupId, $forumId) {
+	function __construct($words, $offset, $isExact, $groupId, $forumId) {
 		$this->groupId = $groupId;
 		$this->forumId = $forumId;
 
-		$this->SearchQuery($words, $offset, $isExact);
+		parent::__construct($words, $offset, $isExact);
 	}
 
 	/**
