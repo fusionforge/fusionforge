@@ -3,6 +3,7 @@
  * Projects Hierarchy plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,9 +31,9 @@ $confArr['delegate'] = 0;
 
 if (!$projectsHierarchy->updateGlobalConf($confArr)) {
 	$error_msg = _('Failed to update global configuration.');
-	session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=globaladmin&pluginname='.$projectsHierarchy->name.'&error_msg='.urlencode($error_msg));
+	session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
 }
 
 $feedback = _('Projects Hierarchy global configuration successfully updated.');
-session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=globaladmin&pluginname='.$projectsHierarchy->name.'&feedback='.urlencode($feedback));
+session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=globaladmin&feedback='.urlencode($feedback));
 ?>
