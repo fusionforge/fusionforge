@@ -1,6 +1,7 @@
 <?php
-/*
+/**
  * Copyright (C) 2011 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -18,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The provided file ("Contribution") has not been tested and/or
@@ -59,7 +60,7 @@ if ($message) {
 	}
 }
 
-site_admin_header($params);
+site_admin_header(array('title'=>_('Global Message Administration')));
 
 print _("Edit the message as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)");
 
@@ -69,7 +70,6 @@ print "<form action=\"/plugins/message/\" method=\"post\">";
 $params['body'] = $message;
 $params['width'] = "800";
 $params['height'] = "300";
-$params['group'] = $id;
 $params['content'] = '<textarea name="body"  rows="20" cols="80">'.$message.'</textarea>';
 plugin_hook_by_reference("text_editor", $params);
 echo $params['content'];
