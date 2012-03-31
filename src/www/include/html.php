@@ -725,7 +725,7 @@ function site_header($params) {
 		Check to see if active user
 		Check to see if logged in
 	*/
-	echo $HTML->header($params);
+	$HTML->header($params);
 }
 
 /**
