@@ -48,7 +48,6 @@ class messagePlugin extends Plugin {
 	}
 
 	function message() {
-		global $HTML;
 		$res = db_query_params('SELECT message FROM plugin_message', array());
 		if ($res && db_numrows($res)>0) {
 			echo '<div id="message_box">';
