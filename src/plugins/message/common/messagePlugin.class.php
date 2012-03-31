@@ -4,6 +4,7 @@
  *
  * Copyright 2009 (c) Alain Peyrat <alain.peyrat@alcatel-lucent.com>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -47,10 +48,11 @@ class messagePlugin extends Plugin {
 	}
 
 	function message() {
+		global $HTML;
 		$res = db_query_params('SELECT message FROM plugin_message', array());
 		if ($res && db_numrows($res)>0) {
 			echo '<div id="message_box">';
-			echo '<img id="message_close" style="float:right;cursor:pointer"  src="/themes/acos/images/ic/close.png" alt="'._('Close').'" />';
+			echo html_image("ic/close.png", '', '', array('alt'=>_('Close'), 'id'=>'message_close', 'style'=>'float:right;cursor:pointer'));
 			echo db_result($res, 0, 'message');
 			echo '</div>';
 		}
