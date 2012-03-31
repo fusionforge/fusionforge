@@ -3,6 +3,7 @@
  * docman hierarchy view
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,17 +25,20 @@
 global $g; //group object
 global $group_id; // id of the group
 $projectsHierarchy = plugin_get_object('projects-hierarchy');
+$globalConfArray = $projectsHierarchy->getGlobalConf();
 
-echo '<form id="projectsHierarchyDocman" name="projectsHierarchyDocman" method="post" action="/plugins/'.$projectsHierarchy->name.'/?action=projectsHierarchyDocman&id='.$group_id.'&type=group" >';
-echo '<ul>';
-$label = _('Enable hierarchical browsing');
-$status = 1;
-if ($projectsHierarchy->getDocmanStatus($group_id)) {
-	$label = _('Disable hierarchical browsing');
-	$status = 0;
+if ($globalConfArray['docman']) {
+	echo '<form id="projectsHierarchyDocman" name="projectsHierarchyDocman" method="post" action="/plugins/'.$projectsHierarchy->name.'/?action=projectsHierarchyDocman&id='.$group_id.'&type=group" >';
+	echo '<ul>';
+	$label = _('Enable hierarchical browsing');
+	$status = 1;
+	if ($projectsHierarchy->getDocmanStatus($group_id)) {
+		$label = _('Disable hierarchical browsing');
+		$status = 0;
+	}
+	echo '<input name="status" type="hidden" value="'.$status.'" />';
+	echo '<li><input id="projectsHierarchyDocmanSubmit" type="submit" value="'.$label.'" /></li>';
+	echo '</ul>';
+	echo '</form>';
 }
-echo '<input name="status" type="hidden" value="'.$status.'" />';
-echo '<li><input id="projectsHierarchyDocmanSubmit" type="submit" value="'.$label.'" /></li>';
-echo '</ul>';
-echo '</form>';
 ?>
