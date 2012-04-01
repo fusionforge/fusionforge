@@ -33,7 +33,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 	}
 
 	function getCategory() {
-		return _('scm');
+		return _('SCM');
 	}
 
 	function getDescription() {
