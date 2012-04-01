@@ -4,6 +4,7 @@
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -597,7 +598,7 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @access	public
 	 */
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name,_('Global Hierarchy admin'), array('class'=>'tabtitle', 'title'=>_('Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)')));
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin',_('Global Hierarchy admin'), array('class'=>'tabtitle', 'title'=>_('Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)')));
 	}
 
 	/**
