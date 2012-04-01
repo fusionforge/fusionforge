@@ -4,6 +4,7 @@
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -150,28 +151,28 @@ class FRSFile extends Error {
 		}
 
 
-		$path_name=forge_get_config('upload_dir').'/'.$this->FRSRelease->FRSPackage->Group->getUnixName();
+		$path_name = forge_get_config('upload_dir').'/'.$this->FRSRelease->FRSPackage->Group->getUnixName();
 		if (!is_dir($path_name)) {
-			mkdir($path_name,0755);
+			mkdir($path_name, 0755, true);
 		} else {
 			if ( fileperms($path_name) != 0x4755 ) {
-				chmod($path_name,0755);
+				chmod($path_name, 0755);
 			}
 		}
-		$path_name=$path_name.'/'.$this->FRSRelease->FRSPackage->getFileName();
+		$path_name = $path_name.'/'.$this->FRSRelease->FRSPackage->getFileName();
 		if (!is_dir($path_name)) {
-			mkdir($path_name,0755);
+			mkdir($path_name, 0755);
 		} else {
 			if ( fileperms($path_name) != 0x4755 ) {
-				chmod($path_name,0755);
+				chmod($path_name, 0755);
 			}
 		}
-		$path_name=$path_name.'/'.$this->FRSRelease->getFileName();
+		$path_name = $path_name.'/'.$this->FRSRelease->getFileName();
 		if (!is_dir($path_name)) {
-			mkdir($path_name,0755);
+			mkdir($path_name, 0755);
 		} else {
 			if ( fileperms($path_name) != 0x4755 ) {
-				chmod($path_name,0755);
+				chmod($path_name, 0755);
 			}
 		}
 
