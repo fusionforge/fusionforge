@@ -27,6 +27,7 @@ Include {core/config_path}/httpd.conf.d/plugin-*.inc
 
 Alias /images/ {core/source_path}/www/images/
 Alias /scripts/jquery/ {core/source_path}/lib/vendor/jquery/
+Alias /scripts/jquery-ui/ {core/source_path}/lib/vendor/jquery-ui/
 Alias /scripts/jquery-tipsy/ {core/source_path}/lib/vendor/jquery-tipsy/
 Alias /scripts/jquery-storage/ {core/source_path}/lib/vendor/jquery-storage/
 Alias /scripts/jquery-simpletreemenu/ {core/source_path}/lib/vendor/jquery-simpletreemenu/
