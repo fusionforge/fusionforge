@@ -326,7 +326,7 @@ It also provides a specific version of CVSWeb wrapped in FusionForge.
 %package plugin-scmsvn
 Summary: Subversion plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, subversion
+Requires: %{name} >= %{version}, php, subversion, viewvc
 %description plugin-scmsvn
 This RPM installs SCM SVN plugin for FusionForge and provides svn support
 to FusionForge.
