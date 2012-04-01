@@ -6,6 +6,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -470,6 +471,8 @@ class FRSPackage extends Error {
 			$this->setError('Package::delete error: trying to delete root dir');
 			return false;
 		}
+		$this->deleteNewestReleaseFilesAsZip();
+
 		if (is_dir($dir))
 			rmdir($dir);
 
@@ -499,7 +502,7 @@ class FRSPackage extends Error {
 		}
 	}
 
-	public function getNewestReleaseZipName () {
+	public function getNewestReleaseZipName() {
 		return $this->getFileName()."-latest.zip";
 	}
 
@@ -526,6 +529,12 @@ class FRSPackage extends Error {
 		}
 
 		$zip->close();
+	}
+
+	public function deleteNewestReleaseFilesAsZip() {
+		if (file_exists($this->getNewestReleaseZipPath()))
+			unlink($this->getNewestReleaseZipPath());
+		return true;
 	}
 
 }
