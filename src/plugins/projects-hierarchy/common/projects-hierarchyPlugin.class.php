@@ -99,28 +99,31 @@ class projects_hierarchyPlugin extends Plugin {
 				break;
 			}
 			case "display_hierarchy_submenu": {
-				// Use to display a submenu in software map page if at least one project has a valid relationship
-				$res1 = db_query_params('SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = $1 and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id',
-							array($this->name));
-				if ($res1) {
-					if (db_numrows($res1) > 0) {
-						$res2 = db_query_params('SELECT count(*) as used FROM plugin_projects_hierarchy_relationship where status = $1',
-									array('t'));
-						if ($res2)
-							$row = db_fetch_array($res2);
-						if ($row['used']) {
-							$hierarchy_used = true;
+				$globalConf = $this->getGlobalconf();
+				if ($globalConf['tree']) {
+					// Use to display a submenu in software map page if at least one project has a valid relationship
+					$res1 = db_query_params('SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = $1 and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id',
+								array($this->name));
+					if ($res1) {
+						if (db_numrows($res1) > 0) {
+							$res2 = db_query_params('SELECT count(*) as used FROM plugin_projects_hierarchy_relationship where status = $1',
+										array('t'));
+							if ($res2)
+								$row = db_fetch_array($res2);
+							if ($row['used']) {
+								$hierarchy_used = true;
+							}
 						}
 					}
-				}
-				if (isset($hierarchy_used)) {
-					$hierarMenuTitle[] = _('Per Category');
-					$hierarMenuTitle[] = _('Per Hierarchy');
-					$hierarMenuAttr[] = array('title' => _('Browse per category the available projects. Some projects might not appear here they do not choose any categories'), 'class' => 'tabtitle-nw');
-					$hierarMenuAttr[] = array('title' => _('Browse per hierarchy. Projects can share relationship between projects, as father and sons'), 'class' => 'tabtitle');
-					$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=c';
-					$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=h';
-					echo ($HTML->subMenu($hierarMenuTitle, $hierarMenuUrl, $hierarMenuAttr));
+					if (isset($hierarchy_used)) {
+						$hierarMenuTitle[] = _('Per Category');
+						$hierarMenuTitle[] = _('Per Hierarchy');
+						$hierarMenuAttr[] = array('title' => _('Browse per category the available projects. Some projects might not appear here they do not choose any categories'), 'class' => 'tabtitle-nw');
+						$hierarMenuAttr[] = array('title' => _('Browse per hierarchy. Projects can share relationship between projects, as father and sons'), 'class' => 'tabtitle');
+						$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=c';
+						$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=h';
+						echo ($HTML->subMenu($hierarMenuTitle, $hierarMenuUrl, $hierarMenuAttr));
+					}
 				}
 				$returned = true;
 				break;
