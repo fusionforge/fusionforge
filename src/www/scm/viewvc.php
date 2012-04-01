@@ -76,7 +76,7 @@ if (!$Group->usesSCM()) {
 // check if the scm_box is located in another server
 $scm_box = $Group->getSCMBox();
 //$external_scm = (gethostbyname(forge_get_config('web_host')) != gethostbyname($scm_box));
-$external_scm = !$sys_scm_single_host;
+$external_scm = !forge_get_config('scm_single_host');
 
 if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 	exit_permission_denied('scm');
@@ -128,11 +128,20 @@ if ($external_scm) {
 // is set to 0 in the ViewCVS config file
 $found = false;
 $line = strtok($content,SEPARATOR);
+
+if ($line == 'Status: 301 Moved') {
+	while ($line) {
+		header($line);
+		$line = strtok(SEPARATOR);
+	}
+	exit;
+}
+
 while ($line && !$found) {
 	if (preg_match('/^Content-Type:(.*)$/',$line,$matches)) {
 		header('Content-Type:' . $matches[1]);
- 		$found = true;
- 	}
+		$found = true;
+	}
 	$line = strtok(SEPARATOR);
 }
 $content = substr($content, strpos($content,$line));
