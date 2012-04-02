@@ -3,6 +3,7 @@
  * Projects Hierarchy plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,7 +29,7 @@ global $use_tooltips;
 $projectsHierarchyGlobalConf = $projectsHierarchy->getGlobalconf();
 
 echo $HTML->boxTop(_('Manage configuration'));
-echo '<form method="post" action="?type=globaladmin&pluginname='.$projectsHierarchy->name.'&action=updateGlobalConf">';
+echo '<form method="post" action="?type=globaladmin&action=updateGlobalConf">';
 echo '<table>';
 
 echo '<tr><td><label id="projectsHierarchy-tree" ';
