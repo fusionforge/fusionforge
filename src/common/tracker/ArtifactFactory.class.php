@@ -207,12 +207,7 @@ class ArtifactFactory extends Error {
 					   'submitted_by',
 					   'priority',
 					   'last_modified_date') ;
-		$efarr = $this->ArtifactType->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
-						    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
-						    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
-						    ARTIFACT_EXTRAFIELDTYPE_SELECT,
-						    ARTIFACT_EXTRAFIELDTYPE_RADIO,
-						    ARTIFACT_EXTRAFIELDTYPE_STATUS));
+		$efarr = $this->ArtifactType->getExtraFields();
 		$keys=array_keys($efarr);
 		for ($k=0; $k<count($keys); $k++) {
 			$i=$keys[$k];
