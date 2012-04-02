@@ -39,14 +39,14 @@ if (!$group_id)
 $g = group_get_object($group_id);
 
 if (!$g || !is_object($g)) {
-    exit_no_group();
+	exit_no_group();
 } elseif ($g->isError()) {
-	exit_error('Error',$g->getErrorMessage(),'frs');
+	exit_error('Error', $g->getErrorMessage(), 'frs');
 }
 
 // check the permissions and see if this user is a release manager.
 // If so, he can create a release
-session_require_perm ('frs', $group_id, 'write') ;
+session_require_perm('frs', $group_id, 'write');
 
 $packages = get_frs_packages($g);
 
