@@ -145,7 +145,13 @@ if (file_exists($gfcgfile)) {
 	forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
 	forge_define_config_item ('user_registration_accept_conditions', 'core', $GLOBALS['sys_require_accept_conditions']);
 	forge_set_config_item_bool ('user_registration_accept_conditions', 'core') ;
+	forge_define_config_item ('use_private_project', 'core', $GLOBALS['sys_use_private_project']);
+	forge_set_config_item_bool ('use_private_project', 'core') ;
+	forge_define_config_item ('require_unique_email', 'core', $GLOBALS['sys_require_unique_email']) ;
 	forge_define_config_item ('compression_method', 'core', 'gzip') ;
+	forge_define_config_item ('use_rdf', 'core', $GLOBALS['sys_use_rdf']) ;
+	forge_set_config_item_bool ('use_rdf', 'core') ;
+	forge_define_config_item ('installation_environment', 'core', $GLOBALS['sys_install_type']) ;
 }
 
 // Arch plugin
