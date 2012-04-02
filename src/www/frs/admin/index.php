@@ -7,6 +7,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -166,13 +167,14 @@ if (!$res || $rows < 1) {
 			<td style="white-space: nowrap;" align="center">
 					<a href="qrs.php?package_id='.
 						db_result($res, $i, 'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Add Release').']</strong>
-					</a>
-
-					<a href="showreleases.php?package_id='.
+					</a>';
+		$packageObject = frspackage_get_object(db_result($res, $i, 'package_id'));
+		if (count($packageObject->getReleases())) {
+			echo '		<a href="showreleases.php?package_id='.
 						db_result($res, $i, 'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Edit Releases').']</strong>
-					</a>
-
-			</td>
+					</a>';
+		}
+		echo '	</td>
 			<td><input type="text" name="package_name" value="'.db_result($res, $i, 'package_name') .'" size="20" maxlength="60" /></td>
 			<td>'.frs_show_status_popup('status_id', db_result($res, $i, 'status_id')).'</td>
 			<td>'.frs_show_public_popup('is_public', db_result($res, $i, 'is_public')).'</td>
