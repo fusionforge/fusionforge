@@ -2,7 +2,7 @@
 # RPM spec file for FusionForge
 #
 # Initial work for 4.8 by JL Bond Consulting
-# Reworked for 5.1 by Alain Peyrat <aljeux@free.fr>
+# Reworked for 5.x by Alain Peyrat <aljeux@free.fr>
 #
 # Copyright (C) 2010 Alain Peyrat
 #
@@ -326,7 +326,7 @@ It also provides a specific version of CVSWeb wrapped in FusionForge.
 %package plugin-scmsvn
 Summary: Subversion plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, subversion
+Requires: %{name} >= %{version}, php, subversion, viewvc
 %description plugin-scmsvn
 This RPM installs SCM SVN plugin for FusionForge and provides svn support
 to FusionForge.
@@ -470,15 +470,22 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 # Apache configuration file
 %{__cp} -a etc/httpd.conf.d-fhs/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/
 %{__cp} -a etc/config.ini.d/defaults.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
-%{__cp} -a etc/config.ini.d/debug.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
 %{__cp} -a etc/config.ini-fhs $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini
-%{__cp} -a etc/httpd.conf-fhs $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
-#%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
-#%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
+%{__cp} -a etc/httpd.conf-fhs $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
+#%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
+#%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
 
-%{__sed} -i -e "s!www-data!apache!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
-%{__sed} -i -e "s!use_shell = yes!use_shell = no!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
-%{__sed} -i -e "s!use_webdav = no!use_webdav = yes!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!www-data!apache!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!/usr/share/jpgraph!/var/www/jpgraph-1.19!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!lists.$core/web_host!$core/web_host!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!scm.$core/web_host!$core/web_host!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!users.$core/web_host!$core/web_host!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_webdav = no!use_webdav = yes!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_shell = yes!use_shell = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_ftp = yes!use_ftp = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_people = yes!use_people = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_project_vhost = yes!use_project_vhost = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_snippet = yes!use_snippet = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 
 # install fusionforge crontab
 %{__install} -m 644 packaging/cron.d/cron.fusionforge $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/%{name}
@@ -714,11 +721,14 @@ if [ "$1" -eq "1" ]; then
 
 	HOSTNAME=`hostname -f`
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{FORGE_CONF_DIR}/local.inc
-	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
+	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/z-gforge.conf
 	[ -d %{FORGE_VAR_LIB}/etc ] || mkdir %{FORGE_VAR_LIB}/etc
 	touch %{FORGE_VAR_LIB}/etc/httpd.vhosts
 
 	/bin/sh %{FORGE_DIR}/install-ng --config >>/var/log/%{name}-install.log 2>&1
+
+	%{__sed} -i -e "s/^#ServerName (.*):80/ServerName $HOSTNAME:80/" /etc/httpd/conf/httpd.conf
+	%{__sed} -i -e "s/^Include/#Include/" %{FORGE_CONF_DIR}/httpd.conf.d/ssl-on.inc
 
 	/etc/init.d/httpd restart >/dev/null 2>&1
 
@@ -781,7 +791,7 @@ fi
 %doc AUTHORS* CHANGES COPYING INSTALL* NEWS README*
 %doc docs/*
 #%attr(0660, %{httpduser}, gforge) %config(noreplace) %{FORGE_CONF_DIR}/local.inc
-#%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
+#%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/z-gforge.conf
 %attr(0644, root, root) %{_sysconfdir}/cron.d/%{name}
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{FORGE_VAR_LIB}/upload
 %attr(755, root, %{httpdgroup}) %dir %{FORGE_DIR}
@@ -870,9 +880,8 @@ fi
 %dir %{FORGE_CONF_DIR}/httpd.d
 %dir %{FORGE_CONF_DIR}/httpd.conf.d
 %{FORGE_CONF_DIR}/httpd.conf.d/*
-%{_sysconfdir}/httpd/conf.d/gforge.conf
+%{_sysconfdir}/httpd/conf.d/z-gforge.conf
 %{FORGE_CONF_DIR}/config.ini.d/defaults.ini
-%{FORGE_CONF_DIR}/config.ini.d/debug.ini
 %{FORGE_CONF_DIR}/config.ini
 %dir %attr(0775,root,%{httpdgroup}) %{FORGE_CONF_DIR}/plugins
 %dir %{FORGE_VAR_LIB}/scmtarballs
@@ -1026,6 +1035,7 @@ fi
 
 %files plugin-scmgit
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmgit.ini
+%{FORGE_CONF_DIR}/httpd.d/plugin-scmgit.conf
 %{FORGE_DIR}/plugins/scmgit
 %{FORGE_DIR}/www/plugins/scmgit
 
