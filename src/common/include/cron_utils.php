@@ -58,6 +58,7 @@ $cron_arr[28]='gather_scm_stats.php';
 
 $cron_arr[901]='create_groups.php';
 $cron_arr[902]='mailing_lists_index.php';
+$cron_arr[903]='job-server.pl';
 
 function cron_entry($job,$output) {
 	$sql='INSERT INTO cron_history (rundate,job,output)
@@ -88,12 +89,31 @@ function checkChroot() {
 //  $name - Name of cron job to use in the lock file name
 //
 function cron_create_lock($name) {
-        global $cron_utils_sem ;
-        if (! $cron_utils_sem[$name]) {
-                $token = ftok ($name, 'g');
-                $cron_utils_sem[$name] = sem_get ($token, 1, 0600, 0) ;
-        }
-        return sem_acquire ($cron_utils_sem[$name]);
+	if (function_exists('sem_get')) {
+		global $cron_utils_sem ;
+		if (! $cron_utils_sem[$name]) {
+			$token = ftok ($name, 'g');
+			$cron_utils_sem[$name] = sem_get ($token, 1, 0600, 0) ;
+		}
+		return sem_acquire ($cron_utils_sem[$name]);
+	}
+
+	$name = basename($name);
+	if (!preg_match('/^[[:alnum:]\.\-_]+$/', $name)) {
+		return false;
+	}
+	$lockf = '/tmp/blahlock'.$name;
+
+	if (file_exists($lockf)) {
+		return false;
+	} else {
+		$fp = fopen($lockf,'w');
+		if ($fp) {
+			fclose($fp);
+			return true;
+		}
+	}
+	return false;
 }
 
 //
@@ -103,12 +123,24 @@ function cron_create_lock($name) {
 //  $name - Name of cron job to use in the lock file name
 //
 function cron_remove_lock($name) {
-        global $cron_utils_sem ;
-        if (! $cron_utils_sem[$name]) {
-                $token = ftok ($name, 'g');
-                $cron_utils_sem[$name] = sem_get ($token, 1, 0600, 0) ;
-        }
-	return sem_release ($cron_utils_sem[$name]);
+	if (function_exists('sem_get')) {
+		global $cron_utils_sem ;
+		if (! $cron_utils_sem[$name]) {
+			$token = ftok ($name, 'g');
+			$cron_utils_sem[$name] = sem_get ($token, 1, 0600, 0) ;
+		}
+		return sem_release ($cron_utils_sem[$name]);
+	}
+
+	$name = basename($name);
+	$lockf = '/tmp/blahlock'.$name;
+
+	if (file_exists($lockf) && is_writeable($lockf)) {
+		if (unlink($lockf)) {
+			return true;
+		}
+	}
+	return false;
 }
 
 // Local Variables:
