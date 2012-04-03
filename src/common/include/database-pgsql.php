@@ -529,24 +529,24 @@ function db_check_foo_exists ($name, $t) {
 	return ($count != 0);
 }
 
-function db_check_table_exists ($tn) {
-	return db_check_foo_exists($tn, 'r');
+function db_check_table_exists ($name) {
+	return db_check_foo_exists($name, 'r');
 }
 
-function db_check_sequence_exists ($tn) {
-	return db_check_foo_exists($tn, 'S');
+function db_check_sequence_exists ($name) {
+	return db_check_foo_exists($name, 'S');
 }
 
-function db_check_view_exists ($tn) {
-	return db_check_foo_exists($tn, 'v');
+function db_check_view_exists ($name) {
+	return db_check_foo_exists($name, 'v');
 }
 
-function db_check_index_exists ($tn) {
-	return db_check_foo_exists($tn, 'i');
+function db_check_index_exists ($name) {
+	return db_check_foo_exists($name, 'i');
 }
 
-function db_drop_table_if_exists ($tn, $cascade=false) {
-	if (!db_check_table_exists($tn)) {
+function db_drop_table_if_exists ($name, $cascade=false) {
+	if (!db_check_table_exists($name)) {
 		return true;
 	}
 	$sql = "DROP TABLE $name";
@@ -561,8 +561,8 @@ function db_drop_table_if_exists ($tn, $cascade=false) {
 	return true;
 }
 
-function db_drop_sequence_if_exists ($tn) {
-	if (!db_check_sequence_exists($tn)) {
+function db_drop_sequence_if_exists ($name) {
+	if (!db_check_sequence_exists($name)) {
 		return;
 	}
 	$sql = "DROP SEQUENCE $name";
@@ -574,8 +574,8 @@ function db_drop_sequence_if_exists ($tn) {
 	return true;
 }
 
-function db_drop_view_if_exists ($tn) {
-	if (!db_check_view_exists($tn)) {
+function db_drop_view_if_exists ($name) {
+	if (!db_check_view_exists($name)) {
 		return true;
 	}
 	$sql = "DROP VIEW $name";
@@ -587,8 +587,8 @@ function db_drop_view_if_exists ($tn) {
 	return true;
 }
 
-function db_drop_index_if_exists ($tn) {
-	if (!db_check_index_exists($tn)) {
+function db_drop_index_if_exists ($name) {
+	if (!db_check_index_exists($name)) {
 		return true;
 	}
 	$sql = "DROP INDEX $name";
