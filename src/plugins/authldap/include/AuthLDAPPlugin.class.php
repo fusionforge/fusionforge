@@ -328,6 +328,12 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 	}
 }
 
+function debuglog($msg) {
+	$fp = fopen("/tmp/ldap.log", "a+");
+	fwrite ($fp, $msg."\n");
+	fclose($fp);
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
