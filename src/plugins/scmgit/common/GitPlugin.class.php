@@ -639,6 +639,35 @@ class GitPlugin extends SCMPlugin {
 			$params['instance'] = new scmgit_Widget_MyRepositories(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
 		}
 	}
+
+	function weekly(&$params) {
+		$res = db_query_params('SELECT group_id FROM groups WHERE status=$1 AND use_scm=1 ORDER BY group_id DESC',
+				array ('A'));
+		if (!$res) {
+			$params['output'] .= 'ScmGit Plugin: Unable to get list of projects using SCM: '.db_error();
+			return false;
+		}
+
+		$params['output'] .= 'ScmGit Plugin: Running "git gc --quiet" on '.db_numrows($res).' repositories.'."\n";
+		while ($row = db_fetch_array($res)) {
+			$project = group_get_object($row['group_id']);
+			if (!$project || !is_object($project)) {
+				continue;
+			} elseif ($project->isError()) {
+				continue;
+			}
+			if (!$project->usesPlugin($this->name)) {
+				continue;
+			}
+
+			$project_name = $project->getUnixName();
+			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project_name . '/' . $project_name .'.git';
+			if (is_dir($repo)) {
+				chdir($repo);
+				$params['output'] .= $project_name.': '.`git gc --quiet 2>&1`;
+			}
+		}
+	}
 }
 
 // Local Variables:
