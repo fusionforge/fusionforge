@@ -55,6 +55,7 @@ $cron_arr[25]='homedirs.php';
 $cron_arr[26]='update_users.php';
 $cron_arr[27]='create_scm_repos.php';
 $cron_arr[28]='gather_scm_stats.php';
+$cron_arr[29]='weekly.php';
 
 $cron_arr[901]='create_groups.php';
 $cron_arr[902]='mailing_lists_index.php';
