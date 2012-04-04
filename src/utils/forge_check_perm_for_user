@@ -1,0 +1,78 @@
+#! /usr/bin/php -f
+<?php
+/**
+ * FusionForge
+ *
+ * Copyright 2012, Roland Mas
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+        
+require (dirname(__FILE__).'/../common/include/env.inc.php');
+require_once $gfcommon.'include/pre.php';
+
+if (count ($argv) < 3) {
+	echo "Usage: .../forge_check_perm_for_user <username> <section_name> [ref_id] [perm]
+" ;
+        exit (127) ;
+}
+$u = $argv[1] ;
+$s = $argv[2] ;
+if (count ($argv) >= 4) {
+	$r = $argv[3] ;
+} else {
+	$r = -1 ;
+}
+if (count ($argv) >= 5) {
+	$a = $argv[4] ;
+} else {
+	$a = NULL ;
+}
+$user = user_get_object_by_name ($u) ;
+if (!$user || $user->isError()) {
+	echo "Can't find this user...
+" ;
+	exit (1) ;
+}
+
+$un = $user->getUnixName();
+echo "forge_check_perm_for_user ($un, $s, $r, $a))\n";
+
+$engine = RBACEngine::getInstance();
+$rs = $engine->getAvailableRolesForUser($user);
+foreach ($rs as $role) {
+	print $role->getID()." = ".$role->getDisplayableName()." = ".$role->getSetting($s, $r);
+	if ($role->hasPermission ($s, $r, $a)) {
+		print " -> OK\n";
+	} else {
+		print " -> NOK\n";
+	}
+}
+
+if (forge_check_perm_for_user ($user, $s, $r, $a)) {
+	echo "OK\n";
+	exit (0);
+} else {
+	echo "NOK\n";
+	exit (1);
+}
+	
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>
