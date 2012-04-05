@@ -207,7 +207,7 @@ echo html_build_select_box_from_arrays(
 
 <tr>
 <td>
-<?php echo _('Email:'); ?>
+<?php echo _('Email')._(':'); ?>
 </td>
 <td>
 <input type="text" name="email" value="<?php echo $u->getEmail(); ?>" size="25" maxlength="255" />

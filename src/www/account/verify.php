@@ -87,7 +87,7 @@ if (forge_get_config('require_unique_email')) {
 }
 ?>
 <br /><input type="text" name="loginname" /></p>
-<p><?php echo _('Password:'); ?>
+<p><?php echo _('Password')._(':'); ?>
 <br /><input type="password" name="passwd" /></p>
 <input type="hidden" name="confirm_hash" value="<?php print htmlentities($confirm_hash); ?>" />
 <p><input type="submit" name="submit" value="<?php echo _('Login'); ?>" /></p>
@@ -95,5 +95,4 @@ if (forge_get_config('require_unique_email')) {
 
 <?php
 $HTML->footer(array());
-
 ?>

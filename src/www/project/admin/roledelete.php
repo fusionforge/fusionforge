@@ -59,7 +59,7 @@ if ($role->getHomeProject()->getID() != $group_id) {
 if (getStringFromRequest('submit')) {
 	if (getIntFromRequest('sure')) {
 		if (!$role->delete()) {
-			$error_msg = _('ERROR: ').$role->getErrorMessage();
+			$error_msg = _('Error')._(': ').$role->getErrorMessage();
 		} else {
 			$feedback = _('Successfully Deleted Role');
 			session_redirect('/project/admin/users.php?group_id='.$group_id.'&feedback='.urlencode($feedback));

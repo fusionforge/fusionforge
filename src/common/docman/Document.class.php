@@ -902,7 +902,7 @@ class Document extends Error {
 				$status = _('Updated document').' '._('by').' ' . $sess->getRealName();
 			}
 			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
-			$body = _('Project:').' '.$this->Group->getPublicName()."\n";
+			$body = _('Project')._(': ').$this->Group->getPublicName()."\n";
 			$body .= _('Directory:').' '.$this->getDocGroupName()."\n";
 			$body .= _('Document title:').' '.$this->getName()."\n";
 			$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
