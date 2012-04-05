@@ -25,7 +25,7 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 
-if (!forge_get_config('use_ssh')) {
+if (!forge_get_config('use_shell')) {
 	exit_permission_denied();
 }
 
