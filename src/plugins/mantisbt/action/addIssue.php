@@ -43,7 +43,7 @@ try {
 	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array("username" => $username, "password" => $password));
 	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
 } catch (SoapFault $soapFault) {
-	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
 	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname=mantisbt&view=viewIssues&error_msg='.urlencode($feedback));
 }
 foreach($listSeverities as $key => $severity){
@@ -132,7 +132,7 @@ try {
 	$feedback = _('Ticket '.$newIdBug.' created successfully');
 	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$newIdBug.'&view=viewIssue&feedback='.urlencode($feedback));
 } catch (SoapFault $soapFault) {
-	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
 	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($error_msg));
 }
 

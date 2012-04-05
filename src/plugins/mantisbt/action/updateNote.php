@@ -33,7 +33,7 @@ try {
 	$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
 	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
 } catch (SoapFault $soapFault) {
-	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
 	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($error_msg));
 }
 
@@ -59,7 +59,7 @@ foreach($listViewStates as $state){
 try {
 	$clientSOAP->__soapCall('mc_issue_note_update', array("username" => $username, "password" => $password, "note" => $noteEdit));
 } catch (SoapFault $soapFault) {
-	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
 	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($error_msg));
 }
 

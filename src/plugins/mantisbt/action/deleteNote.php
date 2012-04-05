@@ -33,7 +33,7 @@ try {
 
 	$clientSOAP->__soapCall('mc_issue_note_delete', array("username" => $username, "password" => $password, "issue_note_id" => $idNote));
 } catch (SoapFault $soapFault) {
-	$feedback = _('Task failed:').' '.$soapFault->faultstring;
+	$feedback = _('Task failed')._(': ').$soapFault->faultstring;
 	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
 }
 $feedback = _('Note deleted successfully');

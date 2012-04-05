@@ -73,9 +73,9 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		if (forge_get_config('require_unique_email')) {
 			$result .= _('Login name or email address');
 		} else {
-			$result .= _('Login name:');
+			$result .= _('Login name')._(':');
 		}
-		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password:') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
+		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password')._(':') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
 </p>
 </form>' ;
 

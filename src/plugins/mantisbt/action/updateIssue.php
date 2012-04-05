@@ -176,7 +176,7 @@ if ($defect->target_version != $_POST['target_version']) {
 try {
 	$clientSOAP->__soapCall('mc_issue_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue" => $defect));
 } catch (SoapFault $soapFault) {
-	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
 	session_redirect($redirect_url.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
 }
 

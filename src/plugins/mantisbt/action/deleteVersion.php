@@ -37,7 +37,7 @@ if ($deleteVersion) {
 			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 	    $clientSOAP->__soapCall('mc_project_version_delete', array("username" => $username, "password" => $password, "version_id" => $deleteVersion));
 	} catch (SoapFault $soapFault) {
-		$msg = _('Error:').' '.$soapFault->faultstring;
+		$msg = _('Error')._(': ').$soapFault->faultstring;
 		session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
 	}
 	$feedback = _('Version deleted successfully');

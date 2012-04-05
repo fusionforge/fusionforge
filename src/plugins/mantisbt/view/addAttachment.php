@@ -29,7 +29,7 @@ global $idBug;
 echo '<form method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue" enctype="multipart/form-data">';
 echo	'<table>';
 echo		'<tr><td>';
-echo		_('File:'). ' '.'<input type="file" name="attachment" />';
+echo		_('File')._(': ').'<input type="file" name="attachment" />';
 echo	'</td></tr></table>';
 echo	'<br/><input type="button" onclick="this.form.submit();this.disabled=true;" value="'._('Upload File').'" name="send">';
 echo '</form>';

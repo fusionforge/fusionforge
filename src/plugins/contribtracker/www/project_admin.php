@@ -186,9 +186,9 @@ case 'add_contrib':
 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
 <input type="hidden" name="action" value="post_add_contrib" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
-<?php echo _('Contribution name:') ?> <input type="text" name="contrib_name" size="20" /><br />
-<?php echo _('Contribution date:') ?> <input type="text" name="date" value="<?php echo strftime($date_format,time()) ?>"  /><br />
-<?php echo _('Contribution description:') ?><br />
+<?php echo _('Contribution name')._(':') ?> <input type="text" name="contrib_name" size="20" /><br />
+<?php echo _('Contribution date')._(':') ?> <input type="text" name="date" value="<?php echo strftime($date_format,time()) ?>"  /><br />
+<?php echo _('Contribution description')._(':') ?><br />
 <textarea name="contrib_desc" rows="20" cols="80"></textarea><br />
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 </form>
@@ -207,9 +207,9 @@ case 'edit_contrib':
 <input type="hidden" name="action" value="post_edit_contrib" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="hidden" name="contrib_id" value="<?php echo $contrib->getId() ?>" />
-<?php echo _('Contribution name:') ?> <input type="text" name="contrib_name" size="20" value="<?php echo htmlspecialchars ($contrib->getName()) ?>" /><br />
-<?php echo _('Contribution date:') ?> <input type="text" name="date" value="<?php echo strftime($date_format,time()) ?>" /><br />
-<?php echo _('Contribution description:') ?><br />
+<?php echo _('Contribution name')._(':') ?> <input type="text" name="contrib_name" size="20" value="<?php echo htmlspecialchars ($contrib->getName()) ?>" /><br />
+<?php echo _('Contribution date')._(':') ?> <input type="text" name="date" value="<?php echo strftime($date_format,time()) ?>" /><br />
+<?php echo _('Contribution description')._(':') ?><br />
 <textarea name="contrib_desc" rows="20" cols="80"><?php echo htmlspecialchars ($contrib->getDescription()) ?></textarea><br />
 <input type="submit" name="submit" value="<?php echo _('Save') ?>" />
 </form>
@@ -286,11 +286,11 @@ case 'display':
 
 		foreach ($contribs as $c) {
 			print '<h3>'.$c->getName().'</h3>' ;
-			print '<strong>'._('Date:').'</strong> ' ;
+			print '<strong>'._('Date')._(':').'</strong> ' ;
 			print strftime (_('%Y-%m-%d'), $c->getDate ()) ;
 			print '<br />' ;
 
-			print '<strong>'._('Description:').'</strong> ' ;
+			print '<strong>'._('Description')._(':').'</strong> ' ;
 			print htmlspecialchars ($c->getDescription ()) ;
 			print '<br />' ;
 

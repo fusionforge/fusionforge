@@ -32,18 +32,18 @@ function display_contribution ($c, $show_groups = false) {
 	global $plugin ;
 	print '<h2>'.$c->getName().'</h2>' ;
 	if ($show_groups) {
-		print '<strong>'._('Project:').'</strong> ' ;
+		print '<strong>'._('Project')._(':').'</strong> ' ;
 		print util_make_link_g ($c->getGroup()->getUnixName(),
 					$c->getGroup()->getId(),
 					htmlspecialchars ($c->getGroup()->getPublicName())) ;
 		print '<br />' ;
 	}
 
-	print '<strong>'._('Date:').'</strong> ' ;
+	print '<strong>'._('Date')._(':').'</strong> ' ;
 	print strftime (_('%Y-%m-%d'), $c->getDate ()) ;
 	print '<br />' ;
 
-	print '<strong>'._('Description:').'</strong> ' ;
+	print '<strong>'._('Description')._(':').'</strong> ' ;
 	print htmlspecialchars ($c->getDescription ()) ;
 	print '<br />' ;
 
@@ -131,15 +131,15 @@ if ($group_id) {
 	print '<h1>'.sprintf(_('Actor details for %s'),
 			     htmlspecialchars($actor->getName())).'</h1>' ;
 	print '<ul>' ;
-	print '<li><strong>'._('Name:').'</strong> '.htmlspecialchars($actor->getName()).'</li>' ;
-	print '<li><strong>'._('URL:').'</strong> ' ;
+	print '<li><strong>'._('Name')._(':').'</strong> '.htmlspecialchars($actor->getName()).'</li>' ;
+	print '<li><strong>'._('URL')._(':').'</strong> ' ;
 	if ($actor->getUrl() != '') {
 		print '<a href="'.htmlspecialchars($actor->getUrl()).'">'.htmlspecialchars($actor->getUrl()).'</a>';
 	}
 	print '</li>' ;
-	print '<li><strong>'._('Email:').'</strong> '.htmlspecialchars($actor->getEmail()).'</li>' ;
-	print '<li><strong>'._('Legal structure:').'</strong> '.htmlspecialchars($actor->getLegalStructure()->getName()).'</li>' ;
-	print '<li><strong>'._('Description:').'</strong> '.htmlspecialchars($actor->getDescription()).'</li>' ;
+	print '<li><strong>'._('Email')._(':').'</strong> '.htmlspecialchars($actor->getEmail()).'</li>' ;
+	print '<li><strong>'._('Legal structure')._(':').'</strong> '.htmlspecialchars($actor->getLegalStructure()->getName()).'</li>' ;
+	print '<li><strong>'._('Description')._(':').'</strong> '.htmlspecialchars($actor->getDescription()).'</li>' ;
 	print '</ul>' ;
 	if ($actor->getLogo() != '') {
 		if ($actor->getUrl() != '') {
@@ -164,11 +164,11 @@ if ($group_id) {
 			$c = $p->getContribution () ;
 			print '<h2>' . util_make_link ('/plugins/'.$plugin->name.'/?group_id='.$c->getGroup()->getId().'&contrib_id='.$c->getId (),
 						       htmlspecialchars ($c->getName())) . '</h2>' ;
-			print '<strong>'._('Project:').'</strong> ' ;
+			print '<strong>'._('Project')._(':').'</strong> ' ;
 			print util_make_link_g ($c->getGroup()->getUnixName(),
 						$c->getGroup()->getId(),
 						$c->getGroup()->getPublicName()) ;
-			print '<br /><strong>'._('Role:').'</strong> ' ;
+			print '<br /><strong>'._('Role')._(':').'</strong> ' ;
 			print htmlspecialchars ($p->getRole()->getName()) ;
 			print '<hr />' ;
 		}

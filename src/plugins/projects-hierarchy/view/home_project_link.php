@@ -33,7 +33,7 @@ if (sizeof($parent) || sizeof($childs)) {
 	if (sizeof($parent)) {
 		echo '<ul>';
 		$parentGroup = group_get_object($parent[0]);
-		echo '<li>'._('Parent Project:').' '.util_make_link('/projects/'.$parentGroup->getUnixName(), $parentGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
+		echo '<li>'._('Parent Project')._(': ').util_make_link('/projects/'.$parentGroup->getUnixName(), $parentGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
 		echo '</ul>';
 	}
 	if (sizeof($childs)) {

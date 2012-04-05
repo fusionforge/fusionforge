@@ -54,14 +54,14 @@ if (isset($_POST['version']) && !empty($_POST['version'])) {
 						$versionStruct['project_id'] = $child;
 						$clientSOAP->__soapCall('mc_project_version_add', array("username" => $username, "password" => $password, "version" => $versionStruct));
 					} catch (SoapFault $soapFault) {
-						$msg = _('Task failed:').' '.$versionStruct['name'].' '.$soapFault->faultstring;
+						$msg = _('Task failed')._(': ').$versionStruct['name'].' '.$soapFault->faultstring;
 						session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
 					}
 				}
 			}
 		}
 	} catch (SoapFault $soapFault) {
-		$msg = _('Task failed:').' '.$versionStruct['name'].' '.$soapFault->faultstring;
+		$msg = _('Task failed')._(': ').$versionStruct['name'].' '.$soapFault->faultstring;
 		session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
 	}
 	$feedback = _('Task succeeded.');

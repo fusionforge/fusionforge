@@ -36,7 +36,7 @@ if ( $newCategoryName && $renameCategory ) {
 		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 		$clientSOAP->__soapCall('mc_project_rename_category_by_name', array("username" => $username, "password" => $password, "p_project_id" => $mantisbtConf['id_mantisbt'], "p_category_name" => $renameCategory, "p_category_name_new" => $newCategoryName, "p_assigned_to" => ''));
 	} catch (SoapFault $soapFault) {
-		$msg = _('Error:').' '.$soapFault->faultstring;
+		$msg = _('Error')._(': ').$soapFault->faultstring;
 		session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
 	}
 	$feedback = _('Category renamed successfully');

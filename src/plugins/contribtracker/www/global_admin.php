@@ -377,8 +377,8 @@ case 'add_role':
 	?>
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
 			 <input type="hidden" name="action" value="post_add_role" />
-			 <?php echo _('Role name:') ?> <input type="text" name="role_name" size="20" /><br />
-			 <?php echo _('Role description:') ?><br />
+			 <?php echo _('Role name')._(':') ?> <input type="text" name="role_name" size="20" /><br />
+			 <?php echo _('Role description')._(':') ?><br />
 			 <textarea name="role_desc" rows="20" cols="80"></textarea><br />
 			 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 			 </form>
@@ -394,8 +394,8 @@ case 'edit_role':
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
 			 <input type="hidden" name="action" value="post_edit_role" />
 			 <input type="hidden" name="role_id" value="<?php echo $role->getId() ?>" />
-			 <?php echo _('Role name:') ?> <input type="text" name="role_name" size="20" value="<?php echo htmlspecialchars ($role->getName()) ?>" /><br />
-			 <?php echo _('Role description:') ?><br />
+			 <?php echo _('Role name')._(':') ?> <input type="text" name="role_name" size="20" value="<?php echo htmlspecialchars ($role->getName()) ?>" /><br />
+			 <?php echo _('Role description')._(':') ?><br />
 			 <textarea name="role_desc" rows="20" cols="80"><?php echo htmlspecialchars ($role->getDescription()) ?></textarea><br />
 			 <input type="submit" name="submit" value="<?php echo _('Save') ?>" />
 			 </form>
@@ -407,7 +407,7 @@ case 'add_structure':
 	?>
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
 			 <input type="hidden" name="action" value="post_add_structure" />
-			 <?php echo _('Structure name:') ?> <input type="text" name="structure_name" size="20" /><br />
+			 <?php echo _('Structure name')._(':') ?> <input type="text" name="structure_name" size="20" /><br />
 			 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 			 </form>
 
@@ -422,7 +422,7 @@ case 'edit_structure':
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
 			 <input type="hidden" name="action" value="post_edit_structure" />
 			 <input type="hidden" name="structure_id" value="<?php echo $structure->getId() ?>" />
-			 <?php echo _('Structure name:') ?> <input type="text" name="structure_name" size="20" value="<?php echo htmlspecialchars ($structure->getName()) ?>" /><br />
+			 <?php echo _('Structure name')._(':') ?> <input type="text" name="structure_name" size="20" value="<?php echo htmlspecialchars ($structure->getName()) ?>" /><br />
 			 <input type="submit" name="submit" value="<?php echo _('Save') ?>" />
 			 </form>
 			 <?php
@@ -433,14 +433,14 @@ case 'add_actor':
 	?>
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post" enctype="multipart/form-data">
 			 <input type="hidden" name="action" value="post_add_actor" />
-			 <?php echo _('Actor name:') ?> <input type="text" name="actor_name" size="20" /><br />
-			 <?php echo _('Actor URL:') ?> <input type="text" name="actor_url" size="20" /><br />
-			 <?php echo _('Actor email:') ?> <input type="text" name="actor_email" size="20" /><br />
-			 <?php echo _('Actor description:') ?><br />
+			 <?php echo _('Actor name')._(':') ?> <input type="text" name="actor_name" size="20" /><br />
+			 <?php echo _('Actor URL')._(':') ?> <input type="text" name="actor_url" size="20" /><br />
+			 <?php echo _('Actor email')._(':') ?> <input type="text" name="actor_email" size="20" /><br />
+			 <?php echo _('Actor description')._(':') ?><br />
 			 <textarea name="actor_desc" rows="20" cols="80"></textarea><br />
-			 <?php printf (_('Actor logo (PNG, %d kB max):'), $max_logo_size) ?> <input type="file" name="actor_logo" /><br />
+			 <?php printf (_('Actor logo (PNG, %d kB max)')._(':'), $max_logo_size) ?> <input type="file" name="actor_logo" /><br />
 			 <?php
-			 echo _('Legal structure:') ?>
+			 echo _('Legal structure')._(':') ?>
 			 <select name="structure_id">
 			 <?php
 			 $structs = $plugin->getLegalStructures () ;
@@ -463,18 +463,18 @@ case 'edit_actor':
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post" enctype="multipart/form-data">
 			 <input type="hidden" name="action" value="post_edit_actor" />
 			 <input type="hidden" name="actor_id" value="<?php echo $actor->getId() ?>" />
-			 <?php echo _('Actor name:') ?> <input type="text" name="actor_name" size="20" value="<?php echo htmlspecialchars ($actor->getName()) ?>" /><br />
-			 <?php echo _('Actor URL:') ?> <input type="text" name="actor_url" size="20" value="<?php echo htmlspecialchars ($actor->getUrl()) ?>" /><br />
-			 <?php echo _('Actor email:') ?> <input type="text" name="actor_email" size="20" value="<?php echo htmlspecialchars ($actor->getEmail()) ?>" /><br />
-			 <?php echo _('Actor description:') ?><br />
+			 <?php echo _('Actor name')._(':') ?> <input type="text" name="actor_name" size="20" value="<?php echo htmlspecialchars ($actor->getName()) ?>" /><br />
+			 <?php echo _('Actor URL')._(':') ?> <input type="text" name="actor_url" size="20" value="<?php echo htmlspecialchars ($actor->getUrl()) ?>" /><br />
+			 <?php echo _('Actor email')._(':') ?> <input type="text" name="actor_email" size="20" value="<?php echo htmlspecialchars ($actor->getEmail()) ?>" /><br />
+			 <?php echo _('Actor description')._(':') ?><br />
 			 <textarea name="actor_desc" rows="20" cols="80"><?php echo htmlspecialchars ($actor->getDescription()) ?></textarea><br />
-			 <?php printf (_('Actor logo (PNG, %d kB max):'), $max_logo_size) ?> <input type="file" name="actor_logo" /><br />
+			 <?php printf (_('Actor logo (PNG, %d kB max)')._(':'), $max_logo_size) ?> <input type="file" name="actor_logo" /><br />
 			 <?php
 			 if ($actor->getLogo() != '') {
 				 print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />' ;
 			 }
 	print '<br />' ;
-			 echo _('Legal structure:') ?>
+			 echo _('Legal structure')._(':') ?>
 			 <select name="structure_id">
 			 <?php
 			 $structs = $plugin->getLegalStructures () ;
