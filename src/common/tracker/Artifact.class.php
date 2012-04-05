@@ -1208,14 +1208,15 @@ class Artifact extends Error {
 				skip it and continue to next item
 
 */
-		if (empty($extra_fields)) {
-			return true;
-		}
 		$update = false;
 
 		//get a list of extra fields for this artifact_type
 		$ef = $this->ArtifactType->getExtraFields();
 		$efk=array_keys($ef);
+
+		if (empty($extra_fields) && empty($ef)) {
+			return true;
+		}
 
 		// If there is a status field, then check against the workflow.
 		for ($i=0; $i<count($efk); $i++) {
