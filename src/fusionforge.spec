@@ -172,6 +172,13 @@ Requires: %{name} >= %{version}, php
 %description plugin-fckeditor
 FCKEditor is a WYSIWYG text editor that displays within a web browser.
 
+%package plugin-foafprofiles
+Summary: FOAF profile for forge users
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-foafprofiles
+The foafprofile plugin manages the generation of a FOAF profile for forge users.
+
 %package plugin-gravatar
 Summary: Gravatar plugin for FusionForge
 Group: Development/Tools
@@ -517,7 +524,7 @@ WHICH_VERSION=%{version}-%{release}
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/rpm-specific
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/plugins/*/packaging
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/plugins/*/*.spec
-%{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/plugins/foafprofiles
+
 
 ### Plugin setup ###
 for i in $(utils/list-enabled-plugins.sh --disabled) ; do
@@ -929,12 +936,6 @@ fi
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/compactpreview.ini
 %{FORGE_DIR}/plugins/compactpreview
 
-%files plugin-cvstracker
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvstracker.ini
-%{FORGE_DIR}/plugins/cvstracker
-%{FORGE_DIR}/www/plugins/cvstracker
-%attr(-,%{httpduser},%{httpdgroup}) %{FORGE_CONF_DIR}/plugins/cvstracker
-
 %files plugin-doaprdf
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/doaprdf.ini
 %{FORGE_DIR}/plugins/doaprdf
@@ -952,6 +953,10 @@ fi
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/fckeditor.ini
 %{FORGE_DIR}/plugins/fckeditor
 %{FORGE_DIR}/www/plugins/fckeditor
+
+%files plugin-foafprofiles
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/foafprofiles.ini
+%{FORGE_DIR}/plugins/foafprofiles
 
 # %files plugin-forumml
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/forumml.ini
