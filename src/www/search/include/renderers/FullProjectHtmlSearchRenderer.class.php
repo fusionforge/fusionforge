@@ -3,6 +3,7 @@
  * Search Engine
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -83,7 +84,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function writeBody() {
 		$title = _('Entire project search');
-		site_project_header(array('title' => $title, 'group' => $this->groupId, 'toptab' => ''));
+		site_project_header(array('title' => $title, 'group' => $this->groupId, 'toptab' => 'home'));
 		echo $this->getResult();
 	}
 
