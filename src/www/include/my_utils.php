@@ -1,14 +1,28 @@
 <?php
-//
-// Codendi
-// Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
-// http://www.codendi.com
-//
-//
-//
-//      Originally written by Laurent Julliard 2001, 2002, Codendi Team, Xerox
-//
-
+/**
+ *
+ * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Originally written by Laurent Julliard 2001, 2002, Codendi Team, Xerox
+ * http://www.codendi.com
+ *
+ *
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 /*
   Function that generates hide/show urls to expand/collapse
@@ -29,6 +43,7 @@ Output:
   $hide_flag: true if the section must be hidden, false otherwise
 
 */
+
 function my_hide_url ($svc, $db_item_id, $item_id, $count, $hide) {
 
     $pref_name = 'my_hide_'.$svc.$db_item_id;
@@ -77,21 +92,25 @@ function my_hide_url ($svc, $db_item_id, $item_id, $count, $hide) {
 }
 
 function my_hide($svc, $db_item_id, $item_id, $hide) {
-    $pref_name = 'my_hide_'.$svc.$db_item_id;
-    $old_pref_value = UserManager::instance()->getCurrentUser()->getPreference($pref_name);
-    list($old_hide,$old_count) = explode('|', $old_pref_value);
+	$pref_name = 'my_hide_'.$svc.$db_item_id;
+	$old_pref_value = UserManager::instance()->getCurrentUser()->getPreference($pref_name);
+	if ($old_pref_value)
+		list($old_hide, $old_count) = explode('|', $old_pref_value);
 
-    // Make sure they are both 0 if never set before
-    if ($old_hide == false) { $old_hide = 0; }
+	if (!isset($old_hide))
+		$old_hide = false;
 
-    if ($item_id == $db_item_id) {
-                if (!isset($hide)) {
-                    $hide = $old_hide;
-                }
-    } else {
-                $hide = $old_hide;
-    }
-    return $hide;
+	// Make sure they are both 0 if never set before
+	if ($old_hide == false) { $old_hide = 0; }
+
+	if ($item_id == $db_item_id) {
+			if (!isset($hide)) {
+			$hide = $old_hide;
+			}
+	} else {
+			$hide = $old_hide;
+	}
+	return $hide;
 }
 
 function my_format_as_flag($assigned_to, $submitted_by, $multi_assigned_to=null) {
