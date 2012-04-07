@@ -292,7 +292,7 @@ $addToNewProjectsTableTitle[] = _('Name');
 $addToNewProjectsTableTitle[] = _('Unix name');
 $addToNewProjectsTableTitle[] = _('Operations');
 $addToNewProjectsTableTitle[] = _('Select role');
-$fullListProjectsQueryResult = db_query_params('SELECT group_id from groups where status = $1', array('A'));
+$fullListProjectsQueryResult = db_query_params('SELECT group_id from groups where status = $1 and is_template = 0', array('A'));
 if ($fullListProjectsQueryResult) {
 	echo $GLOBALS['HTML']->listTableTop($addToNewProjectsTableTitle);
 	while ($projectQueryResult = db_fetch_array($fullListProjectsQueryResult)) {
