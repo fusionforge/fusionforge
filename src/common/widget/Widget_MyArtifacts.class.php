@@ -21,6 +21,7 @@
  */
 
 require_once('Widget.class.php');
+require_once('common/include/utils.php');
 require_once('common/tracker/ArtifactTypeFactory.class.php');
 require_once('common/tracker/ArtifactsForUser.class.php');
 require_once('common/tracker/Artifact.class.php');
@@ -133,7 +134,7 @@ class Widget_MyArtifacts extends Widget {
 			$html_my_artifacts .= $this->_display_artifacts($my_artifacts, 1);
 		} else {
 			$html_my_artifacts .= '<tr><td colspan="3">' .
-			    _("You have no artifacts") . '</td></tr>';
+			    _("You have no artifacts.") . '</td></tr>';
 		}
 		$html_my_artifacts .= '<tr><td colspan="3">'.(($this->_artifact_show == 'N' || count($my_artifacts) > 0)?' ':_("None")).'</td></tr>';
 		$html_my_artifacts .= '</table>';
@@ -172,7 +173,7 @@ class Widget_MyArtifacts extends Widget {
 		$tracker_name = "";
 
 		$artifact_types = array();
-		$allIds=array();
+		$allIds = array();
 
 		$pm = ProjectManager::instance();
 		foreach ($list_trackers as $trackers_array ) {
@@ -190,10 +191,13 @@ class Widget_MyArtifacts extends Widget {
 				//work on the tracker of the last round if there was one
 				if ($atid != $atid_old && $count_aids != 0) {
 					list($hide_now,$count_diff,$hide_url) =
-						my_hide_url('artifact',$atid_old,$hide_item_id,$count_aids,$hide_artifact);
+						my_hide_url('artifact', $atid_old, $hide_item_id, $count_aids, $hide_artifact);
 					$html_hdr =  '<tr class="boxitem"><td colspan="3">' .
-						$hide_url.'<a href="/tracker/?group_id='.$group_id_old.'&amp;atid='.$atid_old.'">'.
-						$group_name." - ".$tracker_name.'</a>    ';
+						$hide_url.
+						util_make_link('/tracker/?group_id='.$group_id_old, $group_name, array('class'=>'tabtitle-nw', 'title'=>_('Browse Trackers List for this project'))).
+						' - '.
+						util_make_link('/tracker/?group_id='.$group_id_old.'&amp;atid='.$atid_old, $tracker_name, array('class'=>'tabtitle', 'title'=>_('Browse this tracker for this project'))).
+						'    ';
 					$count_new = max(0, $count_diff);
 
 					$html_hdr .= my_item_count($count_aids,$count_new).'</td></tr>';
@@ -228,14 +232,22 @@ class Widget_MyArtifacts extends Widget {
 
 					// Form the 'Submitted by/Assigned/Monitored_by to flag' for marking
 					$AS_flag = '';
+					$AS_title = '';
 					if($trackers_array->getAssignedTo()== user_getid()) {
 						$AS_flag .= 'A';
+						$AS_title .= _('Assigned');
 					}
 					if ($trackers_array->getSubmittedBy()== user_getid()) {
 						$AS_flag .= 'S';
+						if (strlen($AS_title))
+							$AS_title .= ' / ';
+						$AS_title .= _('Submitted');
 					}
 					if ($trackers_array->isMonitoring()) {
 						$AS_flag .= 'M';
+						if (strlen($AS_title))
+							$AS_title .= ' / ';
+						$AS_title .= _('Monitored');
 					}
 					if (!strlen($AS_flag)) {
 						$AS_flag .= 'N';
@@ -245,10 +257,9 @@ class Widget_MyArtifacts extends Widget {
 						$html .= '
 							<tr '. $HTML->boxGetAltRowStyle($count_aids) .'>'.
 							'<td class="priority'.$trackers_array->getPriority().'">'.$trackers_array->getPriority().'</td>'.
-							'<td><a href="/tracker/?func=detail&amp;group_id='.
-							$group_id.'&amp;aid='.$aid.'&amp;atid='.$atid.
-							'">'. stripslashes($summary).'</a></td>'.
-							'<td class="small">';
+							'<td>'.util_make_link('/tracker/?func=detail&amp;group_id='.$group_id.'&amp;aid='.$aid.'&amp;atid='.$atid, stripslashes($summary), array("class"=>"tabtitle", "title"=>_('Browse this artefact'))).
+							'</td>'.
+							'<td class="small tabtitle-ne" title="'.$AS_title.'">';
 						$html .= '&nbsp;'.$AS_flag.'</td></tr>';
 
 					}
