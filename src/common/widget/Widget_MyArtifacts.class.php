@@ -21,18 +21,19 @@
  */
 
 require_once('Widget.class.php');
-require_once('common/include/utils.php');
-require_once('common/tracker/ArtifactTypeFactory.class.php');
-require_once('common/tracker/ArtifactsForUser.class.php');
-require_once('common/tracker/Artifact.class.php');
-require_once('common/tracker/ArtifactFile.class.php');
-require_once('common/tracker/ArtifactType.class.php');
-require_once('common/tracker/ArtifactCanned.class.php');
+require_once $gfcommon.'include/utils.php';
+require_once $gfwww.'include/html.php';
+require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
+require_once $gfcommon.'tracker/ArtifactsForUser.class.php';
+require_once $gfcommon.'tracker/Artifact.class.php';
+require_once $gfcommon.'tracker/ArtifactFile.class.php';
+require_once $gfcommon.'tracker/ArtifactType.class.php';
+require_once $gfcommon.'tracker/ArtifactCanned.class.php';
 
 /**
  * Widget_MyArtifacts
  *
- * Artifact assigned to or submitted by this person
+ * Artifact assigned to or submitted by or monitored by this person
  */
 class Widget_MyArtifacts extends Widget {
 	var $_artifact_show;
@@ -92,16 +93,16 @@ class Widget_MyArtifacts extends Widget {
 	}
 
 	function getPreferences() {
-		$prefs  = '';
-		$prefs .= _("Display artifacts:").' <select name="show">';
-		$prefs .= '<option value="A"  '.($this->_artifact_show === 'A'?'selected="selected"':'').'>'._("assigned to me [A]");
-		$prefs .= '<option value="S"  '.($this->_artifact_show === 'S'?'selected="selected"':'').'>'._("submitted by me [S]");
-		$prefs .= '<option value="M"  '.($this->_artifact_show === 'M'?'selected="selected"':'').'>'._("monitored by me [M]");
-		$prefs .= '<option value="AS" '.($this->_artifact_show === 'AS'?'selected="selected"':'').'>'._("assigned to or submitted by me [AS]");
-		$prefs .= '<option value="AM" '.($this->_artifact_show === 'AM'?'selected="selected"':'').'>'._("assigned to or monitored by me [AM]");
-		$prefs .= '<option value="SM" '.($this->_artifact_show === 'SM'?'selected="selected"':'').'>'._("submitted by or monitored by me [SM]");
-		$prefs .= '<option value="ASM" '.($this->_artifact_show === 'ASM'?'selected="selected"':'').'>'._("assigned to or submitted by or monitored by me [ASM]");
-		$prefs .= '</select>';
+		$optionsArray = array('A','S','M','AS','AM','SM', 'ASM');
+		$textsArray = array();
+		$textsArray[] = _('assigned to me'.' [A]');
+		$textsArray[] = _('submitted by me'.' [S]');
+		$textsArray[] = _('monitored by me'.' [M]');
+		$textsArray[] = _('assigned to or submitted by me'.' [AS]');
+		$textsArray[] = _('assigned to or monitored by me'.' [AM]');
+		$textsArray[] = _('submitted by or monitored by me'.' [SM]');
+		$textsArray[] = _('assigned to or submitted by or monitored by me'.' [ASM]');
+		$prefs = _("Display artifacts:").html_build_select_box_from_arrays($optionsArray, $textsArray, "show", $this->_artifact_show);
 		return $prefs;
 	}
 
@@ -271,8 +272,11 @@ class Widget_MyArtifacts extends Widget {
 		if ($atid_old != 0 && $count_aids != 0) {
 			list($hide_now,$count_diff,$hide_url) = my_hide_url('artifact',$atid_old,$hide_item_id,$count_aids,$hide_artifact);
 			$html_hdr = ($j ? '<tr class="boxitem"><td colspan="3">' : '').
-				$hide_url.'<a href="/tracker/?group_id='.$group_id_old.'&amp;atid='.$atid_old.'">'.
-				$group_name." - ".$tracker_name.'</a>    ';
+				$hide_url.
+				util_make_link('/tracker/?group_id='.$group_id_old, $group_name, array('class'=>'tabtitle-nw', 'title'=>_('Browse Trackers List for this project'))).
+				' - '.
+				util_make_link('/tracker/?group_id='.$group_id_old.'&amp;atid='.$atid_old, $tracker_name, array('class'=>'tabtitle', 'title'=>_('Browse this tracker for this project'))).
+				'    ';
 			$count_new = max(0, $count_diff);
 
 			$html_hdr .= my_item_count($count_aids,$count_new).'</td></tr>';
@@ -286,7 +290,7 @@ class Widget_MyArtifacts extends Widget {
 	}
 
 	function getDescription() {
-		return _("List artifacts you have submitted or assigned to you, by project.");
+		return _("List artifacts you have submitted or assigned to you or you are monitoring, by project.");
 	}
 }
 
