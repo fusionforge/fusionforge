@@ -39,7 +39,7 @@ class Widget_MyArtifacts extends Widget {
 		$this->Widget('myartifacts');
 		$this->_artifact_show = UserManager::instance()->getCurrentUser()->getPreference('my_artifacts_show');
 		if($this->_artifact_show === false) {
-			$this->_artifact_show = 'AS';
+			$this->_artifact_show = 'ASM';
 			UserManager::instance()->getCurrentUser()->setPreference('my_artifacts_show', $this->_artifact_show);
 		}
 	}
@@ -50,7 +50,7 @@ class Widget_MyArtifacts extends Widget {
 
 	function updatePreferences(&$request) {
 		$request->valid(new Valid_String('cancel'));
-		$vShow = new Valid_WhiteList('show', array('A', 'S', 'N', 'AS'));
+		$vShow = new Valid_WhiteList('show', array('A', 'S', 'M', 'N', 'AS', 'AM', 'SM', 'ASM'));
 		$vShow->required();
 		if (!$request->exist('cancel')) {
 			if ($request->valid($vShow)) {
@@ -61,12 +61,24 @@ class Widget_MyArtifacts extends Widget {
 					case 'S':
 						$this->_artifact_show = 'S';
 						break;
+					case 'M':
+						$this->_artifact_show = 'M';
+						break;
 					case 'N':
 						$this->_artifact_show = 'N';
 						break;
 					case 'AS':
-					default:
 						$this->_artifact_show = 'AS';
+						break;
+					case 'AM':
+						$this->_artifact_show = 'AM';
+						break;
+					case 'SM':
+						$this->_artifact_show = 'SM';
+						break;
+					case 'ASM':
+					default:
+						$this->_artifact_show = 'ASM';
 				}
 				UserManager::instance()->getCurrentUser()->setPreference('my_artifacts_show', $this->_artifact_show);
 			}
@@ -83,7 +95,11 @@ class Widget_MyArtifacts extends Widget {
 		$prefs .= _("Display artifacts:").' <select name="show">';
 		$prefs .= '<option value="A"  '.($this->_artifact_show === 'A'?'selected="selected"':'').'>'._("assigned to me [A]");
 		$prefs .= '<option value="S"  '.($this->_artifact_show === 'S'?'selected="selected"':'').'>'._("submitted by me [S]");
+		$prefs .= '<option value="M"  '.($this->_artifact_show === 'M'?'selected="selected"':'').'>'._("monitored by me [M]");
 		$prefs .= '<option value="AS" '.($this->_artifact_show === 'AS'?'selected="selected"':'').'>'._("assigned to or submitted by me [AS]");
+		$prefs .= '<option value="AM" '.($this->_artifact_show === 'AM'?'selected="selected"':'').'>'._("assigned to or monitored by me [AM]");
+		$prefs .= '<option value="SM" '.($this->_artifact_show === 'SM'?'selected="selected"':'').'>'._("submitted by or monitored by me [SM]");
+		$prefs .= '<option value="ASM" '.($this->_artifact_show === 'ASM'?'selected="selected"':'').'>'._("assigned to or submitted by or monitored by me [ASM]");
 		$prefs .= '</select>';
 		return $prefs;
 	}
@@ -91,17 +107,26 @@ class Widget_MyArtifacts extends Widget {
 	function getContent() {
 		$html_my_artifacts = '<table style="width:100%">';
 		$atf = new ArtifactsForUser(@UserManager::instance()->getCurrentUser());
-		$assigned = $atf->getAssignedArtifactsByGroup();
-		$submitted = $atf->getSubmittedArtifactsByGroup();
-		$all = $atf->getArtifactsFromSQLWithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR  av.assigned_to=$1) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
-		if($this->_artifact_show == 'AS'){
-			$my_artifacts=$all;
+		if ($this->_artifact_show == 'ASM'){
+			$my_artifacts = $atf->getArtifactsFromSQLWithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.assigned_to=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
 		}
-		if($this->_artifact_show== 'S') {
-			$my_artifacts=$submitted;
+		if ($this->_artifact_show == 'AS'){
+			$my_artifacts = $atf->getArtifactsFromSQLWithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.assigned_to=$1) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
 		}
-		if($this->_artifact_show== 'A') {
-			$my_artifacts=$assigned;
+		if ($this->_artifact_show == 'AM'){
+			$my_artifacts = $atf->getArtifactsFromSQLWithParams('SELECT * FROM artifact_vw av where (av.assigned_to=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
+		}
+		if ($this->_artifact_show == 'SM'){
+			$my_artifacts = $atf->getArtifactsFromSQLWithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
+		}
+		if ($this->_artifact_show== 'S') {
+			$my_artifacts = $atf->getSubmittedArtifactsByGroup();
+		}
+		if ($this->_artifact_show== 'A') {
+			$my_artifacts = $atf->getAssignedArtifactsByGroup();
+		}
+		if ($this->_artifact_show== 'M') {
+			$my_artifacts = $atf->getArtifactsFromSQLWithParams('SELECT * FROM artifact_vw av where (av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));;
 		}
 
 		if (count($my_artifacts) > 0) {
@@ -201,21 +226,19 @@ class Widget_MyArtifacts extends Widget {
 
 				if (!$hide_now && $aid != $aid_old) {
 
-					// Form the 'Submitted by/Assigned to flag' for marking
-					if($trackers_array->getAssignedTo()== user_getid())
-					{
-						if($trackers_array->getSubmittedBy()== user_getid()) {
-							$AS_flag = 'AS';
-						}
-						else {
-							$AS_flag='A';
-						}
+					// Form the 'Submitted by/Assigned/Monitored_by to flag' for marking
+					$AS_flag = '';
+					if($trackers_array->getAssignedTo()== user_getid()) {
+						$AS_flag .= 'A';
 					}
-					elseif($trackers_array->getSubmittedBy()== user_getid()){
-						$AS_flag='S';
+					if ($trackers_array->getSubmittedBy()== user_getid()) {
+						$AS_flag .= 'S';
 					}
-					else {
-						$AS_flag='N';
+					if ($trackers_array->isMonitoring()) {
+						$AS_flag .= 'M';
+					}
+					if (!strlen($AS_flag)) {
+						$AS_flag .= 'N';
 					}
 
 					if($AS_flag !='N') {
