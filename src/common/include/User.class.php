@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -1657,6 +1658,27 @@ Enjoy the site.
 			return forge_check_perm_for_user($this, 'docman', $group_id, 'admin');
 			break;
 		}
+	}
+
+	/**
+	 * setAdminNotification - send an email to all admins (used in verify.php)
+	 *
+	 * @return	boolean	True
+	 */
+	function setAdminNotification() {
+		$admins = RBACEngine::getInstance()->getUsersByAllowedAction('forge_admin', -1);
+		foreach ($admins as $admin) {
+			$admin_email = $admin->getEmail();
+			setup_gettext_for_user($admin);
+			$message = sprintf(_('New User %1$s registered and validated
+Full Name:  %2$s
+Email: %3$s
+'),
+					$this->getUnixName() , $this->getRealName(), $this->getEmail());
+			util_send_message($admin_email, sprintf(_('New %1$s User'), forge_get_config ('forge_name')), $message);
+			setup_gettext_from_context();
+		}
+		return true;
 	}
 }
 
