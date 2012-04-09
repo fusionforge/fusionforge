@@ -686,8 +686,8 @@ class Group extends Error {
 
 		// Check that status transition is valid
 		if ($this->getStatus() != $status
-			&& !in_array($this->getStatus(). $status,$allowed_status_changes)) {
-			$this->setError(_('Invalid Status Change'));
+			&& !array_key_exists($this->getStatus(). $status, $allowed_status_changes)) {
+			$this->setError(_('Invalid Status Change From: ').$this->getStatus(). _(' To: '.$status);
 			return false;
 		}
 
