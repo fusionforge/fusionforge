@@ -4,6 +4,7 @@
  * GForge Cron Job
  *
  * The rest Copyright 2002-2005 (c) GForge Team
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -55,38 +56,36 @@ require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
 setup_gettext_from_sys_lang();
-define('USER_DEFAULT_GROUP','users');
+define('USER_DEFAULT_GROUP', 'users');
 //error variable
 $err = '';
 
 if (forge_get_config('groupdir_prefix') == '') {		// this should be set in configuration
-	exit () ;
+	exit();
 }
 
 if (!is_dir(forge_get_config('groupdir_prefix'))) {
-	@mkdir(forge_get_config('groupdir_prefix'),0755,true);
+	@mkdir(forge_get_config('groupdir_prefix'), 0755, true);
 }
 
 if (forge_get_config('homedir_prefix') == '') {		// this should be set in configuration
-	exit () ;
+	exit();
 }
 
 if (!is_dir(forge_get_config('homedir_prefix'))) {
-	@mkdir(forge_get_config('homedir_prefix'),0755,true);
+	@mkdir(forge_get_config('homedir_prefix'), 0755, true);
 }
 
-$active_projects = group_get_active_projects() ;
-$unames = array () ;
+$active_projects = group_get_active_projects();
+$unames = array();
 foreach ($active_projects as $project) {
 	foreach ($project->getUsers() as $u) {
-		$unames[] = $u->getUnixName() ;
+		$unames[] = $u->getUnixName();
 	}
 }
-$unames = array_unique ($unames) ;
+$unames = array_unique($unames);
 foreach($unames as $uname) {
-	if (is_dir(forge_get_config('homedir_prefix')."/".$uname)) {
-
-	} else {
+	if (!is_dir(forge_get_config('homedir_prefix')."/".$uname)) {
 		@mkdir(forge_get_config('homedir_prefix')."/".$uname);
 	}
 	system("chown $uname:".USER_DEFAULT_GROUP." ".forge_get_config('homedir_prefix')."/".$uname);
@@ -94,11 +93,11 @@ foreach($unames as $uname) {
 
 //test if the FTP upload dir exists and create it if not
 if (!is_dir(forge_get_config('ftp_upload_dir'))) {
-	@mkdir(forge_get_config('ftp_upload_dir'),0755,true);
+	@mkdir(forge_get_config('ftp_upload_dir'), 0755, true);
 }
 
 foreach($active_projects as $project) {
-	$groupname = $project->getUnixName() ;
+	$groupname = $project->getUnixName();
 	//create an FTP upload dir for this project
 	if (forge_get_config('use_ftp_uploads')) {
 		if (!is_dir(forge_get_config('ftp_upload_dir').'/'.$groupname)) {
@@ -106,9 +105,7 @@ foreach($active_projects as $project) {
 		}
 	}
 
-	if (is_dir(forge_get_config('groupdir_prefix')."/".$groupname)) {
-
-	} else {
+	if (!is_dir(forge_get_config('groupdir_prefix')."/".$groupname)) {
 		@mkdir(forge_get_config('groupdir_prefix')."/".$groupname);
 		@mkdir(forge_get_config('groupdir_prefix')."/".$groupname."/htdocs");
 		@mkdir(forge_get_config('groupdir_prefix')."/".$groupname."/cgi-bin");
@@ -116,47 +113,43 @@ foreach($active_projects as $project) {
 		//
 		//	Read in the template file
 		//
-		$fo=fopen(dirname(__FILE__).'/../utils/default_page.php','r');
+		$fo = fopen(dirname(__FILE__).'/../utils/default_page.php', 'r');
 		$contents = '';
 		if (!$fo) {
 			$err .= 'Default Page Not Found';
 		} else {
 			while (!feof($fo)) {
-    			$contents .= fread($fo, 8192);
+				$contents .= fread($fo, 8192);
 			}
 			fclose($fo);
 		}
 		//
 		//	Change some defaults in the template file
 		//
-		$contents=str_replace('##comment##', _('Default Web Page for groups that haven\'t setup their page yet'), $contents);
-		$contents=str_replace('##purpose##', _('Please replace this file with your own website'), $contents);
-		$contents=str_replace('##welcome_to##', sprintf(_('Welcome to %s'), $project->getPublicName()), $contents);
-		$contents=str_replace('##body##',
+		$contents = str_replace('##comment##', _('Default Web Page for groups that haven\'t setup their page yet'), $contents);
+		$contents = str_replace('##purpose##', _('Please replace this file with your own website'), $contents);
+		$contents = str_replace('##welcome_to##', sprintf(_('Welcome to %s'), $project->getPublicName()), $contents);
+		$contents = str_replace('##body##',
 			sprintf(
 				_("We're Sorry but this Project hasn't yet uploaded their personal webpage yet. <br /> Please check back soon for updates or visit <a href=\"%s\">the project page</a>."),
-				util_make_url ('/projects/'.$project->getUnixName())),
+				util_make_url('/projects/'.$project->getUnixName())),
 				      $contents);
 		//
 		//	Write the file back out to the project home dir
 		//
-		$fw=fopen(forge_get_config('groupdir_prefix')."/".$groupname."/htdocs/index.html",'w');
-		fwrite($fw,$contents);
+		$fw = fopen(forge_get_config('groupdir_prefix')."/".$groupname."/htdocs/index.html", 'w');
+		fwrite($fw, $contents);
 		fclose($fw);
 	}
 
 	if (forge_get_config('use_manual_uploads')) {
-		$incoming = forge_get_config('groupdir_prefix')/$groupname."/incoming" ;
-		if (!is_dir($incoming))
-		{
+		$incoming = forge_get_config('groupdir_prefix')."/".$groupname."/incoming";
+		if (!is_dir($incoming)) {
 			@mkdir($incoming);
 		}
 	}
-
-	system("chown -R ".forge_get_config('apache_user').":".forge_get_config('apache_group')." forge_get_config('groupdir_prefix')/$groupname");
-
+	system("chown -R ".forge_get_config('apache_user').":".forge_get_config('apache_group')." ".forge_get_config('groupdir_prefix')."/".$groupname);
 }
-
 
 cron_entry(25,$err);
 
