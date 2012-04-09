@@ -4,6 +4,7 @@
  * GForge Cron Job
  *
  * The rest Copyright 2002-2005 (c) GForge Team
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -146,14 +147,14 @@ foreach($active_projects as $project) {
 	}
 
 	if (forge_get_config('use_manual_uploads')) { 
-		$incoming = forge_get_config('groupdir_prefix')/$groupname."/incoming" ;
+		$incoming = forge_get_config('groupdir_prefix')."/".$groupname."/incoming" ;
 		if (!is_dir($incoming))
 		{
 			@mkdir($incoming); 
 		}
 	}
 
-	system("chown -R ".forge_get_config('apache_user').":".forge_get_config('apache_group')." forge_get_config('groupdir_prefix')/$groupname");
+	system("chown -R ".forge_get_config('apache_user').":".forge_get_config('apache_group')." ".forge_get_config('groupdir_prefix')."/".$groupname);
 
 }
 
