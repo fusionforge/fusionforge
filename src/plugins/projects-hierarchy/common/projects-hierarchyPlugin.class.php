@@ -175,7 +175,7 @@ class projects_hierarchyPlugin extends Plugin {
 		// value = list of sons
 		$tree = array();
 		while ($row = db_fetch_array($res)) {
-			if (forge_check_perm('project_read', $row['father_id'])) {
+			if (forge_check_perm('project_read', $row['father_id']) && forge_check_perm('project_read', $row['son_id'])) {
 				$tree[$row['father_id']][] = $row['son_id'];
 				//get the unix name of the project
 				$project_name[$row['father_id']][0] = $row['father_name'];
