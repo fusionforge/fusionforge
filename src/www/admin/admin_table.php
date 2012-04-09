@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -130,7 +131,7 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 	if ($unit == "supported_language") {
 		$result = db_numrows(db_query_params("SELECT language FROM users WHERE language=$1", array($id)));
 		if ($result > 0) {
-			echo '<div class="warning_msg">'.sprintf(_('You can\'t delete the language %1$s since it\'s currently referenced in a user profile.'), db_result(db_query_params ('select license_name from licenses where license_id = $1',
+			echo '<div class="warning_msg">'.sprintf(_('You can\'t delete the language %1$s since it\'s currently referenced in a user profile.'), db_result(db_query_params ('select language from users where language = $1',
 			array($id)), 0, 0)).'</div>';
 			return;
 		}
