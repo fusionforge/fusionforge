@@ -1,5 +1,6 @@
 <?php
 /**
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -38,12 +39,15 @@ require_once $gfwww.'export/rss_utils.inc';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
+$sysdebug_enable = false;
 
-if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group_id'])) {
-	$group_id = $_GET['group_id'];
+$group_id = getIntFromRequest('group_id');
+$limit = getIntFromRequest('limit', 10);
+if ($limit > 100) $limit = 100;
 
+if (isset($group_id) && !empty($group_id) && is_numeric($group_id)) {
+	session_require_perm('project_read', $group_id);
 	$group =& group_get_object($group_id);
-
 
 	//does group exist? do we get an object?
 	if (!$group || !is_object($group)) {
@@ -53,14 +57,11 @@ if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group
 	        beginFeed();
 		endOnError($group->getErrorMessage());
 	}
-    elseif (!session_check_perm ('project_read', $group_id)){
-		beginFeed();
-		endOnError('No RSS feed available as group status is set to private.');
-	}
-	$groupname = $group->getPublicName();
-	$link = "/docman/index.php?group_id=$group_id";
 
-    beginFeed($groupname,$link);
+	$groupname = $group->getPublicName();
+	$link = "/docman/index.php?group_id=".$group_id;
+
+	beginFeed($groupname, $link);
 
 	//does documentation exist? do we get a factory?
 	$df = new DocumentFactory($group);
@@ -68,22 +69,14 @@ if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group
 		endOnError($df->getErrorMessage());
 	}
 
-	$dgf = new DocumentGroupFactory($group);
-	if ($dgf->isError()) {
-		endOnError($dgf->getErrorMessage());
-	}
-	// Get the document groups info
-	$nested_groups =& $dgf->getNested();
-
 	$d_arr =& $df->getDocuments();
 
-	writeFeed($d_arr,$group_id, $nested_groups);
+	writeFeed($d_arr, $limit);
 	endFeed();
 
-}//no group_id in GET
-else {
+} else {
 	beginFeed();
-	displayError('Please supply a Group ID with the request.');
+	displayError(_('Please supply a Group ID with the request.'));
 	endFeed();
 }
 
@@ -99,20 +92,14 @@ function beginFeed($groupname = "", $link = "") {
 	print "  <link>http://".forge_get_config('web_host').$link."</link>\n";
 	print "  <description>".forge_get_config('forge_name')." Documents of \"".$groupname."\"</description>\n";
 	print "  <language>en-us</language>\n";
-	print "  <copyright>Copyright 2000-".date("Y")." ".forge_get_config('forge_name')."</copyright>\n";
+	print "  <copyright>Copyright ".date("Y")." ".forge_get_config('forge_name')."</copyright>\n";
 	print "  <webMaster>".forge_get_config('admin_email')."</webMaster>\n";
-	print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
+	print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-	print "  <image>\n";
-	print "    <url>http://".forge_get_config('web_host')."/images/bflogo-88.png</url>\n";
-	print "    <title>".forge_get_config('forge_name')." Developer</title>\n";
-	print "    <link>http://".forge_get_config('web_host')."/</link>\n";
-	print "    <width>124</width>\n";
-	print "    <heigth>32</heigth>\n";
-	print "  </image>\n";
+	print "  <generator>".forge_get_config ('forge_name')." RSS generator</generator>\n";
 }
 
-function writeFeed($d_arr, $group_id){
+function writeFeed($d_arr, $limit){
 
 	// ## default limit
 	//if (isset($limit) ||empty($limit)) $limit = 10;
@@ -124,17 +111,14 @@ function writeFeed($d_arr, $group_id){
 	}
 	$child_count = count($nested_groups["$parent_group"]);
 	*/
-	if (!$d_arr || count($d_arr) < 1) {
-		endOnError(_("No documents found in Document Manager"));
-
-	} else {
+	if ($d_arr && count($d_arr) > 1) {
 		//	Put the result set (list of documents for this group) into feed items
 
 		// ## item outputs
 		//$outputtotal = 0;
 		//loop through the documents
 		for ($j = 0; $j < count($d_arr); $j++) {
-			$link = (( $d_arr[$j]->isURL() ) ? $d_arr[$j]->getFileName() : "docman/view.php/".$d_arr[$j]->Group->getID()."/".$d_arr[$j]->getID()."/".$d_arr[$j]->getFileName() );
+			$link = (( $d_arr[$j]->isURL() ) ? $d_arr[$j]->getFileName() : "http://".forge_get_config('web_host')."/docman/view.php/".$d_arr[$j]->Group->getID()."/".$d_arr[$j]->getID()."/".$d_arr[$j]->getFileName() );
 
 			print "  <item>\n";
 			if (!is_object($d_arr[$j])) {
@@ -144,37 +128,35 @@ function writeFeed($d_arr, $group_id){
 						"<description>".rss_description($d_arr[$j]->getErrorMessage())."</decription>";
 			} else {
 				print "   <title>".$d_arr[$j]->getName()."</title>\n";
-				print "   <link>http://".forge_get_config('web_host')."/".$link."</link>\n";
-				print "   <category>".$d_arr[$j]->getDocGroupName()."</category>\n";
-
-				print "   <description>".
-						rss_description($d_arr[$j]->getDescription()).
-						" - Language: ". $d_arr[$j]->getLanguageName().
-						"</description>\n";
-
-				print "   <author>".$d_arr[$j]->getCreatorRealName()."</author>\n";
-				//print "   <comment></comment>\n";
-				//print "   <pubDate>".gmdate('D, d M Y G:i:s',time())." GMT</pubDate>\n";
+				print "   <link>".$link."</link>\n";
+				//print "   <category>".$d_arr[$j]->getDocGroupName()."</category>\n";
+				print "   <description>".rss_description($d_arr[$j]->getDescription())."</description>\n";
+				print "   <author>".trim($d_arr[$j]->getCreatorRealName())."</author>\n";
+				if ( $d_arr[$j]->getUpdated() ) {
+					$pubdate = date(_('Y-m-d H:i'), $d_arr[$j]->getUpdated());
+				} else {
+					$pubdate = date(_('Y-m-d H:i'), $d_arr[$j]->getCreated());
+				}
+				print "   <pubDate>".$pubdate."</pubDate>\n";
 				//print "   <guid></guid>\n";
 			}//else (everything ok)
 			print "  </item>\n";
 
-			//$outputtotal++;
-			//if ($outputtotal >= $limit) break;
+			if ($j >= $limit) break;
 		}//for loop
 	}//else (there are documents)
 }
 
 
 function displayError($errorMessage) {
-	print " <title>Error</title>".
-			"<description>".rss_description($errorMessage)."</description>";
+	print " <title>"._('Error')."</title>".
+		"<description>".rss_description($errorMessage)."</description>";
 }
 
 function endFeed() {
-			print '</channel></rss>';
-			exit();
-		}
+	print '</channel></rss>';
+	exit();
+}
 
 function endOnError($errorMessage) {
 	displayError($errorMessage);

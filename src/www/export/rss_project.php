@@ -1,8 +1,9 @@
 <?php
-/*
+/**
  * Copyright 1999-2000 (c) The SourceForge Crew
  * Copyright (C) 2009-2010 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -101,6 +102,12 @@ if ( ($project->usesNews() && forge_get_config('use_news')) ||
 if ($project->usesFRS() && forge_get_config('use_frs')) {
 	$string_rss_20 .= get_rss_feed_20 ("rss20_newreleases.php?group_id=" . $group_id,
 										$name.': ' . _('Project Releases'));
+}
+
+// RSS for project documents
+if ($project->usesDocman() && forge_get_config('use_docman')) {
+	$string_rss_20 .= get_rss_feed_20 ("rss20_docman.php?group_id=" . $group_id,
+										$name.': ' . _('Project Document Manager'));
 }
 
 ?>
