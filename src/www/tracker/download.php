@@ -60,7 +60,9 @@ if (!$ah || !is_object($ah)) {
 	} else {
 		Header('Content-disposition: filename="'.str_replace('"', '', $afh->getName()).'"');
 		Header("Content-type: ".$afh->getType());
-		echo $afh->getData();
+		header("Content-length: ".$afh->getSize());
+
+		readfile_chunked($afh->getFile());
 	}
 }
 

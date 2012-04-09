@@ -34,8 +34,7 @@ class ArtifactFileHtml extends ArtifactFile {
 			return false;
 		}
 		$size = @filesize($input_file);
-		$input_data = fread(fopen($input_file, 'r'), $size);
-		return $this->create($input_file_name,$input_file_type,$size,$input_data,$description);
+		return $this->create($input_file_name,$input_file_type,$size,$input_file,$description);
 	}
 
 }

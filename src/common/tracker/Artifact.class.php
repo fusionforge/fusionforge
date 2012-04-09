@@ -48,6 +48,7 @@ require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/ArtifactMessage.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
+require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 
 // This string is used when sending the notification mail for identifying the
 // user response
@@ -524,11 +525,16 @@ class Artifact extends Error {
 			db_rollback();
 			return false;
 		}
+
+		ArtifactStorage::instance()->deleteFromQuery('SELECT id FROM artifact_file WHERE artifact_id=$1',
+					array ($this->getID())) ;
+
 		$res = db_query_params ('DELETE FROM artifact_file WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError(_('Error deleting file from db: ').db_error());
 			db_rollback();
+			ArtifactStorage::instance()->rollback();
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM artifact_message WHERE artifact_id=$1',
@@ -536,6 +542,7 @@ class Artifact extends Error {
 		if (!$res) {
 			$this->setError(_('Error deleting message: ').db_error());
 			db_rollback();
+			ArtifactStorage::instance()->rollback();
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM artifact_history WHERE artifact_id=$1',
@@ -543,6 +550,7 @@ class Artifact extends Error {
 		if (!$res) {
 			$this->setError(_('Error deleting history: ').db_error());
 			db_rollback();
+			ArtifactStorage::instance()->rollback();
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM artifact_monitor WHERE artifact_id=$1',
@@ -550,6 +558,7 @@ class Artifact extends Error {
 		if (!$res) {
 			$this->setError(_('Error deleting monitor: ').db_error());
 			db_rollback();
+			ArtifactStorage::instance()->rollback();
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM artifact WHERE artifact_id=$1',
@@ -557,6 +566,7 @@ class Artifact extends Error {
 		if (!$res) {
 			$this->setError(_('Error deleting artifact: ').db_error());
 			db_rollback();
+			ArtifactStorage::instance()->rollback();
 			return false;
 		}
 
@@ -567,6 +577,7 @@ class Artifact extends Error {
 			if (!$res) {
 				$this->setError(_('Error updating artifact counts: ').db_error());
 				db_rollback();
+				ArtifactStorage::instance()->rollback();
 				return false;
 			}
 		} elseif ($this->getStatusID() == 2) {
@@ -576,11 +587,13 @@ class Artifact extends Error {
 			if (!$res) {
 				$this->setError(_('Error updating artifact counts: ').db_error());
 				db_rollback();
+				ArtifactStorage::instance()->rollback();
 				return false;
 			}
 		}
 
 		db_commit();
+		ArtifactStorage::instance()->commit();
 		return true;
 	}
 
