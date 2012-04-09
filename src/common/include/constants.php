@@ -3,6 +3,7 @@
  * FusionForge constants
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -61,6 +62,7 @@ define('MAIL__MAILING_LIST_IS_REQUESTED', '1');
 define('MAIL__MAILING_LIST_IS_CREATED', '2');
 define('MAIL__MAILING_LIST_IS_CONFIGURED', '3');
 define('MAIL__MAILING_LIST_PW_RESET_REQUESTED', '4');
+define('MAIL__MAILING_LIST_IS_UPDATED', '5');
 
 define('MAIL__MAILING_LIST_NAME_MIN_LENGTH', 4);
 
