@@ -6,6 +6,7 @@
  * Copyright 2009-2010, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -685,7 +686,7 @@ class Group extends Error {
 
 		// Check that status transition is valid
 		if ($this->getStatus() != $status
-			&& !$allowed_status_changes[$this->getStatus().$status]) {
+			&& !in_array($this->getStatus(). $status,$allowed_status_changes)) {
 			$this->setError(_('Invalid Status Change'));
 			return false;
 		}
