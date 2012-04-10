@@ -508,24 +508,25 @@ class FRSPackage extends Error {
 	}
 
 	public function createNewestReleaseFilesAsZip(){
-		$zip = new ZipArchive();
 		$release = $this->getNewestRelease();
+		if ($release) {
+			$zip = new ZipArchive();
+			$zipPath = $this->getNewestReleaseZipPath();
+			$filesPath = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$release->getFileName();
 
-		$zipPath = $this->getNewestReleaseZipPath();
-		$filesPath = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$release->getFileName();
+			if ($zip->open($zipPath, ZIPARCHIVE::OVERWRITE)!==true) {
+				exit_error(_('Cannot open the file archive.').' '.$zipPath.'.');
+			}
 
-		if ($zip->open($zipPath, ZIPARCHIVE::OVERWRITE)!==true) {
-			exit_error(_('Cannot open the file archive.').' '.$zipPath.'.');
+			$files = $release->getFiles();
+
+			foreach ($files as $f) {
+				$filePath = $filesPath.'/'.$f->getName();
+				$zip->addFile($filePath,$f->getName());
+			}
+
+			$zip->close();
 		}
-
-		$files = $release->getFiles();
-
-		foreach ($files as $f) {
-			$filePath = $filesPath.'/'.$f->getName();
-			$zip->addFile($filePath,$f->getName());
-		}
-
-		$zip->close();
 	}
 
 }
