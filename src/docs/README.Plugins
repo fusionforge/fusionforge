@@ -512,6 +512,16 @@ TODO : document Auth plugins :
   Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, $params['xml'] already returned xml bits
   Description: returns in $params['prefixes'] and $params['xml'] added prefixes and added bits of RDF+XML to be included in the project's DOAP description 
 
+  Hook Name  : role_adduser
+  Parameters : $params['user'] : user added to the role, $params['role'] : role added to the user
+  Locations  : common/include/RBAC.php
+  Description: Called when a role is added to an user.
+
+  Hook Name  : role_removeuser
+  Parameters : $params['user'] : user removed to the role, $params['role'] : role removed to the user
+  Locations  : common/include/RBAC.php
+  Description: Called when a role is removed to an user.
+
 TODO (nerville) : document display_hierarchy
 TODO (lolando ?) : document role_normalize, role_translate_strings, role_has_permission, role_get_setting, list_roles_by_permission 
 TODO : document project_link_with_tooltip
