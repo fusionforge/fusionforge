@@ -927,7 +927,14 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	}
 
 	public function addUser ($user) {
-		return $this->addUsers (array ($user)) ;
+		if (!$this->addUsers (array ($user))) {
+			return false;
+		}
+		$hook_params['user'] = $user;
+		$hook_params['role'] = $this;
+		plugin_hook ("role_adduser", $hook_params);
+
+		return true;
 	}
 
 	public function removeUsers($users) {
@@ -952,7 +959,14 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	}
 
 	public function removeUser ($user) {
-		return $this->removeUsers (array ($user)) ;
+		if(!$this->removeUsers (array ($user))){
+			return false;
+		}
+		$hook_params['user'] = $user;
+		$hook_params['role'] = $this;
+		plugin_hook ("role_removeuser", $hook_params);
+
+		return true;
 	}
 
 	public function getUsers() {
