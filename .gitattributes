@@ -2239,7 +2239,6 @@ src/plugins/oauthprovider/www/request_tokens.php -text
 src/plugins/oauthprovider/www/token_authorize.php -text
 src/plugins/oauthprovider/www/token_delete.php -text
 src/plugins/oauthprovider/www/token_deny.php -text
-src/plugins/online_help/common/online_help-init.php -text
 src/plugins/online_help/common/online_helpPlugin.class.php -text
 src/plugins/online_help/etc/online_help.ini -text
 src/plugins/online_help/www/ar01s01s01.html -text
