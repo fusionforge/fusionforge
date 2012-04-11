@@ -259,7 +259,7 @@ class SVNPlugin extends SCMPlugin {
 
 		if (forge_get_config('use_ssh', 'scmsvn')) {
 			$unix_group = 'scm_' . $project->getUnixName();
-			system("find $repo -type d | xargs chmod g+s");
+			system("find $repo -type d | xargs -I{} chmod g+s {}");
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$unix_user = forge_get_config('apache_user');
 				system("chown -R $unix_user:$unix_group $repo");

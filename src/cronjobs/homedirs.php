@@ -148,6 +148,7 @@ foreach($active_projects as $project) {
 			@mkdir($incoming);
 		}
 	}
+
 	system("chown -R ".forge_get_config('apache_user').":".forge_get_config('apache_group')." ".forge_get_config('groupdir_prefix')."/".$groupname);
 }
 
