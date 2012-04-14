@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +27,7 @@ global $mantisbt; // the mantisbt object
 global $group; // the group object
 
 $confArr = array();
+$confArr['globalconf'] = getIntFromRequest('global_conf');
 $confArr['url'] = getStringFromRequest('url');
 $confArr['sync_roles'] = 0;
 $confArr['soap_user'] = getStringFromRequest('soap_user');

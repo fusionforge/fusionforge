@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Fabien Dubois - Capgemini
  * Copyright 2009-2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -435,23 +435,36 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function initialize($group_id, $confArr) {
+		if ($confArr['globalconf']) {
+			$globalConfArr = $this->getGlobalconf();
+			$confArr['url'] = $globalConfArr['url'];
+			$confArr['soap_user'] = $globalConfArr['soap_user'];
+			$confArr['soap_password'] = $globalConfArr['soap_password'];
+		}
 		if ($confArr['mantisbtcreate']) {
 			$idProjectMantis = $this->addProjectMantis($group_id, $confArr);
-		} else {
+		} elseif ($confArr['mantisbtname'] && sizeof($confArr['mantisbtname'])) {
 			$idProjectMantis = $this->getProjectMantisByName($group_id, $confArr);
+		} else {
+			$groupObject = group_get_object($group_id);
+			$groupObject->setError('initialize::Error: '. _('MantisBT project not initialized, missing params'));
 		}
-		if ($idProjectMantis) {
-			$result = db_query_params('insert into plugin_mantisbt (id_group, id_mantisbt, url, soap_user, soap_password, sync_roles)
-							values ($1, $2, $3, $4, $5, $6)',
+
+		if (isset($idProjectMantis) && $idProjectMantis) {
+			$result = db_query_params('insert into plugin_mantisbt (id_group, id_mantisbt, url, soap_user, soap_password, sync_roles, use_global)
+							values ($1, $2, $3, $4, $5, $6, $7)',
 							array($group_id,
 								$idProjectMantis,
 								$confArr['url'],
 								$confArr['soap_user'],
 								$confArr['soap_password'],
-								$confArr['sync_roles']));
-			if (!$result)
+								$confArr['sync_roles'],
+								$confArr['globalconf']));
+			if (!$result) {
+				$groupObject = group_get_object($group_id);
+				$groupObject->setError('initialize::Error: '. db_error());
 				return false;
-
+			}
 			return true;
 		}
 		return false;
@@ -536,7 +549,7 @@ class MantisBTPlugin extends Plugin {
 				return $mantisbtProject->id;
 			}
 		}
-		$groupObject->setError('getProjectMantisByName::Error: mantisbt project not found');
+		$groupObject->setError('getProjectMantisByName::Error: '. _('MantisBT project not found'));
 		return false;
 	}
 
