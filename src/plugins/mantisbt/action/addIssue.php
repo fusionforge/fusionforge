@@ -3,6 +3,7 @@
  * MantisBT Plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,7 +31,7 @@ global $type;
 
 $defect = array();
 
-$defect['category'] = $_POST['categorie'];
+$defect['category'] = getStringFromRequest('categorie');
 $defect['project']['id'] = $mantisbtConf['id_mantisbt'];
 
 try {
@@ -43,11 +44,11 @@ try {
 	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array("username" => $username, "password" => $password));
 	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
 } catch (SoapFault $soapFault) {
-	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
 	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname=mantisbt&view=viewIssues&error_msg='.urlencode($feedback));
 }
 foreach($listSeverities as $key => $severity){
-	if ($_POST['severite'] == $severity->name){
+	if (getStringFromRequest('severite') == $severity->name){
 		$defect['severity']['id'] = $severity->id;
 		$defect['severity']['name'] = $severity->name;
 		break;
@@ -55,7 +56,7 @@ foreach($listSeverities as $key => $severity){
 }
 
 foreach($listReproducibilities as $key => $reproducibility){
-	if ($_POST['reproductibilite'] == $reproducibility->name){
+	if (getStringFromRequest('reproductibilite') == $reproducibility->name){
 		$defect['reproducibility']['id'] = $reproducibility->id;
 		$defect['reproducibility']['name'] = $reproducibility->name;
 		break;
@@ -79,10 +80,10 @@ foreach($listViewStates as $key => $viewState){
 	}
 }
 
-if ($_POST['handler'] != ''){
+if (getStringFromRequest('handler') != ''){
 	$listUsers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis, "acces" => 10));
 	foreach($listUsers as $key => $mantisuser){
-		if ($_POST['handler'] == $mantisuser->name){
+		if (getStringFromRequest('handler') == $mantisuser->name){
 			$defect['handler']['id'] = $mantisuser->id;
 			$defect['handler']['name'] = $mantisuser->name;
 			$defect['handler']['email'] = $mantisuser->email;
@@ -92,7 +93,7 @@ if ($_POST['handler'] != ''){
 }
 
 foreach($listPriorities as $key => $priority){
-	if ($_POST['priorite'] == $priority->name){
+	if (getStringFromRequest('priorite') == $priority->name){
 		$defect['priority']['id'] = $priority->id;
 		$defect['priority']['name'] = $priority->name;
 		break;
@@ -115,21 +116,14 @@ foreach($listStatus as $key => $status){
 	}
 }
 
-$defect['description'] = $_POST['description'];
-$defect['summary'] = $_POST['resume'];
-
-
-if (isset($_POST['informations'])){
-	$defect['additional_information'] = $_POST['informations'];
-}
-
-if (isset($_POST['version'])) {
-	$defect['version'] = $_POST['version'];
-}
+$defect['description'] = getStringFromRequest('description');
+$defect['summary'] = getStringFromRequest('resume');
+$defect['additional_information'] = getStringFromRequest('informations');
+$defect['version'] = getStringFromRequest('version');
 
 try {
 	$newIdBug = $clientSOAP->__soapCall('mc_issue_add', array("username" => $username, "password" => $password, "issue" => $defect));
-	$feedback = _('Ticket '.$newIdBug.' created successfully');
+	$feedback = _('Ticket '.$newIdBug.' created successfully.');
 	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$newIdBug.'&view=viewIssue&feedback='.urlencode($feedback));
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed:').' '.$soapFault->faultstring;

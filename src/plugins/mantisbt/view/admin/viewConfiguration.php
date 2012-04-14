@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +26,7 @@ global $HTML;
 global $mantisbt;
 global $mantisbtConf;
 global $use_tooltips;
+global $group_id;
 
 ?>
 <script type="text/javascript">
@@ -56,7 +57,7 @@ echo '<table>';
 echo '<tr><td><label id="mantisbtinit-global" ';
 if ($use_tooltips)
 	echo 'title="'._('Use the global configuration defined at forge level').'"';
-echo ' >'._('Use global configuration').'</label></td><td><input id="mantisbtglobalconf" type="checkbox" name="global_conf" ';
+echo ' >'._('Use global configuration').'</label></td><td><input id="mantisbtglobalconf" type="checkbox" name="global_conf" value="1" ';
 if ($mantisbtConf['use_global']) {
 	echo 'checked="checked" ';
 }

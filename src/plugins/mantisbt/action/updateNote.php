@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -44,9 +45,7 @@ foreach($defect->notes as $key => $note){
 	}
 }
 
-if (isset($_POST['edit_texte_note'])){
-	$noteEdit->text = $_POST['edit_texte_note'];
-}
+$noteEdit->text = getStringFromRequest('edit_texte_note');
 
 foreach($listViewStates as $state){
 	if (($state->id == 50 && $actionNote == "private") || ($state->id == 10 && $actionNote == "public")){
@@ -63,7 +62,7 @@ try {
 	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($error_msg));
 }
 
-$feedback = _('Task succeeded');
+$feedback = _('Task succeeded.');
 session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
 
 ?>

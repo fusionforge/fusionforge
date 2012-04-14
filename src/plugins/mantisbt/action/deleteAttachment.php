@@ -33,13 +33,13 @@ if ($idAttachment) {
 	try {
 		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 		$clientSOAP->__soapCall('mc_issue_attachment_delete', array("username" => $username, "password" => $password, "issue_attachment_id" => $idAttachment));
-		$feedback = _('Attachment deleted successfully');
+		$feedback = _('Attachment deleted successfully.');
 	} catch (SoapFault $soapFault) {
 		$error_msg = _('Task failed:').' '.$soapFault->faultstring;
 		session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($error_msg));
 	}
 	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
 }
-$warning_msg = _('Missing Attachment ID to delete');
+$warning_msg = _('Missing Attachment ID to delete.');
 session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&warning_msg='.urlencode($warning_msg));
 ?>

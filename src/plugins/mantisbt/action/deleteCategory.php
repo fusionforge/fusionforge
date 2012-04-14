@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,20 +27,20 @@ global $mantisbtConf;
 global $username;
 global $password;
 
-$deleteCategory = $_POST['deleteCategory'];
+$deleteCategory = getStringFromRequest('deleteCategory');
 
 if ($deleteCategory) {
     try {
 	    $clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 	    $clientSOAP->__soapCall('mc_project_delete_category', array("username" => $username, "password" => $password, "p_project_id" => $mantisbtConf['id_mantisbt'], "p_category_name" => $deleteCategory));
     } catch (SoapFault $soapFault) {
-        $msg = _('Error:').' '.$soapFault->faultstring;
+        $msg = _('Task failed:').' '.$soapFault->faultstring;
         session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
     }
-    $feedback = sprintf(_('Category %s deleted successfully'), $deleteCategory);
+    $feedback = sprintf(_('Category %s deleted successfully.'), $deleteCategory);
     session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
 } else {
-    $warning = _('Missing parameters to delete category');
+    $warning = _('Missing parameters to delete category.');
     session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&warning_msg='.urlencode($warning));
 }
 ?>

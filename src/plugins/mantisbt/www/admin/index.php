@@ -3,7 +3,7 @@
  * Admin MantisBT page
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -56,8 +56,8 @@ switch ($view) {
 			echo '</td><td valign="top">';
 			include ("mantisbt/view/admin/addVersion.php");
 			echo '</td></tr></table>';
-			include ("mantisbt/view/admin/viewConfiguration.php");
 		}
+		include ("mantisbt/view/admin/viewConfiguration.php");
 		break;
 	}
 }

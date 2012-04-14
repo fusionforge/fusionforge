@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,20 +29,24 @@ global $username;
 global $password;
 global $group_id;
 
-$newCategoryName = $_POST['newCategoryName'];
-$renameCategory = $_POST['renameCategory'];
+$newCategoryName = trim(getStringFromRequest('newCategoryName'));
+$renameCategory = getStringFromRequest('renameCategory');
 
-if ( $newCategoryName && $renameCategory ) {
+if ($newCategoryName && $renameCategory) {
+	if ( $newCategoryName === $renameCategory ) {
+		$warning_msg = _('No action, same category name.');
+		session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&warning_msg='.urlencode($warning_msg));
+	}
 	try {
 		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 		$clientSOAP->__soapCall('mc_project_rename_category_by_name', array("username" => $username, "password" => $password, "p_project_id" => $mantisbtConf['id_mantisbt'], "p_category_name" => $renameCategory, "p_category_name_new" => $newCategoryName, "p_assigned_to" => ''));
 	} catch (SoapFault $soapFault) {
-		$msg = _('Error:').' '.$soapFault->faultstring;
+		$msg = _('Task failed:').' '.$soapFault->faultstring;
 		session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
 	}
-	$feedback = _('Category renamed successfully');
+	$feedback = _('Category renamed successfully.');
 	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
 }
-$warning_msg = _('Missing category name');
-session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&warning_msg='.urlencode($warning));
+$warning_msg = _('Missing category name.');
+session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&warning_msg='.urlencode($warning_msg));
 ?>
