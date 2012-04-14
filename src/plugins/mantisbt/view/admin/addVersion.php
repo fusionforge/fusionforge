@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,9 +34,10 @@ echo '<table><tr>';
 echo $HTML->boxTop(_('Add a new version'));
 echo '<td>';
 echo '<label>'._('Name').'</label><input name="version" type="text" size="10" />';
-if ($group->usesPlugin('projects-hierarchy')) {
-	echo '<input name="transverse" type="checkbox" value="1" >'. _('Cross version (son included)') .'</input>';
-}
+// need to be implemented ....
+// if ($group->usesPlugin('projects-hierarchy')) {
+// 	echo '<input name="transverse" type="checkbox" value="1" >'. _('Cross version (son included)') .'</input>';
+// }
 echo '</td>';
 echo '</tr><tr>';
 echo '<td>';

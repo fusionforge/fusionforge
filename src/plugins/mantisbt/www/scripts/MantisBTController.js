@@ -2,7 +2,7 @@
  * MantisBT Plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -61,12 +61,10 @@ MantisBTInitController.prototype =
 
 	toggleAllInput: function() {
 		if (!this.params.checkboxGlobalConf.is(":checked")) {
-			this.params.inputName.attr('disabled',false);
 			this.params.inputUrl.attr('disabled',false);
 			this.params.inputUser.attr('disabled',false);
 			this.params.inputPassword.attr('disabled',false);
 		} else {
-			this.params.inputName.attr('disabled',true);
 			this.params.inputUrl.attr('disabled',true);
 			this.params.inputUser.attr('disabled',true);
 			this.params.inputPassword.attr('disabled',true);

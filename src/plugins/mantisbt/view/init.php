@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -63,7 +63,7 @@ echo '<table>';
 echo '<tr><td><label id="mantisbtinit-global" ';
 if ($use_tooltips)
 	echo 'title="'._('Use the global configuration defined at forge level').'"';
-echo ' >'._('Use global configuration').'</label></td><td><input id="mantisbtglobalconf" type="checkbox" name="global_conf" /></td></tr>';
+echo ' >'._('Use global configuration').'</label></td><td><input id="mantisbtglobalconf" type="checkbox" name="global_conf" value="1" /></td></tr>';
 echo '<tr><td><label id="mantisbtinit-url" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify the Full URL of the MantisBT Web Server.').'"';
@@ -79,7 +79,7 @@ echo ' >SOAP Password</label></td><td><input id="mantisbtpassword" type="text" s
 echo '<tr><td><label id="mantisbtinit-create" ';
 if ($use_tooltips)
 	echo 'title="'._('If this project does NOT exist in MantisBT, do you want to create it ?').'"';
-echo ' >Create the project in MantisBT</label></td><td><input id="mantisbtcreate" type="checkbox" name="mantisbtcreate" value="1" ></td></tr>';
+echo ' >Create the project in MantisBT</label></td><td><input id="mantisbtcreate" type="checkbox" name="mantisbtcreate" value="1" /></td></tr>';
 echo '<tr><td><label id="mantisbtinit-name" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify the name of the project in MantisBT if already created in MantisBT').'"';

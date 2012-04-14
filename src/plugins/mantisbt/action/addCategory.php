@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,7 +29,7 @@ global $username;
 global $password;
 global $group_id;
 
-$nameCategory = $_POST['nameCategory'];
+$nameCategory = getStringFromRequest('nameCategory');
 
 if (!empty($nameCategory)) {
 	try {

@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,21 +30,21 @@ global $username;
 global $password;
 global $group_id;
 
-$deleteVersion = $_POST['deleteVersion'];
+$deleteVersion = getIntFromRequest('deleteVersion');
 
-if ($deleteVersion) {
+if (!empty($deleteVersion)) {
 	try {
 		if(!isset($clientSOAP))
 			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 	    $clientSOAP->__soapCall('mc_project_version_delete', array("username" => $username, "password" => $password, "version_id" => $deleteVersion));
 	} catch (SoapFault $soapFault) {
-		$msg = _('Error')._(': ').$soapFault->faultstring;
+		$msg = _('Task failed:').' '.$soapFault->faultstring;
 		session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
 	}
-	$feedback = _('Version deleted successfully');
+	$feedback = _('Version deleted successfully.');
 	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
 } else {
-	$warning = _('Missing parameters to delete version');
+	$warning = _('Missing parameters to delete version.');
 	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&warning_msg='.urlencode($warning));
 }
 ?>

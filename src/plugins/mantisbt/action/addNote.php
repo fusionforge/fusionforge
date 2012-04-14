@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,7 +32,7 @@ try {
 	$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 	$noteEdit;
 
-	$note['text'] = $_POST['edit_texte_note'];
+	$note['text'] = getStringFromRequest('edit_texte_note');
 
 	$note['view_state']['id'] = 10;
 	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
@@ -53,7 +54,7 @@ try {
 	}
 
 	$clientSOAP->__soapCall('mc_issue_note_add', array("username" => $username, "password" => $password, "issue_id" => $idBug, "note" => $note));
-	$feedback = _('Note added successfully');
+	$feedback = _('Note added successfully.');
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
 	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($error_msg));
