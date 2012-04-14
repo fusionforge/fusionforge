@@ -4,6 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,6 +29,7 @@ global $username;
 global $password;
 global $gfplugins;
 global $editable;
+global $group_id;
 
 if (!isset($defect)) {
 	try {
@@ -42,9 +44,14 @@ if (!isset($defect)) {
 	}
 }
 
+if ($defect->project->id != $mantisbtConf['id_mantisbt']) {
+	echo '<div class="warning" >'. _('Woops: wrong issue id').'</div>';
+	$errorPage = true;
+}
+
 if (!isset($errorPage)) {
-    include('jumpToIssue.php');
-    echo '<h2>'._('Ticket').' #'.$idBug.'</h2>';
+	include('jumpToIssue.php');
+	echo '<h2>'._('Ticket').' #'.$idBug.'</h2>';
 	echo	'<table>';
 	echo		'<tr style="background-color: gray;">';
 	echo 			'<td width="14%" >'._('Category').'</td>';
@@ -113,10 +120,9 @@ if (!isset($errorPage)) {
 	echo	'</table>';
 ?>
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-        jQuery("#expandable_edition").hide();
-    });
-
+	jQuery(document).ready(function() {
+		jQuery("#expandable_edition").hide();
+	});
 </script>
 <?php
 	if ($editable) {
