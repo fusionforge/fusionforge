@@ -48,18 +48,28 @@ jQuery(document).ready(function() {
 
 echo '<form method="POST" Action="?type='.$type.'&pluginname='.$mantisbt->name.'&action=inituser" >';
 echo '<table>';
+echo '<tr><td><label id="mantisbtuseglobal-user" ';
+if ($use_tooltips)
+	echo 'title="'._('Use global forge configuration.').'"';
+echo ' >Use global configuration</label></td><td><input id="mantisbtuseglobal" type="checkbox" name="mantisbtuseglobal" value="1"></td></tr>';
+echo '<tr><td><label id="mantisbtinit-create" ';
+if ($use_tooltips)
+	echo 'title="'._('If your user does NOT exist in MantisBT, do you want to create it ?').'"';
+echo ' >Create the user in MantisBT</label></td><td><input id="mantisbtcreate" type="checkbox" name="mantisbtcreate" value="1"></td></tr>';
+echo '<tr><td><label id="mantisbtinit-link" ';
+if ($use_tooltips)
+	echo 'title="'._('If your user DOES exist in MantisBT, do you want to link with it ?').'"';
+echo ' >Link with already created user in MantisBT</label></td><td><input id="mantisbtlink" type="checkbox" name="mantisbtlink" value="1"></td></tr>';
+
 echo '<tr><td><label id="mantisbtinit-user" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify your mantisbt user to be used.').'"';
-echo ' >SOAP User</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_user" /></td></tr>';
+echo ' >MantisBT User</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_user" /></td></tr>';
 echo '<tr><td><label id="mantisbtinit-password" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify the password of your user.').'"';
-echo ' >SOAP Password</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_password" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-create" ';
-if ($use_tooltips)
-	echo 'title="'._('If your user does NOT exist in MantisBT, do you want to create it ? NOT YET IMPLEMENTED').'"';
-echo ' >Create the user in MantisBT</label></td><td><input id="mantisbtcreate" type="checkbox" name="mantisbtcreate" value="1" disabled="disabled" ></td></tr>';
+echo ' >Your Password</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_password" /></td></tr>';
+
 echo '</table>';
 echo '<input type="submit" value="'._('Initialize').'" />';
 echo '</form>';

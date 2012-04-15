@@ -165,6 +165,33 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	/**
+	 * addUserMantisBT - inject the User into MantisBT thru SOAP
+	 *
+	 * @param	array	Configuration Array (url, soap_user, soap_password, mantisbt_password)
+	 * @return	bool	success or not
+	 */
+	function addUserMantisBT($confArr) {
+		global $user;
+		$mantisbtAccount = array();
+		$mantisbtAccount['name'] = $user->getUnixName();
+		$mantisbtAccount['real_name'] = $user->getRealName();
+		$mantisbtAccount['email'] = $user->getEmail();
+		$mantisbtAccount['password'] = $confArr['mantisbt_password'];
+		try {
+			$clientSOAP = new SoapClient($confArr['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+			$idUserMantisBT = $clientSOAP->__soapCall('mc_account_create', array("username" => $confArr['soap_user'], "password" => $confArr['soap_password'], "account" => $mantisbtAccount));
+		} catch (SoapFault $soapFault) {
+			$user->setError('addUserMantisBT::Error: ' . $soapFault->faultstring);
+			return false;
+		}
+		if (!isset($idUserMantisBT) || !is_int($idUserMantisBT)){
+			$user->setError('addUserMantisBT::Error: ' . _('Unable to create user in Mantisbt'));
+			return false;
+		}
+		return $idUserMantisBT;
+	}
+
+	/**
 	 * addProjectMantis - inject the Group into Mantisbt thru SOAP
 	 *
 	 * @param	array	Configuration Array (url, soap_user, soap_password, sync_roles)
@@ -176,6 +203,7 @@ class MantisBTPlugin extends Plugin {
 		$project['name'] = $groupObject->getPublicName();
 		$project['status'] = "development";
 
+		//TODO : make it works correctly and use the config soap api to get the real value.
 		if ($groupObject->isPublic()) {
 			$project['view_state'] = 10;
 		}else{
@@ -478,15 +506,30 @@ class MantisBTPlugin extends Plugin {
 	 */
 	function initializeUser($confArr) {
 		global $user;
-		$result = db_query_params('insert into plugin_mantisbt_users (id_user, mantisbt_user, mantisbt_password)
+		if ($confArr['mantisbt_useglobal']) {
+			$globalConfArr = $this->getGlobalconf();
+			$confArr['url'] = $globalConfArr['url'];
+			$confArr['soap_user'] = $globalConfArr['soap_user'];
+			$confArr['soap_password'] = $globalConfArr['soap_password'];
+		}
+		
+		if ($confArr['mantisbtcreate']) {
+			$idMantisBTUser = $this->addUserMantisBT($confArr);
+			$confArr['mantisbt_user'] = $user->getUnixName();
+		}
+		if ($idMantisBTUser || !$confArr['mantisbtcreate']) {
+			$result = db_query_params('insert into plugin_mantisbt_users (id_user, mantisbt_user, mantisbt_password)
 							values ($1, $2, $3)',
 							array($user->getID(),
 								$confArr['mantisbt_user'],
 								$confArr['mantisbt_password']));
-		if (!$result)
-			return false;
-
-		return true;
+			if (!$result) {
+				$user->setError('initializeUser::Error: '. db_error());
+				return false;
+			}
+			return true;
+		}
+		return false;
 	}
 
 	/**
