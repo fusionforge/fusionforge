@@ -223,8 +223,16 @@ class CVSPlugin extends SCMPlugin {
 			system ("chmod 3777 $locks_dir") ;
 			if ($project->enableAnonSCM()) {
 				system ("chmod -R g+wXs,o+rX-w $repo") ;
+				system ("echo \"SystemAuth=no\" > $repo/CVSROOT/config");
+				system ("echo \"LockDir=$locks_dir\" >> $repo/CVSROOT/config");
+				system ("echo \"anonymous\" > $repo/CVSROOT/readers");
+				system ("echo \"anonymous:\" > $repo/CVSROOT/passwd");
 			} else {
 				system ("chmod -R g+wXs,o-rwx $repo") ;
+				system ("echo \"SystemAuth=no\" > $repo/CVSROOT/config");
+				system ("echo \"LockDir=$locks_dir\" >> $repo/CVSROOT/config");
+				system ("echo \"\" > $repo/CVSROOT/readers");
+				system ("echo \"\" > $repo/CVSROOT/passwd");
 			}
 		} else {
 			$unix_user = forge_get_config ('apache_user') ;
