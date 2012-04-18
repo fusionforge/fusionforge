@@ -2627,6 +2627,13 @@ class Group extends Error {
 		$this->normalizeAllRoles () ;
 		$this->activateUsers();
 
+		// Delete fake join request
+		if (USE_PFO_RBAC) {
+			foreach (get_group_join_requests ($this) as $gjr) {
+				$gjr->delete(true) ;
+			}
+		}
+
 		// Switch back to user preference
 		session_set_internal ($saved_session->getID()) ;
 		setup_gettext_from_context();
