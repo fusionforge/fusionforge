@@ -2575,10 +2575,13 @@ class Group extends Error {
 				}
 			}
 
-			$this->setUseSCM ($template->usesSCM()) ;
+			// Disabled to keep user choice from registration page.
+//			$this->setUseSCM ($template->usesSCM()) ;
 
 			foreach ($template->getPlugins() as $plugin_id => $plugin_name) {
-				$this->setPluginUse ($plugin_name) ;
+				if (preg_match('/^scm/', $plugin_name) && ($plugin_name != 'scmhook')) {
+					$this->setPluginUse($plugin_name);
+				}
 			}
 
 			foreach ($template->getRoles() as $oldrole) {
