@@ -19,8 +19,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-include_once('cronjobs/stats_projects.inc');
+require_once 'cronjobs/stats_projects.inc';
 
 $i=0;
 
