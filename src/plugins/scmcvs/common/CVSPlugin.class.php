@@ -188,7 +188,7 @@ class CVSPlugin extends SCMPlugin {
 		
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				print '<iframe src="'.util_make_url ("/scm/viewvc.php/?root=".$project->getUnixName()).'" frameborder="0" width=100% height=700></iframe>' ;
+				session_redirect("/scm/viewvc.php/?root=".$project->getUnixName());
 			}
 		}
 	}
