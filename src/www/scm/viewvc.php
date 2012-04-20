@@ -120,6 +120,10 @@ if ($external_scm) {
 		$repos_type = 'svn';
 	}
 
+	// HACK : getSiteMenu in Navigation.class.php use GLOBAL['group_id']
+	// to fix missing projet name tab
+	$group_id = $Group->getID();
+
 	$content = viewcvs_execute($unix_name, $repos_type);
 }
 
