@@ -38,7 +38,7 @@ $err = '';
 //	Default values for the script
 //
 define('DEFAULT_SHELL','/bin/cvssh.pl'); //use /bin/grap for cvs-only
-define('FILE_EXTENSION','.new'); // use .new when testing
+define('FILE_EXTENSION',''); // use .new when testing
 
 if (util_is_root_dir(forge_get_config('groupdir_prefix'))) {
 	$err .=  "Error! groupdir_prefix Points To Root Directory!";
@@ -55,7 +55,7 @@ $groups = group_get_objects (util_result_column_to_array($res,'group_id'));
 $res = db_query_params ('SELECT user_id FROM users WHERE unix_status=$1',
 			array('A')) ;
 $err .= db_error();
-$users = user_get_objects (util_result_column_to_array($res,'group_id'));
+$users = user_get_objects (util_result_column_to_array($res,'user_id'));
 
 // Create the entries for the GForge users
 $gforge_lines_passwd = array();
@@ -166,6 +166,21 @@ for ($i=0; $i < count($shadow_orig); $i++) {
 
 	$unmanaged_lines_shadow[] = $line;
 }
+
+$userp_res = db_query_params ('SELECT  unix_pw FROM users WHERE unix_status=$1',
+                        array('A')) ;
+
+$err .= db_error();
+
+
+$user_pws = array();
+for($i = 0; $i < db_numrows($userp_res); $i++) {
+        $us_pw = db_result($userp_res,$i,'unix_pw');
+        $user_pws[] = $us_pw;
+
+}
+
+$i=0;
 foreach ($users as $u) {
 	$username = $u->getUnixName() ;
 	$managed_by_gforge = !in_array($username, $unmanaged_usernames);
@@ -176,6 +191,7 @@ foreach ($users as $u) {
 		$line_shadow = $username.":".$unix_passwd.":12090:0:99999:7:::";
 		$gforge_lines_shadow[] = $line_shadow;
 	}
+	$i++;
 }
 
 // Generate the contents of /etc/shadow
@@ -189,6 +205,21 @@ $shadow_contents .= "\n#GFORGEEND\n";
  * Step 3: Parse /etc/group
  *************************************************************************/
 $group_orig = file("/etc/group");
+
+//    Add the groups from the gforge database
+$group_res = db_query_params ('SELECT group_id, unix_group_name, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status=$1 AND type_id=$2',
+                        array('A',
+                                '1'));
+$err .= db_error();
+
+$gforge_groups = array();
+for($i = 0; $i < db_numrows($group_res); $i++) {
+        $group_name = db_result($group_res,$i,'unix_group_name');
+        $gforge_groups[] = $group_name;
+        $gids[$group_name] = db_result($group_res,$i,'group_id') + 50000;       // 50000: hardcoded value (for now).
+}
+
+
 
 //	Add the groups from the gforge database
 for ($i=0; $i < count($group_orig); $i++) {
@@ -231,8 +262,8 @@ foreach ($groups as $g) {
 	$group_name = $g->getUnixName() ;
 	$unix_gid = $g->getID() + 50000;	// 50000: hardcoded value (for now).
 
-	$line = $group_name.":x:".$unix_gid.":";
-
+	$line = "scm_".$group_name.":x:".$unix_gid.":";
+	
 	/* we need to get the project object to check if a project
 	 * has a private CVS repository - in which case we need to add
 	 * the apache user to the group so that ViewCVS can be used
