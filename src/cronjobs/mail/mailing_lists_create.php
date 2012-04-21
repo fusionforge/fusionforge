@@ -6,6 +6,7 @@
  *
  * Copyright 2000-2010, Fusionforge Team
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -46,30 +47,6 @@ if (is_dir(forge_get_config('mailman_path'))) {
 	exit;
 }
 
-//
-// Extract the mailing lists that already exist on the system and create
-// a "list" of them for use later so we don't try to create ones that
-// already exist
-//
-$mailing_lists = array();
-$mlists_cmd = escapeshellcmd($path_to_mailman."/bin/list_lists -b");
-//$err .= "Command to be executed is $mlists_cmd\n";
-$fp = popen($mlists_cmd, "r");
-while (!feof($fp)) {
-	$mlist = fgets($fp, 4096);
-	if (stristr($mlist,"matching mailing lists") !== FALSE) {
-		continue;
-	}
-	$mlist = trim($mlist);
-	if ($mlist <> "") {
-		$mailing_lists[] = strtolower($mlist);
-	}
-}
-
-// $err .= 'Existing mailing lists : '.implode(', ', $mailing_lists)."\n";
-
-pclose($fp);
-
 $res = db_query_params('SELECT users.user_name,email,mail_group_list.list_name,
 			mail_group_list.password,mail_group_list.status,
 			mail_group_list.group_list_id,mail_group_list.is_public
@@ -81,6 +58,9 @@ $err .= db_error();
 $rows = db_numrows($res);
 //$err .= "$rows rows returned from query\n";
 
+if (!is_dir(forge_get_config('data_path').'/dumps')) {
+	mkdir(forge_get_config('data_path').'/dumps', 0755, true);
+}
 $h1 = fopen(forge_get_config('data_path').'/dumps/mailman-aliases', "w");
 
 $mailingListIds = array();
@@ -114,7 +94,7 @@ for ($i=0; $i<$rows; $i++) {
 	$privatize_cmd = escapeshellcmd($path_to_mailman.'/bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
 	$publicize_cmd = escapeshellcmd($path_to_mailman.'/bin/config_list -i '.$script_dir.'/publicize_list.py '.$listname);
 
-	if (!in_array($listname,$mailing_lists)) {	// New list?
+	if ($status == MAIL__MAILING_LIST_IS_REQUESTED) {	// New list?
 		$err .= "Creating Mailing List: $listname\n";
 		//$lcreate_cmd = $path_to_mailman."/bin/newlist -q $listname@".forge_get_config('lists_host')." $email $listpassword &> /dev/null";
 		$lcreate_cmd = $path_to_mailman."/bin/newlist -q $listname $email $listpassword";
@@ -138,7 +118,7 @@ for ($i=0; $i<$rows; $i++) {
 		$mailingListIds[] = $grouplistid;
 	} elseif ($status == MAIL__MAILING_LIST_IS_UPDATED) {
 		// For already created list, update only if status was changed on the forge to
-		// avoid anwanted reset of parameters.
+		// avoid unwanted reset of parameters.
 
 		// Get the mailman info on public/private to change
 		if ($is_commits_list || $public) {

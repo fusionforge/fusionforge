@@ -93,7 +93,8 @@ if ($group_id) {
 
 			if(!$mailingList->update(
 				unInputSpecialChars(getStringFromPost('description')),
-				getIntFromPost('is_public', MAIL__MAILING_LIST_IS_PUBLIC)
+				getIntFromPost('is_public', MAIL__MAILING_LIST_IS_PUBLIC),
+				MAIL__MAILING_LIST_IS_UPDATED
 			)) {
 				exit_error($mailingList->getErrorMessage(),'mail');
 			} else {
