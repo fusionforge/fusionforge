@@ -276,29 +276,33 @@ class GitPlugin extends SCMPlugin {
 			return false ;
 		}
 
-		if (! $project->usesPlugin ($this->name)) {
+		if (! $project->usesPlugin($this->name)) {
 			return false;
 		}
 
 		$project_name = $project->getUnixName();
-		$root = forge_get_config('repos_path', 'scmgit') . '/' . $project_name ;
-		system ("mkdir -p $root");
+		$root = forge_get_config('repos_path', 'scmgit') . '/' . $project_name;
+		if (!is_dir($root)) {
+			system("mkdir -p $root");
+		}
+		$output = '';
+		$output = '';
 
 		$main_repo = $root . '/' .  $project_name . '.git' ;
-		if (!is_file ("$main_repo/HEAD") && !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs")) {
-			exec ("GIT_DIR=\"$main_repo\" git init --bare --shared=group", $result) ;
+		if (!is_file("$main_repo/HEAD") && !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs")) {
+			exec("GIT_DIR=\"$main_repo\" git init --bare --shared=group", $result) ;
 			$output .= join("<br />", $result);
 			$result = '';
-			exec ("GIT_DIR=\"$main_repo\" git update-server-info", $result) ;
+			exec("GIT_DIR=\"$main_repo\" git update-server-info", $result) ;
 			$output .= join("<br />", $result);
-			if (is_file ("$main_repo/hooks/post-update.sample")) {
-				rename ("$main_repo/hooks/post-update.sample",
-					"$main_repo/hooks/post-update") ;
+			if (is_file("$main_repo/hooks/post-update.sample")) {
+				rename("$main_repo/hooks/post-update.sample",
+					"$main_repo/hooks/post-update");
 			}
-			if (!is_file ("$main_repo/hooks/post-update")) {
-				$f = fopen ("$main_repo/hooks/post-update") ;
-				fwrite ($f, "exec git-update-server-info\n") ;
-				fclose ($f) ;
+			if (!is_file("$main_repo/hooks/post-update")) {
+				$f = fopen("$main_repo/hooks/post-update");
+				fwrite($f, "exec git-update-server-info\n");
+				fclose($f);
 			}
 			if (is_file ("$main_repo/hooks/post-update")) {
 				system ("chmod +x $main_repo/hooks/post-update") ;
