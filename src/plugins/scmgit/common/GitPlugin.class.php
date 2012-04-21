@@ -283,6 +283,7 @@ class GitPlugin extends SCMPlugin {
 		$project_name = $project->getUnixName();
 		$root = forge_get_config('repos_path', 'scmgit') . '/' . $project_name ;
 		system ("mkdir -p $root");
+		$output = '';
 
 		$main_repo = $root . '/' .  $project_name . '.git' ;
 		if (!is_file ("$main_repo/HEAD") && !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs")) {
