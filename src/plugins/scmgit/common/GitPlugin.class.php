@@ -393,7 +393,7 @@ class GitPlugin extends SCMPlugin {
 
         function getRepositories($path) {
                 if (! is_dir($path))
-                        return;
+                        return array();
                 $list = array();
                 $entries = scandir($path);
                 foreach ($entries as $entry) {
