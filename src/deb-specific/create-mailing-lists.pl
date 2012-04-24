@@ -119,6 +119,7 @@ eval {
                     AND mail_group_list.list_admin = users.user_id" ; # Status = 4: password reset requested
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
+    @lines = () ;
     while (my @myarray = $sth->fetchrow_array ()) {
 	push @lines, \@myarray ;
     }
