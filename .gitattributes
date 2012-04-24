@@ -483,6 +483,7 @@ src/common/include/rbac_texts.php -text
 src/common/include/sqlparser.php -text
 src/common/include/tag_cloud.php -text
 src/common/include/testjson.php -text
+src/common/include/timezones.php -text
 src/common/include/utils_crossref.php -text
 src/common/include/xhtml10t-rdfa10.dtd -text
 src/common/mail/Mail.class.php -text
