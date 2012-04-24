@@ -39,23 +39,23 @@ if (file_exists("/usr/share/zoneinfo/UTC")) {
 			$TZs[] = $j;
 		}
 	}
-	$j = true;
-	while ($j) {
+	do {
 		sort($TZs);
 		$i = count($TZs);
-		$j = false;
+		$j = array();
 		while ($i-- > 0) {
 			if (is_dir("/usr/share/zoneinfo/" . $TZs[$i])) {
 				foreach (ls("/usr/share/zoneinfo/" . $TZs[$i])
-				    as $j) {
-					$TZs[] = $TZs[$i] . "/" . $j;
+				    as $k) {
+					$TZs[] = $TZs[$i] . "/" . $k;
 				}
-				unset($TZs[$i]);
-				$j = true;
-				break;
+				$j[] = $i;
 			}
 		}
-	}
+		foreach ($j as $i) {
+			unset($TZs[$i]);
+		}
+	} while ($j);
 	sort($TZs);
 }
 
