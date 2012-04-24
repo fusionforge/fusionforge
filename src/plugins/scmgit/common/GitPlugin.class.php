@@ -286,7 +286,6 @@ class GitPlugin extends SCMPlugin {
 			system("mkdir -p $root");
 		}
 		$output = '';
-		$output = '';
 
 		$main_repo = $root . '/' .  $project_name . '.git' ;
 		if (!is_file("$main_repo/HEAD") && !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs")) {
@@ -407,8 +406,7 @@ class GitPlugin extends SCMPlugin {
 
 	function getRepositories($path) {
 		if (! is_dir($path)) {
-			echo 'pas de path ?';
-			return;
+			return array();
 		}
 		$list = array();
 		$entries = scandir($path);
