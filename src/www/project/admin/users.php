@@ -59,39 +59,7 @@ if (plugin_hook_listeners("project_admin_users") > 0) {
 	plugin_hook ("project_admin_users", $hook_params);
 }
 
-function cache_external_roles () {
-	global $used_external_roles, $unused_external_roles, $group, $group_id;
-
-	if (USE_PFO_RBAC) {
-		$unused_external_roles = array () ;
-		foreach (RBACEngine::getInstance()->getPublicRoles() as $r) {
-			$grs = $r->getLinkedProjects () ;
-			$seen = false ;
-			foreach ($grs as $g) {
-				if ($g->getID() == $group_id) {
-					$seen = true ;
-					break ;
-				}
-			}
-			if (!$seen) {
-				$unused_external_roles[] = $r ;
-			}
-		}
-		$used_external_roles = array () ;
-		foreach ($group->getRoles() as $r) {
-			if ($r->getHomeProject() == NULL
-			    || $r->getHomeProject()->getID() != $group_id) {
-				$used_external_roles[] = $r ;
-			}
-		}
-
-		sortRoleList ($used_external_roles, $group, 'composite') ;
-		sortRoleList ($unused_external_roles, $group, 'composite') ;
-
-	}
-}
-
-cache_external_roles () ;
+forge_cache_external_roles($group);
 
 if (getStringFromRequest('submit')) {
 	if (getStringFromRequest('adduser')) {
@@ -198,7 +166,7 @@ if (getStringFromRequest('submit')) {
 						$error_msg = $r->getErrorMessage();
 					} else {
 						$feedback = _("Role linked successfully");
-						cache_external_roles () ;
+						forge_cache_external_roles($group);
 					}
 				}
 			}
@@ -213,7 +181,7 @@ if (getStringFromRequest('submit')) {
 						$error_msg = $r->getErrorMessage();
 					} else {
 						$feedback = _("Role unlinked successfully");
-						cache_external_roles () ;
+						forge_cache_external_roles($group);
 					}
 				}
 			}
