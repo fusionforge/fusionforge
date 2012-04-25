@@ -655,12 +655,12 @@ function SVNPluginStartElement($parser, $name, $attrs) {
 			if ($attrs['ACTION'] == "M") {
 				$updates++;
 				if ($last_user) {
-					$usr_updates[$last_user] = isset($usr_updates[$last_user]) ? ($usr_updates[$last_user]+1) : 0 ;
+					$usr_updates[$last_user] = isset($usr_updates[$last_user]) ? ($usr_updates[$last_user]+1) : 1 ;
 				}
 			} elseif ($attrs['ACTION'] == "A") {
 				$adds++;
 				if ($last_user) {
-					$usr_adds[$last_user] = isset($usr_adds[$last_user]) ? ($usr_adds[$last_user]+1) : 0 ;
+					$usr_adds[$last_user] = isset($usr_adds[$last_user]) ? ($usr_adds[$last_user]+1) : 1 ;
 				}
 			}
 		}
