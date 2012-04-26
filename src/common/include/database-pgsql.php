@@ -600,6 +600,9 @@ function db_join_qpa ($old_qpa = false, $new_qpa = false) {
 }
 
 function db_query_to_string ($sql, $params = array()) {
+	$sql = preg_replace('/\n/',' ',$sql);
+	$sql = preg_replace('/\t/',' ',$sql);
+	$sql = preg_replace('/\s+/',' ',$sql);
 	foreach ($params as $index => $value) {
 		$sql = preg_replace('/\\$'.($index+1).'(?!\d)/', "'".$value."'", $sql);
 	}
