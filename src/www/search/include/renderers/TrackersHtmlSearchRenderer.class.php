@@ -52,23 +52,49 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		);
 	}
 
+	function getFilteredRows() {
+		$rowsCount = $this->searchQuery->getRowsCount();
+		$result =& $this->searchQuery->getResult();
+
+		$fields = array ('group_artifact_id',
+				 'artifact_id',
+				 'name',
+				 'summary',
+				 'realname',
+				 'open_date');
+
+		$fd = array();
+		for($i = 0; $i < $rowsCount; $i++) {
+			if (forge_check_perm('tracker',
+					     db_result($result, $i, 'group_artifact_id'),
+					     'read')) {
+				$r = array();
+				foreach ($fields as $f) {
+					$r[$f] = db_result($result, $i, $f);
+				}
+				$fd[] = $r;
+			}
+		}
+		return $fd;
+	}
+
 	/**
 	 * getRows - get the html output for result rows
 	 *
 	 * @return string html output
 	 */
 	function getRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$fd = $this->getFilteredRows();
+
 		$dateFormat = _('Y-m-d H:i');
 			
 		$return = '';
 		$rowColor = 0;
 		$lastTracker = null;
 		
-		for($i = 0; $i < $rowsCount; $i++) {
+		foreach ($fd as $row) {
 			//section changed
-			$currentTracker = db_result($result, $i, 'name');
+			$currentTracker = $row['name'];
 			if ($lastTracker != $currentTracker) {
 				$return .= '<tr><td colspan="5">'.$currentTracker.'</td></tr>';
 				$lastTracker = $currentTracker;
@@ -76,13 +102,13 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			}
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
 						. '<td width="5%">&nbsp;</td>'
-						. '<td>'.db_result($result, $i, 'artifact_id').'</td>'
+						. '<td>'.$row['artifact_id'].'</td>'
 						. '<td>'
-							. '<a href="'.util_make_url ('/tracker/?func=detail&amp;group_id='.$this->groupId.'&amp;aid='.db_result($result, $i, 'artifact_id') . '&amp;atid='.db_result($result, $i, 'group_artifact_id')).'">'
-							. html_image('ic/tracker20g.png').' '.db_result($result, $i, 'summary')
+							. '<a href="'.util_make_url ('/tracker/?func=detail&amp;group_id='.$this->groupId.'&amp;aid='.$row['artifact_id'] . '&amp;atid='.$row['group_artifact_id']).'">'
+							. html_image('ic/tracker20g.png').' '.$row['summary']
 							. '</a></td>'		
-						. '<td width="15%">'.db_result($result, $i, 'realname').'</td>'
-						. '<td width="15%">'.date($dateFormat, db_result($result, $i, 'open_date')).'</td></tr>';
+						. '<td width="15%">'.$row['realname'].'</td>'
+						. '<td width="15%">'.date($dateFormat, $row['open_date']).'</td></tr>';
 			$rowColor ++;
 		}
 		return $return;

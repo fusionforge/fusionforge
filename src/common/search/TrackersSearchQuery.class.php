@@ -143,16 +143,15 @@ class TrackersSearchQuery extends SearchQuery {
 	 */
 	static function getSections($groupId, $showNonPublic=false) {
 		$sql = 'SELECT group_artifact_id, name FROM artifact_group_list WHERE group_id = $1';
-		if (!$showNonPublic) {
-			$sql .= ' AND artifact_group_list.is_public = 1';
-		}
 		$sql .= ' ORDER BY name';
 		
 		$res = db_query_params ($sql,
 					array ($groupId));
 		$sections = array();
 		while($data = db_fetch_array($res)) {
-			$sections[$data['group_artifact_id']] = $data['name'];
+			if (forge_check_perm('tracker',$data['group_artifact_id'],'read')) {
+				$sections[$data['group_artifact_id']] = $data['name'];
+			}
 		}
 		return $sections;
 	}

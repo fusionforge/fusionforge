@@ -68,7 +68,7 @@ class TasksSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa () ;
 
 		$qpa = db_construct_qpa ($qpa,
-					 'SELECT x.* FROM (SELECT y.project_task_id, y.summary, y.percent_complete, y.start_date, y.end_date, users.realname, project_group_list.project_name, y.full_string_agg',
+					 'SELECT x.* FROM (SELECT y.group_project_id, y.project_task_id, y.summary, y.percent_complete, y.start_date, y.end_date, users.realname, project_group_list.project_name, y.full_string_agg',
 					 array());
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFTIwords();
@@ -124,7 +124,7 @@ class TasksSearchQuery extends SearchQuery {
 						 ' AND project_group_list.is_public = 1') ;
 		}
 		$qpa = db_construct_qpa ($qpa,
-					 ' GROUP BY y.project_task_id, y.summary, y.percent_complete, y.start_date, y.end_date, users.realname, project_group_list.project_name, y.full_string_agg',
+					 ' GROUP BY y.group_project_id, y.project_task_id, y.summary, y.percent_complete, y.start_date, y.end_date, users.realname, project_group_list.project_name, y.full_string_agg',
 					 array());
 		
 		if (forge_get_config('use_fti')) {
@@ -168,16 +168,15 @@ class TasksSearchQuery extends SearchQuery {
 	 */
 	static function getSections($groupId, $showNonPublic=false) {
 		$sql = 'SELECT group_project_id, project_name FROM project_group_list WHERE group_id=$1' ;
-		if (!$showNonPublic) {
-			$sql .= ' AND is_public = 1';
-		}
 		$sql .= ' ORDER BY project_name';
 		
 		$sections = array();
 		$res = db_query_params ($sql,
 					array ($groupId));
 		while($data = db_fetch_array($res)) {
-			$sections[$data['group_project_id']] = $data['project_name'];
+			if (forge_check_perm('pm',$data['group_project_id'],'read')) {
+				$sections[$data['group_project_id']] = $data['project_name'];
+			}
 		}
 		return $sections;
 	}

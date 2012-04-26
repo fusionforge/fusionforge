@@ -143,11 +143,6 @@ class Search extends FForge_SeleniumTestCase
 		$this->populateStandardTemplate();
 		$this->createProject('projecta');
 
-		// TODO: check that search results vary according to what items are visible to the user
-		// $this->createProject('projectb');
-		// $this->createUser('piperade');
-		// $this->createUser('cassoulet');
-
 		// Prepare some tracker items
 
 		$this->gotoProject('projecta');
@@ -442,7 +437,7 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->gotoProject('projecta');
 		$this->select("type_of_search", "label=Search the entire project");
-		$this->type("//input[@name='words']", "ZONGO");
+		$this->type("//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
 		$this->assertTrue($this->isTextPresent("Bug2"));
@@ -487,7 +482,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("//a[contains(@href,'short_pm') and .='all']");
 		$this->click("//a[contains(@href,'short_docman') and .='all']");
 		$this->click("//a[contains(@href,'short_news') and .='all']");
-		$this->type("//div[@id='maindiv']//input[@name='words']", "ZONGO");
+		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
 		$this->assertTrue($this->isTextPresent("Bug2"));
@@ -499,6 +494,135 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Message4"));
 		$this->assertTrue($this->isTextPresent("Doc1"));
 		$this->assertTrue($this->isTextPresent("Doc2"));
+		$this->assertTrue($this->isTextPresent("News1"));
+		$this->assertTrue($this->isTextPresent("News2"));
+
+		// Now let's check that RBAC permissions are taken into account
+
+		$this->createUser('piperade');
+		$this->gotoProject('projecta');
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->click("//tr/td/form/div[contains(.,'Any user logged in')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'roleedit.php')]/..//input[@name='role_name']", "Trainee") ;
+		$this->click ("//input[@value='Create Role']") ;
+		$this->waitForPageToLoad("30000");
+
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "piperade") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Trainee");
+		$this->click ("//input[@value='Add Member']") ;
+		$this->waitForPageToLoad("30000");
+
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->click ("//td/form/div[contains(.,'Trainee')]/../div/input[@value='Edit Permissions']") ;
+		$this->waitForPageToLoad("30000");
+		$this->select("//tr/td[.='Bugs']/../td/select[contains(@name,'data[tracker]')]", "label=Read only");
+		$this->select("//tr/td[.='Patches']/../td/select[contains(@name,'data[tracker]')]", "label=No access");
+		$this->select("//tr/td[.='To Do']/../td/select[contains(@name,'data[pm]')]", "label=Read only");
+		$this->select("//tr/td[.='Next Release']/../td/select[contains(@name,'data[pm]')]", "label=No access");
+		$this->select("//tr/td[.='open-discussion']/../td/select[contains(@name,'data[forum]')]", "label=Read only");
+		$this->select("//tr/td[.='developers-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No access");
+		$this->select("//select[contains(@name,'data[docman]')]", "label=Read only");
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->click ("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
+		$this->waitForPageToLoad("30000");
+		$this->select("//tr/td[.='Bugs']/../td/select[contains(@name,'data[tracker]')]", "label=No access");
+		$this->select("//tr/td[.='Patches']/../td/select[contains(@name,'data[tracker]')]", "label=No access");
+		$this->select("//tr/td[.='To Do']/../td/select[contains(@name,'data[pm]')]", "label=No access");
+		$this->select("//tr/td[.='Next Release']/../td/select[contains(@name,'data[pm]')]", "label=No access");
+		$this->select("//tr/td[.='open-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No access");
+		$this->select("//tr/td[.='developers-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No access");
+		$this->select("//select[contains(@name,'data[docman]')]", "label=No access");
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+
+		$this->switchUser('piperade');
+		$this->gotoProject('projecta');
+		$this->select("type_of_search", "label=Search the entire project");
+		$this->type("//input[@name='words']", "zongo");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("Bug1"));
+		$this->assertFalse($this->isTextPresent("Bug2"));
+		$this->assertTrue($this->isTextPresent("Task1"));
+		$this->assertFalse($this->isTextPresent("Task2"));
+		$this->assertTrue($this->isTextPresent("Message1"));
+		$this->assertTrue($this->isTextPresent("Message2"));
+		$this->assertTrue($this->isTextPresent("Message3"));
+		$this->assertFalse($this->isTextPresent("Message4"));
+		$this->assertTrue($this->isTextPresent("Doc1"));
+		$this->assertTrue($this->isTextPresent("Doc2"));
+		$this->assertTrue($this->isTextPresent("News1"));
+		$this->assertTrue($this->isTextPresent("News2"));
+
+		$this->gotoProject('projecta');
+		$this->clickAndWait('Link=Advanced search');
+		$this->click("//a[contains(@href,'short_forum') and .='all']");
+		$this->click("//a[contains(@href,'short_tracker') and .='all']");
+		$this->click("//a[contains(@href,'short_pm') and .='all']");
+		$this->click("//a[contains(@href,'short_docman') and .='all']");
+		$this->click("//a[contains(@href,'short_news') and .='all']");
+		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
+		$this->clickAndWait("//input[@name='submitbutton']");
+		$this->assertTrue($this->isTextPresent("Bug1"));
+		$this->assertFalse($this->isTextPresent("Bug2"));
+		$this->assertTrue($this->isTextPresent("Task1"));
+		$this->assertFalse($this->isTextPresent("Task2"));
+		$this->assertTrue($this->isTextPresent("Message1"));
+		$this->assertTrue($this->isTextPresent("Message2"));
+		$this->assertTrue($this->isTextPresent("Message3"));
+		$this->assertFalse($this->isTextPresent("Message4"));
+		$this->assertTrue($this->isTextPresent("Doc1"));
+		$this->assertTrue($this->isTextPresent("Doc2"));
+		$this->assertTrue($this->isTextPresent("News1"));
+		$this->assertTrue($this->isTextPresent("News2"));
+
+		$this->logout();
+		$this->gotoProject('projecta');
+		$this->select("type_of_search", "label=Search the entire project");
+		$this->type("//input[@name='words']", "zongo");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("Bug1"));
+		$this->assertFalse($this->isTextPresent("Bug2"));
+		$this->assertFalse($this->isTextPresent("Task1"));
+		$this->assertFalse($this->isTextPresent("Task2"));
+		$this->assertFalse($this->isTextPresent("Message1"));
+		$this->assertFalse($this->isTextPresent("Message2"));
+		$this->assertFalse($this->isTextPresent("Message3"));
+		$this->assertFalse($this->isTextPresent("Message4"));
+		$this->assertFalse($this->isTextPresent("Doc1"));
+		$this->assertFalse($this->isTextPresent("Doc2"));
+		$this->assertTrue($this->isTextPresent("News1"));
+		$this->assertTrue($this->isTextPresent("News2"));
+
+		$this->gotoProject('projecta');
+		$this->clickAndWait('Link=Advanced search');
+		$this->click("//a[contains(@href,'short_forum') and .='all']");
+		$this->click("//a[contains(@href,'short_tracker') and .='all']");
+		$this->assertFalse($this->isElementPresent("//a[contains(@href,'short_pm') and .='all']"));
+		$this->assertFalse($this->isElementPresent("//a[contains(@href,'short_docman') and .='all']"));
+		$this->click("//a[contains(@href,'short_news') and .='all']");
+		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
+		$this->clickAndWait("//input[@name='submitbutton']");
+		$this->assertFalse($this->isTextPresent("Bug1"));
+		$this->assertFalse($this->isTextPresent("Bug2"));
+		$this->assertFalse($this->isTextPresent("Task1"));
+		$this->assertFalse($this->isTextPresent("Task2"));
+		$this->assertFalse($this->isTextPresent("Message1"));
+		$this->assertFalse($this->isTextPresent("Message2"));
+		$this->assertFalse($this->isTextPresent("Message3"));
+		$this->assertFalse($this->isTextPresent("Message4"));
+		$this->assertFalse($this->isTextPresent("Doc1"));
+		$this->assertFalse($this->isTextPresent("Doc2"));
 		$this->assertTrue($this->isTextPresent("News1"));
 		$this->assertTrue($this->isTextPresent("News2"));
 	}
