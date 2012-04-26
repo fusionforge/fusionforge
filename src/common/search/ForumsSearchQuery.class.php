@@ -81,7 +81,7 @@ class ForumsSearchQuery extends SearchQuery {
 			}
 
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name, forum.subject||$2||forum.body as full_string_agg FROM forum, users, forum_group_list, forum_idx, to_tsquery($1) as q ',
+						 'SELECT forum.group_forum_id, forum.msg_id, ts_headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name, forum.subject||$2||forum.body as full_string_agg FROM forum, users, forum_group_list, forum_idx, to_tsquery($1) as q ',
 						 array ($this->getFTIwords(),
 							$this->field_separator)) ;
 			$qpa = db_construct_qpa ($qpa,
@@ -109,7 +109,7 @@ class ForumsSearchQuery extends SearchQuery {
 						 'ORDER BY forum_group_list.forum_name ASC, forum.msg_id ASC, ts_rank(vectors, q) DESC') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT x.* FROM (SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name, forum.subject||$1||forum.body as full_string_agg FROM forum, users, forum_group_list WHERE users.user_id = forum.posted_by AND forum_group_list.group_forum_id = forum.group_forum_id AND forum_group_list.is_public <> 9 AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $2) ',
+						 'SELECT x.* FROM (SELECT forum.group_forum_id, forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name, forum.subject||$1||forum.body as full_string_agg FROM forum, users, forum_group_list WHERE users.user_id = forum.posted_by AND forum_group_list.group_forum_id = forum.group_forum_id AND forum_group_list.is_public <> 9 AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $2) ',
 						 array ($this->field_separator,
 							$this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
@@ -157,16 +157,15 @@ class ForumsSearchQuery extends SearchQuery {
 	 */
 	static function getSections($groupId, $showNonPublic=false) {
 		$sql = 'SELECT group_forum_id, forum_name FROM forum_group_list WHERE group_id = $1 AND is_public <> 9';
-		if (!$showNonPublic) {
-			$sql .= ' AND is_public = 1';
-		}
 		$sql .= ' ORDER BY forum_name';
 
 		$sections = array();
 		$res = db_query_params ($sql,
 					array ($groupId));
 		while($data = db_fetch_array($res)) {
-			$sections[$data['group_forum_id']] = $data['forum_name'];
+			if (forge_check_perm('forum',$data['group_forum_id'],'read')) {
+				$sections[$data['group_forum_id']] = $data['forum_name'];
+			}
 		}
 		return $sections;
 	}

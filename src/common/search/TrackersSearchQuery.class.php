@@ -70,11 +70,11 @@ class TrackersSearchQuery extends SearchQuery {
 
 		$qpa = db_construct_qpa ($qpa,
 					 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg',
-						 array (''));
+						 array ($this->field_separator));
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFTIwords();
 			$qpa = db_construct_qpa ($qpa,
-						 ', (artifact_idx.vectors || coalesce(ff_tsvector_agg(artifact_message_idx.vectors), $1::tsvector)) AS full_vector_agg',
+						 ', (artifact_idx.vectors || coalesce(ff_tsvector_agg(artifact_message_idx.vectors), to_tsvector($1))) AS full_vector_agg',
 						 array (''));
 						 }
 		$qpa = db_construct_qpa ($qpa, 
@@ -115,7 +115,7 @@ class TrackersSearchQuery extends SearchQuery {
 		
 		if (forge_get_config('use_fti')) {
 			$qpa = db_construct_qpa ($qpa,
-						 'full_vector_agg @@ $1 ',
+						 'full_vector_agg @@ to_tsquery($1) ',
 						 array($words));
 			if (count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
@@ -125,7 +125,7 @@ class TrackersSearchQuery extends SearchQuery {
 							 ') ') ;
 			}
 			$qpa = db_construct_qpa ($qpa,
-						 'ORDER BY ts_rank(full_vector_agg, $1) DESC',
+						 'ORDER BY ts_rank(full_vector_agg, to_tsquery($1)) DESC',
 						 array($words)) ;
 			
 		} else {
@@ -144,16 +144,15 @@ class TrackersSearchQuery extends SearchQuery {
 	 */
 	static function getSections($groupId, $showNonPublic=false) {
 		$sql = 'SELECT group_artifact_id, name FROM artifact_group_list WHERE group_id = $1';
-		if (!$showNonPublic) {
-			$sql .= ' AND artifact_group_list.is_public = 1';
-		}
 		$sql .= ' ORDER BY name';
 
 		$res = db_query_params ($sql,
 					array ($groupId));
 		$sections = array();
 		while($data = db_fetch_array($res)) {
-			$sections[$data['group_artifact_id']] = $data['name'];
+			if (forge_check_perm('tracker',$data['group_artifact_id'],'read')) {
+				$sections[$data['group_artifact_id']] = $data['name'];
+			}
 		}
 		return $sections;
 	}

@@ -62,7 +62,11 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 		$dateFormat = _('Y-m-d H:i');
-
+		
+		if (!forge_check_perm('docman', $this->groupId, 'read')) {
+			return '';
+		}
+		
 		$return = '';
 
 		$lastDocGroup = null;
