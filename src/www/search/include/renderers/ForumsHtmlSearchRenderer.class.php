@@ -51,23 +51,49 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		);
 	}
 
+	function getFilteredRows() {
+		$rowsCount = $this->searchQuery->getRowsCount();
+		$result =& $this->searchQuery->getResult();
+
+		$fields = array ('group_forum_id',
+				 'msg_id',
+				 'forum_name',
+				 'subject',
+				 'realname',
+				 'post_date');
+
+		$fd = array();
+		for($i = 0; $i < $rowsCount; $i++) {
+			if (forge_check_perm('forum',
+					     db_result($result, $i, 'group_forum_id'),
+					     'read')) {
+				$r = array();
+				foreach ($fields as $f) {
+					$r[$f] = db_result($result, $i, $f);
+				}
+				$fd[] = $r;
+			}
+		}
+		return $fd;
+	}
+
 	/**
 	 * getRows - get the html output for result rows
 	 *
 	 * @return string html output
 	 */
 	function getRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$fd = $this->getFilteredRows();
+
 		$dateFormat = _('Y-m-d H:i');
 
 		$return = '';
 		$rowColor = 0;
 		$lastForumName = null;
-
-		for($i = 0; $i < $rowsCount; $i++) {
+		
+		foreach ($fd as $row) {
 			//section changed
-			$currentForumName = db_result($result, $i, 'forum_name');
+			$currentForumName = $row['forum_name'];
 			if ($lastForumName != $currentForumName) {
 				$return .= '<tr><td colspan="4">'.$currentForumName.'</td></tr>';
 				$lastForumName = $currentForumName;
@@ -75,11 +101,11 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			}
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
 						. '<td width="5%"></td>'
-						. '<td><a href="'.util_make_url ('/forum/message.php?msg_id='. db_result($result, $i, 'msg_id')).'">'
-							. html_image('ic/msg.png', '10', '12').' '.db_result($result, $i, 'subject')
-							.'</a></td>'
-						. '<td width="15%">'.db_result($result, $i, 'realname').'</td>'
-						. '<td width="15%">'.date($dateFormat, db_result($result, $i, 'post_date')).'</td></tr>';
+						. '<td><a href="'.util_make_url ('/forum/message.php?msg_id='. $row['msg_id']).'">'
+							. html_image('ic/msg.png', '10', '12').' '.$row['subject']
+							.'</a></td>'			
+						. '<td width="15%">'.$row['realname'].'</td>'
+						. '<td width="15%">'.date($dateFormat, $row['post_date']).'</td></tr>';
 			$rowColor ++;
 		}
 		return $return;
