@@ -94,7 +94,7 @@ class TasksSearchQuery extends SearchQuery {
 						 array());
 		}
 		$qpa = db_construct_qpa ($qpa,
-					 ' GROUP BY project_task.project_task_id',
+					 ' GROUP BY project_task.project_task_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, project_task.created_by, project_task.group_project_id',
 					 array());
 		
 		if (forge_get_config('use_fti')) {
