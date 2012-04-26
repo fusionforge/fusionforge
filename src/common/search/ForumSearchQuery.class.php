@@ -69,7 +69,7 @@ class ForumSearchQuery extends SearchQuery {
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFTIwords();
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT x.* FROM (SELECT forum.group_forum_id, forum.msg_id, ts_headline(forum.subject, $1::tsquery) AS subject, forum.post_date, users.realname, forum.subject||$2||forum.body as full_string_agg, forum_idx.vectors FROM forum, users, to_tsquery($1) AS q, forum_idx WHERE forum.group_forum_id = $3 AND forum.posted_by = users.user_id AND forum_idx.msg_id = forum.msg_id GROUP BY forum.msg_id, subject, body, post_date, realname, forum_idx.vectors) AS x WHERE vectors @@ $1::tsquery ',
+						 'SELECT x.* FROM (SELECT forum.group_forum_id, forum.msg_id, ts_headline(forum.subject, $1::tsquery) AS subject, forum.post_date, users.realname, forum.subject||$2||forum.body as full_string_agg, forum_idx.vectors FROM forum, users, to_tsquery($1) AS q, forum_idx WHERE forum.group_forum_id = $3 AND forum.posted_by = users.user_id AND forum_idx.msg_id = forum.msg_id GROUP BY forum.group_forum_id, forum.msg_id, subject, body, post_date, realname, forum_idx.vectors) AS x WHERE vectors @@ $1::tsquery ',
 						 array ($words,
 							$this->field_separator,
 							$this->forumId)) ;
@@ -87,7 +87,7 @@ class ForumSearchQuery extends SearchQuery {
 						 array($words)) ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT x.* FROM (SELECT forum.group_forum_id, forum.msg_id, forum.subject, forum.post_date, users.realname, forum.subject||$1||forum.body as full_string_agg FROM forum,users WHERE users.user_id=forum.posted_by AND forum.group_forum_id=$2 GROUP BY msg_id, subject, post_date, realname, body) AS x WHERE ',
+						 'SELECT x.* FROM (SELECT forum.group_forum_id, forum.msg_id, forum.subject, forum.post_date, users.realname, forum.subject||$1||forum.body as full_string_agg FROM forum,users WHERE users.user_id=forum.posted_by AND forum.group_forum_id=$2 GROUP BY forum.group_forum_id, msg_id, subject, post_date, realname, body) AS x WHERE ',
 						 array ($this->field_separator,
 							$this->forumId)) ;
 			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
