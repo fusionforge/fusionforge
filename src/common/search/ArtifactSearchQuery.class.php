@@ -68,10 +68,10 @@ class ArtifactSearchQuery extends SearchQuery {
 
 		$qpa = db_construct_qpa ($qpa,
 					 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg',
-						 array (''));
+						 array ($this->field_separator));
 		if (forge_get_config('use_fti')) {
 			$qpa = db_construct_qpa ($qpa,
-						 ', (artifact_idx.vectors || coalesce(ff_tsvector_agg(artifact_message_idx.vectors), $1::tsvector)) AS full_vector_agg',
+						 ', (artifact_idx.vectors || coalesce(ff_tsvector_agg(artifact_message_idx.vectors), to_tsvector($1))) AS full_vector_agg',
 						 array(''));
 						 }
 		$qpa = db_construct_qpa ($qpa, 
@@ -103,7 +103,7 @@ class ArtifactSearchQuery extends SearchQuery {
 		
 		if (forge_get_config('use_fti')) {
 			$qpa = db_construct_qpa ($qpa,
-						 'full_vector_agg @@ $1 ',
+						 'full_vector_agg @@ to_tsquery($1) ',
 						 array($words));
 			if (count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
@@ -113,7 +113,7 @@ class ArtifactSearchQuery extends SearchQuery {
 							 ') ') ;
 			}
 			$qpa = db_construct_qpa ($qpa,
-						 'ORDER BY ts_rank(full_vector_agg, $1) DESC',
+						 'ORDER BY ts_rank(full_vector_agg, to_tsquery($1)) DESC',
 						 array($words)) ;
 			
 		} else {
@@ -135,11 +135,11 @@ class ArtifactSearchQuery extends SearchQuery {
 			$artifactId = $this->artifactId;
 
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT a.group_artifact_id, a.artifact_id, ts_headline(summary, $1) AS summary, ',
+						 'SELECT a.group_artifact_id, a.artifact_id, ts_headline(summary, to_tsquery($1)) AS summary, ',
 						 array ($words)) ;
 			$qpa = db_construct_qpa ($qpa,
 						 'a.open_date, users.realname, rank FROM (SELECT a.artifact_id, SUM (ts_rank(ai.vectors, q) + ts_rank(ami.vectors, q)) AS rank, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)',
-						 array('')) ;
+						 array($this->field_separator)) ;
 
 			$qpa = db_construct_qpa ($qpa,
 						 ', artifact_idx ai, artifact_message_idx ami, to_tsquery($1) q',

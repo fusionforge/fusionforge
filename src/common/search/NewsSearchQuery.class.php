@@ -71,7 +71,7 @@ class NewsSearchQuery extends SearchQuery {
 				$qpa = $this->addMatchCondition ($qpa, 'full_string_agg') ;
 			}
 			$qpa = db_construct_qpa ($qpa,
-						 ' ORDER BY ts_rank(vectors, $1) DESC, post_date DESC',
+						 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC, post_date DESC',
 						 array($words)) ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,

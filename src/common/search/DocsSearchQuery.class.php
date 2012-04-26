@@ -106,7 +106,7 @@ class DocsSearchQuery extends SearchQuery {
 					 array ($this->field_separator,
 						$words)) ;
 		$qpa = db_construct_qpa ($qpa,
-					 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ $1',
+					 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($1)',
 					 array ($words)) ;
 		$qpa = db_construct_qpa ($qpa,
 					 ') AND doc_data.group_id = $1',
@@ -130,7 +130,7 @@ class DocsSearchQuery extends SearchQuery {
 			$qpa = $this->addMatchCondition($qpa, 'full_string_agg');
 		}
 		$qpa = db_construct_qpa ($qpa,
-					 ' ORDER BY ts_rank(vectors, $1) DESC, groupname ASC',
+					 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC, groupname ASC',
 					 array($words)) ;
 		return $qpa ;
 	}
