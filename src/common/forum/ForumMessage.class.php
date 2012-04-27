@@ -647,7 +647,7 @@ class ForumMessage extends Error {
 		}
 
 		foreach ($recipients as $recipient) {
-			if (is_a ($recipient, 'GFUser')) {
+			if ($recipient instanceof GFUser) {
 				setup_gettext_for_user ($recipient) ;
 				$dest_email = $recipient->getEmail ();
 			} else {
