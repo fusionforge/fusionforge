@@ -675,6 +675,7 @@ src/debian/dsf-po/fi.po -text
 src/debian/dsf-po/gl.po -text
 src/debian/dsf-po/pt.po -text
 src/debian/dsf-po/ru.po -text
+src/debian/patches/disable-authcas -text
 src/debian/patches/disable-dav.patch -text
 src/debian/patches/disable-tracker-reply-by-email.patch -text
 src/debian/patches/production-environment.patch -text
