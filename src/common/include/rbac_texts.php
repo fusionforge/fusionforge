@@ -121,9 +121,9 @@ function setup_rbac_strings () {
 								  'frs2' => _('View all packages'),
 								  'frs3' => _('Publish files'),
 
-								  'webcal0' => _('No access'),
-								  'webcal1' => _('Modify'),
-								  'webcal2' => _('See'),
+//								  'webcal0' => _('No access'),
+//								  'webcal1' => _('Modify'),
+//								  'webcal2' => _('See'),
 								  )
 		);
 
@@ -153,7 +153,7 @@ function setup_rbac_strings () {
 								    'docman' => _('Documentation manager'),
 								    'frs' => _('Files'),
 
-								    'webcal' => _('Webcal'),
+//								    'webcal' => _('Webcal'),
 								    )
 		) ;
 	plugin_hook ("role_translate_strings") ;

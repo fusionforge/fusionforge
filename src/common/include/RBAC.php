@@ -80,7 +80,7 @@ abstract class BaseRole extends Error {
 			'docman' => array (0, 1, 2, 3, 4),
 			'frs' => array (0, 1, 2, 3),
 
-			'webcal' => array(0, 1, 2),
+//			'webcal' => array(0, 1, 2),
 			);
 
 		// Global permissions
