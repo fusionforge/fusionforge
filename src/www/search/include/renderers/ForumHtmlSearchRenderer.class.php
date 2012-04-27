@@ -93,12 +93,14 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$dateFormat = _('Y-m-d H:i');
 
 		$return = '';
+		$i = 0;
 		foreach ($fd as $row) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="halfwidth"><a href="'.util_make_url ('/forum/message.php?msg_id=' . $row['msg_id']).'">'
 				. html_image('ic/msg.png', '10', '12')
 				. ' '.$row['subject'].'</a></td>'
 				. '<td width="30%">'.$row['realname'].'</td>'
 				. '<td width="20%">'.date($dateFormat, $row['post_date']).'</td></tr>';
+			$i++;
 		}
 		return $return;
 	}
