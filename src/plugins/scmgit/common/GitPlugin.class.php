@@ -480,14 +480,14 @@ class GitPlugin extends SCMPlugin {
 			while (!feof($pipe) && $data = fgets ($pipe)) {
 				$line = trim($data);
 				if (strlen($line) > 0) {
-					$result = preg_match("/^(?<name>.+) <(?<mail>.+)>/", $line, $matches);
+					$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
 					if ($result) {
 						// Author line
 						$last_user = $matches['name'];
 						$user2email[$last_user] = strtolower($matches['mail']);
 					} else {
 						// Short-commit stats line
-						preg_match("/^(?<mode>[AM])\s+(?<file>.+)$/", $line, $matches);
+						preg_match("/^(?P<mode>[AM])\s+(?P<file>.+)$/", $line, $matches);
 						if ($last_user == "") continue;
 						if ($matches['mode'] == 'A') {
 							$usr_adds[$last_user]++;
