@@ -254,28 +254,29 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 	}
 
 	$field_list = getStringFromRequest('__fields__');
-	$fields = explode(",", $field_list);
-	$values = array(); $v = array ();
-	$qpa = db_construct_qpa (false, 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
+	if (strlen($field_list)) {
+		$fields = explode(",", $field_list);
+		$values = array(); $v = array ();
+		$qpa = db_construct_qpa (false, 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
 
-	$i = 1 ;
-	foreach ($fields as $field) {
-		$v[] = '$'.$i;
-		$i++ ;
-		$values[] = getStringFromPost($field);
+		$i = 1 ;
+		foreach ($fields as $field) {
+			$v[] = '$'.$i;
+			$i++ ;
+			$values[] = getStringFromPost($field);
+		}
+
+		$qpa = db_construct_qpa ($qpa, implode (',', $v).')', $values) ;
+
+		if (db_query_qpa($qpa)) {
+		print('<p class="feedback">');
+			printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
+		print('</p>');
+		} else {
+			form_release_key(getStringFromRequest('form_key'));
+			echo db_error();
+		}
 	}
-
-	$qpa = db_construct_qpa ($qpa, implode (',', $v).')', $values) ;
-
-	if (db_query_qpa($qpa)) {
-        print('<p class="feedback">');
-		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
-        print('</p>');
-	} else {
-		form_release_key(getStringFromRequest('form_key'));
-		echo db_error();
-	}
-
 }
 
 /**
