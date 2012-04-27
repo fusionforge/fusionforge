@@ -41,11 +41,11 @@ foreach ($SubmittedVars as $SubmittedVar) {
 	$Configs[$i]['TaskNumbers']     = $SubmittedVar['TaskNumbers'];
 	$Configs[$i]['Log']             = $SubmittedVar['Log'];
 	$Configs[$i]['SvnDate']         = $SubmittedVar['SvnDate'];
-	$i++;
 	if($svn_tracker_debug) {
 		echo "Variables received by newcommit.php:\n";
 		print_r($Configs[$i]);
 	}
+	$i++;
 }
 
 
