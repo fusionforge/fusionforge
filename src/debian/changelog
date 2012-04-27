@@ -1,9 +1,11 @@
 fusionforge (5.1.50+svn15228-2) UNRELEASED; urgency=low
 
-  * Disable authcas plugin at least until phpCAS is packaged in Debian
-    (closes: #666908).
+  * Disable authcas plugin at least until phpCAS is packaged in Debian,
+    thanks to Laurent Bonnaud (closes: #666908).
+  * Fixed upgrade-db.php so it can run even without gforge-web-apache2
+    installed, thanks to Andreas Beckmann (closes: #668970).
 
- -- Roland Mas <lolando@debian.org>  Fri, 27 Apr 2012 14:22:07 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 27 Apr 2012 14:28:49 +0200
 
 fusionforge (5.1.50+svn15228-1) experimental; urgency=low
 

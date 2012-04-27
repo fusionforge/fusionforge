@@ -6,7 +6,7 @@
 // upgrade-db.php <plugin> => Upgrade only the database of the given active plugin.
 echo "Entering  upgrade-db.php\n";
 
-require_once dirname(__FILE__).'/../www/env.inc.php';
+require_once dirname(__FILE__).'/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/sqlparser.php';
 
