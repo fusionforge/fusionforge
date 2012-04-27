@@ -246,6 +246,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		$this->gotoProject('projecta');
+		$this->clickAndWait("link=Tasks");
 		$this->clickAndWait("link=Next Release");
 		$this->clickAndWait("link=Add Task");
 		$this->type("summary", "Task2 world peace");
@@ -478,11 +479,7 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->gotoProject('projecta');
 		$this->clickAndWait('Link=Advanced search');
-		$this->click("//a[contains(@href,'short_forum') and .='all']");
-		$this->click("//a[contains(@href,'short_tracker') and .='all']");
-		$this->click("//a[contains(@href,'short_pm') and .='all']");
-		$this->click("//a[contains(@href,'short_docman') and .='all']");
-		$this->click("//a[contains(@href,'short_news') and .='all']");
+		$this->click("//input[@class='checkthemall']");
 		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
@@ -500,7 +497,6 @@ class Search extends FForge_SeleniumTestCase
 
 		// Now let's check that RBAC permissions are taken into account
 
-		$this->createUser('piperade');
 		$this->gotoProject('projecta');
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");
@@ -514,7 +510,7 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
-		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "piperade") ;
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "ratatouille") ;
 		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Trainee");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
@@ -547,7 +543,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 
-		$this->switchUser('piperade');
+		$this->switchUser('ratatouille');
 		$this->gotoProject('projecta');
 		$this->select("type_of_search", "label=Search the entire project");
 		$this->type("//input[@name='words']", "zongo");
@@ -567,11 +563,7 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->gotoProject('projecta');
 		$this->clickAndWait('Link=Advanced search');
-		$this->click("//a[contains(@href,'short_forum') and .='all']");
-		$this->click("//a[contains(@href,'short_tracker') and .='all']");
-		$this->click("//a[contains(@href,'short_pm') and .='all']");
-		$this->click("//a[contains(@href,'short_docman') and .='all']");
-		$this->click("//a[contains(@href,'short_news') and .='all']");
+		$this->click("//input[@class='checkthemall']");
 		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
@@ -607,11 +599,9 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->gotoProject('projecta');
 		$this->clickAndWait('Link=Advanced search');
-		$this->click("//a[contains(@href,'short_forum') and .='all']");
-		$this->click("//a[contains(@href,'short_tracker') and .='all']");
-		$this->assertFalse($this->isElementPresent("//a[contains(@href,'short_pm') and .='all']"));
-		$this->assertFalse($this->isElementPresent("//a[contains(@href,'short_docman') and .='all']"));
-		$this->click("//a[contains(@href,'short_news') and .='all']");
+		$this->click("//input[@class='checkthemall']");
+		$this->assertFalse($this->isElementPresent("//input[@name='short_pm_checkall']"));
+		$this->assertFalse($this->isElementPresent("//input[@name='short_docman_checkall']"));
 		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertFalse($this->isTextPresent("Bug1"));
