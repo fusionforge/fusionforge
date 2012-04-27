@@ -1,4 +1,4 @@
-fusionforge (5.1.1-5+1) unstable; urgency=low
+fusionforge (5.1.1-6) unstable; urgency=low
 
   * Fixes in search.
   * Use current way to get configuration values instead of looking for the
