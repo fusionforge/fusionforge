@@ -8,3 +8,4 @@ use-yui-from-distro
 upgrade-db-location
 upgrade-db-noninteractive
 production-environment.patch
+disable-authcas
