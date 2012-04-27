@@ -61,10 +61,10 @@ class Widget_MyProjectsLastDocuments extends Widget {
 			foreach ($groups as $g) {
 				$i++;
 
-				$vWhiteList = new Valid_WhiteList('hide_docmanproject', array(0, 1));
+				$vWhiteList = new Valid_WhiteList('hide_dmproj', array(0, 1));
 				$vWhiteList->required();
 				if($request->valid($vWhiteList)) {
-					$hide_docmanproject = $request->get('hide_docmanproject');
+					$hide_docmanproject = $request->get('hide_dmproj');
 				} else {
 					$hide_docmanproject = null;
 				}
@@ -75,7 +75,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 				$df->setSort('DESC');
 				$df->getDocuments();
 
-				list($hide_now,$count_diff,$hide_url) = my_hide_url('docmanproject', $g->getID(), $hide_item_id, count($df->Documents), $hide_docmanproject);
+				list($hide_now,$count_diff,$hide_url) = my_hide_url('dmproj', $g->getID(), $hide_item_id, count($df->Documents), $hide_docmanproject);
 				$html_hdr = ($i ? '<tr class="boxitem"><td colspan="4">' : '').
 					$hide_url.'<a href="/docman/?group_id='.$g->getID().'">'.
 					$g->getPublicName().'</a>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>';
