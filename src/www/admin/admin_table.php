@@ -137,6 +137,15 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 		}
 	}
 
+	if ($unit == "theme") {
+		$result = db_numrows(db_query_params("SELECT theme_id FROM users WHERE theme_id=$1", array($id)));
+		if ($result > 0) {
+			echo '<div class="warning_msg">'.sprintf(_('You can\'t delete the theme %1$s since it\'s currently referenced in a user profile.'), db_result(db_query_params ('select language from users where language = $1',
+			array($id)), 0, 0)).'</div>';
+			return;
+		}
+	}
+
 	$result = db_query_params("SELECT * FROM $table WHERE $primary_key=$1", array($id));
 
 	if ($result) {
