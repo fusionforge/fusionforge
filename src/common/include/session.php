@@ -364,6 +364,20 @@ function session_redirect_external($url) {
 }
 
 /**
+ *	session_redirect404() - Redirect browser to 404 error page
+ *
+ *	@return never returns
+ */
+function session_redirect404() {
+	global $HTML, $gfwww;
+
+	header("HTTP/1.0 404 Not Found");
+	require_once $gfwww.'404.php';
+	exit;
+}
+
+
+/**
  *	session_require() - DEPRECATED Convenience function to easily enforce permissions
  *
  *	Calling page will terminate with error message if current user

@@ -40,16 +40,9 @@ require_once $gfcommon.'frs/FRSFile.class.php';
  *   package_id)
  */
 
-function send_404 () {
-	global $gfwww;
-	header("HTTP/1.0 404 Not Found");
-	require_once $gfwww.'404.php';
-	exit;
-}
-
 function send_file ($filename,$filepath,$file_id=NULL) {
 	if (!file_exists($filepath)) {
-		send_404();
+		session_redirect404();
 	}
 
 	if ($GLOBALS['sys_block_anonymous_downloads']) {
@@ -94,7 +87,7 @@ case 'file':
 	$file_id = $expl_pathinfo[4];
 	$File = frsfile_get_object($file_id);
 	if (!$File) {
-		send_404();
+		session_redirect404();
 	}
 
 	$Release = $File->FRSRelease;
@@ -121,7 +114,7 @@ case 'latestzip':
 
 	$Package = frspackage_get_object($package_id);
 	if (!$Package || !$Package->getNewestRelease()) {
-		send_404();
+		session_redirect404();
 	}
 
 	if ($Package->isPublic()) {
@@ -147,7 +140,7 @@ case 'latestfile':
 				array($package_id, $file_name));
 
 	if (!$res || db_numrows($res) < 1) {
-		send_404();
+		session_redirect404();
 	}
 
 	$row = db_fetch_array($res);
