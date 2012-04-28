@@ -369,7 +369,7 @@ function session_redirect_external($url) {
  *	@return never returns
  */
 function session_redirect404() {
-	global $HTML, $gfwww;
+	global $HTML, $gfwww, $gfcommon;
 
 	header("HTTP/1.0 404 Not Found");
 	require_once $gfwww.'404.php';
