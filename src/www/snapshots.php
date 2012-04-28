@@ -59,7 +59,7 @@ if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
 
 	readfile_chunked(forge_get_config('scm_snapshots_path').'/'.$filename);
 } else {
-	session_redirect(util_make_url('/404.php'));
+	session_redirect404();
 }
 
 ?>
