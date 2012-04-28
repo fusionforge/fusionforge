@@ -94,6 +94,8 @@ class Widget_MyArtifacts extends Widget {
 		$assigned = $atf->getAssignedArtifactsByGroup();
 		$submitted = $atf->getSubmittedArtifactsByGroup();
 		$all = $atf->getArtifactsFromSQLWithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR  av.assigned_to=$1) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
+
+		$my_artifacts = array();
 		if($this->_artifact_show == 'AS'){
 			$my_artifacts=$all;
 		}
