@@ -248,6 +248,13 @@ if(forge_get_config('use_news')) {
 if(forge_get_config('use_docman')) {
 ?>
 <input type="hidden" name="use_docman" value="<?php echo ($group->usesDocman() ? '1' : '0'); ?>" />
+<p>
+<?php echo _('If you wish, you can provide default email addresses to which new submissions will be sent') ?>.<br />
+<strong><?php echo _('New Document Submissions') ?>:</strong><br />
+<input type="text" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" size="40" maxlength="250" />
+<?php echo _('(send on all updates)') ?>
+<input type="checkbox" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> />
+</p>
 <?php
 }
 
@@ -269,14 +276,6 @@ if(forge_get_config('use_frs')) {
 <?php } ?>
 
 <input type="hidden" name="use_stats" value="<?php echo ($group->usesStats() ? '1' : '0'); ?>" />
-
-<p>
-<?php echo _('If you wish, you can provide default email addresses to which new submissions will be sent') ?>.<br />
-<strong><?php echo _('New Document Submissions') ?>:</strong><br />
-<input type="text" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" size="40" maxlength="250" />
-<?php echo _('(send on all updates)') ?>
-<input type="checkbox" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> />
-</p>
 
 <p>
 <input type="submit" name="submit" value="<?php echo _('Update') ?>" />
