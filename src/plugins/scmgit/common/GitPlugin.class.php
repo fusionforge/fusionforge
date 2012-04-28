@@ -596,6 +596,12 @@ class GitPlugin extends SCMPlugin {
 			return false ;
 		}
 
+		// Skip empty repo (no HEAD present in repository)
+		$ref = trim(`GIT_DIR=$repo git symbolic-ref HEAD`);
+		if (!file_exists($repo.'/'.$ref)) {
+			return false;
+		}
+
 		$tmp = trim (`mktemp -d`) ;
 		if ($tmp == '') {
 			return false ;
