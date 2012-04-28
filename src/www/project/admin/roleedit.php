@@ -168,6 +168,8 @@ for ($i=0; $i<count($keys); $i++) {
 		continue;
 	}
 
+	if ($keys[$i] == 'webcal') continue;
+
 	if (preg_match("/^plugin_([a-z]*)/", $keys[$i], $matches)) {
 		$p = $matches[1];
 		if (!$group->usesPlugin($p)) {
