@@ -72,10 +72,13 @@ class ForumFactory extends Error {
 
 	function &getAllForumIds() {
 		$result = array () ;
-		$res = db_query_params ('SELECT * FROM forum_group_list_vw
-WHERE group_id=$1
+		$res = db_query_params('SELECT group_forum_id FROM forum_group_list
+WHERE group_forum_id NOT IN (
+	SELECT group_forum_id FROM forum_group_list WHERE group_forum_id IN (
+		SELECT forum_id FROM news_bytes))
+AND group_id=$1
 ORDER BY group_forum_id',
-					   array ($this->Group->getID())) ;
+			array ($this->Group->getID()));
 		if (!$res) {
 			return $result ;
 		}
