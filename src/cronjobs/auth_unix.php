@@ -97,7 +97,7 @@ if ($err == "")
 	//
 	for ($i = 0; $i < count ($user_names); $i++)
 	{
-		if ($def_users [$user_names [$i]])
+		if (isset($def_users [$user_names [$i]]))
 		{
 			// This username was already existing in the /etc/passwd.org file
 		}
@@ -140,7 +140,7 @@ if ($err == "")
 	//
 	for ($i = 0; $i < count ($user_names); $i++)
 	{
-		if ($def_shadow [$user_names [$i]])
+		if (isset($def_shadow [$user_names [$i]]))
 		{
 			// This username was already existing in the /etc/shadow.org file
 		}
@@ -182,7 +182,7 @@ if ($err == "")
 	//
 	for ($i = 0; $i < count ($group_names); $i++)
 	{
-		if ($def_group [$group_names [$i]])
+		if (isset($def_group [$group_names [$i]]))
 		{
 			// This groupname was already existing in the /etc/group.org file
 		}
