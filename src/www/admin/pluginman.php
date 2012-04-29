@@ -72,7 +72,7 @@ if (getStringFromRequest('update')) {
 			}
 			$installdir = $plugin->getInstallDir();
 
-			// Remove the symbolic links made if plugin has a www.
+			// Remove the symbolic link made if plugin has a www.
 			if (is_dir(forge_get_config('plugins_path') . '/' . $pluginname . '/www')) { // if the plugin has a www dir delete the link to it
 				if (file_exists('../'.$installdir)) {
 					$result = unlink('../'.$installdir);
@@ -82,11 +82,13 @@ if (getStringFromRequest('update')) {
 				} else {
 					$result = 0;
 				}
-				if (file_exists(forge_get_config('config_path'). '/plugins/'.$pluginname)) {
-					$result = unlink(forge_get_config('config_path'). '/plugins/'.$pluginname); // the apache group or user should have write perms in forge_get_config('config_path')/plugins folder...
-					if (!$result) {
-						$feedback .= _('Success, config not deleted');
-					}
+			}
+
+			// Remove the symbolic link made if plugin has a config.
+			if (file_exists(forge_get_config('config_path'). '/plugins/'.$pluginname)) {
+				$result = unlink(forge_get_config('config_path'). '/plugins/'.$pluginname); // the apache group or user should have write perms in forge_get_config('config_path')/plugins folder...
+				if (!$result) {
+					$feedback .= _('Success, config not deleted');
 				}
 			}
 		}
