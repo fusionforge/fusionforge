@@ -173,8 +173,8 @@ if ($area=='tracker') {
 		$interval = REPORT_MONTH_SPAN;
 	}
 
-	print "start: $start ".date('r',$start)."<br>";
-	print "  end: $end ".date('r', $end)."<br>";
+//	print "start: $start ".date('r',$start)."<br>";
+//	print "  end: $end ".date('r', $end)."<br>";
 
 	$sum = array();
 	$starting_date = $start;
