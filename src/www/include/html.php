@@ -158,10 +158,16 @@ function html_get_theme_popup ($title='theme_id',$selected='xzxz') {
 	$res=db_query_params ('SELECT theme_id, fullname FROM themes WHERE enabled=true',
 			array());
 	$nbTheme = db_numrows($res);
-	if($nbTheme < 2) {
+	if ($nbTheme == 1) {
+		$thetheme = db_result($res, 0, 'fullname');
+		return util_html_secure($thetheme) . html_e('input', array(
+			'type' => 'hidden',
+			'name' => $title,
+			'value' => db_result($res, 0, 'theme_id'),
+		    ));
+	} else if ($nbTheme < 1) {
 		return("");
-	}
-	else {
+	} else {
 		return html_build_select_box($res,$title,$selected,false);
 	}
 }
