@@ -1,0 +1,102 @@
+Documentation of common HTML utility functions
+──────────────────────────────────────────────
+
+Functions defined in src/common/include/utils.php → available: always.
+
+
+• string util_html_encode(string $s)
+
+	util_html_secure('a=1&b=2')
+	⇒ 'a=1&amp;b=2'        // HTML-encoded
+
+	util_html_secure('a=1&amp;b=2')
+	⇒ 'a=1&amp;amp;b=2'    // changed!
+
+  Encode a string for use in XHTML even if it is already encoded.
+
+• string util_html_secure(string $s)
+
+	util_html_secure('a=1&b=2')
+	⇒ 'a=1&amp;b=2'    // HTML-encoded
+
+	util_html_secure('a=1&amp;b=2')
+	⇒ 'a=1&amp;b=2'    // unchanged
+
+  Encode a string for use in XHTML if it is not already encoded.
+  (So, if you use this for output sanitising, other than a slight
+  performance penalty no harm is done if the output was already
+  sane.)
+
+• string util_unconvert_htmlspecialchars(string $s)
+
+	util_unconvert_htmlspecialchars('a=1&b=2')
+	⇒ 'a=1&b=2'    // unchanged
+
+	util_unconvert_htmlspecialchars('a=1&amp;b=2')
+	⇒ 'a=1&b=2'    // HTML-decoded
+
+  Undo util_html_encode; be careful, this can decode partially.
+
+
+• string util_gethref(optional(false) string $baseurl,
+    optional(empty) array $args, optional(true) bool $ashtml,
+    optional('&') string $sep)
+
+	util_gethref("/x.php", array(
+		'foo' => 'a+b&c',
+		'bar' => 'd+b&e',
+	    ));
+	⇒ "/x.php?foo=a%2Bb%26c&amp;bar=d%2Bb%26e"
+
+	util_gethref("/x.php", array(
+		'foo' => 'a+b&c',
+		'bar' => 'd+b&e',
+	    ), false);
+	⇒ /x.php?foo=a%2Bb%26c&bar=d%2Bb%26e
+
+	util_gethref("/x.php", array(
+		'foo' => 'a+b&c',
+		'bar' => 'd+b&e',
+	    ), true, ';')
+	⇒ "/x.php?foo=a%2Bb%26c;bar=d%2Bb%26e"
+
+  Construct an URI for use with util_make_url, session_redirect,
+  html_e('a', array('href' => …)), and similar. The first argument
+  ($baseurl) is passed through as-is but, if falsy, defaults to
+  getStringFromServer('PHP_SELF'); the arguments (both keys and
+  values) are urlencoded (entries while values is false are not
+  emitted at all) and appended, with a question mark in front and
+  the $sep separator in between.
+
+  If $ashtml is true (default), the result will then be run through
+  util_html_encode; set this to false when using in html_e href as
+  value (since html_e will html-encode itself).
+
+• string util_make_url(string $path)
+
+	util_make_url('/foo.php?a=1&amp;b=2')
+	⇒ 'https://forge.domain.com/fusionforge/foo.php?a=1&amp;b=2'
+
+  Return an absolute URI for the path in question, containing the
+  system-defined protocol, hostname and (if defined) webroot prefix.
+
+  Both html-encoded and not html-encoded return values of util_gethref
+  are safe to pass as arguments, if their baseurl was only a path.
+
+• integer|false util_nat0(ByRef string $s)
+
+  If and only if $s is the normalised positive integer (ℕ₀)
+  representation of a number, return that number; false otherwise.
+  Limited by system constraints, i.e. usually [0;2³¹-1].
+
+
+‣ common non-HTML utility functions
+
+
+• mixed util_ifsetor(ByRef mixed $val, optional(false) mixed $default)
+
+  If isset($val), return $val, otherwise (no warning) $default.
+
+• string debug_string_backtrace(void)
+
+  Return the current debugging backtrace as string.
