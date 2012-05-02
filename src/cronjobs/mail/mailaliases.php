@@ -26,7 +26,8 @@ require dirname(__FILE__).'/../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
-define('FILE_EXTENSION','.new'); // use .new when testing
+//define('FILE_EXTENSION','.new'); // use .new when testing
+define('FILE_EXTENSION',''); // use .new when testing
 
 /*
 
@@ -49,7 +50,7 @@ GRANT ALL ON project_sums_agg TO listsuser;
 $path_to_cronjobs = dirname(dirname(__FILE__));
 
 // You should also modify this to the correct PHP path and extra configuration (if needed)
-$php_command = "/usr/bin/php -d include_path=".ini_get("include_path");
+$php_command = '/usr/bin/php';
 
 
 $aliases_orig = file("/etc/aliases");
@@ -158,7 +159,7 @@ if (forge_get_config('use_mail') && file_exists(forge_get_config('data_path').'/
 
 		$gforge_aliases[$alias] = $command;
 	}
-	$err .= "\n$k Mailman Lines";
+	$err .= "$k Mailman Lines\n";
 	fclose($h2);
 }
 
