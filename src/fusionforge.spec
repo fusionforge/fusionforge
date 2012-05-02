@@ -203,9 +203,9 @@ This is a plugin to integrate MediaWiki within FusionForge.
 %package plugin-moinmoin
 Summary: MoinMoinWiki plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, postgresql
+Requires: %{name} >= %{version}, php, postgresql, moin
 %description plugin-moinmoin
-This is a plugin to integrate MediaWiki within FusionForge.
+This is a plugin to integrate MoinMoin wiki within FusionForge.
 
 %package plugin-message
 Summary: Global Information Message plugin for FusionForge
@@ -213,7 +213,7 @@ Group: Development/Tools
 Requires: %{name} >= %{version}, php
 %description plugin-message
 This is a plugin to add a global announce message for FusionForge.
-It can be use to warn users for planned or current outage.
+It can be used to warn users for planned or current outage.
 
 %package plugin-online_help
 Summary: online_help plugin for FusionForge
@@ -481,7 +481,7 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__sed} -i -e "s!use_webdav = no!use_webdav = yes!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 
 # install fusionforge crontab
-%{__install} -m 644 packaging/cron.d/cron.fusionforge $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/%{name}
+%{__sed} -e 's/\$FFUSER/%{gfuser}/g' packaging/cron.d/cron.fusionforge > $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/%{name}
 
 %{__install} -m 644 deb-specific/sqlhelper.pm $RPM_BUILD_ROOT%{FORGE_DIR}/lib/sqlhelper.pm
 
