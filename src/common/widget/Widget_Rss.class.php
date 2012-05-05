@@ -1,21 +1,25 @@
 <?php
 /**
+ * Generic RSS Widget Class
+ *
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2012, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
- * This file is a part of Codendi.
+ * This file is a part of Fusionforge.
  *
- * Codendi is free software; you can redistribute it and/or modify
+ * Fusionforge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Codendi is distributed in the hope that it will be useful,
+ * Fusionforge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
+ * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
 require_once('Widget.class.php');
@@ -46,10 +50,10 @@ require_once('Widget.class.php');
 				}
 			}
 			require_once('common/rss/simplepie.inc');
-			if (!is_dir(forge_get_config('sys_var_path') .'/rss')) {
-				mkdir(forge_get_config('sys_var_path') .'/rss');
+			if (!is_dir(forge_get_config('data_path') .'/rss')) {
+				mkdir(forge_get_config('data_path') .'/rss');
 			}
-			$rss = new SimplePie($this->rss_url, forge_get_config('sys_var_path') .'/rss', null, forge_get_config('sys_proxy'));
+			$rss = new SimplePie($this->rss_url, forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
 			$max_items = 10;
 			$items = array_slice($rss->get_items(), 0, $max_items);
 			$content .= '<table class="fullwidth">';
@@ -134,10 +138,10 @@ require_once('Widget.class.php');
 				else {
 					require_once('common/rss/simplepie.inc');
 				}
-				if (!is_dir(forge_get_config('sys_var_path') .'/rss')) {
-					mkdir(forge_get_config('sys_var_path') .'/rss');
+				if (!is_dir(forge_get_config('data_path') .'/rss')) {
+					mkdir(forge_get_config('data_path') .'/rss');
 				}
-				$rss_reader = new SimplePie($rss['url'], forge_get_config('sys_var_path') .'/rss', null, forge_get_config('sys_proxy'));
+				$rss_reader = new SimplePie($rss['url'], forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
 				$rss['title'] = $rss_reader->get_title();
 			}
 			$sql = 'INSERT INTO widget_rss (owner_id, owner_type, title, url) VALUES ($1,$2,$3,$4)';
@@ -206,6 +210,5 @@ require_once('Widget.class.php');
 			return vsprintf(_('over %s years'), round($distance_in_minutes/525960));
 		}
 	}
-
 }
 ?>
