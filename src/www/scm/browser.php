@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Tim Perdue -GForge LLC
  * Copyright 2004-2009, Roland Mas
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,11 +31,13 @@ $group_id = getIntFromRequest("group_id");
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 
 $repo_name = getStringFromRequest("repo_name", "none");
+$user_id = getIntFromRequest("user_id");
 
-$hook_params = array () ;
-$hook_params['group_id'] = $group_id ;
-$hook_params['repo_name'] = $repo_name ;
-plugin_hook ("scm_browser_page", $hook_params) ;
+$hook_params = array();
+$hook_params['group_id'] = $group_id;
+$hook_params['repo_name'] = $repo_name;
+$hook_params['user_id'] = $user_id;
+plugin_hook ("scm_browser_page", $hook_params);
 
 scm_footer();
 

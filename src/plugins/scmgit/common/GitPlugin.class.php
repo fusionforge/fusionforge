@@ -99,7 +99,7 @@ class GitPlugin extends SCMPlugin {
 				$user_id = db_result($result,$i,'user_id');
 				$user_name = db_result($result,$i,'user_name');
 				$real_name = db_result($result,$i,'realname');
-				$b .= '<tt>git clone '.util_make_url('/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').'</tt> ('.util_make_link_u ($user_name, $user_id, $real_name).')<br />';
+				$b .= '<tt>git clone '.util_make_url('/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').'</tt> ('.util_make_link_u ($user_name, $user_id, $real_name).') ['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id, _('Browse Git Repository')).']<br />';
 			}
 			$b .= '</p>';
 		}
@@ -212,7 +212,11 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		if ($project->usesPlugin($this->name)) {
-			if ($this->browserDisplayable($project)) {
+			if ($params['user_id']) {
+				$user = user_get_object($params['user_id']);
+				echo $project->getUnixName().'/users/'.$user->getUnixName();
+				print '<iframe src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/users/'.$user->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>' ;
+			} else if ($this->browserDisplayable($project)) {
 				print '<iframe src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>' ;
 			}
 		}
