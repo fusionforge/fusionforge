@@ -190,7 +190,7 @@ if (is_numeric($docid)) {
 				$docs = $df->getDocuments(1);	// no caching
 				if (is_array($docs) && count($docs) > 0) {	// this group has documents
 					foreach ($docs as $doc) {
-						if (!$zip->addFromString($doc->getFileName(), $doc->getFileData()))
+						if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $doc->getFileName()), $doc->getFileData()))
 							exit_error(_('Unable to fill zipfile.'), 'docman');
 					}
 				}
@@ -233,7 +233,7 @@ if (is_numeric($docid)) {
 						exit_error($d->getErrorMessage(), 'docman');
 					}
 
-					if (!$zip->addFromString($d->getFileName(), $d->getFileData()))
+					if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $d->getFileName()), $d->getFileData()))
 						exit_error(_('Unable to fill zipfile.'), 'docman');
 				} else {
 					$zip->close();
