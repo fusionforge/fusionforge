@@ -745,6 +745,11 @@ if [ "$1" -eq "1" ]; then
 	HASH=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-40)
 	#%{__sed} -i -e "s/sys_session_key = 'foobar'/sys_session_key = '$HASH'/g" %{FORGE_CONF_DIR}/local.inc
 
+	# Mailman initial setup
+	/usr/lib/mailman/bin/newlist -q mailman $FFORGE_ADMIN_USER@$HOSTNAME $FFORGE_ADMIN_PASSWORD >>%{INSTALL_LOG} 2>&1
+	chkconfig mailman on >>%{INSTALL_LOG} 2>&1
+	/etc/init.d/mailman start >>%{INSTALL_LOG} 2>&1
+
 	# add noreply mail alias
 	echo "noreply: /dev/null" >> /etc/aliases
 	/usr/bin/newaliases >/dev/null 2>&1
