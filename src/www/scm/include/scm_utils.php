@@ -3,8 +3,9 @@
  * FusionForge SCM Library
  *
  * Copyright 2004-2005 (c) GForge LLC, Tim Perdue
- * Copyright 2010 (c), Franck Villaume
+ * Copyright 2010 (c), Franck Villaume - Capgemini
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -43,18 +44,21 @@ function scm_header($params) {
 		Show horizontal links
 	*/
 	if (session_loggedin()) {
-		if (forge_check_perm ('project_admin', $project->getID())) {
+		$params['TITLES'][] = _('View Source Code');
+		$params['DIRS'][] = '/scm/?group_id='.$params['group'];
+		$params['TOOLTIPS'][] = array('title' => _('Online Source code browsing'), 'class' => 'tabtitle');
+		$params['TITLES'][] = _('Reporting');
+		$params['DIRS'][] = '/scm/reporting/?group_id='.$params['group'];
+		$params['TOOLTIPS'][] = array('title' => _('Global statistics on this SCM repository'), 'class' => 'tabtitle');
+		$params['TITLES'][] = _('Administration');
+		$params['DIRS'][] = '/scm/admin/?group_id='.$params['group'];
+		$params['TOOLTIPS'][] = array('title' => _('Administration page : enable / disable options'), 'class' => 'tabtitle');
+
+		if (forge_check_perm('project_admin', $project->getID())) {
 			$params['submenu'] = $HTML->subMenu(
-				array(
-					_('View Source Code'),
-					_('Reporting'),
-					_('Administration')
-					),
-				array(
-					'/scm/?group_id='.$params['group'],
-					'/scm/reporting/?group_id='.$params['group'],
-					'/scm/admin/?group_id='.$params['group']
-					)
+				$params['TITLES'],
+				$params['DIRS'],
+				$params['TOOLTIPS']
 				);
 		}
 	}
