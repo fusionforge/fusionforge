@@ -5,8 +5,8 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -111,7 +111,7 @@ if (is_numeric($docid)) {
 			$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
 			$file = forge_get_config('data_path').'/'.$filename;
 			$zip = new ZipArchive;
-			if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE)) {
+			if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
 				exit_error(_('Unable to open zip archive for backup'), 'docman');
 			}
 
