@@ -53,8 +53,8 @@ if (getStringFromRequest('submit')) {
 	$phone = getStringFromRequest('phone');
 	$fax = getStringFromRequest('fax');
 	$title = getStringFromRequest('title');
-	$jabber_address = getStringFromRequest('jabber');
-	$jabber_only = getStringFromRequest('jabber');
+	$jabber_address = getStringFromRequest('jabber_address');
+	$jabber_only = getStringFromRequest('jabber_only');
 	$mail_site = getStringFromRequest('mail_site');
 	$mail_va = getStringFromRequest('mail_va');
 	$remember_user = getStringFromRequest('remember_user');
