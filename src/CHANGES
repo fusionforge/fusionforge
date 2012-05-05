@@ -2,6 +2,7 @@ FusionForge-5.3:
 * Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)
 * Trackers: Attachements moved to filesystem to allow larger attachments & reduce DB size (Alcatel-Lucent)
 * Users: notify admins when user has validated his account (TrivialDev)
+* scmgit: add browsing capability for user personal repository (TrivialDev)
 
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)
