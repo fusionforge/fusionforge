@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -98,12 +99,12 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 		$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
 		$file = forge_get_config('data_path').'/'.$filename;
 		$zip = new ZipArchive;
-		if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE)) {
+		if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
 			exit_error(_('Unable to open zip archive for backup'),'docman');
 		}
 
-        if ( !docman_fill_zip($zip,$nested_groups,$df))
-            exit_error(_('Unable to fill zip archive for backup'),'docman');
+		if ( !docman_fill_zip($zip,$nested_groups,$df))
+			exit_error(_('Unable to fill zip archive for backup'),'docman');
 
 		if ( !$zip->close())
 			exit_error(_('Unable to close zip archive for backup'),'docman');
