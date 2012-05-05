@@ -53,14 +53,14 @@ function doc_get_state_box($checkedval = 'xzxz', $removedval = '') {
 function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0, $parent_docname = '') {
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
-			if (!$zip->addEmptyDir($parent_docname.'/'.$dg->getName()))
+			if (!$zip->addEmptyDir(iconv("UTF-8", "ASCII//TRANSLIT", $parent_docname).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName())))
 				return false;
 
 			$document_factory->setDocGroupID($dg->getID());
 			$docs = $document_factory->getDocuments(1);	// no caching
 			if (is_array($docs) && count($docs) > 0) {	// this group has documents
 				foreach ($docs as $doc) {
-					if ( !$zip->addFromString($parent_docname.'/'.$dg->getName().'/'.$doc->getFileName(),$doc->getFileData()))
+					if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $parent_docname).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName()).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $doc->getFileName()), $doc->getFileData()))
 						return false;
 				}
 			}
