@@ -7,6 +7,7 @@
  * Copyright 2002-2004, GForge Team
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -79,7 +80,7 @@ function docman_recursive_display($docgroup) {
 	}
 }
 
-/*
+/**
  * docman_fill_zip - Recursive function to add docgroup and documents inside zip for backup
  *
  * @param	$object	zip
@@ -91,18 +92,18 @@ function docman_recursive_display($docgroup) {
 function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0, $parent_docname = '') {
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
-			if (!$zip->addEmptyDir($parent_docname.'/'.$dg->getName()))
+			if (!$zip->addEmptyDir(iconv("UTF-8", "ASCII//TRANSLIT", $parent_docname).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName())))
 				return false;
 
 			$document_factory->setDocGroupID($dg->getID());
 			$docs = $document_factory->getDocuments();
 			if (is_array($docs) && count($docs) > 0) {	// this group has documents
 				foreach ($docs as $doc) {
-					if ( !$zip->addFromString($parent_docname.'/'.$dg->getName().'/'.$doc->getFileName(),$doc->getFileData()))
+					if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $parent_docname).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName()).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $doc->getFileName()), $doc->getFileData()))
 						return false;
 				}
 			}
-			docman_fill_zip($zip, $nested_groups, $document_factory, $dg->getID(), $parent_docname.'/'.$dg->getName());
+			docman_fill_zip($zip, $nested_groups, $document_factory, $dg->getID(), iconv("UTF-8", "ASCII//TRANSLIT", $parent_docname).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName()));
 		}
 	}
 	return true;
