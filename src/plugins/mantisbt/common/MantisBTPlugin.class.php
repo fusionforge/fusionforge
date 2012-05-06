@@ -689,7 +689,7 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name, _('Global MantisBT admin'), array('class' => 'tabtitle', 'title' => _('Direct link to global configuration of this plugin')));
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Global MantisBT admin'), array('class' => 'tabtitle', 'title' => _('Direct link to global configuration of this plugin')));
 	}
 
 	function widgets($params) {
