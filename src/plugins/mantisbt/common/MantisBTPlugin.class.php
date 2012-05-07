@@ -692,6 +692,18 @@ class MantisBTPlugin extends Plugin {
 		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Global MantisBT admin'), array('class' => 'tabtitle', 'title' => _('Direct link to global configuration of this plugin')));
 	}
 
+
+	/**
+	 * getPluginDescription - display the description of this plugin in pluginman admin page
+	 *
+	 * @return	string	the description
+	 */
+	function getPluginDescription() {
+		return _('Use Mantis Bugtracker as another ticket management tool.');
+	}
+
+	/** Widgets function **/
+
 	function widgets($params) {
 		$group = group_get_object($GLOBALS['group_id']);
 		if ( !$group || !$group->usesPlugin ( $this->name ) ) {
