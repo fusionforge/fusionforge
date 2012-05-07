@@ -147,6 +147,19 @@ if (!$pm->PluginIsInstalled('scmcvs')) {
 	$plugins_disabled[] = 'cvstracker';
 }
 
+// [#411] Prevent admin from desactivating the last auth plugin.
+$plugins = $pm->GetPlugins();
+$auth_plugins = array();
+foreach($plugins as $p) {
+	if (preg_match('/^auth/', $p)) {
+		$auth_plugins[] = $p;
+	}
+}
+if (count($auth_plugins) == 1) {
+	$plugin = $auth_plugins[0];
+	$action[$plugin]['deactivate'] = false;
+}
+
 //get the directories from the plugins dir
 
 $filelist = array();
@@ -192,6 +205,7 @@ foreach ($filelist as $filename) {
 	if ($pm->PluginIsInstalled($filename)) {
 		$msg = _('Active');
 		$status = "active";
+		$next = 'deactivate';
 		$link = util_make_link("/admin/pluginman.php?update=$filename&amp;action=deactivate", _('Deactivate'));
 
 		$res = db_query_params ('SELECT u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id',
@@ -239,10 +253,16 @@ foreach ($filelist as $filename) {
 	} else {
 		$msg = _('Inactive');
 		$status = "inactive";
+		$next = 'activate';
 		$link = util_make_link("/admin/pluginman.php?update=$filename&amp;action=activate", _('Activate'));
 		$users = _('None');
 		$groups = _('None');
 		$adminlink = '';
+	}
+
+	// Disable link to action if action is not possible.
+	if (isset($action[$filename][$next]) && $action[$filename][$next] === false) {
+		$link = '';
 	}
 
 	$title = _('Current plugin status:'). ' ' .forge_get_config('plugin_status', $filename);
