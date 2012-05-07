@@ -1,8 +1,10 @@
 <?php
-
 /**
  * MediaWikiPlugin Class
  *
+ * Copyright 2000-2011, Fusionforge Team 
+ * Copyright 2012, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -51,6 +53,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page for group
 		$this->_addHook("clone_project_from_template") ;
 		$this->_addHook("site_admin_option_hook");
+		$this->_addHook('group_delete');
 	}
 
         function process() {
@@ -370,6 +373,17 @@ class MediaWikiPlugin extends Plugin {
 			}
 		} elseif ($hookname == "site_admin_option_hook") {
 			echo '<li><a href="'.$this->getPluginPath().'/">' . _('Mediawiki plugin') . '</a></li>';
+		} elseif ($hookname == 'group_delete') {
+			$projectId = $params['group_id'];
+			$projectObject = group_get_object($projectId);
+			if ($projectObject->usesPlugin($this->name)) {
+				//delete the files and db schema
+				$schema = 'plugin_mediawiki_'.$projectObject->getUnixName();
+				// Sanitize schema name
+				$schema = strtr($schema, "-", "_");
+				db_query_params('drop schema $1 cascade', array($schema));
+				exec('/bin/rm -rf '.forge_get_config('projects_path', 'mediawiki').'/'.$projectObject->getUnixName());
+			}
 		}
 	}
   }
