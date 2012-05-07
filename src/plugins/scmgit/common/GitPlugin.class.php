@@ -38,6 +38,7 @@ class GitPlugin extends SCMPlugin {
 		$this->_addHook('scm_gather_stats');
 		$this->_addHook('widget_instance', 'myPageBox', false);
 		$this->_addHook('widgets', 'widgets', false);
+		$this->_addHook('activity');
 		$this->register();
 	}
 
@@ -686,6 +687,39 @@ class GitPlugin extends SCMPlugin {
 				$params['output'] .= $project_name.': '.`git gc --quiet 2>&1`;
 			}
 		}
+	}
+
+	function activity($params) {
+		$group_id = $params['group'];
+		$project = group_get_object($group_id);
+		if (! $project->usesPlugin($this->name)) {
+			return false;
+		}
+		if (in_array('scm', $params['show'])) {
+			$start_time = $params['begin'];
+			$end_time = $params['end'];
+			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
+			$pipe = popen("GIT_DIR=\"$repo\" git log --date=raw --since=@$start_time --until=@$end_time --all --pretty='format:%ad||%an||%s||%h' --name-status", 'r' );
+			while (!feof($pipe) && $data = fgets($pipe)) {
+				$line = trim($data);
+				$splitedLine = explode('||', $line);
+				if (sizeof($splitedLine) == 4) {
+					$result = array();
+					$result['section'] = 'scm';
+					$result['group_id'] = $group_id;
+					$result['ref_id'] = 'browser.php?group_id='.$group_id;
+					$result['description'] = $splitedLine[2].' (commit '.$splitedLine[3].')';
+					$result['realname'] = '';
+					$splitedDate = explode(' ', $splitedLine[0]);
+					$result['activity_date'] = $splitedDate[0];
+					$result['subref_id'] = '';
+					$params['results'][] = $result;
+				}
+			}
+		}
+		$params['ids'][] = 'scm';
+		$params['texts'][] = _('SCM Git Commits');
+		return true;
 	}
 }
 
