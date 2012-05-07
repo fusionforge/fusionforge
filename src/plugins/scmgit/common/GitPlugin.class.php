@@ -112,24 +112,30 @@ class GitPlugin extends SCMPlugin {
 		if (session_loggedin()) {
 			$u =& user_get_object(user_getid());
 			$d = $u->getUnixName();
+			$validSetup = 0;
+			$b = '';
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b = '<h2>';
+				$b .= '<h2>';
 				$b .= _('Developer GIT Access via SSH');
 				$b .= '</h2>';
 				$b .= '<p>';
 				$b .= _('Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $this->getBoxForProject($project) . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
-			} elseif (forge_get_config('use_dav', 'scmgit')) {
+				$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				$validSetup = 1;
+			} 
+			if (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b = '<h2>';
+				$b .= '<h2>';
 				$b .= _('Developer GIT Access via HTTP');
 				$b .= '</h2>';
 				$b .= '<p>';
 				$b .= _('Only project developers can access the GIT tree via this method. Enter your site password when prompted.');
 				$b .= '</p>';
 				$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $this->getBoxForProject($project) . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
-			} else {
+				$validSetup = 1;
+			}
+			if ($validSetup == 0) {
 				$b = '<p class="warning">'._('Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled').'</p>';
 			}
 		} else {
@@ -140,8 +146,9 @@ class GitPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $this->getBoxForProject($project) . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
-			} elseif (forge_get_config('use_dav', 'scmgit')) {
+				$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+			} 
+			if (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$b = '<h2>';
 				$b .= _('Developer GIT Access via HTTP');
@@ -166,7 +173,7 @@ class GitPlugin extends SCMPlugin {
 					$b .= '<p>';
 					$b .= _('You have a personal repository for this project, accessible through SSH with the following method. Enter your site password when prompted.');
 					$b .= '</p>';
-					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $this->getBoxForProject($project) . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>' ;
+					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>' ;
 				} else {
 					$glist = $u->getGroups();
 					foreach ($glist as $g) {
