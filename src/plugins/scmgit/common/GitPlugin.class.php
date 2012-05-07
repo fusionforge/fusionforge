@@ -88,7 +88,7 @@ class GitPlugin extends SCMPlugin {
 		if ($rows > 0) {
 			$b .= '<h2>';
 			$b .= _('Developer\'s repository');
-			$b .= '</h2>';
+			$b .= '</h2>'."\n";
 			$b .= '<p>';
 			$b .= ngettext('One of this project\'s members also has a personal Git repository that can be checked out anonymously.',
 					'Some of this project\'s members also have personal Git repositories that can be checked out anonymously.',
@@ -110,7 +110,7 @@ class GitPlugin extends SCMPlugin {
 	function getInstructionsForRW($project) {
 
 		if (session_loggedin()) {
-			$u =& user_get_object(user_getid());
+			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
 			$validSetup = 0;
 			$b = '';
@@ -211,8 +211,6 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function printBrowserPage($params) {
-		global $HTML;
-
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
@@ -389,6 +387,9 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		$config_dir = forge_get_config('config_path').'/plugins/scmgit';
+		if (!is_dir($config_dir)) {
+			mkdir($config_dir, 0755, true);
+		}
 		$fname = $config_dir . '/gitweb.conf' ;
 		$config_f = fopen($fname.'.new', 'w') ;
 		$rootdir = forge_get_config('repos_path', 'scmgit');
@@ -441,9 +442,6 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function gatherStats ($params) {
-		global $last_user, $usr_adds, $usr_deletes,
-		$usr_updates, $updates, $adds;
-
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
@@ -454,8 +452,6 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		if ($params['mode'] == 'day') {
-			db_begin();
-
 			$year = $params ['year'] ;
 			$month = $params ['month'] ;
 			$day = $params ['day'] ;
@@ -473,11 +469,12 @@ class GitPlugin extends SCMPlugin {
 			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
 			if (!is_dir ($repo) || !is_dir ("$repo/refs")) {
 				// echo "No repository\n" ;
-				db_rollback () ;
 				return false ;
 			}
 
-			$pipe = popen ("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%an <%ae>' --name-status", 'r' ) ;
+			$pipe = popen ("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%an <%ae>' --name-status 2>/dev/null", 'r' ) ;
+
+			db_begin();
 
 			// cleaning stats_cvs_* table for the current day
 			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
