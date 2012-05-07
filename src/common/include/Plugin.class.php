@@ -314,6 +314,10 @@ class Plugin extends Error {
 			$user->setPluginUse($this->name, false);
 		}
 	}
+
+	function getPluginDescription() {
+		return _('No description available.');
+	}
 }
 
 class PluginSpecificRoleSetting {

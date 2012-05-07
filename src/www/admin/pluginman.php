@@ -202,6 +202,7 @@ sort($filelist);
 $j = 0;
 
 foreach ($filelist as $filename) {
+	$pluginObject = $pm->GetPluginObject($filename);
 	if ($pm->PluginIsInstalled($filename)) {
 		$msg = _('Active');
 		$status = "active";
@@ -246,7 +247,6 @@ foreach ($filelist as $filename) {
 			}
 		}
 		$adminlink = '';
-		$pluginObject = plugin_get_object($filename);
 		if (method_exists($pluginObject, 'getAdminOptionLink')) {
 			$adminlink = $pluginObject->getAdminOptionLink();
 		}
@@ -259,7 +259,10 @@ foreach ($filelist as $filename) {
 		$groups = _('None');
 		$adminlink = '';
 	}
-
+	$description = '';
+	if (method_exists($pluginObject, 'getPluginDescription')) {
+		$description = $pluginObject->getPluginDescription();
+	}
 	// Disable link to action if action is not possible.
 	if (isset($action[$filename][$next]) && $action[$filename][$next] === false) {
 		$link = '';
@@ -267,7 +270,7 @@ foreach ($filelist as $filename) {
 
 	$title = _('Current plugin status:'). ' ' .forge_get_config('plugin_status', $filename);
 	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
-		'<td title="'. $title .'" >'. $filename.'</td>'.
+		'<td title="'. $description.' '.$title .'">'. $filename.'</td>'.
 		'<td class="'.$status.'" class="align-center">'. $msg .'</td>'.
 		'<td class="align-center">'. $link .'</td>'.
 		'<td class="align-left">'. $users .'</td>'.
