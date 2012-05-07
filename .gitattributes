@@ -2755,7 +2755,6 @@ src/plugins/wiki/cronjobs/template_groups/www/index.html -text
 src/plugins/wiki/db/wiki-drop.sql -text
 src/plugins/wiki/db/wiki-init.sql -text
 src/plugins/wiki/etc/cron.d/cron.wiki -text
-src/plugins/wiki/etc/httpd.d/03wiki.conf -text
 src/plugins/wiki/etc/plugins/wiki/config.php -text
 src/plugins/wiki/packaging/docs/plugin-wiki -text
 src/plugins/wiki/www/.htaccess -text

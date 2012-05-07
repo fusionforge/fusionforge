@@ -63,6 +63,9 @@ Requires: php-pecl-zip
  
 # BuildRequires: sed, perl
 
+%define INSTALL_LOG       %{_var}/log/gforge/install-%{version}.log
+%define UPGRADE_LOG       %{_var}/log/gforge/upgrade-%{version}.log
+
 Provides: gforge = %{version}
 
 %description
@@ -445,7 +448,7 @@ globalsearch plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/chroot/scmrepos/cvs
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/plugins/mediawiki
 %{__install} -m 755 -d $RPM_BUILD_ROOT/home/groups
-%{__install} -m 755 -d $RPM_BUILD_ROOT/var/log/gforge
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{_var}/log/gforge
 # mock mediawiki directory because we symlink GForge skin to Monobook
 %{__install} -m 755 -d $RPM_BUILD_ROOT/usr/share/mediawiki/skins
 
@@ -520,6 +523,7 @@ done
 %{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
 %{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/cron.d/* $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
 %{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/httpd.d/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.d/
+%{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/httpd.conf.d/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/
 %{__cp} -rp $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/plugins/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/plugins/
 %{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/README
 
@@ -667,18 +671,19 @@ done
 ### END OF PLUGIN SETUP ###
 
 %pre
+[ -d %{_var}/log/gforge ] || mkdir -p %{_var}/log/gforge
+
 if [ ! -d "/var/lib/pgsql/data/base" ]; then
-	/sbin/service postgresql initdb  >>/var/log/%{name}-install.log 2>&1
+	/sbin/service postgresql initdb  >>%{INSTALL_LOG} 2>&1
 fi
 
 # we will need postgresql to be running. we start it, even if it already is running
 # this won't hurt anything, just ensure we have a running database
-/sbin/service postgresql start >>/var/log/%{name}-install.log 2>&1
+/sbin/service postgresql start >>%{INSTALL_LOG} 2>&1
 
 if [ "$1" -eq "1" ]; then
 	# setup user/group for gforge
 	if [ `/usr/bin/getent passwd | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -eq 0 ] ; then
-		echo "Did not find existing fusionforge user. Adding fusionforge group and user..." >>/var/log/%{name}-install.log 2>&1
 		/usr/sbin/groupadd -r %{gfgroup}
 		/usr/sbin/useradd -r -g %{gfgroup} -d %{FORGE_DIR} -s /bin/bash -c "FusionForge User" %{gfuser}
 	fi
@@ -702,15 +707,15 @@ if [ "$1" -eq "1" ]; then
 	        FFORGE_ADMIN_PASSWORD=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-8)
 	    fi
 	    export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD
-	    /bin/sh %{FORGE_DIR}/install-ng --database >>/var/log/%{name}-install.log 2>&1
+	    /bin/sh %{FORGE_DIR}/install-ng --database >>%{INSTALL_LOG} 2>&1
 	else
-	    echo "Database %{dbname} already exists. Will not proceed with database setup." >>/var/log/%{name}-install.log 2>&1
-	    echo "Please see %{FORGE_DIR}/install-ng --database and run it manually" >>/var/log/%{name}-install.log 2>&1
-	    echo "if deemed necessary." >>/var/log/%{name}-install.log 2>&1
+	    echo "Database %{dbname} already exists. Will not proceed with database setup." >>%{INSTALL_LOG} 2>&1
+	    echo "Please see %{FORGE_DIR}/install-ng --database and run it manually" >>%{INSTALL_LOG} 2>&1
+	    echo "if deemed necessary." >>%{INSTALL_LOG} 2>&1
 	fi
 
-	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>/var/log/%{name}-install.log 2>&1
-	/usr/bin/php %{FORGE_DIR}/utils/normalize_roles.php >>/var/log/%{name}-install.log 2>&1
+	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>%{INSTALL_LOG} 2>&1
+	/usr/bin/php %{FORGE_DIR}/utils/normalize_roles.php >>%{INSTALL_LOG} 2>&1
 
 	HOSTNAME=`hostname -f`
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{FORGE_CONF_DIR}/local.inc
@@ -718,11 +723,11 @@ if [ "$1" -eq "1" ]; then
 	[ -d %{FORGE_VAR_LIB}/etc ] || mkdir %{FORGE_VAR_LIB}/etc
 	touch %{FORGE_VAR_LIB}/etc/httpd.vhosts
 
-	/bin/sh %{FORGE_DIR}/install-ng --config >>/var/log/%{name}-install.log 2>&1
+	/bin/sh %{FORGE_DIR}/install-ng --config >>%{INSTALL_LOG} 2>&1
 
-	/etc/init.d/httpd restart >/dev/null 2>&1
+	/etc/init.d/httpd restart >>%{INSTALL_LOG} 2>&1
 
-	chkconfig postgresql on >/dev/null 2>&1
+	chkconfig postgresql on >>%{INSTALL_LOG} 2>&1
 
 	# generate random hash for session_key
 	HASH=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-40)
@@ -735,7 +740,7 @@ if [ "$1" -eq "1" ]; then
 
 	# add noreply mail alias
 	echo "noreply: /dev/null" >> /etc/aliases
-	/usr/bin/newaliases >/dev/null 2>&1
+	/usr/bin/newaliases >>%{INSTALL_LOG} 2>&1
 
 	if [ $ret -ne 0 ] ; then
 		# display message about default admin account
@@ -753,7 +758,7 @@ if [ "$1" -eq "1" ]; then
 		sleep 10
 	fi
 else
-	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>/var/log/%{name}-upgrade.log 2>&1
+	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>%{UPGRADE_LOG} 2>&1
 fi
 
 %preun
@@ -884,8 +889,8 @@ fi
 %dir %{FORGE_VAR_LIB}/scmsnapshots
 %dir %{FORGE_VAR_LIB}/dumps
 %{FORGE_VAR_LIB}/homedirs
+%dir %{_var}/log/gforge
 /home/groups
-/var/log/gforge
 /bin/cvssh.pl
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authbuiltin.ini
 %{FORGE_DIR}/plugins/authbuiltin
@@ -1031,6 +1036,7 @@ fi
 
 %files plugin-scmgit
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmgit.ini
+%{FORGE_CONF_DIR}/httpd.conf.d/plugin-scmgit-dav.inc
 %{FORGE_DIR}/plugins/scmgit
 %{FORGE_DIR}/www/plugins/scmgit
 
@@ -1088,7 +1094,7 @@ fi
 %files plugin-wiki
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/wiki/
 %{_sysconfdir}/cron.d/cron.wiki
-%{FORGE_CONF_DIR}/httpd.d/03wiki.conf
+%{FORGE_CONF_DIR}/httpd.conf.d/plugin-wiki.inc
 %{FORGE_DIR}/plugins/wiki
 %{FORGE_DIR}/www/wiki
 
