@@ -48,7 +48,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 			$returnhtml = '<table>';
 			foreach ($GitRepositories as $GitRepository) {
 				$project = group_get_object($GitRepository);
-				$returnhtml .= '<tr><td><tt>git clone git+ssh://'.$user->getUnixName().'@' . $scmgitplugin->getBoxForProject($project) .'/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</tt></p></td><tr>';
+				$returnhtml .= '<tr><td><tt>git clone git+ssh://'.$user->getUnixName().'@' . $scmgitplugin->getBoxForProject($project) . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</tt></p></td><tr>';
 			}
 			$returnhtml .= '</table>';
 			return $returnhtml;
