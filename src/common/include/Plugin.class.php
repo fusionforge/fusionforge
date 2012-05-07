@@ -230,7 +230,7 @@ class Plugin extends Error {
 
 		$group = group_get_object($params['group']);
 
-		if ( forge_get_config('plugin_status',$this->name) !== 'valid' ) {
+		if ( forge_get_config('plugin_status', $this->name) !== 'valid' ) {
 			$display = 0;
 			$imgStatus = 'plugin_status_broken.png';
 		}
@@ -249,9 +249,14 @@ class Plugin extends Error {
 			}
 			echo ' /><br/>';
 			echo '</td>';
-			echo '<td>';
+			$pluginObject = plugin_get_object($this->name);
+			if (method_exists($pluginObject, 'getPluginDescription')) {
+				echo '<td class="tabtitle" title="'.$description = $pluginObject->getPluginDescription().'">';
+			} else {
+				echo '<td>';
+			}
 			echo '<strong>'. sprintf(_('Use %s Plugin'), $this->text) .'</strong>';
-			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title));
+			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title, 'class'=>'tabtitle-sw'));
 			echo '</td>';
 			echo '</tr>';
 		}
