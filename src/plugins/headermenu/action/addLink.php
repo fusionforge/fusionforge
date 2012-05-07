@@ -25,7 +25,7 @@ global $headermenu;
 
 session_require_global_perm('forge_admin');
 $link = getStringFromRequest('link');
-$descripton = getStringFromRequest('description');
+$description = getStringFromRequest('description');
 $name = getStringFromRequest('name');
 
 if (!empty($link) && !empty($name)) {

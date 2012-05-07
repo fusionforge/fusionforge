@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * headermenu plugin
  *
@@ -19,41 +19,22 @@
  * You should have received a copy of the GNU General Public License along
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */ 
+ */
 
-require_once('../../env.inc.php');
-require_once $gfcommon.'include/pre.php';
+global $headermenu;
 
-$type = getStringFromRequest('type');
+session_require_global_perm('forge_admin');
+$idLink = getIntFromRequest('linkid');
 
-if (!$type) {
-	exit_missing_param($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'headermenu');
-}
-
-global $use_tooltips;
-$headermenu = plugin_get_object('headermenu');
-
-switch ($type) {
-	case 'globaladmin': {
-		if (!session_loggedin()) {
-			exit_not_logged_in();
-		}
-		session_require_global_perm('forge_admin');
-		$action = getStringFromRequest('action');
-		switch ($action) {
-			case 'addLink':
-			case 'deleteLink':
-			case 'updateLinkStatus': {
-				global $gfplugins;
-				include($gfplugins.$headermenu->name.'/action/'.$action.'.php');
-				break;
-			}
-		}
-		$headermenu->getHeader('globaladmin');
-		$headermenu->getGlobalAdminView();
-		break;
+if (!empty($idLink)) {
+	if ($headermenu->deleteLink($idLink)) {
+		$feedback = _('Link deleted');
+		session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&feedback='.urlencode($feedback));
 	}
+	$error_msg = _('Task failed');
+	session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
 }
+$warning_msg = _('Missing Link to be deleted.');
+session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
 
-site_project_footer(array());
 ?>

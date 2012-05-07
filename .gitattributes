@@ -1807,6 +1807,8 @@ src/plugins/gravatar/packaging/control/223plugin-gravatar.shortdesc -text
 src/plugins/gravatar/packaging/dirs/plugin-gravatar -text
 src/plugins/gravatar/packaging/install/plugin-gravatar -text
 src/plugins/headermenu/action/addLink.php -text
+src/plugins/headermenu/action/deleteLink.php -text
+src/plugins/headermenu/action/updateLinkStatus.php -text
 src/plugins/headermenu/common/headermenu-init.php -text
 src/plugins/headermenu/common/headermenuPlugin.class.php -text
 src/plugins/headermenu/db/headermenu-init.sql -text

@@ -50,19 +50,30 @@ class headermenuPlugin extends Plugin {
 		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Global HeaderMenu admin'), array('class' => 'tabtitle', 'title' => _('Direct link to global configuration of this plugin')));
 	}
 
+	/**
+	 * getHeaderLink - generate the links following the template
+	 *
+	 * @return	bool	true...
+	 */
 	function getHeaderLink() {
 		$availableLinks = $this->getAvailableLinks();
 		foreach ($availableLinks as $link) {
-			$ahref = '<a href="'.$link['url'].'">'.$link['name'].'</a>';
-
-			$template = isset($params['template']) ?  $params['template'] : ' | {menu}';
-			echo str_replace('{menu}', $ahref, $template);
+			if ($link['is_enable']) {
+				$ahref = '<a href="'.$link['url'].'">'.$link['name'].'</a>';
+				$template = isset($params['template']) ?  $params['template'] : ' | {menu}';
+				echo str_replace('{menu}', $ahref, $template);
+			}
 		}
 		return true;
 	}
 
+	/**
+	 * getAvailableLinks - get all the links from the db
+	 *
+	 * @return	array	the available links
+	 */
 	function getAvailableLinks() {
-		$links = db_query_params('SELECT * FROM plugin_headermenu', array());
+		$links = db_query_params('select * FROM plugin_headermenu', array());
 		$availableLinks = array();
 		while ($arr = db_fetch_array($links)) {
 			$availableLinks[] = $arr;
@@ -70,6 +81,14 @@ class headermenuPlugin extends Plugin {
 		return $availableLinks;
 	}
 
+	/**
+	 * addLink - add a new valid link
+	 *
+	 * @param	string	the url
+	 * @param	string	the displayed name
+	 * @param	string	a short description (to help administration)
+	 * @return	bool	success or not
+	 */
 	function addLink($url, $name, $description) {
 		if (!empty($url)) {
 			$res = db_query_params('insert into plugin_headermenu (url, name, description, is_enable)
@@ -89,8 +108,31 @@ class headermenuPlugin extends Plugin {
 	}
 
 	/**
+	 * deleteLink - delete a link
+	 *
+	 * @param	int	the link id
+	 * @return	bool	success or not
+	 */
+	function deleteLink($idLink) {
+		$res = db_query_params('delete from plugin_headermenu where id_headermenu = $1', array($idLink));
+		if ($res) {
+			return true;
+		}
+		return false;
+	}
+
+	function updateLinkStatus($idLink, $linkStatus) {
+		$res = db_query_params('update plugin_headermenu set is_enable = $1 where id_headermenu = $2', array($linkStatus, $idLink));
+		if ($res) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * getHeader - initialize header and js
-	 * @param	string	type : user, project (aka group)
+	 *
+	 * @param	string	type : user, project, globaladmin (aka group)
 	 * @return	bool	success or not
 	 */
 	function getHeader($type) {
@@ -122,6 +164,11 @@ class headermenuPlugin extends Plugin {
 		return true;
 	}
 
+	/**
+	 * getPluginDescription - display the description of this plugin in pluginman admin page
+	 *
+	 * @return	string	the description
+	 */
 	function getPluginDescription() {
 		return _('Get the ability to set new links next to the login menu.');
 	}
