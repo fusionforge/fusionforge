@@ -11,6 +11,8 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -48,7 +50,7 @@ if (getStringFromRequest('submit')) {
 
 		$group = group_get_object_by_name($groupname);
 		if (!$group || !is_object($group)) {
-            exit_no_group();
+			exit_no_group();
 		} elseif ($group->isError()) {
 			exit_error($group->getErrorMessage(),'home');
 		}
