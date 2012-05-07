@@ -95,8 +95,8 @@ class MediaWikiPlugin extends Plugin {
 				} else {
 					$params['DIRS'][]=util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
 				}
-                $params['ADMIN'][]='';
-                $params['TOOLTIPS'][] = _('Mediawiki Space');
+				$params['ADMIN'][]='';
+				$params['TOOLTIPS'][] = _('Mediawiki Space');
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
