@@ -186,6 +186,13 @@ Requires: %{name} >= %{version}, php
 %description plugin-gravatar
 This plugin adds faces images to FusionForge users using the gravatar service.
 
+%package plugin-headermenu
+Summary: Headermenu plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-headermenu
+This plugin adds capability to add links right to login/logout.
+
 %package plugin-hudson
 Summary: Hudson continous integration plugin for FusionForge
 Group: Development/Tools
@@ -573,6 +580,9 @@ done
 
 # plugin: forumml
 # %{__ln_s} ../../plugins/forumml/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/forumml
+
+# plugin: headermenu
+%{__ln_s} ../../plugins/headermenu/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/headermenu
 
 # plugin: hudson
 %{__ln_s} ../../plugins/hudson/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/hudson
@@ -971,6 +981,11 @@ fi
 %files plugin-gravatar
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/gravatar.ini
 %{FORGE_DIR}/plugins/gravatar
+
+%files plugin-headermenu
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/headermenu.ini
+%{FORGE_DIR}/plugins/headermenu
+%{FORGE_DIR}/www/plugins/headermenu
 
 %files plugin-hudson
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/hudson/
