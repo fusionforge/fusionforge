@@ -197,6 +197,7 @@ abstract class SCMPlugin extends Plugin {
 
 		if ($project->usesPlugin($this->name)) {
 
+			session_require_perm('scm', $project->getID(), 'read');
 			// Table for summary info
 			print '<table class="fullwidth"><tr valign="top"><td style="width:65%">'."\n";
 			print $this->getBlurb()."\n";
