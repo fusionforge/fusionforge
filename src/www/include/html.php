@@ -160,11 +160,17 @@ function html_get_theme_popup($title='theme_id', $selected='xzxz') {
 	$res=db_query_params('SELECT theme_id, fullname FROM themes WHERE enabled=true',
 			array());
 	$nbTheme = db_numrows($res);
-	if($nbTheme < 2) {
+	if ($nbTheme == 1) {
+		$thetheme = db_result($res, 0, 'fullname');
+		return util_html_secure($thetheme) . html_e('input', array(
+			'type' => 'hidden',
+			'name' => $title,
+			'value' => db_result($res, 0, 'theme_id'),
+		    ));
+	} else if ($nbTheme < 1) {
 		return("");
-	}
-	else {
-		return html_build_select_box($res, $title, $selected, false);
+	} else {
+		return html_build_select_box($res,$title,$selected,false);
 	}
 }
 
@@ -920,9 +926,211 @@ function relative_date ($date) {
 
 	return date(_('Y-m-d H:i'), $date);
 }
+
+/* TODO: think about beautifying output */
+
+/**
+ * html_eo() - Return proper element XHTML start tag
+ *
+ * @param	string	$name
+ *			element name
+ * @param	array	$attrs
+ *		(optional) associative array of element attributes
+ *			values: arrays are space-imploded;
+ *			    false values and empty arrays ignored
+ * @return	string
+ *		XHTML string suitable for echo'ing
+ */
+function html_eo($name, $attrs=array()) {
+	$rv = '<' . $name;
+	foreach ($attrs as $key => $value) {
+		if (is_array($value)) {
+			$value = count($value) ? implode(" ", $value) : false;
+		}
+		if ($value === false) {
+			continue;
+		}
+		$rv .= ' ' . $key . '="' . htmlspecialchars($value) . '"';
+	}
+	$rv .= '>';
+	return $rv;
+}
+
+/**
+ * html_e() - Return proper element XHTML start/end sequence
+ *
+ * @param	string	$name
+ *			element name
+ * @param	array	$attrs
+ *		(optional) associative array of element attributes
+ *			values: arrays are space-imploded;
+ *			    false values and empty arrays ignored
+ * @param	string	$content
+ *		(optional) XHTML to be placed inside
+ * @param	bool	$shortform
+ *		(optional) allow short open-close form
+ *		(default: true)
+ * @return	string
+ *		XHTML string suitable for echo'ing
+ */
+function html_e($name, $attrs=array(), $content="", $shortform=true) {
+	$rv = '<' . $name;
+	foreach ($attrs as $key => $value) {
+		if (is_array($value)) {
+			$value = count($value) ? implode(" ", $value) : false;
+		}
+		if ($value === false) {
+			continue;
+		}
+		$rv .= ' ' . $key . '="' . htmlspecialchars($value) . '"';
+	}
+	if ($content === "" && $shortform) {
+		$rv .= ' />';
+	} else {
+		$rv .= '>' . $content . '</' . $name . '>';
+	}
+	return $rv;
+}
+
+$html_autoclose_stack = array();
+$html_autoclose_pos = 0;
+
+/**
+ * html_ap() - Return XHTML element autoclose stack position
+ *
+ * @return	integer
+ */
+function html_ap() {
+	global $html_autoclose_pos;
+
+	return $html_autoclose_pos;
+}
+
+/**
+ * html_ao() - Return proper element XHTML start tag, with autoclose
+ *
+ * @param	string	$name
+ *			element name
+ * @param	array	$attrs
+ *		(optional) associative array of element attributes
+ *			values: arrays are space-imploded;
+ *			    false values and empty arrays ignored
+ * @return	string
+ *		XHTML string suitable for echo'ing
+ */
+function html_ao($name, $attrs=array()) {
+	global $html_autoclose_pos, $html_autoclose_stack;
+
+	$html_autoclose_stack[$html_autoclose_pos++] = array(
+		'name' => $name,
+		'attr' => $attrs,
+	    );
+	return html_eo($name, $attrs);
+}
+
+/**
+ * html_aonce() - Return once proper element XHTML start tag, with autoclose
+ *
+ * @param	ref	&$sptr
+			initialise this to false; will be modified
+ * @param	string	$name
+ *			element name
+ * @param	array	$attrs
+ *		(optional) associative array of element attributes
+ *			values: arrays are space-imploded;
+ *			    false values and empty arrays ignored
+ * @return	string
+ *		XHTML string suitable for echo'ing
+ */
+function html_aonce(&$sptr, $name, $attrs=array()) {
+	if ($sptr !== false) {
+		/* already run */
+		return "";
+	}
+	$sptr = html_ap();
+	return html_ao($name, $attrs);
+}
+
+/**
+ * html_ac() - Return proper element XHTML end tags, autoclosing
+ *
+ * @param	integer	$spos
+ *			stack position to return to
+ *			(nothing is done if === false)
+ * @return	string
+ *		XHTML string suitable for echo'ing
+ */
+function html_ac($spos) {
+	global $html_autoclose_pos, $html_autoclose_stack;
+
+	if ($spos === false) {
+		/* support for html_aonce() */
+		return "";
+	}
+
+	if ($html_autoclose_pos < $spos) {
+		$e = "html_autoclose stack underflow; closing down to " .
+		    $spos . " but we're down to " . $html_autoclose_pos .
+		    " already!";
+		throw new Exception($e);
+	}
+
+	$rv = "";
+	while ($html_autoclose_pos > $spos) {
+		--$html_autoclose_pos;
+		$rv .= '</' . $html_autoclose_stack[$html_autoclose_pos]['name'] . '>';
+		unset($html_autoclose_stack[$html_autoclose_pos]);
+	}
+	return $rv;
+}
+
+/**
+ * html_a_copy() - Return a copy of part of the autoclose stack
+ *
+ * @param	integer	$spos
+ *			stack position caller will return to
+ * @return	opaque
+ *		argument suitable for html_a_apply()
+ */
+function html_a_copy($spos) {
+	global $html_autoclose_pos, $html_autoclose_stack;
+
+	if ($spos === false) {
+		return array();
+	}
+
+	if ($spos > $html_autoclose_pos) {
+		$e = "html_autoclose stack underflow; closing down to " .
+		    $spos . " but we're down to " . $html_autoclose_pos .
+		    " already!";
+		throw new Exception($e);
+	}
+
+	$rv = array();
+	while ($spos < $html_autoclose_pos) {
+		$rv[] = $html_autoclose_stack[$spos++];
+	}
+	return $rv;
+}
+
+/**
+ * html_a_apply() - Reopen tags based on an autoclose stack copy
+ *
+ * @param	opaque	$scopy
+ *			return value from html_a_copy()
+ * @return	string
+ *		XHTML string suitable for echo'ing
+ */
+function html_a_apply($scopy) {
+	/* array_reduce() would be useful here... IF IT WORKED, FFS! */
+	$rv = "";
+	foreach ($scopy as $value) {
+		$rv .= html_ao($value['name'], $value['attr']);
+	}
+	return $rv;
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
