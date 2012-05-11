@@ -16,7 +16,7 @@ use vars qw// ;
 
 sub debug ( $ ) ;
 
-require ("/usr/share/gforge/lib/include.pl") ; # Include all the predefined functions 
+require ("/usr/share/gforge/lib/include.pl") ; # Include all the predefined functions
 
 &db_connect ;
 
@@ -89,13 +89,7 @@ eval {
 	system ($cmd) ;
 	unlink $tmp ;
 
-	my $urlpattern;
-	if (&forge_get_config ('use_ssl') eq 'yes') {
-	    $urlpattern = 'https://%s/cgi-bin/mailman/';
-	} else {
-	    $urlpattern = 'http://%s/cgi-bin/mailman/';
-	}
-	$cmd= "/usr/lib/mailman/bin/withlist -l -r fix_url $listname -u $sys_lists_host -p '$urlpattern'" ;
+	$cmd= "/usr/lib/mailman/bin/withlist -l -r fix_url $listname -u $sys_lists_host" ;
 	#print "cmd = <$cmd>\n" ;
 	system ($cmd) ;
 
@@ -147,7 +141,7 @@ eval {
 	#debug "Committing." ;
 	$dbh->commit () ;
     }
-    
+
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.
     # For safety, we roll back.
