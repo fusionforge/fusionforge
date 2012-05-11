@@ -287,6 +287,8 @@ abstract class BaseRole extends Error {
 			return false;
 		}
 
+		$this->normalizeData();
+
 		return true ;
 	}
 
