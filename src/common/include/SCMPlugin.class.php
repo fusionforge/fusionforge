@@ -43,6 +43,8 @@ abstract class SCMPlugin extends Plugin {
 		# scm_gather_stats
 		# scm_browser_page
 		# scm_update_repolist
+
+		$this->provides['scm'] = true;
 	}
 
 	function CallHook($hookname, &$params) {

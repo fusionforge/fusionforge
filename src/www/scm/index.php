@@ -29,7 +29,20 @@ $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 }
-scm_header(array('title'=>_('SCM Repository'), 'group'=>$group_id));
+
+// Check if there is an associated scm plugin and issue a warning if none.
+$scm_plugin = '';
+foreach (PluginManager::instance()->GetPlugins() as $p) {
+	$plugin = PluginManager::instance()->GetPluginObject($p);
+	if (isset($plugin->provides['scm']) && $plugin->provides['scm'] && $group->usesPlugin($p)) {
+		$scm_plugin = $p;
+	}
+}
+if (!$scm_plugin) {
+	$warning_msg = _("This project has no associated Source Code Management tool defined, please configure one using the Administration submenu.");
+}
+
+scm_header(array('title'=> sprintf(_('Source Code Repository for %s'), $group->getPublicName()),'group'=>$group_id));
 
 plugin_hook("blocks", "scm index");
 
