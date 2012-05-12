@@ -170,11 +170,14 @@ class ArtifactSearchQuery extends SearchQuery {
 						 ') GROUP BY a.artifact_id) x, artifact a, users WHERE a.artifact_id=x.artifact_id AND users.user_id=a.submitted_by ORDER BY group_artifact_id ASC, rank DESC, a.artifact_id ASC') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname ') ;
+						 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname,a.status_id ') ;
 			$qpa = db_construct_qpa ($qpa,
 						 'FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id), users WHERE a.group_artifact_id=$1 AND users.user_id=a.submitted_by AND ((',
 						 array ($this->artifactId)) ;
 
+			$qpa = $this->addIlikeCondition ($qpa, 'cast(a.artifact_id as text)') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
 			$qpa = $this->addIlikeCondition ($qpa, 'a.details') ;
 			$qpa = db_construct_qpa ($qpa,
 						 ') OR (') ;
