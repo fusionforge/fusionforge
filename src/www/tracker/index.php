@@ -46,14 +46,14 @@ $atid = getIntFromRequest('atid');
 
 //if the ATID and GID are not provided, but
 //the artifact_id is, then fetch the other vars
-if ($aid && (!$group_id && !$atid)) {
+if ($aid && (!$group_id || !$atid)) {
 	$a =& artifact_get_object($aid);
 	if (!$a || !is_object($a) || $a->isError()) {
 		exit_error(_('Could Not Get Artifact Object'),'tracker');
 	} else {
 		$group_id=$a->ArtifactType->Group->getID();
 		$atid=$a->ArtifactType->getID();
-		$func='detail';
+		session_redirect('/tracker/?func=detail&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid);
 	}
 }
 
