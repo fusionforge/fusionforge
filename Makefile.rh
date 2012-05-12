@@ -11,14 +11,21 @@ RPMBUILD=rpmbuild --define='_topdir $(RPM_TMP)' --define='_tmppath %{_topdir}' -
 
 VER=$(shell LC_ALL=C sed -n '/>software_version/s/^.*'\''\([0-9.]*\)'\''.*$$/\1/p' src/common/include/FusionForge.class.php)
 in_svn_repo:= $(wildcard .svn/)
-ifeq ($(strip $(in_svn_repo)),)
-	ID=unknown
-	URL=unknown
-	TAG=unknown
-else
+ifneq ($(strip $(in_svn_repo)),)
 	ID=$(shell LANG=C svnversion|cut -d: -f1)
 	URL=$(shell LANG=C svn info | grep 'Root:' | awk '{print $$3}')
 	TAG=$(shell LANG=C svn log $(URL) -r $(ID) -l 1 2>/dev/null | awk '{ if ($$1=="Tag-Release") print $$1}')
+else
+	is_git_repo:= $(wildcard .git/)
+	ifneq ($(strip $(is_git_repo)),)
+		id=$(shell git log --pretty=format:%h | wc -l)
+		hash=$(shell git log -1 --pretty=format:%h)
+		ID=$(id).$(hash)
+	else
+		ID=unknown
+		URL=unknown
+		TAG=unknown
+	endif
 endif
 ifeq ($(TAG),)
 	version=$(VER).$(ID)
