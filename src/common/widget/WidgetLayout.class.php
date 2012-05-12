@@ -47,7 +47,7 @@ class WidgetLayout {
         if (!$readonly) {
             $cells = "['". implode("', '", $this->getColumnIds()) ."']";
            echo <<<EOS
-	<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+	<script type="text/javascript">/* <![CDATA[ */
             var cells = $cells;
             Event.observe(window, 'load', function() {
                   cells.each(function (cell_id) {
