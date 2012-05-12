@@ -217,12 +217,12 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 <input type="hidden" name="addtab" value="1" />
 <strong><?php echo _('Name of the tab:') ?></strong><?php echo utils_requiredField(); ?>
 <br />
-<input type="text" size="20" maxlength="20" name="tab_name" value="<?php echo $tab_name ?>" /><br />
+<input type="text" required="required" size="20" maxlength="20" name="tab_name" value="<?php echo $tab_name ?>" /><br />
 </p>
 <p>
 <strong><?php echo _('URL of the tab:') ?></strong><?php echo utils_requiredField(); ?>
 <br />
-<input type="text" size="60" name="tab_url" value="<?php echo $tab_url ?>" /><br/>
+<input type="text" required="required" size="60" name="tab_url" value="<?php echo $tab_url ?>" /><br/>
 </p>
 <p>
 <input type="radio" name="type" value="0" checked="checked"/><?php echo _('Link') ?>

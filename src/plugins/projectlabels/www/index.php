@@ -118,7 +118,7 @@ if ($func == 'edit') {
 <input type="hidden" name="label_id" value="<?php echo $label_id ?>" />
 <?php echo utils_requiredField(); ?>
 	 <?php echo _('Label name:') ; ?><br/>
-<input type="text" size="15" maxlength="32" name="label_name" value="<?php echo stripslashes ($row['label_name']) ; ?>"/> <br/>
+<input type="text" required="required" size="15" maxlength="32" name="label_name" value="<?php echo stripslashes ($row['label_name']) ; ?>"/> <br/>
 						  <?php echo _('Displayed text (or HTML) for the label:') ; ?><br/>
 <textarea tabindex='1' accesskey="," name="label_text" rows='5'
 														       cols='80'><?php echo $row['label_text'] ; ?></textarea><br/>
@@ -195,7 +195,7 @@ if (db_numrows($res) >= 1) {
 <input type="hidden" name="func" value="addlabel" />
 <?php echo utils_requiredField(); ?>
 		  <?php echo _('Name of the label:') ; ?><br/>
-<input type="text" size="15" maxlength="32" name="label_name" value="<?php echo _('potm') ; ?>"/> <br/>
+<input type="text" required="required" size="15" maxlength="32" name="label_name" value="<?php echo _('potm') ; ?>"/> <br/>
 		  <?php echo _('Displayed text (or HTML) for the label:') ; ?><br/>
 <textarea tabindex='1' accesskey="," name="label_text" rows='5'
 		  cols='80'><p><b><?php echo _('Project of the month!') ; ?></b></p>
