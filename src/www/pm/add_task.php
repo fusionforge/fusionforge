@@ -29,6 +29,14 @@ $related_artifact_summary = getStringFromRequest('related_artifact_summary');
 
 pm_header(array('title'=>_('Add a new Task'),'group_project_id'=>$group_project_id));
 echo notepad_func();
+
+$params['name'] = 'details';
+$params['body'] = '';
+$params['height'] = "500";
+$params['width'] = "100%";
+$params['content'] = '<textarea required="required" name="details" rows="5" cols="80"></textarea>';
+plugin_hook_by_reference("text_editor", $params);
+
 ?>
 
 <form id="addtaskform" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
@@ -71,20 +79,8 @@ echo notepad_func();
 	<tr>
 		<td colspan="2">
 		<strong><?php echo _('Task Details') ?>:</strong><?php echo notepad_button('document.forms.addtaskform.details') ?> <?php echo utils_requiredField(); ?><br />
-<?php
-$GLOBALS['editor_was_set_up']=false;
-$params = array() ;
-$params['name'] = 'details';
-$params['width'] = "800";
-$params['height'] = "500";
-$params['body'] = "";
-$params['group'] = $group_id;
-plugin_hook("text_editor",$params);
-if (!$GLOBALS['editor_was_set_up']) {
-	echo '<textarea name="details" rows="5" cols="80"></textarea>';
-}
-unset($GLOBALS['editor_was_set_up']);
-?></td>
+		<?php echo $params['content']; ?>
+		</td>
 	</tr>
 
 	<tr>
