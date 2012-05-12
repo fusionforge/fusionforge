@@ -22,7 +22,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
@@ -355,14 +354,10 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 				</tr>
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
 					<td>
-
 							<?php echo frs_show_release_popup ($group_id, $name='new_release_id',db_result($res,$x,'release_id')); ?>
-
 					</td>
 					<td>
-
 							<input type="text" name="release_time" value="<?php echo date('Y-m-d',db_result($res,$x,'release_time')); ?>" size="10" maxlength="10" />
-
 					</td>
 					<td><input type="submit" name="submit" value="<?php echo _('Update/Refresh') ?> " /></td>
 				</tr>
@@ -378,9 +373,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>
-
 							<input type="submit" name="submit" value="<?php echo _('Delete File') ?> " /> <input type="checkbox" name="im_sure" value="1" /> <?php echo _('I\'m Sure') ?>
-
 					</td>
 				</tr>
 			</form>

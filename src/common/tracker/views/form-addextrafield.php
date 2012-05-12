@@ -69,8 +69,7 @@ $ath->adminHeader(array ('title'=>$title));
 					$optrows=count($elearray);
 
 					echo '<td>';
-					for ($j=0; $j <$optrows; $j++)
-					{
+					for ($j=0; $j <$optrows; $j++) {
 						echo $elearray[$j]['element_name'];
 						echo ' <a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
 						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.

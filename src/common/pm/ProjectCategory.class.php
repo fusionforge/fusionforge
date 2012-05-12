@@ -104,7 +104,7 @@ class ProjectCategory extends Error {
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
-		
+
 			$id=db_insertid($result,'project_category','category_id');
 
 			//

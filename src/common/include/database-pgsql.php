@@ -682,11 +682,11 @@ function db_query_to_string ($sql, $params = array()) {
 		$sql = preg_replace('/\\$'.($index+1).'(?!\d)/', "'".$value."'", $sql);
 	}
 	return $sql;
-}	
+}
 
 function db_qpa_to_string ($qpa) {
 	return db_query_to_string($qpa[0], $qpa[1]);
-}	
+}
 
 // Local Variables:
 // mode: php

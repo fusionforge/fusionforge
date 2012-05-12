@@ -28,9 +28,9 @@ $plugin_manager = PluginManager::instance();
 $p = $plugin_manager->getPluginByName('hudson');
 
 if ($p && $plugin_manager->isPluginAvailable($p)) {
-    $p->process();
+	$p->process();
 } else {
-    session_redirect(get_server_url());
+	session_redirect(get_server_url());
 }
 
 ?>

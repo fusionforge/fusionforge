@@ -64,9 +64,9 @@ class HudsonJob {
     }
 
     public function configJobObject() {
-	if ($this->config_job) {
-	    return;
-	}
+		if ($this->config_job) {
+	    	return;
+		}
         $this->config_job = $this->_getXMLObject($this->hudson_config_job_url);
     }
 

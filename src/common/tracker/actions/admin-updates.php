@@ -194,7 +194,7 @@ if (getStringFromRequest('add_extrafield')) {
 			$feedback .= '<br />';
 
 			for ($k=0; $k < $copy_rows; $k++) {
-			$aefe = new ArtifactExtraFieldElement($aef);
+				$aefe = new ArtifactExtraFieldElement($aef);
 				if (!$aefe || !is_object($aefe)) {
 					$error_msg .= 'Unable to create ArtifactExtraFieldElement Object';
 				} elseif ($aefe->isError()) {
@@ -355,7 +355,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$body = getStringFromRequest('body');
 	$body = preg_replace('/^\s*<table>(.*)<\/table>\s*$/s', '\\1', $body);
 
-		db_query_params ('UPDATE artifact_group_list SET custom_renderer=$1 WHERE group_artifact_id=$2',
+	db_query_params('UPDATE artifact_group_list SET custom_renderer=$1 WHERE group_artifact_id=$2',
 		array($body, $ath->getID()));
 	$feedback .= _('Renderer Updated');
 

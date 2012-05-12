@@ -57,7 +57,7 @@ abstract class HudsonJobWidget extends HudsonWidget {
         $prefs  = '';
         $prefs .= '<strong>'._("Monitored job:").'</strong><br />';
         $jobs = $this->getAvailableJobs();
-	$selected_jobs_id = $this->getSelectedJobsId();
+		$selected_jobs_id = $this->getSelectedJobsId();
 
         foreach ($jobs as $job_id => $job) {
             if (in_array($job_id, $selected_jobs_id)) {
