@@ -50,8 +50,10 @@ if (!forge_get_config('use_project_full_list')) {
 	exit_disabled();
 }
 
-$HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
+$HTML->header(array('title'=>_('Project List'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
+
+echo '<p/>';
 
 $res_grp = db_query_params ('
 	SELECT group_id, group_name, unix_group_name, short_description, register_time
