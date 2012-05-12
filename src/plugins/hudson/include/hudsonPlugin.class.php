@@ -16,8 +16,8 @@ class hudsonPlugin extends Plugin {
 
 	function hudsonPlugin($id=0) {
 		$this->Plugin($id);
-		$this->name = "hudson" ;
-		$this->text = _('Hudson'); // To show in the tabs, use...
+		$this->name = "hudson";
+		$this->text = _('Hudson/Jenkins'); // To show in the tabs, use...
 		$this->_addHook("user_personal_links"); //to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu") ;
 		$this->_addHook("groupmenu");	// To put into the project tabs
