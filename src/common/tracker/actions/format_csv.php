@@ -50,15 +50,13 @@
 global $ath;
 global $group_id;
 
-//pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
 $ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
 
 $headers = getIntFromRequest('headers', 1);
 $sep = getStringFromRequest('sep', ',');
 
 ?>
-<center>
-<table>
+<table class="centered">
 	<tr>
 		<td>
 		<fieldset><legend><b>CSV Format</b></legend>
@@ -72,7 +70,6 @@ $sep = getStringFromRequest('sep', ',');
 				<td><input type="radio" name="sep" value=","<?php if ($sep==',') echo ' checked="checked"' ?>/>Comma (char: ',')<br />
 				<input type="radio" name="sep" value=";"<?php if ($sep==';') echo ' checked="checked"' ?>/>Semi-colon (char: ';')</td>
 			</tr>
-			<tr><td colspan="2"></td></tr>
 			<tr>
 				<td class="top"><b>Header :</b></td>
 				<td><input type="radio" name="headers" value="1"<?php if ($headers) echo ' checked="checked"' ?>/>Included<br />
@@ -84,7 +81,6 @@ $sep = getStringFromRequest('sep', ',');
 		</td>
 	</tr>
 </table>
-</center>
 <p><strong>Notes:</strong></p>
 <div>
 <ul>

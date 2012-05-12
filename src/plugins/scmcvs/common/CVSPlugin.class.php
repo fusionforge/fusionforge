@@ -159,18 +159,18 @@ class CVSPlugin extends SCMPlugin {
 
 			while($data = db_fetch_array($result)) {
 				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-				$b .= '<td width="50%">' ;
+				$b .= '<td class="halfwidth">' ;
 				$b .= util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
-				$b .= '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
-					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
+				$b .= '</td><td class="onequarterwidth align-right">'.$data['adds']. '</td>'.
+					'<td class="onequarterwidth align-right">'.$data['commits'].'</td></tr>';
 				$total['adds'] += $data['adds'];
 				$total['commits'] += $data['commits'];
 				$i++;
 			}
 			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			$b .= '<td width="50%"><strong>'._('Total').':</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
+			$b .= '<td class="halfwidth"><strong>'._('Total').':</strong></td>'.
+				'<td class="onequarterwidth align-right"><strong>'.$total['adds']. '</strong></td>'.
+				'<td class="onequarterwidth align-right"><strong>'.$total['commits'].'</strong></td>';
 			$b .= '</tr>';
 			$b .= $HTML->listTableBottom();
 		}

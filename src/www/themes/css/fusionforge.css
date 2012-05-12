@@ -261,14 +261,16 @@ up {
 
 .nowrap {white-space: nowrap;}
 
+.tt {font-family: monospace;}
+
 .bgcolor-grey {background-color: #e5e5e5;}
 .bgcolor-white {background-color: white;}
 
 .width-100p100 {width: 100%;}
 .fullwidth {width: 100%;}
 .halfwidth {width: 50%;}
-.onethirdwidth {width: 33%;}
-.twothirdswidth {width: 66%;}
+.onethirdwidth {width: 33.33333%;}
+.twothirdswidth {width: 66.66667%;}
 .onequarterwidth {width: 25%;}
 
 /* A table with two columns, first one right-aligned and bold */
@@ -277,6 +279,9 @@ table.infotable td:first-child { font-weight: bold; text-align: right; padding-r
 
 table.full {
 	width: 100%;
+}
+table.centered {
+    margin-left: auto; margin-right: auto;
 }
 
 .selected {background-color:pink; }
@@ -444,11 +449,7 @@ p.information {
 .widget_titlebar_minimize,
 .widget_titlebar_maximize {
 	float: right;
-}
-
-.widget_titlebar_rss,
-.widget_titlebar_prefs {
-	padding: 2px 4px;
+	padding: 0px 2px;
 }
 
 .widget_titlebar_rss a, .widget_titlebar_rss a:link, .widget_titlebar_rss a:visited, .widget_titlebar_rss a:hover,
@@ -842,6 +843,7 @@ legend {
 	font-weight: bold;
 	font-size: 130%;
 }
+
 #message_box {
    display:none;
    background:#ffc;

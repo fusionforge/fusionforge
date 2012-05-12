@@ -37,15 +37,15 @@ class WidgetLayout_Row {
         $c->setRow($this);
     }
     function display($readonly, $owner_id, $owner_type) {
-        echo '<table width="100%">';
-        echo '<tr style="vertical-align:top;">';
+        echo '<table class="fullwidth">' . "\n";
+        echo '<tr style="vertical-align:top;">' . "\n";
         $last = count($this->columns) - 1;
         $i = 0;
         foreach($this->columns as $key => $nop) {
             $this->columns[$key]->display($readonly, $owner_id, $owner_type, $is_last = ($i++ == $last));
         }
-        echo '</tr>';
-        echo '</table>';
+        echo '</tr>' . "\n";
+        echo '</table>' . "\n";
     }
     function getColumnIds() {
         $ret = array();

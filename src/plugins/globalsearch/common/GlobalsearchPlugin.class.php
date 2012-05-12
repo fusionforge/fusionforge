@@ -94,7 +94,7 @@ class globalSearchPlugin extends Plugin {
 			return _('No stats available')." ".db_error();
 		}
 
-		$return .= '<table summary="" class="underline-link">';
+		$return .= '<table class="underline-link">';
 		while ($row_topdown = db_fetch_array($res_top_n_assoc)) {
 			if ($row_topdown['numprojects'] > 0) {
 				$return .= '<tr><td>';

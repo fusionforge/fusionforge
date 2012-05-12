@@ -85,8 +85,8 @@ $ath->adminHeader(array ('title'=>$title));
 					echo '<td>';
 				}
 
-				echo '</td>';
-				echo '<td>';
+				echo "</td>\n";
+				echo "<td>\n";
 				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT
 					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO
 					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX
@@ -94,16 +94,16 @@ $ath->adminHeader(array ('title'=>$title));
 					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 					echo '<a href="'.getStringFromServer('PHP_SELF').'?add_opt=1&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
-						_('add choices').']</a>';
+						_('Add/Reorder choices').']</a>';
 				}
-				echo '</td>';
-			        echo   '</tr>'."\n";
+				echo "</td>\n";
+				echo "</tr>\n";
 			}
 			echo $GLOBALS['HTML']->listTableBottom();
 
 			echo utils_requiredField().' '._('Indicates required fields.');
 		} else {
-			echo "\n<strong>"._('You have not defined any custom fields')."</strong>";
+			echo "\n<p class=\"warning_msg\">"._('You have not defined any custom fields')."</p>";
 		}
 
 		echo "<h2>"._('Add New Custom Field')."</h2>";

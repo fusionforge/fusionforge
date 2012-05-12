@@ -84,7 +84,7 @@ class CCasePlugin extends SCMPlugin {
 
 			// Table for summary info
 
-			print '<table width="100%"><tr valign="top"><td width="65%">' ;
+			print '<table class="fullwidth"><tr class="top"><td class="twothirdswidth">' ;
 
 			// Developer access
 
@@ -97,7 +97,7 @@ class CCasePlugin extends SCMPlugin {
 
 			// Summary info
 
-			print '</td><td width="35%">' ;
+			print '</td><td class="onethirdwidth">' ;
 
 			// CCase Browsing
 

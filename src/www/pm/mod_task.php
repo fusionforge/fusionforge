@@ -179,7 +179,7 @@ unset($GLOBALS['editor_was_set_up']);
 		?>
 		</td>
 
-		<td valign="top" colspan="2">
+		<td class="top" colspan="2">
 		<strong><?php echo _('Dependent on task') ?>:</strong><br />
 		<?php
 		/*
@@ -276,17 +276,17 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage(),'pm');
 }
 
-echo '<form action="/reporting/timeadd.php" method="post">
+echo '<form id="time-tracking" action="/reporting/timeadd.php" method="post">
 	<input type="hidden" name="project_task_id" value="'.$project_task_id.'" />
 	<input type="hidden" name="submit" value="1" />';
 echo $HTML->listTableTop ($title_arr);
 echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
-		<td style="text-align:center">'. report_weeks_box($report, 'week') .'</td>
-		<td style="text-align:center">'. report_day_adjust_box($report, 'days_adjust') .'</td>
-		<td style="text-align:center"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
-		<td style="text-align:center">'.report_time_category_box('time_code',false).'</td>
+		<td class="align-center">'. report_weeks_box($report, 'week') .'</td>
+		<td class="align-center">'. report_day_adjust_box($report, 'days_adjust') .'</td>
+		<td class="align-center"><input id="time-tracking-hours" type="text" required="required" name="hours" value="" size="3" maxlength="3" /></td>
+		<td class="align-center">'.report_time_category_box('time_code',false).'</td>
 		<td>&nbsp;</td>
-		<td style="text-align:center"><input type="submit" name="add" value="'._('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
+		<td class="align-center"><input type="submit" name="add" value="'._('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
 	</tr>';
 
 //setenv("TZ=" . $user_timezone); //restore the user's timezone

@@ -78,7 +78,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 	}
 
 	print '
-		<table width="100%" cellpadding="0" cellspacing="0" border="0">';
+		<table class="fullwidth">';
 	$seen = array();
 	$i = 0;
 	foreach ($rows as $row_new) {

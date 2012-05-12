@@ -128,8 +128,8 @@ if ($selected_tag) {
 		}
 
 		if ($row_grp && $viewthisrow) {
-			print '<table border="0" cellpadding="0" width="100%">';
-			print '<tr valign="top"><td colspan="2">';
+			print '<table class="fullwidth">';
+			print '<tr class="top"><td colspan="2">';
 			print util_make_link ('/projects/'. strtolower($row_grp['unix_group_name']).'/',
 					      '<strong>'.$row_grp['group_name'].'</strong> ');
 
@@ -139,13 +139,13 @@ if ($selected_tag) {
 
 			// extra description
 			print '</td></tr>';
-			print '<tr valign="top"><td colspan="2">';
-			print _('Tags'). ':&nbsp;' . list_project_tag($row_grp['group_id']);
+			print '<tr class="top"><td colspan="2">';
+			print _('Tags') . _(': ') . list_project_tag($row_grp['group_id']);
 			print '</td></tr>';
-			print '<tr valign="top"><td>';
+			print '<tr class="top"><td>';
 			// list all trove categories
 			print trove_getcatlisting($row_grp['group_id'],0,1,0);
-			print '</td>'."\n".'<td align="right">'; // now the right side of the display
+			print '</td>'."\n".'<td class="align-right">'; // now the right side of the display
 			$res = db_query_params('SELECT percentile, ranking
 					FROM project_weekly_metric
 					WHERE group_id=$1', array($row_grp['group_id']));

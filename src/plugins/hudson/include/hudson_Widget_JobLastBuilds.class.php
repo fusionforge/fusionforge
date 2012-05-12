@@ -80,7 +80,7 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
         if ($this->job != null) {
             $job = $this->job;
 
-            $html .= '<table width="100%">';
+            $html .= '<table class="fullwidth">';
             $html .= ' <tr>';
             $html .= '  <td>';
             $html .= '   <ul>';

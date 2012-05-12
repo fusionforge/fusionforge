@@ -125,8 +125,8 @@ for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
 		print '<div typeof="doap:Project sioc:Space" about="'.$proj_uri.'">'."\n";
 		print '<span rel="planetforge:hosted_by" resource="'. util_make_url ('/') .'"></span>'."\n";
 
-		print '<table border="0" cellpadding="0" width="100%">';
-		print '<tr valign="top"><td colspan="2">';
+		print '<table class="fullwidth">';
+		print '<tr class="top"><td colspan="2">';
 		print util_make_link_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id'],'<strong>'
 			.'<span property="doap:name">'
 			.$row_grp['group_name']
@@ -141,11 +141,11 @@ for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
 		}
 
 		// extra description
-		print '</td></tr><tr valign="top"><td>';
+		print '</td></tr><tr class="top"><td>';
 		// list all trove categories
 		print trove_getcatlisting($row_grp['group_id'],0,1,1);
 		print '</td>';
-		print '<td valign="bottom" style="text-align:right;"><br />'._('Register Date:').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong></td>';
+		print '<td class="bottom align-right"><br />'._('Register Date:').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong></td>';
 		print '</tr>';
         print '</table>';
         print '</div>'; // /doap:Project

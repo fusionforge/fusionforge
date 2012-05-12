@@ -221,7 +221,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;release_id=$release_id&amp;package_id=$package_id"; ?>">
 <input type="hidden" name="step1" value="1" />
-<table border="0" cellpadding="1" cellspacing="1">
+<table cellpadding="1" cellspacing="1">
 <tr>
 	<td width="10%"><strong><?php echo _('Release date') ?>:</strong></td>
 	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d H:i',$frsr->getReleaseDate()) ?>" size="16" maxlength="16" /></td>

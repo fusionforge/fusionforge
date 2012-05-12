@@ -156,12 +156,12 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 			$title = $value;
 		}
 	} else {
-		$title .= _(' Archives');
+		$title .= ' ' . _('Archives');
 	}
 	echo '<h2>'.$title.'</h2>';
 
 	if (! $request->exist('pv') || ($request->exist('pv') && $request->get('pv') == 0)) {
-		echo "<table border=0 width=100%>
+		echo "<table border='0' width='100%'>
 			<tr>";
 
 		echo "<td align='left'>";
@@ -203,13 +203,13 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 				plugin_forumml_show_all_threads($p,$list_id,$list_name,$offset);
 			}
 		} else {
-			echo "<H2>"._('Empty archives')."</H2>";
+			echo "<h2>"._('Empty archives')."</h2>";
 		}
 	} else {
 		// search archives
 		$pattern = "%".$request->get('search')."%";
 		$result = getForumMLDao()->searchArchives($list_id,$pattern);
-		echo "<H3>"._('Search result for ').$request->get('search')." (".$result->rowCount()." "._('Thread(s) found').")</H3>";
+		echo "<h3>"._('Search result for ').$request->get('search')." (".$result->rowCount()." "._('Thread(s) found').")</h3>";
 		if ($result->rowCount() > 0) {
 			plugin_forumml_show_search_results($p,$result,$group_id,$list_id);
 		}

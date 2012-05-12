@@ -222,7 +222,8 @@ if ($group_id) {
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PUBLIC; ?>"<?php echo ($mailingList->isPublic() == MAIL__MAILING_LIST_IS_PUBLIC ? ' checked="checked"' : ''); ?> /> <?php echo _('Yes'); ?><br />
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PRIVATE; ?>"<?php echo ($mailingList->isPublic() == MAIL__MAILING_LIST_IS_PRIVATE ? ' checked="checked"' : ''); ?> /> <?php echo _('No'); ?>
 			</p>
-			<p><strong><?php echo _('Description:'); ?></strong><br />
+			<p>
+			<strong><?php echo _('Description:'); ?></strong><br />
 			<input type="text" name="description" value="<?php echo inputSpecialChars($mailingList->getDescription()); ?>" size="40" maxlength="80" /></p>
 			<p>
 			<input type="submit" name="submit" value="<?php echo _('Update'); ?>" /></p>
@@ -276,15 +277,15 @@ if ($group_id) {
 					echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td width="60%">'.
 					'<strong>'.$currentList->getName().'</strong><br />'.
 					htmlspecialchars($currentList->getDescription()).'</td>'.
-					'<td style="text-align:center"><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a></td>' ;
-					echo '<td style="text-align:center">';
+					'<td class="align-center"><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a></td>' ;
+					echo '<td class="align-center">';
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 						echo _('Not activated yet');
 					} else {
 						echo '<a href="'.$currentList->getExternalAdminUrl().'">'._('Administration').'</a>';
 					}
 					echo '</td>';
-					echo '<td style="text-align:center">';
+					echo '<td class="align-center">';
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_CONFIGURED) {
 						print '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;reset_pw=1">'._('Reset admin password').'</a></td>' ;
 
