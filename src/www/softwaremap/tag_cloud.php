@@ -49,7 +49,7 @@ if (!forge_get_config('use_project_tags')) {
 	exit_disabled();
 }
 
-$HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
+$HTML->header(array('title'=>_('Tag Cloud'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
 $selected_tag = getStringFromRequest('tag');
