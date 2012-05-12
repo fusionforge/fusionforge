@@ -57,7 +57,7 @@ class HgPlugin extends SCMPlugin {
 
 	function getInstructionsForRW ($project) {
 		if (session_loggedin()) {
-			$u =& user_get_object(user_getid()) ;
+			$u = user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
 			$b = '<h2>' ;
 			$b .= _('Developer Mercurial Access via SSH');
@@ -134,7 +134,9 @@ class HgPlugin extends SCMPlugin {
 		}
 
 		if (! $project->enableAnonSCM()) {
-			unlink ($tarball) ;
+			if (is_file($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false;
 		}
 
@@ -142,7 +144,9 @@ class HgPlugin extends SCMPlugin {
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo)) {
-			unlink ($tarball) ;
+			if (is_file($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false ;
 		}
 
