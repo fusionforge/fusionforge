@@ -38,8 +38,8 @@ add_config () {
 lastsection=''
 tmp=$(mktemp)
 cat > $tmp <<EOF
-# This is a generated file with values migrated from your previous configuration
-# You may want to move the values in here to the main configuration files
+; This is a generated file with values migrated from your previous configuration
+; You may want to move the values in here to the main configuration files
 EOF
 
 add_config core account_manager_type >> $tmp
@@ -155,8 +155,8 @@ chmod 644 $config_path/zzz-migrated-old-config
 lastsection=''
 tmp=$(mktemp)
 cat > $tmp <<EOF
-# This is a generated file with values migrated from your previous configuration
-# You may want to move the values in here to the main configuration files
+; This is a generated file with values migrated from your previous configuration
+; You may want to move the values in here to the main configuration files
 EOF
 
 add_config core database_host >> $tmp
