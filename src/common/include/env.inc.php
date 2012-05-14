@@ -7,6 +7,17 @@
  * 
  */
 
+if (!getenv('SERVER_SOFTWARE')) {
+	/* when running outside of the Web */
+
+	/* enable maximum error reporting */
+	error_reporting(-1);
+	/* disable output buffering */
+	$no_gz_buffer = true;
+	/* allow it to eat all memory */
+	ini_set("memory_limit", -1);
+}
+
 // Attempt to set up the include path, to fix problems with relative includes
 $fusionforge_basedir = dirname(dirname(dirname( __FILE__ ))) ;
 $include_path = join(PATH_SEPARATOR, 
