@@ -68,13 +68,46 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->setHost(SELENIUM_RC_HOST);
 	}
 
-//	protected function waitForPageToLoad($timeout)
-//	{
-//		parent::waitForPageToLoad($timeout);
-//		$this->test->assertFalse($this->isTextPresent("Notice: Undefined variable:"));
-//		$this->test->assertFalse($this->isTextPresent("Notice: Undefined index:"));
-//		$this->test->assertFalse($this->isTextPresent("Warning: Missing argument"));
-//	}
+	/**
+	 * Method that is called after Selenium actions.
+	 *
+	 * @param  string $action
+	 */
+	protected function defaultAssertions($action)
+	{
+		if ($action == 'waitForPageToLoad') {
+			$this->assertElementPresent("//h1");
+//			$this->assertFalse($this->isElementPresent("//div[@id='ffErrors']"));
+//			$this->assertFalse($this->isTextPresent("PhpWiki Warning:"));
+		}
+	}
+
+	protected function clickAndWait($link)
+	{
+		$this->click($link);
+		$this->waitForPageToLoad();
+	}
+
+	protected function waitForTextPresent($text)
+	{
+		for ($second = 0; ; $second++) {
+			if ($second >= 30) $this->fail("timeout");
+			try {
+				if ($this->isTextPresent($text)) break;
+			} catch (Exception $e) {}
+			sleep(1);
+		}
+	}
+
+	protected function runCommand($cmd)
+	{
+		system($cmd);
+	}
+
+	protected function db($sql)
+	{
+		system("echo \"$sql\" | psql -q -Upostgres ".DB_NAME);
+	}
 
 	protected function cron($cmd)
 	{
@@ -324,10 +357,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->select("//select[@name='built_from_template']", "label=Tmpl");
 		}
 
-		$this->click("submit");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
-		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
+		$this->clickAndWait("submit");
+		$this->assertTextPresent("Your project has been submitted");
+		$this->assertTextPresent("you will receive notification of their decision and further instructions");
 
 		$this->switchUser ($saved_user) ;
 	}
@@ -379,8 +411,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Site Admin");
 		$this->clickAndWait("link=Display Full User List/Edit Users");
-		$this->click("//table/tbody/tr/td/a[contains(@href,'useredit.php') and contains(.,'($login)')]/../..//a[contains(@href, 'userlist.php?action=activate&user_id=')]");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("//table/tbody/tr/td/a[contains(@href,'useredit.php') and contains(.,'($login)')]/../..//a[contains(@href, 'userlist.php?action=activate&user_id=')]");
 	}
 
 	protected function activatePlugin($pluginName) {
