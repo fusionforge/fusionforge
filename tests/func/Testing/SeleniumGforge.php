@@ -339,7 +339,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		return $this->isTextPresent("Permission denied") ;
 	}
 
-	protected function registerProject ($name, $user) {
+	protected function registerProject ($name, $user, $scm='scmsvn') {
 		$unix_name = strtolower($name);
 
 		$saved_user = $this->logged_in ;
@@ -351,7 +351,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->type("purpose", "This is a simple description for $name");
 		$this->type("description", "This is the public description for $name.");
 		$this->type("unix_name", $unix_name);
-		$this->click("//input[@name='scm' and @value='scmsvn']");
+		$this->click("//input[@name='scm' and @value='$scm']");
 
 		if ($this->isElementPresent("//select[@name='built_from_template']/option[.='Tmpl']")) {
 			$this->select("//select[@name='built_from_template']", "label=Tmpl");
@@ -380,14 +380,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->switchUser ($saved_user) ;
 	}
 
-	protected function createProject ($name) {
+	protected function createProject ($name, $scm='scmsvn') {
 		$unix_name = strtolower($name);
 
 		$this->switchUser (FORGE_ADMIN_USERNAME) ;
 		
 		// Create a simple project.
 		if ((!defined('PROJECTA')) || ($unix_name != "projecta")) {
-			$this->registerProject ($name, FORGE_ADMIN_USERNAME) ;
+			$this->registerProject ($name, FORGE_ADMIN_USERNAME, $scm) ;
 			$this->approveProject ($name, FORGE_ADMIN_USERNAME) ;
 		}
 	}
