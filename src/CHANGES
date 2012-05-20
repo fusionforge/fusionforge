@@ -5,6 +5,7 @@ FusionForge-5.3:
 * scmgit: add browsing capability for user personal repository (TrivialDev)
 * headermenu: new plugin to add links in login/logout menu link (TrivialDev)
 * scmgit: basic activity support (TrivialDev).
+* scmhg: merge patch from Denise Patzker: add http support, online browse, stats (TrivialDev)
 
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)

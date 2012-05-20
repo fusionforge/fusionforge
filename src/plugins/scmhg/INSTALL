@@ -1,0 +1,50 @@
+Mercurial Plugin
+================
+
+Just put the plugin files in the rigth place:
+	/opt/gforge/plugins/scmhg
+
+--> /opt/gforge/www/plugins must contain a symlink to /opt/gforge/plugins/scmhg/www 
+
+Make sure you have installed Mercurial correctly. The Plugin should work with almost any Version of it. 
+Now search the hgweb.cgi of your Mercurial install or download it from http://mercurial.selenic.com/ .
+
+The file should contain some lines like:
+ application = hgweb("/path/to/repo", "repository name") 
+ wsgicgi.launch(application)
+This lines are needed to launch independend webpages for every mercurial project.
+Put the hgweb.cgi into scmhg/www/cgi-bin and make sure that it is readable for the user running fusionforges-cronjobs. 
+
+Now copy the fflog.tmpl file into your central mercurial path for templates. It should be something like '/usr/lib/python2.6/site-packages/mercurial/templates/' . 
+The path was correct, when you can use 'hg log --style fflog.tmpl' from any hg repository. The template file is needed to gather statistics for the sourcecode history.
+ 
+
+Your scmhg.ini (/etc/config.ini.d/) should contain the following entries:
+	default_server, repos_path, use_ssh, use_ssl, use_dav, anonhg_login, anonhg_password
+
+APACHE CONFIGURATION:
+
+Here is an example configuration for use with http and hgweb .
+
+	#
+        #       Mercurial Repository
+        #
+        ScriptAliasMatch ^/hg/(.*) /opt/gforge/www/plugins/scmhg/www/cgi-bin/$1.cgi
+        <Directory "/opt/gforge/www/plugins/scmhg/www/cgi-bin">
+                Options +ExecCGI FollowSymLinks Multiviews
+                AddHandler cgi-script .cgi
+                RewriteEngine On
+                RewriteRule .* - [E=REMOTE_USER:%{ENV:REDIRECT_REMOTE_USER}]
+                AllowOverride None
+                Order allow,deny        
+                Allow from all
+        </Directory>
+
+        <Location /hg>
+                AuthType Basic
+                AuthName "Mercurial Access"
+                AuthUserFile /data_path/hgroot-authfile
+                Require valid-user
+        </Location>
+
+ 

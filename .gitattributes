@@ -2641,9 +2641,11 @@ src/plugins/scmgit/packaging/dirs/plugin-scmgit -text
 src/plugins/scmgit/packaging/install/plugin-scmgit -text
 src/plugins/scmgit/packaging/links/plugin-scmgit -text
 src/plugins/scmgit/www/index.php -text
+src/plugins/scmhg/INSTALL -text
 src/plugins/scmhg/NAME -text
 src/plugins/scmhg/common/HgPlugin.class.php -text
 src/plugins/scmhg/common/scmhg-init.php -text
+src/plugins/scmhg/etc/fflog.tmpl -text
 src/plugins/scmhg/etc/scmhg.ini -text
 src/plugins/scmhg/packaging/control/134plugin-scmhg -text
 src/plugins/scmhg/packaging/control/134plugin-scmhg.shortdesc -text
