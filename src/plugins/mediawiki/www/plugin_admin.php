@@ -4,6 +4,7 @@
  *
  * Copyright © 2010
  *      Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2012, Franck Villaume - TrivialDev
  * All rights reserved.
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -76,7 +77,7 @@ if (!$userperm->IsAdmin())
 	exit_error("Access Denied", "You are not an admin of this project");
 
 $group_unix_name = $group->getUnixName();
-$wgUploadDirectory = "/var/lib/gforge/plugins/mediawiki/wikidata/" .
+$wgUploadDirectory = forge_get_config('projects_path', 'mediawiki') . "/" .
     $group_unix_name . "/images";
 $group_logo = $wgUploadDirectory . "/.wgLogo.png";
 $group_logo_url = util_make_url("/plugins/mediawiki/wiki/" .
