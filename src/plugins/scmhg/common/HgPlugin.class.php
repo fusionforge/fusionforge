@@ -173,7 +173,6 @@ class HgPlugin extends SCMPlugin {
 		}
 		if ($project->usesPlugin($this->name)) {
 			if ($this->browserDisplayable($project)) {
-				//print '<iframe src="'.util_make_url("/plugins/scmhg/cgi-bin/hgweb.cgi".$project->getUnixName()."?p=".$project->getUnixName()).'" frameborder="0" width=100% height=700></iframe>';
 				print '<iframe src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width=100% height=700></iframe>';
 			}
 		}
@@ -208,7 +207,7 @@ class HgPlugin extends SCMPlugin {
 				$repo_config = "";
 				foreach ($lines as $line) {
 					if (preg_match("/\Aapplication = hgweb/",$line)) {
-						//link per projekt hgweb.cgi to the project repository
+						//link per project hgweb.cgi to the project repository
 						$repo_config .= "application = hgweb(\"".$repo."\",\"".$project->getUnixName()."\")\n";
 					} else {
 						$repo_config .= $line;

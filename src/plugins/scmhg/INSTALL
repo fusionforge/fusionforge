@@ -15,7 +15,7 @@ The file should contain some lines like:
 This lines are needed to launch independend webpages for every mercurial project.
 Put the hgweb.cgi into scmhg/www/cgi-bin and make sure that it is readable for the user running fusionforges-cronjobs. 
 
-Now copy the fflog.tmpl file into your central mercurial path for templates. It should be something like '/usr/lib/python2.6/site-packages/mercurial/templates/' . 
+Now copy the fflog.tmpl file available in etc directory into your central mercurial path for templates. It should be something like '/usr/lib/python2.6/site-packages/mercurial/templates/' . 
 The path was correct, when you can use 'hg log --style fflog.tmpl' from any hg repository. The template file is needed to gather statistics for the sourcecode history.
  
 
