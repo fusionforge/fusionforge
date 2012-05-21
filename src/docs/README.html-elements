@@ -1,0 +1,142 @@
+Documentation of new HTML element creation functions
+────────────────────────────────────────────────────
+
+Functions defined in src/www/include/html.php → available: always.
+
+
+‣ Element emission functions (do not echo anything)
+
+
+• string html_eo(string $name, optional(empty) array $attrs)
+
+	html_eo('b')
+	⇒ '<b>'
+
+	html_eo('td', array('colspan' => 2))
+	⇒ '<td colspan="2">'
+
+	html_eo('div', array('class' => array('ff', 'important')))
+	⇒ '<div class="ff important">'
+
+	html_eo('img', array(
+		'src' => '…',
+		'ref' => false,
+		'class' => array(),
+		'alt' => "",
+	    ))
+	⇒ '<img src="…" alt="">'
+
+  Generate an XHTML E̲lement O̲pen tag for $name, with attributes
+  defined by key/value pairs properly inserted. Attribute values
+  are coerced into strings from integers (by casting) or arrays
+  (by concatenating the array elements with spaces); if the value
+  is === false or an empty array (count($attrs[n]) == 0), the
+  attribute is not output at all, but for empty values it is; see
+  the img example (admittedly bad, you’d use html_e() for "img").
+
+• string html_e(string $name, optional(empty) array $attrs,
+    optional(empty) string $content, optional(true) bool $shortform)
+
+	html_e('br')
+	⇒ '<br />'
+
+	html_e('a', array('href' => '/foo.php?a=1&b=2'), 't&auml;xt')
+	⇒ '<a href="/foo.php?a=1&amp;b=2">t&auml;xt</a>'
+
+	html_e('script', array(
+		'type' => 'text/javascript',
+		'src' => '/js/foo.js',
+	    ), "", false)
+	⇒ '<script type="text/javascript" src="/js/foo.js"></script>'
+	/* needed because <script ... /> does not work */
+
+	html_e('tr', array(), html_e('td', array(), 'bla'))
+	⇒ '<tr><td>bla</td></tr>'
+
+  As with html_eo() the first two arguments define the tag to open.
+  The third argument will be placed between the opening and closing
+  tags but – in contrast to attribute values – not entity-encoded.
+  If the third argument is empty, either a self-closing (default)
+  tag, or, if the fourth argument is false, an open-close sequence,
+  is emitted.
+
+
+‣ Autoclose stack functions
+
+	$spos = html_ap();
+	$s = html_ao('p');
+	if ($foo) {
+		$s .= html_ao('strong');
+	}
+	$s .= html_ao('a', array('href' => '/'));
+	$s .= somefunc();
+	$s .= html_ac($spos);
+	⇒ '<p><strong><a href="/">somefuncreturnvalue</a></strong></p>'
+	⇒ '<p><a href="/">somefuncreturnvalue</a></p>'
+
+• integer html_ap(void)
+
+  Return the a̲utoclose stack’s current p̲osition.
+
+• string html_ao(string $name, optional(empty) array $attrs)
+
+  Works the same as html_eo() but pushes $name onto the a̲utoclose
+  element stack when o̲pening it.
+
+• string html_ac(integer $spos)
+
+  Return a set of closing elements until the a̲utoc̲lose stack
+  has reached the position it had when html_ap() returned $spos.
+
+  If $spos === false: an empty string is returned, for html_aonce().
+
+  If $spos < current stack position, an Exception is raised.
+
+• string html_aonce(ByRef integer $sptr, string $name,
+    optional(empty) array $attrs)
+
+	$spos = false;
+	foreach ($row in $rows) {
+		echo html_aonce('table');
+		echo html_e('tr', array(), html_e('td', array(),
+		    util_html_secure($row['data'])));
+	}
+	echo html_ac($spos);
+	⇒ ''  // if $rows is empty
+	⇒ '<table><tr><td>content1</td></tr><tr><td>content2</td></tr></table>'
+
+  If $sptr is not false, do nothing. Otherwise, set it to
+  the current html_ap() then do html_ao($name, $attrs).
+
+  This function can easily be used to open an enclosing element
+  with mandatory inner elements, such as a table, only once except
+  if no table row were to be generated.
+
+‣ Autoclose stack copy functions
+
+	$spos = html_ap();
+	echo html_ao('tr', array('bgcolor' => '#FF0000'));
+	echo html_ao('td');
+	echo "content 1";
+	$scopy = html_a_copy($spos);
+	echo html_ac($spos);
+	echo html_e('tr', array(), html_e('td', array(), "intermediate"));
+	echo html_a_apply($scopy);
+	echo "content 2";
+	echo html_ac($spos);
+	echo html_a_apply($scopy);
+	echo "content 3";
+	echo html_ac($spos);
+
+	⇒ <tr bgcolor="#FF0000"><td>content 1</td></tr>
+	  <tr><td>intermediate</td></tr>
+	  <tr bgcolor="#FF0000"><td>content 2</td></tr>
+	  <tr bgcolor="#FF0000"><td>content 3</td></tr>
+
+• opaque html_a_copy(integer $spos)
+• string html_a_apply(opaque $scopy)
+
+  Before autoclosing the stack down to a level $spos, you can
+  retrieve a copy of the stack in an opaque format, which can
+  later be used to (re-)open the same elements, with the same
+  attributes, even in a different nesting state.

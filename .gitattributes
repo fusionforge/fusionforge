@@ -691,6 +691,8 @@ src/debian/po/README -text
 src/debian/source/format -text
 src/debian/watch -text
 src/docs/README.gettext -text
+src/docs/README.html-elements -text
+src/docs/README.html-utils -text
 src/docs/architecture/stats/stats-process.sda svneol=native#unset
 src/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 src/docs/docbook/css/docbook.css -text svneol=unset#text/css
