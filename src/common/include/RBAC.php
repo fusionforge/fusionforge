@@ -215,7 +215,9 @@ abstract class BaseRole extends Error {
 			return false;
 		}
 
-		return true;
+		$this->normalizeData();
+
+		return true ;
 	}
 
 	function unlinkProject($project) { // From the PFO spec

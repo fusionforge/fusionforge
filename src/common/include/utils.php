@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2011, Roland Mas
  * Copyright 2009-2011, Franck Villaume - Capgemini
- * Copyright (c) 2010, 2011
+ * Copyright (c) 2010, 2011, 2012
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  *
@@ -380,15 +380,7 @@ function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabb
  *
  */
 function util_unconvert_htmlspecialchars($string) {
-	if (strlen($string) < 1) {
-		return '';
-	} else {
-		//$trans = get_html_translation_table(HTMLENTITIES, ENT_QUOTES);
-		$trans = get_html_translation_table(HTML_ENTITIES);
-		$trans = array_flip ($trans);
-		$str = strtr ($string, $trans);
-		return $str;
-	}
+	return html_entity_decode($string, ENT_QUOTES, "UTF-8");
 }
 
 /**
@@ -1497,10 +1489,45 @@ function util_uri_grabber($unencoded_string, $tryaidtid=false) {
 	return $s;
 }
 
+function util_html_encode($s) {
+	return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+}
+
 /* secure a (possibly already HTML encoded) string */
 function util_html_secure($s) {
-	return htmlentities(html_entity_decode($s, ENT_QUOTES, "UTF-8"),
-	    ENT_QUOTES, "UTF-8");
+	return util_html_encode(util_unconvert_htmlspecialchars($s));
+}
+
+/* return integral value (ℕ₀) of passed string if it matches, or false */
+function util_nat0(&$s) {
+	if (!isset($s)) {
+		/* unset variable */
+		return false;
+	}
+	if (is_array($s)) {
+		if (count($s) == 1) {
+			/* one-element array */
+			return util_nat0($s[0]);
+		}
+		/* not one element, or element not at [0] */
+		return false;
+	}
+	if (!is_numeric($s)) {
+		/* not numeric */
+		return false;
+	}
+	$num = (int)$s;
+	if ($num >= 0) {
+		/* number element of ℕ₀ */
+		$text = (string)$num;
+		if ($text == $s) {
+			/* number matches its textual representation */
+			return ($num);
+		}
+		/* doesn't match, like 0123 or 1.2 or " 1" */
+	}
+	/* or negative */
+	return false;
 }
 
 /**
@@ -1534,9 +1561,39 @@ function util_negociate_alternate_content_types($script, $default_content_type) 
 	return $content_type;
 }
 
+/**
+ * util_gethref() - Construct a hypertext reference
+ *
+ * @param	string	$baseurl
+ *		(optional) base URL (absolute or relative);
+ *			urlencoded, but not htmlencoded
+ *		(default (falsy): PHP_SELF)
+ * @param	array	$args
+ *		(optional) associative array of unencoded query parameters;
+ *			false values are ignored
+ * @param	bool	$ashtml
+ *		(optional) htmlencode the result?
+ *		(default: true)
+ * @param	string	$sep
+ *		(optional) argument separator ('&' or ';')
+ *		(default: '&')
+ * @return	string
+ *		URL, possibly htmlencoded
+ */
+function util_gethref($baseurl=false, $args=array(), $ashtml=true, $sep='&') {
+	$rv = $baseurl ? $baseurl : getStringFromServer('PHP_SELF');
+	$pfx = '?';
+	foreach ($args as $k => $v) {
+		if ($v === false) {
+			continue;
+		}
+		$rv .= $pfx . urlencode($k) . '=' . urlencode($v);
+		$pfx = $sep;
+	}
+	return ($ashtml ? util_html_encode($rv) : $rv);
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

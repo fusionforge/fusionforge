@@ -678,21 +678,23 @@ src/debian/dsf-po/gl.po -text
 src/debian/dsf-po/pt.po -text
 src/debian/dsf-po/ru.po -text
 src/debian/patches/disable-authcas -text
-src/debian/patches/disable-dav.patch -text
-src/debian/patches/disable-tracker-reply-by-email.patch -text
-src/debian/patches/production-environment.patch -text
+src/debian/patches/disable-dav -text
+src/debian/patches/disable-tracker-reply-by-email -text
+src/debian/patches/production-environment -text
 src/debian/patches/series -text
 src/debian/patches/upgrade-db-location -text
 src/debian/patches/upgrade-db-noninteractive -text
-src/debian/patches/use-jquery-from-distro.patch -text
-src/debian/patches/use-nusoap-from-distro.patch -text
-src/debian/patches/use-simplepie-from-distro.patch -text
-src/debian/patches/use-snoopy-from-distro.patch -text
+src/debian/patches/use-jquery-from-distro -text
+src/debian/patches/use-nusoap-from-distro -text
+src/debian/patches/use-simplepie-from-distro -text
+src/debian/patches/use-snoopy-from-distro -text
 src/debian/patches/use-yui-from-distro -text
 src/debian/po/README -text
 src/debian/source/format -text
 src/debian/watch -text
 src/docs/README.gettext -text
+src/docs/README.html-elements -text
+src/docs/README.html-utils -text
 src/docs/architecture/stats/stats-process.sda svneol=native#unset
 src/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 src/docs/docbook/css/docbook.css -text svneol=unset#text/css
@@ -4806,6 +4808,7 @@ src/utils/install-nsspgsql.sh -text svneol=unset#text/x-sh
 src/utils/ldap/sql2ldif.pl svneol=native#text/x-perl
 src/utils/ldap/sql2ldifadd.pl -text svneol=unset#text/x-perl
 src/utils/ldap/sql2ldifmod.pl -text svneol=unset#text/x-perl
+src/utils/list-admins.php -text
 src/utils/list-enabled-plugins.sh -text
 src/utils/manage-apache-config.sh -text svneol=unset#text/x-sh
 src/utils/manage-translations.sh -text svneol=unset#text/x-sh

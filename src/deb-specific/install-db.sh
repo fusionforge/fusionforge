@@ -204,9 +204,9 @@ EOF
 	fi
 	
         # Create the appropriate database
-	tmp1=$(mktemp /tmp/$pattern)
-	tmp2=$(mktemp /tmp/$pattern)
 	if ! exist_db $db_name ; then
+		tmp1=$(mktemp /tmp/$pattern)
+		tmp2=$(mktemp /tmp/$pattern)
 		if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<EOF \
 	    	    && [ "$(tail -n +2 $tmp1 | head -1)" = 'CREATE DATABASE' ] ; 
 SET LC_MESSAGES = 'C' ;

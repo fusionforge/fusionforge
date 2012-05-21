@@ -104,7 +104,7 @@ class Widget_MySurveys extends Widget {
 					}
 				}
 
-				$html_hdr .= '['.count($surveys).($count_new ? ", <b>".sprintf(_('%s new'), array($count_new))."</b>]" : ']').'</td></tr>';
+				$html_hdr .= '['.count($surveys).($count_new ? ", <b>".sprintf(_('%d new'), $count_new)."</b>]" : ']').'</td></tr>';
 				$html_my_surveys .= $html_hdr.$html;
 			}
 			$html_my_surveys .= '</table>';

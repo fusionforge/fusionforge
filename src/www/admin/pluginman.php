@@ -268,6 +268,11 @@ foreach ($filelist as $filename) {
 		$link = '';
 	}
 
+	// Disable link to action if action is not possible.
+	if (isset($action[$filename][$next]) && $action[$filename][$next] === false) {
+		$link = '';
+	}
+
 	$title = _('Current plugin status:'). ' ' .forge_get_config('plugin_status', $filename);
 	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 		'<td title="'. $description.' '.$title .'">'. $filename.'</td>'.

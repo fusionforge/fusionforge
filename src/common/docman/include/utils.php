@@ -64,7 +64,7 @@ function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0,
 						return false;
 				}
 			}
-			if (!docman_fill_zip($zip, $nested_groups, $document_factory, $dg->getID(), $parent_docname.'/'.$dg->getName())) {
+			if (!docman_fill_zip($zip, $nested_groups, $document_factory, $dg->getID(), iconv("UTF-8", "ASCII//TRANSLIT", $parent_docname).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName()))) {
 				return false;
 			}
 		}

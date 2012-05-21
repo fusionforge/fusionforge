@@ -109,6 +109,7 @@ class Widget_MyArtifacts extends Widget {
 	function getContent() {
 		$html_my_artifacts = '<table style="width:100%">';
 		$atf = new ArtifactsForUser(@UserManager::instance()->getCurrentUser());
+		$my_artifacts = array();
 		if ($this->_artifact_show == 'ASM'){
 			$my_artifacts = $atf->getArtifactsFromSQLWithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.assigned_to=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
 		}
