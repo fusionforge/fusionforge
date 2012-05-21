@@ -4777,6 +4777,7 @@ src/utils/cvs1/cvscreate.sh svneol=native#text/x-sh
 src/utils/cvs1/cvstar_genlist.pl svneol=native#text/x-perl
 src/utils/cvs1/cvstar_superscript.pl svneol=native#text/x-perl
 src/utils/decode_images.sh svneol=native#text/x-sh
+src/utils/ffcountries.pl -text
 src/utils/fill-in-the-blanks.pl svneol=native#text/x-perl
 src/utils/filter-sql-dump.php -text
 src/utils/fixscripts/fix_default_role.php -text

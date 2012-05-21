@@ -193,6 +193,9 @@ build: remove-binary-files debian/po/templates.pot conffiles
 #       Build FHS-compatible Apache config files (generates contents of etc/httpd.conf.d-fhs/ etc.)
 	utils/manage-apache-config.sh build
 
+#	Update SQL for list of country codes
+	utils/ffcountries.pl > 200403251.sql
+
 # 	Preprocess files with DSF-Helper
 	perl $(CURDIR)/deb-specific/dsf-helper.pl
 
@@ -208,7 +211,7 @@ clean: remove-binary-files
 	rm -f $(CURDIR)/debian/*.README.Debian
 	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
 	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-common.manpages
-	rm -f cvssh.1 $(PACKAGE)-config.1
+	rm -f cvssh.1 $(PACKAGE)-config.1 200403251.sql
 	rm -f $(CURDIR)/debian/README.Debian
 	rm -rf locales
 
