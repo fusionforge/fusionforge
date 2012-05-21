@@ -70,7 +70,7 @@ case "$1" in
 	    ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new ${pg_hba_dir}/pg_hba.conf
 	fi
 	# register it with ucfr/ucfq so that next time the normal ucf template is used, in case of user changes (or another package's)
-	ucfr @OLDPACKAGE@-db-postgresql /etc/postgresql/9.0/main/pg_hba.conf
+	ucfr @OLDPACKAGE@-db-postgresql ${pg_hba_dir}/pg_hba.conf
 	rm ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new
 
 	# Make sure the database accepts connections from these new users

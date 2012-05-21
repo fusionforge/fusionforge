@@ -3,8 +3,9 @@ fusionforge (5.1.50+svn15410-2) UNRELEASED; urgency=low
   * Generate initial list of countries and codes from the current known
     data (from isoquery) at build time (closes: #565240).  Thanks to David
     Prévot <david@tilapin.org> for the bulk of the patch.
+  * Remove UCF-generated files on purge (closes: #672256).
 
- -- Roland Mas <lolando@debian.org>  Mon, 21 May 2012 15:13:05 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 21 May 2012 15:49:11 +0200
 
 fusionforge (5.1.50+svn15410-1) experimental; urgency=low
 
