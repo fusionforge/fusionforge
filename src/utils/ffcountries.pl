@@ -21,5 +21,6 @@ foreach (`isoquery -c`) {
 	chomp ;
 	my $cc = substr($_,0,2);
 	$_ =~ s/.*\t//;
-	print "INSERT INTO country_code VALUES (\"$_\",'$cc');\n";
+	$_ =~ s/'/''/g;
+	print "INSERT INTO country_code VALUES ('$_','$cc');\n";
 }
