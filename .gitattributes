@@ -4794,6 +4794,7 @@ src/utils/install-nsspgsql.sh -text svneol=unset#text/x-sh
 src/utils/ldap/sql2ldif.pl svneol=native#text/x-perl
 src/utils/ldap/sql2ldifadd.pl -text svneol=unset#text/x-perl
 src/utils/ldap/sql2ldifmod.pl -text svneol=unset#text/x-perl
+src/utils/list-admins.php -text
 src/utils/list-enabled-plugins.sh -text
 src/utils/manage-apache-config.sh -text svneol=unset#text/x-sh
 src/utils/manage-translations.sh -text svneol=unset#text/x-sh

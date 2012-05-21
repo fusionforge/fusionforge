@@ -2340,11 +2340,25 @@ class Group extends Error {
 				}
 			}
 
-			// Disabled to keep user choice from registration page.
-//			$this->setUseSCM ($template->usesSCM()) ;
+			if (0) {
+				/* use SCM plugin from template group */
+				$this->setUseSCM($template->usesSCM());
 
-			foreach ($template->getPlugins() as $plugin_id => $plugin_name) {
-				if (preg_match('/^scm/', $plugin_name) && ($plugin_name != 'scmhook')) {
+				foreach ($template->getPlugins() as
+				    $plugin_id => $plugin_name) {
+					$this->setPluginUse($plugin_name);
+				}
+			} else {
+				/* use SCM choice from registration page */
+
+				foreach ($template->getPlugins() as
+				    $plugin_id => $plugin_name) {
+					if (substr($plugin_name, 3) == 'scm' &&
+					    $plugin_name != 'scmhook') {
+						/* skip copying scm plugins */
+						continue;
+					}
+					/* enable other plugins though */
 					$this->setPluginUse($plugin_name);
 				}
 			}

@@ -27,3 +27,5 @@ locales/*                              usr/share/locale/
 plugins/authbuiltin/common          usr/share/@OLDPACKAGE@/plugins/authbuiltin/
 plugins/authbuiltin/www             usr/share/@OLDPACKAGE@/plugins/authbuiltin/
 plugins/authbuiltin/etc/*.ini 	    etc/@PACKAGE@/config.ini.d/
+#
+utils/list-admins.php                  usr/share/@OLDPACKAGE@/bin/
