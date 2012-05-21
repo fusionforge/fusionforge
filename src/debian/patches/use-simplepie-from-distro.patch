@@ -1,5 +1,32 @@
 Author: Roland Mas <lolando@debian.org>
 Description: Use SimplePie as provided by the libphp-simplepie Debian package
+Index: src/common/widget/Widget_Rss.class.php
+===================================================================
+--- src.orig/common/widget/Widget_Rss.class.php
++++ src/common/widget/Widget_Rss.class.php
+@@ -49,7 +49,7 @@
+ 					return idn_to_unicode($param);
+ 				}
+ 			}
+-			require_once('common/rss/simplepie.inc');
++			require_once('/usr/share/php/simplepie/simplepie.inc');
+ 			if (!is_dir(forge_get_config('data_path') .'/rss')) {
+ 				mkdir(forge_get_config('data_path') .'/rss');
+ 			}
+@@ -132,12 +132,7 @@
+ 			$vTitle = new Valid_String('title');
+ 			$vTitle->required();
+ 			if (!$request->validInArray('rss', $vTitle)) {
+-				if (function_exists('idn_to_utf8()')) {
+-					require_once('simplepie/simplepie.inc');
+-				}
+-				else {
+-					require_once('common/rss/simplepie.inc');
+-				}
++				require_once('/usr/share/php/simplepie/simplepie.inc');
+ 				if (!is_dir(forge_get_config('data_path') .'/rss')) {
+ 					mkdir(forge_get_config('data_path') .'/rss');
+ 				}
 Index: src/common/rss/simplepie.inc
 ===================================================================
 --- src.orig/common/rss/simplepie.inc
@@ -13729,30 +13756,3 @@ Index: src/common/rss/simplepie.inc
 -}
 -
 -?>
-Index: src/common/widget/Widget_Rss.class.php
-===================================================================
---- src.orig/common/widget/Widget_Rss.class.php
-+++ src/common/widget/Widget_Rss.class.php
-@@ -45,7 +45,7 @@
- 					return idn_to_unicode($param);
- 				}
- 			}
--			require_once('common/rss/simplepie.inc');
-+			require_once('/usr/share/php/simplepie/simplepie.inc');
- 			if (!is_dir(forge_get_config('sys_var_path') .'/rss')) {
- 				mkdir(forge_get_config('sys_var_path') .'/rss');
- 			}
-@@ -128,12 +128,7 @@
- 			$vTitle = new Valid_String('title');
- 			$vTitle->required();
- 			if (!$request->validInArray('rss', $vTitle)) {
--				if (function_exists('idn_to_utf8()')) {
--					require_once('simplepie/simplepie.inc');
--				}
--				else {
--					require_once('common/rss/simplepie.inc');
--				}
-+				require_once('/usr/share/php/simplepie/simplepie.inc');
- 				if (!is_dir(forge_get_config('sys_var_path') .'/rss')) {
- 					mkdir(forge_get_config('sys_var_path') .'/rss');
- 				}

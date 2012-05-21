@@ -4,7 +4,7 @@ Index: src/www/include/html.php
 ===================================================================
 --- src.orig/www/include/html.php
 +++ src/www/include/html.php
-@@ -371,7 +371,7 @@
+@@ -377,7 +377,7 @@
  }
  
  function html_use_jquery() {
