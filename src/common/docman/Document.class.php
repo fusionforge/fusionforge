@@ -151,12 +151,11 @@ class Document extends Error {
 			function_exists('mb_detect_encoding')) {
 			$data = mb_convert_encoding($data, 'UTF-8', mb_detect_encoding($data));
 		}
-		$data1 = $data;
 
 		// key words for in-document search
 		if ($this->Group->useDocmanSearch()) {
 			$kw = new Parsedata();
-			$kwords = $kw->get_parse_data($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
+			$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype);
 		} else {
 			$kwords ='';
 		}
@@ -702,7 +701,8 @@ class Document extends Error {
 			case "text/plain":
 			case "text/x-php":
 			case "application/xml":
-			case "text/x-c": {
+			case "text/x-c":
+			case "text/x-diff": {
 				$image = 'docman/file_type_plain.png';
 				break;
 			}
@@ -837,12 +837,10 @@ class Document extends Error {
 		}
 
 		if ($data) {
-			$data1 = $data;
-
 			// key words for in-document search
 			if ($this->Group->useDocmanSearch()) {
 				$kw = new Parsedata();
-				$kwords = $kw->get_parse_data($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
+				$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype);
 			} else {
 				$kwords = '';
 			}

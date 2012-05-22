@@ -4,6 +4,7 @@
 #
 # Copyright 2005, Fabio Bertagnin
 # Copyright 2009-2010, Franck Villaume - Capgemini
+# Copyright 2012, Franck Villaume - TrivialDev
 # http://fusionforge.org
 #
 # This file is part of FusionForge.
@@ -27,6 +28,9 @@
 # mime-type|parser
 # This list is used by the ParserData class to find if any parser is available for that type of file
 text/plain|parser_text.php
+text/x-diff|parser_text.php
+text/x-php|parser_text.php
+text/x-c|parser_text.php
 text/html|parser_html.php
 application/pdf|parser_pdf.php
 application/vnd.oasis.opendocument.presentation|parser_oo.php

@@ -4,7 +4,7 @@
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2010, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -44,13 +44,12 @@ class Parsedata {
 	function get_parse_data($data, $title, $description, $filetype) {
 		$parser = "";
 		$rep = "";
-		$data1 = $data;
 		if (array_key_exists($filetype, $this->parsers)) {
 			// parse data if good parser exists
 			$parser = $this->p_path.$this->parsers[$filetype];
 			$filename = tempnam("/tmp/", "tmp");
 			$handle = fopen($filename, "w");
-			fwrite($handle, $data1);
+			fwrite($handle, $data);
 			fclose($handle);
 			$cmd = "php -f $parser $filename";
 			$rep = shell_exec($cmd);
@@ -59,11 +58,11 @@ class Parsedata {
 			}
 		}
 		// always parse titre and description
-		$data2 = utf8_decode("$title $description");
+		$data1 = utf8_decode("$title $description");
 		// temporary file for treatement
 		$filename = tempnam("/tmp", "tmp");
 		$handle = fopen($filename, "w");
-		fwrite($handle, $data2);
+		fwrite($handle, $data1);
 		fclose($handle);
 		$cmd = $this->p_path.$this->parsers["text/plain"];
 		$cmd = "php -f $cmd $filename";
