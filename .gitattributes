@@ -1899,6 +1899,8 @@ src/plugins/mediawiki/common/MediaWikiPlugin.class.php -text
 src/plugins/mediawiki/common/mediawiki-init.php -text
 src/plugins/mediawiki/cronjobs/create-imagedirs.php -text
 src/plugins/mediawiki/cronjobs/create-wikis.php -text
+src/plugins/mediawiki/debian/plugin-mediawiki.postinst -text
+src/plugins/mediawiki/debian/plugin-mediawiki.triggers -text
 src/plugins/mediawiki/etc/cron.d/fusionforge-plugin-mediawiki -text
 src/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki -text
 src/plugins/mediawiki/etc/mediawiki.ini -text
@@ -4337,6 +4339,7 @@ src/utils/ldap/sql2ldifadd.pl -text svneol=unset#text/x-perl
 src/utils/ldap/sql2ldifmod.pl -text svneol=unset#text/x-perl
 src/utils/list-admins.php -text
 src/utils/list-enabled-plugins.sh -text
+src/utils/list-projects-using-plugin.php -text
 src/utils/manage-apache-config.sh -text svneol=unset#text/x-sh
 src/utils/manage-translations.sh -text svneol=unset#text/x-sh
 src/utils/migrate-to-ini-files.sh -text svneol=unset#text/x-sh

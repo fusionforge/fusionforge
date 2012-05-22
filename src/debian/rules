@@ -45,6 +45,8 @@ PLINKSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/
 INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
 PINSTALLFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/install/[a-z]*),debian/$(PACKAGE)-plugin-$i.install))
 
+PTRIGGERSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/debian/[a-z]*.triggers),debian/$(PACKAGE)-plugin-$i.triggers))
+
 DOCSFILES=$(patsubst packaging/docs/%,debian/$(OLDPACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*)) \
 		$(patsubst packaging/docs/%,debian/$(PACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*))
 PDOCSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/docs/[a-z]*),debian/$(PACKAGE)-plugin-$i.docs))
@@ -77,13 +79,19 @@ remove-binary-files:
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 
 .PHONY: conffiles
-conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(READMEFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) debian/control
+conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(READMEFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) $(PTRIGGERSFILES) debian/control
 
 debian/$(PACKAGE)-plugin-%.postinst:
-	export PLUGLONGNAME="`cat $(CURDIR)/plugins/$*/NAME`"; $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.postinst > $@
+	export PLUGLONGNAME="`cat $(CURDIR)/plugins/$*/NAME`"; \
+		[ -e $(CURDIR)/plugins/$*/debian/plugin-$*.postinst ] \
+		&& $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/plugins/$*/debian/plugin-$*.postinst > $@ \
+		|| $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.postinst > $@
 
 debian/$(PACKAGE)-plugin-%.prerm:
-	export PLUGLONGNAME="`cat $(CURDIR)/plugins/$*/NAME`"; $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.prerm > $@
+	export PLUGLONGNAME="`cat $(CURDIR)/plugins/$*/NAME`"; \
+		[ -e $(CURDIR)/plugins/$*/debian/plugin-$*.prerm ] \
+		&& $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/plugins/$*/debian/plugin-$*.prerm > $@ \
+		|| $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.prerm > $@
 
 debian/$(PACKAGE)-plugin-%.cron.d:
 	$(SED_REPLACE) -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/plugins/$*/packaging/cron.d/plugin-$* > $@
@@ -91,6 +99,7 @@ debian/$(PACKAGE)-plugin-%.cron.d:
 debian/$(OLDPACKAGE)-%.cron.d:
 	(cat $(CURDIR)/packaging/cron.d/00phpcron ; $(SED_REPLACE) -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) | $(SED_REPLACE) > $@
 
+# Perform subsitutions on 'dirs', 'links', 'install', 'docs', 'triggers' files
 debian/$(PACKAGE)-plugin-%.dirs:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/dirs/plugin-$* > $@
 
@@ -105,6 +114,9 @@ debian/$(OLDPACKAGE)-%.links:
 
 debian/$(PACKAGE)-plugin-%.install:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/install/plugin-$* > $@
+
+debian/$(PACKAGE)-plugin-%.triggers:
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/debian/plugin-$*.triggers > $@
 
 debian/$(OLDPACKAGE)-%.install:
 	$(SED_REPLACE) $(CURDIR)/packaging/install/$* > $@ 

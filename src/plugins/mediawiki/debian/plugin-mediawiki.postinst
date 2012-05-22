@@ -1,0 +1,28 @@
+#! /bin/sh
+# postinst script for @PACKAGE@-plugin-mediawiki
+
+set -e
+
+case "$1" in
+    triggered)
+	if [ "$2" = /usr/share/mediawiki/maintenance/postgres ] ; then
+	    # Upgrade Mediawiki database schemas
+	    /usr/share/gforge/bin/list-projects-using-plugin.php mediawiki | while read i ; do
+		/usr/share/gforge/plugins/mediawiki/bin/mw-wrapper.php $i update.php
+	    done
+
+	fi
+	;;
+    
+    configure|abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+	;;
+esac
+
+#DEBHELPER#
+
+exit 0
