@@ -4,7 +4,7 @@
 set -e
 
 case "$1" in
-    triggered)
+    triggered|configure)
 	if [ "$2" = /usr/share/mediawiki/maintenance/postgres ] ; then
 	    # Upgrade Mediawiki database schemas
 	    /usr/share/gforge/bin/list-projects-using-plugin.php mediawiki | while read i ; do
@@ -14,7 +14,7 @@ case "$1" in
 	fi
 	;;
     
-    configure|abort-upgrade|abort-remove|abort-deconfigure)
+    abort-upgrade|abort-remove|abort-deconfigure)
 	;;
 
     *)
