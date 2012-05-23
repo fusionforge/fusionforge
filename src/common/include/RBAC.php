@@ -266,6 +266,7 @@ abstract class BaseRole extends Error {
 	}
 
 	function linkProject ($project) { // From the PFO spec
+		global $SYS;
 		$hp = $this->getHomeProject () ;
 		if ($hp != NULL && $hp->getID() == $project->getID()) {
 			$this->setError ("Can't link to home project") ;
@@ -289,10 +290,18 @@ abstract class BaseRole extends Error {
 
 		$this->normalizeData();
 
+		foreach ($this->getUsers() as $u) {
+			if (!$SYS->sysCheckCreateUser($u->getID())) {
+				$this->setError($SYS->getErrorMessage());
+				return false;
+			}
+		}
+
 		return true ;
 	}
 
 	function unlinkProject ($project) { // From the PFO spec
+		global $SYS;
 		$hp = $this->getHomeProject () ;
 		if ($hp != NULL && $hp->getID() == $project->getID()) {
 			$this->setError ("Can't unlink from home project") ;
@@ -308,6 +317,13 @@ abstract class BaseRole extends Error {
 		}
 
 		$this->removeObsoleteSettings () ;
+
+		foreach ($this->getUsers() as $u) {
+			if (!$SYS->sysCheckCreateUser($u->getID())) {
+				$this->setError($SYS->getErrorMessage());
+				return false;
+			}
+		}
 
 		return true ;
 	}
@@ -956,15 +972,6 @@ abstract class BaseRole extends Error {
 			foreach ($data as $sect => $refs) {
 				foreach ($refs as $refid => $value) {
 					$this->setSetting ($sect, $refid, $value) ;
-					if ($sect == 'scm') {
-						foreach ($this->getUsers() as $u) {
-							if (!$SYS->sysGroupCheckUser($refid,$u->getID())) {
-								$this->setError($SYS->getErrorMessage());
-								db_rollback();
-								return false;
-							}
-						}
-					}
 				}
 			}
 		} else {
@@ -989,15 +996,6 @@ abstract class BaseRole extends Error {
 				 array ($this->getID(),
 					'pm',
 					db_int_array_to_any_clause (array_keys ($data['pm'])))) ;
-		
-
-
-
-
-
-
-
-
 
 ////$data['section_name']['ref_id']=$val
 		$arr1 = array_keys($data);
@@ -1152,6 +1150,14 @@ abstract class BaseRole extends Error {
 
 		db_commit();
 		$this->fetchData($this->getID());
+
+		foreach ($this->getUsers() as $u) {
+			if (!$SYS->sysCheckCreateUser($u->getID())) {
+				$this->setError($SYS->getErrorMessage());
+				return false;
+			}
+		}
+
 		return true;
 	}
 
@@ -1191,6 +1197,7 @@ abstract class BaseRole extends Error {
 					'forum')) ;
 
 		db_commit () ;
+		$this->fetchData($this->getID());
 		return true ;
 	}
 
