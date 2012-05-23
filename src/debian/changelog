@@ -29,12 +29,13 @@ fusionforge (5.1.50+svn15228-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Tue, 27 Mar 2012 20:57:28 +0200
 
-fusionforge (5.1.1-6+1) unstable; urgency=low
+fusionforge (5.1.1-7) unstable; urgency=low
 
+  * Many fixes from the 5.1 upstream branch.
   * Set up a dpkg trigger to handle Mediawiki upgrades and update the
     database schemas accordingly (closes: #673125).
 
- -- Roland Mas <lolando@debian.org>  Tue, 22 May 2012 11:24:34 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 23 May 2012 13:54:10 +0200
 
 fusionforge (5.1.1-6) unstable; urgency=low
 
