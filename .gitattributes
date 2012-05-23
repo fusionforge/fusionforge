@@ -657,6 +657,7 @@ src/debian/NEWS.Debian -text
 src/debian/README.source -text
 src/debian/compat -text
 src/debian/dsf-helper/ucf-choices.templates -text
+src/debian/dsf-in/db-postgresql.postrm -text
 src/debian/dsf-in/plugin-mailman.postrm -text
 src/debian/dsf-in/plugin-mailman.preinst -text
 src/debian/dsf-in/plugin-scmbzr.init.d -text
@@ -2108,6 +2109,8 @@ src/plugins/mediawiki/cronjobs/create-wikis-mysql.php -text
 src/plugins/mediawiki/cronjobs/create-wikis.php -text
 src/plugins/mediawiki/cronjobs/dump-wikis.php -text
 src/plugins/mediawiki/db/mediawiki-init.sql -text
+src/plugins/mediawiki/debian/plugin-mediawiki.postinst -text
+src/plugins/mediawiki/debian/plugin-mediawiki.triggers -text
 src/plugins/mediawiki/etc/cron.d/fusionforge-plugin-mediawiki -text
 src/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki -text
 src/plugins/mediawiki/etc/mediawiki.ini -text
@@ -4788,6 +4791,7 @@ src/utils/cvs1/cvscreate.sh svneol=native#text/x-sh
 src/utils/cvs1/cvstar_genlist.pl svneol=native#text/x-perl
 src/utils/cvs1/cvstar_superscript.pl svneol=native#text/x-perl
 src/utils/decode_images.sh svneol=native#text/x-sh
+src/utils/ffcountries.pl -text
 src/utils/fill-in-the-blanks.pl svneol=native#text/x-perl
 src/utils/filter-sql-dump.php -text
 src/utils/fixscripts/fix_default_role.php -text
@@ -4810,6 +4814,7 @@ src/utils/ldap/sql2ldifadd.pl -text svneol=unset#text/x-perl
 src/utils/ldap/sql2ldifmod.pl -text svneol=unset#text/x-perl
 src/utils/list-admins.php -text
 src/utils/list-enabled-plugins.sh -text
+src/utils/list-projects-using-plugin.php -text
 src/utils/manage-apache-config.sh -text svneol=unset#text/x-sh
 src/utils/manage-translations.sh -text svneol=unset#text/x-sh
 src/utils/migrate-to-ini-files.sh -text svneol=unset#text/x-sh

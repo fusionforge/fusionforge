@@ -45,6 +45,7 @@ db/200212*.sql                          usr/share/@OLDPACKAGE@/db/
 db/2003*.sql                            usr/share/@OLDPACKAGE@/db/
 db/2004*php                             usr/share/@OLDPACKAGE@/db/
 db/2004*.sql                            usr/share/@OLDPACKAGE@/db/
+200403251.sql				usr/share/@OLDPACKAGE@/db/
 db/2005*php                             usr/share/@OLDPACKAGE@/db/
 db/2005*.sql                            usr/share/@OLDPACKAGE@/db/
 db/2006*.sql                            usr/share/@OLDPACKAGE@/db/

@@ -4,11 +4,15 @@ fusionforge (5.2.50~-1) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Mon, 26 Mar 2012 20:10:13 +0200
 
-fusionforge (5.1.50+svn15410-2) UNRELEASED; urgency=low
+fusionforge (5.1.50+svn15558-1) experimental; urgency=low
 
-  * 
+  * New upstream SVN snapshot from the 5.2 stabilisation branch.
+  * Generate initial list of countries and codes from the current known
+    data (from isoquery) at build time (closes: #565240).  Thanks to David
+    Prévot <david@tilapin.org> for the bulk of the patch.
+  * Remove UCF-generated files on purge (closes: #672256).
 
- -- Roland Mas <lolando@debian.org>  Fri, 27 Apr 2012 16:15:09 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 23 May 2012 14:34:18 +0200
 
 fusionforge (5.1.50+svn15410-1) experimental; urgency=low
 
@@ -31,6 +35,14 @@ fusionforge (5.1.50+svn15228-1) experimental; urgency=low
   * New upstream SVN snapshot from the 5.2 stabilisation branch.
 
  -- Roland Mas <lolando@debian.org>  Tue, 27 Mar 2012 20:57:28 +0200
+
+fusionforge (5.1.1-7) unstable; urgency=low
+
+  * Many fixes from the 5.1 upstream branch.
+  * Set up a dpkg trigger to handle Mediawiki upgrades and update the
+    database schemas accordingly (closes: #673125).
+
+ -- Roland Mas <lolando@debian.org>  Wed, 23 May 2012 13:54:10 +0200
 
 fusionforge (5.1.1-6) unstable; urgency=low
 
