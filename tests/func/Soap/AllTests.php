@@ -47,8 +47,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Site_AllTests::main');
 }
  
-require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/TextUI/TestRunner.php';
+if (!@include_once 'PHPUnit/Autoload.php') {
+	include_once 'PHPUnit/Framework.php';
+	require_once 'PHPUnit/TextUI/TestRunner.php';
+}
  
 require_once 'func/config.php';
 require_once 'func/Soap/checks.php';
