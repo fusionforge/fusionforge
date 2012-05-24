@@ -1,6 +1,8 @@
 Documentation of common HTML utility functions
 ──────────────────────────────────────────────
 
+Please take note of the literature links at the bottom of this file.
+
 Functions defined in src/common/include/utils.php → available: always.
 
 
@@ -100,3 +102,9 @@ Functions defined in src/common/include/utils.php → available: always.
 • string debug_string_backtrace(void)
 
   Return the current debugging backtrace as string.
+
+
+Literature
+──────────
+
+• http://me.veekun.com/blog/2012/04/09/php-a-fractal-of-bad-design/
