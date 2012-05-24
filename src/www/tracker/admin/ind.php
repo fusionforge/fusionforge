@@ -49,7 +49,6 @@ if (getStringFromRequest('post_changes')) {
             $feedback .= '<br/>';
 			$feedback .= _('Please configure also the roles (by default, it\'s \'No Access\')');
 		}
-		$group->normalizeAllRoles () ;
 	}
 }
 

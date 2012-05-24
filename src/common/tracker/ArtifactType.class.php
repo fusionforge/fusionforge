@@ -260,10 +260,11 @@ class ArtifactType extends Error {
 				db_rollback();
 				return false;
 			} else {
+				$this->Group->normalizeAllRoles ();
 				db_commit();
 				return $id;
+			}
 		}
-	}
 	}
 
 	/**

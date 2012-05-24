@@ -225,6 +225,7 @@ class Forum extends Error {
 				return false;
 			}
 		}
+		$this->Group->normalizeAllRoles () ;
 		db_commit();
 		return true;
 	}
