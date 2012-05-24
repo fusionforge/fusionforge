@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-24 15:25+0200\n"
-"PO-Revision-Date: 2010-10-06 14:24+0200\n"
+"PO-Revision-Date: 2012-05-24 15:35+0200\n"
 "Last-Translator: Luis Cañas Díaz <lcanas@libresoft.es>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: es\n"
@@ -4754,7 +4754,7 @@ msgstr "Enviado por"
 #: common/tracker/actions/query.php:204 common/tracker/actions/query.php:351
 #: www/pm/browse_task.php:159 www/pm/ganttpage.php:155
 msgid "Assignee"
-msgstr "Asignado por"
+msgstr "Asignado a"
 
 #: common/tracker/actions/browse.php:219 common/tracker/actions/query.php:221
 msgid "Ascending"
@@ -21759,7 +21759,7 @@ msgstr "Título de la Respuesta:"
 #: www/tracker/reporting/index.php:102
 #, fuzzy
 msgid "By Assignee"
-msgstr "Asignado por"
+msgstr "Asignado a"
 
 #: www/tracker/reporting/index.php:110
 #, fuzzy
