@@ -57,9 +57,9 @@ ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
 $FORGE_HOME/tests/scripts/phpunit.sh DEBDebian60Tests.php &> /var/log/phpunit.log &
-echo $! > /root/phpunit.pid
+echo \$! > /root/phpunit.pid
 fg
-echo $? > /root/phpunit.exitcode
+echo \$? > /root/phpunit.exitcode
 EOF
 ssh root@$HOST vncpasswd <<EOF
 password
