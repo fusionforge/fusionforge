@@ -51,7 +51,7 @@ rsync -a 3rd-party/selenium/selenium-server.jar root@$HOST:$FORGE_HOME/tests/sel
 # Run tests
 retcode=0
 echo "Run phpunit test on $HOST"
-set -x
+
 ssh root@$HOST "apt-get -y install vnc4server ; mkdir -p /root/.vnc"
 ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
