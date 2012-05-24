@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-24 15:25+0200\n"
-"PO-Revision-Date: 2012-05-24 15:35+0200\n"
+"PO-Revision-Date: 2012-05-24 15:39+0200\n"
 "Last-Translator: Luis Cañas Díaz <lcanas@libresoft.es>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: es\n"
@@ -12727,9 +12727,8 @@ msgid "ATS%d: %s"
 msgstr "ATS%d: %s"
 
 #: utils/fixscripts/populate_template_project.php:103
-#, fuzzy
 msgid "Open-Discussion"
-msgstr "Foros de discusión:"
+msgstr "Foro-de-discusión"
 
 #: utils/fixscripts/populate_template_project.php:103
 msgid "General Discussion"
@@ -12748,7 +12747,7 @@ msgstr "Obtén ayuda"
 
 #: utils/fixscripts/populate_template_project.php:117
 msgid "Developers-Discussion"
-msgstr "Foro de desarrolladores"
+msgstr "Foro-de-desarrolladores"
 
 #: utils/fixscripts/populate_template_project.php:117
 msgid "Project Developer Discussion"
