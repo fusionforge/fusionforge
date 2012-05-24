@@ -60,6 +60,10 @@ echo $! > /root/phpunit.pid
 fg
 echo $? > /root/phpunit.exitcode
 EOF
+ssh root@$HOST vncpasswd <<EOF
+password
+password
+EOF
 ssh root@$HOST "vncserver :1"
 sleep 5
 pid=$(ssh root@$HOST cat /root/phpunit.pid)
