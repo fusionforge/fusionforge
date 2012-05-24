@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-24 15:25+0200\n"
-"PO-Revision-Date: 2012-03-14 20:03+0100\n"
+"PO-Revision-Date: 2012-05-24 15:28+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -60,7 +60,6 @@ msgid "Error updating document group:"
 msgstr "Erreur lors de l'ajout d'un document :"
 
 #: common/docman/Document.class.php:235
-#, fuzzy
 msgid "Document: Invalid docid"
 msgstr "Document : numéro de document invalide."
 
@@ -120,9 +119,8 @@ msgid "Submitter:"
 msgstr "Soumis par :"
 
 #: common/docman/Document.class.php:912
-#, fuzzy
 msgid "Updated By:"
-msgstr "Mis à jour"
+msgstr "Mis à jour par :"
 
 #: common/docman/Document.class.php:915
 msgid "For more info, visit:"
@@ -150,7 +148,6 @@ msgid "No Documents Found"
 msgstr "Aucun document trouvé."
 
 #: common/docman/DocumentFactory.class.php:336
-#, fuzzy
 msgid "No Storage API Found"
 msgstr "Pas d'API de stockage."
 
@@ -1370,9 +1367,8 @@ msgid "search into childs following project hierarchy"
 msgstr ""
 
 #: common/docman/views/search.php:75
-#, fuzzy
 msgid "Include child projects"
-msgstr "Projet fils"
+msgstr "Inclure les projets fils"
 
 #: common/docman/views/search.php:128
 msgid "Database query error"
