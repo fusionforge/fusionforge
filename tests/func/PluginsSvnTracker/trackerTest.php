@@ -53,22 +53,21 @@ class SvnCommit2Tracker extends FForge_SeleniumTestCase
 		 * Make a commit
 		 * Verify that commit email has been correctly send/stored.
 		 */
-		$this->populateStandardTemplate('trackers');
+		$this->populateStandardTemplate();
 		$this->initSvn();
 		$this->activatePlugin('svntracker');
 		$this->login(FORGE_ADMIN_USERNAME);
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
-	    $this->clickAndWait("link=Admin");
-	    $this->clickAndWait("link=Tools");
-	    $this->click("use_scm");
-	    $this->click("use_svntracker");
-	    $this->clickAndWait("submit");
+		$this->clickAndWait("link=Admin");
+		$this->clickAndWait("link=Tools");
+		$this->click("use_svntracker");
+		$this->clickAndWait("submit");
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
-	    $this->clickAndWait("link=Tracker");
+		$this->clickAndWait("link=Tracker");
 		$this->clickAndWait("link=Bugs");
 		$this->clickAndWait("link=Submit New");
 		$this->click("summary");
@@ -79,7 +78,7 @@ class SvnCommit2Tracker extends FForge_SeleniumTestCase
 		// Run the svn create to get the repository with the hooks.
 		$this->cron("cronjobs/create_scm_repos.php");
 
-		$svn = "svn";
+		$svn = "svn --non-interactive --no-auth-cache";
 		$url = URL."svn/projecta/";
 
 		// Try accessing the svn repository using admin rights
@@ -103,10 +102,34 @@ class SvnCommit2Tracker extends FForge_SeleniumTestCase
 		system("cd /tmp/svn.test/projecta; $svn --username ".FORGE_ADMIN_USERNAME." --password ".FORGE_ADMIN_PASSWORD." ci -m 'Improved [#1] updated mytext' >/dev/null", $ret);
 		$this->assertEquals($ret, 0);
 
-		system("rm -fr /tmp/svn.test");
-
 		$this->clickAndWait("link=Bug Summary1");
 		$this->assertTextPresent("added mytext");
+
+		$this->click("link=Commits");
+		$this->clickAndWait("link=Diff To 2");
+		$this->assertTextPresent("Diff of /mytext.txt");
+		$this->assertTextPresent("with a new line");
+
+		// Same test for tasks, pattern to use is [T2]
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=Tasks");
+		$this->clickAndWait("link=To Do");
+		$this->clickAndWait("link=Add Task");
+		$this->type("summary", "Task Summary2");
+		$this->type("details", "Description2");
+		$this->clickAndWait("submit");
+
+		system("echo 'Summary2 completed' >> /tmp/svn.test/projecta/mytext.txt");
+
+		system("cd /tmp/svn.test/projecta; $svn --username admin --password myadmin ci -m '[T2] done' >/dev/null", $ret);
+		$this->assertEquals($ret, 0);
+
+		$this->clickAndWait("link=To Do");
+		$this->clickAndWait("link=Task Summary2");
+		$this->assertTextPresent("[T2] done");
+
+		system("rm -fr /tmp/svn.test");
 	}
 }
 ?>
