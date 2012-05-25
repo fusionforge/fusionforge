@@ -19,7 +19,7 @@ prepare_workspace()
 	# Delete existing packages
 	if [ -d $WORKSPACE/build/packages ] 
 	then 
-		rm $WORKSPACE/build/packages/*
+		rm -fr $WORKSPACE/build/packages/*
 	fi
 	# Create place to build package if necessary
 	[ ! -d $WORKSPACE/build/packages ] || mkdir -p $WORKSPACE/build/packages
