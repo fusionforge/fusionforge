@@ -34,6 +34,10 @@ while(my ($vhost_name, $docdir, $cgidir) = $c->fetchrow()) {
     $hash{docdir} = $docdir ;
     $hash{cgidir} = $cgidir ;
 
+    foreach my $k (qw/groupdir_prefix log_path/) {
+	$hash{$k} = &forge_get_config ($k) ;
+    }
+
     foreach my $tmpl_line (@ilist) {
 	my $line = $tmpl_line ;
 	chomp $line ;

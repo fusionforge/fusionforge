@@ -2,14 +2,7 @@
 
 set -e
 
-#su -s /bin/sh gforge -c /usr/share/gforge/bin/prepare-vhosts-file.pl
-#TODO (remove workaround) make proper db connect config so the previous line works
 /usr/share/gforge/bin/prepare-vhosts-file.pl
-[ -f /var/lib/gforge/etc/templates/httpd.vhosts ] && \
-	/usr/share/gforge/bin/fill-in-the-blanks.pl \
-		/var/lib/gforge/etc/templates/httpd.vhosts \
-		/var/lib/gforge/etc/httpd.vhosts \
-		/etc/fusionforge/fusionforge.conf
 
 case "$1" in
 	--norestart)
