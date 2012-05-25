@@ -40,6 +40,9 @@ define ('HOST', getenv('HOST'));
 // Base URL where FusionForge is installed
 define ('ROOT', '');
 
+// Define locations
+define('HOME_FORGE', '$FORGE_HOME/src');
+
 // Database connection parameters.
 define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', getenv('DB_USER'));

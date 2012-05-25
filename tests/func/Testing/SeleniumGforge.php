@@ -111,7 +111,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function cron($cmd)
 	{
-		system("/usr/bin/php -q /usr/share/gforge/$cmd");
+		$this->runCommand("/usr/bin/php -q ".HOME_FORGE."/$cmd");
 	}
 
 	protected function init() {
