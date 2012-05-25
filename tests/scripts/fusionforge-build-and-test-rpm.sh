@@ -16,7 +16,7 @@ setup_ff_repo $@
 setup_dag_repo $@
 
 sleep 5
-ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=$FORGE_ADMIN_USERNAME FFORGE_ADMIN_PASSWORD=$FORGE_ADMIN_PASSWORD export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD; yum install -y --skip-broken fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-authldap fusionforge-plugin-scmgit fusionforge-plugin-blocks"
+ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=$FORGE_ADMIN_USERNAME FFORGE_ADMIN_PASSWORD=$FORGE_ADMIN_PASSWORD export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD; yum install -y --skip-broken fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-svntracker fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-authldap fusionforge-plugin-scmgit fusionforge-plugin-blocks"
 
 ssh root@$HOST '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-buildbot.ini'
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
@@ -44,7 +44,7 @@ ssh root@$HOST "yum install -y vnc-server ; mkdir -p /root/.vnc"
 ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
-$FORGE_HOME/tests/scripts/phpunit.sh RPMCentosTests.php &> /var/log/phpunit.log &
+$FORGE_HOME/tests/scripts/phpunit.sh func &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
 wait %1
 echo \$? > /root/phpunit.exitcode
