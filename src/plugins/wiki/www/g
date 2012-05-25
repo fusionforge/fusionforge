@@ -47,7 +47,7 @@ ini_set("memory_limit", "64M");
 // Disable compression, seems needed to get all the messages.
 $no_gz_buffer=true;
 
-require_once('../../env.inc.php');
+require_once('../../../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfplugins.'wiki/common/wikiconfig.class.php';
 
@@ -118,7 +118,7 @@ if (!$group_id || !$project) {
     // Disable access log (already in Apache & FusionForge).
     define('ACCESS_LOG_SQL', 0);
 
-    define('DEBUG', ($sys_install_type != 'production'));
+    define('DEBUG', (forge_get_config('installation_environment') != 'production'));
 
     // Postgresql
     define('DATABASE_TYPE', 'SQL');
