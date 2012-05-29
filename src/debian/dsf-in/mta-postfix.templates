@@ -7,10 +7,6 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-#DSFHELPER:common-variables#
-#DSFHELPER:users-variables#
-#DSFHELPER:lists-variables#
-
 Template: @PACKAGE@/shared/noreply_to_bitbucket
 Type: boolean
 Default: true

@@ -15,8 +15,6 @@ _Description: Shell server:
  Please enter the hostname of the server that will host the @FORGENAME@
  shell accounts.
 
-#DSFHELPER:users-variables#
-
 #DSFHELPER:lists-variables#
 
 Template: @PACKAGE@/shared/download_host

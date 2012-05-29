@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@ 4.6.99+svn6387-1\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-16 10:20+0100\n"
+"POT-Creation-Date: 2012-05-29 12:10+0200\n"
 "PO-Revision-Date: 2010-10-03 21:23+0200\n"
 "Last-Translator: Ricardo Silva <ardoric@gmail.com>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
@@ -15,6 +15,49 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#: ../dsf-helper/common-variables.templates:2001
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "O nome do domínio ou subdomínio do @FORGENAME@:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#: ../dsf-helper/common-variables.templates:2001
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Por favor introduza o domínio que vai conter a instalação do @FORGENAME@. "
+"Alguns serviços (scm, listas de mail, etc.) terão o seu próprio subdomínio "
+"nesse domínio."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#: ../dsf-helper/common-variables.templates:4001
+#, fuzzy
+#| msgid "@FORGENAME@ system name:"
+msgid "@FORGENAME@ system name:"
+msgstr "Nome do sistema @FORGENAME@:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#: ../dsf-helper/common-variables.templates:4001
+#, fuzzy
+#| msgid ""
+#| "Please enter the name of the @FORGENAME@ system. It is used in various "
+#| "places throughout the system."
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Por favor introduza o nome do sistema @FORGENAME@. Este nome é utilizado em "
+"vários lugares pelo sistema."
 
 #. Type: string
 #. Description
@@ -63,7 +106,6 @@ msgstr ""
 #: ../dsf-in/db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
-#: ../dsf-helper/users-variables.templates:2001
 #, fuzzy
 #| msgid "It should not be the same as the main @FORGENAME@ host."
 msgid "It should not be the same as the main @FORGENAME@ host."
@@ -182,53 +224,6 @@ msgstr ""
 "tem os directórios de projectos no mesmo servidor e tem um único servidor "
 "SCM."
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr "Deseja que o mail para ${noreply} seja apagado?"
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-#, fuzzy
-#| msgid ""
-#| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
-#| "\"${noreply}\" address."
-msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the "
-"\"${noreply}\" address."
-msgstr ""
-"O @FORGENAME@ envia e recebe bastante e-mail para e a partir do endereço "
-"\"${noreply}\"."
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"E-mail to that address should be directed to a black hole (/dev/null), "
-"unless you have another use for that address."
-msgstr ""
-"Os e-mails para esse endereço devem ser redireccionados para um buraco negro "
-"(/dev/null), a não ser que tenha outro uso para esse endereço."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid "@FORGENAME@ domain or subdomain name:"
-msgstr "O nome do domínio ou subdomínio do @FORGENAME@:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid ""
-"Please enter the domain that will host the @FORGENAME@ installation. Some "
-"services (scm, lists, etc.) will be given their own subdomain in that domain."
-msgstr ""
-"Por favor introduza o domínio que vai conter a instalação do @FORGENAME@. "
-"Alguns serviços (scm, listas de mail, etc.) terão o seu próprio subdomínio "
-"nesse domínio."
-
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
@@ -250,28 +245,6 @@ msgid ""
 msgstr ""
 "Por favor introduza o endereço de email do administrador @FORGENAME@ neste "
 "site. Será usado quando houverem problemas."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-#, fuzzy
-#| msgid "@FORGENAME@ system name:"
-msgid "@FORGENAME@ system name:"
-msgstr "Nome do sistema @FORGENAME@:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-#, fuzzy
-#| msgid ""
-#| "Please enter the name of the @FORGENAME@ system. It is used in various "
-#| "places throughout the system."
-msgid ""
-"Please enter the name of the @FORGENAME@ system. It is used in various "
-"places throughout the system."
-msgstr ""
-"Por favor introduza o nome do sistema @FORGENAME@. Este nome é utilizado em "
-"vários lugares pelo sistema."
 
 #. Type: string
 #. Description
@@ -418,26 +391,6 @@ msgid ""
 msgstr ""
 "Por favor introduza o nome do servidor onde irão ficar as contas de shell do "
 "@FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid "User mail redirector server:"
-msgstr "Servidor de redireccionamento de mail dos utilizadores:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "user mail redirector."
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ user "
-"mail redirector."
-msgstr ""
-"Por favor introduza o nome do servidor que fará o redireccionamento do mail "
-"dos utilizadores do @FORGENAME@."
 
 #. Type: select
 #. Choices
@@ -615,6 +568,41 @@ msgid ""
 msgstr ""
 "Por favor escolha o tema pré-definido para as páginas web. Tem de introduzir "
 "um nome válido."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "Deseja que o mail para ${noreply} seja apagado?"
+
+#, fuzzy
+#~| msgid ""
+#~| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~| "\"${noreply}\" address."
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "O @FORGENAME@ envia e recebe bastante e-mail para e a partir do endereço "
+#~ "\"${noreply}\"."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "Os e-mails para esse endereço devem ser redireccionados para um buraco "
+#~ "negro (/dev/null), a não ser que tenha outro uso para esse endereço."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Servidor de redireccionamento de mail dos utilizadores:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "user mail redirector."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Por favor introduza o nome do servidor que fará o redireccionamento do "
+#~ "mail dos utilizadores do @FORGENAME@."
 
 #, fuzzy
 #~| msgid "@FORGENAME@ administrator login:"

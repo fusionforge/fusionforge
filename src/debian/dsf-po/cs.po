@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-16 10:20+0100\n"
+"POT-Creation-Date: 2012-05-29 12:10+0200\n"
 "PO-Revision-Date: 2008-03-30 14:36+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -23,6 +23,55 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#: ../dsf-helper/common-variables.templates:2001
+#, fuzzy
+#| msgid "@FORGENAME@ domain or subdomain name:"
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Název @FORGENAME@ domény nebo subdomény:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#: ../dsf-helper/common-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the domain that will host the @FORGENAME@ installation. Some "
+#| "services (scm, lists, etc.) will be given their own subdomain in that "
+#| "domain."
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Zadejte prosím doménu, která bude hostit vaši instalaci @FORGENAME@. Některé "
+"služby obdrží své vlastní subdomény této domény (scm, lists, atd.)."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#: ../dsf-helper/common-variables.templates:4001
+#, fuzzy
+#| msgid "@FORGENAME@ system name:"
+msgid "@FORGENAME@ system name:"
+msgstr "Jméno @FORGENAME@ systému:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#: ../dsf-helper/common-variables.templates:4001
+#, fuzzy
+#| msgid ""
+#| "Please enter the name of the @FORGENAME@ system. It is used in various "
+#| "places throughout the system."
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Zadejte prosím jméno @FORGENAME@ systému. Toto jméno je v systému používáno "
+"na několika místech."
 
 #. Type: string
 #. Description
@@ -68,7 +117,6 @@ msgstr "Zadejte prosím jméno serveru, který bude hostit balíky @FORGENAME@."
 #: ../dsf-in/db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
-#: ../dsf-helper/users-variables.templates:2001
 #, fuzzy
 #| msgid "It should not be the same as the main @FORGENAME@ host."
 msgid "It should not be the same as the main @FORGENAME@ host."
@@ -186,59 +234,6 @@ msgstr ""
 "Nastavení bude pouze předpokládat, budete mít všechny adresáře s weby "
 "projektů na jednom počítači a že pro SCM použijete jediný server."
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-#, fuzzy
-#| msgid ""
-#| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
-#| "\"${noreply}\" address."
-msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the "
-"\"${noreply}\" address."
-msgstr ""
-"@FORGENAME@ využívá adresu „${noreply}“ k odesílání i příjmu velkého "
-"množství pošty."
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"E-mail to that address should be directed to a black hole (/dev/null), "
-"unless you have another use for that address."
-msgstr ""
-"Pokud s touto adresou nemáte jiné plány, doporučujeme veškerou příchozí "
-"poštu přesměrovat do černé díry (/dev/null)."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-#, fuzzy
-#| msgid "@FORGENAME@ domain or subdomain name:"
-msgid "@FORGENAME@ domain or subdomain name:"
-msgstr "Název @FORGENAME@ domény nebo subdomény:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the domain that will host the @FORGENAME@ installation. Some "
-#| "services (scm, lists, etc.) will be given their own subdomain in that "
-#| "domain."
-msgid ""
-"Please enter the domain that will host the @FORGENAME@ installation. Some "
-"services (scm, lists, etc.) will be given their own subdomain in that domain."
-msgstr ""
-"Zadejte prosím doménu, která bude hostit vaši instalaci @FORGENAME@. Některé "
-"služby obdrží své vlastní subdomény této domény (scm, lists, atd.)."
-
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
@@ -260,28 +255,6 @@ msgid ""
 msgstr ""
 "Zadejte prosím emailovou adresu správce tohoto systému @FORGENAME@. Adresa "
 "se použije v případě výskytu problémů."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-#, fuzzy
-#| msgid "@FORGENAME@ system name:"
-msgid "@FORGENAME@ system name:"
-msgstr "Jméno @FORGENAME@ systému:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-#, fuzzy
-#| msgid ""
-#| "Please enter the name of the @FORGENAME@ system. It is used in various "
-#| "places throughout the system."
-msgid ""
-"Please enter the name of the @FORGENAME@ system. It is used in various "
-"places throughout the system."
-msgstr ""
-"Zadejte prosím jméno @FORGENAME@ systému. Toto jméno je v systému používáno "
-"na několika místech."
 
 #. Type: string
 #. Description
@@ -439,26 +412,6 @@ msgid ""
 "shell accounts."
 msgstr ""
 "Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid "User mail redirector server:"
-msgstr "Server pro přesměrování pošty:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "user mail redirector."
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ user "
-"mail redirector."
-msgstr ""
-"Zadejte prosím jméno serveru, který bude hostit přesměrování pošty pro "
-"uživatele @FORGENAME@."
 
 #. Type: select
 #. Choices
@@ -635,6 +588,41 @@ msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr ""
 "Vyberte prosím výchozí téma pro webové stránky. Musí to být platný název."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
+
+#, fuzzy
+#~| msgid ""
+#~| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~| "\"${noreply}\" address."
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ využívá adresu „${noreply}“ k odesílání i příjmu velkého "
+#~ "množství pošty."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "Pokud s touto adresou nemáte jiné plány, doporučujeme veškerou příchozí "
+#~ "poštu přesměrovat do černé díry (/dev/null)."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Server pro přesměrování pošty:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "user mail redirector."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Zadejte prosím jméno serveru, který bude hostit přesměrování pošty pro "
+#~ "uživatele @FORGENAME@."
 
 #, fuzzy
 #~| msgid "@FORGENAME@ administrator login:"

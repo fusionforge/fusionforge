@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGENAME@ 4.8.2-1\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-16 10:20+0100\n"
+"POT-Creation-Date: 2012-05-29 12:10+0200\n"
 "PO-Revision-Date: 2009-12-27 09:30+0100\n"
 "Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -14,6 +14,45 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#: ../dsf-helper/common-variables.templates:2001
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "@FORGENAME@ Domain- oder Subdomain-Name:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#: ../dsf-helper/common-variables.templates:2001
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Bitte geben Sie die Domain an, die Ihre @FORGENAME@-Installation beherbergen "
+"wird. Einigen Diensten (scm, lists, usw.) wird innerhalb der Domain eine "
+"eigene Subdomain zugewiesen."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#: ../dsf-helper/common-variables.templates:4001
+#, fuzzy
+#| msgid "@FORGENAME@/FusionForge system name:"
+msgid "@FORGENAME@ system name:"
+msgstr "@FORGENAME@/FusionForge-Systemname:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#: ../dsf-helper/common-variables.templates:4001
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Bitte geben Sie den Namen des @FORGENAME@-Systems ein. Er wird an "
+"verschiedenen Stellen im ganzen System verwendet."
 
 #. Type: string
 #. Description
@@ -54,7 +93,6 @@ msgstr ""
 #: ../dsf-in/db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
-#: ../dsf-helper/users-variables.templates:2001
 msgid "It should not be the same as the main @FORGENAME@ host."
 msgstr ""
 "Dieser sollte nicht mit dem Namen des Haupt-@FORGENAME@-Rechners "
@@ -167,50 +205,6 @@ msgstr ""
 "angenommen, dass sich alle Webverzeichnisse der Projekte auf dem gleichen "
 "Server mit einem einzelnen Server für SCM befinden."
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr "Möchten Sie, dass E-Mail an ${noreply} verworfen wird?"
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the "
-"\"${noreply}\" address."
-msgstr ""
-"@FORGENAME@ sendet und empfängt viele E-Mails von und auf der »${noreply}«-"
-"Adresse."
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"E-mail to that address should be directed to a black hole (/dev/null), "
-"unless you have another use for that address."
-msgstr ""
-"E-Mails an diese Adresse sollten an ein schwarzes Loch (/dev/null) "
-"umgeleitet werden, es sei denn, Sie haben für diese Adresse eine andere "
-"Verwendung."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid "@FORGENAME@ domain or subdomain name:"
-msgstr "@FORGENAME@ Domain- oder Subdomain-Name:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid ""
-"Please enter the domain that will host the @FORGENAME@ installation. Some "
-"services (scm, lists, etc.) will be given their own subdomain in that domain."
-msgstr ""
-"Bitte geben Sie die Domain an, die Ihre @FORGENAME@-Installation beherbergen "
-"wird. Einigen Diensten (scm, lists, usw.) wird innerhalb der Domain eine "
-"eigene Subdomain zugewiesen."
-
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
@@ -226,24 +220,6 @@ msgid ""
 msgstr ""
 "Bitte geben Sie die E-Mail-Adresse des @FORGENAME@-Administrators Ihrer Site "
 "an. Diese wird beim Auftritt von Problemen benötigt."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-#, fuzzy
-#| msgid "@FORGENAME@/FusionForge system name:"
-msgid "@FORGENAME@ system name:"
-msgstr "@FORGENAME@/FusionForge-Systemname:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-msgid ""
-"Please enter the name of the @FORGENAME@ system. It is used in various "
-"places throughout the system."
-msgstr ""
-"Bitte geben Sie den Namen des @FORGENAME@-Systems ein. Er wird an "
-"verschiedenen Stellen im ganzen System verwendet."
 
 #. Type: string
 #. Description
@@ -378,22 +354,6 @@ msgid ""
 msgstr ""
 "Bitte geben Sie den Rechnernamen des Servers ein, der Ihre @FORGENAME@-Shell-"
 "Konten beherbergen wird."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid "User mail redirector server:"
-msgstr "Benutzer-E-Mail-Umleitungsserver:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ user "
-"mail redirector."
-msgstr ""
-"Bitte geben Sie den Rechnernamen des Servers ein, der Ihren @FORGENAME@-"
-"Benutzer-E-Mail-Umleiter beherbergen wird."
 
 #. Type: select
 #. Choices
@@ -571,6 +531,34 @@ msgid ""
 msgstr ""
 "Bitte wählen Sie das Standard-Thema für Webseiten. Dies muss ein gültiger "
 "Namen sein."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "Möchten Sie, dass E-Mail an ${noreply} verworfen wird?"
+
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ sendet und empfängt viele E-Mails von und auf der "
+#~ "»${noreply}«-Adresse."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "E-Mails an diese Adresse sollten an ein schwarzes Loch (/dev/null) "
+#~ "umgeleitet werden, es sei denn, Sie haben für diese Adresse eine andere "
+#~ "Verwendung."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Benutzer-E-Mail-Umleitungsserver:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Bitte geben Sie den Rechnernamen des Servers ein, der Ihren @FORGENAME@-"
+#~ "Benutzer-E-Mail-Umleiter beherbergen wird."
 
 #~ msgid "@FORGENAME@ administrator login:"
 #~ msgstr "@FORGENAME@-Administrator-Anmeldung:"

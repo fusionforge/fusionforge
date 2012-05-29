@@ -1,7 +1,6 @@
-[type: gettext/rfc822deb] dsf-in/common.templates.dsfh-in
+[type: gettext/rfc822deb] dsf-in/common.templates
 [type: gettext/rfc822deb] dsf-in/db-postgresql.templates.dsfh-in
 [type: gettext/rfc822deb] dsf-in/dns-bind9.templates.dsfh-in
-[type: gettext/rfc822deb] dsf-in/mta-postfix.templates.dsfh-in
 [type: gettext/rfc822deb] dsf-helper/common-variables.templates
 [type: gettext/rfc822deb] dsf-helper/dbhost-variables.templates
 [type: gettext/rfc822deb] dsf-helper/dbpasswd-variables.templates
@@ -10,5 +9,4 @@
 [type: gettext/rfc822deb] dsf-helper/host-variables.templates
 [type: gettext/rfc822deb] dsf-helper/lists-variables.templates
 [type: gettext/rfc822deb] dsf-helper/shellhost-variables.templates
-[type: gettext/rfc822deb] dsf-helper/users-variables.templates
 [type: gettext/rfc822deb] dsf-helper/web-variables.templates

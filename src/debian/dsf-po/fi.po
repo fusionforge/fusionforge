@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-16 10:20+0100\n"
+"POT-Creation-Date: 2012-05-29 12:10+0200\n"
 "PO-Revision-Date: 2008-03-24 17:41+0200\n"
 "Last-Translator: Esko Arajärvi <edu@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -12,6 +12,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-Country: FINLAND\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#: ../dsf-helper/common-variables.templates:2001
+#, fuzzy
+#| msgid "@FORGENAME@ domain or subdomain name:"
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "@FORGENAME@n verkkotunnus tai aliverkkotunnus:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#: ../dsf-helper/common-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the domain that will host the @FORGENAME@ installation. Some "
+#| "services (scm, lists, etc.) will be given their own subdomain in that "
+#| "domain."
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Anna @FORGENAME@-asennuksen verkkotunnus. Joillekin palveluille "
+"(versionhallinta, listat, jne.) annetaan oma aliverkkotunnus tämän "
+"verkkotunnuksen alta."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#: ../dsf-helper/common-variables.templates:4001
+#, fuzzy
+#| msgid "@FORGENAME@ system name:"
+msgid "@FORGENAME@ system name:"
+msgstr "@FORGENAME@n järjestelmänimi:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#: ../dsf-helper/common-variables.templates:4001
+#, fuzzy
+#| msgid ""
+#| "Please enter the name of the @FORGENAME@ system. It is used in various "
+#| "places throughout the system."
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Anna @FORGENAME@-järjestelmän nimi. Tätä käytetään eri paikoissa ympäri "
+"järjestelmää."
 
 #. Type: string
 #. Description
@@ -57,7 +107,6 @@ msgstr "Anna @FORGENAME@-paketteja isännöivän palvelimen verkkonimi."
 #: ../dsf-in/db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
-#: ../dsf-helper/users-variables.templates:2001
 #, fuzzy
 #| msgid "It should not be the same as the main @FORGENAME@ host."
 msgid "It should not be the same as the main @FORGENAME@ host."
@@ -176,61 +225,6 @@ msgstr ""
 "projektien verkkohakemistot ovat samalla palvelimella yhden "
 "versionhallintapalvelimen kanssa."
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr ""
-"Haluatko, että osoitteeseen ${noreply} tuleva sähköposti heitetään pois?"
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-#, fuzzy
-#| msgid ""
-#| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
-#| "\"${noreply}\" address."
-msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the "
-"\"${noreply}\" address."
-msgstr ""
-"@FORGENAME@ lähettää ja vastaanottaa paljon sähköpostia osoitteen "
-"”${noreply}” kautta."
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"E-mail to that address should be directed to a black hole (/dev/null), "
-"unless you have another use for that address."
-msgstr ""
-"Tuohon osoitteeseen tuleva sähköposti tulisi ohjata mustaan aukkoon (/dev/"
-"null), jos osoitteelle ei ole muuta käyttöä."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-#, fuzzy
-#| msgid "@FORGENAME@ domain or subdomain name:"
-msgid "@FORGENAME@ domain or subdomain name:"
-msgstr "@FORGENAME@n verkkotunnus tai aliverkkotunnus:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the domain that will host the @FORGENAME@ installation. Some "
-#| "services (scm, lists, etc.) will be given their own subdomain in that "
-#| "domain."
-msgid ""
-"Please enter the domain that will host the @FORGENAME@ installation. Some "
-"services (scm, lists, etc.) will be given their own subdomain in that domain."
-msgstr ""
-"Anna @FORGENAME@-asennuksen verkkotunnus. Joillekin palveluille "
-"(versionhallinta, listat, jne.) annetaan oma aliverkkotunnus tämän "
-"verkkotunnuksen alta."
-
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
@@ -252,28 +246,6 @@ msgid ""
 msgstr ""
 "Anna @FORGENAME@n ylläpidon sähköpostiosoite. Tätä käytetään, kun ongelmia "
 "ilmaantuu."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-#, fuzzy
-#| msgid "@FORGENAME@ system name:"
-msgid "@FORGENAME@ system name:"
-msgstr "@FORGENAME@n järjestelmänimi:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-#, fuzzy
-#| msgid ""
-#| "Please enter the name of the @FORGENAME@ system. It is used in various "
-#| "places throughout the system."
-msgid ""
-"Please enter the name of the @FORGENAME@ system. It is used in various "
-"places throughout the system."
-msgstr ""
-"Anna @FORGENAME@-järjestelmän nimi. Tätä käytetään eri paikoissa ympäri "
-"järjestelmää."
 
 #. Type: string
 #. Description
@@ -428,26 +400,6 @@ msgid ""
 "shell accounts."
 msgstr ""
 "Anna @FORGENAME@n komentorivitunnuksia isännöivän palvelimen verkkonimi."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid "User mail redirector server:"
-msgstr "Käyttäjäpostien edelleenohjaajapalvelin:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "user mail redirector."
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ user "
-"mail redirector."
-msgstr ""
-"Anna @FORGENAME@n käyttäjäpostien edelleenohjaajaa isännöivän palvelimen "
-"verkkonimi."
 
 #. Type: select
 #. Choices
@@ -623,6 +575,42 @@ msgstr "Oletusteema:"
 msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr "Valitse verkkosivujen oletusteema. Tämän tulee olla käypä nimi."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr ""
+#~ "Haluatko, että osoitteeseen ${noreply} tuleva sähköposti heitetään pois?"
+
+#, fuzzy
+#~| msgid ""
+#~| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~| "\"${noreply}\" address."
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ lähettää ja vastaanottaa paljon sähköpostia osoitteen "
+#~ "”${noreply}” kautta."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "Tuohon osoitteeseen tuleva sähköposti tulisi ohjata mustaan aukkoon (/dev/"
+#~ "null), jos osoitteelle ei ole muuta käyttöä."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Käyttäjäpostien edelleenohjaajapalvelin:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "user mail redirector."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Anna @FORGENAME@n käyttäjäpostien edelleenohjaajaa isännöivän palvelimen "
+#~ "verkkonimi."
 
 #, fuzzy
 #~| msgid "@FORGENAME@ administrator login:"

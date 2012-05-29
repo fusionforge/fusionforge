@@ -7,7 +7,6 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-#DSFHELPER:common-variables#
 Template: @PACKAGE@/shared/web_host
 Type: string
 _Description: @FORGENAME@ domain or subdomain name:

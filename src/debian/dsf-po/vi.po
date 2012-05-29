@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@ 4.6.99+svn6387-1\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-16 10:20+0100\n"
+"POT-Creation-Date: 2012-05-29 12:10+0200\n"
 "PO-Revision-Date: 2010-03-10 10:10+0200\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -17,6 +17,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 1.2.1\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#: ../dsf-helper/common-variables.templates:2001
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Tên miền hay miền con @FORGENAME@:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#: ../dsf-helper/common-variables.templates:2001
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Hãy gõ miền sẽ chứa bản cài đặt @FORGENAME@. Một số dịch vụ (scm, lists v."
+"v.) sẽ nhận miền con riêng ở trong miền đó."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#: ../dsf-helper/common-variables.templates:4001
+msgid "@FORGENAME@ system name:"
+msgstr "Tên hệ thống @FORGENAME@:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#: ../dsf-helper/common-variables.templates:4001
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Hãy gõ tên của hệ thống @FORGENAME@. Nó được dùng ở các nơi khác nhau trên "
+"khắp hệ thống."
 
 #. Type: string
 #. Description
@@ -54,7 +90,6 @@ msgstr "Hãy gõ tên máy của máy phục vụ sẽ hỗ trợ các gói @FOR
 #: ../dsf-in/db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
-#: ../dsf-helper/users-variables.templates:2001
 msgid "It should not be the same as the main @FORGENAME@ host."
 msgstr "Không nên trùng với máy chủ @FORGENAME@ chính."
 
@@ -162,47 +197,6 @@ msgstr ""
 "mục Web của dự án nằm trên cùng một máy phục vụ, với một máy phục vụ SCM "
 "riêng lẻ."
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr "Bạn có muốn hủy mọi thư được gửi cho ${noreply} không?"
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the "
-"\"${noreply}\" address."
-msgstr ""
-"@FORGENAME@ gửi và nhận rất nhiều thư điện tử cho/từ địa chỉ « ${noreply} »."
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"E-mail to that address should be directed to a black hole (/dev/null), "
-"unless you have another use for that address."
-msgstr ""
-"Các thư gửi đến địa chỉ đó nên bị chuyển hướng tới « /dev/null » (bị hủy), "
-"trừ bạn muốn sử dụng địa chỉ đó bằng cách khác."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid "@FORGENAME@ domain or subdomain name:"
-msgstr "Tên miền hay miền con @FORGENAME@:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid ""
-"Please enter the domain that will host the @FORGENAME@ installation. Some "
-"services (scm, lists, etc.) will be given their own subdomain in that domain."
-msgstr ""
-"Hãy gõ miền sẽ chứa bản cài đặt @FORGENAME@. Một số dịch vụ (scm, lists v."
-"v.) sẽ nhận miền con riêng ở trong miền đó."
-
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
@@ -218,22 +212,6 @@ msgid ""
 msgstr ""
 "Hãy gõ địa chỉ thư điện tử của quản trị @FORGENAME@ của địa chỉ Web này. Nó "
 "sẽ được dùng khi gặp vấn đề."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-msgid "@FORGENAME@ system name:"
-msgstr "Tên hệ thống @FORGENAME@:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-msgid ""
-"Please enter the name of the @FORGENAME@ system. It is used in various "
-"places throughout the system."
-msgstr ""
-"Hãy gõ tên của hệ thống @FORGENAME@. Nó được dùng ở các nơi khác nhau trên "
-"khắp hệ thống."
 
 #. Type: string
 #. Description
@@ -360,22 +338,6 @@ msgid ""
 "shell accounts."
 msgstr ""
 "Hãy gõ tên máy của máy phục vụ sẽ chứa các tài khoản trình bao @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid "User mail redirector server:"
-msgstr "Máy phục vụ chuyển hướng thư tín người dùng:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ user "
-"mail redirector."
-msgstr ""
-"Hãy gõ tên máy của máy phục vụ sẽ chứa bộ chuyển hướng thư tín người dùng "
-"@FORGENAME@."
 
 #. Type: select
 #. Choices
@@ -551,6 +513,33 @@ msgstr "Sắc thái mặc định:"
 msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr "Hãy chọn sắc thái mặc định cho trang Web: nó phải là một tên hợp lệ."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "Bạn có muốn hủy mọi thư được gửi cho ${noreply} không?"
+
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ gửi và nhận rất nhiều thư điện tử cho/từ địa chỉ « ${noreply} "
+#~ "»."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "Các thư gửi đến địa chỉ đó nên bị chuyển hướng tới « /dev/null » (bị "
+#~ "hủy), trừ bạn muốn sử dụng địa chỉ đó bằng cách khác."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Máy phục vụ chuyển hướng thư tín người dùng:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Hãy gõ tên máy của máy phục vụ sẽ chứa bộ chuyển hướng thư tín người dùng "
+#~ "@FORGENAME@."
 
 #~ msgid "@FORGENAME@ administrator login:"
 #~ msgstr "Tên đăng nhập quản trị @FORGENAME@:"

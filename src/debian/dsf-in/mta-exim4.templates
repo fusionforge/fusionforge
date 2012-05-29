@@ -1,7 +1,3 @@
-#DSFHELPER:common-variables#
-#DSFHELPER:users-variables#
-#DSFHELPER:lists-variables#
-
 Template: @PACKAGE@/shared/noreply_to_bitbucket
 Type: boolean
 Default: true
