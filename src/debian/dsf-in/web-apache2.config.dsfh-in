@@ -15,12 +15,7 @@ init_debconf_from_mainconffile
 #DSFHELPER:common-variables#
 #DSFHELPER:web-variables#
 #DSFHELPER:groupid-variables#
-# [Disabled] DSFHELPER:users-variables#
-# [Disabled] DSFHELPER:lists-variables#
 #DSFHELPER:downloadhost-variables#
 #DSFHELPER:uploadhost-variables#
 #DSFHELPER:ftpuploadhost-variables#
 #DSFHELPER:jabberhost-variables#
-# [Disabled] DSFHELPER:shellhost-variables#
-# [Disabled] DSFHELPER:dbpasswd-variables#
-# [Disabled] DSFHELPER:dbhost-variables#

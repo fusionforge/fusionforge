@@ -3,9 +3,21 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:handle-mainconffile#
+db_get @PACKAGE@/shared/web_host || true
+if [ -z "$RET" ] ; then
+   hostname=$(hostname -f 2>/dev/null) || hostname=localhost
+   db_set @PACKAGE@/shared/web_host $hostname
+fi
+db_input medium @PACKAGE@/shared/web_host || true
+db_go || true
 
-create_mainconffile
-init_debconf_from_mainconffile
+db_get @PACKAGE@/shared/server_admin || true
+if [ -z "$RET" ] ; then
+  db_get @PACKAGE@/shared/web_host || true
+  db_set @PACKAGE@/shared/server_admin "webmaster@$RET"
+fi
 
-#DSFHELPER:common-variables#
+db_input medium @PACKAGE@/shared/server_admin || true
+db_input low @PACKAGE@/shared/forge_name || true
+
+db_go || true

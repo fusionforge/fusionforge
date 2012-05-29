@@ -25,13 +25,6 @@ if [ "$RET" = "false" ]; then
     fi
 fi
 
-#DSFHELPER:host-variables#
-#DSFHELPER:shellhost-variables#
-#DSFHELPER:users-variables#
-#DSFHELPER:lists-variables#
-#DSFHELPER:downloadhost-variables#
-#DSFHELPER:groupid-variables#
-
 db_go || true
 
 vars="admin_password"
