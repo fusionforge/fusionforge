@@ -662,12 +662,12 @@ src/debian/dsf-in/plugin-scmbzr.init.d -text
 src/debian/dsf-in/plugin.postinst -text
 src/debian/dsf-in/plugin.prerm -text
 src/debian/dsf-in/web-apache2-vhosts.logrotate -text
-src/debian/dsf-in/web-apache2-vhosts.postinst.dsfh-in -text
-src/debian/dsf-in/web-apache2-vhosts.postrm.dsfh-in -text
+src/debian/dsf-in/web-apache2-vhosts.postinst -text
+src/debian/dsf-in/web-apache2-vhosts.postrm -text
 src/debian/dsf-in/web-apache2.logrotate -text
-src/debian/dsf-in/web-apache2.postinst.dsfh-in -text
+src/debian/dsf-in/web-apache2.postinst -text
 src/debian/dsf-in/web-apache2.prerm -text
-src/debian/dsf-in/web-apache2.templates.dsfh-in -text
+src/debian/dsf-in/web-apache2.templates -text
 src/debian/dsf-po/cs.po -text
 src/debian/dsf-po/de.po -text
 src/debian/dsf-po/es.po -text
