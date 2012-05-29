@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGENAME@\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
 "POT-Creation-Date: 2012-05-29 18:26+0200\n"
-"PO-Revision-Date: 2009-12-29 13:36+0100\n"
+"PO-Revision-Date: 2012-05-29 18:33+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
@@ -38,10 +38,8 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#, fuzzy
-#| msgid "@FORGENAME@/FusionForge system name:"
 msgid "@FORGENAME@ system name:"
-msgstr "Nom du système @FORGENAME@/FusionForge :"
+msgstr "Nom du système @FORGENAME@ :"
 
 #. Type: string
 #. Description
@@ -62,22 +60,14 @@ msgstr "Mot de passe de l'administrateur de @FORGENAME@ :"
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
-#| msgid ""
-#| "The @FORGENAME@ administrator account will have full privileges on the "
-#| "system. It will be used to approve the creation of new projects."
 msgid ""
 "The @FORGENAME@ administrator account will have full privileges on the "
 "forge. It will be used to approve the creation of new projects."
-msgstr ""
-"Le compte d'administration de @FORGENAME@ aura tous les privilèges sur le "
-"système @FORGENAME@. Il servira à approuver la création de projets."
+msgstr "Le compte d'administration de @FORGENAME@ aura tous les privilèges sur la forge. Il servira à approuver la création de projets."
 
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
-#| msgid "Please choose the password for this account."
 msgid "Please choose the password for this forge account."
 msgstr "Veuillez choisir le mot de passe de ce compte."
 
@@ -97,37 +87,37 @@ msgstr "Veuillez entrer à nouveau le mot de passe, pour confirmation."
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "install the new version configured by @PACKAGE@"
-msgstr ""
+msgstr "installer la nouvelle version proposée par @PACKAGE@"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "keep the local version currently installed"
-msgstr ""
+msgstr "conserver la version actuelle"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "show the differences between the versions"
-msgstr ""
+msgstr "afficher les différences entre les versions"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "show a side-by-side difference between the versions"
-msgstr ""
+msgstr "afficher les différences côte à côte"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "start a new shell to examine the situation"
-msgstr ""
+msgstr "suspendre ce processus pour examiner la situation"
 
 #. Type: select
 #. Description
 #: ../dsf-in/db-postgresql.templates:4002
 msgid "What do you want to do about configuration file ${BASENAME}?"
-msgstr ""
+msgstr "Que voulez-vous faire du ficher de configuration ${BASENAME}?"
 
 #. Type: select
 #. Description
@@ -135,7 +125,7 @@ msgstr ""
 msgid ""
 "The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
 "is also a configuration file of the postgresql package."
-msgstr ""
+msgstr "Le fichier de configuration ${FILE} doit être modifié pour permettre le fonctionnement de @PACKAGE@, mais il appartien au paquet postgresql."
 
 #. Type: boolean
 #. Description
