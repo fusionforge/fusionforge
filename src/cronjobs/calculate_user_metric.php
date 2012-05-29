@@ -76,7 +76,7 @@ $err .= db_error();
 
 foreach(RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin',forge_get_config('peer_rating_group')) as $u) {
 	db_query_params ('INSERT INTO user_metric0 (user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor) VALUES ($1,5,1.25,3,0,0,1.25)',
-			array (forge_get_config('peer_rating_group'))) ;
+			array ($u->getID())) ;
 	$err .= db_error();
 }
 
