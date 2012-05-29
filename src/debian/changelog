@@ -3,8 +3,9 @@ fusionforge (5.1.50+svn15558-2) UNRELEASED; urgency=low
   * Ripped out all but the most important Debconf questions in order to
     simplify installation and get rid of the legacy fusionforge.conf
     configuration file (which is no longer created on new installs).
+  * Stop shipping fusionforge-config manpage.
 
- -- Roland Mas <lolando@debian.org>  Tue, 29 May 2012 18:34:37 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 29 May 2012 18:37:43 +0200
 
 fusionforge (5.1.50+svn15558-1) experimental; urgency=low
 
