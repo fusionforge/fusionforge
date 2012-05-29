@@ -654,7 +654,6 @@ src/deb-specific/user_dump_update.pl svneol=native#text/x-perl
 src/debian/NEWS.Debian -text
 src/debian/README.source -text
 src/debian/compat -text
-src/debian/dsf-helper/ucf-choices.templates -text
 src/debian/dsf-in/db-postgresql.postrm -text
 src/debian/dsf-in/plugin-mailman.postrm -text
 src/debian/dsf-in/plugin-mailman.preinst -text
