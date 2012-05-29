@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fusionforge\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-05-29 12:10+0200\n"
+"POT-Creation-Date: 2012-05-29 15:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,14 +66,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:2001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
 msgid "Download server:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
 msgid ""
 "Please enter the hostname of the server that will host the @FORGENAME@ "
 "packages."
@@ -81,22 +80,21 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:2001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
 #: ../dsf-helper/lists-variables.templates:2001
 msgid "It should not be the same as the main @FORGENAME@ host."
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
 #: ../dsf-helper/host-variables.templates:2001
 msgid ""
 "Please enter the IP address of the server that will host the @FORGENAME@ "
@@ -105,20 +103,20 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 msgid "@FORGENAME@ administrator password:"
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 msgid ""
 "The @FORGENAME@ administrator account will have full privileges on the "
 "forge. It will be used to approve the creation of new projects."
@@ -126,20 +124,20 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 msgid "Please choose the password for this forge account."
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr ""
@@ -251,14 +249,6 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-helper/downloadhost-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"packages."
-msgstr ""
-
-#. Type: string
-#. Description
 #: ../dsf-helper/groupid-variables.templates:2001
 msgid "News administrative group ID:"
 msgstr ""
@@ -304,179 +294,4 @@ msgstr ""
 msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ "
 "shell accounts."
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "English"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Bulgarian"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Catalan"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Chinese (Traditional)"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Dutch"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Esperanto"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "French"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "German"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Greek"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Hebrew"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Indonesian"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Italian"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Japanese"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Korean"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Latin"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Norwegian"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Polish"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Portuguese (Brazilian)"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Portuguese"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Russian"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Chinese (Simplified)"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Spanish"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Swedish"
-msgstr ""
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Thai"
-msgstr ""
-
-#. Type: select
-#. DefaultChoice
-#: ../dsf-helper/web-variables.templates:2002
-msgid "English[ Default language]"
-msgstr ""
-
-#. Type: select
-#. Description
-#: ../dsf-helper/web-variables.templates:2003
-msgid "Default language:"
-msgstr ""
-
-#. Type: select
-#. Description
-#: ../dsf-helper/web-variables.templates:2003
-msgid "Please choose the default language for web pages."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/web-variables.templates:3001
-msgid "Default theme:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/web-variables.templates:3001
-msgid ""
-"Please choose the default theme for web pages. This must be a valid name."
 msgstr ""

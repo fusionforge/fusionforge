@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@ 4.6.99+svn6387-1\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-05-29 12:10+0200\n"
+"POT-Creation-Date: 2012-05-29 15:53+0200\n"
 "PO-Revision-Date: 2010-03-10 10:10+0200\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -72,14 +72,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:2001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
 msgid "Download server:"
 msgstr "Máy phục vụ tải xuống:"
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
 msgid ""
 "Please enter the hostname of the server that will host the @FORGENAME@ "
 "packages."
@@ -87,22 +86,21 @@ msgstr "Hãy gõ tên máy của máy phục vụ sẽ hỗ trợ các gói @FOR
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:2001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
 #: ../dsf-helper/lists-variables.templates:2001
 msgid "It should not be the same as the main @FORGENAME@ host."
 msgstr "Không nên trùng với máy chủ @FORGENAME@ chính."
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr "Địa chỉ IP:"
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
 #: ../dsf-helper/host-variables.templates:2001
 msgid ""
 "Please enter the IP address of the server that will host the @FORGENAME@ "
@@ -111,20 +109,20 @@ msgstr "Hãy gõ địa chỉ IP của máy phục vụ sẽ chứa bản cài �
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr "Nó cần để cấu hình dịch vụ ảo Apache."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 msgid "@FORGENAME@ administrator password:"
 msgstr "Mật khẩu quản trị @FORGENAME@:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 #, fuzzy
 #| msgid ""
 #| "The @FORGENAME@ administrator account will have full privileges on the "
@@ -138,7 +136,7 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 #, fuzzy
 #| msgid "Please choose the password for this account."
 msgid "Please choose the password for this forge account."
@@ -146,14 +144,14 @@ msgstr "Hãy chọn mật khẩu cho tài khoản này."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
 msgstr "Xác nhận mật khẩu :"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Hãy gõ lại mật khẩu để xác nhận nó."
@@ -279,14 +277,6 @@ msgstr "Hãy chọn mật khẩu kết nối."
 
 #. Type: string
 #. Description
-#: ../dsf-helper/downloadhost-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"packages."
-msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các gói @FORGENAME@."
-
-#. Type: string
-#. Description
 #: ../dsf-helper/groupid-variables.templates:2001
 msgid "News administrative group ID:"
 msgstr "ID nhóm quản trị tin tức:"
@@ -339,180 +329,99 @@ msgid ""
 msgstr ""
 "Hãy gõ tên máy của máy phục vụ sẽ chứa các tài khoản trình bao @FORGENAME@."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "English"
-msgstr "tiếng Anh"
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các gói @FORGENAME@."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Bulgarian"
-msgstr "tiếng Bun-ga-ri"
+#~ msgid "English"
+#~ msgstr "tiếng Anh"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Catalan"
-msgstr "tiếng Ca-ta-lăng"
+#~ msgid "Bulgarian"
+#~ msgstr "tiếng Bun-ga-ri"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Chinese (Traditional)"
-msgstr "tiếng Trung (truyền thống)"
+#~ msgid "Catalan"
+#~ msgstr "tiếng Ca-ta-lăng"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Dutch"
-msgstr "tiếng Hòa"
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "tiếng Trung (truyền thống)"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Esperanto"
-msgstr "tiếng Etpêrantô"
+#~ msgid "Dutch"
+#~ msgstr "tiếng Hòa"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "French"
-msgstr "tiếng Pháp"
+#~ msgid "Esperanto"
+#~ msgstr "tiếng Etpêrantô"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "German"
-msgstr "tiếng Đức"
+#~ msgid "French"
+#~ msgstr "tiếng Pháp"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Greek"
-msgstr "tiếng Hy Lạp"
+#~ msgid "German"
+#~ msgstr "tiếng Đức"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Hebrew"
-msgstr "tiếng Do Thái"
+#~ msgid "Greek"
+#~ msgstr "tiếng Hy Lạp"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Indonesian"
-msgstr "tiếng Nam Dương"
+#~ msgid "Hebrew"
+#~ msgstr "tiếng Do Thái"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Italian"
-msgstr "tiếng Ý"
+#~ msgid "Indonesian"
+#~ msgstr "tiếng Nam Dương"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Japanese"
-msgstr "tiếng Nhật"
+#~ msgid "Italian"
+#~ msgstr "tiếng Ý"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Korean"
-msgstr "tiếng Hàn"
+#~ msgid "Japanese"
+#~ msgstr "tiếng Nhật"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Latin"
-msgstr "tiếng La-tinh"
+#~ msgid "Korean"
+#~ msgstr "tiếng Hàn"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Norwegian"
-msgstr "tiếng Na Uy"
+#~ msgid "Latin"
+#~ msgstr "tiếng La-tinh"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Polish"
-msgstr "tiếng Ba Lan"
+#~ msgid "Norwegian"
+#~ msgstr "tiếng Na Uy"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Portuguese (Brazilian)"
-msgstr "tiếng Bổ Đào Nhà (Bra-xin)"
+#~ msgid "Polish"
+#~ msgstr "tiếng Ba Lan"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Portuguese"
-msgstr "tiếng Bổ Đào Nhà"
+#~ msgid "Portuguese (Brazilian)"
+#~ msgstr "tiếng Bổ Đào Nhà (Bra-xin)"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Russian"
-msgstr "tiếng Nga"
+#~ msgid "Portuguese"
+#~ msgstr "tiếng Bổ Đào Nhà"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Chinese (Simplified)"
-msgstr "tiếng Trung (phổ thông)"
+#~ msgid "Russian"
+#~ msgstr "tiếng Nga"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Spanish"
-msgstr "tiếng Tây Ban Nha"
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "tiếng Trung (phổ thông)"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Swedish"
-msgstr "tiếng Thuỵ Điển"
+#~ msgid "Spanish"
+#~ msgstr "tiếng Tây Ban Nha"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Thai"
-msgstr "tiếng Thái"
+#~ msgid "Swedish"
+#~ msgstr "tiếng Thuỵ Điển"
 
-#. Type: select
-#. DefaultChoice
-#: ../dsf-helper/web-variables.templates:2002
-msgid "English[ Default language]"
-msgstr "Tiếng Việt [Ngôn ngữ mặc định]"
+#~ msgid "Thai"
+#~ msgstr "tiếng Thái"
 
-#. Type: select
-#. Description
-#: ../dsf-helper/web-variables.templates:2003
-msgid "Default language:"
-msgstr "Ngôn ngữ mặc định:"
+#~ msgid "English[ Default language]"
+#~ msgstr "Tiếng Việt [Ngôn ngữ mặc định]"
 
-#. Type: select
-#. Description
-#: ../dsf-helper/web-variables.templates:2003
-msgid "Please choose the default language for web pages."
-msgstr "Hãy chọn ngôn ngữ mặc định cho trang Web."
+#~ msgid "Default language:"
+#~ msgstr "Ngôn ngữ mặc định:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/web-variables.templates:3001
-msgid "Default theme:"
-msgstr "Sắc thái mặc định:"
+#~ msgid "Please choose the default language for web pages."
+#~ msgstr "Hãy chọn ngôn ngữ mặc định cho trang Web."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/web-variables.templates:3001
-msgid ""
-"Please choose the default theme for web pages. This must be a valid name."
-msgstr "Hãy chọn sắc thái mặc định cho trang Web: nó phải là một tên hợp lệ."
+#~ msgid "Default theme:"
+#~ msgstr "Sắc thái mặc định:"
+
+#~ msgid ""
+#~ "Please choose the default theme for web pages. This must be a valid name."
+#~ msgstr ""
+#~ "Hãy chọn sắc thái mặc định cho trang Web: nó phải là một tên hợp lệ."
 
 #~ msgid "Do you want mail to ${noreply} to be discarded?"
 #~ msgstr "Bạn có muốn hủy mọi thư được gửi cho ${noreply} không?"

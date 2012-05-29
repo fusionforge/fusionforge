@@ -1,10 +1,8 @@
 #DSFHELPER:host-variables#
-#DSFHELPER:downloadhost-variables#
 #DSFHELPER:uploadhost-variables#
 #DSFHELPER:ftpuploadhost-variables#
 #DSFHELPER:jabberhost-variables#
 #DSFHELPER:lists-variables#
 #DSFHELPER:shellhost-variables#
-#DSFHELPER:web-variables#
 #DSFHELPER:groupid-variables#
 #DSFHELPER:dbpasswd-variables#

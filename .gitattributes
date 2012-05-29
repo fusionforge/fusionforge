@@ -664,7 +664,6 @@ src/debian/dsf-in/plugin.prerm -text
 src/debian/dsf-in/web-apache2-vhosts.logrotate -text
 src/debian/dsf-in/web-apache2-vhosts.postinst.dsfh-in -text
 src/debian/dsf-in/web-apache2-vhosts.postrm.dsfh-in -text
-src/debian/dsf-in/web-apache2.config.dsfh-in -text
 src/debian/dsf-in/web-apache2.logrotate -text
 src/debian/dsf-in/web-apache2.postinst.dsfh-in -text
 src/debian/dsf-in/web-apache2.prerm -text

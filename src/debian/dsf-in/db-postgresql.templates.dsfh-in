@@ -50,8 +50,6 @@ _Description: Password confirmation:
 
 #DSFHELPER:dbhost-variables#
 
-#DSFHELPER:web-variables#
-
 #DSFHELPER:groupid-variables#
 
 #DSFHELPER:ucf-choices#

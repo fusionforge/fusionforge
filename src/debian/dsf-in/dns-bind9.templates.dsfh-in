@@ -10,9 +10,7 @@
 #DSFHELPER:common-variables#
 #DSFHELPER:shellhost-variables#
 #DSFHELPER:lists-variables#
-#DSFHELPER:downloadhost-variables#
 #DSFHELPER:host-variables#
-#DSFHELPER:web-variables#
 
 Template: @PACKAGE@/shared/simple_dns
 Type: boolean
