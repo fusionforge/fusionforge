@@ -7,34 +7,6 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-#DSFHELPER:common-variables#
-
-Template: @PACKAGE@/shared/shell_host
-Type: string
-_Description: Shell server:
- Please enter the hostname of the server that will host the @FORGENAME@
- shell accounts.
-
-#DSFHELPER:lists-variables#
-
-Template: @PACKAGE@/shared/download_host
-Type: string
-_Description: Download server:
- Please enter the hostname of the server that will host the @FORGENAME@
- packages. 
- .
- It should not be the same as the main @FORGENAME@ host.
-
-#DSFHELPER:dbpasswd-variables#
-
-Template: @PACKAGE@/shared/ip_address
-Type: string
-_Description: IP address:
- Please enter the IP address of the server that will host the @FORGENAME@
- installation.
- .
- This is needed for the configuration of Apache virtual hosting.
-
 Template: @PACKAGE@/shared/admin_password
 Type: password
 _Description: @FORGENAME@ administrator password:
@@ -47,9 +19,5 @@ Template: @PACKAGE@/shared/admin_password_confirm
 Type: password
 _Description: Password confirmation:
  Please re-type the password for confirmation.
-
-#DSFHELPER:dbhost-variables#
-
-#DSFHELPER:groupid-variables#
 
 #DSFHELPER:ucf-choices#

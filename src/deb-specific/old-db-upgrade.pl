@@ -14,13 +14,13 @@ use HTML::Entities ;
 use Digest::MD5 ;
 
 use vars qw/$dbh @reqlist $query/ ;
-use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
+use vars qw/$sys_default_domain $sys_scm_host
     $sys_shell_host $sys_users_host $sys_docs_host $sys_lists_host
     $sys_dns1_host $sys_dns2_host $FTPINCOMING_DIR $FTPFILES_DIR
     $sys_urlroot $sf_cache_dir $sys_name $sys_themeroot
     $sys_news_group $sys_dbhost $sys_dbname $sys_dbuser $sys_dbpasswd
     $sys_ldap_base_dn $sys_ldap_host $admin_password
-    $server_admin $domain_name $newsadmin_groupid $statsadmin_groupid
+    $server_admin $domain_name
     $libdir $sqldir/ ;
 
 $libdir="/usr/share/gforge/lib";

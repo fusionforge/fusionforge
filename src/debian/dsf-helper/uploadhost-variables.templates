@@ -1,5 +1,0 @@
-Template: @PACKAGE@/shared/upload_host
-Type: string
-_Description: Your upload server:
- The hostname of the server where you will upload files available
- in ftp space

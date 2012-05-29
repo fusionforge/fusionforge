@@ -1,5 +1,0 @@
-Template: @PACKAGE@/shared/ftpuploadhost
-Type: string
-_Description: Your upload server for released files:
- The hostname of the server where you will upload files
- to release

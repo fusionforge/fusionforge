@@ -1,8 +1,0 @@
-###
-# Functions to handle the main @FORGENAME@ confguration file
-###
-mainconffile=/etc/@PACKAGE@/@PACKAGE@.conf
-# Delete the main configuration file
-delete_mainconffile () {
-    rm -f $mainconffile
-}

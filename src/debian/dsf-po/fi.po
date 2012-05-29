@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-05-29 15:53+0200\n"
+"POT-Creation-Date: 2012-05-29 18:13+0200\n"
 "PO-Revision-Date: 2008-03-24 17:41+0200\n"
 "Last-Translator: Esko Arajärvi <edu@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -16,7 +16,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:2001
-#: ../dsf-helper/common-variables.templates:2001
 #, fuzzy
 #| msgid "@FORGENAME@ domain or subdomain name:"
 msgid "@FORGENAME@ domain or subdomain name:"
@@ -25,7 +24,6 @@ msgstr "@FORGENAME@n verkkotunnus tai aliverkkotunnus:"
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:2001
-#: ../dsf-helper/common-variables.templates:2001
 #, fuzzy
 #| msgid ""
 #| "Please enter the domain that will host the @FORGENAME@ installation. Some "
@@ -42,7 +40,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#: ../dsf-helper/common-variables.templates:4001
 #, fuzzy
 #| msgid "@FORGENAME@ system name:"
 msgid "@FORGENAME@ system name:"
@@ -51,7 +48,6 @@ msgstr "@FORGENAME@n järjestelmänimi:"
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#: ../dsf-helper/common-variables.templates:4001
 #, fuzzy
 #| msgid ""
 #| "Please enter the name of the @FORGENAME@ system. It is used in various "
@@ -63,83 +59,9 @@ msgstr ""
 "Anna @FORGENAME@-järjestelmän nimi. Tätä käytetään eri paikoissa ympäri "
 "järjestelmää."
 
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
-#: ../dsf-helper/shellhost-variables.templates:2001
-msgid "Shell server:"
-msgstr "Komentorivipalvelin:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
-#, fuzzy
-#| msgid ""
-#| "Please enter the hostname of the server that will host the @FORGENAME@ "
-#| "shell accounts."
-msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ shell "
-"accounts."
-msgstr ""
-"Anna @FORGENAME@n komentorivitunnuksia isännöivän palvelimen verkkonimi."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
-msgid "Download server:"
-msgstr "Latauspalvelin:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
-#, fuzzy
-#| msgid ""
-#| "Please enter the hostname of the server that will host the @FORGENAME@ "
-#| "packages."
-msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ "
-"packages."
-msgstr "Anna @FORGENAME@-paketteja isännöivän palvelimen verkkonimi."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
-#: ../dsf-helper/lists-variables.templates:2001
-#, fuzzy
-#| msgid "It should not be the same as the main @FORGENAME@ host."
-msgid "It should not be the same as the main @FORGENAME@ host."
-msgstr "Tämän ei tulisi olla @FORGENAME@n pääpalvelin."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "IP address:"
-msgstr "IP-osoite:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
-#: ../dsf-helper/host-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the IP address of the server that will host the @FORGENAME@ "
-#| "installation."
-msgid ""
-"Please enter the IP address of the server that will host the @FORGENAME@ "
-"installation."
-msgstr "Anna @FORGENAME@-asennusta isännöivän palvelimen IP-osoite."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "This is needed for the configuration of Apache virtual hosting."
-msgstr "Tätä tarvitaan Apachen näennäiskoneiden asetukseen."
-
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
 #| msgid "@FORGENAME@ administrator password:"
 msgid "@FORGENAME@ administrator password:"
@@ -147,7 +69,7 @@ msgstr "@FORGENAME@n ylläpitosalasana:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
 #| msgid ""
 #| "The @FORGENAME@ administrator account will have full privileges on the "
@@ -161,7 +83,7 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
 #| msgid "Please choose the password for this account."
 msgid "Please choose the password for this forge account."
@@ -169,15 +91,13 @@ msgstr "Valitse tunnuksen salasana."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-in/db-postgresql.templates:3001
 msgid "Password confirmation:"
 msgstr "Salasanan vahvistus:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-in/db-postgresql.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Anna salasana uudestaan vahvistukseksi."
 
@@ -185,7 +105,7 @@ msgstr "Anna salasana uudestaan vahvistukseksi."
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 #, fuzzy
 #| msgid "Do you want a simple DNS setup for @FORGENAME@?"
 msgid "Do you want a simple DNS setup for @FORGENAME@?"
@@ -195,7 +115,7 @@ msgstr "Käytetäänkö @FORGENAME@n kanssa yksinkertaista DNS-asetusta?"
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -212,7 +132,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -223,169 +143,160 @@ msgstr ""
 "projektien verkkohakemistot ovat samalla palvelimella yhden "
 "versionhallintapalvelimen kanssa."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
 #, fuzzy
-#| msgid "@FORGENAME@ administrator e-mail address:"
-msgid "@FORGENAME@ administrator e-mail address:"
-msgstr "@FORGENAME@n ylläpidon sähköpostiosoite:"
+#~| msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgstr "@FORGENAME@n ylläpidon sähköpostiosoite:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
 #, fuzzy
-#| msgid ""
-#| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
-#| "site. It will be used when problems occur."
-msgid ""
-"Please enter the e-mail address of the @FORGENAME@ administrator of this "
-"site. It will be used when problems occur."
-msgstr ""
-"Anna @FORGENAME@n ylläpidon sähköpostiosoite. Tätä käytetään, kun ongelmia "
-"ilmaantuu."
+#~| msgid ""
+#~| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~| "site. It will be used when problems occur."
+#~ msgid ""
+#~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~ "site. It will be used when problems occur."
+#~ msgstr ""
+#~ "Anna @FORGENAME@n ylläpidon sähköpostiosoite. Tätä käytetään, kun "
+#~ "ongelmia ilmaantuu."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid "Database server:"
-msgstr "Tietokantapalvelin:"
+#~ msgid "Download server:"
+#~ msgstr "Latauspalvelin:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
 #, fuzzy
-#| msgid ""
-#| "Please enter the IP address (or hostname) of the server that will host "
-#| "the @FORGENAME@ database."
-msgid ""
-"Please enter the IP address (or hostname) of the server that will host the "
-"@FORGENAME@ database."
-msgstr ""
-"Anna @FORGENAME@n tietokantaa isännöivän palvelimen IP-osoite (tai "
-"verkkonimi)."
+#~| msgid ""
+#~| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~| "packages."
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr "Anna @FORGENAME@-paketteja isännöivän palvelimen verkkonimi."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Database name:"
-msgstr "Tietokannan nimi:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
 #, fuzzy
-#| msgid ""
-#| "Please enter the name of the database that will host the @FORGENAME@ "
-#| "database."
-msgid ""
-"Please enter the name of the database that will host the @FORGENAME@ "
-"database."
-msgstr "Anna @FORGENAME@n tietokantaa isännöivän tietokannan nimi."
+#~| msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgstr "Tämän ei tulisi olla @FORGENAME@n pääpalvelin."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
-msgid "Database administrator username:"
-msgstr "Tietokannan ylläpitotunnus:"
+#~ msgid "Database server:"
+#~ msgstr "Tietokantapalvelin:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
 #, fuzzy
-#| msgid ""
-#| "Please enter the username of the database administrator for the server "
-#| "that will host the @FORGENAME@ database."
-msgid ""
-"Please enter the username of the database administrator for the server that "
-"will host the @FORGENAME@ database."
-msgstr ""
-"Anna @FORGENAME@n tietokantaa isännöivän palvelimen tietokannan "
-"ylläpitokäyttäjätunnus."
+#~| msgid ""
+#~| "Please enter the IP address (or hostname) of the server that will host "
+#~| "the @FORGENAME@ database."
+#~ msgid ""
+#~ "Please enter the IP address (or hostname) of the server that will host "
+#~ "the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Anna @FORGENAME@n tietokantaa isännöivän palvelimen IP-osoite (tai "
+#~ "verkkonimi)."
 
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Password used for the database:"
-msgstr "Tietokannan salasana:"
+#~ msgid "Database name:"
+#~ msgstr "Tietokannan nimi:"
 
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Connections to the database system are authenticated by a password."
-msgstr "Yhteydet tietokantaan todennetaan salasanalla."
-
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Please choose the connection password."
-msgstr "Anna yhteyssalasana."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
-msgid "News administrative group ID:"
-msgstr "Uutisten ylläpitäjäryhmän ID:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
 #, fuzzy
-#| msgid ""
-#| "The members of the news admin group can approve news for the @FORGENAME@ "
-#| "main page. This group's ID must not be 1. This should be changed only if "
-#| "you upgrade from a previous version and want to keep the data."
-msgid ""
-"The members of the news admin group can approve news for the @FORGENAME@ "
-"main page. This group's ID must not be 1. This should be changed only if you "
-"upgrade from a previous version and want to keep the data."
-msgstr ""
-"Uutisten ylläpitäjäryhmän jäsenet voivat hyväksyä uutisia @FORGENAME@n "
-"pääsivulle. Tämän ryhmän ID:n ei tule olla 1. Tätä tulisi muuttaa vain, jos "
-"päivität aikaisemmasta versiosta ja haluat säilyttää tiedot."
+#~| msgid ""
+#~| "Please enter the name of the database that will host the @FORGENAME@ "
+#~| "database."
+#~ msgid ""
+#~ "Please enter the name of the database that will host the @FORGENAME@ "
+#~ "database."
+#~ msgstr "Anna @FORGENAME@n tietokantaa isännöivän tietokannan nimi."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:3001
-msgid "Statistics administrative group ID:"
-msgstr "Tilastojen ylläpitäjäryhmän ID:"
+#~ msgid "Database administrator username:"
+#~ msgstr "Tietokannan ylläpitotunnus:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:4001
-msgid "Peer rating administrative group ID:"
-msgstr "Vertaisarvioiden ylläpitäjäryhmän ID:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
-msgid "Mailing lists server:"
-msgstr "Postituslistapalvelin:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
 #, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "mailing lists."
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"mailing lists."
-msgstr "Anna @FORGENAME@n postituslistoja isännöivän palvelimen verkkonimi."
+#~| msgid ""
+#~| "Please enter the username of the database administrator for the server "
+#~| "that will host the @FORGENAME@ database."
+#~ msgid ""
+#~ "Please enter the username of the database administrator for the server "
+#~ "that will host the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Anna @FORGENAME@n tietokantaa isännöivän palvelimen tietokannan "
+#~ "ylläpitokäyttäjätunnus."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/shellhost-variables.templates:2001
+#~ msgid "Password used for the database:"
+#~ msgstr "Tietokannan salasana:"
+
+#~ msgid "Connections to the database system are authenticated by a password."
+#~ msgstr "Yhteydet tietokantaan todennetaan salasanalla."
+
+#~ msgid "Please choose the connection password."
+#~ msgstr "Anna yhteyssalasana."
+
+#~ msgid "IP address:"
+#~ msgstr "IP-osoite:"
+
 #, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "shell accounts."
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"shell accounts."
-msgstr ""
-"Anna @FORGENAME@n komentorivitunnuksia isännöivän palvelimen verkkonimi."
+#~| msgid ""
+#~| "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~| "installation."
+#~ msgid ""
+#~ "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~ "installation."
+#~ msgstr "Anna @FORGENAME@-asennusta isännöivän palvelimen IP-osoite."
+
+#~ msgid "This is needed for the configuration of Apache virtual hosting."
+#~ msgstr "Tätä tarvitaan Apachen näennäiskoneiden asetukseen."
+
+#~ msgid "Shell server:"
+#~ msgstr "Komentorivipalvelin:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~| "shell accounts."
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Anna @FORGENAME@n komentorivitunnuksia isännöivän palvelimen verkkonimi."
+
+#~ msgid "Mailing lists server:"
+#~ msgstr "Postituslistapalvelin:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "mailing lists."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "mailing lists."
+#~ msgstr "Anna @FORGENAME@n postituslistoja isännöivän palvelimen verkkonimi."
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "shell accounts."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Anna @FORGENAME@n komentorivitunnuksia isännöivän palvelimen verkkonimi."
+
+#~ msgid "News administrative group ID:"
+#~ msgstr "Uutisten ylläpitäjäryhmän ID:"
+
+#, fuzzy
+#~| msgid ""
+#~| "The members of the news admin group can approve news for the @FORGENAME@ "
+#~| "main page. This group's ID must not be 1. This should be changed only if "
+#~| "you upgrade from a previous version and want to keep the data."
+#~ msgid ""
+#~ "The members of the news admin group can approve news for the @FORGENAME@ "
+#~ "main page. This group's ID must not be 1. This should be changed only if "
+#~ "you upgrade from a previous version and want to keep the data."
+#~ msgstr ""
+#~ "Uutisten ylläpitäjäryhmän jäsenet voivat hyväksyä uutisia @FORGENAME@n "
+#~ "pääsivulle. Tämän ryhmän ID:n ei tule olla 1. Tätä tulisi muuttaa vain, "
+#~ "jos päivität aikaisemmasta versiosta ja haluat säilyttää tiedot."
+
+#~ msgid "Statistics administrative group ID:"
+#~ msgstr "Tilastojen ylläpitäjäryhmän ID:"
+
+#~ msgid "Peer rating administrative group ID:"
+#~ msgstr "Vertaisarvioiden ylläpitäjäryhmän ID:"
 
 #, fuzzy
 #~| msgid ""

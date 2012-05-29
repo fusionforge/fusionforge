@@ -52,7 +52,6 @@ $sys_dbpasswd = &forge_get_config ('database_password') ;
 $sys_ldap_base_dn = &forge_get_config ('ldap_base_dn') ;
 $sys_ldap_host = &forge_get_config ('ldap_host') ;
 $server_admin = &forge_get_config ('admin_email') ;
-$peerrating_groupid = &forge_get_config ('peer_rating_group') ;
 $chroot_prefix = &forge_get_config ('chroot') ;
 $homedir_prefix = &forge_get_config ('homedir_prefix') ;
 $grpdir_prefix = &forge_get_config ('groupdir_prefix') ;

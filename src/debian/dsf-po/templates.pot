@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fusionforge\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-05-29 15:53+0200\n"
+"POT-Creation-Date: 2012-05-29 18:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,14 +20,12 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:2001
-#: ../dsf-helper/common-variables.templates:2001
 msgid "@FORGENAME@ domain or subdomain name:"
 msgstr ""
 
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:2001
-#: ../dsf-helper/common-variables.templates:2001
 msgid ""
 "Please enter the domain that will host the @FORGENAME@ installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
@@ -36,87 +34,26 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#: ../dsf-helper/common-variables.templates:4001
 msgid "@FORGENAME@ system name:"
 msgstr ""
 
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#: ../dsf-helper/common-variables.templates:4001
 msgid ""
 "Please enter the name of the @FORGENAME@ system. It is used in various "
 "places throughout the system."
 msgstr ""
 
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
-#: ../dsf-helper/shellhost-variables.templates:2001
-msgid "Shell server:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
-msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ shell "
-"accounts."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
-msgid "Download server:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
-msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ "
-"packages."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
-#: ../dsf-helper/lists-variables.templates:2001
-msgid "It should not be the same as the main @FORGENAME@ host."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "IP address:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
-#: ../dsf-helper/host-variables.templates:2001
-msgid ""
-"Please enter the IP address of the server that will host the @FORGENAME@ "
-"installation."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "This is needed for the configuration of Apache virtual hosting."
-msgstr ""
-
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates:2001
 msgid "@FORGENAME@ administrator password:"
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates:2001
 msgid ""
 "The @FORGENAME@ administrator account will have full privileges on the "
 "forge. It will be used to approve the creation of new projects."
@@ -124,21 +61,19 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates:2001
 msgid "Please choose the password for this forge account."
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-in/db-postgresql.templates:3001
 msgid "Password confirmation:"
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-in/db-postgresql.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr ""
 
@@ -146,7 +81,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid "Do you want a simple DNS setup for @FORGENAME@?"
 msgstr ""
 
@@ -154,7 +89,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -166,132 +101,9 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
 "the same server with a single SCM server."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
-msgid "@FORGENAME@ administrator e-mail address:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
-msgid ""
-"Please enter the e-mail address of the @FORGENAME@ administrator of this "
-"site. It will be used when problems occur."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid "Database server:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid ""
-"Please enter the IP address (or hostname) of the server that will host the "
-"@FORGENAME@ database."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Database name:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
-msgid ""
-"Please enter the name of the database that will host the @FORGENAME@ "
-"database."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
-msgid "Database administrator username:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
-msgid ""
-"Please enter the username of the database administrator for the server that "
-"will host the @FORGENAME@ database."
-msgstr ""
-
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Password used for the database:"
-msgstr ""
-
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Connections to the database system are authenticated by a password."
-msgstr ""
-
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Please choose the connection password."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
-msgid "News administrative group ID:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
-msgid ""
-"The members of the news admin group can approve news for the @FORGENAME@ "
-"main page. This group's ID must not be 1. This should be changed only if you "
-"upgrade from a previous version and want to keep the data."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:3001
-msgid "Statistics administrative group ID:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:4001
-msgid "Peer rating administrative group ID:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
-msgid "Mailing lists server:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"mailing lists."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../dsf-helper/shellhost-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"shell accounts."
 msgstr ""

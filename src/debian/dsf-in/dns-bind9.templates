@@ -7,11 +7,6 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-#DSFHELPER:common-variables#
-#DSFHELPER:shellhost-variables#
-#DSFHELPER:lists-variables#
-#DSFHELPER:host-variables#
-
 Template: @PACKAGE@/shared/simple_dns
 Type: boolean
 Default: false

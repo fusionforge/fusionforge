@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-05-29 15:53+0200\n"
+"POT-Creation-Date: 2012-05-29 18:13+0200\n"
 "PO-Revision-Date: 2008-03-30 14:36+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -27,7 +27,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:2001
-#: ../dsf-helper/common-variables.templates:2001
 #, fuzzy
 #| msgid "@FORGENAME@ domain or subdomain name:"
 msgid "@FORGENAME@ domain or subdomain name:"
@@ -36,7 +35,6 @@ msgstr "Název @FORGENAME@ domény nebo subdomény:"
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:2001
-#: ../dsf-helper/common-variables.templates:2001
 #, fuzzy
 #| msgid ""
 #| "Please enter the domain that will host the @FORGENAME@ installation. Some "
@@ -52,7 +50,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#: ../dsf-helper/common-variables.templates:4001
 #, fuzzy
 #| msgid "@FORGENAME@ system name:"
 msgid "@FORGENAME@ system name:"
@@ -61,7 +58,6 @@ msgstr "Jméno @FORGENAME@ systému:"
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#: ../dsf-helper/common-variables.templates:4001
 #, fuzzy
 #| msgid ""
 #| "Please enter the name of the @FORGENAME@ system. It is used in various "
@@ -73,84 +69,9 @@ msgstr ""
 "Zadejte prosím jméno @FORGENAME@ systému. Toto jméno je v systému používáno "
 "na několika místech."
 
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
-#: ../dsf-helper/shellhost-variables.templates:2001
-msgid "Shell server:"
-msgstr "Server se shellovými účty:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
-#, fuzzy
-#| msgid ""
-#| "Please enter the hostname of the server that will host the @FORGENAME@ "
-#| "shell accounts."
-msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ shell "
-"accounts."
-msgstr ""
-"Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
-msgid "Download server:"
-msgstr "Server pro stahování:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
-#, fuzzy
-#| msgid ""
-#| "Please enter the hostname of the server that will host the @FORGENAME@ "
-#| "packages."
-msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ "
-"packages."
-msgstr "Zadejte prosím jméno serveru, který bude hostit balíky @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:5001
-#: ../dsf-helper/lists-variables.templates:2001
-#, fuzzy
-#| msgid "It should not be the same as the main @FORGENAME@ host."
-msgid "It should not be the same as the main @FORGENAME@ host."
-msgstr "Měl by to být jiný počítač než je hlavní server @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "IP address:"
-msgstr "IP adresa:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
-#: ../dsf-helper/host-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the IP address of the server that will host the @FORGENAME@ "
-#| "installation."
-msgid ""
-"Please enter the IP address of the server that will host the @FORGENAME@ "
-"installation."
-msgstr ""
-"Zadejte prosím IP adresu serveru, který bude hostit instalaci @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:7001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "This is needed for the configuration of Apache virtual hosting."
-msgstr "To je vyžadováno pro nastavení virtuálních hostů v Apachi."
-
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
 #| msgid "@FORGENAME@ administrator password:"
 msgid "@FORGENAME@ administrator password:"
@@ -158,7 +79,7 @@ msgstr "Heslo správce @FORGENAME@:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
 #| msgid ""
 #| "The @FORGENAME@ administrator account will have full privileges on the "
@@ -172,7 +93,7 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
 #| msgid "Please choose the password for this account."
 msgid "Please choose the password for this forge account."
@@ -180,15 +101,13 @@ msgstr "Zadejte prosím heslo pro tento účet."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-in/db-postgresql.templates:3001
 msgid "Password confirmation:"
 msgstr "Potvrzení hesla:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-in/db-postgresql.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Zadejte heslo ještě jednou pro potvrzení."
 
@@ -196,7 +115,7 @@ msgstr "Zadejte heslo ještě jednou pro potvrzení."
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 #, fuzzy
 #| msgid "Do you want a simple DNS setup for @FORGENAME@?"
 msgid "Do you want a simple DNS setup for @FORGENAME@?"
@@ -206,7 +125,7 @@ msgstr "Chcete mít v @FORGENAME@ jednoduchou konfiguraci DNS?"
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -222,7 +141,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -232,172 +151,165 @@ msgstr ""
 "Nastavení bude pouze předpokládat, budete mít všechny adresáře s weby "
 "projektů na jednom počítači a že pro SCM použijete jediný server."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
 #, fuzzy
-#| msgid "@FORGENAME@ administrator e-mail address:"
-msgid "@FORGENAME@ administrator e-mail address:"
-msgstr "Emailová adresa správce @FORGENAME@:"
+#~| msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgstr "Emailová adresa správce @FORGENAME@:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
 #, fuzzy
-#| msgid ""
-#| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
-#| "site. It will be used when problems occur."
-msgid ""
-"Please enter the e-mail address of the @FORGENAME@ administrator of this "
-"site. It will be used when problems occur."
-msgstr ""
-"Zadejte prosím emailovou adresu správce tohoto systému @FORGENAME@. Adresa "
-"se použije v případě výskytu problémů."
+#~| msgid ""
+#~| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~| "site. It will be used when problems occur."
+#~ msgid ""
+#~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~ "site. It will be used when problems occur."
+#~ msgstr ""
+#~ "Zadejte prosím emailovou adresu správce tohoto systému @FORGENAME@. "
+#~ "Adresa se použije v případě výskytu problémů."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid "Database server:"
-msgstr "Databázový server:"
+#~ msgid "Download server:"
+#~ msgstr "Server pro stahování:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
 #, fuzzy
-#| msgid ""
-#| "Please enter the IP address (or hostname) of the server that will host "
-#| "the @FORGENAME@ database."
-msgid ""
-"Please enter the IP address (or hostname) of the server that will host the "
-"@FORGENAME@ database."
-msgstr ""
-"Zadejte prosím IP adresu (nebo jméno) serveru, který bude hostit vaši "
-"@FORGENAME@ databázi."
+#~| msgid ""
+#~| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~| "packages."
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr "Zadejte prosím jméno serveru, který bude hostit balíky @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Database name:"
-msgstr "Jméno databáze:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
 #, fuzzy
-#| msgid ""
-#| "Please enter the name of the database that will host the @FORGENAME@ "
-#| "database."
-msgid ""
-"Please enter the name of the database that will host the @FORGENAME@ "
-"database."
-msgstr ""
-"Zadejte prosím jméno databáze, která bude obsahovat databázi @FORGENAME@."
+#~| msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgstr "Měl by to být jiný počítač než je hlavní server @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
-msgid "Database administrator username:"
-msgstr "Uživatelské jméno správce databáze:"
+#~ msgid "Database server:"
+#~ msgstr "Databázový server:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
 #, fuzzy
-#| msgid ""
-#| "Please enter the username of the database administrator for the server "
-#| "that will host the @FORGENAME@ database."
-msgid ""
-"Please enter the username of the database administrator for the server that "
-"will host the @FORGENAME@ database."
-msgstr ""
-"Zadejte prosím uživatelské jméno správce databáze na serveru, který bude "
-"hostit databázi @FORGENAME@."
+#~| msgid ""
+#~| "Please enter the IP address (or hostname) of the server that will host "
+#~| "the @FORGENAME@ database."
+#~ msgid ""
+#~ "Please enter the IP address (or hostname) of the server that will host "
+#~ "the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Zadejte prosím IP adresu (nebo jméno) serveru, který bude hostit vaši "
+#~ "@FORGENAME@ databázi."
 
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Password used for the database:"
-msgstr "Heslo pro připojení do databáze:"
+#~ msgid "Database name:"
+#~ msgstr "Jméno databáze:"
 
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Connections to the database system are authenticated by a password."
-msgstr "Připojení do databáze je ověřováno heslem."
-
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Please choose the connection password."
-msgstr "Zadejte zde prosím heslo pro připojení."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
-msgid "News administrative group ID:"
-msgstr "ID skupiny správců novinek:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
 #, fuzzy
-#| msgid ""
-#| "The members of the news admin group can approve news for the @FORGENAME@ "
-#| "main page. This group's ID must not be 1. This should be changed only if "
-#| "you upgrade from a previous version and want to keep the data."
-msgid ""
-"The members of the news admin group can approve news for the @FORGENAME@ "
-"main page. This group's ID must not be 1. This should be changed only if you "
-"upgrade from a previous version and want to keep the data."
-msgstr ""
-"Členové správcovské skupiny pro novinky mohou schvalovat novinky pro hlavní "
-"stránku @FORGENAME@. Tato skupina nesmí mít ID 1. Toto byste měli měnit jen "
-"v případě, že přecházíte z dřívější verze a chcete zachovat svá data."
+#~| msgid ""
+#~| "Please enter the name of the database that will host the @FORGENAME@ "
+#~| "database."
+#~ msgid ""
+#~ "Please enter the name of the database that will host the @FORGENAME@ "
+#~ "database."
+#~ msgstr ""
+#~ "Zadejte prosím jméno databáze, která bude obsahovat databázi @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:3001
-msgid "Statistics administrative group ID:"
-msgstr "ID skupiny správců pro statistiky:"
+#~ msgid "Database administrator username:"
+#~ msgstr "Uživatelské jméno správce databáze:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:4001
-msgid "Peer rating administrative group ID:"
-msgstr "ID skupiny správců pro hodnocení:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
-msgid "Mailing lists server:"
-msgstr "Server pro poštovní konference:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
 #, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "mailing lists."
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"mailing lists."
-msgstr ""
-"Zadejte prosím jméno serveru, který bude hostit poštovní konference "
-"@FORGENAME@."
+#~| msgid ""
+#~| "Please enter the username of the database administrator for the server "
+#~| "that will host the @FORGENAME@ database."
+#~ msgid ""
+#~ "Please enter the username of the database administrator for the server "
+#~ "that will host the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Zadejte prosím uživatelské jméno správce databáze na serveru, který bude "
+#~ "hostit databázi @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/shellhost-variables.templates:2001
+#~ msgid "Password used for the database:"
+#~ msgstr "Heslo pro připojení do databáze:"
+
+#~ msgid "Connections to the database system are authenticated by a password."
+#~ msgstr "Připojení do databáze je ověřováno heslem."
+
+#~ msgid "Please choose the connection password."
+#~ msgstr "Zadejte zde prosím heslo pro připojení."
+
+#~ msgid "IP address:"
+#~ msgstr "IP adresa:"
+
 #, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "shell accounts."
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"shell accounts."
-msgstr ""
-"Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
+#~| msgid ""
+#~| "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~| "installation."
+#~ msgid ""
+#~ "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~ "installation."
+#~ msgstr ""
+#~ "Zadejte prosím IP adresu serveru, který bude hostit instalaci @FORGENAME@."
+
+#~ msgid "This is needed for the configuration of Apache virtual hosting."
+#~ msgstr "To je vyžadováno pro nastavení virtuálních hostů v Apachi."
+
+#~ msgid "Shell server:"
+#~ msgstr "Server se shellovými účty:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~| "shell accounts."
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
+
+#~ msgid "Mailing lists server:"
+#~ msgstr "Server pro poštovní konference:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "mailing lists."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "mailing lists."
+#~ msgstr ""
+#~ "Zadejte prosím jméno serveru, který bude hostit poštovní konference "
+#~ "@FORGENAME@."
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "shell accounts."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
+
+#~ msgid "News administrative group ID:"
+#~ msgstr "ID skupiny správců novinek:"
+
+#, fuzzy
+#~| msgid ""
+#~| "The members of the news admin group can approve news for the @FORGENAME@ "
+#~| "main page. This group's ID must not be 1. This should be changed only if "
+#~| "you upgrade from a previous version and want to keep the data."
+#~ msgid ""
+#~ "The members of the news admin group can approve news for the @FORGENAME@ "
+#~ "main page. This group's ID must not be 1. This should be changed only if "
+#~ "you upgrade from a previous version and want to keep the data."
+#~ msgstr ""
+#~ "Členové správcovské skupiny pro novinky mohou schvalovat novinky pro "
+#~ "hlavní stránku @FORGENAME@. Tato skupina nesmí mít ID 1. Toto byste měli "
+#~ "měnit jen v případě, že přecházíte z dřívější verze a chcete zachovat svá "
+#~ "data."
+
+#~ msgid "Statistics administrative group ID:"
+#~ msgstr "ID skupiny správců pro statistiky:"
+
+#~ msgid "Peer rating administrative group ID:"
+#~ msgstr "ID skupiny správců pro hodnocení:"
 
 #, fuzzy
 #~| msgid ""
