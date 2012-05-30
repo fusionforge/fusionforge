@@ -25,21 +25,8 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:handle-mainconffile#
-
 case "$1" in
     configure)
-	if [ -c /dev/urandom ]; then  # ...using /dev/urandom when possible
-	    sys_session_key=$(dd if=/dev/urandom count=1 bs=16 2> /dev/null | md5sum | cut -b1-32)
-	else			# ...or something else if need be.
-	    # Last I was told, the Hurd had no /dev/urandom
-	    # (Correct me if it has changed)
-	    sys_session_key=$(dd if=/dev/random count=1 bs=8 2> /dev/null | md5sum | cut -b1-32)
-	fi
-	add_onevar_mainconfile sys_session_key $sys_session_key
-	add_onevar_mainconfile sys_show_source 0
-	add_onevar_mainconfile sys_force_login 0
-
 	if [ ! -e /etc/@OLDPACKAGE@/ssl-cert.pem ] || [ ! -e /etc/@OLDPACKAGE@/ssl-cert.key ] ; then
 	    # Uh-oh, no SSL cert, let's make sure at least a dummy one exists.
 	    if [ ! -e /etc/ssl/certs/ssl-cert-snakeoil.pem ] || [ ! -e /etc/ssl/private/ssl-cert-snakeoil.key ] ; then

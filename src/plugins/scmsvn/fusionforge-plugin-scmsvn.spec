@@ -90,9 +90,6 @@ if [ "$1" = "1" ] ; then
     perl -pi -e "
 	s/sys_use_scm=false/sys_use_scm=true/g" %{FFORGE_CONF_DIR}/gforge.conf
 		
-	# initializing configuration
-	%{SBIN_DIR}/fusionforge-config
-	
 	CHROOT=`grep '^gforge_chroot=' %{FFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
 	if [ ! -d $CHROOT/svnroot ] ; then
 		mkdir -p $CHROOT/svnroot

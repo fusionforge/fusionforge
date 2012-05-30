@@ -7,6 +7,19 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
+Template: @PACKAGE@/shared/admin_password
+Type: password
+_Description: @FORGENAME@ administrator password:
+ The @FORGENAME@ administrator account will have full privileges on the
+ forge. It will be used to approve the creation of new projects.
+ .
+ Please choose the password for this forge account.
+
+Template: @PACKAGE@/shared/admin_password_confirm
+Type: password
+_Description: Password confirmation:
+ Please re-type the password for confirmation.
+
 Template: @PACKAGE@/ucfchangeprompt
 Type: select
 __Choices: install the new version configured by @PACKAGE@, keep the local version currently installed, show the differences between the versions, show a side-by-side difference between the versions, start a new shell to examine the situation

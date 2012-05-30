@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGENAME@ 4.8.2-1\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-16 10:20+0100\n"
+"POT-Creation-Date: 2012-05-29 18:26+0200\n"
 "PO-Revision-Date: 2010-01-02 10:03+0300\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -22,79 +22,48 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
-#: ../dsf-helper/shellhost-variables.templates:2001
-msgid "Shell server:"
-msgstr "Сервер оболочек:"
+#: ../dsf-in/common.templates:2001
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Имя домена или поддомена @FORGENAME@:"
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
+#: ../dsf-in/common.templates:2001
 msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ shell "
-"accounts."
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
-"Введите имя сервера, на котором будут расположены учётные записи оболочек "
-"для @FORGENAME@."
+"Введите домен, который будет обслуживать установку @FORGENAME@. В этом "
+"домене некоторым сервисам (scm, lists и т.д.) будут присвоены свои "
+"собственные поддомены."
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:2001
-msgid "Download server:"
-msgstr "Сервер загрузок:"
+#: ../dsf-in/common.templates:3001
+#, fuzzy
+#| msgid "@FORGENAME@/FusionForge system name:"
+msgid "@FORGENAME@ system name:"
+msgstr "Имя системы @FORGENAME@/FusionForge:"
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
+#: ../dsf-in/common.templates:3001
 msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ "
-"packages."
-msgstr "Введите имя сервера, на котором будут расположены пакеты @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:2001
-#: ../dsf-helper/lists-variables.templates:2001
-#: ../dsf-helper/users-variables.templates:2001
-msgid "It should not be the same as the main @FORGENAME@ host."
-msgstr "Оно не должно совпадать с главным хостом @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "IP address:"
-msgstr "IP-адрес:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-helper/host-variables.templates:2001
-msgid ""
-"Please enter the IP address of the server that will host the @FORGENAME@ "
-"installation."
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
 msgstr ""
-"Введите IP-адрес сервера, на котором будет располагаться установка "
-"@FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "This is needed for the configuration of Apache virtual hosting."
-msgstr "Это нужно для настройки виртуального хостинга Apache."
+"Введите имя системы @FORGENAME@. Оно используется в разных местах по всей "
+"системе."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates:2001
 msgid "@FORGENAME@ administrator password:"
 msgstr "Пароль администратора @FORGENAME@:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
 #| msgid ""
 #| "The @FORGENAME@ administrator account will have full privileges on the "
@@ -108,7 +77,7 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
 #| msgid "Please choose the password for this account."
 msgid "Please choose the password for this forge account."
@@ -116,23 +85,65 @@ msgstr "Введите пароль для этой учётной записи.
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-in/db-postgresql.templates:3001
 msgid "Password confirmation:"
 msgstr "Подтверждение пароля:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-in/db-postgresql.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Введите пароль ещё раз для подтверждения."
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "install the new version configured by @PACKAGE@"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "keep the local version currently installed"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show the differences between the versions"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show a side-by-side difference between the versions"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "start a new shell to examine the situation"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid "What do you want to do about configuration file ${BASENAME}?"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid ""
+"The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
+"is also a configuration file of the postgresql package."
+msgstr ""
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid "Do you want a simple DNS setup for @FORGENAME@?"
 msgstr "Выполнить простую настройку DNS для @FORGENAME@?"
 
@@ -140,7 +151,7 @@ msgstr "Выполнить простую настройку DNS для @FORGENA
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -156,7 +167,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -167,406 +178,248 @@ msgstr ""
 "предполагается, что все веб-каталоги проектов размещены на том же сервере с "
 "одним сервером SCM."
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr "Удалять почту, присланную на адрес ${noreply}?"
+#~ msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgstr "Адрес электронной почты администратора @FORGENAME@:"
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the "
-"\"${noreply}\" address."
-msgstr ""
-"@FORGENAME@ посылает и принимает множество электронных писем на адрес "
-"\"${noreply}\"."
+#~ msgid ""
+#~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~ "site. It will be used when problems occur."
+#~ msgstr ""
+#~ "Введите e-mail адрес администратора @FORGENAME@ для этого сайта. Он будет "
+#~ "использован при возникновении проблем."
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"E-mail to that address should be directed to a black hole (/dev/null), "
-"unless you have another use for that address."
-msgstr ""
-"Почта на этот адрес должна быть перенаправлена в чёрную дыру (/dev/null), "
-"если вы не используете этот адрес для чего-то ещё."
+#~ msgid "Download server:"
+#~ msgstr "Сервер загрузок:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid "@FORGENAME@ domain or subdomain name:"
-msgstr "Имя домена или поддомена @FORGENAME@:"
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr ""
+#~ "Введите имя сервера, на котором будут расположены пакеты @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid ""
-"Please enter the domain that will host the @FORGENAME@ installation. Some "
-"services (scm, lists, etc.) will be given their own subdomain in that domain."
-msgstr ""
-"Введите домен, который будет обслуживать установку @FORGENAME@. В этом "
-"домене некоторым сервисам (scm, lists и т.д.) будут присвоены свои "
-"собственные поддомены."
+#~ msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgstr "Оно не должно совпадать с главным хостом @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
-msgid "@FORGENAME@ administrator e-mail address:"
-msgstr "Адрес электронной почты администратора @FORGENAME@:"
+#~ msgid "Database server:"
+#~ msgstr "Сервер базы данных:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
-msgid ""
-"Please enter the e-mail address of the @FORGENAME@ administrator of this "
-"site. It will be used when problems occur."
-msgstr ""
-"Введите e-mail адрес администратора @FORGENAME@ для этого сайта. Он будет "
-"использован при возникновении проблем."
+#~ msgid ""
+#~ "Please enter the IP address (or hostname) of the server that will host "
+#~ "the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Введите IP-адрес (или имя хоста) сервера, на котором будет расположена "
+#~ "база данных @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-#, fuzzy
-#| msgid "@FORGENAME@/FusionForge system name:"
-msgid "@FORGENAME@ system name:"
-msgstr "Имя системы @FORGENAME@/FusionForge:"
+#~ msgid "Database name:"
+#~ msgstr "Имя базы данных:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-msgid ""
-"Please enter the name of the @FORGENAME@ system. It is used in various "
-"places throughout the system."
-msgstr ""
-"Введите имя системы @FORGENAME@. Оно используется в разных местах по всей "
-"системе."
+#~ msgid ""
+#~ "Please enter the name of the database that will host the @FORGENAME@ "
+#~ "database."
+#~ msgstr ""
+#~ "Введите имя базы данных, которая будет содержать базу данных @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid "Database server:"
-msgstr "Сервер базы данных:"
+#~ msgid "Database administrator username:"
+#~ msgstr "Имя пользователя администратора базы данных:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid ""
-"Please enter the IP address (or hostname) of the server that will host the "
-"@FORGENAME@ database."
-msgstr ""
-"Введите IP-адрес (или имя хоста) сервера, на котором будет расположена база "
-"данных @FORGENAME@."
+#~ msgid ""
+#~ "Please enter the username of the database administrator for the server "
+#~ "that will host the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Введите имя пользователя администратора базы данных для сервера, на "
+#~ "котором будет расположена база данных @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Database name:"
-msgstr "Имя базы данных:"
+#~ msgid "Password used for the database:"
+#~ msgstr "Пароль для базы данных:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
-msgid ""
-"Please enter the name of the database that will host the @FORGENAME@ "
-"database."
-msgstr ""
-"Введите имя базы данных, которая будет содержать базу данных @FORGENAME@."
+#~ msgid "Connections to the database system are authenticated by a password."
+#~ msgstr "Для подключений к базе данных требуется пароль."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
-msgid "Database administrator username:"
-msgstr "Имя пользователя администратора базы данных:"
+#~ msgid "Please choose the connection password."
+#~ msgstr "Введите пароль для подключения."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
-msgid ""
-"Please enter the username of the database administrator for the server that "
-"will host the @FORGENAME@ database."
-msgstr ""
-"Введите имя пользователя администратора базы данных для сервера, на котором "
-"будет расположена база данных @FORGENAME@."
+#~ msgid "IP address:"
+#~ msgstr "IP-адрес:"
 
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Password used for the database:"
-msgstr "Пароль для базы данных:"
+#~ msgid ""
+#~ "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~ "installation."
+#~ msgstr ""
+#~ "Введите IP-адрес сервера, на котором будет располагаться установка "
+#~ "@FORGENAME@."
 
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Connections to the database system are authenticated by a password."
-msgstr "Для подключений к базе данных требуется пароль."
+#~ msgid "This is needed for the configuration of Apache virtual hosting."
+#~ msgstr "Это нужно для настройки виртуального хостинга Apache."
 
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Please choose the connection password."
-msgstr "Введите пароль для подключения."
+#~ msgid "Shell server:"
+#~ msgstr "Сервер оболочек:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/downloadhost-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"packages."
-msgstr ""
-"Введите имя хоста сервера, на котором будут располагаться пакеты @FORGENAME@."
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Введите имя сервера, на котором будут расположены учётные записи оболочек "
+#~ "для @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
-msgid "News administrative group ID:"
-msgstr "Административный ID группы новостей:"
+#~ msgid "Mailing lists server:"
+#~ msgstr "Сервер списков почтовых рассылок:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
-msgid ""
-"The members of the news admin group can approve news for the @FORGENAME@ "
-"main page. This group's ID must not be 1. This should be changed only if you "
-"upgrade from a previous version and want to keep the data."
-msgstr ""
-"Члены административной группы новостей могут утверждать новости для главной "
-"страницы @FORGENAME@. Данный ID не должен быть равен 1. Он должен быть "
-"изменён, только если вы обновляетесь с предыдущей версии и хотите сохранить "
-"данные."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "mailing lists."
+#~ msgstr ""
+#~ "Введите имя хоста сервера, который будет обслуживать списки почтовых "
+#~ "рассылок @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:3001
-msgid "Statistics administrative group ID:"
-msgstr "Административный ID группы статистики:"
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Введите имя сервера, на котором будут расположены учётные записи оболочек "
+#~ "для @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:4001
-msgid "Peer rating administrative group ID:"
-msgstr "Административный ID группы рейтинга:"
+#~ msgid "News administrative group ID:"
+#~ msgstr "Административный ID группы новостей:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
-msgid "Mailing lists server:"
-msgstr "Сервер списков почтовых рассылок:"
+#~ msgid ""
+#~ "The members of the news admin group can approve news for the @FORGENAME@ "
+#~ "main page. This group's ID must not be 1. This should be changed only if "
+#~ "you upgrade from a previous version and want to keep the data."
+#~ msgstr ""
+#~ "Члены административной группы новостей могут утверждать новости для "
+#~ "главной страницы @FORGENAME@. Данный ID не должен быть равен 1. Он должен "
+#~ "быть изменён, только если вы обновляетесь с предыдущей версии и хотите "
+#~ "сохранить данные."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"mailing lists."
-msgstr ""
-"Введите имя хоста сервера, который будет обслуживать списки почтовых "
-"рассылок @FORGENAME@."
+#~ msgid "Statistics administrative group ID:"
+#~ msgstr "Административный ID группы статистики:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/shellhost-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"shell accounts."
-msgstr ""
-"Введите имя сервера, на котором будут расположены учётные записи оболочек "
-"для @FORGENAME@."
+#~ msgid "Peer rating administrative group ID:"
+#~ msgstr "Административный ID группы рейтинга:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid "User mail redirector server:"
-msgstr "Сервер-перенаправитель пользовательской почты:"
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr ""
+#~ "Введите имя хоста сервера, на котором будут располагаться пакеты "
+#~ "@FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ user "
-"mail redirector."
-msgstr ""
-"Введите имя сервера, который будет перенаправлять почту пользователей "
-"@FORGENAME@."
+#~ msgid "English"
+#~ msgstr "английский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "English"
-msgstr "английский"
+#~ msgid "Bulgarian"
+#~ msgstr "болгарский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Bulgarian"
-msgstr "болгарский"
+#~ msgid "Catalan"
+#~ msgstr "каталонский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Catalan"
-msgstr "каталонский"
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "китайский (традиционный)"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Chinese (Traditional)"
-msgstr "китайский (традиционный)"
+#~ msgid "Dutch"
+#~ msgstr "голландский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Dutch"
-msgstr "голландский"
+#~ msgid "Esperanto"
+#~ msgstr "эсперанто"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Esperanto"
-msgstr "эсперанто"
+#~ msgid "French"
+#~ msgstr "французский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "French"
-msgstr "французский"
+#~ msgid "German"
+#~ msgstr "немецкий"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "German"
-msgstr "немецкий"
+#~ msgid "Greek"
+#~ msgstr "греческий"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Greek"
-msgstr "греческий"
+#~ msgid "Hebrew"
+#~ msgstr "иврит"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Hebrew"
-msgstr "иврит"
+#~ msgid "Indonesian"
+#~ msgstr "индонезийский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Indonesian"
-msgstr "индонезийский"
+#~ msgid "Italian"
+#~ msgstr "итальянский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Italian"
-msgstr "итальянский"
+#~ msgid "Japanese"
+#~ msgstr "японский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Japanese"
-msgstr "японский"
+#~ msgid "Korean"
+#~ msgstr "корейский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Korean"
-msgstr "корейский"
+#~ msgid "Latin"
+#~ msgstr "латинский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Latin"
-msgstr "латинский"
+#~ msgid "Norwegian"
+#~ msgstr "норвежский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Norwegian"
-msgstr "норвежский"
+#~ msgid "Polish"
+#~ msgstr "польский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Polish"
-msgstr "польский"
+#~ msgid "Portuguese (Brazilian)"
+#~ msgstr "португальский (бразильский)"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Portuguese (Brazilian)"
-msgstr "португальский (бразильский)"
+#~ msgid "Portuguese"
+#~ msgstr "португальский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Portuguese"
-msgstr "португальский"
+#~ msgid "Russian"
+#~ msgstr "русский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Russian"
-msgstr "русский"
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "китайский (упрощённый)"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Chinese (Simplified)"
-msgstr "китайский (упрощённый)"
+#~ msgid "Spanish"
+#~ msgstr "испанский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Spanish"
-msgstr "испанский"
+#~ msgid "Swedish"
+#~ msgstr "шведский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Swedish"
-msgstr "шведский"
+#~ msgid "Thai"
+#~ msgstr "тайский"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Thai"
-msgstr "тайский"
+#~ msgid "English[ Default language]"
+#~ msgstr "русский"
 
-#. Type: select
-#. DefaultChoice
-#: ../dsf-helper/web-variables.templates:2002
-msgid "English[ Default language]"
-msgstr "русский"
+#~ msgid "Default language:"
+#~ msgstr "Язык по умолчанию:"
 
-#. Type: select
-#. Description
-#: ../dsf-helper/web-variables.templates:2003
-msgid "Default language:"
-msgstr "Язык по умолчанию:"
+#~ msgid "Please choose the default language for web pages."
+#~ msgstr "Выберите язык по умолчанию для веб-страниц."
 
-#. Type: select
-#. Description
-#: ../dsf-helper/web-variables.templates:2003
-msgid "Please choose the default language for web pages."
-msgstr "Выберите язык по умолчанию для веб-страниц."
+#~ msgid "Default theme:"
+#~ msgstr "Тема по умолчанию:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/web-variables.templates:3001
-msgid "Default theme:"
-msgstr "Тема по умолчанию:"
+#~ msgid ""
+#~ "Please choose the default theme for web pages. This must be a valid name."
+#~ msgstr ""
+#~ "Выберите тему по умолчанию для веб-страниц. Должно быть указано "
+#~ "допустимое имя."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/web-variables.templates:3001
-msgid ""
-"Please choose the default theme for web pages. This must be a valid name."
-msgstr ""
-"Выберите тему по умолчанию для веб-страниц. Должно быть указано допустимое "
-"имя."
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "Удалять почту, присланную на адрес ${noreply}?"
+
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ посылает и принимает множество электронных писем на адрес "
+#~ "\"${noreply}\"."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "Почта на этот адрес должна быть перенаправлена в чёрную дыру (/dev/null), "
+#~ "если вы не используете этот адрес для чего-то ещё."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Сервер-перенаправитель пользовательской почты:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Введите имя сервера, который будет перенаправлять почту пользователей "
+#~ "@FORGENAME@."
 
 #~ msgid "@FORGENAME@ administrator login:"
 #~ msgstr "Учётная запись администратора @FORGENAME@:"

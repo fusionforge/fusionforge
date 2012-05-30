@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-16 10:20+0100\n"
+"POT-Creation-Date: 2012-05-29 18:26+0200\n"
 "PO-Revision-Date: 2008-03-25 03:47+0000\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -17,201 +17,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
-#: ../dsf-helper/shellhost-variables.templates:2001
-msgid "Shell server:"
-msgstr "Servidor de shell:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
-#, fuzzy
-#| msgid ""
-#| "Please enter the hostname of the server that will host the @FORGENAME@ "
-#| "shell accounts."
-msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ shell "
-"accounts."
-msgstr ""
-"Introduza o nome do servidor que ha hospedar as contas shell de @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:2001
-msgid "Download server:"
-msgstr "Servidor de descargas:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#, fuzzy
-#| msgid ""
-#| "Please enter the hostname of the server that will host the @FORGENAME@ "
-#| "packages."
-msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ "
-"packages."
-msgstr ""
-"Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:2001
-#: ../dsf-helper/lists-variables.templates:2001
-#: ../dsf-helper/users-variables.templates:2001
-#, fuzzy
-#| msgid "It should not be the same as the main @FORGENAME@ host."
-msgid "It should not be the same as the main @FORGENAME@ host."
-msgstr "Non debería ser o mesmo que o servidor principal de @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "IP address:"
-msgstr "Enderezo IP:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-helper/host-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the IP address of the server that will host the @FORGENAME@ "
-#| "installation."
-msgid ""
-"Please enter the IP address of the server that will host the @FORGENAME@ "
-"installation."
-msgstr ""
-"Introduza o enderezo IP do servidor que ha hospedar a instalación de "
-"@FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "This is needed for the configuration of Apache virtual hosting."
-msgstr "Isto é preciso para configurar a hospedaxe virtual de Apache."
-
-#. Type: password
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
-#, fuzzy
-#| msgid "@FORGENAME@ administrator password:"
-msgid "@FORGENAME@ administrator password:"
-msgstr "Contrasinal de administrador de @FORGENAME@:"
-
-#. Type: password
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
-#, fuzzy
-#| msgid ""
-#| "The @FORGENAME@ administrator account will have full privileges on the "
-#| "system. It will be used to approve the creation of new projects."
-msgid ""
-"The @FORGENAME@ administrator account will have full privileges on the "
-"forge. It will be used to approve the creation of new projects."
-msgstr ""
-"A conta de administrador de @FORGENAME@ ha ter tódolos privilexios no "
-"sistema. Hase empregar para aprobar a creación de novos proxectos."
-
-#. Type: password
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
-#, fuzzy
-#| msgid "Please choose the password for this account."
-msgid "Please choose the password for this forge account."
-msgstr "Escolla un contrasinal para esta conta."
-
-#. Type: password
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
-msgid "Password confirmation:"
-msgstr "Confirmación do contrasinal:"
-
-#. Type: password
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
-msgid "Please re-type the password for confirmation."
-msgstr "Volva introducir o contrasinal para confirmalo."
-
-#. Type: boolean
-#. Description
-#. Translators: SCM here means "Source Control Management"
-#. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
-#, fuzzy
-#| msgid "Do you want a simple DNS setup for @FORGENAME@?"
-msgid "Do you want a simple DNS setup for @FORGENAME@?"
-msgstr "¿Quere unha configuración de DNS simple para @FORGENAME@?"
-
-#. Type: boolean
-#. Description
-#. Translators: SCM here means "Source Control Management"
-#. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
-msgid ""
-"You can use a simple DNS setup with wildcards to map all project web-hosts "
-"to a single IP address, and direct all the scm-hosts to a single SCM server, "
-"or a complex setup which allows many servers as project web servers or SCM "
-"servers."
-msgstr ""
-"Pode empregar unha configuración de DNS simple con comodíns para mapear "
-"tódalas webs dos proxectos a un só enderezo IP e dirixir tódolos nomes dos "
-"SCM a un só servidor de SCM, ou unha configuración complexa que lle permite "
-"ter moitos servidores coma servidores web ou servidores SCM."
-
-#. Type: boolean
-#. Description
-#. Translators: SCM here means "Source Control Management"
-#. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
-msgid ""
-"Even if you use a simple DNS setup, you can still use separate machines as "
-"project servers; it just assumes that all the project web directories are on "
-"the same server with a single SCM server."
-msgstr ""
-"Aínda se ten unha configuración simple de DNS, pode ter varias máquinas para "
-"os servidores dos proxectos; só supón que tódolos directorios web dos "
-"proxectos están no mesmo servidor cun só servidor para SCM."
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr "¿Quere que se descarten as mensaxes enviadas a ${noreply}?"
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-#, fuzzy
-#| msgid ""
-#| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
-#| "\"${noreply}\" address."
-msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the "
-"\"${noreply}\" address."
-msgstr ""
-"@FORGENAME@ envía e recibe moito email desde e para o enderezo "
-"\"${noreply}\"."
-
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"E-mail to that address should be directed to a black hole (/dev/null), "
-"unless you have another use for that address."
-msgstr ""
-"O email dirixido a ese enderezo debería ser enviado a un burato negro (/dev/"
-"null), a menos que empregue ese enderezo para outra cousa."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
+#: ../dsf-in/common.templates:2001
 #, fuzzy
 #| msgid "@FORGENAME@ domain or subdomain name:"
 msgid "@FORGENAME@ domain or subdomain name:"
@@ -219,7 +25,7 @@ msgstr "Nome de dominio ou subdominio de @FORGENAME@:"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/common-variables.templates:2001
+#: ../dsf-in/common.templates:2001
 #, fuzzy
 #| msgid ""
 #| "Please enter the domain that will host the @FORGENAME@ installation. Some "
@@ -235,29 +41,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-helper/common-variables.templates:3001
-#, fuzzy
-#| msgid "@FORGENAME@ administrator e-mail address:"
-msgid "@FORGENAME@ administrator e-mail address:"
-msgstr "Enderezo de email do administrador de @FORGENAME@:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
-#, fuzzy
-#| msgid ""
-#| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
-#| "site. It will be used when problems occur."
-msgid ""
-"Please enter the e-mail address of the @FORGENAME@ administrator of this "
-"site. It will be used when problems occur."
-msgstr ""
-"Introduza o enderezo de email do administrador de @FORGENAME@ deste sitio. "
-"Hase empregar se aparecen problemas."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
+#: ../dsf-in/common.templates:3001
 #, fuzzy
 #| msgid "@FORGENAME@ system name:"
 msgid "@FORGENAME@ system name:"
@@ -265,7 +49,7 @@ msgstr "Nome do sistema @FORGENAME@:"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/common-variables.templates:4001
+#: ../dsf-in/common.templates:3001
 #, fuzzy
 #| msgid ""
 #| "Please enter the name of the @FORGENAME@ system. It is used in various "
@@ -277,362 +61,432 @@ msgstr ""
 "Introduza o nome do sistema @FORGENAME@. Emprégase en varios lugares do "
 "sistema."
 
-#. Type: string
+#. Type: password
 #. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid "Database server:"
-msgstr "Servidor de bases de datos:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
-#| msgid ""
-#| "Please enter the IP address (or hostname) of the server that will host "
-#| "the @FORGENAME@ database."
-msgid ""
-"Please enter the IP address (or hostname) of the server that will host the "
-"@FORGENAME@ database."
-msgstr ""
-"Introduza o enderezo IP (ou nome) do servidor que ha hospedar a base de "
-"datos de @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Database name:"
-msgstr "Nome da base de datos:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
-#, fuzzy
-#| msgid ""
-#| "Please enter the name of the database that will host the @FORGENAME@ "
-#| "database."
-msgid ""
-"Please enter the name of the database that will host the @FORGENAME@ "
-"database."
-msgstr ""
-"Introduza o nome da base de datos que ha hospedar as contas shell de "
-"@FORGENAME@"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
-msgid "Database administrator username:"
-msgstr "Nome de usuario do administrador da base de datos:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
-#, fuzzy
-#| msgid ""
-#| "Please enter the username of the database administrator for the server "
-#| "that will host the @FORGENAME@ database."
-msgid ""
-"Please enter the username of the database administrator for the server that "
-"will host the @FORGENAME@ database."
-msgstr ""
-"Introduza o nome de usuario do administrador de bases de datos do servidor "
-"que ha hospedar a base de datos de @FORGENAME@."
+#| msgid "@FORGENAME@ administrator password:"
+msgid "@FORGENAME@ administrator password:"
+msgstr "Contrasinal de administrador de @FORGENAME@:"
 
 #. Type: password
 #. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Password used for the database:"
-msgstr "Contrasinal para a base de datos:"
+#: ../dsf-in/db-postgresql.templates:2001
+#, fuzzy
+#| msgid ""
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
+msgstr ""
+"A conta de administrador de @FORGENAME@ ha ter tódolos privilexios no "
+"sistema. Hase empregar para aprobar a creación de novos proxectos."
 
 #. Type: password
 #. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Connections to the database system are authenticated by a password."
-msgstr ""
-"As conexións ao sistema de bases de datos van autenticadas cun contrasinal."
+#: ../dsf-in/db-postgresql.templates:2001
+#, fuzzy
+#| msgid "Please choose the password for this account."
+msgid "Please choose the password for this forge account."
+msgstr "Escolla un contrasinal para esta conta."
 
 #. Type: password
 #. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Please choose the connection password."
-msgstr "Escolla o contrasinal para a conexión."
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Password confirmation:"
+msgstr "Confirmación do contrasinal:"
 
-#. Type: string
+#. Type: password
 #. Description
-#: ../dsf-helper/downloadhost-variables.templates:2001
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Please re-type the password for confirmation."
+msgstr "Volva introducir o contrasinal para confirmalo."
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "install the new version configured by @PACKAGE@"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "keep the local version currently installed"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show the differences between the versions"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show a side-by-side difference between the versions"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "start a new shell to examine the situation"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid "What do you want to do about configuration file ${BASENAME}?"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid ""
+"The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
+"is also a configuration file of the postgresql package."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
 #, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "packages."
+#| msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgstr "¿Quere unha configuración de DNS simple para @FORGENAME@?"
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"packages."
+"You can use a simple DNS setup with wildcards to map all project web-hosts "
+"to a single IP address, and direct all the scm-hosts to a single SCM server, "
+"or a complex setup which allows many servers as project web servers or SCM "
+"servers."
 msgstr ""
-"Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
+"Pode empregar unha configuración de DNS simple con comodíns para mapear "
+"tódalas webs dos proxectos a un só enderezo IP e dirixir tódolos nomes dos "
+"SCM a un só servidor de SCM, ou unha configuración complexa que lle permite "
+"ter moitos servidores coma servidores web ou servidores SCM."
 
-#. Type: string
+#. Type: boolean
 #. Description
-#: ../dsf-helper/groupid-variables.templates:2001
-msgid "News administrative group ID:"
-msgstr "ID do grupo de administradores de novas:"
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"Even if you use a simple DNS setup, you can still use separate machines as "
+"project servers; it just assumes that all the project web directories are on "
+"the same server with a single SCM server."
+msgstr ""
+"Aínda se ten unha configuración simple de DNS, pode ter varias máquinas para "
+"os servidores dos proxectos; só supón que tódolos directorios web dos "
+"proxectos están no mesmo servidor cun só servidor para SCM."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
 #, fuzzy
-#| msgid ""
-#| "The members of the news admin group can approve news for the @FORGENAME@ "
-#| "main page. This group's ID must not be 1. This should be changed only if "
-#| "you upgrade from a previous version and want to keep the data."
-msgid ""
-"The members of the news admin group can approve news for the @FORGENAME@ "
-"main page. This group's ID must not be 1. This should be changed only if you "
-"upgrade from a previous version and want to keep the data."
-msgstr ""
-"Os membros do grupo de administradores de novas poden aprobar as novas da "
-"páxina principal de @FORGENAME@. Este ID de grupo non debe ser 1. Só se "
-"debería cambiar se está a se actualizar dunha versión anterior e quere "
-"conservar os datos."
+#~| msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgstr "Enderezo de email do administrador de @FORGENAME@:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:3001
-msgid "Statistics administrative group ID:"
-msgstr "ID do grupo de administradores de estatísticas:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:4001
-msgid "Peer rating administrative group ID:"
-msgstr "ID do grupo de administradores de calificacións de iguais:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
-msgid "Mailing lists server:"
-msgstr "Servidor de listas de correo:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
 #, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "mailing lists."
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"mailing lists."
-msgstr ""
-"Introduza o nome do servidor que ha hospedar as listas de correo de "
-"@FORGENAME@."
+#~| msgid ""
+#~| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~| "site. It will be used when problems occur."
+#~ msgid ""
+#~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~ "site. It will be used when problems occur."
+#~ msgstr ""
+#~ "Introduza o enderezo de email do administrador de @FORGENAME@ deste "
+#~ "sitio. Hase empregar se aparecen problemas."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/shellhost-variables.templates:2001
+#~ msgid "Download server:"
+#~ msgstr "Servidor de descargas:"
+
 #, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "shell accounts."
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"shell accounts."
-msgstr ""
-"Introduza o nome do servidor que ha hospedar as contas shell de @FORGENAME@."
+#~| msgid ""
+#~| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~| "packages."
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid "User mail redirector server:"
-msgstr "Redirector de correo dos usuarios:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
 #, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "user mail redirector."
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ user "
-"mail redirector."
-msgstr ""
-"Introduza o nome do servidor que ha hospedar o redirector do correo dos "
-"usuarios de @FORGENAME@."
+#~| msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgstr "Non debería ser o mesmo que o servidor principal de @FORGENAME@."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "English"
-msgstr "Inglés"
+#~ msgid "Database server:"
+#~ msgstr "Servidor de bases de datos:"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Bulgarian"
-msgstr "Búlgaro"
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the IP address (or hostname) of the server that will host "
+#~| "the @FORGENAME@ database."
+#~ msgid ""
+#~ "Please enter the IP address (or hostname) of the server that will host "
+#~ "the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Introduza o enderezo IP (ou nome) do servidor que ha hospedar a base de "
+#~ "datos de @FORGENAME@."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Catalan"
-msgstr "Catalán"
+#~ msgid "Database name:"
+#~ msgstr "Nome da base de datos:"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Chinese (Traditional)"
-msgstr "Chinés (Tradicional)"
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the name of the database that will host the @FORGENAME@ "
+#~| "database."
+#~ msgid ""
+#~ "Please enter the name of the database that will host the @FORGENAME@ "
+#~ "database."
+#~ msgstr ""
+#~ "Introduza o nome da base de datos que ha hospedar as contas shell de "
+#~ "@FORGENAME@"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Dutch"
-msgstr "Holandés"
+#~ msgid "Database administrator username:"
+#~ msgstr "Nome de usuario do administrador da base de datos:"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Esperanto"
-msgstr "Esperanto"
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the username of the database administrator for the server "
+#~| "that will host the @FORGENAME@ database."
+#~ msgid ""
+#~ "Please enter the username of the database administrator for the server "
+#~ "that will host the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Introduza o nome de usuario do administrador de bases de datos do "
+#~ "servidor que ha hospedar a base de datos de @FORGENAME@."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "French"
-msgstr "Francés"
+#~ msgid "Password used for the database:"
+#~ msgstr "Contrasinal para a base de datos:"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "German"
-msgstr "Alemán"
+#~ msgid "Connections to the database system are authenticated by a password."
+#~ msgstr ""
+#~ "As conexións ao sistema de bases de datos van autenticadas cun "
+#~ "contrasinal."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Greek"
-msgstr "Grego"
+#~ msgid "Please choose the connection password."
+#~ msgstr "Escolla o contrasinal para a conexión."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Hebrew"
-msgstr "Hebreo"
+#~ msgid "IP address:"
+#~ msgstr "Enderezo IP:"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Indonesian"
-msgstr "Indonesio"
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~| "installation."
+#~ msgid ""
+#~ "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~ "installation."
+#~ msgstr ""
+#~ "Introduza o enderezo IP do servidor que ha hospedar a instalación de "
+#~ "@FORGENAME@."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Italian"
-msgstr "Italiano"
+#~ msgid "This is needed for the configuration of Apache virtual hosting."
+#~ msgstr "Isto é preciso para configurar a hospedaxe virtual de Apache."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Japanese"
-msgstr "Xaponés"
+#~ msgid "Shell server:"
+#~ msgstr "Servidor de shell:"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Korean"
-msgstr "Coreano"
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~| "shell accounts."
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar as contas shell de "
+#~ "@FORGENAME@."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Latin"
-msgstr "Latín"
+#~ msgid "Mailing lists server:"
+#~ msgstr "Servidor de listas de correo:"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Norwegian"
-msgstr "Noruegués"
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "mailing lists."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "mailing lists."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar as listas de correo de "
+#~ "@FORGENAME@."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Polish"
-msgstr "Polaco"
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "shell accounts."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar as contas shell de "
+#~ "@FORGENAME@."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Portuguese (Brazilian)"
-msgstr "Portugués (Brasil)"
+#~ msgid "News administrative group ID:"
+#~ msgstr "ID do grupo de administradores de novas:"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Portuguese"
-msgstr "Portugués"
+#, fuzzy
+#~| msgid ""
+#~| "The members of the news admin group can approve news for the @FORGENAME@ "
+#~| "main page. This group's ID must not be 1. This should be changed only if "
+#~| "you upgrade from a previous version and want to keep the data."
+#~ msgid ""
+#~ "The members of the news admin group can approve news for the @FORGENAME@ "
+#~ "main page. This group's ID must not be 1. This should be changed only if "
+#~ "you upgrade from a previous version and want to keep the data."
+#~ msgstr ""
+#~ "Os membros do grupo de administradores de novas poden aprobar as novas da "
+#~ "páxina principal de @FORGENAME@. Este ID de grupo non debe ser 1. Só se "
+#~ "debería cambiar se está a se actualizar dunha versión anterior e quere "
+#~ "conservar os datos."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Russian"
-msgstr "Ruso"
+#~ msgid "Statistics administrative group ID:"
+#~ msgstr "ID do grupo de administradores de estatísticas:"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Chinese (Simplified)"
-msgstr "Chinés (Simplificado)"
+#~ msgid "Peer rating administrative group ID:"
+#~ msgstr "ID do grupo de administradores de calificacións de iguais:"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Spanish"
-msgstr "Español"
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "packages."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Swedish"
-msgstr "Sueco"
+#~ msgid "English"
+#~ msgstr "Inglés"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Thai"
-msgstr "Thai"
+#~ msgid "Bulgarian"
+#~ msgstr "Búlgaro"
 
-#. Type: select
-#. DefaultChoice
-#: ../dsf-helper/web-variables.templates:2002
-msgid "English[ Default language]"
-msgstr "Inglés"
+#~ msgid "Catalan"
+#~ msgstr "Catalán"
 
-#. Type: select
-#. Description
-#: ../dsf-helper/web-variables.templates:2003
-msgid "Default language:"
-msgstr "Idioma por defecto:"
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "Chinés (Tradicional)"
 
-#. Type: select
-#. Description
-#: ../dsf-helper/web-variables.templates:2003
-msgid "Please choose the default language for web pages."
-msgstr "Escolla o idioma por defecto para as páxinas web."
+#~ msgid "Dutch"
+#~ msgstr "Holandés"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/web-variables.templates:3001
-msgid "Default theme:"
-msgstr "Tema por defecto:"
+#~ msgid "Esperanto"
+#~ msgstr "Esperanto"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/web-variables.templates:3001
-msgid ""
-"Please choose the default theme for web pages. This must be a valid name."
-msgstr ""
-"Escolla o tema por defecto para as páxinas web. Debe ser un nome válido."
+#~ msgid "French"
+#~ msgstr "Francés"
+
+#~ msgid "German"
+#~ msgstr "Alemán"
+
+#~ msgid "Greek"
+#~ msgstr "Grego"
+
+#~ msgid "Hebrew"
+#~ msgstr "Hebreo"
+
+#~ msgid "Indonesian"
+#~ msgstr "Indonesio"
+
+#~ msgid "Italian"
+#~ msgstr "Italiano"
+
+#~ msgid "Japanese"
+#~ msgstr "Xaponés"
+
+#~ msgid "Korean"
+#~ msgstr "Coreano"
+
+#~ msgid "Latin"
+#~ msgstr "Latín"
+
+#~ msgid "Norwegian"
+#~ msgstr "Noruegués"
+
+#~ msgid "Polish"
+#~ msgstr "Polaco"
+
+#~ msgid "Portuguese (Brazilian)"
+#~ msgstr "Portugués (Brasil)"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugués"
+
+#~ msgid "Russian"
+#~ msgstr "Ruso"
+
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "Chinés (Simplificado)"
+
+#~ msgid "Spanish"
+#~ msgstr "Español"
+
+#~ msgid "Swedish"
+#~ msgstr "Sueco"
+
+#~ msgid "Thai"
+#~ msgstr "Thai"
+
+#~ msgid "English[ Default language]"
+#~ msgstr "Inglés"
+
+#~ msgid "Default language:"
+#~ msgstr "Idioma por defecto:"
+
+#~ msgid "Please choose the default language for web pages."
+#~ msgstr "Escolla o idioma por defecto para as páxinas web."
+
+#~ msgid "Default theme:"
+#~ msgstr "Tema por defecto:"
+
+#~ msgid ""
+#~ "Please choose the default theme for web pages. This must be a valid name."
+#~ msgstr ""
+#~ "Escolla o tema por defecto para as páxinas web. Debe ser un nome válido."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "¿Quere que se descarten as mensaxes enviadas a ${noreply}?"
+
+#, fuzzy
+#~| msgid ""
+#~| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~| "\"${noreply}\" address."
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ envía e recibe moito email desde e para o enderezo "
+#~ "\"${noreply}\"."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "O email dirixido a ese enderezo debería ser enviado a un burato negro (/"
+#~ "dev/null), a menos que empregue ese enderezo para outra cousa."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Redirector de correo dos usuarios:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "user mail redirector."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar o redirector do correo dos "
+#~ "usuarios de @FORGENAME@."
 
 #, fuzzy
 #~| msgid "@FORGENAME@ administrator login:"

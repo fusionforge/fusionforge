@@ -7,20 +7,14 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-Template: @PACKAGE@/shared/domain_name
+Template: @PACKAGE@/shared/web_host
 Type: string
 _Description: @FORGENAME@ domain or subdomain name:
  Please enter the domain that will host the @FORGENAME@ installation. Some
  services (scm, lists, etc.) will be given their own subdomain in that
  domain.
 
-Template: @PACKAGE@/shared/server_admin
-Type: string
-_Description: @FORGENAME@ administrator e-mail address:
- Please enter the e-mail address of the @FORGENAME@ administrator of this site. It
- will be used when problems occur.
-
-Template: @PACKAGE@/shared/system_name
+Template: @PACKAGE@/shared/forge_name
 Type: string
 Default: @FORGENAME@
 _Description: @FORGENAME@ system name:

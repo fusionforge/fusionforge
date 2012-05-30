@@ -185,10 +185,8 @@ build: remove-binary-files debian/po/templates.pot conffiles
 	$(DH) $@
 
 # 	Build man pages from Docbook sources
-	cat debian/dsf-in/config.sgml | $(SED_REPLACE) > debian/$(PACKAGE)-config.sgml
 	cat debian/dsf-in/common.manpages | $(SED_REPLACE) > debian/$(OLDPACKAGE)-common.manpages
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
-	/usr/bin/docbook-to-man debian/$(PACKAGE)-config.sgml > $(PACKAGE)-config.1
 
 # 	Build README.Debian from template
 	cat debian/README.Debian.tmpl | $(SED_REPLACE) > debian/README.Debian

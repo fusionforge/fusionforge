@@ -87,25 +87,15 @@ Custom local configuration
 --------------------------
 With default Debian settings, a set of conf files have been generated,
 and will contain the desired settings for runtime :
- - /etc/gforge/local.inc
- - ... (TO BE DOCUMENTED PROPERLY !)
+ - /etc/fusionforge/config.ini
+ - /etc/fusionforge/config.ini.d/*.ini
 
-Should these settings not suit you, it is possible to change
-configuration options by :
-
- 1. modifying /etc/@PACKAGE@/@PACKAGE@.conf which contains the
-    basic settings
- ( 2. Optional : copy some template files from
-     /usr/share/gforge/etc/local.d/ to /etc/gforge/local.d/ (TO BE
-     DOCUMENTED PROPERLY !) )
- 3. regenerate the runtime config files by issueing :
-      # fusionforge-config
-
-Customizations in /etc/@PACKAGE@/@PACKAGE@.conf may include :
- - switching to HTTPS with 'sys_use_ssl=true',
- - setting a custom URL prefix with 'sys_urlprefix=/@PACKAGE@/' for
-   instance, 
- etc.
+They are standard Windows-style *.ini files, and can be updated with
+any text editor.  They should be taken into account immediately by the
+web part of the forge and any subsequent runs of the cron jobs.  Note
+however that some require manual intervention: for instance, if you
+change the name of the database, you will need to perform the
+appropriate steps in the database server too.
 
 
 Adminning notes

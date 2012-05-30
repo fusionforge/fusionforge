@@ -51,11 +51,8 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
-	add_onevar_mainconfile default_trove_cat 18
-
         # Patch DB configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-db.sh configure-files
 

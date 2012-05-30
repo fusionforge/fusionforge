@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@ 4.6.99+svn6387-1\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
-"POT-Creation-Date: 2012-03-16 10:20+0100\n"
+"POT-Creation-Date: 2012-05-29 18:26+0200\n"
 "PO-Revision-Date: 2010-03-10 10:10+0200\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -20,76 +20,45 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
-#: ../dsf-helper/shellhost-variables.templates:2001
-msgid "Shell server:"
-msgstr "Máy phục vụ trình bao :"
+#: ../dsf-in/common.templates:2001
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Tên miền hay miền con @FORGENAME@:"
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
+#: ../dsf-in/common.templates:2001
 msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ shell "
-"accounts."
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
-"Hãy gõ tên máy của máy phục vụ sẽ hỗ trợ các tài khoản trình bao @FORGENAME@."
+"Hãy gõ miền sẽ chứa bản cài đặt @FORGENAME@. Một số dịch vụ (scm, lists v."
+"v.) sẽ nhận miền con riêng ở trong miền đó."
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:2001
-msgid "Download server:"
-msgstr "Máy phục vụ tải xuống:"
+#: ../dsf-in/common.templates:3001
+msgid "@FORGENAME@ system name:"
+msgstr "Tên hệ thống @FORGENAME@:"
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
+#: ../dsf-in/common.templates:3001
 msgid ""
-"Please enter the hostname of the server that will host the @FORGENAME@ "
-"packages."
-msgstr "Hãy gõ tên máy của máy phục vụ sẽ hỗ trợ các gói @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:2001
-#: ../dsf-helper/lists-variables.templates:2001
-#: ../dsf-helper/users-variables.templates:2001
-msgid "It should not be the same as the main @FORGENAME@ host."
-msgstr "Không nên trùng với máy chủ @FORGENAME@ chính."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "IP address:"
-msgstr "Địa chỉ IP:"
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-helper/host-variables.templates:2001
-msgid ""
-"Please enter the IP address of the server that will host the @FORGENAME@ "
-"installation."
-msgstr "Hãy gõ địa chỉ IP của máy phục vụ sẽ chứa bản cài đặt @FORGENAME@."
-
-#. Type: string
-#. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
-#: ../dsf-helper/host-variables.templates:2001
-msgid "This is needed for the configuration of Apache virtual hosting."
-msgstr "Nó cần để cấu hình dịch vụ ảo Apache."
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Hãy gõ tên của hệ thống @FORGENAME@. Nó được dùng ở các nơi khác nhau trên "
+"khắp hệ thống."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates:2001
 msgid "@FORGENAME@ administrator password:"
 msgstr "Mật khẩu quản trị @FORGENAME@:"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
 #| msgid ""
 #| "The @FORGENAME@ administrator account will have full privileges on the "
@@ -103,7 +72,7 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates:2001
 #, fuzzy
 #| msgid "Please choose the password for this account."
 msgid "Please choose the password for this forge account."
@@ -111,23 +80,65 @@ msgstr "Hãy chọn mật khẩu cho tài khoản này."
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-in/db-postgresql.templates:3001
 msgid "Password confirmation:"
 msgstr "Xác nhận mật khẩu :"
 
 #. Type: password
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
-#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-in/db-postgresql.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Hãy gõ lại mật khẩu để xác nhận nó."
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "install the new version configured by @PACKAGE@"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "keep the local version currently installed"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show the differences between the versions"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show a side-by-side difference between the versions"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "start a new shell to examine the situation"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid "What do you want to do about configuration file ${BASENAME}?"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid ""
+"The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
+"is also a configuration file of the postgresql package."
+msgstr ""
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid "Do you want a simple DNS setup for @FORGENAME@?"
 msgstr "Bạn có muốn tạo một thiết lập DNS đơn giản cho @FORGENAME@ không?"
 
@@ -135,7 +146,7 @@ msgstr "Bạn có muốn tạo một thiết lập DNS đơn giản cho @FORGENA
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -151,7 +162,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates:2001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -162,395 +173,240 @@ msgstr ""
 "mục Web của dự án nằm trên cùng một máy phục vụ, với một máy phục vụ SCM "
 "riêng lẻ."
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr "Bạn có muốn hủy mọi thư được gửi cho ${noreply} không?"
+#~ msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgstr "Địa chỉ thư của quản trị @FORGENAME@:"
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"@FORGENAME@ sends and receives plenty of e-mail to and from the "
-"\"${noreply}\" address."
-msgstr ""
-"@FORGENAME@ gửi và nhận rất nhiều thư điện tử cho/từ địa chỉ « ${noreply} »."
+#~ msgid ""
+#~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~ "site. It will be used when problems occur."
+#~ msgstr ""
+#~ "Hãy gõ địa chỉ thư điện tử của quản trị @FORGENAME@ của địa chỉ Web này. "
+#~ "Nó sẽ được dùng khi gặp vấn đề."
 
-#. Type: boolean
-#. Description
-#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
-msgid ""
-"E-mail to that address should be directed to a black hole (/dev/null), "
-"unless you have another use for that address."
-msgstr ""
-"Các thư gửi đến địa chỉ đó nên bị chuyển hướng tới « /dev/null » (bị hủy), "
-"trừ bạn muốn sử dụng địa chỉ đó bằng cách khác."
+#~ msgid "Download server:"
+#~ msgstr "Máy phục vụ tải xuống:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid "@FORGENAME@ domain or subdomain name:"
-msgstr "Tên miền hay miền con @FORGENAME@:"
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr "Hãy gõ tên máy của máy phục vụ sẽ hỗ trợ các gói @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid ""
-"Please enter the domain that will host the @FORGENAME@ installation. Some "
-"services (scm, lists, etc.) will be given their own subdomain in that domain."
-msgstr ""
-"Hãy gõ miền sẽ chứa bản cài đặt @FORGENAME@. Một số dịch vụ (scm, lists v."
-"v.) sẽ nhận miền con riêng ở trong miền đó."
+#~ msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgstr "Không nên trùng với máy chủ @FORGENAME@ chính."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
-msgid "@FORGENAME@ administrator e-mail address:"
-msgstr "Địa chỉ thư của quản trị @FORGENAME@:"
+#~ msgid "Database server:"
+#~ msgstr "Máy phục vụ cơ sở dữ liệu :"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:3001
-msgid ""
-"Please enter the e-mail address of the @FORGENAME@ administrator of this "
-"site. It will be used when problems occur."
-msgstr ""
-"Hãy gõ địa chỉ thư điện tử của quản trị @FORGENAME@ của địa chỉ Web này. Nó "
-"sẽ được dùng khi gặp vấn đề."
+#~ msgid ""
+#~ "Please enter the IP address (or hostname) of the server that will host "
+#~ "the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Hãy gõ địa chỉ IP (hay tên máy) của máy phục vụ sẽ chứa cơ sở dữ liệu "
+#~ "@FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-msgid "@FORGENAME@ system name:"
-msgstr "Tên hệ thống @FORGENAME@:"
+#~ msgid "Database name:"
+#~ msgstr "Tên cơ sở dữ liệu :"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/common-variables.templates:4001
-msgid ""
-"Please enter the name of the @FORGENAME@ system. It is used in various "
-"places throughout the system."
-msgstr ""
-"Hãy gõ tên của hệ thống @FORGENAME@. Nó được dùng ở các nơi khác nhau trên "
-"khắp hệ thống."
+#~ msgid ""
+#~ "Please enter the name of the database that will host the @FORGENAME@ "
+#~ "database."
+#~ msgstr "Hãy gõ tên của cơ sở dữ liệu sẽ hỗ trợ cơ sở dữ liệu @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid "Database server:"
-msgstr "Máy phục vụ cơ sở dữ liệu :"
+#~ msgid "Database administrator username:"
+#~ msgstr "Tên người dùng quản trị cơ sở dữ liệu :"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid ""
-"Please enter the IP address (or hostname) of the server that will host the "
-"@FORGENAME@ database."
-msgstr ""
-"Hãy gõ địa chỉ IP (hay tên máy) của máy phục vụ sẽ chứa cơ sở dữ liệu "
-"@FORGENAME@."
+#~ msgid ""
+#~ "Please enter the username of the database administrator for the server "
+#~ "that will host the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Hãy gõ tên người dùng của quản trị cơ sở dữ liệu cho máy phục vụ sẽ chứa "
+#~ "cơ sở dữ liệu @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Database name:"
-msgstr "Tên cơ sở dữ liệu :"
+#~ msgid "Password used for the database:"
+#~ msgstr "Mật khẩu dùng cho cơ sở dữ liệu :"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:3001
-msgid ""
-"Please enter the name of the database that will host the @FORGENAME@ "
-"database."
-msgstr "Hãy gõ tên của cơ sở dữ liệu sẽ hỗ trợ cơ sở dữ liệu @FORGENAME@."
+#~ msgid "Connections to the database system are authenticated by a password."
+#~ msgstr "Kết nối đến hệ thống cơ sở dữ liệu thì xác thực bằng mật khẩu."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
-msgid "Database administrator username:"
-msgstr "Tên người dùng quản trị cơ sở dữ liệu :"
+#~ msgid "Please choose the connection password."
+#~ msgstr "Hãy chọn mật khẩu kết nối."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:4001
-msgid ""
-"Please enter the username of the database administrator for the server that "
-"will host the @FORGENAME@ database."
-msgstr ""
-"Hãy gõ tên người dùng của quản trị cơ sở dữ liệu cho máy phục vụ sẽ chứa cơ "
-"sở dữ liệu @FORGENAME@."
+#~ msgid "IP address:"
+#~ msgstr "Địa chỉ IP:"
 
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Password used for the database:"
-msgstr "Mật khẩu dùng cho cơ sở dữ liệu :"
+#~ msgid ""
+#~ "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~ "installation."
+#~ msgstr "Hãy gõ địa chỉ IP của máy phục vụ sẽ chứa bản cài đặt @FORGENAME@."
 
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Connections to the database system are authenticated by a password."
-msgstr "Kết nối đến hệ thống cơ sở dữ liệu thì xác thực bằng mật khẩu."
+#~ msgid "This is needed for the configuration of Apache virtual hosting."
+#~ msgstr "Nó cần để cấu hình dịch vụ ảo Apache."
 
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Please choose the connection password."
-msgstr "Hãy chọn mật khẩu kết nối."
+#~ msgid "Shell server:"
+#~ msgstr "Máy phục vụ trình bao :"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/downloadhost-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"packages."
-msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các gói @FORGENAME@."
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Hãy gõ tên máy của máy phục vụ sẽ hỗ trợ các tài khoản trình bao "
+#~ "@FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
-msgid "News administrative group ID:"
-msgstr "ID nhóm quản trị tin tức:"
+#~ msgid "Mailing lists server:"
+#~ msgstr "Máy phục vụ hộp thư chung:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:2001
-msgid ""
-"The members of the news admin group can approve news for the @FORGENAME@ "
-"main page. This group's ID must not be 1. This should be changed only if you "
-"upgrade from a previous version and want to keep the data."
-msgstr ""
-"Các thành viên của nhóm quản trị tin tức cũng có quyền tán thành tin tức để "
-"hiển thị trên trang chính @FORGENAME@. Mã số nhóm (GID) này phải khác với số "
-"1. Thay đổi nó chỉ nếu bạn nâng cấp từ một phiên bản cũ và muốn giữ lại dữ "
-"liệu."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "mailing lists."
+#~ msgstr ""
+#~ "Hãy gõ tên máy của máy phục vụ sẽ chứa các hộp thư chung @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:3001
-msgid "Statistics administrative group ID:"
-msgstr "ID nhóm quản trị thống kê:"
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Hãy gõ tên máy của máy phục vụ sẽ chứa các tài khoản trình bao "
+#~ "@FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/groupid-variables.templates:4001
-msgid "Peer rating administrative group ID:"
-msgstr "ID nhóm quản trị đánh giá ngang hàng:"
+#~ msgid "News administrative group ID:"
+#~ msgstr "ID nhóm quản trị tin tức:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
-msgid "Mailing lists server:"
-msgstr "Máy phục vụ hộp thư chung:"
+#~ msgid ""
+#~ "The members of the news admin group can approve news for the @FORGENAME@ "
+#~ "main page. This group's ID must not be 1. This should be changed only if "
+#~ "you upgrade from a previous version and want to keep the data."
+#~ msgstr ""
+#~ "Các thành viên của nhóm quản trị tin tức cũng có quyền tán thành tin tức "
+#~ "để hiển thị trên trang chính @FORGENAME@. Mã số nhóm (GID) này phải khác "
+#~ "với số 1. Thay đổi nó chỉ nếu bạn nâng cấp từ một phiên bản cũ và muốn "
+#~ "giữ lại dữ liệu."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/lists-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"mailing lists."
-msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các hộp thư chung @FORGENAME@."
+#~ msgid "Statistics administrative group ID:"
+#~ msgstr "ID nhóm quản trị thống kê:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/shellhost-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"shell accounts."
-msgstr ""
-"Hãy gõ tên máy của máy phục vụ sẽ chứa các tài khoản trình bao @FORGENAME@."
+#~ msgid "Peer rating administrative group ID:"
+#~ msgstr "ID nhóm quản trị đánh giá ngang hàng:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid "User mail redirector server:"
-msgstr "Máy phục vụ chuyển hướng thư tín người dùng:"
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các gói @FORGENAME@."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:2001
-msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ user "
-"mail redirector."
-msgstr ""
-"Hãy gõ tên máy của máy phục vụ sẽ chứa bộ chuyển hướng thư tín người dùng "
-"@FORGENAME@."
+#~ msgid "English"
+#~ msgstr "tiếng Anh"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "English"
-msgstr "tiếng Anh"
+#~ msgid "Bulgarian"
+#~ msgstr "tiếng Bun-ga-ri"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Bulgarian"
-msgstr "tiếng Bun-ga-ri"
+#~ msgid "Catalan"
+#~ msgstr "tiếng Ca-ta-lăng"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Catalan"
-msgstr "tiếng Ca-ta-lăng"
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "tiếng Trung (truyền thống)"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Chinese (Traditional)"
-msgstr "tiếng Trung (truyền thống)"
+#~ msgid "Dutch"
+#~ msgstr "tiếng Hòa"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Dutch"
-msgstr "tiếng Hòa"
+#~ msgid "Esperanto"
+#~ msgstr "tiếng Etpêrantô"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Esperanto"
-msgstr "tiếng Etpêrantô"
+#~ msgid "French"
+#~ msgstr "tiếng Pháp"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "French"
-msgstr "tiếng Pháp"
+#~ msgid "German"
+#~ msgstr "tiếng Đức"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "German"
-msgstr "tiếng Đức"
+#~ msgid "Greek"
+#~ msgstr "tiếng Hy Lạp"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Greek"
-msgstr "tiếng Hy Lạp"
+#~ msgid "Hebrew"
+#~ msgstr "tiếng Do Thái"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Hebrew"
-msgstr "tiếng Do Thái"
+#~ msgid "Indonesian"
+#~ msgstr "tiếng Nam Dương"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Indonesian"
-msgstr "tiếng Nam Dương"
+#~ msgid "Italian"
+#~ msgstr "tiếng Ý"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Italian"
-msgstr "tiếng Ý"
+#~ msgid "Japanese"
+#~ msgstr "tiếng Nhật"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Japanese"
-msgstr "tiếng Nhật"
+#~ msgid "Korean"
+#~ msgstr "tiếng Hàn"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Korean"
-msgstr "tiếng Hàn"
+#~ msgid "Latin"
+#~ msgstr "tiếng La-tinh"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Latin"
-msgstr "tiếng La-tinh"
+#~ msgid "Norwegian"
+#~ msgstr "tiếng Na Uy"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Norwegian"
-msgstr "tiếng Na Uy"
+#~ msgid "Polish"
+#~ msgstr "tiếng Ba Lan"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Polish"
-msgstr "tiếng Ba Lan"
+#~ msgid "Portuguese (Brazilian)"
+#~ msgstr "tiếng Bổ Đào Nhà (Bra-xin)"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Portuguese (Brazilian)"
-msgstr "tiếng Bổ Đào Nhà (Bra-xin)"
+#~ msgid "Portuguese"
+#~ msgstr "tiếng Bổ Đào Nhà"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Portuguese"
-msgstr "tiếng Bổ Đào Nhà"
+#~ msgid "Russian"
+#~ msgstr "tiếng Nga"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Russian"
-msgstr "tiếng Nga"
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "tiếng Trung (phổ thông)"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Chinese (Simplified)"
-msgstr "tiếng Trung (phổ thông)"
+#~ msgid "Spanish"
+#~ msgstr "tiếng Tây Ban Nha"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Spanish"
-msgstr "tiếng Tây Ban Nha"
+#~ msgid "Swedish"
+#~ msgstr "tiếng Thuỵ Điển"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Swedish"
-msgstr "tiếng Thuỵ Điển"
+#~ msgid "Thai"
+#~ msgstr "tiếng Thái"
 
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:2001
-msgid "Thai"
-msgstr "tiếng Thái"
+#~ msgid "English[ Default language]"
+#~ msgstr "Tiếng Việt [Ngôn ngữ mặc định]"
 
-#. Type: select
-#. DefaultChoice
-#: ../dsf-helper/web-variables.templates:2002
-msgid "English[ Default language]"
-msgstr "Tiếng Việt [Ngôn ngữ mặc định]"
+#~ msgid "Default language:"
+#~ msgstr "Ngôn ngữ mặc định:"
 
-#. Type: select
-#. Description
-#: ../dsf-helper/web-variables.templates:2003
-msgid "Default language:"
-msgstr "Ngôn ngữ mặc định:"
+#~ msgid "Please choose the default language for web pages."
+#~ msgstr "Hãy chọn ngôn ngữ mặc định cho trang Web."
 
-#. Type: select
-#. Description
-#: ../dsf-helper/web-variables.templates:2003
-msgid "Please choose the default language for web pages."
-msgstr "Hãy chọn ngôn ngữ mặc định cho trang Web."
+#~ msgid "Default theme:"
+#~ msgstr "Sắc thái mặc định:"
 
-#. Type: string
-#. Description
-#: ../dsf-helper/web-variables.templates:3001
-msgid "Default theme:"
-msgstr "Sắc thái mặc định:"
+#~ msgid ""
+#~ "Please choose the default theme for web pages. This must be a valid name."
+#~ msgstr ""
+#~ "Hãy chọn sắc thái mặc định cho trang Web: nó phải là một tên hợp lệ."
 
-#. Type: string
-#. Description
-#: ../dsf-helper/web-variables.templates:3001
-msgid ""
-"Please choose the default theme for web pages. This must be a valid name."
-msgstr "Hãy chọn sắc thái mặc định cho trang Web: nó phải là một tên hợp lệ."
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "Bạn có muốn hủy mọi thư được gửi cho ${noreply} không?"
+
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ gửi và nhận rất nhiều thư điện tử cho/từ địa chỉ « ${noreply} "
+#~ "»."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "Các thư gửi đến địa chỉ đó nên bị chuyển hướng tới « /dev/null » (bị "
+#~ "hủy), trừ bạn muốn sử dụng địa chỉ đó bằng cách khác."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Máy phục vụ chuyển hướng thư tín người dùng:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Hãy gõ tên máy của máy phục vụ sẽ chứa bộ chuyển hướng thư tín người dùng "
+#~ "@FORGENAME@."
 
 #~ msgid "@FORGENAME@ administrator login:"
 #~ msgstr "Tên đăng nhập quản trị @FORGENAME@:"

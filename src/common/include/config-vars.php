@@ -103,7 +103,6 @@ if (file_exists($gfcgfile)) {
 	forge_set_config_item_bool ('use_project_database', 'core') ;
 	forge_define_config_item ('use_project_multimedia', 'core', $GLOBALS['sys_use_project_multimedia']) ;
 	forge_set_config_item_bool ('use_project_multimedia', 'core') ;
-	forge_define_config_item ('download_host', 'core', $GLOBALS['sys_download_host']) ;
 	forge_define_config_item ('shell_host', 'core', $GLOBALS['sys_shell_host']) ;
 	forge_define_config_item ('users_host', 'core', $GLOBALS['sys_users_host']) ;
 	forge_define_config_item ('lists_host', 'core', $GLOBALS['sys_lists_host']) ;
