@@ -2,14 +2,16 @@
 	ServerName {vhost_name}
 	VirtualDocumentRoot {docdir}
         VirtualScriptAlias {cgidir}
-        <Directory {gforge_chroot}{groupdir}>
+        <Directory {core/groupdir_prefix}>
                Options Indexes FollowSymlinks
                AllowOverride All
                order allow,deny
                allow from all
        </Directory>
-  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" fusionforge
+  CustomLog {core/log_path}/access.log fusionforge
+  LogFormat "%{Host}i %h %l %u %t %{SSL_PROTOCOL}x:%{SSL_CIPHER}x \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combinedvhssl
+  CustomLog {core/log_path}/awstats.log combinedvhssl
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable

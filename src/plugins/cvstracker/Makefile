@@ -27,10 +27,6 @@ install:
 	find $(DESTDIR)/usr/share/gforge/plugins/$(PLUGIN)/db/ -type f | xargs chmod 0644
 	find $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 	find $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
-	/usr/share/gforge/bin/fill-in-the-blanks.pl \
-	$(DESTDIR)/etc/gforge/plugins/cvstracker/cvstracker.conf.tmpl \
-	$(DESTDIR)/etc/gforge/plugins/cvstracker/cvstracker.conf \
-        $(DESTDIR)/etc/fusionforge/fusionforge.conf
 	chmod 0644 $(DESTDIR)/etc/gforge/plugins/cvstracker/cvstracker.conf
 	$(DESTDIR)/usr/share/gforge/plugins/cvstracker/bin/db-upgrade.pl
 	$(DESTDIR)/usr/share/gforge/bin/register-plugin cvstracker "cvstracker"	
