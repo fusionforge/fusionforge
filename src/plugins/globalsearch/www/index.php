@@ -60,7 +60,7 @@ function highlight_target_words($word_array,$text) {
                 return '&nbsp;';
         }
         $re=implode($word_array,'|');
-        return eregi_replace("($re)",'<span style="background-color:pink">\1</span>',$text);
+        return preg_replace("/($re)/i",'<span style="background-color:pink">\1</span>',$text);
 }
 
 $HTML->header(array('title'=>'Search','pagename'=>'search'));

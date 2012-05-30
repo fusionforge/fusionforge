@@ -1,0 +1,57 @@
+#! /usr/bin/php -f
+<?php
+/**
+ * FusionForge
+ *
+ * Copyright 2012, Roland Mas
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+        
+require (dirname(__FILE__).'/../common/include/env.inc.php');
+require_once $gfcommon.'include/pre.php';
+
+if (count ($argv) == 2) {
+	$u = $argv[1] ;
+	$user = user_get_object_by_name ($u) ;
+	if (!$user || $user->isError()) {
+		echo "Can't find this user...
+" ;
+		exit (1) ;
+	}
+
+	$e = RBACEngine::getInstance();
+	$rs = $e->getRolesByAllowedAction("forge_admin", -1);
+	if (count ($rs) == 0) {
+		echo "No role found with forge admin privileges...\n";
+		exit (1);
+	}
+	$r = $rs[0];
+	if (!$r->addUser($user)) {
+		echo "An error occurred when adding the user to role ". $r->getDisplayableName()."\n";
+		exit (1);
+	}
+	echo "User ".$u->getUnixName()." added to role ".$r->getDisplayableName()."\n";
+} else {
+	echo "Usage: .../forge_make_admin <username>
+" ;
+        exit (1) ;
+}
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:

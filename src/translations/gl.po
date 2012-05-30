@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-26 20:11+0200\n"
+"POT-Creation-Date: 2012-05-24 15:25+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -29,7 +29,7 @@ msgid "Group_id in db result does not match Group Object"
 msgstr "O group_id na base de datos non coincide co obxecto do grupo"
 
 #: common/docman/Document.class.php:111 common/docman/Document.class.php:791
-#: common/pm/ProjectGroup.class.php:143 common/pm/ProjectGroup.class.php:324
+#: common/pm/ProjectGroup.class.php:143 common/pm/ProjectGroup.class.php:325
 msgid "Title Must Be At Least 5 Characters"
 msgstr "O título debe ter, cando menos, 5 caracteres"
 
@@ -72,7 +72,7 @@ msgstr "Documento:: docid non válido"
 msgid "Unable To Remove Monitor"
 msgstr "Non foi posíbel engadir o seguimento"
 
-#: common/docman/Document.class.php:575 common/forum/Forum.class.php:461
+#: common/docman/Document.class.php:575 common/forum/Forum.class.php:462
 msgid "Unable To Add Monitor"
 msgstr "Non foi posíbel engadir o seguimento"
 
@@ -302,16 +302,16 @@ msgstr "Modificado por última vez"
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:215 common/pm/ProjectTask.class.php:1207
-#: common/tracker/Artifact.class.php:1542
-#: common/tracker/Artifact.class.php:1544
-#: common/tracker/Artifact.class.php:1551
-#: common/tracker/Artifact.class.php:1557
-#: common/tracker/Artifact.class.php:1657
+#: common/tracker/Artifact.class.php:1543
+#: common/tracker/Artifact.class.php:1545
+#: common/tracker/Artifact.class.php:1552
+#: common/tracker/Artifact.class.php:1558
+#: common/tracker/Artifact.class.php:1658
 #: common/tracker/actions/browse.php:608 common/tracker/actions/browse.php:619
 #: common/tracker/actions/browse.php:639 common/tracker/actions/detail.php:73
-#: common/tracker/actions/downloadcsv.php:83
 #: common/tracker/actions/downloadcsv.php:84
 #: common/tracker/actions/downloadcsv.php:85
+#: common/tracker/actions/downloadcsv.php:86
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod-limited.php:108
 #: common/tracker/actions/mod.php:104 common/tracker/actions/mod.php:109
@@ -325,7 +325,7 @@ msgstr "Modificado por última vez"
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:111
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:113
 #: common/widget/Widget_ProjectInfo.class.php:66
-#: common/widget/Widget_Rss.class.php:74
+#: common/widget/Widget_Rss.class.php:78
 #: cronjobs/send_pending_items_mail.php:98
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:189
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
@@ -335,7 +335,7 @@ msgstr "Modificado por última vez"
 #: www/admin/userlist.php:111 www/developer/diary.php:51
 #: www/developer/diary.php:82 www/export/tracker.php:108
 #: www/forum/index.php:89 www/forum/message.php:127 www/forum/myforums.php:152
-#: www/frs/index.php:145 www/frs/index.php:204 www/include/html.php:921
+#: www/frs/index.php:145 www/frs/index.php:204 www/include/html.php:927
 #: www/include/stats_function.php:77 www/include/stats_function.php:98
 #: www/news/news_utils.php:147 www/news/news_utils.php:267
 #: www/people/people_utils.php:422 www/people/viewjob.php:78
@@ -345,14 +345,14 @@ msgstr "Modificado por última vez"
 #: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
 #: www/project/admin/project_admin_utils.php:180
 #: www/reporting/usersummary.php:127
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:71
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:97
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:64
-#: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:68
-#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:62
+#: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
+#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:62
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:65
-#: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:63
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:93
+#: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:89
 #: www/snippet/detail.php:80 www/snippet/detail.php:169
 #: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:148
 #: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:299
@@ -606,8 +606,8 @@ msgstr ""
 #: plugins/contribtracker/www/index.php:142
 #: plugins/contribtracker/www/project_admin.php:293
 #: plugins/mailman/www/admin/index.php:150
-#: plugins/mailman/www/admin/index.php:183 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:224 www/snippet/package.php:152
+#: plugins/mailman/www/admin/index.php:183 www/mail/admin/index.php:193
+#: www/mail/admin/index.php:225 www/snippet/package.php:152
 msgid "Description:"
 msgstr "Descrición:"
 
@@ -643,11 +643,11 @@ msgstr "(como mínimo %1$s caracteres)"
 #: plugins/mailman/www/mailman_utils.php:57
 #: plugins/mailman/www/mailman_utils.php:73
 #: plugins/mantisbt/view/addIssue.php:137
-#: plugins/mantisbt/view/admin/addVersion.php:42
-#: plugins/mantisbt/view/admin/editVersion.php:61
+#: plugins/mantisbt/view/admin/addVersion.php:44
+#: plugins/mantisbt/view/admin/editVersion.php:62
 #: plugins/mantisbt/view/admin/viewVersion.php:50
 #: plugins/mantisbt/view/editIssue.php:217
-#: plugins/mantisbt/view/viewIssue.php:105
+#: plugins/mantisbt/view/viewIssue.php:112
 #: plugins/oauthconsumer/www/provider_edit.php:39
 #: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:78
@@ -659,8 +659,8 @@ msgstr "(como mínimo %1$s caracteres)"
 #: plugins/scmhook/common/scmhookPlugin.class.php:183
 #: www/forum/admin/index.php:103 www/forum/admin/index.php:144
 #: www/forum/index.php:68 www/mail/index.php:78 www/people/editjob.php:52
-#: www/people/editjob.php:74 www/pm/admin/index.php:287
-#: www/pm/admin/index.php:326 www/pm/index.php:100
+#: www/people/editjob.php:74 www/pm/admin/index.php:286
+#: www/pm/admin/index.php:325 www/pm/index.php:100
 #: www/project/admin/editimages.php:228 www/project/admin/editimages.php:255
 #: www/project/admin/editimages.php:271
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:64
@@ -880,7 +880,7 @@ msgstr ""
 #: plugins/contribtracker/www/global_admin.php:351
 #: plugins/contribtracker/www/project_admin.php:318
 #: plugins/globaldashboard/www/admin/manage_accounts.php:93
-#: plugins/oauthconsumer/www/providers.php:32 www/admin/admin_table.php:314
+#: plugins/oauthconsumer/www/providers.php:32 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:45 www/admin/responses_admin.php:92
 #: www/admin/trove/trove_cat_list.php:53 www/frs/admin/showreleases.php:111
 #: www/people/skills_utils.php:45 www/people/skills_utils.php:103
@@ -1036,7 +1036,7 @@ msgstr "Nome de ficheiro "
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editprofile.php:107 www/people/people_utils.php:405
-#: www/people/skills_utils.php:49 www/pm/admin/index.php:189
+#: www/people/skills_utils.php:49 www/pm/admin/index.php:188
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:63
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:51
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
@@ -1081,11 +1081,11 @@ msgstr "Apelidos: "
 #: common/widget/Widget_ProjectLatestDocuments.class.php:74
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:218
 #: plugins/mantisbt/view/editIssue.php:130
-#: plugins/mantisbt/view/viewIssue.php:80
+#: plugins/mantisbt/view/viewIssue.php:87
 #: plugins/mantisbt/view/viewIssues.php:305 www/admin/groupedit.php:107
-#: www/admin/grouplist.php:68 www/admin/pluginman.php:128
+#: www/admin/grouplist.php:68 www/admin/pluginman.php:130
 #: www/admin/search.php:85 www/admin/search.php:162
-#: www/frs/admin/editrelease.php:235 www/frs/admin/index.php:154
+#: www/frs/admin/editrelease.php:235 www/frs/admin/index.php:155
 #: www/my/dashboard.php:68 www/news/admin/index.php:131
 #: www/people/editjob.php:74 www/people/editjob.php:166
 #: www/people/viewjob.php:72 www/pm/browse_task.php:160
@@ -1448,7 +1448,7 @@ msgstr "Non se puido obter o obxecto de foro"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:103
 #: plugins/mailman/www/mailman_utils.php:75
 #: plugins/mailman/www/mailman_utils.php:182
-#: plugins/mantisbt/view/admin/editVersion.php:98
+#: plugins/mantisbt/view/admin/editVersion.php:100
 #: plugins/mantisbt/view/admin/viewCategorie.php:67
 #: plugins/mantisbt/view/viewAttachment.php:58
 #: plugins/mantisbt/view/viewNote.php:60
@@ -1461,15 +1461,15 @@ msgstr "Non se puido obter o obxecto de foro"
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: www/admin/admin_table.php:152 www/admin/admin_table.php:315
+#: www/admin/admin_table.php:162 www/admin/admin_table.php:326
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:228 www/forum/admin/index.php:159
 #: www/forum/admin/index.php:170 www/frs/admin/deletepackage.php:73
-#: www/frs/admin/deleterelease.php:77 www/frs/admin/index.php:182
+#: www/frs/admin/deleterelease.php:77 www/frs/admin/index.php:184
 #: www/frs/admin/showreleases.php:114 www/news/admin/index.php:133
 #: www/people/people_utils.php:177 www/people/people_utils.php:322
 #: www/people/skills_utils.php:46 www/people/skills_utils.php:104
-#: www/pm/admin/index.php:364 www/pm/admin/index.php:375
+#: www/pm/admin/index.php:363 www/pm/admin/index.php:374
 #: www/project/admin/vhost.php:145 www/reporting/timeadd.php:157
 #: www/snippet/detail.php:66 www/survey/include/SurveyHTML.class.php:311
 #: www/tracker/admin/index.php:99 www/tracker/admin/index.php:176
@@ -1481,7 +1481,7 @@ msgstr "Eliminar"
 #: common/widget/WidgetLayoutManager.class.php:529
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:61
 #: plugins/mantisbt/view/admin/addCategory.php:34
-#: plugins/mantisbt/view/admin/addVersion.php:45 www/admin/admin_table.php:54
+#: plugins/mantisbt/view/admin/addVersion.php:47 www/admin/admin_table.php:55
 #: www/admin/database.php:170 www/admin/trove/trove_cat_add.php:123
 #: www/admin/trove/trove_cat_list.php:51 www/admin/trove/trove_cat_list.php:54
 #: www/pm/mod_task.php:289 www/reporting/timeadd.php:174
@@ -1527,15 +1527,15 @@ msgstr "O ficheiro actualizouse correctamente"
 msgid "Forums: No Valid Group Object"
 msgstr "Foro:: o obxecto do grupo non é válido"
 
-#: common/forum/Forum.class.php:150 common/forum/Forum.class.php:559
+#: common/forum/Forum.class.php:150 common/forum/Forum.class.php:560
 msgid "Forum Name Must Be At Least 3 Characters"
 msgstr "O nome do foro debe ter, cando menos, 3 caracteres"
 
-#: common/forum/Forum.class.php:154 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:154 common/forum/Forum.class.php:564
 msgid "Forum Description Must Be At Least 10 Characters"
 msgstr "A descrición do foro debe ter, cando menos, 10 caracteres"
 
-#: common/forum/Forum.class.php:158 common/forum/Forum.class.php:567
+#: common/forum/Forum.class.php:158 common/forum/Forum.class.php:568
 msgid "Illegal Characters in Forum Name"
 msgstr "O nome do foro contén caracteres non permitidos"
 
@@ -1553,25 +1553,25 @@ msgstr "Houbo un erro ao engadir o foro"
 msgid "Welcome to %1$s"
 msgstr "Benvido/a a %1$s"
 
-#: common/forum/Forum.class.php:242
+#: common/forum/Forum.class.php:243
 msgid "Invalid forum group identifier"
 msgstr "O identificador de foro non é válido"
 
-#: common/forum/Forum.class.php:443 common/forum/Forum.class.php:477
+#: common/forum/Forum.class.php:444 common/forum/Forum.class.php:478
 #: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:301
-#: common/tracker/ArtifactType.class.php:550
+#: common/tracker/ArtifactType.class.php:551
 msgid "You can only monitor if you are logged in"
 msgstr "Só pode facer un seguimento se está conectado "
 
-#: common/forum/Forum.class.php:510
+#: common/forum/Forum.class.php:511
 msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr "Só pode gardar o seu lugar se está conectado"
 
-#: common/forum/Forum.class.php:528
+#: common/forum/Forum.class.php:529
 msgid "Forum::savePlace()"
 msgstr "Foro::savePlace()"
 
-#: common/forum/Forum.class.php:603 common/mail/MailingList.class.php:255
+#: common/forum/Forum.class.php:604 common/mail/MailingList.class.php:255
 #: plugins/mailman/include/MailmanList.class.php:250
 #: plugins/mailman/include/MailmanList.class.php:377
 #: plugins/mailman/include/MailmanList.class.php:394
@@ -1580,18 +1580,18 @@ msgstr "Foro::savePlace()"
 msgid "Error On Update:"
 msgstr "Hai un erro na actualización:"
 
-#: common/forum/Forum.class.php:618 common/frs/FRSPackage.class.php:450
-#: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1529
-#: common/mail/MailingList.class.php:386 common/pm/ProjectGroup.class.php:370
+#: common/forum/Forum.class.php:619 common/frs/FRSPackage.class.php:450
+#: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1530
+#: common/mail/MailingList.class.php:390 common/pm/ProjectGroup.class.php:371
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:512
 #: common/tracker/ArtifactExtraField.class.php:429
-#: common/tracker/ArtifactType.class.php:816
+#: common/tracker/ArtifactType.class.php:817
 msgid "Please tick all checkboxes."
 msgstr ""
 
-#: common/forum/Forum.class.php:629 common/forum/Forum.class.php:637
-#: common/forum/Forum.class.php:645 common/forum/Forum.class.php:653
-#: common/forum/Forum.class.php:661 common/forum/Forum.class.php:669
+#: common/forum/Forum.class.php:630 common/forum/Forum.class.php:638
+#: common/forum/Forum.class.php:646 common/forum/Forum.class.php:654
+#: common/forum/Forum.class.php:662 common/forum/Forum.class.php:670
 #, fuzzy
 msgid "Error Deleting Forum:"
 msgstr "Produciuse un erro ao obter o foro "
@@ -1666,8 +1666,8 @@ msgstr "Sen moderación "
 #: common/forum/ForumAdmin.class.php:326
 #: plugins/mantisbt/controler/filter_roadmap.php:60
 #: plugins/mantisbt/controler/filter_roadmap.php:92
-#: plugins/mantisbt/view/admin/editVersion.php:75
-#: plugins/mantisbt/view/admin/editVersion.php:78
+#: plugins/mantisbt/view/admin/editVersion.php:76
+#: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 #, fuzzy
 msgid "Release"
@@ -1680,23 +1680,23 @@ msgstr "Liberacións"
 #: plugins/mailman/www/mailman_utils.php:74
 #: plugins/mailman/www/mailman_utils.php:181
 #: plugins/mantisbt/view/addOrEditNote.php:54
-#: plugins/mantisbt/view/admin/editVersion.php:92
-#: plugins/mantisbt/view/admin/viewConfiguration.php:81
+#: plugins/mantisbt/view/admin/editVersion.php:94
+#: plugins/mantisbt/view/admin/viewConfiguration.php:82
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:42
 #: plugins/mantisbt/view/admin/viewVersion.php:70
 #: plugins/mantisbt/view/adminuser.php:43
 #: plugins/mantisbt/view/editIssue.php:227
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:52
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
 #: www/account/editsshkeys.php:89 www/account/index.php:308
 #: www/account/lostlogin.php:100 www/admin/groupedit.php:230
 #: www/admin/trove/trove_cat_edit.php:152 www/admin/useredit.php:233
 #: www/admin/useredit.php:314 www/admin/vhost.php:189
-#: www/forum/admin/index.php:148 www/frs/admin/index.php:179
-#: www/mail/admin/index.php:227 www/mail/admin/index.php:278
+#: www/forum/admin/index.php:148 www/frs/admin/index.php:181
+#: www/mail/admin/index.php:228 www/mail/admin/index.php:279
 #: www/people/people_utils.php:176 www/people/people_utils.php:321
-#: www/pm/admin/index.php:344 www/pm/calendar.php:293
-#: www/project/admin/database.php:234 www/project/admin/index.php:282
+#: www/pm/admin/index.php:343 www/pm/calendar.php:293
+#: www/project/admin/database.php:234 www/project/admin/index.php:281
 #: www/project/admin/tools.php:289 www/reporting/timecategory.php:98
 #: www/scm/admin/index.php:110
 msgid "Update"
@@ -1750,12 +1750,12 @@ msgstr "Foro:: o obxecto do grupo non é válido"
 msgid "Forum"
 msgstr "Foro "
 
-#: common/forum/ForumFactory.class.php:124
-#: common/forum/ForumFactory.class.php:133
+#: common/forum/ForumFactory.class.php:127
+#: common/forum/ForumFactory.class.php:136
 msgid "You don't have a permission to access this page"
 msgstr "Non ten permiso para acceder a esta páxina"
 
-#: common/forum/ForumFactory.class.php:140
+#: common/forum/ForumFactory.class.php:143
 msgid "Forum not found"
 msgstr "Non se achou o foro "
 
@@ -1804,7 +1804,7 @@ msgstr "Data "
 #: common/tracker/views/form-customizelist.php:43
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/editIssue.php:213
-#: plugins/mantisbt/view/viewIssue.php:101
+#: plugins/mantisbt/view/viewIssue.php:108
 #: plugins/mantisbt/view/viewIssues.php:363 www/my/dashboard.php:64
 #: www/my/diary.php:183 www/pm/browse_task.php:145
 #: www/project/report/index.php:136
@@ -1848,7 +1848,7 @@ msgstr "Foros de discusión: "
 #: plugins/mailman/www/mailman_utils.php:211
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:374
 #: plugins/mantisbt/www/user/index.php:41 www/frs/include/frs_utils.php:78
-#: www/mail/admin/index.php:283 www/mail/mail_utils.php:48
+#: www/mail/admin/index.php:284 www/mail/mail_utils.php:48
 #: www/news/news_utils.php:48 www/pm/include/ProjectGroupHTML.class.php:93
 #: www/pm/include/ProjectGroupHTML.class.php:98
 #: www/scm/include/scm_utils.php:51 www/survey/include/SurveyHTML.class.php:66
@@ -1919,8 +1919,8 @@ msgstr "Mensaxe:"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:156
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:51
-#: www/admin/admin_table.php:58 www/admin/admin_table.php:155
-#: www/admin/admin_table.php:214 www/forum/admin/index.php:398
+#: www/admin/admin_table.php:59 www/admin/admin_table.php:165
+#: www/admin/admin_table.php:224 www/forum/admin/index.php:398
 #: www/forum/monitor.php:65 www/my/rmproject.php:98
 #: www/people/editprofile.php:158 www/people/editprofile.php:217
 #: www/pm/mod_task.php:289 www/register/index.php:296
@@ -2174,8 +2174,8 @@ msgstr ""
 msgid "Database initialisation error:"
 msgstr "Manipulación da base de datos"
 
-#: common/include/Error.class.php:130 common/include/Group.class.php:398
-#: common/include/Group.class.php:465
+#: common/include/Error.class.php:130 common/include/Group.class.php:399
+#: common/include/Group.class.php:466
 msgid "Permission denied."
 msgstr "Permiso denegado. "
 
@@ -2196,35 +2196,35 @@ msgstr "Hai un erro na actualización:"
 msgid "Missing Parameters"
 msgstr "Faltan algúns parámetros"
 
-#: common/include/Group.class.php:223
+#: common/include/Group.class.php:224
 msgid "Group Not Found"
 msgstr "Non se achou o grupo "
 
-#: common/include/Group.class.php:245
+#: common/include/Group.class.php:246
 #, php-format
 msgid "fetchData():: %s"
 msgstr "fetchData():: %s"
 
-#: common/include/Group.class.php:273
+#: common/include/Group.class.php:274
 msgid "Group::create: Group object already exists"
 msgstr "Grupo::create: O obxecto de grupo xa existe"
 
-#: common/include/Group.class.php:278
+#: common/include/Group.class.php:279
 msgid "Invalid Unix name"
 msgstr "O nome unix non é válido"
 
-#: common/include/Group.class.php:281 common/include/Group.class.php:285
+#: common/include/Group.class.php:282 common/include/Group.class.php:286
 #: common/include/User.class.php:283
 msgid "Unix name already taken"
 msgstr "Este nome de unix xa está en uso "
 
-#: common/include/Group.class.php:288
+#: common/include/Group.class.php:289
 msgid ""
 "Please describe your Registration Purpose in a more comprehensive manner"
 msgstr ""
 "Por favor, describa a súa proposta de rexistro dun xeito máis comprensíbel. "
 
-#: common/include/Group.class.php:291
+#: common/include/Group.class.php:292
 msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
@@ -2232,37 +2232,37 @@ msgstr ""
 "O texto da proposta de rexistro é demasiado longo. Debe ter menos de 1500 "
 "bytes."
 
-#: common/include/Group.class.php:294
+#: common/include/Group.class.php:295
 msgid "Describe in a more comprehensive manner your project."
 msgstr "Describa o seu proxecto dun modo máis comprensivo."
 
-#: common/include/Group.class.php:338
+#: common/include/Group.class.php:339
 #, php-format
 msgid "ERROR: Could not create group: %s"
 msgstr "ERRO: Non se puido crear o grupo: %s"
 
-#: common/include/Group.class.php:345
+#: common/include/Group.class.php:346
 #, php-format
 msgid "ERROR: Could not get group id: %s"
 msgstr "ERRO: non se atopou o id de grupo: %s"
 
-#: common/include/Group.class.php:393 common/include/Group.class.php:460
+#: common/include/Group.class.php:394 common/include/Group.class.php:461
 msgid "Could not get permission."
 msgstr "Non se puido obter autorización."
 
-#: common/include/Group.class.php:414
+#: common/include/Group.class.php:415
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
 msgstr "ERRO: BD: non se puideron cambiar as propiedades de grupo: %s"
 
-#: common/include/Group.class.php:479
+#: common/include/Group.class.php:480
 #, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
 msgstr[0] "O novo enderezo de documento non parece válido: %s"
 msgstr[1] "Os novos enderezos de documentos non parecen válidos: %s"
 
-#: common/include/Group.class.php:532
+#: common/include/Group.class.php:533
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
@@ -2270,39 +2270,39 @@ msgstr ""
 "Houbo un erro actualizando a información do proxecto: A lonxitude máxima "
 "para a descrición do proxecto é de 255 caracteres."
 
-#: common/include/Group.class.php:576
+#: common/include/Group.class.php:577
 #, php-format
 msgid "Error updating project information: %s"
 msgstr "Houbo un erro actualizando a información do proxecto: %s"
 
-#: common/include/Group.class.php:582
+#: common/include/Group.class.php:583
 #, fuzzy, php-format
 msgid "Error updating project information: use_docman %s"
 msgstr "Houbo un erro actualizando a información do proxecto: %s"
 
-#: common/include/Group.class.php:601
+#: common/include/Group.class.php:602
 #, fuzzy
 msgid "Error updating project information in plugin_hook group_update"
 msgstr "Houbo un erro actualizando a información do proxecto: %s"
 
-#: common/include/Group.class.php:689
+#: common/include/Group.class.php:690
 msgid "Invalid Status Change"
 msgstr "Cambio no estado non válido"
 
-#: common/include/Group.class.php:700
+#: common/include/Group.class.php:701
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
 msgstr "ERRO: BD: Non se puido cambiar o estado de grupo: %s"
 
-#: common/include/Group.class.php:911
+#: common/include/Group.class.php:912
 msgid "Couldn't insert SCM_BOX to database"
 msgstr "Non se puido inserir SCM_BOX na base de datos"
 
-#: common/include/Group.class.php:915
+#: common/include/Group.class.php:916
 msgid "SCM Box can't be empty"
 msgstr "A caixa de SCM non pode estar baleira "
 
-#: common/include/Group.class.php:1497
+#: common/include/Group.class.php:1498
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
@@ -2310,161 +2310,161 @@ msgstr ""
 "Nome de etiqueta non válido. Só se poden empregar os seguintes caracteres: "
 "[A-Z][a-z][0-9]-_&'#+. e espazo"
 
-#: common/include/Group.class.php:1506
+#: common/include/Group.class.php:1507
 #, fuzzy
 msgid "Setting tags:"
 msgstr "Estabelecendo as etiquetas: "
 
-#: common/include/Group.class.php:1536
+#: common/include/Group.class.php:1537
 msgid "Cannot Delete System Group"
 msgstr "Non se pode borrar o grupo de sistema"
 
-#: common/include/Group.class.php:1558
+#: common/include/Group.class.php:1559
 #, fuzzy
 msgid "Could not properly remove member:"
 msgstr "Non se puido eliminar a lista de correo adecuadamente"
 
-#: common/include/Group.class.php:1583
+#: common/include/Group.class.php:1584
 #, fuzzy
 msgid "Could not properly delete the tracker:"
 msgstr "Non se puido eliminar a lista de correo adecuadamente"
 
-#: common/include/Group.class.php:1597
+#: common/include/Group.class.php:1598
 #, fuzzy
 msgid "Could not properly delete the forum:"
 msgstr "Non se puido eliminar a lista de correo adecuadamente"
 
-#: common/include/Group.class.php:1611
+#: common/include/Group.class.php:1612
 #, fuzzy
 msgid "Could not properly delete the ProjectGroup:"
 msgstr "Non se puido eliminar a lista de correo adecuadamente"
 
-#: common/include/Group.class.php:1621
+#: common/include/Group.class.php:1622
 #, fuzzy
 msgid "Error FRS Packages: "
 msgstr "Produciuse un erro ao obter a mensaxe do foro "
 
-#: common/include/Group.class.php:1629
+#: common/include/Group.class.php:1630
 #, fuzzy
 msgid "Could not properly delete the FRSPackage:"
 msgstr "Non se puido eliminar a lista de correo adecuadamente"
 
-#: common/include/Group.class.php:1640 common/include/Group.class.php:1655
+#: common/include/Group.class.php:1641 common/include/Group.class.php:1656
 #, fuzzy
 msgid "Error Deleting News: "
 msgstr "Produciuse un erro ao obter o novo foro"
 
-#: common/include/Group.class.php:1648
+#: common/include/Group.class.php:1649
 #, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr "Non se puido eliminar o foro de novas: %d"
 
-#: common/include/Group.class.php:1666 common/include/Group.class.php:1674
+#: common/include/Group.class.php:1667 common/include/Group.class.php:1675
 #, fuzzy
 msgid "Error Deleting Documents: "
 msgstr "Erro inserindo un elemento"
 
-#: common/include/Group.class.php:1684
+#: common/include/Group.class.php:1685
 #, fuzzy
 msgid "Error Deleting Tags: "
 msgstr "Erro inserindo un elemento"
 
-#: common/include/Group.class.php:1695
+#: common/include/Group.class.php:1696
 #, fuzzy
 msgid "Error Deleting Project History: "
 msgstr "Houbo un erro actualizando a información do proxecto: %s"
 
-#: common/include/Group.class.php:1706
+#: common/include/Group.class.php:1707
 #, fuzzy
 msgid "Error Deleting Project Plugins: "
 msgstr "Erro ao obter o obxecto de membro: %s"
 
-#: common/include/Group.class.php:1717
+#: common/include/Group.class.php:1718
 #, fuzzy
 msgid "Error Deleting SCM Statistics: "
 msgstr "Produciuse un erro ao obter a lista"
 
-#: common/include/Group.class.php:1732
+#: common/include/Group.class.php:1733
 #, fuzzy
 msgid "Could not properly delete the survey"
 msgstr "Non se puido eliminar a lista de correo adecuadamente"
 
-#: common/include/Group.class.php:1747
+#: common/include/Group.class.php:1748
 #, fuzzy
 msgid "Could not properly delete the survey questions"
 msgstr "Non se puido eliminar a lista de correo adecuadamente"
 
-#: common/include/Group.class.php:1762
+#: common/include/Group.class.php:1763
 #: plugins/mailman/include/mailmanPlugin.class.php:200
 msgid "Could not properly delete the mailing list"
 msgstr "Non se puido eliminar a lista de correo adecuadamente"
 
-#: common/include/Group.class.php:1773 common/include/Group.class.php:1781
+#: common/include/Group.class.php:1774 common/include/Group.class.php:1782
 #, fuzzy
 msgid "Error Deleting Trove: "
 msgstr "Produciuse un erro ao crear o grupo"
 
-#: common/include/Group.class.php:1792
+#: common/include/Group.class.php:1793
 #, fuzzy
 msgid "Error Deleting Counters: "
 msgstr "Produciuse un erro ao crear a mensaxe de foro:"
 
-#: common/include/Group.class.php:1802 common/include/Group.class.php:1811
+#: common/include/Group.class.php:1803 common/include/Group.class.php:1812
 #, fuzzy
 msgid "Error Deleting Project:"
 msgstr "Erro ao obter o obxecto de membro: %s"
 
-#: common/include/Group.class.php:1883
+#: common/include/Group.class.php:1884
 msgid "User is not active. Only active users can be added."
 msgstr "O usuario non está activo. Só se poden engadir usuarios activos."
 
-#: common/include/Group.class.php:1895
+#: common/include/Group.class.php:1896
 msgid "Error Getting Role Object"
 msgstr "Erro obtendo o obxecto de Rol"
 
-#: common/include/Group.class.php:1924
+#: common/include/Group.class.php:1925
 msgid "ERROR: User does not exist"
 msgstr "ERRO: O usuario non existe"
 
-#: common/include/Group.class.php:1972 common/include/Group.class.php:2091
+#: common/include/Group.class.php:1973 common/include/Group.class.php:2092
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr "ERRO: non se eliminou o usuario: %s"
 
-#: common/include/Group.class.php:1994
+#: common/include/Group.class.php:1995
 #, fuzzy
 msgid "ERROR: DB: artifact:"
 msgstr "ERRO: BD: artefacto: %s"
 
-#: common/include/Group.class.php:2015 common/include/Group.class.php:2028
+#: common/include/Group.class.php:2016 common/include/Group.class.php:2029
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr "ERRO: BD: project_assigned_to %d: %s"
 
-#: common/include/Group.class.php:2071 www/admin/globalroledelete.php:37
+#: common/include/Group.class.php:2072 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:41 www/project/admin/roledelete.php:46
 #: www/project/admin/roleedit.php:53
 msgid "Could Not Get Role"
 msgstr "Non se puido obter o Rol"
 
-#: common/include/Group.class.php:2074
+#: common/include/Group.class.php:2075
 #, php-format
 msgid "Role: %s"
 msgstr "Rol: %s"
 
-#: common/include/Group.class.php:2078
+#: common/include/Group.class.php:2079
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2184
+#: common/include/Group.class.php:2185
 msgid "Group already active"
 msgstr "Este grupo xa está activo"
 
-#: common/include/Group.class.php:2424 common/include/Group.class.php:2495
+#: common/include/Group.class.php:2447 common/include/Group.class.php:2518
 msgid "Group does not have any administrators."
 msgstr "O grupo non ten ningún administrador."
 
-#: common/include/Group.class.php:2432
+#: common/include/Group.class.php:2455
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -2539,12 +2539,12 @@ msgstr ""
 "\n"
 "-- o equipo de %4$s"
 
-#: common/include/Group.class.php:2468
+#: common/include/Group.class.php:2491
 #, php-format
 msgid "%1$s Project Approved"
 msgstr "O proxecto %1$s foi aprobado "
 
-#: common/include/Group.class.php:2502
+#: common/include/Group.class.php:2525
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -2563,21 +2563,21 @@ msgstr ""
 "Razóns para o denegar:\n"
 "\n"
 
-#: common/include/Group.class.php:2521
+#: common/include/Group.class.php:2544
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "O proxecto %1$s foi denegado "
 
-#: common/include/Group.class.php:2545
+#: common/include/Group.class.php:2568
 msgid "Could not find user who has submitted the project."
 msgstr "Non foi posíbel atopar o usuario que enviou o proxecto."
 
-#: common/include/Group.class.php:2552
+#: common/include/Group.class.php:2575
 #, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "Non hai ningún administrador a quen enviarlle o correo."
 
-#: common/include/Group.class.php:2560
+#: common/include/Group.class.php:2583
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -2594,12 +2594,12 @@ msgstr ""
 "Visite o seguinte URL para aprobar ou rexeitar este proxecto:\n"
 "%4$s"
 
-#: common/include/Group.class.php:2570
+#: common/include/Group.class.php:2593
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Enviados por %1$s (%2$s)"
 
-#: common/include/Group.class.php:2576
+#: common/include/Group.class.php:2599
 #, php-format
 msgid ""
 "\n"
@@ -2607,12 +2607,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2580 common/include/Group.class.php:2595
+#: common/include/Group.class.php:2603 common/include/Group.class.php:2618
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "Novo proxecto %1$s enviado"
 
-#: common/include/Group.class.php:2588
+#: common/include/Group.class.php:2611
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -2631,39 +2631,39 @@ msgstr ""
 "O equipo de administración de %1$s examinará o seu envío, e notificaráselle "
 "a súa decisión."
 
-#: common/include/Group.class.php:2613
+#: common/include/Group.class.php:2636
 msgid "Group name is too short"
 msgstr "O nome de grupo é demasiado corto"
 
-#: common/include/Group.class.php:2616
+#: common/include/Group.class.php:2639
 msgid "Group name is too long"
 msgstr "O nome de grupo é demasiado longo"
 
-#: common/include/Group.class.php:2619
+#: common/include/Group.class.php:2642
 msgid "Group name already taken"
 msgstr "O nome de grupo xa está en uso"
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2724
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2764
+#: common/include/Group.class.php:2787
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2782
+#: common/include/Group.class.php:2805
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group UseWebdab Status: %s"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2800
+#: common/include/Group.class.php:2823
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group UseDocmanSearch Status: %s"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2818
+#: common/include/Group.class.php:2841
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group force_docman_reindex %s"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
@@ -2974,32 +2974,32 @@ msgstr ""
 msgid "More than one value for the plugin + key"
 msgstr ""
 
-#: common/include/RBAC.php:199
+#: common/include/RBAC.php:200
 #, fuzzy
 msgid "Can't link to home project"
 msgstr "Nome unix do proxecto:"
 
-#: common/include/RBAC.php:224
+#: common/include/RBAC.php:235
 #, fuzzy
 msgid "Can't unlink from home project"
 msgstr "Todos os rexistros dos meus proxectos"
 
-#: common/include/RBAC.php:735
+#: common/include/RBAC.php:752
 #, php-format
 msgid "%s (global role)"
 msgstr ""
 
-#: common/include/RBAC.php:739
+#: common/include/RBAC.php:756
 #, fuzzy, php-format
 msgid "%s (in project %s)"
 msgstr "Proxectos de %1$s"
 
-#: common/include/RBAC.php:1029
+#: common/include/RBAC.php:1047
 #, fuzzy
 msgid "Anonymous/not logged in"
 msgstr "Debe ter iniciado sesión primeiro"
 
-#: common/include/RBAC.php:1077
+#: common/include/RBAC.php:1095
 #, fuzzy
 msgid "Any user logged in"
 msgstr "Debe ter iniciado sesión primeiro"
@@ -3053,15 +3053,15 @@ msgstr "Historial do repositorio"
 msgid "Not implemented for this SCM plugin yet."
 msgstr "Aínda non está implementado"
 
-#: common/include/SCMPlugin.class.php:223
+#: common/include/SCMPlugin.class.php:224
 msgid "Repository History"
 msgstr "Historial do repositorio"
 
-#: common/include/SCMPlugin.class.php:224
+#: common/include/SCMPlugin.class.php:225
 msgid "Data about current and past states of the repository"
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:254
+#: common/include/SCMPlugin.class.php:255
 #, fuzzy
 msgid "Enable Anonymous Read Access"
 msgstr "Habilitar acceso anónimo"
@@ -3321,7 +3321,7 @@ msgstr "Árbore de proxectos"
 
 #: common/include/forge_events.php:38
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:55
-#: plugins/mantisbt/view/admin/editVersion.php:60
+#: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49 www/snippet/package.php:170
 #: www/snippet/submit.php:138
 msgid "Version"
@@ -3344,7 +3344,7 @@ msgstr ""
 #: common/include/rbac_texts.php:45 common/include/rbac_texts.php:57
 #: common/include/rbac_texts.php:60 common/include/rbac_texts.php:62
 #: common/include/rbac_texts.php:64
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:224
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:227
 #, fuzzy
 msgid "No administrative access"
 msgstr "Administrativo"
@@ -3360,7 +3360,6 @@ msgstr "Foros: Administración"
 #: common/include/rbac_texts.php:89 common/include/rbac_texts.php:97
 #: common/include/rbac_texts.php:105 common/include/rbac_texts.php:111
 #: common/include/rbac_texts.php:114 common/include/rbac_texts.php:119
-#: common/include/rbac_texts.php:124
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:155
 msgid "No access"
 msgstr "Sen acceso "
@@ -3376,7 +3375,7 @@ msgid "Approve news"
 msgstr "Aprobar/rexeitar "
 
 #: common/include/rbac_texts.php:52
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:204
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:207
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:156
 #, fuzzy
 msgid "Read access"
@@ -3506,15 +3505,6 @@ msgstr "Novo paquete de fragmento"
 msgid "Publish files"
 msgstr "Áreas públicas"
 
-#: common/include/rbac_texts.php:125 plugins/mantisbt/view/viewNote.php:59
-#: plugins/quota_management/www/quota_admin.php:130
-msgid "Modify"
-msgstr "Modificar "
-
-#: common/include/rbac_texts.php:126
-msgid "See"
-msgstr "Ver"
-
 #: common/include/rbac_texts.php:135
 #, fuzzy
 msgid "Forge statistics"
@@ -3544,10 +3534,6 @@ msgstr ""
 msgid "Documentation manager"
 msgstr "Xestión de documentación"
 
-#: common/include/rbac_texts.php:156
-msgid "Webcal"
-msgstr "Webcal"
-
 #: common/include/session.php:138 plugins/authldap/www/post-login.php:88
 msgid "Missing Password Or Users Name"
 msgstr "Falta o contrasinal ou o nome de usuario "
@@ -3574,23 +3560,23 @@ msgstr "Conta eliminada "
 msgid "Account Not Active"
 msgstr "A conta non está activa "
 
-#: common/include/session.php:384
+#: common/include/session.php:398
 msgid "Your account is no longer active ; you have been disconnected"
 msgstr ""
 
-#: common/include/session.php:437
+#: common/include/session.php:451
 #, fuzzy, php-format
 msgid ""
 "Permission denied. The %s administrators will have to grant you permission "
 "to view this page."
 msgstr "O administrador deste proxecto ten que permitirlle ver esta páxina."
 
-#: common/include/session.php:486
+#: common/include/session.php:500
 #, fuzzy
 msgid "Could not fetch user session data"
 msgstr "Non se puido obter autorización."
 
-#: common/include/session.php:514
+#: common/include/session.php:528
 msgid "No admin users ?"
 msgstr ""
 
@@ -3598,11 +3584,11 @@ msgstr ""
 msgid "UTF-8"
 msgstr "UTF-8 "
 
-#: common/include/utils.php:494
+#: common/include/utils.php:486
 msgid "Priority Colors"
 msgstr "Cores das prioridades "
 
-#: common/include/utils.php:494 common/tracker/actions/query.php:403
+#: common/include/utils.php:486 common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-updatecanned.php:43
@@ -3610,49 +3596,49 @@ msgstr "Cores das prioridades "
 msgid ":"
 msgstr ""
 
-#: common/include/utils.php:879 common/include/utils.php:883
-#: common/include/utils.php:894
+#: common/include/utils.php:871 common/include/utils.php:875
+#: common/include/utils.php:886
 msgid "bytes"
 msgstr "bytes"
 
-#: common/include/utils.php:879 common/include/utils.php:894
+#: common/include/utils.php:871 common/include/utils.php:886
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:879
+#: common/include/utils.php:871
 msgid "MB"
 msgstr ""
 
-#: common/include/utils.php:879
+#: common/include/utils.php:871
 msgid "GB"
 msgstr ""
 
-#: common/include/utils.php:879
+#: common/include/utils.php:871
 msgid "TB"
 msgstr ""
 
-#: common/include/utils.php:883 common/include/utils.php:894
+#: common/include/utils.php:875 common/include/utils.php:886
 msgid "KiB"
 msgstr ""
 
-#: common/include/utils.php:883
+#: common/include/utils.php:875
 msgid "MiB"
 msgstr ""
 
-#: common/include/utils.php:883
+#: common/include/utils.php:875
 msgid "GiB"
 msgstr ""
 
-#: common/include/utils.php:883
+#: common/include/utils.php:875
 msgid "TiB"
 msgstr ""
 
-#: common/include/utils.php:1233
+#: common/include/utils.php:1225
 #, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
 msgstr "Xa existe un usuario con este correo electrónico."
 
-#: common/include/utils.php:1249
+#: common/include/utils.php:1241
 #, fuzzy
 msgid "Error: a forum with the same email address already exists."
 msgstr "Xa existe un usuario con este correo electrónico."
@@ -3752,7 +3738,7 @@ msgstr "Produciuse un erro ao obter %1$s"
 msgid "ProjectCategory: name and assignee are Required"
 msgstr "Categoría do proxecto: o nome e a asignación son campos obrigatorios"
 
-#: common/pm/ProjectGroup.class.php:147 common/pm/ProjectGroup.class.php:328
+#: common/pm/ProjectGroup.class.php:147 common/pm/ProjectGroup.class.php:329
 #, fuzzy
 msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "A descrición do documento debe ter, cando menos, 10 caracteres"
@@ -3928,7 +3914,7 @@ msgid "Error: criteria not specified"
 msgstr "Produciuse un erro: non se especificaron criterios"
 
 #: common/search/SearchQuery.class.php:135
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:146
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:147
 msgid "Error: search query too short"
 msgstr "Produciuse un erro: a consulta de busca é demasiado curta"
 
@@ -4020,8 +4006,8 @@ msgstr "Non se achou ningunha pregunta na enquisa"
 #: plugins/mailman/www/index.php:48 www/admin/passedit.php:53
 #: www/admin/passedit.php:61 www/admin/passedit.php:69
 #: www/forum/admin/pendingmsgdetail.php:51
-#: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:152
-#: www/mail/admin/index.php:248 www/snippet/download.php:45
+#: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:153
+#: www/mail/admin/index.php:249 www/snippet/download.php:45
 #: www/survey/admin/question.php:64 www/survey/admin/question.php:66
 #: www/survey/admin/show_csv.php:82 www/survey/admin/show_csv.php:84
 #: www/survey/admin/show_results.php:69 www/survey/admin/show_results.php:73
@@ -4138,7 +4124,7 @@ msgstr "Monitorización de artefacto desactivada"
 #: common/tracker/include/build_submission_form.php:61
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
-#: plugins/mantisbt/view/viewIssue.php:77 www/my/dashboard.php:72
+#: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:72
 #: www/pm/add_task.php:128 www/pm/browse_task.php:241
 #: www/pm/browse_task.php:381 www/pm/detail_task.php:125
 #: www/pm/mod_task.php:173
@@ -4200,8 +4186,8 @@ msgstr "Ningún cambio - cancelouse a actualización"
 msgid "Error updating assigned_to in artifact: "
 msgstr "Houbo un erro actualizando a información do proxecto: %s"
 
-#: common/tracker/Artifact.class.php:1275
-#: common/tracker/Artifact.class.php:1285
+#: common/tracker/Artifact.class.php:1276
+#: common/tracker/Artifact.class.php:1286
 #, fuzzy
 msgid "Status Custom Field Must Be Set"
 msgstr "Eliminouse o campo extra"
@@ -4323,7 +4309,7 @@ msgid "Query does not exist"
 msgstr "A consulta non existe "
 
 #: common/tracker/ArtifactType.class.php:211
-#: common/tracker/ArtifactType.class.php:981
+#: common/tracker/ArtifactType.class.php:982
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr ""
@@ -4331,19 +4317,19 @@ msgstr ""
 "o estado"
 
 #: common/tracker/ArtifactType.class.php:218
-#: common/tracker/ArtifactType.class.php:999
+#: common/tracker/ArtifactType.class.php:1000
 msgid "E-mail address(es) appeared invalid"
 msgstr "O(s) enderezo(s) de correo non semella(n) válido(s) "
 
-#: common/tracker/ArtifactType.class.php:568
+#: common/tracker/ArtifactType.class.php:569
 msgid "Now Monitoring Tracker"
 msgstr "Agora está a monitorizar o rexistro"
 
-#: common/tracker/ArtifactType.class.php:578
+#: common/tracker/ArtifactType.class.php:579
 msgid "Tracker Monitoring Deactivated"
 msgstr "Monitorización do rexistro desactivada"
 
-#: common/tracker/ArtifactType.class.php:992
+#: common/tracker/ArtifactType.class.php:993
 #, fuzzy
 msgid "Tracker name already used"
 msgstr "O nome de grupo xa está en uso"
@@ -4475,18 +4461,18 @@ msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: www/account/pending-resend.php:75 www/activity/index.php:184
-#: www/admin/admin_table.php:212 www/admin/cronman.php:37
+#: www/admin/admin_table.php:222 www/admin/cronman.php:37
 #: www/admin/globalroleedit.php:247 www/admin/index.php:163
 #: www/admin/pending-news.php:172 www/forum/admin/index.php:397
 #: www/include/vote_function.php:281 www/my/bookmark_add.php:50
 #: www/my/bookmark_edit.php:63 www/my/diary.php:191
 #: www/news/admin/index.php:151 www/news/news_utils.php:42
 #: www/news/submit.php:160 www/pm/add_task.php:49 www/pm/add_task.php:144
-#: www/pm/add_task.php:158 www/pm/admin/index.php:216
-#: www/pm/admin/index.php:261 www/pm/admin/index.php:292
+#: www/pm/add_task.php:158 www/pm/admin/index.php:215
+#: www/pm/admin/index.php:260 www/pm/admin/index.php:291
 #: www/pm/deletetask.php:44 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:237 www/project/admin/roledelete.php:85
-#: www/project/admin/roleedit.php:306 www/project/request.php:69
+#: www/project/admin/roleedit.php:308 www/project/request.php:69
 #: www/register/index.php:295 www/survey/include/SurveyHTML.class.php:554
 #: www/tracker/roadmap.php:444
 msgid "Submit"
@@ -4716,7 +4702,7 @@ msgid "Element deleted"
 msgstr "Actualizouse o elemento "
 
 #: common/tracker/actions/browse.php:94 common/tracker/actions/taskmgr.php:142
-#: www/pm/admin/index.php:386 www/pm/index.php:46 www/pm/task.php:86
+#: www/pm/admin/index.php:385 www/pm/index.php:46 www/pm/task.php:86
 #: www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr "Non se puido obter o Factory"
@@ -4752,7 +4738,7 @@ msgstr "ID "
 #: common/tracker/views/form-customizelist.php:46
 #: plugins/mantisbt/view/addIssue.php:73
 #: plugins/mantisbt/view/editIssue.php:128
-#: plugins/mantisbt/view/viewIssue.php:78 www/my/dashboard.php:70
+#: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:70
 #: www/pm/add_task.php:59 www/pm/browse_task.php:130
 #: www/pm/browse_task.php:243 www/pm/browse_task.php:374
 #: www/pm/detail_task.php:68 www/pm/mod_task.php:83
@@ -4921,8 +4907,8 @@ msgstr ""
 "e prema unha vez en \"actualización masiva\". "
 
 #: common/tracker/actions/browse.php:737 common/tracker/actions/browse.php:748
-#: common/tracker/actions/browse.php:752 www/include/html.php:318
-#: www/include/html.php:490 www/include/html.php:681
+#: common/tracker/actions/browse.php:752 www/include/html.php:324
+#: www/include/html.php:496 www/include/html.php:687
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:373
 #: www/pm/browse_task.php:384
 msgid "No Change"
@@ -5103,7 +5089,7 @@ msgstr "Aberto"
 #: plugins/quota_management/www/quota_project.php:230
 #: plugins/scmcvs/common/CVSPlugin.class.php:171
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:216
-#: plugins/scmgit/common/GitPlugin.class.php:263
+#: plugins/scmgit/common/GitPlugin.class.php:264
 #: plugins/scmsvn/common/SVNPlugin.class.php:218 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
 msgid "Total"
@@ -5133,7 +5119,7 @@ msgstr "Ficheiros existentes"
 msgid "Change Log"
 msgstr "Rexistro de cambios "
 
-#: common/tracker/actions/mod.php:180 www/include/html.php:351
+#: common/tracker/actions/mod.php:180 www/include/html.php:357
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
@@ -5257,8 +5243,8 @@ msgstr ""
 msgid "Artifact Could Not Be Created"
 msgstr "Non se puido crear o artefacto"
 
-#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:301
-#: www/pm/admin/index.php:357
+#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:300
+#: www/pm/admin/index.php:356
 msgid "Could Not Get ProjectGroup"
 msgstr "Non se puido obter o grupo do proxecto"
 
@@ -5578,7 +5564,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:357
 #: plugins/blocks/www/index.php:225
 #: plugins/mantisbt/view/admin/addCategory.php:32
-#: plugins/mantisbt/view/admin/addVersion.php:35
+#: plugins/mantisbt/view/admin/addVersion.php:36
 #: plugins/oauthconsumer/www/provider_edit.php:34
 #: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:73
@@ -5587,7 +5573,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_update_page.php:55
 #: plugins/scmcvs/common/CVSPlugin.class.php:151
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:196
-#: plugins/scmgit/common/GitPlugin.class.php:243
+#: plugins/scmgit/common/GitPlugin.class.php:244
 #: plugins/scmsvn/common/SVNPlugin.class.php:198 www/admin/useredit.php:261
 #: www/admin/useredit.php:291 www/project/admin/editimages.php:267
 #: www/reporting/usersummary.php:101
@@ -5600,18 +5586,18 @@ msgstr "Nome"
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:67
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:143
 #: plugins/mantisbt/view/viewAttachment.php:56
-#: plugins/mediawiki/www/plugin_admin.php:157 www/new/index.php:119
+#: plugins/mediawiki/www/plugin_admin.php:158 www/new/index.php:119
 msgid "Download"
 msgstr "Descargar "
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:523
 #: common/tracker/include/ArtifactTypeHtml.class.php:566
 #: common/tracker/include/ArtifactTypeHtml.class.php:728
-#: common/widget/Widget_MyArtifacts.class.php:113 www/admin/pluginman.php:210
-#: www/admin/pluginman.php:229 www/admin/pluginman.php:241
-#: www/admin/pluginman.php:242 www/include/html.php:277
-#: www/include/html.php:431 www/include/html.php:516 www/include/html.php:533
-#: www/include/html.php:567 www/include/html.php:608 www/pm/ganttpage.php:62
+#: common/widget/Widget_MyArtifacts.class.php:115 www/admin/pluginman.php:226
+#: www/admin/pluginman.php:245 www/admin/pluginman.php:258
+#: www/admin/pluginman.php:259 www/include/html.php:283
+#: www/include/html.php:437 www/include/html.php:522 www/include/html.php:539
+#: www/include/html.php:573 www/include/html.php:614 www/pm/ganttpage.php:62
 #: www/tracker/roadmap.php:440
 msgid "None"
 msgstr "Ningún"
@@ -5698,7 +5684,7 @@ msgid "Custom Fields Defined"
 msgstr "Campos personalizados definidos"
 
 #: common/tracker/views/form-addextrafield.php:43
-#: plugins/mantisbt/view/admin/editVersion.php:63
+#: plugins/mantisbt/view/admin/editVersion.php:64
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:102
 #: www/admin/massmail.php:137 www/frs/index.php:179
 #: www/people/editprofile.php:107 www/people/editprofile.php:282
@@ -5906,8 +5892,8 @@ msgstr "Está seguro de querer eliminar esta tarefa?"
 #: plugins/projects-hierarchy/view/admin_project_link.php:62
 #: plugins/projects-hierarchy/view/admin_project_link.php:74
 #: www/admin/groupedit.php:148 www/admin/groupedit.php:168
-#: www/forum/admin/index.php:207 www/mail/admin/index.php:190
-#: www/mail/admin/index.php:221 www/people/editprofile.php:247
+#: www/forum/admin/index.php:207 www/mail/admin/index.php:191
+#: www/mail/admin/index.php:222 www/people/editprofile.php:247
 #: www/survey/admin/show_results_aggregate.php:193
 #: www/survey/include/SurveyHTML.class.php:194
 #: www/survey/include/SurveyHTML.class.php:417
@@ -5967,7 +5953,7 @@ msgstr "Xestionar etiquetas"
 msgid "Set order of releases for %s roadmap:"
 msgstr ""
 
-#: common/tracker/views/form-adminroadmap.php:400 www/frs/admin/index.php:152
+#: common/tracker/views/form-adminroadmap.php:400 www/frs/admin/index.php:153
 msgid "Releases"
 msgstr "Liberacións"
 
@@ -6092,14 +6078,14 @@ msgstr ""
 #: common/tracker/views/form-deletetracker.php:32
 #: www/forum/admin/index.php:168 www/frs/admin/deletepackage.php:67
 #: www/frs/admin/deleterelease.php:75 www/frs/admin/editrelease.php:382
-#: www/pm/admin/index.php:372 www/project/admin/roledelete.php:81
+#: www/pm/admin/index.php:371 www/project/admin/roledelete.php:81
 msgid "I'm Sure"
 msgstr "Estou seguro "
 
 #: common/tracker/views/form-deleteextrafield.php:40
 #: common/tracker/views/form-deletetracker.php:33
 #: www/forum/admin/index.php:169 www/frs/admin/deletepackage.php:70
-#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:373
+#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:372
 msgid "I'm Really Sure"
 msgstr "Estou totalmente seguro "
 
@@ -6358,12 +6344,12 @@ msgstr "Enviado por"
 msgid "assigned to or submitted by me [AS]"
 msgstr ""
 
-#: common/widget/Widget_MyArtifacts.class.php:111
+#: common/widget/Widget_MyArtifacts.class.php:113
 #, fuzzy
 msgid "You have no artifacts"
 msgstr "Non ten ningunha entrada no seu diario "
 
-#: common/widget/Widget_MyArtifacts.class.php:255
+#: common/widget/Widget_MyArtifacts.class.php:257
 msgid "List artifacts you have submitted or assigned to you, by project."
 msgstr ""
 
@@ -6411,6 +6397,13 @@ msgstr "Ningún"
 msgid "Maximum number of SVN commits to display per project"
 msgstr ""
 
+#: common/widget/Widget_MyLatestSvnCommits.class.php:108
+#: plugins/quota_management/www/quota.php:165
+#: plugins/quota_management/www/quota.php:189
+#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:36
+msgid "scm"
+msgstr "scm"
+
 #: common/widget/Widget_MyLatestSvnCommits.class.php:111
 msgid "List SVN commits you have done, by project."
 msgstr ""
@@ -6444,7 +6437,6 @@ msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:102
 #: common/widget/Widget_MyMonitoredForums.class.php:116
-#: common/widget/Widget_MySurveys.class.php:107
 #, fuzzy, php-format
 msgid "%s new"
 msgstr "Engadir novo "
@@ -6569,7 +6561,6 @@ msgid ""
 msgstr ""
 
 #: common/widget/Widget_MyRss.class.php:35
-#: common/widget/Widget_ProjectRss.class.php:41
 msgid ""
 "Allow you to include public rss (or atom) feeds into your personal page."
 msgstr ""
@@ -6578,6 +6569,11 @@ msgstr ""
 #, fuzzy
 msgid "There are no surveys in your projects."
 msgstr "Non hai ningún paquete de ficheiros definido para este proxecto."
+
+#: common/widget/Widget_MySurveys.class.php:107
+#, fuzzy, php-format
+msgid "%d new"
+msgstr "Engadir novo "
 
 #: common/widget/Widget_MySurveys.class.php:116
 #, fuzzy
@@ -6840,7 +6836,7 @@ msgstr "Enquisas "
 #: plugins/scmgit/www/index.php:23 plugins/scmgit/www/index.php:36
 #: www/register/index.php:228 www/scm/admin/index.php:72
 #: www/scm/admin/index.php:89 www/scm/browser.php:30 www/scm/index.php:32
-#: www/scm/viewvc.php:149
+#: www/scm/viewvc.php:162
 msgid "SCM Repository"
 msgstr "Repositorio de SCM "
 
@@ -6857,75 +6853,79 @@ msgid ""
 "service (e.g. total number of open bugs, tasks, ...)"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:99
+#: common/widget/Widget_ProjectRss.class.php:40
+msgid "Include public rss (or atom) feeds into project homepage."
+msgstr ""
+
+#: common/widget/Widget_Rss.class.php:103
 msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:188
+#: common/widget/Widget_Rss.class.php:192
 msgid "less than 1 minute"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:188
-msgid "1 minute"
-msgstr ""
-
-#: common/widget/Widget_Rss.class.php:190
-#, php-format
-msgid "%s minutes ago"
-msgstr ""
-
 #: common/widget/Widget_Rss.class.php:192
-msgid "About one hour"
+msgid "1 minute"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:194
 #, php-format
-msgid "about %s hours"
+msgid "%s minutes ago"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:196
-msgid "About one day"
+msgid "About one hour"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:198
 #, php-format
-msgid "%s days ago"
+msgid "about %s hours"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:200
+msgid "About one day"
+msgstr ""
+
+#: common/widget/Widget_Rss.class.php:202
+#, php-format
+msgid "%s days ago"
+msgstr ""
+
+#: common/widget/Widget_Rss.class.php:204
 #, fuzzy
 msgid "About one month"
 msgstr "Un mes"
 
-#: common/widget/Widget_Rss.class.php:202
+#: common/widget/Widget_Rss.class.php:206
 #, fuzzy, php-format
 msgid "%s months ago"
 msgstr "Último(s) mes(es)"
 
-#: common/widget/Widget_Rss.class.php:204
+#: common/widget/Widget_Rss.class.php:208
 msgid "About one year"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:206
+#: common/widget/Widget_Rss.class.php:210
 #, php-format
 msgid "over %s years"
 msgstr ""
 
-#: cronjobs/homedirs.php:132
+#: cronjobs/homedirs.php:133
 msgid "Default Web Page for groups that haven't setup their page yet"
 msgstr ""
 "Páxina web por omisión para grupos que aínda non definiran a súa páxina"
 
-#: cronjobs/homedirs.php:133
+#: cronjobs/homedirs.php:134
 msgid "Please replace this file with your own website"
 msgstr "Substitúa este ficheiro co seu propio sitio web"
 
-#: cronjobs/homedirs.php:134
+#: cronjobs/homedirs.php:135
 #, php-format
 msgid "Welcome to %s"
 msgstr "Benvido/a a %s"
 
-#: cronjobs/homedirs.php:137
+#: cronjobs/homedirs.php:138
 #, php-format
 msgid ""
 "We're Sorry but this Project hasn't yet uploaded their personal webpage yet. "
@@ -7312,7 +7312,7 @@ msgid ""
 "the web site. They are created manually."
 msgstr ""
 
-#: plugins/blocks/www/index.php:228 www/admin/pluginman.php:191
+#: plugins/blocks/www/index.php:228 www/admin/pluginman.php:206
 #: www/admin/userlist.php:72
 msgid "Active"
 msgstr "Activo "
@@ -8137,9 +8137,9 @@ msgid "Sub projects"
 msgstr "Subproxecto"
 
 #: plugins/extsubproj/view/admin/viewGlobalConfiguration.php:30
-#: plugins/mantisbt/view/admin/viewConfiguration.php:53
+#: plugins/mantisbt/view/admin/viewConfiguration.php:54
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:30
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:30
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:31
 #, fuzzy
 msgid "Manage configuration"
 msgstr "Confirmación do cambio de correo electrónico "
@@ -8604,7 +8604,7 @@ msgid "User account URL"
 msgstr "Rexistro da conta de %1$s "
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
-#: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:129
+#: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:131
 #: www/people/people_utils.php:158 www/people/people_utils.php:299
 #: www/project/admin/users.php:302 www/project/admin/users.php:382
 #: www/project/admin/users.php:442 www/project/admin/users.php:466
@@ -8716,8 +8716,8 @@ msgstr "Está seguro de querer eliminar esta forxa asociada?"
 #: plugins/projects-hierarchy/view/admin_project_link.php:62
 #: plugins/projects-hierarchy/view/admin_project_link.php:74
 #: www/admin/groupedit.php:147 www/admin/groupedit.php:167
-#: www/forum/admin/index.php:208 www/mail/admin/index.php:191
-#: www/mail/admin/index.php:222 www/people/editprofile.php:246
+#: www/forum/admin/index.php:208 www/mail/admin/index.php:192
+#: www/mail/admin/index.php:223 www/people/editprofile.php:246
 #: www/survey/admin/show_results_aggregate.php:207
 #: www/survey/include/SurveyHTML.class.php:195
 #: www/survey/include/SurveyHTML.class.php:419
@@ -9444,7 +9444,7 @@ msgstr "ML: %s"
 msgid "Mailman plugin"
 msgstr "Administración de correos"
 
-#: plugins/mailman/www/admin/deletelist.php:52 www/mail/admin/index.php:229
+#: plugins/mailman/www/admin/deletelist.php:52 www/mail/admin/index.php:230
 msgid "Permanently Delete List"
 msgstr "Eliminar a lista permanentemente"
 
@@ -9464,8 +9464,8 @@ msgstr "Eliminar permanentemente "
 #: plugins/mailman/www/admin/index.php:73
 #: plugins/mailman/www/admin/index.php:94
 #: plugins/mailman/www/admin/index.php:164 www/mail/admin/index.php:62
-#: www/mail/admin/index.php:89 www/mail/admin/index.php:112
-#: www/mail/admin/index.php:207
+#: www/mail/admin/index.php:89 www/mail/admin/index.php:113
+#: www/mail/admin/index.php:208
 msgid "Error getting the list"
 msgstr "Produciuse un erro ao obter a lista"
 
@@ -9478,11 +9478,11 @@ msgstr "Actualizouse a lista"
 msgid "List Added"
 msgstr "Engadiuse a lista"
 
-#: plugins/mailman/www/admin/index.php:106 www/mail/admin/index.php:100
+#: plugins/mailman/www/admin/index.php:106 www/mail/admin/index.php:101
 msgid "List updated"
 msgstr "Actualizouse a lista"
 
-#: plugins/mailman/www/admin/index.php:116 www/mail/admin/index.php:135
+#: plugins/mailman/www/admin/index.php:116 www/mail/admin/index.php:136
 msgid "Add a Mailing List"
 msgstr "Engadir unha lista de correo"
 
@@ -9497,39 +9497,39 @@ msgstr ""
 "%1$s</strong></p><p>Levará <span class=\"important\">de 6 a 24 horas</span> "
 "crear esta lista.</p>"
 
-#: plugins/mailman/www/admin/index.php:131 www/mail/admin/index.php:152
+#: plugins/mailman/www/admin/index.php:131 www/mail/admin/index.php:153
 msgid "Unable to get the lists"
 msgstr "Non se puido obter as listas"
 
-#: plugins/mailman/www/admin/index.php:144 www/mail/admin/index.php:186
+#: plugins/mailman/www/admin/index.php:144 www/mail/admin/index.php:187
 msgid "Mailing List Name:"
 msgstr "Nome da lista de correo:"
 
 #: plugins/mailman/www/admin/index.php:147
-#: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:189
-#: www/mail/admin/index.php:220
+#: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:190
+#: www/mail/admin/index.php:221
 msgid "Is Public?"
 msgstr "É público?"
 
-#: plugins/mailman/www/admin/index.php:153 www/mail/admin/index.php:195
+#: plugins/mailman/www/admin/index.php:153 www/mail/admin/index.php:196
 msgid "Add This List"
 msgstr "Engadir esta lista"
 
-#: plugins/mailman/www/admin/index.php:169 www/mail/admin/index.php:213
+#: plugins/mailman/www/admin/index.php:169 www/mail/admin/index.php:214
 msgid "Mail admin"
 msgstr "Administración de correos"
 
-#: plugins/mailman/www/admin/index.php:200 www/mail/admin/index.php:242
+#: plugins/mailman/www/admin/index.php:200 www/mail/admin/index.php:243
 msgid "Mailing List Administration"
 msgstr "Administración de listas de correos"
 
 #: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:48
-#: www/mail/admin/index.php:248
+#: www/mail/admin/index.php:249
 #, php-format
 msgid "Unable to get the list %s"
 msgstr "Non se puido obter a lista de correo %s"
 
-#: plugins/mailman/www/admin/index.php:213 www/mail/admin/index.php:253
+#: plugins/mailman/www/admin/index.php:213 www/mail/admin/index.php:254
 #, php-format
 msgid ""
 "You can administrate lists from here. Please note that private lists can "
@@ -9538,7 +9538,7 @@ msgstr ""
 "Pode administrar as listas desde aquí. Teña en conta que os membros do seu "
 "proxecto poderán ver as listas privadas, pero estas non aparecerán en %1$s."
 
-#: plugins/mailman/www/admin/index.php:216 www/mail/admin/index.php:256
+#: plugins/mailman/www/admin/index.php:216 www/mail/admin/index.php:257
 msgid "Add Mailing List"
 msgstr "Engadir lista de correo"
 
@@ -9625,7 +9625,7 @@ msgid "Administrate"
 msgstr "Administrar"
 
 #: plugins/mailman/www/mailman_utils.php:112
-#: plugins/mailman/www/mailman_utils.php:172 www/mail/admin/index.php:281
+#: plugins/mailman/www/mailman_utils.php:172 www/mail/admin/index.php:282
 #: www/mail/index.php:91
 msgid "Not activated yet"
 msgstr "Aínda non se activou"
@@ -9657,82 +9657,83 @@ msgid "Administrate from Mailman"
 msgstr "Administración"
 
 #: plugins/mantisbt/action/addAttachment.php:36
-#, fuzzy
-msgid "Task Successed"
-msgstr "Actualizouse correctamente "
-
-#: plugins/mantisbt/action/addAttachment.php:38
-#: plugins/mantisbt/action/addCategory.php:38
-#: plugins/mantisbt/action/addIssue.php:46
-#: plugins/mantisbt/action/addIssue.php:135
-#: plugins/mantisbt/action/addNote.php:58
-#: plugins/mantisbt/action/addVersion.php:57
-#: plugins/mantisbt/action/addVersion.php:64
-#: plugins/mantisbt/action/deleteAttachment.php:38
-#: plugins/mantisbt/action/deleteNote.php:36
-#: plugins/mantisbt/action/updateIssue.php:179
-#: plugins/mantisbt/action/updateNote.php:36
-#: plugins/mantisbt/action/updateNote.php:62
-#: plugins/mantisbt/action/updateVersion.php:61
-#, fuzzy
-msgid "Task failed:"
-msgstr "Detalles da tarefa"
-
-#: plugins/mantisbt/action/addCategory.php:41
-#, fuzzy
-msgid "Category added successfully"
-msgstr "Engadiuse o usuario correctamente"
-
-#: plugins/mantisbt/action/addCategory.php:44
-#: plugins/mantisbt/action/renameCategory.php:45
-#, fuzzy
-msgid "Missing category name"
-msgstr "Esqueceu un parámetro "
-
-#: plugins/mantisbt/action/addIssue.php:132
-msgid "Ticket "
-msgstr ""
-
-#: plugins/mantisbt/action/addNote.php:56
-#, fuzzy
-msgid "Note added successfully"
-msgstr "Engadiuse o usuario correctamente"
-
-#: plugins/mantisbt/action/addVersion.php:67
+#: plugins/mantisbt/action/addVersion.php:70
+#: plugins/mantisbt/action/updateIssue.php:183
+#: plugins/mantisbt/action/updateNote.php:65
+#: plugins/mantisbt/action/updateVersion.php:62
 #, fuzzy
 msgid "Task succeeded."
 msgstr "Eliminouse a tarefa correctamente"
 
-#: plugins/mantisbt/action/addVersion.php:70
+#: plugins/mantisbt/action/addAttachment.php:38
+#: plugins/mantisbt/action/addCategory.php:39
+#: plugins/mantisbt/action/addIssue.php:129
+#: plugins/mantisbt/action/addNote.php:59
+#: plugins/mantisbt/action/addVersion.php:67
+#: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
+#: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
+#: plugins/mantisbt/action/updateIssue.php:179
+#: plugins/mantisbt/action/updateNote.php:37
+#: plugins/mantisbt/action/updateNote.php:61
+#: plugins/mantisbt/action/updateVersion.php:59
+#, fuzzy
+msgid "Task failed:"
+msgstr "Detalles da tarefa"
+
+#: plugins/mantisbt/action/addCategory.php:42
+#, fuzzy
+msgid "Category added successfully"
+msgstr "Engadiuse o usuario correctamente"
+
+#: plugins/mantisbt/action/addCategory.php:45
+#, fuzzy
+msgid "Missing category name"
+msgstr "Esqueceu un parámetro "
+
+#: plugins/mantisbt/action/addIssue.php:47
+#, fuzzy
+msgid "Task failed"
+msgstr "Detalles da tarefa"
+
+#: plugins/mantisbt/action/addIssue.php:47 www/tracker/roadmap.php:468
+msgid ": "
+msgstr ""
+
+#: plugins/mantisbt/action/addIssue.php:126
+msgid "Ticket "
+msgstr ""
+
+#: plugins/mantisbt/action/addNote.php:57
+#, fuzzy
+msgid "Note added successfully."
+msgstr "Engadiuse o usuario correctamente"
+
+#: plugins/mantisbt/action/addVersion.php:73
 #, fuzzy
 msgid "Missing version."
 msgstr "Faltan algúns parámetros"
 
 #: plugins/mantisbt/action/deleteAttachment.php:36
 #, fuzzy
-msgid "Attachment deleted successfully"
+msgid "Attachment deleted successfully."
 msgstr "Eliminouse o artefacto correctamente"
 
 #: plugins/mantisbt/action/deleteAttachment.php:43
 #, fuzzy
-msgid "Missing Attachment ID to delete"
+msgid "Missing Attachment ID to delete."
 msgstr "Eliminouse o anexo"
 
-#: plugins/mantisbt/action/deleteCategory.php:36
-#: plugins/mantisbt/action/deleteVersion.php:40
-#: plugins/mantisbt/action/renameCategory.php:39
-#, fuzzy
-msgid "Error:"
-msgstr "Erro "
-
-#: plugins/mantisbt/action/deleteCategory.php:39
+#: plugins/mantisbt/action/deleteCategory.php:40
 #, fuzzy, php-format
-msgid "Category %s deleted successfully"
+msgid "Category %s deleted successfully."
 msgstr "Eliminouse correctamente a habelencia de traballo"
 
-#: plugins/mantisbt/action/deleteCategory.php:42
+#: plugins/mantisbt/action/deleteCategory.php:43
 #, fuzzy
-msgid "Missing parameters to delete category"
+msgid "Missing parameters to delete category."
 msgstr "Faltan algúns parámetros"
 
 #: plugins/mantisbt/action/deleteNote.php:39
@@ -9740,17 +9741,17 @@ msgstr "Faltan algúns parámetros"
 msgid "Note deleted successfully"
 msgstr "Eliminouse a habelencia correctamente"
 
-#: plugins/mantisbt/action/deleteVersion.php:43
+#: plugins/mantisbt/action/deleteVersion.php:44
 #, fuzzy
-msgid "Version deleted successfully"
+msgid "Version deleted successfully."
 msgstr "Eliminouse a habelencia correctamente"
 
-#: plugins/mantisbt/action/deleteVersion.php:46
+#: plugins/mantisbt/action/deleteVersion.php:47
 #, fuzzy
-msgid "Missing parameters to delete version"
+msgid "Missing parameters to delete version."
 msgstr "Faltan algúns parámetros"
 
-#: plugins/mantisbt/action/init.php:39
+#: plugins/mantisbt/action/init.php:41
 #, fuzzy
 msgid "MantisBT plugin successfully initialized."
 msgstr "Eliminouse a tarefa correctamente"
@@ -9764,18 +9765,28 @@ msgstr ""
 msgid "MantisBT User successfully initialized."
 msgstr "Eliminouse a tarefa correctamente"
 
-#: plugins/mantisbt/action/renameCategory.php:42
+#: plugins/mantisbt/action/renameCategory.php:37
 #, fuzzy
-msgid "Category renamed successfully"
+msgid "No action, same category name."
+msgstr "Esqueceu un parámetro "
+
+#: plugins/mantisbt/action/renameCategory.php:47
+#, fuzzy
+msgid "Category renamed successfully."
 msgstr "Creouse correctamente "
 
-#: plugins/mantisbt/action/updateConf.php:41
+#: plugins/mantisbt/action/renameCategory.php:50
+#, fuzzy
+msgid "Missing category name."
+msgstr "Esqueceu un parámetro "
+
+#: plugins/mantisbt/action/updateConf.php:39
 #, fuzzy
 msgid "MantisBT configuration successfully updated."
 msgstr "Creouse o elemento correctamente"
 
 #: plugins/mantisbt/action/updateGlobalConf.php:33
-#: plugins/projects-hierarchy/actions/updateGlobalConf.php:32
+#: plugins/projects-hierarchy/actions/updateGlobalConf.php:33
 #, fuzzy
 msgid "Failed to update global configuration."
 msgstr "Produciuse un erro ao actualizar o marcador. "
@@ -9786,17 +9797,10 @@ msgstr ""
 
 #: plugins/mantisbt/action/updateIssue.php:45
 #, fuzzy
-msgid "No type found"
+msgid "No type found."
 msgstr "Non se atoparon elementos"
 
-#: plugins/mantisbt/action/updateIssue.php:183
-#: plugins/mantisbt/action/updateNote.php:66
-#: plugins/mantisbt/action/updateVersion.php:64
-#, fuzzy
-msgid "Task succeeded"
-msgstr "Eliminouse a tarefa correctamente"
-
-#: plugins/mantisbt/action/updateuserConf.php:33
+#: plugins/mantisbt/action/updateuserConf.php:34
 #, fuzzy
 msgid "MantisBT User configuration successfully updated."
 msgstr "Creouse o elemento correctamente"
@@ -9894,12 +9898,21 @@ msgstr "Estatísticas agregadas de todo o sitio"
 msgid "Site Global MantisBT Admin"
 msgstr "Ver o calendario web persoal"
 
-#: plugins/mantisbt/common/MantisBTPlugin.class.php:636
+#: plugins/mantisbt/common/MantisBTPlugin.class.php:450
+msgid "MantisBT project not initialized, missing params"
+msgstr ""
+
+#: plugins/mantisbt/common/MantisBTPlugin.class.php:552
+#, fuzzy
+msgid "MantisBT project not found"
+msgstr "Erro: non se atopou o foro"
+
+#: plugins/mantisbt/common/MantisBTPlugin.class.php:649
 #, fuzzy
 msgid "Global MantisBT admin"
 msgstr "Administración de Mantis"
 
-#: plugins/mantisbt/common/MantisBTPlugin.class.php:636
+#: plugins/mantisbt/common/MantisBTPlugin.class.php:649
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
@@ -9929,13 +9942,13 @@ msgstr "Aínda non está implementado"
 #: plugins/mantisbt/view/addIssue.php:62
 #: plugins/mantisbt/view/addOrEditNote.php:46
 #: plugins/mantisbt/view/admin/StatPerStatus.php:39
-#: plugins/mantisbt/view/admin/editVersion.php:42
+#: plugins/mantisbt/view/admin/editVersion.php:43
 #: plugins/mantisbt/view/admin/viewCategorie.php:39
 #: plugins/mantisbt/view/admin/viewVersion.php:40
 #: plugins/mantisbt/view/editIssue.php:65 plugins/mantisbt/view/roadmap.php:39
 #: plugins/mantisbt/view/roadmap.php:92
 #: plugins/mantisbt/view/viewAttachment.php:38
-#: plugins/mantisbt/view/viewIssue.php:40
+#: plugins/mantisbt/view/viewIssue.php:42
 #: plugins/mantisbt/view/viewIssues.php:64
 #: plugins/mantisbt/www/admin/index.php:45
 msgid "Technical error occurs during data retrieving:"
@@ -9978,8 +9991,8 @@ msgstr "Versión:"
 
 #: plugins/mantisbt/controler/filter_roadmap.php:62
 #: plugins/mantisbt/controler/filter_roadmap.php:94
-#: plugins/mantisbt/view/admin/editVersion.php:76
-#: plugins/mantisbt/view/admin/editVersion.php:79
+#: plugins/mantisbt/view/admin/editVersion.php:77
+#: plugins/mantisbt/view/admin/editVersion.php:80
 #: plugins/mantisbt/view/roadmap.php:96 plugins/mantisbt/view/roadmap.php:145
 msgid "Milestone"
 msgstr ""
@@ -9987,7 +10000,7 @@ msgstr ""
 #: plugins/mantisbt/view/addIssue.php:70
 #: plugins/mantisbt/view/admin/viewCategorie.php:49
 #: plugins/mantisbt/view/editIssue.php:88
-#: plugins/mantisbt/view/viewIssue.php:50
+#: plugins/mantisbt/view/viewIssue.php:57
 #: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:49
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editjob.php:163 www/people/people_utils.php:350
@@ -10002,21 +10015,21 @@ msgstr "Categoría"
 
 #: plugins/mantisbt/view/addIssue.php:71
 #: plugins/mantisbt/view/editIssue.php:90
-#: plugins/mantisbt/view/viewIssue.php:52
+#: plugins/mantisbt/view/viewIssue.php:59
 #, fuzzy
 msgid "Reproducibility"
 msgstr "Listaxe de proxectos"
 
 #: plugins/mantisbt/view/addIssue.php:72
 #: plugins/mantisbt/view/editIssue.php:89
-#: plugins/mantisbt/view/viewIssue.php:51
+#: plugins/mantisbt/view/viewIssue.php:58
 #: plugins/mantisbt/view/viewIssues.php:276
 msgid "Severity"
 msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:75
 #: plugins/mantisbt/view/editIssue.php:176
-#: plugins/mantisbt/view/viewIssue.php:55
+#: plugins/mantisbt/view/viewIssue.php:62
 msgid "Found in"
 msgstr ""
 
@@ -10066,22 +10079,17 @@ msgstr "Pechado "
 msgid "Add a new category"
 msgstr "Engadir un proxecto novo"
 
-#: plugins/mantisbt/view/admin/addVersion.php:33
+#: plugins/mantisbt/view/admin/addVersion.php:34
 #, fuzzy
 msgid "Add a new version"
 msgstr "Enviar unha nova versión"
 
-#: plugins/mantisbt/view/admin/addVersion.php:37
-#: plugins/mantisbt/view/admin/editVersion.php:87
-msgid "Cross version (son included)"
-msgstr ""
-
-#: plugins/mantisbt/view/admin/editVersion.php:55
+#: plugins/mantisbt/view/admin/editVersion.php:56
 #, fuzzy
 msgid "Version Detail"
 msgstr "Versión"
 
-#: plugins/mantisbt/view/admin/editVersion.php:62
+#: plugins/mantisbt/view/admin/editVersion.php:63
 #, fuzzy
 msgid "Target date"
 msgstr "Actualizouse o rexistro"
@@ -10101,37 +10109,37 @@ msgstr "Nome verdadeiro "
 msgid "No Categories"
 msgstr "Engadir categorías"
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:58
+#: plugins/mantisbt/view/admin/viewConfiguration.php:59
 #: plugins/mantisbt/view/init.php:65
 msgid "Use the global configuration defined at forge level"
 msgstr ""
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:59
+#: plugins/mantisbt/view/admin/viewConfiguration.php:60
 #: plugins/mantisbt/view/init.php:66
 #, fuzzy
 msgid "Use global configuration"
 msgstr "O hash de confirmación non é válido "
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:66
+#: plugins/mantisbt/view/admin/viewConfiguration.php:67
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:34
 #: plugins/mantisbt/view/init.php:69
 msgid "Specify the Full URL of the MantisBT Web Server."
 msgstr ""
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:70
+#: plugins/mantisbt/view/admin/viewConfiguration.php:71
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:36
 #: plugins/mantisbt/view/init.php:73
 msgid "Specify the user with admin right to be used thru SOAP API."
 msgstr ""
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:74
+#: plugins/mantisbt/view/admin/viewConfiguration.php:75
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:38
 #: plugins/mantisbt/view/adminuser.php:40 plugins/mantisbt/view/init.php:77
 #, fuzzy
 msgid "Specify the password of this user."
 msgstr "O contrasinal é 'anonsvn'"
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:78
+#: plugins/mantisbt/view/admin/viewConfiguration.php:79
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:40
 msgid ""
 "Do you want to sync FusionForge -> MantisBT roles ? Not implemented yet."
@@ -10167,36 +10175,36 @@ msgid "Edit Ticket: "
 msgstr "Editar rol"
 
 #: plugins/mantisbt/view/editIssue.php:91
-#: plugins/mantisbt/view/viewIssue.php:53
+#: plugins/mantisbt/view/viewIssue.php:60
 #, fuzzy
 msgid "Submit Date"
 msgstr "Remitente"
 
 #: plugins/mantisbt/view/editIssue.php:92
-#: plugins/mantisbt/view/viewIssue.php:54
+#: plugins/mantisbt/view/viewIssue.php:61
 #, fuzzy
 msgid "Update Date"
 msgstr "Actualizar "
 
 #: plugins/mantisbt/view/editIssue.php:126
-#: plugins/mantisbt/view/viewIssue.php:76
+#: plugins/mantisbt/view/viewIssue.php:83
 #, fuzzy
 msgid "Reporter"
 msgstr "Informe"
 
 #: plugins/mantisbt/view/editIssue.php:129
-#: plugins/mantisbt/view/viewIssue.php:79 www/include/html.php:349
+#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:355
 #: www/pm/ganttpage.php:159
 msgid "Resolution"
 msgstr "Resolución"
 
 #: plugins/mantisbt/view/editIssue.php:177
-#: plugins/mantisbt/view/viewIssue.php:81
+#: plugins/mantisbt/view/viewIssue.php:88
 msgid "Fixed in"
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:178
-#: plugins/mantisbt/view/viewIssue.php:56
+#: plugins/mantisbt/view/viewIssue.php:63
 #, fuzzy
 msgid "Target"
 msgstr "Grande"
@@ -10206,7 +10214,7 @@ msgid "(max128 char )"
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:221
-#: plugins/mantisbt/view/viewIssue.php:109
+#: plugins/mantisbt/view/viewIssue.php:116
 #, fuzzy
 msgid "Additional Informations"
 msgstr "Información persoal"
@@ -10281,11 +10289,15 @@ msgstr "Este proxecto non ten definida ningunha etiqueta"
 msgid "Add file"
 msgstr "Engadir ficheiro"
 
-#: plugins/mantisbt/view/viewIssue.php:47
+#: plugins/mantisbt/view/viewIssue.php:48
+msgid "Woops: wrong issue id"
+msgstr ""
+
+#: plugins/mantisbt/view/viewIssue.php:54
 msgid "Ticket"
 msgstr ""
 
-#: plugins/mantisbt/view/viewIssue.php:124
+#: plugins/mantisbt/view/viewIssue.php:130
 #, fuzzy
 msgid "Edit ticket"
 msgstr "Directorio ftp do proxecto"
@@ -10308,6 +10320,11 @@ msgstr "Actualizouse a lista"
 #, fuzzy
 msgid "Add a new ticket"
 msgstr "Engadir un proxecto novo"
+
+#: plugins/mantisbt/view/viewNote.php:59
+#: plugins/quota_management/www/quota_admin.php:130
+msgid "Modify"
+msgstr "Modificar "
 
 #: plugins/mantisbt/view/viewNote.php:70
 #, fuzzy
@@ -10374,75 +10391,75 @@ msgstr "Subiuse un ficheiro multimedios"
 msgid "Mediawiki integration in the forge"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:96
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:99
 #, fuzzy
 msgid "Mediawiki Space"
 msgstr "Subiuse un ficheiro multimedios"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:202
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:205
 msgid "Mediawiki read access"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:203
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:206
 msgid "No reading"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:208
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:211
 msgid "Mediawiki write access"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:209
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:212
 #, fuzzy
 msgid "No editing"
 msgstr "Votación"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:210
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:213
 #, fuzzy
 msgid "Edit existing pages only"
 msgstr "Respostas existentes"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:211
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:214
 #, fuzzy
 msgid "Edit and create pages"
 msgstr "Editar a mensaxe "
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:212
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:215
 msgid "Edit, create, move, delete pages"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:216
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:219
 #, fuzzy
 msgid "Mediawiki file upload"
 msgstr "Subiuse un ficheiro multimedios"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:217
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:220
 #, fuzzy
 msgid "No uploading"
 msgstr "Ficheiro para cargar"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:218
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:221
 #, fuzzy
 msgid "Upload permitted"
 msgstr "Enviar ficheiro "
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:219
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:222
 msgid "Upload and re-upload"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:223
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:226
 msgid "Mediawiki administrative tasks"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:225
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:228
 msgid "Edit interface, import XML dumps"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:352
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:355
 #, fuzzy
 msgid "MediaWiki Plugin admin"
 msgstr "Administración de correos"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:372
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:375
 #, fuzzy
 msgid "Mediawiki plugin"
 msgstr "Administración de correos"
@@ -10463,50 +10480,50 @@ msgstr ""
 msgid "Wiki not created yet, please wait for a few minutes."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:34
+#: plugins/mediawiki/www/plugin_admin.php:35
 #, fuzzy
 msgid "Invalid file upload"
 msgstr "o nome do ficheiro non é válido."
 
-#: plugins/mediawiki/www/plugin_admin.php:38
+#: plugins/mediawiki/www/plugin_admin.php:39
 msgid "Not a valid PNG image"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:40
+#: plugins/mediawiki/www/plugin_admin.php:41
 #, php-format
 msgid "Image size is %dx%d pixels, expected %dx%d instead"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:44
+#: plugins/mediawiki/www/plugin_admin.php:45
 msgid "Cannot copy file to target directory"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:47
+#: plugins/mediawiki/www/plugin_admin.php:48
 #, fuzzy
 msgid "Cannot overwrite existing file"
 msgstr "Non se pode eliminar a entrada de separador: %s"
 
-#: plugins/mediawiki/www/plugin_admin.php:53
+#: plugins/mediawiki/www/plugin_admin.php:54
 #, fuzzy
 msgid "Cannot move file to target location"
 msgstr "O ficheiro non pode moverse á posición permanente"
 
-#: plugins/mediawiki/www/plugin_admin.php:55
+#: plugins/mediawiki/www/plugin_admin.php:56
 #, fuzzy
 msgid "New file installed successfully"
 msgstr "Eliminouse correctamente"
 
-#: plugins/mediawiki/www/plugin_admin.php:94
+#: plugins/mediawiki/www/plugin_admin.php:95
 #, fuzzy
 msgid "File successfully removed"
 msgstr "Creouse o elemento correctamente"
 
-#: plugins/mediawiki/www/plugin_admin.php:96
+#: plugins/mediawiki/www/plugin_admin.php:97
 #, fuzzy
 msgid "File removal error"
 msgstr "Produciuse un erro no envío do ficheiro."
 
-#: plugins/mediawiki/www/plugin_admin.php:107
+#: plugins/mediawiki/www/plugin_admin.php:108
 #: www/frs/include/frs_utils.php:224
 #, fuzzy
 msgid ""
@@ -10516,42 +10533,42 @@ msgstr ""
 "O ficheiro enviado excede o tamaño máximo permitido. Contacte coa "
 "administración para enviar este ficheiro. "
 
-#: plugins/mediawiki/www/plugin_admin.php:110
+#: plugins/mediawiki/www/plugin_admin.php:111
 #: www/frs/include/frs_utils.php:227
 msgid "The uploaded file was only partially uploaded."
 msgstr "O ficheiro enviouse só parcialmente. "
 
-#: plugins/mediawiki/www/plugin_admin.php:113
-#: plugins/mediawiki/www/plugin_admin.php:124
+#: plugins/mediawiki/www/plugin_admin.php:114
+#: plugins/mediawiki/www/plugin_admin.php:125
 #: www/frs/include/frs_utils.php:230 www/frs/include/frs_utils.php:268
 msgid "Unknown file upload error."
 msgstr "Produciuse un erro descoñecido no envío do ficheiro."
 
-#: plugins/mediawiki/www/plugin_admin.php:147
+#: plugins/mediawiki/www/plugin_admin.php:148
 msgid "Nightly XML dump"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:149
+#: plugins/mediawiki/www/plugin_admin.php:150
 #, php-format
 msgid "<a href=\"%s\">Download</a> the nightly created XML dump (backup) here."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:156
+#: plugins/mediawiki/www/plugin_admin.php:157
 #, fuzzy
 msgid "Current logo:"
 msgstr "Ficheiro actual"
 
-#: plugins/mediawiki/www/plugin_admin.php:161
+#: plugins/mediawiki/www/plugin_admin.php:162
 #, fuzzy
 msgid "No per-project logo currently installed."
 msgstr "Non hai ningún ficheiro anexo actualmente"
 
-#: plugins/mediawiki/www/plugin_admin.php:169
+#: plugins/mediawiki/www/plugin_admin.php:170
 #, fuzzy
 msgid "Upload a new logo"
 msgstr "Enviar un ficheiro novo "
 
-#: plugins/mediawiki/www/plugin_admin.php:171
+#: plugins/mediawiki/www/plugin_admin.php:172
 #, fuzzy
 msgid ""
 "NOTE: In some browsers you must select the file in the file-upload dialog "
@@ -10561,12 +10578,12 @@ msgstr ""
 "diálogo e premer \"Aceptar\". Se premer dúas veces, non se rexistra o "
 "ficheiro."
 
-#: plugins/mediawiki/www/plugin_admin.php:173
+#: plugins/mediawiki/www/plugin_admin.php:174
 #: www/frs/admin/editrelease.php:287 www/frs/admin/qrs.php:199
 msgid "Upload a new file"
 msgstr "Enviar un ficheiro novo "
 
-#: plugins/mediawiki/www/plugin_admin.php:179
+#: plugins/mediawiki/www/plugin_admin.php:180
 #: www/frs/admin/editrelease.php:302 www/frs/admin/qrs.php:215
 #, php-format
 msgid ""
@@ -10574,25 +10591,25 @@ msgid ""
 "the <a href=\"%2$s\">project's incoming directory</a> (%1$s)."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:181
+#: plugins/mediawiki/www/plugin_admin.php:182
 #: www/frs/admin/editrelease.php:304 www/frs/admin/qrs.php:217
 msgid ""
 "This direct <tt>sftp://</tt> link only works with some browsers, such as "
 "Konqueror."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:182
+#: plugins/mediawiki/www/plugin_admin.php:183
 #: www/frs/admin/editrelease.php:292 www/frs/admin/editrelease.php:305
 #: www/frs/admin/qrs.php:218
 #, fuzzy
 msgid "Choose an already uploaded file:"
 msgstr "Elixa un ficheiro de FTP en lugar do enviar: "
 
-#: plugins/mediawiki/www/plugin_admin.php:188
+#: plugins/mediawiki/www/plugin_admin.php:189
 msgid "… or delete the currently uploaded logo and revert to the site default"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:189
+#: plugins/mediawiki/www/plugin_admin.php:190
 #, fuzzy
 msgid "Upload new logo"
 msgstr "Enviar un ficheiro novo "
@@ -11518,7 +11535,7 @@ msgstr "Creouse o elemento correctamente"
 msgid "Failed to removed parent"
 msgstr ""
 
-#: plugins/projects-hierarchy/actions/updateGlobalConf.php:36
+#: plugins/projects-hierarchy/actions/updateGlobalConf.php:37
 msgid "Projects Hierarchy global configuration successfully updated."
 msgstr ""
 
@@ -11542,51 +11559,51 @@ msgstr "Id da tarefa"
 msgid "Failed to do task."
 msgstr "Non foi posíbel engadir a habelencia"
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:29
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:30
 #, fuzzy
 msgid "Project Hierarchy"
 msgstr "Nome do proxecto"
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:94
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:95
 #, fuzzy
 msgid "Hierarchy Admin"
 msgstr "Téc. e admin. "
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:94
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:600
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:95
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:604
 msgid ""
 "Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf "
 "features)"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:116
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:119
 #, fuzzy
 msgid "Per Category"
 msgstr "Categoría superior "
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:117
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:120
 #, fuzzy
 msgid "Per Hierarchy"
 msgstr "Busca global"
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:118
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:121
 msgid ""
 "Browse per category the available projects. Some projects might not appear "
 "here they do not choose any categories"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:119
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:122
 msgid ""
 "Browse per hierarchy. Projects can share relationship between projects, as "
 "father and sons"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:600
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:604
 #, fuzzy
 msgid "Global Hierarchy admin"
 msgstr "Busca global"
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:617
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:621
 #, fuzzy
 msgid "Site Global Hierarchy Admin"
 msgstr "Busca global"
@@ -11603,20 +11620,20 @@ msgstr "Compartir"
 msgid "Navigation"
 msgstr "Navegación"
 
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:36
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:37
 msgid "Enable Tree in projects tab."
 msgstr ""
 
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:37
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:38
 #, fuzzy
 msgid "Enable Tree"
 msgstr "Habilitar pserver"
 
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:45
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:46
 msgid "Enable hierarchical view for browsing in document manager."
 msgstr ""
 
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:46
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:47
 msgid "Enable docman browsing"
 msgstr ""
 
@@ -11724,12 +11741,12 @@ msgstr ""
 msgid "No pending requests"
 msgstr "Non hai peticións pendentes"
 
-#: plugins/projects-hierarchy/view/docman_project_link.php:30
+#: plugins/projects-hierarchy/view/docman_project_link.php:33
 #, fuzzy
 msgid "Enable hierarchical browsing"
 msgstr "Procurar en "
 
-#: plugins/projects-hierarchy/view/docman_project_link.php:33
+#: plugins/projects-hierarchy/view/docman_project_link.php:36
 #, fuzzy
 msgid "Disable hierarchical browsing"
 msgstr "Motor de busca nos documentos"
@@ -11798,12 +11815,6 @@ msgstr "proxecto"
 #: plugins/quota_management/www/quota.php:163
 msgid "Ftp, Home"
 msgstr "Ftp, Home"
-
-#: plugins/quota_management/www/quota.php:165
-#: plugins/quota_management/www/quota.php:189
-#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:36
-msgid "scm"
-msgstr "scm"
 
 #: plugins/quota_management/www/quota.php:166
 #: plugins/quota_management/www/quota_project.php:305
@@ -12005,7 +12016,7 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:68
 #: plugins/scmcvs/common/CVSPlugin.class.php:64
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:82
-#: plugins/scmgit/common/GitPlugin.class.php:62
+#: plugins/scmgit/common/GitPlugin.class.php:65
 #: plugins/scmsvn/common/SVNPlugin.class.php:80
 #, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
@@ -12074,8 +12085,8 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:108
 #: plugins/scmcpold/common/CpoldPlugin.class.php:73
 #: plugins/scmcvs/common/CVSPlugin.class.php:106
-#: plugins/scmgit/common/GitPlugin.class.php:140
-#: plugins/scmgit/common/GitPlugin.class.php:149
+#: plugins/scmgit/common/GitPlugin.class.php:143
+#: plugins/scmgit/common/GitPlugin.class.php:152
 #: plugins/scmsvn/common/SVNPlugin.class.php:154
 #: plugins/scmsvn/common/SVNPlugin.class.php:163
 msgid "developername"
@@ -12261,7 +12272,7 @@ msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:119
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:154
-#: plugins/scmgit/common/GitPlugin.class.php:196
+#: plugins/scmgit/common/GitPlugin.class.php:199
 #, fuzzy
 msgid "Download the nightly snapshot"
 msgstr "Descargar a instantánea nocturna da árbore CVS"
@@ -12288,7 +12299,7 @@ msgstr "Navegar polo repositorio CVS"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:152
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:197
-#: plugins/scmgit/common/GitPlugin.class.php:244
+#: plugins/scmgit/common/GitPlugin.class.php:245
 #: plugins/scmsvn/common/SVNPlugin.class.php:199
 #: www/stats/site_stats_utils.php:284
 msgid "Adds"
@@ -12393,7 +12404,7 @@ msgstr "Historial do repositorio"
 msgid "Clone: "
 msgstr "ID da forxa"
 
-#: plugins/scmgit/common/GitPlugin.class.php:67
+#: plugins/scmgit/common/GitPlugin.class.php:70
 #, fuzzy
 msgid ""
 "Documentation for Git is available at <a href=\"http://git-scm.com/\">http://"
@@ -12402,12 +12413,12 @@ msgstr ""
 "<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN\") "
 "<a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
 
-#: plugins/scmgit/common/GitPlugin.class.php:71
+#: plugins/scmgit/common/GitPlugin.class.php:74
 #, fuzzy
 msgid "Anonymous Git Access"
 msgstr "Habilitar acceso anónimo"
 
-#: plugins/scmgit/common/GitPlugin.class.php:73
+#: plugins/scmgit/common/GitPlugin.class.php:76
 #, fuzzy
 msgid ""
 "This project's Git repository can be checked out through anonymous access "
@@ -12417,12 +12428,12 @@ msgstr ""
 "repositorio SVN deste proxecto a través de acceso anónimo coas seguintes "
 "ordes.</p>"
 
-#: plugins/scmgit/common/GitPlugin.class.php:87
+#: plugins/scmgit/common/GitPlugin.class.php:90
 #, fuzzy
 msgid "Developer's repository"
 msgstr "Desenvolvedores (en proba) "
 
-#: plugins/scmgit/common/GitPlugin.class.php:90
+#: plugins/scmgit/common/GitPlugin.class.php:93
 msgid ""
 "One of this project's members also has a personal Git repository that can be "
 "checked out anonymously."
@@ -12432,15 +12443,15 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:114
-#: plugins/scmgit/common/GitPlugin.class.php:135
-msgid "Developer GIT Access via SSH"
+#: plugins/scmgit/common/GitPlugin.class.php:117
+#: plugins/scmgit/common/GitPlugin.class.php:138
+msgid "Developer Git Access via SSH"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:117
+#: plugins/scmgit/common/GitPlugin.class.php:120
 #, fuzzy
 msgid ""
-"Only project developers can access the GIT tree via this method. SSH must be "
+"Only project developers can access the Git tree via this method. SSH must be "
 "installed on your client machine. Enter your site password when prompted."
 msgstr ""
 "<p><b>Acceso para desenvolvedores ao Subversion mediante SSH</b></p><p> Só "
@@ -12448,31 +12459,31 @@ msgstr ""
 "Ten que ter instalado SSH na máquina cliente. Introduza o seu contrasinal "
 "cando se lle solicite.</p>"
 
-#: plugins/scmgit/common/GitPlugin.class.php:123
-#: plugins/scmgit/common/GitPlugin.class.php:144
-msgid "Developer GIT Access via HTTP"
-msgstr ""
-
 #: plugins/scmgit/common/GitPlugin.class.php:126
 #: plugins/scmgit/common/GitPlugin.class.php:147
+msgid "Developer Git Access via HTTP"
+msgstr ""
+
+#: plugins/scmgit/common/GitPlugin.class.php:129
+#: plugins/scmgit/common/GitPlugin.class.php:150
 #, fuzzy
 msgid ""
-"Only project developers can access the GIT tree via this method. Enter your "
+"Only project developers can access the Git tree via this method. Enter your "
 "site password when prompted."
 msgstr ""
 "<p><b>Acceso para desenvolvedores ao Subversion mediante DAV</b></p><p> Só "
 "os desenvolvedores do proxecto poden acceder á árbore SVN por este método. "
 "Introduza o seu contrasinal cando se lle solicite.</p>"
 
-#: plugins/scmgit/common/GitPlugin.class.php:130
+#: plugins/scmgit/common/GitPlugin.class.php:133
 msgid ""
 "Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:138
+#: plugins/scmgit/common/GitPlugin.class.php:141
 #, fuzzy
 msgid ""
-"Only project developers can access the GIT tree via this method. SSH must be "
+"Only project developers can access the Git tree via this method. SSH must be "
 "installed on your client machine. Substitute <i>developername</i> with the "
 "proper value. Enter your site password when prompted."
 msgstr ""
@@ -12482,11 +12493,11 @@ msgstr ""
 "<i>nome_do_desenvolvedor</i> co valor axeitado. Introduza o seu contrasinal "
 "cando se lle solicite.</p>"
 
-#: plugins/scmgit/common/GitPlugin.class.php:161
+#: plugins/scmgit/common/GitPlugin.class.php:164
 msgid "Access to your personal repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:164
+#: plugins/scmgit/common/GitPlugin.class.php:167
 #, fuzzy
 msgid ""
 "You have a personal repository for this project, accessible through SSH with "
@@ -12496,11 +12507,11 @@ msgstr ""
 "os desenvolvedores do proxecto poden acceder á árbore SVN por este método. "
 "Introduza o seu contrasinal cando se lle solicite.</p>"
 
-#: plugins/scmgit/common/GitPlugin.class.php:172
+#: plugins/scmgit/common/GitPlugin.class.php:175
 msgid "Request a personal repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:175
+#: plugins/scmgit/common/GitPlugin.class.php:178
 msgid ""
 "You can clone the project repository into a personal one into which you "
 "alone will be able to write.  Other members of the project will only have "
@@ -12509,17 +12520,17 @@ msgid ""
 "time before it is created (less than an hour in most situations)."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:178
+#: plugins/scmgit/common/GitPlugin.class.php:181
 #, php-format
 msgid "<a href=\"%s\">Request a personal repository</a>."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:220
+#: plugins/scmgit/common/GitPlugin.class.php:221
 #, fuzzy
 msgid "Git Repository Browser"
 msgstr "Historial do repositorio"
 
-#: plugins/scmgit/common/GitPlugin.class.php:222
+#: plugins/scmgit/common/GitPlugin.class.php:223
 #, fuzzy
 msgid ""
 "Browsing the Git tree gives you a view into the current status of this "
@@ -12530,12 +12541,12 @@ msgstr ""
 "estado actual do código do proxecto. Tamén pode ver o historial completo de "
 "calquera ficheiro do repositorio."
 
-#: plugins/scmgit/common/GitPlugin.class.php:226
+#: plugins/scmgit/common/GitPlugin.class.php:227
 #, fuzzy
 msgid "Browse Git Repository"
 msgstr "Navegar polo repositorio CVS"
 
-#: plugins/scmgit/common/GitPlugin.class.php:245
+#: plugins/scmgit/common/GitPlugin.class.php:246
 msgid "Updates"
 msgstr "Actualizacións"
 
@@ -13149,7 +13160,7 @@ msgstr "O equipo de %1$s"
 msgid "Updated"
 msgstr "Actualizado "
 
-#: www/account/index.php:97 www/account/index.php:102 www/include/html.php:846
+#: www/account/index.php:97 www/account/index.php:102 www/include/html.php:852
 msgid "Account Maintenance"
 msgstr "Mantemento da conta "
 
@@ -13686,17 +13697,17 @@ msgstr "Mensaxe de foro"
 msgid "Document"
 msgstr "Documentos"
 
-#: www/admin/admin_table.php:40
+#: www/admin/admin_table.php:41
 #, php-format
 msgid "Create a new %1$s below:"
 msgstr "Crear un novo %1$s abaixo: "
 
-#: www/admin/admin_table.php:93 www/admin/admin_table.php:271
+#: www/admin/admin_table.php:94 www/admin/admin_table.php:282
 #, php-format
 msgid "%1$s successfully added."
 msgstr "Engadiuse %1$s correctamente."
 
-#: www/admin/admin_table.php:116
+#: www/admin/admin_table.php:117
 #, php-format
 msgid ""
 "You can't delete the processor %1$s since it's currently referenced in a "
@@ -13705,7 +13716,7 @@ msgstr ""
 "Non pode eliminar o procesador %1$s porque está actualmente en uso nalgunha "
 "publicación de ficheiros. "
 
-#: www/admin/admin_table.php:125
+#: www/admin/admin_table.php:126
 #, php-format
 msgid ""
 "You can't delete the license %1$s since it's currently referenced in a "
@@ -13714,7 +13725,7 @@ msgstr ""
 "Non pode eliminar a licenza %1$s porque está actualmente en uso nalgún "
 "proxecto. "
 
-#: www/admin/admin_table.php:133
+#: www/admin/admin_table.php:134
 #, php-format
 msgid ""
 "You can't delete the language %1$s since it's currently referenced in a user "
@@ -13723,31 +13734,40 @@ msgstr ""
 "Non se pode eliminar o idioma %1$s porque está actualmente en uso nun perfil "
 "de usuario. "
 
-#: www/admin/admin_table.php:144
+#: www/admin/admin_table.php:143
+#, fuzzy, php-format
+msgid ""
+"You can't delete the theme %1$s since it's currently referenced in a user "
+"profile."
+msgstr ""
+"Non se pode eliminar o idioma %1$s porque está actualmente en uso nun perfil "
+"de usuario. "
+
+#: www/admin/admin_table.php:154
 #, php-format
 msgid "Are you sure you want to delete this %1$s?"
 msgstr "Está seguro de que desexa eliminar este/a %1$s? "
 
-#: www/admin/admin_table.php:173
+#: www/admin/admin_table.php:183
 #, php-format
 msgid "%1$s successfully deleted."
 msgstr "Eliminouse %1$s correctamente."
 
-#: www/admin/admin_table.php:194
+#: www/admin/admin_table.php:204
 #, php-format
 msgid "Modify the %1$s below:"
 msgstr "Modificar o %1$s abaixo: "
 
-#: www/admin/admin_table.php:249
+#: www/admin/admin_table.php:259
 #, php-format
 msgid "%1$s successfully modified."
 msgstr "Modificouse %1$s correctamente."
 
-#: www/admin/admin_table.php:297
+#: www/admin/admin_table.php:308
 msgid "add new"
 msgstr "Engadir novo "
 
-#: www/admin/admin_table.php:342
+#: www/admin/admin_table.php:353
 #, php-format
 msgid "Edit the %1$ss Table"
 msgstr "Editar a táboa de %1$ss"
@@ -14334,7 +14354,7 @@ msgstr "Engadir, eliminar ou editar os temas "
 msgid "Last Logins"
 msgstr "Últimos accesos"
 
-#: www/admin/index.php:207 www/admin/pluginman.php:117
+#: www/admin/index.php:207 www/admin/pluginman.php:119
 msgid "Plugin Manager"
 msgstr "Administrador de complementos "
 
@@ -14541,12 +14561,12 @@ msgid_plural "%d projects detached from plugin."
 msgstr[0] "%d grupo desconectado do plugin."
 msgstr[1] "%d grupos desconectados do plugin."
 
-#: www/admin/pluginman.php:66 www/admin/pluginman.php:99
+#: www/admin/pluginman.php:66 www/admin/pluginman.php:101
 #, php-format
 msgid "Plugin %1$s updated Successfully"
 msgstr "O plugin %1$s actualizouse correctamente"
 
-#: www/admin/pluginman.php:71 www/admin/pluginman.php:107
+#: www/admin/pluginman.php:71 www/admin/pluginman.php:109
 #, fuzzy
 msgid "Couldn't get plugin object"
 msgstr "Non se puido obter o obxecto de foro"
@@ -14558,64 +14578,64 @@ msgstr ""
 "<br>Non se puido eliminar a ligazón simbólica no cartafol www/plugins. Por "
 "favor, fágao manualmente. "
 
-#: www/admin/pluginman.php:88
+#: www/admin/pluginman.php:91
 msgid "Success, config not deleted"
 msgstr "Correcto, non se borrou a configuración"
 
-#: www/admin/pluginman.php:123
+#: www/admin/pluginman.php:125
 msgid ""
 "Here you can activate / deactivate site-wide plugins which are in the "
 "plugins/ folder. Then, you should activate them also per project, per user "
 "or whatever the plugin specifically applies to."
 msgstr ""
 
-#: www/admin/pluginman.php:125
+#: www/admin/pluginman.php:127
 msgid ""
 "Be careful because some projects/users can be using the plugin. Deactivating "
 "it will remove the plugin from all users/projects."
 msgstr ""
 
-#: www/admin/pluginman.php:127
+#: www/admin/pluginman.php:129
 msgid "Plugin Name"
 msgstr "Nome do complemento "
 
-#: www/admin/pluginman.php:130
+#: www/admin/pluginman.php:132
 msgid "Users Using it"
 msgstr "Usuarios que están a empregalo"
 
-#: www/admin/pluginman.php:131
+#: www/admin/pluginman.php:133
 #, fuzzy
 msgid "Projects Using it"
 msgstr "Grupos que están a empregalo"
 
-#: www/admin/pluginman.php:132
+#: www/admin/pluginman.php:134
 #, fuzzy
 msgid "Global Administration View"
 msgstr "Administración"
 
-#: www/admin/pluginman.php:193
+#: www/admin/pluginman.php:209
 msgid "Deactivate"
 msgstr "Desactivar"
 
-#: www/admin/pluginman.php:207
+#: www/admin/pluginman.php:223
 #, fuzzy, php-format
 msgid "%d users"
 msgstr "Engadir usuario"
 
-#: www/admin/pluginman.php:226
+#: www/admin/pluginman.php:242
 #, fuzzy, php-format
 msgid "%d projects"
 msgstr "Proxectos de %1$s"
 
-#: www/admin/pluginman.php:238
+#: www/admin/pluginman.php:254
 msgid "Inactive"
 msgstr "Inactivo"
 
-#: www/admin/pluginman.php:240
+#: www/admin/pluginman.php:257
 msgid "Activate"
 msgstr "Activar "
 
-#: www/admin/pluginman.php:246
+#: www/admin/pluginman.php:268
 #, fuzzy
 msgid "Current plugin status:"
 msgstr "Ficheiro actual"
@@ -14987,7 +15007,7 @@ msgstr ": listaxe de usuarios "
 msgid "User updated to %1$s status"
 msgstr "Actualizouse o usuario ao estado %1$s"
 
-#: www/admin/userlist.php:73 www/frs/admin/index.php:94
+#: www/admin/userlist.php:73 www/frs/admin/index.php:95
 #: www/frs/admin/showreleases.php:81
 msgid "Deleted"
 msgstr "Eliminado "
@@ -15751,8 +15771,8 @@ msgid "Forum Position Saved. New messages will be highlighted when you return"
 msgstr "Gardouse a posición do foro. As mensaxes novas marcaranse ao volver "
 
 #: www/frs/admin/deletepackage.php:48 www/frs/admin/deleterelease.php:50
-#: www/frs/admin/index.php:69 www/frs/admin/index.php:84
-#: www/frs/admin/index.php:100 www/frs/admin/showreleases.php:58
+#: www/frs/admin/index.php:70 www/frs/admin/index.php:85
+#: www/frs/admin/index.php:101 www/frs/admin/showreleases.php:58
 #, fuzzy
 msgid "Could Not Get FRS Package"
 msgstr "Non se puido obter o Rol"
@@ -15775,7 +15795,7 @@ msgstr ""
 msgid "Could Not Get FRS Release"
 msgstr "Non se puido obter o Rol"
 
-#: www/frs/admin/deleterelease.php:67 www/frs/admin/index.php:112
+#: www/frs/admin/deleterelease.php:67 www/frs/admin/index.php:113
 msgid "Release Edit/File Releases"
 msgstr "Editar/liberar ficheiros "
 
@@ -15844,7 +15864,7 @@ msgstr ""
 msgid "File Updated"
 msgstr "Actualizouse o ficheiro "
 
-#: www/frs/admin/editrelease.php:215 www/frs/admin/index.php:172
+#: www/frs/admin/editrelease.php:215 www/frs/admin/index.php:174
 msgid "Edit Releases"
 msgstr "Editar as publicacións "
 
@@ -15968,108 +15988,108 @@ msgid_plural "There are %1$s users monitoring this package."
 msgstr[0] "Hai %1$s usuario monitorizando este paquete."
 msgstr[1] "Hai %1$s usuarios monitorizando este paquete."
 
-#: www/frs/admin/index.php:76
+#: www/frs/admin/index.php:77
 msgid "Added Package"
 msgstr "Engadiuse un paquete "
 
-#: www/frs/admin/index.php:107
+#: www/frs/admin/index.php:108
 msgid "Updated Package"
 msgstr "Paquete actualizado "
 
-#: www/frs/admin/index.php:119
+#: www/frs/admin/index.php:120
 msgid "QRS"
 msgstr "Sistema de publicación rápida"
 
-#: www/frs/admin/index.php:120
+#: www/frs/admin/index.php:121
 #, php-format
 msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "Prema aquí para %1$s unha rápida liberación do ficheiro %2$s"
 
-#: www/frs/admin/index.php:125
+#: www/frs/admin/index.php:126
 #, fuzzy
 msgid "Packages"
 msgstr "Paquete "
 
-#: www/frs/admin/index.php:126
+#: www/frs/admin/index.php:127
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
 
-#: www/frs/admin/index.php:127
+#: www/frs/admin/index.php:128
 #, fuzzy
 msgid "An example of packages:"
 msgstr "Engadir un fragmento ao paquete"
 
-#: www/frs/admin/index.php:129
+#: www/frs/admin/index.php:130
 #, fuzzy
 msgid "Your Packages:"
 msgstr "Paquete:"
 
-#: www/frs/admin/index.php:131
+#: www/frs/admin/index.php:132
 msgid "Define your packages"
 msgstr ""
 
-#: www/frs/admin/index.php:132
+#: www/frs/admin/index.php:133
 #, fuzzy
 msgid "Create new releases of packages"
 msgstr "Para crear unha liberación nova, prema aquí."
 
-#: www/frs/admin/index.php:134
+#: www/frs/admin/index.php:135
 #, fuzzy
 msgid "Releases of Packages"
 msgstr "Notas da publicación"
 
-#: www/frs/admin/index.php:135
+#: www/frs/admin/index.php:136
 msgid "A release of a package can contain multiple files."
 msgstr ""
 
-#: www/frs/admin/index.php:136
+#: www/frs/admin/index.php:137
 #, fuzzy
 msgid "Examples of Releases"
 msgstr "Últimas publicacións de ficheiros"
 
-#: www/frs/admin/index.php:138
+#: www/frs/admin/index.php:139
 msgid ""
 "You can create new releases of packages by clicking on <strong>Add/Edit "
 "Releases</strong> next to your package name"
 msgstr ""
 
-#: www/frs/admin/index.php:149
+#: www/frs/admin/index.php:150
 msgid "You Have No Packages Defined"
 msgstr "Non ten ningún paquete definido "
 
-#: www/frs/admin/index.php:153 www/frs/admin/showreleases.php:99
+#: www/frs/admin/index.php:154 www/frs/admin/showreleases.php:99
 msgid "Package name"
 msgstr "Nome de paquete "
 
-#: www/frs/admin/index.php:155 www/frs/admin/index.php:205
+#: www/frs/admin/index.php:156 www/frs/admin/index.php:207
 #: www/people/editprofile.php:244
 msgid "Publicly Viewable"
 msgstr "Visíbel publicamente "
 
-#: www/frs/admin/index.php:168
+#: www/frs/admin/index.php:169
 msgid "Add Release"
 msgstr "Engadir publicación"
 
-#: www/frs/admin/index.php:199
+#: www/frs/admin/index.php:201
 #, fuzzy
 msgid "Create New Package"
 msgstr "Crear un paquete "
 
-#: www/frs/admin/index.php:203
+#: www/frs/admin/index.php:205
 msgid "New Package Name"
 msgstr "Nome do novo paquete "
 
-#: www/frs/admin/index.php:206
+#: www/frs/admin/index.php:208
 msgid "Public"
 msgstr "Público "
 
-#: www/frs/admin/index.php:207
+#: www/frs/admin/index.php:209
 msgid "Private"
 msgstr "Privado "
 
-#: www/frs/admin/index.php:208
+#: www/frs/admin/index.php:210
 msgid "Create This Package"
 msgstr "Crear este paquete "
 
@@ -16434,14 +16454,14 @@ msgstr "Debe proporcionar o seu nome "
 msgid "File does not exist. File %s is not in incoming FTP directory."
 msgstr ""
 
-#: www/include/html.php:335
+#: www/include/html.php:341
 msgid ""
 "This drop-down box represents the person to which a tracker item is assigned."
 msgstr ""
 "Esta listaxe despregábel representa a persoa a que se lle asigna un elemento "
 "de rexistro."
 
-#: www/include/html.php:337
+#: www/include/html.php:343
 msgid ""
 "This drop-down box represents the current status of a tracker item.<br /"
 "><br />You can set the status to 'Pending' if you are waiting for a response "
@@ -16457,15 +16477,15 @@ msgstr ""
 "definido (14 días, como valor predeterminado) o elemento recibe o estado de "
 "eliminado. "
 
-#: www/include/html.php:339
+#: www/include/html.php:345
 msgid "Tracker category"
 msgstr "Categoría de rexistro"
 
-#: www/include/html.php:341
+#: www/include/html.php:347
 msgid "Tracker group"
 msgstr "Grupo do rexistro"
 
-#: www/include/html.php:343
+#: www/include/html.php:349
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
 "<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, "
@@ -16477,7 +16497,7 @@ msgstr ""
 "data de apertura, por data de remate, por enviado ou por asignado. Tamén "
 "pode amosar os resultados por orde ascendente ou descendente. "
 
-#: www/include/html.php:345
+#: www/include/html.php:351
 msgid ""
 "The Data Type option determines the type of tracker item this is.  Since the "
 "tracker rolls into one the bug, patch, support, etc... managers you need to "
@@ -16491,7 +16511,7 @@ msgstr ""
 "<br /><br />Isto ten o beneficio engadido de permitir á administración "
 "converter unha solicitude de asistencia nun informe de erro"
 
-#: www/include/html.php:347
+#: www/include/html.php:353
 msgid ""
 "The priority option allows a user to define a tracker item priority (ranging "
 "from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs "
@@ -16503,7 +16523,7 @@ msgstr ""
 ">Isto é de utilidade para informes de erros e solicitudes de asistencia onde "
 "un usuario pode atopar un problema crítico nun proxecto."
 
-#: www/include/html.php:353
+#: www/include/html.php:359
 msgid ""
 "The canned response drop-down represents a list of project admin-defined "
 "canned responses to common support or bug submission.<br /><br /> If you are "
@@ -16516,19 +16536,19 @@ msgstr ""
 "administración dun proxecto, pode premer a ligazón '(admin)' para definir as "
 "súas propias respostas almacenadas"
 
-#: www/include/html.php:355
+#: www/include/html.php:361
 msgid ""
 "Anyone can add here comments to give additional information, answers and "
 "solutions. Please, be as precise as possible to avoid misunderstanding. If "
 "relevant, screenshots or documents can be added as attached files."
 msgstr ""
 
-#: www/include/html.php:357
+#: www/include/html.php:363
 #, fuzzy
 msgid "Enter the complete description."
 msgstr "Descrición detallada"
 
-#: www/include/html.php:358
+#: www/include/html.php:364
 msgid ""
 "<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</"
 "strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/"
@@ -16537,7 +16557,7 @@ msgid ""
 "</div>"
 msgstr ""
 
-#: www/include/html.php:361
+#: www/include/html.php:367
 msgid ""
 "When you wish to attach a file to a tracker item you must check this "
 "checkbox before submitting changes."
@@ -16545,7 +16565,7 @@ msgstr ""
 "Cando desexe anexar un ficheiro a un elemento de rexistro, deberá marcar "
 "esta caixa de verificación antes de enviar os cambios."
 
-#: www/include/html.php:363
+#: www/include/html.php:369
 msgid ""
 "You can monitor or un-monitor this item by clicking the \"Monitor\" button. "
 "<br /><br /><strong>Note!</strong> this will send you additional email. If "
@@ -16557,92 +16577,92 @@ msgstr ""
 "electrónico adicional. Se engade comentarios a este elemento ou se o asigna "
 "a este elemento, tamén recibirá correos por estas razóns! "
 
-#: www/include/html.php:683
+#: www/include/html.php:689
 msgid "Lowest"
 msgstr "A máis baixa "
 
-#: www/include/html.php:687
+#: www/include/html.php:693
 msgid "Highest"
 msgstr "A máis alta "
 
-#: www/include/html.php:773
+#: www/include/html.php:779
 #, fuzzy, php-format
 msgid "Project access problem: %s"
 msgstr "Uso de recursos do proxecto"
 
-#: www/include/html.php:775
+#: www/include/html.php:781
 #, fuzzy, php-format
 msgid "Project Problem: %s"
 msgstr "Administración do proxecto: %1$s"
 
-#: www/include/html.php:830 www/my/bookmark_add.php:28
+#: www/include/html.php:836 www/my/bookmark_add.php:28
 msgid "My Personal Page"
 msgstr "A miña páxina persoal "
 
-#: www/include/html.php:832
+#: www/include/html.php:838
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:835
+#: www/include/html.php:841
 msgid "Trackers dashboard"
 msgstr "Taboleiro de rexistros"
 
-#: www/include/html.php:837
+#: www/include/html.php:843
 #, fuzzy
 msgid "View your tasks and artifacts."
 msgstr "Non ten ningunha entrada no seu diario "
 
-#: www/include/html.php:841
+#: www/include/html.php:847
 msgid "Diary &amp; Notes"
 msgstr "Diario e notas"
 
-#: www/include/html.php:843
+#: www/include/html.php:849
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:848
+#: www/include/html.php:854
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:852 www/register/index.php:155
+#: www/include/html.php:858 www/register/index.php:155
 msgid "Register Project"
 msgstr "Rexistrar un proxecto "
 
-#: www/include/html.php:854
+#: www/include/html.php:860
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:903
+#: www/include/html.php:909
 #, fuzzy, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "Último(s) mes(es)"
 msgstr[1] "Último(s) mes(es)"
 
-#: www/include/html.php:907
+#: www/include/html.php:913
 #, fuzzy, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "Último(s) mes(es)"
 msgstr[1] "Último(s) mes(es)"
 
-#: www/include/html.php:911
+#: www/include/html.php:917
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:915
+#: www/include/html.php:921
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:919
+#: www/include/html.php:925
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -17198,11 +17218,11 @@ msgstr "Eliminouse a tarefa correctamente"
 msgid "Permanently Delete Mailing List "
 msgstr "Eliminar a lista permanentemente"
 
-#: www/mail/admin/index.php:125
+#: www/mail/admin/index.php:126
 msgid "Password reset requested"
 msgstr "Solicitouse o restabelecemento do contrasinal"
 
-#: www/mail/admin/index.php:137
+#: www/mail/admin/index.php:138
 #, fuzzy, php-format
 msgid ""
 "Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
@@ -17212,7 +17232,7 @@ msgstr ""
 "%1$s</strong></p><p>Levará <span class=\"important\">de 6 a 24 horas</span> "
 "crear esta lista.</p>"
 
-#: www/mail/admin/index.php:141
+#: www/mail/admin/index.php:142
 #, fuzzy
 msgid ""
 "It will take <span class=\"important\">6-24 Hours</span> for your list to be "
@@ -17222,15 +17242,15 @@ msgstr ""
 "%1$s</strong></p><p>Levará <span class=\"important\">de 6 a 24 horas</span> "
 "crear esta lista.</p>"
 
-#: www/mail/admin/index.php:158
+#: www/mail/admin/index.php:159
 msgid "Existing mailing lists"
 msgstr "Listas de correo existentes"
 
-#: www/mail/admin/index.php:262 www/mail/index.php:76
+#: www/mail/admin/index.php:263 www/mail/index.php:76
 msgid "Mailing list"
 msgstr "Lista de correo"
 
-#: www/mail/admin/index.php:288
+#: www/mail/admin/index.php:289
 msgid "Reset admin password"
 msgstr "Restabelecer contrasinal de administrador"
 
@@ -17617,7 +17637,7 @@ msgstr ""
 msgid " Error inserting value: "
 msgstr "Produciuse un erro ao inserir"
 
-#: www/people/admin/index.php:55 www/pm/admin/index.php:99
+#: www/people/admin/index.php:55 www/pm/admin/index.php:98
 msgid "Category Inserted"
 msgstr "Categoría inserida"
 
@@ -18192,9 +18212,9 @@ msgstr "Dependente da tarefa"
 msgid "Dependent note"
 msgstr "Nota dependente"
 
-#: www/pm/admin/index.php:62 www/pm/admin/index.php:94
-#: www/pm/admin/index.php:114 www/pm/admin/index.php:171
-#: www/pm/admin/index.php:233 www/pm/admin/index.php:244
+#: www/pm/admin/index.php:62 www/pm/admin/index.php:93
+#: www/pm/admin/index.php:113 www/pm/admin/index.php:170
+#: www/pm/admin/index.php:232 www/pm/admin/index.php:243
 #, fuzzy
 msgid "Unable to create ProjectCategory Object"
 msgstr "Non se puido crear o obxecto ArtifactCanned"
@@ -18204,58 +18224,58 @@ msgstr "Non se puido crear o obxecto ArtifactCanned"
 msgid "Subproject Inserted"
 msgstr "Proxecto inserido"
 
-#: www/pm/admin/index.php:97
+#: www/pm/admin/index.php:96
 #, fuzzy
 msgid "Error inserting: "
 msgstr "Produciuse un erro ao inserir"
 
-#: www/pm/admin/index.php:119
+#: www/pm/admin/index.php:118
 #, fuzzy
 msgid "Error updating: "
 msgstr "Produciuse un erro ao actualizar"
 
-#: www/pm/admin/index.php:121
+#: www/pm/admin/index.php:120
 msgid "Category Updated"
 msgstr "Categoría actualizada"
 
-#: www/pm/admin/index.php:140
+#: www/pm/admin/index.php:139
 #, fuzzy
 msgid "Subproject Updated successfully"
 msgstr "Actualizouse correctamente "
 
-#: www/pm/admin/index.php:155
+#: www/pm/admin/index.php:154
 #, fuzzy
 msgid "Subproject Successfully Deleted"
 msgstr "Eliminouse %1$s correctamente."
 
-#: www/pm/admin/index.php:178
+#: www/pm/admin/index.php:177
 #, fuzzy, php-format
 msgid "Add Categories to: %s"
 msgstr "Engadir categorías a "
 
-#: www/pm/admin/index.php:188
+#: www/pm/admin/index.php:187
 msgid "Id"
 msgstr "Id"
 
-#: www/pm/admin/index.php:204
+#: www/pm/admin/index.php:203
 msgid "No categories defined"
 msgstr "Non se definiron categorías"
 
-#: www/pm/admin/index.php:212 www/pm/admin/index.php:256
+#: www/pm/admin/index.php:211 www/pm/admin/index.php:255
 #: www/reporting/timecategory.php:72 www/reporting/timecategory.php:91
 msgid "Category Name"
 msgstr "Nome da categoría"
 
-#: www/pm/admin/index.php:215
+#: www/pm/admin/index.php:214
 msgid "Once you add a category, it cannot be deleted"
 msgstr "Unha vez engadida a categoría, non se poderá eliminar"
 
-#: www/pm/admin/index.php:240
+#: www/pm/admin/index.php:239
 #, fuzzy, php-format
 msgid "Modify a Category in: %s"
 msgstr "Modificar unha categoría en"
 
-#: www/pm/admin/index.php:259
+#: www/pm/admin/index.php:258
 msgid ""
 "It is not recommended that you change the category name because other things "
 "are dependent upon it. When you change the category name, all related items "
@@ -18265,12 +18285,12 @@ msgstr ""
 "dependen del. Cando cambie o nome da categoría, cambiaranse todos os "
 "elementos relacionados ao novo nome."
 
-#: www/pm/admin/index.php:274
+#: www/pm/admin/index.php:273
 #, fuzzy
 msgid "Add a new subproject"
 msgstr "Engadir un proxecto novo"
 
-#: www/pm/admin/index.php:277
+#: www/pm/admin/index.php:276
 #, fuzzy
 msgid ""
 "Add a new subproject to the Tasks. <strong>This is different than adding a "
@@ -18279,21 +18299,21 @@ msgstr ""
 "Engadir un proxecto ao xestor de proxectos/tarefas. <strong>Isto é diferente "
 "a engadir unha tarefa a un proxecto.</strong>"
 
-#: www/pm/admin/index.php:283
+#: www/pm/admin/index.php:282
 #, fuzzy
 msgid "New Subproject Name"
 msgstr "Nome do subproxecto"
 
-#: www/pm/admin/index.php:290 www/pm/admin/index.php:332
+#: www/pm/admin/index.php:289 www/pm/admin/index.php:331
 msgid "Send All Updates To"
 msgstr "Enviar todas as actualizacións a"
 
-#: www/pm/admin/index.php:308
+#: www/pm/admin/index.php:307
 #, fuzzy
 msgid "Change Tasks Status"
 msgstr "Estado da tarefa"
 
-#: www/pm/admin/index.php:311
+#: www/pm/admin/index.php:310
 #, fuzzy
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
@@ -18304,19 +18324,19 @@ msgstr ""
 "que os membros dos proxectos poden ver os proxecto privados, pero o público "
 "xeral non."
 
-#: www/pm/admin/index.php:320 www/pm/index.php:99
+#: www/pm/admin/index.php:319 www/pm/index.php:99
 msgid "Subproject Name"
 msgstr "Nome do subproxecto"
 
-#: www/pm/admin/index.php:338
+#: www/pm/admin/index.php:337
 msgid "Add/Edit Categories"
 msgstr "Engadir/editar categorías"
 
-#: www/pm/admin/index.php:339
+#: www/pm/admin/index.php:338
 msgid "Permanently delete this subproject and all its data."
 msgstr "Eliminar permanentemente este subproxecto e todos os seus datos."
 
-#: www/pm/admin/index.php:370
+#: www/pm/admin/index.php:369
 msgid ""
 "You are about to permanently and irretrievably delete this subproject and "
 "all its related data!"
@@ -18324,17 +18344,17 @@ msgstr ""
 "Vai eliminar permanente e irrecuperabelmente este subproxecto e todos os "
 "seus datos relacionados!"
 
-#: www/pm/admin/index.php:394
+#: www/pm/admin/index.php:393
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "Administración"
 
-#: www/pm/admin/index.php:402
+#: www/pm/admin/index.php:401
 #, fuzzy
 msgid "Add a Subproject"
 msgstr "Engadir un proxecto novo"
 
-#: www/pm/admin/index.php:403
+#: www/pm/admin/index.php:402
 #, fuzzy
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
@@ -18343,12 +18363,12 @@ msgstr ""
 "Engadir un proxecto, que pode conter un conxunto de tarefas. Isto é "
 "diferente de crear unha nova tarefa."
 
-#: www/pm/admin/index.php:411
+#: www/pm/admin/index.php:410
 #, fuzzy
 msgid "No Subprojects Found in this Project"
 msgstr "Non existe tal publicación para este proxecto."
 
-#: www/pm/admin/index.php:412
+#: www/pm/admin/index.php:411
 #, fuzzy
 msgid "You may add new Subprojects using the \"Add a Subproject\" link above."
 msgstr ""
@@ -18356,7 +18376,7 @@ msgstr ""
 "Pode engadir novos proxectos usando a ligazón \"Engadir un proxecto\" de "
 "arriba.</p>"
 
-#: www/pm/admin/index.php:416
+#: www/pm/admin/index.php:415
 #, fuzzy
 msgid "Edit/Update Subproject"
 msgstr "Editar/actualizar un proxecto"
@@ -19158,7 +19178,7 @@ msgstr "Editar rol"
 msgid "Homepage Link"
 msgstr "Ligazón á páxina de inicio"
 
-#: www/project/admin/index.php:274
+#: www/project/admin/index.php:252
 msgid ""
 "If you wish, you can provide default email addresses to which new "
 "submissions will be sent"
@@ -19166,11 +19186,11 @@ msgstr ""
 "Se o desexa, pode introducir os enderezos de correo predeterminados aos que "
 "se enviarán os novos envíos"
 
-#: www/project/admin/index.php:275
+#: www/project/admin/index.php:253
 msgid "New Document Submissions"
 msgstr "Envíos de documentos novos"
 
-#: www/project/admin/index.php:277
+#: www/project/admin/index.php:255
 msgid "(send on all updates)"
 msgstr "(enviar en todas as actualizacións)"
 
@@ -20392,32 +20412,32 @@ msgid "Error: Under min length search"
 msgstr "Erro: busca máis curta que a lonxitude mínima"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:116
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:126
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:127
 msgid "Forum Search Results"
 msgstr "Resultado da procura no foro"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:121
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:122
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:123
 msgid "Tracker Search Results"
 msgstr "Resultado da procura no rexistro"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:126
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:130
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:131
 msgid "Task Search Results"
 msgstr "Resultado da procura nas tarefas"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:131
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:134
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:135
 msgid "Documentation Search Results"
 msgstr "Resultado da procura na documentación"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:136
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:138
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:139
 msgid "Files Search Results"
 msgstr "Resultado da procura nos ficheiros"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:141
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:142
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:143
 msgid "News Search Results"
 msgstr "Resultado da procura nas novas"
 
@@ -20427,7 +20447,7 @@ msgid "Note: only the first %d results for this category are displayed."
 msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:194
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:215
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:216
 #, fuzzy, php-format
 msgid ""
 "No matches found for <em>%s</em> - No sections available (check your "
@@ -20437,7 +20457,7 @@ msgstr ""
 "(comprobe os seus permisos) "
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:196
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:217
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:218
 #, fuzzy, php-format
 msgid "No matches found for <em>%s</em>"
 msgstr "Non se achou ningunha coincidencia para <em>%1$s</em>"
@@ -20471,12 +20491,12 @@ msgstr "#"
 msgid "Post date"
 msgstr "Data da publicación"
 
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:85
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:86
 #, fuzzy
 msgid "Entire project search"
 msgstr "Procura avanzada no proxecto "
 
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:167
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:168
 #, fuzzy, php-format
 msgid "%s Search Results"
 msgstr "Resultado da procura nas novas"
@@ -22148,10 +22168,6 @@ msgstr ""
 msgid "No release available"
 msgstr "Non hai estatísticas dispoñibles"
 
-#: www/tracker/roadmap.php:468
-msgid ": "
-msgstr ""
-
 #: www/tracker/roadmap.php:471
 #, fuzzy
 msgid "Display as text"
@@ -22255,6 +22271,24 @@ msgstr[1] ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
+
+#~ msgid "See"
+#~ msgstr "Ver"
+
+#~ msgid "Webcal"
+#~ msgstr "Webcal"
+
+#, fuzzy
+#~ msgid "Task Successed"
+#~ msgstr "Actualizouse correctamente "
+
+#, fuzzy
+#~ msgid "Error:"
+#~ msgstr "Erro "
+
+#, fuzzy
+#~ msgid "Task succeeded"
+#~ msgstr "Eliminouse a tarefa correctamente"
 
 #~ msgid "D/l"
 #~ msgstr "D/l"

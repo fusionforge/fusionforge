@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-26 20:11+0200\n"
+"POT-Creation-Date: 2012-05-24 15:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgid "Group_id in db result does not match Group Object"
 msgstr ""
 
 #: common/docman/Document.class.php:111 common/docman/Document.class.php:791
-#: common/pm/ProjectGroup.class.php:143 common/pm/ProjectGroup.class.php:324
+#: common/pm/ProjectGroup.class.php:143 common/pm/ProjectGroup.class.php:325
 msgid "Title Must Be At Least 5 Characters"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgstr ""
 msgid "Unable To Remove Monitor"
 msgstr ""
 
-#: common/docman/Document.class.php:575 common/forum/Forum.class.php:461
+#: common/docman/Document.class.php:575 common/forum/Forum.class.php:462
 msgid "Unable To Add Monitor"
 msgstr ""
 
@@ -262,16 +262,16 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:215 common/pm/ProjectTask.class.php:1207
-#: common/tracker/Artifact.class.php:1542
-#: common/tracker/Artifact.class.php:1544
-#: common/tracker/Artifact.class.php:1551
-#: common/tracker/Artifact.class.php:1557
-#: common/tracker/Artifact.class.php:1657
+#: common/tracker/Artifact.class.php:1543
+#: common/tracker/Artifact.class.php:1545
+#: common/tracker/Artifact.class.php:1552
+#: common/tracker/Artifact.class.php:1558
+#: common/tracker/Artifact.class.php:1658
 #: common/tracker/actions/browse.php:608 common/tracker/actions/browse.php:619
 #: common/tracker/actions/browse.php:639 common/tracker/actions/detail.php:73
-#: common/tracker/actions/downloadcsv.php:83
 #: common/tracker/actions/downloadcsv.php:84
 #: common/tracker/actions/downloadcsv.php:85
+#: common/tracker/actions/downloadcsv.php:86
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod-limited.php:108
 #: common/tracker/actions/mod.php:104 common/tracker/actions/mod.php:109
@@ -285,7 +285,7 @@ msgstr ""
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:111
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:113
 #: common/widget/Widget_ProjectInfo.class.php:66
-#: common/widget/Widget_Rss.class.php:74
+#: common/widget/Widget_Rss.class.php:78
 #: cronjobs/send_pending_items_mail.php:98
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:189
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
@@ -295,7 +295,7 @@ msgstr ""
 #: www/admin/userlist.php:111 www/developer/diary.php:51
 #: www/developer/diary.php:82 www/export/tracker.php:108
 #: www/forum/index.php:89 www/forum/message.php:127 www/forum/myforums.php:152
-#: www/frs/index.php:145 www/frs/index.php:204 www/include/html.php:921
+#: www/frs/index.php:145 www/frs/index.php:204 www/include/html.php:927
 #: www/include/stats_function.php:77 www/include/stats_function.php:98
 #: www/news/news_utils.php:147 www/news/news_utils.php:267
 #: www/people/people_utils.php:422 www/people/viewjob.php:78
@@ -305,14 +305,14 @@ msgstr ""
 #: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
 #: www/project/admin/project_admin_utils.php:180
 #: www/reporting/usersummary.php:127
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:71
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:97
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:64
-#: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:68
-#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:62
+#: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
+#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:62
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:65
-#: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:63
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:93
+#: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:89
 #: www/snippet/detail.php:80 www/snippet/detail.php:169
 #: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:148
 #: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:299
@@ -539,8 +539,8 @@ msgstr ""
 #: plugins/contribtracker/www/index.php:142
 #: plugins/contribtracker/www/project_admin.php:293
 #: plugins/mailman/www/admin/index.php:150
-#: plugins/mailman/www/admin/index.php:183 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:224 www/snippet/package.php:152
+#: plugins/mailman/www/admin/index.php:183 www/mail/admin/index.php:193
+#: www/mail/admin/index.php:225 www/snippet/package.php:152
 msgid "Description:"
 msgstr ""
 
@@ -575,11 +575,11 @@ msgstr ""
 #: plugins/mailman/www/mailman_utils.php:57
 #: plugins/mailman/www/mailman_utils.php:73
 #: plugins/mantisbt/view/addIssue.php:137
-#: plugins/mantisbt/view/admin/addVersion.php:42
-#: plugins/mantisbt/view/admin/editVersion.php:61
+#: plugins/mantisbt/view/admin/addVersion.php:44
+#: plugins/mantisbt/view/admin/editVersion.php:62
 #: plugins/mantisbt/view/admin/viewVersion.php:50
 #: plugins/mantisbt/view/editIssue.php:217
-#: plugins/mantisbt/view/viewIssue.php:105
+#: plugins/mantisbt/view/viewIssue.php:112
 #: plugins/oauthconsumer/www/provider_edit.php:39
 #: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:78
@@ -591,8 +591,8 @@ msgstr ""
 #: plugins/scmhook/common/scmhookPlugin.class.php:183
 #: www/forum/admin/index.php:103 www/forum/admin/index.php:144
 #: www/forum/index.php:68 www/mail/index.php:78 www/people/editjob.php:52
-#: www/people/editjob.php:74 www/pm/admin/index.php:287
-#: www/pm/admin/index.php:326 www/pm/index.php:100
+#: www/people/editjob.php:74 www/pm/admin/index.php:286
+#: www/pm/admin/index.php:325 www/pm/index.php:100
 #: www/project/admin/editimages.php:228 www/project/admin/editimages.php:255
 #: www/project/admin/editimages.php:271
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:64
@@ -791,7 +791,7 @@ msgstr ""
 #: plugins/contribtracker/www/global_admin.php:351
 #: plugins/contribtracker/www/project_admin.php:318
 #: plugins/globaldashboard/www/admin/manage_accounts.php:93
-#: plugins/oauthconsumer/www/providers.php:32 www/admin/admin_table.php:314
+#: plugins/oauthconsumer/www/providers.php:32 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:45 www/admin/responses_admin.php:92
 #: www/admin/trove/trove_cat_list.php:53 www/frs/admin/showreleases.php:111
 #: www/people/skills_utils.php:45 www/people/skills_utils.php:103
@@ -927,7 +927,7 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editprofile.php:107 www/people/people_utils.php:405
-#: www/people/skills_utils.php:49 www/pm/admin/index.php:189
+#: www/people/skills_utils.php:49 www/pm/admin/index.php:188
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:63
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:51
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
@@ -971,11 +971,11 @@ msgstr ""
 #: common/widget/Widget_ProjectLatestDocuments.class.php:74
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:218
 #: plugins/mantisbt/view/editIssue.php:130
-#: plugins/mantisbt/view/viewIssue.php:80
+#: plugins/mantisbt/view/viewIssue.php:87
 #: plugins/mantisbt/view/viewIssues.php:305 www/admin/groupedit.php:107
-#: www/admin/grouplist.php:68 www/admin/pluginman.php:128
+#: www/admin/grouplist.php:68 www/admin/pluginman.php:130
 #: www/admin/search.php:85 www/admin/search.php:162
-#: www/frs/admin/editrelease.php:235 www/frs/admin/index.php:154
+#: www/frs/admin/editrelease.php:235 www/frs/admin/index.php:155
 #: www/my/dashboard.php:68 www/news/admin/index.php:131
 #: www/people/editjob.php:74 www/people/editjob.php:166
 #: www/people/viewjob.php:72 www/pm/browse_task.php:160
@@ -1304,7 +1304,7 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:103
 #: plugins/mailman/www/mailman_utils.php:75
 #: plugins/mailman/www/mailman_utils.php:182
-#: plugins/mantisbt/view/admin/editVersion.php:98
+#: plugins/mantisbt/view/admin/editVersion.php:100
 #: plugins/mantisbt/view/admin/viewCategorie.php:67
 #: plugins/mantisbt/view/viewAttachment.php:58
 #: plugins/mantisbt/view/viewNote.php:60
@@ -1317,15 +1317,15 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: www/admin/admin_table.php:152 www/admin/admin_table.php:315
+#: www/admin/admin_table.php:162 www/admin/admin_table.php:326
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:228 www/forum/admin/index.php:159
 #: www/forum/admin/index.php:170 www/frs/admin/deletepackage.php:73
-#: www/frs/admin/deleterelease.php:77 www/frs/admin/index.php:182
+#: www/frs/admin/deleterelease.php:77 www/frs/admin/index.php:184
 #: www/frs/admin/showreleases.php:114 www/news/admin/index.php:133
 #: www/people/people_utils.php:177 www/people/people_utils.php:322
 #: www/people/skills_utils.php:46 www/people/skills_utils.php:104
-#: www/pm/admin/index.php:364 www/pm/admin/index.php:375
+#: www/pm/admin/index.php:363 www/pm/admin/index.php:374
 #: www/project/admin/vhost.php:145 www/reporting/timeadd.php:157
 #: www/snippet/detail.php:66 www/survey/include/SurveyHTML.class.php:311
 #: www/tracker/admin/index.php:99 www/tracker/admin/index.php:176
@@ -1337,7 +1337,7 @@ msgstr ""
 #: common/widget/WidgetLayoutManager.class.php:529
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:61
 #: plugins/mantisbt/view/admin/addCategory.php:34
-#: plugins/mantisbt/view/admin/addVersion.php:45 www/admin/admin_table.php:54
+#: plugins/mantisbt/view/admin/addVersion.php:47 www/admin/admin_table.php:55
 #: www/admin/database.php:170 www/admin/trove/trove_cat_add.php:123
 #: www/admin/trove/trove_cat_list.php:51 www/admin/trove/trove_cat_list.php:54
 #: www/pm/mod_task.php:289 www/reporting/timeadd.php:174
@@ -1382,15 +1382,15 @@ msgstr ""
 msgid "Forums: No Valid Group Object"
 msgstr ""
 
-#: common/forum/Forum.class.php:150 common/forum/Forum.class.php:559
+#: common/forum/Forum.class.php:150 common/forum/Forum.class.php:560
 msgid "Forum Name Must Be At Least 3 Characters"
 msgstr ""
 
-#: common/forum/Forum.class.php:154 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:154 common/forum/Forum.class.php:564
 msgid "Forum Description Must Be At Least 10 Characters"
 msgstr ""
 
-#: common/forum/Forum.class.php:158 common/forum/Forum.class.php:567
+#: common/forum/Forum.class.php:158 common/forum/Forum.class.php:568
 msgid "Illegal Characters in Forum Name"
 msgstr ""
 
@@ -1407,25 +1407,25 @@ msgstr ""
 msgid "Welcome to %1$s"
 msgstr ""
 
-#: common/forum/Forum.class.php:242
+#: common/forum/Forum.class.php:243
 msgid "Invalid forum group identifier"
 msgstr ""
 
-#: common/forum/Forum.class.php:443 common/forum/Forum.class.php:477
+#: common/forum/Forum.class.php:444 common/forum/Forum.class.php:478
 #: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:301
-#: common/tracker/ArtifactType.class.php:550
+#: common/tracker/ArtifactType.class.php:551
 msgid "You can only monitor if you are logged in"
 msgstr ""
 
-#: common/forum/Forum.class.php:510
+#: common/forum/Forum.class.php:511
 msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr ""
 
-#: common/forum/Forum.class.php:528
+#: common/forum/Forum.class.php:529
 msgid "Forum::savePlace()"
 msgstr ""
 
-#: common/forum/Forum.class.php:603 common/mail/MailingList.class.php:255
+#: common/forum/Forum.class.php:604 common/mail/MailingList.class.php:255
 #: plugins/mailman/include/MailmanList.class.php:250
 #: plugins/mailman/include/MailmanList.class.php:377
 #: plugins/mailman/include/MailmanList.class.php:394
@@ -1434,18 +1434,18 @@ msgstr ""
 msgid "Error On Update:"
 msgstr ""
 
-#: common/forum/Forum.class.php:618 common/frs/FRSPackage.class.php:450
-#: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1529
-#: common/mail/MailingList.class.php:386 common/pm/ProjectGroup.class.php:370
+#: common/forum/Forum.class.php:619 common/frs/FRSPackage.class.php:450
+#: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1530
+#: common/mail/MailingList.class.php:390 common/pm/ProjectGroup.class.php:371
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:512
 #: common/tracker/ArtifactExtraField.class.php:429
-#: common/tracker/ArtifactType.class.php:816
+#: common/tracker/ArtifactType.class.php:817
 msgid "Please tick all checkboxes."
 msgstr ""
 
-#: common/forum/Forum.class.php:629 common/forum/Forum.class.php:637
-#: common/forum/Forum.class.php:645 common/forum/Forum.class.php:653
-#: common/forum/Forum.class.php:661 common/forum/Forum.class.php:669
+#: common/forum/Forum.class.php:630 common/forum/Forum.class.php:638
+#: common/forum/Forum.class.php:646 common/forum/Forum.class.php:654
+#: common/forum/Forum.class.php:662 common/forum/Forum.class.php:670
 msgid "Error Deleting Forum:"
 msgstr ""
 
@@ -1517,8 +1517,8 @@ msgstr ""
 #: common/forum/ForumAdmin.class.php:326
 #: plugins/mantisbt/controler/filter_roadmap.php:60
 #: plugins/mantisbt/controler/filter_roadmap.php:92
-#: plugins/mantisbt/view/admin/editVersion.php:75
-#: plugins/mantisbt/view/admin/editVersion.php:78
+#: plugins/mantisbt/view/admin/editVersion.php:76
+#: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 msgid "Release"
 msgstr ""
@@ -1530,23 +1530,23 @@ msgstr ""
 #: plugins/mailman/www/mailman_utils.php:74
 #: plugins/mailman/www/mailman_utils.php:181
 #: plugins/mantisbt/view/addOrEditNote.php:54
-#: plugins/mantisbt/view/admin/editVersion.php:92
-#: plugins/mantisbt/view/admin/viewConfiguration.php:81
+#: plugins/mantisbt/view/admin/editVersion.php:94
+#: plugins/mantisbt/view/admin/viewConfiguration.php:82
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:42
 #: plugins/mantisbt/view/admin/viewVersion.php:70
 #: plugins/mantisbt/view/adminuser.php:43
 #: plugins/mantisbt/view/editIssue.php:227
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:52
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
 #: www/account/editsshkeys.php:89 www/account/index.php:308
 #: www/account/lostlogin.php:100 www/admin/groupedit.php:230
 #: www/admin/trove/trove_cat_edit.php:152 www/admin/useredit.php:233
 #: www/admin/useredit.php:314 www/admin/vhost.php:189
-#: www/forum/admin/index.php:148 www/frs/admin/index.php:179
-#: www/mail/admin/index.php:227 www/mail/admin/index.php:278
+#: www/forum/admin/index.php:148 www/frs/admin/index.php:181
+#: www/mail/admin/index.php:228 www/mail/admin/index.php:279
 #: www/people/people_utils.php:176 www/people/people_utils.php:321
-#: www/pm/admin/index.php:344 www/pm/calendar.php:293
-#: www/project/admin/database.php:234 www/project/admin/index.php:282
+#: www/pm/admin/index.php:343 www/pm/calendar.php:293
+#: www/project/admin/database.php:234 www/project/admin/index.php:281
 #: www/project/admin/tools.php:289 www/reporting/timecategory.php:98
 #: www/scm/admin/index.php:110
 msgid "Update"
@@ -1597,12 +1597,12 @@ msgstr ""
 msgid "Forum"
 msgstr ""
 
-#: common/forum/ForumFactory.class.php:124
-#: common/forum/ForumFactory.class.php:133
+#: common/forum/ForumFactory.class.php:127
+#: common/forum/ForumFactory.class.php:136
 msgid "You don't have a permission to access this page"
 msgstr ""
 
-#: common/forum/ForumFactory.class.php:140
+#: common/forum/ForumFactory.class.php:143
 msgid "Forum not found"
 msgstr ""
 
@@ -1649,7 +1649,7 @@ msgstr ""
 #: common/tracker/views/form-customizelist.php:43
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/editIssue.php:213
-#: plugins/mantisbt/view/viewIssue.php:101
+#: plugins/mantisbt/view/viewIssue.php:108
 #: plugins/mantisbt/view/viewIssues.php:363 www/my/dashboard.php:64
 #: www/my/diary.php:183 www/pm/browse_task.php:145
 #: www/project/report/index.php:136
@@ -1692,7 +1692,7 @@ msgstr ""
 #: plugins/mailman/www/mailman_utils.php:211
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:374
 #: plugins/mantisbt/www/user/index.php:41 www/frs/include/frs_utils.php:78
-#: www/mail/admin/index.php:283 www/mail/mail_utils.php:48
+#: www/mail/admin/index.php:284 www/mail/mail_utils.php:48
 #: www/news/news_utils.php:48 www/pm/include/ProjectGroupHTML.class.php:93
 #: www/pm/include/ProjectGroupHTML.class.php:98
 #: www/scm/include/scm_utils.php:51 www/survey/include/SurveyHTML.class.php:66
@@ -1761,8 +1761,8 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:156
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:51
-#: www/admin/admin_table.php:58 www/admin/admin_table.php:155
-#: www/admin/admin_table.php:214 www/forum/admin/index.php:398
+#: www/admin/admin_table.php:59 www/admin/admin_table.php:165
+#: www/admin/admin_table.php:224 www/forum/admin/index.php:398
 #: www/forum/monitor.php:65 www/my/rmproject.php:98
 #: www/people/editprofile.php:158 www/people/editprofile.php:217
 #: www/pm/mod_task.php:289 www/register/index.php:296
@@ -1982,8 +1982,8 @@ msgstr ""
 msgid "Database initialisation error:"
 msgstr ""
 
-#: common/include/Error.class.php:130 common/include/Group.class.php:398
-#: common/include/Group.class.php:465
+#: common/include/Error.class.php:130 common/include/Group.class.php:399
+#: common/include/Group.class.php:466
 msgid "Permission denied."
 msgstr ""
 
@@ -2004,248 +2004,248 @@ msgstr ""
 msgid "Missing Parameters"
 msgstr ""
 
-#: common/include/Group.class.php:223
+#: common/include/Group.class.php:224
 msgid "Group Not Found"
 msgstr ""
 
-#: common/include/Group.class.php:245
+#: common/include/Group.class.php:246
 #, php-format
 msgid "fetchData():: %s"
 msgstr ""
 
-#: common/include/Group.class.php:273
+#: common/include/Group.class.php:274
 msgid "Group::create: Group object already exists"
 msgstr ""
 
-#: common/include/Group.class.php:278
+#: common/include/Group.class.php:279
 msgid "Invalid Unix name"
 msgstr ""
 
-#: common/include/Group.class.php:281 common/include/Group.class.php:285
+#: common/include/Group.class.php:282 common/include/Group.class.php:286
 #: common/include/User.class.php:283
 msgid "Unix name already taken"
 msgstr ""
 
-#: common/include/Group.class.php:288
+#: common/include/Group.class.php:289
 msgid ""
 "Please describe your Registration Purpose in a more comprehensive manner"
 msgstr ""
 
-#: common/include/Group.class.php:291
+#: common/include/Group.class.php:292
 msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
 msgstr ""
 
-#: common/include/Group.class.php:294
+#: common/include/Group.class.php:295
 msgid "Describe in a more comprehensive manner your project."
 msgstr ""
 
-#: common/include/Group.class.php:338
+#: common/include/Group.class.php:339
 #, php-format
 msgid "ERROR: Could not create group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:345
+#: common/include/Group.class.php:346
 #, php-format
 msgid "ERROR: Could not get group id: %s"
 msgstr ""
 
-#: common/include/Group.class.php:393 common/include/Group.class.php:460
+#: common/include/Group.class.php:394 common/include/Group.class.php:461
 msgid "Could not get permission."
 msgstr ""
 
-#: common/include/Group.class.php:414
+#: common/include/Group.class.php:415
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
 msgstr ""
 
-#: common/include/Group.class.php:479
+#: common/include/Group.class.php:480
 #, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: common/include/Group.class.php:532
+#: common/include/Group.class.php:533
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
 msgstr ""
 
-#: common/include/Group.class.php:576
+#: common/include/Group.class.php:577
 #, php-format
 msgid "Error updating project information: %s"
 msgstr ""
 
-#: common/include/Group.class.php:582
+#: common/include/Group.class.php:583
 #, php-format
 msgid "Error updating project information: use_docman %s"
 msgstr ""
 
-#: common/include/Group.class.php:601
+#: common/include/Group.class.php:602
 msgid "Error updating project information in plugin_hook group_update"
 msgstr ""
 
-#: common/include/Group.class.php:689
+#: common/include/Group.class.php:690
 msgid "Invalid Status Change"
 msgstr ""
 
-#: common/include/Group.class.php:700
+#: common/include/Group.class.php:701
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:911
+#: common/include/Group.class.php:912
 msgid "Couldn't insert SCM_BOX to database"
 msgstr ""
 
-#: common/include/Group.class.php:915
+#: common/include/Group.class.php:916
 msgid "SCM Box can't be empty"
 msgstr ""
 
-#: common/include/Group.class.php:1497
+#: common/include/Group.class.php:1498
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
 
-#: common/include/Group.class.php:1506
+#: common/include/Group.class.php:1507
 msgid "Setting tags:"
 msgstr ""
 
-#: common/include/Group.class.php:1536
+#: common/include/Group.class.php:1537
 msgid "Cannot Delete System Group"
 msgstr ""
 
-#: common/include/Group.class.php:1558
+#: common/include/Group.class.php:1559
 msgid "Could not properly remove member:"
 msgstr ""
 
-#: common/include/Group.class.php:1583
+#: common/include/Group.class.php:1584
 msgid "Could not properly delete the tracker:"
 msgstr ""
 
-#: common/include/Group.class.php:1597
+#: common/include/Group.class.php:1598
 msgid "Could not properly delete the forum:"
 msgstr ""
 
-#: common/include/Group.class.php:1611
+#: common/include/Group.class.php:1612
 msgid "Could not properly delete the ProjectGroup:"
 msgstr ""
 
-#: common/include/Group.class.php:1621
+#: common/include/Group.class.php:1622
 msgid "Error FRS Packages: "
 msgstr ""
 
-#: common/include/Group.class.php:1629
+#: common/include/Group.class.php:1630
 msgid "Could not properly delete the FRSPackage:"
 msgstr ""
 
-#: common/include/Group.class.php:1640 common/include/Group.class.php:1655
+#: common/include/Group.class.php:1641 common/include/Group.class.php:1656
 msgid "Error Deleting News: "
 msgstr ""
 
-#: common/include/Group.class.php:1648
+#: common/include/Group.class.php:1649
 #, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1666 common/include/Group.class.php:1674
+#: common/include/Group.class.php:1667 common/include/Group.class.php:1675
 msgid "Error Deleting Documents: "
 msgstr ""
 
-#: common/include/Group.class.php:1684
+#: common/include/Group.class.php:1685
 msgid "Error Deleting Tags: "
 msgstr ""
 
-#: common/include/Group.class.php:1695
+#: common/include/Group.class.php:1696
 msgid "Error Deleting Project History: "
 msgstr ""
 
-#: common/include/Group.class.php:1706
+#: common/include/Group.class.php:1707
 msgid "Error Deleting Project Plugins: "
 msgstr ""
 
-#: common/include/Group.class.php:1717
+#: common/include/Group.class.php:1718
 msgid "Error Deleting SCM Statistics: "
 msgstr ""
 
-#: common/include/Group.class.php:1732
+#: common/include/Group.class.php:1733
 msgid "Could not properly delete the survey"
 msgstr ""
 
-#: common/include/Group.class.php:1747
+#: common/include/Group.class.php:1748
 msgid "Could not properly delete the survey questions"
 msgstr ""
 
-#: common/include/Group.class.php:1762
+#: common/include/Group.class.php:1763
 #: plugins/mailman/include/mailmanPlugin.class.php:200
 msgid "Could not properly delete the mailing list"
 msgstr ""
 
-#: common/include/Group.class.php:1773 common/include/Group.class.php:1781
+#: common/include/Group.class.php:1774 common/include/Group.class.php:1782
 msgid "Error Deleting Trove: "
 msgstr ""
 
-#: common/include/Group.class.php:1792
+#: common/include/Group.class.php:1793
 msgid "Error Deleting Counters: "
 msgstr ""
 
-#: common/include/Group.class.php:1802 common/include/Group.class.php:1811
+#: common/include/Group.class.php:1803 common/include/Group.class.php:1812
 msgid "Error Deleting Project:"
 msgstr ""
 
-#: common/include/Group.class.php:1883
+#: common/include/Group.class.php:1884
 msgid "User is not active. Only active users can be added."
 msgstr ""
 
-#: common/include/Group.class.php:1895
+#: common/include/Group.class.php:1896
 msgid "Error Getting Role Object"
 msgstr ""
 
-#: common/include/Group.class.php:1924
+#: common/include/Group.class.php:1925
 msgid "ERROR: User does not exist"
 msgstr ""
 
-#: common/include/Group.class.php:1972 common/include/Group.class.php:2091
+#: common/include/Group.class.php:1973 common/include/Group.class.php:2092
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1994
+#: common/include/Group.class.php:1995
 msgid "ERROR: DB: artifact:"
 msgstr ""
 
-#: common/include/Group.class.php:2015 common/include/Group.class.php:2028
+#: common/include/Group.class.php:2016 common/include/Group.class.php:2029
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2071 www/admin/globalroledelete.php:37
+#: common/include/Group.class.php:2072 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:41 www/project/admin/roledelete.php:46
 #: www/project/admin/roleedit.php:53
 msgid "Could Not Get Role"
 msgstr ""
 
-#: common/include/Group.class.php:2074
+#: common/include/Group.class.php:2075
 #, php-format
 msgid "Role: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2078
+#: common/include/Group.class.php:2079
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2184
+#: common/include/Group.class.php:2185
 msgid "Group already active"
 msgstr ""
 
-#: common/include/Group.class.php:2424 common/include/Group.class.php:2495
+#: common/include/Group.class.php:2447 common/include/Group.class.php:2518
 msgid "Group does not have any administrators."
 msgstr ""
 
-#: common/include/Group.class.php:2432
+#: common/include/Group.class.php:2455
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -2281,12 +2281,12 @@ msgid ""
 "-- the %4$s crew"
 msgstr ""
 
-#: common/include/Group.class.php:2468
+#: common/include/Group.class.php:2491
 #, php-format
 msgid "%1$s Project Approved"
 msgstr ""
 
-#: common/include/Group.class.php:2502
+#: common/include/Group.class.php:2525
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -2298,20 +2298,20 @@ msgid ""
 "\n"
 msgstr ""
 
-#: common/include/Group.class.php:2521
+#: common/include/Group.class.php:2544
 #, php-format
 msgid "%1$s Project Denied"
 msgstr ""
 
-#: common/include/Group.class.php:2545
+#: common/include/Group.class.php:2568
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2552
+#: common/include/Group.class.php:2575
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2560
+#: common/include/Group.class.php:2583
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -2320,12 +2320,12 @@ msgid ""
 "Submitted Description: %3$s\n"
 msgstr ""
 
-#: common/include/Group.class.php:2570
+#: common/include/Group.class.php:2593
 #, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr ""
 
-#: common/include/Group.class.php:2576
+#: common/include/Group.class.php:2599
 #, php-format
 msgid ""
 "\n"
@@ -2333,12 +2333,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2580 common/include/Group.class.php:2595
+#: common/include/Group.class.php:2603 common/include/Group.class.php:2618
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr ""
 
-#: common/include/Group.class.php:2588
+#: common/include/Group.class.php:2611
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -2350,39 +2350,39 @@ msgid ""
 "notified of their decision."
 msgstr ""
 
-#: common/include/Group.class.php:2613
+#: common/include/Group.class.php:2636
 msgid "Group name is too short"
 msgstr ""
 
-#: common/include/Group.class.php:2616
+#: common/include/Group.class.php:2639
 msgid "Group name is too long"
 msgstr ""
 
-#: common/include/Group.class.php:2619
+#: common/include/Group.class.php:2642
 msgid "Group name already taken"
 msgstr ""
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2724
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2764
+#: common/include/Group.class.php:2787
 #, php-format
 msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2782
+#: common/include/Group.class.php:2805
 #, php-format
 msgid "ERROR - Could Not Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2800
+#: common/include/Group.class.php:2823
 #, php-format
 msgid "ERROR - Could Not Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2818
+#: common/include/Group.class.php:2841
 #, php-format
 msgid "ERROR - Could Not Update Group force_docman_reindex %s"
 msgstr ""
@@ -2670,29 +2670,29 @@ msgstr ""
 msgid "More than one value for the plugin + key"
 msgstr ""
 
-#: common/include/RBAC.php:199
+#: common/include/RBAC.php:200
 msgid "Can't link to home project"
 msgstr ""
 
-#: common/include/RBAC.php:224
+#: common/include/RBAC.php:235
 msgid "Can't unlink from home project"
 msgstr ""
 
-#: common/include/RBAC.php:735
+#: common/include/RBAC.php:752
 #, php-format
 msgid "%s (global role)"
 msgstr ""
 
-#: common/include/RBAC.php:739
+#: common/include/RBAC.php:756
 #, php-format
 msgid "%s (in project %s)"
 msgstr ""
 
-#: common/include/RBAC.php:1029
+#: common/include/RBAC.php:1047
 msgid "Anonymous/not logged in"
 msgstr ""
 
-#: common/include/RBAC.php:1077
+#: common/include/RBAC.php:1095
 msgid "Any user logged in"
 msgstr ""
 
@@ -2741,15 +2741,15 @@ msgstr ""
 msgid "Not implemented for this SCM plugin yet."
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:223
+#: common/include/SCMPlugin.class.php:224
 msgid "Repository History"
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:224
+#: common/include/SCMPlugin.class.php:225
 msgid "Data about current and past states of the repository"
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:254
+#: common/include/SCMPlugin.class.php:255
 msgid "Enable Anonymous Read Access"
 msgstr ""
 
@@ -2972,7 +2972,7 @@ msgstr ""
 
 #: common/include/forge_events.php:38
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:55
-#: plugins/mantisbt/view/admin/editVersion.php:60
+#: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49 www/snippet/package.php:170
 #: www/snippet/submit.php:138
 msgid "Version"
@@ -2995,7 +2995,7 @@ msgstr ""
 #: common/include/rbac_texts.php:45 common/include/rbac_texts.php:57
 #: common/include/rbac_texts.php:60 common/include/rbac_texts.php:62
 #: common/include/rbac_texts.php:64
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:224
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:227
 msgid "No administrative access"
 msgstr ""
 
@@ -3009,7 +3009,6 @@ msgstr ""
 #: common/include/rbac_texts.php:89 common/include/rbac_texts.php:97
 #: common/include/rbac_texts.php:105 common/include/rbac_texts.php:111
 #: common/include/rbac_texts.php:114 common/include/rbac_texts.php:119
-#: common/include/rbac_texts.php:124
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:155
 msgid "No access"
 msgstr ""
@@ -3023,7 +3022,7 @@ msgid "Approve news"
 msgstr ""
 
 #: common/include/rbac_texts.php:52
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:204
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:207
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:156
 msgid "Read access"
 msgstr ""
@@ -3133,15 +3132,6 @@ msgstr ""
 msgid "Publish files"
 msgstr ""
 
-#: common/include/rbac_texts.php:125 plugins/mantisbt/view/viewNote.php:59
-#: plugins/quota_management/www/quota_admin.php:130
-msgid "Modify"
-msgstr ""
-
-#: common/include/rbac_texts.php:126
-msgid "See"
-msgstr ""
-
 #: common/include/rbac_texts.php:135
 msgid "Forge statistics"
 msgstr ""
@@ -3164,10 +3154,6 @@ msgstr ""
 
 #: common/include/rbac_texts.php:153
 msgid "Documentation manager"
-msgstr ""
-
-#: common/include/rbac_texts.php:156
-msgid "Webcal"
 msgstr ""
 
 #: common/include/session.php:138 plugins/authldap/www/post-login.php:88
@@ -3196,22 +3182,22 @@ msgstr ""
 msgid "Account Not Active"
 msgstr ""
 
-#: common/include/session.php:384
+#: common/include/session.php:398
 msgid "Your account is no longer active ; you have been disconnected"
 msgstr ""
 
-#: common/include/session.php:437
+#: common/include/session.php:451
 #, php-format
 msgid ""
 "Permission denied. The %s administrators will have to grant you permission "
 "to view this page."
 msgstr ""
 
-#: common/include/session.php:486
+#: common/include/session.php:500
 msgid "Could not fetch user session data"
 msgstr ""
 
-#: common/include/session.php:514
+#: common/include/session.php:528
 msgid "No admin users ?"
 msgstr ""
 
@@ -3219,11 +3205,11 @@ msgstr ""
 msgid "UTF-8"
 msgstr ""
 
-#: common/include/utils.php:494
+#: common/include/utils.php:486
 msgid "Priority Colors"
 msgstr ""
 
-#: common/include/utils.php:494 common/tracker/actions/query.php:403
+#: common/include/utils.php:486 common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-updatecanned.php:43
@@ -3231,48 +3217,48 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: common/include/utils.php:879 common/include/utils.php:883
-#: common/include/utils.php:894
+#: common/include/utils.php:871 common/include/utils.php:875
+#: common/include/utils.php:886
 msgid "bytes"
 msgstr ""
 
-#: common/include/utils.php:879 common/include/utils.php:894
+#: common/include/utils.php:871 common/include/utils.php:886
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:879
+#: common/include/utils.php:871
 msgid "MB"
 msgstr ""
 
-#: common/include/utils.php:879
+#: common/include/utils.php:871
 msgid "GB"
 msgstr ""
 
-#: common/include/utils.php:879
+#: common/include/utils.php:871
 msgid "TB"
 msgstr ""
 
-#: common/include/utils.php:883 common/include/utils.php:894
+#: common/include/utils.php:875 common/include/utils.php:886
 msgid "KiB"
 msgstr ""
 
-#: common/include/utils.php:883
+#: common/include/utils.php:875
 msgid "MiB"
 msgstr ""
 
-#: common/include/utils.php:883
+#: common/include/utils.php:875
 msgid "GiB"
 msgstr ""
 
-#: common/include/utils.php:883
+#: common/include/utils.php:875
 msgid "TiB"
 msgstr ""
 
-#: common/include/utils.php:1233
+#: common/include/utils.php:1225
 msgid "Error: a mailing list with the same email address already exists."
 msgstr ""
 
-#: common/include/utils.php:1249
+#: common/include/utils.php:1241
 msgid "Error: a forum with the same email address already exists."
 msgstr ""
 
@@ -3352,7 +3338,7 @@ msgstr ""
 msgid "ProjectCategory: name and assignee are Required"
 msgstr ""
 
-#: common/pm/ProjectGroup.class.php:147 common/pm/ProjectGroup.class.php:328
+#: common/pm/ProjectGroup.class.php:147 common/pm/ProjectGroup.class.php:329
 msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr ""
 
@@ -3517,7 +3503,7 @@ msgid "Error: criteria not specified"
 msgstr ""
 
 #: common/search/SearchQuery.class.php:135
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:146
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:147
 msgid "Error: search query too short"
 msgstr ""
 
@@ -3606,8 +3592,8 @@ msgstr ""
 #: plugins/mailman/www/index.php:48 www/admin/passedit.php:53
 #: www/admin/passedit.php:61 www/admin/passedit.php:69
 #: www/forum/admin/pendingmsgdetail.php:51
-#: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:152
-#: www/mail/admin/index.php:248 www/snippet/download.php:45
+#: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:153
+#: www/mail/admin/index.php:249 www/snippet/download.php:45
 #: www/survey/admin/question.php:64 www/survey/admin/question.php:66
 #: www/survey/admin/show_csv.php:82 www/survey/admin/show_csv.php:84
 #: www/survey/admin/show_results.php:69 www/survey/admin/show_results.php:73
@@ -3706,7 +3692,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:61
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
-#: plugins/mantisbt/view/viewIssue.php:77 www/my/dashboard.php:72
+#: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:72
 #: www/pm/add_task.php:128 www/pm/browse_task.php:241
 #: www/pm/browse_task.php:381 www/pm/detail_task.php:125
 #: www/pm/mod_task.php:173
@@ -3763,8 +3749,8 @@ msgstr ""
 msgid "Error updating assigned_to in artifact: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1275
-#: common/tracker/Artifact.class.php:1285
+#: common/tracker/Artifact.class.php:1276
+#: common/tracker/Artifact.class.php:1286
 msgid "Status Custom Field Must Be Set"
 msgstr ""
 
@@ -3879,25 +3865,25 @@ msgid "Query does not exist"
 msgstr ""
 
 #: common/tracker/ArtifactType.class.php:211
-#: common/tracker/ArtifactType.class.php:981
+#: common/tracker/ArtifactType.class.php:982
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr ""
 
 #: common/tracker/ArtifactType.class.php:218
-#: common/tracker/ArtifactType.class.php:999
+#: common/tracker/ArtifactType.class.php:1000
 msgid "E-mail address(es) appeared invalid"
 msgstr ""
 
-#: common/tracker/ArtifactType.class.php:568
+#: common/tracker/ArtifactType.class.php:569
 msgid "Now Monitoring Tracker"
 msgstr ""
 
-#: common/tracker/ArtifactType.class.php:578
+#: common/tracker/ArtifactType.class.php:579
 msgid "Tracker Monitoring Deactivated"
 msgstr ""
 
-#: common/tracker/ArtifactType.class.php:992
+#: common/tracker/ArtifactType.class.php:993
 msgid "Tracker name already used"
 msgstr ""
 
@@ -4011,18 +3997,18 @@ msgstr ""
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: www/account/pending-resend.php:75 www/activity/index.php:184
-#: www/admin/admin_table.php:212 www/admin/cronman.php:37
+#: www/admin/admin_table.php:222 www/admin/cronman.php:37
 #: www/admin/globalroleedit.php:247 www/admin/index.php:163
 #: www/admin/pending-news.php:172 www/forum/admin/index.php:397
 #: www/include/vote_function.php:281 www/my/bookmark_add.php:50
 #: www/my/bookmark_edit.php:63 www/my/diary.php:191
 #: www/news/admin/index.php:151 www/news/news_utils.php:42
 #: www/news/submit.php:160 www/pm/add_task.php:49 www/pm/add_task.php:144
-#: www/pm/add_task.php:158 www/pm/admin/index.php:216
-#: www/pm/admin/index.php:261 www/pm/admin/index.php:292
+#: www/pm/add_task.php:158 www/pm/admin/index.php:215
+#: www/pm/admin/index.php:260 www/pm/admin/index.php:291
 #: www/pm/deletetask.php:44 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:237 www/project/admin/roledelete.php:85
-#: www/project/admin/roleedit.php:306 www/project/request.php:69
+#: www/project/admin/roleedit.php:308 www/project/request.php:69
 #: www/register/index.php:295 www/survey/include/SurveyHTML.class.php:554
 #: www/tracker/roadmap.php:444
 msgid "Submit"
@@ -4234,7 +4220,7 @@ msgid "Element deleted"
 msgstr ""
 
 #: common/tracker/actions/browse.php:94 common/tracker/actions/taskmgr.php:142
-#: www/pm/admin/index.php:386 www/pm/index.php:46 www/pm/task.php:86
+#: www/pm/admin/index.php:385 www/pm/index.php:46 www/pm/task.php:86
 #: www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr ""
@@ -4270,7 +4256,7 @@ msgstr ""
 #: common/tracker/views/form-customizelist.php:46
 #: plugins/mantisbt/view/addIssue.php:73
 #: plugins/mantisbt/view/editIssue.php:128
-#: plugins/mantisbt/view/viewIssue.php:78 www/my/dashboard.php:70
+#: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:70
 #: www/pm/add_task.php:59 www/pm/browse_task.php:130
 #: www/pm/browse_task.php:243 www/pm/browse_task.php:374
 #: www/pm/detail_task.php:68 www/pm/mod_task.php:83
@@ -4429,8 +4415,8 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/browse.php:737 common/tracker/actions/browse.php:748
-#: common/tracker/actions/browse.php:752 www/include/html.php:318
-#: www/include/html.php:490 www/include/html.php:681
+#: common/tracker/actions/browse.php:752 www/include/html.php:324
+#: www/include/html.php:496 www/include/html.php:687
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:373
 #: www/pm/browse_task.php:384
 msgid "No Change"
@@ -4604,7 +4590,7 @@ msgstr ""
 #: plugins/quota_management/www/quota_project.php:230
 #: plugins/scmcvs/common/CVSPlugin.class.php:171
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:216
-#: plugins/scmgit/common/GitPlugin.class.php:263
+#: plugins/scmgit/common/GitPlugin.class.php:264
 #: plugins/scmsvn/common/SVNPlugin.class.php:218 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
 msgid "Total"
@@ -4634,7 +4620,7 @@ msgstr ""
 msgid "Change Log"
 msgstr ""
 
-#: common/tracker/actions/mod.php:180 www/include/html.php:351
+#: common/tracker/actions/mod.php:180 www/include/html.php:357
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
@@ -4751,8 +4737,8 @@ msgstr ""
 msgid "Artifact Could Not Be Created"
 msgstr ""
 
-#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:301
-#: www/pm/admin/index.php:357
+#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:300
+#: www/pm/admin/index.php:356
 msgid "Could Not Get ProjectGroup"
 msgstr ""
 
@@ -5054,7 +5040,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:357
 #: plugins/blocks/www/index.php:225
 #: plugins/mantisbt/view/admin/addCategory.php:32
-#: plugins/mantisbt/view/admin/addVersion.php:35
+#: plugins/mantisbt/view/admin/addVersion.php:36
 #: plugins/oauthconsumer/www/provider_edit.php:34
 #: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:73
@@ -5063,7 +5049,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_update_page.php:55
 #: plugins/scmcvs/common/CVSPlugin.class.php:151
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:196
-#: plugins/scmgit/common/GitPlugin.class.php:243
+#: plugins/scmgit/common/GitPlugin.class.php:244
 #: plugins/scmsvn/common/SVNPlugin.class.php:198 www/admin/useredit.php:261
 #: www/admin/useredit.php:291 www/project/admin/editimages.php:267
 #: www/reporting/usersummary.php:101
@@ -5076,18 +5062,18 @@ msgstr ""
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:67
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:143
 #: plugins/mantisbt/view/viewAttachment.php:56
-#: plugins/mediawiki/www/plugin_admin.php:157 www/new/index.php:119
+#: plugins/mediawiki/www/plugin_admin.php:158 www/new/index.php:119
 msgid "Download"
 msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:523
 #: common/tracker/include/ArtifactTypeHtml.class.php:566
 #: common/tracker/include/ArtifactTypeHtml.class.php:728
-#: common/widget/Widget_MyArtifacts.class.php:113 www/admin/pluginman.php:210
-#: www/admin/pluginman.php:229 www/admin/pluginman.php:241
-#: www/admin/pluginman.php:242 www/include/html.php:277
-#: www/include/html.php:431 www/include/html.php:516 www/include/html.php:533
-#: www/include/html.php:567 www/include/html.php:608 www/pm/ganttpage.php:62
+#: common/widget/Widget_MyArtifacts.class.php:115 www/admin/pluginman.php:226
+#: www/admin/pluginman.php:245 www/admin/pluginman.php:258
+#: www/admin/pluginman.php:259 www/include/html.php:283
+#: www/include/html.php:437 www/include/html.php:522 www/include/html.php:539
+#: www/include/html.php:573 www/include/html.php:614 www/pm/ganttpage.php:62
 #: www/tracker/roadmap.php:440
 msgid "None"
 msgstr ""
@@ -5166,7 +5152,7 @@ msgid "Custom Fields Defined"
 msgstr ""
 
 #: common/tracker/views/form-addextrafield.php:43
-#: plugins/mantisbt/view/admin/editVersion.php:63
+#: plugins/mantisbt/view/admin/editVersion.php:64
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:102
 #: www/admin/massmail.php:137 www/frs/index.php:179
 #: www/people/editprofile.php:107 www/people/editprofile.php:282
@@ -5364,8 +5350,8 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin_project_link.php:62
 #: plugins/projects-hierarchy/view/admin_project_link.php:74
 #: www/admin/groupedit.php:148 www/admin/groupedit.php:168
-#: www/forum/admin/index.php:207 www/mail/admin/index.php:190
-#: www/mail/admin/index.php:221 www/people/editprofile.php:247
+#: www/forum/admin/index.php:207 www/mail/admin/index.php:191
+#: www/mail/admin/index.php:222 www/people/editprofile.php:247
 #: www/survey/admin/show_results_aggregate.php:193
 #: www/survey/include/SurveyHTML.class.php:194
 #: www/survey/include/SurveyHTML.class.php:417
@@ -5417,7 +5403,7 @@ msgstr ""
 msgid "Set order of releases for %s roadmap:"
 msgstr ""
 
-#: common/tracker/views/form-adminroadmap.php:400 www/frs/admin/index.php:152
+#: common/tracker/views/form-adminroadmap.php:400 www/frs/admin/index.php:153
 msgid "Releases"
 msgstr ""
 
@@ -5522,14 +5508,14 @@ msgstr ""
 #: common/tracker/views/form-deletetracker.php:32
 #: www/forum/admin/index.php:168 www/frs/admin/deletepackage.php:67
 #: www/frs/admin/deleterelease.php:75 www/frs/admin/editrelease.php:382
-#: www/pm/admin/index.php:372 www/project/admin/roledelete.php:81
+#: www/pm/admin/index.php:371 www/project/admin/roledelete.php:81
 msgid "I'm Sure"
 msgstr ""
 
 #: common/tracker/views/form-deleteextrafield.php:40
 #: common/tracker/views/form-deletetracker.php:33
 #: www/forum/admin/index.php:169 www/frs/admin/deletepackage.php:70
-#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:373
+#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:372
 msgid "I'm Really Sure"
 msgstr ""
 
@@ -5767,11 +5753,11 @@ msgstr ""
 msgid "assigned to or submitted by me [AS]"
 msgstr ""
 
-#: common/widget/Widget_MyArtifacts.class.php:111
+#: common/widget/Widget_MyArtifacts.class.php:113
 msgid "You have no artifacts"
 msgstr ""
 
-#: common/widget/Widget_MyArtifacts.class.php:255
+#: common/widget/Widget_MyArtifacts.class.php:257
 msgid "List artifacts you have submitted or assigned to you, by project."
 msgstr ""
 
@@ -5814,6 +5800,13 @@ msgstr ""
 msgid "Maximum number of SVN commits to display per project"
 msgstr ""
 
+#: common/widget/Widget_MyLatestSvnCommits.class.php:108
+#: plugins/quota_management/www/quota.php:165
+#: plugins/quota_management/www/quota.php:189
+#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:36
+msgid "scm"
+msgstr ""
+
 #: common/widget/Widget_MyLatestSvnCommits.class.php:111
 msgid "List SVN commits you have done, by project."
 msgstr ""
@@ -5845,7 +5838,6 @@ msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:102
 #: common/widget/Widget_MyMonitoredForums.class.php:116
-#: common/widget/Widget_MySurveys.class.php:107
 #, php-format
 msgid "%s new"
 msgstr ""
@@ -5962,13 +5954,17 @@ msgid ""
 msgstr ""
 
 #: common/widget/Widget_MyRss.class.php:35
-#: common/widget/Widget_ProjectRss.class.php:41
 msgid ""
 "Allow you to include public rss (or atom) feeds into your personal page."
 msgstr ""
 
 #: common/widget/Widget_MySurveys.class.php:56
 msgid "There are no surveys in your projects."
+msgstr ""
+
+#: common/widget/Widget_MySurveys.class.php:107
+#, php-format
+msgid "%d new"
 msgstr ""
 
 #: common/widget/Widget_MySurveys.class.php:116
@@ -6214,7 +6210,7 @@ msgstr ""
 #: plugins/scmgit/www/index.php:23 plugins/scmgit/www/index.php:36
 #: www/register/index.php:228 www/scm/admin/index.php:72
 #: www/scm/admin/index.php:89 www/scm/browser.php:30 www/scm/index.php:32
-#: www/scm/viewvc.php:149
+#: www/scm/viewvc.php:162
 msgid "SCM Repository"
 msgstr ""
 
@@ -6231,73 +6227,77 @@ msgid ""
 "service (e.g. total number of open bugs, tasks, ...)"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:99
+#: common/widget/Widget_ProjectRss.class.php:40
+msgid "Include public rss (or atom) feeds into project homepage."
+msgstr ""
+
+#: common/widget/Widget_Rss.class.php:103
 msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:188
+#: common/widget/Widget_Rss.class.php:192
 msgid "less than 1 minute"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:188
-msgid "1 minute"
-msgstr ""
-
-#: common/widget/Widget_Rss.class.php:190
-#, php-format
-msgid "%s minutes ago"
-msgstr ""
-
 #: common/widget/Widget_Rss.class.php:192
-msgid "About one hour"
+msgid "1 minute"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:194
 #, php-format
-msgid "about %s hours"
+msgid "%s minutes ago"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:196
-msgid "About one day"
+msgid "About one hour"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:198
 #, php-format
-msgid "%s days ago"
+msgid "about %s hours"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:200
-msgid "About one month"
+msgid "About one day"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:202
 #, php-format
-msgid "%s months ago"
+msgid "%s days ago"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:204
-msgid "About one year"
+msgid "About one month"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:206
 #, php-format
+msgid "%s months ago"
+msgstr ""
+
+#: common/widget/Widget_Rss.class.php:208
+msgid "About one year"
+msgstr ""
+
+#: common/widget/Widget_Rss.class.php:210
+#, php-format
 msgid "over %s years"
 msgstr ""
 
-#: cronjobs/homedirs.php:132
+#: cronjobs/homedirs.php:133
 msgid "Default Web Page for groups that haven't setup their page yet"
 msgstr ""
 
-#: cronjobs/homedirs.php:133
+#: cronjobs/homedirs.php:134
 msgid "Please replace this file with your own website"
 msgstr ""
 
-#: cronjobs/homedirs.php:134
+#: cronjobs/homedirs.php:135
 #, php-format
 msgid "Welcome to %s"
 msgstr ""
 
-#: cronjobs/homedirs.php:137
+#: cronjobs/homedirs.php:138
 #, php-format
 msgid ""
 "We're Sorry but this Project hasn't yet uploaded their personal webpage yet. "
@@ -6623,7 +6623,7 @@ msgid ""
 "the web site. They are created manually."
 msgstr ""
 
-#: plugins/blocks/www/index.php:228 www/admin/pluginman.php:191
+#: plugins/blocks/www/index.php:228 www/admin/pluginman.php:206
 #: www/admin/userlist.php:72
 msgid "Active"
 msgstr ""
@@ -7360,9 +7360,9 @@ msgid "Sub projects"
 msgstr ""
 
 #: plugins/extsubproj/view/admin/viewGlobalConfiguration.php:30
-#: plugins/mantisbt/view/admin/viewConfiguration.php:53
+#: plugins/mantisbt/view/admin/viewConfiguration.php:54
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:30
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:30
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:31
 msgid "Manage configuration"
 msgstr ""
 
@@ -7770,7 +7770,7 @@ msgid "User account URL"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
-#: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:129
+#: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:131
 #: www/people/people_utils.php:158 www/people/people_utils.php:299
 #: www/project/admin/users.php:302 www/project/admin/users.php:382
 #: www/project/admin/users.php:442 www/project/admin/users.php:466
@@ -7879,8 +7879,8 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin_project_link.php:62
 #: plugins/projects-hierarchy/view/admin_project_link.php:74
 #: www/admin/groupedit.php:147 www/admin/groupedit.php:167
-#: www/forum/admin/index.php:208 www/mail/admin/index.php:191
-#: www/mail/admin/index.php:222 www/people/editprofile.php:246
+#: www/forum/admin/index.php:208 www/mail/admin/index.php:192
+#: www/mail/admin/index.php:223 www/people/editprofile.php:246
 #: www/survey/admin/show_results_aggregate.php:207
 #: www/survey/include/SurveyHTML.class.php:195
 #: www/survey/include/SurveyHTML.class.php:419
@@ -8554,7 +8554,7 @@ msgstr ""
 msgid "Mailman plugin"
 msgstr ""
 
-#: plugins/mailman/www/admin/deletelist.php:52 www/mail/admin/index.php:229
+#: plugins/mailman/www/admin/deletelist.php:52 www/mail/admin/index.php:230
 msgid "Permanently Delete List"
 msgstr ""
 
@@ -8574,8 +8574,8 @@ msgstr ""
 #: plugins/mailman/www/admin/index.php:73
 #: plugins/mailman/www/admin/index.php:94
 #: plugins/mailman/www/admin/index.php:164 www/mail/admin/index.php:62
-#: www/mail/admin/index.php:89 www/mail/admin/index.php:112
-#: www/mail/admin/index.php:207
+#: www/mail/admin/index.php:89 www/mail/admin/index.php:113
+#: www/mail/admin/index.php:208
 msgid "Error getting the list"
 msgstr ""
 
@@ -8587,11 +8587,11 @@ msgstr ""
 msgid "List Added"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:106 www/mail/admin/index.php:100
+#: plugins/mailman/www/admin/index.php:106 www/mail/admin/index.php:101
 msgid "List updated"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:116 www/mail/admin/index.php:135
+#: plugins/mailman/www/admin/index.php:116 www/mail/admin/index.php:136
 msgid "Add a Mailing List"
 msgstr ""
 
@@ -8603,46 +8603,46 @@ msgid ""
 "your list to be created."
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:131 www/mail/admin/index.php:152
+#: plugins/mailman/www/admin/index.php:131 www/mail/admin/index.php:153
 msgid "Unable to get the lists"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:144 www/mail/admin/index.php:186
+#: plugins/mailman/www/admin/index.php:144 www/mail/admin/index.php:187
 msgid "Mailing List Name:"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:147
-#: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:189
-#: www/mail/admin/index.php:220
+#: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:190
+#: www/mail/admin/index.php:221
 msgid "Is Public?"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:153 www/mail/admin/index.php:195
+#: plugins/mailman/www/admin/index.php:153 www/mail/admin/index.php:196
 msgid "Add This List"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:169 www/mail/admin/index.php:213
+#: plugins/mailman/www/admin/index.php:169 www/mail/admin/index.php:214
 msgid "Mail admin"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:200 www/mail/admin/index.php:242
+#: plugins/mailman/www/admin/index.php:200 www/mail/admin/index.php:243
 msgid "Mailing List Administration"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:48
-#: www/mail/admin/index.php:248
+#: www/mail/admin/index.php:249
 #, php-format
 msgid "Unable to get the list %s"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:213 www/mail/admin/index.php:253
+#: plugins/mailman/www/admin/index.php:213 www/mail/admin/index.php:254
 #, php-format
 msgid ""
 "You can administrate lists from here. Please note that private lists can "
 "still be viewed by members of your project, but are not listed on %1$s."
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:216 www/mail/admin/index.php:256
+#: plugins/mailman/www/admin/index.php:216 www/mail/admin/index.php:257
 msgid "Add Mailing List"
 msgstr ""
 
@@ -8707,7 +8707,7 @@ msgid "Administrate"
 msgstr ""
 
 #: plugins/mailman/www/mailman_utils.php:112
-#: plugins/mailman/www/mailman_utils.php:172 www/mail/admin/index.php:281
+#: plugins/mailman/www/mailman_utils.php:172 www/mail/admin/index.php:282
 #: www/mail/index.php:91
 msgid "Not activated yet"
 msgstr ""
@@ -8735,86 +8735,88 @@ msgid "Administrate from Mailman"
 msgstr ""
 
 #: plugins/mantisbt/action/addAttachment.php:36
-msgid "Task Successed"
-msgstr ""
-
-#: plugins/mantisbt/action/addAttachment.php:38
-#: plugins/mantisbt/action/addCategory.php:38
-#: plugins/mantisbt/action/addIssue.php:46
-#: plugins/mantisbt/action/addIssue.php:135
-#: plugins/mantisbt/action/addNote.php:58
-#: plugins/mantisbt/action/addVersion.php:57
-#: plugins/mantisbt/action/addVersion.php:64
-#: plugins/mantisbt/action/deleteAttachment.php:38
-#: plugins/mantisbt/action/deleteNote.php:36
-#: plugins/mantisbt/action/updateIssue.php:179
-#: plugins/mantisbt/action/updateNote.php:36
-#: plugins/mantisbt/action/updateNote.php:62
-#: plugins/mantisbt/action/updateVersion.php:61
-msgid "Task failed:"
-msgstr ""
-
-#: plugins/mantisbt/action/addCategory.php:41
-msgid "Category added successfully"
-msgstr ""
-
-#: plugins/mantisbt/action/addCategory.php:44
-#: plugins/mantisbt/action/renameCategory.php:45
-msgid "Missing category name"
-msgstr ""
-
-#: plugins/mantisbt/action/addIssue.php:132
-msgid "Ticket "
-msgstr ""
-
-#: plugins/mantisbt/action/addNote.php:56
-msgid "Note added successfully"
-msgstr ""
-
-#: plugins/mantisbt/action/addVersion.php:67
+#: plugins/mantisbt/action/addVersion.php:70
+#: plugins/mantisbt/action/updateIssue.php:183
+#: plugins/mantisbt/action/updateNote.php:65
+#: plugins/mantisbt/action/updateVersion.php:62
 msgid "Task succeeded."
 msgstr ""
 
-#: plugins/mantisbt/action/addVersion.php:70
+#: plugins/mantisbt/action/addAttachment.php:38
+#: plugins/mantisbt/action/addCategory.php:39
+#: plugins/mantisbt/action/addIssue.php:129
+#: plugins/mantisbt/action/addNote.php:59
+#: plugins/mantisbt/action/addVersion.php:67
+#: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
+#: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
+#: plugins/mantisbt/action/updateIssue.php:179
+#: plugins/mantisbt/action/updateNote.php:37
+#: plugins/mantisbt/action/updateNote.php:61
+#: plugins/mantisbt/action/updateVersion.php:59
+msgid "Task failed:"
+msgstr ""
+
+#: plugins/mantisbt/action/addCategory.php:42
+msgid "Category added successfully"
+msgstr ""
+
+#: plugins/mantisbt/action/addCategory.php:45
+msgid "Missing category name"
+msgstr ""
+
+#: plugins/mantisbt/action/addIssue.php:47
+msgid "Task failed"
+msgstr ""
+
+#: plugins/mantisbt/action/addIssue.php:47 www/tracker/roadmap.php:468
+msgid ": "
+msgstr ""
+
+#: plugins/mantisbt/action/addIssue.php:126
+msgid "Ticket "
+msgstr ""
+
+#: plugins/mantisbt/action/addNote.php:57
+msgid "Note added successfully."
+msgstr ""
+
+#: plugins/mantisbt/action/addVersion.php:73
 msgid "Missing version."
 msgstr ""
 
 #: plugins/mantisbt/action/deleteAttachment.php:36
-msgid "Attachment deleted successfully"
+msgid "Attachment deleted successfully."
 msgstr ""
 
 #: plugins/mantisbt/action/deleteAttachment.php:43
-msgid "Missing Attachment ID to delete"
+msgid "Missing Attachment ID to delete."
 msgstr ""
 
-#: plugins/mantisbt/action/deleteCategory.php:36
-#: plugins/mantisbt/action/deleteVersion.php:40
-#: plugins/mantisbt/action/renameCategory.php:39
-msgid "Error:"
-msgstr ""
-
-#: plugins/mantisbt/action/deleteCategory.php:39
+#: plugins/mantisbt/action/deleteCategory.php:40
 #, php-format
-msgid "Category %s deleted successfully"
+msgid "Category %s deleted successfully."
 msgstr ""
 
-#: plugins/mantisbt/action/deleteCategory.php:42
-msgid "Missing parameters to delete category"
+#: plugins/mantisbt/action/deleteCategory.php:43
+msgid "Missing parameters to delete category."
 msgstr ""
 
 #: plugins/mantisbt/action/deleteNote.php:39
 msgid "Note deleted successfully"
 msgstr ""
 
-#: plugins/mantisbt/action/deleteVersion.php:43
-msgid "Version deleted successfully"
+#: plugins/mantisbt/action/deleteVersion.php:44
+msgid "Version deleted successfully."
 msgstr ""
 
-#: plugins/mantisbt/action/deleteVersion.php:46
-msgid "Missing parameters to delete version"
+#: plugins/mantisbt/action/deleteVersion.php:47
+msgid "Missing parameters to delete version."
 msgstr ""
 
-#: plugins/mantisbt/action/init.php:39
+#: plugins/mantisbt/action/init.php:41
 msgid "MantisBT plugin successfully initialized."
 msgstr ""
 
@@ -8826,16 +8828,24 @@ msgstr ""
 msgid "MantisBT User successfully initialized."
 msgstr ""
 
-#: plugins/mantisbt/action/renameCategory.php:42
-msgid "Category renamed successfully"
+#: plugins/mantisbt/action/renameCategory.php:37
+msgid "No action, same category name."
 msgstr ""
 
-#: plugins/mantisbt/action/updateConf.php:41
+#: plugins/mantisbt/action/renameCategory.php:47
+msgid "Category renamed successfully."
+msgstr ""
+
+#: plugins/mantisbt/action/renameCategory.php:50
+msgid "Missing category name."
+msgstr ""
+
+#: plugins/mantisbt/action/updateConf.php:39
 msgid "MantisBT configuration successfully updated."
 msgstr ""
 
 #: plugins/mantisbt/action/updateGlobalConf.php:33
-#: plugins/projects-hierarchy/actions/updateGlobalConf.php:32
+#: plugins/projects-hierarchy/actions/updateGlobalConf.php:33
 msgid "Failed to update global configuration."
 msgstr ""
 
@@ -8844,16 +8854,10 @@ msgid "MantisBT global configuration successfully updated."
 msgstr ""
 
 #: plugins/mantisbt/action/updateIssue.php:45
-msgid "No type found"
+msgid "No type found."
 msgstr ""
 
-#: plugins/mantisbt/action/updateIssue.php:183
-#: plugins/mantisbt/action/updateNote.php:66
-#: plugins/mantisbt/action/updateVersion.php:64
-msgid "Task succeeded"
-msgstr ""
-
-#: plugins/mantisbt/action/updateuserConf.php:33
+#: plugins/mantisbt/action/updateuserConf.php:34
 msgid "MantisBT User configuration successfully updated."
 msgstr ""
 
@@ -8935,11 +8939,19 @@ msgstr ""
 msgid "Site Global MantisBT Admin"
 msgstr ""
 
-#: plugins/mantisbt/common/MantisBTPlugin.class.php:636
+#: plugins/mantisbt/common/MantisBTPlugin.class.php:450
+msgid "MantisBT project not initialized, missing params"
+msgstr ""
+
+#: plugins/mantisbt/common/MantisBTPlugin.class.php:552
+msgid "MantisBT project not found"
+msgstr ""
+
+#: plugins/mantisbt/common/MantisBTPlugin.class.php:649
 msgid "Global MantisBT admin"
 msgstr ""
 
-#: plugins/mantisbt/common/MantisBTPlugin.class.php:636
+#: plugins/mantisbt/common/MantisBTPlugin.class.php:649
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
@@ -8965,13 +8977,13 @@ msgstr ""
 #: plugins/mantisbt/view/addIssue.php:62
 #: plugins/mantisbt/view/addOrEditNote.php:46
 #: plugins/mantisbt/view/admin/StatPerStatus.php:39
-#: plugins/mantisbt/view/admin/editVersion.php:42
+#: plugins/mantisbt/view/admin/editVersion.php:43
 #: plugins/mantisbt/view/admin/viewCategorie.php:39
 #: plugins/mantisbt/view/admin/viewVersion.php:40
 #: plugins/mantisbt/view/editIssue.php:65 plugins/mantisbt/view/roadmap.php:39
 #: plugins/mantisbt/view/roadmap.php:92
 #: plugins/mantisbt/view/viewAttachment.php:38
-#: plugins/mantisbt/view/viewIssue.php:40
+#: plugins/mantisbt/view/viewIssue.php:42
 #: plugins/mantisbt/view/viewIssues.php:64
 #: plugins/mantisbt/www/admin/index.php:45
 msgid "Technical error occurs during data retrieving:"
@@ -9009,8 +9021,8 @@ msgstr ""
 
 #: plugins/mantisbt/controler/filter_roadmap.php:62
 #: plugins/mantisbt/controler/filter_roadmap.php:94
-#: plugins/mantisbt/view/admin/editVersion.php:76
-#: plugins/mantisbt/view/admin/editVersion.php:79
+#: plugins/mantisbt/view/admin/editVersion.php:77
+#: plugins/mantisbt/view/admin/editVersion.php:80
 #: plugins/mantisbt/view/roadmap.php:96 plugins/mantisbt/view/roadmap.php:145
 msgid "Milestone"
 msgstr ""
@@ -9018,7 +9030,7 @@ msgstr ""
 #: plugins/mantisbt/view/addIssue.php:70
 #: plugins/mantisbt/view/admin/viewCategorie.php:49
 #: plugins/mantisbt/view/editIssue.php:88
-#: plugins/mantisbt/view/viewIssue.php:50
+#: plugins/mantisbt/view/viewIssue.php:57
 #: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:49
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editjob.php:163 www/people/people_utils.php:350
@@ -9033,20 +9045,20 @@ msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:71
 #: plugins/mantisbt/view/editIssue.php:90
-#: plugins/mantisbt/view/viewIssue.php:52
+#: plugins/mantisbt/view/viewIssue.php:59
 msgid "Reproducibility"
 msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:72
 #: plugins/mantisbt/view/editIssue.php:89
-#: plugins/mantisbt/view/viewIssue.php:51
+#: plugins/mantisbt/view/viewIssue.php:58
 #: plugins/mantisbt/view/viewIssues.php:276
 msgid "Severity"
 msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:75
 #: plugins/mantisbt/view/editIssue.php:176
-#: plugins/mantisbt/view/viewIssue.php:55
+#: plugins/mantisbt/view/viewIssue.php:62
 msgid "Found in"
 msgstr ""
 
@@ -9090,20 +9102,15 @@ msgstr ""
 msgid "Add a new category"
 msgstr ""
 
-#: plugins/mantisbt/view/admin/addVersion.php:33
+#: plugins/mantisbt/view/admin/addVersion.php:34
 msgid "Add a new version"
 msgstr ""
 
-#: plugins/mantisbt/view/admin/addVersion.php:37
-#: plugins/mantisbt/view/admin/editVersion.php:87
-msgid "Cross version (son included)"
-msgstr ""
-
-#: plugins/mantisbt/view/admin/editVersion.php:55
+#: plugins/mantisbt/view/admin/editVersion.php:56
 msgid "Version Detail"
 msgstr ""
 
-#: plugins/mantisbt/view/admin/editVersion.php:62
+#: plugins/mantisbt/view/admin/editVersion.php:63
 msgid "Target date"
 msgstr ""
 
@@ -9119,35 +9126,35 @@ msgstr ""
 msgid "No Categories"
 msgstr ""
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:58
+#: plugins/mantisbt/view/admin/viewConfiguration.php:59
 #: plugins/mantisbt/view/init.php:65
 msgid "Use the global configuration defined at forge level"
 msgstr ""
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:59
+#: plugins/mantisbt/view/admin/viewConfiguration.php:60
 #: plugins/mantisbt/view/init.php:66
 msgid "Use global configuration"
 msgstr ""
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:66
+#: plugins/mantisbt/view/admin/viewConfiguration.php:67
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:34
 #: plugins/mantisbt/view/init.php:69
 msgid "Specify the Full URL of the MantisBT Web Server."
 msgstr ""
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:70
+#: plugins/mantisbt/view/admin/viewConfiguration.php:71
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:36
 #: plugins/mantisbt/view/init.php:73
 msgid "Specify the user with admin right to be used thru SOAP API."
 msgstr ""
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:74
+#: plugins/mantisbt/view/admin/viewConfiguration.php:75
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:38
 #: plugins/mantisbt/view/adminuser.php:40 plugins/mantisbt/view/init.php:77
 msgid "Specify the password of this user."
 msgstr ""
 
-#: plugins/mantisbt/view/admin/viewConfiguration.php:78
+#: plugins/mantisbt/view/admin/viewConfiguration.php:79
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:40
 msgid ""
 "Do you want to sync FusionForge -> MantisBT roles ? Not implemented yet."
@@ -9178,33 +9185,33 @@ msgid "Edit Ticket: "
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:91
-#: plugins/mantisbt/view/viewIssue.php:53
+#: plugins/mantisbt/view/viewIssue.php:60
 msgid "Submit Date"
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:92
-#: plugins/mantisbt/view/viewIssue.php:54
+#: plugins/mantisbt/view/viewIssue.php:61
 msgid "Update Date"
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:126
-#: plugins/mantisbt/view/viewIssue.php:76
+#: plugins/mantisbt/view/viewIssue.php:83
 msgid "Reporter"
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:129
-#: plugins/mantisbt/view/viewIssue.php:79 www/include/html.php:349
+#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:355
 #: www/pm/ganttpage.php:159
 msgid "Resolution"
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:177
-#: plugins/mantisbt/view/viewIssue.php:81
+#: plugins/mantisbt/view/viewIssue.php:88
 msgid "Fixed in"
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:178
-#: plugins/mantisbt/view/viewIssue.php:56
+#: plugins/mantisbt/view/viewIssue.php:63
 msgid "Target"
 msgstr ""
 
@@ -9213,7 +9220,7 @@ msgid "(max128 char )"
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:221
-#: plugins/mantisbt/view/viewIssue.php:109
+#: plugins/mantisbt/view/viewIssue.php:116
 msgid "Additional Informations"
 msgstr ""
 
@@ -9282,11 +9289,15 @@ msgstr ""
 msgid "Add file"
 msgstr ""
 
-#: plugins/mantisbt/view/viewIssue.php:47
+#: plugins/mantisbt/view/viewIssue.php:48
+msgid "Woops: wrong issue id"
+msgstr ""
+
+#: plugins/mantisbt/view/viewIssue.php:54
 msgid "Ticket"
 msgstr ""
 
-#: plugins/mantisbt/view/viewIssue.php:124
+#: plugins/mantisbt/view/viewIssue.php:130
 msgid "Edit ticket"
 msgstr ""
 
@@ -9304,6 +9315,11 @@ msgstr ""
 
 #: plugins/mantisbt/view/viewIssues.php:496
 msgid "Add a new ticket"
+msgstr ""
+
+#: plugins/mantisbt/view/viewNote.php:59
+#: plugins/quota_management/www/quota_admin.php:130
+msgid "Modify"
 msgstr ""
 
 #: plugins/mantisbt/view/viewNote.php:70
@@ -9363,67 +9379,67 @@ msgstr ""
 msgid "Mediawiki integration in the forge"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:96
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:99
 msgid "Mediawiki Space"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:202
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:205
 msgid "Mediawiki read access"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:203
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:206
 msgid "No reading"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:208
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:211
 msgid "Mediawiki write access"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:209
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:212
 msgid "No editing"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:210
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:213
 msgid "Edit existing pages only"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:211
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:214
 msgid "Edit and create pages"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:212
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:215
 msgid "Edit, create, move, delete pages"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:216
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:219
 msgid "Mediawiki file upload"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:217
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:220
 msgid "No uploading"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:218
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:221
 msgid "Upload permitted"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:219
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:222
 msgid "Upload and re-upload"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:223
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:226
 msgid "Mediawiki administrative tasks"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:225
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:228
 msgid "Edit interface, import XML dumps"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:352
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:355
 msgid "MediaWiki Plugin admin"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:372
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:375
 msgid "Mediawiki plugin"
 msgstr ""
 
@@ -9441,94 +9457,94 @@ msgstr ""
 msgid "Wiki not created yet, please wait for a few minutes."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:34
+#: plugins/mediawiki/www/plugin_admin.php:35
 msgid "Invalid file upload"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:38
+#: plugins/mediawiki/www/plugin_admin.php:39
 msgid "Not a valid PNG image"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:40
+#: plugins/mediawiki/www/plugin_admin.php:41
 #, php-format
 msgid "Image size is %dx%d pixels, expected %dx%d instead"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:44
+#: plugins/mediawiki/www/plugin_admin.php:45
 msgid "Cannot copy file to target directory"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:47
+#: plugins/mediawiki/www/plugin_admin.php:48
 msgid "Cannot overwrite existing file"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:53
+#: plugins/mediawiki/www/plugin_admin.php:54
 msgid "Cannot move file to target location"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:55
+#: plugins/mediawiki/www/plugin_admin.php:56
 msgid "New file installed successfully"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:94
+#: plugins/mediawiki/www/plugin_admin.php:95
 msgid "File successfully removed"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:96
+#: plugins/mediawiki/www/plugin_admin.php:97
 msgid "File removal error"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:107
+#: plugins/mediawiki/www/plugin_admin.php:108
 #: www/frs/include/frs_utils.php:224
 msgid ""
 "The uploaded file exceeds the maximum file size. Contact to the site admin "
 "to upload this big file, or use an alternate upload method (if available)."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:110
+#: plugins/mediawiki/www/plugin_admin.php:111
 #: www/frs/include/frs_utils.php:227
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:113
-#: plugins/mediawiki/www/plugin_admin.php:124
+#: plugins/mediawiki/www/plugin_admin.php:114
+#: plugins/mediawiki/www/plugin_admin.php:125
 #: www/frs/include/frs_utils.php:230 www/frs/include/frs_utils.php:268
 msgid "Unknown file upload error."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:147
+#: plugins/mediawiki/www/plugin_admin.php:148
 msgid "Nightly XML dump"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:149
+#: plugins/mediawiki/www/plugin_admin.php:150
 #, php-format
 msgid "<a href=\"%s\">Download</a> the nightly created XML dump (backup) here."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:156
+#: plugins/mediawiki/www/plugin_admin.php:157
 msgid "Current logo:"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:161
+#: plugins/mediawiki/www/plugin_admin.php:162
 msgid "No per-project logo currently installed."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:169
+#: plugins/mediawiki/www/plugin_admin.php:170
 msgid "Upload a new logo"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:171
+#: plugins/mediawiki/www/plugin_admin.php:172
 msgid ""
 "NOTE: In some browsers you must select the file in the file-upload dialog "
 "and click \"OK\".  Double-clicking doesn't register the file."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:173
+#: plugins/mediawiki/www/plugin_admin.php:174
 #: www/frs/admin/editrelease.php:287 www/frs/admin/qrs.php:199
 msgid "Upload a new file"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:179
+#: plugins/mediawiki/www/plugin_admin.php:180
 #: www/frs/admin/editrelease.php:302 www/frs/admin/qrs.php:215
 #, php-format
 msgid ""
@@ -9536,24 +9552,24 @@ msgid ""
 "the <a href=\"%2$s\">project's incoming directory</a> (%1$s)."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:181
+#: plugins/mediawiki/www/plugin_admin.php:182
 #: www/frs/admin/editrelease.php:304 www/frs/admin/qrs.php:217
 msgid ""
 "This direct <tt>sftp://</tt> link only works with some browsers, such as "
 "Konqueror."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:182
+#: plugins/mediawiki/www/plugin_admin.php:183
 #: www/frs/admin/editrelease.php:292 www/frs/admin/editrelease.php:305
 #: www/frs/admin/qrs.php:218
 msgid "Choose an already uploaded file:"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:188
+#: plugins/mediawiki/www/plugin_admin.php:189
 msgid "… or delete the currently uploaded logo and revert to the site default"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:189
+#: plugins/mediawiki/www/plugin_admin.php:190
 msgid "Upload new logo"
 msgstr ""
 
@@ -10403,7 +10419,7 @@ msgstr ""
 msgid "Failed to removed parent"
 msgstr ""
 
-#: plugins/projects-hierarchy/actions/updateGlobalConf.php:36
+#: plugins/projects-hierarchy/actions/updateGlobalConf.php:37
 msgid "Projects Hierarchy global configuration successfully updated."
 msgstr ""
 
@@ -10423,46 +10439,46 @@ msgstr ""
 msgid "Failed to do task."
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:29
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:30
 msgid "Project Hierarchy"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:94
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:95
 msgid "Hierarchy Admin"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:94
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:600
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:95
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:604
 msgid ""
 "Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf "
 "features)"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:116
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:119
 msgid "Per Category"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:117
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:120
 msgid "Per Hierarchy"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:118
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:121
 msgid ""
 "Browse per category the available projects. Some projects might not appear "
 "here they do not choose any categories"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:119
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:122
 msgid ""
 "Browse per hierarchy. Projects can share relationship between projects, as "
 "father and sons"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:600
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:604
 msgid "Global Hierarchy admin"
 msgstr ""
 
-#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:617
+#: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:621
 msgid "Site Global Hierarchy Admin"
 msgstr ""
 
@@ -10478,19 +10494,19 @@ msgstr ""
 msgid "Navigation"
 msgstr ""
 
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:36
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:37
 msgid "Enable Tree in projects tab."
 msgstr ""
 
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:37
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:38
 msgid "Enable Tree"
 msgstr ""
 
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:45
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:46
 msgid "Enable hierarchical view for browsing in document manager."
 msgstr ""
 
-#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:46
+#: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:47
 msgid "Enable docman browsing"
 msgstr ""
 
@@ -10586,11 +10602,11 @@ msgstr ""
 msgid "No pending requests"
 msgstr ""
 
-#: plugins/projects-hierarchy/view/docman_project_link.php:30
+#: plugins/projects-hierarchy/view/docman_project_link.php:33
 msgid "Enable hierarchical browsing"
 msgstr ""
 
-#: plugins/projects-hierarchy/view/docman_project_link.php:33
+#: plugins/projects-hierarchy/view/docman_project_link.php:36
 msgid "Disable hierarchical browsing"
 msgstr ""
 
@@ -10654,12 +10670,6 @@ msgstr ""
 
 #: plugins/quota_management/www/quota.php:163
 msgid "Ftp, Home"
-msgstr ""
-
-#: plugins/quota_management/www/quota.php:165
-#: plugins/quota_management/www/quota.php:189
-#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:36
-msgid "scm"
 msgstr ""
 
 #: plugins/quota_management/www/quota.php:166
@@ -10857,7 +10867,7 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:68
 #: plugins/scmcvs/common/CVSPlugin.class.php:64
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:82
-#: plugins/scmgit/common/GitPlugin.class.php:62
+#: plugins/scmgit/common/GitPlugin.class.php:65
 #: plugins/scmsvn/common/SVNPlugin.class.php:80
 #, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
@@ -10906,8 +10916,8 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:108
 #: plugins/scmcpold/common/CpoldPlugin.class.php:73
 #: plugins/scmcvs/common/CVSPlugin.class.php:106
-#: plugins/scmgit/common/GitPlugin.class.php:140
-#: plugins/scmgit/common/GitPlugin.class.php:149
+#: plugins/scmgit/common/GitPlugin.class.php:143
+#: plugins/scmgit/common/GitPlugin.class.php:152
 #: plugins/scmsvn/common/SVNPlugin.class.php:154
 #: plugins/scmsvn/common/SVNPlugin.class.php:163
 msgid "developername"
@@ -11049,7 +11059,7 @@ msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:119
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:154
-#: plugins/scmgit/common/GitPlugin.class.php:196
+#: plugins/scmgit/common/GitPlugin.class.php:199
 msgid "Download the nightly snapshot"
 msgstr ""
 
@@ -11070,7 +11080,7 @@ msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:152
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:197
-#: plugins/scmgit/common/GitPlugin.class.php:244
+#: plugins/scmgit/common/GitPlugin.class.php:245
 #: plugins/scmsvn/common/SVNPlugin.class.php:199
 #: www/stats/site_stats_utils.php:284
 msgid "Adds"
@@ -11156,27 +11166,27 @@ msgstr ""
 msgid "Clone: "
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:67
+#: plugins/scmgit/common/GitPlugin.class.php:70
 msgid ""
 "Documentation for Git is available at <a href=\"http://git-scm.com/\">http://"
 "git-scm.com/</a>."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:71
+#: plugins/scmgit/common/GitPlugin.class.php:74
 msgid "Anonymous Git Access"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:73
+#: plugins/scmgit/common/GitPlugin.class.php:76
 msgid ""
 "This project's Git repository can be checked out through anonymous access "
 "with the following command."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:87
+#: plugins/scmgit/common/GitPlugin.class.php:90
 msgid "Developer's repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:90
+#: plugins/scmgit/common/GitPlugin.class.php:93
 msgid ""
 "One of this project's members also has a personal Git repository that can be "
 "checked out anonymously."
@@ -11186,56 +11196,56 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:114
-#: plugins/scmgit/common/GitPlugin.class.php:135
-msgid "Developer GIT Access via SSH"
-msgstr ""
-
 #: plugins/scmgit/common/GitPlugin.class.php:117
-msgid ""
-"Only project developers can access the GIT tree via this method. SSH must be "
-"installed on your client machine. Enter your site password when prompted."
+#: plugins/scmgit/common/GitPlugin.class.php:138
+msgid "Developer Git Access via SSH"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:123
-#: plugins/scmgit/common/GitPlugin.class.php:144
-msgid "Developer GIT Access via HTTP"
+#: plugins/scmgit/common/GitPlugin.class.php:120
+msgid ""
+"Only project developers can access the Git tree via this method. SSH must be "
+"installed on your client machine. Enter your site password when prompted."
 msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:126
 #: plugins/scmgit/common/GitPlugin.class.php:147
+msgid "Developer Git Access via HTTP"
+msgstr ""
+
+#: plugins/scmgit/common/GitPlugin.class.php:129
+#: plugins/scmgit/common/GitPlugin.class.php:150
 msgid ""
-"Only project developers can access the GIT tree via this method. Enter your "
+"Only project developers can access the Git tree via this method. Enter your "
 "site password when prompted."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:130
+#: plugins/scmgit/common/GitPlugin.class.php:133
 msgid ""
 "Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:138
+#: plugins/scmgit/common/GitPlugin.class.php:141
 msgid ""
-"Only project developers can access the GIT tree via this method. SSH must be "
+"Only project developers can access the Git tree via this method. SSH must be "
 "installed on your client machine. Substitute <i>developername</i> with the "
 "proper value. Enter your site password when prompted."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:161
+#: plugins/scmgit/common/GitPlugin.class.php:164
 msgid "Access to your personal repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:164
+#: plugins/scmgit/common/GitPlugin.class.php:167
 msgid ""
 "You have a personal repository for this project, accessible through SSH with "
 "the following method. Enter your site password when prompted."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:172
+#: plugins/scmgit/common/GitPlugin.class.php:175
 msgid "Request a personal repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:175
+#: plugins/scmgit/common/GitPlugin.class.php:178
 msgid ""
 "You can clone the project repository into a personal one into which you "
 "alone will be able to write.  Other members of the project will only have "
@@ -11244,27 +11254,27 @@ msgid ""
 "time before it is created (less than an hour in most situations)."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:178
+#: plugins/scmgit/common/GitPlugin.class.php:181
 #, php-format
 msgid "<a href=\"%s\">Request a personal repository</a>."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:220
+#: plugins/scmgit/common/GitPlugin.class.php:221
 msgid "Git Repository Browser"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:222
+#: plugins/scmgit/common/GitPlugin.class.php:223
 msgid ""
 "Browsing the Git tree gives you a view into the current status of this "
 "project's code. You may also view the complete histories of any file in the "
 "repository."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:226
+#: plugins/scmgit/common/GitPlugin.class.php:227
 msgid "Browse Git Repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:245
+#: plugins/scmgit/common/GitPlugin.class.php:246
 msgid "Updates"
 msgstr ""
 
@@ -11759,7 +11769,7 @@ msgstr ""
 msgid "Updated"
 msgstr ""
 
-#: www/account/index.php:97 www/account/index.php:102 www/include/html.php:846
+#: www/account/index.php:97 www/account/index.php:102 www/include/html.php:852
 msgid "Account Maintenance"
 msgstr ""
 
@@ -12228,62 +12238,69 @@ msgstr ""
 msgid "Document"
 msgstr ""
 
-#: www/admin/admin_table.php:40
+#: www/admin/admin_table.php:41
 #, php-format
 msgid "Create a new %1$s below:"
 msgstr ""
 
-#: www/admin/admin_table.php:93 www/admin/admin_table.php:271
+#: www/admin/admin_table.php:94 www/admin/admin_table.php:282
 #, php-format
 msgid "%1$s successfully added."
 msgstr ""
 
-#: www/admin/admin_table.php:116
+#: www/admin/admin_table.php:117
 #, php-format
 msgid ""
 "You can't delete the processor %1$s since it's currently referenced in a "
 "file release."
 msgstr ""
 
-#: www/admin/admin_table.php:125
+#: www/admin/admin_table.php:126
 #, php-format
 msgid ""
 "You can't delete the license %1$s since it's currently referenced in a "
 "project."
 msgstr ""
 
-#: www/admin/admin_table.php:133
+#: www/admin/admin_table.php:134
 #, php-format
 msgid ""
 "You can't delete the language %1$s since it's currently referenced in a user "
 "profile."
 msgstr ""
 
-#: www/admin/admin_table.php:144
+#: www/admin/admin_table.php:143
+#, php-format
+msgid ""
+"You can't delete the theme %1$s since it's currently referenced in a user "
+"profile."
+msgstr ""
+
+#: www/admin/admin_table.php:154
 #, php-format
 msgid "Are you sure you want to delete this %1$s?"
 msgstr ""
 
-#: www/admin/admin_table.php:173
+#: www/admin/admin_table.php:183
 #, php-format
 msgid "%1$s successfully deleted."
 msgstr ""
 
-#: www/admin/admin_table.php:194
+#: www/admin/admin_table.php:204
 #, php-format
 msgid "Modify the %1$s below:"
 msgstr ""
 
-#: www/admin/admin_table.php:249
+#: www/admin/admin_table.php:259
 #, php-format
 msgid "%1$s successfully modified."
 msgstr ""
 
-#: www/admin/admin_table.php:297
+#: www/admin/admin_table.php:308
 msgid "add new"
 msgstr ""
 
-#: www/admin/admin_table.php:342
+#: www/admin/admin_table.php:353
 #, php-format
 msgid "Edit the %1$ss Table"
 msgstr ""
@@ -12839,7 +12856,7 @@ msgstr ""
 msgid "Last Logins"
 msgstr ""
 
-#: www/admin/index.php:207 www/admin/pluginman.php:117
+#: www/admin/index.php:207 www/admin/pluginman.php:119
 msgid "Plugin Manager"
 msgstr ""
 
@@ -13026,12 +13043,12 @@ msgid_plural "%d projects detached from plugin."
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/admin/pluginman.php:66 www/admin/pluginman.php:99
+#: www/admin/pluginman.php:66 www/admin/pluginman.php:101
 #, php-format
 msgid "Plugin %1$s updated Successfully"
 msgstr ""
 
-#: www/admin/pluginman.php:71 www/admin/pluginman.php:107
+#: www/admin/pluginman.php:71 www/admin/pluginman.php:109
 msgid "Couldn't get plugin object"
 msgstr ""
 
@@ -13040,62 +13057,62 @@ msgid ""
 "<br />Soft link wasn't removed in www/plugins folder, please do so manually."
 msgstr ""
 
-#: www/admin/pluginman.php:88
+#: www/admin/pluginman.php:91
 msgid "Success, config not deleted"
 msgstr ""
 
-#: www/admin/pluginman.php:123
+#: www/admin/pluginman.php:125
 msgid ""
 "Here you can activate / deactivate site-wide plugins which are in the "
 "plugins/ folder. Then, you should activate them also per project, per user "
 "or whatever the plugin specifically applies to."
 msgstr ""
 
-#: www/admin/pluginman.php:125
+#: www/admin/pluginman.php:127
 msgid ""
 "Be careful because some projects/users can be using the plugin. Deactivating "
 "it will remove the plugin from all users/projects."
 msgstr ""
 
-#: www/admin/pluginman.php:127
+#: www/admin/pluginman.php:129
 msgid "Plugin Name"
 msgstr ""
 
-#: www/admin/pluginman.php:130
+#: www/admin/pluginman.php:132
 msgid "Users Using it"
 msgstr ""
 
-#: www/admin/pluginman.php:131
+#: www/admin/pluginman.php:133
 msgid "Projects Using it"
 msgstr ""
 
-#: www/admin/pluginman.php:132
+#: www/admin/pluginman.php:134
 msgid "Global Administration View"
 msgstr ""
 
-#: www/admin/pluginman.php:193
+#: www/admin/pluginman.php:209
 msgid "Deactivate"
 msgstr ""
 
-#: www/admin/pluginman.php:207
+#: www/admin/pluginman.php:223
 #, php-format
 msgid "%d users"
 msgstr ""
 
-#: www/admin/pluginman.php:226
+#: www/admin/pluginman.php:242
 #, php-format
 msgid "%d projects"
 msgstr ""
 
-#: www/admin/pluginman.php:238
+#: www/admin/pluginman.php:254
 msgid "Inactive"
 msgstr ""
 
-#: www/admin/pluginman.php:240
+#: www/admin/pluginman.php:257
 msgid "Activate"
 msgstr ""
 
-#: www/admin/pluginman.php:246
+#: www/admin/pluginman.php:268
 msgid "Current plugin status:"
 msgstr ""
 
@@ -13428,7 +13445,7 @@ msgstr ""
 msgid "User updated to %1$s status"
 msgstr ""
 
-#: www/admin/userlist.php:73 www/frs/admin/index.php:94
+#: www/admin/userlist.php:73 www/frs/admin/index.php:95
 #: www/frs/admin/showreleases.php:81
 msgid "Deleted"
 msgstr ""
@@ -14121,8 +14138,8 @@ msgid "Forum Position Saved. New messages will be highlighted when you return"
 msgstr ""
 
 #: www/frs/admin/deletepackage.php:48 www/frs/admin/deleterelease.php:50
-#: www/frs/admin/index.php:69 www/frs/admin/index.php:84
-#: www/frs/admin/index.php:100 www/frs/admin/showreleases.php:58
+#: www/frs/admin/index.php:70 www/frs/admin/index.php:85
+#: www/frs/admin/index.php:101 www/frs/admin/showreleases.php:58
 msgid "Could Not Get FRS Package"
 msgstr ""
 
@@ -14141,7 +14158,7 @@ msgstr ""
 msgid "Could Not Get FRS Release"
 msgstr ""
 
-#: www/frs/admin/deleterelease.php:67 www/frs/admin/index.php:112
+#: www/frs/admin/deleterelease.php:67 www/frs/admin/index.php:113
 msgid "Release Edit/File Releases"
 msgstr ""
 
@@ -14204,7 +14221,7 @@ msgstr ""
 msgid "File Updated"
 msgstr ""
 
-#: www/frs/admin/editrelease.php:215 www/frs/admin/index.php:172
+#: www/frs/admin/editrelease.php:215 www/frs/admin/index.php:174
 msgid "Edit Releases"
 msgstr ""
 
@@ -14317,101 +14334,101 @@ msgid_plural "There are %1$s users monitoring this package."
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/frs/admin/index.php:76
+#: www/frs/admin/index.php:77
 msgid "Added Package"
 msgstr ""
 
-#: www/frs/admin/index.php:107
+#: www/frs/admin/index.php:108
 msgid "Updated Package"
 msgstr ""
 
-#: www/frs/admin/index.php:119
+#: www/frs/admin/index.php:120
 msgid "QRS"
 msgstr ""
 
-#: www/frs/admin/index.php:120
+#: www/frs/admin/index.php:121
 #, php-format
 msgid "Click here to %1$s quick-release a file %2$s"
 msgstr ""
 
-#: www/frs/admin/index.php:125
+#: www/frs/admin/index.php:126
 msgid "Packages"
 msgstr ""
 
-#: www/frs/admin/index.php:126
+#: www/frs/admin/index.php:127
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
 
-#: www/frs/admin/index.php:127
+#: www/frs/admin/index.php:128
 msgid "An example of packages:"
 msgstr ""
 
-#: www/frs/admin/index.php:129
+#: www/frs/admin/index.php:130
 msgid "Your Packages:"
 msgstr ""
 
-#: www/frs/admin/index.php:131
+#: www/frs/admin/index.php:132
 msgid "Define your packages"
 msgstr ""
 
-#: www/frs/admin/index.php:132
+#: www/frs/admin/index.php:133
 msgid "Create new releases of packages"
 msgstr ""
 
-#: www/frs/admin/index.php:134
+#: www/frs/admin/index.php:135
 msgid "Releases of Packages"
 msgstr ""
 
-#: www/frs/admin/index.php:135
+#: www/frs/admin/index.php:136
 msgid "A release of a package can contain multiple files."
 msgstr ""
 
-#: www/frs/admin/index.php:136
+#: www/frs/admin/index.php:137
 msgid "Examples of Releases"
 msgstr ""
 
-#: www/frs/admin/index.php:138
+#: www/frs/admin/index.php:139
 msgid ""
 "You can create new releases of packages by clicking on <strong>Add/Edit "
 "Releases</strong> next to your package name"
 msgstr ""
 
-#: www/frs/admin/index.php:149
+#: www/frs/admin/index.php:150
 msgid "You Have No Packages Defined"
 msgstr ""
 
-#: www/frs/admin/index.php:153 www/frs/admin/showreleases.php:99
+#: www/frs/admin/index.php:154 www/frs/admin/showreleases.php:99
 msgid "Package name"
 msgstr ""
 
-#: www/frs/admin/index.php:155 www/frs/admin/index.php:205
+#: www/frs/admin/index.php:156 www/frs/admin/index.php:207
 #: www/people/editprofile.php:244
 msgid "Publicly Viewable"
 msgstr ""
 
-#: www/frs/admin/index.php:168
+#: www/frs/admin/index.php:169
 msgid "Add Release"
 msgstr ""
 
-#: www/frs/admin/index.php:199
+#: www/frs/admin/index.php:201
 msgid "Create New Package"
 msgstr ""
 
-#: www/frs/admin/index.php:203
+#: www/frs/admin/index.php:205
 msgid "New Package Name"
 msgstr ""
 
-#: www/frs/admin/index.php:206
+#: www/frs/admin/index.php:208
 msgid "Public"
 msgstr ""
 
-#: www/frs/admin/index.php:207
+#: www/frs/admin/index.php:209
 msgid "Private"
 msgstr ""
 
-#: www/frs/admin/index.php:208
+#: www/frs/admin/index.php:210
 msgid "Create This Package"
 msgstr ""
 
@@ -14749,12 +14766,12 @@ msgstr ""
 msgid "File does not exist. File %s is not in incoming FTP directory."
 msgstr ""
 
-#: www/include/html.php:335
+#: www/include/html.php:341
 msgid ""
 "This drop-down box represents the person to which a tracker item is assigned."
 msgstr ""
 
-#: www/include/html.php:337
+#: www/include/html.php:343
 msgid ""
 "This drop-down box represents the current status of a tracker item.<br /"
 "><br />You can set the status to 'Pending' if you are waiting for a response "
@@ -14764,15 +14781,15 @@ msgid ""
 "item is given a status of 'Deleted'."
 msgstr ""
 
-#: www/include/html.php:339
+#: www/include/html.php:345
 msgid "Tracker category"
 msgstr ""
 
-#: www/include/html.php:341
+#: www/include/html.php:347
 msgid "Tracker group"
 msgstr ""
 
-#: www/include/html.php:343
+#: www/include/html.php:349
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
 "<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, "
@@ -14780,7 +14797,7 @@ msgid ""
 "or Descending order."
 msgstr ""
 
-#: www/include/html.php:345
+#: www/include/html.php:351
 msgid ""
 "The Data Type option determines the type of tracker item this is.  Since the "
 "tracker rolls into one the bug, patch, support, etc... managers you need to "
@@ -14789,7 +14806,7 @@ msgid ""
 "into a bug."
 msgstr ""
 
-#: www/include/html.php:347
+#: www/include/html.php:353
 msgid ""
 "The priority option allows a user to define a tracker item priority (ranging "
 "from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs "
@@ -14797,7 +14814,7 @@ msgid ""
 "project."
 msgstr ""
 
-#: www/include/html.php:353
+#: www/include/html.php:359
 msgid ""
 "The canned response drop-down represents a list of project admin-defined "
 "canned responses to common support or bug submission.<br /><br /> If you are "
@@ -14805,18 +14822,18 @@ msgid ""
 "responses"
 msgstr ""
 
-#: www/include/html.php:355
+#: www/include/html.php:361
 msgid ""
 "Anyone can add here comments to give additional information, answers and "
 "solutions. Please, be as precise as possible to avoid misunderstanding. If "
 "relevant, screenshots or documents can be added as attached files."
 msgstr ""
 
-#: www/include/html.php:357
+#: www/include/html.php:363
 msgid "Enter the complete description."
 msgstr ""
 
-#: www/include/html.php:358
+#: www/include/html.php:364
 msgid ""
 "<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</"
 "strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/"
@@ -14825,13 +14842,13 @@ msgid ""
 "</div>"
 msgstr ""
 
-#: www/include/html.php:361
+#: www/include/html.php:367
 msgid ""
 "When you wish to attach a file to a tracker item you must check this "
 "checkbox before submitting changes."
 msgstr ""
 
-#: www/include/html.php:363
+#: www/include/html.php:369
 msgid ""
 "You can monitor or un-monitor this item by clicking the \"Monitor\" button. "
 "<br /><br /><strong>Note!</strong> this will send you additional email. If "
@@ -14839,91 +14856,91 @@ msgid ""
 "will also get emails for those reasons as well!"
 msgstr ""
 
-#: www/include/html.php:683
+#: www/include/html.php:689
 msgid "Lowest"
 msgstr ""
 
-#: www/include/html.php:687
+#: www/include/html.php:693
 msgid "Highest"
 msgstr ""
 
-#: www/include/html.php:773
+#: www/include/html.php:779
 #, php-format
 msgid "Project access problem: %s"
 msgstr ""
 
-#: www/include/html.php:775
+#: www/include/html.php:781
 #, php-format
 msgid "Project Problem: %s"
 msgstr ""
 
-#: www/include/html.php:830 www/my/bookmark_add.php:28
+#: www/include/html.php:836 www/my/bookmark_add.php:28
 msgid "My Personal Page"
 msgstr ""
 
-#: www/include/html.php:832
+#: www/include/html.php:838
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:835
+#: www/include/html.php:841
 msgid "Trackers dashboard"
 msgstr ""
 
-#: www/include/html.php:837
+#: www/include/html.php:843
 msgid "View your tasks and artifacts."
 msgstr ""
 
-#: www/include/html.php:841
+#: www/include/html.php:847
 msgid "Diary &amp; Notes"
 msgstr ""
 
-#: www/include/html.php:843
+#: www/include/html.php:849
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:848
+#: www/include/html.php:854
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:852 www/register/index.php:155
+#: www/include/html.php:858 www/register/index.php:155
 msgid "Register Project"
 msgstr ""
 
-#: www/include/html.php:854
+#: www/include/html.php:860
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:903
+#: www/include/html.php:909
 #, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:907
+#: www/include/html.php:913
 #, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:911
+#: www/include/html.php:917
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:915
+#: www/include/html.php:921
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:919
+#: www/include/html.php:925
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -15428,32 +15445,32 @@ msgstr ""
 msgid "Permanently Delete Mailing List "
 msgstr ""
 
-#: www/mail/admin/index.php:125
+#: www/mail/admin/index.php:126
 msgid "Password reset requested"
 msgstr ""
 
-#: www/mail/admin/index.php:137
+#: www/mail/admin/index.php:138
 #, php-format
 msgid ""
 "Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
 "strong>"
 msgstr ""
 
-#: www/mail/admin/index.php:141
+#: www/mail/admin/index.php:142
 msgid ""
 "It will take <span class=\"important\">6-24 Hours</span> for your list to be "
 "created."
 msgstr ""
 
-#: www/mail/admin/index.php:158
+#: www/mail/admin/index.php:159
 msgid "Existing mailing lists"
 msgstr ""
 
-#: www/mail/admin/index.php:262 www/mail/index.php:76
+#: www/mail/admin/index.php:263 www/mail/index.php:76
 msgid "Mailing list"
 msgstr ""
 
-#: www/mail/admin/index.php:288
+#: www/mail/admin/index.php:289
 msgid "Reset admin password"
 msgstr ""
 
@@ -15796,7 +15813,7 @@ msgstr ""
 msgid " Error inserting value: "
 msgstr ""
 
-#: www/people/admin/index.php:55 www/pm/admin/index.php:99
+#: www/people/admin/index.php:55 www/pm/admin/index.php:98
 msgid "Category Inserted"
 msgstr ""
 
@@ -16333,9 +16350,9 @@ msgstr ""
 msgid "Dependent note"
 msgstr ""
 
-#: www/pm/admin/index.php:62 www/pm/admin/index.php:94
-#: www/pm/admin/index.php:114 www/pm/admin/index.php:171
-#: www/pm/admin/index.php:233 www/pm/admin/index.php:244
+#: www/pm/admin/index.php:62 www/pm/admin/index.php:93
+#: www/pm/admin/index.php:113 www/pm/admin/index.php:170
+#: www/pm/admin/index.php:232 www/pm/admin/index.php:243
 msgid "Unable to create ProjectCategory Object"
 msgstr ""
 
@@ -16343,130 +16360,130 @@ msgstr ""
 msgid "Subproject Inserted"
 msgstr ""
 
-#: www/pm/admin/index.php:97
+#: www/pm/admin/index.php:96
 msgid "Error inserting: "
 msgstr ""
 
-#: www/pm/admin/index.php:119
+#: www/pm/admin/index.php:118
 msgid "Error updating: "
 msgstr ""
 
-#: www/pm/admin/index.php:121
+#: www/pm/admin/index.php:120
 msgid "Category Updated"
 msgstr ""
 
-#: www/pm/admin/index.php:140
+#: www/pm/admin/index.php:139
 msgid "Subproject Updated successfully"
 msgstr ""
 
-#: www/pm/admin/index.php:155
+#: www/pm/admin/index.php:154
 msgid "Subproject Successfully Deleted"
 msgstr ""
 
-#: www/pm/admin/index.php:178
+#: www/pm/admin/index.php:177
 #, php-format
 msgid "Add Categories to: %s"
 msgstr ""
 
-#: www/pm/admin/index.php:188
+#: www/pm/admin/index.php:187
 msgid "Id"
 msgstr ""
 
-#: www/pm/admin/index.php:204
+#: www/pm/admin/index.php:203
 msgid "No categories defined"
 msgstr ""
 
-#: www/pm/admin/index.php:212 www/pm/admin/index.php:256
+#: www/pm/admin/index.php:211 www/pm/admin/index.php:255
 #: www/reporting/timecategory.php:72 www/reporting/timecategory.php:91
 msgid "Category Name"
 msgstr ""
 
-#: www/pm/admin/index.php:215
+#: www/pm/admin/index.php:214
 msgid "Once you add a category, it cannot be deleted"
 msgstr ""
 
-#: www/pm/admin/index.php:240
+#: www/pm/admin/index.php:239
 #, php-format
 msgid "Modify a Category in: %s"
 msgstr ""
 
-#: www/pm/admin/index.php:259
+#: www/pm/admin/index.php:258
 msgid ""
 "It is not recommended that you change the category name because other things "
 "are dependent upon it. When you change the category name, all related items "
 "will be changed to the new name."
 msgstr ""
 
-#: www/pm/admin/index.php:274
+#: www/pm/admin/index.php:273
 msgid "Add a new subproject"
 msgstr ""
 
-#: www/pm/admin/index.php:277
+#: www/pm/admin/index.php:276
 msgid ""
 "Add a new subproject to the Tasks. <strong>This is different than adding a "
 "task to a subproject.</strong>"
 msgstr ""
 
-#: www/pm/admin/index.php:283
+#: www/pm/admin/index.php:282
 msgid "New Subproject Name"
 msgstr ""
 
-#: www/pm/admin/index.php:290 www/pm/admin/index.php:332
+#: www/pm/admin/index.php:289 www/pm/admin/index.php:331
 msgid "Send All Updates To"
 msgstr ""
 
-#: www/pm/admin/index.php:308
+#: www/pm/admin/index.php:307
 msgid "Change Tasks Status"
 msgstr ""
 
-#: www/pm/admin/index.php:311
+#: www/pm/admin/index.php:310
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
 "private subprojects can still be viewed by members of your project, but not "
 "the general public."
 msgstr ""
 
-#: www/pm/admin/index.php:320 www/pm/index.php:99
+#: www/pm/admin/index.php:319 www/pm/index.php:99
 msgid "Subproject Name"
 msgstr ""
 
-#: www/pm/admin/index.php:338
+#: www/pm/admin/index.php:337
 msgid "Add/Edit Categories"
 msgstr ""
 
-#: www/pm/admin/index.php:339
+#: www/pm/admin/index.php:338
 msgid "Permanently delete this subproject and all its data."
 msgstr ""
 
-#: www/pm/admin/index.php:370
+#: www/pm/admin/index.php:369
 msgid ""
 "You are about to permanently and irretrievably delete this subproject and "
 "all its related data!"
 msgstr ""
 
-#: www/pm/admin/index.php:394
+#: www/pm/admin/index.php:393
 msgid "Tasks Administration"
 msgstr ""
 
-#: www/pm/admin/index.php:402
+#: www/pm/admin/index.php:401
 msgid "Add a Subproject"
 msgstr ""
 
-#: www/pm/admin/index.php:403
+#: www/pm/admin/index.php:402
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
 "creating a new task."
 msgstr ""
 
-#: www/pm/admin/index.php:411
+#: www/pm/admin/index.php:410
 msgid "No Subprojects Found in this Project"
 msgstr ""
 
-#: www/pm/admin/index.php:412
+#: www/pm/admin/index.php:411
 msgid "You may add new Subprojects using the \"Add a Subproject\" link above."
 msgstr ""
 
-#: www/pm/admin/index.php:416
+#: www/pm/admin/index.php:415
 msgid "Edit/Update Subproject"
 msgstr ""
 
@@ -17207,17 +17224,17 @@ msgstr ""
 msgid "Homepage Link"
 msgstr ""
 
-#: www/project/admin/index.php:274
+#: www/project/admin/index.php:252
 msgid ""
 "If you wish, you can provide default email addresses to which new "
 "submissions will be sent"
 msgstr ""
 
-#: www/project/admin/index.php:275
+#: www/project/admin/index.php:253
 msgid "New Document Submissions"
 msgstr ""
 
-#: www/project/admin/index.php:277
+#: www/project/admin/index.php:255
 msgid "(send on all updates)"
 msgstr ""
 
@@ -18296,32 +18313,32 @@ msgid "Error: Under min length search"
 msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:116
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:126
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:127
 msgid "Forum Search Results"
 msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:121
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:122
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:123
 msgid "Tracker Search Results"
 msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:126
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:130
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:131
 msgid "Task Search Results"
 msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:131
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:134
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:135
 msgid "Documentation Search Results"
 msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:136
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:138
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:139
 msgid "Files Search Results"
 msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:141
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:142
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:143
 msgid "News Search Results"
 msgstr ""
 
@@ -18331,7 +18348,7 @@ msgid "Note: only the first %d results for this category are displayed."
 msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:194
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:215
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:216
 #, php-format
 msgid ""
 "No matches found for <em>%s</em> - No sections available (check your "
@@ -18339,7 +18356,7 @@ msgid ""
 msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:196
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:217
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:218
 #, php-format
 msgid "No matches found for <em>%s</em>"
 msgstr ""
@@ -18371,11 +18388,11 @@ msgstr ""
 msgid "Post date"
 msgstr ""
 
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:85
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:86
 msgid "Entire project search"
 msgstr ""
 
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:167
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:168
 #, php-format
 msgid "%s Search Results"
 msgstr ""
@@ -19912,10 +19929,6 @@ msgstr ""
 
 #: www/tracker/roadmap.php:452
 msgid "No release available"
-msgstr ""
-
-#: www/tracker/roadmap.php:468
-msgid ": "
 msgstr ""
 
 #: www/tracker/roadmap.php:471

@@ -27,6 +27,7 @@ $sep = getStringFromRequest('sep', ',');
 
 $date = date('Y-m-d');
 
+sysdebug_off();
 header('Content-type: text/csv');
 header('Content-disposition: filename="trackers-'.$date.'.csv"');
 

@@ -4801,6 +4801,7 @@ src/utils/forge_check_perm_for_user -text
 src/utils/forge_get_compressed_extension -text
 src/utils/forge_get_compressor -text
 src/utils/forge_get_config -text
+src/utils/forge_make_admin -text
 src/utils/forge_set_password -text
 src/utils/fusionforge-shell-postgresql.spec -text
 src/utils/include.pl svneol=native#text/x-perl

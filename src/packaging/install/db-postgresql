@@ -76,3 +76,4 @@ utils/sync_unix_groups.php	usr/share/@OLDPACKAGE@/bin/
 utils/fixscripts/populate_template_project.php	usr/share/@OLDPACKAGE@/bin/
 utils/fixscripts/fix_default_role.php	usr/share/@OLDPACKAGE@/bin/
 utils/forge_set_password                usr/share/@OLDPACKAGE@/bin/
+utils/forge_make_admin			usr/share/@OLDPACKAGE@/bin/
