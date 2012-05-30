@@ -39,7 +39,11 @@ class Widget_ProjectPublicAreas extends Widget {
 		// ################# Homepage Link
 
 		echo '<div class="public-area-box" rel="doap:homepage">';
-		echo util_make_link ('http://' . $project->getHomePage(), $HTML->getHomePic(_('Home Page')) . ' ' . _('Project Home Page'), false, true);
+		if ( util_check_url($project->getHomePage())) {
+			echo util_make_link ($project->getHomePage(), $HTML->getHomePic(_('Home Page')) . ' ' . _('Project Home Page'), false, true);
+                } else {
+			echo util_make_link ('http://' . $project->getHomePage(), $HTML->getHomePic(_('Home Page')) . ' ' . _('Project Home Page'), false, true);
+		}
 		echo "</div>\n";
 
 		// ################## ArtifactTypes
