@@ -29,6 +29,9 @@ function parser_text($fichin) {
 	if (!is_file($fichin))
 		return "";
 
+	if (filesize($fichin) == 0)
+		return "";
+
 	$handle = fopen($fichin, "r");
 	$buff = fread($handle, filesize($fichin));
 

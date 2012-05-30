@@ -36,6 +36,9 @@ $fichin = $argv[1];
 if (!is_file($fichin))
 	exit (1);
 
+if (filesize($fichin) == 0)
+	exit (1);
+
 $fd = fopen($fichin, "r");
 $contents = fread($fd, filesize($fichin));
 fclose($fd);
