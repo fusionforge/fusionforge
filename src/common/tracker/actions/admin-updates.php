@@ -314,24 +314,126 @@ if (getStringFromRequest('add_extrafield')) {
 //	Update the browse list of a tracker
 //
 } elseif (getStringFromRequest('customize_list')) {
-	$browse_fields = getArrayFromRequest('browse_fields');
-	foreach ($browse_fields as $name => $pos) {
-		if ($pos)
-			$list_fields[$pos][] = $name;
+	if (getStringFromRequest('add_field')) {
+		$field_to_add = getStringFromRequest('field_to_add');
+		if ($field_to_add) {
+			$browse_fields = $ath->getBrowseList();
+			$result = $ath->setBrowseList(($browse_fields ? $browse_fields.',' : '').$field_to_add);
+		}
+		else {
+			$result = false;
+		}
 	}
-	ksort($list_fields);
-	$browse_fields = array();
-	foreach ($list_fields as $pos => $list_name) {
-		sort($list_name);
-		foreach ($list_name as $name)
-			$browse_fields[] = $name;
+	elseif (getStringFromRequest('updownorder_field')) {
+		$id = getStringFromRequest('id');
+		$new_pos = getIntFromRequest('new_pos');
+		if ($new_pos) {
+			$browse_fields = explode(',',$ath->getBrowseList());
+			$pos_of_id = array_search($id, $browse_fields);
+			$val_at_new_pos = $browse_fields[$new_pos - 1];
+			$browse_fields[$new_pos - 1] = $id;
+			$browse_fields[$pos_of_id] = $val_at_new_pos;
+			$result = $ath->setBrowseList(implode(',', $browse_fields));
+		}
+		else {
+			$result = false;
+		}
 	}
-	$browse_fields = join(',', $browse_fields);
-	if (!$ath->setBrowseList($browse_fields)) {
+	elseif (getStringFromRequest('field_changes_order')) {
+		$order = getArrayFromRequest('order');
+
+		// Fields with not modified positions
+		$not_changed = array_keys($order, '');
+
+		// Get positions
+		$list_size = count(explode(',',$ath->getBrowseList()));
+		$not_changed = array();
+		$changed = array();
+		$out_before = array();
+		$out_after = array();
+		foreach ($order as $field => $new_pos) {
+			if (! $new_pos || ! is_numeric($new_pos)) {
+				$not_changed[] = $field;
+				continue;
+			}
+			$new_pos = intval($new_pos);
+			if ($new_pos < 1 ) {
+				if (! isset($out_before[$new_pos]))
+					$out_before[$new_pos] = array();
+				$out_before[$new_pos][] = $field;
+			}
+			elseif ($new_pos > $list_size) {
+				if (! isset($out_after[$new_pos]))
+					$out_after[$new_pos] = array();
+				$out_after[$new_pos][] = $field;
+			}
+			else {
+				if (! isset($changed[$new_pos - 1]))
+					$changed[$new_pos - 1] = array();
+				$changed[$new_pos - 1][] = $field;
+			}
+		}
+		ksort($changed, SORT_NUMERIC);
+
+		// Start of the browse list
+		$start_browse_fields = array();
+		$index_start = 0;
+		if (! empty($out_before)) {
+			ksort($out_before, SORT_NUMERIC);
+			foreach (array_values($out_before) as $list) {
+				foreach ($list as $field) {
+					$start_browse_fields[] = $field;
+					$index_start++;
+				}
+			}
+		}
+
+		// Middle of the browse list
+		$index = $index_start;
+		foreach ($changed as $pos => $list) {
+			for (; $index < $pos; $index++) {
+				$start_browse_fields[] = array_shift($not_changed);
+			}
+			foreach ($list as $field) {
+				$start_browse_fields[] = $field;
+				$index++;
+			}
+		}
+
+		// End of the browse list
+		$end_browse_fields = array();
+		if (! empty($out_after)) {
+			ksort($out_after, SORT_NUMERIC);
+			foreach (array_values($out_after) as $list) {
+				foreach ($list as $field) {
+					$end_browse_fields[] = $field;
+				}
+			}
+		}
+
+		// And we complete the browse list
+		$new_browse_fields = array_merge($start_browse_fields, $not_changed, $end_browse_fields);
+
+		$result = $ath->setBrowseList(implode(',', $new_browse_fields));
+	}
+	elseif (getStringFromRequest('delete_field')) {
+		$id = getStringFromRequest('id');
+		$browse_fields = explode(',',$ath->getBrowseList());
+		$pos = array_search($id, $browse_fields);
+		if ($pos !== false) {
+			array_splice($browse_fields, $pos, 1);
+			$result = $ath->setBrowseList(implode(',', $browse_fields));
+		}
+		else {
+			$result = false;
+		}
+	}
+	if ($result !== false) {
+		$feedback .= _('Tracker Updated');
+	}
+	else {
 		$error_msg .= _('Error updating').' : '.$ath->getErrorMessage();
 		$ath->clearError();
-	} else {
-		$feedback .= _('Tracker Updated');
 	}
 
 //
@@ -416,7 +518,7 @@ if (getStringFromRequest('add_extrafield')) {
 	} elseif ($ac->isError()) {
 		$error_msg .= $ac->getErrorMessage();
 	} else {
-		if (!$ac->alphaorderValues($id)) {
+		if (!$ac->alphaorderValues()) {
 			$error_msg .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
 			$ac->clearError();
 		} else {

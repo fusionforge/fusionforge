@@ -29,15 +29,7 @@ $ath->adminHeader(array('title'=>_('Customize Browse List'),'pagename'=>'tracker
 $efarr = $ath->getExtraFields();
 
 $browse_fields = explode(',',$ath->getBrowseList());
-?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
-<input type="hidden" name="customize_list" value="y" />
-<p>
-<?php echo _('Set order of the fields that will be displayed on the browse view of your tracker:') ?>
-</p>
-
-<?php
 // Display regular fields.
 $fields = array (
 	'summary' => _('Summary'),
@@ -63,35 +55,79 @@ foreach ($efarr as $f) {
 
 asort($fields);
 
-// Display fields
+$rows = array();
+$select = '';
 foreach ($fields as $f => $name) {
 	$pos = array_search($f, $browse_fields);
-	echo "<input type=\"text\" name=\"browse_fields[$f]\" value=\"" .
-		 (($pos !== false) ? $pos + 1 : '') .
-		 "\" size=\"3\" maxlength=\"3\" /> " .
-		 $name .
-		 "<br />\n";
-}
-
-$keys=array_keys($efarr);
-$rows=count($keys);
-if ($rows > 0) {
-	for ($k=0; $k < $rows; $k++) {
-		$i=$keys[$k];
-		$pos = array_search($i, $browse_fields);
-		echo "<input type=\"text\" name=\"browse_fields[$i]\" value=\"" .
-		 	 (($pos !== false) ? $pos + 1 : '') .
-		 	 "\" size=\"3\" maxlength=\"3\" /> " .
-			 $efarr[$i]['field_name'] .
-			 "<br />\n";
+	if ($pos !== false) {
+		$rows[$pos] = '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($pos) .'>'.'<td>'.$name.'</td>'."\n".
+					'<td class="align-right">'.
+					($pos + 1).' --&gt; <input type="text" name="order['.$f.']" value="" size="3" maxlength="3" />'.
+					'</td>'."\n".
+					'<td class="align-center">'.
+					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;id='.$f.
+					'&amp;customize_list=1&amp;post_changes=1&amp;updownorder_field=1&amp;new_pos='.(($pos == 0)? $pos + 1 : $pos).'">'.html_image('ic/btn_up.png','19','18',array('alt'=>"Up")).'</a> '.
+					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;id='.$f.
+					'&amp;customize_list=1&amp;post_changes=1&amp;updownorder_field=1&amp;new_pos='.(($pos == count($browse_fields) - 1)? $pos + 1 : $pos + 2).'">'.html_image('ic/btn_down.png','19','18',array('alt'=>"Down")).'</a>'.
+					'</td>'."\n".
+					'<td class="align-center">'.
+					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;id='.$f.
+					'&amp;customize_list=1&amp;post_changes=1&amp;delete_field=1">'.
+					html_image('ic/trash.png','','',array('alt'=>"Delete")).'</a>'.
+					'</td>'."\n".
+					'</tr>'."\n";
+	}
+	else {
+		$select .= '<option value="'.$f.'">'.$name.'</option>'."\n";
 	}
 }
-?>
+ksort($rows);
 
-<p>
-<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-</form>
+?>
+	<p>
+	<?php echo _('Set order of the fields that will be displayed on the browse view of your tracker:') ?>
+	</p>
+	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
+	<input type="hidden" name="customize_list" value="1" />
+	<input type="hidden" name="post_changes" value="1" />
 <?php
+$title_arr = array();
+$title_arr[] = _('Fields');
+$title_arr[] = _('Current / New positions');
+$title_arr[] = _('Up/Down positions');
+$title_arr[] = _('Delete');
+
+echo $GLOBALS['HTML']->listTableTop ($title_arr,false, ' ');
+echo implode('', $rows);
+echo '<tr class="noborder">
+	<td>
+	</td>
+	<td class="align-right">
+	<input type="submit" name="field_changes_order" value="'._('Reorder').'" />
+	</td>
+	<td>
+	</td>
+      </tr>';
+echo $GLOBALS['HTML']->listTableBottom();
+?>
+	</form>
+<?php if ($select) { ?>
+	<p>
+	<?php echo _('Select the fields that will be displayed on the browse view of your tracker:') ?>
+	</p>
+	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
+		<input type="hidden" name="customize_list" value="1" />
+		<input type="hidden" name="add_field" value="1" />
+		<strong><?php echo _('Add New Field') ?>:</strong>
+<?php
+echo '<select name="field_to_add">'."\n";
+echo $select;
+echo '</select>'."\n";
+?>
+		<input type="submit" name="post_changes" value="<?php echo _('Add') ?>" />
+	</form>
+<?php
+}
 
 $ath->footer(array());
 
