@@ -2,6 +2,7 @@
 /**
  *
  * Copyright 2006 Daniel A. Perez <daniel@gforgegroup.com>
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,7 +40,7 @@ if ($group_id) {
 				array($group_id),
 				1);
 	$row = db_fetch_array($res);
-	$title = $row['group_name'];
+	$title = $row['group_name']." - ";
 	$link = "?group_id=$group_id";
 	$description = " of ".$row['group_name'];
 
@@ -66,14 +67,35 @@ if ($group_id) {
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 	print "  <generator>".forge_get_config ('forge_name')." RSS generator</generator>\n";
 
-	$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2 AND group_id=$3 ORDER BY activity_date DESC',
+	$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
+		AND group_id=$3 ORDER BY activity_date DESC',
 				array(time() - 30*86400,
 				      time(),
 				      $group_id),
 				$limit);
+	$results = array();
+	while ($arr = db_fetch_array($res)) {
+		$results[] = $arr;
+	}
+
+	// If plugins wants to add activities.
+	$ids = array();
+	$texts = array();
+	$show = array();
+
+	$hookParams['group'] = $group_id ;
+	$hookParams['results'] = &$results;
+	$hookParams['show'] = &$show;
+	$hookParams['begin'] = time()-(30*86400);
+	$hookParams['end'] = time();
+	$hookParams['ids'] = &$ids;
+	$hookParams['texts'] = &$texts;
+	plugin_hook ("activity", $hookParams) ;
+
+	usort($results, 'date_compare');
 
 	// ## item outputs
-	while ($arr = db_fetch_array($res)) {
+	foreach ($results as $arr) {
 
 		switch ($arr['section']) {
 			case 'commit': {
@@ -136,10 +158,20 @@ if ($group_id) {
 				print "   <comments>$url/forum/forum.php?forum_id=".$arr['subref_id']."</comments>\n";
 				break;
 			}
+			default: {
+				print "  <item>\n";
+				print "   <title>".htmlspecialchars($arr['title'])."</title>\n";
+				print "   <link>".$url.$arr['link']."</link>\n";
+				print "   <comment>".$url.$arr['link']."</comment>\n";
+			}
 		}
 
 		print "   <description>".rss_description($arr['description'])."</description>\n";
-		print "   <author>".$arr['user_name']."@".forge_get_config('users_host')." (".$arr['realname'].")</author>\n";
+		if (isset($arr['user_name']) && $arr['user_name']) {
+			print "   <author>".$arr['user_name']."@".forge_get_config('users_host')." (".$arr['realname'].")</author>\n";
+		} else {
+			print "   <author>".$arr['realname']."</author>\n";
+		}
 		print "   <pubDate>".rss_date($arr['activity_date'])."</pubDate>\n";
 		print "  </item>\n";
 	}
@@ -150,7 +182,15 @@ if ($group_id) {
 } else {
 	// Print error showing no group was selected
 
-	echo "<div class='error'>"._('Error: No group selected')."</div>";
+	echo "<br /><span class=\"error\">    Error: No group selected</span>";
+}
+
+function date_compare($a, $b)
+{
+	if ($a['activity_date'] == $b['activity_date']) {
+		return 0;
+	}
+	return ($a['activity_date'] > $b['activity_date']) ? -1 : 1;
 }
 
 ?>
