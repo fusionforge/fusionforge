@@ -66,7 +66,7 @@ h6 { font-size: 0.6em; }
 
 /* Titles in the page. */
 h1, .titlebar, .widget_titlebar {
-    background: url(/themes/base-alcatel-lucent/images/bgrd_hpage_header.gif) white;
+    background: url(/themes/gforge/images/bgrd_hpage_header.gif) white;
     background-position: bottom;
     background-repeat: repeat-x;
     padding-left: 10px;
@@ -690,7 +690,7 @@ div.information {
 div.success, div.feedback,
 p.success, p.feedback {
    color: #4F8A10;
-   background-image:url('/themes/base-alcatel-lucent/images/success.png');
+   background-image:url('/themes/gforge/images/success.png');
 }
 div.feedback p, div.feedback li,
 div.success p, div.success li {
@@ -700,7 +700,7 @@ div.success p, div.success li {
 div.warning, div.warning_msg,
 p.warning, p.warning_msg {
    color: #9F6000;
-   background-image: url('/themes/base-alcatel-lucent/images/warning.png');
+   background-image: url('/themes/gforge/images/warning.png');
 }
 div.warning p, div.warning_msg p,
 div.warning li, div.warning_msg li {
@@ -710,7 +710,7 @@ div.warning li, div.warning_msg li {
 div.error,
 p.error {
    color: #D8000C;
-   background-image: url('/themes/base-alcatel-lucent/images/error.png');
+   background-image: url('/themes/gforge/images/error.png');
 }
 div.error p,
 div.error li {
@@ -720,7 +720,7 @@ div.error li {
 div.information,
 p.information {
    color: #00529B;
-   background-image: url('/themes/base-alcatel-lucent/images/info.png');
+   background-image: url('/themes/gforge/images/info.png');
 }
 
 .error, .warning, .debug, .hint {
