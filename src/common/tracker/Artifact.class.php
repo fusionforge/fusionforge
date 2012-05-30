@@ -376,6 +376,24 @@ class Artifact extends Error {
 	}
 
 	/**
+	 *	getCustomStatusName - get custom status value text.
+	 *
+	 *	@return	string	The custom status name.
+	 */
+	function getCustomStatusName() {
+		$custom_status_id = $this->ArtifactType->getCustomStatusField();
+		if ($custom_status_id) {
+			$result = db_query_params ('SELECT element_name FROM artifact_extra_field_elements aefe, artifact_extra_field_data aefd
+										WHERE artifact_id=$1 AND aefd.extra_field_id=$2 AND CAST(aefd.field_data AS INTEGER)=aefe.element_id',
+								array ($this->getID(), $custom_status_id)) ;
+			if ($result) {
+				return db_result($result, 0, 'element_name');
+			}
+		}
+		return $this->data_array['status_name'];
+	}
+
+	/**
 	 *	getPriority - get priority flag.
 	 *
 	 *	@return int priority.
