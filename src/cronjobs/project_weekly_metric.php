@@ -42,10 +42,11 @@ $this_day   = date('d',$this_week);
 $err .= "\nlast_week: $last_week $last_day ";
 $err .= "\n\nthis_week: $this_week $this_day";
 
-db_drop_table_if_exists ("project_counts_weekly_tmp");
-$err .= "\n\nDROP TABLE project_counts_weekly_tmp" ;
-db_drop_table_if_exists ("project_metric_weekly_tmp1");
-$err .= "\n\nDROP TABLE project_metric_weekly_tmp1" ;
+// Clean temporary tables & sequences if present
+db_drop_sequence_if_exists("project_metric_weekly_seq") ;
+db_drop_table_if_exists("project_counts_weekly_tmp");
+db_drop_table_if_exists("project_metric_weekly_tmp1");
+db_drop_sequence_if_exists("project_metric_week_ranking_seq");
 
 #create a table to put the aggregates in
 $rel = db_query_params ('CREATE TABLE project_counts_weekly_tmp (group_id INT, type TEXT, count FLOAT(8))',
@@ -264,10 +265,10 @@ if (!$rel) {
 
 $err .= db_error();
 
-db_drop_sequence_if_exists ("project_metric_weekly_seq") ;
-db_drop_table_if_exists ("project_counts_weekly_tmp");
-db_drop_table_if_exists ("project_metric_weekly_tmp1");
-db_drop_sequence_if_exists ("project_metric_week_ranking_seq");
+db_drop_sequence_if_exists("project_metric_weekly_seq") ;
+db_drop_table_if_exists("project_counts_weekly_tmp");
+db_drop_table_if_exists("project_metric_weekly_tmp1");
+db_drop_sequence_if_exists("project_metric_week_ranking_seq");
 
 cron_entry(8,$err);
 
