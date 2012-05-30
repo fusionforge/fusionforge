@@ -45,11 +45,6 @@ if (getStringFromServer('HTTP_X_moz') === 'prefetch'){
 	exit;
 }
 
-// Use latest rendering engine for IE (bypass compatibility mode)
-if (isset($_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'], "msie")) {
-	header("X-UA-Compatible: IE=edge");
-}
-
 if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 	ob_start("ob_gzhandler");
 }
