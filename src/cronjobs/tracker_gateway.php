@@ -132,10 +132,10 @@ class TrackerGateway extends Error {
 		if (preg_match('/(\[)([0-9]*)(\])/',$subj,$arr)) {
 		        $this->ArtifactId=$arr[2];
 			$artifactid_end=(strpos($subj,'['.$arr[2].']')) + strlen('['.$arr[2].']');
-			$this->Subject = addslashes(substr($subj,$artifactid_end));
+			$this->Subject = substr($subj,$artifactid_end);
 		} else {
 			$this->FromEmail = ''; // Do not reply if no pattern found.
-			$this->Subject = addslashes($subj);
+			$this->Subject = $subj;
 			$this->ArtifactId=0; // Not supported at the moment
 			$this->setError("ArtifactId needed at the moment. Artifact creation not supported");
 			return false;
@@ -266,7 +266,7 @@ function DBG($str) {
 	global $debug;
 
 	if ($debug==1) {
-		system("echo \"artifact: ".$str."\n\" >> /tmp/tracker-gateway.log");
+		file_put_contents('/tmp/tracker-gateway.log', "artifact: ".$str."\n", FILE_APPEND);
 		syslog(LOG_DEBUG, "artifact_gateway: ". $str);
 	} else if ($debug==2) {
 		echo $str."\n";
