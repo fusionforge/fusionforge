@@ -137,6 +137,7 @@ if $KEEPVM
 then
 	echo "Keeping vm $HOST alive"
 else
-	(cd tests/scripts ; sh ./stop_vm.sh $HOST)
+	cd tests/scripts
+	sh ./stop_vm.sh $HOST || true
 fi
 exit $retcode
