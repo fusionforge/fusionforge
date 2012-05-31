@@ -7,7 +7,7 @@
 #
 VMENGINE=lxc
 REMOTESELENIUM=true
-KEEPVM=true
+KEEPVM=false
 
 # VM for trunk
 fgcostrksrc=lxc:centos5::
