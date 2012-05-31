@@ -75,11 +75,22 @@ define ('WSDL_URL', URL.'soap/index.php?wsdl');
 ?>
 EOF
 
-retcode=0
-echo "This will run phpunit tests"
+echo "Starting Selenium"
 killall -9 java
-LANG=C java -jar selenium-server.jar -browserSessionReuse -singleWindow >/dev/null &
-#LANG=C java -jar selenium-server.jar -singleWindow >/dev/null &
+LANG=C java -jar selenium-server.jar -singleWindow >/dev/null &
+i=0
+timeout=200
+while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 ; do
+    sleep 1
+    i=$(($i+1))
+done
+if [ $i = $timeout ] ; then
+    echo "Selenium failed to start within $timeout seconds"
+    exit 1
+fi
+
+echo "Running PHPunit tests"
+retcode=0
 cd tests
 phpunit --verbose --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ $testsuite || retcode=$?
 cd ..
