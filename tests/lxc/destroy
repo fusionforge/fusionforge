@@ -6,4 +6,4 @@ lxcdir=`dirname $0`
 export TEMPLATE=$VMTEMPLATE
 
 sudo /usr/bin/lxc-stop -n $HOST
-sudo /usr/bin/lxc-destroy -n $HOST
+sudo /usr/bin/lxc-destroy -n $HOST || true
