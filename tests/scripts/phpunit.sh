@@ -77,7 +77,7 @@ EOF
 
 echo "Starting Selenium"
 killall -9 java
-PATH=/usr/lib/iceweasel:$PATH LANG=C java -jar selenium-server.jar -singleWindow >/dev/null &
+PATH=/usr/lib/iceweasel:$PATH LANG=C java -jar $FORGE_HOME/tests/selenium-server.jar -singleWindow >/dev/null &
 i=0
 timeout=200
 while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 ; do
