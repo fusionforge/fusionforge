@@ -75,19 +75,22 @@ define ('WSDL_URL', URL.'soap/index.php?wsdl');
 ?>
 EOF
 
-retcode=0
-echo "This will run phpunit tests"
+echo "Starting Selenium"
 killall -9 java
-cat /dev/null >/var/log/selenium.log
-PATH=/usr/lib/iceweasel:$PATH
-export PATH
-LANG=C java -jar $FORGE_HOME/tests/selenium-server.jar -browserSessionReuse -singleWindow >/var/log/selenium.log &
-while ! grep -q org.openqa.jetty /var/log/selenium.log
-do
-	echo "Waiting Selenium"
-	sleep 1
+PATH=/usr/lib/iceweasel:$PATH LANG=C java -jar selenium-server.jar -singleWindow >/dev/null &
+i=0
+timeout=200
+while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 ; do
+    sleep 1
+    i=$(($i+1))
 done
+if [ $i = $timeout ] ; then
+    echo "Selenium failed to start within $timeout seconds"
+    exit 1
+fi
 
+echo "Running PHPunit tests"
+retcode=0
 cd tests
 phpunit --verbose --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ $testsuite || retcode=$?
 cd ..
