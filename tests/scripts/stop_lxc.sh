@@ -11,4 +11,4 @@ then
         fi
 fi
 sudo /usr/bin/lxc-stop -n $HOST
-sudo /usr/bin/lxc-destroy -n $HOST
+sudo /usr/bin/lxc-destroy -n $HOST || true
