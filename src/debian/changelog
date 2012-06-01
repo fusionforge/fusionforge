@@ -1,9 +1,10 @@
-fusionforge (5.1.1-7+1) UNRELEASED; urgency=low
+fusionforge (5.1.1-8) unstable; urgency=low
 
+  * Fixes from the 5.1 upstream branch.
   * Fixed wrong link for custom homepage, thanks to Olivier Berger for the
     patch (closes: #675090).
 
- -- Roland Mas <lolando@debian.org>  Wed, 30 May 2012 15:05:09 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 01 Jun 2012 11:04:11 +0200
 
 fusionforge (5.1.1-7) unstable; urgency=low
 
