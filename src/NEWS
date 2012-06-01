@@ -1,3 +1,28 @@
+Release notes for FusionForge 5.2
+---------------------------------
+
+FusionForge 5.2 is another incremental step over 5.1, with about 2600
+commits.
+
+There have been no in-depth rewrites this time, only a number of
+improvements to various parts of the code.  The document manager
+steadily grows in functionality, new widgets are available for users'
+personal pages, the SCM plugins grew new features for hooks (on
+supported systems), the trackers now offer a new view for roadmaps.
+New plugins include a Message plugin allowing to display a global
+message on the forge, and a MoinMoinWiki plugin.
+
+Many bugs were of course fixed during the course of this development
+cycle.
+
+As before, this release comes with packages for Red Hat and Debian
+systems (and derived distributions), as well as a rewritten installer
+script for users of other systems (and those who prefer more manual
+installations).  This release provides scripts to migrate what needs
+to be migrated to the new schemes (for the database schema).  Care
+should still be taken to check the results of these migrations, as a
+safety net.
+
 Release notes for FusionForge 5.1
 ---------------------------------
 

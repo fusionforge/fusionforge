@@ -4,14 +4,15 @@ fusionforge (5.2.50~-1) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Mon, 26 Mar 2012 20:10:13 +0200
 
-fusionforge (5.1.50+svn15558-2) UNRELEASED; urgency=low
+fusionforge (5.2~rc1-1) unstable; urgency=low
 
+  * New upstream pre-release 5.2rc1.
   * Ripped out all but the most important Debconf questions in order to
     simplify installation and get rid of the legacy fusionforge.conf
     configuration file (which is no longer created on new installs).
   * Stop shipping fusionforge-config manpage.
 
- -- Roland Mas <lolando@debian.org>  Tue, 29 May 2012 18:37:43 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 01 Jun 2012 14:28:54 +0200
 
 fusionforge (5.1.50+svn15558-1) experimental; urgency=low
 
@@ -45,12 +46,13 @@ fusionforge (5.1.50+svn15228-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Tue, 27 Mar 2012 20:57:28 +0200
 
-fusionforge (5.1.1-7+1) UNRELEASED; urgency=low
+fusionforge (5.1.1-8) unstable; urgency=low
 
+  * Fixes from the 5.1 upstream branch.
   * Fixed wrong link for custom homepage, thanks to Olivier Berger for the
     patch (closes: #675090).
 
- -- Roland Mas <lolando@debian.org>  Wed, 30 May 2012 15:05:09 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 01 Jun 2012 11:04:11 +0200
 
 fusionforge (5.1.1-7) unstable; urgency=low
 
