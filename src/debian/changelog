@@ -1,4 +1,4 @@
-fusionforge (5.2~rc1-0) UNRELEASED; urgency=low
+fusionforge (5.2~rc1-1) unstable; urgency=low
 
   * New upstream pre-release 5.2rc1.
   * Ripped out all but the most important Debconf questions in order to
@@ -6,7 +6,7 @@ fusionforge (5.2~rc1-0) UNRELEASED; urgency=low
     configuration file (which is no longer created on new installs).
   * Stop shipping fusionforge-config manpage.
 
- -- Roland Mas <lolando@debian.org>  Fri, 01 Jun 2012 13:15:25 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 01 Jun 2012 14:28:54 +0200
 
 fusionforge (5.1.50+svn15558-1) experimental; urgency=low
 
