@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-24 15:25+0200\n"
+"POT-Creation-Date: 2012-06-01 13:33+0200\n"
 "PO-Revision-Date: 2012-05-24 15:39+0200\n"
 "Last-Translator: Luis Cañas Díaz <lcanas@libresoft.es>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -297,11 +297,11 @@ msgstr "Última modificación"
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:215 common/pm/ProjectTask.class.php:1207
-#: common/tracker/Artifact.class.php:1543
-#: common/tracker/Artifact.class.php:1545
-#: common/tracker/Artifact.class.php:1552
-#: common/tracker/Artifact.class.php:1558
-#: common/tracker/Artifact.class.php:1658
+#: common/tracker/Artifact.class.php:1561
+#: common/tracker/Artifact.class.php:1563
+#: common/tracker/Artifact.class.php:1570
+#: common/tracker/Artifact.class.php:1576
+#: common/tracker/Artifact.class.php:1676
 #: common/tracker/actions/browse.php:608 common/tracker/actions/browse.php:619
 #: common/tracker/actions/browse.php:639 common/tracker/actions/detail.php:73
 #: common/tracker/actions/downloadcsv.php:84
@@ -1571,7 +1571,7 @@ msgstr "Error en la actualización:"
 #: common/forum/Forum.class.php:619 common/frs/FRSPackage.class.php:450
 #: common/frs/FRSRelease.class.php:356 common/include/Group.class.php:1530
 #: common/mail/MailingList.class.php:390 common/pm/ProjectGroup.class.php:371
-#: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:512
+#: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:530
 #: common/tracker/ArtifactExtraField.class.php:429
 #: common/tracker/ArtifactType.class.php:817
 msgid "Please tick all checkboxes."
@@ -2838,7 +2838,7 @@ msgstr ""
 #: common/include/Navigation.class.php:442 common/include/rbac_texts.php:144
 #: common/reporting/report_utils.php:143
 #: common/tracker/actions/admin-ind.php:100 common/tracker/actions/ind.php:57
-#: common/widget/Widget_ProjectPublicAreas.class.php:49
+#: common/widget/Widget_ProjectPublicAreas.class.php:53
 #: www/pm/include/ProjectTaskHTML.class.php:109
 msgid "Tracker"
 msgstr "Peticiones"
@@ -2859,7 +2859,7 @@ msgstr "Listas de Correo"
 #: common/include/Navigation.class.php:475
 #: common/include/group_section_texts.php:30 common/include/rbac_texts.php:145
 #: common/reporting/report_utils.php:155 common/reporting/report_utils.php:193
-#: common/widget/Widget_ProjectPublicAreas.class.php:128
+#: common/widget/Widget_ProjectPublicAreas.class.php:132
 #: plugins/blocks/www/index.php:169 www/my/dashboard.php:76
 #: www/stats/site_stats_utils.php:239 www/stats/site_stats_utils.php:365
 #: www/stats/site_stats_utils.php:420
@@ -2883,7 +2883,7 @@ msgid "Document Management."
 msgstr "Leer Documentos"
 
 #: common/include/Navigation.class.php:505
-#: common/widget/Widget_ProjectPublicAreas.class.php:152
+#: common/widget/Widget_ProjectPublicAreas.class.php:156
 #: plugins/blocks/www/index.php:171
 msgid "Surveys"
 msgstr "Encuestas"
@@ -4036,7 +4036,7 @@ msgstr "No existe el objeto: ArtifactType: %d"
 msgid "Only project members can view private artifact types"
 msgstr "Sólo los miembros del proyecto pueden ver las peticiones privadas"
 
-#: common/tracker/Artifact.class.php:221 common/tracker/Artifact.class.php:762
+#: common/tracker/Artifact.class.php:221 common/tracker/Artifact.class.php:780
 #, fuzzy
 msgid "This Artifact Type Does Not Allow Anonymous Submissions. Please Login."
 msgstr "Esta petición no admite envíos anónimos. Por favor, inicie sesión."
@@ -4061,55 +4061,55 @@ msgstr "Error Creando %1$s"
 msgid "Invalid Artifact ID"
 msgstr "ID no válida"
 
-#: common/tracker/Artifact.class.php:523
+#: common/tracker/Artifact.class.php:541
 #, fuzzy
 msgid "Error deleting extra field data: "
 msgstr "Error inserting un nombre de opción"
 
-#: common/tracker/Artifact.class.php:530
+#: common/tracker/Artifact.class.php:548
 #, fuzzy
 msgid "Error deleting file from db: "
 msgstr "Error creando el objeto grupo"
 
-#: common/tracker/Artifact.class.php:537
+#: common/tracker/Artifact.class.php:555
 #, fuzzy
 msgid "Error deleting message: "
 msgstr "Fue un error creando el foro."
 
-#: common/tracker/Artifact.class.php:544
+#: common/tracker/Artifact.class.php:562
 #, fuzzy
 msgid "Error deleting history: "
 msgstr "Error actualizando información del proyecto: %s"
 
-#: common/tracker/Artifact.class.php:551
+#: common/tracker/Artifact.class.php:569
 #, fuzzy
 msgid "Error deleting monitor: "
 msgstr "Error creando el objeto grupo"
 
-#: common/tracker/Artifact.class.php:558
+#: common/tracker/Artifact.class.php:576
 #, fuzzy
 msgid "Error deleting artifact: "
 msgstr "Error obteniendo el objeto miembro: %s"
 
-#: common/tracker/Artifact.class.php:568 common/tracker/Artifact.class.php:577
+#: common/tracker/Artifact.class.php:586 common/tracker/Artifact.class.php:595
 #, fuzzy
 msgid "Error updating artifact counts: "
 msgstr "Error actualizando información del proyecto: %s"
 
-#: common/tracker/Artifact.class.php:605
+#: common/tracker/Artifact.class.php:623
 #, fuzzy
 msgid "Valid Email Address Required"
 msgstr "Monitorizar::Se requiere una Dirección de Correo Válida"
 
-#: common/tracker/Artifact.class.php:623
+#: common/tracker/Artifact.class.php:641
 msgid "Now Monitoring Artifact"
 msgstr "Nueva Monitorización"
 
-#: common/tracker/Artifact.class.php:633
+#: common/tracker/Artifact.class.php:651
 msgid "Artifact Monitoring Deactivated"
 msgstr "Moritorización Desactivada"
 
-#: common/tracker/Artifact.class.php:905 common/tracker/actions/browse.php:568
+#: common/tracker/Artifact.class.php:923 common/tracker/actions/browse.php:568
 #: common/tracker/actions/browse.php:747 common/tracker/actions/detail.php:92
 #: common/tracker/actions/mod-limited.php:119
 #: common/tracker/actions/mod.php:145
@@ -4123,7 +4123,7 @@ msgstr "Moritorización Desactivada"
 msgid "Assigned to"
 msgstr "Asignado a"
 
-#: common/tracker/Artifact.class.php:909 common/tracker/actions/browse.php:409
+#: common/tracker/Artifact.class.php:927 common/tracker/actions/browse.php:409
 #: common/tracker/actions/browse.php:564 common/tracker/actions/browse.php:751
 #: common/tracker/actions/detail.php:78
 #: common/tracker/actions/mod-limited.php:133
@@ -4133,53 +4133,53 @@ msgstr "Asignado a"
 msgid "State"
 msgstr "Estado"
 
-#: common/tracker/Artifact.class.php:913 common/tracker/actions/browse.php:757
+#: common/tracker/Artifact.class.php:931 common/tracker/actions/browse.php:757
 msgid "Canned Response"
 msgstr "Respuesta Prefijada"
 
-#: common/tracker/Artifact.class.php:917 common/tracker/actions/mod.php:116
+#: common/tracker/Artifact.class.php:935 common/tracker/actions/mod.php:116
 msgid "Data Type"
 msgstr "Tipo Datos"
 
-#: common/tracker/Artifact.class.php:924
+#: common/tracker/Artifact.class.php:942
 msgid "Invalid assigned_to (assigned person is not a technician)"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:948
+#: common/tracker/Artifact.class.php:966
 #, fuzzy
 msgid "Could not move to new Artifact Type"
 msgstr "No se pudo completar la operación"
 
-#: common/tracker/Artifact.class.php:1032
+#: common/tracker/Artifact.class.php:1050
 msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1112
+#: common/tracker/Artifact.class.php:1130
 #, fuzzy
 msgid "Error - update failed!"
 msgstr "Error al actualizar"
 
-#: common/tracker/Artifact.class.php:1140
+#: common/tracker/Artifact.class.php:1158
 #, fuzzy
 msgid "Could Not Create Canned Response Object"
 msgstr "No Puedo Actualizar el Mensaje Padre"
 
-#: common/tracker/Artifact.class.php:1153
+#: common/tracker/Artifact.class.php:1171
 #, fuzzy
 msgid "Unable to Use Canned Response"
 msgstr "Usar Respuesta Prefijada"
 
-#: common/tracker/Artifact.class.php:1168
+#: common/tracker/Artifact.class.php:1186
 msgid "Nothing Changed - Update Cancelled"
 msgstr "Ningún Cambio - Actualización Cancelada"
 
-#: common/tracker/Artifact.class.php:1201
+#: common/tracker/Artifact.class.php:1219
 #, fuzzy
 msgid "Error updating assigned_to in artifact: "
 msgstr "Error actualizando información del proyecto: %s"
 
-#: common/tracker/Artifact.class.php:1276
-#: common/tracker/Artifact.class.php:1286
+#: common/tracker/Artifact.class.php:1294
+#: common/tracker/Artifact.class.php:1304
 #, fuzzy
 msgid "Status Custom Field Must Be Set"
 msgstr "Nombre de caja actualizado"
@@ -6733,20 +6733,22 @@ msgstr "Lista de miembros del proyecto."
 msgid "Public Areas"
 msgstr "Área pública"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:42
+#: common/widget/Widget_ProjectPublicAreas.class.php:43
+#: common/widget/Widget_ProjectPublicAreas.class.php:45
 msgid "Home Page"
 msgstr "Página principal"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:42
+#: common/widget/Widget_ProjectPublicAreas.class.php:43
+#: common/widget/Widget_ProjectPublicAreas.class.php:45
 msgid "Project Home Page"
 msgstr "Página de inicio del proyecto"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:63
+#: common/widget/Widget_ProjectPublicAreas.class.php:67
 #: www/include/project_summary.php:149
 msgid "There are no public trackers available"
 msgstr "No hay sistemas de seguimiento de peticiones públicos disponibles"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:75
+#: common/widget/Widget_ProjectPublicAreas.class.php:79
 #: www/include/project_summary.php:154
 #, fuzzy, php-format
 msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
@@ -6754,48 +6756,48 @@ msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgstr[0] "%1$s abierto /%2$s total"
 msgstr[1] "%1$s abierto /%2$s total"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:90
+#: common/widget/Widget_ProjectPublicAreas.class.php:94
 msgid "Public Forums"
 msgstr "Foros Públicos"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:95
+#: common/widget/Widget_ProjectPublicAreas.class.php:99
 #, fuzzy, php-format
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
 msgstr[0] "<strong>%1$s</strong> proyecto en esta categoría."
 msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:97
+#: common/widget/Widget_ProjectPublicAreas.class.php:101
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
 msgstr[0] "<strong>%1$s</strong> proyectos en esta categoría."
 msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:106
+#: common/widget/Widget_ProjectPublicAreas.class.php:110
 msgid "DocManager: Project Documentation"
 msgstr "Gestión de doc.: Documentación del proyecto"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:116
+#: common/widget/Widget_ProjectPublicAreas.class.php:120
 msgid "Mailing Lists"
 msgstr "Listas de Correo"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:120
+#: common/widget/Widget_ProjectPublicAreas.class.php:124
 #, fuzzy, php-format
 msgid "(<strong>%1$s</strong> public mailing list)"
 msgid_plural "(<strong>%1$s</strong> public mailing lists)"
 msgstr[0] "<strong>%1$s</strong> proyectos en esta categoría."
 msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:135
+#: common/widget/Widget_ProjectPublicAreas.class.php:139
 msgid "There are no public subprojects available"
 msgstr "No hay subproyectos públicos disponibles"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:154
+#: common/widget/Widget_ProjectPublicAreas.class.php:158
 msgid "surveys"
 msgstr "encuestas"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:163
+#: common/widget/Widget_ProjectPublicAreas.class.php:167
 #: plugins/scmgit/www/index.php:23 plugins/scmgit/www/index.php:36
 #: www/register/index.php:228 www/scm/admin/index.php:72
 #: www/scm/admin/index.php:89 www/scm/browser.php:30 www/scm/index.php:32
@@ -6803,11 +6805,11 @@ msgstr "encuestas"
 msgid "SCM Repository"
 msgstr "Repositorio SCM"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:186
+#: common/widget/Widget_ProjectPublicAreas.class.php:190
 msgid "Anonymous FTP Space"
 msgstr "Espacio FTP Anónimo"
 
-#: common/widget/Widget_ProjectPublicAreas.class.php:204
+#: common/widget/Widget_ProjectPublicAreas.class.php:208
 msgid ""
 "List all available services for this project along with some information "
 "next to it. Click on any of this item to access a service.<br />The role of "
