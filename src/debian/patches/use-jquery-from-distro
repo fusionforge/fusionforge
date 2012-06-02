@@ -4,7 +4,7 @@ Index: src/www/include/html.php
 ===================================================================
 --- src.orig/www/include/html.php
 +++ src/www/include/html.php
-@@ -377,7 +377,7 @@
+@@ -377,14 +377,14 @@
  }
  
  function html_use_jquery() {
@@ -13,3 +13,23 @@ Index: src/www/include/html.php
  }
  
  function html_use_tooltips() {
+ 	html_use_jquery();
+-	use_javascript('/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js');
++	use_javascript('/scripts/jquery-tipsy/jquery.tipsy.js');
+ 	use_javascript('/js/jquery-common.js');
+-	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
++	use_stylesheet('/scripts/jquery-tipsy/stylesheets/tipsy.css');
+ }
+ 
+ function html_use_storage() {
+@@ -407,8 +407,8 @@
+ 
+ function html_use_jqueryui() {
+ 	html_use_jquery();
+-	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.8.17.custom.min.js');
+-	use_stylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.8.17.custom.css');
++	use_javascript('/scripts/jquery-ui/jquery-ui.min.js');
++	use_stylesheet('/scripts/jquery-ui-themes/overcast/jquery-ui.min.css');
+ }
+ 
+ /**
