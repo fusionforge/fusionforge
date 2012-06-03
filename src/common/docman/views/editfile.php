@@ -57,7 +57,7 @@ if ($g->useCreateOnline()) {
 	echo '		<td>'. _('Edit the contents to your desire or leave them as they are to remain unmodified.') .'<br />';
 	echo '			<textarea id="defaulteditzone" name="details" rows="15" cols="70"></textarea><br />';
 	echo '			<input id="defaulteditfiletype" type="hidden" name="filetype" value="text/plain" />';
-	echo '			<input type="hidden" name="editor" value="online" />';
+	echo '			<input id="editor" type="hidden" name="editor" value="online" />';
 	echo '		</td>';
 	echo '	</tr>';
 }

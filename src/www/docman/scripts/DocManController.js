@@ -59,7 +59,7 @@ DocManListFileController.prototype =
 		if (typeof(this.params.divHandle) != 'undefined') {
 			this.params.divHandle.mousedown(jQuery.proxy(this, "dragging"));
 			var params = this.params;
-			var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 70;
+			var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 10;
 			jQuery(document).mouseup(function(){isDragging = false;}).mousemove(function(e){
 				if (typeof(isDragging) != 'undefined') {
 					if (isDragging) {
@@ -81,7 +81,7 @@ DocManListFileController.prototype =
 			}
 			if (jQuery.Storage.get("treesize") != 0) {
 				this.params.divLeft.css('width', parseInt(jQuery.Storage.get("treesize")));
-				var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 70;
+				var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 10;
 				this.params.divRight.css('width', w - this.params.divLeft.width());
 			}
 		}
@@ -187,6 +187,7 @@ DocManListFileController.prototype =
 		}
 		if (!this.docparams.useCreateOnline || !this.docparams.isText) {
 			jQuery('#editonlineroweditfile').hide();
+			jQuery('#editor').attr('disabled', true);
 		}
 		jQuery('#filelink').text(this.docparams.filename);
 		if (this.docparams.statusId != 2) {
