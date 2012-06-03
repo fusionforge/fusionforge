@@ -820,7 +820,7 @@ class Document extends Error {
 			return false;
 		}
 
-		if ($data) {
+		if (filesize($data)) {
 			// key words for in-document search
 			if ($this->Group->useDocmanSearch()) {
 				$kw = new Parsedata();
@@ -835,16 +835,14 @@ class Document extends Error {
 							$this->Group->getID(),
 							$this->getID())
 						);
-
+ 
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setOnUpdateError(db_error());
 				return false;
 			}
-
+ 
 			DocumentStorage::instance()->delete($this->getID())->commit();
 			DocumentStorage::instance()->store($this->getID(), $data);
-
-
 		}
 
 		$this->sendNotice(false);

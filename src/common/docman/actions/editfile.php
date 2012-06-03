@@ -109,6 +109,6 @@ if (($editor) && ($d->getFileData() != $details) && (!$uploaded_data['name'])) {
 if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid))
 	session_redirect($urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 
-$return_msg = sprintf(_('Document %s updated successfully.'),$filename);
+$return_msg = sprintf(_('Document %s updated successfully.'), $filename);
 session_redirect($urlparam.'&feedback='.urlencode($return_msg));
 ?>
