@@ -80,7 +80,6 @@ if (($editor) && ($d->getFileData()!=$data) && (!$uploaded_data['name'])) {
 		$filetype = $d->getFileType();
 
 } elseif (!empty($uploaded_data) && $uploaded_data['name']) {
-	var_dump($uploaded_data);
 	if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 		$return_msg = sprintf(_('Invalid file attack attempt %1$s.'), $uploaded_data['name']);
 		session_redirect($urlparam.'&error_msg='.urlencode($return_msg));
