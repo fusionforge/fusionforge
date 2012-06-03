@@ -147,7 +147,7 @@ class Document extends Error {
 		}
 
 		// If $filetype is "text/plain", $body convert UTF-8 encoding.
-		if (strcasecmp($filetype,"text/plain") === 0 &&
+		if (strcasecmp($filetype, "text/plain") === 0 &&
 			function_exists('mb_convert_encoding') &&
 			function_exists('mb_detect_encoding')) {
 			$data = mb_convert_encoding($data, 'UTF-8', mb_detect_encoding($data));
@@ -156,11 +156,10 @@ class Document extends Error {
 		// key words for in-document search
 		if ($this->Group->useDocmanSearch()) {
 			$kw = new Parsedata();
-			$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype);
+			$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename);
 		} else {
 			$kwords ='';
 		}
-		$filesize = strlen($data);
 
 		db_begin();
 		$result = db_query_params('INSERT INTO doc_data (group_id, title, description, createdate, doc_group,
@@ -174,7 +173,7 @@ class Document extends Error {
 							$doc_initstatus,
 							$filename,
 							$filetype,
-							$filesize,
+							filesize($data),
 							$kwords,
 							$user_id)
 					);
@@ -825,13 +824,13 @@ class Document extends Error {
 			// key words for in-document search
 			if ($this->Group->useDocmanSearch()) {
 				$kw = new Parsedata();
-				$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype);
+				$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename);
 			} else {
 				$kwords = '';
 			}
 
 			$res = db_query_params('UPDATE doc_data SET filesize=$1, data_words=$2 WHERE group_id=$3 AND docid=$4',
-						array(strlen($data),
+						array(filesize($data),
 							$kwords,
 							$this->Group->getID(),
 							$this->getID())

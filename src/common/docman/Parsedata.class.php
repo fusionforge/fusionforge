@@ -41,24 +41,17 @@ class Parsedata {
 		$this->parsers = $this->get_parser_list($this->p_path);
 	}
 
-	function get_parse_data($data, $title, $description, $filetype) {
+	function get_parse_data($data, $title, $description, $filetype, $filename) {
 		$parser = "";
 		$rep = "";
 		if (array_key_exists($filetype, $this->parsers)) {
 			// parse data if good parser exists
 			$parser = $this->p_path.$this->parsers[$filetype];
-			$filename = tempnam("/tmp/", "tmp");
-			$handle = fopen($filename, "w");
-			fwrite($handle, $data);
-			fclose($handle);
-			$cmd = "php -f $parser $filename";
+			$cmd = "php -f $parser $data";
 			$rep = shell_exec($cmd);
-			if (file_exists($filename)) {
-				unlink($filename);
-			}
 		}
-		// always parse titre and description
-		$data1 = utf8_decode("$title $description");
+		// always parse title, description, filename and filetype
+		$data1 = utf8_decode("$title $description $filename $filetype");
 		// temporary file for treatement
 		$filename = tempnam("/tmp", "tmp");
 		$handle = fopen($filename, "w");
