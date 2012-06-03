@@ -187,6 +187,7 @@ DocManListFileController.prototype =
 		}
 		if (!this.docparams.useCreateOnline || !this.docparams.isText) {
 			jQuery('#editonlineroweditfile').hide();
+			jQuery('#editor').attr('disabled', true);
 		}
 		jQuery('#filelink').text(this.docparams.filename);
 		if (this.docparams.statusId != 2) {
