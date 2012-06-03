@@ -228,11 +228,11 @@ class DocumentGroup extends Error {
 
 		switch ($uploaded_data_type) {
 			case "application/zip": {
-				$returned = $this->__injectZip($uploaded_data);
+				$returned = $this->injectZip($uploaded_data);
 				break;
 			}
 			case "application/x-rar-compressed": {
-				$returned = $this->__injectRar($uploaded_data);
+				$returned = $this->injectRar($uploaded_data);
 				break;
 			}
 			default: {
@@ -575,7 +575,7 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function setStateID($stateid) {
-		return $this->__setValueinDB('stateid', $stateid);
+		return $this->setValueinDB('stateid', $stateid);
 	}
 
 	/**
@@ -586,23 +586,23 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function setParentDocGroupId($parentDocGroupId) {
-		return $this->__setValueinDB('parent_doc_group', $parentDocGroupId);
+		return $this->setValueinDB('parent_doc_group', $parentDocGroupId);
 	}
 
 	/**
-	 * __injectZip - private method to inject a zip archive tree and files
+	 * injectZip - private method to inject a zip archive tree and files
 	 *
 	 * @param	array	uploaded zip
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
-	private function __injectZip($uploadedZip) {
+	private function injectZip($uploadedZip) {
 		$zip = new ZipArchive();
 		if ($zip->open($uploadedZip['tmp_name'])) {
 			$extractDir = forge_get_config('data_path').'/'.uniqid();
 			if ($zip->extractTo($extractDir)) {
 				$zip->close();
-				if ($this->__injectContent($extractDir)) {
+				if ($this->injectContent($extractDir)) {
 					rmdir($extractDir);
 					return true;
 				} else {
@@ -620,31 +620,31 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 * __injectRar - private method to inject a rar archive tree and files
+	 * injectRar - private method to inject a rar archive tree and files
 	 *
 	 * @param	array	uploaded rar
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
-	private function __injectRar($uploadedRar) {
+	private function injectRar($uploadedRar) {
 		return true;
 	}
 
 	/**
-	 * __injectContent - private method to inject a directory tree and files
+	 * injectContent - private method to inject a directory tree and files
 	 *
 	 * @param	string	the directory to inject
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
-	private function __injectContent($directory) {
+	private function injectContent($directory) {
 		if (is_dir($directory)) {
 			$dir_arr = scandir($directory);
 			for ($i = 0; $i < count($dir_arr); $i++) {
 				if ($dir_arr[$i] != '.' && $dir_arr[$i] != '..') {
 					if (is_dir($directory.'/'.$dir_arr[$i])) {
 						if ($this->create($dir_arr[$i], $this->getID())) {
-							if (!$this->__injectContent($directory.'/'.$dir_arr[$i])) {
+							if (!$this->injectContent($directory.'/'.$dir_arr[$i])) {
 								$this->setError(_('Unable to open directory for inject into tree'));
 								return false;
 							} else {
@@ -676,14 +676,14 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 * __setValueinDB - private function to update columns in db
+	 * setValueinDB - private function to update columns in db
 	 *
 	 * @param	string	the column to update
 	 * @param	int	the value to store
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
-	private function __setValueinDB($column, $value) {
+	private function setValueinDB($column, $value) {
 		switch ($column) {
 			case "stateid":
 			case "parent_doc_group": {

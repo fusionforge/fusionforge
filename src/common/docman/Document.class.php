@@ -579,7 +579,7 @@ class Document extends Error {
 	 * @return	boolean	success or not.
 	 */
 	function setState($stateid) {
-		return $this->__setValueinDB('stateid', $stateid);
+		return $this->setValueinDB('stateid', $stateid);
 	}
 
 
@@ -590,7 +590,7 @@ class Document extends Error {
 	 * @return	boolean	success or not.
 	 */
 	function setDocGroupID($newdocgroupid) {
-		return $this->__setValueinDB('doc_group', $newdocgroupid);
+		return $this->setValueinDB('doc_group', $newdocgroupid);
 	}
 
 	/**
@@ -930,14 +930,14 @@ class Document extends Error {
 	}
 
 	/**
-	 * __setValueinDB - private function to update columns in db
+	 * setValueinDB - private function to update columns in db
 	 *
 	 * @param	string	the column to update
 	 * @param	int	the value to store
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
-	private function __setValueinDB($column, $value) {
+	private function setValueinDB($column, $value) {
 		switch ($column) {
 			case "stateid":
 			case "doc_group": {

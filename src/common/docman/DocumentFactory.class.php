@@ -267,7 +267,7 @@ class DocumentFactory extends Error {
 	 */
 	function &getDocuments($nocache = 0) {
 		if (!$this->Documents || $nocache) {
-			$this->__getFromStorage();
+			$this->getFromStorage();
 		}
 
 		$return = array();
@@ -320,13 +320,13 @@ class DocumentFactory extends Error {
 	}
 
 	/**
-	 * __getFromStorage - Retrieve documents from storage (database for all informations).
+	 * getFromStorage - Retrieve documents from storage (database for all informations).
 	 * you can limit query to speed up: warning, once $this->documents is retrieve, it's cached.
 	 *
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
-	private function __getFromStorage() {
+	private function getFromStorage() {
 		$this->Documents = array();
 		$qpa = db_construct_qpa();
 		$qpa = db_construct_qpa($qpa, 'SELECT * FROM docdata_vw WHERE group_id = $1 ',
@@ -354,7 +354,7 @@ class DocumentFactory extends Error {
 
 		$result = db_query_qpa($qpa);
 		if (!$result) {
-			$this->setError('__getFromStorage::'.db_error());
+			$this->setError('getFromStorage::'.db_error());
 			return false;
 		}
 
