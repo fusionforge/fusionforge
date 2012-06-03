@@ -58,7 +58,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 $docid = getIntFromRequest('docid');
 $title = getStringFromRequest('title');
 $description = getStringFromRequest('description');
-$data = getStringFromRequest('details');
+$details = getStringFromRequest('details');
 $file_url = getStringFromRequest('file_url');
 $uploaded_data = getUploadedFile('uploaded_data');
 $stateid = getIntFromRequest('stateid');
@@ -73,19 +73,23 @@ if ($d->isError())
 	session_redirect($urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 
 $sanitizer = new TextSanitizer();
-$data = $sanitizer->SanitizeHtml($data);
-if (($editor) && ($d->getFileData()!=$data) && (!$uploaded_data['name'])) {
+$details = $sanitizer->SanitizeHtml($details);
+if (($editor) && ($d->getFileData() != $details) && (!$uploaded_data['name'])) {
 	$filename = $d->getFileName();
+	$datafile = tempnam("/tmp", "docman");
+	$fh = fopen($datafile, 'w');
+	fwrite($fh, $details);
+	fclose($fh);
+	$data = $datafile;
 	if (!$filetype)
 		$filetype = $d->getFileType();
 
 } elseif (!empty($uploaded_data) && $uploaded_data['name']) {
-	var_dump($uploaded_data);
 	if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 		$return_msg = sprintf(_('Invalid file attack attempt %1$s.'), $uploaded_data['name']);
 		session_redirect($urlparam.'&error_msg='.urlencode($return_msg));
 	}
-	$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
+	$data = $uploaded_data['tmp_name'];
 	$filename = $uploaded_data['name'];
 	if (function_exists('finfo_open')) {
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -101,6 +105,7 @@ if (($editor) && ($d->getFileData()!=$data) && (!$uploaded_data['name'])) {
 	$filename = $d->getFileName();
 	$filetype = $d->getFileType();
 }
+
 if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid))
 	session_redirect($urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 

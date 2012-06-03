@@ -96,14 +96,18 @@ if (!$d || !is_object($d)) {
 
 switch ($type) {
 	case 'editor' : {
-		$data = getStringFromRequest('details');
+		$filecontent = getStringFromRequest('details');
 		$uploaded_data_name = $name;
 		$sanitizer = new TextSanitizer();
-		$data = $sanitizer->SanitizeHtml($data);
-		if (strlen($data)<1) {
+		$filecontent = $sanitizer->SanitizeHtml($filecontent);
+		if (strlen($filecontent) < 1) {
 			$return_msg = _('Error getting blank document.');
 			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 		}
+		$data = tempnam("/tmp", "docman");
+		$fh = fopen($data, 'w');
+		fwrite($fh, $filecontent);
+		fclose($fh);
 		$uploaded_data_type = 'text/html';
 		break;
 	}
@@ -124,7 +128,7 @@ switch ($type) {
 		} else {
 			$uploaded_data_type = $uploaded_data['type'];
 		}
-		$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
+		$data = $uploaded_data['tmp_name'];
 		$file_url = '';
 		$uploaded_data_name = $uploaded_data['name'];
 		break;
@@ -149,8 +153,7 @@ switch ($type) {
 		} else {
 			$uploaded_data_type = 'application/binary';
 		}
-		$stat = stat($filename);
-		$data = fread(fopen($filename, 'r'), $stat['size']);
+		$data = $filename;
 		$file_url = '';
 		$uploaded_data_name = $manual_path;
 		break;
@@ -173,7 +176,7 @@ if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $ti
 		setcookie("gforgecurrentdocdata", "", time() - 3600);
 	}
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		$return_msg = sprintf(_('Document %s submitted successfully.'),$d->getFilename());
+		$return_msg = sprintf(_('Document %s submitted successfully.'), $d->getFilename());
 		session_redirect($redirecturl.'&feedback='.urlencode($return_msg));
 	} else {
 		$return_msg = sprintf(_('Document %s has been successfully uploaded and is waiting to be approved.'),$d->getFilename());

@@ -2848,13 +2848,6 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		}
 	}
 
-	function setStorageAPI($type) {
-		return true;
-	}
-
-	function getStorageAPI() {
-		return 'DB';
-	}
 }
 
 /**

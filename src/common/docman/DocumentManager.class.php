@@ -107,8 +107,9 @@ class DocumentManager extends Error {
 		$trashId = $this->getTrashID();
 		if ($trashId !== -1) {
 			db_begin();
+			$result = db_query_params('select docid FROM doc_data WHERE stateid=$1 and group_id=$2', array('2', $this->Group->getID()));
 			$emptyFile = db_query_params('DELETE FROM doc_data WHERE stateid=$1 and group_id=$2', array('2', $this->Group->getID()));
-			if (!$emptyFile)	{
+			if (!$emptyFile) {
 				db_rollback();
 				return false;
 			}
@@ -116,6 +117,9 @@ class DocumentManager extends Error {
 			if (!$emptyDir) {
 				db_rollback();
 				return false;
+			}
+			while ($arr = db_fetch_array($result)) {
+				DocumentStorage::instance()->delete($arr['docid'])->commit();
 			}
 			db_commit();
 			return true;

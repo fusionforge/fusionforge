@@ -395,6 +395,7 @@ src/common/dao/include/DataAccess.class.php -text
 src/common/dao/include/DataAccessException.class.php -text
 src/common/dao/include/DataAccessObject.class.php -text
 src/common/dao/include/DataAccessResult.class.php -text
+src/common/docman/DocumentStorage.class.php -text
 src/common/docman/Parsedata.class.php -text
 src/common/docman/actions/addfile.php -text
 src/common/docman/actions/addsubdocgroup.php -text
@@ -615,6 +616,7 @@ src/db/20111214-docman-doc_groups-created_by.sql -text
 src/db/20120321-add-news-in-activity_vw.sql -text
 src/db/20120322-add-news-in-activity_vw.sql -text
 src/db/20120409-add-new-processors-64bits.sql -text
+src/db/20120603-docman-file-moved-in-fs.php -text
 src/db/FTI-20061025.sql -text
 src/db/SQL_2.6/replicate.sh svneol=native#text/x-sh
 src/db/gforge-data-mysql.sql -text

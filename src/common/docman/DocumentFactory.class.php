@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -319,35 +320,13 @@ class DocumentFactory extends Error {
 	}
 
 	/**
-	 * __getFromStorage - Retrieve documents from storage API
-	 *
-	 * @return	boolean	success or not
-	 * @access	private
-	 */
-	private function __getFromStorage() {
-		$returned = false;
-		switch ($this->Group->getStorageAPI()) {
-			case 'DB': {
-				if ($this->__getFromDB())
-					$returned = true;
-				break;
-			}
-			default: {
-				$this->setError(_('No Storage API Found'));
-				break;
-			}
-		}
-		return $returned;
-	}
-
-	/**
-	 * __getFromDB - Retrieve documents from database.
+	 * __getFromStorage - Retrieve documents from storage (database for all informations).
 	 * you can limit query to speed up: warning, once $this->documents is retrieve, it's cached.
 	 *
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
-	private function __getFromDB() {
+	private function __getFromStorage() {
 		$this->Documents = array();
 		$qpa = db_construct_qpa();
 		$qpa = db_construct_qpa($qpa, 'SELECT * FROM docdata_vw WHERE group_id = $1 ',
@@ -375,7 +354,7 @@ class DocumentFactory extends Error {
 
 		$result = db_query_qpa($qpa);
 		if (!$result) {
-			$this->setError('getFromDB::'.db_error());
+			$this->setError('__getFromStorage::'.db_error());
 			return false;
 		}
 

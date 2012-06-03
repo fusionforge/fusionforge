@@ -1,8 +1,9 @@
 <?php
 /**
- * FusionForge Generic Storage Class
+ * FusionForge Document Storage Class
  *
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -42,69 +43,18 @@
  * ALONE BASIS."
  */
 
-class Storage extends Error {
-    protected static $_instance;
-	var $pending_store = array();
-	var $pending_delete = array();
+require_once $gfcommon.'include/Storage.class.php';
 
-	function store($key, $file) {
-		$storage = $this->get_storage($key);
-		$dir     = dirname($storage);
-		if (!is_dir($dir)) {
-			if (!mkdir ( $dir, 0755, true)) {
-				$this->setError(_('mkdir failed').': '.$dir);
-				return false;
-			}
-		}
+class DocumentStorage extends Storage {
+    public static function instance() {
+        if (!isset(self::$_instance)) {
+            $c = __CLASS__;
+            self::$_instance = new $c;
+        }
+        return self::$_instance;
+    }
 
-		$this->pending_store[] = $storage;
-
-		$ret = rename($file, $storage);
-		if (!$ret) {
-			$this->setError( sprintf(_('File %1$s cannot be moved to the permanent location: %2$s.'), $file, $storage));
-			return false;
-		}
-		return $this;
-	}
-
-	function get($key) {
-		return $this->get_storage($key);
-	}
-
-	function delete($key) {
-		$this->pending_delete[] = $this->get_storage($key);
-		return self::$_instance;
-	}
-
-	function deleteFromQuery($query, $params) {
-		$res = db_query_params($query, $params);
-		while($row = db_fetch_array($res)) {
-			$this->delete($row['id']);
-		}
-	}
-
-	function commit() {
-		foreach ($this->pending_delete as $f) {
-			rename($f, "$f.removed");
-			touch("$f.removed");
-		}
-		$this->pending_store = array();
-		$this->pending_delete = array();
-	}
-
-	function rollback() {
-		foreach ($this->pending_store as $f) {
-			unlink($f);
-		}
-		$this->pending_store = array();
-		$this->pending_delete = array();
-	}
-
-	function get_storage($key) {
-		$key = dechex($key);
-		$pre = substr($key, strlen($key)-2);
-		$last = substr($key, 0, strlen($key)-2);
-		if (!$last) $last = '0';
-		return $this->get_storage_path().'/'.$pre.'/'.$last;
+	function get_storage_path() {
+		return forge_get_config('data_path').'/docman';
 	}
 }

@@ -30,6 +30,7 @@ require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'docman/Parsedata.class.php';
 require_once $gfcommon.'docman/DocumentManager.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
+require_once $gfcommon.'docman/DocumentStorage.class.php';
 
 
 class Document extends Error {
@@ -159,52 +160,38 @@ class Document extends Error {
 		} else {
 			$kwords ='';
 		}
-
 		$filesize = strlen($data);
 
 		db_begin();
-		$result = db_query_params('INSERT INTO doc_data (group_id,title,description,createdate,doc_group,
-						stateid,filename,filetype,filesize,data_words,created_by)
-						VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)',
+		$result = db_query_params('INSERT INTO doc_data (group_id, title, description, createdate, doc_group,
+						stateid, filename, filetype, filesize, data_words, created_by)
+						VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
 						array($this->Group->getId(),
-						htmlspecialchars($title),
-						htmlspecialchars($description),
-						time(),
-						$doc_group,
-						$doc_initstatus,
-						$filename,
-						$filetype,
-						$filesize,
-						$kwords,
-						$user_id));
-		if (!$result) {
+							htmlspecialchars($title),
+							htmlspecialchars($description),
+							time(),
+							$doc_group,
+							$doc_initstatus,
+							$filename,
+							$filetype,
+							$filesize,
+							$kwords,
+							$user_id)
+					);
+
+		$docid = db_insertid($result, 'doc_data', 'docid');
+		DocumentStorage::instance()->store($docid, $data);
+
+		if (!$result || !$docid) {
 			$this->setError(_('Error Adding Document:').' '.db_error().$result);
+			DocumentStorage::instance()->rollback();
 			db_rollback();
 			return false;
 		}
 
-		$docid = db_insertid($result,'doc_data','docid');
-
-		switch ($this->Group->getStorageAPI()) {
-			case 'DB': {
-				$result = db_query_params('UPDATE doc_data set data = $1 where docid = $2',
-								array(base64_encode($data),$docid));
-				if (!$result) {
-					$this->setError(_('Error Adding Document:').' '.db_error().$result);
-					db_rollback();
-					return false;
-				}
-				break;
-			}
-			default: {
-				$this->setError(_('Error Adding Document: No Storage API'));
-				db_rollback();
-				return false;
-			}
-		}
-
 		if (!$this->fetchData($docid)) {
 			$this->setError(_('Error fetching Document'));
+			DocumentStorage::instance()->rollback();
 			db_rollback();
 			return false;
 		}
@@ -212,11 +199,13 @@ class Document extends Error {
 		$localDg = new DocumentGroup($this->Group, $doc_group);
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setError(_('Error updating document group:').$localDg->getErrorMessage());
+			DocumentStorage::instance()->rollback();
 			db_rollback();
 			return false;
 		}
 		$this->sendNotice(true);
 		db_commit();
+		DocumentStorage::instance()->commit();
 		return true;
 	}
 
@@ -414,11 +403,7 @@ class Document extends Error {
 	 * @return	string	The filedata.
 	 */
 	function getFileData() {
-		//
-		//	Because this could be a large string, we only fetch if we actually need it
-		//
-		$res = db_query_params('SELECT data FROM doc_data WHERE docid=$1', array($this->getID()));
-		return base64_decode(db_result($res, 0, 'data'));
+		return file_get_contents(DocumentStorage::instance()->get($this->getID()));
 	}
 
 	/**
@@ -857,25 +842,10 @@ class Document extends Error {
 				return false;
 			}
 
-			switch ($this->Group->getStorageAPI()) {
-				case 'DB': {
-					$res = db_query_params('UPDATE doc_data SET data = $1 where group_id = $2 and docid = $3',
-								array(base64_encode($data),
-									$this->Group->getID(),
-									$this->getID())
-								);
+			DocumentStorage::instance()->delete($this->getID())->commit();
+			DocumentStorage::instance()->store($this->getID(), $data);
 
-					if (!$res || db_affected_rows($res) < 1) {
-						$this->setOnUpdateError(db_error());
-						return false;
-					}
-					break;
-				}
-				default: {
-					$this->setOnUpdateError(_('No Storage API'));
-					return false;
-				}
-			}
+
 		}
 
 		$this->sendNotice(false);
@@ -938,16 +908,7 @@ class Document extends Error {
 			return false;
 		}
 
-		switch ($this->Group->getStorageAPI()) {
-			case 'DB': {
-				break;
-			}
-			default: {
-				$this->setError(_('Error Deleting Document: No Storage API'));
-				db_rollback();
-				return false;
-			}
-		}
+		DocumentStorage::instance()->delete($this->getID())->commit();
 
 		/** we should be able to send a notice that this doc has been deleted .... but we need to rewrite sendNotice
 		 * $this->sendNotice(false);

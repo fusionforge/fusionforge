@@ -6,6 +6,7 @@ FusionForge-5.3:
 * headermenu: new plugin to add links in login/logout menu link (TrivialDev)
 * scmgit: basic activity support (TrivialDev).
 * scmhg: merge patch from Denise Patzker: add http support, online browse, stats (TrivialDev)
+* Docman: Files moves to filesystem using the Storage generic class (TrivialDev)
 
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)
