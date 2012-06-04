@@ -119,7 +119,26 @@ retcode=0
 if $REMOTESELENIUM
 then
 	echo "Run phpunit test on $HOST"
-	ssh -X root@$HOST "tests/scripts/phpunit.sh RPMCentos52Tests.php"|| retcode=$?
+	ssh root@$HOST "yum install -y vnc-server ; mkdir -p /root/.vnc"
+	ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
+#! /bin/bash
+: > /root/phpunit.exitcode
+$FORGE_HOME/tests/scripts/phpunit.sh RPMCentos52Tests.php &> /var/log/phpunit.log &
+echo \$! > /root/phpunit.pid
+wait %1
+echo \$? > /root/phpunit.exitcode
+EOF
+	ssh root@$HOST vncpasswd <<EOF
+password
+password
+EOF
+	ssh root@$HOST "vncserver :1"
+	sleep 5
+	pid=$(ssh root@$HOST cat /root/phpunit.pid)
+	ssh root@$HOST "tail -f /var/log/phpunit.log --pid=$pid"
+	sleep 5
+	retcode=$(ssh root@$HOST cat /root/phpunit.exitcode)
+	ssh root@$HOST "vncserver -kill :1" || retcode=$?
 else
 	cd tests
 	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php || retcode=$?
