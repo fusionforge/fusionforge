@@ -131,7 +131,7 @@ rsync -a 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar r
 rsync -a --delete tests/ root@$HOST:/root/tests/
 
 echo "Run phpunit test on $HOST"
-if xterm -e "sh -c exit" 2>/dev/null
+if $REMOTESELENIUM
 then
 	ssh root@$HOST "yum install -y vnc-server ; mkdir -p /root/.vnc"
 	ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
