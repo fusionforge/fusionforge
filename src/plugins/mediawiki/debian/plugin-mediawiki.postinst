@@ -18,6 +18,12 @@ case "$1" in
 	;;
     
     configure)
+	# Run plugin specific db upgrade
+	if [ -f /usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl ]
+	then
+		/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl
+	fi
+	/usr/share/@OLDPACKAGE@/bin/register-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g') "@PLUGLONGNAME@"
 	upgrade_mediawikis
 	;;
     
