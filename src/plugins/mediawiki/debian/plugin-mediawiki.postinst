@@ -6,7 +6,7 @@ set -e
 upgrade_mediawikis () {
     # Upgrade Mediawiki database schemas
     /usr/share/gforge/bin/list-projects-using-plugin.php mediawiki | while read i ; do
-	/usr/share/gforge/plugins/mediawiki/bin/mw-wrapper.php $i update.php
+	/usr/share/gforge/plugins/mediawiki/bin/mw-wrapper.php $i update.php --quick
     done
 }
 
@@ -18,6 +18,12 @@ case "$1" in
 	;;
     
     configure)
+	# Run plugin specific db upgrade
+	if [ -f /usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl ]
+	then
+		/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl
+	fi
+	/usr/share/@OLDPACKAGE@/bin/register-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g') "@PLUGLONGNAME@"
 	upgrade_mediawikis
 	;;
     
