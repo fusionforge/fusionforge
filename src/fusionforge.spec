@@ -4,7 +4,7 @@
 # Initial work for 4.8 by JL Bond Consulting
 # Reworked for 5.1 by Alain Peyrat <aljeux@free.fr>
 #
-# Copyright (C) 2010 Alain Peyrat
+# Copyright (C) 2010-2012 Alain Peyrat
 #
 
 # Global Definitions
@@ -473,15 +473,22 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 # Apache configuration file
 %{__cp} -a etc/httpd.conf.d-fhs/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/
 %{__cp} -a etc/config.ini.d/defaults.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
-%{__cp} -a etc/config.ini.d/debug.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
 %{__cp} -a etc/config.ini-fhs $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini
-%{__cp} -a etc/httpd.conf-fhs $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
-#%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
-#%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
+%{__cp} -a etc/httpd.conf-fhs $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
+#%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
+#%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
 
-%{__sed} -i -e "s!www-data!apache!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
-%{__sed} -i -e "s!use_shell = yes!use_shell = no!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
-%{__sed} -i -e "s!use_webdav = no!use_webdav = yes!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!www-data!apache!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!/usr/share/jpgraph!/var/www/jpgraph-1.19!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!lists.$core/web_host!$core/web_host!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!scm.$core/web_host!$core/web_host!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!users.$core/web_host!$core/web_host!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_webdav = no!use_webdav = yes!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_shell = yes!use_shell = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_ftp = yes!use_ftp = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_people = yes!use_people = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_project_vhost = yes!use_project_vhost = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_snippet = yes!use_snippet = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 
 # install fusionforge crontab
 %{__sed} -e 's/\$FFUSER/%{gfuser}/g' packaging/cron.d/cron.fusionforge > $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/%{name}
@@ -715,14 +722,14 @@ if [ "$1" -eq "1" ]; then
 	    %{FORGE_DIR}/install-ng --config >>%{INSTALL_LOG} 2>&1
 	fi
 
-	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>%{INSTALL_LOG} 2>&1
-	/usr/bin/php %{FORGE_DIR}/utils/normalize_roles.php >>%{INSTALL_LOG} 2>&1
-
 	HOSTNAME=`hostname -f`
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{FORGE_CONF_DIR}/local.inc
-	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
+	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/z-gforge.conf
 	[ -d %{FORGE_VAR_LIB}/etc ] || mkdir %{FORGE_VAR_LIB}/etc
 	touch %{FORGE_VAR_LIB}/etc/httpd.vhosts
+
+	%{__sed} -i -e "s/^#ServerName (.*):80/ServerName $HOSTNAME:80/" /etc/httpd/conf/httpd.conf
+	%{__sed} -i -e "s/^Include/#Include/" %{FORGE_CONF_DIR}/httpd.conf.d/ssl-on.inc
 
 	/etc/init.d/httpd restart >>%{INSTALL_LOG} 2>&1
 
@@ -741,6 +748,9 @@ if [ "$1" -eq "1" ]; then
 	echo "noreply: /dev/null" >> /etc/aliases
 	/usr/bin/newaliases >>%{INSTALL_LOG} 2>&1
 
+	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>%{INSTALL_LOG} 2>&1
+	/usr/bin/php %{FORGE_DIR}/utils/normalize_roles.php >>%{INSTALL_LOG} 2>&1
+
 	if [ $ret -ne 0 ] ; then
 		# display message about default admin account
 		echo ""
@@ -758,6 +768,7 @@ if [ "$1" -eq "1" ]; then
 	fi
 else
 	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>%{UPGRADE_LOG} 2>&1
+	/usr/bin/php %{FORGE_DIR}/utils/normalize_roles.php >>%{UPGRADE_LOG} 2>&1
 fi
 
 %preun
@@ -790,7 +801,7 @@ fi
 %doc AUTHORS* CHANGES COPYING INSTALL* NEWS README*
 %doc docs/*
 #%attr(0660, %{httpduser}, gforge) %config(noreplace) %{FORGE_CONF_DIR}/local.inc
-#%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
+#%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/z-gforge.conf
 %attr(0644, root, root) %{_sysconfdir}/cron.d/%{name}
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{FORGE_VAR_LIB}/upload
 %attr(755, root, %{httpdgroup}) %dir %{FORGE_DIR}
@@ -879,9 +890,8 @@ fi
 %dir %{FORGE_CONF_DIR}/httpd.d
 %dir %{FORGE_CONF_DIR}/httpd.conf.d
 %{FORGE_CONF_DIR}/httpd.conf.d/*
-%{_sysconfdir}/httpd/conf.d/gforge.conf
+%{_sysconfdir}/httpd/conf.d/z-gforge.conf
 %{FORGE_CONF_DIR}/config.ini.d/defaults.ini
-%{FORGE_CONF_DIR}/config.ini.d/debug.ini
 %{FORGE_CONF_DIR}/config.ini
 %dir %attr(0775,root,%{httpdgroup}) %{FORGE_CONF_DIR}/plugins
 %dir %{FORGE_VAR_LIB}/scmtarballs
@@ -1137,6 +1147,9 @@ fi
 # %{FORGE_DIR}/plugins/oauthprovider
 
 %changelog
+* Thu June 07 2012 - Alain Peyrat <aljeux@free.fr> - 5.1.90-1
+- Adapted for 5.2 with new install scripts.
+
 * Tue May 17 2011 - Thorsten Glaser <t.glaser@tarent.de> - 5.0.50-2
 - Adapted for versioning of the forge via the packaging
 
