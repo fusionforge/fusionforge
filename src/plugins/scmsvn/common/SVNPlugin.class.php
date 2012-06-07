@@ -289,6 +289,7 @@ class SVNPlugin extends SCMPlugin {
 
 		$access_data = '';
 		$password_data = '';
+		$engine = RBACEngine::getInstance() ;
 
 		$svnusers = array();
 		foreach ($groups as $project) {
@@ -300,20 +301,16 @@ class SVNPlugin extends SCMPlugin {
 			}
 			$access_data .= '[' . $project->getUnixName() . ":/]\n";
 
-			$users = $project->getMembers();
+			$users = $engine->getUsersByAllowedAction('scm',$project->getID(),'read');
 			foreach ($users as $user) {
+				$svnusers[$user->getID()] = $user;
 				if (forge_check_perm_for_user($user,
 							       'scm',
 							       $project->getID(),
 							       'write')) {
 					$access_data .= $user->getUnixName() . "= rw\n";
-					$svnusers[$user->getID()] = $user;
-				} elseif (forge_check_perm_for_user($user,
-								     'scm',
-								     $project->getID(),
-								     'read')) {
+				} else {
 					$access_data .= $user->getUnixName() . "= r\n";
-					$svnusers[$user->getID()] = $user;
 				}
 			}
 
