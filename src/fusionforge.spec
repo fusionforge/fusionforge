@@ -707,11 +707,12 @@ if [ "$1" -eq "1" ]; then
 	        FFORGE_ADMIN_PASSWORD=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-8)
 	    fi
 	    export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD
-	    /bin/sh %{FORGE_DIR}/install-ng --database >>%{INSTALL_LOG} 2>&1
+	    %{FORGE_DIR}/install-ng --config --database >>%{INSTALL_LOG} 2>&1
 	else
 	    echo "Database %{dbname} already exists. Will not proceed with database setup." >>%{INSTALL_LOG} 2>&1
 	    echo "Please see %{FORGE_DIR}/install-ng --database and run it manually" >>%{INSTALL_LOG} 2>&1
 	    echo "if deemed necessary." >>%{INSTALL_LOG} 2>&1
+	    %{FORGE_DIR}/install-ng --config >>%{INSTALL_LOG} 2>&1
 	fi
 
 	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>%{INSTALL_LOG} 2>&1
@@ -722,8 +723,6 @@ if [ "$1" -eq "1" ]; then
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
 	[ -d %{FORGE_VAR_LIB}/etc ] || mkdir %{FORGE_VAR_LIB}/etc
 	touch %{FORGE_VAR_LIB}/etc/httpd.vhosts
-
-	/bin/sh %{FORGE_DIR}/install-ng --config >>%{INSTALL_LOG} 2>&1
 
 	/etc/init.d/httpd restart >>%{INSTALL_LOG} 2>&1
 
