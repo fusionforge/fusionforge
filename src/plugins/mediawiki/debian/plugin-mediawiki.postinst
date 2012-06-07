@@ -6,7 +6,7 @@ set -e
 upgrade_mediawikis () {
     # Upgrade Mediawiki database schemas
     /usr/share/gforge/bin/list-projects-using-plugin.php mediawiki | while read i ; do
-	/usr/share/gforge/plugins/mediawiki/bin/mw-wrapper.php $i update.php
+	/usr/share/gforge/plugins/mediawiki/bin/mw-wrapper.php $i update.php --quick
     done
 }
 
