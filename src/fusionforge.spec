@@ -1147,7 +1147,7 @@ fi
 # %{FORGE_DIR}/plugins/oauthprovider
 
 %changelog
-* Thu June 07 2012 - Alain Peyrat <aljeux@free.fr> - 5.1.90-1
+* Thu Jun 07 2012 - Alain Peyrat <aljeux@free.fr> - 5.1.90-1
 - Adapted for 5.2 with new install scripts.
 
 * Tue May 17 2011 - Thorsten Glaser <t.glaser@tarent.de> - 5.0.50-2
