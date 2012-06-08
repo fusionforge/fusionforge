@@ -42,7 +42,7 @@ if (getStringFromRequest('post_changes')) {
 
 	if (getStringFromRequest('add_at')) {
 		$res=new ArtifactTypeHtml($group);
-		if (!$res->create($name,$description,0,0,$email_all,$email_address,
+		if (!$res->create($name,$description,$email_all,$email_address,
 			$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
 			exit_error($res->getErrorMessage(),'tracker');
 		} else {

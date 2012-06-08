@@ -103,18 +103,18 @@ $severity=array('Severity',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0,0,$severities);
 //
 
 /*
-NAME DESCRIPTION, $is_public,$allow_anon,$email_all,$email_address,
+NAME, DESCRIPTION, $email_all,$email_address,
 $due_period,$use_resolution,$submit_instructions,$browse_instructions,
 $datatype=0,$fields
 */
 
-$trackers[]=array('Bugs','Bug Tracking System',1,0,'','',30,0,'','',1, array($hardware, $product, $os, $component, $version, $severity, $bugres, $url));
+$trackers[]=array('Bugs','Bug Tracking System','','',30,0,'','',1, array($hardware, $product, $os, $component, $version, $severity, $bugres, $url));
 
-$trackers[]=array('Support','Tech Support Tracking System',1,0,'','',30,0,'','',2, array($hardware, $product, $os, $component, $version, $severity, $url));
+$trackers[]=array('Support','Tech Support Tracking System','','',30,0,'','',2, array($hardware, $product, $os, $component, $version, $severity, $url));
 
-$trackers[]=array('Patches','Patch Tracking System',1,0,'','',30,0,'','',3, array($component, $version, $patchres));
+$trackers[]=array('Patches','Patch Tracking System','','',30,0,'','',3, array($component, $version, $patchres));
 
-$trackers[]=array('Feature Requests','Feature Request Tracking System',1,0,'','',30,0,'','',4, array($product, $os, $component));
+$trackers[]=array('Feature Requests','Feature Request Tracking System','','',30,0,'','',4, array($product, $os, $component));
 
 //This allows you to specify a custom status with given status_id.
 //e.g. The following allows for open and closed custom states to be defined for new trackers.

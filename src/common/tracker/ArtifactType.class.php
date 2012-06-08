@@ -189,8 +189,6 @@ class ArtifactType extends Error {
 	 *
 	 *	@param	string	The type name.
 	 *	@param	string	The type description.
-	 *  @param  bool	(1) true (0) false - viewable by general public.
-	 *  @param  bool	(1) true (0) false - whether non-logged-in users can submit.
 	 *	@param	bool	(1) true (0) false - whether to email on all updates.
 	 *	@param	string	The address to send new entries and updates to.
 	 *	@param	int		Days before this item is considered overdue.
@@ -200,7 +198,7 @@ class ArtifactType extends Error {
 	 *	@param	int		(1) bug tracker, (2) Support Tracker, (3) Patch Tracker, (4) features (0) other.
 	 *	@return id on success, false on failure.
 	 */
-	function create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
+	function create($name,$description,$email_all,$email_address,
 		$due_period,$use_resolution,$submit_instructions,$browse_instructions,$datatype=0) {
 
 		if (!forge_check_perm('tracker_admin', $this->Group->getID())) {
@@ -222,8 +220,6 @@ class ArtifactType extends Error {
 		}
 
 		$use_resolution = ((!$use_resolution) ? 0 : $use_resolution);
-		$is_public = ((!$is_public) ? 0 : $is_public);
-		$allow_anon = ((!$allow_anon) ? 0 : $allow_anon);
 		$email_all = ((!$email_all) ? 0 : $email_all);
 
 		db_begin();
@@ -233,8 +229,6 @@ class ArtifactType extends Error {
 			(group_id,
 			name,
 			description,
-			is_public,
-			allow_anon,
 			email_all_updates,
 			email_address,
 			due_period,
@@ -243,12 +237,10 @@ class ArtifactType extends Error {
 			browse_instructions,
 			datatype)
 			VALUES
-			($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)',
+			($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
 					array ($this->Group->getID(),
 					       htmlspecialchars($name),
 					       htmlspecialchars($description),
-					       $is_public,
-					       $allow_anon,
 					       $email_all,
 					       $email_address,
 					       $due_period*(60*60*24),
@@ -333,15 +325,6 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  allowsAnon - determine if non-logged-in users can post.
-	 *
-	 *	  @return	boolean	allow_anonymous_submissions.
-	 */
-	function allowsAnon() {
-		return $this->data_array['allow_anon'];
-	}
-
-	/**
 	 *	  getSubmitInstructions - get the free-form string strings.
 	 *
 	 *	  @return	string	instructions.
@@ -375,15 +358,6 @@ class ArtifactType extends Error {
 	 */
 	function getEmailAddress() {
 		return $this->data_array['email_address'];
-	}
-
-	/**
-	 *	  isPublic - whether non-group-members can view.
-	 *
-	 *	  @return boolean	is_public.
-	 */
-	function isPublic() {
-		return $this->data_array['is_public'];
 	}
 
 	/**

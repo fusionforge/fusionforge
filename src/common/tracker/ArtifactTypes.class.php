@@ -89,7 +89,7 @@ class ArtifactTypes extends Error {
 			//
 			//	Create a tracker
 			//
-			if (!$at->create($trk[0], $trk[1], $trk[2], $trk[3], $trk[4], $trk[5], $trk[6], $trk[7], $trk[8], $trk[9], $trk[10])) {
+			if (!$at->create($trk[0], $trk[1], $trk[2], $trk[3], $trk[4], $trk[5], $trk[6], $trk[7], $trk[8])) {
 				$this->setError('Error Creating Tracker: '.$at->getErrorMessage());
 				db_rollback();
 				return false;
@@ -97,7 +97,7 @@ class ArtifactTypes extends Error {
 				//
 				//	Create each field in the tracker
 				//
-				foreach ($trk[11] AS $fld) {
+				foreach ($trk[9] AS $fld) {
 					$aef = new ArtifactExtraField($at);
 //print($fld[0])."***|";
 					if (!$aef->create($fld[0], $fld[1], $fld[2], $fld[3], $fld[4])) {
