@@ -1558,9 +1558,6 @@ class Group extends Error {
 				return false;
 			}
 		}
-		// Failsafe until user_group table is gone
-		$res = db_query_params('DELETE FROM user_group WHERE group_id=$1',
-					array($this->getID()));
 
 		// unlink roles from this project
 		$ra = RoleAnonymous::getInstance();
