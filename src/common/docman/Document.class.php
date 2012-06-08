@@ -153,6 +153,9 @@ class Document extends Error {
 			$data = mb_convert_encoding($data, 'UTF-8', mb_detect_encoding($data));
 		}
 
+                $filesize = filesize($data);
+                if (!$filesize) { $filesize = 0 ; }
+
 		// key words for in-document search
 		if ($this->Group->useDocmanSearch()) {
 			$kw = new Parsedata();
@@ -173,7 +176,7 @@ class Document extends Error {
 							$doc_initstatus,
 							$filename,
 							$filetype,
-							filesize($data),
+							$filesize,
 							$kwords,
 							$user_id)
 					);
