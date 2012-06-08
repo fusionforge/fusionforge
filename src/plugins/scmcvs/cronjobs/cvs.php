@@ -285,15 +285,6 @@ function update_cvs_repositories() {
 	global $cvsdir_prefix;
 	global $err;
 
-	$res = db_query_params ('select groups.group_id,groups.unix_group_name,groups.enable_anonscm,groups.enable_pserver
- FROM groups, plugins, group_plugin
- WHERE groups.status != $1
- AND groups.group_id=group_plugin.group_id
- AND group_plugin.plugin_id=plugins.plugin_id
- AND plugins.plugin_name=$2',
-			array('P',
-				'scmcvs'));
-
 	//
         // Move CVS trees for deleted groups
         //

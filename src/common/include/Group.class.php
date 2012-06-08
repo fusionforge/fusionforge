@@ -317,11 +317,10 @@ class Group extends Error {
 					scm_box,
 					register_purpose,
 					register_time,
-					enable_anonscm,
 					rand_hash,
 					built_from_template
 				)
-				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
+				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
 						array (htmlspecialchars ($group_name),
 						       $unix_name,
 						       htmlspecialchars($description),
@@ -332,7 +331,6 @@ class Group extends Error {
 						       $scm_box,
 						       htmlspecialchars($purpose),
 						       time(),
-						       0,
 						       md5(util_randbytes()),
 						       $built_from_template));
 			if (!$res || db_affected_rows($res) < 1) {

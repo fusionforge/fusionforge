@@ -207,7 +207,7 @@ $shadow_contents .= "\n#GFORGEEND\n";
 $group_orig = file("/etc/group");
 
 //    Add the groups from the gforge database
-$group_res = db_query_params ('SELECT group_id, unix_group_name, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status=$1 AND type_id=$2',
+$group_res = db_query_params ('SELECT group_id, unix_group_name FROM groups WHERE status=$1 AND type_id=$2',
                         array('A',
                                 '1'));
 $err .= db_error();
