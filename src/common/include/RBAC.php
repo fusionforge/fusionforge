@@ -662,6 +662,9 @@ abstract class BaseRole extends Error {
 			case 'manager':
 				return (($value & 4) != 0) ;
 				break ;
+			case 'submit':
+				return (($value & 8) != 0) ;
+				break ;
 			}
 			break ;
 
