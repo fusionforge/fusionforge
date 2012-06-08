@@ -4,7 +4,7 @@
 # Initial work for 4.8 by JL Bond Consulting
 # Reworked for 5.x by Alain Peyrat <aljeux@free.fr>
 #
-# Copyright (C) 2010 Alain Peyrat
+# Copyright (C) 2010-2012 Alain Peyrat
 #
 
 # Global Definitions
@@ -731,15 +731,13 @@ if [ "$1" -eq "1" ]; then
 	        FFORGE_ADMIN_PASSWORD=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-8)
 	    fi
 	    export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD
-	    /bin/sh %{FORGE_DIR}/install-ng --database >>%{INSTALL_LOG} 2>&1
+	    %{FORGE_DIR}/install-ng --config --database >>%{INSTALL_LOG} 2>&1
 	else
 	    echo "Database %{dbname} already exists. Will not proceed with database setup." >>%{INSTALL_LOG} 2>&1
 	    echo "Please see %{FORGE_DIR}/install-ng --database and run it manually" >>%{INSTALL_LOG} 2>&1
 	    echo "if deemed necessary." >>%{INSTALL_LOG} 2>&1
+	    %{FORGE_DIR}/install-ng --config >>%{INSTALL_LOG} 2>&1
 	fi
-
-	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>%{INSTALL_LOG} 2>&1
-	/usr/bin/php %{FORGE_DIR}/utils/normalize_roles.php >>%{INSTALL_LOG} 2>&1
 
 	HOSTNAME=`hostname -f`
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{FORGE_CONF_DIR}/local.inc
@@ -747,7 +745,8 @@ if [ "$1" -eq "1" ]; then
 	[ -d %{FORGE_VAR_LIB}/etc ] || mkdir %{FORGE_VAR_LIB}/etc
 	touch %{FORGE_VAR_LIB}/etc/httpd.vhosts
 
-	/bin/sh %{FORGE_DIR}/install-ng --config >>%{INSTALL_LOG} 2>&1
+	%{__sed} -i -e "s/^#ServerName (.*):80/ServerName $HOSTNAME:80/" /etc/httpd/conf/httpd.conf
+	%{__sed} -i -e "s/^Include/#Include/" %{FORGE_CONF_DIR}/httpd.conf.d/ssl-on.inc
 
 	%{__sed} -i -e "s/^#ServerName (.*):80/ServerName $HOSTNAME:80/" /etc/httpd/conf/httpd.conf
 	%{__sed} -i -e "s/^Include/#Include/" %{FORGE_CONF_DIR}/httpd.conf.d/ssl-on.inc
@@ -769,6 +768,9 @@ if [ "$1" -eq "1" ]; then
 	echo "noreply: /dev/null" >> /etc/aliases
 	/usr/bin/newaliases >>%{INSTALL_LOG} 2>&1
 
+	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>%{INSTALL_LOG} 2>&1
+	/usr/bin/php %{FORGE_DIR}/utils/normalize_roles.php >>%{INSTALL_LOG} 2>&1
+
 	if [ $ret -ne 0 ] ; then
 		# display message about default admin account
 		echo ""
@@ -786,6 +788,7 @@ if [ "$1" -eq "1" ]; then
 	fi
 else
 	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>%{UPGRADE_LOG} 2>&1
+	/usr/bin/php %{FORGE_DIR}/utils/normalize_roles.php >>%{UPGRADE_LOG} 2>&1
 fi
 
 %preun
@@ -1167,6 +1170,9 @@ fi
 # %{FORGE_DIR}/plugins/oauthprovider
 
 %changelog
+* Thu Jun 07 2012 - Alain Peyrat <aljeux@free.fr> - 5.1.90-1
+- Adapted for 5.2 with new install scripts.
+
 * Tue May 17 2011 - Thorsten Glaser <t.glaser@tarent.de> - 5.0.50-2
 - Adapted for versioning of the forge via the packaging
 

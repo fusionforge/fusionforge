@@ -45,12 +45,6 @@ function send_file ($filename,$filepath,$file_id=NULL) {
 		session_redirect404();
 	}
 
-	if ($GLOBALS['sys_block_anonymous_downloads']) {
-		if (!session_loggedin()) {
-			exit_permission_denied();
-		}
-	}
-
 	header('Content-disposition: attachment; filename="'.str_replace('"', '', $filename).'"');
 	header("Content-type: application/binary");
 	$length = filesize($filepath);
