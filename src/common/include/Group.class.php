@@ -2254,7 +2254,7 @@ class Group extends Error {
 					$oldatf = new ArtifactTypeFactory($template);
 					foreach ($oldatf->getArtifactTypes() as $o) {
 						$t = new ArtifactType ($this) ;
-						$t->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->allowsAnon(),$o->emailAll(),$o->getEmailAddress(),$o->getDuePeriod()/86400,0,$o->getSubmitInstructions(),$o->getBrowseInstructions()) ;
+						$t->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->emailAll(),$o->getEmailAddress(),$o->getDuePeriod()/86400,0,$o->getSubmitInstructions(),$o->getBrowseInstructions()) ;
 						$id_mappings['tracker'][$o->getID()] = $t->getID();
 						$t->cloneFieldsFrom ($o->getID());
 					}
@@ -2267,7 +2267,7 @@ class Group extends Error {
 					$oldpgf = new ProjectGroupFactory($template);
 					foreach ($oldpgf->getProjectGroups() as $o) {
 						$pg = new ProjectGroup($this);
-						$pg->create($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->getSendAllPostsTo());
+						$pg->create($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->getSendAllPostsTo());
 						$id_mappings['pm'][$o->getID()] = $pg->getID();
 					}
 				}

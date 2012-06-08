@@ -73,7 +73,7 @@ if (getStringFromRequest('post_changes')) {
 			Add new subproject
 		*/
 		session_require_perm ('pm_admin', $group_id) ;
-		if (!$pg->create($project_name,$description,0,$send_all_posts_to)) {
+		if (!$pg->create($project_name,$description,$send_all_posts_to)) {
 			exit_error($pg->getErrorMessage(),'pm');
 		} else {
 			$feedback .= _('Subproject Inserted');

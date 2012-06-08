@@ -139,16 +139,25 @@ class Widget_ProjectPublicAreas extends Widget {
 						$link_content = $HTML->getPmPic('') . ' ' . _('Tasks');
 						print util_make_link( '/pm/?group_id='.$group_id, $link_content);
 
-						$result = db_query_params ('SELECT * FROM project_group_list WHERE group_id=$1 AND is_public=1',
+						$result = db_query_params ('SELECT * FROM project_group_list WHERE group_id=$1',
 								array ($group_id));
-						$rows = db_numrows($result);
-						if (!$result || $rows < 1) {
-							echo "<br />\n<em>"._('There are no public subprojects available').'</em>';
+						
+						$rows = array();
+						while ($row = db_fetch_array($result)) {
+							if (!forge_check_perm('pm',$row['group_project_id'],'read')) {
+								continue;
+							}
+							$rows[] = $row;
+						}
+
+
+						if (count($rows) < 1) {
+							echo "<br />\n<em>"._('There are no subprojects available').'</em>';
 						} else {
 							echo "\n".'<ul class="task-manager">';
-							for ($j = 0; $j < $rows; $j++) {
+							foreach ($rows as $row) {
 								echo "\n\t<li>";
-								print util_make_link ('/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').'&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'project_name'));
+								print util_make_link ('/pm/task.php?group_project_id='.$row['group_project_id'].'&amp;group_id='.$group_id.'&amp;func=browse',$row['project_name']);
 								echo '</li>' ;
 							}
 							echo "\n</ul>";

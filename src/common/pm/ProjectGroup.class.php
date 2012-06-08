@@ -134,11 +134,10 @@ class ProjectGroup extends Error {
 	 *
 	 * @param	string	The project name.
 	 * @param	string	The project description.
-	 * @param	int	Whether it is (1) public or (0) private .
 	 * @param	string	The email address to send new notifications to.
 	 * @return	boolean	success.
 	 */
-	function create($project_name,$description,$is_public=1,$send_all_posts_to='') {
+	function create($project_name,$description,$send_all_posts_to='') {
 		if (strlen($project_name) < 3) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -161,10 +160,9 @@ class ProjectGroup extends Error {
 		}
 
 		db_begin();
-		$result = db_query_params('INSERT INTO project_group_list (group_id,project_name,is_public,description,send_all_posts_to) VALUES ($1,$2,$3,$4,$5)',
+		$result = db_query_params('INSERT INTO project_group_list (group_id,project_name,description,send_all_posts_to) VALUES ($1,$2,$3,$4)',
 					  array($this->Group->getId(),
 						htmlspecialchars($project_name),
-						$is_public,
 						htmlspecialchars($description),
 						$send_all_posts_to));
 		if (!$result) {
@@ -234,15 +232,6 @@ class ProjectGroup extends Error {
 	 */
 	function getTotalCount() {
 		return $this->data_array['count'];
-	}
-
-	/**
-	 * isPublic - Is this projectGroup open to the general public.
-	 *
-	 * @return	boolean	allow.
-	 */
-	function isPublic() {
-		return $this->data_array['is_public'];
 	}
 
 	/**
