@@ -85,16 +85,12 @@ class ForumsSearchQuery extends SearchQuery {
 						 array ($this->getFTIwords(),
 							$this->field_separator)) ;
 			$qpa = db_construct_qpa ($qpa,
-						 'WHERE users.user_id = forum.posted_by AND vectors @@ q AND forum.msg_id = forum_idx.msg_id AND forum_group_list.group_forum_id = forum.group_forum_id AND forum_group_list.is_public <> 9 AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $1) ',
+						 'WHERE users.user_id = forum.posted_by AND vectors @@ q AND forum.msg_id = forum_idx.msg_id AND forum_group_list.group_forum_id = forum.group_forum_id AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $1) ',
 						 array ($this->groupId));
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$qpa = db_construct_qpa ($qpa,
 							 'AND forum_group_list.group_forum_id = ANY ($1) ',
 							 array (db_int_array_to_any_clause ($this->sections))) ;
-			}
-			if (!$this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
-							 'AND forum_group_list.is_public = 1 ') ;
 			}
 
 			if(count($this->phrases)) {
@@ -109,17 +105,13 @@ class ForumsSearchQuery extends SearchQuery {
 						 'ORDER BY forum_group_list.forum_name ASC, forum.msg_id ASC, ts_rank(vectors, q) DESC') ;
 		} else {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT x.* FROM (SELECT forum.group_forum_id, forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name, forum.subject||$1||forum.body as full_string_agg FROM forum, users, forum_group_list WHERE users.user_id = forum.posted_by AND forum_group_list.group_forum_id = forum.group_forum_id AND forum_group_list.is_public <> 9 AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $2) ',
+						 'SELECT x.* FROM (SELECT forum.group_forum_id, forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name, forum.subject||$1||forum.body as full_string_agg FROM forum, users, forum_group_list WHERE users.user_id = forum.posted_by AND forum_group_list.group_forum_id = forum.group_forum_id AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $2) ',
 						 array ($this->field_separator,
 							$this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$qpa = db_construct_qpa ($qpa,
 							 'AND forum_group_list.group_forum_id = ANY ($1) ',
 							 array (db_int_array_to_any_clause ($this->sections))) ;
-			}
-			if (!$this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
-							 'AND forum_group_list.is_public = 1 ') ;
 			}
 			$qpa = db_construct_qpa ($qpa,
 						 ') AS x WHERE ') ;
@@ -141,10 +133,6 @@ class ForumsSearchQuery extends SearchQuery {
 					 'SELECT msg_id FROM forum, forum_group_list WHERE msg_id=$1 AND forum_group_list.group_forum_id=forum.group_forum_id AND group_forum_id=$2',
 					 array ($this->searchId,
 						$this->forumId)) ;
-		if (!$this->showNonPublic) {
-			$qpa = db_construct_qpa ($qpa,
-						 ' AND forum_group_list.is_public=1') ;
-		}
 
 		return $qpa;
 	}
@@ -156,7 +144,7 @@ class ForumsSearchQuery extends SearchQuery {
 	 * @param $showNonPublic boolean if we should consider non public sections
 	 */
 	static function getSections($groupId, $showNonPublic=false) {
-		$sql = 'SELECT group_forum_id, forum_name FROM forum_group_list WHERE group_id = $1 AND is_public <> 9';
+		$sql = 'SELECT group_forum_id, forum_name FROM forum_group_list WHERE group_id = $1';
 		$sql .= ' ORDER BY forum_name';
 
 		$sections = array();
