@@ -138,38 +138,29 @@ class Widget_ProjectPublicAreas extends Widget {
 						echo "\n</div>\n";
 					}
 
-					// ##################### Task Manager
-
-					if ($project->usesPm()) {
-						echo '<div class="public-area-box">'."\n";
-						$link_content = $HTML->getPmPic('') . ' ' . _('Tasks');
-						print util_make_link( '/pm/?group_id='.$group_id, $link_content);
-
-						$result = db_query_params ('SELECT * FROM project_group_list WHERE group_id=$1',
-								array ($group_id));
-						
-						$rows = array();
-						while ($row = db_fetch_array($result)) {
-							if (!forge_check_perm('pm',$row['group_project_id'],'read')) {
-								continue;
-							}
-							$rows[] = $row;
-						}
-
-
-						if (count($rows) < 1) {
-							echo "<br />\n<em>"._('There are no subprojects available').'</em>';
-						} else {
-							echo "\n".'<ul class="task-manager">';
-							foreach ($rows as $row) {
-								echo "\n\t<li>";
-								print util_make_link ('/pm/task.php?group_project_id='.$row['group_project_id'].'&amp;group_id='.$group_id.'&amp;func=browse',$row['project_name']);
-								echo '</li>' ;
-							}
-							echo "\n</ul>";
-						}
-						echo "\n</div>\n";
-					}
+		// ##################### Task Manager
+					
+		if ($project->usesPm()) {
+			echo '<div class="public-area-box">'."\n";
+			$link_content = $HTML->getPmPic('') . ' ' . _('Tasks');
+			print util_make_link( '/pm/?group_id='.$group_id, $link_content);
+			
+			$pgf = new ProjectGroupFactory ($project);
+			$pgs = $pgf->getProjectGroups();
+			
+			if (count($pgs) < 1) {
+				echo "<br />\n<em>"._('There are no subprojects available').'</em>';
+			} else {
+				echo "\n".'<ul class="task-manager">';
+				foreach ($pgs as $pg) {
+					echo "\n\t<li>";
+					print util_make_link ('/pm/task.php?group_project_id='.$pg->getID().'&amp;group_id='.$group_id.'&amp;func=browse',$pg->getName());
+					echo '</li>' ;
+				}
+				echo "\n</ul>";
+			}
+			echo "\n</div>\n";
+		}
 
 					// ######################### Surveys
 
