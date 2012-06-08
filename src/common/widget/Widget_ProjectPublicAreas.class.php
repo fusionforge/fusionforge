@@ -57,32 +57,39 @@ class Widget_ProjectPublicAreas extends Widget {
 					FROM artifact_group_list agl
 					LEFT JOIN artifact_counts_agg aca USING (group_artifact_id)
 					WHERE agl.group_id=$1
-					AND agl.is_public=1
 					ORDER BY group_artifact_id ASC',
 					array($group_id));
 
-			$rows = db_numrows($result);
+			$rows = array();
+			while ($row = db_fetch_array($result)) {
+				if (!forge_check_perm('tracker',$row['group_artifact_id'],'read')) {
+					continue;
+				}
+				$rows[] = $row;
+			}
 
-			if (!$result || $rows < 1) {
-				echo "<br />\n<em>"._('There are no public trackers available').'</em>';
+			if (count($rows) < 1) {
+				echo "<br />\n<em>"._('There are no trackers available').'</em>';
 			} else {
 				echo "\n".'<ul class="tracker" rel="doap:bug-database">'."\n";
-				for ($j = 0; $j < $rows; $j++) {
+				foreach ($rows as $row) {
 					// tracker REST paths are something like : /tracker/cm/project/A_PROJECT/atid/NUMBER to plan compatibility
 					// with OSLC-CM server API
-					$group_artifact_id = db_result($result, $j, 'group_artifact_id');
+					$group_artifact_id = $row['group_artifact_id'];
 					$tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $project->getUnixName() .'/atid/'. $group_artifact_id);
 					echo "\t".'<li about="'. $tracker_stdzd_uri . '" typeof="sioc:Container">'."\n";
 					print '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
-					echo util_make_link ('/tracker/?atid='. $group_artifact_id . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name')) . ' ' ;
+					echo util_make_link ('/tracker/?atid='. $group_artifact_id . '&amp;group_id='.$group_id.'&amp;func=browse',$row['name']) . ' ' ;
 					echo "</span>\n"; // /owl:sameAs
-					printf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count'));
-					echo '<br />'; //.db_result($result, $j, 'description');
+					printf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
+					echo '<br />';
 					print '<span rel="sioc:has_space" resource="" ></span>'."\n";
 					echo "</li>\n";
 				}
 				echo "</ul>\n";
 			}
+
+
 			echo "</div>\n";
 		}
 
