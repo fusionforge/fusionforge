@@ -138,14 +138,11 @@ class Forum extends Error {
 	 *
 	 * @param	string	The name of the forum.
 	 * @param	string	The description of the forum.
-	 * @param	int	Pass (1) if it should be public (0) for private.
 	 * @param	string	The email address to send all new posts to.
 	 * @param	int	Pass (1) if a welcome message should be created (0) for no welcome message.
-	 * @param	int	Pass (1) if we should allow non-logged-in users to post (0) for mandatory login.
-	 * @param	int	Pass (0) if the messages that are posted in the forum should go to moderation before available. 0-> no moderation 1-> moderation for anonymous and non-project members 2-> moderation for everyone
 	 * @return	boolean	success.
 	 */
-	function create($forum_name,$description,$is_public=1,$send_all_posts_to='',$create_default_message=1,$allow_anonymous=1,$moderation_level=0) {
+	function create($forum_name,$description,$send_all_posts_to='',$create_default_message=1) {
 		if (strlen($forum_name) < 3) {
 			$this->setError(_('Forum Name Must Be At Least 3 Characters'));
 			return false;
@@ -196,14 +193,11 @@ class Forum extends Error {
 		}
 
 		db_begin();
-		$result = db_query_params('INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous,moderation_level) VALUES ($1,$2,$3,$4,$5,$6,$7)',
+		$result = db_query_params('INSERT INTO forum_group_list (group_id,forum_name,description,send_all_posts_to) VALUES ($1,$2,$3,$4)',
 					  array($this->Group->getID(),
 						strtolower($forum_name),
-						$is_public,
 						htmlspecialchars($description),
-						$send_all_posts_to,
-						$allow_anonymous,
-						$moderation_level));
+						$send_all_posts_to));
 		if (!$result) {
 			$this->setError(_('Error Adding Forum:').' '.db_error());
 			db_rollback();
@@ -320,24 +314,6 @@ class Forum extends Error {
 	}
 
 	/**
-	 * allowAnonymous - does this forum allow non-logged in users to post.
-	 *
-	 * @return	boolean	allow_anonymous.
-	 */
-	function allowAnonymous() {
-		return $this->data_array['allow_anonymous'];
-	}
-
-	/**
-	 * isPublic - Is this forum open to the general public.
-	 *
-	 * @return	boolean	is_public.
-	 */
-	function isPublic() {
-		return $this->data_array['is_public'];
-	}
-
-	/**
 	 * getName - get the name of this forum.
 	 *
 	 * @return	string	The name of this forum.
@@ -362,15 +338,6 @@ class Forum extends Error {
 	 */
 	function getDescription() {
 		return $this->data_array['description'];
-	}
-
-	/**
-	 * getModerationLevel - the moderation level of the forum
-	 *
-	 * @return	int	The moderation level.
-	 */
-	function getModerationLevel() {
-		return $this->data_array['moderation_level'];
 	}
 
 	/**
@@ -549,13 +516,10 @@ class Forum extends Error {
 	 *
 	 * @param	string	The name of the forum.
 	 * @param	string	The description of the forum.
-	 * @param	int	if it should be public (0) for private.
-	 * @param	int	if we should allow non-logged-in users to post (0) for mandatory login.
 	 * @param	string	The email address to send all new posts to.
-	 * @param	int	if the messages that are posted in the forum should go to moderation before available. 0-> no moderation 1-> moderation for anonymous and non-project members 2-> moderation for everyone
 	 * @return	boolean	success.
 	 */
-	function update($forum_name, $description, $allow_anonymous, $is_public, $send_all_posts_to = '', $moderation_level = 0) {
+	function update($forum_name, $description, $send_all_posts_to = '') {
 		if (strlen($forum_name) < 3) {
 			$this->setError(_('Forum Name Must Be At Least 3 Characters'));
 			return false;
@@ -585,18 +549,12 @@ class Forum extends Error {
 		$res = db_query_params('UPDATE forum_group_list SET
 			forum_name=$1,
 			description=$2,
-			send_all_posts_to=$3,
-			allow_anonymous=$4,
-			moderation_level=$5,
-			is_public=$6
-			WHERE group_id=$7
-			AND group_forum_id=$8',
+			send_all_posts_to=$3
+			WHERE group_id=$4
+			AND group_forum_id=$5',
 					array(strtolower($forum_name),
 					      htmlspecialchars($description),
 					      $send_all_posts_to,
-					      $allow_anonymous,
-					      $moderation_level,
-					      $is_public,
 					      $this->Group->getID(),
 					      $this->getID()));
 

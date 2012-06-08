@@ -166,14 +166,6 @@ if ($forum_id) {
  *
  */
 
-	//create a pop-up select box listing the forums for this project
-	//determine if this person can see private forums or not
-	if (session_loggedin() && user_ismember($group_id)) {
-		$public_flag='0,1';
-	} else {
-		$public_flag='1';
-	}
-
 	//create a pop-up select box showing options for viewing threads
 
 	$vals=array('nested','flat','threaded','ultimate');

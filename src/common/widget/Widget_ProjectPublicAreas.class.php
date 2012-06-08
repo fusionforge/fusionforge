@@ -98,17 +98,23 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesForum()) {
 			echo '<div class="public-area-box">'."\n";
 			//	print '<hr size="1" /><a rel="sioc:container_of" href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
+			$ff = new ForumFactory($project);
+			$f_arr = $ff->getForums();
+			$forums_count = count($f_arr);
+			$messages_count = 0;
+			foreach ($f_arr as $f) {
+				$messages_count += $f->getMessageCount();
+			}
+			
 			$link_content = $HTML->getForumPic('') . ' ' . _('Public Forums');
 			echo util_make_link ( '/forum/?group_id=' . $group_id, $link_content);
 			print ' (';
-					$messages_count = project_get_public_forum_message_count($group_id);
-					$forums_count = project_get_public_forum_count($group_id);
-					printf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
-					print ' in ';
-					printf(ngettext("<strong>%d</strong> forum","<strong>%d</strong> forums",$forums_count),$forums_count);
-					print ')' ;
-					print "\n</div>";
-					}
+			printf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
+			print ' in ';
+			printf(ngettext("<strong>%d</strong> forum","<strong>%d</strong> forums",$forums_count),$forums_count);
+			print ')' ;
+			print "\n</div>";
+		}
 
 					// ##################### Doc Manager
 

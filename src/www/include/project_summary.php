@@ -82,24 +82,6 @@ function project_get_survey_count($group_id) {
 }
 
 /**
- * project_get_public_forum_count() - Get the number of public forums for a project.
- *
- * @param		int		The group ID
- */
-function project_get_public_forum_count($group_id) {
-	return project_getaggvalue($group_id, 'fora');
-}
-
-/**
- * project_get_public_forum_message_count() - Get the number of messages within public forums for a project.
- *
- * @param		int		The group ID
- */
-function project_get_public_forum_message_count($group_id) {
-	return project_getaggvalue($group_id, 'fmsg');
-}
-
-/**
  * project_summary() - Build a project summary box that projects can insert into their project pages
  *
  * @param		int		The group ID
@@ -167,9 +149,19 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= html_image("ic/forum20g.png","20","20",array("alt"=>"Forums"));
 		$return .= '&nbsp;Forums</a>';
 
+		$ff = new ForumFactory($project);
+		$f_arr = $ff->getForums();
+		$forums_count = count($f_arr);
+		$messages_count = 0;
+		foreach ($f_arr as $f) {
+			$messages_count += $f->getMessageCount();
+		}
+
 		if ($mode != 'compact') {
-			$return .= " ( <strong>". project_get_public_forum_message_count($group_id) ."</strong> messages in ";
-			$return .= "<strong>". project_get_public_forum_count($group_id) ."</strong> forums )\n";
+			$return .= sprintf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
+			$return .= ' in ';
+			$return .= sprintf(ngettext("<strong>%d</strong> forum","<strong>%d</strong> forums",$forums_count),$forums_count);
+			$return .= "\n";
 		}
 	}
 
