@@ -113,7 +113,7 @@ $nb = $count? ' ('.$count.')' : '';
 <div class="tabbertab" title="<?php echo _('Followups').$nb; ?>">
 	<table width="80%">
 		<tr><td colspan="2">
-			<?php if ($ath->allowsAnon() || session_loggedin()) { ?>
+			<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) { ?>
 			<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 			<input type="hidden" name="func" value="postmod" />
 			<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />

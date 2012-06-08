@@ -12,6 +12,25 @@ CREATE VIEW artifact_group_list_vw AS
   FROM artifact_group_list agl
   LEFT JOIN artifact_counts_agg aca USING (group_artifact_id);
 
+CREATE OR REPLACE FUNCTION tmp_migrate_tracker_allow_anon_to_rbac () RETURNS integer AS $$
+DECLARE
+	agl artifact_group_list%ROWTYPE ;
+	tid integer := 0;
+BEGIN
+	UPDATE pfo_role_setting SET perm_val = perm_val|8 WHERE perm_val > 0 AND role_id != 1 AND (section_name = 'tracker' OR section_name = 'new_tracker');
+	FOR agl IN SELECT * FROM artifact_group_list WHERE allow_anon = 1
+	LOOP
+		tid = agl.group_artifact_id ;
+		UPDATE pfo_role_setting SET perm_val = perm_val|8 WHERE perm_val > 0 AND role_id = 1 AND (section_name = 'tracker' OR section_name = 'new_tracker');
+	END LOOP ;
+	RETURN 0;
+END ;
+$$ LANGUAGE plpgsql ;
+
+SELECT migrate_tracker_allow_anon_to_rbac ();
+
+DROP FUNCTION tmp_migrate_tracker_allow_anon_to_rbac () ;
+
 ALTER TABLE artifact_group_list DROP COLUMN is_public;
 ALTER TABLE artifact_group_list DROP COLUMN allow_anon;
 

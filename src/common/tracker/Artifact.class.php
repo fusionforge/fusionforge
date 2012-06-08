@@ -213,15 +213,15 @@ class Artifact extends Error {
 		if(array_key_exists('user', $importData)){
 				$user = $importData['user'];
 		} else {
+			if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
+					$this->setError(_('You are not currently allowed to submit items to this tracker.'));
+					return false;
+			}
+
 			if (session_loggedin()) {
 				$user=user_getid();
 			} else {
-				if ($this->ArtifactType->allowsAnon()) {
-					$user=100;
-				} else {
-					$this->setError(_('This Artifact Type Does Not Allow Anonymous Submissions. Please Login.'));
-					return false;
-				}
+				$user=100;
 			}
 		}
 
@@ -779,6 +779,10 @@ class Artifact extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
+		if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
+			$this->setError(_('You are not currently allowed to submit items to this tracker.'));
+			return false;
+		}
 		if (session_loggedin()) {
 			$user_id=user_getid();
 			$user =& user_get_object($user_id);
@@ -789,9 +793,6 @@ class Artifact extends Error {
 			//	we'll store this email even though it will likely never be used -
 			//	since we have their correct user_id, we can join the USERS table to get email
 			$by=$user->getEmail();
-		} elseif (!$this->ArtifactType->allowsAnon()) {
-			$this->setError(_('This Artifact Type Does Not Allow Anonymous Submissions. Please Login.'));
-			return false;
 		} else {
 			$user_id=100;
 			if (!$by || !validate_email($by)) {

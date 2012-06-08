@@ -182,20 +182,22 @@ class TrackerGateway extends Error {
 		//	get user_id
 		//
 		$user_id = $this->getUserId();
-		if ($user_id) {
-			//
-			//	Set up this user's session before posting
-			//
-			session_set_new($user_id);
-		}
-
 		$Artifact =& $this->getArtifact();
 		if (!$Artifact || !is_object($Artifact)) {
 			$this->setError("Could Not Get Artifact");
 			return false;
 		}
-		if (!$user_id && !$Artifact->ArtifactType->allowsAnon()) {
-			$this->setError("Could Not Match Sender Email Address to User and Tracker Does Not Allow Anonymous Posts");
+		if ($user_id) {
+			//
+			//	Set up this user's session before posting
+			//
+			session_set_new($user_id);
+			if (!forge_check_perm_for_user ($user_id, 'tracker',$this->ArtifactType->getID(),'submit')) {
+				$this->setError(_('This user is not allowed to submit items to this tracker.'));
+				return false;
+			}
+		} else if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
+			$this->setError(_('Could not match sender email address to user, and tracker does not allow anonymous posts.'));
 			return false;
 		}
 

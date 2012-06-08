@@ -46,7 +46,7 @@ if ($ath->isError()) {
 switch (getStringFromRequest('func')) {
 
 	case 'add' : {
-		if (!$ath->allowsAnon() && !session_loggedin()) {
+		if (!forge_check_perm ('tracker',$ath->getID(),'submit')) {
 			exit_permission_denied('tracker');
 		}
 		include $gfcommon.'tracker/actions/add.php';
@@ -74,8 +74,8 @@ switch (getStringFromRequest('func')) {
 		if (!$ah || !is_object($ah)) {
 			form_release_key(getStringFromRequest('form_key'));
 			exit_error(_('Artifact Could Not Be Created'),'tracker');
-		} else if (!$ath->allowsAnon() && !session_loggedin()) {
-			exit_error(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'),'tracker');
+		} else if (!forge_check_perm ('tracker',$ath->getID(),'submit')) {
+			exit_permission_denied('tracker');
 		} else {
 			if (empty($user_email)) {
 				$user_email=false;
@@ -267,8 +267,8 @@ switch (getStringFromRequest('func')) {
 			exit_error(_('Artifact Could Not Be Created'),'tracker');
 		} else if ($ah->isError()) {
 			exit_error($ah->getErrorMessage(),'tracker');
-		} else if (!$ath->allowsAnon() && !session_loggedin()) {
-			exit_error(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'),'tracker');
+		} else if (!forge_check_perm ('tracker',$ath->getID(),'submit')) {
+			exit_permission_denied('tracker');
 		} else {
 
 			$remlink = getArrayFromRequest('remlink');

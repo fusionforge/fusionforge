@@ -348,6 +348,24 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			}
 			break ;
 		case 'tracker':
+			switch ($action) {
+			case 'ANY':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0') ;
+				break ;
+			case 'read':
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 1) = 1') ;
+				break ;
+			case 'tech':
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 2) = 2') ;
+				break ;
+			case 'manager':
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 4) = 4') ;
+				break ;
+			case 'submit':
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 8) = 8') ;
+				break ;
+			}
+			break ;
 		case 'pm':
 			switch ($action) {
 			case 'ANY':
