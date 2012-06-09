@@ -2655,8 +2655,6 @@ src/plugins/scmhg/packaging/control/134plugin-scmhg -text
 src/plugins/scmhg/packaging/control/134plugin-scmhg.shortdesc -text
 src/plugins/scmhg/packaging/dirs/plugin-scmhg -text
 src/plugins/scmhg/packaging/install/plugin-scmhg -text
-src/plugins/scmhook/common/languages/Base.tab -text
-src/plugins/scmhook/common/scmhook-init.php -text
 src/plugins/scmhook/common/scmhook.class.php -text
 src/plugins/scmhook/common/scmhookPlugin.class.php -text
 src/plugins/scmhook/cronjobs/updateScmRepo.php -text
