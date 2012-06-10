@@ -73,5 +73,3 @@ $as->commit();
 db_query_params ('UPDATE artifact_file SET bin_data=$1', array(''));
 
 echo "SUCCESS\n";
-
-?>
