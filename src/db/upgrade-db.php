@@ -147,9 +147,11 @@ function run_script($script) {
 				$return = true;
 			} else {
 				show($db_path.$filename." FAILED!\n\n");
+				show("Script output follows:\n");
 				foreach ($result as $line) {
 					show($line."\n");
 				}
+				show("[End of script output]\n");
 			}
 		} else {
 			show($db_path.$filename." FAILED!\n\n");
