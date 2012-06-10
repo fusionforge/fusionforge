@@ -72,6 +72,7 @@ ssh root@$HOST "tail -f /var/log/phpunit.log --pid=$pid"
 sleep 5
 retcode=$(ssh root@$HOST cat /root/phpunit.exitcode)
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
+scp root@$HOST:/tmp/gforge-*.log $WORKSPACE/reports/
 ssh root@$HOST "vncserver -kill :1" || retcode=$?
 
 stop_vm_if_not_keeped -t debian6 $@
