@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -148,7 +149,7 @@ function genchr(){
 /**
  * account_gensalt() - A random salt generator
  *
- * @returns The random salt string
+ * @returns	The random salt string
  *
  */
 function account_gensalt(){
@@ -182,8 +183,8 @@ function account_gensalt(){
 /**
  * account_genunixpw() - Generate unix password
  *
- * @param		string	The plaintext password string
- * @return		The encrypted password
+ * @param	string	The plaintext password string
+ * @return	string	The encrypted password
  *
  */
 function account_genunixpw($plainpw) {
@@ -200,7 +201,7 @@ function account_genunixpw($plainpw) {
 /**
  * account_shellselects() - Print out shell selects
  *
- * @param		string	The current shell
+ * @param	string	The current shell
  *
  */
 function account_shellselects($current) {
@@ -221,10 +222,10 @@ function account_shellselects($current) {
 }
 
 /**
- *	account_user_homedir() - Returns full path of user home directory
+ * account_user_homedir() - Returns full path of user home directory
  *
- *  @param		string	The username
- *	@return home directory path
+ * @param	string	The username
+ * @return	string	home directory path
  */
 function account_user_homedir($user) {
 	//return '/home/users/'.substr($user,0,1).'/'.substr($user,0,2).'/'.$user;
@@ -232,14 +233,38 @@ function account_user_homedir($user) {
 }
 
 /**
- *	account_group_homedir() - Returns full path of group home directory
+ * account_group_homedir() - Returns full path of group home directory
  *
- *  @param		string	The group name
- *	@return home directory path
+ * @param	string	The group name
+ * @return	string	home directory path
  */
 function account_group_homedir($group) {
 	//return '/home/groups/'.substr($group,0,1).'/'.substr($group,0,2).'/'.$group;
 	return forge_get_config('groupdir_prefix').'/'.$group;
+}
+
+/**
+ * checkKeys() - Simple function that tries to check the validity of public ssh keys with a regexp.
+ * Exits with an error message if an invalid key is found.
+ *
+ * @param	keys	A string with a set of keys to check. Each key is delimited by a carriage return.
+ */
+function checkKeys($keys) {
+	$key = strtok($keys, "\n");
+	while ($key !== false) {
+		$key = trim($key);
+		if ((strlen($key) > 0) && ($key[0] != '#')) {
+			/* The encoded key is made of 0-9, A-Z ,a-z, +, / (base 64) characters,
+			 ends with zero or up to three '=' and the length must be >= 512 bits (157 base64 characters).
+			 The whole key ends with an optional comment. */
+			if ( preg_match("@^(((no-port-forwarding|no-X11-forwarding|no-agent-forwarding|no-pty|command=\"[^\"]+\"|from=\"?[A-Za-z0-9\.-]+\"?),?)*\s+)?ssh-(rsa|dss)\s+[A-Za-z0-9+/]{157,}={0,2}(\s+.*)?$@", $key) === 0 ) { // Warning: we must use === for the test
+				$msg = sprintf(_('The following key has a wrong format: |%s|.  Please, correct it by going back to the previous page.'),
+						htmlspecialchars($key));
+				exit_error($msg, 'my');
+			}
+		}
+		$key = strtok("\n");
+	}
 }
 
 // Local Variables:

@@ -37,6 +37,15 @@ if (!$u || !is_object($u)) {
 	exit_error($u->getErrorMessage(),'my');
 }
 
+$action = getStringFromRequest('action');
+switch ($action) {
+	case "deletesshkey": 
+	case "addsshkey": {
+		include ($gfcommon."account/actions/$action.php");
+		break;
+	}
+}
+
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('my');
@@ -289,17 +298,18 @@ if (($u->getUnixStatus() == 'A') && (forge_get_config('use_shell'))) {
 <br />'._('Shell box').': <strong>'.$u->getUnixBox().'</strong>
 <br />'._('SSH Shared Authorized Keys').': <strong>';
 	global $HTML;
-	$sshKeysArray = $u->getArrayAuthorizedKeys();
+	$sshKeysArray = $u->getAuthorizedKeys();
 	if (count($sshKeysArray)) {
-		$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Ready ?'));
-		$classth = array('','','','');
+		$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'), _('Ready ?'));
+		$classth = array('', '', '', '', '');
 		echo $HTML->listTableTop($tabletop, false, 'sortable_sshkeys_listlinks', 'sortable', $classth);
 		foreach($sshKeysArray as $sshKey) {
 			echo '<tr>';
 			echo '<td>'.$sshKey['name'].'</td>';
 			echo '<td>'.$sshKey['algorithm'].'</td>';
 			echo '<td>'.$sshKey['fingerprint'].'</td>';
-			if ($sshKey['ready']) {
+			echo '<td>'.date(_('Y-m-d H:i'), $sshKey['upload']).'</td>';
+			if ($sshKey['deploy']) {
 				$image = html_image('docman/validate.png', 22, 22, array('alt'=>_('ssh key is deployed.'), 'class'=>'tabtitle', 'title'=>_('ssh key is deployed.')));
 			} else {
 				$image = html_image('waiting.png', 22, 22, array('alt'=>_('ssh key is not deployed yet.'), 'class'=>'tabtitle', 'title'=>_('ssh key is not deployed yet.')));
@@ -312,7 +322,7 @@ if (($u->getUnixStatus() == 'A') && (forge_get_config('use_shell'))) {
 		print '0';
 	}
 	print '</strong>';
-	print '<br />' . util_make_link ("account/editsshkeys.php",_('Edit Keys')) ;
+	print '<br />' . util_make_link("account/editsshkeys.php",_('Edit Keys'));
 	echo $HTML->boxBottom();
 }
 ?>

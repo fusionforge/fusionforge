@@ -204,10 +204,23 @@ class GFUser extends Error {
 			} else {
 				//set up an associative array for use by other functions
 				$this->data_array = db_fetch_array_by_row($res, 0);
+				if (($this->getUnixStatus() == 'A') && (forge_get_config('use_shell'))) {
+					$this->data_array['authorized_keys'] = array();
+					$res = db_query_params('select * from sshkeys where userid = $1 and deleted = 0', array($this->getID()));
+					while ($arr = db_fetch_array($res)) {
+						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['upload'] = $arr['upload'];
+						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['name'] = $arr['name'];
+						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['fingerprint'] = $arr['fingerprint'];
+						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['algorithm'] = $arr['algorithm'];
+						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['deploy'] = $arr['deploy'];
+						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['key'] = $arr['sshkey'];
+						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['keyid'] = $arr['id_sshkeys'];
+					}
+				}
 			}
 		}
-		$this->is_super_user=false;
-		$this->is_logged_in=false;
+		$this->is_super_user = false;
+		$this->is_logged_in = false;
 		return true;
 	}
 
@@ -1182,61 +1195,55 @@ Enjoy the site.
 	 * @return	string	This user's SSH authorized (public) keys.
 	 */
 	function getAuthorizedKeys() {
-		return preg_replace("/###/", "\n", $this->data_array['authorized_keys']);
-	}
-
-	function getArrayAuthorizedKeys() {
-		$arrayKeys = explode("###", $this->data_array['authorized_keys']);
-		$returnArrayKeys = array();
-		$i = 0;
-		foreach ($arrayKeys as $key) {
-			$valuesKey = explode(' ',$key);
-			$tempfile = tempnam("/tmp", "authkey");
-			$ft = fopen($tempfile, 'w');
-			fwrite($ft, $key);
-			fclose($ft);
-			$returnExec = array();
-			exec("/usr/bin/ssh-keygen -lf ".$tempfile, $returnExec);
-			unlink($tempfile);
-			$returnExecExploded = explode(' ', $returnExec[0]);
-			$returnArrayKeys[$i]['fingerprint'] = $returnExecExploded[1];
-			$returnArrayKeys[$i]['uploaded'] = 'tbi';
-			$returnArrayKeys[$i]['name'] = $valuesKey[2];
-			$returnArrayKeys[$i]['algorithm'] = $valuesKey[0];
-			$authorized_keys_file = forge_get_config('homedir_prefix').'/'.$this->getUnixName().'/.ssh/authorized_keys';
-			$fd = fopen($authorized_keys_file,"r");
-			$fs = filesize($authorized_keys_file);
-			$datafile = fread($fd, $fs);
-			if (strpos($datafile, $valuesKey[1]) && strpos($datafile, $valuesKey[2])) {
-				$returnArrayKeys[$i]['ready'] = '1';
-			} else {
-				$returnArrayKeys[$i]['ready'] = '0';
-			}
-			$i++;
-		}
-		return $returnArrayKeys;
+		return $this->data_array['authorized_keys'];
 	}
 
 	/**
-	 *	setAuthorizedKeys - set the SSH authorized keys for the user.
+	 *	addAuthorizedKey - add the SSH authorized key for the user.
 	 *
-	 * @param	string	The users public keys.
+	 * @param	string	The user public key.
 	 * @return	boolean	success.
 	 */
-	function setAuthorizedKeys($keys) {
-		$keys = trim($keys);
-		$keys = preg_replace("/\r\n/", "\n", $keys); // Convert to Unix EOL
-		$keys = preg_replace("/\n+/", "\n", $keys); // Remove empty lines
-		$keys = preg_replace("/\n/", "###", $keys); // Convert EOL to marker
-
-		$res = db_query_params('UPDATE users SET authorized_keys=$1 WHERE user_id=$2',
-					array($keys,
-					       $this->getID()));
+	function addAuthorizedKey($key) {
+		$key = trim($key);
+		$key = preg_replace("/\r\n/", "\n", $key); // Convert to Unix EOL
+		$key = preg_replace("/\n+/", "\n", $key); // Remove empty lines
+		$tempfile = tempnam("/tmp", "authkey");
+		$ft = fopen($tempfile, 'w');
+		fwrite($ft, $key);
+		fclose($ft);
+		$returnExec = array();
+		exec("/usr/bin/ssh-keygen -lf ".$tempfile, $returnExec);
+		unlink($tempfile);
+		$returnExecExploded = explode(' ', $returnExec[0]);
+		$fingerprint = $returnExecExploded[1];
+		$now = time();
+		$explodedKey = explode(' ', $key);
+		$res = db_query_params('insert into sshkeys (userid, fingerprint, upload, sshkey, name, algorithm)
+							values ($1, $2, $3, $4, $5, $6)',
+					array($this->getID(), $fingerprint, $now, $key, $explodedKey[2], $explodedKey[0]));
 		if (!$res) {
-			$this->setError(_('ERROR - Could Not Update User SSH Keys'));
+			$this->setError(_('ERROR - Could Not Add User SSH Key:').db_error());
 			return false;
 		} else {
-			$this->data_array['authorized_keys'] = $keys;
+			$keyid = db_insertid($res, 'sshkeys', 'id_sshkeys');
+			$this->data_array['authorized_keys'][$keyid]['fingerprint'] = $fingerprint;
+			$this->data_array['authorized_keys'][$keyid]['upload'] = $now;
+			$this->data_array['authorized_keys'][$keyid]['sshkey'] = $key;
+			$this->data_array['authorized_keys'][$keyid]['deploy'] = 0;
+			$this->data_array['authorized_keys'][$keyid]['keyid'] = $keyid;
+			return true;
+		}
+	}
+
+	function deleteAuthorizedKey($keyid) {
+		$res = db_query_params('update sshkeys set deleted = 1 where id_sshkeys =$1 and userid = $2',
+					array($keyid, $this->getID()));
+		if (!$res) {
+			$this->setError(_('ERROR - Could Not Delete User SSH Key:').db_error());
+			return false;
+		} else {
+			unset($this->data_array['authorized_keys'][$keyid]);
 			return true;
 		}
 	}

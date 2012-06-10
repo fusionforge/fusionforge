@@ -30,28 +30,34 @@ require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
 $err='';
+$res1 = db_query_params('select userid, user_name from sshkeys, users
+					where sshkeys.userid = users.user_id
+					and users.status = $1
+					and users.unix_status = $2',
+			array('A', 'A'));
 
-$res=db_query_params('SELECT user_name,user_id,authorized_keys
-	FROM users
-	WHERE authorized_keys != $1
-	AND status=$2 AND unix_status = $3',
-		      array('',
-			    'A',
-			    'A'));
-
-for ($i = 0; $i < db_numrows($res); $i++) {
-
-
-	$ssh_key = db_result($res, $i, 'authorized_keys');
-	$username = db_result($res, $i, 'user_name');
+for ($i = 0; $i < db_numrows($res1); $i++) {
+	$userid = db_result($res1, $i, 'userid');
+	$username = db_result($res1, $i, 'user_name');
+	$res2 = db_query_params('select sshkey from sshkeys, users
+						where sshkeys.userid = users.user_id
+						and users.status = $1
+						and users.unix_status = $2
+						and sshkeys.deleted = $3
+						and sshkeys.deploy = $4
+						and sshkeys.userid = $5',
+				array('A', 'A', 0, 0, $userid));
+	$ssh_key = '';
+	while ($arr = db_fetch_array($res2)) {
+		$ssh_key .= $arr['sshkey']."\n";
+	}
+	
 	$dir = forge_get_config('homedir_prefix').'/'.$username;
 	if (util_is_root_dir($dir)) {
 		$err .= "Error! homedir_prefix/username Points To Root Directory!";
 		continue;
 	}
-	$uid = db_result($res, $i, 'user_id');
-
-	$ssh_key = str_replace('###', "\n", $ssh_key);
+	$uid = $userid;
 	$uid += 1000;
 
 	$ssh_dir = $dir.'/.ssh';
@@ -69,7 +75,6 @@ for ($i = 0; $i < db_numrows($res); $i++) {
 	fclose($h8);
 	posix_seteuid(0);
 	posix_setegid(0);
-		
 	chown($dir, $username);
 	chgrp($dir, 'users');
 	chown($ssh_dir, $username);
@@ -77,6 +82,11 @@ for ($i = 0; $i < db_numrows($res); $i++) {
 	chmod($ssh_dir.'/authorized_keys', 0644);
 	chown($ssh_dir.'/authorized_keys', $username);
 	chgrp($ssh_dir.'/authorized_keys', 'users');
+
+	db_query_params('update sshkeys set deploy = $1 where userid = $2 and deploy = $3',
+			array(1, $userid, 0));
+	db_query_params('delete from sshkeys where userid = $1 and deleted = $2',
+			array($userid, 1));
 }
 
 cron_entry(15,$err);

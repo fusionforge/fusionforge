@@ -8,6 +8,8 @@ FusionForge-5.3:
 * scmhg: merge patch from Denise Patzker: add http support, online browse, stats (TrivialDev)
 * Docman: Files moves to filesystem using the Storage generic class (TrivialDev)
 * webanalytics: new plugin to add support for piwik or google analytics tool (TrivialDev)
+* User: account ssh key management: rewrite backend, add more informations such as
+        fingerprint, deploy flag, easy delete (TrivialDev)
 
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)
