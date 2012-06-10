@@ -387,7 +387,6 @@ src/AUTHORS -text
 src/CHANGES -text
 src/COPYING.php -text
 src/NEWS -text
-src/backend/DatabaseDump.pl svneol=native#text/x-perl
 src/backend/include.pl svneol=native#text/x-perl
 src/backend/shell/apache.sh svneol=native#text/x-sh
 src/common/account/actions/addsshkey.php -text
