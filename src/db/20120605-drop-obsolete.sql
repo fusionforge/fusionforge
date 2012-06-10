@@ -21,7 +21,7 @@ BEGIN
 	FOR agl IN SELECT * FROM artifact_group_list WHERE allow_anon = 1
 	LOOP
 		tid = agl.group_artifact_id ;
-		UPDATE pfo_role_setting SET perm_val = perm_val|8 WHERE perm_val > 0 AND role_id = 1 AND (section_name = 'tracker' OR section_name = 'new_tracker');
+		UPDATE pfo_role_setting SET perm_val = perm_val|8 WHERE perm_val > 0 AND role_id = 1 AND section_name = 'tracker' AND ref_id = tid;
 	END LOOP ;
 	RETURN 0;
 END ;
