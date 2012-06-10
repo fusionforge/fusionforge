@@ -138,7 +138,9 @@ class Theme extends Layout {
 		echo '<div class="footer">' . "\n";
 		echo $this->navigation->getPoweredBy();
 		echo $this->navigation->getShowSource();
-		echo '<div style="clear:both"></div></div></body></html>' . "\n";
+		echo '<div style="clear:both"></div></div>';
+		plugin_hook('webanalytics_url', array());
+		echo '</body></html>' . "\n";
 	}
 
 	/**

@@ -8,6 +8,7 @@
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright 2012 - Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -499,7 +500,11 @@ class Layout extends Error {
 			<?php echo $this->navigation->getPoweredBy(); ?>
 			</div>
 
-			<?php echo $this->navigation->getShowSource(); ?>
+			<?php echo $this->navigation->getShowSource();
+
+			plugin_hook('webanalytics_url', array());
+
+			?>
 
 			</body>
 			</html>

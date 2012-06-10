@@ -5,7 +5,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -138,6 +138,8 @@ class Theme extends Layout {
 			</div>
                        ' . $this->navigation->getShowSource() . '
 			';
+
+		plugin_hook('webanalytics_url', array());
 
                 echo '
 		</body>

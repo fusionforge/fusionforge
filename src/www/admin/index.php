@@ -186,7 +186,8 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 
 <h2><?php echo _('Stats'); ?></h2>
 <ul>
-	<li><?php echo util_make_link ('/stats/',_('Site-Wide Stats')); ?></li>
+	<li><?php echo util_make_link('/stats/',_('Site-Wide Stats')); ?></li>
+	<?php plugin_hook('webanalytics_admin', array()); ?>
 </ul>
 
 <h2><?php echo _('Trove Project Tree'); ?></h2>
