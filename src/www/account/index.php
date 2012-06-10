@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -94,6 +95,7 @@ if (getStringFromRequest('submit')) {//if this is set, then the user has issued 
 	plugin_hook("userisactivecheckboxpost", $hookParams);
 }
 
+use_javascript('/js/sortable.js');
 $title = _('Account Maintenance');
 site_user_header(array('title'=>$title));
 
@@ -274,7 +276,7 @@ echo "\n</div>";
 // displays a "Use xxxx Plugin" checkbox
 plugin_hook("userisactivecheckbox", $hookParams);
 ?>
-<tr><td>
+<tr><td colspan="2">
 
 <?php
 echo $HTML->boxBottom();
@@ -286,10 +288,26 @@ if (($u->getUnixStatus() == 'A') && (forge_get_config('use_shell'))) {
 	print '&nbsp;
 <br />'._('Shell box').': <strong>'.$u->getUnixBox().'</strong>
 <br />'._('SSH Shared Authorized Keys').': <strong>';
-	// get shared key count from db
-	$expl_keys = explode("\n", $u->getAuthorizedKeys());
-	if ($expl_keys[0]) {
-		print (sizeof($expl_keys));
+	global $HTML;
+	$sshKeysArray = $u->getArrayAuthorizedKeys();
+	if (count($sshKeysArray)) {
+		$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Ready ?'));
+		$classth = array('','','','');
+		echo $HTML->listTableTop($tabletop, false, 'sortable_sshkeys_listlinks', 'sortable', $classth);
+		foreach($sshKeysArray as $sshKey) {
+			echo '<tr>';
+			echo '<td>'.$sshKey['name'].'</td>';
+			echo '<td>'.$sshKey['algorithm'].'</td>';
+			echo '<td>'.$sshKey['fingerprint'].'</td>';
+			if ($sshKey['ready']) {
+				$image = html_image('docman/validate.png', 22, 22, array('alt'=>_('ssh key is deployed.'), 'class'=>'tabtitle', 'title'=>_('ssh key is deployed.')));
+			} else {
+				$image = html_image('waiting.png', 22, 22, array('alt'=>_('ssh key is not deployed yet.'), 'class'=>'tabtitle', 'title'=>_('ssh key is not deployed yet.')));
+			}
+			echo '<td>'.$image.'</td>';
+			echo '</tr>';
+		}
+		echo $HTML->listTableBottom();
 	} else {
 		print '0';
 	}

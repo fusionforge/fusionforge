@@ -1185,6 +1185,38 @@ Enjoy the site.
 		return preg_replace("/###/", "\n", $this->data_array['authorized_keys']);
 	}
 
+	function getArrayAuthorizedKeys() {
+		$arrayKeys = explode("###", $this->data_array['authorized_keys']);
+		$returnArrayKeys = array();
+		$i = 0;
+		foreach ($arrayKeys as $key) {
+			$valuesKey = explode(' ',$key);
+			$tempfile = tempnam("/tmp", "authkey");
+			$ft = fopen($tempfile, 'w');
+			fwrite($ft, $key);
+			fclose($ft);
+			$returnExec = array();
+			exec("/usr/bin/ssh-keygen -lf ".$tempfile, $returnExec);
+			unlink($tempfile);
+			$returnExecExploded = explode(' ', $returnExec[0]);
+			$returnArrayKeys[$i]['fingerprint'] = $returnExecExploded[1];
+			$returnArrayKeys[$i]['uploaded'] = 'tbi';
+			$returnArrayKeys[$i]['name'] = $valuesKey[2];
+			$returnArrayKeys[$i]['algorithm'] = $valuesKey[0];
+			$authorized_keys_file = forge_get_config('homedir_prefix').'/'.$this->getUnixName().'/.ssh/authorized_keys';
+			$fd = fopen($authorized_keys_file,"r");
+			$fs = filesize($authorized_keys_file);
+			$datafile = fread($fd, $fs);
+			if (strpos($datafile, $valuesKey[1]) && strpos($datafile, $valuesKey[2])) {
+				$returnArrayKeys[$i]['ready'] = '1';
+			} else {
+				$returnArrayKeys[$i]['ready'] = '0';
+			}
+			$i++;
+		}
+		return $returnArrayKeys;
+	}
+
 	/**
 	 *	setAuthorizedKeys - set the SSH authorized keys for the user.
 	 *

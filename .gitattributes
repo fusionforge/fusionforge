@@ -5147,6 +5147,7 @@ src/www/themes/funky/images/search-logo.png -text svneol=unset#image/png
 src/www/themes/funky/images/spacer.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/t.png -text svneol=unset#image/png
 src/www/themes/funky/images/t2.png -text svneol=unset#image/png
+src/www/themes/funky/images/waiting.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/help.css -text svneol=unset#text/css
 src/www/themes/funky/viewvc/help_dirview.html -text
 src/www/themes/funky/viewvc/help_log.html -text
@@ -5287,6 +5288,7 @@ src/www/themes/gforge/images/toptab-new/selected-left.gif -text svneol=unset#ima
 src/www/themes/gforge/images/toptab-new/selected-middle.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/toptab-new/selected-right.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/vert-grad.png -text svneol=unset#image/png
+src/www/themes/gforge/images/waiting.png -text svneol=unset#image/png
 src/www/themes/gforge/images/warning.png -text
 src/www/themes/gforge/images/wgLogo.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/help.css -text svneol=unset#text/css
