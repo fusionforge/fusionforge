@@ -50,7 +50,7 @@ msg(){
 create_db_admin_user(){
 	gforge_db="$1"
 	admin_user="$2"
-	su - postgres -c "psql $gforge_db -c \"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', 'INVALID', 'INVALID', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags, role_id) VALUES (currval('users_pk_seq'), 1, 'A',17); INSERT INTO pfo_user_role (user_id, role_id) VALUES (currval('users_pk_seq'), 3)\""
+	su - postgres -c "psql $gforge_db -c \"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', 'INVALID', 'INVALID', 'A', 1); INSERT INTO pfo_user_role (user_id, role_id) VALUES (currval('users_pk_seq'), 3)\""
 }
 
 find_psql_init(){
