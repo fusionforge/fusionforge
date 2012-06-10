@@ -428,6 +428,13 @@ globalsearch plugin for FusionForge.
 # %description plugin-oauthprovider
 # oauthprovider plugin for FusionForge. 
 
+%package plugin-webanalytics
+Summary: webanalytics plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description plugin-webanalytics
+webanalytics plugin for FusionForge.
+
 %prep
 %setup -q
 
@@ -691,6 +698,8 @@ done
 # plugin: oauthprovider
 #%{__ln_s} ../../plugins/oauthprovider/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oauthprovider
 
+# plugin: webanalytics
+%{__ln_s} ../../plugins/webanalytics/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/webanalytics
 
 ### END OF PLUGIN SETUP ###
 
@@ -1168,6 +1177,11 @@ fi
 # %config(noreplace) %{FORGE_CONF_DIR}/plugins/oauthprovider/
 # %{FORGE_CONF_DIR}/httpd.d/62plugin-oauthprovider
 # %{FORGE_DIR}/plugins/oauthprovider
+
+%files plugin-webanalytics
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/webanalytics.ini
+%{FORGE_DIR}/plugins/webanalytics
+%{FORGE_DIR}/www/plugins/webanalytics
 
 %changelog
 * Thu Jun 07 2012 - Alain Peyrat <aljeux@free.fr> - 5.1.90-1
