@@ -47,9 +47,9 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
 	print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
 	print "  <pubDate>".rss_date(time())."</pubDate>\n";
 	print "  <description>$desription</description>\n";
-	print "  <link>http://".$GLOBALS['sys_default_domain']."/</link>\n";
+	print "  <link>http://".forge_get_config ('web_host')."/</link>\n";
 	print "  <title>$title</title>\n";
-	print "  <webMaster>".$GLOBALS['sys_admin_email']."</webMaster>\n";
+	print "  <webMaster>".forge_get_config ('admin_email')."</webMaster>\n";
 	print "  <language>en-us</language>\n";
 
 	// item outputs
