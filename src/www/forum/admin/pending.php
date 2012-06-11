@@ -6,6 +6,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2005 (c) Daniel Perez
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -42,7 +43,7 @@ $fa = new ForumAdmin ($group_id);
 if (!$forum_id) {
 	session_require_perm ('forum_admin', $group_id) ;
 
-	forum_header(array('title'=>_('Forums: Administration')));
+	forum_header(array('title'=>_('Manage Pending Messages')));
 	if (getStringFromRequest("Go")) {
 		$fa->ExecuteAction("view_pending");
 	} else {
@@ -53,7 +54,7 @@ if (!$forum_id) {
 } else {
 	session_require_perm ('forum', $forum_id, 'moderate') ;
 
-	forum_header(array('title'=>_('Forums: Administration')));
+	forum_header(array('title'=>_('Manage Pending Messages')));
 	if (getStringFromRequest("Go")) {
 		$fa->ExecuteAction("view_pending");
 	} else {
