@@ -283,6 +283,7 @@ class SVNPlugin extends SCMPlugin {
 		$access_data = '' ;
 		$password_data = '' ;
 		$engine = RBACEngine::getInstance() ;
+		$svnusers = array();
 
 		foreach ($groups as $project) {
 			if ( !$project->isActive()) {
