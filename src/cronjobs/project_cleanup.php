@@ -97,6 +97,11 @@ db_query_params ('DELETE FROM form_keys WHERE creation_date < $1',
 			array ($then));
 $err .= db_error();
 
+// Purge delete files older than one month.
+if (is_dir(forge_get_config('data_path').'/tracker')) {
+	system('find "'.forge_get_config('data_path').'/tracker" -name "*.removed" -type f -mtime +30 -exec rm -- {} \\;');
+}
+
 db_commit();
 if (db_error()) {
 	$err .= "Error: ".db_error();

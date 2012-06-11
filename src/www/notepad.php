@@ -58,7 +58,7 @@ if ($form) {
 <html>
   <head>
     <title>FusionForge Notepad</title>
-	<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+	<script type="text/javascript">/* <![CDATA[ */
     function load_initial_value() {
         try {
             aform = <?php echo $pform ?>;
