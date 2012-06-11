@@ -47,6 +47,10 @@ class messagePlugin extends Plugin {
 		echo '<li>' . util_make_link ('/plugins/message/index.php', _('Configure Global Message')) . '</li>';
 	}
 
+	function getAdminOptionLink() {
+		return util_make_link ('/plugins/message/index.php', _('Configure Message'));
+	}
+
 	function message() {
 		$res = db_query_params('SELECT message FROM plugin_message', array());
 		if ($res && db_numrows($res)>0) {
