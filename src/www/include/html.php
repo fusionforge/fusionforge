@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2011-2012, Franck Villaume - TrivialDev
  *
@@ -798,6 +798,20 @@ function site_project_header($params) {
 	}
 	if (!isset($params['h1'])){
 		$params['h1'] = $h1;
+	}
+
+	if ($project->getDescription()) {
+		$params['meta-description'] = $project->getDescription();
+	}
+
+	if (forge_get_config('use_project_tags')) {
+		$res = db_query_params('SELECT name FROM project_tags WHERE group_id = $1', array($group_id));
+		if ($res && db_numrows($res) > 0) {
+			while ($row = db_fetch_array($res)) {
+				$array[] = $row['name'];
+			}
+			$params['meta-keywords'] = htmlspecialchars(join(', ', $array));
+		}
 	}
 
 	site_header($params);

@@ -9,6 +9,7 @@
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright 2012 - Franck Villaume - TrivialDev
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -250,8 +251,14 @@ class Layout extends Error {
 	function headerStart($params) {
 		$this->headerHTMLDeclaration();
 		?>
-			<head>
-			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?php if (isset($params['meta-description'])) { ?>
+		<meta name="description" content="<?php echo $params['meta-description'] ?>" />
+<?php } ?>
+<?php if (isset($params['meta-keywords'])) { ?>
+		<meta name="keywords" content="<?php echo $params['meta-keywords'] ?>" />
+<?php } ?>
 		<?php
 		plugin_hook('htmlhead', array());
 		$this->headerTitle($params);
@@ -262,7 +269,7 @@ class Layout extends Error {
 		$this->headerJS();
 		$this->headerForgepluckerMeta();
 		?>
-			</head>
+	</head>
 		<?php
 	}
 
