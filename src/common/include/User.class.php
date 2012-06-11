@@ -6,6 +6,7 @@
  * Copyright 2009-2010, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -972,8 +973,23 @@ Enjoy the site.
 	 * @return	string	This user's real name.
 	 */
 	function getRealName() {
-		$last_name = $this->getLastName();
-		return $this->getFirstName(). ($last_name ? ' ' .$last_name:'');
+		return $this->data_array['realname'];
+	}
+
+	/**
+	 *	setRealName - set the user's real name.
+	 *
+	 *	@return	string	boolean.
+	 */
+	function setRealName($realname) {
+		$res=db_query_params('UPDATE users SET realname=$1 WHERE user_id=$2',
+				array($realname, $this->getID()));
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('ERROR - Could Not Update real name of user : '.db_error());
+			return false;
+		}
+		$this->data_array['realname'] = $realname;
+		return true;
 	}
 
 	/**
