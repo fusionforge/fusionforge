@@ -115,15 +115,6 @@ function exit_project_disabled($toptab = 'summary') {
 }
 
 /**
- * exit_project_disabled() - Exit with disabled feature error (by project admin).
- *
- * @param	string	toptab needed for navigation
- */
-function exit_project_disabled($toptab = 'summary') {
-	exit_error(_('The Project Administrator has turned off this feature.'), $toptab);
-}
-
-/**
  * exit_form_double_submit() - Exit with double submit error.
  *
  * @param	string	toptab needed for navigation
