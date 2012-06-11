@@ -102,10 +102,10 @@ foreach ($all_users as $user) {
 		$process = true ;
 		break;
 	case 'SITE':
-		$process = $user->getMailingPrefs('site') ;
+		$process = $user->getMailingsPrefs('site') ;
 		break;
 	case 'COMMNTY':
-		$process = $user->getMailingPrefs('va') ;
+		$process = $user->getMailingsPrefs('va') ;
 		break;
 	case 'DVLPR':
 		$process = count ($user->getGroups()) ;
