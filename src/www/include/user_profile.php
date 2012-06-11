@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -62,7 +62,6 @@ function user_personal_information($user, $compact = false, $title = false) {
 		$html .= '<td></td>';
 	}
 	$html .='<td>
-
 			<table class="my-layout-table" id="user-profile-personal-info">
 			<tr>
 				<td>'. _('User Id:') . '</td>';
@@ -164,7 +163,7 @@ function user_personal_information($user, $compact = false, $title = false) {
     			</td>
 			</tr>';
 	if($compact) {
-		$user_uri = util_make_url ("/users/". $user->getUnixName() . "/");
+		$user_uri = util_make_url('/users/'. $user->getUnixName() . '/');
 		$html .= '<tr>
 					<td><small>'. _('URI:') .'</small></td>
 					<td><small><a href="'. $user_uri .'">'. $user_uri .'</a></small></td>

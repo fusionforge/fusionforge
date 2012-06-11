@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -166,7 +166,7 @@ if($status == 'P') {
 	array(
 		_('No'),
 		_('Yes')
-),
+	),
 	'form_template', $group->isTemplate(), false
 ); ?>
 </td>

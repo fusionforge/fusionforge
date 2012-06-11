@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems
  * Copyright 2010, Roland Mas <lolando@debian.org>
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -340,7 +341,7 @@ if (forge_get_config('database_name') != "") {
 		if (session_loggedin()) {
 			$LUSER =& session_get_user();
 			$use_tooltips = $LUSER->usesTooltips();
-			header ('Cache-Control: private');
+			header('Cache-Control: private');
 			require_once forge_get_config('themes_root').'/'.$LUSER->setUpTheme().'/Theme.class.php';
 		} else {
 			$use_tooltips = 1;

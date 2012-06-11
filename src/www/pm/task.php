@@ -6,6 +6,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -137,7 +138,6 @@ switch (getStringFromRequest('func')) {
 		$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
 		$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
 
-
 		$sanitizer = new TextSanitizer();
 		$details = $sanitizer->purify($details);
 
@@ -186,7 +186,7 @@ switch (getStringFromRequest('func')) {
 		$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
 		$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
 		if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,
-				 $status_id,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$new_group_project_id,$duration,$parent_id)) {
+			$status_id,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$new_group_project_id,$duration,$parent_id)) {
 			exit_error('update():: '.$pt->getErrorMessage(),'pm');
 		} else {
 			if (count($rem_artifact_id) > 0) {
@@ -194,7 +194,7 @@ switch (getStringFromRequest('func')) {
 					exit_error('removeRelatedArtifacts():: '.$pt->getErrorMessage(),'pm');
 				}
 			}
-			$feedback=_('Task Updated Successfully');
+			$feedback = _('Task Updated Successfully');
 			include $gfwww.'pm/browse_task.php';
 		}
 		break;

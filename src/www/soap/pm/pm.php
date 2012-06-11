@@ -3,6 +3,7 @@
  * SOAP Tasks Include - this file contains wrapper functions for the SOAP interface
  *
  * Copyright 2004 (c) GForge, LLC
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://gforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -518,7 +519,7 @@ function &getProjectTechnicians($session_ser,$group_id,$group_project_id) {
 	$engine = RBACEngine::getInstance () ;
 	$techs = $engine->getUsersByAllowedAction ('pm', $pg->getID(), 'tech') ;
 
-	return users_to_soap ($techs);
+	return users_to_soap($techs);
 }
 
 function &getProjectTasks($session_ser,$group_id,$group_project_id,$assigned_to,$status,$category,$group) {

@@ -33,7 +33,7 @@ function get_frs_packages($Group) {
 				array ($Group->getID())) ;
 	if (db_numrows($res) > 0) {
 		while($arr = db_fetch_array($res)) {
-			$ps[]=new FRSPackage($Group,$arr['package_id'],$arr);
+			$ps[]=new FRSPackage($Group, $arr['package_id'], $arr);
 		}
 	}
 	return $ps;
@@ -537,7 +537,6 @@ class FRSPackage extends Error {
 			unlink($this->getNewestReleaseZipPath());
 		return true;
 	}
-
 }
 
 // Local Variables:

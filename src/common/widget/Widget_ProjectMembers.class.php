@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is a part of Codendi.
  *
@@ -106,13 +107,13 @@ class Widget_ProjectMembers extends Widget {
 		if (!$iam_member) {
 			echo '<p>'.util_make_link ('/project/request.php?group_id='.$group_id,_('Request to join')).'</p>';
 		}
-}
-public function canBeUsedByProject(&$project) {
-	return true;
-}
-function getDescription() {
-	return _('List the project members.');
-}
+	}
+	public function canBeUsedByProject(&$project) {
+		return true;
+	}
+	function getDescription() {
+		return _('List the project members.');
+	}
 }
 
 // Local Variables:

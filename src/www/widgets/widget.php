@@ -82,8 +82,8 @@ if ($request->valid($vOwner)) {
                             break;
                         case 'ajax':
                             if ($widget->isAjax()) {
-				header("Cache-Control: no-store, no-cache, must-revalidate");
-				sysdebug_ajaxbody();
+								header("Cache-Control: no-store, no-cache, must-revalidate");
+								sysdebug_ajaxbody();
                                 $widget->loadContent($instance_id);
                                 echo $widget->getContent();
                                 exit();

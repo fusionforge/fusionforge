@@ -6,7 +6,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2005 (c) Daniel Perez
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,7 +34,7 @@ class ForumAdmin extends Error {
 		if ($group_id) {
 			$this->group_id = $group_id;
 			$this->g = group_get_object($group_id);
-			$this->p =& $this->g->getPermission ();
+			$this->p =& $this->g->getPermission();
 		}
 	}
 
@@ -138,7 +138,7 @@ class ForumAdmin extends Error {
 			$this->setGroupIdError();
 			return false;
 		}
-		$this->p =& $this->g->getPermission ();
+		$this->p =& $this->g->getPermission();
 		if (!$this->p || !is_object($this->p) || $this->p->isError()) {
 			$this->setPermissionDeniedError();
 			return false;

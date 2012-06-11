@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -408,7 +408,7 @@ if (getStringFromRequest('add_forum')) {
 	  Show main page for choosing
 	  either moderator or delete
 	*/
-		forum_header(array('title'=>_('Forums Administration')));
+	forum_header(array('title'=>_('Forums Administration')));
 
 	//
 	//	Add new forum

@@ -5,7 +5,7 @@
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -184,8 +184,8 @@ if ($forum_id) {
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="get">
 	<table>
 		<tr><td>
-	<input type="hidden" name="set" value="custom" />
-	<input type="hidden" name="forum_id" value="'.$forum_id.'" />
+			<input type="hidden" name="set" value="custom" />
+			<input type="hidden" name="forum_id" value="'.$forum_id.'" />
 			'. $options_popup .
 			'</td><td>'. $max_row_popup .
 			'</td><td><input type="submit" name="submit" value="'.
@@ -294,8 +294,8 @@ if ($forum_id) {
 		$msg_arr =& $fmf->getFlat($thread_id);
 		if ($fmf->isError()) {
 			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
-	        forum_footer(array());
-            exit;
+			forum_footer(array());
+			exit;
 		}
 		$avail_rows=$fmf->fetched_rows;
 
@@ -331,7 +331,7 @@ ORDER BY f.most_recent_date DESC',
 			$title_arr[]=_('Topic Starter');
 			$title_arr[]=_('Replies');
 			$title_arr[]=_('Last Post');
-
+	
 			$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 			$i=0;
 			while (($row=db_fetch_array($result)) && ($i < $max_rows)) {

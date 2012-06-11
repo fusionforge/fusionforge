@@ -5,7 +5,7 @@
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -203,8 +203,8 @@ class ForumHTML extends Error {
 		<table>
 			<tr>
 				<td class="tablecontent" style="white-space: nowrap;">'._('By:').
-		$msg->getPosterRealName().
-		'<br />
+					$msg->getPosterRealName().
+					'<br />
 					';
 		$msgforum =& $msg->getForum();
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
@@ -262,7 +262,7 @@ class ForumHTML extends Error {
 		$ret_val .= $bold_begin. $msg->getSubject(). ' <a href="'.$url.'">[ '._("reply").' ]</a>'. $bold_end;
 		$ret_val .= '<br/>'._('By:').' '.util_make_link_u ($msg->getPosterName(),$msg->getPosterID(),$msg->getPosterRealName());
 		$ret_val .= ' on '.date('Y-m-d H:i',$msg->getPostDate());
-		$ret_val .= '</td><td class="tablecontent"  align="right">';
+		$ret_val .= '</td><td class="tablecontent align-right">';
 		$ret_val .= '<a href="'.$url.'">[forum:'.$msg->getID().']</a><br/>';
 		if (forge_check_perm ('forum_admin', $msgforum->Group->getID())) {
 			$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());
@@ -275,11 +275,11 @@ class ForumHTML extends Error {
 				<td colspan="2">
 					';
 					if (strpos($msg->getBody(),'<') === false) {
-			$ret_val .= nl2br($msg->getBody()); //backwards compatibility for non html messages
-		} else {
-			$ret_val .= $msg->getBody();
-		}
-		$ret_val .= '
+						$ret_val .= nl2br($msg->getBody()); //backwards compatibility for non html messages
+					} else {
+						$ret_val .= $msg->getBody();
+					}
+					$ret_val .= '
 				</td>
 			</tr>
 		</table>';
