@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -82,16 +82,7 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 		}
 	}
 
-	// Is it a Personal wiki URL (see phpwiki plugin)
-	if (($expl_pathinfo[1]=='wiki') && ($expl_pathinfo[2]=='u')) {
-		// URLs are /wiki/u/<user_name>/<page_name>
-		// Fake group_name which is in fact the user_name.
-		$group_name = $expl_pathinfo[3];
-	}
-
-	// Is it a Project wiki URL (see phpwiki plugin)
-	if (($expl_pathinfo[1]=='wiki') && ($expl_pathinfo[2]=='g')) {
-		// URLs are /wiki/g/<user_name>/<page_name>
+	if ($expl_pathinfo[1]=='wiki') {
 		$group_name = $expl_pathinfo[3];
 		$res_grp=db_query_params ('
 			SELECT *
@@ -127,13 +118,12 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	$log_group=0;
 }
 
-$sql =	"INSERT INTO activity_log
-(day,hour,group_id,browser,ver,platform,time,page,type)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
-
-$res_logger = db_query_params ($sql, array(date('Ymd'), date('H'),
-	$log_group, browser_get_agent(), browser_get_version(), browser_get_platform(),
-	time(), getStringFromServer('PHP_SELF'), '0'));
+$res_logger = db_query_params ('INSERT INTO activity_log
+	(day,hour,group_id,browser,ver,platform,time,page,type)
+	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+	array(date('Ymd'), date('H'),
+		$log_group, browser_get_agent(), browser_get_version(), browser_get_platform(),
+		time(), getStringFromServer('PHP_SELF'), '0'));
 
 if (!$res_logger) {
 	echo "An error occured in the logger.\n";
