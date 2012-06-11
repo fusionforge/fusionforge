@@ -700,7 +700,7 @@ function setup_tz_from_context() {
 	}
 	putenv ('TZ='. $tz);
 	date_default_timezone_set($tz);
-}	
+}
 
 /**
  *	session_get_user() - Wrapper function to return the User object for the logged in user.

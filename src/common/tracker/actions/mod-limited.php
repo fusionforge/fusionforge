@@ -113,7 +113,7 @@ if (session_loggedin()) {
 
 	<?php
 		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any',array(),false,'UPDATE');
-		?>
+	?>
 
 	<tr>
 		<td><strong><?php echo _('Assigned to')?>:</strong><br />

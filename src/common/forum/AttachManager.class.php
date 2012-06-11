@@ -86,7 +86,7 @@ class AttachManager extends Error {
 	*/
 
 	function PrintHelperFunctions() {
-		return '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+		return '<script type="text/javascript">/* <![CDATA[ */
 
 		function confirmDel() {
 			var agree=confirm("Proceed with deletion? ");
