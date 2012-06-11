@@ -7,6 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -324,7 +325,7 @@ class Group extends Error {
 						array (htmlspecialchars ($group_name),
 						       $unix_name,
 						       htmlspecialchars($description),
-						       $unix_name.".".forge_get_config('web_host'),
+						       $homepage,
 						       $homepage,
 						       'P',
 						       $unix_box,
@@ -571,7 +572,7 @@ class Group extends Error {
 					     $use_stats,
 					     $this->getID()));
 
-		if (!$res) {
+		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(sprintf(_('Error updating project information: %s'), db_error()));
 			db_rollback();
 			return false;
