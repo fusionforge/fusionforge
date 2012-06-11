@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -54,7 +54,7 @@ if (session_loggedin()) {
 	}
 
 	// Display with the preferred layout/theme of the user (if logged-in)
-	$perm =& $group->getPermission( session_get_user() );
+	$perm =& $group->getPermission();
 	if ($perm && is_object($perm) && $perm->isAdmin()) {
 		$sql = "SELECT l.*
 				FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)

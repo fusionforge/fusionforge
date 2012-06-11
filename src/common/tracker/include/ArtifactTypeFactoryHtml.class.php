@@ -4,6 +4,7 @@
  *
  * Copyright 2011 (C) Alain Peyrat, Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -54,7 +55,7 @@ class ArtifactTypeFactoryHtml extends ArtifactTypeFactory {
 			$labels[] = _('Reporting');
 			$links[]  = '/tracker/reporting/?group_id='.$group_id;
 			$attr[]   = array('title' => _('Various graph of statistics.'), 'class' => 'tabtitle');
-			$perm = $this->Group->getPermission(session_get_user());
+			$perm = $this->Group->getPermission();
 			if ($perm && is_object($perm) && !$perm->isError() && $perm->isPMAdmin()) {
 				$labels[] = _('Administration');
 				$links[]  = '/tracker/admin/?group_id='.$group_id;

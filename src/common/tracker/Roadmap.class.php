@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2011, Alcatel-Lucent
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -490,7 +491,7 @@ class Roadmap extends Error {
 				return false;
 			}
 		}
-		$perm =& $this->group->getPermission(session_get_user());
+		$perm =& $this->group->getPermission();
 
 		if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
 			$this->setPermissionDeniedError();
