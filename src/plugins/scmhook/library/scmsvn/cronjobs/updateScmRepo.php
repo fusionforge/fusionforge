@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -45,11 +46,16 @@ function updateScmRepo($params) {
 		@unlink($svndir_root.'/hooks/pre-commit');
 		@unlink($svndir_root.'/hooks/post-commit');
 		$hooksPreCommit = array();
+		$hooksPreRevPropChange = array();
 		$hooksPostCommit = array();
 		foreach ($hooksAvailable as $hook) {
 			switch ($hook->getHookType()) {
 				case "pre-commit": {
 					$hooksPreCommit[] = $hook;
+					break;
+				}
+				case "pre-revprop-change": {
+					$hooksPreRevPropChange[] = $hook;
 					break;
 				}
 				case "post-commit": {
@@ -71,6 +77,14 @@ function updateScmRepo($params) {
 			}
 		}
 
+		foreach($hooksPreRevPropChange as $hook) {
+			if ($hook->needCopy()) {
+				foreach($hook->getFiles() as $file) {
+					@unlink($svndir_root.'/hooks/'.basename($file));
+				}
+			}
+		}
+
 		foreach($hooksPostCommit as $hookPostCommit) {
 			if ($hookPostCommit->needCopy()) {
 				foreach($hookPostCommit->getFiles() as $hookPostCommitFile) {
@@ -82,11 +96,17 @@ function updateScmRepo($params) {
 		$newHooks = explode('|', $hooksString);
 		if (count($newHooks)) {
 			$newHooksPreCommit = array();
+			$newHooksPreRevPropChange = array();
 			$newHooksPostCommit = array();
 			foreach($newHooks as $newHook) {
 				foreach($hooksPreCommit as $hookPreCommit) {
 					if ($hookPreCommit->getClassname() == $newHook) {
 						$newHooksPreCommit[] = $hookPreCommit;
+					}
+				}
+				foreach($hooksPreRevPropChange as $hook) {
+					if ($hook->getClassname() == $newHook) {
+						$newHooksPreRevPropChange[] = $hook;
 					}
 				}
 				foreach($hooksPostCommit as $hookPostCommit) {
@@ -106,6 +126,14 @@ function updateScmRepo($params) {
 			}
 		}
 
+		foreach($hooksPreRevPropChange as $newHook) {
+			if ($newHook->needCopy()) {
+				foreach ($newHook->getFiles() as $file) {
+					copy($file, $svndir_root.'/hooks/'.basename($file));
+					chmod($svndir_root.'/hooks/'.basename($file), 0755);
+				}
+			}
+		}
 
 		foreach($newHooksPostCommit as $newHookPostCommit) {
 			if ($newHookPostCommit->needCopy()) {
@@ -120,15 +148,9 @@ function updateScmRepo($params) {
 			// prepare the pre-commit
 			$file = fopen("/tmp/pre-commit-$unixname.tmp", "w");
 			fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/pre-commit/head'));
-			$loopid = 0;
 			$string = '';
 			foreach($newHooksPreCommit as $newHookPreCommit) {
-				if ($loopid) {
-					//insert && \ between commands
-					$string .= ' && ';
-				}
-				$string .= $newHookPreCommit->getHookCmd();
-				$loopid = 1;
+				$string .= $newHookPreCommit->getHookCmd()."\n";
 			}
 			$string .= "\n";
 			fwrite($file, $string);
@@ -136,21 +158,35 @@ function updateScmRepo($params) {
 			copy('/tmp/pre-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/pre-commit');
 			chmod($svndir_root.'/hooks/pre-commit', 0755);
 			unlink('/tmp/pre-commit-'.$unixname.'.tmp');
+		} else {
+			@unlink($svndir_root.'/hooks/pre-commit');
+		}
+
+		if (count($newHooksPreRevPropChange)) {
+			// prepare the pre-revprop-change
+			$file = fopen("/tmp/pre-revprop-change-$unixname.tmp", "w");
+			fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/pre-revprop-change/head'));
+			$string = '';
+			foreach($newHooksPreRevPropChange as $hook) {
+				$string .= $hook->getHookCmd()."\n";
+			}
+			$string .= "\n";
+			fwrite($file, $string);
+			fclose($file);
+			copy('/tmp/pre-revprop-change-'.$unixname.'.tmp', $svndir_root.'/hooks/pre-revprop-change');
+			chmod($svndir_root.'/hooks/pre-revprop-change', 0755);
+			unlink('/tmp/pre-revprop-change-'.$unixname.'.tmp');
+		} else {
+			@unlink($svndir_root.'/hooks/pre-revprop-change');
 		}
 
 		if (count($newHooksPostCommit)) {
 			// prepare the post-commit
 			$file = fopen("/tmp/post-commit-$unixname.tmp", "w");
 			fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-commit/head'));
-			$loopid = 0;
 			$string = '';
 			foreach($newHooksPostCommit as $newHookPostCommit) {
-				if ($loopid) {
-					//insert && \ between commands
-					$string .= ' && ';
-				}
-				$string .= $newHookPostCommit->getHookCmd();
-				$loopid = 1;
+				$string .= $newHookPostCommit->getHookCmd()."\n";
 			}
 			$string .= "\n";
 			fwrite($file, $string);

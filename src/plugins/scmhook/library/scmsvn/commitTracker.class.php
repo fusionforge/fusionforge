@@ -4,6 +4,7 @@
  * Copyright 2004, Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2005, Guillaume Smet <guillaume-gforge@smet.org>
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -75,8 +76,8 @@ class commitTracker extends scmhook {
 		$Rows= db_numrows($DBResult);
 
 		if ($Rows > 0) {
-			echo '<tr><td colspan="2">';
-			echo '<h4>'._('Links to related SVN commits').':</h4>';
+			echo '<tr><td>';
+			echo '<h2>'._('Related SVN commits').'</h2>';
 
 			$title_arr = $this->getTitleArr();
 			echo $GLOBALS['HTML']->listTableTop($title_arr);

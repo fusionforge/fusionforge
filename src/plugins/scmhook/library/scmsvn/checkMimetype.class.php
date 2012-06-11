@@ -2,6 +2,7 @@
 /**
  * scmhook checkMimetype Plugin Class
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -27,12 +28,11 @@ class checkMimetype extends scmhook {
 		$this->name = "Check Mimetype";
 		$this->description = _('Verify if commited files have svn:mimetype set up correctly.');
 		$this->classname = "checkMimetype";
-		$this->command = 'perl $SCRIPTPATH/check-mime-type.pl "$1" "$2"';
+		$this->command = 'perl '.dirname(__FILE__).'/hooks/checkmimetype/check-mime-type.pl "$1" "$2"';
 		$this->hooktype = "pre-commit";
 		$this->label = "scmsvn";
 		$this->unixname = "checkmimetype";
-		$this->needcopy = 1;
-		$this->files = array(dirname(__FILE__).'/hooks/'.$this->unixname.'/check-mime-type.pl');
+		$this->needcopy = 0;
 	}
 }
 ?>
