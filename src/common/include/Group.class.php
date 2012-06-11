@@ -554,8 +554,8 @@ class Group extends Error {
 				use_ftp=$13,
 				use_tracker=$14,
 				use_frs=$15,
-				use_stats=$16
-				use_stats=$17
+				use_stats=$16,
+				use_activity=$17
 			WHERE group_id=$18',
 				       array(htmlspecialchars($group_name),
 					     $homepage,
