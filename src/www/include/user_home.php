@@ -27,9 +27,7 @@
  * Assumes $user object for displayed user is present
  */
 
-
 require_once $gfwww.'include/user_profile.php';
-
 require_once $gfwww.'include/vote_function.php';
 
 $title = _('User Profile');
