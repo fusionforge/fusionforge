@@ -414,7 +414,7 @@ class Navigation extends Error {
 			*/
 
 			// Project Activity
-			if ($project->usesActivity()) {
+			if ($group->usesActivity()) {
 				$menu['titles'][] = _('Activity');
 				$menu['tooltips'][] = _('Last activities per category.');
 				$menu['urls'][] = util_make_uri('/activity/?group_id=' . $group_id);
