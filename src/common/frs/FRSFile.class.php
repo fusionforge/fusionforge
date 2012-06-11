@@ -5,6 +5,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -191,10 +192,7 @@ class FRSFile extends Error {
 			$release_time=time();
 		}
 		$file_size=filesize("$newfilelocation$name");
-		$sql="INSERT INTO frs_file(release_id,filename,release_time,
-				type_id,processor_id,file_size,post_date)
-			VALUES ('".$this->FRSRelease->getId()."','$name','$release_time',
-				'$type_id','$processor_id','$file_size','".time()."')";
+
 
 		db_begin();
 		$result = db_query_params ('INSERT INTO frs_file(release_id,filename,release_time,type_id,processor_id,file_size,post_date) VALUES ($1,$2,$3,$4,$5,$6,$7)',
