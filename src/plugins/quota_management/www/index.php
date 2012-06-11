@@ -2,6 +2,7 @@
 /**
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -68,7 +69,7 @@ if (!$type) {
 		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the quota_management plugin active
 			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginnname),'home');
 		}
-		$userperm = $group->getPermission ();//we'll check if the user belongs to the group
+		$userperm = $group->getPermission();//we'll check if the user belongs to the group
 		if ( !$userperm->IsMember()) {
 			exit_permission_denied(_('You are not a member of this project'),'home');
 		}

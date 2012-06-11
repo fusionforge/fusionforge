@@ -6,6 +6,7 @@
  * Copyright 2009, Fabien Dubois - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -80,7 +81,7 @@ switch ($type) {
 
 		$action = '';
 		if (isset($user)) {
-			$userperm = $group->getPermission($user);
+			$userperm = $group->getPermission();
 			if ($userperm->IsMember()) {
 				$mantisbtUserConf = $mantisbt->getUserConf($user->getID());
 				if ($mantisbtUserConf) {

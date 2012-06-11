@@ -3,6 +3,7 @@
  * MediaWiki Plugin for FusionForge
  *
  * Copyright © 2010
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *      Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2012, Franck Villaume - TrivialDev
  * All rights reserved.
@@ -70,7 +71,7 @@ if (!$group)
 if (!$group->usesPlugin("mediawiki"))
 	exit_error("Invalid Project", "Project does not use MediaWiki Plugin");
 
-$userperm = $group->getPermission($user);
+$userperm = $group->getPermission();
 if (!$userperm->IsMember())
 	exit_error("Access Denied", "You are not a member of this project");
 if (!$userperm->IsAdmin())

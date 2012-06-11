@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -57,7 +58,7 @@ if ( $group->isError()) {
 	$error_msg .= $group->getErrorMessage();
 }
 
-$userperm = $group->getPermission($user);//we'll check if the user belongs to the group (optional)
+$userperm = $group->getPermission();//we'll check if the user belongs to the group (optional)
 if ( !$userperm->IsMember()) {
 	exit_permission_denied(_('You are not a member of this project'), 'home');
 }

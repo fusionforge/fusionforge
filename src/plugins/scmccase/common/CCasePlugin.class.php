@@ -3,7 +3,7 @@
  *
  * Copyright 2003-2009, Roland Mas
  * Copyright 2004, GForge, LLC
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -103,7 +103,7 @@ class CCasePlugin extends SCMPlugin {
 
 			$anonymous = 1;
 			if (session_loggedin()) {
-				$perm =& $project->getPermission ();
+				$perm =& $project->getPermission();
 				$anonymous = !$perm->isMember();
 			}
 
