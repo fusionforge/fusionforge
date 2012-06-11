@@ -6,6 +6,7 @@
  * Copyright 2002-2004, GForge Team
  * Copyright 2010, Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Roland Mas
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -37,7 +38,7 @@ $post_changes = getStringFromRequest('post_changes');
 $approve = getStringFromRequest('approve');
 $status = getIntFromRequest('status');
 $summary = getStringFromRequest('summary');
-$details = getStringFromRequest('details');
+$details = getHtmlTextFromRequest('details');
 $id = getIntFromRequest('id');
 $for_group = getIntFromRequest('for_group');
 
@@ -66,11 +67,6 @@ if ($post_changes) {
 			/*
 			  Update the db so the item shows on the home page
 			*/
-			if (getStringFromRequest('_details_content_type') == 'html') {
-				$details = TextSanitizer::purify($details);
-			} else {
-				$details = htmlspecialchars($details);
-			}
 			$result=db_query_params('UPDATE news_bytes SET is_approved=1, post_date=$1, summary=$2, details=$3 WHERE id=$4',
 						array(time(),
 						      htmlspecialchars($summary),
@@ -116,7 +112,7 @@ WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 	}
 }
 
-news_header(array('title'=>_('News admin')));
+news_header(array('title'=>_('News administration')));
 
 if ($approve) {
 	/*
@@ -153,21 +149,16 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="60" maxlength="60" /><br />
 		<strong>'._('Details').':</strong><br />';
 
-	$GLOBALS['editor_was_set_up']=false;
 	$params = array () ;
 	$params['name'] = 'details';
 	$params['width'] = "600";
 	$params['height'] = "300";
 	$params['group'] = db_result($result,0,'group_id');
 	$params['body'] = db_result($result,0,'details');
-	plugin_hook("text_editor",$params);
-	if (!$GLOBALS['editor_was_set_up']) {
-		//if we don't have any plugin for text editor, display a simple textarea edit box
-		echo '<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><br />';
-	}
-	unset($GLOBALS['editor_was_set_up']);
+	$params['content'] = '<textarea name="details" rows="5" cols="50">'.$params['body'].'</textarea>';
+	plugin_hook_by_reference("text_editor",$params);
 
-
+	echo $params['content'].'<br/>';
 	echo '<br />
 		<input type="submit" name="submit" value="'._('Submit').'" />
 		</form>';
