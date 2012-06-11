@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright (C) 2009-2012 Alain Peyrat, Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -118,7 +118,7 @@ if (count($data) == 0) {
     echo '</p>';
 } else {
 
-    echo $HTML->listTableTop (array('Package', 'Release', 'File','User', 'Date'),
+    echo $HTML->listTableTop (array(_('Package'), _('Release'), _('File'), _('User'), _('Date')),
                               false, true, 'Download');
 
     for ($i=0; $i<count($data); $i++) {
