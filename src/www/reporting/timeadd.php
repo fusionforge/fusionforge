@@ -3,7 +3,7 @@
  * Reporting System
  *
  * Copyright 2004 (c) GForge LLC - Tim Perdue
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -113,7 +113,7 @@ if ($week) {
 						 db_int_array_to_any_clause($project_ids)));
 	}
 	?>
-		<h3><?php printf(_('Time Entries For The Week Starting %s'), date(_('Y-m-d'),$week)) ?></h3>
+<h2><?php printf(_('Time Entries For The Week Starting %s'), date(_('Y-m-d'),$week)) ?></h2>
 <?php
 	$res = db_query_params ('SELECT pt.project_task_id, pgl.project_name || $1 || pt.summary AS name,
 	rtt.hours, rtt.report_date, rtc.category_name, rtt.time_code
@@ -166,11 +166,11 @@ if ($group_project_id || $rows) {
 			echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'" method="post">
 			<input type="hidden" name="submit" value="1" />
 			<tr '.$HTML->boxGetAltRowStyle($xi++).'>
-				<td align="middle">'. html_build_select_box ($respt,'project_task_id',false,false) .'</td>
-				<td align="middle"><input type="text" name="report_date" value="'. date('Y-m-d',$week) .'" size="10" maxlength="10" /></td>
-				<td align="middle"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
-				<td align="middle">'.report_time_category_box('time_code',false).'</td>
-				<td align="middle"><input type="submit" name="add" value="'.
+				<td class="align-center">'. html_build_select_box ($respt,'project_task_id',false,false) .'</td>
+				<td class="align-center"><input type="text" name="report_date" value="'. date('Y-m-d',$week) .'" size="10" maxlength="10" /></td>
+				<td class="align-center"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
+				<td class="align-center">'.report_time_category_box('time_code',false).'</td>
+				<td class="align-center"><input type="submit" name="add" value="'.
 		_('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
 			</tr></form>';
 
@@ -218,13 +218,13 @@ else {
 
 	?>
 <h2><?php echo _('Choose A Week to Record Or Edit Your Time.'); ?></h2>
-<p><?php echo _('After you choose a week, you will be prompted to choose a Project/Subproject in the Task Manager.'); ?>
-</p>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
-	method="get" /><strong><?php echo _('Week Starting'); ?>:</strong><br />
-	<?php echo report_weeks_box($report,'week'); ?>
-<p><input type="submit" name="submit" value="<?php echo _('Next'); ?>" />
 
+<p><?php echo _("After you choose a week, you will be prompted to choose a Project/Subproject in the Tasks."); ?></p>
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
+	method="get" />
+<p><strong><?php echo _('Week Starting'); ?>:</strong></p>
+	<?php echo report_weeks_box($report,'week'); ?>
+<p><input type="submit" name="submit" value="<?php echo _('Next'); ?>" /></p>
 </form>
 	<?php
 

@@ -3,6 +3,7 @@
  * Search Engine
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -86,7 +87,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				. '<td width="5%">&nbsp;</td>'
 				. '<td>'.db_result($result, $i, 'docid').'</td>'
 				. '<td><a href="'.util_make_url ('/docman/view.php/'.$this->groupId . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'filename')).'">'
-				. html_image('ic/msg.png', '10', '12', array('border' => '0'))
+				. html_image('ic/msg.png', '10', '12')
 				. ' '.db_result($result, $i, 'title').'</a></td>'
 				. '<td>'.db_result($result, $i, 'description').'</td></tr>';
 			$rowColor++;

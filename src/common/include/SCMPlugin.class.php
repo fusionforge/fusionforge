@@ -3,7 +3,7 @@
  * FusionForge source control management
  *
  * Copyright 2004-2009, Roland Mas
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -201,7 +201,7 @@ abstract class SCMPlugin extends Plugin {
 
 			session_require_perm('scm', $project->getID(), 'read');
 			// Table for summary info
-			print '<table class="fullwidth"><tr valign="top"><td style="width:65%">'."\n";
+			print '<table class="fullwidth"><tr class="top"><td style="width:65%">'."\n" ;
 			print $this->getBlurb()."\n";
 
 			// Instructions for anonymous access

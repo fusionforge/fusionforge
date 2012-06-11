@@ -4,6 +4,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -62,8 +63,8 @@ function reports_quick_graph($title,$qpa1,$qpa2,$bar_colors) {
 		);
 		end_graph();
 		print '<p /><br />';
-		print '<table><tr class="align-center"><td width="15%">'._('Key').':</td><td width="5%">(</td><td width="35%" style="background-color:'.$bar_colors[0].'">'._('Open').'</td>'.
-		      '<td width="5%">/</td><td width="35%" style="background-color:'.$bar_colors[1].'">'._('All').' </td><td width="5%">)</td></tr></table>';
+		print '<table><tr class="align-center"><td style="width:15%">'._('Key').':</td><td style="width:5%">(</td><td style="width:35%; background-color:'.$bar_colors[0].'">'._('Open').'</td>'.
+		      '<td style="width:5%">/</td><td style="width:35%; background-color:'.$bar_colors[1].'">'._('All').' </td><td style="width:5%">)</td></tr></table>';
 		print '<p />';
 //      		GraphResult($result,$title);
 	} else {

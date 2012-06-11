@@ -5,6 +5,7 @@
  * Copyright 1999/2000, Sourceforge.net Tim Perdue
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -131,7 +132,7 @@ $size_box=html_build_select_box_from_arrays ($size_col_arr,$size_title_arr,'_siz
 		}
 		//echo "XX $_size $gantt_width $gantt_height XX";
 		?>
-		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+		<script type="text/javascript">/* <![CDATA[ */
 		function setSize(width,height) {
 			if (window.outerWidth) {
 				window.outerWidth = width;

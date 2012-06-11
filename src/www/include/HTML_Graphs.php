@@ -2,6 +2,7 @@
 /**
  * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://sourceforge.net
  *
  * @author		Tim Perdue <tperdue@valnux.com>
@@ -374,7 +375,7 @@ function start_graph($vals, $names)
             $colspan = SizeOf($names) + 1;
            }
 
-        print '<tr><td align="center" valign="center" ';
+        print '<tr><td class="align-center" valign="center" ';
 
         // If a background was choosen don't print cell BGCOLOR
         if (! $vals["background"]) { print 'style="background-color:' . $vals["hbgcolor"] . '"'; }
@@ -384,7 +385,7 @@ function start_graph($vals, $names)
         print "<strong>" . $vals["hlabel"] . "</strong>";
         print '</span></td></tr>';
 
-        print '<tr><td align="center" valign="center" ';
+        print '<tr><td class="align-center" valign="center" ';
 
         // If a background was choosen don't print cell BGCOLOR
         if (! $vals["background"]) { print 'style="background-color:' . $vals["vbgcolor"] . '"'; }
@@ -771,7 +772,9 @@ function horizontal_multisection_graph($names, $multi_rows, $colors, $vals, $add
 	<tr>
 	<td class="align-right" <?php
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' style="background-color:' . $vals["namebgcolor"] . '"'; }
+        if (! $vals["background"]) {
+			print ' style="background-color:' . $vals["namebgcolor"] . '"';
+		}
 ?>>
 		<span style="font-size:-1;color:<?php echo $vals["namefcolor"]; ?>;<?php echo $vals["namefstyle"]; ?>">
 <?php
@@ -781,28 +784,28 @@ function horizontal_multisection_graph($names, $multi_rows, $colors, $vals, $add
 
 	<td  align="left" <?php
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
-
-	echo ">";
+		if (! $vals["background"]) {
+			print ' style="background-color:' . $vals["valuebgcolor"] . '"';
+		}
+		echo ">";
 
         echo '<table align="left"><tr>'."\n";
         $prev_val=0;
         $shown=0;
-	for( $j=0;$j<$subbars_num;$j++ ) {
+		for( $j=0;$j<$subbars_num;$j++ ) {
         	$width=$multi_rows[$j][$i];
-                if (!$additive) $width-=$prev_val;
-                if ($width<=0 && ($j!=$subbars_num-1 || $shown)) continue;
-                // make sure that we show at least stump, but only one
-                $shown=1;
-                $prev_val=$multi_rows[$j][$i];
-                $pix_width=$width * $vals["scale"];
-                echo "<td style=\"background-color:".$colors[$j]."\" width=\"".$pix_width."\">&nbsp;</td>";
+            if (!$additive) $width-=$prev_val;
+            if ($width<=0 && ($j!=$subbars_num-1 || $shown)) continue;
+            // make sure that we show at least stump, but only one
+            $shown=1;
+            $prev_val=$multi_rows[$j][$i];
+            $pix_width=$width * $vals["scale"];
+            echo "<td style=\"background-color:".$colors[$j]."\" width=\"".$pix_width."\">&nbsp;</td>";
         }
         echo '</tr></table>';
 
-        if (! $vals["noshowvals"])
-           {
-                print '		<em><span style="font-size:-2;color:' . $vals["valuefcolor"] . ';'
+        if (! $vals["noshowvals"]) {
+            print '		<em><span style="font-size:-2;color:' . $vals["valuefcolor"] . ';'
                 . $vals["valuefstyle"] . '">&nbsp;(';
         	for( $j=0;$j<SizeOf($multi_rows);$j++ ) {
                         if ($j) print "/";

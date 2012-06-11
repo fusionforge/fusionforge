@@ -6,6 +6,7 @@
  * Copyright 2002-2004, GForge Team
  * Copyright 2009, Jean-Pierre Fortune/Spirtech
  * Copyright 2009-2010, Roland Mas
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -111,9 +112,9 @@ if (!session_loggedin()) {
 									$at->getName()) . '</strong></td></tr>';
 						$toggle=0;
 						foreach($art_arr as $art) {
-							echo '<tr '. $HTML->boxGetAltRowStyle($toggle++) . ' valign="top"><td align="center">'. $art->getID() .'</td>';
+							echo '<tr '. $HTML->boxGetAltRowStyle($toggle++) . ' class="top"><td class="align-center">'. $art->getID() .'</td>';
 							if ($display_col['summary'])
-							echo '<td align="left"><a href="/tracker/?func=detail&amp;aid='.
+							echo '<td class="align-left"><a href="/tracker/?func=detail&aid='.
 								$art->getID() .
 								'&amp;group_id='. $p->getID() .'&amp;atid='.
 								$ath->getID().'">'.

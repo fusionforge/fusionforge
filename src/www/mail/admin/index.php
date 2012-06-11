@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -274,7 +274,7 @@ if ($group_id) {
 					echo $currentList->getErrorMessage();
 					echo '</td></tr>';
 				} else {
-					echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td width="60%">'.
+					echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>'.
 					'<strong>'.$currentList->getName().'</strong><br />'.
 					htmlspecialchars($currentList->getDescription()).'</td>'.
 					'<td class="align-center"><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a></td>' ;

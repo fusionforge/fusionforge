@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems , Darrell Brogdon
  * Copyright 2002 (c) GForge, LLC
  * Copyright 2010 (c), FusionForge Team
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -144,7 +145,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 ?>
 
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>">
-	<table border="0" cellpadding="2" cellspacing="2">
+	<table>
 	<tr>
 		<td>
 			<strong><?php echo _('Package ID') ?>:</strong>

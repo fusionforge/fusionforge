@@ -5,7 +5,7 @@
  *
  * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
@@ -172,7 +172,7 @@ class ArtifactHtml extends Artifact {
 		if (db_numrows($res)>0) {
 			?>
 <div class="tabbertab" title="<?php echo _('Backward Relations'); ?>">
-<table border="0" width="80%">
+<table class="fullwidth">
 	<tr>
 		<td colspan="2">
 		<h2><?php echo _('Changes') ?>:</h2>

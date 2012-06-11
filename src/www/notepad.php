@@ -4,6 +4,7 @@
  * FusionForge Notepad Facility
  *
  * Copyright 2003 FUJITSU PRIME SOFTWARE TECHNOLOGIES LIMITED
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://www.pst.fujitsu.com/
  *
  * This file is part of FusionForge. FusionForge is free software;

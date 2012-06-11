@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 - Alain Peyrat
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright 2012 - Franck Villaume - TrivialDev
@@ -526,7 +526,7 @@ class Layout extends Error {
 		return '
 			<!-- Box Top Start -->
 
-			<table cellspacing="0" cellpadding="0" width="100%" border="0" style="background:url('.$this->imgbaseurl.'vert-grad.png)">
+			<table class="fullwidth" style="background:url('.$this->imgroot.'vert-grad.png)">
 			<tr class="align-center">
 			<td valign="top" align="right" width="10" style="background:url('.$this->imgbaseurl.'box-topleft.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
 			<td width="100%" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
@@ -1210,16 +1210,16 @@ class Layout extends Error {
 	}
 
 	function getMonitorPic($title = '', $alt = '') {
-		return $this->getPicto('ic/mail16w.png', $title, $alt, '15', '15');
+		return $this->getPicto('ic/mail16w.png', $title, $alt);
 	}
 
 	function getReleaseNotesPic($title = '', $alt = '') {
-		return $this->getPicto('ic/manual16c.png', $title, $alt, '15', '15');
+		return $this->getPicto('ic/manual16c.png', $title, $alt);
 	}
 
 	/* no picto for download */
 	function getDownloadPic($title = '', $alt = '') {
-		return $this->getPicto('ic/save.png', $title, $alt, '15', '15');
+		return $this->getPicto('ic/save.png', $title, $alt);
 	}
 
 	function getHomePic($title = '', $alt = '') {
@@ -1323,9 +1323,9 @@ class Layout extends Error {
 		}
 		echo "</div>\n";
 		if ($widget->isAjax()) {
-			echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */'."
+			echo '<script type="text/javascript">/* <![CDATA[ */'."
 				document.observe('dom:loaded', function () {
-						$('$element_id-ajax').update('<div style=\"text-align:center\">". $this->getPicto('ic/spinner.gif','spinner','spinner') ."</div>');
+						$('$element_id-ajax').update('<div style=\"text-align:center\">". $this->getPicto('ic/spinner.gif','spinner','spinner', 10, 10) ."</div>');
 						new Ajax.Updater('$element_id-ajax',
 							'". $widget->getAjaxUrl($owner_id, $owner_type) ."'
 							);

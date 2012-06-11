@@ -5,7 +5,7 @@
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -36,7 +36,7 @@ if ($group_id) {
 		exit_no_group();
 	}
 
-	$ff=new ForumFactory($g);
+	$ff = new ForumFactory($g);
 	if (!$ff || !is_object($ff) || $ff->isError()) {
 		exit_error($ff->getErrorMessage(),'forums');
 	}
@@ -81,11 +81,11 @@ if ($group_id) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td>'.
 				'<a href="'.util_make_uri('/forum/forum.php?forum_id='.$farr[$j]->getID().'&amp;group_id='.$group_id).'">'.
 				html_image('ic/forum20w.png') .
-				'&nbsp;' .
+				' ' .
 				$farr[$j]->getName() .'</a></td>
 				<td>'.$farr[$j]->getDescription().'</td>
-				<td style="text-align:center">'.$farr[$j]->getThreadCount().'</td>
-				<td style="text-align:center">'. $farr[$j]->getMessageCount() .'</td>
+				<td class="align-center">'.$farr[$j]->getThreadCount().'</td>
+				<td class="align-center">'. $farr[$j]->getMessageCount() .'</td>
 				<td>'.  date(_('Y-m-d H:i'),$farr[$j]->getMostRecentDate()) .'</td></tr>';
 		}
 	}

@@ -56,7 +56,7 @@ function forum_header($params) {
 			$params['title'] = _('Forum: ') . db_result($result,0,'summary');
 			$HTML->header($params);
 
-			echo '<table><tr><td valign="top">';
+			echo '<table><tr><td class="top">';
 			$user = user_get_object(db_result($result,0,'submitted_by'));
 			$group = group_get_object($params['group']);
 			if (!$group || !is_object($group) || $group->isError()) {

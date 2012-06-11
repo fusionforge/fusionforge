@@ -5,7 +5,7 @@
  * Copyright 1999/2000, Sourceforge.net Tim Perdue
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -247,7 +247,7 @@ if ($add_cat && $group_project_id) {
 	    pm_header(array ('title'=>$title));
 		?>
 		<p />
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post" />
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 		<input type="hidden" name="update_cat" value="y" />
 		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
 		<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
@@ -314,7 +314,7 @@ if ($add_cat && $group_project_id) {
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="update_pg" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
-	<table border="0">
+	<table>
 	<tr>
 		<td><strong><?php echo _('Subproject Name').utils_requiredField() ?>:</strong><br />
 			<input type="text" name="project_name" value="<?php echo $pg->getName() ?>" />
@@ -339,7 +339,7 @@ if ($add_cat && $group_project_id) {
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td colspan="2">
 			<input type="submit" name="submit" value="<?php echo _('Update') ?>" />
 		</td>
 	</tr>

@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,7 +33,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
        	function show_news_item($row,$i,$approved,$selectable) {
 	        global $HTML;
 
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td width="20%">';
+		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>';
        		if ($selectable) {
        			echo '<input type="checkbox" '
        			     .'name="news_id[]" value="'
@@ -44,7 +45,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
        		<a href="'.getStringFromServer('PHP_SELF').'?approve=1&amp;id='.$row['id'].'">'.$row['summary'].'</a>
        		</td>
 
-       		<td width="35%">'
+       		<td class="onethirdwidth">'
 		.util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name'].' ('.$row['unix_group_name'].')')
        		.'</td>
        		</tr>'

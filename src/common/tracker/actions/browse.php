@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 Roland Mas
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -384,7 +384,7 @@ if (db_numrows($res)>0) {
 	</td></tr></table>
 	</form>';
 	?>
-		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+		<script type="text/javascript">/* <![CDATA[ */
 		$('#query_id').change(function() {
 			location.href = '<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id=' ?>'+$('#query_id').val();
 		});
