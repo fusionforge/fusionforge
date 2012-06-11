@@ -67,7 +67,7 @@ if (getStringFromRequest('set_roadmap')) {
 	$roadmap_list = getArrayFromRequest('roadmap_list');
 
 	if (! $roadmap_name) {
-		$error_msg .= _("Can't create or rename roadmap: name is empty");
+		$error_msg .= _("Can't create or rename roadmap")._(': ')._('name is empty');
 	}
 	else {
 		$roadmap = new Roadmap($group, $roadmap_id);
@@ -190,7 +190,7 @@ if ($set_roadmap_failed ||
 	?>
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;admin_roadmap=1' ?>" method="post">
 	<?php
-	echo '<p>'._('Name: ') . '<input type="text" name="roadmap_name" value="'.$roadmap->getName().'" size="40" /></p>';
+	echo '<p>'._('Name'). _(': ') . '<input type="text" name="roadmap_name" value="'.$roadmap->getName().'" size="40" /></p>';
 
 	if ($roadmap_id) {
 		echo '<input type="hidden" name="roadmap_id" value="'.$roadmap_id.'" />';

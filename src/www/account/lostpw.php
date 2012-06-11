@@ -8,6 +8,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -85,7 +86,7 @@ echo '<p>' . _('Clicking "Send Lost PW Hash" below will email a URL to the email
 
 <form action="<?php echo util_make_url('/account/lostpw.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/> <p>
-<?php echo _('Login name:'); ?>
+<?php echo _('Login name')._(':'); ?>
 <br />
 <input type="text" name="loginname" />
 <br />

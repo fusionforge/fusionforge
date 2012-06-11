@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -183,7 +184,7 @@ if ($group_id && $atid) {
 			$error_msg .= _('Unable to create ArtifactCanned Object');
 		} else {
 			if (!$acr->delete()) {
-				$error_msg .= sprintf(_('Error: %s'), $acr->getErrorMessage());
+				$error_msg .= _('Error') . _(': ') . $acr->getErrorMessage();
 				$acr->clearError();
 			} else {
 				$feedback .= _('Canned Response Deleted');

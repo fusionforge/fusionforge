@@ -68,7 +68,7 @@ function forum_header($params) {
 				<strong>'._('Summary').':</strong>'.
 				util_make_link('/forum/forum.php?forum_id='.db_result($result, 0, 'forum_id').'&amp;group_id='.$group_id,
 						db_result($result, 0, 'summary')).'<br/>
-				<strong>'._('Project').':</strong>'.
+				<strong>'._('Project')._(': ').'</strong>'.
 				util_make_link_g($group->getUnixName(),db_result($result, 0, 'group_id'),$group->getPublicName()).'<br />
 				</p>
 				';
