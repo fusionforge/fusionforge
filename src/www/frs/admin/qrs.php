@@ -75,10 +75,7 @@ if (getStringFromRequest('submit')) {
 		$warning_msg .= _('Must define a release name.');
 	} else 	if (!$package_id) {
 		$warning_msg .= _('Must select a package.');
-	} else 	if (!$type_id || $type_id == "100") {
-		$warning_msg .= _('Must select a file type.');
-	} else 	if (!$processor_id || $processor_id == "100")  {
-		$warning_msg .= _('Must select a processor type.');
+
 	} else {
 
 		//
@@ -227,7 +224,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<strong><?php echo _('File Type') ?>:<?php echo utils_requiredField();?></strong>
+			<strong><?php echo _('File Type') ?>:</strong>
 		</td>
 		<td>
 <?php
@@ -237,7 +234,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<strong><?php echo _('Processor Type') ?>:<?php echo utils_requiredField();?></strong>
+			<strong><?php echo _('Processor Type') ?>:</strong>
 		</td>
 		<td>
 <?php

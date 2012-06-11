@@ -137,7 +137,7 @@ function frs_show_filetype_popup ($name='type_id', $checked_val="xzxz") {
 		$FRS_FILETYPE_RES=db_query_params('SELECT * FROM frs_filetype ORDER BY type_id',
 			array());
 	}
-	return html_build_select_box($FRS_FILETYPE_RES, $name, $checked_val, true, _('Must Choose One'));
+	return html_build_select_box($FRS_FILETYPE_RES, $name, $checked_val, false);
 }
 
 /*
@@ -153,7 +153,7 @@ function frs_show_processor_popup($name='processor_id', $checked_val="xzxz") {
 		$FRS_PROCESSOR_RES=db_query_params ('SELECT * FROM frs_processor ORDER BY processor_id',
 			array());
 	}
-	return html_build_select_box ($FRS_PROCESSOR_RES,$name,$checked_val,true,_('Must Choose One'));
+	return html_build_select_box ($FRS_PROCESSOR_RES, $name, $checked_val, false);
 }
 
 /*
