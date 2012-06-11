@@ -456,9 +456,61 @@ function util_make_links($data='') {
 	if(empty($data)) {
 		return $data;
 	}
-	$lines = explode("\n", $data);
+	$withPattern = 0;
+	for ($i = 0; $i < 5; $i++) {
+		$randPattern = rand(10000, 30000);
+		if (! preg_match("/$randPattern/", $data)) {
+			$withPattern = 1;
+			break;
+		}
+	}
+	if ($withPattern) {
+/*
+		while(preg_match('/<a [^>]*>[^<]*<\/a>/i', $data, $part)) {
+			$mem[] = $part[0];
+			$data = preg_replace('/<a [^>]*>[^<]*<\/a>/i', $randPattern, $data, 1);
+		}
+*/
+		$mem = array();
+		while(preg_match('/<a [^>]*>.*<\/a>/siU', $data, $part)) {
+			$mem[] = $part[0];
+			$data = preg_replace('/<a [^>]*>.*<\/a>/siU', $randPattern, $data, 1);
+		}
+		while(preg_match('/<img [^>]*\/>/siU', $data, $part)) {
+			$mem[] = $part[0];
+			$data = preg_replace('/<img [^>]*\/>/siU', $randPattern, $data, 1);
+		}
+		$data = str_replace('&gt;', "\1", $data);
+		$data = preg_replace("#([ \t]|^)www\.#i"," http://www.",$data);
+		$data = preg_replace("#([[:alnum:]]+)://([^[:space:]<\1]*)([[:alnum:]\#?/&=])#i", "<a href=\"\\1://\\2\\3\" target=\"_new\">\\1://\\2\\3</a>", $data);
+		$data = preg_replace("#([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]<\1]*)([[:alnum:]-]))#i", "\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>", $data);
+		$data = str_replace("\1", '&gt;', $data);
+		for ($i = 0; $i < count($mem); $i++) {
+			$data = preg_replace("/$randPattern/", $mem[$i], $data, 1);
+		}
+		return($data);
+	}
+
+	$lines = split("\n",$data);
 	$newText = "";
 	while ( list ($key, $line) = each ($lines)) {
+		// Do not scan lines if they already have hyperlinks.
+		// Avoid problem with text written with an WYSIWYG HTML editor.
+		if (eregi('<a ([^>]*)>.*</a>', $line, $linePart)) {
+			if (eregi('href="[^"]*"', $linePart[1])) {
+				$newText .= $line;
+				continue;
+			}
+		}
+
+		// Skip </img> tag also
+		if (eregi('<img ([^>]*)/>', $line, $linePart)) {
+			if (eregi('href="[^"]*"', $linePart[1])) {
+				$newText .= $line;
+				continue;
+			}
+		}
+
 		// When we come here, we usually have form input
 		// encoded in entities. Our aim is to NOT include
 		// angle brackets in the URL

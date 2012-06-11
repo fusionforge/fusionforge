@@ -69,6 +69,27 @@ class Utils_Tests extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * test the util_make_links() function.
+	 */
+	public function testUtilMakeLinks()
+	{
+		$this->assertEquals(
+			'a <a href="http://fusionforge.org/" target="_new">http://fusionforge.org/</a> b',
+			util_make_links('a http://fusionforge.org/ b')
+		);
+
+		$this->assertEquals(
+			'a <a href="https://fusionforge.org/" target="_new">https://fusionforge.org/</a> b',
+			util_make_links('a https://fusionforge.org/ b')
+		);
+
+		$this->assertEquals(
+			'a <img src="http://ff.org/i.png" /> b',
+			util_make_links('a <img src="http://ff.org/i.png" /> b')
+		);
+	}
+
+	/**
 	 * test the human_readable_bytes() function.
 	 */
 	public function testHumanReadableBytes()
