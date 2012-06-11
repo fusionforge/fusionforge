@@ -5431,6 +5431,7 @@ tests/scripts/phpunit.sh -text
 tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
 tests/scripts/start_vm -text
 tests/scripts/stop_vm -text
+tests/unit/common/minijsonTest.php -text
 tests/unit/config/ConfigTest.php -text
 tests/unit/utils/DbUtilsTest.php -text
 tests/unit/utils/HtmlPurifierTest.php -text

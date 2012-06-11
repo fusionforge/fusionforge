@@ -2,7 +2,7 @@
 /*-
  * Small test for the minijson encoder/decoder routines
  *
- * Copyright © 2011
+ * Copyright © 2011, 2012
  *	Thorsten Glaser <mirabilos@evolvis.org>
  * All rights reserved.
  *
@@ -29,7 +29,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
 {
 	/****************************************************************/
 	/* $s_orig [parse] print_r->$s_printr [encode] $s_ecompact or $s_epadded */
-	/* $s_e* [decode] print_r ->$s_printr */
+	/* $s_e* [decode] print_r ->$s_printrs (due to Object key sorting) */
 
 	var $s_orig = '[
     "JSON Test Pattern pass1",
@@ -127,8 +127,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
             [quote] => "
             [backslash] => \\
             [controls] => 
-
-	
+	
             [slash] => / & /
             [alpha] => abcdefghijklmnopqrstuvwyz
             [ALPHA] => ABCDEFGHIJKLMNOPQRSTUVWYZ
@@ -176,8 +175,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
             [jsontext] => {"object with 1 member":["array with 1 element"]}
             [quotes] => &#34; " %22 0x22 034 &#x22;
             [/\\"쫾몾ꮘﳞ볚
-
-	`1~!@#$%^&*()_+-=[]{}|;:\',./<>?] => A key can be any string
+	`1~!@#$%^&*()_+-=[]{}|;:\',./<>?] => A key can be any string
         )
 
     [9] => 0.5
@@ -194,7 +192,109 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
 )
 ';
 
-	var $s_ecompact = '["JSON Test Pattern pass1",{"object with 1 member":["array with 1 element"]},[],[],-42,true,false,null,{"integer":1234567890,"real":-9.87654321E+3,"e":1.23456789E-13,"E":1.23456789E+34,"":2.3456789012E+76,"zero":0,"one":1,"space":" ","quote":"\\"","backslash":"\\\\","controls":"\\b\\f\\n\\r\\t","slash":"/ & /","alpha":"abcdefghijklmnopqrstuvwyz","ALPHA":"ABCDEFGHIJKLMNOPQRSTUVWYZ","digit":"0123456789","0123456789":"digit","special":"`1~!@#$%^&*()_+-={\':[,]}|;.</>?","hex":"ģ䕧覫췯ꯍ","true":true,"false":false,"null":null,"array":[],"object":[],"address":"50 St. James Street","url":"http://www.JSON.org/","comment":"// /* <!-- --","# -- --> */":" "," s p a c e d ":[1,2,3,4,5,6,7],"compact":[1,2,3,4,5,6,7],"jsontext":"{\\"object with 1 member\\":[\\"array with 1 element\\"]}","quotes":"&#34; \\" %22 0x22 034 &#x22;","/\\\\\\"쫾몾ꮘﳞ볚\\b\\f\\n\\r\\t`1~!@#$%^&*()_+-=[]{}|;:\',./<>?":"A key can be any string"},5.0E-1,9.86E+1,9.944E+1,1066,1.0E+1,1.0,1.0E-1,1.0,2.0,2.0,"rosebud"]';
+	var $s_printrs = 'Array
+(
+    [0] => JSON Test Pattern pass1
+    [1] => Array
+        (
+            [object with 1 member] => Array
+                (
+                    [0] => array with 1 element
+                )
+
+        )
+
+    [2] => Array
+        (
+        )
+
+    [3] => Array
+        (
+        )
+
+    [4] => -42
+    [5] => 1
+    [6] => 
+    [7] => 
+    [8] => Array
+        (
+            [] => 2.3456789012E+76
+            [ s p a c e d ] => Array
+                (
+                    [0] => 1
+                    [1] => 2
+                    [2] => 3
+                    [3] => 4
+                    [4] => 5
+                    [5] => 6
+                    [6] => 7
+                )
+
+            [# -- --> */] =>  
+            [/\\"쫾몾ꮘﳞ볚
+	`1~!@#$%^&*()_+-=[]{}|;:\',./<>?] => A key can be any string
+            [0123456789] => digit
+            [ALPHA] => ABCDEFGHIJKLMNOPQRSTUVWYZ
+            [E] => 1.23456789E+34
+            [address] => 50 St. James Street
+            [alpha] => abcdefghijklmnopqrstuvwyz
+            [array] => Array
+                (
+                )
+
+            [backslash] => \\
+            [comment] => // /* <!-- --
+            [compact] => Array
+                (
+                    [0] => 1
+                    [1] => 2
+                    [2] => 3
+                    [3] => 4
+                    [4] => 5
+                    [5] => 6
+                    [6] => 7
+                )
+
+            [controls] => 
+	
+            [digit] => 0123456789
+            [e] => 1.23456789E-13
+            [false] => 
+            [hex] => ģ䕧覫췯ꯍ
+            [integer] => 1234567890
+            [jsontext] => {"object with 1 member":["array with 1 element"]}
+            [null] => 
+            [object] => Array
+                (
+                )
+
+            [one] => 1
+            [quote] => "
+            [quotes] => &#34; " %22 0x22 034 &#x22;
+            [real] => -9876.54321
+            [slash] => / & /
+            [space] =>  
+            [special] => `1~!@#$%^&*()_+-={\':[,]}|;.</>?
+            [true] => 1
+            [url] => http://www.JSON.org/
+            [zero] => 0
+        )
+
+    [9] => 0.5
+    [10] => 98.6
+    [11] => 99.44
+    [12] => 1066
+    [13] => 10
+    [14] => 1
+    [15] => 0.1
+    [16] => 1
+    [17] => 2
+    [18] => 2
+    [19] => rosebud
+)
+';
+
+	var $s_ecompact = '["JSON Test Pattern pass1",{"object with 1 member":["array with 1 element"]},[],[],-42,true,false,null,{"":2.3456789012E+76," s p a c e d ":[1,2,3,4,5,6,7],"# -- --> */":" ","/\\\\\\"쫾몾ꮘﳞ볚\\b\\f\\n\\r\\t`1~!@#$%^&*()_+-=[]{}|;:\',./<>?":"A key can be any string","0123456789":"digit","ALPHA":"ABCDEFGHIJKLMNOPQRSTUVWYZ","E":1.23456789E+34,"address":"50 St. James Street","alpha":"abcdefghijklmnopqrstuvwyz","array":[],"backslash":"\\\\","comment":"// /* <!-- --","compact":[1,2,3,4,5,6,7],"controls":"\\b\\f\\n\\r\\t","digit":"0123456789","e":1.23456789E-13,"false":false,"hex":"ģ䕧覫췯ꯍ","integer":1234567890,"jsontext":"{\\"object with 1 member\\":[\\"array with 1 element\\"]}","null":null,"object":[],"one":1,"quote":"\\"","quotes":"&#34; \\" %22 0x22 034 &#x22;","real":-9.87654321E+3,"slash":"/ & /","space":" ","special":"`1~!@#$%^&*()_+-={\':[,]}|;.</>?","true":true,"url":"http://www.JSON.org/","zero":0},5.0E-1,9.86E+1,9.944E+1,1066,1.0E+1,1.0,1.0E-1,1.0,2.0,2.0,"rosebud"]';
 	var $s_epadded = '[
   "JSON Test Pattern pass1",
   {
@@ -213,37 +313,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
   false,
   null,
   {
-    "integer": 1234567890,
-    "real": -9.87654321E+3,
-    "e": 1.23456789E-13,
-    "E": 1.23456789E+34,
     "": 2.3456789012E+76,
-    "zero": 0,
-    "one": 1,
-    "space": " ",
-    "quote": "\\"",
-    "backslash": "\\\\",
-    "controls": "\\b\\f\\n\\r\\t",
-    "slash": "/ & /",
-    "alpha": "abcdefghijklmnopqrstuvwyz",
-    "ALPHA": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
-    "digit": "0123456789",
-    "0123456789": "digit",
-    "special": "`1~!@#$%^&*()_+-={\':[,]}|;.</>?",
-    "hex": "ģ䕧覫췯ꯍ",
-    "true": true,
-    "false": false,
-    "null": null,
-    "array": [
-
-    ],
-    "object": [
-
-    ],
-    "address": "50 St. James Street",
-    "url": "http://www.JSON.org/",
-    "comment": "// /* <!-- --",
-    "# -- --> */": " ",
     " s p a c e d ": [
       1,
       2,
@@ -253,6 +323,18 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
       6,
       7
     ],
+    "# -- --> */": " ",
+    "/\\\\\\"쫾몾ꮘﳞ볚\\b\\f\\n\\r\\t`1~!@#$%^&*()_+-=[]{}|;:\',./<>?": "A key can be any string",
+    "0123456789": "digit",
+    "ALPHA": "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+    "E": 1.23456789E+34,
+    "address": "50 St. James Street",
+    "alpha": "abcdefghijklmnopqrstuvwyz",
+    "array": [
+
+    ],
+    "backslash": "\\\\",
+    "comment": "// /* <!-- --",
     "compact": [
       1,
       2,
@@ -262,9 +344,27 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
       6,
       7
     ],
+    "controls": "\\b\\f\\n\\r\\t",
+    "digit": "0123456789",
+    "e": 1.23456789E-13,
+    "false": false,
+    "hex": "ģ䕧覫췯ꯍ",
+    "integer": 1234567890,
     "jsontext": "{\\"object with 1 member\\":[\\"array with 1 element\\"]}",
+    "null": null,
+    "object": [
+
+    ],
+    "one": 1,
+    "quote": "\\"",
     "quotes": "&#34; \\" %22 0x22 034 &#x22;",
-    "/\\\\\\"쫾몾ꮘﳞ볚\\b\\f\\n\\r\\t`1~!@#$%^&*()_+-=[]{}|;:\',./<>?": "A key can be any string"
+    "real": -9.87654321E+3,
+    "slash": "/ & /",
+    "space": " ",
+    "special": "`1~!@#$%^&*()_+-={\':[,]}|;.</>?",
+    "true": true,
+    "url": "http://www.JSON.org/",
+    "zero": 0
   },
   5.0E-1,
   9.86E+1,
@@ -299,7 +399,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
 		$this->assertEquals('array', gettype($reparsed), "FAIL reparse-compact-basic");
 
 		$printrd = print_r($reparsed, true);
-		$this->assertEquals($this->s_printr, $printrd, "reparsed-compact");
+		$this->assertEquals($this->s_printrs, $printrd, "reparsed-compact");
 
 		$encoded = minijson_encode($parsed);
 		$this->assertEquals($this->s_epadded, $encoded, "encode-padded");
@@ -309,6 +409,6 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
 		$this->assertEquals('array', gettype($reparsed), "FAIL reparse-padded-basic");
 
 		$printrd = print_r($reparsed, true);
-		$this->assertEquals($this->s_printr, $printrd, "reparsed-padded");
+		$this->assertEquals($this->s_printrs, $printrd, "reparsed-padded");
 	}
 }
