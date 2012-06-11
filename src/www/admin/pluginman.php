@@ -6,6 +6,7 @@
  * Copyright 2010 FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,6 +28,8 @@
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
+
+session_require_global_perm('forge_admin');
 
 // Skip non compatible plugins.
 $plugins_disabled = array('webcalendar', 'scmccase');
