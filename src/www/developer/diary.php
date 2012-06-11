@@ -25,6 +25,10 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/vote_function.php';
 
+if (!forge_get_config('use_diary')) {
+	exit_disabled('home');
+}
+
 $diary_user = getIntFromRequest('diary_user');
 if ($diary_user) {
 	$diary_id = getIntFromRequest('diary_id');

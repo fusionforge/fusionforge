@@ -24,6 +24,10 @@
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
+if (!forge_get_config('use_diary')) {
+	exit_disabled('home');
+}
+
 if (!session_loggedin()) {
 
 	exit_not_logged_in();
