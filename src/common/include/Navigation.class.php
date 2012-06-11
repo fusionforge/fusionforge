@@ -413,13 +413,15 @@ class Navigation extends Error {
 			$TABS_TITLES[]=_('Home Page');
 			*/
 
-			// Project Activity tab
-			$menu['titles'][] = _('Activity');
-			$menu['tooltips'][] = _('Last activities per category.');
-			$menu['urls'][] = util_make_uri('/activity/?group_id=' . $group_id);
-			$menu['adminurls'][] = false;
-			if ($toptab == "activity") {
-				$selected = (count($menu['urls'])-1);
+			// Project Activity
+			if ($project->usesActivity()) {
+				$menu['titles'][] = _('Activity');
+				$menu['tooltips'][] = _('Last activities per category.');
+				$menu['urls'][] = util_make_uri('/activity/?group_id=' . $group_id);
+				$menu['adminurls'][] = false;
+				if ($toptab == "activity") {
+					$selected = (count($menu['urls'])-1);
+				}
 			}
 
 			// Forums

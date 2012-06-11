@@ -5,9 +5,8 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
- * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -452,7 +451,7 @@ class Group extends Error {
 	function update(&$user, $group_name, $homepage, $short_description, $use_mail, $use_survey, $use_forum,
 		$use_pm, $use_pm_depend_box, $use_scm, $use_news, $use_docman,
 		$new_doc_address, $send_all_docs, $logo_image_id,
-		$use_ftp, $use_tracker, $use_frs, $use_stats, $tags, $is_public) {
+		$use_ftp, $use_tracker, $use_frs, $use_stats, $tags, $use_activity, $is_public) {
 
 		$perm =& $this->getPermission();
 
@@ -519,6 +518,9 @@ class Group extends Error {
 		if (!$use_stats) {
 			$use_stats = 0;
 		}
+		if (!$use_activity) {
+			$use_activity = 0;
+		}
 		if (!$send_all_docs) {
 			$send_all_docs = 0;
 		}
@@ -553,7 +555,8 @@ class Group extends Error {
 				use_tracker=$14,
 				use_frs=$15,
 				use_stats=$16
-			WHERE group_id=$17',
+				use_stats=$17
+			WHERE group_id=$18',
 				       array(htmlspecialchars($group_name),
 					     $homepage,
 					     htmlspecialchars($short_description),
@@ -570,6 +573,7 @@ class Group extends Error {
 					     $use_tracker,
 					     $use_frs,
 					     $use_stats,
+						 $use_activity,
 					     $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
@@ -1085,6 +1089,19 @@ class Group extends Error {
 	function usesNews() {
 		if (forge_get_config('use_news')) {
 			return $this->data_array['use_news'];
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * usesActivity - whether or not this group has opted to display Project Activities.
+	 *
+	 * @return	boolean	uses_activities.
+	 */
+	function usesActivity() {
+		if (forge_get_config('use_activity')) {
+			return $this->data_array['use_activity'];
 		} else {
 			return false;
 		}

@@ -53,6 +53,7 @@ if (getStringFromRequest('submit')) {
 	$use_tracker = getStringFromRequest('use_tracker');
 	$use_frs = getStringFromRequest('use_frs');
 	$use_stats = getStringFromRequest('use_stats');
+	$use_activity = getStringFromRequest('use_activity');
 	$tags = getStringFromRequest('form_tags');
 	$new_doc_address = getStringFromRequest('new_doc_address');
 	$send_all_docs = getStringFromRequest('send_all_docs');
@@ -78,6 +79,7 @@ if (getStringFromRequest('submit')) {
 		$use_frs,
 		$use_stats,
 		$tags,
+		$use_activity,
 		$group->isPublic()
 	);
 
@@ -139,6 +141,19 @@ function c($v) {
 
 <table>
 <?php
+if(forge_get_config('use_activity')) {
+?>
+<tr>
+<td>
+<input type="checkbox" name="use_activity" value="1" <?php echo c($group->usesActivity()); ?> />
+</td>
+<td>
+<strong><?php echo _('Use Project Activity') ?></strong>
+</td>
+</tr>
+<?php
+}
+
 if(forge_get_config('use_forum')) {
 ?>
 <tr>

@@ -64,6 +64,7 @@ if (getStringFromRequest('submit')) {
 	$use_tracker = getStringFromRequest('use_tracker');
 	$use_frs = getStringFromRequest('use_frs');
 	$use_stats = getStringFromRequest('use_stats');
+	$use_activity = getStringFromRequest('use_activity');
 	$tags = getStringFromRequest('form_tags');
 	$addTags = getArrayFromRequest('addTags');
 	$new_doc_address = getStringFromRequest('new_doc_address');
@@ -95,6 +96,7 @@ if (getStringFromRequest('submit')) {
 		$use_frs,
 		$use_stats,
 		$tags,
+		$use_activity,
 		0
 	);
 
@@ -218,6 +220,12 @@ if(forge_get_config('use_mail')) {
 if(forge_get_config('use_survey')) {
 ?>
 <input type="hidden" name="use_survey" value="<?php echo ($group->usesSurvey() ? '1' : '0'); ?>" />
+<?php
+}
+
+if(forge_get_config('use_activity')) {
+?>
+<input type="hidden" name="use_activity" value="<?php echo ($group->usesActivity() ? '1' : '0'); ?>" />
 <?php
 }
 

@@ -82,6 +82,10 @@ if (!$group || !is_object($group)) {
 	exit_no_group();
 } elseif ($group->isError()) {
 	exit_error($group->getErrorMessage(), 'home');
+} elseif (!forge_get_config('use_activity')) {
+	exit_disabled();
+} elseif (!$group->usesActivity()) {
+	exit_project_disabled();
 }
 
 site_project_header(array('title'=>_('Activity'), 'group'=>$group_id, 'toptab'=>'activity'));

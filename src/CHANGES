@@ -10,6 +10,8 @@ FusionForge-5.3:
 * webanalytics: new plugin to add support for piwik or google analytics tool (TrivialDev)
 * User: account ssh key management: rewrite backend, add more informations such as
         fingerprint, deploy flag, easy delete (TrivialDev)
+* Allow project to disable the Project Activity (Alcatel-Lucent)
+>>>>>>> 068042b... Implement feature: Allow project to disable the Project Activity
 
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)
