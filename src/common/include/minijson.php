@@ -2,7 +2,7 @@
 /**
  * Minimal complete JSON generator and parser for FusionForge
  *
- * Copyright © 2010, 2011
+ * Copyright © 2010, 2011, 2012
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * All rights reserved.
  *
@@ -188,6 +188,7 @@ function minijson_encode($x, $ri="") {
 		$rs = "{";
 		if ($ri !== false)
 			$rs .= "\n";
+		sort($k, SORT_STRING);
 		foreach ($k as $v) {
 			if ($first)
 				$first = false;
@@ -626,5 +627,3 @@ function minijson_decode_number(&$j, &$p, &$ov) {
 	$ov = (float)$s;
 	return true;
 }
-
-?>
