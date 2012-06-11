@@ -63,14 +63,16 @@ class CompactPreviewPlugin extends Plugin {
 	
 	function javascript_file (&$params) {
 		// The userTooltip.js script is used by the compact preview feature (see content_negociated_user_home)
-		use_javascript('/scripts/jquery/jquery.js');
+		html_use_jquery();
 		// provides support for the popup for compact preview
 		use_javascript('/plugins/'.$this->name.'/scripts/oslcTooltip.js');
 	}
+
 	function javascript (&$params) {
 		// make sure jquery won't conflict with prototype
 		$params['return'] = 'jQuery.noConflict();';
 	}
+
 	function cssfile (&$params) {
 		use_stylesheet('/plugins/'.$this->name.'/css/oslcTooltipStyle.css');
 	}
@@ -97,7 +99,6 @@ class CompactPreviewPlugin extends Plugin {
 		
 		$user_obj = user_get_object_by_name($username);
 
-		
 		$user_real_name = $user_obj->getRealName();
 		$user_id = $user_obj->getID();
 		
@@ -106,8 +107,8 @@ class CompactPreviewPlugin extends Plugin {
 						<title>User: '. $user_real_name .' (Identifier: '. $user_id .')</title>
 						</head>
 						<body>';
-		$compact = true;
-		$html .= user_personal_information($user_obj, $compact, $title);
+
+		$html .= user_personal_information($user_obj, true, $title);
 		$html .= '</body>
 						</html>';
 		
