@@ -69,7 +69,7 @@ if (getStringFromRequest('submit')) {
 	$mail_va = getStringFromRequest('mail_va');
 	$remember_user = getStringFromRequest('remember_user');
 	$use_ratings = getStringFromRequest('use_ratings');
-	$use_tooltips = (getStringFromRequest('use_tooltips')) ? getStringFromRequest('use_tooltips') : 0;
+	$use_tooltips = getIntFromRequest('use_tooltips');
 
 /*
 //needs security audit
