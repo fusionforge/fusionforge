@@ -29,7 +29,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
-require_once $gfwww.'frs/include/frs_utils.php';
+require_once $gfcommon.'frs/include/frs_utils.php';
+
 
 $group_id = getIntFromRequest('group_id');
 $package_id = getIntFromRequest('package_id');

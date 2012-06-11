@@ -27,6 +27,7 @@ $no_gz_buffer=true;
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'frs/include/frs_utils.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
