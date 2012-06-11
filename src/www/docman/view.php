@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
@@ -44,6 +44,9 @@ $g = group_get_object($group_id);
 if (!$g || !is_object($g)) {
 	exit_no_group();
 } elseif ($g->isError()) {
+	if ($g->isPermissionDeniedError()) {
+		exit_permission_denied();
+	}
 	exit_error($g->getErrorMessage(), 'docman');
 }
 
