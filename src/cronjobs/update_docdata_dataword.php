@@ -6,6 +6,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -35,7 +36,7 @@ $p = new Parsedata();
 $timestarttrait = microtime_float();
 // documents list
 $resarr = array();
-$result = db_query_params('SELECT doc_data.docid, doc_data.group_id, doc_data.filename, doc_data.title, doc_data.filename, doc_data.description, doc_data.filetype from doc_data, groups where doc_data.group_id = groups.group_id and groups.force_docman_reindex = $1',
+$result = db_query_params('SELECT doc_data.docid, doc_data.group_id, doc_data.filename, doc_data.title, doc_data.description, doc_data.filetype from doc_data, groups where doc_data.group_id = groups.group_id and groups.force_docman_reindex = $1',
 			   array('1'));
 if (!$result) {
 	die(db_error());
@@ -52,13 +53,10 @@ $errorFlag = 0;
 foreach ($resarr as $item) {
 	$compt++;
 	$timestart = microtime_float();
-	$res = db_query_params('SELECT data from doc_data where docid = $1', array($item["docid"]));
-	if (!$res) {
-		die("unable to get data: ".db_error());
-	}
-	$data = base64_decode(db_result($res, 0, 'data'));
-	$lenin = strlen($data);
-	$res = $p->get_parse_data($data, $item["title"], $item["description"], $item["filetype"]);
+	$d = new Document($item['group_id'], $item['doc_id']);
+	$data = $d->getFileData();
+	$lenin = $d->getFileSize();
+	$res = $p->get_parse_data($data, $item['title'], $item['description'], $item['filetype'], $item['filename']);
 	$len = strlen($res);
 	$resUp = db_query_params('UPDATE doc_data SET data_words=$1 WHERE docid=$2',
 			 array ($res, $item["docid"]));
