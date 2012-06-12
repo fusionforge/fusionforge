@@ -1,1 +1,1 @@
-ALTER TABLE docman DROP COLUMN data;
+ALTER TABLE doc_data DROP COLUMN data;

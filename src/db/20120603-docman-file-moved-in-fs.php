@@ -71,6 +71,4 @@ while($row = db_fetch_array($res)) {
 
 $ds->commit();
 
-db_query_params ('UPDATE doc_data SET data=$1', array(''));
-
 echo "SUCCESS\n";
