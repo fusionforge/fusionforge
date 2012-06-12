@@ -45,28 +45,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
         $project = $pm->getProject($group_id);
 	$unix_group_name = $project->getUnixName();
 $HTML=$GLOBALS['HTML'];
-	echo '
-	<table summary="Latest file releases" class="width-100p100">
-		<tr class="table-header">
-			<th class="align-left" scope="col">
-				'._('Package').'
-			</th>
-			<th scope="col">
-				'._('Version').'
-			</th>
-			<th scope="col">
-				'._('Date').'
-			</th>
-			<th scope="col">
-				'._('Notes').'
-			</th>
-			<th scope="col">
-				'._('Monitor').'
-			</th>
-			<th scope="col">
-				'._('Download').'
-			</th>
-		</tr>';
+
 
 		//
 		//  Members of projects can see all packages
@@ -91,9 +70,31 @@ $HTML=$GLOBALS['HTML'];
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No releases
-			echo '<tr><td colspan="6"><strong>'._('This Project Has Not Released Any Files').'</strong></td></tr>';
+			echo '<div class="warning">'._('This Project Has Not Released Any Files').'</div>';
 
 		} else {
+			echo '
+				<table summary="Latest file releases" class="width-100p100">
+					<tr class="table-header">
+						<th class="align-left" scope="col">
+							'._('Package').'
+						</th>
+						<th scope="col">
+							'._('Version').'
+						</th>
+						<th scope="col">
+							'._('Date').'
+						</th>
+						<th scope="col">
+							'._('Notes').'
+						</th>
+						<th scope="col">
+							'._('Monitor').'
+						</th>
+						<th scope="col">
+							'._('Download').'
+						</th>
+					</tr>';
 			/*
 				This query actually contains ALL releases of all packages
 				We will test each row and make sure the package has changed before printing the row
