@@ -182,7 +182,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->click("//a[contains(@href,'".ROOT."/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "newTracker");
-		$this->type("description", "This is a new tracker");
+		$this->type("//input[@name='description']", "This is a new tracker");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Tracker created successfully"));

@@ -162,7 +162,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->click("link=Trackers Admin");
 			$this->waitForPageToLoad("30000");
 			$this->type("name", "Bugs");
-			$this->type("description", "Tracker for bug reports");
+			$this->type("//input[@name='description']", "Tracker for bug reports");
 			$this->click("post_changes");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
@@ -183,19 +183,19 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->click("link=Trackers Admin");
 			$this->waitForPageToLoad("30000");
 			$this->type("name", "Support Requests");
-			$this->type("description", "Tracker for support requests");
+			$this->type("//input[@name='description']", "Tracker for support requests");
 			$this->click("post_changes");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
 
 			$this->type("name", "Patches");
-			$this->type("description", "Proposed changes to code");
+			$this->type("//input[@name='description']", "Proposed changes to code");
 			$this->click("post_changes");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
 
 			$this->type("name", "Feature Requests");
-			$this->type("description", "New features that people want");
+			$this->type("//input[@name='description']", "New features that people want");
 			$this->click("post_changes");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
@@ -211,13 +211,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->click("link=Add a Subproject");
 			$this->waitForPageToLoad("30000");
 			$this->type("project_name", "To Do");
-			$this->type("description", "Things we have to do");
+			$this->type("//input[@name='description']", "Things we have to do");
 			$this->click("submit");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Subproject Inserted"));
 
 			$this->type("project_name", "Next Release");
-			$this->type("description", "Items for our next release");
+			$this->type("//input[@name='description']", "Items for our next release");
 			$this->click("submit");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Subproject Inserted"));
@@ -234,19 +234,19 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->click("link=Add forum");
 			$this->waitForPageToLoad("30000");
 			$this->type("forum_name", "Open-Discussion");
-			$this->type("description", "General Discussion");
+			$this->type("//input[@name='description']", "General Discussion");
 			$this->click("submit");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Forum added successfully"));
 
 			$this->type("forum_name", "Help");
-			$this->type("description", "Get Public Help");
+			$this->type("//input[@name='description']", "Get Public Help");
 			$this->click("submit");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Forum added successfully"));
 
 			$this->type("forum_name", "Developers-Discussion");
-			$this->type("description", "Project Developer Discussion");
+			$this->type("//input[@name='description']", "Project Developer Discussion");
 			$this->click("submit");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Forum added successfully"));
@@ -349,7 +349,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->clickAndWait("link=Register Project");
 		$this->type("full_name", $name);
 		$this->type("purpose", "This is a simple description for $name");
-		$this->type("description", "This is the public description for $name.");
+		$this->type("//textarea[@name='description']", "This is the public description for $name.");
 		$this->type("unix_name", $unix_name);
 		$this->click("//input[@name='scm' and @value='$scm']");
 

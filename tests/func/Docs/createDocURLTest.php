@@ -60,7 +60,7 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->click("buttonDoc");
 		$this->type("title", "My document");
-		$this->type("description", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
+		$this->type("//input[@name='description']", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->click("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", "http://buildbot.fusionforge.org/");
 		$this->clickAndWait("submit");

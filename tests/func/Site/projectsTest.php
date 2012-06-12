@@ -59,7 +59,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->type("full_name", "ProjectA");
 		$this->type("purpose", "This is a simple description for ProjectA");
-		$this->type("description", "This is the public description for ProjectA.");
+		$this->type("//textarea[@name='description']", "This is the public description for ProjectA.");
 		$this->type("unix_name", "projecta");
 		$this->click("//input[@name='scm' and @value='scmsvn']");
 		$this->assertTrue($this->isElementPresent("//select[@name='built_from_template']"));
@@ -91,7 +91,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->type("full_name", "Project ' & B");
 		$this->type("purpose", "This is a & été simple description for project B");
-		$this->type("description", "This is & été the public description for project B.");
+		$this->type("//textarea[@name='description']", "This is & été the public description for project B.");
 		$this->type("unix_name", "projectb");
 		$this->click("//input[@name='scm' and @value='scmsvn']");
 		$this->click("submit");
@@ -156,7 +156,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("link=Trackers Admin");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "Local tracker for UNIXNAME");
-		$this->type("description", "Tracker for PUBLICNAME (UNIXNAME)");
+		$this->type("//input[@name='description']", "Tracker for PUBLICNAME (UNIXNAME)");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Tracker created successfully"));
@@ -196,7 +196,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isElementPresent("//select[@name='built_from_template']"));
 		$this->type("full_name", "ProjectA");
 		$this->type("purpose", "This is a simple description for ProjectA");
-		$this->type("description", "This is the public description for ProjectA.");
+		$this->type("//textarea[@name='description']", "This is the public description for ProjectA.");
 		$this->type("unix_name", "projecta");
 		$this->select("//select[@name='built_from_template']", "label=Start from empty project");
 		$this->click("//input[@name='scm' and @value='scmsvn']");

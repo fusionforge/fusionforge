@@ -137,7 +137,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->click("link=Add Mailing List");
 		$this->waitForPageToLoad("30000");
 		$this->type("list_name", "toto");
-		$this->type("description", "Toto mailing list");
+		$this->type("//input[@name='description']", "Toto mailing list");
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("List Added"));
@@ -148,7 +148,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->click("link=Add forum");
 		$this->waitForPageToLoad("30000");
 		$this->type("forum_name", "toto");
-		$this->type("description", "Toto forum");
+		$this->type("//input[@name='description']", "Toto forum");
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Error: a mailing list with the same email address already exists"));
