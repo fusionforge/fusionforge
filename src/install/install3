@@ -282,7 +282,10 @@ EOF
 	su $susufix $gforge_user -c "psql $gforge_db < $fusionforge_src_dir/db/gforge.sql" >> /tmp/gforge-import.log
 
 	msg green " * Running php db/upgrade-db.php"
-        php $fusionforge_src_dir/db/upgrade-db.php >> /tmp/gforge-upgrade.log
+        if ! php $fusionforge_src_dir/db/upgrade-db.php >> /tmp/gforge-upgrade.log ; then
+		msg red "upgrade-db.php failed."
+		return 1
+	fi
 
 
 	if [ -z "$FFORGE_ADMIN_USER" ]
