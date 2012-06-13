@@ -1,10 +1,10 @@
-fusionforge (5.2~rc1-2) UNRELEASED; urgency=low
+fusionforge (5.2~rc1-2) unstable; urgency=low
 
   * Use more of the system-provided Jquery.
   * Reinstate code running the Mediawiki SQL initialisation code from the
     package's postinst (closes: #677373).
 
- -- Roland Mas <lolando@debian.org>  Wed, 13 Jun 2012 17:55:48 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 13 Jun 2012 18:58:30 +0200
 
 fusionforge (5.2~rc1-1) unstable; urgency=low
 
