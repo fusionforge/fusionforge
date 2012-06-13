@@ -4,7 +4,7 @@ fusionforge (5.2~rc1-2) UNRELEASED; urgency=low
   * Reinstate code running the Mediawiki SQL initialisation code from the
     package's postinst.
 
- -- Roland Mas <lolando@debian.org>  Wed, 06 Jun 2012 17:49:37 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 13 Jun 2012 17:50:07 +0200
 
 fusionforge (5.2~rc1-1) unstable; urgency=low
 
@@ -47,6 +47,13 @@ fusionforge (5.1.50+svn15228-1) experimental; urgency=low
   * New upstream SVN snapshot from the 5.2 stabilisation branch.
 
  -- Roland Mas <lolando@debian.org>  Tue, 27 Mar 2012 20:57:28 +0200
+
+fusionforge (5.1.1-9) UNRELEASED; urgency=low
+
+  * Reinstate code running the Mediawiki SQL initialisation code from the
+    package's postinst.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 06 Jun 2012 17:49:37 +0200
 
 fusionforge (5.1.1-8) unstable; urgency=low
 
