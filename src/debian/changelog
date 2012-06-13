@@ -1,3 +1,9 @@
+fusionforge (5.2~rc1-2+) UNRELEASED; urgency=low
+
+  * 
+
+ -- Roland Mas <lolando@debian.org>  Wed, 13 Jun 2012 19:05:22 +0200
+
 fusionforge (5.2~rc1-2) unstable; urgency=low
 
   * Use more of the system-provided Jquery.
