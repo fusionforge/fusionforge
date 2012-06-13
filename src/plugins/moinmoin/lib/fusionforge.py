@@ -19,6 +19,10 @@ import urllib
 from MoinMoin import user
 from MoinMoin.auth import _PHPsessionParser, BaseAuth
 
+perm_name = "plugin_moinmoin_access"
+perm_map = { "Admins":  3,
+             "Writers": 2,
+             "Readers": 1 }
 
 class FusionForgeError(Exception):
     def __init__(self,  msg):
@@ -119,28 +123,36 @@ class FusionForgeSessionAuth(BaseAuth):
         conn = self.fflink._conn
         cur = conn.cursor()
 
-        # Check whether this is a public project
-        # anomymous users and registered users that are not part of the project
+        # Get perm setting for anonymous users
 
-        val = cur.execute("""SELECT prs.perm_val
-                             FROM pfo_role_setting prs, groups g
-                             WHERE prs.role_id=1
-                               AND prs.section_name='project_read'
-                               AND prs.ref_id = g.group_id
-                               AND g.unix_group_name='%s'""" % project_name)
+        query = """SELECT prs.perm_val
+                        FROM pfo_role_setting prs, groups
+                       WHERE prs.role_id = 1
+                         AND prs.section_name = '%s'
+                         AND groups.unix_group_name = '%s'
+                         AND prs.ref_id = groups.group_id""" \
+                    % (perm_name, project_name)
+        val = cur.execute(query)
         val = cur.fetchone()
-        is_public = val != None and val[0] != 0
-        cur.close ()
+        if val:
+            anon_perm = [k for k, v in perm_map.iteritems() if v == val[0]]
+            if anon_perm:
+                anon_perm = anon_perm[0]
+        else:
+            anon_perm = None
+
+        rights_dict = \
+                      { 'Admins':  'read,write,delete,revert,admin',
+                        'Writers': 'read,write,delete,revert',
+                        'Readers': 'read' }
 
         rights = [ 'FFSiteAdminsGroup:read,write,delete,revert,admin' ] \
                + map (lambda (g, right):
                         'FFProject_%s_%sGroup:%s' % (project_name, g, right),
-                      { 'Admins':  'read,write,delete,revert,admin',
-                        'Writers': 'read,write,delete,revert',
-                        'Readers': 'read' }.iteritems ())
+                        rights_dict.iteritems ())
 
-        if is_public:
-            rights.append ('All:read')
+        if anon_perm and rights_dict.has_key(anon_perm):
+            rights.append ('All:' + rights_dict[anon_perm])
         else:
             rights.append ('All:')
 
@@ -148,7 +160,7 @@ class FusionForgeSessionAuth(BaseAuth):
                        (rights,))
         return string.join (rights)
 
-    def get_permission_entries (self, project_name, section, condition, user_name = None):
+    def get_permission_entries (self, project_name, perm, user_name = None):
         conn = self.fflink._conn
         cur = conn.cursor()
 
@@ -156,18 +168,23 @@ class FusionForgeSessionAuth(BaseAuth):
             ucond = "u.user_name = '%s'" % (user_name)
         else:
             ucond = "TRUE"
+
+        # ??? query should also include user if permission is granted to
+        # authenticated non-members.
+
         query = """SELECT DISTINCT(u.user_name)
                         FROM users u, pfo_user_role pur, pfo_role pr,
                              pfo_role_setting prs, groups
                        WHERE %s
-                         AND u.user_id = pur.user_id
-                         AND pur.role_id = pr.role_id
-                         AND pr.role_id = prs.role_id
+                         AND ((u.user_id = pur.user_id
+                               AND pur.role_id = pr.role_id
+                               AND pr.role_id = prs.role_id)
+                              OR prs.role_id = 2)
                          AND prs.section_name = '%s'
                          AND groups.unix_group_name = '%s'
-                         AND prs.perm_val %s
+                         AND prs.perm_val = %d
                          AND prs.ref_id = groups.group_id""" \
-                    % (ucond, section, project_name, condition)
+                    % (ucond, perm_name, project_name, perm_map[perm])
         logging.debug ("get_perm_entries: " + query)
         cur.execute(query)
         result = []
@@ -176,9 +193,9 @@ class FusionForgeSessionAuth(BaseAuth):
         logging.debug (" -> %s " % (result,))
         return result
 
-    def check_permission (self, project_name, section, condition, user_name):
+    def check_permission (self, project_name, perm, user_name):
         return len(self.get_permission_entries \
-                     (project_name, section, condition, user_name)) > 0
+                     (project_name, perm, user_name)) > 0
 
     def request(self, request, user_obj, **kw):
         cookies = kw.get('cookie')

@@ -30,10 +30,6 @@ class FFLazyGroup(LazyGroup):
 
 class FFLazyGroups(LazyGroupsBackend):
 
-    permdict = { "Admins":  ("plugin_moinmoin_access", "= 3"),
-                 "Writers": ("plugin_moinmoin_access", "= 2"),
-                 "Readers": ("plugin_moinmoin_access", "= 1") }
-
     def __init__(self, request, ffsa):
         super(FFLazyGroups, self).__init__(request)
 
@@ -89,9 +85,7 @@ class FFLazyGroups(LazyGroupsBackend):
 
         elif scope == "Project":
           try:
-            return self._ffsa.get_permission_entries \
-                     (*((project,) \
-                        + FFLazyGroups.permdict[permission])).__iter__ ()
+            return self._ffsa.get_permission_entries(project,permission).__iter__()
           except:
             return None
 
@@ -128,10 +122,7 @@ class FFLazyGroups(LazyGroupsBackend):
             result = self._username in self._ffsa.admins
 
         elif scope == "Project":
-          result = self._ffsa.check_permission \
-                     (*((project,) \
-                        + FFLazyGroups.permdict[permission] \
-                        + (self._username,)))
+          result = self._ffsa.check_permission (project, permission, self._username)
 
         logging.debug \
           ("FFLazyGroups _group_has_member: %s" % (result,))
