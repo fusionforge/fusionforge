@@ -53,7 +53,11 @@ class DatabaseForge extends DatabasePostgres {
 
 		global $wgDBmwschema;
 		if ($this->schemaExists($wgDBmwschema)) {
-			$safeschema = $this->addIdentifierQuotes($wgDBmwschema);
+			if (method_exists ($this,"addIdentifierQuotes")) {
+				$safeschema = $this->addIdentifierQuotes($wgDBmwschema);
+			} else {
+				$safeschema = $wgDBmwschema;
+			}
 			$this->doQuery("SET search_path TO $safeschema,public");
 		}
 
