@@ -86,6 +86,18 @@ class DatabaseForge extends DatabasePostgres {
 		    $password, $dbName, $failFunction, $flags);
 	}
 
+	function open($server, $user, $password, $dbName) {
+		$v = DatabasePostgres::open($server, $user, $password, $dbName);
+
+		global $wgDBmwschema;
+		if ($this->schemaExists($wgDBmwschema)) {
+			$safeschema = $this->addIdentifierQuotes($wgDBmwschema);
+			$this->doQuery("SET search_path TO $safeschema,public");
+		}
+
+		return $v;
+	}
+
 	function tableName($name, $format='quoted') {
 		switch ($name) {
 		case 'interwiki':
