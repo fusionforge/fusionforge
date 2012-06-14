@@ -1073,6 +1073,19 @@ function normalized_urlprefix () {
 }
 
 /**
+ * Return URL prefix (http:// or https://)
+ *
+ * @return	string	URL prefix
+ */
+function util_url_prefix() {
+	if (forge_get_config('use_ssl')) {
+		return "https://";
+	} else {
+		return "http://";
+	}
+}
+
+/**
  * Construct full URL from a relative path
  * 
  * @param string $path
