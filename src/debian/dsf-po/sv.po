@@ -1,16 +1,16 @@
-# Translation of @PACKAGENAME@ debconf template to Swedish
-# Copyright (C) 2009 Martin Bagge <brother@bsnet.se>
-# This file is distributed under the same license as the @PACKAGENAME@ package.
+# Translation of fusionforge debconf template to Swedish
+# Copyright (C) 2012 Martin Bagge <brother@bsnet.se>
+# This file is distributed under the same license as the fusionforge package.
 #
 # Martin Ågren <martin.agren@gmail.com>, 2008.
-# Martin Bagge <brother@bsnet.se>, 2009
+# Martin Bagge <brother@bsnet.se>, 2009, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGENAME@_4.6.99+svn6580-1_sv\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
 "POT-Creation-Date: 2012-05-29 18:26+0200\n"
-"PO-Revision-Date: 2008-07-29 18:44+0200\n"
-"Last-Translator: Martin Ågren <martin.agren@gmail.com>\n"
+"PO-Revision-Date: 2012-06-13 20:58+0100\n"
+"Last-Translator: Martin Bagge / brother <brother@bsnet.se>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Language: Swedish\n"
 "X-Poedit-Country: Sweden\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Type: string
 #. Description
@@ -41,7 +41,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#, fuzzy
 #| msgid "@FORGENAME@/FusionForge system name:"
 msgid "@FORGENAME@ system name:"
 msgstr "@FORGENAME@ systemnamn:"
@@ -64,7 +63,6 @@ msgstr "@FORGENAME@-administratörens lösenord:"
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
 #| msgid ""
 #| "The @FORGENAME@ administrator account will have full privileges on the "
 #| "system. It will be used to approve the creation of new projects."
@@ -72,16 +70,15 @@ msgid ""
 "The @FORGENAME@ administrator account will have full privileges on the "
 "forge. It will be used to approve the creation of new projects."
 msgstr ""
-"Administratörskontot för @FORGENAME@ kommer att ha alla rättigheter i "
-"@FORGENAME@-systemet. Det behövs för att godkänna skapandet av projekten."
+"Administratörskontot för @FORGENAME@ kommer att ha maximala rättigheter i "
+"forge-systemet. Det behövs för att godkänna skapandet av nya projekt."
 
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
 #| msgid "Please choose the password for this account."
 msgid "Please choose the password for this forge account."
-msgstr "Mata in lösenordet för detta konto."
+msgstr "Ange lösenordet för det här forge-kontot."
 
 #. Type: password
 #. Description
@@ -99,37 +96,37 @@ msgstr "Mata in lösenordet igen för bekräftelse."
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "install the new version configured by @PACKAGE@"
-msgstr ""
+msgstr "installera den nya versionens inställningar för @PACKAGE@"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "keep the local version currently installed"
-msgstr ""
+msgstr "behåll den lokalt justerade versionen som förnärvarande är installerad"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "show the differences between the versions"
-msgstr ""
+msgstr "visa skillnaderna mellan versionerna"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "show a side-by-side difference between the versions"
-msgstr ""
+msgstr "visa skillnaderna mellan versionerna sida-vid-sida"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "start a new shell to examine the situation"
-msgstr ""
+msgstr "starta ett nytt skal för att undersöka situationen"
 
 #. Type: select
 #. Description
 #: ../dsf-in/db-postgresql.templates:4002
 msgid "What do you want to do about configuration file ${BASENAME}?"
-msgstr ""
+msgstr "Vad vill du göra med inställningsfilen ${BASENAME}?"
 
 #. Type: select
 #. Description
@@ -138,6 +135,8 @@ msgid ""
 "The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
 "is also a configuration file of the postgresql package."
 msgstr ""
+"Inställningsfilen ${FILE} behöver justeras av @PACKAGE@, detta är också "
+"inställningsfilen för postgresql-paketet."
 
 #. Type: boolean
 #. Description
