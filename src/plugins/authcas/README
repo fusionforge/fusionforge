@@ -1,7 +1,14 @@
 fusionforge-plugin-authcas
 --------------------------
 
-This is the external CAS authentication plugin for FusionForge.
+This is the external CAS authentication plugin for FusionForge. It is
+meant to be used in conjunction with the AuthLDAP plugin : CAS
+validates lognames (SSO perceived by the user) while LDAP retrieves
+her attributes.
+
+ATTENTION : if used with DB users (without LDAP), nothing guarantees
+that users logging in through CAS will be owners of the FusionForge
+accounts with the same login. This could leak to account hijacking.
 
 Installation:
 
@@ -20,7 +27,7 @@ session.  Your account will be created the first time you log in
 (which means you can't add someone to a group before his/her first
 login).
 
- -- Roland Mas <lolando@debian.org>, Wed, 23 Feb 2011 15:01:24 +0100
+ -- Olivier Berger <obergix@debian.org>, Thu, 14 Jun 2012 14:17:31 +0200
 
 External requirement:
 
