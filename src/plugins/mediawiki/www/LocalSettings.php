@@ -82,12 +82,12 @@ class DatabaseForge extends DatabasePostgres {
 		    $password, $dbName, $failFunction, $flags);
 	}
 
-	function tableName($name) {
+	function tableName($name, $format='quoted') {
 		switch ($name) {
 		case 'interwiki':
 			return 'public.interwiki';
 		default:
-			return DatabasePostgres::tableName($name);
+			return DatabasePostgres::tableName($name, $format);
 		}
 	}
 }
