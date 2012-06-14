@@ -53,46 +53,43 @@ if (forge_get_config('use_ssl') && !session_issecure()) {
 $plugin->initCAS();
 
 if (phpCAS::isAuthenticated()) {
+
+	$success = false;
+	$cas_username = '';
+
 	if ($plugin->isSufficient()) {
-		$plugin->startSession(phpCAS::getUser());
+
+		$cas_username = phpCAS::getUser();
+		$success = $plugin->startSession($cas_username);
 	}
-	if ($return_to) {
-		validate_return_to($return_to);
-		session_redirect($return_to);
-		//header ("Location: " . util_make_url($return_to));
-		//exit;
-	} else {
-		session_redirect("/my");
-		//header ("Location: " . util_make_url("/my"));
-		//exit;
+
+	if($success) {
+
+		if ($return_to) {
+
+			validate_return_to($return_to);
+			session_redirect($return_to);
+			//header ("Location: " . util_make_url($return_to));                                                                                                                                                                                                                    
+			//exit;                                                                                                                                                                                                                                                                 
+		} else {
+
+			session_redirect("/my");
+			//header ("Location: " . util_make_url("/my"));                                                                                                                                                                                                                         
+			//exit;                                                                                                                                                                                                                                                                 
+		}
 	}
+
+	else {
+		$warning_msg .= '<br /><p>'. _('Your account '.$cas_username.' does not exist.').'</p>';
+	}
+
 } else {
+
 	if ($login) {		     // The user just clicked the Login button
 		// Let's send them to CAS
 
-		$return_url = util_make_url('/plugins/authcas/post-login.php?postcas=true&return_to='.htmlspecialchars($return_to));
-
-		$GLOBALS['PHPCAS_CLIENT']->setURL($return_url);
-
 		phpCAS::forceAuthentication();
 
-	} elseif ($postcas) {		// The user is coming back from CAS
-		if (phpCAS::isAuthenticated()) {
-			if ($plugin->isSufficient()) {
-				$plugin->startSession(phpCAS::getUser());
-			}
-			if ($return_to) {
-				validate_return_to($return_to);
-
-				session_redirect($return_to);
-				//header ("Location: " . util_make_url($return_to));
-				//exit;
-			} else {
-				session_redirect("/my");
-				//header ("Location: " . util_make_url("/my"));
-				//exit;
-			}
-		}
 	}
 }
 
