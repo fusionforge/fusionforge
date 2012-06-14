@@ -1477,6 +1477,11 @@ class Group extends Error {
 	 * @return	string	homepage URL.
 	 */
 	function getHomePage() {
+		if (!preg_match("/^[a-zA-Z][a-zA-Z0-9+.-]*:/",
+		    $this->data_array['homepage'])) {
+			$this->data_array['homepage'] = util_url_prefix() .
+			    $this->data_array['homepage'];
+		}
 		return $this->data_array['homepage'];
 	}
 

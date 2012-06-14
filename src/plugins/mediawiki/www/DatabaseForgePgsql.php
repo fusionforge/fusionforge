@@ -21,23 +21,75 @@
  */
 
 require_once("$IP/includes/db/DatabasePostgres.php");
-class DatabaseForge extends DataBasePostgres{
-	function DatabaseForge($server=false, $user=false, $password=false,
-			       $dbName=false, $failFunction=false, $flags=0) {
+class DatabaseForge extends DatabasePostgres {
+	function __construct($server=false, $user=false, $password=false,
+	    $dbName=false, $failFunction=false, $flags=0) {
 		global $wgDBtype;
 
 		$wgDBtype = "postgres";
-		return DatabasePostgres::DatabasePostgres($server, $user,
-							  $password, $dbName, $failFunction, $flags);
+		return parent::__construct($server, $user,
+		    $password, $dbName, $failFunction, $flags);
 	}
 
-	function tableName($name) {
+	function fieldInfo($table, $field) {
+		switch ($table) {
+		case 'interwiki':
+			break;
+		default:
+			return DatabasePostgres::fieldInfo($table, $field);
+		}
+
+		global $wgDBmwschema;
+
+		$save_wgDBmwschema = $wgDBmwschema;
+		$wgDBmwschema = 'public';
+		$v = DatabasePostgres::fieldInfo($table, $field);
+		$wgDBmwschema = $save_wgDBmwschema;
+		return $v;
+	}
+
+	function open($server, $user, $password, $dbName) {
+		$v = DatabasePostgres::open($server, $user, $password, $dbName);
+
+		global $wgDBmwschema;
+		if ($this->schemaExists($wgDBmwschema)) {
+			if (method_exists ($this,"addIdentifierQuotes")) {
+				$safeschema = $this->addIdentifierQuotes($wgDBmwschema);
+			} else {
+				$safeschema = $wgDBmwschema;
+			}
+			$this->doQuery("SET search_path TO $safeschema,public");
+		}
+
+		return $v;
+	}
+
+	function query($sql, $fname='', $tempIgnore=false) {
+		/* ugh! */
+		$chk = "ALTER TABLE interwiki ";
+		$csz = strlen($chk);
+		if (substr($sql, 0, $csz) == $chk) {
+			$sql = "ALTER TABLE public.interwiki " .
+			    substr($sql, $csz);
+		}
+		return DatabasePostgres::query($sql, $fname,$tempIgnore);
+	}
+
+	function tableName($name, $format='quoted') {
+		global $wgDBmwschema;
+
 		switch ($name) {
 		case 'interwiki':
-			return 'public.plugin_mediawiki_interwiki';
+			$v = 'plugin_mediawiki_interwiki';
+			break;
 		default:
-			return DatabasePostgres::tableName($name);
+			return DatabasePostgres::tableName($name, $format);
 		}
+
+		if ($wgDBmwschema != 'public') {
+			$v = 'public.' . $v;
+		}
+		return $v;
 	}
 }
 

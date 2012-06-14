@@ -4,13 +4,21 @@ fusionforge (5.2.50~-1) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Mon, 26 Mar 2012 20:10:13 +0200
 
-fusionforge (5.2~rc1-2) UNRELEASED; urgency=low
+fusionforge (5.2~rc1-2+) UNRELEASED; urgency=low
+
+  * Updated Debconf translations for Swedish (thanks to Martin Bagge)
+    (closes: #677411).
+  * Fixes to Mediawiki plugin (including for interwiki).
+
+ -- Roland Mas <lolando@debian.org>  Thu, 14 Jun 2012 16:05:37 +0200
+
+fusionforge (5.2~rc1-2) unstable; urgency=low
 
   * Use more of the system-provided Jquery.
   * Reinstate code running the Mediawiki SQL initialisation code from the
     package's postinst (closes: #677373).
 
- -- Roland Mas <lolando@debian.org>  Wed, 13 Jun 2012 17:55:48 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 13 Jun 2012 18:58:30 +0200
 
 fusionforge (5.2~rc1-1) unstable; urgency=low
 

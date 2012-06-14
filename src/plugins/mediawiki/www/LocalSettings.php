@@ -23,6 +23,10 @@
  *  Mediawiki plugin of FusionForge.
  */
 
+/* C style inclusion guard. Yes, I know. Don’t comment on it. */
+if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
+$fusionforge_plugin_mediawiki_LocalSettings_included = true;
+
 require_once dirname(__FILE__) . '/../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/RBACEngine.class.php';
@@ -63,6 +67,8 @@ if (!is_dir($project_dir)) {
 $path = array( $IP, "$IP/includes", "$IP/languages" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
 
+require_once( "$IP/includes/AutoLoader.php" );
+require_once( "$IP/includes/Defines.php" );
 require_once( "$IP/includes/DefaultSettings.php" );
 
 if ( $wgCommandLineMode ) {
@@ -70,6 +76,7 @@ if ( $wgCommandLineMode ) {
                 die( "This script must be run from the command line\n" );
         }
 }
+
 $g = group_get_object_by_name($fusionforgeproject) ;
 $wgSitename         = $g->getPublicName() . " Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
@@ -191,7 +198,6 @@ function FusionForgeMWAuth( $user, &$result ) {
                 $user->mId=$mwu->getID();
                 $user->loadFromId() ;
 
-		$user->loadGroups() ;
 		$current_groups = $user->getGroups() ;
 
 		$available_roles = RBACEngine::getInstance()->getAvailableRoles() ;
@@ -398,3 +404,6 @@ if (is_file("$project_dir/ProjectSettings.php")) {
 // mode: php
 // c-file-style: "bsd"
 // End:
+
+/* !isset($fusionforge_plugin_mediawiki_LocalSettings_included) */
+}
