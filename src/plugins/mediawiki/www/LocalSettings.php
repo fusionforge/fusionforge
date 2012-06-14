@@ -70,6 +70,27 @@ if ( $wgCommandLineMode ) {
                 die( "This script must be run from the command line\n" );
         }
 }
+
+class DatabaseForge extends DatabasePostgres {
+	function DatabaseForge($server=false, $user=false, $password=false,
+	    $dbName=false, $failFunction=false, $flags=0) {
+		global $wgDBtype;
+
+		$wgDBtype = "postgres";
+		return DatabasePostgres::DatabasePostgres($server, $user,
+		    $password, $dbName, $failFunction, $flags);
+	}
+
+	function tableName($name) {
+		switch ($name) {
+		case 'interwiki':
+			return 'public.interwiki';
+		default:
+			return DatabasePostgres::tableName($name);
+		}
+	}
+}
+
 $g = group_get_object_by_name($fusionforgeproject) ;
 $wgSitename         = $g->getPublicName() . " Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
