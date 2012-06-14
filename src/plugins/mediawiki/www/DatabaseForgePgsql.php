@@ -76,7 +76,8 @@ class DatabaseForge extends DatabasePostgres {
 
 		switch ($name) {
 		case 'interwiki':
-			$v = 'interwiki';
+			$v = 'plugin_mediawiki_interwiki';
+			break;
 		default:
 			return DatabasePostgres::tableName($name, $format);
 		}
