@@ -1027,22 +1027,32 @@ function normalized_urlprefix() {
 }
 
 /**
+ * Return URL prefix (http:// or https://)
+ *
+ * @return	string	URL prefix
+ */
+function util_url_prefix() {
+	if (forge_get_config('use_ssl')) {
+		return "https://";
+	} else {
+		return "http://";
+	}
+}
+
+/**
  * Construct the base URL http[s]://forge_name[:port]
  *
  * @return	string base URL
  */
 function util_make_base_url() {
-	if (forge_get_config('use_ssl')) {
-		$url = "https://" ;
-	} else {
-		$url = "http://" ;
-	}
+	$url = util_url_prefix();
 	$url .= forge_get_config('web_host') ;
 	if (forge_get_config('https_port') && (forge_get_config('https_port') != 443)) {
 		$url .= ":".forge_get_config('https_port') ;
 	}
 	return $url;
 }
+
 /**
  * Construct full URL from a relative path
  *
