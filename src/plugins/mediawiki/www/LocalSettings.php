@@ -77,12 +77,12 @@ if ( $wgCommandLineMode ) {
 }
 
 class DatabaseForge extends DatabasePostgres {
-	function DatabaseForge($server=false, $user=false, $password=false,
+	function __construct($server=false, $user=false, $password=false,
 	    $dbName=false, $failFunction=false, $flags=0) {
 		global $wgDBtype;
 
 		$wgDBtype = "postgres";
-		return DatabasePostgres::DatabasePostgres($server, $user,
+		return parent::__construct($server, $user,
 		    $password, $dbName, $failFunction, $flags);
 	}
 
