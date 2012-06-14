@@ -86,6 +86,23 @@ class DatabaseForge extends DatabasePostgres {
 		    $password, $dbName, $failFunction, $flags);
 	}
 
+	function fieldInfo($table, $field) {
+		switch ($table) {
+		case 'interwiki':
+			break;
+		default:
+			return DatabasePostgres::fieldInfo($table, $field);
+		}
+
+		global $wgDBmwschema;
+
+		$save_wgDBmwschema = $wgDBmwschema;
+		$wgDBmwschema = 'public';
+		$v = DatabasePostgres::fieldInfo($table, $field);
+		$wgDBmwschema = $save_wgDBmwschema;
+		return $v;
+	}
+
 	function open($server, $user, $password, $dbName) {
 		$v = DatabasePostgres::open($server, $user, $password, $dbName);
 
@@ -98,13 +115,31 @@ class DatabaseForge extends DatabasePostgres {
 		return $v;
 	}
 
+	function query($sql, $fname='', $tempIgnore=false) {
+		/* ugh! */
+		$chk = "ALTER TABLE interwiki ";
+		$csz = strlen($chk);
+		if (substr($sql, 0, $csz) == $chk) {
+			$sql = "ALTER TABLE public.interwiki " .
+			    substr($sql, $csz);
+		}
+		return DatabasePostgres::query($sql, $fname,$tempIgnore);
+	}
+
 	function tableName($name, $format='quoted') {
+		global $wgDBmwschema;
+
 		switch ($name) {
 		case 'interwiki':
-			return 'public.interwiki';
+			$v = 'interwiki';
 		default:
 			return DatabasePostgres::tableName($name, $format);
 		}
+
+		if ($wgDBmwschema != 'public') {
+			$v = 'public.' . $v;
+		}
+		return $v;
 	}
 }
 
