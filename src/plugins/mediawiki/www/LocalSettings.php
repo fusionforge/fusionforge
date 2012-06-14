@@ -265,7 +265,6 @@ function FusionForgeMWAuth( $user, &$result ) {
                 $user->mId=$mwu->getID();
                 $user->loadFromId() ;
 
-		$user->loadGroups() ;
 		$current_groups = $user->getGroups() ;
 
 		$available_roles = RBACEngine::getInstance()->getAvailableRoles() ;
