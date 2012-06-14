@@ -56,7 +56,7 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		phpCAS::client(forge_get_config('cas_version', $this->name),
 			       forge_get_config('cas_server', $this->name),
 			       intval(forge_get_config('cas_port', $this->name)),
-			       '');
+			       forge_get_config('cas_context', $this->name));
 		if (forge_get_config('validate_server_certificate', $this->name)) {
 			// TODO
 		} else {
@@ -171,6 +171,7 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		forge_define_config_item ('cas_server', $this->name, 'cas.example.com');
 		forge_define_config_item ('cas_port', $this->name, 443);
 		forge_define_config_item ('cas_version', $this->name, '2.0');
+		forge_define_config_item ('cas_context', $this->name, '/cas');
 
 		forge_define_config_item('validate_server_certificate', $this->name, 'no');
 		forge_set_config_item_bool('validate_server_certificate', $this->name);
