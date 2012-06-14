@@ -23,6 +23,10 @@
  *  Mediawiki plugin of FusionForge.
  */
 
+/* C style inclusion guard. Yes, I know. Don’t comment on it. */
+if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
+$fusionforge_plugin_mediawiki_LocalSettings_included = true;
+
 require_once dirname(__FILE__) . '/../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/RBACEngine.class.php';
@@ -420,3 +424,6 @@ if (is_file("$project_dir/ProjectSettings.php")) {
 // mode: php
 // c-file-style: "bsd"
 // End:
+
+/* !isset($fusionforge_plugin_mediawiki_LocalSettings_included) */
+}
