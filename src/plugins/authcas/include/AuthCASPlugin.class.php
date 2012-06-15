@@ -53,6 +53,9 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 			return;
 		}
 
+		// Uncomment this to activate phpCAS logs in /tmp
+		//phpCAS::setDebug();
+
 		phpCAS::client(forge_get_config('cas_version', $this->name),
 			       forge_get_config('cas_server', $this->name),
 			       intval(forge_get_config('cas_port', $this->name)),
