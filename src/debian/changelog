@@ -1,3 +1,9 @@
+fusionforge (5.2~rc1-4+) UNRELEASED; urgency=low
+
+  * 
+
+ -- Roland Mas <lolando@debian.org>  Fri, 15 Jun 2012 14:53:25 +0200
+
 fusionforge (5.2~rc1-4) unstable; urgency=low
 
   * One more fix to Mediawiki upgrades (closes: #677599).
