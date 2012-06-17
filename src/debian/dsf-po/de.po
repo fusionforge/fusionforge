@@ -1,13 +1,13 @@
 # Translation of @PACKAGENAME@ debconf templates to German
-# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2007-2009.
+# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2007-2009,2012.
 # This file is distributed under the same license as the @PACKAGENAME@ package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGENAME@ 4.8.2-1\n"
+"Project-Id-Version: @PACKAGENAME@ 5.2~rc1-2\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
 "POT-Creation-Date: 2012-05-29 18:26+0200\n"
-"PO-Revision-Date: 2009-12-27 09:30+0100\n"
+"PO-Revision-Date: 2012-06-15 20:24+0200\n"
 "Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -35,10 +35,8 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#, fuzzy
-#| msgid "@FORGENAME@/FusionForge system name:"
 msgid "@FORGENAME@ system name:"
-msgstr "@FORGENAME@/FusionForge-Systemname:"
+msgstr "@FORGENAME@-Systemname:"
 
 #. Type: string
 #. Description
@@ -56,28 +54,23 @@ msgstr ""
 msgid "@FORGENAME@ administrator password:"
 msgstr "@FORGENAME@-Administrator-Passwort:"
 
+# FIXME: Translation of forge???
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
-#| msgid ""
-#| "The @FORGENAME@ administrator account will have full privileges on the "
-#| "system. It will be used to approve the creation of new projects."
 msgid ""
 "The @FORGENAME@ administrator account will have full privileges on the "
 "forge. It will be used to approve the creation of new projects."
 msgstr ""
-"Das @FORGENAME@-Administrator-Konto wird alle Privilegien auf dem "
-"@FORGENAME@-System haben. Es wird benötigt, um die Erstellung von neuen "
+"Das @FORGENAME@-Administrator-Konto wird alle Privilegien auf der "
+"Forge haben. Es wird benötigt, um die Erstellung von neuen "
 "Projekten zu bewilligen."
 
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
-#| msgid "Please choose the password for this account."
 msgid "Please choose the password for this forge account."
-msgstr "Bitte wählen Sie das Passwort für dieses Konto."
+msgstr "Bitte wählen Sie das Passwort für dieses Forge-Konto."
 
 #. Type: password
 #. Description
@@ -95,37 +88,37 @@ msgstr "Bitte geben Sie zur Bestätigung das Passwort erneut ein."
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "install the new version configured by @PACKAGE@"
-msgstr ""
+msgstr "die neue durch @PACKAGE@ konfigurierte Version installieren"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "keep the local version currently installed"
-msgstr ""
+msgstr "die derzeit installierte lokale Version beibehalten"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "show the differences between the versions"
-msgstr ""
+msgstr "die Unterschiede zwischen den Versionen anzeigen"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "show a side-by-side difference between the versions"
-msgstr ""
+msgstr "zeige die Unterscheide zwischen den Versionen Seite-an-Seite"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "start a new shell to examine the situation"
-msgstr ""
+msgstr "öffne eine neue Shell, um die Situation zu untersuchen"
 
 #. Type: select
 #. Description
 #: ../dsf-in/db-postgresql.templates:4002
 msgid "What do you want to do about configuration file ${BASENAME}?"
-msgstr ""
+msgstr "Was soll mit der Konfigurationsdatei ${BASENAME} passieren?"
 
 #. Type: select
 #. Description
@@ -134,6 +127,8 @@ msgid ""
 "The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
 "is also a configuration file of the postgresql package."
 msgstr ""
+"Die Konfigurationsdatei ${FILE} muss durch @PACKAGE@ verändert werden, wobei "
+"sie auch eine Konfigurationsdatei des Pakets postgresql ist."
 
 #. Type: boolean
 #. Description
@@ -172,7 +167,7 @@ msgstr ""
 "Selbst falls Sie eine einfache DNS-Installation verwenden, können Sie "
 "dennoch separate Maschinen für die Projektserver verwenden, es wird nur "
 "angenommen, dass sich alle Webverzeichnisse der Projekte auf dem gleichen "
-"Server mit einem einzelnen Server für SCM befinden."
+"Server mit einem einzelnen Server für das SCM befinden."
 
 #~ msgid "@FORGENAME@ administrator e-mail address:"
 #~ msgstr "E-Mail-Adresse des @FORGENAME@-Administrators:"
