@@ -1,8 +1,9 @@
 fusionforge (5.2~rc1-4+) UNRELEASED; urgency=low
 
-  * 
+  * Updated Debconf translations for Portuguese (thanks to Américo Monteiro)
+    (closes: #677737).
 
- -- Roland Mas <lolando@debian.org>  Fri, 15 Jun 2012 14:53:25 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 17 Jun 2012 11:45:38 +0200
 
 fusionforge (5.2~rc1-4) unstable; urgency=low
 
