@@ -58,7 +58,7 @@ function htpasswd_apr1_md5($plainpasswd) {
     "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
     return "$"."apr1"."$".$salt."$".$tmp;
 }
- 
+
 /**
  * is_utf8($string) - utf-8 detection
  *
@@ -91,11 +91,11 @@ function is_utf8($str) {
 }
 
 /**
- * removeCRLF() - remove any Carriage Return-Line Feed from a string. 
+ * removeCRLF() - remove any Carriage Return-Line Feed from a string.
  * That function is useful to remove the possibility of a CRLF Injection when sending mail
  * All the data that we will send should be passed through that function
  *
- * @param	   string  The string that we want to empty from any CRLF 
+ * @param	   string  The string that we want to empty from any CRLF
  */
 function util_remove_CRLF($str) {
 	return strtr($str, "\015\012", '  ');
@@ -173,7 +173,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	if (!$from) {
 		$from='noreply@'.forge_get_config('web_host');
 	}
-	
+
 
 	$charset = _('UTF-8');
 	if (!$charset) {
@@ -197,7 +197,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 		"\nContent-type: text/$type; charset=$charset".
 		"\n\n".
 		util_convert_body($body, $charset);
-	
+
 	if (!forge_get_config('sendmail_path')){
 		$sys_sendmail_path="/usr/sbin/sendmail";
 	}
@@ -222,7 +222,7 @@ function util_encode_mailaddr($email,$name,$charset) {
 				$name,$charset,"UTF-8")).
 			"?=";
 	}
-	
+
 	return $name." <".$email."> ";
 }
 
@@ -268,7 +268,7 @@ function util_convert_body($str,$charset) {
 	if (!function_exists('mb_convert_encoding') || $charset == 'UTF-8') {
 		return $str;
 	}
-	
+
 	return mb_convert_encoding($str,$charset,"UTF-8");
 }
 
@@ -449,7 +449,7 @@ function util_wrap_find_space($string,$wrap) {
 					if ($code <= 0x7F ||
 					    $code >= 0xC0) {
 						//Here is single byte character
-						//or head of multi byte character  
+						//or head of multi byte character
 						return $wrap;
 					}
 					//Do not break multi byte character
@@ -509,8 +509,8 @@ function util_line_wrap ($text, $wrap = 80, $break = "\n") {
  *
  */
 function util_make_links ($data='') {
-	if(empty($data)) { 
-		return $data; 
+	if(empty($data)) {
+		return $data;
 	}
 	$lines = explode("\n",$data);
 	$newText = "";
@@ -754,14 +754,14 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
 				$headersCellData[] = array($fieldName);
 			}
 		}
-		
+
 		/*  Create the title  */
 		if(strlen($title) > 0) {
 			$titleCellData = array();
 			$titleCellData[] = array($title, 'colspan="'.count($headersCellData).'"');
 			echo $HTML->multiTableRow('', $titleCellData, TRUE);
 		}
-		
+
 		/* Display the headers */
 		if($displayHeaders) {
 			echo $HTML->multiTableRow('', $headersCellData, TRUE);
@@ -836,10 +836,10 @@ function validate_email ($address) {
 */
 function validate_emails ($addresses, $separator=',') {
 	if (strlen($addresses) == 0) return array();
-	
+
 	$emails = explode($separator, $addresses);
 	$ret 	= array();
-	
+
 	if (is_array($emails)) {
 		foreach ($emails as $email) {
 			$email = trim($email);		// This is done so we can validate lists like "a@b.com, c@d.com"
@@ -915,7 +915,7 @@ function valid_hostname ($hostname = "xyz") {
  * @version        1.0
  * @param int       bytes   is the size
  * @param bool     base10  enable base 10 representation, otherwise
- *                 default base 2  is used  
+ *                 default base 2  is used
  * @param int       round   number of fractional digits
  * @param array     labels  strings associated to each 2^10 or
  *                  10^3(base10==true) multiple of base units
@@ -978,12 +978,12 @@ function readfile_chunked($filename, $returnBytes=true) {
     $chunksize = 1*(1024*1024); // 1MB chunks
     $buffer = '';
     $byteCounter = 0;
-    
+
     $handle = fopen($filename, 'rb');
     if ($handle === false) {
         return false;
     }
-    
+
     ob_start () ;
     while (!feof($handle)) {
 	    $buffer = fread($handle, $chunksize);
@@ -1030,7 +1030,7 @@ function util_containts_dot_or_dotdot($dir) {
     if (util_is_dot_or_dotdot($sub_dir))
       return true;
   }
-  
+
   return false;
 }
 
@@ -1059,7 +1059,7 @@ function util_strip_accents($text) {
 
 /**
  * Constructs the forge's URL prefix out of forge_get_config('url_prefix')
- * 
+ *
  * @return string
  */
 function normalized_urlprefix () {
@@ -1067,7 +1067,7 @@ function normalized_urlprefix () {
 	$prefix = preg_replace ("/^\//", "", $prefix) ;
 	$prefix = preg_replace ("/\/$/", "", $prefix) ;
 	$prefix = "/$prefix/" ;
-	if ($prefix == '//') 
+	if ($prefix == '//')
 		$prefix = '/' ;
 	return $prefix ;
 }
@@ -1087,7 +1087,7 @@ function util_url_prefix() {
 
 /**
  * Construct full URL from a relative path
- * 
+ *
  * @param string $path
  * @return string URL
  */
@@ -1111,7 +1111,7 @@ function util_make_url ($path) {
 
 /**
  * Construct proper (relative) URI (prepending prefix)
- * 
+ *
  * @param string $path
  * @return string URI
  */
@@ -1138,7 +1138,7 @@ function util_make_link ($path, $text, $extra_params=false, $absolute=false) {
 
 /**
  * Create an HTML link to a user's profile page
- * 
+ *
  * @param string $username
  * @param int $user_id
  * @param string $text
@@ -1151,7 +1151,7 @@ function util_make_link_u ($username, $user_id,$text) {
 /**
  * Display username with link to a user's profile page
  * and icon face if possible.
- * 
+ *
  * @param string $username
  * @param int $user_id
  * @param string $text
@@ -1179,7 +1179,7 @@ function util_display_user($username, $user_id,$text, $size='xs') {
 
 /**
  * Create URL for user's profile page
- * 
+ *
  * @param string $username
  * @param int $user_id
  * @return string URL
@@ -1205,7 +1205,7 @@ function util_make_link_g ($groupame, $group_id,$text) {
 
 /**
  * Create URL for a project's page
- * 
+ *
  * @param string $groupame
  * @param int $group_id
  * @return string
@@ -1245,7 +1245,7 @@ function check_email_available($group, $email, &$response) {
 			return false;
 		}
 	}
-		
+
 	// Check if a forum with same name already exists
 	$ff = new ForumFactory($group);
 	if (!$ff || !is_object($ff) || $ff->isError()) {
@@ -1262,7 +1262,7 @@ function check_email_available($group, $email, &$response) {
 			}
 		}
 	}
-	
+
 	// Email is available
 	return true;
 }
@@ -1289,7 +1289,7 @@ if (!function_exists('array_replace_recursive')) {
 			    !isset ($result[$k]) || !is_array ($result[$k])) {
 				$result[$k] = $v ;
 			}
-			
+
 			$result[$k] = array_replace_recursive ($result[$k],
 							       $v) ;
 		}
@@ -1562,6 +1562,24 @@ function util_gethref($baseurl=false, $args=array(), $ashtml=true, $sep='&') {
 	}
 	return ($ashtml ? util_html_encode($rv) : $rv);
 }
+
+/**
+ * util_sanitise_multiline_submission() – Convert text to ASCII CR-LF
+ *
+ * @param	string	$text
+ *			input string to sanitise
+ * @return	string
+ *		sanitised string: CR, LF or CR-LF converted to CR-LF
+ */
+function util_sanitise_multiline_submission($text) {
+	/* convert all CR-LF into LF */
+	$text = preg_replace("/\015+\012+/m", "\012", $text);
+	/* convert all CR or LF into CR-LF */
+	$text = preg_replace("/[\012\015]/m", "\015\012", $text);
+
+	return $text;
+}
+
 
 // Local Variables:
 // mode: php
