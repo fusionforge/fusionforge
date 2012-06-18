@@ -114,8 +114,13 @@ foreach ($srclist as $aidx) {
 	/* add a _permalink pseudo-field */
 	$rec['_permalink'] = util_make_url('/tracker/t_follow.php/' . $aid);
 
+	/*
+	 * here would be the place to add more pseudo-elements, like
+	 * a _comments Array, an _extrafields Value, a _files Value…
+	 */
+
 	/* append to list of records to emit */
-	$out[] = $rec;
+	$out[$aid] = $rec;
 }
 
 /* generate output */
