@@ -4828,6 +4828,7 @@ src/utils/manage-apache-config.sh -text svneol=unset#text/x-sh
 src/utils/manage-translations.sh -text svneol=unset#text/x-sh
 src/utils/migrate-to-ini-files.sh -text svneol=unset#text/x-sh
 src/utils/normalize_roles.php -text
+src/utils/one-off-scripts/tracker-massmove.php -text
 src/utils/sync_unix_groups.php -text
 src/utils/underworld-dummy/dns_conf.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/dump_database.pl svneol=native#text/x-perl
