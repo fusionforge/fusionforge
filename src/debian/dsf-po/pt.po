@@ -1,26 +1,29 @@
-# Portuguese translation for @PACKAGE@'s debconf messages
-# Copyright (C) 2007 Ricardo Silva
-# This file is distributed under the same license as the @PACKAGE@ package.
-# Ricardo Silva <ardoric@gmail.com>, 2007-2008.
+# Portuguese translation for fusionforge's debconf messages
+# Copyright (C) 2007 the fusionforge's copyright holder
+# This file is distributed under the same license as the fusionforge package.
 #
+# Ricardo Silva <ardoric@gmail.com>, 2007-2008.
+# Américo Monteiro <a_monteiro@netcabo.pt>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@ 4.6.99+svn6387-1\n"
+"Project-Id-Version: fusionforge 5.2~rc1-2\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
 "POT-Creation-Date: 2012-05-29 18:26+0200\n"
-"PO-Revision-Date: 2010-10-03 21:23+0200\n"
-"Last-Translator: Ricardo Silva <ardoric@gmail.com>\n"
+"PO-Revision-Date: 2012-06-14 20:53+0100\n"
+"Last-Translator: Américo Monteiro <a_monteiro@netcabo.pt>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.4\n"
 
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:2001
 msgid "@FORGENAME@ domain or subdomain name:"
-msgstr "O nome do domínio ou subdomínio do @FORGENAME@:"
+msgstr "O nome do domínio ou subdomínio de @FORGENAME@:"
 
 #. Type: string
 #. Description
@@ -29,14 +32,13 @@ msgid ""
 "Please enter the domain that will host the @FORGENAME@ installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
-"Por favor introduza o domínio que vai conter a instalação do @FORGENAME@. "
+"Por favor introduza o domínio que vai conter a instalação de @FORGENAME@. "
 "Alguns serviços (scm, listas de mail, etc.) terão o seu próprio subdomínio "
 "nesse domínio."
 
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#, fuzzy
 #| msgid "@FORGENAME@ system name:"
 msgid "@FORGENAME@ system name:"
 msgstr "Nome do sistema @FORGENAME@:"
@@ -44,7 +46,6 @@ msgstr "Nome do sistema @FORGENAME@:"
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#, fuzzy
 #| msgid ""
 #| "Please enter the name of the @FORGENAME@ system. It is used in various "
 #| "places throughout the system."
@@ -58,7 +59,6 @@ msgstr ""
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
 #| msgid "@FORGENAME@ administrator password:"
 msgid "@FORGENAME@ administrator password:"
 msgstr "Palavra-passe do administrador do @FORGENAME@:"
@@ -66,7 +66,6 @@ msgstr "Palavra-passe do administrador do @FORGENAME@:"
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
 #| msgid ""
 #| "The @FORGENAME@ administrator account will have full privileges on the "
 #| "system. It will be used to approve the creation of new projects."
@@ -74,16 +73,15 @@ msgid ""
 "The @FORGENAME@ administrator account will have full privileges on the "
 "forge. It will be used to approve the creation of new projects."
 msgstr ""
-"A conta de administrador do @FORGENAME@ terá privilégios totais sobre o "
-"sistema. Será usada para aprovar a criação de novos projectos."
+"A conta de administrador do @FORGENAME@ terá privilégios totais sobre a "
+"forja. Será usada para aprovar a criação de novos projectos."
 
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
 #| msgid "Please choose the password for this account."
 msgid "Please choose the password for this forge account."
-msgstr "Por favor escolha a palavra-passe para esta conta."
+msgstr "Por favor escolha a palavra-passe para esta conta de forja."
 
 #. Type: password
 #. Description
@@ -101,37 +99,37 @@ msgstr "Por favor, reescreva a palavra-passe para confirmação."
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "install the new version configured by @PACKAGE@"
-msgstr ""
+msgstr "instalar a nova versão configurada por @PACKAGE@"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "keep the local version currently installed"
-msgstr ""
+msgstr "manter a versão local actualmente instalada"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "show the differences between the versions"
-msgstr ""
+msgstr "mostrar as diferenças entre as versões"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "show a side-by-side difference between the versions"
-msgstr ""
+msgstr "mostrar as diferenças, lado-a-lado, entre versões"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "start a new shell to examine the situation"
-msgstr ""
+msgstr "iniciar uma nova linha de comandos para examinar a situação"
 
 #. Type: select
 #. Description
 #: ../dsf-in/db-postgresql.templates:4002
 msgid "What do you want to do about configuration file ${BASENAME}?"
-msgstr ""
+msgstr "O que deseja fazer acerca do ficheiro de configuração ${BASENAME}?"
 
 #. Type: select
 #. Description
@@ -140,6 +138,8 @@ msgid ""
 "The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
 "is also a configuration file of the postgresql package."
 msgstr ""
+"O ficheiro de configuração ${FILE} precisa de ser modificado pelo @PACKAGE@, "
+"no entanto este também é um ficheiro de configuração do pacote postgresql."
 
 #. Type: boolean
 #. Description
@@ -147,7 +147,7 @@ msgstr ""
 #. (cvs, svn, etc.)
 #: ../dsf-in/dns-bind9.templates:2001
 msgid "Do you want a simple DNS setup for @FORGENAME@?"
-msgstr "Deseja uma configuração simples de DNS no @FORGENAME@?"
+msgstr "Deseja uma configuração simples de DNS para @FORGENAME@?"
 
 #. Type: boolean
 #. Description

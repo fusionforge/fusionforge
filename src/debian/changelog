@@ -4,11 +4,19 @@ fusionforge (5.2.50~-1) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Mon, 26 Mar 2012 20:10:13 +0200
 
-fusionforge (5.2~rc1-3+) UNRELEASED; urgency=low
+fusionforge (5.2~rc1-4+) UNRELEASED; urgency=low
 
-  * 
+  * Updated Debconf translations for Portuguese (thanks to Américo
+    Monteiro), German (thanks to Helge Kreutzmann) (closes: #677737,
+    #677653).
 
- -- Roland Mas <lolando@debian.org>  Thu, 14 Jun 2012 16:57:04 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 17 Jun 2012 11:47:05 +0200
+
+fusionforge (5.2~rc1-4) unstable; urgency=low
+
+  * One more fix to Mediawiki upgrades (closes: #677599).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 15 Jun 2012 14:48:58 +0200
 
 fusionforge (5.2~rc1-3) unstable; urgency=low
 

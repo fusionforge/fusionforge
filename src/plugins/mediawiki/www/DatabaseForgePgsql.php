@@ -34,6 +34,7 @@ class DatabaseForge extends DatabasePostgres {
 	function fieldInfo($table, $field) {
 		switch ($table) {
 		case 'interwiki':
+			$table = 'plugin_mediawiki_interwiki';
 			break;
 		default:
 			return DatabasePostgres::fieldInfo($table, $field);
@@ -69,7 +70,7 @@ class DatabaseForge extends DatabasePostgres {
 		$chk = "ALTER TABLE interwiki ";
 		$csz = strlen($chk);
 		if (substr($sql, 0, $csz) == $chk) {
-			$sql = "ALTER TABLE public.interwiki " .
+			$sql = "ALTER TABLE public.plugin_mediawiki_interwiki " .
 			    substr($sql, $csz);
 		}
 		return DatabasePostgres::query($sql, $fname,$tempIgnore);
