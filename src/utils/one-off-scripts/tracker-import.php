@@ -1,5 +1,4 @@
 <?php
-die; //broken
 /*-
  * one-off script to import tracker items (limited)
  *
@@ -57,6 +56,7 @@ if (!($trk = util_nat0($argv1))) {
 	usage();
 }
 
+/* read input and ensure it’s a JSON Array or Object */
 $iv = false;
 if (!minijson_decode(file_get_contents('php://stdin'), $iv)) {
 	echo "input is invalid JSON: $iv\n";
@@ -67,6 +67,7 @@ if (!is_array($iv)) {
 	die;
 }
 
+/* validate input elements */
 define('IT_STR', 0);
 define('IT_NUM', 1);
 define('IT_ARR', 2);
@@ -87,9 +88,14 @@ $required_fields = array(
 	array(IT_STR, "summary"),
     );
 
+
 $ic = count($iv);
 echo "$ic tracker items to consider\n";
 
+/*
+ * iterate over all elements in the top-level Array or Object,
+ * ensuring each is a JSON Object and has all required fields
+ */
 foreach ($iv as $k => $v) {
 	if (!is_array($v)) {
 		echo "item $k is not an Object\n";
@@ -102,6 +108,7 @@ foreach ($iv as $k => $v) {
 		}
 		switch ($r[0]) {
 		case IT_STR:
+			/* test for scalar (not Array or Object) Value */
 			if (is_array($v[$r[1]])) {
 				echo "item $k field " . $r[1] .
 				    " is not a scalar!\n";
@@ -109,11 +116,13 @@ foreach ($iv as $k => $v) {
 			}
 			break;
 		case IT_NUM:
+			/* test for scalar (not Array or Object) Value */
 			if (is_array($v[$r[1]])) {
 				echo "item $k field " . $r[1] .
 				    " is not a scalar!\n";
 				die;
 			}
+			/* test Value for integer >= 0 */
 			if (util_nat0($v[$r[1]]) === false) {
 				echo "item $k field " . $r[1] .
 				    " is not a positive-or-zero integer!\n";
@@ -121,6 +130,7 @@ foreach ($iv as $k => $v) {
 			}
 			break;
 		case IT_ARR:
+			/* test Value is a JSON Array or Object */
 			if (!is_array($v[$r[1]])) {
 				echo "item $k field " . $r[1] .
 				    " is not an array!\n";
@@ -128,82 +138,72 @@ foreach ($iv as $k => $v) {
 			}
 			break;
 		default:
+			/* someone made a boo-boo editing this script */
 			echo "internal error: unknown type " . $r[0] .
 			    " for required field: " . $r[1] . "\n";
 			die;
 		}
 	}
 }
-
 echo "syntactically ok\n";
+
+/* begin the import for sure */
 
 session_set_admin();
 $now = time();
 
+/* get the Tracker */
 $at =& artifactType_get_object($trk);
 if (!$at || !is_object($at) || $at->isError()) {
 	echo "cannot get tracker object\n";
 	die;
 }
 
+/* absolute minimum needed for creating tracker items in $at */
 $extra_fields = array();
-foreach ($at->getExtraFields() as $ef) {
-	switch (util_ifsetor($ef['field_type'])) {
-	case ARTIFACT_EXTRAFIELDTYPE_CHECKBOX:
-	case ARTIFACT_EXTRAFIELDTYPE_MULTISELECT:
-		$extra_fields[$ef['extra_field_id']] = array('100');
-		break;
-	case ARTIFACT_EXTRAFIELDTYPE_RADIO:
-	case ARTIFACT_EXTRAFIELDTYPE_SELECT:
-		$extra_fields[$ef['extra_field_id']] = '100';
-		break;
-	case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
-		$extra_fields[$ef['extra_field_id']] = 0;
-		break;
-	case ARTIFACT_EXTRAFIELDTYPE_STATUS:
-		$res = db_query_params('SELECT element_id
-			FROM artifact_extra_field_elements
-			WHERE extra_field_id=$1
-			ORDER BY element_pos ASC, element_id ASC
-			LIMIT 1
-			OFFSET 0',
-		    array($ef['extra_field_id']));
-		$extra_fields[$ef['extra_field_id']] = db_result($res, 0,
-		    'element_id');
-		break;
-	default:
-		$extra_fields[$ef['extra_field_id']] = '';
-		break;
-	}
+if ($at->usesCustomStatuses()) {
+	$i = $at->getCustomStatusField();
+	$res = db_query_params('SELECT element_id
+		FROM artifact_extra_field_elements
+		WHERE extra_field_id=$1
+		ORDER BY element_pos ASC, element_id ASC
+		LIMIT 1 OFFSET 0',
+	    array($i));
+	$extra_fields[$i] = db_result($res, 0, 'element_id');
 }
+
+/* now import the items, one by one */
 
 $i = 0;
 db_begin();
 foreach ($iv as $k => $v) {
 	echo "importing $k (" . ++$i . "/$ic)\n";
+	$importData = array();
+
+	/* get all standard data fields (we use) */
 
 	$summary = $v["summary"];
 	$details = $v["details"];
 	/* assign to Nobody by default */
 	$assigned_to = 100;
 	$priority = $v["priority"];
+	$importData['time'] = (int)$v["open_date"];
 
-	$submitter =& user_get_object_by_name($v["submitted_unixname"]);
-	$submitter = 100;
-	if ($v["submitted_by"] != 100 && ($submitter_u =&
+	/* take over the submitter, but only if they exist */
+	if ($v["submitted_by"] != 100 && ($submitter =&
 	    user_get_object_by_name($v["submitted_unixname"])) &&
-	    is_object($submitter_u) && !($submitter_u->isError())) {
+	    is_object($submitter) && !($submitter->isError())) {
 		/* map the unixname of the submitter to our local user */
-		$submitter = $submitter_u->getID();
+		$importData['user'] = $submitter->getID();
+	} else {
+		/* submitted by Nobody, though we ignore the email */
+		$importData['user'] = 100;
 	}
 
-	$importData = array(
-		'time' => (int)$v["open_date"],
-		'user' => $submitter,
-	    );
-
+	/* prepend the old permalink in front of the details */
 	$details = "Imported from: " . $v["_permalink"] . "\n\n" . $details;
 
+	/* instantiate a new item */
 	$ah = new Artifact($at);
 	if (!$ah || !is_object($ah) || $ah->isError()) {
 		echo "cannot get the object\n";
@@ -211,13 +211,16 @@ foreach ($iv as $k => $v) {
 		die;
 	}
 
+	/* actually create the item */
 	if (!$ah->create($summary, $details, $assigned_to, $priority,
 	    $extra_fields, $importData)) {
 		echo "cannot import: " . $ah->getErrorMessage() . "\n";
 		db_rollback();
 		die;
 	}
-	$ah->addHistory("imported-mtime", $v["last_modified_date"], $now);
+	/* log the import action */
+	$ah->addHistory("last-modified-before-import", date('Y-m-d H:i',
+	    $v["last_modified_date"]), $now);
 }
 db_commit();
 echo "ok\n";
