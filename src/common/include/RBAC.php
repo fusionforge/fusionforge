@@ -665,6 +665,10 @@ abstract class BaseRole extends Error {
 			case 'submit':
 				return (($value & 8) != 0) ;
 				break ;
+			/*
+			 * bit4 (value & 16) is reserved
+			 * for tracker item vote from Evolvis
+			 */
 			}
 			break ;
 
