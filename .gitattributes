@@ -410,6 +410,7 @@ src/common/docman/actions/forcereindexenginesearch.php -text
 src/common/docman/actions/getfile.php -text
 src/common/docman/actions/injectzip.php -text
 src/common/docman/actions/lockfile.php -text
+src/common/docman/actions/monitordirectory.php -text
 src/common/docman/actions/monitorfile.php -text
 src/common/docman/actions/releasefile.php -text
 src/common/docman/actions/reservefile.php -text

@@ -33,45 +33,41 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 }
 
-$arr_fileid = explode(',',getStringFromRequest('fileid'));
+$directoryid = getStringFromRequest('directoryid');
 $option = getStringFromRequest('option');
-$return_msg = _('Document(s)').' ';
+$return_msg = _('Diretory').' ';
 switch ($option) {
 	case "add": {
-		foreach ($arr_fileid as $fileid) {
-			if (!empty($fileid)) {
-				$d = new Document($g, $fileid);
-				$return_msg .= $d->getFilename().' ';
+		if (!empty($directoryid)) {
+			$dg = new DocumentGroup($g, $directoryid);
+			$return_msg .= $dg->getName().' ';
 
-				if ($d->isError())
-					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+			if ($dg->isError())
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-				if (!$d->addMonitoredBy($LUSER->getID()))
-					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
-			} else {
-				$warning_msg = _('No action to perform');
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
-			}
+			if (!$dg->addMonitoredBy($LUSER->getID()))
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+		} else {
+			$warning_msg = _('No action to perform');
+			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 		}
 		$return_msg .= _('monitoring started');
 		break;
 	}
 	case "remove": {
-		foreach ($arr_fileid as $fileid) {
-			if (!empty($fileid)) {
-				$d = new Document($g, $fileid);
-				$return_msg .= $d->getFilename().' ';
+		if (!empty($directoryid)) {
+			$dg = new DocumentGroup($g, $directoryid);
+			$return_msg .= $dg->getName().' ';
 
-				if ($d->isError())
-					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+			if ($dg->isError())
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-				if (!$d->removeMonitoredBy($LUSER->getID()))
-					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+			if (!$dg->removeMonitoredBy($LUSER->getID()))
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-			} else {
-				$warning_msg = _('No action to perform');
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
-			}
+		} else {
+			$warning_msg = _('No action to perform');
+			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 		}
 		$return_msg .= _('monitoring stopped.');
 		break;
@@ -84,3 +80,4 @@ switch ($option) {
 
 session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 ?>
+ 

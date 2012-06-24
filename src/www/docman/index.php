@@ -82,6 +82,7 @@ switch ($action) {
 	case "injectzip":
 	case "lockfile":
 	case "monitorfile":
+	case "monitordirectory":
 	case "releasefile":
 	case "reservefile":
 	case "trashdir":

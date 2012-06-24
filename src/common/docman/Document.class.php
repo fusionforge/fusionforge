@@ -157,7 +157,7 @@ class Document extends Error {
                 if (!$filesize) { $filesize = 0 ; }
 
 		// key words for in-document search
-		if ($this->Group->useDocmanSearch()) {
+		if ($this->Group->useDocmanSearch() && $filesize ) {
 			$kw = new Parsedata();
 			$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename);
 		} else {
@@ -182,18 +182,24 @@ class Document extends Error {
 					);
 
 		$docid = db_insertid($result, 'doc_data', 'docid');
-		DocumentStorage::instance()->store($docid, $data);
+		if ($filesize) {
+			DocumentStorage::instance()->store($docid, $data);
+		}
 
 		if (!$result || !$docid) {
 			$this->setError(_('Error Adding Document:').' '.db_error().$result);
-			DocumentStorage::instance()->rollback();
+			if ($filesize) {
+				DocumentStorage::instance()->rollback();
+			}
 			db_rollback();
 			return false;
 		}
 
 		if (!$this->fetchData($docid)) {
 			$this->setError(_('Error fetching Document'));
-			DocumentStorage::instance()->rollback();
+			if ($filesize) {
+				DocumentStorage::instance()->rollback();
+			}
 			db_rollback();
 			return false;
 		}
@@ -201,13 +207,17 @@ class Document extends Error {
 		$localDg = new DocumentGroup($this->Group, $doc_group);
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setError(_('Error updating document group:').$localDg->getErrorMessage());
-			DocumentStorage::instance()->rollback();
+			if ($filesize) {
+				DocumentStorage::instance()->rollback();
+			}
 			db_rollback();
 			return false;
 		}
 		$this->sendNotice(true);
 		db_commit();
-		DocumentStorage::instance()->commit();
+		if ($filesize) {
+			DocumentStorage::instance()->commit();
+		}
 		return true;
 	}
 
@@ -572,6 +582,10 @@ class Document extends Error {
 	function clearMonitor() {
 		$result = db_query_params('DELETE FROM docdata_monitored_docman WHERE doc_id = $1',
 					array($this->getID()));
+		if (!$result) {
+			$this->setError(_('Unable To Clear Monitor').' : '.db_error());
+			return false;
+		}
 		return true;
 	}
 
@@ -857,10 +871,14 @@ class Document extends Error {
 	 *
 	 * @param	boolean	true = new document (default value)
 	 */
-	function sendNotice($new=true) {
+	function sendNotice($new = true) {
 		$BCC = $this->Group->getDocEmailAddress();
 		if ($this->isMonitoredBy('ALL')) {
 			$BCC .= $this->getMonitoredUserEmailAddress();
+		}
+		$dg = new DocumentGroup($this->Group, $this->getDocGroupID());
+		if ($dg->isMonitoredBy('ALL')) {
+			$BCC .= $dg->getMonitoredUserEmailAddress();
 		}
 		if (strlen($BCC) > 0) {
 			$sess = session_get_user();
@@ -876,7 +894,7 @@ class Document extends Error {
 			$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
 			$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
 			if (!$new) {
-				$body .= _('Updated By:').' '. $sess->getRealName ();
+				$body .= _('Updated By:').' '. $sess->getRealName();
 			}
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').
@@ -884,7 +902,6 @@ class Document extends Error {
 
 			util_send_message('', $subject, $body, '', $BCC);
 		}
-
 		return true;
 	}
 

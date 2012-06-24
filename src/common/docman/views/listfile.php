@@ -190,6 +190,16 @@ if ($DocGroupName) {
 	if ($numFiles || (isset($numPendingFiles) && $numPendingFiles))
 		echo '<a href="/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid.'" class="tabtitle" title="'. _('Download this folder as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
 
+	if (session_loggedin()) {
+		if ($ndg->isMonitoredBy($u->getID())) {
+			$option = 'remove';
+			$titleMonitor = _('Stop monitoring this directory');
+		} else {
+			$option = 'add';
+			$titleMonitor = _('Start monitoring this directory');
+		}
+		echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=monitordirectory&amp;option='.$option.'&amp;directoryid='.$ndg->getID().'" title="'.$titleMonitor.'" >'.html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)). '</a>';
+	}
 	echo '</h3>';
 
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {

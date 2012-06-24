@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -161,7 +162,7 @@ class DocumentGroup extends Error {
 			$parentDg = new DocumentGroup($this->Group, $parent_doc_group);
 			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, 0);
 		}
-
+		$this->sendNotice(true);
 		return true;
 	}
 
@@ -348,7 +349,104 @@ class DocumentGroup extends Error {
 
 	}
 
+	/**
+	 * getMonitoredUserEmailAddress - get the email addresses of users who monitor this directory
+	 *
+	 * @return	string	The list of emails comma separated
+	 */
+	function getMonitoredUserEmailAddress() {
+		$result = db_query_params('select users.email from users,docgroup_monitored_docman where users.user_id = docgroup_monitored_docman.user_id and docgroup_monitored_docman.docgroup_id = $1', array ($this->getID()));
+		if (!$result || db_numrows($result) < 1) {
+			return NULL;
+		} else {
+			$values = '';
+			$comma = '';
+			$i = 0;
+			while ($arr = db_fetch_array($result)) {
+				if ( $i > 0 )
+					$comma = ',';
 
+				$values .= $comma.$arr['email'];
+				$i++;
+			}
+		}
+		return $values;
+	}
+
+	/**
+	 * isMonitoredBy - get the monitored status of this document directory for a specific user id.
+	 *
+	 * @param	int	User ID
+	 * @return	boolean	true if monitored by this user
+	 */
+	function isMonitoredBy($userid = 'ALL') {
+		if ( $userid == 'ALL' ) {
+			$condition = '';
+		} else {
+			$condition = 'user_id = '.$userid.' AND';
+		}
+		$result = db_query_params('SELECT * FROM docgroup_monitored_docman WHERE '.$condition.' docgroup_id = $1',
+						array($this->getID()));
+
+		if (!$result || db_numrows($result) < 1)
+			return false;
+
+		return true;
+	}
+
+	/**
+	 * removeMonitoredBy - remove this document directory for a specific user id for monitoring.
+	 *
+	 * @param	int	User ID
+	 * @return	boolean	true if success
+	 */
+	function removeMonitoredBy($userid) {
+		$result = db_query_params('DELETE FROM docgroup_monitored_docman WHERE docgroup_id = $1 AND user_id = $2',
+						array($this->getID(), $userid));
+
+		if (!$result) {
+			$this->setError(_('Unable To Remove Monitor').' : '.db_error());
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * addMonitoredBy - add this document for a specific user id for monitoring.
+	 *
+	 * @param	int	User ID
+	 * @return	boolean	true if success
+	 */
+	function addMonitoredBy($userid) {
+		$result = db_query_params('SELECT * FROM docgroup_monitored_docman WHERE user_id=$1 AND docgroup_id = $2',
+						array($userid, $this->getID()));
+
+		if (!$result || db_numrows($result) < 1) {
+			$result = db_query_params('INSERT INTO docgroup_monitored_docman (docgroup_id,user_id) VALUES ($1,$2)',
+							array($this->getID(), $userid));
+
+			if (!$result) {
+				$this->setError(_('Unable To Add Monitor').' : '.db_error());
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * clearMonitor - remove all entries of monitoring for this document.
+	 *
+	 * @return	boolean	true if success.
+	 */
+	function clearMonitor() {
+		$result = db_query_params('DELETE FROM docgroup_monitored_docman WHERE docgroup_id = $1',
+					array($this->getID()));
+		if (!$result) {
+			$this->setError(_('Unable To Clear Monitor').' : '.db_error());
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * getCreated_by - get the creator (user) id.
@@ -419,6 +517,7 @@ class DocumentGroup extends Error {
 				$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
 
 			$this->fetchData($this->getID());
+			$this->sendNotice(false);
 			return true;
 		} else {
 			$this->setOnUpdateError(sprintf(_('Error: %s'), db_error()));
@@ -587,6 +686,40 @@ class DocumentGroup extends Error {
 	 */
 	function setParentDocGroupId($parentDocGroupId) {
 		return $this->setValueinDB('parent_doc_group', $parentDocGroupId);
+	}
+
+	/**
+	 * sendNotice - Notifies of directory submissions
+	 *
+	 * @param	boolean	true = new directory (default value)
+	 */
+	function sendNotice($new = true) {
+		$BCC = $this->Group->getDocEmailAddress();
+		if ($this->isMonitoredBy('ALL')) {
+			$BCC .= $this->getMonitoredUserEmailAddress();
+		}
+		if (strlen($BCC) > 0) {
+			$sess = session_get_user();
+			if ($new) {
+				$status = _('New directory');
+			} else {
+				$status = _('Updated directory').' '._('by').' ' . $sess->getRealName();
+			}
+			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
+			$body = _('Project')._(': ').$this->Group->getPublicName()."\n";
+			$body .= _('Directory:').' '.$this->getName()."\n";
+			$user = user_get_object($this->getCreated_by());
+			$body .= _('Submitter:').' '.$user->getRealName()." (".$user->getUnixName().") \n";
+			if (!$new) {
+				$body .= _('Updated By:').' '. $sess->getRealName();
+			}
+			$body .= "\n\n-------------------------------------------------------\n".
+				_('For more info, visit:').
+				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getID());
+
+			util_send_message('', $subject, $body, '', $BCC);
+		}
+		return true;
 	}
 
 	/**
