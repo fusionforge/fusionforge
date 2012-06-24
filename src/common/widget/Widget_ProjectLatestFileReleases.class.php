@@ -1,15 +1,16 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
- * This file is a part of Codendi.
+ * This file is a part of Fusionforge.
  *
- * Codendi is free software; you can redistribute it and/or modify
+ * Fusionforge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Codendi is distributed in the hope that it will be useful,
+ * Fusionforge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -25,27 +26,26 @@ require_once('Widget.class.php');
 *
 */
 class Widget_ProjectLatestFileReleases extends Widget {
-    var $content;
-    function Widget_ProjectLatestFileReleases() {
-        $this->Widget('projectlatestfilereleases');
-        $request =& HTTPRequest::instance();
-        $pm = ProjectManager::instance();
-        $project = $pm->getProject($request->get('group_id'));
-        if ($project && $this->canBeUsedByProject($project)) {
-            $this->content['title'] = _('Latest File Releases');
-        }
-    }
-    function getTitle() {
-        return $this->content['title'];
-    }
-    function getContent() {
-        $request =& HTTPRequest::instance();
-        $pm = ProjectManager::instance();
-	$group_id=$request->get('group_id');
-        $project = $pm->getProject($group_id);
-	$unix_group_name = $project->getUnixName();
-$HTML=$GLOBALS['HTML'];
-
+	var $content;
+	function Widget_ProjectLatestFileReleases() {
+		$this->Widget('projectlatestfilereleases');
+		$request =& HTTPRequest::instance();
+		$pm = ProjectManager::instance();
+		$project = $pm->getProject($request->get('group_id'));
+		if ($project && $this->canBeUsedByProject($project)) {
+		$this->content['title'] = _('Latest File Releases');
+		}
+	}
+	function getTitle() {
+		return $this->content['title'];
+	}
+	function getContent() {
+		$request =& HTTPRequest::instance();
+		$pm = ProjectManager::instance();
+		$group_id=$request->get('group_id');
+		$project = $pm->getProject($group_id);
+		$unix_group_name = $project->getUnixName();
+		$HTML=$GLOBALS['HTML'];
 
 		//
 		//  Members of projects can see all packages
@@ -107,14 +107,14 @@ $HTML=$GLOBALS['HTML'];
 					$package_name = db_result($res_files, $f, 'package_name');
 					$package_release = db_result($res_files,$f,'release_name');
 					echo '
-                        <tr class="align-center">
+						<tr class="align-center">
 						<td class="align-left">
 							<strong>' . $package_name . '</strong>
 						</td>';
 					// Releases to display
 //print '<div about="" xmlns:sioc="http://rdfs.org/sioc/ns#" rel="container_of" resource="'.util_make_link ('/frs/?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id').'">';
 					echo '
-                        <td>'
+						<td>'
 						.$package_release.'
 						</td>
 						<td>'
@@ -148,11 +148,11 @@ $HTML=$GLOBALS['HTML'];
 					echo util_make_link ($link, $link_content);
 					echo '</td>
 					</tr>';
-
 				}
+				echo '</table>';
 			}
 		}
-		echo '</table>';
+
 		echo '<div class="underline-link">' . util_make_link ('/frs/?group_id='.$group_id, _('View All Project Files')) . '</div>';
 
     }
