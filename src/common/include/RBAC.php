@@ -785,7 +785,9 @@ abstract class BaseRole extends Error {
 				//
 				//	Build an associative array of these key values + localized description
 				//
-				$role_vals[$section][$this->role_values[$section][$i]]=$rbac_permission_names["$section".$this->role_values[$section][$i]];
+				$role_vals[$section][$this->role_values[$section][$i]] =
+				    util_ifsetor($rbac_permission_names["$section".$this->role_values[$section][$i]],
+				    _('UNKNOWN (internal error, report bug to FusionForge)'));
 			}
 		}
 		return $role_vals[$section];
