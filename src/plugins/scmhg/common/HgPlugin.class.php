@@ -90,12 +90,7 @@ class HgPlugin extends SCMPlugin {
 				$b .= '</p>';
 				// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 				//            HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-				$boxforproject = $this->getBoxForProject($project);
-				if ('/' != substr($boxforproject, -1)) {
-					// just to be sure, we have double /
-					$boxforproject .= '/';
-				}
-				$b .= '<p><tt>hg clone ssh://'.$d.'@' . $boxforproject .'/'. forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'</tt></p>';
+				$b .= '<p><tt>hg clone ssh://'.$d.'@' . $this->getBoxForProject($project) .'/'. forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'</tt></p>';
 			}
 			if (forge_get_config('use_dav', 'scmhg')) {
 				$b .= '<h2>';
@@ -117,12 +112,7 @@ class HgPlugin extends SCMPlugin {
 				$b .= '</p>';
 				// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 				//            HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-				$boxforproject = $this->getBoxForProject($project);
-				if ('/' != substr($boxforproject, -1)) {
-					// just to be sure, we have double /
-					$boxforproject .= '/';
-				}
-				$b .= '<p><tt>hg clone ssh://'.$d.'@' . $boxforproject .'/'. forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'</tt></p>';
+				$b .= '<p><tt>hg clone ssh://'.$d.'@' . $this->getBoxForProject($project) .'/'. forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'</tt></p>';
 			} else {
 				$b = '<h2>';
 				$b .= _('Developer Mercurial Access via HTTP');
