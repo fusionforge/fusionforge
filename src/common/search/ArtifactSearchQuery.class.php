@@ -74,13 +74,17 @@ class ArtifactSearchQuery extends SearchQuery {
 			$qpa = db_construct_qpa ($qpa,
 						 ', (artifact_idx.vectors || coalesce(ff_tsvector_agg(artifact_message_idx.vectors), to_tsvector($1))) AS full_vector_agg',
 						 array(''));
-						 }
+		}
 		$qpa = db_construct_qpa ($qpa, 
-					 ' FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users',
+					 ' FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id) ',
 						 array ()) ;
 		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa, ' LEFT JOIN artifact_message_idx USING (artifact_id) ', array()) ;
+		}
+		$qpa = db_construct_qpa ($qpa, ' , users ', array()) ;
+		if (forge_get_config('use_fti')) {
 			$qpa = db_construct_qpa ($qpa, 
-						 ', artifact_idx, artifact_message_idx',
+						 ', artifact_idx',
 						 array ()) ;
 		}
 		$qpa = db_construct_qpa ($qpa, 
@@ -88,7 +92,7 @@ class ArtifactSearchQuery extends SearchQuery {
 					 array ($this->artifactId)) ;
 		if (forge_get_config('use_fti')) {
 			$qpa = db_construct_qpa ($qpa, 
-						 'AND artifact.artifact_id = artifact_idx.artifact_id AND artifact_message.id = artifact_message_idx.id ',
+						 'AND artifact.artifact_id = artifact_idx.artifact_id ',
 						 array ()) ;
 		}
 		$qpa = db_construct_qpa ($qpa,
