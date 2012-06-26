@@ -104,6 +104,7 @@ scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 		echo '<p class="error_msg">'._('Error - Site has SCM but no plugins registered').'</p>';
 	}
 
+	(isset($scm)) ? $hook_params['scm_plugin'] = $scm : $hook_params['scm_plugin'] = 0;
 	plugin_hook("scm_admin_page", $hook_params);
 ?>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />

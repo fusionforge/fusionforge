@@ -39,8 +39,9 @@ class scmhookPlugin extends Plugin {
 		switch ($hookname) {
 			case "scm_admin_page": {
 				$group_id = $params['group_id'];
+				$scm_plugin = $params['scm_plugin'];
 				$group = &group_get_object($group_id);
-				if ($group->usesPlugin($this->name)) {
+				if ($group->usesPlugin($this->name) && $scm_plugin) {
 					$this->displayScmHook($group_id);
 				}
 				break;
