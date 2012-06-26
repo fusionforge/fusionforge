@@ -137,6 +137,7 @@ if (file_exists(forge_get_config('repos_path', 'scmcvs'))) {
 /**************************************
  * Backup SVN repositories (using the hot-backup.py script)
  **************************************/
+$svndir_prefix = forge_get_config ('repos_path', 'scmsvn');
 if (file_exists($svndir_prefix)) {
 	$hot_backup = dirname(__FILE__).'/hot-backup.py';
 	$svn_path = dirname(`which svn`);

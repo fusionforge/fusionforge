@@ -38,6 +38,8 @@ $res = db_query_params ('SELECT DISTINCT u.user_id, u.realname, u.email FROM use
 $now = time();
 $today = date("n/j/y");
 
+$err = '';
+
 // for every user retrieved, get its open tasks and send an email
 for ($i=0; $i<db_numrows($res);$i++) {
 

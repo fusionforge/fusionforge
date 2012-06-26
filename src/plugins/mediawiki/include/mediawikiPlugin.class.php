@@ -52,7 +52,6 @@ class MediaWikiPlugin extends Plugin {
 		$this->_addHook("list_roles_by_permission");
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page for group
 		$this->_addHook("clone_project_from_template") ;
-		$this->_addHook("site_admin_option_hook");
 		$this->_addHook('group_delete');
 	}
 
@@ -371,8 +370,6 @@ class MediaWikiPlugin extends Plugin {
 					}
 				}
 			}
-		} elseif ($hookname == "site_admin_option_hook") {
-			echo '<li><a href="'.$this->getPluginPath().'/">' . _('Mediawiki plugin') . '</a></li>';
 		} elseif ($hookname == 'group_delete') {
 			$projectId = $params['group_id'];
 			$projectObject = group_get_object($projectId);
