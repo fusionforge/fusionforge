@@ -155,21 +155,15 @@ class Search extends FForge_SeleniumTestCase
 		$this->type("details", "brebis outremanchienne");
 		$this->clickAndWait("//form[@id='trackeraddform']//input[@type='submit']");
 		$this->clickAndWait("link=Bug1 boustrophédon");
-		$this->type("details", 'Ceci était une référence au « Génie des Alpages », rien à voir avec Charlie - also, ZONGO');
-		$this->clickAndWait("submit");
-		$this->clickAndWait("link=Bug1 boustrophédon");
-		$this->type("details", 'This is the needle');
+		$this->type("details", 'Ceci était une référence au « Génie des Alpages », rien à voir avec Charlie - also, ZONGO, and needle');
 		$this->clickAndWait("submit");
 
 		$this->clickAndWait("link=Tracker");
 		$this->clickAndWait("link=Patches");
 		$this->clickAndWait("link=Submit New");
 		$this->type("summary", "Bug2 gratapouêt");
-		$this->type("details", "cthulhu was here - also, ZONGO");
+		$this->type("details", "cthulhu was here - also, ZONGO, and Charlie was here too");
 		$this->clickAndWait("//form[@id='trackeraddform']//input[@type='submit']");
-		$this->clickAndWait("link=Bug2 gratapouêt");
-		$this->type("details", 'Charlie was here too');
-		$this->clickAndWait("submit");
 
 		// Search in trackers
 
