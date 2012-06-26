@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
 "POT-Creation-Date: 2012-05-29 18:26+0200\n"
-"PO-Revision-Date: 2008-03-30 14:36+0200\n"
+"PO-Revision-Date: 2012-06-23 19:55+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "Language: cs\n"
@@ -27,19 +27,12 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:2001
-#, fuzzy
-#| msgid "@FORGENAME@ domain or subdomain name:"
 msgid "@FORGENAME@ domain or subdomain name:"
 msgstr "Název @FORGENAME@ domény nebo subdomény:"
 
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the domain that will host the @FORGENAME@ installation. Some "
-#| "services (scm, lists, etc.) will be given their own subdomain in that "
-#| "domain."
 msgid ""
 "Please enter the domain that will host the @FORGENAME@ installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
@@ -50,18 +43,12 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#, fuzzy
-#| msgid "@FORGENAME@ system name:"
 msgid "@FORGENAME@ system name:"
 msgstr "Jméno @FORGENAME@ systému:"
 
 #. Type: string
 #. Description
 #: ../dsf-in/common.templates:3001
-#, fuzzy
-#| msgid ""
-#| "Please enter the name of the @FORGENAME@ system. It is used in various "
-#| "places throughout the system."
 msgid ""
 "Please enter the name of the @FORGENAME@ system. It is used in various "
 "places throughout the system."
@@ -72,18 +59,12 @@ msgstr ""
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
-#| msgid "@FORGENAME@ administrator password:"
 msgid "@FORGENAME@ administrator password:"
 msgstr "Heslo správce @FORGENAME@:"
 
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
-#| msgid ""
-#| "The @FORGENAME@ administrator account will have full privileges on the "
-#| "system. It will be used to approve the creation of new projects."
 msgid ""
 "The @FORGENAME@ administrator account will have full privileges on the "
 "forge. It will be used to approve the creation of new projects."
@@ -94,10 +75,8 @@ msgstr ""
 #. Type: password
 #. Description
 #: ../dsf-in/db-postgresql.templates:2001
-#, fuzzy
-#| msgid "Please choose the password for this account."
 msgid "Please choose the password for this forge account."
-msgstr "Zadejte prosím heslo pro tento účet."
+msgstr "Zadejte prosím heslo pro tento forge účet."
 
 #. Type: password
 #. Description
@@ -115,37 +94,37 @@ msgstr "Zadejte heslo ještě jednou pro potvrzení."
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "install the new version configured by @PACKAGE@"
-msgstr ""
+msgstr "instalovat novou verzi nastavenou @PACKAGE@"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "keep the local version currently installed"
-msgstr ""
+msgstr "ponechat aktuálně nainstalovanou lokální verzi"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "show the differences between the versions"
-msgstr ""
+msgstr "zobrazit rozdíly mezi verzemi"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "show a side-by-side difference between the versions"
-msgstr ""
+msgstr "zobrazit rozdíly mezi verzemi vedle sebe"
 
 #. Type: select
 #. Choices
 #: ../dsf-in/db-postgresql.templates:4001
 msgid "start a new shell to examine the situation"
-msgstr ""
+msgstr "spustit nový shell a prozkoumat situaci"
 
 #. Type: select
 #. Description
 #: ../dsf-in/db-postgresql.templates:4002
 msgid "What do you want to do about configuration file ${BASENAME}?"
-msgstr ""
+msgstr "Co chcete provést s konfiguračním souborem ${BASENAME}?"
 
 #. Type: select
 #. Description
@@ -154,14 +133,14 @@ msgid ""
 "The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
 "is also a configuration file of the postgresql package."
 msgstr ""
+"Konfigurační soubor ${FILE} musí být balíkem @PACKAGE@ upraven, avšak "
+"tento soubor je i konfiguračním souborem balíku postgresql."
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
 #: ../dsf-in/dns-bind9.templates:2001
-#, fuzzy
-#| msgid "Do you want a simple DNS setup for @FORGENAME@?"
 msgid "Do you want a simple DNS setup for @FORGENAME@?"
 msgstr "Chcete mít v @FORGENAME@ jednoduchou konfiguraci DNS?"
 
@@ -195,15 +174,9 @@ msgstr ""
 "Nastavení bude pouze předpokládat, budete mít všechny adresáře s weby "
 "projektů na jednom počítači a že pro SCM použijete jediný server."
 
-#, fuzzy
-#~| msgid "@FORGENAME@ administrator e-mail address:"
 #~ msgid "@FORGENAME@ administrator e-mail address:"
 #~ msgstr "Emailová adresa správce @FORGENAME@:"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
-#~| "site. It will be used when problems occur."
 #~ msgid ""
 #~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
 #~ "site. It will be used when problems occur."
@@ -214,27 +187,17 @@ msgstr ""
 #~ msgid "Download server:"
 #~ msgstr "Server pro stahování:"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the hostname of the server that will host the @FORGENAME@ "
-#~| "packages."
 #~ msgid ""
 #~ "Please enter the hostname of the server that will host the @FORGENAME@ "
 #~ "packages."
 #~ msgstr "Zadejte prosím jméno serveru, který bude hostit balíky @FORGENAME@."
 
-#, fuzzy
-#~| msgid "It should not be the same as the main @FORGENAME@ host."
 #~ msgid "It should not be the same as the main @FORGENAME@ host."
 #~ msgstr "Měl by to být jiný počítač než je hlavní server @FORGENAME@."
 
 #~ msgid "Database server:"
 #~ msgstr "Databázový server:"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the IP address (or hostname) of the server that will host "
-#~| "the @FORGENAME@ database."
 #~ msgid ""
 #~ "Please enter the IP address (or hostname) of the server that will host "
 #~ "the @FORGENAME@ database."
@@ -245,10 +208,6 @@ msgstr ""
 #~ msgid "Database name:"
 #~ msgstr "Jméno databáze:"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the name of the database that will host the @FORGENAME@ "
-#~| "database."
 #~ msgid ""
 #~ "Please enter the name of the database that will host the @FORGENAME@ "
 #~ "database."
@@ -258,10 +217,6 @@ msgstr ""
 #~ msgid "Database administrator username:"
 #~ msgstr "Uživatelské jméno správce databáze:"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the username of the database administrator for the server "
-#~| "that will host the @FORGENAME@ database."
 #~ msgid ""
 #~ "Please enter the username of the database administrator for the server "
 #~ "that will host the @FORGENAME@ database."
@@ -281,10 +236,6 @@ msgstr ""
 #~ msgid "IP address:"
 #~ msgstr "IP adresa:"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the IP address of the server that will host the @FORGENAME@ "
-#~| "installation."
 #~ msgid ""
 #~ "Please enter the IP address of the server that will host the @FORGENAME@ "
 #~ "installation."
@@ -297,10 +248,6 @@ msgstr ""
 #~ msgid "Shell server:"
 #~ msgstr "Server se shellovými účty:"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the hostname of the server that will host the @FORGENAME@ "
-#~| "shell accounts."
 #~ msgid ""
 #~ "Please enter the hostname of the server that will host the @FORGENAME@ "
 #~ "shell accounts."
@@ -310,10 +257,6 @@ msgstr ""
 #~ msgid "Mailing lists server:"
 #~ msgstr "Server pro poštovní konference:"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the host name of the server that will host the @FORGENAME@ "
-#~| "mailing lists."
 #~ msgid ""
 #~ "Please enter the host name of the server that will host the @FORGENAME@ "
 #~ "mailing lists."
@@ -321,10 +264,6 @@ msgstr ""
 #~ "Zadejte prosím jméno serveru, který bude hostit poštovní konference "
 #~ "@FORGENAME@."
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the host name of the server that will host the @FORGENAME@ "
-#~| "shell accounts."
 #~ msgid ""
 #~ "Please enter the host name of the server that will host the @FORGENAME@ "
 #~ "shell accounts."
@@ -334,11 +273,6 @@ msgstr ""
 #~ msgid "News administrative group ID:"
 #~ msgstr "ID skupiny správců novinek:"
 
-#, fuzzy
-#~| msgid ""
-#~| "The members of the news admin group can approve news for the @FORGENAME@ "
-#~| "main page. This group's ID must not be 1. This should be changed only if "
-#~| "you upgrade from a previous version and want to keep the data."
 #~ msgid ""
 #~ "The members of the news admin group can approve news for the @FORGENAME@ "
 #~ "main page. This group's ID must not be 1. This should be changed only if "
@@ -355,10 +289,6 @@ msgstr ""
 #~ msgid "Peer rating administrative group ID:"
 #~ msgstr "ID skupiny správců pro hodnocení:"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the host name of the server that will host the @FORGENAME@ "
-#~| "packages."
 #~ msgid ""
 #~ "Please enter the host name of the server that will host the @FORGENAME@ "
 #~ "packages."
@@ -456,10 +386,6 @@ msgstr ""
 #~ msgid "Do you want mail to ${noreply} to be discarded?"
 #~ msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
 
-#, fuzzy
-#~| msgid ""
-#~| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
-#~| "\"${noreply}\" address."
 #~ msgid ""
 #~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
 #~ "\"${noreply}\" address."
@@ -477,10 +403,6 @@ msgstr ""
 #~ msgid "User mail redirector server:"
 #~ msgstr "Server pro přesměrování pošty:"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please enter the host name of the server that will host the @FORGENAME@ "
-#~| "user mail redirector."
 #~ msgid ""
 #~ "Please enter the host name of the server that will host the @FORGENAME@ "
 #~ "user mail redirector."
@@ -488,8 +410,6 @@ msgstr ""
 #~ "Zadejte prosím jméno serveru, který bude hostit přesměrování pošty pro "
 #~ "uživatele @FORGENAME@."
 
-#, fuzzy
-#~| msgid "@FORGENAME@ administrator login:"
 #~ msgid "@FORGENAME@ administrator login:"
 #~ msgstr "Přihlašovací jméno správce @FORGENAME@:"
 
@@ -499,11 +419,6 @@ msgstr ""
 #~ msgid "Initial list of skills:"
 #~ msgstr "Počáteční seznam schopností:"
 
-#, fuzzy
-#~| msgid ""
-#~| "@FORGENAME@ allows users to define a list of their skills, to be chosen "
-#~| "from those present in the database. This list is the initial list of "
-#~| "skills that will enter the database."
 #~ msgid ""
 #~ "@FORGENAME@ allows users to define a list of their skills, to be chosen "
 #~ "from those present in the database. This list is the initial list of "

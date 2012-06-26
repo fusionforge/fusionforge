@@ -8,9 +8,10 @@ fusionforge (5.2~rc1-4+) UNRELEASED; urgency=low
 
   * Updated Debconf translations for Portuguese (thanks to Américo
     Monteiro), German (thanks to Helge Kreutzmann), Russian (thanks to
-    Yuri Kozlov) (closes: #677737, #677653, #678424).
+    Yuri Kozlov), Galician (thanks to Jorge Barreiro), Czech (thanks to
+    Miroslav Kure) (closes: #677737, #677653, #678424, #678629, #678685).
 
- -- Roland Mas <lolando@debian.org>  Fri, 22 Jun 2012 15:42:30 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 26 Jun 2012 11:04:17 +0200
 
 fusionforge (5.2~rc1-4) unstable; urgency=low
 
