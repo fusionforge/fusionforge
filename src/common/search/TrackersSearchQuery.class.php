@@ -77,15 +77,19 @@ class TrackersSearchQuery extends SearchQuery {
 						 array (''));
 						 }
 		$qpa = db_construct_qpa ($qpa, 
-					 ' FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list',
+					 ' FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id) ',
 						 array ()) ;
 		if (forge_get_config('use_fti')) {
+			$qpa = db_construct_qpa ($qpa, ' LEFT JOIN artifact_message_idx USING (artifact_id) ', array()) ;
+		}
+		$qpa = db_construct_qpa ($qpa, ' , users, artifact_group_list ', array()) ;
+		if (forge_get_config('use_fti')) {
 			$qpa = db_construct_qpa ($qpa, 
-						 ', artifact_idx, artifact_message_idx',
+						 ', artifact_idx ',
 						 array ()) ;
 		}
 		$qpa = db_construct_qpa ($qpa, 
-					 ' WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 AND artifact_message.artifact_id = artifact.artifact_id ',
+					 ' WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 ',
 						 array ($this->groupId)) ;
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
 			$qpa = db_construct_qpa ($qpa,
@@ -98,7 +102,7 @@ class TrackersSearchQuery extends SearchQuery {
 		}
 		if (forge_get_config('use_fti')) {
 			$qpa = db_construct_qpa ($qpa, 
-						 'AND artifact.artifact_id = artifact_idx.artifact_id AND artifact_message.id = artifact_message_idx.id ',
+						 'AND artifact.artifact_id = artifact_idx.artifact_id ',
 						 array ()) ;
 		}
 		$qpa = db_construct_qpa ($qpa,
