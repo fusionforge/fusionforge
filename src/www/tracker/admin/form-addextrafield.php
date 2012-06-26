@@ -48,7 +48,7 @@ $ath->adminHeader(array ('title'=>$title));
 
 			for ($k=0; $k < $rows; $k++) {
 				$i=$keys[$k];
-				echo '<tr id="field-'.$efarr[$i]['alias'].'" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+				echo '<tr id="field-'.$efarr[$i]['alias'].'" '. $GLOBALS['HTML']->boxGetAltRowStyle($k) .'>'.
 					'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').'<a href="'.getStringFromServer('PHP_SELF').'?update_box=1&amp;id='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 						' ['._('Edit').']</a>'.
