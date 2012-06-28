@@ -6,7 +6,7 @@ then
 	shift
 else
         echo "You must give the testsuite to run :"
-	echo "	- DEBDebian60Tests.php"
+	echo "	- DEBDebian70Tests.php"
 	echo "	- RPMCentosTests.php"
 	echo "	- TarCentosTests.php"
 fi
