@@ -4,10 +4,54 @@
 
 export FORGE_HOME=/usr/share/gforge
 export DIST=wheezy
-get_config $@
+export HOST=$1
+
 prepare_workspace
-destroy_vm -t debian7 $@
-start_vm_if_not_keeped -t debian7 $@
+destroy_vm -t debian7 $HOST
+start_vm_if_not_keeped -t debian7 $HOST
+
+CHECKOUTPATH=$(pwd)
+
+set -e
+
+COWBUILDERBASE=/var/lib/jenkins/builder/
+COWBUILDERCOW=$COWBUILDERBASE/cow/base-$DIST-amd64.cow
+COWBUILDERCONFIG=$COWBUILDERBASE/config/$DIST.config
+
+sudo cowbuilder --update --basepath $COWBUILDERBASE
+cat > $COWBUILDERCONFIG <<EOF
+PDEBUILD_PBUILDER=cowbuilder
+BASEPATH=$COWBUILDERBASE
+APTCACHEHARDLINK="no"
+APTCACHE="/var/cache/pbuilder/aptcache"
+PBUILDERROOTCMD="sudo HOME=${HOME}"
+BUILDRESULT=$BUILDRESULT
+EOF
+
+cd $CHECKOUTPATH/src
+pdebuild --configfile ~/.config/pbuilder/$DIST.config
+
+PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
+PKGVERS=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
+MAJOR=$(echo $PKGVERS | sed 's,([^-]+).*,\1,')
+SMAJOR=$(echo $(MAJOR) | sed 's/^.://')
+if [ -d $CHECKOUTPATH/.svn ] ; then
+    MINOR=svn$(svn info | awk '/^Revision:/ { print $2 }')
+elif [ -d $CHECKOUTPATH/.bzr ] ; then
+    MINOR=bzr$(bzr revno)
+elif [ -d $CHECKOUTPATH/.git ] ; then
+    MINOR=git$(git describe --always)
+else
+    MINOR=-1
+fi
+ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
+CHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)_$(ARCH).changes
+
+cd $BUILDRESULT
+reprepro -Vb include $DIST $CHANGEFILE
+
+
+exit 1
 
 # Build 3rd-party 
 make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
