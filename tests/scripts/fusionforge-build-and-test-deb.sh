@@ -6,6 +6,8 @@ set -x
 . tests/scripts/common-functions
 . tests/scripts/common-vm
 
+get_config
+
 export FORGE_HOME=/usr/share/gforge
 export DIST=wheezy
 export HOST=$1
