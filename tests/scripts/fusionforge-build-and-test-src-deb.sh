@@ -47,7 +47,6 @@ ssh root@$HOST "service crond stop" || true
 
 # Copy selenium
 rsync -a 3rd-party/selenium/selenium-server.jar root@$HOST:$FORGE_HOME/tests/selenium-server.jar
-ssh root@$HOST "apt-get -y install phpunit-selenium"
 
 # Run tests
 retcode=0

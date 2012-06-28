@@ -216,6 +216,7 @@ avahi-utils,\
 openssh-server,\
 xbase-clients,\
 phpunit,\
+phpunit-selenium,\
 openjdk-6-jre,\
 iceweasel
 
