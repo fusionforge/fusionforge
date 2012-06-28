@@ -19,7 +19,8 @@ COWBUILDERBASE=/var/lib/jenkins/builder/
 COWBUILDERCOW=$COWBUILDERBASE/cow/base-$DIST-amd64.cow
 COWBUILDERCONFIG=$COWBUILDERBASE/config/$DIST.config
 
-sudo cowbuilder --update --basepath $COWBUILDERCOW --buildplace=$COWBUILDERBASE
+#sudo cowbuilder --update --basepath $COWBUILDERCOW --buildplace=$COWBUILDERBASE
+
 cat > $COWBUILDERCONFIG <<EOF
 PDEBUILD_PBUILDER=cowbuilder
 BASEPATH=$COWBUILDERBASE
@@ -44,13 +45,13 @@ elif [ -d $CHECKOUTPATH/.git ] ; then
 else
     MINOR=-1
 fi
+ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
 
-dch -b -v $(MAJOR)$(MINOR) -D UNRELEASED "This is $(DISTRIB)-$(ARCH) autobuild"
-perl -p -i.orig -e "s/UNRELEASED/$(DISTRIB)/" debian/changelog
+dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DISTRIB-$ARCH autobuild"
+perl -p -i.orig -e "s/UNRELEASED/$DISTRIB/" debian/changelog
 pdebuild --configfile $COWBUILDERCONFIG
 mv debian/changelog.orig debian/changelog
 
-ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
 CHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)_$(ARCH).changes
 
 cd $BUILDRESULT
