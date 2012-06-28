@@ -66,7 +66,7 @@ UDebComponents: main
 Architectures: amd64 i386 source
 Origin: debian.fusionforge.org
 Description: FusionForge autobuilt repository
-SignWith: DEBEMAIL=buildbot@$(hostname -f)
+SignWith: buildbot@$(hostname -f)
 EOF
 
 reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
