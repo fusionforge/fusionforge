@@ -100,6 +100,7 @@ ssh root@$HOST "invoke-rc.d cron stop" || true
 
 # Install selenium tests
 ssh root@$HOST mkdir $FORGE_HOME/tests
+make -C 3rd-party/selenium selenium-server.jar
 cp 3rd-party/selenium/selenium-server.jar tests/
 rsync -a --delete tests/ root@$HOST:$FORGE_HOME/tests/
 

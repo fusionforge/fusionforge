@@ -42,6 +42,7 @@ echo "Stop cron daemon"
 ssh root@$HOST "service crond stop" || true
 
 # Copy selenium
+make -C 3rd-party/selenium selenium-server.jar
 rsync -a 3rd-party/selenium/selenium-server.jar root@$HOST:$FORGE_HOME/tests/selenium-server.jar
 
 # Run tests
