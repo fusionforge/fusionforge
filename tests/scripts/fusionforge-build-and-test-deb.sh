@@ -29,7 +29,7 @@ PBUILDERROOTCMD="sudo HOME=${HOME}"
 BUILDRESULT=$BUILDRESULT
 EOF
 
-# sudo cowbuilder --update --configfile $COWBUILDERCONFIG
+sudo cowbuilder --update --configfile $COWBUILDERCONFIG
 
 cd $CHECKOUTPATH/src
 PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
@@ -70,7 +70,7 @@ Description: FusionForge autobuilt repository
 SignWith: buildbot@$(hostname -f)
 EOF
 
-# reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
+reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
 # Build 3rd-party 
 # make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
