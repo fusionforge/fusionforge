@@ -69,7 +69,7 @@ XDISTRIB:=3sid
 DISTRIB:=$(shell echo $(XDISTRIB) | cut -c2-)
 SIGNKEY=$(DEBEMAIL)
 BOTKEY=botkey
-DEBIANLIST=1lenny 2squeeze 3sid
+DEBIANLIST=1lenny 2squeeze 2wheezy 3sid
 DEBIANLISTP=1etch
 DEBLIST=$(DEBIANLIST) $(DEBIANLISTP)
 UBUNTULIST=1hardy 1intrepid 1jaunty 1karmic
@@ -173,6 +173,9 @@ squeeze:  # Simply build squeeze packages #
 
 rsqueeze: # Make a squeeze repository #
 	$(MAKE) repodeb DEBIANLIST=2squeeze
+
+rwheezy: # Make a wheezy repository #
+	$(MAKE) repodeb DEBIANLIST=2wheezy
 
 sid:      # Simply build sid packages #
 	$(MAKE) cowbuilddeb DEBIANLIST=3sid
