@@ -1,4 +1,8 @@
-#!/bin/sh +x
+#!/bin/sh
+
+set -e
+set -x
+
 . tests/scripts/common-functions
 . tests/scripts/common-vm
 
@@ -11,9 +15,6 @@ destroy_vm -t debian7 $HOST
 start_vm_if_not_keeped -t debian7 $HOST
 
 CHECKOUTPATH=$(pwd)
-
-set -e
-set -x
 
 COWBUILDERBASE=/var/lib/jenkins/builder/
 COWBUILDERCONFIG=$COWBUILDERBASE/config/$DIST.config
@@ -71,14 +72,13 @@ EOF
 
 reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
-set +x
-
 # Build 3rd-party 
 # make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
 
 # Build fusionforge
 # make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rwheezy
 
+cd $CHECKOUTPATH
 # Transfer preseeding
 cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
 
