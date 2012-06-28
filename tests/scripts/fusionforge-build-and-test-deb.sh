@@ -31,7 +31,7 @@ BUILDRESULT=$BUILDRESULT
 EOF
 
 cd $CHECKOUTPATH/src
-pdebuild --configfile ~/.config/pbuilder/$DIST.config
+pdebuild --configfile $COWBUILDERCONFIG
 
 PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
 PKGVERS=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
