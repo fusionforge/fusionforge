@@ -70,7 +70,7 @@ Description: FusionForge autobuilt repository
 SignWith: buildbot@$(hostname -f)
 EOF
 
-reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
+# reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
 # Build 3rd-party 
 # make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
@@ -80,7 +80,7 @@ reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
 cd $CHECKOUTPATH
 # Transfer preseeding
-cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
+# cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
 
 # Setup debian repo
 export DEBMIRROR DEBMIRRORSEC
