@@ -51,18 +51,18 @@ delrights: beroot
 
 installtemplate: /usr/lib/lxc/templates/lxc-debian7 /usr/lib/lxc/templates/lxc-debian6 /usr/lib/lxc/templates/lxc-centos5 /usr/lib/lxc/templates/lxc-centos6
 
-/usr/lib/lxc/templates/lxc-debian6: lxc-debian6 /usr/lib/lxc
+/usr/lib/lxc/templates/lxc-debian6: lxc-debian6 /usr/lib/lxc Makefile
 	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian6
 	chmod 755 /usr/lib/lxc/templates/lxc-debian6
 
-/usr/lib/lxc/templates/lxc-debian7: lxc-debian7 /usr/lib/lxc
+/usr/lib/lxc/templates/lxc-debian7: lxc-debian7 /usr/lib/lxc Makefile
 	cat lxc-debian7 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian7
 	chmod 755 /usr/lib/lxc/templates/lxc-debian7
 
-/usr/lib/lxc/templates/lxc-centos5: lxc-centos5 /usr/lib/lxc
+/usr/lib/lxc/templates/lxc-centos5: lxc-centos5 /usr/lib/lxc Makefile
 	cp lxc-centos5 /usr/lib/lxc/templates/
 
-/usr/lib/lxc/templates/lxc-centos6: lxc-centos6 /usr/lib/lxc
+/usr/lib/lxc/templates/lxc-centos6: lxc-centos6 /usr/lib/lxc Makefile
 	cp lxc-centos6 /usr/lib/lxc/templates/
 
 createdeb:
