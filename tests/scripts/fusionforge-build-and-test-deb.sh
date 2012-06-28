@@ -19,7 +19,7 @@ COWBUILDERBASE=/var/lib/jenkins/builder/
 COWBUILDERCOW=$COWBUILDERBASE/cow/base-$DIST-amd64.cow
 COWBUILDERCONFIG=$COWBUILDERBASE/config/$DIST.config
 
-sudo cowbuilder --update --basepath $COWBUILDERBASE
+sudo cowbuilder --update --basepath $COWBUILDERCOW
 cat > $COWBUILDERCONFIG <<EOF
 PDEBUILD_PBUILDER=cowbuilder
 BASEPATH=$COWBUILDERBASE
