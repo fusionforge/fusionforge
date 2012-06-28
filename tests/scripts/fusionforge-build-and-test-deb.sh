@@ -13,6 +13,7 @@ start_vm_if_not_keeped -t debian7 $HOST
 CHECKOUTPATH=$(pwd)
 
 set -e
+set -x
 
 COWBUILDERBASE=/var/lib/jenkins/builder/
 COWBUILDERCOW=$COWBUILDERBASE/cow/base-$DIST-amd64.cow
@@ -50,7 +51,7 @@ CHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)_$(ARCH).changes
 cd $BUILDRESULT
 reprepro -Vb include $DIST $CHANGEFILE
 
-
+set +x
 exit 1
 
 # Build 3rd-party 
