@@ -34,7 +34,7 @@ cd $CHECKOUTPATH/src
 PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
 PKGVERS=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
 MAJOR=$(echo $PKGVERS | sed 's,([^-]+).*,\\1,')
-SMAJOR=$(echo $(MAJOR) | sed 's/^.://')
+SMAJOR=$(echo $MAJOR | sed 's/^.://')
 if [ -d $CHECKOUTPATH/.svn ] ; then
     MINOR=svn$(svn info | awk '/^Revision:/ { print $2 }')
 elif [ -d $CHECKOUTPATH/.bzr ] ; then
