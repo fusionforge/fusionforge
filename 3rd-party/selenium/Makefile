@@ -10,8 +10,8 @@ S_VERSION=2.21.0
 run: selenium-server.jar
 	LANG=C java -jar selenium-server.jar -interactive
 
-selenium-server.jar:
-	wget -c -O $@ http://selenium.googlecode.com/files/selenium-server-standalone-$(S_VERSION).jar
+selenium-server.jar: Makefile
+	wget -O $@ http://selenium.googlecode.com/files/selenium-server-standalone-$(S_VERSION).jar
 
 svnexport:
 	svn export http://selenium.googlecode.com/svn/trunk/remote/server selenium-server

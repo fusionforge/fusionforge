@@ -56,7 +56,7 @@ ssh root@$HOST "apt-get -y install vnc4server ; mkdir -p /root/.vnc"
 ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
-$FORGE_HOME/tests/scripts/phpunit.sh DEBDebian60Tests.php &> /var/log/phpunit.log &
+$FORGE_HOME/tests/scripts/phpunit.sh DEBDebian70Tests.php &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
 wait %1
 echo \$? > /root/phpunit.exitcode

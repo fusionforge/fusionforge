@@ -1,24 +1,91 @@
-#!/bin/sh +x
+#!/bin/sh
+
+set -e
+set -x
+
 . tests/scripts/common-functions
 . tests/scripts/common-vm
 
+get_config
+
 export FORGE_HOME=/usr/share/gforge
 export DIST=wheezy
-get_config $@
+export HOST=$1
+
 prepare_workspace
-destroy_vm -t debian7 $@
-start_vm_if_not_keeped -t debian7 $@
+destroy_vm -t debian7 $HOST
+start_vm_if_not_keeped -t debian7 $HOST
+
+CHECKOUTPATH=$(pwd)
+
+COWBUILDERBASE=/var/lib/jenkins/builder/
+COWBUILDERCONFIG=$COWBUILDERBASE/config/$DIST.config
+
+cat > $COWBUILDERCONFIG <<EOF
+PDEBUILD_PBUILDER=cowbuilder
+BASEPATH=$COWBUILDERBASE/cow/base-$DIST-amd64.cow
+BUILDPLACE=$COWBUILDERBASE/buildplace
+APTCACHEHARDLINK="no"
+APTCACHE="/var/cache/pbuilder/aptcache"
+PBUILDERROOTCMD="sudo HOME=${HOME}"
+BUILDRESULT=$BUILDRESULT
+EOF
+
+sudo cowbuilder --update --configfile $COWBUILDERCONFIG
+
+cd $CHECKOUTPATH/src
+PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
+PKGVERS=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
+MAJOR=${PKGVERS%-*}
+SMAJOR=${MAJOR#*:}
+MINOR=${PKGVERS##*-}
+if [ -d $CHECKOUTPATH/.svn ] ; then
+    MINOR=-$MINOR+svn$(svn info | awk '/^Revision:/ { print $2 }')
+elif [ -d $CHECKOUTPATH/.bzr ] ; then
+    MINOR=-$MINOR+bzr$(bzr revno)
+elif [ -d $CHECKOUTPATH/.git ] ; then
+    MINOR=-$MINOR+git$(git describe --always)
+else
+    MINOR=-$MINOR+$(TZ=UTC date +%Y%m%d%H%M%S)
+fi
+ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
+
+dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
+sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
+pdebuild --configfile $COWBUILDERCONFIG
+
+CHANGEFILE=${PKGNAME}_$SMAJOR${MINOR}_$ARCH.changes
+
+cd $BUILDRESULT
+REPOPATH=$WORKSPACE/build/debian
+
+rm -r $REPOPATH
+mkdir -p $REPOPATH/conf
+cat > $REPOPATH/conf/distributions <<EOF
+Codename: $DIST
+Suite: $DIST
+Components: main
+UDebComponents: main
+Architectures: amd64 i386 source
+Origin: buildbot.fusionforge.org
+Description: FusionForge autobuilt repository
+SignWith: buildbot@$(hostname -f)
+EOF
+
+reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
 # Build 3rd-party 
-make -C 3rd-party -f Makefile.debian BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
+# make -C 3rd-party -f Makefile.debian BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
 
 # Build fusionforge
-make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rwheezy
+# make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rwheezy
 
+cd $CHECKOUTPATH
 # Transfer preseeding
-cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
+# cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
 
 # Setup debian repo
+export DEBMIRROR DEBMIRRORSEC
 ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
 ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
 
@@ -81,4 +148,3 @@ ssh root@$HOST "vncserver -kill :1" || retcode=$?
 
 stop_vm_if_not_keeped -t debian7 $@
 exit $retcode
-
