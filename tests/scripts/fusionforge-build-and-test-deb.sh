@@ -114,6 +114,7 @@ ssh root@$HOST "invoke-rc.d cron stop" || true
 ssh root@$HOST mkdir $FORGE_HOME/tests
 cp 3rd-party/selenium/selenium-server.jar tests/
 rsync -a --delete tests/ root@$HOST:$FORGE_HOME/tests/
+ssh root@$HOST "apt-get -y install phpunit-selenium"
 
 ssh root@$HOST "cat > $FORGE_HOME/tests/config/phpunit" <<-EOF
 HUDSON_URL=$HUDSON_URL
