@@ -21,18 +21,6 @@ CHECKOUTPATH=$(pwd)
 COWBUILDERBASE=/var/lib/jenkins/builder/
 COWBUILDERCONFIG=$COWBUILDERBASE/config/$DIST.config
 
-cat > $COWBUILDERCONFIG <<EOF
-PDEBUILD_PBUILDER=cowbuilder
-BASEPATH=$COWBUILDERBASE/cow/base-$DIST-amd64.cow
-BUILDPLACE=$COWBUILDERBASE/buildplace
-APTCACHEHARDLINK="no"
-APTCACHE="/var/cache/pbuilder/aptcache"
-PBUILDERROOTCMD="sudo HOME=${HOME}"
-BUILDRESULT=$BUILDRESULT
-EOF
-
-sudo cowbuilder --update --configfile $COWBUILDERCONFIG
-
 cd $CHECKOUTPATH/src
 PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
 PKGVERS=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
