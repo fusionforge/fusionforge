@@ -16,6 +16,7 @@ set -e
 set -x
 
 COWBUILDERBASE=/var/lib/jenkins/builder/
+COWBUILDERBUILDPLACE=$COWBUILDERBASE/buildplace
 COWBUILDERCOW=$COWBUILDERBASE/cow/base-$DIST-amd64.cow
 COWBUILDERCONFIG=$COWBUILDERBASE/config/$DIST.config
 
@@ -24,7 +25,7 @@ COWBUILDERCONFIG=$COWBUILDERBASE/config/$DIST.config
 cat > $COWBUILDERCONFIG <<EOF
 PDEBUILD_PBUILDER=cowbuilder
 BASEPATH=$COWBUILDERBASE
-BUILDPLACE=$COWBUILDERBASE
+BUILDPLACE=$COWBUILDERBUILDPLACE
 APTCACHEHARDLINK="no"
 APTCACHE="/var/cache/pbuilder/aptcache"
 PBUILDERROOTCMD="sudo HOME=${HOME}"
@@ -34,7 +35,7 @@ EOF
 cd $CHECKOUTPATH/src
 PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
 PKGVERS=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
-MAJOR=$(echo $PKGVERS | sed 's,([^-]+).*,\\1,')
+MAJOR=$(echo $PKGVERS | sed 's,([^-]*).*,\\1,')
 SMAJOR=$(echo $MAJOR | sed 's/^.://')
 if [ -d $CHECKOUTPATH/.svn ] ; then
     MINOR=svn$(svn info | awk '/^Revision:/ { print $2 }')
