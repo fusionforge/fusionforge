@@ -8,7 +8,7 @@ export HOST=$1
 
 prepare_workspace
 destroy_vm -t debian7 $HOST
-# start_vm_if_not_keeped -t debian7 $HOST
+start_vm_if_not_keeped -t debian7 $HOST
 
 CHECKOUTPATH=$(pwd)
 
@@ -64,7 +64,7 @@ Suite: $DIST
 Components: main
 UDebComponents: main
 Architectures: amd64 i386 source
-Origin: debian.fusionforge.org
+Origin: buildbot.fusionforge.org
 Description: FusionForge autobuilt repository
 SignWith: buildbot@$(hostname -f)
 EOF
