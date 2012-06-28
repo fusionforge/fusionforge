@@ -73,7 +73,9 @@ function project_trackers_to_service_catalog($server_url, $base_url, $trackers, 
 	// We list trackers as Services or ServiceProvider (s) ???????????
 	foreach ($trackers as $tracker) {
 		// oslc:service node.
-		$service = $doc->createElement("oslc:service");
+		$servicenode = $doc->createElement("oslc:service");
+
+		$service = $doc->createElement("oslc:Service");
 		$service->setAttribute("rdf:about", $base_url.'/cm/oslc-cm-service/'.$tracker['group_id'].'/tracker/'.$tracker['id']);
 
 		// dcterms:title
@@ -100,9 +102,9 @@ function project_trackers_to_service_catalog($server_url, $base_url, $trackers, 
 		$sdetails->setAttribute("rdf:resource", htmlentities($tracker_url));
 		$service->appendChild($sdetails);
 
-		$provider->appendChild($service);
-		$root->appendChild($provider);
+		$servicenode->appendChild($service);
 
+		$provider->appendChild($servicenode);
 	}
 
 	$root->appendChild($provider);

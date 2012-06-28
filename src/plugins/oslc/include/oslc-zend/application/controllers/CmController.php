@@ -112,7 +112,8 @@ class CmController extends Zend_Rest_Controller {
 								'application/x-oslc-cm-service-description+xml' => 'xml',
 								'application/xml' => 'xml',
 								'application/x-oslc-cm-service-description+json' => 'json',
-								'application/json' => 'json'
+								'application/json' => 'json',
+								'application/rdf+xml' => 'xml'
 								)
 	);
 

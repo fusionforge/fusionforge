@@ -42,13 +42,11 @@ function project_to_service_description($base_url, $project, $tracker) {
 	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc', 'http://open-services.net/ns/core#');
 	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc_cm', 'http://open-services.net/ns/cm#');
 
+	$provider = $doc->createElement("oslc:ServiceProvider");
 	// rdf:about
-	$rdfabout = $doc->createElement("rdf:about", $base_url.'/cm/oslc-cm-service/'.$project.'/tracker/'.$tracker);
-	$root->appendChild($rdfabout);
+	$provider->setAttribute("rdf:about", $base_url.'/cm/oslc-cm-service/'.$project.'/tracker/'.$tracker);
 
 	// rdf:type
-	$rdftype = $doc->createElement("rdf:type");
-	$rdftyperessource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/core#Service");
 
 	// oslc:Publisher ressource inside a dcterms:publisher node.
 	$publishernode = $doc->createElement("dcterms:publisher");
@@ -59,55 +57,62 @@ function project_to_service_description($base_url, $project, $tracker) {
 	$publishernodecontent->appendChild($publishernodecontenttitle);
 	$publishernode->appendChild($publishernodecontent);
 	// Add created dcterms:publisher node in the ServiceProvider node.
-	$root->appendChild($publishernode);
+	$provider->appendChild($publishernode);
 
 	// dcterms:title
 	$title = $doc->createElement("dcterms:title","OSLC-CM V2 service description document");
-	$root->appendChild($title);
+	$provider->appendChild($title);
 
 	//dcterms:description
 	$desc = $doc->createElement("dcterms:description","FusionForge Tracker services");
-	$root->appendChild($desc);
+	$provider->appendChild($desc);
 
 	/**
 	 * Services description
 	 */
 
-	$service = $doc->createElement("oslc:service");
+	$servicenode = $doc->createElement("oslc:service");
+
+	$service = $doc->createElement("oslc:Service");
 
 	// oslc:domain
 	$sdomain = $doc->createElement("oslc:domain");
-	$sdomainressource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/cm#");
-	$sdomain->appendChild($sdomainressource);
+	$sdomain->setAttribute("rdf:resource", "http://open-services.net/ns/cm#");
 	$service->appendChild($sdomain);
 
 	// Creation Factory.
-	$cfact = $doc->createElement("creationFactory");
+	$cfactnode = $doc->createElement("oslc:creationFactory");
+	$cfact = $doc->createElement("oslc:CreationFactory");
+	
 	$cfacttitle = $doc->createElement("dcterms:title", "Location for creation of change Requests with a POST HTTP request");
-	$cfactlabel = $doc->createElement("oslc_label", "New Tracker items Creation");
+	$cfactlabel = $doc->createElement("oslc:label", "New Tracker items Creation");
 	$cfactcreation = $doc->createElement("oslc:creation");
-	$cfactcreationressource = $doc->createElement("rdf:ressource", $base_url.'/cm/project/'.$project.'/tracker/'.$tracker);
-	$cfactcreation->appendChild($cfactcreationressource);
+	$cfactcreation->setAttribute("rdf:resource", $base_url.'/cm/project/'.$project.'/tracker/'.$tracker);
 	$cfact->appendChild($cfacttitle);
 	$cfact->appendChild($cfactlabel);
 	$cfact->appendChild($cfactcreation);
-	$service->appendChild($cfact);
+
+	$cfactnode->appendChild($cfact);
+	$service->appendChild($cfactnode);
 
 	// Query capabilities.
-	$qc = $doc->createElement("queryCapability");
+	$qcnode = $doc->createElement("oslc:queryCapability");
+	$qc = $doc->createElement("oslc:QueryCapability");
+
 	$qctitle = $doc->createElement("dcterms:title", "GET-Based Tracker items query");
 	$qclabel = $doc->createElement("oslc:label", "Tracker items query");
 	$qcqbase = $doc->createElement("oslc:queryBase");
-	$qcqbaseressource = $doc->createElement("rdf:ressource",$base_url.'/cm/project/'.$project.'/tracker/'.$tracker);
-	$qcqbase->appendChild($qcqbaseressource);
+	$qcqbase->setAttribute("rdf:resource",$base_url.'/cm/project/'.$project.'/tracker/'.$tracker);
 	$qc->appendChild($qctitle);
 	$qc->appendChild($qclabel);
 	$qc->appendChild($qcqbase);
-	$service->appendChild($qc);
+
+	$qcnode->appendChild($qc);
+	$service->appendChild($qcnode);
 
 	// Delegated Selection UI.
-	$sD = $doc->createElement("selectionDialog");
-	$d = $doc->createElement("Dialog");
+	$sD = $doc->createElement("oslc:selectionDialog");
+	$d = $doc->createElement("oslc:Dialog");
 	$dtitle = $doc->createElement("dcterms:title", "Change Requests Selection Dialog");
 	$dlabel = $doc->createElement("oslc:label", "Tracker items selection UI");
 	$ddialog = $doc->createElement("oslc:dialog", $base_url.'/cm/project/'.$project.'/tracker/'.$tracker.'/ui/selection');
@@ -122,8 +127,8 @@ function project_to_service_description($base_url, $project, $tracker) {
 	$service->appendChild($sD);
 
 	// Delegated Creation UI.
-	$cD = $doc->createElement("creationDialog");
-	$dialog = $doc->createElement("Dialog");
+	$cD = $doc->createElement("oslc:creationDialog");
+	$dialog = $doc->createElement("oslc:Dialog");
 	$dialogtitle = $doc->createElement("dcterms:title", "Change Requests Creation Dialog");
 	$dialoglabel = $doc->createElement("oslc:label", "Tracker items creation UI");
 	$dialogdialog = $doc->createElement("oslc:dialog", $base_url.'/cm/project/'.$project.'/tracker/'.$tracker.'/ui/creation');
@@ -137,9 +142,11 @@ function project_to_service_description($base_url, $project, $tracker) {
 	$cD->appendChild($dialog);
 	$service->appendChild($cD);
 
+	$servicenode->appendChild($service);
 
-	$root->appendChild($service);
+	$provider->appendChild($servicenode);
 
+	$root->appendChild($provider);
 
 	return $doc->saveXML();
 }
