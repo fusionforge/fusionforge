@@ -37,21 +37,21 @@ PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
 PKGVERS=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
 MAJOR=${PKGVERS%-*}
 SMAJOR=${MAJOR#*:}
+MINOR=${PKGVERS##*-}
 if [ -d $CHECKOUTPATH/.svn ] ; then
-    MINOR=svn$(svn info | awk '/^Revision:/ { print $2 }')
+    MINOR=$MINOR-svn$(svn info | awk '/^Revision:/ { print $2 }')
 elif [ -d $CHECKOUTPATH/.bzr ] ; then
-    MINOR=bzr$(bzr revno)
+    MINOR=$MINOR-bzr$(bzr revno)
 elif [ -d $CHECKOUTPATH/.git ] ; then
-    MINOR=git$(git describe --always)
+    MINOR=$MINOR-git$(git describe --always)
 else
-    MINOR=-1
+    MINOR=$MINOR-$(TZ=UTC date +%Y%m%d%H%M%S)
 fi
 ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
 
-dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DISTRIB-$ARCH autobuild"
-perl -p -i.orig -e "s/UNRELEASED/$DIST/" debian/changelog
+dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
+perl -pi -e "s/UNRELEASED/$DIST/" debian/changelog
 pdebuild --configfile $COWBUILDERCONFIG
-mv debian/changelog.orig debian/changelog
 
 CHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)_$(ARCH).changes
 
