@@ -66,6 +66,7 @@ installtemplate: /usr/lib/lxc/templates/lxc-debian7 /usr/lib/lxc/templates/lxc-d
 	cp lxc-centos6 /usr/lib/lxc/templates/
 
 createdeb:
+	sudo /usr/bin/lxc-create -n dhdebian6.local -f config.debian6 -t debian6
 	sudo /usr/bin/lxc-create -n dhdebian7.local -f config.debian7 -t debian7
 
 createcos: /usr/bin/netmask /usr/bin/rinse
