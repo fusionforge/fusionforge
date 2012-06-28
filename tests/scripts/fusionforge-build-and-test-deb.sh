@@ -16,21 +16,19 @@ set -e
 set -x
 
 COWBUILDERBASE=/var/lib/jenkins/builder/
-COWBUILDERBUILDPLACE=$COWBUILDERBASE/buildplace
-COWBUILDERCOW=$COWBUILDERBASE/cow/base-$DIST-amd64.cow
 COWBUILDERCONFIG=$COWBUILDERBASE/config/$DIST.config
-
-#sudo cowbuilder --update --basepath $COWBUILDERCOW --buildplace=$COWBUILDERBASE
 
 cat > $COWBUILDERCONFIG <<EOF
 PDEBUILD_PBUILDER=cowbuilder
-BASEPATH=$COWBUILDERCOW
-BUILDPLACE=$COWBUILDERBUILDPLACE
+BASEPATH=$COWBUILDERBASE/cow/base-$DIST-amd64.cow
+BUILDPLACE=$COWBUILDERBASE/buildplace
 APTCACHEHARDLINK="no"
 APTCACHE="/var/cache/pbuilder/aptcache"
 PBUILDERROOTCMD="sudo HOME=${HOME}"
 BUILDRESULT=$BUILDRESULT
 EOF
+
+sudo cowbuilder --update --configfile $COWBUILDERCONFIG
 
 cd $CHECKOUTPATH/src
 PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
@@ -39,13 +37,13 @@ MAJOR=${PKGVERS%-*}
 SMAJOR=${MAJOR#*:}
 MINOR=${PKGVERS##*-}
 if [ -d $CHECKOUTPATH/.svn ] ; then
-    MINOR=$MINOR-svn$(svn info | awk '/^Revision:/ { print $2 }')
+    MINOR=-$MINOR+svn$(svn info | awk '/^Revision:/ { print $2 }')
 elif [ -d $CHECKOUTPATH/.bzr ] ; then
-    MINOR=$MINOR-bzr$(bzr revno)
+    MINOR=-$MINOR+bzr$(bzr revno)
 elif [ -d $CHECKOUTPATH/.git ] ; then
-    MINOR=$MINOR-git$(git describe --always)
+    MINOR=-$MINOR+git$(git describe --always)
 else
-    MINOR=$MINOR-$(TZ=UTC date +%Y%m%d%H%M%S)
+    MINOR=-$MINOR+$(TZ=UTC date +%Y%m%d%H%M%S)
 fi
 ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
 
@@ -53,7 +51,7 @@ dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
 perl -pi -e "s/UNRELEASED/$DIST/" debian/changelog
 pdebuild --configfile $COWBUILDERCONFIG
 
-CHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)_$(ARCH).changes
+CHANGEFILE=$PKGNAME_$SMAJOR$MINOR_$ARCH.changes
 
 cd $BUILDRESULT
 reprepro -Vb include $DIST $CHANGEFILE
