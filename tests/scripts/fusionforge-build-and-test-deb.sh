@@ -51,7 +51,7 @@ dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
 sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
 pdebuild --configfile $COWBUILDERCONFIG
 
-CHANGEFILE=${PKGNAME}_$SMAJOR$MINOR_$ARCH.changes
+CHANGEFILE=${PKGNAME}_$SMAJOR${MINOR}_$ARCH.changes
 
 cd $BUILDRESULT
 REPOPATH=$WORKSPACE/build/debian
