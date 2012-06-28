@@ -48,7 +48,7 @@ fi
 ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
 
 dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DISTRIB-$ARCH autobuild"
-perl -p -i.orig -e "s/UNRELEASED/$DISTRIB/" debian/changelog
+perl -p -i.orig -e "s/UNRELEASED/$DIST/" debian/changelog
 pdebuild --configfile $COWBUILDERCONFIG
 mv debian/changelog.orig debian/changelog
 
