@@ -201,7 +201,7 @@ ifupdown,\
 locales,\
 libui-dialog-perl,\
 dialog,\
-dhcp3-client,\
+isc-dhcp-client,\
 netbase,\
 net-tools,\
 iproute,\
