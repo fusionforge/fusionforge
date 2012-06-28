@@ -37,8 +37,8 @@ ssh:
 	[ -e ssh ] || (echo "You need a ssh dir containing host keys like /etc/ssh_host_*" && false)
 
 setname: beroot
-	echo "debian6.local" > $(VMROOT)/rootfs/etc/hostname
-	grep -q debian6.local $(VMROOT)/rootfs/etc/hosts || echo "$(IPDEBBASE).$(VEIDDEB)	debian6.local debian6" >> $(VMROOT)/rootfs/etc/hosts
+	echo "debian7.local" > $(VMROOT)/rootfs/etc/hostname
+	grep -q debian7.local $(VMROOT)/rootfs/etc/hosts || echo "$(IPDEBBASE).$(VEIDDEB)	debian7.local debian7" >> $(VMROOT)/rootfs/etc/hosts
 
 beroot:
 	@[ $(shell id -u) = "0" ] || (echo "you should be root to run this" ; exit 1)
@@ -49,11 +49,15 @@ addrights: beroot
 delrights: beroot
 	lxc-setcap -d
 
-installtemplate: /usr/lib/lxc/templates/lxc-debian6 /usr/lib/lxc/templates/lxc-centos5 /usr/lib/lxc/templates/lxc-centos6
+installtemplate: /usr/lib/lxc/templates/lxc-debian7 /usr/lib/lxc/templates/lxc-debian6 /usr/lib/lxc/templates/lxc-centos5 /usr/lib/lxc/templates/lxc-centos6
 
 /usr/lib/lxc/templates/lxc-debian6: lxc-debian6 /usr/lib/lxc
 	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian6
 	chmod 755 /usr/lib/lxc/templates/lxc-debian6
+
+/usr/lib/lxc/templates/lxc-debian7: lxc-debian7 /usr/lib/lxc
+	cat lxc-debian7 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian7
+	chmod 755 /usr/lib/lxc/templates/lxc-debian7
 
 /usr/lib/lxc/templates/lxc-centos5: lxc-centos5 /usr/lib/lxc
 	cp lxc-centos5 /usr/lib/lxc/templates/
@@ -62,16 +66,16 @@ installtemplate: /usr/lib/lxc/templates/lxc-debian6 /usr/lib/lxc/templates/lxc-c
 	cp lxc-centos6 /usr/lib/lxc/templates/
 
 createdeb:
-	sudo /usr/bin/lxc-create -n dhdebian6.local -f config.debian6 -t debian6
+	sudo /usr/bin/lxc-create -n dhdebian7.local -f config.debian7 -t debian7
 
 createcos: /usr/bin/netmask /usr/bin/rinse
 	sudo /usr/bin/lxc-create -n dhcentos5.local -f config.centos5 -t centos5
 
 startdeb: checkmount
-	sudo LANG=C /usr/bin/lxc-start -n dhdebian6.local -d
+	sudo LANG=C /usr/bin/lxc-start -n dhdebian7.local -d
 
 stopdeb:
-	sudo LANG=C /usr/bin/lxc-stop -n dhdebian6.local
+	sudo LANG=C /usr/bin/lxc-stop -n dhdebian7.local
 
 startcos: checkmount
 	sudo LANG=C /usr/bin/lxc-start -n dhcentos5.local -d
@@ -80,8 +84,8 @@ stopcos:
 	sudo LANG=C /usr/bin/lxc-stop -n dhcentos5.local
 
 destroydeb:
-	sudo LANG=C /usr/bin/lxc-stop -n dhdebian6.local
-	sudo LANG=C /usr/bin/lxc-destroy -n dhdebian6.local
+	sudo LANG=C /usr/bin/lxc-stop -n dhdebian7.local
+	sudo LANG=C /usr/bin/lxc-destroy -n dhdebian7.local
 
 destroycos:
 	sudo LANG=C /usr/bin/lxc-stop -n dhcentos5.local
