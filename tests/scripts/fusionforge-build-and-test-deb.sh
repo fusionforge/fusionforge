@@ -28,7 +28,7 @@ PBUILDERROOTCMD="sudo HOME=${HOME}"
 BUILDRESULT=$BUILDRESULT
 EOF
 
-sudo cowbuilder --update --configfile $COWBUILDERCONFIG
+# sudo cowbuilder --update --configfile $COWBUILDERCONFIG
 
 cd $CHECKOUTPATH/src
 PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
@@ -48,13 +48,28 @@ fi
 ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
 
 dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
-perl -pi -e "s/UNRELEASED/$DIST/" debian/changelog
+sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
 pdebuild --configfile $COWBUILDERCONFIG
 
 CHANGEFILE=$PKGNAME_$SMAJOR$MINOR_$ARCH.changes
 
 cd $BUILDRESULT
-reprepro -Vb include $DIST $CHANGEFILE
+REPOPATH=$WORKSPACE/build/debian
+
+rm -r $REPOPATH
+mkdir -p $REPOPATH/conf
+cat > $REPOPATH/conf/distributions <<EOF
+Codename: $DIST
+Suite: $DIST
+Components: main
+UDebComponents: main
+Architectures: amd64 i386 source
+Origin: debian.fusionforge.org
+Description: FusionForge autobuilt repository
+SignWith: DEBEMAIL=buildbot@$(hostname -f)
+EOF
+
+reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
 set +x
 exit 1
