@@ -69,7 +69,6 @@ function project_trackers_to_service_catalog($server_url, $base_url, $trackers, 
 	$spdetails = $doc->createElement("oslc:details");
 	$spdetails->setAttribute("rdf:resource", htmlentities($project_trackers_url));
 	$provider->appendChild($spdetails);
-	$root->appendChild($provider);
 
 	// We list trackers as Services or ServiceProvider (s) ???????????
 	foreach ($trackers as $tracker) {
@@ -105,12 +104,15 @@ function project_trackers_to_service_catalog($server_url, $base_url, $trackers, 
 		$root->appendChild($provider);
 
 	}
-	// A service provider should mention at least one (empty?) service.
-	if(count($trackers) == 0){
-		$service = $doc->createElement("oslc:service");
-		$provider->appendChild($service);
-		$root->appendChild($provider);
-	}
+
+	$root->appendChild($provider);
+
+	/* // A service provider should mention at least one (empty?) service. */
+	/* if(count($trackers) == 0){ */
+	/* 	$service = $doc->createElement("oslc:service"); */
+	/* 	$provider->appendChild($service); */
+	/* 	$root->appendChild($provider); */
+	/* } */
 	return $doc->saveXML();
 }
 
@@ -159,6 +161,9 @@ function projects_to_service_catalog($base_url, $projects) {
 	$root->appendChild($catalog);
 
 	foreach ($projects as $proj) {
+
+	        $spnode = $doc->createElement("oslc:serviceProvider");
+
 		$sp = $doc->createElement("oslc:ServiceProvider");
 		$sp->setAttribute("rdf:about", $base_url.'/cm/oslc-cm-services/'.$proj['id']);
 
@@ -192,7 +197,10 @@ function projects_to_service_catalog($base_url, $projects) {
 		$service->appendChild($servicedomain);
 		$sp->appendChild($service);
 
-		$catalog->appendChild($sp);
+		$spnode->appendChild($sp);
+
+		$catalog->appendChild($spnode);
+
 		$root->appendChild($catalog);
 	}
 	return $doc->saveXML();
