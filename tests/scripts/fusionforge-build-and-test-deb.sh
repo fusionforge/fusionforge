@@ -8,7 +8,7 @@ export HOST=$1
 
 prepare_workspace
 destroy_vm -t debian7 $HOST
-start_vm_if_not_keeped -t debian7 $HOST
+# start_vm_if_not_keeped -t debian7 $HOST
 
 CHECKOUTPATH=$(pwd)
 
