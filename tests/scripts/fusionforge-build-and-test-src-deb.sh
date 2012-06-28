@@ -47,6 +47,7 @@ ssh root@$HOST "service crond stop" || true
 
 # Copy selenium
 rsync -a 3rd-party/selenium/selenium-server.jar root@$HOST:$FORGE_HOME/tests/selenium-server.jar
+ssh root@$HOST "apt-get -y install phpunit-selenium"
 
 # Run tests
 retcode=0
@@ -56,7 +57,7 @@ ssh root@$HOST "apt-get -y install vnc4server ; mkdir -p /root/.vnc"
 ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
-$FORGE_HOME/tests/scripts/phpunit.sh DEBDebian60Tests.php &> /var/log/phpunit.log &
+$FORGE_HOME/tests/scripts/phpunit.sh DEBDebian70Tests.php &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
 wait %1
 echo \$? > /root/phpunit.exitcode
