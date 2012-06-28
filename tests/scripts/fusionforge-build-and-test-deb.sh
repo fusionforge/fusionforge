@@ -31,8 +31,6 @@ BUILDRESULT=$BUILDRESULT
 EOF
 
 cd $CHECKOUTPATH/src
-pdebuild --configfile $COWBUILDERCONFIG
-
 PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
 PKGVERS=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
 MAJOR=$(echo $PKGVERS | sed 's,([^-]+).*,\1,')
@@ -46,6 +44,12 @@ elif [ -d $CHECKOUTPATH/.git ] ; then
 else
     MINOR=-1
 fi
+
+dch -b -v $(MAJOR)$(MINOR) -D UNRELEASED "This is $(DISTRIB)-$(ARCH) autobuild"
+perl -p -i.orig -e "s/UNRELEASED/$(DISTRIB)/" debian/changelog
+pdebuild --configfile $COWBUILDERCONFIG
+mv debian/changelog.orig debian/changelog
+
 ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
 CHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)_$(ARCH).changes
 
