@@ -14,7 +14,6 @@ BUILDPLACE=$COWBUILDERBASE/buildplace
 APTCACHEHARDLINK="no"
 APTCACHE="/var/cache/pbuilder/aptcache"
 PBUILDERROOTCMD="sudo HOME=${HOME}"
-BUILDRESULT=$BUILDRESULT
 EOF
    
     if [ -d $COWBUILDERBASE/cow/base-$DIST-amd64.cow ] ; then
