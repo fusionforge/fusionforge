@@ -40,7 +40,7 @@ ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
 
 dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
 sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
-pdebuild --configfile $COWBUILDERCONFIG
+pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
 
 CHANGEFILE=${PKGNAME}_$SMAJOR${MINOR}_$ARCH.changes
 
