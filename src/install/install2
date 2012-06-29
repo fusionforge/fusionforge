@@ -183,7 +183,7 @@ install2_files(){
 		fi
 	done
 		
-	for file in /opt/csw/apache2/etc/httpd.conf /etc/apache2/httpd.conf
+	for file in /opt/csw/apache2/etc/httpd.conf /etc/apache2/httpd.conf /etc/apache2/apache2.conf
 	do
 		if [ -f $file ]
 		then 

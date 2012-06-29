@@ -71,6 +71,12 @@ install5_post_debian()
                 mv /etc/gforge/httpd.conf.d/$i.generated /etc/gforge/httpd.conf.d/$i
             fi
         done
+
+	# Apache settings: modules
+	for m in dav dav_svn authz_svn ssl; do
+		a2enmod $m
+	done
+
 	a2dissite default
 	service apache2 restart
 }
