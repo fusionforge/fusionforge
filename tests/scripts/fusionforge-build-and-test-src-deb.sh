@@ -10,16 +10,16 @@ destroy_vm -t debian7 $@
 start_vm_if_not_keeped -t debian7 $@
 
 # Build 3rd-party 
-make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
+# make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
 
 # Setup debian repo
-ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
-ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
+# ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
+# ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
+# ssh root@$HOST "echo \"deb file:/debian $DIST main\" >> /etc/apt/sources.list"
+# scp -r $WORKSPACE/build/debian root@$HOST:/
+# gpg --export --armor | ssh root@$HOST "apt-key add -"
+# sleep 5
 
-ssh root@$HOST "echo \"deb file:/debian $DIST main\" >> /etc/apt/sources.list"
-scp -r $WORKSPACE/build/debian root@$HOST:/
-gpg --export --armor | ssh root@$HOST "apt-key add -"
-sleep 5
 ssh root@$HOST "apt-get update"
 
 echo "Sync code on root@$HOST:$FORGE_HOME"
