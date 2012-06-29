@@ -1828,8 +1828,14 @@ class ArtifactComparator {
 		default:
 			$aa=$a->getExtraFieldDataText();
 			$ba=$b->getExtraFieldDataText();
-			$af=$aa[$this->criterion]['value'];
-			$bf=$ba[$this->criterion]['value'];
+			if(!isset($this->criterion) || empty($this->criterion)) {
+                                $criterion = 1;
+			}
+			else {
+                                $criterion = $this->criterion;
+			}
+                        $af=$aa[$criterion]['value'];
+                        $bf=$ba[$criterion]['value'];
 			$namecmp = strcoll ($af,$bf) ;
 			if ($namecmp != 0) {
 				return $namecmp ;
