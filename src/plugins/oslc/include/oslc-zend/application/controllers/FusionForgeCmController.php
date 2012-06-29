@@ -102,6 +102,14 @@ class FusionForgeCmController extends CmController {
 
 		$contextSwitch = $this->_helper->getHelper('contextSwitch');
 
+		// add an atom context
+                $atomContextSpec = array(
+					 'suffix'        => 'atom',
+					 );
+                if (! $contextSwitch->hasContext('atom')) {     
+		  $contextSwitch->addContext('atom', $atomContextSpec);
+		}
+
 		// we'll handle JSON ourselves
 		$contextSwitch->setAutoJsonSerialization(false);
 		$types = array();

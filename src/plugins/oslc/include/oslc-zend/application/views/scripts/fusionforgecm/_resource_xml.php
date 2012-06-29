@@ -32,7 +32,7 @@ function encodeResource($doc, $container, $resource) {
 	}
 }
 
-function createRessourceCollectionView($view){
+function createRessourceCollectionAtomView($view){
 	$feedcharset = 'UTF-8';
 	$feedauthor = 'FusionForge OSLC-CM plugin';
 
@@ -89,6 +89,38 @@ function createRessourceCollectionView($view){
 	return $doc->saveXML();
 }
 
+function createRessourceCollectionRdfView($view){
+	$doc = new DOMDocument();
+	$doc->formatOutput = true;
+
+	$root = $doc->createElementNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:RDF");
+	$root = $doc->appendChild($root);
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:rdfs', 'http://www.w3.org/2000/01/rdf-schema#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:dcterms', 'http://purl.org/dc/terms/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc', 'http://open-services.net/ns/core#');
+
+	$responseInfo = $doc->createElement("oslc:ResponseInfo");
+	$responseInfo->setAttribute("rdf:about", $view->id);
+
+	$titlenode = $doc->createElement("dcterms:title", TRACKER_TYPE.' OSLC-CM ChangeRequests found in Tracker'. $view->tracker);
+	$responseInfo->appendChild($titlenode);
+
+	$root->appendChild($responseInfo);
+	
+	$rdfDescription = $doc->createElement("rdf:Description");
+	$rdfDescription->setAttribute("rdf:about", $view->id);
+
+	foreach ($view->collection as $entry) {
+	  $member = $doc->createElement("rdfs:member");
+	  $member->setAttribute("rdf:resource", $entry['id']);
+	  $rdfDescription->appendChild($member);
+	}
+	$root->appendChild($rdfDescription);
+
+	return $doc->saveXML();
+}
+
 function createResourceView($view)
 {
 	$doc = new DOMDocument();
@@ -103,6 +135,7 @@ function createResourceView($view)
 	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:foaf', 'http://http://xmlns.com/foaf/0.1/');
 	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc', 'http://open-services.net/ns/core#');
 	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc_cm', 'http://open-services.net/ns/cm#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:helios_bt', 'http://heliosplatform.sourceforge.net/ontologies/2010/05/helios_bt.owl#');
 
 	$child = $doc->createElement("oslc_cm:ChangeRequest");
 	$changerequest = $ressource->appendChild($child);
