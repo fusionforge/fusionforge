@@ -244,7 +244,7 @@ class HgPlugin extends SCMPlugin {
 		}
 	}
 
-	function updateRepositoryList ($params) {
+	function updateRepositoryList($params) {
 		$groups = $this->getGroups();
 		if (!forge_get_config('use_dav', 'scmhg')) {
 			return true;

@@ -26,9 +26,9 @@
 class MantisBTPlugin extends Plugin {
 
 	function MantisBTPlugin() {
-		$this->Plugin() ;
-		$this->name = "mantisbt" ;
-		$this->text = "MantisBT" ; // To show in the tabs, use...
+		$this->Plugin();
+		$this->name = "mantisbt";
+		$this->text = "MantisBT"; // To show in the tabs, use...
 		$this->_addHook('user_personal_links'); //to make a link to the user's personal part of the plugin
 		$this->_addHook('usermenu');
 		$this->_addHook('groupmenu'); // To put into the project tabs
