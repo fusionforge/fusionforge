@@ -1,18 +1,21 @@
 FusionForge-5.3:
 * Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)
 * Trackers: Attachements moved to filesystem to allow larger attachments & reduce DB size (Alcatel-Lucent)
+* Docman: Files moves to filesystem using the Storage generic class (TrivialDev)
 * Users: notify admins when user has validated his account (TrivialDev)
 * Allow project to disable the Project Activity (Alcatel-Lucent)
 * User: account ssh key management: rewrite backend, add more informations such as
         fingerprint, deploy flag, easy delete (TrivialDev)
+* Docman: Directory monitoring (TrivialDev)
+
 Plugins:
 * headermenu: new plugin to add links in login/logout menu link (TrivialDev)
 * scmgit: add browsing capability for user personal repository (TrivialDev)
 * scmgit: basic activity support (TrivialDev).
 * scmhg: merge patch from Denise Patzker: add http support, online browse, stats (TrivialDev)
-* Docman: Files moves to filesystem using the Storage generic class (TrivialDev)
 * webanalytics: new plugin to add support for piwik or google analytics tool (TrivialDev)
 * scmhook: Support added for pre-revprop-changehooks to change properties (Alcatel-Lucent)
+* scmhook: Add commitEmail support for scmhg plugin (TrivialDev)
 
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)

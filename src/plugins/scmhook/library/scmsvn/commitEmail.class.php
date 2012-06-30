@@ -23,7 +23,7 @@ global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
 class commitEmail extends scmhook {
-	function commitEmail() {
+	function __construct() {
 		$this->name = "Commit Email";
 		$this->description = _('Commit is pushed to commit mailing-list of the project');
 		$this->classname = "commitEmail";

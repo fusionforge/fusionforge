@@ -28,7 +28,7 @@
  */
 
 /**
- * scmsvn_updateScmRepo - update the scmrepo with the new hooks
+ * updateScmRepo - update the scmrepo with the new hooks
  *
  * @params	Array	the complete array description
  * @return	boolean	success or not

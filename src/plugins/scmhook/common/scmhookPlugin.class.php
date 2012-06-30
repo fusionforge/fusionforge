@@ -3,6 +3,7 @@
  * scmhookPlugin Class
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -21,10 +22,10 @@
  */
 
 class scmhookPlugin extends Plugin {
-	function scmhookPlugin () {
-		$this->Plugin() ;
-		$this->name = "scmhook" ;
-		$this->text = "Scmhook" ; // To show in the tabs, use...
+	function __construct() {
+		$this->Plugin();
+		$this->name = "scmhook";
+		$this->text = "Scmhook"; // To show in the tabs, use...
 		$this->_addHook('groupmenu');	// To put into the project tabs
 		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook('groupisactivecheckboxpost'); //
@@ -42,7 +43,7 @@ class scmhookPlugin extends Plugin {
 				$scm_plugin = $params['scm_plugin'];
 				$group = &group_get_object($group_id);
 				if ($group->usesPlugin($this->name) && $scm_plugin) {
-					$this->displayScmHook($group_id);
+					$this->displayScmHook($group_id, $scm_plugin);
 				}
 				break;
 			}
@@ -106,7 +107,7 @@ class scmhookPlugin extends Plugin {
 		$hooksString = '';
 		foreach($params as $key => $value) {
 			if ($key == strstr($key, 'scm')) {
-				$hookname = preg_replace('/scm[a-z][a-z][a-z]_/','',$key);
+				$hookname = preg_replace('/scm[a-z][a-z]+_/','',$key);
 				if ($key != $hookname) {	//handle the case of scm_enable_anonymous
 					if (strlen($hooksString)) {
 						$hooksString .= '|'.$hookname;
@@ -125,9 +126,7 @@ class scmhookPlugin extends Plugin {
 		return true;
 	}
 
-	function displayScmHook($group_id) {
-		global $HTML;
-		use_javascript('/js/sortable.js');
+	function displayScmHook($group_id, $scm) {
 		$hooksAvailable = $this->getAvailableHooks($group_id);
 		$statusDeploy = $this->getStatusDeploy($group_id);
 		$hooksEnabled = $this->getEnabledHooks($group_id);
@@ -137,116 +136,15 @@ class scmhookPlugin extends Plugin {
 				echo '<p class="warning">'._('Hooks management update process waiting ...').'</p>';
 
 			echo '<h2>'._('Enable Repository Hooks').'</h2>';
-			$hooksPreCommit = array();
-			$hooksPreRevPropChange = array();
-			$hooksPostCommit = array();
-			foreach ($hooksAvailable as $hook) {
-				switch ($hook->getHookType()) {
-					case "pre-commit": {
-						$hooksPreCommit[] = $hook;
-						break;
-					}
-					case "pre-revprop-change": {
-						$hooksPreRevPropChange[] = $hook;
-						break;
-					}
-					case "post-commit": {
-						$hooksPostCommit[] = $hook;
-						break;
-					}
-					default: {
-						echo 'ici';
-						//byebye hook.... we do not validate you...
-						break;
-					}
+			switch ($scm) {
+				case "scmsvn": {
+					$this->displayScmSvnHook($hooksAvailable, $statusDeploy, $hooksEnabled);
+					break;
 				}
-			}
-			if (count($hooksPreCommit)) {
-				echo '<h3>'._('pre-commit Hooks').'</h3>';
-				$tabletop = array('', _('Hook Name'), _('Description'));
-				$classth = array('unsortable', '', '');
-				echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
-				foreach ($hooksPreCommit as $hookPreCommit) {
-					if (! empty($hookPreCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-						echo '<tr style="display: none;" ><td>';
-					}
-					else {
-						echo '<tr><td>';
-					}
-					echo '<input type="checkbox" ';
-					echo 'name="'.$hookPreCommit->getLabel().'_'.$hookPreCommit->getClassname().'" ';
-					if (in_array($hookPreCommit->getClassname(), $hooksEnabled))
-						echo ' checked="checked"';
-
-					if ($statusDeploy)
-						echo ' disabled="disabled"';
-
-					echo ' />';
-					echo '</td><td>';
-					echo $hookPreCommit->getName();
-					echo '</td><td>';
-					echo $hookPreCommit->getDescription();
-					echo '</td></tr>';
+				case "scmhg": {
+					$this->displayScmHgHook($hooksAvailable, $statusDeploy, $hooksEnabled);
+					break;
 				}
-				echo $HTML->listTableBottom();
-			}
-			if (count($hooksPreRevPropChange)) {
-				echo '<h3>'._('pre-revprop-change Hooks').'</h3>';
-				$tabletop = array('', _('Hook Name'), _('Description'));
-				$classth = array('unsortable', '', '');
-				echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
-				foreach ($hooksPreRevPropChange as $hook) {
-					if (! empty($hook->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-						echo '<tr style="display: none;" ><td>';
-					}
-					else {
-						echo '<tr><td>';
-					}
-					echo '<input type="checkbox" ';
-					echo 'name="'.$hook->getLabel().'_'.$hook->getClassname().'" ';
-					if (in_array($hook->getClassname(), $hooksEnabled))
-						echo ' checked="checked"';
-
-					if ($statusDeploy)
-						echo ' disabled="disabled"';
-
-					echo ' />';
-					echo '</td><td>';
-					echo $hook->getName();
-					echo '</td><td>';
-					echo $hook->getDescription();
-					echo '</td></tr>';
-				}
-				echo $HTML->listTableBottom();
-			}
-			if (count($hooksPostCommit)) {
-				echo '<h3>'._('post-commit Hooks').'</h3>';
-				$tabletop = array('', _('Hook Name'), _('Description'));
-				$classth = array('unsortable', '', '');
-				echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_postcommit', 'sortable', $classth);
-				foreach ($hooksPostCommit as $hookPostCommit) {
-					if (! empty($hookPostCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-						echo '<tr style="display: none;" ><td>';
-					}
-					else {
-						echo '<tr><td>';
-					}
-					echo '<input type="checkbox" ';
-					echo 'name="'.$hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname().'" ';
-					if (in_array($hookPostCommit->getClassname(), $hooksEnabled))
-						echo ' checked="checked"';
-
-					if ($statusDeploy)
-						echo ' disabled="disabled"';
-
-					echo ' />';
-					echo '</td><td>';
-					echo $hookPostCommit->getName();
-					echo '</td><td>';
-					echo $hookPostCommit->getDescription();
-					echo '</td></tr>';
-				}
-				echo $HTML->listTableBottom();
 			}
 			echo '</div><p />';
 		} else {
@@ -344,6 +242,166 @@ class scmhookPlugin extends Plugin {
 			$this->remove($group->getID());
 		}
 		return true;
+	}
+
+	function displayScmSvnHook($hooksAvailable, $statusDeploy, $hooksEnabled) {
+		global $HTML;
+		$hooksPreCommit = array();
+		$hooksPreRevPropChange = array();
+		$hooksPostCommit = array();
+		foreach ($hooksAvailable as $hook) {
+			switch ($hook->getHookType()) {
+				case "pre-commit": {
+					$hooksPreCommit[] = $hook;
+					break;
+				}
+				case "pre-revprop-change": {
+					$hooksPreRevPropChange[] = $hook;
+					break;
+				}
+				case "post-commit": {
+					$hooksPostCommit[] = $hook;
+					break;
+				}
+				default: {
+					//byebye hook.... we do not know you...
+					break;
+				}
+			}
+		}
+		if (count($hooksPreCommit)) {
+			echo '<h3>'._('pre-commit Hooks').'</h3>';
+			$tabletop = array('', _('Hook Name'), _('Description'));
+			$classth = array('unsortable', '', '');
+			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
+			foreach ($hooksPreCommit as $hookPreCommit) {
+				if (! empty($hookPreCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
+					echo '<tr style="display: none;" ><td>';
+				}
+				else {
+					echo '<tr><td>';
+				}
+				echo '<input type="checkbox" ';
+				echo 'name="'.$hookPreCommit->getLabel().'_'.$hookPreCommit->getClassname().'" ';
+				if (in_array($hookPreCommit->getClassname(), $hooksEnabled))
+					echo ' checked="checked"';
+
+				if ($statusDeploy)
+					echo ' disabled="disabled"';
+
+				echo ' />';
+				echo '</td><td>';
+				echo $hookPreCommit->getName();
+				echo '</td><td>';
+				echo $hookPreCommit->getDescription();
+				echo '</td></tr>';
+			}
+			echo $HTML->listTableBottom();
+		}
+		if (count($hooksPreRevPropChange)) {
+			echo '<h3>'._('pre-revprop-change Hooks').'</h3>';
+			$tabletop = array('', _('Hook Name'), _('Description'));
+			$classth = array('unsortable', '', '');
+			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
+			foreach ($hooksPreRevPropChange as $hook) {
+				if (! empty($hook->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
+					echo '<tr style="display: none;" ><td>';
+				}
+				else {
+					echo '<tr><td>';
+				}
+				echo '<input type="checkbox" ';
+				echo 'name="'.$hook->getLabel().'_'.$hook->getClassname().'" ';
+				if (in_array($hook->getClassname(), $hooksEnabled))
+					echo ' checked="checked"';
+
+				if ($statusDeploy)
+					echo ' disabled="disabled"';
+
+				echo ' />';
+				echo '</td><td>';
+				echo $hook->getName();
+				echo '</td><td>';
+				echo $hook->getDescription();
+				echo '</td></tr>';
+			}
+			echo $HTML->listTableBottom();
+		}
+		if (count($hooksPostCommit)) {
+			echo '<h3>'._('post-commit Hooks').'</h3>';
+			$tabletop = array('', _('Hook Name'), _('Description'));
+			$classth = array('unsortable', '', '');
+			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_postcommit', 'sortable', $classth);
+			foreach ($hooksPostCommit as $hookPostCommit) {
+				if (! empty($hookPostCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
+					echo '<tr style="display: none;" ><td>';
+				}
+				else {
+					echo '<tr><td>';
+				}
+				echo '<input type="checkbox" ';
+				echo 'name="'.$hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname().'" ';
+				if (in_array($hookPostCommit->getClassname(), $hooksEnabled))
+					echo ' checked="checked"';
+
+				if ($statusDeploy)
+					echo ' disabled="disabled"';
+
+				echo ' />';
+				echo '</td><td>';
+				echo $hookPostCommit->getName();
+				echo '</td><td>';
+				echo $hookPostCommit->getDescription();
+				echo '</td></tr>';
+			}
+			echo $HTML->listTableBottom();
+		}
+	}
+
+	function displayScmHgHook($hooksAvailable, $statusDeploy, $hooksEnabled) {
+		global $HTML;
+		$hooksServePushPullBundle = array();
+		foreach ($hooksAvailable as $hook) {
+			switch ($hook->getHookType()) {
+				case "serve-push-pull-bundle": {
+					$hooksServePushPullBundle[] = $hook;
+					break;
+				}
+				default: {
+					//byebye hook.... we do not know you...
+					break;
+				}
+			}
+		}
+		if (count($hooksServePushPullBundle)) {
+			echo '<h3>'._('serve-push-pull-bundle Hooks').'</h3>';
+			$tabletop = array('', _('Hook Name'), _('Description'));
+			$classth = array('unsortable', '', '');
+			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_serve-push-pull-bundle', 'sortable', $classth);
+			foreach ($hooksServePushPullBundle as $hookServePushPullBundle) {
+				if (! empty($hookServePushPullBundle->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
+					echo '<tr style="display: none;" ><td>';
+				}
+				else {
+					echo '<tr><td>';
+				}
+				echo '<input type="checkbox" ';
+				echo 'name="'.$hookServePushPullBundle->getLabel().'_'.$hookServePushPullBundle->getClassname().'" ';
+				if (in_array($hookServePushPullBundle->getClassname(), $hooksEnabled))
+					echo ' checked="checked"';
+
+				if ($statusDeploy)
+					echo ' disabled="disabled"';
+
+				echo ' />';
+				echo '</td><td>';
+				echo $hookServePushPullBundle->getName();
+				echo '</td><td>';
+				echo $hookServePushPullBundle->getDescription();
+				echo '</td></tr>';
+			}
+			echo $HTML->listTableBottom();
+		}
 	}
 }
 

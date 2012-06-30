@@ -2664,6 +2664,8 @@ src/plugins/scmhook/common/scmhookPlugin.class.php -text
 src/plugins/scmhook/cronjobs/updateScmRepo.php -text
 src/plugins/scmhook/db/scmhook-init.sql -text
 src/plugins/scmhook/etc/scmhook.ini -text
+src/plugins/scmhook/library/scmhg/commitEmail.class.php -text
+src/plugins/scmhook/library/scmhg/cronjobs/updateScmRepo.php -text
 src/plugins/scmhook/library/scmsvn/checkLog.class.php -text
 src/plugins/scmhook/library/scmsvn/checkMimetype.class.php -text
 src/plugins/scmhook/library/scmsvn/commitEmail.class.php -text

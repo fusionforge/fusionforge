@@ -3,6 +3,7 @@
  * scmhook checkMimetype Plugin Class
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * COpyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -24,7 +25,7 @@ global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
 class checkMimetype extends scmhook {
-	function checkMimetype() {
+	function __construct() {
 		$this->name = "Check Mimetype";
 		$this->description = _('Verify if commited files have svn:mimetype set up correctly.');
 		$this->classname = "checkMimetype";

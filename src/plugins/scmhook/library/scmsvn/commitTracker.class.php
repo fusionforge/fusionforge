@@ -26,7 +26,7 @@ global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
 class commitTracker extends scmhook {
-	function commitTracker() {
+	function __construct() {
 		$this->name = "Commit Tracker";
 		$this->description = _('Every commit is pushed into related tracker or task.');
 		$this->classname = "commitTracker";
