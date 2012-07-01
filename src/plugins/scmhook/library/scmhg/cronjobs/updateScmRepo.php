@@ -26,58 +26,65 @@
  *	$params['scm_root'] = directory containing the scm repository
  */
 
-/**
- * updateScmRepo - update the scmrepo with the new hooks
- *
- * @params	Array	the complete array description
- * @return	boolean	success or not
- */
-function updateScmRepo($params) {
-	$group_id = $params['group_id'];
-	$hooksString = $params['hooksString'];
-	$scmdir_root = $params['scm_root'];
-	$group = group_get_object($group_id);
-	$scmhookPlugin = new scmhookPlugin;
-	$hooksAvailable = $scmhookPlugin->getAvailableHooks($group_id);
-	$unixname = $group->getUnixName();
-	if (is_dir($scmdir_root)) {
-		$hooksServePushPullBundle = array();
-		foreach ($hooksAvailable as $hook) {
-			switch ($hook->getHookType()) {
-				case "serve-push-pull-bundle": {
-					$hooksServePushPullBundle[] = $hook;
-					break;
-				}
-				default: {
-					//byebye hook.... we do not know you...
-					break;
-				}
-			}
-		}
-		//first we disable all hooks
-		foreach($hooksServePushPullBundle as $hookServePushPullBundle) {
-			$hookServePushPullBundle->disable($group);
-		}
-		//now we enable new available hooks
-		$newHooks = explode('|', $hooksString);
-		if (count($newHooks)) {
+
+class ScmHgUpdateScmRepo {
+	function __construct() {
+		return true;
+	}
+
+	/**
+	* updateScmRepo - update the scmrepo with the new hooks
+	*
+	* @params	Array	the complete array description
+	* @return	boolean	success or not
+	*/
+	function updateScmRepo($params) {
+		$group_id = $params['group_id'];
+		$hooksString = $params['hooksString'];
+		$scmdir_root = $params['scm_root'];
+		$group = group_get_object($group_id);
+		$scmhookPlugin = new scmhookPlugin;
+		$hooksAvailable = $scmhookPlugin->getAvailableHooks($group_id);
+		$unixname = $group->getUnixName();
+		if (is_dir($scmdir_root)) {
 			$hooksServePushPullBundle = array();
-			foreach($newHooks as $newHook) {
-				foreach($hooksServePushPullBundle as $hookServePushPullBundle) {
-					if ($hookServePushPullBundle->getClassname() == $newHook) {
-						$newHooksServePushPullBundle[] = $hookServePushPullBundle;
+			foreach ($hooksAvailable as $hook) {
+				switch ($hook->getHookType()) {
+					case "serve-push-pull-bundle": {
+						$hooksServePushPullBundle[] = $hook;
+						break;
+					}
+					default: {
+						//byebye hook.... we do not know you...
+						break;
 					}
 				}
 			}
-		}
-		if (count($newHooksServePushPullBundle)) {
-			foreach($newHooksServePushPullBundle as $newHookServePushPullBundle) {
-				$newHookServePushPullBundle->enable($group);
+			//first we disable all hooks
+			foreach($hooksServePushPullBundle as $hookServePushPullBundle) {
+				$hookServePushPullBundle->disable($group);
 			}
+			//now we enable new available hooks
+			$newHooks = explode('|', $hooksString);
+			if (count($newHooks)) {
+				$hooksServePushPullBundle = array();
+				foreach($newHooks as $newHook) {
+					foreach($hooksServePushPullBundle as $hookServePushPullBundle) {
+						if ($hookServePushPullBundle->getClassname() == $newHook) {
+							$newHooksServePushPullBundle[] = $hookServePushPullBundle;
+						}
+					}
+				}
+			}
+			if (count($newHooksServePushPullBundle)) {
+				foreach($newHooksServePushPullBundle as $newHookServePushPullBundle) {
+					$newHookServePushPullBundle->enable($group);
+				}
+			}
+			return true;
 		}
-		return true;
+		return false;
 	}
-	return false;
 }
 
 ?> 
