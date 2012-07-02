@@ -342,10 +342,15 @@ Thank you for registering your project with %1$s.
 	 * @return string url of the archives
 	 */
 	function getArchivesUrl() {
-		if ($this->isPublic()) {
-			return 'http://'.forge_get_config('lists_host').'/pipermail/'.$this->getName().'/';
+		if (forge_get_config('use_ssl')) {
+			$proto = 'https';
 		} else {
-			return 'http://'.forge_get_config('lists_host').'/mailman/private/'.$this->getName().'/';
+			$proto = 'http';
+		}
+		if ($this->isPublic()) {
+			return "$proto://".forge_get_config('lists_host').'/pipermail/'.$this->getName().'/';
+		} else {
+			return "$proto://".forge_get_config('lists_host').'/mailman/private/'.$this->getName().'/';
 		}
 	}
 
