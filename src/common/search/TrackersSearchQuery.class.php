@@ -68,75 +68,63 @@ class TrackersSearchQuery extends SearchQuery {
 	function getQuery() {
 		$qpa = db_construct_qpa () ;
 
-		$qpa = db_construct_qpa ($qpa,
-					 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg',
-						 array ($this->field_separator));
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFTIwords();
-			$qpa = db_construct_qpa ($qpa,
-						 ', (artifact_idx.vectors || coalesce(ff_tsvector_agg(artifact_message_idx.vectors), to_tsvector($1))) AS full_vector_agg',
-						 array (''));
-						 }
-		$qpa = db_construct_qpa ($qpa, 
-					 ' FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id) ',
-						 array ()) ;
-		if (forge_get_config('use_fti')) {
-			$qpa = db_construct_qpa ($qpa, ' LEFT JOIN artifact_message_idx USING (artifact_id) ', array()) ;
-		}
-		$qpa = db_construct_qpa ($qpa, ' , users, artifact_group_list ', array()) ;
-		if (forge_get_config('use_fti')) {
-			$qpa = db_construct_qpa ($qpa, 
-						 ', artifact_idx ',
-						 array ()) ;
-		}
-		$qpa = db_construct_qpa ($qpa, 
-					 ' WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 ',
-						 array ($this->groupId)) ;
-		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$qpa = db_construct_qpa ($qpa,
-						 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
-						 array (db_int_array_to_any_clause ($this->sections))) ;
-		}
-		if (!$this->showNonPublic) {
-			$qpa = db_construct_qpa ($qpa,
-						 'AND artifact_group_list.is_public = 1 ') ;
-		}
-		if (forge_get_config('use_fti')) {
-			$qpa = db_construct_qpa ($qpa, 
-						 'AND artifact.artifact_id = artifact_idx.artifact_id ',
-						 array ()) ;
-		}
-		$qpa = db_construct_qpa ($qpa,
-					 'GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, artifact.details') ;
 
-		if (forge_get_config('use_fti')) {
-			$qpa = db_construct_qpa ($qpa, 
-						 ', artifact_idx.vectors',
-						 array ()) ;
-		}
-		$qpa = db_construct_qpa ($qpa, 
-					 ') AS x WHERE ') ;
-		
-		if (forge_get_config('use_fti')) {
-			$qpa = db_construct_qpa ($qpa,
-						 'full_vector_agg @@ to_tsquery($1) ',
-						 array($words));
 			if (count($this->phrases)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'AND (') ;
-				$qpa = $this->addMatchCondition ($qpa, 'x.full_string_agg') ;
+							 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg, artifact_idx.vectors FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list, artifact_idx WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = artifact_group_list.group_artifact_id AND artifact_group_list.group_id = $2 ',
+							 array ($this->field_separator, $this->groupId)) ;
+
+				if ($this->sections != SEARCH__ALL_SECTIONS) {
+					$qpa = db_construct_qpa ($qpa,
+								 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
+								 array (db_int_array_to_any_clause ($this->sections))) ;
+				}
+
 				$qpa = db_construct_qpa ($qpa,
-							 ') ') ;
-			}
-			$qpa = db_construct_qpa ($qpa,
-						 'ORDER BY ts_rank(full_vector_agg, to_tsquery($1)) DESC',
+							 ' AND artifact.artifact_id = artifact_idx.artifact_id AND vectors @@ to_tsquery($1) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.details, vectors) AS x WHERE ',
+							 array ($words)) ;
+				$qpa = $this->addMatchCondition ($qpa, 'full_string_agg') ;
+				$qpa = db_construct_qpa ($qpa,
+						 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
 						 array($words)) ;
-			
+			} else {
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_idx.vectors FROM artifact, users, artifact_group_list, artifact_idx WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = artifact_group_list.group_artifact_id AND artifact_group_list.group_id = $1 ',
+							 array ($this->groupId)) ;
+				
+				if ($this->sections != SEARCH__ALL_SECTIONS) {
+					$qpa = db_construct_qpa ($qpa,
+								 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
+								 array (db_int_array_to_any_clause ($this->sections))) ;
+				}
+
+				$qpa = db_construct_qpa ($qpa,
+							 'AND artifact.artifact_id = artifact_idx.artifact_id AND vectors @@ to_tsquery($1) ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
+							 array ($words)) ;
+			}
+
 		} else {
-			$qpa = $this->addIlikeCondition ($qpa, 'x.full_string_agg') ;
 			$qpa = db_construct_qpa ($qpa,
-						 ' ORDER BY x.name, x.artifact_id') ;
+						 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = artifact_group_list.group_artifact_id AND artifact_group_list.group_id = $2 ',
+						 array ($this->field_separator, $this->groupId)) ;
+
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$qpa = db_construct_qpa ($qpa,
+							 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
+							 array (db_int_array_to_any_clause ($this->sections))) ;
+			}
+
+			$qpa = db_construct_qpa ($qpa,
+						 'GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.details) AS x WHERE ',
+						 array ()) ;
+			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ' ORDER BY artifact_id') ;
 		}
+
+		error_log(db_qpa_to_string($qpa).' ');
 		return $qpa ;
 	}
 
