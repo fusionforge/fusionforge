@@ -284,16 +284,25 @@ class ChangeRequestsFusionForgeDb extends ChangeRequests
 									$return[$identifier]['helios_bt:assigned_to'] = $at_arr[$i]->data_array['assigned_realname'];
 									break;
 								case 'dcterms:modified':
-									$return[$identifier]['modified'] = $at_arr[$i]->data_array['last_modified_date'];
-									break;
+								  $date = '@'.$at_arr[$i]->data_array['last_modified_date'];
+								  $date = DateTime($date);
+								  $return[$identifier]['modified'] = $date->format(DateTime::W3C);
+								  break;
 								case 'dcterms:created':
-									$return[$identifier]['created'] = $at_arr[$i]->data_array['open_date'];
-									break;
+								  $date = '@'.$at_arr[$i]->data_array['open_date'];
+								  $date = DateTime($date);
+								  $return[$identifier]['created'] = $date->format(DateTime::W3C);
+								  break;
 								default:
 									throw new ConflictException("The attribute specified ".$field." cannot be found!");
 							}
 						}
 					} else {
+					  $modified = '@'.$at_arr[$i]->data_array['last_modified_date'];
+					  $modified = new DateTime($modified);
+					  $created = '@'.$at_arr[$i]->data_array['open_date'];
+					  $created = new DateTime($created);
+
 						//return the by default set of Change request fields.
 						$return[$identifier]=array(
 							'identifier'=>$identifier,
@@ -303,8 +312,8 @@ class ChangeRequestsFusionForgeDb extends ChangeRequests
 							'helios_bt:priority'=>$at_arr[$i]->data_array['priority'],
 							'creator' => $at_arr[$i]->data_array['submitted_realname'],
 							'helios_bt:assigned_to' => $at_arr[$i]->data_array['assigned_realname'],
-							'modified' => $at_arr[$i]->data_array['last_modified_date'],
-							'created' => $at_arr[$i]->data_array['open_date']
+							'modified' => $modified->format(DateTime::W3C),
+                                                        'created' => $created->format(DateTime::W3C)
 						);
 					}
 				}

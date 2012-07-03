@@ -87,6 +87,7 @@ class CmController extends Zend_Rest_Controller {
 
 							'readResource'=> array(
 								'application/x-oslc-cm-change-request+xml' => 'xml',
+								'application/rdf+xml' => 'xml',
 								'application/xml' => 'xml',
 								'text/xml' => 'xml',
 				 				'application/json' => 'json',
@@ -94,8 +95,9 @@ class CmController extends Zend_Rest_Controller {
 								),
 
 							'readResourceCollection' => array(
-								'application/atom+xml' => 'xml',
 								'application/xml' => 'xml',
+								'application/rdf+xml' => 'xml',
+								'application/atom+xml' => 'atom',
 								'application/json' => 'json'
 								),
 

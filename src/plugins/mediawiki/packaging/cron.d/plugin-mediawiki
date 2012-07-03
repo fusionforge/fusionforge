@@ -17,4 +17,4 @@ MAILTO=""
 1,16,31,46 * * * * root [ -x $MWCRON/create-imagedirs.php ] && $PHP $MWCRON/create-imagedirs.php
 
 # Create wiki XML dumps every night
-55 1 * * * root [ -x $MWCRON/dump-wikis.php ] && $PHP $MWCRON/cronjobs/dump-wikis.php
+55 1 * * * root [ -x $MWCRON/dump-wikis.php ] && $PHP $MWCRON/dump-wikis.php

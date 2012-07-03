@@ -2425,6 +2425,7 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-bugnote.json.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-bugnote.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-bugnote.xml.phtml -text
+src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-resource-collection.atom.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-resource-collection.json.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-resource-collection.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-resource-collection.xml.phtml -text
