@@ -8,7 +8,7 @@ DROP TABLE artifact_message_idx;
 DELETE FROM project_task_idx;
 CREATE UNIQUE INDEX ON project_task_idx (project_task_id);
 INSERT INTO project_task_idx (SELECT t.project_task_id, to_tsvector(t.summary) || to_tsvector(t.details) || coalesce(ff_tsvector_agg(to_tsvector(tm.body)), to_tsvector('')) AS vectors FROM project_task t LEFT OUTER JOIN project_messages tm USING (project_task_id) GROUP BY t.project_task_id);
-DROP TABLE artifact_message_idx;
+DROP TABLE project_messages_idx;
 
 CREATE OR REPLACE FUNCTION update_vectors() RETURNS TRIGGER AS '
 DECLARE
