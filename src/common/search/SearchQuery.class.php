@@ -201,14 +201,17 @@ class SearchQuery extends Error {
 	}
 
 	function addMatchCondition($qpa, $fieldName) {
+
+		error_log(print_r($this->phrases, 1));
 		if(!count($this->phrases)) {
 			$qpa = db_construct_qpa ($qpa, 'TRUE') ;
 			return $qpa;
 		}
 
-		$regexs = array_map ('strtolower',
-				     array_merge ($this->phrases,
-						  str_replace(' ', "\s+", $this->phrases)));
+		$regexs = array();
+		foreach ($this->phrases as $p) {
+			$regexs[] = strtolower (preg_replace ("/\s+/", "\s+", $p));
+		}
 	
 		for ($i = 0; $i < count ($regexs); $i++) {
 			if ($i > 0) {
