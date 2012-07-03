@@ -202,7 +202,6 @@ class SearchQuery extends Error {
 
 	function addMatchCondition($qpa, $fieldName) {
 
-		error_log(print_r($this->phrases, 1));
 		if(!count($this->phrases)) {
 			$qpa = db_construct_qpa ($qpa, 'TRUE') ;
 			return $qpa;
