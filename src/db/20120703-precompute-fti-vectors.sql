@@ -17,12 +17,20 @@ BEGIN
 	table_name := TG_ARGV[0];
 	-- **** artifact table ****
 	IF table_name = ''artifact'' THEN
+		IF TG_OP = ''DELETE'' THEN
+		      DELETE FROM artifact_idx WHERE artifact_id=OLD.artifact_id;
+		ELSE
 		      DELETE FROM artifact_idx WHERE artifact_id=NEW.artifact_id;
 		      INSERT INTO artifact_idx (SELECT a.artifact_id, to_tsvector(a.summary) || to_tsvector(a.details) || coalesce(ff_tsvector_agg(to_tsvector(am.body)), to_tsvector('''')) AS vectors FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id) WHERE a.artifact_id=NEW.artifact_id GROUP BY a.artifact_id);
+		END IF;
 	-- **** artifact_message table ****
 	ELSIF table_name = ''artifact_message'' THEN
+		IF TG_OP = ''DELETE'' THEN
+		      DELETE FROM artifact_idx WHERE artifact_id=OLD.artifact_id;
+		ELSE
 		      DELETE FROM artifact_idx WHERE artifact_id=NEW.artifact_id;
 		      INSERT INTO artifact_idx (SELECT a.artifact_id, to_tsvector(a.summary) || to_tsvector(a.details) || coalesce(ff_tsvector_agg(to_tsvector(am.body)), to_tsvector('''')) AS vectors FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id) WHERE a.artifact_id=NEW.artifact_id GROUP BY a.artifact_id);
+		END IF;
 	-- **** doc_data table ****
 	ELSIF table_name = ''doc_data'' THEN
 		IF TG_OP = ''INSERT'' THEN
@@ -81,21 +89,19 @@ BEGIN
 		END IF;
 	-- **** project_task table ****
 	ELSIF table_name = ''project_task'' THEN
-		IF TG_OP = ''INSERT'' THEN
-			INSERT INTO project_task_idx (project_task_id, vectors) VALUES (NEW.project_task_id, to_tsvector(coalesce(NEW.summary,'''') ||'' ''|| coalesce(NEW.details,'''')));
-		ELSIF TG_OP = ''UPDATE'' THEN
-			UPDATE project_task_idx SET vectors=to_tsvector(coalesce(NEW.summary,'''') ||'' ''|| coalesce(NEW.details,'''')) WHERE project_task_id=NEW.project_task_id;
-		ELSIF TG_OP = ''DELETE'' THEN
+		IF TG_OP = ''DELETE'' THEN
 			DELETE FROM project_task_idx WHERE project_task_id=OLD.project_task_id;
+		ELSE
+			DELETE FROM project_task_idx WHERE project_task_id=NEW.project_task_id;
+			INSERT INTO project_task_idx (SELECT t.project_task_id, to_tsvector(t.summary) || to_tsvector(t.details) || coalesce(ff_tsvector_agg(to_tsvector(tm.body)), to_tsvector('''')) AS vectors FROM project_task t LEFT OUTER JOIN project_messages tm USING (project_task_id) WHERE t.project_task_id=NEW.project_task_id GROUP BY t.project_task_id);
 		END IF;
 	-- **** project_messages table ****
 	ELSIF table_name = ''project_messages'' THEN
-		IF TG_OP = ''INSERT'' THEN
-			INSERT INTO project_messages_idx (id, project_task_id, vectors) VALUES (NEW.project_message_id, NEW.project_task_id, to_tsvector(coalesce(NEW.body,'''')));
-		ELSIF TG_OP = ''UPDATE'' THEN
-			UPDATE project_messages_idx SET project_task_id=NEW.project_task_id, vectors=to_tsvector(coalesce(NEW.body,'''')) WHERE id=NEW.project_message_id;
-		ELSIF TG_OP = ''DELETE'' THEN
-			DELETE FROM project_messages_idx WHERE id=OLD.project_message_id;
+		IF TG_OP = ''DELETE'' THEN
+			DELETE FROM project_task_idx WHERE project_task_id=OLD.project_task_id;
+		ELSE
+			DELETE FROM project_task_idx WHERE project_task_id=NEW.project_task_id;
+			INSERT INTO project_task_idx (SELECT t.project_task_id, to_tsvector(t.summary) || to_tsvector(t.details) || coalesce(ff_tsvector_agg(to_tsvector(tm.body)), to_tsvector('''')) AS vectors FROM project_task t LEFT OUTER JOIN project_messages tm USING (project_task_id) WHERE t.project_task_id=NEW.project_task_id GROUP BY t.project_task_id);
 		END IF;
 	-- **** skills_data table ****
 	ELSIF table_name = ''skills_data'' THEN
