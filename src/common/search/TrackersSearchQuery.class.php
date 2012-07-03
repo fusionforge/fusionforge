@@ -124,7 +124,6 @@ class TrackersSearchQuery extends SearchQuery {
 						 ' ORDER BY artifact_id') ;
 		}
 
-		error_log(db_qpa_to_string($qpa).' ');
 		return $qpa ;
 	}
 
