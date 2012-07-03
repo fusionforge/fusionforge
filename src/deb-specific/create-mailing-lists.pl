@@ -30,7 +30,8 @@ eval {
                      users.user_name,
                      mail_group_list.password,
                      mail_group_list.description,
-                     mail_group_list.is_public
+                     mail_group_list.is_public,
+                     users.email
               FROM mail_group_list, users
               WHERE mail_group_list.status = 1
                     AND mail_group_list.list_admin = users.user_id" ; # Status = 1: list just created on the website
@@ -43,15 +44,17 @@ eval {
 
     foreach $line (@lines) {
 	@array = @{$line} ;
-	my ($group_list_id, $listname, $user_name, $password, $description, $is_public) ;
+	my ($group_list_id, $listname, $user_name, $password, $description, $is_public, $user_email) ;
 	my ($tmp) ;
 
-	($group_list_id, $listname, $user_name, $password, $description, $is_public)= @array ;
+	($group_list_id, $listname, $user_name, $password, $description, $is_public, $user_email)= @array ;
 	next if $listname eq '' ;
 	next if $listname eq '.' ;
 	next if $listname eq '..' ;
 	next if $listname !~ /^[a-z0-9\-_\.]*$/ ;
 
+	# Switch between login@users.myforge.com or firstname.lastname@mail.com style for list owner's email by commenting either of the following 2 lines
+        #my $cmd = "/usr/sbin/newlist -q $listname $user_email $password >/dev/null 2>&1" ;
 	my $cmd = "/usr/sbin/newlist -q $listname $user_name\@$sys_users_host $password >/dev/null 2>&1" ;
 	#print "cmd = <$cmd>\n" ;
 	system ($cmd) ;
