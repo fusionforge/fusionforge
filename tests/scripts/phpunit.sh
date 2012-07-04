@@ -44,7 +44,7 @@ define ('ROOT', '');
 define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASSWORD', '@@FFDB_PASS@@');
-define('DB_INIT_CMD', "$FORGE_HOME/tests/func/db_reload.sh >>/var/log/db_reload_selenium.log 2>>/var/log/db_reload_selenium.errlog");
+define('DB_INIT_CMD', "$FORGE_HOME/tests/func/db_reload.sh >>/var/log/db_reload_selenium.log 2>&1");
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'myadmin')
