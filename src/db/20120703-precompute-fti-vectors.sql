@@ -1,12 +1,12 @@
 ALTER TABLE artifact_idx DROP COLUMN group_artifact_id;
 
 DELETE FROM artifact_idx;
-CREATE UNIQUE INDEX ON artifact_idx (artifact_id);
+ALTER TABLE artifact_idx ADD PRIMARY KEY (artifact_id);
 INSERT INTO artifact_idx (SELECT a.artifact_id, to_tsvector(a.summary) || to_tsvector(a.details) || coalesce(ff_tsvector_agg(to_tsvector(am.body)), to_tsvector('')) AS vectors FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id) GROUP BY a.artifact_id);
 DROP TABLE artifact_message_idx;
 
 DELETE FROM project_task_idx;
-CREATE UNIQUE INDEX ON project_task_idx (project_task_id);
+ALTER TABLE project_task_idx ADD PRIMARY KEY (project_task_id);
 INSERT INTO project_task_idx (SELECT t.project_task_id, to_tsvector(t.summary) || to_tsvector(t.details) || coalesce(ff_tsvector_agg(to_tsvector(tm.body)), to_tsvector('')) AS vectors FROM project_task t LEFT OUTER JOIN project_messages tm USING (project_task_id) GROUP BY t.project_task_id);
 DROP TABLE project_messages_idx;
 
