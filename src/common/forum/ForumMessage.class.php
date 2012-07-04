@@ -656,7 +656,7 @@ class ForumMessage extends Error {
 			}
 
 			$body = sprintf(_("\nRead and respond to this message at: \n%s"), util_make_url ('/forum/message.php?msg_id='.$this->getID()));
-			if (forge_get_config('use_mail')) {
+			if (forge_get_config('use_mail') && forge_get_config('use_forum_mail_replies')) {
 				$body .= stripcslashes(sprintf(_('
 Or reply to this e-mail entering your response between the following markers:
 %1$s
@@ -690,7 +690,7 @@ Or reply to this e-mail entering your response between the following markers:
 			$extra_headers = "Return-Path: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Errors-To: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
-			if (forge_get_config('use_mail')) {
+			if (forge_get_config('use_mail') && forge_get_config('use_forum_mail_replies')) {
 				$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 			}
 			$extra_headers .= "Precedence: Bulk\n"

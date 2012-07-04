@@ -61,6 +61,9 @@ if (file_exists($gfcgfile)) {
 	forge_set_config_item_bool ('use_docman', 'core') ;
 	forge_define_config_item ('use_diary', 'core', $GLOBALS['sys_use_diary']) ;
 	forge_set_config_item_bool ('use_diary', 'core') ;
+	// whether to generate the templates allowing to respond to forum notifications by mail
+	forge_define_config_item ('use_forum_mail_replies', 'core', $GLOBALS['sys_use_mail']) ;
+	forge_set_config_item_bool ('use_forum_mail_replies', 'core') ;
 	forge_define_config_item ('use_news', 'core', $GLOBALS['sys_use_news']) ;
 	forge_set_config_item_bool ('use_news', 'core') ;
 	forge_define_config_item ('use_mail', 'core', $GLOBALS['sys_use_mail']) ;
