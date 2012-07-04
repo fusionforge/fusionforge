@@ -690,7 +690,9 @@ Or reply to this e-mail entering your response between the following markers:
 			$extra_headers = "Return-Path: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Errors-To: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
-			$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
+			if (forge_get_config('use_mail')) {
+				$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
+			}
 			$extra_headers .= "Precedence: Bulk\n"
 				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".forge_get_config('web_host').">\n"
 				."List-Help: ".util_make_url ('/forum/forum.php?id='.$this->Forum->getId())."\n"
