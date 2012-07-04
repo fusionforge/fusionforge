@@ -15,6 +15,8 @@ fgcostrk=lxc:centos5::
 fgdebtrk=lxc:debian6::
 
 # VM for Branch 5.1
+centos5=lxc:centos5::
+debian6=lxc:debian6::
 fgcos51src=lxc:centos5::
 fgcos51=lxc:centos5::
 fgdeb51=lxc:debian6::
