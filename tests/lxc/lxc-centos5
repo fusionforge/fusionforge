@@ -212,7 +212,7 @@ sed -i -e '/start_udev/d' $rootfs/etc/rc.d/rc.sysinit
     fi
 
 mv $rootfs/dev $rootfs/dev.old
-mkdir $rootfs/dev
+mkdir -p $rootfs/dev
 test -e $rootfs/dev/null    || mknod -m 666 $rootfs/dev/null c 1 3
 test -e $rootfs/dev/zero    || mknod -m 666 $rootfs/dev/zero c 1 5
 test -e $rootfs/dev/random  || mknod -m 666 $rootfs/dev/random c 1 8
@@ -305,6 +305,20 @@ echo "Setup baseurl on server \$server"
 sed -i -e "s!#baseurl=http://mirror.centos.org!baseurl=http://\$server!" $cache/partial-$arch/etc/yum.repos.d/CentOS-Base.repo
 rm -f $cache/partial-$arch/etc/mtab
 ln -s /proc/mounts $cache/partial-$arch/etc/mtab
+
+mkdir -p $cache/partial-$arch/dev
+test -e $cache/partial-$arch/dev/null    || mknod -m 666 $cache/partial-$arch/dev/null c 1 3
+test -e $cache/partial-$arch/dev/zero    || mknod -m 666 $cache/partial-$arch/dev/zero c 1 5
+test -e $cache/partial-$arch/dev/random  || mknod -m 666 $cache/partial-$arch/dev/random c 1 8
+test -e $cache/partial-$arch/dev/urandom || mknod -m 666 $cache/partial-$arch/dev/urandom c 1 9
+test -e $cache/partial-$arch/dev/pts     || mkdir -m 755 $cache/partial-$arch/dev/pts
+test -e $cache/partial-$arch/dev/shm     || mkdir -m 1777 $cache/partial-$arch/dev/shm
+test -e $cache/partial-$arch/dev/tty     || mknod -m 666 $cache/partial-$arch/dev/tty c 5 0
+test -e $cache/partial-$arch/dev/console || mknod -m 600 $cache/partial-$arch/dev/console c 5 1
+test -e $cache/partial-$arch/dev/tty0    || mknod -m 666 $cache/partial-$arch/dev/tty0 c 4 0
+test -e $cache/partial-$arch/dev/full    || mknod -m 666 $cache/partial-$arch/dev/full c 1 7
+test -e $cache/partial-$arch/dev/initctl || mknod -m 600 $cache/partial-$arch/dev/initctl p
+test -e $cache/partial-$arch/dev/ptmx    || mknod -m 666 $cache/partial-$arch/dev/ptmx c 5 2
 EOF
     chmod 755 /var/cache/rinse/$DISTRO-$arch.before_post_install
 
