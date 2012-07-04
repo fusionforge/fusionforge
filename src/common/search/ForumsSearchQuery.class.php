@@ -123,21 +123,6 @@ class ForumsSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getSearchByIdQuery - get the sql query built to get the search results when we are looking for an int
-	 *
-	 * @return array query+params array
-	 */
-	function getSearchByIdQuery() {
-		$qpa = db_construct_qpa () ;
-		$qpa = db_construct_qpa ($qpa,
-					 'SELECT msg_id FROM forum, forum_group_list WHERE msg_id=$1 AND forum_group_list.group_forum_id=forum.group_forum_id AND group_forum_id=$2',
-					 array ($this->searchId,
-						$this->forumId)) ;
-
-		return $qpa;
-	}
-
-	/**
 	 * getSections - returns the list of available forums
 	 *
 	 * @param $groupId int group id

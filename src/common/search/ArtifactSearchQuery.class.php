@@ -93,24 +93,6 @@ class ArtifactSearchQuery extends SearchQuery {
 
 		return $qpa ;
 	}
-
-	/**
-	 * getSearchByIdQuery - get the query built to get the search results when we are looking for an int
-	 *
-	 * @return array query+params array
-	 */
-	function getSearchByIdQuery() {
-		$qpa = db_construct_qpa () ;
-
-		$qpa = db_construct_qpa ($qpa,
-					 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id, a.artifact_id') ;
-		$qpa = db_construct_qpa ($qpa,
-					 ' FROM artifact a WHERE a.group_artifact_id=$1 AND a.artifact_id=$2',
-					 array ($this->artifactId,
-						$this->searchId)) ;
-
-		return $qpa;
-	}
 }
 
 // Local Variables:

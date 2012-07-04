@@ -62,12 +62,6 @@ class SearchQuery extends Error {
 	 */
 	var $result;
 	/**
-	 * When search by id is enabled, the id to search for
-	 *
-	 * @var int $searchId
-	 */
-	var $searchId = false;
-	/**
 	 * if we want to search for all the words or if only one is sufficient
 	 *
 	 * @var boolean $isExact
@@ -96,7 +90,6 @@ class SearchQuery extends Error {
 	 * @param	int	$rowsPerPage number of rows per page
 	 */
 	function __construct($words, $offset, $isExact, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE) {
-		$this->field_separator = ' ioM0Thu6_fieldseparator_kaeph9Ee ';
 
 		$this->cleanSearchWords($words);
 		//We manual escap because every Query in Search escap parameters
@@ -128,43 +121,40 @@ class SearchQuery extends Error {
 			$this->setError(_('Error: criteria not specified'));
 			return;
 		}
-		if(is_numeric($words) && $this->implementsSearchById()) {
-			$this->searchId = (int) $words;
-		} else {
-			$words = preg_replace("/[ \t]+/", ' ', $words);
-			if(strlen($words) < 3) {
-				$this->setError(_('Error: search query too short'));
-				return;
-			}
-			$words = htmlspecialchars($words);
-			$words = strtr($words, array('%' => '\%', '_' => '\_'));
-			$phrase = '';
-			$inQuote = false;
-			foreach(explode(' ', quotemeta($words)) as $word) {
-				if($inQuote) {
+
+		$words = preg_replace("/[ \t]+/", ' ', $words);
+		if(strlen($words) < 3) {
+			$this->setError(_('Error: search query too short'));
+			return;
+		}
+		$words = htmlspecialchars($words);
+		$words = strtr($words, array('%' => '\%', '_' => '\_'));
+		$phrase = '';
+		$inQuote = false;
+		foreach(explode(' ', quotemeta($words)) as $word) {
+			if($inQuote) {
+				if(substr($word, -1) == "'") {
+					$word = substr($word, 0, -1);
+					$inQuote = false;
+					$phrase .= ' '.$word;
+					$this->phrases[] = $phrase;
+				} else {
+					$phrase .= ' '.$word;
+				}
+			} else {
+				if(substr($word, 0, 1) == "'") {
+					$word = substr($word, 1);
+					$inQuote = true;
 					if(substr($word, -1) == "'") {
+						// This is a special case where the phrase is just one word
 						$word = substr($word, 0, -1);
 						$inQuote = false;
-						$phrase .= ' '.$word;
-						$this->phrases[] = $phrase;
+						$this->words[] = $word;
 					} else {
-						$phrase .= ' '.$word;
+						$phrase = $word;
 					}
 				} else {
-					if(substr($word, 0, 1) == "'") {
-						$word = substr($word, 1);
-						$inQuote = true;
-						if(substr($word, -1) == "'") {
-							// This is a special case where the phrase is just one word
-							$word = substr($word, 0, -1);
-							$inQuote = false;
-							$this->words[] = $word;
-						} else {
-							$phrase = $word;
-						}
-					} else {
-						$this->words[] = $word;
-					}
+					$this->words[] = $word;
 				}
 			}
 		}
@@ -175,14 +165,8 @@ class SearchQuery extends Error {
 	 */
 	function executeQuery() {
 
-		if($this->searchId) {
-			$qpa = $this->getSearchByIdQuery();
-		} else {
-			$qpa = $this->getQuery();
-		}
-
 		$this->result = db_query_qpa (
-			$qpa,
+			$this->getQuery(),
 			$this->rowsPerPage + 1,
 			$this->offset,
 			'SYS_DB_SEARCH'
@@ -252,15 +236,6 @@ class SearchQuery extends Error {
 		} else {
 			return ' OR ';
 		}
-	}
-
-	/**
-	 * implementsSearchById - check if the current object implements the search by id feature by having a getSearchByIdQuery method
-	 *
-	 * @return boolean true if our object implements search by id, false otherwise.
-	 */
-	function implementsSearchById() {
-		return method_exists($this, 'getSearchByIdQuery');
 	}
 
 	/**

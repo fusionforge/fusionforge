@@ -147,23 +147,6 @@ class TrackersSearchQuery extends SearchQuery {
 		}
 		return $sections;
 	}
-
-	function getSearchByIdQuery() {
-		$qpa = db_construct_qpa () ;
-		$qpa = db_construct_qpa ($qpa,
-					 'SELECT DISTINCT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 ',
-					 array ($this->groupId)) ;
-		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$qpa = db_construct_qpa ($qpa,
-						 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
-						 array( db_int_array_to_any_clause ($this->sections))) ;
-		}
-		$qpa = db_construct_qpa ($qpa,
-					 'AND artifact.artifact_id=$1 ORDER BY artifact_group_list.name, artifact.artifact_id',
-					 array ($this->searchId)) ;
-
-		return $qpa ;
-	}
 }
 
 // Local Variables:
