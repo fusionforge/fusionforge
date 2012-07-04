@@ -38,11 +38,10 @@ class Widget_MyMonitoredForums extends Widget {
 
 	function getContent() {
 		$html_my_monitored_forums = '';
-		$sql="SELECT DISTINCT groups.group_id, groups.group_name ".
+		$sql="SELECT DISTINCT groups.group_id, groups.group_name, forum_group_list.group_forum_id ".
 		"FROM groups,forum_group_list,forum_monitored_forums ".
 		"WHERE groups.group_id=forum_group_list.group_id ".
 		"AND groups.status = 'A' ".
-		"AND forum_group_list.is_public <> 9 ".
 		"AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
 		"AND forum_monitored_forums.user_id=$1 ";
 		$um = UserManager::instance();
@@ -55,25 +54,38 @@ class Widget_MyMonitoredForums extends Widget {
 		$sql .= "ORDER BY groups.group_id ASC LIMIT 100";
 
 		$result=db_query_params($sql,array(user_getid()));
-		$rows=db_numrows($result);
+		$glist = array();
+		while ($r = db_fetch_array($result)) {
+			if (forge_check_perm('project', $r['group_id'], 'read') 
+					&& forge_check_perm('forum', $r['group_forum_id'], 'read')) {
+				$glist[] = $r;
+			}
+		}
+		$rows=count($glist);
 		if (!$result || $rows < 1) {
 			$html_my_monitored_forums .= '<div class="warning">' . _("You are not monitoring any forums.") . '</div><p>' . _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.") . '</p><p>' . _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself.") . '</p>';
 		} else {
 			$request =& HTTPRequest::instance();
 			$html_my_monitored_forums .= '<table style="width:100%">';
 			for ($j=0; $j<$rows; $j++) {
-				$group_id = db_result($result, $j, 'group_id');
+				$group_id = $glist[$j]['group_id'];
 
 				$sql2="SELECT forum_group_list.group_forum_id,forum_group_list.forum_name ".
 					"FROM groups,forum_group_list,forum_monitored_forums ".
 					"WHERE groups.group_id=forum_group_list.group_id ".
 					"AND groups.group_id=$1".
-					"AND forum_group_list.is_public <> 9 ".
 					"AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
 					"AND forum_monitored_forums.user_id=$2 LIMIT 100";
 
 				$result2 = db_query_params($sql2, array($group_id, user_getid()));
-				$rows2 = db_numrows($result2);
+				$flist = array();
+				while ($r = db_fetch_array($result2)) {
+					if (forge_check_perm('forum', $r['group_forum_id'], 'read')) {
+						$flist[] = $r;
+					}
+				}
+
+				$rows2 = count($flist);
 
 				$vItemId = new Valid_UInt('hide_item_id');
 				$vItemId->required();
@@ -95,17 +107,17 @@ class Widget_MyMonitoredForums extends Widget {
 
 				$html_hdr = ($j ? '<tr class="boxitem"><td colspan="2">' : '').
 				$hide_url.'<a href="/forum/?group_id='.$group_id.'">'.
-				db_result($result,$j,'group_name').'</a>    ';
+				$glist[$j]['group_name'].'</a>    ';
 
 				$html = '';
 				$count_new = max(0, $count_diff);
 				for ($i=0; $i<$rows2; $i++) {
 					if (!$hide_now) {
-						$group_forum_id = db_result($result2, $i, 'group_forum_id');
+						$group_forum_id = $flist[$i]['group_forum_id'];
 						$html .= '
 					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'"><td width="99%">'.
 					'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/forum/forum.php?forum_id='.$group_forum_id.'">'.
-						db_result($result2,$i,'forum_name').'</a></td>'.
+						$flist[$i]['forum_name'].'</a></td>'.
 					'<td class="align-center"><a href="/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1'.
 					'" onClick="return confirm(\''._("Stop monitoring this Forum?").'\')">'.
 					'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" '.
