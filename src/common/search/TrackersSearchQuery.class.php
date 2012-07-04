@@ -158,10 +158,6 @@ class TrackersSearchQuery extends SearchQuery {
 						 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
 						 array( db_int_array_to_any_clause ($this->sections))) ;
 		}
-		if (!$this->showNonPublic) {
-			$qpa = db_construct_qpa ($qpa,
-						 'AND artifact_group_list.is_public = 1 ') ;
-		}
 		$qpa = db_construct_qpa ($qpa,
 					 'AND artifact.artifact_id=$1 ORDER BY artifact_group_list.name, artifact.artifact_id',
 					 array ($this->searchId)) ;
