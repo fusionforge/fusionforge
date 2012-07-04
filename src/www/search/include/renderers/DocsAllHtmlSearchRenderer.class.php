@@ -38,21 +38,17 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 	 *
 	 */
 	function DocsAllHtmlSearchRenderer($words, $offset, $isExact, $sections = SEARCH__ALL_SECTIONS) {
-		$nbGroups 		= 0;
 		$parametersValues 	= array();
 
 		if (session_loggedin()) {
 			$u =& session_get_user();
 			$listGroups = $u->getGroups();
-		}
-
-		if (count($listGroups) > 0) {
-			foreach ($listGroups as $group) {
-				$userIsGroupMember = forge_check_perm('docman', $group->getID(), 'read');
-				$parametersValues[$group->getID()]=$userIsGroupMember;
+			if (count($listGroups) > 0) {
+				foreach ($listGroups as $group) {
+					$userIsGroupMember = forge_check_perm('docman', $group->getID(), 'read');
+					$parametersValues[$group->getID()]=$userIsGroupMember;
+				}
 			}
-		} else {
-			$parametersValues = array();
 		}
 
 		$searchQuery = new DocsAllSearchQuery($words, $offset, $isExact , $sections, $parametersValues);
