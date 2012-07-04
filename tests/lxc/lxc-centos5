@@ -390,7 +390,7 @@ copy_centos()
 
     # make a local copy of the minicentos
     echo -n "Copying rootfs to $rootfs ..."
-    cp -a $cache/rootfs-$arch $rootfs || return 1
+    cp --reflink=auto -a $cache/rootfs-$arch $rootfs || return 1
     return 0
 }
 
