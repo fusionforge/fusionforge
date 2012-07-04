@@ -49,7 +49,7 @@ while [ $i -lt 10 ] && is_db_up ; do
     i=$(( $i + 1 ))
     sleep 5
 done
-if is_db_up ; then
+if ! is_db_up ; then
     echo "...OK"
 else
     echo "... FAIL: database still up?"
