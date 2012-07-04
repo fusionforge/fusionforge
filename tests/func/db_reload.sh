@@ -38,7 +38,23 @@ else
 	service postgresql restart
 fi
 
-echo "Droping database $database"
+is_db_up () {
+    echo "select count(*) from users;" | su - postgres -c "psql $database" > /dev/null 2>&1
+}
+
+echo "Waiting for database to be up..."
+i=0
+while [ $i -lt 10 ] && ! is_db_up ; do
+    i=$(( $i + 1 ))
+    sleep 5
+done
+if is_db_up ; then
+    echo "...OK"
+else
+    echo "... FAIL: database still down?"
+fi
+
+echo "Dropping database $database"
 su - postgres -c "dropdb -e $database"
 
 if [ -f /root/dump ]
