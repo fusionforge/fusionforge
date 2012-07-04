@@ -42,19 +42,27 @@ class Widget_MyTasks extends Widget {
             'WHERE project_task.project_task_id=project_assigned_to.project_task_id '.
             'AND project_assigned_to.assigned_to_id=$1'.
             ' AND project_task.status_id=1 AND project_group_list.group_id=groups.group_id '.
-            "AND project_group_list.is_public!='9' ".
           'AND project_group_list.group_project_id=project_task.group_project_id GROUP BY groups.group_id, groups.group_name, project_group_list.project_name, project_group_list.group_project_id';
 
         $result=db_query_params($sql,array(user_getid()));
-        $rows=db_numrows($result);
+
+	$plist = array();
+	while ($r = db_fetch_array($result)) {
+		if (forge_check_perm('project', $r['group_id'], 'read') 
+				&& forge_check_perm('pm', $r['group_project_id'], 'read')) {
+			$plist[] = $r;
+		}
+	}
+
+        $rows = count($plist);
 
         if ($result && $rows >= 1) {
             $request =& HTTPRequest::instance();
             $this->content .= '<table style="width:100%">';
             for ($j=0; $j<$rows; $j++) {
 
-                $group_id = db_result($result,$j,'group_id');
-                $group_project_id = db_result($result,$j,'group_project_id');
+                $group_id = $plist[$j]['group_id'];
+                $group_project_id = $plist[$j]['group_project_id'];
 
                 $sql2 = 'SELECT project_task.project_task_id, project_task.priority, project_task.summary,project_task.percent_complete '.
                     'FROM groups,project_group_list,project_task,project_assigned_to '.
@@ -63,7 +71,6 @@ class Widget_MyTasks extends Widget {
                     'AND project_group_list.group_id=groups.group_id '.
                     "AND groups.group_id=$2 ".
                     'AND project_group_list.group_project_id=project_task.group_project_id '.
-                    "AND project_group_list.is_public!='9' ".
                    "AND project_group_list.group_project_id= $3 LIMIT 100";
 
 
