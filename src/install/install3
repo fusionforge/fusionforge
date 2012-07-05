@@ -279,10 +279,10 @@ EOF
 	esac
 
 	msg green " * Loading FusionForge DB"
-	su $susufix $gforge_user -c "psql $gforge_db < $fusionforge_src_dir/db/gforge.sql" >> /tmp/gforge-import.log
+	su $susufix $gforge_user -c "psql $gforge_db < $fusionforge_src_dir/db/gforge.sql" >> /tmp/gforge-import.log 2>&1
 
 	msg green " * Running php db/upgrade-db.php"
-        php $fusionforge_src_dir/db/upgrade-db.php >> /tmp/gforge-upgrade.log
+        php $fusionforge_src_dir/db/upgrade-db.php >> /tmp/gforge-upgrade.log 2>&1
 
 
 	if [ -z "$FFORGE_ADMIN_USER" ]

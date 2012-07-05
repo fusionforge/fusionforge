@@ -1603,6 +1603,24 @@ function util_gethref($baseurl=false, $args=array(), $ashtml=true, $sep='&') {
 	return ($ashtml ? util_html_encode($rv) : $rv);
 }
 
+/**
+ * util_sanitise_multiline_submission() – Convert text to ASCII CR-LF
+ *
+ * @param	string	$text
+ *			input string to sanitise
+ * @return	string
+ *		sanitised string: CR, LF or CR-LF converted to CR-LF
+ */
+function util_sanitise_multiline_submission($text) {
+	/* convert all CR-LF into LF */
+	$text = preg_replace("/\015+\012+/m", "\012", $text);
+	/* convert all CR or LF into CR-LF */
+	$text = preg_replace("/[\012\015]/m", "\015\012", $text);
+
+	return $text;
+}
+
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
