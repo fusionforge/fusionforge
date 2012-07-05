@@ -260,7 +260,7 @@ EOF
 	case $pgv in
 		7.*|8.1*|8.2*)
 			msg green " * Loading tsearch2 Database Into $gforge_db DB"
-			su - postgres -c "psql $gforge_db < $tsearch" >> /tmp/gforge-import.log
+			su - postgres -c "psql $gforge_db < $tsearch" >> /tmp/gforge-import.log 2>&1
 			for table in pg_ts_cfg pg_ts_cfgmap pg_ts_dict pg_ts_parser
 			do
 				su - postgres -c "psql $gforge_db -c \"GRANT ALL on $table TO $gforge_user\";"
@@ -270,10 +270,10 @@ EOF
 	esac
 
 	msg green " * Loading FusionForge DB"
-	su $susufix $gforge_user -c "psql $gforge_db < $fusionforge_src_dir/db/gforge.sql" >> /tmp/gforge-import.log
+	su $susufix $gforge_user -c "psql $gforge_db < $fusionforge_src_dir/db/gforge.sql" >> /tmp/gforge-import.log 2>&1
 
 	msg green " * Running php db/upgrade-db.php"
-        php $fusionforge_src_dir/db/upgrade-db.php >> /tmp/gforge-upgrade.log
+        php $fusionforge_src_dir/db/upgrade-db.php >> /tmp/gforge-upgrade.log 2>&1
 
 
 	if [ -z "$FFORGE_ADMIN_USER" ]
