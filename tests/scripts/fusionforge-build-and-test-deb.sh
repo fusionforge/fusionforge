@@ -82,7 +82,7 @@ EOF
 
 scp -r tests root@$HOST:/root
 scp -r $WORKSPACE/build/config  root@$HOST:/root
-scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
+scp 3rd-party/selenium/selenium-server.jar root@$HOST:/root
 ssh root@$HOST "cat /root/tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | LANG=C debconf-set-selections"
 ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
 ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"

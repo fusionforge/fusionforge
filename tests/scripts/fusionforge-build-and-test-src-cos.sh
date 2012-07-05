@@ -127,7 +127,7 @@ HUDSON_URL=$HUDSON_URL
 JOB_NAME=$JOB_NAME
 EOF
 scp -r $WORKSPACE/build/config  root@$HOST:/root/
-rsync -a 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root/selenium-server.jar
+rsync -a 3rd-party/selenium/selenium-server.jar root@$HOST:/root/selenium-server.jar
 rsync -a --delete tests/ root@$HOST:/root/tests/
 
 echo "Run phpunit test on $HOST"

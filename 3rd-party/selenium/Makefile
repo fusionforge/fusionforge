@@ -2,26 +2,16 @@
 # http://seleniumhq.org/
 # http://seleniumhq.org/projects/remote-control/
 # http://selenium.googlecode.com/svn/trunk/remote/server/
-# take http://selenium.googlecode.com/files/selenium-remote-control-1.0.3.zip
 # see tests/func/README.TXT
 #
 
-run: binary/selenium-server-1.0.3
-	cd binary/selenium-server-1.0.3 ; LANG=C java -jar selenium-server.jar -interactive
+S_VERSION=2.21.0
 
-getselenium: binary/selenium-server-current/selenium-server.jar
+run: selenium-server.jar
+	LANG=C java -jar selenium-server.jar -interactive
 
-binary/selenium-server-current/selenium-server.jar: binary/selenium-server-1.0.3
-	ln -s selenium-server-1.0.3 binary/selenium-server-current
-
-binary/selenium-server-1.0.3: binary/selenium-remote-control-1.0.3.zip
-	cd binary ; [ -d selenium-server-1.0.3 ] || unzip selenium-remote-control-1.0.3.zip
-
-binary/selenium-remote-control-1.0.3.zip: binary
-	cd binary ; wget -q -c http://selenium.googlecode.com/files/selenium-remote-control-1.0.3.zip
-
-binary:
-	mkdir binary
+selenium-server.jar: Makefile
+	wget -O - http://selenium.googlecode.com/files/selenium-server-standalone-$(S_VERSION).jar > $@
 
 svnexport:
 	svn export http://selenium.googlecode.com/svn/trunk/remote/server selenium-server
@@ -29,3 +19,13 @@ svnexport:
 
 getpackage:
 	sudo apt-get install maven-debian-helper
+
+getselenium: selenium-server.jar
+
+clean:
+	rm -f selenium-server.jar
+
+botbuild: getselenium
+
+botclean:
+	@echo "Nothing to do"
