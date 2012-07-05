@@ -94,14 +94,14 @@ class globalSearchPlugin extends Plugin {
 			return _('No stats available')." ".db_error();
 		}
 
-		$return .= '<table class="underline-link">';
+		$return = '<table class="underline-link">';
 		while ($row_topdown = db_fetch_array($res_top_n_assoc)) {
 			if ($row_topdown['numprojects'] > 0) {
 				$return .= '<tr><td>';
-				$return .= '<a href="' . $row_topdown[link] . '/">';
-				$return .= $row_topdown[title] . "</a>";
+				$return .= '<a href="' . $row_topdown['link'] . '/">';
+				$return .= $row_topdown['title'] . "</a>";
 				$return .= '</td>';
-				$return .= '<td class="align-right">' . number_format($row_topdown[numprojects], 0);
+				$return .= '<td class="align-right">' . number_format($row_topdown['numprojects'], 0);
 				$return .= " projects";
 				$return .= "</td></tr>\n";
 			}
