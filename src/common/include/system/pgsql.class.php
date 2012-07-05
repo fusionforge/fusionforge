@@ -306,7 +306,7 @@ class pgsql extends System {
 			return false;
 		}
 		
-		foreach ($group->getUsers() as $u) {
+		foreach ($group->getUsers(false) as $u) {
 			$this->sysGroupAddUser ($group_id, $u->getID()) ;
 		}
 
