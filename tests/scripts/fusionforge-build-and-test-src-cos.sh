@@ -5,6 +5,7 @@
 export FORGE_HOME=/opt/gforge
 get_config $@
 prepare_workspace
+destroy_vm -t centos5 $@
 start_vm_if_not_keeped -t centos5 $@
 
 #[ ! -e $HOME/doxygen-1.6.3/bin/doxygen ] || make build-doc DOCSDIR=$WORKSPACE/apidocs DOXYGEN=$HOME/doxygen-1.6.3/bin/doxygen
