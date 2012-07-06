@@ -98,7 +98,7 @@ JOB_NAME=$JOB_NAME
 EOF
 
 scp -r $WORKSPACE/build/config  root@$HOST:/root/
-rsync -a 3rd-party/selenium/binary/selenium-server.jar root@$HOST:/root/selenium-server.jar
+rsync -a 3rd-party/selenium/selenium-server.jar root@$HOST:/root/selenium-server.jar
 rsync -a --delete tests/ root@$HOST:/root/tests/
 
 ssh root@$HOST "ln -s gforge /usr/share/src"
