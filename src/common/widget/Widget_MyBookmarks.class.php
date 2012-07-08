@@ -22,12 +22,13 @@ require_once('Widget.class.php');
 require_once $gfcommon.'include/plugins_utils.php';
 
 /**
-* Widget_MyBookmarks
-*
-* Personal bookmarks
-*/
+ * Widget_MyBookmarks
+ *
+ * Personal bookmarks
+ */
+
 class Widget_MyBookmarks extends Widget {
-	function Widget_MyBookmarks() {
+	function __construct() {
 		$this->Widget('mybookmarks');
 	}
 

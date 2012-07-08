@@ -25,12 +25,11 @@ require_once('Widget.class.php');
 include $gfcommon.'docman/DocumentFactory.class.php';
 
 /**
-* Widget_MyProjectsLastDocuments
-*
-* PROJECT LIST
-*/
+ * Widget_MyProjectsLastDocuments
+ */
+
 class Widget_MyProjectsLastDocuments extends Widget {
-	function Widget_MyProjectsLastDocuments() {
+	function __construct() {
 		$this->Widget('myprojectslastdocuments');
 	}
 

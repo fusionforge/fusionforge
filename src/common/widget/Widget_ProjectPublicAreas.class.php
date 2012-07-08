@@ -23,13 +23,16 @@ require_once('Widget.class.php');
 /**
  * Widget_ProjectPublicAreas
  */
+
 class Widget_ProjectPublicAreas extends Widget {
-	function Widget_ProjectPublicAreas() {
+	function __construct() {
 		$this->Widget('projectpublicareas');
 	}
+
 	function getTitle() {
 		return _('Public Areas');
 	}
+
 	function getContent() {
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
@@ -212,14 +215,14 @@ class Widget_ProjectPublicAreas extends Widget {
 								//webcalendar
 								plugin_hook("cal_link_group",$group_id);
 	}
+
 	function canBeUsedByProject(&$project) {
 		return true;
 	}
+
 	function getDescription() {
 		return _('List all available services for this project along with some information next to it. Click on any of this item to access a service.<br />The role of this area is pretty much equivalent to the Project Main Menu at the top of the screen except that it shows additional information about each of the service (e.g. total number of open bugs, tasks, ...)');
 	}
-
-
 }
 
 ?>

@@ -23,12 +23,12 @@
 require_once('Widget.class.php');
 
 /**
-* Widget_ProjectLatestDocuments
-*
-*/
+ * Widget_ProjectLatestDocuments
+ */
+
 class Widget_ProjectLatestDocuments extends Widget {
 	var $content;
-	function Widget_ProjectLatestDocuments() {
+	function __construct() {
 		$this->Widget('projectlatestdocuments');
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();

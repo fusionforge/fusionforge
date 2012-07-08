@@ -22,12 +22,13 @@ require_once('Widget_Rss.class.php');
 require_once('common/widget/WidgetLayoutManager.class.php');
 
 /**
-* Widget_MyRss
-*
-* Personal rss reader
-*/
+ * Widget_MyRss
+ *
+ * Personal rss reader
+ */
+
 class Widget_MyRss extends Widget_Rss {
-    function Widget_MyRss() {
+    function __construct() {
         $this->Widget_Rss('myrss', user_getid(), WidgetLayoutManager::OWNER_TYPE_USER);
     }
 

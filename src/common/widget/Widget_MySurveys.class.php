@@ -30,11 +30,12 @@ require_once ('common/survey/SurveyFactory.class.php');
  * This needs to be updated manually to display any given survey
  * Default behavior: get first survey from group #1
  */
+
 class Widget_MySurveys extends Widget {
 	var $content;
 	var $can_be_displayed;
 
-	function Widget_MySurveys() {
+	function __construct() {
 		$this->Widget('mysurveys');
 		$no_survey = true;
 

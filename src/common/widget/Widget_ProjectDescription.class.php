@@ -22,47 +22,46 @@ require_once('Widget.class.php');
 require_once('common/include/Codendi_HTMLPurifier.class.php');
 
 /**
-* Widget_ProjectDescription
-*
-*/
-class Widget_ProjectDescription extends Widget {
-    public function __construct() {
-        $this->Widget('projectdescription');
-    }
-    public function getTitle() {
-        return _('Project description');
-    }
-    public function getContent() {
-        $request =& HTTPRequest::instance();
-        $group_id = $request->get('group_id');
-        $pm = ProjectManager::instance();
-        $project = $pm->getProject($group_id);
-        //$hp = Codendi_HTMLPurifier::instance();
+ * Widget_ProjectDescription
+ */
 
-	$pluginManager = plugin_manager_get_object();
+class Widget_ProjectDescription extends Widget {
+	public function __construct() {
+		$this->Widget('projectdescription');
+	}
+
+	public function getTitle() {
+		return _('Project description');
+	}
+
+	public function getContent() {
+		$request =& HTTPRequest::instance();
+		$group_id = $request->get('group_id');
+		$pm = ProjectManager::instance();
+		$project = $pm->getProject($group_id);
+
+		$pluginManager = plugin_manager_get_object();
 		if (! $pluginManager->PluginIsInstalled('blocks') || !plugin_hook ("blocks", 'summary_description')) {
-		$project_description = $project->getDescription();
-		if ($project_description) {
-			// need to use a litteral version for content attribute since nl2br is for HTML
-			print "<p>"
-				.'<span property="doap:description" content="'. preg_quote($project_description,'"') .'">'
-				. nl2br($project_description)
-				.'</span></p>';
-		} else {
-			print "<p>" . _('This project has not yet submitted a description.') . '</p>';
+			$project_description = $project->getDescription();
+			if ($project_description) {
+				// need to use a litteral version for content attribute since nl2br is for HTML
+				print "<p>"
+					.'<span property="doap:description" content="'. preg_quote($project_description,'"') .'">'
+					. nl2br($project_description)
+					.'</span></p>';
+			} else {
+				print "<p>" . _('This project has not yet submitted a description.') . '</p>';
+			}
 		}
 	}
 
+	public function canBeUsedByProject(&$project) {
+		return true;
+	}
 
-
-
-    }
-    public function canBeUsedByProject(&$project) {
-	    return true;
-    }
-    function getDescription() {
-	    return _('Allow you to view the project description');
-    }
+	function getDescription() {
+		return _('Allow you to view the project description');
+	}
 }
 
 ?>

@@ -21,12 +21,13 @@
 require_once('Widget.class.php');
 
 /**
-* Widget_MyAdmin
-*
-* Personal Admin
-*/
+ * Widget_MyAdmin
+ *
+ * Personal Admin
+ */
+
 class Widget_MyAdmin extends Widget {
-    function Widget_MyAdmin() {
+    function __construct() {
         $this->Widget('myadmin');
     }
     function getTitle() {

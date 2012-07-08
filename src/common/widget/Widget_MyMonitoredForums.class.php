@@ -23,12 +23,13 @@ require_once('Widget.class.php');
 require_once $gfwww.'include/my_utils.php';
 
 /**
-* Widget_MyMonitoredForums
-*
-* Forums that are actively monitored
-*/
+ * Widget_MyMonitoredForums
+ *
+ * Forums that are actively monitored
+ */
+
 class Widget_MyMonitoredForums extends Widget {
-	function Widget_MyMonitoredForums() {
+	function __construct() {
 		$this->Widget('mymonitoredforums');
 	}
 
@@ -47,8 +48,8 @@ class Widget_MyMonitoredForums extends Widget {
 		$um = UserManager::instance();
 		$current_user = $um->getCurrentUser();
 		if ($current_user->getStatus()=='S') {
-		$projects = $current_user->getProjects();
-		$sql .= "AND groups.group_id IN (". implode(',', $projects) .") ";
+			$projects = $current_user->getProjects();
+			$sql .= "AND groups.group_id IN (". implode(',', $projects) .") ";
 		}
 		//$sql .= "GROUP BY groups.group_id ORDER BY groups.group_id ASC LIMIT 100";
 		$sql .= "ORDER BY groups.group_id ASC LIMIT 100";
@@ -149,7 +150,7 @@ class Widget_MyMonitoredForums extends Widget {
 		$request =& HTTPRequest::instance();
 		$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
 		if ($request->exist('hide_item_id') || $request->exist('hide_forum')) {
-		$ajax_url .= '&amp;hide_item_id=' . $request->get('hide_item_id') . '&amp;hide_forum=' . $request->get('hide_forum');
+			$ajax_url .= '&amp;hide_item_id=' . $request->get('hide_item_id') . '&amp;hide_forum=' . $request->get('hide_forum');
 		}
 		return $ajax_url;
 	}

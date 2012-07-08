@@ -25,12 +25,13 @@ require_once('Widget.class.php');
 require_once $gfwww.'include/my_utils.php';
 
 /**
-* Widget_MyMonitoredDocuments
-*
-* Documents that are actively monitored
-*/
+ * Widget_MyMonitoredDocuments
+ *
+ * Documents that are actively monitored
+ */
+
 class Widget_MyMonitoredDocuments extends Widget {
-	function Widget_MyMonitoredDocuments() {
+	function __construct() {
 		$this->Widget('mymonitoreddocuments');
 	}
 

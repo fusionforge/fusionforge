@@ -21,15 +21,17 @@
 require_once('Widget.class.php');
 
 /**
- * Widget_ProjectMembers
+ * Widget_ProjectInfo
  */
 class Widget_ProjectInfo extends Widget {
 	public function __construct() {
 		$this->Widget('projectinfo');
 	}
+
 	public function getTitle() {
 		return _('Project Info');
 	}
+
 	public function getContent() {
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
@@ -116,16 +118,16 @@ class Widget_ProjectInfo extends Widget {
 			}
 		}
 
-
 		$hook_params = array();
 		$hook_params['group_id'] = $group_id;
 		plugin_hook("project_after_description",$hook_params);
 		plugin_hook('hierarchy_views', array($group_id, 'home'));
-
 	}
+
 	public function canBeUsedByProject(&$project) {
 		return true;
 	}
+
 	function getDescription() {
 		return _('Some infos about the project.');
 	}

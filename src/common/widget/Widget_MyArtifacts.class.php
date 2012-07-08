@@ -35,9 +35,10 @@ require_once $gfcommon.'tracker/ArtifactCanned.class.php';
  *
  * Artifact assigned to or submitted by or monitored by this person
  */
+
 class Widget_MyArtifacts extends Widget {
 	var $_artifact_show;
-	function Widget_MyArtifacts() {
+	function __construct() {
 		$this->Widget('myartifacts');
 		$this->_artifact_show = UserManager::instance()->getCurrentUser()->getPreference('my_artifacts_show');
 		if($this->_artifact_show === false) {

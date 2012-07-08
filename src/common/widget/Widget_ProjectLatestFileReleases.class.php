@@ -22,23 +22,25 @@
 require_once('Widget.class.php');
 
 /**
-* Widget_ProjectLatestFileReleases
-*
-*/
+ * Widget_ProjectLatestFileReleases
+ */
+
 class Widget_ProjectLatestFileReleases extends Widget {
 	var $content;
-	function Widget_ProjectLatestFileReleases() {
+	function __construct() {
 		$this->Widget('projectlatestfilereleases');
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));
 		if ($project && $this->canBeUsedByProject($project)) {
-		$this->content['title'] = _('Latest File Releases');
+			$this->content['title'] = _('Latest File Releases');
 		}
 	}
+
 	function getTitle() {
 		return $this->content['title'];
 	}
+
 	function getContent() {
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
@@ -152,23 +154,23 @@ class Widget_ProjectLatestFileReleases extends Widget {
 				echo '</table>';
 			}
 		}
-
 		echo '<div class="underline-link">' . util_make_link ('/frs/?group_id='.$group_id, _('View All Project Files')) . '</div>';
+	}
 
-    }
-    function isAvailable() {
-        return isset($this->content['title']);
-    }
-    function canBeUsedByProject(&$project) {
-        return $project->usesFRS();
-    }
+	function isAvailable() {
+		return isset($this->content['title']);
+	}
+	function canBeUsedByProject(&$project) {
+		return $project->usesFRS();
+	}
 
-    function getCategory() {
-        return 'File-Release';
-    }
-    function getDescription() {
+	function getCategory() {
+		return 'File-Release';
+	}
+
+	function getDescription() {
 		return _(' List the most recent packages available for download along with their revision. <br />A Release Notes icon allows you to see the latest changes and developers comments associated with this revision.<br />Then comes the monitor icon, selecting this icon will cause this package to be monitored for you.<br />Anytime the project development team posts a new release, you will be automatically notified via e-mail. All monitored File Releases are listed in your Personal Page and can be canceled from this page or from the main page of the file release system.');
-    }
+	}
 }
 
 ?>

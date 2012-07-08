@@ -28,9 +28,11 @@ class Widget_ProjectMembers extends Widget {
 	public function __construct() {
 		$this->Widget('projectmembers');
 	}
+
 	public function getTitle() {
 		return _('Project Members');
 	}
+
 	public function getContent() {
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
@@ -108,9 +110,11 @@ class Widget_ProjectMembers extends Widget {
 			echo '<p>'.util_make_link ('/project/request.php?group_id='.$group_id,_('Request to join')).'</p>';
 		}
 	}
+
 	public function canBeUsedByProject(&$project) {
 		return true;
 	}
+
 	function getDescription() {
 		return _('List the project members.');
 	}

@@ -23,12 +23,13 @@ require_once('Widget.class.php');
 require_once('common/rss/RSS.class.php');
 
 /**
-* Widget_MyProjects
-*
-* PROJECT LIST
-*/
+ * Widget_MyProjects
+ *
+ * PROJECT LIST
+ */
+
 class Widget_MyProjects extends Widget {
-	function Widget_MyProjects() {
+	function __construct() {
 		$this->Widget('myprojects');
 	}
 	function getTitle() {
