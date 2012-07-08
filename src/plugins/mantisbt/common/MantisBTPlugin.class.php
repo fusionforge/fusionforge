@@ -25,7 +25,7 @@
 
 class MantisBTPlugin extends Plugin {
 
-	function MantisBTPlugin() {
+	function __construct() {
 		$this->Plugin();
 		$this->name = "mantisbt";
 		$this->text = "MantisBT"; // To show in the tabs, use...

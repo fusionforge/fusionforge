@@ -22,7 +22,7 @@ require_once('common/widget/Widget.class.php');
 require_once('common/widget/WidgetLayoutManager.class.php');
 
 class mantisBT_Widget_ProjectLastIssues extends Widget {
-	function mantisBT_Widget_ProjectLastIssues() {
+	function __construct() {
 		$this->Widget('plugin_mantisbt_project_latestissues');
 	}
 
