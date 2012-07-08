@@ -3,6 +3,8 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems - Tim Perdue
+ * Copyright 2012, Jean-Christophe Masson - French National Education Department
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -138,7 +140,7 @@ function snippet_footer($params) {
 
 function snippet_show_package_snippets($version) {
 	//show the latest version
-	$result=db_query_params("SELECT snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name
+	$result=db_query_params("SELECT users.realname,users.user_id,snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name
 FROM snippet,snippet_version,snippet_package_item,users
 WHERE snippet.snippet_id=snippet_version.snippet_id
 AND users.user_id=snippet_version.submitted_by
@@ -154,7 +156,7 @@ AND snippet_package_item.snippet_package_version_id=$1", array($version));
 	$title_arr[]= _('Title');
 	$title_arr[]= _('Author');
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr,$links_arr);
+	echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 	if (!$result || $rows < 1) {
 		echo db_error();
@@ -169,10 +171,10 @@ AND snippet_package_item.snippet_package_version_id=$1", array($version));
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
 				'</td><td>'.
-				util_make_link ('/snippet/download.php?type=snippet&amp;id='.db_result($result,$i,'snippet_version_id'),db_result($result,$i,'version')).
+				util_make_link('/snippet/download.php?type=snippet&amp;id='.db_result($result,$i,'snippet_version_id'),db_result($result,$i,'version')).
 				'</td><td>'.
 				db_result($result,$i,'name').'</td><td>'.
-				db_result($result,$i,'user_name').'</td></tr>';
+				util_make_link_u(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td></tr>';
 		}
 	}
 
