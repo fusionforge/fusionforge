@@ -3,6 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems - Tim Perdue
+ * Copyright 2012, Jean-Christophe Masson - French National Education Department
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -154,7 +155,7 @@ AND snippet_package_item.snippet_package_version_id=$1", array($version));
 	$title_arr[]= _('Title');
 	$title_arr[]= _('Author');
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr,$links_arr);
+	echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 	if (!$result || $rows < 1) {
 		echo db_error();
