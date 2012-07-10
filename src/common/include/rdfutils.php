@@ -49,3 +49,4 @@ function rdfutils_setPropToUri($res, $prop, $value) {
 // mode: php
 // c-file-style: "bsd"
 // End:
+

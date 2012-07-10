@@ -509,8 +509,8 @@ TODO : document Auth plugins :
                in $params['content_type'] the actual content-type to return
 
   Hook Name  : project_rdf_metadata
-  Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, $params['xml'] already returned xml bits
-  Description: returns in $params['prefixes'] and $params['xml'] added prefixes and added bits of RDF+XML to be included in the project's DOAP description 
+  Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, $params['in_Resource'] : already constructed ARC2_Resource instances (read-only)
+  Description: returns in $params['prefixes'] added prefixes, and in the array $params['out_Resources'] new ARC2_Resources including new triples to be included in the project's DOAP description 
 
   Hook Name  : role_adduser
   Parameters : $params['user'] : user added to the role, $params['role'] : role added to the user

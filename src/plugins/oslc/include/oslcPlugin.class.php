@@ -21,6 +21,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once('common/include/rdfutils.php');
+
 class oslcPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
@@ -152,14 +154,22 @@ class oslcPlugin extends Plugin {
 			}
 		}
 		elseif($hookname == "project_rdf_metadata") {
-			
-			$group_id=$params['group'];
-			$serviceprovider = util_make_url ("/plugins/oslc/cm/oslc-cm-services/".$group_id);
 
-			if (! $params['prefixes']['http://open-services.net/ns/core#']) {
+			# TODO : create another resource
+			$group_id=$params['group'];
+
+			if (! isset($params['prefixes']['http://open-services.net/ns/core#'])) {
 				$params['prefixes']['http://open-services.net/ns/core#'] = 'oslc';
 			}
-			$params['xml'][] = '<oslc:serviceProvider rdf:resource="'.$serviceprovider.'"/>';
+			
+			$serviceprovider = util_make_url ("/plugins/oslc/cm/oslc-cm-services/".$group_id);
+
+			$res = $params['in_Resource'];
+
+			rdfutils_setPropToUri($res, 'oslc:serviceProvider', $serviceprovider);
+            
+			$params['out_Resources'][] = $res;
+			
 		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
