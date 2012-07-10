@@ -17,6 +17,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * Portions Copyright 2002-2004 (c) GForge Team
  * Portions Copyright 2002-2009 (c) Roland Mas
+ * Copyright 2012, Jean-Christophe Masson - French National Education Department
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -163,7 +164,7 @@ if (getStringFromRequest('submit')) {
 	$feedback = '';
 }
 
-site_header(array('title'=>_('Register Project')));
+site_user_header(array('title'=>_('Register Project')));
 ?>
 
 <p>
