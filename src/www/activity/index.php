@@ -124,6 +124,8 @@ if (forge_get_config('use_docman') && $group->usesDocman()) {
 	$texts[]	= _('New Documents');
 	$ids[]		= 'docmanupdate';
 	$texts[]	= _('Updated Documents');
+	$ids[]		= 'docgroupnew';
+	$texts[]	= _('New Directories');
 }
 
 if (count($show) < 1) {
@@ -233,7 +235,8 @@ if (count($results) < 1) {
 					break;
 				}
 				case 'docmannew':
-				case 'docmanupdate': {
+				case 'docmanupdate':
+				case 'docgroupnew': {
 					$cached_perms[$s][$ref] = forge_check_perm('docman', $group_id, 'read');
 					break;
 				}
@@ -308,6 +311,11 @@ if (count($results) < 1) {
 			case 'docmanupdate': {
 				$icon = html_image("ic/docman16b.png", '', '', array("alt"=>"Documents"));
 				$url = util_make_link('docman/?group_id='.$arr['group_id'].'&amp;view=listfile&amp;dirid='.$arr['ref_id'],_('Document').' '.$arr['description']);
+				break;
+			}
+			case 'docgroupnew': {
+				$icon = html_image("ic/cfolder15.png", '', '', array("alt"=>"Directory"));
+				$url = util_make_link('docman/?group_id='.$arr['group_id'].'&amp;view=listfile&amp;dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
 				break;
 			}
 			default: {

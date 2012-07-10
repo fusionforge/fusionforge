@@ -7,6 +7,7 @@ FusionForge-5.3:
 * User: account ssh key management: rewrite backend, add more informations such as
         fingerprint, deploy flag, easy delete (TrivialDev)
 * Docman: Directory monitoring (TrivialDev)
+* Activity: New Directory appears now in activity (TrivialDev)
 
 Plugins:
 * headermenu: new plugin to add links in login/logout menu link (TrivialDev)
