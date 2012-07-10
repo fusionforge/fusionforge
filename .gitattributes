@@ -483,6 +483,7 @@ src/common/include/plugins_utils.php -text
 src/common/include/pre-compat.php -text
 src/common/include/preplugins.php -text
 src/common/include/rbac_texts.php -text
+src/common/include/rdfutils.php -text
 src/common/include/sqlparser.php -text
 src/common/include/tag_cloud.php -text
 src/common/include/timezones.php -text
