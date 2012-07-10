@@ -522,6 +522,10 @@ TODO : document Auth plugins :
   Locations  : common/include/RBAC.php
   Description: Called when a role is removed to an user.
 
+  Hook Name  : alt_representations
+  Parameters : $params['script_name'] contains the SCRIPT_NAME (filtered to work only on /projects or /users for the moment)
+  Description: returns alternate representations for a particular page in $params['results'] which is populated by the hook users 
+
 TODO (nerville) : document display_hierarchy
 TODO (lolando ?) : document role_normalize, role_translate_strings, role_has_permission, role_get_setting, list_roles_by_permission 
 TODO : document project_link_with_tooltip

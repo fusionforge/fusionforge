@@ -36,6 +36,7 @@ class doaprdfPlugin extends Plugin {
 		$this->text = "DoaPRDF!"; // To show in the tabs, use...
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_project_home");
+		$this->_addHook("alt_representations");
 
 	}
 
@@ -156,6 +157,18 @@ class doaprdfPlugin extends Plugin {
 			$params['content'] = $doc;
 		}
 	}
+	
+	/**
+	 * Declares a link to itself in the link+meta HTML headers
+	 * @param unknown_type $params
+	 */
+	function alt_representations (&$params) {
+		$script_name = $params['script_name'];
+		if ($script_name == '/projects') {
+			$params['return'][] = '<link rel="meta" type="application/rdf+xml" title="DOAP RDF Data" href=""/>';
+		}
+	}
+	
 }
 
 // Local Variables:
