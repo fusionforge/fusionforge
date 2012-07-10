@@ -46,13 +46,13 @@
 require_once $gfcommon.'include/Storage.class.php';
 
 class DocumentStorage extends Storage {
-    public static function instance() {
-        if (!isset(self::$_instance)) {
-            $c = __CLASS__;
-            self::$_instance = new $c;
-        }
-        return self::$_instance;
-    }
+	public static function instance() {
+		if (!isset(self::$_instance)) {
+		$c = __CLASS__;
+		self::$_instance = new $c;
+		}
+		return self::$_instance;
+	}
 
 	function get_storage_path() {
 		return forge_get_config('data_path').'/docman';
