@@ -364,7 +364,7 @@ Description: Contribution tracker plugin for FusionForge
 
 Package: fusionforge-plugin-doaprdf
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, php-http, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, php-http, libarc-php, ${misc:Depends}
 Description: collaborative development tool - DOAP RDF plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -492,7 +492,7 @@ Description: MoinMoinWiki plugin for FusionForge
 Package: fusionforge-plugin-oslc
 Homepage: http://picoforge.int-evry.fr/cgi-bin/twiki/view/Oslc/Web/FusionForgeOslcServer
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, zendframework (>> 1.10), php5-cli, php-pear, php-http (>= 1.4.1), ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, zendframework (>> 1.10), php5-cli, php-pear, php-http (>= 1.4.1), libarc-php, ${misc:Depends}
 Recommends: fusionforge-plugin-compactpreview
 Description: OSLC-CM compatible plugin for FusionForge tracker system.
  OSLC-CM is a standard specification for APIs in Change Management
