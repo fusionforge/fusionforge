@@ -63,6 +63,7 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
 	public function testUnixLineEndings()
 	{
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
+		// to see individual lines + line nums : find src tests -name '*.php' -type f | xargs pcregrep -n '\r$'
 		$output = `find $root/src $root/tests -name '*.php' -type f | xargs pcregrep -l '\r$'`;
 		$this->assertEquals('', $output);
 		$output = `find $root/src $root/tests -name '*.sql' -type f | xargs pcregrep -l '\r$'`;
