@@ -1084,6 +1084,13 @@ src/plugins/authopenid/packaging/links/plugin-authopenid -text
 src/plugins/authopenid/www/index.php -text
 src/plugins/authopenid/www/post-login.php -text
 src/plugins/authwebid/3rd-party/README -text
+src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/LICENSE -text
+src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/README.markdown -text
+src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/lib/Authentication.php -text
+src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/lib/Authentication_Delegated.php -text
+src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/lib/Authentication_Session.php -text
+src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/lib/Authentication_URL.php -text
+src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/lib/Authentication_X509CertRepo.php -text
 src/plugins/authwebid/NAME -text
 src/plugins/authwebid/README -text
 src/plugins/authwebid/bin/db-delete.pl -text
