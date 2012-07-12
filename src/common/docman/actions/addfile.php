@@ -7,6 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Thorsten Glaser - tarent solutions GmbH
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -74,7 +75,7 @@ if (!$doc_group) {
 	session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 }
 
-if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name))) {
+if (!$title || !$description || (!$uploaded_data && !$file_url && !$manual_path && (!$editor && !$name))) {
 	$missing_params = array();
 	if (!$title)
 		$missing_params[] = 'title';
