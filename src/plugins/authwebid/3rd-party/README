@@ -1,0 +1,3 @@
+The plugin relies on WebIDDelegatedAuth, downloaded from https://github.com/WebIDauth/WebIDDelegatedAuth
+
+Attention, it uses ARC2 internally, which may be also included by other plugins but with different paths

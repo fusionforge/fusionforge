@@ -1,0 +1,6 @@
+plugins/authwebid/include   usr/share/@OLDPACKAGE@/plugins/authwebid/
+plugins/authwebid/www       usr/share/@OLDPACKAGE@/plugins/authwebid/
+plugins/authwebid/etc/*.ini etc/@PACKAGE@/config.ini.d/
+plugins/authwebid/db/*      usr/share/@OLDPACKAGE@/plugins/authwebid/db/
+plugins/authwebid/bin/*	usr/share/@OLDPACKAGE@/plugins/authwebid/bin/
+

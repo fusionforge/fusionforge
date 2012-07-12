@@ -1,0 +1,39 @@
+fusionforge-plugin-authwebid
+-----------------------------
+
+This is meant to be the external WebID authentication plugin for FusionForge.
+
+It allows the forge to delegate authentication to a third party WebID "Identity Provider" 
+which will check the validity of the WebID profile of the user (checking that 
+the SSL cert used to access the IdP is the same as the one mentioned in the 
+FOAF profile it points to).
+That IdP must be trusted by the forge administrators to do so, of course. 
+
+If the plugin is activated by a user in its account management page, then 
+he/she may login to FusionForge using WebID (provided that the plugin is 
+activated on the whole site/forge, of course).
+
+Any number of WebID identities (URLs) can be used by a forge user to authenticate.
+
+Only one user may use one particular WebID identity simultaneously.
+
+WebID identities must have been added through the account management's WebID tab, 
+and are associated to the user, provided he/she owns them (i.e. can successfully 
+log-in to these URLs).
+
+The logged-in session is granted full privileges of the user, for now. 
+This should be improved in a later version, as WebID may not be trusted for critical 
+operations on the forge.
+
+The code depends on the WebIDDelegatedAuth library : https://github.com/WebIDauth/WebIDDelegatedAuth (a scaled down version of libAuthentication).
+
+This plugin's code is distributed under the conditions of the GNU GPL v2+ license.
+  
+
+USE IT AT YOUR OWN RISKS : THIS IS JUST A VERY EARLY PLUGIN, AND NO SECURITY AUDIT WAS CONDUCTED !
+ 
+-- Olivier Berger
+
+Local Variables:
+mode: readme-debian
+End:
