@@ -41,19 +41,21 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
 	public function testUTF8Chars()
 	{
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
-		$output = `find $root/src $root/tests -name '*.php' -type f | xargs isutf8`;
+		// We don't pass syntax tests on 3rd party libraries in src/lib/vendor
+		$exclude_third_party_libs="-path '$root/src/lib/vendor' -prune -o ";
+		$output = `find $root/src $root/tests $exclude_third_party_libs -name '*.php' -type f -print | xargs isutf8`;
 		$this->assertEquals('', $output);
-		$output = `find $root/src $root/tests -name '*.css' -type f | xargs isutf8`;
+		$output = `find $root/src $root/tests $exclude_third_party_libs -name '*.css' -type f -print | xargs isutf8`;
 		$this->assertEquals('', $output);
-		$output = `find $root/src $root/tests -name '*.sql' -type f | xargs isutf8`;
+		$output = `find $root/src $root/tests $exclude_third_party_libs -name '*.sql' -type f -print | xargs isutf8`;
 		$this->assertEquals('', $output);
-		$output = `find $root/src $root/tests -name '*.sh' -type f | xargs isutf8`;
+		$output = `find $root/src $root/tests $exclude_third_party_libs -name '*.sh' -type f -print | xargs isutf8`;
 		$this->assertEquals('', $output);
-		$output = `find $root/src $root/tests -name '*.pl' -type f | xargs isutf8`;
+		$output = `find $root/src $root/tests $exclude_third_party_libs -name '*.pl' -type f -print | xargs isutf8`;
 		$this->assertEquals('', $output);
-		$output = `find $root/src $root/tests -name '*.tmpl' -type f | xargs isutf8`;
+		$output = `find $root/src $root/tests $exclude_third_party_libs -name '*.tmpl' -type f -print | xargs isutf8`;
 		$this->assertEquals('', $output);
-		$output = `find $root/src $root/tests -name '*.xml' -type f | xargs isutf8`;
+		$output = `find $root/src $root/tests $exclude_third_party_libs -name '*.xml' -type f -print | xargs isutf8`;
 		$this->assertEquals('', $output);
 	}
 
@@ -92,7 +94,9 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
 	public function testEmptyLastLine()
 	{
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
-		$output = `find $root/src $root/tests -name '*.php' -type f | while read i ; do [ -s \$i ] && [ -z "\$(tail -n 1 \$i)" ] && echo \$i ; done`;
+		// We don't pass syntax tests on 3rd party libraries in src/lib/vendor
+		$exclude_third_party_libs="-path '$root/src/lib/vendor' -prune -o ";
+		$output = `find $root/src $root/tests $exclude_third_party_libs -name '*.php' -type f -print | while read i ; do [ -s \$i ] && [ -z "\$(tail -n 1 \$i)" ] && echo \$i ; done`;
 		$this->assertEquals('', $output);
 	}
 
