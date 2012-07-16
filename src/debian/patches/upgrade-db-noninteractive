@@ -2,7 +2,7 @@ Index: src/db/upgrade-db.php
 ===================================================================
 --- src.orig/db/upgrade-db.php
 +++ src/db/upgrade-db.php
-@@ -197,16 +197,7 @@
+@@ -199,16 +199,7 @@
  		if (!$res) {
  			show(db_error()."\n");
  			show("QUERY: $query\n");
