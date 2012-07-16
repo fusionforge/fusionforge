@@ -8,6 +8,7 @@ FusionForge-5.3:
         fingerprint, deploy flag, easy delete (TrivialDev)
 * Docman: Directory monitoring (TrivialDev)
 * Activity: New Directory appears now in activity (TrivialDev)
+* Docman: Number of download per file (TrivialDev)
 
 Plugins:
 * headermenu: new plugin to add links in login/logout menu link (TrivialDev)

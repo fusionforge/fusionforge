@@ -415,6 +415,7 @@ class Document extends Error {
 	 * @return	string	The filedata.
 	 */
 	function getFileData() {
+		$this->downloadUp();
 		return file_get_contents(DocumentStorage::instance()->get($this->getID()));
 	}
 
@@ -434,6 +435,15 @@ class Document extends Error {
 	 */
 	function getUpdated() {
 		return $this->data_array['updatedate'];
+	}
+
+	/**
+	 * getDownload - get the number of views of this document.
+	 *
+	 * @return	int	the number of views
+	 */
+	function getDownload() {
+		return $this->data_array['download'];
 	}
 
 	/**
@@ -950,6 +960,14 @@ class Document extends Error {
 	}
 
 	/**
+	 * downloadUp - +1 on download column
+	 *
+	 */
+	private function downloadUp() {
+		$this->setValueinDB('download', ++$this->data_array['download']);
+	}
+
+	/**
 	 * setValueinDB - private function to update columns in db
 	 *
 	 * @param	string	the column to update
@@ -960,7 +978,8 @@ class Document extends Error {
 	private function setValueinDB($column, $value) {
 		switch ($column) {
 			case "stateid":
-			case "doc_group": {
+			case "doc_group":
+			case "download": {
 				$qpa = db_construct_qpa();
 				$qpa = db_construct_qpa($qpa, 'UPDATE doc_data SET ');
 				$qpa = db_construct_qpa($qpa, $column);
