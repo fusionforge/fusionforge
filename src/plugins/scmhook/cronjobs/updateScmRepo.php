@@ -73,7 +73,6 @@ while ($row = db_fetch_array($res)) {
 			$params['group_id'] = $group_id;
 			$params['hooksString'] = $row['hooks'];
 			$params['scm_root'] = forge_get_config('repos_path', 'scmsvn') . '/' . $group->getUnixName();
-
 			if ($scmsvncronjob->updateScmRepo($params)) {
 				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
 				if (!$res) {
@@ -91,7 +90,6 @@ while ($row = db_fetch_array($res)) {
 			$params['hooksString'] = $row['hooks'];
 			$params['scm_root'] = forge_get_config('repos_path', 'scmhg') . '/' . $group->getUnixName();
 			if ($scmhgcronjob->updateScmRepo($params)) {
-				echo 'ici';
 				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
 				if (!$res) {
 					$returnvalue = false;
