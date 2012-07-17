@@ -333,7 +333,7 @@ abstract class BaseRole extends Error {
 
 		$sections_forum = array('forum_admin', 'new_forum');
 		foreach ($sections_forum as $section_forum) {
-			$result[$section_forum][$group_id] = $this->getVal ($section_forum, 0) ;
+			$result[$section_forum][$group_id] = $this->getVal ($section_forum, $group_id) ;
 		}
 		$sections = array_merge($sections, $sections_forum);
 		
@@ -346,7 +346,7 @@ abstract class BaseRole extends Error {
 
 		$sections_pm = array('pm_admin', 'new_pm');
 		foreach ($sections_pm as $section_pm) {
-			$result[$section_pm][$group_id] = $this->getVal ($section_pm, 0) ;
+			$result[$section_pm][$group_id] = $this->getVal ($section_pm, $group_id) ;
 		}
 		$sections = array_merge($sections, $sections_pm);
 		$pgf = new ProjectGroupFactory ($project) ;
