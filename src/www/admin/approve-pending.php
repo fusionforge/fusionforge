@@ -120,97 +120,106 @@ if ($rows < 1) {
 }
 
 if ($rows > $LIMIT) {
-	print "<p>"._('Pending projects:'). "$LIMIT+ ($LIMIT shown)</p>";
+	print '<p>'. _('Pending projects:'). " $LIMIT+ ($LIMIT shown)</p>";
 } else {
-	print "<p>"._('Pending projects:'). "$rows</p>";
+	print '<p>'. _('Pending projects:'). " $rows</p>";
 }
 
 while ($row_grp = db_fetch_array($res_grp)) {
 
 	?>
-	<h2><?php echo $row_grp['group_name']; ?></h2>
+	<hr />
+	<h2><?php echo _('Pending') . ': <i>'. $row_grp['group_name'] . '</i>'; ?></h2>
 
 	<p />
-	<h3><?php echo util_make_link ('/admin/groupedit.php?group_id='.$row_grp['group_id'],_('[Edit Project Details]')); ?></h3>
+	<h3><?php  echo _('Pre-approval modifications :'); ?></h3>
+
+	<p><?php echo util_make_link ('/admin/groupedit.php?group_id='.$row_grp['group_id'],_('[Edit Project Details]')); 
+	echo _(' or ');
+	echo util_make_link ('/project/admin/?group_id='.$row_grp['group_id'],_('[Project Admin]'));
+	echo _(' or ');
+	echo util_make_link ('/admin/userlist.php?group_id='.$row_grp['group_id'],_('[View/Edit Project Members]')); ?></p>
 
 	<p />
-	<h3><?php echo util_make_link ('/project/admin/?group_id='.$row_grp['group_id'],_('Project Admin')); ?></h3>
+	<h3><?php  echo _('Decision :'); ?></h3>
+	<table><tr class="bottom"><td>
 
-	<p />
-	<h3><?php echo util_make_link ('/admin/userlist.php?group_id='.$row_grp['group_id'],_('[View/Edit Project Members]')); ?></h3>
-
-	<p />
-	<table><tr><td>
 	<form name="approve.<?php echo $row_grp['unix_group_name'] ?>" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="<?php print $row_grp['group_id']; ?>" />
 	<input type="submit" name="submit" value="<?php echo _('Approve'); ?>" />
 	</form>
-	</td></tr>
-	<tr><td>
+
+	</td><td><?php echo _(' or '); ?>
+	</td><td>
+
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="action" value="delete" />
 	<input type="hidden" name="group_id" value="<?php print $row_grp['group_id']; ?>" />
-	<?php echo _('Canned responses'); ?><br />
+	<?php echo _('Rejection canned responses'); ?><br />
 	<?php print get_canned_responses(); ?> <a href="responses_admin.php"><?php echo _('(manage responses)'); ?></a>
 	<br />
 	<?php echo _('Custom response title and text'); ?><br />
 	<input type="text" name="response_title" size="30" maxlength="25" /><br />
-	<textarea name="response_text" rows="10" cols="50"></textarea>
+	<textarea name="response_text" rows="5" cols="50"></textarea><br />
 	<input type="checkbox" name="add_to_can" value="<?php echo _('yes'); ?>" /><?php echo _('Add this custom response to canned responses') ;?>
 	<br />
 	<input type="submit" name="submit" value="<?php echo _('Reject'); ?>" />
 	</form>
+
 	</td></tr>
 	</table>
 
-	<p>
+	<h3><?php  echo _('Project details :'); ?></h3>
+
+	<table>
+	<tr class="top"><td>
 	<?php
 
 		if (forge_get_config('use_shell')) {
 	?>
-	<br /><strong><?php echo _('Home Box:')." "; print $row_grp['unix_box']; ?></strong>
+	<strong><?php echo _('Home Box:')."</strong></td><td>"; print $row_grp['unix_box']; ?></tr>
 	<?php
 		} //end of sys_use_shell
 	?>
-	<br /><strong><?php echo _('HTTP Domain:')." "; print $row_grp['http_domain']; ?></strong>
+	<tr><td><strong><?php echo _('HTTP Domain:')."</strong></td><td>"; print $row_grp['http_domain']; ?></td>
 
-	<br />
-	&nbsp;</p>
+	</tr>
+
 	<?php
 
 	// ########################## OTHER INFO
 
-	print "<p><strong>" ._('Other Information')."</strong></p>";
-	print "<p>" ._('Unix Project Name:'). " ".$row_grp['unix_group_name']."</p>";
+//	print "<p><strong>" ._('Other Information')."</strong></p>";
+	print "<tr><td>" ._('Unix Project Name:'). "</td><td>".$row_grp['unix_group_name']."</td></tr>";
 
-	print "<p>" ._('Submitted Description:'). "</p><blockquote>".$row_grp['short_description']."</blockquote>";
+	print "<tr><td>" ._('Submitted Description:'). "</td><td><blockquote>".$row_grp['short_description']."</blockquote></td></tr>";
 
-	print "<p>" ._('Purpose of submission:'). "</p><blockquote>".$row_grp['register_purpose']."</blockquote>";
+	print "<tr><td>" ._('Purpose of submission:'). "</td><td><blockquote>".$row_grp['register_purpose']."</blockquote></td></tr>";
 
 	if ($row_grp['license']=="other") {
-		print "<p>" ._('License Other:'). "</p><blockquote>".$row_grp['license_other']."</blockquote>";
+		print "<tr><td>" ._('License Other:'). "</td><td><blockquote>".$row_grp['license_other']."</blockquote></td></tr>";
 	}
 
 	if (isset($row_grp['status_comment'])) {
-		print "<p>" ._('Pending reason:'). "</p><span class=\"important\">".$row_grp['status_comment']."</span>";
+		print "<tr><td>" ._('Pending reason:'). "</td><td><span class=\"important\">".$row_grp['status_comment']."</span></td></tr>";
 	}
 
 	$submitter = NULL ;
 	$project = group_get_object ($row_grp['group_id']) ;
 	foreach (get_group_join_requests ($project) as $gjr) {
 		$submitter = user_get_object($gjr->getUserID()) ;
-		echo '<p>'
-			.sprintf(_('Submitted by: %s'), make_user_link($submitter->getUnixName(),$submitter->getRealName()))
-			.'</p>';
+		echo '<tr><td>'
+			._('Submitted by') .'</td><td>'. make_user_link($submitter->getUnixName(),$submitter->getRealName())
+			.'</td></tr>';
 	}
 
 	if ($row_grp['built_from_template']) {
 		$templateproject = group_get_object ($row_grp['built_from_template']) ;
-		print "<p>" .sprintf(_('Based on template project: %s (%s)'),$templateproject->getPublicName(),$templateproject->getUnixName())."</p>";
+		print "<tr><td>" . _('Based on template project') . '</td><td>'. $templateproject->getPublicName() .' ('. $templateproject->getUnixName().")</td></tr>";
 	}
 
-	echo "<hr />";
+	echo "</table><hr />";
 }
 
 //list of group_id's of pending projects
