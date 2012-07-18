@@ -1,8 +1,10 @@
 fusionforge (5.2~rc1-5+) UNRELEASED; urgency=low
 
+  * Populate new user's shell accounts out of
+    /var/lib/gforge/chroot/etc/skel (closes: #675054).
   * 
 
- -- Roland Mas <lolando@debian.org>  Thu, 28 Jun 2012 20:47:45 +0200
+ -- Olivier Berger <obergix@debian.org>  Wed, 18 Jul 2012 21:55:42 +0200
 
 fusionforge (5.2~rc1-5) unstable; urgency=low
 

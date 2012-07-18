@@ -90,9 +90,9 @@ sub add_user {
 
 	if($verbose){print("Making a User Account for : $username\n")};
 		
-	# Now lets create the homedir and copy the contents of /etc/skel into it.
-	if (-d "/etc/skel") {
-	    system "cp -r /etc/skel $home_dir";
+	# Now lets create the homedir and copy the contents of /var/lib/gforge/chroot/etc/skel into it.
+	if (-d "/var/lib/gforge/chroot/etc/skel") {
+	    system "cp -r /var/lib/gforge/chroot/etc/skel $home_dir";
 	    chmod 0755, $home_dir;
 	} else {
 	    mkdir $home_dir, 0755;
