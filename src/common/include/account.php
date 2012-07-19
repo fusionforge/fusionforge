@@ -232,6 +232,7 @@ function account_getavailableshells($add_user_default_shell = TRUE) {
 		}
 		$out_shells[] = chop($s);
 	}
+	// in most cases, we do need to add the default shell in case it wouldn't be in the ../etc/shells already (no regression)
 	if ($add_user_default_shell) {
 		$user_default_shell = account_get_user_default_shell();
 		if (! file_exists($user_default_shell) ) {
