@@ -383,9 +383,10 @@ class GitPlugin extends SCMPlugin {
 		fwrite($config_f, "\$projectroot = '$rootdir';\n");
 		fwrite($config_f, "\$projects_list = '$config_dir/gitweb.list';\n");
 		fwrite($config_f, "@git_base_url_list = ('". util_make_url('/anonscm/git') . "');\n");
-		fwrite($config_f, "\$logo = '". util_make_url('/plugins/scmgit/git-logo.png') . "';\n");
-		fwrite($config_f, "\$favicon = '". util_make_url('/plugins/scmgit/git-favicon.png')."';\n");
-		fwrite($config_f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
+		fwrite($config_f, "\$logo = '". util_make_url('/plugins/scmgit/static/git-logo.png') . "';\n");
+		fwrite($config_f, "\$favicon = '". util_make_url('/plugins/scmgit/static/git-favicon.png')."';\n");
+		fwrite($config_f, "\$stylesheet = '". util_make_url('/plugins/scmgit/static/gitweb.css')."';\n");
+		fwrite($config_f, "\$javascript = '". util_make_url('/plugins/scmgit/static/gitweb.js')."';\n");
 		fwrite($config_f, "\$prevent_xss = 'true';\n");
 		fclose($config_f);
 		chmod ($fname.'.new', 0644) ;
