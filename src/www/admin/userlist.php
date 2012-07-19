@@ -65,6 +65,7 @@ function performAction($newStatus, $statusString, $user_id) {
 
 function show_users_list ($users, $filter='') {
 	if (!count($users)) {
+		echo '<p>'. _('No such users found') .'</p>';
 		return;
 	}
 
