@@ -363,11 +363,12 @@ class GFUser extends Error {
 			$this->setError(_('Invalid Unix Name.'));
 			return false;
 		}
+		$shell = account_get_user_default_shell();
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($password1 . util_randbytes() . microtime()),0,16);
 		db_begin();
-		$result = db_query_params('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips)
-							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25)',
+		$result = db_query_params('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips,shell)
+							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26)',
 					   array($unix_name,
 						 md5($password1),
 						 account_genunixpw($password1),
@@ -392,7 +393,8 @@ class GFUser extends Error {
 						 htmlspecialchars($title),
 						 $ccode,
 						 $theme_id,
-						 $tooltips));
+						 $tooltips,
+						 $shell));
 		if (!$result) {
 			$this->setError(_('Insert Failed: ') . db_error());
 			db_rollback();
@@ -1054,17 +1056,11 @@ Enjoy the site.
 	 */
 	function setShell($shell) {
 		global $SYS;
-		$shells = file('/etc/shells');
-		$shells[count($shells)] = "/bin/cvssh";
-		$out_shells = array();
-		foreach ($shells as $s) {
-			if (substr($s, 0, 1) == '#') {
-				continue;
-			}
-			$out_shells[] = chop($s);
-		}
-		if (!in_array($shell, $out_shells)) {
-			$this->setError(_('ERROR: Invalid Shell'));
+
+		$shells = account_getavailableshells();
+
+		if (!in_array($shell, $shells)) {
+			$this->setError( sprintf(_('ERROR: Invalid Shell %s'), $shell) );
 			return false;
 		}
 

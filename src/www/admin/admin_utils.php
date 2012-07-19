@@ -41,6 +41,11 @@ function check_system() {
 	if (!function_exists("pg_pconnect")) {
 		$result[] = 'ERROR: Missing Postgresql support in PHP, please install/compile php-pg.';
 	}
+	$user_default_shell = forge_get_config('user_default_shell');
+	$shells = account_getavailableshells();
+	if (!in_array($user_default_shell, $shells)) {
+		$result[] = 'WARNING: default user shell "'. $user_default_shell .'" not in allowed shells (check ini var "user_default_shell" and contents of '. forge_get_config('chroot') .'/etc/shells or /etc/shells).';
+	}
 	return $result;
 }
 

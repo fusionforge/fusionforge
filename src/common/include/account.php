@@ -199,26 +199,79 @@ function account_genunixpw($plainpw) {
 }
 
 /**
+ * account_get_user_default_shell() - return default user shell
+ *
+ */
+function account_get_user_default_shell() {
+        $user_default_shell = forge_get_config('user_default_shell');
+        if (! isset($user_default_shell)) {
+           // same as in DB schema before that config var was introduced
+           $user_default_shell = '/bin/bash';
+        }
+        return $user_default_shell;
+}
+
+/**
+ * account_getavailableshells() - return available shells for the users
+ *
+ */
+function account_getavailableshells($add_user_default_shell = TRUE) {
+	// we'd better use the shells defined inside the 'chroot' in /var/lib/gforge/chroot/etc/shells it it exists
+	$chroot = forge_get_config('chroot');
+	$shells_file = $chroot.'/etc/shells';
+	if(! file_exists($shells_file) ) {
+		// otherwise, fallback to /etc/shells
+		$shells_file = '/etc/shells';
+        }
+        $shells = file($shells_file);
+
+	$out_shells = array();
+	foreach ($shells as $s) {
+		if (substr($s, 0, 1) == '#') {
+			continue;
+		}
+		$out_shells[] = chop($s);
+	}
+	if ($add_user_default_shell) {
+		$user_default_shell = account_get_user_default_shell();
+		if (! file_exists($user_default_shell) ) {
+			// we'll always add cvssh if no other defaukt set ... TODO: explain why ?
+			$user_default_shell = "/bin/cvssh";
+		}
+		if (!in_array($user_default_shell, $out_shells)) {
+			$out_shells[count($out_shells)] = $user_default_shell;
+		}
+	}
+	return $out_shells;
+}
+
+/**
  * account_shellselects() - Print out shell selects
  *
  * @param	string	The current shell
  *
  */
 function account_shellselects($current) {
-	$shells = file("/etc/shells");
-	$shells[count($shells)] = "/bin/cvssh";
+	$html = '';
 
-	for ($i = 0; $i < count($shells); $i++) {
-		$this_shell = chop($shells[$i]);
-
-		if ($current == $this_shell) {
-			echo "<option selected=\"selected\" value=$this_shell>$this_shell</option>\n";
-		} else {
-			if (! preg_match("/^#/",$this_shell)){
-				echo "<option value=\"$this_shell\">$this_shell</option>\n";
-			}
-		}
+	$shells = account_getavailableshells();
+	
+        $found = false;
+        for ($i = 0; $i < count($shells); $i++) {
+                $this_shell = $shells[$i];
+		
+                if ($current == $this_shell) {
+                        $found = true;
+                        $html .= "<option selected=\"selected\" value=\"$this_shell\">$this_shell</option>\n";
+                } else {
+			$html .= "<option value=\"$this_shell\">$this_shell</option>\n";
+                }
+        }
+        if(! $found) {
+		// add the current option but unselectable -> defaults to cvssh if no other option in /var/lib/gforge/chroot/etc/shells
+		$html .= "<option value=\"$current\" disabled=\"disabled\">$current</option>\n";
 	}
+        echo $html;
 }
 
 /**

@@ -154,6 +154,8 @@ if (file_exists($gfcgfile)) {
 	forge_define_config_item ('use_rdf', 'core', $GLOBALS['sys_use_rdf']) ;
 	forge_set_config_item_bool ('use_rdf', 'core') ;
 	forge_define_config_item ('installation_environment', 'core', $GLOBALS['sys_install_type']) ;
+	forge_define_config_item ('user_default_shell', 'core', '/bin/bash') ;
+
 }
 
 // Arch plugin
