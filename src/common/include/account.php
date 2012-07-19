@@ -264,7 +264,12 @@ function account_shellselects($current) {
                         $found = true;
                         $html .= "<option selected=\"selected\" value=\"$this_shell\">$this_shell</option>\n";
                 } else {
-			$html .= "<option value=\"$this_shell\">$this_shell</option>\n";
+			// the last one is supposed to be the default, so select it if not found current shell to observe default settings
+			if ( ($i == (count($shells) - 1)) && (! $found)) {
+				$html .= "<option selected=\"selected\" value=\"$this_shell\">$this_shell</option>\n";
+			} else {
+				$html .= "<option value=\"$this_shell\">$this_shell</option>\n";
+			}
                 }
         }
         if(! $found) {
