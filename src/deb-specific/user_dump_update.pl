@@ -90,12 +90,20 @@ sub add_user {
 
 	if($verbose){print("Making a User Account for : $username\n")};
 		
-	# Now lets create the homedir and copy the contents of /etc/skel into it.
-	mkdir $home_dir, 0755;
-        chown $uid, $gid, $home_dir;
-	
+	# Now let's create the homedir and copy the contents of .../etc/skel into it.
+	my $skel_dir = &forge_get_config ('chroot').'/etc/skel' ;
+	if (-d $skel_dir) {
+	    system "cp -r $skel_dir $home_dir";
+	    chmod 0755, $home_dir;
+	} else {
+	    mkdir $home_dir, 0755;
+	}
 	mkdir $home_dir.'/incoming', 0755;
-	chown $uid, $gid, $home_dir.'/incoming' ;
+
+	my @a;
+	push @a, $home_dir;
+	push @a, glob "$home_dir/*";
+	chown $uid, $gid, @a;
 }
 
 #############################

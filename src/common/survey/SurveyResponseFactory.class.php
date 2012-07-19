@@ -127,7 +127,7 @@ class SurveyResponseFactory extends Error {
 	 *
  	 *	@return	array	The array of Survey Response objects.
 	 */
-	function &getSurveyResponses() {
+	function getSurveyResponses() {
 		/* We alread have it */
 		if ($this->Responses) {
 			return $this->Responses;
@@ -162,7 +162,7 @@ class SurveyResponseFactory extends Error {
 	 *
 	 *	@return	array	The array of Survey Response objects.
 	 */
-	function &getSurveyAllResponses() {
+	function getSurveyAllResponses() {
 		/* We alread have it */
 		if ($this->Responses) {
 			return $this->Responses;
@@ -210,7 +210,7 @@ class SurveyResponseFactory extends Error {
 	 *              for the 1-5 question, it returns counts in arr[1], arr[1], ..., arr[5];
 	 *              for comments, we return arr[1], ...arr[n] with comments
 	 */
-	function &getResults() {
+	function getResults() {
 		if ($this->Result) {
 			return $this->Result;
 		}
@@ -257,11 +257,11 @@ class SurveyResponseFactory extends Error {
 	 *	@return	int      the array of result
 	 *		return all responses for one survey
 	 */
-	function &getDetailResults() {
+	function getDetailResults() {
 		if ($this->Results) {
 			return $this->Results;
 		}
-		$arr = &$this->getSurveyAllResponses();
+		$arr = $this->getSurveyAllResponses();
 		if (!$arr || !is_array($arr)) {
 			return false;
 		}

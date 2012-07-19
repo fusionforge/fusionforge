@@ -173,7 +173,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 		db_begin();
 		if ($this->Group == NULL) {
-			$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id IS NULL AND role_name=$1',
+			$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id IS NULL AND LOWER(role_name)=LOWER($1)',
 					       array (htmlspecialchars($role_name)));
 			if (db_numrows($res)) {
 				$this->setError('Cannot create a role with this name (already used)');
@@ -181,7 +181,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				return false;
 			}
 		} else {
-			$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id=$1 AND role_name=$2',
+			$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id=$1 AND LOWER(role_name)=LOWER($2)',
 					       array ($this->Group->getID(), htmlspecialchars($role_name)));
 			if (db_numrows($res)) {
 				$this->setError('Cannot create a role with this name (already used)');

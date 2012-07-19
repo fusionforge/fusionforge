@@ -20,7 +20,7 @@ fi
 
 # Loop until engine is up and ssh is running
 test_host () {
-    ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a 2>/dev/null 
+    ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a >/dev/null 2>&1
 }
 
 echo "Waiting for $HOST to come up..."

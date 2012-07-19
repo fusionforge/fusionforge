@@ -319,7 +319,7 @@ abstract class BaseRole extends Error {
 		$result = array () ;
 		$group_id = $project->getID() ;
 
-		$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
+		$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker') ;
 		foreach ($sections as $section) {
 			$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
 		}
@@ -329,21 +329,32 @@ abstract class BaseRole extends Error {
 		foreach ($tids as $tid) {
 			$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
 		}
-		$sections[] = 'tracker' ;
+		array_push ($sections,'tracker');
 
+		$sections_forum = array('forum_admin', 'new_forum');
+		foreach ($sections_forum as $section_forum) {
+			$result[$section_forum][$group_id] = $this->getVal ($section_forum, $group_id) ;
+		}
+		$sections = array_merge($sections, $sections_forum);
+		
 		$ff = new ForumFactory ($project) ;
 		$fids = $ff->getAllForumIds () ;
 		foreach ($fids as $fid) {
 			$result['forum'][$fid] = $this->getVal ('forum', $fid) ;
 		}
-		$sections[] = 'forum' ;
+		array_push ($sections,'forum');
 
+		$sections_pm = array('pm_admin', 'new_pm');
+		foreach ($sections_pm as $section_pm) {
+			$result[$section_pm][$group_id] = $this->getVal ($section_pm, $group_id) ;
+		}
+		$sections = array_merge($sections, $sections_pm);
 		$pgf = new ProjectGroupFactory ($project) ;
 		$pgids = $pgf->getAllProjectGroupIds () ;
 		foreach ($pgids as $pgid) {
 			$result['pm'][$pgid] = $this->getVal ('pm', $pgid) ;
 		}
-		$sections[] = 'pm' ;
+		array_push ($sections,'pm') ;
 
 
 		// Add settings not yet listed so far (probably plugins)

@@ -1,6 +1,7 @@
 etc/config.ini-fhs                     etc/@PACKAGE@
 etc/config.ini.d/defaults.ini          etc/@PACKAGE@/config.ini.d/
 etc/config.ini.d/debug.ini             etc/@PACKAGE@/config.ini.d/
+etc/config.ini.d/zz-local.ini          etc/@PACKAGE@/config.ini.d/
 deb-specific/cvssh                     bin/
 #
 deb-specific/install-chroot.sh         usr/share/@OLDPACKAGE@/bin/
