@@ -314,10 +314,10 @@ class GitPlugin extends SCMPlugin {
 			system ("chmod g+s $root") ;
 			if ($project->enableAnonSCM()) {
 				system ("chmod g+wX,o+rX-w $root") ;
-				system ("chmod -R g+wX,o+rX-w $main_repo") ;
+				system ("chmod -R g+rwX,o+rX-w $main_repo") ;
 			} else {
 				system ("chmod g+wX,o-rwx $root") ;
-				system ("chmod -R g+wX,o-rwx $main_repo") ;
+				system ("chmod -R g+rwX,o-rwx $main_repo") ;
 			}
 		} else {
 			$unix_user = forge_get_config('apache_user');
