@@ -837,10 +837,11 @@ function site_user_header($params) {
 	$arr_l[] = '/my/';
 	$arr_attr[] = array('title' => _('View your personal page, a selection of widgets to follow the informations from projects.'), 'class' => 'tabtitle-nw');
 
-
-	$arr_t[] = _('Trackers dashboard');
-	$arr_l[] = '/my/dashboard.php';
-	$arr_attr[] = array('title' => _('View your tasks and artifacts.'), 'class' => 'tabtitle');
+	if (forge_get_config('use_tracker')) {
+		$arr_t[] = _('Trackers dashboard');
+		$arr_l[] = '/my/dashboard.php';
+		$arr_attr[] = array('title' => _('View your tasks and artifacts.'), 'class' => 'tabtitle');
+	}
 
 
 	if (forge_get_config('use_diary')) {
