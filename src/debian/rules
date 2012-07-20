@@ -88,17 +88,25 @@ conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INS
 
 # Construct the plugin's 'postinst' script out of a template in debian/dsf-in/plugin.postinst
 debian/$(PACKAGE)-plugin-%.postinst:
-	export PLUGLONGNAME="`cat $(CURDIR)/plugins/$*/NAME`"; \
-		[ -e $(CURDIR)/plugins/$*/debian/plugin-$*.postinst ] \
-		&& $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/plugins/$*/debian/plugin-$*.postinst > $@ \
-		|| $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.postinst > $@
+	PLUGLONGNAME="$$(cat '$(CURDIR)/plugins/$*/NAME')"; \
+	    test -n "$$PLUGLONGNAME" || exit 1; \
+	    srcf='$(CURDIR)/plugins/$*/debian/plugin-$*.postinst'; \
+	    test -e "$$srcf" || srcf='$(CURDIR)/debian/dsf-in/plugin.postinst'; \
+	    $(SED_REPLACE) \
+	    -e 's/@PLUGSHORTNAME@/$*/g' \
+	    -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" \
+	    "$$srcf" >$@ || (rm -f $@; exit 1)
 
 # Construct the plugin's 'prerm' script out of a template in debian/dsf-in/plugin.prerm
 debian/$(PACKAGE)-plugin-%.prerm:
-	export PLUGLONGNAME="`cat $(CURDIR)/plugins/$*/NAME`"; \
-		[ -e $(CURDIR)/plugins/$*/debian/plugin-$*.prerm ] \
-		&& $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/plugins/$*/debian/plugin-$*.prerm > $@ \
-		|| $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.prerm > $@
+	PLUGLONGNAME="$$(cat '$(CURDIR)/plugins/$*/NAME')"; \
+	    test -n "$$PLUGLONGNAME" || exit 1; \
+	    srcf='$(CURDIR)/plugins/$*/debian/plugin-$*.prerm'; \
+	    test -e "$$srcf" || srcf='$(CURDIR)/debian/dsf-in/plugin.prerm'; \
+	    $(SED_REPLACE) \
+	    -e 's/@PLUGSHORTNAME@/$*/g' \
+	    -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" \
+	    "$$srcf" >$@ || (rm -f $@; exit 1)
 
 # Perform substitutions in plugin's cron.d file
 debian/$(PACKAGE)-plugin-%.cron.d:
@@ -113,13 +121,13 @@ debian/$(PACKAGE)-plugin-%.dirs:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/dirs/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.dirs:
-	$(SED_REPLACE) $(CURDIR)/packaging/dirs/$* > $@ 
+	$(SED_REPLACE) $(CURDIR)/packaging/dirs/$* > $@
 
 debian/$(PACKAGE)-plugin-%.links:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/links/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.links:
-	$(SED_REPLACE) $(CURDIR)/packaging/links/$* > $@ 
+	$(SED_REPLACE) $(CURDIR)/packaging/links/$* > $@
 
 debian/$(PACKAGE)-plugin-%.install:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/install/plugin-$* > $@
@@ -128,7 +136,7 @@ debian/$(PACKAGE)-plugin-%.triggers:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/debian/plugin-$*.triggers > $@
 
 debian/$(OLDPACKAGE)-%.install:
-	$(SED_REPLACE) $(CURDIR)/packaging/install/$* > $@ 
+	$(SED_REPLACE) $(CURDIR)/packaging/install/$* > $@
 
 debian/$(PACKAGE)-plugin-%.docs:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/docs/plugin-$* > $@
