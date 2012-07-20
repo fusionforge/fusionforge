@@ -133,6 +133,18 @@ if($status == 'P') {
 </td>
 </tr>
 <tr>
+<?php if (USE_PFO_RBAC) { ?>
+<td colspan="2"><?php
+printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make a project public, <%1$s>link<%2$s> the global role “Anonymous/not logged in” then <%3$s>give<%4$s> it “Project visibility” permissions.'),
+	'a href="' . util_make_url('/project/admin/users.php?group_id=' .
+	    $group_id) . '"',
+	'/a',
+	'a href="' . util_make_url('/project/admin/roleedit.php?group_id=' .
+	    $group_id . '&amp;role_id=' . RoleAnonymous::getInstance()->getID()) . '"',
+	'/a'
+);
+?></td>
+<?php } else { ?>
 <td>
 <?php echo _('Public?') ?>:
 </td>
@@ -150,6 +162,7 @@ if($status == 'P') {
 	'form_public', $group->isPublic(), false
 ); ?>
 </td>
+<?php } ?>
 </tr>
 
 <tr>

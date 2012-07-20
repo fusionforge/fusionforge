@@ -71,6 +71,7 @@ function show_users_list ($users, $filter='', $sortorder='realname') {
 		<span class="pending">'.util_make_link('/admin/userlist.php?status=P'.'&amp;sortorder='.$sortorder,_('(*)Pending')).'</span>'.'</p>';
 
 	if (!count($users)) {
+		echo '<p>'. _('No such users found') .'</p>';
 		return;
 	}
 

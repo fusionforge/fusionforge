@@ -792,7 +792,7 @@ src/etc/config.ini.d/scmhg.ini -text
 src/etc/config.ini.d/scmsvn.ini -text
 src/etc/config.ini.d/svncommitemail.ini -text
 src/etc/config.ini.d/svntracker.ini -text
-src/etc/config.ini.d/zz-local.ini -text
+src/etc/config.ini.d/zzzz-local.ini -text
 src/etc/httpd.conf-fhs -text
 src/etc/httpd.conf-opt -text
 src/etc/httpd.conf-usrlocal -text
