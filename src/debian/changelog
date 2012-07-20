@@ -10,9 +10,12 @@ fusionforge (5.2~rc1-5+) UNRELEASED; urgency=low
     /var/lib/gforge/chroot/etc/skel (closes: #675054).
   * Fix several missing files errors in gitweb for scmgit plugin (closes:
     #674536).
+  * Fix permission problem with scmgit plugin (closes: #682223)
+  * Set defaults to use SSH and not DAV for scmgit plugin (closes:
+    #682222)
   * 
 
- -- Olivier Berger <obergix@debian.org>  Thu, 19 Jul 2012 17:23:32 +0200
+ -- Olivier Berger <obergix@debian.org>  Fri, 20 Jul 2012 14:41:49 +0200
 
 fusionforge (5.2~rc1-5) unstable; urgency=low
 
