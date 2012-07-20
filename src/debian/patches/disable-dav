@@ -52,3 +52,16 @@ Index: src/etc/httpd.conf.d/plugin-scmsvn.inc
 +#   # only authenticated users may access the repository
 +#   Require valid-user
 +# </Location>
+Index: src/plugins/scmgit/etc/scmgit.ini
+===================================================================
+--- src.orig/plugins/scmgit/etc/scmgit.ini
++++ src/plugins/scmgit/etc/scmgit.ini
+@@ -13,6 +13,6 @@ repos_path = "$core/chroot/scmrepos/git"
+ ; this value might be used to create an alias in your httpd conf for clone
+ scm_root = "git"
+ 
+-use_dav = yes
+-use_ssh = no
++use_dav = no
++use_ssh = yes
+ use_ssl = "$core/use_ssl"
