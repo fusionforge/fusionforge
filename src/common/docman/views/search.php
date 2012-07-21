@@ -78,9 +78,7 @@ echo '</td></tr>';
 echo '</table>';
 echo '</form>';
 if ($searchString) {
-	$textsearch = trim(getStringFromPost("textsearch"));
-	//$textsearch = prepare_search_text($textsearch);
-	$mots = preg_split("/[\s,]+/",$textsearch);
+	$mots = preg_split("/[\s,]+/",$searchString);
 	$qpa = db_construct_qpa(false, 'SELECT filename, filetype, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, group_id FROM doc_data, doc_states WHERE doc_data.stateid = doc_states.stateid');
 	if (getStringFromPost('search_type') == "one") {
 		if (count($mots) > 0) {
@@ -128,7 +126,7 @@ if ($searchString) {
 		echo '<p class="error">'._('Database query error').'</p>';
 		db_free_result($result);
 	} elseif (db_numrows($result) < 1) {
-		echo '<p class="warning_msg">'._('Your search did not match any documents').'</p>';
+		echo '<p class="warning_msg">'._('Your search did not match any documents.').'</p>';
 		db_free_result($result);
 	} else {
 		$resarr = array();
@@ -166,6 +164,8 @@ if ($searchString) {
 		}
 		echo '</table>';
 	}
+} else {
+	echo '<p class="warning_msg">'._('Your search is empty.').'</p>';
 }
 echo '</div>';
 ?>
