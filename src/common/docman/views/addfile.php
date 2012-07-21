@@ -7,6 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -111,7 +112,7 @@ if ($dgf->getNested() == NULL) {
 					<td style="text-align:right;">
 						<strong>'. _('Document Title').'</strong>'.utils_requiredField()
 					.'</td><td>'
-					.'&nbsp;<input type="text" name="title" size="40" maxlength="255" />&nbsp;'
+					.'&nbsp;<input type="text" name="title" size="40" maxlength="255" required="required" />&nbsp;'
 					.sprintf(_('(at least %1$s characters)'), 5)
 					.'</td>
 				</tr>
@@ -119,7 +120,7 @@ if ($dgf->getNested() == NULL) {
 					<td style="text-align:right;">
 						<strong>'. _('Description') .'</strong>'.utils_requiredField()
 				 	.'</td><td>'
-						.'&nbsp;<input type="text" name="description" size="50" maxlength="255" />&nbsp;'
+						.'&nbsp;<input type="text" name="description" size="50" maxlength="255" required="required" />&nbsp;'
 						.sprintf(_('(at least %1$s characters)'), 10)
 					.'</td>
 				</tr>
@@ -127,12 +128,12 @@ if ($dgf->getNested() == NULL) {
 					<td style="text-align:right;">
 						<strong>'. _('Type of Document') .'</strong>'.utils_requiredField()
 					.'</td><td>
-					<input type="radio" name="type" value="httpupload" onclick="javascript:displayRowFile()" checked="checked" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onclick="javascript:displayRowUrl()" />'. _('URL');
+					<input type="radio" name="type" value="httpupload" onclick="javascript:displayRowFile()" checked="checked" required="required" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onclick="javascript:displayRowUrl()" />'. _('URL');
 	if (forge_get_config('use_manual_uploads')) {
-					echo '<input type="radio" name="type" value="manualupload" onclick="javascript:displayRowManual()" />'. _('Already-uploaded file');
+					echo '<input type="radio" name="type" value="manualupload" onclick="javascript:displayRowManual()" required="required" />'. _('Already-uploaded file');
 	}
 	if ($g->useCreateOnline()) {
-					echo '<input type="radio" name="type" value="editor" onclick="javascript:displayRowEditor()" />'. _('Create online');
+					echo '<input type="radio" name="type" value="editor" onclick="javascript:displayRowEditor()" required="required" />'. _('Create online');
 	}
 	echo '				</td>
 				</tr>
@@ -140,14 +141,14 @@ if ($dgf->getNested() == NULL) {
 					<td style="text-align:right;">
 						<strong>'. _('Upload File') .'</strong>'. utils_requiredField()
 					.'</td><td>'
-						.'&nbsp;<input type="file" name="uploaded_data" size="30" />
+						.'&nbsp;<input type="file" name="uploaded_data" size="30" required="required" />
 					</td>
 				</tr>
 				<tr id="urlrow" style="display:none">
 					<td style="text-align:right;">
 						<strong>'. _('URL') .'</strong>'. utils_requiredField()
 					.'</td><td>'
-						.'&nbsp;<input type="text" name="file_url" size="30" />
+						.'&nbsp;<input type="text" name="file_url" size="30" required="required" />
 					</td>
 				</tr>
 				<tr id="pathrow" style="display:none">
