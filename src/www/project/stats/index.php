@@ -5,6 +5,7 @@
  * Copyright 2003 GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -79,12 +80,7 @@ if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }
 if ($start && !is_numeric($start)) { $start = false; }
 if ($end && !is_numeric($end)) { $end = false; }
 
-$params['title'] = _('Project Statistics');
-$params['group'] = $group_id;
-$params['toptab'] = 'activity';
-$params['submenu'] = $HTML->subMenu(array(_('Statistics')), array('/project/stats/?group_id='.$group_id));
-
-site_project_header($params);
+project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_id));
 
 //
 // BEGIN PAGE CONTENT CODE
