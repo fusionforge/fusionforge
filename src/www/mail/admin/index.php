@@ -4,8 +4,9 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
- * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -188,8 +189,8 @@ if ($group_id) {
 			<strong><?php echo $group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php echo forge_get_config('lists_host'); ?></strong></p>
 			<p>
 			<strong><?php echo _('Is Public?'); ?></strong><br />
-			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PUBLIC; ?>" checked="checked" /> <?php echo _('Yes'); ?><br />
-			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PRIVATE; ?>" /> <?php echo _('No'); ?></p><p>
+			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PUBLIC; ?>" <?php echo ($group->isPublic() ? ' checked="checked"' : '') ?> /> <?php echo _('Yes'); ?><br />
+			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PRIVATE; ?>" <?php echo ($group->isPublic() ? '' : ' checked="checked"') ?> /> <?php echo _('No'); ?></p><p>
 			<strong><?php echo _('Description:'); ?></strong><br />
 			<input type="text" name="description" value="" size="40" maxlength="80" /></p>
 			<p>
