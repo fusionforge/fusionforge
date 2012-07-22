@@ -26,9 +26,25 @@ global $u;
 require_once $gfcommon.'include/account.php';
 
 $authorized_key = getStringFromRequest('authorized_key');
+$uploaded_filekey = getUploadedFile('uploaded_filekey');
 if (strlen($authorized_key)) {
 	checkKeys($authorized_key);
 	if (!$u->addAuthorizedKey($authorized_key)) {
+		session_redirect('/account/?&error_msg='.urlencode($u->getErrorMessage()));
+	}
+	$feedback = _('SSH Key added successfully.');
+	session_redirect('/account/?&feedback='.urlencode($feedback));
+}
+
+if (!is_uploaded_file($uploaded_filekey['tmp_name'])) {
+	$return_msg = _('Invalid file name.');
+	session_redirect('/account/?&error_msg='.urlencode($return_msg));
+}
+
+$payload = fread(fopen($uploaded_filekey['tmp_name'], 'r'), $uploaded_filekey['size']);
+if (strlen($payload)) {
+	checkKeys($payload);
+	if (!$u->addAuthorizedKey($payload)) {
 		session_redirect('/account/?&error_msg='.urlencode($u->getErrorMessage()));
 	}
 	$feedback = _('SSH Key added successfully.');

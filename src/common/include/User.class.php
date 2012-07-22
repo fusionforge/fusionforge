@@ -1231,6 +1231,13 @@ Enjoy the site.
 		$fingerprint = $returnExecExploded[1];
 		$now = time();
 		$explodedKey = explode(' ', $key);
+		$existingKeys = $this->getAuthorizedKeys();
+		foreach ($existingKeys as $existingKey) {
+			if ($existingKey['fingerprint'] = $fingerprint) {
+				$this->setError(_('SSH Key already in use'));
+				return false;
+			}
+		}
 		$res = db_query_params('insert into sshkeys (userid, fingerprint, upload, sshkey, name, algorithm)
 							values ($1, $2, $3, $4, $5, $6)',
 					array($this->getID(), $fingerprint, $now, $key, $explodedKey[2], $explodedKey[0]));
