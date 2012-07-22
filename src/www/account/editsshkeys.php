@@ -3,7 +3,8 @@
  * Change user's SSH authorized keys
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -74,7 +75,7 @@ if (getStringFromRequest('submit')) {
 
 } else {
 	// not valid registration, or first time to page
-	site_user_header(array('title'=>'Change Authorized Keys'));
+	site_user_header(array('title'=>_('Change Authorized Keys')));
 
 	echo '<p>' . _('To avoid having to type your password every time for your CVS/SSH developer account, you may upload your public key(s) here and they will be placed on the CVS server in your ~/.ssh/authorized_keys file. This is done by a cron job, so it may not happen immediately.  Please allow for a one hour delay.') . '</p>';
 	echo '<p>' . _('To generate a public key, run the program \'ssh-keygen\' (you can use both protocol 1 or 2). The public key will be placed at \'~/.ssh/identity.pub\' (protocol version 1) and \'~/.ssh/id_dsa.pub\' or \'~/.ssh/id_rsa.pub\' (protocol version 2). Read the ssh documentation for further information on sharing keys.') . '</p>';
