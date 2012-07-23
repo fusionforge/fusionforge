@@ -97,6 +97,8 @@ $wgShowExceptionDetails = true ;
 $wgLanguageCode = strtolower(forge_get_config('default_country_code'));
 
 $wgDefaultSkin = 'fusionforge';
+$wgHtml5 = false;
+$wgWellFormedXml = true;
 
 $GLOBALS['sys_dbhost'] = forge_get_config('database_host') ;
 $GLOBALS['sys_dbport'] = forge_get_config('database_port') ;
