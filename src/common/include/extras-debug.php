@@ -9,9 +9,20 @@ if (!isset($ffErrors))
 function ffErrorHandler($errno, $errstr, $errfile, $errline)
 {
 	global $ffErrors, $sysdebug_ignored, $sysdebug__aborted;
+	/* Debian-specific MediaWiki patch */
+	global $wf__warnings_suppressed;
 
 	if ($sysdebug__aborted) {
 		/* inside the exception handler, ignore everything */
+		return true;
+	}
+
+	if (isset($wf__warnings_suppressed) && $wf__warnings_suppressed) {
+		/*
+		 * MediaWiki makes use of surrounding sloppily written,
+		 * unclean, unsafe code with wfSuppressWarnings(); and
+		 * wfRestoreWarnings(); calls, we never want to see them
+		 */
 		return true;
 	}
 
