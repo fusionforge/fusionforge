@@ -1233,7 +1233,7 @@ Enjoy the site.
 		$explodedKey = explode(' ', $key);
 		$existingKeys = $this->getAuthorizedKeys();
 		foreach ($existingKeys as $existingKey) {
-			if ($existingKey['fingerprint'] = $fingerprint) {
+			if ($existingKey['fingerprint'] == $fingerprint) {
 				$this->setError(_('SSH Key already in use'));
 				return false;
 			}
