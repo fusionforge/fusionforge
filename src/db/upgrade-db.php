@@ -143,10 +143,10 @@ function run_script($script) {
 
 		if (count($result)) { // the script produced an output
 			if ($result[count($result)-1] == 'SUCCESS') {
-				show($db_path.$filename." ran correctly\n\n");
+				show(realpath($db_path.$filename)." ran correctly\n\n");
 				$return = true;
 			} else {
-				show($db_path.$filename." FAILED!\n\n");
+				show(realpath($db_path.$filename)." FAILED!\n\n");
 				show("Script output follows:\n");
 				foreach ($result as $line) {
 					show($line."\n");
@@ -154,7 +154,7 @@ function run_script($script) {
 				show("[End of script output]\n");
 			}
 		} else {
-			show($db_path.$filename." FAILED!\n\n");
+			show(realpath($db_path.$filename)." FAILED!\n\n");
 		}
 
 	} else if ($ext == 'sql') {
@@ -167,10 +167,10 @@ echo "\nskipping $filename";
 			// run the sql script
 			$queries = array();
 			if (run_sql_script($filename)) {
-				show($db_path.$filename." ran correctly\n\n");
+				show(realpath($db_path.$filename)." ran correctly\n\n");
 				$return = true;
 			} else {
-				show($db_path.$filename." FAILED!\n\n");
+				show(realpath($db_path.$filename)." FAILED!\n\n");
 			}
 		}
 	} else {
