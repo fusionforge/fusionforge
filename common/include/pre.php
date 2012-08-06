@@ -348,12 +348,15 @@ if (forge_get_config('database_name') != "") {
 			$LUSER =& session_get_user();
 			$use_tooltips = $LUSER->usesTooltips();
 			header ('Cache-Control: private');
-			require_once forge_get_config('themes_root').'/'.$LUSER->setUpTheme().'/Theme.class.php';
+			$x_theme = $LUSER->setUpTheme();
 		} else {
 			$use_tooltips = 1;
-			require_once forge_get_config('themes_root').'/'.forge_get_config('default_theme').'/Theme.class.php';
+			$x_theme = forge_get_config('default_theme');
 		}
+		require_once forge_get_config('themes_root').'/'.$x_theme.'/Theme.class.php';
 		$HTML = new Theme () ;
+		$HTML->_theme = $x_theme;
+		unset($x_theme);
 	} else {		     // Script run from cron or a command line
 		require_once $gfcommon.'include/squal_exit.php';
 	}
