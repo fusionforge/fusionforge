@@ -1,3 +1,12 @@
+fusionforge (5.2~rc1wheezy1~exp1) UNRELEASED; urgency=low
+
+  * Since this package was accidentally uploaded as native package,
+    and there is a large delta to what’s in upstream SVN right now,
+    upload this deliberately as native package now.
+  * Add myself to uploaders
+
+ -- Thorsten Glaser <tg@mirbsd.de>  Mon, 06 Aug 2012 10:46:56 +0200
+
 fusionforge (5.2~rc1-5) unstable; urgency=low
 
   * Updated Debconf translations for Portuguese (thanks to Américo
