@@ -42,6 +42,12 @@ class SkinFusionForge extends SkinTemplate {
 	 */
 	function setupSkinUserCss( OutputPage $out ) {
 		global $wgHandheldStyle;
+
+		/* add FusionForge styles */
+		foreach ($GLOBALS['HTML']->stylesheets as $sheet) {
+			$out->addStyle($sheet['css'], $sheet['media']);
+		}
+
 		parent::setupSkinUserCss( $out );
 
 		$out->addModuleStyles( 'skins.monobook' );
@@ -55,11 +61,6 @@ class SkinFusionForge extends SkinTemplate {
 		// TODO: Migrate all of these
 		$out->addStyle( 'monobook/IE60Fixes.css', 'screen', 'IE 6' );
 		$out->addStyle( 'monobook/IE70Fixes.css', 'screen', 'IE 7' );
-
-		/* add FusionForge global and per-FF-theme styles */
-		$out->addStyle('/themes/css/mediawiki.css', 'screen');
-		$out->addStyle('/themes/' . $GLOBALS['HTML']->_theme .
-		    '/mediawiki.css', 'screen');
 
 	}
 }
