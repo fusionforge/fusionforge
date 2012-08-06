@@ -2361,7 +2361,7 @@ plugins/mediawiki/include/mediawiki-init.php -text
 plugins/mediawiki/include/mediawikiPlugin.class.php -text
 plugins/mediawiki/mediawiki-skin/FusionForge.php -text
 plugins/mediawiki/mediawiki-skin/FusionForge.php.patch -text
-plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text
+plugins/mediawiki/mediawiki-skin/FusionForge.php.renamed -text
 plugins/mediawiki/mediawiki-skin/Makefile -text
 plugins/mediawiki/mediawiki-skin/README.beforemodifying -text
 plugins/mediawiki/packaging/control/160plugin-mediawiki -text
