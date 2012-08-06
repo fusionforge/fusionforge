@@ -1,0 +1,4 @@
+plugins/extratabs/bin/*	usr/share/@OLDPACKAGE@/plugins/extratabs/bin/
+plugins/extratabs/common/* usr/share/@OLDPACKAGE@/plugins/extratabs/common/
+plugins/extratabs/db/* usr/share/@OLDPACKAGE@/plugins/extratabs/db/
+plugins/extratabs/www/* usr/share/@OLDPACKAGE@/plugins/extratabs/www/

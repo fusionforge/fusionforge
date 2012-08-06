@@ -1,0 +1,32 @@
+Date: Fri, 10 Sep 2010 13:46:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FAdvice%20for%20Mediawiki%20users 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FAdvice%20Mediawiki%20users;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+If you contribute to Wikipedia or to other wikis that use the Mediawiki
+software, you will notice some differences in the wiki syntax of Mediawiki
+and the wiki syntax of Phpwiki.
+
+== Syntax differences ==
+
+Here are some differences between Mediawiki and Phpwiki:
+* Italics are ##//## (but you can also use ##''## like in Wikipedia)
+* Bold is ##~*~*## (you //cannot use// ##'''## like in Wikipedia)
+* There is **no automatic capitalisation** of first character of page name. Pages *<tt>~[~[foo~]~]</tt>* and *<tt>~[~[Foo~]~]</tt>* are different.
+* A space in a page name in not equivalent to an underscore. Pages *<tt>~[~[foo bar~]~]</tt>* and *<tt>~[~[foo_bar~]~]</tt>* are different. We recommend to use a space in the page names.
+* Many things that are built-in in Mediawiki use plug-ins in Phpwiki (table of contents, redirections, back links, etc.).
+* Redirections are less sophisticated in Phpwiki (e.g. backlinks do not show redirected pages)
+
+== Tables ==
+
+You can use in ACOS Forge the [[Help:MediawikiTablePlugin|Mediawiki table syntax]].
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

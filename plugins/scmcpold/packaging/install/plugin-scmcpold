@@ -1,0 +1,2 @@
+plugins/scmcpold/common/*             usr/share/gforge/plugins/scmcpold/common/
+plugins/scmcpold/etc/plugins/scmcpold/* etc/gforge/plugins/scmcpold/

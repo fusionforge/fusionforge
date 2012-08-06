@@ -1,0 +1,182 @@
+# Sourceforge/Gforge Project's directory schema items
+# initially by Olafur Osvaldsson (osvaldsson@users.sourceforge.net) 
+# Modified by Roland Mas <lolando@debian.org>
+# for the Debian-SF project (Sourceforge for Debian)
+# then for the Gforge projet
+# 
+# depends upon: 
+# core.schema 
+# cosine.schema 
+# inetorgperson.schema 
+# nis.schema 
+# 
+# Assigned numbers:
+# 1.3.6.1.4.1.9586 is the Enterprise number assigned to Debian
+# 1.3.6.1.4.1.9586.1 is assigned to Debian packages
+# 1.3.6.1.4.1.9586.1.1: assigned to the sourceforge package -- Debian-SF project
+# 1.3.6.1.4.1.9586.1.1.1: stable series
+# 1.3.6.1.4.1.9586.1.1.1.1: stable series for attribute types
+# 1.3.6.1.4.1.9586.1.1.1.2: stable series for object classes
+# 1.3.6.1.4.1.9586.1.1.2: experimental series
+# 1.3.6.1.4.1.9586.1.1.2.1: experimental series for attribute types
+# 1.3.6.1.4.1.9586.1.1.2.2: experimental series for object classes
+# 1.3.6.1.4.1.9586.100 is assigned to not necessarily Debian-specific projects
+# 1.3.6.1.4.1.9586.100.3: assigned to the Gforge project
+# 1.3.6.1.4.1.9586.100.3.1: stable series
+# 1.3.6.1.4.1.9586.100.3.1.1: stable series for attribute types
+# 1.3.6.1.4.1.9586.100.3.1.2: stable series for object classes
+# 1.3.6.1.4.1.9586.100.3.2: experimental series
+# 1.3.6.1.4.1.9586.100.3.2.1: experimental series for attribute types
+# 1.3.6.1.4.1.9586.100.3.2.2: experimental series for object classes
+
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.1 NAME 'debSfCvsShell' 
+	DESC 'The path to the CVS login shell' 
+	EQUALITY caseExactIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.2 NAME 'debSfForwardEmail' 
+	DESC 'The address to which email is forwarded' 
+	EQUALITY caseIgnoreIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.3 NAME 'debSfListPostAddress' 
+	DESC 'The address of the mailing-list'
+	EQUALITY caseIgnoreIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.4 NAME 'debSfListOwnerAddress' 
+	DESC 'The address of the list owner' 
+	EQUALITY caseIgnoreIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.5 NAME 'debSfListRequestAddress' 
+	DESC 'The address to which email is forwarded' 
+	EQUALITY caseIgnoreIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.6 NAME 'debSfListAdminAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.7 NAME 'debSfListBouncesAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.8 NAME 'debSfListConfirmAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.9 NAME 'debSfListJoinAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.10 NAME 'debSfListLeaveAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.11 NAME 'debSfListSubscribeAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.12 NAME 'debSfListUnsubscribeAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+objectclass ( 1.3.6.1.4.1.9586.1.1.1.2.1 NAME 'debSfAccount' SUP top AUXILIARY
+	DESC 'Abstraction of a Sourceforge account' 
+	MAY ( debSfCvsShell $ debSfForwardEmail ) )
+
+objectclass ( 1.3.6.1.4.1.9586.1.1.1.2.2 NAME 'debSfMailingList' SUP top AUXILIARY
+	DESC 'Abstraction of a Sourceforge Mailing List' 
+	MAY ( debSfListPostAddress $ debSfListOwnerAddress $ debSfListRequestAddress ) )
+
+objectclass ( 1.3.6.1.4.1.9586.1.1.1.2.3 NAME 'debSfMailingListMM21' SUP top AUXILIARY
+	DESC 'Abstraction of a Sourceforge Mailing List' 
+	MAY ( debSfListPostAddress $ debSfListOwnerAddress $ debSfListRequestAddress
+	$ debSfListAdminAddress $ debSfListBouncesAddress $ debSfListConfirmAddress $ debSfListJoinAddress
+	$ debSfListLeaveAddress $ debSfListSubscribeAddress $ debSfListUnsubscribeAddress) )
+
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.1 NAME 'debGforgeCvsShell' 
+	DESC 'The path to the CVS login shell' 
+	EQUALITY caseExactIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.2 NAME 'debGforgeForwardEmail' 
+	DESC 'The address to which email is forwarded' 
+	EQUALITY caseIgnoreIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.3 NAME 'debGforgeListPostAddress' 
+	DESC 'The address of the mailing-list'
+	EQUALITY caseIgnoreIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.4 NAME 'debGforgeListOwnerAddress' 
+	DESC 'The address of the list owner' 
+	EQUALITY caseIgnoreIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.5 NAME 'debGforgeListRequestAddress' 
+	DESC 'The address to which email is forwarded' 
+	EQUALITY caseIgnoreIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.6 NAME 'debGforgeListAdminAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.7 NAME 'debGforgeListBouncesAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.8 NAME 'debGforgeListConfirmAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.9 NAME 'debGforgeListJoinAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.10 NAME 'debGforgeListLeaveAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.11 NAME 'debGforgeListSubscribeAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.100.3.1.1.12 NAME 'debGforgeListUnsubscribeAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+objectclass ( 1.3.6.1.4.1.9586.100.3.1.2.1 NAME 'debGforgeAccount' SUP top AUXILIARY
+	DESC 'Abstraction of a Sourceforge account' 
+	MAY ( debGforgeCvsShell $ debGforgeForwardEmail ) )
+
+objectclass ( 1.3.6.1.4.1.9586.100.3.1.2.2 NAME 'debGforgeMailingList' SUP top AUXILIARY
+	DESC 'Abstraction of a Sourceforge Mailing List' 
+	MUST ( cn )
+	MAY ( debGforgeListPostAddress $ debGforgeListOwnerAddress $ debGforgeListRequestAddress ) )
+
+objectclass ( 1.3.6.1.4.1.9586.100.3.1.2.3 NAME 'debGforgeMailingListMM21' SUP top AUXILIARY
+	DESC 'Abstraction of a Sourceforge Mailing List'
+	MUST ( cn )
+	MAY ( debGforgeListPostAddress $ debGforgeListOwnerAddress $ debGforgeListRequestAddress
+	$ debGforgeListAdminAddress $ debGforgeListBouncesAddress $ debGforgeListConfirmAddress $ debGforgeListJoinAddress
+	$ debGforgeListLeaveAddress $ debGforgeListSubscribeAddress $ debGforgeListUnsubscribeAddress) )

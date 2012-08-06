@@ -1,0 +1,115 @@
+Date: Thu,  9 Dec 2010 17:30:39 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FPhpHighlightPlugin 7764 2010-12-09 16:36:20Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPhpHighlightPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~PhpHighlight** [[Help:WikiPlugin|plugin]] pretty-prints PHP code using the
+php-function:highlight-string.
+
+== Usage ==
+
+You specify options for the plugin on the same line as ##~<~<~PhpHighlight##,
+and put the code on the following lines, until the final ##~>~>##:
+
+{{{
+<<PhpHighlight [wrap?] [color options]
+code to be highlighted
+>>
+}}}
+
+== Description ==
+
+Depending on the ##wrap## option, then the plugin will take care of
+adding ##<?php## and ##?>## to the code before passing it to
+php-function:highlight-string. If the PHP delimiters were added, then
+the plugin removes them again from the highlighted string, before
+presenting it.
+
+== Options ==
+
+Automatic Wrapping:
+
+  If you don't want the plugin to automatically wrap the source code
+  in ##<?php## and ##?>##, then set ##wrap## to ##0##. The default value is ##1##
+  which means that the plugin takes care of adding and removing
+  ##<?php## and ##?>## automatically.
+
+  If you set ##wrap## to ##0##, then you'll be able to mix PHP code with
+  HTML. The plugin will then translate '##< ?php##' into '##<?php##' and
+  '##? >##' into '##?>##' to allow you to start and stop PHP mode in your
+  code.
+
+Color Options:
+
+  The plugin accepts optional color arguments which correspond to the
+  highlight settings in *php.ini*. Specified colors must be a valid
+  hexadecimal color or
+  [[http://www.w3.org/TR/REC-html40/types.html#h-6.5|HTML 4 color name]]
+  in lowercase, such as ##'#0f0344'## or ##blue##. You can set the
+  following options:
+
+  ##string##, ##comment##, ##keyword##, ##bg##, ##default##, and ##html##
+
+== Examples ==
+
+=== PHP with default colors from ##php.ini##: ===
+
+<<PhpHighlight
+function hello() {
+    echo "Hello World<p>";
+}
+>>
+
+=== HTML with embedded PHP ===
+
+Here we have to use ##wrap=0## to prevent automatic wrapping, and escape
+'##?>##' as '##? >##':
+
+<<PhpHighlight wrap=0 html='#000000' bg='#dddddd'
+<html>
+  <head>
+    <title>PHP Test</title>
+  </head>
+  <body>
+    < ?php echo "<p>Hello World</p>\n"; ? >
+  </body>
+</html>
+>>
+
+=== C Source ===
+
+Although ##highlight_string()## was designed with PHP code in mind it is
+suitable for basic syntax-highlighting of most C code because the two
+syntax are similar.
+
+<<PhpHighlight default=black string=blue comment=gray keyword=purple
+#include <stdio.h>
+/* Get load */
+int
+getload(void)
+{
+    if ((fp = fopen("/proc/loadavg", "r")) == NULL) {
+        syslog(LOG_ERR, _("%s %s: unable to open %s: %s"), _("FATAL ERROR:"),
+              "getload()", "/proc/loadavg", strerror(errno));
+        exit(EX_OSFILE);
+    }
+    fclose(fp);
+}
+>>
+
+== Authors ==
+* [[mailto:gimpster@gimpster.com|Martin Geisler]]
+* [[mailto:carstenklapp@users.sourceforge.net|Carsten Klapp]]
+
+== See Also ==
+* [[Help:SyntaxHighlighterPlugin|SyntaxHighlighter]] plugin for highlighting other languages.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

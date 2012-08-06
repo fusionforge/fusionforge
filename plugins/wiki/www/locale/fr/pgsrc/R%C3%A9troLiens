@@ -1,0 +1,19 @@
+Date: Tue, 25 Jan 2011 21:26:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: R%C3%A9troLiens 7896 2011-01-25 20:27:58Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=R%C3%A9troLiens;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Le contenu de toutes les pages est parcouru pour trouver des liens vers la page courante. 
+La fonction RétroLiens répond aussi à la question : "Quelles pages contiennent le 
+titre de cette page ?"
+
+----
+<<BackLinks exclude||='' include_self||=1 noheader||=0 page||='' info||=''>>
+
+----
+[[CatégoriePageDAction]]

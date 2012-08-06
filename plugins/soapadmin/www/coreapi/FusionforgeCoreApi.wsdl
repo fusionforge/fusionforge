@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.api.fusionforge.org/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://soap.api.fusionforge.org/" name="CoreApiService">
+	<types>
+		<xsd:schema version="1.0" targetNamespace="http://soap.api.fusionforge.org/">
+			<xsd:element name="getGroups" type="tns:getGroups" />
+			<xsd:element name="getGroupsByName" type="tns:getGroupsByName" />
+			<xsd:element name="getGroupsByNameResponse" type="tns:getGroupsByNameResponse" />
+			<xsd:element name="getGroupsResponse" type="tns:getGroupsResponse" />
+			<xsd:element name="getPublicProjectNames" type="tns:getPublicProjectNames" />
+			<xsd:element name="getPublicProjectNamesResponse" type="tns:getPublicProjectNamesResponse" />
+			<xsd:element name="getSCMData" type="tns:getSCMData" />
+			<xsd:element name="getSCMDataResponse" type="tns:getSCMDataResponse" />
+			<xsd:element name="getUsers" type="tns:getUsers" />
+			<xsd:element name="getUsersByName" type="tns:getUsersByName" />
+			<xsd:element name="getUsersByNameResponse" type="tns:getUsersByNameResponse" />
+			<xsd:element name="getUsersResponse" type="tns:getUsersResponse" />
+			<xsd:element name="getVersion" type="tns:getVersion" />
+			<xsd:element name="getVersionResponse" type="tns:getVersionResponse" />
+			<xsd:element name="userGetGroups" type="tns:userGetGroups" />
+			<xsd:element name="userGetGroupsResponse" type="tns:userGetGroupsResponse" />
+			<xsd:complexType name="getSCMData">
+				<xsd:sequence>
+					<xsd:element name="group_id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getSCMDataResponse">
+				<xsd:sequence>
+					<xsd:element name="scm_data" type="tns:scmData"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="scmData">
+				<xsd:sequence>
+					<xsd:element name="allow_anonymous" type="xsd:int" />
+					<xsd:element name="box" type="xsd:string"/>
+					<xsd:element name="connection_string" type="xsd:string"/>
+					<xsd:element name="module" type="xsd:string"/>
+					<xsd:element name="root" type="xsd:string"/>
+					<xsd:element name="type" type="xsd:string"/>
+					<xsd:element name="public" type="xsd:int"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getVersion">
+				<xsd:sequence />
+			</xsd:complexType>
+			<xsd:complexType name="getVersionResponse">
+				<xsd:sequence>
+					<xsd:element name="version" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getGroups">
+				<xsd:sequence>
+					<xsd:element name="group_id" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getGroupsResponse">
+				<xsd:sequence>
+					<xsd:element name="group" type="tns:group" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="group">
+				<xsd:sequence>
+					<xsd:element name="group_id" type="xsd:int" />
+					<xsd:element name="group_name" type="xsd:string" minOccurs="0" />
+					<xsd:element name="homepage" type="xsd:string" minOccurs="0" />
+					<xsd:element name="is_public" type="xsd:boolean" />
+					<xsd:element name="register_time" type="xsd:dateTime" minOccurs="0" />
+					<xsd:element name="scm_box" type="xsd:string" minOccurs="0" />
+					<xsd:element name="short_description" type="xsd:string" minOccurs="0" />
+					<xsd:element name="status" type="xsd:string" minOccurs="0" />
+					<xsd:element name="unix_group_name" type="xsd:string" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getPublicProjectNames">
+				<xsd:sequence />
+			</xsd:complexType>
+			<xsd:complexType name="getPublicProjectNamesResponse">
+				<xsd:sequence>
+					<xsd:element name="project_name" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="userGetGroups">
+				<xsd:sequence>
+					<xsd:element name="user_id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="userGetGroupsResponse">
+				<xsd:sequence>
+					<xsd:element name="group" type="tns:group" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getUsers">
+				<xsd:sequence>
+					<xsd:element name="user_id" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getUsersResponse">
+				<xsd:sequence>
+					<xsd:element name="user" type="tns:user" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="user">
+				<xsd:sequence>
+					<xsd:element name="add_date" type="xsd:dateTime" minOccurs="0" />
+					<xsd:element name="address" type="xsd:string" minOccurs="0" />
+					<xsd:element name="address2" type="xsd:string" minOccurs="0" />
+					<xsd:element name="country_code" type="xsd:string" minOccurs="0" />
+					<xsd:element name="fax" type="xsd:string" minOccurs="0" />
+					<xsd:element name="firstname" type="xsd:string" minOccurs="0" />
+					<xsd:element name="language_id" type="xsd:int" />
+					<xsd:element name="lastname" type="xsd:string" minOccurs="0" />
+					<xsd:element name="phone" type="xsd:string" minOccurs="0" />
+					<xsd:element name="status" type="xsd:string" minOccurs="0" />
+					<xsd:element name="timezone" type="xsd:string" minOccurs="0" />
+					<xsd:element name="title" type="xsd:string" minOccurs="0" />
+					<xsd:element name="user_id" type="xsd:int" />
+					<xsd:element name="user_name" type="xsd:string" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getGroupsByName">
+				<xsd:sequence>
+					<xsd:element name="group_name" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getGroupsByNameResponse">
+				<xsd:sequence>
+					<xsd:element name="group" type="tns:group" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getUsersByName">
+				<xsd:sequence>
+					<xsd:element name="user_name" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getUsersByNameResponse">
+				<xsd:sequence>
+					<xsd:element name="user" type="tns:user" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	<message name="getVersion">
+		<part name="parameters" element="tns:getVersion" />
+	</message>
+	<message name="getVersionResponse">
+		<part name="parameters" element="tns:getVersionResponse" />
+	</message>
+	<message name="getGroups">
+		<part name="parameters" element="tns:getGroups" />
+	</message>
+	<message name="getGroupsResponse">
+		<part name="parameters" element="tns:getGroupsResponse" />
+	</message>
+	<message name="getUsers">
+		<part name="parameters" element="tns:getUsers" />
+	</message>
+	<message name="getUsersResponse">
+		<part name="parameters" element="tns:getUsersResponse" />
+	</message>
+	<message name="getGroupsByName">
+		<part name="parameters" element="tns:getGroupsByName" />
+	</message>
+	<message name="getGroupsByNameResponse">
+		<part name="parameters" element="tns:getGroupsByNameResponse" />
+	</message>
+	<message name="getPublicProjectNames">
+		<part name="parameters" element="tns:getPublicProjectNames" />
+	</message>
+	<message name="getPublicProjectNamesResponse">
+		<part name="parameters" element="tns:getPublicProjectNamesResponse" />
+	</message>
+	<message name="getUsersByName">
+		<part name="parameters" element="tns:getUsersByName" />
+	</message>
+	<message name="getUsersByNameResponse">
+		<part name="parameters" element="tns:getUsersByNameResponse" />
+	</message>
+	<message name="userGetGroups">
+		<part name="parameters" element="tns:userGetGroups" />
+	</message>
+	<message name="userGetGroupsResponse">
+		<part name="parameters" element="tns:userGetGroupsResponse" />
+	</message>
+	<message name="getSCMData">
+		<part name="parameters" element="tns:getSCMData" />
+	</message>
+	<message name="getSCMDataResponse">
+		<part name="parameters" element="tns:getSCMDataResponse" />
+	</message>
+	<portType name="CoreApi">
+		<operation name="getVersion">
+			<input message="tns:getVersion" />
+			<output message="tns:getVersionResponse" />
+		</operation>
+		<operation name="getGroups">
+			<input message="tns:getGroups" />
+			<output message="tns:getGroupsResponse" />
+		</operation>
+		<operation name="getUsers">
+			<input message="tns:getUsers" />
+			<output message="tns:getUsersResponse" />
+		</operation>
+		<operation name="getGroupsByName">
+			<input message="tns:getGroupsByName" />
+			<output message="tns:getGroupsByNameResponse" />
+		</operation>
+		<operation name="getPublicProjectNames">
+			<input message="tns:getPublicProjectNames" />
+			<output message="tns:getPublicProjectNamesResponse" />
+		</operation>
+		<operation name="getUsersByName">
+			<input message="tns:getUsersByName" />
+			<output message="tns:getUsersByNameResponse" />
+		</operation>
+		<operation name="userGetGroups">
+			<input message="tns:userGetGroups" />
+			<output message="tns:userGetGroupsResponse" />
+		</operation>
+		<operation name="getSCMData">
+			<input message="tns:getSCMData" />
+			<output message="tns:getSCMDataResponse" />
+		</operation>
+	</portType>
+	<binding name="CoreApiPortBinding" type="tns:CoreApi">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+		<operation name="getVersion">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getGroups">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getUsers">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getGroupsByName">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getPublicProjectNames">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getUsersByName">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="userGetGroups">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getSCMData">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	<service name="CoreApiService">
+		<port name="CoreApiPort" binding="tns:CoreApiPortBinding">
+			<soap:address location="http://fusionforge.local/api/soap/coreapi.php" />
+		</port>
+	</service>
+</definitions>

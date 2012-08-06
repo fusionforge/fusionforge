@@ -1,0 +1,15 @@
+/**
+ *  $Id: IEFixes.css 7833 2011-01-13 15:06:45Z vargenau $
+ */ 
+
+/*
+** Stylesheet filter for some b0rked browser
+** Don't touch, don't add anything here (can break the filter)
+** Add rules to the individual stylesheets.
+*/
+/* IE6.0 */
+@import "null?\"\{"; 
+@import "IE60Fixes.css";
+
+voice-family: "\"}\"";
+voice-family:inherit; 

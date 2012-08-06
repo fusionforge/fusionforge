@@ -1,0 +1,13 @@
+<?php // -*-php-*-
+// $Id: savepage.tmpl 7796 2010-12-20 16:02:14Z vargenau $'
+?>
+
+<?php if (!empty($WARNINGS)) { ?>
+  <?php echo $WARNINGS ?>
+<?php } ?>
+
+<?php if (!empty($LOCK_CHANGED_MSG)) { ?>
+  <p><?php echo $LOCK_CHANGED_MSG?></p>
+<?php } ?>
+
+<?php echo Template('browse') ?>

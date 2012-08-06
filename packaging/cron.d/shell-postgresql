@@ -1,0 +1,6 @@
+#
+# Regular cron jobs for shell-postgresql
+#
+
+# SCM/user/group update
+0 * * * * root [ -x /usr/share/@OLDPACKAGE@/bin/update-user-group-ssh.sh ] && /usr/share/@OLDPACKAGE@/bin/update-user-group-ssh.sh > /dev/null 2>&1

@@ -1,0 +1,86 @@
+<section id="ug_sitewide_snippet">
+	<title>Snippet Library</title>
+	<para>
+		The Snippet Library function of FusionForge is very interesting; it allows to collect all the type of information/knowledge which is not a complete piece of code and which is usually difficult to organize/share.
+	</para>
+	<para>
+		A typical example are sophisticated shell commands, javascript functions, perl one-liner, SQL expressions that perform special queries, an algorithm, etc.
+	</para>
+	<section id="ug_sitewide_snippet_insert_new">
+		<title>Inserting a new snippet</title>
+		<para>
+			You can insert a new Snippet by clicking on the <guimenuitem>Submit a New Snippet</guimenuitem> link.
+		</para>
+		<para>
+			A form appears, where the following information can be inserted:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Title</term>
+				<listitem>
+					<para>Insert the title of the snippet. This will be displayed in the list of the snippets.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Description</term>
+				<listitem>
+					<para>Insert the description of the snippet.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Type</term>
+				<listitem>
+					<para>Select the type of the snippet: function, full script, Howto, class, Readme.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>License</term>
+				<listitem>
+					<para>Select the license you want to use for your snippet.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Language</term>
+				<listitem>
+					<para>Select the language of the snippet (if it is language dependent).</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Category</term>
+				<listitem>
+					<para>Classify your snippet in categories tree.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Version</term>
+				<listitem>
+					<para>You should insert here the version of the snippet. For a new snippet, insert 1.0.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Code</term>
+				<listitem>
+					<para>Paste here the code of the snippet.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	<section id="ug_sitewide_snippet_browse">
+		<title>Browsing snippets</title>
+		<para>
+			You can browse snippets by clicking the <guimenuitem>Browse</guimenuitem> link.
+		</para>
+		<para>
+			You can browse snippets by Language or by Category. The resulting table shows the list of all snippets of the Language/Category. You can click on the snippet number to view the detail of the snippet.
+		</para>
+	</section>
+	<section id="ug_sitewide_snippet_modify">
+		<title>Modifying a snippet</title>
+		<para>
+			You cannot modify an existing snippet, but you can add a new version of the snippet by clicking on the Submit a new version link on the bottom part of the detail page of the snippet.
+		</para>
+		<para>
+			Adding a new version does not delete the old version, all previous versions will be available.
+		</para>
+	</section>
+</section>

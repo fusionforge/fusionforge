@@ -1,0 +1,185 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>4.3. Project Administration</title>
+<link rel="stylesheet" href="docbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<link rel="start" href="index.html" title="FusionForge User Guide">
+<link rel="up" href="ug_project.html" title="4. Project functions">
+<link rel="prev" href="ug_project_activity.html" title="4.2. Project Activity">
+<link rel="next" href="ug_project_forums.html" title="4.4. Forums">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">4.3. Project Administration</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ug_project_activity.html">Prev</a> </td>
+<th width="60%" align="center">4. Project functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ug_project_forums.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ug_project_project_admin"></a>4.3. Project Administration</h3></div></div></div>
+<p>
+		The Project Administration section allows you to administer the project.
+	</p>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_project_admin_page"></a>4.3.1. The Project Admin Page</h4></div></div></div>
+<p>
+			The Project Admin web page is where all the administration of the project is done from. To get there, log into FusionForge, and select the project from your personal page. This will bring you to the <span class="guimenuitem">Project Summary</span> page.
+		</p>
+<p>
+			The Project admin page is available by clicking on the Admin tab.
+		</p>
+<p>
+			Clicking here will present you with links to Admin, User Permissions, Edit Public Info, Project History, VHOSTS, Post Jobs, Edit Jobs, Edit MultiMedia Data, Database Admin and Stats. The Project Admin page is only accessible to members of the project who have been granted administrator privileges. By default, the person who registers the project is given admin privileges. Other members can be granted admin rights by the project administrator(s).
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_project_admin_admin_link"></a>4.3.2. Admin</h4></div></div></div>
+<p>
+			The Admin page presents the user with Misc. Project Information, Trove Categorization, Tool Admin and Group Members.
+		</p>
+<div class="variablelist"><dl>
+<dt><span class="term">Misc Project Information</span></dt>
+<dd><p>This shows the Short Description of the project and the location of the project homepage. There's also a link to Download Your Nightly CVS Tree Tarball, but this doesn't currently work.</p></dd>
+<dt><span class="term">Trove Categorization</span></dt>
+<dd>
+<p>
+						In order for people to be able to find the project, it must be classified in the Trove Map. This is basically a set of categories in which like projects are grouped.
+					</p>
+<p>
+						Clicking on Edit Trove Categorization presets a page which allows you to select the category(s) to which the project belongs (select as many as needed).
+					</p>
+<p>
+						Clicking Submit All Category Changes will set the categorizations, and you will be returned to the Project Admin page. You can change the trove categorizations during the lifetime of the project by following the above steps, as the project moves through its life.
+					</p>
+</dd>
+<dt><span class="term">Tool Admin</span></dt>
+<dd><p>This section shows the links to the tools describes the tools listed under the Tool Admin section on the Project Admin page.</p></dd>
+<dt><span class="term">Group Members</span></dt>
+<dd><p>This displays the names of the members in the project, and allows you to add members or delete them. To add members simply enter their login into the box provided and press Add User. To remove them, click on the rubbish bin to the left of their name.</p></dd>
+<dt><span class="term">Edit Roles</span></dt>
+<dd><p>This allows the project admin to edit existing roles in the project and create new ones.</p></dd>
+</dl></div>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_project_admin_edit_public_info"></a>4.3.3. Edit Public Info</h4></div></div></div>
+<p>
+			This page enables the project admin to select the information that is visible to the public and to the members of the project. It is possible to select the utilities that are used by the project, so that any that are not desired are not presented on the web page. Specifically it is possible to disable/enable:
+		</p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>Mailing Lists</p></li>
+<li><p>Surveys</p></li>
+<li><p>Forums</p></li>
+<li><p>Project/Task Manager</p></li>
+<li><p>CVS or Subversion (SCM tool)</p></li>
+<li><p>pserver (CVS server with password authentication)</p></li>
+<li><p>Anonymous access to CVS</p></li>
+<li><p>News</p></li>
+<li><p>Document Manager</p></li>
+<li><p>FTP</p></li>
+<li><p>Tracker</p></li>
+<li><p>File Release System (FRS)</p></li>
+<li><p>Statistics</p></li>
+</ul></div>
+<p>
+			It is also possible to change the home page (eg, it is possible to set up a web page on another machine, which has other information). In this case, the summary page will remain on FusionForge, pointing to the project, and the <span class="emphasis"><em>Home Page</em></span> link will point to the pages specified in the Homepage Link field.
+		</p>
+<p>
+			You can also change the descriptive group name and the short description. If desired you can add an email address to which all Bugs, Patches, Support Requests and Task Assignments will be sent. This could be a Mailing list or just an email address.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_project_admin_project_history"></a>4.3.4. Project History</h4></div></div></div>
+<p>
+			This page presents a history of the project, so you can see when major changes took place, eg members added/removed, Trove categories changed etc. There is nothing that you can do here.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_project_admin_stats"></a>4.3.5. VHosts</h4></div></div></div>
+<p>
+			This section allows you to handle the different virtual hosts needed for your project. A small interface is presented where you can add, modify or delete virtualhosts.
+		</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+				These virtualhosts are not created immediately, they are created by a backend script (be sure that the backend script is configured in your crontab).
+			</p>
+</div>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="id2780100"></a>4.3.6. Post Jobs</h4></div></div></div>
+<p>
+			This allows you to post jobs for your project, so that when non-project members visit the site, they can offer to help with the development.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="id2780114"></a>4.3.7. Edit Jobs</h4></div></div></div>
+<p>
+			This allows you to edit the jobs that have been posted for your project.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="id2780125"></a>4.3.8. Edit Multimedia data</h4></div></div></div>
+<p>
+			This allows you to publish screenshots of your project.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="id2780135"></a>4.3.9. Database Admin</h4></div></div></div>
+<p>
+			This allows you to maintain projects' databases.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="id2780148"></a>4.3.10. Stats</h4></div></div></div>
+<p>
+                        This section shows you information about your project activity.
+                </p>
+<p>
+                        You can select:
+                </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>Areas: tracker, forums, docs, tasks, downloads, page views;</p></li>
+<li><p>Type: daily, weekly, monthly;</p></li>
+<li><p>Start;</p></li>
+<li><p>End.</p></li>
+</ul></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ug_project_activity.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ug_project.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ug_project_forums.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">4.2. Project Activity </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> 4.4. Forums</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

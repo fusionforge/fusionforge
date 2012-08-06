@@ -1,0 +1,168 @@
+<section id="ug_project_project_admin">
+	<title>Project Administration</title>
+	<para>
+		The <emphasis>Project Administration</emphasis> section allows you to administer the project.
+	</para>
+	<section id="ug_project_project_admin_page">
+		<title>The Project Admin Page</title>
+		<para>
+			The Project Admin web page is where all the administration of the project is done from. To get there, log into FusionForge, and select the project from your personal page. This will bring you to the <guimenuitem>Project Summary</guimenuitem> page.
+		</para>
+		<para>
+			The Project admin page is available by clicking on the <emphasis>Admin</emphasis> tab.
+		</para>
+		<para>
+			Clicking here will present you with links to Admin, User Permissions, Edit Public Info, Project History, VHOSTS, Post Jobs, Edit Jobs, Edit MultiMedia Data, Database Admin and Stats. The Project Admin page is only accessible to members of the project who have been granted administrator privileges. By default, the person who registers the project is given admin privileges. Other members can be granted admin rights by the project administrator(s).
+		</para>
+	</section>
+	<section id="ug_project_project_admin_admin_link"> 
+	<title>Admin</title>
+		<para>
+			The Admin page presents the user with Misc. Project Information, Trove Categorization, Tool Admin and Group Members.
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Misc Project Information</term>
+				<listitem>
+					<para>This shows the Short Description of the project and the location of the project homepage. There's also a link to Download Your Nightly CVS Tree Tarball, but this doesn't currently work.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Trove Categorization</term>
+				<listitem>
+					<para>
+						In order for people to be able to find the project, it must be classified in the Trove Map. This is basically a set of categories in which like projects are grouped.
+					</para>
+					<para>
+						Clicking on Edit Trove Categorization presets a page which allows you to select the category(s) to which the project belongs (select as many as needed).
+					</para>
+					<para>
+						Clicking Submit All Category Changes will set the categorizations, and you will be returned to the Project Admin page. You can change the trove categorizations during the lifetime of the project by following the above steps, as the project moves through its life.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Tools Admin</term>
+				<listitem>
+					<para>This section shows the links to the tools describes the tools listed under the Tool Admin section on the Project Admin page.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Group Members</term>
+				<listitem>
+					<para>This displays the names of the members in the project, and allows you to add members or delete them. To add members simply enter their login into the box provided and press Add User. To remove them, click on the rubbish bin to the left of their name.</para>
+				</listitem>
+			</varlistentry>
+                        <varlistentry>
+                                <term>Edit Roles</term>
+                                <listitem>
+		                        <para>This allows the project admin to edit existing roles in the project and create new ones.</para>
+                                </listitem>
+                        </varlistentry>
+
+		</variablelist>
+	</section>
+	<section id="ug_project_project_admin_edit_public_info">
+		<title>Edit Public Info</title>
+		<para>
+			This page enables the project admin to select the information that is visible to the public and to the members of the project. It is possible to select the utilities that are used by the project, so that any that are not desired are not presented on the web page. Specifically it is possible to disable/enable:
+		</para>
+		<itemizedlist>
+			<listitem><para>Mailing Lists</para></listitem>
+			<listitem><para>Surveys</para></listitem>
+			<listitem><para>Forums</para></listitem>
+			<listitem><para>Project/Task Manager</para></listitem>
+			<listitem><para>CVS or Subversion (SCM tool)</para></listitem>
+			<listitem><para>pserver (CVS server with password authentication)</para></listitem>
+			<listitem><para>Anonymous access to CVS</para></listitem>
+			<listitem><para>News</para></listitem>
+			<listitem><para>Document Manager</para></listitem>
+			<listitem><para>FTP</para></listitem>
+			<listitem><para>Tracker</para></listitem>
+			<listitem><para>File Release System (FRS)</para></listitem>
+			<listitem><para>Statistics</para></listitem>
+		</itemizedlist>
+		<para>
+			It is also possible to change the home page (eg, it is possible to set up a web page on another machine, which has other information). In this case, the summary page will remain on FusionForge, pointing to the project, and the <emphasis>Home Page</emphasis> link will point to the pages specified in the Homepage Link field.
+		</para>
+		<para>
+			You can also change the descriptive group name and the short description. If desired you can add an email address to which all Bugs, Patches, Support Requests and Task Assignments will be sent. This could be a Mailing list or just an email address.
+		</para>
+	</section>
+	<section id="ug_project_project_admin_project_history">
+		<title>Project History</title>
+		<para>
+			This page presents a history of the project, so you can see when major changes took place, eg members added/removed, Trove categories changed etc. There is nothing that you can do here.
+		</para>
+	</section>
+	<section id="ug_project_project_admin_stats">
+		<title>VHosts</title>
+		<para>
+			This section allows you to handle the different virtual hosts needed for your project. A small interface is presented where you can add, modify or delete virtualhosts.
+		</para>
+		<note>
+			<para>
+				These virtualhosts are not created immediately, they are created by a backend script (be sure that the backend script is configured in your crontab).
+			</para>
+		</note>
+	</section>
+	<section>
+		<title>Post Jobs</title>
+		<para>
+			This allows you to post jobs for your project, so that when non-project members visit the site, they can offer to help with the development.
+		</para>
+	</section>
+	<section>
+		<title>Edit Jobs</title>
+		<para>
+			This allows you to edit the jobs that have been posted for your project.
+		</para>
+	</section>
+	<section>
+		<title>Edit Multimedia data</title>
+		<para>
+			This allows you to publish screenshots of your project.
+		</para>
+	</section>
+	<section>
+		<title>Database Admin</title>
+		<para>
+			This allows you to maintain projects' databases.
+		</para>
+	</section>
+	<section>
+		<title>Stats</title>
+                <para>
+                        This section shows you information about your project activity.
+                </para>
+                <para>
+                        You can select:
+                </para>
+                <itemizedlist>
+                        <listitem><para>Areas: tracker, forums, docs, tasks, downloads, page views;</para></listitem>
+	                <listitem><para>Type: daily, weekly, monthly;</para></listitem>
+	                <listitem><para>Start;</para></listitem>
+			<listitem><para>End.</para></listitem>
+                </itemizedlist>
+<!--
+		<para>
+			This section shows you information about your project:
+		</para>
+
+		<variablelist>
+			<varlistentry>
+				<term>Usage statistics</term>
+				<listitem>
+					<para>A graph shows you for the latest 30 days the number of views/dowloads for each day.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Lifetime statistics</term>
+				<listitem>
+					<para>This stat shows you, for the lifetime of the project, the number of visits/downloads, number of items inserted in the tracker, number of items in the PM/Task manager</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+-->
+	</section>
+</section>

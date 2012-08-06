@@ -1,0 +1,50 @@
+Installing phpwiki with MS SQL Server Native Driver for ADOdb
+-----------------------------------------------------------
+
+Microsoft has been working hard to get support for their products
+into Open Source projects. The MS SQL Server 2005 Driver for ADOdb
+is one step in that direction. The following is instructions on how
+to get and install the new mssql php driver for ADOdb as well as
+how to get the new driver to work with phpWiki.
+
+As of the writing of this walkthrough, the latest version of the PHP
+driver for SQL Server 2005 is the May 2008 Community Technical Preview.
+If you don't already have a copy of the SQL Server 2005 for PHP 
+driver installed on your server, you can get a copy at:
+http://www.microsoft.com/sql/technologies/php/default.mspx
+
+This assumes that you have PHP 5 installed as well as a working copy of
+any edition of SQL Server 2005 or SQL Server 2000 (including Express 
+Edition). If you do not have a copy of the free SQL Server 2005 Express
+Edition you can download it from:
+http://go.microsoft.com/fwlink/?LinkId=64064
+
+1. If you do not have a database created already, create one using
+   the SQL Server Management tool. You can get the free Express version at:
+   http://www.microsoft.com/downloads/details.aspx?FamilyId=C243A5AE-4BD1-
+   4E3D-94B8-5A0F62BF7796&displaylang=en
+   
+2. If necessary create a user for that database which has the rights
+   to select, insert, update, delete. For more information on how to use
+   SQL Server 2005 you can download SQL Server 2005 Books Online at:
+   http://www.microsoft.com/downloads/details.aspx?FamilyId=BE6A2C5D-00DF-
+   4220-B133-29C1E0B6585F&displaylang=en
+
+3. Create the tables and functions inside your database by running the SQL 
+   file included with the phpWiki project located at: 
+   schemas/sqlsrv-initialize.sql
+
+4. Edit the DATABASE settings in config/config.ini to reflect your settings.
+
+   a) DATABASE_TYPE should be set to 'ADODB' (case sensitive)
+   b) DATABASE_DSN should be set to something like:
+      'mssqlnative://username:password@pathtosqlserver/databasename'
+   c) Note that if you set DATABASE_PREFIX to a non-empty string, you will 
+	  have to edit schemas/sqlsrv-initialize.sql before you perform step
+      three (above). You might also edit schemas/sqlsrv-destroy.sql at the 
+	  same time, so you don't forget.
+   d) USE_SAFE_DBSESSION should be set to 'true'
+	
+   Note: DATABASE_DIRECTORY and DATABASE_DBA_HANDLER are ignored for mssql.
+
+That's it. phpWiki should work now. 

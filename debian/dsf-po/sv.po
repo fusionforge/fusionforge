@@ -1,0 +1,440 @@
+# Translation of fusionforge debconf template to Swedish
+# Copyright (C) 2012 Martin Bagge <brother@bsnet.se>
+# This file is distributed under the same license as the fusionforge package.
+#
+# Martin Ågren <martin.agren@gmail.com>, 2008.
+# Martin Bagge <brother@bsnet.se>, 2009, 2012
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGENAME@_4.6.99+svn6580-1_sv\n"
+"Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-29 18:26+0200\n"
+"PO-Revision-Date: 2012-06-13 20:58+0100\n"
+"Last-Translator: Martin Bagge / brother <brother@bsnet.se>\n"
+"Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: Sweden\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Namn på @FORGENAME@-domänen eller -underdomänen:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Ange den domän som kommer att vara värd för @FORGENAME@-installationen.  "
+"Vissa tjänster (källkodshantering, listor, etc.) kommer att tilldelas sina "
+"egna underdomäner i den domänen."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#| msgid "@FORGENAME@/FusionForge system name:"
+msgid "@FORGENAME@ system name:"
+msgstr "@FORGENAME@ systemnamn:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Ange namnet på @FORGENAME@-systemet. Det används på olika ställen i systemet."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+msgid "@FORGENAME@ administrator password:"
+msgstr "@FORGENAME@-administratörens lösenord:"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+#| msgid ""
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
+msgstr ""
+"Administratörskontot för @FORGENAME@ kommer att ha maximala rättigheter i "
+"forge-systemet. Det behövs för att godkänna skapandet av nya projekt."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+#| msgid "Please choose the password for this account."
+msgid "Please choose the password for this forge account."
+msgstr "Ange lösenordet för det här forge-kontot."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Password confirmation:"
+msgstr "Lösenordsbekräftelse:"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Please re-type the password for confirmation."
+msgstr "Mata in lösenordet igen för bekräftelse."
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "install the new version configured by @PACKAGE@"
+msgstr "installera den nya versionens inställningar för @PACKAGE@"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "keep the local version currently installed"
+msgstr "behåll den lokalt justerade versionen som förnärvarande är installerad"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show the differences between the versions"
+msgstr "visa skillnaderna mellan versionerna"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show a side-by-side difference between the versions"
+msgstr "visa skillnaderna mellan versionerna sida-vid-sida"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "start a new shell to examine the situation"
+msgstr "starta ett nytt skal för att undersöka situationen"
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid "What do you want to do about configuration file ${BASENAME}?"
+msgstr "Vad vill du göra med inställningsfilen ${BASENAME}?"
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid ""
+"The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
+"is also a configuration file of the postgresql package."
+msgstr ""
+"Inställningsfilen ${FILE} behöver justeras av @PACKAGE@, detta är också "
+"inställningsfilen för postgresql-paketet."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgstr "Vill du ha en enkel DNS-konfiguration för @FORGENAME@?"
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"You can use a simple DNS setup with wildcards to map all project web-hosts "
+"to a single IP address, and direct all the scm-hosts to a single SCM server, "
+"or a complex setup which allows many servers as project web servers or SCM "
+"servers."
+msgstr ""
+"Du kan ha en enkel DNS-konfiguration som använder jokertecken för att peka "
+"alla projektwebbplatser till en enda IP-adress och vidaresända alla "
+"källkodshanteringsvärdar till en enda källkodshanteringsserver, eller en "
+"komplex konfiguration som låter dig ha många servrar som projektwebbservrar "
+"eller källkodshanteringsservrar."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"Even if you use a simple DNS setup, you can still use separate machines as "
+"project servers; it just assumes that all the project web directories are on "
+"the same server with a single SCM server."
+msgstr ""
+"Även om du har en enkel DNS-konfiguration, kan du fortfarande ha separata "
+"maskiner för dina projektservrar; den antar bara att du har alla projektens "
+"webbkataloger på samma server och en enda källkodshanteringsserver."
+
+#~ msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgstr "@FORGENAME@-administratörens e-postadress:"
+
+#~ msgid ""
+#~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~ "site. It will be used when problems occur."
+#~ msgstr ""
+#~ "Ange e-postadressen för @FORGENAME@-administratören på systemet. Den "
+#~ "kommer användas ifall problem uppstår."
+
+#~ msgid "Download server:"
+#~ msgstr "Hämtningsserver:"
+
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr ""
+#~ "Ange värdnamnet för servern som kommer tillhandahålla @FORGENAME@-paketen."
+
+#~ msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgstr "Det ska inte vara samma som huvudvärden för @FORGENAME@."
+
+#~ msgid "Database server:"
+#~ msgstr "Databasserver:"
+
+#~ msgid ""
+#~ "Please enter the IP address (or hostname) of the server that will host "
+#~ "the @FORGENAME@ database."
+#~ msgstr ""
+#~ "IP-adressen (eller värdnamnet) för servern som kommer tillhandahålla "
+#~ "@FORGENAME@-databasen."
+
+#~ msgid "Database name:"
+#~ msgstr "Databasnamn:"
+
+#~ msgid ""
+#~ "Please enter the name of the database that will host the @FORGENAME@ "
+#~ "database."
+#~ msgstr ""
+#~ "Ange namnet på databasen som kommer tillhandahålla @FORGENAME@-databasen."
+
+#~ msgid "Database administrator username:"
+#~ msgstr "Databasadministratörens användarnamn:"
+
+#~ msgid ""
+#~ "Please enter the username of the database administrator for the server "
+#~ "that will host the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Ange användarnamnet på databasadministratören för servers som kommer "
+#~ "tillhandahålla @FORGENAME@-databasen."
+
+#~ msgid "Password used for the database:"
+#~ msgstr "Lösenordet som används för databasen:"
+
+#~ msgid "Connections to the database system are authenticated by a password."
+#~ msgstr "Uppkopplingar till databassystem autentiseras med ett lösenord."
+
+#~ msgid "Please choose the connection password."
+#~ msgstr "Välj uppkopplingslösenordet."
+
+#~ msgid "IP address:"
+#~ msgstr "IP-adress:"
+
+#~ msgid ""
+#~ "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~ "installation."
+#~ msgstr ""
+#~ "Ange IP-adressen för servern som kommer tillhandahålla @FORGENAME@-"
+#~ "installationen."
+
+#~ msgid "This is needed for the configuration of Apache virtual hosting."
+#~ msgstr "Detta krävs för att konfigurera Apaches virtuella värd."
+
+#~ msgid "Shell server:"
+#~ msgstr "Skalserver:"
+
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Ange värdnamnet för servern som kommer tillhandahålla skalkonton för "
+#~ "@FORGENAME@."
+
+#~ msgid "Mailing lists server:"
+#~ msgstr "Server för sändlistor:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "mailing lists."
+#~ msgstr ""
+#~ "Ange värdnamnet för servern som kommer tillhandahålla sändlistorna för "
+#~ "@FORGENAME@."
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Ange värdnamnet för servern som kommer tillhandahålla skalkonton för "
+#~ "@FORGENAME@."
+
+#~ msgid "News administrative group ID:"
+#~ msgstr "Grupp-id för nyhetsadministratörerna:"
+
+#~ msgid ""
+#~ "The members of the news admin group can approve news for the @FORGENAME@ "
+#~ "main page. This group's ID must not be 1. This should be changed only if "
+#~ "you upgrade from a previous version and want to keep the data."
+#~ msgstr ""
+#~ "Medlemmar i nyhetsadministrationsgruppen kan godkänna nyheter för "
+#~ "@FORGENAME@s förstasida.  Detta grupp-id får inte vara 1. Du behöver bara "
+#~ "ändra detta värde om du uppgraderar från en tidigare version och vill "
+#~ "behålla ditt data."
+
+#~ msgid "Statistics administrative group ID:"
+#~ msgstr "Grupp-id för statistikadministratörerna:"
+
+#~ msgid "Peer rating administrative group ID:"
+#~ msgstr "Grupp-id för användarbedömningsadministratörerna:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr ""
+#~ "Ange värdnamnet för servern som kommer tillhandahålla @FORGENAME@-paketen."
+
+#~ msgid "English"
+#~ msgstr "Engelska"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Bulgariska"
+
+#~ msgid "Catalan"
+#~ msgstr "Katalanska"
+
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "Kinesiska (traditionell)"
+
+#~ msgid "Dutch"
+#~ msgstr "Holländska"
+
+#~ msgid "Esperanto"
+#~ msgstr "Esperanto"
+
+#~ msgid "French"
+#~ msgstr "Franska"
+
+#~ msgid "German"
+#~ msgstr "Tyska"
+
+#~ msgid "Greek"
+#~ msgstr "Grekiska"
+
+#~ msgid "Hebrew"
+#~ msgstr "Hebreiska"
+
+#~ msgid "Indonesian"
+#~ msgstr "Indonesiska"
+
+#~ msgid "Italian"
+#~ msgstr "Italienska"
+
+#~ msgid "Japanese"
+#~ msgstr "Japanska"
+
+#~ msgid "Korean"
+#~ msgstr "Koreanska"
+
+#~ msgid "Latin"
+#~ msgstr "Latin"
+
+#~ msgid "Norwegian"
+#~ msgstr "Norska"
+
+#~ msgid "Polish"
+#~ msgstr "Polska"
+
+#~ msgid "Portuguese (Brazilian)"
+#~ msgstr "Portugisiska (brasiliansk)"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugisiska"
+
+#~ msgid "Russian"
+#~ msgstr "Ryska"
+
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "Kinesiska (förenklad)"
+
+#~ msgid "Spanish"
+#~ msgstr "Spanska"
+
+#~ msgid "Swedish"
+#~ msgstr "Svenska"
+
+#~ msgid "Thai"
+#~ msgstr "Thailändska"
+
+#~ msgid "English[ Default language]"
+#~ msgstr "Engelska[ Standardspråk]"
+
+#~ msgid "Default language:"
+#~ msgstr "Standardspråk:"
+
+#~ msgid "Please choose the default language for web pages."
+#~ msgstr "Ange standardspråket för webbsidorna."
+
+#~ msgid "Default theme:"
+#~ msgstr "Standardtema:"
+
+#~ msgid ""
+#~ "Please choose the default theme for web pages. This must be a valid name."
+#~ msgstr ""
+#~ "Ange standardtemat för webbsidorna. Detta måste vara ett giltigt namn."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "Vill du att e-post till ${noreply} ska tas bort?"
+
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ skickar och tar emot en mängd e-postmeddelanden till och från "
+#~ "adressen \"${noreply}\"."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "E-post till den adressen ska pekas mot ett svart hål (/dev/null) såvida "
+#~ "du inte har andra användningsområden för den adressen."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Omdirigerarserver för användarnas e-post:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Ange värdnamnet för servern som kommer tillhandahålla omdirigerarserver "
+#~ "för användarnas e-post för @FORGENAME@."
+
+#~ msgid "@FORGENAME@ administrator login:"
+#~ msgstr "@FORGENAME@-administratörens användarnamn:"
+
+#~ msgid "Please choose the username for this account."
+#~ msgstr "Ange användarnamnet för detta konto."
+
+#~ msgid "Initial list of skills:"
+#~ msgstr "Initiala listan över färdigheter:"
+
+#~ msgid ""
+#~ "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~ "from those present in the database. This list is the initial list of "
+#~ "skills that will enter the database."
+#~ msgstr ""
+#~ "@FORGENAME@ låter användarna definiera en lista över sina färdigheter, "
+#~ "som kan väljas av de som finns i databasen.  Denna lista är den initiala "
+#~ "listan som kommer att läggas in i databasen."
+
+#~ msgid "Please enter a semicolon-separated list of skill names."
+#~ msgstr "Mata in namn på färdigheter, separerade med semikolon."

@@ -1,0 +1,23 @@
+Date: Tue,  4 Jan 2011 11:59:41 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: SeitenErzeugen 7799 2011-01-04 11:05:56Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=SeitenErzeugen;
+  flags="";
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Um dem Wiki eine neue Seite hinzuzufügen mußt du dir nur einen sinnvollen Titel einfallen lassen, alle Wörter im Titel großschreiben und sie AufDieseArtZusammenfuegen. Wiki erkennt dies automatisch als einen Hyperlink. **Umlaute kannst du in Titeln auch verwenden: [[den Namen in eckige Klammern so einschließen].**
+
+Dann kannst du das Fragezeichen am Ende des neuen Hyperlinks anklicken, und Wiki öffnet einen Editor zum Erstellen der neuen Seite.
+
+Wenn du ein Dokument mit aufwendigen Formatierungen zum Wiki hinzufügen willst, ist es vielleicht einfacher, einen Link zu diesem Dokument ins Wiki einzufügen statt das Dokument selbst. Zum Beispiel:
+
+Die Homepage des PhpWiki Projektes: http://phpwiki.sourceforge.net/
+
+Wiki unterstüzt keine HTML-Tags (siehe TextFormatierungsRegeln). <tags>werden einfach wie normaler Text angezeigt.</tags> Wiki soll so einfach wie möglich sein, damit es jeder benutzen kann.
+
+Es gibt eine Funktion, durch die der Systemverwalter HTML in Dokumenten erlauben kann, das führt aber zu Sicherheitsrisiken.
+
+----
+[[PhpWikiDokumentation]]

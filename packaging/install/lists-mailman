@@ -1,0 +1,2 @@
+deb-specific/create-mailing-lists.pl usr/share/@OLDPACKAGE@/bin/
+deb-specific/fix-mailing-lists.pl    usr/share/@OLDPACKAGE@/bin/

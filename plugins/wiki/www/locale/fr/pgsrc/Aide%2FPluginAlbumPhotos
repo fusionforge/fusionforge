@@ -1,0 +1,96 @@
+Date: Tue, 25 Jan 2011 17:50:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Aide%2FPluginAlbumPhotos 7879 2011-01-25 17:01:33Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FPluginAlbumPhotos;
+  flags="";
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+== Description
+
+Faire un album en affichant un ensemble de photos dont la liste est
+un fichier de texte avec des descriptions optionnelles.
+
+===Usage
+
+{{{
+<<PhotoAlbum
+         src=http://server/textfile
+         mode=[column|row]
+         align=[center|left|right]
+         desc=true
+         sort=false
+         height=100%
+         width=100%
+         weblocation=>false
+>>
+}}}
+
+== Arguments
+
+''='src'= est le seul paramètre obligatoire.''
+
+**src**:
+  Url ou chemin local pour un fichier CSV où chaque ligne est un nom de 
+  fichier de photo et une description de la photo. Les photos sont dans le 
+  même répertoire que le fichier. Les descriptions sont facultatives. Si
+  le chemin local est un répertoire relatif à PHPWIKI_DIR et que le script 
+  principal est dans PHPWIKI_DIR, alors la localisation des fichiers ne 
+  doit pas être donnée et toutes les images du répertoire sont affichées.
+
+**weblocation**:
+  Chemin optionnel si les sources pointent vers un répertoire local et 
+  que les liens vers les photos ne fonctionnent pas.
+
+**mode**:
+  Spécifie comment les images sont rangées : ='column'= signifie 
+  verticalement, ='row'= signifie horizontalement . Par défaut : ='row'=.
+
+**align**:
+  Seulement applicable au mode colonne. Par défaut : ='center'=.
+
+**desc**:
+  Affiche les descriptions données dans le fichier. Vrai par défaut.
+
+**sort**:
+  Tri les images par nom de fichier. Par défaut, c'est l'ordre dans le 
+  fichier texte qui est suivi.
+
+**height**, **width**:
+  Height and width are calculated compared to original metrics
+  retrieved by [php-function:getimagesize] and can be absolute or a
+  percentage (e.g. "50%").
+
+== Exemples
+
+=== Fichier texte
+Contenu possible d'une fichier texte valide :
+
+{{{
+photo-01.jpg; Ma femme et moi !
+photo-02.jpg
+jn.gif; Joyeux Noël !
+}}}
+
+=== Exemple d'album
+Dossier local :
+<<PhotoAlbum
+         src="themes/Hawaiian/images/pictures/"
+>>
+ou par une adresse extérieure :
+{{{
+<<PhotoAlbum
+         src="http://phpwiki.sourceforge.net/demo/themes/Hawaiian/images/pictures/PhotoAlbum.csv"
+}}}
+>>
+
+== Auteur
+
+[Ted Vinke|mailto:teddy@jouwfeestje.com] <teddy@jouwfeestje.com>
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

@@ -1,0 +1,286 @@
+The "sourceforge" package was first debianised on Wed, 22 Nov 2000
+22:06:35 +0100 by Roland Mas <lolando@debian.org>.  Work has been
+constant since then, and the package evolved a great deal.  It began
+to work, for a start, and then it evolved into GForge, what with the
+more recent versions of the Sourceforge software having been made
+proprietary.  And then in early 2009 it evolved into FusionForge, what
+with the more recent versions of GForge having been rewritten as
+proprietary software without a name change.
+
+FusionForge is Copyright © 2009-2011 by several people, including:
+Patrick Apel		<p.apel@tarent.de>
+Christian Bayle		<bayle@debian.org>
+Julien Heyman		<julien.heyman@atosorigin.com>
+Mélanie Le Bail
+Olivier Berger
+Gonéri Le Bouder	<goneri.lebouder@atosorigin.com>
+Grégory Cuellar
+Thorsten Glaser		<t.glaser@tarent.de>
+Julien Heyman
+Ognyan Kulev
+Pierre Lacoste
+Olaf Lenz
+Roland Mas		<lolando@debian.org>
+Olivier Meunier 	<olivier.meunier@centraliens.net>
+Alexandre Neymann	<alexandre.neymann@dgfip.finances.gouv.fr>
+Mathieu Peltier
+Alain Peyrat		<aljeux@free.fr>
+Philip Schwartz
+Franck Villaume
+
+GForge itself is Copyright © 2000-2008 by a fair number of people,
+including:
+Tim Perdue              <tim@gforge.org>
+Roland Mas              <99.roland.mas@aist.enst.fr>
+Christian Bayle         <gforge@free.fr>
+Tom Copeland            <tom@infoether.com>
+Guillaume Smet          <guillaume-gforge@smet.org>
+Francisco Gimeno        <kikov@kikov.org>
+Sung Kim                <hunkims@gmail.com>
+Alain Peyrat            <aljeux@free.fr>
+
+Past Members of the development team include:
+Reinhard Spisser
+Ryan T. Sammartino
+Edward Ritter
+Michael Jennings
+
+Since FusionForge, and GForge before it, was initially a fork of
+Sourceforge, here's the copyright info for the Sourceforge software:
+,----
+| The original sources were downloaded from http://www.sourceforge.net/
+| 
+| Authors: The Sourceforge crew at VA Linux.  They are many, they
+| change as time goes by, and they are listed on the Sourceforge
+| website.  Let them be thanked for their work.
+| 
+| Copyright:
+| 
+| This software is Copyright © 1999-2000 by VA Linux.
+| 
+| You are free to distribute this software under the terms of the GNU
+| General Public License.
+`----
+
+For some reason, the OSX-like theme is provided under an MIT-like
+license rather than the usual GPL:
+,----
+| This theme is 
+| 
+| Copyright(c) 2002-2003 Richard Offer. All rights reserved.
+| 
+| Permission to use, copy, modify, distribute, and sell this software and its
+| documentation for any purpose is hereby granted without fee, provided that
+| the above copyright notice appear in all copies and that both that
+| copyright notice and this permission notice appear in supporting
+| documentation.
+| 
+| The above copyright notice and this permission notice shall be included in
+| all copies or substantial portions of the Software.
+| 
+| THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+| IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+| FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+| AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+| AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+| CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+| 
+| Except as contained in this notice, the name of the author shall not be
+| used in advertising or otherwise to promote the sale, use or other dealings
+| in this Software without prior written authorization from the author.
+`----
+
+The packaging and installing scripts (in the debian/ and deb-specific/
+directories amongst others) are Copyright © 2000-2010 by Christian
+Bayle <bayle@aist.enst.fr> and Roland Mas <lolando@debian.org>.  You
+are free to use and redistribute them under the terms of the GNU
+General Public License, version 2 or (at your option) any later
+version published by the Free Software Foundation.
+
+The upstream sources contain a modified copy of a version of the
+Nusoap library (prior to nusoap 0.6.8) (not used by the Debian
+packages):
+,----
+| NuSOAP - Web Services Toolkit for PHP developed by Dietrich Ayala
+|
+| Copyright (c) 2002 NuSphere Corporation
+|
+| This library is free software; you can redistribute it and/or
+| modify it under the terms of the GNU Lesser General Public
+| License as published by the Free Software Foundation; either
+| version 2.1 of the License, or (at your option) any later version.
+|
+| This library is distributed in the hope that it will be useful,
+| but WITHOUT ANY WARRANTY; without even the implied warranty of
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+| Lesser General Public License for more details.
+|
+| You should have received a copy of the GNU Lesser General Public
+| License along with this library; if not, write to the Free Software
+| Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
+| USA.
+`----
+
+They also contain a copy of tabber.js and related files (under an
+MIT-like license):
+,----
+| tabber.js by Patrick Fitzgerald pat@barelyfitz.com
+|
+| Documentation can be found at the following URL:
+| http://www.barelyfitz.com/projects/tabber/
+|
+| License (http://www.opensource.org/licenses/mit-license.php)
+|
+| Copyright (c) 2006 Patrick Fitzgerald
+|
+| Permission is hereby granted, free of charge, to any person
+| obtaining a copy of this software and associated documentation files
+| (the "Software"), to deal in the Software without restriction,
+| including without limitation the rights to use, copy, modify, merge,
+| publish, distribute, sublicense, and/or sell copies of the Software,
+| and to permit persons to whom the Software is furnished to do so,
+| subject to the following conditions:
+|
+| The above copyright notice and this permission notice shall be
+| included in all copies or substantial portions of the Software.
+|
+| THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+| EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+| MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+| NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+| BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+| ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+| CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+| SOFTWARE.
+`----
+
+There's also a copy of the JSCook Javascript library (also under an
+MIT-like license):
+,----
+| JSCookMenu v1.4.4.  (c) Copyright 2002-2005 by Heng Yuan
+|
+| Permission is hereby granted, free of charge, to any person obtaining a
+| copy of this software and associated documentation files (the "Software"),
+| to deal in the Software without restriction, including without limitation
+| the rights to use, copy, modify, merge, publish, distribute, sublicense,
+| and/or sell copies of the Software, and to permit persons to whom the
+| Software is furnished to do so, subject to the following conditions:
+|
+| The above copyright notice and this permission notice shall be included
+| in all copies or substantial portions of the Software.
+|
+| THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+| OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+| ITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+| AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+| LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+| FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+| DEALINGS IN THE SOFTWARE.
+`----
+
+And a copy of the FCKeditor Javascript library, triple-licensed:
+,----
+| FCKeditor - The text editor for Internet - http://www.fckeditor.net
+| Copyright (C) 2003-2008 Frederico Caldeira Knabben
+| 
+| Licensed under the terms of any of the following licenses at your
+| choice:
+| 
+|  - GNU General Public License Version 2 or later (the "GPL")
+|    http://www.gnu.org/licenses/gpl.html
+|    (See Appendix A)
+| 
+|  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+|    http://www.gnu.org/licenses/lgpl.html
+|    (See Appendix B)
+| 
+|  - Mozilla Public License Version 1.1 or later (the "MPL")
+|    http://www.mozilla.org/MPL/MPL-1.1.html
+|    (See Appendix C)
+`----
+
+FCKeditor also includes a copy of ImageObject.cfc and image.cfc, which
+are under a BSD-like license:
+,----
+| Copyright (c) 2007, Rick Root <rick@webworksllc.com>
+| All rights reserved.
+| 
+| Redistribution and use in source and binary forms, with or
+| without modification, are permitted provided that the
+| following conditions are met:
+| 
+| - Redistributions of source code must retain the above
+|   copyright notice, this list of conditions and the
+|   following disclaimer.
+| - Redistributions in binary form must reproduce the above
+|   copyright notice, this list of conditions and the
+|   following disclaimer in the documentation and/or other
+|   materials provided with the distribution.
+| - Neither the name of the Webworks, LLC. nor the names of
+|   its contributors may be used to endorse or promote products
+|   derived from this software without specific prior written
+|   permission.
+| 
+| THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+| CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+| INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+| MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+| DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+| CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+| SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+| BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+| LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+| HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+| CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+| OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+| SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+| 
+| ============================================================
+| This is a derivative work.  Following is the original
+| Copyright notice.
+| ============================================================
+| 
+| Copyright (c) 2004 James F. Dew <jdew@yggdrasil.ca>
+| 
+| Permission to use, copy, modify, and distribute this software for any
+| purpose with or without fee is hereby granted, provided that the above
+| copyright notice and this permission notice appear in all copies.
+| 
+| THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+| WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+| MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+| ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+| WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+| ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+| OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+`----
+
+The ARC2_OSLCCoreRDFJSONParserPlugin.php file from the OSLC Tools
+project, shipped as part of fusionforge-plugin-projectimport is
+distributed under the terms of the Apache license (a copy can be found
+in /usr/share/common-licenses/Apache-2.0) :
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0 or in the acompanying COPYING file
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+
+
+PHPWIKI ??
+
+VIEWVC ??
+
+On Debian systems, the complete text of the GNU General Public License
+can be found in the /usr/share/common-licenses directory.
+
+# Local Variables:
+# coding: utf-8
+# End:

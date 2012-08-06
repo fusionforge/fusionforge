@@ -1,0 +1,198 @@
+Release notes for FusionForge 5.2
+---------------------------------
+
+FusionForge 5.2 is another incremental step over 5.1, with about 2600
+commits.
+
+There have been no in-depth rewrites this time, only a number of
+improvements to various parts of the code.  The document manager
+steadily grows in functionality, new widgets are available for users'
+personal pages, the SCM plugins grew new features for hooks (on
+supported systems), the trackers now offer a new view for roadmaps.
+New plugins include a Message plugin allowing to display a global
+message on the forge, and a MoinMoinWiki plugin.
+
+Many bugs were of course fixed during the course of this development
+cycle.
+
+As before, this release comes with packages for Red Hat and Debian
+systems (and derived distributions), as well as a rewritten installer
+script for users of other systems (and those who prefer more manual
+installations).  This release provides scripts to migrate what needs
+to be migrated to the new schemes (for the database schema).  Care
+should still be taken to check the results of these migrations, as a
+safety net.
+
+Release notes for FusionForge 5.1
+---------------------------------
+
+FusionForge 5.1 is another incremental step over 5.0, although it's a
+large step in some regards, with about 3000 commits since version 5.0.
+
+The FusionForge team would like to dedicate this release to the memory
+of Alexandre Neymann, who passed away in March 2011.  Alexandre was
+one of the founding members of the FusionForge project in 2009, and
+one of its most active developers.  His death has meant a great loss
+to us all.
+
+On the user interface front, the project summary pages and users'
+personal pages are now built out of blocks called "widgets" that can
+be rearranged at will; these widgets (taken from Codendi) allow
+greater flexibility on how the pages look.  A new theme, called Funky,
+is now available, with a more modern feel (contributed by Capgemini).
+In the same field, the old help window has been replaced with a new
+unobtrusive tooltip system (Alcatel-Lucent).  A less visible aspect is
+that the generated webpages are now much closer to full XHTML
+compliance.
+
+Among the improvements in features, the document manager has been
+vastly rewritten (by Capgemini again), with more features and an
+improved usability; more improvements are planned for the next
+release, but this should bring the docman to something we're no longer
+ashamed of :-)
+
+Many improvements in the trackers have been contributed (by
+Alcatel-Lucent), including a progress bar and improvements in sorting.
+
+The permissions system has been enhanced and made more flexible, with
+the new ability to have several roles at once in the same project and
+to share roles across projects (contributed by Roland Mas as part of
+the Coclico project).
+
+New projects can now cloned from one of a set of configurable
+templates, thus allowing forges to have standard shapes for their
+common project organizations (Roland Mas, Coclico).
+
+New plugins have been written or merged from Codendi as part of the
+Coclico project: Mailman, Forumml, Hudson and SoapAdmin.  Not all are
+production-ready yet, but they're made available for the adventurous.
+Other new plugins include a gravatar plugin (Alain Peyrat) and a
+"blocks" plugin allowing to add free descriptions in several places
+(Alcatel-Lucent).
+
+Behind the scenes, the configuration system has also been made
+simpler, it now uses standard *.ini files that are taken into account
+immediately; the Apache configuration files are also splitted out into
+independent components, rather than a large generated file.  (Both by
+Roland Mas.)
+
+Another improvement making installation easier is the availability
+packages in RPM format for Red Hat Enterprise Linux and CentOS, in
+addition to the *.deb packages for Debian-based distributions.
+Installation from source is still supported, of course.
+
+As usual, this release provides scripts to migrate what needs to be
+migrated to the new schemes (in this case, for the database schema,
+the configuration variables and the existing permissions).  Care
+should still be taken to check the results of these migrations, as a
+safety net.
+
+Release notes for FusionForge 5.0
+---------------------------------
+
+FusionForge 5.0 is still an incremental step over 4.8, but many
+changes have been made, some of which may require caution when
+upgrading.
+
+In particular, the rewriting of the version control subsystem created
+the possibility for many new VCS tools to be integrated, and indeed
+several new plugins were implemented (Arch, Bazaar, Darcs, Git and
+Mercurial).  To avoid crowding the chroot, all repositories are now
+hosted under a two-level subdirectory structure.  For instance, where
+you had a CVS repositories stored under
+/var/lib/gforge/chroot/cvsroot/<project>, you'll now have it under
+.../chroot/scmrepos/cvs/<project>.  As a consequence, you need to move
+the repositories by hand and/or add symlinks.  Previously existing
+symlinks will also have to be updated, as well as previously existing
+working copies obtained by users.
+
+Also, the Mediawiki plugin was rewritten to allow for each project to
+get their own independent wiki.  The wiki for project foo-bar is now
+stored in the plugin_mediakiki_foo_bar in the same database as the
+rest of the forge.  This means the data should be migrated from the
+existing database to this new location.  Depending on your setup and
+the amount of data involved, it might make sense to either cut and
+paste by hand or dump the tables and reload them in the new schema.
+
+On the internal side of things, access to the database has been
+converted from the db_query() abstraction layer to the
+db_query_params() one.  This means SQL queries are no longer built as
+strings with unwieldy and fragile escaping code, while ensuring no
+data coming from the user can be used for SQL injection attacks.  The
+db_query() function, while deprecated, is still present for the
+benefit of out-of-tree code that might use it.  It might be removed at
+some point in the future, so maintainers of local plugins or
+enhancements are encouraged to migrate their code to
+db_query_params().  For really complex queries that need to be built
+dynamically, there's also a db_query_qpa() abstraction, with a
+db_construct_qpa() method to manipulate "QPA" (query+params array)
+objects.
+
+On a more visible note, the default theme has been reworked to
+increase the accessibility of the web pages; this rewrite also brings
+better maintainability, easier customisation by CSS and more
+conformant XHTML.
+
+
+Release notes for FusionForge 4.8
+---------------------------------
+
+FusionForge 4.8 is an incremental step from 4.7, and the changes are
+less far-reaching than the ones in 4.7.  Most notably, they include:
+- A new project classification system based on tags (with a tag cloud).
+- A new reporting page on the FRS displaying the number of downloads
+  per package.
+- The “Project List” can now display a list of all projects.
+- The “wiki” plugin now uses the latest PHPwiki code.
+
+The upgrade from 4.7 should be straightforward.
+
+
+Release notes for FusionForge 4.7
+---------------------------------
+
+This is the first public release of FusionForge.  FusionForge is based
+on GForge, and started as an identical copy, with only a name change
+to avoid confusion with the proprietary versions of GForge (known as
+GForge Advanced Server or GForge AS).  As such, it benefits from
+mature code and known-good infrastructure, and builds on it for the
+future.
+
+This 4.7 release is focused on bringing the recent evolutions out to
+the community in an official stable release.  This should provide a
+solid base as a starting point for community-based development, making
+it easier for enhancements to be maintained.  The FusionForge name was
+chosen to reflect this: this is a community effort, and we hope to
+hear about your improvements.  Contributing these improvements would
+make their future long-term maintenance easier for everyone.
+
+Major changes since previous versions (of GForge) include:
+- Support for PHP5.
+- Support for PostgreSQL 8.x.
+- Translations are now managed by gettext.
+- Support for several configurations running on the same code.
+- Improved security, no need for PHP register_globals.
+- Available as full install CD.
+- New wiki plugins (using MediaWiki or phpWiki).
+- New online_help plugin.
+- New phpwebcalendar plugin.
+- New project hierarchy plugin.
+
+Things to keep in mind when installing:
+- FusionForge is based on GForge, and the renaming is quite recent.
+  So the code still contains lots of references to GForge.  This will
+  be fixed as time passes.
+- Full text search using the primitives provided by PostgreSQL 8.3
+  isn't quite complete yet.
+- Not all plugins are packaged for all distributions yet.
+
+Things to keep in mind when upgrading:
+- Since internationalisation was changed from a hand-made system to
+  standard gettext, locally customised translations will no longer
+  override standard ones.  This will be addressed in a future release.
+
+For more up-to-date information, please visit http://fusionforge.org/
+or http://fusionforge.fusionforge.org/ -- you can even join us on IRC
+from there!
+
+ -- The FusionForge development team

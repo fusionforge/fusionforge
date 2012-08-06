@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section id="cg_coding_standards">
+  <title>PHP Coding Standards</title>
+  <section>
+    <title>Introduction</title>
+    <para>
+   Coding Standards.  Live them, love them.
+  </para>
+    <para>
+   Then come up with a new introduction...
+  </para>
+  </section>
+  <section>
+    <title>Comments</title>
+    <section>
+      <title>Guidelines</title>
+      <para>
+    Non-documentation comments are strongly encouraged. A general rule of thumb is that if you look at a section of code and think &quot;Wow, I don&apos;t want to try and describe that&quot;, you need to comment it before you forget how it works.
+   </para>
+      <itemizedlist>
+        <listitem>
+          <para>C++ style comments (/* */) and standard C comments (//) are both acceptable.</para>
+        </listitem>
+        <listitem>
+          <para>Use of perl/shell style comments (#) is prohibited.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+    <section>
+      <title>PHPdoc Tags</title>
+      <para>
+    Inline documentation for classes should follow the PHPDoc convention, similar to Javadoc. More information about PHPDoc can be found here: <ulink url="http://www.phpdoc.de/">http://www.phpdoc.de/</ulink>
+   </para>
+    </section>
+    <section>
+      <title>File comments</title>
+      <para>
+    Every file should start with a comment block describing its purpose, version, author and a copyright message. The comment block should be a block comment in standard JavaDoc format along with a CVS Id tag. While all JavaDoc tags are allowed, only the tags in the examples below will be parsed by PHPdoc.
+   </para>
+      <para>
+    FusionForge contains a mixed copyright. For files that have been changed since the FusionForge fork, the following header should be used:
+   </para>
+      <programlisting><![CDATA[
+/**
+ *
+ * brief description.
+ * long description.  more long description.
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2002 (c) their respective authors
+ *
+ */
+]]></programlisting>
+    </section>
+    <section>
+      <title>Function and Class Comments</title>
+      <para>
+    Similarly, every function should have a block comment specifying name, parameters, return values, and last change date.
+   </para>
+      <programlisting><![CDATA[
+/**
+ * brief description.
+ * long description.  more long description.
+ *
+ * @author    firstname lastname email
+ * @param     variable  description
+ * @return    value     description
+ * @date      YYYY-MM-DD
+ * @deprecated
+ * @see
+ *
+ */
+]]></programlisting>
+    </section>
+    <section>
+      <title>Note</title>
+      <para>
+    The placement of periods in the short and long descriptions is important to the PHPdoc parser. The first period always ends the short description. All future periods are part of the long description, ending with a blank comment line.  The long comment is optional.
+   </para>
+    </section>
+  </section>
+  <section>
+    <title>Formatting</title>
+    <section>
+      <title>Indenting</title>
+      <para>
+    All indenting is done with TABS. Before committing any file to Subversion, make sure you first replace spaces with tabs and verify the formatting.
+   </para>
+    </section>
+    <section>
+      <title>PHP Tags</title>
+      <para>
+    The use of <markup>&lt;?php ?&gt;</markup> to delimit PHP code is required. Using <markup>&lt;? ?&gt;</markup> is not valid. This is the most portable way to include PHP code on differing operating systems and webserver setups.  Also, XML parsers are confused by the shorthand syntax.
+   </para>
+    </section>
+  </section>
+  <section>
+    <title>Templating</title>
+    <para>
+   In the FusionForge system, PHP itself is used as the template language.  To make the templating clearer, template files should be separated out and included once objects and database results are established. Detailed examples are in the docs repository and <link linkend="cg_templating">here</link>.
+  </para>
+    <para>
+   Variables in the templates are presented surrounded by <markup> &lt;?php ?&gt;</markup> tags instead of the {} tags that some other template libraries would use. The end result is the same, with less bloat and more efficient code.
+  </para>
+  </section>
+  <section>
+    <title>Expressions</title>
+    <itemizedlist>
+      <listitem>
+        <para>Use parentheses liberally to resolve ambiguity.</para>
+      </listitem>
+      <listitem>
+        <para>Using parentheses can force an order of evaluation. This saves the time a reader may spend remembering precedence of operators.</para>
+      </listitem>
+      <listitem>
+        <para>Don&apos;t sacrifice clarity for cleverness.</para>
+      </listitem>
+      <listitem>
+        <para>Write conditional expressions so that they read naturally aloud.</para>
+      </listitem>
+      <listitem>
+        <para>Sometimes eliminating a not operator (!) will make an expression more understandable.</para>
+      </listitem>
+      <listitem>
+        <para>Keep each line simple.</para>
+      </listitem>
+      <listitem>
+        <para>The ternary operator (x ? 1 : 2) usually indicates too much code on one line. if... else if... else is usually more readable.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section>
+    <title>Functions</title>
+    <section>
+      <title>Function Calls</title>
+      <para>
+    unctions shall be called with no spaces between the function name, the opening parenthesis, and the first parameter; spaces between commas and each parameter, and no space between the last parameter, the closing parenthesis, and the semicolon. Here&apos;s an example:
+   </para>
+      <programlisting><![CDATA[
+$var = foo($bar, $baz, $quux);
+]]></programlisting>
+      <para>
+    As displayed above, there should be one space on either side of an equals sign used to assign the return value of a function to a variable. In the case of a block of related assignments, more space may be inserted to promote readability:
+   </para>
+      <programlisting><![CDATA[
+$short  = foo($bar);
+$long_variable = foo($baz);
+]]></programlisting>
+    </section>
+    <section>
+      <title>Function Definitions</title>
+      <para>
+    Function declarations follow the unix convention:
+   </para>
+      <programlisting><![CDATA[
+function fooFunction($arg1, $arg2 = '') {
+    if (condition) {
+        statement;
+    }
+    return $val;
+}
+
+]]></programlisting>
+      <para>
+    Arguments with default values go at the end of the argument list. Always attempt to return a meaningful value from a function if one is appropriate. Here is a slightly longer example:
+   </para>
+      <programlisting><![CDATA[
+function connect(&$dsn, $persistent = false) {
+    if (is_array($dsn)) {
+        $dsninfo = &$dsn;
+    } else {
+        $dsninfo = DB::parseDSN($dsn);
+    }
+
+    if (!$dsninfo || !$dsninfo['phptype']) {
+        return $this->raiseError();
+    }
+
+    return true;
+}
+]]></programlisting>
+    </section>
+  </section>
+  <section>
+    <title>Objects</title>
+    <para>
+   Objects should generally be normalized similar to a database so they contain only the attributes that make sense.
+  </para>
+    <para>
+   Each object should have <classname>Error</classname> as the abstract parent object unless the object or its subclasses will never produce errors.
+  </para>
+    <para>
+   Each object should also have a <methodname>create()</methodname> method which does the work of inserting a new row into the database table that this object represents.
+  </para>
+    <para>
+   An <methodname>update()</methodname> method is also required for any objects that can be changed.  Individual <methodname>set()</methodname> methods are generally not a good idea as doing separate updates to each field in the database is a performance bottleneck.
+  </para>
+    <para>
+   <methodname>fetchData()</methodname> and <methodname>getId()</methodname> are also standard in most objects. See the tracker codebase for specific examples.
+  </para>
+    <para>
+   Common sense about performance should be used when designing objects.
+  </para>
+  </section>
+  <section>
+    <title>Naming</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+     Constants should always be uppercase, with underscores to separate words. Prefix constant names with the name of the class/package they are used in. For example, the constants used by the DB:: package all begin with <quote>DB_</quote>.</para>
+      </listitem>
+      <listitem>
+        <para>
+     True and false are built in to the php language and behave like constants, but should be written in lowercase to distinguish them from user-defined constants.
+    </para>
+      </listitem>
+      <listitem>
+        <para>
+     Function names should suggest an action or verb: <function>updateAddress</function>, <function>makeStateSelector</function>
+    </para>
+      </listitem>
+      <listitem>
+        <para>
+     Variable names should suggest a property or noun: <varname>UserName</varname>, <varname>Width</varname>
+    </para>
+      </listitem>
+      <listitem>
+        <para>
+     Use pronounceable names. Common abbreviations are acceptable as long as they are used the same way throughout the project.
+    </para>
+      </listitem>
+      <listitem>
+        <para>
+     Be consistent, use parallelism.  If you are abbreviating <quote>number</quote> as <quote>num</quote>, always use that abbreviation.  Don&apos;t switch to using <quote>no</quote> or <quote>nmbr</quote>.
+    </para>
+      </listitem>
+      <listitem>
+        <para>
+     Use descriptive names for variables used globally, use short names for variables used locally.
+    </para>
+        <programlisting><![CDATA[
+$AddressInfo = array(...);
+
+for($i=0; $i &lt; count($list); $i++)
+]]></programlisting>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section>
+    <title>Control Structures</title>
+    <para>
+   These include if, for, while, switch, etc. Here is an example if statement, since it is the most complicated form:
+  </para>
+    <programlisting><![CDATA[
+if ((condition1) || (condition2)) {
+    action1;
+} elseif ((condition3) && (condition4)) {
+    action2;
+} else {
+    defaultaction;
+}
+]]></programlisting>
+    <para> 
+   Control statements shall have one space between the control keyword and opening parenthesis, to distinguish them from function calls.
+  </para>
+    <para>
+   You should use curly braces even in situations where they are technically optional. Having them increases readability and decreases the likelihood of logic errors being introduced when new lines are added.
+  </para>
+    <para>
+   For switch statements:
+  </para>
+    <programlisting><![CDATA[
+switch (condition) {
+    case 1: {
+        action1;
+        break;
+    }
+    case 2: {
+        action2;
+        break;
+    }
+    default: {
+        defaultaction;
+        break;
+    }
+}
+]]></programlisting>
+  </section>
+  <section>
+    <title>Including PHP Files</title>
+    <para>
+   Anywhere you are unconditionally including a class file, use require_once. Anywhere you are conditionally including a class file (for example, factory methods), use include_once. Either of these will ensure that class files are included only once. They share the same file list, so you don&apos;t need to worry about mixing them - a file included with require_once will not be included again by include_once.
+  </para>
+    <note>
+      <para>
+    Note: include_once and require_once are statements, not functions. You don&apos;t need parentheses around the filename to be included, however you should do it anyway and use &apos; (apostrophes) not &quot; (quotes):
+   </para>
+    </note>
+    <programlisting><![CDATA[
+include('pre.php');
+]]></programlisting>
+  </section>
+</section>

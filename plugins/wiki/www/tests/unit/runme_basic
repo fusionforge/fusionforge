@@ -1,0 +1,6 @@
+#!/bin/sh
+# run load/save with dba only, without memory trace (debug=9).
+# this should catch most of existing errors, and needs only one external file.
+chmod -R a+rw .testbox .dumphtml
+if [ -d .testbox/page_data -a ! -w .testbox/page_data/AllPages ]; then rm -rf .testbox/*; fi
+php -Cq -d register_argc_argv=1 test.php test=SetupWiki test=DumpHtml db=dba level=10 debug=0

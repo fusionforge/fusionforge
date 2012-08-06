@@ -1,0 +1,3 @@
+etc/gforge/plugins/oauthprovider
+usr/share/gforge/plugins/oauthprovider/common
+usr/share/gforge/plugins/oauthprovider/www

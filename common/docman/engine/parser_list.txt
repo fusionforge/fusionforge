@@ -1,0 +1,34 @@
+# parser_list.txt
+#
+# FusionForge document search engine
+#
+# Copyright 2005, Fabio Bertagnin
+# Copyright 2009-2010, Franck Villaume - Capgemini
+# http://fusionforge.org
+#
+# This file is part of FusionForge.
+#
+# FusionForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published
+# by the Free Software Foundation; either version 2 of the License,
+# or (at your option) any later version.
+#
+# FusionForge is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Tupple : mime type file   parser file
+# syntax :
+# mime-type|parser
+# This list is used by the ParserData class to find if any parser is available for that type of file
+text/plain|parser_text.php
+text/html|parser_html.php
+application/pdf|parser_pdf.php
+application/vnd.oasis.opendocument.presentation|parser_oo.php
+application/vnd.oasis.opendocument.text|parser_oo.php
+application/msword|parser_doc.php

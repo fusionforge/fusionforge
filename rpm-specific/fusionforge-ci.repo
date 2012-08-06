@@ -1,0 +1,8 @@
+# Name: FusionForge CI RPM Repository
+# URL: http://buildbot.fusionforge.org/
+[fusionforge-ci]
+name = Red Hat Enterprise $releasever - fusionforge.org
+baseurl = http://buildbot.fusionforge.org/job/fusionforge-trunk-build-and-test-rpm/ws/build/packages/
+enabled = 1
+protect = 0
+gpgcheck = 0

@@ -1,0 +1,15 @@
+scmcvs plugin
+-------------
+
+This is the CVS plugin for Gforge.  It creates CVS repositories and
+provides some functionality to manage them.
+
+The scmcvs/etc/plugins/scmcvs/config.php should be copied and edited
+to
+
+        /etc/gforge/plugins/scmcvs/config.php
+
+The 'Site Admin' tab on the GForge web interface now has a 'Plugin Manager'
+page where you can activate plugins on a sitewide basis. Be sure to do that
+if you want this plugin to be available to projects.
+

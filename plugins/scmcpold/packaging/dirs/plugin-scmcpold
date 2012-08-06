@@ -1,0 +1,4 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/scmcpold
+usr/share/gforge/plugins/scmcpold/common
+var/lib/gforge/chroot/scmrepos/cpold

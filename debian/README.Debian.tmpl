@@ -1,0 +1,156 @@
+@FORGENAME@ for Debian
+=================
+
+@FORGENAME@ is packaged for Debian, and was formerly packaged under
+the 'gforge' source package name. Even though a transition is in
+progress towards renaming it widely, only high-level meta-packages are
+named with the '@PACKAGE@' prefix. The rest of the packages are
+still named with the 'gforge-' prefix, so expect most paths and
+filenames to still be named in relation to 'gforge'.
+
+Status
+------
+Want to know what the status of this package is?  Read
+/usr/share/doc/@PACKAGE@/TODO.Debian or (even better)
+<https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Roadmap>.  If you miss a
+feature, or find a bug, or want to help, don't hesitate to contact me
+(Roland Mas <lolando@debian.org>) .  Plenty of features are missing,
+I'm working on some, but if you don't tell me which ones you miss the
+most I might process them in the wrong order for you.
+
+  Please read the bug reports on the Debian bug-tracking system (at
+<URL:http://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=@PACKAGE@>)
+before submitting new ones.  Be warned that bug reports describing a
+problem precisely and/or offering a solution will probably be
+processed faster :-)
+
+
+Note on documentation
+---------------------
+See contents of /usr/share/doc/@OLDPACKAGE@-common/ first.
+
+Although a few documentation files from upstream are included, they
+are either very out of date or practically useless.  I mostly include
+them for completeness's sake (and per request, too).  The files I'm
+referring to are Install_Guide.html, Adminstration_Guide.html,
+Contributor_Guide.html, INSTALL, and AUTHORS.
+
+
+Installation notes
+------------------
+  @FORGENAME@ is a big piece of software.  It's far-reaching.  It
+fiddles with many different parts of the system.  As automated as I
+have tried to make its installation, there are still things that need
+to be done by hand, maybe even by a system administrator.
+
+  First, you'll need a hostname.  Get the @PACKAGE@.<your-domain>
+DNS name to be created, pointing on the IP address of the host you're
+installing @FORGENAME@ on.  The "@PACKAGE@" part isn't required, you
+can call it however you like.  However, I'll assume you chose
+"@PACKAGE@" from now on; substitute as needed.
+
+  If you want to use the Apache virtual hosting service, you'll even
+need a delegation of a subdomain.  Get your system administrator to
+delegate you the SOA for the @PACKAGE@.<your-domain> subdomain.
+This will allow @FORGENAME@ to create new hostnames for projects when
+needed (foo.@PACKAGE@.<your-domain>, for instance), as well as some
+hostnames needed by the system (for mailing-lists or SCM, for
+instance).
+
+  The LDAP server is hosted on the same host and automatically
+managed, therefore you should not have to worry too much about it.
+You might be able to access it from another host, but I'm not sure
+you'll be able to modify the entries in it.  I would advise not to in
+any case, since it would make the data contained in the LDAP directory
+inconsistent with the real data stored in the PostgreSQL database.
+
+  You'll need a configured MTA for @FORGENAME@.  Depending on whether
+the @FORGENAME@ users are local or remote, you might need to set up a
+smarthost or something else.  @FORGENAME@ depends on a working mail
+system, and you won't be able to create user accounts without it.  I'm
+not sure yet what advanced tricks need to be done with the MTA.  There
+might be some stuff to do with virtual domains for mailing-lists or
+user email forwarding...  I haven't fully investigated it yet.  Your
+contribution will be most welcome.
+
+  Depending on the targeted audience, you might want to get a real
+SSL/TLS certificate from some certification authority, whether it be a
+professional one or your personal one (or the one in your company).
+Otherwise, just use mod-ssl-makecert as advised during the
+configuration phase, and get your own custom certificate.
+
+  Do *not* delete the /etc/@PACKAGE@/*.template files.  They are
+needed.  Do not alter them either unless you *know* what you're doing.
+
+
+Custom local configuration
+--------------------------
+With default Debian settings, a set of conf files have been generated,
+and will contain the desired settings for runtime :
+ - /etc/fusionforge/config.ini
+ - /etc/fusionforge/config.ini.d/*.ini
+
+They are standard Windows-style *.ini files, and can be updated with
+any text editor.  They should be taken into account immediately by the
+web part of the forge and any subsequent runs of the cron jobs.  Note
+however that some require manual intervention: for instance, if you
+change the name of the database, you will need to perform the
+appropriate steps in the database server too.
+
+
+Adminning notes
+---------------
+  Once @FORGENAME@ is setup, it pretty much runs by itself.  There
+should be relatively few things to do for the administrator.  The
+following are random notes trying to document them.
+
+  You'll need to periodically check the Approve Pending Projects page
+as well as the Approve News Bytes one, and take appropriate action.
+That can be done by the `admin' user (or any user having admin
+permissions on the `siteadmin' project) via the web interface.
+
+  If you need to add skills to the database after installation, you
+can use the sf-add-skill script.  Give it a skill (or a list of
+skills) and it'll insert it into the databse.  This script is located
+in /usr/share/@PACKAGE@/bin/.
+
+  For cvs to work you have to add a symlink doing
+ln -s /var/lib/@PACKAGE@/chroot/cvsroot /cvsroot.
+We can't do this for Debian policy reason that forbid this.
+  For svn similar 
+ln -s /var/lib/@PACKAGE@/chroot/svnroot /svnroot is to be done
+
+  Don't forget about adding 
+SYSLOGD="-p /dev/log -a /var/lib/@PACKAGE@/chroot/dev/log" in /etc/default/syslog
+This is a WARNING you might have seen at install, essential if you run 
+anonymous cvs in a root jail (This is the default in Debian)
+
+  If you would like to add a theme to your @FORGENAME@, you'll first
+have to compose it.  Please refer to README.Themes.
+
+  Other customisations are described in README.Custom.
+
+
+Thanks
+------
+  Apart from the SourceForge crew at VA Linux, who did (and probably
+still do) a great job with SF, I'd like to send my thanks to Guillaume
+Morin, who wrote a very thorough SourceForge installation guide.  That
+guide gives step-by-step instructions for the installation procedure,
+and a big part of the packaging task was to turn these instructions
+into automated scripts.  Even if this package has evolved a lot since
+then, it was originally based on his guide.
+
+  Thanks also to all who tested packages and helped correct many
+errors of mine.  In particular, thanks to all who submitted patches.
+
+  And mega-thanks to Christian Bayle.  That guy single-handedly
+adapted and fixed all the scripts related to SCM, DNS, SSH accounts,
+and probably more.
+
+ -- Roland Mas <lolando@debian.org>, Thu Jul 24 21:33:33 2003
+
+# Local Variables:
+# mode: text
+# End:
+

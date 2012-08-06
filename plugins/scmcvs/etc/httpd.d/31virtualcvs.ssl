@@ -1,0 +1,33 @@
+# CVS HTTP SSL vhosts
+<VirtualHost *:443>
+	ServerName cvs.{domain_name}
+  	ServerAlias cvs.*.{domain_name}
+	DocumentRoot {gforge_chroot}{groupdir}/
+	VirtualDocumentRoot {gforge_chroot}{groupdir}/%2/htdocs
+	VirtualScriptAlias {gforge_chroot}{groupdir}/%2/cgi-bin
+
+	<IfModule mod_ssl.c>
+		SSLEngine on
+		SSLCertificateFile {sys_sslcrt}
+		SSLCertificateKeyFile {sys_sslkey}
+		SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+	</IfModule>
+	<IfModule apache_ssl.c>
+		SSLEnable
+		SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+	</IfModule>
+
+	<Directory {gforge_chroot}{groupdir}>
+		Options Indexes FollowSymlinks
+		AllowOverride All
+		order allow,deny
+		allow from all
+	</Directory>
+	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+	CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
+
+        RewriteEngine on
+        RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
+        RewriteRule .* - [F]
+</VirtualHost>
+

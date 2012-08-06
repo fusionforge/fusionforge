@@ -1,0 +1,80 @@
+#! /usr/bin/php -f
+<?php
+/**
+ * FusionForge source control management
+ *
+ * Copyright 2009, Roland Mas
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+        
+require (dirname(__FILE__).'/../common/include/env.inc.php');
+require_once $gfcommon.'include/pre.php';
+
+if (count ($argv) == 3) {
+	$v = forge_get_config ($argv[1], $argv[2]) ;
+	if ($v === true) {
+		$v = 'yes' ;
+	} elseif ($v === false) {
+		$v = 'no' ;
+	}
+	echo "$v\n" ;
+} elseif (count($argv) == 2) {
+	if ($argv[1] == 'list-all-variables') {
+		$c = FusionForgeConfig::get_instance () ;
+		$sections = $c->get_sections() ;
+		foreach ($sections as $s) {
+			$variables = $c->get_variables($s) ;
+			foreach ($variables as $v) {
+				print "$s/$v\n" ;
+			}
+		}
+	} elseif ($argv[1] == 'list-all-variables-values') {
+		$c = FusionForgeConfig::get_instance () ;
+		$sections = $c->get_sections() ;
+		foreach ($sections as $s) {
+			$variables = $c->get_variables($s) ;
+			foreach ($variables as $v) {
+				$value = forge_get_config ($v, $s);
+				print "$s/$v: $value\n" ;
+			}
+		}
+	} else {
+		$v = forge_get_config ($argv[1]) ;
+		if ($v === true) {
+			$v = 'yes' ;
+		} elseif ($v === false) {
+			$v = 'no' ;
+		}
+		echo "$v\n" ;
+	}
+} else {
+	echo "Usage: .../forge-get-config <variable> [ <section> ]
+For instance: .../forge-get-config web_host
+              .../forge-get-config repo_prefix scmsvn
+
+Or:           .../forge-get-config list-all-variables, for all variables
+              .../forge-get-config list-all-variables-values, for all variables and their values
+" ;
+        exit (1) ;
+}
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>

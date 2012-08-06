@@ -1,0 +1,111 @@
+<section id="cg_templating">
+	<title>Templating Standards</title>
+	<section>
+		<title>Coding Example</title>
+		<para>
+			The following code examples demonstrate how all coding on FusionForge is going to be done in the future. The first example shows the <quote>switchbox</quote> page (taken from <filename>www/tracker/index.php</filename>) - where the various objects are included, instantiated and checked for errors every step of the way.
+		</para>
+		<para>
+			Once the objects are instantiated, the template file can be included. In this example, the template file is detail.php (example2).
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Template page</term>
+				<listitem>
+<programlisting><![CDATA[
+<?php
+/**
+ * FusionForge Tracker Facility
+ *
+ * Portions Copyright 1999-2000 (c) The SourceForge Crew
+ * Copyright 2002-2004 (c) The FusionForge Teem
+ * http://fusionforge.org/
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+echo $ath->header(array 
+   ('title'=>'Detail: '.$ah->getID(). ' '.$ah->getSummary()));
+
+?>
+<H2>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></H2>
+
+<TABLE CELLPADDING="0" WIDTH="100%">
+	<FORM ACTION="<?php echo $PHP_SELF; ?>
+		?group_id=<?php echo $group_id; ?>
+		&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
+	<INPUT TYPE="HIDDEN" NAME="func" VALUE="monitor">
+	<INPUT TYPE="HIDDEN" NAME="artifact_id" 
+		VALUE="<?php echo $ah->getID(); ?>">
+	<TR>
+		<TD COLSPAN=2">
+		<?php
+		if (!session_loggedin()) {
+			?>
+		<B>Email:</B> &nbsp;
+		<INPUT TYPE="TEXT" NAME="user_email" 
+			SIZE="20" MAXLENGTH="40">
+		<?php
+			}
+			?>
+		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Monitor">
+		</FORM>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+         <B>Date:</B><BR>
+			<?php echo date( $sys_datefmt, 
+				$ah->getOpenDate() ); ?></TD>
+		<TD><B>Priority:</B><BR>
+			<?php echo $ah->getPriority(); ?></TD>
+	</TR>
+
+	<TR>
+		<TD><B>Submitted By:</B><BR>
+			<?php echo $ah->getSubmittedRealName(); ?> 
+			(<?php echo $ah->getSubmittedUnixName(); ?>)</TD>
+		<TD><B>Assigned To:</B><BR>
+			<?php echo $ah->getAssignedRealName(); ?>
+			(<?php echo $ah->getAssignedUnixName(); ?>)</TD>
+	</TR>
+
+	<TR>
+		<TD><B>Category:</B><BR>
+			<?php echo $ah->getCategoryName(); ?></TD>
+		<TD><B>Status:</B><BR>
+			<?php echo $ah->getStatusName(); ?></TD>
+	</TR>
+
+	<TR><TD COLSPAN="2">
+		<H3>DO NOT enter passwords or confidential information 
+			in your message!</H3>
+		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
+		</FORM>
+	</TD></TR>
+
+	</TABLE>
+	</FORM>
+<?php
+
+$ath->footer(array());
+
+?>]]></programlisting>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+</section>

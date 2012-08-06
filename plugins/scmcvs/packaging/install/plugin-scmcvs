@@ -1,0 +1,7 @@
+deb-specific/update-user-group-ssh.sh  usr/share/@OLDPACKAGE@/plugins/scmcvs/bin/
+plugins/scmcvs/bin/*                   usr/share/@OLDPACKAGE@/plugins/scmcvs/bin/
+plugins/scmcvs/sbin/*                  usr/share/@OLDPACKAGE@/plugins/scmcvs/sbin/
+plugins/scmcvs/common/*                usr/share/@OLDPACKAGE@/plugins/scmcvs/common/
+plugins/scmcvs/cronjobs/*              usr/share/@OLDPACKAGE@/plugins/scmcvs/cronjobs/
+plugins/scmcvs/etc/plugins/scmcvs/*    etc/@OLDPACKAGE@/plugins/scmcvs/
+plugins/scmcvs/etc/*.ini 	       etc/@PACKAGE@/config.ini.d/

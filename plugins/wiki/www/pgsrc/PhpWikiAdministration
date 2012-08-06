@@ -1,0 +1,162 @@
+Date: Fri, 10 Sep 2010 13:46:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: PhpWikiAdministration 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=PhpWikiAdministration;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+**//Note://** //Most of the actions on this page require administrative privileges.//
+
+<<CreateToc jshide||=0 with_toclink||=1 position=right with_counter=1>>
+
+== Page Explorer ==
+
+First select pages and then define the action:
+
+<?plugin-form WikiAdminSelect s="*" ?>
+
+or call the available ~WikiAdmin actions directly:
+
+| [[/Chown]] | [[/Markup]] | [[/Purge]] | [[/Remove]] | [[/Rename]] | [[/SearchReplace]] | [[/SetAcl]] | [[/SetAclSimple]]
+
+== Global Access Rights ==
+
+These action pages will allow you to set the default access rights for wiki pages.
+Pages without individual access rights will use these default access rights.
+* [[SetGlobalAccessRightsSimple]]
+* [[SetGlobalAccessRights]]
+
+== User Management ==
+
+=== Reset a users password ===
+
+<?plugin-form PasswordReset textinput=user method=post ?>
+
+=== Email Verification ===
+
+This is currently non-strict, leaving some possible holes in not being able to
+connect to certain mail hosts, which can be overridden below. See [[PhpWiki:EmailVerification]].
+
+This button will show a list of all users with registered emails and buttons to set the verification status manually.
+
+<<WikiAdminUtils action=email-verification label="Email Verification">>
+
+=== Access Restrictions (disabled) ===
+
+To prevent from robots eating all possible ressources in a short time, blocking from certain IPs
+or not-well-behaving user agents can be defined below. See [[PhpWiki:HowToBlockRobots]] and
+[[MeatBall:SurgeProtector]]. //Note: Not yet enabled.//
+
+<<WikiAdminUtils action=access-restrictions label="Access Restrictions">>
+
+== Cleanup ==
+
+A Wiki SandBox is very easy to clean. Here you can restore it to
+pristine condition by loading the default from pgsrc.
+
+**[[phpwiki:?action=loadfile&overwrite=1&source=pgsrc/SandBox|Rake the SandBox]]**
+
+== Making Snapshots or Backups ==
+
+=== ZIP files of database ===
+
+These links lead to zip files, generated on the fly, which contain all
+the pages in your Wiki. The zip file will be downloaded to your local
+computer.
+
+This **[[phpwiki:?action=zip|ZIP Snapshot]]** contains only the
+latest versions of each page, while this **[[phpwiki:?action=zip&include=all|ZIP Dump]]** contains all archived versions.
+
+(If the ~PhpWiki is configured to allow it, anyone can download a zip file.)
+
+If your php has //zlib// support, the files in the archive will be compressed, otherwise they will just be stored.
+
+=== Dump to directory ===
+
+Here you can dump pages of your Wiki into a directory of your choice.
+
+<<WikiForm action=dumpserial>>
+
+The most recent version of each page will written out to the directory, one page per file. Your server must have write permissions to the directory!
+
+== Restoring ==
+
+If you have dumped a set of pages from ~PhpWiki, you can reload them
+here. Note that pages in your database will be overwritten; thus, if
+you dumped your HomePage when you load it from this form it will
+overwrite the one in your database now. If you want to be selective
+just delete the pages from the directory (or zip file) which you don't
+want to load.
+
+=== Upload File ===
+
+Here you can upload ZIP archives, or individual files from your
+(client) machine.
+
+<<WikiForm action=upload>>
+
+=== Load File ===
+
+Here you can load ZIP archives, individual files or entire
+directories. The file or directory must be local to the http
+server. You can also use this form to load from an http: or ftp: URL.
+
+<<WikiForm action=loadfile>>
+<<WikiForm action=loadfile buttontext="Load & Overwrite" overwrite=1>>
+
+=== Upgrade ===
+
+Do some verification checks and upgrade changes automatically, after having installed a
+new phpwiki engine update:
+* Upgrade new or changed page revisions from pgsrc,
+* Upgrade the database schema (mysql //page.id auto_increment//, ADD //session.sess_ip//),
+
+You can force overwrite or not:
+* **[[phpwiki:HomePage?action=upgrade|Upgrade]]**
+* **[[phpwiki:HomePage?action=upgrade&overwrite=1|Upgrade & Overwrite]]**
+
+== Format of the files ==
+
+=== Current Format ===
+
+Currently the pages are stored, one per file, as MIME (RFC:2045)
+e-mail (RFC:822) messages. The content-type //application/x-phpwiki//
+is used, and page meta-data is encoded in the content-type
+parameters. (If the file contains several versions of a page, it will
+have type //multipart/mixed//, and contain several sub-parts, each
+with type //application/x-phpwiki//.)  The message body contains the
+page text.
+
+=== Old Formats ===
+
+==== Serialized Files ====
+
+The dump to directory command used to dump the pages as PHP
+//serialized()// strings. For humans, this made the files very hard
+to read, and nearly impossible to edit.
+
+==== Plain Files ====
+
+Before that the page text was just dumped to a file--this means that
+all page meta-data was lost. Note that when loading //plain files//,
+the page name is deduced from the file name.
+
+The upload and load functions will automatically recognize each of
+these three types of files, and handle them accordingly.
+
+== Dump pages as XHTML ==
+
+<<WikiForm action=dumphtml>>
+
+This will generate a directory of static pages suitable for
+distribution on disk where no web server is available. The various
+links for page editing functions and navigation are removed from the
+pages.
+
+The XHTML file collection can also be downloaded as an **[[phpwiki:?action=ziphtml|XHTML ZIP Snapshot]]**.
+
+----
+[[CategoryActionPage]]

@@ -1,0 +1,22 @@
+Source: fusionforge-plugin-mailman
+Section: devel
+Priority: optional
+Maintainer: Christian Bayle <bayle@debian.org>
+Uploaders: Roland Mas <lolando@debian.org>
+Build-Depends-Indep: devscripts
+Build-Depends: debhelper (>= 7), perl, gettext
+Standards-Version: 3.8.4
+Homepage: http://fusionforge.org/
+Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/
+
+Package: fusionforge-plugin-mailman
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, apache2 (>= 2.0.52), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, mailman (>= 2.1.13), python-psycopg2, python-mysqldb, ${misc:Depends}
+Provides: gforge-lists
+Conflicts: gforge-lists
+Description: collaborative development tool - mailing-lists plugin (using Mailman)
+ .
+ This package controls the interaction between FusionForge and Mailman.
+ It provides a single sign on authentication mecanism between
+ the forge and mailman.
+

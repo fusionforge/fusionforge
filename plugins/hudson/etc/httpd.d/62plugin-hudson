@@ -1,0 +1,12 @@
+# 62plugin-hudson begin
+#	AddHandler cgi-script .cgi
+
+#	ScriptAlias /cgi-bin/hudson/ /var/lib/hudson/cgi-bin/
+#	ScriptAlias /hudson/ /var/lib/hudson/cgi-bin/
+
+#	Alias /images/hudson /usr/share/images/hudson
+#	<Location /images/hudson>
+#		order allow,deny
+#		allow from all
+#	</Location>
+# 62plugin-hudson end

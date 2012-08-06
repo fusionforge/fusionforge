@@ -1,0 +1,11 @@
+#
+# Regular cron jobs for the ftp-proftpd package
+#
+
+INCLUDE_PATH=/etc/@OLDPACKAGE@:/usr/share/@OLDPACKAGE@/:/usr/share/@OLDPACKAGE@/www:/usr/share/@OLDPACKAGE@/common
+
+# FTP update
+0 * * * * root [ -x /usr/share/@OLDPACKAGE@/bin/install-ftp.sh ] && /usr/share/@OLDPACKAGE@/bin/install-ftp.sh update > /dev/null 2>&1
+
+# create and mount project directory in user's home directory
+0 * * * * root [ -x /usr/share/@OLDPACKAGE@/bin/ftp_create_group_access.php ] && /usr/bin/php -d include_path=$INCLUDE_PATH /usr/share/@OLDPACKAGE@/bin/ftp_create_group_access.php > /dev/null 2>&1

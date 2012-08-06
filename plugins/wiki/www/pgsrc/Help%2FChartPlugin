@@ -1,0 +1,105 @@
+Date: Fri, 16 Dec 2011 12:42:36 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FChartPlugin 8210 2011-12-16 11:43:27Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FChartPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **Chart** [[Help:WikiPlugin|plugin]] allows to easily draw simple graphs on a wiki page.
+
+Three graph formats are possible: line, bar and pie. In pie mode, negative values are ignored.
+
+The browser must support SVG in order graphs to be displayed.
+If you are using Internet Explorer 6 + Adobe SVGviewer (often included
+by default with Windows XP) or SVG-enabled Firefox (2.0 or above)
+then you should see the examples.
+
+== Usage ==
+{{{
+<<Chart width=200 height=200 type=line color=green data="5, 7, 11, 3, 15" >>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **width**
+| Graph width in pixels
+| 200
+|-
+| **height**
+| Graph height in pixels
+| 200
+|-
+| **type**
+| line, bar or pie
+| line
+|-
+| **data**
+| Graph data: a list of numbers separated by comma
+| //None// (required argument)
+|}
+
+== Examples ==
+
+=== Line chart ===
+
+{{{
+<<Chart type=line
+        data="5, 7, 11, 3, 15"
+>>
+}}}
+
+<<Chart type=line
+        data="5, 7, 11, 3, 15"
+>>
+
+=== Bar chart ===
+
+{{{
+<<Chart type=bar
+        color=red
+        data="5, 7, 11, 3, 15"
+>>
+}}}
+
+<<Chart type=bar
+        color=red
+        data="5, 7, 11, 3, 15"
+>>
+
+=== Pie chart ===
+
+{{{
+<<Chart type=pie
+        color=blue
+        data="5, 7, 11, 3, 15"
+>>
+}}}
+
+<<Chart type=pie
+        color=blue
+        data="5, 7, 11, 3, 15"
+>>
+
+== Known Problems ==
+
+With multiple Chart plugins on the same page the 2nd and
+subsequent ones will have the same width and height.
+
+== Author ==
+* Marc-Etienne Vargenau
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

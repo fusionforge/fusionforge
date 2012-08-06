@@ -1,0 +1,83 @@
+*************************************************************************
+*  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *
+
+	This code has no warranty and might contain bugs. Use at 
+	your own risk.  This code might not even install so there
+	is no guarantee. We have released this code primarily for
+	educational purposes and to make it easier for the 
+	community to contribute back to the code. 
+
+*  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *
+*************************************************************************
+
+GForge SVNTracker Plugin
+
+GForge is a web-based Collaborative Development Environment offering 
+easy access to SVN,CVS, mailing lists, bug tracking, message
+boards/forums, task management, permanent file archival,
+and total web-based administration.
+
+All files contained in this archive are licensed as stated in the
+COPYING file.  Please check out the AUTHORS file to see who helped
+make this possible.
+
+Thanks for taking the time to download this code.  If you have any
+questions please feel free to visit http://fusionforge.org/
+
+1. Installation Instructions
+----------------------------
+
+1.2 Other Packaging System
+
+General instructions:
+
+1.2.1 Install the database
+	You'll find this file within this package. Just run it without parameters.
+        /usr/share/gforge/plugins/svntracker/bin/db-upgrade.pl
+
+1.2.2 Register the plugin
+	You'll find the script register-plugin with your current Gforge installation. 
+Use it in the following way.
+        /usr/share/gforge/bin/register-plugin svntracker "svntracker"
+
+1.2.3 Install the cron file
+   	You should install a cron file in /etc/cron.d/gforge-plugin-svntracker like this:
+
+   35 1 * * * root [ -x /usr/share/gforge/plugins/svntracker/bin/update_postcommit.php ] && /usr/share/gforge/plugins/svntracker/bin/update_postcommit.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include
+
+1.2.4 Configure the plugin
+
+	You should fill in the svntracker.conf.tmpl template with apropiate values and put the file in:
+	/etc/gforge/plugins/svntracker/svntracker.conf
+	add $sys_default_domain and $sys_plugins_path accordingly to your configuration to config.php file and put the file in /etc/gforge/plugins/svntracker/
+
+2. Description
+--------------
+
+SVNTracker plugin allowes linking SVN Log messages to Trackers and Tasks.
+It will review all commits in a project and search for a specific string
+to know which task or tracker is related. 
+
+This string is on the form: [#NNN] for Tracker, and [TNNN] for Tasks.
+Example:
+
+$ svn commit -m "This patch will solve a problem on Bug [#123] and closes
+task [T344]."
+
+Then, in the task or tracker detail page, it will appear that logs with links
+to the involved files.
+
+3. Use
+------
+
+You have to enable SVNTracker Plugin for the project you want to use it. You 
+can change enabled/disabled checkbox in Project -> Admin -> Edit Public Info.
+You'll see a checkbox near the bottom saying: "Use Svn 2 Tracker Plugin". 
+Enable it, and wait for cronfiles to be executed.
+
+Once it's active, you can use cvs log message to attach commit info to related
+tasks and trackers.
+
+You can see those Logs in the detail page of trackers and tasks.
+
+

@@ -1,0 +1,79 @@
+deb-specific/sf-2.6-complete.sql        usr/share/@OLDPACKAGE@/db/
+deb-specific/sf2.5-to-sf2.6.sql         usr/share/@OLDPACKAGE@/db/
+#
+cronjobs/calculate_user_metric.php      usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/db_trove_maint.php             usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/project_cleanup.php            usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/rating_stats.php               usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/db_project_sums.php            usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/check_stale_tracker_items.php  usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/project_weekly_metric.php      usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/rotate_activity.php            usr/share/@OLDPACKAGE@/cronjobs/
+#
+cronjobs/site_stats.php                 usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/stats_site.inc                 usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/stats_projects.inc             usr/share/@OLDPACKAGE@/cronjobs/
+#
+cronjobs/reporting_cron.php             usr/share/@OLDPACKAGE@/cronjobs/
+# 
+cronjobs/db_stats_agg.php               usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/massmail.php                   usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/vacuum.php                     usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/@OLDPACKAGE@-db-backup.sh            usr/share/@OLDPACKAGE@/cronjobs/
+#
+cronjobs/ftp_create_group_access.php    usr/share/@OLDPACKAGE@/cronjobs/
+#
+cronjobs/get_news_notapproved.pl	usr/share/@OLDPACKAGE@/cronjobs/
+#
+deb-specific/stats_projects_logparse.pl usr/share/@OLDPACKAGE@/bin/
+deb-specific/install-db.sh              usr/share/@OLDPACKAGE@/bin/
+deb-specific/old-db-upgrade.pl              usr/share/@OLDPACKAGE@/bin/
+deb-specific/sqlparser.pm               usr/share/@OLDPACKAGE@/lib/
+deb-specific/sqlhelper.pm               usr/share/@OLDPACKAGE@/lib/
+deb-specific/sf-add-skill               usr/share/@OLDPACKAGE@/bin/
+deb-specific/register-theme             usr/share/@OLDPACKAGE@/bin/
+deb-specific/unregister-theme           usr/share/@OLDPACKAGE@/bin/
+#
+deb-specific/register-plugin            usr/share/@OLDPACKAGE@/bin/
+deb-specific/unregister-plugin          usr/share/@OLDPACKAGE@/bin/
+#
+deb-specific/view_bug.sql               usr/share/@OLDPACKAGE@/db/
+deb-specific/view_patch.sql             usr/share/@OLDPACKAGE@/db/
+#
+db/20021125.sql                         usr/share/@OLDPACKAGE@/db/
+db/200212*.sql                          usr/share/@OLDPACKAGE@/db/
+db/2003*.sql                            usr/share/@OLDPACKAGE@/db/
+db/2004*php                             usr/share/@OLDPACKAGE@/db/
+db/2004*.sql                            usr/share/@OLDPACKAGE@/db/
+200403251.sql				usr/share/@OLDPACKAGE@/db/
+db/2005*php                             usr/share/@OLDPACKAGE@/db/
+db/2005*.sql                            usr/share/@OLDPACKAGE@/db/
+db/2006*.sql                            usr/share/@OLDPACKAGE@/db/
+db/timetracking-init.sql                usr/share/@OLDPACKAGE@/db/
+db/20070924-forum-perm.sql              usr/share/@OLDPACKAGE@/db/
+db/20070924-project-perm.sql            usr/share/@OLDPACKAGE@/db/
+db/20070924-artifact-perm.sql           usr/share/@OLDPACKAGE@/db/
+db/20090327_create_table_project_tags.sql     usr/share/@OLDPACKAGE@/db/
+db/20090402-add-projecttags-constraints.sql   usr/share/@OLDPACKAGE@/db/
+db/20090402-forum-attachment-types.sql  usr/share/@OLDPACKAGE@/db/
+db/20090507-add_artifact_workflow.sql	usr/share/@OLDPACKAGE@/db/
+db/20090507-add_element_pos.sql		usr/share/@OLDPACKAGE@/db/
+db/20090507-add_project_query.sql	usr/share/@OLDPACKAGE@/db/
+db/20090507-browse_list.sql		usr/share/@OLDPACKAGE@/db/
+db/2010*.sql				usr/share/@OLDPACKAGE@/db/
+db/2011*.sql				usr/share/@OLDPACKAGE@/db/
+db/2012*.sql				usr/share/@OLDPACKAGE@/db/
+db/FTI*.sql				usr/share/@OLDPACKAGE@/db/
+db/schema-convergence*.sql		usr/share/@OLDPACKAGE@/db/
+#
+db/upgrade-db.php			usr/share/@OLDPACKAGE@/bin/
+utils/inject-users.php usr/share/@OLDPACKAGE@/bin/
+utils/inject-groups.php usr/share/@OLDPACKAGE@/bin/
+utils/inject-files.php usr/share/@OLDPACKAGE@/bin/
+#
+utils/normalize_roles.php	usr/share/@OLDPACKAGE@/bin/
+utils/sync_unix_groups.php	usr/share/@OLDPACKAGE@/bin/
+utils/fixscripts/populate_template_project.php	usr/share/@OLDPACKAGE@/bin/
+utils/fixscripts/fix_default_role.php	usr/share/@OLDPACKAGE@/bin/
+utils/forge_set_password                usr/share/@OLDPACKAGE@/bin/
+utils/forge_make_admin			usr/share/@OLDPACKAGE@/bin/

@@ -1,0 +1,141 @@
+/**
+ * $Id: portland.css 8114 2011-09-23 12:18:10Z vargenau $
+ *
+ * PhpWiki's Portland style sheet based on the original Wiki
+ *
+ * Styles are kept to a minimum, so the page will mostly appear
+ * according to the browser's default font settings.
+ */
+body {
+  color : black;
+  background : white;
+}
+
+img {
+  border: 0;
+}
+
+.wiki-edithelp {
+  font-size : smaller;
+}
+
+input.numeric {
+  text-align: right;
+}
+
+.clear-floats {
+  clear: both;
+}
+
+/* generic classes ----------------------------------------------- */
+
+.align-left {text-align: left;}
+.align-right {text-align: right;}
+.align-center {text-align: center;}
+  
+.top {vertical-align: top;}
+
+.nowrap {white-space: nowrap;}
+
+.fullwidth { width: 100%; }
+
+/* --------------------------------------------------------------- */
+
+/*
+ * "DL tables"
+ */
+.wiki-dl-table {
+  border-collapse: collapse;
+  border: 2px #444 solid;
+}
+.wiki-dl-table tr {
+  border-top: 2px #444 solid;
+  border-bottom: 2px #444 solid;
+  border-left: none;
+  border-right: none;
+}
+.wiki-dl-table th,
+.wiki-dl-table td {
+  padding: 0.25em 0.5em;
+}
+.wiki-dl-table th {
+  vertical-align: top;
+  text-align: right;
+  border-right: 1px #444 solid;
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+}
+.wiki-dl-table td {
+  border: none;
+}
+
+/* Mozilla RecentChanges Sidebar */
+body.sidebar {
+  font-size: smaller;
+  margin: 0.5em;
+}
+body.sidebar div.wikitext ul { padding-left: 1em; }
+body.sidebar h2 { margin-top: 0; }
+
+/* IncludePage plugin ================================================= */
+
+.transclusion-title {
+   font-style: oblique;
+   font-size: 0.75em;
+   text-decoration: underline;
+   text-align: right;
+}
+
+.transclusion {
+   background: lightgreen;
+   border: thin;
+   border-style: solid;
+   padding-left: 0.8em;
+   padding-right: 0.8em;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   margin: 0.5ex 0px;
+}
+
+/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
+
+/*
+ * table class="boxed"
+ * will put a border around the table (but not around the cells)
+ *
+ * table class="bordered"
+ * will put a border around the table and the cells
+ *
+ * In both cases, the caption will be bold and centered under the table
+ *
+ * In both cases, the headers (th) will have a "#d8d8d8" background
+ */
+
+table.boxed, table.bordered, table.bordered th, table.bordered td {
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+    vertical-align: top;
+}
+
+table.boxed td, table.bordered td,
+table.boxed th, table.bordered th {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+table.boxed caption, table.bordered caption {
+    text-align: center;
+    font-weight: bold;
+    caption-side: bottom;
+    padding-top: 0.8em;
+}
+
+table.boxed th, table.bordered th {
+    font-weight: bold;
+    background-color: #d8d8d8;
+}
+

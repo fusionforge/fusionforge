@@ -1,0 +1,32 @@
+<?php // -*-php-*-
+// $Id: dialog.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+/* 
+ * A "popup" dialog.  (Though it doesn't pop up yet.)
+ */
+printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", CHARSET);
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET?>" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="generator" content="phpWiki" />
+<meta name="PHPWIKI_VERSION" content="<?php echo PHPWIKI_VERSION?>" />
+<base href="<?php echo PHPWIKI_BASE_URL?>" />
+<?php echo $WikiTheme->getCSS() ?>
+<title><?php echo WIKI_NAME . ' - ' . _("Dialog")?></title>
+</head>
+<body>
+<div class="dialog">
+<h1><?php echo $HEADER?></h1>
+
+<div class="message"><?php echo $CONTENT?></div>
+<p class="buttons"><?php echo $BUTTONS?></p>
+</div>
+<?php if (!$WikiTheme->DUMP_MODE) { ?>
+  <?php echo empty($WARNINGS) ? '' : $WARNINGS ?>
+  <?php echo $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
+<?php } ?>
+</body>
+</html>

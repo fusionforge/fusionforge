@@ -1,0 +1,45 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2F_AuthInfoPlugin 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2F_AuthInfoPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Administrative plugin, used to debug auth problems and settings.
+This plugin is only for testing purposes.
+If DEBUG has no _DEBUG_LOGIN bit set, only the admin user can call it,
+which is of no real use.
+
+Warning! This may display DB and user passwords in cleartext. We think we
+cleared everything out though.
+
+== Usage ==
+{{{
+<<_AuthInfo userid||=AdminUser>>
+}}}
+
+== Arguments ==
+
+userid:
+  default: current user
+
+== Example ==
+
+See [[DebugAuthInfo]]
+
+== Authors ==
+* [[PhpWiki:JeffDairiki|Jeff Dairiki]]
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+* [[DebugAuthInfo]] is the corresponding [[Help:ActionPage]].
+* [[Help:_GroupInfoPlugin]]
+* [[Help:_BackendInfoPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

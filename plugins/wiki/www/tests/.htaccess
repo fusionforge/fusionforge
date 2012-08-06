@@ -1,0 +1,4 @@
+# $Id: .htaccess 6201 2008-08-26 13:02:33Z vargenau $
+Order Deny,Allow
+Deny from all
+Allow from localhost 192.168.1.0/24

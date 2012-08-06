@@ -1,0 +1,103 @@
+Date: Fri, 16 Dec 2011 12:51:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FGoogleMapsPlugin 8211 2011-12-16 11:54:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FGoogleMapsPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~GoogleMaps**  [[Help:WikiPlugin|plugin]] displays a marker
+with further infos (when clicking) on given coordinates.
+
+You need to sign up for a Google Maps API key!
+
+http://www.google.com/apis/maps/signup.html
+
+Then enter the key in {{{config/config.ini}}} under {{{GOOGLE_LICENSE_KEY=}}}
+
+== Usage ==
+
+{{{
+<<GoogleMaps arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **Longitude**
+| Longitude
+| //None// (required argument)
+|-
+| **Latitude**
+| Latitude
+| //None// (required argument)
+|-
+| **~ZoomFactor**
+| Zoom factor
+| 5
+|-
+| **Marker**
+|
+| true
+|-
+| **~InfoText**
+|
+| //None//
+|-
+| **~MapType**
+| Map or Satellite or Hybrid
+| Hybrid
+|-
+| **~SmallMapControl**
+| large or small
+| false
+|-
+| **width**
+| width
+| 500px
+|-
+| **height**
+| height
+| 400px
+|}
+
+== Example ==
+
+{{{
+<<GoogleMaps
+          Latitude=53.053
+          Longitude=7.803
+          ZoomFactor=10
+          Marker=true
+          MapType=Hybrid
+          width=500px
+          height=400px
+>>
+}}}
+
+<<GoogleMaps
+          Latitude=53.053
+          Longitude=7.803
+          ZoomFactor=10
+          Marker=true
+          MapType=Hybrid
+          width=500px
+          height=400px
+>>
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

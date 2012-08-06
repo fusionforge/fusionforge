@@ -1,0 +1,15 @@
+<?php // -*-php-*-
+// $Id: body.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<body<?php echo $WikiTheme->getMoreAttr('body') ?>>
+
+<div id="header">
+  <?php echo Template('top') ?>
+</div>
+<div id="content">
+
+<?php echo $CONTENT ?>
+
+</div>
+<?php echo Template('bottom') ?>
+</body>

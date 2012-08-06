@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>Webalizer HOWTO</title>
+<style type="text/css">
+h2, h3 { text-align: center; }
+pre { width: 90%; background: silver; overflow: auto; }
+</style>
+</head>
+<body>
+
+<h2>Webalizer HOWTO</h2>
+<h3>Updated 05/20/03</h3>
+
+<p><a href="http://www.mrunix.net/webalizer/">Webalizer</a> is a tool for creating <a href="http://cougaar.org/usage/">nice graphs</a> of web site usage.  It's not too hard to set up, but hopefully this document will show how <a href="http://cougaar.org">CougaarForge</a> uses Webalizer to create usage graphs for each virtual host and a combined usage page as well.
+
+<p>First, when I add a new project to CougaarForge, I create a new virtual host entry in httpd.conf with a log file for that host:
+<pre>
+&lt;VirtualHost *&gt;
+ ServerName csmart.cougaar.org
+ DocumentRoot /var/www/gforge-3.0/csmart
+ CustomLog /var/log/httpd/csmart-access_log common
+ ErrorLog /var/log/httpd/csmart-error_log
+&lt;/VirtualHost&gt;
+</pre>
+
+<p>Then I create a <samp>$project/usage/</samp> directory and put a placeholder page in there.  Like this:
+<pre>
+# mkdir "/var/www/gforge-3.0/$project/usage/"
+# cp /var/www/gforge-3.0/www/usage/msfree.png /var/www/gforge-3.0/$project/usage/
+# cp /root/webalizer/index.html /var/www/gforge-3.0/$project/usage/
+</pre>
+
+<p>Note that I also copied the <samp>msfree.png</samp> file in there to prevent future broken links.
+
+<p>Next, I create a <samp>webalizer.conf</samp> file specifically for this host.  This can usually be done by cranking another site's <samp>webalizer.conf</samp> thru <samp>sed</samp>:
+<pre>
+# sed -e "s/project_one/project_two/g" /etc/webalizer/project_one-webalizer.conf &gt; /etc/webalizer/project_two-webalizer.conf
+</pre>
+
+<p>I've got a shell script set up that runs every night and runs Webalizer against all those log files, like this:
+<pre>
+#!/bin/bash
+
+# run webalizer on cougaar.org first
+/usr/bin/webalizer -c /etc/webalizer/cougaarforge-webalizer.conf
+
+# run webalizer on all the logs after combining and sorting them
+cat /var/log/httpd/*access_log &gt; /var/log/httpd/all_access_log_unsorted
+sort -t ' ' -k 4.9,4.12n -k 4.5,4.7M -k 4.2,4.3n -k 4.14,4.15n -k 4.17,4.18n -k 4.20,4.21n /var/log/httpd/all_access_log_unsorted
+&gt; /var/log/httpd/all_access_log
+/usr/bin/webalizer -c /etc/webalizer/cougaarforge-all-webalizer.conf
+rm /var/log/httpd/all_access_log
+rm /var/log/httpd/all_access_log_unsorted
+
+for project in `ls /var/www/gforge-3.0/ | grep -v prototype | grep -v www | grep -v common`
+do
+        # create the usage directory if it's not there
+        if [ ! -e "/var/www/gforge-3.0/$project/usage/" ]; then
+                mkdir "/var/www/gforge-3.0/$project/usage/"
+                cp /var/www/gforge-3.0/www/usage/msfree.png /var/www/gforge-3.0/$project/usage/
+                cp /root/webalizer/index.html /var/www/gforge-3.0/$project/usage/
+        fi
+
+        # run webalizer on this project
+        /usr/bin/webalizer -c /etc/webalizer/$project-webalizer.conf
+done
+</pre>
+
+<p>Nifty, huh?  So now you can get to each project's usage page with a URL something like this - <a href="http://tutorials.cougaar.org/usage/">http://tutorials.cougaar.org/usage/</a> - and there's a <a href="http://cougaar.org/usage_all/">combined page</a>, too!
+
+<p>I've probably forgotten some important details; if you can think of a way to improve this document, please post to the <a href="http://gforge.org/forum/?group_id=1">GForge forums</a>.
+ 
+</body>
+</html>

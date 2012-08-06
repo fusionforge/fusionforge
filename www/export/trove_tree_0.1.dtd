@@ -1,0 +1,20 @@
+<!--
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// trove_tree.dtd: DTD for Trove categories (Trove is a software
+// 		   categorization scheme).
+-->
+
+<?xml version="1.0"?>
+
+<!ELEMENT category (category*)>
+<!ATTLIST category
+	id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	fullname CDATA #REQUIRED
+	description CDATA #IMPLIED
+>
+
+<!ELEMENT trove-tree (category)>

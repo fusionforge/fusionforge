@@ -1,0 +1,11 @@
+The OpenDocument directory contains a copy of PEAR's OpenDocument package 
+as downloaded from http://download.pear.php.net/package/OpenDocument-0.2.0.tgz 
+on 20011/03/09.
+
+Note that instead of using this version, the code now depends on the modified 
+version managed in http://gitorious.org/php-opendocument/php-opendocument/commits/packages 
+for the moment, until inclusion in upstream reference repository (contacted upstream author, 
+and work in progress).
+A corresponding patch is provided in opendocument-packages.patch
+
+-- Olivier Berger

@@ -1,0 +1,7 @@
+#
+# IMPORTANT!! READ THE README.root file before continuing!
+#
+
+# Create the shell users accounts and groups home directories
+15 * * * * root $PHP $FFCRON/homedirs.php
+

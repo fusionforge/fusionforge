@@ -1,0 +1,5 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/scmbzr
+usr/share/gforge/plugins/scmbzr/common
+var/lib/gforge/chroot/scmrepos/bzr
+var/lib/gforge/plugins/scmbzr/public-repositories

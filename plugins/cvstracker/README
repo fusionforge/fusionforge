@@ -1,0 +1,82 @@
+*************************************************************************
+*  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *
+
+	This code has no warranty and might contain bugs. Use at 
+	your own risk.  This code might not even install so there
+	is no guarantee. We have released this code primarily for
+	educational purposes and to make it easier for the 
+	community to contribute back to the code. 
+
+*  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *
+*************************************************************************
+
+GForge CVSTracker Plugin
+
+GForge is a web-based Collaborative Development Environment offering 
+easy access to CVS, mailing lists, bug tracking, message
+boards/forums, task management, permanent file archival,
+and total web-based administration.
+
+All files contained in this archive are licensed as stated in the
+COPYING file.  Please check out the AUTHORS file to see who helped
+make this possible.
+
+Thanks for taking the time to download this code.  If you have any
+questions please feel free to visit http://fusionforge.org/
+
+
+1. Installation Instructions
+----------------------------
+
+Decompress the plugin tarball and place it into your plugins directory. 
+Usually, this would be in a location like /opt/gforge/gforge/plugins/cvstracker
+Whereever you place it, be sure your /etc/gforge/local.inc file has 
+$sys_plugins_path pointing to the plugins directory.
+
+The cvstracker/etc/plugins/cvstracker/config.php should be copied and edited 
+to 
+
+	/etc/gforge/plugins/cvstracker/config.php
+
+The 'Site Admin' tab on the GForge web interface now has a 'Plugin Manager' 
+page where you can activate plugins on a sitewide basis. Be sure to do that
+if you want this plugin to be available to projects.
+
+
+2. Description
+--------------
+
+CVSTracker plugin allows linking CVS Log messages to Trackers and Tasks.
+It will review all commits in a project and search for a specific string
+to know which task or tracker is related. 
+
+This string is on the form: [#NNN] for Tracker, and [TNNN] for Tasks.
+Example:
+
+$ cvs ci README -m "This patch will solve a problem on Bug [#123] and closes
+task [T344]."
+
+Then, in the task or tracker detail page, it will appear that logs with links
+to the involved files.
+
+3. Use
+------
+
+You have to enable CVSTracker Plugin for the project you want to use it. You 
+can change enabled/disabled checkbox in Project -> Admin -> Edit Public Info.
+You'll see a checkbox near the bottom saying: "Use Cvs 2 Tracker Plugin". 
+Enable it, and wait for cronfiles to be executed.
+
+Once it's active, you can use cvs log message to attach commit info to related
+tasks and trackers.
+
+You can see those Logs in the detail page of trackers and tasks.
+
+4. Configuration
+----------------
+
+Edit the file $GFORGE_ETC_DIR/plugins/cvstracker/config.php and set the $cvs_binary_version to
+1.11 or 1.12 depending on the version in the SCM server.
+Also set $sys_default_domain and $sys_plugins_path  accordingly
+
+

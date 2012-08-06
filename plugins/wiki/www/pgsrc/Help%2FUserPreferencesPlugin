@@ -1,0 +1,38 @@
+Date: Thu,  9 Dec 2010 16:17:37 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FUserPreferencesPlugin 7762 2010-12-09 15:18:27Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FUserPreferencesPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~UserPreferences** [[Help:WikiPlugin|plugin]] allows any user to adjust his own preferences.
+The plugin must be used in the page [[UserPreferences]].
+Preferences are stored in metadata in the current session, within the user's home page or in a database.
+
+== Usage ==
+{{{
+<<UserPreferences>>
+}}}
+
+== Arguments ==
+
+== Example ==
+
+{{{
+<<UserPreferences>>
+}}}
+
+<<UserPreferences>>
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

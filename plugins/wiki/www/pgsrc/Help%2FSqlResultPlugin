@@ -1,0 +1,96 @@
+Date: Thu,  9 Dec 2010 19:59:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FSqlResultPlugin 7770 2010-12-09 19:02:38Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FSqlResultPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~SqlResult** [[Help:WikiPlugin|plugin]] displays results of arbitrary SQL select statements in table form.
+
+The database definition, the DSN, must be defined in the local file ##config/SqlResult.ini##
+
+A simple textfile with alias = dsn lines.
+
+Optional template file to format the result and handle some logic.
+
+Template vars: %%where%%, %%sortby%%, %%limit%%
+
+== Usage ==
+{{{
+<<SqlResult parameters
+SELECT statement
+>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **alias**
+| DSN database specification
+| false
+|-
+| **ordered**
+| if to display as {{{<ol>}}} list: single col only without template
+| false
+|-
+| **template**
+| use a custom {{{<theme>/template.tmpl}}}
+| false
+|-
+| **where**
+| custom filter for the query
+| false
+|-
+| **sortby**
+| for paging
+| false (no paging)
+|-
+| **limit**
+| for paging
+| 0,50 (only the first 50)
+|}
+
+== Examples ==
+
+{{{
+<<SqlResult alias=mysql
+         SELECT 'mysql password for string "xx":',
+                PASSWORD('xx')
+>>
+
+<<SqlResult alias=videos template=videos
+         SELECT rating,title,date
+                FROM video
+                ORDER BY rating DESC
+                LIMIT 5
+>>
+
+<<SqlResult alias=imdb template=imdbmovies where||="Davies, Jeremy%"
+SELECT m.title, m.date, n.name, c.role
+  FROM movies as m, names as n, jobs as j, characters as c
+  WHERE n.name LIKE "%%where%%"
+  AND m.title_id = c.title_id
+  AND n.name_id = c.name_id
+  AND c.job_id = j.job_id
+  AND j.description = 'Actor'
+  ORDER BY m.date DESC
+>>
+}}}
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

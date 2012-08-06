@@ -1,0 +1,29 @@
+Date: Fri, 10 Sep 2010 13:48:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: DocumentationDePhpWiki 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=DocumentationDePhpWiki;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+=== Sommaire
+
+<<SiteMap
+         noheader=true
+         exclude=PageAccueil
+         reclimit=1
+         direction=forward
+         firstreversed=1
+>>
+
+==== Pages dans cette catégorie :
+
+<<BackLinks
+         exclude||=''
+         include_self||=1
+         noheader||=0
+         page||=[pagename]
+         info||=pagename,mtime
+>>

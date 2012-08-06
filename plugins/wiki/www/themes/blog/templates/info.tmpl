@@ -1,0 +1,14 @@
+<?php // -*-php-*-
+// $Id: info.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<?php echo Template("default/info") ?>
+<div class="actionbuttons">
+  <?php echo $SEP?><?php echo Button("AuthorHistory", _("AuthorHistory")) ?>
+  <?php echo $SEP?><?php echo Button("Diff") ?>
+  <?php echo $SEP?><?php echo Button(array('action'=>'diff','previous' => 'minor'),_("Diff previous Revision"),$page->getName()) ?>
+  <?php echo $SEP?><?php echo Button(array('action'=>'diff','previous' => 'author'),_("Diff previous Author"),$page->getName()) ?>
+</div>
+<br />
+<div class="actionbuttons">
+  <?php echo Template("default/actionbar") ?>
+</div>

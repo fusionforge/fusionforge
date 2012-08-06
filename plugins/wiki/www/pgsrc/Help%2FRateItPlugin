@@ -1,0 +1,131 @@
+Date: Fri, 10 Sep 2010 13:46:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FRateItPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FRateItPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+RateIt: A recommender system, based on [[http://www.movielens.org/|MovieLens]] and "suggest".
+
+Store user ratings per pagename. The wikilens theme displays a navbar image bar
+with some nice Javascript magic and this plugin shows various recommendations.
+
+There should be two methods to store ratings:
+* In a SQL database as in wikilens http://dickens.cs.umn.edu/dfrankow/wikilens
+
+The most important fact: A page has more than one rating. There can
+be (and will be!) many ratings per page (ratee): different raters
+(users), in different dimensions. Are those stored per page
+(ratee)? Then what if I wish to access the ratings per rater
+(user)?
+
+Wikilens plans several user-centered applications like:
+* a) show my ratings
+* b) show my buddies' ratings
+* c) show how my ratings are like my buddies'
+* d) show where I agree/disagree with my buddy
+* e) show what this group of people agree/disagree on
+
+If the ratings are stored in a real DB in a table, we can index the
+ratings by rater and ratee, and be confident in
+performance. Currently MovieLens has 80,000 users, 7,000 items,
+10,000,000 ratings. This is an average of 1400 ratings/page if each
+page were rated equally. However, they're not: the most popular
+things have tens of thousands of ratings (e.g., "Pulp Fiction" has
+42,000 ratings). If ratings are stored per page, you would have to
+save/read huge page metadata every time someone submits a
+rating. Finally, the movie domain has an unusually small number of
+items-- I'd expect a lot more in music, for example.
+
+For a simple rating system one can also store the rating in the page
+metadata (default).
+
+Recommender Engines:
+* Recommendation/Prediction is a special field of "Data Mining"
+* For a list of (also free) software see http://www.the-data-mine.com/bin/view/Software/WebIndex
+** movielens: (Java Server) will be gpl'd in summer 2004 (weighted)
+** suggest: is free for non-commercial use, available as compiled library (non-weighted)
+** Autoclass: simple public domain C library
+** MLC++: C++ library http://www.sgi.com/tech/mlc/
+
+== Usage ==
+
+Note: The wikilens theme or any derivate must be enabled, to enable this plugin!
+
+{{{
+        <<RateIt>> just the widget without text
+        <<RateIt show=top>> text plus widget below
+        <<RateIt show=ratings>> to show my ratings
+TODO:   <<RateIt show=buddies>> to show my buddies
+        <<RateIt show=ratings dimension=1>>
+TODO:   <<RateIt show=text>> just text, no widget, for dumps
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **pagename**
+| The page to execute upon
+| current pagename
+|-
+| **version**
+|
+| false
+|-
+| **version**
+|
+| false
+|-
+| **id**
+|
+| rateit
+|-
+| **imgPrefix**
+| //(empty)// or BStar or Star
+| //(empty)//
+|-
+| **dimension**
+|
+| false
+|-
+| **small**
+|
+| false
+|-
+| **show**
+|
+| false
+|-
+| **mode**
+|
+| false
+|}
+
+== Example ==
+
+{{{
+<<RateIt>>
+}}}
+
+== Author ==
+* Dan Frankowski (wikilens author),
+* [[PhpWiki:ReiniUrban|Reini Urban]] (as plugin)
+
+== See Also ==
+* [[Help:UserRatingsPlugin]]
+
+== To do ==
+* finish mysuggest.c (external engine with data from mysql)
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

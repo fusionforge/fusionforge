@@ -1,0 +1,7 @@
+Package: @PACKAGE@-plugin-projectlabels
+Architecture: all
+Depends: @OLDPACKAGE@-common (>= 4.6.99), @OLDPACKAGE@-db-postgresql (>= 4.6.99) | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 (>= 4.6.99) | @OLDPACKAGE@-web, ${misc:Depends}
+Conflicts: @OLDPACKAGE@-plugin-projectlabels (<< 5.0.51-2)
+Replaces: @OLDPACKAGE@-plugin-projectlabels (<< 5.0.51-2)
+Provides: @OLDPACKAGE@-plugin-projectlabels
+Description: Projectlabels plugin for FusionForge

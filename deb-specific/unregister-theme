@@ -1,0 +1,75 @@
+#!/usr/bin/perl -w
+#
+# Debian-specific script to unregister a theme from the Gforge database
+
+use DBI ;
+use strict ;
+use diagnostics ;
+
+use vars qw/$dbh @reqlist $thdir/ ;
+
+sub debug ( $ ) ;
+
+require ("/usr/share/gforge/lib/include.pl") ; # Include all the predefined functions 
+
+&db_connect ;
+
+if ($#ARGV < 0) {
+    debug "Usage: unregister-theme <dirname>" ;
+    debug "The theme must be in /usr/share/gforge/www/themes/<dirname>/" ;
+    exit 1 ;
+}
+
+$thdir = $ARGV [0] ;
+
+$dbh->{AutoCommit} = 0;
+$dbh->{RaiseError} = 1;
+eval {
+    my ($query, $sth, @array, $version, $action) ;
+
+    $thdir = $dbh->quote ($thdir) ;
+
+    $query = "SELECT count(*) FROM themes WHERE dirname=$thdir" ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+
+    if ($array [0] != 0) {
+	$query = "UPDATE themes SET enabled=false WHERE dirname=$thdir" ;
+
+	# debug $query ;
+	
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+    }
+
+    # debug "Committing." ;
+    $dbh->commit () ;
+
+    # There should be a commit at the end of every block above.
+    # If there is not, then it might be symptomatic of a problem.
+    # For safety, we roll back.
+    $dbh->rollback ();
+};
+
+if ($@) {
+    warn "Transaction aborted because $@" ;
+    debug "Transaction aborted because $@" ;
+    $dbh->rollback ;
+    debug "Please report this bug on the Debian bug-tracking system." ;
+    debug "Please include the previous messages as well to help debugging." ;
+    debug "You should not worry too much about this," ;
+    debug "your DB is still in a consistent state and should be usable." ;
+    exit 1 ;
+}
+
+$dbh->rollback ;
+$dbh->disconnect ;
+
+sub debug ( $ ) {
+    my $v = shift ;
+    chomp $v ;
+    print STDERR "$v\n" ;
+}

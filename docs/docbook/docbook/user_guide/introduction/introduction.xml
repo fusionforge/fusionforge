@@ -1,0 +1,122 @@
+<section id="ug_introduction">
+	<title>Introduction</title>
+	<para>This manual explains how to use the FusionForge software.</para>
+	<para>The manual is divided in 4 parts:</para>
+	<section>
+		<title>Getting Started</title>
+		<para>This section explains how to register as a new user, how to register a new project, how to login and how to logout.</para>
+	</section>
+	<section>
+		<title>User specific functions</title>
+		<para>This section describes the functions of FusionForge that are relative to the user's section.</para>
+		<para>This document describes the user's homepage, how to modify user settings, how to handle user ratings, skill profiles and Diary and Notes.</para>
+	</section>
+	<section>
+		<title>Project specific functions</title>
+	      <para>This chapter explains the project specific functions of FusionForge.</para>
+		<variablelist>
+			<varlistentry>
+				<term><link linkend="ug_project_project_summary">Project Summary</link></term>
+				<listitem>
+					<para>This section describes the Project Summary page for your project.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><link linkend="ug_project_project_admin">Project Administration</link></term>
+				<listitem>
+					<para>This section describes the Administration of the project. The Project Administrator function is accessible only to the Project Administrators.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><link linkend="ug_project_forums">Forums</link></term>
+				<listitem>
+					<para>This section describes the use and administration of the Discussion Forums.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><link linkend="ug_project_tracker">Tracker</link></term>
+				<listitem>
+					<para>This section describes how to use the Tracker to track bugs, patches, support requests.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><link linkend="ug_project_mailing_lists">Mailing Lists</link></term>
+				<listitem>
+					<para>This section describes the creation or maintenance of mailing lists for your project.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><link linkend="ug_project_task_manager">Task Manager</link></term>
+				<listitem>
+					<para>This section describes how to use the Task Manager to track activities.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><link linkend="ug_project_docman">Document Manager</link></term>
+				<listitem>
+					<para>This section describes the Document Manager.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><link linkend="ug_project_surveys">Surveys</link></term>
+				<listitem>
+					<para>This section describes how to set up Surveys for your project.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><link linkend="ug_project_news">News</link></term>
+				<listitem>
+					<para>This section describes how to add and release News for your project.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+			  <!-- TODO: this is now SCM -->
+                                <term><link linkend="ug_project_cvs">CVS</link></term>
+                                <listitem>
+                                        <para>This section describes how to manage CVS repositories for your project.</para>
+                                </listitem>
+                        </varlistentry>
+			<varlistentry>
+                                <term><link linkend="ug_project_file_releases">File releases</link></term>
+                                <listitem>
+                                        <para>This section describes how to publish new releases of your project.</para>
+                                </listitem>
+                        </varlistentry>
+          <varlistentry>
+            <term>
+              <link linkend="ug_project_blocks"> Blocks </link>
+            </term>
+            <listitem>
+              <para>
+        This section describes how to use HTML
+        blocks to customize the appearance of
+        project pages.
+       </para>
+            </listitem>
+          </varlistentry>
+		</variablelist>
+	</section>
+	<section>
+		<title>Site-wide functions</title>
+		<variablelist>
+			<varlistentry>
+				<term><link linkend="ug_sitewide_trove">Trove Map</link></term>
+				<listitem>
+					<para>This section describes the Project Classification System.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><link linkend="ug_sitewide_snippet">Snippet Library</link></term>
+				<listitem>
+					<para>This document describes how to use the code fragment Library.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><link linkend="ug_sitewide_project_help">Project Help</link></term>
+				<listitem>
+					<para>This document describes how to use the Project help function of FusionForge.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+</section>

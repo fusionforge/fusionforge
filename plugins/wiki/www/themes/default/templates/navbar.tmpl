@@ -1,0 +1,51 @@
+<?php // -*-php-*-
+// $Id: navbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<!-- The top navigation/search bar -->
+<div id="navbuttons">
+<?php if (ENABLE_DISCUSSION_LINK) { ?>
+<?php // This requires Talk: map to end in "/Discussion"
+  if (!string_ends_with($page->getName(), SUBPAGE_SEPARATOR._("Discussion"))) { ?>
+    <?php echo $SEP?><?php echo WikiLink(new WikiPagename('Talk:'.$page->getName(), $page->getName()), 
+               'button', _("Discussion")) ?>
+  <?php } else { ?>
+    <?php echo $SEP?><?php echo Button(array(),_("Article"),$page->getName()) ?>
+  <?php } ?>
+  <?php echo $SEP?>
+<?php } ?>
+<?php echo WikiLink(_("RecentChanges"), "button") ?>
+<?php echo $SEP?><?php echo Template('search', 
+		      array('SEARCH_BEFORE' => HTML::Button(_("FindPage"))))
+?><?php if (!empty($revision)) { ?>
+<?php echo $SEP?><?php echo $WikiTheme->makeLinkButton($revision,_("LikePages"),_("LikePages")) 
+?><?php echo $SEP?><?php echo $WikiTheme->makeLinkButton($revision,_("BackLinks"),_("BackLinks")) 
+?><?php /* RelatedChanges disabled
+  $links = $page->getPageLinks();
+  if ($links->count() > 1) { ?><?php echo $SEP?><?php echo $WikiTheme->makeLinkButton($revision,_("RelatedChanges"),_("RelatedChanges")) ?><?php } */ ?>
+<?php } ?>
+<?php if (!empty($user) && $user->isSignedIn()) { ?>
+<?php echo $SEP?><?php echo WikiLink(_("UserPreferences"), 'button',_("Preferences")) ?>
+<?php } ?>
+<?php if (!empty($user)) { ?>
+<?php
+      /* Today's calendar page for the user, if the Calender subpage is defined. */
+      $UserCalPageTitle = $user->getId() . SUBPAGE_SEPARATOR . _("Calendar");
+      $dbi = $request->getDbh();
+      if ($dbi->isWikiPage($UserCalPageTitle)) {
+        $UserCalPageTodayTitle = $UserCalPageTitle . SUBPAGE_SEPARATOR . strftime("%Y-%m-%d", time());
+        //$UserCalPageTodayUrl = WikiURL($UserCalPageTodayTitle);
+        ?>
+<?php echo $SEP?><?php echo WikiLink($UserCalPageTodayTitle, "button", _("Today")) ?>
+<?php } ?>
+<?php } ?>
+<?php if (!empty($user) && $user->isAdmin()) { ?>
+<?php echo $SEP?><?php echo WikiLink(_("PhpWikiAdministration"), "button", _("Admin")) ?>
+<?php } ?></div>
+<?php if (DEBUG & 2) {
+        if (isset($links)) {
+            $p = $links->next();
+            $s = $p->_pagename;
+            while ($p = $links->next()) { $s .= ', ' . $p->_pagename; }
+            echo asXML(HTML::strong("PageLinks: "),$s ? HTML::em($s) : HTML::em('<none>'));
+        }
+} ?>

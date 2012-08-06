@@ -1,0 +1,78 @@
+Date: Tue, 11 Jan 2011 13:48:05 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FAdobe%20Flash 7826 2011-01-11 12:52:54Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FAdobe%20Flash;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+You can easily insert **Adobe Flash** (.swf) files in the wiki.
+
+== Uploading Flash files ==
+
+First, Flash files need to be uploaded in the wiki. For that purpose, you will use the
+[[Help:UpLoadPlugin|UpLoad]] plugin.
+
+=== Syntax ===
+
+You give access to the uploaded Flash files with the following syntax.
+
+{{{
+{{myflash.swf}}
+}}}
+or
+{{{
+[[Upload:myflash.swf]]
+}}}
+will inline the image.
+
+=== Options ===
+
+Using the {{{Upload:}}} syntax, options are allowed to change the appearance:
+{{{
+[[Upload:myflash.png size=40x25 align=center]]
+}}}
+
+Separate options by spaces. The allowed options are the following:
+* size: ''width "x" height'' or ''num + "%"''
+* align: ''string''
+* border: ''number''
+* hspace: ''number''
+* vspace: ''number''
+
+== Examples ==
+
+=== Wikicréole syntax ===
+
+{{{
+{{ora.swf}}
+}}}
+
+{{/themes/Sidebar/ora.swf}}
+
+=== Upload syntax ===
+
+{{{
+[[Upload:ora.swf]]
+[[Upload:ora.swf size=50x50]]
+}}}
+
+=== URL syntax ===
+
+{{{
+[[http://www.qasia.com/games/mahjong.swf]]
+}}}
+
+[[http://www.qasia.com/games/mahjong.swf]]
+
+== See Also ==
+* [[Help:Images]]
+* [[Help:VideoPlugin]]
+* [[Help:Wikicreole]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

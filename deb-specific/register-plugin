@@ -1,0 +1,100 @@
+#!/usr/bin/perl -w
+#
+# Debian-specific script to register a new plugin into the SF database
+
+use DBI ;
+use strict ;
+use diagnostics ;
+
+use vars qw/$dbh @reqlist $plugin_name $plugin_desc $plugin_id/ ;
+
+sub debug ( $ ) ;
+
+require ("/usr/share/gforge/lib/include.pl") ; # Include all the predefined functions
+
+&db_connect ;
+
+if ($#ARGV < 1) {
+    debug "Usage: register-plugin <plugin name> <plugin description>" ;
+    exit 1 ;
+}
+
+$plugin_name = $ARGV [0] ;
+$plugin_desc = $ARGV [1] ;
+
+if ($plugin_name =~ /[^a-z]/) {
+    debug "Error: the plugin name must contain only [a-z] characters" ;
+    exit 1 ;
+}
+
+$dbh->{AutoCommit} = 0;
+$dbh->{RaiseError} = 1;
+eval {
+    my ($query, $sth, @array, $version, $action) ;
+
+    $plugin_desc = $dbh->quote ($plugin_desc) ;
+
+    $query = "SELECT count(*) FROM plugins WHERE plugin_name = '$plugin_name'" ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+
+    if ($array[0] == 1) {
+	$query = "SELECT plugin_id FROM plugins WHERE plugin_name = '$plugin_name'" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	@array = $sth->fetchrow_array () ;
+	$sth->finish () ;
+
+	$plugin_id = $array[0] ;
+	debug "Plugin '$plugin_name' already registered, skipping." ;
+	print "$plugin_id\n" ;
+    } else {
+	$query = "INSERT INTO plugins (plugin_name, plugin_desc) VALUES ('$plugin_name', $plugin_desc)" ;
+
+	debug $query ;
+
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	$query = "SELECT plugin_id FROM plugins WHERE plugin_name = '$plugin_name'" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	@array = $sth->fetchrow_array () ;
+	$sth->finish () ;
+
+	$plugin_id = $array[0] ;
+	debug "Plugin '$plugin_name' registered with id $plugin_id." ;
+	print "$plugin_id\n" ;
+
+	# debug "Committing." ;
+	$dbh->commit () ;
+    }
+
+    # There should be a commit at the end of every block above.
+    # If there is not, then it might be symptomatic of a problem.
+    # For safety, we roll back.
+    $dbh->rollback ();
+};
+
+if ($@) {
+    warn "Transaction aborted because $@" ;
+    debug "Transaction aborted because $@" ;
+    $dbh->rollback ;
+    debug "Please report this bug on the Debian bug-tracking system." ;
+    debug "Please include the previous messages as well to help debugging." ;
+    debug "You should not worry too much about this," ;
+    debug "your DB is still in a consistent state and should be usable." ;
+    exit 1 ;
+}
+
+$dbh->rollback ;
+$dbh->disconnect ;
+
+sub debug ( $ ) {
+    my $v = shift ;
+    chomp $v ;
+    print STDERR "$v\n" ;
+}

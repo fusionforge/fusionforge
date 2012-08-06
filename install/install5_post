@@ -1,0 +1,88 @@
+install5_post_redhat()
+{
+	hostname=$1
+
+	# Post installation fixes.
+	perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
+	# Disable ssl
+	perl -spi -e "s/^Include/#Include/" /etc/gforge/httpd.conf.d/ssl-on.inc
+	
+	chkconfig httpd on
+	chkconfig postgresql on
+	chkconfig iptables off
+	
+	service httpd restart
+	service iptables stop
+	msg="IMPORTANT: Service iptables (firewall) disabled, please reconfigure after"
+	
+	cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
+	cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
+	service crond reload
+}
+
+install5_post_suse()
+{
+	hostname=$1
+
+	# Post installation fixes.
+	#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
+
+	chkconfig -s apache2 on
+	chkconfig -s postgresql on
+
+	# Apache settings: modules
+	for m in dav dav_svn authz_svn ssl; do
+		a2enmod $m
+		a2enflag $m
+	done
+	echo "Virtual hosts for ${hostname}:"
+	httpd2 -S -DSSL 2>&1 | grep ${hostname}
+
+	rcapache2 restart
+
+	rcSuSEfirewall2 stop
+	msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
+
+	cp $scriptdir/packaging/cron.d/cron.fusionforge /etc/cron.d
+	cp $scriptdir/plugins/*/etc/cron.d/* /etc/cron.d/
+	rccron reload
+}
+
+install5_post_debian()
+{
+        if [ ! -e /etc/gforge/ssl-cert.pem ] || [ ! -e /etc/gforge/ssl-cert.key ] ; then
+            # Uh-oh, no SSL cert, let's make sure at least a dummy one exists.
+            if [ ! -e /etc/ssl/certs/ssl-cert-snakeoil.pem ] || [ ! -e /etc/ssl/private/ssl-cert-snakeoil.key ] ; then
+                # What, not even the snakeoil cert is there?  Let's generate it
+                make-ssl-cert generate-default-snakeoil
+            fi
+            # Right.  At this point, it should be safe to set the symlinks.
+            ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/gforge/ssl-cert.pem
+            ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/gforge/ssl-cert.key
+        fi
+
+        for i in secrets.inc vhost-list.inc vhost-main.inc vhost-projects.inc ; do
+            if [ ! -e /etc/gforge/httpd.conf.d/$i ] ; then
+                cp /opt/gforge/src/etc/httpd.conf.d-opt/$i /etc/gforge/httpd.conf.d/$i
+                if [ $i = "secrets.inc" ] ; then
+                    chmod 700 /etc/gforge/httpd.conf.d/$i
+                fi
+                PATH=/opt/gforge/src/utils:$PATH manage-apache-config.sh install
+                mv /etc/gforge/httpd.conf.d/$i.generated /etc/gforge/httpd.conf.d/$i
+            fi
+        done
+	a2dissite default
+	service apache2 restart
+}
+
+install5_post_ubuntu()
+{
+	install5_post_debian
+}
+
+install5_post_unknown()
+{
+	echo "TODO"
+}
+
+

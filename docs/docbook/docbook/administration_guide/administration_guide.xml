@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "../../../dtd/docbookx.dtd" [
+ <!ENTITY % authors SYSTEM "../entities/authors.ent">
+ %authors;
+]>
+<article id="administration_guide" lang="en-US">
+  <articleinfo>
+    <title>FusionForge Administration Guide</title>
+    <authorgroup>
+&ken_mccullagh;    </authorgroup>
+  </articleinfo>
+  <section>
+    <title>Introduction</title>
+    <para>
+   This document is intended to be a guide for administering projects on  FusionForge. It is not intended to describe how to administer the FusionForge site itself. It is assumed that the reader will have also read the FusionForge User&apos;s Guide before reading this document.
+  </para>
+  </section>
+  <section>
+    <title>What is FusionForge?</title>
+    <para>
+   FusionForge was developed by the Open Source community as an environment in which to host projects in a way that the code, documentation, binaries etc. were publicly accessible to all who wished to see them, and members of the public could use the software that was developed, and contribute feedback, bugs, ideas and suggestions, and even help to develop code/modules/documentation/resources for the software.
+  </para>
+    <para>
+   Traditionally it was used for software projects, although there is really no reason why it cannot be used to develop hardware or silicon projects also.
+  </para>
+    <para>
+   Generally, everyone needs to have read access to the data associated with a project, with (some of) the developers having write access to the data. Usually there is a maintainer of the code (the project leader or the person who registered the project) and contributers who email  any changes to the code that they developed - bug fixes, additional functionality - which the maintainer adds to the code in the CVS tree upon verification that it was correct/clean/maintainable/useful.
+  </para>
+  </section>
+  <section>
+    <title>What can FusionForge do for me?</title>
+    <para>
+   FusionForge can provide a centralized access point for several useful utilities and tools which could be used in a project. Some of these tools include:
+  </para>
+    <orderedlist>
+      <listitem>
+        <para>A version control repository (CVS or Subversion)</para>
+      </listitem>
+      <listitem>
+        <para>Mailing lists</para>
+      </listitem>
+      <listitem>
+        <para>Discussion forums</para>
+      </listitem>
+      <listitem>
+        <para>Bug tracking</para>
+      </listitem>
+      <listitem>
+        <para>A web interface to CVS or Subversion</para>
+      </listitem>
+      <listitem>
+        <para>Task lists</para>
+      </listitem>
+      <listitem>
+        <para>A website which provides some usage statistics, including the project members, the number of mailing lists, source code statistics, the number of items in the discussion forums, etc.</para>
+      </listitem>
+    </orderedlist>
+  </section>
+  <section>
+    <title>Setting up a new project</title>
+    <para>
+   In order to get a project up and running, you must be registered as a user of FusionForge. This is described in the FusionForge Users Guide.
+  </para>
+  </section>
+  <section>
+    <title>Registering a new project</title>
+    <para>
+   It is quite straightforward to register a new project on FusionForge. The steps involved are:
+  </para>
+    <orderedlist>
+      <listitem>
+        <para>Login to FusionForge</para>
+      </listitem>
+      <listitem>
+        <para>Select Register New Project from the menu on the left hand side of the page.</para>
+      </listitem>
+      <listitem>
+        <para>Fill in the Full Name, Unix Name, Project Purpose and Summarization fields (paying attention to the restrictions listed on the page) and select a license type.</para>
+      </listitem>
+      <listitem>
+        <para>Click Proceed with this registration and assuming that all the details are correct, and that the name is unique, the project will be accepted pending approval. If there are details missing, or other errors, you will be informed of the problem.</para>
+      </listitem>
+      <listitem>
+        <para>Assuming that the project is approved, you will be sent back an email confirming that this is the case, and listing the website, cvsroot etc of the project you created. It will take some time for the cvsroot to be created - usually by an overnight cronjob.</para>
+      </listitem>
+    </orderedlist>
+    <para>
+   Once you have received the email confirming project acceptance, you will be able to find your project through the search box by enteringyour project&apos;s name or details. Clicking on the link provided will bring you to the project summary page which is the default starting point for all the project administration.
+  </para>
+  </section>
+  <section>
+    <title>Administering a new project</title>
+    <para>
+   This section provides an oversight on how to set up the FusionForge utilities so that they can be used by your project once it has been approved. Typically the cvs space will have been allocated by the morning after the confirmation email is sent to the project requester. In order to get the project into a useable state, the project administrator will need to perform some steps.
+  </para>
+  </section>
+  <section>
+    <title>CVS repository</title>
+    <para>
+   If the project does not already have a CVS repository in place (eg if an existing project is being added to FusionForge mid-life, rather than a brand new project being started) the CVS repository will need to be set up. There are plenty of resources on CVS around so this document will not attempt to describe how to use CVS, but will provide just enough information to get started.
+  </para>
+  </section>
+  <section>
+    <title>Setting up the CVSROOT</title>
+    <para>
+   Before any CVS operations can be carried out, the CVSROOT environment variable must be set in the command shell you are using, or in whatever CVS GUI you are using, such as WinCVS. 
+  </para>
+  </section>
+  <section>
+    <title>Setting your <filename>.rhosts</filename> file correctly</title>
+    <para>
+   In your UNIX home directory there exists a file called <filename>.rhosts</filename>. This file requires special permissions, namely :
+  </para>
+    <screen>-rw-r--r--   .rhosts</screen>
+    <para>
+   If this is not correct, you will encounter problems trying to access CVS. If this file is not present, it must be created.
+  </para>
+    <para>
+   Secondly, your <filename>.rhosts</filename> file must contain the name of the machine(s) from which you are accessing CVS. The format of the file is as follows:
+  </para>
+    <programlisting><![CDATA[
+ machine1 username
+ machine2 username
+]]></programlisting>
+    <para>
+   It is recommended that fully qualified domain names are used, or IP addresses, as this seems to solve problems arising due to machines in different offices accessing each other. The last line of the file may optionally be
+  </para>
+    <programlisting>
+ + username 
+</programlisting>
+    <para>
+   to allow UNIX (not Linux) machines to use wildcard matching to allow access from all hosts on the network. This does NOT work on Linux, which is what the FusionForge server runs. Also, if the wildcard entry is before the machine you wish to use, then it will not work either.
+  </para>
+  </section>
+  <section>
+    <title>Creating the CVS repository</title>
+    <para>
+   Once CVSROOT has been set, the base entry for CVS can be added. This is the top level for the directory structure of the repository.
+  </para>
+    <para>
+   This is done using the cvs import command. The following steps show how it can be done.
+  </para>
+    <screen><![CDATA[
+ $ cd <top of tree>
+ $ cvs import <module-name> <vendor-tag> <release-tag>
+]]></screen>
+    <para>
+   e.g. suppose we wish to import a directory structure called myproject, which was obtained from &quot;customer&quot; and is labelled &quot;releaseone&quot; we would do:
+  </para>
+    <screen><![CDATA[
+ $ cd path/to/myproject
+ $ cvs import myproject customer releaseone
+]]></screen>
+    <para>
+   If we wanted to create a clean, new directory structure called mynewproject we could do something like this.
+  </para>
+    <screen><![CDATA[
+ $ mkdir mynewproject
+ $ cd mynewproject
+ $ cvs import mynewproject mycompany start
+]]></screen>
+    <para>
+   This is pretty much all that has to be done to start up the CVS repository - after this the repository can be used in the normal way. It is also possible to import several modules to the same CVS repository. e.g.
+  </para>
+    <screen><![CDATA[
+ $ cd path/to/src
+ $ cvs import src S3 src0
+ $ cd path/to/docs
+ $ cvs import docs S3 docs0
+]]></screen>
+    <para>
+   But as was said earlier, this is not the place to provide a complete introduction to CVS.  Go out and find some of the abundant documentation that is available for it on the web and elsewhere. Most importantly, if you run into a problem with CVS, it is NOT the FusionForge administrator&apos;s fault so don&apos;t go running to them every time. Try to figure it out yourself or go looking for help on CVS related news groups.
+  </para>
+  </section>
+</article>

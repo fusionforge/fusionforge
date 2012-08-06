@@ -1,0 +1,132 @@
+<?php // -*-php-*-
+// $Id: editpage.tmpl 8103 2011-09-09 15:03:15Z vargenau $
+?>
+<?php if (isset($PREVIEW_CONTENT)) { ?>
+  <p><strong><?php echo _("Preview only!  Changes not saved.")?></strong>
+<!-- FIXME: it would be nice to put a link to the #editarea anchor below,
+     but it does not work currently with the <base> declared in top.tmpl.
+     I think we need to do away with using <base> altogether... -->
+     <?php echo fmt("Please continue editing.  (You'll find your %s at the bottom of the page.)",
+          /* HTML::a(array("href" => "#editarea"), */ _("edit area") /*)  */) ?>
+  </p>
+  <hr class="printer" />
+  <?php echo $PREVIEW_CONTENT ?>
+  <hr class="printer" />
+<?php } ?>
+
+<?php echo $PAGE_LOCKED_MESSAGE ?>
+<?php echo $CONCURRENT_UPDATE_MESSAGE ?>
+
+<?php if (! $IS_CURRENT) { ?>
+  <p class="warning_msg"><strong><?php echo _("Warning: You are editing an old revision.")?>
+        <?php echo _("Saving this page will overwrite the current version.")?></strong></p>
+<?php } ?>
+<?php /*
+ * FIXME: Hack! 
+ * The funky URL used for the form action parameter is bogus.
+ * This is needed, otherwise the redirect to the real browser
+ * page won't work with some browsers. (NS4 and Mozilla 0.97 won't accept
+ * a redirect from a page to itself.)
+ */ ?>
+<form method="post" id="editpage" name="editpage"
+      action="<?php echo $request->getPostURL() ?>"
+      accept-charset="<?php echo CHARSET?>">
+  <?php if (!empty($_GET['start_debug'])) echo '<input type="hidden" name="start_debug" value="1" >'; ?>
+  <?php /* To clear beyond a larger logo, such as in the Hawaiian theme */ ?>
+  <br class="clear-floats" />
+  <table class="fullwidth">
+    <tr><td><?php echo $EDIT_TOOLBAR ?></td>
+        <td align="right"><div id="editarea-size">
+    <?php echo _("Size").':'?>
+    <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?> 
+    <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>
+    <noscript><?php echo Button("submit:", _("Adjust"), 'wikiaction')?></noscript>
+  </div></td></tr></table>
+<?php if (!empty($WYSIWYG_B)) { ?>
+  <br /><div class="hint"><strong>Warning:</strong> Switching to the Wysiwyg editor will not keep your changes.</div>
+<?php } ?>
+  <a id="editarea"></a><?php echo $EDIT_TEXTAREA?>
+<!-- FIXME: fix layout, move CSS to CSS -->
+<div class="toolbar" style="text-align: center;">
+  <label for="edit-summary"><?php echo _("Summary").':'?></label> <?php echo $SUMMARY_INPUT?>
+</div>
+<?php if (ENABLE_CAPTCHA) { ?>
+<div class="toolbar" style="text-align: center;">
+  <?php echo $CAPTCHA_IMAGE ?><br/>
+  <?php echo $CAPTCHA_LABEL ?><?php echo $CAPTCHA_INPUT ?>
+</div> 
+<?php } ?>
+<table summary="Toolbar: Page editing options." class="toolbar" width="100%"
+       cellpadding="0" cellspacing="0" border="0">
+<tr valign="middle">
+  <td> 
+    <?php echo $MINOR_EDIT_CB ?> <label for="edit-minor_edit"><?php echo _("This is a minor change.")?></label><br />
+    <?php echo $OLD_MARKUP_CB ?> <label for="useOldMarkup"><?php echo _("Use old markup")?></label> <?php echo $OLD_MARKUP_CONVERT?>
+  </td>
+  <td align="center">
+    <?php if (!empty($WYSIWYG_B)){ ?>
+    <?php echo $WYSIWYG_B?><?php echo $SEP?>
+    <?php } ?>
+    <?php echo $PREVIEW_B ?>
+    <?php if ($SAVE_B)  { ?> 
+      <?php echo $SEP?><?php echo $SAVE_B ?>
+    <?php } ?>
+    <?php echo $SEP?><?php echo $CHANGES_B ?>
+  </td>
+  <td>&nbsp; <?php echo $AUTHOR_MESSAGE?></td>
+</tr>
+<tr>
+  <td>
+    <?php if ($user->isAdmin()) { ?> 
+    <?php echo $LOCKED_CB ?> <label for="edit-locked" title="<?php echo _("Make the page read-only?")?>"><?php echo _("Locked")?></label>
+    <?php if (ENABLE_PAGE_PUBLIC) { ?>
+    &nbsp;&nbsp;<?php echo $PUBLIC_CB ?> <label for="edit-public" title="<?php echo _("Export to a seperate public area?")?>"><?php echo _("Public")?></label>
+    <?php }} ?>
+  </td>
+  <td colspan="2" align="right">
+    <?php if (!$user->isAuthenticated()) { ?>
+    <?php echo Template('signin', array('FORMNAME' => 'editpage')) ?>
+    <?php } ?>
+  </td>
+</tr>
+</table>
+<?php echo $HIDDEN_INPUTS?>
+</form>
+<div style="width:100%;text-align:center;"><?php /*plugin UpLoad autolink=0 mode=edit size=30 */?></div>
+
+<hr />
+
+<script type="text/javascript">
+<!--
+function showOldMarkupRules(show) {
+  if (document.getElementById) {
+    if (!show) {
+      document.getElementById('newMarkup').style.display="block";
+      document.getElementById('oldMarkup').style.display="none";
+    } else {
+      document.getElementById('newMarkup').style.display="none";
+      document.getElementById('oldMarkup').style.display="block";
+    }
+  }
+}
+// -->
+</script>
+
+<div id="oldMarkup" class="wiki-edithelp">
+<!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
+<p><?php echo fmt("See %s tips for editing.", WikiLink(_("Help/GoodStyle"))) ?></p>
+<?plugin IncludePage page=_("Help/OldTextFormattingRules") section=_("Synopsis") quiet=1?>
+</div>
+<div id="newMarkup" class="wiki-edithelp">
+<!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
+<p><?php echo fmt("See %s tips for editing.", WikiLink(_("Help/GoodStyle"))) ?></p>
+<?plugin IncludePage page=_("Help/TextFormattingRules") section=_("Synopsis") quiet=1?>
+</div>
+
+<script type="text/javascript">
+<!--
+if (document.getElementById) {
+  showOldMarkupRules(document.getElementById('useOldMarkup').checked);
+}
+// -->
+</script>

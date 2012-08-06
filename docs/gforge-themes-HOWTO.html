@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>GForge Themes HOWTO</title>
+</head>
+<body>
+
+<center>
+<h2>GForge Themes HOWTO</h2>
+<h3>Updated 12/30/02</h3>
+</center>
+
+<p>Let's say you want to create a new theme called "water". It'll be
+all blue-ish and clean and such.</p>
+<p>First, create a new directory <code>www/themes/water</code>. This
+is where your new theme will live. Now, write a PHP class called <code>Theme.class.php
+</code>that extends <code>www/include/Layout.class.php</code>. Like this:</p>
+<pre>
+class Theme extends Layout {
+ require_once('www/include/Layout.class.php');
+ function Theme() {
+  $this-&gt;Layout();
+  $this-&gt;COLOR_HTMLBOX_TITLE = '#BBDDFF';
+ }
+}
+</pre>
+
+<p>Note that we've made the box title color to a nice blue just so
+we can see something happen. To make the theme available, we need to add
+it to list of available themes. To do that, log in as the admin user, go
+to the admin page, click on Add, Delete, or Edit Themes, click on
+add_new, and add the new theme. On this page you'll see listed the
+column names in the <code>themes</code> database table. You can see if
+you already have any custom themes installed by querying the database,
+i.e.:</p>
+<pre>
+bash-2.05a$ psql -c "select * from themes;" alexandria
+ theme_id | dirname | fullname
+----------+---------+----------
+(0 rows)
+
+bash-2.05a$
+</pre>
+
+<p>So, we don't have any custom themes installed, and we can enter a
+<code>theme_id</code> of <code>1</code>. The <code>dirname</code> will
+be <code>water</code> and the <code>fullname</code> is <code>Water</code>.
+Then click the Submit New Theme button and it'll be added, which you can
+verify with:</p>
+<pre>
+bash-2.05a$ psql -c "select * from themes;" alexandria
+ theme_id | dirname | fullname
+----------+---------+----------
+      1   | water   | Water
+(1 row)
+
+bash-2.05a$
+</pre>
+
+<p>Now go to the Account Maintenance page and click on the Choose My
+Theme link. Select the Water theme and click Submit Changes. Then click
+on My Page and, if all goes well, the box title bars will all have blue
+backgrounds. Nice, huh?</p>
+<hr>
+
+<p>There's an example of a Layout subclass <a
+	href="http://savannah.nongnu.org/cgi-bin/viewcvs/gforge/gforge/www/themes/debian/Theme.class.php?rev=1.8&amp;content-type=text/vnd.viewcvs-markup">here</a>.
+
+
+</p>
+<hr>
+
+TODO:
+<ul>
+	<li>Changing other stuff seems to require copying the
+	gforge/Theme.class.php file over and customizing it - i.e., editing the
+	CSS stylesheet to do what you want, changing the image root, etc.</li>
+	<li>Need to include list of images with details from Ryan's post.
+
+	</li>
+</ul>
+
+</body>
+</html>

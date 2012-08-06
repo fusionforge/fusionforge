@@ -1,0 +1,294 @@
+#!/usr/bin/make -f
+
+# GNU copyright 1997 to 1999 by Joey Hess (sample file)
+# Copyright 2000 to 2002 by Roland Mas and Christian Bayle for the Sourceforge package
+# Copyright 2002 to 2008 by Roland Mas and Christian Bayle for the Gforge package
+# Copyright 2008 to 2010 by Roland Mas and Christian Bayle for the FusionForge package
+
+OLDPACKAGE=gforge
+PACKAGE=fusionforge
+SRCPACKAGE=fusionforge
+FORGENAME=FusionForge
+
+# Identify this FusionForge version
+# keep type intact and change forge in derivates,
+# unless there are deep changes (type is used for
+# the Forge-Identification meta header)
+WHICH_TYPE=FusionForge
+WHICH_FORGE=FusionForge
+WHICH_VERSION:=$(shell dpkg-parsechangelog | sed -n '/^Version: /s///p')
+
+# Replace macros present in the files for forge's name
+SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' -e 's/@OLDPACKAGE@/$(OLDPACKAGE)/g' -e 's/@FORGENAME@/$(FORGENAME)/g'
+
+DH=dh --with quilt
+
+default:
+	@echo $(PACKAGE)
+
+# The substitutions bellow can be quite tricky, so use 'debian/rules testpat' to check if it's OK
+ENABLED_PLUGINS:=$(shell sh $(CURDIR)/utils/list-enabled-plugins.sh || echo error)
+ifeq (${ENABLED_PLUGINS},error)
+$(error list-enabled-plugins.sh failed)
+endif
+
+PPOSTINST=$(foreach i,$(ENABLED_PLUGINS),debian/$(PACKAGE)-plugin-$i.postinst)
+PPRERM=$(foreach i,$(ENABLED_PLUGINS),debian/$(PACKAGE)-plugin-$i.prerm)
+
+CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(OLDPACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
+PCRONDFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/cron.d/[a-z]*),debian/$(PACKAGE)-plugin-$i.cron.d))
+
+DIRSFILES=$(patsubst packaging/dirs/%,debian/$(OLDPACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
+PDIRSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/dirs/[a-z]*),debian/$(PACKAGE)-plugin-$i.dirs))
+
+LINKSFILES=$(patsubst packaging/links/%,debian/$(OLDPACKAGE)-%.links,$(wildcard packaging/links/[a-z]*))
+PLINKSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/links/[a-z]*),debian/$(PACKAGE)-plugin-$i.links))
+
+INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
+PINSTALLFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/install/[a-z]*),debian/$(PACKAGE)-plugin-$i.install))
+
+PTRIGGERSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/debian/[a-z]*.triggers),debian/$(PACKAGE)-plugin-$i.triggers))
+
+DOCSFILES=$(patsubst packaging/docs/%,debian/$(OLDPACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*)) \
+		$(patsubst packaging/docs/%,debian/$(PACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*))
+PDOCSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/docs/[a-z]*),debian/$(PACKAGE)-plugin-$i.docs))
+
+PEXAMPLESSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/examples/[a-z]*),debian/$(PACKAGE)-plugin-$i.examples))
+READMEFILES=$(patsubst packaging/readme/%,debian/$(OLDPACKAGE)-%.README.Debian,$(wildcard packaging/readme/[a-z]*)) \
+		$(patsubst packaging/readme/%,debian/$(PACKAGE)-%.README.Debian,$(wildcard packaging/readme/[a-z]*))
+
+POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
+
+# Displays the variables to check if globbing and substitutions are correct
+testpat:
+	@echo "ENABLED_PLUGINS=$(ENABLED_PLUGINS)"
+	@echo ""
+	@echo "PPOSTINST=$(PPOSTINST)"
+	@echo "PPRERM=$(PPRERM)"
+	@echo ""
+	@echo "CRONDFILES=$(CRONDFILES)"
+	@echo "DIRSFILES=$(DIRSFILES)"
+	@echo "LINKSFILES=$(LINKSFILES)"
+	@echo "INSTALLFILES=$(INSTALLFILES)"
+	@echo "DOCSFILES=$(DOCSFILES)"
+	@echo "READMEFILES=$(READMEFILES)"
+	@echo ""
+	@echo "PCRONDFILES=$(PCRONDFILES)"
+	@echo "PDIRSFILES=$(PDIRSFILES)"
+	@echo "PLINKSFILES=$(PLINKSFILES)"
+	@echo "PINSTALLFILES=$(PINSTALLFILES)"
+	@echo "PDOCSFILES=$(PDOCSFILES)"
+	@echo "PEXAMPLESFILES=$(PEXAMPLESFILES)"
+
+remove-binary-files:
+	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
+
+.PHONY: conffiles
+conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(READMEFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) $(PTRIGGERSFILES) $(PEXAMPLESFILES) debian/control
+
+# Construct the plugin's 'postinst' script out of a template in debian/dsf-in/plugin.postinst
+debian/$(PACKAGE)-plugin-%.postinst:
+	export PLUGLONGNAME="`cat $(CURDIR)/plugins/$*/NAME`"; \
+		[ -e $(CURDIR)/plugins/$*/debian/plugin-$*.postinst ] \
+		&& $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/plugins/$*/debian/plugin-$*.postinst > $@ \
+		|| $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.postinst > $@
+
+# Construct the plugin's 'prerm' script out of a template in debian/dsf-in/plugin.prerm
+debian/$(PACKAGE)-plugin-%.prerm:
+	export PLUGLONGNAME="`cat $(CURDIR)/plugins/$*/NAME`"; \
+		[ -e $(CURDIR)/plugins/$*/debian/plugin-$*.prerm ] \
+		&& $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/plugins/$*/debian/plugin-$*.prerm > $@ \
+		|| $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.prerm > $@
+
+# Perform substitutions in plugin's cron.d file
+debian/$(PACKAGE)-plugin-%.cron.d:
+	$(SED_REPLACE) -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/plugins/$*/packaging/cron.d/plugin-$* > $@
+
+# Add a prefix and perform substitutions on the main cron.d files
+debian/$(OLDPACKAGE)-%.cron.d:
+	(cat $(CURDIR)/packaging/cron.d/00phpcron ; $(SED_REPLACE) -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) | $(SED_REPLACE) > $@
+
+# Perform subsitutions on 'dirs', 'links', 'install', 'docs', 'triggers' files
+debian/$(PACKAGE)-plugin-%.dirs:
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/dirs/plugin-$* > $@
+
+debian/$(OLDPACKAGE)-%.dirs:
+	$(SED_REPLACE) $(CURDIR)/packaging/dirs/$* > $@ 
+
+debian/$(PACKAGE)-plugin-%.links:
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/links/plugin-$* > $@
+
+debian/$(OLDPACKAGE)-%.links:
+	$(SED_REPLACE) $(CURDIR)/packaging/links/$* > $@ 
+
+debian/$(PACKAGE)-plugin-%.install:
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/install/plugin-$* > $@
+
+debian/$(PACKAGE)-plugin-%.triggers:
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/debian/plugin-$*.triggers > $@
+
+debian/$(OLDPACKAGE)-%.install:
+	$(SED_REPLACE) $(CURDIR)/packaging/install/$* > $@ 
+
+debian/$(PACKAGE)-plugin-%.docs:
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/docs/plugin-$* > $@
+debian/$(OLDPACKAGE)-%.docs:
+	$(SED_REPLACE) $(CURDIR)/packaging/docs/$* > $@
+debian/$(PACKAGE)-%.docs:
+	$(SED_REPLACE) $(CURDIR)/packaging/docs/$* > $@
+
+debian/$(PACKAGE)-plugin-%.examples:
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/examples/plugin-$* > $@
+
+debian/$(OLDPACKAGE)-%.README.Debian:
+	$(SED_REPLACE) $(CURDIR)/packaging/readme/$* > $@
+debian/$(PACKAGE)-%.README.Debian:
+	$(SED_REPLACE) $(CURDIR)/packaging/readme/$* > $@
+
+# Construct the control file
+debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*) $(wildcard plugins/*/etc/*.ini)
+	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | \
+	while read file ; do \
+		cat $${file}; \
+		if [ -f $${file}.shortdesc ] ; then \
+			cat $(CURDIR)/packaging/control/AAAdesc; \
+			echo ' .'; \
+			cat $${file}.shortdesc; \
+		fi; \
+		echo ''; \
+	done | $(SED_REPLACE) > $@
+	@echo Enabled plugins: $(ENABLED_PLUGINS)
+	@echo Skipped plugins: $(shell sh $(CURDIR)/utils/list-enabled-plugins.sh --disabled)
+	for plugin in $(ENABLED_PLUGINS) ; do \
+		ls plugins/$$plugin/packaging/control/[1-9][0-9][0-9]plugin-$$plugin ; \
+	done | \
+	while read file ; do \
+		cat $${file}; \
+		if [ -f $${file}.shortdesc ] ; then \
+			cat $(CURDIR)/packaging/control/AAAdesc; \
+			echo ' .'; \
+			cat $${file}.shortdesc; \
+		fi; \
+		echo ''; \
+	done | $(SED_REPLACE) >> $@
+
+# Update the translation of package descriptions fields
+debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
+	@debconf-updatepo --podir=debian/dsf-po
+
+debian/po/%:
+	cat $(patsubst debian/po/%, debian/dsf-po/%, $@) | $(SED_REPLACE) > $@
+
+override_dh_auto_build:
+
+build: remove-binary-files debian/po/templates.pot conffiles
+	$(DH) $@
+
+# 	Build man pages from Docbook sources
+	cat debian/dsf-in/common.manpages | $(SED_REPLACE) > debian/$(OLDPACKAGE)-common.manpages
+	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
+
+# 	Build README.Debian from template
+	cat debian/README.Debian.tmpl | $(SED_REPLACE) > debian/README.Debian
+
+# 	Uudecode binary files
+	sh $(CURDIR)/deb-specific/manage-uufiles.sh decode
+
+# 	Build gettext *.mo files
+	utils/manage-translations.sh build
+
+#       Build FHS-compatible Apache config files (generates contents of etc/httpd.conf.d-fhs/ etc.)
+	utils/manage-apache-config.sh build
+
+#	Update SQL for list of country codes
+	utils/ffcountries.pl > 200403251.sql
+
+# 	Preprocess files with DSF-Helper
+	perl $(CURDIR)/deb-specific/dsf-helper.pl
+
+clean: remove-binary-files
+	$(DH) $@
+
+	rm -f $(CURDIR)/debian/*.cron.d
+	rm -f $(CURDIR)/debian/*.dirs
+	rm -f $(CURDIR)/debian/*.links
+	rm -f $(CURDIR)/debian/*.install
+	rm -f $(CURDIR)/debian/*.docs
+	rm -f $(CURDIR)/debian/*.examples
+	rm -f $(CURDIR)/debian/*.README.Debian
+	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
+	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-common.manpages
+	rm -f cvssh.1 $(PACKAGE)-config.1 200403251.sql
+	rm -f $(CURDIR)/debian/README.Debian
+	rm -rf locales
+
+	rm -f $(POFILES) $(PPOSTINST) $(PPRERM)
+
+	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
+
+	rm -f $(PPOSTINST)
+	rm -f $(PPRERM)
+	rm -fr $(CURDIR)/etc/httpd.conf.d-fhs/ $(CURDIR)/etc/httpd.conf.d-opt/ $(CURDIR)/etc/httpd.conf.d-usrlocal/
+
+install: build
+	$(DH) $@
+
+	sed \
+	    -e 's!@PKGNAME@!${WHICH_FORGE}!g' \
+	    -e 's!@PKGVERSION@!${WHICH_VERSION}!g' \
+	    -e 's!@PLUCKERNAME@!${WHICH_TYPE}!g' \
+	    <$(CURDIR)/deb-specific/pkginfo.inc.php \
+	    >$(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/$(OLDPACKAGE)/common/pkginfo.inc.php
+
+# 	Fix permissions
+	chmod 755 $(CURDIR)/debian/*/*/*/*/bin/* $(CURDIR)/debian/*/*/*/*/cronjobs/* \
+		$(CURDIR)/debian/*/bin/*  $(CURDIR)/debian/*/usr/share/*/plugins/*/bin/* \
+		$(CURDIR)/debian/*/usr/share/*/plugins/*/cronjobs/*
+	chmod 644 $(CURDIR)/debian/$(OLDPACKAGE)-db-postgresql/usr/share/$(OLDPACKAGE)/cronjobs/*.inc
+
+	chmod 755 $(CURDIR)/debian/$(OLDPACKAGE)-db-postgresql/usr/share/*/db/*.php
+
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/bin/cgi/viewvc-strace.sh
+
+	find $(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
+
+	rm -f $(CURDIR)/debian/$(PACKAGE)-plugin-scm*/usr/share/*/plugins/scm*/*/README
+	chmod 755 $(CURDIR)/debian/$(PACKAGE)-plugin-scmcvs/usr/share/*/plugins/scmcvs/sbin/*
+
+# 	Rename config files
+	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini-fhs $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini
+	mkdir -p $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d
+	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf.d-fhs/*.conf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
+	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf.d-fhs/*.inc $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
+	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf
+
+# 	Remove those that need to be generated at install time
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/secrets.inc
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/vhost-list.inc
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/vhost-main.inc
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/vhost-projects.inc
+
+# 	Remove Windows files
+	rm -rf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows
+
+# Remove extra copies of the GNU GPLv2
+	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/themes/*/COPYING
+
+# 	Remove Snoopy class from binary packages (provided by libphp-snoopy)
+	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name Snoopy.class.php | xargs -r rm
+
+# 	Remove NuSOAP class from binary packages (provided by libnusoap-php)
+	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name nusoap.php | xargs -r rm
+
+# 	Remove potential SCM artefacts from binary packages
+	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs -r rm -rf
+
+# 	Also remove uuencoded files
+	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name \*.uu | xargs -r rm
+
+
+binary: install
+
+%:
+	$(DH) $@

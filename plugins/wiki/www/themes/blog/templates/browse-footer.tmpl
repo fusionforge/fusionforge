@@ -1,0 +1,9 @@
+<?php // -*-php-*-
+// $Id: browse-footer.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<!--{{{ Edit Date-->
+<p class="editdate">
+<?php if( $page->getName() != _("HomePage")) { ?>
+<?php echo $WikiTheme->getOwnerMessage($page) ?>  <?php echo $WikiTheme->getLastModifiedMessage($revision) ?> <?php echo $WikiTheme->getAuthorMessage($revision) ?><br />
+<?php } ?>
+This site is powered by <a href="http://phpwiki.sourceforge.net">PhpWiki</a>. Page design based on <a href="http://binarybonsai.com/kubrick/">Kubrick</a>,<br />adapted by <a href="http://the.taoofmac.com">Rui Carmo</a> from an original design by <a href="http://binarybonsai.com">Michael Heilemann</a>.</p><!--}}} Edit Date-->

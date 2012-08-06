@@ -1,0 +1,432 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-29 18:26+0200\n"
+"PO-Revision-Date: 2012-06-23 19:55+0200\n"
+"Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
+"Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Název @FORGENAME@ domény nebo subdomény:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Zadejte prosím doménu, která bude hostit vaši instalaci @FORGENAME@. Některé "
+"služby obdrží své vlastní subdomény této domény (scm, lists, atd.)."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+msgid "@FORGENAME@ system name:"
+msgstr "Jméno @FORGENAME@ systému:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Zadejte prosím jméno @FORGENAME@ systému. Toto jméno je v systému používáno "
+"na několika místech."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+msgid "@FORGENAME@ administrator password:"
+msgstr "Heslo správce @FORGENAME@:"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
+msgstr ""
+"Správce @FORGENAME@ bude mít v systému @FORGENAME@ všechna práva. Používá se "
+"například pro schvalování vytváření nových projektů."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+msgid "Please choose the password for this forge account."
+msgstr "Zadejte prosím heslo pro tento forge účet."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Password confirmation:"
+msgstr "Potvrzení hesla:"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Please re-type the password for confirmation."
+msgstr "Zadejte heslo ještě jednou pro potvrzení."
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "install the new version configured by @PACKAGE@"
+msgstr "instalovat novou verzi nastavenou @PACKAGE@"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "keep the local version currently installed"
+msgstr "ponechat aktuálně nainstalovanou lokální verzi"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show the differences between the versions"
+msgstr "zobrazit rozdíly mezi verzemi"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show a side-by-side difference between the versions"
+msgstr "zobrazit rozdíly mezi verzemi vedle sebe"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "start a new shell to examine the situation"
+msgstr "spustit nový shell a prozkoumat situaci"
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid "What do you want to do about configuration file ${BASENAME}?"
+msgstr "Co chcete provést s konfiguračním souborem ${BASENAME}?"
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid ""
+"The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
+"is also a configuration file of the postgresql package."
+msgstr ""
+"Konfigurační soubor ${FILE} musí být balíkem @PACKAGE@ upraven, avšak "
+"tento soubor je i konfiguračním souborem balíku postgresql."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgstr "Chcete mít v @FORGENAME@ jednoduchou konfiguraci DNS?"
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"You can use a simple DNS setup with wildcards to map all project web-hosts "
+"to a single IP address, and direct all the scm-hosts to a single SCM server, "
+"or a complex setup which allows many servers as project web servers or SCM "
+"servers."
+msgstr ""
+"Můžete mít buď jednodušší konfiguraci DNS, která používá zástupné znaky, aby "
+"namapovala weby všech projektů na jedinou IP adresu a nasměrovala všechny "
+"SCM servery na server jediný, nebo můžete mít komplexní nastavení, jež vám "
+"umožní použít vícero počítačů pro webové a SCM servery."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"Even if you use a simple DNS setup, you can still use separate machines as "
+"project servers; it just assumes that all the project web directories are on "
+"the same server with a single SCM server."
+msgstr ""
+"I když zvolíte jednodušší nastavení DNS, stále můžete použít více počítačů. "
+"Nastavení bude pouze předpokládat, budete mít všechny adresáře s weby "
+"projektů na jednom počítači a že pro SCM použijete jediný server."
+
+#~ msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgstr "Emailová adresa správce @FORGENAME@:"
+
+#~ msgid ""
+#~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~ "site. It will be used when problems occur."
+#~ msgstr ""
+#~ "Zadejte prosím emailovou adresu správce tohoto systému @FORGENAME@. "
+#~ "Adresa se použije v případě výskytu problémů."
+
+#~ msgid "Download server:"
+#~ msgstr "Server pro stahování:"
+
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr "Zadejte prosím jméno serveru, který bude hostit balíky @FORGENAME@."
+
+#~ msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgstr "Měl by to být jiný počítač než je hlavní server @FORGENAME@."
+
+#~ msgid "Database server:"
+#~ msgstr "Databázový server:"
+
+#~ msgid ""
+#~ "Please enter the IP address (or hostname) of the server that will host "
+#~ "the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Zadejte prosím IP adresu (nebo jméno) serveru, který bude hostit vaši "
+#~ "@FORGENAME@ databázi."
+
+#~ msgid "Database name:"
+#~ msgstr "Jméno databáze:"
+
+#~ msgid ""
+#~ "Please enter the name of the database that will host the @FORGENAME@ "
+#~ "database."
+#~ msgstr ""
+#~ "Zadejte prosím jméno databáze, která bude obsahovat databázi @FORGENAME@."
+
+#~ msgid "Database administrator username:"
+#~ msgstr "Uživatelské jméno správce databáze:"
+
+#~ msgid ""
+#~ "Please enter the username of the database administrator for the server "
+#~ "that will host the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Zadejte prosím uživatelské jméno správce databáze na serveru, který bude "
+#~ "hostit databázi @FORGENAME@."
+
+#~ msgid "Password used for the database:"
+#~ msgstr "Heslo pro připojení do databáze:"
+
+#~ msgid "Connections to the database system are authenticated by a password."
+#~ msgstr "Připojení do databáze je ověřováno heslem."
+
+#~ msgid "Please choose the connection password."
+#~ msgstr "Zadejte zde prosím heslo pro připojení."
+
+#~ msgid "IP address:"
+#~ msgstr "IP adresa:"
+
+#~ msgid ""
+#~ "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~ "installation."
+#~ msgstr ""
+#~ "Zadejte prosím IP adresu serveru, který bude hostit instalaci @FORGENAME@."
+
+#~ msgid "This is needed for the configuration of Apache virtual hosting."
+#~ msgstr "To je vyžadováno pro nastavení virtuálních hostů v Apachi."
+
+#~ msgid "Shell server:"
+#~ msgstr "Server se shellovými účty:"
+
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
+
+#~ msgid "Mailing lists server:"
+#~ msgstr "Server pro poštovní konference:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "mailing lists."
+#~ msgstr ""
+#~ "Zadejte prosím jméno serveru, který bude hostit poštovní konference "
+#~ "@FORGENAME@."
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
+
+#~ msgid "News administrative group ID:"
+#~ msgstr "ID skupiny správců novinek:"
+
+#~ msgid ""
+#~ "The members of the news admin group can approve news for the @FORGENAME@ "
+#~ "main page. This group's ID must not be 1. This should be changed only if "
+#~ "you upgrade from a previous version and want to keep the data."
+#~ msgstr ""
+#~ "Členové správcovské skupiny pro novinky mohou schvalovat novinky pro "
+#~ "hlavní stránku @FORGENAME@. Tato skupina nesmí mít ID 1. Toto byste měli "
+#~ "měnit jen v případě, že přecházíte z dřívější verze a chcete zachovat svá "
+#~ "data."
+
+#~ msgid "Statistics administrative group ID:"
+#~ msgstr "ID skupiny správců pro statistiky:"
+
+#~ msgid "Peer rating administrative group ID:"
+#~ msgstr "ID skupiny správců pro hodnocení:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr "Zadejte prosím jméno serveru, který bude hostit balíky @FORGENAME@."
+
+#~ msgid "English"
+#~ msgstr "angličtina"
+
+#~ msgid "Bulgarian"
+#~ msgstr "bulharština"
+
+#~ msgid "Catalan"
+#~ msgstr "katalánština"
+
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "čínština (tradiční)"
+
+#~ msgid "Dutch"
+#~ msgstr "holandština"
+
+#~ msgid "Esperanto"
+#~ msgstr "esperanto"
+
+#~ msgid "French"
+#~ msgstr "francouzština"
+
+#~ msgid "German"
+#~ msgstr "němčina"
+
+#~ msgid "Greek"
+#~ msgstr "řečtina"
+
+#~ msgid "Hebrew"
+#~ msgstr "hebrejština"
+
+#~ msgid "Indonesian"
+#~ msgstr "indonéština"
+
+#~ msgid "Italian"
+#~ msgstr "italština"
+
+#~ msgid "Japanese"
+#~ msgstr "japonština"
+
+#~ msgid "Korean"
+#~ msgstr "korejština"
+
+#~ msgid "Latin"
+#~ msgstr "latina"
+
+#~ msgid "Norwegian"
+#~ msgstr "norština"
+
+#~ msgid "Polish"
+#~ msgstr "polština"
+
+#~ msgid "Portuguese (Brazilian)"
+#~ msgstr "portugalština (brazilská)"
+
+#~ msgid "Portuguese"
+#~ msgstr "portugalština"
+
+#~ msgid "Russian"
+#~ msgstr "ruština"
+
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "čínština (zjednodušená)"
+
+#~ msgid "Spanish"
+#~ msgstr "španělština"
+
+#~ msgid "Swedish"
+#~ msgstr "švédština"
+
+#~ msgid "Thai"
+#~ msgstr "thajština"
+
+#~ msgid "English[ Default language]"
+#~ msgstr "English"
+
+#~ msgid "Default language:"
+#~ msgstr "Výchozí jazyk:"
+
+#~ msgid "Please choose the default language for web pages."
+#~ msgstr "Vyberte prosím výchozí jazyk pro webové stránky."
+
+#~ msgid "Default theme:"
+#~ msgstr "Výchozí téma:"
+
+#~ msgid ""
+#~ "Please choose the default theme for web pages. This must be a valid name."
+#~ msgstr ""
+#~ "Vyberte prosím výchozí téma pro webové stránky. Musí to být platný název."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
+
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ využívá adresu „${noreply}“ k odesílání i příjmu velkého "
+#~ "množství pošty."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "Pokud s touto adresou nemáte jiné plány, doporučujeme veškerou příchozí "
+#~ "poštu přesměrovat do černé díry (/dev/null)."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Server pro přesměrování pošty:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Zadejte prosím jméno serveru, který bude hostit přesměrování pošty pro "
+#~ "uživatele @FORGENAME@."
+
+#~ msgid "@FORGENAME@ administrator login:"
+#~ msgstr "Přihlašovací jméno správce @FORGENAME@:"
+
+#~ msgid "Please choose the username for this account."
+#~ msgstr "Zadejte prosím přihlašovací jméno tohoto účtu."
+
+#~ msgid "Initial list of skills:"
+#~ msgstr "Počáteční seznam schopností:"
+
+#~ msgid ""
+#~ "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~ "from those present in the database. This list is the initial list of "
+#~ "skills that will enter the database."
+#~ msgstr ""
+#~ "@FORGENAME@ umožňuje uživatelům, aby si ze seznamu schopností definovali "
+#~ "své dovednosti. Seznam, který zde zadáte, bude uložen v databázi jako "
+#~ "výchozí seznam schopností."
+
+#~ msgid "Please enter a semicolon-separated list of skill names."
+#~ msgstr "Jednotlivé položky seznamu schopností oddělte středníky."

@@ -1,0 +1,225 @@
+Date: Fri, 10 Sep 2010 13:46:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FWikiFormRichPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FWikiFormRichPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Create generic and enhanced forms, with various options:
+* editbox[]            name=.. value=.. text=.. autocomplete=0|1
+* checkbox[]           name=.. value=0|1 checked text=..
+* radio[]              name=.. value=.. text=..
+* pulldown[]           name=.. value=.. selected=.. text=.. autocomplete=0|1
+* combobox[]           name=.. value=.. text=.. method=.. args=..
+* hidden[]             name=.. value=..
+* submit[]
+* action, submit buttontext, optional cancel button (bool)
+* method=get or post, Default: post.
+
+Valid arguments for pulldown and editbox: autocomplete=1, Default: 0
+
+If autocomplete=1, additional arguments method and args may be used.
+autocomplete together with dyn-methods (see below) should be used to handle larger lists (> 500).
+
+If no method is given, value will be used to fill in the valid values.
+
+{{{
+method="xmlrpc:name [optional args]"
+method="dynxmlrpc:url [optional args]"
+method="url:http://server/wiki/method"
+method="dynurl:http://server/wiki/method"
+method="array:jsvariable"
+method="plugin:pluginname [optional args]"
+}}}
+
+* The plugin must return a pagelist.
+* args are optional arguments, space seperated, for the method.
+* A combobox is a pulldown with autocomplete=1.
+* Values which are constants are evaluated.
+* The cancel button must be supported by the action (just some wikiadmin actions so far)
+* improve layout by: nobr=1
+* some allow values as list from <!plugin-list pluginname args !>
+
+== Samples ==
+
+{{{
+<<WikiFormRich action=dumpserial method=get
+               checkbox[] name=include value="all"
+               editbox[] name=directory value=DEFAULT_DUMP_DIR
+               editbox[] name=pages value=*
+               editbox[] name=exclude value=""
+>>
+}}}
+
+<<WikiFormRich action=dumpserial method=get
+               checkbox[] name=include value="all"
+               editbox[] name=directory value=DEFAULT_DUMP_DIR
+               editbox[] name=pages value=*
+               editbox[] name=exclude value=""
+>>
+
+----
+
+{{{
+<<WikiFormRich action=dumphtml method=get
+               editbox[] name=directory value=HTML_DUMP_DIR
+               editbox[] name=pages value="*"
+               editbox[] name=exclude value=""
+>>
+}}}
+
+<<WikiFormRich action=dumphtml method=get
+               editbox[] name=directory value=HTML_DUMP_DIR
+               editbox[] name=pages value="*"
+               editbox[] name=exclude value=""
+>>
+
+----
+
+{{{
+<<WikiFormRich action=loadfile method=get
+               editbox[]  name=source value=DEFAULT_WIKI_PGSRC
+               checkbox[] name=overwrite value=1
+               editbox[]  name=exclude value=""
+>>
+}}}
+
+<<WikiFormRich action=loadfile method=get
+               editbox[]  name=source value=DEFAULT_WIKI_PGSRC
+               checkbox[] name=overwrite value=1
+               editbox[]  name=exclude value=""
+>>
+
+----
+
+{{{
+<<WikiFormRich action=TitleSearch method=get class=wikiadmin nobr=1
+               editbox[] name=s text=""
+               submit[]
+               checkbox[] name=case_exact
+               checkbox[] name=regex
+>>
+}}}
+
+<<WikiFormRich action=TitleSearch method=get class=wikiadmin nobr=1
+               editbox[] name=s text=""
+               submit[]
+               checkbox[] name=case_exact
+               checkbox[] name=regex
+>>
+
+----
+
+{{{
+<<WikiFormRich action=FullTextSearch method=get class=wikiadmin nobr=1
+               editbox[] name=s text=""
+               submit[]
+               checkbox[] name=case_exact
+               checkbox[] name=regex
+>>
+}}}
+
+<<WikiFormRich action=FullTextSearch method=get class=wikiadmin nobr=1
+               editbox[] name=s text=""
+               submit[]
+               checkbox[] name=case_exact
+               checkbox[] name=regex
+>>
+
+----
+
+{{{
+<<WikiFormRich action=FuzzyPages method=get class=wikiadmin nobr=1
+               editbox[] name=s text=""
+               submit[]
+               checkbox[] name=case_exact
+>>
+}}}
+
+<<WikiFormRich action=FuzzyPages method=get class=wikiadmin nobr=1
+               editbox[] name=s text=""
+               submit[]
+               checkbox[] name=case_exact
+>>
+
+----
+
+{{{
+<<WikiFormRich action=AppendText buttontext="AddPlugin"
+               radio[] name=s value=<!plugin-list BackLinks page=WikiPlugin limit=5 !>
+>>
+}}}
+
+<<WikiFormRich action=AppendText buttontext="AddPlugin"
+               radio[] name=s value=<!plugin-list BackLinks page=WikiPlugin limit=5 !>
+>>
+
+----
+
+{{{
+<<WikiFormRich action=AppendText buttontext="AddPlugin"
+               combobox[] name=s text="" style="width:60px" value=<!plugin-list BackLinks page=WikiPlugin !>
+               submit[]
+>>
+}}}
+
+<<WikiFormRich action=AppendText buttontext="AddPlugin"
+               combobox[] name=s text="" style="width:60px" value=<!plugin-list BackLinks page=WikiPlugin !>
+               submit[]
+>>
+
+----
+
+{{{
+<<WikiFormRich action=AppendText buttontext="AddCategory"
+               pulldown[] name=s text="Categories: " value=<!plugin-list TitleSearch s=Category !>
+>>
+}}}
+
+<<WikiFormRich action=AppendText buttontext="AddCategory"
+               pulldown[] name=s text="Categories: " value=<!plugin-list TitleSearch s=Category !>
+>>
+
+----
+
+{{{
+<<WikiFormRich action=SemanticSearch buttontext="AddRelation"
+               combobox[] name=relation method="xmlrpc:listRelations"
+               submit[]
+               checkbox[] name=case_exact text="Case-exact?"
+>>
+}}}
+
+----
+
+{{{
+<<WikiFormRich action=AppendText buttontext="InsertTemplate"
+               combobox[] name=s text="Template: " method="plugin:titleSearch s=Template*"
+               submit[]
+>>
+}}}
+
+<<WikiFormRich action=AppendText buttontext="InsertTemplate"
+               combobox[] name=s text="Template: " method="plugin:titleSearch s=Template*"
+               submit[]
+>>
+
+----
+
+{{{
+<<WikiFormRich action=GoTo
+               editbox[] name=page text="GoTo: " method="dynxmlrpc:titleSearch s=H" style="width:100px" autocomplete=1
+               submit[]
+>>
+}}}
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,0 +1,3 @@
+ This plugin contains the extsubproj subsystem of FusionForge. It allows each
+ FusionForge project to have its own extsubproj, and gives some
+ control over it to the project's administrator.

@@ -1,0 +1,15 @@
+gforge (4.8+scmrefactor-1) unstable; urgency=low
+
+  * As part of the refactoring of the SCM plugins, and to avoid namespace
+    pollution in /var/lib/gforge/chroot with many directories, the
+    repositories are now stored under
+    /var/lib/gforge/chroot/scmrepos/$scm.  If you were previously using
+    the CVS and/or Subversion plugins, you need to take care of moving the
+    existing contents of /var/lib/gforge/chroot/cvsroot to
+    .../chroot/scmrepos/cvs/, similarly from
+    /var/lib/gforge/chroot/svnroot to .../chroot/scmrepos/svn/.  Take care
+    to update your backup scripts, internal documentation, symbolic links,
+    etc. accordingly.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 20 Aug 2009 09:50:25 +0200
+

@@ -1,0 +1,19 @@
+<?php // -*-php-*-
+// $Id: top.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+
+global $HIDE_TOOLBARS;
+if (!$HIDE_TOOLBARS) {
+?>
+<!-- The logo -->
+<div id="logo"><a class="wikilink" 
+    href="<?php echo WikiURL(HOME_PAGE)?>"
+    ><img src="<?php echo $WikiTheme->getImageURL('logo')?>" id="logo-img"
+      alt="<?php echo fmt(_("%s: %s"), WIKI_NAME, HOME_PAGE) ?>" /></a></div>
+<!-- The top navigation/search bar -->
+<div class="toolbar">
+  <?php echo Template('navbar') ?>
+  </div>
+<?php } ?>
+
+<!-- Page title -->
+<h1><?php echo $HEADER ?></h1>

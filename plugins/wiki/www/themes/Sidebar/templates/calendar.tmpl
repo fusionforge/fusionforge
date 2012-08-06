@@ -1,0 +1,16 @@
+<?php // -*-php-*-
+// $Id: calendar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<div id="calendar"></div>
+<?php echo JavaScript('
+function dateChanged(calendar) {
+   if (calendar.dateClicked) {
+      var y = calendar.date.getFullYear();
+      var m = calendar.date.getMonth() + 1;     // integer, 0..11
+      var d = calendar.date.getDate();      // integer, 1..31
+      m = m < 10 ? "0" + m : m;
+      d = d < 10 ? "0" + d : d;
+      window.location = "' . WikiUrl($WikiTheme->calendarBase(),0,1) . SUBPAGE_SEPARATOR . '" + y + "-" + m + "-" + d;
+    }
+};
+Calendar.setup({flat : "calendar", flatCallback : dateChanged, setDateStatusFunc : dateStatusFunc, weekNumbers : false})') ?>

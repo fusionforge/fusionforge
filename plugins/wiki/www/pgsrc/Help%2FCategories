@@ -1,0 +1,71 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FCategories 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FCategories;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+**Categories** are a way to group pages that are related to the same subject.
+They provide an easy way to browse the wiki.
+
+In Phpwiki, categories are not stored in a separate namespace like in Mediawiki for
+instance. A category is a page with a name that begins with "Category" and contains
+a call the the [[Help:BackLinksPlugin|BackLinks plugin]].
+
+== Creating a new category ==
+
+The simplest way to create a new category is to to go the
+[[:CategoryCategory|CategoryCategory]] page.
+
+Enter its name (starting with "Category") and hit "CreatePage" button.
+
+This will automatically insert the necessary plugins calls.
+
+You might want to add at the beginning of the page a paragraph
+explaining the purpose of the category.
+
+Suppose you want to create a category called **~CategoryFruit**.
+You might add:
+{{{
+This Category groups the different kinds of fruit.
+}}}
+
+By default, the new category is created as a subcategory of
+[[:CategoryCategory|CategoryCategory]] (the "root" category).
+You might want to change this (see below "Category hierarchies").
+
+== Putting a page in a category ==
+
+To put the article **banana** in ~CategoryFruit, you have to put at the end of the page:
+
+{{{
+----
+[[CategoryFruit]]
+}}}
+
+The ~CategoryFruit page will then display your text describing the
+purpose of the category, then the list of pages in the category.
+
+The can be done very easily by using the {{/themes/default/images/ed_category.png|[C]}}
+button of the edit toolbar when editing the page.
+
+== Category hierarchies ==
+
+The simplest way to use categories is to use "flat" categories. But you
+can also build a hierarchy of categories by putting categories themselves
+in categories.
+
+For example, you can put the {{{[[CategoryFruit]]}}} in {{{[[CategoryFood]]}}}
+instead of default {{{[[CategoryCategory]]}}}.
+
+== Tips and tricks ==
+
+* Page [[:CategoryCategory]] is the root category. All categories should be subcategories of this category (recursively).
+* If in a page you need to refer to a category, you should add a semi-colon: {{{[[:CategoryFruit]]}}}. This will create a link to the category //without// putting the page in the category (which would be the case if using {{{[[CategoryFruit]]}}}).
+* You can put a page in several categories if needed.
+
+----
+[[PhpWikiDocumentation]]

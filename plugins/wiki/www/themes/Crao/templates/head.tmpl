@@ -1,0 +1,111 @@
+<?php // -*-php-*-
+// $Id: head.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET?>" />
+<?php $ROBOTS_CONTENT = isset($ROBOTS_META) ? $ROBOTS_META : "noindex,nofollow"; ?>
+<meta name="robots" content="<?php echo $ROBOTS_CONTENT ?>" />
+<?php if (!empty($PAGE_DESCRIPTION)) { ?>
+<meta name="description" content="<?php echo $PAGE_DESCRIPTION?>" />
+<?php } ?>
+<?php if (!empty($PAGE_KEYWORDS)) { ?>
+<meta name="keywords" content="<?php echo $PAGE_KEYWORDS?>" />
+<?php } ?>
+<meta name="language" content="<?php echo DEFAULT_LANGUAGE?>" />
+<meta name="document-type" content="Public" />
+<meta name="document-rating" content="General" />
+<meta name="generator" content="PhpWiki" />
+<meta name="PHPWIKI_VERSION" content="<?php echo PHPWIKI_VERSION?>" />
+<base href="<?php echo PHPWIKI_BASE_URL?>" />
+<link rel="shortcut icon" href="<?php echo $WikiTheme->getImageURL('favicon.ico')?>" />
+<?php /* The next few lines are wrapped in an odd manner to allow gettext string extraction: cd locale;make */ ?>
+<link rel="home" title="<?php echo HOME_PAGE?>" href="<?php echo WikiURL(HOME_PAGE)?>" />
+<link rel="help" title="<?php echo 
+_("HowToUseWiki")?>" href="<?php echo WikiURL(
+_("HowToUseWiki"))?>" />
+<link rel="copyright" title="<?php echo COPYRIGHTPAGE_TITLE?>" href="<?php echo COPYRIGHTPAGE_URL?>" />
+<link rel="author" title="<?php echo AUTHORPAGE_TITLE?>" href="<?php echo AUTHORPAGE_URL?>" />
+<link rel="search" title="<?php echo 
+_("FindPage")?>" href="<?php echo WikiURL(
+_("FindPage"))?>" />
+<?php /**
+       * Provide alternate variations of the page content:
+       * 'viewsource' and 'browse'.
+       * Translated pages could go here too.
+       */
+      if (!empty($revision)) {
+          $args = $request->getargs();
+          $action = $args['action'];
+          if (!($action == "viewsource")) {
+            $alternatelinkTitle = fmt("%s: %s", _("View Source"), $page->getName());
+            $alternatelinkUrl = WikiURL($revision, array('action' => 'viewsource'));
+          }
+          if (!($action == "browse")) {
+            $alternatelinkTitle = $page->getName();
+            $alternatelinkUrl = WikiURL($revision, array('action' => 'browse'));
+          } ?>
+<link rel="alternate" title="<?php echo $alternatelinkTitle ?>" href="<?php echo $alternatelinkUrl ?>" />
+<?php }
+      /**
+       * Link tag for RSS auto-discovery.  See
+       * http://diveintomark.org/archives/2002/05/30.html#rss_autodiscovery
+       * http://www.oreillynet.com/cs/weblog/view/wlg/1475
+       */
+?>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo WikiURL(
+_("RecentChanges"), array('format' => 'rss'))?>" />
+<?php /**
+       * Add some user-specific links.
+       */ ?>
+<?php if (!$user->isSignedIn()) {
+      /* For users not signed in */ ?>
+<link rel="bookmark" title="<?php echo 
+_("SandBox")?>" href="<?php echo WikiURL(
+_("SandBox"))?>" />
+<link rel="bookmark" title="<?php echo 
+_("WikiWikiWeb")?>" href="<?php echo WikiURL(
+_("WikiWikiWeb"))?>" />
+<?php } ?>
+<link rel="alternate" type="application/x-wiki" title="Edit this page!" href="<?php echo WikiURL($page,array('action'=>'edit')) ?>" />
+<?php if ($user->isadmin()) {
+      /* Only for the Administrator */ ?>
+<link rel="bookmark" title="<?php echo 
+_("PhpWikiAdministration")?>" href="<?php echo WikiURL(
+_("PhpWikiAdministration"))?>" />
+<?php } ?>
+<?php if ($user->isSignedIn()) {
+      /* For signed-in users */ ?>
+<link rel="bookmark" title="<?php echo 
+_("UserPreferences")?>" href="<?php echo WikiURL(
+_("UserPreferences"))?>" />
+<?php /* User's calendar page
+       */
+      $UserCalPageTitle = $user->getId() . SUBPAGE_SEPARATOR ._("Calendar");
+      $UserCalPageUrl = WikiURL($UserCalPageTitle);
+      ?>
+<link rel="bookmark" title="<?php echo $UserCalPageTitle ?>" href="<?php echo $UserCalPageUrl ?>" />
+<?php /* Today's calendar page for the user if it exists
+       */
+      $UserCalPageTodayTitle = $UserCalPageTitle . SUBPAGE_SEPARATOR . strftime("%Y-%m-%d", time()); //FIXME
+      $dbi = $request->getDbh();
+      if ($dbi->isWikiPage($UserCalPageTodayTitle)) {
+          $UserCalPageTodayUrl = WikiURL($UserCalPageTodayTitle);
+          ?>
+<link rel="bookmark" title="<?php echo $UserCalPageTodayTitle ?>" href="<?php echo $UserCalPageTodayUrl ?>" />
+<?php } ?>
+<?php } //end of links for signed-in user ?>
+<?php echo $WikiTheme->getCSS() ?>
+<?php
+  // avoid redundant bookmark title for custom home page
+  if ($page->getName() == WIKI_NAME && HOME_PAGE == WIKI_NAME)
+      $pagetitle = "";
+  else
+      $pagetitle = " - ". AsString($TITLE);
+?>
+<title><?php echo WIKI_NAME.$pagetitle?></title>
+<?php if (ENABLE_OPEN_GRAPH) { ?>
+<meta property="og:title" content="<?php echo strip_tags($TITLE) ?>"/>
+<meta property="og:site_name" content="<?php echo WIKI_NAME ?>"/>
+<?php } ?>
+<?php echo $WikiTheme->getMoreHeaders() ?>
+</head>

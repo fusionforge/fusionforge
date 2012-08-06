@@ -1,0 +1,48 @@
+#
+# FusionForge
+# http://fusionforge.org
+#
+#
+
+The FusionForge codebase was developed for many years in the frame of
+the GForge project (until 2009), then in the FusionForge project since
+2009.
+
+It is copyrighted by individual authors mentioned in copyright notices
+of each files.
+
+----------------------------------------------------------------------------
+The new FusionForge Team
+----------------------------------------------------------------------------
+
+TODO: name all contributors to FusionForge. The list below was
+mostly extracted from the SVN stats.
+
+Patrick Apel
+Christian Bayle
+Mélanie Le Bail
+Olivier Berger
+Gonéri Le Bouder
+Grégory Cuellar
+Francisco Gimeno
+Thorsten Glaser
+Julien Heyman
+Ognyan Kulev
+Pierre Lacoste
+Olaf Lenz
+Roland Mas
+Olivier Meunier
+Alexandre Neymann
+Mathieu Peltier
+Alain Peyrat
+Philip Schwartz
+Guillaume Smet
+Reinhard Spisser
+Franck Villaume
+
+
+See also AUTHORS.gforge and AUTHORS.sourceforge for prior contributors.
+
+# Local Variables:
+# coding: utf-8
+# End:

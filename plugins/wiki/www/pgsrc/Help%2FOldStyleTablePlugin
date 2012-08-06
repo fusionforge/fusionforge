@@ -1,0 +1,85 @@
+Date: Thu, 16 Dec 2010 12:53:03 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FOldStyleTablePlugin 7777 2010-12-16 11:53:55Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FOldStyleTablePlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~OldStyleTable** [[Help:WikiPlugin|plugin]] can be used to include tables within a wiki
+page using the old-style markup syntax for tables.
+
+This plugin is included for legacy only. We recommand to
+use [[Help:Wikicreole#Tables|Wikicreole tables]]
+or [[Help:MediawikiTablePlugin|Mediawiki tables]] instead.
+
+== Usage ==
+
+{{{
+<<OldStyleTable caption="OldStyleTable" border||=2
+||^  *Name*                |v *Cost*   |v *Notes*
+| *First*     | *Last*
+|> Jeff       |< Dairiki   |^  Cheap   |< Not worth it
+|> Marco      |< Polo      | Cheaper   |< Not available
+>>
+}}}
+
+will get you
+
+<<OldStyleTable caption="OldStyleTable" border||=2
+||^  *Name*                |v *Cost*   |v *Notes*
+| *First*     | *Last*
+|> Jeff       |< Dairiki   |^  Cheap   |< Not worth it
+|> Marco      |< Polo      | Cheaper   |< Not available
+>>
+
+Note that multiple **|**s lead to spanned columns, and **v**s can be
+used to span rows.  A **>** generates a right justified column, **<**
+a left justified column and **^** a centered column (which is the
+default.)
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **caption**
+| Any string
+| Empty string
+|-
+| **border**
+| Any number
+| 1
+|-
+| **cellspacing**
+| Any number
+| 1
+|-
+| **cellpadding**
+| Any number
+| 1
+|-
+| **summary**
+| Any string
+| Empty string
+|}
+
+== Syntax ==
+
+Note that within each table cell, //new-style// markup is used.  You can
+only use inline markup --- no block level markup is allowed within
+table cells.
+
+(Using old-style markup wouldn't make much sense, since one can't
+include multi-line plugin invocations using the old-style markup
+rules.)
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

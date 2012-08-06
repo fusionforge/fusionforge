@@ -1,0 +1,83 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FUserRatingsPlugin 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FUserRatingsPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~UserRatings** [[Help:WikiPlugin|plugin]] lists the user's ratings.
+
+== Usage ==
+
+{{{
+<<UserRatings arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **dimension**
+|
+| 0
+|-
+| **userids**
+| Array of userids to display ratings for; null/empty for active user only
+| null
+|-
+| **pageids**
+| Array of pageids to display ratings for; null for all of current active user's ratings
+| null
+|-
+| **category**
+| a category to display ratings for; null for no category; has higher precedence than pageids
+| null
+|-
+| **pagename**
+|
+|
+|-
+| **exclude**
+| Pages to exclude (allows multiple pagenames exclude=HomePage,RecentChanges)
+|
+|-
+| **limit**
+| limit of <=0 is show-all
+| 0
+|-
+| **noheader**
+|
+| 0
+|-
+| **userPage**
+|
+| false
+|-
+| **info**
+| columns to display (hits, pagename, author, ratingwidget...)
+| pagename
+|}
+
+== Example ==
+
+{{{
+<<UserRatings>>
+}}}
+
+== Author ==
+* Dan Frankowski
+
+== See Also ==
+* [[Help:RateItPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

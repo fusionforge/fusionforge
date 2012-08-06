@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "../../../dtd/docbookx.dtd" [
+	<!ENTITY % authors SYSTEM "../entities/authors.ent">
+	%authors;
+	<!ENTITY % xinclude SYSTEM "../entities/xinclude.ent">
+	%xinclude;
+	
+	<!ENTITY introduction "introduction/introduction.xml">
+	<!ENTITY getting_started "getting_started/getting_started.xml">
+	<!ENTITY user_functions "user_functions/index.xml">
+	<!ENTITY project_functions "project_functions/index.xml">
+	<!ENTITY sitewide_functions "sitewide_functions/index.xml">
+]>
+<article lang="en-US" id="user_guide">
+	<articleinfo>
+		<title>FusionForge User Guide</title>
+		<authorgroup>
+			&alain_peyrat;
+			&ken_mccullagh;
+			&guillaume_smet;
+			&reinhard_spisser;
+		</authorgroup>
+	</articleinfo>
+
+	<xi:include href="&introduction;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="&getting_started;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="&user_functions;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="&project_functions;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="&sitewide_functions;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+</article>

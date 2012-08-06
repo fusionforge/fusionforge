@@ -1,0 +1,6 @@
+etc/@OLDPACKAGE@/templates
+usr/share/@OLDPACKAGE@/bin
+var/lib/@OLDPACKAGE@/chroot
+var/lib/@OLDPACKAGE@/download
+var/lib/@OLDPACKAGE@/etc
+var/lib/@OLDPACKAGE@/ftp/incoming

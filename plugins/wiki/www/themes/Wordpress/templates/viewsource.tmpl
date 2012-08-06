@@ -1,0 +1,28 @@
+<?php // -*-php-*-
+// $Id: viewsource.tmpl 8155 2011-10-03 12:33:36Z vargenau $
+?>
+
+<div class="wikitext" id="viewform">
+
+<?php 
+if (empty($revision)) $revision = $page->getCurrentRevision(false);
+if ($page->get('locked') && !$user->isAdmin()) { ?>
+  <p class="warning_msg"><strong><?php echo _("Note:")?></strong>
+  <?php echo _("This page has been locked and cannot be edited.")?></p>
+<?php } ?>
+<?php if (! $revision->isCurrent()) { ?>
+  <p class="warning_msg"><?php echo _("You are viewing an old revision of this page.")?>
+  <?php echo Button('viewsource', _("View the current version."), $page)?></p>
+<?php } ?>
+<textarea class="wikiedit"
+          name="content"
+          rows="<?php echo $request->getPref('editHeight')?>"
+          cols="<?php echo $request->getPref('editWidth')?>"
+          readonly="readonly"
+><?php echo $PAGE_SOURCE ?></textarea>
+<hr />
+<a href="<?php echo WikiURL($page,array('action'=>_("PageHistory")))?>"
+   ><?php echo $WikiTheme->getLastModifiedMessage($revision) ?></a>
+<br />
+
+</div>

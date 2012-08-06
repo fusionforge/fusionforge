@@ -1,0 +1,22 @@
+Date: Fri,  4 Feb 2011 17:33:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: SeiteSpeichern 7937 2011-02-04 16:34:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=SeiteSpeichern;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Betrachte eine Wiki Seite im MIME Format oder lade sie als Backup herunter als einzelne Seite. _Ein komplettes Backup aller Seiten kann in der PhpWikiVerwaltung erzeugt werden._
+
+<<PageDump>>
+----
+Exakter Seitenname, der gespeichert werden soll:
+<?plugin-form PageDump?>
+
+TitelSuche:
+<?plugin-form TitleSearch?>
+
+----
+Siehe auch: [QuellTextAnsicht|phpwiki:?action=viewsource].

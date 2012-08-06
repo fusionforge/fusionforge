@@ -1,0 +1,5 @@
+edit cron
+
+0 * * * * root [ -x /usr/share/gforge/plugins/quota_management/cronjobs/quota_update.pl ] && /usr/share/gforge/plugins/quota_management/cronjobs/quota_update.pl > /dev/null 2>&1
+
+

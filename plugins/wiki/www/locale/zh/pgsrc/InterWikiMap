@@ -1,0 +1,13 @@
+Date: Fri, 10 Sep 2010 13:48:49 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: InterWikiMap 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=InterWikiMap;
+  pagetype=interwikimap;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+此 wiki 中,有被使用到的 InterWiki map 列在下面. 這個 map 是來自於下面 verbatim
+區塊裡的文字. (但這只在此頁面被鎖定的情況下才看得到).

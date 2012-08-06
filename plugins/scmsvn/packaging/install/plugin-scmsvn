@@ -1,0 +1,4 @@
+plugins/scmsvn/bin/*                usr/share/@OLDPACKAGE@/plugins/scmsvn/bin/
+plugins/scmsvn/common/*             usr/share/@OLDPACKAGE@/plugins/scmsvn/common/
+plugins/scmsvn/etc/plugins/scmsvn/* etc/@OLDPACKAGE@/plugins/scmsvn/
+plugins/scmsvn/etc/*.ini 	    etc/@PACKAGE@/config.ini.d/

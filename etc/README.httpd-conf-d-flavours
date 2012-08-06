@@ -1,0 +1,16 @@
+The following information may be helpful to developers.
+
+The different httpd.conf.d-*/ directories are *generated* out of
+contents of 'httpd.conf.d/'. At the moment, there are 3 flavours of
+these files ("fhs", "opt" and "usrlocal").
+
+The script src/utils/manage-apache-config.sh must be used to
+regenerate the files for these flavours.
+
+Please make modifications in the source files inside 'httpd.conf.d/'
+and regenerate.
+
+More details available in :
+http://lists.fusionforge.org/pipermail/fusionforge-general/2010-June/001074.html
+
+-- Olivier Berger

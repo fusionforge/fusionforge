@@ -1,0 +1,43 @@
+<?php // -*-php-*-
+// $Id: browse.tmpl 8204 2011-11-29 13:38:06Z vargenau $
+
+$curuserprefs = $user->getPreferences();
+?>
+
+<?php if ($page->exists() and $revision and $revision->hasDefaultContents()) { ?>
+  <p class="error"><?php echo _("Error:")?>
+  <?php echo _("This revision of the page does not exist.")?>
+  <?php echo Button('browse', _("View the current version."), $page)?>
+  </p>
+<?php } else { ?>
+<?php if ($revision and !$revision->isCurrent()) { ?>
+  <p class="warning_msg"><?php echo _("Note:")?>
+  <?php echo _("You are viewing an old revision of this page.")?>
+  <?php echo Button('browse', _("View the current version."), $page)?>
+  </p>
+<?php } ?>
+<?php if (!empty($redirected)) { ?>
+  <p><?php echo $redirected ?></p>
+<?php } ?>
+
+<?php if (WIKI_NAME == "help") { ?>
+<div class="browsebanner">
+<table>
+<tr>
+<td>This Help page is located in the Forge Help wiki. You are not in your project's wiki.</td>
+</tr>
+</table>
+</div>
+<?php } ?>
+
+<?php if ($curuserprefs->get('pageTrail')) { ?>
+<?plugin PageTrail ?>
+<?php } ?>
+
+<?php echo $CONTENT?>
+
+<?php } ?>
+
+<div id="footer"><?php // for top & bottom toolbars stylesheet ?>
+  <?php echo Template('browse-footer')?>
+</div>

@@ -1,0 +1,18 @@
+<?php // -*-php-*-
+// $Id: top.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<div id="header">
+<?php if ( $request->getArg('action') == 'browse' ) { ?>
+<div id="yoursiteheader">
+<!-- Insert Flash or Logo here -->
+<a href=""><?php echo WIKI_NAME ?></a>
+</div>
+<?php } ?>
+</div>
+<?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
+<div id="actionbar">
+<?php echo Template('actionbar') ?>
+</div>
+<div id="pagetrail"><?php echo _("Page Trail")?>: <?plugin PageTrail numberlinks=7 ?></div>
+<?php } ?>
+

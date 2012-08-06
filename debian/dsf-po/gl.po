@@ -1,0 +1,520 @@
+# Galician translation of @PACKAGE@'s debconf templates
+# This file is distributed under the same license as the @PACKAGE@ package.
+#
+# Jacobo Tarrio <jtarrio@debian.org>, 2007, 2008.
+# Jorge Barreiro <yortx.barry@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-29 18:26+0200\n"
+"PO-Revision-Date: 2012-06-23 12:29+0200\n"
+"Last-Translator: Jorge Barreiro <yortx.barry@gmail.com>\n"
+"Language-Team: Galician <proxecto@trasno.net>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#| msgid "@FORGENAME@ domain or subdomain name:"
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Nome de dominio ou subdominio de @FORGENAME@:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+#| msgid ""
+#| "Please enter the domain that will host the @FORGENAME@ installation. Some "
+#| "services (scm, lists, etc.) will be given their own subdomain in that "
+#| "domain."
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Introduza o dominio que hospedará a instalación de @FORGENAME@. Algúns "
+"servizos (scm, listas, etc.) terán o seu propio subdominio dentro dese "
+"dominio."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#| msgid "@FORGENAME@ system name:"
+msgid "@FORGENAME@ system name:"
+msgstr "Nome do sistema @FORGENAME@:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#| msgid ""
+#| "Please enter the name of the @FORGENAME@ system. It is used in various "
+#| "places throughout the system."
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Introduza o nome do sistema @FORGENAME@. Emprégase en varios lugares do "
+"sistema."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+#| msgid "@FORGENAME@ administrator password:"
+msgid "@FORGENAME@ administrator password:"
+msgstr "Contrasinal de administrador de @FORGENAME@:"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+#| msgid ""
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
+msgstr ""
+"A conta de administrador de @FORGENAME@ terá todos os privilexios no "
+"sistema. Empregarase para aprobar a creación de novos proxectos."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+#| msgid "Please choose the password for this account."
+msgid "Please choose the password for this forge account."
+msgstr "Escolla un contrasinal para esta conta."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Password confirmation:"
+msgstr "Confirmación do contrasinal:"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Please re-type the password for confirmation."
+msgstr "Volva introducir o contrasinal para confirmalo."
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "install the new version configured by @PACKAGE@"
+msgstr "instalar a nova versión configurada por @PACKAGE@"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "keep the local version currently installed"
+msgstr "manter a versión local instalada actualmente"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show the differences between the versions"
+msgstr "amosar as diferenzas entre as versións"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show a side-by-side difference between the versions"
+msgstr "mostrar as entre as versións cara a cara"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "start a new shell to examine the situation"
+msgstr "executar un intérprete de ordes para examinar a situación"
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid "What do you want to do about configuration file ${BASENAME}?"
+msgstr "Que quere facer co ficheiro de configuración ${BASENAME}?"
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid ""
+"The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
+"is also a configuration file of the postgresql package."
+msgstr ""
+"O ficheiro de configuración ${FILE} precisa ser modificado por @PACKAGE@, "
+"pero tamén é un ficheiro de configuración do paquete «postgresql»."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+#| msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgstr "Quere unha configuración de DNS simple para @FORGENAME@?"
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"You can use a simple DNS setup with wildcards to map all project web-hosts "
+"to a single IP address, and direct all the scm-hosts to a single SCM server, "
+"or a complex setup which allows many servers as project web servers or SCM "
+"servers."
+msgstr ""
+"Pode empregar unha configuración de DNS simple con comodíns para mapear "
+"tódalas webs dos proxectos a un só enderezo IP e dirixir tódolos nomes dos "
+"SCM a un só servidor de SCM, ou unha configuración complexa que lle permite "
+"ter moitos servidores como servidores web ou servidores SCM."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"Even if you use a simple DNS setup, you can still use separate machines as "
+"project servers; it just assumes that all the project web directories are on "
+"the same server with a single SCM server."
+msgstr ""
+"Aínda se ten unha configuración simple de DNS, pode ter varias máquinas para "
+"os servidores dos proxectos; só supón que tódolos directorios web dos "
+"proxectos están no mesmo servidor cun só servidor para SCM."
+
+#, fuzzy
+#~| msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgstr "Enderezo de email do administrador de @FORGENAME@:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~| "site. It will be used when problems occur."
+#~ msgid ""
+#~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~ "site. It will be used when problems occur."
+#~ msgstr ""
+#~ "Introduza o enderezo de email do administrador de @FORGENAME@ deste "
+#~ "sitio. Hase empregar se aparecen problemas."
+
+#~ msgid "Download server:"
+#~ msgstr "Servidor de descargas:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~| "packages."
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
+
+#, fuzzy
+#~| msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgstr "Non debería ser o mesmo que o servidor principal de @FORGENAME@."
+
+#~ msgid "Database server:"
+#~ msgstr "Servidor de bases de datos:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the IP address (or hostname) of the server that will host "
+#~| "the @FORGENAME@ database."
+#~ msgid ""
+#~ "Please enter the IP address (or hostname) of the server that will host "
+#~ "the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Introduza o enderezo IP (ou nome) do servidor que ha hospedar a base de "
+#~ "datos de @FORGENAME@."
+
+#~ msgid "Database name:"
+#~ msgstr "Nome da base de datos:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the name of the database that will host the @FORGENAME@ "
+#~| "database."
+#~ msgid ""
+#~ "Please enter the name of the database that will host the @FORGENAME@ "
+#~ "database."
+#~ msgstr ""
+#~ "Introduza o nome da base de datos que ha hospedar as contas shell de "
+#~ "@FORGENAME@"
+
+#~ msgid "Database administrator username:"
+#~ msgstr "Nome de usuario do administrador da base de datos:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the username of the database administrator for the server "
+#~| "that will host the @FORGENAME@ database."
+#~ msgid ""
+#~ "Please enter the username of the database administrator for the server "
+#~ "that will host the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Introduza o nome de usuario do administrador de bases de datos do "
+#~ "servidor que ha hospedar a base de datos de @FORGENAME@."
+
+#~ msgid "Password used for the database:"
+#~ msgstr "Contrasinal para a base de datos:"
+
+#~ msgid "Connections to the database system are authenticated by a password."
+#~ msgstr ""
+#~ "As conexións ao sistema de bases de datos van autenticadas cun "
+#~ "contrasinal."
+
+#~ msgid "Please choose the connection password."
+#~ msgstr "Escolla o contrasinal para a conexión."
+
+#~ msgid "IP address:"
+#~ msgstr "Enderezo IP:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~| "installation."
+#~ msgid ""
+#~ "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~ "installation."
+#~ msgstr ""
+#~ "Introduza o enderezo IP do servidor que ha hospedar a instalación de "
+#~ "@FORGENAME@."
+
+#~ msgid "This is needed for the configuration of Apache virtual hosting."
+#~ msgstr "Isto é preciso para configurar a hospedaxe virtual de Apache."
+
+#~ msgid "Shell server:"
+#~ msgstr "Servidor de shell:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~| "shell accounts."
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar as contas shell de "
+#~ "@FORGENAME@."
+
+#~ msgid "Mailing lists server:"
+#~ msgstr "Servidor de listas de correo:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "mailing lists."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "mailing lists."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar as listas de correo de "
+#~ "@FORGENAME@."
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "shell accounts."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar as contas shell de "
+#~ "@FORGENAME@."
+
+#~ msgid "News administrative group ID:"
+#~ msgstr "ID do grupo de administradores de novas:"
+
+#, fuzzy
+#~| msgid ""
+#~| "The members of the news admin group can approve news for the @FORGENAME@ "
+#~| "main page. This group's ID must not be 1. This should be changed only if "
+#~| "you upgrade from a previous version and want to keep the data."
+#~ msgid ""
+#~ "The members of the news admin group can approve news for the @FORGENAME@ "
+#~ "main page. This group's ID must not be 1. This should be changed only if "
+#~ "you upgrade from a previous version and want to keep the data."
+#~ msgstr ""
+#~ "Os membros do grupo de administradores de novas poden aprobar as novas da "
+#~ "páxina principal de @FORGENAME@. Este ID de grupo non debe ser 1. Só se "
+#~ "debería cambiar se está a se actualizar dunha versión anterior e quere "
+#~ "conservar os datos."
+
+#~ msgid "Statistics administrative group ID:"
+#~ msgstr "ID do grupo de administradores de estatísticas:"
+
+#~ msgid "Peer rating administrative group ID:"
+#~ msgstr "ID do grupo de administradores de calificacións de iguais:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "packages."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
+
+#~ msgid "English"
+#~ msgstr "Inglés"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Búlgaro"
+
+#~ msgid "Catalan"
+#~ msgstr "Catalán"
+
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "Chinés (Tradicional)"
+
+#~ msgid "Dutch"
+#~ msgstr "Holandés"
+
+#~ msgid "Esperanto"
+#~ msgstr "Esperanto"
+
+#~ msgid "French"
+#~ msgstr "Francés"
+
+#~ msgid "German"
+#~ msgstr "Alemán"
+
+#~ msgid "Greek"
+#~ msgstr "Grego"
+
+#~ msgid "Hebrew"
+#~ msgstr "Hebreo"
+
+#~ msgid "Indonesian"
+#~ msgstr "Indonesio"
+
+#~ msgid "Italian"
+#~ msgstr "Italiano"
+
+#~ msgid "Japanese"
+#~ msgstr "Xaponés"
+
+#~ msgid "Korean"
+#~ msgstr "Coreano"
+
+#~ msgid "Latin"
+#~ msgstr "Latín"
+
+#~ msgid "Norwegian"
+#~ msgstr "Noruegués"
+
+#~ msgid "Polish"
+#~ msgstr "Polaco"
+
+#~ msgid "Portuguese (Brazilian)"
+#~ msgstr "Portugués (Brasil)"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugués"
+
+#~ msgid "Russian"
+#~ msgstr "Ruso"
+
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "Chinés (Simplificado)"
+
+#~ msgid "Spanish"
+#~ msgstr "Español"
+
+#~ msgid "Swedish"
+#~ msgstr "Sueco"
+
+#~ msgid "Thai"
+#~ msgstr "Thai"
+
+#~ msgid "English[ Default language]"
+#~ msgstr "Inglés"
+
+#~ msgid "Default language:"
+#~ msgstr "Idioma por defecto:"
+
+#~ msgid "Please choose the default language for web pages."
+#~ msgstr "Escolla o idioma por defecto para as páxinas web."
+
+#~ msgid "Default theme:"
+#~ msgstr "Tema por defecto:"
+
+#~ msgid ""
+#~ "Please choose the default theme for web pages. This must be a valid name."
+#~ msgstr ""
+#~ "Escolla o tema por defecto para as páxinas web. Debe ser un nome válido."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "¿Quere que se descarten as mensaxes enviadas a ${noreply}?"
+
+#, fuzzy
+#~| msgid ""
+#~| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~| "\"${noreply}\" address."
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ envía e recibe moito email desde e para o enderezo "
+#~ "\"${noreply}\"."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "O email dirixido a ese enderezo debería ser enviado a un burato negro (/"
+#~ "dev/null), a menos que empregue ese enderezo para outra cousa."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Redirector de correo dos usuarios:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Please enter the host name of the server that will host the @FORGENAME@ "
+#~| "user mail redirector."
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Introduza o nome do servidor que ha hospedar o redirector do correo dos "
+#~ "usuarios de @FORGENAME@."
+
+#, fuzzy
+#~| msgid "@FORGENAME@ administrator login:"
+#~ msgid "@FORGENAME@ administrator login:"
+#~ msgstr "Nome do usuario administrador de @FORGENAME@:"
+
+#~ msgid "Please choose the username for this account."
+#~ msgstr "Escolla o nome de usuario para esta conta."
+
+#~ msgid "Initial list of skills:"
+#~ msgstr "Lista inicial de coñecementos:"
+
+#, fuzzy
+#~| msgid ""
+#~| "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~| "from those present in the database. This list is the initial list of "
+#~| "skills that will enter the database."
+#~ msgid ""
+#~ "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~ "from those present in the database. This list is the initial list of "
+#~ "skills that will enter the database."
+#~ msgstr ""
+#~ "@FORGENAME@ permítelle aos usuarios facer unha lista cos seus "
+#~ "coñecementos, que poden escoller entre os que figuran na base de datos. "
+#~ "Esta lista é a lista inicial de coñecementos que han entrar na base de "
+#~ "datos."
+
+#~ msgid "Please enter a semicolon-separated list of skill names."
+#~ msgstr ""
+#~ "Introduza unha lista de nomes de coñecementos separados por signos de "
+#~ "punto e coma."
+
+#~ msgid "admin"
+#~ msgstr "admin"

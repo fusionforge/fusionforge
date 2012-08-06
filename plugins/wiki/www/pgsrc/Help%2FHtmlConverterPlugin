@@ -1,0 +1,39 @@
+Date: Thu,  9 Dec 2010 17:30:39 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FHtmlConverterPlugin 7764 2010-12-09 16:36:20Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FHtmlConverterPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~HtmlConverter** [[Help:WikiPlugin|plugin]] will convert HTML tags as far to Wiki markup as possible and eliminate all other HTML markup, so the output can be copied and pasted into a wiki page.
+
+== Usage ==
+{{{
+<<HtmlConverter>>
+}}}
+
+== Arguments ==
+
+None
+
+== Example ==
+
+{{{
+<<HtmlConverter>>
+}}}
+
+<<HtmlConverter>>
+
+== Authors ==
+* [[mailto:hendrik.scheider@wincor-nixdorf.com|Hendrik Scheider]]
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,0 +1,83 @@
+<?php // -*-php-*-
+// $Id: editpage.tmpl 7720 2010-10-22 18:38:33Z vargenau $
+?>
+<?php if (isset($PREVIEW_CONTENT)) { ?>
+  <p><strong><?php echo _("Preview only!  Changes not saved.")?></strong>
+     <?php echo fmt("Please continue editing.  (You'll find your %s at the bottom of the page.)",
+          /* HTML::a(array("href" => "#editarea"), */ _("edit area") /*)  */) ?>
+  </p>
+  <?php echo $PREVIEW_CONTENT ?>
+<?php } ?>
+
+<?php echo $PAGE_LOCKED_MESSAGE ?>
+<?php echo $CONCURRENT_UPDATE_MESSAGE ?>
+
+<?php if (! $IS_CURRENT) { ?>
+  <p class="warning_msg"><strong><?php echo _("Warning: You are editing an old revision.")?>
+        <?php echo _("Saving this page will overwrite the current version.")?></strong></p>
+<?php } ?>
+<?php /*
+ * FIXME: Hack!
+ * The funky URL used for the form action parameter is bogus.
+ * This is needed, otherwise the redirect to the real browser
+ * page won't work with some browsers. (NS4 and Mozilla 0.97 won't accept
+ * a redirect from a page to itself.)
+ */ ?>
+<form method="post" id="editpage" name="editpage"
+      action="<?php echo $request->getPostURL() ?>"
+      accept-charset="<?php echo CHARSET?>">
+  <?php if (!empty($_GET['start_debug'])) echo '<input type="hidden" name="start_debug" value="1" >'; ?>
+  <?php /* To clear beyond a larger logo, such as in the Hawaiian theme */ ?>
+  <br class="clear-floats" />
+  <table width="100%">
+    <tr><td><?php echo $EDIT_TOOLBAR ?></td>
+        <td align="right"><div id="editarea-size">
+    <?php echo _("Size").':'?>
+    <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?>
+    <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>
+    <noscript><?php echo Button("submit:", _("Adjust"), 'wikiaction')?></noscript>
+  </div></td></tr></table>
+  <a id="editarea"></a><?php echo $EDIT_TEXTAREA?>
+<div class="toolbar" style="text-align: center;">
+  <label for="edit-summary"><?php echo _("Summary").':'?></label> <?php echo $SUMMARY_INPUT?>
+</div>
+<table summary="Toolbar: Page editing options." class="toolbar" width="100%"
+       cellpadding="0" cellspacing="0" border="0">
+<tr valign="middle">
+  <td>
+    <?php echo $MINOR_EDIT_CB ?> <label for="edit-minor_edit"><?php echo _("This is a minor change.")?></label><br />
+  </td>
+  <td align="center">
+    <?php echo $PREVIEW_B ?>
+    <?php if ($SAVE_B)  { ?>
+      <?php echo $SEP?><?php echo $SAVE_B ?>
+    <?php } ?>
+    <?php echo $SEP?><?php echo $CHANGES_B ?>
+  </td>
+  <td>&nbsp; <?php echo $AUTHOR_MESSAGE?></td>
+</tr>
+<tr>
+  <td>
+    <?php if ($user->isAdmin()) { ?>
+    <?php echo $LOCKED_CB ?> <label for="edit-locked" title="<?php echo _("Make the page read-only?")?>"><?php echo _("Locked")?></label>
+    <?php if (ENABLE_PAGE_PUBLIC) { ?>
+    &nbsp;&nbsp;<?php echo $PUBLIC_CB ?> <label for="edit-public" title="<?php echo _("Make the page public?")?>"><?php echo _("Public")?></label>
+    <?php } ?>
+    <?php if (ENABLE_EXTERNAL_PAGES) { ?>
+    &nbsp;&nbsp;<?php echo $EXTERNAL_CB ?> <label for="edit-external" title="<?php echo _("Make the page external?")?>"><?php echo _("External")?></label>
+    <?php }} ?>
+  </td>
+</tr>
+</table>
+<?php echo $HIDDEN_INPUTS?>
+</form>
+
+<hr noshade="noshade" />
+
+<div class="wiki-edithelp">
+<?php if (WIKI_NAME == "help") { ?>
+<?plugin IncludePage page=_("Help/TextFormattingRules") section=_("Synopsis") quiet=1?>
+<?php } else { ?>
+<?plugin IncludePage page=_("TextFormattingRules") section=_("Synopsis") quiet=1?>
+<?php } ?>
+</div>

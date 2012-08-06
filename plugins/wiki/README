@@ -1,0 +1,70 @@
+This is a port of phpwiki 1.3.14-svn to be used as plugin in gforge.
+
+This plugin provides a full wiki for each projects with:
+  * A full integration.
+  * One wiki per project.
+  * A search integrated in the forge search.
+  * Page edits are displayed on the activaty tab.
+  * Wiki Preferences are across projects.
+
+Currently, only postgresql is supported.
+
+To use this plugin, you have to:
+
+1) Install tsearch2 to the fforge database (if not already installed).
+
+su - postgres -c "psql fforge" < /usr/share/pgsql/contrib/tsearch2.sql 
+su - postgres -c "psql fforge -c 'GRANT ALL on pg_ts_cfg TO gforge'"
+su - postgres -c "psql fforge -c 'GRANT ALL on pg_ts_cfgmap TO gforge'"
+su - postgres -c "psql fforge -c 'GRANT ALL on pg_ts_dict TO gforge'"
+su - postgres -c "psql fforge -c 'GRANT ALL on pg_ts_parser TO gforge'"
+
+2) Add a symbolic link from the gforge/www/wiki to the gforge/plugins/wiki/www
+
+example (for installs in /opt/gforge):
+# ln -s ../plugins/wiki/www /opt/gforge/www/wiki 
+
+3) Activate the plugin by the web (with init checked).
+
+4) Add in your apache file(s):
+
+========== BEGIN
+        <Location /wiki/g>
+                php_admin_flag register_long_arrays on 
+                ForceType application/x-httpd-php
+        </Location>
+        
+        <Location "/www">
+		        Options -ExecCGI -FollowSymLinks
+		        DirectoryIndex index.html index.htm
+		        php_admin_flag engine off
+		        php_admin_value open_basedir /opt/groups/
+        </Location>
+
+        RewriteEngine On
+        RewriteRule     ^/www/([^/]*)/(.*) /opt/groups/$1/www/$2 [L]
+========== END
+
+5) Add the following cronjob:
+
+12 * * * * root $PHP $GFORGE/plugins/wiki/cronjobs/create_groups.php /opt
+
+NOTES: 
+1) Personal wikis are no longer available but can be re-activated quite easily by
+ cloning configuration on g to u, changing the prefix and adding the same kind of
+ configuration at apache level.
+
+2) By default, phpWiki creates lots of pages with plugins and helps. The current 
+ implementation allows to create a full wiki (with all standard pages) or one big
+ and the others with minimal pages (see configuration file for more).
+
+PROBLEMS:
+* If you have PearDB problems and if you have a peardb package already installed, then
+you can try to remove it. By default, phpwiki will try to use the installed one and
+failback to the embedded one if none found.
+
+* You may also have problems with the tsearch configuration. phpWiki uses full text
+search to provide an improved search and you have to check that the configuration
+is supported by the installed locale on your system.
+Here is an example of command if your installed locale is fr_FR.UTF-8:
+SQL: UPDATE pg_ts_cfg set locale = 'fr_FR.UTF-8' WHERE ts_name = 'default';

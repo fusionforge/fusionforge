@@ -1,0 +1,6 @@
+#
+# Regular cron jobs for the lists-mailman package
+#
+
+# Mailing-list creation
+55 * * * * root [ -x /usr/share/@OLDPACKAGE@/bin/create-mailing-lists.pl ] && /usr/share/@OLDPACKAGE@/bin/create-mailing-lists.pl > /dev/null 2>&1

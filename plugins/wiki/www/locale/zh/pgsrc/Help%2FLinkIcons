@@ -1,0 +1,62 @@
+Date: Fri,  4 Feb 2011 16:58:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FLinkIcons 7932 2011-02-04 16:03:52Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FLinkIcons;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+LinkIcons 是一個 PhpWiki 可選的新特色. 當啟始以後, 圖示將被顯示在 URLs 的
+最前面以指示連結的型態.
+
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/http.png]
+  http link
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/url.png]
+  generic internet link
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/interwiki.png]
+  InterWiki link
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/https.png]
+  https link
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/mailto.png]
+  mailto link
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/ftp.png]
+  ftp link
+
+**注意**: 部份預設圖示使用了
+[PNG|http://www.libpng.org/pub/png/png-sitemap.htm]圖片格式的
+alpha channel 特色以便能夠平順的在任何有顏色或有背景頁面被畫出來.
+舊的瀏覽器可能無法顯示圖片.
+
+== Examples
+
+如果管理者有啟始這個特色的話,以下的範例將會只以上面的連結圖示顯示.
+
+=== InterWiki links
+
+* InterWiki link PhpWiki:InterWiki
+* A named InterWiki [read WhyWikiWorks at c2|Wiki:WhyWikiWorks].
+
+===URLs
+
+* Email address [PhpWiki-talk mailing list|mailto:phpwiki-talk@lists.sourceforge.net]
+* Normal http link [PhpWiki's Home Page|http://phpwiki.sourceforge.net/phpwiki/]
+* Secure http link [PhpWiki's Home Page|https://phpwiki.sourceforge.net/phpwiki/]
+* File transfer ftp://ftp.sourceforge.net/
+
+''A generic icon is shown for other less common link types.''
+
+* news://nntp.news.com
+* gopher://gopher.caltech.cmu.edu
+
+LinkIcons 將在 URL 協定是 PhpWiki 允許並能連結的時候才顯示. 除非管理者加上,
+否則以下的範例無法顯示任何圖示,而 PhpWiki 也不會自動提供雙擊的連結, 
+
+* bogus://oedipus.nostradamus.com
+* bolo://lgm.cheshire.org
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

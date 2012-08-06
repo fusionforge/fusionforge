@@ -1,0 +1,57 @@
+Date: Fri, 16 Dec 2011 12:51:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FFileInfoPlugin 8211 2011-12-16 11:54:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FFileInfoPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~FileInfo** [[Help:WikiPlugin|plugin]] displays the version, date, size,
+perms of an uploaded file.  Only files relative and below to the uploads path
+can be handled.
+
+For exe files the **version** argument might work to display the VERSIONINFO ressource string. (highly experimental).
+
+== Typical Usage ==
+
+{{{
+<<FileInfo file=uploads/setup.exe display=version,date>>
+<<FileInfo file=uploads/setup.exe display=name,version,date
+                                  format="%s (version: %s, date: %s)">>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **file**
+| Relative path from PHPWIKI_DIR.
+| //None// (required argument)
+|-
+| **display**
+| Comma-seperated string of version, size, phonysize, date, mtime, owner, name, path, dirname, link, mime-typ, magic.
+| //None// (required argument)
+|-
+| **format**
+| printf format string with %s only, all display modes from above vars return strings
+| (optional)
+|-
+| **quiet**
+| print no error if file not found
+| false
+|}
+
+== Examples ==
+
+This wiki was installed at <<FileInfo file=config/config.ini display=date>>.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

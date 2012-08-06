@@ -1,0 +1,36 @@
+GForge external search plugin
+
+GForge is a web-based Collaborative Development Environment offering 
+easy access to CVS, mailing lists, bug tracking, message
+boards/forums, task management, permanent file archival,
+and total web-based administration.
+
+All files contained in this archive are licensed as stated in the
+COPYING file.  Please check out the AUTHORS file to see who helped
+make this possible.
+
+Thanks for taking the time to download this code.  If you have any
+questions please feel free to visit http://fusionforge.org/
+
+1. Installation Instructions
+----------------------------
+
+You need the latest CVS to make it work (2004-12-13).
+
+mkdir -p <your gforge plugin directory>/externalsearch/
+cp -r gforge-plugin-externalsearch/* <your gforge plugin directory>/externalsearch/
+
+mkdir -p /etc/gforge/plugins/
+cp gforge-plugin-externalsearch/etc/plugins/externalsearch /etc/gforge/plugins/
+
+you have to register the plugin in GForge :
+# psql -U gforge gforge
+# INSERT INTO plugins (plugin_name, plugin_desc) VALUES('externalsearch', 'External search on your GForge site');
+
+2. Description
+--------------
+
+This plugin adds a new search engine to your GForge site. It allows your users to search your GForge site
+through external search engines which have indexed it.
+You can define search engines you want to use in the config file.
+

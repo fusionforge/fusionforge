@@ -1,0 +1,134 @@
+Date: Fri, 10 Sep 2010 13:48:42 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+Content-Type: application/x-phpwiki;
+  pagename=Hilfe%2FPhotoAlbumPlugin;
+  flags="";
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+== Zusammenfassung
+Zeigt eine Liste von Bilder aus einer Definitionsdatei mit optionaler Beschreibung als Album an. 
+
+== Benutzung 
+{{{
+<<PhotoAlbum
+         src=http://server/textfile
+         mode=[column|row]
+         align=[center|left|right]
+         desc=true
+         sort=false
+         height=100%
+         width=100%
+         weblocation=>false
+>>
+}}}
+
+== Argumente
+_Nur der ='src'= Parameter ist verpflichtend._
+
+*src*:
+  Url or local path to a CSV textfile which separates filename and 
+  description of each photo. Photos listed in the text file have to be in same
+  directory as the file. Descriptions are optional.
+  If the the local path points to a directory, is relative from PHPWIKI_DIR, 
+  and the main script is in PHPWIKI_DIR, weblocation must not be given, and 
+  all pictures from this directory are displayed.
+
+*url*: 
+  defines the the webpath to the srcdir directory (formerly called weblocation)
+
+*mode*:
+  Specifies how the images are arranged.
+
+  * "normal" - Normal table which shows photos full-size
+  * "thumbs" - WinXP thumbnail style
+  * "tiles"  - WinXP tiles style
+  * "list"   - WinXP list style
+  * "slide"  - slideshow mode, needs javascript on client
+
+*showdesc*:
+  "none"   - No descriptions next to photos %%%
+  "name"   - Only filename shown %%%
+  "desc"   - Only description (from textfile) shown %%%
+  "both"   - If no description found, then filename will be used %%%
+
+*link*: 
+  true or false
+  If true, each image will be hyperlinked to a page where the single 
+  photo will be shown full-size. Only works when mode != 'normal'
+
+*align*:
+  center|right|left. Default is ='center'=.
+
+*desc*:
+  Display any descriptions given in the text file. Default is true.
+
+*sort*:
+  Sort images by file name. By default the order in the text file is
+  followed.
+
+*bgcolor*:
+  Default: #eae8e8  cell bgcolor (lightgrey)
+
+*hlcolor*:
+  Default: #c0c0ff  highlight color (lightblue)
+
+*height*, *width*:
+  Height and width are calculated compared to original metrics
+  retrieved by [php-function:getimagesize] and can be absolute (50px) 
+  or a percentage (e.g. "50%").
+
+*attrib*:
+  attrib arg allows multiple attributes: attrib=sort,nowrap,alt
+  'sort' sorts alphabetically, 'nowrap' for cells, 'alt' to use
+  descs instead of filenames in image ALT-tags
+
+*cellwidth*:
+  cell (auto|equal|image|75|100%)
+
+  Width of cells in table. Either absolute value in pixels, HTML
+  style percentage, "auto" (no special action), "equal" (where
+  all columns are equally sized) or "image" (take height and
+  width of the photo in that cell).
+
+*tablewidth*: (Optional)
+  table (75|100%)
+
+*p*:    (Optional)
+  "displaythissinglephoto.jpg" only
+
+*h*: (Optional)
+  "highlightcolorofthisphoto.jpg" only
+
+== Beispiele
+=== Textdatei
+Möglicher Inhalt einer Definitionsdatei:
+
+{{{
+photo-01.jpg; Meine Freundin und Ich
+photo-02.jpg
+christmas.gif; Frohe Weihnachten!
+}}}
+
+=== Beispiel Alben
+Lokales Verzeichnis:
+<<PhotoAlbum
+         src="themes/Hawaiian/images/pictures/"
+>>
+oder via externe URL:
+{{{
+<<PhotoAlbum
+         src="http://phpwiki.sourceforge.net/demo/themes/Hawaiian/images/pictures/PhotoAlbum.csv"
+}}}
+>>
+
+[ /Diashow ]
+
+== Plugin Autoren
+* [Ted Vinke|mailto:teddy@jouwfeestje.com] Originaler Autor
+* [ReiniUrban|PhpWiki:ReiniUrban] Lokales Dateisystem
+* [ThomasHarding|PhpWiki:ThomasHarding] Diashow und thumbs
+
+----
+[[PhpWikiDokumentation]] [[KategorieWikiPlugin]]

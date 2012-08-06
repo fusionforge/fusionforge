@@ -1,0 +1,23 @@
+<?php // -*-php-*-
+// $Id: savepage.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<?php
+    $signatureURL = $WikiTheme->getImageURL('signature');
+?>
+<p><?php echo fmt("Thank you for editing %s.", WikiLink($page))?> 
+<?php echo _("Your careful attention to detail is much appreciated.")?></p>
+
+<?php if (!empty($WARNINGS)) { ?>
+  <?php echo $WARNINGS ?>
+<?php } ?>
+
+<?php if ($signatureURL) { ?>
+  <p><img src="<?php echo $signatureURL?>" id="signature" alt="signature" /></p>
+<?php } ?>
+
+<?php if (!empty($LOCK_CHANGED_MSG)) { ?>
+  <p><?php echo $LOCK_CHANGED_MSG?></p>
+<?php } ?>
+
+<hr />
+<?php echo Template('browse') ?>

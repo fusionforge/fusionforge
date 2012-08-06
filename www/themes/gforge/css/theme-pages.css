@@ -1,0 +1,229 @@
+/*
+ * Stylesheet for FusionForge default theme.
+ *
+ * Copyright 2009 Matthieu FAURE // Open-S: global clean-up
+ * Copyright 2010 (c) FusionForge Team
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * CONTENT: all page-related styles
+ * ========================================================
+ */
+
+/*
+ * PAGE: home page
+ * ========================================================
+ */
+
+/* =bd (main body)
+----------------------------------------------- */
+#bd td {
+	vertical-align: top;
+	padding: 5px;
+}
+
+#bd-col1 {
+	width: 65%;
+}
+
+#bd-col2 {
+	width: 35%;
+}
+
+#title-home-page {
+	text-align: center;
+}
+
+#Latest_News h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+#Latest_News em {
+    padding-left: 1em;
+}
+
+/* remove inherited background-image */
+#title_Features_Boxes {
+    display: none;
+}
+
+#Features_Boxes {
+	background-image: none;
+}
+
+#Features_Boxes #title_Associated_Forges {
+    margin-top: 0;
+}
+
+#Associated_Forges td {
+    padding-right: 1em;
+}
+
+#Associated_Forges .align-right {
+    text-align: right;
+}
+
+#Recently_Registered_Projects td {
+    padding: 0.2em;
+}
+
+#search_associated_forges {
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#search_associated_forges_submit {
+    margin-top: 6px;
+    padding-left: 5px;
+}
+
+/*
+ * PAGE: project home
+ * ========================================================
+ */
+#project-summary-and-devs {
+	margin-top: 0.5em;
+}
+
+#file-releases {
+    margin: 0 0.5em;
+}
+
+#latest-major-contributions {
+    margin: 1em 0.5em;
+}
+
+/*
+ * PAGE: frs
+ * ========================================================
+ */
+.frs-table-files {
+    width: 100%;
+    margin: 0 0 2.5em 0;
+}
+
+.frs-table-files th {
+    background: #e8dfd4;
+}
+
+.frs-table-files tr {
+    border-bottom: solid 1px #c9c9c9;
+}
+
+.frs-table-files th,
+.frs-table-files td {
+    vertical-align:middle;
+}
+
+.frs-table-files h3 {
+    margin:0;
+}
+
+#forge-frs .blue-box {
+	padding-top: 2em;
+	padding-bottom: 2em;
+}
+
+#forge-frs h2 {
+    padding-top: 1em;
+}
+
+#forge-frs h3 {
+    font-size: small;
+}
+
+#forge-frs .box-surround {
+    margin: 0 0.5em 0.5em 2em;
+}
+
+#forge-frs .box-content {
+	padding-left: 2em;
+}
+
+#forge-frs .listTable {
+    margin:0;
+}
+
+#forge-frs .listTable td {
+	width: 12%;
+}
+
+/*
+ * PAGE: user_home (eg: http://fusionforge/user/<username>)
+ * ========================================================
+ */
+#user-profile-homepage {
+
+}
+
+/*
+ * PAGE: docman (eg: http://fusionforge/docman/?group_id=<id>)
+ *
+ */
+.docman_h3 {
+}
+
+.docman_h4 {
+    padding: 0px;
+    margin: 2px;
+    font-style: italic;
+}
+
+.docman_div_include {
+    border-style: solid;
+    border-color: #C2C7D1;
+    border-width: 1px;
+    padding: 2px;
+    margin-bottom: 5px;
+}
+
+.docmanDivIncluded {
+    font-size: 0.95em;
+}
+
+.docmanSubmitDiv input {
+    margin: 5px;
+}
+
+.docmanDiv {
+    padding-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.docmanDiv table {
+    border-style: solid;
+    border-color: #C2C7D1;
+    border-width: 1px;
+    border-collapse: collapse;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.docmanDiv td, .docmanDiv th {
+    border-style: solid;
+    border-color: #C2C7D1;
+    border-width: 1px;
+    border-collapse: collapse;
+    padding: 3px;
+}
+
+.docman_editfile_nodisplay {
+	display: none;
+}

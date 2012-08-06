@@ -1,0 +1,16 @@
+Date: Fri, 10 Sep 2010 13:47:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: CategoryWiki%20templates 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=CategoryWiki%20templates;
+  flags=EXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~CategoryWiki templates** groups template pages.
+
+<<BackLinks info||=pagename,mtime,hits,author sortby||=pagename >>
+
+----
+[[CategoryCategory]]

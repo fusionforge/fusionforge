@@ -1,0 +1,19 @@
+Date: Tue, 25 Jan 2011 21:26:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: D%C3%A9poserUnFichier 7896 2011-01-25 20:27:58Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=D%C3%A9poserUnFichier;
+  flags="";
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+**Télécharger un fichier qui sera accessible avec la syntaxe:**
+{{{
+Upload:num_rev/nom_fichier
+}}}
+----
+<<UpLoad>>
+
+----
+[[CatégoriePageDAction]]

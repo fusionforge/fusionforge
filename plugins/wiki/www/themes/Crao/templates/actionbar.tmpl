@@ -1,0 +1,43 @@
+<?php // -*-php-*-
+// $Id: actionbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+  if (!$page->get('locked') || $user->isAdmin() and $revision)
+      $EditB = Button("edit",
+                      $revision->isCurrent() ? _("Edit") : _("Edit Old Revision"));
+  else
+      $EditB = Button("viewsource", _("View Source"));
+  if (empty($revision)) $revision = $page->getCurrentRevision(false);
+//MSIE needs sticky.js
+?>
+<?php if (isBrowserIE()) { ?>
+<div class="ie-actionbuttons">
+<?php } else { ?>
+<div id="actionbuttons">
+<?php } ?>
+<?php echo $EditB ?>
+<?php if ($user->isAdmin() or mayAccessPage('change',$page->getName())) { ?>
+<?php echo $SEP?><?php echo Button($page->get('locked') ? 'unlock' : 'lock') ?>
+<?php if (ENABLE_PAGEPERM) { ?>
+<?php echo $SEP?><?php echo Button('chown') ?>
+<?php echo $SEP?><?php echo Button('setacl') ?>
+<?php }} ?>
+<?php if ($user->isAdmin() or mayAccessPage('remove',$page->getName())) { ?>
+<?php echo $SEP?><?php echo Button('remove') ?>
+<?php } ?>
+<?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?>
+<?php echo $SEP?><?php echo Button("diff") ?> 
+<?php echo $SEP?><?php echo Button("PageInfo", _("PageInfo")) ?>
+<?php if ((DEBUG and $request->getArg('action') == 'browse') || $user->isAdmin()) { ?> 
+<!-- Buttons really only for debugging -->
+<?php echo $SEP?><?php echo Button("DebugInfo", _("DebugInfo")) ?>
+<?php echo $SEP?><?php echo Button("PageDump", _("PageDump")) ?>
+<?php $purgeb = Button(array('nocache' => 'purge'),
+                       _("PurgeHtmlCache"), $page->getName());
+      $purgeb->addTooltip(_("Purge HTML cache for this page. Regenerate from WikiMarkup when next accessed."));
+?>
+<?php echo $SEP?><?php echo $purgeb ?>
+    <!-- End debugging buttons -->
+<?php } ?>
+<?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
+    <?php echo $SEP?><?php echo Button("pdf") ?>
+<?php } ?>
+</div>

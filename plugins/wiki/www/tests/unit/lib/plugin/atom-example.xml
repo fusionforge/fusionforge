@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:georss="http://www.georss.org/georss" >
+    <link href="http://www.phpwiki.org/fakeurl" rel="self" type="application/atom+xml" />
+    <title>This is a fake feed</title>
+    <updated>2010-05-15T01:00:00Z</updated>
+    <id>http://www.phpwiki.org/fakeurl</id>
+    <subtitle>Cool feed</subtitle>
+    <author>
+        <name>Sébastien Le Callonnec</name>
+        <email>slc_ie@yahoo.ie</email>
+    </author>
+
+    <entry>
+      <title>Foobar Éire</title>
+      <link href="http://maps.google.com/maps?f=q&amp;sll=53.125728,-6.068907&amp;ie=UTF8"/>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">Millenium Spire, Dublin
+          <div class="geo">Geo coordinates: 
+            <abbr class="latitude" title="53.349441">53.349441</abbr>
+            <abbr class="longitude" title="-6.260282">-6.260282</abbr>
+          </div>
+        </div>
+      </content>
+      <updated>2010-05-15T01:00:00Z</updated>
+      <published>2010-05-15T01:00:00Z</published>
+      <georss:box>53.349441 -6.26234 53.35078 -6.260282</georss:box>
+      <id>tag:www.phpwiki.org,2010-05-15:/fakeurl/20100515223621</id>
+    </entry>
+    <entry>
+      <title>Foobar Éire 2</title>
+      <link href="http://maps.google.com/maps?f=q&amp;sll=53.125728,-6.068907&amp;ie=UTF8"/>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">Again Millenium Spire, Dublin
+          <div class="geo">Geo coordinates: 
+            <abbr class="latitude" title="53.349441">53.349441</abbr>
+            <abbr class="longitude" title="-6.260282">-6.260282</abbr>
+          </div>
+        </div>
+      </content>
+      <updated>2010-05-15T01:00:00Z</updated>
+      <published>2010-05-15T01:00:00Z</published>
+      <georss:box>53.349441 -6.26234 53.35078 -6.260282</georss:box>
+      <id>tag:www.phpwiki.org,2010-05-15:/fakeurl/20100515223622</id>
+    </entry>
+    <entry>
+      <title>Foobar Éire 3</title>
+      <link href="http://maps.google.com/maps?f=q&amp;sll=53.125728,-6.068907&amp;ie=UTF8"/>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">Still Millenium Spire, Dublin
+          <div class="geo">Geo coordinates: 
+            <abbr class="latitude" title="53.349441">53.349441</abbr>
+            <abbr class="longitude" title="-6.260282">-6.260282</abbr>
+          </div>
+        </div>
+      </content>
+      <updated>2010-05-15T01:00:00Z</updated>
+      <published>2010-05-15T01:00:00Z</published>
+      <georss:box>53.349441 -6.26234 53.35078 -6.260282</georss:box>
+      <id>tag:www.phpwiki.org,2010-05-15:/fakeurl/20100515223623</id>
+    </entry>
+    <entry>
+      <title>Foobar Éire 4</title>
+      <link href="http://maps.google.com/maps?f=q&amp;sll=53.125728,-6.068907&amp;ie=UTF8"/>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">Yet Again Millenium Spire, Dublin
+          <div class="geo">Geo coordinates: 
+            <abbr class="latitude" title="53.349441">53.349441</abbr>
+            <abbr class="longitude" title="-6.260282">-6.260282</abbr>
+          </div>
+        </div>
+      </content>
+      <updated>2010-05-15T01:00:00Z</updated>
+      <published>2010-05-15T01:00:00Z</published>
+      <georss:box>53.349441 -6.26234 53.35078 -6.260282</georss:box>
+      <id>tag:www.phpwiki.org,2010-05-15:/fakeurl/20100515223624</id>
+    </entry>
+    <entry>
+      <title>Foobar Éire 5</title>
+      <link href="http://maps.google.com/maps?f=q&amp;sll=53.125728,-6.068907&amp;ie=UTF8"/>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">Yes, yes Millenium Spire, Dublin
+          <div class="geo">Geo coordinates: 
+            <abbr class="latitude" title="53.349441">53.349441</abbr>
+            <abbr class="longitude" title="-6.260282">-6.260282</abbr>
+          </div>
+        </div>
+      </content>
+      <updated>2010-05-15T01:00:00Z</updated>
+      <published>2010-05-15T01:00:00Z</published>
+      <georss:box>53.349441 -6.26234 53.35078 -6.260282</georss:box>
+      <id>tag:www.phpwiki.org,2010-05-15:/fakeurl/20100515223625</id>
+    </entry>
+</feed>

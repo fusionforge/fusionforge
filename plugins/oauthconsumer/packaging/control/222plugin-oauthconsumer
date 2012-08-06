@@ -1,0 +1,4 @@
+Package: @PACKAGE@-plugin-oauthconsumer
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, liboauth-php, ${misc:Depends}
+Description: collaborative development tool - OAuthConsumer plugin

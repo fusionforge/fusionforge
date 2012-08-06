@@ -1,0 +1,97 @@
+Date: Tue,  4 Jan 2011 11:59:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Ayuda%2FViejoReglasDeFormatoDeTexto 7862 2011-01-22 18:00:33Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Ayuda%2FViejoReglasDeFormatoDeTexto;
+  flags=PAGE_LOCKED;
+  charset=utf-8;
+  markup=1
+Content-Transfer-Encoding: binary
+
+! Sinopsis
+ViejoReglasDeFormatoDeTexto%%%
+**Énfasis:** '****' para ''itálicas'', _''''_ para **bold**, '****'_''''_ para ''**ambos**''.%%%
+**Listas:** * para listas de balazos, # para listas numeradas, ''**;** term **:** definición'' para listas de definiciones.%%%
+**Referencias:** !UnirPalabrasEnMayúsculas o usar corchetes para una [[enlace hacia una página] o URL [[!http://cool.wiki.int/].%%%
+**Anotaciones:** Use [[1],[[2],[[3],...%%%
+**Preveción enlazar:** Evite hacer enlaces con "!": !!NoHiperEnlaces. Enlaces con nombres como [[[[text | URL] (doble "["). %%%
+**Varios:** "!", "!!", "!!!" para hacer títulos, "%''''%%" hace un salto de línea, "-''''---" Hace una linea horizontal.
+
+! Parrafos
+
+* No indente los parrafos
+* Las palabras se acomodan automaticamente
+* Use lines en blanco como seperarodes de pararrafos
+* Cuatro o mas guiones hacen una linea horizontal
+* %%''''% hace una ruptura de linea (tambien en cabeceras y listas)
+
+
+! Listas
+
+* asterisco para primer nivel
+** asterico-asterico para segundo nivel, etc.
+* Use * para listas, # para listas numeradas (se pueden mezclar)
+* ;Term: Definición para definicíon de listas
+* Una linea por cada item
+* cualquier otro espacio en blanco señala texto preformateado, acmbia el tipo de letra.
+
+! Cabeceras
+
+* '!' al principio hace una pequeña cabecera
+* '!!' al principio hace una cabecera mediana
+* '!!!' al principio hace una cabecera grande
+
+! Tipos de Letra
+
+* Indente con uno o mas espacios para usar tipo de letra monoespaciado:
+
+ Esto es monoespaciado
+Esto no
+
+! Parrafos indentados
+''(Citas)''
+
+* ;: -- a menudo usado (con énfasis) para citas.
+
+
+! Enfasis
+
+* Use dobles comillas simples ('') para énfasis (normalmente cursiva)
+* Use doble subrayado (**) para un énfasis fuerte (normalmente negrita)
+* Mezclelos y seran: ''**negrita cursiva**''
+* ''Enfasis'' puede ser usado ''multiples'' veces en una linea, pero no puede ir a traves de mas de una linea:
+
+''esto
+no funcionará''
+
+! Referencias
+
+* Los enlaces a otras páginas dentro de Wiki son realizadas poniendo el nombre entre corchetes: [esto es un vinculo de página] o UsandoPalabarasWiki (preferido)
+* Los enlaces a páginas externas son realizados como este: [http://www.wcsb.org/]
+* Puede nombrar los enlaces a páginas externas poniendo un nombre, una barra (|) y el enlace: [página web de Steve | http://wcsb.org/~swain/]  
+* Puede suprimir enlace a viejas referencias, precediendo la palabra con un '!', e.j. !NotLinkedAsWikiName
+* You can create footnotes by using [[1], [[2], [[3], ... like this here [1]. See footnote for counterpart.  (If the [[ is in the first column, it is a footnote ''definition'' rather than a footnote ''reference'' [1].)
+* También, el sistema antiguo de enlazar los URL's sigue siendo soportado: preceda los URLs con "http:", "ftp:" o "mailto:" para crear enlaces automáticamante como en: http://c2.com/
+* Las URLs que finalizan en .png, o .jpg son visualizadas si están entre corchetes: [http://phpwiki.sourceforge.net/phpwiki/images/wikibase.png]
+
+! Tables
+
+* Simple tables are available.  A table row is introduced by a **|** in the first column.  It is best described by example:
+      ||  _''''_Name_''''_               |v _''''_Cost_''''_   |v _''''_Notes_''''_
+      | _''''_First_''''_   | _''''_Last_''''_
+      |> Jeff       |< Dairiki   |^  Cheap     |< Not worth it
+      |> Marco      |< Polo      | Cheaper     |< Not available
+;: will generate
+||  **Name**               |v **Cost**   |v **Notes**
+| **First**   | **Last**
+|> Jeff       |< Dairiki   |^  Cheap     |< Not worth it
+|> Marco      |< Polo      | Cheaper     |< Not available
+
+;: Note that multiple **|**'s lead to spanned columns, and **v**'s can be used to span rows.  A **>** generates a right justified column, **<** a left justified column and **^** a centered column (which is the default.)
+
+! Lenguaje HTML
+
+* No se preocupe de el
+* < y > son si mismos
+* Los caracters & no funcionarán
+* Si realmente desea usar HTML, su administrador del sistema debe activar esta característica. Empiece cada líneas con una barra vertical (|). Tenga en cuenta que esta característica está desactivada por defecto.

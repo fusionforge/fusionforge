@@ -1,0 +1,28 @@
+<?php // -*-php-*-
+// $Id: top.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+$pagename = $page->getName();
+$isActionPage = isActionPage($pagename);
+if (ENABLE_PAGE_PUBLIC)
+    $public = $page->get('public');
+else
+    $public = false;
+if (ENABLE_RATEIT && !empty($user) && $user->isAuthenticated() 
+ && $page->exists() && !$isActionPage && !$WikiTheme->DUMP_MODE)
+    $rating = 1;
+else
+    $rating = 0;
+?>
+<!-- Page title -->
+<a id="contentTop"></a>
+<?php if ($page->_pagename != "HomePage") { ?>
+<h1 class="firstHeading<?php echo $rating ? '-rating' : '' ?><?php echo $public ? '-public' : '' ?>"><?php echo $HEADER ?></h1>
+<?php } ?>
+<?php if ($rating && $request->getArg('action') == 'browse') { ?>
+<?php echo Template('ratings') ?>
+<?php } elseif ($rating && $WikiTheme->DUMP_MODE) { ?>
+<div id="rateit-widget-top">
+<?php
+  $loader = new WikiPluginLoader();
+  printXML($loader->expandPI("<"."?plugin RateIt show=text ?".">", $request, $dbi->_markup));
+?></div>
+<?php } ?>

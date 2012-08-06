@@ -1,0 +1,71 @@
+#!/usr/bin/perl -w
+#
+# Debian-specific script to insert a new skill into the SF database
+
+use DBI ;
+use strict ;
+use diagnostics ;
+
+use vars qw/$dbh @reqlist $skill/ ;
+
+use vars qw/@skills/ ;
+
+sub debug ( $ ) ;
+
+require ("/usr/share/gforge/lib/include.pl") ; # Include all the predefined functions 
+
+&db_connect ;
+
+if ($#ARGV < 0) {
+    debug "Usage: sf-add-skill <skill>..." ;
+    exit 1 ;
+}
+
+@skills = @ARGV ;
+
+$dbh->{AutoCommit} = 0;
+$dbh->{RaiseError} = 1;
+eval {
+    my ($query, $sth, @array, $version, $action, $skill) ;
+
+    foreach $skill (@skills) {
+	debug "Inserting skill <$skill>." ;
+	$skill = $dbh->quote ($skill) ;
+	
+	$query = "INSERT INTO people_skill (name) VALUES ($skill)" ;
+	
+	# debug $query ;
+	
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+    }
+    
+    # debug "Committing." ;
+    $dbh->commit () ;
+
+    # There should be a commit at the end of every block above.
+    # If there is not, then it might be symptomatic of a problem.
+    # For safety, we roll back.
+    $dbh->rollback ();
+};
+
+if ($@) {
+    warn "Transaction aborted because $@" ;
+    debug "Transaction aborted because $@" ;
+    $dbh->rollback ;
+    debug "Please report this bug on the Debian bug-tracking system." ;
+    debug "Please include the previous messages as well to help debugging." ;
+    debug "You should not worry too much about this," ;
+    debug "your DB is still in a consistent state and should be usable." ;
+    exit 1 ;
+}
+
+$dbh->rollback ;
+$dbh->disconnect ;
+
+sub debug ( $ ) {
+    my $v = shift ;
+    chomp $v ;
+    print STDERR "$v\n" ;
+}

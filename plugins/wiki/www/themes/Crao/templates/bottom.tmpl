@@ -1,0 +1,11 @@
+<?php // -*-php-*-
+// $Id: bottom.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+
+<!-- Add your Disclaimer here -->
+
+
+
+
+<?php echo $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
+<?php if (defined('DEBUG') and DEBUG) { ?><?php echo Template('debug') ?><?php } ?>

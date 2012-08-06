@@ -1,0 +1,7 @@
+Package: @PACKAGE@-plugin-scmcvs
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, libipc-run-perl, rcs, liburi-perl, cvs, php5-cli, python, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
+Provides: @PACKAGE@-plugin-scm, @OLDPACKAGE@-plugin-scmcvs
+Conflicts: @OLDPACKAGE@-plugin-scmcvs
+Replaces: @OLDPACKAGE@-plugin-scmcvs
+Description: collaborative development tool - CVS plugin

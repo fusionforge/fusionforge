@@ -1,0 +1,131 @@
+Date: Thu, 27 Jan 2011 10:22:55 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Aide%2FURLMagiquesPhpWiki 7915 2011-01-27 09:24:46Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FURLMagiquesPhpWiki;
+  flags=PAGE_LOCKED;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+===À propos des URL de PhpWiki
+
+Un type spécial d'URL est disponible pour créer des liens permettant de réaliser
+des tâches administratives ou particulières dans PhpWiki. Voici une brève description de leur
+fonctionnement.
+
+La syntaxe de base d'un URL phpwiki est :
+
+<pre>
+**phpwiki:**''nomdelapage''**?**''arguments''
+</pre>
+
+* si ''nomdelapage'' est omis, sa valeur par défaut est la page courante.
+* ''arguments'' doit être un ensemble de paramètres au format standard HTTP GET.
+
+Le paramètre "action=''x''" doit presque toujours être donné. Il peut valoir
+**browse**, **info**, **diff**, **search**, **edit**,
+**zip**, **dumpserial**, **loadserial**,
+**remove**, **lock**, **unlock**,
+**login**, **logout**, **setprefs** ou **save**.
+L'action par défaut est **browse**.
+
+Certaines actions acceptent d'autres paramètres :
+
+**!FullTextSearch**, **!TitleSearch**:
+
+  accepte **s**=terme à rechercher, et **size**=taille de l'entrée.
+
+**edit**: 
+
+  accepte **version**.
+
+**remove**: 
+
+  accepte **verify**.
+
+**save**: 
+
+  accepte **editversion**, **minor_edit**, et  **content**.
+
+**setprefs**: 
+
+  accepte **edit_area_width**, **edit_area_height**.
+
+
+=== Rédiger des liens Magiques dans les pages du Wiki
+
+Un lien magique a cette allure :
+
+{{{
+[ texte | url-phpwiki ]
+}}}
+
+La partie ''texte'' est optionnelle mais est habituellement recommandée.
+S'il est donné, il fournira le label du lien. L' ''url-phpwiki'' est 
+un URL **phpwiki:** comme décrit plus haut.
+
+===Exemples
+
+{{{
+[ Éditer le BacÀSable | phpwiki:BacÀSable?action=edit ]
+}}}
+générera un lien qui vous emmènera directement à l'édition du [BacÀSable], comme ceci :
+[ Éditer le BacÀSable | phpwiki:BacÀSable?action=edit ].
+
+Autres possibilités :
+* [ Diff du BacÀSable | phpwiki:BacÀSable?action=diff ],
+* [ Verrouiller la page d'accueil | phpwiki:PageAccueil?action=lock ],
+* [ Obtenir un vidage Zip complet | phpwiki:?action=zip&include=all ],
+* Recherche pour [ Titres de page contenant 'wiki' | phpwiki:RechercheParTitre?s=wiki ],
+
+=== Insertion de Formulaires Magiques dans les Pages du Wiki
+
+''**Note**: L'ancienne syntaxe des formulaires magiques n'est plus supportée. 
+Ils ont été remplacés par =<?plugin-form>=.''
+
+Si le plugin est appelé en utilisant *<?plugin-form* au lieu de *<?plugin* et
+que le plugin supporte les recherches alors sera rendu comme un formulaire.
+
+''size'':
+
+  Si c'est donné, spécifie la taille de la zone de saisie.
+
+''s'':
+
+  Spécifie la valeur par défaut de l'entrée.
+
+==== Exemples:
+
+Un plugin de recherche appelé avec *<?plugin* au lieu de *<?plugin-form*
+insère simplement le résultat de la recherche du plugin :
+
+{{{
+<<TitleSearch s=wiki noheader=true>>
+}}}
+
+Résultats de recherche pour les pages dont le titre contient 'wiki' :
+
+<<TitleSearch s=wiki noheader=true>>
+
+{{{
+<?plugin-form FullTextSearch ?>
+}}}
+
+donne
+
+<?plugin-form FullTextSearch ?>
+
+Tandis que
+
+{{{
+<?plugin-form TitleSearch formsize=12 ?>
+}}}
+
+donne
+
+<?plugin-form TitleSearch formsize=12 ?>
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]]
+</noinclude>

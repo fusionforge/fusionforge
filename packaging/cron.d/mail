@@ -1,0 +1,9 @@
+# Create the new mailing lists
+06 * * * * root $PHP $FFCRON/mail/mailing_lists_create.php
+
+# Create the /etc/aliases file
+08 * * * * root $PHP $FFCRON/mail/mailaliases.php
+
+# Send email to users with pending tasks
+#30 5 * * 1,2,3,4,5 root $PHP $FFCRON/daily_task_email.php
+

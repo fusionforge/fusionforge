@@ -1,0 +1,16 @@
+Date: Fri,  4 Feb 2011 17:33:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: AlleSeitenImBesitzVonMir 7938 2011-02-04 16:35:28Z vargenau $ 
+Content-Type: application/x-phpwiki;
+  pagename=AlleSeitenImBesitzVonMir;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Die Liste aller Seiten, die Ihnen gehören. (Wenn Sie sich authentifiziert haben)
+
+<<AllPages owner=[] >>
+
+----
+[[KategorieAktionSeite]]

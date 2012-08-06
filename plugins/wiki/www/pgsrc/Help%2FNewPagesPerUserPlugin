@@ -1,0 +1,68 @@
+Date: Fri, 10 Sep 2010 13:46:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FNewPagesPerUserPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FNewPagesPerUserPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~NewPagesPerUser** [[Help:WikiPlugin|plugin]] lists all new pages
+per month per user in the wiki.
+
+== Usage ==
+{{{
+<<NewPagesPerUser arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **userid**
+|
+| 0
+|-
+| **month**
+|
+| 0
+|-
+| **since**
+|
+| 0
+|-
+| **until**
+|
+| 0
+|-
+| **comments**
+|
+| 0
+|-
+| **links**
+| Have a link to pages.
+| true
+|}
+
+== Example ==
+
+{{{
+<<NewPagesPerUser links=0>>
+}}}
+
+<<NewPagesPerUser links=0>>
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

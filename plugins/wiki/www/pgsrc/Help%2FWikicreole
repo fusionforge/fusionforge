@@ -1,0 +1,275 @@
+Date: Tue,  4 Jan 2011 12:37:33 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FWikicreole 7802 2011-01-04 11:38:12Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FWikicreole;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+<<CreateToc jshide||=0 with_toclink||=1 position=right with_counter=1 >>
+
+Phpwiki allows you to use the Wikicreole syntax to edit your wiki pages.
+
+We have implemented most of Wikicreole 1.0 and Wikicreole 1.0 additions. What is implemented is described below.
+
+Complete information about Wikicreole can be found at: http://www.wikicreole.org/
+
+== Cheat Sheet from Wikicreole web site ==
+
+[[http://www.wikicreole.org/attach/CheatSheet/creole_cheat_sheet.png]]
+
+== Text formatting ==
+
+=== Bold ===
+
+Bold text is made using two stars:
+
+{{{
+This sentence contains **words in bold**.
+}}}
+
+This sentence contains **words in bold**.
+
+=== Italics ===
+
+Italics text is made using two slashes:
+
+{{{
+This sentence contains //words in italics//.
+}}}
+
+This sentence contains //words in italics//.
+
+=== Underline ===
+
+Underline text is made using two underscores:
+
+{{{
+This sentence contains __underlined text__.
+}}}
+
+This sentence contains __underlined text__.
+
+=== Monospace ===
+
+Monospace text is made using two hashes:
+
+{{{
+This sentence contains ##monospace text##.
+}}}
+
+This sentence contains ##monospace text##.
+
+=== Superscript ===
+
+Superscript text is made using two carets:
+
+{{{
+The XX^^th^^ century.
+}}}
+
+The XX^^th^^ century.
+
+=== Subscript ===
+
+Subscript text is made using two commas:
+
+{{{
+Water is H,,2,,O.
+}}}
+
+Water is H,,2,,O.
+
+== Headers ==
+
+Headers start on a new line with two or more equal signs (up to six) followed the header text.
+
+Optional equal signs can be put at the end of the line (to be compatible with Mediawiki syntax). They are ignored.
+
+The content of the headers is parsed, allowing for instance to use subscript and superscript text. (The header content parsing is optional in Wikicreole.)
+
+<pre>
+~== First level of header (h2 in HTML) ==
+~=== Second level of header (h3 in HTML) ===
+~==== Third level of header (h4 in HTML)
+</pre>
+
+== Links ==
+
+=== Simple link ===
+
+{{{
+This is a [[link]].
+}}}
+
+This is a [[link]].
+
+=== Link with alternate text ===
+
+{{{
+This is a [[link|link with alternate text]].
+}}}
+
+This is a [[link|link with alternate text]].
+
+=== External link (URL) ===
+
+{{{
+[[http://www.wikicreole.org]]
+}}}
+
+[[http://www.wikicreole.org]]
+
+=== Raw external link (URL) ===
+
+{{{
+http://www.wikicreole.org
+}}}
+
+http://www.wikicreole.org
+
+=== External link with alternate text ===
+
+{{{
+[[http://www.wikicreole.org|Visit the Wikicreole website]]
+}}}
+
+[[http://www.wikicreole.org|Visit the Wikicreole website]]
+
+== Paragraphs ==
+
+Paragraphs are made of text separated by a blank line.
+
+== Line breaks ==
+
+A line break is made with two backslashes.
+
+{{{
+This is the first line,\\and this is the second.
+}}}
+
+This is the first line,\\and this is the second.
+
+== Lists ==
+
+=== Unordered lists ===
+
+{{{
+* Item 1
+* Item 2
+** Item 2.1
+** Item 2.2
+* Item 3
+}}}
+
+* Item 1
+* Item 2
+** Item 2.1
+** Item 2.2
+* Item 3
+
+=== Ordered lists ===
+
+{{{
+# Item 1
+# Item 2
+## Item 2.1
+## Item 2.2
+# Item 3
+}}}
+
+# Item 1
+# Item 2
+## Item 2.1
+## Item 2.2
+# Item 3
+
+== Horizontal rule ==
+
+A horizontal rule is made with four hyphens (or more)
+
+{{{
+----
+}}}
+
+----
+
+== Images ==
+
+A inline image is created with curly brackets.
+An alternate text can be put after a pipe. If there is none, an empty alternate text will be created.
+
+{{{
+{{myimage.png}}
+}}}
+
+{{{
+{{myimage.png|this is my image}}
+}}}
+
+== Tables ==
+
+All cells are separated by single pipes. Leading spaces are permitted before the first cell of a row and trailing spaces are permitted at the end of a line. The ending pipe is optional. You can embed links, bold, italics, line breaks, and nowiki in table cells. Equal sign directly following pipe defines a header. Headers can be arranged horizontally or vertically.
+
+{{{
+|=Heading Col 1 |=Heading Col 2         |
+|Cell 1.1       |Two lines\\in Cell 1.2 |
+|Cell 2.1       |Cell 2.2               |
+}}}
+
+|=Heading Col 1 |=Heading Col 2         |
+|Cell 1.1       |Two lines\\in Cell 1.2 |
+|Cell 2.1       |Cell 2.2               |
+
+== Nowiki ==
+
+Between three opening curly brackets and three closing curly brackets, no wiki markup is interpreted.
+
+{{{
+//This// does **not** get [[formatted]]
+}}}
+
+{{{
+Some examples of markup are: {{{** <i>this</i> ** }}}
+}}}
+
+Some examples of markup are: {{{** <i>this</i> ** }}}
+
+== Escape character ==
+
+The escape character is the tilde.
+
+It escapes the character immediately following it.
+
+It disables the automatic conversion of the URL immediately following it.
+
+It disables camel case in the word following it.
+
+{{{
+~http://www.foo.com/
+}}}
+
+~http://www.foo.com/
+
+{{{
+~CamelCaseLink
+}}}
+
+~CamelCaseLink
+
+== Plugins ==
+
+Plugins use double angle brackets.
+
+{{{
+<<CurrentTime format="date">>
+}}}
+
+<<CurrentTime format="date">>
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

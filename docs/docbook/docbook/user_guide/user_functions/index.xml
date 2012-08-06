@@ -1,0 +1,119 @@
+<section id="ug_user">
+    <title>User specific functions</title>
+	<section id="ug_user_homepage">
+		<title>User Homepage</title>
+		<para>
+			The User home page appears after the user has performed the <link linkend="ug_getting_started_login">login</link> or when he clicks the <emphasis>My Page</emphasis> tab.
+		</para>
+
+                <para>The User Homepage contains a 4 links and 5 tabs.</para>
+                
+                <para>The four links are the following:</para>
+                <itemizedlist>
+                    <listitem><para>My Personal Page</para></listitem>
+                    <listitem><para>Trackers dashboard</para></listitem>
+                    <listitem><para>Diary &amp; Notes</para></listitem>
+                    <listitem><para>Account Maintenance</para></listitem>
+                    <listitem><para>Register Project</para></listitem>
+                 </itemizedlist>
+
+		<para>
+			The five tabs contain the following information:<!-- TODO: this is no longer exactly like this in 5.0 : (codendi) widgets appeared -->
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Assigned Artifacts</term>
+				<listitem>
+					<para>This list shows the Tracker items assigned to you. Only items in the open state will be listed here. Clicking on the number of the item, you'll go to the detail of the item. The items are ordered by priority.</para>
+				</listitem>
+			</varlistentry>
+                        <varlistentry>
+                                <term>Assigned Tasks</term>
+                                <listitem>
+                                        <para>This list shows the Tasks items assigned to you. Only tasks in the open state will be listed here. Clicking on the task name, you'll go to the detail of the task. The tasks are ordered by subproject.</para>
+                                </listitem>
+                        </varlistentry>
+			<varlistentry>
+				<term>Submitted Artifacts</term>
+				<listitem>
+					<para>This list shows the Tracker items submitted by you. Only items in the open state will be listed here. Clicking on the number of the item, you'll go to the detail of the item. The Tracker items are ordered by tracker.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Monitored Items</term>
+				<listitem>
+					<para>This list shows the Items you are monitoring. It shows the Tackers that are monitored globally, the News, the Forums and the FileModules you are monitoring. See the sections about Forums and FileModules for more details on how monitoring works.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Projects</term>
+				<listitem>
+					<para>This list shows you the active projects you are participating. When you click on a project, you will go to the project summary.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	<section id="ug_user_modifying_settings">
+		<title>Modifying User settings</title>
+		<para>
+			When you click on Account Maintenance on your user homepage, you get a page where you can change some data you inserted. You can change every data you inserted when you registered as user except:
+		</para>
+		<itemizedlist>
+			<listitem><para>Registration date (Member since)</para></listitem>
+			<listitem><para>User Id</para></listitem>
+			<listitem><para>Login name</para></listitem>
+		</itemizedlist>
+
+	</section>
+	<section id="ug_user_changing_language">
+		<title>Changing the language on FusionForge</title>
+                <para>You have two possibilities:</para>
+                <orderedlist>
+                    <listitem><para>If you want to change the language for your account, then go to
+                                    <emphasis>My Page</emphasis> -&gt; Account Maintenance and then, select &lt;your language&gt; 
+                                    as language. And submit.</para></listitem>
+                    <listitem><para>If you want your language for accessing FusionForge (even without being logged), 
+                                    then it's defined in the configuration of your browser. You should 
+                                    see a preferred list of language somewhere.</para></listitem>
+                </orderedlist>
+	</section>
+	<section id="ug_user_ratings">
+		<title>User ratings</title>
+		<para>
+			You can be rated by other users and you can rate other users. Every time you go to the detail of a user, you can rate the user.
+		</para>
+		<para>
+			Ratings can be given for:
+		</para>
+		<itemizedlist>
+			<listitem><para>Teamwork/Attitude</para></listitem>
+			<listitem><para>Coding</para></listitem>
+			<listitem><para>Design/Architecture</para></listitem>
+			<listitem><para>Follow-Trough/Reliability</para></listitem>
+			<listitem><para>Leadership/Management</para></listitem>
+		</itemizedlist> 
+	</section>
+	<section id="ug_user_skills">
+		<title>Skills profile</title>
+		<para>
+			In this section you can add your skills. You can set your skills profile to public, so everyone can see it, or to private, so that only you can view it.
+		</para>
+		<para>
+			The information that you can insert is:
+		</para>
+		<itemizedlist>
+			<listitem><para>Language</para></listitem>
+			<listitem><para>Level of experience (Beginner, Master, Expert)</para></listitem>
+			<listitem><para>Duration of experience (6 months, 1 year, 5 years) </para></listitem>
+		</itemizedlist>
+	</section>
+	<section id="ug_user_diary">
+		<title>Diary and Notes</title>
+		<para>
+			The Diary and Notes section allows you to simulate a basic agenda. You can insert a subject and a description of the item and select if the item is public or private.
+		</para>
+		<para>
+			If the item is public, every user of FusionForge can view and monitor this item.
+		</para>
+	</section>
+</section>

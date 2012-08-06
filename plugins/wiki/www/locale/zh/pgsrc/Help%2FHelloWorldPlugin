@@ -1,0 +1,83 @@
+Date: Fri,  4 Feb 2011 16:44:25 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FHelloWorldPlugin;
+  flags="";
+  author=test;
+  version=10;
+  lastmodified=1068935007;
+  author_id=test;
+  markup=2;
+  hits=10;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+簡單的範例 plugin.
+
+<<HelloWorld salutation="Hello," name="WikiUser" >>
+
+From the source of this page:
+
+{{{
+<<HelloWorld salutation="Hello," name="WikiUser" >>
+}}}
+
+-----
+PhpWiki 的 plugin 架構允許你加入自訂的頁面元素. 你所要做的就是繼承 ~WikiPlugin
+類別並實作你的 run() 方法.
+
+<<PhpHighlight
+
+/**
+ * A simple demonstration WikiPlugin.
+ *
+ * Usage:
+ * <<HelloWorld> >
+ * <<HelloWorld
+ *          salutation="Greetings, "
+ *          name=Wikimeister
+ * > >
+ * <<HelloWorld salutation=Hi > >
+ * <<HelloWorld name=WabiSabi > >
+ */
+
+// Constants are defined before the class.
+if (!defined('THE_END'))
+    define('THE_END', "!");
+
+class WikiPlugin_HelloWorld
+extends WikiPlugin
+{
+    // Five required functions in a WikiPlugin.
+
+    function getName () {
+        return _("HelloWorld");
+    }
+
+    function getDescription () {
+        return _("Simple Sample Plugin");
+
+    }
+
+    // Establish default values for each of this plugin's arguments.
+    function getDefaultArguments() {
+        return array('salutation' => "Hello,",
+                     'name'       => "World");
+    }
+
+    function run($dbi, $argstr, $request) {
+        extract($this->getArgs($argstr, $request));
+
+        // Any text that is returned will not be further transformed,
+        // so use html where necessary.
+        $html = HTML::tt(fmt('%s: %s', $salutation, WikiLink($name, 'auto')),
+                         THE_END);
+        return $html;
+    }
+};
+>>
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

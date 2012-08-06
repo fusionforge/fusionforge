@@ -1,0 +1,84 @@
+Date: Tue,  4 Jan 2011 12:30:30 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FExternalSearchPlugin 7801 2011-01-04 11:31:19Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FExternalSearchPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~ExternalSearch** [[Help:WikiPlugin|plugin]] creates a form to query [[Help:InterWiki|InterWikis]] or other internet sites.
+
+== Usage ==
+
+{{{
+<<ExternalSearch
+         url="InterWiki or URL"
+         name="button text"
+>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **url**
+| Specify a wiki from the InterWikiMap or a url. Any text entered by
+the user will be appended to the search url. The string placeholder
+'##**%s**##' can be used to insert a search query into the url rather
+than appending it.
+|
+|-
+| **name**
+| Text to display in the submit button.
+| For ~InterWiki sites the default is the wiki name, for other urls the default is the text "External Search".
+|-
+| **formsize**
+| Specify the input area size.
+| 30 characters
+|-
+| **debug**
+| Don't really redirect to the external site, just print out the url that would be redirected to.
+|
+|}
+
+== Examples ==
+
+{{{
+  url="http://sunir.org/apps/meta.pl?"       name="Metawiki Search"
+  url="http://www.usemod.com/cgi-bin/mb.pl?" name="MeatBall Search"
+  url=php-lookup
+  url=php-function
+  url=PhpWiki
+}}}
+
+Perform a full-text search on multiple wiki's:
+<<ExternalSearch url="http://sunir.org/apps/meta.pl?" name="Metawiki Search">>
+
+Perform a full-text search on [[MeatBall:SiteSearch|MeatBall]] wiki:
+<<ExternalSearch url="http://www.usemod.com/cgi-bin/mb.pl?" name="MeatBall Search">>
+
+Search the PHP web site for a function name:
+<<ExternalSearch url=php-lookup name="PHP Lookup">>
+
+Enter the name of a PHP function to view the documentation page:%%%
+<<ExternalSearch url=php-function>>
+
+Enter any existing page name on ~PhpWiki to jump to that page:
+<<ExternalSearch url=PhpWiki>>
+
+== See Also ==
+* [[Help:TitleSearchPlugin]]
+* [[Help:FullTextSearchPlugin]]
+* [[Help:ExternalSearchPlugin]]
+* [[Help:InterWikiSearchPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

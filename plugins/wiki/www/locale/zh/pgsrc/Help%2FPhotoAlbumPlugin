@@ -1,0 +1,71 @@
+Date: Fri,  4 Feb 2011 16:44:25 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FPhotoAlbumPlugin 7928 2011-02-04 15:46:03Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPhotoAlbumPlugin;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+== Summary
+藉著顯示帶有說明以及相片檔名的文字檔以製作相簿.
+
+== Usage
+{{{
+<<PhotoAlbum
+         src=http://server/textfile
+         mode=[column|row]
+         align=[center|left|right]
+         desc=true
+         sort=false
+         height=100%
+         width=100%
+>>
+}}}
+
+== Arguments
+''只有 ='src'= 參數是必要的.''
+
+**src**:
+  一個 CSV 文字檔案,裡面每行的格式為 filename, description.
+  裡面列出的每張相片必須都與 CSV 文字檔在同個目錄下. Descriptions 可寫可不寫.
+
+**mode**:
+  指定相片排列的方法, ='column'= 表示直放, ='row'= 表示橫放. 預設為 ='row'=.
+
+**align**:
+  每欄的對齊方式. 預設為 ='center'=.
+
+**desc**:
+  是否顯示文字檔中指定的 description. 預設為真.
+
+**sort**:
+  以檔案名稱排序圖片. 預設是以文字檔中的順序來排列.
+
+**height**, **width**:
+  高度與寬度用來與用 [php-function:getimagesize] 取得的原始高度與寬度做比較,
+  可以指定絕對值或百分比 (例如 "50%").
+
+== Examples
+=== Text file
+正確文字檔的內容應該是:
+
+{{{
+photo-01.jpg; My girlfriend and I
+photo-02.jpg
+christmas.gif; Merry Christmas!
+}}}
+
+=== Sample Album
+<<PhotoAlbum
+         src="http://phpwiki.sourceforge.net/demo/themes/Hawaiian/images/pictures/PhotoAlbum"
+>>
+
+== Plugin Author
+[Ted Vinke|mailto:teddy@jouwfeestje.com] <teddy@jouwfeestje.com>
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

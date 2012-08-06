@@ -1,0 +1,6 @@
+This is a copy of the ARC2 plugin developped as part of the OSLC Tools.
+
+To get latest version, use for instance :
+ $ wget -O ARC2_OSLCCoreRDFJSONParserPlugin.php "http://oslc-tools.svn.sourceforge.net/viewvc/oslc-tools/language-libs/php/arc2-plugin/ARC2_OSLCCoreRDFJSONParserPlugin.php?revision=HEAD"
+
+-- Olivier Berger

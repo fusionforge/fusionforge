@@ -1,0 +1,35 @@
+-----------------
+-- FusionForge --
+-----------------
+
+FusionForge is a web-based Collaborative Development Environment
+offering easy access to CVS, SVN and other versioning systems, mailing
+lists, bug tracking, message boards/forums, task management, and permanent
+file archival. It provides full web-based administration.
+
+FusionForge is the new name of the same free software elements that
+were previously named GForge (versions 4.x).
+
+All files contained in this archive are licensed as stated in the
+COPYING file.  Please check out the AUTHORS file to see who helped
+make this possible.
+
+Thanks for taking the time to download this code. You will find
+documentation on how to install, administrate and use FusionForge on
+the project's wiki at 
+
+    http://wiki.fusionforge.org/
+
+If you have any questions or suggestions, post a message either in the
+forums at
+
+    https://fusionforge.org/forum/?group_id=6
+
+connect to the FusionForge IRC channel #fusionforge on
+irc.freenode.net, e.g. via the web client at
+
+    http://webchat.freenode.net/?channels=fusionforge
+
+or subscribe and post to the mailing list
+
+    fusionforge-general@lists.fusionforge.org

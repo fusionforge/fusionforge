@@ -1,0 +1,22 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
+Template: @PACKAGE@/shared/web_host
+Type: string
+_Description: @FORGENAME@ domain or subdomain name:
+ Please enter the domain that will host the @FORGENAME@ installation. Some
+ services (scm, lists, etc.) will be given their own subdomain in that
+ domain.
+
+Template: @PACKAGE@/shared/forge_name
+Type: string
+Default: @FORGENAME@
+_Description: @FORGENAME@ system name:
+ Please enter the name of the @FORGENAME@ system. It is used in various places
+ throughout the system.

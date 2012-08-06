@@ -1,0 +1,134 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>4.7. Task Manager</title>
+<link rel="stylesheet" href="docbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<link rel="start" href="index.html" title="FusionForge User Guide">
+<link rel="up" href="ug_project.html" title="4. Project functions">
+<link rel="prev" href="ug_project_mailing_lists.html" title="4.6. Mailing Lists">
+<link rel="next" href="ug_project_docman.html" title="4.8. Document Manager">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">4.7. Task Manager</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ug_project_mailing_lists.html">Prev</a> </td>
+<th width="60%" align="center">4. Project functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ug_project_docman.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ug_project_task_manager"></a>4.7. Task Manager</h3></div></div></div>
+<p>
+		The Task Manager is similar to the tracker, with the following differences:
+	</p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>you can insert the start date of the item</p></li>
+<li><p>you can insert the end date of the item</p></li>
+<li><p>you can insert the number of hours for the item</p></li>
+<li><p>you can have multiple assignees for the item</p></li>
+<li><p>you can handle dependencies between tasks</p></li>
+</ul></div>
+<p>
+		Tasks are organized in subprojects. Before inserting a new task, you must first create a subproject. You can use the <span class="guimenuitem">Admin</span> link to create new subprojects.
+	</p>
+<p>
+		Tasks allows you to create and manage tasks, or blocks of work, similar to the way projects are broken down in e.g. Microsoft Project.
+	</p>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_task_manager_insert_new"></a>4.7.1. Inserting a new Task</h4></div></div></div>
+<p>
+			This allows you to add tasks to the sub projects - e.g. Write Design Doc, Review Doc, Update Doc, Write Code, Review Code, Update Code, Test, Log Test Results, etc. They can be assigned to members of the team, and start and end dates set up for them, dependencies on other tasks set, percentage completion etc.
+		</p>
+<p>
+			You need to select first a subproject from the subproject list and then select the <span class="guimenuitem">Add Task</span> link.
+		</p>
+<p>
+			A form appears, where you are requested to insert the following data:
+		</p>
+<div class="variablelist"><dl>
+<dt><span class="term">Percent Complete</span></dt>
+<dd><p>You can select here the Percentage of the completion of the work.</p></dd>
+<dt><span class="term">Priority</span></dt>
+<dd><p>You can select here the priority of the task.</p></dd>
+<dt><span class="term">Task Summary</span></dt>
+<dd><p>You should insert a brief description of the task.</p></dd>
+<dt><span class="term">Task Details</span></dt>
+<dd><p>You should insert here the most detailed description possible of the task.</p></dd>
+<dt><span class="term">Start Date</span></dt>
+<dd><p>You can insert here the start date.</p></dd>
+<dt><span class="term">End Date</span></dt>
+<dd><p>You can insert here the end date of the task.</p></dd>
+<dt><span class="term">Assigned To</span></dt>
+<dd><p>You can select one or more assignees of the task. Only users which are defined as “<span class="quote">Technicians</span>” are listed here.</p></dd>
+<dt><span class="term">Dependent on task</span></dt>
+<dd><p>You can select here one ore more task upon which this task depends.</p></dd>
+<dt><span class="term">Hours</span></dt>
+<dd><p>It is the estimated duration of this task in hours.</p></dd>
+</dl></div>
+<p>
+			Only Administrators can add new items on the Task Manager; only Administrators can make changes to the task; only administrators can close the task.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_task_manager_my_tasks"></a>4.7.2. My Tasks</h4></div></div></div>
+<p>It lists the tasks assigned to the user.</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_task_manager_open_tasks"></a>4.7.3. Browse Open Tasks</h4></div></div></div>
+<p>It lists all tasks in the open state.</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_task_manager_reporting"></a>4.7.4. Reporting</h4></div></div></div>
+<p>The Reporting is similar to the reporting section of the Tracker.</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_task_manager_task_admin"></a>4.7.5. Task Admin</h4></div></div></div>
+<p>
+			The Admin section allows you to:
+		</p>
+<div class="variablelist"><dl>
+<dt><span class="term">Add a project</span></dt>
+<dd>
+<p>You can select if the subproject is public (visibile to everyone) or not (visibile only to project members).</p>
+<p>This allows you to add a subproject to a project, such as modules, documentation, etc.</p>
+<p>Required arguments are Project Name and description.</p>
+</dd>
+<dt><span class="term">Update information</span></dt>
+<dd><p>Here you can select if the project is public, private or deleted (visible to nobody) and update the name and description of the subproject.</p></dd>
+<dt><span class="term">Register an e-mail address for notification of tasks</span></dt>
+<dd><p>Fill the 'Send All Updates To:' box with an e-mail address.</p></dd>
+</dl></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ug_project_mailing_lists.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ug_project.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ug_project_docman.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">4.6. Mailing Lists </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> 4.8. Document Manager</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

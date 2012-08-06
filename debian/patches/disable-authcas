@@ -1,0 +1,13 @@
+Index: src/plugins/authcas/etc/authcas.ini
+===================================================================
+--- src.orig/plugins/authcas/etc/authcas.ini
++++ src/plugins/authcas/etc/authcas.ini
+@@ -4,7 +4,7 @@
+ ; valid means : production ready.
+ ; Any other strings means it's under work or broken and plugin
+ ; is available in installation_environment = development only.
+-plugin_status = valid
++plugin_status = "disabled for Debian until phpCAS gets packaged"
+ 
+ 
+ ; By default, CAS is required and sufficient to log in

@@ -1,0 +1,3 @@
+version=3
+
+https://fusionforge.org/frs/?group_id=6 https://fusionforge.org/frs/download.php/.*/fusionforge-([\d\.]*).tar.bz2

@@ -1,0 +1,27 @@
+Date: Tue, 25 Jan 2011 21:26:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Aide%2FPluginTestDeCache 7896 2011-01-25 20:27:58Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FPluginTestDeCache;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+TestDeCache est un simple test de la classe ~WikiPluginCached
+qui convertit un texte en image.
+
+==== Exemple :
+
+{{{
+<<CacheTest text="What a wonderful test!">>
+}}}
+
+will generate 
+
+<<CacheTest text="What a wonderful test!" font="5">>
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

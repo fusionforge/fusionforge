@@ -1,0 +1,844 @@
+/* 
+ * Stylesheet for Funky Theme.
+ *
+ * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+/* HTML elements */
+html {
+    background-color: #CCCCCC;
+}
+
+body {
+    font-size:11px;
+    font-family:"Lucida Grande",sans-serif;
+    color:rgb(68,68,68);
+    background-color:white;
+    text-align:left;
+    border-radius: 6px;
+}
+
+div#maindiv {
+    margin:1em;
+}
+
+form {
+    margin:0;
+}
+
+img {
+    border:0;
+}
+
+h1 {
+    color: black;
+    -webkit-mask-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0.296875)), to(black));
+}
+
+h2 {
+    margin-top: 30px;
+    color: black;
+    -webkit-mask-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0.296875)), to(black));
+}
+
+h3 {
+    margin-top: 30px;
+    color: black;
+    -webkit-mask-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0.296875)), to(black));
+}
+
+ul {
+    list-style-type: circle;
+    margin: 0px;
+}
+
+li {
+    margin: 10px;
+}
+
+a {
+    text-decoration:none; 
+    font-weight: bold;
+    color: #7D88CC;
+    -webkit-transition-property: background-color, color, height, shadow;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-property: background-color, color, height, shadow;
+    -moz-transition-duration: 0.3s;
+    -o-transition-property: background-color, color, height, shadow;
+    -o-transition-duration: 0.3s;
+    transition-property: background-color, color, height, shadow;
+    transition-duration: 0.3s;
+}
+
+a:hover {
+    text-decoration: none; 
+    color: #7eaaee; 
+    font-weight: bold;
+}
+
+th, td {
+    text-align:left; 
+    border:none;
+    border-collapse: collapse;
+}
+
+input[type="text"], input[type="password"], textarea {
+	width: auto;
+	border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #e6e6e6;
+	padding: 3px;
+	font-family:"Lucida Grande",sans-serif;
+}
+
+hr {
+    border: 0;
+    background-color: #E2E2E2;
+    height: 1px;
+}
+
+/* =header */
+#header {
+    background: rgb(66, 69, 82) url("../images/header/header-bg.png");
+    background-color: white;
+    font-size:77%;
+    margin: 0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-collapse: collapse;
+    
+}
+
+#header-col1 {
+  padding:10px;
+} 
+
+#header-col1 img{
+  padding:0;
+  height: 30px;
+/*  height: 50%;
+  width: 50%;
+*/}
+
+#header-col1 h1 {
+    padding: 0;
+    margin: 0;
+}
+
+#header-col2 {
+  padding:0;	
+  text-align: right;
+  padding-right: 7px;
+  font-size: 10px;
+  color: #7D88CC;
+  text-shadow: 1px 1px white;
+  font-weight: bold;
+}
+#header-col2 a {
+  font-size: 10px;
+  color: #7D88CC;
+  font-weight: 800;
+  text-shadow: 1px 1px white;
+}
+
+#header-col2 a:hover {
+    font-size: 10px;
+    color: #7eaaee;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 1px 1px white;
+}
+
+#header-line2 {
+    background: #41495C url("../images/header/tabs-bg.png") repeat-x;
+    text-align: right;
+    padding-top: 10px;
+}
+
+#header-news {
+    background-color: #41495C;
+    display: table-cell;
+}
+
+#header-news span {
+    background-color: #41495C;
+    height: 200px;
+}
+
+.quicknews-toggle {
+    display: inline;
+    font-size: 12px;
+/*    text-shadow: 1px 1px gray;*/
+    color: white;
+}
+
+.quicknews .title {
+    font-size: 12px;
+    color: red;
+}
+
+.quicknews ul {
+    background-color: white;
+    width: 100%;
+    margin: 10px;
+    display: block;
+}
+
+.quicknews ul li {
+    display: inline;
+    list-style: none;
+    margin: 0;
+}
+
+.quicknews ul li:hover {
+    background-color:blue;
+}
+
+/* =searchBox */
+#searchBox {
+  display: inline;
+}
+
+#searchBox a{
+  font-size: 10px;
+  margin-right: 10px;
+  text-decoration:none; 
+  font-weight: bold; 
+  color: #7D88CC;
+  -webkit-transition-property: background-color, color, height, shadow;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-property: background-color, color, height, shadow;
+  -moz-transition-duration: 0.3s;
+  -o-transition-property: background-color, color, height, shadow;
+  -o-transition-duration: 0.3s;
+  transition-property: background-color, color, height, shadow;
+  transition-duration: 0.3s;
+}
+
+#searchBox a:hover {
+    text-decoration: none; 
+    color: #7eaaee; 
+    font-weight: bold;
+}
+
+
+#searchBox span {
+  display: inline;
+  margin-left: 20px;
+}
+
+#searchBox span input[type=text] {
+    padding-left: 20px;
+    border-radius: 20px;
+    height: 15px;
+    border: 1px solid white;
+    background-image: url(../images/search-logo.png);
+    background-repeat: no-repeat;
+    background-position: 3px 2px;
+    display: inline;
+    width: 130px;
+    margin-right: 7px;
+    height: 10px;
+}
+
+#searchBox span input[type=submit] {
+    display:none;
+}
+
+/* =quicknavform */
+#quicknavform {
+    display: inline;
+    color: white;
+    float: left;
+}
+
+#quicknavform span {
+    display: inline;
+    color: white;
+}
+
+#quicknav {
+    margin-left: 7px;
+    width: 180px;
+}
+
+/* =tabGenerator */
+.tabGenerator {
+    font-weight:bold;
+    border-collapse: collapse;
+    height: 36px;
+}
+
+.tabGenerator tbody {
+    margin-left: 50px;
+}
+
+.tabGenerator td {
+    padding:0;
+    margin: 0; 
+    vertical-align: middle;
+}
+
+.tabGenerator .tg-middle {
+  background-color: #41495C;
+  vertical-align: bottom;
+}
+
+.tabGenerator .tg-middle span {
+    background-color: #41495C;
+    margin-top: 0px;
+}
+
+.tabGenerator .tg-middle span span {
+    display: block;
+    text-align:center;
+    vertical-align: middle;
+    height: 20px;
+    margin: 0px;
+    border-bottom: 0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    -webkit-top-right-border-radius: 6px;
+    -webkit-top-left-border-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    -moz-border-radius-topleft: 6px;
+    background-color: #909DB7;
+    line-height: 17px;
+    color: black;
+    text-shadow: 1px 1px #B2BFD9;
+    margin-left: 2px;
+    margin-right: 2px;
+    -webkit-transition-property: background-color, color, height, shadow;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-property: background-color, color, height, shadow;
+    -moz-transition-duration: 0.3s;
+    -o-transition-property: background-color, color, height, shadow;
+    -o-transition-duration: 0.3s;
+    transition-property: background-color, color, height, shadow;
+    transition-duration: 0.3s;
+}
+
+.tabGenerator .tg-middle span span:hover {
+    display: block;
+    background-color: white;
+    text-shadow: 1px 1px white;
+    height: 30px;
+}
+
+.tabGenerator .tg-middle span span a {
+    display: block;
+    color: black;
+}
+
+.tabGenerator .tg-middle span.selected span {
+    background-color: white;
+    text-shadow: 1px 1px white;
+    height: 30px;
+}
+
+.tabGenerator .tg-right span.selected span {
+    display:none;
+}
+
+/*
+    innertabs
+*/
+.innertabs .tabGenerator {
+    font-weight:bold;
+    border-collapse: collapse;
+    height: 20px;
+}
+
+.innertabs .tabGenerator tbody {
+    margin-left: 50px;
+}
+
+.innertabs .tabGenerator td {
+    padding:0;
+    margin: 0; 
+    vertical-align: middle;
+}
+
+.innertabs .tabGenerator .tg-middle {
+  background-color: #F7F7F7;
+  vertical-align: middle; 
+}
+
+.innertabs .tabGenerator .tg-middle span {
+    background-color: #F7F7F7;
+    margin-top: 0px;
+}
+
+.innertabs .tabGenerator .tg-middle span span {
+    display: block;
+    text-align:center;
+    vertical-align: middle;
+    height: 20px;
+    margin: 0px;
+    border-bottom: 0;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    background-color: #F7F7F7;
+    line-height: 17px;
+    color: black;
+    text-shadow: 1px 1px white;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+
+.innertabs .tabGenerator .tg-middle span span:hover {
+    display: block;
+    background-color: white;
+}
+
+.innertabs .tabGenerator .tg-middle span span a {
+    display: block;
+    color: black;
+}
+
+.innertabs .tabGenerator .tg-middle span.selected span {
+    background-color: white;
+    text-shadow: 1px 1px white;
+}
+
+.innertabs .tabGenerator .tg-right span.selected span {
+    display:none;
+}
+
+/* =tabber */
+.topTab, a.topTab, a.topTab:visited, a.topTab:hover,
+.topTabSelected, a.topTabSelected, a.topTabSelected:visited,
+a.topTabSelected:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(68, 68, 68);
+  font-family: arial, helvetica, sans-serif;
+  font-size: 0.9em;
+}
+
+.bottomTab, a.bottomTab, a.bottomTab:visited, a.bottomTab:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 0.9em;
+}
+
+.bottomTabSelected, a.bottomTabSelected, a.bottomTabSelected:visited, a.bottomTabSelected:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(68, 68, 68);
+  font-family: arial, helvetica, sans-serif;
+  font-size: 0.9em;
+}
+
+.topLeft {
+  vertical-align: top;
+  text-align: left;
+}
+
+.middleRight {
+  vertical-align: middle;
+  text-align: right;
+}
+
+.pane {
+  color: rgb(112, 112, 112);
+  background-color: white;
+}
+
+/*--------------------------------------------------
+  REQUIRED to hide the non-active tab content.
+  But do not hide them in the print stylesheet!
+  --------------------------------------------------*/
+.tabberlive .tabbertabhide {
+  display:none;
+}
+
+/*--------------------------------------------------
+  .tabber = before the tabber interface is set up
+  .tabberlive = after the tabber interface is set up
+  --------------------------------------------------*/
+.tabber {
+}
+
+.tabberlive {
+}
+
+.tabberlive ul {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    /*border-collapse: collapse;*/
+    border-bottom: 1px solid #E2E3E4;
+    border-spacing: 6px 0px;
+    padding-left: 0;
+}
+
+.tabberlive li {
+    display: table-cell;
+    border: 1px solid #E2E3E4;
+    height: 16px;
+    padding: 5px;
+    border-bottom: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    -webkit-top-right-border-radius: 6px;
+    -webkit-top-left-border-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    -moz-border-radius-topleft: 6px;
+    margin-right: 10px;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#f7f7f7));
+}
+
+.tabberlive li:hover  {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), to(white));
+}
+
+/*--------------------------------------------------
+  .tabbertab = the tab content
+  Add style only after the tabber interface is set up (.tabberlive)
+  --------------------------------------------------*/
+.tabberlive, .tabbertab {
+    padding: 5px;
+    border:1px solid #E2E3E4;
+    border-top:0;
+    margin-bottom: 10px;
+}
+
+.tabberlive#tab1 {
+}
+
+.tabberlive#tab2 {
+}
+
+.tabberlive#tab2 .tabbertab {
+  height:200px;
+  overflow:auto;
+}
+
+.field-holder {
+  clear: both;
+}
+
+/* Boxes (top / middle / bottom)
+----------------------------------------------- */
+.box-surround {
+/*  margin-bottom: 1em;*/
+    background-color: #F7F7F7;
+    border: 1px solid #E2E3E4;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    margin-bottom: 0px;
+}
+
+.box-title-content {
+    color: #808080;
+    font-weight: bold;
+    font-size: 13px;
+    padding-left: 13px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #E2E3E4;
+}
+
+
+.box-content {
+    border-bottom: 1px solid #E2E3E4;
+    margin: 0px;
+    padding: 8px;
+    padding-left: 18px;
+}
+
+.box-content p {
+    margin: 0px;
+}
+
+
+.box-middle {
+  margin: 0px;
+  padding-left: 18px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #808080;
+  font-weight: bold;
+}
+
+
+/* widgets */
+
+.widget {
+    margin-top: 5px;
+    background-color: #F7F7F7;
+    border: 1px solid #E2E3E4;
+    border-bottom: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.widget_titlebar {
+    color: #808080;
+    font-weight: bold;
+    font-size: 13px;
+    padding-left: 13px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #E2E3E4;
+    background: none;
+}
+
+.widget_titlebar_close img {
+    width: 12px;
+    height: 12px;
+}
+
+.widget_titlebar_minimize img {
+    width: 12px;
+    height: 12px;
+}
+
+.widget_titlebar_maximize img {
+    width: 12px;
+    height: 12px;
+}
+
+.widget_content {
+    border-bottom: 1px solid #E2E3E4;
+    margin: 0px;
+    padding: 8px;
+}
+
+.widget_content table {
+    border-collapse: collapse;
+    border: 1px solid #D5D5D5;
+}
+.widget_content table td {
+    padding: 4px;
+}
+
+.bgcolor-grey {
+    background-color: #CDDCF3;
+}
+
+/*
+    listTable
+*/
+
+.listTable table {
+    border-collapse: collapse;
+}
+
+.listTable table td{
+    padding: 5px;
+    border: 1px solid gray;
+}
+
+/*
+    submenu
+*/
+.submenu {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    margin-left: 0px;
+    /*border-collapse: collapse;*/
+    border-bottom: 1px solid #E2E3E4;
+    border-spacing: 6px 0px;
+    padding-left: 0;
+}
+
+.submenu li {
+    display: table-cell;
+    margin-left: 5px;
+    border: 1px solid #E2E3E4;
+    height: 16px;
+    padding: 5px;
+    border-bottom: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    -webkit-top-right-border-radius: 6px;
+    -webkit-top-left-border-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    -moz-border-radius-topleft: 6px;
+    margin-right: 10px;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#f7f7f7));
+}
+
+.submenu li:hover  {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), to(white));
+}
+
+
+
+/* =ft (footer)
+----------------------------------------------- */
+#ft {
+  text-align:center;
+}
+
+/* error_msg, warning_msg or feedback function
+----------------------------------------------- */
+.error {
+    border-width: 1px;
+    border-style: solid;
+    background-color: #ff4940; /* red */
+    border-color: red; /* red */
+    padding: 7px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    text-shadow: 1px 1px #ff7c73;
+    text-align: left;
+    font-size: small;
+    font-weight: normal;
+    color: black;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.warning_msg, .warning, .tips, .important, .veryimportant {
+    border-width: 1px;
+    border-style: solid;
+    background-color: #ffd297; /* orange */
+    border-color: #ffa500; /* orange */
+    padding: 7px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    text-shadow: 1px 1px #fff5CA;
+    text-align: left;
+    font-weight: normal;
+    font-size: small;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.feedback {
+    border-width: 1px;
+    border-style: solid;
+    background-color: #aef26d; /* green */
+    border-color: green; /* green */
+    padding: 7px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    text-shadow: 1px 1px #DFF59f;
+    text-align: left;
+    font-weight: normal;
+    font-size: small;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+p.information {
+    border-width: 1px;
+    border-style: solid;
+    background-color: #9db0d2;
+    border-color: #3a5fa5;
+    padding: 7px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    text-shadow: 1px 1px #DFF59f;
+    text-align: left;
+    font-weight: normal;
+    font-size: small;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+#ffErrors {
+    border-width: 1px;
+    border-style: solid;
+    background-color: #ff4940; /* red */
+    border-color: red; /* red */
+    padding: 7px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    text-shadow: 1px 1px #ff7c73;
+    color: black;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+#ffErrors .error {
+    border-width: 1px;
+    border-style: solid;
+    background-color: #ff4940; /* red */
+    border-color: red; /* red */
+    padding: 7px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    text-shadow: 1px 1px #ff7c73;
+    color: black;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+
+/*
+    footer
+*/
+.footer {
+    background-color: gray;
+    padding: 10px;
+    background: rgb(66, 69, 82) url("../images/header/header-bg.png");
+    border-top: 1px solid #f7f7f7;
+    margin-top: 20px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    -webkit-bottom-right-border-radius: 6px;
+    -webkit-bottom-left-border-radius: 6px;
+    -moz-border-radius-bottomright: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    text-align: center;
+    color: #dcdcdc;
+    text-shadow: 1px 1px white;
+}
+
+.footer img {
+    float: right;
+}
+
+.even {
+	background-color: #F0F0F0;
+	font-weight: normal;
+}
+
+.odd {
+	background-color: #FFFFFF;
+	font-weight: normal;
+}

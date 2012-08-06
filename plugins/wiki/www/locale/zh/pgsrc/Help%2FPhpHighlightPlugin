@@ -1,0 +1,99 @@
+Date: Fri, 10 Sep 2010 13:48:49 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FPhpHighlightPlugin 7870 2011-01-25 13:52:22Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPhpHighlightPlugin;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+PhpHighlightPlugin 使用了 php-function:highlight-string 來優雅印出
+PHP 程式碼.
+
+== Usage
+
+在同一行指定 plugin 的選項,簡單說就是在 =<?plugin= 與 =?>= 之間置放選項.
+
+{{{
+<<PhpHighlight [wrap?] [color options]
+code to be highlighted
+>>
+}}}
+
+== Description
+
+plugin 將視 =wrap= 選項決定是否要在傳入 php-function:highlight-string 之前
+適切地加入 =<?php= 與 =?>= . 如果加入了 PHP 分隔子,那麼 plugin 在輸出之前, 
+會從 highlighted 字串再次移除他們. 
+
+== Options
+
+Automatic Wrapping (自動分行):
+
+  如果你不想 plugin 自動為包在 =<?php= 和 =?>= 之間的源碼分行, 就設定
+  =wrap= 為 0. 預設值是 =1=, 這表示 plugin 會自動小心地增加並移除
+  =<?php= 和 =?>=.
+
+  如果你將 =wrap= 設為 =0=, 那麼你將得把 PHP 程式碼與 HTML 混在一起.
+  plugin 將會轉換 '=< ?php=' 為 '=<?php=' , '=? >=' 為 '=?>=' 以允許你
+  在程式碼中啟動與停止 PHP 模式.
+
+Color Options:
+
+  plugin 允許使用(或不使用)對應到 *php.ini* 設定裡的 highlight 設定的
+  顏色引數. 指定顏色時必須是一個正確的十六進位顏色或是以小寫表示的
+  [HTML 4 color name|http://www.w3.org/TR/REC-html40/types.html#h-6.5]
+  ,像是 ='#0f0344'= 或 =blue=. 你可以指定以下的選項:
+
+  =string=, =comment=, =keyword=, =bg=, =default=, and =html=
+
+== Examples
+
+=== PHP 和預設顏色(從 =php.ini= 來的):
+
+<<PhpHighlight
+function hello() {
+    echo "Hello World<p>";
+}
+>>
+
+=== HTML 與嵌入的 PHP
+
+這兒我們必須使用 =wrap=0= 以避免自動折行並替換 '=?>=' 為 '=? >=':
+
+<<PhpHighlight wrap=0 html='#000000' bg='#dddddd'
+<html>
+  <head>
+    <title>PHP Test</title>
+  </head>
+  <body>
+    < ?php echo "<p>Hello World</p>\n"; ? >
+  </body>
+</html>
+>>
+
+=== C Source
+
+雖然 =highlight_string() 是為 PHP 程式碼所設計,但他也適用於大部分 C 的基本
+語法 highlight ,因為這兩個語言的語法是很接近的.
+
+<<PhpHighlight default=black string=blue comment=gray keyword=purple
+#include <stdio.h>
+/* Get load */
+int
+getload(void)
+{
+    if ((fp = fopen("/proc/loadavg", "r")) == NULL) {
+        syslog(LOG_ERR, _("%s %s: unable to open %s: %s"), _("FATAL ERROR:"),
+              "getload()", "/proc/loadavg", strerror(errno));
+        exit(EX_OSFILE);
+    }
+    fclose(fp);
+}
+>>
+
+== Authors
+
+Martin Geisler mailto:gimpster@gimpster.com and Carsten Klapp
+mailto:carstenklapp@users.sourceforge.net.

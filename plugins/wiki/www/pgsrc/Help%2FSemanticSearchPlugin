@@ -1,0 +1,112 @@
+Date: Thu, 16 Dec 2010 14:00:38 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FSemanticSearchPlugin 7783 2010-12-16 13:01:01Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FSemanticSearchPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Search for relations/attributes and its values.
+
+page - relation::object. e.g list all cities: is_a::city => relation=is_a&s=city
+
+We search for both a relation and if the search is valid for attributes also, and OR combine the result.
+
+An attribute has just a value, which is a number, and which is for sure no pagename, and its value goes through some units unification. (not yet)
+
+We can also do numerical comparison and unit lifting with attributes:
+*  population > 1000000
+*  population > 1 million
+
+Limitation:
+* The backends can already do simple AND/OR combination of multiple relations and attributes to search for. Just the UI not. TODO: implement the AND/OR buttons.  population < 1 million AND area > 50 km2
+* Due to attribute internals a relation search with matching attribute names will also find those attribute names, but not the values. You must explicitly search for attributes then.
+
+The Advanced query can do a freeform query expression with multiple comparison and nesting.
+* "is_a::city and population > 1.000.000 and population < 10.000.000"
+* "(is_a::city or is_a::country) and population < 10.000.000"
+
+== Usage ==
+
+{{{
+<<SemanticSearch arguments>>
+}}}
+
+== Arguments ==
+
+All [[Help:PageList|PageList]] arguments, plus the following ones.
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **s**
+| linkvalue query string
+| *
+|-
+| **page**
+| which pages (glob allowed)
+| ~* (all)
+|-
+| **relation**
+| linkname. which relations.
+| all
+|-
+| **attribute**
+| linkname. which attributes.
+| all
+|-
+| **attr_op**
+| a funny written way for equality for pure aesthetic pleasure "All attributes which have this value set"
+| ~:=
+|-
+| **units**
+|
+|
+|-
+| **case_exact**
+|
+| true
+|-
+| **regex**
+| no word splitting, if no regex op is present, defaults to exact match
+| auto
+|-
+| **noform**
+| don't show form with results.
+| false
+|-
+| **noheader**
+| no caption
+| false
+|-
+| **info**
+| valid: pagename, relation, linkto, attribute, value and all other pagelist columns
+| false
+|}
+
+== Example ==
+
+{{{
+<<SemanticSearch>>
+}}}
+
+<<SemanticSearch>>
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+* [[Help:TitleSearchPlugin]]
+* [[Help:FullTextSearchPlugin]]
+* [[Help:ExternalSearchPlugin]]
+* [[Help:InterWikiSearchPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

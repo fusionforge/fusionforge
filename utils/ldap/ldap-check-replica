@@ -1,0 +1,34 @@
+#!/usr/bin/perl
+#
+#  Check proper installation of LDAP replication 
+#  by pfalcon@sourceforge.net 2001-01-16
+
+require("include.pl");  # Include all the predefined functions
+
+$ldap1="sf-ldap1";
+$ldap2="sf-ldap2";
+
+print "Making change to the master server.\n";
+$time=time();
+$cmd = "
+echo '
+dn: cn=Replicator,dc=sourceforge,dc=net
+changetype: modify
+replace: description
+description: modified at $time
+' |
+${ldap_prefix}ldapmodify -h $ldap1 -p $ldap1 -D '$sys_ldap_bind_dn' -w $sys_ldap_passwd
+";
+system($cmd);
+
+print "Allowing for propogation delay...\n\n";
+sleep(10);
+
+print "Querying master server:\n";
+$cmd = "${ldap_prefix}ldapsearch -h $ldap1 -p $sys_ldap_port -LLL -D '$sys_ldap_bind_dn' -w $sys_ldap_passwd -b '$sys_ldap_base_dn' '(cn=Replicator)' description";
+system($cmd);
+print "Querying slave server 1:\n";
+$cmd = "${ldap_prefix}ldapsearch -h $ldap2 -p $sys_ldap_port -LLL -D '$sys_ldap_bind_dn' -w $sys_ldap_passwd -b '$sys_ldap_base_dn' '(cn=Replicator)' description";
+system($cmd);
+
+print "If two requests above differ, LDAP replication is NOT functioning\n";

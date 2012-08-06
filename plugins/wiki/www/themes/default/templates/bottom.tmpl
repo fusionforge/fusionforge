@@ -1,0 +1,9 @@
+<?php // -*-php-*-
+// $Id: bottom.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<!-- Add your Disclaimer here -->
+<?php if (!$WikiTheme->DUMP_MODE) { ?>
+<?php echo empty($WARNINGS) ? '' : $WARNINGS ?>
+<?php echo $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
+<?php if (defined('DEBUG') and DEBUG & 1) { ?><?php echo Template('debug') ?><?php } ?>
+<?php } ?>

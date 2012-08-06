@@ -1,0 +1,38 @@
+<section id="ug_project_project_summary">
+	<title>Project Summary</title>
+	<para>
+		The project summary shows summarized information about the current project. The following information is displayed:
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>Project description and statistics</term>
+			<listitem>
+				<para>Description of the project and some statistics about it</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Project administrators and members</term>
+			<listitem>
+				<para>List of the developers involved in the project</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Latest file releases</term>
+			<listitem>
+				<para>Latest file releases published via the FRS.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Public areas</term>
+			<listitem>
+				<para>For each Tool of FusionForge, Summary Information is displayed; e.g. Public Forums (7 message in 2 forums), Bugs (4 open, 12 total).</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>News</term>
+			<listitem>
+				<para>Latest news of the project.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

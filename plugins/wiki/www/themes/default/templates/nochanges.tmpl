@@ -1,0 +1,9 @@
+<?php // -*-php-*-
+// $Id: nochanges.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<p><strong><?php echo _("Edit aborted.")?></strong>
+<?php echo _("You have not made any changes so no new version has been saved.")?></p>
+<?php if (!empty($LOCK_CHANGED_MSG)) { ?>
+  <p><?php echo $LOCK_CHANGED_MSG?></p>
+<?php } ?>
+<?php echo Template('browse') ?>

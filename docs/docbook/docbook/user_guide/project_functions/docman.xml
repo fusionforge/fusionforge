@@ -1,0 +1,134 @@
+<section id="ug_project_docman">
+	<title>Document Manager</title>
+	<para>
+		The Document Manager provided with FusionForge gives you a simple way to publish documents on the site. 
+	</para>
+	<section id="ug_project_docman_submit_new">
+		<title>Submit new documentation</title>
+		<para>
+			Here you can submit new documents for approving/publishing on the site. The form requires you to insert the following information:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Document Title</term>
+				<listitem>
+					<para>The document title refers to the relatively brief title of the document</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Description</term>
+				<listitem>
+					<para>A brief description to be placed just under the title.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Upload File</term>
+				<listitem>
+					<para>Here you should select the file to be uploaded. You can upload text files (.html, .txt) or binary files (.zip, .doc, .pdf).</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Reference File (by an URL)</term>
+				<listitem>
+					<para>Instead of uploading a file, you can specify the URL where the document is located.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Language</term>
+				<listitem>
+					<para>You should select here the language of the document.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Group that document belongs in</term>
+				<listitem>
+					<para>You should select here the group of the document. This feature is used to categorize documents.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			Fill in all the fields, select the group from the drop down list and click <guimenuitem>Submit Information</guimenuitem>. The document will then be placed in the <guimenuitem>Pending Submissions</guimenuitem> section of the <guimenuitem>DocManager Admin</guimenuitem> page, to be approved or rejected.
+		</para>
+	</section>
+	<section id="ug_project_docman_view_existing">
+		<title>Viewing existing docs</title>
+		<para>
+			The View Documentation page shows you a list of documents published and approved for viewing; grouped by Document groups. You can click on a document to view the entire content.
+		</para>
+	</section>
+	<section id="ug_project_docman_admin">
+		<title>Admin</title>
+		<para>
+			Clicking on this will present you with a page showing pending and active documents. In order to allow users to submit a document, you must first set up the document groups for the project.
+		</para>
+		<para>
+			The Admin section allows you to:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Approve/publish pending submissions</term>
+				<listitem>
+					<para>The Pending Submissions list shows the list of submissions that are waiting for your approval. Clicking on the document name, the Edit Document form will be displayed.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Edit Documents</term>
+				<listitem>
+					<para>The Edit Document links shows all states of the documents, and the documents in the state:</para>
+					<variablelist>
+						<varlistentry>
+							<term>Active Documents</term>
+							<listitem>
+								<para>Active Documents are displayed in the View Documentation list.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Pending Documents</term>
+							<listitem>
+								<para>Pending Documents are waiting for your approval.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Hidden Documents</term>
+							<listitem>
+								<para>Hidden documents are not displayed.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Deleted Documents</term>
+							<listitem>
+								<para>Deleted Documents are old, outdated documents.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Private Documents</term>
+							<listitem>
+								<para>Private documents are displayed only for members of the project.</para>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Edit Document Groups</term>
+				<listitem>
+					<para>
+						Clicking on this will present you with a box and a button to add document groups, and it also shows the document groups associated with this project. Submit as many document categories as you wish - eg Howto, Release notes, FAQ, etc. These groups will be the categories the documents will fall into when users submit documents.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	<section id="ug_project_docman_edit">
+		<title>Edit Document</title>
+		<para>
+			When you select a document from one of the lists, a form will be displayed. In this form you can change the Document Title, the Short Description, the Language, the Document Group and the State.
+		</para>
+		<para>
+			If the Document is a text file with .txt, .html or .htm extension, a textbox appears where you can edit the content of the document.
+		</para>
+		<para>
+			If the Document is a binary document, you can upload a new version of the document.
+		</para>
+	</section>
+</section>

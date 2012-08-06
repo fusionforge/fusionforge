@@ -1,0 +1,26 @@
+<?php // -*-php-*-
+// $Id: navbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<!-- The top navigation/search bar -->
+<form action="<?php echo WikiURL(_("TitleSearch"))?>"
+      method="get" accept-charset="<?php echo $charset?>">
+  <div id="navbuttons">
+   <?php echo WikiLink(_("RecentChanges"), "","News") ?>
+   <?php echo $SEP?><?php echo WikiLink(_("FindPage"), "","Search:") ?>
+   <input type="hidden" name="auto_redirect" value="1" />
+      <input type="text"  name="s" size="12" maxlength="256"
+             title='<?php echo _("Quick Search")?>'
+             onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
+             onmouseout="window.status=''; return true;" />
+    <?php if (!empty($revision)) { ?>
+     <?php echo $SEP?><?php echo Button(array('action'=>_("LikePages")),_("LikePages"),$page->getName()) ?>
+     <?php echo $SEP?><?php echo Button(array('action'=>_("BackLinks")), _("BackLinks"),$page->getName()) ?>
+    <?php } ?>
+    <?php if (!empty($user) && $user->isAdmin()) { ?>
+     <?php echo $SEP?><?php echo WikiLink(_("PhpWikiAdministration"), "","Admin") ?>
+    <?php } ?>
+    <?php if (!empty($user) && $user->isSignedIn()) { ?>
+     <?php echo $SEP?><?php echo WikiLink(_("UserPreferences"), "","Preferences") ?>
+    <?php } ?>
+  </div>
+</form>

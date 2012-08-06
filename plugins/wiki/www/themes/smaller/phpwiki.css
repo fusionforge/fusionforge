@@ -1,0 +1,48 @@
+/**
+ * $Id: phpwiki.css 6204 2008-08-26 15:12:03Z vargenau $
+ * We have two possibilities to override the default:
+ * 1. import is ns4 incompatible
+ * 2. add a 2nd css in themeinfo.php
+ */
+
+@import url(../default/phpwiki.css);
+
+/**
+ * Wiki
+ */
+body {
+  /* ivory #ffe #fffff0*/
+  background: #dddddd;
+  /* background: #000099; */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 80%; /* The default is too large. But enlarge monospace below */
+  /*margin: 1.5ex 1em; */
+}
+
+/**
+ * Link styles
+ */
+div#navbuttons a.wikiaction, div#navbuttons a.wikiadmin {
+  background-color: #dddddd;
+  border: 0;
+  -moz-appearance: none;
+  -moz-box-sizing: content-box;
+  -moz-border-radius: 0;
+}
+.wiki, .named-wiki {
+  text-decoration: none;
+  font-weight: normal;
+}
+
+h1 { margin: 0; font-size: 140% }
+pre { font-size: 110% }
+td { font-size: 80% }
+
+
+/* For emacs users
+ *
+ * Local Variables:
+ * mode: c
+ * c-file-style: cc-mode
+ * End:
+ */

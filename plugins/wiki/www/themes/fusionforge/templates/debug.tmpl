@@ -1,0 +1,13 @@
+<?php // -*-php-*-
+// $Id: debug.tmpl 8015 2011-04-05 09:47:42Z vargenau $
+?>
+<p class="debug">
+<?php
+global $RUNTIMER;
+echo fmt("Page Execution took %s seconds", $RUNTIMER->getStats());
+$mem = @getMemoryUsage();
+if ($mem) {
+    echo fmt(", Memory: %s", $mem);
+}
+?>
+</p>

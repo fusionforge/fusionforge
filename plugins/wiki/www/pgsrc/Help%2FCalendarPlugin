@@ -1,0 +1,110 @@
+Date: Fri, 10 Sep 2010 13:46:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FCalendarPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FCalendarPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **Calendar** [[Help:WikiPlugin|plugin]] can be used to generate a monthly calendar in a
+wiki page. It's handy for [[PhpWiki:PersonalWiki|personal wikis]].
+
+Individual dates in the calendar link to specially named wiki pages.
+The names for the "day pages" are by default formed by appending the
+date to the pagename on which the calendar appears.
+
+== Usage ==
+
+{{{
+<<Calendar>>
+}}}
+
+will get you:
+<<Calendar>>
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| colspan="3" align="center" | **Selection of Month**
+|-
+| **year**
+| Specify the year for the calendar.
+| Current year
+|-
+| **month**
+| Specify the month for the calendar.
+| Current month
+|-
+| **month_offset**
+| Added to //month//. Can be used to include several months worth of calendars on a single wiki page.
+| 0
+|-
+| colspan="3" align="center" | **"Day Page" Names**
+|-
+| **date_format**
+| [[php-function:strftime|strftime]] style format string used to generate page names for the "day pages."
+| The default value is =%Y-%m-%d=.
+|-
+| **prefix**
+| Prepended to the date (formatted per //date_format//) to generate the "day page" names.
+| The default value is =~[pagename]/=.
+|-
+| colspan="3" align="center" | **Appearance**
+|-
+| **month_format**
+| [[php-function:strftime|strftime]] style format string used to generate the title of the calendar.
+| (Default: =%B %Y=.)
+|-
+| **wday_format**
+| [[php-function:strftime|strftime]] style format string used to generate the day-of-week names at the top of the calendar.
+|
+|-
+| **start_wday**
+| What day of the week does the calendar start on. This should be specified as an integer in the range zero (Sunday) through six (Saturday), inclusive.
+|
+|}
+
+== Examples ==
+
+{{{
+<<Calendar month_offset=+1>>
+}}}
+
+will get you:
+<<Calendar month_offset=+1>>
+
+{{{
+<<Calendar start_wday=0>>
+}}}
+
+will get you:
+<<Calendar start_wday=0>>
+
+== See Also ==
+
+* [[Help:CalendarListPlugin]]
+
+Often used together like this:
+
+{{{
+<<Calendar>>
+<<CalendarList>>
+}}}
+
+== Authors ==
+
+This feature was inspired by [[http://manila.userland.com/|Calendar]],
+and first implemented by [[PhpWiki:GaryBenson|Gary Benson]]. It was later implemented as a
+[[Help:WikiPlugin|plugin]] by [[PhpWiki:JeffDairiki|Jeff Dairiki]].
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

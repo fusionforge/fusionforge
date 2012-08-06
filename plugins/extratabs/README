@@ -1,0 +1,16 @@
+This plugin adds a new page "Extra tabs" in the "group admin"
+page. There you can create new tabs that will appear on all project
+pages.
+
+The purpose is to let people point to external resources related to
+the project. For example, a project might use an external bugzilla and
+they want to point people there.
+
+The administrators of projects can now add such links. They must
+simply give an URL and a name.
+
+This plugin has been written by Raphael Hertzog <hertzog@debian.org>
+for the Adullact.net Gforge.
+
+http://www.adullact.net
+

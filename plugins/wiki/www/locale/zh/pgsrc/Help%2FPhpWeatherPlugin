@@ -1,0 +1,67 @@
+Date: Fri,  4 Feb 2011 16:44:25 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FPhpWeatherPlugin 7928 2011-02-04 15:46:03Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPhpWeatherPlugin;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+== Synopsis
+
+~PhpWeatherPlugin 是個 WikiPlugin, 他使用 PhpWeather 來顯示目前世界上
+某些機場的氣象. 它看起來像是這樣:
+
+<<PhpWeather menu=true >>
+
+== Plugin Arguments
+
+**menu**:
+  設定為 =true= 是讓 plugin 在報告之後產生選單. 使用者將可以從這個選單
+  去挑選國家,機場或語言. 預設值為 <tt>false</tt>.
+
+**icao**:
+  使用這個引數來先行挑選機場,以替代預設機場 <tt>EKAH</tt>. 如果你想讓使
+  用者能用選單改變地方,那麼你得使用這樣的語法
+  {{{
+  <<PhpWeather menu=true icao||=EKYT >>
+  }}}
+  然後當使用者送出表單時,值將會被覆寫.如果你只用了
+  {{{
+  <<PhpWeather menu=true icao=EKYT >>
+  }}}
+  那麼,當使用者從清單挑選其他地方的時候,將不會有任何事情產生.
+
+**cc**:
+  Specify the country code. You can use this if you want pre-select a
+  different country than the one specified in the ICAO. So using
+  {{{
+  <<PhpWeather menu=true cc||=GB icao||=KTTS >>
+  }}}
+  will show the current weather at the NASA Shuttle Facility, United
+  States (<tt>KTTS</tt>) and at the same time give the user a list of
+  stations in the United Kingdom. As the example shows, then you
+  should use <tt>cc||=XX</tt> when combining it with **menu** set to
+  <tt>true</tt>.
+
+**language**:
+  The default language. When combining **language** with **menu** set
+  to <tt>true</tt> then remember to use the <code>language||=xx</code>
+  form.
+
+**units**:
+  You can specify the way the units are printed. The choice is between
+  having both metric and imperial units printed, or just one of
+  them. Setting **units** to =both_metric= will print the metric value
+  first and then the imperial value in parenthesis. Using
+  =both_imperial= instead will do the opposite.
+
+  If you only need the metric or imperial units to be shown, then
+  setting **units** to =only_metric= or =only_imperial= will do just
+  that.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

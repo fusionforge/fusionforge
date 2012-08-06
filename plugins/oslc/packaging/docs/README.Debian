@@ -1,0 +1,9 @@
+This is the OSLC plugin for FusionForge packaged for Debian.
+
+Note that you may have to switch to development environment to
+activate this plugin.
+
+To do so, edit /etc/gforge/config.ini.d/debug.ini and change
+'installation_environment' to 'development'.
+
+ -- Olivier Berger <olivier.berger@it-sudparis.eu>, Fri, 18 Feb 2011 18:59:41 +0100

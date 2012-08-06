@@ -1,0 +1,77 @@
+Date: Fri, 10 Sep 2010 13:46:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FPreferenceAppPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPreferenceAppPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~PreferenceApp** [[Help:WikiPlugin|plugin]] is used to analyze a category of items
+that a group of people have rated.  A user is grouped to be analyzed in the group by
+# having rated at least one item in the database and
+# matching the optional criteria for declaring a budget on their homepage.
+
+An example of a budget declaration would be "~TotalSoda: 50" on my homepage.
+
+~PreferenceApp will output a matrix style table shows "how much" fractionally a group of people prefer an item over other items.  For example, if my soda
+budget is 100 then ~PreferenceApp might assign 20 units of my budget to Moutain Dew.
+
+== Usage ==
+{{{
+<<PreferenceApp arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **category**
+|
+| null
+|-
+| **lockedBudget**
+|
+| null
+|-
+| **pageTextLabel**
+|
+| null
+|-
+| **group**
+|
+| null
+|-
+| **roundCalc**
+|
+| true
+|-
+| **neutralRating**
+|
+| 3
+|-
+| **declareBudget**
+|
+| true
+|}
+
+== Example ==
+
+{{{
+<<PreferenceApp category="Soda" pageTextLabel="TotalSoda" roundCalc="true" >>
+}}}
+
+== Author ==
+* mcassano circa April 2004
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

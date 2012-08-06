@@ -1,0 +1,159 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>4.12. File Releases</title>
+<link rel="stylesheet" href="docbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<link rel="start" href="index.html" title="FusionForge User Guide">
+<link rel="up" href="ug_project.html" title="4. Project functions">
+<link rel="prev" href="ug_project_cvs.html" title="4.11. CVS">
+<link rel="next" href="ug_sitewide.html" title="5. Site-wide functions">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">4.12. File Releases</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ug_project_cvs.html">Prev</a> </td>
+<th width="60%" align="center">4. Project functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ug_sitewide.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ug_project_file_releases"></a>4.12. File Releases</h3></div></div></div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_file_releases_introduction"></a>4.12.1. Introduction</h4></div></div></div>
+<p>
+			The File Releases System (FRS) is used to upload files to the FusionForge site and to make these files available to the users in an easy and efficient way.
+		</p>
+<p>
+			Files can be divided in different packages, and every single package can be monitored by the users; these users will receive an email every time a new file has been added to the package.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_file_releases_administration"></a>4.12.2. Administration</h4></div></div></div>
+<p>
+			The FRS system allows you to upload file to FusionForge and make this file available to the public.
+		</p>
+<p>
+			You have to define a package before you can release a file. A package should have a descriptive name for the project, e.g. gforge3.
+		</p>
+<p>
+			To add a new package, insert a package name in the textbox at the bottom of the page and click Create this Package.
+		</p>
+<p>
+			You can use the radio buttons to make the package publicly viewable or not. Default is public.
+		</p>
+<p>
+			You can use the menu buttons to make the package active or hidden. Hidden packages will not be listed in the Files section.
+		</p>
+<p>
+			Your package will appear in the Releases list at the bottom of the page.
+		</p>
+<p>
+			Click Add release. The form has the following fields:
+		</p>
+<div class="variablelist"><dl>
+<dt><span class="term">Package ID</span></dt>
+<dd><p>You can select here the package.</p></dd>
+<dt><span class="term">Release Name</span></dt>
+<dd><p>Insert here the name of your release. The name should be indicative for the version of your file, e.g. pre-8.</p></dd>
+<dt><span class="term">Release Date</span></dt>
+<dd><p>The Release Date.</p></dd>
+<dt><span class="term">File Name</span></dt>
+<dd>
+<p>Click the <span class="emphasis"><em>Browse</em></span> button to select the file to upload. In some browsers you must select the file in the file-upload dialog and click OK. Double-clicking doesn't register the file.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>You can't upload file that exceed the UploadFile Limit in php.ini.</p>
+</div>
+</dd>
+<dt><span class="term">File Type</span></dt>
+<dd><p>You can select here the file type (.zip, .html, .exe, .tar.gz, etc).</p></dd>
+<dt><span class="term">Processor Type</span></dt>
+<dd><p>You can select here the processor required to run the application.</p></dd>
+<dt><span class="term">Release Notes</span></dt>
+<dd><p>The release notes.</p></dd>
+<dt><span class="term">Changelog</span></dt>
+<dd><p>The changelog.</p></dd>
+</dl></div>
+<p>
+			Click the <span class="emphasis"><em>Release File</em></span> button. Your file will now appear in the list of files in the File section.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_file_releases_cli"></a>4.12.3. Managing packages and releases via CLI (Command-Line Interface)</h4></div></div></div>
+<p>We give here some basic examples of CLI commands. For more information,
+                      please consult the FusionForge Command-line interface (CLI) documentation.</p>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="ug_project_file_releases_cli_login"></a>4.12.3.1. Logging in with CLI</h5></div></div></div>
+<pre class="screen">gforge.php -v login --username="user" --project=myproject</pre>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="ug_project_file_releases_cli_get_list"></a>4.12.3.2. Getting a list of releases</h5></div></div></div>
+<p>Get the package id</p>
+<pre class="screen">gforge.php frs packages</pre>
+<p>Get the list of releases of a given package</p>
+<pre class="screen">gforge.php frs releases --package=xxx</pre>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="ug_project_file_releases_cli_add_release"></a>4.12.3.3. Add a release of a given package</h5></div></div></div>
+<pre class="screen">gforge.php frs addrelease --package=xxx --name="My new release"</pre>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="ug_project_file_releases_cli_edit_release"></a>4.12.3.4. Edit a release</h5></div></div></div>
+<p>Add a text file to a release of a given package.</p>
+<pre class="screen">gforge.php frs addfile --package=xxx --release=yyy --file=zzz</pre>
+<p>Retrieve file on the standard output</p>
+<pre class="screen">gforge.php frs getfile --package=xxx --release=yyy -id=www</pre>
+<p>Retrieve file in a file</p>
+<pre class="screen">gforge.php frs getfile --package=xxx --release=yyy -id=www 
+                       --output=newfile</pre>
+</div>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_file_releases_monitor_packages"></a>4.12.4. Monitoring packages</h4></div></div></div>
+<p>You can monitor a package by clicking on the envelope next to the package name.
+                      The envelope now bears a red symbol.</p>
+<p>You can unmonitor the package by clicking again on the envelope.</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_file_releases_subscribe_rss"></a>4.12.5. Subscribing RSS feed for a package</h4></div></div></div>
+<p>You can subscribe a RSS feed for a package on the summary page of the project, 
+                by clicking on the RSS icon and select Alcatel-Lucent Forge Developer New Project Releases.
+                </p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ug_project_cvs.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ug_project.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ug_sitewide.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">4.11. CVS </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> 5. Site-wide functions</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

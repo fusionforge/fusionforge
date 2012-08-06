@@ -1,0 +1,106 @@
+/**
+ * $Id: fusionforge-print.css 8071 2011-05-18 14:56:14Z vargenau $
+ *
+ * Copyright (C) 2008 Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+*/
+
+/*
+ * Standard Alcatel-Lucent disclaimer for contributing to open source
+ *
+ * "The Style Sheet ("Contribution") has not been tested and/or
+ * validated for release as or in products, combinations with products or
+ * other commercial use. Any use of the Contribution is entirely made at
+ * the user's own responsibility and the user can not rely on any features,
+ * functionalities or performances Alcatel-Lucent has attributed to the
+ * Contribution.
+ *
+ * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
+ * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
+ * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE
+ * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER
+ * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
+ * ALONE BASIS."
+ */
+
+/* Do not print the wiki navigation and edition bars */
+.toolpalettes { display: none; }
+
+/* Do not print Page Trail line */
+.pagetrail { display: none; }
+
+/* Do not print main wiki browse banner */
+.browsebanner { display: none; }
+
+/* Do not print rateit widget */
+#rateit-widget-top { display: none; }
+
+/* Do not print date of last edition */
+.editdate { display: none; }
+
+/* Print links in black */
+a { color: black; }
+
+/* Do not print icons in front of hyperlinks */
+a.interwiki img { display: none; }
+a.named-interwiki img { display: none; }
+a.namedurl img { display: none; }
+
+/* Do not print "none" sorting icon */
+img[src="/wiki/themes/fusionforge/buttons/no_order.png"] { display: none; }
+
+/**
+ * Table of content
+ */
+div.toc {
+    border: 1px solid black;
+}
+
+/* Do not print TOC toggle image */
+#toctoggle { display: none; }
+
+div.toc p.toctitle, h1, h2, h3, h4, h5, h6 {
+    border-bottom: 1px solid black;
+}
+
+h1 { font-weight: bold; }
+
+/*
+div.toclist a::after {
+    content: leader('.') target-counter(attr(href), page);
+}
+*/
+
+table.boxed, table.bordered, table.bordered th, table.bordered td {
+    border-color: black;
+}
+
+#content {
+    background: white;
+    border: none;
+}
+
+/* Do not cut tables with class "nobreak" */
+
+table.nobreak {
+    page-break-inside: avoid !important;
+}

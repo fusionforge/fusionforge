@@ -1,0 +1,16 @@
+#!/bin/sh
+# daily Berkeley DB backup into ASCII dumpfiles
+# adjust the version of your db tools
+
+DBDIR=/var/www/wikidb
+
+for db in pagedb session; do
+  /usr/bin/db3.1_verify $DBDIR/$db.db3
+  if [ $? -gt 0 ]; then
+    echo "$db.db3 corrupt"
+  fi
+  cd $DBDIR
+  dump="$db-`date +%Y%m%d-%H%M`.dump"
+  #/usr/bin/db3.1_dump -r -p -f $dump $db.db3
+  /usr/bin/db3.1_dump -p -f $dump $db.db3
+done

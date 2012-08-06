@@ -1,0 +1,75 @@
+#!/bin/sh
+# Memory regression helper.
+# Create a .data file from a .result file, which can then be processed by combine_define.pl
+# If the 2nd arg is not -nopl some ploticus file is also created.
+
+result=$1
+if [ ! -e $result.result ]; then 
+  if [ -e $result ]; then result="`echo $result|sed s,.result,,`"
+  else
+    echo "$result.result missing" 
+    exit
+  fi
+fi
+
+perl -ne '
+    BEGIN { $i=1; print "//inc\tmem\tmsg\n"; }
+    chomp;
+    if (/^-- MEMORY USAGE: (\d+)/) {
+	print "$i\t$1\t$msg\n"; $i++;
+    } elsif (/^(\w+)=(\S+)$/) {
+	$vars .= "// $_\n";
+    } else {
+      $msg = $_;
+    }
+    END { print "\n// PARAMS:\n",$vars; }
+' $result.result > $result.data
+
+today=`date`
+echo "// CREATED=$today" >> $result.data
+
+# pl -png -o vbars.png -prefab vbars data=all_dba.data x=2 y=1 barwidth=line vals=yes ylbl="memory (kb)" title="dba cli-4.3.9WIN" xlbl="consecutive tests" stubvert=yes ygrid=yes ylbldet="adjust=-0.1,0" xlbldet="adjust=0,-1.2"
+
+# pl -png -o stack.png -prefab stack data=all_dba.data x=2 y=1 barwidth=line ylbl="memory (kb)" title="dba cli-4.3.9WIN" ygrid=yes ylbldet="adjust=-0.1,0" stubvert=yes stackarea=yes name=file name2=file name3=SQL name4=ADODB
+
+# pl -png -o all_$db.png -prefab vbars data=all_$db.data x=2 y=1 barwidth=line yfield=1 fill=redorange pointsym=none pointsym2=none 
+
+if [ "x$2" = "x-nopl" ]; then exit; fi
+
+php_const() {
+  grep $1 $2|cut -d= -f2
+}
+PHP_SAPI=`php_const PHP_SAPI $result.result`
+PHP_SAPI=${PHP_SAPI:-cli}
+PHP_OS=`php_const PHP_OS $result.result`
+PHP_VERSION=`php_const PHP_VERSION $result.result`
+PHPWIKI_VERSION=`php_const PHPWIKI_VERSION $result.result`
+title="$PHP_SAPI-$PHP_OS-$PHP_VERSION $PHPWIKI_VERSION"
+legendvars=`grep "// " $result.data|cut -c4-`
+
+# echo "Usage: pl -png -o $result.png $result.ploticus"
+# basic memory usage graph for single test
+cat > $result.ploticus <<EOF
+// Usage: pl -png -o $result.png $result.ploticus
+#proc page
+  pagesize: 11 8.5 
+  #if \@DEVICE in gif,png
+    scale: 0.7
+  #endif
+  textsize: 10
+  title: $title 
+         $result
+
+#endproc
+
+#set resultdata = $result.data
+#include _mem_pl.ploticus
+
+#proc annotate
+  location: @legend
+  textdetails: size=7, align=L
+  text: $legendvars
+  
+#endproc
+
+EOF

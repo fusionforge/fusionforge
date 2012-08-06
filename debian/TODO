@@ -1,0 +1,48 @@
+This is a TODO list for the packaging.  Some items that used to be
+here have been transferred onto the Savannah project, at
+<http://savannah.gnu.org/support/?group_id=259>.
+
+* [CB] Add the possibility to handle sourceforge.conf with debconf
+
+* [CB] Using ldap2dns
+
+* [CB] Make /stats/ work.  [RM] It seems the tables don't get filled
+  up, so I'd be tempted to blame the cronjobs.
+
+* [CB] Add documentation pointed in project admin page.  [RM] Has to
+  wait for smooth DB upgrade.  [RM] Even though, most of the
+  documentation is VA-centric and should not be used as is.
+
+* [CB] ViewCVS instead of CVSWEB?  [RM] Chora might be even better,
+  since it's in PHP and could be more easily hacked to include
+  permission checking.
+
+* [CB] When a project is private, cvsweb access should be too, this
+  means implementing access control a la sourceforge in perl for
+  CVSWEB or python for ViewCVS.  At the occasion give the sourceforge
+  look to CVS Browsing.
+
+* [CB] Find how to use libnss-lwres.  [RM] ???  [CB] It is not doing
+  what I was thinking.  It may be possible to make the dns server to
+  use directly postgres-db or ldap (Look at sdb driver
+  /usr/share/doc/bind9-doc/misc/sdb.gz).
+
+* [RM] Decide on whether to use a chroot or not.
+
+* [RM] Provide a way to un-release a file, and (why not?) to modify a
+  released file afterwards.  Maybe.  [RM] Already supposed to work
+  (edit releases), needs testing.  [RM] Currently done asynchronously
+  (by a cron job).  Can probably be done on-the-fly instead, but that
+  requires a patch in fileforge.pl.
+
+* [RM] Browse through everything and find out things to add here.
+
+* [RM] Search and replace "sourceforge.net" with the appropriate
+  hostname in all files.  Ditto with "valinux.com".
+
+* [CB] Integrate Sourceforge Timesheet System 
+  http://sourceforge.net/projects/dts
+
+# Local variables:
+# mode: indented-text
+# End:

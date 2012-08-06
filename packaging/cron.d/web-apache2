@@ -1,0 +1,6 @@
+#
+# Regular cron jobs for the web-apache2 package
+#
+
+# Clean cached files older than 60 minutes
+25 * * * * root [ -d /var/cache/@OLDPACKAGE@ ] && find /var/cache/@OLDPACKAGE@/ -type f -and -cmin +60 -exec /bin/rm -f "{}" \; > /dev/null 2>&1

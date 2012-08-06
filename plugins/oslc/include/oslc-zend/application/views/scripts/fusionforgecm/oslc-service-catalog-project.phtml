@@ -1,0 +1,39 @@
+<?php
+/**
+ * This file is (c) Copyright 2010 by Sabri LABBENE, Institut
+ * TELECOM
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ * This program has been developed in the frame of the HELIOS
+ * project with financial support of its funders.
+ *
+ */
+
+require_once('_service-catalog_xml.php');
+require_once('_add_hyperlinks.php');
+
+?>
+<body>
+<h1>OSLC Core V2 ServiceProvider corresponding to a FusionForge project</h1>
+<pre>
+<?php
+	$xml = project_trackers_to_service_catalog($this->serverUrl(), $this->serverUrl().$this->baseUrl(), $this->trackers, $this->project);
+	$text = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
+	$text = add_links($text, $this->serverUrl());
+	echo $text;
+?>
+</pre>
+</body>

@@ -1,0 +1,24 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
+Template: @PACKAGE@/shared/simple_dns
+Type: boolean
+Default: false
+# Translators: SCM here means "Source Control Management"
+#              (cvs, svn, etc.)
+_Description: Do you want a simple DNS setup for @FORGENAME@?
+ You can use a simple DNS setup with wildcards to map all
+ project web-hosts to a single IP address, and direct all the scm-hosts
+ to a single SCM server, or a complex setup which allows
+ many servers as project web servers or SCM servers.
+ .
+ Even if you use a simple DNS setup, you can still use
+ separate machines as project servers; it just assumes that
+ all the project web directories are on the same server with a single
+ SCM server.

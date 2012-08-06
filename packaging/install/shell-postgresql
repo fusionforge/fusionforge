@@ -1,0 +1,2 @@
+deb-specific/fusionforge.rsyslog etc/rsyslog.d/
+utils/install-nsspgsql.sh usr/share/@OLDPACKAGE@/bin/

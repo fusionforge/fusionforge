@@ -1,0 +1,39 @@
+<?php // -*-php-*-
+// $Id: body.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+// Set the body attr dynamically. here class="ns-2" for Mozilla
+?>
+  <body <?php echo $WikiTheme->getMoreAttr('body') ?>>
+    <div id="global-wrapper">
+      <div id="column-content">
+	<div id="content">
+	  <?php echo Template('top') ?>
+	  <div id="bodyContent">
+	    <?php echo $CONTENT ?>
+
+	    <!-- end content -->
+	    <div class="visualClear"></div>
+	  </div>
+	</div>
+<?php if (!$WikiTheme->DUMP_MODE) { ?>
+	<?php echo Template('logo') ?>
+        <div id="footer"><?php // for top & bottom toolbars stylesheet ?>
+          <?php echo Template('browse-footer') ?>
+        </div>
+        <div id="bottom">
+	  <?php echo Template('bottom') ?>
+        </div>
+      </div>
+      <div id="column-one">
+<?php if (ALLOW_ANON_USER or $user->isAuthenticated()) { ?>
+	<?php echo Template('navbar') ?>
+	<?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
+	  <?php echo Template('actionbar') ?>
+	<?php } ?>
+<?php } // isAuthenticated ?>
+	<?php if (empty($NOSIGNIN)) { ?>
+	  <?php echo Template('signin', array('NOFORM' => 0)) ?>
+	<?php } ?>
+      </div>
+<?php } // !DUMP_MODE ?>
+    </div>
+  </body>

@@ -1,0 +1,19 @@
+<?php // -*-php-*-
+// $Id: browse.tmpl 8155 2011-10-03 12:33:36Z vargenau $
+?>
+
+<?php if ($revision and !$revision->isCurrent()) { ?>
+  <p><strong><?php echo _("Note:")?></strong>
+     <?php echo _("You are viewing an old revision of this page.")?>
+  <?php echo Button('browse', _("View the current version."), $page)?>
+  </p>
+<?php } ?>
+<?php if (!empty($redirected)) { ?>
+  <p><?php echo $redirected ?></p>
+<?php } ?>
+
+<?php echo $CONTENT?>
+
+<div id="footer"><?php // for top & bottom toolbars stylesheet ?>
+  <?php echo Template('browse-footer')?>
+</div>

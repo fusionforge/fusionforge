@@ -1,0 +1,89 @@
+<?php // -*-php-*-
+// $Id: actionbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<?php
+  //$p = $WikiTheme->tooltipAccessKeyPrefix();
+  $dbh = $request->getDbh();
+  $isAdmin = $user->isAdmin();
+  $pagename = $page->getName();
+  $isActionPage = isActionPage($pagename);
+  $isBrowse = $request->getArg('action') == 'browse';
+?>
+<div class="portlet" id="p-cactions">
+  <h5><?php echo _("Views") ?></h5>
+  <ul>
+    <?php if (!string_ends_with($pagename, SUBPAGE_SEPARATOR._("Discussion"))) { ?>
+      <?php $talk = new WikiPageName('Talk:'.$pagename); ?>
+      <?php echo ActionButton(array(),
+		       $isActionPage ? _("ActionPage") : _("Article"), 
+		       $talk->getParent(), array('class'=>$isBrowse ? "selected" : "", 'title' => "View the page [alt-c]")) ?>
+      <?php if (!$isActionPage) { ?>
+        <?php if ($dbh->isWikiPage($talk->getName())) { ?>
+	  <?php echo ActionButton(array('action'=>'browse'), _("Discussion"), $talk->getName()) ?>
+        <?php } else { ?>
+	  <?php echo ActionButton(array('action'=>'create',
+				 'template'=>_("Template/Talk")),
+			   _("Discussion"), $talk->getName()) ?>
+        <?php } ?>
+      <?php } ?>
+    <?php } else {
+      $talk = new WikiPageName($pagename); ?>
+      <?php echo ActionButton(array(),$isActionPage ? _("ActionPage") : _("Article"), $talk->getParent(), array('title' => "View the page [alt-c]")) ?>
+      <?php echo ActionButton(array(),_("Discussion"), $talk->getName(), array('class'=>$isBrowse ? "selected" : "")) ?>
+    <?php } ?>
+    <?php if (($isAdmin or mayAccessPage('edit', $pagename)) and $revision) { ?>
+    <?php echo ActionButton("edit", $dbh->isWikiPage($page->getName()) ? ($revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) : _("Create Page"), false, 
+		     array('id' => 'btn-edit', 'title' => "You can edit this page. Please use the preview button before saving. [alt-e]")) ?>
+    <?php } else { ?>
+      <?php echo ActionButton("viewsource", _("View Source")) ?>
+    <?php } ?>
+
+    <?php if ($dbh->isWikiPage($page->getName())) { ?>
+
+      <?php echo ActionButton(_("PageHistory"),_("History"),false,array('title'=>"Past versions of this page. [alt-h]")) ?>
+
+      <?php if (!empty($revision) and ($isAdmin or mayAccessPage('purge', $pagename))) { ?>
+        <?php echo ActionButton("purge") ?>
+      <?php } ?>
+
+      <?php if ($isAdmin or mayAccessPage('change', $pagename)) { ?>
+        <?php echo ActionButton('rename') ?>
+        <?php echo ActionButton($page->get('locked') ? 'unlock' : 'lock') ?> 
+      <?php } ?>
+
+    <?php } ?>
+
+    <?php if ( $user->isSignedIn() ) { ?>
+      <?php echo ActionButton(_("WatchPage"), _("Watch"), false, 
+		       array('title'=>"Add/Remove this to/from the list of pages you're monitoring for changes [alt-l]")) ?>
+    <?php } ?>
+  </ul>
+</div>
+<div class="portlet" id="p-tbx">
+  <h5><?php echo _("Special Actions") ?></h5>
+  <div class="pBody">
+  <ul>
+    <?php if ( $user->isSignedIn() ) { ?>
+     <?php if ($isAdmin or mayAccessPage('change', $pagename)) { ?>
+      <?php if (ENABLE_PAGEPERM and mayAccessPage('change', $pagename)) { ?>
+       <?php echo ActionButton('chown') ?>
+       <?php echo ActionButton('setacl') ?>
+     <?php }} ?>
+     <?php if (!empty($revision) and ($isAdmin or mayAccessPage('remove', $pagename))) { ?>
+      <?php echo ActionButton('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?>
+      <?php echo ActionButton('remove') ?>
+     <?php } ?>
+    <?php } ?>
+    <?php echo ActionButton(array('action'=>_("PageInfo")), _("Page info"), $pagename) ?>
+    <?php echo ActionButton(array('action'=>_("AuthorHistory")), _("Author history"), $pagename) ?>
+    <?php echo ActionButton("diff") ?> 
+    <?php echo ActionButton(array('action'=>_("PageDump")), _("Page dump"), $pagename) ?>
+    <?php if (DEBUG and USECACHE) {
+      $PurgeCache = ActionButton(array('nocache' => 'purge'),
+                     _("Purge HTML cache"), $pagename);
+      $PurgeCache->addTooltip(_("Purge HTML cache for this page. Regenerate from WikiMarkup when next accessed.")); ?>
+      <?php echo $PurgeCache ?>
+    <?php } ?>
+  </ul>
+  </div>
+</div>

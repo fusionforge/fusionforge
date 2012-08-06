@@ -1,0 +1,136 @@
+<section id="ug_getting_started">
+	<title>Getting Started</title>
+	<section id="ug_getting_started_homepage">
+		<title>FusionForge homepage</title>
+		<para>
+			Connect with your browser to your FusionForge installation.
+		</para>
+	</section>
+	<section id="ug_getting_started_new_user">
+		<title>Registering as a new user</title>
+		<para>
+			To register a new user, click on the <emphasis>New Account</emphasis> link on the top right side of the browser window.
+		</para>
+		<para>
+			To register as a user, you need to fill out the form with the following data:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Login Name</term>
+				<listitem>
+					<para>
+						You should select an unique user name to access to the system. The name should not contain uppercase letters and usually is a combination of your name and your surname; e.g. jdoe for John Doe.  Also, the user name cannot match that of an existing system user account - i.e., you can't have a FusionForge user named 'root'.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Password</term>
+				<listitem>
+					<para>
+						You should insert your password here. It must be at least 6 characters long. You shouldn't use too obvious names for the password. It should be easy to remember for you, but hard to guess for others. So don't use the name of your dog, of your cat, or the name of your birth city.
+					</para>
+					<para>You should use instead a combination of letters and numbers.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Full/Real Name</term>
+				<listitem>
+					<para>Here you should insert your full name.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Language Choice</term>
+				<listitem>
+					<para>Select here your preferred language. This choice does not influence only the language in which FusionForge will speak to you, but also some local specific data display, like dates, etc.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Timezone</term>
+				<listitem>
+					<para>Select your timezone. Note that GMT is preselected. All dates will be showed relative to your timezone.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Email Address</term>
+				<listitem>
+					<para>You should insert your email address here.</para>
+					<para>The email address should be correct, FusionForge will send you a confirmation email for your subscription. If the email address you're inserting here is wrong, you'll never receive the confirmation email and the account you're registering will never be activated.</para>
+					<para>When you receive the confirmation email, you must connect to FusionForge using the provided URL in the email. This is the only way to become a registered user.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Receive Email about Site Updates</term>
+				<listitem>
+					<para>If you check this, you'll periodically receive information about the FusionForge site. The traffic is very low, it is recommended that you activate this option.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Receive additional community mailings</term>
+				<listitem>
+					<para>If you check this, you will receive information about the site's community.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	<section id="ug_getting_started_new_project">
+		<title>Registering a new project</title>
+		<para>To register a new project, connect to FusionForge,
+		login and go to <emphasis>My Page</emphasis> section. You have a <emphasis>Register
+		Project</emphasis> link in the menu at the top of the
+		page.</para>
+		<para>You need to insert the following information to
+		register a project:</para>
+		<variablelist>
+			<varlistentry>
+				<term>Project Full Name</term>
+				<listitem>
+					<para>The Name of the Project: eg. FusionForge Master project</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Project Purpose and Summarization</term>
+				<listitem>
+					<para>A brief summary of the Project</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>License</term>
+				<listitem>
+					<para>You must select a License for your software.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Project Public Description</term>
+				<listitem>
+					<para>Insert a description of the Project. This description will appear in the Project Summary page</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Project Unix Name</term>
+				<listitem>
+					<para>Insert here the Unix name of your project. This name must respect the following rules:</para>
+					<orderedlist>
+						<listitem><para>it cannot match the Unix name of any other project</para></listitem>
+						<listitem><para>its length must be between 3 and 15 characters</para></listitem>
+						<listitem><para>only lowercase letters, numbers and dashes are accepted</para></listitem> 
+					</orderedlist>
+					<para>The Unix name will be used for your website, the CVS Repository and the shell access for FusionForge.</para>
+					<note>
+						<para>The Unix name will never change. Once a project is set up with its Unix name, the name cannot be changed.</para>
+					</note>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>Click on the <emphasis>I agree</emphasis> button to register the project. Your project is now registered on FusionForge; but you cannot yet access it. It has to be approved from the site administrators.</para>
+		<para>When the project is approved, you'll receive an email from FusionForge confirming that the project is active.</para>
+	</section>
+	<section id="ug_getting_started_login">
+		<title>Login</title>
+		<para>You can login by clicking the <emphasis>Login</emphasis> link in the top-right border of the browser window.</para>
+		<para>The form requires that you insert your username and your password to access the site. If the data is correct, the user homepage will be displayed.</para>
+	</section>
+	<section id="ug_getting_started_logout">
+		<title>Logout</title>
+		<para>To log out from FusionForge, click on the <emphasis>Logout</emphasis> link on the top right of your browser window.</para>
+	</section>
+</section>

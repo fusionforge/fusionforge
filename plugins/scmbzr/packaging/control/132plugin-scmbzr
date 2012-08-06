@@ -1,0 +1,7 @@
+Package: @PACKAGE@-plugin-scmbzr
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, bzr, php5-cli, ${misc:Depends}
+Provides: @PACKAGE@-plugin-scm, @OLDPACKAGE@-plugin-scmbzr
+Conflicts: @OLDPACKAGE@-plugin-scmbzr
+Replaces: @OLDPACKAGE@-plugin-scmbzr
+Description: collaborative development tool - Bazaar plugin

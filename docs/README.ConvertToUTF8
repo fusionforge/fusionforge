@@ -1,0 +1,25 @@
+By: phil
+
+Hello
+for those of you who used sourceforge and now use gforge with the same database,
+you probably noticed that if the language of the site was something other then
+english the strings stored in the db are now not displayed correctly because
+of the new coding mechanism used by gforge which is UTF-8. Here is how you can
+transform the encoding of your database to make it work. That exemple will work
+if your site used only one type of language for exemple latin1.
+
+If you want to convert your db so that the strings will be displayed correctly,
+do that:
+1) dump your existing db
+2) Create a new db with UTF-8 encoding:
+createdb -E UNICODE your_new_db_name
+3) Convert your dump with iconv (in that exemple, all strings were
+in iso-8859-1):
+iconv -f iso-8859-1 -t utf-8 your_database_dump > database_dump_converted
+4) Load your dump into the db using:
+psql -d your_new_db_name -f database_dump_converted
+
+And that's it.
+
+Greetings
+Phil

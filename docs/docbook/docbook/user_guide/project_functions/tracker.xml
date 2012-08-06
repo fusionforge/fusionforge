@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="ug_project_tracker">
+	<title>Tracker</title>
+	<section id="ug_project_tracker_what_is">
+		<title>What is the Tracker?</title>
+		<para>
+			The Tracker is a generic system where you can store items like bugs, feature requests, patch submissions, etc.
+		</para>
+		<para>
+			You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.
+		</para>
+		<para>
+			Trackers are referred to as <quote>Artifact Types</quote> and individual pieces of data are <quote>Artifacts</quote>. <quote>Bugs</quote> might be an Artifact Type, while a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming.
+		</para>
+		<para>
+			When a project is created, FusionForge creates automatically 4 trackers:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Bugs</term>
+				<listitem>
+					<para>Used for Bug tracking</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Support Requests</term>
+				<listitem>
+					<para>Users can insert here support requests and receive support</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Patches</term>
+				<listitem>
+					<para>Developers can upload here patches to the software</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Feature Requests</term>
+				<listitem>
+					<para>Requests for enhancements of the software should be posted here</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	<section id="ug_project_tracker_using">
+		<title>Using a Tracker</title>
+		<para>
+			The following descriptions can be applied to any of the trackers. The functionalities between the different trackers are the same, we'll use the Bugs Tracker as example to describe the functionality of all trackers.
+		</para>
+		<para>
+			The Tracker provides the following functions:
+		</para>
+		<orderedlist>
+			<listitem><para>Submitting a new item</para></listitem>
+			<listitem><para>Browsing of Items</para></listitem>
+			<listitem><para>Downloading CSV file</para></listitem>
+			<listitem><para>Reporting</para></listitem>
+			<listitem><para>Monitoring</para></listitem>
+			<listitem><para>Administration</para></listitem>
+		</orderedlist>
+	</section>
+	<section id="ug_project_tracker_submit_new">
+		<title>Submitting a new Bug</title>
+		<para>
+			To submit a new bug, click on the <guimenuitem>Submit New</guimenuitem> link. A form will be displayed, where you can insert/select the following data:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Assigned To</term>
+				<listitem>
+					<para>You can assign the item to a user. Only users which are <quote>Technicians</quote> are listed here.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Priority</term>
+				<listitem>
+					<para>You can select the Priority of the item. In the Browse list, and the homepage of the users, priorities are displayed in different colors, and can be ordered by priority.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Summary</term>
+				<listitem>
+					<para>Give a short description of the bug, e.g. Logout function gives an SQL Error</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Detailed Description</term>
+				<listitem>
+					<para>Insert the most detailed description possible.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>File upload</term>
+				<listitem>
+					<para>You can also upload files as attachment to the bug. This can be used to attach a screenshot with the error and the log file of the application.</para>
+					<para>To upload files, select files using the <emphasis>Browse</emphasis> button.
+                                              You can upload up to 5 files at a time.</para>
+					<note>
+						<para>Attachments to tracker items can be no larger than 256KB.</para>
+					</note>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<note>
+		    <para>Some custom fields may have been added by administrators. Default bug trackers propose the following additional fields: Resolution, Severity, Version, Component, Operating System, Product, Hardware, URL.</para>
+		</note>
+
+                <para>When the user is not logged, he will still be proposed to submit new bugs.
+                If the Tracker allows anonymous posting, he will be able to post without logging in.
+                If the Tracker does not allow anonymous posting, clicking on the <emphasis>Submit New</emphasis> link
+                will prompt the user with the login banner.
+                </para>
+	</section>
+	<section id="ug_project_tracker_browse_bugs">
+		<title>Browse Bugs</title>
+		<para>
+			The Browse page shows the list of bugs. You
+			can create and save queries allowing filtering
+			on any defined fields.
+		</para>
+		<para>
+			You can sort the items by ID, Summary, Open Date, Submitter and the Ordering (ascending, descending).
+		</para>
+		<para>
+			The different colors indicate the different priorities of the bug; a * near the open date indicates that the request is more than 30 days old. The overdue time (default 30 days) is configurable for each tracker.
+		</para>
+		<para>
+			When you click on the summary, you go to the detail/modify Bug page.
+		</para>
+	</section>
+	<section id="ug_project_tracker_modify_bugs">
+		<title>Modify Bugs</title>
+		<para>
+			In the modify Bug page, you can modify the data you inserted, and also add the following information:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Data Type</term>
+				<listitem>
+					<para>This combo box lists the trackers of the project. If you select a different tracker and submit the changes, the item will be reassigned to the selected tracker.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Status</term>
+				<listitem>
+					<para>The status indicates the status of the item. When an item is inserted, it is created in the <quote>Open</quote> state. When you fix a bug, you should change the state to <quote>Closed</quote>.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Canned Responses</term>
+				<listitem>
+					<para>Canned responses are prefixed responses. You can create canned responses for your project in the admin section and select the responses in the combo box.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			The Changelog on the bottom of the page shows in chronological order the changes applied to the item. Also all followups can be viewed.
+		</para>
+	</section>
+	<section id="ug_project_tracker_monitor_bugs">
+		<title>Monitor Bugs</title>
+                <para>You can choose to monitor a tracker as a whole, or only individual tracker 
+                      entries.
+                </para>
+                <section id="ug_project_tracker_monitor_entire_tracker">
+                <title>Monitoring an entire tracker</title>
+                <para>
+                Go to the tracker page and select <guibutton>Monitor</guibutton> link.
+                </para>
+                <para>
+                To stop monitoring the tracker, select <guibutton>Stop Monitor</guibutton> link.
+                </para>
+                </section>
+                <section id="ug_project_tracker_monitoring_tracker_entries">
+                <title>Monitoring tracker entries</title>
+		<para>
+			If you select the <guibutton>Monitor</guibutton> button on the top left of the Bug detail page, bug monitoring will be enabled.
+		</para>
+		<para>
+			When you are monitoring a bug, every change to the bug will be sent to you by email.
+		</para>
+		<para>
+			To disable bug monitoring, simply select the <guibutton>Stop Monitoring</guibutton> button.
+		</para>
+	        </section>
+	</section>
+	<section id="ug_project_tracker_admin">
+		<title>Admin Tracker</title>
+		<para>
+			If you are an Administrator of the tracker, you can add or change bug groups, categories, canned responses:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Manage Custom Fields</term>
+				<listitem>
+					<para>You can add new fields or change the name of ones.</para>
+					<para>You can select the type of box (select box, check box, radio button, text field, multi-select box and status) and the possible values.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Add Update Canned Responses</term>
+				<listitem>
+					<para>Canned responses are predefined responses. Creating useful generic messages can save you a lot of time when handling common requests.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Update preferences</term>
+				<listitem>
+					<para>Here you can update the following information on the tracker:</para>
+					<variablelist>
+						<varlistentry>
+							<term>Name</term>
+							<listitem>
+								<para>The name of the Tracker. This is the name displayed in the tracker list, e.g. Bug Submissions.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Description</term>
+							<listitem>
+								<para>The description of the Tracker. E.g. This is the tracker dedicated to the Bugs of the project</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Publicly Available</term>
+							<listitem>
+								<para>By default, this checkbox is not enabled.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Allow non-logged-in postings</term>
+							<listitem>
+								<para>If this checkbox is enabled, also non logged-in users can post items to the tracker. If this checkbox is not enabled, only logged in users can post items.</para>
+								<para>By default, this checkbox is not enabled.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Send email on new submission to address</term>
+							<listitem>
+								<para>All new items will be sent to the address inserted in the text box.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Send email on all changes</term>
+							<listitem>
+								<para>If this checkbox is enabled, all changes on the items will be sent out via email. It is useful to check this radiobutton only if in the Send email address is inserted an email address.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Days still considered overdue</term>
+							<listitem>
+								<para></para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Days till pending tracker items time out</term>
+							<listitem>
+								<para></para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Free form text for the <guimenuitem>Submit new item</guimenuitem> page</term>
+							<listitem>
+								<para>This allows you to put a specific introduction on the <guimenuitem>submit new item</guimenuitem> page.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Free form text for the <guimenuitem>Browse items</guimenuitem> page</term>
+							<listitem>
+								<para>This allows you to put a specific introduction on the <guimenuitem>Browse items</guimenuitem> page.</para>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	<section id="ug_project_tracker_mass_update">
+		<title>Mass Update</title>
+		<para>
+			If you are an Administrator of the tracker, you are also enabled for the Mass Update function.
+		</para>
+		<para>
+			This function is visible in the browse bug page and allows you to update the following information:
+		</para>
+		<orderedlist>
+			<listitem><para>Priority</para></listitem>
+			<listitem><para>Assignee</para></listitem>
+			<listitem><para>Status</para></listitem>
+			<listitem><para>Canned Response</para></listitem>
+		</orderedlist>
+		<para>
+			When this function is enabled, a checkbox will appear at the left side of each bug id. You can check one or more of the ids, select one or more of the values in the Mass Update combo boxes and click Mass Update.
+		</para>
+		<para>
+			All selected bugs will be modified with these new value(s). This function is very useful if you need to change the same information for more bugs; e.g. assigning 5 bugs to one developer or closing 10 bugs.
+		</para>
+                <para>
+                        This function allow to update all selected box fields, not only mandatory fields but also custom fields.
+		</para>
+	</section>
+	<section id="ug_project_tracker_reporting">
+		<title>Reporting</title>
+		<para>
+			The reporting functions allows to check the life-span of the Bug. The lifespan is the duration of the bug; it starts when the bug is inserted (opened) in the tracker and ends when the bug is closed.
+		</para>
+		<itemizedlist>
+			<listitem>
+			<para>By assignee</para>
+			</listitem>
+			<listitem>
+			<para>Response time</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+	<section id="ug_project_tracker_searching">
+		<title>Searching for bugs</title>
+		<para>
+			When using a tracker, a voice with the name of the tracker will appear in the search combo box. The search will be done on the description, the summary, the username of the submitter and the username of the assignee.
+		</para>
+		<para>
+                        Giving a number will redirect to the corresponding tracker id.
+		</para>
+	</section>
+        <section id="ug_project_tracker_add_comment_by_email">
+          <title>Adding a comment to a tracker by e-mail</title>
+          <para>
+            When a user receives an e-mail about a tracker, he can add
+            add a comment to this tracker by replying to this e-mail.
+          </para>
+          <note><para>The e-mail reply must use plain text format. An HTML e-mail
+                      will lead to an error message.</para></note>
+
+        </section>
+
+        <section id="ug_project_tracker_cli">
+          <title>Managing trackers via CLI (Command-Line Interface)</title>
+
+                <para>We give here some basic examples of CLI commands. For more information,
+                      please consult the FusionForge Command-line interface (CLI) documentation.</para>
+
+                <section id="ug_project_tracker_cli_login">
+                <title>Logging in with CLI</title>
+                <para><screen>gforge.php -v login --username="user" --project=myproject</screen></para>
+                </section>
+
+                <section id="ug_project_tracker_cli_list">
+                <title>Getting the list of tracker entries via CLI</title>
+
+                <para>Use CLI to get the tracker id for a given project</para>
+                <para><screen>gforge.php tracker typelist</screen></para>
+                <para>Use CLI to get the list all bugs for a given project</para>
+                <para><screen>gforge.php tracker list --type=xxx</screen></para>
+
+                </section>
+
+                <section id="ug_project_tracker_cli_create">
+                <title>Creating a tracker entry via CLI</title>
+                <para><screen>gforge.php tracker add --type=xxx --priority=4 --summary="New bug" 
+                       --details="This is a brand new bug"</screen></para>
+                </section>
+
+                <section id="ug_project_tracker_cli_update">
+                <title>Updating a tracker entry via CLI</title>
+                <para><screen>gforge.php tracker update --type=xxx --id=yyyy --priority=5 
+                   --summary="New summary" --details="New details"</screen></para>
+                <para>You can include a Custom Field, e.g. Group</para>
+                <para><screen>gforge.php tracker update --type=xxx --id=yyyy --priority=5 
+                          --summary="New summary" --group=zzzz</screen></para>
+                </section>
+
+        </section>
+
+</section>

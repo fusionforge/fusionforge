@@ -1,0 +1,4 @@
+Package: @PACKAGE@-plugin-authcas
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, ${misc:Depends}
+Description: collaborative development tool - CAS authentication plugin

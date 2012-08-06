@@ -1,0 +1,51 @@
+<section id="cg__howto_xhtml">
+	<title>How to obtain XHTML compliance for FusionForge</title>
+	<para>
+		The complete XHTML specification is available at <ulink url="http://www.w3.org/TR/xhtml1/">XHTML specification</ulink> at <ulink url="http://www.w3.org">www.w3c.org</ulink>.
+	</para>
+	<para>
+		Here is listed a summary of what is needed to be XHTML compliant:
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>XML declaration</term>
+			<listitem>
+				<para>All pages should have the following xml declaration:</para>
+				<programlisting><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+]]></programlisting>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Document must be well-formed</term>
+			<listitem>
+				<para>All open tags must be closed, all tags must stay between &lt; and &gt;.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>All tags must be lowercase</term>
+			<listitem>
+				<para><markup>&lt;HTML&gt;</markup> must be converted to <markup>&lt;html&gt;</markup>.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Empty tags must be closed</term>
+			<listitem>
+				<para>No standalone <markup>&lt;br&gt;</markup> tag is allowed; <markup>&lt;br/&gt;</markup> must be used.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Attributes must always be quoted</term>
+			<listitem>
+				<para><markup>&lt;td rowspan=3&gt;</markup> must be converted to <markup>&lt;rowspan="3"&gt;</markup>.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<para>
+		The differences listed here are the most significant differences between HTML and XHTML, there are other, minor differences. For a complete list, refer to the XHTML specification.
+	</para>
+</section>

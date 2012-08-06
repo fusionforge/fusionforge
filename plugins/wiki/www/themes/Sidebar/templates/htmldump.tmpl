@@ -1,0 +1,54 @@
+<?php  // -*-php-*-
+// $Id: htmldump.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+/*
+ * This template is used only for html file dumps, and is responsible
+ * mainly for the outer level <html> stuff and the and <head>.
+ */
+// echo "<","?xml version=\"1.0\" encoding=\"", $charset, "\"?", ">\n";
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset?>" />
+<link rel="home" title="<?php echo HOME_PAGE?>" href="<?php echo WikiURL(HOME_PAGE)?>" />
+<link rel="help" title="<?php echo _("HowToUseWiki")?>" href="<?php echo WikiURL(_("HowToUseWiki"))?>" />
+<link rel="copyright" title="<?php echo COPYRIGHTPAGE_TITLE?>" href="<?php echo COPYRIGHTPAGE_URL?>" />
+<link rel="author" title="<?php echo AUTHORPAGE_TITLE?>" href="<?php echo AUTHORPAGE_URL?>" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Language" content="<?php echo $GLOBALS['LANG']?>" />
+<?php $ROBOTS_CONTENT = isset($ROBOTS_META) ? $ROBOTS_META : "noindex,nofollow"; ?>
+<meta name="robots" content="<?php echo $ROBOTS_CONTENT ?>" />
+<?php if (!empty($PAGE_DESCRIPTION)) { ?>
+<meta name="description" content="<?php echo $PAGE_DESCRIPTION?>" />
+<?php } ?>
+<?php if (!empty($PAGE_KEYWORDS)) { ?>
+<meta name="keywords" content="<?php echo $PAGE_KEYWORDS?>" />
+<?php } ?>
+<meta name="language" content="<?php echo $GLOBALS['LANG']?>" />
+<meta name="document-type" content="Public" />
+<meta name="document-rating" content="General" />
+<meta name="generator" content="PhpWiki" />
+<meta name="PHPWIKI_VERSION" content="<?php echo PHPWIKI_VERSION?>" />
+
+<?php if (!empty($relative_base)) { ?>
+<base href="<?php echo $relative_base?>" />
+<?php } ?>
+<?php echo $WikiTheme->getCSS() ?>
+<?php
+  // avoid redundant bookmark title for custom home page
+  if ($page->getName() == WIKI_NAME && HOME_PAGE == WIKI_NAME)
+      $pagetitle = "";
+  else
+      $pagetitle = " - ". AsString($TITLE);
+?>
+<title><?php echo WIKI_NAME.$pagetitle?></title>
+</head>
+<?php if ($WikiTheme->DUMP_MODE) { ?>
+<?php echo Template('logo') ?>
+<?php } ?>
+<?php echo Template('body') ?>
+<div id="footer">
+  <?php echo Template('dump-footer') ?>
+</div>
+</html>

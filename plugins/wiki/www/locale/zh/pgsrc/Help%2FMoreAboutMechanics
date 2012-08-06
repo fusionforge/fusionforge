@@ -1,0 +1,40 @@
+Date: Fri,  4 Feb 2011 16:58:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FMoreAboutMechanics 7932 2011-02-04 16:03:52Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FMoreAboutMechanics;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+PhpWiki 是以伺服器端的 script 語言 PHP 所撰寫的, PHP 可以從
+http://www.php.net 取得. PHP 綜合了 C 與 Perl 的語法和函數,並且很類似
+ASP, ~EmbPerl 或 JSP.
+
+PhpWiki 是以許多的 PHP 與 HTML 所組成的. 而基於 PHP 之上的 WikiWikiWeb
+也使用資料庫存放頁面之前版本的的備份. (PhpWiki 目前支援了 DBM, MySQL,
+PostgreSQL 或文字檔案等資料庫.)
+
+每次使用者點擊網站, 所娶得頁面會從資料庫拉出來,並立刻輸出. 使用者只能
+從 =index.php= 進入,而它則決定了要含括那些 php 檔案.
+
+Wiki 頁面的連結是自動被連結的: AddingPages.
+這可能是 Wiki 中令人注意的地方, 要新增並連結頁面是很簡單的. 另外一個令人
+注意的事情是外部的 URLs 連結,像是:
+
+# http://www.wcsb.org/
+# ftp://ftp.redhat.com/
+# news://news.mozilla.org/
+# http://slashdot.org/
+# http://theregister.co.uk/
+
+以命名空間與簡單的標記組成, Wiki 展現了 WabiSabi 的精神.
+
+PhpWiki 使用 GNU General Public license 授權,你應該參照這裡:
+http://www.gnu.org/copyleft/gpl.txt.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

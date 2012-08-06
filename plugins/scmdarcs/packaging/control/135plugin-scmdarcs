@@ -1,0 +1,7 @@
+Package: @PACKAGE@-plugin-scmdarcs
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, darcs, darcsweb, php5-cli, ${misc:Depends}
+Provides: @PACKAGE@-plugin-scm, @OLDPACKAGE@-plugin-scmdarcs
+Conflicts: @OLDPACKAGE@-plugin-scmdarcs
+Replaces: @OLDPACKAGE@-plugin-scmdarcs
+Description: collaborative development tool - Darcs plugin

@@ -1,0 +1,46 @@
+<?php // -*- php -*-
+// $Id: wikiblog.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+$CDATE = $WikiTheme->formatDateTime($BLOG_CTIME);
+$buttons = $modified = '';
+
+if ($user->isAdmin() or $user->getId() == $BLOG_CREATOR) {
+    $buttons = HTML::small(array('class' => 'floatleft'),
+                           Button('edit', false, $page));
+    if ($user->isAdmin()) {
+	$buttons->pushContent($SEP, Button('remove', false, $page));
+    }
+}
+
+// This is a hack, but since we only have a fake PageRevision,
+// we can't get the version.
+if ($rev->get('mtime') != $BLOG_CTIME) {
+    $modified = HTML::small(array('class' => 'floatright'),
+			    fmt("Modified on %s by %s",
+				$WikiTheme->formatDateTime($rev->get('mtime')), 
+                                WikiLink($rev->get('author'))));
+}
+?>
+<div title="<?php echo fmt("Entry on %s by %s.", $BLOG_PARENT, $BLOG_CREATOR)?>"
+     class="wikiblog wikitext">
+  <!-- <div class="wikiblog-header">
+    <strong class="floatleft"><?php echo WikiLink($page, 'known', $CDATE) ?></strong>
+    <strong class="floatright"><?php echo WikiLink($BLOG_CREATOR, 'if_known') ?></strong>
+    <br class="clear-floats" />
+  </div> -->
+  <div class="wikiblog-body">
+    <?php if ($rev->get('summary')) { ?> 
+      <h3 class="wikiblog-summary"><?php echo $rev->get('summary') ?></h3>
+    <?php } ?>  
+    <?php echo $CONTENT ?>
+  </div>
+
+  <?php if ($buttons or $modified) { ?>
+    <div class="wikiblog-footer">
+      <?php echo $buttons ?>
+      <?php echo $modified ?>
+      <br class="clear-floats" />
+    </div>
+  <?php } ?>
+
+</div>
+<hr class="no-css" />

@@ -1,0 +1,85 @@
+Date: Fri, 10 Sep 2010 13:48:42 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Hilfe%2FVorlagePlugin 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Hilfe%2FVorlagePlugin;
+  flags="";
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+=== Synopsis
+
+Vorlage = Parametrische Blöcke.
+
+Include text from a wiki page and replace certain placeholders by parameters.
+Similiar to CreatePage with the template argument, but at run-time.
+
+Similiar to the mediawiki templates but not with the "|" parameter seperator. 
+Note: The mediawiki syntax is also supported.
+
+=== Usage
+{{{
+  <<Template page=Template/Footer>>
+
+  <<Template page=Template/Film vars="title=SomeFilm&year=1999" >>
+
+  {{Template/Film|title=SomeFilm|year=1999}}
+}}}
+
+=== Plugin Argumente
+Argument|
+  Vorgabewert|
+    Beschreibung
+
+page|
+  (empty)|
+    pagename to be included as template
+
+vars|
+  (empty)|
+    optional parameters to be expanded inside the template
+
+==== Parameter expansion:
+  vars="var1=value1&var2=value2"
+
+We only support named parameters, not numbered ones as in mediawiki, and 
+the placeholder is %%var%% and not {{~{var~}}} as in mediawiki.
+
+The following predefined variables are automatically expanded if existing:
+{{{
+  pagename
+  mtime     - last modified date + time
+  ctime     - creation date + time
+  author    - last author
+  owner     
+  creator   - first author
+  SERVER_URL, DATA_PATH, SCRIPT_NAME, PHPWIKI_BASE_URL and BASE_URL
+}}}
+
+<noinclude> .. </noinclude> is stripped
+
+==== In work:
+  Support a mediawiki-style syntax extension which maps 
+{{{
+    {{Template/Film|title=Some Good Film|year=1999}}
+}}}
+  to 
+{{{
+    <<Template page=Template/Film vars="title=Some Good Film&year=1999" >>
+}}}
+
+=== Examples
+
+{{{
+  <<Template page=Vorlage/Beispiel vars="title=TestTitle" >>
+}}}
+
+Standard syntax:
+  <<Template page=Vorlage/Beispiel vars="title=TestTitle" >>
+
+Shorter syntax:
+  {{Vorlage/Beispiel|title=TestTitel}}
+
+----
+[[PhpWikiDokumentation]] [[KategorieWikiPlugin]]

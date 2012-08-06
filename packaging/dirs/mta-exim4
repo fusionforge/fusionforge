@@ -1,0 +1,3 @@
+etc/@OLDPACKAGE@
+usr/share/@OLDPACKAGE@/bin
+var/lib/@OLDPACKAGE@/etc

@@ -1,0 +1,74 @@
+Date: Fri,  7 Jan 2011 17:32:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FUpLoadPlugin 7825 2011-01-07 16:35:43Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FUpLoadPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~UpLoad** [[Help:WikiPlugin|plugin]] displays an editbox and two buttons.
+* The first button lets you choose the file to be uploaded at your local filesystem. The textvalue of this button is localised from your browser.
+* The second "Upload" button actually uploads the given filename to the upload directory.
+This directory is not browsable, any file there may be accessed by using the "Upload~:"
+[[InterWikiMap]] prefix to the given filename. This way you can easily inline uploaded images.
+
+== Usage ==
+
+{{{
+<<UpLoad arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **logfile**
+| Local path. The format is currently HTML - a new {{{<tr>}}} row per entry - and not log file syntax.
+| phpwiki-upload.log
+|-
+| **autolink**
+| Add the uploaded filename to the list of uploaded files at the page.
+| true
+|-
+| **page**
+| The page where the uploaded files are publicly listed, if autolink is true.
+| Current page
+|-
+| **size**
+| Size of file input box.
+| 50
+|-
+| **mode**
+| 'actionpage' or 'edit'
+| actionpage
+|}
+
+== Notes ==
+
+# The user must be authenticated to be able to upload.
+# The filename may not end with certain disallowed extensions, to prevent from abuse.
+# MAX_FILE_SITE is configured by the config.ini option MAX_UPLOAD_SIZE, which defaults to 16MB. Your webserver and PHP may add another limit.
+# Already existing uploaded files are NOT overwritten.
+
+== Example ==
+
+{{{
+<<UpLoad>>
+}}}
+
+<<UpLoad>>
+
+== See Also ==
+
+* [[PhpWiki:InlineUploadedImages]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

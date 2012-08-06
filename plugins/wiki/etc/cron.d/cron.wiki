@@ -1,0 +1,17 @@
+#
+# GForge
+# Copyright 1999-2001 (c) VA Linux Systems
+# Copyright 2002-2004 (c) GForge, LLC, Ognyan Kulev
+# http://fusionforge.org/
+#
+# YOUR php.ini FOR PHP CLI MUST HAVE APPROPRIATE include_path
+
+# Change path to the GForge directory.
+GFORGE="/opt/gforge"
+
+PHP="/usr/bin/php -f"
+
+# Don't mail command output to anyone.
+MAILTO=""
+
+12 * * * * root $PHP $GFORGE/plugins/wiki/cronjobs/create_groups.php /opt

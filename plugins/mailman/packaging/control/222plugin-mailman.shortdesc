@@ -1,0 +1,3 @@
+ This package controls the interaction between FusionForge and Mailman.
+ It provides a single sign on authentication mecanism between
+ the forge and mailman.

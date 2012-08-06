@@ -1,0 +1,58 @@
+diff -ruN fusionforge-4.8.3-original/common/include/account.php fusionforge-4.8.3-register_globals/common/include/account.php
+--- fusionforge-4.8.3-original/common/include/account.php	2009-09-20 11:46:33.000000000 -0700
++++ fusionforge-4.8.3-register_globals/common/include/account.php	2010-05-13 17:07:54.949101797 -0700
+@@ -73,7 +73,7 @@
+ 		$GLOBALS['register_error'] = _('Name is reserved.');
+ 		return 0;
+ 	}
+-	if ($sys_use_shell) {
++	if ($GLOBALS['sys_use_shell']) {
+ 		if ( exec("getent passwd $name") != "" ){
+ 			$GLOBALS['register_error'] = _('That username already exists.');
+ 			return 0;
+diff -ruN fusionforge-4.8.3-original/www/account/index.php fusionforge-4.8.3-register_globals/www/account/index.php
+--- fusionforge-4.8.3-original/www/account/index.php	2010-02-10 11:20:06.000000000 -0800
++++ fusionforge-4.8.3-register_globals/www/account/index.php	2010-05-13 17:14:33.904513771 -0700
+@@ -252,7 +252,7 @@
+ 
+ // ############################### Shell Account
+ 
+-if (($u->getUnixStatus() == 'A') && ($sys_use_shell)) {
++if (($u->getUnixStatus() == 'A') && ($GLOBALS['sys_use_shell'])) {
+ 	echo $HTML->boxTop(_('Shell Account Information')."");
+ 	print '&nbsp;
+ <br />'._('Shell box').': <strong>'.$u->getUnixBox().'</strong>
+diff -ruN fusionforge-4.8.3-original/www/admin/useredit.php fusionforge-4.8.3-register_globals/www/admin/useredit.php
+--- fusionforge-4.8.3-original/www/admin/useredit.php	2009-06-07 10:48:51.000000000 -0700
++++ fusionforge-4.8.3-register_globals/www/admin/useredit.php	2010-05-13 17:13:42.883770988 -0700
+@@ -60,7 +60,7 @@
+ 
+     //XXX use_shell
+ 	if (!$u->setEmail($email)
+-		|| ($sys_use_shell && !$u->setShell($shell))
++		|| ($GLOBALS['sys_use_shell'] && !$u->setShell($shell))
+ 		|| !$u->setStatus($status)) {
+ 		exit_error(
+ 			_('Could Not Complete Operation'),
+@@ -149,9 +149,7 @@
+ </tr>
+ 
+ <?php 
+-	global $sys_use_shell;
+-
+-	if ($sys_use_shell) {
++	if ($GLOBALS['sys_use_shell']) {
+ ?>    
+ <tr>
+ 	<td>
+@@ -207,9 +205,7 @@
+ </p>
+ 
+ <?php 
+-	global $sys_use_shell;
+-
+-	if ($sys_use_shell) {
++	if ($GLOBALS['sys_use_shell']) {
+ ?>    
+ <p>
+ <sup>2</sup><?php echo _('Unix status updated mirroring web status, unless it has value \'No unix account (N)\''); ?>

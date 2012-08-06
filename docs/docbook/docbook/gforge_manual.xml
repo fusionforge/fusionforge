@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "../../dtd/docbookx.dtd" [
+ <!ENTITY % authors SYSTEM "entities/authors.ent">
+ %authors;
+ <!ENTITY % xinclude SYSTEM "entities/xinclude.ent">
+ %xinclude;
+
+ <!ENTITY introduction "introduction/introduction.xml">
+ <!ENTITY installation_guide "installation_guide/installation_guide.xml">
+ <!ENTITY administration_guide "administration_guide/administration_guide.xml">
+ <!ENTITY user_guide "user_guide/user_guide.xml">
+ <!ENTITY contribution_guide "contribution_guide/contribution_guide.xml">
+]>
+<book id="gforge_manual" lang="en-US">
+  <bookinfo>
+    <title>FusionForge Manual</title>
+    <authorgroup>
+&tom_copeland;&roland_mas;&ken_mccullagh;&tim_perdue;&guillaume_smet;&reinhard_spisser;    </authorgroup>
+  </bookinfo>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&introduction;"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&installation_guide;"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&administration_guide;"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&user_guide;"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&contribution_guide;"/>
+</book>

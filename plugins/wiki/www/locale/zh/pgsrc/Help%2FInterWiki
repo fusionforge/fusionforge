@@ -1,0 +1,40 @@
+Date: Fri,  4 Feb 2011 16:58:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FInterWiki 7932 2011-02-04 16:03:52Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FInterWiki;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+這個 wiki 支援 InterWiki 連結,它是由 [UseMod:] 複製過來的. 可以不必
+知道完整 URLs 就可以連結到其他 wiki 的頁面, 舉例來說: MeatBall:InterWiki 
+將能連結到 Meatball wiki 上的 "~InterWiki" 頁面上.
+
+~InterWiki map 是由 InterWikiMap 裡的 <verbatim> 區塊而來, 但是該頁面要能
+運作,必須被鎖定. 這可以拒絕潛在的惡毒駭客有機會將每個 ~InterWiki 的連結
+指向一些惡毒的 URL. 如果在 InterWikiMap 沒有找到任何 map (或是頁面沒被鎖定),
+PhpWiki 將會改使用 lib/interwiki.map 這個檔案. PhpWiki 正使用的 
+~InterWiki map 檔案,可以參閱 [http://phpwiki.sf.net/interwiki.map].
+
+map 檔案是手動更新的. 基於此,他會定期與 
+[UseMod's InterMap|http://usemod.com/intermap.txt] 同步但他們並不完全相似.
+一個與 [UseMod:] 主要的差異點在於 PhpWiki 允許 map 裡的 URLs 支援 '%s' -
+參照 RFC 範例以了解他如何運祚.
+
+在 InterWikiMap 裡的的進入點並不全都是 wikis. 舉例來說, 這些就只是正規的
+網站: Dictionary:fungible, [JargonFile:Alderson loop], [IMDB:Roman Holiday],
+RFC:2822, and ISBN:020171499X.
+
+"Category"(分類)這個名字只是一個特別的進入點,它允許人能連結到分類網頁
+而無須建立 back-reference(向後參考).因此, Category:Category 連結到
+CategoryCategory 頁面,此頁面將不顯示 CategoryCategory 的 back-links(向後連結).
+
+這個字眼 "InterWiki" 也涉及了廣義的觀念. 參閱 PhpWiki:InterWikiSearch 取得
+更多連結.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

@@ -1,0 +1,20 @@
+fusionforge-logo.xcf:
+* can be used to regenerate www/images/icon.png too
+
+fusionforge-logo-noversion.xcf:
+* resized to 630x175, gives www/images/fusionforge-resized.png
+* can be used to regenerate www/images/icon.png too
+
+pow-fusionforge.xcf:
+* gives www/images/pow-fusionforge.png
+
+top-logo.xcf:
+* resized to *x54 (300x54 currently), gives gforge/www/themes/gforge/images/header/top-logo.png
+
+Font: MgOpen Modata Bold 200 for the main logo, 100 for "powered by", 64 for the badge ("4.7" or "GPL")
+The font is available in the "ttf-mgopen" Debian/Ubuntu package.
+
+Colours:
+- yellowish: ffd500 (e6c000 for the darker version)
+- grey: 606060 (404040)
+

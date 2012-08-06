@@ -1,0 +1,27 @@
+Date: Tue, 25 Jan 2011 21:26:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Aide%2FPlugin%C3%89diterMetaData 7896 2011-01-25 20:27:58Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FPlugin%C3%89diterMetaData;
+  flags="";
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Ce plugin vous permet d'ajouter/éditer/effacer des paires clé/valeur 
+pour une page donnée. Vous devez être connecté comme administrateur 
+pour le faire. La page de métadonnées contient des choses comme le 
+compteur de visite, la date de dernière édition et d'autre chose.
+
+Éditer les métadonnées pour la page d'accueil devrait ressembler à :
+------
+<<EditMetaData page="PageAccueil">>
+------
+Sans argument, la page par défaut est la page courante :
+------
+<<EditMetaData>>
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

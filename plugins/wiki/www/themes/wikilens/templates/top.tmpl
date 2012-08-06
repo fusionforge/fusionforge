@@ -1,0 +1,13 @@
+<?php // -*-php-*-
+// $Id: top.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+global $HIDE_TOOLBARS;
+if (!$HIDE_TOOLBARS) { ?>
+<!-- The logo -->
+<div id="logo" style="height: 51px; 
+     background-image: url(<?php echo $WikiTheme->getImageURL('splice')?>); background-repeat: repeat-x;"
+><a class="wikilink" 
+    href="<?php echo WikiURL(HOME_PAGE)?>"
+    ><img src="<?php echo $WikiTheme->getImageURL('logo')?>" id="logo-img"
+      border="0" alt="<?php echo fmt(_("%s: %s"), WIKI_NAME, HOME_PAGE) ?>" align="right" /></a>
+</div>
+<?php } ?>

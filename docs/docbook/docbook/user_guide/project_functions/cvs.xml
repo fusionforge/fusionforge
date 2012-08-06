@@ -1,0 +1,18 @@
+<section id="ug_project_cvs">
+  <!-- FIXME : this is now SCM -->
+	<title>CVS</title>
+	<para>
+		The CVS button shows a page that contains information on how to access the CVS repository. Use this information to configure your client for CVS access. 
+	</para>
+	<para>
+		This page also displays some statistics about the selected project's CVS tree.
+	</para>
+	<para>
+		The Browse CVS Repository link opens the viewcvs web interface, where you can view the CVS repository, view differences between revisions, download versions of a file.
+	</para>
+	<note>
+		<para>
+			Only public projects will show the browse CVS repository link.
+		</para>
+	</note>
+</section>

@@ -1,0 +1,34 @@
+<?php // -*-php-*-
+// $Id: body.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<body<?php echo $WikiTheme->getMoreAttr('body') ?>>
+
+<table><tr><td colspan="2" class="header">
+<div id="header">
+  <?php echo Template('top') ?>
+</div>
+</td></tr>
+<tr valign="top"><td class="leftnav" width="120">
+<div class="toolbar">
+  <?php echo Template('navbar') ?>
+</div>
+<hr />
+<?plugin IncludePage page="LeftbarContent" quiet="true" ?>
+</td><td class="content">
+
+<!-- Page title -->
+<h1><?php echo $HEADER ?>
+<?php if (!empty($user) && $user->isSignedIn()) {
+  $loader = new WikiPluginLoader();
+  printXML(HTML::Raw("&nbsp;&nbsp;"));
+  printXML($loader->expandPI("<"."?plugin RateIt ?".">", $request, $dbi->_markup));
+} ?> </h1>
+
+<div id="content">
+
+<?php echo $CONTENT ?>
+
+</div>
+<?php echo Template('bottom') ?>
+</td></tr></table>
+</body>

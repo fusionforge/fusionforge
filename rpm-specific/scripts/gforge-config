@@ -1,0 +1,11 @@
+# !/bin/bash
+echo '##'
+echo '# Generating GForge configuration files'
+
+cd /usr/share/gforge
+./setup -confdir /etc/gforge -input /etc/gforge/gforge.conf -noapache &> /dev/null
+cd - &> /dev/null
+
+echo '# Done.'
+echo '# If you have modified the database configuration, you have to restart apache (service httpd restart).'
+echo '##'

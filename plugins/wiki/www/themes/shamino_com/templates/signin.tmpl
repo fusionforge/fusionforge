@@ -1,0 +1,32 @@
+<?php // -*-php-*-
+// $Id: signin.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+// signin only implicitly by clicking "Edit"
+if (empty($FORMNAME))
+    $FORMNAME = 'signin';
+else
+    $NOFORM = true;
+?>
+<?php if (empty($NOFORM)) { ?>
+  <form method="post" action="<?php echo $request->getPostURL() ?>" accept-charset="<?php echo $charset?>" name="<?php echo $FORMNAME?>">
+  <?php echo HiddenInputs($request->getArgs(), false, array('auth')) ?>
+<?php }
+if ($user->isAuthenticated()) {
+    $SignOutB = $WikiTheme->makeButton(_("Sign Out"), "javascript:SignOut();", 'wikiaction');
+    $SignOutJS = JavaScript('
+    document.write(\'<input type="hidden" name="auth[logout]" value="0" />\');
+    function SignOut() { 
+      var form = document.forms["'.$FORMNAME.'"];
+      form.elements["auth[logout]"].value = 1;
+      form.submit();
+    }
+    document.write(\''.AsXML($SignOutB).'\');');
+?>
+  <span class="signin"><?php echo fmt("Authenticated as %s", WikiLink($user->getAuthenticatedId(), 'auto')) ?>
+  <?php echo $SEP?><?php echo $SignOutJS?></span>
+  <noscript>
+    <span class="signin"><?php echo Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?></span>
+  </noscript>
+<?php } ?>
+<?php if (empty($NOFORM)) { ?>
+  </form>
+<?php } ?>

@@ -1,0 +1,75 @@
+Date: Fri,  4 Feb 2011 16:58:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FHowToUseWiki 7932 2011-02-04 16:03:52Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FHowToUseWiki;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+''"Wiki wiki"'' 在夏威夷話裡是 "快" 的意思..
+
+*你真正需要了解的只有:*
+
+* 點擊頁面下方的"編輯"連結即可編輯頁面. 你應該立刻閱讀這個頁面的源碼.
+  這會非常有用.
+
+* 要讓字體變為斜體,只要在前後加上底線,像是 _這樣_.
+
+* 要讓字體變為*粗體*,只要前後加上星號.
+
+* 然後,使用兩者,即可得到*_粗體加斜體_*.
+
+* 前後使用等號,就可以得到=正常文字=.
+
+* 在列的最前面加上 * ,即可條列文字.
+
+* 以 <pre> 和 </pre> 包起來的一段字,都會是一般正常字體.
+
+  <pre>
+  this is a poem for sure
+  about monospacing
+  i wrote in purple velour
+  but couldn't find a rhyme for monospacing
+  </pre>
+
+* 使用額外的空白列就可以分割出段落. 舉例來說:
+
+  I am a paragraph.
+
+  I am a paragraph too. We're just very small paragraphs.
+
+* 用四個或更多的減號 -, 就能得到水平線:
+
+  ---------
+
+* 只要將每個字的第一個字母改為大寫並放到一起,就可以建立超連結. 讓我們假設
+  一下,你想要建立一個頁面是關於 Steve Wainstead 吃蟲的事蹟. 你所需要做的
+  就是將每個字的第一個字母變為大寫並放到一起,像是: SteveWainsteadEatsLiveWorms.
+  如果這個頁面還未不存在,那麼會有一個問號出現在連結的後面(或前面?!),讓你
+  點擊並建立頁面: ThisPageShouldNotExist. (請不要真的去建立這個頁面,以免
+  破壞這個範例.)
+
+* 要連結到外部 Wiki 的某頁面, 你可以直接輸入 URL, 而 Wiki將會為你製作連結:
+  http://www.nytimes.com/
+
+* 要置放圖片的話,只要以中括號包圍超連結,像是:
+  ~[~http://www.yourhost.yourdomain/images/picture.png]. 不存在中括號之間
+  的圖片 URL,只會出現連結到該圖片的超連結.
+
+* 現在你已經準備好要開始加入新頁面 AddingPages.
+
+----
+
+WikiWikiWeb 表示可以快速並簡單的編輯.他有非常簡單的標記,你可以閱讀
+TextFormattingRules 取得更多資訊.
+
+----
+
+如果你不喜歡文字編輯視窗的大小,你可以改變它. 請參閱 UserPreferences.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

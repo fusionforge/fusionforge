@@ -1,0 +1,31 @@
+Date: Fri, 10 Sep 2010 13:47:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: TextFormattingRules 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=TextFormattingRules;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+== Synopsis
+
+**Emphasis:** ##~/~/## for //italics//, ##~*~*## for **bold**, ##~*~*~/~/...~/~/~*~*## for **//both//**, ##~#~### for ##fixed width##. \\
+**Lists:** ##~*## for bullet lists, ##~### for numbered lists; use multiple ##~*## or ##~### for nested lists. \\
+**Headings:** "##~=~=##", "##~=~=~=##", "##~=~=~=~=##", etc. make headings. \\
+**Preformatted text:** Enclose text in ##~{~{~{...~}~}~}## or ##~<pre>~</pre>##. \\
+**Indented text:** Indent the paragraph with whitespaces. \\
+**References:** use double square brackets for a ##~[~[page link~]~]## or URL ##~[~[~http:~//cool.wiki.int/~]~]##. \\
+**References:** use pipe ##~|## to name the links: ##~[~[page link~|some text~]~]## or ##~[~[~http:~//cool.wiki.int/~|some text~]~]##. \\
+**Preventing linking:** Prefix with "##~~##": ##~~~DoNotHyperlink##. \\
+**Misc:** "##~\~\##" makes a linebreak, "##~----##" makes a horizontal rule. \\
+**Allowed HTML tags:** <b>b</b> <big>big</big> <i>i</i>
+<small>small</small> ##tt## <em>em</em> <strong>strong</strong>
+<s>s</s> <strike>strike</strike>
+<abbr>abbr</abbr> <acronym>acronym</acronym> <cite>cite</cite>
+<code>code</code> <dfn>dfn</dfn> <kbd>kbd</kbd> <samp>samp</samp>
+<var>var</var> <sup>sup</sup> <sub>sub</sub> \\
+**More:** [[Help:TextFormattingRules#Tables|tables]], [[Help:TextFormattingRules#Images|images]],
+[[Help:CreateTocPlugin|table of contents]], [[Help:TextFormattingRules#Inserting_plugins|plugins]]
+
+More explanations: [[Help:TextFormattingRules]]

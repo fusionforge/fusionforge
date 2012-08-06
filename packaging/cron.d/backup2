@@ -1,0 +1,4 @@
+# Daily incremental backup to /backup
+# we have to discuss this 
+#15 23 * * * root $FFCRON/@OLDPACKAGE@-db-backup.sh
+

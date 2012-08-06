@@ -1,0 +1,69 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2F_WikiTranslationPlugin 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2F_WikiTranslationPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Display pagenames and other internal strings in various languages.
+
+Can also be used to let a favorite translation service translate a whole page.
+Current favorite: translate.google.com if from_lang = en or fr
+
+== Usage ==
+{{{
+  <<_WikiTranslation languages=de,en,sv string="" page=""
+                            what=pages from_lang=0 nolinks=0 noT=0 debug=0
+ >>
+}}}
+
+== Arguments ==
+
+All [[Help:PageList|PageList]] arguments, plus the following ones.
+
+languages:
+  comma delimited string of de,en,sv,...
+string:
+  string defined in a <lang>.po file to be translated
+page:
+  A whole page to translate by the currently defined external translation service.
+what:
+  One of pages, buttons, plugins or wikiwords
+match:
+  Filter. Default: *
+from_lang:
+  Override the current lang.
+nolinks:
+  Do not display any links (for development only)
+noT:
+  Do not display the T link (for development only)
+
+== Example ==
+
+{{{
+  <<_WikiTranslation page=HomePage languages=fr>>
+     Translation service for HomePage into french (redirect to translate.google.com)
+  <<_WikiTranslation what=pages>>
+     Translation matrix of all pages with proper translations (all in pgsrc)
+  <<_WikiTranslation what=wikiwords match="W*" limit=20>>
+     Translation matrix of the first 20 wikiwords matching "W*"
+  <<_WikiTranslation string=HomePage languages=fr,de,sv>>
+     Translation matrix for all given languages
+  <<_WikiTranslation string=HomePage>>
+     Translation matrix for all supported languages
+  <<_WikiTranslation string=HomePage languages=fr>>
+     Just return the translated string for this language.
+}}}
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

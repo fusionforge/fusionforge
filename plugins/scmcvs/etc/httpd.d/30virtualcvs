@@ -1,0 +1,29 @@
+#
+# cvs.* hosts
+#
+# This example is so beautiful that I keep it
+# And can be used in a better way e.g. creating a cvs directory by group
+<VirtualHost *:80>
+	ServerName cvs.{domain_name}
+	ServerAlias cvs.*.{domain_name}
+	DocumentRoot {gforge_chroot}{groupdir}/
+	VirtualDocumentRoot {gforge_chroot}{groupdir}/%2/htdocs
+	VirtualScriptAlias {gforge_chroot}{groupdir}/%2/cgi-bin
+	<Directory {gforge_chroot}{groupdir}>
+		Options Indexes FollowSymlinks
+		AllowOverride All
+		order allow,deny
+		allow from all
+	</Directory>
+	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+	CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
+	# Ensure that we don't try to use SSL on SSL Servers
+	<IfModule apache_ssl.c>
+		SSLDisable
+	</IfModule>
+
+        RewriteEngine on
+        RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
+        RewriteRule .* - [F]
+</VirtualHost>
+

@@ -1,0 +1,57 @@
+I paste here the interesting post of Lars Ehrhardt & Waldemar Brodkorb
+about tuning LDAP
+
+==============================================================
+By: lehrhardt
+
+Hi,
+
+we would like to share some hints regarding the improvement of OpenLDAP performance
+on slow systems. Our GForge system is running on an Ultra Sparc 5 with 512 MB
+RAM and 333 MHz.
+
+Some of our users complained about slow cvs checkout and cvs handling with eclipse.
+After some hours of debugging we have found a solution to this problem.
+
+The main reason for the slow response is that if an application is trying to
+resolve in which groups a user is, the complete directory tree is searched for
+all uniqueMember and memberUID  matches. This is the default behavior of the
+libnss-ldap package in Debian and it does take some time on slow systems.
+
+Our solution was to recompile the libnss-ldap library without the 
+configure option --enable-rfc2307bis.
+In addition to that we installed nscd and created the following indeces:
+
+index   objectClass             eq
+index   cn,uid                  pres,eq
+index   uidNumber,gidNumber     pres,eq
+index   userPassword,memberUid  pres,eq
+index   homeDirectory,gecos     pres,eq
+index   loginShell              pres,eq
+
+Hope this helps to improve performance - it certainly did on our system.
+
+Kind regards
+Lars Ehrhardt & Waldemar Brodkorb
+
+==============================================================
+
+I would add some more instruction
+When you add the indexes in /etc/ldap/slapd.conf
+I was told it's much better to stop ldap
+/etc/init.d/slapd stop
+Then you run 
+slapindex
+restart ldap
+/etc/init.d/slapd start 
+
+On a debian box you can see the improvement doing 
+ls /var/lib/gforge/chroot/home/users
+If you have a properly configured libnss-ldap of course
+
+Some more improvement can be done installing nscd the Name Service Cache Daemon
+apt-get install nscd on debian.
+
+Christian Bayle
+
+

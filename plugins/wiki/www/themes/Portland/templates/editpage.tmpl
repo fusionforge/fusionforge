@@ -1,0 +1,97 @@
+<?php // -*-php-*-
+// $Id: editpage.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<?php /*
+ * FIXME: Hack!
+ * The funky URL used for the form action parameter is bogus.
+ * This is needed, otherwise the redirect to the real browser
+ * page won't work with some browsers. (NS4 and Mozilla 0.97 won't accept
+ * a redirect from a page to itself.)
+ *
+ */ ?>
+
+<form method="post" name="editpage"
+      action="<?php echo $request->getPostURL() ?>"
+      accept-charset="<?php echo CHARSET?>">
+<table summary="Toolbar: Save, Preview, and edit warnings." class="toolbar" width="100%"
+       cellpadding="0" cellspacing="0" border="0">
+<tr align="bottom">
+  <td>
+    <?php echo $PAGE_LOCKED_MESSAGE ?>
+    <?php echo $CONCURRENT_UPDATE_MESSAGE ?>
+    <?php if (!$IS_CURRENT) { ?>
+      <p class="warning_msg"><strong><?php echo _("Warning: You are editing an old revision.")?>
+            <?php echo _("Saving this page will overwrite the current version.")?></strong></p>
+    <?php } ?>
+  </td>
+  <td align="right">
+    <?php echo $PREVIEW_B ?>
+    <?php if ($SAVE_B) { ?>
+      <?php echo $SEP?> <?php echo $SAVE_B ?>
+    <?php } ?>
+  </td>
+</tr>
+</table>
+<a id="editarea"><?php echo $EDIT_TEXTAREA?></a>
+<br />
+<?php echo _("Summary")?>: <?php echo $SUMMARY_INPUT ?>
+<br />
+<?php echo fmt("Author will be logged as %s.", HTML::em($user->getId())) ?>
+<br />
+<?php echo $MINOR_EDIT_CB ?>
+<?php echo fmt("I'm just doing minor edits. Please divert the usual logging to %s instead.",
+        WikiLink(_("RecentEdits"))) ?>
+<br />
+<p>
+  <?php echo _("Edit Area Size")?>: <b><?php echo _("H")?></b> <?php echo $HEIGHT_PREF?> 
+  <b><?php echo _("W")?></b> <?php echo $WIDTH_PREF?>
+  <?php echo Button("submit:", _("Adjust"), 'wikiaction')?>
+  <br />
+  <?php echo $OLD_MARKUP_CB?>  <?php echo _("Use old markup")?>
+</p>
+
+<?php if (isset($PREVIEW_CONTENT)) { ?>
+  <hr />
+  <p><strong><?php echo _("Preview only!  Changes not saved.")?></strong></p>
+  <?php echo $PREVIEW_CONTENT ?>
+  <hr />
+<?php } ?>
+
+<script type="text/javascript">
+<!--
+function showOldMarkupRules(show) {
+  if (document.getElementById) {
+    if (!show) {
+      document.getElementById('newMarkup').style.display="block";
+      document.getElementById('oldMarkup').style.display="none";
+    } else {
+      document.getElementById('newMarkup').style.display="none";
+      document.getElementById('oldMarkup').style.display="block";
+    }
+  }
+}
+// -->
+</script>
+
+<div id="oldMarkup" class="wiki-edithelp">
+<!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
+<p><?php echo fmt("See %s tips for editing.", WikiLink(_("Help/GoodStyle"))) ?></p>
+<?plugin IncludePage page=_("Help/OldTextFormattingRules") section=_("Synopsis") quiet=1?>
+</div>
+<div id="newMarkup" class="wiki-edithelp">
+<!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
+<p><?php echo fmt("See %s tips for editing.", WikiLink(_("Help/GoodStyle"))) ?></p>
+<?plugin IncludePage page=_("Help/TextFormattingRules") section=_("Synopsis") quiet=1?>
+</div>
+<?php echo $HIDDEN_INPUTS?>
+</form>
+
+<script type="text/javascript">
+<!--
+if (document.getElementById) {
+  showOldMarkupRules(document.getElementById('useOldMarkup').checked);
+}
+// -->
+</script>
+
+<hr />

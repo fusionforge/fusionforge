@@ -1,0 +1,62 @@
+<a name="diff"></a>
+  <hr noshade>
+  This form allows you to request diffs between any two revisions of
+  a file. You may select a symbolic revision name using the selection
+  box or you may type in a numeric name using the type-in text box.
+  <p>
+  <form method="get" action="[diff_select_action]" name="diff_select">
+  [diff_select_hidden_values]
+
+  <table border="0" cellpadding="2" cellspacing="0">
+  <tr>
+  <td>&nbsp;</td>
+  <td>
+  Diffs between
+[if-any tags]
+  <select name="r1">
+    <option value="text" selected>Use Text Field</option>
+  [for tags]
+    <option value="[tags.rev]:[tags.name]">[tags.name]</option>
+  [end]
+  </select>
+[else]
+  <input type="hidden" name="r1" value="text" />
+[end]
+  <input type="TEXT" size="12" name="tr1" value="[tr1]"
+        [if-any tags]onChange="document.diff_select.r1.selectedIndex=0"[end]>
+
+  and
+[if-any tags]
+  <select name="r2">
+    <option value="text" selected>Use Text Field</option>
+  [for tags]
+    <option value="[tags.rev]:[tags.name]">[tags.name]</option>
+  [end]
+  </select>
+[else]
+  <input type="hidden" name="r2" value="text" />
+[end]
+  <input type="TEXT" size="12" name="tr2" value="[tr2]"
+        [if-any tags]onChange="document.diff_select.r1.selectedIndex=0"[end]>
+  </td>
+  </tr>
+  <tr>
+  <td><input type="checkbox" name="makepatch" id="makepatch" value="1" /></td>
+  <td><label for="makepatch">Generate output suitable for use with a patch
+  program</label></td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+  <td>
+  Type of Diff should be a
+  <select name="diff_format" onchange="submit()">
+    <option value="h" [is diff_format "h"]selected[end]>Colored Diff</option>
+    <option value="l" [is diff_format "l"]selected[end]>Long Colored Diff</option>
+    <option value="u" [is diff_format "u"]selected[end]>Unidiff</option>
+    <option value="c" [is diff_format "c"]selected[end]>Context Diff</option>
+    <option value="s" [is diff_format "s"]selected[end]>Side by Side</option>
+  </select>
+  <input type="submit" value="  Get Diffs  "></form>
+  </td>
+  </tr>
+  </table>

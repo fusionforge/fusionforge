@@ -1,0 +1,71 @@
+Date: Fri, 10 Sep 2010 13:46:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: PhpWikiDebug 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=PhpWikiDebug;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+**//Note://** //Most of the actions on this page require administrative privileges.//
+
+<<CreateToc jshide||=0 with_toclink||=1 position=right with_counter=1 >>
+
+These are here mostly for debugging purposes (at least, that is the hope.)
+
+In normal use, you should not need to use these, though, then again,
+they should not really do any harm.
+
+== Purge Markup Cache ==
+
+(If your wiki is so configured,) the transformed (almost-HTML) content
+of the most recent version of each page is cached. This speeds up page
+rendering since parsing of the wiki-text takes a fair amount of juice.
+
+Hitting this button will delete all cached transformed
+content. (Each pages content will be transformed and re-cached next
+time someone views it.)
+
+<<WikiAdminUtils action=purge-cache label="Purge Markup Cache" >>
+
+== Clean Wiki Database of Illegal Filenames ==
+
+Page names beginning with the subpage-separator, usually a slash
+(##/##), are not allowed. Sometimes though an errant plugin or something
+might create one....
+
+This button will delete any pages with illegal page names, without possibility to restore.
+
+<<WikiAdminUtils action=purge-bad-pagenames label="Purge bad pagenames" >>
+
+== Clean Wiki Database of empty and unreferenced pages ==
+
+**Warning!** This button will delete every empty and unreferenced page, without any possibility to restore them again.
+This will disable the possibility to revert or get back any deleted page.
+
+<<WikiAdminUtils action=purge-empty-pages label="Purge all empty unreferenced pages" >>
+
+== Convert cached_html to new SQL column ==
+
+This is only needed on SQL or ADODB if you didn't do action=upgrade, but created the
+new page.cached_html field seperately, and now you want to move this data from
+page.pagedata over to page.cached_html.
+
+<<WikiAdminUtils action=convert-cached-html label="Convert cached_html" >>
+
+== Check Wiki Database ==
+
+This button will check the Wiki page database for consistency. This can last several minutes.
+
+<<WikiAdminUtils action=db-check label="Check Wiki Database" >>
+
+== Rebuild Wiki Database ==
+
+This will retransform all pages and rebuild the Wiki database on consistency errors or parser updates.
+This can last several minutes, eat a lot of memory and possibly times out!!
+
+<<WikiAdminUtils action=db-rebuild label="Rebuild Wiki Database" >>
+
+----
+[[CategoryActionPage]]

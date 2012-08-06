@@ -1,0 +1,50 @@
+Date: Fri, 10 Sep 2010 13:48:42 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Hilfe%2FGraphVizPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Hilfe%2FGraphVizPlugin;
+  flags="";
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+==== Beispiel
+
+{{{
+<<GraphViz
+digraph automata_0 {
+	size ="8.5, 11";
+	node [shape = circle];
+	0 [ style = filled, color=lightgrey ];
+	2 [ shape = doublecircle ];
+	0 -> 2 [ label = "a " ];
+	0 -> 1 [ label = "other " ];
+	1 -> 2 [ label = "a " ];
+	1 -> 1 [ label = "other " ];
+	2 -> 2 [ label = "a " ];
+	2 -> 1 [ label = "other " ];
+	"Machine: a" [ shape = plaintext ];
+}
+>>
+}}}
+
+wird angezeigt als
+
+<<GraphViz
+digraph automata_0 {
+	size ="8.5, 11";
+	node [shape = circle];
+	0 [ style = filled, color=lightgrey ];
+	2 [ shape = doublecircle ];
+	0 -> 2 [ label = "a " ];
+	0 -> 1 [ label = "other " ];
+	1 -> 2 [ label = "a " ];
+	1 -> 1 [ label = "other " ];
+	2 -> 2 [ label = "a " ];
+	2 -> 1 [ label = "other " ];
+	"Machine: a" [ shape = plaintext ];
+}
+>>
+
+----
+[[PhpWikiDokumentation]] [[KategorieWikiPlugin]]

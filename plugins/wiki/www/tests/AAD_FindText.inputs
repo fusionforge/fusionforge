@@ -1,0 +1,16 @@
+# Test the page WabiSabi for the text
+# string "imperfect, impermanent, and incomplete"
+# $Id: AAD_FindText.inputs 6206 2008-08-26 15:20:22Z vargenau $
+
+# get the starting page
+type: starting_page
+start_url: index.php?WabiSabi
+assert_text: imperfect, impermanent, and incomplete
+go
+
+# check the page for certain text
+type: follow_link
+follow_link: "PageHistory"
+assert_url: WabiSabi
+go
+

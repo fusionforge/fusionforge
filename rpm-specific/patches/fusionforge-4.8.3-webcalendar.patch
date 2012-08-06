@@ -1,0 +1,11 @@
+diff -ruN fusionforge-4.8.3-original/plugins/webcalendar/www/login.php fusionforge-4.8.3-webcalendar/plugins/webcalendar/www/login.php
+--- fusionforge-4.8.3-original/plugins/webcalendar/www/login.php	2009-06-07 10:49:27.000000000 -0700
++++ fusionforge-4.8.3-webcalendar/plugins/webcalendar/www/login.php	2010-05-05 13:21:05.565048641 -0700
+@@ -1,6 +1,6 @@
+ <?php
+ include "../../env.inc.php";
+-include "pre.php";
++include "include/pre.php";
+ include "./includes/config.php";
+ include "./includes/php-dbi.php";
+ include "./includes/functions.php";

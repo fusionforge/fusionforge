@@ -1,0 +1,124 @@
+<section id="ug_project_blocks">
+  <!-- TODO: is this a plugin now ? -->
+    <title>Blocks</title>
+
+    <section id="ug_project_blocks_introduction">
+        <title>Introduction</title>
+
+        <para>
+	    The Blocks plugin allows the project manager to customize the appearance
+            of the project pages.
+        </para>
+        <para>
+            A block is a piece of HTML that will be displayed (if active) on a predefined location.
+            Predefined location includes: project description and a user blocks (right side)
+            at summary page, and headers on top of each tool (trackers, forums, etc.).
+        </para>
+        <para>
+            In case the HTML project description block is activated, it overwrites the short
+	    project description provided in text mode (the short project description is still
+	    used in the project tree).
+        </para>
+        <note>
+            <para>
+                It is not possible to create a new block.
+            </para>
+        </note>
+    </section>
+
+    <section id="ug_project_blocks_activation_modification">
+        <title>Activating and modifying blocks</title>
+
+        <itemizedlist>
+            <listitem><para>The project administrator logs in
+                            and enters his project.</para></listitem>
+            <listitem><para>He clicks on the '<guimenuitem>Admin</guimenuitem>'
+                            link to enter the administration area.</para></listitem>
+            <listitem><para>He clicks on the '<guimenuitem>Blocks admin</guimenuitem>'
+                            link.</para></listitem>
+            <listitem><para>He can then edit a block to change its content and
+                            also activate or deactivate a block.</para></listitem>
+            <listitem><para>Once submitted, the block is changed.</para></listitem>
+        </itemizedlist>
+        <para>
+            To edit the block, the HTML editor or a simple text area (showing the
+            HTML code) will be used, depending whether the HTML editor is activated or not.
+        </para>
+        <para>
+            You might include images in the block as well as text.
+        </para>
+        <para>
+            It is a good idea to first activate the blocks you want to include, and
+            have a look at the corresponding page before modifying them. This allows you
+            check their placement in the page.
+        </para>
+    </section>
+
+    <section id="ug_project_blocks_macros">
+        <title>Macros</title>
+
+        <para>
+            When you activate a block, a predefined content is provided. The content will
+            use macros.
+        </para>
+        <para>
+            For example, you might have :
+        </para>
+        <para>
+		<filename>{boxHeader}Enter your text here{boxFooter}</filename>
+        </para>
+        <para>
+            We recommend that you use these macros. Use of the macros will guarantee a
+            consistent look and feel.
+        </para>
+
+	<para>
+	    You can create boxes like the ones on the right site of summary page,
+	    by inserting the following sentences in the content:
+        </para>
+
+	<itemizedlist>
+             <listitem><para><filename>{boxTop Hello}</filename>:
+	               will create the top part of the box using <emphasis>Hello</emphasis>
+                       as title.</para>
+             </listitem>
+             <listitem><para><filename>{boxMiddle Here}</filename>:
+                       will create a middle part of a box using <emphasis>Here</emphasis>
+                       as title (optional).</para>
+             </listitem>
+             <listitem><para><filename>{boxBottom}</filename>: 
+                       will create the end part of a box.</para>
+             </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+             <listitem><para><filename>{boxHeader}</filename>:
+                       will create a header before a text.</para>
+             </listitem>
+             <listitem><para><filename>{boxFooter}</filename>: 
+                       will create a footer after a text.</para>
+             </listitem>
+        </itemizedlist>
+
+        <para>
+            You can create as many boxes as you want, but a <filename>boxTop</filename> 
+            has to be closed by a <filename>boxBottom</filename> 
+            and a <filename>boxHeader</filename> has to be closed by 
+            a <filename>boxFooter</filename>.
+        </para>
+    </section>
+    <section id="ug_project_blocks_examples">
+	<title>Examples</title>
+	<para>
+	    You can, for example, use the summary_right block to display your project logo.
+        </para>
+        <para>
+	    You can use the summary_description block to provide a more complete description
+	    of your project and also links to major project resources.
+	</para>
+	<para>
+	HTML blocks for tools can be used to explain purpose and usage of the different
+       	tools (ex: trackers).
+	</para>	
+    </section>
+</section>

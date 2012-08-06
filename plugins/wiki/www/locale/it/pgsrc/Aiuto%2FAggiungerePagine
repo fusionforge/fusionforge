@@ -1,0 +1,30 @@
+Date: Fri, 10 Sep 2010 13:48:47 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Aiuto%2FAggiungerePagine 7860 2011-01-22 12:39:04Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Aiuto%2FAggiungerePagine;
+  flags="";
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Scrivere parole sensate in maiuscolo nel Wiki, come ad esempio
+UnaStringaComeQuesta aggiunge una pagina e da senso all'argomento di cui
+si andrà a trattare.
+Wiki magicamente riconoscerà che la parola in maiuscolo sarà un link,
+alternativamente è possibile comunque definirlo attraverso le [parentesi quadre]
+
+Ora puoi procedere a CliccareSulPuntoEsclamativo alla fine del tuo nuovo
+link e Wiki aprirà una finestra in cui potrai scrivere la nuova pagina.
+
+Se vuoi aggiungere documenti con marcature complesse al Wiki, puoi
+provare a fornire un indirizzo piuttosto che aggiungere del testo
+all'interno del documento come ad esempio:
+
+ La pagina del progetto PhpWiki: http://phpwiki.sourceforge.net/
+
+Wiki non supporta tag HTML (guarda RegoleDiFormattazioneDelTesto.
+<tags>Mostrerannno solo testo</tags> Wiki si pone come obiettivo quello
+di essere il più semplice possibile.
+
+C'è in effetti la possibilità di utilizzare l'HTML ma è necessario
+accordarsi con l'amministratore di sistema del Wiki

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <definitions name="Wiki"
+		 targetNamespace="http://phpwiki.sourceforge.net/PhpWiki.wsdl"
+		 xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+		 xmlns:tns="http://phpwiki.sourceforge.net/PhpWiki.wsdl"
+		 xmlns:xsd="http://www.w3.org/1999/XMLSchema"
+		 xmlns="http://schemas.xmlsoap.org/wsdl/"
+		 >
+
+	<message name="getPageContent">
+		<part name="pagename" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="getPageRevision">
+		<part name="pagename" type="xsd:string"/>
+		<part name="revision" type="xsd:double"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="getPageContentResponse">
+		<part name="content" type="xsd:string"/>
+	</message>
+
+	<message name="getCurrentRevision">
+		<part name="pagename" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="getRevisionResponse">
+		<part name="revision" type="xsd:double"/>
+	</message>
+
+	<message name="getPageMeta">
+		<part name="pagename" type="typens:PageMetadata"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="getPageMetaResponse">
+		<part name="meta" type="xsd:double"/>
+	</message>
+	<message name="doSavePage">
+		<part name="pagename" type="xsd:string"/>
+		<part name="content"  type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="doSavePageResponse">
+		<part name="successcode" type="xsd:int"/>
+	</message>
+
+	<message name="getAllPagenames">
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="getBackLinks">
+		<part name="pagename" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="doTitleSearch">
+		<part name="query" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="doFullTextSearch">
+		<part name="query" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="getRecentChanges">
+		<part name="limit" type="xsd:int"/>
+		<part name="since" type="xsd:int"/>
+		<part name="include_minor" type="xsd:int"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="listLinks">
+		<part name="pagename" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="listPlugins">
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="callPlugin">
+		<part name="pluginname" type="xsd:string"/>
+		<part name="pluginargs" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="getPluginSynopsis">
+		<part name="pluginname" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="listRelations">
+		<part name="option" type="xsd:int"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="linkSearch">
+		<part name="linktype"  type="xsd:string"/>
+		<part name="search"    type="xsd:string"/>
+		<part name="pages"     type="xsd:string"/>
+		<part name="relation"  type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+
+	<message name="PagenameListResponse">
+		<part name="content" type="xsd:PagenameList"/>
+	</message>
+	<message name="RecentChangesResponse">
+		<part name="content" type="xsd:RecentChangesList"/>
+	</message>
+	<message name="StringListResponse">
+		<part name="content" type="xsd:StringList"/>
+	</message>
+	<message name="LinkSearchResponse">
+		<part name="content" type="xsd:RdfTripleList"/>
+	</message>
+	<message name="StringResponse">
+		<part name="content" type="xsd:string"/>
+	</message>
+
+        <xsd:complexType name="PagenameList">
+            <xsd:all> 
+		<part name="pagename" type="xsd:string"/>
+            </xsd:all>
+        </xsd:complexType> 
+        <xsd:complexType name="RdfTripleList">
+            <xsd:all> 
+		<part name="pagename" type="xsd:string"/>
+		<part name="relation" type="xsd:string"/>
+		<part name="target"   type="xsd:string"/>
+            </xsd:all>
+        </xsd:complexType> 
+        <xsd:complexType name="StringList">
+            <xsd:all type="xsd:string" /> 
+        </xsd:complexType> 
+        <xsd:complexType name="RecentChangesList">
+            <xsd:all>
+		<part name="pagename"     type="xsd:string"/>
+		<part name="lastModified" type="xsd:int"/>
+		<part name="author"       type="xsd:string"/>
+		<part name="summary"      type="xsd:string"/>
+		<part name="version"      type="xsd:int"/>
+            </xsd:all>
+        </xsd:complexType> 
+        <xsd:complexType name="Credentials">
+            <xsd:all> 
+                <xsd:element name="username" type="xsd:string"/> 
+                <xsd:element name="password" type="xsd:string"/> 
+            </xsd:all>
+        </xsd:complexType> 
+        <xsd:complexType name="PageMetadata">
+            <xsd:all> 
+                <xsd:element name="createdby" type="xsd:string"/> 
+                <xsd:element name="lastauthor" type="xsd:string"/> 
+                <xsd:element name="ctime" type="xsd:int"/> 
+                <xsd:element name="mtime" type="xsd:int"/> 
+                <xsd:element name="atime" type="xsd:int"/> 
+            </xsd:all>
+        </xsd:complexType> 
+
+	<portType name="wikiPortType">
+		<operation name="getPageContent">
+			<input message="tns:getPageContent"/>
+			<output message="tns:getPageContentResponse"/>
+		</operation>
+		<operation name="getPageRevision">
+			<input message="tns:getPageRevision"/>
+			<output message="tns:getPageContentResponse"/>
+		</operation>
+		<operation name="doSavePage">
+			<input message="tns:doSavePage"/>
+			<output message="tns:doSavePageResponse"/>
+		</operation>
+		<operation name="getAllPagenames">
+			<input message="tns:getAllPagenames"/>
+			<output message="tns:PagenameListResponse"/>
+		</operation>
+		<operation name="getBackLinks">
+			<input message="tns:getBackLinks"/>
+			<output message="tns:PagenameListResponse"/>
+		</operation>
+		<operation name="doTitleSearch">
+			<input message="tns:doTitleSearch"/>
+			<output message="tns:PagenameListResponse"/>
+		</operation>
+		<operation name="doFullTextSearch">
+			<input message="tns:doFullTextSearch"/>
+			<output message="tns:PagenameListResponse"/>
+		</operation>
+		<operation name="getRecentChanges">
+			<input message="tns:getRecentChanges"/>
+			<output message="tns:RecentChangesResponse"/>
+		</operation>
+		<operation name="listLinks">
+			<input message="tns:listLinks"/>
+			<output message="tns:PagenameListResponse"/>
+		</operation>
+		<operation name="listPlugins">
+			<input message="tns:listPlugins"/>
+			<output message="tns:StringListResponse"/>
+		</operation>
+		<operation name="callPlugin">
+			<input message="tns:callPlugin"/>
+			<output message="tns:PagenameListResponse"/>
+		</operation>
+		<operation name="getPluginSynopsis">
+			<input message="tns:getPluginSynopsis"/>
+			<output message="tns:StringResponse"/>
+		</operation>
+		<operation name="listRelations">
+			<input message="tns:listRelations"/>
+			<output message="tns:StringListResponse"/>
+		</operation>
+		<operation name="linkSearch">
+			<input message="tns:callPlugin"/>
+			<output message="tns:LinkSearchResponse"/>
+		</operation>
+	</portType>
+
+	<binding name="wikiBinding" type="tns:wikiPortType">
+	    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+	    <operation name="getPage">
+	    	<soap:operation soapAction="http://phpwiki.sourceforge.net/phpwiki/SOAP.php"/>
+		<input>
+		    <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+		</input>
+		<output>
+		    <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+		</output>
+	    </operation>
+	</binding>
+
+	<service name="wikiService">
+	    <port name="wikiPortType" binding="tns:wikiBinding">
+		<soap:address location="http://phpwiki.sourceforge.net/phpwiki/SOAP.php" />
+	    </port>
+	</service>
+</definitions>

@@ -1,0 +1,82 @@
+Date: Fri, 10 Sep 2010 13:46:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FPhpWeatherPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPhpWeatherPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~PhpWeather** [[Help:WikiPlugin|plugin]] is a plugin that uses ~PhpWeather to display
+a block of text with the current weather for some airport in the
+world. It looks like this:
+
+<<PhpWeather menu=true>>
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **menu**
+|
+Set this to ##true## to have the plugin generate a menu after the
+report. The user will able to select a country from this menu, and
+after that, an airport and a language.
+| false
+|-
+| **icao**
+|
+Use this to pre-select a specific airport instead of using the
+default one which is ##EKAH##.
+
+If you want the user to be able
+to change the station using the menu, then you have to use this
+as ##<~<PhpWeather menu=true icao|~|~=EKYT>>##
+so that the value can be overwritten when the user submits the form.
+
+If you just use ##<~<PhpWeather menu=true icao=EKYT>>##
+then nothing will happen when the user selects another station from
+the list.
+|
+|-
+| **cc**
+|
+Specify the country code. You can use this if you want pre-select a
+different country than the one specified in the ICAO.
+
+So using ##<~<PhpWeather menu=true cc|~|~=GB icao|~|~=KTTS>>##
+will show the current weather at the NASA Shuttle Facility, United
+States (##KTTS##) and at the same time give the user a list of
+stations in the United Kingdom.
+
+As the example shows, then you
+should use ##cc|~|~=XX## when combining it with **menu** set to ##true##.
+|-
+| **language**
+|
+The default language. When combining **language** with **menu** set
+to ##true## then remember to use the ##language|~|~=xx## form.
+|
+|-
+| **units**
+|
+You can specify the way the units are printed. The choice is between
+having both metric and imperial units printed, or just one of
+them. Setting **units** to ##both_metric## will print the metric value
+first and then the imperial value in parenthesis. Using ##both_imperial##
+instead will do the opposite.
+
+If you only need the metric or imperial units to be shown, then
+setting **units** to ##only_metric## or ##only_imperial## will do just that.
+|
+|}
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

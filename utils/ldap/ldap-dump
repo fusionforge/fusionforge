@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+#
+#  Dump LDAP database 
+#  by pfalcon@users.sourceforge.net 2000-10-18
+
+require("include.pl");  # Include all the predefined functions
+
+$cmd = "${ldap_prefix}ldapsearch -h $sys_ldap_host -p $sys_ldap_port -LLL -D '$sys_ldap_bind_dn' -w $sys_ldap_passwd -b '$sys_ldap_base_dn' '(objectclass=*)'";
+system($cmd);

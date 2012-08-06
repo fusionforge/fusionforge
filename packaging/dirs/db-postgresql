@@ -1,0 +1,11 @@
+etc/@OLDPACKAGE@
+usr/share/@OLDPACKAGE@
+usr/share/@OLDPACKAGE@/cronjobs
+usr/share/@OLDPACKAGE@
+usr/share/@OLDPACKAGE@/bin
+usr/share/@OLDPACKAGE@/db
+usr/share/@OLDPACKAGE@/lib
+var/lib/@OLDPACKAGE@
+var/lib/@OLDPACKAGE@/tmp
+var/lib/@OLDPACKAGE@/etc
+var/lib/@OLDPACKAGE@/db

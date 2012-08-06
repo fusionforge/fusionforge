@@ -1,0 +1,6 @@
+Package: @OLDPACKAGE@-dns-bind9
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, bind9 , ${misc:Depends}
+Provides: @OLDPACKAGE@-dns
+Conflicts: @OLDPACKAGE@-dns
+Description: collaborative development tool - DNS management (using Bind9)

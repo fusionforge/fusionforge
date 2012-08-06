@@ -1,0 +1,15 @@
+Date: Tue,  4 Jan 2011 11:59:41 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: BenutzerEinstellungen 7799 2011-01-04 11:05:56Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=BenutzerEinstellungen;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Sie können einige Einstellungen jetzt bestimmen. Die Werte werden in
+einer **Cookie** Ihres Browsers gespeichert, daher müssen Cookies in
+Ihrem Browser aktiviert sein.
+
+<<UserPreferences>>

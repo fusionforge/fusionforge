@@ -1,0 +1,52 @@
+<?php // -*-php-*-
+// $Id: body.tmpl 8028 2011-04-08 13:57:12Z vargenau $
+?>
+<?php if ($WikiTheme->DUMP_MODE) { ?>
+<body>
+<?php } ?>
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td valign="top">
+<?php
+global $HIDE_TOOLBARS;
+if (!$HIDE_TOOLBARS) {
+?>
+<div class="toolpalettes">
+<div class="toolbar">
+<?php echo Template('actionbar') ?>
+</div>
+</div>
+<?php } ?>
+<div id="content">
+<?php
+if (ENABLE_RATEIT && $page->exists())
+    $rating = 1;
+else
+    $rating = 0;
+?>
+<a id="contentTop"></a>
+<h1>
+<span class="firstHeading<?php echo $rating ? '-rating' : '' ?>">
+<span style="float: left;"><?php echo $HEADER ?></span>
+<?php if ($rating && $request->getArg('action') == 'browse') { ?>
+<span style="float: right;">
+<?php echo Template('ratings') ?>
+</span>
+<?php } elseif ($rating && $WikiTheme->DUMP_MODE) { ?>
+<span id="rateit-widget-top">
+<?php
+  $loader = new WikiPluginLoader();
+  printXML($loader->expandPI("<"."?plugin RateIt show=text ?".">", $request, $dbi->_markup));
+?></span>
+<?php } ?>
+</span>
+</h1>
+<?php echo $CONTENT ?>
+</div>
+</td>
+</tr>
+</table>
+<?php echo Template('bottom') ?>
+<?php if ($WikiTheme->DUMP_MODE) { ?>
+</body>
+<?php } ?>

@@ -1,0 +1,163 @@
+#!/bin/bash
+#
+# Simple wrapper for FusionForge installation
+#
+# Usage: ./install-ng <hostname>
+#
+# This will install all the fusionforge code in $FORGE_HOME
+# Configuration is stored in /etc/gforge
+#
+# Currently supported:
+# * Red Hat 5 / CentOS 5
+# * OpenSuSE 11 (contributed by Martin Bernreuther)
+#
+# Author: Alain Peyrat <aljeux@free.fr>
+#         Christian Bayle <bayle@debian.org>
+#
+FORGE_HOME=/opt/gforge
+
+usage(){
+	echo "Usage: $1 [-r|-h|-a|--reinit|--help|--auto|--deps|--files|--database|--config] [<hostname>]"
+}
+
+options=`getopt -o rha -l reinit,help,auto,deps,files,database,config -- "$@"`
+
+if [ $? != 0 ] ; then echo "Terminating..." >&2 ; usage $0 ;exit 1 ; fi
+
+eval set -- "$options"
+
+REINIT=false
+AUTO=false
+
+# Install dependancies files database config by default
+DEFAULT=true
+
+# Install dependancies
+DEPS=false
+# Install files
+FILES=false
+# Install database
+DATABASE=false
+# Install config
+CONFIG=false
+	
+while true
+do
+    case "$1" in
+        -r|--reinit)    REINIT=true; shift 1;;
+        -h|--help)      usage $0 ; exit 0; shift 1;;
+        -a|--auto)      AUTO=true ; shift 1;;
+	--deps)		DEFAULT=false ; DEPS=true ; shift 1;;
+	--files)	DEFAULT=false ; FILES=true ; shift 1;;
+	--database)	DEFAULT=false ; DATABASE=true ; shift 1;;
+	--config)	DEFAULT=false ; CONFIG=true ; shift 1;;
+	--)		shift 1; break;;
+        *)              break ;;
+    esac
+done
+
+hostname=$1
+
+if [ -z "$hostname" ]
+then
+	hostname=`hostname -f`
+fi
+echo "Using hostname=$hostname"
+
+# Load some script
+scriptdir=`cd \`dirname $0\`; pwd`
+. $scriptdir/install/detect_os
+
+FUSIONFORGE_DEFAULT_SRC_DIR=$(cd $(dirname $0); pwd)
+FUSIONFORGE_DEFAULT_DIR=$FUSIONFORGE_DEFAULT_SRC_DIR
+fusionforge_src_dir=${FUSIONFORGE_SRC_DIR:-$FUSIONFORGE_DEFAULT_SRC_DIR}
+fusionforge_dir=${FUSIONFORGE_DIR:-$FUSIONFORGE_DEFAULT_DIR}
+fusionforge_data_dir=${FUSIONFORGE_DATA_DIR:-/var/lib/gforge}
+fusionforge_log_dir=${FUSIONFORGE_LOG_DIR:-/var/log/gforge}
+fusionforge_etc_dir=${FUSIONFORGE_ETC_DIR:-/etc/gforge}
+
+# Call to detect_os, this will set $type and $distrib
+os=$(detect_os)
+type=$(detect_type)
+echo "Install type = $type"
+
+if $DEPS || $DEFAULT
+then
+	# Load deps script and run the appropriate one
+	. $scriptdir/install/deps
+	deps_$os
+fi
+
+# Load install scripts
+. $scriptdir/install/install2
+. $scriptdir/install/install3
+. $scriptdir/install/install4
+. $scriptdir/install/install5_post
+. $scriptdir/install/install6_upgrade
+
+if $AUTO
+then
+	echo "Using automatic configuration"
+	FFORGE_DB=fforge
+	FFORGE_USER=gforge
+	FFORGE_ADMIN_USER=admin
+	FFORGE_ADMIN_PASSWORD=myadmin
+fi
+
+if $REINIT
+then
+	echo "Reinit the database"
+	rm -f /etc/gforge/install_completed
+	dropdbifexists $FFORGE_DB
+fi
+
+if [ -d "$FORGE_HOME" ]
+then
+	if [ -f "/etc/gforge/install_completed" ]
+	then
+		mode="update"
+		echo "Upgrading previous installation ...";
+	else
+		mode="install"
+		echo "Installing FusionForge ...";
+	fi
+else
+	mode="install"
+	echo "Installing FusionForge ...";
+fi
+
+if $DEFAULT || $FILES
+then
+	install2_files_$type "$hostname"
+fi
+
+if [ "$mode" = "install" ]
+then
+	if $DEFAULT || $DATABASE
+	then
+		echo "Running install3_db_$type"
+		install3_db_$type
+	fi
+	if $DEFAULT || $CONFIG
+	then
+		echo "Running install4_config_$type"
+		install4_config_$type
+	fi
+	if $DEFAULT
+	then
+		echo "Running install5_post_$type"
+		install5_post_$type "$hostname"
+	fi
+else
+	if $DEFAULT
+	then
+		echo "Running install6_upgrade_$type"
+		install6_upgrade_$type
+	fi
+fi
+
+echo "check /etc/gforge/local.inc for $hostname specific FusionForge settings"
+echo "Write INSTALL COMPLETED"
+date >> /etc/gforge/install_completed
+ls -al /etc/gforge/install_completed
+

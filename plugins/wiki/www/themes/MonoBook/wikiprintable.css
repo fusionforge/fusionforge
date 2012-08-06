@@ -1,0 +1,45 @@
+/**
+ *  $Id: wikiprintable.css 7965 2011-03-07 09:47:31Z vargenau $
+ */
+
+/* MediaWiki print stylesheet */
+
+body {
+    color: #000000; background: #ffffff;
+}
+
+/* MSIE/Win doesn't understand 'inherit' */
+a, a.external, a.new, a.stub {
+    color: black ! important;
+    text-decoration: none ! important;
+}
+#article {
+    margin: 0 ! important;
+}
+
+/* Continue ... */
+a, a.external, a.new, a.stub {
+    color: inherit ! important;
+    text-decoration: inherit ! important;
+}
+
+/* Hide ugly UI stuff */
+#quickbar, #topbar, #footer,
+.editsection, .toctoggle {
+    display: none;
+}
+
+#article {
+    position: relative;
+    margin: inherit ! important;
+}
+
+/* Show some stuff */
+.urlexpansion {
+    display: inline ! important;
+}
+
+.printfooter {
+    border-top: solid 1px black;
+    display: block ! important;
+}

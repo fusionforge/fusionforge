@@ -1,0 +1,12 @@
+# 62plugin-oauthprovider begin
+#	AddHandler cgi-script .cgi
+
+#	ScriptAlias /cgi-bin/oauthprovider/ /var/lib/oauthprovider/cgi-bin/
+#	ScriptAlias /oauthprovider/ /var/lib/oauthprovider/cgi-bin/
+
+#	Alias /images/oauthprovider /usr/share/images/oauthprovider
+#	<Location /images/oauthprovider>
+#		order allow,deny
+#		allow from all
+#	</Location>
+# 62plugin-oauthprovider end

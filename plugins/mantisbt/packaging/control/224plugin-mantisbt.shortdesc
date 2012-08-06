@@ -1,0 +1,3 @@
+ This plugin contains the MantisBT subsystem of FusionForge. It allows
+ each FusionForge project to connect to its own instance of the Mantis
+ bugtracker.

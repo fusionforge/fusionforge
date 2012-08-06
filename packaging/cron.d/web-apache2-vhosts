@@ -1,0 +1,6 @@
+#
+# Regular cron jobs for the web-apache2-vhosts package
+#
+
+# Enable the virtual hosts
+37 7,19 * * * root [ -x /usr/share/@OLDPACKAGE@/bin/create-vhosts.sh ] && /usr/share/@OLDPACKAGE@/bin/create-vhosts.sh > /dev/null 2>&1

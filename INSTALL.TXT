@@ -1,0 +1,390 @@
+Installation of FusionForge is a non-trivial undertaking, since it integrates
+with so many different components across your system. A skilled sysadmin 
+is required to pull it off, or at the least a great deal of patience.
+
+The result of a complete installation means automatic creation of CVS 
+and Subversion repositories, and having access to them controlled by 
+FusionForge and stats gathered from them. ViewCVS (used for CVS and
+Subversion browsing) are two additional integration points.
+
+BASICS OF INSTALLATION
+----------------------
+
+
+For Ubuntu/Debian system, you should use the debian packaging, see
+the fusionforge.org website for the correct instructions.
+
+For an installation on CentOS or Red Hat, use the following command.
+
+install.sh <hostname with domain>
+
+That will install the bulk of the system and even set up a site admin
+user account for you.
+
+
+****
+The information below may not be necessary if you succeeded installing
+using the above method. However this info may give you an overview 
+of how the installation is done.
+****
+
+
+
+
+OVERVIEW
+--------
+
+FusionForge has a lot of different pieces touching a lot of different components
+in the system. Cronjobs are required to maintain the system, touching lots 
+of files on a daily and hourly basis, including /etc/* system files.
+
+The plugins that now manage the CVS and SVN functionality have made 
+installation slightly harder because even more files have to be moved into
+place during installation.
+
+The manual installation of fusionforge is documented below. Be sure to follow
+each step carefully, check the forums for frequently asked questions, 
+and ask your Apache, mailman, and postgresql installation questions in the
+corresponding mailing lists rather than on the gforge forums where little
+help is available.
+
+
+  CVS Overview
+  ------------
+  CVS is now managed via the scmcvs plugin which is included in the 
+plugins/ directory in the tarball downloaded from gforge.org. Most 
+of the files in scmcvs are intended for auto-installation on debian 
+systems and DO NOT APPLY to the majority of users. The scmcvs plugin 
+is activated by default in the gforge.sql database.
+
+  Cronjobs for CVS are included in cronjobs/crontab.in, but are commented 
+out by default for your security. cronjobs/cvs-cron/* contains the files 
+that are executed hourly to build permissions and create blank cvs trees.
+Make sure these files are executed as root, and have proper execution bits
+set.  Each of these cronjobs has configuration parameters which you may 
+have to edit manually the paths in those files for your specific system.
+
+
+  SVN Overview
+  ------------
+
+  If you want to use GForge's svn-over-DAV support and apache2 are 
+required.
+
+  SVN is also managed via plugin - the scmsvn plugin is included and 
+activated by default in gforge.
+
+  The sample etc/gforge-httpd.conf.example file in this tarball contains 
+a COMPLETE AND WORKING vhost for subversion-over-dav. The gforge-install.sh
+script will copy this to /etc/gforge/httpd.conf You may have to 
+alter the passwords and any other config options, but the sample config 
+shown has been used in dozens or even hundreds of installs and DOES WORK.
+
+
+  CVSTracker Overview
+  -------------------
+  The cvstracker plugin allows for some integration between CVS 
+commits and the bug tracker and task manager. So, for example, 
+when you commit, you can reference bug and task IDs in your 
+commit message and have the commit linked to the corresponding
+bug and task.
+
+  This works by having a script in the cvs server issue a POST 
+to the main website ( /plugins/cvstracker/newcommit.php )
+
+  See the plugins/cvstracker/README file for details. This 
+plugin is enabled by default in the gforge.sql database file. 
+As with the other plugins, you may manually place the config 
+files in /etc/gforge/plugins/cvstracker/ and uncomment the 
+cronjob in crontab.in.
+
+
+  PHP
+  ---
+  The cronjobs require the PHP CGI to be installed and the php.ini 
+file to be properly configured with your include_path OR edit the 
+crontab.in file to set your include path.
+
+  Mailman
+  -------
+
+  Mailman is needed to create and use mailing lists with gforge. 
+Mailman is frequently installed in /var/mailman/ and the sample 
+vhost shown below will work with this setup without any changes.
+
+  Cronjobs for mailman are located in cronjobs/mail/*
+
+  cronjobs/mail/mailing_lists_create.php is used obviously to 
+create new mailing lists. You may have to edit /etc/gforge/local.inc 
+to change the location of the mailman bin/ directory.
+
+  For all problems with mailman installation and use, contact 
+the mailman mailing lists for help.
+
+
+UPGRADING DATABASE - EXISTING INSTALL
+-------------------------------------
+
+To migrate to a newer version of GForge, you must import 
+your old database, FRS files, mailing lists, cvs and svn trees
+into your new installation.
+
+1) Completely install your new system
+2) Move the mentioned files into place
+3) Import your old database
+4) go into the gforge/db directory and choose 'startpoint.php 4.0.2' 
+as the starting point of the installation (4.0.2 is an example)
+5) ./upgrade-db.php - this script will run the updates in order. 
+If any of them fail, it will prompt you to continue. Generally, 
+you should always continue. Most are minor or informational errors.
+
+
+WEB SETUP - MANUAL INSTALLATION
+-------------------------------
+
+The following are sample commands commonly issued for a manual installation:
+
+tar -xjf gforge-X.X.tar.bz2
+cd gforge-X.X
+
+#
+#	BEFORE RUNNING THIS, determine your apacheuser/group 
+#	and pass it as an argument as shown below.
+#
+#	Argument 1: the main hostname you want to use.
+#	Argument 2: the apache user
+#	Argument 3: the apache group
+#	Argument 3: the IP address that you are listening on
+#
+./gforge-install.sh gforge.company.com apacheuser apachegroup
+
+#
+#	jpgraph install - use the 1.9.1 version from gforge.org
+#	as mentioned above
+#
+tar -xzf jpgraph-1.9.1.tar.gz
+mv jpgraph-1.9.1/src/* /opt/jpgraph/
+
+#you will have to edit jpgraph.php to set USE_CACHE=false
+vim /opt/jpgraph/jpgraph.php
+
+Apache will need to have a line added to its httpd.conf:
+
+Include /etc/gforge/httpd.conf
+
+Restart apache when you are done editing the file so the 
+changes can be picked up.
+
+
+PHP setup
+---------
+
+You may also add the include_path to the php.ini, as it will be
+necessary for your php cgi to run the cron jobs.
+
+register_globals = Off
+magic_quotes_gpc = Off
+file_uploads = On
+include_path = ".:/opt/gforge/gforge/:/opt/gforge/gforge/www/include/:/etc/gforge/"
+
+PHP CLI that is used by crontab.in may use different php.ini.  Find
+it by running the following command and add the above include_path
+directive there:
+
+$ /usr/bin/php -i | fgrep php.ini
+
+
+FRS - File Release System
+-------------------------
+
+FRS has been radically simplified. Simply create a directory and make
+it owned by the webserver-user. Usually "chown -R apache:apache mydir"
+will do the trick.
+
+This directory will be referenced in the GForge Config File as $sys_upload_dir
+
+
+GForge Config File
+--------------
+
+Edit the /etc/gforge/local.inc and set any specific variables 
+like sys_default_domain and any paths to files that are not right
+
+
+Site Admin
+----------
+
+Site admins are anyone who is an admin of group_id=1
+
+To give the first user "Site Admin" privileges, register a new user,
+and confirm it via the email link. Then enter the postgres command
+line and issue these commands:
+
+[gforge]# psql gforge
+
+psql> SELECT user_id FROM users WHERE user_name='******MY NEW USERNAME*********';
+
+The result of that query will be put into this next query:
+
+psql> insert into user_group (user_id,group_id,admin_flags) values (*****YOUR NEW NUMERIC USER ID*****,1,'A');
+
+
+Mail Aliases
+------------
+
+This alias was already added by the gforge-install script:
+
+noreply:        /dev/null
+
+
+PEER RATINGS
+------------
+
+Add yourself, and any others you wish, to the "Peer Ratings" project,
+which should be at /projects/peerrating/ on the website. Make yourself
+an "admin" of the project, and then proceed to "rate" other users on
+the website.
+
+Members of the "Peer Ratings" project, who are "admins" of the project
+become the first trusted users. This is the only way to prime the pump
+for the peer ratings system.
+
+
+CRON JOBS
+---------
+
+Cron jobs are in the cronjobs/ directory and the README file contains
+a sample crontab. This gives you the basic cronjobs for updating
+certain statistics and data on the site.
+
+/cronjobs/cvs-cron/ contains scripts useful for creating blank cvs 
+trees and managing the /etc/groups /etc/passwd and /etc/shadow files.
+See /cronjobs/README.root for more info.
+
+/cronjobs/mail/ contains files useful for the creation of new mailing 
+lists in mailman and creating the /etc/aliases file.
+
+**************************************************************************
+WARNING!!! the following command will blow away any existing root crontab.
+**************************************************************************
+
+[root]# crontab cronjobs/crontab.in
+
+Now edit the paths to the cron scripts:
+
+[root]# crontab -e
+
+IMPORTANT!!!! - the cvs-cron/usergroup.php cron script will meddle 
+with your /etc/passwd, /etc/group, and /etc/shadow files. By default,
+this cron will save these files with a .new extension. You will have 
+to edit the cron script to remove the .new extension, but you must 
+make sure that it is properly generating your files or your server 
+could be unusable.
+
+Once you have manually run the usergroup.php file, look at the 
+/etc/*.new files and verify that they contain sensisble information.
+When you are confident they are right, you can edit usergroup.php 
+to remove the .new extension and uncomment the cronjobs.
+
+
+JPGRAPH
+-------
+
+The installation was shown above. Be sure to use the 1.9.1 version
+from gforge.org and set USE_CACHE=false as shown here.
+
+DEFINE("USE_CACHE",false);
+
+
+ADDITIONAL FILES
+----------------
+
+For XHTML validation against the DTD, the following files must be
+placed under the gforge/common/include/ directory:
+* xhtml-lat1.ent
+* xhtml-special.ent
+* xhtml-symbol.ent
+* xhtml1-strict.dtd
+* xhtml1-transitional.dtd
+They can be downloaded from http://www.w3.org/TR/xhtml1/dtds.html
+as tarball (xhtml1.tgz).
+
+Installation of xmlstarlet is also required.
+
+MOST COMMON PROBLEMS
+--------------------
+
+Q: I get a blank page when I visit http://gforge.company.com/
+
+A: Most often you are missing the php-pgsql library that lets PHP
+talk to the postgres database. Find a php-pgsql RPM or recompile 
+php to have pgql support.
+
+If you're sure you have php-pgsql support, you can edit 
+common/include/database-pgsql.php and remove the @ symbol from
+this line:
+
+	$conn = @pg_connect( 
+
+So that it looks like:
+
+	$conn = pg_connect(
+
+This will let debug output dump to the screen and may let you find
+the problem. Search the forums for more solutions.
+
+
+Q: "Error Occurred In the Logger" or other database permission problems
+
+A: As stated in the installation instructions, the database must be created, 
+owned, and accessed by the gforge user. This user is the only one who will 
+have total acess to all the tables. Any other user would have to be specifically 
+granted permissions with the GRANT commands in postgres.
+
+
+Q: Reporting or time tracking doesn't work
+
+A: Go to the reporting tab and scroll down so you can choose 
+"Initialize/Rebuild Reporting Tables"
+
+You may also be missing GD support or be missing JPGraph or have it installed 
+improperly. The jpgraph/src/ directory should be specified accurately in your 
+local.inc file, and you should include a / at the end of the path specified.
+In addition, you should modify jpgraph.php to set USE_CACHE=false
+
+
+Q: How do I upgrade my database?
+
+A: As stated above, you must apply the changes that are listed in date order 
+in the db/ directory to your database. Only the changes that are not already 
+in your old db/ directory should be applied, and they should be applied and 
+checked IN ORDER.
+
+
+Q: I'm getting an error about BaseLanguage.class not being found.
+
+A: Make sure your localization path is correctly specified in the local.inc 
+file and that it is readable AND writable by the apache user.
+
+
+Q: When I click on "/projects/" or "/users/" links, I get the source code
+instead of the page I expected.
+
+A: As shown in the example httpd.conf files above, you may have to switch 
+to using the <Files> or <Location> directives depending on your server
+version.
+
+
+Q: How do I backup GForge? 
+
+A: The only proper way to backup the gforge database is with pg_dump. 
+Any attempt to backup the filesystem while pgsql is running will result
+in a useless and corrupt backup. You can backup CVS trees using tar as 
+long as they are not actively and heavily used during the backup. 
+Mailman and the FRS uploads dir can also be backed up with tar.
+
+
+Q: Large uploads into FRS or the doc manager fail.
+
+A: Apache and the php.ini file need to have upload limits and possibly 
+memory limits increased.

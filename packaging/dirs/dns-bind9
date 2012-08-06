@@ -1,0 +1,5 @@
+etc/@OLDPACKAGE@/templates
+usr/share/@OLDPACKAGE@/bin
+var/lib/@OLDPACKAGE@/bind
+var/lib/@OLDPACKAGE@/tmp
+var/lib/@OLDPACKAGE@/etc

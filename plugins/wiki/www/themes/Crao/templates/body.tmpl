@@ -1,0 +1,22 @@
+<?php // -*-php-*-
+// $Id: body.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<body<?php echo $WikiTheme->getMoreAttr('body') ?>>
+<div id="header"><?php // for top toolbars style sheet ?>
+  <?php echo Template('top') ?>
+</div>
+<div class="toolbar"><?php echo Template('navbar') ?></div>
+<!-- Page content -->
+<div id="content">
+<?php if (isset($HEADER)) { ?>
+<!-- Page title -->
+<h1><?php echo $HEADER ?></h1>
+<?php } ?>
+<?php echo $CONTENT ?>
+<?php echo Template('bottom') ?>
+</div>
+<?php if (isset($revision)) { ?>
+<!-- Actionbar -->
+<?php echo Template('actionbar') ?>
+<?php } ?>
+</body>

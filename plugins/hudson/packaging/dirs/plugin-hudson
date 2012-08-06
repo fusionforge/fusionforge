@@ -1,0 +1,5 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/hudson
+usr/share/gforge/plugins/hudson/cgi-bin
+usr/share/gforge/plugins/hudson/common
+usr/share/gforge/plugins/hudson/www

@@ -1,0 +1,3 @@
+# $Id: .htaccess 6201 2008-08-26 13:02:33Z vargenau $
+order allow,deny
+Deny from all

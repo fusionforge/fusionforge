@@ -1,0 +1,351 @@
+/* 
+ * Default Theme
+ *
+ * Copyright 2009 Matthieu FAURE // Open-S: global clean-up
+ * Copyright 2010 (c) FusionForge Team
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Stylesheet for FusionForge default theme.
+ * 
+ * CONTENT: all generic styles (not page-related)
+ * ========================================================
+ */
+
+/* HTML elements */
+body {font-size:85%;font-family:"verdana",sans-serif;color:rgb(68,68,68);background-color:rgb(247,247,247);text-align:left;margin:0; }
+form {margin:0; }
+img {border:0; }
+h1 {margin:0; }
+div#maindiv {margin:1em; }
+
+a {text-decoration:none; color:rgb(1, 73, 144); }
+a:hover {text-decoration: underline; color: rgb(247, 0, 0); }
+a.userlink, #searchBox a {color: white; }
+a.userlink:hover, #searchBox a:hover {text-decoration: underline; color: white;}
+a.userlink:visited, #searchBox a:visited {text-decoration: none; color: white; }
+th, td {text-align:left; border:none; }
+input[type="text"], input[type="password"], textarea {
+	width: auto;
+}
+
+/* =header */
+#header {
+  background: rgb(66, 69, 82) url("../images/header/top-middle.gif") top left repeat-x;
+  font-size:77%;
+  margin: 0;
+}
+#header td {padding:0; }
+#header p,
+#header a {
+  color: white;
+  font-weight: bold;
+}
+#header-col1 {
+  padding:0;	
+} 
+#header-col1 h1 {
+    padding: 0;
+    margin: 0;
+}
+#header-col2 {
+  padding:0;
+  text-align:center;	
+}
+#header-col3 {
+  padding: 0 1em 0 0;
+  text-align:right;
+}
+
+/* =searchBox */
+#searchBox div {
+  text-align:center;
+}
+
+/* =tabGenerator */
+.tabGenerator {font-weight:bold; margin:0; }
+.tabGenerator td {padding:0; }
+.tabGenerator .tg-left div div {
+  background: 0 0 url(/themes/gforge/images/toptab-new/left.gif) no-repeat;
+  display: block;
+  width: 3px;
+  height: 30px;
+}
+.tabGenerator .tg-middle {
+  vertical-align: middle;
+}
+.tabGenerator .tg-middle div div {
+  background: url(/themes/gforge/images/toptab-new/middle.gif);
+  text-align:center;
+  vertical-align: middle;
+  height: 30px;
+}
+.tabGenerator .tg-right div div {
+  background: 0 0 url(/themes/gforge/images/toptab-new/right.gif) no-repeat;
+  display: block;
+  width: 9px;
+  height: 30px;
+}
+
+.tabGenerator .tg-left div div.nested {width:5px; }
+.tabGenerator .tg-right div div.nested {width:2px; }
+.tabGenerator .tg-left div div.nested,
+.tabGenerator .tg-middle div div.nested,
+.tabGenerator .tg-right div div.nested {height: 22px; padding-top:0.5em; }
+
+.tabGenerator .tg-left div.selected div {background-image:url(/themes/gforge/images/toptab-new/selected-left.gif); }
+.tabGenerator .tg-middle div.selected div {background-image: url(/themes/gforge/images/toptab-new/selected-middle.gif); }
+.tabGenerator .tg-right div.selected div {background-image: url(/themes/gforge/images/toptab-new/selected-right.gif)}
+
+.tabGenerator .tg-left div div.nested {background:0 0 url(/themes/gforge/images/bottomtab-new/middle.gif); } 
+.tabGenerator .tg-middle div div.nested {background:url(/themes/gforge/images/bottomtab-new/middle.gif); }
+.tabGenerator .tg-right div div.nested {background: 0 0 url(/themes/gforge/images/bottomtab-new/separator.gif); }
+
+.tabGenerator .tg-left div.selected div.nested {background:0 0 url(/themes/gforge/images/bottomtab-new/selected-middle.gif); }
+.tabGenerator .tg-middle div.selected div.nested{background:url(/themes/gforge/images/bottomtab-new/selected-middle.gif);  }
+.tabGenerator .tg-right div.selected div.nested {background: 0 0 url(/themes/gforge/images/bottomtab-new/selected-separator.gif); }
+
+/* set padding only for non nested tabs */
+.tabGenerator .tg-middle div div a {display:block; padding-top: 0.5em;}
+.tabGenerator .tg-middle div div.nested a {display:inline;}
+
+/* set white color only for nested + selected tab */
+.tabGenerator .tg-middle div div.nested a {color: white;}
+.tabGenerator .tg-middle div.selected div.nested a {color: rgb(1,73,144);;}
+
+/* =tabber */
+.topTab, a.topTab, a.topTab:visited, a.topTab:hover,
+.topTabSelected, a.topTabSelected, a.topTabSelected:visited,
+a.topTabSelected:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(68, 68, 68);
+  font-family: arial, helvetica, sans-serif;
+  font-size: 0.9em;
+}
+
+.bottomTab, a.bottomTab, a.bottomTab:visited, a.bottomTab:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 0.9em;
+}
+
+.bottomTabSelected, a.bottomTabSelected, a.bottomTabSelected:visited, 
+a.bottomTabSelected:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(68, 68, 68);
+  font-family: arial, helvetica, sans-serif;
+  font-size: 0.9em;
+}
+
+.topLeft {
+  vertical-align: top;
+  text-align: left;
+}
+
+.middleRight {
+  vertical-align: middle;
+  text-align: right;
+}
+
+.pane {
+  color: rgb(112, 112, 112);
+  background-color: white;
+}
+
+/*--------------------------------------------------
+  REQUIRED to hide the non-active tab content.
+  But do not hide them in the print stylesheet!
+  --------------------------------------------------*/
+.tabberlive .tabbertabhide {
+  display:none;
+}
+
+/*--------------------------------------------------
+  .tabber = before the tabber interface is set up
+  .tabberlive = after the tabber interface is set up
+  --------------------------------------------------*/
+.tabber {
+}
+.tabberlive {
+  margin-top:1em;
+}
+
+/*--------------------------------------------------
+  ul.tabbernav = the tab navigation list
+  li.tabberactive = the active tab
+  --------------------------------------------------*/
+ul.tabbernav {
+  margin:0;
+  padding: 3px 0;
+  border-bottom: 1px solid #778;
+}
+
+ul.tabbernav li {
+  list-style: none;
+  margin: 0;
+  display: inline;
+}
+
+ul.tabbernav li a {
+  padding: 3px 0.5em;
+  margin-left: 3px;
+  border: 1px solid #778;
+  border-bottom: none;
+  background: #D0D0D0;
+  text-decoration: none;
+}
+
+ul.tabbernav li a:link { color: #333333; }
+ul.tabbernav li a:visited { color: #667; }
+
+ul.tabbernav li a:hover {
+  color: #000;
+  background: #FED620;
+  border-color: #227;
+}
+
+ul.tabbernav li.tabberactive a {
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+ul.tabbernav li.tabberactive a:hover {
+  color: #000;
+  background: white;
+  border-bottom: 1px solid white;
+}
+
+/*--------------------------------------------------
+  .tabbertab = the tab content
+  Add style only after the tabber interface is set up (.tabberlive)
+  --------------------------------------------------*/
+.tabberlive .tabbertab {
+  padding:5px;
+  border:1px solid #aaa;
+  border-top:0;
+}
+
+/* If desired, hide the heading since a heading is provided by the tab */
+.tabberlive .tabbertab h2 {
+  display:none;
+}
+.tabberlive .tabbertab h3 {
+  display:none;
+}
+
+/* Example of using an ID to set different styles for the tabs on the page */
+.tabberlive#tab1 {
+}
+.tabberlive#tab2 {
+}
+.tabberlive#tab2 .tabbertab {
+  height:200px;
+  overflow:auto;
+}
+
+.field-holder {
+  clear: both;
+}
+
+/* Boxes (top / middle / bottom)
+----------------------------------------------- */
+.box-surround {
+  margin-bottom: 1em;
+}
+
+.box-title-left {
+  background-image: url(../images/box-topleft.png);
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+
+.box-title-right {
+  background-image: url(../images/box-topright.png);
+  background-repeat: no-repeat;
+  background-position: top right;
+}
+
+.box-title-content {
+  background-image: url(../images/box-grad.png);
+  margin: 0 0.5em;
+  padding: 0.2em 0.1em 0.1em;
+}
+
+.box-content {
+  background-image: url(../images/vert-grad.png);
+  padding: 0.5em;
+}
+
+.box-middle {
+  background-image: url(../images/box-grad.png);
+  margin: 0;
+  padding: 0.2em 0.5em 0.1em;
+}
+
+/* =ft (footer)
+----------------------------------------------- */
+#ft {
+  text-align:center;
+}
+
+/* error_msg, warning_msg or feedback function
+----------------------------------------------- */
+.error {
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #ff4940; /* red */
+    border-color: red; /* red */
+    padding: 0.5em;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+.warning {
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #ffd297; /* orange */
+    border-color: #ffa500; /* orange */
+    padding: 0.5em;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+.feedback {
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #aef26d; /* green */
+    border-color: green; /* green */
+    padding: 0.5em;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+/* scm
+----------------------------------------------- */
+.scm {
+    width: 99%;
+}

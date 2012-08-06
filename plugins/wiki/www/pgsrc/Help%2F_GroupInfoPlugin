@@ -1,0 +1,45 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2F_GroupInfoPlugin 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2F_GroupInfoPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Administrative plugin, used to debug auth problems and settings.
+This [[Help:WikiPlugin|plugin]] is only for testing purposes.
+If DEBUG has no _DEBUG_LOGIN bit set, only the admin user can call it,
+which is of no real use.
+
+Warning! This may display db and user passwords in cleartext. We think we
+cleared everything out though.
+
+== Usage ==
+{{{
+<<_GroupInfo>>
+}}}
+
+== Arguments ==
+
+page _(default: current pagename)_:
+  The page to execute upon.
+
+== Example ==
+
+See [[DebugGroupInfo]]
+
+== Author ==
+* [[PhpWiki:CharlesCorrigan|Charles Corrigan]]
+
+== See Also ==
+
+* [[DebugGroupInfo]] is the corresponding [[Help:ActionPage]].
+* [[Help:_AuthInfoPlugin]]
+* [[Help:_BackendInfoPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

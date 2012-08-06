@@ -1,0 +1,21 @@
+<?php // -*-php-*-
+// $Id: navbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<!-- Additional sidebar navigation -->
+<div class="box">
+<div class="box-title">
+  <?php echo _("Navigation") ?>
+</div>
+<div class="box-data">
+<?php if (!empty($revision)) { ?>
+&middot; <?php echo WikiLink(_("BackLinks"), "button",_("BackLinks")) ?>
+<?php } ?>
+<?php if (!empty($user) && $user->isAdmin()) { ?>
+<br />&middot; <?php echo WikiLink(_("PhpWikiAdministration"), "button", _("Admin")) ?>
+<?php } ?>
+<?php if (!empty($user) && $user->isSignedIn()) { ?>
+<br />&middot; <?php echo WikiLink(_("UserPreferences"), "","Preferences") ?>
+<?php } ?>
+<br />&middot; 
+<?php echo Template("blog/signin") ?>
+</div></div>

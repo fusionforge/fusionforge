@@ -1,0 +1,222 @@
+FusionForge now uses GNU gettext for its internationalisation system,
+instead of the previous home-grown system (the *.tab files).
+
+How it works
+------------
+
+To display a translatable string, the source files need to use the _()
+function, which is an alias for gettext().  Its one parameter is the
+translatable string itself, in English.
+
+  The gettext tools can then extract from the source files a list of
+all translatable strings, and store them in a POT file
+(translations/gforge.pot).  POT stands for PO Template, because this
+file can be used to generate PO files.
+
+  The PO files (PO standing for Portable Object) are stored in
+translations/<ll>.po, <ll> being the locale name for the language.
+There's fr.po for French, de.po for German, and pt_BR.po for
+Portuguese as spoken in Brazil.  They contain, for each translatable
+string, a translated string in the appropriate language.
+
+  The PO files are then turned into MO (Machine Object) files, which
+contain the same information, only in a binary format not meant for
+human editing.  These MO files are installed onto the server where
+FusionForge runs, and gettext finds and uses them at runtime to convert
+strings from English to another language -- if a string is missing in
+the PO file, the English string is displayed.
+
+  So, the initial workflow is:
+
+        *.php -------\
+                      -> gforge.pot -> *.po -> *.mo
+        *.class.php -/
+
+  Now what happens when the source files are modified, new strings are
+added, and existing ones are modified?  Well, the gforge.pot file
+needs to be updated to reflect the new "catalog" of translatable
+strings.  The *.po files also need to be updated.  You'd think changed
+strings would be lost, but the gettext tools do a nifty trick: since
+both the gforge.pot and the *.po files contain comments that reference
+where in the code a translatable string is used, gettext can infer
+that some old translation probably still applies to the new string,
+but it should be checked by a human.  The string is then marked as
+"fuzzy" in the *.po files, which makes it easy to find, check for
+changes in meaning, and maybe update.
+
+  The "update" workflow is therefore:
+
+        *.php -------\
+                      -> new gforge.pot -\
+        *.class.php -/                    -> new *.po -> new *.mo
+                         old *.po -------/
+
+How to use it when coding -- basic
+----------------------------------
+
+To simply display a translated string, just use the _() function on a
+hardcoded string.  For instance, to display a welcome message, you'd
+use the following:
+,----
+| echo _('Welcome to FusionForge!') ;
+`----
+
+  If you need to use a parameter, your best bet is to use printf
+formats.  Your translatable string is the format, and you then use
+that format with sprintf().  For instance, for a more personalised
+greeting, you'd use:
+,----
+| echo sprintf(_('Hello, %s!'), $user_name) ;
+`----
+...or, since you're going to print that formatted string anyway:
+,----
+| printf(_('Hello, %s!'), $user_name) ;
+`----
+
+  Sometimes you need several parameters.  No problem, printf() and
+friends can handle that:
+,----
+| printf(_('Good morning, %s.  Today is %s.'), $user_name, $weekday) ;
+`----
+
+  Sometimes you even need to reorder parameters, or use some of them
+more than once; not to worry, you can also use positional
+placeholders:
+,----
+| printf(_('Good morning, Mr %1$s.  Today is %22s.
+|           How are you feeling today, Mr %1$s?'), $last_name, $weekday) ;
+`----
+
+  Of course, the translated strings will need to contain the
+appropriate placeholders too.
+
+Gotcha #1 -- Plural forms
+-------------------------
+
+Gettext was designed with internationalisation in mind, by people who
+thought of several things that might not be obvious to all of us.
+They are worth keeping in mind.
+
+  One of those is the fact that not every language has the same idea
+of what is a plural, and what numbers should use what plural form.
+Some languages have no concept of plural forms, some have four forms
+depending on the number you're talking about, and even French and
+English (which only have two forms) disagree on what form to use for
+zero (plural in English, singular in French).  That area is handled by
+the library's ngettext() function, which takes three parameters: a
+singular (English) string, a plural (English) string, and a number.
+Depending on the number, the appropriate result will be yielded at
+run-time.  For instance, to get a proper translation for bread
+loaf/loaves depending on how many there are, you'd use
+,----
+| ngettext('bread loaf', 'bread loaves', $n);
+`----
+
+  Of course, that doesn't actually print the number.  So you usually
+use that in conjunction with a *printf() call:
+,----
+| printf(ngettext('There is %d bread loaf', 'There are %d bread loaves', 
+|                 $n),
+|        $n);
+`----
+
+  Note $n is there twice: the innermost occurrence helps gettext
+choose what form to use, the outermost is used by printf to actually
+put the number in there.  If that code were called for values of $n in
+{0,1,2}, you'd see the following result in English:
+,----
+| There are 0 bread loaves
+| There is 1 bread loaf
+| There are 2 bread loaves
+`----
+  And, since French considers that zero of something is not a plural
+number of that thing, the same program would yield the following
+result in French:
+,----
+| Il y a 0 baguette
+| Il y a 1 baguette
+| Il y a 2 baguettes
+`----
+  (I have no idea about Slovenian, but the documentation tells me it
+has four different forms -- the good point is, only the Slovenian
+translator needs to know about that, and the coder can happily ignore
+it, since gettext will do the right thing at runtime.)
+
+  In summary: try to avoid testing for plurality in PHP (with
+if-blocks), since your tests will only work in a select handful of
+languages; use ngettext() instead, leave the rest to translators.
+
+Gotcha #2 -- "domains"
+----------------------
+
+At run-time, the program needs to know where to find the *.mo files.
+Since different parts of a program could make use of several *.mo
+files at the same time, gettext needs to know about them.  So it uses
+the concept of "domains".
+
+  Basically, a domain is a namespace for translatable strings.  The
+beginning of the program needs to tell gettext to use such-and-such
+domain, whose *.mo files can be found in such-and-such location of the
+filesystem.  The very next instruction is usually a declaration that
+one domain is to be used as default -- in FusionForge, that domain is
+"gforge", and it corresponds to the various gforge.mo files, which
+will usually be /usr/share/locale/*/LC_MESSAGES/gforge.mo.  Strings
+from the default domain can be translated by the _() function (or the
+gettext() function, same thing).
+
+  If you want to access strings from another domain (maybe to re-use
+translations from a library, or because your FusionForge plugin has
+its own strings), you need to specify what domain when invoking
+gettext, by using the dgettext() function.  It takes an extra
+parameter before the string to be translated, which is the domain
+name.  One could thus envision the following code:
+,----
+| echo dgettext('gforge-plugin-superduper',
+|               'Thank you for using the SuperDuper FusionForge plugin.') ;
+`----
+
+  (There's also a dngettext() function, for those times when you need
+both explicit domain and plural form handling.)
+
+How to regenerate stuff
+-----------------------
+
+The trunk/tools/update-gettext-files.sh script will update the strings
+catalog (trunk/gforge/translations/gforge.pot) and the translation
+files (trunk/gforge/translations/*.po).  It should be run after new
+strings have been introduced, or old strings have been changed --
+although not too often, since it does generate a large diff (think of
+all the line numbers that have been modified).  You can then commit
+the newly updated trunk/gforge/translations/* files.
+
+  When a translation file has been updated by a translator, the *.mo
+files need to be regenerated.  The trunk/tools/update-gettext-files.sh
+script takes care of that, and prepares new
+trunk/gforge/locales/<ll>/LC_MESSAGES/gforge.mo from the corresponding
+trunk/gforge/translations/<ll>.po files.
+
+How to edit translation files
+-----------------------------
+
+The PO format is designed to be usable by computer programs.  That
+means several helper applications exist to provide interfaces for
+translators and make their life easier than if they had to edit text
+files by hand.  (The fact that these applications also ensures that
+the files are always well-formed provides the added convenience of
+making the developers' life easier, and nobody complains about that.)
+Translators therefore usually use these programs, which allow them to
+easily navigate through the *.po files, fix strings, look for
+untranslated strings or strings that need review (fuzzy strings), and
+so on.
+
+  Notable examples of these applications include POedit (a Gtk-based
+app), Kbabel (this ones is Qt), and Pootle (web-based).  Emacs
+aficionados will, no doubt, use their favourite editor's PO-mode.
+
+  Note that the Debian internationalisation team have been kind enough
+to host FusionForge translations on their Pootle instance.  It is
+therefore recommended that translators register an account on
+https://pootle.debian.net/ and use it for their work.  Pootle has a
+web-based interface, but it also allows translators to download and
+upload the *.po files for those who prefer working locally with the
+other tools.

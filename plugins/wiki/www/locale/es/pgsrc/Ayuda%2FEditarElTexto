@@ -1,0 +1,10 @@
+Date: Fri, 10 Sep 2010 13:48:44 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Ayuda%2FEditarElTexto 7862 2011-01-22 18:00:33Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Ayuda%2FEditarElTexto;
+  flags="";
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Todas las páginas (excepto los resultados de búsquedas) tienen una enlace hacia EditarElTexto en la parte inferior. Al hacer click sobre este enlace se puede editar el texto que se está leyendo.

@@ -1,0 +1,243 @@
+/**
+ * $Id: shamino_com.css 8114 2011-09-23 12:18:10Z vargenau $
+ *
+ * shamino.com style sheet based on the original Wiki
+ *
+ */
+body {
+    font-family: sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    background-color: #ffffff;
+    position: absolute;
+    top:0px;
+    left:0px;
+    visibility: visible;
+    z-index: auto;
+    margin:0px;
+}
+
+hr {
+    height:0px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+#content {
+    font-size: 10pt;
+    font-family: sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    background-color: #ffffff;
+    padding: 1em 10px 1em 10px;
+}
+
+.wikitext, .wiki, p, form, ul, dd, dl, li, td {
+    /*font-size: 10pt;*/
+    line-height: 150%;
+    color: #111111;
+    margin: 0px;
+    padding: 0px;
+    list-style-type:none;
+}
+
+p, ul {
+    padding: 10px;
+    text-align: justify;
+    background-color:#ffffff;
+}
+
+dd {
+    font-size: 9pt;
+    text-align:right;
+    padding:0px;
+    margin:0px;
+    bottom:0px;
+}
+
+dl {
+    padding:0px;
+    margin:0px;
+    margin-top:14px;
+    bottom:0px;
+}
+
+li {
+  margin-left:0px;
+  margin-bottom:0px;
+}
+
+img {
+    margin:0px;
+    border:0;
+    padding:0px;
+}
+
+table {
+  border: 0px;;
+  padding: 0px;
+  border-spacing: 0px;
+  margin: 0px;
+}
+
+td, th, tr, tt {
+  padding: 0px;
+  margin: 2px;
+  border: 0px;
+  border-spacing: 0px;
+}
+
+input.numeric { text-align: right; }
+input {
+  font-family: sans-serif;
+  font-size: 10pt;
+  font-style: normal;
+  font-weight: normal;
+}
+
+textarea {
+  text-decoration:none;
+  font-family: sans-serif;
+  font-size: 10pt;
+  font-style: normal;
+  font-weight: normal;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Lucida Grande', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  margin:0px;
+  padding:0px;
+  padding-top:10px;
+  text-decoration:none;
+  text-align:left;
+}
+
+a.wiki { font-weight:normal; }
+a:link { font-weight:normal; color:#445566; text-decoration:none }
+a:visited { font-weight:normal; color:#445566; text-decoration:none }
+a:hover { font-weight:normal; color:#445566; text-decoration:underline }
+a:active { font-weight:normal; color:#445566; text-decoration:underline }
+a:focus { font-weight:normal; color:#445566; text-decoration:underline }
+
+/* generic classes ----------------------------------------------- */
+
+.align-left {text-align: left;}
+.align-right {text-align: right;}
+.align-center {text-align: center;}
+  
+.top {vertical-align: top;}
+
+.nowrap {white-space: nowrap;}
+
+.fullwidth { width: 100%; }
+
+/* --------------------------------------------------------------- */
+
+.main { padding: 0px; border: 0px; margin:0px; }
+.maintable { padding: 0px; border: 0px; margin:0px; }
+.menu { font-size: 9pt; padding: 10px; padding-top:0px; border: 0px; margin:0px; }
+.box { background-color: #eeeeee; border: 1px solid #dcdcdc; color: #111111; padding: 0px; position: absolute; }
+.bar { background-color: #eeeeee; color: #111111; font-weight: bold; padding: 2px 1em 2px 1em; }
+
+.wikilink { color: #5555CC; text-decoration:none; font-style:normal; }
+.wikinavbar { border-bottom: 1px #999999 solid; padding: 2px; font-size: 8pt; }
+.toolbar { border-top: 1px #999999 solid; padding: 2px; font-size: 8pt; }
+.debug { padding: 2px; margin-left:10px; font-size: 8pt; }
+.wikinavbar a.wikilink, .toolbar a.wikilink, .editdate, #xhtml-validator a.wikilink { font-size: 8pt; }
+#content a.wiki { font-size: 9pt; }
+.wikiaction { color: #5555CC; text-decoration:none; font-style:normal; }
+.wiki { color: #5555CC; text-decoration:none; font-style:normal; }
+.backlinks { color: #5555CC; text-decoration:none; font-style:normal; }
+/* .header { font-size: x-small; border-top: 1px #999999 solid; padding:10px; padding-top:5px; padding-bottom:5px; } */
+
+#header { font-size: 8pt; margin-left:4px; }
+.signin, .signin a.wiki, .signin a.wikiaction { font-size: 8pt; }
+.top { font-size: 75%; margin:4px; }
+.plugin { margin:0px; }
+
+div#logo {
+  float: right;
+}
+
+/* plugin BoxRight */
+div.boxright {
+  width: 200px;
+  right: 10px;
+  padding: 0.5em;
+  float: right;
+  border: thin solid #888888;
+  padding: 0.5em;
+}
+
+/**
+ * Search Results
+ */
+.search-context { background: white; font-style: oblique; }
+.search-term {
+  background: yellow;
+  font-weight: normal;
+}
+
+/* IncludePage plugin ================================================= */
+
+.transclusion-title {
+   font-style: oblique;
+   font-size: 0.75em;
+   text-decoration: underline;
+   text-align: right;
+}
+
+.transclusion {
+   background: lightgreen;
+   border: thin;
+   border-style: solid;
+   padding-left: 0.8em;
+   padding-right: 0.8em;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   margin: 0.5ex 0px;
+}
+
+/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
+
+/*
+ * table class="boxed"
+ * will put a border around the table (but not around the cells)
+ *
+ * table class="bordered"
+ * will put a border around the table and the cells
+ *
+ * In both cases, the caption will be bold and centered under the table
+ *
+ * In both cases, the headers (th) will have a "#d8d8d8" background
+ */
+
+table.boxed, table.bordered, table.bordered th, table.bordered td {
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+    vertical-align: top;
+}
+
+table.boxed td, table.bordered td,
+table.boxed th, table.bordered th {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+table.boxed caption, table.bordered caption {
+    text-align: center;
+    font-weight: bold;
+    caption-side: bottom;
+    padding-top: 0.8em;
+}
+
+table.boxed th, table.bordered th {
+    font-weight: bold;
+    background-color: #d8d8d8;
+}
+

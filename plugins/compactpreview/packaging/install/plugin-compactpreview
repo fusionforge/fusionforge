@@ -1,0 +1,4 @@
+plugins/compactpreview/common/*                  usr/share/@OLDPACKAGE@/plugins/compactpreview/common/
+plugins/compactpreview/include/*                 usr/share/@OLDPACKAGE@/plugins/compactpreview/include/
+plugins/compactpreview/www/*                     usr/share/@OLDPACKAGE@/plugins/compactpreview/www/
+plugins/compactpreview/etc/compactpreview.ini	             etc/@PACKAGE@/config.ini.d/

@@ -1,0 +1,18 @@
+lun oct 6 11:36:26 CEST 2003 kikov
+
+        * Try to modify the RSS XML to support extended attributes
+                like License, Dates, Category, etc...
+        
+        * Ring of Gforge sites: a list of the gforge sites subscribed 
+                - Need a param to say if a site is public ( so the url
+                        will be propagated among gforge sites ). It
+                        could have a private associated site.
+                
+        * Categorization support: 
+                - RSS modification needed
+                - Mixing trees needed
+
+        * Project Orders: needed the study
+                - Local info
+                - Distributed info
+                - Rings of Gforge sites needed/supported

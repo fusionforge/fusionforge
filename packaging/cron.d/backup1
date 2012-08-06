@@ -1,0 +1,3 @@
+# Daily site backup
+0 2 * * *  root $PHP $FFCRON/backup_site.php
+

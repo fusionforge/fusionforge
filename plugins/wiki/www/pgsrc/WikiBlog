@@ -1,0 +1,22 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: WikiBlog 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=WikiBlog;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+<<Comment
+  Required actionpage for blogs. You can override a user base here.
+  The default is the current username.
+  If user=ADMIN_USER and BLOG_DEFAULT_EMPTY_PREFIX=true then the base will be /Blog.
+
+  The most beautiful is copying this page to a new page Blog and have your admin blogs under /Blog only.
+  See the blog theme.
+>>
+<<WikiBlog>>
+
+----
+[[CategoryActionPage]]

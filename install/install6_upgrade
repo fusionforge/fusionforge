@@ -1,0 +1,32 @@
+install6_upgrade()
+{
+	echo "Running php db/upgrade-db.php"
+	cd $scriptdir; php db/upgrade-db.php
+	echo "Running php utils/normalize_roles.php"
+	cd $scriptdir; php utils/normalize_roles.php
+}
+
+install6_upgrade_redhat()
+{
+	install6_upgrade
+}
+
+install6_upgrade_suse()
+{
+	install6_upgrade
+}
+
+install6_upgrade_debian()
+{
+	echo "TODO"
+}
+
+install6_upgrade_ubuntu()
+{
+	echo "TODO"
+}
+
+install6_upgrade_unknown()
+{
+	echo "TODO"
+}

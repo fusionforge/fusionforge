@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# check write perms to the .testbox/* (mixed web/cli perms)
+chmod -R a+rw .testbox .dumphtml
+if [ -d .testbox/page_data -a ! -w .testbox/page_data/AllPages ]; then
+  rm -rf .testbox/*
+fi
+
+for db in file dba SQL ADODB cvs \
+    PearDB_mysql PearDB_pgsql PearDB_sqlite \
+    ADODB_mysql ADODB_postgres7 ADODB_sqlite \
+    PDO_mysql PDO_pgsql PDO_sqlite
+do
+    php -Cq -d register_argc_argv=1 test.php debug=1 level=10 db=$db | \
+	tee all_$db.result
+done

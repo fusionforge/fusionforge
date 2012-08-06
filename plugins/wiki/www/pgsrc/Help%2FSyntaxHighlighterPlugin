@@ -1,0 +1,80 @@
+Date: Fri, 16 Dec 2011 12:51:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FSyntaxHighlighterPlugin 8211 2011-12-16 11:54:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FSyntaxHighlighterPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~SyntaxHighlighter** [[Help:WikiPlugin|plugin]] passes all its arguments through a C++
+highlighter called "highlight" (available at http://www.andre-simon.de/).
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **syntax**
+|
+| //None// (required argument), see http://www.andre-simon.de/doku/highlight/highlight.html
+|-
+| **style**
+|
+| ~[ "ansi", "gnu", "kr", "java", "linux" ~] (required)
+|-
+| **color**
+|
+| null (optional), see ##highlight/themes##
+|-
+| **number**
+|
+| 0  (optional)
+|-
+| **wrap**
+|
+| 0  (optional)
+|}
+
+== Example ==
+
+{{{
+<<SyntaxHighlighter syntax=c style=kr color=emacs
+ #include <stdio.h>
+
+ int main() {
+ printf("Lalala\n");
+ }
+>>
+}}}
+
+will give:
+
+<<SyntaxHighlighter syntax=c style=kr color=emacs
+ #include <stdio.h>
+
+ int main() {
+ printf("Lalala\n");
+ }
+>>
+
+I did not use beautifier, because it used up more than 8M of memory on
+my system and PHP killed it. I'm not sure whether this is a problem
+with my integration, or with beautifier itself.
+
+== Authors ==
+
+* alecthomas
+* Fixes by [[PhpWiki:ReiniUrban|Reini Urban]]:
+** support options: syntax, style, color,
+** php version switch,
+** HIGHLIGHT_DATA_DIR, HIGHLIGHT_EXE constants,
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

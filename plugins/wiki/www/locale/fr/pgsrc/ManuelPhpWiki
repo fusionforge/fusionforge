@@ -1,0 +1,31 @@
+Date: Thu, 27 Jan 2011 17:06:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: ManuelPhpWiki 7918 2011-01-27 16:07:56Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=ManuelPhpWiki;
+  flags=EXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+<<IncludePage page="Aide/PhpWiki">>
+<<IncludePage page="Aide/WikiWikiWeb">>
+<<IncludePage page="SteveWainstead">>
+<<IncludePage page="Aide/WabiSabi">>
+<<IncludePage page="Aide/AjouterDesPages">>
+<<IncludePage page="Aide/ÉditerLeContenu">>
+<<IncludePage page="Aide/StyleCorrect">>
+<<IncludePage page="Aide/CommentUtiliserUnWiki">>
+<<IncludePage page="PagesRecherchées">>
+<<IncludePage page="Aide/InterWiki">>
+<<IncludePage page="Aide/IcônesDeLien">>
+<<IncludePage page="Aide/PluginWiki">>
+<<IncludePage page="Aide/URLMagiquesPhpWiki">>
+<<IncludePage page="Aide/DétailsTechniques">>
+<<IncludePage page="Aide/RèglesDeFormatageDesTextes">>
+<<IncludePages pages=<!plugin-list BackLinks page=CatégoriePluginWiki sortby=pagename exclude="Template/*" !> >>
+
+{| width="100%"
+|- align="center"
+| **FIN DU DOCUMENT**
+|}

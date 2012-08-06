@@ -1,0 +1,21 @@
+CompactPreview plugin
+
+Provides OSLC-compatible compact preview of recources such as users and projects.
+
+Whenever activated, a JavaScript popup will appear when mouse moves over links 
+to user or project profiles, containing a minimal identity card for these.
+
+The code originally existed in the oslc plugin, but was committed in a separate 
+plugin so as not to force users to activate the REST web services for the 
+trackers if they don't want to.
+
+This plugin was initially developped as part of the COCLICO project with financial 
+support from Region Ile de France.
+
+More details can be found in : 
+https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/CompactPreview_plugin
+
+TODO : implement some more preview of the forge's artifacts.
+
+-- Olivier Berger
+ 

@@ -1,0 +1,131 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FPageList 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPageList;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~PageList** library allows to list a number of pagenames, optionally as table with various columns.
+
+This library relieves some work for these plugins:
+* AllPages,
+* BackLinks,
+* LikePages,
+* MostPopular,
+* TitleSearch,
+- ~WikiAdmin* and more.
+
+It also allows dynamic expansion of those plugins to include more columns in their output.
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **info**
+| which columns to display
+| pagename
+|-
+| **exclude**
+| which pages to exclude. Wildcards, comma-seperated lists and <!plugin-list !> arrays allowed.
+| //none//
+|-
+| **author**
+| select pages by author; current user by ~[~]
+| false
+|-
+| **owner**
+| select pages by owner; current user by ~[~]
+| false
+|-
+| **creator**
+| select pages by creator; current user by ~[~]
+| false
+|-
+| **sortby**
+| select column to sort
+| //none//
+|-
+| **limit**
+| number of rows
+| 50
+|-
+| **paging**
+| auto (top + bottom rows if applicable) \\ top (top only if applicable) \\ bottom (bottom only if applicable) \\ none (don't page at all)
+| auto
+|-
+| **cols**
+| side-by-side display of list (1-3)
+| 1
+|-
+| **azhead**
+| 1: group by initials \\ 2: provide shortcut links to initials also
+| 0
+|-
+| **comma**
+| condensed comma-seperated list, 1 if without links, 2 if with
+| 0
+|-
+| **commasep**
+| comma separator
+| ', '
+|-
+| **listtype**
+| ul, ol, dl, comma
+| ul
+|-
+| **ordered**
+| OL or just UL lists (ignored for comma)
+| false
+|-
+| **linkmore**
+| If count > 0 and limit > 0, display a link with the number of all results, linked to the given pagename.
+| //none//
+|-
+| **nopage**
+| for info=col omit the pagename column
+| false
+|}
+
+=== Info arguments ===
+
+Column 'info=' arguments:
+|= pagename  | Page Name (string regex)
+|= mtime     | Last Modified
+|= hits      | Hits
+|= summary   | Last Summary
+|= version   | Version
+|= author    | Last Author
+|= locked    | Locked
+|= external  | External
+|= minor     | Minor Edit
+|= markup    | Markup
+|= size      | Size
+|= creator   | Creator
+|= owner     | Owner
+|= checkbox  | Selectable checkbox at the left
+|= content   | Page content
+|= perm      | Permission Mask
+|= acl       | ACL
+
+Special, custom columns, either theme or plugin (~WikiAdmin*) specific:
+|= remove              | Remove
+|= renamed_pagename    | Rename to
+|= ratingwidget        | wikilens theme specific.
+|= custom              | See plugin/_WikiTranslation
+
+Symbolic 'info=' arguments:
+|= all  | All columns except the special columns
+|= most | pagename, mtime, author, size, hits, ...
+|= some | pagename, mtime, author
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

@@ -1,0 +1,35 @@
+<section id="ug_sitewide_search">
+	<title>Searching in FusionForge</title>
+	<para>
+		You can search in FusionForge for the following arguments:
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>People</term>
+			<listitem>
+				<para>You can search for login name or the complete username. The search is not case sensitive. Inserted text must be at least 3 characters.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Software/Group</term>
+			<listitem>
+				<para>You can search for software groups. Inserted text must be at least 3 characters.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Skill</term>
+			<listitem>
+				<para>You can search for skills inserted by the users. Only public skills profiles can be searched. Inserted text must be at least 3 characters.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<para>
+		You can search for People or Software groups by selecting the item in the combo box and inserting the search text in the text box.
+	</para>
+	<para>
+		If the user is inside a project, he can search on all the items of the project (trackers, forums, mailing lists, tasks, releases, documents, news and wiki); he can also search on a specific item by selecting the corresponding search.
+	</para>
+	<para>
+		An advanced search is also provided to precise the search on a project.
+	</para>
+</section>

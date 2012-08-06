@@ -1,0 +1,17 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: AllUsers 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=AllUsers;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Here is a list of all users who have once successfully logged in,
+created their own home page or have saved [[UserPreferences]] at least once.
+----
+<<AllUsers>>
+
+----
+[[CategoryActionPage]]

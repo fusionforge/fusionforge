@@ -1,0 +1,7 @@
+Package: @PACKAGE@-plugin-scmhg
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, mercurial, php5-cli, ${misc:Depends}
+Provides: @PACKAGE@-plugin-scm, @OLDPACKAGE@-plugin-scmhg
+Conflicts: @OLDPACKAGE@-plugin-scmhg
+Replaces: @OLDPACKAGE@-plugin-scmhg
+Description: collaborative development tool - Mercurial (Hg) plugin

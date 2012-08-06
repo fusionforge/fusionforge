@@ -1,0 +1,101 @@
+#!/usr/bin/perl -w
+#
+# Debian-specific script to unregister a plugin from the SF database
+
+use DBI ;
+use strict ;
+use diagnostics ;
+
+use vars qw/$dbh @reqlist $plugin_name $plugin_desc $plugin_id/ ;
+
+sub debug ( $ ) ;
+
+require ("/usr/share/gforge/lib/include.pl") ; # Include all the predefined functions
+
+&db_connect ;
+
+if ($#ARGV < 0) {
+    debug "Usage: unregister-plugin <plugin name>" ;
+    exit 1 ;
+}
+
+$plugin_name = $ARGV [0] ;
+
+if ($plugin_name =~ /[^a-z]/) {
+    debug "Error: the plugin name must contain only [a-z] characters" ;
+    exit 1 ;
+}
+
+$dbh->{AutoCommit} = 0;
+$dbh->{RaiseError} = 1;
+eval {
+    my ($query, $query2, $query3, $sth, @array, @array2, @array3, $version, $action) ;
+
+    $query = "SELECT count(*) FROM plugins WHERE plugin_name = '$plugin_name'" ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+
+
+
+
+    if ($array[0] == 1) {
+    	# Looking if this plugin is already referenced by a group
+    	$query2="SELECT group_plugin.plugin_id FROM group_plugin,plugins WHERE group_plugin.plugin_id=plugins.plugin_id AND plugin_name = '$plugin_name'";
+        $sth = $dbh->prepare ($query2) ;
+        $sth->execute () ;
+        @array2 = $sth->fetchrow_array () ;
+        $sth->finish () ;
+    	if ($array2[0] && $array2[0] >= 1) {
+		print "WARNING: This plugin is already used by one or more groups, can't unregister\n"
+	} else {
+    		$query3="SELECT user_plugin.plugin_id FROM user_plugin,plugins WHERE user_plugin.plugin_id=plugins.plugin_id AND plugin_name = '$plugin_name'";
+        	$sth = $dbh->prepare ($query3) ;
+        	$sth->execute () ;
+        	@array3 = $sth->fetchrow_array () ;
+        	$sth->finish () ;
+    		if ($array3[0] && $array3[0] >= 1) {
+			print "WARNING: This plugin is already used by one or more users, can't unregister\n"
+		} else {
+			$query = "DELETE FROM plugins WHERE plugin_name = '$plugin_name'" ;
+			$sth = $dbh->prepare ($query) ;
+			$sth->execute () ;
+			$sth->finish () ;
+
+			$plugin_id = $array[0] ;
+			debug "Plugin '$plugin_name' successfully unregistered." ;
+
+			# debug "Committing." ;
+			$dbh->commit () ;
+		}
+	}
+    } else {
+	debug "No plugin '$plugin_name' found, skipping." ;
+    }
+
+    # There should be a commit at the end of every block above.
+    # If there is not, then it might be symptomatic of a problem.
+    # For safety, we roll back.
+    $dbh->rollback ();
+};
+
+if ($@) {
+    warn "Transaction aborted because $@" ;
+    debug "Transaction aborted because $@" ;
+    $dbh->rollback ;
+    debug "Please report this bug on the Debian bug-tracking system." ;
+    debug "Please include the previous messages as well to help debugging." ;
+    debug "You should not worry too much about this," ;
+    debug "your DB is still in a consistent state and should be usable." ;
+    exit 1 ;
+}
+
+$dbh->rollback ;
+$dbh->disconnect ;
+
+sub debug ( $ ) {
+    my $v = shift ;
+    chomp $v ;
+    print STDERR "$v\n" ;
+}

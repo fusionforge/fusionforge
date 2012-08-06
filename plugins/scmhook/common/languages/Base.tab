@@ -1,0 +1,14 @@
+#/**
+#  *
+#  * scmhook message catalog (English)
+#  *
+#  * GForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  *                2005 (c) Daniel Pérez <danielperez.arg@gmail.com>
+#  * http://sourceforge.net
+#  * Here you can add your own language customizations
+#  *
+#  *
+#  */
+user_home	view_scmhook	View Personal scmhook
+project_admin	scmhook	View the scmhook Administration

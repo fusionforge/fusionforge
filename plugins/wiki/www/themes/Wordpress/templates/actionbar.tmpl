@@ -1,0 +1,104 @@
+<?php // -*-php-*-
+// $Id: actionbar.tmpl 8148 2011-10-03 09:16:57Z vargenau $
+?>
+
+<div id="actionbar">
+
+<?php
+  if ((!$page->get('locked') || $user->isAdmin()) and $revision)
+      $EditB = Button("edit",
+                      $revision->isCurrent() ? _("Edit this page") : _("Edit Old Revision"));
+  else
+      $EditB = Button("viewsource", _("View Source"));
+  // $EditB = fmt("%s of this page", $EditB);
+  if (empty($revision)) $revision = $page->getCurrentRevision(false);
+?>
+
+ <ul>
+   <li><a class="wikilink" href="<?php echo WikiURL(HOME_PAGE)?>"><?php echo WIKI_NAME ?></a>
+     <ul>
+       <li>
+         <?php echo WikiLink(_("HomePage"), "button") ?>
+       </li>
+       <li>
+         <?php echo WikiLink(_("RecentChanges"), "button") ?>
+       </li>
+       <?php if (!empty($user) && $user->isAdmin()) { ?>
+       <li>
+       <?php echo $SEP?><?php echo WikiLink(_("PhpWikiAdministration"), "button") ?>
+       </li>
+       <?php } ?>
+       <?php if (!empty($user)) { ?>
+       <?php
+       /* Today's calendar page for the user, if the Calender subpage is defined. */
+        $UserCalPageTitle = $user->getId() . SUBPAGE_SEPARATOR . _("Calendar");
+        $dbi = $request->getDbh();
+        if ($dbi->isWikiPage($UserCalPageTitle)) {
+          $UserCalPageTodayTitle = $UserCalPageTitle . SUBPAGE_SEPARATOR . strftime("%Y-%m-%d", time());
+         ?>
+         <li>
+         <?php echo $SEP?><?php echo WikiLink($UserCalPageTodayTitle, "button", _("Today")) ?>
+         </li>
+       <?php } ?>
+      <?php } ?>
+      <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
+        <li><?php echo $SEP?><?php echo Button("pdf") ?></li>
+       <?php } ?>
+     </ul>
+   </li>
+   <li>Editing
+     <ul>
+       <li><?php echo $EditB ?></li>
+       <?php if ($user->isAdmin() or mayAccessPage('change', $page->getName())) { ?>
+        <li><?php echo $SEP?><?php echo Button($page->get('locked') ? 'unlock' : 'lock')?></li>
+        <?php if (ENABLE_PAGEPERM) { ?>
+          <li><?php echo $SEP?><?php echo Button('chown') ?></li>
+          <li><?php echo $SEP?><?php echo Button('setacl') ?></li>
+        <?php } ?>
+       <?php } ?>
+       <?php if ($user->isAdmin() or mayAccessPage('remove', $page->getName())) { ?>
+        <li><?php echo $SEP?><?php echo Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?></li>
+        <li><?php echo $SEP?><?php echo Button('remove') ?></li>
+       <?php } ?>
+     </ul>
+   </li>
+   <li>Information
+     <ul>
+       <li>
+         <a href="<?php echo WikiURL($revision,array('action'=>'diff'))?>" >
+         <?php echo $WikiTheme->getLastModifiedMessage($revision) ?></a>
+       </li>
+       <li>
+         <?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?><?php echo $SEP?>
+       </li>
+       <li> <?php echo Button("PageInfo", _("PageInfo")) ?> </li>
+         <?php if ((DEBUG and $request->getArg('action') == 'browse') || $user->isAdmin()) { ?>
+         <li>
+           <?php echo $SEP?><?php echo Button("DebugInfo", _("DebugInfo")) ?> <!-- For debugging only, really -->
+           <?php echo $SEP?><?php echo Button("PageDump", _("PageDump")) ?>
+         </li>
+         <?php } ?>
+     </ul>
+   </li>
+   <li>Search
+     <ul>
+       <li>
+         <?plugin-form TitleSearch formsize=20 ?>
+       </li>
+       <li>
+         <?plugin-form FullTextSearch formsize=20 ?>
+       </li>
+       <li>
+         <?php if ($revision) { ?>
+           <?php echo Button(_("LikePages"), _("LikePages")) ?>
+         <?php } ?>
+       </li>
+     </ul>
+   </li>
+   <li>User info
+     <ul>
+       <?php echo Template('signin') ?>
+     </ul>
+   </li>
+ </ul>
+</div>

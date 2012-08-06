@@ -1,0 +1,31 @@
+# $Id: Makefile.global 8202 2011-11-29 13:08:05Z vargenau $
+#
+# themes/Makefile.global
+#
+# minify themes, for gnu make only
+
+.PHONY: all css js
+
+THEMES = default MonoBook wikilens Sidebar SpaceWiki blog MacOSX fusionforge
+
+# http://developer.yahoo.com/yui/compressor/
+YUICOMPRESSOR = java -jar ../default/yuicompressor-2.4.7.jar
+
+css: $(CSS_FILES)
+
+js:  $(MAIN)-min.js $(patsubst %.js,%-min.js,$(JS_REST)) 
+
+clean:
+	rm $(MAIN)-min.js $(patsubst %.js,%-min.js,$(JS_REST)) $(CSS_FILES) 
+
+$(MAIN)-min.js : $(JS_MAIN)
+	$(YUICOMPRESSOR) -o $@ $(JS_MAIN)
+
+%-min.css : %.css
+	$(YUICOMPRESSOR) -o $@ $<
+
+%-min.js : %.js
+	$(YUICOMPRESSOR) -o $@ $<
+
+IEFixes-min.js : IEFixes.js
+	$(YUICOMPRESSOR) $< | sed -e's,style.floats,style.float,g' > $@

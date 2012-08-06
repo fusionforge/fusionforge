@@ -1,0 +1,3 @@
+[type: gettext/rfc822deb] dsf-in/common.templates
+[type: gettext/rfc822deb] dsf-in/db-postgresql.templates
+[type: gettext/rfc822deb] dsf-in/dns-bind9.templates

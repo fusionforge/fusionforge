@@ -1,0 +1,85 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+SRCPACKAGE=$(shell head -1 $(CURDIR)/debian/changelog | sed 's/\(.[^ ]*\) .*/\1/')
+MAJOR=$(shell head -1 $(CURDIR)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
+ORIGFILE=$(SRCPACKAGE)_$(MAJOR).orig.tar.gz
+OLDPACKAGE=gforge
+PACKAGE=fusionforge
+FORGENAME=FusionForge
+
+SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' -e 's/@FORGENAME@/$(FORGENAME)/g' -e 's/@OLDPACKAGE@/$(OLDPACKAGE)/g'
+
+CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(PACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
+DIRSFILES=$(patsubst packaging/dirs/%,debian/$(PACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
+LINKSFILES=$(patsubst packaging/links/%,debian/$(PACKAGE)-%.links,$(wildcard packaging/links/[a-z]*))
+INSTALLFILES=$(patsubst packaging/install/%,debian/$(PACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
+DOCSFILES=$(patsubst packaging/docs/%,debian/$(PACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*))
+POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
+DSFINFILES=$(patsubst debian/dsf-in/%,debian/$(PACKAGE)-%,$(wildcard debian/dsf-in/[a-z]*))
+
+.PHONY: conffiles
+conffiles: $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(DSFINFILES) debian/control
+
+debian/$(PACKAGE)-%.cron.d:
+	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(PACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) > $@
+
+debian/$(PACKAGE)-%.dirs:
+	cp $(CURDIR)/packaging/dirs/$* $@ 
+
+debian/$(PACKAGE)-%.links:
+	cp $(CURDIR)/packaging/links/$* $@ 
+
+debian/$(PACKAGE)-%.install:
+	cp $(CURDIR)/packaging/install/$* $@ 
+
+debian/$(PACKAGE)-%.docs:
+	cp $(CURDIR)/packaging/docs/$* $@
+
+debian/control: $(wildcard packaging/control/*)
+	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | grep -v scmcpold | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
+
+debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
+        @debconf-updatepo --podir=debian/dsf-po
+
+debian/po/%:
+	cat $(patsubst debian/po/%,debian/dsf-po/%,$@) | $(SED_REPLACE) > $@
+
+# postinst and prerm files
+debian/$(PACKAGE)-%:
+	cat $(patsubst debian/$(PACKAGE)-%,debian/dsf-in/%,$@) | $(SED_REPLACE) > $@
+
+build: debian/po/templates.pot conffiles
+	dh $@
+	# Build gettext *.mo files
+	utils/manage-translations.sh build
+
+clean:
+	dh $@
+	rm -f $(CURDIR)/debian/*.cron.d
+	rm -f $(CURDIR)/debian/*.dirs
+	rm -f $(CURDIR)/debian/*.links
+	rm -f $(CURDIR)/debian/*.install
+	rm -f $(CURDIR)/debian/*.docs
+	rm -f $(CURDIR)/debian/*.postinst
+	rm -f $(CURDIR)/debian/*.prerm
+	rm -rf locales
+	rm -f $(POFILES)
+
+makeorig: 
+	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | \
+	grep -v '/.svn/' | grep -v '/.testbox/' | \
+	grep -v rpm-specific | grep -v docs/phpdoc/docs | \
+	grep -v ^./debian/ | grep -v \\.jar$$ | \
+	grep -v \\.pdf$$ | grep -v plugins/fckeditor/www/_samples | \
+	cpio -o -H ustar | gzip > ../$(ORIGFILE)
+
+%:
+	dh  $@

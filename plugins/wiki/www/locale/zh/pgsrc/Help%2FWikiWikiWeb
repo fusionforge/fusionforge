@@ -1,0 +1,32 @@
+Date: Fri,  4 Feb 2011 16:58:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FWikiWikiWeb 7932 2011-02-04 16:03:52Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FWikiWikiWeb;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+WikiWikiWeb 是一個可以協同作業的站台. 最知名且最廣泛被使用的 Wiki 是
+位於 http://c2.com/cgi-bin/wiki?WikiWikiWeb 的 Portland Pattern Repository.
+
+You and I will find these statements there particularly relevant:
+
+''使 EditText 表單變得簡單並且使 FindPage 能快速搜尋.''
+
+''In addition to being quick, this site also aspires to Zen ideals
+generally labeled WabiSabi. Zen finds beauty in the imperfect and
+ephemeral. When it comes down to it, that's all you need.''
+
+''The Universe tends toward chaos. The Universe tends toward Wiki.''
+
+你可以在 RecentVisitors 說聲 hello, 或是閱讀 HowToUseWiki 和 AddingPages.
+目前這個 Wiki 並沒有討論任何主題, 所以就用力的去玩並享受他吧!!
+
+--SteveWainstead.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

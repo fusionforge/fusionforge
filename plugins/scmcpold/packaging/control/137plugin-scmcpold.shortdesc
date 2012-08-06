@@ -1,0 +1,5 @@
+ This plugin contains the CPOLD subsystem of FusionForge. It allows
+ each FusionForge project to have its own CPOLD repository, and gives
+ some control over it to the project's administrator.
+ .
+ It is mostly intended as a proof of concept.

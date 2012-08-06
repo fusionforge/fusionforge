@@ -1,0 +1,5 @@
+etc/gforge/httpd.conf.d
+etc/gforge/plugins/oslc
+usr/share/gforge/plugins/oslc/cgi-bin
+usr/share/gforge/plugins/oslc/common
+usr/share/gforge/plugins/oslc/www

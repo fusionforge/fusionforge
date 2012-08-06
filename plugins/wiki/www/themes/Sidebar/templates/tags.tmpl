@@ -1,0 +1,10 @@
+<?php // -*-php-*- 
+// $Id: tags.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<!-- list of most popular categories -->
+<div class="portlet" id="p-tags">
+  <h5><?php echo _("Favorite Categories") ?> <?php echo $WikiTheme->folderArrow('p-tags', 'Open') ?></h5>
+  <div class="pBody" id="p-tags-body">
+    <?plugin PopularTags ?>
+  </div>
+</div>

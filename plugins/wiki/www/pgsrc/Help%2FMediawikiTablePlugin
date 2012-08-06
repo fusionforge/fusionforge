@@ -1,0 +1,269 @@
+Date: Tue,  9 Nov 2010 14:24:02 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FMediawikiTablePlugin 7733 2010-11-09 13:25:11Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FMediawikiTablePlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~MediawikiTable** [[Help:WikiPlugin|plugin]] allows a user to specify a ##<table>## with (a subset of) the syntax used by Mediawiki.
+The plugin is not meant to be called directly, just use the syntax below to insert your table.
+
+== Mediawiki table syntax ==
+
+* The table starts with a line ##{|##.
+* An optional table caption is made with a line starting with a pipe and a plus sign ##|+## followed by the caption.
+* An optional table summary is made with a line starting with a pipe and an equal sign ##|=## followed by the summary.
+* A table row starts with a pipe and a hyphen: ##|-##.
+* A table cell starts with a pipe on a new line, or a double bar ##||## on the same line.
+* A header table cell starts with an exclamation mark, or a double exclamation mark ##!!## on the same line.
+* The table ends with a line ##|}##.
+
+The summary syntax is an extension to the Mediawiki syntax.
+You can also simply put the summary as an attribute to the table.
+The summary is necessary to be able to create accessible tables.
+
+If the first row of the table as made with header cells only, this row will be put in a //thead//.
+In that case, this row will be repeated on every page when printing the table.
+
+=== HTML attributes ===
+
+{| class="bordered"
+|-
+! Attribute
+! Syntax
+|-
+| For the table
+| {{{ {| border="1" }}}
+|-
+| For the caption
+| {{{ |+ style="font-weight: bold;" }}}
+|-
+| For a row
+| {{{ |- style="height:100px" }}}
+|-
+| For a cell
+| {{{ | align="right" | Cell 2 (right aligned) }}}
+|}
+
+The attributes might be put with or without double quotes.
+
+=== Predefined CSS classes ===
+
+If you do not specify a class for the table, it will be rendered without border.
+
+==== Boxed and bordered tables ====
+
+If you specify ##class="boxed"##, you will have a border around the table (but not around the cells).
+
+If you specify ##class="bordered"##, you will have a border around the table and the cells
+
+In both cases, the caption (if any) will be bold and centered under the table
+
+In both cases, the headers (specified by ##!##) will have a ##"#d8d8d8"## background
+
+==== Sortable tables ====
+
+If you specify ##class="sortable"##, the table columns will be sortable.
+
+==== Do not break table when printing ====
+
+If you specify ##class="nobreak"##, the table will not be cut when printed (if your browser supports it).
+
+== Examples ==
+
+=== Example 1: simple table ===
+
+{| border="1" style="width: 100%"
+|+ style="font-weight: bold; font-size: 150%;" | This is the table caption
+|= This is the table summary
+|- style="white-space: nowrap"
+! Header 1
+! Header 2
+! Header 3
+|- style=height:100px
+| Cell I
+| **Cell II**,  in bold
+|align=right width="100%" |Cell III
+|- bgcolor=#f0f0ff align=center
+|Cell 1||Cell 2||Cell 3
+|}
+
+The above table is rendered from:
+
+{{{
+{| border="1" style="width: 100%"
+|+ style="font-weight: bold; font-size: 150%;" | This is the table caption
+|= This is the table summary
+|- style="white-space: nowrap"
+! Header 1
+! Header 2
+! Header 3
+|- style=height:100px
+| Cell I
+| **Cell II**,  in bold
+|align=right width="100%" |Cell III
+|- bgcolor=#f0f0ff align=center
+|Cell 1||Cell 2||Cell 3
+|}
+}}}
+
+=== Example 2: table with paragraphs, lists and plugins in cells ===
+
+{|
+|- style="white-space: nowrap"
+! Header 1
+! Header 2
+|- bgcolor=yellow
+| First paragraph.
+
+Second paragraph.
+|
+* One
+* Two
+* Three
+|- bgcolor=#f0f0ff align=center
+|Current date || <<CurrentTime format=date>>
+|}
+
+The above table is rendered from:
+
+{{{
+{|
+|- style="white-space: nowrap"
+! Header 1
+! Header 2
+|- bgcolor=yellow
+| First paragraph.
+
+Second paragraph.
+|
+* One
+* Two
+* Three
+|- bgcolor=#f0f0ff align=center
+|Current date || <<CurrentTime format=date>>
+|}
+}}}
+
+=== Example 3: sortable table ===
+
+Click on a column header to sort the column.
+Clicking a second time will reverse the sorting order.
+
+{| class="bordered sortable"
+|-
+! First name !! Name !! Age
+|-
+| John || Smith || 35
+|-
+| Albert || Wells || 5
+|-
+| Sam || Adam || 102
+|}
+
+The above table is rendered from:
+
+{{{
+{| class="bordered sortable"
+|-
+! First name !! Name !! Age
+|-
+| John || Smith || 35
+|-
+| Albert || Wells || 5
+|-
+| Sam || Adam || 102
+|}
+}}}
+
+=== Example 4: nested tables ===
+
+<<MediawikiTable
+{| class="bordered" align=center
+|+ Outer table caption
+|-
+! Header A !! Header B
+|-
+| A numbered list:
+# one
+# two
+# three
+|
+This cell contains a nested table.
+ {| class="bordered"
+ |+ Inner table caption
+ |-
+ ! Header A
+ ! Header B
+ |-
+ | Inner A1
+ | Inner B1
+ |-
+ | Inner A2
+ | Inner B2
+ |}
+|-
+| A paragraph
+
+Another paragraph
+
+| A plain list:
+* apple
+* pear
+* apricot
+|}
+>>
+
+The above table is rendered from:
+
+{{{
+<<MediawikiTable
+{| class="bordered" align=center
+|+ Outer table caption
+|-
+! Header A !! Header B
+|-
+| A numbered list:
+# one
+# two
+# three
+|
+This cell contains a nested table.
+ {| class="bordered"
+ |+ Inner table caption
+ |-
+ ! Header A
+ ! Header B
+ |-
+ | Inner A1
+ | Inner B1
+ |-
+ | Inner A2
+ | Inner B2
+ |}
+|-
+| A paragraph
+
+Another paragraph
+
+| A plain list:
+* apple
+* pear
+* apricot
+|}
+>>
+}}}
+
+== Author ==
+* Marc-Etienne Vargenau, Alcatel-Lucent
+
+== See Also ==
+* [[http://meta.wikimedia.org/wiki/Help:Table|Mediawiki table help page]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,0 +1,8 @@
+# Name: FusionForge RPM Repository
+# URL: http://fusionforge.org/
+[fusionforge]
+name = Red Hat Enterprise $releasever - fusionforge.org
+baseurl = file:///root/fusionforge_repo/noarch/
+enabled = 1
+protect = 0
+gpgcheck = 0

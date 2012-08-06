@@ -1,0 +1,3 @@
+plugins/authldap/include              usr/share/@OLDPACKAGE@/plugins/authldap/
+plugins/authldap/www              usr/share/@OLDPACKAGE@/plugins/authldap/
+plugins/authldap/etc/*.ini 	     etc/@PACKAGE@/config.ini.d/

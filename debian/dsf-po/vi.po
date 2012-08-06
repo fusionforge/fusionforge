@@ -1,0 +1,431 @@
+# Vietnamese Translation for @FORGENAME@.
+# Copyright © 2008 Free Software Foundation, Inc.
+# This file is distributed under the same license as the @PACKAGE@ 4.6.99+svn6387-1 package.
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@ 4.6.99+svn6387-1\n"
+"Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-29 18:26+0200\n"
+"PO-Revision-Date: 2010-03-10 10:10+0200\n"
+"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
+"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 1.2.1\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Tên miền hay miền con @FORGENAME@:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Hãy gõ miền sẽ chứa bản cài đặt @FORGENAME@. Một số dịch vụ (scm, lists v."
+"v.) sẽ nhận miền con riêng ở trong miền đó."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+msgid "@FORGENAME@ system name:"
+msgstr "Tên hệ thống @FORGENAME@:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Hãy gõ tên của hệ thống @FORGENAME@. Nó được dùng ở các nơi khác nhau trên "
+"khắp hệ thống."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+msgid "@FORGENAME@ administrator password:"
+msgstr "Mật khẩu quản trị @FORGENAME@:"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+#, fuzzy
+#| msgid ""
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
+msgstr ""
+"Tài khoản quản trị @FORGENAME@ này sẽ được mọi quyền truy cập đến hệ thống. "
+"Nó dùng để tán thành việc tạo dự án mới."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+#, fuzzy
+#| msgid "Please choose the password for this account."
+msgid "Please choose the password for this forge account."
+msgstr "Hãy chọn mật khẩu cho tài khoản này."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Password confirmation:"
+msgstr "Xác nhận mật khẩu :"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Please re-type the password for confirmation."
+msgstr "Hãy gõ lại mật khẩu để xác nhận nó."
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "install the new version configured by @PACKAGE@"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "keep the local version currently installed"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show the differences between the versions"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show a side-by-side difference between the versions"
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "start a new shell to examine the situation"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid "What do you want to do about configuration file ${BASENAME}?"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid ""
+"The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
+"is also a configuration file of the postgresql package."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgstr "Bạn có muốn tạo một thiết lập DNS đơn giản cho @FORGENAME@ không?"
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"You can use a simple DNS setup with wildcards to map all project web-hosts "
+"to a single IP address, and direct all the scm-hosts to a single SCM server, "
+"or a complex setup which allows many servers as project web servers or SCM "
+"servers."
+msgstr ""
+"Bạn có thể sử dụng một thiết lập DNS đơn giản có ký tự đại diện, để ánh xạ "
+"mọi máy chủ Web của dự án tới cùng một địa chỉ IP, và chuyển hướng mọi máy "
+"chủ scm-host tới cùng một máy phục vụ SCM, hoặc một thiết lập phức tạp cho "
+"phép nhiều máy phục vụ làm máy phục vụ Web của dự án hay máy phục vụ SCM."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"Even if you use a simple DNS setup, you can still use separate machines as "
+"project servers; it just assumes that all the project web directories are on "
+"the same server with a single SCM server."
+msgstr ""
+"Thậm chí nếu bạn sử dụng một thiết lập DNS đơn giản, bạn vẫn còn có thể sử "
+"dụng các máy khác nhau làm máy phục vụ dự án; nó chỉ giả sử tất cả các thư "
+"mục Web của dự án nằm trên cùng một máy phục vụ, với một máy phục vụ SCM "
+"riêng lẻ."
+
+#~ msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgstr "Địa chỉ thư của quản trị @FORGENAME@:"
+
+#~ msgid ""
+#~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~ "site. It will be used when problems occur."
+#~ msgstr ""
+#~ "Hãy gõ địa chỉ thư điện tử của quản trị @FORGENAME@ của địa chỉ Web này. "
+#~ "Nó sẽ được dùng khi gặp vấn đề."
+
+#~ msgid "Download server:"
+#~ msgstr "Máy phục vụ tải xuống:"
+
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr "Hãy gõ tên máy của máy phục vụ sẽ hỗ trợ các gói @FORGENAME@."
+
+#~ msgid "It should not be the same as the main @FORGENAME@ host."
+#~ msgstr "Không nên trùng với máy chủ @FORGENAME@ chính."
+
+#~ msgid "Database server:"
+#~ msgstr "Máy phục vụ cơ sở dữ liệu :"
+
+#~ msgid ""
+#~ "Please enter the IP address (or hostname) of the server that will host "
+#~ "the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Hãy gõ địa chỉ IP (hay tên máy) của máy phục vụ sẽ chứa cơ sở dữ liệu "
+#~ "@FORGENAME@."
+
+#~ msgid "Database name:"
+#~ msgstr "Tên cơ sở dữ liệu :"
+
+#~ msgid ""
+#~ "Please enter the name of the database that will host the @FORGENAME@ "
+#~ "database."
+#~ msgstr "Hãy gõ tên của cơ sở dữ liệu sẽ hỗ trợ cơ sở dữ liệu @FORGENAME@."
+
+#~ msgid "Database administrator username:"
+#~ msgstr "Tên người dùng quản trị cơ sở dữ liệu :"
+
+#~ msgid ""
+#~ "Please enter the username of the database administrator for the server "
+#~ "that will host the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Hãy gõ tên người dùng của quản trị cơ sở dữ liệu cho máy phục vụ sẽ chứa "
+#~ "cơ sở dữ liệu @FORGENAME@."
+
+#~ msgid "Password used for the database:"
+#~ msgstr "Mật khẩu dùng cho cơ sở dữ liệu :"
+
+#~ msgid "Connections to the database system are authenticated by a password."
+#~ msgstr "Kết nối đến hệ thống cơ sở dữ liệu thì xác thực bằng mật khẩu."
+
+#~ msgid "Please choose the connection password."
+#~ msgstr "Hãy chọn mật khẩu kết nối."
+
+#~ msgid "IP address:"
+#~ msgstr "Địa chỉ IP:"
+
+#~ msgid ""
+#~ "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~ "installation."
+#~ msgstr "Hãy gõ địa chỉ IP của máy phục vụ sẽ chứa bản cài đặt @FORGENAME@."
+
+#~ msgid "This is needed for the configuration of Apache virtual hosting."
+#~ msgstr "Nó cần để cấu hình dịch vụ ảo Apache."
+
+#~ msgid "Shell server:"
+#~ msgstr "Máy phục vụ trình bao :"
+
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Hãy gõ tên máy của máy phục vụ sẽ hỗ trợ các tài khoản trình bao "
+#~ "@FORGENAME@."
+
+#~ msgid "Mailing lists server:"
+#~ msgstr "Máy phục vụ hộp thư chung:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "mailing lists."
+#~ msgstr ""
+#~ "Hãy gõ tên máy của máy phục vụ sẽ chứa các hộp thư chung @FORGENAME@."
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Hãy gõ tên máy của máy phục vụ sẽ chứa các tài khoản trình bao "
+#~ "@FORGENAME@."
+
+#~ msgid "News administrative group ID:"
+#~ msgstr "ID nhóm quản trị tin tức:"
+
+#~ msgid ""
+#~ "The members of the news admin group can approve news for the @FORGENAME@ "
+#~ "main page. This group's ID must not be 1. This should be changed only if "
+#~ "you upgrade from a previous version and want to keep the data."
+#~ msgstr ""
+#~ "Các thành viên của nhóm quản trị tin tức cũng có quyền tán thành tin tức "
+#~ "để hiển thị trên trang chính @FORGENAME@. Mã số nhóm (GID) này phải khác "
+#~ "với số 1. Thay đổi nó chỉ nếu bạn nâng cấp từ một phiên bản cũ và muốn "
+#~ "giữ lại dữ liệu."
+
+#~ msgid "Statistics administrative group ID:"
+#~ msgstr "ID nhóm quản trị thống kê:"
+
+#~ msgid "Peer rating administrative group ID:"
+#~ msgstr "ID nhóm quản trị đánh giá ngang hàng:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các gói @FORGENAME@."
+
+#~ msgid "English"
+#~ msgstr "tiếng Anh"
+
+#~ msgid "Bulgarian"
+#~ msgstr "tiếng Bun-ga-ri"
+
+#~ msgid "Catalan"
+#~ msgstr "tiếng Ca-ta-lăng"
+
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "tiếng Trung (truyền thống)"
+
+#~ msgid "Dutch"
+#~ msgstr "tiếng Hòa"
+
+#~ msgid "Esperanto"
+#~ msgstr "tiếng Etpêrantô"
+
+#~ msgid "French"
+#~ msgstr "tiếng Pháp"
+
+#~ msgid "German"
+#~ msgstr "tiếng Đức"
+
+#~ msgid "Greek"
+#~ msgstr "tiếng Hy Lạp"
+
+#~ msgid "Hebrew"
+#~ msgstr "tiếng Do Thái"
+
+#~ msgid "Indonesian"
+#~ msgstr "tiếng Nam Dương"
+
+#~ msgid "Italian"
+#~ msgstr "tiếng Ý"
+
+#~ msgid "Japanese"
+#~ msgstr "tiếng Nhật"
+
+#~ msgid "Korean"
+#~ msgstr "tiếng Hàn"
+
+#~ msgid "Latin"
+#~ msgstr "tiếng La-tinh"
+
+#~ msgid "Norwegian"
+#~ msgstr "tiếng Na Uy"
+
+#~ msgid "Polish"
+#~ msgstr "tiếng Ba Lan"
+
+#~ msgid "Portuguese (Brazilian)"
+#~ msgstr "tiếng Bổ Đào Nhà (Bra-xin)"
+
+#~ msgid "Portuguese"
+#~ msgstr "tiếng Bổ Đào Nhà"
+
+#~ msgid "Russian"
+#~ msgstr "tiếng Nga"
+
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "tiếng Trung (phổ thông)"
+
+#~ msgid "Spanish"
+#~ msgstr "tiếng Tây Ban Nha"
+
+#~ msgid "Swedish"
+#~ msgstr "tiếng Thuỵ Điển"
+
+#~ msgid "Thai"
+#~ msgstr "tiếng Thái"
+
+#~ msgid "English[ Default language]"
+#~ msgstr "Tiếng Việt [Ngôn ngữ mặc định]"
+
+#~ msgid "Default language:"
+#~ msgstr "Ngôn ngữ mặc định:"
+
+#~ msgid "Please choose the default language for web pages."
+#~ msgstr "Hãy chọn ngôn ngữ mặc định cho trang Web."
+
+#~ msgid "Default theme:"
+#~ msgstr "Sắc thái mặc định:"
+
+#~ msgid ""
+#~ "Please choose the default theme for web pages. This must be a valid name."
+#~ msgstr ""
+#~ "Hãy chọn sắc thái mặc định cho trang Web: nó phải là một tên hợp lệ."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "Bạn có muốn hủy mọi thư được gửi cho ${noreply} không?"
+
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ gửi và nhận rất nhiều thư điện tử cho/từ địa chỉ « ${noreply} "
+#~ "»."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "Các thư gửi đến địa chỉ đó nên bị chuyển hướng tới « /dev/null » (bị "
+#~ "hủy), trừ bạn muốn sử dụng địa chỉ đó bằng cách khác."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Máy phục vụ chuyển hướng thư tín người dùng:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Hãy gõ tên máy của máy phục vụ sẽ chứa bộ chuyển hướng thư tín người dùng "
+#~ "@FORGENAME@."
+
+#~ msgid "@FORGENAME@ administrator login:"
+#~ msgstr "Tên đăng nhập quản trị @FORGENAME@:"
+
+#~ msgid "Please choose the username for this account."
+#~ msgstr "Hãy chọn tên người dùng cho tài khoản này."
+
+#~ msgid "Initial list of skills:"
+#~ msgstr "Danh sách kỹ năng ban đầu :"
+
+#~ msgid ""
+#~ "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~ "from those present in the database. This list is the initial list of "
+#~ "skills that will enter the database."
+#~ msgstr ""
+#~ "@FORGENAME@ cho mỗi người dùng có khả năng xác định một danh sách các kỹ "
+#~ "năng của mình, được chọn trong các điều nằm trong cơ sở dữ liệu. Danh "
+#~ "sách này là danh sách kỹ năng ban đầu sẽ vào cơ sở dữ liệu."
+
+#~ msgid "Please enter a semicolon-separated list of skill names."
+#~ msgstr ""
+#~ "Hãy gõ danh sách các tên kỹ năng định giới bằng dấu chấm phẩy « ; »."

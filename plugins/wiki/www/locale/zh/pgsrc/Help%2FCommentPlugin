@@ -1,0 +1,48 @@
+Date: Fri,  4 Feb 2011 16:44:25 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FCommentPlugin 7928 2011-02-04 15:46:03Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FCommentPlugin;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+== Synopsis
+
+CommentPlugin 可以讓你隱藏部份 Wiki 頁面而無須刪除這些文字. 註解將只會在
+編輯或查看源碼的時候顯現出來.
+
+== Usage
+
+簡單的把 =<<Comment= 和 =>>= 放在要註解的文字前後.
+
+{{{
+<<Comment
+
+== A Hidden Section
+
+這段文字將不會顯示在產生出的 HTML 頁面中, 但在你編輯 WikiMarkup 時,它仍然可以
+被看到.
+
+>>
+}}}
+
+== Author
+
+Martin Geisler mailto:gimpster@gimpster.com.
+
+<<Comment
+
+== "Fuzzy" Logic
+Theorem: a cat has nine tails.
+Proof:
+    No cat has eight tails. A cat has one tail more than no cat.
+    Therefore, a cat has nine tails.
+
+>>
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

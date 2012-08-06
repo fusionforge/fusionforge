@@ -1,0 +1,17 @@
+Date: Tue, 25 Jan 2011 21:26:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: InfosDeD%C3%A9bogage$
+Content-Type: application/x-phpwiki;
+  pagename=InfosDeD%C3%A9bogage;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Vue détaillée d'une page, ce qui est probablement plus utile que n'importe 
+quoi d'autre pour le débogage.
+
+<<_BackendInfo page||=''>>
+
+----
+[[CatégoriePageDAction]]

@@ -1,0 +1,22 @@
+Date: Wed, 13 Apr 2011 15:47:43 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Template%2FRelation 8046 2011-04-13 13:50:57Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Template%2FRelation;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+//SemanticSearch for pages with the// **//%%PAGENAME%%//** //relation://
+
+<<SemanticSearch page="*" relation=%%PAGENAME%% s="*" case_exact=1 noform=1 >>
+
+Create a new relation page:
+<?plugin-form CreatePage initial_content={{Template/Relation}} ?>
+
+Note: Relations are created implicitly by using the ##~:~:## syntax.
+See [[Help:SemanticRelations|SemanticRelations]]
+
+List of all other used relations:
+<<ListRelations mode=relations>>

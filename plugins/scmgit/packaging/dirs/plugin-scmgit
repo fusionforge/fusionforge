@@ -1,0 +1,7 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/scmgit
+usr/share/gforge/plugins/scmgit/cgi-bin
+usr/share/gforge/plugins/scmgit/common
+usr/share/gforge/plugins/scmgit/www
+usr/share/gforge/www/plugins
+var/lib/gforge/chroot/scmrepos/git

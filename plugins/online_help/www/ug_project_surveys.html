@@ -1,0 +1,128 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>4.9. Surveys</title>
+<link rel="stylesheet" href="docbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<link rel="start" href="index.html" title="FusionForge User Guide">
+<link rel="up" href="ug_project.html" title="4. Project functions">
+<link rel="prev" href="ug_project_docman.html" title="4.8. Document Manager">
+<link rel="next" href="ug_project_news.html" title="4.10. News">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">4.9. Surveys</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ug_project_docman.html">Prev</a> </td>
+<th width="60%" align="center">4. Project functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ug_project_news.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ug_project_surveys"></a>4.9. Surveys</h3></div></div></div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_surveys_introduction"></a>4.9.1. Introduction</h4></div></div></div>
+<p>
+			Surveys allow you to ask questions to your developer/users and view the results. Surveys are often very helpful if you need some feedback from the users, examples of surveys might be:
+		</p>
+<div class="orderedlist"><ol type="1">
+<li><p>User feedback: ask users if they like your project</p></li>
+<li><p>Developer feedback: ask developers on new features to be implemented</p></li>
+</ol></div>
+<p>
+			Of course, surveys are not limited to this list. Basically, you can ask everything you want with surveys.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_surveys_questions"></a>4.9.2. Administering survey questions</h4></div></div></div>
+<p>
+			Before you can add/modify existing surveys, you need to administer the questions for your surveys. Questions are global for all surveys.
+		</p>
+<p>
+			FusionForge surveys handle the following question types:
+		</p>
+<div class="orderedlist"><ol type="1">
+<li>
+<p>Radio Buttons 1-5: This type of question shows 5 radio buttons where the user can select between 1 (low) and 5 (high).</p>
+<p>This is useful for indicating priorities or quality feedback (e.g.: the question might be: did you like the new xxx feature. The user can select (1 (not very much), 2,3,4, 5(really)</p>
+</li>
+<li><p>Radio Buttons Yes/No. This type of question allows only two choices: Yes or No.</p></li>
+<li><p>Comment Only</p></li>
+<li><p>Text field: This type of question allows the user to insert some text in a text field.</p></li>
+<li><p>Text area: This type of question allows the user to insert some text in a textarea</p></li>
+</ol></div>
+<p>
+			When inserting new questions or modifying existing questions, take note of the ID of the question. You'll need them when creating/modifying surveys.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_surveys_create_new"></a>4.9.3. Creating a new survey</h4></div></div></div>
+<p>
+			You can create a new survey by clicking on the <span class="guimenuitem">Admin</span> link and then <span class="guimenuitem">Add a new survey</span>.
+		</p>
+<p>You'll be asked to insert the following data:</p>
+<div class="variablelist"><dl>
+<dt><span class="term">Survey name</span></dt>
+<dd><p>The name of the survey</p></dd>
+<dt><span class="term">Question list</span></dt>
+<dd>
+<p>Here you should insert the IDs of the questions in the order they should appear. If you wish to see question 4 first, then question 6, then question 1, you should insert here 4,6,1.</p>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p>Don't insert spaces or any character other than comma between the numbers.</p>
+</div>
+</dd>
+<dt><span class="term">Is Active?</span></dt>
+<dd><p>This flag indicates if the survey is active or not.</p></dd>
+</dl></div>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_surveys_modification"></a>4.9.4. Modifying a survey</h4></div></div></div>
+<p>
+			You can modify an existing survey, although this is not recommended if answers to the survey have already been given.
+		</p>
+<p>
+			You should know that the results of a survey are not consistent if you modify the survey and users have already inserted answers.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_surveys_results"></a>4.9.5. Viewing survey results</h4></div></div></div>
+<p>
+			If you have admin rights, you can view the results of the surveys clicking on the <span class="guimenuitem">View Results</span> tab.
+		</p>
+<p>
+                        You can export the survey results in a file in CSV format. This file can then be
+                        imported in a spreadsheet like Open Office Calc or Microsoft Excel.
+		</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ug_project_docman.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ug_project.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ug_project_news.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">4.8. Document Manager </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> 4.10. News</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+Package: @OLDPACKAGE@-web-apache2-vhosts
+Architecture: all
+Depends: @OLDPACKAGE@-web-apache2, ${misc:Depends}
+Description: collaborative development tool - web vhosts (using Apache)

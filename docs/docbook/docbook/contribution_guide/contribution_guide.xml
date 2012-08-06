@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "../../../dtd/docbookx.dtd" [
+ <!ENTITY % authors SYSTEM "../entities/authors.ent">
+ %authors;
+ <!ENTITY % xinclude SYSTEM "../entities/xinclude.ent">
+ %xinclude;
+
+ <!ENTITY howto_contribute "include/howto_contribute.xml">
+ <!ENTITY repository "include/repository.xml">
+ <!ENTITY coding_standards "include/coding_standards.xml">
+ <!ENTITY templating "include/templating.xml">
+ <!ENTITY howto_documentation "include/howto_documentation.xml">
+ <!ENTITY howto_localization "include/howto_localization.xml">
+ <!ENTITY howto_xhtml "include/howto_xhtml.xml">
+]>
+<article id="contribution_guide" lang="en-US">
+  <articleinfo>
+    <title>FusionForge Contribution Guide</title>
+    <authorgroup>
+&roland_mas;&tim_perdue;&guillaume_smet;&reinhard_spisser;    </authorgroup>
+  </articleinfo>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&howto_contribute;"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&repository;"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&coding_standards;"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&templating;"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&howto_documentation;"/>
+<!-- <xi:include href="&howto_localization;" xmlns:xi="http://www.w3.org/2001/XInclude" />  -->  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&howto_xhtml;"/>
+</article>

@@ -1,0 +1,11 @@
+/**
+ *  $Id: IEFixes.css 6415 2009-01-19 10:40:19Z vargenau $
+ */
+
+/*
+** IE Fixes (5.0, 5.5, 6.0)
+*/
+
+#actionbuttons, #signin { font-size: 80% }
+
+td, .hint { font-size: 90% }

@@ -1,0 +1,18 @@
+Date: Wed, 26 Jan 2011 17:12:31 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: PageAccueil 7906 2011-01-26 16:13:30Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=PageAccueil;
+  flags="";
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+* Qu'est-ce qu'un [[Aide:WikiWikiWeb|WikiWikiWeb]] ? Description courte de cette application.
+* Apprenez [[Aide:CommentUtiliserUnWiki|CommentUtiliserUnWiki]] et comment [[Aide:AjouterDesPages|AjouterDesPages]].
+* Le [[BacÀSable]] est là pour jouer et expérimenter.
+* Signez la page des [[DerniersVisiteurs]].
+* Visitez [[DernièresModifs]] pour voir les additions et les modifications les plus récentes.
+* Découvrez quelles pages sont [[LesPlusVisitées]].
+* Lisez les [[NotesDeVersion]].
+* Ce Wiki est géré par l'intermédiaire de la page d'[[AdministrationDePhpWiki]].

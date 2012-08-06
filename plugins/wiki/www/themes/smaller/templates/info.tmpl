@@ -1,0 +1,26 @@
+<?php // -*-php-*-
+// $Id: info.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+
+<?php echo Template("default/info") ?>
+
+<div id="actionbuttons">
+    <?php echo Button("viewsource", _("View Source")) ?>
+    <?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?>
+    <?php echo $SEP?><?php echo Button("AuthorHistory", _("AuthorHistory")) ?>
+    <?php echo $SEP?><?php echo Button("Diff") ?>
+    <?php echo $SEP?><?php echo Button(array('action'=>'diff','previous' => 'minor'),_("Diff previous Revision"),$page->getName()) ?>
+    <?php echo $SEP?><?php echo Button(array('action'=>'diff','previous' => 'author'),_("Diff previous Author"),$page->getName()) ?>
+    <?php echo $SEP?><?php echo Button("PageDump", _("PageDump")) ?>
+  <?php if ((defined('DEBUG') && DEBUG) || $user->isAdmin()) { ?>
+    <!-- Buttons really only for debugging -->
+    <?php echo $SEP?><?php echo Button("DebugInfo", _("DebugInfo")) ?>
+<?php
+    $PurgeCache = Button(array('nocache' => 'purge'),
+                     _("PurgeHtmlCache"), $page->getName());
+    $PurgeCache->addTooltip(_("Purge HTML cache for this page. Regenerate from WikiMarkup when next accessed."));
+?>
+    <?php echo $SEP?><?php echo $PurgeCache ?>
+    <!-- End debugging buttons -->
+  <?php } ?>
+</div>

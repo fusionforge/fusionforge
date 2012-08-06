@@ -1,0 +1,12 @@
+<?php // -*-php-*-
+// $Id: browse-footer.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<div class="toolbar">
+<?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
+  <?php echo Template('actionbar') ?>
+  <?php echo $WikiTheme->getButtonSeparator() ?>
+<?php } ?>
+  <span class="editdate"><?php echo $WikiTheme->getOwnerMessage($page) ?>  <?php echo $WikiTheme->getLastModifiedMessage($revision) ?> <?php echo $WikiTheme->getAuthorMessage($revision) ?></span>
+<br />
+<a href="<?php echo PHPWIKI_BASE_URL ?>"><?php echo WIKI_NAME?></a> created with <a href="http://phpwiki.org/">PhpWiki</a> © 1998-2007 | <?php echo WikiLink(_("TermsOfUse")) ?>
+</div>

@@ -1,0 +1,28 @@
+GlobalDashboard plugin.
+
+This is a fusionforge plugin for discovery and browsing between projects hosted
+in different software forges.
+It is a dashboard that contain several graphical widgets that allows users to 
+discover and display different software forge's artifacts they are interested 
+in such as:
+- Projects information
+- Tracker artifacts
+- Tracker artifacts update
+- Releases information
+- Monitored Spaces (like Forums, trackers, etc.)
+- Source code commits
+- and others
+
+Those information are retrieved from physically different software forges
+on which the user is registered with the same identity.
+
+Quick display techniques like compact previews will also ease information
+display. 
+
+Data like tracker artifacts are gathered from other forges sites using 
+OSLC-CM protocol if the forges are already OSLC compliant.
+
+This plugin is part of fusionforge and is a completely free software product
+according to the terms of the GPL2 License.
+
+-- Sabri LABBENE <sabri.labbene@gmail.com>

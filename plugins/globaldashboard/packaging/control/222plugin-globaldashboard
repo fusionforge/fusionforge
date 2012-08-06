@@ -1,0 +1,8 @@
+Package: @PACKAGE@-plugin-globaldashboard
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, libarc-php, @PACKAGE@-plugin-compactpreview
+Description: Global Dashboard plugin for FusionForge that enable users to monitor
+ their data and data they are interested in and that lives in physically different
+ software forges. This plugin also fetches user private data from other forges using 
+ OAuth Authentication. User Interface reuses widgets of fusionforge/codendi with some 
+ client scripts in jQuery to display compact-previews for instance.   

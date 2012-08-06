@@ -1,0 +1,25 @@
+Several scripts in this directory will allow you to automate the
+process of adding users, groups, cvs trees etc. to your machine. These
+scripts build the /etc/passwd /etc/shadow and /etc/group files based
+on the contents of your gforge database.
+
+WARNING: There are potential security risks. Any gforge project admin could 
+add a user to a project, who would then have unix-level access to your 
+machine. For best security, you should separate the CVS hosting machine from 
+the web/database machine. To do this, simply copy the gforge tarball 
+and configure a new /etc/gforge/local.inc on the cvs machine. You can create 
+a second, read-only database user, and place that user's name/password in 
+the local.inc file. This user only needs read access to the users,groups, and
+user_group tables. See the postgres manual for information on managing 
+database users and permissions.
+
+To use these files, you should first create any default users/groups you 
+want on your machine. YOU MUST CREATE A USER CALLED "anonymous" with /bin/false 
+as its shell. Then copy /etc/group to /etc/group.org, and do the 
+same for /etc/shadow -> /etc/shadow.org /etc/passwd -> /etc/passwd.org
+
+The usergroup.php script will build on the .org file and place them in .new
+files.
+
+WHEN YOU ARE SURE IT WORKS AS EXPECTED, you can change usergroup.php 
+FILE_EXTENSION to '' instead of '.new'

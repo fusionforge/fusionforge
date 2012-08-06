@@ -1,0 +1,16 @@
+0. INSTALLATION of Contribtracker Plugin
+
+i.e. : if the directory where the plugins are is  /srv/www/gforge/plugins you should end up 
+	with /srv/www/gforge/plugins/contribtracker and all the files in it
+
+1. CONFIGURATION
+
+A) Make the symbolic links for each section
+
+(this is just an example, you should change the variables for what you have on your installation)
+
+/$GFORGEDIR/www/plugins/contribtracker -> /$GFORGEPLUGINSDIR/contribtracker/www
+
+B) Run the db/contribtracker-init.sql file
+
+psql -U gforge gforge < db/contribtracker-init.sql

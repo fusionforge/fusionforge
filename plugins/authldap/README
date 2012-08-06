@@ -1,0 +1,27 @@
+fusionforge-plugin-authldap
+------------------------------
+
+This is the external LDAP authentication plugin for FusionForge.
+
+Installation:
+
+- files from include/ go to /usr/share/gforge/plugins/authldap/include/
+- files from www/ go to /usr/share/gforge/www/plugins/authldap/
+
+Setup:
+
+- customise /etc/fusionforge/config.ini.d/authldap.ini to match your
+LDAP installation (server, base DN, and mapping)
+- /usr/share/gforge/bin/register-plugin authldap "LDAP external
+authentication"
+
+Voilà, you can now log into FusionForge with your existing loginname
+and password.  Your account will be created the first time you log in
+(which means you can't add someone to a group before his/her first
+login).
+
+ -- Roland Mas <lolando@debian.org>, Tue, 15 Mar 2011 11:33:10 +0100
+
+Local Variables:
+mode: readme-debian
+End:

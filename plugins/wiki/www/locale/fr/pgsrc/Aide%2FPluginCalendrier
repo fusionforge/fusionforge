@@ -1,0 +1,69 @@
+Date: Tue, 25 Jan 2011 21:26:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Aide%2FPluginCalendrier 7896 2011-01-25 20:27:58Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FPluginCalendrier;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+== Description
+
+Le PluginCalendrier peut être utilisé pour générer un calendrier mensuel
+au sein d'une page du wiki. C'est pratique pour des WikiPersonnel~s.
+
+Les dates individuelles dans le calendrier sont liées à des pages wiki spécialement nommées : le nom d'une "page du jour" est formé par défaut en ajoutant la date au nom de la page sur laquelle apparaît le calendrier.
+
+== Usage
+
+{{{
+<<Calendar>>
+}}}
+
+vous donnera :
+<<Calendar>>
+
+== Arguments
+
+=== Sélection du Mois
+
+**year** |
+  spécifie l'année du calendrier (l'année actuelle par défaut)
+**month** |
+  spécifie le mois du calendrier (le mois actuel par défaut)
+**month_offset** |
+  ajouté au ''mois''. Peut être utilisé pour inclure l'équivalent de plusieurs mois sur une seule page du wiki.
+
+Le calendrier suivant affiche systématiquement le mois suivant le mois courant :
+
+<<Calendar month_offset=+1>>
+
+=== Nom de la "Page du Jour"
+
+**date_format** |
+  [Strftime| php-function:strftime] format de la chaîne utilisée pour générer le nom des pages pour les "pages du jour". La valeur par défaut est =%Y-%m-%d=.
+**prefix** | 
+  Préfixe pour la date (formatée par ''date_format'') pour générer les noms des "pages du jour". La valeur par défaut est =~[pagename]/=.
+
+=== Apparence
+
+**month_format** |
+  [Strftime| php-function:strftime] format de la chaîne utilisée pour générer le titre du calendrier. La valeur par défaut est =%B, %Y=.
+**wday_format** |
+  [Strftime| php-function:strftime] format de la chaîne utilisée pour générer le nom des jours de la semaine au-dessus du calendrier.
+**start_wday** |
+  Le premier jour de la semaine. Il doit être spécifié par un entier de zéro (dimanche) à six (samedi) inclus.
+
+Par exemple, le calendrier suivant commence les semaines le lundi :
+
+<<Calendar start_wday=1>>
+
+== Auteur
+
+Cette fonctionnalité a été inspirée par [Manila|http://manila.userland.com/], et a été tout d'abord implémentée par Gary Benson. Elle fut par la suite implémentée sous forme de PluginWiki par JeffDairiki.
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

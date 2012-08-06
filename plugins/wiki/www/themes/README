@@ -1,0 +1,35 @@
+Some files may be removed from this directory to save space, if
+needed.
+*The default theme must always be present,* even when using another
+theme! Wherever a theme has no specific variant (override) of a
+template or button or image, PhpWiki will look for one in the default 
+theme. Same with the language: 
+Language and theme specific specific buttons will be search in 
+sub-directories like <theme>/buttons/en, and if none will be found, 
+the default buttons, which might be language-independent, in default/buttons 
+will be used.
+
+List of current themes:
+* default
+* blog
+* Crao
+* fusionforge (extends wikilens, can be used only with Fusionforge)
+* Hawaiian
+* MacOSX
+* MonoBook (extends wikilens)
+* Portland
+* shamino_com
+* Sidebar (extends MonoBook)
+* smaller
+* SpaceWiki
+* wikilens
+* Wordpress
+
+See doc/THEMES for more info on PhpWiki themes.
+
+TODO:
+Make it easier to add design templates such as these:
+  http://www.oswd.org/viewdesign.phtml?id=1739&referer=%2Fmost_popular.phtml
+Use the plugin->box method for the right and left boxes.
+
+$Id: README 7690 2010-09-17 08:46:20Z vargenau $

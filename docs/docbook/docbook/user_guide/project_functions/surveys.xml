@@ -1,0 +1,87 @@
+<section id="ug_project_surveys">
+	<title>Surveys</title>
+	<section id="ug_project_surveys_introduction">
+		<title>Introduction</title>
+		<para>
+			Surveys allow you to ask questions to your developer/users and view the results. Surveys are often very helpful if you need some feedback from the users, examples of surveys might be:
+		</para>
+		<orderedlist>
+			<listitem><para>User feedback: ask users if they like your project</para></listitem>
+			<listitem><para>Developer feedback: ask developers on new features to be implemented</para></listitem>
+		</orderedlist>
+		<para>
+			Of course, surveys are not limited to this list. Basically, you can ask everything you want with surveys.
+		</para>
+	</section>
+	<section id="ug_project_surveys_questions">
+		<title>Administering survey questions</title>
+		<para>
+			Before you can add/modify existing surveys, you need to administer the questions for your surveys. Questions are global for all surveys.
+		</para>
+		<para>
+			FusionForge surveys handle the following question types:
+		</para>
+		<orderedlist>
+			<listitem>
+				<para>Radio Buttons 1-5: This type of question shows 5 radio buttons where the user can select between 1 (low) and 5 (high).</para>
+				<para>This is useful for indicating priorities or quality feedback (e.g.: the question might be: did you like the new xxx feature. The user can select (1 (not very much), 2,3,4, 5(really)</para>
+			</listitem>
+			<listitem><para>Radio Buttons Yes/No. This type of question allows only two choices: Yes or No.</para></listitem>
+			<listitem><para>Comment Only</para></listitem>
+			<listitem><para>Text field: This type of question allows the user to insert some text in a text field.</para></listitem>
+			<listitem><para>Text area: This type of question allows the user to insert some text in a textarea</para></listitem>
+		</orderedlist>
+		<para>
+			When inserting new questions or modifying existing questions, take note of the ID of the question. You'll need them when creating/modifying surveys.
+		</para>
+	</section>
+	<section id="ug_project_surveys_create_new">
+		<title>Creating a new survey</title>
+		<para>
+			You can create a new survey by clicking on the <guimenuitem>Admin</guimenuitem> link and then <guimenuitem>Add a new survey</guimenuitem>.
+		</para>
+		<para>You'll be asked to insert the following data:</para>
+		<variablelist>
+			<varlistentry>
+				<term>Survey name</term>
+				<listitem>
+					<para>The name of the survey</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Question list</term>
+				<listitem>
+					<para>Here you should insert the IDs of the questions in the order they should appear. If you wish to see question 4 first, then question 6, then question 1, you should insert here 4,6,1.</para>
+					<warning>
+						<para>Don't insert spaces or any character other than comma between the numbers.</para>
+					</warning>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Is Active?</term>
+				<listitem>
+					<para>This flag indicates if the survey is active or not.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	<section id="ug_project_surveys_modification">
+		<title>Modifying a survey</title>
+		<para>
+			You can modify an existing survey, although this is not recommended if answers to the survey have already been given.
+		</para>
+		<para>
+			You should know that the results of a survey are not consistent if you modify the survey and users have already inserted answers.
+		</para>
+	</section>
+	<section id="ug_project_surveys_results">
+		<title>Viewing survey results</title>
+		<para>
+			If you have admin rights, you can view the results of the surveys clicking on the <guimenuitem>View Results</guimenuitem> tab.
+		</para>
+		<para>
+                        You can export the survey results in a file in CSV format. This file can then be
+                        imported in a spreadsheet like Open Office Calc or Microsoft Excel.
+		</para>
+	</section>
+</section>

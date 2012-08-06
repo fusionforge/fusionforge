@@ -1,0 +1,57 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FTranscludePlugin 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FTranscludePlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **Transclude** [[Help:WikiPlugin|plugin]] can be used to embed include whole (external) web pages within a wiki page.
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **src**
+| The URL of the page to transclude
+| //none//
+|-
+| **title**
+| The title of the page to transclude
+| //Transcluded page//
+|-
+| **height**
+| The (initial) height of the transclusion frame. If, possible, after the transcluded page is loaded, the frame is resized via Javascript so that it fits the entire transcluded page. (See below for more.)
+| 450
+|-
+| **quiet**
+| If set, frame appears as normal content
+| false
+|}
+
+== Bugs / Caveats ==
+
+* Pages are transcluded using ##<iframe>## tags.  Older browsers do not support //iframe//s.  In that case the user will be presented with a link to the transcluded material.
+* When possible, Javascript code is used to adjust the height of the //iframe// so that it fits the entire transcluded page.  Unfortunately, this seems possible only when the transcluded page comes from the same server as the wiki page.  (This restriction is due to security checks built in to the Javascript language.)
+* The recursion detection code does not currently work.  Be careful to avoid recursive transclusions, or you'll be sorry (or at least amused.)
+
+== Example ==
+
+{{{
+<<Transclude src="http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/pgsrc/ReleaseNotes?view=markup">>
+}}}
+
+will get you
+
+<<Transclude src="http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/pgsrc/ReleaseNotes?view=markup">>
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

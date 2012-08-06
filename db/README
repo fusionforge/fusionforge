@@ -1,0 +1,62 @@
+Some explanations:
+
+-rw-rw-r--    1   276333 2002-12-24 16:43 gforge2.6.sql
+The gforge2.6 first file called formally sf-2.6-complete.sql (v1.1 in CVS)
+
+-rw-rw-r--    1   276333 2002-12-24 16:43 gforge3.sql
+The gforge3 sql initialisation file
+
+-rw-rw-r--    1      292 2003-01-04 00:41 20021124-1_drop_foundry.sql
+This foundry related files
+This is not done in debian package since we would like to find a way to migrate this data
+An idea is to convert foundry in project and to attach project that where part of a foundry 
+in a subcategory of a newly created foundry category.
+
+-rw-rw-r--    1     1675 2003-01-04 01:15 20021124-2_theming.sql
+This will drop all theme formaly defined
+This is not done in debian package since we consider that some user would like to keep theme default
+choosen by user in previous sourceforge package.
+
+
+-rw-rw-r--    1     5273 2003-01-04 01:08 20021124-3_gforge-debian-sf-sync.sql
+This file contains update that were already done in debian package.
+So gforge2.6.sql + 20021124-3_gforge-debian-sf-sync.sql should be equivalent to debian-sf 2.6 package
+
+
+-rw-rw-r--    1     1259 2002-12-23 14:17 20021125.sql
+-rw-rw-r--    1     1947 2002-12-23 14:17 20021212.sql
+-rwxrwxr-x    1      860 2002-12-23 14:17 20021213_doc_data-migrate.php
+-rw-rw-r--    1      184 2002-12-23 14:17 20021213.sql
+-rw-rw-r--    1      391 2002-12-23 14:17 20021214.sql
+-rw-rw-r--    1      172 2002-12-23 14:17 20021215.sql
+-rw-rw-r--    1      520 2003-01-04 01:22 20021216.sql
+-rw-rw-r--    1     7959 2002-12-31 16:21 20021223.sql
+-rw-rw-r--    1       23 2002-12-30 21:41 20021230.sql
+-rw-rw-r--    1     1741 2003-01-03 00:17 20030102.sql
+...
+The previous files are update applied during gforge development, this file are used
+in common by custom install and debian package install
+20021213_doc_data-migrate.php has a perl equivalent in debian upgrade.
+
+drwxrwsr-x    5     4096 2002-12-28 09:29 oci8port
+Oracle port related files
+
+drwxrwsr-x    3     4096 2002-12-31 19:28 SQL_2.5
+Old sql file for sourceforge 2.5
+
+drwxrwsr-x    3     4096 2002-12-31 19:51 SQL_2.6
+Old sql and others file for sourceforge 2.6
+
+drwxrwsr-x    3     4096 2002-12-31 19:21 SQL_migrate-2.5-to-2.6
+Old sql and others file to migrate from sourceforge 2.5 to 2.6
+
+The *-drop.sql are not necessary, they are separated when the tables/views don't exists
+and would make fail debian db-upgrade.pl script
+You can apply them safely, but they should be useless
+
+P.S.:
+In debian upgrade is done with a perl script: deb-specific/db-upgrade.pl.
+This script in debian does smooth upgrade from sourceforge 2.5 to 2.6 and to gforge.
+This should be usable on a non debian install, and it contains valuable information if 
+you wish to migrate from an old sourceforge 2.5 install.
+

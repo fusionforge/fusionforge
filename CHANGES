@@ -1,0 +1,156 @@
+FusionForge-5.2:
+* Docman: inject zip as a tree (Capgemini)
+* Widget: New User Widget: Last 5 documents published in my project (Capgemini)
+* Docman: mass action (Capgemini)
+* New Message plugin to display global messages like planned upgrade or outage
+  (Alcatel-Lucent).
+* Docman: complete rewritten of trash and pending view (Capgemini)
+* New Scmhook: complete library to handle hooks for any scm available in
+  fusionforge. Currently supporting post-commit and pre-commit hook.
+  scmsvn pre-commit and post-commit library is provided (Capgemini)
+* New Widget: scmgit personal URL of cloned repositories. Currently just
+  a list of URLs of your personal repository cloned from project you
+   belong. (Capgemini)
+* Docman: interaction with the projects-hierarchy plugin to enable hierarchical
+  browsing. (Capgemini)
+* Admin: User add membership to multiples projects in one shot (Capgemini)
+* New MoinMoinWiki plugin (AdaCore)
+* Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)
+* scmsvn: private project can now be browsed with viewvc using user rights management (TrivialDev).
+* scmsvn: basic activity support (TrivialDev).
+
+FusionForge-5.1:
+* Theme: new Funky Theme (Capgemini)
+* Docman: new UI (Capgemini)
+* Docman: extract documents and directories as zip archive (Capgemini)
+* Docman: rebirth of URL and online creation documents (better with
+  HTML editor) (Capgemini) 
+* Docman: new reservation document feature (Capgemini)
+* HTML Editor: available in task PM (Capgemini)
+* Trackers: New progress bar to view completion state (when custom
+  status field is used) (Alain Peyrat)
+* Trackers: Sorting improved to allow text & select fields (Alcatel-Lucent)
+* [#127] Patch to auto approve projects.
+* scmgit plugin now allows project members to request a personal git
+  repository as a clone of the current project's one (AdaCore)
+* New blocks plugin, to add free HTML blocks on top of each tools of
+  the project allowing admins to add free descriptions
+  (Alcatel-Lucent), (better with fckeditor plugin).
+* New unobtrusive tooltip system based on jquery and tipsy to replace
+  old help window (Alcatel-Lucent)
+* New gravatar plugin to display faces of users using the Gravatar
+  service (Alain Peyrat)
+* More flexible and more powerful role-based access control system
+  (Roland Mas, Coclico)
+* Unified configuration system, now using standard *.ini files (Roland
+  Mas)
+* Template projects: there can be several of them, and users
+  registering new projects can pick which template to clone from for
+  their new projects (Roland Mas, Coclico)
+* Reorganised, modular Apache configuration (Roland Mas)
+* New User Widget : documents monitoring (Capgemini)
+* RPM packages for Red Hat (and derived) distributions
+* New extratabs iframe option to allow embeding another site using an
+  iframe (Alcatel-Lucent)
+* Improved Spanish translation (Libresoft)
+
+FusionForge-5.0.3:
+* Maintenance release, bugfixes mostly.  Summary of changes:
+* htmlpurifier upgraded to 4.3.0
+* mailing lists now are as public as the project they’re in upon creation possible data leak, security fix, spotted by <scamp:#fusionforge>, 10x!
+* MFC r11973: Fix XSD conformity errors in the generated WSDL.
+* Stop trying to copy unneeded libcap into chroot
+* Applied patch [#214]: PHP warning if search query is empty
+* Added missing spaces to fix SQL queries [#208]
+* [#207] Backport file from trunk to fix php warning in project_hierarchy plugin
+* Fixed database credentials used for MTA and NSS on new installations
+* Improve SVN checkout message and allow pure anonymous access for svn over http (webdav)
+* Fix warning if no mailman-aliases files.
+* Source install: No chgrp(scm_*) when no shell as groups are not created
+* CVS plugin: clear warning when removing non existing files (at least for the first run)
+* Source install: Disabling crons: tarball.php no longer available, get_news_approved.pl not working
+* Allow user to register projects by default.
+* Remove xslt on svn example file (for http).
+* Fixed hang during removal of -mta-postfix in some conditions
+* Fixed Mediawiki creation script so it uses the appropriate database and user
+* Fixed XSS vulnerability reported by 'Bluetouff'
+* Validate mailing-list names when creating/deleting them
+* Merged updated translations from Pootle (Spanish and Italian)
+* Handle amd64 architectures and add missing files in chroot creation
+* Support rsyslog as well as syslogd
+* Fixed bad detection of PostgreSQL's init script
+* Fix URL for roadmap
+* Fix for bug #200
+* Fix admin_table_postadd
+* htmlpurifier upgraded to 4.2.0
+* Fixed SQL query in snippet browsing
+* Fix database creation problems in case of an SQL_ASCII default for PostgreSQL
+
+FusionForge-5.0.2:
+* Maintenance release, bugfixes mostly.
+
+FusionForge-5.0.1:
+* Maintenance release, bugfixes and translations only.
+
+FusionForge-5.0:
+* New projectlabels plugin, to tag projects with snippets of
+  user-defined HTML (developed for/sponsored by Adullact)
+* New extratabs plugin, to add tabs with links to arbitrary URLs
+  (Adullact again)
+* New globalsearch, allowing cross-forge searching of projects
+* Users can log in with their email address (in addition to login
+  name) if sys_require_unique_email is true (developed for/sponsored by AdaCore)
+* Site admin can now optionally enforce the acceptance of terms of use
+  on account creation (AdaCore again)
+* Site admin can now optionnally block anonymous downloads from the
+  FRS (AdaCore again)
+* New command-line scripts to inject users, groups and file releases
+  into the database from text files (AdaCore again)
+* Trackers: The list of fields displayed when browsing the list of artifacts
+  can now be defined (Alcatel-Lucent)
+* Trackers: The description field can now be updated/corrected (Alcatel-Lucent)
+* Trackers: It is now possible to force a custom field to be mandatory (Alcatel-Lucent)
+* Trackers: The values for 'select box' custom fields can now be reordered (Alcatel-Lucent)
+* Trackers: A workflow on the status field (when overwritten) can be set. Allowed
+  transition between values can be defined and allowed per roles (Alcatel-Lucent)
+* Trackers: A new type of extra field has been added: Relation between artifact. 
+  This type allow to create a relation between artifacts. Backwards relation can
+  also be visible (Alcatel-Lucent)
+* Trackers: Dynamic links added, expressions like [#NNN],[TNNN] are now rendered as
+  links for description and comments (Alcatel-Lucent).
+* Trackers: Search improved to allow searching in text fields (Alcatel-Lucent).
+* Trackers: New system to share a search query. Shared queries can be represented 
+  as an URL or bookmarked. It is also possible to define one query as the default
+  one (Alcatel-Lucent)
+* Trackers: Custom fields are now preserved (if same name and value) when moving an
+  artifact (Alcatel-Lucent)
+* Trackers: New custom field type: Integer (Alain Peyrat)
+* Version control subsystem: completely rewritten.  New plugins add
+  support for Arch, Bazaar, Darcs, Git, Mercurial.
+* Mediawiki plugin: mostly rewritten.  Now creates independent wikis
+  for projects, allowing different sets of permissions.
+* Forums: New 'move' option to move a thread from one forum to another (Alcatel-Lucent).
+* Tasks: Improved CSV import/export (Alcatel-Lucent)
+* Global: rework of the default theme, for better accessibility, maintainability and
+  conformance (developed by Open-S for Adullact)
+* New contribtracker plugin, to give visibility to major contributors
+  to projects (developed for/sponsored by Adullact)
+
+FusionForge-4.8.3:
+* Maintenance release, only bugfixes.
+
+FusionForge-4.8.2:
+* Maintenance release, security and bugfixes.
+
+FusionForge-4.8.1:
+* Maintenance release, only bugfixes.
+
+FusionForge-4.8:
+* New classification by tags (aka tag cloud)
+* New reporting page on frs to view the downloads per package
+* List of all projects added in 'Project List'
+* New version of wiki plugin, using lastest svn code
+
+# Local Variables:
+# mode: text
+# End:

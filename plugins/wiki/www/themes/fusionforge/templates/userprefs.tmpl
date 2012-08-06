@@ -1,0 +1,395 @@
+<?php // -*-php-*-
+// $Id: userprefs.tmpl 8134 2011-09-27 08:05:54Z vargenau $
+// Todo: Move the logic and code to the plugin
+// This is very experimental and the read-only part an ugly hack so far.
+foreach (explode(',','errmsg,isForm') as $var) {
+    if (empty($$var)) $$var = false;
+}
+
+$plugin = $request->getArg('pagename');
+if (isActionPage($request->getArg('pagename'))
+    and $isForm and $plugin == _("PreferencesInfo")) {
+    $isForm = false;
+}
+$time = time();
+$user =& $request->getUser();
+$pref =& $request->_prefs;
+
+if (!$pref) return;
+$offset = $pref->get('timeOffset');
+$serverTime = $time - $offset * 3600;
+if ( $isForm )
+    $timeOffsetInput = HTML::input(array('type' => "text",
+                                         'size' => 6,
+                                         'maxlength' => 6,
+                                         'name' => "pref[timeOffset]",
+                                         'class' => "numeric",
+                                         'value' => $offset));
+else
+    $timeOffsetInput = $pref->get('timeOffset');
+
+$OwnModificationsCB = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[ownModifications]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('ownModifications')));
+$MajorModificationsOnlyCB = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[majorModificationsOnly]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('majorModificationsOnly')));
+$DiffMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[diffMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('diffMenuItem')));
+$PageInfoMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[pageInfoMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('pageInfoMenuItem')));
+$PDFMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[pdfMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('pdfMenuItem')));
+$ChownMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[chownMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('chownMenuItem')));
+$SetaclMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[setaclMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('setaclMenuItem')));
+$RemoveMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[removeMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('removeMenuItem')));
+$RenameMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[renameMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('renameMenuItem')));
+$RevertMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[revertMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('revertMenuItem')));
+$LockMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[lockMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('lockMenuItem')));
+$BackLinksMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[backLinksMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('backLinksMenuItem')));
+$WatchPageMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[watchPageMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('watchPageMenuItem')));
+$RecentChangesMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[recentChangesMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('recentChangesMenuItem')));
+$RandomPageMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[randomPageMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('randomPageMenuItem')));
+$LikePagesPageMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[likePagesMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('likePagesMenuItem')));
+$SpecialPagesMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[specialPagesMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('specialPagesMenuItem')));
+$RelativeDatesCB = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[relativeDates]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('relativeDates')));
+$PageTrailCB = HTML::input(array('type' => 'checkbox',
+                                 'name' => 'pref[pageTrail]',
+                                 'value' => '1',
+                                 'checked' => (bool) $pref->get('pageTrail')));
+$NoLinkIconsCB = HTML::input(array('type' => 'checkbox',
+                                   'name' => 'pref[noLinkIcons]',
+                                   'value' => '1',
+                                   'checked' => (bool) $pref->get('noLinkIcons')));
+$GoogleLinkCB = HTML::input(array('type' => 'checkbox',
+                                  'name' => 'pref[googleLink]',
+                                  'value' => '1',
+                                  'checked' => (bool) $pref->get('googleLink')));
+$DoubleClickCB = HTML::input(array('type' => 'checkbox',
+                                  'name' => 'pref[doubleClickEdit]',
+                                  'value' => '1',
+                                  'checked' => (bool) $pref->get('doubleClickEdit')));
+if (!function_exists('selectedOption')) {
+  function selectedOption ($value, $label = false) {
+    return HTML::option(array('value' => $value,'selected'=>"selected"), ($label ? $label : $value) . "\n");
+  }
+  function unselectedOption ($value, $label = false) {
+    return HTML::option(array('value' => $value), ($label ? $label : $value) . "\n");
+  }
+}
+
+$SelectThemes = ''; $SelectLanguages = '';
+$SelectThemesDesc = ''; $SelectLanguagesDesc = '';
+if ( $isForm ) {
+    $SelectOptions = HTML();
+    if (!empty($available_themes) and is_array($available_themes)) {
+        if (!$pref->get('theme') or $pref->get('theme') == THEME)
+            $SelectOptions->pushContent(selectedOption("",_("<system theme>")));
+        else
+            $SelectOptions->pushContent(unselectedOption("",_("<system theme>")));
+        foreach ($available_themes as $theme) {
+            if ($theme == $pref->get('theme') and $theme != THEME)
+                $SelectOptions->pushContent(selectedOption($theme));
+            else
+                $SelectOptions->pushContent(unselectedOption($theme));
+        }
+        $SelectThemes = HTML::select(array('name' => "pref[theme]",'id' => 'theme'),
+                                     $SelectOptions);
+        $SelectThemesDesc = _("Personal theme:");
+    }
+
+    $SelectOptions = HTML();
+    if (!empty($available_languages) and is_array($available_languages)) {
+        if (!$pref->get('lang') or $pref->get('lang') == DEFAULT_LANGUAGE)
+            $SelectOptions->pushContent(selectedOption("",_("<system language>")));
+        else
+            $SelectOptions->pushContent(unselectedOption("",_("<system language>")));
+        foreach ($available_languages as $lang) {
+            if ($lang == $pref->get('lang') and $lang != DEFAULT_LANGUAGE)
+                $SelectOptions->pushContent(selectedOption($lang));
+            else
+                $SelectOptions->pushContent(unselectedOption($lang));
+        }
+        $SelectLanguages = HTML::select(array('name' => "pref[lang]",'id' => 'lang'),
+                                        $SelectOptions);
+        $SelectLanguagesDesc = _("Personal language:");
+    } else {
+        if ($SelectThemes == '') {
+            $appearance = false;
+            $SelectThemesDesc = '';
+            $SelectLanguagesDesc = '';
+        }
+    }
+} else {
+    $SelectThemesDesc = _("Personal theme:");
+    $SelectLanguagesDesc = _("Personal language:");
+    $SelectThemes = $pref->get('theme');
+    $SelectLanguages = $pref->get('lang');
+}
+
+?>
+<?php echo $errmsg ?>
+
+<h2>
+<?php echo fmt("User preferences for user %s", WikiLink($user->UserName())) ?>
+</h2>
+
+<?php if ($isForm) { ?>
+<form action="<?php echo $request->getPostURL()?>" method="post">
+<?php } ?>
+
+<fieldset style="margin-bottom: 1em;">
+<legend><strong><?php echo _("User preferences for this project")?></strong></legend>
+<table class="fullwidth">
+
+   <tr><td colspan="2"><h3><?php echo _("E-mail Notification")?></h3></td></tr>
+
+   <tr><td colspan="2">
+    <?php echo _("Get an email notification at changes of the following pages:")?>
+   </td></tr>
+
+   <tr>
+    <?php if ($isForm) { ?>
+      <td><textarea name="pref[notifyPages]" cols="40" rows="6"><?php echo $pref->get('notifyPages')?></textarea></td>
+      <td><p class="hint"><?php echo _("Enter pages seperated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
+    <?php } else { ?>
+     <td colspan="2"><?php echo $pref->get('notifyPages')?></td>
+    <?php } ?>
+   </tr>
+
+</table>
+</fieldset>
+
+<fieldset style="margin-bottom: 1em;">
+<legend><strong><?php echo _("Global user preferences (for all projects)")?></strong></legend>
+
+<table class="fullwidth">
+
+  <tr><td colspan="2"><h3><?php echo _("E-mail Notification")?></h3></td></tr>
+
+  <tr>
+      <td>
+         <p class="nowrap">
+             <?php echo $OwnModificationsCB ?>
+             <?php echo _("Do not send my own modifications")?>
+         </p>
+      </td>
+      <td>
+         <p class="hint"><?php echo _("Check if you do not want to be notified of your own modifications.")?></p>
+      </td>
+  </tr>
+
+  <tr>
+      <td>
+         <p class="nowrap">
+             <?php echo $MajorModificationsOnlyCB ?>
+             <?php echo _("Do not send minor modifications")?>
+         </p>
+      </td>
+      <td>
+         <p class="hint"><?php echo _("Check if you do not want to be notified of minor modifications.")?></p>
+      </td>
+  </tr>
+
+  <tr><td colspan="2"><h3><?php echo _("Menus")?></h3></td></tr>
+  <tr>
+     <td>
+       <fieldset>
+       <legend><?php echo _("Top Menu")?></legend>
+       <table>
+         <tr>
+            <td>
+               <p class="nowrap"><?php echo $DiffMenuItem ?> <?php echo _("Last Difference")?></p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p class="nowrap"><?php echo $RevertMenuItem ?> <?php echo _("Revert")?></p>
+            </td>
+         </tr>
+         <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
+           <tr>
+             <td>
+                <p class="nowrap"><?php echo $PDFMenuItem ?> <?php echo _("PDF")?></p>
+             </td>
+           </tr>
+         <?php } ?>
+         <tr>
+            <td>
+               <p class="nowrap"><?php echo $LockMenuItem ?> <?php echo _("Lock")?></p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p class="nowrap"><?php echo $ChownMenuItem ?> <?php echo _("Change Owner")?></p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p class="nowrap"><?php echo $SetaclMenuItem ?> <?php echo _("Access Rights")?></p>
+            </td>
+         </tr>
+       </table>
+       </fieldset>
+    </td>
+    <td class="top">
+      <p class="hint"><?php echo _("Check menu items to display.")?></p>
+    </td>
+    </tr>
+
+    <tr>
+    <td class="top">
+       <fieldset>
+       <legend><?php echo _("Left Menu")?></legend>
+       <table>
+         <tr>
+            <td>
+               <p class="nowrap"><?php echo $RandomPageMenuItem ?> <?php echo _("Random Page")?></p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p class="nowrap"><?php echo $LikePagesPageMenuItem ?> <?php echo _("Like Pages")?></p>
+            </td>
+         </tr>
+       </table>
+       </fieldset>
+    </td>
+    <td>
+    </td>
+  </tr>
+
+  <tr><td colspan="2"><h3><?php echo _("Appearance")?></h3></td></tr>
+
+  <tr><td colspan="2"><?php echo _("Here you can override site-specific default values.") ?></td></tr>
+      <tr>
+          <td>
+             <p class="nowrap">
+               <?php echo $PageTrailCB?>
+               <?php echo _("Show Page Trail")?>
+             </p>
+          </td>
+          <td><p class="hint"><?php echo _("Show Page Trail at top of page.")?></p></td>
+      </tr>
+      <tr>
+          <td>
+             <p class="nowrap">
+               <?php echo $NoLinkIconsCB?>
+               <?php echo fmt("Hide %s", WikiLink("Help:LinkIcons"))?>
+             </p>
+          </td>
+          <td><p class="hint"><?php echo _("Hide or show LinkIcons.")?></p></td>
+      </tr>
+      <tr>
+          <td>
+             <p class="nowrap">
+               <?php echo $GoogleLinkCB?>
+               <?php echo fmt("Add %s", WikiLink("Help:GoogleLink"))?>
+             </p>
+          </td>
+          <td><p class="hint"><?php echo fmt("Add Google links to unknown pages behind the '?', and the create action behind the pagename instead. See %s.", WikiLink("MeatBall:GooglePrompt"))?></p></td>
+      </tr>
+
+  <tr><td colspan="2"><h3><?php echo _("Edit Area Size")?></h3></td></tr>
+
+  <tr><td>
+    <?php echo _("Height") . _(":")?>
+    <?php if ($isForm) { ?>
+     <input type="text" name="pref[editHeight]" size="4" maxlength="4" class="numeric"
+            value="<?php echo $pref->get('editHeight')?>" />
+    <?php } else { ?>
+      <?php echo $pref->get('editHeight')?>
+    <?php } ?>
+    <?php echo _("Width") . _(":")?>
+    <?php if ($isForm) { ?>
+     <input type="text" name="pref[editWidth]" size="4" maxlength="4" class="numeric"
+            value="<?php echo $pref->get('editWidth')?>" />
+    <?php } else { ?>
+      <?php echo $pref->get('editWidth')?>
+    <?php } ?>
+    </td>
+    <td><p class="hint">
+      <?php echo _("Note that many browsers will automatically adjust the width of the editing area so that it fills the browser window.  In this case, the width preference will be ignored.")?></p>
+    </td></tr>
+
+  <tr><td colspan="2"><h3><?php echo _("Time Zone")?></h3></td></tr>
+
+  <tr><td><p>
+    <?php echo fmt("Add %s hours to the server's local time when reporting times.",
+           $timeOffsetInput)?>
+  </p></td><td>
+  <p class="hint">
+    <?php echo fmt("The current time at the server is %s.",
+            HTML::strong($WikiTheme->formatDateTime($serverTime)))?>
+    <?php echo fmt("With the current offset, this would be reported as %s.",
+           HTML::strong($WikiTheme->formatDateTime($time)))?>
+  </p>
+  </td></tr>
+
+  <tr><td colspan="2"><h3><?php echo _("Date Format")?></h3></td></tr>
+
+  <tr><td colspan="2">
+    <p>
+      <?php echo $RelativeDatesCB ?>
+      <?php echo _("Show relative dates using 'Today' and 'Yesterday'")?>
+    </p>
+  </td></tr>
+</table>
+</fieldset>
+
+<?php if ($isForm) { ?>
+<p>
+  <?php echo Button("submit:", _("Update Preferences"), 'wikiadmin')?>
+  <?php echo Button("submit:delete", _("Reset Preferences"), 'wikiadmin')?>
+  <?php echo Button("submit:cancel", _("Cancel"), 'button')?>
+  <?php echo HiddenInputs($request->getArgs(), false, array('pref')) ?>
+</p>
+</form>
+<?php } ?>

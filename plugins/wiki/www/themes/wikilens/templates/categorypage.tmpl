@@ -1,0 +1,79 @@
+<?php
+// $Id: categorypage.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<div class="categorypage categorypage-form">
+
+<p>This page represents the <?php echo $SINGULAR?> category.</p>
+
+<p>All pages that are in the <?php echo $SINGULAR?> category refer to this page.</p>
+
+<?php
+
+$this->_printPlugin("<" . "?plugin UserRatings nobuds=" . ($SHOWBUDS ? 0 : 1) . " category=\"" . $PAGENAME . "\" ?" . ">");
+?>
+<br/>
+<?php 
+if ($SHOWBUDS){
+	$btn = Button(array('exclude'  => "$EXCLUDE", 
+						'category' => "$PAGENAME",
+               			'showbuds' => false),
+                       _("Hide Buddy Ratings in the $SINGULAR category"), 
+                 		$PAGENAME); 
+
+
+} else {
+$btn = Button(array('exclude'  => "$EXCLUDE", 
+						'category' => "$PAGENAME",
+                       'showbuds' => true),
+                       _("Show Buddy Ratings in the $SINGULAR category"), 
+                 		$PAGENAME); 
+}
+                 ?>
+<?php echo $btn ?>
+
+
+<h3>To create a page in the <?php echo $SINGULAR?> category</h3>
+
+<ol>
+
+<li>
+
+Search to see if it already exists.  We don't want lots of
+duplicate pages.  You can use this FuzzyPages search:
+
+<?plugin-form FuzzyPages ?>
+
+</li>
+
+<li>
+
+If it does not exist, you can create the page.  You can use this
+CreatePage button, or see <?php $link = WikiLink("HowToUseWiki"); ?> <?php echo 
+$link ?> for more ways to navigate or create pages.
+
+<?php
+  $bpage = "~~[" . $PAGENAME . "]";
+
+  $initial_content = "\"This page is in the $bpage category.  You must leave in at least one reference to $bpage in order for this page to be in the $bpage category.  Otherwise, edit this text to describe your page.\"";
+	$adder = "";
+  
+  //if($SELF_ON_CREATE == true){
+  	//$adder = "save_and_redirect_to=\"" . $PAGENAME . "\"";
+  //}	
+  
+  $this->_printPlugin("<" . "?plugin-form CreatePage " . $adder . " initial_content=" . $initial_content . " ?" . ">");
+?>
+
+</li>
+
+<li>
+Once you have created a page, it will simply appear in the list above.  If you would
+like to add information about the page, click on its name in the list and edit and save the text.
+To ensure that the page stays in this category, make sure <b>[<?php echo $PAGENAME?>]</b> is in the description somewhere (including the
+brackets to be safe).
+
+</li>
+
+</ol>
+
+</div>

@@ -1,0 +1,415 @@
+# translation of @PACKAGENAME@_4.8.2-1_ru.po to Russian
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the fusionforge package.
+#
+# Yuri Kozlov <kozlov.y@gmail.com>, 2007, 2008.
+# Yuri Kozlov <yuray@komyakino.ru>, 2010, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: fusionforge 5.2~rc1-2\n"
+"Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-29 18:26+0200\n"
+"PO-Revision-Date: 2012-06-21 20:40+0400\n"
+"Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
+"Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Имя домена или поддомена @FORGENAME@:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Введите домен, который будет обслуживать установку @FORGENAME@. В этом "
+"домене некоторым службам (scm, lists и т.д.) будут присвоены свои "
+"собственные поддомены."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+#| msgid "@FORGENAME@/FusionForge system name:"
+msgid "@FORGENAME@ system name:"
+msgstr "Имя системы @FORGENAME@:"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Введите имя системы @FORGENAME@. Оно используется в разных местах по всей "
+"системе."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+msgid "@FORGENAME@ administrator password:"
+msgstr "Пароль администратора @FORGENAME@:"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+#| msgid ""
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
+msgstr ""
+"Учётная запись администратора @FORGENAME@ будет иметь все привилегии в "
+"forge. Она будет использована для подтверждения создания новых проектов."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+#| msgid "Please choose the password for this account."
+msgid "Please choose the password for this forge account."
+msgstr "Введите пароль для этой учётной записи forge."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Password confirmation:"
+msgstr "Подтверждение пароля:"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Please re-type the password for confirmation."
+msgstr "Введите пароль ещё раз для подтверждения."
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "install the new version configured by @PACKAGE@"
+msgstr "установить новую версию, настроенную @PACKAGE@"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "keep the local version currently installed"
+msgstr "сохранить установленную локальную версию"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show the differences between the versions"
+msgstr "показать различия между версиями"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show a side-by-side difference between the versions"
+msgstr "показать различия между версиями параллельно"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "start a new shell to examine the situation"
+msgstr "запустить новую оболочку для прояснения ситуации"
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid "What do you want to do about configuration file ${BASENAME}?"
+msgstr "Что нужно сделать с файлом настройки ${BASENAME}?"
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid ""
+"The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
+"is also a configuration file of the postgresql package."
+msgstr ""
+"@PACKAGE@ требуется изменить файл настройки ${FILE}, который также является "
+"файлом настройки для пакета postgresql."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgstr "Выполнить простую настройку DNS для @FORGENAME@?"
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"You can use a simple DNS setup with wildcards to map all project web-hosts "
+"to a single IP address, and direct all the scm-hosts to a single SCM server, "
+"or a complex setup which allows many servers as project web servers or SCM "
+"servers."
+msgstr ""
+"Вы можете использовать простую настройку DNS с групповыми символами, по "
+"которым веб-имена всех проектов преобразуются в один IP-адрес, а все "
+"scm-узлы в одно имя сервера SCM, или сложную настройку, которая позволяет "
+"многим серверам выступать в качестве веб или SCM серверов."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../dsf-in/dns-bind9.templates:2001
+msgid ""
+"Even if you use a simple DNS setup, you can still use separate machines as "
+"project servers; it just assumes that all the project web directories are on "
+"the same server with a single SCM server."
+msgstr ""
+"Даже если используется простая настройка DNS, вы всё равно можете "
+"использовать отдельные машины под серверы проектов; здесь просто "
+"предполагается, что все веб-каталоги проектов размещены на том же сервере с "
+"одним сервером SCM."
+
+#~ msgid "@FORGENAME@ administrator e-mail address:"
+#~ msgstr "Адрес электронной почты администратора @FORGENAME@:"
+
+#~ msgid ""
+#~ "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#~ "site. It will be used when problems occur."
+#~ msgstr ""
+#~ "Введите e-mail адрес администратора @FORGENAME@ для этого сайта. Он будет "
+#~ "использован при возникновении проблем."
+
+#~ msgid "Download server:"
+#~ msgstr "Сервер загрузок:"
+
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "packages."
+#~ msgstr ""
+#~ "Введите имя сервера, на котором будут расположены пакеты @FORGENAME@."
+
+#~ msgid "Database server:"
+#~ msgstr "Сервер базы данных:"
+
+#~ msgid "Database name:"
+#~ msgstr "Имя базы данных:"
+
+#~ msgid ""
+#~ "Please enter the name of the database that will host the @FORGENAME@ "
+#~ "database."
+#~ msgstr ""
+#~ "Введите имя базы данных, которая будет содержать базу данных @FORGENAME@."
+
+#~ msgid "Database administrator username:"
+#~ msgstr "Имя пользователя администратора базы данных:"
+
+#~ msgid ""
+#~ "Please enter the username of the database administrator for the server "
+#~ "that will host the @FORGENAME@ database."
+#~ msgstr ""
+#~ "Введите имя пользователя администратора базы данных для сервера, на "
+#~ "котором будет расположена база данных @FORGENAME@."
+
+#~ msgid "Password used for the database:"
+#~ msgstr "Пароль для базы данных:"
+
+#~ msgid "Connections to the database system are authenticated by a password."
+#~ msgstr "Для подключений к базе данных требуется пароль."
+
+#~ msgid "Please choose the connection password."
+#~ msgstr "Введите пароль для подключения."
+
+#~ msgid "IP address:"
+#~ msgstr "IP-адрес:"
+
+#~ msgid ""
+#~ "Please enter the IP address of the server that will host the @FORGENAME@ "
+#~ "installation."
+#~ msgstr ""
+#~ "Введите IP-адрес сервера, на котором будет располагаться установка "
+#~ "@FORGENAME@."
+
+#~ msgid "Shell server:"
+#~ msgstr "Сервер оболочек:"
+
+#~ msgid ""
+#~ "Please enter the hostname of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Введите имя сервера, на котором будут расположены учётные записи оболочек "
+#~ "для @FORGENAME@."
+
+#~ msgid "Mailing lists server:"
+#~ msgstr "Сервер списков почтовых рассылок:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "shell accounts."
+#~ msgstr ""
+#~ "Введите имя сервера, на котором будут расположены учётные записи оболочек "
+#~ "для @FORGENAME@."
+
+#~ msgid "News administrative group ID:"
+#~ msgstr "Административный ID группы новостей:"
+
+#~ msgid ""
+#~ "The members of the news admin group can approve news for the @FORGENAME@ "
+#~ "main page. This group's ID must not be 1. This should be changed only if "
+#~ "you upgrade from a previous version and want to keep the data."
+#~ msgstr ""
+#~ "Члены административной группы новостей могут утверждать новости для "
+#~ "главной страницы @FORGENAME@. Данный ID не должен быть равен 1. Он должен "
+#~ "быть изменён, только если вы обновляетесь с предыдущей версии и хотите "
+#~ "сохранить данные."
+
+#~ msgid "Statistics administrative group ID:"
+#~ msgstr "Административный ID группы статистики:"
+
+#~ msgid "Peer rating administrative group ID:"
+#~ msgstr "Административный ID группы рейтинга:"
+
+#~ msgid "English"
+#~ msgstr "английский"
+
+#~ msgid "Bulgarian"
+#~ msgstr "болгарский"
+
+#~ msgid "Catalan"
+#~ msgstr "каталонский"
+
+#~ msgid "Chinese (Traditional)"
+#~ msgstr "китайский (традиционный)"
+
+#~ msgid "Dutch"
+#~ msgstr "голландский"
+
+#~ msgid "Esperanto"
+#~ msgstr "эсперанто"
+
+#~ msgid "French"
+#~ msgstr "французский"
+
+#~ msgid "German"
+#~ msgstr "немецкий"
+
+#~ msgid "Greek"
+#~ msgstr "греческий"
+
+#~ msgid "Hebrew"
+#~ msgstr "иврит"
+
+#~ msgid "Indonesian"
+#~ msgstr "индонезийский"
+
+#~ msgid "Italian"
+#~ msgstr "итальянский"
+
+#~ msgid "Japanese"
+#~ msgstr "японский"
+
+#~ msgid "Korean"
+#~ msgstr "корейский"
+
+#~ msgid "Latin"
+#~ msgstr "латинский"
+
+#~ msgid "Norwegian"
+#~ msgstr "норвежский"
+
+#~ msgid "Polish"
+#~ msgstr "польский"
+
+#~ msgid "Portuguese (Brazilian)"
+#~ msgstr "португальский (бразильский)"
+
+#~ msgid "Portuguese"
+#~ msgstr "португальский"
+
+#~ msgid "Russian"
+#~ msgstr "русский"
+
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "китайский (упрощённый)"
+
+#~ msgid "Spanish"
+#~ msgstr "испанский"
+
+#~ msgid "Swedish"
+#~ msgstr "шведский"
+
+#~ msgid "Thai"
+#~ msgstr "тайский"
+
+#~ msgid "English[ Default language]"
+#~ msgstr "русский"
+
+#~ msgid "Default language:"
+#~ msgstr "Язык по умолчанию:"
+
+#~ msgid "Please choose the default language for web pages."
+#~ msgstr "Выберите язык по умолчанию для веб-страниц."
+
+#~ msgid "Default theme:"
+#~ msgstr "Тема по умолчанию:"
+
+#~ msgid ""
+#~ "Please choose the default theme for web pages. This must be a valid name."
+#~ msgstr ""
+#~ "Выберите тему по умолчанию для веб-страниц. Должно быть указано "
+#~ "допустимое имя."
+
+#~ msgid "Do you want mail to ${noreply} to be discarded?"
+#~ msgstr "Удалять почту, присланную на адрес ${noreply}?"
+
+#~ msgid ""
+#~ "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#~ "\"${noreply}\" address."
+#~ msgstr ""
+#~ "@FORGENAME@ посылает и принимает множество электронных писем на адрес "
+#~ "\"${noreply}\"."
+
+#~ msgid ""
+#~ "E-mail to that address should be directed to a black hole (/dev/null), "
+#~ "unless you have another use for that address."
+#~ msgstr ""
+#~ "Почта на этот адрес должна быть перенаправлена в чёрную дыру (/dev/null), "
+#~ "если вы не используете этот адрес для чего-то ещё."
+
+#~ msgid "User mail redirector server:"
+#~ msgstr "Сервер-перенаправитель пользовательской почты:"
+
+#~ msgid ""
+#~ "Please enter the host name of the server that will host the @FORGENAME@ "
+#~ "user mail redirector."
+#~ msgstr ""
+#~ "Введите имя сервера, который будет перенаправлять почту пользователей "
+#~ "@FORGENAME@."
+
+#~ msgid "@FORGENAME@ administrator login:"
+#~ msgstr "Учётная запись администратора @FORGENAME@:"
+
+#~ msgid "Please choose the username for this account."
+#~ msgstr "Введите имя пользователя учётной записи для этого."
+
+#~ msgid "Initial list of skills:"
+#~ msgstr "Начальный список навыков:"
+
+#~ msgid ""
+#~ "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#~ "from those present in the database. This list is the initial list of "
+#~ "skills that will enter the database."
+#~ msgstr ""
+#~ "@FORGENAME@ позволяет пользователям составить список своих навыков из "
+#~ "имеющихся в базе данных. Запрашиваемый сейчас начальный список навыков "
+#~ "будет введён в базу данных."
+
+#~ msgid "Please enter a semicolon-separated list of skill names."
+#~ msgstr "Введите названия навыков, разделяя их точкой с запятой."

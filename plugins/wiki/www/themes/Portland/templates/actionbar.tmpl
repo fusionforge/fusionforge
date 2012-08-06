@@ -1,0 +1,20 @@
+<?php // -*-php-*-
+// $Id: actionbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<?php
+  if ($revision and (!$page->get('locked') || $user->isAdmin()))
+      $EditB = Button("edit",
+                      $revision->isCurrent() ? _("EditText") : _("Edit Old Revision"));
+  else
+      $EditB = Button("viewsource", _("View Source"));
+  $EditB = fmt("%s of this page", $EditB);
+  if (empty($revision)) $revision = $page->getCurrentRevision(false);
+?>
+<?php echo $EditB ?> 
+<a href="<?php echo WikiURL($revision,array('action'=>'diff'))?>"><?php echo $WikiTheme->getLastModifiedMessage($revision) ?></a>
+    <?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?>
+    <?php echo $SEP?><?php echo Button("PageInfo", _("PageInfo")) ?>
+<?php if (defined('DEBUG') && DEBUG || $user->isAdmin()) { ?>
+    <?php echo $SEP?><?php echo Button("DebugInfo", _("DebugInfo")) ?> <!-- For debugging only, really -->
+<?php } ?>
+<br />

@@ -1,0 +1,57 @@
+<?php // -*-php-*-
+// $Id: navbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<!-- The top navigation/search bar -->
+<form action="<?php echo WikiURL(_("TitleSearch"))?>"
+      method="get" accept-charset="<?php echo $charset?>" id="searchform">
+<input type="hidden" name="auto_redirect" value="1" />
+<?php if (! USE_PATH_INFO) { ?>
+  <input type="hidden" name="pagename" value="<?php echo _("TitleSearch")?>" />
+<?php } ?>
+<div id="navbuttons">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr valign="middle"><td align="left">
+<?php echo WikiLink(_("RecentChanges"), "button") ?>
+<?php if (!empty($revision)) { ?>
+<?php echo $SEP?><?php echo Button("RelatedChanges", _("RelatedChanges")) ?>
+<?php echo $SEP?><?php echo Button(_("LikePages"), _("LikePages")) ?>
+<?php echo $SEP?><?php echo Button(_("BackLinks"), _("BackLinks")) ?>
+<?php } ?>
+</td>
+<td align="right" width="150">
+   <div id="search">
+    <?php if (!empty($user) && $user->isSignedIn()) { ?>
+     <?php echo WikiLink(_("UserPreferences"),'button',_("Preferences")) ?><?php echo $SEP?>
+<?php } ?>
+<?php if (!empty($user)) { ?>
+<?php
+      /* Today's calendar page for the user, if the Calender subpage is defined. */
+      $UserCalPageTitle = $user->getId() . SUBPAGE_SEPARATOR . _("Calendar");
+      $dbi = $request->getDbh();
+      if ($dbi->isWikiPage($UserCalPageTitle)) {
+        $UserCalPageTodayTitle = $UserCalPageTitle . SUBPAGE_SEPARATOR . strftime("%Y-%m-%d", time());
+        //$UserCalPageTodayUrl = WikiURL($UserCalPageTodayTitle);
+?>
+<?php echo WikiLink($UserCalPageTodayTitle, "button", _("Today")) ?><?php echo $SEP?>
+<?php } ?>
+<?php if (!empty($user) && $user->isAdmin()) { ?>
+<?php echo WikiLink(_("PhpWikiAdministration"), "button", _("Admin")) ?><?php echo $SEP?>
+<?php } ?>
+<?php } ?>
+<?php echo WikiLink(_("FindPage"), "button") ?><input type="text" id="livesearch" name="s" size="12" 
+   maxlength="256" 
+   onfocus="if (this.value == '<?php echo _("Search")?>') {this.value = '';}"
+   onmouseout="window.status=''; return true;" 
+   onmouseover="window.status='<?php echo _("Search")?>'; return true;"
+<?php if (ENABLE_LIVESEARCH) { ?>
+   title="<?php echo _("LiveSearch")?>" 
+   onKeypress="liveSearchStart()"
+   onblur="setTimeout('closeResults()',2000); if (this.value == '') {this.value = '<?php echo _("Search")?>';}" />
+   </div><br /><div align="left" id="LSResult"></div>
+<?php } else { ?>
+   title="<?php echo _("TitleSearch")?>" />
+   </div>
+<?php } ?>
+</td></tr></table></div>
+</form>
+

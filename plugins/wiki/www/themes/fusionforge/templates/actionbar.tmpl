@@ -1,0 +1,136 @@
+<?php // -*-php-*-
+// $Id: actionbar.tmpl 7926 2011-02-01 10:47:10Z vargenau $
+
+$curuserprefs = $user->getPreferences();
+$dbh = $request->getDbh();
+$isAdmin = $user->isAdmin();
+$pagename = $page->getName();
+$isActionPage = isActionPage($pagename);
+$isBrowse = $request->getArg('action') == 'browse';
+?>
+
+  <div id="actionbuttons">
+    <table cellpadding="0" cellspacing="0">
+    <tr>
+
+    <?php if (!string_ends_with($pagename, SUBPAGE_SEPARATOR._("Discussion"))) { ?>
+    <?php $talk = new WikiPageName('Talk:'.$pagename); ?>
+      <td class="bold">
+      <?php echo Button(array(),
+                       $isActionPage ? _("Action Page") : _("Page"),
+                       $talk->getParent(), array('title' => "Page")) ?>
+      </td>
+      <td class="spacer">&nbsp;</td>
+      <?php if (!$isActionPage) { ?>
+        <?php if ($dbh->isWikiPage($talk->getName())) { ?>
+          <td>
+          <?php echo Button(array('action'=>'browse'), _("Discussion"), $talk->getName()) ?>
+          </td>
+        <?php } else { ?>
+          <td>
+          <?php echo Button(array('action'=>'create',
+                                 'template'=>_("Template/Talk")),
+                           _("Discussion"), $talk->getName()) ?>
+          </td>
+        <?php } ?>
+      <?php } ?>
+    <?php } else {
+      $talk = new WikiPageName($pagename); ?>
+      <td>
+      <?php echo Button(array(),$isActionPage ? _("Action Page") : _("Page"), $talk->getParent(), array('title' => "View the page")) ?>
+      </td>
+      <td class="spacer">&nbsp;</td>
+      <td class="bold">
+      <?php echo Button(array(),_("Discussion"), $talk->getName()) ?>
+      </td>
+    <?php } ?>
+
+    <td class="spacer">&nbsp;</td>
+    <td class="spacer">&nbsp;</td>
+
+    <?php if ($user->isAdmin() or (!($page->get('locked')) and (mayAccessPage('edit', $page->getName())))) { ?>
+      <td class="bold">
+      <?php if (! $dbh->isWikiPage($page->getName())) { ?>
+      <?php echo Button("edit", _("Create Page")) ?>
+      <?php } else if ($revision && (($revision->isCurrent()) || ($revision->hasDefaultContents()))) { ?>
+      <?php echo Button("edit", _("Edit")) ?>
+      <?php } else { ?>
+      <?php echo Button("edit", _("Edit Old Revision")) ?>
+      <?php } ?>
+      </td>
+    <?php } else if ($dbh->isWikiPage($page->getName())) { ?>
+      <td><?php echo Button("viewsource", _("View Source")) ?></td>
+    <?php } ?>
+
+    <?php if ($dbh->isWikiPage($page->getName())) { ?>
+
+    <td class="spacer">&nbsp;</td>
+    <td><?php echo Button("PageHistory", _("History")) ?></td>
+
+    <?php if ($curuserprefs->get('diffMenuItem')) { ?>
+      <td class="spacer">&nbsp;</td>
+      <td><?php echo Button("diff", _("Last Difference")) ?> </td>
+    <?php } ?>
+
+    <?php if ($curuserprefs->get('revertMenuItem')) { ?>
+      <td class="spacer">&nbsp;</td>
+      <td><?php echo Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?></td>
+    <?php } ?>
+
+      <td class="spacer">&nbsp;</td>
+      <td><?php echo Button("PageInfo", _("Page Info")) ?></td>
+
+      <td class="spacer">&nbsp;</td>
+      <td><?php echo Button(array('action'=>_("BackLinks")), _("Back Links"),$page->getName()) ?></td>
+
+    <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
+      <?php if ($curuserprefs->get('pdfMenuItem')) { ?>
+        <td class="spacer">&nbsp;</td>
+        <td><?php echo Button("pdf") ?></td>
+      <?php } ?>
+    <?php } ?>
+
+    <td class="spacer">&nbsp;</td>
+    <td class="spacer">&nbsp;</td>
+
+    <?php if ($user->isAdmin() or mayAccessPage('change', $page->getName())) { ?>
+      <?php if ($curuserprefs->get('lockMenuItem')) { ?>
+        <?php if ($page->get('locked')) { ?>
+          <td><?php echo Button('unlock', _("Unlock")) ?></td>
+        <?php } else { ?>
+          <td><?php echo Button('lock', _("Lock")) ?></td>
+        <?php } ?>
+        <td class="spacer">&nbsp;</td>
+      <?php } ?>
+
+      <?php if (ENABLE_PAGEPERM and mayAccessPage('change', $page->getName())) { ?>
+        <?php if ($curuserprefs->get('chownMenuItem')) { ?>
+          <td><?php echo Button('chown', _("Change Owner")) ?></td>
+          <td class="spacer">&nbsp;</td>
+        <?php } ?>
+
+        <?php if ($curuserprefs->get('setaclMenuItem')) { ?>
+          <td><?php echo Button('setaclsimple', _("Access Rights")) ?></td>
+          <td class="spacer">&nbsp;</td>
+        <?php } ?>
+      <?php } ?>
+    <?php } ?>
+
+    <?php if (($user->isAdmin() or mayAccessPage('rename', $page->getName())) && $revision) { ?>
+        <td><?php echo Button('rename', _("Rename")) ?></td>
+        <td class="spacer">&nbsp;</td>
+    <?php } ?>
+
+    <?php if (($user->isAdmin() or mayAccessPage('purge', $page->getName())) && $revision) { ?>
+        <td><?php echo Button('purge', _("Purge")) ?></td>
+        <td class="spacer">&nbsp;</td>
+    <?php } ?>
+
+    <?php } ?>
+
+    <td class="spacer">&nbsp;</td>
+    <td><?php echo Button(_("WatchPage"), _("Watch Page")) ?></td>
+
+  </tr>
+  </table>
+  </div>

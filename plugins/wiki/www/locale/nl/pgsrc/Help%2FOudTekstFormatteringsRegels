@@ -1,0 +1,112 @@
+Date: Tue,  4 Jan 2011 11:57:15 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FOudTekstFormatteringsRegels 7864 2011-01-22 20:11:13Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FOudTekstFormatteringsRegels;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+! Synopsis
+OudTekstFormatteringsRegels%%%
+<strong>Nadruk:</strong> '<strong></strong>' voor <em>schuin</em>, _<em></em>~_ voor <strong>vet</strong>, '<strong></strong>'_<em></em>~_ voor <em><strong>beide</strong></em>.%%%
+<strong>Lijsten:</strong> * voor punt lijsten, # voor genummerde lijsten, <em><strong>;</strong> Term <strong>:</strong> Definitie</em> voor definitie lijsten.%%%
+<strong>Verwijzingen:</strong> ~KapitaliseerEnSchrijfAanElkaar of gebruik vierkante haken ~[pagina koppeling] of URL ~[~http://koel.wiki.int/].%%%
+<strong>Footnotes:</strong> Gebruik ~[1],~[2],~[3],...%%%
+<strong>Vermijden van koppelingen:</strong> Vermijdt kopplingen met "~!": ~!~KoppelNiet, noem koppelingen met ~[~[naam | URL].%%%
+<strong>Allerlei:</strong> "~!", "~!~!", "~!~!~!" maak koppen, "%<em></em>%%" maak regelbreuk, "-<em></em>---" maak horizontale lijn.
+
+----
+! Alinea's
+
+* Spring alinea's niet in (zoals engelstaligen dat doen).
+* Begin een nieuwe regel en vul uit waar nodig.
+* Gebruik lege regels als scheiding.
+* Vier of meer mintekens maken een horizontale lijn.
+* %%<em></em>% maakt een regelbreuk (ook in koppen en lijsten).
+
+
+! Lijsten
+
+* * voor niveau een.
+     * *~* voor niveau twee, enz.
+* Gebuik * voor gepunteerde lijsten, # genummerde lijsten (meng maar wat raak).
+* ; Term : Definitie voor definitie lijsten.
+* Een regel voor elk punt.
+* Andere witruimte aan het begin betekent geformatteerde tekst en
+verandert het font.
+
+
+! Koppen
+
+* '~!' aan het begin van een regel maakt een kleine kop.
+* '~!~!' aan het begin van een regel maakt een middelgrote kop.
+* '~!~!~!' aan het begin van een regel maakt een grote kop.
+
+! Lettertypen
+
+* Spring in met een of meer spaties voor een niet proportioneel font:
+
+<pre>
+ Dit is niet proportioneel
+</pre>
+En dit lekker wel.
+
+
+! Ingesprongen Alinea's
+<em>(Citaten)</em>
+
+* ;: -- veel gebruikt (met nadruk) voor citaten.  (Zie BlokCitatenNadoen)
+
+
+! Nadruk
+
+* Gebruik twee paar enkele aanhalingtekens (<em>) voor nadruk (meestal </em>cursief'').
+* Gebruik "two underscores" (<strong>) voor sterke nadruk (meestal </strong>vet**).
+* Mix them at will: <strong><em>bold italics</em></strong>
+* <Obsolete>: Gebruik vijf paar enkele aanhalingstekens (<em></em>'), of drie binnen
+dubbele, voor een ander soort van nadruk (VetCursiefInWiki), maar wees
+op je hoede voor luizen in de Wiki nadruk logica...
+* Nadruk kan meerdere malen in een regel worden gebruikt, maar kan
+regelbreuken niet oversteken.
+
+! Verwijzingen
+
+* Koppelingen naar andere pagina's binnen de Wiki worden gemaakt door de naam van de pagina in vierkante haken te zetten: [dit is een paginakoppeling].
+* Koppelingen naar externe pagina's gaan zo: [http://www.lilypond.org].
+* Je kunt de koppelingen naar externe pagina's een naam geven, door het tiepen van naam, een staaf (|) en dan de koppeling: [Jan's thuispagina | http://www.xs4all.nl/~~jantien].
+* Oude Wiki koppeling wordt nog steeds ondersteund: KapitaliseerEnSchrijfAanElkaar voor het maken van lokale verwijzingen.
+* Je kunt koppelen naar oude stijl verwijzingen onderdrukken door een '~!' voor de woorden te tiepen: ~NietGekoppeldAlsWikiNaam.
+* You can create footnotes by using ~[1], ~[2], ~[3], ... like this here #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>. See footnote for counterpart.  (If the ~[ is in the first column, it is a footnote <em>definition</em> rather than a footnote <em>reference</em> #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>.)
+* De oude manier van URL koppeling wordt nog steeds ondersteund: tiep voor de URLs "http:", "ftp:" of "mailto:" ome een automatiese koppeling te maken, als in: http://c2.com/.
+* URLs die eindigen op .png, .gif of .jpg worden ingebed <em>wanneer ingevoerd als een externe verwijzing</em>: [http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]
+
+
+! Tables
+
+* Simple tables are available.  A table row is introduced by a <strong>|</strong> in the first column.  It is best described by example:
+<pre>
+      ||  _<em></em>_Name_<em></em>~_               |v _<em></em>_Cost_<em></em>~_   |v _<em></em>_Notes_<em></em>~_
+      | _<em></em>_First_<em></em>~_   | _<em></em>_Last_<em></em>~_
+      |> Jeff       |< Dairiki   |^  Cheap     |< Not worth it
+      |> Marco      |< Polo      | Cheaper     |< Not available
+</pre>
+;:will generate
+<<OldStyleTable
+||  <strong>Name</strong>               |v <strong>Cost</strong>   |v <strong>Notes</strong>
+| <strong>First</strong>   | <strong>Last</strong>
+|> Jeff       |< Dairiki   |^  Cheap     |< Not worth it
+|> Marco      |< Polo      | Cheaper     |< Not available
+>>
+
+;:Note that multiple <strong>|</strong>'s lead to spanned columns, and <strong>v</strong>'s can be used to span rows.  A <strong>></strong> generates a right justified column, <strong><</strong> a left justified column and <strong>^</strong> a centered column (which is the default.)
+
+! Opmaak Taal
+
+* Doe geen moeite.
+* < en > zijn zichzelf.
+* De & tekens werken toch niet.
+* Als je nou echt zo nodig HTML moet gebruiken, begin elke regel met een staaf (|).  Merk op dat dit kunstje mogelijk gemaakt moet worden door de systeembeheerder.
+----
+PhpWikiDocumentatie

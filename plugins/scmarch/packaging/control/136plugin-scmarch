@@ -1,0 +1,7 @@
+Package: @PACKAGE@-plugin-scmarch
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, php5-cli, tla, ${misc:Depends}
+Provides: @PACKAGE@-plugin-scm, @OLDPACKAGE@-plugin-scmarch
+Conflicts: @OLDPACKAGE@-plugin-scmarch
+Replaces: @OLDPACKAGE@-plugin-scmarch
+Description: collaborative development tool - GNU Arch plugin

@@ -1,0 +1,136 @@
+Date: Fri,  4 Feb 2011 16:36:35 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: PhpWikiBeheer 7927 2011-02-04 15:37:59Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=PhpWikiBeheer;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+*Noot*: Het merendeel van de acties op deze pagina vereist beheer
+privileges.  Ze zullen niet werken tenzij je een beheer gebruikersnaam
+en wachtwoord in het PhpWiki configuratiebestand hebt gezet.
+
+<<CreateToc jshide||=1 with_toclink||=1 >>
+
+== Page Explorer
+
+First select pages and then define the action:
+
+<?plugin-form WikiAdminSelect s="*" ?>
+
+or call the available ~WikiAdmin actions directly:
+
+| [[/Verwijder]] | [[/Rename]] | [[/Vervangt]] | [[/SetAcl]] | [[/Chmod]] | [[/Chown]]
+
+== User Management
+
+PhpWiki:EmailVerification is currently non-strict, leaving some possible holes, which can be 
+administrated below.
+
+  This button will show a list of all users with registered emails and buttons to set the 
+  verification status manually.
+
+  <<WikiAdminUtils
+           action=email-verification
+           label="Email Verification"
+   >>
+
+----------
+=== Cleanup
+A Wiki ZandBak is very easy to clean. Here you can restore it to pristine condition by loading the default from pgsrc:
+
+[ Rake the SandBox | phpwiki:?action=loadfile&source=locale/nl/pgsrc/ZandBak ].
+
+----------
+
+=== Kiekjes of Backups maken
+
+==== ZIP bestanden van database
+
+Deze koppelingen leiden naar zip bestanden, aangemaakt terwijl je
+wacht, die alle pagina's van je Wiki bevatten.  Het zip bestand wordt
+gedowload naar je lokale computer.
+
+Dit *[ZIP Kiekje | phpwiki:?action=zip]* bevat enkel de meest recente versies van elke pagina, terwijl deze *[ZIP Stort | phpwiki:?action=zip&include=all]* alle gearchiveerde versies bevat.
+
+(Als de PhpWiki geconfigureerd is dit toe te staan,) kan iedereen een
+zip bestand downloaden.
+
+Als je php _zlib_ ondersteuning heeft, worden de bestanden is het
+archief gecomprimeerd, anders worden ze simpelweg opgeslagen.
+
+==== Stort in directory
+
+Hier kun je pagina's van je Wiki in een willekeurige directory storten.
+
+<<WikiForm action=dumpserial>>
+
+De meest recente versie van elke pagina wordt naar de directory geschreven,
+een pagina be bestand.  Je server moet schrijfpermissies naar die directory
+hebben.
+
+-----------
+
+=== Herladen
+
+Als je een stel pagina's van PhpWiki hebt gestort, kun je ze hier
+herladen.  Noot dat pagina's in je database zullen worden
+overschreven; dus, als je je ThuisPagina hebt gestort en je laadt
+vanuit dit formulier, zal de pagina die nu in je database staat worden
+overschreven.  Als je een selectie wilt maken, verwijder dan de
+pagina's uit de directory (of uit het zip bestand) die je niet wil
+laden.
+
+==== Upload bestand
+
+Hier kun je ZIP archieven uploaden, of individuele bestanden van je (client)
+machine.
+
+<<WikiForm action=upload>>
+
+==== Laad bestand
+
+Here you can load ZIP archives, individual files or entire directories.
+The file or directory must be local to the http server.
+You can also use this form to load from an http: or ftp: URL.
+
+<<WikiForm action=loadfile>>
+
+-----------
+
+=== Formaat van de bestanden
+
+Momenteel worden de pagina's opgeslagen, een per bestand, als MIME ([
+RFC2045 | http://www.faqs.org/rfcs/rfc2045.html ]) e-mail ([ RFC822 |
+http://www.faqs.org/rfcs/rfc822.html ]) berichten.  Het content-type
+_application/x-phpwiki_ wordt gebruikt, en pagina meta-data wordt
+gecodeerd in de content-type parameters.
+(Als het bestand meerdere versies van een pagina bevat, is het type
+_multipart/mixed_, en bevat een aantal onderdelen, elke van type
+_application/x-phpwiki_.)
+De body van het bericht bevat de tekst van de pagina.
+
+==== Oude formaten
+
+*Geserialiseerde bestanden*
+
+De stort naar directory opdracht stortte voorheen de pagina's als php
+_serialized()_ strings.  Dit maakte de bestanden slecht geschikt
+voor menselijke consumptie, en bijna onmogelijk te veranderen.
+
+*Platte bestanden*
+
+Nog vroeger werd de pagina tekst gewoon naar een bestand gestort ---
+dit betekent dat alle pagina meta-data verloren ging.
+
+The upload and load functions will automatically recognize each of these
+three types of files, and handle them accordingly.
+Note that when loading _plain files_, the page name is deduced from the
+file name.
+
+De upload en laad functies herkennen automatisch alle van deze drie
+verschillenden types van bestanden, en verwerken ze aldus.  Noot dat
+bij het laden van _platte bestanden_ de paginanaam wordt afgeleidt
+van de bestandsnaam.

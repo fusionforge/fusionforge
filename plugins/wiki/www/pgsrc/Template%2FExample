@@ -1,0 +1,36 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Template%2FExample 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Template%2FExample;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+<noinclude>
+The following predefined variables are automatically expanded by
+the [[Help:CreatePagePlugin|CreatePage]] plugin if existing:
+  PAGENAME
+  MTIME     - last modified date + time
+  CTIME     - creation date + time
+  AUTHOR    - last author
+  OWNER
+  CREATOR   - first author
+  SERVER_URL, DATA_PATH, SCRIPT_NAME, PHPWIKI_BASE_URL and BASE_URL
+</noinclude>
+
+Title: %%TITLE%%   Year: %%YEAR%%
+---
+* Pagename: %%PAGENAME%%
+* Author: %%AUTHOR%%
+* Last modified time: %%MTIME%%
+* Created time: %%CTIME%%
+* Owner: %%OWNER%%
+* Creator: %%CREATOR%%
+
+* SERVER_URL: %%SERVER_URL%%
+* DATA_PATH: %%DATA_PATH%%
+* SCRIPT_NAME: %%SCRIPT_NAME%%
+* PHPWIKI_BASE_URL: %%PHPWIKI_BASE_URL%%
+* BASE_URL: %%BASE_URL%%

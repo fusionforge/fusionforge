@@ -1,0 +1,10 @@
+Source: @SRCPACKAGE@
+Section: devel
+Priority: optional
+Maintainer: Christian Bayle <bayle@debian.org>
+Uploaders: Roland Mas <lolando@debian.org>
+Build-Depends-Indep: devscripts
+Build-Depends: debhelper (>= 7), perl, gettext
+Standards-Version: 3.8.4
+Homepage: http://fusionforge.org/
+Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/

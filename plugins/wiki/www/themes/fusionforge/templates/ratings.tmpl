@@ -1,0 +1,7 @@
+<?php // -*-php-*-
+// $Id: ratings.tmpl 7720 2010-10-22 18:38:33Z vargenau $
+?>
+<?php if (!$WikiTheme->DUMP_MODE) {
+  $loader = new WikiPluginLoader();
+  printXML($loader->expandPI("<"."?plugin RateIt show=top imgPrefix=BStar ?".">", $request, $dbi->_markup));
+} ?>

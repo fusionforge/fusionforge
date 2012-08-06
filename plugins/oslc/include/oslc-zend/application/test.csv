@@ -1,0 +1,4 @@
+title,identifier,type,description,subject,creator,modified,helios_bt:status,mantisbt:project,bugtracker=fusionforge
+Provide import,1234,http://myserver/mycmapp/types/Enhancement,Implement the system's import capabilities.,import,mailto:aadams@someemail.com,2008-09-16T08:42:11.265Z,open,1
+Fix soap api,12345,http://myserver/mycmapp/types/Fixes,Correct the soap api default attributes,soap,mailto:jsmith@someemail.com,2008-09-21T08:41:10.265Z,closed,2
+Fix againsoap api,123456,http://myserver/mycmapp/types/Fixes,Correct the soap api default attributes,soap,mailto:jsmith@someemail.com,2008-09-21T08:41:10.265Z,open,1

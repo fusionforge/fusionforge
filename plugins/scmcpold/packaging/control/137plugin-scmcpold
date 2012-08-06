@@ -1,0 +1,5 @@
+Package: @OLDPACKAGE@-plugin-scmcpold
+Architecture: all
+Depends: @OLDPACKAGE@-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
+Provides: @OLDPACKAGE@-plugin-scm
+Description: collaborative development tool - CPOLD plugin

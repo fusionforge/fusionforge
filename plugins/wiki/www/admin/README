@@ -1,0 +1,86 @@
+!!! Database and Wiki Backup Tools
+
+It is recommended to do daily backups of your database and/or your wiki pages.
+
+In this directory are some sample scripts, which could help to setup your 
+cronjobs, on the server or even remotely (zipdump or dumpserial).
+
+  # berkeley db backup
+  dump-wikidb
+
+  # daily serial pgsrc dump
+  DEFAULT_DUMP_DIR = /var/www/wikidb/pgsrc
+  nice /usr/bin/lwp-request -P -d -m GET "http://localhost/wiki/?action=dumpserial"
+
+  # pgsrc rcs update (local history)
+  wikircs-backup
+
+  # update xapian index
+  nice wiki2omega -u /wiki $DEFAULT_DUMP_DIR | \
+    scriptindex /var/lib/omega/data/wiki /var/lib/omega/scripts/wiki2index.script \
+    > /var/log/omega/updateindex-wiki.log
+
+  # check uploads for viri
+  date >> /var/www/virus-found/scan.log
+  nice clamdscan -l /var/www/virus-found/scan.log --move=/var/www/virus-found /var/www/html/phpwiki/uploads
+
+
+!!! Xapian Fulltext Search Integration
+
+See http://www.xapian.org/
+
+* wiki2omega - perl script to update the database from wiki plaintext files or live dumps
+* wiki2index.script - xapian scriptindex definition
+* ExternalSearch
+
+  This is a sample template section for search.tmpl to use xapian as external search engine.
+
+  <h5>Fulltext Search</h5>
+  <form id="searchform2" action="/cgi-bin/omega"
+      method="get" accept-charset="<?php echo $charset?>" style="display:inline" class="searchform">
+    <?php $s = $request->getArg('s') ? $request->getArg('s') : _("Search"); ?>
+    <input type="hidden" name="DEFAULTOP" value="AND" />
+    <input name="P" size="18" maxlength="256"
+      value="<?php echo $s?>"
+      onfocus="if (this.value == '<?php echo _("Search")?>') {this.value = '';}"
+      onmouseout="window.status=''; return true;" 
+      onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
+      type="text" id="search2" 
+      title="<?php echo _("Search term(s)") ?>" />
+    <div align="right" style="padding-right:10px;">
+      <input type="submit" name="searchtype" value="fulltext" class="searchButton" title="External Fulltext Search">
+    </div>
+  </form>
+
+  This displays the result not in a wiki layout. However the omega layout can be tuned.
+== Open Office to Phpwiki converter
+
+Convert Open Office 2.3 (or later), Star Office, MS Word or MS Office Documents to Phpwiki.
+
+=== Installation
+
+You first have to install (once for all) the Open Office to Phpwiki converter.
+
+To install the export filter:
+* Start Open Office 2.3 (or later)
+* From //Tool// choose //XML Filter Settings//
+* Choose //New// and in //General// fill the form with the following data:
+** Filter name: //Phpwiki//
+** Application: //~OpenOffice.org Writer (.odt)//
+** Name of file type: //Phpwiki//
+** File extention: //txt//
+* Choose //Transformation// and fill the form with the following data:
+** //XSLT for Export//: put the full path to **phpwiki/admin/odt2phpwiki.xsl**
+
+=== Open Office Converter Usage
+
+Open your Word document in Open Office.
+
+Select //Export...// in the //File// menu, then select //Phpwiki// in //File format// menu.
+
+You will get a text file ({{{.txt}}}). Copy and paste the content of this file in your wiki page.
+
+Please note the following:
+* Tables will always be bordered ({{{class="bordered"}}}), regardless they are or not in Word; you might want to change this in the generated content.
+* If there was a table of contents in your Word file, you can delete it and replace it with the ~CreateToc plugin (use the TOC button from the Edit Toolbar).
+* If there were images in your document, you should also upload them in the wiki.

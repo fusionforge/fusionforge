@@ -1,0 +1,51 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FWatchPagePlugin 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FWatchPagePlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~WatchPage** [[Help:WikiPlugin|plugin]] allows to manage notifications e-mails per page.
+
+== Usage ==
+{{{
+<<WatchPage arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| The page to execute upon
+| current pagename
+|-
+| **mode**
+|
+| add
+|}
+
+== Example ==
+
+{{{
+<<WatchPage page=HomePage>>
+}}}
+
+<<WatchPage page=HomePage>>
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

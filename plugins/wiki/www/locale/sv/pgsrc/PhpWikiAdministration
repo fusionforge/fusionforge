@@ -1,0 +1,50 @@
+Date: Tue, 15 Mar 2011 18:42:26 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: PhpWikiAdministration 7998 2011-03-15 17:43:49Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=PhpWikiAdministration;
+  flags=PAGE_LOCKED;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+== Detta fungerar bara om du är inloggad som ADMIN
+
+-----------
+
+==== ZIP-filer av databasen
+
+ **[ZIP Snapshot | phpwiki:zip=snapshot]** : innehåller endast den senaste versionen
+
+ **[ZIP Dump | phpwiki:?zip=all]** : innehåller alla arkiverade versioner
+
+De här länkarna leder till zipfilerna, som genereras direkt, och
+innehåller den senaste versionen av alla sidor på denna
+~PhpWiki. Sidorna lagras, en per fil, som MIME (RFC2045)
+e-postmeddelanden (RFC822), med "content type" application/x-phpwiki
+för den senaste versionen och multipart/mixed för den arkiverade
+versionen. I det senare fallet finns det en underdel (med "content
+type" application/x-phpwiki) för varje version av sidan (i kronlogisk
+ordning). Brevkroppen innehåller texten till sidan medan sidans
+metadata finns som parametrar till Content-Type i brevhuvudet.
+
+==== Ladda / Dumpa serialiserade sidor
+
+Här kan du ladda eller dumpa sidor av din Wiki i valfri katalog.
+
+**Dump**
+
+%%ADMIN-INPUT-dumpserial-Dumpa_serialiserade_sidor%%
+
+Sidor kommer att skrivas som serialiserade strängar av PHP-associativa
+vektorer, vilket betyder att de inte är läsbara. Om katalogen inte
+existerar kommer ~PhpWiki att försöka skapa en åt dig. Se till att din
+webbserver har skrivrättigheter i katalogen!
+
+**Ladda**
+
+%%ADMIN-INPUT-loadserial-Ladda_serialiserade_sidor%%
+
+Om du har dumpat en mängd med sidor från ~PhpWiki kan du ladda dem här.
+Observera att sidorna i din databas kommer att skrivas över. Om du
+vill kan du bara ta bort de sidor från katalogen som du inte vill
+ladda.

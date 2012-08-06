@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="gm_introduction">
+  <title>Introduction</title>
+  <section>
+    <title>About this manual</title>
+    <para>
+      This manual is probably obsolete in many parts, as it has unfortunately not been updated as frequently as the source code.
+    </para>
+    <para>
+      This manual groups several guides bundled together into one single document: <xref linkend="installation_guide" />, <xref linkend="administration_guide" />, <xref linkend="user_guide" /> and <xref linkend="contribution_guide" />. Each guide is intended for a particular audience, and is also available separately.
+    </para>
+    <section>
+      <title>Copyright and license</title>
+      <para>This manual is copyrighted by the different authors and released under a FIXME license</para>
+    </section>
+  </section>
+  <section>
+    <title>About FusionForge</title>
+    <para>
+   FusionForge is a software for collaborative development for the software community. It provides a full configured development system with versioning, a project web site and tools for communication between members of a development team.  The tools provided by FusionForge allows team members to communicate and organize their work; this allows the creation of a knowledgebase.
+  </para>
+    <para>
+   A complete configurated FusionForge system will give you the following features <!-- TODO : this should rather point to the list of features in the user guide, maybe -->:
+  </para>
+    <orderedlist>
+      <listitem>
+        <para>A Web site for every project</para>
+      </listitem>
+      <listitem>
+        <para>Versioning via CVS or Subversion</para>
+      </listitem>
+      <listitem>
+        <para>Shell access to the server for the developers</para>
+      </listitem>
+      <listitem>
+        <para>A web site for project coordination and comunication between team members:</para>
+        <orderedlist>
+          <listitem>
+            <para>Discussion Forums - For discussions between team members</para>
+          </listitem>
+          <listitem>
+            <para>Bug tracking - Allow registration and administration of bugs</para>
+          </listitem>
+          <listitem>
+            <para>Support requests, patch submissions, and enhancement requests</para>
+          </listitem>
+          <listitem>
+            <para>Comunication between project members using mailing lists</para>
+          </listitem>
+          <listitem>
+            <para>Sharing of documentation</para>
+          </listitem>
+          <listitem>
+            <para>Handling of todo lists, tasks, etc</para>
+          </listitem>
+          <listitem>
+            <para>File uploads/releases</para>
+          </listitem>
+          <listitem>
+            <para>Posting of news - Every project can have its own news items.</para>
+          </listitem>
+          <listitem>
+            <para>Code Snippets - Provides of a basic knowledgebase that can contain code fragments, HOWTOs, etc.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </orderedlist>
+    <para>
+   The tasks and the tracker items (to track bugs, patches, support requests, enhancement requests) can be classified using status, priority, category.
+  </para>
+    <para>
+   The system provides also a classification system of the projects, a user profile, and a user rating system.
+  </para>
+  </section>
+  <section>
+    <title>FusionForge History</title>
+    <para>
+      To avoid confusion with the proprietary versions of GForge (known as GForge Advanced Server, GForge Express Edition and GForge Community Edition), the free/libre/opensource codebase was renamed/forked, to be separately maintained under the name FusionForge by the main developers of the free GForge 4.x codebase.
+    </para>
+    <para>
+   GForge was itself a fork of the 2.61 SourceForge code, which was only available via anonymous CVS from VA (Research|Linux|Software). Since VA had not released the source in over one year, despite their promises to the contrary, a fork was necessary to ensure a viable open source version of the codebase. The GForge project was formed and maintained by Tim Perdue, the original author of much of the original SourceForge web code.
+  </para>
+  </section>
+</chapter>

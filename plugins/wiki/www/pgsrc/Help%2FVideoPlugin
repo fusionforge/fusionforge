@@ -1,0 +1,77 @@
+Date: Tue, 11 Jan 2011 13:48:05 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FVideoPlugin 7826 2011-01-11 12:52:54Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FVideoPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~Video** [[Help:WikiPlugin|plugin]] allows to include video in a wiki page.
+Video file must be encoded in FLV format.
+
+The Video plugin can also be called with the ~{~{video.flv~}~} syntax.
+
+== Arguments ==
+
+Use only one of ##url## or ##file## arguments at a time.
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **url**
+| The url of a video file.
+| none
+|-
+| **file**
+| The name of a video file that has been uploaded.
+| none
+|-
+| **width**
+| The width of the video (in pixels).
+| 460
+|-
+| **height**
+| The height of the video (in pixels).
+| 320
+|-
+| **autoplay**
+| Auto play the video when page is displayed.
+| false
+|}
+
+== Example ==
+
+A video:
+{{{
+<<Video url=http://a.video.server/a_video.flv>>
+}}}
+
+Another video:
+{{{
+<<Video file=another_video.flv>>
+}}}
+
+This is equivalent to:
+{{{
+{{another_video.flv}}
+}}}
+
+== Authors ==
+
+* Roger Guignard, Alcatel-Lucent
+* Marc-Etienne Vargenau, Alcatel-Lucent
+
+== See Also ==
+* [[Help:Images]]
+* [[Help:Adobe Flash]]
+* [[Help:Wikicreole]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

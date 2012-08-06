@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>Mini GForge/Sourceforge FAQ</title>
+</head>
+<body>
+
+<b>Question:</b>
+What is available?
+
+<blockquote><b>Answer:</b> <BR>
+You can have a look <a href=http://people.debian.org/~bayle/debian />there</a>
+to see what's available</blockquote>
+
+<b>Question:</b>
+How to get the packages?
+
+<blockquote><b>Answer:</b> <BR>
+Add the following lines to you /etc/apt/sources.list <pre>
+deb http://people.debian.org/~bayle/debian stable/
+deb-src http://people.debian.org/~bayle/debian stable/
+</pre> or <pre>
+deb http://christian.bayle.free.fr/debian stable/
+deb-src http://christian.bayle.free.fr/debian stable/
+</pre> (Christian's pages), or <pre>
+deb http://people.debian.org/~lolando/debian unstable/
+deb-src http://people.debian.org/~lolando/debian unstable/
+</pre> or <pre>
+deb http://roland.mas.free.fr/debian unstable/
+deb-src http://roland.mas.free.fr/debian unstable/
+</pre> (Roland's pages). Depending on our real life activity, one may be more
+up-to-date than the other.<br>
+Then run: <pre>
+apt-get update
+</pre> <BR>
+You have now several possibilities:
+<UL>
+	<LI>You never installed any sourceforge or gforge package, just: <pre>
+apt-get install gforge
+</pre> and answer carefully to all the questions, it is preferable to let the
+	install touch your config files, though it's not the default because of
+	debian policy.
+	<LI>You want old sourceforge (more tested than gforge, with themes
+	and foundries, almost the classical 2.6.1 coming from the last known
+	cvs snapshot from VA. <pre>
+apt-get install sourceforge
+</pre>
+	<LI>You want new gforge, but you have already sourceforge
+	installed <BR>
+	<pre>
+apt-get install gforge-sourceforge-transition
+</pre> will dump your db and move your files, then <pre>
+apt-get install gforge
+</pre> will uninstall sourceforge and install gforge with the dumped data
+</UL>
+</blockquote>
+
+<b>Question:</b>
+How to get the gforge source code?
+
+<blockquote><b>Answer:</b> <BR>
+<UL>
+	<LI>From debian distro <BR>
+<pre>
+apt-get source gforge
+</pre>
+	<LI>From CVS <BR>
+<pre>
+cvs -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/gforge login
+</pre> And just return for the password <pre>
+cvs -z3 -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/gforge co -d gforge-3.0 gforge
+</pre>
+</UL>
+</blockquote>
+
+<b>Question:</b>
+Where is the savannah project page?
+
+<blockquote><b>Answer:</b> <BR>
+<A href=http://savannah.nongnu.org/projects/gforge />http://savannah.nongnu.org/projects/gforge/</A>
+</blockquote>
+
+<b>Question:</b>
+Where is the Gforge home page?
+
+<blockquote><b>Answer:</b> <BR>
+<A href=http://gforge.org />http://fusionforge.org/</A></blockquote>
+
+<b>Question:</b>
+How do I build this packages?
+<blockquote><b>Answer:</b> <BR>
+go into gforge-3.0 dir and run <pre>
+debuild
+</pre> The debuild tool is in the devscripts Debian package. If you run this
+command on Debian Woody (stable), you may have to upgrade some needed
+tools (debconf, debhelper, ...). To do that, add the lines for Debian
+testing in your apt sources file and then try something like: <pre>
+apt-get -t &lt;needed version&gt; install debhelper
+</pre> When the packages are built, do the following: <pre>
+mkdir /directory_of_your_choice/debian
+cd /directory_of_your_choice
+dpkg-scanpackages debian /dev/null | gzip &gt; debian/Packages.gz
+echo "deb file:/directory_of_your_choice debian/" &gt;&gt; /etc/apt/sources.list
+apt-get update
+apt-get install gforge
+</pre></blockquote>
+
+<b>Question:</b>
+Where do I find help?
+
+<blockquote><b>Answer:</b> <BR>
+For more info you can join us on IRC at irc.openprojects.net on #gforge
+(GForge package) or #debian-devel-fr (French) <BR>
+Mailing lists are there: <A
+	HREF=http://savannah.nongnu.org/mail/?group=gforge>http://savannah.nongnu.org/mail/?group=gforge</A>
+
+</blockquote>
+</body>
+</html>

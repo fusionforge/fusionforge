@@ -1,0 +1,22 @@
+Index: src/db/upgrade-db.php
+===================================================================
+--- src.orig/db/upgrade-db.php
++++ src/db/upgrade-db.php
+@@ -197,16 +197,7 @@
+ 		if (!$res) {
+ 			show(db_error()."\n");
+ 			show("QUERY: $query\n");
+-			show("Continue executing ([Y]es/[N]o)?\n");
+-			// Read the input
+-			$answer = strtolower(trim(fgets(STDIN)));
+-			if ($answer != 'y' && $answer != 'yes') {
+-				//db_rollback();
+-				return false;
+-			} else {
+-				//db_commit();
+-				//db_begin();
+-			}
++			return false;
+ 		}
+ 	}
+ 

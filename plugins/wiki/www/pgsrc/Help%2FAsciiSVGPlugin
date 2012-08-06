@@ -1,0 +1,98 @@
+Date: Fri, 10 Sep 2010 13:46:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FAsciiSVGPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FAsciiSVGPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~AsciiSVGPlugin** [[Help:WikiPlugin|plugin]] is an interface to
+[[http://www1.chapman.edu/~jipsen/svg/asciisvg.html]]
+
+Requires ENABLE_XHTML_XML = true
+
+Syntax: [[http://www1.chapman.edu/~jipsen/svg/asciisvgcommands.html]]
+
+If you are using Internet Explorer 6 + Adobe SVGviewer (often included
+by default with Windows XP) or SVG-enabled Firefox (2.0 or above)
+then you should see the examples.
+
+== Usage ==
+{{{
+<<AsciiSVG width= height= onmousemove="" script=""
+         code...
+>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **height**
+| graph width
+| 200
+|-
+| **height**
+| graph height
+| 200
+|-
+| **script**
+|
+| false
+|-
+| **onmouseover**
+|
+| false
+|}
+
+All other arguments are passed to the ASCIISvg javascript library and rendered as SVG.
+
+See [[http://www1.chapman.edu/~jipsen/svg/asciisvg.html]]
+
+== Example ==
+
+{{{
+<<AsciiSVG width="117" height="117"
+  initPicture(-10,10)
+  axes()
+  stroke = "red"
+  p = []
+  with (Math)
+    for (t = 0; t < 10.01; t += 0.05)
+      p[p.length] = [t*cos(PI*t), t*sin(PI*t)]
+  path(p)
+>>
+}}}
+
+<<AsciiSVG width="117" height="117"
+  initPicture(-10,10)
+  axes()
+  stroke = "red"
+  p = []
+  with (Math)
+    for (t = 0; t < 10.01; t += 0.05)
+      p[p.length] = [t*cos(PI*t), t*sin(PI*t)]
+  path(p)
+>>
+
+== Known Problems ==
+
+With multiple ~AsciiSVG plugins on the same page the second and subsequent ones will have the same width and height.
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+* [[Help:AsciiMathPlugin]]
+* [[Help:ChartPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

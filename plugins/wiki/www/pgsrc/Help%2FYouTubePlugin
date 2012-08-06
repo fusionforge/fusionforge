@@ -1,0 +1,127 @@
+Date: Thu,  9 Dec 2010 14:49:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FYouTubePlugin 7756 2010-12-09 13:49:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FYouTubePlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+== Usage ==
+{{{
+  <<YouTube v=-dnL00TdmLY
+           width=425 height=350
+           size=medium|small|large
+           style=inline|link
+           autoplay=0|1
+           browse="Daily Pick|Most Recent|Most Viewed|Top Rated|
+                   Most Discussed|Top Favorites|Most Linked|
+                   Recently Featured|Most Responded|Watch on Mobile"
+           time="Today|This week|This month|All Time"
+           category="All|Autos & Vehicles|Comedy|Entertainment|
+                   Film & Animation|Gadgets & Games|Howto & DIY|Music
+                   News & Politics|People & Blogs|Pets & Animals|
+                   Sports|Travel & Places"
+           language="All|English|Spanish|Japanese|German|Chinese|French"
+ >>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **v**
+| key of the video
+| required, or define browse
+|-
+| **browse**
+| One of "Daily Pick", "Most Recent", "Most Viewed", "Top Rated",
+"Most Discussed", "Top Favorites", "Most Linked", "Recently Featured",
+"Most Responded", "Watch on Mobile"
+| optional, if v is empty
+|-
+| **time**
+| One of "Today", "This Week", "This Month", "All Time" (optional).
+| Today
+|-
+| **category**
+| One of "All", "Autos & Vehicles", "Comedy", "Entertainment",
+"Film & Animation", "Gadgets & Games", "Howto & DIY", "Music",
+"News & Politics", "People & Blogs", "Pets & Animals", "Sports",
+"Travel & Places" (optional).
+| All
+|-
+| **language**
+| One of "All", "English", "Spanish", "Japanese", "German", "Chinese", "French" (optional).
+| All
+|-
+| **width**
+| Video width (optional).
+| 425
+|-
+| **height**
+| Video height (optional).
+| 350
+|-
+| **autoplay**
+| If autoplay=1 it starts automatically to play, otherwise to have to click on it (optional).
+| 0
+|-
+| **style**
+| If link will display a small icon with a link to the Youtube video (optional).
+| inline
+|-
+| **size**
+| Video size (medium or small or large). Overrides width and height (optional).
+| medium
+|}
+
+== Examples ==
+
+=== Link ===
+
+{{{
+<<YouTube v=-dnL00TdmLY style=link>>
+}}}
+
+<<YouTube v=-dnL00TdmLY style=link>>
+
+=== Inline ===
+
+{{{
+<<YouTube v=-dnL00TdmLY>>
+}}}
+
+<<YouTube v=-dnL00TdmLY>>
+
+=== Daily Pick ===
+
+{{{
+<<YouTube browse="Daily Pick">>
+}}}
+
+<!-- <<YouTube browse="Daily Pick">> -->
+
+=== Top Rated (This Month) ===
+
+{{{
+<<YouTube browse="Top Rated" time="This Month">>
+}}}
+
+<!-- <<YouTube browse="Top Rated" time="This Month">> -->
+
+== See Also ==
+* [[Help:VideoPlugin]]
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

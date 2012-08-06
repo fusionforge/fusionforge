@@ -1,0 +1,21 @@
+#!/bin/sh
+# daily backup of a serialdump to rcs-style ,v files with full history
+
+BACKUPDIR=/var/www/wikidb/pgsrc
+
+#chgrp -R apache $backupdir
+chmod -R ug+rw $BACKUPDIR
+
+for p in $BACKUPDIR/*; do
+    # Set the file-date as saved by phpwiki
+    date=`perl -ne'if ($.==1){s/Date: //; s/ \+0100//; print}' "$p"`
+    touch -d "$date" "$p"
+    if [ -e "RCS/$p,v" ]
+    then
+	# check in the new version
+  	ci -u -m"." "$p" > /dev/null
+  else
+	# create new rcs revision
+        rcs -i -U -t-"new wikipage" "$p" 2> /dev/null
+  fi
+done

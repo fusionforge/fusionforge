@@ -1,0 +1,36 @@
+<?php // -*-php-*-
+// $Id: body.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+// Todo: set the body attr dynamically. here class="ns-2" for mozilla
+?>
+<body <?php echo $WikiTheme->getMoreAttr('body') ?>>
+    <div id="global-wrapper">
+      <div id="column-content">
+	<div id="content">
+	  <?php echo Template('top') ?>
+	  <div id="bodyContent">
+	    <?php echo $CONTENT ?>
+
+	    <!-- end content -->
+	    <div class="visualClear"></div>
+	  </div>
+	</div>
+	<?php if (empty($NOSIGNIN)) { ?>
+	  <?php echo Template('signin') ?>
+	<?php } ?>
+	<?php echo Template('logo') ?>
+      </div>
+      <div id="column-one">
+	<?php echo Template('navbar') ?>
+	<?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
+	  <?php echo Template('actionbar') ?>
+	  <?php echo Template('tags') ?>
+	<?php } ?>
+      </div>
+      <div id="footer"><?php // for top & bottom toolbars stylesheet ?>
+        <?php echo Template('browse-footer') ?>
+      </div>
+      <div id="bottom">
+	<?php echo Template('bottom') ?>
+      </div>
+    </div>
+</body>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section id="ug_project_news">
+  <title>News</title>
+  <para>
+  The news section allows you to insert news relative to your project. A news can be monitored similar to tracker items, forums. News will be displayed on the project homepage and also on the site homepage, if the site administrators approve the news.
+ </para>
+  <para>
+  News are generally used to announce software releases, milestones, or significant changes in the software.
+ </para>
+  <section id="ug_project_news_insert">
+    <title>Inserting a news item</title>
+    <para>You can insert a news item by clicking on the <emphasis>Submit</emphasis> link.</para>
+    <para>You can post news about your project if you are an admin on your project.</para>
+    <para>All posts for your project will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the administration team before they will appear on the FusionForge home page.</para>
+    <para>You may include URLs in your submissions. URLs that start with http:// are made clickable.</para>
+    <para>HTML is allowed in your submissions but filtered.</para>
+    <para>The news item will go to the <emphasis>News Admin</emphasis> for approval for publication.</para>
+  </section>
+  <section id="ug_project_news_approving">
+    <title>Modifying/Approving a news item</title>
+    <para>You can modify or/and approve a news by clicking on the <emphasis>Admin</emphasis> link.</para>
+    <para>You can select the status of the news: Displayed or Deleted (the news will be deleted), you can insert the Subject (title) and the details.</para>
+  </section>
+  <section id="ug_project_news_rss">
+    <title>Subscribing RSS feed for project news</title>
+    <para>You can subscribe a RSS feed for project news by clicking on the RSS icon on the <emphasis>Summary</emphasis> page of the project.</para>
+  </section>
+</section>

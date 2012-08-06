@@ -1,0 +1,64 @@
+// single category lineplot, horizontal (bad)
+#setifnotgiven legend = "max+0.1 max-0.5" 
+
+#proc getdata
+  file: @resultdata
+  //fieldnameheader: yes
+  fieldnames: inc mem msg
+  delim: tab
+#endproc
+
+#proc areadef
+  title: memory usage (KB)
+  titledetail: align=R
+  rectangle: 0.5 2.5 7.5 7
+  yrange: 4000 36000
+  xautorange: datafield=1
+//  yrange: 11 1
+
+#proc yaxis
+// label: memory usage (KB)
+//  stubs: datafields=mem
+  stubs: inc 1000
+  stubslide: +0.05
+//  stubvert: yes
+  grid: color=orange
+//  gridskip: min
+  location: max
+//  tics: yes
+
+#proc xaxis
+  stubs: datafields=msg
+  stubvert: yes
+  grid: color=green
+//  location: max
+//  ticincrement: 100 1000
+ 
+#proc lineplot
+  xfield: 1
+  yfield: 2
+  fill: green
+  gapmissing:  yes
+  linedetails: color=blue
+  ptlabelfield: 2
+  ptlabeldetails: adjust=0.05,0 size=7 align=L
+  //numbers: yes
+  //legendsampletype: line+symbol
+#endproc
+
+#if X = Y
+
+#proc rangebar
+  datafield: mem
+  axis: x
+#endproc
+
+#proc bars
+  lenfield: mem
+  locfield: msg
+  legendlabel: mem
+#endproc
+
+#endif
+
+#endproc

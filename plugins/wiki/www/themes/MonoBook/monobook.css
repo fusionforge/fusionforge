@@ -1,0 +1,18 @@
+/**
+ * $Id: monobook.css 6204 2008-08-26 15:12:03Z vargenau $
+ * We have two possibilities to override the default:
+ * 1. import is ns4 incompatible
+ * 2. add a 2nd css in themeinfo.php
+ */
+
+/* @import url(../default/phpwiki.css); */
+
+@import url(main.css);
+
+/* For emacs users
+ *
+ * Local Variables:
+ * mode: c
+ * c-file-style: cc-mode
+ * End:
+ */

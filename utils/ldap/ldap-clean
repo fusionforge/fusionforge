@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+#
+#  Clean LDAP database 
+#  by pfalcon@users.sourceforge.net 2000-10-18
+
+require("include.pl");  # Include all the predefined functions
+
+$cmd = "${ldap_prefix}ldapdelete -h $sys_ldap_host -p $sys_ldap_port -D '$sys_ldap_admin_dn' -W -r '$sys_ldap_base_dn'";
+print "Destroying LDAP database...\n";
+system($cmd);

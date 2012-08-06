@@ -1,0 +1,69 @@
+<?php // -*-php-*-
+// $Id: actionbar.tmpl 8149 2011-10-03 10:12:40Z vargenau $
+  $dbh = $request->getDbh();
+  $isAdmin = $user->isAdmin();
+  $pagename = $page->getName();
+  $isActionPage = isActionPage($pagename);
+  $isBrowse = $request->getArg('action') == 'browse';
+  $mayEdit = mayAccessPage('edit', $pagename);
+  $mayChange = mayAccessPage('change', $pagename);
+?>
+<div class="portlet" id="p-cactions">
+  <h5><?php echo _("Views") ?></h5>
+  <ul>
+    <?php if ($request->getArg('action') != "") { ?>
+      <?php echo ActionButton("browse", _("View Page"), false, array('title' => _("View Page")." [alt-c]")) ?>
+    <?php } else { ?>
+      <li class="selected"><a class="named-wiki" name="browse"><?php echo _("View Page") ?></a></li>
+    <?php } ?>
+    <?php if (($isAdmin or $mayEdit) and $revision) { ?>
+      <?php echo ActionButton("edit", $dbh->isWikiPage($page->getName()) ? ($revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) : _("Create Page"), false, array('id' => 'btn-edit', 'title' => _("You can edit this page. Please use the preview button before saving.")." [alt-e]")) ?>
+      <?php if (ENABLE_WYSIWYG) { ?>
+        <?php echo Button(array("action" => "edit", "mode"=> "wysiwyg"), _("Wysiwyg Editor"), false, array('id' => 'btn-wysiwyg-edit')) ?>
+      <?php } ?>
+    <?php } elseif ($page->exists()) { ?>
+      <?php echo ActionButton("viewsource", _("View Source")) ?>
+    <?php } ?>
+    <?php echo ActionButton(_("PageHistory"),_("History"),false,array('title'=>_("Past versions of this page.")." [alt-h]")) ?>
+    <?php echo ActionButton("diff") ?>
+    <?php if ($user->isSignedIn()) { ?>
+      <?php echo ActionButton(_("WatchPage"), _("Watch"), false, 
+		       array('title'=>_("Add/Remove this to/from the list of pages you're monitoring for changes")." [alt-l]")) ?>
+    <?php } ?>
+  </ul>
+</div>
+
+<?php if ($user->isSignedIn()) { ?>
+<div class="portlet" id="p-tbx">
+  <h5><?php echo _("Special Actions") ?> <?php echo $WikiTheme->folderArrow('p-tbx', 'Closed') ?></h5>
+  <div class="pBody" id="p-tbx-body" style="display:none;">
+  <ul>
+     <?php if ($isAdmin or $mayEdit) { ?>
+      <?php echo ActionButton('rename') ?>
+     <?php } ?>
+     <?php if (!empty($revision) and ($isAdmin or mayAccessPage('remove', $pagename))) { ?>
+      <?php echo ActionButton('remove') ?>
+      <?php echo ActionButton('purge') ?>
+      <?php echo ActionButton('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?>
+     <?php } ?>
+     <?php if ($isAdmin or $mayChange) { ?>
+      <?php echo ActionButton($page->get('locked') ? 'unlock' : 'lock') ?>
+      <?php if (ENABLE_PAGEPERM and $mayChange) { ?>
+       <?php echo ActionButton('chown') ?>
+       <?php echo ActionButton('setacl') ?>
+     <?php }} ?>
+     <?php echo ActionButton("viewsource", _("View Source")) ?>
+     <?php echo ActionButton(array('action'=>'PageInfo'), _("PageInfo"), $pagename) ?>
+     <?php echo ActionButton(_("AuthorHistory")) ?>
+     <?php echo ActionButton(_("PageHistory")) ?>
+     <?php echo ActionButton("diff") ?>
+     <?php if ($isAdmin) { ?>
+      <?php echo ActionButton(_("PageDump")) ?>
+      <?php if (USECACHE) { ?>
+       <?php echo ActionButton(array('nocache' => 'purge'), _("PurgeHtmlCache"), $pagename,
+		        array('title'=>_("Purge HTML cache for this page. Regenerate from WikiMarkup when next accessed."))) ?>
+     <?php }} ?>
+  </ul>
+  </div>
+</div>
+<?php } //isSignedIn ?>

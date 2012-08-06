@@ -1,0 +1,332 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>4.5. Tracker</title>
+<link rel="stylesheet" href="docbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<link rel="start" href="index.html" title="FusionForge User Guide">
+<link rel="up" href="ug_project.html" title="4. Project functions">
+<link rel="prev" href="ug_project_forums.html" title="4.4. Forums">
+<link rel="next" href="ug_project_mailing_lists.html" title="4.6. Mailing Lists">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">4.5. Tracker</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ug_project_forums.html">Prev</a> </td>
+<th width="60%" align="center">4. Project functions</th>
+<td width="20%" align="right"> <a accesskey="n" href="ug_project_mailing_lists.html">Next</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ug_project_tracker"></a>4.5. Tracker</h3></div></div></div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_what_is"></a>4.5.1. What is the Tracker?</h4></div></div></div>
+<p>
+			The Tracker is a generic system where you can store items like bugs, feature requests, patch submissions, etc.
+		</p>
+<p>
+			You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.
+		</p>
+<p>
+			Trackers are referred to as “<span class="quote">Artifact Types</span>” and individual pieces of data are “<span class="quote">Artifacts</span>”. “<span class="quote">Bugs</span>” might be an Artifact Type, while a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming.
+		</p>
+<p>
+			When a project is created, FusionForge creates automatically 4 trackers:
+		</p>
+<div class="variablelist"><dl>
+<dt><span class="term">Bugs</span></dt>
+<dd><p>Used for Bug tracking</p></dd>
+<dt><span class="term">Support Requests</span></dt>
+<dd><p>Users can insert here support requests and receive support</p></dd>
+<dt><span class="term">Patches</span></dt>
+<dd><p>Developers can upload here patches to the software</p></dd>
+<dt><span class="term">Feature Requests</span></dt>
+<dd><p>Requests for enhancements of the software should be posted here</p></dd>
+</dl></div>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_using"></a>4.5.2. Using a Tracker</h4></div></div></div>
+<p>
+			The following descriptions can be applied to any of the trackers. The functionalities between the different trackers are the same, we'll use the Bugs Tracker as example to describe the functionality of all trackers.
+		</p>
+<p>
+			The Tracker provides the following functions:
+		</p>
+<div class="orderedlist"><ol type="1">
+<li><p>Submitting a new item</p></li>
+<li><p>Browsing of Items</p></li>
+<li><p>Downloading CSV file</p></li>
+<li><p>Reporting</p></li>
+<li><p>Monitoring</p></li>
+<li><p>Administration</p></li>
+</ol></div>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_submit_new"></a>4.5.3. Submitting a new Bug</h4></div></div></div>
+<p>
+			To submit a new bug, click on the <span class="guimenuitem">Submit New</span> link. A form will be displayed, where you can insert/select the following data:
+		</p>
+<div class="variablelist"><dl>
+<dt><span class="term">Assigned To</span></dt>
+<dd><p>You can assign the item to a user. Only users which are “<span class="quote">Technicians</span>” are listed here.</p></dd>
+<dt><span class="term">Priority</span></dt>
+<dd><p>You can select the Priority of the item. In the Browse list, and the homepage of the users, priorities are displayed in different colors, and can be ordered by priority.</p></dd>
+<dt><span class="term">Summary</span></dt>
+<dd><p>Give a short description of the bug, e.g. Logout function gives an SQL Error</p></dd>
+<dt><span class="term">Detailed Description</span></dt>
+<dd><p>Insert the most detailed description possible.</p></dd>
+<dt><span class="term">File upload</span></dt>
+<dd>
+<p>You can also upload files as attachment to the bug. This can be used to attach a screenshot with the error and the log file of the application.</p>
+<p>To upload files, select files using the <span class="emphasis"><em>Browse</em></span> button.
+                                              You can upload up to 5 files at a time.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>Attachments to tracker items can be no larger than 256KB.</p>
+</div>
+</dd>
+</dl></div>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>Some custom fields may have been added by administrators. Default bug trackers propose the following additional fields: Resolution, Severity, Version, Component, Operating System, Product, Hardware, URL.</p>
+</div>
+<p>When the user is not logged, he will still be proposed to submit new bugs.
+                If the Tracker allows anonymous posting, he will be able to post without logging in.
+                If the Tracker does not allow anonymous posting, clicking on the <span class="emphasis"><em>Submit New</em></span> link
+                will prompt the user with the login banner.
+                </p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_browse_bugs"></a>4.5.4. Browse Bugs</h4></div></div></div>
+<p>
+			The Browse page shows the list of bugs. You
+			can create and save queries allowing filtering
+			on any defined fields.
+		</p>
+<p>
+			You can sort the items by ID, Summary, Open Date, Submitter and the Ordering (ascending, descending).
+		</p>
+<p>
+			The different colors indicate the different priorities of the bug; a * near the open date indicates that the request is more than 30 days old. The overdue time (default 30 days) is configurable for each tracker.
+		</p>
+<p>
+			When you click on the summary, you go to the detail/modify Bug page.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_modify_bugs"></a>4.5.5. Modify Bugs</h4></div></div></div>
+<p>
+			In the modify Bug page, you can modify the data you inserted, and also add the following information:
+		</p>
+<div class="variablelist"><dl>
+<dt><span class="term">Data Type</span></dt>
+<dd><p>This combo box lists the trackers of the project. If you select a different tracker and submit the changes, the item will be reassigned to the selected tracker.</p></dd>
+<dt><span class="term">Status</span></dt>
+<dd><p>The status indicates the status of the item. When an item is inserted, it is created in the “<span class="quote">Open</span>” state. When you fix a bug, you should change the state to “<span class="quote">Closed</span>”.</p></dd>
+<dt><span class="term">Canned Responses</span></dt>
+<dd><p>Canned responses are prefixed responses. You can create canned responses for your project in the admin section and select the responses in the combo box.</p></dd>
+</dl></div>
+<p>
+			The Changelog on the bottom of the page shows in chronological order the changes applied to the item. Also all followups can be viewed.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_monitor_bugs"></a>4.5.6. Monitor Bugs</h4></div></div></div>
+<p>You can choose to monitor a tracker as a whole, or only individual tracker 
+                      entries.
+                </p>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="ug_project_tracker_monitor_entire_tracker"></a>4.5.6.1. Monitoring an entire tracker</h5></div></div></div>
+<p>
+                Go to the tracker page and select <span class="guibutton">Monitor</span> link.
+                </p>
+<p>
+                To stop monitoring the tracker, select <span class="guibutton">Stop Monitor</span> link.
+                </p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="ug_project_tracker_monitoring_tracker_entries"></a>4.5.6.2. Monitoring tracker entries</h5></div></div></div>
+<p>
+			If you select the <span class="guibutton">Monitor</span> button on the top left of the Bug detail page, bug monitoring will be enabled.
+		</p>
+<p>
+			When you are monitoring a bug, every change to the bug will be sent to you by email.
+		</p>
+<p>
+			To disable bug monitoring, simply select the <span class="guibutton">Stop Monitoring</span> button.
+		</p>
+</div>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_admin"></a>4.5.7. Admin Tracker</h4></div></div></div>
+<p>
+			If you are an Administrator of the tracker, you can add or change bug groups, categories, canned responses:
+		</p>
+<div class="variablelist"><dl>
+<dt><span class="term">Manage Custom Fields</span></dt>
+<dd>
+<p>You can add new fields or change the name of ones.</p>
+<p>You can select the type of box (select box, check box, radio button, text field, multi-select box and status) and the possible values.</p>
+</dd>
+<dt><span class="term">Add Update Canned Responses</span></dt>
+<dd><p>Canned responses are predefined responses. Creating useful generic messages can save you a lot of time when handling common requests.</p></dd>
+<dt><span class="term">Update preferences</span></dt>
+<dd>
+<p>Here you can update the following information on the tracker:</p>
+<div class="variablelist"><dl>
+<dt><span class="term">Name</span></dt>
+<dd><p>The name of the Tracker. This is the name displayed in the tracker list, e.g. Bug Submissions.</p></dd>
+<dt><span class="term">Description</span></dt>
+<dd><p>The description of the Tracker. E.g. This is the tracker dedicated to the Bugs of the project</p></dd>
+<dt><span class="term">Publicly Available</span></dt>
+<dd><p>By default, this checkbox is not enabled.</p></dd>
+<dt><span class="term">Allow non-logged-in postings</span></dt>
+<dd>
+<p>If this checkbox is enabled, also non logged-in users can post items to the tracker. If this checkbox is not enabled, only logged in users can post items.</p>
+<p>By default, this checkbox is not enabled.</p>
+</dd>
+<dt><span class="term">Send email on new submission to address</span></dt>
+<dd><p>All new items will be sent to the address inserted in the text box.</p></dd>
+<dt><span class="term">Send email on all changes</span></dt>
+<dd><p>If this checkbox is enabled, all changes on the items will be sent out via email. It is useful to check this radiobutton only if in the Send email address is inserted an email address.</p></dd>
+<dt><span class="term">Days still considered overdue</span></dt>
+<dd><p></p></dd>
+<dt><span class="term">Days till pending tracker items time out</span></dt>
+<dd><p></p></dd>
+<dt><span class="term">Free form text for the <span class="guimenuitem">Submit new item</span> page</span></dt>
+<dd><p>This allows you to put a specific introduction on the <span class="guimenuitem">submit new item</span> page.</p></dd>
+<dt><span class="term">Free form text for the <span class="guimenuitem">Browse items</span> page</span></dt>
+<dd><p>This allows you to put a specific introduction on the <span class="guimenuitem">Browse items</span> page.</p></dd>
+</dl></div>
+</dd>
+</dl></div>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_mass_update"></a>4.5.8. Mass Update</h4></div></div></div>
+<p>
+			If you are an Administrator of the tracker, you are also enabled for the Mass Update function.
+		</p>
+<p>
+			This function is visible in the browse bug page and allows you to update the following information:
+		</p>
+<div class="orderedlist"><ol type="1">
+<li><p>Priority</p></li>
+<li><p>Assignee</p></li>
+<li><p>Status</p></li>
+<li><p>Canned Response</p></li>
+</ol></div>
+<p>
+			When this function is enabled, a checkbox will appear at the left side of each bug id. You can check one or more of the ids, select one or more of the values in the Mass Update combo boxes and click Mass Update.
+		</p>
+<p>
+			All selected bugs will be modified with these new value(s). This function is very useful if you need to change the same information for more bugs; e.g. assigning 5 bugs to one developer or closing 10 bugs.
+		</p>
+<p>
+                        This function allow to update all selected box fields, not only mandatory fields but also custom fields.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_reporting"></a>4.5.9. Reporting</h4></div></div></div>
+<p>
+			The reporting functions allows to check the life-span of the Bug. The lifespan is the duration of the bug; it starts when the bug is inserted (opened) in the tracker and ends when the bug is closed.
+		</p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>By assignee</p></li>
+<li><p>Response time</p></li>
+</ul></div>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_searching"></a>4.5.10. Searching for bugs</h4></div></div></div>
+<p>
+			When using a tracker, a voice with the name of the tracker will appear in the search combo box. The search will be done on the description, the summary, the username of the submitter and the username of the assignee.
+		</p>
+<p>
+                        Giving a number will redirect to the corresponding tracker id.
+		</p>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_add_comment_by_email"></a>4.5.11. Adding a comment to a tracker by e-mail</h4></div></div></div>
+<p>
+            When a user receives an e-mail about a tracker, he can add
+            add a comment to this tracker by replying to this e-mail.
+          </p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>The e-mail reply must use plain text format. An HTML e-mail
+                      will lead to an error message.</p>
+</div>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ug_project_tracker_cli"></a>4.5.12. Managing trackers via CLI (Command-Line Interface)</h4></div></div></div>
+<p>We give here some basic examples of CLI commands. For more information,
+                      please consult the FusionForge Command-line interface (CLI) documentation.</p>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="ug_project_tracker_cli_login"></a>4.5.12.1. Logging in with CLI</h5></div></div></div>
+<pre class="screen">gforge.php -v login --username="user" --project=myproject</pre>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="ug_project_tracker_cli_list"></a>4.5.12.2. Getting the list of tracker entries via CLI</h5></div></div></div>
+<p>Use CLI to get the tracker id for a given project</p>
+<pre class="screen">gforge.php tracker typelist</pre>
+<p>Use CLI to get the list all bugs for a given project</p>
+<pre class="screen">gforge.php tracker list --type=xxx</pre>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="ug_project_tracker_cli_create"></a>4.5.12.3. Creating a tracker entry via CLI</h5></div></div></div>
+<pre class="screen">gforge.php tracker add --type=xxx --priority=4 --summary="New bug" 
+                       --details="This is a brand new bug"</pre>
+</div>
+<div class="section" lang="en-US">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="ug_project_tracker_cli_update"></a>4.5.12.4. Updating a tracker entry via CLI</h5></div></div></div>
+<pre class="screen">gforge.php tracker update --type=xxx --id=yyyy --priority=5 
+                   --summary="New summary" --details="New details"</pre>
+<p>You can include a Custom Field, e.g. Group</p>
+<pre class="screen">gforge.php tracker update --type=xxx --id=yyyy --priority=5 
+                          --summary="New summary" --group=zzzz</pre>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ug_project_forums.html">Prev</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ug_project.html">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ug_project_mailing_lists.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">4.4. Forums </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> 4.6. Mailing Lists</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

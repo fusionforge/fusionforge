@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+#
+#  Import LDIF file to LDAP database
+#  by pfalcon@users.sourceforge.net 2000-10-18
+
+require("include.pl");  # Include all the predefined functions
+
+if (!($#ARGV+1)) {
+	print "Usage: $0 <ldif_file>\n";
+	exit;
+}
+
+$cmd = "${ldap_prefix}ldapadd -h $sys_ldap_host -p $sys_ldap_port -D '$sys_ldap_admin_dn' -W -f $ARGV[0]";
+#print "$cmd\n";
+system($cmd);

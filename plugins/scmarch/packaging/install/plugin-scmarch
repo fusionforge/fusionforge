@@ -1,0 +1,2 @@
+plugins/scmarch/common/*             usr/share/gforge/plugins/scmarch/common/
+plugins/scmarch/etc/*.ini	     etc/@PACKAGE@/config.ini.d/

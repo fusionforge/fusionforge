@@ -1,0 +1,103 @@
+Date: Thu,  9 Dec 2010 18:12:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FRecentEditsPlugin 7768 2010-12-09 17:14:11Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FRecentEditsPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~RecentEdits** [[Help:WikiPlugin|plugin]] lists all recent edits in this wiki.
+
+== Usage ==
+{{{
+<<RecentEdits arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **pagename**
+| The page to execute upon
+| current pagename
+|-
+| **days**
+| Number of days. Specifying 0 will display modifications since wiki creation.
+| 2
+|-
+| **show_major**
+| Show major modifications
+| true
+|-
+| **show_deleted**
+| Show deleted pages
+| sometimes
+|-
+| **only_new**
+| Show only new pages
+| false
+|-
+| **author**
+| Show only modifications from a specific author
+| false
+|-
+| **owner**
+| Show only pages from a specific owner
+| false
+|-
+| **limit**
+| Do not show more pages that the limit.
+| false
+|-
+| **format**
+| Default is HTML. Other: rss, rss2, rss091, atom, sidebar, box, contribs
+| false
+|-
+| **daylist**
+| Comma-separated list of days
+| false
+|-
+| **difflinks**
+| Show diff links
+| true
+|-
+| **historylinks**
+| Show history links
+| false (true for Monobook and FusionForge)
+|-
+| **caption**
+| Custom caption
+|
+|-
+| **category**
+| Limit pages to a given category
+|
+|-
+| **pagematch**
+| Limit to pages matching pattern
+|
+|}
+
+== Example ==
+
+{{{
+<<RecentEdits limit=10>>
+}}}
+
+<<RecentEdits limit=10>>
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

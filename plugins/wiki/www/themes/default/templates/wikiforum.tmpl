@@ -1,0 +1,38 @@
+<?php // -*- php -*-
+// $Id: wikiforum.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+/* 
+navigation headline: "MainForum / SubPage / ThisTopic" comes for free
+
+other templates: forum-topics.tmpl: summary list of topics
+
+this  template:  detailed list of threads per topic
+
+action: "newtopic" or "postreply"
+*/
+$CDATE = $WikiTheme->formatDateTime($FORUM_CTIME);
+?>
+<div class="wikiforum wikiforum-form">
+<form action="<?php echo $request->getPostURL()?>" method="post" class="wikiaction"
+      accept-charset="<?php echo CHARSET?>">
+  <input type="hidden" name="forum[title]" value="<?php echo $FORUM_PARENT ?>" />
+  <?php echo HiddenInputs($request->getArgs()) ?>
+  <table class="wikiforum wikiforum-list">
+    <caption><?php echo _("New Topic")?>  &nbsp;&nbsp; <?php echo _("Post new")?> </caption>
+    <col class="label" width="10%" /><col width="100%" />
+    <tr><th align="center"><?php echo _("Author")?></th><th align="center"><?php echo _("Message")?></th></tr>
+
+    <tr>
+      <td align="left"><?php echo WikiLink($FORUM_CREATOR, 'if_known')?></td>
+      <td>
+        <table class="wikiforum wikiforum-message">
+          <tr><td align="left"><?php echo fmt("Posted: %s",$CDATE)?></td>
+              <td align="right"><?php echo _("Reply")?></td></tr>
+          <tr><td><?php echo $CONTENT ?></td></tr>
+        </table>
+     </td>
+   </tr>
+
+  </table>
+</form>
+</div>
+

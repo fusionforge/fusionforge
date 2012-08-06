@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>Migrating to GForge HOWTO</title>
+</head>
+<body>
+
+<center>
+<h2>Migrating to GForge HOWTO</h2>
+<h3>Updated 1/19/2004</h3>
+</center>
+
+<p>Lots of people are moving from various other SourceForge
+codebases to GForge. Here's some notes on how to do this. Please post
+comments/questions/improvements to the <a
+	href="http://gforge.org/forum/forum.php?forum_id=6">forums</a>.
+<p><b>SF 2.5 or SF 2.6 to GForge</b> <br>
+<p>The basic steps are:
+<ul>
+	<li>First run a <code>apt-get install
+	gforge-sourceforge-transition</code>. This dumps the database into <code>/var/lib/sourceforge/sf_dump_for_gforge</code>.
+
+
+	
+	<li>Now <code>mv /var/lib/sourceforge /var/lib/gforge</code>
+	<li>Now run a <code>apt-get install gforge</code>. This will find
+	the database dump and import it automagically.
+	<li>If all goes well, <code>/var/lib/gforge/sf_dump_for_gforge</code>
+	will be renamed <code>/var/lib/gforge/sf_dump_for_gforge.ok</code>. If
+	something fails, it'll be renamed to <code>/var/lib/gforge/sf_dump_for_gforge.ko</code>.
+
+
+	
+	<li>Note that <code>apt-get install gforge</code> will also remove
+	the <code>gforge-sourceforge-transition</code> package.
+</ul>
+You may read Jeremy Maziarz transition report found at
+<a
+	href="http://members.cox.net/jmaziarz/tmp/HOWTO-sourceforge-gforge-transition.txt">http://members.cox.net/jmaziarz/tmp/HOWTO-sourceforge-gforge-transition.txt</a>
+or in CVS docs/migrating-to-gforge-REPORT.txt
+
+
+
+<p><b>debian-sf to GForge</b> <br>
+This has been done - see <a
+	href="http://gforge.org/forum/forum.php?thread_id=173&forum_id=6">this</a>
+thread. Theme preferences may go away, but they can easily be reset.
+<p><b>SF Enterprise to GForge</b> <br>
+This has been done - see <a
+	href="http://gforge.org/forum/forum.php?thread_id=148&forum_id=6">this</a>
+thread on the forums. Looks like there are some database changes which
+might cause problems; not sure what those are.
+</body>
+</html>

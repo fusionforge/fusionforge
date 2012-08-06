@@ -1,0 +1,36 @@
+gforge-plugin-fckeditor
+--------------------
+
+This is the FCKEditor plugin for Gforge.  It prints FCKEditor input boxes when called
+
+Prerequisite:
+
+- Have FCKEditor in your gforge installation (as the day of the release, this is found in HEAD)
+
+Installation:
+
+- files from common/ go to /usr/share/gforge/plugins/fckeditor/common
+
+Setup:
+
+1. CONFIGURATION
+
+A) Go to GForge installation dir and enter the plugins folder
+
+NOTE : You can skip this step if you are putting the plugins in the GForge plugin folder 
+
+i.e. : /srv/www/gforge/gforge/plugins
+
+Run the command ln -s <path-to-fckeditor-plugin> ./fckeditor
+
+i.e. : If you have extracted the plugin in /srv/www/gforge/plugins/fckeditor/
+we should run "ln -s /srv/www/gforge/plugins/fckeditor/ ./fckeditor"
+
+B ) Run schema.psql to insert the plugin name and description into plugins table of GForge DB
+
+psql gforge -f schemas/schema.psql
+
+C ) You will see a checkbox per project in "Edit Public Info" to enable/disable the plugin
+
+ -- Daniel A. Pérez <daniel@gforgegroup.com>, 18/10/2005 04:09p.m.
+

@@ -1,0 +1,26 @@
+<?php // -*-php-*-
+// $Id: actionbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<?php
+if (empty($revision)) $revision = $page->getCurrentRevision(false);
+?>
+<?php echo Button(array('action'=>'PageInfo'),_("PageInfo"),$page->getName()) ?>
+<?php echo $SEP?><?php echo Button("edit", $revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) ?>
+<?php if ($user->isAdmin() or mayAccessPage('change',$page->getName())) { ?>
+  <?php echo $SEP?><?php echo Button($page->get('locked') ? 'unlock' : 'lock') ?>
+  <?php if (ENABLE_PAGEPERM) { ?>
+     <?php echo $SEP?><?php echo Button('chown') ?>
+     <?php echo $SEP?><?php echo Button('setacl') ?>
+  <?php } ?>
+<?php } ?>
+<?php if ($user->isAdmin() or mayAccessPage('remove',$page->getName())) { ?>
+   <?php echo $SEP?><?php echo Button('remove') ?>
+<?php } ?>
+<?php if (!empty($user) && $user->isAdmin()) { ?>
+  <?php echo $SEP?><?php echo WikiLink(_("PhpWikiAdministration"), "","Admin") ?>
+  <!-- Buttons really only for debugging. See info for more -->
+  <?php echo $SEP?><?php echo Button(_("PageHistory")) ?>
+  <?php echo $SEP?><?php echo Button("diff") ?>
+  <?php echo $SEP?><?php echo Button(_("PageDump")) ?>
+  <!-- End debugging buttons -->
+<?php } ?>

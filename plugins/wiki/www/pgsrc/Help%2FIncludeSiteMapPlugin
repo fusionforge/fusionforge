@@ -1,0 +1,91 @@
+Date: Thu,  9 Dec 2010 10:37:40 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FIncludeSiteMapPlugin 7753 2010-12-09 09:39:02Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FIncludeSiteMapPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+This is a quick mod of [[Help:BackLinksPlugin|BackLinks plugin]] to do the job recursively. If your
+site is categorized correctly, and all the categories are listed in
+[[:CategoryCategory|CategoryCategory]], then a recursive ~BackLinks there will produce a contents
+page for the entire site.
+
+The list is as deep as the recursion level (##reclimit##).
+
+== Usage ==
+{{{
+<<IncludeSiteMap direction=back|forward reclimit=4>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **direction**
+| Get BackLinks or forward links (links listed on the page)
+|
+|-
+| **firstreversed**
+| If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
+|
+|-
+| **excludeunknown**
+| If true (default) then exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.
+|
+|-
+| **exclude**
+|
+|
+|-
+| **include_self**
+|
+| 0
+|-
+| **noheader**
+|
+| 0
+|-
+| **page**
+|
+| The current page
+|-
+| **description**
+| Override default Description. Printed as header.
+|
+|-
+| **reclimit**
+|
+| 4
+|-
+| **info**
+|
+| false
+|}
+
+== Example ==
+
+{{{
+<<SiteMap page=PhpWikiDocumentation>>
+}}}
+
+<<SiteMap page=PhpWikiDocumentation>>
+
+== Author ==
+* Cuthbert Cat
+* Redesigned by [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+* [[Help:BackLinksPlugin]]
+* [[Help:SiteMapPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

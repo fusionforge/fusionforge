@@ -1,0 +1,27 @@
+<section id="cg_howto_contribute">
+	<title>How to contribute</title>
+	<para>
+		There are several ways to contribute to the FusionForge project.
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para>The first one is to give us a feedback about the software: what you like, what you don't like, features you like to be added in new versions, comments on documentation, etc.</para>
+		</listitem>
+		<listitem>
+			<para>You are willing to help develop new features. Give a look at the PM/Task Manager. The three subprojects (Todo, Documentation, Localization) lists the open tasks. You can pick up one of the open tasks and start working on it.</para>
+		</listitem>
+		<listitem>
+			<para>If you find a bug, submit a bug to the Bug tracker at <ulink url="http://fusionforge.org/tracker/?group_id=6">http://fusionforge.org/tracker/?group_id=6</ulink>. If you already solved the bug and are willing to share the fix with us, please add a patch to the bug.</para>
+		</listitem>
+		<listitem>
+			<para>If you have developed some new feature, submit a patch to the patch manager of fusionforge. The submitted patch should follow the Coding and Templating standards described in this document.</para>
+		</listitem>
+		<listitem>
+			<para>Documentation: there are some parts of FusionForge that are not well documented. Refer to the Task Manager, Documentation subproject for a list of open tasks. You should write the documentation in the docbook format as described in this section.</para>
+		</listitem>
+		<listitem>
+			<para>Localization: The user interface of fusionforge is now nearly completely localized. We need translators for the different languages.</para>
+			<para>If you like to translate fusionforge to a new, not listed language, please contact us.</para>
+		</listitem>
+	</itemizedlist>
+</section>

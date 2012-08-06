@@ -1,0 +1,9 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/forumml
+usr/share/gforge/plugins/forumml/cgi-bin
+usr/share/gforge/plugins/forumml/common
+usr/share/gforge/plugins/forumml/www
+var/spool/forumml
+var/lib/gforge/forumml
+var/log/gforge
+var/log/gforge/forumml

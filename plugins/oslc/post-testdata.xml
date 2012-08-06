@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<!--  POST to 		/oslc-zend/cm/project/project_name
+	  or		/oslc-zend/cm/project/project_id
+-->
+<!-- POST FOR MANTIS TRACKER 
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<oslc_cm:ChangeRequest xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/">
+		<dc:title xmlns:dc="http://purl.org/dc/terms/">Provide import</dc:title>
+		<dc:type xmlns:dc="http://purl.org/dc/terms/">General</dc:type>
+		<dc:description xmlns:dc="http://purl.org/dc/terms/">Implement the system's import capabilities</dc:description>
+		<mantisbt:priority xmlns:mantisbt="http://mantisbt.org/">Low</mantisbt:priority>
+		<mantisbt:severity xmlns:mantisbt="http://mantisbt.org/">Feature</mantisbt:severity>
+		<mantisbt:version xmlns:mantisbt="http://mantisbt.org/">Branch 1.x</mantisbt:version>
+		<mantisbt:target_version xmlns:mantisbt="http://mantisbt.org/">Branch 2.x</mantisbt:target_version>
+		<mantisbt:version_number xmlns:mantisbt="http://mantisbt.org/">1.5</mantisbt:version_number>
+		<dc:creator xmlns:dc="http://purl.org/dc/terms/">aadams</dc:creator>
+	</oslc_cm:ChangeRequest>
+</rdf:RDF>
+-->
+
+<!-- POST FOR FUSIONFORGE TRACKER
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <oslc_cm:ChangeRequest xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/">
+    <dc:title xmlns:dc="http://purl.org/dc/terms/">test post in oslc-cm plugin of FusionForge</dc:title>
+    <dc:description xmlns:dc="http://purl.org/dc/terms/">created by oslc-cm powered plugin of FusionForge</dc:description>
+    <helios_bt:status xmlns:helios_bt="http://heliosplatform.sourceforge.net/ontologies/2010/05/helios_bt.owl">Open</helios_bt:status>
+    <helios_bt:priority xmlns:helios_bt="http://heliosplatform.sourceforge.net/ontologies/2010/05/helios_bt.owl">3</helios_bt:priority>
+    <dc:creator xmlns:dc="http://purl.org/dc/terms/">Sabri LABBENE</dc:creator>
+    <helios_bt:assigned_to xmlns:helios_bt="http://heliosplatform.sourceforge.net/ontologies/2010/05/helios_bt.owl">Nobody</helios_bt:assigned_to>
+  </oslc_cm:ChangeRequest>
+</rdf:RDF>
+-->
+
+<!-- PUT FOR FUSIONFORGE TRACKER
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <oslc_cm:ChangeRequest xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/" rdf:about="http://fusionforge/tracker/oslc-zend/cm/project/6/tracker/105/bug/3">
+    <dc:title xmlns:dc="http://purl.org/dc/terms/">test put in oslc-cm implementation for FusionForge</dc:title>
+    <dc:description xmlns:dc="http://purl.org/dc/terms/">created by oslc-cm powered software :) toto coin coin</dc:description>
+    <helios_bt:status xmlns:helios_bt="http://heliosplatform.sourceforge.net/ontologies/2010/05/helios_bt.owl">closed</helios_bt:status>
+    <helios_bt:priority xmlns:helios_bt="http://heliosplatform.sourceforge.net/ontologies/2010/05/helios_bt.owl">5</helios_bt:priority>
+    <helios_bt:assigned_to xmlns:helios_bt="http://heliosplatform.sourceforge.net/ontologies/2010/05/helios_bt.owl">102</helios_bt:assigned_to>
+  </oslc_cm:ChangeRequest>
+</rdf:RDF>
+
+-->

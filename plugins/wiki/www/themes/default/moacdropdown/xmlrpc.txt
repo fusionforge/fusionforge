@@ -1,0 +1,58 @@
+How to encode the xmlrpc request in acdropdown?
+ 
+short form (local server):
+  "xmlrpc:wiki.titleSearch [S] 4"
+
+long form (remote server):
+  "xmlrpc:http://localhost/wiki/?wiki.titleSearch [S] 4"
+
+encode the methodname as optional query_arg and the args space seperated
+args can only be strings
+
+
+The xmlrpc request looks like:
+
+POST url
+
+<?xml version='1.0' encoding="iso-8859-1" ?>
+<methodCall>
+<methodName>wiki.titleSearch</methodName>
+<params>
+ <param>
+  <value>
+   <string>^Page</string>
+  </value>
+ </param>
+ <param>
+  <value>
+    <string>4</string>
+  </value>
+ </param>
+</params>
+</methodCall>
+
+
+The xmlrpc response XML looks like this:
+
+Content-Type: application/xml
+
+<?xml version='1.0' encoding="iso-8859-1" ?>
+<methodResponse>
+<params>
+ <param>
+  <value>
+   <array>
+    <data>
+     <value>
+      <string>Page 1</string>
+     </value>
+     <value>
+      <string>Page 2</string>
+     </value>
+    </data>
+   </array>
+  </value>
+ </param>
+</params>
+</methodResponse>
+

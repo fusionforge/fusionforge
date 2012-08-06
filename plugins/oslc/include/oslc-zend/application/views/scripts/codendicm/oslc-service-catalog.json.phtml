@@ -1,0 +1,14 @@
+<?php
+
+$json["dc:title"] = TRACKER_TYPE. " Change management service provider catalog";
+foreach ($this->projects as $proj)
+{
+	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["dc:title"] = $proj["name"];
+	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["oslc_disc:services"] = $this->baseUrl().'/cm/oslc-cm-service/'.$proj['id'];
+	$catalog[] = $service;
+}
+
+$json["oslc_disc:ServiceProviderCatalog"] = $catalog;
+
+
+print str_replace("\/", "/", Zend_Json::prettyPrint(Zend_Json::encode($json)));

@@ -1,0 +1,55 @@
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FCacheTestPlugin 7757 2010-12-09 13:53:00Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FCacheTestPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~CacheTest** [[Help:WikiPlugin|plugin]] allows to test image caching.
+
+== Usage ==
+{{{
+<<CacheTest arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **text**
+| Text in image
+| This is a simple example using WikiPluginCached
+|-
+| **font**
+|
+| 3
+|-
+| **type**
+|
+| png
+|}
+
+== Example ==
+
+{{{
+<<CacheTest>>
+}}}
+
+<<CacheTest>>
+
+== Author ==
+* Johannes Große
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

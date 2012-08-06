@@ -1,0 +1,16 @@
+Date: Tue, 25 Jan 2011 21:32:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+Content-Type: application/x-phpwiki;
+  pagename=Aide;
+  flags="";
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Les **pages d'aide** suivantes sont disponibles.
+
+<<ListSubpages cols||=3 sortby||=pagename noheader||=1 limit=1000 >>
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

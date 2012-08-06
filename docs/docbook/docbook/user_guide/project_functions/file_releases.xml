@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section id="ug_project_file_releases">
+  <title>File Releases</title>
+  <section id="ug_project_file_releases_introduction">
+    <title>Introduction</title>
+    <para>
+   The File Releases System (FRS) is used to upload files to the FusionForge site and to make these files available to the users in an easy and efficient way.
+  </para>
+    <para>
+   Files can be divided in different <emphasis>packages</emphasis>, and every single package can be monitored by the users; these users will receive an email every time a new file has been added to the package.
+  </para>
+  </section>
+  <section id="ug_project_file_releases_administration">
+    <title>Administration</title>
+    <para>
+   The FRS system allows you to upload a file to FusionForge and make this file available to the public.
+  </para>
+    <para>
+   You have to define a package before you can release a file. A package should have a descriptive name for the project, e.g. gforge3.
+  </para>
+    <para>
+   To add a new package, insert a package name in the textbox at the bottom of the page and click Create this Package.
+  </para>
+    <para>
+   You can use the radio buttons to make the package publicly viewable or not. Default is public.
+  </para>
+    <para>
+   You can use the menu buttons to make the package active or hidden. Hidden packages will not be listed in the Files section.
+  </para>
+    <para>
+   Your package will appear in the Releases list at the bottom of the page.
+  </para>
+    <para>
+   Click Add release. The form has the following fields:
+  </para>
+    <variablelist>
+      <varlistentry>
+        <term>Package ID</term>
+        <listitem>
+          <para>You can select here the package.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Release Name</term>
+        <listitem>
+          <para>Insert here the name of your release. The name should be indicative for the version of your file, e.g. pre-8.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Release Date</term>
+        <listitem>
+          <para>The Release Date.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>File Name</term>
+        <listitem>
+          <para>Click the <emphasis>Browse</emphasis> button to select the file to upload. In some browsers you must select the file in the file-upload dialog and click OK. Double-clicking doesn&apos;t register the file.</para>
+          <note>
+            <para>You can&apos;t upload file that exceed the UploadFile Limit in php.ini.</para>
+          </note>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>File Type</term>
+        <listitem>
+          <para>You can select here the file type (.zip, .html, .exe, .tar.gz, etc).</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Processor Type</term>
+        <listitem>
+          <para>You can select here the processor required to run the application.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Release Notes</term>
+        <listitem>
+          <para>The release notes.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Changelog</term>
+        <listitem>
+          <para>The changelog.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    <para>
+   Click the <emphasis>Release File</emphasis> button. Your file will now appear in the list of files in the File section.
+  </para>
+  </section>
+  <section id="ug_project_file_releases_cli">
+    <title>Managing packages and releases via CLI (Command-Line Interface)</title>
+    <para>We give here some basic examples of CLI commands. For more information,
+                      please consult the FusionForge Command-line interface (CLI) documentation.</para>
+    <section id="ug_project_file_releases_cli_login">
+      <title>Logging in with CLI</title>
+      <para><screen>gforge.php -v login --username=&quot;user&quot; --project=myproject</screen></para>
+    </section>
+    <section id="ug_project_file_releases_cli_get_list">
+      <title>Getting a list of releases</title>
+      <para>Get the package id</para>
+      <para><screen>gforge.php frs packages</screen></para>
+      <para>Get the list of releases of a given package</para>
+      <para><screen>gforge.php frs releases --package=xxx</screen></para>
+    </section>
+    <section id="ug_project_file_releases_cli_add_release">
+      <title>Add a release of a given package</title>
+      <para><screen>gforge.php frs addrelease --package=xxx --name=&quot;My new release&quot;</screen></para>
+    </section>
+    <section id="ug_project_file_releases_cli_edit_release">
+      <title>Edit a release</title>
+      <para>Add a text file to a release of a given package.</para>
+      <para><screen>gforge.php frs addfile --package=xxx --release=yyy --file=zzz</screen></para>
+      <para>Retrieve file on the standard output</para>
+      <para><screen>gforge.php frs getfile --package=xxx --release=yyy -id=www</screen></para>
+      <para>Retrieve file in a file</para>
+      <para><screen>gforge.php frs getfile --package=xxx --release=yyy -id=www 
+                       --output=newfile</screen></para>
+    </section>
+  </section>
+  <section id="ug_project_file_releases_monitor_packages">
+    <title>Monitoring packages</title>
+    <para>You can monitor a package by clicking on the envelope next to the package name.
+                      The envelope now bears a red symbol.</para>
+    <para>You can unmonitor the package by clicking again on the envelope.</para>
+  </section>
+  <section id="ug_project_file_releases_subscribe_rss">
+    <title>Subscribing RSS feed for a package</title>
+    <para>You can subscribe a RSS feed for a package on the summary page of the project, 
+                by clicking on the RSS icon and select Developer New Project Releases.
+                </para>
+  </section>
+</section>

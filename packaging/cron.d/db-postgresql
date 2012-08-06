@@ -1,0 +1,61 @@
+#
+# Regular cron jobs for the db-postgresql package
+#
+
+# Daily reporting process
+25 7 * * * $FFUSER $PHP $FFCRON/reporting_cron.php
+
+# Recalculate user popularity metric
+25 1 * * * $FFUSER $PHP $FFCRON/calculate_user_metric.php
+
+# Daily recalculate of the sums under the trove map
+30 1 * * * $FFUSER $PHP $FFCRON/db_trove_maint.php
+
+# Daily deletion of sessions, closing jobs, etc
+35 1 * * * $FFUSER $PHP $FFCRON/project_cleanup.php
+
+# Daily crunching of survey data and other associated ratings
+40 1 * * * $FFUSER $PHP $FFCRON/rating_stats.php
+
+# Daily crunching of project summary data (counts)
+42 1 * * * $FFUSER $PHP $FFCRON/db_project_sums.php
+
+# Daily close pending artifacts
+43 1 * * * $FFUSER $PHP $FFCRON/check_stale_tracker_items.php
+
+# Daily project_weekly_metric recalc
+12 1 * * * $FFUSER $PHP $FFCRON/project_weekly_metric.php
+
+# Daily rotation of the activity_log
+0 0 * * * $FFUSER $PHP $FFCRON/rotate_activity.php
+
+# Daily aggregating of the numbers
+15 0 * * * $FFUSER $PHP $FFCRON/site_stats.php
+
+# Daily sweep of the stats into final tables
+45 0 * * * $FFUSER $PHP $FFCRON/db_stats_agg.php
+
+# Hourly send pending massmailings, if any
+48 * * * * root $PHP $FFCRON/massmail.php
+
+# Weekly db vacuum (should be done after ALL OTHER JOBS)
+50 2 * * 1 $FFUSER $PHP $FFCRON/vacuum.php
+
+# Create SCM repositories
+0 * * * * root $PHP $FFCRON/create_scm_repos.php
+
+# Gather commit stats from SCM repositories
+0 2 * * * root $PHP $FFCRON/gather_scm_stats.php
+
+# Generate snapshots and tarballs from SCM repositories
+0 3 * * * root $PHP $FFCRON/generate_scm_snapshots.php
+
+# this cronjob analyse the apache log and instert them in the db table stats_subd_pages
+# this is not used in fusionforge IHM.
+# Daily sweep of the HTTP log files for project activity
+#15 0 * * * $FFUSER $FFCRON/stats_projects_logparse.pl
+
+# this cronjob send a mail to the admin with all news that have been posted less than 30 days and that have not be validated.
+# Daily mail for not approved news
+30 17 * * * root $FFCRON/get_news_notapproved.pl
+

@@ -1,0 +1,519 @@
+FUSIONFORGE PLUGINS HOWTO
+--------------------------------
+
+Here is a short HOWTO explaining how plugins work, and how to make
+a new one.
+
+  It was written by Roland Mas <lolando@debian.org>.
+
+WHAT PLUGINS ARE, AND WHY THEY ARE USEFUL
+-----------------------------------------
+
+  Plugins are extensions to the "core" of GForge, providing extra
+functionality without being tightly integrated within Sourceforge
+proper.  They are useful because they allow for independent
+development of third-party functionality, and they add flexibility to
+Sourceforge as to what features are available on a particular
+installation.
+
+  As an example, it's been suggested to integrate a shared calendar
+application in Sourceforge.  It's a good idea and an interesting
+feature, but not one that everybody wants.  Thus, including it in the
+GForge code would piss off someone.  Additionnally, there might
+be several competing implementations for such a calnedar application.
+Choosing one among them would also piss off people.  So it is made
+possible to have a system so that different implementations can exist
+and be installed separately.
+
+HOW PLUGINS WORK
+----------------
+
+  It is expected that a plugin is just some new feature added to
+GForge, and not a change in the behaviour of existing features.
+A plug-in should therefore only add files, not change existing ones.
+Whether these files be web pages, offline scripts, static
+documentation or else is not relevant.
+
+  Of course, *some* changes will have to be made to the "core" files,
+if only to add links to new web pages, for instance.  These changes
+are acceptable, and will be discussed below.  Here come the details
+about how the plugin system is implemented.
+
+- A plugin will be identified primarily by a string handle, which will
+be static across all installations of this plugin.  It should be
+composed of lowercase letters only, because it's going to be used in
+table names and we don't want namespace conflicts.  For instance, if
+the ACME company writes a time tracking tool plugin, the handle for
+that plugin could be "acmetimetracker".  When installed, the plugin
+will be assigned an integer identifier.  This id might vary from site
+to site, and should not be depended upon.
+
+  We [the GForge-proper maintainers team] will maintain some sort
+of list of allocated plugin names so that different plugins get
+different allocated identifiers, see below.
+
+- Tables in the database schema: special tables have been added to the
+database schema to keep track of installed plugins.  They are
+described below (simplified descriptions):
+,----
+| CREATE TABLE plugins (plugin_id integer,
+|                       plugin_name character(32),
+|                       plugin_desc text,
+|                       CONSTRAINT plugins_pkey PRIMARY KEY (plugin_id)
+|                      )
+| CREATE TABLE group_plugin (group_plugin_id integer,
+|                            group_id integer,
+|                            plugin_id integer,
+|                            CONSTRAINT PRIMARY KEY (plugin_id),
+|                            CONSTRAINT FOREIGN KEY (group_id) REFERENCES groups(group_id)
+|                           )
+| CREATE TABLE user_plugin (user_plugin_id integer,
+|                           user_id integer,
+|                           plugin_id integer,
+|                           CONSTRAINT PRIMARY KEY (plugin_id),
+|                           CONSTRAINT FOREIGN KEY (user_id) REFERENCES users(user_id)
+|                          )
+`----
+
+TODO: add plugins_persistence, group_plugin_persistence, user_plugin_persistence
+
+  "plugins" lists the installed plugins, with the numeric id, the
+string handle (say, "acmetimetracker") and a description.
+
+  "group_plugin" is a way to store the fact that a group "uses" a
+plugin without needing to add a "uses_acmetimetracker" to the groups
+table for each known plugin.
+
+  "user_plugin" is the same, for users.
+
+- A plugin may create its own tables in the same database.  These
+tables must be named plugin_foo_* if the plugin's string identifier is
+"foo".  One suggested table is plugin_foo_meta_data, which should be
+used to store the plugin meta-data, such as the installed version.
+The plugin can then use some code like db-upgrade.pl if its database
+schema changes over time.
+
+[TODO: Standardise the command/script/something below]
+  These tables may have foreign key referential integrity constraints
+going from them to standard tables, but not the other way round.  If
+they have, then a command/script/something must be provided so that
+the main db-upgrade.pl can disable the constraints and re-enable them
+afterwards in case some database schema changes are needed.
+
+  Similarly, a plugin may create sequences, indexes, views, etc,
+provided that their names are prefixed with plugin_foo_ too.
+
+  A plugin should not modify the data in tables that do not belong to
+it.  If it really needs to, then please discuss it with us first,
+there might be cases where it's needed/useful.  Reading those data is
+okay, but it must be careful not to leak any info to places/users
+which normally wouldn't have had access to it.
+
+- Functions in Group.class.php and User.class.php: the Group and User classes
+now have a usesPlugin() method.  It takes a single parameter, the
+"acmetimetracker" identifier for the module, and returns a boolean if
+the particular user/group has turned on the use of that module.  Also
+provided are setPluginUsage() methods, taking a plugin name and a
+boolean value as arguments and returning true on success and false on
+failure.
+
+- A plugin should not change the existing files.  Of course, it will
+need a way to adds links to its own web pages.  This is done by a
+"hook" system.  Each plugin can hook itself up to a number of hook
+points in the main code, and execute arbitrary code when that point is
+reached.  Basically, the plugin registers itself to a global object
+(of the PluginManager class, if you want to know).  You have to call
+the register_plugin() function, providing it an object of a subclass
+of the Plugin class that is provided by the main code.  That object
+must provide a GetHooks() method, which returns a list of hook names.
+Whenever one of these hooks is encountered, the object's CallHook()
+method is called with the hook name and extra parameters that depend
+on the hook.  Adding a link to your page in some place is just a
+matter of "subscribing" yourself to the hook that is in the
+appropriate place, and printing the appropriate link whenever your
+CallHook() method is called from that place.
+
+  Registering your plugin is done by providing a
+/usr/share/gforge/plugins/<pluginname>/include/<pluginname>-init.php.
+It will be parsed by the PluginManager object.  That file should
+contain a call to register_plugin(), passing it an object of the
+appropriate class.  See the helloworld plugin for an example.
+
+  The hooks are managed centrally by the GForge code maintainers.
+If you need one, please ask, we'll add it.  The current list of
+hooks is provided at the end of this document.
+I rely on you plugins developers to provide more ideas :-)
+
+- Plugin-specific web pages should reside either in the /plugin/*/
+URL-space (that is, plugin "foo" will probably put its files in
+/usr/share/gforge/www/plugins/foo/) or (if the web interface is not
+written in PHP) in /plugin/*/cgi-bin/ URL-space (files in
+/usr/lib/sourceforge/cgi-bin/plugins/foo/).
+
+  If possible, and as much as possible, a plugin should use the layout
+functions defined by GForge (Layout.class.php, HTML.class.php, or
+whatever they're called), to ensure a consistent look and themability.
+
+  Of course, the previous point only applies to plugins written in
+PHP.  Plugins written in other languages are not excluded by this
+proposal, and there is no need to restrict them.  Should they appear,
+they might need to recode some of GForge's functions in Perl or
+another language.  I see no need to restrict that either.  Only thing:
+it would be better if the porting were as straightforward as possible.
+Do not reimplement, please.  Just translate from PHP to Perl or
+whatever.  If you do, please submit your translation to us, so that it
+can be provided by GForge proper and maintained in common.
+
+[TODO: Think about that, design, implement]
+  Speaking of languages...  There should be some way to have
+plugin-specific language files, so that the plugins can use the
+standard methods used elsewhere in Sourceforge.  I haven't thought
+about that very deeply yet, but I think it will evolve into a
+recommendation that the "handles" in the language files are
+plugin_foo_page / item (as compared to the current page / item model
+used for "core" GForge i18n strings).
+
+- A plugin should register itself into the database using the provided
+register-plugin script on its installation, and unregister itself
+using unregister-plugin on removal.  When unregistering, be careful
+to delete all the rows in tables that contain a reference to your
+plugin_id, so that the unregistration process (which deletes your row
+in the plugins table) does not fail due to referential integrity errors.
+
+HOW DO I MAKE A PLUGIN?
+-----------------------
+
+  Your best bet would be to start with the sample "helloworld" plugin
+and change parts of it.  It shows an example of most of the things you
+should need to make your plugin: PHP pages, configuration files, bits
+of Apache configuration, cron jobs, etc.  If you need something else,
+please ask, we'll discuss it, (hopefully) reach an agreement on how to
+Do It Right, and implement a sample in helloworld.
+
+HOW TO NAME MY PLUGIN
+---------------------
+
+If you plan on distributing your plugin to the public, please contact
+the GForge maintainer with your proposed name, and we'll add it
+to the list below.  This ensures that no other plugin will use the
+same name, so as to reduce the risk of name conflicts.
+
+  If you only intend to keep your plugin for yourself, you might still
+contact us with your plugin name.  If you're really nice, we might
+consider adding it here too, so that other people who want to
+distribute their plugin do not reuse the same name.
+
+  For reference, this is the list of currently used plugin names:
+
+- helloworld, the plugin provided as an example.
+- extldapauth, a plugin allowing on-the-fly account creation from an
+  existing LDAP directory;
+
+CURRENT LIST OF PLUGIN HOOKS
+----------------------------
+
+The following is a list of hooks available in GForge for plugins to utilise.
+Each hook is listed with its name, locations in the source code where the
+hook is called, and parameters that are passed into the hook and a brief
+description. There may be other hooks available, added after this section
+had been written.
+
+  Hook Name  : session_set_entry
+  Locations  : common/include/session.php
+  Description: Called before checking if the user is logged in by
+  						 reading session cookie.
+               You can use this hook to handle session setup specific
+               to your plugin. 
+  
+  Hook Name  : session_set_return
+  Locations  : common/include/session.php
+  Description: Called after checking if the user is logged in by reading
+  						 session cookie.
+               You can use this hook to handle session setup specific
+               to your plugin.
+
+  Hook Name  : artifact_extra_detail
+  Parameters : artifact_id - The ID of a tracker item
+  Locations  : www/tracker/detail.php
+               www/tracker/mod-limited.php
+               www/tracker/mod.php
+  Description: Use this hook to provide additional information about a 
+               tracker item based upon its ID.
+
+  Hook Name  : before_logout_redirect
+  Locations  : www/account/logout.php
+  Description: Called once the GForge user has had their session logged
+               out, and before the user is redirected to the homepage of
+               the site.
+
+  Hook Name  : cssfile
+  Locations  : www/include/Layout.class.php
+  Description: Used to include a CSS link element to include in the page
+               layout. The hook should return a complete <link> element.
+
+  Hook Name  : cssstyle
+  Locations  : www/include/Layout.class.php
+  Description: Used to include inline CSS into the page layout. The
+               hook should return pure CSS, without surrounding
+               <style> elements.
+
+  Hook Name  : group_approved
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/admin/approve-pending.php
+  Description: When a group is approved by a site admin, this hook is called.
+
+  Hook Name  : groupisactivecheckboxpost
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/project/admin/index.php
+  Description: Called when a plugin is activated for a specific group from 
+               the group's Edit Public Info page. Use this to perform
+               actions to initialise the plugin for a specific group.
+
+  Hook Name  : groupisactivecheckbox
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/project/admin/index.php
+  Description: Used to display a portion of a form on a group's Edit
+               Public Info page. It should return a HTML <tr> line containing
+               two cells. 
+
+  Hook Name  : groupmenu
+  Parameters : DIRS - A reference to the array of tab URLs
+               TITLES - A reference to the array of tab titles
+               toptab - A reference to a string containing the name of
+                        the GForge tab menu in use (eg. admin, tracker)
+               selected - A reference to an array index of the tabs.
+               group - The numeric ID of the current group
+  Locations  : www/include/Layout.class.php
+  Description: Used to provide a plugin specific tab in when viewing
+               group pages.
+  [TODO: The use of the 'group' name as a parameter is inconsistent
+   with most other group plugin hooks - which use group_id.]
+
+  Hook Name  : groupmenu_scm
+  Parameters : DIRS - A reference to the array of tab URLs
+               TITLES - A reference to the array of tab titles
+               toptab - A reference to a string containing the name of
+                        the GForge tab menu in use (eg. admin, tracker)
+               selected - A reference to an array index of the tabs.
+               group_id - The numeric ID of the current group
+  Locations  : www/include/Layout.class.php
+  Description: Provides a tab for the SCM system in the group pages.
+
+  Hook Name  : headermenu
+  Parameters : toptab - A reference to a string containing the name of
+                        the GForge tab menu in use (eg. admin, tracker)
+               template - An HTML template giving how to add the menu.
+  Locations  : www/include/Layout.class.php
+  Description: Used to provide a plugin specific menu entry in the header
+               top menu (after: Login, Logout, My Account).
+               See plugin online_help for example of use.
+
+  Hook Name  : htmlhead
+  Locations  : www/include/Layout.class.php (& derived classes)
+  Description: Used to allow plugins to include code in the <head>.
+               See plugin message for example of use.
+
+  Hook Name  : javascript
+  Locations  : www/include/Layout.class.php
+               www/include/LayoutSF.class.php
+  Description: Provides a place to add inline Javascript into the page.
+               The output (in $params['return']) of the hook should be pure Javascript, as it will
+               be placed within an existing <script> block.
+  [TODO: The output of the hook appears after the closing SGML comment marker
+   and before the closing </script> element. Is this what is really indended?]
+
+  Hook Name  : project_admin_plugins
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/project/admin/index.php
+  Description: Provides a place for plugin authors to add a link on the
+               group summary page to the admin page for a plugin.
+
+  Hook Name  : project_after_description
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/include/project_home.php
+  Description: Provides some space for plugin specific text on a group's 
+               summary page.
+
+  Hook Name  : project_public_area
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/include/project_home.php
+  Description: Used to provide plugin specific infos on a group's 
+               public area.
+
+  Hook Name  : scm_admin_update
+  Parameters : group_id - The numeric ID of the group
+  Parameters : scmradio
+               A number of scm specific values generated from the
+               form fields created by the scm_admin_page hook.
+  Locations  : www/scm/admin/index.php
+  Description: When the SCM admin page is submitted, this hook is called.
+  [TODO: Is scmradio actually used anywhere or is it legacy? A grep through
+   the source code seems to indicate its never used!]
+
+  Hook Name  : scm_admin_page
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/scm/admin/index.php
+  Description: Used to generate an administrative form for the SCM
+               plugin. All the form fields generated by this hook should
+               be named [pluginname]_[fieldname] where [pluginname] is the
+               SCM plugin name and [fieldname] is a field name for the
+               form element. Using this naming scheme ensures the fields
+               are properly passed as parameters to the scm_admin_update hook.
+
+  Hook Name  : scm_page
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/scm/index.php
+  Description: Show a page for the SCM in use by a group.
+
+  Hook Name  : scm_plugin
+  Parameters : scm_plugins - A reference to an array of plugins providing
+                             SCM features. Each element is a plugin string name.
+  Locations  : common/scm/SCMFactory.class.php
+  Description: This is used by GForge to identify SCM plugins. Any plugin that
+               provides SCM features should add itself to the scm_plugins array
+               when this hook is called.
+ 
+  Hook Name  : scm_stats
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/include/project_home.php
+  Description: Shows SCM specific statistics on the group's summary page.
+
+  Hook Name  : search_engines
+  Locations  : www/search/include/SearchManager.class.php
+
+  Hook Name  : session_before_login
+  Parameters : loginname - The login as passed in from the user
+               passwd - The password as passed in from the user
+  Locations  : common/include/session.php
+  Description: Authentication plugins can use this hook to authenticate
+               a user before GForge passes the authentication details on
+               to its own database. The hook should return true if the 
+               authentication succeeds.
+
+  Hook Name  : site_admin_option_hook
+  Locations  : www/admin/index.php
+  Description: Use this to provide a link to the site wide administrative
+               pages for your plugin. The hook should return HTML within
+               a <li> block and will appear on the Site Admin page in the
+               Site Utilities list.
+
+  Hook Name  : site_admin_project_maintenance_hook
+  Locations  : www/admin/index.php
+  Description: Use this to provide a link to the project maintenance pages
+               for your plugin. The hook should obey the plugin_hook_by_reference()
+               protocol and concatenate a <li> HTML block to params['result'] so 
+               that it can appear in the "Plugins Project Maintenance" subsection
+
+  Hook Name  : site_admin_user_maintenance_hook
+  Locations  : www/admin/index.php
+  Description: Use this to provide a link to the user maintenance pages
+               for your plugin. The hook should obey the plugin_hook_by_reference()
+               protocol and concatenate a <li> HTML block to params['result'] so 
+               that it can appear in the "Plugins User Maintenance" subsection
+
+  Hook Name  : task_extra_detail
+  Parameters : task_id - The numeric ID for a task
+  Locations  : www/pm/detail_task.php
+               www/pm/mod_task.php
+  Description: Provides a place to include extra information about a
+               task. The hook should return a <tr> row containing 2 cells
+               (or colspan'ed to 2).
+  
+  Hook Name  : usermenu
+  Locations  : www/include/html.php
+  Description: Prints out a tab to show when displaying user pages.
+               Unlike the groupmenu hook, this hook should use the PrintSubMenu
+               method to display the tab itself.
+
+  Hook Name  : role_get
+  Locations  : common/include/Role.class.php
+  Description: Provides a place to read role from another subsystem (LDAP, DB,
+               etc...)
+
+  Hook Name  : role_update
+  Locations  : common/include/Role.class.php
+  Description: Triggered when new a role is updated
+
+  Hook Name  : role_setuser
+  Locations  : common/include/Role.class.php
+  Description: Provides a way to extend the way user information are stored
+
+  hook Name  : outermenu
+  Parameters : DIRS - A reference to the array of tab URLs
+               TITLES - A reference to the array of tab titles
+  Location   : www/include/Layout.class.php
+  Description: Used to provide a plugin specific tab in main menu.
+
+  Hook Name  : project_public_area
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/include/project_home.php
+  Description: Used to provide plugin specific infos on a group's
+               public area.
+
+  Hook Name  : user_logo
+  Parameters : user_id, size, content (return value)
+  Locations  : common/include/utils.php
+  Description: plugin_hook_by_reference hook used to provide a user
+               picture in params['content'] (see gravatar plugin for instance)
+
+  Hook Name  : user_link_with_tooltip
+  Parameters : username, user_id, user_link (return value)
+  Locations  : common/include/utils.php
+  Description: plugin_hook_by_reference hook used to replace util_display_user()
+               default behaviour, returns value in params['user_link']
+               (see oslc plugin for instance)
+
+TODO : document Auth plugins :
+
+  Hook Name  : display_auth_form
+  Parameters : return_to
+  Locations  : www/include/login-form.php
+  Description: returns a login dialog and/or a redirect URL :
+               it should return an HTML dialog appened to passed $params['html_snippets']
+               it may return a redirection URL appened to  $params['transparent_redirect_urls']
+
+  Hook Name  : check_auth_session
+  Parameters : auth_token ??
+  Locations  : common/include/session.php
+  Description: is there a valid session?
+               it returns a ??? appened to passed $params['results'] :FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT
+
+  Hook Name  : fetch_authenticated_user
+  Parameters : ??
+  Locations  : common/include/session.php
+  Description: what GFUser is logged in?
+               it returns a user object in passed $params['results']
+
+  Hook Name  : widgets
+  Parameters : $params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP or WidgetLayoutManager::OWNER_TYPE_USER
+  Description: appends to $params['fusionforge_widgets'] (or 'codendi_widgets') names 
+  			   of widgets it provides depending on the project home or user home context
+
+  Hook Name  : widget_instance
+  Parameters : $params['widget'] provides the widget name
+  Description: returns in $params['instance'] an instance of the new Widget subclass
+
+  Hook Name  : script_accepted_types
+  Parameters : $params['script'] == 'project_home' or 'user_home' depending on whether providing alternate accept types for such pages
+  Description: appends to $params['accepted_types'] alternate HTTP Accept Content-types supported by a plugin for the 
+               /projects or /users/ pages rendered through content-negociation
+
+  Hook Name  : content_negociated_project_home
+  Parameters : $params['accept'] provides the content-type to be rendered, $params['groupname'] the project name, $params['group_id'] the project ID
+  Description: returns in $params['content'] an alternate content for /projects/ page and 
+               in $params['content_type'] the actual content-type to return
+		
+  Hook Name  : content_negociated_user_home
+  Parameters : $params['accept'] provides the content-type to be rendered, $params['username'] the user name
+  Description: returns in $params['content'] an alternate content for /users/ page and 
+               in $params['content_type'] the actual content-type to return
+
+  Hook Name  : project_rdf_metadata
+  Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, $params['xml'] already returned xml bits
+  Description: returns in $params['prefixes'] and $params['xml'] added prefixes and added bits of RDF+XML to be included in the project's DOAP description 
+
+TODO (nerville) : document display_hierarchy
+TODO (lolando ?) : document role_normalize, role_translate_strings, role_has_permission, role_get_setting, list_roles_by_permission 
+TODO : document project_link_with_tooltip
+
+  -- Roland Mas <lolando@debian.org>

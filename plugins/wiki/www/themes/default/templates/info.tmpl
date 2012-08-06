@@ -1,0 +1,172 @@
+<?php // -*-php-*-
+// $Id: info.tmpl 8166 2011-10-03 14:49:15Z vargenau $
+?>
+<?php
+if (empty($revision)) $revision = $page->getCurrentRevision(false);
+$modifed = $WikiTheme->formatDateTime($revision->get('mtime'));
+
+$dbi = $request->getDbh();
+$author = $revision->get('author');
+$authorLink = $author;
+if ($dbi->isWikiPage($author))
+    $authorLink = WikiLink($author);
+
+$authorId = $revision->get('author_id');
+$version = $revision->getVersion();
+$hits = $page->get('hits');
+
+$is_minor_edit = $revision->get('is_minor_edit') ? _("minor edit") : false;
+if ($minor_flag = $is_minor_edit) {
+    $minor_flag = HTML(" ",
+                       HTML::span(array('class' => 'pageinfo-minoredit'),
+                                  "(" . _("minor edit") . ")"));
+}
+
+/* better way to do this? */
+$bytes = strlen($revision->_data['%content']);
+$size = ByteFormatter($bytes, /* $longformat = */true);
+// Count words
+preg_match_all('/\\w+\\W*/', $revision->_data['%content'], $whitespacematches);
+if (1 == ($c = count_all($whitespacematches)))
+  $wordcount = fmt("1 word");
+else
+  $wordcount = fmt("%s words", $c);
+
+
+$markupVersion = ($markupVersion = $revision->get('markup'))
+               ? fmt("Version %s", $markupVersion)
+               : _("Original (1.2 or 1.0)");
+
+$summary = $revision->get('summary');
+
+if ($is_current = $revision->isCurrent()) {
+
+    $LOCKED_CB = HTML::input(array('type' => 'checkbox',
+                                   'name' => 'edit[locked]',
+                                   'disabled' => !$user->isadmin(),
+                                   'checked'  => $page->get('locked')));
+
+    // Not sure if I want to keep this... --Carsten
+    if ($user->isAdmin()) {
+        $lockunlock = $page->get('locked') ? 'unlock' : 'lock';
+        $clickcheckbUrl = WikiURL($revision, array('action' => $lockunlock));
+        $clickcheckb = "location.href='$clickcheckbUrl'";
+        $LOCKED_CB->setAttr('onclick', $clickcheckb);
+    }
+
+    $label['date'] = _("Last Modified") . _(":");
+    $label['author'] = _("Last Author") . _(":");
+    $label['summary'] = _("Last Summary") . _(":");
+
+} else {
+    $label['date'] = _("Saved on") . _(":");
+    $label['author'] = _("Author") . _(":");
+    $label['summary'] = _("Summary") . _(":");
+}
+
+$tableSummary = fmt("Statistics about %s.", $page->getName());
+$Sep = $WikiTheme->getButtonSeparator();
+
+$perm_tree = pagePermissions($page->getName());
+list($type, $perm) = pagePermissionsAcl($perm_tree[0], $perm_tree);
+if ($type == 'inherited') {
+    $type = sprintf(_("page permission inherited from %s"), $perm_tree[1][0]);
+} elseif ($type == 'page') {
+    $type = _("individual page permission");
+} elseif ($type == 'default') {
+    $type = _("default page permission");
+}
+?>
+
+<table summary="<?php echo $tableSummary ?>" class="pageinfo">
+
+<?php if (!$is_current) { ?>
+  <tr>
+    <td class="align-right pageinfo"><?php echo _("Supplanted on") . _(":") ?></td>
+    <td><?php echo $WikiTheme->formatDateTime($revision->get('_supplanted')) ?></td>
+  </tr>
+<?php } ?>
+
+  <tr>
+    <td class="align-right nowrap pageinfo"><?php echo $label['date'] ?></td>
+    <td><?php echo $modifed ?><?php echo $minor_flag ?></td>
+  </tr>
+  <tr>
+    <td class="align-right pageinfo"><?php echo $label['author'] ?></td>
+    <td><?php echo $authorLink ?>
+<?php if (! ($author == $authorId)) {
+    if ($dbi->isWikiPage($authorId)) $authorId = WikiLink($authorId); ?>
+        <span class="pageinfo-authorid">(<?php echo $authorId ?>)</span>
+      <?php } ?></td>
+  </tr>
+  <tr>
+    <td class="align-right pageinfo"><?php echo _("Page Version") . _(":") ?></td>
+    <td><?php echo $version ?></td>
+  </tr>
+  <tr>
+    <td class="align-right pageinfo"><?php echo _("Markup") . _(":") ?></td>
+    <td><?php echo $markupVersion ?></td>
+  </tr>
+  <tr>
+    <td class="align-right pageinfo"><?php echo _("Size") . _(":") ?></td>
+    <td><?php echo $wordcount ?>, <?php echo $size ?></td>
+  </tr>
+<?php if ($is_current) { ?>
+  <tr>
+    <td class="align-right pageinfo"><?php echo _("Hits") . _(":") ?></td>
+    <td><?php echo $hits ?></td>
+  </tr>
+<?php } ?>
+  <tr>
+    <td class="align-right nowrap top pageinfo"><?php echo $label['summary'] ?></td>
+    <td><?php echo $summary ?></td>
+  </tr>
+<?php if ($is_current) { ?>
+  <tr>
+    <td class="align-right"><?php echo $LOCKED_CB ?></td>
+    <td class="pageinfo"><?php echo _("Locked")?></td>
+  </tr>
+<?php if (ENABLE_EXTERNAL_PAGES) { ?>
+  <tr>
+    <td class="align-right pageinfo"><?php echo _("Is External") . _(":") ?></td>
+    <td><?php echo $page->get('external') ? _("Yes") : _("No") ?></td>
+  </tr>
+<?php } ?>
+  <tr>
+    <td class="align-right pageinfo"><?php echo _("ACL type") . _(":") ?></td>
+    <td><?php echo $type ?></td>
+  </tr>
+  <tr>
+    <td class="align-right top pageinfo"><?php echo _("ACL") . _(":") ?></td>
+    <td><?php echo $perm->asAclLines() ?></td>
+  </tr>
+<?php } ?>
+
+<?php // determine page type
+if (HOME_PAGE == $page->getName()) {
+    $pagetype []= sprintf('%s %s', WIKI_NAME, _("Home Page"));
+}
+if ($page->isUserPage($include_empty=true)) {
+    $pagetype []= _("User page");
+}
+if (isActionPage($page->getName())) {
+    $pagetype []= _("Action Page");
+}
+if ($page->get('pagetype') == 'wikiblog') {
+    $pagetype []= _("Blog page");
+}
+if ($page->getName() == _("InterWikiMap")) {
+    $pagetype []= _("InterWikiMap");
+}
+if (isSubPage($page->getName())) {
+    $pagetype []= _("Subpage");
+} ?>
+
+<?php if (!empty($pagetype)) { $pagetype = implode(", ", $pagetype); ?>
+  <tr>
+    <td class="align-right pageinfo"><?php echo _("Page Type") . _(":") ?></td>
+    <td><?php echo $pagetype?></td>
+  </tr>
+<?php } ?>
+
+</table>

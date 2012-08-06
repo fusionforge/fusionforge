@@ -1,0 +1,52 @@
+#
+# SourceForge: Breaking Down the Barriers to Open Source Development
+# Copyright 1999-2001 (c) VA Linux Systems
+# http://sourceforge.net
+#
+
+Replicate Tables:
+
+stats_site
+stats_project
+stats_project_developers
+stats_project_metric
+frs_dlstats_file_agg
+stats_subd_pages
+stats_agg_logo_by_group
+stats_cvs_group
+stats_agg_site_by_group
+stats_site_pages_by_day
+
+project_weekly_metric
+trove_cat
+trove_group_link
+
+frs_package
+frs_release
+frs_file
+frs_processor
+frs_filetype
+users
+groups
+
+foundry_projects
+
+Slave-only tables:
+
+frs_dlstats_filetotal_agg
+frs_dlstats_grouptotal_agg
+frs_dlstats_group_agg
+stats_project_months
+stats_project_all
+stats_project_last_30
+stats_project_developers_last30
+stats_site_pages_by_month
+stats_site_last_30
+stats_site_months
+stats_site_all
+
+trove_agg
+trove_treesums
+
+foundry_project_rankings_agg
+foundry_project_downloads_agg

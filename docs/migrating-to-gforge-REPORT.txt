@@ -1,0 +1,160 @@
+This is an install report for sourceforge 2.5 (debian-sf) to gforge 3.1
+The various problem encountered can be of some help for those of us doing
+this transition.
+Thanks to Jeremy Maziarz
+Originaly downloaded from
+http://members.cox.net/jmaziarz/tmp/HOWTO-sourceforge-gforge-transition.txt
+
+--------------------------------------------------------------
+
+DATE: 2003-12-18
+AUTH: jmaziarz@mitre.org
+DESC: This document describes the process used to transition a working
+      SourceForge 2.5 installation to GForge 3.1 using the available Debian 
+      packages.
+
+
+1. Backup your SourceForge 2.5 installation (database, LDAP, etc.).
+
+   ** This cannot be stressed enough. Installing the GForge transition package
+   ** can and will overwrite or could destroy anything that is not backed up.
+
+
+2. Modify your /etc/apt/sources.list
+
+   # vi /etc/apt/sources.list
+
+   Add the following lines:
+
+   deb http://gforge.free.fr/debian stable/
+   deb-src http://gforge.free.fr/debian stable/
+
+   # apt-get update
+
+
+3. Install the gforge-sourceforge-transition Debian package
+
+   # apt-get install gforge-sourceforge-transition
+
+   [ Problem #1 ]
+
+   ** This is where I encountered my first problem. Below you will see that
+   ** /etc/gforge/local.pl could not be found. That is because it doesn't
+   ** exist yet, so we need to make it exist! See solution #1, below.
+
+   sf:~# apt-get install gforge-sourceforge-transition
+   Reading Package Lists... Done
+   Building Dependency Tree... Done
+   The following NEW packages will be installed:
+     gforge-sourceforge-transition
+   0 packages upgraded, 1 newly installed, 0 to remove and 5  not upgraded.
+   Need to get 53.4kB of archives. After unpacking 119kB will be used.
+   Get:1 http://gforge.free.fr stable/ gforge-sourceforge-transition 3.1-0woody2 [53.4kB]
+   Fetched 53.4kB in 10s (5197B/s)
+   Selecting previously deselected package gforge-sourceforge-transition.
+   (Reading database ... 28382 files and directories currently installed.)
+   Unpacking gforge-sourceforge-transition (from .../gforge-sourceforge-transition_3.1-0woody2_all.deb) ...
+   Setting up gforge-sourceforge-transition (3.1-0woody2) ...
+   Can't locate /etc/gforge/local.pl at -e line 1.
+   dpkg: error processing gforge-sourceforge-transition (--configure):
+    subprocess post-installation script returned error exit status 2
+   Errors were encountered while processing:
+    gforge-sourceforge-transition
+   E: Sub-process /usr/bin/dpkg returned an error code (1) 
+
+   [ Solution #1 ]
+
+   ** Use the SourceForge local.pl file. Reinstall gforge-sourceforge-transition
+   ** Debian package.
+
+   # cp /etc/sourceforge/local.pl /etc/gforge/   
+   # apt-get install gforge-sourceforge-transition
+
+
+4. Install the gforge Debian package 
+
+   ** During this install you will be asked for the Debian (Woody) CDs (1, 2 
+   ** and 3)
+   ** 
+   ** The installation of GForge is documented in serveral places so please
+   ** refer to that documentation for the actual GForge install steps.
+
+   # apt-get install gforge
+
+   ** Take note that during the GForge installation there is one screen 
+   ** titled "Configuring Mailman" that says:
+  
+   .                                                                        . 
+   . Missing site list                                                      .
+   .                                                                        .
+   . Mailman needs a so-called "site list", which is the list from which    .
+   . password reminders and such are sent out from.  This list needs to be  .
+   . created before mailman will start.                                     .
+   .                                                                        .
+   . To create the list, run "newlist mailman" and follow the instructions  .
+   . on-screen                                                              . 
+
+   [ Problem #2 ]
+
+   ** This really would not be a problem if you took note of the screen I
+   ** mentioned above. But, in case you didn't here is what you might see:
+
+   Creating config file /etc/mailman/qmail-to-mailman.py with new version
+    cp -f /usr/share/mailman/qmail-to-mailman.py /etc/mailman/qmail-to-mailman.py
+   Upgrading from version 0x2000bf0 to 0x20102f0
+   getting rid of old source files
+   Site list for mailman (usually named mailman) missing
+   Please create it; until then, mailman will refuse to start
+
+   dpkg: dependency problems prevent configuration of gforge-lists-mailman:
+
+   < a bunch of dependancy messages cut out >
+
+   E: Sub-process /usr/bin/dpkg returned an error code (1)
+
+   [ Solution #2 ]
+
+   ** Just as the screen I mentioned say run newlist. Restart the PostGreSQL
+   ** server and reinstall the gforge Debian package.
+   
+   # /usr/sbin/newlist mailman
+   # /usr/sbin/invoke-rc.d postgresql start
+   # apt-get install gforge
+
+
+5. Check to see if the database was imported properly.
+
+   ** There are two places that you can check to see if your SourceForge 2.5
+   ** database dump  was imported into the new GForge database properly.
+
+   a. /var/lib/gforge/sf_dump_for_gforge.*
+
+      If sf_dump_for_gforge.ko exists then something failed.
+      If sf_dump_for_gforge.ok exists then it most likely was successful.
+
+   b. Check the database
+
+      sf:~# psql -c "SELECT sum(*) FROM users;" -U gforge gforge
+        sum
+       -----
+          2
+       (1 row)
+
+      If you have only two users then this result might be good, but I am
+      willing to bet that there are more, so something must have failed. ;)
+
+
+6. Manually import the database (optional)
+
+   ** This of course only needs to be done if Step 5 indicates failure.
+
+   # cd /var/lib/gforge/
+   # /usr/share/gforge/bin/install-db.sh restore sf_dump_for_gforge.ko  
+
+   ** Reinstall the gforge-db-postgresql Debian package (this will bring the
+   ** database schema up-to-date.
+
+   # apt-get install gforge-db-postgresql --reinstall
+
+
+7. See Step 5b.

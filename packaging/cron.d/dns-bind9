@@ -1,0 +1,6 @@
+#
+# Regular cron jobs for the dns-bind9 package
+#
+
+# DNS Update
+0 * * * * root [ -f /var/lib/@OLDPACKAGE@/bind/dns.head ] && [ -x /usr/share/@OLDPACKAGE@/bin/dns_conf.pl ] && /usr/share/@OLDPACKAGE@/bin/dns_conf.pl &&  /usr/sbin/invoke-rc.d --quiet bind9 reload 

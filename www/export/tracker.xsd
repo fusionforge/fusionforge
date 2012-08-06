@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="adddate" type="xsd:string"/>
+	<xsd:element name="artifact">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="submitted_by"/>
+				<xsd:element ref="submitted_date"/>
+				<xsd:element ref="artifact_type"/>
+				<xsd:element ref="category"/>
+				<xsd:element ref="artifact_group"/>
+				<xsd:element ref="assigned_to"/>
+				<xsd:element ref="priority"/>
+				<xsd:element ref="status"/>
+				<xsd:element ref="resolution"/>
+				<xsd:element ref="summary"/>
+				<xsd:element ref="detail" minOccurs="0"/>
+				<xsd:element ref="followups"/>
+				<xsd:element ref="existingfiles"/>
+				<xsd:element ref="changelog"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int"/>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="artifact_group">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string" >
+					<xsd:attribute name="id" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int"/>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="artifact_type">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="id" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int"/>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="assigned_to">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="by">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="category">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="id" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int"/>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="changelog">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="field" minOccurs="0"/>
+				<xsd:element ref="old_value" minOccurs="0"/>
+				<xsd:element ref="date" minOccurs="0"/>
+				<xsd:element ref="by" minOccurs="0"/>
+				<xsd:element ref="item" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="date" type="xsd:string"/>
+	<xsd:element name="description" type="xsd:string"/>
+	<xsd:element name="detail" type="xsd:string"/>
+	<xsd:element name="existingfiles">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="file" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="field" type="xsd:string"/>
+	<xsd:element name="file">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="id"/>
+				<xsd:element ref="name"/>
+				<xsd:element ref="description"/>
+				<xsd:element ref="location"/>
+				<xsd:element ref="filesize"/>
+				<xsd:element ref="filetype"/>
+				<xsd:element ref="adddate"/>
+				<xsd:element ref="submitted_by"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="filesize" type="xsd:byte"/>
+	<xsd:element name="filetype">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="followups">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="id">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:int"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="item">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="field" minOccurs="0"/>
+				<xsd:element ref="old_value" minOccurs="0"/>
+				<xsd:element ref="date"/>
+				<xsd:element ref="sender" minOccurs="0"/>
+				<xsd:element ref="submitted_by" minOccurs="0"/>
+				<xsd:element ref="text" minOccurs="0"/>
+				<xsd:element ref="by" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="location" type="xsd:string"/>
+	<xsd:element name="name">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="old_value" type="xsd:string"/>
+	<xsd:element name="priority">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="id" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int"/>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="resolution">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="id">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int"/>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="sender" type="xsd:string"/>
+	<xsd:element name="status">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="id">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int"/>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="submitted_by">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="submitted_date" type="xsd:string"/>
+	<xsd:element name="summary" type="xsd:string"/>
+	<xsd:element name="text" type="xsd:string"/>
+	<xsd:element name="tracker">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="artifact" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="version" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string"/>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

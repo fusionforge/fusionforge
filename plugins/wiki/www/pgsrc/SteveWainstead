@@ -1,0 +1,19 @@
+Date: Wed, 26 Jan 2011 18:03:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: SteveWainstead 7910 2011-01-26 17:04:39Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=SteveWainstead;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Hi. I started building this [[Help:WikiWikiWeb|WikiWikiWeb]] but many others help me
+now. I'm at [[http://www.panix.com/~swain/]].
+
+Please report bugs to [[mailto:phpwiki-talk@lists.sourceforge.net]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

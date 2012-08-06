@@ -1,0 +1,155 @@
+#
+# This file is (c) Copyright 2010 by Olivier BERGER, Institut
+# TELECOM
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+# This program has been developed in the frame of the HELIOS
+# project with financial support of its funders.
+#
+
+#
+# This file contains the grammar definition for the "Library of Congress Contextual 
+# Query Language" (CQL) -like OSLC-CM V1's Change Management Query Syntax 
+# ( http://open-services.net/bin/view/Main/CmQuerySyntaxV1).
+#
+# Its is meant to be parsed by the "LIME Parser generator for PHP" 
+# (http://lime-php.sourceforge.net/) to generate the "cql-lime_parser.inc.php" parser
+#
+
+# Here's the BNF for the grammar
+# query      ::= (term (boolean_op term)*)+ modifiers
+# term       ::= (identifier operator)? value+ | (identifier "in")? in_val | fulltext
+# operator   ::= "=" | "!=" | "<" | ">" | "<=" | ">="
+# boolean_op ::= "and"
+# modifiers  ::= sort?
+# sort       ::= "/sort" "=" identifier
+# fulltext   ::= "oslc_cm:searchTerms" "=" '"' value+ '"'
+# identifier ::= word (":" word)?
+# in_val     ::= "[" value ("," value)* "]"
+# value      ::= (integer | string)
+# word       ::= /any sequence of letters and numbers, starting with a letter/
+# string     ::= '"' + /any sequence of characters/ + '"'
+# integer    ::= /any sequence of integers/
+
+# $Id: CmController.php 69 2009-12-17 21:35:25Z berger_o $
+
+# name of the class to be generated for the parser
+%class cql_lime_parser
+
+# The following tokens are provided by the tokenizer :
+#  integer  : an integer
+#  string   : a string quoted with double quotes (")
+#  word     : an unquoted string
+#  and_kw   : 'and'
+#  sort_kw  : 'sort'
+#  equal_kw : '='
+#  not_kw   : '!'
+#  lt_kw    : '<' 
+#  gt_kw    : '>'
+
+
+%start query
+
+# start to try and map :
+#  query ::= (term (boolean_op term)*)+ modifiers
+# decomposed in 2 rules using 'query_in'
+
+query = query_in {
+	global $parsed_results;
+	$parsed_results = $$;
+	}
+| query_in modifiers {
+	global $parsed_results;
+	$parsed_results = $$;
+	}
+.
+
+query_in = term { 
+
+	$$ = array( 'terms' => array($1) );
+
+	debug_found('query_in', 'single term :'. print_r($$,true) ); 
+	}
+| query_in boolean_op term {
+ 
+	$first_subquery = $1;
+	$terms = $first_subquery['terms'];
+	$terms[] = $3;
+	$$ = array( 'terms' => $terms );
+	
+	debug_found('query_in', 'found multiplesubqueries with boolean query_in : '. print_r($$,true) );
+	}
+.
+
+
+# term       ::= (identifier operator)? value+ | (identifier "in")? in_val | fulltext
+
+term = identifier/i operator/o value/v {
+
+	$$ = array($o, $i, $v);
+
+	debug_found('term', 'found identifier operator value term: '. print_r($$,true) ); 
+	}
+| value { 
+	debug_found('term', 'found single value term: '. print_r($$,true) );
+	}
+.
+
+operator = equal_kw
+| not_kw equal_kw { $$ = $1.$2; }
+| lt_kw 
+| gt_kw 
+| lt_kw equal_kw { $$ = $1.$2; } 
+| gt_kw equal_kw { $$ = $1.$2; } 
+.
+
+boolean_op = and_kw
+.
+
+modifiers = sort
+.
+
+sort = '/' sort_kw '=' identifier
+.
+
+identifier = word { 
+	debug_found('identifier', 'found simple identifier: '. print_r($$,true) );
+	}
+| word ':' word {
+
+	$$ = $1.':'.$3;
+	 
+	debug_found('identifier', 'found prefixed identifier: '. print_r($$,true) );
+	}
+.
+
+in_val = {
+	$$=array(); /* problem */}
+| '[' in_val_in/in ']' { $$[] = $in; }
+.
+
+in_val_in = value {/* problem */}
+| ',' in_val_in
+.
+
+value = integer { 
+	debug_found('value', 'found integer: '. print_r($$,true) ); 
+	}
+| string { 
+	debug_found('value', 'found string: '. print_r($$,true) ); 
+	}
+.
+

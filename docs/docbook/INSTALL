@@ -1,0 +1,56 @@
+***
+* GForge documentation tools installation guide
+***
+
+XML Docbook
+--
+
+You must have the docbook DTDs installed on your computer.  On many
+distros, there are some docbook packages to install them easily.
+
+Download docbook XSL stylesheets from
+http://sourceforge.net/projects/docbook/ .  Install them anywhere you
+want then add a symlink to them called docbook in xsl/ folder.
+
+
+DB2LaTeX
+--
+
+Download DB2LaTeX XSL stylesheets from
+http://sourceforge.net/projects/db2latex/ .  Install them anywhere you
+want then add a symlink to them called db2latex in xsl/ folder.
+
+
+PDFLatex
+--
+
+You have to install PDFLatex to generate the pdf output. It's
+distributed in tetex-latex package.  I personally installed a lot of
+tetex packages as I don't know which ones I really need :).
+
+
+Documentation tools in Debian
+--
+
+For HTML documentation tools, run:
+
+  # apt-get install docbook-xml docbook-xsl libxml2-utils xsltproc
+
+Then making the symbolic link is like that (in docs/docbook/xsl):
+
+  $ ln -s /usr/share/xml/docbook/stylesheet/nwalsh docbook
+
+For PDF documentation tools, run:
+
+  # apt-get install db2latex-xsl tetex-extra latex-ucs
+
+Then make the symbolic link (in docs/docbook/xsl):
+
+  $ mkdir db2latex
+  $ ln -s /usr/share/xml/docbook/stylesheet/db2latex/latex db2latex/xsl
+
+All these steps are automated in the Makefile by using sudo:
+
+  $ make debianhtml
+  $ make debianpdf
+  $ make debian      # runs both debianhtml and debianpdf

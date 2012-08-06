@@ -1,0 +1,30 @@
+<?php // -*-php-*-
+// $Id: browse-footer.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+?>
+<?php // <hr class="printer" noshade="noshade" /> ?>
+    <div class="visualClear"></div>
+    <ul id="f-list">
+      <li id="f-lastmod"> <?php echo $WikiTheme->getOwnerMessage($page) ?>  <?php echo $WikiTheme->getLastModifiedMessage($revision) ?> <?php echo $WikiTheme->getAuthorMessage($revision) ?> </li>
+	  
+      <li id="f-copyright">All text is available under the terms of the <a class="internal" href="http://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License</a> (see <b>
+<?php if ($request->_dbi->isWikiPage(_("Copyrights"))) { ?>
+      <?php echo WikiLink(_("Copyrights")) ?>
+<?php } else { ?>
+      <a class="internal" href="http://www.phpwiki.org/Copyrights" title ="PhpWiki:Copyrights">Copyrights</a>
+<?php } ?>
+</b> for details).<br /></li>
+<?php if ($request->_dbi->isWikiPage(_("About".WIKI_NAME))) { ?>
+      <?php echo WikiLink(_("About".WIKI_NAME)) ?>
+<?php } else { ?>
+      <li id="f-about"><a href="http://www.phpwiki.org/PhpWiki" title ="PhpWiki:About">About PhpWiki</a></li>
+<?php } ?>
+      <li id="f-disclaimer">
+<?php if ($request->_dbi->isWikiPage(_("GeneralDisclaimer"))) { ?>
+      <?php echo WikiLink(_("GeneralDisclaimer")) ?>
+<?php } else { ?>
+      <a href="http://www.phpwiki.org/GeneralDisclaimer" title ="PhpWiki:Disclaimer">Disclaimer</a>
+<?php } ?>
+</li>
+    </ul>
+    <div id="f-poweredbyico"><a href="http://www.phpwiki.org/"><img src="<?php echo $WikiTheme->getImageURL("poweredby_phpwiki_51x31.png") ?>" alt="Powered by PhpWiki" /></a></div>
+    <div id="f-copyrightico"><a href="http://www.gnu.org/copyleft/fdl.html"><img src="<?php echo $WikiTheme->getImageURL("gnu-fdl.png") ?>" alt="GNU Free Documentation License" /></a></div>

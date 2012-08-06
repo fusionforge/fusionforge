@@ -1,0 +1,224 @@
+The goal of this document is to explain how to map user accounts of 
+a linux system on a postgress database. In our case on the gforge database.
+
+The clue is the Name Service Switch aka NSS.
+
+Extract of the nsswitch.conf manual:
+------------------------------------------------------------------------------
+nsswitch.conf - System Databases and Name Service Switch configuration file
+
+DESCRIPTION
+    Various functions in the C Library need to be configured to work correctly in the local environment.  Tra­
+    ditionally, this was done by using files (e.g., `/etc/passwd'), but other nameservices (like  the  Network
+    Information  Service  (NIS)  and the Domain Name Service (DNS)) became popular, and were hacked into the C
+    library, usually with a fixed search order.
+
+    The Linux libc5 with NYS support and the GNU C Library 2.x (libc.so.6) contain a cleaner solution of  this
+    problem.   It is designed after a method used by Sun Microsystems in the C library of Solaris 2. We follow
+    their name and call this scheme "Name Service Switch" (NSS). The sources for  the  "databases"  and  their
+    lookup order are specified in the /etc/nsswitch.conf file.
+------------------------------------------------------------------------------
+Many "databases" are available in the NSS
+The one that we will use are:
+	passwd: User passwords, used by getpwent(3) functions.
+	group : Groups of users, used by getgrent(3) functions.
+
+shadow is not used in the nss-pgsql implementation we will use
+
+How this works?
+---------------
+A service named SERVICE is implemented by a shared object library named libnss_SERVICE.so.X  that  resides
+in /lib.
+common ones are:
+     /lib/libnss_compat.so.X  implements `compat' source for glibc2
+     /lib/libnss_db.so.X      implements `db' source for glibc2
+     /lib/libnss_dns.so.X     implements `dns' source for glibc2
+     /lib/libnss_files.so.X   implements `files' source for glibc2
+     /lib/libnss_hesiod.so.X  implements `hesiod' source for glibc2
+     /lib/libnss_nis.so.X     implements `nis' source for glibc2
+     /lib/libnss_nisplus.so.2 implements `nisplus' source for glibc 2.1
+the one we use is:
+     /lib/libnss_pgsql.so.2.0.0
+
+Configuration files:
+--------------------
+/etc/nsswitch.conf 
+Here you tell which "databases" you will use
+This is very simple:
+
+...
+passwd:         compat pgsql
+group:          compat pgsql
+...
+
+Only have to add the pgsql database for passwd and group
+
+/etc/nss-pgsql.conf
+This is the most complex part for nss-pgsql configuration
+
+---
+host            = 10.0.0.5
+port            = 5432
+database        = gforge
+login           = gforge_nss
+passwd          = ''
+passwdtable     = nss_passwd
+grouptable      = nss_groups
+groupmembertable = nss_passwd JOIN nss_usergroups ON nss_passwd.uid=nss_usergroups.uid JOIN nss_groups ON nss_usergroups.gid=nss_groups.gid
+
+passwd_name     = login
+passwd_passwd   = passwd
+passwd_uid      = uid
+passwd_dir      = homedir
+passwd_shell    = shell
+passwd_gecos    = gecos
+passwd_gid      = gid
+
+group_name      = name
+group_passwd    = passwd
+group_gid       = gid
+group_member    = login
+---
+host/port/database/login/passwd are used to connect pgsql
+nss-pgsql uses internally PQconnectdb function (http://www.postgresql.org/docs/7.4/static/libpq.html)
+host can be /tmp for socket connection
+You have to ensure pgsql is properly configured to let the user access to the database
+usually in /etc/postgresql/pg_hba.conf file
+You can set a password if you want.
+The rest of the config describes the mapping with database tables (passwdtable/grouptable/groupmembertable)
+and fields (passwd_*/group_*) in the database.
+
+nss_passwd/nss_groups where defined as views in gforge
+
+Postgresql tables
+-----------------
+There is the first implementation without changing anything in the database
+
+--- gforge/db/20041001.sql
+CREATE VIEW nss_passwd AS
+	SELECT unix_uid+20000 AS uid,
+		unix_uid+20000 AS gid,
+		user_name AS login,
+		unix_pw AS passwd,
+		realname AS gecos,
+		shell,
+		'/var/lib/gforge/chroot/home/users/' || user_name AS homedir
+	FROM users
+	WHERE status='A'
+	UNION
+	SELECT group_id+50000 AS uid,
+		group_id+20000 AS gid,
+		'anoncvs_' || unix_group_name AS login,
+		CHAR(1) 'x' AS passwd,
+		group_name AS gecos,
+		'/bin/false' AS shell,
+		'/var/lib/gforge/chroot/home/groups' || group_name AS homedir
+	FROM groups
+	UNION
+	SELECT 9999 AS uid,
+		9999 AS gid,
+		'gforge_scm' AS login,
+		CHAR(1) 'x' AS passwd,
+		'Gforge SCM user' AS gecos,
+		'/bin/false' AS shell,
+		'/var/lib/gforge/chroot/home' AS homedir;
+
+CREATE VIEW nss_shadow AS
+	SELECT user_name AS login,
+		unix_pw AS passwd,
+		CHAR(1) 'n' AS expired,
+		CHAR(1) 'n' AS pwchange
+	FROM users
+	WHERE status='A';
+
+CREATE VIEW nss_groups AS
+	SELECT group_id+10000 AS gid,
+		unix_group_name AS name,
+		group_name AS descr,
+		CHAR(1) 'x' AS passwd
+	FROM groups
+	UNION
+	SELECT unix_uid+20000 AS gid,
+		user_name AS name,
+		lastname AS descr,
+		CHAR(1) 'x' AS passwd
+	FROM users;
+
+CREATE VIEW nss_usergroups AS
+	SELECT group_id+10000 AS gid,
+		users.unix_uid+20000 AS uid
+	FROM user_group,users 
+	WHERE user_group.user_id=users.user_id
+	UNION 
+	SELECT unix_uid+20000 AS gid,
+		unix_uid+20000 AS uid
+	FROM users
+---
+You will need to give some access to the gforge_nss postgresql user.
+GRANT SELECT ON nss_passwd TO gforge_nss
+GRANT SELECT ON nss_groups TO gforge_nss
+GRANT SELECT ON nss_usergroups TO gforge_nss
+
+
+Comments:
+---------
+nss_shadow is not used
+
+nss_passwd is composed of the union of users for user account 
+and users for cvs account
+
+nss_group
+One problem is it should be different groups for projects and for cvs since all users of a project don't
+have necessarily access to cvs
+All addition are making search not very efficient and probably renders indexes ineficient
+
+nss_usergroups
+It's a table of uid,gid couples describing user with uid is member of group with gid
+
+How to solve this:
+Efficiency:
+	Have two tables for users and groups that would allow direct mapping, efficient indexes.
+	Link this to the System class
+
+Easyness:
+	Add fields in users and groups table
+	This will require the use of union, and indexes will be less efficient
+
+On non debian install unix_uid is not used, it's rather user_id.
+Hardcoded path should be replaced by database fields.
+
+Changing uid/gid on the system is a complex thing so we should find a solution that allow to keep 
+the already defined uid/gid
+
+--------
+
+
+ID:
+---
+For each user I need one uid=gid
+For each group I need one gid for shell, one for scm
+This last may cause a problem for users members of more that 16 projects
+	if there is a limitation to a max of 32 groups for a user,
+	so we can keep the actual situation that use the same gid for shell and scm 
+We use the following:
+uid from 50000 to 59999 / gid from 10000 to 19999 for projects
+uid from 20000 to 49999 / gid from  20000 to 49999 for users
+With different gid for shell and scm:
+gid from 50000 to 59999 for scm
+
+
+---------------------------------------------
+anonscm-gforge user
+fill /cvsroot/projectname/CVSROOT/passwd with 
+anonymous:\$1\$0H\$2/LSjjwDfsSA0gaDYY5Df/:anonscm-gforge
+create anonscm-gforge user
+adduser --system --group --home /var/lib/gforge/chroot/cvsroot anonscm-gforge
+make history files owned by anonscm-gforge
+chown anonscm-gforge /cvsroot/*/CVSROOT/history
+
+---------------------------------------------
+Currently implementation replaced views with tables
+see db/20050225-nsssetup.sql and changes 
+between tables are triggered by 
+common/include/system/pgsql.class.php
+I hope soon to get some help to have this as db triggers

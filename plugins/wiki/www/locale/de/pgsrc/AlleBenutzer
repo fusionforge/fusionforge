@@ -1,0 +1,19 @@
+Date: Fri,  4 Feb 2011 17:33:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: AlleBenutzer 7938 2011-02-04 16:35:28Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=AlleBenutzer;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Liste aller eingetragenen Benutzer, die ihre 
+BenutzerEinstellungen schon einmal gespeichert haben,
+entweder in ihrer Homepage oder - wenn so konfiguriert -
+in einer Datenbank.
+----
+<<AllUsers>>
+
+----
+[[KategorieAktionSeite]]

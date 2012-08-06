@@ -1,0 +1,130 @@
+OSLC-CM V2 compatible plugin for FusionForge
+----------------------------------------------
+
+This directory holds development for an OSLC-CM V2 compatible plugin for FusionForge.
+
+This program was developped at Institut TELECOM in the frame of the
+HELIOS project (http://www.helios-platform.org/) and COCLICO project 
+(http://www.coclico-project.org/),  with the financial support of 
+the Paris Region council.
+
+More details about this project are available at its homepage at :
+https://picoforge.int-evry.fr/cgi-bin/twiki/view/Oslc/Web/FusionForgeOslcServer
+
+About OSLC-CM
+-------------
+OSLC-CM is a proposed standard of a protocol to interact with Change
+Management tools, devised by the Open Services initiative.
+
+More details can be found at the project's homepage :
+http://open-services.net/bin/view/Main/CmHome
+
+This program does not constitute a reference implementation of OSLC-CM
+V2, and the specifications at
+http://open-services.net/bin/view/Main/CmSpecificationV2 are the only
+authoritative reference on the protocol. Still we hope to be able to
+achieve full coverage of the specs.
+
+Current status
+--------------
+This is version 0.8 of the program, which only provides a first set
+of demonstartive methods of an OSLC-CM server.
+
+Architecture of the plugin
+--------------------------
+This plugin is based on the Zend PHP framework in order to implement
+a REST interface to FusionForge Tracker system.
+
+Copyright, OpenSource and license
+-------------------------------------
+See the AUTHORS file for the list of authors of this program.
+
+See the COPYING file for details on the GNU GPL license (V2 or above) 
+covering this program, which states the use and redistribution conditions.
+
+We must acknowledge the original pieces of example Zend REST server
+code that we've borrowed from several blog posts. We hope that the
+current licensing does not infringe on anyone else's rights.
+
+Parts of the code is copied out of the following sources :
+* a blog post "Creating a PHP REST API Using the Zend Framework" by 
+  Chris Danielson (http://www.chrisdanielson.com/2009/09/02/creating-a-php-rest-api-using-the-zend-framework/)
+
+TODO : Acknowledge original authors of zend REST examples we reused
+more precisely.
+
+
+Included is a copy of code from the "LIME Parser generator for PHP" 
+(http://lime-php.sourceforge.net/), used to implement the CQL-like 
+"Change Management Query Syntax" parser 
+(http://open-services.net/bin/view/Main/OSLCCoreSpecQuery)
+
+Installing & configuring
+------------------------
+
+Until a sperate debian package will be provided for this plugin, you
+can reffer to the INSTALL file for installation guidelines.
+
+Using the OSLC FusionForge plugin
+-------------------------
+
+Supported REST queries (see OSLC-CM V2 specs for more detailed
+instructions) are described below.
+
+As specific Content-Type/Accept are required by the REST protocol
+specified by OSLC-CM V2, more queries will need a versatile HTTP
+client.
+
+Most URLs will not work if accessed in a web browser, as it normally
+requires text/html, which is not part of the OSLC-CM supported
+formats.
+
+We recommend to use the "curl" command-line tool, with the following
+syntax :
+ $ curl -H "Accept: EXPECTED FORMAT" -X [GET|PUT|POST|DEL] URL
+where EXPECTED FORMAT is one mentioned below (application/xml, etc.)
+
+* GET (retrieval) :
+-------------------
+Discovery of services :
+ - GET .../cm/oslc-services/ (application/xml) -> retrieve OSLC
+    service catalog document
+
+ - GET .../cm/oslc-cm-service/ (application/xml) -> retrieve OSLC-CM
+    service description document
+
+Retrieval of all bugs of a tracker whithin a project :
+ - GET .../cm/project/PROJ_ID/tracker/TRACKER_ID (application/atom+xml) where PROJ_ID
+   is the project id and TRACKER_ID is the tracker id.
+
+Retrieval of ChangeRequest resources :
+ - GET .../cm/bug/nnnnn -> get bug whose id is nnnnn (RDF+XML or JSON) etc.
+
+We support only basic auth where user and password are checked against FusionForge' DB 
+
+Example of curl syntax :
+ 	curl -v -H "Accept: application/atom+xml" -X GET http://user:pass@localhost/plugins/oslc/cm/project/6/tracker/101
+
+Example of filtering on attributes :
+ - GET ...cm/project/PROJ_ID/tracker/TRACKER_ID?oslc_where=helios_bt:status="open" and helios_bt:assigned_to="labbenes" 
+  -> retrieve bugs whose helios_bt:status == "open" AND helios_bt:assigned_to == "labbenes".
+ - GET ...cm/project/PROJ_ID/tracker/TRACKER_ID?oslc_properties=dc:title,dc:description,helios_bt:status,helios_bt:assigned_to
+  -> retrieve all bugs of tracke TRACKER_ID and only shows the title, description, status, assigned_to attributes 
+  of those bugs.
+
+Pagination of Change Requests:
+ - GET .../cm/project/PROJ_ID/tracker/TRACKER_ID?oslc_limit=xx&oslc_offset=yy
+ 
+
+ * POST (creation) :
+-------------------
+ - POST .../cm/project/PROJ_ID/tracker/TRACKER_ID -> create a new bug out of provided input (RDF+XML or JSON) into a particular project
+
+ Example of curl syntax using data contained in the file post-testdata.xml (provided as example for tests):
+ 	curl -v -H "Content-Type: application/x-oslc-cm-change-request+xml" -X POST --data @test-testdata.xml http://user:pass@fusionforge/plugins/oslc/cm/project/6/tracker/101/?type=group&id=6&pluginname=oslc
+ 	
+* PUT (modification) :
+----------------------
+ - PUT .../cm/bug/nnnnn -> replace bug whose id is nnnnn by provided input (RDF+XML or JSON) 
+ -> Update bug whose id is nnnnn by provided data in input (RDF+XML or JSON)
+ 

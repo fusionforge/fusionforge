@@ -1,0 +1,77 @@
+Date: Tue, 25 Jan 2011 17:50:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Aide%2FPluginTableauAncienStyle 7879 2011-01-25 17:01:33Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FPluginTableauAncienStyle;
+  flags="";
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+===Description
+PluginTableauAncienStyle peut être utilisé pour inclure des 
+tableaux dans une page wiki avec la syntaxe de l'ancien style
+des marques pour les tableaux.
+
+===Usage:
+
+{{{
+<<OldStyleTable caption="Tableau ancien style" border||=2
+||^  *Identité*             |v *Prix*       |v *Notes*
+| *Prénom*     | *Nom*
+|> Jeff        |< Dairiki   |^ Bon marché   |< Sans valeur
+|> Marco       |< Polo      |  Moins cher   |< Pas disponible
+>>
+}}}
+
+affichera
+
+<<OldStyleTable caption="Tableau ancien style" border||=2
+||^  *Identité*             |v *Prix*       |v *Notes*
+| *Prénom*     | *Nom*
+|> Jeff        |< Dairiki   |^ Bon marché   |< Sans valeur
+|> Marco       |< Polo      |  Moins cher   |< Pas disponible
+>>
+
+Remarquez que de multiple **|** conduisent à des colonnes étendus
+et que des**v** peuvent être utilisé pour étendre des lignes. Un 
+**>** engendre une colonne justifiée à droite, **<** une colonne 
+justifiée à gauche et **^** une colonne centrée (position par 
+défaut).
+
+===Arguments
+
+**caption**:
+
+  une chaîne. Par défaut : ""
+
+**border**:
+
+  un nombre. Par défaut : 1
+
+**cellspacing**:
+
+  un nombre. Par défaut : 1
+
+**cellpadding**:
+
+  un nombre. Par défaut : 1
+
+**summary**:
+
+  une chaîne. Par défaut : ""
+
+----
+
+Notez que dans chaque cellule du tableau, le _nouveau style_ est utilisé.
+Vous pouvez seulement utiliser les marques en ligne --- des groupes de marques 
+par niveau sont autorisés dans les cellules.
+
+Utiliser l'ancien style ne devrait pas avoir beaucoup plus de sens puisqu'on 
+ne peut pas inclure d'appels de plugin sur plusieurs lignes en utilisant
+les anciennes règles.
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

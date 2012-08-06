@@ -1,0 +1,17 @@
+<section id="ug_project">
+	<title>Project functions</title>
+
+	<xi:include href="project_summary.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="activity.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="project_admin.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="forums.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="tracker.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="mailing_lists.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="task_manager.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="docman.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="surveys.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="news.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="cvs.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="file_releases.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="blocks.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</section>

@@ -1,0 +1,136 @@
+<section id="cg_howto_localization">
+	<title>Localization howto</title>
+	<section>
+		<title>FusionForge localization system and status</title>
+		<para>
+			This short HOWTO explains how you can customize your local installation of FusionForge.
+		</para>
+		<para>
+			First, a quick course on the internationalisation system present in FusionForge.
+		</para>
+		<para>
+			The texts you can read on the web pages are not hard-coded.
+			Instead, they are displayed as results of a function of several parameters.
+			One of these parameters is the language in which you wish to display a piece of information, and another is some handle to identify the information you want to display.
+			In FusionForge, this handle is made up of the <quote>page name</quote> and the <quote>category</quote> strings.
+		</para>
+		<para>
+			Knowing all the needed info, the function displays the appropriate text. How appropriate is this text?  Well, that depends. First, a basic set of texts is loaded. Historically, this set is loaded in English. This set of texts makes the Base class, storing texts for all known <quote>handles</quote>.
+		</para>
+		<para>
+			This set of texts can then be partially or completely overloaded, e.g. for other languages: the handles present in the language overwrite the Base handles, and the ones not found keep their values from the Base class.
+		</para>
+		<para>
+			The language files are located in the <filename>www/include/languages</filename> directory.
+		</para>
+		<para>The following languages are available in FusionForge :</para>
+		<itemizedlist>
+			<listitem><para>The English language, being the original one in which FusionForge was written, is obviously complete.</para></listitem>
+			<listitem><para>The french translation is complete.</para></listitem>
+			<listitem><para>The Spanish (Castillan) translation is complete.</para></listitem>
+			<listitem><para>The Korean translation used to be complete.</para></listitem>
+			<listitem><para>The Dutch, Italian, Portuguese Brazilian and Swedish translations are pretty well advanced but not regularly updated.</para></listitem>
+			<listitem><para>The German, Japanese and Simplified Chinese translations are 20-50% complete.</para></listitem>
+			<listitem><para>The Catalan translation is a work in progress.</para></listitem>
+		</itemizedlist>
+		<para>
+			You might consider translating FusionForge into your language. If you do so, please also consider submitting your translated file to us so that future releases of FusionForge include your translated file by default.
+		</para>
+	</section>
+	<section>
+		<title>Adding a new language</title>
+		<para>
+			These are the steps to add a new language:
+		</para>
+		<orderedlist>
+			<listitem>
+				<para>
+					Add a row in the <database class="table">supported_languages</database> table in the <database>gforge</database> database:
+				</para>
+<programlisting>
+INSERT INTO supported_languages
+	(name, filename, classname, language_code)
+	VALUES ('German (Austria)',
+		'Austrian.class.php',
+		'Austrian',
+		'at'
+	);
+</programlisting>
+				<note>
+					<para>
+						The language_code should follow the international language codings described in <ulink url="http://www.faqs.org/rfcs/rfc1766.html">RFC 1766</ulink>. For example, Portuguese Brazilian code is pt-br and not pt_BR.
+					</para>
+				</note>
+			</listitem>
+			<listitem>
+				<para>
+					Copy the file <filename>Base.tab</filename> to <filename>Austrian.tab</filename> and place it in the <filename>www/languages/include</filename> folder.
+				</para>
+			</listitem>
+			<listitem>
+				<para>Translate the document</para>
+				<warning>
+					<para>If you are not going to translate the entire document, <emphasis>please just override strings you translate</emphasis>.</para>
+				</warning>
+			</listitem>
+			<listitem>
+				<para>Submit the translation to the FusionForge project</para>
+			</listitem>
+		</orderedlist>
+	</section>
+	<section>
+		<title>Format of the *.tab files</title>
+		<para>
+			The *.tab files are in a fairly straightforward format.  Lines starting with a '#' character are ignored, other lines must be in the following format:
+		</para>
+<programlisting><![CDATA[<pagename> TAB <category> TAB <data>]]></programlisting>
+		<warning>
+			<para>Please be careful to use <keycap>TAB</keycap> and not <keycap>SPACE</keycap>.</para>
+		</warning>
+		<para>
+			The &lt;data&gt; field can use variables in the form $1, $2, etc.  These variables are defined by the script and there's no simple way of knowing what they are apart from looking at the script itself.  To find out exactly what these variables are filled out with, search for the <methodname>getText('&lt;pagename&gt;','&lt;category'&gt;)</methodname> string in the scripts contained in the <filename>www/</filename> and <filename>common/</filename>.  This is not always easy to do.
+		</para>
+		<para>
+			Your best bet is to guess the meaning of the $1, $2, etc. variables from the non-customized text (either Base.tab or Foobaric.tab if it is defined).
+		</para>
+		<warning>
+			<para>*.tab files must be UTF-8 encoded.</para>
+		</warning>
+	</section>
+	<section>
+		<title>Updating a translation</title>
+		<para>
+			FusionForge is constantly developed and so translation files are regularly outdated. Thus translations should be regularly updated to be uptodate.
+		</para>
+		<para>
+			If you are maintaining a translation file, you may find useful <filename>language_file_merger.php</filename> script you can find in tools module (see <xref linkend="cg_repository" endterm="cg_repository.title" /> for more information).
+		</para>
+		<para>
+			You can use the following command to merge your outdated language file with Base.tab :
+		</para>
+		<programlisting role="shell"><![CDATA[php -q language_file_merger.php <your/gforge/install/root> <language> \
+1>merge.tab 2>merge.log]]></programlisting>
+		<para>
+			You have to check lines with #TO_TRANSLATE# and #TO_REMOVE# flags and respectively translate them and remove them. Lines are already sorted by alphabetical order so you just have to add header information found in the previous YourLanguage.tab file to merge.tab file and replace YourLanguage.tab by merge.tab.
+		</para>
+	</section>
+	<section>
+		<title>Text content customization</title>
+		<para>
+			The text content can be somewhat customized. The FusionForge internationalisation system already provides a way to have different texts depending on user choice.
+		</para>
+		<para>
+			You might want to change page footers, or contact pages, or host names, or whatever you need to integrate your FusionForge your target audience (company, organisation, or even your own personal FusionForge).
+		</para>
+		<para>
+			The way you should usually go when you have to customize some text is the following:
+		</para>
+		<orderedlist>
+			<listitem><para>Find the bit of text you want to customize in <filename>Foobaric.tab</filename>;</para></listitem>
+			<listitem><para>Copy and paste the appropriate line (including the <quote>handle</quote> -- the first two fields) in <filename>/etc/gforge/languages-local/Foobaric.tab</filename> or for theme specific customization in <filename>/etc/gforge/languages-local/&lt;theme&gt;/Foobaric.tab</filename>;</para></listitem>
+			<listitem><para>Read it to find out about the $n variables;</para></listitem>
+			<listitem><para>Replace the third field with my own customized version.</para></listitem>
+			<listitem><para>If you use the localization caching system, remove cache files.</para></listitem>
+		</orderedlist>
+	</section>
+</section>

@@ -1,0 +1,32 @@
+#
+# GForge
+# Copyright 1999-2001 (c) VA Linux Systems
+# Copyright 2002-2004 (c) GForge, LLC, Ognyan Kulev
+# http://fusionforge.org/
+#
+
+# Change path to the GForge directory.
+FUSIONFORGE="/usr/share/gforge"
+
+# Change paths to the GForge directory.
+# Don't reference $GFORGE because this won't work!
+# You may need to change the pathname to php CLI (command line interface)
+PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include"
+
+# Don't mail command output to anyone.
+MAILTO=""
+
+#
+#       Create the /etc/* files : only usefull if the sys_account_manager_type=UNIX
+#
+#10 * * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/usergroup.php
+
+#
+#       Upload the SSH key files
+#
+15 * * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/ssh_create.php
+
+#
+#       Create the blank cvs trees
+#
+20 * * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/cvs.php

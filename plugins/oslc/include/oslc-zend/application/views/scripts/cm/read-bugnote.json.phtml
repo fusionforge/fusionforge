@@ -1,0 +1,29 @@
+<?php
+
+
+  /* 
+   * This file is (c) Copyright 2009 by Madhumita DHAR, Institut
+   * TELECOM
+   *
+   * Use, modification, redistribution of this software are subject to
+   * the terms of the NEW BSD License, whose text can be found in the
+   * 'COPYING' file that is distributed along with the software archive.
+   *
+   * Thus you may use it at your own risk, of course !
+   *
+   * This program has been developed in the frame of the HELIOS
+   * project with financial support of its funders.
+   *
+   */
+
+  /* $Id$ */
+
+$json = array('rdf:about' => $this->id);
+foreach ($this->resource as $field => $value) {
+	$json[$field] = $value;
+}
+print str_replace("\/", "/", Zend_Json::prettyPrint(Zend_Json::encode($json)));
+
+//require('_get_response.php');
+//print $doc->saveXML();
+//print Zend_Json::fromXML();
