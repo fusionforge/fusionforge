@@ -4,6 +4,7 @@ usr/share/mediawiki/img_auth.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/i
 usr/share/mediawiki/includes			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/includes
 usr/share/mediawiki/index.php			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/index.php
 usr/share/mediawiki/languages			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/languages
+usr/share/mediawiki/load.php			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/load.php
 usr/share/mediawiki/maintenance			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/maintenance
 usr/share/mediawiki/opensearch_desc.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/opensearch_desc.php
 usr/share/mediawiki/profileinfo.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/profileinfo.php
