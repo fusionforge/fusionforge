@@ -885,5 +885,5 @@ fieldset {
 		top: -1em;	/* undo div#maindiv */
 		left: -1em;	/* undo div#maindiv */
 	padding-top: 1em;	/* redo div#maindiv for !absolute content */
-	font-size: x-small;	/* expected by MW */
+	background: #f9f9f9 url(mw-headbg.jpg) 0 0 no-repeat;
 }

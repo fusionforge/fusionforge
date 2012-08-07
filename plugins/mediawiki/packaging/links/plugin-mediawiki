@@ -14,6 +14,7 @@ usr/share/mediawiki/thumb.php			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/thu
 usr/share/mediawiki/trackback.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/trackback.php
 
 usr/share/mediawiki/skins			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/skins
+usr/share/mediawiki/skins/monobook/headbg.jpg	usr/share/@OLDPACKAGE@/www/themes/css/mw-headbg.jpg
 
 usr/share/mediawiki				var/lib/@OLDPACKAGE@/plugins/mediawiki/master
 

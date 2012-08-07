@@ -91,7 +91,7 @@ class FusionForgeTemplate extends BaseTemplate {
 
 		echo "\n<!-- FUSIONFORGE BodyHeader BEGIN -->\n";
 		$GLOBALS['HTML']->bodyHeader($this->params);
-		echo "<div id=\"ff-mw-wrapper\">\n";
+		echo "<div id=\"ff-mw-wrapper\"><div style=\"font-size:x-small;\">\n";
 		echo "<!-- FUSIONFORGE BodyHeader END -->\n";
 
 ?><div id="globalWrapper">
@@ -190,7 +190,7 @@ echo $footerEnd;
 </div>
 <?php
 		$this->printTrail();
-		echo "</div>\n";
+		echo "</div></div>\n";
 		$GLOBALS['HTML']->footer($this->params);
 		wfRestoreWarnings();
 	} // end of execute() method
