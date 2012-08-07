@@ -2,12 +2,13 @@ Source: fusionforge
 Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
-Uploaders: Christian Bayle <bayle@debian.org>, Olivier Berger <obergix@debian.org>
+Uploaders: Christian Bayle <bayle@debian.org>, Olivier Berger <obergix@debian.org>, Thorsten Glaser <tg@mirbsd.de>
 Build-Depends-Indep: sharutils, docbook-to-man, devscripts, gettext, isoquery, iso-codes
 Build-Depends: debhelper (>= 7), quilt (>= 0.40), perl, confget
 Standards-Version: 3.9.2
 Homepage: http://fusionforge.org/
 Vcs-Svn: svn://scm.fusionforge.org/scmrepos/svn/fusionforge/trunk
+XBS-Apport: No
 
 Package: fusionforge-standard
 Architecture: all
@@ -464,7 +465,7 @@ Description: collaborative development tool - Hudson plugin
 
 Package: fusionforge-plugin-mediawiki
 Architecture: all
-Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, postgresql-contrib | mysql-server, mediawiki (>= 1:1.15.5-10~), php5-cli, php5-gd, ${misc:Depends}
+Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, postgresql-contrib, mediawiki (>= 1:1.19.1-2~exp2), php5-cli, php5-gd, ${misc:Depends}
 Provides: gforge-plugin-mediawiki
 Conflicts: gforge-plugin-mediawiki (<< 5.0.51-2)
 Replaces: gforge-plugin-mediawiki (<< 5.0.51-2)
