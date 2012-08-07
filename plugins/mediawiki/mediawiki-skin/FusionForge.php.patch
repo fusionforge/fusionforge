@@ -1,5 +1,5 @@
 --- FusionForge.php.renamed	2012-08-06 11:35:42.000000000 +0200
-+++ FusionForge.php	2012-08-06 11:45:29.000000000 +0200
++++ FusionForge.php	2012-08-07 10:38:09.000000000 +0200
 @@ -23,11 +23,31 @@
  	var $skinname = 'fusionforge', $stylename = 'fusionforge',
  		$template = 'FusionForgeTemplate', $useHeadElement = true;
@@ -48,7 +48,7 @@
 +
 +		echo "\n<!-- FUSIONFORGE BodyHeader BEGIN -->\n";
 +		$GLOBALS['HTML']->bodyHeader($this->params);
-+		echo "<div style=\"font-size:x-small;\">\n";
++		echo "<div id=\"ff-mw-wrapper\">\n";
 +		echo "<!-- FUSIONFORGE BodyHeader END -->\n";
 +
  ?><div id="globalWrapper">

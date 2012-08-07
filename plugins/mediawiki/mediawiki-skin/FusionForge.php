@@ -91,7 +91,7 @@ class FusionForgeTemplate extends BaseTemplate {
 
 		echo "\n<!-- FUSIONFORGE BodyHeader BEGIN -->\n";
 		$GLOBALS['HTML']->bodyHeader($this->params);
-		echo "<div style=\"font-size:x-small;\">\n";
+		echo "<div id=\"ff-mw-wrapper\">\n";
 		echo "<!-- FUSIONFORGE BodyHeader END -->\n";
 
 ?><div id="globalWrapper">
