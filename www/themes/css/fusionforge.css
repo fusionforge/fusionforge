@@ -921,6 +921,7 @@ fieldset {
 
 #ff-mw-wrapper h6 {
 	font-size:80%;
+	margin-bottom:0;
 }
 
 #ff-mw-wrapper h3, #ff-mw-wrapper h4, #ff-mw-wrapper h5 {
@@ -935,7 +936,8 @@ fieldset {
 }
 
 #ff-mw-wrapper ul li {
-	margin-bottom:0.1em;
+	/*      ↑   →    ↓   ←    */
+	margin:0em 0em 0.1em 0em;
 	list-style-type:square;
 	list-style-image:url(data:image/gif;base64,R0lGODlhBQANAIAAAGOMnP///yH5BAEAAAEALAAAAAAFAA0AAAIJjI+pu+APo4SpADs=);
 }
@@ -945,6 +947,7 @@ fieldset {
 }
 
 #ff-mw-wrapper #toc ul li, #ff-mw-wrapper .toc ul li {
+	margin:0em 0em 0.1em 0em;
 	list-style-image:none;
 	list-style-type:none;
 }
@@ -961,12 +964,26 @@ fieldset {
 }
 
 #ff-mw-wrapper ol li {
-	margin-bottom:0.1em;
+	margin:0em 0em 0.1em 0em;
 	list-style-type:decimal;
+}
+
+#ff-mw-wrapper #p-personal ul {
+	margin:0;
+	padding:0 2em 0 3em;
+}
+
+#ff-mw-wrapper #p-personal li {
+	margin-left:1em;
 }
 
 #ff-mw-wrapper pre {
 	line-height:1.1em;
 	padding:1em;
 	margin-top:1em;
+}
+
+#ff-mw-wrapper a {
+	color:#002BB8;
+	font-weight:normal;
 }
