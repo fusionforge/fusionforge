@@ -1,4 +1,4 @@
-fusionforge (5.2~rc1wheezy1~exp1) experimental; urgency=low
+fusionforge (5.2~rc1wheezy1) UNRELEASED; urgency=low
 
   * Since this package was accidentally uploaded as native package,
     and there is a large delta to what’s in upstream SVN right now,
@@ -6,8 +6,9 @@ fusionforge (5.2~rc1wheezy1~exp1) experimental; urgency=low
   * Add myself to uploaders
   * Opt out of Apport reports
   * Integrate with MediaWiki 1.19 (Closes: #679932)
+  * Update versioned Depends on MediaWiki
 
- -- Thorsten Glaser <tg@mirbsd.de>  Tue, 07 Aug 2012 13:34:37 +0200
+ -- Thorsten Glaser <tg@mirbsd.de>  Wed, 08 Aug 2012 14:26:37 +0200
 
 fusionforge (5.2~rc1-5) unstable; urgency=low
 

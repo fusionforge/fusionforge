@@ -465,7 +465,7 @@ Description: collaborative development tool - Hudson plugin
 
 Package: fusionforge-plugin-mediawiki
 Architecture: all
-Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, postgresql-contrib, mediawiki (>= 1:1.19.1-2~exp2), php5-cli, php5-gd, ${misc:Depends}
+Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, postgresql-contrib, mediawiki (>= 1:1.19.1-2~), php5-cli, php5-gd, ${misc:Depends}
 Provides: gforge-plugin-mediawiki
 Conflicts: gforge-plugin-mediawiki (<< 5.0.51-2)
 Replaces: gforge-plugin-mediawiki (<< 5.0.51-2)
