@@ -6,6 +6,7 @@
  * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -95,7 +96,8 @@ if ($group_id) {
 			
 			if(!$mailingList->update(
 				unInputSpecialChars(getStringFromPost('description')),
-				getIntFromPost('is_public', MAIL__MAILING_LIST_IS_PUBLIC)
+				getIntFromPost('is_public', MAIL__MAILING_LIST_IS_PUBLIC),
+				MAIL__MAILING_LIST_IS_UPDATED
 			)) {
 				exit_error($mailingList->getErrorMessage(),'mail');
 			} else {
@@ -277,7 +279,11 @@ if ($group_id) {
 					echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td width="60%">'.
 					'<strong>'.$currentList->getName().'</strong><br />'.
 					htmlspecialchars($currentList->getDescription()).'</td>'.
-					'<td style="text-align:center"><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a></td>' ;
+					'<td style="text-align:center">';
+					if ($currentList->getStatus() != MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
+						echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a>';
+					}
+					echo '</td>';
 					echo '<td style="text-align:center">';
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 						echo _('Not activated yet');

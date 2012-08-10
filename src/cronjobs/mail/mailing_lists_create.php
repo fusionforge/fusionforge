@@ -37,7 +37,7 @@ while (!feof($fp)) {
 	$mlist = trim($mlist);
 	if ($mlist <> "") {
 		list($listname, $listdesc) = explode(" ",$mlist);	
-		$mailing_lists[] = strtolower($listname);	
+		$mailing_lists[] = strtolower($listname);
 	}
 }
 
@@ -97,20 +97,58 @@ for ($i=0; $i<$rows; $i++) {
 		passthru($lcreate_cmd, $failed);
 		if($failed) {
 			$err .= 'Failed to create '.$listname.", skipping\n";
-echo $err;
 			continue;
 		} else {
+			db_query_params('UPDATE mail_group_list set status=$1 WHERE status=$2 and group_list_id=$3',
+					array(MAIL__MAILING_LIST_IS_CREATED,
+						MAIL__MAILING_LIST_IS_REQUESTED,
+						$grouplistid));
+			echo db_error();
 			if ($is_commits_list || $public) {
 				// Make the *-commits list public
 				$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
-				passthru($publicize_cmd,$publicizeFailed);
+				passthru($publicize_cmd,$failed);
 			} else {
 				// Privatize the new list
 				$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-				passthru($privatize_cmd,$privatizeFailed);
+				passthru($privatize_cmd,$failed);
+			}
+			$fixurl_cmd = escapeshellcmd(forge_get_config('mailman_path')."/bin/withlist -l -r fix_url $listname -u ".forge_get_config('lists_host'));
+			passthru($fixurl_cmd,$failed);
+			if (!$failed) {
+				db_query_params('UPDATE mail_group_list set status=$1 WHERE status=$2 and group_list_id=$3',
+						array(MAIL__MAILING_LIST_IS_CONFIGURED,
+							MAIL__MAILING_LIST_IS_CREATED,
+							$grouplistid));
+				echo db_error();
+			} else {
+				$err .= 'Failed to configure '.$listname."\n";
+				continue;
 			}
 		}
 		$mailingListIds[] = $grouplistid;
+	} elseif ($status == MAIL__MAILING_LIST_IS_CREATED) {
+		if ($is_commits_list || $public) {
+			// Make the *-commits list public
+			$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
+			passthru($publicize_cmd,$failed);
+		} else {
+			// Privatize the new list
+			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
+			passthru($privatize_cmd,$failed);
+		}
+		$fixurl_cmd = escapeshellcmd(forge_get_config('mailman_path')."/bin/withlist -l -r fix_url $listname -u ".forge_get_config('lists_host'));
+		passthru($fixurl_cmd,$failed);
+		if (!failed) {
+			db_query_params('UPDATE mail_group_list set status=$1 WHERE status=$2 and group_list_id=$3',
+					array(MAIL__MAILING_LIST_IS_CONFIGURED,
+						MAIL__MAILING_LIST_IS_CREATED,
+						$grouplistid));
+			echo db_error();
+		} else {
+			$err .= 'Failed to configure '.$listname."\n";
+			continue;
+		}
 	} elseif ($status == MAIL__MAILING_LIST_IS_UPDATED) {
 		// For already created list, update only if status was changed on the forge to
 		// avoid anwanted reset of parameters.
@@ -118,18 +156,36 @@ echo $err;
 		// Get the mailman info on public/private to change
 		if ($is_commits_list || $public) {
 			$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
-			passthru($publicize_cmd,$publicizeFailed);
+			passthru($publicize_cmd, $failed);
 		} elseif (!$public) {
 			// Privatize only if it is marked as private
 			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-			passthru($privatize_cmd,$privatizeFailed);
+			passthru($privatize_cmd, $failed);
+		}
+		if ($failed) {
+			$err .= 'Failed to update '.$listname."\n";
+		} else {
+			db_query_params('UPDATE mail_group_list set status=$1 WHERE status=$2 and group_list_id=$3',
+					array(MAIL__MAILING_LIST_IS_CONFIGURED,
+						MAIL__MAILING_LIST_IS_UPDATED,
+						$grouplistid));
+			echo db_error();
 		}
 	} elseif ($status == MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
 		$change_pw_cmd = escapeshellcmd(forge_get_config ('mailman_path').'/bin/change_pw -l '.$listname);
 		$err .= "Resetting password of ".$listname."\n";
-		passthru($change_pw_cmd,$failed);
+		exec($change_pw_cmd, $returnnewpasswd, $failed);
 		if ($failed) {
 			$err .= 'Failed to reset password of '.$listname."\n";
+		} else {
+			$arrayReturnNewPasswd = explode(' ', $returnnewpasswd[0]);
+			$newpasswd = trim(end($arrayReturnNewPasswd));
+			db_query_params('UPDATE mail_group_list set (status, password) = ($1, $2)  WHERE status=$3 and group_list_id=$4',
+					array(MAIL__MAILING_LIST_IS_CONFIGURED,
+						$newpasswd,
+						MAIL__MAILING_LIST_PW_RESET_REQUESTED,
+						$grouplistid));
+			echo db_error();
 		}
 	} else {	// Old list
 		if (!$public) {
@@ -164,12 +220,6 @@ $listname.':		"|'.forge_get_config('mailman_path').'/mail/wrapper post '.$listna
 
 	fwrite($h1,$list_str);
 }
-
-db_query_params ('UPDATE mail_group_list set status=$1 WHERE status=$2',
-		 array (MAIL__MAILING_LIST_IS_CREATED,
-			MAIL__MAILING_LIST_IS_REQUESTED));
-echo db_error();
-
 fclose($h1);
 
 //
