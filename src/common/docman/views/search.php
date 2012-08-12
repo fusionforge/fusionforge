@@ -134,20 +134,6 @@ if ($searchString) {
 			$resarr[] = $arr;
 		}
 		db_free_result($result);
-		// need groups infos
-		$groupsarr = array();
-		$qpa = db_construct_qpa(false, 'SELECT doc_group, groupname, parent_doc_group FROM doc_groups WHERE group_id=$1', array($group_id));
-		$params['group_id'] = $group_id;
-		$params['qpa'] = &$qpa;
-		$params['includesubprojects'] = $subprojectsIncluded;
-		plugin_hook('docmansearch_has_hierarchy', $params);
-		$result = db_query_qpa($qpa);
-		if ($result && db_numrows($result) > 0) {
-			while ($arr = db_fetch_array($result)) {
-				$groupsarr[] = $arr;
-			}
-		}
-		db_free_result($result);
 		$count = 0;
 		echo '<table width="98%" cellpadding="0" cellspacing="0" border="0">';
 		foreach ($resarr as $item) {
@@ -159,7 +145,15 @@ if ($searchString) {
 			}
 			echo '<tr><td width="20px" align="right"><b>'.$count.'.</b></td><td><b>'.$item["title"].'</b>&nbsp;(<a href="'.$fileurl.'">'.$item["filename"].'</a>)</td></tr>';
 			echo '<tr><td colspan="2">'.$item["description"].'</td></tr>';
-			echo '<tr><td colspan="2"><b>'.$item["statename"].'</b>&nbsp;&nbsp;<i>'.get_path_document($groupsarr, $item["doc_group"], $item["group_id"]).'</i></td></tr>';
+			$localProject = group_get_object($item['group_id']);
+			$docGroupObject = new DocumentGroup($localProject, $item['doc_group']);
+			echo '<tr><td colspan="2">'._('Status:').'<b>'.$item["statename"].'</b></td></tr>';
+			echo '<tr><td colspan="2">'._('Path:');
+			if ($localProject->getUnixName() != $g->getUnixName()) {
+				$browselink = '/docman/?group_id='.$localProject->getID();
+				echo util_make_link($browselink, $localProject->getPublicName(), array('title' => _('Browse document manager for this project.'), 'class' => 'tabtitle-nw')).'::';
+			}
+			echo '<i>'.$docGroupObject->getPath(true, true).'</i></td></tr>';
 			echo '<tr><td colspan="2">&nbsp;</td></tr>';
 		}
 		echo '</table>';
