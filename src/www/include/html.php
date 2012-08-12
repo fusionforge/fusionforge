@@ -377,7 +377,7 @@ function html_get_tooltip_description($element_name) {
 }
 
 function html_use_jquery() {
-	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+	use_javascript('/scripts/jquery/jquery-1.7.2.min.js');
 }
 
 function html_use_tooltips() {
@@ -407,8 +407,8 @@ function html_use_coolfieldset() {
 
 function html_use_jqueryui() {
 	html_use_jquery();
-	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.8.17.custom.min.js');
-	use_stylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.8.17.custom.css');
+	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.8.22.custom.min.js');
+	use_stylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.8.22.custom.css');
 }
 
 /**
@@ -430,19 +430,20 @@ function html_use_jqueryui() {
  * @param		string	What to call the 'Any row' defaults to any
  * @param		array	Array of all allowed values from the full list.
  */
-function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any', $allowed=false) {
+function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz', $show_100 = true, $text_100 = 'none', $show_any = false, $text_any = 'any', $allowed = false) {
 	$have_a_subelement = false;
 
 	if ($text_100=='none'){
-		$text_100=_('None');
+		$text_100 = _('None');
 	}
 	$return = '';
 
-	$rows=count($vals);
+	$rows = count($vals);
 	if (count($texts) != $rows) {
-		$return .= 'ERROR - uneven row counts';
+		$return .= _('ERROR - uneven row counts');
 	}
 
+	//TODO: remove this ugly ack to get something more generic...
 	$title = html_get_tooltip_description($select_name);
 	$id = '';
 	if ($title) {

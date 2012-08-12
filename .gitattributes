@@ -941,9 +941,9 @@ src/lib/vendor/jquery-ui/css/overcast/images/ui-icons_454545_256x240.png -text s
 src/lib/vendor/jquery-ui/css/overcast/images/ui-icons_70b2e1_256x240.png -text svneol=unset#image/png
 src/lib/vendor/jquery-ui/css/overcast/images/ui-icons_999999_256x240.png -text svneol=unset#image/png
 src/lib/vendor/jquery-ui/css/overcast/images/ui-icons_fbc856_256x240.png -text svneol=unset#image/png
-src/lib/vendor/jquery-ui/css/overcast/jquery-ui-1.8.17.custom.css -text
-src/lib/vendor/jquery-ui/js/jquery-ui-1.8.17.custom.min.js -text
-src/lib/vendor/jquery/jquery-1.4.2.min.js -text
+src/lib/vendor/jquery-ui/css/overcast/jquery-ui-1.8.22.custom.css -text
+src/lib/vendor/jquery-ui/js/jquery-ui-1.8.22.custom.min.js -text
+src/lib/vendor/jquery/jquery-1.7.2.min.js -text
 src/lib/vendor/prototype/prototype.js -text
 src/lib/vendor/scriptaculous/builder.js -text
 src/lib/vendor/scriptaculous/controls.js -text
