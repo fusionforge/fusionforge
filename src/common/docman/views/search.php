@@ -159,7 +159,7 @@ if ($searchString) {
 			}
 			echo '<tr><td width="20px" align="right"><b>'.$count.'.</b></td><td><b>'.$item["title"].'</b>&nbsp;(<a href="'.$fileurl.'">'.$item["filename"].'</a>)</td></tr>';
 			echo '<tr><td colspan="2">'.$item["description"].'</td></tr>';
-			echo '<tr><td colspan="2"><b>'.$item["statename"].'</b>&nbsp;&nbsp;<i>'.get_path_document($groupsarr, $item["doc_group"], "$item[group_id]").'</i></td></tr>';
+			echo '<tr><td colspan="2"><b>'.$item["statename"].'</b>&nbsp;&nbsp;<i>'.get_path_document($groupsarr, $item["doc_group"], $item["group_id"]).'</i></td></tr>';
 			echo '<tr><td colspan="2">&nbsp;</td></tr>';
 		}
 		echo '</table>';
