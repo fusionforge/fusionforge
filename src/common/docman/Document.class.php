@@ -696,7 +696,9 @@ class Document extends Error {
 			}
 			case "audio/x-wav":
 			case "audio/x-vorbis+ogg":
-			case "audio/mpeg": {
+			case "audio/mpeg":
+			case "audio/x-ms-wma":
+			case "audio/vnd.rn-realaudio": {
 				$image = "docman/file_type_sound.png";
 				break;
 			}
