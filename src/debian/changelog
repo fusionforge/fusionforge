@@ -1,4 +1,4 @@
-fusionforge (5.2~rc2~dev1) UNRELEASED; urgency=low
+fusionforge (5.2~rc2~svn16071) UNRELEASED; urgency=low
 
   [ Olivier Berger ]
   * Populate new user's shell accounts out of
@@ -12,7 +12,7 @@ fusionforge (5.2~rc2~dev1) UNRELEASED; urgency=low
   [ Thorsten Glaser ]
   * Merge fusionforge (5.2~rc1wheezy1~exp1) experimental upload
 
- -- Thorsten Glaser <tg@mirbsd.de>  Tue, 07 Aug 2012 13:56:36 +0200
+ -- Olivier Berger <obergix@debian.org>  Tue, 14 Aug 2012 15:55:43 +0200
 
 fusionforge (5.2~rc1wheezy1~exp1) experimental; urgency=low
 
