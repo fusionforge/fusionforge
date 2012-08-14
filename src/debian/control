@@ -609,7 +609,7 @@ Description: collaborative development tool - Darcs plugin
 
 Package: fusionforge-plugin-scmgit
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git (>= 1:1.7) | git-core, gitweb (>= 1:1.7), php5-cli, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git (>= 1:1.7) | git-core, gitweb (>= 1:1.7.4.1), php5-cli, ${misc:Depends}
 Provides: fusionforge-plugin-scm, gforge-plugin-scmgit
 Conflicts: gforge-plugin-scmgit (<< 5.0.51-2)
 Replaces: gforge-plugin-scmgit (<< 5.0.51-2)

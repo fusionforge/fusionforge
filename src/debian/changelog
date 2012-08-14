@@ -1,3 +1,10 @@
+fusionforge (5.2~rc2~svn16078) UNRELEASED; urgency=low
+
+  * Properly fix #674536 without messing too much with upstream or other
+    downstream that aren't yet using gitweb >= 1.7.4.1.
+
+ -- Olivier Berger <obergix@debian.org>  Tue, 14 Aug 2012 18:03:41 +0200
+
 fusionforge (5.2~rc2~svn16071) UNRELEASED; urgency=low
 
   [ Olivier Berger ]
