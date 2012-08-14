@@ -43,16 +43,12 @@ jQuery(document).ready(function() {
 		divZipInject:	jQuery('#zipinject'),
 		buttonDoc:	jQuery('#buttonDoc'),
 		buttonDir:	jQuery('#buttonDir'),
-		buttonZip:	jQuery('#buttonZip')
+		buttonZip:	jQuery('#buttonZip'),
+		injectZip:	jQuery('#injectzip'),
+		submitZip:	jQuery('#submitinjectzip')
 	});
 });
 
-//]]></script>
-<script language="Javascript"  type="text/javascript">//<![CDATA[
-function doItInject() {
-	document.getElementById('injectzip').submit();
-	document.getElementById('submitinjectzip').disabled = true;
-}
 //]]></script>
 <?php
 echo '<div class="docmanDivIncluded" >';

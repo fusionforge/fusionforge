@@ -275,6 +275,7 @@ DocManAddItemController.prototype =
 		this.params.buttonDoc.click(jQuery.proxy(this, "toggleAddFileView"));
 		this.params.buttonDir.click(jQuery.proxy(this, "toggleAddDirectoryView"));
 		this.params.buttonZip.click(jQuery.proxy(this, "toggleInjectZipView"));
+		this.params.submitZip.click(jQuery.proxy(this, "submitFormZip"));
 	},
 
 	toggleAddDirectoryView: function() {
@@ -330,4 +331,10 @@ DocManAddItemController.prototype =
 			}
 		}
 	},
+
+	submitFormZip: function() {
+		this.params.injectZip.submit();
+		this.params.submitZip.attr('disabled', true);
+	}
+
 }
