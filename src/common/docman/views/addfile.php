@@ -53,7 +53,27 @@ if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$return_msg = _('Document Manager Action Denied.');
 	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
 }
+?>
 
+<script language="Javascript" type="text/javascript">//<![CDATA[
+var controllerAddFile;
+
+jQuery(document).ready(function() {
+	controllerAddFile = new DocManAddFileController({
+		fileRow:		jQuery('#filerow'),
+		urlRow:			jQuery('#urlrow'),
+		pathRow:		jQuery('#pathrow'),
+		editRow:		jQuery('#editrow'),
+		editNameRow:		jQuery('#editnamerow'),
+		buttonFile:		jQuery('#buttonFile'),
+		buttonUrl:		jQuery('#buttonUrl'),
+		buttonManualUpload:	jQuery('#buttonManualUpload'),
+		buttonEditor:		jQuery('#buttonEditor')
+	});
+});
+
+//]]></script>
+<?php
 echo '<div class="docmanDivIncluded">';
 if ($dgf->getNested() == NULL) {
 	$dg = new DocumentGroup($g);
@@ -68,39 +88,6 @@ if ($dgf->getNested() == NULL) {
 	echo '<div class="warning">'. _('You MUST first create at least one directory to store your document.') .'</div>';
 } else {
 	/* display the add new documentation form */
-	/* @todo - use jquery and javascript controler */
-?>
-	<script language="JavaScript" type="text/javascript">//<![CDATA[
-	function displayRowFile() {
-		document.getElementById('filerow').style.display = '';
-		document.getElementById('urlrow').style.display = 'none';
-		document.getElementById('pathrow').style.display = 'none';
-		document.getElementById('editrow').style.display = 'none';
-		document.getElementById('editnamerow').style.display = 'none';
-	}
-	function displayRowUrl() {
-		document.getElementById('filerow').style.display = 'none';
-		document.getElementById('urlrow').style.display = '';
-		document.getElementById('pathrow').style.display = 'none';
-		document.getElementById('editrow').style.display = 'none';
-		document.getElementById('editnamerow').style.display = 'none';
-	}
-	function displayRowEditor() {
-		document.getElementById('filerow').style.display = 'none';
-		document.getElementById('urlrow').style.display = 'none';
-		document.getElementById('pathrow').style.display = 'none';
-		document.getElementById('editrow').style.display = '';
-		document.getElementById('editnamerow').style.display = '';
-	}
-	function displayRowManual() {
-		document.getElementById('filerow').style.display = 'none';
-		document.getElementById('urlrow').style.display = 'none';
-		document.getElementById('pathrow').style.display = '';
-		document.getElementById('editrow').style.display = 'none';
-		document.getElementById('editnamerow').style.display = 'none';
-	}
-	//]]></script>
-<?php
 	echo '<p><strong>'. _('Document Title:') .'</strong> '. _('Refers to the relatively brief title of the document (e.g. How to use the download server).'). '</p>';
 	echo '<p><strong>'. _('Description:') .'</strong> '. _('A brief description to be placed just under the title.') .'</p>';
 	if ($g->useDocmanSearch())
@@ -128,12 +115,13 @@ if ($dgf->getNested() == NULL) {
 					<td style="text-align:right;">
 						<strong>'. _('Type of Document') .'</strong>'.utils_requiredField()
 					.'</td><td>
-					<input type="radio" name="type" value="httpupload" onclick="javascript:displayRowFile()" checked="checked" required="required" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onclick="javascript:displayRowUrl()" />'. _('URL');
+					<input type="radio" id="buttonFile" name="type" value="httpupload" checked="checked" required="required" />'. _('File') .
+					'<input type="radio" id="buttonUrl" name="type" value="pasteurl" />'. _('URL');
 	if (forge_get_config('use_manual_uploads')) {
-					echo '<input type="radio" name="type" value="manualupload" onclick="javascript:displayRowManual()" required="required" />'. _('Already-uploaded file');
+					echo '<input type="radio" id="buttonManualUpload" name="type" value="manualupload" required="required" />'. _('Already-uploaded file');
 	}
 	if ($g->useCreateOnline()) {
-					echo '<input type="radio" name="type" value="editor" onclick="javascript:displayRowEditor()" required="required" />'. _('Create online');
+					echo '<input type="radio" id="buttonEditor" name="type" value="editor" required="required" />'. _('Create online');
 	}
 	echo '				</td>
 				</tr>

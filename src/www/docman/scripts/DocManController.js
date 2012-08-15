@@ -42,6 +42,12 @@ DocManAddItemController = function(params)
 	this.bindControls();
 };
 
+DocManAddFileController = function(params)
+{
+	this.params	= params;
+	this.bindControls();
+}
+
 DocManListFileController.prototype =
 {
 	/*! Binds the controls to the actions
@@ -335,6 +341,81 @@ DocManAddItemController.prototype =
 	submitFormZip: function() {
 		this.params.injectZip.submit();
 		this.params.submitZip.attr('disabled', true);
-	}
+	},
+}
 
+DocManAddFileController.prototype =
+{
+	/*! Binds the controls to the actions
+	 */
+	bindControls: function() {
+		this.params.buttonFile.click(jQuery.proxy(this, "toggleFileRowView"));
+		this.params.buttonUrl.click(jQuery.proxy(this, "toggleUrlRowView"));
+		if (typeof(this.params.buttonManualUpload) != 'undefined') {
+			this.params.buttonManualUpload.click(jQuery.proxy(this, "toggleManualUploadView"));
+		}
+		if (typeof(this.params.buttonEditor) != 'undefined') {
+			this.params.buttonEditor.click(jQuery.proxy(this, "toggleEditorView"));
+		}
+	},
+	
+	toggleFileRowView: function() {
+		this.params.fileRow.show();
+		this.params.urlRow.hide();
+		this.params.pathRow.hide();
+		this.params.editRow.hide();
+		this.params.editNameRow.hide();
+		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
+			if (jQuery('#left').height() > jQuery('#right').height()) {
+				jQuery('#handle').css('height', jQuery('#left').height());
+			} else {
+				jQuery('#handle').css('height', jQuery('#right').height());
+			}
+		}
+	},
+	
+	toggleUrlRowView: function() {
+		this.params.fileRow.hide();
+		this.params.urlRow.show();
+		this.params.pathRow.hide();
+		this.params.editRow.hide();
+		this.params.editNameRow.hide();
+		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
+			if (jQuery('#left').height() > jQuery('#right').height()) {
+				jQuery('#handle').css('height', jQuery('#left').height());
+			} else {
+				jQuery('#handle').css('height', jQuery('#right').height());
+			}
+		}
+	},
+	
+	toggleManualUploadView: function() {
+		this.params.fileRow.hide();
+		this.params.urlRow.hide();
+		this.params.pathRow.show();
+		this.params.editRow.hide();
+		this.params.editNameRow.hide();
+		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
+			if (jQuery('#left').height() > jQuery('#right').height()) {
+				jQuery('#handle').css('height', jQuery('#left').height());
+			} else {
+				jQuery('#handle').css('height', jQuery('#right').height());
+			}
+		}
+	},
+	
+	toggleEditorView: function() {
+		this.params.fileRow.hide();
+		this.params.urlRow.hide();
+		this.params.pathRow.hide();
+		this.params.editRow.show();
+		this.params.editNameRow.show();
+		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
+			if (jQuery('#left').height() > jQuery('#right').height()) {
+				jQuery('#handle').css('height', jQuery('#left').height());
+			} else {
+				jQuery('#handle').css('height', jQuery('#right').height());
+			}
+		}
+	},
 }
