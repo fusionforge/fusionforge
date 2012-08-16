@@ -25,17 +25,18 @@ global $headermenu;
 
 session_require_global_perm('forge_admin');
 $idLink = getIntFromRequest('linkid');
-$linkStatus = getIntFromRequest('linkstatus');
+$link = getStringFromRequest('link');
+$name = getStringFromRequest('name');
+$description = getStringFromRequest('description');
 
 if (!empty($idLink)) {
-	if ($headermenu->updateLinkStatus($idLink, $linkStatus)) {
-		$feedback = _('Link Status updated');
-		session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+	if (!empty($link) && util_check_url($link)) {
+		if ($headermenu->updateLink($idLink, $link,$name, $description)) {
+			$feedback = _('Link updated');
+			session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+		}
 	}
 	$error_msg = _('Task failed');
 	session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
 }
-$warning_msg = _('Missing Link or status to be updated.');
-session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
-
 ?>

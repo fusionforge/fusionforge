@@ -40,8 +40,10 @@ switch ($type) {
 		}
 		session_require_global_perm('forge_admin');
 		$action = getStringFromRequest('action');
+		$view = getStringFromRequest('view');
 		switch ($action) {
 			case 'addLink':
+			case 'updateLinkValue':
 			case 'deleteLink':
 			case 'updateLinkStatus': {
 				global $gfplugins;
@@ -50,7 +52,15 @@ switch ($type) {
 			}
 		}
 		$headermenu->getHeader('globaladmin');
-		$headermenu->getGlobalAdminView();
+		switch ($view) {
+			case 'updateLinkValue':
+				global $gfplugins;
+				include($gfplugins.$headermenu->name.'/view/admin/'.$view.'.php');
+				break;
+			default:
+				$headermenu->getGlobalAdminView();
+				break;
+		}
 		break;
 	}
 }

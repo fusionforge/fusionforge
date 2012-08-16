@@ -129,6 +129,23 @@ class headermenuPlugin extends Plugin {
 		return false;
 	}
 
+	function getLink($idLink) {
+		$res = db_query_params('select * from plugin_headermenu where id_headermenu = $1', array($idLink));
+		if (db_numrows($res) == 1) {
+			return db_fetch_array($res);
+		}
+		return false;
+	}
+
+	function updateLink($idLink, $url, $name, $description) {
+		$res = db_query_params('update plugin_headermenu set url = $1, name = $2, description = $3 where id_headermenu = $4',
+				array($url, $name, $description, $idLink));
+		if ($res) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * getHeader - initialize header and js
 	 *
