@@ -5,6 +5,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2003, Guillaume Smet
  * Copyright 2009, Roland Mas
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -235,7 +236,8 @@ Thank you for registering your project with %1$s.
 			return false;
 		}
 
-		if ($status == 'xyzzy') {
+		// do not update the status if the mailing-list is not created yet
+		if ($status == 'xyzzy'  || $this->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 			$status = $this->getStatus();
 		}
 		
