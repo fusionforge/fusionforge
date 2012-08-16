@@ -292,37 +292,41 @@ echo $HTML->boxBottom();
 
 // ############################### Shell Account
 
-if (($u->getUnixStatus() == 'A') && (forge_get_config('use_shell'))) {
+if (forge_get_config('use_shell')) {
 	echo $HTML->boxTop(_('Shell Account Information')."");
-	print '&nbsp;
-<br />'._('Shell box').': <strong>'.$u->getUnixBox().'</strong>
-<br />'._('SSH Shared Authorized Keys').': <strong>';
-	global $HTML;
-	$sshKeysArray = $u->getAuthorizedKeys();
-	if (count($sshKeysArray)) {
-		$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'), _('Ready ?'));
-		$classth = array('', '', '', '', '');
-		echo $HTML->listTableTop($tabletop, false, 'sortable_sshkeys_listlinks', 'sortable', $classth);
-		foreach($sshKeysArray as $sshKey) {
-			echo '<tr>';
-			echo '<td>'.$sshKey['name'].'</td>';
-			echo '<td>'.$sshKey['algorithm'].'</td>';
-			echo '<td>'.$sshKey['fingerprint'].'</td>';
-			echo '<td>'.date(_('Y-m-d H:i'), $sshKey['upload']).'</td>';
-			if ($sshKey['deploy']) {
-				$image = html_image('docman/validate.png', 22, 22, array('alt'=>_('ssh key is deployed.'), 'class'=>'tabtitle', 'title'=>_('ssh key is deployed.')));
-			} else {
-				$image = html_image('waiting.png', 22, 22, array('alt'=>_('ssh key is not deployed yet.'), 'class'=>'tabtitle', 'title'=>_('ssh key is not deployed yet.')));
+	if ($u->getUnixStatus() == 'A') {
+		print '&nbsp;
+	<br />'._('Shell box').': <strong>'.$u->getUnixBox().'</strong>
+	<br />'._('SSH Shared Authorized Keys').': <strong>';
+		global $HTML;
+		$sshKeysArray = $u->getAuthorizedKeys();
+		if (count($sshKeysArray)) {
+			$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'), _('Ready ?'));
+			$classth = array('', '', '', '', '');
+			echo $HTML->listTableTop($tabletop, false, 'sortable_sshkeys_listlinks', 'sortable', $classth);
+			foreach($sshKeysArray as $sshKey) {
+				echo '<tr>';
+				echo '<td>'.$sshKey['name'].'</td>';
+				echo '<td>'.$sshKey['algorithm'].'</td>';
+				echo '<td>'.$sshKey['fingerprint'].'</td>';
+				echo '<td>'.date(_('Y-m-d H:i'), $sshKey['upload']).'</td>';
+				if ($sshKey['deploy']) {
+					$image = html_image('docman/validate.png', 22, 22, array('alt'=>_('ssh key is deployed.'), 'class'=>'tabtitle', 'title'=>_('ssh key is deployed.')));
+				} else {
+					$image = html_image('waiting.png', 22, 22, array('alt'=>_('ssh key is not deployed yet.'), 'class'=>'tabtitle', 'title'=>_('ssh key is not deployed yet.')));
+				}
+				echo '<td>'.$image.'</td>';
+				echo '</tr>';
 			}
-			echo '<td>'.$image.'</td>';
-			echo '</tr>';
+			echo $HTML->listTableBottom();
+		} else {
+			print '0';
 		}
-		echo $HTML->listTableBottom();
+		print '</strong>';
+		print '<br />' . util_make_link("account/editsshkeys.php",_('Edit Keys'));
 	} else {
-		print '0';
+		echo '<div class="warning_msg">'._('Shell Account deactivated').'</div>';
 	}
-	print '</strong>';
-	print '<br />' . util_make_link("account/editsshkeys.php",_('Edit Keys'));
 	echo $HTML->boxBottom();
 }
 ?>
