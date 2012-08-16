@@ -84,6 +84,15 @@ $group_logo = $wgUploadDirectory . "/.wgLogo.png";
 $group_logo_url = util_make_url("/plugins/mediawiki/wiki/" .
     $group_unix_name . "/images/.wgLogo.png");
 
+$incoming = False;
+if (forge_get_config('use_manual_uploads')) {
+  $incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming";
+
+  if ( (! is_dir($incoming)) || (! opendir($incoming)) ) {
+    $error_msg = sprintf( _("Not a directory or could not access contents of %s"), $incoming);
+  }
+}
+
 /* As the cronjob creates images subdirs in project data only if the uploads are enabled, there are chances the upload may fail */
 if (! forge_get_config('enable_uploads', 'mediawiki')) {
   $error_msg .= _("Mediawiki plugin's configuration may require to enable uploads ('enable_uploads'). Contact your admin.");
