@@ -780,7 +780,7 @@ class DocumentGroup extends Error {
 								return false;
 							}
 						}
-					} else {
+					} else if (is_file($directory.'/'.$dir_arr[$i])) {
 						$d = new Document($this->getGroup());
 						if (function_exists('finfo_open')) {
 							$finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -788,11 +788,18 @@ class DocumentGroup extends Error {
 						} else {
 							$dir_arr_type = 'application/binary';
 						}
-						$data = $directory.'/'.$dir_arr[$i];
-						if (!$d->create($dir_arr[$i], $dir_arr_type, $data, $this->getID(), $dir_arr[$i].' '._('injected by Zip:').date(DATE_ATOM), _('no description'))) {
-							$this->setError($dir_arr[$i].': '.$d->getErrorMessage());
+						if (util_is_valid_filename($dir_arr[$i])) {
+							if (!$d->create($dir_arr[$i], $dir_arr_type, $directory.'/'.$dir_arr[$i], $this->getID(), $dir_arr[$i].' '._('injected by Zip:').date(DATE_ATOM), _('no description'))) {
+								$this->setError($dir_arr[$i].': '.$d->getErrorMessage());
+								return false;
+							}
+						} else {
+							$this->setError($dir_arr[$i].': '._('Invalid file name.'));
 							return false;
 						}
+					} else {
+						$this->setError($dir_arr[$i].': '._('Unknown item.'));
+						return false;
 					}
 				}
 			}
