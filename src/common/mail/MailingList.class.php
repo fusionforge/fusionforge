@@ -5,6 +5,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2003, Guillaume Smet
  * Copyright 2009, Roland Mas
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -55,7 +56,7 @@ class MailingList extends Error {
 	 * @param	array		The associative array of data.
 	 * @return	boolean	success.
 	 */
-	function MailingList(&$Group, $groupListId = false, $dataArray = false) {
+	function __construct(&$Group, $groupListId = false, $dataArray = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'MailingList'));
@@ -234,12 +235,13 @@ Thank you for registering your project with %1$s.
 	 *	@return	boolean	success.
 	 */
 	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC, $status = 'xyzzy') {
-		if(! forge_check_perm ('project_admin', $this->Group->getID())) {
+		if(! forge_check_perm('project_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 
-		if ($status == 'xyzzy') {
+		// do not change the status if the mailing-list is not created yet
+		if ($status == 'xyzzy' || $this->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 			$status = $this->getStatus();
 		}
 
