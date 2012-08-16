@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -661,7 +662,7 @@ class DocumentGroup extends Error {
 							$dir_arr_type = 'application/binary';
 						}
 						$data = fread(fopen($directory.'/'.$dir_arr[$i], 'r'), filesize($directory.'/'.$dir_arr[$i]));
-						if (!$d->create($dir_arr[$i], $dir_arr_type, $data, $this->getID(), 'no title', 'no description')) {
+						if (!$d->create($dir_arr[$i], $dir_arr_type, $data, $this->getID(), $dir_arr[$i].' '._('injected by Zip:').date(DATE_ATOM), 'no description')) {
 							$this->setError(_('Unable to add document from zip injection.'));
 							return false;
 						} else {
