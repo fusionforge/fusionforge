@@ -99,7 +99,7 @@ class Document extends Error {
 	 *
 	 *	@param	string	The filename of this document. Can be a URL.
 	 *	@param	string	The filetype of this document. If filename is URL, this should be 'URL';
-	 *	@param	string	The contents of this document.
+	 *	@param	string	The absolute path file itself.
 	 *	@param	int	The doc_group id of the doc_groups table.
 	 *	@param	string	The title of this document.
 	 *	@param	string	The description of this document.
@@ -154,10 +154,10 @@ class Document extends Error {
 		}
 
                 $filesize = filesize($data);
-                if (!$filesize) { $filesize = 0 ; }
+                if (!$filesize) { $filesize = 0; }
 
 		// key words for in-document search
-		if ($this->Group->useDocmanSearch() && $filesize ) {
+		if ($this->Group->useDocmanSearch() && $filesize) {
 			$kw = new Parsedata();
 			$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename);
 		} else {
