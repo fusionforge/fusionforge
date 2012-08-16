@@ -1,13 +1,8 @@
-fusionforge (5.2~rc2~svn16078) UNRELEASED; urgency=low
-
-  * Properly fix #674536 without messing too much with upstream or other
-    downstream that aren't yet using gitweb >= 1.7.4.1.
-
- -- Olivier Berger <obergix@debian.org>  Tue, 14 Aug 2012 18:03:41 +0200
-
-fusionforge (5.2~rc2~svn16071) UNRELEASED; urgency=low
+fusionforge (5.2~rc2~svn16078+) UNRELEASED; urgency=low
 
   [ Olivier Berger ]
+  * Properly fix #674536 without messing too much with upstream or other
+    downstream that aren't yet using gitweb >= 1.7.4.1.
   * Populate new user's shell accounts out of
     /var/lib/gforge/chroot/etc/skel (closes: #675054).
   * Fix several missing files errors in gitweb for scmgit plugin (closes:
@@ -18,8 +13,9 @@ fusionforge (5.2~rc2~svn16071) UNRELEASED; urgency=low
 
   [ Thorsten Glaser ]
   * Merge fusionforge (5.2~rc1wheezy1~exp1) experimental upload
+  * Move wikis to new (as of 2010-03-19, possibly by accident) data path
 
- -- Olivier Berger <obergix@debian.org>  Tue, 14 Aug 2012 15:55:43 +0200
+ -- Thorsten Glaser <tg@mirbsd.de>  Thu, 16 Aug 2012 11:50:00 +0200
 
 fusionforge (5.2~rc1wheezy1~exp1) experimental; urgency=low
 
