@@ -183,7 +183,12 @@ class Document extends Error {
 
 		$docid = db_insertid($result, 'doc_data', 'docid');
 		if ($filesize) {
-			DocumentStorage::instance()->store($docid, $data);
+			if (!DocumentStorage::instance()->store($docid, $data)) {
+				DocumentStorage::instance()->rollback();
+				db_rollback();
+				$this->setError(DocumentStorage::instance()->getErrorMessage());
+				return false;
+			}
 		}
 
 		if (!$result || !$docid) {
