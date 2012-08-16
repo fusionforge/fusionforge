@@ -166,7 +166,7 @@ printf(_('<a href="%s">Download</a> the nightly created XML dump (backup) here.'
        util_make_url("/plugins/mediawiki/dumps/" . $group_unix_name . ".xml"));
 echo "</p>\n";
 
-echo "<h2>\$wgLogo</h2>\n";
+echo '<h2>'. _("This project's wiki logo : \$wgLogo") . "</h2>\n";
 echo '<div style="border:solid 1px black; margin:3px; padding:3px;">';
 if (file_exists($group_logo)) {
 	echo "\n <p>" . _("Current logo:") . ' (<a href="' . $group_logo_url .
