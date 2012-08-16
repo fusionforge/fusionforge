@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -261,7 +262,7 @@ $nb = $count? ' ('.$count.')' : '';
 		<h2><?php echo _('Existing Files') ?>:</h2>
 <table width="80%">
 	<tr><td colspan="2">
-        <strong><?php echo _('Attach Files') ?>:</strong><br />
+        <strong><?php echo _('Attach Files') ?>:</strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
         <input type="file" name="input_file0" size="30" /><br />
         <input type="file" name="input_file1" size="30" /><br />
         <input type="file" name="input_file2" size="30" /><br />
