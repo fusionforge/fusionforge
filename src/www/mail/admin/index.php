@@ -278,11 +278,16 @@ if ($group_id) {
 					echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>'.
 					'<strong>'.$currentList->getName().'</strong><br />'.
 					htmlspecialchars($currentList->getDescription()).'</td>'.
-					'<td class="align-center"><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a></td>' ;
-					echo '<td class="align-center">';
+					'<td style="text-align:center">';
+					if ($currentList->getStatus() != MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
+						echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a>';
+					}
+					echo '</td>';
+					echo '<td style="text-align:center">';
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 						echo _('Not activated yet');
 					} else {
+						echo $currentList->getStatus();
 						echo '<a href="'.$currentList->getExternalAdminUrl().'">'._('Administration').'</a>';
 					}
 					echo '</td>';
