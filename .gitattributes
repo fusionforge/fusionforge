@@ -2374,7 +2374,6 @@ plugins/mediawiki/packaging/links/plugin-mediawiki -text
 plugins/mediawiki/www/DatabaseForgeMysql.php -text
 plugins/mediawiki/www/DatabaseForgePgsql.php -text
 plugins/mediawiki/www/LocalSettings.php -text
-plugins/mediawiki/www/frame.php -text
 plugins/mediawiki/www/plugin_admin.php -text
 plugins/message/common/messagePlugin.class.php -text
 plugins/message/db/message-init.sql -text
