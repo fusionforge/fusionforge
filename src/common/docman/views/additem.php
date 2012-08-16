@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -75,7 +76,7 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo '<h4 class="docman_h4">'. _('Inject a Tree') .'</h4>';
 	echo '<form id="injectzip" name="injectzip" method="post" action="?group_id='.$group_id.'&action=injectzip&dirid='.$dirid.'" enctype="multipart/form-data">';
 	echo '<p>';
-	echo '<label>' . _('Upload archive:') . ' </label><input type="file" name="uploaded_zip" size="30" />';
+	echo '<label>' . _('Upload archive:') . ' </label><input type="file" name="uploaded_zip" size="30" />'.sprintf(_('(max upload size: %1$s)'),human_readable_bytes(util_get_maxuploadfilesize()));
 	echo '<input id="submitinjectzip" type="button" value="'. _('Inject') .'" onclick="javascript:doItInject()" />';
 	echo '</p>';
 	echo '</form>';

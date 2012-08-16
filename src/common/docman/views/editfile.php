@@ -78,7 +78,7 @@ echo '		</td>';
 echo '	</tr>';
 echo '	<tr id="uploadnewroweditfile">';
 echo '		<td><strong>'. _('OPTIONAL: Upload new file:') .'</strong><br />';
-echo '			<input type="file" name="uploaded_data" size="30" />';
+echo '			<input type="file" name="uploaded_data" size="30" />'.sprintf(_('(max upload size: %1$s)'),human_readable_bytes(util_get_maxuploadfilesize()));
 echo '		</td>';
 echo '	</tr>';
 echo '</table>';

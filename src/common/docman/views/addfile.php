@@ -129,7 +129,7 @@ if ($dgf->getNested() == NULL) {
 					<td style="text-align:right;">
 						<strong>'. _('Upload File') .'</strong>'. utils_requiredField()
 					.'</td><td>'
-						.'&nbsp;<input type="file" name="uploaded_data" size="30" />
+						.'&nbsp;<input type="file" name="uploaded_data" size="30" />'.sprintf(_('(max upload size: %1$s)'),human_readable_bytes(util_get_maxuploadfilesize())).'
 					</td>
 				</tr>
 				<tr id="urlrow" style="display:none">
