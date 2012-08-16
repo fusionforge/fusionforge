@@ -732,14 +732,13 @@ class DocumentGroup extends Error {
 	private function injectZip($uploadedZip) {
 		$zip = new ZipArchive();
 		if ($zip->open($uploadedZip['tmp_name'])) {
-			$extractDir = forge_get_config('data_path').'/'.uniqid();
+			$extractDir = sys_get_temp_dir().'/'.uniqid();
 			if ($zip->extractTo($extractDir)) {
 				$zip->close();
 				if ($this->injectContent($extractDir)) {
 					rmdir($extractDir);
 					return true;
 				} else {
-					$this->setError(_('Unable inject zipfile.'));
 					return false;
 				}
 			} else {
@@ -778,10 +777,7 @@ class DocumentGroup extends Error {
 					if (is_dir($directory.'/'.$dir_arr[$i])) {
 						if ($this->create($dir_arr[$i], $this->getID())) {
 							if (!$this->injectContent($directory.'/'.$dir_arr[$i])) {
-								$this->setError(_('Unable to open directory for inject into tree'));
 								return false;
-							} else {
-								rmdir($directory.'/'.$dir_arr[$i]);
 							}
 						}
 					} else {
@@ -792,12 +788,10 @@ class DocumentGroup extends Error {
 						} else {
 							$dir_arr_type = 'application/binary';
 						}
-						$data = fread(fopen($directory.'/'.$dir_arr[$i], 'r'), filesize($directory.'/'.$dir_arr[$i]));
-						if (!$d->create($dir_arr[$i], $dir_arr_type, $data, $this->getID(), 'no title', 'no description')) {
-							$this->setError(_('Unable to add document from zip injection.'));
+						$data = $directory.'/'.$dir_arr[$i];
+						if (!$d->create($dir_arr[$i], $dir_arr_type, $data, $this->getID(), $dir_arr[$i].' '._('injected by Zip:').date(DATE_ATOM), _('no description'))) {
+							$this->setError($dir_arr[$i].': '.$d->getErrorMessage());
 							return false;
-						} else {
-							unlink($directory.'/'.$dir_arr[$i]);
 						}
 					}
 				}
@@ -805,6 +799,7 @@ class DocumentGroup extends Error {
 			return true;
 		} else {
 			$this->setError(_('Unable to open directory for inject into tree'));
+			return false;
 		}
 	}
 
