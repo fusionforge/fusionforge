@@ -34,9 +34,9 @@ if (sizeof($linksArray)) {
 	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
 		echo '<tr>';
-		echo '<td>'.$link['url'].'</td>';
-		echo '<td>'.$link['name'].'</td>';
-		echo '<td>'.$link['description'].'</td>';
+		echo '<td>'.htmlspecialchars($link['url']).'</td>';
+		echo '<td>'.htmlspecialchars($link['name']).'</td>';
+		echo '<td>'.htmlspecialchars($link['description']).'</td>';
 		if ($link['is_enable']) {
 			echo '<td>'.html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'class'=>'tabtitle', 'title'=>_('link is on'))).'</td>';
 			echo '<td><a class="tabtitle-ne" title="'._('Desactivate this link').'" href="index.php?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0">'.html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))). '</a>';

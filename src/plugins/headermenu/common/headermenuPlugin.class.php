@@ -26,19 +26,19 @@ class headermenuPlugin extends Plugin {
 
 	function __construct() {
 		$this->Plugin() ;
-		$this->name = "headermenu" ;
-		$this->text = "headermenu" ;
+		$this->name = 'headermenu' ;
+		$this->text = 'headermenu' ;
 		$this->_addHook('headermenu');
 		$this->_addHook('site_admin_option_hook');
 	}
 
 	function CallHook ($hookname, &$params) {
 		switch ($hookname) {
-			case "headermenu": {
+			case 'headermenu': {
 				$this->getHeaderLink();
 				break;
 			}
-			case "site_admin_option_hook": {
+			case 'site_admin_option_hook': {
 				echo '<li>'.$this->getAdminOptionLink().'</li>';
 				$returned = true;
 				break;
@@ -59,7 +59,7 @@ class headermenuPlugin extends Plugin {
 		$availableLinks = $this->getAvailableLinks();
 		foreach ($availableLinks as $link) {
 			if ($link['is_enable']) {
-				$ahref = '<a href="'.$link['url'].'">'.$link['name'].'</a>';
+				$ahref = '<a href="'.$link['url'].'">'.htmlspecialchars($link['name']).'</a>';
 				$template = isset($params['template']) ?  $params['template'] : ' | {menu}';
 				echo str_replace('{menu}', $ahref, $template);
 			}
