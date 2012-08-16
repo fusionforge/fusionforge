@@ -62,14 +62,17 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive())
 	exit_error("Invalid User", "Cannot process your request for this user.");
 
 $gid = getIntFromRequest("group_id", -1);
-if ($gid == -1)
+if ($gid == -1) {
 	$group = false;
-else
+} else {
 	$group = group_get_object($gid);
-if (!$group)
+}
+if (!$group) {
 	exit_error("Invalid Project", "Nonexistent Project");
-if (!$group->usesPlugin("mediawiki"))
+}
+if (!$group->usesPlugin("mediawiki")) {
 	exit_error("Invalid Project", "Project does not use MediaWiki Plugin");
+}
 
 $userperm = $group->getPermission();
 if (!$userperm->IsMember())
@@ -106,10 +109,11 @@ if (getStringFromRequest("logo_submit")) {
 	$feedback = "";
 
 	if (getIntFromRequest("logo_nuke") == 1) {
-		if (unlink($wgUploadDirectory . "/.wgLogo.png"))
+	  if (unlink($wgUploadDirectory . "/.wgLogo.png")) {
 			$feedback = _("File successfully removed");
-		else
+	  } else {
 			$feedback = _("File removal error");
+	  }
 	} else if ($userfile && is_uploaded_file($userfile['tmp_name']) &&
 	    util_is_valid_filename($userfile['name'])) {
 		$infile = $userfile['tmp_name'];
