@@ -144,7 +144,7 @@ switch ($type) {
 		$filename = $incoming.'/'.$manual_path;
 
 		if (!util_is_valid_filename($manual_path) || !is_file($filename)) {
-		$return_msg = _('Invalid file name.');
+			$return_msg = _('Invalid file name.');
 			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 		}
 
