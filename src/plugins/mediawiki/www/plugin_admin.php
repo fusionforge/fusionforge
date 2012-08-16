@@ -29,8 +29,8 @@
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
-function logo_create($file_location, $wgUploadDirectory) {
-	$logofile = $wgUploadDirectory . "/.wgLogo.png";
+function logo_create($file_location, $project_mw_images_dir) {
+	$logofile = $project_mw_images_dir . "/.wgLogo.png";
 
 	if (!is_file($file_location) || !file_exists($file_location))
 		return _("Invalid file upload");
@@ -42,8 +42,8 @@ function logo_create($file_location, $wgUploadDirectory) {
 		return sprintf(_("Image size is %dx%d pixels, expected %dx%d instead"),
 		    $img[0], $img[1], 135, 135);
 
-	if (!is_writable($wgUploadDirectory))
-		return _("Cannot copy file to target directory");
+	if (!is_writable($project_mw_images_dir))
+	  return sprintf( _("Cannot copy file to target directory %s"), $project_mw_images_dir) ;
 
 	if (file_exists($logofile) && !is_writable($logofile))
 		return _("Cannot overwrite existing file");
