@@ -2860,10 +2860,12 @@ src/plugins/twitter/www/index.php -text
 src/plugins/webanalytics/action/addLink.php -text
 src/plugins/webanalytics/action/deleteLink.php -text
 src/plugins/webanalytics/action/updateLinkStatus.php -text
+src/plugins/webanalytics/action/updateLinkValue.php -text
 src/plugins/webanalytics/common/webanalytics-init.php -text
 src/plugins/webanalytics/common/webanalyticsPlugin.class.php -text
 src/plugins/webanalytics/db/webanalytics-init.sql -text
 src/plugins/webanalytics/etc/webanalytics.ini -text
+src/plugins/webanalytics/view/admin/updateLinkValue.php -text
 src/plugins/webanalytics/view/admin/viewGlobalConfiguration.php -text
 src/plugins/webanalytics/www/index.php -text
 src/plugins/wiki/README -text

@@ -25,17 +25,15 @@ global $webanalytics;
 
 session_require_global_perm('forge_admin');
 $idLink = getIntFromRequest('linkid');
-$linkStatus = getIntFromRequest('linkstatus');
+$link = getStringFromRequest('link');
+$name = getStringFromRequest('name');
 
-if (!empty($idLink)) {
-	if ($webanalytics->updateLinkStatus($idLink, $linkStatus)) {
-		$feedback = _('Link Status updated');
+if (!empty($idLink) && !empty($link)) {
+	if ($webanalytics->updateLink($idLink, $link, $name)) {
+		$feedback = _('Link updated');
 		session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&feedback='.urlencode($feedback));
 	}
 	$error_msg = _('Task failed');
 	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
 }
-$warning_msg = _('Missing Link or status to be updated.');
-session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
-
 ?>

@@ -124,6 +124,23 @@ class webanalyticsPlugin extends Plugin {
 		return false;
 	}
 
+	function getLink($idLink) {
+		$res = db_query_params('select * from plugin_webanalytics where id_webanalytics = $1', array($idLink));
+		if (db_numrows($res) == 1) {
+			return db_fetch_array($res);
+		}
+		return false;
+	}
+
+	function updateLink($idLink, $url, $name) {
+		$res = db_query_params('update plugin_webanalytics set url = $1, name = $2, code = $3 where id_webanalytics = $4',
+				array(htmlspecialchars($url), $name, $url, $idLink));
+		if ($res) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * getHeader - initialize header and js
 	 *

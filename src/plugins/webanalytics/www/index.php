@@ -43,6 +43,7 @@ switch ($type) {
 		switch ($action) {
 			case 'addLink':
 			case 'deleteLink':
+			case 'updateLinkValue':
 			case 'updateLinkStatus': {
 				global $gfplugins;
 				include($gfplugins.$webanalytics->name.'/action/'.$action.'.php');
@@ -50,7 +51,16 @@ switch ($type) {
 			}
 		}
 		$webanalytics->getHeader('globaladmin');
-		$webanalytics->getGlobalAdminView();
+		$view = getStringFromRequest('view');
+		switch ($view) {
+			case 'updateLinkValue':
+				global $gfplugins;
+				include($gfplugins.$webanalytics->name.'/view/admin/'.$view.'.php');
+				break;
+			default:
+				$webanalytics->getGlobalAdminView();
+				break;
+		}
 		break;
 	}
 }
