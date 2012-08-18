@@ -6,6 +6,7 @@
  * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Jean-Christophe Masson - French National Education Department
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -82,24 +83,26 @@ if ($group_id) {
 
 	for ($j = 0; $j < $mlCount; $j++) {
 		$currentList =& $mlArray[$j];
-		echo '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
-		if ($currentList->isError()) {
-			echo '<td colspan="4">'.$currentList->getErrorMessage().'</td>';
-		} else if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
-			echo '<td class="halfwidth" colspan="2"><strong>'.$currentList->getName().'</strong></td>'.
-				 '<td width="25%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
-				 '<td width="25%" class="align-center">'._('Not activated yet').'</td>';
-		} else {
-			$listemail = preg_replace('/@/', $currentList->getListEmail(), '&#064;');
-			echo '<td width="25%">'.
-				'<strong><a href="'.$currentList->getArchivesUrl().'">' .
-				sprintf(_('%1$s Archives'), $currentList->getName()).'</a></strong></td>'.
-				'<td width="25%" align="center"><a href="&#109;&#097;&#105;&#108;&#116;&#111;:'.$currentList->getListEmail().'">'.$currentList->getListEmail(). '</a></td>'.
-				'<td width="25%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
-				'<td width="25%" class="align-center"><a href="'.$currentList->getExternalInfoUrl().'">'._('Subscribe/Unsubscribe/Preferences').'</a>'.
-				'</td>';
+		if (!$currentList->isPermissionDeniedError()) {
+			echo '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
+			if ($currentList->isError()) {
+				echo '<td colspan="4">'.$currentList->getErrorMessage().'</td>';
+			} else if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
+				echo '<td class="halfwidth" colspan="2"><strong>'.$currentList->getName().'</strong></td>'.
+				 	'<td width="25%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
+				 	'<td width="25%" class="align-center">'._('Not activated yet').'</td>';
+			} else {
+				$listemail = preg_replace('/@/', $currentList->getListEmail(), '&#064;');
+				echo '<td width="25%">'.
+					'<strong><a href="'.$currentList->getArchivesUrl().'">' .
+					sprintf(_('%1$s Archives'), $currentList->getName()).'</a></strong></td>'.
+					'<td width="25%" align="center"><a href="&#109;&#097;&#105;&#108;&#116;&#111;:'.$currentList->getListEmail().'">'.$currentList->getListEmail(). '</a></td>'.
+					'<td width="25%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
+					'<td width="25%" class="align-center"><a href="'.$currentList->getExternalInfoUrl().'">'._('Subscribe/Unsubscribe/Preferences').'</a>'.
+					'</td>';
+			}
+			echo '</tr>';
 		}
-		echo '</tr>';
 	}
 
 	echo $HTML->listTableBottom();
