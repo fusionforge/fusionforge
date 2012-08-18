@@ -33,7 +33,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));
-		if ($project && $this->canBeUsedByProject($project)) {
+		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('docman', $project->getID(), 'read')) {
 			$this->content['title'] = _('5 Latest Published Documents');
 		}
 	}
