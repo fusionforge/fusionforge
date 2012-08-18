@@ -90,7 +90,6 @@ if ($group_id) {
 				 '<td width="25%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
 				 '<td width="25%" class="align-center">'._('Not activated yet').'</td>';
 		} else {
-			$listemail = preg_replace('/@/', $currentList->getListEmail(), '&#064;');
 			echo '<td width="25%">'.
 				'<strong><a href="'.$currentList->getArchivesUrl().'">' .
 				sprintf(_('%1$s Archives'), $currentList->getName()).'</a></strong></td>'.
