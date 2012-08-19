@@ -27,7 +27,11 @@ global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
 class commitEmail extends scmhook {
+	var $group;
+	var $disabledMessage;
+
 	function __construct() {
+		$this->group = $GLOBALS['group'];
 		$this->name = "Commit Email";
 		$this->description = _('Every commit pushed sends a notification e-mail to the users of the commit-mailinglist.
 The hook is triggered after \'serve push pull bundle\' on the projects repository.');
@@ -37,6 +41,29 @@ The hook is triggered after \'serve push pull bundle\' on the projects repositor
 		$this->unixname = "commitemail";
 		$this->needcopy = 0;
 		$this->command = 'exit 0';
+	}
+
+	function isAvailable() {
+		global $gfcommon;
+		require_once $gfcommon.'mail/MailingList.class.php';
+		require_once $gfcommon.'mail/MailingListFactory.class.php';
+		if ($this->group->usesMail()) {
+			$mlFactory = new MailingListFactory($group);
+			$mlArray = $mlFactory->getMailingLists();
+			for ($j = 0; $j < $mlCount; $j++) {
+				$currentList =& $mlArray[$j];
+				if ($currentList->getListEmail() == $this->group->getUnixName().'-commits@'.forge_get_config('lists_host'))
+					return true;
+			}
+			$this->disabledMessage = _('Hook not available due to missing dependency : Project has no commit mailing-list: ').$this->group->getUnixName().'-commits';
+		} else {
+			$this->disabledMessage = _('Hook not available due to missing dependency : Project not using mailing-list.');
+		}
+		return false;
+	}
+
+	function getDisabledMessage() {
+		return $this->disabledMessage;
 	}
 
 	/**

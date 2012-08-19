@@ -2,6 +2,7 @@
 /**
  * scmhook Class
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -64,6 +65,14 @@ class scmhook {
 
 	function getFiles() {
 		return $this->files;
+	}
+
+	function isAvailable() {
+		return true;
+	}
+
+	function getDisabledMessage() {
+		return _('Feature not implemented.');
 	}
 }
 ?>

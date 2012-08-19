@@ -284,6 +284,7 @@ class scmhookPlugin extends Plugin {
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
 			foreach ($hooksPreCommit as $hookPreCommit) {
+				$isdisabled = 0;
 				if (! empty($hookPreCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 					echo '<tr style="display: none;" ><td>';
 				}
@@ -295,11 +296,19 @@ class scmhookPlugin extends Plugin {
 				if (in_array($hookPreCommit->getClassname(), $hooksEnabled))
 					echo ' checked="checked"';
 
-				if ($statusDeploy)
+				if ($statusDeploy) {
+					$isdisabled = 1;
+					echo ' disabled="disabled"';
+				}
+				if (!$isdisabled && !$hookPreCommit->isAvailable())
 					echo ' disabled="disabled"';
 
 				echo ' />';
-				echo '</td><td>';
+				echo '</td><td';
+				if (!$hookPreCommit->isAvailable())
+					echo ' class="tabtitle-w" title="'.$hookPreCommit->getDisabledMessage().'"';
+
+				echo ' >';
 				echo $hookPreCommit->getName();
 				echo '</td><td>';
 				echo $hookPreCommit->getDescription();
@@ -313,6 +322,7 @@ class scmhookPlugin extends Plugin {
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
 			foreach ($hooksPreRevPropChange as $hook) {
+				$isdisabled = 0;
 				if (! empty($hook->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 					echo '<tr style="display: none;" ><td>';
 				}
@@ -324,11 +334,19 @@ class scmhookPlugin extends Plugin {
 				if (in_array($hook->getClassname(), $hooksEnabled))
 					echo ' checked="checked"';
 
-				if ($statusDeploy)
+				if ($statusDeploy) {
+					$isdisabled = 1;
+					echo ' disabled="disabled"';
+				}
+				if (!$isdisabled && !$hook->isAvailable())
 					echo ' disabled="disabled"';
 
 				echo ' />';
-				echo '</td><td>';
+				echo '</td><td';
+				if (!$hook->isAvailable())
+					echo ' class="tabtitle-w" title="'.$hook->getDisabledMessage().'"';
+
+				echo ' >';
 				echo $hook->getName();
 				echo '</td><td>';
 				echo $hook->getDescription();
@@ -342,6 +360,7 @@ class scmhookPlugin extends Plugin {
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_postcommit', 'sortable', $classth);
 			foreach ($hooksPostCommit as $hookPostCommit) {
+				$isdisabled = 0;
 				if (! empty($hookPostCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 					echo '<tr style="display: none;" ><td>';
 				}
@@ -353,11 +372,20 @@ class scmhookPlugin extends Plugin {
 				if (in_array($hookPostCommit->getClassname(), $hooksEnabled))
 					echo ' checked="checked"';
 
-				if ($statusDeploy)
+				if ($statusDeploy) {
+					$isdisabled = 1;
+					echo ' disabled="disabled"';
+				}
+
+				if (!$isdisabled && !$hookPostCommit->isAvailable())
 					echo ' disabled="disabled"';
 
 				echo ' />';
-				echo '</td><td>';
+				echo '</td><td';
+				if (!$hookPostCommit->isAvailable())
+					echo ' class="tabtitle-w" title="'.$hookPostCommit->getDisabledMessage().'"';
+
+				echo ' >';
 				echo $hookPostCommit->getName();
 				echo '</td><td>';
 				echo $hookPostCommit->getDescription();
@@ -388,6 +416,7 @@ class scmhookPlugin extends Plugin {
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_serve-push-pull-bundle', 'sortable', $classth);
 			foreach ($hooksServePushPullBundle as $hookServePushPullBundle) {
+				$isdisabled = 0;
 				if (! empty($hookServePushPullBundle->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 					echo '<tr style="display: none;" ><td>';
 				}
@@ -399,11 +428,20 @@ class scmhookPlugin extends Plugin {
 				if (in_array($hookServePushPullBundle->getClassname(), $hooksEnabled))
 					echo ' checked="checked"';
 
-				if ($statusDeploy)
+				if ($statusDeploy) {
+					$isdisabled = 1;
+					echo ' disabled="disabled"';
+				}
+
+				if (!$isdisabled && !$hookServePushPullBundle->isAvailable())
 					echo ' disabled="disabled"';
 
 				echo ' />';
-				echo '</td><td>';
+				echo '</td><td';
+				if (!$hookServePushPullBundle->isAvailable())
+					echo ' class="tabtitle-w" title="'.$hookServePushPullBundle->getDisabledMessage().'"';
+
+				echo ' >';
 				echo $hookServePushPullBundle->getName();
 				echo '</td><td>';
 				echo $hookServePushPullBundle->getDescription();

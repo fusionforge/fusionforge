@@ -26,7 +26,11 @@ global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
 class commitTracker extends scmhook {
+	var $group;
+	var $disabledMessage;
+
 	function __construct() {
+		$this->group = $GLOBALS['group'];
 		$this->name = "Commit Tracker";
 		$this->description = _('Every commit is pushed into related tracker or task.');
 		$this->classname = "commitTracker";
@@ -36,6 +40,18 @@ class commitTracker extends scmhook {
 		$this->needcopy = 0;
 		$this->command = '/usr/bin/php -d include_path='.ini_get('include_path').' '.forge_get_config('plugins_path').'/scmhook/library/'.
 				$this->label.'/hooks/'.$this->unixname.'/post.php "$1" "$2"';
+	}
+
+	function isAvailable() {
+		if ($this->group->usesTracker()) {
+			return true;
+		}
+		$this->disabledMessage = _('Hook not available due to missing dependency : Project not using tracker.');
+		return false;
+	}
+
+	function getDisabledMessage() {
+		return $this->disabledMessage;
 	}
 
 	function artifact_extra_detail($params) {

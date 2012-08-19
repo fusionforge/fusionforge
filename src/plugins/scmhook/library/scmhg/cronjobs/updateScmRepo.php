@@ -76,7 +76,7 @@ class ScmHgUpdateScmRepo {
 					}
 				}
 			}
-			if (count($newHooksServePushPullBundle)) {
+			if (isset($newHooksServePushPullBundle) && count($newHooksServePushPullBundle)) {
 				foreach($newHooksServePushPullBundle as $newHookServePushPullBundle) {
 					$newHookServePushPullBundle->enable($group);
 				}
