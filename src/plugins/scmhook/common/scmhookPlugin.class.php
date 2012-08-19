@@ -24,8 +24,8 @@
 class scmhookPlugin extends Plugin {
 	function __construct() {
 		$this->Plugin();
-		$this->name = "scmhook";
-		$this->text = "Scmhook"; // To show in the tabs, use...
+		$this->name = 'scmhook';
+		$this->text = 'Scmhook'; // To show in the tabs, use...
 		$this->_addHook('groupmenu');	// To put into the project tabs
 		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook('groupisactivecheckboxpost'); //
@@ -33,12 +33,13 @@ class scmhookPlugin extends Plugin {
 		$this->_addHook('scm_admin_update');
 		$this->_addHook('artifact_extra_detail');
 		$this->_addHook('task_extra_detail');
+		$this->_addHook('javascript_file');
 	}
 
 	function CallHook($hookname, &$params) {
 		$returned = true;
 		switch ($hookname) {
-			case "scm_admin_page": {
+			case 'scm_admin_page': {
 				$group_id = $params['group_id'];
 				$scm_plugin = $params['scm_plugin'];
 				$group = &group_get_object($group_id);
@@ -47,11 +48,11 @@ class scmhookPlugin extends Plugin {
 				}
 				break;
 			}
-			case "scm_admin_update": {
+			case 'scm_admin_update': {
 				$this->update($params);
 				break;
 			}
-			case "artifact_extra_detail": {
+			case 'artifact_extra_detail': {
 				$group_id = $params['group_id'];
 				$group = &group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
@@ -59,12 +60,16 @@ class scmhookPlugin extends Plugin {
 				}
 				break;
 			}
-			case "task_extra_detail": {
+			case 'task_extra_detail': {
 				$group_id = $params['group_id'];
 				$group = &group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					$this->task_extra_detail($params);
 				}
+				break;
+			}
+			case 'javascript_file': {
+				use_javascript('/js/sortable.js');
 				break;
 			}
 		}
@@ -143,6 +148,10 @@ class scmhookPlugin extends Plugin {
 				}
 				case "scmhg": {
 					$this->displayScmHgHook($hooksAvailable, $statusDeploy, $hooksEnabled);
+					break;
+				}
+				default: {
+					echo '<div class="warning">'._('SCM Type not supported yet by scmhook').'</div>';
 					break;
 				}
 			}
