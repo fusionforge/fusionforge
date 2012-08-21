@@ -37,10 +37,23 @@ function rdfutils_setPropToUri($res, $prop, $value) {
 		$res->setRel($prop, $value);
 	}
 	else {
-		$uri = array (
-				'type' => 'uri',
-				'value' => $res->expandPName($value));
-		$res->setProp($prop, $uri);
+		if(!is_array($value)) {
+			$uri = array (
+					'type' => 'uri',
+					'value' => $res->expandPName($value));
+			$res->setProp($prop, $uri);
+		} else {
+			$s = $res->uri;
+			foreach($value as $i => $x) {
+				if(!is_array($x)) {
+					$uri = array (
+							'type' => 'uri',
+							'value' => $res->expandPName($x));
+					$value[$i] = $uri;
+				}
+			}
+			$res->index[$s][$res->expandPName($prop)] = $value;
+		}
 	}
 }
 
