@@ -53,23 +53,8 @@ if (!forge_get_config('use_project_full_list')) {
 $HTML->header(array('title'=>_('Project List'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
-echo '<p/>';
+$projects = get_public_active_projects_asc($TROVE_HARDQUERYLIMIT);
 
-$res_grp = db_query_params ('
-	SELECT group_id, group_name, unix_group_name, short_description, register_time
-	FROM groups
-	WHERE status = $1 AND type_id=1 AND group_id>4 AND register_time > 0
-	ORDER BY group_name ASC
-',
-			    array ('A'),
-			    $TROVE_HARDQUERYLIMIT);
-$projects = array();
-while ($row_grp = db_fetch_array($res_grp)) {
-	if (!forge_check_perm ('project_read', $row_grp['group_id'])) {
-		continue ;
-	}
-	$projects[] = $row_grp;
-}
 $querytotalcount = count($projects);
 
 // #################################################################
