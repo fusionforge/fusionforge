@@ -502,7 +502,7 @@ TODO : document Auth plugins :
   Parameters : $params['accept'] provides the content-type to be rendered, $params['groupname'] the project name, $params['group_id'] the project ID
   Description: returns in $params['content'] an alternate content for /projects/ page and 
                in $params['content_type'] the actual content-type to return
-		
+
   Hook Name  : content_negociated_user_home
   Parameters : $params['accept'] provides the content-type to be rendered, $params['username'] the user name
   Description: returns in $params['content'] an alternate content for /users/ page and 
@@ -525,6 +525,11 @@ TODO : document Auth plugins :
   Hook Name  : alt_representations
   Parameters : $params['script_name'] contains the SCRIPT_NAME (filtered to work only on /projects or /users for the moment)
   Description: returns alternate representations for a particular page in $params['results'] which is populated by the hook users 
+
+  Hook Name  : content_negociated_projects_list
+  Parameters : $params['accept'] provides the content-type to be rendered
+  Description: returns in $params['content'] an alternate content for /projects page and 
+               in $params['content_type'] the actual content-type to return
 
 TODO (nerville) : document display_hierarchy
 TODO (lolando ?) : document role_normalize, role_translate_strings, role_has_permission, role_get_setting, list_roles_by_permission 

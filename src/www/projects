@@ -38,11 +38,29 @@ require_once $gfcommon.'include/pre.php';
 //
 
 $default_content_type = 'text/html';
-$script='project_home';
-$content_type = util_negociate_alternate_content_types($script, $default_content_type);
 
 if (!$group_id || !$project) {
-	exit_no_group();
+
+	$script = 'projects_list';
+	$content_type = util_negociate_alternate_content_types($script, $default_content_type);
+
+	if($content_type != $default_content_type) {
+		$hook_params = array();
+		$hook_params['accept'] = $content_type;
+		$hook_params['return'] = '';
+		$hook_params['content_type'] = '';
+		plugin_hook_by_reference('content_negociated_projects_list', $hook_params);
+		if($hook_params['content_type'] != ''){
+				header('Content-type: '. $hook_params['content_type']);
+				echo $hook_params['content'];
+		}
+		else {
+			header('HTTP/1.1 406 Not Acceptable',true,406);
+			exit(0);
+		}
+	} else {
+		exit_no_group();
+	}
 } else {
 	$subpage = getStringFromRequest('subpage');
 
@@ -58,6 +76,10 @@ if (!$group_id || !$project) {
 		header("Location: ".account_group_cvsweb_url($project->getUnixName()));
 		exit();
 	} else {
+	
+		$script='project_home';
+		$content_type = util_negociate_alternate_content_types($script, $default_content_type);
+	
 		// if a custom content-type is selected, then redirect to plugin's rendering
 		if($content_type != $default_content_type) {
 			$hook_params = array();

@@ -41,7 +41,7 @@ class doaprdfPlugin extends Plugin {
 	}
 
 	/**
-	 * Declares itself as accepting RDF XML on /users
+	 * Declares itself as accepting RDF XML on /projects/...
 	 * @param unknown_type $params
 	 */
 	function script_accepted_types (&$params) {
@@ -52,7 +52,7 @@ class doaprdfPlugin extends Plugin {
 	}
 
 	/**
-	 * Outputs user's FOAF profile
+	 * Outputs project's DOAP profile
 	 * @param unknown_type $params
 	 */
 	function content_negociated_project_home (&$params) {
@@ -81,55 +81,42 @@ class doaprdfPlugin extends Plugin {
 					'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 					'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 					'doap' => 'http://usefulinc.com/ns/doap#',
-					'dcterms' => 'http://purl.org/dc/terms/' /*,
-					'oslc' => 'http://open-services.net/ns/core#' */
+					'dcterms' => 'http://purl.org/dc/terms/' 
 			);
-			
+				
 			$conf = array(
 					'ns' => $ns
-					/*,
-					'serializer_type_nodes' => true*/
 			);
 			
 			$res = ARC2::getResource($conf);
-			$res->setURI('');
+			$res->setURI(util_make_url_g($projectname, $group_id));
 				
-			//$res->setRel('rdf:type', 'doap:Project');
+			// $res->setRel('rdf:type', 'doap:Project');
 			rdfutils_setPropToUri($res, 'rdf:type', 'doap:Project');
-				
+							
 			$res->setProp('doap:name', $projectname);
 			$res->setProp('doap:shortdesc', $project_shortdesc);
 			if($project_description) {
 				$res->setProp('doap:description', $project_description);
 			}
+			$res->setProp('doap:homepage', $project->getHomePage());
+			$tags = array();
 			if($tags_list) {
 				$tags = split(', ',$tags_list);
 				$res->setProp('dcterms:subject', $tags);
 			}
-
+			
 			// Now, we need to collect complementary RDF descriptiosn of the project via other plugins 
 			// invoke the 'project_rdf_metadata' hook so as to complement the RDF description
 			$hook_params = array();
-			
 			$hook_params['prefixes'] = array();
 			foreach($ns as $prefix => $url) {
 				$hook_params['prefixes'][$url] = $prefix;
 			}
-			/*
-			$hook_params['prefixes'] = array(
-					'http://www.w3.org/1999/02/22-rdf-syntax-ns#' => 'rdf',
-					'http://www.w3.org/2000/01/rdf-schema#' => 'rdfs',
-					'http://usefulinc.com/ns/doap#' => 'doap',
-					'http://purl.org/dc/terms/' => 'dcterms'
-			);
-			*/
 			$hook_params['group'] = $group_id;
-			
 			// pass the resource in case it could be useful (read-only in principle)
 			$hook_params['in_Resource'] = $res;
-
 			$hook_params['out_Resources'] = array();
-			
 			plugin_hook_by_reference('project_rdf_metadata', $hook_params);
 
 			// add new prefixes to the list
@@ -139,6 +126,7 @@ class doaprdfPlugin extends Plugin {
 				}
 			}
 
+			// merge the two sets of triples
 			$merged_index = $res->index;
 			foreach($hook_params['out_Resources'] as $out_res) {
 				$merged_index = ARC2::getMergedIndex($merged_index, $out_res->index);
@@ -154,7 +142,7 @@ class doaprdfPlugin extends Plugin {
 			/* Serialize a resource index */
 			$doc = $ser->getSerializedIndex($merged_index);
 
-			$params['content'] = $doc;
+			$params['content'] = $doc . "\n";
 		}
 	}
 	
@@ -164,7 +152,9 @@ class doaprdfPlugin extends Plugin {
 	 */
 	function alt_representations (&$params) {
 		$script_name = $params['script_name'];
-		if ($script_name == '/projects') {
+		$php_self = $params['php_self'];
+		// really trigger only for real projects descriptions, not for the projects index
+		if ( ($script_name == '/projects') && (($php_self != '/projects') && ($php_self != '/projects/')) ) {
 			$params['return'][] = '<link rel="meta" type="application/rdf+xml" title="DOAP RDF Data" href=""/>';
 		}
 	}
