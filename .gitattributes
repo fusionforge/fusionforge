@@ -462,6 +462,7 @@ src/common/include/AuthPlugin.class.php -text
 src/common/include/Codendi_HTMLPurifier.class.php -text
 src/common/include/Codendi_Request.class.php -text
 src/common/include/DatabaseInstaller.class.php -text
+src/common/include/Group.class.php -text svneol=native#unset
 src/common/include/HTTPRequest.class.php -text
 src/common/include/Navigation.class.php -text
 src/common/include/PFO-RBAC.interface.php -text
