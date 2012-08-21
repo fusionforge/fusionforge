@@ -277,6 +277,19 @@ Description: Git plugin for FusionForge (transitional package)
  This package is only present for transitional purposes and can be
  safely removed.
 
+Package: fusionforge-plugin-admssw
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, php-http, fusionforge-plugin-doaprdf, ${misc:Depends}
+Description: collaborative development tool - ADMS.SW plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin provides ADMS.SW additions to the DOAP RDF documents for projects on /projects URLs 
+ with content-negociation (application/rdf+xml).
+ 
 Package: fusionforge-plugin-authcas
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, ${misc:Depends}

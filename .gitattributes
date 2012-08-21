@@ -1028,6 +1028,16 @@ src/packaging/links/common -text
 src/packaging/links/web-apache2 -text
 src/packaging/readme/web-apache2 -text
 src/plugins/README -text
+src/plugins/admssw/NAME -text
+src/plugins/admssw/README -text
+src/plugins/admssw/common/admssw-init.php -text
+src/plugins/admssw/etc/admssw.ini -text
+src/plugins/admssw/include/admsswPlugin.class.php -text
+src/plugins/admssw/packaging/control/222plugin-admssw -text
+src/plugins/admssw/packaging/control/222plugin-admssw.shortdesc -text
+src/plugins/admssw/packaging/dirs/plugin-admssw -text
+src/plugins/admssw/packaging/docs/plugin-admssw -text
+src/plugins/admssw/packaging/install/plugin-admssw -text
 src/plugins/aselectextauth/etc/aselectextauth.ini -text
 src/plugins/authbuiltin/common/AuthBuiltinPlugin.class.php -text
 src/plugins/authbuiltin/common/authbuiltin-init.php -text
