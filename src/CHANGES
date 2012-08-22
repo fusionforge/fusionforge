@@ -18,6 +18,8 @@ Plugins:
 * webanalytics: new plugin to add support for piwik or google analytics tool (TrivialDev)
 * scmhook: Support added for pre-revprop-changehooks to change properties (Alcatel-Lucent)
 * scmhook: Add commitEmail support for scmhg plugin (TrivialDev)
+* new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects 
+
 
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)
@@ -39,6 +41,9 @@ FusionForge-5.2:
 * Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)
 * scmsvn: private project can now be browsed with viewvc using user rights management (TrivialDev).
 * scmsvn: basic activity support (TrivialDev).
+* New doaprdf and foafprofiles plugins which provide RDF descriptions of projects and 
+  people (Institut Telecom via COCLICO project)
+
 
 FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)
