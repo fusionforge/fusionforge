@@ -37,7 +37,7 @@ class commitEmail extends scmhook {
 		$this->unixname = "commitemail";
 		$this->needcopy = 0;
 		$this->command = '/usr/bin/php -d include_path='.ini_get('include_path').' '.forge_get_config('plugins_path').'/scmhook/library/'.
-				$this->label.'/hooks/'.$this->unixname.'/commit-email.php "$1" "$2" '.$this->group->getUnixName().'-commits@'.forge_get_config('lists_host');
+		$this->label.'/hooks/'.$this->unixname.'/commit-email.php "$1" "$2" '.$this->group->getUnixName().'-commits@'.forge_get_config('lists_host');
 	}
 
 	function isAvailable() {
