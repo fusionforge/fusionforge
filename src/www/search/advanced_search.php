@@ -45,11 +45,6 @@ if (!getStringFromRequest('search')) {
 	$searchQuery->writeHeader();
 	$searchQuery->writeFooter();
 } else {
-	if ($mode == SEARCH__MODE_AND) {
-		$exact = true;
-	} else {
-		$exact = false;
-	}
 	$searchQuery = new AdvancedSearchHtmlSearchRenderer($words, $offset, $exact, $group_id);
 	$searchQuery->flush();
 }
