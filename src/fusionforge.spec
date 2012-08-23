@@ -75,6 +75,15 @@ mailing-lists, SCM repository, forums, support request helper,
 web/FTP hosting, release management, etc. All these services are
 integrated into one web site and managed through a web interface.
 
+%package plugin-admssw
+Summary: ADMS.SW profiles for projects URLs for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql, plugin-doaprdf
+%description plugin-admssw
+This plugin will provide content-negociation means to export RDF+XML ADMS.SW profiles for projects on /projects URLs, in addition to the content already provided by doaprdf.
+
+ADMS.SW stands for Asset Description Metadata Schema for Software. See https://joinup.ec.europa.eu/asset/adms_foss/description for more details.
+
 %package plugin-aselectextauth
 Summary: A-select external authentication for FusionForge
 Group: Development/Tools
@@ -932,6 +941,10 @@ fi
 /bin/cvssh.pl
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authbuiltin.ini
 %{FORGE_DIR}/plugins/authbuiltin
+
+%files plugin-admssw
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/admssw.ini
+%{FORGE_DIR}/plugins/admssw
 
 %files plugin-aselectextauth
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/aselectextauth.ini
