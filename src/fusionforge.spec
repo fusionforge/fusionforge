@@ -80,9 +80,10 @@ Summary: ADMS.SW profiles for projects URLs for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, postgresql, plugin-doaprdf
 %description plugin-admssw
-This plugin will provide content-negociation means to export RDF+XML ADMS.SW profiles for projects on /projects URLs, in addition to the content already provided by doaprdf.
-
-ADMS.SW stands for Asset Description Metadata Schema for Software. See https://joinup.ec.europa.eu/asset/adms_foss/description for more details.
+This plugin will provide content-negociation means to export RDF+XML ADMS.SW profiles for projects on /projects URLs,
+in addition to the content already provided by doaprdf.
+ADMS.SW stands for Asset Description Metadata Schema for Software.
+See https://joinup.ec.europa.eu/asset/adms_foss/description for more details.
 
 %package plugin-aselectextauth
 Summary: A-select external authentication for FusionForge
