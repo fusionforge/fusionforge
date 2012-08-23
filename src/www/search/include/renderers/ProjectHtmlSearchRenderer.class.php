@@ -70,7 +70,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 				continue ;
 			}
 			$i++;
-			if ($row['type'] == 2) {
+			if ($row['type_id'] == 2) {
 				$what = 'foundry';
 			} else {
 				$what = 'projects';
