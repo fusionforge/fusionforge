@@ -130,7 +130,7 @@ if (getStringFromRequest('submit')) {
 		form_release_key(getStringFromRequest("form_key"));
 		$error_msg .= $group->getErrorMessage();
 	} else {
-		$HTML->header(array('title'=>_('Registration complete')));
+		site_user_header(array('title'=>_('Registation Complete')));
 
 		if ( ! forge_get_config ('project_auto_approval') ) {
 			printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
@@ -146,7 +146,7 @@ if (getStringFromRequest('submit')) {
 			}
 		}
 
-		$HTML->footer(array());
+		site_footer(array());
 		exit();
 	}
 } else if (getStringFromRequest('i_disagree')) {
