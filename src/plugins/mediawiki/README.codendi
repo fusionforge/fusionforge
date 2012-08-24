@@ -41,4 +41,4 @@ $PHP $MWCRON/create-wikis-mysql.php
 #,16,31,46 * * * * root [ -x $MWCRON/create-imagedirs.php ] && $PHP $MWCRON/create-imagedirs.php
 
 # Create wiki XML dumps every night
-#5 1 * * * root [ -x $MWCRON/dump-wikis.php ] && $PHP $MWCRON/cronjobs/dump-wikis.php
+#5 1 * * * root [ -x $MWCRON/dump-wikis.php ] && $PHP $MWCRON/dump-wikis.php
