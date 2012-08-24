@@ -8,8 +8,9 @@ fusionforge (5.2~rc1wheezy1) UNRELEASED; urgency=low
   * Integrate with MediaWiki 1.19 (Closes: #679932)
   * Update versioned Depends on MediaWiki
   * Move wikis to new (as of 2010-03-19, possibly by accident) data path
+  * Check image upload is enabled before trying to do so (Closes: #679521)
 
- -- Thorsten Glaser <tg@mirbsd.de>  Thu, 16 Aug 2012 11:47:59 +0200
+ -- Thorsten Glaser <tg@mirbsd.de>  Fri, 24 Aug 2012 10:41:57 +0200
 
 fusionforge (5.2~rc1-5) unstable; urgency=low
 
