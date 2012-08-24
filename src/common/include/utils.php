@@ -1522,14 +1522,6 @@ function util_pwrap($encoded_string) {
 	    implode("<br />", explode("\n",
 	    $encoded_string))) . "</p>")));
 }
-function util_ttwrap($encoded_string) {
-	return str_replace("<p><tt></tt></p>", "",
-	    str_replace("<br /></tt></p>", "</tt></p>",
-	    str_replace("<p><tt><br />", "<p><tt>",
-	    "<p><tt>" . str_replace("<br /><br />", "</tt></p><p><tt>",
-	    implode("<br />", explode("\n",
-	    encoded_string))) . "</tt></p>")));
-}
 
 /* takes a string and returns it HTML encoded, URIs made to hrefs */
 function util_uri_grabber($unencoded_string, $tryaidtid=false) {
