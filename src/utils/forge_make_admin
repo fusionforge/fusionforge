@@ -44,7 +44,7 @@ if (count ($argv) == 2) {
 		echo "An error occurred when adding the user to role ". $r->getDisplayableName()."\n";
 		exit (1);
 	}
-	echo "User ".$u->getUnixName()." added to role ".$r->getDisplayableName()."\n";
+	echo "User ".$user->getUnixName()." added to role ".$r->getDisplayableName()."\n";
 } else {
 	echo "Usage: .../forge_make_admin <username>
 " ;
