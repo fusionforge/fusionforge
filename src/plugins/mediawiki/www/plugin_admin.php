@@ -2,7 +2,7 @@
 /*-
  * MediaWiki Plugin for FusionForge
  *
- * Copyright © 2010
+ * Copyright © 2010, 2012
  *      Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2012, Franck Villaume - TrivialDev
  * All rights reserved.
@@ -83,11 +83,6 @@ $group_logo = $wgUploadDirectory . "/.wgLogo.png";
 $group_logo_url = util_make_url("/plugins/mediawiki/wiki/" .
     $group_unix_name . "/images/.wgLogo.png");
 
-/* As the cronjob creates images subdirs in project data only if the uploads are enabled, there are chances the upload may fail */
-if (! forge_get_config('enable_uploads', 'mediawiki')) {
-  $error_msg .= _("Mediawiki plugin's configuration may require to enable uploads ('enable_uploads'). Contact your admin.");
-}
-
 if (getStringFromRequest("logo_submit")) {
 	$userfile = getUploadedFile('userfile');
 	$userfile_name = $userfile['name'];
@@ -155,6 +150,15 @@ echo '<p>';
 printf(_('<a href="%s">Download</a> the nightly created XML dump (backup) here.'),
        util_make_url("/plugins/mediawiki/dumps/" . $group_unix_name . ".xml"));
 echo "</p>\n";
+
+if (!forge_get_config('enable_uploads', 'mediawiki')) {
+	echo "<h2>Disabled: \$wgLogo</h2>\n";
+	echo '<p>' .
+	    _('Custom per-project logos require that the "enable_uploads" setting in the [mediawiki] section of your FusionForge configuration is enabled.') .
+	    "</p>\n";
+	site_project_footer(array());
+	exit(0);
+}
 
 echo "<h2>\$wgLogo</h2>\n";
 echo '<div style="border:solid 1px black; margin:3px; padding:3px;">';
