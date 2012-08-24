@@ -227,7 +227,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	/**
 	 * TODO: Enter description here ...
 	 * @param unknown_type $name
-	 * @return Ambigous <number, boolean, contents>|boolean
+	 * @return Ambiguous <number, boolean, contents>|boolean
 	 */
 	function createDefault($name) {
 		if ($this->Group == NULL) {

@@ -29,7 +29,7 @@ class DatabaseInstaller extends Error {
 
 	/**
 	 * TODO: Enter description here ...
-	 * @return boolean|Ambigous <boolean, string>
+	 * @return boolean|Ambiguous <boolean, string>
 	 */
 	function install() {
 		$name = $this->name;
@@ -90,17 +90,15 @@ class DatabaseInstaller extends Error {
 		return $output;
 	}
 
-	private static function getDatabaseDate() {
+	private function getDatabaseDate() {
 		// Check if table 'database_startpoint' has proper values
 		$res = db_query_params ('SELECT * FROM database_startpoint', array()) ;
 		if (!$res) { // db error
 			return $this->setError("DB-ERROR-3: ".db_error()."\n");
 		} else if (db_numrows($res) == 0) { // table 'database_startpoint' is empty
 			return $this->setError("Table 'database_startpoint' is empty, run startpoint.php first.");
-		} else { // get the start date from the db
-			return (int) db_result($res, 0, 'db_start_date');
 		}
-		return false;
+		return (int) db_result($res, 0, 'db_start_date');
 	}
 
 	private function _runScript($file) {
