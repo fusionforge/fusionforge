@@ -720,7 +720,8 @@ class Document extends Error {
 			case "text/x-php":
 			case "application/xml":
 			case "text/x-c":
-			case "text/x-diff": {
+			case "text/x-diff":
+			case "text/x-shellscript" {
 				$image = 'docman/file_type_plain.png';
 				break;
 			}
