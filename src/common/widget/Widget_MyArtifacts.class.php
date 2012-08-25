@@ -109,7 +109,6 @@ class Widget_MyArtifacts extends Widget {
 		if (count($my_artifacts) > 0) {
 			$html_my_artifacts = '<table style="width:100%">';
 			$html_my_artifacts .= $this->_display_artifacts($my_artifacts, 1);
-			$html_my_artifacts .= '<tr><td colspan="3">'.(($this->_artifact_show == 'N' || count($my_artifacts) > 0)?' ':_("None")).'</td></tr>';
 			$html_my_artifacts .= '</table>';
 		} else {
 			$html_my_artifacts = '<div class="warning">'. _("You have no artifacts") . '</div>';
