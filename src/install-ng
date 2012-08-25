@@ -26,6 +26,11 @@ if [ $? != 0 ] ; then echo "Terminating..." >&2 ; usage $0 ;exit 1 ; fi
 
 eval set -- "$options"
 
+if [[ $EUID -ne 0 ]]; then
+  echo "This script must be run as root" 1>&2
+  exit 1
+fi
+
 REINIT=false
 AUTO=false
 
