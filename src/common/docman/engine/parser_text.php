@@ -29,15 +29,15 @@ require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
 if ($argc != 2) {
 	echo "Usage : parser_text.php <filename>\n";
-	exit (1);
+	exit(1);
 }
 
 $fichin = $argv[1];
 if (!is_file($fichin))
-	exit (1);
+	exit(1);
 
 echo parser_text($fichin);
-unlink ($fichin);
+unlink($fichin);
 
 // Local Variables:
 // mode: php
