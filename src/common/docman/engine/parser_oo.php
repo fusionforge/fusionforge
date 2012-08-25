@@ -38,6 +38,7 @@ if (!is_file($fichin))
 $zip = new ZipArchive;
 if ($zip->open($fichin) === TRUE) {
 	$output_dir = tempnam(forge_get_config('data_path'), "tmp");
+	unlink($output_dir);
 	mkdir($output_dir);
 	$zip->extractTo($output_dir, array('content.xml'));
 	$zip->close();
