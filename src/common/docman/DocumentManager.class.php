@@ -181,9 +181,13 @@ class DocumentManager extends Error {
 				if (isset($nbDocsTrashed)) {
 					$nbDocsLabel = '<span class="tabtitle-nw" title="'._('Number of deleted documents in this folder').'" >('.$nbDocsTrashed.')</span>';
 				}
-				$user = user_get_object($localDg->getCreated_by());
-				$lititle = _('Created_by:').$user->getRealName()._('; Last modified:').date(_('Y-m-d H:i'), $localDg->getLastModifyDate());
-				echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName(), array('class'=>'tabtitle-nw', 'title'=>$lititle)).$nbDocsLabel;
+				if ($localDg->getName() != '.trash') {
+					$user = user_get_object($localDg->getCreated_by());
+					$lititle = _('Created_by:').$user->getRealName()._('; Last modified:').date(_('Y-m-d H:i'), $localDg->getLastModifyDate());
+					echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName(), array('class'=>'tabtitle-nw', 'title'=>$lititle)).$nbDocsLabel;
+				} else {
+					echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel;
+				}
 				if ($dg->getSubgroup($subGroupIdValue, $stateId)) {
 					echo '<ul>';
 					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
