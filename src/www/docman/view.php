@@ -86,12 +86,7 @@ if (is_numeric($docid)) {
 	}
 
 	header('Content-disposition: attachment; filename="'.str_replace('"', '', $d->getFileName()) . '"');
-
-	if (strstr($d->getFileType(), 'app')) {
-		header("Content-type: application/binary");
-	} else {
-		header("Content-type: ".$d->getFileType());
-	}
+	header("Content-type: ".$d->getFileType());
 	header("Content-Transfer-Encoding: binary");
 	ob_end_clean();
 	echo $d->getFileData();
