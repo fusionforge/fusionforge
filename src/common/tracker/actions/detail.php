@@ -29,6 +29,7 @@ global $group_id;
 global $aid;
 
 use_javascript('/tabber/tabber.js');
+html_use_coolfieldset();
 
 if (getStringFromRequest('commentsort') == 'anti') {
        $sort_comments_chronologically = false;

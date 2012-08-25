@@ -39,6 +39,7 @@ if (getStringFromRequest('commentsort') == 'anti') {
        $sort_comments_chronologically = true;
 }
 
+html_use_coolfieldset();
 $ath->header(array ('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
