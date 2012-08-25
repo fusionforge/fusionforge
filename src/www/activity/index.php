@@ -60,7 +60,7 @@ if (!$received_end || $received_end == 0) {
 		$end = time();
 		$rendered_end = strftime($date_format, $end);
 	} else {
-		$end = mktime(0, 0, 0,$tmp['tm_mon']+1,$tmp['tm_mday'],$tmp['tm_year'] + 1900);
+		$end = mktime(23, 59, 59, $tmp['tm_mon']+1, $tmp['tm_mday'], $tmp['tm_year'] + 1900);
 		$rendered_end = $received_end;
 	}
 }
