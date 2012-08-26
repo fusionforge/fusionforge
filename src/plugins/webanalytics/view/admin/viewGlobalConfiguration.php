@@ -34,7 +34,7 @@ if (sizeof($linksArray)) {
 	echo $HTML->listTableTop($tabletop, false, 'sortable_webanalytics_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
 		echo '<tr>';
-		echo '<td>'.$link['name'].'</td>';
+		echo '<td>'.htmlentities($link['name']).'</td>';
 		echo '<td><code>'.$link['url'].'</code></td>';
 		if ($link['is_enable']) {
 			echo '<td>'.html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'class'=>'tabtitle', 'title'=>_('link is on'))).'</td>';
