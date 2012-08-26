@@ -90,7 +90,8 @@ class Widget_MyProjectsLastDocuments extends Widget {
 						}
 						foreach ($keys as $key) {
 							$dg = new DocumentGroup($g, $key);
-							$html .= '<tr><td colspan="4"><a href="'.util_make_url('/docman/?group_id='.$g->getID().'&view=listfile&dirid='.$key).'">'.$dg->getPath().'</a></td></tr>';
+							$view = ($dg->getState() != 2) ? 'listfile' : 'listtrashfile';
+							$html .= '<tr><td colspan="4"><a href="'.util_make_url('/docman/?group_id='.$g->getID().'&view='.$view.'&dirid='.$key).'">'.$dg->getPath().'</a></td></tr>';
 							$j++;
 							$count = count($df->Documents[$key]);
 							for ($i=0; $i < $count; $i++) {
