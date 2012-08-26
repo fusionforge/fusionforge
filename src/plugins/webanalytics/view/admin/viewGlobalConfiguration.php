@@ -56,9 +56,9 @@ if (sizeof($linksArray)) {
 echo '<form method="POST" name="addLink" action="index.php?type=globaladmin&action=addLink">';
 echo '<table><tr>';
 echo $HTML->boxTop(_('Add a new webanalytics reference'));
-echo '<td>'._('Standard JavaScript Tracking code.').'</td><td><textarea name="link" rows="15" cols="70">'._('Just paste your code here...').'</textarea></td>';
-echo '</tr><tr>';
 echo '<td>'._('Informative Name').'</td><td><input name="name" type="text" maxsize="255" /></td>';
+echo '</tr><tr>';
+echo '<td>'._('Standard JavaScript Tracking code.').'</td><td><textarea name="link" rows="15" cols="70">'._('Just paste your code here...').'</textarea></td>';
 echo '</tr><tr>';
 echo '<td>';
 echo '<input type="submit" value="'. _('Add') .'" />';
