@@ -10,6 +10,8 @@
 # Built packages will be put into ./result/
 #
 # ATTENTION : it requires you to run cowbuilder with sudo
+# This also requires the following packages :
+# 	dpkg-dev
 #
 
 FUSIONFORGE=FusionForge
@@ -110,7 +112,7 @@ MINOR=-$(BRANCH)$(svnrev)+$(XDISTRIB)
 DEBUG=--debug
 DEBUG=
 DEBBUILDOPTS=--debbuildopts -sa 
-ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
+ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
 
 # Some doc found there http://wiki.debian.org/cowbuilder
 # Hook are not anymore necessary, but I keep as an example
