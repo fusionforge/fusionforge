@@ -12,6 +12,7 @@
 # ATTENTION : it requires you to run cowbuilder with sudo
 # This also requires the following packages :
 # 	dpkg-dev
+#	dpkg-parsechangelog
 #
 
 FUSIONFORGE=FusionForge
@@ -85,7 +86,7 @@ DEBIANOP=--mirror $(DEBMIRROR) --debootstrapopts --include=apt --debootstrap deb
 ASKPASS=--ask-passphrase
 ASKPASS=
 
-MAJOR:=$(shell [ ! -f $(PKGDIR)/debian/changelog ] || dpkg-parsechangelog -l$(PKGDIR)/debian/changelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
+MAJOR:=$(shell [ ! -f $(PKGDIR)/debian/changelog ] || dpkg-parsechangelog -l$(PKGDIR)/debian/changelog 2>&1 | sed -rne 's,^Version: ([^-]+).*,\1,p')
 # SMAJOR is MAJOR without epoch if any
 SMAJOR:=$(shell echo $(MAJOR) | sed 's/^.://')
 
@@ -477,7 +478,10 @@ gnupgkey:
 exportgnupgkey:
 	gpg --export --armor $(DEBEMAIL)
 
-depends: dpkg-dev
+depends: dpkg-dev dpkg-parsechangelog
 
 dpkg-dev:
 	@[ -f /usr/bin/dpkg-architecture ] || (echo "You need to install $@ package" ; exit 1)
+
+dpkg-parsechangelog:
+	@[ -f /usr/bin/dpkg-parsechangelog ] || (echo "You need to install $@ package" ; exit 1)
