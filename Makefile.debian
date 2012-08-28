@@ -9,6 +9,10 @@
 
 # Built packages will be put into ./result/
 #
+# You can customize var in several way 
+# 	1 - Setup env vars (available for BUILDERDIR, BUILDRESULT, UBUMIRROR, DEBMIRROR, TARBALLS
+#	2 - Create a config/local.$(hostname) file
+#
 # ATTENTION : it requires you to run cowbuilder with sudo
 # This also requires the following packages :
 # 	dpkg-dev
@@ -20,8 +24,6 @@ PKGDIR=src
 PKGNAME:=$(shell [ ! -f $(PKGDIR)/debian/changelog ] || head -1 $(PKGDIR)/debian/changelog | sed 's/ .*//')
 PKGLETTER:=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.fusionforge.org
-# BRANCH set to 'svn' if checkout from trunk or 'brc' otherwise
-BRANCH:=$(shell [ "$(shell echo $(basename $(CURDIR)) | sed 's/.*runk.*/trunk/')" = "trunk" ] && echo svn || echo brc)
 #
 ifeq (,$(shell echo "$$BUILDERDIR"))
 BUILDERDIR=$(CURDIR)/builder
@@ -50,9 +52,38 @@ else
 DEBEMAIL:=$(shell echo $$DEBEMAIL)
 endif
 #
+ifeq (,$(shell echo "$$TARBALLS"))
+TARBALLS:=$(shell echo $$TARBALLS)
+else
 TARBALLS=$(CURDIR)/tarballs
+endif
+#
+# SCM detect
+#
+# BRANCH set to 'trunk' if checkout from trunk or 'brc' otherwise
+BRANCH:=$(shell [ "$(shell echo $(basename $(CURDIR)) | sed 's/.*runk.*/trunk/')" = "trunk" ] && echo svn || echo brc)
+#
+in_svn_repo:= $(wildcard .svn/) 
+ifeq ($(strip $(in_svn_repo)),) 
+in_bzr_repo:= $(wildcard .bzr/)
+ifeq ($(strip $(in_bzr_repo)),)
+in_git_repo:= $(wildcard .git/)
+ifeq ($(strip $(in_git_repo)),)
+	svnrev=unknown
+else
+	svnrev=git-$(shell git describe --always)
+	BRANCH:=$(shell git branch|cut -c3-)
+endif # git
+else
+	svnrev=bzr$(shell bzr revno)
+endif # bzr
+else
+	svnrev:=$(shell LANG=C svn info 2>&1 | grep Revision | cut -d: -f2| sed 's/ //g')
+endif # svn
+
 #
 # Local customization
+#
 ifeq (../../3rd-party,$(shell ls -d ../../3rd-party 2>/dev/null))
 -include ../../config/local.$(shell hostname)
 else
@@ -90,25 +121,8 @@ MAJOR:=$(shell [ ! -f $(PKGDIR)/debian/changelog ] || dpkg-parsechangelog -l$(PK
 # SMAJOR is MAJOR without epoch if any
 SMAJOR:=$(shell echo $(MAJOR) | sed 's/^.://')
 
-in_svn_repo:= $(wildcard .svn/) 
-ifeq ($(strip $(in_svn_repo)),) 
-in_bzr_repo:= $(wildcard .bzr/)
-ifeq ($(strip $(in_bzr_repo)),)
-in_git_repo:= $(wildcard .git/)
-ifeq ($(strip $(in_git_repo)),)
-	svnrev=unknown
-else
-	svnrev=git$(shell git describe --always)
-endif # git
-else
-	svnrev=bzr$(shell bzr revno)
-endif # bzr
-else
-	svnrev:=$(shell LANG=C svn info 2>&1 | grep Revision | cut -d: -f2| sed 's/ //g')
-endif # svn
-
 MINOR=-1
-MINOR=-$(BRANCH)$(svnrev)+$(XDISTRIB)
+MINOR=-$(BRANCH)-$(svnrev)+$(XDISTRIB)
 
 DEBUG=--debug
 DEBUG=
