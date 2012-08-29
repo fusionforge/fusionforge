@@ -185,7 +185,7 @@ class GFUser extends Error {
 	 * @param	int	The user_id
 	 * @param	int	The database result set OR array of data
 	 */
-	function GFUser($id = false, $res = false) {
+	function __construct($id = false, $res = false) {
 		$this->Error();
 		if (!$id) {
 			//setting up an empty object
@@ -658,6 +658,19 @@ Enjoy the site.
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
+		if (($this->getUnixStatus() == 'A') && (forge_get_config('use_shell'))) {
+			$this->data_array['authorized_keys'] = array();
+			$res = db_query_params('select * from sshkeys where userid = $1 and deleted = 0', array($this->getID()));
+			while ($arr = db_fetch_array($res)) {
+				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['upload'] = $arr['upload'];
+				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['name'] = $arr['name'];
+				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['fingerprint'] = $arr['fingerprint'];
+				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['algorithm'] = $arr['algorithm'];
+				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['deploy'] = $arr['deploy'];
+				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['key'] = $arr['sshkey'];
+				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['keyid'] = $arr['id_sshkeys'];
+			}
+		}
 		return true;
 	}
 

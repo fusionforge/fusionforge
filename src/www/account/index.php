@@ -300,7 +300,7 @@ if (forge_get_config('use_shell')) {
 	<br />'._('SSH Shared Authorized Keys').': <strong>';
 		global $HTML;
 		$sshKeysArray = $u->getAuthorizedKeys();
-		if (count($sshKeysArray)) {
+		if (is_array($sshKeysArray && count($sshKeysArray)) {
 			$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'), _('Ready ?'));
 			$classth = array('', '', '', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_sshkeys_listlinks', 'sortable', $classth);
