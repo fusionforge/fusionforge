@@ -4,6 +4,7 @@
  *
  * Copyright 2010, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -155,7 +156,7 @@ if (file_exists($gfcgfile)) {
 	forge_set_config_item_bool ('use_rdf', 'core') ;
 	forge_define_config_item ('installation_environment', 'core', $GLOBALS['sys_install_type']) ;
 	forge_define_config_item ('user_default_shell', 'core', '/bin/bash') ;
-
+	forge_define_config_item('gettext_path', 'core', $GLOBALS['sys_gettext_path']);
 }
 
 // Arch plugin

@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2003-2004, Guillaume Smet
  * Copyright 2007-2009, Roland Mas
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -217,8 +218,8 @@ function setup_gettext_from_sys_lang () {
 function setup_gettext_from_locale ($locale) {
 	setlocale(LC_ALL, $locale);
 
-	if (isset($GLOBALS['sys_gettext_path'])) {
-		bindtextdomain('fusionforge', $GLOBALS['sys_gettext_path']);
+	if (forge_get_config('gettext_path') || isset($GLOBALS['sys_gettext_path'])) {
+		bindtextdomain('fusionforge', forge_get_config('gettext_path'));
 	} else {
 		bindtextdomain('fusionforge', '/usr/share/locale/');
 	}
