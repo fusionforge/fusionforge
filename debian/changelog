@@ -10,8 +10,9 @@ fusionforge (5.2~rc1wheezy1) UNRELEASED; urgency=low
   * Move wikis to new (as of 2010-03-19, possibly by accident) data path
   * Check image upload is enabled before trying to do so (Closes: #679521)
   * Unbreak and silence the MediaWiki nightly dump cronjob (Closes: #680165)
+  * Remove minified ECMAscript and binary *.jar from the source
 
- -- Thorsten Glaser <tg@mirbsd.de>  Fri, 24 Aug 2012 10:53:50 +0200
+ -- Thorsten Glaser <tg@mirbsd.de>  Thu, 30 Aug 2012 11:06:02 +0200
 
 fusionforge (5.2~rc1-5) unstable; urgency=low
 

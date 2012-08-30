@@ -863,13 +863,11 @@ lib/vendor/coolfieldset/images/collapsed.gif -text
 lib/vendor/coolfieldset/images/expanded.gif -text
 lib/vendor/coolfieldset/index.html -text
 lib/vendor/coolfieldset/js/jquery.coolfieldset.js -text
-lib/vendor/coolfieldset/js/jquery.js -text
 lib/vendor/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.1.0.css -text
 lib/vendor/jquery-simpletreemenu/css/simpleTreeMenu/menu-arrow-down.png -text
 lib/vendor/jquery-simpletreemenu/css/simpleTreeMenu/menu-arrow-right.png -text
 lib/vendor/jquery-simpletreemenu/css/simpleTreeMenu/menu-dot.png -text
 lib/vendor/jquery-simpletreemenu/js/jquery-simpleTreeMenu-1.1.0.js -text
-lib/vendor/jquery-storage/jquery.Storage.js -text
 lib/vendor/jquery-tipsy/LICENSE -text
 lib/vendor/jquery-tipsy/README -text
 lib/vendor/jquery-tipsy/Rakefile -text
@@ -897,8 +895,6 @@ lib/vendor/jquery-ui/css/overcast/images/ui-icons_70b2e1_256x240.png -text
 lib/vendor/jquery-ui/css/overcast/images/ui-icons_999999_256x240.png -text
 lib/vendor/jquery-ui/css/overcast/images/ui-icons_fbc856_256x240.png -text
 lib/vendor/jquery-ui/css/overcast/jquery-ui-1.8.17.custom.css -text
-lib/vendor/jquery-ui/js/jquery-ui-1.8.17.custom.min.js -text
-lib/vendor/jquery/jquery-1.4.2.min.js -text
 lib/vendor/prototype/prototype.js -text
 lib/vendor/scriptaculous/builder.js -text
 lib/vendor/scriptaculous/controls.js -text
@@ -4517,7 +4513,6 @@ plugins/wiki/www/themes/Sidebar/buttons/TitleSearch.png -text
 plugins/wiki/www/themes/Sidebar/clock.php -text
 plugins/wiki/www/themes/Sidebar/hwiki.prop -text
 plugins/wiki/www/themes/Sidebar/hyperapplet.php -text
-plugins/wiki/www/themes/Sidebar/hyperwiki.jar -text
 plugins/wiki/www/themes/Sidebar/hyperwiki.php -text
 plugins/wiki/www/themes/Sidebar/images/UEB16.png -text
 plugins/wiki/www/themes/Sidebar/images/bullet.png -text
@@ -4888,7 +4883,6 @@ plugins/wiki/www/themes/default/toolbar.css -text
 plugins/wiki/www/themes/default/toolbar.js -text
 plugins/wiki/www/themes/default/wikicommon-min.js -text
 plugins/wiki/www/themes/default/wikicommon.js -text
-plugins/wiki/www/themes/default/yuicompressor-2.4.7.jar -text
 plugins/wiki/www/themes/fusionforge/Makefile -text
 plugins/wiki/www/themes/fusionforge/buttons/asc_order.png -text
 plugins/wiki/www/themes/fusionforge/buttons/desc_order.png -text
