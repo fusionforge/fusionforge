@@ -42,7 +42,7 @@ class SoapChecksProcess extends PHPUnit_Framework_TestCase
   {
 
     $this->assertNotEquals('xxxxx', FORGE_ADMIN_PASSWORD);
-    
+
   }
 
   // This checks that the WSDL URL looks fine

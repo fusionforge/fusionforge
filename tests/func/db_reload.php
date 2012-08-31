@@ -104,7 +104,7 @@ system("echo \"VACUUM FULL ANALYZE;\" | psql -q -Upostgres ".DB_NAME);
 //
 $user = new GFUser();
 
-$user_id = $user->create(FORGE_ADMIN_USERNAME, 'Forge', 'Admin', FORGE_ADMIN_PASSWORD, FORGE_ADMIN_PASSWORD, 
+$user_id = $user->create(FORGE_ADMIN_USERNAME, 'Forge', 'Admin', FORGE_ADMIN_PASSWORD, FORGE_ADMIN_PASSWORD,
 	'nobody@nowhere.com', 1, 1, 1,'GMT','',0,1,'', '','','','','','US',false);
 
 if (!$user_id) {

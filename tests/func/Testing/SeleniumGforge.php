@@ -384,7 +384,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$unix_name = strtolower($name);
 
 		$this->switchUser (FORGE_ADMIN_USERNAME) ;
-		
+
 		// Create a simple project.
 		if ((!defined('PROJECTA')) || ($unix_name != "projecta")) {
 			$this->registerProject ($name, FORGE_ADMIN_USERNAME, $scm) ;

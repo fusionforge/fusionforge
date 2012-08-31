@@ -8,7 +8,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -199,7 +199,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("Bug2"));
 
 		// Search in one particular tracker
-		
+
 		$this->select("type_of_search", "label=This project's trackers");
 		$this->type("//input[@name='words']", "charlie");
 		$this->clickAndWait("//input[@name='Search']");
@@ -234,7 +234,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->type("details", "The same thing we do every night, Pinky - try to take over the world! - also, ZONGO");
 		$this->type("hours", "199");
 		$this->clickAndWait("submit");
-		
+
 		$this->clickAndWait("link=Task1 the brain");
 		$this->type("details", 'This is the needle for tasks');
 		$this->clickAndWait("submit");
@@ -247,7 +247,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->type("details", "Otherwise WW4 will be fought with sticks - also, ZONGO");
 		$this->type("hours", "199");
 		$this->clickAndWait("submit");
-			      
+
 		// Search in Tasks
 
 		$this->select("type_of_search", "label=This project's tasks");
@@ -269,7 +269,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Task1"));
 
 		// Post some messages in a forum
-		
+
 		$this->gotoProject('projecta');
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=open-discussion");

@@ -56,7 +56,7 @@ class TextSanitizerTests extends PHPUnit_Framework_TestCase
 		$out = "\n<div>&gt; rep &gt; rep</div>\n";
 		$this->assertEquals($out, $this->s->purify($in));
 	}
-	
+
 	/**
 	 * test purify on other html piece of code.
 	 */

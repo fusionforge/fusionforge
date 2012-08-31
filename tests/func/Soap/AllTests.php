@@ -51,7 +51,7 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 	include_once 'PHPUnit/Framework.php';
 	require_once 'PHPUnit/TextUI/TestRunner.php';
 }
- 
+
 require_once 'func/config.php';
 require_once 'func/Soap/checks.php';
 require_once 'func/Soap/login.php';

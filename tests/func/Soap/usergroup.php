@@ -320,7 +320,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	  // corner case, but a dangerous ? one : the way the SOAP
 	  // server works allow to trick it in returning several
 	  // values at a time : this one may be fixed some day and we'd then
-	  $users = array('admin", "None' => array( 'count' => 2, 
+	  $users = array('admin", "None' => array( 'count' => 2,
 						   'user_names' => array(FORGE_ADMIN_USERNAME, 'None')));
 
 	  foreach (array_keys($users) as $user_name) {
@@ -344,7 +344,7 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 
 		$this->assertNotNull($this->session);
 
-		$users = array('None'=>'None', 
+		$users = array('None'=>'None',
 			       FORGE_ADMIN_USERNAME => FORGE_ADMIN_USERNAME);
 
 		foreach (array_keys($users) as $user_name) {
