@@ -230,4 +230,4 @@ The hook is triggered after \'serve push pull bundle\' on the projects repositor
 		return true;
 	}
 	
-} 
+}

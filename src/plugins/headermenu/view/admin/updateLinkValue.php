@@ -51,4 +51,4 @@ if (is_array($linkValues)) {
 	session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
 }
 
-?> 
+?>
