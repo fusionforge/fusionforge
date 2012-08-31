@@ -630,7 +630,6 @@ src/db/gforge-data-mysql.sql -text
 src/db/gforge-struct-mysql.sql -text
 src/db/schema-convergence-from-debian.sql -text
 src/db/timetracking-init.sql -text
-src/deb-specific/create-mailing-lists.pl svneol=native#text/x-perl
 src/deb-specific/create-vhosts.sh svneol=native#text/x-sh
 src/deb-specific/db-convert-to-unicode.pl svneol=native#text/x-perl
 src/deb-specific/dns_conf.pl svneol=native#text/x-perl
