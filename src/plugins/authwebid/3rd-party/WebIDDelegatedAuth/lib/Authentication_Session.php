@@ -47,7 +47,7 @@ class Authentication_Session
 
     /**
      * Created authenticated session
-     * @param int $isAuthenticated
+     * @param int    $isAuthenticated
      * @param string $webid
      */
     public function __construct($isAuthenticated = 0, $webid = NULL)

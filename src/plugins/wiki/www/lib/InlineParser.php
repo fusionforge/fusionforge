@@ -95,7 +95,7 @@ class RegexpSet
      *
      * @param string $text The text to search.
      *
-     * @return RegexpSet_match  A RegexpSet_match object, or false if no match.
+     * @return RegexpSet_match A RegexpSet_match object, or false if no match.
      */
     function match ($text) {
         return $this->_match($text, $this->_regexps, '*?');

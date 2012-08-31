@@ -224,11 +224,11 @@ class DB_odbc extends DB_common
      * Formating of the array and the data therein are configurable.
      * See DB_result::fetchInto() for more information.
      *
-     * @param resource $result    query result identifier
-     * @param array    $arr       (reference) array where data from the row
+     * @param resource $result query result identifier
+     * @param array    $arr    (reference) array where data from the row
      *                            should be placed
-     * @param int      $fetchmode how the resulting array should be indexed
-     * @param int      $rownum    the row number to fetch
+     * @param int $fetchmode how the resulting array should be indexed
+     * @param int $rownum    the row number to fetch
      *
      * @return mixed DB_OK on success, null when end of result set is
      *               reached or on failure
@@ -349,9 +349,9 @@ class DB_odbc extends DB_common
      * Use 'mssql' as the dbsyntax in the DB DSN only if you've unchecked
      * "Use ANSI quoted identifiers" when setting up the ODBC data source.
      *
-     * @param string $str  identifier name to be quoted
+     * @param string $str identifier name to be quoted
      *
-     * @return string  quoted identifier string
+     * @return string quoted identifier string
      *
      * @since 1.6.0
      * @access public
@@ -408,11 +408,11 @@ class DB_odbc extends DB_common
     /**
      * Returns the next free id in a sequence
      *
-     * @param string  $seq_name  name of the sequence
-     * @param boolean $ondemand  when true, the seqence is automatically
+     * @param string  $seq_name name of the sequence
+     * @param boolean $ondemand when true, the seqence is automatically
      *                           created if it does not exist
      *
-     * @return int  the next id number in the sequence.  DB_Error if problem.
+     * @return int the next id number in the sequence.  DB_Error if problem.
      *
      * @internal
      * @see DB_common::nextID()
@@ -461,9 +461,9 @@ class DB_odbc extends DB_common
     /**
      * Creates a new sequence
      *
-     * @param string $seq_name  name of the new sequence
+     * @param string $seq_name name of the new sequence
      *
-     * @return int  DB_OK on success.  A DB_Error object is returned if
+     * @return int DB_OK on success.  A DB_Error object is returned if
      *              problems arise.
      *
      * @internal
@@ -484,9 +484,9 @@ class DB_odbc extends DB_common
     /**
      * Deletes a sequence
      *
-     * @param string $seq_name  name of the sequence to be deleted
+     * @param string $seq_name name of the sequence to be deleted
      *
-     * @return int  DB_OK on success.  DB_Error if problems.
+     * @return int DB_OK on success.  DB_Error if problems.
      *
      * @internal
      * @see DB_common::dropSequence()
@@ -538,9 +538,9 @@ class DB_odbc extends DB_common
      * Gather information about an error, then use that info to create a
      * DB error object and finally return that object.
      *
-     * @param  integer  $errno  PEAR error number (usually a DB constant) if
+     * @param integer $errno PEAR error number (usually a DB constant) if
      *                          manually raising an error
-     * @return object  DB error object
+     * @return object DB error object
      * @see errorNative()
      * @see DB_common::errorCode()
      * @see DB_common::raiseError()

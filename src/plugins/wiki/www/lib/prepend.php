@@ -83,8 +83,8 @@ class DebugTimer {
     }
 
     /**
-     * @param string $which  One of 'real', 'utime', 'stime', 'cutime', 'sutime'
-     * @return float Seconds.
+     * @param  string $which One of 'real', 'utime', 'stime', 'cutime', 'sutime'
+     * @return float  Seconds.
      */
     function getTime($which='real', $now=false) {
         if ($which == 'real')

@@ -32,7 +32,7 @@ class Rule {
     /**
      * Check if $val is a valid not.
      *
-     * @param String $val Value to check.
+     * @param  String  $val Value to check.
      * @return Boolean
      */
     function isValid($val) {
@@ -42,7 +42,7 @@ class Rule {
     /**
      * Default error message if rule is not apply on value.
      *
-     * @param String $val Value to check.
+     * @param  String  $val Value to check.
      * @return Boolean
      */
     function getErrorMessage($key) {
@@ -337,7 +337,7 @@ extends Rule {
      * Check file upload validity
      *
      * @param  Array   One entry in $_FILES superarray (e.g. $_FILES['test'])
-     * @return Boolean Is file upload valid or not.
+     * @return Boolean              Is file upload valid or not.
      */
     function isValid($file) {
         $ok = false;

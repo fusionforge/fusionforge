@@ -133,7 +133,7 @@ class PEAR
      * $_PEAR_destructor_object_list for destructor emulation if a
      * destructor object exists.
      *
-     * @param string $error_class  (optional) which class to use for
+     * @param string $error_class (optional) which class to use for
      *        error objects, defaults to PEAR_Error.
      * @access public
      * @return void
@@ -223,11 +223,11 @@ class PEAR
     /**
      * Tell whether a value is a PEAR error.
      *
-     * @param   mixed $data   the value to test
-     * @param   int   $code   if $data is an error object, return true
+     * @param mixed $data the value to test
+     * @param int   $code if $data is an error object, return true
      *                        only if $obj->getCode() == $code
      * @access  public
-     * @return  bool    true if parameter is an error
+     * @return bool true if parameter is an error
      */
     function isError($data, $code = null)
     {
@@ -339,7 +339,7 @@ class PEAR
      *
      * @param mixed $code a single error code or an array of error codes to expect
      *
-     * @return int     the new depth of the "expected errors" stack
+     * @return int the new depth of the "expected errors" stack
      * @access public
      */
     function expectError($code = '*')
@@ -359,7 +359,7 @@ class PEAR
      * This method pops one element off the expected error codes
      * stack.
      *
-     * @return array   the list of error codes that were popped
+     * @return array the list of error codes that were popped
      */
     function popExpect()
     {
@@ -447,10 +447,10 @@ class PEAR
      *
      * @param mixed $message a text error message or a PEAR error object
      *
-     * @param int $code      a numeric error code (it is up to your class
+     * @param int $code a numeric error code (it is up to your class
      *                  to define these if you want to use codes)
      *
-     * @param int $mode      One of PEAR_ERROR_RETURN, PEAR_ERROR_PRINT,
+     * @param int $mode One of PEAR_ERROR_RETURN, PEAR_ERROR_PRINT,
      *                  PEAR_ERROR_TRIGGER, PEAR_ERROR_DIE,
      *                  PEAR_ERROR_CALLBACK, PEAR_ERROR_EXCEPTION.
      *
@@ -472,7 +472,7 @@ class PEAR
      *                  the error message parameter will be dropped.
      *
      * @access public
-     * @return object   a PEAR error object
+     * @return object a PEAR error object
      * @see PEAR::setErrorHandling
      * @since PHP 4.0.5
      */
@@ -555,7 +555,7 @@ class PEAR
      * you can easily override the actual error handler for some code and restore
     * it later with popErrorHandling.
     *
-     * @param mixed $mode (same as setErrorHandling)
+     * @param mixed $mode    (same as setErrorHandling)
      * @param mixed $options (same as setErrorHandling)
     *
     * @return bool Always true
@@ -693,15 +693,15 @@ class PEAR_Error
     /**
      * PEAR_Error constructor
      *
-     * @param string $message  message
+     * @param string $message message
      *
-     * @param int $code     (optional) error code
+     * @param int $code (optional) error code
      *
-     * @param int $mode     (optional) error mode, one of: PEAR_ERROR_RETURN,
+     * @param int $mode (optional) error mode, one of: PEAR_ERROR_RETURN,
      * PEAR_ERROR_PRINT, PEAR_ERROR_DIE, PEAR_ERROR_TRIGGER,
      * PEAR_ERROR_CALLBACK or PEAR_ERROR_EXCEPTION
      *
-     * @param mixed $options   (optional) error level, _OR_ in the case of
+     * @param mixed $options (optional) error level, _OR_ in the case of
      * PEAR_ERROR_CALLBACK, the callback function or object/method
      * tuple.
      *
@@ -805,7 +805,7 @@ class PEAR_Error
     /**
      * Get the error message from an error object.
      *
-     * @return  string  full error message
+     * @return string full error message
      * @access public
      */
     function getMessage()
@@ -877,7 +877,7 @@ class PEAR_Error
      * Get the call backtrace from where the error was generated.
      * Supported with PHP 4.3.0 or newer.
      *
-     * @param int $frame (optional) what frame to fetch
+     * @param  int   $frame (optional) what frame to fetch
      * @return array Backtrace, or NULL if not available.
      * @access public
      */

@@ -400,8 +400,8 @@ abstract class BaseRole extends Error {
 
     /**
      * TODO: Enter description here ...
-     * @param unknown_type $section
-     * @param unknown_type $reference
+     * @param  unknown_type   $section
+     * @param  unknown_type   $reference
      * @return number|boolean
      */
     function getSetting($section, $reference) {

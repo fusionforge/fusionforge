@@ -738,7 +738,7 @@
      *
      * @param sql        SQL statement to execute, or possibly an array holding prepared statement ($sql[0] will hold sql text)
      * @param [inputarr]    holds the input data to bind to. Null elements will be set to null.
-     * @return         RecordSet or false
+     * @return RecordSet or false
      */
     function &Execute($sql,$inputarr=false)
     {
@@ -904,7 +904,7 @@
      *
      * @param seqname        name of sequence to use
      * @param startID        if sequence does not exist, start at this ID
-     * @return        0 if not supported, otherwise a sequence id
+     * @return 0 if not supported, otherwise a sequence id
      */
     function GenID($seqname='adodbseq',$startID=1)
     {
@@ -930,7 +930,7 @@
     }
 
     /**
-     * @return  the last inserted ID. Not all databases support this.
+     * @return the last inserted ID. Not all databases support this.
      */
     function Insert_ID()
     {
@@ -947,7 +947,7 @@
     /**
      * Portable Insert ID. Pablo Roca <pabloroca@mvps.org>
      *
-     * @return  the last inserted ID. All databases support this. But aware possible
+     * @return the last inserted ID. All databases support this. But aware possible
      * problems in multiuser environments. Heavy test this before deploying.
      */
     function PO_Insert_ID($table="", $id="")
@@ -978,7 +978,7 @@
 
 
     /**
-     * @return  the last error message
+     * @return the last error message
      */
     function ErrorMsg()
     {
@@ -1038,7 +1038,7 @@
      * Choose a database to connect to. Many databases do not support this.
      *
      * @param dbName     is the name of the database to select
-     * @return         true or false
+     * @return true or false
      */
     function SelectDB($dbName)
     {return false;}
@@ -1509,7 +1509,7 @@
      *                      This is an optional parameter.
      * @param sql        SQL statement to execute
      * @param [inputarr]    holds the input data  to bind to
-     * @return         RecordSet or false
+     * @return RecordSet or false
      */
     function &CacheExecute($secs2cache,$sql=false,$inputarr=false)
     {
@@ -1858,7 +1858,7 @@
      * @param showSchema returns the schema/user with the table name, eg. USER.TABLE
      * @param mask  is the input mask - only supported by oci8 and postgresql
      *
-     * @return  array of tables for current database.
+     * @return array of tables for current database.
      */
     function &MetaTables($ttype=false,$showSchema=false,$mask=false)
     {
@@ -1918,7 +1918,7 @@
      * @param upper    uppercase table name (required by some databases)
      * @schema is optional database schema to use - not supported by all databases.
      *
-     * @return  array of ADOFieldObjects for current table.
+     * @return array of ADOFieldObjects for current table.
      */
     function &MetaColumns($table,$upper=true)
     {
@@ -1975,7 +1975,7 @@
      * List columns names in a table as an array.
      * @param table    table name to query
      *
-     * @return  array of column names for current table.
+     * @return array of column names for current table.
      */
     function &MetaColumnNames($table)
     {
@@ -2011,7 +2011,7 @@
      *
      * @param d    a date in Unix date time format.
      *
-     * @return  date string in database date format
+     * @return date string in database date format
      */
     function DBDate($d)
     {
@@ -2032,7 +2032,7 @@
      *
      * @param ts    a timestamp in Unix date time format.
      *
-     * @return  timestamp string in database timestamp format
+     * @return timestamp string in database timestamp format
      */
     function DBTimeStamp($ts)
     {
@@ -2162,7 +2162,7 @@
      * @param [magic_quotes]    if $s is GET/POST var, set to get_magic_quotes_gpc().
      *                This undoes the stupidity of magic quotes for GPC.
      *
-     * @return  quoted string to be sent back to database
+     * @return quoted string to be sent back to database
      */
     function qstr($s,$magic_quotes=false)
     {
@@ -2874,7 +2874,7 @@
      /**
      * Portable RecordCount. Pablo Roca <pabloroca@mvps.org>
      *
-     * @return  the number of records from a previous SELECT. All databases support this.
+     * @return the number of records from a previous SELECT. All databases support this.
      *
      * But aware possible problems in multiuser environments. For better speed the table
      * must be indexed by the condition. Heavy test this before deploying.

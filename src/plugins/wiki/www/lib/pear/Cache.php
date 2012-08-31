@@ -145,7 +145,7 @@ class Cache extends PEAR {
     /**
      * Returns the current caching state.
      *
-     * @return  boolean     The current caching state.
+     * @return boolean The current caching state.
      * @access  public
      */
     function getCaching()

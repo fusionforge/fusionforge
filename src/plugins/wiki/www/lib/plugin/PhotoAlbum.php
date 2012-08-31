@@ -509,8 +509,8 @@ display_slides();"));
      * Calculate the new size in pixels when the original size
      * with a value is given.
      *
-     * @param integer $oldSize Absolute no. of pixels
-     * @param mixed $value Either absolute no. or HTML percentage e.g. '50%'
+     * @param  integer $oldSize Absolute no. of pixels
+     * @param  mixed   $value   Either absolute no. or HTML percentage e.g. '50%'
      * @return integer New size in pixels
      */
     function newSize($oldSize, $value) {
@@ -545,8 +545,8 @@ display_slides();"));
      * fromFile - read pictures & descriptions (separated by ;)
      *            from $src and return it in array $photos
      *
-     * @param string $src path to dir or textfile (local or remote)
-     * @param array $photos
+     * @param  string $src    path to dir or textfile (local or remote)
+     * @param  array  $photos
      * @return string Error when bad url or file couldn't be opened
      */
     function fromFile($src, &$photos, $webpath='') {

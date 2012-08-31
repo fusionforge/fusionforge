@@ -216,7 +216,7 @@ extends WikiPlugin_GraphViz
      * @param  category string   attribute of the pages which is used
      *                           to compare them
      * @param  minimum  boolean  true finds smallest, false finds biggest
-     * @return array             list of page names found to be the best
+     * @return array list of page names found to be the best
      */
     function findbest($number, $category, $minimum ) {
         // select the $number best in the category '$category'
@@ -414,7 +414,7 @@ extends WikiPlugin_GraphViz
      * @param shape     string  node shape; 'ellipse', 'box', 'circle', 'point'
      * @param label     string  'name': label by name,
      *                          'number': label by unique number
-     * @return boolean          error status; true=ok; false=error
+     * @return boolean error status; true=ok; false=error
      */
     function createDotFile($filename, $argarray) {
         extract($argarray);
@@ -530,7 +530,7 @@ extends WikiPlugin_GraphViz
      *                          image. It is not necessary to call
      *                          WikiPlugin->getArgs anymore.
      * @param  request  Request ???
-     * @return          string  html output
+     * @return string html output
      */
     function embedImg($url,&$dbi,$argarray,&$request) {
         if (!VISUALWIKI_ALLOWOPTIONS)

@@ -235,11 +235,11 @@ class DB_ifx extends DB_common
      * Formating of the array and the data therein are configurable.
      * See DB_result::fetchInto() for more information.
      *
-     * @param resource $result    query result identifier
-     * @param array    $arr       (reference) array where data from the row
+     * @param resource $result query result identifier
+     * @param array    $arr    (reference) array where data from the row
      *                            should be placed
-     * @param int      $fetchmode how the resulting array should be indexed
-     * @param int      $rownum    the row number to fetch
+     * @param int $fetchmode how the resulting array should be indexed
+     * @param int $rownum    the row number to fetch
      *
      * @return mixed DB_OK on success, null when end of result set is
      *               reached or on failure
@@ -384,9 +384,9 @@ class DB_ifx extends DB_common
      * Gather information about an error, then use that info to create a
      * DB error object and finally return that object.
      *
-     * @param  integer  $errno  PEAR error number (usually a DB constant) if
+     * @param integer $errno PEAR error number (usually a DB constant) if
      *                          manually raising an error
-     * @return object  DB error object
+     * @return object DB error object
      * @see errorNative()
      * @see errorCode()
      * @see DB_common::raiseError()
@@ -410,8 +410,8 @@ class DB_ifx extends DB_common
      * Requires that the DB implementation's constructor fills
      * in the <var>$errorcode_map</var> property.
      *
-     * @param  string  $nativecode  error code returned by the database
-     * @return int a portable DB error code, or DB_ERROR if this DB
+     * @param  string $nativecode error code returned by the database
+     * @return int    a portable DB error code, or DB_ERROR if this DB
      * implementation has no mapping for the given error code.
      */
     function errorCode($nativecode)
@@ -444,7 +444,7 @@ class DB_ifx extends DB_common
 
     /**
      * Returns the query needed to get some backend info
-     * @param string $type What kind of info you want to retrieve
+     * @param  string $type What kind of info you want to retrieve
      * @return string The SQL query string
      */
     function getSpecialQuery($type)
@@ -469,10 +469,10 @@ class DB_ifx extends DB_common
      * an error will be raised saying
      * <samp>can't distinguish duplicate field names</samp>.
      *
-     * @param object|string  $result  DB_result object from a query or a
+     * @param object|string $result DB_result object from a query or a
      *                                string containing the name of a table
-     * @param int            $mode    a valid tableInfo mode
-     * @return array  an associative array with the information requested
+     * @param  int   $mode a valid tableInfo mode
+     * @return array an associative array with the information requested
      *                or an error object if something is wrong
      * @access public
      * @internal

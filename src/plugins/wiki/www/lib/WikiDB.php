@@ -155,7 +155,7 @@ class WikiDB {
      * therefore this method never fails.
      *
      * @access public
-     * @param string $pagename Which page to get.
+     * @param  string      $pagename Which page to get.
      * @return WikiDB_Page The requested WikiDB_Page.
      */
     function getPage($pagename) {
@@ -192,7 +192,7 @@ class WikiDB {
      * manner in certain back-ends.
      *
      * @access public
-     * @param string $pagename string Which page to check.
+     * @param  string  $pagename string Which page to check.
      * @return boolean True if the page actually exists with
      * non-default contents in the WikiDataBase.
      */
@@ -288,7 +288,7 @@ class WikiDB {
      * @access public
      *
      * @param boolean $include_empty If true include also empty pages
-     * @param string $exclude: comma-seperated list of pagenames.
+     * @param string  $exclude:      comma-seperated list of pagenames.
      *             TBD: array of pagenames
      * @return integer
      *
@@ -322,7 +322,7 @@ class WikiDB {
      *        If false the result is faster in natural order.
      * @param string or false $limit Optional. Encoded as "$offset,$count".
      *         $offset defaults to 0.
-     * @param string $exclude: Optional comma-seperated list of pagenames.
+     * @param  string              $exclude: Optional comma-seperated list of pagenames.
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching pages.
      * @see TextSearchQuery
      */
@@ -352,7 +352,7 @@ class WikiDB {
      *        If false the result is faster in natural order.
      * @param string or false $limit Optional. Encoded as "$offset,$count".
      *         $offset defaults to 0.
-     * @param string $exclude: Optional comma-seperated list of pagenames.
+     * @param  string              $exclude: Optional comma-seperated list of pagenames.
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching pages.
      * @see TextSearchQuery
      */
@@ -501,10 +501,10 @@ class WikiDB {
      * Call the appropriate backend method.
      *
      * @access public
-     * @param string $from Page to rename
-     * @param string $to   New name
-     * @param boolean $updateWikiLinks If the text in all pages should be replaced.
-     * @return boolean     true or false
+     * @param  string  $from            Page to rename
+     * @param  string  $to              New name
+     * @param  boolean $updateWikiLinks If the text in all pages should be replaced.
+     * @return boolean true or false
      */
     function renamePage($from, $to, $updateWikiLinks = false) {
         if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
@@ -649,8 +649,8 @@ class WikiDB {
      * @see get
      * @access public
      *
-     * @param string $key  Meta-data key to set.
-     * @param string $newval  New value.
+     * @param string $key    Meta-data key to set.
+     * @param string $newval New value.
      */
     function set($key, $newval) {
         if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
@@ -891,7 +891,7 @@ class WikiDB_Page
      *
      * @param hash $links List of linkto=>pagename, relation=>pagename which this page links to.
      *
-     * @return WikiDB_PageRevision  Returns the new WikiDB_PageRevision object. If
+     * @return WikiDB_PageRevision Returns the new WikiDB_PageRevision object. If
      * $version was incorrect, returns false
      */
     function createRevision($version, &$content, $metadata, $links) {
@@ -963,7 +963,7 @@ class WikiDB_Page
      * This takes care of computing the links, and storing
      * a cached version of the transformed wiki-text.
      *
-     * @param string $wikitext  The page content.
+     * @param string $wikitext The page content.
      *
      * @param int $version Version number for new revision.
      * To ensure proper serialization of edits, $version must be
@@ -971,7 +971,7 @@ class WikiDB_Page
      * (You can defeat this check by setting $version to
      * {@link WIKIDB_FORCE_CREATE} --- not usually recommended.)
      *
-     * @param hash $meta  Meta-data for new revision.
+     * @param hash $meta Meta-data for new revision.
      */
     function save($wikitext, $version, $meta, $formatted = null) {
         if ($this->_wikidb->readonly) { trigger_error("readonly database", E_USER_WARNING); return; }
@@ -1067,7 +1067,7 @@ class WikiDB_Page
      *
      * @access public
      *
-     * @param integer $version  Which revision to get.
+     * @param integer $version Which revision to get.
      *
      * @return WikiDB_PageRevision The requested WikiDB_PageRevision object, or
      * false if the requested revision does not exist in the {@link WikiDB}.
@@ -1098,7 +1098,7 @@ class WikiDB_Page
      *
      * @access public
      *
-     * @param integer $version  Find most recent revision before this version.
+     * @param integer $version Find most recent revision before this version.
      *  You can also use a WikiDB_PageRevision object to specify the $version.
      *
      * @return WikiDB_PageRevision The requested WikiDB_PageRevision object, or false if the
@@ -1295,8 +1295,8 @@ class WikiDB_Page
      * @see get
      * @access public
      *
-     * @param string $key  Meta-data key to set.
-     * @param string $newval  New value.
+     * @param string $key    Meta-data key to set.
+     * @param string $newval New value.
      */
     function set($key, $newval) {
         $cache = &$this->_wikidb->_cache;
@@ -1561,7 +1561,7 @@ class WikiDB_PageRevision
     /**
      * Get the transformed content of a page.
      *
-     * @param string $pagetype  Override the page-type of the revision.
+     * @param string $pagetype Override the page-type of the revision.
      *
      * @return object An XmlContent-like object containing the page transformed
      * contents.

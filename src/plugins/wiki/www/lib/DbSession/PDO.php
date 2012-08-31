@@ -54,8 +54,8 @@ extends DbSession
      * Opens a session.
      *
      * Actually this function is a fake for session_set_save_handle.
-     * @param  string $save_path a path to stored files
-     * @param  string $session_name a name of the concrete file
+     * @param  string  $save_path    a path to stored files
+     * @param  string  $session_name a name of the concrete file
      * @return boolean true just a variable to notify PHP that everything 
      * is good.
      * @access private
@@ -117,8 +117,8 @@ extends DbSession
      * is  necessary, it is suggested that the debug output be
      * written to a file instead.
      *
-     * @param  string $id
-     * @param  string $sess_data
+     * @param  string  $id
+     * @param  string  $sess_data
      * @return boolean true if data saved successfully  and false
      * otherwise.
      * @access private
@@ -182,7 +182,7 @@ extends DbSession
      *
      * Removes a session from the table.
      *
-     * @param  string $id
+     * @param  string  $id
      * @return boolean true 
      * @access private
      */
@@ -199,7 +199,7 @@ extends DbSession
     /**
      * Cleans out all expired sessions.
      *
-     * @param  int $maxlifetime session's time to live.
+     * @param  int     $maxlifetime session's time to live.
      * @return boolean true
      * @access private
      */

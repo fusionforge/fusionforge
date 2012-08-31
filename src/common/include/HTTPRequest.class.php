@@ -38,8 +38,8 @@ class HTTPRequest extends Codendi_Request {
     /**
      * Get the value of $variable in $this->params (server side values).
      *
-     * @param string $variable Name of the parameter to get.
-     * @return mixed If the variable exist, the value is returned (string)
+     * @param  string $variable Name of the parameter to get.
+     * @return mixed  If the variable exist, the value is returned (string)
      * otherwise return false;
      */
     function getFromServer($variable) {
@@ -103,7 +103,7 @@ class HTTPRequest extends Codendi_Request {
      * element.
      *
      * @access private
-     * @param mixed $value
+     * @param  mixed $value
      * @return mixed
      */
     function _stripslashes($value) {
@@ -123,7 +123,7 @@ class HTTPRequest extends Codendi_Request {
      *
      * @access private
      * @param string $variable Name of the parameter to get.
-     * @param array $array Name of the parameter to get.
+     * @param array  $array    Name of the parameter to get.
      */
     function _get($variable, $array) {
         if ($this->_exist($variable, $array)) {

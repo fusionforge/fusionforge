@@ -37,7 +37,7 @@ class CodendiOSLCConnector extends OSLCConnector {
     /**
      * Filter parameters provided in the REST GET request to check whether mandatory ones are set.
      *
-     * @param array $params
+     * @param  array $params
      * @return array
      */
     public function filterRequestParams($params) {
@@ -55,7 +55,7 @@ class CodendiOSLCConnector extends OSLCConnector {
 
     /**
      * Checks whether a change request exists inside Codendi trackers.
-     * @param int $id change request id.
+     * @param  int  $id change request id.
      * @return bool
      */
     public function checkChangeRequestExists($changerequest_id) {
@@ -138,7 +138,7 @@ class CodendiOSLCConnector extends OSLCConnector {
      * Updates an existant Codendi ChangeRequest in the tracker DataBase.
      * @param int $identifier id of the ChangeRequest within Codendi tracker
      * @param ChangeRequest the change request given as input for the PUT request.
-     * @param array $props array of the properties that PUT request is going to change
+     * @param  array   $props array of the properties that PUT request is going to change
      * @return boolean true if success, false otherwise.
      */
     public function updateChangeRequest($changerequest_id, $group_id, $tracker_id, $changerequest, $props) {

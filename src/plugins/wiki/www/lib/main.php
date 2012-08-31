@@ -336,7 +336,7 @@ class WikiRequest extends Request {
      * By default it will grab the page requested via the URL
      *
      * This is a convenience function.
-     * @param string $pagename Name of page to get.
+     * @param  string      $pagename Name of page to get.
      * @return WikiDB_Page Object with methods to pull data from
      * database for the page requested.
      */

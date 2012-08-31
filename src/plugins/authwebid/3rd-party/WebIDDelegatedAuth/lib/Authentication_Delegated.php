@@ -82,11 +82,11 @@ class Authentication_Delegated {
     const SIG_ALG_RSA_SHA1 = 'rsa-sha1';
     /**
      * Perform delegated WebID authentication relying on an Identity Provider
-     * @param Authentication_SignedURL $request (if not specified infered from _GET)
-     * @param Authentication_X509CertRepo $certRepository (if not default is used)
-     * @param bool $createSession
-     * @param string $sigAlg
-     * @param int $allowedTimeWindow
+     * @param Authentication_SignedURL    $request           (if not specified infered from _GET)
+     * @param Authentication_X509CertRepo $certRepository    (if not default is used)
+     * @param bool                        $createSession
+     * @param string                      $sigAlg
+     * @param int                         $allowedTimeWindow
      */
     public function __construct($createSession = TRUE,
                                 Authentication_SignedURL $request = NULL,

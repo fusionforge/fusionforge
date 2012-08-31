@@ -388,8 +388,8 @@ class WikiDB_backend
      * be returned in reverse order by hit count.
      *
      * @access protected
-     * @param integer $limit No more than this many pages
-     * @return object A WikiDB_backend_iterator.
+     * @param  integer $limit No more than this many pages
+     * @return object  A WikiDB_backend_iterator.
      */
     function most_popular($limit, $sortby='-hits') {
         // This is method fetches all pages, then

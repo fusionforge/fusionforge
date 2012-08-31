@@ -128,7 +128,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  argstr    string  plugin arguments in the call from PhpWiki
      * @param  request   Request ???
      * @param  string    basepage Pagename to use to interpret links [/relative] page names.
-     * @return           string  HTML output to be printed to browser
+     * @return string HTML output to be printed to browser
      *
      * @see #getHtml
      * @see #getImage
@@ -286,7 +286,7 @@ class WikiPluginCached extends WikiPlugin
      *                                image. It is not necessary to call
      *                                WikiPlugin->getArgs anymore.
      * @param  request   Request      ???
-     * @return           imagehandle  image handle if successful
+     * @return imagehandle image handle if successful
      *                                false if an error occured
      */
     function getImage($dbi,$argarray,$request) {
@@ -309,7 +309,7 @@ class WikiPluginCached extends WikiPlugin
      *                                not necessary to call
      *                                WikiPlugin->getArgs anymore.
      * @param  request   Request      ???
-     * @return           string       format: '+seconds'
+     * @return string format: '+seconds'
      *                                '0' never expires
      */
     function getExpire($dbi,$argarray,$request) {
@@ -326,7 +326,7 @@ class WikiPluginCached extends WikiPlugin
      *                                not necessary to call
      *                                WikiPlugin->getArgs anymore.
      * @param  request   Request      ???
-     * @return           string       'png', 'jpeg' or 'gif'
+     * @return string 'png', 'jpeg' or 'gif'
      */
     function getImageType(&$dbi, $argarray, &$request) {
         if (in_array($argarray['imgtype'], preg_split('/\s*:\s*/', PLUGIN_CACHED_IMGTYPES)))
@@ -345,7 +345,7 @@ class WikiPluginCached extends WikiPlugin
      *                                not necessary to call
      *                                WikiPlugin->getArgs anymore.
      * @param  request   Request      ???
-     * @return           string       "alt" description of the image
+     * @return string "alt" description of the image
      */
     function getAlt($dbi,$argarray,$request) {
         return '<?plugin '.$this->getName().' '.$this->glueArgs($argarray).'?>';
@@ -362,8 +362,8 @@ class WikiPluginCached extends WikiPlugin
      *                                image. It is not necessary to call
      *                                WikiPlugin->getArgs anymore.
      * @param  request   Request      ???
-     * @param  string    $basepage    Pagename to use to interpret links [/relative] page names.
-     * @return           string       html to be printed in place of the plugin command
+     * @param  string $basepage Pagename to use to interpret links [/relative] page names.
+     * @return string html to be printed in place of the plugin command
      *                                false if an error occured
      */
     function getHtml($dbi, $argarray, $request, $basepage) {
@@ -382,7 +382,7 @@ class WikiPluginCached extends WikiPlugin
      *                                image. It is not necessary to call
      *                                WikiPlugin->getArgs anymore.
      * @param  request   Request      ???
-     * @return array(html,handle)     html for the map interior (to be specific,
+     * @return array(html,handle) html for the map interior (to be specific,
      *                                only &lt;area;&gt; tags defining hot spots)
      *                                handle is an imagehandle to the corresponding
      *                                image.
@@ -409,7 +409,7 @@ class WikiPluginCached extends WikiPlugin
      *                          image. It is not necessary to call
      *                          WikiPlugin->getArgs anymore.
      * @param  request  Request ???
-     * @return          string  html output
+     * @return string html output
      */
     function embedMap($id,$url,$map,&$dbi,$argarray,&$request) {
         // id is not unique if the same map is produced twice
@@ -436,7 +436,7 @@ class WikiPluginCached extends WikiPlugin
      *                          image. It is not necessary to call
      *                          WikiPlugin->getArgs anymore.
      * @param  request  Request ???
-     * @return          string  html output
+     * @return string html output
      */
     function embedImg($url, $dbi, $argarray, $request) {
         return HTML::img( array(
@@ -479,7 +479,7 @@ class WikiPluginCached extends WikiPlugin
      * FIXME: There should be references returned
      *
      * @access static protected
-     * @return Cache  copy of the cache object
+     * @return Cache copy of the cache object
      */
     function newCache() {
         static $staticcache;
@@ -516,7 +516,7 @@ class WikiPluginCached extends WikiPlugin
      *
      * @access  public static
      * @param   wish   string one of 'png', 'gif', 'jpeg', 'jpg'
-     * @return         string the image type to be used ('png', 'gif', 'jpeg')
+     * @return string the image type to be used ('png', 'gif', 'jpeg')
      *                        'html' in case of an error
      */
 
@@ -567,7 +567,7 @@ class WikiPluginCached extends WikiPlugin
      * @param   imgtype   string 'png', 'gif' or 'jpeg'
      * @param   imghandle string image handle containing the image
      * @param   imgfile   string file name of the image to be produced
-     * @return  void
+     * @return void
      * @see     decideImageType
      */
     function writeImage($imgtype, $imghandle, $imgfile=false) {
@@ -588,7 +588,7 @@ class WikiPluginCached extends WikiPlugin
      *
      * @access  public static
      * @param   doctype string 'gif', 'png', 'jpeg', 'html'
-     * @return  void
+     * @return void
      */
     function writeHeader($doctype) {
         static $IMAGEHEADER = array(
@@ -613,7 +613,7 @@ class WikiPluginCached extends WikiPlugin
      *
      * @access public static
      * @param  argarray array   contains all arguments to be converted
-     * @return          string  concated arguments
+     * @return string concated arguments
      */
     function glueArgs($argarray) {
         if (!empty($argarray)) {
@@ -643,7 +643,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  request      Request  ???
      * @param  errorformat  string   format which should be used to
      *                               output errors ('html', 'png', 'gif', 'jpeg')
-     * @return boolean               false if an error occurs, true otherwise.
+     * @return boolean false if an error occurs, true otherwise.
      *                               Param id and param plugincall are
      *                               also return values.
      */
@@ -673,7 +673,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  plugincall string   reference to serialized array containing both
      *                             name and parameters of the plugin call
      * @param  request    Request  ???
-     * @return            boolean  false if an error occurs, true otherwise.
+     * @return boolean false if an error occurs, true otherwise.
      *
      */
     function checkCall2(&$plugincall, $request) {
@@ -705,7 +705,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  argarray array            Contains all arguments needed by plugin
      * @param  request Request           ????
      * @param  errorformat string        outputs errors in 'png', 'gif', 'jpg' or 'html'
-     * @return boolean                   error status; true=ok; false=error
+     * @return boolean error status; true=ok; false=error
      */
     function produceImage(&$content, $plugin, $dbi, $argarray, $request, $errorformat) {
         $plugin->resetError();
@@ -955,7 +955,7 @@ class WikiPluginCached extends WikiPlugin
      *                         I recommend font 2 for errors and 4 for help texts.
      * @param  textcol array   text color as a list of the rgb components; array(red,green,blue)
      * @param  bgcol   array   background color; array(red,green,blue)
-     * @return string          image handle for gd routines
+     * @return string image handle for gd routines
      */
     function text2img($txt,$fontnr,$textcol,$bgcol) {
         // basic (!) output for error handling
@@ -1080,7 +1080,7 @@ class WikiPluginCached extends WikiPlugin
      *
      * @param  cmd   string   command to be invoked
      * @param  until string   expected output filename
-     * @return       boolean  error status; true=ok; false=error
+     * @return boolean error status; true=ok; false=error
      */
     function execute($cmd, $until = false) {
         // cmd must redirect stderr to stdout though!

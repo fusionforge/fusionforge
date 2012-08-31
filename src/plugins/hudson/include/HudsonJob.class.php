@@ -301,7 +301,7 @@ class HudsonJob {
      *
      * @exception if unable to open build URL or if response is an error
      *
-     * @param string $token if CI server has activated security (login/password), then a token is mandatory to build jobs. This token is defined in the job configuration.
+     * @param  string   $token if CI server has activated security (login/password), then a token is mandatory to build jobs. This token is defined in the job configuration.
      * @return response of build call.
      */
     function launchBuild($token = null) {

@@ -28,9 +28,9 @@ class TransformedText extends CacheableMarkup {
     /** Constructor.
      *
      * @param WikiDB_Page $page
-     * @param string $text  The packed page revision content.
-     * @param hash $meta    The version meta-data.
-     * @param string $type_override  For markup of page using a different
+     * @param string      $text          The packed page revision content.
+     * @param hash        $meta          The version meta-data.
+     * @param string      $type_override For markup of page using a different
      *        pagetype than that specified in its version meta-data.
      */
     function TransformedText($page, $text, $meta, $type_override=false) {
@@ -70,8 +70,8 @@ class PageType {
      *
      * This is a static member function.
      *
-     * @param string $pagetype  Name of the page type.
-     * @return PageType  An object which is a subclass of PageType.
+     * @param  string   $pagetype Name of the page type.
+     * @return PageType An object which is a subclass of PageType.
      */
     function GetPageType ($name=false) {
         if (!$name)
@@ -87,7 +87,7 @@ class PageType {
     /**
      * Get the name of this page type.
      *
-     * @return string  Page type name.
+     * @return string Page type name.
      */
     function getName() {
     if (!preg_match('/^PageType_(.+)$/i', get_class($this), $m))
@@ -98,10 +98,10 @@ class PageType {
     /**
      * Transform page text.
      *
-     * @param WikiDB_Page $page
-     * @param string $text
-     * @param hash $meta Version meta-data
-     * @return XmlContent The transformed page text.
+     * @param  WikiDB_Page $page
+     * @param  string      $text
+     * @param  hash        $meta Version meta-data
+     * @return XmlContent  The transformed page text.
      */
     function transform(&$page, &$text, $meta) {
         $fmt_class = 'PageFormatter_' . $this->getName();
@@ -327,7 +327,7 @@ class PageFormatter {
     /** Constructor.
      *
      * @param WikiDB_Page $page
-     * @param hash $meta Version meta-data.
+     * @param hash        $meta Version meta-data.
      */
     function PageFormatter(&$page, $meta) {
         $this->_page = $page;
@@ -347,8 +347,8 @@ class PageFormatter {
 
     /** Transform the page text.
      *
-     * @param string $text  The raw page content (e.g. wiki-text).
-     * @return XmlContent   Transformed content.
+     * @param  string     $text The raw page content (e.g. wiki-text).
+     * @return XmlContent Transformed content.
      */
     function format($text) {
         trigger_error("pure virtual", E_USER_ERROR);

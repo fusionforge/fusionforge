@@ -71,7 +71,7 @@ class LDAP_result extends DB_result
 
     /**
      * class constructor, calls DB_result constructor
-     * @param ref $dbh reference to the db instance
+     * @param ref      $dbh    reference to the db instance
      * @param resource $result ldap command result
      */
     function LDAP_result(&$dbh, $result)
@@ -84,8 +84,8 @@ class LDAP_result extends DB_result
      *
      * called once as soon as something needs to be returned
      * @access private
-     * @param resource $result ldap command result
-     * @return boolean true
+     * @param  resource $result ldap command result
+     * @return boolean  true
      */
     function getRows() {
         if ($this->_recordset === null) {
@@ -146,10 +146,10 @@ class LDAP_result extends DB_result
     
     /**
      * Fetch and return a row of data (it uses driver->fetchInto for that)
-     * @param int $fetchmode  format of fetched row
-     * @param int $rownum     the row number to fetch
+     * @param int $fetchmode format of fetched row
+     * @param int $rownum    the row number to fetch
      *
-     * @return  array a row of data, NULL on no more rows or PEAR_Error on error
+     * @return array a row of data, NULL on no more rows or PEAR_Error on error
      *
      * @access public
      */
@@ -167,11 +167,11 @@ class LDAP_result extends DB_result
     /**
      * Fetch a row of data into an existing variable.
      *
-     * @param  mixed     $arr        reference to data containing the row
-     * @param  integer   $fetchmode  format of fetched row
-     * @param  integer   $rownum     the row number to fetch
+     * @param mixed   $arr       reference to data containing the row
+     * @param integer $fetchmode format of fetched row
+     * @param integer $rownum    the row number to fetch
      *
-     * @return  mixed  DB_OK on success, NULL on no more rows or
+     * @return mixed DB_OK on success, NULL on no more rows or
      *                 a DB_Error object on error
      *
      * @access public     
@@ -194,10 +194,10 @@ class LDAP_result extends DB_result
      *
      * returns a hash of all records, basically returning
      * a copy of $this->_recordset
-     * @param  integer   $fetchmode  format of fetched row
-     * @param  integer   $rownum     the row number to fetch (not used, here for interface compatibility)
+     * @param integer $fetchmode format of fetched row
+     * @param integer $rownum    the row number to fetch (not used, here for interface compatibility)
      *
-     * @return  mixed  DB_OK on success, NULL on no more rows or
+     * @return mixed DB_OK on success, NULL on no more rows or
      *                 a DB_Error object on error
      *
      * @access public     
@@ -253,7 +253,7 @@ class LDAP_result extends DB_result
 
     /**
      * Frees the resources allocated for this result set.
-     * @return  int     error code
+     * @return int error code
      *
      * @access public     
      */
@@ -357,9 +357,9 @@ class DB_ldap extends DB_common
     /**
      * Connect and bind to LDAP server with either anonymous or authenticated bind depending on dsn info
      *
-     * @param array $dsninfo dsn info as passed by DB::connect()
-     * @param boolean $persistent kept for interface compatibility
-     * @return DB_OK if successfully connected. A DB error code is returned on failure.
+     * @param  array   $dsninfo    dsn info as passed by DB::connect()
+     * @param  boolean $persistent kept for interface compatibility
+     * @return DB_OK   if successfully connected. A DB error code is returned on failure.
      */
     function connect($dsninfo, $persistent = false)
     {
@@ -412,9 +412,9 @@ class DB_ldap extends DB_common
      * depend on two additional parameters, added in respect to the
      * DB_common interface.
      *
-     * @param string $filter text of the request to send to the LDAP server
-     * @param string $action type of request to perform, defaults to search (ldap_search())
-     * @param array $params array of additional parameters to pass to the PHP ldap function requested
+     * @param  string $filter text of the request to send to the LDAP server
+     * @param  string $action type of request to perform, defaults to search (ldap_search())
+     * @param  array  $params array of additional parameters to pass to the PHP ldap function requested
      * @return result from ldap function or DB Error object if no result
      */
     function simpleQuery($filter, $action = null, $params = null)
@@ -499,10 +499,10 @@ class DB_ldap extends DB_common
     /**
      * Executes a query performing variables substitution in the query text
      *
-     * @param string $stmt text of the request to send to the LDAP server
-     * @param array $data query variables values to substitute
-     * @param string $action type of request to perform, defaults to search (ldap_search())
-     * @param array $params array of additional parameters to pass to the PHP ldap function requested
+     * @param  string      $stmt   text of the request to send to the LDAP server
+     * @param  array       $data   query variables values to substitute
+     * @param  string      $action type of request to perform, defaults to search (ldap_search())
+     * @param  array       $params array of additional parameters to pass to the PHP ldap function requested
      * @return LDAP_result object or DB Error object if no result
      * @see DB_common::executeEmulateQuery $this->simpleQuery()
      */
@@ -525,10 +525,10 @@ class DB_ldap extends DB_common
     /**
      * Executes multiple queries performing variables substitution for each query
      *
-     * @param string $stmt text of the request to send to the LDAP server
-     * @param array $data query variables values to substitute
-     * @param string $action type of request to perform, defaults to search (ldap_search())
-     * @param array $params array of additional parameters to pass to the PHP ldap function requested
+     * @param  string      $stmt   text of the request to send to the LDAP server
+     * @param  array       $data   query variables values to substitute
+     * @param  string      $action type of request to perform, defaults to search (ldap_search())
+     * @param  array       $params array of additional parameters to pass to the PHP ldap function requested
      * @return LDAP_result object or DB Error object if no result
      * @see DB_common::executeMultiple
      */
@@ -542,10 +542,10 @@ class DB_ldap extends DB_common
     /**
      * Executes a query substituting variables if any are present
      *
-     * @param string $query text of the request to send to the LDAP server
-     * @param array $data query variables values to substitute
-     * @param string $action type of request to perform, defaults to search (ldap_search())
-     * @param array $params array of additional parameters to pass to the PHP ldap function requested
+     * @param  string      $query  text of the request to send to the LDAP server
+     * @param  array       $data   query variables values to substitute
+     * @param  string      $action type of request to perform, defaults to search (ldap_search())
+     * @param  array       $params array of additional parameters to pass to the PHP ldap function requested
      * @return LDAP_result object or DB Error object if no result
      * @see DB_common::prepare() $this->execute()$this->simpleQuery()
      */
@@ -571,9 +571,9 @@ class DB_ldap extends DB_common
     /**
      * Modifies a query to return only a set of rows, stores $from and $count for LDAP_result
      *
-     * @param string $query text of the request to send to the LDAP server
-     * @param int $from record position from which to start returning data
-     * @param int $count number of records to return
+     * @param  string   $query text of the request to send to the LDAP server
+     * @param  int      $from  record position from which to start returning data
+     * @param  int      $count number of records to return
      * @return modified query text (no modifications are made, see above)
      */
     function modifyLimitQuery($query, $from, $count)
@@ -589,11 +589,11 @@ class DB_ldap extends DB_common
      * This method only saves the $from and $count parameters for LDAP_result
      * where the actual records processing takes place
      *
-     * @param string $query text of the request to send to the LDAP server
-     * @param int $from record position from which to start returning data
-     * @param int $count number of records to return
-     * @param string $action type of request to perform, defaults to search (ldap_search())
-     * @param array $params array of additional parameters to pass to the PHP ldap function requested
+     * @param  string      $query  text of the request to send to the LDAP server
+     * @param  int         $from   record position from which to start returning data
+     * @param  int         $count  number of records to return
+     * @param  string      $action type of request to perform, defaults to search (ldap_search())
+     * @param  array       $params array of additional parameters to pass to the PHP ldap function requested
      * @return LDAP_result object or DB Error object if no result
      */
     function limitQuery($query, $from, $count, $action = 'search', $params = array())
@@ -612,8 +612,8 @@ class DB_ldap extends DB_common
      * @param $query the SQL query
      * @param $data if supplied, prepare/execute will be used
      *        with this array as execute parameters
-     * @param string $action type of request to perform, defaults to search (ldap_search())
-     * @param array $params array of additional parameters to pass to the PHP ldap function requested
+     * @param  string $action type of request to perform, defaults to search (ldap_search())
+     * @param  array  $params array of additional parameters to pass to the PHP ldap function requested
      * @return array
      * @see DB_common::getOne()
      * @access public
@@ -634,7 +634,7 @@ class DB_ldap extends DB_common
      * @param $data array if supplied, prepare/execute will be used
      *        with this array as execute parameters
      * @param string $action type of request to perform, defaults to search (ldap_search())
-     * @param array $params array of additional parameters to pass to the PHP ldap function requested
+     * @param array  $params array of additional parameters to pass to the PHP ldap function requested
      * @access public
      * @return array the first row of results as an array indexed from
      * 0, or a DB error code.
@@ -661,7 +661,7 @@ class DB_ldap extends DB_common
      * @param $data array if supplied, prepare/execute will be used
      *        with this array as execute parameters
      * @param string $action type of request to perform, defaults to search (ldap_search())
-     * @param array $params array of additional parameters to pass to the PHP ldap function requested
+     * @param array  $params array of additional parameters to pass to the PHP ldap function requested
      * @access public
      * @return array an indexed array with the data from the first
      * row at index 0, or a DB error code.
@@ -686,9 +686,9 @@ class DB_ldap extends DB_common
      * @param array $data if supplied, prepare/execute will be used
      *        with this array as execute parameters
      * @param $fetchmode the fetch mode to use
-     * @param boolean $group see DB_Common::getAssoc()
-     * @param string $action type of request to perform, defaults to search (ldap_search())
-     * @param array $params array of additional parameters to pass to the PHP ldap function requested
+     * @param boolean $group  see DB_Common::getAssoc()
+     * @param string  $action type of request to perform, defaults to search (ldap_search())
+     * @param array   $params array of additional parameters to pass to the PHP ldap function requested
      * @access public
      * @return array an indexed array with the data from the first
      * row at index 0, or a DB error code.
@@ -712,7 +712,7 @@ class DB_ldap extends DB_common
      *        with this array as execute parameters
      * @param $fetchmode the fetch mode to use
      * @param string $action type of request to perform, defaults to search (ldap_search())
-     * @param array $params array of additional parameters to pass to the PHP ldap function requested
+     * @param array  $params array of additional parameters to pass to the PHP ldap function requested
      * @access public
      * @return array an nested array, or a DB error
      * @see DB_common::getAll()
@@ -778,9 +778,9 @@ class DB_ldap extends DB_common
      * The name of sequence is LDAP DN of entry.
      *
      * @access public
-     * @param string $seq_name the DN of the sequence
-     * @param bool $ondemand whether to create the sequence on demand
-     * @return a sequence integer, or a DB error
+     * @param  string $seq_name the DN of the sequence
+     * @param  bool   $ondemand whether to create the sequence on demand
+     * @return a      sequence integer, or a DB error
      */
     function nextId($seq_name, $ondemand = true)
     {
@@ -859,8 +859,8 @@ class DB_ldap extends DB_common
      * cn: $seq_value
      * uid: $seq_uniq
      *
-     * @param string $seq_name the DN of the sequence
-     * @return mixed DB_OK on success or DB error on error
+     * @param  string $seq_name the DN of the sequence
+     * @return mixed  DB_OK on success or DB error on error
      * @access public
      */
     function createSequence($seq_name)
@@ -888,8 +888,8 @@ class DB_ldap extends DB_common
     /**
      * Drop a sequence
      *
-     * @param string $seq_name the DN of the sequence
-     * @return mixed DB_OK on success or DB error on error
+     * @param  string $seq_name the DN of the sequence
+     * @return mixed  DB_OK on success or DB error on error
      * @access public
      */
     function dropSequence($seq_name)

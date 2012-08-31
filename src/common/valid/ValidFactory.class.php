@@ -161,7 +161,7 @@ extends Valid {
     /**
      * Check rules on given file.
      *
-     * @param  Array  $_FILES superarray.
+     * @param  Array                            $_FILES superarray.
      * @param  String Index of file to check in $_FILES array.
      * @return Boolean
      */

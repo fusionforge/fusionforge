@@ -228,8 +228,8 @@ class DB_pgsql extends DB_common
     /**
      * Determine PEAR::DB error code from the database's text error message.
      *
-     * @param  string  $errormsg  error message returned from the database
-     * @return integer  an error number from a DB error constant
+     * @param  string  $errormsg error message returned from the database
+     * @return integer an error number from a DB error constant
      */
     function errorCode($errormsg)
     {
@@ -268,11 +268,11 @@ class DB_pgsql extends DB_common
      * Formating of the array and the data therein are configurable.
      * See DB_result::fetchInto() for more information.
      *
-     * @param resource $result    query result identifier
-     * @param array    $arr       (reference) array where data from the row
+     * @param resource $result query result identifier
+     * @param array    $arr    (reference) array where data from the row
      *                            should be placed
-     * @param int      $fetchmode how the resulting array should be indexed
-     * @param int      $rownum    the row number to fetch
+     * @param int $fetchmode how the resulting array should be indexed
+     * @param int $rownum    the row number to fetch
      *
      * @return mixed DB_OK on success, null when end of result set is
      *               reached or on failure
@@ -349,7 +349,7 @@ class DB_pgsql extends DB_common
     /**
      * Format input so it can be safely used in a query
      *
-     * @param mixed $in  data to be quoted
+     * @param mixed $in data to be quoted
      *
      * @return mixed Submitted variable's type = returned value:
      *               + null = the string <samp>NULL</samp>
@@ -383,9 +383,9 @@ class DB_pgsql extends DB_common
      * {@internal PostgreSQL treats a backslash as an escape character,
      * so they are escaped as well.
      *
-     * @param string $str  the string to be escaped
+     * @param string $str the string to be escaped
      *
-     * @return string  the escaped string
+     * @return string the escaped string
      *
      * @see DB_common::quoteSmart()
      * @since Method available since Release 1.6.0
@@ -533,11 +533,11 @@ class DB_pgsql extends DB_common
     /**
      * Returns the next free id in a sequence
      *
-     * @param string  $seq_name  name of the sequence
-     * @param boolean $ondemand  when true, the seqence is automatically
+     * @param string  $seq_name name of the sequence
+     * @param boolean $ondemand when true, the seqence is automatically
      *                           created if it does not exist
      *
-     * @return int  the next id number in the sequence.  DB_Error if problem.
+     * @return int the next id number in the sequence.  DB_Error if problem.
      *
      * @internal
      * @see DB_common::nextID()
@@ -578,8 +578,8 @@ class DB_pgsql extends DB_common
     /**
      * Create the sequence
      *
-     * @param string $seq_name the name of the sequence
-     * @return mixed DB_OK on success or DB error on error
+     * @param  string $seq_name the name of the sequence
+     * @return mixed  DB_OK on success or DB error on error
      * @access public
      */
     function createSequence($seq_name)
@@ -595,8 +595,8 @@ class DB_pgsql extends DB_common
     /**
      * Drop a sequence
      *
-     * @param string $seq_name the name of the sequence
-     * @return mixed DB_OK on success or DB error on error
+     * @param  string $seq_name the name of the sequence
+     * @return mixed  DB_OK on success or DB error on error
      * @access public
      */
     function dropSequence($seq_name)
@@ -621,9 +621,9 @@ class DB_pgsql extends DB_common
      * Gather information about an error, then use that info to create a
      * DB error object and finally return that object.
      *
-     * @param  integer  $errno  PEAR error number (usually a DB constant) if
+     * @param integer $errno PEAR error number (usually a DB constant) if
      *                          manually raising an error
-     * @return object  DB error object
+     * @return object DB error object
      * @see errorNative()
      * @see errorCode()
      * @see DB_common::raiseError()
@@ -645,7 +645,7 @@ class DB_pgsql extends DB_common
     /**
      * Flags of a Field
      *
-     * @param int $resource PostgreSQL result identifier
+     * @param int $resource  PostgreSQL result identifier
      * @param int $num_field the field number
      *
      * @return string The flags of the field ("not_null", "default_value",
@@ -714,10 +714,10 @@ class DB_pgsql extends DB_common
      * NOTE: only supports 'table' and 'flags' if <var>$result</var>
      * is a table name.
      *
-     * @param object|string  $result  DB_result object from a query or a
+     * @param object|string $result DB_result object from a query or a
      *                                string containing the name of a table
-     * @param int            $mode    a valid tableInfo mode
-     * @return array  an associative array with the information requested
+     * @param  int   $mode a valid tableInfo mode
+     * @return array an associative array with the information requested
      *                or an error object if something is wrong
      * @access public
      * @internal
@@ -803,7 +803,7 @@ class DB_pgsql extends DB_common
 
     /**
      * Returns the query needed to get some backend info
-     * @param string $type What kind of info you want to retrieve
+     * @param  string $type What kind of info you want to retrieve
      * @return string The SQL query string
      */
     function getSpecialQuery($type)

@@ -52,9 +52,9 @@ class WikiPlugin
      * args, not the rest of the wikidb state or any request query args)
      * will work correctly here.
      *
-     * @param string $argstr The plugin argument string.
-     * @param string $basepage The pagename the plugin is invoked from.
-     * @return array List of pagenames linked to (or false).
+     * @param  string $argstr   The plugin argument string.
+     * @param  string $basepage The pagename the plugin is invoked from.
+     * @return array  List of pagenames linked to (or false).
      */
     function getWikiPageLinks ($argstr, $basepage) {
         return false;

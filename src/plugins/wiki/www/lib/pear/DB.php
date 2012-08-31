@@ -280,7 +280,7 @@ class DB
      * @param string $type    database type, for example "mysql"
      * @param array  $options associative array of option names and values
      *
-     * @return object  a new DB object.  On error, an error object.
+     * @return object a new DB object.  On error, an error object.
      *
      * @see DB_common::setOption()
      * @access public
@@ -341,13 +341,13 @@ class DB
      * }
      * ?></code>
      *
-     * @param mixed $dsn      string "data source name" or an array in the
+     * @param mixed $dsn string "data source name" or an array in the
      *                        format returned by DB::parseDSN()
      *
-     * @param array $options  an associative array of option names and
+     * @param array $options an associative array of option names and
      *                        their values
      *
-     * @return object  a newly created DB connection object, or a DB
+     * @return object a newly created DB connection object, or a DB
      *                 error object on error
      *
      * @see DB::parseDSN(), DB_common::setOption(), DB::isError()
@@ -732,10 +732,10 @@ class DB_Error extends PEAR_Error
     /**
      * DB_Error constructor.
      *
-     * @param mixed   $code   DB error code, or string with error message.
-     * @param integer $mode   what "error mode" to operate in
-     * @param integer $level  what error level to use for $mode & PEAR_ERROR_TRIGGER
-     * @param mixed   $debuginfo  additional debug info, such as the last query
+     * @param mixed   $code      DB error code, or string with error message.
+     * @param integer $mode      what "error mode" to operate in
+     * @param integer $level     what error level to use for $mode & PEAR_ERROR_TRIGGER
+     * @param mixed   $debuginfo additional debug info, such as the last query
      *
      * @access public
      *
@@ -837,10 +837,10 @@ class DB_result
      *   + <samp>DB_PORTABILITY_RTRIM</samp>
      *     right trim the data
      *
-     * @param int $fetchmode  how the resulting array should be indexed
-     * @param int $rownum     the row number to fetch
+     * @param int $fetchmode how the resulting array should be indexed
+     * @param int $rownum    the row number to fetch
      *
-     * @return array  a row of data, null on no more rows or PEAR_Error
+     * @return array a row of data, null on no more rows or PEAR_Error
      *                object on error
      *
      * @see DB_common::setOption(), DB_common::setFetchMode()
@@ -921,10 +921,10 @@ class DB_result
      *
      * @param array &$arr       (reference) array where data from the row
      *                          should be placed
-     * @param int   $fetchmode  how the resulting array should be indexed
-     * @param int   $rownum     the row number to fetch
+     * @param int $fetchmode how the resulting array should be indexed
+     * @param int $rownum    the row number to fetch
      *
-     * @return mixed  DB_OK on success, null on no more rows or
+     * @return mixed DB_OK on success, null on no more rows or
      *                a DB_Error object on error
      *
      * @see DB_common::setOption(), DB_common::setFetchMode()
@@ -1032,7 +1032,7 @@ class DB_result
 
     /**
      * Frees the resources allocated for this result set.
-     * @return  int error code
+     * @return int error code
      *
      * @access public
      */

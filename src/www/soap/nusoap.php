@@ -4874,8 +4874,8 @@ class wsdl extends nusoap_base {
      * start-element handler
      *
      * @param string $parser XML parser object
-     * @param string $name element name
-     * @param string $attrs associative array of attributes
+     * @param string $name   element name
+     * @param string $attrs  associative array of attributes
      * @access private
      */
     function start_element($parser, $name, $attrs)

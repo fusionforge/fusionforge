@@ -221,11 +221,11 @@ class DB_fbsql extends DB_common
      * Formating of the array and the data therein are configurable.
      * See DB_result::fetchInto() for more information.
      *
-     * @param resource $result    query result identifier
-     * @param array    $arr       (reference) array where data from the row
+     * @param resource $result query result identifier
+     * @param array    $arr    (reference) array where data from the row
      *                            should be placed
-     * @param int      $fetchmode how the resulting array should be indexed
-     * @param int      $rownum    the row number to fetch
+     * @param int $fetchmode how the resulting array should be indexed
+     * @param int $rownum    the row number to fetch
      *
      * @return mixed DB_OK on success, null when end of result set is
      *               reached or on failure
@@ -394,11 +394,11 @@ class DB_fbsql extends DB_common
     /**
      * Returns the next free id in a sequence
      *
-     * @param string  $seq_name  name of the sequence
-     * @param boolean $ondemand  when true, the seqence is automatically
+     * @param string  $seq_name name of the sequence
+     * @param boolean $ondemand when true, the seqence is automatically
      *                           created if it does not exist
      *
-     * @return int  the next id number in the sequence.  DB_Error if problem.
+     * @return int the next id number in the sequence.  DB_Error if problem.
      *
      * @internal
      * @see DB_common::nextID()
@@ -430,9 +430,9 @@ class DB_fbsql extends DB_common
     /**
      * Creates a new sequence
      *
-     * @param string $seq_name  name of the new sequence
+     * @param string $seq_name name of the new sequence
      *
-     * @return int  DB_OK on success.  A DB_Error object is returned if
+     * @return int DB_OK on success.  A DB_Error object is returned if
      *              problems arise.
      *
      * @internal
@@ -453,9 +453,9 @@ class DB_fbsql extends DB_common
     /**
      * Deletes a sequence
      *
-     * @param string $seq_name  name of the sequence to be deleted
+     * @param string $seq_name name of the sequence to be deleted
      *
-     * @return int  DB_OK on success.  DB_Error if problems.
+     * @return int DB_OK on success.  DB_Error if problems.
      *
      * @internal
      * @see DB_common::dropSequence()
@@ -489,7 +489,7 @@ class DB_fbsql extends DB_common
     /**
      * Format input so it can be safely used in a query
      *
-     * @param mixed $in  data to be quoted
+     * @param mixed $in data to be quoted
      *
      * @return mixed Submitted variable's type = returned value:
      *               + null = the string <samp>NULL</samp>
@@ -521,9 +521,9 @@ class DB_fbsql extends DB_common
      * Gather information about an error, then use that info to create a
      * DB error object and finally return that object.
      *
-     * @param  integer  $errno  PEAR error number (usually a DB constant) if
+     * @param integer $errno PEAR error number (usually a DB constant) if
      *                          manually raising an error
-     * @return object  DB error object
+     * @return object DB error object
      * @see DB_common::errorCode()
      * @see DB_common::raiseError()
      */
@@ -542,10 +542,10 @@ class DB_fbsql extends DB_common
     /**
      * Returns information about a table or a result set.
      *
-     * @param object|string  $result  DB_result object from a query or a
+     * @param object|string $result DB_result object from a query or a
      *                                string containing the name of a table
-     * @param int            $mode    a valid tableInfo mode
-     * @return array  an associative array with the information requested
+     * @param  int   $mode a valid tableInfo mode
+     * @return array an associative array with the information requested
      *                or an error object if something is wrong
      * @access public
      * @internal
@@ -629,7 +629,7 @@ class DB_fbsql extends DB_common
 
     /**
      * Returns the query needed to get some backend info
-     * @param string $type What kind of info you want to retrieve
+     * @param  string $type What kind of info you want to retrieve
      * @return string The SQL query string
      */
     function getSpecialQuery($type)

@@ -207,11 +207,11 @@ class DB_ibase extends DB_common
      * Formating of the array and the data therein are configurable.
      * See DB_result::fetchInto() for more information.
      *
-     * @param resource $result    query result identifier
-     * @param array    $arr       (reference) array where data from the row
+     * @param resource $result query result identifier
+     * @param array    $arr    (reference) array where data from the row
      *                            should be placed
-     * @param int      $fetchmode how the resulting array should be indexed
-     * @param int      $rownum    the row number to fetch
+     * @param int $fetchmode how the resulting array should be indexed
+     * @param int $rownum    the row number to fetch
      *
      * @return mixed DB_OK on success, null when end of result set is
      *               reached or on failure
@@ -303,8 +303,8 @@ class DB_ibase extends DB_common
      *    "UPDATE foo SET col=? WHERE col='over \& under'"
      * </code>
      *
-     * @param string $query query to be prepared
-     * @return mixed DB statement resource on success. DB_Error on failure.
+     * @param  string $query query to be prepared
+     * @return mixed  DB statement resource on success. DB_Error on failure.
      */
     function prepare($query)
     {
@@ -346,13 +346,13 @@ class DB_ibase extends DB_common
     /**
      * Executes a DB statement prepared with prepare().
      *
-     * @param resource  $stmt  a DB statement resource returned from prepare()
-     * @param mixed  $data  array, string or numeric data to be used in
+     * @param resource $stmt a DB statement resource returned from prepare()
+     * @param mixed    $data array, string or numeric data to be used in
      *                      execution of the statement.  Quantity of items
      *                      passed must match quantity of placeholders in
      *                      query:  meaning 1 for non-array items or the
      *                      quantity of elements in the array.
-     * @return object  a new DB_Result or a DB_Error when fail
+     * @return object a new DB_Result or a DB_Error when fail
      * @see DB_ibase::prepare()
      * @access public
      */
@@ -469,11 +469,11 @@ class DB_ibase extends DB_common
     /**
      * Returns the next free id in a sequence
      *
-     * @param string  $seq_name  name of the sequence
-     * @param boolean $ondemand  when true, the seqence is automatically
+     * @param string  $seq_name name of the sequence
+     * @param boolean $ondemand when true, the seqence is automatically
      *                           created if it does not exist
      *
-     * @return int  the next id number in the sequence.  DB_Error if problem.
+     * @return int the next id number in the sequence.  DB_Error if problem.
      *
      * @internal
      * @see DB_common::nextID()
@@ -513,8 +513,8 @@ class DB_ibase extends DB_common
     /**
      * Create the sequence
      *
-     * @param string $seq_name the name of the sequence
-     * @return mixed DB_OK on success or DB error on error
+     * @param  string $seq_name the name of the sequence
+     * @return mixed  DB_OK on success or DB error on error
      * @access public
      */
     function createSequence($seq_name)
@@ -533,8 +533,8 @@ class DB_ibase extends DB_common
     /**
      * Drop a sequence
      *
-     * @param string $seq_name the name of the sequence
-     * @return mixed DB_OK on success or DB error on error
+     * @param  string $seq_name the name of the sequence
+     * @return mixed  DB_OK on success or DB error on error
      * @access public
      */
     function dropSequence($seq_name)
@@ -622,10 +622,10 @@ class DB_ibase extends DB_common
      * NOTE: only supports 'table' and 'flags' if <var>$result</var>
      * is a table name.
      *
-     * @param object|string  $result  DB_result object from a query or a
+     * @param object|string $result DB_result object from a query or a
      *                                string containing the name of a table
-     * @param int            $mode    a valid tableInfo mode
-     * @return array  an associative array with the information requested
+     * @param  int   $mode a valid tableInfo mode
+     * @return array an associative array with the information requested
      *                or an error object if something is wrong
      * @access public
      * @internal
@@ -714,10 +714,10 @@ class DB_ibase extends DB_common
      * Gather information about an error, then use that info to create a
      * DB error object and finally return that object.
      *
-     * @param  integer  $db_errno  PEAR error number (usually a DB constant) if
+     * @param integer $db_errno PEAR error number (usually a DB constant) if
      *                             manually raising an error
-     * @param  string  $native_errmsg  text of error message if known
-     * @return object  DB error object
+     * @param  string $native_errmsg text of error message if known
+     * @return object DB error object
      * @see DB_common::errorCode()
      * @see DB_common::raiseError()
      */

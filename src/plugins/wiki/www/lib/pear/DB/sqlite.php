@@ -232,11 +232,11 @@ class DB_sqlite extends DB_common
      * Formating of the array and the data therein are configurable.
      * See DB_result::fetchInto() for more information.
      *
-     * @param resource $result    query result identifier
-     * @param array    $arr       (reference) array where data from the row
+     * @param resource $result query result identifier
+     * @param array    $arr    (reference) array where data from the row
      *                            should be placed
-     * @param int      $fetchmode how the resulting array should be indexed
-     * @param int      $rownum    the row number to fetch
+     * @param int $fetchmode how the resulting array should be indexed
+     * @param int $rownum    the row number to fetch
      *
      * @return mixed DB_OK on success, null when end of result set is
      *               reached or on failure
@@ -367,8 +367,8 @@ class DB_sqlite extends DB_common
     /**
      * Determine PEAR::DB error code from the database's text error message.
      *
-     * @param  string  $errormsg  error message returned from the database
-     * @return integer  an error number from a DB error constant
+     * @param  string  $errormsg error message returned from the database
+     * @return integer an error number from a DB error constant
      */
     function errorCode($errormsg)
     {
@@ -400,9 +400,9 @@ class DB_sqlite extends DB_common
     /**
      * Deletes a sequence
      *
-     * @param string $seq_name  name of the sequence to be deleted
+     * @param string $seq_name name of the sequence to be deleted
      *
-     * @return int  DB_OK on success.  DB_Error if problems.
+     * @return int DB_OK on success.  DB_Error if problems.
      *
      * @internal
      * @see DB_common::dropSequence()
@@ -417,9 +417,9 @@ class DB_sqlite extends DB_common
     /**
      * Creates a new sequence
      *
-     * @param string $seq_name  name of the new sequence
+     * @param string $seq_name name of the new sequence
      *
-     * @return int  DB_OK on success.  A DB_Error object is returned if
+     * @return int DB_OK on success.  A DB_Error object is returned if
      *              problems arise.
      *
      * @internal
@@ -451,11 +451,11 @@ class DB_sqlite extends DB_common
     /**
      * Returns the next free id in a sequence
      *
-     * @param string  $seq_name  name of the sequence
-     * @param boolean $ondemand  when true, the seqence is automatically
+     * @param string  $seq_name name of the sequence
+     * @param boolean $ondemand when true, the seqence is automatically
      *                           created if it does not exist
      *
-     * @return int  the next id number in the sequence.  DB_Error if problem.
+     * @return int the next id number in the sequence.  DB_Error if problem.
      *
      * @internal
      * @see DB_common::nextID()
@@ -498,7 +498,7 @@ class DB_sqlite extends DB_common
      *
      * Refer to the online manual at http://sqlite.org/sqlite.html.
      *
-     * @param string $type What kind of info you want to retrieve
+     * @param  string $type What kind of info you want to retrieve
      * @return string The SQL query string
      */
     function getSpecialQuery($type, $args=array())
@@ -576,8 +576,8 @@ class DB_sqlite extends DB_common
      * atime, mtime, ctime, blksize, blocks or a numeric key between
      * 0 and 12.
      *
-     * @param string $arg Array key for stats()
-     * @return mixed array on an unspecified key, integer on a passed arg and
+     * @param  string $arg Array key for stats()
+     * @return mixed  array on an unspecified key, integer on a passed arg and
      * false at a stats error.
      */
     function getDbFileStats($arg = '')
@@ -611,9 +611,9 @@ class DB_sqlite extends DB_common
      * containing binary data. See the
      * {@link http://php.net/sqlite_escape_string PHP manual} for more info.
      *
-     * @param string $str  the string to be escaped
+     * @param string $str the string to be escaped
      *
-     * @return string  the escaped string
+     * @return string the escaped string
      *
      * @since 1.6.1
      * @see DB_common::escapeSimple()
@@ -640,7 +640,7 @@ class DB_sqlite extends DB_common
      *
      * This little hack lets you know how many rows were deleted.
      *
-     * @param string $query The SQL query string
+     * @param  string $query The SQL query string
      * @return string The SQL query string
      */
     function _modifyQuery($query)
@@ -661,9 +661,9 @@ class DB_sqlite extends DB_common
      * Gather information about an error, then use that info to create a
      * DB error object and finally return that object.
      *
-     * @param  integer  $errno  PEAR error number (usually a DB constant) if
+     * @param integer $errno PEAR error number (usually a DB constant) if
      *                          manually raising an error
-     * @return object  DB error object
+     * @return object DB error object
      * @see errorNative()
      * @see errorCode()
      * @see DB_common::raiseError()

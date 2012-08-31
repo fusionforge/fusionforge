@@ -78,7 +78,7 @@ echo '<p><em>'. _('Important: Make sure there are no line breaks. After submitti
 ?>
 <textarea rows="10" cols="80" name="authorized_key" style="width:90%;">
 </textarea></p>
-<?
+<?php
 echo '<p>'. _('Or upload your \'~/.ssh/identity.pub\' (protocol version 1) or \'~/.ssh/id_dsa.pub\' or \'~/.ssh/id_rsa.pub\' (protocol version 2)') .'</p>';
 echo '<input type="file" name="uploaded_filekey" size="30" />';
 ?>

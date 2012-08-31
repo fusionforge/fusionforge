@@ -1910,9 +1910,9 @@ class Alert {
     /** Constructor
      *
      * @param object $request
-     * @param mixed $head  Header ("title") for alert box.
-     * @param mixed $body  The text in the alert box.
-     * @param hash $buttons  An array mapping button labels to URLs.
+     * @param mixed  $head    Header ("title") for alert box.
+     * @param mixed  $body    The text in the alert box.
+     * @param hash   $buttons An array mapping button labels to URLs.
      *    The default is a single "Okay" button pointing to $request->getURLtoSelf().
      */
     function Alert($head, $body, $buttons=false) {

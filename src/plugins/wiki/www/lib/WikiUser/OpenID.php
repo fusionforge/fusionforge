@@ -45,7 +45,7 @@ extends _PassUser
      * @param array $params HTTP query data from OpenID server
      * @param string &$identity this argument is set to end-user's claimed
      *  identifier or OpenID provider local identifier.
-     * @param mixed $extensions extension object or array of extensions objects
+     * @param  mixed $extensions extension object or array of extensions objects
      * @return bool
      */
     function verify($params, &$identity = "", $extensions = null) {
@@ -106,12 +106,12 @@ extends _PassUser
      * On success the function does not return (it does HTTP redirection to
      * server and exits). On failure it returns false.
      *
-     * @param bool $immediate enables or disables interaction with user
-     * @param string $id OpenID identity
-     * @param string $returnTo HTTP URL to redirect response from server to
-     * @param string $root HTTP URL to identify consumer on server
-     * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend_Controller_Response_Abstract $response an optional response
+     * @param bool                              $immediate  enables or disables interaction with user
+     * @param string                            $id         OpenID identity
+     * @param string                            $returnTo   HTTP URL to redirect response from server to
+     * @param string                            $root       HTTP URL to identify consumer on server
+     * @param mixed                             $extensions extension object or array of extensions objects
+     * @param Zend_Controller_Response_Abstract $response   an optional response
      *  object to perform HTTP or HTML form redirection
      * @return bool
      */

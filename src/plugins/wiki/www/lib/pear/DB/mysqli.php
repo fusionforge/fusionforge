@@ -102,7 +102,7 @@ class DB_mysqli extends DB_common
     /**
      * Connect to a database and log in as the specified user.
      *
-     * @param string $dsn the data source name (see DB::parseDSN for syntax)
+     * @param string  $dsn        the data source name (see DB::parseDSN for syntax)
      * @param boolean $persistent (optional) whether the connection should
      *                            be persistent
      * @return mixed DB_OK on success, a DB error on failure
@@ -200,8 +200,8 @@ class DB_mysqli extends DB_common
      * Send a query to MySQL and return the results as a MySQL resource
      * identifier.
      *
-     * @param string $query the SQL query
-     * @return mixed a valid MySQL result for successful SELECT
+     * @param  string $query the SQL query
+     * @return mixed  a valid MySQL result for successful SELECT
      *               queries, DB_OK for other successful queries.
      *               A DB error is returned on failure.
      * @access public
@@ -249,7 +249,7 @@ class DB_mysqli extends DB_common
      *
      * This method has not been implemented yet.
      *
-     * @param resource $result a valid sql result resource
+     * @param  resource $result a valid sql result resource
      * @return false
      * @access public
      */
@@ -267,11 +267,11 @@ class DB_mysqli extends DB_common
      * Formating of the array and the data therein are configurable.
      * See DB_result::fetchInto() for more information.
      *
-     * @param resource $result    query result identifier
-     * @param array    $arr       (reference) array where data from the row
+     * @param resource $result query result identifier
+     * @param array    $arr    (reference) array where data from the row
      *                            should be placed
-     * @param int      $fetchmode how the resulting array should be indexed
-     * @param int      $rownum    the row number to fetch
+     * @param int $fetchmode how the resulting array should be indexed
+     * @param int $rownum    the row number to fetch
      *
      * @return mixed DB_OK on success, null when end of result set is
      *               reached or on failure
@@ -321,8 +321,8 @@ class DB_mysqli extends DB_common
     /**
      * Free the internal resources associated with $result.
      *
-     * @param resource $result MySQL result identifier
-     * @return bool true on success, false if $result is invalid
+     * @param  resource $result MySQL result identifier
+     * @return bool     true on success, false if $result is invalid
      * @access public
      */
     function freeResult($result)
@@ -360,8 +360,8 @@ class DB_mysqli extends DB_common
     /**
      * Get the number of rows in a result set.
      *
-     * @param resource $result MySQL result identifier
-     * @return int the number of rows in $result
+     * @param  resource $result MySQL result identifier
+     * @return int      the number of rows in $result
      * @access public
      */
     function numRows($result)
@@ -474,11 +474,11 @@ class DB_mysqli extends DB_common
     /**
      * Returns the next free id in a sequence
      *
-     * @param string  $seq_name  name of the sequence
-     * @param boolean $ondemand  when true, the seqence is automatically
+     * @param string  $seq_name name of the sequence
+     * @param boolean $ondemand when true, the seqence is automatically
      *                           created if it does not exist
      *
-     * @return int  the next id number in the sequence.  DB_Error if problem.
+     * @return int the next id number in the sequence.  DB_Error if problem.
      *
      * @internal
      * @see DB_common::nextID()
@@ -558,9 +558,9 @@ class DB_mysqli extends DB_common
     /**
      * Creates a new sequence
      *
-     * @param string $seq_name  name of the new sequence
+     * @param string $seq_name name of the new sequence
      *
-     * @return int  DB_OK on success.  A DB_Error object is returned if
+     * @return int DB_OK on success.  A DB_Error object is returned if
      *              problems arise.
      *
      * @internal
@@ -586,9 +586,9 @@ class DB_mysqli extends DB_common
     /**
      * Deletes a sequence
      *
-     * @param string $seq_name  name of the sequence to be deleted
+     * @param string $seq_name name of the sequence to be deleted
      *
-     * @return int  DB_OK on success.  DB_Error if problems.
+     * @return int DB_OK on success.  DB_Error if problems.
      *
      * @internal
      * @see DB_common::dropSequence()
@@ -606,8 +606,8 @@ class DB_mysqli extends DB_common
      * Backwards compatibility with old sequence emulation implementation
      * (clean up the dupes).
      *
-     * @param string $seqname The sequence name to clean up
-     * @return mixed DB_Error or true
+     * @param  string $seqname The sequence name to clean up
+     * @return mixed  DB_Error or true
      */
     function _BCsequence($seqname)
     {
@@ -657,9 +657,9 @@ class DB_mysqli extends DB_common
      * MySQL can't handle the backtick character (<kbd>`</kbd>) in
      * table or column names.
      *
-     * @param string $str  identifier name to be quoted
+     * @param string $str identifier name to be quoted
      *
-     * @return string  quoted identifier string
+     * @return string quoted identifier string
      *
      * @since 1.6.0
      * @access public
@@ -676,9 +676,9 @@ class DB_mysqli extends DB_common
     /**
      * Escape a string according to the current DBMS's standards
      *
-     * @param string $str  the string to be escaped
+     * @param string $str the string to be escaped
      *
-     * @return string  the escaped string
+     * @return string the escaped string
      *
      * @internal
      */
@@ -721,9 +721,9 @@ class DB_mysqli extends DB_common
      * Gather information about an error, then use that info to create a
      * DB error object and finally return that object.
      *
-     * @param  integer  $errno  PEAR error number (usually a DB constant) if
+     * @param integer $errno PEAR error number (usually a DB constant) if
      *                          manually raising an error
-     * @return object  DB error object
+     * @return object DB error object
      * @see DB_common::errorCode()
      * @see DB_common::raiseError()
      */
@@ -756,10 +756,10 @@ class DB_mysqli extends DB_common
      * WARNING: this method will probably not work because the mysqli_*()
      * functions it relies upon may not exist.
      *
-     * @param object|string  $result  DB_result object from a query or a
+     * @param object|string $result DB_result object from a query or a
      *                                string containing the name of a table
-     * @param int            $mode    a valid tableInfo mode
-     * @return array  an associative array with the information requested
+     * @param  int   $mode a valid tableInfo mode
+     * @return array an associative array with the information requested
      *                or an error object if something is wrong
      * @access public
      * @internal
@@ -844,7 +844,7 @@ class DB_mysqli extends DB_common
     /**
      * Returns the query needed to get some backend info.
      *
-     * @param string $type What kind of info you want to retrieve
+     * @param  string $type What kind of info you want to retrieve
      * @return string The SQL query string
      */
     function getSpecialQuery($type)

@@ -138,7 +138,7 @@ class nusoap_base {
     /**
      * adds debug data to the class level debug string
      *
-     * @param    string $string debug data
+     * @param string $string debug data
      * @access   private
      */
     function debug($string){
@@ -148,7 +148,7 @@ class nusoap_base {
     /**
      * returns error string if present
      *
-     * @return   boolean $string error string
+     * @return boolean $string error string
      * @access   public
      */
     function getError(){
@@ -161,7 +161,7 @@ class nusoap_base {
     /**
      * sets error string
      *
-     * @return   boolean $string error string
+     * @return boolean $string error string
      * @access   private
      */
     function setError($str){
@@ -172,7 +172,7 @@ class nusoap_base {
      * serializes PHP values in accordance w/ section 5. Type information is
      * not serialized if $use == 'literal'.
      *
-     * @return	string
+     * @return string
      * @access	public
      */
     function serialize_val($val,$name=false,$type=false,$name_ns=false,
@@ -516,8 +516,8 @@ class soap_fault extends nusoap_base {
     /**
      * constructor
      *
-     * @param string $faultcode (client | server)
-     * @param string $faultactor only used when msg routed between multiple actors
+     * @param string $faultcode   (client | server)
+     * @param string $faultactor  only used when msg routed between multiple actors
      * @param string $faultstring human readable error message
      * @param string $faultdetail
      */
@@ -1233,12 +1233,12 @@ class soapval extends nusoap_base {
     /**
      * constructor
      *
-     * @param    string $name optional name
-     * @param    string $type optional type name
-     * @param	mixed $value optional value
-     * @param	string $namespace optional namespace of value
-     * @param	string $type_namespace optional namespace of type
-     * @param	array $attributes associative array of attributes to add to element serialization
+     * @param string $name           optional name
+     * @param string $type           optional type name
+     * @param mixed  $value          optional value
+     * @param string $namespace      optional namespace of value
+     * @param string $type_namespace optional namespace of type
+     * @param array  $attributes     associative array of attributes to add to element serialization
      * @access   public
      */
     function soapval($name='soapval',$type=false,$value=-1,$element_ns=false,$type_ns=false,$attributes=false) {
@@ -1253,7 +1253,7 @@ class soapval extends nusoap_base {
     /**
      * return serialized value
      *
-     * @return	string XML data
+     * @return string XML data
      * @access   private
      */
     function serialize($use='encoded') {
@@ -1263,8 +1263,8 @@ class soapval extends nusoap_base {
     /**
      * decodes a soapval object into a PHP native type
      *
-     * @param	object $soapval optional SOAPx4 soapval object, else uses self
-     * @return	mixed
+     * @param  object $soapval optional SOAPx4 soapval object, else uses self
+     * @return mixed
      * @access   public
      */
     function decode(){
@@ -1354,9 +1354,9 @@ class soap_transport_http extends nusoap_base {
     /**
      * send the SOAP message via HTTP
      *
-     * @param    string $data message data
-     * @param    integer $timeout set timeout in seconds
-     * @return	string data
+     * @param  string  $data    message data
+     * @param  integer $timeout set timeout in seconds
+     * @return string  data
      * @access   public
      */
     function send($data, $timeout=0) {
@@ -1509,9 +1509,9 @@ class soap_transport_http extends nusoap_base {
     /**
      * send the SOAP message via HTTPS 1.0 using CURL
      *
-     * @param    string $msg message data
-     * @param    integer $timeout set timeout in seconds
-     * @return	string data
+     * @param  string  $msg     message data
+     * @param  integer $timeout set timeout in seconds
+     * @return string  data
      * @access   public
      */
     function sendHTTPS($data, $timeout=0) {
@@ -1673,8 +1673,8 @@ class soap_transport_http extends nusoap_base {
     /**
      * if authenticating, set user credentials here
      *
-     * @param    string $user
-     * @param    string $pass
+     * @param string $user
+     * @param string $pass
      * @access   public
      */
     function setCredentials($username, $password) {
@@ -1685,7 +1685,7 @@ class soap_transport_http extends nusoap_base {
     /**
      * set the soapaction value
      *
-     * @param    string $soapaction
+     * @param string $soapaction
      * @access   public
      */
     function setSOAPAction($soapaction) {
@@ -1695,7 +1695,7 @@ class soap_transport_http extends nusoap_base {
     /**
      * use http encoding
      *
-     * @param    string $enc encoding style. supported values: gzip, deflate, or both
+     * @param string $enc encoding style. supported values: gzip, deflate, or both
      * @access   public
      */
     function setEncoding($enc='gzip, deflate'){
@@ -1706,8 +1706,8 @@ class soap_transport_http extends nusoap_base {
     /**
      * set proxy info here
      *
-     * @param    string $proxyhost
-     * @param    string $proxyport
+     * @param string $proxyhost
+     * @param string $proxyport
      * @access   public
      */
     function setProxy($proxyhost, $proxyport) {
@@ -1719,7 +1719,7 @@ class soap_transport_http extends nusoap_base {
      * decode a string that is encoded w/ "chunked' transfer encoding
      * as defined in RFC2068 19.4.6
      *
-     * @param    string $buffer
+     * @param string $buffer
      * @returns	string
      * @access   public
      */
@@ -1828,7 +1828,7 @@ class soap_server extends nusoap_base {
     /**
      * processes request and returns response
      *
-     * @param    string $data usually is the value of $HTTP_RAW_POST_DATA
+     * @param string $data usually is the value of $HTTP_RAW_POST_DATA
      * @access   public
      */
     function service($data){
@@ -1889,8 +1889,8 @@ class soap_server extends nusoap_base {
     /**
      * parses request and posts response
      *
-     * @param    string $data XML string
-     * @return	string XML response msg
+     * @param  string $data XML string
+     * @return string XML response msg
      * @access   private
      */
     function parse_request($data='') {
@@ -2048,7 +2048,7 @@ class soap_server extends nusoap_base {
      * and compares to the method's signature, if available.
      *
      * @param	mixed
-     * @return	boolean
+     * @return boolean
      * @access   private
      */
     function verify_method($operation,$request){
@@ -2065,9 +2065,9 @@ class soap_server extends nusoap_base {
     /**
      * add a method to the dispatch map
      *
-     * @param    string $methodname
-     * @param    string $in array of input values
-     * @param    string $out array of output values
+     * @param string $methodname
+     * @param string $in         array of input values
+     * @param string $out        array of output values
      * @access   public
      */
     function add_to_map($methodname,$in,$out){
@@ -2077,12 +2077,12 @@ class soap_server extends nusoap_base {
     /**
      * register a service with the server
      *
-     * @param    string $methodname
-     * @param    string $in assoc array of input values: key = param name, value = param type
-     * @param    string $out assoc array of output values: key = param name, value = param type
-     * @param	string $namespace
-     * @param	string $soapaction
-     * @param	string $style (rpc|literal)
+     * @param string $methodname
+     * @param string $in         assoc array of input values: key = param name, value = param type
+     * @param string $out        assoc array of output values: key = param name, value = param type
+     * @param string $namespace
+     * @param string $soapaction
+     * @param string $style      (rpc|literal)
      * @access   public
      */
     function register($name,$in=false,$out=false,$namespace=false,$soapaction=false,$style=false,$use=false){
@@ -2525,8 +2525,8 @@ class wsdl extends XMLSchema {
      * start-element handler
      * 
      * @param string $parser XML parser object
-     * @param string $name element name
-     * @param string $attrs associative array of attributes
+     * @param string $name   element name
+     * @param string $attrs  associative array of attributes
      * @access private 
      */
     function start_element($parser, $name, $attrs)
@@ -2719,7 +2719,7 @@ class wsdl extends XMLSchema {
      * end-element handler
      * 
      * @param string $parser XML parser object
-     * @param string $name element name
+     * @param string $name   element name
      * @access private 
      */
     function end_element($parser, $name){ 
@@ -2744,7 +2744,7 @@ class wsdl extends XMLSchema {
      * element content handler
      * 
      * @param string $parser XML parser object
-     * @param string $data element content
+     * @param string $data   element content
      * @access private 
      */
     function character_data($parser, $data)
@@ -2770,8 +2770,8 @@ class wsdl extends XMLSchema {
      * NOTE: currently only supports multiple services of differing binding types
      * This method needs some work
      * 
-     * @param string $bindingType eg: soap, smtp, dime (only soap is currently supported)
-     * @return array 
+     * @param  string $bindingType eg: soap, smtp, dime (only soap is currently supported)
+     * @return array
      * @access public 
      */
     function getOperations($bindingType = 'soap')
@@ -2793,9 +2793,9 @@ class wsdl extends XMLSchema {
     /**
      * returns an associative array of data necessary for calling an operation
      * 
-     * @param string $operation , name of operation
-     * @param string $bindingType , type of binding eg: soap
-     * @return array 
+     * @param  string $operation   , name of operation
+     * @param  string $bindingType , type of binding eg: soap
+     * @return array
      * @access public 
      */
     function getOperationData($operation, $bindingType = 'soap')
@@ -2972,10 +2972,10 @@ class wsdl extends XMLSchema {
     /**
      * serializes a PHP value according a given type definition
      * 
-     * @param string $name , name of type (part)
-     * @param string $type , type of type, heh (type or element)
-     * @param mixed $value , a native PHP value (parameter value)
-     * @param string $use , use for part (encoded|literal)
+     * @param  string $name  , name of type (part)
+     * @param  string $type  , type of type, heh (type or element)
+     * @param  mixed  $value , a native PHP value (parameter value)
+     * @param  string $use   , use for part (encoded|literal)
      * @return string serialization
      * @access public 
      */
@@ -3114,12 +3114,12 @@ class wsdl extends XMLSchema {
     /**
      * register a service with the server
      * 
-     * @param string $methodname 
-     * @param string $in assoc array of input values: key = param name, value = param type
-     * @param string $out assoc array of output values: key = param name, value = param type
-     * @param string $namespace 
-     * @param string $soapaction 
-     * @param string $style (rpc|literal)
+     * @param string $methodname
+     * @param string $in         assoc array of input values: key = param name, value = param type
+     * @param string $out        assoc array of output values: key = param name, value = param type
+     * @param string $namespace
+     * @param string $soapaction
+     * @param string $style      (rpc|literal)
      * @access public 
      */
     function addOperation($name, $in = false, $out = false, $namespace = false, $soapaction = false, $style = 'rpc', $use = 'encoded', $documentation = '')
@@ -3224,8 +3224,8 @@ class soap_parser extends nusoap_base {
     /**
      * constructor
      *
-     * @param    string $xml SOAP message
-     * @param    string $encoding character encoding scheme of message
+     * @param string $xml      SOAP message
+     * @param string $encoding character encoding scheme of message
      * @access   public
      */
     function soap_parser($xml,$encoding='UTF-8',$method=''){
@@ -3663,9 +3663,9 @@ class pwsoapclient extends nusoap_base  {
     /**
      * constructor
      *
-     * @param    string $endpoint SOAP server or WSDL URL
-     * @param    bool $wsdl optional, set to true if using WSDL
-     * @param	int $portName optional portName in WSDL document
+     * @param string $endpoint SOAP server or WSDL URL
+     * @param bool   $wsdl     optional, set to true if using WSDL
+     * @param int    $portName optional portName in WSDL document
      * @access   public
      */
     function soapclient($endpoint,$wsdl = false){
@@ -3697,14 +3697,14 @@ class pwsoapclient extends nusoap_base  {
     /**
      * calls method, returns PHP native type
      *
-     * @param    string $method SOAP server URL or path
-     * @param    array $params array of parameters, can be associative or not
-     * @param	string $namespace optional method namespace
-     * @param	string $soapAction optional SOAPAction value
-     * @param	boolean $headers optional array of soapval objects for headers
-     * @param	boolean $rpcParams optional treat params as RPC for use="literal"
+     * @param string  $method     SOAP server URL or path
+     * @param array   $params     array of parameters, can be associative or not
+     * @param string  $namespace  optional method namespace
+     * @param string  $soapAction optional SOAPAction value
+     * @param boolean $headers    optional array of soapval objects for headers
+     * @param boolean $rpcParams  optional treat params as RPC for use="literal"
      *                   This can be used on a per-call basis to overrider defaultRpcParams.
-     * @return	mixed
+     * @return mixed
      * @access   public
      */
     function call($operation,$params=array(),$namespace='',$soapAction='',$headers=false,$rpcParams=null){
@@ -3948,7 +3948,7 @@ class pwsoapclient extends nusoap_base  {
     /**
      * set the SOAP headers
      *
-     * @param    $headers string XML
+     * @param   $headers string XML
      * @access   public
      */
     function setHeaders($headers){
@@ -3958,7 +3958,7 @@ class pwsoapclient extends nusoap_base  {
     /**
      * get the response headers
      *
-     * @return   mixed object SOAPx4 soapval object or empty if no headers
+     * @return mixed object SOAPx4 soapval object or empty if no headers
      * @access   public
      */
     function getHeaders(){

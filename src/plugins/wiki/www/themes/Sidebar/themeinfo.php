@@ -71,8 +71,8 @@ class WikiTheme_Sidebar extends WikiTheme_MonoBook {
 
     /** CbUpload (&$request, $pathname) => true or false
      * Callback when a file is uploaded. virusscan, ...
-     * @param string $str
-     * @return bool true for success, false to abort gracefully.
+     * @param  string $str
+     * @return bool   true for success, false to abort gracefully.
      * In case of false, the file is deleted by the caller, but the callback must
      * inform the user why the file was deleted.
      * Src:

@@ -37,9 +37,9 @@ class Cache_Container_trifile extends Cache_Container_file {
     /**
      * Fetch cached file.
      *
-     * @param string $id Cache ID to fetch
-     * @param string $group Group to fetch from
-     * @return array 1-dimensional array in the format: expiration,data,userdata
+     * @param  string $id    Cache ID to fetch
+     * @param  string $group Group to fetch from
+     * @return array  1-dimensional array in the format: expiration,data,userdata
      */
     function fetch($id, $group)
     {
@@ -92,11 +92,11 @@ class Cache_Container_trifile extends Cache_Container_file {
     /**
      * Cache file
      *
-     * @param string $id Cache ID
-     * @param mixed $cachedata Data to cache
-     * @param mixed $expires When the data expires
-     * @param string $group Cache group to store data in
-     * @param mixed $userdata Additional data to store
+     * @param  string  $id        Cache ID
+     * @param  mixed   $cachedata Data to cache
+     * @param  mixed   $expires   When the data expires
+     * @param  string  $group     Cache group to store data in
+     * @param  mixed   $userdata  Additional data to store
      * @return boolean true on success, false otherwise
      */
     function save($id, $cachedata, $expires, $group, $userdata)
@@ -120,9 +120,9 @@ class Cache_Container_trifile extends Cache_Container_file {
     /**
      * Save data in a file
      *
-     * @param string $file File to save data in
-     * @param string $data Data to save
-     * @return mixed true on success, Cache_Error otherwise
+     * @param  string $file File to save data in
+     * @param  string $data Data to save
+     * @return mixed  true on success, Cache_Error otherwise
      */
     function _saveData($file, $data) {
         // Save data

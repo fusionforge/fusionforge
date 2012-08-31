@@ -99,7 +99,7 @@ class WikiGroup{
     /**
      * Static method to return the WikiGroup subclass used in this wiki.  Controlled
      * by the constant GROUP_METHOD.
-     * @param object $request The global WikiRequest object.
+     * @param  object $request The global WikiRequest object.
      * @return object Subclass of WikiGroup selected via GROUP_METHOD.
      */
     function getGroup($not_current = false){
@@ -173,7 +173,7 @@ class WikiGroup{
      *
      * This method is an abstraction.  The group is ignored, an error is sent, and
      * false (not a member of the group) is returned.
-     * @param string $group Name of the group to check for membership (ignored).
+     * @param  string  $group Name of the group to check for membership (ignored).
      * @return boolean True if user is a member, else false (always false).
      */
     function isMember($group){
@@ -304,8 +304,8 @@ class WikiGroup{
      *
      * This method is an abstraction.  The group is ignored, an error is sent,
      * and an empty array is returned
-     * @param string $group Name of the group to get the full membership list of.
-     * @return array Array of usernames that have joined the group (always empty).
+     * @param  string $group Name of the group to get the full membership list of.
+     * @return array  Array of usernames that have joined the group (always empty).
      */
     function getMembersOf($group){
         if ($this->specialGroup($group)) {
@@ -365,9 +365,9 @@ class WikiGroup{
      *
      * This method is an abstraction.  The group and user are ignored, an error
      * is sent, and false (not added) is always returned.
-     * @param string $group User added to this group.
-     * @param string $user Username to add to the group (default = current user).
-     * @return bool On true user was added, false if not.
+     * @param  string $group User added to this group.
+     * @param  string $user  Username to add to the group (default = current user).
+     * @return bool   On true user was added, false if not.
      */
     function setMemberOf($group, $user = false){
         trigger_error(__sprintf("Method '%s' not implemented in this GROUP_METHOD %s",
@@ -381,9 +381,9 @@ class WikiGroup{
      *
      * This method is an abstraction.  The group and user are ignored, and error
      * is sent, and false (not removed) is always returned.
-     * @param string $group User removed from this group.
-     * @param string $user Username to remove from the group (default = current user).
-     * @return bool On true user was removed, false if not.
+     * @param  string $group User removed from this group.
+     * @param  string $user  Username to remove from the group (default = current user).
+     * @return bool   On true user was removed, false if not.
      */
     function removeMemberOf($group, $user = false){
         trigger_error(__sprintf("Method '%s' not implemented in this GROUP_METHOD %s",
@@ -417,7 +417,7 @@ class GroupNone extends WikiGroup{
      * Determines if the current user is a member of a group.
      *
      * The group is ignored and false (not a member of the group) is returned.
-     * @param string $group Name of the group to check for membership (ignored).
+     * @param  string  $group Name of the group to check for membership (ignored).
      * @return boolean True if user is a member, else false (always false).
      */
     function isMember($group){
@@ -432,8 +432,8 @@ class GroupNone extends WikiGroup{
      * Determines all of the groups of which the current user is a member.
      *
      * The group is ignored and an empty array (a member of no groups) is returned.
-     * @param string $group Name of the group to check for membership (ignored).
-     * @return array Array of groups to which the user belongs (always empty).
+     * @param  string $group Name of the group to check for membership (ignored).
+     * @return array  Array of groups to which the user belongs (always empty).
      */
     function getAllGroupsIn(){
         return array();
@@ -443,8 +443,8 @@ class GroupNone extends WikiGroup{
      * Determines all of the members of a particular group.
      *
      * The group is ignored and an empty array (a member of no groups) is returned.
-     * @param string $group Name of the group to check for membership (ignored).
-     * @return array Array of groups user belongs to (always empty).
+     * @param  string $group Name of the group to check for membership (ignored).
+     * @return array  Array of groups user belongs to (always empty).
      */
     function getMembersOf($group){
         return array();
@@ -482,7 +482,7 @@ class GroupWikiPage extends WikiGroup{
      * superclass instance variable $membership to see if membership has
      * already been determined.  If not, then the group page is parsed to
      * determine membership.
-     * @param string $group Name of the group to check for membership.
+     * @param  string  $group Name of the group to check for membership.
      * @return boolean True if user is a member, else false.
      */
     function isMember($group){
@@ -533,8 +533,8 @@ class GroupWikiPage extends WikiGroup{
      *
      * Checks the root Group page ('CategoryGroup') for the list of all groups,
      * then checks each group to see if the current user is a member.
-     * @param string $group Name of the group to check for membership.
-     * @return array Array of groups to which the user belongs.
+     * @param  string $group Name of the group to check for membership.
+     * @return array  Array of groups to which the user belongs.
      */
     function getAllGroupsIn(){
         $membership = array();
@@ -563,8 +563,8 @@ class GroupWikiPage extends WikiGroup{
      *
      * Checks a group's page to return all the current members.  Currently this
      * method is disabled and triggers an error and returns an empty array.
-     * @param string $group Name of the group to get the full membership list of.
-     * @return array Array of usernames that have joined the group (always empty).
+     * @param  string $group Name of the group to get the full membership list of.
+     * @return array  Array of usernames that have joined the group (always empty).
      */
     function getMembersOf($group){
         if ($this->specialGroup($group))
@@ -649,7 +649,7 @@ class GroupDb_PearDB extends GroupDb {
     /**
      * Determines if the current user is a member of a database group.
      *
-     * @param string $group Name of the group to check for membership.
+     * @param  string  $group Name of the group to check for membership.
      * @return boolean True if user is a member, else false.
      */
     function isMember($group) {
@@ -675,8 +675,8 @@ class GroupDb_PearDB extends GroupDb {
      * Determines all of the groups of which the current user is a member.
      *
      * then checks each group to see if the current user is a member.
-     * @param string $group Name of the group to check for membership.
-     * @return array Array of groups to which the user belongs.
+     * @param  string $group Name of the group to check for membership.
+     * @return array  Array of groups to which the user belongs.
      */
     function getAllGroupsIn(){
         $membership = array();
@@ -704,8 +704,8 @@ class GroupDb_PearDB extends GroupDb {
      *
      * Checks a group's page to return all the current members.  Currently this
      * method is disabled and triggers an error and returns an empty array.
-     * @param string $group Name of the group to get the full membership list of.
-     * @return array Array of usernames that have joined the group.
+     * @param  string $group Name of the group to get the full membership list of.
+     * @return array  Array of usernames that have joined the group.
      */
     function getMembersOf($group){
 
@@ -734,7 +734,7 @@ class GroupDb_ADODB extends GroupDb {
     /**
      * Determines if the current user is a member of a database group.
      *
-     * @param string $group Name of the group to check for membership.
+     * @param  string  $group Name of the group to check for membership.
      * @return boolean True if user is a member, else false.
      */
     function isMember($group) {
@@ -764,8 +764,8 @@ class GroupDb_ADODB extends GroupDb {
      * Determines all of the groups of which the current user is a member.
      * then checks each group to see if the current user is a member.
      *
-     * @param string $group Name of the group to check for membership.
-     * @return array Array of groups to which the user belongs.
+     * @param  string $group Name of the group to check for membership.
+     * @return array  Array of groups to which the user belongs.
      */
     function getAllGroupsIn(){
         $membership = array();
@@ -794,8 +794,8 @@ class GroupDb_ADODB extends GroupDb {
     /**
      * Determines all of the members of a particular group.
      *
-     * @param string $group Name of the group to get the full membership list of.
-     * @return array Array of usernames that have joined the group.
+     * @param  string $group Name of the group to get the full membership list of.
+     * @return array  Array of usernames that have joined the group.
      */
     function getMembersOf($group){
         $members = array();
@@ -855,7 +855,7 @@ class GroupFile extends WikiGroup {
      * superclass instance variable $membership to see if membership has
      * already been determined.  If not, then the group file is parsed to
      * determine membership.
-     * @param string $group Name of the group to check for membership.
+     * @param  string  $group Name of the group to check for membership.
      * @return boolean True if user is a member, else false.
      */
     function isMember($group) {
@@ -884,8 +884,8 @@ class GroupFile extends WikiGroup {
      * Determines all of the groups of which the current user is a member.
      *
      * then checks each group to see if the current user is a member.
-     * @param string $group Name of the group to check for membership.
-     * @return array Array of groups to which the user belongs.
+     * @param  string $group Name of the group to check for membership.
+     * @return array  Array of groups to which the user belongs.
      */
     function getAllGroupsIn(){
         //$username = $this->_getUserName();
@@ -915,8 +915,8 @@ class GroupFile extends WikiGroup {
      * Determines all of the members of a particular group.
      *
      * Return all the current members.
-     * @param string $group Name of the group to get the full membership list of.
-     * @return array Array of usernames that have joined the group.
+     * @param  string $group Name of the group to get the full membership list of.
+     * @return array  Array of usernames that have joined the group.
      */
     function getMembersOf($group){
         $members = array();
@@ -982,7 +982,7 @@ class GroupLdap extends WikiGroup {
      * Determines if the current user is a member of a group.
      * Not ready yet!
      *
-     * @param string $group Name of the group to check for membership.
+     * @param  string  $group Name of the group to check for membership.
      * @return boolean True if user is a member, else false.
      */
     function isMember($group) {
@@ -1001,8 +1001,8 @@ class GroupLdap extends WikiGroup {
     /**
      * Determines all of the groups of which the current user is a member.
      *
-     * @param string $group Name of the group to check for membership.
-     * @return array Array of groups to which the user belongs.
+     * @param  string $group Name of the group to check for membership.
+     * @return array  Array of groups to which the user belongs.
      */
     function getAllGroupsIn(){
         //$request = &$this->request;
@@ -1060,8 +1060,8 @@ class GroupLdap extends WikiGroup {
      * Determines all of the members of a particular group.
      *
      * Return all the members of the given group. LDAP just returns the gid of each user
-     * @param string $group Name of the group to get the full membership list of.
-     * @return array Array of usernames that have joined the group.
+     * @param  string $group Name of the group to get the full membership list of.
+     * @return array  Array of usernames that have joined the group.
      */
     function getMembersOf($group){
         $members = array();

@@ -45,7 +45,7 @@ class Authentication_URL
 
     /**
      *
-     * @param string $URL_string String to parse
+     * @param  string             $URL_string String to parse
      * @return Authentication_URL A valid Authentication_URL instance
      * (or NULL on error)
      */
@@ -57,9 +57,9 @@ class Authentication_URL
     }
     /**
      * Returns query string parameter value by key
-     * @param string $key
-     * @param mixed $default
-     * @return mixed The required "value" (or $default if not found)
+     * @param  string $key
+     * @param  mixed  $default
+     * @return mixed  The required "value" (or $default if not found)
      */
     public function getQueryParameter($key,$default = NULL)
     {
@@ -146,7 +146,7 @@ class Authentication_SignedURL extends Authentication_URL
     }
     /**
      * Parses the given URL string into a Authentication_SignedURL
-     * @param string $URL_string
+     * @param  string                   $URL_string
      * @return Authentication_SignedURL
      */
     public static function parse($URL_string)

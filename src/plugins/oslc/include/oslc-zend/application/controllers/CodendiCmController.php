@@ -467,8 +467,8 @@ class CodendiCmController extends CmController {
     /**
      * Performs authentication according to the configured AUTH_TYPE configured
      *
-     * @param string $login
-     * @return True if auth is valid, in which case $login is modified.
+     * @param  string $login
+     * @return True   if auth is valid, in which case $login is modified.
      * If there was actually no auth requested, then return False, but $login will be set to null.
      */
     private function retrieveAuthentication(&$login) {

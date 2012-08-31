@@ -1258,7 +1258,7 @@ class PageList {
      * If you wish to add multiple columns of the same type, use addColumnObject().
      *
      * @param column name
-     * @return  true if column is added, false otherwise
+     * @return true if column is added, false otherwise
      */
     function _addColumn ($column) {
         if (isset($this->_columns_seen[$column]))

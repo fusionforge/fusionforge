@@ -80,9 +80,9 @@ extends WikiPlugin
     /**
      * return links (static only as of action=edit)
      *
-     * @param string $argstr The plugin argument string.
-     * @param string $basepage The pagename the plugin is invoked from.
-     * @return array List of pagenames linked to (or false).
+     * @param  string $argstr   The plugin argument string.
+     * @param  string $basepage The pagename the plugin is invoked from.
+     * @return array  List of pagenames linked to (or false).
      */
     function getWikiPageLinks ($argstr, $basepage) {
         if (isset($this->_links))

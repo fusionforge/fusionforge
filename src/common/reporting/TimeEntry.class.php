@@ -62,12 +62,12 @@ class TimeEntry extends Error {
      *
      * @author Tony Bibbs <tony@geeklog.net>
      * @access public
-     * @param int $projectTaskId The project task the user is reporting time to
-     * @param int $week The week the time being reported was done
-     * @param int $daysAdjust Represents the offset to add to the given week to specify the day
-     * @param int $timeCode The type of work that was done (general categorization)
-     * @param float $hours The actual time spent
-     * @return int This will be the Artificat ID otherwise it will be false if an error occurred
+     * @param  int   $projectTaskId The project task the user is reporting time to
+     * @param  int   $week          The week the time being reported was done
+     * @param  int   $daysAdjust    Represents the offset to add to the given week to specify the day
+     * @param  int   $timeCode      The type of work that was done (general categorization)
+     * @param  float $hours         The actual time spent
+     * @return int   This will be the Artificat ID otherwise it will be false if an error occurred
      * @todo I'm quite concerned that none of the form data is being sanitized for things like
      * unwanted HTML, JavaSript and SQL Injection.  Might be worth adding that sort of filtering
      * as provided by the KSES Filter (search Google).
@@ -118,9 +118,9 @@ class TimeEntry extends Error {
      *
      * @author Tony Bibbs <tony@geeklog.net>
      * @access public
-     * @param int $projectTaskId ID for the task which the time entry record belongs to.
-     * @param int $reportDate
-     * @param int $oldTimeCode ID of time code that was associated with time entry record.
+     * @param  int     $projectTaskId ID for the task which the time entry record belongs to.
+     * @param  int     $reportDate
+     * @param  int     $oldTimeCode   ID of time code that was associated with time entry record.
      * @return boolean True if delete works, otherwise false)
      *
      */

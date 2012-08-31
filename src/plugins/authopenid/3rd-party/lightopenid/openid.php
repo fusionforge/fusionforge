@@ -328,7 +328,7 @@ class LightOpenID
     /**
      * Performs Yadis and HTML discovery. Normally not used.
      * @param $url Identity URL.
-     * @return String OP Endpoint (i.e. OpenID provider address).
+     * @return String         OP Endpoint (i.e. OpenID provider address).
      * @throws ErrorException
      */
     function discover($url)
@@ -586,8 +586,8 @@ class LightOpenID
 
     /**
      * Returns authentication url. Usually, you want to redirect your user to it.
-     * @return String The authentication url.
-     * @param String $select_identifier Whether to request OP to select identity for an user in OpenID 2. Does not affect OpenID 1.
+     * @return String         The authentication url.
+     * @param  String         $select_identifier Whether to request OP to select identity for an user in OpenID 2. Does not affect OpenID 1.
      * @throws ErrorException
      */
     function authUrl($identifier_select = null)
@@ -605,7 +605,7 @@ class LightOpenID
 
     /**
      * Performs OpenID verification with the OP.
-     * @return Bool Whether the verification was successful.
+     * @return Bool           Whether the verification was successful.
      * @throws ErrorException
      */
     function validate()

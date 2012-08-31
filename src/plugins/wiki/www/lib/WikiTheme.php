@@ -1148,7 +1148,7 @@ class WikiTheme {
 
     /** Set alternate CSS source for this theme.
      *
-     * @param string $title Name of style.
+     * @param string $title     Name of style.
      * @param string $css_files Name of CSS file.
      */
     function addAlternateCSS ($title, $css_files) {

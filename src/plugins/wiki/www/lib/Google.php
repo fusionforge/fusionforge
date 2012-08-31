@@ -264,7 +264,7 @@ class Google {
      * Get spelling suggestions from Google
      *
      * @param  string phrase   word or phrase to spell-check
-     * @return string          text of any suggested replacement, or None
+     * @return string text of any suggested replacement, or None
      */
     function doSpellingSuggestion($phrase) {
         if (!$this->license_key)
