@@ -551,7 +551,6 @@ src/cronjobs/gforge-db-backup.sh -text svneol=unset#text/x-sh
 src/cronjobs/homedirs.php -text
 src/cronjobs/job-restart.sh -text
 src/cronjobs/job-server.pl -text
-src/cronjobs/mail/publicize_list.py -text
 src/cronjobs/update_docdata_dataword.php -text
 src/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 src/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream

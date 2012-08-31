@@ -49,7 +49,8 @@ if (is_dir(forge_get_config('mailman_path'))) {
 
 $res = db_query_params('SELECT users.user_name,email,mail_group_list.list_name,
 			mail_group_list.password,mail_group_list.status,
-			mail_group_list.group_list_id,mail_group_list.is_public
+			mail_group_list.group_list_id,mail_group_list.is_public,
+			mail_group_list.description
 			FROM mail_group_list,users
 			WHERE mail_group_list.list_admin=users.user_id',
 			array ());
@@ -64,7 +65,6 @@ if (!is_dir(forge_get_config('data_path').'/dumps')) {
 $h1 = fopen(forge_get_config('data_path').'/dumps/mailman-aliases', "w");
 
 $mailingListIds = array();
-
 for ($i=0; $i<$rows; $i++) {
 	$listadmin = db_result($res,$i,'user_name');
 	$email = db_result($res,$i,'email');
@@ -73,6 +73,7 @@ for ($i=0; $i<$rows; $i++) {
 	$grouplistid = db_result($res,$i,'group_list_id');
 	$public = db_result($res,$i,'is_public');
 	$status = db_result($res,$i,'status');
+	$description = db_result($res, $i, 'description');
 
 	$listname = trim($listname);
 	if (!$listname) {
@@ -83,16 +84,6 @@ for ($i=0; $i<$rows; $i++) {
 		$err .= 'Invalid List Name: ' . $listname;
 		break;
 	}
-
-	$is_commits_list = preg_match('/-commits$/', $listname);
-
-	// Hack to Disable auto-public of listname.
-	$is_commits_list = false;
-
-	// Here we assume that the privatize_list.py script is located in the same dir as this script
-	$script_dir = dirname(__FILE__);
-	$privatize_cmd = escapeshellcmd($path_to_mailman.'/bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
-	$publicize_cmd = escapeshellcmd($path_to_mailman.'/bin/config_list -i '.$script_dir.'/publicize_list.py '.$listname);
 
 	if ($status == MAIL__MAILING_LIST_IS_REQUESTED) {	// New list?
 		$err .= "Creating Mailing List: $listname\n";
@@ -109,17 +100,34 @@ for ($i=0; $i<$rows; $i++) {
 						MAIL__MAILING_LIST_IS_REQUESTED,
 						$grouplistid));
 			echo db_error();
-			if ($is_commits_list || $public) {
-				// Make the *-commits list public
-				$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
-				passthru($publicize_cmd,$failed);
+			$tmp = tempnam(forge_get_config('data_path'), "tmp");
+			$fh = fopen($tmp,'w');
+			$listConfig = "description = \"$description\"\n" ;
+			$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
+			if (!$public) {
+				$listConfig .= "archive_private = True\n" ;
+				$listConfig .= "advertised = False\n" ;
+				$listConfig .= "subscribe_policy = 3\n" ;
+				## Reject mails sent by non-members
+				$listConfig .= "generic_nonmember_action = 2\n";
+				## Do not forward auto discard message
+				$listConfig .= "forward_auto_discards = 0\n";
 			} else {
-				// Privatize the new list
-				$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-				passthru($privatize_cmd,$failed);
+				$listConfig .= "archive_private = False\n" ;
+				$listConfig .= "advertised = True\n" ;
+				$listConfig .= "subscribe_policy = 1\n" ;
 			}
-			$fixurl_cmd = escapeshellcmd(forge_get_config('mailman_path')."/bin/withlist -l -r fix_url $listname -u ".forge_get_config('lists_host'));
-			passthru($fixurl_cmd,$failed);
+			fwrite($fh, $listConfig);
+			fclose($fh);
+			$config_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
+			passthru($config_cmd, $failed);
+			unlink($tmp);
+			if ($failed) {
+				$err .= 'Failed to configure '.$listname.", skipping\n";
+				continue;
+			}
+			$fixurl_cmd = escapeshellcmd($path_to_mailman."/bin/withlist -l -r fix_url $listname -u ".forge_get_config('lists_host'));
+			passthru($fixurl_cmd, $failed);
 			if (!$failed) {
 				db_query_params('UPDATE mail_group_list set status=$1 WHERE status=$2 and group_list_id=$3',
 						array(MAIL__MAILING_LIST_IS_CONFIGURED,
@@ -133,18 +141,29 @@ for ($i=0; $i<$rows; $i++) {
 		}
 		$mailingListIds[] = $grouplistid;
 	} elseif ($status == MAIL__MAILING_LIST_IS_CREATED) {
-		if ($is_commits_list || $public) {
-			// Make the *-commits list public
-			$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
-			passthru($publicize_cmd,$failed);
+		$tmp = tempnam(forge_get_config('data_path'), "tmp");
+		$fh = fopen($tmp,'w');
+		$listConfig = "description = \"$description\"\n" ;
+		$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n";
+		if (!$public) {
+			$listConfig .= "archive_private = True\n";
+			$listConfig .= "advertised = False\n";
+			$listConfig .= "subscribe_policy = 3\n";
+			## Reject mails sent by non-members
+			$listConfig .= "generic_nonmember_action = 2\n";
+			## Do not forward auto discard message
+			$listConfig .= "forward_auto_discards = 0\n";
 		} else {
-			// Privatize the new list
-			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-			passthru($privatize_cmd,$failed);
+			$listConfig .= "archive_private = False\n";
+			$listConfig .= "advertised = True\n";
+			$listConfig .= "subscribe_policy = 1\n";
 		}
-		$fixurl_cmd = escapeshellcmd(forge_get_config('mailman_path')."/bin/withlist -l -r fix_url $listname -u ".forge_get_config('lists_host'));
-		passthru($fixurl_cmd,$failed);
-		if (!failed) {
+		fwrite($fh, $listConfig);
+		fclose($fh);
+		$config_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
+		passthru($config_cmd, $failed);
+		unlink($tmp);
+		if (!$failed) {
 			db_query_params('UPDATE mail_group_list set status=$1 WHERE status=$2 and group_list_id=$3',
 					array(MAIL__MAILING_LIST_IS_CONFIGURED,
 						MAIL__MAILING_LIST_IS_CREATED,
@@ -155,26 +174,38 @@ for ($i=0; $i<$rows; $i++) {
 			continue;
 		}
 	} elseif ($status == MAIL__MAILING_LIST_IS_UPDATED) {
-		// For already created list, update only if status was changed on the forge to
-		// avoid unwanted reset of parameters.
-
-		// Get the mailman info on public/private to change
-		if ($is_commits_list || $public) {
-			$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
-			passthru($publicize_cmd, $failed);
-		} elseif (!$public) {
-			// Privatize only if it is marked as private
-			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-			passthru($privatize_cmd, $failed);
-		}
-		if ($failed) {
-			$err .= 'Failed to update '.$listname."\n";
+		$tmp = tempnam(forge_get_config('data_path'), "tmp");
+		$tmp = tempnam(forge_get_config('data_path'), "tmp");
+		$fh = fopen($tmp,'w');
+		$listConfig = "description = \"$description\"\n" ;
+		$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
+		if (!$public) {
+			$listConfig .= "archive_private = True\n" ;
+			$listConfig .= "advertised = False\n" ;
+			$listConfig .= "subscribe_policy = 3\n" ;
+			## Reject mails sent by non-members
+			$listConfig .= "generic_nonmember_action = 2\n";
+			## Do not forward auto discard message
+			$listConfig .= "forward_auto_discards = 0\n";
 		} else {
+			$listConfig .= "archive_private = False\n" ;
+			$listConfig .= "advertised = True\n" ;
+			$listConfig .= "subscribe_policy = 1\n" ;
+		}
+		fwrite($fh, $listConfig);
+		fclose($fh);
+		$config_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
+		passthru($config_cmd, $failed);
+		unlink($tmp);
+		if (!$failed) {
 			db_query_params('UPDATE mail_group_list set status=$1 WHERE status=$2 and group_list_id=$3',
 					array(MAIL__MAILING_LIST_IS_CONFIGURED,
 						MAIL__MAILING_LIST_IS_UPDATED,
 						$grouplistid));
 			echo db_error();
+		} else {
+			$err .= 'Failed to configure '.$listname."\n";
+			continue;
 		}
 	} elseif ($status == MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
 		$change_pw_cmd = escapeshellcmd($path_to_mailman.'/bin/change_pw -l '.$listname);
@@ -195,8 +226,32 @@ for ($i=0; $i<$rows; $i++) {
 	} else {	// Old list
 		if (!$public) {
 			// Privatize only if it is marked as private
-			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-			passthru($privatize_cmd,$privatizeFailed);
+			$err .= "Privatizing ".$listname."\n";
+			$tmp = tempnam(forge_get_config('data_path'), "tmp");
+			$fh = fopen($tmp,'w');
+			$listConfig = "description = \"$description\"\n" ;
+			$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
+			if (!$public) {
+				$listConfig .= "archive_private = True\n" ;
+				$listConfig .= "advertised = False\n" ;
+				$listConfig .= "subscribe_policy = 3\n" ;
+				## Reject mails sent by non-members
+				$listConfig .= "generic_nonmember_action = 2\n";
+				## Do not forward auto discard message
+				$listConfig .= "forward_auto_discards = 0\n";
+			} else {
+				$listConfig .= "archive_private = False\n" ;
+				$listConfig .= "advertised = True\n" ;
+				$listConfig .= "subscribe_policy = 1\n" ;
+			}
+			fwrite($fh, $listConfig);
+			fclose($fh);
+			$privatize_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
+			passthru($privatize_cmd, $privatizeFailed);
+			if ($privatizeFailed) {
+				$err .= 'Failed to privatize '.$listname."\n";
+			}
+			unlink($tmp);
 		}
 	}
 
