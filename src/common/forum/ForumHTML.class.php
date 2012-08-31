@@ -199,6 +199,8 @@ class ForumHTML extends Error {
 		$am = new AttachManager();
 		$ret_val = $am->PrintHelperFunctions();
 		html_feedback_top(_('This is the content of the pending message'));
+		$bold_begin='<strong>';
+		$bold_end='</strong>';
 		$ret_val .= '
 		<table>
 			<tr>
