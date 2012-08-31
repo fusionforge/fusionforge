@@ -966,7 +966,7 @@ class WikiRequest extends Request {
                 if (empty($HTTP_SERVER_VARS['PHP_AUTH_USER'])) {
                     return false;
                 }
-            } else if (isa($user, WikiUserClassname())) {
+            } elseif (isa($user, WikiUserClassname())) {
                 $this->_user = $user;
                 $this->_user->_authhow = 'session';
                 return ENABLE_USER_NEW ? $user->UserName() : $this->_user;

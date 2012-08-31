@@ -53,7 +53,7 @@ if ($group_id) {
         echo '<div class="error">'. $ff->getErrorMessage().'</div>';
 		forum_footer(array());
 		exit;
-    } else if ( count($farr) < 1) {
+    } elseif ( count($farr) < 1) {
 		echo '<div class="warning_msg">'.sprintf(_('No Forums Found for %1$s'), $g->getPublicName()) .'</div>';
 		forum_footer(array());
 		exit;

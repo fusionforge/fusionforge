@@ -171,7 +171,7 @@ extends WikiPlugin
                                                    //previous,next
                     }
                 }
-            } else if ($go_item == 'next') {
+            } elseif ($go_item == 'next') {
                 if ($loop) {
                     if ($thispage == $lastindex) {
                         $linkpage  = $c[1];

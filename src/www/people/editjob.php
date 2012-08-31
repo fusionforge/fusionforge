@@ -65,7 +65,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			$feedback .= _('JOB inserted successfully');
 		}
 
-	} else if (getStringFromRequest('update_job')) {
+	} elseif (getStringFromRequest('update_job')) {
 		/*
 			update the job's description, status, etc
 		*/
@@ -82,7 +82,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			$feedback = _('JOB updated successfully');
 		}
 
-} else if (getStringFromRequest('add_to_job_inventory')) {
+} elseif (getStringFromRequest('add_to_job_inventory')) {
 		/*
 			add item to job inventory
 		*/
@@ -98,7 +98,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			$error_msg .= _('JOB update failed - wrong project_id');
 		}
 
-	} else if (getStringFromRequest('update_job_inventory')) {
+	} elseif (getStringFromRequest('update_job_inventory')) {
 		/*
 			Change Skill level, experience etc.
 		*/
@@ -119,7 +119,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			$error_msg .= _('JOB skill update failed - wrong project_id');
 		}
 
-	} else if (getStringFromRequest('delete_from_job_inventory')) {
+	} elseif (getStringFromRequest('delete_from_job_inventory')) {
 		/*
 			remove this skill from this job
 		*/

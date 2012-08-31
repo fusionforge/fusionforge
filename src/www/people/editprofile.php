@@ -56,7 +56,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 			$feedback .= _('User updated successfully');
 		}
 
-	} else if (getStringFromRequest('AddSkill')) {
+	} elseif (getStringFromRequest('AddSkill')) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit('my');
 		}
@@ -161,7 +161,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 				return;
 			}
 		}
-	} else if (getStringFromRequest('cancelMultiEdit')) {
+	} elseif (getStringFromRequest('cancelMultiEdit')) {
 		$warning_msg = _('Cancelled skills update');
 	}
 

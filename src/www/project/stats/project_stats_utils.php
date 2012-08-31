@@ -31,11 +31,11 @@ function period2seconds($period_name,$span) {
 
 	if ($period_name=="day") {
 		return 60*60*24*$span;
-	} else if ($period_name=="week") {
+	} elseif ($period_name=="week") {
 		return 60*60*24*7*$span;
-	} else if ($period_name=="month") {
+	} elseif ($period_name=="month") {
 		return 60*60*24*30*$span;
-	} else if ($period_name=="year") {
+	} elseif ($period_name=="year") {
 		return 60*60*24*365*$span;
 	} else {
 		return $span;

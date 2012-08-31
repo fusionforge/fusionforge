@@ -886,7 +886,7 @@ function getArtifactFileData($session_ser,$group_id,$group_artifact_id,$artifact
 	$af=new ArtifactFile($a,$file_id);
 	if (!$af || !is_object($af)) {
 		return new soap_fault ('','getArtifactFileData','ArtifactFile Could Not Be Created','ArtifactFile Could Not Be Created');
-	} else if ($af->isError()) {
+	} elseif ($af->isError()) {
 		return new soap_fault ('','getArtifactFileData',$af->getErrorMessage(),$af->getErrorMessage());
 	}
 
@@ -937,7 +937,7 @@ function addArtifactFile($session_ser,$group_id,$group_artifact_id,$artifact_id,
 	$af = new ArtifactFile($a);
 	if (!$af || !is_object($af)) {
 		return new soap_fault ('','addArtifactFile','Could Not Create ArtifactFile object','Could Not Create ArtifactFile object');
-	} else if ($af->isError()) {
+	} elseif ($af->isError()) {
 		return new soap_fault ('','addArtifactFile',$af->getErrorMessage(),$af->getErrorMessage());
 	}
 
@@ -1125,9 +1125,9 @@ function artifact_history_to_soap($db_result, &$artifactType) {
 
 		if ($field_name == 'status_id') {
 			$old_value = $artifactType->getStatusName($old_value);
-		} else if ($field_name == 'assigned_to') {
+		} elseif ($field_name == 'assigned_to') {
 			$old_value =  user_getname($old_value);
-		} else if ($field == 'close_date') {
+		} elseif ($field == 'close_date') {
 			$old_value =  date(_('Y-m-d H:i'), $old_value);
 		}
 

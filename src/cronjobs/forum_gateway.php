@@ -338,7 +338,7 @@ function DBG($str) {
 
 	if ($debug==1) {
 		syslog(LOG_DEBUG, "forum_gateway: ". $str);
-	} else if ($debug==2) {
+	} elseif ($debug==2) {
 		echo $str."\n";
 	}
 }

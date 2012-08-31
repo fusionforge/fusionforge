@@ -284,8 +284,8 @@ class ADODB_odbc extends ADOConnection {
 			if ($ttype) { 
 				if ($isview) {
 					if (strncmp($type,'V',1) === 0) $arr2[] = $arr[$i][2];
-				} else if (strncmp($type,'SYS',3) !== 0) $arr2[] = $arr[$i][2];
-			} else if (strncmp($type,'SYS',3) !== 0) $arr2[] = $arr[$i][2];
+				} elseif (strncmp($type,'SYS',3) !== 0) $arr2[] = $arr[$i][2];
+			} elseif (strncmp($type,'SYS',3) !== 0) $arr2[] = $arr[$i][2];
 		}
 		return $arr2;
 	}
@@ -442,7 +442,7 @@ class ADODB_odbc extends ADOConnection {
 				$fld->not_null = !empty($rs->fields[10]);
 				$fld->scale = $rs->fields[8];
 				$retarr[strtoupper($fld->name)] = $fld;	
-			} else if (sizeof($retarr)>0)
+			} elseif (sizeof($retarr)>0)
 				break;
 			$rs->MoveNext();
 		}
@@ -490,7 +490,7 @@ class ADODB_odbc extends ADOConnection {
 				return false;
 			}
 		
-		} else if (is_array($sql)) {
+		} elseif (is_array($sql)) {
 			$stmtid = $sql[1];
 			if (!odbc_execute($stmtid)) {
 				//@odbc_free_result($stmtid);

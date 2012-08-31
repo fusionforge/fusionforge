@@ -31,7 +31,7 @@ function people_header($params) {
 		$params['toptab']='people';
 		$params['group']=$group_id;
 		site_project_header($params);
-	} else if (strstr($_SERVER['HTTP_REFERER'],'account')){
+	} elseif (strstr($_SERVER['HTTP_REFERER'],'account')){
 		$params['toptab']='my';
 		site_user_header($params);
 	} else {

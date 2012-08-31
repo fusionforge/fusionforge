@@ -117,7 +117,7 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 	}
 	snippet_footer(array());
 
-} else if ($type=='package') {
+} elseif ($type=='package') {
 	/*
 
 
@@ -204,7 +204,7 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 	}
 	snippet_footer(array());
 
-} else if ($type=='packagever') {
+} elseif ($type=='packagever') {
 	/*
 		Show a specific version of a package and its specific snippet versions
 	*/

@@ -308,7 +308,7 @@ display_slides();"));
             if ($cellwidth != 'auto') {
                 if ($cellwidth == 'equal') {
                     $newcellwidth = round(100/$numcols)."%";
-                } else if ($cellwidth == 'image') {
+                } elseif ($cellwidth == 'image') {
                     $newcellwidth = $newwidth;
                 } else {
                     $newcellwidth = $cellwidth;

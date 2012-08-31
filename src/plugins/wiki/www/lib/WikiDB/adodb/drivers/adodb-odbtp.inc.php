@@ -295,7 +295,7 @@ class ADODB_odbtp extends ADOConnection{
  					$fld->default_value = $rs->fields[12];
 				}
 				$retarr[strtoupper($fld->name)] = $fld;
-			} else if (sizeof($retarr)>0)
+			} elseif (sizeof($retarr)>0)
 				break;
 			$rs->MoveNext();
 		}
@@ -497,7 +497,7 @@ class ADODB_odbtp extends ADOConnection{
 			if (! odbtp_execute($stmtid) ) {
 				return false;
 			}
-		} else if (is_array($sql)) {
+		} elseif (is_array($sql)) {
 			$stmtid = $sql[1];
 			if (!odbtp_execute($stmtid)) {
 				return false;

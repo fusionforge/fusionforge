@@ -72,7 +72,7 @@ function getSCMData($session_ser, $group_id) {
 
 		// Note: This was taken from CVS plugin. Maybe we shouldn't hardcode this?
 		$res["root"] = "/cvsroot/".$grp->getUnixName();
-	} else if ($grp->usesPlugin("scmsvn")) {
+	} elseif ($grp->usesPlugin("scmsvn")) {
 		$res["type"] = "SVN";
 		$res["allow_anonymous"] = $grp->enableAnonSCM();
 		$res["public"] = $grp->enablePserver();

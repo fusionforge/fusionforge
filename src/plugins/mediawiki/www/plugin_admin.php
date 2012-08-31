@@ -114,12 +114,12 @@ if (getStringFromRequest("logo_submit")) {
 	  } else {
 			$feedback = _("File removal error");
 	  }
-	} else if ($userfile && is_uploaded_file($userfile['tmp_name']) &&
+	} elseif ($userfile && is_uploaded_file($userfile['tmp_name']) &&
 	    util_is_valid_filename($userfile['name'])) {
 		$infile = $userfile['tmp_name'];
 		$fname = $userfile['name'];
 		$move = true;
-	} else if ($userfile && $userfile['error'] != UPLOAD_ERR_OK &&
+	} elseif ($userfile && $userfile['error'] != UPLOAD_ERR_OK &&
 	    $userfile['error'] != UPLOAD_ERR_NO_FILE) {
 		switch ($userfile['error']) {
 		case UPLOAD_ERR_INI_SIZE:
@@ -133,7 +133,7 @@ if (getStringFromRequest("logo_submit")) {
 			$feedback = _('Unknown file upload error.');
 			break;
 		}
-	} else if (forge_get_config ('use_manual_uploads') && $manual_filename &&
+	} elseif (forge_get_config ('use_manual_uploads') && $manual_filename &&
 	    util_is_valid_filename($manual_filename) &&
 	    is_file($incoming.'/'.$manual_filename)) {
 		$incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming";

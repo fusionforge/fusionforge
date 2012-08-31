@@ -86,7 +86,7 @@ if (getStringFromRequest('send_mail')) {
 		echo '<p>'._('Message has been sent').'.</p>';
 		$HTML->footer(array());
 		exit;
-	} else if ($touser) {
+	} elseif ($touser) {
 		/*
 			figure out the user's email and send it there
 		*/

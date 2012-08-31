@@ -464,7 +464,7 @@ function _adodb_is_leap_year($year)
 	if ($year % 400 == 0) {
 		return true;
 	// if gregorian calendar (>1582), century not-divisible by 400 is not leap
-	} else if ($year > 1582 && $year % 100 == 0 ) {
+	} elseif ($year > 1582 && $year % 100 == 0 ) {
 		return false;
 	} 
 	

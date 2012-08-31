@@ -96,11 +96,11 @@ if (preg_match('/MSIE ([0-9].[0-9]{1,2})/',getStringFromServer('HTTP_USER_AGENT'
 
 if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Win')) {
 	$GLOBALS['BROWSER_PLATFORM']='Win';
-} else if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Mac')) {
+} elseif (strstr(getStringFromServer('HTTP_USER_AGENT'),'Mac')) {
 	$GLOBALS['BROWSER_PLATFORM']='Mac';
-} else if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Linux')) {
+} elseif (strstr(getStringFromServer('HTTP_USER_AGENT'),'Linux')) {
 	$GLOBALS['BROWSER_PLATFORM']='Linux';
-} else if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Unix')) {
+} elseif (strstr(getStringFromServer('HTTP_USER_AGENT'),'Unix')) {
 	$GLOBALS['BROWSER_PLATFORM']='Unix';
 } else {
 	$GLOBALS['BROWSER_PLATFORM']='Other';

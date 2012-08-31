@@ -37,7 +37,7 @@ if ($diary_user) {
 	$user_obj=user_get_object($diary_user);
 	if (!$user_obj) {
 		exit_error(_('User could not be found.'),'home');
-	} else if ($user_obj->isError()) {
+	} elseif ($user_obj->isError()) {
 		exit_error($user_obj->getErrorMessage(),'home');
 	}
 

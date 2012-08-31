@@ -74,7 +74,7 @@ switch (getStringFromRequest('func')) {
 		if (!$ah || !is_object($ah)) {
 			form_release_key(getStringFromRequest('form_key'));
 			exit_error(_('Artifact Could Not Be Created'),'tracker');
-		} else if (!forge_check_perm ('tracker',$ath->getID(),'submit')) {
+		} elseif (!forge_check_perm ('tracker',$ath->getID(),'submit')) {
 			exit_permission_denied('tracker');
 		} else {
 			if (empty($user_email)) {
@@ -172,7 +172,7 @@ switch (getStringFromRequest('func')) {
 			$ah=new Artifact($ath,$artifact_id_list[$i]);
 			if (!$ah || !is_object($ah)) {
 				$feedback .= ' ID: '.$artifact_id_list[$i].'::Artifact Could Not Be Created';
-			} else if ($ah->isError()) {
+			} elseif ($ah->isError()) {
 				$feedback .= ' ID: '.$artifact_id_list[$i].'::'.$ah->getErrorMessage();
 			} else {
 				$_summary = '';
@@ -196,7 +196,7 @@ switch (getStringFromRequest('func')) {
 						// the original values
 						if (!is_array($f) || count($f) == 0) {
 							$ef[$efid] = array();
-						} else if (in_array('100', $extra_fields[$efid])) {	// "No change" option selected?
+						} elseif (in_array('100', $extra_fields[$efid])) {	// "No change" option selected?
 							// no change
 						} else {
 							$ef[$efid] = $f;		// replace old values with new values
@@ -265,9 +265,9 @@ switch (getStringFromRequest('func')) {
 		$ah=new ArtifactHtml($ath,$artifact_id);
 		if (!$ah || !is_object($ah)) {
 			exit_error(_('Artifact Could Not Be Created'),'tracker');
-		} else if ($ah->isError()) {
+		} elseif ($ah->isError()) {
 			exit_error($ah->getErrorMessage(),'tracker');
-		} else if (!forge_check_perm ('tracker',$ath->getID(),'submit')) {
+		} elseif (!forge_check_perm ('tracker',$ath->getID(),'submit')) {
 			exit_permission_denied('tracker');
 		} else {
 
@@ -436,7 +436,7 @@ switch (getStringFromRequest('func')) {
 				$ah=new ArtifactHtml($ath,$artifact_id);
 				if (!$ah || !is_object($ah)) {
 					exit_error(_('Artifact Could Not Be Created'),'tracker');
-				} else if ($ah->isError()) {
+				} elseif ($ah->isError()) {
 					exit_error($ah->getErrorMessage(),'tracker');
 				} else {
 					if ($start && $ah->isMonitoring())
@@ -453,7 +453,7 @@ switch (getStringFromRequest('func')) {
 				$at=new ArtifactType($group,$atid);
 				if (!$at || !is_object($at)) {
 					exit_error(_('Artifact Could Not Be Created'),'tracker');
-				} else if ($at->isError()) {
+				} elseif ($at->isError()) {
 					exit_error($at->getErrorMessage(),'tracker');
 				} else {
 					if ($start && $at->isMonitoring())
@@ -560,7 +560,7 @@ switch (getStringFromRequest('func')) {
 			$ah=new ArtifactHtml($ath,$aid);
 			if (!$ah || !is_object($ah)) {
 				exit_error(_('Artifact Could Not Be Created'),'tracker');
-			} else if ($ah->isError()) {
+			} elseif ($ah->isError()) {
 				exit_error($ah->getErrorMessage(),'tracker');
 			} else {
 				if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {

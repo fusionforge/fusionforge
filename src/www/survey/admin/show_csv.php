@@ -80,7 +80,7 @@ if ($survey_id) {
     $srf = new SurveyResponseFactory($s, $one_question);
     if (!$srf || !is_object($srf)) {
 		echo '<p class="error">'._("Error"). ' ' . _('Cannot get Survey Response Factory') ."</p>";
-    } else if ( $srf->isError()) {
+    } elseif ( $srf->isError()) {
 		echo '<p class="error">'._("Error"). $srf->getErrorMessage() ."</p>";
     } else {
 		$s2=$srf->getDetailResults();

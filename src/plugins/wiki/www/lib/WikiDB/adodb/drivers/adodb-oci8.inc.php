@@ -186,7 +186,7 @@ NATSOFT.DOMAIN =
 		if ($mode==1) {
 			$this->_connectionID = OCIPLogon($argUsername,$argPassword, $argDatabasename);
 			if ($this->_connectionID && $this->autoRollback)  OCIrollback($this->_connectionID);
-		} else if ($mode==2) {
+		} elseif ($mode==2) {
 			$this->_connectionID = OCINLogon($argUsername,$argPassword, $argDatabasename);
 		} else {
 			$this->_connectionID = OCILogon($argUsername,$argPassword, $argDatabasename);
@@ -692,7 +692,7 @@ NATSOFT.DOMAIN =
 			if ($type !== false) $rez = OCIBindByName($stmt[1],":".$name,$var,$size,$type);
 			else $rez = OCIBindByName($stmt[1],":".$stmt[2],$var,$size); // +1 byte for null terminator
 			$stmt[2] += 1;
-		} else if ($type == OCI_B_BLOB){
+		} elseif ($type == OCI_B_BLOB){
             //we have to create a new Descriptor here
             $_blob = OCINewDescriptor($this->_connectionID, OCI_D_LOB);
             $rez = OCIBindByName($stmt[1], ":".$name, $_blob, -1, OCI_B_BLOB);

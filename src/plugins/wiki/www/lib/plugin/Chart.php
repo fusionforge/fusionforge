@@ -114,7 +114,7 @@ extends WikiPlugin
                         .  'line(point1, point2);';
                 $abscisse += 1;
             }
-        } else if ($type == "line") {
+        } elseif ($type == "line") {
             $abscisse = 0;
             $source .= 'strokewidth = 3; p = []; ';
             foreach ($values as $value) {
@@ -126,7 +126,7 @@ extends WikiPlugin
                 $abscisse += 1;
             }
             $source .= 'path(p);';
-        } else if ($type == "pie") {
+        } elseif ($type == "pie") {
             $source = 'initPicture(-1.1,1.1,-1.1,1.1); stroke = "'.$color.'"; strokewidth = 1;'
                     . 'center = [0, 0]; circle(center, 1);'
                     . 'point = [1, 0]; line(center, point);';

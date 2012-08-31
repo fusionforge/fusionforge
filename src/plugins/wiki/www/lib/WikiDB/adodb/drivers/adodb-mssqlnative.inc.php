@@ -454,7 +454,7 @@ class ADODB_mssqlnative extends ADOConnection {
 		$this->_errorMsg = false;
 		if (is_array($inputarr)) {
             $rez = sqlsrv_query($this->_connectionID,$sql,$inputarr);
-		} else if (is_array($sql)) {
+		} elseif (is_array($sql)) {
             $rez = sqlsrv_query($this->_connectionID,$sql[1],$inputarr);
 		} else {
 			$rez = sqlsrv_query($this->_connectionID,$sql);
@@ -759,7 +759,7 @@ class ADORecordset_mssqlnative extends ADORecordSet {
 				foreach($this->fields as $k=>$v) {
 					$this->fields[strtolower($k)] = $v;
 				}
-			} else if (ADODB_ASSOC_CASE == 1) {
+			} elseif (ADODB_ASSOC_CASE == 1) {
 				foreach($this->fields as $k=>$v) {
 					$this->fields[strtoupper($k)] = $v;
 				}

@@ -68,7 +68,7 @@ class fckeditorPlugin extends Plugin {
 				if ( $project->usesPlugin ( $this->name ) ) { // only if the plugin is activated for the project show the fckeditor box
 					$display = 1;
 				}
-			} else if (isset($params['user_id'])) {
+			} elseif (isset($params['user_id'])) {
 				$userid = $params['user_id'];
 				$user = user_get_object($userid);
 				if ($user->usesPlugin($this->name)) {

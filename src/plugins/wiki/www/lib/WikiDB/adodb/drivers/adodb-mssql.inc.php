@@ -583,7 +583,7 @@ order by constraint_name, referenced_table_name, keyno";
 					}
 
 					$params .= "@P$i=N". (strncmp($v,"'",1)==0? $v : $this->qstr($v));
-				} else if (is_integer($v)) {
+				} elseif (is_integer($v)) {
 					$decl .= "@P$i INT";
 					$params .= "@P$i=".$v;
 				} else {
@@ -596,7 +596,7 @@ order by constraint_name, referenced_table_name, keyno";
 			if ($this->debug) ADOConnection::outp("<font size=-1>sp_executesql N{$sql[1]},N$decl,$params</font>");
 			$rez = mssql_query("sp_executesql N{$sql[1]},N$decl,$params");
 			
-		} else if (is_array($sql)) {
+		} elseif (is_array($sql)) {
 			# PrepareSP()
 			$rez = mssql_execute($sql[1]);
 			
@@ -742,7 +742,7 @@ class ADORecordset_mssql extends ADORecordSet {
 					foreach($this->fields as $k=>$v) {
 						$this->fields[strtolower($k)] = $v;
 					}
-				} else if (ADODB_ASSOC_CASE == 1) {
+				} elseif (ADODB_ASSOC_CASE == 1) {
 					foreach($this->fields as $k=>$v) {
 						$this->fields[strtoupper($k)] = $v;
 					}
@@ -783,11 +783,11 @@ class ADORecordset_mssql extends ADORecordSet {
 			}
 			
 			if (!$this->fields) {
-			} else if (ADODB_ASSOC_CASE == 0) {
+			} elseif (ADODB_ASSOC_CASE == 0) {
 				foreach($this->fields as $k=>$v) {
 					$this->fields[strtolower($k)] = $v;
 				}
-			} else if (ADODB_ASSOC_CASE == 1) {
+			} elseif (ADODB_ASSOC_CASE == 1) {
 				foreach($this->fields as $k=>$v) {
 					$this->fields[strtoupper($k)] = $v;
 				}

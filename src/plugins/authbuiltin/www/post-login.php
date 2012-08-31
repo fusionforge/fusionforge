@@ -105,7 +105,7 @@ if ($login) {
 				$warning_msg .= '<br /><p>'. _('Your account does not exist.').'</p>';
 			}
 		}
-	} else if ($userstatus == "P") {
+	} elseif ($userstatus == "P") {
 		$warning_msg .= '<br />'. sprintf(_('<p>Your account is currently pending your email confirmation.<br/>Visiting the link sent to you in this email will activate your account.<br/>If you need this email resent, please click below and a confirmation email will be sent to the email address you provided in registration.</p><a href="%1$s">[Resend Confirmation Email]</a><br><hr>'), util_make_url ("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname)));
 	} else {
 		if ($userstatus == "D") {

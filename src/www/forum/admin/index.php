@@ -67,7 +67,7 @@ if (getStringFromRequest('post_changes')) {
 		$feedback .= $fa->ExecuteAction("delete_forum");
 		$group_forum_id=0;
 		$deleteforum=0;
-	} else if (getStringFromRequest('add_forum')) {
+	} elseif (getStringFromRequest('add_forum')) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit('forums');
 		}
@@ -77,7 +77,7 @@ if (getStringFromRequest('post_changes')) {
 			$feedback .= $fa->ExecuteAction("add_forum");
 			$g->normalizeAllRoles () ;
 		}
-	} else if (getStringFromRequest('change_status')) {
+	} elseif (getStringFromRequest('change_status')) {
 		$fa = new ForumAdmin($group_id);
 		$feedback .= $fa->ExecuteAction("change_status");
 	}
@@ -114,7 +114,7 @@ if (getStringFromRequest('add_forum')) {
 
 	forum_footer(array());
 
-} else if (getStringFromRequest('change_status')) {
+} elseif (getStringFromRequest('change_status')) {
 	/*
 	  Change a forum
 	*/

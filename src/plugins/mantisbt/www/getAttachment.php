@@ -39,9 +39,9 @@ $user = session_get_user(); // get the session user
 
 if (!$user || !is_object($user)) {
         exit_error(_('Invalid User'), 'mantisbt');
-} else if ( $user->isError() ) {
+} elseif ( $user->isError() ) {
         exit_error($user->isError(), 'mantisbt');
-} else if ( !$user->isActive()) {
+} elseif ( !$user->isActive()) {
         exit_error(_('Invalid User not active'), 'mantisbt');
 }
 

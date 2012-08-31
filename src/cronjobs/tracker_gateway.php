@@ -196,7 +196,7 @@ class TrackerGateway extends Error {
 				$this->setError(_('This user is not allowed to submit items to this tracker.'));
 				return false;
 			}
-		} else if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
+		} elseif (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
 			$this->setError(_('Could not match sender email address to user, and tracker does not allow anonymous posts.'));
 			return false;
 		}
@@ -270,7 +270,7 @@ function DBG($str) {
 	if ($debug==1) {
 		file_put_contents('/tmp/tracker-gateway.log', "artifact: ".$str."\n", FILE_APPEND);
 		syslog(LOG_DEBUG, "artifact_gateway: ". $str);
-	} else if ($debug==2) {
+	} elseif ($debug==2) {
 		echo $str."\n";
 	}
 }

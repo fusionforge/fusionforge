@@ -80,7 +80,7 @@ if (getStringFromRequest('post_changes')) {
 			$warning_msg .= _("Please configure also the roles (by default, it's 'No Access')");
 		}
 
-	} else if ($add_cat) {
+	} elseif ($add_cat) {
 		$name = getStringFromRequest('name');
 
 		/*
@@ -99,7 +99,7 @@ if (getStringFromRequest('post_changes')) {
 			}
 		}
 
-	} else if ($update_cat) {
+	} elseif ($update_cat) {
 		$id = getIntFromRequest('id');
 		$name = getStringFromRequest('name');
 
@@ -123,7 +123,7 @@ if (getStringFromRequest('post_changes')) {
 			}
 		}
 
-	} else if (getStringFromRequest('update_pg')) {
+	} elseif (getStringFromRequest('update_pg')) {
 		$project_name = getStringFromRequest('project_name');
 		$description = getStringFromRequest('description');
 		$send_all_posts_to = getStringFromRequest('send_all_posts_to');
@@ -139,7 +139,7 @@ if (getStringFromRequest('post_changes')) {
 			$feedback .= _('Subproject Updated successfully');
 		}
 
-	} else if ($delete) {
+	} elseif ($delete) {
 		$sure = getStringFromRequest('sure');
 		$really_sure = getStringFromRequest('really_sure');
 
@@ -293,7 +293,7 @@ if ($add_cat && $group_project_id) {
 	<?php
 	pm_footer(array());
 
-} else if (getStringFromRequest('update_pg') && $group_project_id) {
+} elseif (getStringFromRequest('update_pg') && $group_project_id) {
 
 	$pg = new ProjectGroup($g,$group_project_id);
 	if (!$pg || !is_object($pg)) {
@@ -349,7 +349,7 @@ if ($add_cat && $group_project_id) {
 
 	pm_footer(array());
 
-} else if ($delete && $group_project_id) {
+} elseif ($delete && $group_project_id) {
 
 	$pg = new ProjectGroup($g,$group_project_id);
 	if (!$pg || !is_object($pg)) {

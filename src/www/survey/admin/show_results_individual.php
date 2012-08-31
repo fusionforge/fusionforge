@@ -140,7 +140,7 @@ for ($i=0; $i<$count; $i++) {
 
 		echo "&nbsp; ".db_result($result, 0, "question")."\n";
 
-	} else if ($question_type == "2") {
+	} elseif ($question_type == "2") {
 
 		/*
 			This is a text-area question.
@@ -158,7 +158,7 @@ for ($i=0; $i<$count; $i++) {
 		}
 		echo "</textarea>\n";
 
-	} else if ($question_type == "3") {
+	} elseif ($question_type == "3") {
 
                 /*
                         This is a Yes/No question.
@@ -191,7 +191,7 @@ for ($i=0; $i<$count; $i++) {
 
 		echo "&nbsp; ".db_result($result, 0, "question")."\n";
 
-        } else if ($question_type == "4") {
+        } elseif ($question_type == "4") {
 
 		/*
 			This is a comment only.
@@ -200,7 +200,7 @@ for ($i=0; $i<$count; $i++) {
 		echo "\n&nbsp;<p><strong>".db_result($result, 0, "question")."</strong></p>\n";
 		echo "\n<input type=\"hidden\" name=\"_".$quest_array[$i]."\" value=\"-666\" />";
 
-        } else if ($question_type == "5") {
+        } elseif ($question_type == "5") {
 
                 /*
                         This is a text-field question.

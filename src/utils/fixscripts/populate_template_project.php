@@ -84,7 +84,7 @@ function populateProject($project) {
 			db_rollback();
 			setup_gettext_from_context();
 			return false;
-		} else if ($ats->isError()) {
+		} elseif ($ats->isError()) {
 			$project->setError(sprintf (_('ATS%d: %s'), 1, $ats->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
@@ -216,9 +216,9 @@ function populateProject($project) {
 
 if (count($argv) < 2) {
 	usage();
-} else if (in_array($argv[1], array('-h', '-?', '--help'))) {
+} elseif (in_array($argv[1], array('-h', '-?', '--help'))) {
 	usage(0);
-} else if (count($argv) == 2) {
+} elseif (count($argv) == 2) {
 	if (!($gid = util_nat0($argv[1]))) {
 		usage();
 	}
@@ -231,7 +231,7 @@ if (count($argv) < 2) {
 		    $project->getErrorMessage());
 		exit(1);
 	}
-} else if (count($argv) == 4 && $argv[1] == "new") {
+} elseif (count($argv) == 4 && $argv[1] == "new") {
 	db_begin();
 	$project = new Group();
 	$desc = sprintf("Template project %s (%s) populated on %s",

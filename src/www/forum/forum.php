@@ -232,7 +232,7 @@ if ($forum_id) {
 			$i++;
 		}
 
-	} else if ($style=='threaded') {
+	} elseif ($style=='threaded') {
 
 		$msg_arr =& $fmf->nestArray($fmf->getThreaded());
 		if ($fmf->isError()) {
@@ -289,7 +289,7 @@ if ($forum_id) {
 
 		$ret_val .= $GLOBALS['HTML']->listTableBottom();
 
-	} else if (($style=='flat' && $thread_id) || ($style=='ultimate' && $thread_id)) {
+	} elseif (($style=='flat' && $thread_id) || ($style=='ultimate' && $thread_id)) {
 
 		$msg_arr =& $fmf->getFlat($thread_id);
 		if ($fmf->isError()) {

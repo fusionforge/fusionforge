@@ -66,7 +66,7 @@ if (!$projectName) {
 $Group = group_get_object_by_name($projectName);
 if (!$Group || !is_object($Group)) {
 	exit_no_group();
-} else if ( $Group->isError()) {
+} elseif ( $Group->isError()) {
 	exit_error($Group->getErrorMessage(),'summary');
 }
 if (!$Group->usesSCM()) {
@@ -116,7 +116,7 @@ if ($external_scm) {
 	// see what type of plugin this project if using
 	if ($Group->usesPlugin('scmcvs')) {
 		$repos_type = 'cvs';
-	} else if ($Group->usesPlugin('scmsvn')) {
+	} elseif ($Group->usesPlugin('scmsvn')) {
 		$repos_type = 'svn';
 	}
 

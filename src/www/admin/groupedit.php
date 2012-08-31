@@ -85,7 +85,7 @@ if (getStringFromRequest('submit')) {
 
 	do_update($group, $form_public, $form_template, $form_status, 1, $form_box, $form_domain, $form_scm_box);
 
-} else if (getStringFromRequest('resend')) {
+} elseif (getStringFromRequest('resend')) {
 
 	$group->sendApprovalEmail();
 	$feedback .= _('Instruction email sent');

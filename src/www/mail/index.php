@@ -87,7 +87,7 @@ if ($group_id) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
 			if ($currentList->isError()) {
 				echo '<td colspan="4">'.$currentList->getErrorMessage().'</td>';
-			} else if ($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
+			} elseif ($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 				echo '<td class="halfwidth" colspan="2"><strong>'.$currentList->getName().'</strong></td>'.
 					'<td width="25%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
 					'<td width="25%" class="align-center">'._('Not activated yet').'</td>';

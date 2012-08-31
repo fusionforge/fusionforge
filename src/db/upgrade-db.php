@@ -29,7 +29,7 @@ $res = db_query_params('SELECT * FROM database_startpoint',
 if (!$res) { // db error
 	show("DB-ERROR-3: ".db_error()."\n");
 	exit(1);
-} else if (db_numrows($res) == 0) { // table 'database_startpoint' is empty
+} elseif (db_numrows($res) == 0) { // table 'database_startpoint' is empty
 	show("ERROR: table 'database_startpoint' is empty.\nRun startpoint.php first.\n");
 	exit(1);
 } else { // get the start date from the db
@@ -53,7 +53,7 @@ if ($argc == 1 || $argv[1] == 'all') {
 				// error
 				show("ERROR-2: ".db_error()."\n");
 				exit(1);
-			} else if (db_numrows($res) == 0) {
+			} elseif (db_numrows($res) == 0) {
 				show("Running script: {$script['filename']}\n");
 				db_begin();
 				$result = run_script($script);
@@ -157,7 +157,7 @@ function run_script($script) {
 			show(realpath($db_path.$filename)." FAILED!\n\n");
 		}
 
-	} else if ($ext == 'sql') {
+	} elseif ($ext == 'sql') {
 		if (//$filename == '20021124-3_gforge-debian-sf-sync.sql' ||
 			$filename == '20021223-drops.sql') {
 //20021223-drops.sql
@@ -239,7 +239,7 @@ function apply_fixes($version) {
 			run_script(array('filename'=>'sfee3.0-sf26-2.php','ext'=>'php'));
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('sfee3.3fixes')";
 		}
-	} else if ($version == 'sfee3.0') {
+	} elseif ($version == 'sfee3.0') {
 		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
 					array ('sfee3.0fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
@@ -247,7 +247,7 @@ function apply_fixes($version) {
 			run_script(array('filename'=>'sfee3.0-sf26-2.php','ext'=>'php'));
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('sfee3.0fixes')";
 		}
-	} else if ($version == '2.5') {
+	} elseif ($version == '2.5') {
 		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
 					array ('2.5fixes'));
 		if ($res && db_result($res, 0, 'applied') == '0') {
@@ -255,7 +255,7 @@ function apply_fixes($version) {
 			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('2.5fixes')";
 		}
-	} else if ($version == '2.6') {
+	} elseif ($version == '2.6') {
 		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
 					array ('2.6fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
@@ -263,7 +263,7 @@ function apply_fixes($version) {
 			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('2.6fixes')";
 		}
-	} else if ($version == '3.0pre5') {
+	} elseif ($version == '3.0pre5') {
 		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
 					array ('3.0pre5fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
@@ -274,14 +274,14 @@ function apply_fixes($version) {
 			}
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('3.0pre5fixes')";
 		}
-	} else if ($version == '3.0pre6') {
+	} elseif ($version == '3.0pre6') {
 		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1', array ('3.0pre6fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
 			show("Applying fixes for version 3.0pre6\n");
 			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('3.0pre6fixes')";
 		}
-	} else if ($version == '3.0pre7') {
+	} elseif ($version == '3.0pre7') {
 		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
 					array ('3.0pre7fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
@@ -289,7 +289,7 @@ function apply_fixes($version) {
 			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('3.0pre7fixes')";
 		}
-	} else if ($version == '4.7') {
+	} elseif ($version == '4.7') {
 		run_script(array('filename'=>'20070924-project-perm.sql','ext'=>'sql'));
 		run_script(array('filename'=>'20070924-forum-perm.sql','ext'=>'sql'));
 		run_script(array('filename'=>'20070924-artifact-perm.sql','ext'=>'sql'));

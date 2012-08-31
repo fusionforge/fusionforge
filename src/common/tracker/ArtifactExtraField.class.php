@@ -495,7 +495,7 @@ class ArtifactExtraField extends Error {
 		if (preg_match("/[^[:alnum:]_@\\-]/", $alias)) {
 			$this->setError(_('The alias contains invalid characters. Only letters, numbers, hypens (-), at sign (@) and underscores (_) allowed.'));
 			return false;
-		} else if (in_array($alias, $reserved_alias)) {	// alias is reserved?
+		} elseif (in_array($alias, $reserved_alias)) {	// alias is reserved?
 			$this->setError(sprintf(_('\'%1$s\' is a reserved alias. Please provide another name.'), $alias));
 			return false;
 		}
@@ -545,7 +545,7 @@ class ArtifactExtraField extends Error {
 			if (!$res) {
 				$this->setError(db_error());
 				return false;
-			} else if (db_numrows($res) > 0) {		// found another field with the same alias
+			} elseif (db_numrows($res) > 0) {		// found another field with the same alias
 				$conflict = true;
 				$serial++;
 				$alias = $alias.$serial;

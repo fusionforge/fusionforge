@@ -129,7 +129,7 @@ if (getStringFromRequest('submit')) {
 			}
 		}
 
-	} else if (getStringFromRequest('remove')) {
+	} elseif (getStringFromRequest('remove')) {
 
 		$res=db_query_params ('DELETE FROM db_images WHERE id=$1 AND group_id=$2',
 			array($id,
@@ -141,7 +141,7 @@ if (getStringFromRequest('submit')) {
 			$feedback .= _('Multimedia File Deleted');
 		}
 
-	} else if (getStringFromRequest("edit")) {
+	} elseif (getStringFromRequest("edit")) {
 		if ($description == "") {
 			$error_msg .= _('File description is required');
 		} else {

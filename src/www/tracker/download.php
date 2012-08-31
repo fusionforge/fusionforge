@@ -49,13 +49,13 @@ if ($ath->isError()) {
 $ah=new Artifact($ath,$aid);
 if (!$ah || !is_object($ah)) {
 	exit_error(_('Artifact Could Not Be Created'),'tracker');
-} else if ($ah->isError()) {
+} elseif ($ah->isError()) {
 	exit_error($ah->getErrorMessage(), 'tracker');
 } else {
 	$afh=new ArtifactFile($ah,$file_id);
 	if (!$afh || !is_object($afh)) {
 		exit_error(_('ArtifactFile Could Not Be Created'),'tracker');
-	} else if ($afh->isError()) {
+	} elseif ($afh->isError()) {
 		exit_error($afh->getErrorMessage(),'tracker');
 	} else {
 		Header('Content-disposition: filename="'.str_replace('"', '', $afh->getName()).'"');

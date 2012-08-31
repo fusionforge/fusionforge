@@ -98,25 +98,25 @@ function minijson_encode($x, $ri="") {
 			}
 			if ($y == 0) {
 				break;
-			} else if ($y == 8) {
+			} elseif ($y == 8) {
 				$rs .= "\\b";
-			} else if ($y == 9) {
+			} elseif ($y == 9) {
 				$rs .= "\\t";
-			} else if ($y == 10) {
+			} elseif ($y == 10) {
 				$rs .= "\\n";
-			} else if ($y == 12) {
+			} elseif ($y == 12) {
 				$rs .= "\\f";
-			} else if ($y == 13) {
+			} elseif ($y == 13) {
 				$rs .= "\\r";
-			} else if ($y == 34) {
+			} elseif ($y == 34) {
 				$rs .= "\\\"";
-			} else if ($y == 92) {
+			} elseif ($y == 92) {
 				$rs .= "\\\\";
-			} else if ($y < 0x20 || $y > 0xFFFD ||
+			} elseif ($y < 0x20 || $y > 0xFFFD ||
 			    ($y >= 0xD800 && $y <= 0xDFFF) ||
 			    ($y > 0x7E && (!$isunicode || $y < 0xA0))) {
 				$rs .= sprintf("\\u%04X", $y);
-			} else if ($isunicode && $y > 0x7E) {
+			} elseif ($isunicode && $y > 0x7E) {
 				$rs .= mb_convert_encoding($v, "UTF-8",
 				    "UTF-16LE");
 			} else {
@@ -291,9 +291,9 @@ function minijson_get_hexdigit(&$j, &$p, &$v, $i) {
 	$wc = $j[$p++];
 	if ($wc >= 0x30 && $wc <= 0x39) {
 		$v += $wc - 0x30;
-	} else if ($wc >= 0x41 && $wc <= 0x46) {
+	} elseif ($wc >= 0x41 && $wc <= 0x46) {
 		$v += $wc - 0x37;
-	} else if ($wc >= 0x61 && $wc <= 0x66) {
+	} elseif ($wc >= 0x61 && $wc <= 0x66) {
 		$v += $wc - 0x57;
 	} else {
 		$ov = sprintf("invalid hex in unicode escape" .
@@ -328,7 +328,7 @@ function minijson_decode_array(&$j, &$p, &$ov, $depth) {
 				$ov = "unexpected comma at wchar #" . $p;
 				return false;
 			}
-		} else if (!$first) {
+		} elseif (!$first) {
 			/*
 			 * all but the first member require a separating
 			 * comma; this also catches e.g. trailing
@@ -374,7 +374,7 @@ function minijson_decode_object(&$j, &$p, &$ov, $depth) {
 				$ov = "unexpected comma at wchar #" . $p;
 				return false;
 			}
-		} else if (!$first) {
+		} elseif (!$first) {
 			/*
 			 * all but the first member require a separating
 			 * comma; this also catches e.g. trailing
@@ -430,7 +430,7 @@ function minijson_decode_value(&$j, &$p, &$ov, $depth) {
 	/* style: falling through exits with false */
 	if ($wc == 0) {
 		$ov = "unexpected EOS at wchar #" . $p;
-	} else if ($wc == 0x6E) {
+	} elseif ($wc == 0x6E) {
 		/* literal null? */
 		if ($j[$p++] == 0x75 &&
 		    $j[$p++] == 0x6C &&
@@ -439,7 +439,7 @@ function minijson_decode_value(&$j, &$p, &$ov, $depth) {
 			return true;
 		}
 		$ov = "expected ull after n near wchar #" . $p;
-	} else if ($wc == 0x74) {
+	} elseif ($wc == 0x74) {
 		/* literal true? */
 		if ($j[$p++] == 0x72 &&
 		    $j[$p++] == 0x75 &&
@@ -448,7 +448,7 @@ function minijson_decode_value(&$j, &$p, &$ov, $depth) {
 			return true;
 		}
 		$ov = "expected rue after t near wchar #" . $p;
-	} else if ($wc == 0x66) {
+	} elseif ($wc == 0x66) {
 		/* literal false? */
 		if ($j[$p++] == 0x61 &&
 		    $j[$p++] == 0x6C &&
@@ -458,19 +458,19 @@ function minijson_decode_value(&$j, &$p, &$ov, $depth) {
 			return true;
 		}
 		$ov = "expected alse after f near wchar #" . $p;
-	} else if ($wc == 0x5B) {
+	} elseif ($wc == 0x5B) {
 		if (--$depth > 0) {
 			return minijson_decode_array($j, $p, $ov, $depth);
 		}
 		$ov = "recursion limit exceeded at wchar #" . $p;
-	} else if ($wc == 0x7B) {
+	} elseif ($wc == 0x7B) {
 		if (--$depth > 0) {
 			return minijson_decode_object($j, $p, $ov, $depth);
 		}
 		$ov = "recursion limit exceeded at wchar #" . $p;
-	} else if ($wc == 0x22) {
+	} elseif ($wc == 0x22) {
 		return minijson_decode_string($j, $p, $ov);
-	} else if ($wc == 0x2D || ($wc >= 0x30 && $wc <= 0x39)) {
+	} elseif ($wc == 0x2D || ($wc >= 0x30 && $wc <= 0x39)) {
 		$p--;
 		return minijson_decode_number($j, $p, $ov);
 	} else {
@@ -488,7 +488,7 @@ function minijson_decode_string(&$j, &$p, &$ov) {
 		if ($wc < 0x20) {
 			$ov = "unescaped control character $wc at wchar #" . $p;
 			return false;
-		} else if ($wc == 0x22) {
+		} elseif ($wc == 0x22) {
 			/* regular exit point for the loop */
 
 			/* convert to UTF-8, then re-check against UTF-16 */
@@ -499,23 +499,23 @@ function minijson_decode_string(&$j, &$p, &$ov) {
 				return false;
 			}
 			return true;
-		} else if ($wc == 0x5C) {
+		} elseif ($wc == 0x5C) {
 			$wc = $j[$p++];
 			if ($wc == 0x22 ||
 			    $wc == 0x2F ||
 			    $wc == 0x5C) {
 				$s .= chr($wc) . chr(0);
-			} else if ($wc == 0x62) {
+			} elseif ($wc == 0x62) {
 				$s .= chr(0x08) . chr(0);
-			} else if ($wc == 0x66) {
+			} elseif ($wc == 0x66) {
 				$s .= chr(0x0C) . chr(0);
-			} else if ($wc == 0x6E) {
+			} elseif ($wc == 0x6E) {
 				$s .= chr(0x0A) . chr(0);
-			} else if ($wc == 0x72) {
+			} elseif ($wc == 0x72) {
 				$s .= chr(0x0D) . chr(0);
-			} else if ($wc == 0x74) {
+			} elseif ($wc == 0x74) {
 				$s .= chr(0x09) . chr(0);
-			} else if ($wc == 0x75) {
+			} elseif ($wc == 0x75) {
 				$v = 0;
 				for ($tmp = 1; $tmp <= 4; $tmp++) {
 					$v <<= 4;
@@ -534,10 +534,10 @@ function minijson_decode_string(&$j, &$p, &$ov) {
 				$ov = "invalid escape sequence at wchar #" . $p;
 				return false;
 			}
-		} else if ($wc > 0xD7FF && $wc < 0xE000) {
+		} elseif ($wc > 0xD7FF && $wc < 0xE000) {
 			$ov = "surrogate $wc at wchar #" . $p;
 			return false;
-		} else if ($wc > 0xFFFD) {
+		} elseif ($wc > 0xFFFD) {
 			$ov = "non-Unicode char $wc at wchar #" . $p;
 			return false;
 		} else {
@@ -565,7 +565,7 @@ function minijson_decode_number(&$j, &$p, &$ov) {
 			$ov = "no leading zeroes please at wchar #" . $p;
 			return false;
 		}
-	} else if ($wc >= 0x31 && $wc <= 0x39) {
+	} elseif ($wc >= 0x31 && $wc <= 0x39) {
 		/* begins with 1‥9 */
 		while ($wc >= 0x30 && $wc <= 0x39) {
 			$s .= chr($wc);

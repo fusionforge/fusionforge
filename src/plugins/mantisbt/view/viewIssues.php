@@ -135,7 +135,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 // 		echo			'<form name="filterprority" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 // 		if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC") {
 // 			echo			'<input type=hidden name="dir" value="DESC"/>';
-// 		} else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC") {
+// 		} elseif ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC") {
 // 			echo			'<input type="hidden" name="dir" value="ASC"/>';
 // 		}
 // 		if ( isset($bugfilter['show_status'])) {
@@ -152,7 +152,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 // 		echo				'<a href="javascript:document.filterprority.submit();">P';
 // 		if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC" ) {
 // 			echo				'<img src="'.$picto_haut.'">';
-// 		} else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC" ) {
+// 		} elseif ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC" ) {
 // 			echo				'<img src="'.$picto_bas.'">';
 // 		}
 // 		echo 				'</a>';
@@ -164,7 +164,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 // 		echo			'<form name="filterid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 // 		if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "ASC") {
 // 			echo			'<input type=hidden name="dir" value="DESC"/>';
-// 		} else if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC") {
+// 		} elseif ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC") {
 // 			echo			'<input type="hidden" name="dir" value="ASC"/>';
 // 		}
 // 		if ( isset($bugfilter['show_status'])) {

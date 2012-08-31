@@ -63,7 +63,7 @@ WHERE user_id=$4 AND id=$5',
 				echo db_error();
 				$feedback .= _('Nothing Updated');
 			}
-		} else if (getStringFromRequest('add')) {
+		} elseif (getStringFromRequest('add')) {
 			//inserting a new diary entry
 			$res=db_query_params ('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES
 								($1,$2,$3,$4,$5)',

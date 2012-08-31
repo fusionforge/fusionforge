@@ -57,7 +57,7 @@ extends _PassUser
         }
         if (isset($params["openid_claimed_id"])) {
             $identity = $params["openid_claimed_id"];
-        } else if (isset($params["openid_identity"])){
+        } elseif (isset($params["openid_identity"])){
             $identity = $params["openid_identity"];
         } else {
             $identity = "";

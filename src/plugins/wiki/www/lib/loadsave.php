@@ -120,21 +120,21 @@ function EndLoadDump(&$request)
         echo "</div>\n";
         echo "</td></tr>\n";
         echo "</table>\n";
-    } else if (isa($WikiTheme, 'WikiTheme_Sidebar')
+    } elseif (isa($WikiTheme, 'WikiTheme_Sidebar')
            or isa($WikiTheme, 'WikiTheme_MonoBook')) {
         echo "</div>\n";
         echo "</div>\n";
         echo "</div>\n";
         echo "</div>\n";
-    } else if (isa($WikiTheme, 'WikiTheme_wikilens')) {
+    } elseif (isa($WikiTheme, 'WikiTheme_wikilens')) {
         echo "</div>\n";
         echo "</td>\n";
         echo "</tr>\n";
         echo "</table>\n";
-    } else if (isa($WikiTheme, 'WikiTheme_blog')) {
+    } elseif (isa($WikiTheme, 'WikiTheme_blog')) {
         echo "</div>\n";
         echo "</div>\n";
-    } else if (isa($WikiTheme, 'WikiTheme_Crao')
+    } elseif (isa($WikiTheme, 'WikiTheme_Crao')
            or isa($WikiTheme, 'WikiTheme_Hawaiian')
            or isa($WikiTheme, 'WikiTheme_MacOSX')
            or isa($WikiTheme, 'WikiTheme_shamino_com')
@@ -1526,7 +1526,7 @@ function SetupWiki (&$request)
 
     if (!FUSIONFORGE) {
         $mandatory = explode(':','SandBox:Template/Category:Template/Talk:SpecialPages:CategoryCategory:CategoryActionPage:Help/OldTextFormattingRules:Help/TextFormattingRules:PhpWikiAdministration');
-    } else if (WIKI_NAME == "help") {
+    } elseif (WIKI_NAME == "help") {
         $mandatory = explode(':','SandBox:Template/Category:Template/Talk:SpecialPages:CategoryCategory:CategoryActionPage:Help/TextFormattingRules:PhpWikiAdministration');
     } else {
         $mandatory = explode(':','SandBox:Template/UserPage:Template/Category:Template/Talk:SpecialPages:CategoryCategory:CategoryActionPage:TextFormattingRules:PhpWikiAdministration');

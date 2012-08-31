@@ -54,7 +54,7 @@ if (forge_check_global_perm('forge_admin')) {
 
 			$feedback .= _('Category Inserted');
 
-		} else if (getStringFromRequest('people_skills')) {
+		} elseif (getStringFromRequest('people_skills')) {
 			$skill_name = getStringFromRequest('skill_name');
 			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 				exit_form_double_submit('admin');
@@ -107,7 +107,7 @@ if (forge_check_global_perm('forge_admin')) {
 
 		people_footer(array());
 
-	} else if (getStringFromRequest('people_skills')) {
+	} elseif (getStringFromRequest('people_skills')) {
 		/*
 			Show people_groups and blank row
 		*/

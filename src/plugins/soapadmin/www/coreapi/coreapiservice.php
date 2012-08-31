@@ -504,7 +504,7 @@ class CoreApiService {
 			$scm_data->connection_string = "";	// this doesn't apply to CVS
 			// Note: This was taken from CVS plugin. Maybe we shouldn't hardcode this?
 			$scm_data->root = "/cvsroot/".$grp->getUnixName();
-		} else if ($grp->usesPlugin("scmsvn")) {
+		} elseif ($grp->usesPlugin("scmsvn")) {
 			$scm_data->type = "SVN";
 			$scm_data->allow_anonymous = $grp->enableAnonSCM();
 			$scm_data->public = $grp->enablePserver();

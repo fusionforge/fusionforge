@@ -932,7 +932,7 @@ class Block_pre extends BlockMarkup
     if ($m->match == '<noinclude>') {
         $text = TransformText($text);
         $this->_element = new Block_HtmlElement('div', false, $text);
-    } else if ($m->match == '<nowiki>') {
+    } elseif ($m->match == '<nowiki>') {
             $text = TransformInlineNowiki($text);
         $this->_element = new Block_HtmlElement('p', false, $text);
     } else {

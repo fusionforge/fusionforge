@@ -113,7 +113,7 @@ if (session_loggedin()) {
 
 		snippet_footer(array());
 
-	} else if ($type=='package') {
+	} elseif ($type=='package') {
 		/*
 			Handle insertion of a new package version
 		*/

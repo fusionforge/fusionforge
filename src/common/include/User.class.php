@@ -1603,7 +1603,7 @@ Enjoy the site.
 	function getMailingsPrefs($mailing_id) {
 		if ($mailing_id == 'va') {
 			return $this->data_array['mail_va'];
-		} else if ($mailing_id == 'site') {
+		} elseif ($mailing_id == 'site') {
 			return $this->data_array['mail_siteupdates'];
 		} else {
 			return 0;

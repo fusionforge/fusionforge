@@ -62,7 +62,7 @@ if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 $sq = new SurveyQuestion($g, $question_id);
 if (!$sq || !is_object($sq)) {
     echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</div>";
-} else if ( $sq->isError()) {
+} elseif ( $sq->isError()) {
     echo '<div class="error">'._('Error'). $sq->getErrorMessage() ."</div>";
 }
 
@@ -78,7 +78,7 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
 	$msg = _('Delete successful');
         echo '<p class="feedback">' .$msg ."</p>";
     }
-} else if (getStringFromRequest('post')=="Y") {
+} elseif (getStringFromRequest('post')=="Y") {
     /* Modification */
     if ($question_id) {
 	$sq->update($question, $question_type);

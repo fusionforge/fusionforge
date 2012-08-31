@@ -148,11 +148,11 @@ for ($i=0; $i<$count; $i++) {
 				GraphResult($result2,stripslashes(db_result($result, 0, "question")));
 			}
 		}// end if (responses to survey question present)
-	} else if ($question_type == "2") { // This is a text-area question.
+	} elseif ($question_type == "2") { // This is a text-area question.
 		echo db_result($result, 0, "question")."<br />\n";
 		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">"._('View All Comments')."</a>";
 
-	} else if ($question_type == "3") { // 	This is a Yes/No question.
+	} elseif ($question_type == "3") { // 	This is a Yes/No question.
 	  //	Show the Yes/No only if this is the first in a series
 		if ($question_type != $last_question_type) {
 			echo "<strong>"._('Yes / No')."</strong><br />\n";
@@ -214,12 +214,12 @@ for ($i=0; $i<$count; $i++) {
 
 		GraphIt($name_array,$value_array,stripslashes(db_result($result, 0, "question")));
 
-	} else if ($question_type == "4") {
+	} elseif ($question_type == "4") {
 
 		echo "&nbsp;<p><strong>".db_result($result, 0, "question")."</strong></p>\n";
 		echo "<input type=\"hidden\" name=\"_".$quest_array[$i]."\" value=\"-666\" />";
 
-	} else if ($question_type == "5") { // This is a text-field question.
+	} elseif ($question_type == "5") { // This is a text-field question.
 		echo db_result($result, 0, "question")."<br />\n";
 
 		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">"._('View All Comments')."</a>";

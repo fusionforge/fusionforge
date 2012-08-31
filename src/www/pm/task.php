@@ -242,7 +242,7 @@ switch (getStringFromRequest('func')) {
 			$pt=new ProjectTask($pg,$project_task_id_list[$i]);
 			if (!$pt || !is_object($pt)) {
 				$error_msg .= ' ID: '.$project_task_id_list[$i].'::ProjectTask Could Not Be Created';
-			} else if ($pt->isError()) {
+			} elseif ($pt->isError()) {
 				$error_msg .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
 			} else {
 
@@ -264,7 +264,7 @@ switch (getStringFromRequest('func')) {
 
 				if ($assigned_to == '100') {
 					$mass_assigned_to = $pt->getAssignedTo();
-				} else if ($assigned_to == '100.1') {
+				} elseif ($assigned_to == '100.1') {
 					$mass_assigned_to = array('100');
 				} else {
 					$mass_assigned_to = array($assigned_to);

@@ -219,7 +219,7 @@ class MailParser extends Error {
 		if (!strcasecmp($string_arr[2], "B") && $string_arr[3]) {
 			$string = base64_decode($string_arr[3]);
 			$charset = $string_arr[1];
-		} else if (!strcasecmp($string_arr[2], "Q") && $string_arr[3]) {
+		} elseif (!strcasecmp($string_arr[2], "Q") && $string_arr[3]) {
 			$string = quoted_printable_decode($string_arr[3]);
 			$charset = $string_arr[1];
 		}

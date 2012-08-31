@@ -44,13 +44,13 @@ site_admin_header(array('title'=>_('Admin Search Results')));
 function format_name($name, $status) {
 	if ($status == 'D') {
 		return "<strong><strike>$name</strike></strong>";
-	} else if ($status == 'S') {
+	} elseif ($status == 'S') {
 		return "<strong><span style=\"text-decoration:underline\">$name</span></strong>";
-	} else if ($status == 'H') {
+	} elseif ($status == 'H') {
 		return "<strong><span style=\"text-decoration:underline\">$name</span></strong>";
-	} else if ($status == 'P') {
+	} elseif ($status == 'P') {
 		return "<strong><em>$name</em></strong>";
-	} else if ($status == 'I') {
+	} elseif ($status == 'I') {
 		return "<strong><em>$name</em></strong>";
 	}
 

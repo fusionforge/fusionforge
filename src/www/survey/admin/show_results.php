@@ -69,7 +69,7 @@ if ($survey_id) {
 		echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey') ."</p>";
 		$sh->footer(array());
 		exit;
-    } else if ( $s->isError()) {
+    } elseif ( $s->isError()) {
 		echo '<p class="error">'._('Error'). $s->getErrorMessage() ."</p>";
 		$sh->footer(array());
 		exit;
@@ -82,7 +82,7 @@ if ($survey_id) {
 		$sq = new SurveyQuestion($g, $question_id);
 		if (!$sq || !is_object($sq)) {
 	    	echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</p>";
-		} else if ($sq->isError()) {
+		} elseif ($sq->isError()) {
 	    	echo '<p class="error">'._('Error'). $sq->getErrorMessage() ."</p>";
 		} else {
 	    	showResult($sh, $s, $sq, 1, 0, $graph);
@@ -131,7 +131,7 @@ function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
     $srf = new SurveyResponseFactory($Survey, $Question);
     if (!$srf || !is_object($srf)) {
 	echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Response Factory') ."</p>";
-    } else if ( $srf->isError()) {
+    } elseif ( $srf->isError()) {
 	echo '<p class="error">'._('Error'). $srf->getErrorMessage() ."</p>";
     } else {
         /* Show result in HTML*/

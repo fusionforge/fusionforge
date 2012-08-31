@@ -48,11 +48,11 @@ function tokenize($line) {
 			# It's a number
 			$out[] = $regs[0];
 			$line = substr($line, strlen($regs[0]));
-		} else if (preg_match('/^[A-Za-z][A-Za-z0-9_]+/', $line, $regs)) {
+		} elseif (preg_match('/^[A-Za-z][A-Za-z0-9_]+/', $line, $regs)) {
 			# It's a word
 			$out[] = $regs[0];
 			$line = substr($line, strlen($regs[0]));
-		} else if (preg_match('/^"[^"]*"/', $line, $regs)) {
+		} elseif (preg_match('/^"[^"]*"/', $line, $regs)) {
 			# It's a string
 			# we need to take care of embedded escaped quotes'\"'
 			$outstr='';

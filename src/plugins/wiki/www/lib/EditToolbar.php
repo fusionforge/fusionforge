@@ -302,7 +302,7 @@ msg_repl_close     = '"._("Close")."'
         $page = $p->getName();
                 if (FUSIONFORGE) {
                     $categories[] = "['$page', '%0A----%0A%5B%5B".$page."%5D%5D']";
-        } else if (DISABLE_MARKUP_WIKIWORD or (!isWikiWord($page))) {
+        } elseif (DISABLE_MARKUP_WIKIWORD or (!isWikiWord($page))) {
             $categories[] = "['$page', '%0A%5B".$page."%5D']";
         } else {
             $categories[] = "['$page', '%0A".$page."']";

@@ -222,7 +222,7 @@ class ForumMessageFactory extends Error {
 		if (!$result) {
 			$this->setError('Error when fetching messages '.db_error());
 			return false;
-		} else if ($rows < 1) {
+		} elseif ($rows < 1) {
 			$this->forum_messages = array();
 		} else {
 			while ($arr = db_fetch_array($result)) {

@@ -222,7 +222,7 @@ class GitPlugin extends SCMPlugin {
 				$user = user_get_object($params['user_id']);
 				echo $project->getUnixName().'/users/'.$user->getUnixName();
 				print '<iframe src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/users/'.$user->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>' ;
-			} else if ($this->browserDisplayable($project)) {
+			} elseif ($this->browserDisplayable($project)) {
 				print '<iframe src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>' ;
 			}
 		}
@@ -436,7 +436,7 @@ class GitPlugin extends SCMPlugin {
 					continue;
 				$result = $this->getRepositories($fullname);
 				$list = array_merge($list, $result);
-			} else if ($entry == "HEAD") {
+			} elseif ($entry == "HEAD") {
 				$list[] = $path;
 			}
 		}

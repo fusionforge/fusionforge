@@ -201,11 +201,11 @@ class ArtifactTypeHtml extends ArtifactType {
 						}
 						$value = join('<br />', $new);
 					}
-				} else if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
+				} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 					$value = preg_replace('/((http|https|ftp):\/\/\S+)/',
 								"<a href=\"\\1\" target=\"_blank\">\\1</a>", $value);
-				} else if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+				} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 					// Convert artifact id to links.
 					$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
 				}

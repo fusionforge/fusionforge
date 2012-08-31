@@ -230,7 +230,7 @@ class SurveyHTML extends Error {
 			/* Fill the remain cells */
 			if ($i%3==1) {
 				$ret.='<td>&nbsp;</td><td>&nbsp;</td></tr>';
-			} else if ($i%3==2) {
+			} elseif ($i%3==2) {
 				$ret.='<td>&nbsp;</td></tr>';
 			}
 

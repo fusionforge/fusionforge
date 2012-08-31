@@ -27,7 +27,7 @@ class Docman {
     	$group =& group_get_object($group_id);
 		if (!$group || !is_object($group)) {
 			print "error retrieving group from id";
-		} else if ($group->isError()) {
+		} elseif ($group->isError()) {
 			print "error";
 		}
 		$this->group = $group;

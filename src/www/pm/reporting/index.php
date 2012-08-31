@@ -185,7 +185,7 @@ AND project_group_list.group_id=$3 ',
 
 		pm_footer(array());
 
-	} else if ($what=="subproject") {
+	} elseif ($what=="subproject") {
 		$qpa1 = db_construct_qpa (false,
 					  'SELECT project_group_list.project_name AS Subproject, count(*) AS Count
 FROM project_group_list,project_task
@@ -211,7 +211,7 @@ GROUP BY Subproject',
 			  _('Open Tasks By Category'), $qpa1,
 			  _('All Tasks By Category'), $qpa2);
 
-	} else if ($what=="tech") {
+	} elseif ($what=="tech") {
 		$qpa1 = db_construct_qpa(false, 'SELECT users.user_name AS Technician, count(*) AS Count
 FROM users,project_group_list,project_task,project_assigned_to
 WHERE users.user_id=project_assigned_to.assigned_to_id

@@ -87,7 +87,7 @@ extends WikiPlugin
         if (! $noheader) {
             if ($limit > 0) {
                 $pagelist->setCaption(fmt("The %d most popular pages of this wiki:", $limit));
-            } else if ($limit < 0) {
+            } elseif ($limit < 0) {
                 $pagelist->setCaption(fmt("The %d least popular pages of this wiki:", -$limit));
             } else {
                 $pagelist->setCaption(_("Visited pages on this wiki, ordered by popularity:"));

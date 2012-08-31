@@ -161,7 +161,7 @@ if ($u->getStatus() == 'D') {
 		_('Active (A)'),
 		_('Suspended (S)'),
 		_('Deleted (D)'));
-} else if ($u->getStatus() == 'P') {
+} elseif ($u->getStatus() == 'P') {
 	$status_letter = array('P','A','S');
 	$status_text   = array(_('Pending (P)'),
 		_('Active (A)'),

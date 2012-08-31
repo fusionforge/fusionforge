@@ -358,15 +358,15 @@ function LinkBracketLink($bracketlink) {
     // Remove spaces before and after ":", if any
     if (string_starts_with($rawlink, "Upload")) {
         $rawlink = preg_replace("/^Upload\\s*:\\s*/", "Upload:", $rawlink);
-    } else if (string_starts_with($rawlink, "upload")) {
+    } elseif (string_starts_with($rawlink, "upload")) {
         $rawlink = preg_replace("/^upload\\s*:\\s*/", "Upload:", $rawlink);
-    } else if (string_starts_with($rawlink, "Image")) {
+    } elseif (string_starts_with($rawlink, "Image")) {
         $rawlink = preg_replace("/^Image\\s*:\\s*/", "Upload:", $rawlink);
-    } else if (string_starts_with($rawlink, "image")) {
+    } elseif (string_starts_with($rawlink, "image")) {
         $rawlink = preg_replace("/^image\\s*:\\s*/", "Upload:", $rawlink);
-    } else if (string_starts_with($rawlink, "File")) {
+    } elseif (string_starts_with($rawlink, "File")) {
         $rawlink = preg_replace("/^File\\s*:\\s*/", "Upload:", $rawlink);
-    } else if (string_starts_with($rawlink, "file")) {
+    } elseif (string_starts_with($rawlink, "file")) {
         $rawlink = preg_replace("/^file\\s*:\\s*/", "Upload:", $rawlink);
     }
 
@@ -411,7 +411,7 @@ function LinkBracketLink($bracketlink) {
         if (preg_match('/^\.\.\//', $link)) {
             return new Cached_ExternalLink($link, $label);
         }
-    } else if (preg_match('/^(\.\.\/|\/)/', $link)) {
+    } elseif (preg_match('/^(\.\.\/|\/)/', $link)) {
         return new Cached_ExternalLink($link, $label);
     }
 
@@ -1098,7 +1098,7 @@ class Markup_template_plugin  extends SimpleMarkup
         if (is_image($imagename)) {
             if ((strpos($imagename, "http://") === 0) || (strpos($imagename, "https://") === 0)) {
                 return LinkImage($imagename, $alt);
-            } else if ($imagename[0] == '/') {
+            } elseif ($imagename[0] == '/') {
                 return LinkImage(DATA_PATH . '/' . $imagename, $alt);
             } else {
                 return LinkImage(getUploadDataPath() . $imagename, $alt);

@@ -117,7 +117,7 @@ function my_format_as_flag($assigned_to, $submitted_by, $multi_assigned_to=null)
     $AS_flag = '';
     if ($assigned_to == user_getid()) {
         $AS_flag = 'A';
-    } else if ($multi_assigned_to) {
+    } elseif ($multi_assigned_to) {
      // For multiple assigned to
        for ($i=0; $i<count($multi_assigned_to); $i++) {
             if ($multi_assigned_to[$i]==user_getid()) {

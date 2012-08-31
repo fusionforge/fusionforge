@@ -64,7 +64,7 @@ $selected = 0; // No item selected by default
 if (getStringFromRequest('addtab') != '') {
 	if ($tab_name == '' || $tab_url == '' || $tab_url == 'http://') {
 		$error_msg = _('ERROR: Missing Name or URL for the new tab');
-	} else if (!util_check_url($tab_url)) {
+	} elseif (!util_check_url($tab_url)) {
 		$error_msg = _('ERROR: Malformed URL (only http, https and ftp allowed)');
 	} else {
 		$res = db_query_params('SELECT * FROM plugin_extratabs_main WHERE group_id=$1 AND tab_name=$2',

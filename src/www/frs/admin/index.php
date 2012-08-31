@@ -95,7 +95,7 @@ if (getStringFromRequest('submit')) {
 			$feedback .= _('Deleted');
 		}
 
-	} else if ($func == 'update_package' && $package_id && $package_name) {
+	} elseif ($func == 'update_package' && $package_id && $package_name) {
 		$frsp = new FRSPackage($project, $package_id);
 		if (!$frsp || !is_object($frsp)) {
 			exit_error(_('Could Not Get FRS Package'), 'frs');

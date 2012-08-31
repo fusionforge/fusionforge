@@ -137,9 +137,9 @@ $usingplugin = getStringFromRequest('usingplugin');
 
 if ($action=='delete') {
 	performAction('D', "DELETED", $user_id);
-} else if ($action=='activate') {
+} elseif ($action=='activate') {
 	performAction('A', "ACTIVE", $user_id);
-} else if ($action=='suspend') {
+} elseif ($action=='suspend') {
 	performAction('S', "SUSPENDED", $user_id);
 }
 
@@ -151,7 +151,7 @@ if ($usingplugin) {
 	$res = db_query_params ('SELECT u.user_id FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id', array($usingplugin));
 	show_users_list(user_get_objects(util_result_column_to_array($res,0)));
 
-} else if (!$group_id) {
+} elseif (!$group_id) {
 	$user_name_search = getStringFromRequest('user_name_search');
 
 	print "<p>" ._('User list for ') . "<strong>" ._('All Projects'). "</strong></p>";

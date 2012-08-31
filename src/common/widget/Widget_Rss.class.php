@@ -190,21 +190,21 @@ require_once('Widget.class.php');
 
 		if ($distance_in_minutes <= 1) {
 			return ($distance_in_minutes == 0) ? _('less than 1 minute') : _('1 minute');
-		} else if ($distance_in_minutes <= 44) {
+		} elseif ($distance_in_minutes <= 44) {
 			return vsprintf(_('%s minutes ago'), $distance_in_minutes);
-		} else if ($distance_in_minutes <= 89) {
+		} elseif ($distance_in_minutes <= 89) {
 			return _('About one hour') ;
-		} else if ($distance_in_minutes <= 1439) {
+		} elseif ($distance_in_minutes <= 1439) {
 			return vsprintf(_('about %s hours'), round($distance_in_minutes/60));
-		} else if ($distance_in_minutes <= 2879) {
+		} elseif ($distance_in_minutes <= 2879) {
 			return _('About one day') ;
-		} else if ($distance_in_minutes <= 43199) {
+		} elseif ($distance_in_minutes <= 43199) {
 			return vsprintf(_('%s days ago'), round($distance_in_minutes/1440));
-		} else if ($distance_in_minutes <= 86399) {
+		} elseif ($distance_in_minutes <= 86399) {
 			return _('About one month') ;
-		} else if ($distance_in_minutes <= 525959) {
+		} elseif ($distance_in_minutes <= 525959) {
 			return vsprintf(_('%s months ago'), round($distance_in_minutes/43200));
-		} else if ($distance_in_minutes <= 1051919) {
+		} elseif ($distance_in_minutes <= 1051919) {
 			return _('About one year') ;
 		} else {
 			return vsprintf(_('over %s years'), round($distance_in_minutes/525960));

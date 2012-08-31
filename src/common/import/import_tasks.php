@@ -16,7 +16,7 @@ class Tasks{
 		$this->group =& group_get_object($group_id);
 		if (!$this->group || !is_object($this->group)) {
 			print "error retrieving group from id";
-		} else if ($this->group->isError()) {
+		} elseif ($this->group->isError()) {
 			print "error";
 		}
 		$this->hashrn=array();

@@ -215,15 +215,15 @@ class ProjectTaskHTML extends ProjectTask {
 //tdP - convert to actual status name
 					echo db_result($result, $i, 'old_value');
 
-				} else if ($field == 'category_id') {
+				} elseif ($field == 'category_id') {
 //tdP convert to actual category_name
 					echo db_result($result, $i, 'old_value');
 
-				} else if ($field == 'start_date') {
+				} elseif ($field == 'start_date') {
 
 					echo date('Y-m-d',db_result($result, $i, 'old_value'));
 
-				} else if ($field == 'end_date') {
+				} elseif ($field == 'end_date') {
 
 					echo date('Y-m-d',db_result($result, $i, 'old_value'));
 

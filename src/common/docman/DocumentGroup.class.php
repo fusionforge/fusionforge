@@ -780,7 +780,7 @@ class DocumentGroup extends Error {
 								return false;
 							}
 						}
-					} else if (is_file($directory.'/'.$dir_arr[$i])) {
+					} elseif (is_file($directory.'/'.$dir_arr[$i])) {
 						$d = new Document($this->getGroup());
 						if (function_exists('finfo_open')) {
 							$finfo = finfo_open(FILEINFO_MIME_TYPE);

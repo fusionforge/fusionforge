@@ -109,7 +109,7 @@ class HTTPRequest extends Codendi_Request {
     function _stripslashes($value) {
         if (is_string($value)) {
             $value = stripslashes($value);
-        } else if (is_array($value)) {
+        } elseif (is_array($value)) {
             foreach($value as $key => $val) {
                 $value[$key] = $this->_stripslashes($val);
             }

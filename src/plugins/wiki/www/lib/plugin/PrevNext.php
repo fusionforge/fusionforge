@@ -79,7 +79,7 @@ extends WikiPlugin
         if ($align == 'center') {
             $tr = HTML::tr();
             $links = HTML::table(array('cellpadding' => 0, 'cellspacing' => 0, 'width' => '100%'), $tr);
-        } else if ($align == 'right') {
+        } elseif ($align == 'right') {
             $td = HTML::td(array('align' => $align));
             $links = HTML::table(array('cellpadding' => 0, 'cellspacing' => 0, 'width' => '100%'), HTML::tr($td));
         } else {
@@ -92,7 +92,7 @@ extends WikiPlugin
             }
             if ($align == 'center') {
                 $tr->pushContent(HTML::td(array('align' => $align), " [ "));
-            } else if ($align == 'right') {
+            } elseif ($align == 'right') {
                 $td->pushcontent(" [ ");
             } else {
                 $links->pushcontent(" [ ");
@@ -110,7 +110,7 @@ extends WikiPlugin
                         if ($last_is_text) {
                             if ($align == 'center') {
                                 $tr->pushContent(HTML::td(array('align' => $align), $sep));
-                            } else if ($align == 'right') {
+                            } elseif ($align == 'right') {
                                 $td->pushcontent($sep);
                             } else {
                                 $links->pushcontent($sep);
@@ -118,7 +118,7 @@ extends WikiPlugin
                         }
                         if ($align == 'center') {
                             $tr->pushContent(HTML::td(array('align' => $align), new ImageButton($label, $url, false, $imgurl)));
-                        } else if ($align == 'right') {
+                        } elseif ($align == 'right') {
                             $td->pushContent(new ImageButton($label, $url, false, $imgurl));
                         } else {
                             $links->pushcontent(new ImageButton($label, $url, false, $imgurl));
@@ -129,7 +129,7 @@ extends WikiPlugin
                         if ($last_is_text) {
                             if ($align == 'center') {
                                 $tr->pushContent(HTML::td(array('align' => $align), $sep));
-                            } else if ($align == 'right') {
+                            } elseif ($align == 'right') {
                                 $td->pushcontent($sep);
                             } else {
                                 $links->pushcontent($sep);
@@ -137,7 +137,7 @@ extends WikiPlugin
                         }
                         if ($align == 'center') {
                             $tr->pushContent(HTML::td(array('align' => $align), new ImageButton($label, $url, false, $imgurl)));
-                        } else if ($align == 'right') {
+                        } elseif ($align == 'right') {
                             $td->pushContent(new ImageButton($label, $url, false, $imgurl));
                         } else {
                             $links->pushcontent(new ImageButton($label, $url, false, $imgurl));
@@ -147,7 +147,7 @@ extends WikiPlugin
                         if (! $this_is_first) {
                             if ($align == 'center') {
                                 $tr->pushContent(HTML::td(array('align' => $align), $sep));
-                            } else if ($align == 'right') {
+                            } elseif ($align == 'right') {
                                 $td->pushcontent($sep);
                             } else {
                                 $links->pushcontent($sep);
@@ -155,7 +155,7 @@ extends WikiPlugin
                         }
                         if ($align == 'center') {
                             $tr->pushContent(HTML::td(array('align' => $align), new Button($label, $url, $class)));
-                        } else if ($align == 'right') {
+                        } elseif ($align == 'right') {
                             $td->pushContent(new Button($label, $url, $class));
                         } else {
                             $links->pushcontent(new Button($label, $url, $class));
@@ -166,7 +166,7 @@ extends WikiPlugin
                     if (! $this_is_first) {
                         if ($align == 'center') {
                             $tr->pushContent(HTML::td(array('align' => $align), $sep));
-                        } else if ($align == 'right') {
+                        } elseif ($align == 'right') {
                             $td->pushcontent($sep);
                         } else {
                             $links->pushcontent($sep);
@@ -174,7 +174,7 @@ extends WikiPlugin
                     }
                     if ($align == 'center') {
                         $tr->pushContent(HTML::td(array('align' => $align), new Button($label, $url, $class)));
-                    } else if ($align == 'right') {
+                    } elseif ($align == 'right') {
                         $td->pushContent(new Button($label, $url, $class));
                     } else {
                         $links->pushcontent(new Button($label, $url, $class));
@@ -187,7 +187,7 @@ extends WikiPlugin
         if ($style == 'text') {
             if ($align == 'center') {
                 $tr->pushContent(HTML::td(array('align' => $align), " ] "));
-            } else if ($align == 'right') {
+            } elseif ($align == 'right') {
                 $td->pushcontent(" ] ");
             } else {
                 $links->pushcontent(" ] ");

@@ -116,7 +116,7 @@ if (getStringFromRequest('submit')) {
 				}
 			}
 		}
-	} else if (getStringFromRequest('rmuser')) {
+	} elseif (getStringFromRequest('rmuser')) {
 		/* Remove a member from this project */
 		$user_id = getIntFromRequest('user_id');
 		$role_id = getIntFromRequest('role_id');
@@ -131,7 +131,7 @@ if (getStringFromRequest('submit')) {
 		} else {
 			$feedback = _("Member Removed Successfully");
 		}
-	} else if (getStringFromRequest('updateuser')) {
+	} elseif (getStringFromRequest('updateuser')) {
 		/* Adjust Member Role */
 		$user_id = getIntFromRequest('user_id');
 		$role_id = getIntFromRequest('role_id');
@@ -178,7 +178,7 @@ if (getStringFromRequest('submit')) {
 				$feedback .= 'Rejected';
 			}
 		}
-	} else if (getStringFromRequest('linkrole')) {
+	} elseif (getStringFromRequest('linkrole')) {
 		/* link a role to this project */
 		$role_id = getIntFromRequest('role_id');
 		foreach ($unused_external_roles as $r) {
@@ -191,7 +191,7 @@ if (getStringFromRequest('submit')) {
 				}
 			}
 		}
-	} else if (getStringFromRequest('unlinkrole')) {
+	} elseif (getStringFromRequest('unlinkrole')) {
 		/* unlink a role from this project */
 		$role_id = getIntFromRequest('role_id');
 		foreach ($used_external_roles as $r) {

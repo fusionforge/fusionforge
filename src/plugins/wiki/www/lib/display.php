@@ -367,10 +367,10 @@ function displayPage(&$request, $template=false) {
     if ($pagename == _("SandBox")) {
         $robots = "noindex,nofollow";
         $toks['ROBOTS_META'] = $robots;
-    } else if (isActionPage($pagename)) {
+    } elseif (isActionPage($pagename)) {
         $robots = "noindex,nofollow";
         $toks['ROBOTS_META'] = $robots;
-    } else if (!isset($toks['ROBOTS_META'])) {
+    } elseif (!isset($toks['ROBOTS_META'])) {
         $robots = "index,follow";
         $toks['ROBOTS_META'] = $robots;
     }

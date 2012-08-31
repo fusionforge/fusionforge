@@ -102,7 +102,7 @@ class Survey extends Error {
 			$this->setError(_('Update Failed: Survey Title Required'));
 			return false;
 			/* We need at least one survey question at this point */
-		} else if (!$add_questions || !is_array($add_questions) || count($add_questions)<1) {
+		} elseif (!$add_questions || !is_array($add_questions) || count($add_questions)<1) {
 			$this->setError(_('Update Failed: Survey Questions Required'));
 			return false;
 		}

@@ -472,7 +472,7 @@ extends WikiDB_backend
                 $returnVal[] = $key;
                 $limit--;
             }
-        } else if ( isset( $params['since'] ) ) {
+        } elseif ( isset( $params['since'] ) ) {
             while ( (list($key, $val) = each($a)) ) {
               
                 if ( $val > $params['since'] ) {

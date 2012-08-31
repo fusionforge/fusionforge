@@ -35,7 +35,7 @@ print   ('
 	function validate() {
 		if ( document.issue.resume.value.length == 0 ) {
 		alert ("champ Résumé obligatoire");
-		} else if ( document.issue.description.value.length == 0 ) {
+		} elseif ( document.issue.description.value.length == 0 ) {
 		alert ("champ Description obligatoire");
 		} else {
 		document.issue.submit();

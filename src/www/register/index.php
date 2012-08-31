@@ -134,7 +134,7 @@ if (getStringFromRequest('submit')) {
 
 		if ( ! forge_get_config ('project_auto_approval') ) {
 			printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
-		} else if ($group->isError()) {
+		} elseif ($group->isError()) {
 			printf(_('<div class="error">ERROR: %1$s</div>'), $group->getErrorMessage() );
 		} else {
 			printf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
@@ -149,7 +149,7 @@ if (getStringFromRequest('submit')) {
 		site_footer(array());
 		exit();
 	}
-} else if (getStringFromRequest('i_disagree')) {
+} elseif (getStringFromRequest('i_disagree')) {
 	session_redirect("/");
 }
 

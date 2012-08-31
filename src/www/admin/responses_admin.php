@@ -95,7 +95,7 @@ if( $action == "Edit" ) {
 <?php
 	}
 
-} else if ( $action == "Delete" ) {
+} elseif ( $action == "Delete" ) {
 	$response_id = getIntFromRequest('response_id');
 	$sure = getStringFromRequest('sure');
 
@@ -111,7 +111,7 @@ if( $action == "Edit" ) {
 		print("<em>" ._('By the way, I didn\'t delete... just in case...')."</em><br />\n");
 	}
 
-} else if ( $action == "Create" ) {
+} elseif ( $action == "Create" ) {
 	$response_title = getStringFromRequest('response_title');
 	$response_text = getStringFromRequest('response_text');
 

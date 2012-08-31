@@ -1531,7 +1531,7 @@ class Artifact extends Error {
 	function marker($prop_name,$changes,$extra_field_id=0) {
 		if ($prop_name == 'extra_fields' && isset($changes[$prop_name][$extra_field_id])) {
 			return '>';
-		} else if ($prop_name != 'extra_fields' && isset($changes[$prop_name])) {
+		} elseif ($prop_name != 'extra_fields' && isset($changes[$prop_name])) {
 			return '>';
 		} else {
 			return '';

@@ -84,7 +84,7 @@ $df->setStateID('4');
 $d_arr_hidden =& $df->getDocuments();
 if ($d_arr != NULL && $d_arr_hidden != NULL) {
 	$d_arr = array_merge($d_arr, $d_arr_hidden);
-} else if ($d_arr_hidden != NULL) {
+} elseif ($d_arr_hidden != NULL) {
 	$d_arr = $d_arr_hidden;
 }
 
@@ -92,7 +92,7 @@ $df->setStateID('5');
 $d_arr_private =& $df->getDocuments();
 if ($d_arr != NULL && $d_arr_private != NULL) {
 	$d_arr = array_merge($d_arr, $d_arr_private);
-} else if ($d_arr_private != NULL) {
+} elseif ($d_arr_private != NULL) {
 		$d_arr = $d_arr_private;
 }
 

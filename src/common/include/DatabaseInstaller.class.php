@@ -70,7 +70,7 @@ class DatabaseInstaller extends Error {
 					array ($prefix.$script['filename'])) ;
 				if (!$res) {
 					return $this->setError("ERROR-2: ".db_error());
-				} else if (db_numrows($res) == 0) {
+				} elseif (db_numrows($res) == 0) {
 					$output .= "Running script: {$script['filename']}\n";
 					$result = $this->_runScript($path.'/'.$script['filename']);
 					if ($result) {
@@ -95,7 +95,7 @@ class DatabaseInstaller extends Error {
 		$res = db_query_params ('SELECT * FROM database_startpoint', array()) ;
 		if (!$res) { // db error
 			return $this->setError("DB-ERROR-3: ".db_error()."\n");
-		} else if (db_numrows($res) == 0) { // table 'database_startpoint' is empty
+		} elseif (db_numrows($res) == 0) { // table 'database_startpoint' is empty
 			return $this->setError("Table 'database_startpoint' is empty, run startpoint.php first.");
 		}
 		return (int) db_result($res, 0, 'db_start_date');

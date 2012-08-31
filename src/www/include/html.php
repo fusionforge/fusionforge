@@ -167,7 +167,7 @@ function html_get_theme_popup($title='theme_id', $selected='xzxz') {
 			'name' => $title,
 			'value' => db_result($res, 0, 'theme_id'),
 		    ));
-	} else if ($nbTheme < 1) {
+	} elseif ($nbTheme < 1) {
 		return("");
 	} else {
 		return html_build_select_box($res,$title,$selected,false);
@@ -767,7 +767,7 @@ function site_project_header($params) {
 
 	if (!$project || !is_object($project)) {
 		exit_no_group();
-	} else if ($project->isError()) {
+	} elseif ($project->isError()) {
 		if ($project->isPermissionDeniedError()) {
 			if (!session_get_user()) {
  			$next = '/account/login.php?error_msg='.urlencode($project->getErrorMessage());

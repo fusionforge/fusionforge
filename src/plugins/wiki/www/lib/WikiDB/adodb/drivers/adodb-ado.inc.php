@@ -76,7 +76,7 @@ class ADODB_ado extends ADOConnection {
 			
 			//use trusted conection for SQL if username not specified
 			if (!$argUsername) $argHostname .= ";Trusted_Connection=Yes";
-		} else if ($argProvider=='access')
+		} elseif ($argProvider=='access')
 			$argProvider = "Microsoft.Jet.OLEDB.4.0"; // Microsoft Jet Provider
 		
 		if ($argProvider) $dbc->Provider = $argProvider;	

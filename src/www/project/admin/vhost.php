@@ -37,7 +37,7 @@ $group = group_get_object($group_id);
 
 if (!$group || !is_object($group)) {
         exit_error('Error','Error creating group object');
-} else if ($group->isError()) {
+} elseif ($group->isError()) {
         exit_error('ERROR',$group->getErrorMessage());
 }
 

@@ -107,7 +107,7 @@ function _adodb_getmenu(&$zthis, $name,$defstr='',$blank1stItem=true,$multiple=f
 		if ($size==0) $size=5;
 		$attr = " multiple size=$size";
 		if (!strpos($name,'[]')) $name .= '[]';
-	} else if ($size) $attr = " size=$size";
+	} elseif ($size) $attr = " size=$size";
 	else $attr ='';
 
 	$s = "<select name=\"$name\"$attr $selectAttr>";
@@ -176,7 +176,7 @@ function _adodb_getcount(&$zthis, $sql,$inputarr=false,$secs2cache=0)
 			$rewritesql = preg_replace('/(\sORDER\s+BY\s.*)/is','',$sql);
 			$rewritesql = "SELECT COUNT(*) FROM ($rewritesql)"; 
 			
-		} else if ( $zthis->databaseType == 'postgres' || $zthis->databaseType == 'postgres7')  {
+		} elseif ( $zthis->databaseType == 'postgres' || $zthis->databaseType == 'postgres7')  {
 			
 			$info = $zthis->ServerInfo();
 			if (substr($info['version'],0,3) >= 7.1) { // good till version 999
@@ -481,7 +481,7 @@ function _adodb_getinsertsql(&$zthis,&$rs,$arrFields,$magicq=false)
 		$recordSet->connection = &$zthis;
 	
 		$columns = $zthis->MetaColumns( $tableName );
-	} else if (is_subclass_of($rs, 'adorecordset')) {
+	} elseif (is_subclass_of($rs, 'adorecordset')) {
 		for ($i=0, $max=$rs->FieldCount(); $i < $max; $i++) 
 			$columns[] = $rs->FetchField($i);
 		$recordSet =& $rs;

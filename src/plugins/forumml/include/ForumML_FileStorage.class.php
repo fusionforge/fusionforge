@@ -112,7 +112,7 @@ class ForumML_FileStorage {
 
         if ($type == "upload") {
         	$path_elements = array($this->root, $type);
-        } else if ($type == "store") {
+        } elseif ($type == "store") {
         	$path_elements = array($this->root, $list, $date);
         }
 

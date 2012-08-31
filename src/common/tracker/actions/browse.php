@@ -596,30 +596,30 @@ if ($art_arr && $art_cnt > 0) {
 				'&amp;group_id='. $group_id .'&amp;atid='.
 				$ath->getID().'">'.$art_arr[$i]->getID() .
 				'</a></td>';
-			} else if ($f == 'summary') {
+			} elseif ($f == 'summary') {
 		 		echo '<td><a href="'.getStringFromServer('PHP_SELF').'?func=detail&amp;aid='.
 				$art_arr[$i]->getID() .
 				'&amp;group_id='. $group_id .'&amp;atid='.
 				$ath->getID().'">'.
 				$art_arr[$i]->getSummary().
 				'</a></td>';
-			} else if ($f == 'open_date') {
+			} elseif ($f == 'open_date') {
 				echo '<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
 				date(_('Y-m-d H:i'),$art_arr[$i]->getOpenDate()) .'</td>';
-			} else if ($f == 'status_id') {
+			} elseif ($f == 'status_id') {
 				echo '<td>'. $art_arr[$i]->getStatusName() .'</td>';
-			} else if ($f == 'priority') {
+			} elseif ($f == 'priority') {
 				echo '<td class="priority'.$art_arr[$i]->getPriority()  .'">'. $art_arr[$i]->getPriority() .'</td>';
-			} else if ($f == 'assigned_to') {
+			} elseif ($f == 'assigned_to') {
 				echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
-			} else if ($f == 'submitted_by') {
+			} elseif ($f == 'submitted_by') {
 				echo '<td>'. $art_arr[$i]->getSubmittedRealName() .'</td>';
-			} else if ($f == 'close_date') {
+			} elseif ($f == 'close_date') {
 				echo '<td>'. ($art_arr[$i]->getCloseDate() ?
 				date(_('Y-m-d H:i'),$art_arr[$i]->getCloseDate()) :'&nbsp; ') .'</td>';
-			} else if ($f == 'details') {
+			} elseif ($f == 'details') {
 				echo '<td>'. $art_arr[$i]->getDetails() .'</td>';
-			} else if ($f == 'related_tasks') {
+			} elseif ($f == 'related_tasks') {
 				echo '<td>';
 				$tasks_res = $art_arr[$i]->getRelatedTasks();
 				$s ='';
@@ -634,15 +634,15 @@ if ($art_arr && $art_cnt > 0) {
 					$s = ' ';
 				}
 				echo '</td>';
-			} else if ($f == 'last_modified_date') {
+			} elseif ($f == 'last_modified_date') {
 				echo '<td>'. ($art_arr[$i]->getLastModifiedDate() ?
 				date(_('Y-m-d H:i'),$art_arr[$i]->getLastModifiedDate()) :'&nbsp; ') .'</td>';
-			} else if (intval($f) > 0) {
+			} elseif (intval($f) > 0) {
 				// Now display extra-fields (fields are numbers).
 				$value = $extra_data[$f]['value'];
 				if ($extra_data[$f]['type'] == 9) {
 					$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
-				} else if ($extra_data[$f]['type'] == 7) {
+				} elseif ($extra_data[$f]['type'] == 7) {
 					if ($art_arr[$i]->getStatusID() == 2) {
 						$value = '<strike>'.$value.'</strike>';
 					}

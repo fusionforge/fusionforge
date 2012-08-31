@@ -1377,9 +1377,9 @@ function util_path_info_last_numeric_component() {
 		if ($x == '/') {
 			$rv = 0;
 			$ok = true;
-		} else if ($ok == false) {
+		} elseif ($ok == false) {
 			; /* need reset using slash */
-		} else if ((ord($x) >= 48) && (ord($x) <= 57)) {
+		} elseif ((ord($x) >= 48) && (ord($x) <= 57)) {
 			$rv = $rv * 10 + ord($x) - 48;
 		} else {
 			$ok = false;

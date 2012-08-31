@@ -110,7 +110,7 @@ extends WikiPlugin
     function _getCounter(&$counter, $level, $firstlevelstyle) {
         if ($firstlevelstyle == 'roman') {
             $str= $this->_roman_counter($counter[1]);
-        } else if ($firstlevelstyle == 'letter') {
+        } elseif ($firstlevelstyle == 'letter') {
             $str= $this->_letter_counter($counter[1]);
         } else {
             $str=$counter[1];
@@ -252,15 +252,15 @@ extends WikiPlugin
             if (preg_match('/^\s*{\|/', $content[$i])) {
                $insidetable = true;
                continue;
-            } else if (preg_match('/^\s*{{{/', $content[$i]) 
+            } elseif (preg_match('/^\s*{{{/', $content[$i]) 
                     || preg_match('/^\s*<pre>/', $content[$i]) 
                     || preg_match('/^\s*<verbatim>/', $content[$i])) {
                $insideverbatim = true;
                continue;
-            } else if (preg_match('/^\s*\|}/', $content[$i])) {
+            } elseif (preg_match('/^\s*\|}/', $content[$i])) {
                $insidetable = false;
                continue;
-            } else if (preg_match('/^\s*}}}/', $content[$i]) 
+            } elseif (preg_match('/^\s*}}}/', $content[$i]) 
                     || preg_match('/^\s*<\/pre>/', $content[$i]) 
                     || preg_match('/^\s*<\/verbatim>/', $content[$i])) {
                $insideverbatim = false;

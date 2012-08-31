@@ -46,7 +46,7 @@ function activate_group($group_id) {
 	if (!$group || !is_object($group)) {
 		$error_msg .= _('Error creating group object');
 		return false;
-	} else if ($group->isError()) {
+	} elseif ($group->isError()) {
 		$error_msg .= $group->getErrorMessage();
 		return false;
 	}
@@ -70,7 +70,7 @@ if ($action == 'activate') {
 	$groups = explode(',', $list_of_groups);
 	array_walk($groups, 'activate_group');
 
-} else if ($action == 'delete') {
+} elseif ($action == 'delete') {
 	$group_id = getIntFromRequest('group_id');
 	$response_id = getIntFromRequest('response_id');
 	$add_to_can = getStringFromRequest('add_to_can');

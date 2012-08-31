@@ -39,9 +39,9 @@ if (isset ($sys_noforcetype) && $sys_noforcetype) {
 		$user =& user_get_object($user_id);
 		if (!$user || !is_object($user)) {
 			    exit_error(_('Invalid User'),'home');
-		} else if ( $user->isError()) {
+		} elseif ( $user->isError()) {
 			    exit_error($user->isError(),'home');
-		} else if ( !$user->isActive()) {
+		} elseif ( !$user->isActive()) {
 			    exit_error(_('User not active'),'home');
 		}
 

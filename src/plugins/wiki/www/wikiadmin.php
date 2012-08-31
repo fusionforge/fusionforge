@@ -51,9 +51,9 @@ $user = session_get_user(); // get the session user
 
 if (!$user || !is_object($user)) {
     exit_error(_('Invalid User'),'home');
-} else if ( $user->isError()) {
+} elseif ( $user->isError()) {
     exit_error($user->getErrorMessage(),'home');
-} else if ( !$user->isActive()) {
+} elseif ( !$user->isActive()) {
     exit_error(_('User not active'),'home');
 }
 

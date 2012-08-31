@@ -57,7 +57,7 @@ if ($by=='lang') {
 	$qpa2 = db_construct_qpa ($qpa2, ' AND snippet_package.language=$1', array ($lang)) ;
 
 	echo '<h2>' .sprintf(_('Snippets by language: %1$s'), $SCRIPT_LANGUAGE[$lang]).'</h2>';
-} else if ($by=='cat') {
+} elseif ($by=='cat') {
 	$cat = getStringFromRequest('cat');
 
 	$qpa = db_construct_qpa ($qpa, ' AND snippet.category=$1', array ($cat)) ;

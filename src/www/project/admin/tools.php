@@ -32,7 +32,7 @@ session_require_perm('project_admin', $group_id);
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_error(_('Error creating group object'), 'admin');
-} else if ($group->isError()) {
+} elseif ($group->isError()) {
 	exit_error($group->getErrorMessage(), 'admin');
 }
 

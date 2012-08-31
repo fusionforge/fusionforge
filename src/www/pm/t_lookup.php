@@ -60,7 +60,7 @@ if (!$ishttps) {
 
 if ($ispublic) {
 	$showall = true;
-} else if ($islogin) {
+} elseif ($islogin) {
 	if (!$isadmin || !$asuser) {
 		/* operate as ourselves */
 		$asuser = session_get_user()->getUnixName();

@@ -73,7 +73,7 @@ extends WikiPlugin_WikiAdminSetAcl
             }
             if (!empty($post_args['aclliberal'])) {
                 return $this->setaclPages($request, array_keys($p), $this->liberalPerms());
-            } else if (!empty($post_args['aclrestricted'])) {
+            } elseif (!empty($post_args['aclrestricted'])) {
                 return $this->setaclPages($request, array_keys($p), $this->restrictedPerms());
             }
         }

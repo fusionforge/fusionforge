@@ -68,7 +68,7 @@ class WidgetLayoutManager {
 				$readonly = !$this->_currentUserCanUpdateLayout($owner_id, $owner_type);
 //				if (!$readonly) {
 //					echo '<p class="customize"><a href="/widgets/widgets.php?owner='. $owner_type.$owner_id .'&amp;layout_id='. $data['id'] .'">'. _("Customize") .'</a></p>';
-//				} else if ($owner_type === self::OWNER_TYPE_GROUP) {
+//				} elseif ($owner_type === self::OWNER_TYPE_GROUP) {
 //					echo '<br />';
 //				}
 				$layout = new WidgetLayout($data['id'], $data['name'], $data['description'], $data['scope']);
@@ -665,7 +665,7 @@ class WidgetLayoutManager {
 				$hp = Codendi_HTMLPurifier::instance();
 				$link = '/projects/'.  $hp->purify($project->getUnixName(), CODENDI_PURIFIER_CONVERT_HTML) ;
 			}
-		} else if ($owner_type == self::OWNER_TYPE_USER) {
+		} elseif ($owner_type == self::OWNER_TYPE_USER) {
 			$link = '/my/';
 		}
 		$GLOBALS['feedback'] .= vsprintf(_('Your <a href="%s">dashboard</a> has been updated.'),  $link);

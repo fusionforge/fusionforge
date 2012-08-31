@@ -299,25 +299,25 @@ class Group extends Error {
 		if ($this->getID()!=0) {
 			$this->setError(_('Group::create: Group object already exists'));
 			return false;
-		} else if (!$this->validateGroupName($group_name)) {
+		} elseif (!$this->validateGroupName($group_name)) {
 			return false;
-		} else if (!account_groupnamevalid($unix_name)) {
+		} elseif (!account_groupnamevalid($unix_name)) {
 			$this->setError(_('Invalid Unix name'));
 			return false;
-		} else if (!$SYS->sysUseUnixName($unix_name)) {
+		} elseif (!$SYS->sysUseUnixName($unix_name)) {
 			$this->setError(_('Unix name already taken'));
 			return false;
-		} else if (db_numrows(db_query_params('SELECT group_id FROM groups WHERE unix_group_name=$1',
+		} elseif (db_numrows(db_query_params('SELECT group_id FROM groups WHERE unix_group_name=$1',
 						      array($unix_name))) > 0) {
 			$this->setError(_('Unix name already taken'));
 			return false;
-		} else if (strlen($purpose)<10) {
+		} elseif (strlen($purpose)<10) {
 			$this->setError(_('Please describe your Registration Purpose in a more comprehensive manner'));
 			return false;
-		} else if (strlen($purpose)>1500) {
+		} elseif (strlen($purpose)>1500) {
 			$this->setError(_('The Registration Purpose text is too long. Please make it smaller than 1500 bytes.'));
 			return false;
-		} else if (strlen($description)<10) {
+		} elseif (strlen($description)<10) {
 			$this->setError(_('Describe in a more comprehensive manner your project.'));
 			return false;
 		} else {
@@ -748,7 +748,7 @@ class Group extends Error {
 
 		/* Otherwise, the group is not active, and make sure that
 		   System group is not active either */
-		} else if ($SYS->sysCheckGroup($this->getID())) {
+		} elseif ($SYS->sysCheckGroup($this->getID())) {
 			if (!$SYS->sysRemoveGroup($this->getID())) {
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();
@@ -2679,10 +2679,10 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		if (strlen($group_name)<3) {
 			$this->setError(_('Group name is too short'));
 			return false;
-		} else if (strlen(htmlspecialchars($group_name))>50) {
+		} elseif (strlen(htmlspecialchars($group_name))>50) {
 			$this->setError(_('Group name is too long'));
 			return false;
-		} else if (group_get_object_by_publicname($group_name)) {
+		} elseif (group_get_object_by_publicname($group_name)) {
 			$this->setError(_('Group name already taken'));
 			return false;
 		}

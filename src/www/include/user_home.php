@@ -165,7 +165,7 @@ print "</p>";
 			       forge_get_config ('forge_name'),
 			       util_make_url ("/account/"));
 
-} else if ($me && !$me->usesRatings()) { ?>
+} elseif ($me && !$me->usesRatings()) { ?>
 <p>
 <em>
 		<?php printf (_('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="%1$s">your account maintenance page</a> for more information.'),

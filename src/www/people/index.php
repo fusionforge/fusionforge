@@ -44,7 +44,7 @@ if ($group_id) {
 
 	echo people_show_project_jobs($group_id) . '</p>';
 
- } else if ($category_id && is_numeric($category_id)) {
+ } elseif ($category_id && is_numeric($category_id)) {
 
 	people_header(array('title'=>_('Help Wanted System')));
 

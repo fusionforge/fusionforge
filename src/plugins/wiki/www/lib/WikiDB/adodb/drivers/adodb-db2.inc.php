@@ -168,8 +168,8 @@ class ADODB_DB2 extends ADODB_odbc {
 			if ($ttype) { 
 				if ($isview) {
 					if (strncmp($type,'V',1) === 0) $arr2[] = $arr[$i][2];
-				} else if (strncmp($type,'T',1) === 0) $arr2[] = $arr[$i][2];
-			} else if (strncmp($type,'S',1) !== 0) $arr2[] = $arr[$i][2];
+				} elseif (strncmp($type,'T',1) === 0) $arr2[] = $arr[$i][2];
+			} elseif (strncmp($type,'S',1) !== 0) $arr2[] = $arr[$i][2];
 		}
 		return $arr2;
 	}

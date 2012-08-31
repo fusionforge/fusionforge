@@ -92,9 +92,9 @@
 
         if (strnatcmp(PHP_VERSION,'4.3.0')>=0) {
             define('ADODB_PHPVER',0x4300);
-        } else if (strnatcmp(PHP_VERSION,'4.2.0')>=0) {
+        } elseif (strnatcmp(PHP_VERSION,'4.2.0')>=0) {
             define('ADODB_PHPVER',0x4200);
-        } else if (strnatcmp(PHP_VERSION,'4.0.5')>=0) {
+        } elseif (strnatcmp(PHP_VERSION,'4.0.5')>=0) {
             define('ADODB_PHPVER',0x4050);
         } else {
             define('ADODB_PHPVER',0x4000);
@@ -328,7 +328,7 @@
             $fn = ADODB_OUTP;
             $fn($msg,$newline);
             return;
-        } else if (isset($ADODB_OUTP)) {
+        } elseif (isset($ADODB_OUTP)) {
             $fn = $ADODB_OUTP;
             $fn($msg,$newline);
             return;
@@ -832,7 +832,7 @@
                 if($emsg = $this->ErrorMsg()) {
                     if ($err = $this->ErrorNo()) ADOConnection::outp($err.': '.$emsg);
                 }
-            } else if (!$this->_queryID) {
+            } elseif (!$this->_queryID) {
                 ADOConnection::outp($this->ErrorNo() .': '. $this->ErrorMsg());
             }
         } else {
@@ -1085,7 +1085,7 @@
                             $ret =& $this->Execute($sql,$inputarr);
                         }
                         return $ret; // PHP5 fix
-                    } else if ($ismssql){
+                    } elseif ($ismssql){
                         $sql = preg_replace(
                         '/(^\s*select\s+(distinctrow|distinct)?)/i','\\1 '.$this->hasTop.' '.$nrows.' ',$sql);
                     } else {
@@ -3145,7 +3145,7 @@
             // is the char field is too long, return as text field...
             if ($this->blobSize >= 0) {
                 if ($len > $this->blobSize) return 'X';
-            } else if ($len > 250) {
+            } elseif ($len > 250) {
                 return 'X';
             }
             return 'C';

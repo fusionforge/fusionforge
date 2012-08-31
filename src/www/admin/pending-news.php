@@ -77,7 +77,7 @@ if ($post_changes) {
 			} else {
 				$feedback .= _('Newsbyte Updated.');
 			}
-		} else if ($status==2) {
+		} elseif ($status==2) {
 			/*
 			  Move msg to deleted status
 			*/
@@ -95,7 +95,7 @@ if ($post_changes) {
 		*/
 		$approve='';
 		$list_queue='y';
-	} else if (getStringFromRequest('mass_reject')) {
+	} elseif (getStringFromRequest('mass_reject')) {
 		/*
 		  Move msg to rejected status
 		*/

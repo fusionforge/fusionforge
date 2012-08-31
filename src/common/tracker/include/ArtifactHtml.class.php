@@ -123,11 +123,11 @@ class ArtifactHtml extends Artifact {
 
 					echo $artifactType->getStatusName(db_result($result, $i, 'old_value'));
 
-				} else if ($field == 'assigned_to') {
+				} elseif ($field == 'assigned_to') {
 
 					echo user_getname(db_result($result, $i, 'old_value'));
 
-				} else if ($field == 'close_date') {
+				} elseif ($field == 'close_date') {
 					if (db_result($result, $i, 'old_value'))
 						echo date(_('Y-m-d H:i'),db_result($result, $i, 'old_value'));
 					else

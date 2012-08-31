@@ -74,7 +74,7 @@ extends WikiPlugin
                 if (! in_array($name, $exclude))
                     $this->_iterateLinks($page_handle, $dbi);
             }
-        } else if ($page && $pageisWikiPage = $dbi->isWikiPage($page)) {
+        } elseif ($page && $pageisWikiPage = $dbi->isWikiPage($page)) {
             //only get WantedPages links for one page
             $page_handle = $dbi->getPage($page);
             $this->_iterateLinks($page_handle, $dbi);

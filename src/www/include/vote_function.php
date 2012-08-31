@@ -219,7 +219,7 @@ if (db_numrows($result) > 0) {
 
 			echo '&nbsp; '.stripslashes(db_result($result, 0, 'question'));
 
-		} else if ($question_type == '2') {
+		} elseif ($question_type == '2') {
 			/*
 				This is a text-area question.
 			*/
@@ -228,7 +228,7 @@ if (db_numrows($result) > 0) {
 			echo '
 				<textarea name="_'.$quest_array[$i].'" rows="5" cols="60"></textarea>';
 
-		} else if ($question_type == '3') {
+		} elseif ($question_type == '3') {
 			/*
 				This is a Yes/No question.
 			*/
@@ -246,7 +246,7 @@ if (db_numrows($result) > 0) {
 
 			echo '&nbsp; '.stripslashes(db_result($result, 0, 'question'));
 
-		} else if ($question_type == '4') {
+		} elseif ($question_type == '4') {
 			/*
 				This is a comment only.
 			*/
@@ -255,7 +255,7 @@ if (db_numrows($result) > 0) {
 			echo '
 				<input type="hidden" name="_'.$quest_array[$i].'" value="-666" />';
 
-		} else if ($question_type == '5') {
+		} elseif ($question_type == '5') {
 			/*
 				This is a text-field question.
 			*/
