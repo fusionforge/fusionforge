@@ -626,7 +626,7 @@ Enjoy the site.
 		// as it opens possibility to abuse rate system)
 		if (!$use_ratings && $this->usesRatings()) {
 			db_query_params('DELETE FROM user_ratings WHERE rated_by=$1',
-					array($user_id));
+					array($this->getID()));
 		}
 		if (!$this->fetchData($this->getID())) {
 			db_rollback();
@@ -647,7 +647,7 @@ Enjoy the site.
 	 *
 	 * If an update occurred and you need to access the updated info.
 	 *
-	 * @param	int	the User ID data to be fecthed
+	 * @param	int	$user_id the User ID data to be fetched
 	 * @return	boolean	success;
 	 */
 	function fetchData($user_id) {
@@ -697,7 +697,7 @@ Enjoy the site.
 	/**
 	 * setStatus - set this user's status.
 	 *
-	 * @param	string	Status - P, A, S, or D.
+	 * @param	string	$status Status - P, A, S, or D.
 	 * @return	boolean	success.
 	 */
 	function setStatus($status) {
@@ -1445,18 +1445,14 @@ Enjoy the site.
 	/**
 	 * setMD5Passwd - Changes user's MD5 password.
 	 *
-	 * @param	string	The MD5-hashed password.
+	 * @param	string	$md5 The MD5-hashed password.
 	 * @return	boolean	success.
 	 */
 	function setMD5Passwd($md5) {
-		global $SYS;
-
 		db_begin();
-
 		if ($md5) {
 			$res = db_query_params('UPDATE users SET user_pw=$1 WHERE user_id=$2',
-						array($md5_pw,
-						       $this->getID()));
+				array($md5, $this->getID()));
 
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
@@ -1471,17 +1467,16 @@ Enjoy the site.
 	/**
 	 * setUnixPasswd - Changes user's Unix-hashed password.
 	 *
-	 * @param	string	The Unix-hashed password.
+	 * @param	string	$unix The Unix-hashed password.
 	 * @return	boolean	success.
 	 */
 	function setUnixPasswd($unix) {
 		global $SYS;
 
 		db_begin();
-
 		if ($unix) {
 			$res = db_query_params('UPDATE users SET unix_pw=$1 WHERE user_id=$1',
-						array ($unix_pw,
+						array ($unix,
 						       $this->getID()));
 
 			if (!$res || db_affected_rows($res) < 1) {
