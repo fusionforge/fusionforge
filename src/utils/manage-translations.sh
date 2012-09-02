@@ -1,4 +1,25 @@
 #!/bin/sh -e
+##
+# FusionForge
+#
+# Copyright Fusionforge Team
+# Copyright 2012, Franck Villaume - TrivialDev
+#
+# This file is part of FusionForge. FusionForge is free software;
+# you can redistribute it and/or modify it under the terms of the
+# GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the Licence, or (at your option)
+# any later version.
+#
+# FusionForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+##
 
 if [ -e src/translations/fusionforge.pot ] ; then        # We're in the parent dir
     cd src
@@ -26,6 +47,10 @@ check_syntax () {
     for l in $(echo $locales | xargs -n 1 | sort) ; do
 	msgfmt -c -o /dev/null translations/$l.po
     done
+}
+
+usage() {
+	echo "Usage: $0 stats|check|refresh|build"
 }
 
 case $1 in
@@ -56,7 +81,9 @@ case $1 in
 	done
 	;;
     *)
+	usage
 	echo "Unknown operation"
 	exit 1
 	;;
 esac
+exit 0
