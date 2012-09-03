@@ -492,6 +492,7 @@ Enjoy the site.
 			plugin_hook ("user_delete", $hook_params);
 			
 			$this->setStatus('D');
+			$this->setUnixStatus('D');
 			db_commit();
 		}
 		return true;
