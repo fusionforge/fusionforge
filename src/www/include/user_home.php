@@ -2,10 +2,11 @@
 /**
  * Developer Info Page
  *
- * Copyright 1999-2001 (c) VA Linux Systems 
+ * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * http://fusionforge.org
+ * Copyright © 2012
+ *	Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -42,7 +43,7 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 	<td>
 
 <table class="my-layout-table" id="user-profile-personal-info">
-<tr> 
+<tr>
 	<td>
 		<?php echo _('User Id:') ?>
 	</td>
@@ -67,8 +68,8 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 
 <tr>
 	<td><?php echo _('Login name:') ?></td>
-	<td><strong><span property="sioc:name"><?php 
-		print $user->getUnixName(); 
+	<td><strong><span property="sioc:name"><?php
+		print $user->getUnixName();
 		?></span></strong></td>
 </tr>
 
@@ -77,9 +78,9 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 	<td>
 		<div rev="foaf:account">
 			<div about="#me" typeof="foaf:Person">
-				<strong><span property="foaf:name"><?php 
+				<strong><span property="foaf:name"><?php
 				$user_title = $user->getTitle();
-				print ($user_title ? $user_title .' ' :''). $user->getRealName(); 
+				print ($user_title ? $user_title .' ' :''). $user->getRealName();
 				?></span></strong>
 			</div>
 		</div>
@@ -90,14 +91,14 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 <tr>
 	<td><?php echo _('Email Address:') ?>: </td>
 	<td>
-	<strong><?php 
+	<strong><?php
 		$user_mail=$user->getEmail();
 		$user_mailsha1=$user->getSha1Email();
 		// Removed for privacy reasons
 		//print '<span property="sioc:email" content="'. $user_mail .'">';
 		print '<span property="sioc:email_sha1" content="'. $user_mailsha1 .'">';
-		echo util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user_mail)); 
-		echo '</span>'; 
+		echo util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user_mail));
+		echo '</span>';
 	?></strong>
 	</td>
 </tr>
@@ -120,10 +121,10 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 <?php if ($user->getPhone()) { ?>
 <tr>
 	<td><?php echo _('Phone:'); ?></td>
-	<td><?php 
+	<td><?php
 //print '<div property="foaf:phone" content="'.$user->getPhone().'">';
-echo $user->getPhone(); 
-//echo '</div>'; 
+echo $user->getPhone();
+//echo '</div>';
 ?></td>
 </tr>
 <?php } ?>
@@ -164,7 +165,7 @@ echo $user->getPhone();
 
 if (forge_get_config('use_diary')) {
 		echo $HTML->boxMiddle(_('Diary and Notes'), _('Diary and Notes'));
-	 
+
 		/*
 			Get their diary information
 		*/
@@ -184,7 +185,7 @@ if (forge_get_config('use_diary')) {
 		echo '</p>';
 		$hookparams['user_id'] = $user_id;
 		plugin_hook("user_personal_links",$hookparams);
-	}	
+	}
 	?>
 
 
@@ -205,14 +206,18 @@ if (count ($projects) < 1) {
 	<?php
 } else { // endif no groups
 	print "<p>"._('This developer is a member of the following projects:')."</p>\n";
-	
+
 	foreach ($projects as $p) {
+		if (!forge_check_perm('project_read', $p->getID())) {
+			continue;
+		}
+
 		$project_link = util_make_link_g ($p->getUnixName(),$p->getID(),$p->getPublicName());
 		$project_uri = util_make_url_g ($p->getUnixName(),$p->getID());
-		// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/ 
+		// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/
 		$usergroup_uri = $project_uri .'members/';
-		
-		
+
+
 		print '<div rel="sioc:member_of">'."\n"
 			.'<div about="'. $usergroup_uri .'" typeof="sioc:UserGroup">'."\n"
 			.'<div rel="sioc:usergroup_of">'."\n"
@@ -228,17 +233,17 @@ if (count ($projects) < 1) {
 				$sioc_has_function_close .= "</div>";
 			}
 		}
-		
+
 		print ('<br />' . $project_link .' ('.htmlspecialchars (implode (', ', $role_names)).')');
 		print "\n";
-		
+
 		if (forge_check_perm_for_user ($user, 'project_admin', $p->getID())) {
 			print '<span rev="doap:maintainer" resource="#me"></span>';
 		}
 		else {
 			print '<span rev="doap:developer" resource="#me"></span>';
 		}
-		
+
 		echo $sioc_has_function_close."\n";  // sioc:has_function
 		echo "</div>\n";  // sioc:Space .../projects/A_PROJECT/
 		echo "</div>\n"; // sioc:usergroup_of
@@ -250,9 +255,9 @@ echo "</div>\n"; // prefixes
 
 echo "</div>\n"; // end of about=""
 
-$me = session_get_user(); 
+$me = session_get_user();
 if (forge_get_config('use_ratings')) {
-if ($user->usesRatings() && (!$me || $me->usesRatings())) { 
+if ($user->usesRatings() && (!$me || $me->usesRatings())) {
 
 print "<p>";
 print _('If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.');
@@ -281,7 +286,7 @@ print "</p>";
 <?php }
       }
 
-echo $HTML->boxBottom(); 
+echo $HTML->boxBottom();
 
 $HTML->footer(array());
 
@@ -289,5 +294,3 @@ $HTML->footer(array());
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

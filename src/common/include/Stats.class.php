@@ -1,10 +1,12 @@
-<?php   
+<?php
 /**
  * FusionForge statistics
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002, GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright © 2012
+ *	Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -77,7 +79,7 @@ class Stats extends Error {
 	* @return a resultset of unix_group_name, group_name, items
 	*/
 	function getTopMessagesPosted() {
-		return db_query_params ('SELECT g.unix_group_name, g.group_name, SUM(s.msg_posted) AS items FROM stats_project s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.unix_group_name, g.group_name ORDER BY items DESC',
+		return db_query_params ('SELECT g.unix_group_name, g.group_name, SUM(s.msg_posted) AS items, g.group_id FROM stats_project s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.unix_group_name, g.group_name, g.group_id ORDER BY items DESC',
 					array ('A'),
 					100) ;
 	}
@@ -89,11 +91,11 @@ class Stats extends Error {
 	* @return a resultset of group_name, unix_group_name, items
 	*/
 	function getTopPageViews() {
-		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(s.page_views) AS items FROM stats_project_months s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name ORDER BY items DESC', 
+		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(s.page_views) AS items, g.group_id FROM stats_project_months s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name, g.group_id ORDER BY items DESC',
 					array ('A'),
 					100) ;
 	}
-	
+
 	/**
 	* Returns a resultset containing group_name, unix_group_name, and items - the count of
 	* the downloads for that group
@@ -101,7 +103,7 @@ class Stats extends Error {
 	* @return a resultset of group_name, unix_group_name, items
 	*/
 	function getTopDownloads() {
-		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(frs.downloads) AS items FROM frs_dlstats_grouptotal_vw frs, groups g WHERE g.group_id = frs.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name ORDER BY items DESC',
+		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(frs.downloads) AS items, g.group_id FROM frs_dlstats_grouptotal_vw frs, groups g WHERE g.group_id = frs.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name, g.group_id ORDER BY items DESC',
 					array ('A'),
 					100) ;
 	}
@@ -111,5 +113,3 @@ class Stats extends Error {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
