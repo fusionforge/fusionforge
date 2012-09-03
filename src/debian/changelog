@@ -16,8 +16,9 @@ fusionforge (5.2~rc2~svn16089+) UNRELEASED; urgency=low
   * Move wikis to new (as of 2010-03-19, possibly by accident) data path
   * Check image upload is enabled before trying to do so (Closes: #679521)
   * Unbreak and silence the MediaWiki nightly dump cronjob (Closes: #680165)
+  * SECURITY: Upon user deletion, remove their Unix account as well
 
- -- Thorsten Glaser <tg@mirbsd.de>  Fri, 24 Aug 2012 10:53:50 +0200
+ -- Thorsten Glaser <tg@mirbsd.de>  Mon, 03 Sep 2012 11:55:51 +0200
 
 fusionforge (5.2~rc1wheezy1~exp1) experimental; urgency=low
 
