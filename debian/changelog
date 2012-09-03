@@ -11,8 +11,9 @@ fusionforge (5.2~rc1wheezy1) UNRELEASED; urgency=low
   * Check image upload is enabled before trying to do so (Closes: #679521)
   * Unbreak and silence the MediaWiki nightly dump cronjob (Closes: #680165)
   * Remove minified ECMAscript and binary *.jar from the source
+  * SECURITY: Upon user deletion, remove their Unix account as well
 
- -- Thorsten Glaser <tg@mirbsd.de>  Thu, 30 Aug 2012 11:06:02 +0200
+ -- Thorsten Glaser <tg@mirbsd.de>  Mon, 03 Sep 2012 11:55:51 +0200
 
 fusionforge (5.2~rc1-5) unstable; urgency=low
 

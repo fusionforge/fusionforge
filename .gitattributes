@@ -533,6 +533,7 @@ db/20111201_description_in_text.sql -text
 db/20111214-docman-doc_groups-created_by.sql -text
 db/20120321-add-news-in-activity_vw.sql -text
 db/20120322-add-news-in-activity_vw.sql -text
+db/20120903-no-unix-account-for-deleted-users.sql -text
 db/FTI-20050315.sql -text
 db/FTI-20050401.sql -text
 db/FTI-20050530.sql -text
