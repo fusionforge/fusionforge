@@ -104,6 +104,10 @@ if (count ($projects) < 1) {
 	print "<p>"._('This developer is a member of the following projects:')."</p>\n";
 
 	foreach ($projects as $p) {
+		if (!forge_check_perm('project_read', $p->getID())) {
+			continue;
+		}
+
 		$project_link = util_make_link_g ($p->getUnixName(),$p->getID(),$p->getPublicName());
 		$project_uri = util_make_url_g ($p->getUnixName(),$p->getID());
 		// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/

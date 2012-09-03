@@ -12,8 +12,9 @@ fusionforge (5.2~rc1wheezy1) UNRELEASED; urgency=low
   * Unbreak and silence the MediaWiki nightly dump cronjob (Closes: #680165)
   * Remove minified ECMAscript and binary *.jar from the source
   * SECURITY: Upon user deletion, remove their Unix account as well
+  * SECURITY: Do not disclose inaccessible groups on user_home/toplist
 
- -- Thorsten Glaser <tg@mirbsd.de>  Mon, 03 Sep 2012 11:55:51 +0200
+ -- Thorsten Glaser <tg@mirbsd.de>  Mon, 03 Sep 2012 14:07:16 +0200
 
 fusionforge (5.2~rc1-5) unstable; urgency=low
 

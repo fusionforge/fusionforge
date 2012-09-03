@@ -47,6 +47,7 @@ else if ($type == 'forumposts_week') {
 }
 // default to downloads
 else {
+	$type = 'downloads';
 	$res_top = $stats->getTopDownloads();
 	$title = _('Top Downloads');
 	$column1 = _('Downloads');
@@ -61,9 +62,17 @@ echo db_error();
 $display_rank = 0;
 $i=0;
 while ($row_top = db_fetch_array($res_top)) {
-	if (!forge_check_perm ('project_read', $row_top['group_id']) && forge_check_perm('frs', $row_new['group_id'], 'read_public') ) {
-		continue ;
+	if (!forge_check_perm('project_read', $row_top['group_id'])) {
+		continue;
 	}
+	if (($type == 'downloads_week' || $type == 'downloads') && 0 &&
+	    !forge_check_perm('frs', $row_new['group_id'], 'read_public')) {
+		continue;
+	}
+	/*-
+	 * pageviews_proj: project_read probably enough
+	 * forumposts_week: forum read? no idea…
+	 */
 	$i++;
 	if ($row_top["items"] == 0) {
 		continue;

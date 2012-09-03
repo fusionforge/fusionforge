@@ -84,7 +84,7 @@ class Stats extends Error {
 	* @return a resultset of unix_group_name, group_name, items
 	*/
 	function getTopMessagesPosted() {
-		return db_query_params ('SELECT g.unix_group_name, g.group_name, SUM(s.msg_posted) AS items FROM stats_project s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.unix_group_name, g.group_name ORDER BY items DESC',
+		return db_query_params ('SELECT g.unix_group_name, g.group_name, SUM(s.msg_posted) AS items, g.group_id FROM stats_project s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.unix_group_name, g.group_name, g.group_id ORDER BY items DESC',
 					array ('A'),
 					100) ;
 	}
@@ -96,7 +96,7 @@ class Stats extends Error {
 	* @return a resultset of group_name, unix_group_name, items
 	*/
 	function getTopPageViews() {
-		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(s.page_views) AS items FROM stats_project_months s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name ORDER BY items DESC',
+		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(s.page_views) AS items, g.group_id FROM stats_project_months s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name, g.group_id ORDER BY items DESC',
 					array ('A'),
 					100) ;
 	}
@@ -108,7 +108,7 @@ class Stats extends Error {
 	* @return a resultset of group_name, unix_group_name, items
 	*/
 	function getTopDownloads() {
-		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(frs.downloads) AS items FROM frs_dlstats_grouptotal_vw frs, groups g WHERE g.group_id = frs.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name ORDER BY items DESC',
+		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(frs.downloads) AS items, g.group_id FROM frs_dlstats_grouptotal_vw frs, groups g WHERE g.group_id = frs.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name, g.group_id ORDER BY items DESC',
 					array ('A'),
 					100) ;
 	}
