@@ -6,7 +6,8 @@
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
- * http://fusionforge.org
+ * Copyright © 2012
+ *	Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -36,7 +37,7 @@ require_once $gfwww.'include/vote_function.php';
 $title = _('User Profile');
 $HTML->header(array('title'=>$title));
 
-echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); 
+echo $HTML->boxTop(_('Personal Information'), _('Personal Information'));
 
 ?>
 
@@ -44,9 +45,9 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information'));
 
 
 	<?php
-	
+
 	echo user_personal_information($user);
-	
+
 	if (forge_get_config('use_ratings')) {
 		echo $HTML->boxMiddle(_('Peer Rating'), _('Peer Rating'));
         echo '<table class="my-layout-table" id="user-profile-rating">';
@@ -105,6 +106,10 @@ if (count ($projects) < 1) {
 	print "<p>"._('This developer is a member of the following projects:')."</p>\n";
 
 	foreach ($projects as $p) {
+		if (!forge_check_perm('project_read', $p->getID())) {
+			continue;
+		}
+
 		$display = 0;
 		if (!$p->isPublic()) {
 			$currentUser = session_get_user();
@@ -202,5 +207,3 @@ $HTML->footer(array());
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -5,7 +5,8 @@
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
  * Copyright 2002-2004 (c) GForge Team
- * http://fusionforge.org/
+ * Copyright © 2012
+ *	Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -32,6 +33,7 @@ $type = getStringFromRequest('type');
 $stats = new Stats();
 
 if ($type == 'downloads_week') {
+	$res_top = "oops… no function for this in class Stats";
 	$title = _('Top Downloads in the Past 7 Days');
 	$column1 = _('Downloads');
 }
@@ -47,6 +49,7 @@ else if ($type == 'forumposts_week') {
 }
 // default to downloads
 else {
+	$type = 'downloads';
 	$res_top = $stats->getTopDownloads();
 	$title = _('Top Downloads');
 	$column1 = _('Downloads');
@@ -61,9 +64,17 @@ echo db_error();
 $display_rank = 0;
 $i=0;
 while ($row_top = db_fetch_array($res_top)) {
-	if (!forge_check_perm ('project_read', $row_top['group_id']) && forge_check_perm('frs', $row_new['group_id'], 'read_public') ) {
-		continue ;
+	if (!forge_check_perm('project_read', $row_top['group_id'])) {
+		continue;
 	}
+	if (($type == 'downloads_week' || $type == 'downloads') && 0 &&
+	    !forge_check_perm('frs', $row_new['group_id'], 'read_public')) {
+		continue;
+	}
+	/*-
+	 * pageviews_proj: project_read probably enough
+	 * forumposts_week: forum read? no idea…
+	 */
 	$i++;
 	if ($row_top["items"] == 0) {
 		continue;
@@ -85,5 +96,3 @@ $HTML->footer(array());
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
