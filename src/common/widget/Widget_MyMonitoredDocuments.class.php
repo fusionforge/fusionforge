@@ -77,21 +77,12 @@ class Widget_MyMonitoredDocuments extends Widget {
 
 				$html = '';
 				$count_new = max(0, $count_diff);
-				for ($i=0; $i<$rows2; $i++) {
-
+				for ($i = 0; $i < $rows2; $i++) {
 					if (!$hide_now) {
-						if ($i % 2 == 0) {
-							$class="bgcolor-white";
-						}
-						else {
-							$class="bgcolor-grey";
-						}
-
 						$doc_group = db_result($result2,$i,'doc_group');
 						$docid = db_result($result2,$i,'docid');
-
 						$html .= '
-							<tr class="'. $class .'"><td width="99%">'.
+							<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'"><td width="99%">'.
 							'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/docman/?group_id='.$group_id.'&amp;view=listfile&amp;dirid='.$doc_group.'">'.
 							stripslashes(db_result($result2,$i,'filename')).'</a></td>'.
 							'<td align="center"><a href="/docman/?group_id='.$group_id.'&amp;action=monitorfile&amp;option=remove&amp;view=listfile&amp;dirid='.$doc_group.'&amp;fileid='.$docid.'">'.
