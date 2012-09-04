@@ -380,15 +380,15 @@ class WidgetLayoutManager {
 										VALUES ($1,$2)";
 									if ($res = db_query_params($sql,array($new_layout_id,$rank++))) {
 										if ($row_id = db_insertid($res,'layouts_rows', 'id')) {
-												foreach($cols as $width) {
-													$sql = "INSERT INTO layouts_rows_columns(layout_row_id, width)
-														VALUES ($1,$2)";
-													db_query_params($sql,array($row_id,$width));
-												}
+											foreach($cols as $width) {
+												$sql = "INSERT INTO layouts_rows_columns(layout_row_id, width)
+													VALUES ($1,$2)";
+												db_query_params($sql,array($row_id,$width));
 											}
 										}
 									}
 								}
+							}
 						}
 					}
 				} else {
@@ -789,53 +789,50 @@ class WidgetLayoutManager {
 							$_and .= ' OR ';
 						} else {
 							$_and .= ' AND (';
-									}
-									$_and .= " (name = '".$name[1]."' AND content_id = ". $name[0] .") ";
-									}
-									$_and .= ')';
-									$sql = "UPDATE layouts_contents
-									SET column_id = 0
-									WHERE owner_type = $1
-									AND owner_id = $2
-									AND column_id = $3".
-									$_and;
-									$res = db_query_params($sql,array($owner_type, $owner_id, $column_id));
-									echo db_error();
-									}
+						}
+						$_and .= " (name = '".$name[1]."' AND content_id = ". $name[0] .") ";
+					}
+					$_and .= ')';
+					$sql = "UPDATE layouts_contents
+						SET column_id = 0
+						WHERE owner_type = $1
+						AND owner_id = $2
+						AND column_id = $3". $_and;
+					$res = db_query_params($sql,array($owner_type, $owner_id, $column_id));
+					echo db_error();
+				}
 
-									//Insert new contents
-									$added_names = $this->_array_diff_names($names, $originals);
-									if (count($added_names)) {
-									$_and = '';
-									foreach($added_names as $name) {
-									if ($_and) {
-										$_and .= ' OR ';
-									} else {
-										$_and .= ' AND (';
-												}
-												$_and .= " (name = '".$name[1]."' AND content_id = ". $name[0] .") ";
-												}
-												$_and .= ')';
-												//old and new column must be part of the same layout
-												$sql = 'UPDATE layouts_contents
-												SET column_id = $1
-												WHERE owner_type = $2
-												AND owner_id = $3' .
-												$_and ."
-												AND layout_id = $4";
-												$res = db_query_params($sql,array($column_id,$owner_type,$owner_id,$layout_id));
-												echo db_error();
-												}
+				//Insert new contents
+				$added_names = $this->_array_diff_names($names, $originals);
+				if (count($added_names)) {
+					$_and = '';
+					foreach($added_names as $name) {
+						if ($_and) {
+							$_and .= ' OR ';
+						} else {
+							$_and .= ' AND (';
+						}
+						$_and .= " (name = '".$name[1]."' AND content_id = ". $name[0] .") ";
+					}
+					$_and .= ')';
+					//old and new column must be part of the same layout
+					$sql = 'UPDATE layouts_contents
+						SET column_id = $1
+						WHERE owner_type = $2
+						AND owner_id = $3' . $_and ."
+						AND layout_id = $4";
+					$res = db_query_params($sql,array($column_id,$owner_type,$owner_id,$layout_id));
+					echo db_error();
+				}
 
-
-												//Update ranks
-												$rank = 0;
-												$values = array();
-												foreach($names as $name) {
-													$sql = 'UPDATE layouts_contents SET rank = $1 WHERE owner_type =$2 AND owner_id = $3 AND column_id = $4 AND name = $5 AND content_id = $6';
-													db_query_params($sql, array($rank++,$owner_type,$owner_id,$column_id,$name[1],$name[0]));
-													echo db_error();
-												}
+				//Update ranks
+				$rank = 0;
+				$values = array();
+				foreach($names as $name) {
+					$sql = 'UPDATE layouts_contents SET rank = $1 WHERE owner_type =$2 AND owner_id = $3 AND column_id = $4 AND name = $5 AND content_id = $6';
+					db_query_params($sql, array($rank++,$owner_type,$owner_id,$column_id,$name[1],$name[0]));
+					echo db_error();
+				}
 			}
 		}
 	}
