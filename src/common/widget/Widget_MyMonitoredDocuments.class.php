@@ -82,7 +82,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 						$doc_group = db_result($result2,$i,'doc_group');
 						$docid = db_result($result2,$i,'docid');
 						$html .= '
-							<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'"><td width="99%">'.
+							<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td width="99%">'.
 							'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/docman/?group_id='.$group_id.'&amp;view=listfile&amp;dirid='.$doc_group.'">'.
 							stripslashes(db_result($result2,$i,'filename')).'</a></td>'.
 							'<td align="center"><a href="/docman/?group_id='.$group_id.'&amp;action=monitorfile&amp;option=remove&amp;view=listfile&amp;dirid='.$doc_group.'&amp;fileid='.$docid.'">'.
