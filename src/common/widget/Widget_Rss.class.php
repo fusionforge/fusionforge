@@ -59,16 +59,9 @@ require_once('Widget.class.php');
 			$content .= '<table class="fullwidth">';
 			$i = 0;
 			foreach($items as $item){
-				if ($i % 2 == 0) {
-					$class="bgcolor-white";
-				}
-				else {
-					$class="bgcolor-grey";
-				}
-
 				$i=$i+1;
 
-				$content .= '<tr class="'. $class .'"><td WIDTH="99%">';
+				$content .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'><td WIDTH="99%">';
 				if ($image = $item->get_link(0, 'image')) {
 					//hack to display twitter avatar
 					$content .= '<img src="'.  $hp->purify($image, CODENDI_PURIFIER_CONVERT_HTML)  .'" style="float:left; margin-right:1em;" />';
