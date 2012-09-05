@@ -360,7 +360,7 @@ EOS;
 	}
 
 	function createSubSections($sectionsArray) {
-		global $group_subsection_names;
+		$group_subsection_names = getSubSectionNames();
 
 		$countLines = 0;
 		foreach ($sectionsArray as $section) {
