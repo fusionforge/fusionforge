@@ -10,6 +10,60 @@ upgrade_mediawikis () {
     done
 }
 
+# Accomodate wikidata path change
+move_mediawikis() {
+	local a b found
+
+	# Determine whether there are any wikis to move
+	found=0
+	for a in /var/lib/gforge/plugins/mediawiki/wikidata/*; do
+		test -d "$a/." || continue
+		found=1
+		break
+	done
+	test $found = 1 || {
+		rmdir /var/lib/gforge/plugins/mediawiki/wikidata || \
+		    echo >&2 "WARNING: Could not delete /var/lib/gforge/plugins/mediawiki/wikidata"
+		return 0
+	}
+
+	# Move wikis
+	(
+		cd /var/lib/gforge/plugins/mediawiki/wikidata
+		for a in *; do
+			test -d "$a/." || {
+				echo >&2 "WARNING: Non-directory /var/lib/gforge/plugins/mediawiki/wikidata/$a not migrated!"
+				continue
+			}
+			# Conflict?
+			b=../projects/$a
+			if test -e "$b"; then
+				b=$(mktemp "/var/lib/gforge/plugins/mediawiki/projects/$a-olddata-XXXXXXXXXX") || {
+					echo >&2 "Could not create temporary file."
+					exit 1
+				}
+				rm -f "$b"
+			fi
+			# Move.
+			mv "$a" "$b" || \
+			    echo >&2 "WARNING: Could not move away /var/lib/gforge/plugins/mediawiki/wikidata/$a, investigate manually!"
+		done
+	)
+
+	# Look again for remnants
+	found=0
+	for a in /var/lib/gforge/plugins/mediawiki/wikidata/*; do
+		test -e "$a" || continue
+		echo >&2 "WARNING: Non-moved files in /var/lib/gforge/plugins/mediawiki/wikidata/ exist. Investigate manually!"
+		found=1
+		break
+	done
+	test $found = 1 || \
+	    rmdir /var/lib/gforge/plugins/mediawiki/wikidata || \
+	    echo >&2 "Could not delete empty /var/lib/gforge/plugins/mediawiki/wikidata"
+	return 0
+}
+
 case "$1" in
     triggered)
 	if [ "$2" = /usr/share/mediawiki/maintenance/postgres ] ; then
@@ -18,6 +72,11 @@ case "$1" in
 	;;
     
     configure)
+	# Data path changed
+	test -d /var/lib/gforge/plugins/mediawiki/wikidata/. && \
+	    test -d /var/lib/gforge/plugins/mediawiki/projects/. && \
+	    move_mediawikis
+
 	# Run plugin specific db upgrade
 	if [ -f /usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl ]
 	then

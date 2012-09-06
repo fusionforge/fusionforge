@@ -6,5 +6,5 @@ usr/share/@OLDPACKAGE@/plugins/mediawiki/cronjobs
 usr/share/@OLDPACKAGE@/plugins/mediawiki/www
 usr/share/@OLDPACKAGE@/etc/httpd.d
 usr/share/mediawiki/skins
-var/lib/@OLDPACKAGE@/plugins/mediawiki/wikidata
 var/lib/@OLDPACKAGE@/plugins/mediawiki/dumps
+var/lib/@OLDPACKAGE@/plugins/mediawiki/projects

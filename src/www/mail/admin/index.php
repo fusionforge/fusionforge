@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/

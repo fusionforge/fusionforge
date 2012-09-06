@@ -240,8 +240,8 @@ Thank you for registering your project with %1$s.
 			return false;
 		}
 
-		// do not change the status if the mailing-list is not created yet
-		if ($status == 'xyzzy' || $this->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
+		// do not update the status if the mailing-list is not created yet
+		if ($status == 'xyzzy'  || $this->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 			$status = $this->getStatus();
 		}
 
