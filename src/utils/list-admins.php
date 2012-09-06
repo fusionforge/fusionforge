@@ -19,6 +19,7 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon."include/pre.php";
 $admins = RBACEngine::getInstance()->getUsersByAllowedAction("forge_admin", -1);

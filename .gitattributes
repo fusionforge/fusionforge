@@ -624,6 +624,7 @@ src/db/20120611-drop-obsolete-column-data-in-docman.sql -text
 src/db/20120709-drop-obsolete-column-language_id-in-docman.sql -text
 src/db/20120710-add-docgroupnew-in-activity_vw.sql -text
 src/db/20120714-docman-docdata-statistics.sql -text
+src/db/20120903-no-unix-account-for-deleted-users.sql -text
 src/db/FTI-20061025.sql -text
 src/db/SQL_2.6/replicate.sh svneol=native#text/x-sh
 src/db/gforge-data-mysql.sql -text

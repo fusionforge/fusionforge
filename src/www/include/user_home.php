@@ -5,7 +5,9 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * http://fusionforge.org
+ * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright © 2012
+ *	Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -33,7 +35,7 @@ require_once $gfwww.'include/vote_function.php';
 $title = _('User Profile');
 $HTML->header(array('title'=>$title));
 
-echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); 
+echo $HTML->boxTop(_('Personal Information'), _('Personal Information'));
 
 ?>
 
@@ -41,9 +43,9 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information'));
 
 
 	<?php
-	
+
 	echo user_personal_information($user);
-	
+
 	if (forge_get_config('use_ratings')) {
 		echo $HTML->boxMiddle(_('Peer Rating'), _('Peer Rating'));
         echo '<table class="my-layout-table" id="user-profile-rating">';
@@ -119,8 +121,8 @@ if (count ($projects) < 1) {
 		$sioc_has_function_close = "";
 		foreach ($roles as $r) {
 			if ($r instanceof RoleExplicit
-			    && $r->getHomeProject() != NULL
-			    && $r->getHomeProject()->getID() == $p->getID()) {
+			&& $r->getHomeProject() != NULL
+			&& $r->getHomeProject()->getID() == $p->getID()) {
 				$role_names[] = $r->getName() ;
 				print '<div property="sioc:has_function" content= "'.$r->getName().'">';
 				$sioc_has_function_close .= "</div>";
