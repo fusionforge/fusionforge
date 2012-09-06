@@ -2,9 +2,9 @@
 /*-
  * MediaWiki Plugin for FusionForge
  *
- * Copyright © 2010
- * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright © 2010, 2012
  *      Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
  * All rights reserved.
  *

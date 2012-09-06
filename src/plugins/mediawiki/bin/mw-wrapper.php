@@ -27,16 +27,33 @@
  * Wrapper to call MediaWiki maintenance scripts on a forge project wiki.
  */
 
-if (count ($argv) < 3) {
-        echo "Usage: .../mw-wrapper.php <project> <script> [ arguments... ]
+function usage($rv=1) {
+        echo "Usage: .../mw-wrapper.php [-L] <project> <script> [ arguments... ]
 For instance: .../mw-wrapper.php siteadmin importDump.php /tmp/wikidump.xml
               .../mw-wrapper.php siteadmin rebuildrecentchanges.php
 " ;
-        exit (1) ;
+        exit($rv);
+}
+
+if (count($argv) < 3) {
+	usage();
 }
 
 $wrapperscript = array_shift ($argv) ;
 $fusionforgeproject = array_shift ($argv) ;
+if ($fusionforgeproject == "-L") {
+	if (count($argv) < 2) {
+		usage();
+	}
+	$fusionforgeproject = array_shift($argv);
+	$preload_localsettings = true;
+} else {
+	/*
+	 * saves some warnings
+	 * works if the mwscript includes e.g. commandLine.inc
+	 */
+	$preload_localsettings = false;
+}
 $mwscript = array_shift ($argv) ;
 
 require_once dirname(__FILE__).'/../../../common/include/env.inc.php';
@@ -66,14 +83,19 @@ function ffmw_wrapper_fixup_searchpath($username) {
 register_shutdown_function('ffmw_wrapper_fixup_searchpath',
     forge_get_config('database_user'));
 
-define( "MEDIAWIKI", true );
-require_once $gfwww.'plugins/mediawiki/LocalSettings.php' ;
+$ff_localsettings = forge_get_config('source_path') .
+    '/www/plugins/mediawiki/LocalSettings.php';
+if ($preload_localsettings) {
+	define("MEDIAWIKI", true);
+	require_once($ff_localsettings);
+}
 
 $src_path = forge_get_config('src_path', 'mediawiki');
 $mwscript = $src_path . '/maintenance/'.$mwscript ;
 
-array_unshift ($argv, $mwscript, '--conf', $fusionforge_basedir . '/plugins/mediawiki/www/LocalSettings.php') ;
+array_unshift($argv, $mwscript, '--conf', $ff_localsettings);
 
-while (@ob_end_flush());
+while (@ob_end_flush())
+	/* nothing */;
 
 require_once $mwscript ;
