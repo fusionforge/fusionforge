@@ -31,8 +31,6 @@ forge_define_config_item('projects_path', 'mediawiki', '$mediawiki/mwdata_path/p
 forge_define_config_item('master_path', 'mediawiki', '$mediawiki/mwdata_path/master');
 forge_define_config_item('enable_uploads', 'mediawiki', false);
 forge_set_config_item_bool('enable_uploads', 'mediawiki');
-forge_define_config_item('use_frame', 'mediawiki', false);
-forge_set_config_item_bool('use_frame', 'mediawiki');
 }
 
 class MediaWikiPlugin extends Plugin {
@@ -89,11 +87,7 @@ class MediaWikiPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				if (forge_get_config('use_frame', 'mediawiki')){
-					$params['DIRS'][]=util_make_url('/plugins/mediawiki/frame.php?group_id=' . $project->getID()) ;
-				} else {
-					$params['DIRS'][]=util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
-				}
+				$params['DIRS'][]=util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
 				$params['ADMIN'][]='';
 				$params['TOOLTIPS'][] = _('Mediawiki Space');
 			}

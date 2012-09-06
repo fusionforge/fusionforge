@@ -1,8 +1,8 @@
-The FusionForge.php and fusionforge/main.css are built
-from MonoBook.php and monobook/main.css mediawiki files
+The FusionForge.php is built from MonoBook.php mediawiki file.
 2 things are done
 
 -Renaming monobook in fusionforge and MonoBook in FusionForge
+ and remove empty trailing lines
 -Apply a minimal patch on the renamed patch
 
 It is highly recommended to touch these files as few as possible

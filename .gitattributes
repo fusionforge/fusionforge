@@ -2226,10 +2226,9 @@ src/plugins/mediawiki/include/mediawiki-init.php -text
 src/plugins/mediawiki/include/mediawikiPlugin.class.php -text
 src/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
 src/plugins/mediawiki/mediawiki-skin/FusionForge.php.patch -text
-src/plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text
+src/plugins/mediawiki/mediawiki-skin/FusionForge.php.renamed -text
 src/plugins/mediawiki/mediawiki-skin/Makefile -text
 src/plugins/mediawiki/mediawiki-skin/README.beforemodifying -text
-src/plugins/mediawiki/mediawiki-skin/fusionforge/fusionforge.css -text svneol=unset#text/css
 src/plugins/mediawiki/packaging/control/160plugin-mediawiki -text
 src/plugins/mediawiki/packaging/control/160plugin-mediawiki.shortdesc -text
 src/plugins/mediawiki/packaging/cron.d/plugin-mediawiki -text

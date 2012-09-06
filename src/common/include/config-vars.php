@@ -267,12 +267,6 @@ if (file_exists ($gfconfig.'plugins/scmsvn/config.php')) {
 	forge_set_config_item_bool ('use_ssl', 'scmsvn') ;
 }
 
-// Mediawiki plugin
-if (isset ($sys_use_mwframe)) {
-	forge_define_config_item ('use_frame', 'mediawiki', $sys_use_mwframe ? 1 : 0) ;
-	forge_set_config_item_bool ('use_frame', 'mediawiki') ;
-}
-
 // Mantis plugin
 if (file_exists ($gfconfig.'plugins/mantis/config.php')) {
 	require_once $gfconfig.'plugins/mantis/config.php' ;

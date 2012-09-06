@@ -881,3 +881,111 @@ fieldset {
 	border: 1px solid #ccc;
 	padding: 5px;
 }
+
+#ff-mw-wrapper {
+	position: relative;	/* so MW can position absolutely */
+		top: -1em;	/* undo div#maindiv */
+		left: -1em;	/* undo div#maindiv */
+	margin-right: -2em;
+	background: #f9f9f9 url(mw-headbg.jpg) 0 0 no-repeat;
+}
+
+/* un-do some damage from the main and YUI sheets */
+
+#ff-mw-wrapper p, #ff-mw-wrapper fieldset, #ff-mw-wrapper table {
+	margin:0.4em 0 0.5em;
+}
+
+#ff-mw-wrapper h1, #ff-mw-wrapper h2, #ff-mw-wrapper h3, #ff-mw-wrapper h4, #ff-mw-wrapper h5, #ff-mw-wrapper h6 {
+	padding-bottom:0.17em;
+	padding-top:0.5em;
+	margin-top:0;
+	margin-bottom:0.6em;
+}
+
+#ff-mw-wrapper h1 {
+	font-size:188%;
+	font-weight:normal;
+}
+
+#ff-mw-wrapper h2 {
+	font-size:150%;
+}
+
+#ff-mw-wrapper h3 {
+	font-weight:bold;
+	font-size:132%;
+}
+
+#ff-mw-wrapper h4 {
+	font-size:116%;
+}
+
+#ff-mw-wrapper h6 {
+	font-size:80%;
+	margin-bottom:0;
+}
+
+#ff-mw-wrapper h3, #ff-mw-wrapper h4, #ff-mw-wrapper h5 {
+	margin-bottom:0.3em;
+}
+
+#ff-mw-wrapper ul {
+	line-height:1.5em;
+	list-style-type:square;
+	margin:0.3em 0 0 1.6em;
+	padding:0;
+}
+
+#ff-mw-wrapper ul li {
+	/*      ↑   →    ↓   ←    */
+	margin:0em 0em 0.1em 0em;
+	list-style-type:square;
+	list-style-image:url(data:image/gif;base64,R0lGODlhBQANAIAAAGOMnP///yH5BAEAAAEALAAAAAAFAA0AAAIJjI+pu+APo4SpADs=);
+}
+
+#ff-mw-wrapper #toc ul, #ff-mw-wrapper .toc ul {
+	margin-left:0;
+}
+
+#ff-mw-wrapper #toc ul li, #ff-mw-wrapper .toc ul li {
+	margin:0em 0em 0.1em 0em;
+	list-style-image:none;
+	list-style-type:none;
+}
+
+#ff-mw-wrapper #toc ul ul, #ff-mw-wrapper .toc ul ul {
+	margin-left:2em;
+}
+
+#ff-mw-wrapper ol {
+	line-height:1.5em;
+	list-style-type:decimal;
+	margin:0.3em 0 0 3.2em;
+	padding:0;
+}
+
+#ff-mw-wrapper ol li {
+	margin:0em 0em 0.1em 0em;
+	list-style-type:decimal;
+}
+
+#ff-mw-wrapper #p-personal ul {
+	margin:0;
+	padding:0 2em 0 3em;
+}
+
+#ff-mw-wrapper #p-personal li {
+	margin-left:1em;
+}
+
+#ff-mw-wrapper pre {
+	line-height:1.1em;
+	padding:1em;
+	margin-top:1em;
+}
+
+#ff-mw-wrapper a {
+	color:#002BB8;
+	font-weight:normal;
+}

@@ -46,8 +46,11 @@ while (count ($exppath) >= 4) {
         if (($exppath[0] == 'plugins') &&
 	    ($exppath[1] == 'mediawiki') &&
 	    ($exppath[2] == 'wiki') &&
-	    (($exppath[4] == 'index.php') || ($exppath[4] == 'api.php'))
-	    ) {
+	    in_array($exppath[4], array(
+		'api.php',
+		'index.php',
+		'load.php',
+	    ))) {
                 $fusionforgeproject = $exppath[3] ;
                 break ;
         } else {
