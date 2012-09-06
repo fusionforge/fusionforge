@@ -416,7 +416,7 @@ class _PageList_Column_content extends _PageList_Column {
         } elseif (($len = strlen($c)) > $this->bytes) {
             $c = substr($c, 0, $this->bytes);
         }
-        include_once('lib/BlockParser.php');
+        include_once 'lib/BlockParser.php';
         // false --> don't bother processing hrefs for embedded WikiLinks
         $ct = TransformText($c, $revision_handle->get('markup'), false);
         if (empty($pagelist->_sortby[$this->_field]))
@@ -1039,7 +1039,7 @@ class PageList {
         if (is_array($input)) return $input;
         // expand wildcards from list of all pages
         if (preg_match('/[\?\*]/', $input) or substr($input,0,1) == "^") {
-            include_once("lib/TextSearchQuery.php");
+            include_once 'lib/TextSearchQuery.php';
             $search = new TextSearchQuery(str_replace(",", " or ", $input), true,
                                          (substr($input,0,1) == "^") ? 'posix' : 'glob');
             $dbi = $GLOBALS['request']->getDbh();

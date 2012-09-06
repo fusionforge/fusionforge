@@ -46,7 +46,7 @@
  * @author: ReiniUrban
  */
 
-include_once("lib/plugin/SqlResult.php");
+include_once 'lib/plugin/SqlResult.php';
 
 class WikiPlugin_Imdb
 extends WikiPlugin_SqlResult
@@ -74,7 +74,7 @@ extends WikiPlugin_SqlResult
     function run($dbi, $argstr, &$request, $basepage) {
         $args = $this->getArgs($argstr, $request);
         extract($args);
-        include_once("lib/imdb.php");
+        include_once 'lib/imdb.php';
         $imdb = new imdb();
 
         if (method_exists($imdb, $query)) {

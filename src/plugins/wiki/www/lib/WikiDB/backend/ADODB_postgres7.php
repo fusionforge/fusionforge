@@ -1,7 +1,7 @@
 <?php // -*-php-*-
 // $Id: ADODB_postgres7.php 7956 2011-03-03 17:08:31Z vargenau $
 
-require_once('lib/WikiDB/backend/ADODB.php');
+require_once 'lib/WikiDB/backend/ADODB.php';
 
 if (!defined("USE_BYTEA"))     // see schemas/psql-initialize.sql
     define("USE_BYTEA", true); // only BYTEA is binary safe

@@ -11,7 +11,7 @@
  * @author Reini Urban
  */
 
-require_once("lib/WysiwygEdit.php");
+require_once 'lib/WysiwygEdit.php';
 
 class WysiwygEdit_htmlarea2 extends WysiwygEdit {
 

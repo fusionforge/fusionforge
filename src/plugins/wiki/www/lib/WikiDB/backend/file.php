@@ -41,8 +41,8 @@
  *
  */
 
-require_once('lib/WikiDB/backend.php');
-require_once('lib/ErrorManager.php');
+require_once 'lib/WikiDB/backend.php';
+require_once 'lib/ErrorManager.php';
 
 class WikiDB_backend_file
 extends WikiDB_backend
@@ -548,7 +548,7 @@ extends WikiDB_backend
      */
     /*
     function get_all_revisions($pagename) {
-        include_once('lib/WikiDB/backend/dumb/AllRevisionsIter.php');
+        include_once 'lib/WikiDB/backend/dumb/AllRevisionsIter.php';
         return new WikiDB_backend_dumb_AllRevisionsIter($this, $pagename);
     }
     */
@@ -573,7 +573,7 @@ extends WikiDB_backend
      * @return object A WikiDB_backend_iterator.
      */
     function get_all_pages($include_empty=false, $sortby='', $limit='', $exclude='') {
-    	require_once("lib/PageList.php");
+    	require_once 'lib/PageList.php';
         $this->_loadLatestVersions();
         $a = array_keys($this->_latest_versions);
         if (empty($a))

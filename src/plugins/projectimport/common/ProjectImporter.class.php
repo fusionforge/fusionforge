@@ -20,9 +20,9 @@
  */
 
 // Include standard ARC library
-include_once("arc/ARC2.php");
+include_once 'arc/ARC2.php';
 // Include the JSON RDF parser ala OSLC developped in COCLICO
-include_once('ARC2_OSLCCoreRDFJSONParserPlugin.php');
+include_once 'ARC2_OSLCCoreRDFJSONParserPlugin.php';
 
 #require_once $gfcommon.'import/import_users.php';
 

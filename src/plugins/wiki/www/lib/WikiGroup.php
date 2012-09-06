@@ -844,7 +844,7 @@ class GroupFile extends WikiGroup {
                           E_USER_WARNING);
             return false;
         }
-        require_once('lib/pear/File_Passwd.php');
+        require_once 'lib/pear/File_Passwd.php';
         $this->_file = new File_Passwd(AUTH_GROUP_FILE,false,AUTH_GROUP_FILE.".lock");
     }
 

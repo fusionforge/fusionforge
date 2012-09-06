@@ -18,17 +18,17 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('OSLCConnector.php');
+require_once 'OSLCConnector.php';
 require_once(dirname(__FILE__) . '/../models/Codendi.inc.php');
 
-require_once ('pre.php');
-require_once ('session.php');
+require_once 'pre.php';
+require_once 'session.php';
 
-require_once ('common/tracker/Tracker.class.php');
-require_once ('common/tracker/TrackerFactory.class.php');
-require_once ('common/tracker/Tracker_Artifact.class.php');
-require_once ('common/tracker/Tracker_ArtifactFactory.class.php');
-require_once ('common/tracker/Tracker_FormElementFactory.class.php');
+require_once 'common/tracker/Tracker.class.php';
+require_once 'common/tracker/TrackerFactory.class.php';
+require_once 'common/tracker/Tracker_Artifact.class.php';
+require_once 'common/tracker/Tracker_ArtifactFactory.class.php';
+require_once 'common/tracker/Tracker_FormElementFactory.class.php';
 
 
 class CodendiOSLCConnector extends OSLCConnector {

@@ -24,7 +24,7 @@
 
 // Screen which displays a list of access tokens the user has already granted to consumers 
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 
 require_once 'checks.php';	

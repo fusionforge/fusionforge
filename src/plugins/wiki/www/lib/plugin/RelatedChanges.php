@@ -27,7 +27,7 @@
  * DONE: days links requires action=RelatedChanges arg
  */
 
-require_once("lib/plugin/RecentChanges.php");
+require_once 'lib/plugin/RecentChanges.php';
 
 class _RelatedChanges_HtmlFormatter
 extends _RecentChanges_HtmlFormatter
@@ -98,7 +98,7 @@ extends WikiPlugin_RecentChanges
             elseif ($format == 'rss2')
                 $fmt_class = '_RecentChanges_Rss2Formatter';
             elseif ($format == 'rss091') {
-                include_once "lib/RSSWriter091.php";
+                include_once 'lib/RSSWriter091.php';
                 $fmt_class = '_RecentChanges_RssFormatter091';
             }
             elseif ($format == 'sidebar')

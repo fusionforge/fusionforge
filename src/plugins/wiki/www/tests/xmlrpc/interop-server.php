@@ -1,6 +1,6 @@
 <?php // $Id: interop-server.php 7181 2009-10-05 14:25:48Z vargenau $
 
-include("xmlrpc_utils.php");
+include 'xmlrpc_utils.php';
 
 /* echos whatever it receives */
 function method_echo($method, $params) {

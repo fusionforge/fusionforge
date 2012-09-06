@@ -228,7 +228,7 @@ class extsubprojPlugin extends Plugin {
 	* @return boolean
 	*/
 	function widgets($params) {
-		require_once('common/widget/WidgetLayoutManager.class.php');
+		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
 			$params['fusionforge_widgets'][] = 'plugin_extsubproj_project_subprojects';
 		}/*
@@ -245,7 +245,7 @@ class extsubprojPlugin extends Plugin {
 	function widget_instance($params) {
 		global $gfplugins;
 		//$user = UserManager::instance()->getCurrentUser();
-		require_once('common/widget/WidgetLayoutManager.class.php');
+		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['widget'] == 'plugin_extsubproj_project_subprojects') {
 			require_once $gfplugins.$this->name.'/include/extsubproj_Widget_SubProjects.class.php';
 			$params['instance'] = new extsubproj_Widget_SubProjects(WidgetLayoutManager::OWNER_TYPE_GROUP, $this);

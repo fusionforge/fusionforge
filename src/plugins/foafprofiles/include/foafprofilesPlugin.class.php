@@ -25,7 +25,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('common/include/rdfutils.php');
+require_once 'common/include/rdfutils.php';
 
 class foafprofilesPlugin extends Plugin {
 	public function __construct($id=0) {

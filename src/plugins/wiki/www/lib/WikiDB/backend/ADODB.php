@@ -63,11 +63,11 @@
  *     performance is comparable.
  */
 
-require_once('lib/WikiDB/backend.php');
+require_once 'lib/WikiDB/backend.php';
 // Error handling - calls trigger_error.  NB - does not close the connection.  Does it need to?
-include_once('lib/WikiDB/adodb/adodb-errorhandler.inc.php');
+include_once 'lib/WikiDB/adodb/adodb-errorhandler.inc.php';
 // include the main adodb file
-require_once('lib/WikiDB/adodb/adodb.inc.php');
+require_once 'lib/WikiDB/adodb/adodb.inc.php';
 
 class WikiDB_backend_ADODB
 extends WikiDB_backend

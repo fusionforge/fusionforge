@@ -130,7 +130,7 @@ extends WikiPlugin
             $p = $dbi->getPage($page_for_date);
             $r = $p->getCurrentRevision();
             $c = $r->getContent();
-            include_once('lib/BlockParser.php');
+            include_once 'lib/BlockParser.php';
             $content = TransformText(implode("\n", $c), $r->get('markup'));
             $link = HTML::a(array('class' => 'cal-hide',
                                   'href'  => WikiURL($page_for_date,

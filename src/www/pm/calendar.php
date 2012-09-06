@@ -30,7 +30,7 @@
  * @todo display holidays.
  */
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'pm/include/ProjectGroupHTML.class.php';
 

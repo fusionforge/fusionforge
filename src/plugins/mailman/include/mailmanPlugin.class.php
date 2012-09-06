@@ -24,15 +24,15 @@
  */
 
 require_once 'plugins_utils.php';
-require_once('common/system_event/SystemEvent.class.php');
-require_once('common/event/Event.class.php');
+require_once 'common/system_event/SystemEvent.class.php';
+require_once 'common/event/Event.class.php';
 require_once 'MailmanList.class.php';
 require_once 'MailmanListFactory.class.php';
 require_once 'MailmanListDao.class.php';
 require_once 'common/dao/CodendiDataAccess.class.php';
 
-require_once'mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php';
-require_once'mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php';
+require_once 'mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php';
+require_once 'mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php';
 
 
 class mailmanPlugin extends Plugin {
@@ -64,7 +64,7 @@ class mailmanPlugin extends Plugin {
 
 	function getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'MailmanPluginInfo')) {
-			require_once('MailmanPluginInfo.class.php');
+			require_once 'MailmanPluginInfo.class.php';
 			$this->pluginInfo = new MailmanPluginInfo($this);
 		}
 		return $this->pluginInfo;

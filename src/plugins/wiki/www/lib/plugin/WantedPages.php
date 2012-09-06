@@ -30,7 +30,7 @@
  *
  * TODO: sort pagename col: disable backend fallback
  **/
-include_once('lib/PageList.php');
+include_once 'lib/PageList.php';
 
 class WikiPlugin_WantedPages
 extends WikiPlugin

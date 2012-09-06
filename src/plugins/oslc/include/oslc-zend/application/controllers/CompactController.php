@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-require_once('HTTP.php');
+require_once 'HTTP.php';
 $exceptions_dir = dirname( dirname( __FILE__ )) . DIRECTORY_SEPARATOR. 'exceptions'. DIRECTORY_SEPARATOR;
 require_once($exceptions_dir . 'oslcException.php');
 

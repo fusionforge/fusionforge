@@ -26,7 +26,7 @@
 // Show no more pending projects per page than specified here
 $LIMIT = 50;
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 require_once $gfwww.'include/canned_responses.php';

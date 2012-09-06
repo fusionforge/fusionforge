@@ -43,7 +43,7 @@
  * ALONE BASIS."
  */
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'tracker/include/ArtifactTypeFactoryHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';

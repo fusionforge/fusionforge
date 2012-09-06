@@ -20,14 +20,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('lib/PageList.php');
-require_once('lib/wikilens/Buddy.php');
-require_once("lib/wikilens/PageListColumns.php");
+require_once 'lib/PageList.php';
+require_once 'lib/wikilens/Buddy.php';
+require_once 'lib/wikilens/PageListColumns.php';
 
 if (ENABLE_USER_NEW)
-    require_once("lib/WikiUserNew.php");
+    require_once 'lib/WikiUserNew.php';
 else
-    require_once("lib/WikiUser.php");
+    require_once 'lib/WikiUser.php';
 
 /**
  * Show a user's ratings in a table, using PageList.

@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once(forge_get_config('jpgraph_path').'/jpgraph.php');
 require_once(forge_get_config('jpgraph_path').'/jpgraph_pie.php');

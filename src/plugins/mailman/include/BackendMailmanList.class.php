@@ -20,7 +20,7 @@
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
-require_once('common/event/Event.class.php');
+require_once 'common/event/Event.class.php';
 require_once 'mailman/include/MailmanListDao.class.php';
 require_once 'common/dao/CodendiDataAccess.class.php';
 require_once 'mailman/include/MailmanList.class.php';

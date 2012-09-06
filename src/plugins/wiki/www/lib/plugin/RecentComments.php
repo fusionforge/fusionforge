@@ -26,8 +26,8 @@
  * @author: Reini Urban
  */
 
-require_once("lib/plugin/RecentChanges.php");
-require_once("lib/plugin/WikiBlog.php");
+require_once 'lib/plugin/RecentChanges.php';
+require_once 'lib/plugin/WikiBlog.php';
 
 class WikiPlugin_RecentComments
 extends WikiPlugin_RecentChanges

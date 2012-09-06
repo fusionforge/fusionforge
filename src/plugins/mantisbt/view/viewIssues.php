@@ -127,7 +127,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 		$picto_haut = util_make_url('themes/gforge/images/picto_fleche_haut_marron.png');
 		$picto_bas = util_make_url('themes/gforge/images/picto_fleche_bas_marron.png');
 		$nbligne++;
-		include('jumpToIssue.php');
+		include 'jumpToIssue.php';
 		echo '<table>';
 		echo	'<tr>';
 		// Priority

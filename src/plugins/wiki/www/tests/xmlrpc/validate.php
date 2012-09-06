@@ -34,7 +34,7 @@
 */
 
 
-include("xmlrpc_utils.php");
+include 'xmlrpc_utils.php';
 
 // ensure extension is loaded.
 xu_load_extension();

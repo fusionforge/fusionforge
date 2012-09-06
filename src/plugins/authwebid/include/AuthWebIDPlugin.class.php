@@ -26,7 +26,7 @@
 require_once $GLOBALS['gfcommon'].'include/User.class.php';
 
 // WebID framework
-require_once('WebIDDelegatedAuth/lib/Authentication.php');
+require_once 'WebIDDelegatedAuth/lib/Authentication.php';
 
 /**
  * WebID Authentication manager Plugin for FusionForge

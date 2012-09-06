@@ -25,7 +25,7 @@
  * although only part of the data, as JSON.
  */
 
-require "/usr/share/gforge/common/include/env.inc.php";
+require '/usr/share/gforge/common/include/env.inc.php';
 require_once $gfcommon."include/pre.php";
 require_once $gfcommon.'include/minijson.php';
 require_once $gfcommon.'tracker/Artifact.class.php';

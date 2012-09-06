@@ -26,7 +26,7 @@
  * This file belongs to WikiPluginCached.
  */
 
-require_once "lib/WikiPlugin.php";
+require_once 'lib/WikiPlugin.php';
 // require_once "lib/plugincache-config.php"; // replaced by config.ini settings!
 
 // types:
@@ -492,7 +492,7 @@ class WikiPluginCached extends WikiPlugin
                 if ($lib = $pearFinder->findFile('Cache.php', 'missing_ok'))
                     require_once($lib);
                 else // fall back to our own copy
-                    require_once('lib/pear/Cache.php');
+                    require_once 'lib/pear/Cache.php';
             }
             $cacheparams = array();
             foreach (explode(':','database:cache_dir:filename_prefix:highwater:lowwater'

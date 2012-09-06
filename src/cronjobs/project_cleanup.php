@@ -52,11 +52,11 @@ $result = db_query_params ('SELECT user_id, email FROM users WHERE status=$1 and
 if (db_numrows($result)) {
 
   // Plugins subsystem
-  require_once('common/include/Plugin.class.php') ;
-  require_once('common/include/PluginManager.class.php') ;
+  require_once 'common/include/Plugin.class.php';
+  require_once 'common/include/PluginManager.class.php';
 
   // SCM-specific plugins subsystem
-  require_once('common/include/SCMPlugin.class.php') ;
+  require_once 'common/include/SCMPlugin.class.php';
 
   setup_plugin_manager () ;
 

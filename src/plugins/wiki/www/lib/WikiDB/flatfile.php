@@ -21,8 +21,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once( 'lib/WikiDB.php' );
-require_once( 'lib/WikiDB/backend/flatfile.php' );
+require_once 'lib/WikiDB.php';
+require_once 'lib/WikiDB/backend/flatfile.php';
 
 /**
  * Wrapper class for the flatfile backend.

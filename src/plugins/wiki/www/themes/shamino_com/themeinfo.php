@@ -18,7 +18,7 @@ if (!defined('PHPWIKI_VERSION')) {
  * no logo
  */
 
-require_once('lib/WikiTheme.php');
+require_once 'lib/WikiTheme.php';
 
 class WikiTheme_shamino_com extends WikiTheme {
 

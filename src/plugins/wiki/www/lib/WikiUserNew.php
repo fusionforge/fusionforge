@@ -203,7 +203,7 @@ function _determineBogoUserOrPassUser($UserName) {
     // Check for password and possibly upgrade user object.
     // $_BogoUser = new _BogoUser($UserName);
     if (_isBogoUserAllowed() and isWikiWord($UserName)) {
-        include_once("lib/WikiUser/BogoLogin.php");
+        include_once 'lib/WikiUser/BogoLogin.php';
         $_BogoUser = new _BogoLoginPassUser($UserName);
         if ($_BogoUser->userExists() or $GLOBALS['request']->getArg('auth'))
             return $_BogoUser;
@@ -486,7 +486,7 @@ class _WikiUser
     //Fixme: for _HttpAuthPassUser
     function PrintLoginForm (&$request, $args, $fail_message = false,
                              $seperate_page = false) {
-        include_once('lib/Template.php');
+        include_once 'lib/Template.php';
         // Call update_locale in case the system's default language is not 'en'.
         // (We have no user pref for lang at this point yet, no one is logged in.)
         if ($GLOBALS['LANG'] != DEFAULT_LANGUAGE)
@@ -665,7 +665,7 @@ class _WikiUser
             {
                 // upgrade class
                 $class = "_" . $this->_current_method . "PassUser";
-                include_once("lib/WikiUser/".$this->_current_method.".php");
+                include_once 'lib/WikiUser/'.$this->_current_method.'.php';
                 $user = new $class($userid,$this->_prefs);
                 if (!check_php_version(5))
                     eval("\$this = \$user;");
@@ -685,7 +685,7 @@ class _WikiUser
         {
             // upgrade class
             $class = "_" . $this->_current_method . "PassUser";
-            include_once("lib/WikiUser/".$this->_current_method.".php");
+            include_once 'lib/WikiUser/'.$this->_current_method.'.php';
             $user = new $class($userid, $this->_prefs);
             if (!check_php_version(5))
                 eval("\$this = \$user;");
@@ -989,7 +989,7 @@ extends _AnonUser
                     // On php5 we can directly return and upgrade the Object,
                     // before we have to upgrade it manually.
                     if (!empty($GLOBALS['PHP_AUTH_USER']) or !empty($_SERVER['REMOTE_USER'])) {
-                        include_once("lib/WikiUser/HttpAuth.php");
+                        include_once 'lib/WikiUser/HttpAuth.php';
                         if (check_php_version(5))
                             return new _HttpAuthPassUser($UserName,$this->_prefs);
                         else {
@@ -1012,7 +1012,7 @@ extends _AnonUser
                     } elseif (in_array('LDAP', $dbh->getAuthParam('USER_AUTH_ORDER')) and
                               defined('LDAP_AUTH_HOST') and defined('LDAP_BASE_DN') and
                               function_exists('ldap_connect')) {
-                        include_once("lib/WikiUser/LDAP.php");
+                        include_once 'lib/WikiUser/LDAP.php';
                         if (check_php_version(5))
                             return new _LDAPPassUser($UserName,$this->_prefs);
                         else {
@@ -1023,7 +1023,7 @@ extends _AnonUser
                         }
                     } elseif (in_array('IMAP', $dbh->getAuthParam('USER_AUTH_ORDER')) and
                               defined('IMAP_AUTH_HOST') and function_exists('imap_open')) {
-                        include_once("lib/WikiUser/IMAP.php");
+                        include_once 'lib/WikiUser/IMAP.php';
                         if (check_php_version(5))
                             return new _IMAPPassUser($UserName,$this->_prefs);
                         else {
@@ -1034,7 +1034,7 @@ extends _AnonUser
                         }
                     } elseif (in_array('File', $dbh->getAuthParam('USER_AUTH_ORDER')) and
                               defined('AUTH_USER_FILE') and file_exists(AUTH_USER_FILE)) {
-                        include_once("lib/WikiUser/File.php");
+                        include_once 'lib/WikiUser/File.php';
                         if (check_php_version(5))
                             return new _FilePassUser($UserName, $this->_prefs);
                         else {
@@ -1044,7 +1044,7 @@ extends _AnonUser
                             return $user;
                         }
                     } else {
-                        include_once("lib/WikiUser/PersonalPage.php");
+                        include_once 'lib/WikiUser/PersonalPage.php';
                         if (check_php_version(5))
                             return new _PersonalPagePassUser($UserName,$this->_prefs);
                         else {
@@ -1179,16 +1179,16 @@ extends _AnonUser
         if (!empty($this->_prefs->_method)) {
             if ($this->_prefs->_method == 'ADODB') {
                 // FIXME: strange why this should be needed...
-                include_once("lib/WikiUser/Db.php");
-                include_once("lib/WikiUser/AdoDb.php");
+                include_once 'lib/WikiUser/Db.php';
+                include_once 'lib/WikiUser/AdoDb.php';
                 return _AdoDbPassUser::getPreferences();
             } elseif ($this->_prefs->_method == 'SQL') {
-                include_once("lib/WikiUser/Db.php");
-                include_once("lib/WikiUser/PearDb.php");
+                include_once 'lib/WikiUser/Db.php';
+                include_once 'lib/WikiUser/PearDb.php';
                 return _PearDbPassUser::getPreferences();
             } elseif ($this->_prefs->_method == 'PDO') {
-                include_once("lib/WikiUser/Db.php");
-                include_once("lib/WikiUser/PdoDb.php");
+                include_once 'lib/WikiUser/Db.php';
+                include_once 'lib/WikiUser/PdoDb.php';
                 return _PdoDbPassUser::getPreferences();
             }
         }
@@ -1214,18 +1214,18 @@ extends _AnonUser
         if (!empty($this->_prefs->_method)) {
             if ($this->_prefs->_method == 'ADODB') {
                 // FIXME: strange why this should be needed...
-                include_once("lib/WikiUser/Db.php");
-                include_once("lib/WikiUser/AdoDb.php");
+                include_once 'lib/WikiUser/Db.php';
+                include_once 'lib/WikiUser/AdoDb.php';
                 return _AdoDbPassUser::setPreferences($prefs, $id_only);
             }
             elseif ($this->_prefs->_method == 'SQL') {
-                include_once("lib/WikiUser/Db.php");
-                include_once("lib/WikiUser/PearDb.php");
+                include_once 'lib/WikiUser/Db.php';
+                include_once 'lib/WikiUser/PearDb.php';
                 return _PearDbPassUser::setPreferences($prefs, $id_only);
             }
             elseif ($this->_prefs->_method == 'PDO') {
-                include_once("lib/WikiUser/Db.php");
-                include_once("lib/WikiUser/PdoDb.php");
+                include_once 'lib/WikiUser/Db.php';
+                include_once 'lib/WikiUser/PdoDb.php';
                 return _PdoDbPassUser::setPreferences($prefs, $id_only);
             }
         }

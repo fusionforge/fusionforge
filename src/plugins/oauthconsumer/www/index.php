@@ -2,7 +2,7 @@
 
 // TODO : copyright header missing
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once 'checks.php';
 
 oauthconsumer_CheckUser();

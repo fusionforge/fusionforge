@@ -39,7 +39,7 @@
  * Rewritten for recursive array support by ReiniUrban.
  */
 
-require_once('lib/plugin/_BackendInfo.php');
+require_once 'lib/plugin/_BackendInfo.php';
 
 class WikiPlugin_EditMetaData
 extends WikiPlugin__BackendInfo

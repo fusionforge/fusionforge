@@ -8,7 +8,7 @@
 // You may copy this code freely under the conditions of the GPL.
 //
 
-require_once('lib/difflib.php');
+require_once 'lib/difflib.php';
 
 class _HWLDF_WordAccumulator {
     function _HWLDF_WordAccumulator () {
@@ -229,7 +229,7 @@ function showDiff (&$request) {
         $html = HTML::div(array('class'=>'wikitext','id'=>'difftext'),
                           HTML::p(fmt("I'm sorry, there is no such page as %s.",
                                       WikiLink($pagename, 'unknown'))));
-        require_once('lib/Template.php');
+        require_once 'lib/Template.php';
         GeneratePage($html, sprintf(_("Diff: %s"), $pagename), false);
         return; //early return
     }
@@ -334,11 +334,11 @@ function showDiff (&$request) {
         }
 
         $html->pushContent(HTML::hr(), HTML::h2($new_version));
-        require_once("lib/BlockParser.php");
+        require_once 'lib/BlockParser.php';
         $html->pushContent(TransformText($new,$new->get('markup'),$pagename));
     }
 
-    require_once('lib/Template.php');
+    require_once 'lib/Template.php';
     GeneratePage($html, sprintf(_("Diff: %s"), $pagename), $new);
 }
 

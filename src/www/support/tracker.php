@@ -24,7 +24,7 @@
  * See: https://fusionforge.org/tracker/?func=detail&aid=337
  */
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 $aid = getIntFromRequest('aid');

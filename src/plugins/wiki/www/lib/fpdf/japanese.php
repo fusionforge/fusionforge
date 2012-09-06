@@ -3,7 +3,7 @@
 
 // PDF functions taken from FPDF http://www.fpdf.org
 
-require_once('lib/pdf.php');
+require_once 'lib/pdf.php';
 
 class PDF_Japanese extends PDF {
     var $B;

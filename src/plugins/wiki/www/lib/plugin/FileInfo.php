@@ -139,7 +139,7 @@ extends WikiPlugin
         // $x, array($i,$j) => sprintf($x, $i, $j)
         $result = call_user_func_array("sprintf", $s);
         if (in_array('link', $modes)) {
-            require_once("lib/InlineParser.php");
+            require_once 'lib/InlineParser.php';
             return TransformInline($result, 2, $basepage);
         } else {
             return HTML::raw($result);

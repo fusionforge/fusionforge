@@ -25,7 +25,7 @@
  */
 
 // requires the openssl extension
-require_once("lib/HttpClient.php");
+require_once 'lib/HttpClient.php';
 
 class _FacebookPassUser
 extends _PassUser {

@@ -33,7 +33,7 @@
  * Author: ReiniUrban
  */
 
-require_once("lib/WikiPlugin.php");
+require_once 'lib/WikiPlugin.php';
 
 class WikiPlugin_ModeratedPage
 extends WikiPlugin
@@ -119,7 +119,7 @@ extends WikiPlugin
         foreach ($args['moderators'] as $userid) {
             $users[$userid] = 0;
         }
-        require_once("lib/MailNotify.php");
+        require_once 'lib/MailNotify.php';
         $mail = new MailNotify($page->getName());
 
         list($args['emails'], $args['moderators']) =
@@ -251,7 +251,7 @@ extends WikiPlugin
                               join(", ", $status['moderators'])
                               ));
             // Send email
-            require_once("lib/MailNotify.php");
+            require_once 'lib/MailNotify.php';
             $pagename = $page->getName();
             $mailer = new MailNotify($pagename);
             $subject = "[".WIKI_NAME.'] '.$action._(": ")._("ModeratedPage").' '.$pagename;
@@ -347,7 +347,7 @@ extends WikiPlugin
         if ($email = $user->getPref('email')) {
             $action_page = $request->getPage(_("ModeratedPage"));
             $status = $this->getSiteStatus($request, $action_page);
-            require_once("lib/MailNotify.php");
+            require_once 'lib/MailNotify.php';
             $mailer = new MailNotify($pagename);
             $subject = "[".WIKI_NAME."] $pass $action "._("ModeratedPage")._(": ").$pagename;
             $mailer->from = $request->_user->UserFrom();
@@ -378,7 +378,7 @@ extends WikiPlugin
             $rev = $p->getCurrentRevision(true);
             $curr_content = $rev->getPackedContent();
             $new_content = $moderation['args']['edit']['content'];
-            include_once("lib/difflib.php");
+            include_once 'lib/difflib.php';
             $diff2 = new Diff($curr_content, $new_content);
             $fmt = new UnifiedDiffFormatter(/*$context_lines*/);
             $diff  = $pagename . " Current Version " .

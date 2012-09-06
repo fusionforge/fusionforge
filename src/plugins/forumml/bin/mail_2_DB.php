@@ -34,16 +34,16 @@
 ini_set('max_execution_time', 0);
 ini_set('memory_limit', -1);
 
-require_once('pre.php');
+require_once 'pre.php';
 error_reporting(E_ALL);
 require 'Mail/Mbox.php';
 require_once(dirname(__FILE__).'/../include/ForumML_mimeDecode.class.php');
 require_once(dirname(__FILE__).'/../include/ForumMLInsert.class.php');
 require_once(dirname(__FILE__).'/../include/ForumML_FileStorage.class.php');
-require_once('common/plugin/PluginManager.class.php');
+require_once 'common/plugin/PluginManager.class.php';
 require_once 'plugins_utils.php';
-require_once('www/mail/mail_utils.php');
-require_once('utils.php');
+require_once 'www/mail/mail_utils.php';
+require_once 'utils.php';
 
 $list = $argv[1];
 // get list id and group id from list name

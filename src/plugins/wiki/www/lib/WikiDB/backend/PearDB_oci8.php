@@ -6,7 +6,7 @@
  * @author: Philippe.Vanhaesendonck@topgame.be
  */
 
-require_once('lib/WikiDB/backend/PearDB_pgsql.php');
+require_once 'lib/WikiDB/backend/PearDB_pgsql.php';
 
 class WikiDB_backend_PearDB_oci8
 extends WikiDB_backend_PearDB_pgsql

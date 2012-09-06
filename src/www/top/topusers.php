@@ -26,7 +26,7 @@
 // Results per page
 $LIMIT = 50;
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 $offset = getStringFromRequest('offset');

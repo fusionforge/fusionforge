@@ -24,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'survey/SurveyQuestion.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';

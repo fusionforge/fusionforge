@@ -45,8 +45,8 @@
  */
 
 
-require_once('lib/ErrorManager.php');
-require_once('lib/WikiDB/backend/PearDB_pgsql.php');
+require_once 'lib/ErrorManager.php';
+require_once 'lib/WikiDB/backend/PearDB_pgsql.php';
 
 class WikiDB_backend_PearDB_ffpgsql
 extends WikiDB_backend_PearDB_pgsql

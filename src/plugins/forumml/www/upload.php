@@ -22,11 +22,11 @@
  #
  # $Id$
  #
-require_once('env.inc.php');
-require_once('pre.php');
-require_once('preplugins.php');
-require_once('mailman/include/MailmanList.class.php');
-require_once('mailman/www/mailman_utils.php');
+require_once 'env.inc.php';
+require_once 'pre.php';
+require_once 'preplugins.php';
+require_once 'mailman/include/MailmanList.class.php';
+require_once 'mailman/www/mailman_utils.php';
 require_once(dirname(__FILE__).'/../include/ForumML_Attachment.class.php');
 global $feedback ;
 $plugin_manager = PluginManager::instance();

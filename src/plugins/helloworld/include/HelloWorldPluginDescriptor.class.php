@@ -21,7 +21,7 @@
  * Portions Copyright 2011 (c) France Telecom, Coclico project
  */
 
-require_once('common/plugin/PluginDescriptor.class.php');
+require_once 'common/plugin/PluginDescriptor.class.php';
 
 
 class HelloWorldPluginDescriptor extends PluginDescriptor {

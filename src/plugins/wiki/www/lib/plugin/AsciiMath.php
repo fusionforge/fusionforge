@@ -22,9 +22,9 @@
  */
 
 if (phpversion() >= '5') {
-    require_once("lib/ASCIIMathPHP/ASCIIMathPHP-2.0.class.php");
+    require_once 'lib/ASCIIMathPHP/ASCIIMathPHP-2.0.class.php';
 } else {
-    require_once("lib/ASCIIMathPHP/ASCIIMathPHP.class.php");
+    require_once 'lib/ASCIIMathPHP/ASCIIMathPHP.class.php';
 }
 
 /**
@@ -67,9 +67,9 @@ extends WikiPlugin
         }
 
         if (phpversion() >= '5') {
-            include("lib/ASCIIMathPHP/ASCIIMathPHP-2.0.cfg.php");
+            include 'lib/ASCIIMathPHP/ASCIIMathPHP-2.0.cfg.php';
         } else {
-            include("lib/ASCIIMathPHP/ASCIIMathPHP.cfg.php");
+            include 'lib/ASCIIMathPHP/ASCIIMathPHP.cfg.php';
         }
         $ascii_math = new ASCIIMathPHP($symbol_arr, $this->source);
         $ascii_math->genMathML();

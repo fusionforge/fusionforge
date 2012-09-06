@@ -18,7 +18,7 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('Mail/mimeDecode.php');
+require_once 'Mail/mimeDecode.php';
 
 class ForumML_mimeDecode extends Mail_mimeDecode {
 

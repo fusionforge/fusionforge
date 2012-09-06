@@ -26,8 +26,8 @@
  * @author:  Reini Urban <rurban@x-ray.at>
  *
  */
-require_once('lib/PageList.php');
-require_once('lib/plugin/WikiAdminSelect.php');
+require_once 'lib/PageList.php';
+require_once 'lib/plugin/WikiAdminSelect.php';
 
 class WikiPlugin_WikiAdminChown
 extends WikiPlugin_WikiAdminSelect

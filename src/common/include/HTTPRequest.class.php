@@ -19,7 +19,7 @@
  */
 
 
-require_once('common/include/Codendi_Request.class.php');
+require_once 'common/include/Codendi_Request.class.php';
 
 
 /**

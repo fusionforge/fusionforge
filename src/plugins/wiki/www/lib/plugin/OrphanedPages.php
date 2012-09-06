@@ -25,7 +25,7 @@
  * Initial version by Lawrence Akka
  *
  **/
-require_once('lib/PageList.php');
+require_once 'lib/PageList.php';
 
 class WikiPlugin_OrphanedPages
 extends WikiPlugin

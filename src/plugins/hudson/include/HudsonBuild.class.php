@@ -17,10 +17,10 @@
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
-require_once('hudson.class.php');
-require_once('HudsonJobURLMalformedException.class.php');
-require_once('HudsonJobURLFileException.class.php');
-require_once('HudsonJobURLFileNotFoundException.class.php');
+require_once 'hudson.class.php';
+require_once 'HudsonJobURLMalformedException.class.php';
+require_once 'HudsonJobURLFileException.class.php';
+require_once 'HudsonJobURLFileNotFoundException.class.php';
 
 class HudsonBuild {
 

@@ -22,8 +22,8 @@
 /**
  * @author: Sébastien Le Callonnec
  */
-require_once('lib/AtomParser.php');
-require_once('PHPUnit/Autoload.php');
+require_once 'lib/AtomParser.php';
+require_once 'PHPUnit/Autoload.php';
 
 class AtomParserTest
 extends phpwiki_TestCase

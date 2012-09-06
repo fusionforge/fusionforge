@@ -65,7 +65,7 @@ extends _PassUser
         $dbi =& $GLOBALS['request']->_dbi;
         $dbtype = $dbi->getParam('dbtype');
         if ($dbtype == 'ADODB') {
-            include_once("lib/WikiUser/AdoDb.php");
+            include_once 'lib/WikiUser/AdoDb.php';
             if (check_php_version(5))
                 return new _AdoDbPassUser($UserName,$this->_prefs);
             else {
@@ -75,7 +75,7 @@ extends _PassUser
             }
         }
         elseif ($dbtype == 'SQL') {
-            include_once("lib/WikiUser/PearDb.php");
+            include_once 'lib/WikiUser/PearDb.php';
             if (check_php_version(5))
                 return new _PearDbPassUser($UserName,$this->_prefs);
             else {
@@ -85,7 +85,7 @@ extends _PassUser
             }
         }
         elseif ($dbtype == 'PDO') {
-            include_once("lib/WikiUser/PdoDb.php");
+            include_once 'lib/WikiUser/PdoDb.php';
             if (check_php_version(5))
                 return new _PdoDbPassUser($UserName,$this->_prefs);
             else {

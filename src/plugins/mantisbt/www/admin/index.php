@@ -48,16 +48,16 @@ switch ($view) {
 		}
 		if (!isset($errorPage)) {
 			echo '<table><tr><td valign="top">';
-			include ("mantisbt/view/admin/viewCategorie.php");
+			include 'mantisbt/view/admin/viewCategorie.php';
 			echo '</td><td valign="top">';
-			include ("mantisbt/view/admin/viewVersion.php");
+			include 'mantisbt/view/admin/viewVersion.php';
 			echo '</td></tr><tr><td valign="top">';
-			include ("mantisbt/view/admin/addCategory.php");
+			include 'mantisbt/view/admin/addCategory.php';
 			echo '</td><td valign="top">';
-			include ("mantisbt/view/admin/addVersion.php");
+			include 'mantisbt/view/admin/addVersion.php';
 			echo '</td></tr></table>';
 		}
-		include ("mantisbt/view/admin/viewConfiguration.php");
+		include 'mantisbt/view/admin/viewConfiguration.php';
 		break;
 	}
 }

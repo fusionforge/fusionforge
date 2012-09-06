@@ -12,7 +12,7 @@ if (!defined('PHPWIKI_VERSION')) {
  * This file defines the default appearance ("theme") of PhpWiki.
  */
 
-require_once('lib/WikiTheme.php');
+require_once 'lib/WikiTheme.php';
 
 $WikiTheme = new WikiTheme('default');
 

@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('lib/plugin/WikiBlog.php');
+require_once 'lib/plugin/WikiBlog.php';
 
 /**
  * BlogJournal - Include the latest blog entries for the current users blog if signed,

@@ -176,7 +176,7 @@ class Request {
             $this->discardOutput(); // This might print the gzip headers. Not good.
             $this->buffer_output(false);
 
-            include_once('lib/Template.php');
+            include_once 'lib/Template.php';
             $tmpl = new Template('redirect', $this, array('REDIRECT_URL' => $url));
             $tmpl->printXML();
             $this->finish();

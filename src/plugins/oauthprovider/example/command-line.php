@@ -25,7 +25,7 @@
 // This program helps test the OAuth provider plugin of fusionforge.
 // See the README for more details.
 
-require_once("OAuth.php");
+require_once 'OAuth.php';
 
 // customize this value which is the address of the FusionForge server
 

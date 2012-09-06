@@ -78,7 +78,7 @@ if (empty($msg)) {
 <p class="notice_title" onclick='jQuery("#expandable_file").slideToggle(300)'><?php echo _('Add file') ?></p>
 <div id='expandable_file' class="notice_content">
 <?php
-		include("addAttachment.php");
+		include 'addAttachment.php';
 	}
 ?>
 </div>

@@ -18,8 +18,8 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('WidgetLayout_Row.class.php');
-require_once('WidgetLayout_Row_Column.class.php');
+require_once 'WidgetLayout_Row.class.php';
+require_once 'WidgetLayout_Row_Column.class.php';
 
 /**
 * WidgetLayout

@@ -29,7 +29,7 @@
  *
  */
 
-require_once('lib/plugin/WikiAdminSetAcl.php');
+require_once 'lib/plugin/WikiAdminSetAcl.php';
 
 class WikiPlugin_WikiAdminSetAclSimple
 extends WikiPlugin_WikiAdminSetAcl

@@ -5,7 +5,7 @@
  */
 
 // Encoding for RSS output.
-include_once("lib/RssWriter.php");
+include_once 'lib/RssWriter.php';
 
 /**
  * A class for writing RSS 2.0 with xml-rpc notifier

@@ -20,8 +20,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 //require_once('lib/HtmlElement.php');
-require_once('lib/CachedMarkup.php');
-require_once('lib/InlineParser.php');
+require_once 'lib/CachedMarkup.php';
+require_once 'lib/InlineParser.php';
 
 /**
  * Deal with paragraphs and proper, recursive block indents

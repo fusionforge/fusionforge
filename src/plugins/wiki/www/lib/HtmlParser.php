@@ -38,7 +38,7 @@
  */
 
 // RssParser contains the XML (expat) and url-grabber methods
-require_once('lib/XmlParser.php');
+require_once 'lib/XmlParser.php';
 
 class HtmlParser
 extends XmlParser

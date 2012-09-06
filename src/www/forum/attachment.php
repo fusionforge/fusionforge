@@ -27,7 +27,7 @@
 	by Daniel Perez - 2005
 */
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'forum/ForumHTML.class.php';
 

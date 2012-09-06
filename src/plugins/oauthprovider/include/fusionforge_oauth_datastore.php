@@ -27,7 +27,7 @@
 // Provider in PHP" by Morten Fangel
 // (http://sevengoslings.net/~fangel/oauthprovider-sp-guide.html)
 
-require_once('OAuth.php');
+require_once 'OAuth.php';
 
 /**
  * OAuthDataStore singleton class to manage tokens, consumers and nonce in FusionForge DB

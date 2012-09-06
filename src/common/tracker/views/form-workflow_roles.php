@@ -23,7 +23,7 @@
  */
 
 
-require_once('common/tracker/ArtifactWorkflow.class.php');
+require_once 'common/tracker/ArtifactWorkflow.class.php';
 
 		$from = getIntFromRequest('from');
 		$next = getIntFromRequest('next');

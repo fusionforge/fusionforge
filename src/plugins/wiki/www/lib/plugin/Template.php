@@ -193,10 +193,10 @@ extends WikiPlugin
         // If content is single-line, call TransformInline, else call TransformText
         $initial_content = trim($initial_content, "\n");
         if (preg_match("/\n/", $initial_content)) {
-            include_once('lib/BlockParser.php');
+            include_once 'lib/BlockParser.php';
             $content = TransformText($initial_content, $r->get('markup'), $page);
         } else {
-            include_once('lib/InlineParser.php');
+            include_once 'lib/InlineParser.php';
             $content = TransformInline($initial_content, $r->get('markup'), $page);
         }
 

@@ -339,10 +339,10 @@ extends WikiPlugin
                         $input['autocomplete_list'] .= (" ".$input['args']);
                 // static xmlrpc call, local only
                 } elseif (string_starts_with($input['method'], "xmlrpc:")) {
-                    include_once("lib/XmlRpcClient.php");
+                    include_once 'lib/XmlRpcClient.php';
                     $values = wiki_xmlrpc_post(substr($input['method'],7), $input['args']);
                 } elseif (string_starts_with($input['method'], "url:")) {
-                    include_once("lib/HttpClient.php");
+                    include_once 'lib/HttpClient.php';
                     $html = HttpClient::quickGet(substr($input['method'],4));
                     //TODO: how to parse the HTML result into a list?
                 } elseif (string_starts_with($input['method'], "dynurl:")) {
@@ -351,7 +351,7 @@ extends WikiPlugin
                     $dbi = $request->getDbh();
                     $pluginName = substr($input['method'],7);
                     $basepage = '';
-                    require_once("lib/WikiPlugin.php");
+                    require_once 'lib/WikiPlugin.php';
                     $w = new WikiPluginLoader;
                     $p = $w->getPlugin($pluginName, false); // second arg?
                     if (!is_object($p))

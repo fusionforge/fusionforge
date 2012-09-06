@@ -28,7 +28,7 @@ Mock::generatePartial(
 require_once(dirname(__FILE__).'/../include/hudson.class.php');
 Mock::generate('hudson');
 
-require_once('common/language/BaseLanguage.class.php');
+require_once 'common/language/BaseLanguage.class.php';
 Mock::generate('BaseLanguage');
 
 class HudsonTestResultTest extends UnitTestCase {

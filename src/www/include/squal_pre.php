@@ -5,6 +5,6 @@
  * No longer required, all functionality provided by pre.php
  */
 
-require_once ('pre.php') ;
+require_once 'pre.php';
 
 ?>

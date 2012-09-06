@@ -23,7 +23,7 @@
 
 /* main display */
 echo "<div style='float:left; width:49%'>";
-include ("mantisbt/view/admin/StatPerStatus.php");
+include 'mantisbt/view/admin/StatPerStatus.php';
 echo "</div>";
 //echo "<div>";
 //include ("mantisbt/view/admin/StatPerMember.php");

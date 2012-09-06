@@ -17,9 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
-require_once('HudsonWidget.class.php');
-require_once('common/widget/Widget.class.php');
-require_once('PluginHudsonJobDao.class.php');
+require_once 'HudsonWidget.class.php';
+require_once 'common/widget/Widget.class.php';
+require_once 'PluginHudsonJobDao.class.php';
 
 abstract class HudsonJobWidget extends HudsonWidget {
 

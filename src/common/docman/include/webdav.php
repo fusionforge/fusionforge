@@ -34,7 +34,7 @@
  * Feel free to add you on input.
  */
 
-require_once "HTTP/WebDAV/Server.php";
+require_once 'HTTP/WebDAV/Server.php';
 
 class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 

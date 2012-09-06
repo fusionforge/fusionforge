@@ -22,7 +22,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require "PFO-RBAC.interface.php";
+require 'PFO-RBAC.interface.php';
 
 define ('USE_PFO_RBAC', true);
 

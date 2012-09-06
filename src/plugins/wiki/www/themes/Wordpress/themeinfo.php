@@ -14,7 +14,7 @@ if (!defined('PHPWIKI_VERSION')) {
  * @author: Mike Pickering
  */
 
-require_once('lib/WikiTheme.php');
+require_once 'lib/WikiTheme.php';
 
 class WikiTheme_Wordpress extends WikiTheme {
 

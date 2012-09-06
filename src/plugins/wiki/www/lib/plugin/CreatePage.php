@@ -33,7 +33,7 @@
  * @authors: Dan Frankowski, Reini Urban
  */
 
-include_once("lib/plugin/Template.php");
+include_once 'lib/plugin/Template.php';
 
 class WikiPlugin_CreatePage
 extends WikiPlugin_Template

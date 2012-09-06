@@ -124,7 +124,7 @@ extends WikiPlugin
         $html = HTML();
         if (!function_exists('pspell_new_config')) {
             // use the aspell commandline interface
-            include_once("lib/WikiPluginCached.php");
+            include_once 'lib/WikiPluginCached.php';
             $args = "";
             $source = preg_replace("/^/m", "^", $source);
             if (ASPELL_DATA_DIR)
@@ -159,7 +159,7 @@ extends WikiPlugin
             $revision = $page->getCurrentRevision();
         }
         $GLOBALS['request']->setArg('suggestions', $sugg);
-        include_once("lib/BlockParser.php");
+        include_once 'lib/BlockParser.php';
         $ori_html = TransformText($revision, $revision->get('markup'), $page);
         $GLOBALS['request']->setArg('suggestions', false);
 

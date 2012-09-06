@@ -20,8 +20,8 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('common/valid/ValidFactory.class.php');
-require_once('Rule_Widget.class.php');
+require_once 'common/valid/ValidFactory.class.php';
+require_once 'Rule_Widget.class.php';
 
 /**
  * Valid that widget is a valid string and a valid widget owner.

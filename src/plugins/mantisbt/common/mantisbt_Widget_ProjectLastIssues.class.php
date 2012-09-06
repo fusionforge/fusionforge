@@ -18,8 +18,8 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-require_once('common/widget/Widget.class.php');
-require_once('common/widget/WidgetLayoutManager.class.php');
+require_once 'common/widget/Widget.class.php';
+require_once 'common/widget/WidgetLayoutManager.class.php';
 
 class mantisBT_Widget_ProjectLastIssues extends Widget {
 	function __construct() {

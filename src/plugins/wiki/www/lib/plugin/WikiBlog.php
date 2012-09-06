@@ -24,7 +24,7 @@
  * @author: Changed as baseclass to AddComment and WikiForum and EditToolbar integration by ReiniUrban.
  */
 
-require_once('lib/TextSearchQuery.php');
+require_once 'lib/TextSearchQuery.php';
 
 /**
  * This plugin shows 'blogs' (comments/news) associated with a
@@ -250,7 +250,7 @@ extends WikiPlugin
             $redirected = $prefix . $pagename;
             if (!$dbi->isWikiPage($redirected)) {
                     if (!$parent) $parent = HOME_PAGE;
-                require_once('lib/loadsave.php');
+                require_once 'lib/loadsave.php';
                 $pageinfo = array('pagename' => $redirected,
                                   'content'  => '<?plugin RedirectTo page="'.$parent.'" ?>',
                                   'pagedata' => array(),
@@ -261,7 +261,7 @@ extends WikiPlugin
             $redirected = $prefix . $pagename . SUBPAGE_SEPARATOR . preg_replace("/T.*/", "", "$time");
             if (!$dbi->isWikiPage($redirected)) {
                     if (!$parent) $parent = HOME_PAGE;
-                require_once('lib/loadsave.php');
+                require_once 'lib/loadsave.php';
                 $pageinfo = array('pagename' => $redirected,
                                   'content'  => '<?plugin RedirectTo page="'.$parent.'" ?>',
                                   'pagedata' => array(),
@@ -390,7 +390,7 @@ extends WikiPlugin
                       'HIDDEN_INPUTS' =>
                       HiddenInputs($request->getArgs()));
         if (ENABLE_EDIT_TOOLBAR and !ENABLE_WYSIWYG and ($template != 'addcomment')) {
-            include_once("lib/EditToolbar.php");
+            include_once 'lib/EditToolbar.php';
             $toolbar = new EditToolbar();
             $args = array_merge($args, $toolbar->getTokens());
         }

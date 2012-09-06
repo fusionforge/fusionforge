@@ -709,7 +709,7 @@ class MantisBTPlugin extends Plugin {
 		if ( !$group || !$group->usesPlugin ( $this->name ) ) {
 			return false;
 		}
- 		require_once('common/widget/WidgetLayoutManager.class.php');
+ 		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
 			$params['fusionforge_widgets'][] = 'plugin_mantisbt_project_latestissues';
 		}
@@ -718,7 +718,7 @@ class MantisBTPlugin extends Plugin {
 
 	function myPageBox($params) {
 		global $gfplugins;
-		require_once('common/widget/WidgetLayoutManager.class.php');
+		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['widget'] == 'plugin_mantisbt_project_latestissues') {
 			require_once $gfplugins.$this->name.'/common/mantisbt_Widget_ProjectLastIssues.class.php';
 			$params['instance'] = new mantisbt_Widget_ProjectLastIssues($this);

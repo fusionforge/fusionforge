@@ -29,9 +29,9 @@ if (!defined("CLAMDSCAN_PATH"))
 if (!defined("CLAMDSCAN_VIRUS"))
     define("CLAMDSCAN_VIRUS","/var/www/virus-found");
 
-require_once('lib/WikiTheme.php');
-require_once('lib/WikiPlugin.php');
-require_once('themes/MonoBook/themeinfo.php');
+require_once 'lib/WikiTheme.php';
+require_once 'lib/WikiPlugin.php';
+require_once 'themes/MonoBook/themeinfo.php';
 
 class WikiTheme_Sidebar extends WikiTheme_MonoBook {
 
@@ -198,8 +198,8 @@ class WikiTheme_Sidebar extends WikiTheme_MonoBook {
 
 $WikiTheme = new WikiTheme_Sidebar('Sidebar');
 if (ENABLE_RATEIT) {
-  require_once("lib/wikilens/CustomPrefs.php");
-  require_once("lib/wikilens/PageListColumns.php");
+  require_once 'lib/wikilens/CustomPrefs.php';
+  require_once 'lib/wikilens/PageListColumns.php';
   //require_once("lib/plugin/RateIt.php");
   $plugin = new WikiPlugin_RateIt;
   // add parent to current theme to find the RateIt images

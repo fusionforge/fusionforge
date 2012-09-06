@@ -18,8 +18,8 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once ('CmController.php');
-require_once ('CodendiOSLCConnector.php');
+require_once 'CmController.php';
+require_once 'CodendiOSLCConnector.php';
 
 class CodendiCmController extends CmController {
     /**

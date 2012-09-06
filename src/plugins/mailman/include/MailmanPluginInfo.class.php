@@ -19,8 +19,8 @@
  *
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
-require_once('common/plugin/PluginInfo.class.php');
-require_once('MailmanPluginDescriptor.class.php');
+require_once 'common/plugin/PluginInfo.class.php';
+require_once 'MailmanPluginDescriptor.class.php';
 
 class MailmanPluginInfo extends PluginInfo {
 

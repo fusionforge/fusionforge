@@ -22,7 +22,7 @@
  * Alias for OrphanedPages. Idea and name from Mediawiki.
  **/
 
-require_once('lib/plugin/OrphanedPages.php');
+require_once 'lib/plugin/OrphanedPages.php';
 
 class WikiPlugin_DeadEndPages
 extends WikiPlugin_OrphanedPages

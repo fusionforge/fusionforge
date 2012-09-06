@@ -27,7 +27,7 @@
  * Would make sense to see arbitrary diff's between any files or revisions.
  */
 
-require_once('lib/diff.php');
+require_once 'lib/diff.php';
 
 class WikiPlugin_Diff
 extends WikiPlugin {

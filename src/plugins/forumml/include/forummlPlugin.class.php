@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
-require_once('preplugins.php');
+require_once 'preplugins.php';
 
 
 class ForumMLPlugin extends Plugin {
@@ -89,7 +89,7 @@ class ForumMLPlugin extends Plugin {
 				$group->setPluginUse ( $this->name, false );
 			}
 		} elseif ($hookname == 'search_engines') {
-			require_once('ForumMLSearchEngine.class.php');
+			require_once 'ForumMLSearchEngine.class.php';
 			// FIXME: when the hook is called, the group_id is not set.
 			// So I use the global variable instead.
 			$request =& HTTPRequest::instance();
@@ -130,7 +130,7 @@ class ForumMLPlugin extends Plugin {
 
 	function &getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'ForumMLPluginInfo')) {
-			require_once('ForumMLPluginInfo.class.php');
+			require_once 'ForumMLPluginInfo.class.php';
 			$this->pluginInfo = new ForumMLPluginInfo($this);
 		}
 		return $this->pluginInfo;

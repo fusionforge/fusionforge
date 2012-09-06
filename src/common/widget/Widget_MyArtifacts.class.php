@@ -20,7 +20,7 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('Widget.class.php');
+require_once 'Widget.class.php';
 require_once $gfcommon.'include/utils.php';
 require_once $gfwww.'include/html.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';

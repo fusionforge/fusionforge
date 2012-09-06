@@ -10,7 +10,7 @@
  * Latest version is available at http://php.weblogs.com
  * 
 */
-include_once('PEAR.php');
+include_once 'PEAR.php';
 
 define('ADODB_ERROR_HANDLER','ADODB_Error_PEAR');
 

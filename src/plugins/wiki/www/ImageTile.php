@@ -1,6 +1,6 @@
 <?php // -*-php-*- $Id: ImageTile.php 7960 2011-03-04 13:58:21Z vargenau $
 // FIXME! This is a mess. Everything.
-require_once('lib/stdlib.php');
+require_once 'lib/stdlib.php';
 
 $remove = 0;
 if (preg_match('/^(http|ftp|https):\/\//i',$_REQUEST['url'])) {

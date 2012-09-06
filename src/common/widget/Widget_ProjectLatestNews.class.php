@@ -18,7 +18,7 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('Widget.class.php');
+require_once 'Widget.class.php';
 
 /**
 * Widget_ProjectLatestNews
@@ -33,7 +33,7 @@ class Widget_ProjectLatestNews extends Widget {
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));
 		if ($project && $this->canBeUsedByProject($project)) {
-			require_once('www/news/news_utils.php');
+			require_once 'www/news/news_utils.php';
 			$this->content = news_show_latest($request->get('group_id'), 10, false);
 		}
 	}

@@ -30,8 +30,8 @@
  * Future versions will support PagePermissions.
  */
 // maybe display more attributes with this class...
-require_once('lib/PageList.php');
-require_once('lib/plugin/WikiAdminSelect.php');
+require_once 'lib/PageList.php';
+require_once 'lib/plugin/WikiAdminSelect.php';
 
 class WikiPlugin_WikiAdminRemove
 extends WikiPlugin_WikiAdminSelect

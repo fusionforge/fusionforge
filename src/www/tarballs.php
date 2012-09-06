@@ -27,7 +27,7 @@
 
 $no_gz_buffer=true;
 
-require_once('env.inc.php');
+require_once 'env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 // get current information

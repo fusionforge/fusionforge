@@ -20,7 +20,7 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('common/valid/Rule.class.php');
+require_once 'common/valid/Rule.class.php';
 
 /**
  * Check that value match widget owner format

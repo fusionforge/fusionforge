@@ -1,6 +1,6 @@
 <?php
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once 'checks.php';
 
 if(!form_key_is_valid(getStringFromRequest( 'plugin_oauthconsumer_provider_update_token' )))	    {

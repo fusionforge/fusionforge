@@ -164,7 +164,7 @@ class Google {
         }
         else
             $this->license_key = GOOGLE_LICENSE_KEY;
-        require_once("lib/nusoap/nusoap.php");
+        require_once 'lib/nusoap/nusoap.php';
 
         $this->soapclient = new soapclient(SERVER_URL . NormalizeWebFileName("GoogleSearch.wsdl"), "wsdl");
         $this->proxy = $this->soapclient->getProxy();

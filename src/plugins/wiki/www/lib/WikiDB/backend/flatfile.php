@@ -32,8 +32,8 @@
  * Author: Reini Urban, based on the file backend by Jochen Kalmbach
  */
 
-require_once('lib/WikiDB/backend/file.php');
-require_once('lib/loadsave.php');
+require_once 'lib/WikiDB/backend/file.php';
+require_once 'lib/loadsave.php';
 
 class WikiDB_backend_flatfile
 extends WikiDB_backend_file

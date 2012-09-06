@@ -1289,7 +1289,7 @@ function NoSuchRevision (&$request, $page, $version) {
     $html = HTML(HTML::h2(_("Revision Not Found")),
                  HTML::p(fmt("I'm sorry.  Version %d of %s is not in the database.",
                              $version, WikiLink($page, 'auto'))));
-    include_once('lib/Template.php');
+    include_once 'lib/Template.php';
     GeneratePage($html, _("Bad Version"), $page->getCurrentRevision());
     $request->finish();
 }
@@ -1572,7 +1572,7 @@ class fileSet {
         $list = $this->_fileList;
 
         if ($sortby) {
-            require_once('lib/PageList.php');
+            require_once 'lib/PageList.php';
             switch (Pagelist::sortby($sortby, 'db')) {
             case 'pagename ASC': break;
             case 'pagename DESC':
@@ -1727,7 +1727,7 @@ function explodeList($input, $allnames, $glob_style = true, $case_sensitive = tr
 // echo implode(":",explodeList("Test*",array("xx","Test1","Test2")));
 function explodePageList($input, $include_empty=false, $sortby='pagename',
              $limit='', $exclude='') {
-    include_once("lib/PageList.php");
+    include_once 'lib/PageList.php';
     return PageList::explodePageList($input, $include_empty, $sortby, $limit, $exclude);
 }
 
@@ -2090,7 +2090,7 @@ function url_get_contents( $uri ) {
     if (get_cfg_var('allow_url_fopen')) { // was ini_get('allow_url_fopen'))
         return @file_get_contents($uri);
     } else {
-        require_once("lib/HttpClient.php");
+        require_once 'lib/HttpClient.php';
         $bits = parse_url($uri);
         $host = $bits['host'];
         $port = isset($bits['port']) ? $bits['port'] : 80;
@@ -2217,7 +2217,7 @@ function isExternalReferrer(&$request) {
     if ($referrer = $request->get('HTTP_REFERER')) {
         $home = SERVER_URL; // SERVER_URL or SCRIPT_NAME, if we want to check sister wiki's also
         if (string_starts_with(strtolower($referrer), strtolower($home))) return false;
-        require_once("lib/ExternalReferrer.php");
+        require_once 'lib/ExternalReferrer.php';
         $se = new SearchEngines();
         return $se->parseSearchQuery($referrer);
     }

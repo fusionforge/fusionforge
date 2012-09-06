@@ -37,11 +37,11 @@ function ConvertAndDisplayPdfPageList (&$request, $pagelist, $args = array()) {
     $dest = $request->getArg('dest');
     $request->setArg('dest',false);
     $request->setArg('format',false);
-    include_once("lib/display.php");
-    include_once("lib/loadsave.php");
+    include_once 'lib/display.php';
+    include_once 'lib/loadsave.php';
 
     array_unshift($pagelist->_pages, $request->_dbi->getPage($pagename));
-    require_once("lib/WikiPluginCached.php");
+    require_once 'lib/WikiPluginCached.php';
     $cache = new WikiPluginCached;
     $cache->newCache();
     $tmpfile = $cache->tempnam();
@@ -70,7 +70,7 @@ function ConvertAndDisplayPdf (&$request) {
     // Disable CACHE
 
     $WikiTheme->DUMP_MODE = true;
-    include_once("lib/display.php");
+    include_once 'lib/display.php';
     // TODO: urldecode pagename to get rid of %20 in filename.pdf
     displayPage($request, new Template('htmldump', $request));
     $html = ob_get_contents();
@@ -84,7 +84,7 @@ function ConvertAndDisplayPdf (&$request) {
         Header('Content-Type: application/pdf');
         $request->discardOutput();
         $request->buffer_output(false/*'nocompress'*/);
-        require_once("lib/WikiPluginCached.php");
+        require_once 'lib/WikiPluginCached.php';
         $cache = new WikiPluginCached;
         $cache->newCache();
         $tmpfile = $cache->tempnam('pdf.html');

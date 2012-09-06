@@ -82,7 +82,7 @@ if (empty($msg)) {
 <p class="notice_title" onclick='jQuery("#expandable_note").slideToggle(300)'><?php echo _('Add note') ?></p>
 <div id='expandable_note' class="notice_content">
 <?php
-		include("addOrEditNote.php");
+		include 'addOrEditNote.php';
 	}
 ?>
 </div>

@@ -31,9 +31,9 @@
  *  Similarly as in certain plugins, like WikiAdminRename or _WikiTranslation
  */
 
-require_once('lib/PageList.php');
-require_once("lib/wikilens/RatingsUser.php");
-require_once('lib/plugin/RateIt.php');
+require_once 'lib/PageList.php';
+require_once 'lib/wikilens/RatingsUser.php';
+require_once 'lib/plugin/RateIt.php';
 
 /**
  * Column representing the number of backlinks to the page.

@@ -12,7 +12,7 @@ if (!defined('PHPWIKI_VERSION')) {
  * WikiWiki Hawaiian theme for PhpWiki.
  */
 
-require_once('lib/WikiTheme.php');
+require_once 'lib/WikiTheme.php';
 
 class WikiTheme_Hawaiian extends WikiTheme {
     function getCSS() {

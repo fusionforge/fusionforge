@@ -29,9 +29,9 @@
  * Author:  Reini Urban <rurban@x-ray.at>
  */
 
-require_once("lib/PageList.php");
-require_once("lib/TextSearchQuery.php");
-require_once("lib/plugin/IncludePage.php");
+require_once 'lib/PageList.php';
+require_once 'lib/TextSearchQuery.php';
+require_once 'lib/plugin/IncludePage.php';
 
 class WikiPlugin_UnfoldSubpages
 extends WikiPlugin_IncludePage
@@ -86,7 +86,7 @@ extends WikiPlugin_IncludePage
             $exclude = PageList::explodePageList($exclude, false, false, $limit);
         $content = HTML();
 
-        include_once('lib/BlockParser.php');
+        include_once 'lib/BlockParser.php';
         $i = 0;
         while ($page = $subpages->next()) {
             $cpagename = $page->getName();

@@ -18,9 +18,9 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('common/mvc/Controler.class.php');
-require_once('hudsonViews.class.php');
-require_once('hudsonActions.class.php');
+require_once 'common/mvc/Controler.class.php';
+require_once 'hudsonViews.class.php';
+require_once 'hudsonActions.class.php';
 /**
  * hudson */
 class hudson extends Controler {

@@ -25,7 +25,7 @@ $unit        = 'theme';
 $table       = 'themes';
 $primary_key = 'theme_id';
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 include_once $gfwww.'admin/admin_table.php';
 
 ?>

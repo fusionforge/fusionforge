@@ -22,7 +22,7 @@
  *
  */
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once 'checks.php';
 
 $pluginname = 'oauthprovider';

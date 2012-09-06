@@ -11,7 +11,7 @@
 
 $no_gz_buffer=true;
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFile.class.php';

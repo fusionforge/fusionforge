@@ -10,7 +10,7 @@
  */
 // $Id: PearDB_sqlite.php 7956 2011-03-03 17:08:31Z vargenau $
 
-require_once('lib/WikiDB/backend/PearDB.php');
+require_once 'lib/WikiDB/backend/PearDB.php';
 
 //TODO: create tables on virgin wiki
 /*

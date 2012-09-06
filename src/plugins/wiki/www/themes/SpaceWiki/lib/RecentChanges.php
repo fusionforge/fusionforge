@@ -4,8 +4,8 @@
  */
 
 
-require_once('lib/plugin/RecentChanges.php');
-require_once('lib/plugin/PageHistory.php');
+require_once 'lib/plugin/RecentChanges.php';
+require_once 'lib/plugin/PageHistory.php';
 
 function SpaceWiki_RC_revision_formatter (&$fmt, &$rev) {
     $class = 'rc-' . $fmt->importance($rev);

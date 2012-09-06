@@ -42,8 +42,8 @@
  *                 which don't exist yet.  Only applicable when direction='forward'.
  */
 
-require_once('lib/PageList.php');
-require_once('lib/plugin/SiteMap.php');
+require_once 'lib/PageList.php';
+require_once 'lib/plugin/SiteMap.php';
 
 class WikiPlugin_IncludeSiteMap
 extends WikiPlugin_SiteMap

@@ -62,7 +62,7 @@ class RatingsDb extends WikiDB {
                 $this->_sqlbackend = &$this->_backend;
                 $this->dbtype = "ADODB";
             } else {
-                include_once("lib/WikiDB/backend/ADODB.php");
+                include_once 'lib/WikiDB/backend/ADODB.php';
                 // It is not possible to decouple a ref from the source again. (4.3.11)
                 // It replaced the main request backend. So we don't initialize _sqlbackend before.
                 //$this->_sqlbackend = clone($this->_backend);
@@ -327,8 +327,8 @@ class RatingsDb extends WikiDB {
         if (is_null($userid))    $userid   = $this->userid;
         if (is_null($pagename))  $pagename = $this->pagename;
         if (empty($this->buddies)) {
-            require_once("lib/wikilens/RatingsUser.php");
-            require_once("lib/wikilens/Buddy.php");
+            require_once 'lib/wikilens/RatingsUser.php';
+            require_once 'lib/wikilens/Buddy.php';
             $user = RatingsUserFactory::getUser($userid);
             $this->buddies = getBuddies($user, $GLOBALS['request']->_dbi);
         }

@@ -25,7 +25,7 @@ Mock::generatePartial(
     array('_getXMLObject')
 );
 
-require_once('common/language/BaseLanguage.class.php');
+require_once 'common/language/BaseLanguage.class.php';
 Mock::generate('BaseLanguage');
 
 class HudsonBuildTest extends UnitTestCase {

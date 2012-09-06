@@ -8,7 +8,7 @@
 // You may copy this code freely under the conditions of the GPL.
 //
 
-require_once('lib/difflib.php');
+require_once 'lib/difflib.php';
 
 class _Diff3_Block {
     var $type = 'diff3';

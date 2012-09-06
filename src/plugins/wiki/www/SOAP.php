@@ -17,24 +17,24 @@
  */
 define ("WIKI_SOAP", true);
 
-include_once("./index.php");
-include_once("lib/main.php");
+include_once './index.php';
+include_once 'lib/main.php';
 if (!loadExtension('soap'))
-    require_once('lib/nusoap/nusoap.php');
+    require_once 'lib/nusoap/nusoap.php';
 
 /*
 // bypass auth and request loop for now.
 // require_once('lib/prepend.php');
-include_once("index.php");
+include_once 'index.php';
 
 //require_once('lib/stdlib.php');
-require_once('lib/WikiDB.php');
-require_once('lib/config.php');
+require_once 'lib/WikiDB.php';
+require_once 'lib/config.php';
 class WikiRequest extends Request {}
 $request = new WikiRequest();
-require_once('lib/PagePerm.php');
-require_once('lib/WikiUserNew.php');
-require_once('lib/WikiGroup.php');
+require_once 'lib/PagePerm.php';
+require_once 'lib/WikiUserNew.php';
+require_once 'lib/WikiGroup.php';
 */
 
 function checkCredentials(&$server, &$credentials, $access, $pagename) {
@@ -253,7 +253,7 @@ function listPlugins($credentials=false) {
     sort($plugins);
     $RetArray = array();
     if (!empty($plugins)) {
-        require_once("lib/WikiPlugin.php");
+        require_once 'lib/WikiPlugin.php';
         $w = new WikiPluginLoader;
         foreach ($plugins as $plugin) {
             $pluginName = str_replace(".php", "", $plugin);
@@ -269,7 +269,7 @@ function listPlugins($credentials=false) {
 function getPluginSynopsis($pluginname, $credentials=false) {
     global $server;
     checkCredentials($server,$credentials,'change',"Help/".$pluginname."Plugin");
-    require_once("lib/WikiPlugin.php");
+    require_once 'lib/WikiPlugin.php';
     $w = new WikiPluginLoader;
     $synopsis = '';
     $p = $w->getPlugin($pluginName, false); // second arg?
@@ -292,7 +292,7 @@ function callPlugin($pluginname, $pluginargs, $credentials=false) {
     checkCredentials($server,$credentials,'change',"Help/".$pluginname."Plugin");
 
     $basepage = '';;
-    require_once("lib/WikiPlugin.php");
+    require_once 'lib/WikiPlugin.php';
     $w = new WikiPluginLoader;
     $p = $w->getPlugin($pluginName, false); // second arg?
     $pagelist = $p->run($dbi, $pluginargs, $request, $basepage);
@@ -330,7 +330,7 @@ function linkSearch($linktype, $search, $pages="*", $relation="*", $credentials=
     global $server;
     checkCredentials($server,$credentials,'view',_("HomePage"));
     $dbi = WikiDB::open($GLOBALS['DBParams']);
-    require_once("lib/TextSearchQuery.php");
+    require_once 'lib/TextSearchQuery.php';
     $pagequery = new TextSearchQuery($pages);
     $linkquery = new TextSearchQuery($search);
     if ($linktype == 'relation') {
@@ -338,7 +338,7 @@ function linkSearch($linktype, $search, $pages="*", $relation="*", $credentials=
         $links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype, $relquery);
     } elseif ($linktype == 'attribute') { // only numeric search withh attributes!
         $relquery = new TextSearchQuery($relation);
-        require_once("lib/SemanticWeb.php");
+        require_once 'lib/SemanticWeb.php';
         // search: "population > 1 million and area < 200 km^2" relation="*" pages="*"
         $linkquery = new SemanticAttributeSearchQuery($search, $relation);
         $links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype, $relquery);

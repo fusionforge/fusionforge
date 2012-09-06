@@ -77,7 +77,7 @@ msg_repl_close     = '"._("Close")."'
             }
         }
 
-        require_once("lib/WikiPluginCached.php");
+        require_once 'lib/WikiPluginCached.php';
         $cache = WikiPluginCached::newCache();
         $dbi = $GLOBALS['request']->getDbh();
         // regenerate if number of pages changes (categories, pages, templates)
@@ -292,7 +292,7 @@ msg_repl_close     = '"._("Close")."'
     function categoriesPulldown() {
         global $WikiTheme;
 
-        require_once('lib/TextSearchQuery.php');
+        require_once 'lib/TextSearchQuery.php';
         $dbi =& $GLOBALS['request']->_dbi;
         // KEYWORDS formerly known as $KeywordLinkRegexp
         $pages = $dbi->titleSearch(new TextSearchQuery(KEYWORDS, true));
@@ -339,7 +339,7 @@ msg_repl_close     = '"._("Close")."'
         sort($plugins);
         if (!empty($plugins)) {
             $plugin_js = '';
-            require_once("lib/WikiPlugin.php");
+            require_once 'lib/WikiPlugin.php';
             $w = new WikiPluginLoader;
             foreach ($plugins as $plugin) {
                 $pluginName = str_replace(".php", "", $plugin);
@@ -377,7 +377,7 @@ msg_repl_close     = '"._("Close")."'
 
     // result is cached. Esp. the args are expensive
     function pagesPulldown($query, $case_exact=false, $regex='auto') {
-        require_once('lib/TextSearchQuery.php');
+        require_once 'lib/TextSearchQuery.php';
         $dbi =& $GLOBALS['request']->_dbi;
         $page_iter = $dbi->titleSearch(new TextSearchQuery($query, $case_exact, $regex));
         if ($page_iter->count() > 0) {
@@ -447,7 +447,7 @@ msg_repl_close     = '"._("Close")."'
     // FIXME!
     function templatePulldown($query, $case_exact=false, $regex='auto') {
         global $request;
-        require_once('lib/TextSearchQuery.php');
+        require_once 'lib/TextSearchQuery.php';
         $dbi =& $request->_dbi;
         $page_iter = $dbi->titleSearch(new TextSearchQuery($query, $case_exact, $regex));
         $count = 0;

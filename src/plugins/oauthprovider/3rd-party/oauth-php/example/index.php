@@ -1,5 +1,5 @@
 <?php
-require_once("common.inc.php");
+require_once 'common.inc.php';
 
 
 $test_consumer = new OAuthConsumer("key", "secret", NULL);

@@ -7,7 +7,7 @@
  *
  */
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 $plugin = plugin_get_object ('contribtracker') ;
 

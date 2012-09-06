@@ -9,8 +9,8 @@
  * Author: Gerrit Riessen, gerrit.riessen@open-source-consultants.de
  */
 
-require_once('lib/WikiDB/backend.php');
-require_once('lib/ErrorManager.php');
+require_once 'lib/WikiDB/backend.php';
+require_once 'lib/ErrorManager.php';
 
 /**
  * Constants used by the CVS backend
@@ -402,7 +402,7 @@ extends WikiDB_backend
 
     /* function get_all_revisions($pagename) {
         // TODO: should replace this with something more efficient
-        include_once('lib/WikiDB/backend/dumb/AllRevisionsIter.php');
+        include_once 'lib/WikiDB/backend/dumb/AllRevisionsIter.php';
         return new WikiDB_backend_dumb_AllRevisionsIter($this, $pagename);
     } */
 

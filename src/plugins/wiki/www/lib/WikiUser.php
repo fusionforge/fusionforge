@@ -207,7 +207,7 @@ class WikiUser {
 
     function PrintLoginForm (&$request, $args, $fail_message = false,
                              $seperate_page = true) {
-        include_once('lib/Template.php');
+        include_once 'lib/Template.php';
         // Call update_locale in case the system's default language is not 'en'.
         // (We have no user pref for lang at this point yet, no one is logged in.)
         update_locale(DEFAULT_LANGUAGE);
@@ -449,7 +449,7 @@ class WikiUser {
             $this->createHomepage($pref);
         } else {
             // empty page
-            include "lib/loadsave.php";
+            include 'lib/loadsave.php';
             $pageinfo = array('pagedata' => array('pref' => serialize($pref->_pref)),
                               'versiondata' => array('author' => $this->_userid),
                               'pagename' => $this->_userid,
@@ -462,7 +462,7 @@ class WikiUser {
     // create user and default user homepage
     function createHomepage ($pref) {
         $pagename = $this->_userid;
-        include "lib/loadsave.php";
+        include 'lib/loadsave.php';
 
         // create default homepage:
         //  properly expanded template and the pref metadata

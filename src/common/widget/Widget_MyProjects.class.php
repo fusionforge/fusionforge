@@ -19,8 +19,8 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('Widget.class.php');
-require_once('common/rss/RSS.class.php');
+require_once 'Widget.class.php';
+require_once 'common/rss/RSS.class.php';
 
 /**
  * Widget_MyProjects

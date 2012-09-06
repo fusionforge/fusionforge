@@ -20,8 +20,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('lib/PageList.php');
-require_once('lib/WikiPluginCached.php');
+require_once 'lib/PageList.php';
+require_once 'lib/WikiPluginCached.php';
 
 /**
  * - To be used by WikiBrowser at http://touchgraph.sourceforge.net/

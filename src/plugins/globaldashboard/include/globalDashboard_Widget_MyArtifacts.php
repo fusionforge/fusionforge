@@ -18,8 +18,8 @@
 * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-require_once('common/widget/Widget.class.php');
-require_once('common/widget/WidgetLayoutManager.class.php');
+require_once 'common/widget/Widget.class.php';
+require_once 'common/widget/WidgetLayoutManager.class.php';
 
 
 class globalDashboard_Widget_MyArtifacts extends Widget {
@@ -52,8 +52,8 @@ class globalDashboard_Widget_MyArtifacts extends Widget {
 			$html .= $HTML->listTableTop($tablearr);
 
 			foreach ($MyProjects as $url) {
-				include_once("arc/ARC2.php");
-				require_once('plugins/extsubproj/include/Graphite.php');
+				include_once 'arc/ARC2.php';
+				require_once 'plugins/extsubproj/include/Graphite.php';
 
 				$parser = ARC2::getRDFParser();
 				//$parser->parse('https://vm2.localdomain/projects/coinsuper/');

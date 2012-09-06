@@ -69,7 +69,7 @@ include($rootdir."lib/XmlRpcServer.php");
 $GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] = $save;
 // now we have $wiki_dmap
 
-include("./xmlrpc-servers.php");
+include './xmlrpc-servers.php';
 
 function match($a, $b) {
    $matches = true;

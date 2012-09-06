@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once("lib/plugin/RecentChanges.php");
+require_once 'lib/plugin/RecentChanges.php';
 
 class _PageHistory_PageRevisionIter
 extends WikiDB_PageRevisionIterator

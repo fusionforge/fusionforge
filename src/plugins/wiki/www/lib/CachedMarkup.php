@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once("lib/Units.php");
+require_once 'lib/Units.php';
 
 class CacheableMarkup extends XmlContent {
 
@@ -70,7 +70,7 @@ class CacheableMarkup extends XmlContent {
                 return unserialize($data);
             } else {
                 // user our php lib. TESTME
-                include_once("ziplib.php");
+                include_once 'ziplib.php';
                 $zip = new ZipReader($packed);
                 list(,$data,$attrib) = $zip->readFile();
                 return unserialize($data);
@@ -793,7 +793,7 @@ class Cached_PluginInvocation extends Cached_DynamicContent {
         static $loader = false;
 
         if (!$loader) {
-            include_once('lib/WikiPlugin.php');
+            include_once 'lib/WikiPlugin.php';
             $loader = new WikiPluginLoader;
         }
         return $loader;

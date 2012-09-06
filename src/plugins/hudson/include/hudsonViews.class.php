@@ -20,15 +20,15 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('common/mvc/Views.class.php');
+require_once 'common/mvc/Views.class.php';
 /*require_once('common/include/HTTPRequest.class.php');
-  require_once('common/user/UserManager.class.php');
-  require_once('common/project/ProjectManager.class.php');*/
+  require_once 'common/user/UserManager.class.php';
+  require_once 'common/project/ProjectManager.class.php';*/
 //require_once('common/reference/CrossReferenceFactory.class.php');
 
-require_once('HudsonJob.class.php');
-require_once('common/dao/CodendiDataAccess.class.php');
-require_once('PluginHudsonJobDao.class.php');
+require_once 'HudsonJob.class.php';
+require_once 'common/dao/CodendiDataAccess.class.php';
+require_once 'PluginHudsonJobDao.class.php';
 
 class hudsonViews extends Views {
 

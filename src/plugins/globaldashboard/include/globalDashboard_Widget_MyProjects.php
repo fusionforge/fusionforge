@@ -56,7 +56,7 @@ class globalDashboard_Widget_MyProjects extends Widget {
 			foreach ($MyProjects as $account_id => $remote_account_projs) {
 				//$remote_account_projs = array("Proj1", "Proj2");
 				/*include_once("arc/ARC2.php");
-				require_once('plugins/extsubproj/include/Graphite.php');
+				require_once 'plugins/extsubproj/include/Graphite.php';
 
 				$parser = ARC2::getRDFParser();
 				//$parser->parse('https://vm2.localdomain/projects/coinsuper/');
@@ -169,8 +169,8 @@ class globalDashboard_Widget_MyProjects extends Widget {
 	function getAccountRemoteProjectsByFOAF($account){
 		$projects = array();
 		
-		include_once("arc/ARC2.php");
-		require_once('plugins/globaldashboard/include/Graphite.php');
+		include_once 'arc/ARC2.php';
+		require_once 'plugins/globaldashboard/include/Graphite.php';
 		
 		$reader = ARC2::getComponent('Reader');
 		
@@ -211,7 +211,7 @@ class globalDashboard_Widget_MyProjects extends Widget {
 			$compact_preview_plugin = $pm->GetPluginObject('compactpreview');
 			if ($pm->isPluginAvailable($compact_preview_plugin)) {
 				if ($pm->PluginIsInstalled('compactpreview')) {
-					require_once ('plugins/compactpreview/include/CompactResource.class.php');
+					require_once 'plugins/compactpreview/include/CompactResource.class.php';
 					foreach ($projects as $project) {
 						$params = array('name' => $project["project_name"], 'url' => $project["project_url"]);
 						$cR = new OslcGroupCompactResource($params);

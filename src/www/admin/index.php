@@ -30,7 +30,7 @@
  */
 
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'include/role_utils.php';

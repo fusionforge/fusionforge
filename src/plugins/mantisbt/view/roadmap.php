@@ -67,7 +67,7 @@ if (!isset($errorPage)) {
 
 <div id='expandable_filter' class="notice_content" style='clear: both'>
 <?php
-	include('mantisbt/controler/filter_roadmap.php');
+	include 'mantisbt/controler/filter_roadmap.php';
 ?>
 </div>
 

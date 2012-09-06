@@ -18,7 +18,7 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('User.class.php');
+require_once 'User.class.php';
 
 
 class UserManager {

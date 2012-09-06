@@ -18,9 +18,9 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('Widget.class.php');
+require_once 'Widget.class.php';
 //require_once('common/survey/SurveySingleton.class.php');
-require_once ('common/survey/SurveyFactory.class.php');
+require_once 'common/survey/SurveyFactory.class.php';
 
 /**
  * Widget_MySurveys

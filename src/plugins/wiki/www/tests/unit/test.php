@@ -118,7 +118,7 @@ function printMemoryUsage($msg = '') {
     static $initmem = 0;
     if ($msg) echo $msg,"\n";
     if ((defined('DEBUG') and (DEBUG & 8)) or !defined('DEBUG')) {
-        require_once("lib/stdlib.php");
+        require_once 'lib/stdlib.php';
         echo "-- MEMORY USAGE: ";
         $oldmem = $mem;
         $mem = getMemoryUsage();
@@ -569,7 +569,7 @@ if (isset($HTTP_SERVER_VARS['REQUEST_METHOD'])) {
 class phpwiki_TestCase extends PHPUnit_TestCase {
     function setUp() {
         global $request, $WikiTheme;
-	include_once("themes/" . THEME . "/themeinfo.php");
+	include_once 'themes/'. THEME . '/themeinfo.php';
         $this->_savedargs = $request->_args;
         $request->_args = array();
         if (DEBUG & 1) {

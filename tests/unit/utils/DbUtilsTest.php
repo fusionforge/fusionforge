@@ -1,6 +1,6 @@
 <?php
 
-require_once 'PHPUnit/Framework/TestCase.php' ;
+require_once 'PHPUnit/Framework/TestCase.php';
 require_once dirname(__FILE__) . '/../../../src/common/include/database-pgsql.php' ;
 
 /**

@@ -23,8 +23,8 @@
  */
 
 
-require_once( 'lib/WikiDB.php' );
-require_once( 'lib/WikiDB/backend/file.php' );
+require_once 'lib/WikiDB.php';
+require_once 'lib/WikiDB/backend/file.php';
 
 /**
  * Wrapper class for the file backend.

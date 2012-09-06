@@ -14,7 +14,7 @@ if (!defined('PHPWIKI_VERSION')) {
  * navbar also shorter labels and without buttons, just links
  */
 
-require_once('lib/WikiTheme.php');
+require_once 'lib/WikiTheme.php';
 
 class WikiTheme_smaller extends WikiTheme {
 

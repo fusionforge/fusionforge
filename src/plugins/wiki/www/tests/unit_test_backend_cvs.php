@@ -20,7 +20,7 @@ if ( $USER == "root" ) {
 // set to false if something went wrong
 $REMOVE_DEBUG = true;
 
-require_once( 'lib/WikiDB/backend/cvs.php' );
+require_once 'lib/WikiDB/backend/cvs.php';
 
 $db_params                           = array();
 /**

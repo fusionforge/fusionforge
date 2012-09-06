@@ -22,8 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once("lib/ziplib.php");
-require_once("lib/Template.php");
+require_once 'lib/ziplib.php';
+require_once 'lib/Template.php';
 
 /**
  * ignore fatal errors during dump
@@ -948,7 +948,7 @@ function SavePage (&$request, &$pageinfo, $source, $filename)
         elseif ( $current and (! $current->hasDefaultContents())
          && ($current->getPackedContent() != $content) )
         {
-            include_once('lib/editpage.php');
+            include_once 'lib/editpage.php';
             $request->setArg('pagename', $pagename);
             $v = $current->getVersion();
             $request->setArg('revision', $current->getVersion());

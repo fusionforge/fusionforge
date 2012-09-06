@@ -13,7 +13,7 @@ if (!defined('PHPWIKI_VERSION')) {
  * And of course it has it's own set of icons for the ratingwidget.
  * http://www.wikilens.org/wiki/
  */
-require_once('lib/WikiTheme.php');
+require_once 'lib/WikiTheme.php';
 
 class WikiTheme_Wikilens extends WikiTheme {
 
@@ -94,8 +94,8 @@ class WikiTheme_Wikilens extends WikiTheme {
 }
 
 $WikiTheme = new WikiTheme_Wikilens('wikilens');
-require_once("lib/wikilens/CustomPrefs.php");
-require_once("lib/wikilens/PageListColumns.php");
+require_once 'lib/wikilens/CustomPrefs.php';
+require_once 'lib/wikilens/PageListColumns.php';
 
 // Local Variables:
 // mode: php

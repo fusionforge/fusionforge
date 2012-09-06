@@ -1,7 +1,7 @@
 <?php // -*-php-*-
 // $Id: ADODB_mysql.php 7956 2011-03-03 17:08:31Z vargenau $
 
-require_once('lib/WikiDB/backend/ADODB.php');
+require_once 'lib/WikiDB/backend/ADODB.php';
 
 /*
  * PROBLEM: mysql seems to be the simpliest (or most stupid) db on earth.

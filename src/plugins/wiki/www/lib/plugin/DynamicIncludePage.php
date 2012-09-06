@@ -26,7 +26,7 @@
  * Author:  Reini Urban
  */
 
-require_once('lib/plugin/IncludePage.php');
+require_once 'lib/plugin/IncludePage.php';
 
 class WikiPlugin_DynamicIncludePage
 extends WikiPlugin_IncludePage

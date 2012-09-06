@@ -75,7 +75,7 @@ elseif (isWindows()) {
     //$fontpath = "/usr/share/fonts/default/TrueType/";
 }
 
-require_once "lib/WikiPluginCached.php";
+require_once 'lib/WikiPluginCached.php';
 
 class WikiPlugin_GraphViz
 extends WikiPluginCached

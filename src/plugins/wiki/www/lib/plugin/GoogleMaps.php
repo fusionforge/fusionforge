@@ -110,7 +110,7 @@ extends WikiPlugin
         // Create a marker whose info window displays the given text
         if ($Marker) {
             if ($InfoText) {
-                include_once("lib/BlockParser.php");
+                include_once 'lib/BlockParser.php';
                 $page = $dbi->getPage($request->getArg('pagename'));
                 $rev  = $page->getCurrentRevision(false);
                 $markup = $rev->get('markup');

@@ -85,7 +85,7 @@ $pstoimgbin = '/usr/bin/pstoimg';
  | WikiPlugin_TexToPng
  *----------------------------------------------------------------------*/
 
-require_once "lib/WikiPluginCached.php";
+require_once 'lib/WikiPluginCached.php';
 
 class WikiPlugin_TexToPng extends WikiPluginCached
 {

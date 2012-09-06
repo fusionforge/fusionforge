@@ -8,7 +8,7 @@
  * This is an example to watch things in action. You can obviously modify things and logic as you see fit
  */
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 require_once $gfplugins.'globaldashboard/include/globalDashboard_utils.php';
 

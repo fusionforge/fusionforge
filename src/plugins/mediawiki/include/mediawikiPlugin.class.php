@@ -62,7 +62,7 @@ class MediaWikiPlugin extends Plugin {
 
         function &getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'MediaWikiPluginInfo')) {
-			require_once('MediaWikiPluginInfo.class.php');
+			require_once 'MediaWikiPluginInfo.class.php';
 			$this->pluginInfo = new MediaWikiPluginInfo($this);
 		}
 		return $this->pluginInfo;

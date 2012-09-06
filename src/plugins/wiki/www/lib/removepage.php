@@ -1,6 +1,6 @@
 <?php
 // $Id: removepage.php 8181 2011-11-22 16:53:45Z vargenau $
-require_once('lib/Template.php');
+require_once 'lib/Template.php';
 
 function RemovePage (&$request) {
     global $WikiTheme;

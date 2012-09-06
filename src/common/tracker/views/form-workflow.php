@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('common/tracker/ArtifactWorkflow.class.php');
+require_once 'common/tracker/ArtifactWorkflow.class.php';
 
 $has_error = false;
 $efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));

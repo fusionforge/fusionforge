@@ -49,7 +49,7 @@
  | WikiPlugin_CacheTest
  *----------------------------------------------------------------------*/
 
-require_once "lib/WikiPluginCached.php";
+require_once 'lib/WikiPluginCached.php';
 
 class WikiPlugin_CacheTest
 extends WikiPluginCached

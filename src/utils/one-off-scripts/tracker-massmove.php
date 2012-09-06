@@ -36,7 +36,7 @@
  *	UPDATE artifact_group_list SET group_id=145 WHERE group_artifact_id IN (378, 667, 209);
  */
 
-require "/usr/share/gforge/common/include/env.inc.php";
+require '/usr/share/gforge/common/include/env.inc.php';
 require_once $gfcommon."include/pre.php";
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFile.class.php';

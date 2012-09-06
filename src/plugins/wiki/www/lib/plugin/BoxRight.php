@@ -49,7 +49,7 @@ extends WikiPlugin
         if (!$basepage) {
             return $this->error("$basepage unset?");
         }
-        include_once("lib/BlockParser.php");
+        include_once 'lib/BlockParser.php';
         $page = $request->getPage($basepage);
         return HTML::div(array('class'=>'boxright'), TransformText($argstr));
     }

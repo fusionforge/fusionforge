@@ -25,7 +25,7 @@
  *                Based on UnfoldSubpages.
  * Usage:   <<ListSubpages noheader=1 info=pagename,hits,mtime >>
  */
-require_once('lib/PageList.php');
+require_once 'lib/PageList.php';
 
 class WikiPlugin_ListSubpages
 extends WikiPlugin

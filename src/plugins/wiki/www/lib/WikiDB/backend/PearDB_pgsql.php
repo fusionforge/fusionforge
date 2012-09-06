@@ -1,8 +1,8 @@
 <?php // -*-php-*-
 // $Id: PearDB_pgsql.php 7956 2011-03-03 17:08:31Z vargenau $
 
-require_once('lib/ErrorManager.php');
-require_once('lib/WikiDB/backend/PearDB.php');
+require_once 'lib/ErrorManager.php';
+require_once 'lib/WikiDB/backend/PearDB.php';
 
 if (!defined("USE_BYTEA")) // see schemas/psql-initialize.sql
     define("USE_BYTEA", true);

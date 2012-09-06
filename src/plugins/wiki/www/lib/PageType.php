@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('lib/CachedMarkup.php');
+require_once 'lib/CachedMarkup.php';
 
 /** A cacheable formatted wiki page.
  */
@@ -181,7 +181,7 @@ class PageType_interwikimap extends PageType
     // localize Upload:links for WIKIDUMP
     if (!empty($WikiTheme->DUMP_MODE) and $moniker == 'Upload') {
         global $request;
-        include_once("lib/config.php");
+        include_once 'lib/config.php';
         $url = getUploadFilePath();
         // calculate to a relative local path to /uploads for pdf images.
         $doc_root = $request->get("DOCUMENT_ROOT");
@@ -341,7 +341,7 @@ class PageFormatter {
     }
 
     function _transform(&$text) {
-    include_once('lib/BlockParser.php');
+    include_once 'lib/BlockParser.php';
     return TransformText($text, $this->_markup);
     }
 
@@ -427,7 +427,7 @@ class PageFormatter_attach extends PageFormatter
     function format($text) {
         if (empty($this->type))
             trigger_error('PageFormatter_attach->format: $type missing');
-        include_once('lib/Template.php');
+        include_once 'lib/Template.php';
         global $request;
         $tokens['CONTENT'] = $this->_transform($text);
         $tokens['page'] = $this->_page;
@@ -480,14 +480,14 @@ class PageFormatter_pdf extends PageFormatter
 {
 
     function _transform($text) {
-    include_once('lib/BlockParser.php');
+    include_once 'lib/BlockParser.php';
     return TransformText($text, $this->_markup);
     }
 
     // one page or set of pages?
     // here we try to format only a single page
     function format($text) {
-        include_once('lib/Template.php');
+        include_once 'lib/Template.php';
         global $request;
         $tokens['page']    = $this->_page;
         $tokens['CONTENT'] = $this->_transform($text);
@@ -502,8 +502,8 @@ class PageFormatter_pdf extends PageFormatter
         // binary.
         // We use a custom HTML->PDF class converter from PHPWebthings
         // to be able to use templates for PDF.
-        require_once('lib/fpdf.php');
-        require_once('lib/pdf.php');
+        require_once 'lib/fpdf.php';
+        require_once 'lib/pdf.php';
 
         $pdf = new PDF();
         $pdf->SetTitle($pagename);
@@ -530,7 +530,7 @@ class PageFormatter_pdf extends PageFormatter
 class PageFormatter_MediaWiki extends PageFormatter
 {
     function _transform(&$text) {
-    include_once('lib/BlockParser.php');
+    include_once 'lib/BlockParser.php';
     // Expand leading tabs.
     $text = expand_tabs($text);
 

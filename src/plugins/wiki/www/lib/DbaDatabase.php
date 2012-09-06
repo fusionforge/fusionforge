@@ -1,6 +1,6 @@
 <?php // $Id: DbaDatabase.php 8034 2011-04-11 09:22:33Z vargenau $
 
-require_once('lib/ErrorManager.php');
+require_once 'lib/ErrorManager.php';
 
 if (isWindows())
     define('DBA_DATABASE_DEFAULT_TIMEOUT', 60);

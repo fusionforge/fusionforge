@@ -23,7 +23,7 @@
 
 // $Id: RSSWriter091.php 7964 2011-03-05 17:05:30Z vargenau $
 
-include_once("lib/RssWriter.php");
+include_once 'lib/RssWriter.php';
 class RSSWriter091 extends RSSWriter
 {
     function RSSWriter091()

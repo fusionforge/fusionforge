@@ -25,7 +25,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('../../../www/env.inc.php');
+require_once '../../../www/env.inc.php';
 require_once $gfwww.'include/pre.php';
 
 require_once $gfwww.'include/role_utils.php';

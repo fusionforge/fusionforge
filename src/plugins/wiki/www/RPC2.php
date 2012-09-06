@@ -22,10 +22,10 @@ if ($HTTP_SERVER_VARS['REQUEST_METHOD'] != "POST")
 define ("WIKI_XMLRPC", true);
 
 // Start up the main code
-include_once("index.php");
-include_once("lib/main.php");
+include_once 'index.php';
+include_once 'lib/main.php';
 
-include_once("lib/XmlRpcServer.php");
+include_once 'lib/XmlRpcServer.php';
 
 $server = new XmlRpcServer;
 $server->service();

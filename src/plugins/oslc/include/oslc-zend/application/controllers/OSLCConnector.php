@@ -25,7 +25,7 @@
 
 /* $Id:$ */
 
-require_once("cql.php");
+require_once 'cql.php';
 
 /**
  * OSLC-CM connector module

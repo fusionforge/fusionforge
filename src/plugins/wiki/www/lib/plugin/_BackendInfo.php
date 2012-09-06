@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('lib/Template.php');
+require_once 'lib/Template.php';
 /**
  */
 class WikiPlugin__BackendInfo

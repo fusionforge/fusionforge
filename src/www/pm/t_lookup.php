@@ -24,7 +24,7 @@
  * Locate task information by UUID (project_task_id) and return as JSON.
  */
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'pm/ProjectTaskSqlQueries.php';
 

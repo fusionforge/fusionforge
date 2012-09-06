@@ -35,7 +35,7 @@
 */
 
 
-require_once('lib/PageList.php');
+require_once 'lib/PageList.php';
 
 class WikiPlugin_PopularNearby
 extends WikiPlugin

@@ -6,7 +6,7 @@
  * @author: Philippe.Vanhaesendonck@topgame.be
  */
 
-require_once('lib/WikiDB/backend/ADODB.php');
+require_once 'lib/WikiDB/backend/ADODB.php';
 
 class WikiDB_backend_ADODB_oci8po
 extends WikiDB_backend_ADODB

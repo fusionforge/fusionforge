@@ -28,8 +28,8 @@
    an action=edit
 */
 
-require_once "lib/WikiPluginCached.php";
-require_once "lib/plugin/RecentChanges.php";
+require_once 'lib/WikiPluginCached.php';
+require_once 'lib/plugin/RecentChanges.php';
 
 class WikiPlugin_RecentChangesCached
 extends WikiPluginCached

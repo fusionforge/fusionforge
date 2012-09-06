@@ -105,7 +105,7 @@ $pgsrc_container =
     _("TranslateText") .','.
     _("UpLoad") .','.
 
-require_once('lib/PageList.php');
+require_once 'lib/PageList.php';
 
 class WikiPlugin__WikiTranslation
 extends WikiPlugin

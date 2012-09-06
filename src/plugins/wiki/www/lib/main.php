@@ -26,15 +26,15 @@ define ('USE_PREFS_IN_PAGE', true);
 
 //include "lib/config.php";
 require_once(dirname(__FILE__)."/stdlib.php");
-require_once('lib/Request.php');
-require_once('lib/WikiDB.php');
+require_once 'lib/Request.php';
+require_once 'lib/WikiDB.php';
 if (ENABLE_USER_NEW)
-    require_once("lib/WikiUserNew.php");
+    require_once 'lib/WikiUserNew.php';
 else
-    require_once("lib/WikiUser.php");
-require_once("lib/WikiGroup.php");
+    require_once 'lib/WikiUser.php';
+require_once 'lib/WikiGroup.php';
 if (ENABLE_PAGEPERM)
-    require_once("lib/PagePerm.php");
+    require_once 'lib/PagePerm.php';
 
 /**
  * Check permission per page.
@@ -63,7 +63,7 @@ class WikiRequest extends Request {
             // There's no way to demand-load it later. This way it's much slower, but needs slightly
             // less memory than loading all.
             if (ALLOW_BOGO_LOGIN)
-                include_once("lib/WikiUser/BogoLogin.php");
+                include_once 'lib/WikiUser/BogoLogin.php';
             // UserPreferences POST Update doesn't reach this.
             foreach ($GLOBALS['USER_AUTH_ORDER'] as $method) {
                 include_once("lib/WikiUser/$method.php");
@@ -77,7 +77,7 @@ class WikiRequest extends Request {
             unset($method);
         }
         if (USE_DB_SESSION) {
-            include_once('lib/DbSession.php');
+            include_once 'lib/DbSession.php';
             $dbi =& $this->_dbi;
             if (defined('READONLY') and !READONLY) // READONLY might be set later
                 $this->_dbsession = new DbSession($dbi, $dbi->getParam('prefix')
@@ -197,7 +197,7 @@ class WikiRequest extends Request {
             and defined('THEME')
             and $user_theme != THEME)
         {
-            include_once("themes/" . THEME . "/themeinfo.php");
+            include_once 'themes/'. THEME . '/themeinfo.php';
         }
         if (empty($WikiTheme) and $user_theme) {
             if (strcspn($user_theme,"./\x00]") != strlen($user_theme)) {
@@ -210,9 +210,9 @@ class WikiRequest extends Request {
             include_once("themes/$user_theme/themeinfo.php");
         }
         if (empty($WikiTheme) and defined('THEME'))
-            include_once("themes/" . THEME . "/themeinfo.php");
+            include_once 'themes/'. THEME . '/themeinfo.php';
         if (empty($WikiTheme))
-            include_once("themes/default/themeinfo.php");
+            include_once 'themes/default/themeinfo.php';
         assert(!empty($WikiTheme));
 
     // Do not execute global init code anymore
@@ -751,7 +751,7 @@ class WikiRequest extends Request {
         if ($current->getVersion() > 0)
             return;             // Homepage exists.
 
-        include_once('lib/loadsave.php');
+        include_once 'lib/loadsave.php';
         $this->setArg('action', 'loadfile');
         SetupWiki($this);
         $this->finish();        // NORETURN
@@ -760,7 +760,7 @@ class WikiRequest extends Request {
     // [574ms] mainly template:printexpansion: 393ms and template::expandsubtemplate [100+70+60ms]
     function handleAction () {
         // Check illegal characters in page names: <>[]{}|"
-        require_once("lib/Template.php");
+        require_once 'lib/Template.php';
         $page = $this->getPage();
         $pagename = $page->getName();
         if (strlen($pagename) > MAX_PAGENAME_LENGTH) {
@@ -786,7 +786,7 @@ class WikiRequest extends Request {
             )
         {
             if ( $page->get('moderation') ) {
-                require_once("lib/WikiPlugin.php");
+                require_once 'lib/WikiPlugin.php';
                 $loader = new WikiPluginLoader();
                 $plugin = $loader->getPlugin("ModeratedPage");
                 if ($plugin->handler($this, $page)) {
@@ -941,7 +941,7 @@ class WikiRequest extends Request {
         // Handle untranslated actionpages in non-english
         // (people playing with switching languages)
         if (0 and $GLOBALS['LANG'] != 'en') {
-            require_once("lib/plugin/_WikiTranslation.php");
+            require_once 'lib/plugin/_WikiTranslation.php';
             $trans = new WikiPlugin__WikiTranslation();
             $en_action = $trans->translate($action,'en',$GLOBALS['LANG']);
             if (isActionPage($en_action))
@@ -1030,8 +1030,8 @@ class WikiRequest extends Request {
         // check for translated version (default language)
         global $LANG;
         if ($LANG != "en") {
-            require_once("lib/WikiPlugin.php");
-            require_once("lib/plugin/_WikiTranslation.php");
+            require_once 'lib/WikiPlugin.php';
+            require_once 'lib/plugin/_WikiTranslation.php';
             $trans = new WikiPlugin__WikiTranslation();
             $trans->lang = $LANG;
             $default = $trans->translate_to_en($action, $LANG);
@@ -1053,7 +1053,7 @@ class WikiRequest extends Request {
 
     function action_browse () {
         $this->buffer_output();
-        include_once("lib/display.php");
+        include_once 'lib/display.php';
         displayPage($this);
     }
 
@@ -1063,7 +1063,7 @@ class WikiRequest extends Request {
 
     function actionpage ($action) {
         $this->buffer_output();
-        include_once("lib/display.php");
+        include_once 'lib/display.php';
         actionPage($this, $action);
     }
 
@@ -1116,7 +1116,7 @@ class WikiRequest extends Request {
 
     function action_diff () {
         $this->buffer_output();
-        include_once "lib/diff.php";
+        include_once 'lib/diff.php';
         showDiff($this);
     }
 
@@ -1144,7 +1144,7 @@ class WikiRequest extends Request {
 
     function action_edit () {
         $this->buffer_output();
-        include "lib/editpage.php";
+        include 'lib/editpage.php';
         $e = new PageEditor ($this);
         $e->editPage();
     }
@@ -1155,7 +1155,7 @@ class WikiRequest extends Request {
 
     function action_viewsource () {
         $this->buffer_output();
-        include "lib/editpage.php";
+        include 'lib/editpage.php';
         $e = new PageEditor ($this);
         $e->viewSource();
     }
@@ -1166,14 +1166,14 @@ class WikiRequest extends Request {
         $this->_dbi->touch();
         // check ModeratedPage hook
         if ($moderated = $page->get('moderation')) {
-            require_once("lib/WikiPlugin.php");
+            require_once 'lib/WikiPlugin.php';
             $plugin = WikiPluginLoader::getPlugin("ModeratedPage");
             if ($retval = $plugin->lock_check($this, $page, $moderated))
                 $this->setArg('errormsg', $retval);
         }
         // check if a link to ModeratedPage exists
         elseif ($action_page = $page->existLink(_("ModeratedPage"))) {
-            require_once("lib/WikiPlugin.php");
+            require_once 'lib/WikiPlugin.php';
             $plugin = WikiPluginLoader::getPlugin("ModeratedPage");
             if ($retval = $plugin->lock_add($this, $page, $action_page))
                 $this->setArg('errormsg', $retval);
@@ -1193,7 +1193,7 @@ class WikiRequest extends Request {
         if (strstr($pagename, _("PhpWikiAdministration"))) {
             $this->action_browse();
         } else {
-            include('lib/purgepage.php');
+            include 'lib/purgepage.php';
             PurgePage($this);
         }
     }
@@ -1205,13 +1205,13 @@ class WikiRequest extends Request {
         if (strstr($pagename, _("PhpWikiAdministration"))) {
             $this->action_browse();
         } else {
-            include('lib/removepage.php');
+            include 'lib/removepage.php';
             RemovePage($this);
         }
     }
 
     function action_xmlrpc () {
-        include_once("lib/XmlRpcServer.php");
+        include_once 'lib/XmlRpcServer.php';
         $xmlrpc = new XmlRpcServer($this);
         $xmlrpc->service();
     }
@@ -1222,21 +1222,21 @@ class WikiRequest extends Request {
     /*
       allow VIRTUAL_PATH or action=soap SOAP access
      */
-    include_once("SOAP.php");
+    include_once 'SOAP.php';
     }
 
     function action_revert () {
-        include_once "lib/loadsave.php";
+        include_once 'lib/loadsave.php';
         RevertPage($this);
     }
 
     function action_zip () {
-        include_once("lib/loadsave.php");
+        include_once 'lib/loadsave.php';
         MakeWikiZip($this);
     }
 
     function action_ziphtml () {
-        include_once("lib/loadsave.php");
+        include_once 'lib/loadsave.php';
         MakeWikiZipHtml($this);
         // I don't think it hurts to add cruft at the end of the zip file.
         echo "\n========================================================\n";
@@ -1244,44 +1244,44 @@ class WikiRequest extends Request {
     }
 
     function action_dumpserial () {
-        include_once("lib/loadsave.php");
+        include_once 'lib/loadsave.php';
         DumpToDir($this);
     }
 
     function action_dumphtml () {
-        include_once("lib/loadsave.php");
+        include_once 'lib/loadsave.php';
         DumpHtmlToDir($this);
     }
 
     function action_upload () {
-        include_once("lib/loadsave.php");
+        include_once 'lib/loadsave.php';
         LoadPostFile($this);
     }
 
     function action_upgrade () {
-        include_once("lib/loadsave.php");
-        include_once("lib/upgrade.php");
+        include_once 'lib/loadsave.php';
+        include_once 'lib/upgrade.php';
         DoUpgrade($this);
     }
 
     function action_loadfile () {
-        include_once("lib/loadsave.php");
+        include_once 'lib/loadsave.php';
         LoadFileOrDir($this);
     }
 
     function action_pdf () {
-        include_once("lib/pdf.php");
+        include_once 'lib/pdf.php';
         ConvertAndDisplayPdf($this);
     }
 
     function action_captcha () {
-        include_once "lib/Captcha.php";
+        include_once 'lib/Captcha.php';
         $captcha = new Captcha();
         $captcha->image ( $captcha->captchaword() );
     }
 
     function action_wikitohtml () {
-       include_once("lib/WysiwygEdit/Wikiwyg.php");
+       include_once 'lib/WysiwygEdit/Wikiwyg.php';
        $wikitohtml = new WikiToHtml( $this->getArg("content") , $this);
        $wikitohtml->send();
     }

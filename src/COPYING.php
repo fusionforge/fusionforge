@@ -24,7 +24,7 @@
  * Short description of the module or comments or whatever
  */
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 //…

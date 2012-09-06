@@ -22,9 +22,9 @@
 /**
  * @author: Sébastien Le Callonnec
  */
-require_once('lib/plugin/AtomFeed.php');
-require_once('lib/AtomParser.php');
-require_once('lib/HtmlElement.php');
+require_once 'lib/plugin/AtomFeed.php';
+require_once 'lib/AtomParser.php';
+require_once 'lib/HtmlElement.php';
 
 class AtomFeedTest
 extends phpwiki_TestCase

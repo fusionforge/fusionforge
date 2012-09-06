@@ -20,7 +20,7 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('common/valid/Valid.class.php');
+require_once 'common/valid/Valid.class.php';
 
 /**
  * Check that value is a decimal integer greater or equal to zero.

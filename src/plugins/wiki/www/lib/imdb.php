@@ -36,7 +36,7 @@ class imdb {
         } else {
             if ($DBParams['dbtype'] != 'ADODB') {
                 // require_once('lib/WikiDB/adodb/adodb-errorhandler.inc.php');
-                require_once('lib/WikiDB/adodb/adodb-pear.inc.php');
+                require_once 'lib/WikiDB/adodb/adodb-pear.inc.php';
             }
             $parsed = parseDSN($dsn);
             $this->_dbh = &ADONewConnection($parsed['phptype']);
@@ -332,7 +332,7 @@ create table characters (name_id integer unsigned not null, title_id integer uns
     }
 
     function _search($what, $callback_fn, $query, $order = '') {
-        include_once("lib/TextSearchQuery.php");
+        include_once 'lib/TextSearchQuery.php';
         // $dbh = $GLOBALS['request']->getDbh();
         //TODO: check if the db is mysql resp. capable of google like search.
         //      postgresql tsearch2 for example

@@ -123,8 +123,8 @@ if (file_exists($fs_config_file)) {
     // Require admin user
     if (!defined('ADMIN_USER') or !defined('ADMIN_PASSWD')) {
             if (!function_exists("IniConfig")) {
-                include_once("lib/prepend.php");
-            include_once("lib/IniConfig.php");
+                include_once 'lib/prepend.php';
+            include_once 'lib/IniConfig.php';
             }
         IniConfig($fs_config_file);
     }
@@ -149,8 +149,8 @@ if (file_exists($fs_config_file)) {
     }
 } else {
     if (!function_exists("IniConfig")) {
-        include_once("lib/prepend.php");
-        include_once("lib/IniConfig.php");
+        include_once 'lib/prepend.php';
+        include_once 'lib/IniConfig.php';
     }
     $def_file = (substr(PHP_OS,0,3) == 'WIN') ? 'config\\config-default.ini' : 'config/config-default.ini';
     $fs_def_file = dirname(__FILE__) . (substr(PHP_OS,0,3) == 'WIN' ? '\\' : '/') . $def_file;

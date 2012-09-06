@@ -24,8 +24,8 @@
 /**
  * Usage:   <<WikiAdminPurge>>
  */
-require_once('lib/PageList.php');
-require_once('lib/plugin/WikiAdminSelect.php');
+require_once 'lib/PageList.php';
+require_once 'lib/plugin/WikiAdminSelect.php';
 
 class WikiPlugin_WikiAdminPurge
 extends WikiPlugin_WikiAdminSelect

@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-include_once("lib/WikiUser/Db.php");
+include_once 'lib/WikiUser/Db.php';
 
 class _AdoDbPassUser
 extends _DbPassUser

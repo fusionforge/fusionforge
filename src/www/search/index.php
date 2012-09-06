@@ -24,7 +24,7 @@
 
 $no_gz_buffer = true;
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
 require_once $gfwww.'search/include/SearchManager.class.php';

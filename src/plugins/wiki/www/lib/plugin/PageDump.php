@@ -87,7 +87,7 @@ extends WikiPlugin
         }
 
         $p = $dbi->getPage($page);
-        include_once("lib/loadsave.php");
+        include_once 'lib/loadsave.php';
         $mailified = MailifyPage($p, ($format == 'backup') ? 99 : 1);
 
         // fixup_headers massages the page dump headers depending on

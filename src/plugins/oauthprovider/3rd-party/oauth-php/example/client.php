@@ -1,5 +1,5 @@
 <?php
-require_once("common.inc.php");
+require_once 'common.inc.php';
 
 $key = @$_REQUEST['key'];
 $secret = @$_REQUEST['secret'];

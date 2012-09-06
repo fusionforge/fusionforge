@@ -21,14 +21,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('../env.inc.php');
-require_once('pre.php');
-require_once('trove.php');
+require_once '../env.inc.php';
+require_once 'pre.php';
+require_once 'trove.php';
 
-require_once('common/include/escapingUtils.php');
-require_once('TroveCategory.class.php');
-require_once('TroveCategoryFactory.class.php');
-require_once('include/utils.php');
+require_once 'common/include/escapingUtils.php';
+require_once 'TroveCategory.class.php';
+require_once 'TroveCategoryFactory.class.php';
+require_once 'include/utils.php';
 
 if (!forge_get_config('use_trove')) {
 	exit_disabled();

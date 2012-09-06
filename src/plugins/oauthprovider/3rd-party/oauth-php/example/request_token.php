@@ -1,5 +1,5 @@
 <?php
-require_once("common.inc.php");
+require_once 'common.inc.php';
 
 try {
   $req = OAuthRequest::from_request();

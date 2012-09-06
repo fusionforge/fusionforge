@@ -88,7 +88,7 @@ extends WikiPlugin
 
 
     function dumpFile(&$thispage, $filename) {
-      include_once("lib/loadsave.php");
+      include_once 'lib/loadsave.php';
       $mailified = MailifyPage($thispage);
 
       $attrib = array('mtime' => $thispage->get('mtime'), 'is_ascii' => 1);

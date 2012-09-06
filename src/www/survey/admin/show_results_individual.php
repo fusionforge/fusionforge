@@ -23,7 +23,7 @@
  */
 
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 $is_admin_page='y';

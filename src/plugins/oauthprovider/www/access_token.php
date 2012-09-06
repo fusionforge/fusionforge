@@ -26,7 +26,7 @@
 
 // This is not exactly using FusionForge, as is not meant for humans, and just an endpoint of the OAuth protocol.
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 //require_once 'checks.php';
 /*if (!session_loggedin()) {

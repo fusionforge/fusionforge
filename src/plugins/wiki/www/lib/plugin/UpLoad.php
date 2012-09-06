@@ -255,7 +255,7 @@ ws[cfh]");
                     $this->log($userfile, $upload_log, $message);
                 }
                 if ($autolink) {
-                    require_once("lib/loadsave.php");
+                    require_once 'lib/loadsave.php';
                     $pagehandle = $dbi->getPage($page);
                     if ($pagehandle->exists()) {// don't replace default contents
                         $current = $pagehandle->getCurrentRevision();

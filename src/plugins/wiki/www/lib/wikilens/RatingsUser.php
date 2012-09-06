@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once("lib/wikilens/RatingsDb.php");
+require_once 'lib/wikilens/RatingsDb.php';
 
 /**
  * Get a RatingsUser instance (possibly from a cache).

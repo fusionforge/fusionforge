@@ -637,7 +637,7 @@ class GitPlugin extends SCMPlugin {
 	 * @return boolean
 	 */
 	function widgets($params) {
- 		require_once('common/widget/WidgetLayoutManager.class.php');
+ 		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
 			$params['fusionforge_widgets'][] = 'plugin_scmgit_project_latestcommits';
 		}
@@ -654,7 +654,7 @@ class GitPlugin extends SCMPlugin {
 	function myPageBox($params) {
 		global $gfplugins;
 		$user = UserManager::instance()->getCurrentUser();
-		require_once('common/widget/WidgetLayoutManager.class.php');
+		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['widget'] == 'plugin_scmgit_user_myrepositories') {
 			require_once $gfplugins.$this->name.'/common/scmgit_Widget_MyRepositories.class.php';
 			$params['instance'] = new scmgit_Widget_MyRepositories(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());

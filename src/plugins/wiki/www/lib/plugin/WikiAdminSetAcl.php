@@ -31,8 +31,8 @@
  * Currently it's easier to dump a page, fix it manually and
  * import it, than use Setacl
  */
-require_once('lib/PageList.php');
-require_once('lib/plugin/WikiAdminSelect.php');
+require_once 'lib/PageList.php';
+require_once 'lib/plugin/WikiAdminSelect.php';
 
 class WikiPlugin_WikiAdminSetAcl
 extends WikiPlugin_WikiAdminSelect

@@ -29,8 +29,8 @@
  * Leave detection: more content than just plugins.
  */
 
-require_once('lib/PageList.php');
-require_once('lib/plugin/SiteMap.php');
+require_once 'lib/PageList.php';
+require_once 'lib/plugin/SiteMap.php';
 
 class WikiPlugin_IncludeTree
 extends WikiPlugin_SiteMap

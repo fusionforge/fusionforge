@@ -12,7 +12,7 @@ if (!defined('PHPWIKI_VERSION')) {
  * This file defines an appearance ("theme") of PhpWiki similar to the Portland Pattern Repository.
  */
 
-require_once('lib/WikiTheme.php');
+require_once 'lib/WikiTheme.php';
 
 class WikiTheme_Portland extends WikiTheme {
 

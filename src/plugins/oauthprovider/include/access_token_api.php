@@ -22,7 +22,7 @@
  *
  */
 
-require_once('token_api.php');
+require_once 'token_api.php';
 
 /**
  * OAuth Access Token concrete class

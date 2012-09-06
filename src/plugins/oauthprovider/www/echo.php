@@ -24,7 +24,7 @@
 
 # This script demonstrates the way to protect access to a resource using OAuth (see README for example of its use).
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 
 session_set_for_authplugin('oauthprovider');

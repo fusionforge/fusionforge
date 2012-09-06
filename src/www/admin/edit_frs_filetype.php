@@ -25,7 +25,7 @@ $unit        = 'file_type';
 $table       = 'frs_filetype';
 $primary_key = 'type_id';
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 include_once $gfwww.'admin/admin_table.php';
 
 ?>

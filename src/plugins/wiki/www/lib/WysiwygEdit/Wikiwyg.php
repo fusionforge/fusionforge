@@ -13,7 +13,7 @@
  * Current maintainer: Sabri LABBENE, STMicroelectronics, 2006
  */
 
-require_once("lib/WysiwygEdit.php");
+require_once 'lib/WysiwygEdit.php';
 
 class WysiwygEdit_Wikiwyg extends WysiwygEdit {
 
@@ -145,7 +145,7 @@ class WikiToHtml {
     }
 
     function convert() {
-        require_once("lib/BlockParser.php");       
+        require_once 'lib/BlockParser.php';       
 	$xmlcontent = TransformText($this->_wikitext, 2.0, $this->_request->getArg('pagename')); 
 	$this->_html = $xmlcontent->AsXML();
 
@@ -291,7 +291,7 @@ function replace_rich_table($matched) {
     
         $plugin = "<?plugin RichTable ".$plugin." ?>";
     
-        require_once("lib/BlockParser.php"); 
+        require_once 'lib/BlockParser.php'; 
         $xmlcontent = TransformText($plugin, 2.0, $GLOBALS['request']->getArg('pagename')); 
         return $xmlcontent->AsXML();
   }

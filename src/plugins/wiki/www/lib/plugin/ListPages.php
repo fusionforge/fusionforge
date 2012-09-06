@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('lib/PageList.php');
+require_once 'lib/PageList.php';
 
 /**
  * ListPages - List pages that are explicitly given as the pages argument.
@@ -74,8 +74,8 @@ extends WikiPlugin
             $info = array();
 
         if (in_array('top3recs', $info)) {
-            require_once('lib/wikilens/Buddy.php');
-            require_once('lib/wikilens/PageListColumns.php');
+            require_once 'lib/wikilens/Buddy.php';
+            require_once 'lib/wikilens/PageListColumns.php';
 
             $active_user   = $request->getUser();
             $active_userid = $active_user->_userid;

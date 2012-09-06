@@ -31,7 +31,7 @@ if (!defined('PHPWIKI_VERSION')) {
  * you may not see it.
  * */
 
-require_once('lib/WikiTheme.php');
+require_once 'lib/WikiTheme.php';
 
 class WikiTheme_MacOSX extends WikiTheme {
     function getCSS() {

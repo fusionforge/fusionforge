@@ -30,7 +30,7 @@
 //to be tested
 //session_require_login ();
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 require $gfconfig.'/plugins/oauthprovider/config.php';
 require_once 'checks.php';

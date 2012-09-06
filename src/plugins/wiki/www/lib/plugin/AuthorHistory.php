@@ -56,7 +56,7 @@
  WikiDB_PageRevisionIterator(&$wikidb, &$revisions)
 */
 
-require_once('lib/PageList.php');
+require_once 'lib/PageList.php';
 
 class WikiPlugin_AuthorHistory
 extends WikiPlugin

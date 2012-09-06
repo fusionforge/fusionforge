@@ -103,9 +103,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('lib/RssWriter.php');
-require_once('lib/TextSearchQuery.php');
-require_once('lib/Units.php');
+require_once 'lib/RssWriter.php';
+require_once 'lib/TextSearchQuery.php';
+require_once 'lib/Units.php';
 
 
 /**

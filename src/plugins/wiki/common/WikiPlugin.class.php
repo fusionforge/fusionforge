@@ -101,7 +101,7 @@ class GforgeWikiPlugin extends Plugin {
 			$group = group_get_object($group_id);
 			if ($group->usesPlugin ( $this->name)) {
 				global $gfwww, $gfcommon, $gfplugins;
-				require_once('plugins/wiki/common/WikiHtmlSearchRenderer.class.php');
+				require_once 'plugins/wiki/common/WikiHtmlSearchRenderer.class.php';
 				$wikiRenderer = new WikiHtmlSearchRenderer($params->words, $params->offset, $params->isExact, $params->groupId);
 				$validLength = (strlen($params->words) >= 3);
 				if ($validLength || (is_numeric($params->words) && $wikiRenderer->searchQuery->implementsSearchById())) {

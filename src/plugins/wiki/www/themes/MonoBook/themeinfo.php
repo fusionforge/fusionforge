@@ -16,8 +16,8 @@ if (!defined('PHPWIKI_VERSION')) {
  * Problems with IE: signin is at the left.
  *
  */
-require_once('lib/WikiTheme.php');
-require_once('themes/wikilens/themeinfo.php');
+require_once 'lib/WikiTheme.php';
+require_once 'themes/wikilens/themeinfo.php';
 
 function ActionButton ($action, $label = false, $page_or_rev = false, $options = false) {
     global $WikiTheme;

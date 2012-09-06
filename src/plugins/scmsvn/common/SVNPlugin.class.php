@@ -590,8 +590,8 @@ class SVNPlugin extends SCMPlugin {
 				}
 			}
 		}
-		$params['ids'][] = 'scm';
-		$params['texts'][] = _('SCM SVN Commits');
+		$params['ids'][] = $this->name;
+		$params['texts'][] = _('Subversion Commits');
 		return true;
 	}
 

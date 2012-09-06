@@ -43,7 +43,7 @@ liveSearchReq.open("GET", liveSearchURI + "?format=livesearch&paging=none&limit=
  * Happy blogging.
  */
 
-require_once('lib/WikiTheme.php');
+require_once 'lib/WikiTheme.php';
 
 class WikiTheme_blog extends WikiTheme {
 

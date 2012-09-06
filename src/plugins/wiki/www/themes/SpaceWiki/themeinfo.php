@@ -19,7 +19,7 @@ if (!defined('PHPWIKI_VERSION')) {
  * remaining non-structural html elements from the html templates.
  */
 
-require_once('lib/WikiTheme.php');
+require_once 'lib/WikiTheme.php';
 
 class WikiTheme_SpaceWiki extends WikiTheme {
 

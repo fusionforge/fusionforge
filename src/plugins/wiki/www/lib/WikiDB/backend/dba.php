@@ -1,7 +1,7 @@
 <?php // $Id: dba.php 7956 2011-03-03 17:08:31Z vargenau $
 
-require_once('lib/WikiDB/backend/dbaBase.php');
-require_once('lib/DbaDatabase.php');
+require_once 'lib/WikiDB/backend/dbaBase.php';
+require_once 'lib/DbaDatabase.php';
 
 class WikiDB_backend_dba
 extends WikiDB_backend_dbaBase

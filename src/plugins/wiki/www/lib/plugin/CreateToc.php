@@ -452,7 +452,7 @@ extends WikiPlugin
             }
         }
         if (TOC_FULL_SYNTAX)
-            require_once("lib/InlineParser.php");
+            require_once 'lib/InlineParser.php';
         if ($headers = $this->extractHeaders($content, $dbi->_markup,
                                              $with_toclink, $with_counter,
                                              $levels, $firstlevelstyle, $basepage))

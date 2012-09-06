@@ -22,7 +22,7 @@
  *
  */
 
-require_once('OAuth.php');
+require_once 'OAuth.php';
 
 /**
  * OAuth Consumer class stored in DB

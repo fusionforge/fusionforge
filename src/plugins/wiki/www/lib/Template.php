@@ -1,7 +1,7 @@
 <?php //-*-php-*-
 // $Id: Template.php 7964 2011-03-05 17:05:30Z vargenau $
 
-require_once("lib/ErrorManager.php");
+require_once 'lib/ErrorManager.php';
 
 
 /** An HTML template.
@@ -79,7 +79,7 @@ class Template
     }
 
     function _printPlugin ($pi) {
-    include_once("lib/WikiPlugin.php");
+    include_once 'lib/WikiPlugin.php';
     static $loader;
 
         if (empty($loader))

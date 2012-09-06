@@ -190,7 +190,7 @@ extends WikiPlugin
 
     function _do_convert_cached_html(&$request, $args) {
 
-        require_once("lib/upgrade.php");
+        require_once 'lib/upgrade.php';
         $dbh = $request->_dbi;
         _upgrade_db_init($dbh);
 
@@ -296,7 +296,7 @@ extends WikiPlugin
     }
 };
 
-require_once("lib/PageList.php");
+require_once 'lib/PageList.php';
 
 class _PageList_Column_email
 extends _PageList_Column {

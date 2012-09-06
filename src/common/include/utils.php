@@ -1612,7 +1612,7 @@ function util_negociate_alternate_content_types($script, $default_content_type) 
 		$accepted_types = array_merge($accepted_types, $new_accepted_types);
 
 		// PEAR::HTTP (for negotiateMimeType())
-		require_once('HTTP.php');
+		require_once 'HTTP.php';
 
 		// negociate accepted content-type depending on the preferred ones declared by client
 		$http=new HTTP();

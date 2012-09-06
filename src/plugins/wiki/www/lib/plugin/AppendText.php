@@ -118,7 +118,7 @@ extends WikiPlugin
                 "\n" . $text;
         }
 
-        require_once("lib/loadsave.php");
+        require_once 'lib/loadsave.php';
         $meta = $current->_data;
         $meta['summary'] = sprintf(_("AppendText to %s"), $pagename);
         if ($page->save($newtext, $current->getVersion() + 1, $meta)) {

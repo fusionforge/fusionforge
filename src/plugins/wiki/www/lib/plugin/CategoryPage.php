@@ -21,7 +21,7 @@
  */
 
 //require_once('lib/InlineParser.php');
-require_once('lib/BlockParser.php');
+require_once 'lib/BlockParser.php';
 
 /**
  * CategoryPage plugin.

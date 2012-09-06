@@ -4,7 +4,7 @@
 /**
  * MS SQL extensions for the ADODB DB backend.
  */
-require_once('lib/WikiDB/backend/ADODB.php');
+require_once 'lib/WikiDB/backend/ADODB.php';
 
 class WikiDB_backend_ADODB_mssqlnative
 extends WikiDB_backend_ADODB

@@ -21,7 +21,7 @@
  * along with FusionForge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('Widget.class.php');
+require_once 'Widget.class.php';
 include $gfcommon.'docman/DocumentFactory.class.php';
 
 /**

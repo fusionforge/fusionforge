@@ -34,7 +34,7 @@
  */
 define('ESCAPE_CHAR', '~');
 
-require_once('lib/CachedMarkup.php');
+require_once 'lib/CachedMarkup.php';
 require_once(dirname(__FILE__).'/stdlib.php');
 
 
@@ -556,7 +556,7 @@ class Markup_searchhighlight extends SimpleMarkup
 {
     function Markup_searchhighlight () {
         $result = $GLOBALS['request']->_searchhighlight;
-        require_once("lib/TextSearchQuery.php");
+        require_once 'lib/TextSearchQuery.php';
         $query = new TextSearchQuery($result['query']);
         $this->hilight_re = $query->getHighlightRegexp();
         $this->engine = $result['engine'];

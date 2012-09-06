@@ -22,11 +22,11 @@
  * This is the "File Uploader" for PHP.
  */
 
-require('./config.php') ;
-require('./util.php') ;
-require('./io.php') ;
-require('./commands.php') ;
-require('./phpcompat.php') ;
+require './config.php';
+require './util.php';
+require './io.php';
+require './commands.php';
+require './phpcompat.php';
 
 function SendError( $number, $text )
 {

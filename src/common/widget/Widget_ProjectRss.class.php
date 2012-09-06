@@ -19,8 +19,8 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('Widget_Rss.class.php');
-require_once('Widget.class.php');
+require_once 'Widget_Rss.class.php';
+require_once 'Widget.class.php';
 
 /**
 * Widget_RSS

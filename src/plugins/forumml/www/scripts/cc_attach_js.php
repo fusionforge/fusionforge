@@ -24,8 +24,8 @@
  */
 
 header("content-type: application/x-javascript");
-require_once('env.inc.php');
-require_once('pre.php');
+require_once 'env.inc.php';
+require_once 'pre.php';
 ?>
 
 function addHeader(cc,file,header_type)

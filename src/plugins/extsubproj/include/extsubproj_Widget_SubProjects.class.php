@@ -18,8 +18,8 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-require_once('common/widget/Widget.class.php');
-require_once('common/widget/WidgetLayoutManager.class.php');
+require_once 'common/widget/Widget.class.php';
+require_once 'common/widget/WidgetLayoutManager.class.php';
 
 
 class extsubproj_Widget_SubProjects extends Widget {
@@ -54,8 +54,8 @@ class extsubproj_Widget_SubProjects extends Widget {
 		
 			foreach ($subProjects as $url) {
 				
-				include_once("arc/ARC2.php");
-				require_once('plugins/extsubproj/include/Graphite.php');
+				include_once 'arc/ARC2.php';
+				require_once 'plugins/extsubproj/include/Graphite.php';
 				
 				$reader = ARC2::getComponent('Reader');
 				
@@ -92,7 +92,7 @@ class extsubproj_Widget_SubProjects extends Widget {
 				}
 				
 				//@TODO: check plugin compactpreview is installed through the right functions...
-				require_once ('plugins/compactpreview/include/CompactResource.class.php');
+				require_once 'plugins/compactpreview/include/CompactResource.class.php';
 				$params = array('name' => $projname,
 								'url' => $url);
 				

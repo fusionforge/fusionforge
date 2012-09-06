@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once("lib/Google.php");
+require_once 'lib/Google.php';
 
 /**
  * This module is a wrapper for the Google Web APIs. It allows you to do Google searches,
@@ -66,7 +66,7 @@ extends WikiPlugin
         extract($args);
         // prevent from dump
         if ($q and $request->isPost()) {
-            require_once("lib/Google.php");
+            require_once 'lib/Google.php';
             $google = new Google();
             if (!$google) return '';
             switch ($mode) {

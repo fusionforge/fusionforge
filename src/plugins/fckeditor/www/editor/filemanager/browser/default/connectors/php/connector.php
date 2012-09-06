@@ -20,11 +20,11 @@
 
 ob_start() ;
 
-include('config.php') ;
-include('util.php') ;
-include('io.php') ;
-include('basexml.php') ;
-include('commands.php') ;
+include 'config.php';
+include 'util.php';
+include 'io.php';
+include 'basexml.php';
+include 'commands.php';
 
 if ( !$Config['Enabled'] )
 	SendError( 1, 'This connector is disabled. Please check the "editor/filemanager/browser/default/connectors/php/config.php" file' ) ;

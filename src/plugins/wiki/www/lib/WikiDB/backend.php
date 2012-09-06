@@ -301,7 +301,7 @@ class WikiDB_backend
      * @return object A WikiDB_backend_iterator.
      */
     function get_all_revisions($pagename) {
-        include_once('lib/WikiDB/backend/dumb/AllRevisionsIter.php');
+        include_once 'lib/WikiDB/backend/dumb/AllRevisionsIter.php';
         return new WikiDB_backend_dumb_AllRevisionsIter($this, $pagename);
     }
   
@@ -354,7 +354,7 @@ class WikiDB_backend
         //
         // It is expected that most backends will overload
         // this method with something more efficient.
-        include_once('lib/WikiDB/backend/dumb/TextSearchIter.php');
+        include_once 'lib/WikiDB/backend/dumb/TextSearchIter.php';
         // ignore $limit
         $pages = $this->get_all_pages(false, $sortby, false, $exclude);
         return new WikiDB_backend_dumb_TextSearchIter($this, $pages, $search, $fulltext,
@@ -376,7 +376,7 @@ class WikiDB_backend
      * @see WikiDB::linkSearch
      */
     function link_search( $pages, $linkvalue, $linktype, $relation=false, $options=array() ) {
-        include_once('lib/WikiDB/backend/dumb/LinkSearchIter.php');
+        include_once 'lib/WikiDB/backend/dumb/LinkSearchIter.php';
         $pageiter = $this->text_search($pages);
         return new WikiDB_backend_dumb_LinkSearchIter($this, $pageiter, $linkvalue, $linktype, $relation, $options);
     }
@@ -398,7 +398,7 @@ class WikiDB_backend
         //
         // It is expected that most backends will overload
         // method with something more efficient.
-        include_once('lib/WikiDB/backend/dumb/MostPopularIter.php');
+        include_once 'lib/WikiDB/backend/dumb/MostPopularIter.php';
         $pages = $this->get_all_pages(false, $sortby, false);
         return new WikiDB_backend_dumb_MostPopularIter($this, $pages, $limit);
     }
@@ -418,13 +418,13 @@ class WikiDB_backend
         //
         // It is expected that most backends will overload
         // method with something more efficient.
-        include_once('lib/WikiDB/backend/dumb/MostRecentIter.php');
+        include_once 'lib/WikiDB/backend/dumb/MostRecentIter.php';
         $pages = $this->get_all_pages(true, '-mtime');
         return new WikiDB_backend_dumb_MostRecentIter($this, $pages, $params);
     }
 
     function wanted_pages($exclude_from='', $exclude='', $sortby='', $limit='') {
-        include_once('lib/WikiDB/backend/dumb/WantedPagesIter.php');
+        include_once 'lib/WikiDB/backend/dumb/WantedPagesIter.php';
         $allpages = $this->get_all_pages(true,false,false,$exclude_from);
         return new WikiDB_backend_dumb_WantedPagesIter($this, $allpages, $exclude, $sortby, $limit);
     }

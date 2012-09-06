@@ -55,7 +55,7 @@ if (!defined("PLOTICUS_EXE"))
     define('PLOTICUS_EXE','/usr/local/bin/pl');
 //TODO: check $_ENV['PLOTICUS_PREFABS'] and default directory
 
-require_once "lib/WikiPluginCached.php";
+require_once 'lib/WikiPluginCached.php';
 
 class WikiPlugin_Ploticus
 extends WikiPluginCached

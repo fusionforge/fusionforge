@@ -47,7 +47,7 @@ class globaldashboardPlugin extends Plugin {
 	}
 	
 	function widgets(&$params) {
-		require_once('common/widget/WidgetLayoutManager.class.php');
+		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
 			$params['fusionforge_widgets'][] = 'plugin_globalDashboard_MyProjects';
 			$params['fusionforge_widgets'][] = 'plugin_globalDashboard_MyArtifacts';
@@ -62,7 +62,7 @@ class globaldashboardPlugin extends Plugin {
 	function widget_instance($params) {
 		global $gfplugins;
 		//$user = UserManager::instance()->getCurrentUser();
-		require_once('common/widget/WidgetLayoutManager.class.php');
+		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['widget'] == 'plugin_globalDashboard_MyProjects') {
 			require_once $gfplugins.$this->name.'/include/globalDashboard_Widget_MyProjects.php';
 			$params['instance'] = new globalDashboard_Widget_MyProjects(WidgetLayoutManager::OWNER_TYPE_USER, $this);

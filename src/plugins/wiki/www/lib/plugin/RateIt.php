@@ -78,8 +78,8 @@
  * - finish mysuggest.c (external engine with data from mysql)
  */
 
-require_once("lib/WikiPlugin.php");
-require_once("lib/wikilens/RatingsDb.php");
+require_once 'lib/WikiPlugin.php';
+require_once 'lib/wikilens/RatingsDb.php';
 
 class WikiPlugin_RateIt
 extends WikiPlugin

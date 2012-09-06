@@ -22,7 +22,7 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('Widget.class.php');
+require_once 'Widget.class.php';
 
 /**
  * Widget_Rss
@@ -49,7 +49,7 @@ require_once('Widget.class.php');
 					return idn_to_unicode($param);
 				}
 			}
-			require_once('common/rss/simplepie.inc');
+			require_once 'common/rss/simplepie.inc';
 			if (!is_dir(forge_get_config('data_path') .'/rss')) {
 				mkdir(forge_get_config('data_path') .'/rss');
 			}
@@ -126,10 +126,10 @@ require_once('Widget.class.php');
 			$vTitle->required();
 			if (!$request->validInArray('rss', $vTitle)) {
 				if (function_exists('idn_to_utf8()')) {
-					require_once('simplepie/simplepie.inc');
+					require_once 'simplepie/simplepie.inc';
 				}
 				else {
-					require_once('common/rss/simplepie.inc');
+					require_once 'common/rss/simplepie.inc';
 				}
 				if (!is_dir(forge_get_config('data_path') .'/rss')) {
 					mkdir(forge_get_config('data_path') .'/rss');

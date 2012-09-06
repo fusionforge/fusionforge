@@ -11,7 +11,7 @@
  * Portions Copyright 2010 (c) Mélanie Le Bail
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  */
-require_once ('env.inc.php');
+require_once 'env.inc.php';
 require_once 'pre.php';
 require_once 'preplugins.php';
 require_once 'plugins_utils.php';

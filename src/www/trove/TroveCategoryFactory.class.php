@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('TroveCategory.class.php');
+require_once 'TroveCategory.class.php';
 
 class TroveCategoryFactory {
 

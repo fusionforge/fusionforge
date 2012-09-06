@@ -32,7 +32,7 @@
 if (!defined('VISUALWIKI_ALLOWOPTIONS'))
     define('VISUALWIKI_ALLOWOPTIONS', false);
 
-require_once "lib/plugin/GraphViz.php";
+require_once 'lib/plugin/GraphViz.php';
 
 class WikiPlugin_VisualWiki
 extends WikiPlugin_GraphViz

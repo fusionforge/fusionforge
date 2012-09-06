@@ -51,7 +51,7 @@ class fckeditorPlugin extends Plugin {
 
 		if (file_exists ("/usr/share/fckeditor/fckeditor.php")) {
 			$use_system_fckeditor = true;
-			require_once("/usr/share/fckeditor/fckeditor.php");
+			require_once '/usr/share/fckeditor/fckeditor.php';
 		} else {
 			$use_system_fckeditor = false;
 			require_once $GLOBALS['gfplugins'].'fckeditor/www/fckeditor.php';

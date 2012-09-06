@@ -22,8 +22,8 @@
 /**
  * @author: Sébastien Le Callonnec
  */
-require_once('lib/WikiPlugin.php');
-require_once('lib/AtomParser.php');
+require_once 'lib/WikiPlugin.php';
+require_once 'lib/AtomParser.php';
 
 class WikiPlugin_AtomFeed
 extends WikiPlugin

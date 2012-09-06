@@ -58,7 +58,7 @@ $GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] = "POST";
 include($rootdir."lib/XmlRpcServer.php");
 $GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] = $save;
 
-include("./xmlrpc-servers.php");
+include './xmlrpc-servers.php';
 
 function match($a, $b) {
    $matches = true;

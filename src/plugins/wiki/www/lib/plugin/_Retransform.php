@@ -54,7 +54,7 @@ extends WikiPlugin
         $version = $backend->get_latest_version($page);
         $vdata = $backend->get_versiondata($page, $version, true);
 
-        include_once('lib/PageType.php');
+        include_once 'lib/PageType.php';
         $formatted = new TransformedText($dbi->getPage($page), $vdata['%content'], $vdata);
         $content =& $formatted->_content;
         $html->pushContent($this->_DebugPrintArray($content));

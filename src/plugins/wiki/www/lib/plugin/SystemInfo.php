@@ -41,7 +41,7 @@
  *       the result. In the page or with WikiPluginCached?
  */
 
-require_once "lib/WikiPluginCached.php";
+require_once 'lib/WikiPluginCached.php';
 class WikiPlugin_SystemInfo
 extends WikiPluginCached
 {
@@ -268,7 +268,7 @@ extends WikiPluginCached
     function revisionstats() {
         global $request, $LANG;
 
-        include_once("lib/WikiPluginCached.php");
+        include_once 'lib/WikiPluginCached.php';
         $cache = WikiPluginCached::newCache();
         $id = $cache->generateId('SystemInfo::revisionstats_' . $LANG);
         $cachedir = 'plugincache';
@@ -362,7 +362,7 @@ extends WikiPluginCached
     function discspace() {
         global $DBParams, $request;
 
-        include_once("lib/WikiPluginCached.php");
+        include_once 'lib/WikiPluginCached.php';
         $cache = WikiPluginCached::newCache();
         $id = $cache->generateId('SystemInfo::discspace');
         $cachedir = 'plugincache';

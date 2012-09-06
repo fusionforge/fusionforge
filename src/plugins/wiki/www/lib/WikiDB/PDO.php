@@ -1,7 +1,7 @@
 <?php // -*-php-*-
 // $Id: PDO.php 7956 2011-03-03 17:08:31Z vargenau $
 
-require_once('lib/WikiDB.php');
+require_once 'lib/WikiDB.php';
 
 /**
  * WikiDB layer for PDO, the new php5 abstraction layer, with support for

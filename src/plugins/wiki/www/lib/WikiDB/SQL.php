@@ -1,6 +1,6 @@
 <?php // $Id: SQL.php 7956 2011-03-03 17:08:31Z vargenau $
 
-require_once('lib/WikiDB.php');
+require_once 'lib/WikiDB.php';
 //require_once('lib/WikiDB/backend/PearDB.php');
 //require_once('DB.php'); // Always favor use our local pear copy
 
@@ -20,7 +20,7 @@ class WikiDB_SQL extends WikiDB
 	    if (is_string($dbparams['dsn']))
 		$dbparams['dsn'] = $backend . ':' . substr($dbparams['dsn'], 10);
 	}
-        include_once ("lib/WikiDB/backend/PearDB_".$backend.".php");
+        include_once 'lib/WikiDB/backend/PearDB_'.$backend.'.php';
         $backend_class = "WikiDB_backend_PearDB_".$backend;
         $backend = new $backend_class($dbparams);
         if (DB::isError($backend->_dbh)) return;

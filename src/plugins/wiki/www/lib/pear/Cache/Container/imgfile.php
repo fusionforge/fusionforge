@@ -18,7 +18,7 @@
 //
 // $Id: imgfile.php 6209 2008-08-26 15:30:39Z vargenau $
 
-require_once('Cache/Container.php');
+require_once 'Cache/Container.php';
 
 /**
 * Stores cache contents in a file.

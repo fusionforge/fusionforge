@@ -32,7 +32,7 @@
  * collectPages() and preSelectS().
  * "list" PagePermissions supported implicitly by PageList.
  */
-require_once('lib/PageList.php');
+require_once 'lib/PageList.php';
 
 class WikiPlugin_WikiAdminSelect
 extends WikiPlugin

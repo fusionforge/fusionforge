@@ -1,7 +1,7 @@
 <?php // -*-php-*-
 // $Id: PearDB.php 8042 2011-04-13 13:02:42Z vargenau $
 
-require_once('lib/WikiDB/backend.php');
+require_once 'lib/WikiDB/backend.php';
 //require_once('lib/FileFinder.php');
 //require_once('lib/ErrorManager.php');
 
@@ -30,7 +30,7 @@ extends WikiDB_backend
                 include_once("$dir/DB.php");
             }
         } else {
-          include_once("DB.php");
+          include_once 'DB.php';
         }
 
         // Install filter to handle bogus error notices from buggy DB.php's.

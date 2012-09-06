@@ -145,7 +145,7 @@ extends WikiPlugin
 
         array_push($included_pages, $page);
 
-        include_once('lib/BlockParser.php');
+        include_once 'lib/BlockParser.php';
         $content = TransformText($ct, $r->get('markup'), $page);
 
         array_pop($included_pages);

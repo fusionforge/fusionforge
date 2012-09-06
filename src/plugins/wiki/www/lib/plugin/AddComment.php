@@ -30,7 +30,7 @@
  * @author: ReiniUrban
  */
 
-include_once("lib/plugin/WikiBlog.php");
+include_once 'lib/plugin/WikiBlog.php';
 
 class WikiPlugin_AddComment
 extends WikiPlugin_WikiBlog

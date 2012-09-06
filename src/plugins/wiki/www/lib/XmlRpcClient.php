@@ -23,10 +23,10 @@ define('XMLRPC_EXT_LOADED', true);
 if (loadPhpExtension('xmlrpc')) { // fast c lib
     global $xmlrpc_util_path;
     $xmlrpc_util_path = dirname(__FILE__)."/XMLRPC/";
-    include_once("lib/XMLRPC/xmlrpc_emu.inc");
+    include_once 'lib/XMLRPC/xmlrpc_emu.inc';
  } else { // slow php lib
     // Include the php XML-RPC library
-    include_once("lib/XMLRPC/xmlrpc.inc");
+    include_once 'lib/XMLRPC/xmlrpc.inc';
 }
 
 // API version

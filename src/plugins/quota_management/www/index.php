@@ -60,7 +60,7 @@ if (!$type) {
 			exit_permission_denied(_('You are not a member of this project'),'home');
 		}
 		$quota_management->quota_management_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-		include('quota_management/www/quota_project.php');
+		include 'quota_management/www/quota_project.php';
 	} elseif ($type == 'admin') {
 		$group = group_get_object($id);
 		if ( !$group) {
@@ -76,7 +76,7 @@ if (!$type) {
 		//only project admin can access here
 		if ( $userperm->isAdmin() ) {
 			$quota_management->quota_management_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-			include('quota_management/www/quota_project.php');
+			include 'quota_management/www/quota_project.php';
 		} else {
 			exit_permission_denied(_('You are not Admin of this project'), 'home');
 		}

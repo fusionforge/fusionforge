@@ -25,7 +25,7 @@
  * @author: Reini Urban
  */
 
-require_once('lib/WikiDB/backend.php');
+require_once 'lib/WikiDB/backend.php';
 
 class WikiDB_backend_PDO
 extends WikiDB_backend

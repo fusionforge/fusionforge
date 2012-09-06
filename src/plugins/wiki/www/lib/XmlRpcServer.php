@@ -77,12 +77,12 @@ if ($GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] != "POST")
         '  You must use XML-RPC calls to access information here.');
 }
 
-require_once("lib/XmlRpcClient.php");
+require_once 'lib/XmlRpcClient.php';
 if (loadPhpExtension('xmlrpc')) { // fast c lib
-    require_once("lib/XMLRPC/xmlrpcs_emu.inc");
+    require_once 'lib/XMLRPC/xmlrpcs_emu.inc';
 } else { // slow php lib
     global $_xmlrpcs_dmap;
-    require_once("lib/XMLRPC/xmlrpcs.inc");
+    require_once 'lib/XMLRPC/xmlrpcs.inc';
 }
 
 
@@ -669,7 +669,7 @@ function titleSearch($params)
             return new xmlrpcresp(0, $xmlrpcerruser + 1, "Invalid option");
         }
     }
-    include_once("lib/TextSearchQuery.php");
+    include_once 'lib/TextSearchQuery.php';
     $query = new TextSearchQuery($searchstring, $case_exact, $regex ? 'auto' : 'none');
     $dbh = $request->getDbh();
     $iterator = $dbh->titleSearch($query);
@@ -714,7 +714,7 @@ function listPlugins($params)
     sort($plugins);
     $RetArray = array();
     if (!empty($plugins)) {
-        require_once("lib/WikiPlugin.php");
+        require_once 'lib/WikiPlugin.php';
         $w = new WikiPluginLoader;
         foreach ($plugins as $plugin) {
             $pluginName = str_replace(".php", "", $plugin);
@@ -746,7 +746,7 @@ function getPluginSynopsis($params)
     $ParamPlugin = $params->getParam(0);
     $pluginName = short_string_decode($ParamPlugin->scalarval());
 
-    require_once("lib/WikiPlugin.php");
+    require_once 'lib/WikiPlugin.php';
     $w = new WikiPluginLoader;
     $synopsis = '';
     $p = $w->getPlugin($pluginName, false); // second arg?
@@ -789,7 +789,7 @@ function callPlugin($params)
     $plugin_args = short_string_decode($ParamArgs->scalarval());
 
     $basepage = ''; //$pluginName;
-    require_once("lib/WikiPlugin.php");
+    require_once 'lib/WikiPlugin.php';
     $w = new WikiPluginLoader;
     $p = $w->getPlugin($pluginName, false); // second arg?
     $pagelist = $p->run($dbi, $plugin_args, $request, $basepage);

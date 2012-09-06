@@ -56,7 +56,7 @@
  * @author: ReiniUrban
  */
 
-require_once("lib/PageList.php");
+require_once 'lib/PageList.php';
 
 class WikiPlugin_SqlResult
 extends WikiPlugin
@@ -143,7 +143,7 @@ extends WikiPlugin
             }
         } else { // unless PearDB use the included ADODB, regardless if dba, file or PDO, ...
             if ($DBParams['dbtype'] != 'ADODB') {
-                require_once('lib/WikiDB/backend/ADODB.php');
+                require_once 'lib/WikiDB/backend/ADODB.php';
             }
             $parsed = parseDSN($inidsn);
             $dbh = &ADONewConnection($parsed['phptype']);

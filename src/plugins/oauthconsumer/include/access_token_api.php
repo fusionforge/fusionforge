@@ -1,5 +1,5 @@
 <?php
-require_once('OAuth.php');
+require_once 'OAuth.php';
 
 class OAuthAccessToken extends OAuthToken {
 	

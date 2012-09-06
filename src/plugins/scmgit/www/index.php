@@ -6,7 +6,7 @@
  * Copyright 2010, Roland Mas <lolando@debian.org>
  */
 
-require_once ('../../../www/env.inc.php');
+require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'scm/include/scm_utils.php';
 

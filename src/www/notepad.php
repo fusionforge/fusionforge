@@ -26,7 +26,7 @@
  * FusionForge Notepad Window
  * By Hidenari Miwa, FUJITSU PRIME SOFTWARE TECHNOLOGIES LIMITED, 09/2003
  */
-require_once('env.inc.php');
+require_once 'env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 /*

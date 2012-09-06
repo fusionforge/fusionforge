@@ -156,9 +156,9 @@ $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 require_once("$IP/includes/Exception.php");
 require_once("$IP/includes/db/Database.php");
 if (forge_get_config('mw_dbtype', 'mediawiki')=='mysql'){
-	require_once("DatabaseForgeMysql.php");
+	require_once 'DatabaseForgeMysql.php';
 }else{
-	require_once("DatabaseForgePgsql.php");
+	require_once 'DatabaseForgePgsql.php';
 }
 
 function FusionForgeRoleToMediawikiGroupName ($role, $project) {
@@ -386,7 +386,7 @@ if (is_file(forge_get_config('config_path')."/plugins/mediawiki/LocalSettings.ph
 
 // debian style system-wide mediawiki extensions
 if (is_file("/etc/mediawiki-extensions/extensions.php")) {
-        include( "/etc/mediawiki-extensions/extensions.php" );
+        include '/etc/mediawiki-extensions/extensions.php';
 }
 
 if (file_exists("$wgUploadDirectory/.wgLogo.png")) {

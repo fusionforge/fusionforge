@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once('lib/plugin/SemanticSearch.php');
+require_once 'lib/plugin/SemanticSearch.php';
 
 /**
  * Advanced search for relations/attributes and its values.

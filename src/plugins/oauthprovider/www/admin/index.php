@@ -24,7 +24,7 @@
 
 
 global $gfwww;
-require_once('../../../env.inc.php');
+require_once '../../../env.inc.php';
 require_once '../checks.php';
 
 oauthprovider_CheckAdminExit();

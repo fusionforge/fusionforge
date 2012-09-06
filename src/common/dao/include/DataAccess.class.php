@@ -18,8 +18,8 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('DataAccessResult.class.php');
-require_once('DataAccessException.class.php');
+require_once 'DataAccessResult.class.php';
+require_once 'DataAccessException.class.php';
 
 
 class DataAccess {

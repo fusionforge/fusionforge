@@ -43,7 +43,7 @@
  * @author: Reini Urban
  */
 
-include_once("lib/plugin/WikiBlog.php");
+include_once 'lib/plugin/WikiBlog.php';
 
 class WikiPlugin_WikiForum
 extends WikiPlugin_WikiBlog

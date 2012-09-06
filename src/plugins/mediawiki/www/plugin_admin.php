@@ -26,7 +26,7 @@
  * Admin page for the plugin
  */
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 function logo_create($file_location, $project_mw_images_dir) {

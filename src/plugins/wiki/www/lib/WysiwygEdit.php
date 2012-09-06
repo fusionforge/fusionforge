@@ -21,7 +21,7 @@
  * @author Reini Urban
  */
 
-require_once("lib/InlineParser.php");
+require_once 'lib/InlineParser.php';
 
 class WysiwygEdit {
 
@@ -44,7 +44,7 @@ class WysiwygEdit {
      *  *text* => '<b>text<b>'
      */
     function ConvertBefore($text) {
-        require_once("lib/BlockParser.php");
+        require_once 'lib/BlockParser.php';
         $xml = TransformText($text, 2.0, $GLOBALS['request']->getArg('pagename'));
         return $xml->AsXML();
     }

@@ -25,7 +25,7 @@ $unit        = 'processor';
 $table       = 'frs_processor';
 $primary_key = 'processor_id';
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 include_once $gfwww.'admin/admin_table.php';
 
 ?>

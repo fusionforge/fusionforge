@@ -1,6 +1,6 @@
 <?php
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';

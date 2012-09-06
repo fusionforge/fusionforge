@@ -18,8 +18,8 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('Widget_Rss.class.php');
-require_once('common/widget/WidgetLayoutManager.class.php');
+require_once 'Widget_Rss.class.php';
+require_once 'common/widget/WidgetLayoutManager.class.php';
 
 /**
  * Widget_MyRss

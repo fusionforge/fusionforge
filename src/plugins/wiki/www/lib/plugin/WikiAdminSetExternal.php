@@ -25,8 +25,8 @@
  * Usage:   <<WikiAdminSetExternal s||=* >> or called via WikiAdminSelect
  * @author:  Marc-Etienne Vargenau, Alcatel-Lucent
  */
-require_once('lib/PageList.php');
-require_once('lib/plugin/WikiAdminSelect.php');
+require_once 'lib/PageList.php';
+require_once 'lib/plugin/WikiAdminSelect.php';
 
 class WikiPlugin_WikiAdminSetExternal
 extends WikiPlugin_WikiAdminSelect

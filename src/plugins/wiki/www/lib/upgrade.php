@@ -47,7 +47,7 @@
  *
  * @author: Reini Urban
  */
-require_once("lib/loadsave.php");
+require_once 'lib/loadsave.php';
 
 class Upgrade {
 

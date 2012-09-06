@@ -19,12 +19,12 @@
  */
 
 
-require_once('HudsonJobWidget.class.php');
-require_once('common/include/HTTPRequest.class.php');
-require_once('PluginHudsonJobDao.class.php');
-require_once('HudsonJob.class.php');
+require_once 'HudsonJobWidget.class.php';
+require_once 'common/include/HTTPRequest.class.php';
+require_once 'PluginHudsonJobDao.class.php';
+require_once 'HudsonJob.class.php';
 
-require_once('HudsonTestResult.class.php');
+require_once 'HudsonTestResult.class.php';
 
 class hudson_Widget_JobTestTrend extends HudsonJobWidget {
 

@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-include_once("lib/WikiPlugin.php");
+include_once 'lib/WikiPlugin.php';
 
 class _RecentChanges_Formatter
 {
@@ -417,7 +417,7 @@ extends _RecentChanges_Formatter
     }
 
     function format ($changes) {
-        include_once('lib/InlineParser.php');
+        include_once 'lib/InlineParser.php';
 
         $html = HTML(HTML::h2(false, $this->headline()));
         if (($desc = $this->description()))
@@ -539,7 +539,7 @@ extends _RecentChanges_HtmlFormatter
     }
 
     function format ($changes) {
-        include_once('lib/InlineParser.php');
+        include_once 'lib/InlineParser.php';
 
         $html = HTML(HTML::h2(false, $this->headline()));
         $lines = HTML::ol();
@@ -715,7 +715,7 @@ extends _RecentChanges_HtmlFormatter
     function description () {
     }
     function format ($changes) {
-        include_once('lib/InlineParser.php');
+        include_once 'lib/InlineParser.php';
         $last_date = '';
         $first = true;
         $html = HTML();
@@ -754,7 +754,7 @@ extends _RecentChanges_Formatter
 
     function format ($changes) {
 
-        include_once('lib/RssWriter.php');
+        include_once 'lib/RssWriter.php';
         $rss = new RssWriter;
         $rss->channel($this->channel_properties());
 
@@ -867,7 +867,7 @@ class _RecentChanges_Rss2Formatter
 extends _RecentChanges_RssFormatter {
 
     function format ($changes) {
-        include_once('lib/RssWriter2.php');
+        include_once 'lib/RssWriter2.php';
         $rss = new RssWriter2;
 
         $rss->channel($this->channel_properties());
@@ -932,7 +932,7 @@ extends _RecentChanges_RssFormatter {
 
     function format ($changes) {
         global $request;
-        include_once('lib/RssWriter.php');
+        include_once 'lib/RssWriter.php';
         $rss = new AtomFeed;
 
         // "channel" is called "feed" in atom
@@ -1263,11 +1263,11 @@ extends WikiPlugin
 
         // only pages (e.g. PageHistory of subpages)
         if (!empty($args['pagematch'])) {
-            require_once("lib/TextSearchQuery.php");
+            require_once 'lib/TextSearchQuery.php';
             $changes = new PageMatchRevisionIterator($changes, $args['pagematch']);
         }
         if (!empty($args['category'])) {
-            require_once("lib/TextSearchQuery.php");
+            require_once 'lib/TextSearchQuery.php';
             $changes = new LinkRevisionIterator($changes, $args['category']);
         }
         if (!empty($args['only_new']))
@@ -1295,7 +1295,7 @@ extends WikiPlugin
             elseif ($format == 'atom')
                 $fmt_class = '_RecentChanges_AtomFormatter';
             elseif ($format == 'rss091') {
-                include_once "lib/RSSWriter091.php";
+                include_once 'lib/RSSWriter091.php';
                 $fmt_class = '_RecentChanges_RssFormatter091';
             }
             elseif ($format == 'sidebar')

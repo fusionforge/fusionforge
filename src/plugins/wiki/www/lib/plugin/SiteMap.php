@@ -40,7 +40,7 @@
  * excludeunknown: If true (default) then exclude any mentioned pages
  * which don't exist yet.  Only applicable when direction = 'forward'.
  */
-require_once('lib/PageList.php');
+require_once 'lib/PageList.php';
 
 class WikiPlugin_SiteMap
 extends WikiPlugin
@@ -137,7 +137,7 @@ extends WikiPlugin
 
 
     function run($dbi, $argstr, &$request, $basepage) {
-        include_once('lib/BlockParser.php');
+        include_once 'lib/BlockParser.php';
 
         $args = $this->getArgs($argstr, $request, false);
         extract($args);

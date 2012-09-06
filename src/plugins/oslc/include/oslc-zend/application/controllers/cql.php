@@ -23,8 +23,8 @@
  *
  */
 
-include_once "lime-parse_engine.php";
-include_once "cql-lime_parser.inc.php";
+include_once 'lime-parse_engine.php';
+include_once 'cql-lime_parser.inc.php';
 
 // change to true to get debug
 $debug_founds=false;

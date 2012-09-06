@@ -22,7 +22,7 @@
 /**
  * @author: Arnaud Fontaine
  */
-include("lib/RssParser.php");
+include 'lib/RssParser.php';
 
 class WikiPlugin_RssFeed
 extends WikiPlugin

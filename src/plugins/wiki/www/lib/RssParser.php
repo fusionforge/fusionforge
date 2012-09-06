@@ -39,7 +39,7 @@
  *     http://ws.audioscrobbler.com/rdf/ for example
  */
 
-require_once('lib/XmlParser.php');
+require_once 'lib/XmlParser.php';
 
 class RSSParser
 extends XmlParser {

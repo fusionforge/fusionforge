@@ -26,7 +26,7 @@
  *
  * @author: Sébastien Le Callonnec
  */
-require_once('lib/XmlParser.php');
+require_once 'lib/XmlParser.php';
 
 class AtomParser
 extends XmlParser

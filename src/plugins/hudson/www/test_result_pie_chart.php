@@ -1,7 +1,7 @@
 <?php
-require_once('env.inc.php');
-require_once('pre.php');
-require_once('preplugins.php');
+require_once 'env.inc.php';
+require_once 'pre.php';
+require_once 'preplugins.php';
 
 require_once(forge_get_config('jpgraph_path').'/jpgraph.php');
 require_once(forge_get_config('jpgraph_path').'/jpgraph_pie.php');

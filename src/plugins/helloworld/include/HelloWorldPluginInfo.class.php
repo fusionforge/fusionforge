@@ -20,8 +20,8 @@
  * Copyright 2010 (c) Mélanie Le Bail
  * Copyright 2011 (c) France Telecom, Coclico project
  */
-require_once('common/plugin/PluginInfo.class.php');
-require_once('HelloWorldPluginDescriptor.class.php');
+require_once 'common/plugin/PluginInfo.class.php';
+require_once 'HelloWorldPluginDescriptor.class.php';
 
 class HelloWorldPluginInfo extends PluginInfo {
 

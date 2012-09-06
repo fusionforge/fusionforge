@@ -20,7 +20,7 @@
  * along with FusionForge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('Widget.class.php');
+require_once 'Widget.class.php';
 
 /**
  * Widget_ProjectLatestDocuments

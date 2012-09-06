@@ -50,7 +50,7 @@ if ($defect->project->id != $mantisbtConf['id_mantisbt']) {
 }
 
 if (!isset($errorPage)) {
-	include('jumpToIssue.php');
+	include 'jumpToIssue.php';
 	echo '<h2>'._('Ticket').' #'.$idBug.'</h2>';
 	echo	'<table>';
 	echo		'<tr style="background-color: gray;">';

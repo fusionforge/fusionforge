@@ -27,12 +27,12 @@
  */
 
 
-require_once('pre.php');
-require_once('www/admin/admin_utils.php');
-require_once('../include/utils.php');
+require_once 'pre.php';
+require_once 'www/admin/admin_utils.php';
+require_once '../include/utils.php';
 
-require_once('common/include/escapingUtils.php');
-require_once('common/trove/TroveCategory.class.php');
+require_once 'common/include/escapingUtils.php';
+require_once 'common/trove/TroveCategory.class.php';
 
 $categoryId = getIntFromGet('trove_cat_id');
 $category = new TroveCategory($categoryId);

@@ -36,8 +36,8 @@
  * 5. check external to_delete, to_add, to_merge
  * 6. store log (where, how?)
  */
-require_once("lib/loadsave.php");
-include_once("lib/plugin/WikiAdminUtils.php");
+require_once 'lib/loadsave.php';
+include_once 'lib/plugin/WikiAdminUtils.php';
 
 class WikiPlugin_SyncWiki
 extends WikiPlugin_WikiAdminUtils
@@ -87,7 +87,7 @@ extends WikiPlugin_WikiAdminUtils
         longer_timeout(240);
 
         if (!function_exists('wiki_xmlrpc_post')) {
-            include_once("lib/XmlRpcClient.php");
+            include_once 'lib/XmlRpcClient.php';
         }
         $userid = $request->_user->_userid;
         $dbh = $request->getDbh();

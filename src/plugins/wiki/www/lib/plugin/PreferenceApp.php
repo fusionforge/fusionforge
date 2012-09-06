@@ -38,13 +38,13 @@
  * <<PreferenceApp category="Soda" pageTextLabel="TotalSoda" roundCalc="true" >>
  */
 
-require_once('lib/PageList.php');
-require_once('lib/InlineParser.php');
+require_once 'lib/PageList.php';
+require_once 'lib/InlineParser.php';
 
-require_once('lib/wikilens/Utils.php');
-require_once('lib/WikiTheme.php');
-require_once('lib/wikilens/Buddy.php');
-require_once('lib/wikilens/RatingsDb.php');
+require_once 'lib/wikilens/Utils.php';
+require_once 'lib/WikiTheme.php';
+require_once 'lib/wikilens/Buddy.php';
+require_once 'lib/wikilens/RatingsDb.php';
 
 class WikiPlugin_PreferenceApp
 extends WikiPlugin

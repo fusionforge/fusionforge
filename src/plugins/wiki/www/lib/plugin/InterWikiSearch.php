@@ -22,7 +22,7 @@
 /**
  * @description
  */
-require_once('lib/PageType.php');
+require_once 'lib/PageType.php';
 
 class WikiPlugin_InterWikiSearch
 extends WikiPlugin

@@ -1,7 +1,7 @@
 <?php // -*-php-*-
 // $Id: ADODB_sqlite.php 7956 2011-03-03 17:08:31Z vargenau $
 
-require_once('lib/WikiDB/backend/ADODB.php');
+require_once 'lib/WikiDB/backend/ADODB.php';
 
 /**
  * WikiDB layer for ADODB-sqlite, called by lib/WikiDB/ADODB.php.

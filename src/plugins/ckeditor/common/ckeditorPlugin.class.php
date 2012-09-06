@@ -94,7 +94,7 @@ class ckeditorPlugin extends Plugin {
 	private function displayCKeditorArea(&$params) {
 		$name = isset($params['name'])? $params['name'] : 'body';
 		if (file_exists ("/usr/share/ckeditor/ckeditor.php")) {
-			require_once("/usr/share/ckeditor/ckeditor.php");
+			require_once '/usr/share/ckeditor/ckeditor.php';
 			$editor = new CKeditor($name) ;
 			$editor->basePath = util_make_uri('/ckeditor/');
 		} else {

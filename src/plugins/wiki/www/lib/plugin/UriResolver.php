@@ -27,7 +27,7 @@
  * Inverse to RdfWriter::makeURIfromXMLExportId()
  * Usage: internal
  */
-require_once('lib/SemanticWeb.php');
+require_once 'lib/SemanticWeb.php';
 
 class WikiPlugin_UriResolver
 extends WikiPlugin

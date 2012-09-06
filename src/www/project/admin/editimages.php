@@ -26,7 +26,7 @@
 // Quota in bytes
 $QUOTA = 1048576;
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 

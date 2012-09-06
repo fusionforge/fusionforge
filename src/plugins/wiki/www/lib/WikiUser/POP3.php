@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once("lib/WikiUser/IMAP.php");
+require_once 'lib/WikiUser/IMAP.php';
 
 class _POP3PassUser
 extends _IMAPPassUser {

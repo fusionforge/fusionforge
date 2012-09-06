@@ -35,7 +35,7 @@
  * @author:  Reini Urban
  */
 
-require_once("lib/plugin/_WikiTranslation.php");
+require_once 'lib/plugin/_WikiTranslation.php';
 
 class WikiPlugin_TranslateText
 extends WikiPlugin__WikiTranslation

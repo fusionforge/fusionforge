@@ -20,7 +20,7 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('include/DataAccess.class.php');
+require_once 'include/DataAccess.class.php';
 
 class CodendiDataAccess extends DataAccess {
 

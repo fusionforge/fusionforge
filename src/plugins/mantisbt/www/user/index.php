@@ -61,18 +61,18 @@ switch ($view) {
 	}
 	case "viewIssue": {
 		include ("mantisbt/view/$view.php");
-		include ("mantisbt/view/viewNote.php");
-		include ("mantisbt/view/viewAttachment.php");
+		include 'mantisbt/view/viewNote.php';
+		include 'mantisbt/view/viewAttachment.php';
 		break;
 	}
 	case "editNote":
 	case "addNote": {
-		include ("mantisbt/view/addOrEditNote.php");
+		include 'mantisbt/view/addOrEditNote.php';
 		break;
 	}
 	// default page is view All issues
 	default: {
-		include('mantisbt/view/viewIssues.php');
+		include 'mantisbt/view/viewIssues.php';
 	}
 }
 ?>

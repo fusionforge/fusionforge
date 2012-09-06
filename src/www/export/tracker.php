@@ -12,7 +12,7 @@
   * @author		Darrell Brogdon <dbrogdon@valinux.com>
   */
 
-require_once('../env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/Artifacts.class.php';

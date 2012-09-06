@@ -21,14 +21,14 @@
 
 // display.php: fetch page or get default content
 
-require_once('lib/Template.php');
+require_once 'lib/Template.php';
 
 /**
  * Extract keywords from Category* links on page.
  */
 function GleanKeywords ($page) {
     if (!defined('KEYWORDS')) return '';
-    require_once("lib/TextSearchQuery.php");
+    require_once 'lib/TextSearchQuery.php';
     $search = new TextSearchQuery(KEYWORDS, true);
     $KeywordLinkRegexp = $search->asRegexp();
     // iterate over the pagelinks (could be a large number) [15ms on PluginManager]
@@ -120,7 +120,7 @@ function actionPage(&$request, $action) {
         echo $html;
     } else {
         $pagelist = null;
-        require_once('lib/WikiPlugin.php');
+        require_once 'lib/WikiPlugin.php';
         // Then the multi-page formats
         // rss (if not already handled by RecentChanges)
         // Need the pagelist from the first plugin
@@ -140,7 +140,7 @@ function actionPage(&$request, $action) {
             trigger_error(sprintf("Format %s requires an actionpage returning a pagelist.",
                       $format)
                   ."\n".("Fall back to single page mode"), E_USER_WARNING);
-            require_once('lib/PageList.php');
+            require_once 'lib/PageList.php';
             $pagelist = new PageList();
             if ($format == 'pdf')
                 $pagelist->addPage($page);
@@ -152,12 +152,12 @@ function actionPage(&$request, $action) {
             }
         }
         if ($format == 'pdf') {
-            require_once("lib/pdf.php");
+            require_once 'lib/pdf.php';
             array_unshift($args['VALID_LINKS'], $pagename);
             ConvertAndDisplayPdfPageList($request, $pagelist, $args);
         }
         elseif ($format == 'ziphtml') { // need to fix links
-            require_once('lib/loadsave.php');
+            require_once 'lib/loadsave.php';
             array_unshift($args['VALID_LINKS'], $pagename);
             $request->setArg('zipname', FilenameForPage($pagename).".zip");
             $request->setArg('pages', $args['VALID_LINKS']);
@@ -170,7 +170,7 @@ function actionPage(&$request, $action) {
             if ($pagename == _("RecentChanges")) {
                 $template->printExpansion($args);
             } else {
-                require_once("lib/plugin/RecentChanges.php");
+                require_once 'lib/plugin/RecentChanges.php';
                 $plugin = new WikiPlugin_RecentChanges();
                 return $plugin->format($plugin->getChanges($request->_dbi, $args), $args);
             }
@@ -184,22 +184,22 @@ function actionPage(&$request, $action) {
             if (loadPhpExtension('json')) {
                 $json_enc = json_encode($json);
             } else {
-                require_once("lib/pear/JSON.php");
+                require_once 'lib/pear/JSON.php';
                 $j = new Services_JSON();
                 $json_enc = $j->encode($json);
             }
             header("Content-Type: application/json");
             die($json_enc);
         } elseif ($format == 'rdf') { // all semantic relations and attributes
-            require_once("lib/SemanticWeb.php");
+            require_once 'lib/SemanticWeb.php';
             $rdf = new RdfWriter($request, $pagelist);
             $rdf->format();
         } elseif ($format == 'rdfs') {
-            require_once("lib/SemanticWeb.php");
+            require_once 'lib/SemanticWeb.php';
             $rdf = new RdfsWriter($request, $pagelist);
             $rdf->format();
         } elseif ($format == 'owl') { // or daml?
-            require_once("lib/SemanticWeb.php");
+            require_once 'lib/SemanticWeb.php';
             $rdf = new OwlWriter($request, $pagelist);
             $rdf->format();
         } else {
@@ -397,11 +397,11 @@ function displayPage(&$request, $template=false) {
         $template->printExpansion($toks);
     } else {
         // No pagelist here. Single page version only
-        require_once("lib/PageList.php");
+        require_once 'lib/PageList.php';
         $pagelist = new PageList();
         $pagelist->addPage($page);
         if ($format == 'pdf') {
-            require_once("lib/pdf.php");
+            require_once 'lib/pdf.php';
             $request->setArg('format','');
             ConvertAndDisplayPdfPageList($request, $pagelist);
             // time-sorted rdf a la RecentChanges
@@ -410,17 +410,17 @@ function displayPage(&$request, $template=false) {
             if ($pagename == _("RecentChanges"))
                 $template->printExpansion($toks);
             else {
-                require_once("lib/plugin/RecentChanges.php");
+                require_once 'lib/plugin/RecentChanges.php';
             $plugin = new WikiPlugin_RecentChanges();
                 $args = $request->getArgs();
                 return $plugin->format($plugin->getChanges($request->_dbi, $args), $args);
             }
         } elseif ($format == 'rdf') { // all semantic relations and attributes
-            require_once("lib/SemanticWeb.php");
+            require_once 'lib/SemanticWeb.php';
             $rdf = new RdfWriter($request, $pagelist);
             $rdf->format();
         } elseif ($format == 'owl') { // or daml?
-            require_once("lib/SemanticWeb.php");
+            require_once 'lib/SemanticWeb.php';
             $rdf = new OwlWriter($request, $pagelist);
             $rdf->format();
         } elseif ($format == 'json') { // include page content asynchronously
@@ -438,7 +438,7 @@ function displayPage(&$request, $template=false) {
             if (loadPhpExtension('json')) {
                 $json_enc = json_encode($json);
             } else {
-                require_once("lib/pear/JSON.php");
+                require_once 'lib/pear/JSON.php';
                 $j = new Services_JSON();
                 $json_enc = $j->encode($json);
             }

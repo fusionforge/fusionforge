@@ -25,8 +25,8 @@ require_once $gfcommon.'include/pre.php';
 $err='';
 
 // Plugins subsystem
-require_once('common/include/Plugin.class.php') ;
-require_once('common/include/PluginManager.class.php') ;
+require_once 'common/include/Plugin.class.php';
+require_once 'common/include/PluginManager.class.php';
 
 setup_plugin_manager () ;
 session_set_admin () ;

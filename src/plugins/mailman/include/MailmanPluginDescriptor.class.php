@@ -20,7 +20,7 @@
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
-require_once('common/plugin/PluginDescriptor.class.php');
+require_once 'common/plugin/PluginDescriptor.class.php';
 
 
 class MailmanPluginDescriptor extends PluginDescriptor {
