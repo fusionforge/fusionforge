@@ -1,2 +1,1 @@
-deb-specific/create-mailing-lists.pl usr/share/@OLDPACKAGE@/bin/
-deb-specific/fix-mailing-lists.pl    usr/share/@OLDPACKAGE@/bin/
+cronjobs/mail          usr/share/@OLDPACKAGE@/cronjobs/
