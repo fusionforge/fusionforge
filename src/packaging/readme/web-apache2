@@ -1,15 +1,24 @@
 This file documents the Apache 2 Web server configuration for
-@PACKAGE@ in Debian.
+@FORGENAME@ in Debian.
 
 See /usr/share/doc/@OLDPACKAGE@-common/README.Debian(.gz) for more
-generic documentation about @PACKAGE@ packaging in Debian.
+generic documentation about @FORGENAME@ packaging in Debian.
 
 See
 http://lists.fusionforge.org/pipermail/fusionforge-general/2010-June/001074.html
 which gives some hints on the design principle behind the Web server
 configuration files adopted for this packaging.
 
- -- Olivier Berger <obergix@debian.org>, Mon, 21 Nov 2011 16:58:44 +0100
+TODO: document how to host all subdomains on the same system domain
+name, for project pages (virtual hosting), mailing lists, etc. (see #568513,
+...)
+
+Note that the DocumentRoot changed from /usr/share/gforge/www in
+@FORGENAME@ 5.0.x to /usr/share/gforge/src/www in @FORGENAME@ 5.1+
+(TODO: explain the rationale). You may need to adjust some settings in
+case of local customizations.
+
+ -- Olivier Berger <obergix@debian.org>, Thu, 16 Aug 2012 14:11:20 +0200
 
 # Local Variables:
 # mode: readme-debian

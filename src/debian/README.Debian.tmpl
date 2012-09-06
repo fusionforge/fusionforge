@@ -1,5 +1,5 @@
 @FORGENAME@ for Debian
-=================
+======================
 
 @FORGENAME@ is packaged for Debian, and was formerly packaged under
 the 'gforge' source package name. Even though a transition is in
@@ -10,13 +10,13 @@ filenames to still be named in relation to 'gforge'.
 
 Status
 ------
-Want to know what the status of this package is?  Read
+Want to know what the status of this package is? Read
 /usr/share/doc/@PACKAGE@/TODO.Debian or (even better)
-<https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Roadmap>.  If you miss a
-feature, or find a bug, or want to help, don't hesitate to contact me
-(Roland Mas <lolando@debian.org>) .  Plenty of features are missing,
-I'm working on some, but if you don't tell me which ones you miss the
-most I might process them in the wrong order for you.
+<https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Roadmap>.
+If you miss a feature, or find a bug, or want to help, don't hesitate
+to contact me (Roland Mas <lolando@debian.org>) .  Plenty of features
+are missing, I'm working on some, but if you don't tell me which ones
+you miss the most I might process them in the wrong order for you.
 
   Please read the bug reports on the Debian bug-tracking system (at
 <URL:http://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=@PACKAGE@>)
@@ -82,6 +82,9 @@ configuration phase, and get your own custom certificate.
   Do *not* delete the /etc/@PACKAGE@/*.template files.  They are
 needed.  Do not alter them either unless you *know* what you're doing.
 
+  See /usr/share/doc/@PACKAGE@-web-apache2/README.Debian(.gz) for
+more details about the Apache webserver configuration options for
+FusionForge.
 
 Custom local configuration
 --------------------------
@@ -100,13 +103,13 @@ appropriate steps in the database server too.
 Instead of changing the contents of the existing file, you may wish to
 add only your custom local settings which differ from the packaged
 defaults in a dedicated overriding file, for example in the provided
-/etc/fusionforge/config.ini.d/zzzz-local.ini. This will make it
+/etc/@PACKAGE@/config.ini.d/zzzz-local.ini.  This will make it
 easier to track local customizations.
 
 
 Adminning notes
 ---------------
-  Once @FORGENAME@ is setup, it pretty much runs by itself.  There
+  Once @FORGENAME@ is set up, it pretty much runs by itself.  There
 should be relatively few things to do for the administrator.  The
 following are random notes trying to document them.
 
@@ -154,7 +157,7 @@ errors of mine.  In particular, thanks to all who submitted patches.
 adapted and fixed all the scripts related to SCM, DNS, SSH accounts,
 and probably more.
 
- -- Roland Mas <lolando@debian.org>, Thu Jul 24 21:33:33 2003
+ -- Olivier Berger <obergix@debian.org>, Thu, 16 Aug 2012 12:55:46 +0200
 
 # Local Variables:
 # mode: text
