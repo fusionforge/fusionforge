@@ -84,4 +84,3 @@ if (!$dg->setParentDocGroupId($dm->getTrashID()))
 
 $return_msg = sprintf(_('Documents folder %s moved to trash successfully.'),$dg->getName());
 session_redirect($redirecturl.'&dirid='.$currentParent.'&feedback='.urlencode($return_msg));
-?>

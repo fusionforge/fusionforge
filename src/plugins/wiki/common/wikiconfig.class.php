@@ -95,4 +95,3 @@ class WikiConfig extends Error {
         return true;
     }
 }
-?>

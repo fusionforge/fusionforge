@@ -238,5 +238,4 @@ extends WikiDB_backend_ADODB
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
-?>
+// End:

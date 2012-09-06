@@ -134,5 +134,3 @@ $list = new MailmanList($group_id,$list_id);
 } else {
 	header('Location: '.get_server_url());
 }
-
-?>

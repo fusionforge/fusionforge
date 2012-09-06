@@ -700,5 +700,3 @@ function documentDelete($session_ser,$group_id,$doc_id) {
 		return true;
 	}
 }
-
-?>

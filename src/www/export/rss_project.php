@@ -117,4 +117,4 @@ if ($project->usesDocman() && forge_get_config('use_docman')) {
 
 <a href="javascript:history.go(-1)">[<?php echo _('Go back') ?>]</a>
 <br />
-<?php $HTML->footer(array()); ?>
+<?php $HTML->footer(array());

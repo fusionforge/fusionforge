@@ -436,5 +436,3 @@ function trove_del_cat_id($node) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

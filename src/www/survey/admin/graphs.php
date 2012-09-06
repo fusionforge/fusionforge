@@ -126,4 +126,3 @@ function ShowHBar(&$legend, &$value) {
 
     $graph->Stroke();
 }
-?>

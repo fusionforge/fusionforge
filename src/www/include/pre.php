@@ -21,5 +21,3 @@
  */
 
 require_once $gfcommon.'include/pre-compat.php';
-
-?>

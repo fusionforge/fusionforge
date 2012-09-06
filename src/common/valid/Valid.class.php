@@ -225,5 +225,3 @@ class Valid {
         return true;
     }
 }
-
-?>

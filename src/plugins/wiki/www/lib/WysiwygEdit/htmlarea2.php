@@ -51,4 +51,3 @@ if (win_ie_ver >= 5.5) {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

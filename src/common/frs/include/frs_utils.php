@@ -284,5 +284,3 @@ function frs_filterfiles($in) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

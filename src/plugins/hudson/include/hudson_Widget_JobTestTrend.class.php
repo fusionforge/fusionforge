@@ -106,5 +106,3 @@ class hudson_Widget_JobTestTrend extends HudsonJobWidget {
         return $html;
     }
 }
-
-?>

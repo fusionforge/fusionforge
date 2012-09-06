@@ -71,5 +71,3 @@ class RssSearchRenderer extends SearchRenderer {
 	}
 
 }
-
-?>

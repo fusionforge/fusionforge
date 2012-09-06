@@ -86,4 +86,3 @@ $WikiTheme = new WikiTheme_Crao('Crao');
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

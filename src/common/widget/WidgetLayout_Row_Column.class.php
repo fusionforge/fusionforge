@@ -45,4 +45,3 @@ class WidgetLayout_Row_Column {
         return 'widgetlayout_col_'. $this->id;
     }
 }
-?>

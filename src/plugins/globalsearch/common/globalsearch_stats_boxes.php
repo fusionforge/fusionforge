@@ -108,5 +108,3 @@ function stats_get_total_projects_assoc_sites() {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

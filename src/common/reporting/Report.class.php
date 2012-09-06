@@ -147,5 +147,3 @@ function getEndDate() {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

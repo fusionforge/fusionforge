@@ -462,5 +462,3 @@ class Theme extends Layout {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

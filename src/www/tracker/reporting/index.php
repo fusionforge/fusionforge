@@ -140,4 +140,4 @@ $h->header(array('title' => _('Tracker Activity Reporting')));
 }
 ?>
 </p>
-<?php $h->footer(array()); ?>
+<?php $h->footer(array());

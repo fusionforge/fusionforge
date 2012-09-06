@@ -76,4 +76,3 @@ if ($details) {
 $filearray["body"] = $d->getFileData();
 echo json_encode($filearray);
 exit;
-?>

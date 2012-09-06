@@ -123,4 +123,3 @@ function artifact_submission_form($ath, $group) {
 	</table></form>
 <?php
 }
-?>

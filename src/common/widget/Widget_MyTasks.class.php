@@ -148,4 +148,3 @@ class Widget_MyTasks extends Widget {
         return _("List the tasks assigned to you.");
     }
 }
-?>

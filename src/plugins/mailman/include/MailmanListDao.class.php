@@ -160,4 +160,3 @@ class MailmanListDao extends DataAccessObject {
 
 	}
 }
-?>

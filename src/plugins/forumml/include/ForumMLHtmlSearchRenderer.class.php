@@ -119,5 +119,3 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
                 return new ForumML_MessageDao(CodendiDataAccess::instance());
         }
 }
-
-?>

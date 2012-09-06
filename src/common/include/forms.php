@@ -104,5 +104,3 @@ function form_release_key($key) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

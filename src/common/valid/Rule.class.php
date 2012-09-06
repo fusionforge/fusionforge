@@ -378,5 +378,3 @@ extends Rule {
         return $ok;
     }
 }
-
-?>

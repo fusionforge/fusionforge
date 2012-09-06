@@ -27,4 +27,3 @@ class ADORecordset_informix extends ADORecordset_informix72 {
 		$this->ADORecordset_informix72($id,$mode);
 	}
 }
-?>

@@ -42,5 +42,3 @@ $group_subsection_names = getSubSectionNames();
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -179,4 +179,3 @@ if (!isset($errorPage)) {
 		echo '<p class="warning">'._('No versions to display').'</p>';
 	}
 }
-?>

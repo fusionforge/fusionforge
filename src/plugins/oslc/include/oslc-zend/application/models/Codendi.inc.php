@@ -141,5 +141,3 @@ class ChangeRequestsCodendiDb extends ChangeRequests {
         return $return;
     }
 }
-
-?>

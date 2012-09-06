@@ -52,5 +52,3 @@ if (strlen($payload)) {
 }
 
 session_redirect('/account/');
-
-?>

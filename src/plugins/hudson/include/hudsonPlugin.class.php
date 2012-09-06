@@ -289,5 +289,3 @@ class hudsonPlugin extends Plugin {
 	}
 
 }
-
-?>

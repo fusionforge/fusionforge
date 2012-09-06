@@ -16,4 +16,3 @@ if ($group_id) {
 } else {
 	session_redirect('/');
 }
-?>

@@ -1568,4 +1568,3 @@ class WikiDB_backend_ADODB_search extends WikiDB_backend_search_sql
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

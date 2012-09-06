@@ -131,5 +131,3 @@ ORDER BY group_name ASC',
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

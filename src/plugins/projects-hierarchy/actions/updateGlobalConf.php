@@ -36,4 +36,3 @@ if (!$projectsHierarchy->updateGlobalConf($confArr)) {
 
 $feedback = _('Projects Hierarchy global configuration successfully updated.');
 session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=globaladmin&feedback='.urlencode($feedback));
-?>

@@ -258,4 +258,3 @@ class AtomFeed extends RssWriter {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

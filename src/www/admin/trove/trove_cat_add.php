@@ -126,5 +126,3 @@ if ($parent_trove_cat_id != -1) {
 <?php
 
 site_admin_footer(array());
-
-?>

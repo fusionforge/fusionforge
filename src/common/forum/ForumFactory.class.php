@@ -229,5 +229,3 @@ ORDER BY group_forum_id',
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

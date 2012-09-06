@@ -77,5 +77,3 @@ class Validator {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

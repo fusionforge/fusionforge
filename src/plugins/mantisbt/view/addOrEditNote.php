@@ -70,4 +70,3 @@ if (!isset($errorPage)){
 	echo 			'</form>';
 	echo 		'</div>';
 }
-?>

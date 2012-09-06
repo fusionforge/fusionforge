@@ -259,4 +259,3 @@ class ADORecordSet_fbsql extends ADORecordSet{
 
 } //class
 } // defined
-?>

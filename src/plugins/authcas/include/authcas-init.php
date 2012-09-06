@@ -30,5 +30,3 @@ register_plugin ($AuthCASPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

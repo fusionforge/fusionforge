@@ -593,6 +593,3 @@ case $result["REQUEST"] == "CreateProject": {
 }
 
 printrcomplete();
-
-
-?>

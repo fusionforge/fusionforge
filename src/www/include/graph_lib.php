@@ -677,5 +677,3 @@ $graph->showDebug();
 $graph->ShowGraph();
 
 */
-
-?>

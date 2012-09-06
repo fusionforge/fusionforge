@@ -2274,4 +2274,3 @@ function _sql_debuglog_shutdown_function() {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

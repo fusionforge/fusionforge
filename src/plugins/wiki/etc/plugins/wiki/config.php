@@ -14,5 +14,3 @@ $wiki_use_a_master_wiki = 'help';
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

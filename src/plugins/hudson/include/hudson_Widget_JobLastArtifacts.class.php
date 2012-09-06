@@ -109,5 +109,3 @@ class hudson_Widget_JobLastArtifacts extends HudsonJobWidget {
         return $html;
     }
 }
-
-?>

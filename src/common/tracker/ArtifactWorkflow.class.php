@@ -331,5 +331,3 @@ function workflow_add_new_role ($role_id, $group) {
 	}
 	return true;
 }
-
-?>

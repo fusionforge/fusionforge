@@ -147,5 +147,3 @@ AND snippet_package_version_id=$2',
 	exit_not_logged_in();
 
 }
-
-?>

@@ -74,5 +74,3 @@ if (session_loggedin()) {
 } else {
 	exit_not_logged_in();
 }
-
-?>

@@ -138,5 +138,3 @@ class hudson extends Controler {
         }
     }
 }
-
-?>

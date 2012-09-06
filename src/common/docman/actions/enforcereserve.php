@@ -46,4 +46,3 @@ foreach ($arr_fileid as $fileid) {
 }
 $return_msg .= _('reservation enforced successfully.');
 session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
-?>

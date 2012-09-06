@@ -528,5 +528,3 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 	}
 	echo 	'</div>';
 }
-
-?>

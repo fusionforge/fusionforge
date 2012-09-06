@@ -473,5 +473,3 @@ GROUP BY rate_field',
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

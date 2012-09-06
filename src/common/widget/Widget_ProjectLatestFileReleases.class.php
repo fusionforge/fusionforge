@@ -172,5 +172,3 @@ class Widget_ProjectLatestFileReleases extends Widget {
 		return _(' List the most recent packages available for download along with their revision. <br />A Release Notes icon allows you to see the latest changes and developers comments associated with this revision.<br />Then comes the monitor icon, selecting this icon will cause this package to be monitored for you.<br />Anytime the project development team posts a new release, you will be automatically notified via e-mail. All monitored File Releases are listed in your Personal Page and can be canceled from this page or from the main page of the file release system.');
 	}
 }
-
-?>

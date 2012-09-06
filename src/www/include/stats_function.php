@@ -183,5 +183,3 @@ function stats_browser_stats() {
 		ShowResultSet($result,'Page Views By Platform/Browser Version');
 	}
 }
-
-?>

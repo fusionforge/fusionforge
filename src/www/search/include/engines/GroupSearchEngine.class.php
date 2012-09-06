@@ -47,5 +47,3 @@ class GroupSearchEngine extends GFSearchEngine {
 		return $renderer;
 	}
 }
-
-?>

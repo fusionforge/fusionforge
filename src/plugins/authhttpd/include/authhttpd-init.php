@@ -30,5 +30,3 @@ register_plugin ($AuthHTTPDPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

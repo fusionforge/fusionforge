@@ -43,5 +43,3 @@ class NewsGroupSearchEngine extends GroupSearchEngine {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

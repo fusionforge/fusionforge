@@ -217,4 +217,3 @@ if ($dgf->getNested() == NULL) {
 }
 
 echo '</div>';
-?>

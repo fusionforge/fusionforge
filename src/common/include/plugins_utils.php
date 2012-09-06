@@ -57,4 +57,3 @@ function getImage($img) {
 function get_server_url() {
 		return util_make_url('');
 }
-?>

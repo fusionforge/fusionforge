@@ -41,4 +41,3 @@ if (isset ($sys_noforcetype) && $sys_noforcetype) {
 } else {
 	session_redirect('/projects/'. group_getunixname($group_id) .'/');
 }
-?>

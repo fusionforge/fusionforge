@@ -211,5 +211,3 @@ class ArtifactBoxOptions extends Error {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

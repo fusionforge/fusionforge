@@ -47,5 +47,3 @@ echo "SUCCESS";
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

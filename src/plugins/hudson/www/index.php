@@ -32,5 +32,3 @@ if ($p && $plugin_manager->isPluginAvailable($p)) {
 } else {
 	session_redirect(get_server_url());
 }
-
-?>

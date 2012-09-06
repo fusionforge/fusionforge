@@ -70,6 +70,4 @@ class ADODB_BASE_RS implements IteratorAggregate {
     function getIterator() {
         return new ADODB_Iterator($this);
     }
-} 
-
-?>
+}

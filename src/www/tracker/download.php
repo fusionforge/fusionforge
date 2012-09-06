@@ -65,5 +65,3 @@ if (!$ah || !is_object($ah)) {
 		readfile_chunked($afh->getFile());
 	}
 }
-
-?>

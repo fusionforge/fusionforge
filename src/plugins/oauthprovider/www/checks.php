@@ -204,5 +204,3 @@ function oauthprovider_CheckForgeAdminExit() {
 	oauthprovider_Admin_Header();
 	
 }
-
-?>

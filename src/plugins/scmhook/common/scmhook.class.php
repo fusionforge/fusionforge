@@ -75,4 +75,3 @@ class scmhook {
 		return _('Feature not implemented.');
 	}
 }
-?>

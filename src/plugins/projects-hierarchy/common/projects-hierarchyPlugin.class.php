@@ -817,5 +817,3 @@ class projects_hierarchyPlugin extends Plugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

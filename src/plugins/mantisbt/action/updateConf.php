@@ -38,4 +38,3 @@ if (!$mantisbt->updateConf($group_id, $confArr))
 
 $feedback = _('MantisBT configuration successfully updated.');
 session_redirect('/plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
-?>

@@ -51,5 +51,3 @@ $hook_params['group_id'] = $group_id;
 plugin_hook("scm_page", $hook_params);
 
 scm_footer();
-
-?>

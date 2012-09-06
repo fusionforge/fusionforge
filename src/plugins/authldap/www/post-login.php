@@ -126,5 +126,3 @@ $HTML->footer(array());
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -87,5 +87,3 @@ echo '<input type="file" name="uploaded_filekey" size="30" />';
 
 <?php
 site_user_footer(array());
-
-?>

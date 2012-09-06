@@ -339,5 +339,3 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

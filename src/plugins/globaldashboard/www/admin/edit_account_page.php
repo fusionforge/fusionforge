@@ -232,4 +232,3 @@ function editRemoteAccount($account_id) {
 	</p>';
 	
 }
-?>

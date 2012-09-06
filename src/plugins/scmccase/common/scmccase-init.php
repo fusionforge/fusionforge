@@ -32,5 +32,3 @@ register_plugin ($CCasePluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

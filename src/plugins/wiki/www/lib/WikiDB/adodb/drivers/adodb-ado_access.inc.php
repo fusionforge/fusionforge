@@ -43,4 +43,3 @@ class  ADORecordSet_ado_access extends ADORecordSet_ado {
 		return $this->ADORecordSet_ado($id,$mode);
 	}
 }
-?>

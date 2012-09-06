@@ -752,4 +752,3 @@ class WikiDB_backend_file_iter extends WikiDB_backend_iterator
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

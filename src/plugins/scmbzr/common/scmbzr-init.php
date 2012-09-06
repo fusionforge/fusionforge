@@ -31,5 +31,3 @@ register_plugin ($BzrPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

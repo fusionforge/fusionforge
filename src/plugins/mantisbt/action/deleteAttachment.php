@@ -42,4 +42,3 @@ if ($idAttachment) {
 }
 $warning_msg = _('Missing Attachment ID to delete.');
 session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&warning_msg='.urlencode($warning_msg));
-?>

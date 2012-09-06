@@ -26,5 +26,3 @@ class ForumMLGroupSearchEngine extends GroupSearchEngine {
 		return false;
 	}
 }
-
-?>

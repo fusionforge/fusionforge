@@ -116,4 +116,3 @@ if (isset ($group_id)) {
 	exit_no_group();
 
 }
-?>

@@ -181,5 +181,3 @@ setup_rbac_strings () ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

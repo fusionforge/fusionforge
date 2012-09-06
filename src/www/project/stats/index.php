@@ -105,5 +105,3 @@ project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_i
 <?php
 
 site_project_footer( array() );
-
-?>

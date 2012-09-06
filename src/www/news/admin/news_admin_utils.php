@@ -142,5 +142,3 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -984,4 +984,3 @@ class XmlRpcServer extends xmlrpc_server
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

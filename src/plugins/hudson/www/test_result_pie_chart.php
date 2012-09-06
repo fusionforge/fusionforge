@@ -50,5 +50,3 @@ $graph->Add($pp);
 
 // display graph
 $graph->Stroke();
-
-?>

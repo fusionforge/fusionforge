@@ -77,4 +77,3 @@ switch (AUTH_TYPE) {
 		break;
 }
 */
-?>

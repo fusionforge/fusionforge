@@ -113,5 +113,3 @@ class extsubproj_Widget_SubProjects extends Widget {
 		return $html;
 	}
 }
-
-?>

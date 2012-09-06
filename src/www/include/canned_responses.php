@@ -49,5 +49,3 @@ function get_canned_responses()
 	}
 	return html_build_select_box($canned_response_res, 'response_id');
 }
-
-?>

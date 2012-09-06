@@ -184,5 +184,3 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -64,5 +64,3 @@ function mail_footer($params) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

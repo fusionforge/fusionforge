@@ -84,4 +84,3 @@ extends WikiPlugin_SiteMap
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

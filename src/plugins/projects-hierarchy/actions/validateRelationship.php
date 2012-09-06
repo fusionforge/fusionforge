@@ -33,4 +33,3 @@ if ($projectsHierarchy->validateRelationship($id, $validation_id, $relation, $st
 	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Task done.'));
 
 $projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Failed to do task.'));
-?>

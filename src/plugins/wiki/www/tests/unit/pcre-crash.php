@@ -41,5 +41,3 @@ $subj = str_repeat("123456789 ", 200);
 preg_match($pat, $subj, $m);
 //preg_match($block_re, $subj, $m);
 echo "ok\n";
-
-?>

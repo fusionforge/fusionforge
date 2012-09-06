@@ -100,4 +100,3 @@ if (forge_get_config('require_unique_email')) {
 
 <?php
 $HTML->footer(array());
-?>

@@ -97,5 +97,3 @@ $graph->xaxis->SetTickLabels($report->getDates());
 
 // Display the graph
 $graph->Stroke();
-
-?>

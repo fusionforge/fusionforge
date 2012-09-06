@@ -149,4 +149,3 @@ class RelatedChangesRevisionIterator extends WikiDB_PageRevisionIterator
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

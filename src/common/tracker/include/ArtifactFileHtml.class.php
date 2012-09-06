@@ -38,5 +38,3 @@ class ArtifactFileHtml extends ArtifactFile {
 	}
 
 }
-
-?>

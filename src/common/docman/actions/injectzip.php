@@ -54,4 +54,3 @@ if ($doc_group)
 	$return_url .= '&dirir='.$doc_group;
 
 session_redirect($return_url);
-?>

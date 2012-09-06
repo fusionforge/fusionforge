@@ -232,5 +232,3 @@ site_admin_footer(array());
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -31,5 +31,3 @@ extends Rule {
         return (preg_match('/^([a-z][0-9]+)$/', $val) === 1);
     }
 }
-
-?>

@@ -92,4 +92,3 @@ if ($idAttachment) {
 } else {
 	exit_missing_param($_SERVER['HTTP_REFERER'], array(_('No idAttachment')), 'mantisbt');
 }
-?>

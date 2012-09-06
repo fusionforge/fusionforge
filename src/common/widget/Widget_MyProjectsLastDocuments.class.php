@@ -141,5 +141,3 @@ class Widget_MyProjectsLastDocuments extends Widget {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

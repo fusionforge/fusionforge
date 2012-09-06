@@ -332,4 +332,4 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 		<td colspan="4" style="border-top:thick solid #808080" align="center">&nbsp;</td>
 	</tr>
 </table>
-<?php project_admin_footer(array()); ?>
+<?php project_admin_footer(array());

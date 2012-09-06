@@ -1865,5 +1865,3 @@ function sortArtifactList (&$list, $criterion='name', $order='ASC') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

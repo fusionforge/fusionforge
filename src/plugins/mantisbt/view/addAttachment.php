@@ -33,5 +33,3 @@ echo		_('File')._(': ').'<input type="file" name="attachment" />';
 echo	'</td></tr></table>';
 echo	'<br/><input type="button" onclick="this.form.submit();this.disabled=true;" value="'._('Upload File').'" name="send">';
 echo '</form>';
-
-?>

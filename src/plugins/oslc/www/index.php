@@ -26,5 +26,3 @@ $application->bootstrap()->run();
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

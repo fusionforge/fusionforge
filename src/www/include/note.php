@@ -68,5 +68,3 @@ function notepad_func() {
 "\n/* ]]> */</script>\n";
       return $js;
 }
-
-?>

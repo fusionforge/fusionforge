@@ -733,5 +733,3 @@ function DarcsPluginEndElement ($parser, $name) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

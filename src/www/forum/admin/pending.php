@@ -62,4 +62,3 @@ if (!$forum_id) {
 	}
 	forum_footer(array());
 }
-?>

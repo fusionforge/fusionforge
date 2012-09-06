@@ -807,4 +807,3 @@ class Cached_PluginInvocation extends Cached_DynamicContent {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

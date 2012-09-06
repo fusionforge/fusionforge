@@ -163,5 +163,3 @@ function getAllFromProjectTask($project_task_id) {
 
 	return $arrResult;
 }
-
-?>

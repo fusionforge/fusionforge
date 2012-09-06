@@ -40,6 +40,3 @@ class CodendiDataAccess extends DataAccess {
 
 
 }
-
-
-?>

@@ -87,5 +87,3 @@ function print_debug ($text) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

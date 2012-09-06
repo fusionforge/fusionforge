@@ -72,5 +72,3 @@ class scmgit_Widget_MyRepositories extends Widget {
 		return $returnedArray;
 	}
 }
-
-?>

@@ -179,5 +179,3 @@ function filechecks_getfiletype($filename) {
 	}
 	return $filetype;
 }
-
-?>

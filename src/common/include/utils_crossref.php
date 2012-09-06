@@ -108,4 +108,3 @@ function _forumid2url ($id) {
 	}
 	return $text;
 }
-?>

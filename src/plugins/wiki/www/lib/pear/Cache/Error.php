@@ -48,4 +48,3 @@ class Cache_Error extends PEAR_Error {
   } // end func Cache_Error
   
 } // end class Cache_Error
-?>

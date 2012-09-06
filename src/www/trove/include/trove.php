@@ -357,5 +357,3 @@ function trove_getfullpath($node) {
 	}
 	return $return;
 }
-
-?>

@@ -175,5 +175,3 @@ if (viewcvs_is_html()) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

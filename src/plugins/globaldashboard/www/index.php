@@ -47,5 +47,3 @@ site_project_footer(array());
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

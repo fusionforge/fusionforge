@@ -86,4 +86,4 @@ printf(_('You are about to permanently delete role %s'), $role->getName()); ?>
 </p>
 </form>
 
-<?php project_admin_footer(array()) ?>
+<?php project_admin_footer(array());

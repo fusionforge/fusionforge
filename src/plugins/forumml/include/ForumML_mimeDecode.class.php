@@ -102,5 +102,3 @@ class ForumML_mimeDecode extends Mail_mimeDecode {
         return $input;
     }
 }
-
-?>

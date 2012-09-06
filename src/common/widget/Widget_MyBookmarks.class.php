@@ -64,4 +64,3 @@ class Widget_MyBookmarks extends Widget {
 		return sprintf(_('List your favorite bookmarks (your favorite pages in %1$s or external).<br />Note that in many cases %1$s uses URL with enough embedded information to bookmark sophisticated items like Software Map browsing, typical search in your project Bug or Task database, etc. <br />Bookmarked items can be edited which means that both the title of the bookmark and its destination URL can be modified.'), forge_get_config('forge_name'));
 	}
 }
-?>

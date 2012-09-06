@@ -91,4 +91,3 @@ $format .= " using '$sep' as separator.";
 <p />
 <?php
 $ath->footer(array());
-?>

@@ -229,5 +229,3 @@ if (!$pending) { //we don't care for the pending attach counter, it's just for a
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

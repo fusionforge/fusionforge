@@ -51,5 +51,3 @@ class SetupWiki extends phpwiki_TestCase {
         $this->assertTrue($dbi->isWikiPage('HomePage'));
     }
 }
-
-?>

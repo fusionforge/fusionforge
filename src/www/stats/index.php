@@ -65,4 +65,3 @@ echo '<ul><li><a href="i18n.php">'.("I18n Statistics").'</a></li></ul>';
 //
 
 $HTML->footer( array() );
-?>

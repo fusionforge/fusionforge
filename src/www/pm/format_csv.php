@@ -98,4 +98,3 @@ $sep = getStringFromRequest('sep', ',');
 </div>
 <?php
 pm_footer(array());
-?>

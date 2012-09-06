@@ -75,4 +75,3 @@ if($result) {
 } else {
 	session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard&error_msg='. urlencode(printf('Unable to create remote account: '.db_error())));
 }
-?>

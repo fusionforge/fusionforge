@@ -138,5 +138,3 @@ if (count($data) == 0) {
 }
 
 frs_footer();
-
-?>

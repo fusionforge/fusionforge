@@ -63,4 +63,3 @@ if (!$g || !is_object($g)) {
 		$ath->footer(array());
 	}
 }
-?>

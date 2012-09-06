@@ -56,4 +56,3 @@ $Compact->appendChild($smallPreview);
 
 $root->appendChild($Compact);
 echo $doc->saveXML();
-?>

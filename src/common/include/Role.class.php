@@ -369,5 +369,3 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

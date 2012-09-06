@@ -32,5 +32,3 @@ register_plugin($MantisBTPluginObject);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

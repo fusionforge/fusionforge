@@ -634,5 +634,3 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

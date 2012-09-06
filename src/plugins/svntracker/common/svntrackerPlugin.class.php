@@ -283,5 +283,3 @@ plugin_svntracker_data_artifact WHERE plugin_svntracker_data_artifact.project_ta
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

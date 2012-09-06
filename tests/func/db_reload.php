@@ -125,5 +125,3 @@ if (!$user_id) {
 	$res = db_query_params ('INSERT INTO pfo_user_role VALUES ($1, 3)',
 				array ($user_id)) ;
 }
-
-?>

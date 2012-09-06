@@ -247,5 +247,3 @@ function report_package_box($group_id, $name='dev_id', $selected='') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

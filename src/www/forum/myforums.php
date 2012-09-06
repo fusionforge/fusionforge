@@ -165,4 +165,3 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 
 echo $HTML->listTableBottom();
 forum_footer(array());
-?>

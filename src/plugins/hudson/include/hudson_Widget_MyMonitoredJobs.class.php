@@ -219,5 +219,3 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
         return $monitored_jobs;
     }
 }
-
-?>

@@ -583,5 +583,3 @@ switch (getStringFromRequest('func')) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

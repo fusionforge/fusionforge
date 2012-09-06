@@ -31,5 +31,3 @@ register_plugin ($HgPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

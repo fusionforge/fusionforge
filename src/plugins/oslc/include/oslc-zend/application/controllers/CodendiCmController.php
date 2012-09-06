@@ -526,5 +526,3 @@ class CodendiCmController extends CmController {
         return $return;
     }
 }
-
-?>

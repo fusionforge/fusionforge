@@ -76,4 +76,3 @@ class RSS {
         echo '</rss>';
     }
 }
-?>

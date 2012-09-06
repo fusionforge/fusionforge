@@ -186,4 +186,3 @@ if (!session_loggedin()) {
 	</table>';
 	echo site_user_footer(array());
 }
-?>

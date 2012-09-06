@@ -194,5 +194,3 @@ function handle_multi_edit($skill_ids = array()) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

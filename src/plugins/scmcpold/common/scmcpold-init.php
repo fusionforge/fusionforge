@@ -31,5 +31,3 @@ register_plugin ($CpoldPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

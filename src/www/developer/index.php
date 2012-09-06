@@ -50,5 +50,3 @@ if (isset ($sys_noforcetype) && $sys_noforcetype) {
 } else {
 	session_redirect('/users/'.user_getname($user_id).'/');
 }
-
-?>

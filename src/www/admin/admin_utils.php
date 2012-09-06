@@ -68,5 +68,3 @@ function site_admin_footer($params) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

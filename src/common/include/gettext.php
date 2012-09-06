@@ -230,5 +230,3 @@ function setup_gettext_from_locale ($locale) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

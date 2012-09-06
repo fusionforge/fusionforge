@@ -32,5 +32,3 @@ register_plugin($SVNPluginObject);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

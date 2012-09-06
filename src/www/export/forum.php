@@ -73,4 +73,3 @@ while ($row_forum = db_fetch_array($res_forum)) {
 }
 
 print " </group>\n";
-?>

@@ -29,4 +29,3 @@ class MailmanPluginDescriptor extends PluginDescriptor {
         $this->PluginDescriptor(_('Mailman'), 'v1.0', _('Offers a better integration of Mailman in the forge'));
     }
 }
-?>

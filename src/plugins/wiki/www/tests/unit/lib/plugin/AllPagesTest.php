@@ -35,6 +35,3 @@ class AllPagesTest extends phpwiki_TestCase {
         //$this->assertType('object', $result, 'isa XmlContent');
     }
 }
-
-
-?>

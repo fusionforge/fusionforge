@@ -141,4 +141,3 @@ jQuery(document).ready(function() {
 		echo '</div>';
 	}
 }
-?>

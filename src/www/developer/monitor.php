@@ -84,5 +84,3 @@ if (!session_loggedin()) {
 	}
 
 }
-
-?>

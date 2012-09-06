@@ -204,4 +204,3 @@ require_once 'Widget.class.php';
 		}
 	}
 }
-?>

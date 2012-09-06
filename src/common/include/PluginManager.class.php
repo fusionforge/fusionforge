@@ -369,5 +369,3 @@ function setup_plugin_manager() {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -734,4 +734,3 @@ class FusionForge_Http_Auth_Resolver implements Zend_Auth_Adapter_Http_Resolver_
 	}
 
 }
-?>

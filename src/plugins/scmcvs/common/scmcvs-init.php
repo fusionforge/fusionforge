@@ -31,5 +31,3 @@ register_plugin ($CVSPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

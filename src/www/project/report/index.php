@@ -250,5 +250,3 @@ foreach ($group->getUsers() as $member) {
 echo $GLOBALS['HTML']->listTableBottom();
 
 site_project_footer(array());
-
-?>

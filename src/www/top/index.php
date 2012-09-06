@@ -50,4 +50,3 @@ $HTML->header(array('title'=>sprintf(_('Top %1$s Projects'), forge_get_config ('
 
 <?php
 $HTML->footer(array());
-?>

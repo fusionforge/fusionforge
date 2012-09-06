@@ -99,4 +99,3 @@ if (forge_get_config('use_webdav')) {
 
 plugin_hook('hierarchy_views', array($group_id, 'docman'));
 echo '</div>';
-?>

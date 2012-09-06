@@ -55,5 +55,3 @@ class ForumMLSearchQuery extends SearchQuery {
 		return $qpa ;
 	}
 }
-
-?>

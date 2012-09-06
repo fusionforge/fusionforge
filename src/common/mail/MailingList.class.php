@@ -416,5 +416,3 @@ Thank you for registering your project with %1$s.
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

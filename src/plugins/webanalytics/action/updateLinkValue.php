@@ -36,4 +36,3 @@ if (!empty($idLink) && !empty($link)) {
 	$error_msg = _('Task failed');
 	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
 }
-?>

@@ -100,4 +100,3 @@ if (!isset($errorPage)){
 	echo '<input type="submit" value="'. _('Delete') .'" />';
 	echo '</form>';
 }
-?>

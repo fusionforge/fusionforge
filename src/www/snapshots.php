@@ -61,5 +61,3 @@ if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
 } else {
 	session_redirect404();
 }
-
-?>

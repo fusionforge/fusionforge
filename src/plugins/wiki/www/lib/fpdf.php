@@ -1562,4 +1562,3 @@ if (isset($HTTP_SERVER_VARS['HTTP_USER_AGENT']) and
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

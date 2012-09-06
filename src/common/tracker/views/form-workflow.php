@@ -126,5 +126,3 @@ if (!$has_error) {
 }
 
 $ath->footer(array());
-
-?>

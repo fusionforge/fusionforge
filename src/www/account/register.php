@@ -256,5 +256,3 @@ if (forge_get_config('use_jabber')) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

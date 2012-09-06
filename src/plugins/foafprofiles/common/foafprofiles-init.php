@@ -28,5 +28,3 @@ register_plugin ($foafprofilesPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

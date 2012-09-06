@@ -60,4 +60,3 @@ echo '<input type="text" name="groupname" size="40" maxlength="255" />';
 echo '<input id="submitaddsubgroup" type="button" value="'. _('Create') .'" onclick="javascript:doItAddSubGroup()" />';
 echo '</form>';
 echo '</div>';
-?>

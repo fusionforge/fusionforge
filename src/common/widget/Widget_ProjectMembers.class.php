@@ -124,5 +124,3 @@ class Widget_ProjectMembers extends Widget {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

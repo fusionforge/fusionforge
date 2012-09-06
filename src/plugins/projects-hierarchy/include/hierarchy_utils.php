@@ -68,5 +68,3 @@ function get_family($group_id, $family = '', $cpt = 0){
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

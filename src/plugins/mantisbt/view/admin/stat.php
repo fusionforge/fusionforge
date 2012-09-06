@@ -29,4 +29,3 @@ echo "</div>";
 //include ("mantisbt/view/admin/StatPerMember.php");
 //echo "</div>";
 echo "<div style='clear:both'>";
-?>

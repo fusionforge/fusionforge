@@ -74,4 +74,3 @@ if (!$projectsHierarchyProjectConf) {
 	echo '</form>';
 	echo $HTML->boxBottom();
 }
-?>

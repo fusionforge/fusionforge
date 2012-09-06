@@ -133,5 +133,3 @@ $graph->Add( $todayline);
 
 // Display the Gantt chart
 $graph->Stroke();
-
-?>

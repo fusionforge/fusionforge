@@ -739,4 +739,3 @@ function plugin_forumml_process_mail($plug,$reply=false) {
 	return $continue;
 
 }
-?>

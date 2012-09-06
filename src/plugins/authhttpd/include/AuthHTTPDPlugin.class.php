@@ -129,5 +129,3 @@ class AuthHTTPDPlugin extends ForgeAuthPlugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

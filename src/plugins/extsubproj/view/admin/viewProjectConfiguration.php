@@ -62,5 +62,3 @@ echo '<input type="submit" value="'._('Add').'" />';
 echo '</form>';
 
 echo $HTML->boxBottom();
-
-?>

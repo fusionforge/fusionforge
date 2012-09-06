@@ -59,4 +59,3 @@ class  ADORecordSet_ado_mssql extends ADORecordSet_ado {
 		return $this->ADORecordSet_ado($id,$mode);
 	}
 }
-?>

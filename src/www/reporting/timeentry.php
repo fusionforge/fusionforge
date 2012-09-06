@@ -51,5 +51,3 @@ function &addTimeEntry($session_ser, $projectTaskId, $week, $daysAdjust, $timeCo
 	error_log("addTimeEntry ($projectTaskId, $week, $daysAdjust, $timeCode, $hours)");
         return $teObj->create($projectTaskId, $week, $daysAdjust, $timeCode, $hours);
 }
-
-?>

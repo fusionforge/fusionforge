@@ -181,4 +181,3 @@ extends WikiPlugin_WikiAdminSetAcl
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

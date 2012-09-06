@@ -1223,5 +1223,3 @@ function sortRoleList (&$list, $relative_to = NULL, $criterion='composite') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

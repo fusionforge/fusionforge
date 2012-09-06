@@ -389,4 +389,3 @@ class ADORecordset_informix72 extends ADORecordSet {
 	}
 
 }
-?>

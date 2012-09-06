@@ -374,4 +374,3 @@ function object_array_unique($array, $keep_key_assoc = false)
 
     return $keep_key_assoc ? $array : array_values($array);
 }
-?>

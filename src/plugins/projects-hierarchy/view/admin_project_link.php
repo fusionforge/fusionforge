@@ -79,6 +79,3 @@ if (sizeof($pendingChilds)) {
 
 if (!sizeof($pendingParent) && !sizeof($pendingChilds))
 	echo '<p class="information">'._('No pending requests').'</p>';
-
-
-?>

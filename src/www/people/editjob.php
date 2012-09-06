@@ -198,5 +198,3 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

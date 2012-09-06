@@ -98,5 +98,3 @@ class ForumML_HTMLPurifier extends Codendi_HTMLPurifier {
         return $clean;
     }
 }
-
-?>

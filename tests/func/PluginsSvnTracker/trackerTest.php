@@ -132,4 +132,3 @@ class SvnCommit2Tracker extends FForge_SeleniumTestCase
 		system("rm -fr /tmp/svn.test");
 	}
 }
-?>

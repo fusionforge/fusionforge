@@ -77,4 +77,3 @@ if ($result) {
 } else {
 	session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard&feedback='.printf('Unable to update remote account: '.db_error()));
 }
-?>

@@ -77,5 +77,3 @@ if ($user_id && is_numeric($user_id)) {
 	*/
 	exit_error(_('User_id not found.'),'home');
 }
-
-?>

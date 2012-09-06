@@ -99,5 +99,3 @@ class NSSPGSQL extends System {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

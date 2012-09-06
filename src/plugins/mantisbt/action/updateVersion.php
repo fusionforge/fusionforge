@@ -61,5 +61,3 @@ try {
 }
 $feedback = _('Task succeeded.');
 session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
-
-?>

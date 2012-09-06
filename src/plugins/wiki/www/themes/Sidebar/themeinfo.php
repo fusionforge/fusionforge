@@ -215,4 +215,3 @@ if (ENABLE_RATEIT) {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

@@ -184,5 +184,3 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 }
 
 pm_footer(array());
-
-?>

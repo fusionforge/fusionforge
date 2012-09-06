@@ -30,4 +30,3 @@ class HelloWorldPluginDescriptor extends PluginDescriptor {
         $this->PluginDescriptor(_('HelloWorld'), 'v1.0', _('HelloWorld integration in the forge'));
     }
 }
-?>

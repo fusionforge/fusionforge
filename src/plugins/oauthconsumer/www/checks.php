@@ -75,5 +75,3 @@ function oauthconsumer_CheckForgeAdminExit() {
 	oauthconsumer_User_Header(array('title'=>'Admin page for OAuthConsumer','pagename'=>"$pluginname"));
 	
 }
-
-?>

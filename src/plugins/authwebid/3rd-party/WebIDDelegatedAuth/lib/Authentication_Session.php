@@ -92,5 +92,3 @@ class Authentication_Session
         $this->webid           = NULL;
     }
 }
-
-?>

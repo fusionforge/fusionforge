@@ -53,4 +53,3 @@ class PluginInfo {
     function getPropertyDescriptorForName($name) {
     }
 }
-?>

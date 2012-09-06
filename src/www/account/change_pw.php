@@ -105,5 +105,3 @@ if (getStringFromRequest('submit')) {
 }
 
 site_user_footer(array());
-
-?>

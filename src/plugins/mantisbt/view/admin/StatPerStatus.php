@@ -86,4 +86,3 @@ if (!isset($errorPage)){
 echo $HTML->boxBottom();
 
 }
-?>

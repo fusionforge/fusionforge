@@ -53,5 +53,3 @@ if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 }
 
 site_user_footer(array());
-
-?>

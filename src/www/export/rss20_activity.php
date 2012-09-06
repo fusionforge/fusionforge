@@ -192,5 +192,3 @@ function date_compare($a, $b)
 	}
 	return ($a['activity_date'] > $b['activity_date']) ? -1 : 1;
 }
-
-?>

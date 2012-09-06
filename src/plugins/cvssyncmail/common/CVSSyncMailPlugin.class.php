@@ -70,5 +70,3 @@ class CVSSyncMailPlugin extends Plugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

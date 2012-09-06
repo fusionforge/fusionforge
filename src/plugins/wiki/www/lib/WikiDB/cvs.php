@@ -29,4 +29,3 @@ extends WikiDB
             $this->_backend = new WikiDB_backend_cvs( $dbparams );
     }
 }
-?>

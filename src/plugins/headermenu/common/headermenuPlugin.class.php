@@ -190,4 +190,3 @@ class headermenuPlugin extends Plugin {
 		return _('Get the ability to set new links next to the login menu.');
 	}
 }
-?>

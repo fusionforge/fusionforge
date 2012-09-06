@@ -214,5 +214,3 @@ $symbol_arr = array(
 '<<'	=> array( 'input'=>'<<', 'tag'=>'mo', 'output'=>'&#' . hexdec('2329') . ';', 'left_bracket'=>TRUE), // 2005-06-07 wes
 '>>'	=> array( 'input'=>'>>', 'tag'=>'mo', 'output'=>'&#' . hexdec('232A') . ';', 'right_bracket'=>TRUE) // 2005-06-07 wes
 );
-
-?>

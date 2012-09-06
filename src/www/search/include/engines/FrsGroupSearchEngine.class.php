@@ -43,5 +43,3 @@ class FrsGroupSearchEngine extends GroupSearchEngine {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

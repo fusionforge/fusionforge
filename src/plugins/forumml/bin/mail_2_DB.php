@@ -145,5 +145,3 @@ if ($argv[2] == 1) {
 		unlink($mbox_file);
 	}
 }
-
-?>

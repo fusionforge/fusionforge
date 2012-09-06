@@ -63,4 +63,3 @@ class commitEmail extends scmhook {
 		return $this->disabledMessage;
 	}
 }
-?>

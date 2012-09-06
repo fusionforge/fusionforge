@@ -3013,5 +3013,3 @@ function sortProjectList (&$list, $criterion='name') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -419,5 +419,3 @@ if ($add_cat && $group_project_id) {
 
 	pm_footer(array());
 }
-
-?>

@@ -34,5 +34,3 @@ register_plugin ($oauthconsumerPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

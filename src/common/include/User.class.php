@@ -1852,5 +1852,3 @@ function sortUserList (&$list, $criterion='name') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

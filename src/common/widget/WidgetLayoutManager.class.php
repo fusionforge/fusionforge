@@ -855,4 +855,3 @@ class WidgetLayoutManager {
 		return $diff;
 	}
 }
-?>

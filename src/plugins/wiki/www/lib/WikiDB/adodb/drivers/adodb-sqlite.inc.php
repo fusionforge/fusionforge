@@ -316,4 +316,3 @@ class ADORecordset_sqlite extends ADORecordSet {
 	}
 
 }
-?>

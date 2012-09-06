@@ -338,5 +338,3 @@ function debuglog($msg) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

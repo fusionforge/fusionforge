@@ -666,4 +666,3 @@ if (isset($HTTP_SERVER_VARS['REQUEST_METHOD']))
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

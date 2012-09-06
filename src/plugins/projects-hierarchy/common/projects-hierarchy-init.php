@@ -32,5 +32,3 @@ register_plugin($projects_hierarchyPluginObject);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

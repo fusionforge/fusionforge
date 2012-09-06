@@ -39,4 +39,3 @@ if (!empty($idLink)) {
 	$error_msg = _('Task failed');
 	session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
 }
-?>

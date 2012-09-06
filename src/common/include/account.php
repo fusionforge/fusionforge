@@ -330,5 +330,3 @@ function checkKeys($keys) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

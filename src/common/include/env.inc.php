@@ -103,5 +103,3 @@ if( !ini_set('include_path', $include_path ) && !set_include_path( $include_path
 	$gfwww = '';
 	$gfplugins = '';
 }
-
-?>

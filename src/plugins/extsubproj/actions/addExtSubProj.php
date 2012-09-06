@@ -34,4 +34,3 @@ if (!$pluginExtSubProj->addExtSubProj($group_id, $confArr['newsubprojecturl'])) 
 
 $feedback = _('Sub project succesfully added.');
 session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name.'&feedback='.urlencode($feedback));
-?>

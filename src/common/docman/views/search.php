@@ -162,4 +162,3 @@ if ($searchString) {
 	echo '<p class="warning_msg">'._('Your search is empty.').'</p>';
 }
 echo '</div>';
-?>

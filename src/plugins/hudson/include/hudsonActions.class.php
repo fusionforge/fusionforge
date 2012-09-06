@@ -100,5 +100,3 @@ class hudsonActions extends Actions {
     // }}}
 
 }
-
-?>

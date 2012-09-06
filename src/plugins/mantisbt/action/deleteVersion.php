@@ -47,4 +47,3 @@ if (!empty($deleteVersion)) {
 	$warning = _('Missing parameters to delete version.');
 	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&warning_msg='.urlencode($warning));
 }
-?>

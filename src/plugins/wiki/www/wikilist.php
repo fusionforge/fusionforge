@@ -90,5 +90,3 @@ while ($grp = db_fetch_array($res)) {
 echo $HTML->listTableBottom();
 
 site_admin_footer(array());
-
-?>

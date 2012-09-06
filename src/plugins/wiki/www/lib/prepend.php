@@ -170,4 +170,3 @@ if (!defined('DEBUG') or (defined('DEBUG') and DEBUG > 2)) {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

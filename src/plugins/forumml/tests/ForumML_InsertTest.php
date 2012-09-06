@@ -217,5 +217,3 @@ class ForumML_InsertTest extends UnitTestCase {
 
 
 }
-
-?>

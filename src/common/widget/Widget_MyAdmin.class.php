@@ -108,4 +108,3 @@ class Widget_MyAdmin extends Widget {
 	    return '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'. $text .'</td><td nowrap="nowrap" style="width:20%; background:'. $bgcolor .'; color:'. $textcolor .'; padding: 2px 8px; font-weight:bold; text-align:center;">'. $value .'</td></tr>';
     }
 }
-?>

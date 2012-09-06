@@ -124,5 +124,3 @@ class UNIX extends System {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

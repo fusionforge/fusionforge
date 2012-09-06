@@ -70,4 +70,3 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		exit_permission_denied('home');
 	}
 }
-?>

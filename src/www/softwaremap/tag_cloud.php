@@ -181,4 +181,3 @@ if ($selected_tag) {
 }
 
 $HTML->footer(array());
-?>

@@ -66,4 +66,3 @@ if (!session_loggedin()) {
 	}
 }
 $HTML->footer(array());
-?>

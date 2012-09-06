@@ -57,5 +57,3 @@ if ($forum_id && $group_id) {
 } else {
 	exit_missing_param('',array(_('Forum ID'),_('Project ID')),'forums');
 }
-
-?>

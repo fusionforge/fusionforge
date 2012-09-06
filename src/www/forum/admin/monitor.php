@@ -74,5 +74,3 @@ while ($arr=db_fetch_array($res)) {
 echo $HTML->listTableBottom();
 
 forum_footer(array());
-
-?>

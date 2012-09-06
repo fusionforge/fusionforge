@@ -30,4 +30,3 @@ class MediaWikiPluginInfo extends PluginInfo {
     }
 
 }
-?>

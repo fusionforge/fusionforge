@@ -91,4 +91,3 @@ echo ' >Sync Roles</label></td><td><input disabled="disabled" type="checkbox" na
 echo '</table>';
 echo '<input type="submit" value="'._('Initialize').'" />';
 echo '</form>';
-?>

@@ -215,4 +215,3 @@ function FileUpload( $resourceType, $currentFolder )
 
 	exit ;
 }
-?>

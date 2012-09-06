@@ -257,5 +257,3 @@ class ForumML_MessageDao extends DataAccessObject {
 	}
 
 }
-
-?>

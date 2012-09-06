@@ -93,5 +93,3 @@ if (!session_loggedin()) {
 
 	echo $HTML->footer(array());
 }
-
-?>

@@ -55,4 +55,3 @@ class WidgetLayout_Row {
         return $ret;
     }
 }
-?>

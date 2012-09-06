@@ -227,5 +227,3 @@ if ($msg_id) {
 }
 
 forum_footer(array());
-
-?>

@@ -34,5 +34,3 @@ register_plugin ($WikiPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

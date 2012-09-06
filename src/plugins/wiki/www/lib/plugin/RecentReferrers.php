@@ -84,4 +84,3 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

@@ -80,5 +80,3 @@ define('ADMIN_CRONMAN_ROWS', 30);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -80,5 +80,4 @@ class  ADORecordSet_access extends ADORecordSet_odbc {
 		return $this->ADORecordSet_odbc($id,$mode);
 	}
 }// class
-} 
-?>
+}

@@ -209,5 +209,3 @@ class GforgeWikiPlugin extends Plugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

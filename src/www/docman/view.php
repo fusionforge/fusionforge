@@ -268,5 +268,3 @@ if (is_numeric($docid)) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

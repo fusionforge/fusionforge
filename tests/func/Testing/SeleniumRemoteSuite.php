@@ -15,4 +15,3 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 		}
 	}
 }
-?>

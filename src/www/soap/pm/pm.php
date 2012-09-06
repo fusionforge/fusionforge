@@ -690,5 +690,3 @@ function &addProjectMessage($session_ser,$group_id,$group_project_id,$project_ta
 		return $am->getID();
 	}
 }
-
-?>

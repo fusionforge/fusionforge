@@ -54,5 +54,3 @@ function globaldashboard_body() {
 		' section and configure some remote accounts and then activate the plugins widgets'.
 		' in his /my/ page </p>';
 }
-
-?>

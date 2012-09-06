@@ -54,4 +54,3 @@ echo '<input type="submit" value="'._('Update').'" />';
 echo '</form>';
 */
 echo $HTML->boxBottom();
-?>

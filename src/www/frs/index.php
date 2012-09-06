@@ -239,5 +239,3 @@ echo '</div><!-- id="forge-frs" -->';
 }
 
 frs_footer();
-
-?>

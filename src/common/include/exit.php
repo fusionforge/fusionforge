@@ -127,5 +127,3 @@ function exit_form_double_submit($toptab = '') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

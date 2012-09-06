@@ -492,5 +492,3 @@ function stats_site_aggregate( ) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

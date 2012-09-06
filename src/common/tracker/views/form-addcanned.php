@@ -81,5 +81,3 @@ $ath->adminHeader(array('title'=>$title, 'modal'=>1));
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

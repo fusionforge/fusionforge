@@ -43,4 +43,3 @@ project_admin_header(array('title'=>sprintf(_('Project History of %s'), $group->
 echo show_grouphistory($group_id);
 
 project_admin_footer(array());
-?>

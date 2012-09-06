@@ -190,5 +190,3 @@ class BackendMailmanList {
     }
 
 }
-
-?>

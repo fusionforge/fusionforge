@@ -35,5 +35,3 @@ register_plugin ($AuthOpenIDPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

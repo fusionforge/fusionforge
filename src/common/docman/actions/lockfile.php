@@ -52,4 +52,3 @@ if ($lock == 0) {
 	echo $d->setLock($lock, $LUSER->getID(), time());
 }
 exit;
-?>

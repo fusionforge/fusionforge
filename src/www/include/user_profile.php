@@ -181,5 +181,3 @@ function user_personal_information($user, $compact = false, $title = false) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

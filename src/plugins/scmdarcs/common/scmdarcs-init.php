@@ -31,5 +31,3 @@ register_plugin ($DarcsPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

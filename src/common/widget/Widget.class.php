@@ -374,4 +374,3 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=iframe&amp;name['. $this->id .']='. $this->getInstanceId();
 	}
 }
-?>

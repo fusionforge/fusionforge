@@ -139,4 +139,3 @@ class HtmlTransformer extends InlineTransformer
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

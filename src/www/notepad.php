@@ -122,5 +122,3 @@ if ($form) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

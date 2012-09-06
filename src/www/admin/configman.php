@@ -160,5 +160,3 @@ function get_absolute_filename($filename) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

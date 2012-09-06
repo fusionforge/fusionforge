@@ -168,4 +168,3 @@ function AverageRating($dbi, $page, $users, $active_userid){
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

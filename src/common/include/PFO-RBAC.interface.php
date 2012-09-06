@@ -142,5 +142,3 @@ interface PFO_RoleLoggedin extends PFO_Role {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

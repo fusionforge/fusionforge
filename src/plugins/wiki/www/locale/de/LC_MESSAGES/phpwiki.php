@@ -1340,5 +1340,3 @@ $locale["view this page"] = "um diese Seite anzuzeigen";
 $locale["weeks"] = "Wochen";
 $locale["yesterday"] =
    "gestern";
-
-?>

@@ -189,4 +189,3 @@ class _PageList_Column_BackLinks_count extends _PageList_Column {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

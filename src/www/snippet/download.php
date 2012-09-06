@@ -44,5 +44,3 @@ if ($result && db_numrows($result) > 0) {
 } else {
 	exit_error(_('Error'));
 }
-
-?>

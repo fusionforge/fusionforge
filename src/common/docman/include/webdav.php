@@ -335,4 +335,3 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		return true;
 	}
 }
-?>

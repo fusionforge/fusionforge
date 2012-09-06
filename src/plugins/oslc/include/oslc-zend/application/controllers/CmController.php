@@ -305,4 +305,3 @@ class CmController extends Zend_Rest_Controller {
 		throw new BadRequestException('Method delete not yet supported !');
 	}
 }
-?>

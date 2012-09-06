@@ -99,5 +99,3 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

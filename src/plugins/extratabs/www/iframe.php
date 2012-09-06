@@ -50,5 +50,3 @@ if ($result && db_numrows($result)) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

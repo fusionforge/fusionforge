@@ -665,5 +665,3 @@ if (!$at_arr || count($at_arr) < 1) {
 if (! $ajax) {
 	$atfh->footer();
 }
-
-?>

@@ -41,4 +41,3 @@ if ($globalConfArray['docman']) {
 	echo '</ul>';
 	echo '</form>';
 }
-?>

@@ -97,5 +97,3 @@ if (getStringFromRequest('submit')) {
 }
 
 site_admin_footer(array());
-
-?>

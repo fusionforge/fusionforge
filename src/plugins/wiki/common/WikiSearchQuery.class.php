@@ -81,5 +81,3 @@ class WikiSearchQuery extends SearchQuery {
 			 array ($pat, $words));
 	}
 }
-
-?>

@@ -160,5 +160,3 @@ if (session_loggedin()) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

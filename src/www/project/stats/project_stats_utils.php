@@ -54,5 +54,3 @@ function period2sql($period_name,$span,$field_name) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

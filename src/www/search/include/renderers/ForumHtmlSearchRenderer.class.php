@@ -130,5 +130,3 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		session_redirect('/forum/message.php?msg_id='.$this->getResultId('msg_id'));
 	}
 }
-
-?>

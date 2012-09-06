@@ -132,5 +132,3 @@ class ckeditorPlugin extends Plugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

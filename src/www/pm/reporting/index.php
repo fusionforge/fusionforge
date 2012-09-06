@@ -262,5 +262,3 @@ GROUP BY Technician',
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

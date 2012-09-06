@@ -211,5 +211,3 @@ class HtmlSearchRenderer extends SearchRenderer {
 		return db_result($this->searchQuery->getResult(), 0, $fieldName);
 	}
 }
-
-?>

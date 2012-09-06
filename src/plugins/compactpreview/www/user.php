@@ -38,5 +38,3 @@ echo $pluginCompatPreview->display_user_html_compact_preview($username, $title);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

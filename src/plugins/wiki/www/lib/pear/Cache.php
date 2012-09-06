@@ -353,4 +353,3 @@ class Cache extends PEAR {
     } // end func garbageCollection
 
 } // end class cache
-?>

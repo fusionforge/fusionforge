@@ -155,4 +155,3 @@ class Widget_MyMonitoredForums extends Widget {
 		return $ajax_url;
 	}
 }
-?>

@@ -120,5 +120,3 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
         }
     }
 }
-
-?>

@@ -39,5 +39,3 @@ for ($i=0; $i<$rows; $i++) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

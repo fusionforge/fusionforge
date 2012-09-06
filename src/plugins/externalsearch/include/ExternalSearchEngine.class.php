@@ -43,5 +43,3 @@ class ExternalSearchEngine extends GroupSearchEngine {
 		return $renderer;
 	}
 }
-
-?>

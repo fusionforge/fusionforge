@@ -10,5 +10,3 @@ register_plugin ($ExtraTabsPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

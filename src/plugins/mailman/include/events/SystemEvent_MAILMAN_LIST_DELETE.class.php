@@ -66,5 +66,3 @@ class SystemEvent_MAILMAN_LIST_DELETE extends SystemEvent {
     }
 
 }
-
-?>

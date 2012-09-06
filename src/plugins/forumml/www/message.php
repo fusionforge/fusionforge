@@ -220,5 +220,3 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 } else {
 	header('Location: '.get_server_url());
 }
-
-?>

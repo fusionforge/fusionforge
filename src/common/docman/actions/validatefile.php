@@ -59,4 +59,3 @@ foreach ($arr_fileid as $fileid) {
 }
 $return_msg .= _('activated successfully.');
 session_redirect($urlredirect.'&feedback='.urlencode($return_msg));
-?>

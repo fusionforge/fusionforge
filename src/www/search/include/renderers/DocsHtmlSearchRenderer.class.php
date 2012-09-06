@@ -106,5 +106,3 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		return DocsSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }
-
-?>

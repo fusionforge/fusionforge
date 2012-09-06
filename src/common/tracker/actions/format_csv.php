@@ -90,4 +90,3 @@ $sep = getStringFromRequest('sep', ',');
 </div>
 <?php
 $ath->footer(array());
-?>

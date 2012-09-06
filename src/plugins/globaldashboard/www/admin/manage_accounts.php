@@ -205,4 +205,3 @@ function createNewAccountForm($user_id) {
 			</form>
 		</p>';
 }
-?>

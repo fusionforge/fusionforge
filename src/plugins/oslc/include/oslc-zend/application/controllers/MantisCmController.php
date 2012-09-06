@@ -898,5 +898,3 @@ class MantisCmController extends CmController{
 	}
 
 }
-
-?>

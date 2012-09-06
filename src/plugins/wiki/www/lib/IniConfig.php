@@ -1137,4 +1137,3 @@ function fixup_dynamic_configs($file) {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

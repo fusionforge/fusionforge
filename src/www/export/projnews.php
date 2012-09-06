@@ -72,5 +72,3 @@ if ($limit>20 || $limit < 1) {
 echo $HTML->boxTop(_('Latest News'));
 echo news_show_latest($group_id,$limit,$show_summaries,false,$flat);
 echo $HTML->boxBottom();
-
-?>

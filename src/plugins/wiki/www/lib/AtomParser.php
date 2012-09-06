@@ -254,4 +254,3 @@ extends XmlParser
         return $tag;
     }
 }
-?>

@@ -109,5 +109,3 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 		return $return;
 	}
 }
-
-?>

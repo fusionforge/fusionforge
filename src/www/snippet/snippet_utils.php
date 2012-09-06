@@ -250,5 +250,3 @@ function snippet_show_snippet_details($id) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

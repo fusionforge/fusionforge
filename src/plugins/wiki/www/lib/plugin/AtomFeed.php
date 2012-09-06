@@ -82,4 +82,3 @@ extends WikiPlugin
         return $html;
     }
 }
-?>

@@ -304,4 +304,3 @@ function replace_rich_table($matched) {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

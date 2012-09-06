@@ -33,4 +33,3 @@ if (forge_get_config('use_project_tags')) {
 } else {
 	session_redirect('/');
 }
-?>

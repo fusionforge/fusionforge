@@ -226,4 +226,3 @@ for ($i=0; $i<count($pt_arr); $i++) {
 		}
 	echo "\n";
 }
-?>

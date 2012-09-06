@@ -236,5 +236,3 @@ function permissions_blurb() {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

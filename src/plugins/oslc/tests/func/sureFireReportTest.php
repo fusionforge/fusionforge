@@ -39,4 +39,3 @@ class SureFireReports extends FForge_SeleniumTestCase
 		$this->assertEquals("100%", $this->getTable("//div[@id='contentBox']/div[3]/div/table.4.6"));
 	}
 }
-?>

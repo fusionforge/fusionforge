@@ -33,5 +33,3 @@ extends Valid_String {
         return parent::validate($value);
     }
 }
-
-?>

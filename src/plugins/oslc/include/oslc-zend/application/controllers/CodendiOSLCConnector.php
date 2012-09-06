@@ -406,4 +406,3 @@ function updateArtifact($sessionKey, $group_id, $tracker_id, $artifact_id, $valu
 }
 
 }
-?>

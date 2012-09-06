@@ -276,4 +276,3 @@ function &MSPCreateProject($groupid,$session_hash,$name,$ispublic,$description) 
 		}
 	}
 }
-?>

@@ -73,4 +73,3 @@ class ADORecordSet_mysqlt extends ADORecordSet_mysql{
 		return false;
 	}	
 }
-?>

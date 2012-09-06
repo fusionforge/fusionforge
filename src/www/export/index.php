@@ -95,4 +95,3 @@ For details, check <a href="http://sourceforge.net/docman/display_doc.php?docid=
 
 <?php
 $HTML->footer(array());
-?>

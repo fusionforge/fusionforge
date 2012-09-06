@@ -75,5 +75,3 @@ frs_admin_header(array('title'=>sprintf(_('Delete Package: %1$s'), $frsp->getNam
 	</form>';
 
 frs_admin_footer();
-
-?>

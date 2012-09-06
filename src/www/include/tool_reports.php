@@ -120,5 +120,3 @@ function reports_header($group_id, $vals, $titles, $html='') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -131,5 +131,3 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		return TasksSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }
-
-?>

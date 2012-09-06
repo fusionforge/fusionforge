@@ -40,5 +40,3 @@ function getFilterUrl($filterArray, $currentId = 0) {
 	}
 	return $url;
 }
-
-?>

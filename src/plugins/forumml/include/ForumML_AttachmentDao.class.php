@@ -32,5 +32,3 @@ class ForumML_AttachmentDao extends DataAccessObject {
     }
 
 }
-
-?>

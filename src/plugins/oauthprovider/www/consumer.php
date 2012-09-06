@@ -133,5 +133,3 @@ $f_consumer_email = getStringFromPost( 'consumer_email' );
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

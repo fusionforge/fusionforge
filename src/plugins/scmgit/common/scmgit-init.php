@@ -31,5 +31,3 @@ register_plugin ($GitPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

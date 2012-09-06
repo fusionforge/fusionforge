@@ -42,5 +42,3 @@ class ExternalHtmlSearchRenderer extends SearchRenderer {
 		exit();
 	}
 }
-
-?>

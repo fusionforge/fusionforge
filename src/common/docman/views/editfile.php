@@ -85,4 +85,3 @@ echo '</table>';
 echo '<input type="hidden" id="docid" name="docid" />';
 echo '</form>';
 echo '</div>';
-?>

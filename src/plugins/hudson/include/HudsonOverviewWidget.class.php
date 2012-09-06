@@ -26,5 +26,3 @@ abstract class HudsonOverviewWidget extends HudsonWidget {
     }
 
 }
-
-?>

@@ -36,5 +36,3 @@ if (!empty($idLink)) {
 }
 $warning_msg = _('Missing Link to be deleted.');
 session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
-
-?>

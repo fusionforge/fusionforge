@@ -112,5 +112,3 @@ class quota_managementPlugin extends Plugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

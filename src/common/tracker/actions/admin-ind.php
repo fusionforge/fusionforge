@@ -157,5 +157,3 @@ $atf->footer();
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

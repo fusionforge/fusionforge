@@ -328,5 +328,3 @@ $this->id_message = $this->dao->insertMessage($this->id_list,  $id_parent , $bod
 	    return $this->storeMime($email, $email->headers, $storage);
     }
 }
-
-?>

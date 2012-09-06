@@ -239,5 +239,3 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 }
 
 $HTML->footer(array());
-
-?>

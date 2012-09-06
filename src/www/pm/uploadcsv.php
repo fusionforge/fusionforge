@@ -90,4 +90,3 @@ external application, such as MS Project. Primarily preserved for sorting purpos
 <p />
 <?php
 pm_footer(array());
-?>

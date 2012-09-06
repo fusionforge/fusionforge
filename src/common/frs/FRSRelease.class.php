@@ -469,5 +469,3 @@ notified in the future, please login to %7$s and click this link:
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

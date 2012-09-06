@@ -20,5 +20,3 @@
 class HudsonJobURLFileException extends Exception {
 
 }
-
-?>

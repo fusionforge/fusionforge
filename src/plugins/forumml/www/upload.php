@@ -88,5 +88,3 @@ echo $attch['file_path'];
 } else {
 	header('Location: '.get_server_url());
 }
-
-?>

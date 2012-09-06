@@ -33,4 +33,3 @@ if (!$mantisbt->updateUserConf($confArr))
 
 $feedback = _('MantisBT User configuration successfully updated.');
 session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&view=adminuser&feedback='.urlencode($feedback));
-?>

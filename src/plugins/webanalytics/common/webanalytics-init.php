@@ -26,5 +26,3 @@ require_once $gfplugins.'webanalytics/common/webanalyticsPlugin.class.php';
 $webanalyticsPluginObject = new webanalyticsPlugin;
 
 register_plugin($webanalyticsPluginObject);
-
-?>

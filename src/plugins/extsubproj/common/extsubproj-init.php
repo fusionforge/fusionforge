@@ -30,5 +30,3 @@ register_plugin ($extsubprojPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

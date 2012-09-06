@@ -64,5 +64,3 @@ mailman_header(array(
 <?php
 
 mail_footer(array());
-
-?>

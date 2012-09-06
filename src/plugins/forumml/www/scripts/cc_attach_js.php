@@ -68,4 +68,3 @@ function removeHeader(divNum)
 <?php
 // Waiting for a better script, this comment just to make test
 // BlankAfterClosingPhpTag happy...
-?>

@@ -225,5 +225,3 @@ To stop monitoring this user, visit the following link:
 	site_user_footer(array());
 
 }
-
-?>

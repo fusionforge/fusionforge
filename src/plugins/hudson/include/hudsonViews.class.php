@@ -430,6 +430,3 @@ class hudsonViews extends Views {
 		echo "<script type=\"text/javascript\">Element.toggle('hudson_iframe_div', 'slide');</script>";
 	}
 }
-
-
-?>

@@ -129,5 +129,3 @@ try {
 	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
 	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($error_msg));
 }
-
-?>

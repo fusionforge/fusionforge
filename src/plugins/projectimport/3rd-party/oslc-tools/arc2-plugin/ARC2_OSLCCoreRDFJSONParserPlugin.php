@@ -253,5 +253,3 @@ class ARC2_OSLCCoreRDFJSONParserPlugin extends ARC2_JSONParser {
 	/*  */
 
 }
-
-?>

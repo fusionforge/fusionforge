@@ -190,5 +190,3 @@ function writeRssFeedEnd() {
 	print'</channel>';
 	print'</rss>';
 }
-
-?>

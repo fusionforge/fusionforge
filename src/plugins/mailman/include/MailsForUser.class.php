@@ -83,5 +83,3 @@ class MailsForUser extends Error {
 	}
 
 }
-
-?>

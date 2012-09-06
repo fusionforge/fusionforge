@@ -185,4 +185,3 @@ class webanalyticsPlugin extends Plugin {
 		return _('Get the ability to configure specific URL for web analytics tool such as Piwik or Google Analytics.');
 	}
 }
-?>

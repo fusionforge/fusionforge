@@ -44,5 +44,3 @@ $Config['DeniedExtensions']['Image']	= array() ;
 
 $Config['AllowedExtensions']['Flash']	= array('swf','fla') ;
 $Config['DeniedExtensions']['Flash']	= array() ;
-
-?>

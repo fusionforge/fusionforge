@@ -1442,4 +1442,3 @@ if (!defined('PHPWIKI_NOMAIN') or !PHPWIKI_NOMAIN)
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

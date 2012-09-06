@@ -148,5 +148,3 @@ function my_format_as_flag2($assignee, $submitter) {
 function my_item_count($total, $new) {
     return '['.$total.($new ? ", <b>".vsprintf(_('%s new items'), array($new))."</b>]" : ']');
 }
-
-?>

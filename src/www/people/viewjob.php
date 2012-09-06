@@ -109,5 +109,3 @@ array($job_id, $group_id));
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -19,4 +19,3 @@ if (isset($oldpjctname) && isset($newpjctname)){
 	shell_exec($shellstring);
 
 }
-?>

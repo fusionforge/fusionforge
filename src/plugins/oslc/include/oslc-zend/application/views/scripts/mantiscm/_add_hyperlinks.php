@@ -22,7 +22,3 @@ function add_links($text, $url)	{
 	$replacement = preg_replace_callback($preg_url, "add_href", $text);
 	return $replacement;
 }
-
-
-
-?>

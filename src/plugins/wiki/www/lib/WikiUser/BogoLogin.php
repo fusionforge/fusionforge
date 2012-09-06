@@ -84,4 +84,3 @@ class _BogoLoginPassUser extends _PassUser {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

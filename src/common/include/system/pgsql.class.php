@@ -442,5 +442,3 @@ WHERE users.user_id=$2
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

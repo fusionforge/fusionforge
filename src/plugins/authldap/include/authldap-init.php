@@ -32,5 +32,3 @@ register_plugin ($AuthLDAPPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

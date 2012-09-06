@@ -369,5 +369,3 @@ $HTML
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

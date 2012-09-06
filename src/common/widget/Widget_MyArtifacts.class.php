@@ -295,5 +295,3 @@ class Widget_MyArtifacts extends Widget {
 		return _("List artifacts you have submitted or assigned to you or you are monitoring, by project.");
 	}
 }
-
-?>

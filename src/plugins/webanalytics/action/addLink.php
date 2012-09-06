@@ -37,5 +37,3 @@ if (!empty($link) && !empty($name)) {
 }
 $warning_msg = _('Missing Link URL or name.');
 session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
-
-?>

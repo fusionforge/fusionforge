@@ -184,4 +184,3 @@ if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $ti
 		session_redirect($baseurl.'&feedback='.urlencode($return_msg));
 	}
 }
-?>

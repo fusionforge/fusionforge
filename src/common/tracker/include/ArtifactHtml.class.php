@@ -207,5 +207,3 @@ class ArtifactHtml extends Artifact {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -63,4 +63,3 @@ if ($dg->getState() != 2) {
 
 $return_msg = sprintf(_('Document folder %s deleted successfully.'),$dg->getName());
 session_redirect($urlredirect.'&view='.$view.'&dirid='.$parentId.'&feedback='.urlencode($return_msg));
-?>

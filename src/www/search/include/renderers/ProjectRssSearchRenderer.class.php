@@ -64,5 +64,3 @@ class ProjectRssSearchRenderer extends RssSearchRenderer {
 		$this->RssSearchRenderer(SEARCH__TYPE_IS_SOFTWARE, $words, $isExact, $searchQuery);
 	}
 }
-
-?>

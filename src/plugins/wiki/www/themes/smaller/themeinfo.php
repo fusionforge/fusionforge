@@ -51,4 +51,3 @@ $WikiTheme = new WikiTheme_smaller('smaller');
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

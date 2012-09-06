@@ -104,5 +104,3 @@ if (isset($parent_trove_cat_id)) {
 <?php
 
 site_admin_footer(array());
-
-?>

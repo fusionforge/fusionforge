@@ -35,5 +35,3 @@ register_plugin ($authWebIDPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

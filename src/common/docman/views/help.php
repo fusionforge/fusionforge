@@ -38,4 +38,3 @@ if ($g->useWebdav()) {
 	echo '<p>'. util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Direct Webdav URL')) .'</p>';
 }
 echo '</div>';
-?>

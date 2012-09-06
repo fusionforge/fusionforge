@@ -166,4 +166,3 @@ $WikiTheme = new WikiTheme_MacOSX('MacOSX');
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

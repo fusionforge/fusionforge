@@ -253,5 +253,3 @@ class globalDashboard_Widget_MyProjects extends Widget {
 		return getDBFetchMethod($account_id, 'projects');
 	} 
 }
-
-?>

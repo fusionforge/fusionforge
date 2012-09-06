@@ -101,5 +101,3 @@ class ExportProjectSearchQuery extends SearchQuery {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

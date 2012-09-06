@@ -400,4 +400,3 @@ switch (getStringFromRequest('func')) {
 		break;
 	}
 }
-?>

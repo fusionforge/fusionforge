@@ -442,4 +442,3 @@ class _PageList_Column_customlang extends _PageList_Column {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

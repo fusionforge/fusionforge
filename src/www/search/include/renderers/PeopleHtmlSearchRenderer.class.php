@@ -85,5 +85,3 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

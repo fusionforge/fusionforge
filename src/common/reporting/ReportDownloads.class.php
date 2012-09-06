@@ -120,5 +120,3 @@ class ReportDownloads extends Report {
 		return true;
 	}
 }
-
-?>

@@ -68,5 +68,3 @@ $plugin_oauthprovider_pending_authorization = 'Consumer <b>"%s"</b> wants to be 
 $plugin_oauthprovider_ensure_authorize = 'Do you really want to grant access to Fusionforge on your behalf to consumer "%s" ?';
 $plugin_oauthprovider_denied_consumer_authorization = 'You have denied Consumer "%s" access to Fusionforge on your behalf. The pending OAuth token request has been deleted.';
 $plugin_oauthprovider_back_consumer = 'Cancel';
-
-?>

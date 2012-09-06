@@ -552,4 +552,3 @@ function IfJavaScript($if_content = false, $else_content = false) {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

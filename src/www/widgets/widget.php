@@ -113,4 +113,3 @@ if ($request->valid($vOwner)) {
 if (!$request->isAjax()) {
 	htmlRedirect($redirect);
 }
-?>

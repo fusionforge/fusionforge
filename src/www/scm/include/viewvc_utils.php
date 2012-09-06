@@ -131,5 +131,3 @@ function viewcvs_execute($repos_name, $repos_type) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -155,5 +155,3 @@ $wgHooks['AutoAuthenticate'][] = array($wgAuth, 'getGForgeUserSession',array());
  *   date +%Y%m%d%H%M%S
  */
 //$wgCacheEpoch = 'date +%Y%m%d%H%M%S';
-
-?>

@@ -174,4 +174,3 @@ $WikiTheme = new WikiTheme_MonoBook('MonoBook');
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

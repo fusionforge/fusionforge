@@ -255,5 +255,3 @@ function globalsearch_status_name ($status_id) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

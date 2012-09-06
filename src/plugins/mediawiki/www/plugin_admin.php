@@ -213,4 +213,3 @@ echo "</div>\n\n";
 
 <?php
 site_project_footer(array());
-?>

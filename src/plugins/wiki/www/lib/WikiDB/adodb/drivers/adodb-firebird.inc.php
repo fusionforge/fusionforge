@@ -66,4 +66,3 @@ class  ADORecordSet_firebird extends ADORecordSet_ibase {
 		$this->ADORecordSet_ibase($id,$mode);
 	}
 }
-?>

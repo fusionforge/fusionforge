@@ -110,5 +110,3 @@ foreach ($members as $user) {
 echo $GLOBALS['HTML']->listTableBottom();
 
 site_project_footer(array());
-
-?>

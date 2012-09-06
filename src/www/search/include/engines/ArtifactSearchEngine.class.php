@@ -54,5 +54,3 @@ class ArtifactSearchEngine extends GroupSearchEngine {
 		return $renderer;
 	}
 }
-
-?>

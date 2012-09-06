@@ -88,4 +88,3 @@ function getSCMData($session_ser, $group_id) {
 	return $res;
 
 }
-?>

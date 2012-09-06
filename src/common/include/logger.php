@@ -130,5 +130,3 @@ if (!$res_logger) {
 	echo htmlspecialchars(db_error());
 	exit;
 }
-
-?>

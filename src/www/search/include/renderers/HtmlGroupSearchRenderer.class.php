@@ -100,4 +100,3 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 		return false;
 	}
 }
-?>

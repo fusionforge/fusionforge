@@ -1143,4 +1143,3 @@ function artifact_history_to_soap($db_result, &$artifactType) {
 
 	return $result;
 }
-?>

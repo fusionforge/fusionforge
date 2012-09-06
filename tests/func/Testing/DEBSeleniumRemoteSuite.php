@@ -9,4 +9,3 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 		parent::setUp();
 	}
 }
-?>

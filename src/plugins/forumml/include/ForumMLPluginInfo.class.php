@@ -132,4 +132,3 @@ class ForumMLPluginInfo extends PluginInfo {
         require($this->_conf_path);
     }
 }
-?>

@@ -37,4 +37,3 @@ if (!$mantisbt->initializeUser($confArr)) {
 
 $feedback = _('MantisBT User successfully initialized.');
 session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
-?>

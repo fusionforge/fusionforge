@@ -102,5 +102,3 @@ class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
         }
     }
 }
-
-?>

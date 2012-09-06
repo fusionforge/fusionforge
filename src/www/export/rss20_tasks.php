@@ -297,4 +297,3 @@ function endOnError($errorMessage) {
 	displayError($errorMessage);
 	endFeed();
 }
-?>

@@ -447,5 +447,3 @@ class CVSPlugin extends SCMPlugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

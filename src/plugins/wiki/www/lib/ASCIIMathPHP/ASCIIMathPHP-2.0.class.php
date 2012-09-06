@@ -1116,4 +1116,3 @@ class ASCIIMathPHP
 		}
 	}	
 }
-?>

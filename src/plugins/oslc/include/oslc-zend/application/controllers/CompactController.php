@@ -111,4 +111,3 @@ class CompactController extends Zend_Rest_Controller {
 
 	}
 }
-?>

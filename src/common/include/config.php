@@ -290,5 +290,3 @@ function forge_reset_config_item ($var, $section, $default) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

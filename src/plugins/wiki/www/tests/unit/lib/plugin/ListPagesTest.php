@@ -21,5 +21,3 @@ class ListPagesTest extends phpwiki_TestCase {
         //$this->assertEquals(3, $result->_maxlen);
     }
 }
-
-?>

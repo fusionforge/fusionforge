@@ -296,5 +296,3 @@ if (file_exists ($gfconfig.'plugins/mantis/config.php')) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -56,4 +56,3 @@ class ADORecordset_mssqlpo extends ADORecordset_mssql {
 		$this->ADORecordset_mssql($id,$mode);
 	}
 }
-?>

@@ -45,5 +45,3 @@ if ($actor_id) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -264,5 +264,3 @@ class ProjectGroupHTML extends ProjectGroup {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -189,4 +189,3 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
                 return $result;
         }
 }
-?>

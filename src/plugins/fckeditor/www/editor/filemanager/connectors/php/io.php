@@ -291,5 +291,3 @@ EOF;
 	echo '</script>' ;
 	exit ;
 }
-
-?>

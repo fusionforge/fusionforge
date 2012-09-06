@@ -84,5 +84,3 @@ function docman_recursive_stateid($docgroup, $nested_groups, $nested_docs, $stat
 		}
 	}
 }
-
-?>

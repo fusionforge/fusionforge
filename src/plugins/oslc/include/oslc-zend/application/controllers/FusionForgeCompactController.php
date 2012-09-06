@@ -166,4 +166,3 @@ class FusionForgeCompactController extends CompactController {
 		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 	}
 }
-?>

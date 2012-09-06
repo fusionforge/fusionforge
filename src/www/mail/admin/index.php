@@ -305,4 +305,3 @@ if ($group_id) {
 } else {
 	exit_no_group();
 }
-?>

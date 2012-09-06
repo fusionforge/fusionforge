@@ -41,5 +41,3 @@ use_soap_error_handler(false);
 $server = new CoreApiServer();
 $server->setClass("CoreApiService");
 $server->handle();
-
-?>

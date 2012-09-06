@@ -364,5 +364,3 @@ function getFilteredStringFromRequest($string, $pattern, $defaultValue = '') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

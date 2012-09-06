@@ -40,4 +40,3 @@ class Widget_ProjectRss extends Widget_Rss {
 		return _("Include public rss (or atom) feeds into project homepage.");
 	}
 }
-?>

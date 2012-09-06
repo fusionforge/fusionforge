@@ -97,5 +97,3 @@ if ($diary_user) {
 } else {
 	exit_error(_('No User Selected'),'home');
 }
-
-?>

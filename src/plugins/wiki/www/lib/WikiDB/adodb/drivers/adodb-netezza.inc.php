@@ -165,4 +165,3 @@ class ADORecordSet_netezza extends ADORecordSet_postgres64
 	}
 
 }
-?>

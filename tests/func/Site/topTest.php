@@ -86,5 +86,3 @@ class Top extends FForge_SeleniumTestCase
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

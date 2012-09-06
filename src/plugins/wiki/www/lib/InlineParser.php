@@ -1409,4 +1409,3 @@ function TransformInlineNowiki($text, $markup = 2.0, $basepage=false) {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

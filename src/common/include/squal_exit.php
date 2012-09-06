@@ -73,5 +73,3 @@ function exit_missing_param($url='',$missing_params=array(),$toptab='') {
 function exit_disabled($toptab='') {
 	exit_error('DISABLED FEATURE');
 }
-
-?>

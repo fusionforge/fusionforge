@@ -100,5 +100,3 @@ if (forge_get_config('use_ssl') && !session_issecure()) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

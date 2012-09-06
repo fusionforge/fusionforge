@@ -1367,5 +1367,3 @@ function updateTimeCode($time_code, $category_name) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -156,5 +156,3 @@ class Authentication_SignedURL extends Authentication_URL
         return $isOk ? $URL : NULL;
     }
 }
-
-?>

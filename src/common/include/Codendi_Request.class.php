@@ -205,4 +205,3 @@ function isAjax() {
 
 
 }
-?>

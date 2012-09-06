@@ -105,5 +105,3 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
         return $html;
     }
 }
-
-?>

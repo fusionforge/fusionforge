@@ -49,5 +49,3 @@ require_once $gfwww.'admin/admin_utils.php';
 session_require_global_perm ('forge_admin');
 
 phpinfo();
-
-?>

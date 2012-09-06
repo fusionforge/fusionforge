@@ -30,5 +30,3 @@ register_plugin ($mailmanPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

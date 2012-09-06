@@ -56,4 +56,3 @@ class ADORecordSet_odbtp_unicode extends ADORecordSet_odbtp {
 		}
 	}
 }
-?>

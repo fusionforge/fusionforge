@@ -30,5 +30,3 @@ register_plugin ($oslcPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

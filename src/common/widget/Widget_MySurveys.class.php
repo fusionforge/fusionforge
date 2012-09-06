@@ -123,5 +123,3 @@ class Widget_MySurveys extends Widget {
 		return _("List the surveys you have not answered.");
 	}
 }
-
-?>

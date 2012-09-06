@@ -76,4 +76,3 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Documents folder docdirectory moved to trash successfully");
 	}
 }
-?>

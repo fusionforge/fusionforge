@@ -117,5 +117,3 @@ class globalDashboard_Widget_MyArtifacts extends Widget {
 	}
 	*/
 }
-
-?>

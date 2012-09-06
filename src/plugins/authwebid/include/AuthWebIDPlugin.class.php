@@ -401,5 +401,3 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -844,5 +844,3 @@ function graph_calculate_scale($multi_rows,$width) {
 	$scale=($width/$max_value);
         return $scale;
 }
-
-?>

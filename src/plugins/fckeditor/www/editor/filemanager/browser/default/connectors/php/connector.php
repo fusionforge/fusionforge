@@ -106,4 +106,3 @@ function DoResponse()
 
 	exit ;
 }
-?>

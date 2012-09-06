@@ -32,5 +32,3 @@ register_plugin ($cvstrackerPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

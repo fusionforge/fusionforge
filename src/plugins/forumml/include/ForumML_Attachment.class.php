@@ -91,5 +91,3 @@ class ForumML_Attachment {
     }
 
 }
-
-?>

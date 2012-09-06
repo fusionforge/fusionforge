@@ -9,4 +9,3 @@ class RPMSeleniumRemoteSuite extends SeleniumRemoteSuite
 		parent::setUp();
 	}
 }
-?>

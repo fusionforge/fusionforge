@@ -33,5 +33,3 @@ abstract class SystemEvent {
   const STATUS_RUNNING= 2;
   const STATUS_DONE= 3;
 }
-
-?>

@@ -30,5 +30,3 @@ register_plugin ($compactpreviewPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

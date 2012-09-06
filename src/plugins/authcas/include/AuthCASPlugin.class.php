@@ -186,5 +186,3 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

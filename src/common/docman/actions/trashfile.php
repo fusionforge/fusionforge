@@ -65,5 +65,3 @@ foreach ($arr_fileid as $fileid) {
 }
 $return_msg .= _('moved to trash successfully.');
 session_redirect($redirecturl.'&feedback='.urlencode($return_msg));
-
-?>

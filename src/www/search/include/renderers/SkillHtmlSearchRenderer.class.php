@@ -104,5 +104,3 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 		session_redirect('/users/'.$this->getResultId('user_name').'/');
 	}
 }
-
-?>

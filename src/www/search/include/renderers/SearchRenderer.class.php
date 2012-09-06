@@ -59,5 +59,3 @@ class SearchRenderer extends Error {
 	function flush() {}
 
 }
-
-?>

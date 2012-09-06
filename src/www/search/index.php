@@ -81,5 +81,3 @@ if ($renderer) {
 } else {
 	exit_error(_('Error - Invalid search'));
 }
-
-?>

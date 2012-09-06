@@ -109,5 +109,3 @@ function oslc_User_Header($params) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

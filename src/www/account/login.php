@@ -46,5 +46,3 @@ display_login_page($return_to, $triggered);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

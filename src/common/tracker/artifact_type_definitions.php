@@ -132,5 +132,3 @@ $custom_status=array('Status',ARTIFACT_EXTRAFIELDTYPE_STATUS,0,0,1,$custom_statu
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

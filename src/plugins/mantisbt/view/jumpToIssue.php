@@ -31,4 +31,3 @@ echo '<input type="text" name="idBug">';
 echo '<input type="submit" value="Ok" />';
 echo '</form>';
 echo '</div>';
-?>

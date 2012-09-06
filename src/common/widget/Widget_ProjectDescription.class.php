@@ -63,5 +63,3 @@ class Widget_ProjectDescription extends Widget {
 		return _('Allow you to view the project description');
 	}
 }
-
-?>

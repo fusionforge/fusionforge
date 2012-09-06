@@ -68,5 +68,3 @@ report_header('Main Page');
 
 plugin_hook ("reporting_reference", array());
 report_footer();
-
-?>

@@ -30,5 +30,3 @@ register_plugin ($helloworldPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -140,5 +140,3 @@ class ForumML_FileStorage {
     }
 
 }
-
-?>

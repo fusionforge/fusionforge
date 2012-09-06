@@ -222,5 +222,3 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 	exit_error(_('Error - was the URL mangled?'));
 
 }
-
-?>

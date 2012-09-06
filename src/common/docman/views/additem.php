@@ -83,4 +83,3 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo '</div>';
 }
 echo '</div>';
-?>

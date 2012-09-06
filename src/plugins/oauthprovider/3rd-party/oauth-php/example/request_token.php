@@ -10,5 +10,3 @@ try {
   print_r($req);
   die();
 }
-
-?>

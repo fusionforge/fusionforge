@@ -93,5 +93,3 @@ for ($i=0; $i<$count; $i++) {
 }
 
 $sh->footer(array());
-
-?>

@@ -73,5 +73,3 @@ site_admin_header(array('title'=>_('Site Admin: Trove - Category List')));
 printnode(0,"root");
 
 site_admin_footer(array());
-
-?>

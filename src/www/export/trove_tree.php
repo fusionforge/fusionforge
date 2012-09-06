@@ -64,5 +64,3 @@ print("</trove-tree>\n");
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

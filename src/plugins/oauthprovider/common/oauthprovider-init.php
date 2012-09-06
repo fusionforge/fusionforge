@@ -34,5 +34,3 @@ require_once $gfplugins.'oauthprovider/include/fusionforge_oauth_datastore.php';
 $oauthproviderPluginObject = new oauthproviderPlugin ;
 
 register_plugin ($oauthproviderPluginObject) ;
-
-?>

@@ -130,5 +130,3 @@ echo '</select>'."\n";
 }
 
 $ath->footer(array());
-
-?>

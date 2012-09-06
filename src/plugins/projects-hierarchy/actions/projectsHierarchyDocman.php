@@ -31,4 +31,3 @@ if ($projectsHierarchy->setDocmanStatus($id, $status))
 	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Successfully update status of hierarchical browsing'));
 
 $projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Failed to update status of hierarchical browsing'));
-?>

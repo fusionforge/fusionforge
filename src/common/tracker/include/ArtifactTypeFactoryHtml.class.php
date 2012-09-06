@@ -85,5 +85,3 @@ class ArtifactTypeFactoryHtml extends ArtifactTypeFactory {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

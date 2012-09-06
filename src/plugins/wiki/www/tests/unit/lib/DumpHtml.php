@@ -50,5 +50,3 @@ class DumpHtml extends phpwiki_TestCase {
     }
 
 }
-
-?>

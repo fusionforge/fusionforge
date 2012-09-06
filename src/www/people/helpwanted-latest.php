@@ -50,5 +50,3 @@ array(),30);
 }
 
 people_footer(array());
-
-?>

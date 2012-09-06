@@ -317,4 +317,3 @@ struct VS_VERSIONINFO { struct VS_VERSIONINFO
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

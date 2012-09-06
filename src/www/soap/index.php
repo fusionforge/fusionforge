@@ -194,5 +194,3 @@ $server->service($HTTP_RAW_POST_DATA);
 if(isset($log) and $log != ''){
 	harness('nusoap_r2_base_server',$server->headers['User-Agent'],$server->methodname,$server->request,$server->response,$server->result);
 }
-
-?>

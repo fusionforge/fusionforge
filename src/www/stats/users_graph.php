@@ -87,5 +87,3 @@ $graph->SetyTitle(_('Users (RED) / Projects (BLUE)'));
 $graph->DrawAxis();
 //$graph->showDebug();
 $graph->ShowGraph('png');
-
-?>

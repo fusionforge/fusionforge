@@ -119,4 +119,3 @@ function wiki_xmlrpc_post($method, $args = null, $url = null, $auth = null) {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

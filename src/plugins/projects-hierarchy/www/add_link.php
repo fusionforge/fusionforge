@@ -40,4 +40,3 @@ db_query_params ('INSERT INTO plugin_projects_hierarchy (project_id ,sub_project
 db_commit();
 
 header("Location: ".util_make_url ('/project/admin/index.php?group_id='.$group_id));
-?>

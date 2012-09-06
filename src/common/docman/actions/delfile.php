@@ -51,4 +51,3 @@ foreach ($arr_fileid as $fileid) {
 }
 $return_msg .= _('deleted successfully.');
 session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
-?>

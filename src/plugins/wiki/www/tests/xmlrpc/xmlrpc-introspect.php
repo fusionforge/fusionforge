@@ -311,6 +311,3 @@ function name_cmp($a, $b) {
 /*************************************
 * END system.describeMethods Support *
 *************************************/
-
-
-?>

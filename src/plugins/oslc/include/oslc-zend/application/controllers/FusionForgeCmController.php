@@ -750,4 +750,3 @@ class FusionForgeCmController extends CmController {
 		return $returned;
 	}
 }
-?>

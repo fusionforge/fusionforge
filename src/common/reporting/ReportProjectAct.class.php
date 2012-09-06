@@ -116,5 +116,3 @@ function &getPageViews() {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

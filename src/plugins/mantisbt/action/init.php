@@ -40,4 +40,3 @@ if (!$mantisbt->initialize($group_id, $confArr))
 
 $feedback = _('MantisBT plugin successfully initialized.');
 session_redirect('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
-?>

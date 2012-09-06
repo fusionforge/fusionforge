@@ -148,4 +148,3 @@ if (!isset($errorPage)){
 	echo	'* '._('Mandatory fields');
 	echo 	'</form>';
 }
-?>

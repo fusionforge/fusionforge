@@ -77,4 +77,3 @@ class ContextualHelp extends FForge_SeleniumTestCase
 		$this->selectWindow("");
 	}
 }
-?>

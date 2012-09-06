@@ -401,5 +401,3 @@ ORDER BY f.most_recent_date DESC',
 	exit_error(_('No forum chosen'),'forums');
 
 }
-
-?>

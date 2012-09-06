@@ -62,4 +62,3 @@ sizeof($members) . " - isMember: " . ($group->isMember($g) ? "yes" : "no")
         return $output;
     }
 };
-?>

@@ -273,5 +273,3 @@ function project_summary($group_id,$mode,$no_table) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

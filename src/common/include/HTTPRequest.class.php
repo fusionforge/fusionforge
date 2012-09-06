@@ -134,5 +134,3 @@ class HTTPRequest extends Codendi_Request {
     }
 
 }
-
-?>

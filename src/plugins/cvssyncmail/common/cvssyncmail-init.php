@@ -29,5 +29,3 @@ register_plugin ($CVSSyncMailPlugin) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

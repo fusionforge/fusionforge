@@ -75,5 +75,3 @@ $graph->xaxis->SetTextLabelInterval($report->getGraphInterval());
 
 // Display the graph
 $graph->Stroke();
-
-?>

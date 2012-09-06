@@ -39,5 +39,3 @@ class ForumMLSearchEngine extends GroupSearchEngine {
 		return $renderer;
 	}
 }
-
-?>

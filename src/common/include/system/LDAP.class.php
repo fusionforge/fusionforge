@@ -730,5 +730,3 @@ class LDAP extends UNIX {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

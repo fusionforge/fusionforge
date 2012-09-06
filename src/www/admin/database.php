@@ -175,5 +175,3 @@ if ($displaydb) {
 <?php
 
 site_admin_footer(array());
-
-?>

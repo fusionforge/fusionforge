@@ -300,4 +300,3 @@ function GeneratePageasXML($content, $title, $page_revision = false, $args = fal
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

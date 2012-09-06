@@ -41,4 +41,3 @@ class DEBDebian60Tests
 if (PHPUnit_MAIN_METHOD == 'AllTests::main') {
 	AllTests::main();
 }
-?>

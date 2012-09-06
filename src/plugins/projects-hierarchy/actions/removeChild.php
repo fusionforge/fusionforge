@@ -32,4 +32,3 @@ if ($child_id && $projectsHierarchy->removeChild($id, $child_id))
 	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Successfully removed child'));
 
 $projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Failed to removed child'));
-?>

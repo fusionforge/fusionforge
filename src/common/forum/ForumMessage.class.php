@@ -890,5 +890,3 @@ Or reply to this e-mail entering your response between the following markers:
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -460,5 +460,3 @@ if (getStringFromRequest('add_forum')) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

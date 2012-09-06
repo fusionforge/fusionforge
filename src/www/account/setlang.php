@@ -40,5 +40,3 @@ remembered next time you visit the site.
 <?php
 
 echo $HTML->footer(array());
-
-?>

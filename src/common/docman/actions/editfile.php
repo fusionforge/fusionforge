@@ -111,4 +111,3 @@ if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $
 
 $return_msg = sprintf(_('Document %s updated successfully.'), $filename);
 session_redirect($urlparam.'&feedback='.urlencode($return_msg));
-?>

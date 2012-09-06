@@ -30,5 +30,3 @@ register_plugin ($soapadminPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

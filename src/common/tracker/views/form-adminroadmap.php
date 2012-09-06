@@ -505,5 +505,3 @@ if (! isset($ihm) || $ihm !== true) {
 }
 
 $atfh->footer();
-
-?>

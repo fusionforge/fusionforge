@@ -30,5 +30,3 @@ register_plugin ($MediaWikiPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

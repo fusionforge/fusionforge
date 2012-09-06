@@ -114,4 +114,3 @@ class Widget_MyLatestSvnCommits extends Widget {
         return true;
     }
 }
-?>

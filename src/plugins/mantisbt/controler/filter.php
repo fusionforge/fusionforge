@@ -200,4 +200,3 @@ EOT;
 		'<input type="submit" value="'._('Apply filter').'" /></div>';
 	echo '</form>';
 }
-?>

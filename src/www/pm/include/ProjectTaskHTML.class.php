@@ -251,5 +251,3 @@ class ProjectTaskHTML extends ProjectTask {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

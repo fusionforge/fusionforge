@@ -1527,7 +1527,3 @@ class CJP_StandardConnector
 		return fread($connection, $chunksize);
 	}
 }
-
-
-
-?>

@@ -31,5 +31,3 @@ register_plugin ($ArchPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

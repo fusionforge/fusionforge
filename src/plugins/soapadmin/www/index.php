@@ -109,5 +109,3 @@ function soapadmin_User_Header($params) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

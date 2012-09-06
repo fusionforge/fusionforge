@@ -77,5 +77,3 @@ abstract class HudsonWidget extends Widget {
     }
 
 }
-
-?>

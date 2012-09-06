@@ -79,5 +79,3 @@ frs_admin_header(array('title'=>_('Release Edit/File Releases'),'group'=>$group_
 	</form>';
 
 frs_admin_footer();
-
-?>

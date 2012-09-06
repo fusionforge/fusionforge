@@ -57,5 +57,3 @@ scm_header(array('title'=>_('SCM Repository Reporting'),'group'=>$group_id));
 <?php
 
 scm_footer();
-
-?>

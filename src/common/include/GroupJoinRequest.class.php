@@ -307,5 +307,3 @@ Comments by the user:
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

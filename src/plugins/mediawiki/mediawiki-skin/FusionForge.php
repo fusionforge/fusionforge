@@ -406,5 +406,3 @@ class FusionForgeTemplate extends QuickTemplate {
 	}
 
 } // end of class
-
-?>

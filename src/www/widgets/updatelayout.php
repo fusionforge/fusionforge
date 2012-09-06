@@ -122,4 +122,3 @@ if ($owner) {
 if (!$request->isAjax()) {
     htmlRedirect($redirect);
 }
-?>

@@ -108,5 +108,3 @@ class DocumentGroupHTML extends Error {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -98,4 +98,3 @@ class WikiDB_SQL extends WikiDB
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

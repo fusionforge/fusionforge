@@ -587,4 +587,3 @@ if (getStringFromRequest('add_extrafield')) {
 		}
 	}
 }
-?>

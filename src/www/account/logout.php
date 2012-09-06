@@ -57,4 +57,3 @@ if ($return_to) {
 }else{
 	header('Location: '.util_make_url ('/'));
 }
-?>

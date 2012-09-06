@@ -42,5 +42,3 @@ class mantisBT_Widget_ProjectLastIssues extends Widget {
 		return '<div class="warning">'._('Not yet implemented').'</div>';
 	}
 }
-
-?>

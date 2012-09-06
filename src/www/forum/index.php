@@ -98,5 +98,3 @@ if ($group_id) {
 	exit_no_group();
 
 }
-
-?>

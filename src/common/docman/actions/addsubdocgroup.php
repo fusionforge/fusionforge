@@ -66,4 +66,3 @@ if ($dirid) {
 
 $return_msg = _('Document folder successfully created.');
 session_redirect($urlredirect.'&view=listfile&dirid='.$dg->getID().'&feedback='.urlencode($return_msg));
-?>

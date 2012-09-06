@@ -110,5 +110,3 @@ class HudsonBuild {
         return format_date(_("Y-m-d H:i"), substr($this->getTimestamp(), 0, -3));
     }
 }
-
-?>

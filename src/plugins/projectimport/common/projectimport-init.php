@@ -28,5 +28,3 @@ register_plugin ($ProjectImportPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

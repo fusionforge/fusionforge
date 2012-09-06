@@ -75,5 +75,3 @@ if (!$ac || !is_object($ac)) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -38,4 +38,3 @@ class CDXCentos52Tests
 if (PHPUnit_MAIN_METHOD == 'AllTests::main') {
 	AllTests::main();
 }
-?>

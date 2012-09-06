@@ -181,5 +181,3 @@ class ForumML_FileStorageTest extends UnitTestCase {
     }
 
 }
-
-?>

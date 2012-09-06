@@ -148,5 +148,3 @@ function cron_remove_lock($name) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

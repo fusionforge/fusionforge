@@ -42,5 +42,3 @@ echo $pluginCompactPreview->display_project_html_compact_preview($project, $titl
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

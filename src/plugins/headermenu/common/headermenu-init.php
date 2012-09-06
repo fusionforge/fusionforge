@@ -26,5 +26,3 @@ require_once $gfplugins.'headermenu/common/headermenuPlugin.class.php';
 $headermenuPluginObject = new headermenuPlugin;
 
 register_plugin($headermenuPluginObject);
-
-?>

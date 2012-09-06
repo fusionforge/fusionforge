@@ -143,5 +143,3 @@ function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

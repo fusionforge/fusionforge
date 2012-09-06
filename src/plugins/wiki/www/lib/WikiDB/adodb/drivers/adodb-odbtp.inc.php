@@ -624,5 +624,3 @@ class ADORecordSet_odbtp extends ADORecordSet {
 		return @odbtp_free_query($this->_queryID);
 	}
 }
-
-?>

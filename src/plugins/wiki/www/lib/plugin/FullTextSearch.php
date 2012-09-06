@@ -171,4 +171,3 @@ class _PageList_Column_hilight extends _PageList_Column {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

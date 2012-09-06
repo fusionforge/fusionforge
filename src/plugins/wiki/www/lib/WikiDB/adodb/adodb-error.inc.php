@@ -250,4 +250,3 @@ static $MAP = array(
 	   
 	return $MAP;
 }
-?>

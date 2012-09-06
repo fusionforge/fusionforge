@@ -350,4 +350,3 @@ class Cache_Graphics extends Cache {
     
     
 } // end class Cache_Graphics
-?>

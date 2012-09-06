@@ -164,5 +164,3 @@ class OslcGroupCompactResource extends GroupCompactResource {
 					'">'. $name . '</a>';
 	}
 }
-
-?>

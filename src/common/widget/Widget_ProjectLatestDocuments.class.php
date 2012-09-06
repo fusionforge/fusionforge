@@ -139,5 +139,3 @@ class Widget_ProjectLatestDocuments extends Widget {
 	}
 
 }
-
-?>

@@ -31,5 +31,3 @@ if ($bookmark_id) {
 	bookmark_delete ($bookmark_id);
 	session_redirect('/my/');
 }
-
-?>

@@ -58,5 +58,3 @@ if ( !$group_id ) {
 session_require_perm ('project_read', $group_id);
 
 echo project_summary($group_id,$mode,$no_table);
-
-?>

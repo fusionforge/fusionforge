@@ -48,5 +48,3 @@ class ForumSearchEngine extends GroupSearchEngine {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

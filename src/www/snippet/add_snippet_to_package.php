@@ -204,5 +204,3 @@ AND snippet_package_item.snippet_package_version_id=$1',
 	exit_not_logged_in();
 
 }
-
-?>

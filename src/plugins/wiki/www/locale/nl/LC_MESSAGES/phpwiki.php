@@ -150,5 +150,3 @@ $locale["version %d"] = "versie %d";
 $locale["version %s"] = "versie %s";
 $locale["version <em>%s</em>"] =
    "versie <em>%s</em>";
-
-?>

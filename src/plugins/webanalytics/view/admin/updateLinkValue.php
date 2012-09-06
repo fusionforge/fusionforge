@@ -48,5 +48,3 @@ if (is_array($linkValues)) {
 	$error_msg = _('Cannot retrieve value for this link:').' '.$linkId;
 	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
 }
-
-?>

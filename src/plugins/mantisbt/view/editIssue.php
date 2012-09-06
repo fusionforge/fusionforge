@@ -228,4 +228,3 @@ if (!isset($errorPage)){
 	echo	'</div>';
 	echo	'</form>';
 }
-?>

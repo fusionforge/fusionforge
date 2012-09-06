@@ -70,5 +70,3 @@ function ReportUserAdded($span,$start=0,$end=0) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

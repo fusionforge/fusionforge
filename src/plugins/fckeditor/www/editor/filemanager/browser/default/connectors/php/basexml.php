@@ -68,4 +68,3 @@ function SendError( $number, $text )
 
 	exit ;
 }
-?>

@@ -84,4 +84,3 @@ while($row = db_fetch_array($result)) {
 		echo "Erreur";
 	}
 }
-?>

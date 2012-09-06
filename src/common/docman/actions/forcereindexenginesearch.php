@@ -40,4 +40,3 @@ if (!$g->setDocmanForceReindexSearch($status))
 	session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($g->getErrorMessage()));
 
 session_redirect('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($return_msg));
-?>

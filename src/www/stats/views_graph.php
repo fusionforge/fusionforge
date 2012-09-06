@@ -107,5 +107,3 @@ $graph->SetyTitle(_('Views (RED)'));
 $graph->DrawAxis();
 //$graph->showDebug();
 $graph->ShowGraph('png');
-
-?>

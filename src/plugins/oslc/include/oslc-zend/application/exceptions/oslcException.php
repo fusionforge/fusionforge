@@ -70,5 +70,3 @@ class PreconditionFailedException extends oslcException
 	protected $code = 412;
 	protected $exception_details = "The ETag supplied in the If-Match request header value did not match that of the resource being modified";
 }
-
-?>

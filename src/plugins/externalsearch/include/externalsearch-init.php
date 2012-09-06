@@ -18,5 +18,3 @@ $externalSearchPluginObject = new ExternalSearchPlugin();
 register_plugin($externalSearchPluginObject) ;
 
 // End:
-
-?>

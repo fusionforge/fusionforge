@@ -66,5 +66,3 @@ echo '<h1>Welcome to '.$group->getPublicName().' project!</h1>
 <p>';
 
 echo $group->getDescription();
-
-?>

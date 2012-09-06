@@ -118,4 +118,3 @@ if ($res['success']) {
 } else {
 	$error_msg .= $res['errormessage'];
 }
-?>

@@ -41,5 +41,3 @@ class WikiGroupSearchEngine extends GroupSearchEngine {
 		return false;
 	}
 }
-
-?>

@@ -510,5 +510,3 @@ class HgPlugin extends SCMPlugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

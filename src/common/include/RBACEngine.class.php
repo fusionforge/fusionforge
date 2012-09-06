@@ -497,5 +497,3 @@ function forge_check_global_perm_for_user ($user, $section, $action = NULL) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

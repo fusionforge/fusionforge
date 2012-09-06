@@ -33,4 +33,3 @@ if (!$pluginExtSubProj->delExtSubProj($group_id, $url)) {
 
 $feedback = _('Sub project succesfully deleted.');
 session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name.'&feedback='.urlencode($feedback));
-?>

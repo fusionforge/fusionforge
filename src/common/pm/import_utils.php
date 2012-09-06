@@ -377,5 +377,3 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -1183,4 +1183,3 @@ class ADORecordset_oci8 extends ADORecordSet {
 		}
 	}
 }
-?>

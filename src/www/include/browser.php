@@ -115,5 +115,3 @@ echo "\nPlatform: ".browser_get_platform();
 echo "\nVersion: ".browser_get_version();
 echo "\nAgent: ".browser_get_agent();
 */
-
-?>

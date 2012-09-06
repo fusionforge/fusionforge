@@ -32,5 +32,3 @@ register_plugin ($hudsonPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -309,6 +309,3 @@ function &users_to_soap($usrs) {
 	}
 	return $return;
 }
-
-
-?>

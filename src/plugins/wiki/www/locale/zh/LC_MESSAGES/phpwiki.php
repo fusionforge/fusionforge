@@ -761,5 +761,3 @@ $locale["view the source of this page"] = "查看此頁面源碼";
 $locale["view this page"] = "查看此頁面";
 $locale["yesterday"] =
    "昨天";
-
-?>

@@ -122,5 +122,3 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		return ForumsSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }
-
-?>

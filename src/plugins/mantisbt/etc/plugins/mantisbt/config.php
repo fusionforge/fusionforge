@@ -37,5 +37,3 @@ $role['Manager'] = 70;
 $role['Concepteur'] = 55;
 $role['Collaborateur'] = 55;
 $role['Rapporteur'] = 55;
-
-?>

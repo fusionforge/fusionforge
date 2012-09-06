@@ -41,4 +41,3 @@ switch ($view) {
 		include ($gfcommon.'docman/views/help.php');
 	}
 }
-?>

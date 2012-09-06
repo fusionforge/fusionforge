@@ -153,6 +153,3 @@ function &groups_to_soap($grps) {
 	// since we have wsdl to describe return value
 	return $return;
 }
-
-
-?>

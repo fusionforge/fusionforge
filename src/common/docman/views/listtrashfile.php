@@ -216,4 +216,3 @@ echo '<div style="clear: both;" />';
 if (forge_check_perm('docman', $g->getID(), 'approve')) {
 	include ($gfcommon.'docman/views/editfile.php');
 }
-?>

@@ -25,4 +25,3 @@ class hudsonPluginDescriptor extends PluginDescriptor {
         $this->PluginDescriptor(_("Continuous Integration"), '1.0', _("Continuous Integration with Hudson"));
     }
 }
-?>

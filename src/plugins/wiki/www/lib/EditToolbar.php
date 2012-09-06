@@ -486,4 +486,3 @@ msg_repl_close     = '"._("Close")."'
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

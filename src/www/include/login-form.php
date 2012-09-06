@@ -105,5 +105,3 @@ function display_login_form($return_to = '/', $triggered = false, $full_page = f
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

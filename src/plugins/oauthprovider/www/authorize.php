@@ -160,5 +160,3 @@ try {
 
 }
 site_project_footer(array());
-
-?>

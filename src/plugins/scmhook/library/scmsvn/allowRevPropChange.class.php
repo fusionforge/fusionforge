@@ -36,4 +36,3 @@ class allowRevPropChange extends scmhook {
 		$this->needcopy    = 0;
 	}
 }
-?>

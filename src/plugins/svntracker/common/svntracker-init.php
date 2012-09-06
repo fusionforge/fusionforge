@@ -33,5 +33,3 @@ register_plugin ($svntrackerPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -192,5 +192,3 @@ function list_project_tag($group_id) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

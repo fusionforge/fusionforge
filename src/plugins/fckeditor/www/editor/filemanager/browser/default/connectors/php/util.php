@@ -34,4 +34,3 @@ function ConvertToXmlAttribute( $value )
 {
 	return utf8_encode( htmlspecialchars( $value ) ) ;
 }
-?>

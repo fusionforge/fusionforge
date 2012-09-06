@@ -165,5 +165,3 @@ function fix4csv ($value) {
 	$value =& str_replace('"', '""', $value);
 	return $value;
 }
-
-?>

@@ -214,4 +214,3 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	}
 	*/
 }
-?>

@@ -32,5 +32,3 @@ if (is_numeric($keyid)) {
 }
 
 session_redirect('/account/');
-
-?>

@@ -332,4 +332,3 @@ class getUsersByNameResponse_soap {
 	 */
 	public $user;
 }
-?>

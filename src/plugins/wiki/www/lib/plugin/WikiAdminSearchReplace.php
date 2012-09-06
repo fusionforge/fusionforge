@@ -277,4 +277,3 @@ function stri_replace($find,$replace,$string) {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

@@ -78,5 +78,3 @@ mail_header(array('title' => _('Permanently Delete Mailing List ') . $ml->getNam
 <?php
 
 mail_footer(array());
-
-?>

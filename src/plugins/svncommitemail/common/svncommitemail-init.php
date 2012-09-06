@@ -27,5 +27,3 @@ register_plugin (new SVNCommitEmailPlugin) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -36,4 +36,3 @@ if (!$mantisbt->updateGlobalConf($confArr)) {
 
 $feedback = _('MantisBT global configuration successfully updated.');
 session_redirect('/plugins/mantisbt/?type=globaladmin&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
-?>

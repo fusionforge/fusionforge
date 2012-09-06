@@ -87,4 +87,3 @@ if (isLogged()) {
 } else {
 	exit_not_logged_in();
 }
-?>

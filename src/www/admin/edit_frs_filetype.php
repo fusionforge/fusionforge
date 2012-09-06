@@ -27,5 +27,3 @@ $primary_key = 'type_id';
 
 require_once '../env.inc.php';
 include_once $gfwww.'admin/admin_table.php';
-
-?>

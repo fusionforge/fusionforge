@@ -38,4 +38,3 @@ try {
 }
 $feedback = _('Note deleted successfully');
 session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
-?>

@@ -155,5 +155,3 @@ class Widget_MyProjects extends Widget {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

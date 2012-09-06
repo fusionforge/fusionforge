@@ -63,5 +63,3 @@ class IncludePageTest extends phpwiki_TestCase {
 	//TODO: check content for found and extracted section
     }
 }
-
-?>

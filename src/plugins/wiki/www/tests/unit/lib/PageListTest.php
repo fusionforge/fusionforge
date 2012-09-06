@@ -26,6 +26,3 @@ class PageListTest extends phpwiki_TestCase {
         //print_r($pl->getContent());
     }
 }
-
-
-?>

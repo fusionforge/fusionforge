@@ -40,5 +40,3 @@ $hook_params['user_id'] = $user_id;
 plugin_hook ("scm_browser_page", $hook_params);
 
 scm_footer();
-
-?>

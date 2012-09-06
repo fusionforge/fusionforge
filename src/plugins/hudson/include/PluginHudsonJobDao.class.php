@@ -134,5 +134,3 @@ class PluginHudsonJobDao extends DataAccessObject {
 	}
 
 }
-
-?>

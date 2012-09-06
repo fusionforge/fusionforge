@@ -56,5 +56,3 @@ $ath->adminHeader(array ('title'=>$title));
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

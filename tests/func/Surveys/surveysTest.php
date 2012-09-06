@@ -166,4 +166,3 @@ class Surveys extends FForge_SeleniumTestCase
 //		$this->assertFalse($this->isTextPresent("My first survey: L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils"));
 	}
 }
-?>

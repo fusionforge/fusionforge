@@ -26,5 +26,3 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/session.php';
 
 session_redirect('/account/');
-
-?>

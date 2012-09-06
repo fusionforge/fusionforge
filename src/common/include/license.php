@@ -85,5 +85,3 @@ function license_selectbox($title='license_id',$selected='xzxz') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

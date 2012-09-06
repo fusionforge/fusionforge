@@ -37,4 +37,3 @@ if (!$projectsHierarchy->updateConf($group_id, $confArr)) {
 
 $feedback = _('Projects Hierarchy configuration successfully updated.');
 session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name.'&feedback='.urlencode($feedback));
-?>

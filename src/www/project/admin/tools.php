@@ -352,5 +352,3 @@ echo '</tr>';
 echo '</table>';
 
 project_admin_footer(array());
-
-?>

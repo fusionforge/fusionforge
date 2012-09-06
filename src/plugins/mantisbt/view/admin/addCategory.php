@@ -36,4 +36,3 @@ echo '</td>';
 echo $HTML->boxBottom();
 echo '</tr></table>';
 echo '</form>';
-?>

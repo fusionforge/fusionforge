@@ -130,5 +130,3 @@ $graph->Add( $todayline);
 
 // .. and stroke the graph
 $graph->Stroke();
-
-?>

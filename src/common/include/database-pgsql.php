@@ -692,5 +692,3 @@ function db_qpa_to_string ($qpa) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

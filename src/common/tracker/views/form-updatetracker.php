@@ -87,5 +87,3 @@ $ath->adminHeader(array ('title'=>sprintf(_('Update settings for %s'),$ath->getN
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

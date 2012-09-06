@@ -125,4 +125,3 @@ class Widget_MyMonitoredFp extends Widget {
         return true;
     }
 }
-?>

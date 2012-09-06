@@ -100,5 +100,3 @@ class Authentication {
         $this->session->unsetAuthenticatedWebid();
     }
 }
-
-?>

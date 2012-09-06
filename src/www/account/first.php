@@ -37,5 +37,3 @@ printf(_('--the %1$s staff.'), $forge_name);
 print '</p>';
 
 site_user_footer(array());
-
-?>

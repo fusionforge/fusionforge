@@ -257,5 +257,3 @@ function show_highest_ranked_projects() {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

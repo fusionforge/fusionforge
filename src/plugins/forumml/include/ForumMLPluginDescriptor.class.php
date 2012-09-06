@@ -26,4 +26,3 @@ class ForumMLPluginDescriptor extends PluginDescriptor {
         parent::__construct('ForumML', 'v2.0', $GLOBALS['Language']->getText('plugin_forumml', 'descriptor_description'));
     }
 }
-?>

@@ -185,5 +185,3 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

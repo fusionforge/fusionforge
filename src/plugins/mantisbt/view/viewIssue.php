@@ -142,4 +142,3 @@ if (!isset($errorPage)) {
 		include($gfplugins.$mantisbt->name."/view/viewNote.php");
 		include($gfplugins.$mantisbt->name."/view/viewAttachment.php");
 	}
-?>

@@ -393,4 +393,3 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 
 	}
 }
-?>

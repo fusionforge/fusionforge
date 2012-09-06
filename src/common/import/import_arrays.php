@@ -2,6 +2,3 @@
 
 
 //Default values for trackers
-
-
-?>

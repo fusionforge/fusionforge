@@ -75,4 +75,3 @@ switch ($view) {
 		include 'mantisbt/view/viewIssues.php';
 	}
 }
-?>

@@ -30,5 +30,3 @@ register_plugin ($globaldashboardPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

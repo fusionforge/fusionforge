@@ -131,5 +131,3 @@ $graph->Add( $p1);
 
 // Display the graph
 $graph->Stroke();
-
-?>

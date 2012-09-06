@@ -287,5 +287,3 @@ function get_news_name($id) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -75,4 +75,4 @@ if (forge_get_config('require_unique_email')) {
 <p><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></p>
 </form>
 
-<?php $HTML->footer(array()); ?>
+<?php $HTML->footer(array());

@@ -259,5 +259,3 @@ exit (0);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

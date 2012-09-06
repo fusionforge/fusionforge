@@ -174,5 +174,3 @@ if (getStringFromRequest('add_to_task')) {
 }
 
 $ath->footer(array());
-
-?>

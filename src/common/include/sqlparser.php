@@ -494,5 +494,3 @@ function parse_sql_file($filename) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -179,4 +179,3 @@ class _PageList_Column_WantedPages_links extends _PageList_Column {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

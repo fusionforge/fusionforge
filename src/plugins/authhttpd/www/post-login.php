@@ -64,5 +64,3 @@ if ($return_to) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

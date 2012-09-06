@@ -7,5 +7,3 @@ $default_cpold_server = forge_get_config('scm_host');
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

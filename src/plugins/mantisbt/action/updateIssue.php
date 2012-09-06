@@ -182,5 +182,3 @@ try {
 
 $feedback = _('Task succeeded.');
 session_redirect($redirect_url.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
-
-?>

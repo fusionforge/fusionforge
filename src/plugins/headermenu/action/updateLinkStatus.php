@@ -37,5 +37,3 @@ if (!empty($idLink)) {
 }
 $warning_msg = _('Missing Link or status to be updated.');
 session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
-
-?>

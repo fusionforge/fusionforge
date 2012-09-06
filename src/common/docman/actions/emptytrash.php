@@ -40,4 +40,3 @@ if (!$dm->cleanTrash()) {
 
 $return_msg = _('Emptied Trash successfully.');
 session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&feedback='.urlencode($return_msg));
-?>

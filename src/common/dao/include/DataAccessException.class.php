@@ -19,4 +19,3 @@
  */
 class DataAccessException extends Exception {
 }
-?>

@@ -65,5 +65,3 @@ class SystemEvent_MAILMAN_LIST_CREATE extends SystemEvent {
     }
 
 }
-
-?>

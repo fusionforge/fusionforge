@@ -41,5 +41,3 @@ WHERE close_date=0 AND support_status_id NOT IN (0,1)
 if (!$res) print "error<br />";
 
 echo "Affected rows: ",db_affected_rows($res),"<br />";
-
-?>

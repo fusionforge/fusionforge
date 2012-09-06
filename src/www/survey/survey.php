@@ -59,5 +59,3 @@ if (!$survey_id) {
 }
 
 $sh->footer(array());
-
-?>

@@ -116,5 +116,3 @@ function global_role_box ($name,$selected='xzxzxz') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

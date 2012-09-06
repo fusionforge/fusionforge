@@ -29,5 +29,3 @@ register_plugin ($ContribTrackerPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

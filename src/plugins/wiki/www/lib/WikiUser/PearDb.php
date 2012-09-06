@@ -260,4 +260,3 @@ extends _DbPassUser
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

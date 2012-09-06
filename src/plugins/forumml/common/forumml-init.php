@@ -32,5 +32,3 @@ register_plugin ($forummlPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

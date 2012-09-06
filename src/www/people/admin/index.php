@@ -161,4 +161,3 @@ if (forge_check_global_perm('forge_admin')) {
 } else {
 	exit_permission_denied('home');
 }
-?>

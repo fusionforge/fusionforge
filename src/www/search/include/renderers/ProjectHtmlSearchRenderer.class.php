@@ -109,5 +109,3 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	}
 
 }
-
-?>

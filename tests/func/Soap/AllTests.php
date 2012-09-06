@@ -79,4 +79,3 @@ class Soap_AllTests
 if (PHPUnit_MAIN_METHOD == 'Soap_AllTests::main') {
     Soap_AllTests::main();
 }
-?>

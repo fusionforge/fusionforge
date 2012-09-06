@@ -155,5 +155,3 @@ if (db_numrows($res_db) > 0) {
 }
 
 project_admin_footer(array());
-
-?>

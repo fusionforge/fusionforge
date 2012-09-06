@@ -149,4 +149,3 @@ function getUserRdfRemoteAccounts($user_profile_url) {
 	// TODO fetch user accounts from its foaf profile using
 	// an RDF parser.
 }
-?>

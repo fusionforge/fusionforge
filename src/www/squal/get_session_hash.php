@@ -19,5 +19,3 @@ if ($success) {
 } else {
 	echo 'ERROR - '.$feedback;
 }
-
-?>

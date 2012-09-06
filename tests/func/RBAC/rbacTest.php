@@ -564,4 +564,3 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("Temporary role"));
 	}
 }
-?>

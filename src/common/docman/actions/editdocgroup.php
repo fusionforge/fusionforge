@@ -88,4 +88,3 @@ if ($childgroup_id)
 	$return_msg .= ' '.sprintf(_('on project %s'), $g->getPublicName());
 
 session_redirect($urlredirect.'&feedback='.urlencode($return_msg));
-?>

@@ -68,4 +68,3 @@ while ($row_logins = db_fetch_array($res_logins)) {
 </table>
 <?php
 $HTML->footer(array());
-?>

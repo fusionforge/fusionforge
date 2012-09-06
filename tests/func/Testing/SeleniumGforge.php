@@ -436,5 +436,3 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

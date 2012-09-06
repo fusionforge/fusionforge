@@ -100,4 +100,3 @@ if (isset($childgroup_id) && $childgroup_id) {
 	';
 }
 echo '</div>';
-?>

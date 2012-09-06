@@ -58,4 +58,3 @@ $HTML->header(array('title'=>sprintf(_('%1$s Site Project Statistical Comparison
 	</div>
 	<?php
 $HTML->footer( array() );
-?>

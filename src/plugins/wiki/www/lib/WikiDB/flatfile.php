@@ -54,4 +54,3 @@ class WikiDB_flatfile extends WikiDB
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-?>

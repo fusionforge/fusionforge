@@ -32,4 +32,3 @@ if ($sub_project_id && $projectsHierarchy->addChild($id, $sub_project_id))
 	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Successfully added child'));
 
 $projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Failed to add child'));
-?>

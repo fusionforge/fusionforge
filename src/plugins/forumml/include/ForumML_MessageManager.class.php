@@ -40,5 +40,3 @@ class ForumML_MessageManager {
     }
 
 }
-
-?>

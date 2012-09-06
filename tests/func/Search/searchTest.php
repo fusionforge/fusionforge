@@ -613,4 +613,3 @@ class Search extends FForge_SeleniumTestCase
 	}
 
 }
-?>

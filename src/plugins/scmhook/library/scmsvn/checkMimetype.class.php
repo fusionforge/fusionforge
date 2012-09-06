@@ -36,4 +36,3 @@ class checkMimetype extends scmhook {
 		$this->needcopy = 0;
 	}
 }
-?>

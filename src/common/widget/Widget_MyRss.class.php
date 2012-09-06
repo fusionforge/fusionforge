@@ -36,4 +36,3 @@ class Widget_MyRss extends Widget_Rss {
         return _("Allow you to include public rss (or atom) feeds into your personal page.");
     }
 }
-?>

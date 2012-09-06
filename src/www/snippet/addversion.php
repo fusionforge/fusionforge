@@ -247,5 +247,3 @@ function show_add_snippet_box() {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

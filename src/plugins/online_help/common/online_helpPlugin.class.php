@@ -93,5 +93,3 @@ class online_helpPlugin extends Plugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

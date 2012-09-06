@@ -36,5 +36,3 @@ $data=base64_decode(db_result($res,0,'bin_data'));
 Header('Content-disposition: filename="'.str_replace('"', '', $filename).'"');
 Header("Content-type: $type");
 echo $data;
-
-?>

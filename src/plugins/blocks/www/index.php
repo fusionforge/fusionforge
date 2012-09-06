@@ -390,5 +390,3 @@ if (!$type) {
 }
 
 site_project_footer(array());
-
-?>

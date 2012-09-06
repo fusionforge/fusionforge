@@ -74,4 +74,3 @@ if (count($menu_text)) {
 }
 
 plugin_hook("blocks", "doc index");
-?>

@@ -404,4 +404,3 @@ function artifactUpdateView($session_ser, $group_id, $group_artifact_id, $query_
 
 	return $query->getID();
 }
-?>

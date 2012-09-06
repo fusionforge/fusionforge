@@ -85,5 +85,3 @@ class FRSFileType extends Error {
 	}
 
 }
-
-?>

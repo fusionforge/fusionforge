@@ -433,5 +433,3 @@ function people_show_job_list($result) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

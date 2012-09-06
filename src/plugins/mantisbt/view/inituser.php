@@ -73,4 +73,3 @@ echo ' >Your Password</label></td><td><input type="text" size="50" maxlength="25
 echo '</table>';
 echo '<input type="submit" value="'._('Initialize').'" />';
 echo '</form>';
-?>

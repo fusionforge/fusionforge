@@ -23,4 +23,3 @@ $test_server->add_signature_method($plaintext_method);
 $test_server->add_signature_method($rsa_method);
 
 $sig_methods = $test_server->get_signature_methods();
-?>

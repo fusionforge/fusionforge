@@ -71,5 +71,3 @@ function bookmark_delete ($bookmark_id) {
 			 array ($bookmark_id,
 				user_getid()));
 }
-
-?>

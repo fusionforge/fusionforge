@@ -76,5 +76,3 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		return $return;
 	}
 }
-
-?>

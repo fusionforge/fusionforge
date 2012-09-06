@@ -190,4 +190,3 @@ class commitTracker extends scmhook {
 				       _('Diff To').' '.$PrevVersion);
 	}
 }
-?>

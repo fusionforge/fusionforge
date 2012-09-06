@@ -232,5 +232,3 @@ class Codendi_HTMLPurifier {
     }
 
 }
-
-?>

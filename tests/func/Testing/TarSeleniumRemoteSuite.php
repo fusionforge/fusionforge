@@ -9,4 +9,3 @@ class TarSeleniumRemoteSuite extends SeleniumRemoteSuite
 		parent::setUp();
 	}
 }
-?>

@@ -81,5 +81,3 @@ if (!$result || db_numrows($result) < 1) {
 
 	frs_footer();
 }
-
-?>

@@ -45,5 +45,3 @@ function get_canned_response($id) {
 		return db_result($result, 0, 'body');
 	}
 }
-
-?>

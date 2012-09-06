@@ -30,4 +30,3 @@ class MediaWikiPluginDescriptor extends PluginDescriptor {
         $this->PluginDescriptor(_('Mediawiki'), 'v1.0', _('Mediawiki integration in the forge'));
     }
 }
-?>

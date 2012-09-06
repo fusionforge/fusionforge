@@ -1410,5 +1410,3 @@ class Layout extends Error {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

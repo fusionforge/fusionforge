@@ -60,4 +60,3 @@ if (!$ss) {
 }
 
 $sh->footer(array());
-?>

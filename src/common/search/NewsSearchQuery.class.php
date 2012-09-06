@@ -91,5 +91,3 @@ class NewsSearchQuery extends SearchQuery {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

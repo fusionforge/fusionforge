@@ -112,5 +112,3 @@ while ($row = db_fetch_array($res)) {
 }
 
 cron_debug("INFO end of updateScmRepo main cronjob");
-
-?>

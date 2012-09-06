@@ -38,5 +38,3 @@ register_plugin ($twitterPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

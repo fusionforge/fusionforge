@@ -30,5 +30,3 @@ register_plugin ($MoinMoinPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

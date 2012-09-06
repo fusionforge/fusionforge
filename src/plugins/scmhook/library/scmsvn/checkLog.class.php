@@ -35,4 +35,3 @@ class checkLog extends scmhook {
 		$this->needcopy = 0;
 	}
 }
-?>

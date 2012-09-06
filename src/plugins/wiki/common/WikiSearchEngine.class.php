@@ -53,5 +53,3 @@ class WikiSearchEngine extends GFSearchEngine {
 		return $renderer;
 	}
 }
-
-?>

@@ -48,5 +48,3 @@ if (!getStringFromRequest('search')) {
 	$searchQuery = new AdvancedSearchHtmlSearchRenderer($words, $offset, $exact, $group_id);
 	$searchQuery->flush();
 }
-
-?>
