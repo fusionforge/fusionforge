@@ -37,10 +37,11 @@
  *
  * in:	array x (Value to be encoded)
  * in:	string indent or bool false to skip beautification
+ * in:	integer	(optional) recursion depth (default: 32)
  * out:	string encoded
  */
-function minijson_encode($x, $ri="") {
-	if (!isset($x) || is_null($x) || (is_float($x) &&
+function minijson_encode($x, $ri="", $depth=32) {
+	if (!$depth-- || !isset($x) || is_null($x) || (is_float($x) &&
 	    (is_nan($x) || is_infinite($x))))
 		return "null";
 	if ($x === true)
@@ -171,13 +172,13 @@ function minijson_encode($x, $ri="") {
 			foreach ($s as $v) {
 				if ($first)
 					$first = false;
-				else if ($ri === false)
+				elseif ($ri === false)
 					$rs .= ",";
 				else
 					$rs .= ",\n";
 				if ($si !== false)
 					$rs .= $si;
-				$rs .= minijson_encode($x[$v], $si);
+				$rs .= minijson_encode($x[$v], $si, $depth);
 			}
 			if ($ri !== false)
 				$rs .= "\n" . $ri;
@@ -192,18 +193,18 @@ function minijson_encode($x, $ri="") {
 		foreach ($k as $v) {
 			if ($first)
 				$first = false;
-			else if ($ri === false)
+			elseif ($ri === false)
 				$rs .= ",";
 			else
 				$rs .= ",\n";
 			if ($si !== false)
 				$rs .= $si;
-			$rs .= minijson_encode((string)$v, false);
+			$rs .= minijson_encode((string)$v, false, $depth);
 			if ($ri === false)
 				$rs .= ":";
 			else
 				$rs .= ": ";
-			$rs .= minijson_encode($x[$v], $si);
+			$rs .= minijson_encode($x[$v], $si, $depth);
 		}
 		if ($ri !== false)
 			$rs .= "\n" . $ri;
@@ -213,8 +214,8 @@ function minijson_encode($x, $ri="") {
 
 	/* treat everything else as array or string */
 	if (!is_scalar($x))
-		return minijson_encode((array)$x, $ri);
-	return minijson_encode((string)$x, $ri);
+		return minijson_encode((array)$x, $ri, $depth);
+	return minijson_encode((string)$x, $ri, $depth);
 }
 
 /**
