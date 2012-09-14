@@ -3,5 +3,5 @@
 #
 
 # Create the shell users accounts and groups home directories
-15 * * * * root $PHP $FFCRON/homedirs.php
+15 * * * * root forge_run_job homedirs.php
 

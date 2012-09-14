@@ -3,4 +3,4 @@
 #
 
 # Mailing-list creation
-55 * * * * root $PHP $FFCRON/mail/mailing_lists_create.php
+55 * * * * root forge_run_job mail/mailing_lists_create.php

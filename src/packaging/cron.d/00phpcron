@@ -1,10 +1,1 @@
-FFDIR=/usr/share/@OLDPACKAGE@
-FFCRON=/usr/share/@OLDPACKAGE@/cronjobs
-FFUSER=@OLDPACKAGE@
-
-# You may need to change the pathname to php CLI (command line interface)
-PHP="/usr/bin/php -q -d include_path=.:/etc/@OLDPACKAGE@:/usr/share/@OLDPACKAGE@:/usr/share/@OLDPACKAGE@/www/include"
-
-# Don't mail command output to anyone.
-MAILTO=""
-
+PATH=/usr/share/@OLDPACKAGE@/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
