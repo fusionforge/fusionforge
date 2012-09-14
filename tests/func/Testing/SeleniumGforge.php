@@ -111,7 +111,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function cron($cmd)
 	{
-		$this->runCommand("/usr/bin/php -q ".HOME_FORGE."/$cmd");
+		$this->runCommand(RUN_JOB_PATH."forge_run_job $cmd");
+	}
+
+	protected function cron_for_plugin($cmd, $plugin)
+	{
+		$this->runCommand(RUN_JOB_PATH."forge_run_plugin_job $plugin $cmd");
 	}
 
 	protected function init() {
@@ -284,7 +289,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->init($project, $user);
 
 		// Run manually the cron for creating the svn structure.
-		$this->cron("cronjobs/create_scm_repos.php");
+		$this->cron("create_scm_repos.php");
 	}
 
 	protected function login($username)

@@ -76,7 +76,7 @@ class SvnCommit2Tracker extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		// Run the svn create to get the repository with the hooks.
-		$this->cron("cronjobs/create_scm_repos.php");
+		$this->cron("create_scm_repos.php");
 
 		$svn = "svn --non-interactive --no-auth-cache";
 		$url = URL."svn/projecta/";
