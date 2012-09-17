@@ -89,6 +89,7 @@ echo "Set forge admin password"
 ssh root@$HOST "/usr/share/gforge/bin/forge_set_password $FORGE_ADMIN_USERNAME $FORGE_ADMIN_PASSWORD"
 ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload"
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-buildbot.ini"
+ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
 
 # Dump database
 echo "Dump freshly installed database"

@@ -27,25 +27,32 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 	
 	function testMoinMoin()
 	{
+		$this->activatePlugin('moinmoin');
+		
 		$this->populateStandardTemplate('empty');
 		$this->init();
-		
-		$this->click("link=Admin");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Tools");
-		$this->waitForPageToLoad("30000");
+
+		$this->clickAndWait("link=Admin");
+		$this->clickAndWait("link=Tools");
 		$this->click("use_moinmoin");
-		$this->click("submit");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("submit");
 		$this->assertTrue($this->isTextPresent("Project information updated"));
+
+		// $this->gotoProject('ProjectA');
+		// $this->click("link=MoinMoinWiki");
+		// sleep(5); // MoinMoinWiki has no <h1> element
+		// $this->assertTrue($this->isTextPresent("ConfigurationError"));
 
 		$this->cron_for_plugin("create-wikis.php", "moinmoin");
 		sleep (5);
 
 		$this->gotoProject('ProjectA');
 		$this->click("link=MoinMoinWiki");
-		sleep (10); // No <h1> in MoinMoin's default layout, so waitForPageToLoad() doesn't work
+		sleep(5); // MoinMoinWiki has no <h1> element
 		$this->assertFalse($this->isTextPresent("ConfigurationError"));
+		$this->assertFalse($this->isTextPresent("Wiki not created yet"));
+
+		// $this->click("link=Create New Page");
 	}
 }
 
