@@ -1,1 +1,2 @@
 usr/share/gforge/plugins/moinmoin/wsgi/moin.wsgi	var/lib/gforge/plugins/moinmoin/wikidata/moin.wsgi
+usr/share/gforge/plugins/moinmoin/www /usr/share/gforge/www/plugins/moinmoin
