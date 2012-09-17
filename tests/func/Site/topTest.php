@@ -46,7 +46,7 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class TopTester extends FForge_SeleniumTestCase
 {
-    function testWalkInTop()
+    function skiptestWalkInTop()
     {
 		$this->populateStandardTemplate('forums');
 		$this->init();
