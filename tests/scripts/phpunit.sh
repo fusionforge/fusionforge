@@ -51,7 +51,10 @@ if (is_executable ("$FORGE_HOME/bin/forge_run_job")) {
     define('RUN_JOB_PATH', "$FORGE_HOME/bin/");
 } elseif (is_executable ("$FORGE_HOME/src/utils/forge_run_job")) {
     define('RUN_JOB_PATH', "$FORGE_HOME/src/utils/");
-}
+} else {
+    print "Neither $FORGE_HOME/bin/forge_run_job nor $FORGE_HOME/src/utils/forge_run_job seem to be executable, dying.";
+    exit(1);
+}   
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'myadmin')
