@@ -45,7 +45,7 @@ ssh root@$HOST "yum install -y vnc-server ; mkdir -p /root/.vnc"
 ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
-$FORGE_HOME/tests/scripts/phpunit.sh func &> /var/log/phpunit.log &
+$FORGE_HOME/tests/scripts/phpunit.sh RPMCentosTests.php &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
 wait %1
 echo \$? > /root/phpunit.exitcode

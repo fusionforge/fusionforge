@@ -22,8 +22,8 @@ class DEBDebian60Tests
 		$suite = new DEBSeleniumRemoteSuite('PHPUnit');
 
 		// Selenium tests
-		$suite->addTestFiles(glob("func/Site/*Test.php"));
 		if (!defined('DB_INIT_CMD')) { define('PROJECTA','true'); }
+		$suite->addTestFiles(glob("func/Site/*Test.php"));
 		$suite->addTestFiles(glob("func/Trackers/*Test.php"));
 		$suite->addTestFiles(glob("func/Tasks/*Test.php"));
 		$suite->addTestFiles(glob("func/Docs/*Test.php"));
@@ -31,6 +31,8 @@ class DEBDebian60Tests
 		$suite->addTestFiles(glob("func/News/*Test.php"));
 		$suite->addTestFiles(glob("func/PluginsBlocks/*Test.php"));
 		$suite->addTestFiles(glob("func/PluginsMoinMoin/*Test.php"));
+		$suite->addTestFiles(glob("func/PluginsOnlineHelp/*Test.php"));
+//		$suite->addTestFiles(glob("func/PluginsSvnTracker/*Test.php"));
 		$suite->addTestFiles(glob("func/RBAC/*Test.php"));
 		$suite->addTestFiles(glob("func/Surveys/*Test.php"));
 		$suite->addTestFiles(glob("func/Search/*Test.php"));
