@@ -1,8 +1,11 @@
-fusionforge (5.2~rc1wheezy1) UNRELEASED; urgency=low
+fusionforge (5.2~rc1+1) unstable; urgency=low
 
   * Since this package was accidentally uploaded as native package,
     and there is a large delta to what’s in upstream SVN right now,
-    upload this deliberately as native package now.
+    upload this deliberately as native package now. The next upload
+    from FF SVN Branch_5_2 is 5.2~rc2 but will need to take special
+    care to exclude nōn-DFSG-free content again.
+  * DFSG: Remove minified ECMAscript and binary *.jar from the source
   * Add myself to uploaders
   * Opt out of Apport reports
   * Integrate with MediaWiki 1.19 (Closes: #679932)
@@ -10,11 +13,11 @@ fusionforge (5.2~rc1wheezy1) UNRELEASED; urgency=low
   * Move wikis to new (as of 2010-03-19, possibly by accident) data path
   * Check image upload is enabled before trying to do so (Closes: #679521)
   * Unbreak and silence the MediaWiki nightly dump cronjob (Closes: #680165)
-  * Remove minified ECMAscript and binary *.jar from the source
   * SECURITY: Upon user deletion, remove their Unix account as well
   * SECURITY: Do not disclose inaccessible groups on user_home/toplist
+  * Fix IFRAME used by the Widget code if no ECMAscript is available
 
- -- Thorsten Glaser <tg@mirbsd.de>  Mon, 03 Sep 2012 14:07:16 +0200
+ -- Thorsten Glaser <tg@mirbsd.de>  Thu, 20 Sep 2012 13:51:30 +0200
 
 fusionforge (5.2~rc1-5) unstable; urgency=low
 

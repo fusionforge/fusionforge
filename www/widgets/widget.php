@@ -90,7 +90,7 @@ if ($request->valid($vOwner)) {
                             }
                             break;
                         case 'iframe':
-                            echo '<html><head>';
+                            echo '<html><head><title>Widget IFRAME</title>';
                             $GLOBALS['HTML']->displayStylesheetElements();
                             echo '</head><body class="main_body_row contenttable">';
                             $widget->loadContent($instance_id);
