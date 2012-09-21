@@ -110,12 +110,15 @@ fusionforge (5.1.1-9) UNRELEASED; urgency=low
   [ Roland Mas ]
   * Reinstate code running the Mediawiki SQL initialisation code from the
     package's postinst.
+  * Fail configuration of the -db-postgresql package if no database is
+    available, to prevent other packages from breaking things due to
+    misconfiguration.
 
   [ Thorsten Glaser ]
   * SECURITY: Upon user deletion, remove their Unix account as well
   * SECURITY: Do not disclose inaccessible groups on user_home/toplist
 
- -- Thorsten Glaser <tg@mirbsd.de>  Mon, 03 Sep 2012 14:07:16 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 21 Sep 2012 16:05:28 +0200
 
 fusionforge (5.1.1-8) unstable; urgency=low
 
