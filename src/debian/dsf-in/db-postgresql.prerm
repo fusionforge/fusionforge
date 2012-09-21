@@ -16,13 +16,9 @@ then
 	then 
 		export pg_hba_dir=/etc/postgresql/${pg_version}/main
 	else
-		echo "No database found online on port 5432"
-		echo "Couldn't initialize or upgrade @OLDPACKAGE@ database."
-		echo "Please see postgresql documentation"
-		echo "and run dpkg-reconfigure -plow @OLDPACKAGE@-db-postgresql"
-		echo "once the problem is solved"
-		echo "exiting without error, but @OLDPACKAGE@ db will not work"
-		echo "right now"
+		echo "No database found online on port 5432."
+		echo "Assuming the database was dropped and no action is needed."
+		echo "Exiting without error, but make sure there are no leftovers."
 		exit 0
 	fi
 else

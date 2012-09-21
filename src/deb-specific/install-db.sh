@@ -25,9 +25,8 @@ function get_pg_hba_dir() {
                 export pg_hba_dir=/var/lib/pgsql/data/
 		return
         fi
-        echo "No pg_hba_dir found"
-        echo "exiting without error, but gforge db will not work"
-        exit 0
+        echo "No pg_hba_dir found — exiting with error"
+        exit 1
 }
 
 # this function export in var pg_version the version of postgresql
@@ -47,13 +46,8 @@ function get_pg_version() {
 		return
         fi
         echo "No database found online on port 5432"
-        echo "Couldn't initialize or upgrade gforge database."
-        echo "Please see postgresql documentation"
-        echo "and run dpkg-reconfigure -plow gforge-db-postgresql"
-        echo "once the problem is solved"
-        echo "exiting without error, but gforge db will not work"
-        echo "right now"
-        exit 0
+        echo "Couldn't initialize or upgrade gforge database"
+        exit 1
 }
 
 
