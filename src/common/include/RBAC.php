@@ -4,6 +4,7 @@
  *
  * Copyright 2004, GForge, LLC
  * Copyright 2009-2010, Roland Mas
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -313,6 +314,7 @@ abstract class BaseRole extends Error {
 						       $section,
 						       $reference,
 						       $value)) ;
+		$this->perms_array[$section][$reference] = $value;
 	}
 
 	function getSettingsForProject ($project) {
