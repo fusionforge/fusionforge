@@ -274,4 +274,38 @@ class DocumentManager extends Error {
 		}
 	}
 
+	/**
+	 * getActivity - return the number of searched actions per sections between two dates
+	 *
+	 * @param	array	Sections to search for activity
+	 * @param	int	the start date time format time()
+	 * @param	int	the end date time format time()
+	 * @return	array	number per section of activities found between begin and end values
+	 */
+	function getActivity($sections, $begin, $end) {
+		$qpa = db_construct_qpa(false);
+		for ($i = 0; $i < count($sections); $i++) {
+			$union = 0;
+			if (count($sections) >= 1 && $i != count($sections) -1) {
+				$union = 1;
+			}
+			$qpa = db_construct_qpa($qpa, 'SELECT count(*) FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
+			AND group_id = $3 AND section = $4 ',
+			array($begin,
+				$end,
+				$this->getGroup()->getID(),
+				$sections[$i]));
+			if ($union) {
+				$qpa = db_construct_qpa($qpa, ' UNION ALL ', array());
+			}
+		}
+		$res = db_query_qpa($qpa);
+		$results = array();
+		$j = 0;
+		while ($arr = db_fetch_array($res)) {
+			$results[$sections[$j]] = $arr['0'];
+			$j++;
+		}
+		return $results;
+	}
 }

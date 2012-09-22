@@ -533,6 +533,7 @@ src/common/widget/Widget_MyRss.class.php -text
 src/common/widget/Widget_MySurveys.class.php -text
 src/common/widget/Widget_MyTasks.class.php -text
 src/common/widget/Widget_ProjectDescription.class.php -text
+src/common/widget/Widget_ProjectDocumentsActivity.class.php -text
 src/common/widget/Widget_ProjectInfo.class.php -text
 src/common/widget/Widget_ProjectLatestDocuments.class.php -text
 src/common/widget/Widget_ProjectLatestFileReleases.class.php -text
@@ -5102,6 +5103,7 @@ src/www/images/widget/widget-preview-project_classification-en_US.png -text svne
 src/www/images/widget/widget-preview-project_classification-fr_FR.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview-project_description-en_US.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview-project_description-fr_FR.png -text svneol=unset#image/png
+src/www/images/widget/widget-preview-project_documentsactivity-en_US.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview-project_latest_cvs_commits-en_US.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview-project_latest_cvs_commits-fr_FR.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview-project_latest_news-en_US.png -text svneol=unset#image/png

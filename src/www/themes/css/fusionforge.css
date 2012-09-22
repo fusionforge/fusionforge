@@ -670,6 +670,10 @@ p.information {
 	background-image: url('../../images/widget/widget-preview-project_svn-stats.png');
 }
 
+.widget-preview-projectdocumentsactivity-en_US {
+	background-image: url('../../images/widget/widget-preview-project_documentsactivity-en_US.png');
+}
+
 /* }}} */
 
 /* {{{ Layout Manager */
