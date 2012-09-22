@@ -908,6 +908,39 @@ src/lib/vendor/coolfieldset/images/expanded.gif -text svneol=unset#unset
 src/lib/vendor/coolfieldset/index.html -text
 src/lib/vendor/coolfieldset/js/jquery.coolfieldset.js -text
 src/lib/vendor/coolfieldset/js/jquery.js -text
+src/lib/vendor/jquery-jqplot/excanvas.js -text
+src/lib/vendor/jquery-jqplot/jquery.jqplot.css -text
+src/lib/vendor/jquery-jqplot/jquery.jqplot.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.BezierCurveRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.barRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.blockRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.bubbleRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.canvasAxisLabelRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.canvasAxisTickRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.canvasOverlay.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.canvasTextRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.categoryAxisRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.ciParser.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.cursor.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.dateAxisRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.donutRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.dragable.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.enhancedLegendRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.funnelRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.highlighter.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.json2.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.logAxisRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.mekkoAxisRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.mekkoRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.meterGaugeRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.mobile.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.ohlcRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.pieRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.pointLabels.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.pyramidAxisRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.pyramidGridRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.pyramidRenderer.js -text
+src/lib/vendor/jquery-jqplot/plugins/jqplot.trendline.js -text
 src/lib/vendor/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.1.0.css -text svneol=unset#text/css
 src/lib/vendor/jquery-simpletreemenu/css/simpleTreeMenu/menu-arrow-down.png -text svneol=unset#image/png
 src/lib/vendor/jquery-simpletreemenu/css/simpleTreeMenu/menu-arrow-right.png -text svneol=unset#image/png
