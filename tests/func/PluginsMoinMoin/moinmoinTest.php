@@ -38,21 +38,28 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 		$this->assertTrue($this->isTextPresent("Project information updated"));
 
-		// $this->gotoProject('ProjectA');
-		// $this->click("link=MoinMoinWiki");
-		// sleep(5); // MoinMoinWiki has no <h1> element
-		// $this->assertTrue($this->isTextPresent("ConfigurationError"));
-
 		$this->cron_for_plugin("create-wikis.php", "moinmoin");
 		sleep (5);
 
 		$this->gotoProject('ProjectA');
 		$this->click("link=MoinMoinWiki");
-		sleep(5); // MoinMoinWiki has no <h1> element
+		sleep(10); // MoinMoinWiki has no <h1> element, so no waitForPageToLoad()
 		$this->assertFalse($this->isTextPresent("ConfigurationError"));
 		$this->assertFalse($this->isTextPresent("Wiki not created yet"));
 
-		// $this->click("link=Create New Page");
+		$this->click("link=Create New Page");
+		sleep(5); // Grmf.
+
+		$this->assertFalse($this->isTextPresent("You are not allowed"));
+		$this->type("//textarea[@id='editor-textarea']", "Pardon me, boy
+Is that the Chattanooga choo choo?");
+		$this->click("//input[@name='button_save']");
+		sleep(5); // Grmf.
+
+		$this->gotoProject('ProjectA');
+		$this->click("link=MoinMoinWiki");
+		sleep(5); // Grmf.
+		$this->assertTrue($this->isTextPresent("Chattanooga"));
 	}
 }
 
