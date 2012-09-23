@@ -3,6 +3,7 @@
  * Project Membership Request
  *
  * Copyright 2005 (c) GForge, L.L.C.
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -40,13 +41,13 @@ if (!session_loggedin()) {
 $group = group_get_object($group_id);
 
 if ($submit) {
-
 	$gjr=new GroupJoinRequest($group);
 	$usr=&session_get_user();
 	if (!$gjr->create($usr->getId(),$comments)) {
-		exit_error($gjr->getErrorMessage(),'summary');
+		session_redirect('/projects/'.$group->getUnixName().'/?error_msg='.urlencode($gjr->getErrorMessage()));
 	} else {
 		$feedback = _('Your request has been submitted.');
+		session_redirect('/projects/'.$group->getUnixName().'/?feedback='.urlencode($feedback));
 	}
 }
 
