@@ -38,6 +38,11 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 		$this->assertTrue($this->isTextPresent("Project information updated"));
 
+		// $this->gotoProject('ProjectA');
+		// $this->click("link=MoinMoinWiki");
+		// sleep(5); // MoinMoinWiki has no <h1> element
+		// $this->assertTrue($this->isTextPresent("ConfigurationError"));
+
 		$this->cron_for_plugin("create-wikis.php", "moinmoin");
 		sleep (5);
 
