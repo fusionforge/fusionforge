@@ -32,6 +32,7 @@ Alias /scripts/jquery-ui/ {core/source_path}/lib/vendor/jquery-ui/
 Alias /scripts/jquery-tipsy/ {core/source_path}/lib/vendor/jquery-tipsy/
 Alias /scripts/jquery-storage/ {core/source_path}/lib/vendor/jquery-storage/
 Alias /scripts/jquery-simpletreemenu/ {core/source_path}/lib/vendor/jquery-simpletreemenu/
+Alias /scripts/jquery-jqplot/ {core/source_path}/lib/vendor/jquery-jqplot/
 Alias /scripts/prototype/ {core/source_path}/lib/vendor/prototype/
 Alias /scripts/scriptaculous/ {core/source_path}/lib/vendor/scriptaculous/
 Alias /scripts/yui/ {core/source_path}/lib/vendor/yui/build/
