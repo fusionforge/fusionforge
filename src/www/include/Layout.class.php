@@ -110,11 +110,9 @@ class Layout extends Error {
 	var $js = array();
 	var $js_min = array();
 	var $javascripts = array();
-	var $javascripts_loaded = array();
 	var $css = array();
 	var $css_min = array();
 	var $stylesheets = array();
-	var $stylesheets_loaded = array();
 
 	/**
 	 * Layout() - Constructor
@@ -214,12 +212,10 @@ class Layout extends Error {
 	function getJavascripts() {
 		$code = '';
 		foreach ($this->javascripts as $js) {
-			if (!in_array($js, $this->javascripts_loaded)) {
-				$code .= "\t\t\t";
-				$code .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
-				$this->javascripts_loaded[] = $js;
-			}
+			$code .= "\t\t\t";
+			$code .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
 		}
+		$this->javascripts = array();
 		return $code;
 	}
 
@@ -229,16 +225,14 @@ class Layout extends Error {
 	function getStylesheets() {
 		$code = '';
 		foreach ($this->stylesheets as $c) {
-			if (!in_array($c, $this->stylesheets_loaded)) {
-				$code .= "\t\t\t";
-				if ($c['media']) {
-					$code .= '<link rel="stylesheet" type="text/css" href="'.$c['css'].'" media="'.$c['media'].'" />'."\n";
-				} else {
-					$code .= '<link rel="stylesheet" type="text/css" href="'.$c['css'].'"/>'."\n";
-				}
-				$this->stylesheets_loaded[] = $c;
+			$code .= "\t\t\t";
+			if ($c['media']) {
+				$code .= '<link rel="stylesheet" type="text/css" href="'.$c['css'].'" media="'.$c['media'].'" />'."\n";
+			} else {
+				$code .= '<link rel="stylesheet" type="text/css" href="'.$c['css'].'"/>'."\n";
 			}
 		}
+		$this->stylesheets = array();
 		return $code;
 	}
 
