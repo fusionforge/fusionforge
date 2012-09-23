@@ -1,0 +1,59 @@
+#! /usr/bin/php -f
+<?php
+/**
+ * FusionForge
+ *
+ * Copyright 2012, Roland Mas
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+        
+require (dirname(__FILE__).'/../common/include/env.inc.php');
+require_once $gfcommon.'include/pre.php';
+
+if (count ($argv) < 2) {
+	echo "Usage: .../forge_run_plugin_job <plugin> <jobname> [ <parameter> ... ]
+" ;
+        exit (1) ;
+}
+$self = array_shift($argv);
+
+$plugin = array_shift($argv);
+if (! plugin_get_object($plugin)) {
+	print "No such plugin $plugin.\n" ;
+	// exit (1) ;
+}
+
+$job = array_shift($argv);
+$path = forge_get_config('source_path')."/plugins/$plugin/cronjobs/";
+$script = $path.$job;
+
+if (! is_executable($script)) {
+	print "Cron job $script not found or not executable.\n" ;
+	// exit (1) ;
+}
+
+$cmdline = $script;
+while ($arg = array_shift($argv)) {
+	$cmdline .= ' '.escapeshellarg($arg);
+}
+	
+system ("$cmdline\n");
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:

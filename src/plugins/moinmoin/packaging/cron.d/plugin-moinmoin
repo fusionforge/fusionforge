@@ -1,16 +1,7 @@
-FFDIR=/usr/share/@OLDPACKAGE@
-MWCRON=/usr/share/@OLDPACKAGE@/plugins/moinmoin/cronjobs
-FFUSER=gforge
-
-# You may need to change the pathname to php CLI (command line interface)
-PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include:/usr/share/gforge/plugins"
-
-# Don't mail command output to anyone.
-MAILTO=""
-
 #
 # Regular cron jobs for the plugin-moinmoin package
 #
+PATH=/usr/share/@OLDPACKAGE@/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Create new wikis four times an hour
-0,15,30,45 * * * * root [ -x $MWCRON/create-wikis.php ] && $PHP $MWCRON/create-wikis.php
+0,15,30,45 * * * * root forge_run_plugin_job moinmoin create-wikis.php

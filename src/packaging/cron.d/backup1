@@ -1,3 +1,3 @@
 # Daily site backup
-0 2 * * *  root $PHP $FFCRON/backup_site.php
+0 2 * * *  root forge_run_job backup_site.php
 

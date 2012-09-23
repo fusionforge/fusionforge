@@ -8,6 +8,8 @@ deb-specific/install-chroot.sh         usr/share/@OLDPACKAGE@/bin/
 deb-specific/install-ssh.sh            usr/share/@OLDPACKAGE@/bin/
 utils/include.pl                       usr/share/@OLDPACKAGE@/lib/
 utils/forge_get_config                 usr/share/@OLDPACKAGE@/bin/
+utils/forge_run_job                    usr/share/@OLDPACKAGE@/bin/
+utils/forge_run_plugin_job             usr/share/@OLDPACKAGE@/bin/
 utils/migrate-to-ini-files.sh	       usr/share/@OLDPACKAGE@/bin/
 #
 deb-specific/user_dump_update.pl       usr/share/@OLDPACKAGE@/bin/
