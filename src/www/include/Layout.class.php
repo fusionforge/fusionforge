@@ -296,7 +296,7 @@ class Layout extends Error {
 	function headerHTMLDeclaration() {
 		global $sysDTDs, $sysXMLNSs;
 
-		print '<?xml version="1.0" encoding="utf-8"?>'."\n";
+		print '<' . '?xml version="1.0" encoding="utf-8"?>'."\n";
 		if (!util_ifsetor($this->doctype) || !util_ifsetor($sysDTDs[$this->doctype])) {
 			$this->doctype = 'transitional';
 		}
@@ -1417,6 +1417,10 @@ class Layout extends Error {
 		}
 
 		echo $this->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
+	}
+
+	function displayStylesheetElements() {
+		/* Codendi/Tuleap compatibility */
 	}
 }
 
