@@ -76,6 +76,11 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 //		$this->test->assertFalse($this->isTextPresent("Warning: Missing argument"));
 //	}
 
+        protected function runCommand($cmd)
+        {
+                system($cmd);
+        }
+
 	protected function cron($cmd)
 	{
 		$this->runCommand(RUN_JOB_PATH."forge_run_job $cmd");
