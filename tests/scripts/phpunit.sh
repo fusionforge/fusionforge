@@ -47,11 +47,18 @@ define('DB_PASSWORD', '@@FFDB_PASS@@');
 define('DB_INIT_CMD', "$FORGE_HOME/tests/func/db_reload.sh >>/var/log/db_reload_selenium.log 2>&1");
 
 // Cronjob wrapper script location
+print "Looking for forge_run_job script...\n";
 if (is_executable ("$FORGE_HOME/bin/forge_run_job")) {
+    print "Found in $FORGE_HOME/bin/\n";
     define('RUN_JOB_PATH', "$FORGE_HOME/bin/");
 } elseif (is_executable ("$FORGE_HOME/src/utils/forge_run_job")) {
+    print "Found in $FORGE_HOME/src/utils/\n";
     define('RUN_JOB_PATH', "$FORGE_HOME/src/utils/");
-}
+} else {
+    print "Neither $FORGE_HOME/bin/forge_run_job nor $FORGE_HOME/src/utils/forge_run_job seem to be executable, strange.\n";
+    system ("find $FORGE_HOME");
+    exit(1);
+}   
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'myadmin')
