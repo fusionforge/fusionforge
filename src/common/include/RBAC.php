@@ -400,26 +400,18 @@ abstract class BaseRole extends Error {
 		return $result ;
 	}
 
-    /**
-     * TODO: Enter description here ...
-     * @param unknown_type $section
-     * @param unknown_type $reference
-     * @return number|boolean
-     */
-    function getSetting($section, $reference) {
-	    $r = $this->getSettingRaw($section, $reference);
-	    if ($r == NULL) {
-		    return 0;
-	    }
-	    return $r;
-    }
-
-    function getSettingRaw($section, $reference) {
-        if (isset ($this->perms_array[$section][$reference])) {
-			$value = $this->perms_array[$section][$reference] ;
-		} else {
-			$value = 0 ;
+	/**
+	 * TODO: Enter description here ...
+	 * @param  unknown_type   $section
+	 * @param  unknown_type   $reference
+	 * @return number|boolean
+	 */
+	function getSetting($section, $reference) {
+		$value = $this->getSettingRaw($section, $reference);
+		if ($value == NULL) {
+			$value = 0;
 		}
+
 		$min = PHP_INT_MAX ;
 		$mask = 0 ;
 
@@ -530,6 +522,12 @@ abstract class BaseRole extends Error {
 			plugin_hook_by_reference ("role_get_setting", $hook_params);
 			return $hook_params['result'] ;
 			break ;
+		}
+	}
+
+	function getSettingRaw($section, $reference) {
+		if (isset ($this->perms_array[$section][$reference])) {
+			return $this->perms_array[$section][$reference] ;
 		}
 	}
 
