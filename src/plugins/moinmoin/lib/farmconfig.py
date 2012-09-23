@@ -13,8 +13,10 @@ class FarmConfig(multiconfig.DefaultConfig):
     page_front_page = u"FrontPage"
     theme_default = 'mentalwealth'
 
-    ffsa = fusionforge.FusionForgeSessionAuth()
-    ff_host = fusionforge.FusionForgeLink().get_config('web_host')
+    session_cookies = ['forge_session_authbuiltin', 'forge_session_authcas', 'forge_session_authhttpd', 'forge_session_authldap', 'forge_session_authopenid', 'forge_session_authwebid']
+
+    ffsa = fusionforge.FusionForgeSessionAuth(session_cookies)
+    ff_host = fusionforge.FusionForgeLink(session_cookies).get_config('web_host')
 
     auth = [ffsa]
 
