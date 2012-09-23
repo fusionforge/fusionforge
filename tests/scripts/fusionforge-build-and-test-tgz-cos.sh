@@ -108,6 +108,8 @@ fi
 ssh root@$HOST 'tar jxf fusionforge-*.tar.bz2'
 ssh root@$HOST "cd fusionforge-*; FFORGE_RPM_REPO=$FFORGE_RPM_REPO DAG_RPMFORGE_REPO=$DAG_RPMFORGE_REPO FFORGE_DB=fforge FFORGE_USER=gforge FFORGE_ADMIN_USER=ffadmin FFORGE_ADMIN_PASSWORD=ffadmin ./install.sh $HOST"
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
+ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
+ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "cd /root/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=$DB_NAME php db_reload.php"
 ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
 #ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"

@@ -380,6 +380,9 @@ SetupPermissionsFromRoles();
 
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
+if (forge_get_config('unbreak_frames', 'mediawiki')) {
+	$wgEditPageFrameOptions = false;
+}
 ini_set ('memory_limit', '100M') ;
 
 // LOAD THE SITE-WIDE AND PROJECT-SPECIFIC EXTRA-SETTINGS
