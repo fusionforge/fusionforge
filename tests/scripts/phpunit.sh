@@ -56,7 +56,6 @@ if (is_executable ("$FORGE_HOME/bin/forge_run_job")) {
     define('RUN_JOB_PATH', "$FORGE_HOME/src/utils/");
 } else {
     print "Neither $FORGE_HOME/bin/forge_run_job nor $FORGE_HOME/src/utils/forge_run_job seem to be executable, strange.\n";
-    system ("find $FORGE_HOME");
     exit(1);
 }   
 
