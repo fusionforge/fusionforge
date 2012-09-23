@@ -9,6 +9,7 @@ FusionForge-5.3:
 * Docman: Directory monitoring (TrivialDev)
 * Activity: New Directory appears now in activity (TrivialDev)
 * Docman: Display number of download per file, max upload size (TrivialDev)
+* Widget: Project Document Activity : new or updates files, new directories, in the last 4 weeks (TrivialDev)
 
 Plugins:
 * headermenu: new plugin to add links in login/logout menu link (TrivialDev)
