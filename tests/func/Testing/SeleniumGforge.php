@@ -109,6 +109,11 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		system("echo \"$sql\" | psql -q -Upostgres ".DB_NAME);
 	}
 
+        protected function runCommand($cmd)
+        {
+                system($cmd);
+        }
+
 	protected function cron($cmd)
 	{
 		$this->runCommand(RUN_JOB_PATH."forge_run_job $cmd");
