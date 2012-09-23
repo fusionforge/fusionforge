@@ -7,6 +7,8 @@
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright © 2011, 2012
+ *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,6 +25,34 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+require_once $gfcommon.'include/minijson.php';
+
+/**
+ * html_generic_fileheader() - Output <html><head> and <meta/> inside.
+ *
+ * @param	string	$title
+ *			Mandatory content of <title> attribute,
+ *			will be HTML-secured
+ */
+function html_generic_fileheader($title) {
+	global $HTML, $sysDTDs, $sysXMLNSs;
+
+	if (!$title) {
+		throw new Exception('A title is mandatory in XHTML!');
+	}
+
+	$HTML->headerHTMLDeclaration();
+	echo "<head>\n";
+	echo '<meta http-equiv="Content-Type" ' .
+	    'content="text/html; charset=utf-8" />' . "\n";
+	echo '<script language="JavaScript" type="text/javascript">//<![CDATA[' .
+	    "\n\tvar sys_url_base = " . minijson_encode(util_make_url("/"),
+	    false) . ";\n" .
+	    "//]]></script>\n";
+	$HTML->headerForgepluckerMeta();
+	echo html_e('title', array(), util_html_secure($title)) . "\n";
+}
 
 /**
  * html_feedback_top() - Show the feedback output at the top of the page.
