@@ -44,12 +44,14 @@
 
 require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
-class Top extends FForge_SeleniumTestCase
+class TopTester extends FForge_SeleniumTestCase
 {
-    function skiptestWalkInTop()
+    function testWalkInTop()
     {
+		$this->cron("project_weekly_metric.php");
+
 		$this->populateStandardTemplate('forums');
-    	$this->init();
+		$this->init();
 
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=open-discussion");
@@ -60,7 +62,7 @@ class Top extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Message Posted Successfully");
 
 		sleep(1);
-		$this->cron("cronjobs/project_weekly_metric.php");
+		$this->cron("project_weekly_metric.php");
 
 		// Test that from the main page we access the most active this week.
 		$this->clickAndWait("link=Home");
@@ -79,6 +81,9 @@ class Top extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=[View Other Top Categories]");
 		$this->clickAndWait("link=Top Downloads");
 		$this->assertTextPresent("Rank");
+
+
+		$this->cron("project_weekly_metric.php");
     }
 }
 
