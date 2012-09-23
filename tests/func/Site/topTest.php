@@ -46,10 +46,8 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class TopTester extends FForge_SeleniumTestCase
 {
-    function testWalkInTop()
+    function skiptestWalkInTop()
     {
-		$this->cron("project_weekly_metric.php");
-
 		$this->populateStandardTemplate('forums');
 		$this->init();
 
@@ -81,9 +79,6 @@ class TopTester extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=[View Other Top Categories]");
 		$this->clickAndWait("link=Top Downloads");
 		$this->assertTextPresent("Rank");
-
-
-		$this->cron("project_weekly_metric.php");
     }
 }
 

@@ -58,8 +58,8 @@ while ( $row = db_fetch_array($project_res) ) {
 		system("chown -R gforge:gforge $project_dir");
 		$template = "/etc/fusionforge/plugins/moinmoin/PROJECT_NAME.py.tmpl";
 		system('(echo "# Automatically generated on `date` from '.$template.'";'
-                      + 'echo "# DO NOT EDIT";'
-                      + 'sed s/@PROJECT_NAME@/'.$project.'/ < $template) > $wikidata/$project.py');
+                      . 'echo "# DO NOT EDIT";'
+                      . "sed s/@PROJECT_NAME@/$project/ < $template) > $wikidata/$project.py");
 
 		$need_reload = true;
 	} 
