@@ -128,6 +128,8 @@ if (isset($gfcgfile) && file_exists ($gfcgfile)) {
 				 'GForgeLdapPasswd', 'sys_gfldap_passwd') ;
 	setconfigfromenv ('core', 'jabber_password',
 				 'GForgeJabberPasswd', 'sys_gfjabber_pass') ;
+	setconfigfromenv ('core', 'session_key',
+				 'GForgeSessionKey', 'sys_session_key') ;
 }
 
 forge_read_config_file ($gfconfig.'/config.ini') ;
