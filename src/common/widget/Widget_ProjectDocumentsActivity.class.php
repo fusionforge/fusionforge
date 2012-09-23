@@ -103,7 +103,8 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		echo $HTML->getStylesheets();
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
-		$dm = new DocumentManager(group_get_object($group_id));
+		$group = group_get_object($group_id);
+		$dm = new DocumentManager($group);
 		$begin1 = strtotime('monday this week');
 		$end1 = time();
 		$begin2 = strtotime('-1 week', $begin1);
