@@ -1,7 +1,7 @@
 bin
 etc/@PACKAGE@/config.ini.d
 etc/@OLDPACKAGE@/templates
-usr/share/@OLDPACKAGE@/bin
+@BINARY_PATH@
 usr/share/@OLDPACKAGE@/lib
 usr/share/@OLDPACKAGE@/common
 usr/share/locale

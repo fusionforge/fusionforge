@@ -1,2 +1,2 @@
-deb-specific/install-ftp.sh  usr/share/@OLDPACKAGE@/bin/
+deb-specific/install-ftp.sh  @BINARY_PATH@/
 deb-specific/sf-proftpd.conf etc/@OLDPACKAGE@/

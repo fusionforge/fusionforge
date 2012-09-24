@@ -25,17 +25,17 @@ cronjobs/ftp_create_group_access.php    usr/share/@OLDPACKAGE@/cronjobs/
 #
 cronjobs/get_news_notapproved.pl	usr/share/@OLDPACKAGE@/cronjobs/
 #
-deb-specific/stats_projects_logparse.pl usr/share/@OLDPACKAGE@/bin/
-deb-specific/install-db.sh              usr/share/@OLDPACKAGE@/bin/
-deb-specific/old-db-upgrade.pl              usr/share/@OLDPACKAGE@/bin/
+deb-specific/stats_projects_logparse.pl @BINARY_PATH@/
+deb-specific/install-db.sh              @BINARY_PATH@/
+deb-specific/old-db-upgrade.pl              @BINARY_PATH@/
 deb-specific/sqlparser.pm               usr/share/@OLDPACKAGE@/lib/
 deb-specific/sqlhelper.pm               usr/share/@OLDPACKAGE@/lib/
-deb-specific/sf-add-skill               usr/share/@OLDPACKAGE@/bin/
-deb-specific/register-theme             usr/share/@OLDPACKAGE@/bin/
-deb-specific/unregister-theme           usr/share/@OLDPACKAGE@/bin/
+deb-specific/sf-add-skill               @BINARY_PATH@/
+deb-specific/register-theme             @BINARY_PATH@/
+deb-specific/unregister-theme           @BINARY_PATH@/
 #
-deb-specific/register-plugin            usr/share/@OLDPACKAGE@/bin/
-deb-specific/unregister-plugin          usr/share/@OLDPACKAGE@/bin/
+deb-specific/register-plugin            @BINARY_PATH@/
+deb-specific/unregister-plugin          @BINARY_PATH@/
 #
 deb-specific/view_bug.sql               usr/share/@OLDPACKAGE@/db/
 deb-specific/view_patch.sql             usr/share/@OLDPACKAGE@/db/
@@ -66,14 +66,14 @@ db/2012*.sql				usr/share/@OLDPACKAGE@/db/
 db/FTI*.sql				usr/share/@OLDPACKAGE@/db/
 db/schema-convergence*.sql		usr/share/@OLDPACKAGE@/db/
 #
-db/upgrade-db.php			usr/share/@OLDPACKAGE@/bin/
-utils/inject-users.php usr/share/@OLDPACKAGE@/bin/
-utils/inject-groups.php usr/share/@OLDPACKAGE@/bin/
-utils/inject-files.php usr/share/@OLDPACKAGE@/bin/
+db/upgrade-db.php			@BINARY_PATH@/
+utils/inject-users.php @BINARY_PATH@/
+utils/inject-groups.php @BINARY_PATH@/
+utils/inject-files.php @BINARY_PATH@/
 #
-utils/normalize_roles.php	usr/share/@OLDPACKAGE@/bin/
-utils/sync_unix_groups.php	usr/share/@OLDPACKAGE@/bin/
-utils/fixscripts/populate_template_project.php	usr/share/@OLDPACKAGE@/bin/
-utils/fixscripts/fix_default_role.php	usr/share/@OLDPACKAGE@/bin/
-utils/forge_set_password                usr/share/@OLDPACKAGE@/bin/
-utils/forge_make_admin			usr/share/@OLDPACKAGE@/bin/
+utils/normalize_roles.php	@BINARY_PATH@/
+utils/sync_unix_groups.php	@BINARY_PATH@/
+utils/fixscripts/populate_template_project.php	@BINARY_PATH@/
+utils/fixscripts/fix_default_role.php	@BINARY_PATH@/
+utils/forge_set_password                @BINARY_PATH@/
+utils/forge_make_admin			@BINARY_PATH@/

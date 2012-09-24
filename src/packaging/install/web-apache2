@@ -1,6 +1,6 @@
 www                                 usr/share/@OLDPACKAGE@/
 www/index_std.php                   etc/@OLDPACKAGE@/custom/
-utils/install-apache.sh             usr/share/@OLDPACKAGE@/bin/
-utils/manage-apache-config.sh	    usr/share/@OLDPACKAGE@/bin/
+utils/install-apache.sh             @BINARY_PATH@/
+utils/manage-apache-config.sh	    @BINARY_PATH@/
 etc/httpd.conf.d-fhs		    usr/share/@OLDPACKAGE@/etc/
 etc/httpd.conf-fhs		    usr/share/@OLDPACKAGE@/etc/

@@ -1,7 +1,7 @@
 etc/@OLDPACKAGE@/custom
 etc/@OLDPACKAGE@/languages-local
 etc/@OLDPACKAGE@/templates
-usr/share/@OLDPACKAGE@/bin
+@BINARY_PATH@
 usr/share/@OLDPACKAGE@/plugins
 usr/share/@OLDPACKAGE@/www
 var/lib/@OLDPACKAGE@/scmtarballs

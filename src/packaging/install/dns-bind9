@@ -1,4 +1,4 @@
-deb-specific/install-dns.sh            usr/share/@OLDPACKAGE@/bin/
+deb-specific/install-dns.sh            @BINARY_PATH@/
 deb-specific/dns.head.template         var/lib/@OLDPACKAGE@/bind/
 deb-specific/dns.simple.template       var/lib/@OLDPACKAGE@/bind/
-deb-specific/dns_conf.pl               usr/share/@OLDPACKAGE@/bin/
+deb-specific/dns_conf.pl               @BINARY_PATH@/

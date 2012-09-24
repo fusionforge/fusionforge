@@ -1,6 +1,6 @@
 etc/@OLDPACKAGE@
 etc/@OLDPACKAGE@/templates
-usr/share/@OLDPACKAGE@/bin
+@BINARY_PATH@
 var
 var/lib
 var/lib/@OLDPACKAGE@

@@ -1,4 +1,4 @@
-usr/share/@OLDPACKAGE@/bin
+@BINARY_PATH@
 var/lib/@OLDPACKAGE@/etc
 var/lib/@OLDPACKAGE@/etc/templates
 etc/@OLDPACKAGE@/templates

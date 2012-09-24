@@ -1,1 +1,1 @@
-deb-specific/install-postfix.sh usr/share/@OLDPACKAGE@/bin/
+deb-specific/install-postfix.sh @BINARY_PATH@/

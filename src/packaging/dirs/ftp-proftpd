@@ -1,5 +1,5 @@
 etc/@OLDPACKAGE@/templates
-usr/share/@OLDPACKAGE@/bin
+@BINARY_PATH@
 var/lib/@OLDPACKAGE@/chroot
 var/lib/@OLDPACKAGE@/download
 var/lib/@OLDPACKAGE@/etc

@@ -2,7 +2,7 @@ etc/@OLDPACKAGE@
 usr/share/@OLDPACKAGE@
 usr/share/@OLDPACKAGE@/cronjobs
 usr/share/@OLDPACKAGE@
-usr/share/@OLDPACKAGE@/bin
+@BINARY_PATH@
 usr/share/@OLDPACKAGE@/db
 usr/share/@OLDPACKAGE@/lib
 var/lib/@OLDPACKAGE@

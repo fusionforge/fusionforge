@@ -4,21 +4,21 @@ etc/config.ini.d/debug.ini             etc/@PACKAGE@/config.ini.d/
 etc/config.ini.d/zzzz-local.ini        etc/@PACKAGE@/config.ini.d/
 deb-specific/cvssh                     bin/
 #
-deb-specific/install-chroot.sh         usr/share/@OLDPACKAGE@/bin/
-deb-specific/install-ssh.sh            usr/share/@OLDPACKAGE@/bin/
+deb-specific/install-chroot.sh         @BINARY_PATH@/
+deb-specific/install-ssh.sh            @BINARY_PATH@/
 utils/include.pl                       usr/share/@OLDPACKAGE@/lib/
-utils/forge_get_config                 usr/share/@OLDPACKAGE@/bin/
-utils/forge_run_job                    usr/share/@OLDPACKAGE@/bin/
-utils/forge_run_plugin_job             usr/share/@OLDPACKAGE@/bin/
-utils/migrate-to-ini-files.sh	       usr/share/@OLDPACKAGE@/bin/
+utils/forge_get_config                 @BINARY_PATH@/
+utils/forge_run_job                    @BINARY_PATH@/
+utils/forge_run_plugin_job             @BINARY_PATH@/
+utils/migrate-to-ini-files.sh	       @BINARY_PATH@/
 #
-deb-specific/user_dump_update.pl       usr/share/@OLDPACKAGE@/bin/
-deb-specific/group_dump_update.pl      usr/share/@OLDPACKAGE@/bin/
+deb-specific/user_dump_update.pl       @BINARY_PATH@/
+deb-specific/group_dump_update.pl      @BINARY_PATH@/
 #cronjobs/cvs-cron/default_page.php    usr/share/@OLDPACKAGE@/cronjobs/
-deb-specific/ssh_dump_update.pl        usr/share/@OLDPACKAGE@/bin/
-deb-specific/mailfwd_update.pl         usr/share/@OLDPACKAGE@/bin/
+deb-specific/ssh_dump_update.pl        @BINARY_PATH@/
+deb-specific/mailfwd_update.pl         @BINARY_PATH@/
 #
-deb-specific/update-user-group-ssh.sh  usr/share/@OLDPACKAGE@/bin/
+deb-specific/update-user-group-ssh.sh  @BINARY_PATH@/
 #
 common                                 usr/share/@OLDPACKAGE@/
 cronjobs/create_scm_repos.php          usr/share/@OLDPACKAGE@/cronjobs/
@@ -30,5 +30,5 @@ plugins/authbuiltin/common          usr/share/@OLDPACKAGE@/plugins/authbuiltin/
 plugins/authbuiltin/www             usr/share/@OLDPACKAGE@/plugins/authbuiltin/
 plugins/authbuiltin/etc/*.ini 	    etc/@PACKAGE@/config.ini.d/
 #
-utils/list-admins.php                  usr/share/@OLDPACKAGE@/bin/
-utils/list-projects-using-plugin.php   usr/share/@OLDPACKAGE@/bin/
+utils/list-admins.php                  @BINARY_PATH@/
+utils/list-projects-using-plugin.php   @BINARY_PATH@/
