@@ -77,6 +77,12 @@ my $old_package_name = qx! grep ^OLDPACKAGE= debian/rules | cut -d= -f2 ! ;
 $old_package_name =~ s/\n//;
 my $forge_name = qx! grep ^FORGENAME= debian/rules | cut -d= -f2 ! ;
 $forge_name =~ s/\n//;
+my $source_path = qx! grep ^source_path etc/config.ini-fhs | cut -d= -f2 | xargs echo -n ! ;   
+my $binary_path = qx! grep ^binary_path etc/config.ini-fhs | cut -d= -f2 | xargs echo -n ! ;   
+my $plugin_path = qx! grep ^plugins_path etc/config.ini-fhs | cut -d= -f2 | xargs echo -n ! ;   
+my $data_path = qx! grep ^data_path etc/config.ini-fhs | cut -d= -f2 | xargs echo -n ! ;   
+my $config_path = qx! grep ^config_path etc/config.ini-fhs | cut -d= -f2 | xargs echo -n ! ;   
+my $log_path = qx! grep ^log_path etc/config.ini-fhs | cut -d= -f2 | xargs echo -n ! ;   
 
 if ($ARGV[0] && $ARGV[0] eq "--clean") {
  EXTLOOP: for my $ext (@known_files) {
@@ -129,6 +135,12 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
        $dest =~ s/\@PACKAGE\@/$package_name/g ;
        $dest =~ s/\@OLDPACKAGE\@/$old_package_name/g ;
        $dest =~ s/\@FORGENAME\@/$forge_name/g ;
+       $dest =~ s:\@SOURCE_PATH\@:$source_path:g ;
+       $dest =~ s:\@BINARY_PATH\@:$binary_path:g ;
+       $dest =~ s:\@PLUGIN_PATH\@:$plugin_path:g ;
+       $dest =~ s:\@DATA_PATH\@:$data_path:g ;
+       $dest =~ s:\@CONFIG_PATH\@:$config_path:g ;
+       $dest =~ s:\@LOG_PATH\@:$log_path:g ;
 
        open D, "> $destfile" ;
        print D "$dest" ;
