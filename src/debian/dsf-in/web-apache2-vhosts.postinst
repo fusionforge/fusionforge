@@ -29,8 +29,8 @@ case "$1" in
     configure)
 	db_stop
         # Setup our Apache
-	touch /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts  && \
-		chown @OLDPACKAGE@:@OLDPACKAGE@ /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts && \
+	touch @DATA_PATH@/etc/templates/httpd.vhosts  && \
+		chown @OLDPACKAGE@:@OLDPACKAGE@ @DATA_PATH@/etc/templates/httpd.vhosts && \
 		@BINARY_PATH@/create-vhosts.sh --norestart
 
 	# Make Apache see these new changes

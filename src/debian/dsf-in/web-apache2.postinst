@@ -54,7 +54,7 @@ case "$1" in
 	db_stop
 
         # Setup our FRS
-	chown www-data:www-data /var/lib/@OLDPACKAGE@/download
+	chown www-data:www-data @DATA_PATH@/download
 
 	# Enable required modules
 	DEBIAN_FRONTEND=noninteractive a2enmod php5 || true

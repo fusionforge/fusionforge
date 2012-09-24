@@ -39,7 +39,7 @@ case "$1" in
 	@BINARY_PATH@/install-ftp.sh configure 
 
         # Setup our FRS
-	chown www-data:www-data /var/lib/@OLDPACKAGE@/download
+	chown www-data:www-data @DATA_PATH@/download
 	
     ;;
 

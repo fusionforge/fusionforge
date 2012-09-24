@@ -40,9 +40,9 @@ case "$1" in
 	done
 
 	adduser --system --group --home /var/www/@OLDPACKAGE@ @OLDPACKAGE@ > /dev/null 2>&1
-	adduser --system --group --home /var/lib/@OLDPACKAGE@/chroot/cvsroot anonscm-@OLDPACKAGE@ > /dev/null 2>&1
-	adduser --system --group --home /var/lib/@OLDPACKAGE@/chroot/cvsroot scm-@OLDPACKAGE@ > /dev/null 2>&1
-	adduser --system --group --home /var/lib/@OLDPACKAGE@/chroot/cvsroot www-@OLDPACKAGE@ > /dev/null 2>&1
+	adduser --system --group --home @DATA_PATH@/chroot/cvsroot anonscm-@OLDPACKAGE@ > /dev/null 2>&1
+	adduser --system --group --home @DATA_PATH@/chroot/cvsroot scm-@OLDPACKAGE@ > /dev/null 2>&1
+	adduser --system --group --home @DATA_PATH@/chroot/cvsroot www-@OLDPACKAGE@ > /dev/null 2>&1
 
 	if [ "$2" = "" ] ; then
 	    # Installation from scratch, let's generate initial config files

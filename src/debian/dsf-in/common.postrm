@@ -18,7 +18,7 @@ set -e
 
 case "$1" in
     purge)
-	rm -rf /var/lib/@OLDPACKAGE@
+	rm -rf @DATA_PATH@
 	[ -d /etc/@OLDPACKAGE@ ] && rm -rf /etc/@OLDPACKAGE@
 	for i in config.ini.d/debian-install-secrets.ini config.ini.d/debian-install.ini fusionforge.conf ; do
 	    [ -e /etc/@PACKAGE@/$i ] && rm /etc/@PACKAGE@/$i

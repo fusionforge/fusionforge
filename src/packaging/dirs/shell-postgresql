@@ -7,5 +7,5 @@ var/lib/@OLDPACKAGE@
 var/lib/@OLDPACKAGE@/chroot
 var/lib/@OLDPACKAGE@/chroot/var
 var/lib/@OLDPACKAGE@/chroot/var/lib
-var/lib/@OLDPACKAGE@/chroot/var/lib/@OLDPACKAGE@
+var/lib/@OLDPACKAGE@/chroot@DATA_PATH@
 var/lib/@OLDPACKAGE@/etc

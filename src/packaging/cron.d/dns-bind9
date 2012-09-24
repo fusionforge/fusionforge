@@ -3,4 +3,4 @@
 #
 
 # DNS Update
-0 * * * * root [ -f /var/lib/@OLDPACKAGE@/bind/dns.head ] && [ -x @BINARY_PATH@/dns_conf.pl ] && @BINARY_PATH@/dns_conf.pl &&  /usr/sbin/invoke-rc.d --quiet bind9 reload 
+0 * * * * root [ -f @DATA_PATH@/bind/dns.head ] && [ -x @BINARY_PATH@/dns_conf.pl ] && @BINARY_PATH@/dns_conf.pl &&  /usr/sbin/invoke-rc.d --quiet bind9 reload 
