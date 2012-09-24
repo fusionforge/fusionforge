@@ -32,7 +32,7 @@ case $1 in
 	mkdir -p httpd.conf.d-fhs
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
 	    sed -e 's,{core/config_path},/etc/gforge,g' \
-		-e 's,{core/source_path},/usr/share/gforge/src,g' \
+		-e 's,{core/source_path},/usr/share/gforge,g' \
 		-e 's,{core/data_path},/var/lib/gforge,g' \
 		-e 's,{core/log_path},/var/log/gforge,g' \
 		-e 's,{core/chroot},/var/lib/gforge/chroot,g' \
