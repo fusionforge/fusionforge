@@ -9,13 +9,13 @@ OLDPACKAGE=gforge
 PACKAGE=fusionforge
 SRCPACKAGE=fusionforge
 FORGENAME=FusionForge
-SOURCE_PATH:=$(shell grep source_path etc/config.ini-fhs | cut -d= -f2 | xargs echo)
-BINARY_PATH:=$(shell grep binary_path etc/config.ini-fhs | cut -d= -f2 | xargs echo)
-PLUGIN_PATH:=$(shell grep plugin_path etc/config.ini-fhs | cut -d= -f2 | xargs echo)
+SOURCE_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs source_path)
+BINARY_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs binary_path)
+PLUGIN_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs plugins_path)
 
-DATA_PATH:=$(shell grep data_path etc/config.ini-fhs | cut -d= -f2 | xargs echo)
-CONFIG_PATH:=$(shell grep config_path etc/config.ini-fhs | cut -d= -f2 | xargs echo)
-LOG_PATH:=$(shell grep log_path etc/config.ini-fhs | cut -d= -f2 | xargs echo)
+DATA_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs data_path)
+CONFIG_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs config_path)
+LOG_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs log_path)
 
 # Identify this FusionForge version
 # keep type intact and change forge in derivates,
@@ -31,7 +31,7 @@ SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g
 DH=dh --with quilt
 
 default:
-	@echo $(PACKAGE) $(SRCPATH)
+	@echo $(PACKAGE) $(SOURCE_PATH)
 
 # The substitutions bellow can be quite tricky, so use 'debian/rules testpat' to check if it's OK
 ENABLED_PLUGINS:=$(shell sh $(CURDIR)/utils/list-enabled-plugins.sh || echo error)
