@@ -2,6 +2,7 @@
 forge_name = FusionForge
 
 source_path = /opt/gforge/src
+binary_path = /opt/gforge/src/utils
 data_path = /var/lib/gforge
 config_path = /etc/gforge
 log_path = /var/log/gforge
