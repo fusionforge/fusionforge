@@ -9,13 +9,14 @@ OLDPACKAGE=gforge
 PACKAGE=fusionforge
 SRCPACKAGE=fusionforge
 FORGENAME=FusionForge
-SOURCE_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs source_path)
-BINARY_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs binary_path)
-PLUGIN_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs plugins_path)
 
-DATA_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs data_path)
-CONFIG_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs config_path)
-LOG_PATH:=$(shell $(CURDIR)/utils/forge_get_config_basic fhs log_path)
+SOURCE_PATH:=$(shell utils/forge_get_config_basic fhs source_path)
+BINARY_PATH:=$(shell utils/forge_get_config_basic fhs binary_path)
+PLUGIN_PATH:=$(shell utils/forge_get_config_basic fhs plugins_path)
+
+DATA_PATH:=$(shell utils/forge_get_config_basic fhs data_path)
+CONFIG_PATH:=$(shell utils/forge_get_config_basic fhs config_path)
+LOG_PATH:=$(shell utils/forge_get_config_basic fhs log_path)
 
 # Identify this FusionForge version
 # keep type intact and change forge in derivates,
@@ -26,7 +27,7 @@ WHICH_FORGE=FusionForge
 WHICH_VERSION:=$(shell dpkg-parsechangelog | sed -n '/^Version: /s///p')
 
 # Replace macros present in the files for forge's name
-SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' -e 's/@OLDPACKAGE@/$(OLDPACKAGE)/g' -e 's/@FORGENAME@/$(FORGENAME)/g'  -e 's/@SOURCE_PATH@/$(SOURCE_PATH)/g' -e 's/@BINARY_PATH@/$(BINARY_PATH)/g' -e 's/@PLUGIN_PATH@/$(PLUGIN_PATH)/g' -e 's/@DATA_PATH@/$(DATA_PATH)/g' -e 's/@CONFIG_PATH@/$(CONFIG_PATH)/g' -e 's/@LOG_PATH@/$(LOG_PATH)/g' 
+SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' -e 's/@OLDPACKAGE@/$(OLDPACKAGE)/g' -e 's/@FORGENAME@/$(FORGENAME)/g'  -e 's:@SOURCE_PATH@:$(SOURCE_PATH):g' -e 's:@BINARY_PATH@:$(BINARY_PATH):g' -e 's:@PLUGIN_PATH@:$(PLUGIN_PATH):g' -e 's:@DATA_PATH@:$(DATA_PATH):g' -e 's:@CONFIG_PATH@:$(CONFIG_PATH):g' -e 's:@LOG_PATH@:$(LOG_PATH):g' 
 
 DH=dh --with quilt
 
@@ -253,30 +254,30 @@ install: build
 	    -e 's!@PKGVERSION@!${WHICH_VERSION}!g' \
 	    -e 's!@PLUCKERNAME@!${WHICH_TYPE}!g' \
 	    <$(CURDIR)/deb-specific/pkginfo.inc.php \
-	    >$(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/$(OLDPACKAGE)/common/pkginfo.inc.php
+	    >$(CURDIR)/debian/$(OLDPACKAGE)-common/$(SOURCE_PATH)/common/pkginfo.inc.php
 
 # 	Fix permissions
 	chmod 755 $(CURDIR)/debian/*/*/*/*/bin/* $(CURDIR)/debian/*/*/*/*/cronjobs/* \
-		$(CURDIR)/debian/*/bin/*  $(CURDIR)/debian/*/usr/share/*/plugins/*/bin/* \
+		$(CURDIR)/debian/*/bin/*  $(CURDIR)/debian/*/$(PLUGIN_PATH)/*/bin/* \
 		$(CURDIR)/debian/*/usr/share/*/plugins/*/cronjobs/*
-	chmod 644 $(CURDIR)/debian/$(OLDPACKAGE)-db-postgresql/usr/share/$(OLDPACKAGE)/cronjobs/*.inc
+	chmod 644 $(CURDIR)/debian/$(OLDPACKAGE)-db-postgresql/$(SOURCE_PATH)/cronjobs/*.inc
 
-	chmod 755 $(CURDIR)/debian/$(OLDPACKAGE)-db-postgresql/usr/share/*/db/*.php
+	chmod 755 $(CURDIR)/debian/$(OLDPACKAGE)-db-postgresql/$(SOURCE_PATH)/db/*.php
 
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/bin/cgi/viewvc-strace.sh
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/www/scm/viewvc/bin/cgi/viewvc-strace.sh
 
-	find $(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
-	find $(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/$(OLDPACKAGE)-common/$(SOURCE_PATH)/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/$(OLDPACKAGE)-common/$(SOURCE_PATH)/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
 
-	rm -f $(CURDIR)/debian/$(PACKAGE)-plugin-scm*/usr/share/*/plugins/scm*/*/README
-	chmod 755 $(CURDIR)/debian/$(PACKAGE)-plugin-scmcvs/usr/share/*/plugins/scmcvs/sbin/*
+	rm -f $(CURDIR)/debian/$(PACKAGE)-plugin-scm*/$(PLUGIN_PATH)/scm*/*/README
+	chmod 755 $(CURDIR)/debian/$(PACKAGE)-plugin-scmcvs/$(PLUGIN_PATH)/scmcvs/sbin/*
 
 # 	Rename config files
 	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini-fhs $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini
 	mkdir -p $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d
-	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf.d-fhs/*.conf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
-	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf.d-fhs/*.inc $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
-	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf
+	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/etc/httpd.conf.d-fhs/*.conf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
+	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/etc/httpd.conf.d-fhs/*.inc $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
+	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/etc/httpd.conf-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf
 
 # 	Remove those that need to be generated at install time
 	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/secrets.inc
