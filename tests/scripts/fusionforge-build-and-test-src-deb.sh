@@ -4,9 +4,11 @@
 
 export FORGE_HOME=/opt/gforge
 export DIST=wheezy
+#export FILTER="-filter func/PluginsMoinMoin/moinmoinTest.php"
+
 get_config $@
 prepare_workspace
-destroy_vm -t debian7 $@
+#destroy_vm -t debian7 $@
 start_vm_if_not_keeped -t debian7 $@
 
 # Build 3rd-party 
@@ -59,7 +61,7 @@ ssh root@$HOST "apt-get -y install vnc4server ; mkdir -p /root/.vnc"
 ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
-$FORGE_HOME/tests/scripts/phpunit.sh DEBDebian70Tests.php &> /var/log/phpunit.log &
+$FORGE_HOME/tests/scripts/phpunit.sh $FILTER DEBDebian70Tests.php &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
 wait %1
 echo \$? > /root/phpunit.exitcode
@@ -79,4 +81,4 @@ scp root@$HOST:/tmp/gforge-*.log $WORKSPACE/reports/
 ssh root@$HOST "vncserver -kill :1" || retcode=$?
 
 stop_vm_if_not_keeped -t debian7 $@
-return $retcode
+exit $retcode

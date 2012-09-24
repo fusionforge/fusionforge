@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+#set -e
 set -x
 
 . tests/scripts/common-functions
@@ -11,6 +11,7 @@ get_config
 export FORGE_HOME=/usr/share/gforge
 export DIST=wheezy
 export HOST=$1
+#export FILTER="-filter func/PluginsMoinMoin/moinmoinTest.php"
 
 prepare_workspace
 destroy_vm -t debian7 $HOST
@@ -18,8 +19,7 @@ start_vm_if_not_keeped -t debian7 $HOST
 
 CHECKOUTPATH=$(pwd)
 
-COWBUILDERBASE=/var/lib/jenkins/builder/
-COWBUILDERCONFIG=$COWBUILDERBASE/config/$DIST.config
+COWBUILDERCONFIG=$BUILDERDIR/config/$DIST.config
 
 cd $CHECKOUTPATH/src
 PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
@@ -38,17 +38,23 @@ else
 fi
 ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
 
+
+[ ! -f debian/changelog.sos ] || mv debian/changelog.sos debian/changelog
+cp debian/changelog debian/changelog.sos
 dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
 sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
 pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
+[ ! -f debian/changelog.sos ] || mv debian/changelog.sos debian/changelog
 
 CHANGEFILE=${PKGNAME}_$SMAJOR${MINOR}_$ARCH.changes
 
 cd $BUILDRESULT
 REPOPATH=$WORKSPACE/build/debian
 
-rm -r $REPOPATH
+[ ! -d $REPOPATH ] || rm -r $REPOPATH
 mkdir -p $REPOPATH/conf
+DEFAULTKEY=buildbot@$(hostname -f)
+SIGNKEY=${DEBEMAIL:-$DEFAULTKEY}
 cat > $REPOPATH/conf/distributions <<EOF
 Codename: $DIST
 Suite: $DIST
@@ -57,20 +63,25 @@ UDebComponents: main
 Architectures: amd64 i386 source
 Origin: buildbot.fusionforge.org
 Description: FusionForge autobuilt repository
-SignWith: buildbot@$(hostname -f)
+SignWith: $SIGNKEY
 EOF
 
 reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
 # Build 3rd-party 
 # make -C 3rd-party -f Makefile.debian BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
+CHANGEFILEM=mediawiki_1.19.2-1_amd64.changes
+cd $CHECKOUTPATH
+make -C 3rd-party/mediawiki BUILDRESULT=$BUILDRESULT COWBUILDERCONFIG=$COWBUILDERCONFIG
+cd $BUILDRESULT
+reprepro -Vb $REPOPATH include $DIST $CHANGEFILEM
 
 # Build fusionforge
 # make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rwheezy
 
 cd $CHECKOUTPATH
 # Transfer preseeding
-# cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
+cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
 
 # Setup debian repo
 export DEBMIRROR DEBMIRRORSEC
@@ -119,7 +130,7 @@ ssh root@$HOST "apt-get -y install vnc4server ; mkdir -p /root/.vnc"
 ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
-$FORGE_HOME/tests/scripts/phpunit.sh DEBDebian70Tests.php &> /var/log/phpunit.log &
+$FORGE_HOME/tests/scripts/phpunit.sh $FILTER DEBDebian70Tests.php &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
 wait %1
 echo \$? > /root/phpunit.exitcode
