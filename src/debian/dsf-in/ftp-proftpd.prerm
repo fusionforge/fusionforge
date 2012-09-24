@@ -22,7 +22,7 @@ case "$1" in
 	db_title "Unconfiguring @FORGENAME@"
 
 	# Unpatch Proftpd configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-ftp.sh purge-files
+	@BINARY_PATH@/install-ftp.sh purge-files
 	ucf --debconf-ok /etc/proftpd/proftpd.conf.@OLDPACKAGE@-new /etc/proftpd/proftpd.conf
 	rm /etc/proftpd/proftpd.conf.@OLDPACKAGE@-new
 	ucf --purge /etc/proftpd/proftpd.conf
@@ -31,7 +31,7 @@ case "$1" in
 	db_stop
 
         # FTP config removal
-	/usr/share/@OLDPACKAGE@/bin/install-ftp.sh purge
+	@BINARY_PATH@/install-ftp.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

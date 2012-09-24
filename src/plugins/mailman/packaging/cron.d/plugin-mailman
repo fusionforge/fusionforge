@@ -1,7 +1,7 @@
 #
 # Regular cron jobs for the lists-mailman package
 #
-PATH=/usr/share/@OLDPACKAGE@/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PATH=@BINARY_PATH@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Mailman-list creation
 * * * * * root forge_run_job manage_mailmanlists.php 

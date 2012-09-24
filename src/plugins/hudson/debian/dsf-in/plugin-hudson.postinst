@@ -26,7 +26,7 @@ set -e
 case "$1" in
     configure)
 	# Prepare database
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/bin/register-plugin hudson "Hudson"'
+	su -s /bin/sh @OLDPACKAGE@ -c '@BINARY_PATH@/register-plugin hudson "Hudson"'
 	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/plugins/hudson/bin/db-upgrade.pl'
     ;;
 

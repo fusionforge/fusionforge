@@ -22,7 +22,7 @@ case "$1" in
 	db_title "Unconfiguring @FORGENAME@"
 
         # Unpatch Slapd configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-nsspgsql.sh purge-files
+	@BINARY_PATH@/install-nsspgsql.sh purge-files
 	ucf --debconf-ok /etc/nss-pgsql.conf.@OLDPACKAGE@-new /etc/nss-pgsql.conf
 	ucf --debconf-ok /etc/nss-pgsql-root.conf.@OLDPACKAGE@-new /etc/nss-pgsql-root.conf
 	ucf --debconf-ok /etc/nsswitch.conf.@OLDPACKAGE@-new /etc/nsswitch.conf

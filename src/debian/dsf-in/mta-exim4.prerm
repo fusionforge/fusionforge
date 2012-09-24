@@ -22,7 +22,7 @@ case "$1" in
 	db_title "Unconfiguring @FORGENAME@"
 
 	# Unpatch Exim configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-exim4.sh purge-files
+	@BINARY_PATH@/install-exim4.sh purge-files
 	ucf --debconf-ok /etc/aliases.@OLDPACKAGE@-new /etc/aliases
 	if [ -f /etc/exim4/exim4.conf.@OLDPACKAGE@-new ]
 	then
@@ -43,7 +43,7 @@ case "$1" in
 	db_stop
 
         # Exim config removal
-	/usr/share/@OLDPACKAGE@/bin/install-exim4.sh purge
+	@BINARY_PATH@/install-exim4.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

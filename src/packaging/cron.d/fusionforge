@@ -1,5 +1,5 @@
 # THIS FILE IS GENERATED, PLEASE DON'T EDIT, RATHER USE Makefile
-PATH=/usr/share/@OLDPACKAGE@/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PATH=@BINARY_PATH@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 #
 # Regular cron jobs for the db-postgresql package
 #

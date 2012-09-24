@@ -28,14 +28,14 @@ set -e
 case "$1" in
     configure)
 	# Patch Bind configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-dns.sh configure-files
+	@BINARY_PATH@/install-dns.sh configure-files
 	ucf --debconf-ok /etc/bind/named.conf.@OLDPACKAGE@-new /etc/bind/named.conf
 	rm /etc/bind/named.conf.@OLDPACKAGE@-new
 
 	db_stop
 
 	# Create the DNS zone
-	/usr/share/@OLDPACKAGE@/bin/install-dns.sh configure
+	@BINARY_PATH@/install-dns.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -28,7 +28,7 @@ set -e
 case "$1" in
     configure)
         # Patch Exim configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-exim4.sh configure-files
+	@BINARY_PATH@/install-exim4.sh configure-files
 	if [ -f /etc/aliases.@OLDPACKAGE@-new ]
 	then
 		ucf --debconf-ok /etc/aliases.@OLDPACKAGE@-new /etc/aliases

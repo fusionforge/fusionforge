@@ -1,7 +1,7 @@
 #
 # Regular cron jobs for the plugin-moinmoin package
 #
-PATH=/usr/share/@OLDPACKAGE@/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PATH=@BINARY_PATH@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Create new wikis four times an hour
 0,15,30,45 * * * * root forge_run_plugin_job moinmoin create-wikis.php

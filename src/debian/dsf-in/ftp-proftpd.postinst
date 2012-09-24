@@ -28,7 +28,7 @@ set -e
 case "$1" in
     configure)
         # Patch Proftpd configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-ftp.sh configure-files
+	@BINARY_PATH@/install-ftp.sh configure-files
 	if [ -f /etc/proftpd/proftpd.conf.@OLDPACKAGE@-new ]
 	then
 		ucf --debconf-ok /etc/proftpd/proftpd.conf.@OLDPACKAGE@-new /etc/proftpd/proftpd.conf
@@ -36,7 +36,7 @@ case "$1" in
 	fi
 
         # Setup our FTP
-	/usr/share/@OLDPACKAGE@/bin/install-ftp.sh configure 
+	@BINARY_PATH@/install-ftp.sh configure 
 
         # Setup our FRS
 	chown www-data:www-data /var/lib/@OLDPACKAGE@/download

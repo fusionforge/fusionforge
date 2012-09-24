@@ -5,7 +5,7 @@
 INCLUDE_PATH=/etc/@OLDPACKAGE@:/usr/share/@OLDPACKAGE@/:/usr/share/@OLDPACKAGE@/www:/usr/share/@OLDPACKAGE@/common
 
 # FTP update
-0 * * * * root [ -x /usr/share/@OLDPACKAGE@/bin/install-ftp.sh ] && /usr/share/@OLDPACKAGE@/bin/install-ftp.sh update > /dev/null 2>&1
+0 * * * * root [ -x @BINARY_PATH@/install-ftp.sh ] && @BINARY_PATH@/install-ftp.sh update > /dev/null 2>&1
 
 # create and mount project directory in user's home directory
-0 * * * * root [ -x /usr/share/@OLDPACKAGE@/bin/ftp_create_group_access.php ] && /usr/bin/php -d include_path=$INCLUDE_PATH /usr/share/@OLDPACKAGE@/bin/ftp_create_group_access.php > /dev/null 2>&1
+0 * * * * root [ -x @BINARY_PATH@/ftp_create_group_access.php ] && /usr/bin/php -d include_path=$INCLUDE_PATH @BINARY_PATH@/ftp_create_group_access.php > /dev/null 2>&1

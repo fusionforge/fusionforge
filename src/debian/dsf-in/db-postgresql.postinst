@@ -49,7 +49,7 @@ set -e
 case "$1" in
     configure)
         # Patch DB configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-db.sh configure-files
+	@BINARY_PATH@/install-db.sh configure-files
 
 	# At first, the pg_hba.conf file is not yet handled by ucf, so
 	# we don't display the usual template, but instead a custom
@@ -81,7 +81,7 @@ case "$1" in
 
         # Setup our DB
 	v=0
-	/usr/share/@OLDPACKAGE@/bin/install-db.sh configure || v=$?
+	@BINARY_PATH@/install-db.sh configure || v=$?
 	if test x"$v" = x"100"; then
 	    db_get @PACKAGE@/shared/admin_password || true
 	    /usr/share/gforge/bin/forge_set_password admin "$RET"

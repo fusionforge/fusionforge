@@ -28,12 +28,12 @@ set -e
 case "$1" in
     configure)
         # Patch Postfix configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-postfix.sh configure-files
+	@BINARY_PATH@/install-postfix.sh configure-files
 	ucf --debconf-ok /etc/aliases.@OLDPACKAGE@-new /etc/aliases
 	ucf --debconf-ok /etc/postfix/main.cf.@OLDPACKAGE@-new /etc/postfix/main.cf
 	rm /etc/aliases.@OLDPACKAGE@-new
 	rm /etc/postfix/main.cf.@OLDPACKAGE@-new
-	/usr/share/@OLDPACKAGE@/bin/install-postfix.sh configure
+	@BINARY_PATH@/install-postfix.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

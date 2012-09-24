@@ -22,7 +22,7 @@ case "$1" in
 	db_title "Unconfiguring @FORGENAME@"
 
 	# Unpatch Postfix configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-postfix.sh purge-files
+	@BINARY_PATH@/install-postfix.sh purge-files
 	ucf --debconf-ok /etc/aliases.@OLDPACKAGE@-new /etc/aliases
 	ucf --debconf-ok /etc/postfix/main.cf.@OLDPACKAGE@-new /etc/postfix/main.cf
 	rm /etc/aliases.@OLDPACKAGE@-new
@@ -34,7 +34,7 @@ case "$1" in
 	db_stop
 
         # Exim config removal
-	/usr/share/@OLDPACKAGE@/bin/install-postfix.sh purge
+	@BINARY_PATH@/install-postfix.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

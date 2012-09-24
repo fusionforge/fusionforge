@@ -42,10 +42,10 @@ set -e
 case "$1" in
     remove)
         # Remove our database
-	/usr/share/@OLDPACKAGE@/bin/install-db.sh purge
+	@BINARY_PATH@/install-db.sh purge
 
         # Unpatch DB configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-db.sh purge-files
+	@BINARY_PATH@/install-db.sh purge-files
 	ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new ${pg_hba_dir}/pg_hba.conf
 	rm ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new
 

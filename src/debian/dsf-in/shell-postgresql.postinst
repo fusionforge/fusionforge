@@ -28,7 +28,7 @@ set -e
 case "$1" in
     configure)
         # Patch NSS configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-nsspgsql.sh configure-files
+	@BINARY_PATH@/install-nsspgsql.sh configure-files
 
 	# There's probably no /etc/nss-pgsql.conf yet (none provided by default with libnss-pgsql2)
 	if [ ! -f /etc/nss-pgsql.conf ]; then
@@ -55,7 +55,7 @@ case "$1" in
 	rm /etc/nsswitch.conf.@OLDPACKAGE@-new
 
 	# Install the chroot environment
-	/usr/share/@OLDPACKAGE@/bin/install-chroot.sh configure
+	@BINARY_PATH@/install-chroot.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

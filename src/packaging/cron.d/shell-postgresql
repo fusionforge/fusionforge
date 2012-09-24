@@ -3,4 +3,4 @@
 #
 
 # SCM/user/group update
-0 * * * * root [ -x /usr/share/@OLDPACKAGE@/bin/update-user-group-ssh.sh ] && /usr/share/@OLDPACKAGE@/bin/update-user-group-ssh.sh > /dev/null 2>&1
+0 * * * * root [ -x @BINARY_PATH@/update-user-group-ssh.sh ] && @BINARY_PATH@/update-user-group-ssh.sh > /dev/null 2>&1

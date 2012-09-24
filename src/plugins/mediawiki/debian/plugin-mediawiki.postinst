@@ -82,7 +82,7 @@ case "$1" in
 	then
 		/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl
 	fi
-	/usr/share/@OLDPACKAGE@/bin/register-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g') "@PLUGLONGNAME@"
+	@BINARY_PATH@/register-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g') "@PLUGLONGNAME@"
 	upgrade_mediawikis
 	;;
     

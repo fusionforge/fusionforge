@@ -26,7 +26,7 @@ set -e
 case "$1" in
     configure)
 	# Prepare database
-	/usr/share/@OLDPACKAGE@/bin/register-plugin forumml "ForumML"
+	@BINARY_PATH@/register-plugin forumml "ForumML"
 	/usr/share/@OLDPACKAGE@/plugins/forumml/bin/db-upgrade.pl
 	/usr/share/@OLDPACKAGE@/plugins/forumml/bin/install.sh
     ;;

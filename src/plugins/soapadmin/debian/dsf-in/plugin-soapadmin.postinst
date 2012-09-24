@@ -28,7 +28,7 @@ case "$1" in
 	@OLDPACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/bin/register-plugin soapadmin "SoapAdmin"'
+	su -s /bin/sh @OLDPACKAGE@ -c '@BINARY_PATH@/register-plugin soapadmin "SoapAdmin"'
 	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/plugins/soapadmin/bin/db-upgrade.pl'
     ;;
 

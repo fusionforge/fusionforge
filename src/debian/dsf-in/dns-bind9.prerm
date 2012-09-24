@@ -23,7 +23,7 @@ case "$1" in
 	db_title "Unconfiguring @FORGENAME@"
 
 	# Unpatch Bind configuration files
-	/usr/share/@OLDPACKAGE@/bin/install-dns.sh purge-files
+	@BINARY_PATH@/install-dns.sh purge-files
 	ucf --debconf-ok /etc/bind/named.conf.@OLDPACKAGE@-new /etc/bind/named.conf
 	rm /etc/bind/named.conf.@OLDPACKAGE@-new
 	ucf --purge /etc/bind/named.conf
@@ -32,7 +32,7 @@ case "$1" in
 	db_stop
 
         # DNS config removal
-	/usr/share/@OLDPACKAGE@/bin/install-dns.sh purge
+	@BINARY_PATH@/install-dns.sh purge
 
 	;;
     upgrade|deconfigure|failed-upgrade)

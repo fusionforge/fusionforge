@@ -31,7 +31,7 @@ case "$1" in
         # Setup our Apache
 	touch /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts  && \
 		chown @OLDPACKAGE@:@OLDPACKAGE@ /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts && \
-		/usr/share/@OLDPACKAGE@/bin/create-vhosts.sh --norestart
+		@BINARY_PATH@/create-vhosts.sh --norestart
 
 	# Make Apache see these new changes
 	invoke-rc.d apache2 reload || true

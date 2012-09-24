@@ -26,7 +26,7 @@ set -e
 case "$1" in
     configure)
 	# Prepare database
-	/usr/share/@OLDPACKAGE@/bin/register-plugin mailman "Mailman"
+	@BINARY_PATH@/register-plugin mailman "Mailman"
 	/usr/share/@OLDPACKAGE@/plugins/mailman/bin/db-upgrade.pl
 	/usr/share/@OLDPACKAGE@/plugins/mailman/bin/install.sh
     ;;

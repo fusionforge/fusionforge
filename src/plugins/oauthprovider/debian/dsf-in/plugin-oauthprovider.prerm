@@ -22,7 +22,7 @@ case "$1" in
     remove|deconfigure)
 	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
-		/usr/share/@OLDPACKAGE@/bin/unregister-plugin oauthprovider
+		@BINARY_PATH@/unregister-plugin oauthprovider
 	else
 		echo "WARNING: database not available to unregister oauthprovider plugin"
 	fi
