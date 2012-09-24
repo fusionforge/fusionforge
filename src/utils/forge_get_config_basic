@@ -1,33 +1,33 @@
-#! /usr/bin/php 
-<?php
-/**
- * FusionForge source control management
- *
- * Copyright 2012, Christian Bayle
- *
- * This file is part of FusionForge. FusionForge is free software;
- * you can redistribute it and/or modify it under the terms of the
- * GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the Licence, or (at your option)
- * any later version.
- *
- * FusionForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with FusionForge; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */
-        
-require (dirname(__FILE__).'/../common/include/env.inc.php');
-require_once $gfcommon.'include/pre.php';
-forge_read_config_file (dirname(__FILE__) . '/../../src/etc/config.ini-' . $argv[1]) ;
-forge_read_config_file (dirname(__FILE__) . '/../../src/etc/config.ini.d/defaults.ini') ;
-printf("%s",forge_get_config ($argv[2]));
+#! /bin/sh
+# FusionForge source control management
+#
+# Copyright 2012, Christian Bayle
+#
+# This file is part of FusionForge. FusionForge is free software;
+# you can redistribute it and/or modify it under the terms of the
+# GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the Licence, or (at your option)
+# any later version.
+#
+# FusionForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
+# In php this would be coded like this
+#require (dirname(__FILE__).'/../common/include/env.inc.php');
+#require_once $gfcommon.'include/pre.php';
+#forge_read_config_file (dirname(__FILE__) . '/../../src/etc/config.ini-' . $argv[1]) ;
+#forge_read_config_file (dirname(__FILE__) . '/../../src/etc/config.ini.d/defaults.ini') ;
+#printf("%s",forge_get_config ($argv[2]));
+# but it didn't work, with only php5-cli build-depends in a cowbuilder
+
+# So this is the very short shell version for package build purpose
+pathfromarvg0=`dirname $0`
+curpath=`cd $pathfromarvg0;pwd`
+grep ^$2 $curpath/../etc/config.ini-$1 | cut -d= -f2 | xargs echo
