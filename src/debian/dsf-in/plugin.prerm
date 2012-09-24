@@ -22,9 +22,9 @@ case "$1" in
 	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
 		@BINARY_PATH@/unregister-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g')
-		if [ -f /usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-delete.pl ]
+		if [ -f @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-delete.pl ]
 		then
-			/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-delete.pl
+			@PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-delete.pl
 		fi
 	fi
         ;;

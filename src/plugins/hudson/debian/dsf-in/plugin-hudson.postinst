@@ -27,7 +27,7 @@ case "$1" in
     configure)
 	# Prepare database
 	su -s /bin/sh @OLDPACKAGE@ -c '@BINARY_PATH@/register-plugin hudson "Hudson"'
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/plugins/hudson/bin/db-upgrade.pl'
+	su -s /bin/sh @OLDPACKAGE@ -c '@PLUGIN_PATH@/hudson/bin/db-upgrade.pl'
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

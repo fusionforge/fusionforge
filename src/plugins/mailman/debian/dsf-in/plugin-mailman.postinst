@@ -27,8 +27,8 @@ case "$1" in
     configure)
 	# Prepare database
 	@BINARY_PATH@/register-plugin mailman "Mailman"
-	/usr/share/@OLDPACKAGE@/plugins/mailman/bin/db-upgrade.pl
-	/usr/share/@OLDPACKAGE@/plugins/mailman/bin/install.sh
+	@PLUGIN_PATH@/mailman/bin/db-upgrade.pl
+	@PLUGIN_PATH@/mailman/bin/install.sh
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

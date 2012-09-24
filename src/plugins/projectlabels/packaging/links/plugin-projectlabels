@@ -1,1 +1,1 @@
-/usr/share/@OLDPACKAGE@/plugins/projectlabels/www /usr/share/@OLDPACKAGE@/www/plugins/projectlabels
+@PLUGIN_PATH@/projectlabels/www /usr/share/@OLDPACKAGE@/www/plugins/projectlabels

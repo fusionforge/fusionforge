@@ -1,1 +1,1 @@
-/usr/share/@OLDPACKAGE@/plugins/hudson/www /usr/share/@OLDPACKAGE@/www/plugins/hudson
+@PLUGIN_PATH@/hudson/www /usr/share/@OLDPACKAGE@/www/plugins/hudson

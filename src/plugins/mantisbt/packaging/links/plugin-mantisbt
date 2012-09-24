@@ -1,1 +1,1 @@
-/usr/share/@OLDPACKAGE@/plugins/mantisbt/www /usr/share/@OLDPACKAGE@/www/plugins/mantisbt
+@PLUGIN_PATH@/mantisbt/www /usr/share/@OLDPACKAGE@/www/plugins/mantisbt

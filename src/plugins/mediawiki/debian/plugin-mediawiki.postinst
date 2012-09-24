@@ -78,9 +78,9 @@ case "$1" in
 	    move_mediawikis
 
 	# Run plugin specific db upgrade
-	if [ -f /usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl ]
+	if [ -f @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-upgrade.pl ]
 	then
-		/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl
+		@PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-upgrade.pl
 	fi
 	@BINARY_PATH@/register-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g') "@PLUGLONGNAME@"
 	upgrade_mediawikis

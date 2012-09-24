@@ -1,1 +1,1 @@
-/usr/share/@OLDPACKAGE@/plugins/blocks/www /usr/share/@OLDPACKAGE@/www/plugins/blocks
+@PLUGIN_PATH@/blocks/www /usr/share/@OLDPACKAGE@/www/plugins/blocks

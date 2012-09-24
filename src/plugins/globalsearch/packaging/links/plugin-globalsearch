@@ -1,1 +1,1 @@
-/usr/share/@OLDPACKAGE@/plugins/globalsearch/www /usr/share/@OLDPACKAGE@/www/plugins/globalsearch
+@PLUGIN_PATH@/globalsearch/www /usr/share/@OLDPACKAGE@/www/plugins/globalsearch

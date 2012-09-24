@@ -1,4 +1,4 @@
-/usr/lib/cgi-bin/gitweb.cgi /usr/share/@OLDPACKAGE@/plugins/scmgit/cgi-bin/gitweb.cgi
+/usr/lib/cgi-bin/gitweb.cgi @PLUGIN_PATH@/scmgit/cgi-bin/gitweb.cgi
 /usr/share/gitweb/gitweb.cgi /usr/share/@OLDPACKAGE@/www/plugins/scmgit/gitweb.cgi
 /usr/share/gitweb/index.cgi /usr/share/@OLDPACKAGE@/www/plugins/scmgit/index.cgi
 /usr/share/gitweb/static/git-favicon.png /usr/share/@OLDPACKAGE@/www/plugins/scmgit/git-favicon.png

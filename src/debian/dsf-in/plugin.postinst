@@ -26,9 +26,9 @@ set -e
 case "$1" in
     configure)
 	# Run plugin specific db upgrade
-	if [ -f /usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl ]
+	if [ -f @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-upgrade.pl ]
 	then
-		/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl
+		@PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-upgrade.pl
 	fi
 	@BINARY_PATH@/register-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g') "@PLUGLONGNAME@"
 	# Restart apache if there is some change in config
@@ -41,9 +41,9 @@ case "$1" in
 		done
 	fi
 	# Run plugin specific install
-	if [ -f /usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/install.sh ]
+	if [ -f @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh ]
 	then
-		/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/install.sh configure
+		@PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh configure
 	fi
     ;;
 

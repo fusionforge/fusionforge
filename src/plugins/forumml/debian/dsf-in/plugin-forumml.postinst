@@ -27,8 +27,8 @@ case "$1" in
     configure)
 	# Prepare database
 	@BINARY_PATH@/register-plugin forumml "ForumML"
-	/usr/share/@OLDPACKAGE@/plugins/forumml/bin/db-upgrade.pl
-	/usr/share/@OLDPACKAGE@/plugins/forumml/bin/install.sh
+	@PLUGIN_PATH@/forumml/bin/db-upgrade.pl
+	@PLUGIN_PATH@/forumml/bin/install.sh
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
