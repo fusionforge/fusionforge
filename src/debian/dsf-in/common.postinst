@@ -35,8 +35,8 @@ case "$1" in
 	    /usr/share/xml/entities/xhtml/xhtml-symbol.ent \
 	    ; do
 		fname=${file##*/}
-		test -s /usr/share/gforge/common/include/$fname || \
-		    ln -sf $file /usr/share/gforge/common/include/
+		test -s @SOURCE_PATH@/common/include/$fname || \
+		    ln -sf $file @SOURCE_PATH@/common/include/
 	done
 
 	adduser --system --group --home /var/www/@OLDPACKAGE@ @OLDPACKAGE@ > /dev/null 2>&1
