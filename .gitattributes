@@ -70,7 +70,6 @@
 3rd-party/yui/yui_2.8.0r4-1.dsc -text
 3rd-party/yui/yui_2.8.0r4.orig.tar.gz -text svneol=unset#application/gzip
 /fix_phpunit.xslt -text svneol=unset#text/xml
-hook/ubuntu/G00ubukey -text
 htdocs/box-grad2.png -text svneol=unset#image/png
 htdocs/deb-repo/dists/hardy/3rd-party/Packages/jquery-goodies/jquery-goodies_3-1~bpo50+1.debian.tar.gz -text
 htdocs/deb-repo/dists/hardy/3rd-party/Packages/jquery-goodies/jquery-goodies_3-1~bpo50+1.dsc -text
