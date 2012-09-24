@@ -1,4 +1,4 @@
-/var/log/@OLDPACKAGE@/access.log /var/log/@OLDPACKAGE@/awstats.log {
+@LOG_PATH@/access.log @LOG_PATH@/awstats.log {
        weekly
        missingok
        rotate 52

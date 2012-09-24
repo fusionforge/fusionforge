@@ -1,4 +1,4 @@
-/var/log/@OLDPACKAGE@/vhosts/*/access.log {
+@LOG_PATH@/vhosts/*/access.log {
        weekly
        missingok
        rotate 52
