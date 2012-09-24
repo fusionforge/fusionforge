@@ -42,12 +42,12 @@ switch:
 	@echo "=========================================================================="
 	@$(MAKE) -f Makefile.$(DIST)
 
-check:
+check: testdepends
 	## To run test in verbose mode :
 	#cd tests ; phpunit --verbose unit; phpunit --verbose code; 
 	cd tests ; php AllTests.php | perl -p -e '$$e=1 if /FAILURE/ ; END { exit 1 if $$e }'
 
-checkfull:
+checkfull: testdepends
 	## To run test in verbose mode :
 	#cd tests ; phpunit --verbose unit; phpunit --verbose code; phpunit --verbose build
 	cd tests ; php AllFullTests.php

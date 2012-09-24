@@ -494,6 +494,8 @@ exportgnupgkey:
 
 depends: dpkg-dev dpkg-parsechangelog
 
+testdepends: phpunit php-htmlpurifier pcregrep
+
 dpkg-dev:
 	@[ -f /usr/bin/dpkg-architecture ] || (echo "You need to install $@ package" ; exit 1)
 

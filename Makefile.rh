@@ -59,6 +59,9 @@ fusionforge: # Build rpm fusionforge packages                               #
 	sed -e 's/@@VERSION@@/$(version)/g' < src/fusionforge.spec > $(RPM_TMP)/SPECS/fusionforge.spec
 	$(RPMBUILD) -bb $(RPM_TMP)/SPECS/fusionforge.spec 2>&1| grep -v '/etc/magic'
 
+testdepends:
+	@echo "TODO: Makefile.rh $@"
+
 3rd-party:
 	$(MAKE) -C 3rd-party -f Makefile.rh BUILDRESULT=$(BUILDRESULT) all
 
