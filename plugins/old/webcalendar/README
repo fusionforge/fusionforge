@@ -1,4 +1,0 @@
-Change owner of www/includes/settings.php
-The owner must be apache
-
-chown www-data www/includes/settings.php
