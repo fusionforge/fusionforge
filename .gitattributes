@@ -909,7 +909,6 @@ src/lib/vendor/coolfieldset/images/expanded.gif -text svneol=unset#unset
 src/lib/vendor/coolfieldset/index.html -text
 src/lib/vendor/coolfieldset/js/jquery.coolfieldset.js -text
 src/lib/vendor/coolfieldset/js/jquery.js -text
-src/lib/vendor/jquery-jqplot/excanvas.js -text
 src/lib/vendor/jquery-jqplot/jquery.jqplot.css -text
 src/lib/vendor/jquery-jqplot/jquery.jqplot.js -text
 src/lib/vendor/jquery-jqplot/plugins/jqplot.BezierCurveRenderer.js -text

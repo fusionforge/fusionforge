@@ -445,7 +445,6 @@ function html_use_jqueryjqplot() {
 	html_use_jquery();
 	use_javascript('/scripts/jquery-jqplot/jquery.jqplot.js');
 	use_stylesheet('/scripts/jquery-jqplot/jquery.jqplot.css');
-	use_javascript('/scripts/jquery-jqplot/excanvas.js');
 }
 
 function html_use_jqueryjqplotpluginCanvas() {
