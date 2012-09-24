@@ -1,3 +1,0 @@
-BUILDERDIR=/var/lib/jenkins/pbuilder
-DEBMIRROR=http://g-rub.rd.francetelecom.fr:3142/debian
-KEEPVM=true
