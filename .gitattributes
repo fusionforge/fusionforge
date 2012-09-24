@@ -69,9 +69,6 @@
 3rd-party/yui/yui_2.8.0r4-1.diff.gz -text svneol=unset#application/gzip
 3rd-party/yui/yui_2.8.0r4-1.dsc -text
 3rd-party/yui/yui_2.8.0r4.orig.tar.gz -text svneol=unset#application/gzip
-delivery/fusionforge/package/config -text
-delivery/gforge/package/config -text
-delivery/novaforge/package/config -text
 /fix_phpunit.xslt -text svneol=unset#text/xml
 hook/ubuntu/G00ubukey -text
 htdocs/box-grad2.png -text svneol=unset#image/png
@@ -153,16 +150,6 @@ htdocs/robots.txt -text
 htdocs/tabber.css -text svneol=unset#text/css
 htdocs/tabber.js -text
 htdocs/top-logo.png -text svneol=unset#image/png
-packaging/build_component -text
-packaging/build_delivery -text
-packaging/delivery/build -text
-packaging/functions -text
-packaging/tag_component_create -text
-packaging/tag_component_delete -text
-packaging/tag_delivery_create -text
-packaging/tag_delivery_delete -text
-packaging/tag_packaging_create -text
-packaging/tag_packaging_delete -text
 plugins/README -text
 plugins/coclico/Makefile -text
 plugins/coclico/Makefile.debian -text
