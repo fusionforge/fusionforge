@@ -1,6 +1,6 @@
 bin
 etc/@PACKAGE@/config.ini.d
-etc/@OLDPACKAGE@/templates
+@CONFIG_PATH@/templates
 @BINARY_PATH@
 @SOURCE_PATH@/lib
 @SOURCE_PATH@/common

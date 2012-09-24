@@ -1,3 +1,3 @@
 deb-specific/create-vhosts.sh       @BINARY_PATH@/
 deb-specific/prepare-vhosts-file.pl @BINARY_PATH@/
-etc/templates/httpd.vhosts          etc/@OLDPACKAGE@/templates/
+etc/templates/httpd.vhosts          @CONFIG_PATH@/templates/

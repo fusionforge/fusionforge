@@ -1,4 +1,4 @@
-etc/@OLDPACKAGE@/plugins/mediawiki
+@CONFIG_PATH@/plugins/mediawiki
 etc/mediawiki-extensions/extensions-available
 @PLUGIN_PATH@/mediawiki/bin
 @PLUGIN_PATH@/mediawiki/common

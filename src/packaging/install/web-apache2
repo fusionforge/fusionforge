@@ -1,5 +1,5 @@
 www                                 @SOURCE_PATH@/
-www/index_std.php                   etc/@OLDPACKAGE@/custom/
+www/index_std.php                   @CONFIG_PATH@/custom/
 utils/install-apache.sh             @BINARY_PATH@/
 utils/manage-apache-config.sh	    @BINARY_PATH@/
 etc/httpd.conf.d-fhs		    @SOURCE_PATH@/etc/

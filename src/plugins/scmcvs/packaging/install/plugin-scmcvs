@@ -3,5 +3,5 @@ plugins/scmcvs/bin/*                   @PLUGIN_PATH@/scmcvs/bin/
 plugins/scmcvs/sbin/*                  @PLUGIN_PATH@/scmcvs/sbin/
 plugins/scmcvs/common/*                @PLUGIN_PATH@/scmcvs/common/
 plugins/scmcvs/cronjobs/*              @PLUGIN_PATH@/scmcvs/cronjobs/
-plugins/scmcvs/etc/plugins/scmcvs/*    etc/@OLDPACKAGE@/plugins/scmcvs/
+plugins/scmcvs/etc/plugins/scmcvs/*    @CONFIG_PATH@/plugins/scmcvs/
 plugins/scmcvs/etc/*.ini 	       etc/@PACKAGE@/config.ini.d/

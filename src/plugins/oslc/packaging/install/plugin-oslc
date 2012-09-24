@@ -3,6 +3,6 @@ plugins/oslc/include/*                 @PLUGIN_PATH@/oslc/include/
 plugins/oslc/bin/*                     @PLUGIN_PATH@/oslc/bin/
 plugins/oslc/www/*                     @PLUGIN_PATH@/oslc/www/
 plugins/oslc/cronjobs/*                @SOURCE_PATH@/cronjobs
-plugins/oslc/etc/plugins/oslc/*        etc/@OLDPACKAGE@/plugins/oslc/
-plugins/oslc/etc/httpd.d/*             etc/@OLDPACKAGE@/httpd.conf.d/
-plugins/oslc/etc/oslc.ini              etc/@OLDPACKAGE@/config.ini.d/
+plugins/oslc/etc/plugins/oslc/*        @CONFIG_PATH@/plugins/oslc/
+plugins/oslc/etc/httpd.d/*             @CONFIG_PATH@/httpd.conf.d/
+plugins/oslc/etc/oslc.ini              @CONFIG_PATH@/config.ini.d/

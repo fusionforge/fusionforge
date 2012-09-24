@@ -1,5 +1,5 @@
-etc/@OLDPACKAGE@
-etc/@OLDPACKAGE@/templates
+@CONFIG_PATH@
+@CONFIG_PATH@/templates
 @BINARY_PATH@
 var
 var/lib

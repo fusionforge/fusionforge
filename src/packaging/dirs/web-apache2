@@ -1,6 +1,6 @@
-etc/@OLDPACKAGE@/custom
-etc/@OLDPACKAGE@/languages-local
-etc/@OLDPACKAGE@/templates
+@CONFIG_PATH@/custom
+@CONFIG_PATH@/languages-local
+@CONFIG_PATH@/templates
 @BINARY_PATH@
 @PLUGIN_PATH@
 @SOURCE_PATH@/www

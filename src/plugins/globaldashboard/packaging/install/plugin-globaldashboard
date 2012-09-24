@@ -4,6 +4,6 @@ plugins/globaldashboard/db/*                      @PLUGIN_PATH@/globaldashboard/
 plugins/globaldashboard/bin/*                     @PLUGIN_PATH@/globaldashboard/bin/
 plugins/globaldashboard/www/*                     @PLUGIN_PATH@/globaldashboard/www/
 plugins/globaldashboard/cronjobs/*                @SOURCE_PATH@/cronjobs
-plugins/globaldashboard/etc/plugins/globaldashboard/*     etc/@OLDPACKAGE@/plugins/globaldashboard/
+plugins/globaldashboard/etc/plugins/globaldashboard/*     @CONFIG_PATH@/plugins/globaldashboard/
 plugins/globaldashboard/etc/httpd.d/*             @SOURCE_PATH@/etc/httpd.d/
 plugins/globaldashboard/etc/globaldashboard.ini	             etc/@PACKAGE@/config.ini.d/

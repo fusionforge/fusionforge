@@ -1,4 +1,4 @@
-etc/@OLDPACKAGE@/templates
+@CONFIG_PATH@/templates
 @BINARY_PATH@
 @DATA_PATH@/chroot
 @DATA_PATH@/download

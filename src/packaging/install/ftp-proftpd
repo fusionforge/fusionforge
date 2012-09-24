@@ -1,2 +1,2 @@
 deb-specific/install-ftp.sh  @BINARY_PATH@/
-deb-specific/sf-proftpd.conf etc/@OLDPACKAGE@/
+deb-specific/sf-proftpd.conf @CONFIG_PATH@/
