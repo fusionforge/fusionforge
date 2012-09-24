@@ -5,7 +5,7 @@ etc/@OLDPACKAGE@
 @BINARY_PATH@
 @SOURCE_PATH@/db
 @SOURCE_PATH@/lib
-var/lib/@OLDPACKAGE@
-var/lib/@OLDPACKAGE@/tmp
-var/lib/@OLDPACKAGE@/etc
-var/lib/@OLDPACKAGE@/db
+@DATA_PATH@
+@DATA_PATH@/tmp
+@DATA_PATH@/etc
+@DATA_PATH@/db

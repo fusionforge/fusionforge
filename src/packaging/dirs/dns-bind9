@@ -1,5 +1,5 @@
 etc/@OLDPACKAGE@/templates
 @BINARY_PATH@
-var/lib/@OLDPACKAGE@/bind
-var/lib/@OLDPACKAGE@/tmp
-var/lib/@OLDPACKAGE@/etc
+@DATA_PATH@/bind
+@DATA_PATH@/tmp
+@DATA_PATH@/etc

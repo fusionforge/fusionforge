@@ -6,4 +6,4 @@ etc/@OLDPACKAGE@/templates
 @SOURCE_PATH@/common
 usr/share/locale
 usr/sbin
-var/lib/@OLDPACKAGE@/www/plugins
+@DATA_PATH@/www/plugins

@@ -6,5 +6,5 @@ etc/mediawiki-extensions/extensions-available
 @PLUGIN_PATH@/mediawiki/www
 @SOURCE_PATH@/etc/httpd.d
 usr/share/mediawiki/skins
-var/lib/@OLDPACKAGE@/plugins/mediawiki/dumps
-var/lib/@OLDPACKAGE@/plugins/mediawiki/projects
+@DATA_PATH@/plugins/mediawiki/dumps
+@DATA_PATH@/plugins/mediawiki/projects

@@ -1,3 +1,3 @@
 etc/@OLDPACKAGE@
 @BINARY_PATH@
-var/lib/@OLDPACKAGE@/etc
+@DATA_PATH@/etc

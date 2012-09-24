@@ -16,6 +16,6 @@ usr/share/mediawiki/trackback.php		@PLUGIN_PATH@/mediawiki/www/trackback.php
 usr/share/mediawiki/skins			@PLUGIN_PATH@/mediawiki/www/skins
 usr/share/mediawiki/skins/monobook/headbg.jpg	@SOURCE_PATH@/www/themes/css/mw-headbg.jpg
 
-usr/share/mediawiki				var/lib/@OLDPACKAGE@/plugins/mediawiki/master
+usr/share/mediawiki				@DATA_PATH@/plugins/mediawiki/master
 
 @PLUGIN_PATH@/mediawiki/www @SOURCE_PATH@/www/plugins/mediawiki

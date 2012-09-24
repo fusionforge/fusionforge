@@ -3,9 +3,9 @@ etc/@OLDPACKAGE@/templates
 @BINARY_PATH@
 var
 var/lib
-var/lib/@OLDPACKAGE@
-var/lib/@OLDPACKAGE@/chroot
-var/lib/@OLDPACKAGE@/chroot/var
-var/lib/@OLDPACKAGE@/chroot/var/lib
-var/lib/@OLDPACKAGE@/chroot@DATA_PATH@
-var/lib/@OLDPACKAGE@/etc
+@DATA_PATH@
+@DATA_PATH@/chroot
+@DATA_PATH@/chroot/var
+@DATA_PATH@/chroot/var/lib
+@DATA_PATH@/chroot@DATA_PATH@
+@DATA_PATH@/etc
