@@ -1,7 +1,12 @@
 -include ../config/default
 -include ../config/$(shell hostname)
 
-default: installtemplate
+# Guess where lxc data is and default to /usr/lib/lxc
+LXC_DATA:=$(shell [ -d /usr/lib/lxc ] && echo /usr/lib/lxc)$(shell [ -d /usr/share/lxc ] && echo /usr/share/lxc)
+LXC_DATA:=$(shell [ -z "$(LXC_DATA)" ] && echo /usr/lib/lxc)$(shell [ -z "$(LXC_DATA)" ] || echo "$(LXC_DATA)")
+TEMPLATELIST:=$(LXC_DATA)/templates/lxc-debian7 $(LXC_DATA)/templates/lxc-debian6 $(LXC_DATA)/templates/lxc-centos5 $(LXC_DATA)/templates/lxc-centos6
+
+default: checkdepends installtemplate
 
 help: 
 	@echo "read the Makefile to see available targets"
@@ -15,16 +20,18 @@ checkmount: checkfstab /cgroup
 checkfstab:
 	@grep ^cgroup /etc/fstab || (echo "You need to add cgroup entry to fstab 'cgroup /cgroup cgroup defaults 0 0'" && false)
 
-/usr/lib/lxc:
+checkdepends: $(LXC_DATA) /lib/bridge-utils /usr/bin/netmask /usr/sbin/rinse /usr/sbin/tunctl
+
+$(LXC_DATA):
 	@[ -d $@ ] || sudo apt-get install lxc
 
-/usr/share/bridge-utils:
-	@[ -d $@ ] || apt-get install bridge-utils
+/lib/bridge-utils:
+	@[ -d $@ ] || sudo apt-get install bridge-utils
 
 /usr/bin/netmask:
 	@[ -f $@ ] || sudo apt-get install netmask
 
-/usr/bin/rinse:
+/usr/sbin/rinse:
 	@[ -f $@ ] || sudo apt-get install rinse
 
 /usr/sbin/tunctl:
@@ -49,21 +56,24 @@ addrights: beroot
 delrights: beroot
 	lxc-setcap -d
 
-installtemplate: /usr/lib/lxc/templates/lxc-debian7 /usr/lib/lxc/templates/lxc-debian6 /usr/lib/lxc/templates/lxc-centos5 /usr/lib/lxc/templates/lxc-centos6
+installtemplate: $(TEMPLATELIST)
 
-/usr/lib/lxc/templates/lxc-debian6: lxc-debian6 /usr/lib/lxc Makefile
-	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian6
-	chmod 755 /usr/lib/lxc/templates/lxc-debian6
+removetemplate:
+	rm -f $(TEMPLATELIST)
 
-/usr/lib/lxc/templates/lxc-debian7: lxc-debian7 /usr/lib/lxc Makefile
-	cat lxc-debian7 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian7
-	chmod 755 /usr/lib/lxc/templates/lxc-debian7
+$(LXC_DATA)/templates/lxc-debian6: lxc-debian6 $(LXC_DATA) Makefile
+	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > $(LXC_DATA)/templates/lxc-debian6
+	chmod 755 $(LXC_DATA)/templates/lxc-debian6
 
-/usr/lib/lxc/templates/lxc-centos5: lxc-centos5 /usr/lib/lxc Makefile
-	cp lxc-centos5 /usr/lib/lxc/templates/
+$(LXC_DATA)/templates/lxc-debian7: lxc-debian7 $(LXC_DATA) Makefile
+	cat lxc-debian7 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > $(LXC_DATA)/templates/lxc-debian7
+	chmod 755 $(LXC_DATA)/templates/lxc-debian7
 
-/usr/lib/lxc/templates/lxc-centos6: lxc-centos6 /usr/lib/lxc Makefile
-	cp lxc-centos6 /usr/lib/lxc/templates/
+$(LXC_DATA)/templates/lxc-centos5: lxc-centos5 $(LXC_DATA) Makefile
+	cp lxc-centos5 $(LXC_DATA)/templates/
+
+$(LXC_DATA)/templates/lxc-centos6: lxc-centos6 $(LXC_DATA) Makefile
+	cp lxc-centos6 $(LXC_DATA)/templates/
 
 createdeb:
 	sudo /usr/bin/lxc-create -n dhdebian6.local -f config.debian6 -t debian6

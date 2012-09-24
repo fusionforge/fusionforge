@@ -2,6 +2,12 @@
 echo "==== START $HOST ===="
 echo "VMENGINE=$VMENGINE VMTEMPLATE=$VMTEMPLATE CIDR=$CIDR IPGW=$IPGW"
 
+LXC_PATH=/usr/lib/lxc
+if [ -d /usr/share/lxc ] 
+then 
+	LXC_PATH=/usr/share/lxc
+fi
+
 lxcdir=`dirname $0`
 export TEMPLATE=$VMTEMPLATE
 
@@ -16,9 +22,9 @@ then
 	exit 2
 fi
 
-if [ ! -e /usr/lib/lxc/templates/lxc-$TEMPLATE ]
+if [ ! -e $LXC_PATH/templates/lxc-$TEMPLATE ]
 then 
-	echo "/usr/lib/lxc/templates/lxc-$TEMPLATE not found"
+	echo "$LXC_PATH/templates/lxc-$TEMPLATE not found"
 	echo "you need to install template"
 	echo "run: (cd $lxcdir ; sudo make)"
 else

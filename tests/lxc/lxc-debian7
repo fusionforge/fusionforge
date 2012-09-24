@@ -260,7 +260,7 @@ copy_debian()
 
 install_debian()
 {
-    cache="/var/cache/lxc/debian"
+    cache="/var/cache/lxc/debian-7"
     rootfs=$1
     mkdir -p /var/lock/subsys/
     (
@@ -357,7 +357,7 @@ EOF
 
 clean()
 {
-    cache="/var/cache/lxc/debian"
+    cache="/var/cache/lxc/debian-7"
 
     if [ ! -e $cache ]; then
 	exit 0
