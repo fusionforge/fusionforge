@@ -33,9 +33,9 @@ case "$1" in
 		    x"$file" && rm -f /usr/share/gforge/common/include/$fname
 	done
 
-	if [ -f /etc/@OLDPACKAGE@/local.pl ] 
+	if [ -f @CONFIG_PATH@/local.pl ] 
 	then
-		rm -f /etc/@OLDPACKAGE@/local.pl
+		rm -f @CONFIG_PATH@/local.pl
 	fi
 	;;
     upgrade|deconfigure|failed-upgrade)

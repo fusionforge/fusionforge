@@ -27,15 +27,15 @@ set -e
 
 case "$1" in
     configure)
-	if [ ! -e /etc/@OLDPACKAGE@/ssl-cert.pem ] || [ ! -e /etc/@OLDPACKAGE@/ssl-cert.key ] ; then
+	if [ ! -e @CONFIG_PATH@/ssl-cert.pem ] || [ ! -e @CONFIG_PATH@/ssl-cert.key ] ; then
 	    # Uh-oh, no SSL cert, let's make sure at least a dummy one exists.
 	    if [ ! -e /etc/ssl/certs/ssl-cert-snakeoil.pem ] || [ ! -e /etc/ssl/private/ssl-cert-snakeoil.key ] ; then
 		# What, not even the snakeoil cert is there?  Let's generate it
 		make-ssl-cert generate-default-snakeoil
 	    fi
 	    # Right.  At this point, it should be safe to set the symlinks.
-	    ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/@OLDPACKAGE@/ssl-cert.pem
-	    ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/@OLDPACKAGE@/ssl-cert.key
+	    ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem @CONFIG_PATH@/ssl-cert.pem
+	    ln -s /etc/ssl/private/ssl-cert-snakeoil.key @CONFIG_PATH@/ssl-cert.key
 	fi
 	
 	for i in secrets.inc vhost-list.inc vhost-main.inc vhost-projects.inc ; do
@@ -71,7 +71,7 @@ case "$1" in
 	    rm -f /etc/apache2/conf.d/@OLDPACKAGE@.httpd.conf
 	fi
 	if [ -d /etc/apache2/sites-available ] && [ ! -h /etc/apache2/sites-available/@OLDPACKAGE@ ] ; then
-	    ln -s /etc/@OLDPACKAGE@/httpd.conf /etc/apache2/sites-available/@OLDPACKAGE@
+	    ln -s @CONFIG_PATH@/httpd.conf /etc/apache2/sites-available/@OLDPACKAGE@
 	fi
 	a2ensite @OLDPACKAGE@
 	

@@ -2,7 +2,7 @@
 # Regular cron jobs for the ftp-proftpd package
 #
 
-INCLUDE_PATH=/etc/@OLDPACKAGE@:@SOURCE_PATH@/:@SOURCE_PATH@/www:@SOURCE_PATH@/common
+INCLUDE_PATH=@CONFIG_PATH@:@SOURCE_PATH@/:@SOURCE_PATH@/www:@SOURCE_PATH@/common
 
 # FTP update
 0 * * * * root [ -x @BINARY_PATH@/install-ftp.sh ] && @BINARY_PATH@/install-ftp.sh update > /dev/null 2>&1

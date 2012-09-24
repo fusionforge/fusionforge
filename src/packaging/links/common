@@ -1,4 +1,4 @@
 @SOURCE_PATH@/common/include/database-pgsql.php @SOURCE_PATH@/common/include/database.php
-/etc/@PACKAGE@/config.ini /etc/@OLDPACKAGE@/config.ini
-/etc/@PACKAGE@/config.ini.d /etc/@OLDPACKAGE@/config.ini.d
+/etc/@PACKAGE@/config.ini @CONFIG_PATH@/config.ini
+/etc/@PACKAGE@/config.ini.d @CONFIG_PATH@/config.ini.d
 @PLUGIN_PATH@/authbuiltin/www @SOURCE_PATH@/www/plugins/authbuiltin

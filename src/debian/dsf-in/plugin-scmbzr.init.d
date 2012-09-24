@@ -20,9 +20,9 @@ SCRIPTNAME=/etc/init.d/$NAME
 [ -x /usr/bin/serve-branches ] || exit 0
 
 # Check if configuration file is present
-[ ! -f /etc/@OLDPACKAGE@/plugins/scmbzr/serve-branches.conf ] && exit 0
+[ ! -f @CONFIG_PATH@/plugins/scmbzr/serve-branches.conf ] && exit 0
 
-. /etc/@OLDPACKAGE@/plugins/scmbzr/serve-branches.conf
+. @CONFIG_PATH@/plugins/scmbzr/serve-branches.conf
 
 #
 #	Function that starts the daemon/service.
