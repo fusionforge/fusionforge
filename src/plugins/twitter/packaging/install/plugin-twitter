@@ -1,4 +1,4 @@
-plugins/twitter/common/*                  usr/share/@OLDPACKAGE@/plugins/twitter/common/
-plugins/twitter/include/*                  usr/share/@OLDPACKAGE@/plugins/twitter/include/
-plugins/twitter/www/*                  usr/share/@OLDPACKAGE@/plugins/twitter/www/
+plugins/twitter/common/*                  @PLUGIN_PATH@/twitter/common/
+plugins/twitter/include/*                  @PLUGIN_PATH@/twitter/include/
+plugins/twitter/www/*                  @PLUGIN_PATH@/twitter/www/
 plugins/twitter/etc/twitter.ini	             etc/@PACKAGE@/config.ini.d/

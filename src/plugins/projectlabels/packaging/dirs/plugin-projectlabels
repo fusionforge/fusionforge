@@ -1,4 +1,4 @@
-usr/share/@OLDPACKAGE@/plugins/projectlabels/bin
-usr/share/@OLDPACKAGE@/plugins/projectlabels/lib
-usr/share/@OLDPACKAGE@/plugins/projectlabels/www
-usr/share/@OLDPACKAGE@/plugins/projectlabels/common
+@PLUGIN_PATH@/projectlabels/bin
+@PLUGIN_PATH@/projectlabels/lib
+@PLUGIN_PATH@/projectlabels/www
+@PLUGIN_PATH@/projectlabels/common

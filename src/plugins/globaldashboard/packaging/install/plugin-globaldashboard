@@ -1,8 +1,8 @@
-plugins/globaldashboard/common/*                  usr/share/@OLDPACKAGE@/plugins/globaldashboard/common/
-plugins/globaldashboard/include/*                 usr/share/@OLDPACKAGE@/plugins/globaldashboard/include/
-plugins/globaldashboard/db/*                      usr/share/@OLDPACKAGE@/plugins/globaldashboard/db/
-plugins/globaldashboard/bin/*                     usr/share/@OLDPACKAGE@/plugins/globaldashboard/bin/
-plugins/globaldashboard/www/*                     usr/share/@OLDPACKAGE@/plugins/globaldashboard/www/
+plugins/globaldashboard/common/*                  @PLUGIN_PATH@/globaldashboard/common/
+plugins/globaldashboard/include/*                 @PLUGIN_PATH@/globaldashboard/include/
+plugins/globaldashboard/db/*                      @PLUGIN_PATH@/globaldashboard/db/
+plugins/globaldashboard/bin/*                     @PLUGIN_PATH@/globaldashboard/bin/
+plugins/globaldashboard/www/*                     @PLUGIN_PATH@/globaldashboard/www/
 plugins/globaldashboard/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
 plugins/globaldashboard/etc/plugins/globaldashboard/*     etc/@OLDPACKAGE@/plugins/globaldashboard/
 plugins/globaldashboard/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/

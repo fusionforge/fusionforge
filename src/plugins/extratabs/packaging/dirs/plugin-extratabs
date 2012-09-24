@@ -1,4 +1,4 @@
-usr/share/@OLDPACKAGE@/plugins/extratabs/bin
-usr/share/@OLDPACKAGE@/plugins/extratabs/lib
-usr/share/@OLDPACKAGE@/plugins/extratabs/www
-usr/share/@OLDPACKAGE@/plugins/extratabs/common
+@PLUGIN_PATH@/extratabs/bin
+@PLUGIN_PATH@/extratabs/lib
+@PLUGIN_PATH@/extratabs/www
+@PLUGIN_PATH@/extratabs/common

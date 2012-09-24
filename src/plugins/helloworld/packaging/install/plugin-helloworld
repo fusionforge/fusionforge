@@ -1,8 +1,8 @@
-plugins/helloworld/common/*                  usr/share/@OLDPACKAGE@/plugins/helloworld/common/
-plugins/helloworld/include/*                 usr/share/@OLDPACKAGE@/plugins/helloworld/include/
-plugins/helloworld/db/*                      usr/share/@OLDPACKAGE@/plugins/helloworld/db/
-plugins/helloworld/bin/*                     usr/share/@OLDPACKAGE@/plugins/helloworld/bin/
-plugins/helloworld/www/*                     usr/share/@OLDPACKAGE@/plugins/helloworld/www/
+plugins/helloworld/common/*                  @PLUGIN_PATH@/helloworld/common/
+plugins/helloworld/include/*                 @PLUGIN_PATH@/helloworld/include/
+plugins/helloworld/db/*                      @PLUGIN_PATH@/helloworld/db/
+plugins/helloworld/bin/*                     @PLUGIN_PATH@/helloworld/bin/
+plugins/helloworld/www/*                     @PLUGIN_PATH@/helloworld/www/
 plugins/helloworld/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
 plugins/helloworld/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/
 plugins/helloworld/etc/helloworld.ini	             etc/@PACKAGE@/config.ini.d/

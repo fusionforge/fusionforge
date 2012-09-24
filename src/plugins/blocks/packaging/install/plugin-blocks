@@ -1,5 +1,5 @@
-plugins/blocks/common/*               usr/share/@OLDPACKAGE@/plugins/blocks/common/
-plugins/blocks/db/*                   usr/share/@OLDPACKAGE@/plugins/blocks/db/
-plugins/blocks/www/*                  usr/share/@OLDPACKAGE@/plugins/blocks/www/
+plugins/blocks/common/*               @PLUGIN_PATH@/blocks/common/
+plugins/blocks/db/*                   @PLUGIN_PATH@/blocks/db/
+plugins/blocks/www/*                  @PLUGIN_PATH@/blocks/www/
 plugins/blocks/etc/plugins/blocks/*   etc/@PACKAGE@/plugins/blocks/
 plugins/blocks/etc/*.ini              etc/@PACKAGE@/config.ini.d/

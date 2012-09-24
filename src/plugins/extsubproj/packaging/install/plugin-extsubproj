@@ -1,8 +1,8 @@
-plugins/extsubproj/actions/*                  usr/share/@OLDPACKAGE@/plugins/extsubproj/actions/
-plugins/extsubproj/common/*                  usr/share/@OLDPACKAGE@/plugins/extsubproj/common/
-plugins/extsubproj/view/*                  usr/share/@OLDPACKAGE@/plugins/extsubproj/view/
-plugins/extsubproj/include/*                 usr/share/@OLDPACKAGE@/plugins/extsubproj/include/
-plugins/extsubproj/db/*                      usr/share/@OLDPACKAGE@/plugins/extsubproj/db/
-plugins/extsubproj/bin/*                     usr/share/@OLDPACKAGE@/plugins/extsubproj/bin/
-plugins/extsubproj/www/*                     usr/share/@OLDPACKAGE@/plugins/extsubproj/www/
+plugins/extsubproj/actions/*                  @PLUGIN_PATH@/extsubproj/actions/
+plugins/extsubproj/common/*                  @PLUGIN_PATH@/extsubproj/common/
+plugins/extsubproj/view/*                  @PLUGIN_PATH@/extsubproj/view/
+plugins/extsubproj/include/*                 @PLUGIN_PATH@/extsubproj/include/
+plugins/extsubproj/db/*                      @PLUGIN_PATH@/extsubproj/db/
+plugins/extsubproj/bin/*                     @PLUGIN_PATH@/extsubproj/bin/
+plugins/extsubproj/www/*                     @PLUGIN_PATH@/extsubproj/www/
 plugins/extsubproj/etc/extsubproj.ini	             etc/@PACKAGE@/config.ini.d/

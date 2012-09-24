@@ -1,19 +1,19 @@
-usr/share/mediawiki/api.php			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/api.php
-usr/share/mediawiki/extensions			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/extensions
-usr/share/mediawiki/img_auth.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/img_auth.php
-usr/share/mediawiki/includes			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/includes
-usr/share/mediawiki/index.php			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/index.php
-usr/share/mediawiki/languages			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/languages
-usr/share/mediawiki/load.php			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/load.php
-usr/share/mediawiki/maintenance			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/maintenance
-usr/share/mediawiki/opensearch_desc.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/opensearch_desc.php
-usr/share/mediawiki/profileinfo.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/profileinfo.php
-usr/share/mediawiki/redirect.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/redirect.php
-usr/share/mediawiki/StartProfiler.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/StartProfiler.php
-usr/share/mediawiki/thumb.php			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/thumb.php
-usr/share/mediawiki/trackback.php		usr/share/@OLDPACKAGE@/plugins/mediawiki/www/trackback.php
+usr/share/mediawiki/api.php			@PLUGIN_PATH@/mediawiki/www/api.php
+usr/share/mediawiki/extensions			@PLUGIN_PATH@/mediawiki/www/extensions
+usr/share/mediawiki/img_auth.php		@PLUGIN_PATH@/mediawiki/www/img_auth.php
+usr/share/mediawiki/includes			@PLUGIN_PATH@/mediawiki/www/includes
+usr/share/mediawiki/index.php			@PLUGIN_PATH@/mediawiki/www/index.php
+usr/share/mediawiki/languages			@PLUGIN_PATH@/mediawiki/www/languages
+usr/share/mediawiki/load.php			@PLUGIN_PATH@/mediawiki/www/load.php
+usr/share/mediawiki/maintenance			@PLUGIN_PATH@/mediawiki/www/maintenance
+usr/share/mediawiki/opensearch_desc.php		@PLUGIN_PATH@/mediawiki/www/opensearch_desc.php
+usr/share/mediawiki/profileinfo.php		@PLUGIN_PATH@/mediawiki/www/profileinfo.php
+usr/share/mediawiki/redirect.php		@PLUGIN_PATH@/mediawiki/www/redirect.php
+usr/share/mediawiki/StartProfiler.php		@PLUGIN_PATH@/mediawiki/www/StartProfiler.php
+usr/share/mediawiki/thumb.php			@PLUGIN_PATH@/mediawiki/www/thumb.php
+usr/share/mediawiki/trackback.php		@PLUGIN_PATH@/mediawiki/www/trackback.php
 
-usr/share/mediawiki/skins			usr/share/@OLDPACKAGE@/plugins/mediawiki/www/skins
+usr/share/mediawiki/skins			@PLUGIN_PATH@/mediawiki/www/skins
 usr/share/mediawiki/skins/monobook/headbg.jpg	usr/share/@OLDPACKAGE@/www/themes/css/mw-headbg.jpg
 
 usr/share/mediawiki				var/lib/@OLDPACKAGE@/plugins/mediawiki/master

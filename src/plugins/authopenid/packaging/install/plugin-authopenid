@@ -1,6 +1,6 @@
-plugins/authopenid/include   usr/share/@OLDPACKAGE@/plugins/authopenid/
-plugins/authopenid/www       usr/share/@OLDPACKAGE@/plugins/authopenid/
+plugins/authopenid/include   @PLUGIN_PATH@/authopenid/
+plugins/authopenid/www       @PLUGIN_PATH@/authopenid/
 plugins/authopenid/etc/*.ini etc/@PACKAGE@/config.ini.d/
-plugins/authopenid/db/*      usr/share/@OLDPACKAGE@/plugins/authopenid/db/
-plugins/authopenid/bin/*	usr/share/@OLDPACKAGE@/plugins/authopenid/bin/
+plugins/authopenid/db/*      @PLUGIN_PATH@/authopenid/db/
+plugins/authopenid/bin/*	@PLUGIN_PATH@/authopenid/bin/
 

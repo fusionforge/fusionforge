@@ -1,4 +1,4 @@
-usr/share/@OLDPACKAGE@/www/env.inc.php usr/share/@OLDPACKAGE@/plugins/env.inc.php
+usr/share/@OLDPACKAGE@/www/env.inc.php @PLUGIN_PATH@/env.inc.php
 usr/share/javascript/yui usr/share/@OLDPACKAGE@/www/scripts/yui
 usr/share/javascript/prototype usr/share/@OLDPACKAGE@/www/scripts/prototype
 usr/share/javascript/scriptaculous usr/share/@OLDPACKAGE@/www/scripts/scriptaculous

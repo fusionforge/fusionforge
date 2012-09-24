@@ -1,9 +1,9 @@
 etc/@OLDPACKAGE@/plugins/mediawiki
 etc/mediawiki-extensions/extensions-available
-usr/share/@OLDPACKAGE@/plugins/mediawiki/bin
-usr/share/@OLDPACKAGE@/plugins/mediawiki/common
-usr/share/@OLDPACKAGE@/plugins/mediawiki/cronjobs
-usr/share/@OLDPACKAGE@/plugins/mediawiki/www
+@PLUGIN_PATH@/mediawiki/bin
+@PLUGIN_PATH@/mediawiki/common
+@PLUGIN_PATH@/mediawiki/cronjobs
+@PLUGIN_PATH@/mediawiki/www
 usr/share/@OLDPACKAGE@/etc/httpd.d
 usr/share/mediawiki/skins
 var/lib/@OLDPACKAGE@/plugins/mediawiki/dumps

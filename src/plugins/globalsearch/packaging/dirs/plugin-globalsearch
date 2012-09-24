@@ -1,4 +1,4 @@
-usr/share/@OLDPACKAGE@/plugins/globalsearch/bin
-usr/share/@OLDPACKAGE@/plugins/globalsearch/lib
-usr/share/@OLDPACKAGE@/plugins/globalsearch/www
-usr/share/@OLDPACKAGE@/plugins/globalsearch/common
+@PLUGIN_PATH@/globalsearch/bin
+@PLUGIN_PATH@/globalsearch/lib
+@PLUGIN_PATH@/globalsearch/www
+@PLUGIN_PATH@/globalsearch/common
