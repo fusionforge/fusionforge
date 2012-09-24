@@ -2,8 +2,8 @@ bin
 etc/@PACKAGE@/config.ini.d
 etc/@OLDPACKAGE@/templates
 @BINARY_PATH@
-usr/share/@OLDPACKAGE@/lib
-usr/share/@OLDPACKAGE@/common
+@SOURCE_PATH@/lib
+@SOURCE_PATH@/common
 usr/share/locale
 usr/sbin
 var/lib/@OLDPACKAGE@/www/plugins

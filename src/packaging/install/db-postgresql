@@ -1,35 +1,35 @@
-deb-specific/sf-2.6-complete.sql        usr/share/@OLDPACKAGE@/db/
-deb-specific/sf2.5-to-sf2.6.sql         usr/share/@OLDPACKAGE@/db/
+deb-specific/sf-2.6-complete.sql        @SOURCE_PATH@/db/
+deb-specific/sf2.5-to-sf2.6.sql         @SOURCE_PATH@/db/
 #
-cronjobs/calculate_user_metric.php      usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/db_trove_maint.php             usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/project_cleanup.php            usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/rating_stats.php               usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/db_project_sums.php            usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/check_stale_tracker_items.php  usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/project_weekly_metric.php      usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/rotate_activity.php            usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/calculate_user_metric.php      @SOURCE_PATH@/cronjobs/
+cronjobs/db_trove_maint.php             @SOURCE_PATH@/cronjobs/
+cronjobs/project_cleanup.php            @SOURCE_PATH@/cronjobs/
+cronjobs/rating_stats.php               @SOURCE_PATH@/cronjobs/
+cronjobs/db_project_sums.php            @SOURCE_PATH@/cronjobs/
+cronjobs/check_stale_tracker_items.php  @SOURCE_PATH@/cronjobs/
+cronjobs/project_weekly_metric.php      @SOURCE_PATH@/cronjobs/
+cronjobs/rotate_activity.php            @SOURCE_PATH@/cronjobs/
 #
-cronjobs/site_stats.php                 usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/stats_site.inc                 usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/stats_projects.inc             usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/site_stats.php                 @SOURCE_PATH@/cronjobs/
+cronjobs/stats_site.inc                 @SOURCE_PATH@/cronjobs/
+cronjobs/stats_projects.inc             @SOURCE_PATH@/cronjobs/
 #
-cronjobs/reporting_cron.php             usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/reporting_cron.php             @SOURCE_PATH@/cronjobs/
 # 
-cronjobs/db_stats_agg.php               usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/massmail.php                   usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/vacuum.php                     usr/share/@OLDPACKAGE@/cronjobs/
-cronjobs/@OLDPACKAGE@-db-backup.sh            usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/db_stats_agg.php               @SOURCE_PATH@/cronjobs/
+cronjobs/massmail.php                   @SOURCE_PATH@/cronjobs/
+cronjobs/vacuum.php                     @SOURCE_PATH@/cronjobs/
+cronjobs/@OLDPACKAGE@-db-backup.sh            @SOURCE_PATH@/cronjobs/
 #
-cronjobs/ftp_create_group_access.php    usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/ftp_create_group_access.php    @SOURCE_PATH@/cronjobs/
 #
-cronjobs/get_news_notapproved.pl	usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/get_news_notapproved.pl	@SOURCE_PATH@/cronjobs/
 #
 deb-specific/stats_projects_logparse.pl @BINARY_PATH@/
 deb-specific/install-db.sh              @BINARY_PATH@/
 deb-specific/old-db-upgrade.pl              @BINARY_PATH@/
-deb-specific/sqlparser.pm               usr/share/@OLDPACKAGE@/lib/
-deb-specific/sqlhelper.pm               usr/share/@OLDPACKAGE@/lib/
+deb-specific/sqlparser.pm               @SOURCE_PATH@/lib/
+deb-specific/sqlhelper.pm               @SOURCE_PATH@/lib/
 deb-specific/sf-add-skill               @BINARY_PATH@/
 deb-specific/register-theme             @BINARY_PATH@/
 deb-specific/unregister-theme           @BINARY_PATH@/
@@ -37,34 +37,34 @@ deb-specific/unregister-theme           @BINARY_PATH@/
 deb-specific/register-plugin            @BINARY_PATH@/
 deb-specific/unregister-plugin          @BINARY_PATH@/
 #
-deb-specific/view_bug.sql               usr/share/@OLDPACKAGE@/db/
-deb-specific/view_patch.sql             usr/share/@OLDPACKAGE@/db/
+deb-specific/view_bug.sql               @SOURCE_PATH@/db/
+deb-specific/view_patch.sql             @SOURCE_PATH@/db/
 #
-db/20021125.sql                         usr/share/@OLDPACKAGE@/db/
-db/200212*.sql                          usr/share/@OLDPACKAGE@/db/
-db/2003*.sql                            usr/share/@OLDPACKAGE@/db/
-db/2004*php                             usr/share/@OLDPACKAGE@/db/
-db/2004*.sql                            usr/share/@OLDPACKAGE@/db/
-200403251.sql				usr/share/@OLDPACKAGE@/db/
-db/2005*php                             usr/share/@OLDPACKAGE@/db/
-db/2005*.sql                            usr/share/@OLDPACKAGE@/db/
-db/2006*.sql                            usr/share/@OLDPACKAGE@/db/
-db/timetracking-init.sql                usr/share/@OLDPACKAGE@/db/
-db/20070924-forum-perm.sql              usr/share/@OLDPACKAGE@/db/
-db/20070924-project-perm.sql            usr/share/@OLDPACKAGE@/db/
-db/20070924-artifact-perm.sql           usr/share/@OLDPACKAGE@/db/
-db/20090327_create_table_project_tags.sql     usr/share/@OLDPACKAGE@/db/
-db/20090402-add-projecttags-constraints.sql   usr/share/@OLDPACKAGE@/db/
-db/20090402-forum-attachment-types.sql  usr/share/@OLDPACKAGE@/db/
-db/20090507-add_artifact_workflow.sql	usr/share/@OLDPACKAGE@/db/
-db/20090507-add_element_pos.sql		usr/share/@OLDPACKAGE@/db/
-db/20090507-add_project_query.sql	usr/share/@OLDPACKAGE@/db/
-db/20090507-browse_list.sql		usr/share/@OLDPACKAGE@/db/
-db/2010*.sql				usr/share/@OLDPACKAGE@/db/
-db/2011*.sql				usr/share/@OLDPACKAGE@/db/
-db/2012*.sql				usr/share/@OLDPACKAGE@/db/
-db/FTI*.sql				usr/share/@OLDPACKAGE@/db/
-db/schema-convergence*.sql		usr/share/@OLDPACKAGE@/db/
+db/20021125.sql                         @SOURCE_PATH@/db/
+db/200212*.sql                          @SOURCE_PATH@/db/
+db/2003*.sql                            @SOURCE_PATH@/db/
+db/2004*php                             @SOURCE_PATH@/db/
+db/2004*.sql                            @SOURCE_PATH@/db/
+200403251.sql				@SOURCE_PATH@/db/
+db/2005*php                             @SOURCE_PATH@/db/
+db/2005*.sql                            @SOURCE_PATH@/db/
+db/2006*.sql                            @SOURCE_PATH@/db/
+db/timetracking-init.sql                @SOURCE_PATH@/db/
+db/20070924-forum-perm.sql              @SOURCE_PATH@/db/
+db/20070924-project-perm.sql            @SOURCE_PATH@/db/
+db/20070924-artifact-perm.sql           @SOURCE_PATH@/db/
+db/20090327_create_table_project_tags.sql     @SOURCE_PATH@/db/
+db/20090402-add-projecttags-constraints.sql   @SOURCE_PATH@/db/
+db/20090402-forum-attachment-types.sql  @SOURCE_PATH@/db/
+db/20090507-add_artifact_workflow.sql	@SOURCE_PATH@/db/
+db/20090507-add_element_pos.sql		@SOURCE_PATH@/db/
+db/20090507-add_project_query.sql	@SOURCE_PATH@/db/
+db/20090507-browse_list.sql		@SOURCE_PATH@/db/
+db/2010*.sql				@SOURCE_PATH@/db/
+db/2011*.sql				@SOURCE_PATH@/db/
+db/2012*.sql				@SOURCE_PATH@/db/
+db/FTI*.sql				@SOURCE_PATH@/db/
+db/schema-convergence*.sql		@SOURCE_PATH@/db/
 #
 db/upgrade-db.php			@BINARY_PATH@/
 utils/inject-users.php @BINARY_PATH@/

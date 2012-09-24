@@ -3,7 +3,7 @@ etc/@OLDPACKAGE@/languages-local
 etc/@OLDPACKAGE@/templates
 @BINARY_PATH@
 @PLUGIN_PATH@
-usr/share/@OLDPACKAGE@/www
+@SOURCE_PATH@/www
 var/lib/@OLDPACKAGE@/scmtarballs
 var/lib/@OLDPACKAGE@/scmsnapshots
 var/lib/@OLDPACKAGE@/download

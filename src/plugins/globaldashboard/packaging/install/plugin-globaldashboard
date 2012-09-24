@@ -3,7 +3,7 @@ plugins/globaldashboard/include/*                 @PLUGIN_PATH@/globaldashboard/
 plugins/globaldashboard/db/*                      @PLUGIN_PATH@/globaldashboard/db/
 plugins/globaldashboard/bin/*                     @PLUGIN_PATH@/globaldashboard/bin/
 plugins/globaldashboard/www/*                     @PLUGIN_PATH@/globaldashboard/www/
-plugins/globaldashboard/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
+plugins/globaldashboard/cronjobs/*                @SOURCE_PATH@/cronjobs
 plugins/globaldashboard/etc/plugins/globaldashboard/*     etc/@OLDPACKAGE@/plugins/globaldashboard/
-plugins/globaldashboard/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/
+plugins/globaldashboard/etc/httpd.d/*             @SOURCE_PATH@/etc/httpd.d/
 plugins/globaldashboard/etc/globaldashboard.ini	             etc/@PACKAGE@/config.ini.d/

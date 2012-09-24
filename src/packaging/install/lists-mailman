@@ -1,1 +1,1 @@
-cronjobs/mail          usr/share/@OLDPACKAGE@/cronjobs/
+cronjobs/mail          @SOURCE_PATH@/cronjobs/

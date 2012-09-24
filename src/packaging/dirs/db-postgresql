@@ -1,10 +1,10 @@
 etc/@OLDPACKAGE@
-usr/share/@OLDPACKAGE@
-usr/share/@OLDPACKAGE@/cronjobs
-usr/share/@OLDPACKAGE@
+@SOURCE_PATH@
+@SOURCE_PATH@/cronjobs
+@SOURCE_PATH@
 @BINARY_PATH@
-usr/share/@OLDPACKAGE@/db
-usr/share/@OLDPACKAGE@/lib
+@SOURCE_PATH@/db
+@SOURCE_PATH@/lib
 var/lib/@OLDPACKAGE@
 var/lib/@OLDPACKAGE@/tmp
 var/lib/@OLDPACKAGE@/etc
