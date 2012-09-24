@@ -4,8 +4,8 @@
 # be sourced in a shell
 # So it should only be stuffs like VAR=value
 #
-DEBMIRROR=http://atom330.bayle.eu/debian
-DEBMIRRORSEC=http://atom330.bayle.eu/debian-security
+#DEBMIRROR=http://atom330.bayle.eu/debian
+#DEBMIRRORSEC=http://atom330.bayle.eu/debian-security
 VMENGINE=lxc
 REMOTESELENIUM=true
 KEEPVM=true

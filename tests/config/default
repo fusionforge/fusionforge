@@ -20,7 +20,7 @@ DB_USER=forgeuser
 CONFIGURED=true
 
 # Debian mirrors
-DEBMIRROR=http://ftp.debian.org/debian/
+DEBMIRROR=http://cdn.debian.net/debian/
 DEBMIRRORSEC=http://security.debian.org/
 
 # Redhat mirrors
