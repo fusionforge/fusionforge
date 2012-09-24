@@ -4,7 +4,12 @@ then
 	database=$1
 else
 	scriptdir=$(dirname $0)
-	UTILS_PATH=$(cd $scriptdir/../../src ; pwd)
+	if [ -d "$scriptdir/../../src" ]
+	then
+		UTILS_PATH=$(cd $scriptdir/../../src ; pwd)
+	else
+		UTILS_PATH=$(cd $scriptdir/../.. ; pwd)
+	fi
 	export PATH=$PATH:$UTILS_PATH/utils:$UTILS_PATH/bin
 	if type forge_get_config
 	then
