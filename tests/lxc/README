@@ -1,0 +1,226 @@
+See https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/LXC#Network_Bridging_Setup
+
+== Introduction ==
+
+The goal of this small document is to explain how to install LXC and how to create templates on top of Debian Squeeze. One show how to create typical templates that supports static IP or DHCP as debian 6 or centos 5 linux container.
+
+== Install Debian ==
+
+Choose your install mode from: [http://www.debian.org/CD/ Debian Web Site] and install debian Squeeze version or a more recent one.
+
+== Install LXC ==
+ apt-get install lxc bridge-utils resolvconf cgroup-bin netmask rinse dpkg-dev sudo
+
+optionnally you may like to 
+ apt-get install subversion bzr git 
+
+if you use this for continuous integration 
+
+=== Debian  ===
+You may need to create cgroup directory:
+ mkdir /cgroup
+
+Modify /etc/fstab and add the following:
+ none  /cgroup  cgroup  defaults  0  0
+
+but it looks like on squeeze the cgroup mount is handled by some start scripts 
+that mount cgroup on /mnt/cgroup (see  /etc/cgconfig.conf)
+
+=== Ubuntu 11.04 / Natty ===
+
+On Natty you don't need to mount cgroup virtual filesystem manually, it's already done by default. However, lxc package has some [https://bugs.launchpad.net/ubuntu/+source/lxc/+bug/784093 configuration bug]. You can either:
+* Install oneiric package (not tested) or
+* Modify  /etc/cgconfig.conf to (see [https://bugs.launchpad.net/ubuntu/+source/lxc/+bug/784093/comments/1 comment]):
+ mount {
+   cpu = /sys/fs//cgroup/cpu;
+   cpuacct = /sys/fs/cgroup/cpu;
+   devices = /sys/fs/cgroup/cpu;
+   memory = /sys/fs/cgroup/cpu;
+ }
+
+== Network Bridging Setup ==
+Edit /etc/network/interfaces
+
+In the following, we distinguish the two cases : your server/desktop runs Static IP or DHCP.
+
+=== If you use static IP ===
+You may use the following template example, replacing values with your network parameters:
+ auto lo 
+ iface lo inet loopback
+ auto br0
+ iface br0 inet static
+        bridge_ports eth0
+        bridge_fd 0
+        address 10.194.10.35
+        netmask 255.255.255.0
+        gateway 10.194.10.1
+        dns-nameservers 10.194.11.20 10.194.11.21
+        dns-search fusionforge.org
+
+=== If you use DHCP ===
+ auto lo 
+ iface lo inet loopback
+ auto br0
+ iface br0 inet dhcp
+        bridge_ports eth0
+        bridge_fd 0
+
+You may now reboot your server/desktop and see if everything is ok
+you may run mount :
+ root@g-virtual05:~# mount
+ /dev/sda1 on / type ext3 (rw,errors=remount-ro)
+ tmpfs on /lib/init/rw type tmpfs (rw,nosuid,mode=0755) 
+ proc on /proc type proc (rw,noexec,nosuid,nodev)
+ sysfs on /sys type sysfs (rw,noexec,nosuid,nodev)
+ udev on /dev type tmpfs (rw,mode=0755)
+ tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
+ devpts on /dev/pts type devpts (rw,noexec,nosuid,gid=5,mode=620)
+ cgroup on /cgroup type cgroup (rw)
+ fusectl on /sys/fs/fuse/connections type fusectl (rw)
+ binfmt_misc on /proc/sys/fs/binfmt_misc type binfmt_misc (rw,noexec,nosuid,nodev)
+
+you must have a cgroup line in the list.
+
+== Bridge with a local network ==
+This one is nice if you don't want to modify your main interface and have a local isolated network
+Here is a working sample
+
+ # This file describes the network interfaces available on your system
+ # and how to activate them. For more information, see interfaces(5).
+ #
+ # The loopback network interface
+ auto lo
+ iface lo inet loopback
+ 
+ # The primary network interface 
+ allow-hotplug eth0
+ iface eth0 inet static
+ 	address 10.0.2.25
+ 	netmask 255.255.0.0
+ 	network 10.0.0.0
+ 	broadcast 10.0.255.255
+ 	gateway 10.0.2.1
+ 	# dns-* options are implemented by the resolvconf package, if installed
+ 	dns-nameservers 88.191.254.60 88.191.254.70
+ 	dns-search local
+ 
+ # The following is a bit complex but allow not to touch eth0
+ # this requires uml-utilities 
+ # usermod -G uml-net jenkins
+ auto tap0
+ iface tap0 inet manual
+        tunctl_user jenkins
+        pre-up tunctl -u jenkins -t tap0
+        up ifconfig tap0 up
+        down ifconfig tap0 down
+        post-down tunctl -d tap0
+ 
+ auto br0
+ iface br0 inet static
+        bridge_ports tap0
+        bridge_stp off
+        bridge_maxwait 5
+        address 172.16.0.1
+        netmask 255.255.0.0
+        network 172.16.0.0
+        post-up echo 1 > /proc/sys/net/ipv4/ip_forward
+        post-up iptables -t nat -A POSTROUTING -s '172.16.0.1/16' -o eth0 -j MASQUERADE
+        post-up service isc-dhcp-server restart
+        post-down iptables -t nat -D POSTROUTING -s '172.16.0.1/16' -o eth0 -j MASQUERADE
+
+Then you may install a dhcp server, with the file /etc/default/isc-dhcp-server set like this :
+ # Defaults for dhcp initscript
+ # sourced by /etc/init.d/dhcp
+ # installed at /etc/default/isc-dhcp-server by the maintainer scripts
+ 
+ #
+ # This is a POSIX shell fragment
+ #
+ 
+ # On what interfaces should the DHCP server (dhcpd) serve DHCP requests?
+ #       Separate multiple interfaces with spaces, e.g. "eth0 eth1".
+ INTERFACES="br0"
+
+And in the default  /etc/dhcp/dhcpd.conf file I added at the end:
+
+ subnet 172.16.0.0 netmask 255.255.0.0 {
+        range 172.16.0.10 172.16.0.50;
+        option routers 172.16.0.1;
+        option domain-name "local";
+        option domain-name-servers 88.191.254.60, 88.191.254.70;
+ }
+
+For the name resolution I install avahi in the lxc virtual machines and in lxc host server. then vhosts are available with their <servername>.local name.
+
+== Create your first Debian container ==
+=== Create a config file ===
+Edit config.debian6  with the following content
+ lxc.network.type = veth
+ lxc.network.flags = up
+ lxc.network.link = br0
+
+=== Templates ===
+Debian squeeze provides a set of predefined templates you can find in /usr/lib/lxc/templates/ directory, the syntax 
+is lxc-<Template Name>, as the time I write busybox, debian, fedora, sshd, ubuntu.
+You can find extra templates to copy in this dir in fusionforge svn repository, get them using
+ apt-get install subversion
+ svn checkout svn://scm.fusionforge.org/svn/fusionforge/trunk/tests/lxc
+
+=== Create the container ===
+As root user or using sudo
+ sudo apt-get install debootstrap
+ sudo /usr/bin/lxc-create -n debian6.local -f config.debian6 -t debian6
+
+where : 
+* debian6.local is the hostname
+* config.debian6 is the config file
+* debian6  (after -t) is the template name
+
+lxc-create calls /usr/lib/lxc/templates/lxc-debian6 script (lxc-template_name).
+this script copie the files cached in /var/cache/lxc/debian/rootfs-squeeze-amd64/ (rootfs-distro-arch)
+to /var/lib/lxc/debian6.local 
+
+If the cache does not exist it will be created using deboostrap
+
+when you update the script, run
+ rm -rf /var/cache/lxc/debian/rootfs-squeeze-amd64
+if you want your changes to be taken in account
+
+tip for curious people
+ diff  /usr/lib/lxc/templates/lxc-debian  /usr/lib/lxc/templates/lxc-debian6
+
+=== Extra Config ===
+Some extra config is embedded in the lxc-* scripts,
+such as dhcp, hostname, caching host keys, caching mac address.
+Config file can be completed like this.
+
+ lxc.network.type = veth
+ lxc.network.flags = up
+ lxc.network.link = br0
+ #lxc.pubkey = /var/lib/jenkins/.ssh/id_rsa.pub
+ lxc.network.ipv4 =  192.168.50.1/24
+ lxc.network.hwaddr = 00:16:3e:37:54:4d
+ 
+lxc.pubkey must be commented, since it's not an lxc known parameter, it's taken in account by my modified scripts.
+
+=== Start the container ===
+ sudo /usr/bin/lxc-start -n debian6.local -d
+
+=== Enter the container ===
+ lxc-console -n debian6.local
+
+you can exit typing <ctrl-a> q
+
+=== Stop the container ===
+ lxc-stop -n debian6.local
+
+=== Destroy the container ===
+ lxc-destroy -n debian6.local
+
+== Create your first centos container ==
+It works like the debian container, just replace debian, with centos
+
+You will need for recent version of Centos: to install:
+* rinse >= 1.8 (not available on debian stable at time of writting, you can download 1.9 from unstable on http://www.debian.org/distrib/packages with wget & install with dpkg -i)
+* netmask dpkg-dev (req. for dpkg-architecture)
+
