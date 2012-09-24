@@ -11,6 +11,7 @@ SRCPACKAGE=fusionforge
 FORGENAME=FusionForge
 SOURCE_PATH:=$(shell grep source_path etc/config.ini-fhs | cut -d= -f2 | xargs echo)
 BINARY_PATH:=$(shell grep binary_path etc/config.ini-fhs | cut -d= -f2 | xargs echo)
+PLUGIN_PATH:=$(shell grep plugin_path etc/config.ini-fhs | cut -d= -f2 | xargs echo)
 
 # Identify this FusionForge version
 # keep type intact and change forge in derivates,
@@ -21,7 +22,7 @@ WHICH_FORGE=FusionForge
 WHICH_VERSION:=$(shell dpkg-parsechangelog | sed -n '/^Version: /s///p')
 
 # Replace macros present in the files for forge's name
-SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' -e 's/@OLDPACKAGE@/$(OLDPACKAGE)/g' -e 's/@FORGENAME@/$(FORGENAME)/g'  -e 's/@SOURCE_PATH@/$(SOURCE_PATH)/g' -e 's/@BINARY_PATH@/$(BINARY_PATH)/g'
+SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' -e 's/@OLDPACKAGE@/$(OLDPACKAGE)/g' -e 's/@FORGENAME@/$(FORGENAME)/g'  -e 's/@SOURCE_PATH@/$(SOURCE_PATH)/g' -e 's/@BINARY_PATH@/$(BINARY_PATH)/g' -e 's/@PLUGIN_PATH@/$(PLUGIN_PATH)/g'
 
 DH=dh --with quilt
 
