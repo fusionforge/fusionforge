@@ -3,7 +3,7 @@ forge_name = FusionForge
 
 source_path = /usr/local/share/gforge
 binary_path = /usr/local/share/gforge/src/utils
-plugin_path = /usr/local/share/gforge/plugins
+plugins_path = /usr/local/share/gforge/plugins
 data_path = /var/local/lib/gforge
 config_path = /etc/gforge
 log_path = /var/log/gforge
