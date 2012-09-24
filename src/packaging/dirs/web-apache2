@@ -9,4 +9,4 @@ etc/@OLDPACKAGE@/templates
 @DATA_PATH@/download
 @DATA_PATH@/etc
 var/cache/@OLDPACKAGE@
-var/log/@OLDPACKAGE@
+@LOG_PATH@
