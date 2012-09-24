@@ -1,5 +1,0 @@
-fusionforge-plugin-helloworld (1.0-1) unstable; urgency=low
-
-  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
-
- -- Christian Bayle <bayle@debian.org>  Mon, 08 Mar 2010 16:37:51 +0100
