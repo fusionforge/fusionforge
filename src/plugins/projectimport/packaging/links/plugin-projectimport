@@ -1,1 +1,1 @@
-@PLUGIN_PATH@/projectimport/www /usr/share/@OLDPACKAGE@/www/plugins/projectimport
+@PLUGIN_PATH@/projectimport/www @SOURCE_PATH@/www/plugins/projectimport

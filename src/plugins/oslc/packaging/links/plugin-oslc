@@ -1,1 +1,1 @@
-@PLUGIN_PATH@/oslc/www /usr/share/@OLDPACKAGE@/www/plugins/oslc
+@PLUGIN_PATH@/oslc/www @SOURCE_PATH@/www/plugins/oslc

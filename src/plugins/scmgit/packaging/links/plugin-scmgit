@@ -1,7 +1,7 @@
 /usr/lib/cgi-bin/gitweb.cgi @PLUGIN_PATH@/scmgit/cgi-bin/gitweb.cgi
-/usr/share/gitweb/gitweb.cgi /usr/share/@OLDPACKAGE@/www/plugins/scmgit/gitweb.cgi
-/usr/share/gitweb/index.cgi /usr/share/@OLDPACKAGE@/www/plugins/scmgit/index.cgi
-/usr/share/gitweb/static/git-favicon.png /usr/share/@OLDPACKAGE@/www/plugins/scmgit/git-favicon.png
-/usr/share/gitweb/static/git-logo.png /usr/share/@OLDPACKAGE@/www/plugins/scmgit/git-logo.png
-/usr/share/gitweb/static/gitweb.css /usr/share/@OLDPACKAGE@/www/plugins/scmgit/gitweb.css
-/usr/share/gitweb/static/gitweb.js /usr/share/@OLDPACKAGE@/www/plugins/scmgit/gitweb.js
+/usr/share/gitweb/gitweb.cgi @SOURCE_PATH@/www/plugins/scmgit/gitweb.cgi
+/usr/share/gitweb/index.cgi @SOURCE_PATH@/www/plugins/scmgit/index.cgi
+/usr/share/gitweb/static/git-favicon.png @SOURCE_PATH@/www/plugins/scmgit/git-favicon.png
+/usr/share/gitweb/static/git-logo.png @SOURCE_PATH@/www/plugins/scmgit/git-logo.png
+/usr/share/gitweb/static/gitweb.css @SOURCE_PATH@/www/plugins/scmgit/gitweb.css
+/usr/share/gitweb/static/gitweb.js @SOURCE_PATH@/www/plugins/scmgit/gitweb.js

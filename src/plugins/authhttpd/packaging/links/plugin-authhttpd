@@ -1,1 +1,1 @@
-@PLUGIN_PATH@/authhttpd/www /usr/share/@OLDPACKAGE@/www/plugins/authhttpd
+@PLUGIN_PATH@/authhttpd/www @SOURCE_PATH@/www/plugins/authhttpd

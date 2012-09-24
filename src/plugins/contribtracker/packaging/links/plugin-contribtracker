@@ -1,1 +1,1 @@
-@PLUGIN_PATH@/contribtracker/www /usr/share/@OLDPACKAGE@/www/plugins/contribtracker
+@PLUGIN_PATH@/contribtracker/www @SOURCE_PATH@/www/plugins/contribtracker

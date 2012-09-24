@@ -1,1 +1,1 @@
-@PLUGIN_PATH@/extratabs/www /usr/share/@OLDPACKAGE@/www/plugins/extratabs
+@PLUGIN_PATH@/extratabs/www @SOURCE_PATH@/www/plugins/extratabs

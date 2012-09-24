@@ -1,1 +1,1 @@
-@PLUGIN_PATH@/authcas/www /usr/share/@OLDPACKAGE@/www/plugins/authcas
+@PLUGIN_PATH@/authcas/www @SOURCE_PATH@/www/plugins/authcas

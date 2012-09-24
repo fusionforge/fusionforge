@@ -1,1 +1,1 @@
-@PLUGIN_PATH@/authwebid/www /usr/share/@OLDPACKAGE@/www/plugins/authwebid
+@PLUGIN_PATH@/authwebid/www @SOURCE_PATH@/www/plugins/authwebid

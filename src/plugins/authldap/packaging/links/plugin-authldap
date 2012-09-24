@@ -1,1 +1,1 @@
-@PLUGIN_PATH@/authldap/www /usr/share/@OLDPACKAGE@/www/plugins/authldap
+@PLUGIN_PATH@/authldap/www @SOURCE_PATH@/www/plugins/authldap
