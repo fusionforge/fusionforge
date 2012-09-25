@@ -502,10 +502,10 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__cp} -a plugins/scmcvs/bin/cvssh.pl $RPM_BUILD_ROOT/bin/
 
 # Apache configuration file
-%{__cp} -a etc/httpd.conf.d-fhs/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/
+%{__cp} -a etc/httpd.conf.d-fhsrh/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/
 %{__cp} -a etc/config.ini.d/defaults.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
-%{__cp} -a etc/config.ini-fhs $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini
-%{__cp} -a etc/httpd.conf-fhs $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
+%{__cp} -a etc/config.ini-fhsrh $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini
+%{__cp} -a etc/httpd.conf-fhsrh $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
 #%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
 #%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
 
