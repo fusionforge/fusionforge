@@ -70,12 +70,7 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 	}
 
 	Header ('Content-disposition: filename="'.str_replace('"', '', $d->getFileName()).'"');
-
-	if (strstr($d->getFileType(),'app')) {
-		Header ("Content-type: application/binary");
-	} else {
-		Header ("Content-type: ".$d->getFileType());
-	}
+	header("Content-type: ".$d->getFileType());
 
 	echo $d->getFileData();
 
