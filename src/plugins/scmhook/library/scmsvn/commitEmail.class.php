@@ -3,6 +3,7 @@
  * scmhook commitEmail Plugin Class
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012, Benoit Debaenst - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -45,8 +46,9 @@ class commitEmail extends scmhook {
 		require_once $gfcommon.'mail/MailingList.class.php';
 		require_once $gfcommon.'mail/MailingListFactory.class.php';
 		if ($this->group->usesMail()) {
-			$mlFactory = new MailingListFactory($group);
+			$mlFactory = new MailingListFactory($this->group);
 			$mlArray = $mlFactory->getMailingLists();
+			$mlCount = count($mlArray);
 			for ($j = 0; $j < $mlCount; $j++) {
 				$currentList =& $mlArray[$j];
 				if ($currentList->getListEmail() == $this->group->getUnixName().'-commits@'.forge_get_config('lists_host'))
