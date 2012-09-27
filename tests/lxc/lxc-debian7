@@ -218,7 +218,8 @@ xbase-clients,\
 phpunit,\
 phpunit-selenium,\
 openjdk-6-jre,\
-iceweasel
+iceweasel,\
+vnc4server
 
     cache=$1
     arch=$2
