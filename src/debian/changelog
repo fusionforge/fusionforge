@@ -19,6 +19,11 @@ fusionforge (5.2~rc2~svn16089+) UNRELEASED; urgency=low
   * SECURITY: Upon user deletion, remove their Unix account as well
   * SECURITY: Do not disclose inaccessible groups on user_home/toplist
 
+  [ Roland Mas ]
+  * Fail configuration of the -db-postgresql package if no
+    database is available, to prevent other packages from breaking
+    things due to misconfiguration. (Closes: #688374)
+
  -- Thorsten Glaser <tg@mirbsd.de>  Mon, 03 Sep 2012 14:07:16 +0200
 
 fusionforge (5.2~rc1wheezy1~exp1) experimental; urgency=low
