@@ -407,7 +407,7 @@ def temp_checkout(svnrepos, path, rev, pool):
     stream = fs.file_contents(root, path, pool)
     try:
       while 1:
-        chunk = core.svn_stream_read(stream, core.SVN_STREAM_CHUNK_SIZE)
+        chunk = core.svn_stream_read(stream, int(core.SVN_STREAM_CHUNK_SIZE))
         if not chunk:
           break
         fp.write(chunk)
