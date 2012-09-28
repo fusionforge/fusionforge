@@ -383,6 +383,12 @@ plugins/old/webcalendar/www/ws/get_reminders.php -text
 plugins/old/webcalendar/www/ws/login.php -text
 plugins/old/webcalendar/www/year.php -text
 /specs.watchr -text
+src-moved-files/lib/vendor/coolfieldset/js/jquery.js/jquery.js -text
+src-moved-files/lib/vendor/jquery-storage/jquery.Storage.js/jquery.Storage.js -text
+src-moved-files/lib/vendor/jquery-ui/js/jquery-ui-1.8.17.custom.min.js/jquery-ui-1.8.17.custom.min.js -text
+src-moved-files/lib/vendor/jquery/jquery-1.4.2.min.js/jquery-1.4.2.min.js -text
+src-moved-files/plugins/wiki/www/themes/Sidebar/hyperwiki.jar/hyperwiki.jar -text svneol=unset#unset
+src-moved-files/plugins/wiki/www/themes/default/yuicompressor-2.4.7.jar/yuicompressor-2.4.7.jar -text svneol=unset#unset
 src/AUTHORS -text
 src/CHANGES -text
 src/COPYING.php -text
