@@ -1,4 +1,10 @@
-fusionforge (5.2) UNRELEASED; urgency=low
+fusionforge (5.2) unstable; urgency=low
+
+  * Let's call this 5.2!
+
+ -- Roland Mas <lolando@debian.org>  Fri, 28 Sep 2012 14:58:15 +0200
+
+fusionforge (5.2~rc2+svn16353) unstable; urgency=low
 
   [ Olivier Berger ]
   * Properly fix #674536 without messing too much with upstream or other
