@@ -387,7 +387,17 @@ src-moved-files/lib/vendor/coolfieldset/js/jquery.js/jquery.js -text
 src-moved-files/lib/vendor/jquery-storage/jquery.Storage.js/jquery.Storage.js -text
 src-moved-files/lib/vendor/jquery-ui/js/jquery-ui-1.8.17.custom.min.js/jquery-ui-1.8.17.custom.min.js -text
 src-moved-files/lib/vendor/jquery/jquery-1.4.2.min.js/jquery-1.4.2.min.js -text
+src-moved-files/plugins/fckeditor/www/_samples/_plugins/findreplace/find.gif/find.gif -text svneol=unset#image/gif
+src-moved-files/plugins/fckeditor/www/_samples/_plugins/findreplace/replace.gif/replace.gif -text svneol=unset#image/gif
+src-moved-files/plugins/fckeditor/www/_samples/adobeair/icons/128.png/128.png -text svneol=unset#image/png
+src-moved-files/plugins/fckeditor/www/_samples/adobeair/icons/16.png/16.png -text svneol=unset#image/png
+src-moved-files/plugins/fckeditor/www/_samples/adobeair/icons/32.png/32.png -text svneol=unset#image/png
+src-moved-files/plugins/fckeditor/www/_samples/adobeair/icons/48.png/48.png -text svneol=unset#image/png
+src-moved-files/plugins/fckeditor/www/_samples/adobeair/sample01_cert.pfx/sample01_cert.pfx -text svneol=unset#unset
+src-moved-files/plugins/fckeditor/www/_samples/html/assets/sample16.fla/sample16.fla -text svneol=unset#unset
+src-moved-files/plugins/fckeditor/www/_samples/html/assets/sample16.swf/sample16.swf -text svneol=unset#application/x-shockwave-flash
 src-moved-files/plugins/wiki/www/themes/Sidebar/hyperwiki.jar/hyperwiki.jar -text svneol=unset#unset
+src-moved-files/plugins/wiki/www/themes/default/templates/MAP.pdf/MAP.pdf -text svneol=unset#application/pdf
 src-moved-files/plugins/wiki/www/themes/default/yuicompressor-2.4.7.jar/yuicompressor-2.4.7.jar -text svneol=unset#unset
 src/AUTHORS -text
 src/CHANGES -text
@@ -1133,21 +1143,14 @@ src/plugins/fckeditor/common/fckeditorPlugin.class.php -text
 src/plugins/fckeditor/etc/fckeditor.ini -text
 src/plugins/fckeditor/packaging/docs/plugin-fckeditor -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/fckplugin.js -text
-src/plugins/fckeditor/www/_samples/_plugins/findreplace/find.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/lang/en.js -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/lang/fr.js -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/lang/it.js -text
-src/plugins/fckeditor/www/_samples/_plugins/findreplace/replace.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/_samples/_plugins/samples/fckplugin.js -text
 src/plugins/fckeditor/www/_samples/adobeair/application.xml -text svneol=unset#text/xml
-src/plugins/fckeditor/www/_samples/adobeair/icons/128.png -text svneol=unset#image/png
-src/plugins/fckeditor/www/_samples/adobeair/icons/16.png -text svneol=unset#image/png
-src/plugins/fckeditor/www/_samples/adobeair/icons/32.png -text svneol=unset#image/png
-src/plugins/fckeditor/www/_samples/adobeair/icons/48.png -text svneol=unset#image/png
 src/plugins/fckeditor/www/_samples/adobeair/package.bat -text
 src/plugins/fckeditor/www/_samples/adobeair/run.bat -text
 src/plugins/fckeditor/www/_samples/adobeair/sample01.html -text
-src/plugins/fckeditor/www/_samples/adobeair/sample01_cert.pfx -text svneol=unset#unset
 src/plugins/fckeditor/www/_samples/afp/fck.afpa -text
 src/plugins/fckeditor/www/_samples/afp/sample01.afp -text
 src/plugins/fckeditor/www/_samples/afp/sample02.afp -text
@@ -1175,8 +1178,6 @@ src/plugins/fckeditor/www/_samples/html/assets/sample14.config.js -text
 src/plugins/fckeditor/www/_samples/html/assets/sample14.styles.css -text svneol=unset#text/css
 src/plugins/fckeditor/www/_samples/html/assets/sample15.config.js -text
 src/plugins/fckeditor/www/_samples/html/assets/sample16.config.js -text
-src/plugins/fckeditor/www/_samples/html/assets/sample16.fla -text svneol=unset#unset
-src/plugins/fckeditor/www/_samples/html/assets/sample16.swf -text svneol=unset#application/x-shockwave-flash
 src/plugins/fckeditor/www/_samples/html/assets/swfobject.js -text
 src/plugins/fckeditor/www/_samples/html/sample01.html -text
 src/plugins/fckeditor/www/_samples/html/sample02.html -text
@@ -4542,7 +4543,6 @@ src/plugins/wiki/www/themes/default/phpwiki-topbottombars.css -text svneol=unset
 src/plugins/wiki/www/themes/default/phpwiki.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/sortable-min.js -text
 src/plugins/wiki/www/themes/default/sortable.js -text
-src/plugins/wiki/www/themes/default/templates/MAP.pdf -text svneol=unset#application/pdf
 src/plugins/wiki/www/themes/default/templates/README -text
 src/plugins/wiki/www/themes/default/templates/actionbar.tmpl -text
 src/plugins/wiki/www/themes/default/templates/addcomment.tmpl -text
