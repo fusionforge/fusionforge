@@ -1,4 +1,4 @@
-fusionforge (5.2~rc2~svn16089+) UNRELEASED; urgency=low
+fusionforge (5.2~rc2+svn16353) unstable; urgency=low
 
   [ Olivier Berger ]
   * Properly fix #674536 without messing too much with upstream or other
@@ -20,11 +20,14 @@ fusionforge (5.2~rc2~svn16089+) UNRELEASED; urgency=low
   * SECURITY: Do not disclose inaccessible groups on user_home/toplist
 
   [ Roland Mas ]
+  * New SVN snapshot.
   * Fail configuration of the -db-postgresql package if no
     database is available, to prevent other packages from breaking
     things due to misconfiguration. (Closes: #688374)
+  * Switch to branch debian-sid-5.2 in SVN to remove non-source files from
+    the tree.
 
- -- Thorsten Glaser <tg@mirbsd.de>  Mon, 03 Sep 2012 14:07:16 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 28 Sep 2012 10:30:22 +0200
 
 fusionforge (5.2~rc1wheezy1~exp1) experimental; urgency=low
 
