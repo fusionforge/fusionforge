@@ -36,6 +36,8 @@ then
 	fi
 fi
 
+[ -d "/root/.vnc" ] || mkdir /root/.vnc 
+
 # Setup X11 to start phpunit
 cat > /root/.vnc/xstartup<<EOF
 #! /bin/bash
