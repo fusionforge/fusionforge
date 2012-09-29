@@ -33,12 +33,12 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		if (session_loggedin()) {
 			$this->_statistic_show = UserManager::instance()->getCurrentUser()->getPreference('my_docman_project_activitity_show');
 		} else {
-			$this->_statistic_show = '60';
+			$this->_statistic_show = 'FUD';
 		}
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));
-		if ($project && $this->canBeUsedByProject($project)) {
+		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('docman', $project->getID(), 'read')) {
 			$this->content['title'] = _('Last 4 weeks Documents Manager Activity');
 		}
 	}
@@ -189,7 +189,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 				});
 			});';
 		echo 'jQuery(window).resize(function() {
-			plot1.replot( { resetAxes: true } );
+				plot1.replot( { resetAxes: true } );
 			});';
 		echo '</script>';
 		echo '<div id="chart1"></div>';
