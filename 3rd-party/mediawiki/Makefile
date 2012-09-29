@@ -3,8 +3,10 @@
 DSCFILE=http://ftp.de.debian.org/debian/pool/main/m/mediawiki/mediawiki_1.19.2-1.dsc
 DIST=wheezy
 
+cowbuild: mediawiki_1.19.2-1.dsc
+	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --buildresult $(BUILDRESULT) --build mediawiki_1.19.2-1.dsc
 
-default: mediawiki-1.19.2
+pdebuild: mediawiki-1.19.2
 	cd mediawiki-1.19.2; pdebuild --configfile $(COWBUILDERCONFIG) --buildresult $(BUILDRESULT)
 
 mediawiki-1.19.2: mediawiki_1.19.2-1.dsc
