@@ -65,10 +65,10 @@ if (getenv('sys_localinc')) {
 } elseif (file_exists('/etc/gforge/local.inc')) {
 	$gfcgfile = '/etc/gforge/local.inc';
 	$gfconfig = '/etc/gforge/';
-} elseif (file_exists('/etc/fusionforge/config.ini')) {
-	$gfconfig = '/etc/fusionforge/';
 } elseif (file_exists('/etc/gforge/config.ini')) {
 	$gfconfig = '/etc/gforge/';
+} elseif (file_exists('/etc/fusionforge/config.ini')) {
+	$gfconfig = '/etc/fusionforge/';
 } else {
 	$gfcgfile = 'local.inc';
 	if (is_dir('/etc/gforge')){
