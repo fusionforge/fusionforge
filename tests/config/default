@@ -9,6 +9,9 @@ SSHPUBKEY=~/.ssh/id_rsa.pub
 # Do we keep vm at end of tests
 KEEPVM=false
 
+# VM Engine currently supported lxc, openvz TODO kvm, virtualbox,...
+VMENGINE=lxc
+
 # Web frontend
 FORGE_ADMIN_USERNAME=admin
 FORGE_ADMIN_PASSWORD=myadmin
