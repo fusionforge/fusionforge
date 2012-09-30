@@ -20,6 +20,9 @@ COWBUILDERCONFIG=$BUILDERDIR/config/$DIST.config
 WORKDIR=$(cd $absolutesourcepath/..; pwd)
 # Jenkins will set WORKSPACE
 WORKSPACE=${WORKSPACE:-$WORKDIR}
+BUILDRESULT=$WORKSPACE/build/packages
+[ ! -d $BUILDRESULT/build ] || mkdir $BUILDRESULT/build
+[ ! -d $BUILDRESULT/build/packages ] || mkdir $BUILDRESULT/build/packages
 
 REPOPATH=$WORKSPACE/build/debian
 [ ! -d $REPOPATH ] || rm -r $REPOPATH
