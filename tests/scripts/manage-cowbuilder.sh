@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Prepare and/or update cowbuilder caches
+# Setup Env
 relativepath=`dirname $0`
 absolutesourcepath=`cd $relativepath/../..; pwd`
 cd $absolutesourcepath
@@ -12,9 +12,9 @@ then
 	echo "Read config from tests/config/`hostname`"
 	. tests/config/`hostname`
 fi
+BUILDERDIR=${BUILDERDIR:-$HOME/builder/}
 
-BUILDERDIR=${BUILDERDIR:-/var/lib/jenkins/builder/}
-DEBMIRROR=${DEBMIRROR:-http://cdn.debian.net/debian/}
+# Prepare and/or update cowbuilder caches
 DISTROLIST=${DISTROLIST:-"squeeze wheezy"}
 
 [ -d $BUILDERDIR/config ] || mkdir $BUILDERDIR/config
