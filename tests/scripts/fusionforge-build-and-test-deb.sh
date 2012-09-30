@@ -128,7 +128,7 @@ EOF
 retcode=0
 echo "Run phpunit test on $HOST in $FORGE_HOME"
 
-ssh root@$HOST "apt-get -y install vnc4server ; mkdir -p /root/.vnc"
+ssh root@$HOST "apt-get -y install xfonts-base vnc4server ; mkdir -p /root/.vnc"
 ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
