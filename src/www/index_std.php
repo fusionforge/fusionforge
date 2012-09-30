@@ -96,9 +96,11 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('New project hierarchy plugin.'); ?></li>
 </ul>
 <?php
-echo $HTML->boxTop(_('Latest News'), 'Latest_News');
-echo news_show_latest(forge_get_config('news_group'),5,true,false,false,5);
-echo $HTML->boxBottom();
+if(forge_get_config('use_news')) {
+	echo $HTML->boxTop(_('Latest News'), 'Latest_News');
+	echo news_show_latest(forge_get_config('news_group'), 5, true, false, false, 5);
+	echo $HTML->boxBottom();
+}
 ?>
 
 </td>
