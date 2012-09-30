@@ -27,7 +27,7 @@ following to get it working:
 
 3. Put the path to Mediawiki's source directory into the configuration
    variable "[mediawiki]source_path" by adding the following lines into
-   your FusionForge configuration file (/etc/fusionforge/config.ini):
+   your FusionForge configuration file (@CONFIG_PATH@/config.ini):
 
 [mediawiki]
 src_path = < Mediawiki source path >
@@ -61,17 +61,17 @@ Customizing the plugin
 The Mediawiki plugin knows all configuration variables described in
 etc/config.ini. To customize Mediawiki (e.g. enable uploads), change
 the value of any of the variables in the file
-/etc/fusionforge/config.ini.
+@CONFIG_PATH@/config.ini.
 
 Furthermore, you can customize all Mediawiki instances within
 FusionForge by creating and/or modifying the file
-  /etc/fusionforge/plugins/mediawiki/LocalSettings.php 
+  @CONFIG_PATH@/plugins/mediawiki/LocalSettings.php 
 In this file, you can add extensions or change anything that can be
 done in Mediawiki's LocalSettings.php.
 
 To customize the settings of a specific project, you can additionally
 create a file 
-  /var/lib/fusionforge/plugin/mediawiki/projects/<project>/ProjectSettings.php
+  @DATA_PATH@/plugin/mediawiki/projects/<project>/ProjectSettings.php
 with additional customizations.
 
 

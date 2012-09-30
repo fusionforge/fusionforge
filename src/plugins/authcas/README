@@ -17,9 +17,9 @@ Installation:
 
 Setup:
 
-- customise /etc/fusionforge/config.ini.d/authcas.ini to match your
+- customise @CONFIG_PATH@/fusionforge/config.ini.d/authcas.ini to match your
 LDAP installation (server, base DN, and mapping)
-- /usr/share/gforge/bin/register-plugin authcas "CAS external
+- @BINARY_PATH@/register-plugin authcas "CAS external
 authentication"
 
 Voilà, you can now log into FusionForge with your existing CAS

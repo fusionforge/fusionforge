@@ -5,14 +5,14 @@ This is the external LDAP authentication plugin for FusionForge.
 
 Installation:
 
-- files from include/ go to /usr/share/gforge/plugins/authldap/include/
-- files from www/ go to /usr/share/gforge/www/plugins/authldap/
+- files from include/ go to @PLUGIN_PATH@/authldap/include/
+- files from www/ go to @SOURCE_PATH@/www/plugins/authldap/
 
 Setup:
 
-- customise /etc/fusionforge/config.ini.d/authldap.ini to match your
+- customise @CONFIG_PATH@/config.ini.d/authldap.ini to match your
 LDAP installation (server, base DN, and mapping)
-- /usr/share/gforge/bin/register-plugin authldap "LDAP external
+- @BINARY_PATH@/register-plugin authldap "LDAP external
 authentication"
 
 Voilà, you can now log into FusionForge with your existing loginname

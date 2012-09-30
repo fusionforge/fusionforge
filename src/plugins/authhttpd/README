@@ -5,14 +5,14 @@ This is the external HTTPD authentication plugin for FusionForge.
 
 Installation:
 
-- files from include/ go to /usr/share/gforge/plugins/authhttpd/include/
-- files from www/ go to /usr/share/gforge/www/plugins/authhttpd/
+- files from include/ go to @PLUGIN_PATH@/authhttpd/include/
+- files from www/ go to @SOURCE_PATH@/www/plugins/authhttpd/
 
 Setup:
 
-- customise /etc/fusionforge/config.ini.d/authhttpd.ini to match your
+- customise @CONFIG_PATH@/config.ini.d/authhttpd.ini to match your
 LDAP installation (server, base DN, and mapping)
-- /usr/share/gforge/bin/register-plugin authhttpd "HTTPD external
+- @BINARY_PATH@/register-plugin authhttpd "HTTPD external
 authentication"
 
 Voilà, FusionForge now reuses your existing HTTPD authentication
