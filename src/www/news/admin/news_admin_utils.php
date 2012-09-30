@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -107,7 +108,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
        		echo '<h2>'.sprintf(_('These items were rejected this past week or were not intended for front page (total: %1$s)'), $rows).'</h2>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
-       			show_news_item($items[$i],$i,false,true);
+       			show_news_item($items[$i],$i,false,false);
        		}
        		echo $GLOBALS['HTML']->listTableBottom();
        	}
@@ -131,7 +132,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
        		echo '<h2>'.sprintf(_('These items were approved this past week (total: %1$s)'), $rows).'</h2>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
-       			show_news_item($items[$i],$i,false,true);
+       			show_news_item($items[$i],$i,false,false);
        		}
        		echo $GLOBALS['HTML']->listTableBottom();
        	}
