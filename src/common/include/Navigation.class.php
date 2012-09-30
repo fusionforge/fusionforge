@@ -281,7 +281,7 @@ class Navigation extends Error {
 		// try to find selected entry
 		for ($j = $before; $j < count($menu['urls']); $j++) {
 			$url = $menu['urls'][$j];
-			if (strstr($request_uri, parse_url ($url, PHP_URL_PATH))) {
+			if (strstr($request_uri, $url)) {
 				$selected = $j;
 				break;
 			}
@@ -292,7 +292,7 @@ class Navigation extends Error {
 			$menu['titles'][] = _('Site Admin');
 			$menu['urls'][] = util_make_uri('/admin/');
 			$menu['tooltips'][] = _('Administration Submenu to handle global configuration, users & projects.');
-			if (strstr($request_uri, util_make_uri('/admin/'))) {
+			if (strstr($request_uri, util_make_uri('/admin/')) || strstr($request_uri, 'globaladmin')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
