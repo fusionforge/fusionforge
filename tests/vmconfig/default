@@ -1,16 +1,14 @@
 # DNS Hostname
 HOST=debian7.local
-# VM Engine currently supported lxc, openvz TODO kvm, virtualbox,...
-VMENGINE=lxc
 # SUPPORTED OS debian6, debian7, centos5, Centos6, ubuntu1204,...
 # Mostly describe vm template
 VMTYPE=debian7
 # Installed distribution, mostly used for repository
 DIST=wheezy
 # Where test suite is installed
-TEST_HOME=/usr/share/gforge/test
+TEST_HOME=/usr/share/gforge/tests
 # Test suite 
-TEST_SUITE=DEBDebian70Tests.php
-# Test filter (usefull if you want torun a subset of selenium tests)
-# TEST_FILTER="-filter func/PluginsMoinMoin/moinmoinTest.php"
-TEST_FILTER=""
+#TEST_SUITE="-filter func/PluginsMoinMoin/moinmoinTest.php DEBDebian70Tests.php"
+TEST_SUITE="func/PluginsMoinMoin/moinmoinTest.php"
+#TEST_SUITE="func/PluginsMediawiki/mediawikiTest.php"
+#TEST_SUITE="DEBDebian70Tests.php"
