@@ -4,6 +4,7 @@
  *
  * Copyright 2009 - 2010, Olaf Lenz
  * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -275,7 +276,6 @@ class Navigation extends Error {
 		$before = count($menu['urls']);
 		$plugin_urls = array();
 		$hookParams['DIRS'] = &$menu['urls'];
-		$hookParams['ADMIN'] =& $menu['adminurls'];
 		$hookParams['TITLES'] = &$menu['titles'];
 		$hookParams['TOOLTIPS'] = &$menu['tooltips'];
 		plugin_hook("outermenu", $hookParams);
@@ -291,7 +291,6 @@ class Navigation extends Error {
 
 		// Admin and Reporting
 		if (forge_check_global_perm('forge_admin')) {
-			$user_is_super = true;
 			$menu['titles'][] = _('Site Admin');
 			$menu['urls'][] = util_make_uri('/admin/');
 			$menu['tooltips'][] = _('Administration Submenu to handle global configuration, users & projects.');
@@ -299,7 +298,7 @@ class Navigation extends Error {
 				$selected = count($menu['urls'])-1;
 			}
 		}
-		if (forge_check_global_perm ('forge_stats', 'read')) {
+		if (forge_check_global_perm('forge_stats', 'read')) {
 			$menu['titles'][] = _('Reporting');
 			$menu['urls'][] = util_make_uri('/reporting/');
 			$menu['tooltips'][] = _('Statistics about visits, users & projects in time frame.');
