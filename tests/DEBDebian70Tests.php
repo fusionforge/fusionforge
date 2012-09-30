@@ -32,7 +32,7 @@ class DEBDebian60Tests
 		$suite->addTestFiles(glob("func/PluginsBlocks/*Test.php"));
 		$suite->addTestFiles(glob("func/PluginsMediawiki/*Test.php"));
 		$suite->addTestFiles(glob("func/PluginsMoinMoin/*Test.php"));
-		$suite->addTestFiles(glob("func/PluginsOnlineHelp/*Test.php"));
+//		$suite->addTestFiles(glob("func/PluginsOnlineHelp/*Test.php"));
 //		$suite->addTestFiles(glob("func/PluginsSvnTracker/*Test.php"));
 		$suite->addTestFiles(glob("func/RBAC/*Test.php"));
 		$suite->addTestFiles(glob("func/Surveys/*Test.php"));
