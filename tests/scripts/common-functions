@@ -1,11 +1,11 @@
 #! /bin/sh
 get_config()
 {
-	echo "Resd config from tests/config/default"
+	echo "Read config from tests/config/default"
 	. tests/config/default
 	if [ -f tests/config/`hostname` ]
 	then
-		echo "Resd config from tests/config/`hostname`"
+		echo "Read config from tests/config/`hostname`"
 		 . tests/config/`hostname` 
 	fi
 	if [ ! -z "$1" ]
