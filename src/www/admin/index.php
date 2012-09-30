@@ -177,12 +177,16 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		echo $plugins_site_admin_project_html;
 		echo '</ul>';
 	}
-?>
 
+
+if(forge_get_config('use_news')) {
+?>
 <h2><?php echo _('News'); ?></h2>
 <ul>
 	<li><?php echo util_make_link ('/admin/pending-news.php',_('Pending news (moderation for front-page)')); ?></li>
 </ul>
+<?php } ?>
+
 
 <h2><?php echo _('Stats'); ?></h2>
 <ul>
