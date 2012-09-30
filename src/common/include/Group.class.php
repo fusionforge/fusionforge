@@ -1783,15 +1783,17 @@ class Group extends Error {
 		//	Delete SurveyQuestions
 		//
 		$sqf = new SurveyQuestionFactory($this);
-		$sq_arr =& $sqf->getSurveyQuestions();
-		foreach ($sq_arr as $i) {
-			if (!is_object($i)) {
-				continue;
-			}
-			if (!$i->delete()) {
-				$this->setError(_('Could not properly delete the survey questions'));
-				db_rollback();
-				return false;
+		$sq_arr = $sqf->getSurveyQuestions();
+		if (is_array($sq_arr)) {
+			foreach ($sq_arr as $i) {
+				if (!is_object($i)) {
+					continue;
+				}
+				if (!$i->delete()) {
+					$this->setError(_('Could not properly delete the survey questions'));
+					db_rollback();
+					return false;
+				}
 			}
 		}
 		//
