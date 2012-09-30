@@ -18,19 +18,19 @@
  * You should have received a copy of the GNU General Public License along
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */ 
+ */
 
 EditHeaderMenuController = function(params) {
-	this.params	= params;
+	this.params = params;
 	this.bindControls();
 	this.initializeView();
-}
+};
 
 HeaderMenuController = function(params) {
-	this.params	= params;
+	this.params = params;
 	this.bindControls();
 	this.initializeView();
-}
+};
 
 HeaderMenuController.prototype =
 {
@@ -45,7 +45,7 @@ HeaderMenuController.prototype =
 		this.params.inputHtmlCode.prop('disabled', true);
 		this.params.trHtmlCode.hide();
 		this.params.trUrlCode.show();
-		this.params.inputURL.attr('checked','checked');
+		this.params.inputURL.attr('checked', 'checked');
 	},
 
 	htmlCodeView: function() {
@@ -60,8 +60,8 @@ HeaderMenuController.prototype =
 
 	inputHtmlCodeView: function() {
 		this.params.inputHtmlCode.prop('disabled', false);
-	},
-}
+	}
+};
 
 EditHeaderMenuController.prototype =
 {
@@ -100,10 +100,10 @@ EditHeaderMenuController.prototype =
 		this.params.inputHtmlCode.prop('disabled', true);
 		this.params.trHtmlCode.hide();
 		this.params.trUrlCode.show();
-		this.params.inputURL.attr('checked','checked');
+		this.params.inputURL.attr('checked', 'checked');
 	},
 
 	inputHtmlCodeView: function() {
 		this.params.inputHtmlCode.prop('disabled', false);
-	},
-}
+	}
+};

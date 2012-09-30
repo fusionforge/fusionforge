@@ -1319,8 +1319,8 @@ function check_email_available($group, $email, &$response) {
 }
 
 /**
- * Adds the Javascript file to the lits to be used
- * @param unknown_type $js
+ * Adds the Javascript file to the list to be used
+ * @param string $js
  */
 function use_javascript($js) {
 	return $GLOBALS['HTML']->addJavascript($js);

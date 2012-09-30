@@ -47,7 +47,6 @@ class headermenuPlugin extends Plugin {
 			}
 			case 'site_admin_option_hook': {
 				echo '<li>'.$this->getAdminOptionLink().'</li>';
-				$returned = true;
 				break;
 			}
 		}
@@ -78,7 +77,8 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * getOuterLink - update the links before generate the tab.
 	 *
-	 * @return	bool	true...
+	 * @param $params
+	 * @return    bool    true...
 	 */
 	function getOuterLink($params) {
 		$availableLinks = $this->getAvailableLinks('outermenu');
@@ -131,10 +131,12 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * addLink - add a new valid link
 	 *
-	 * @param	string	the url
-	 * @param	string	the displayed name
-	 * @param	string	a short description (to help administration)
-	 * @param	string	linkmenu entry : headermenu or outermenu
+	 * @param	string	$url the url
+	 * @param	string	$name the displayed name
+	 * @param	string	$description a short description (to help administration)
+	 * @param	string	$linkmenu linkmenu entry : headermenu or outermenu
+	 * @param	string	$linktype
+	 * @param	string	$htmlcode
 	 * @return	bool	success or not
 	 */
 	function addLink($url, $name, $description, $linkmenu, $linktype = 'url', $htmlcode = '') {
@@ -213,7 +215,6 @@ class headermenuPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function getHeader($type) {
-		global $gfplugins;
 		$returned = false;
 		switch ($type) {
 			case 'globaladmin': {

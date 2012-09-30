@@ -48,6 +48,7 @@ if (!empty($name) && !empty($linkmenu)) {
 			}
 			$warning_msg = _('Missing Link URL.');
 			session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+			break;
 		}
 		case "outermenu": {
 			if (!empty($link)) {

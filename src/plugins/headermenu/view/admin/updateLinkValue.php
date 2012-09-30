@@ -38,8 +38,8 @@ jQuery(document).ready(function() {
 		inputHeader:	jQuery('#linkmenu_headermenu'),
 		inputOuter:	jQuery('#linkmenu_outermenu'),
 		trHtmlCode:	jQuery('#htmlcode'),
-		trUrlCode:	jQuery('#urlcode'),
-	});
+		trUrlCode:	jQuery('#urlcode')
+    });
 });
 
 //]]></script>

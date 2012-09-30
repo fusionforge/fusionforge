@@ -1706,7 +1706,6 @@ src/plugins/headermenu/action/addLink.php -text
 src/plugins/headermenu/action/deleteLink.php -text
 src/plugins/headermenu/action/updateLinkStatus.php -text
 src/plugins/headermenu/action/updateLinkValue.php -text
-src/plugins/headermenu/common/headermenu-init.php -text
 src/plugins/headermenu/common/headermenuPlugin.class.php -text
 src/plugins/headermenu/db/20120930-addoutermenusupport.sql -text
 src/plugins/headermenu/db/headermenu-init.sql -text
