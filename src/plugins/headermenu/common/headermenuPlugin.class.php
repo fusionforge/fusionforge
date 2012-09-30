@@ -77,8 +77,8 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * getOuterLink - update the links before generate the tab.
 	 *
-	 * @param $params
-	 * @return    bool    true...
+	 * @param 	array	hook params array
+	 * @return	bool	true...
 	 */
 	function getOuterLink($params) {
 		$availableLinks = $this->getAvailableLinks('outermenu');
@@ -95,6 +95,7 @@ class headermenuPlugin extends Plugin {
 						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
+						break;
 					}
 				}
 			}
@@ -160,7 +161,7 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * deleteLink - delete a link
 	 *
-	 * @param	int	the link id
+	 * @param	int	$idLink the link id
 	 * @return	bool	success or not
 	 */
 	function deleteLink($idLink) {
@@ -187,6 +188,18 @@ class headermenuPlugin extends Plugin {
 		return false;
 	}
 
+	/**
+	 * updateLink - update a valid link
+	 *
+	 * @param	int	$idLink the link id to be updated
+	 * @param	string	$url the url
+	 * @param	string	$name the displayed name
+	 * @param	string	$description a short description (to help administration)
+	 * @param	string	$linkmenu linkmenu entry : headermenu or outermenu
+	 * @param	string	$linktype : url or htmlcode, default is url
+	 * @param	string	$htmlcode
+	 * @return	bool	success or not
+	 */
 	function updateLink($idLink, $url, $name, $description, $linkmenu, $linktype = 'url', $htmlcode ='') {
 		$res = db_query_params('update plugin_headermenu set url = $1, name = $2, description = $3, linkmenu = $4, linktype = $5, htmlcode = $6
 					where id_headermenu = $7',
