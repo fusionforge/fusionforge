@@ -227,7 +227,7 @@ class Group extends Error {
 	 * @param	int	Database result from select query OR associative array of all columns.
 	 * @return	boolean	success or not
 	 */
-	function Group($id = false, $res = false) {
+	function __construct($id = false, $res = false) {
 		$this->Error();
 		if (!$id) {
 			//setting up an empty object
@@ -556,8 +556,8 @@ class Group extends Error {
 			$homepage = util_make_url('/projects/' . $this->getUnixName() . '/');
 		}
 
-		if (strlen(htmlspecialchars($short_description))>255) {
-			$this->setError(_('Error updating project information: Maximum length for Project Description is 255 chars.'));
+		if (strlen(htmlspecialchars($short_description))<10) {
+			$this->setError(_('Describe in a more comprehensive manner your project.'));
 			return false;
 		}
 
