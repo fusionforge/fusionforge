@@ -16,6 +16,7 @@ prepare_workspace()
 	export WORKSPACE=${WORKSPACE:-$WORKDIR}
 	export RPM_TMP=$WORKDIR/tmp
 	export BUILDRESULT=$WORKSPACE/build/packages
+	export BUILDERDIR=${BUILDERDIR:-$HOME/builder}
 	# Delete existing packages
 	if [ -d $WORKSPACE/build/packages ] 
 	then 
@@ -32,13 +33,6 @@ prepare_workspace()
 	# Erase apidocs
 	[ ! -d $WORKSPACE/apidocs ] || rm -fr $WORKSPACE/apidocs
 	mkdir -p $WORKSPACE/apidocs
-	# When in jenkins reuse same space for pbuilder
-	if [ "$HOME" = "/var/lib/jenkins" ]
-	then
-		BUILDERDIR="/var/lib/jenkins/builder"
-		export BUILDERDIR
-		echo "Building in $BUILDERDIR"
-	fi
 }
 
 setup_dag_repo()
