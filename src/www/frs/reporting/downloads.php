@@ -113,28 +113,22 @@ if ($report->isError()) {
 $data = $report->getData();
 
 if (count($data) == 0) {
-    echo '<p class="information">';
-    echo _('There have been no downloads for this package.');
-    echo '</p>';
+	echo '<p class="information">';
+	echo _('There have been no downloads for this package.');
+	echo '</p>';
 } else {
-
-    echo $HTML->listTableTop (array(_('Package'), _('Release'), _('File'), _('User'), _('Date')),
+	echo $HTML->listTableTop (array(_('Package'), _('Release'), _('File'), _('User'), _('Date')),
                               false, true, 'Download');
-
-    for ($i=0; $i<count($data); $i++) {
+	for ($i=0; $i<count($data); $i++) {
 		$date = preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][4]);
-
-	echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
-		'<td>'. $data[$i][0] .'</td>'.
-		'<td>'. $data[$i][1] .'</td>'.
-		'<td>'. basename($data[$i][2]) .'</td>'.
-		'<td><a href="/users/'.urlencode($data[$i][5]).'/">'. $data[$i][3] .'</a></td>'.
-		'<td class="align-center">'. $date .'</td></tr>';
-
-    }
-
-    echo $HTML->listTableBottom ();
-
+		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
+			'<td>'. $data[$i][0] .'</td>'.
+			'<td>'. $data[$i][1] .'</td>'.
+			'<td>'. basename($data[$i][2]) .'</td>'.
+			'<td><a href="/users/'.urlencode($data[$i][5]).'/">'. $data[$i][3] .'</a></td>'.
+			'<td class="align-center">'. $date .'</td></tr>';
+	}
+	echo $HTML->listTableBottom ();
 }
 
 frs_footer();
