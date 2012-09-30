@@ -3,8 +3,7 @@
  * FusionForge navigation
  *
  * Copyright 2009 - 2010, Olaf Lenz
- * Copyright 2011, Franck Villaume - TrivialDev
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -274,14 +273,13 @@ class Navigation extends Error {
 
 		// Outermenu hook
 		$before = count($menu['urls']);
-		$plugin_urls = array();
 		$hookParams['DIRS'] = &$menu['urls'];
 		$hookParams['TITLES'] = &$menu['titles'];
 		$hookParams['TOOLTIPS'] = &$menu['tooltips'];
 		plugin_hook("outermenu", $hookParams);
 
 		// try to find selected entry
-		for ($j = $before; $j < count($plugin_urls); $j++) {
+		for ($j = $before; $j < count($menu['urls']); $j++) {
 			$url = $menu['urls'][$j];
 			if (strstr($request_uri, parse_url ($url, PHP_URL_PATH))) {
 				$selected = $j;
