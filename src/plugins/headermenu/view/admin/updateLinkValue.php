@@ -26,17 +26,51 @@ global $headermenu;
 
 session_require_global_perm('forge_admin');
 $linkId = getIntFromRequest('linkid');
+?>
 
+<script language="Javascript" type="text/javascript">//<![CDATA[
+var controllerHeaderMenu;
+
+jQuery(document).ready(function() {
+	controllerHeaderMenu = new EditHeaderMenuController({
+		inputHtmlCode:	jQuery('#typemenu_htmlcode'),
+		inputURL:	jQuery('#typemenu_url'),
+		inputHeader:	jQuery('#linkmenu_headermenu'),
+		inputOuter:	jQuery('#linkmenu_outermenu'),
+		trHtmlCode:	jQuery('#htmlcode'),
+		trUrlCode:	jQuery('#urlcode'),
+	});
+});
+
+//]]></script>
+
+<?
 $linkValues = $headermenu->getLink($linkId);
 if (is_array($linkValues)) {
 	echo '<form method="POST" name="updateLink" action="index.php?type=globaladmin&action=updateLinkValue">';
 	echo '<table><tr>';
 	echo $HTML->boxTop(_('Update this link'));
-	echo '<td>'._('URL').'</td><td><input name="link" type="text" maxsize="255" value="'.$linkValues['url'].'" /></td>';
-	echo '</tr><tr>';
 	echo '<td>'._('Displayed Name').'</td><td><input name="name" type="text" maxsize="255" value="'.$linkValues['name'].'" /></td>';
 	echo '</tr><tr>';
 	echo '<td>'._('Description').'</td><td><input name="description" type="text" maxsize="255" value="'.$linkValues['description'].'" /></td>';
+	echo '</tr><tr>';
+	echo '<td>'._('Menu Location').'</td><td>';
+	$vals = array('headermenu', 'outermenu');
+	$texts = array('headermenu', 'outermenu');
+	$select_name = 'linkmenu';
+	echo html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $linkValues['linkmenu'], false);
+	echo '</td>';
+	echo '</tr><tr>';
+	echo '<td>'._('Menu Type').'</td><td>';
+	$texts = array('URL', 'New Page');
+	$vals = array('url', 'htmlcode');
+	$select_name = 'typemenu';
+	echo html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $linkValues['linktype'], false);
+	echo '</td>';
+	echo '</tr><tr id="htmlcode" style="display:none" >';
+	echo '<td>'._('Your HTML Code.').'</td><td><textarea name="htmlcode" rows="15" cols="70">'.$linkValues['htmlcode'].'</textarea></td>';
+	echo '</tr><tr id="urlcode"  style="display:none" >';
+	echo '<td>'._('URL').'</td><td><input name="link" type="text" maxsize="255" value="'.$linkValues['url'].'" /></td>';
 	echo '</tr><tr>';
 	echo '<td>';
 	echo '<input type="hidden" name="linkid" value="'.$linkId.'" />';

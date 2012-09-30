@@ -24,18 +24,25 @@
 
 class headermenuPlugin extends Plugin {
 
+	var $pageid;
+
 	function __construct() {
 		$this->Plugin() ;
 		$this->name = 'headermenu' ;
 		$this->text = 'headermenu' ;
 		$this->_addHook('headermenu');
 		$this->_addHook('site_admin_option_hook');
+		$this->_addHook('outermenu');
 	}
 
 	function CallHook ($hookname, &$params) {
 		switch ($hookname) {
 			case 'headermenu': {
 				$this->getHeaderLink();
+				break;
+			}
+			case 'outermenu': {
+				$this->getOuterLink($params);
 				break;
 			}
 			case 'site_admin_option_hook': {
@@ -45,6 +52,7 @@ class headermenuPlugin extends Plugin {
 			}
 		}
 	}
+
 
 	function getAdminOptionLink() {
 		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Global HeaderMenu admin'), array('class' => 'tabtitle', 'title' => _('Direct link to global configuration of this plugin')));
@@ -56,7 +64,7 @@ class headermenuPlugin extends Plugin {
 	 * @return	bool	true...
 	 */
 	function getHeaderLink() {
-		$availableLinks = $this->getAvailableLinks();
+		$availableLinks = $this->getAvailableLinks('headermenu');
 		foreach ($availableLinks as $link) {
 			if ($link['is_enable']) {
 				$ahref = '<a href="'.$link['url'].'">'.htmlspecialchars($link['name']).'</a>';
@@ -68,12 +76,40 @@ class headermenuPlugin extends Plugin {
 	}
 
 	/**
-	 * getAvailableLinks - get all the links from the db
+	 * getOuterLink - update the links before generate the tab.
 	 *
+	 * @return	bool	true...
+	 */
+	function getOuterLink($params) {
+		$availableLinks = $this->getAvailableLinks('outermenu');
+		foreach ($availableLinks as $link) {
+			if ($link['is_enable']) {
+				switch ($link['linktype']) {
+					case 'url': {
+						$params['DIRS'][] = $link['url'];
+						$params['TITLES'][] = $link['name'];
+						$params['TOOLTIPS'][] = $link['description'];
+						break;
+					}
+					case 'htmlcode': {
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&pageid='.$link['id_headermenu'];
+						$params['TITLES'][] = $link['name'];
+						$params['TOOLTIPS'][] = $link['description'];
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * getAvailableLinks - get all the links from the db of certain kind
+	 *
+	 * @param	string	the type of menu links search in db
 	 * @return	array	the available links
 	 */
-	function getAvailableLinks() {
-		$links = db_query_params('select * FROM plugin_headermenu', array());
+	function getAvailableLinks($linkmenu) {
+		$links = db_query_params('select * FROM plugin_headermenu where linkmenu = $1', array($linkmenu));
 		$availableLinks = array();
 		while ($arr = db_fetch_array($links)) {
 			$availableLinks[] = $arr;
@@ -82,29 +118,41 @@ class headermenuPlugin extends Plugin {
 	}
 
 	/**
+	 * getAllAvailableLinks - get all the links from the db
+	 *
+	 * @return	array	the available links
+	 */
+	function getAllAvailableLinks() {
+		$availableOuterLinks = $this->getAvailableLinks('outermenu');
+		$availableHeaderLinks = $this->getAvailableLinks('headermenu');
+		return array_merge($availableOuterLinks, $availableHeaderLinks);
+	}
+
+	/**
 	 * addLink - add a new valid link
 	 *
 	 * @param	string	the url
 	 * @param	string	the displayed name
 	 * @param	string	a short description (to help administration)
+	 * @param	string	linkmenu entry : headermenu or outermenu
 	 * @return	bool	success or not
 	 */
-	function addLink($url, $name, $description) {
-		if (!empty($url)) {
-			$res = db_query_params('insert into plugin_headermenu (url, name, description, is_enable)
-					values ($1, $2, $3, $4)',
+	function addLink($url, $name, $description, $linkmenu, $linktype = 'url', $htmlcode = '') {
+		$res = db_query_params('insert into plugin_headermenu (url, name, description, is_enable, linkmenu, linktype, htmlcode)
+					values ($1, $2, $3, $4, $5, $6, $7)',
 					array(
 						$url,
 						$name,
 						$description,
 						1,
+						$linkmenu,
+						$linktype,
+						$htmlcode
 					));
-			if (!$res)
-				return false;
+		if (!$res)
+			return false;
 
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	/**
@@ -137,13 +185,25 @@ class headermenuPlugin extends Plugin {
 		return false;
 	}
 
-	function updateLink($idLink, $url, $name, $description) {
-		$res = db_query_params('update plugin_headermenu set url = $1, name = $2, description = $3 where id_headermenu = $4',
-				array($url, $name, $description, $idLink));
+	function updateLink($idLink, $url, $name, $description, $linkmenu, $linktype = 'url', $htmlcode ='') {
+		$res = db_query_params('update plugin_headermenu set url = $1, name = $2, description = $3, linkmenu = $4, linktype = $5, htmlcode = $6
+					where id_headermenu = $7',
+				array($url, $name, $description, $linkmenu, $linktype, $htmlcode, $idLink));
 		if ($res) {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * pageView - display a static html code
+	 *
+	 * @param	int	the page id
+	 * @return	string	the html code
+	 */
+	function pageView($pageid) {
+		$link = $this->getLink($pageid);
+		return $link['htmlcode'];
 	}
 
 	/**
@@ -161,7 +221,13 @@ class headermenuPlugin extends Plugin {
 				global $gfwww;
 				require_once($gfwww.'admin/admin_utils.php');
 				use_javascript('/js/sortable.js');
-				site_admin_header(array('title'=>_('Site Global headerMenu Admin'), 'toptab' => ''));
+				site_admin_header(array('title'=>_('Site Global Menu Admin'), 'toptab' => ''));
+				$returned = true;
+				break;
+			}
+			case 'pageview': {
+				$link = $this->getLink($this->pageid);
+				site_header(array('title'=> $link['name'], 'toptab' => '/plugins/headermenu/?pageview&pageid='.$this->pageid));
 				$returned = true;
 				break;
 			}
@@ -187,6 +253,6 @@ class headermenuPlugin extends Plugin {
 	 * @return	string	the description
 	 */
 	function getPluginDescription() {
-		return _('Get the ability to set new links next to the login menu.');
+		return _('Get the ability to set new links next to the login menu (headermenu) or in the main menu (outermenu).');
 	}
 }

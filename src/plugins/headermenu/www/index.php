@@ -32,6 +32,7 @@ if (!$type) {
 
 global $use_tooltips;
 $headermenu = plugin_get_object('headermenu');
+use_javascript('scripts/HeaderMenuController.js');
 
 switch ($type) {
 	case 'globaladmin': {
@@ -51,7 +52,7 @@ switch ($type) {
 				break;
 			}
 		}
-		$headermenu->getHeader('globaladmin');
+		$headermenu->getHeader($type);
 		switch ($view) {
 			case 'updateLinkValue':
 				global $gfplugins;
@@ -61,6 +62,13 @@ switch ($type) {
 				$headermenu->getGlobalAdminView();
 				break;
 		}
+		break;
+	}
+	case 'pageview': {
+		$pageid = getIntFromRequest('pageid');
+		$headermenu->pageid = $pageid;
+		$headermenu->getHeader($type);
+		echo $headermenu->pageView($pageid);
 		break;
 	}
 }

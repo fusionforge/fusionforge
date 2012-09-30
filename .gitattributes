@@ -1708,11 +1708,13 @@ src/plugins/headermenu/action/updateLinkStatus.php -text
 src/plugins/headermenu/action/updateLinkValue.php -text
 src/plugins/headermenu/common/headermenu-init.php -text
 src/plugins/headermenu/common/headermenuPlugin.class.php -text
+src/plugins/headermenu/db/20120930-addoutermenusupport.sql -text
 src/plugins/headermenu/db/headermenu-init.sql -text
 src/plugins/headermenu/etc/headermenu.ini -text
 src/plugins/headermenu/view/admin/updateLinkValue.php -text
 src/plugins/headermenu/view/admin/viewGlobalConfiguration.php -text
 src/plugins/headermenu/www/index.php -text
+src/plugins/headermenu/www/scripts/HeaderMenuController.js -text
 src/plugins/helloworld/NAME -text
 src/plugins/helloworld/README -text
 src/plugins/helloworld/bin/db-delete.pl -text svneol=unset#text/x-perl

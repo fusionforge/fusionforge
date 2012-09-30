@@ -12,7 +12,7 @@ FusionForge-5.3:
 * Widget: Project Document Activity : new or updates files, new directories, in the last 4 weeks (TrivialDev)
 
 Plugins:
-* headermenu: new plugin to add links in login/logout menu link (TrivialDev)
+* headermenu: new plugin to handle links in headermenu or outermenu (TrivialDev)
 * scmgit: add browsing capability for user personal repository (TrivialDev)
 * scmgit: basic activity support (TrivialDev).
 * scmhg: merge patch from Denise Patzker: add http support, online browse, stats (TrivialDev)
