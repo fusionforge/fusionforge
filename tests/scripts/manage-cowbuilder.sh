@@ -1,11 +1,17 @@
 #! /bin/sh
 
 # Prepare and/or update cowbuilder caches
+relativepath=`dirname $0`
+absolutesourcepath=`cd $relativepath/../..; pwd`
+cd $absolutesourcepath
 
-. tests/scripts/common-functions
-. tests/scripts/common-vm
-
-get_config
+echo "Read config from tests/config/default"
+. tests/config/default
+if [ -f tests/config/`hostname` ]
+then
+	echo "Read config from tests/config/`hostname`"
+	. tests/config/`hostname`
+fi
 
 BUILDERDIR=${BUILDERDIR:-/var/lib/jenkins/builder/}
 DEBMIRROR=${DEBMIRROR:-http://cdn.debian.net/debian/}
