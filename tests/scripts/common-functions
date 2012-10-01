@@ -73,3 +73,12 @@ else
         scp src/rpm-specific/fusionforge.repo root@$HOST:/etc/yum.repos.d/
 fi
 }
+
+setup_debian_3rd-party_repo()
+{
+[ -z "$HOST" ] || exit 1
+[ -z "$DEB3RD" ] || exit 2
+[ -z "$DIST" ] || exit 3
+ssh root@$HOST "echo \"deb $DEB3RD $DIST main\" > /etc/apt/sources.list.d/3rd-party.list"
+gpg --export --armor | ssh root@$HOST "apt-key add -"
+}
