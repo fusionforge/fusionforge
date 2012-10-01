@@ -12,7 +12,7 @@ prepare_workspace
 destroy_vm -t debian7 $@
 start_vm_if_not_keeped -t debian7 $@
 
-setup_debian_3rd-party_repo
+setup_debian_3rdparty_repo
 
 ssh root@$HOST "apt-get update"
 

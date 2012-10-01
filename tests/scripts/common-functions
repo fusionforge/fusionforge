@@ -74,7 +74,7 @@ else
 fi
 }
 
-setup_debian_3rd-party_repo()
+setup_debian_3rdparty_repo()
 {
 [ -z "$HOST" ] || exit 1
 [ -z "$DEB3RD" ] || exit 2
