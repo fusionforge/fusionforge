@@ -28,7 +28,7 @@ then
 	fi
 	if type apt-get 2>/dev/null
 	then
-		apt-get -y install vnc4server
+		apt-get -y install xfonts-base vnc4server
 	fi
 	if ! type vncserver 2>/dev/null
 	then
