@@ -1999,8 +1999,6 @@ src/plugins/moinmoin/bin/install.sh -text
 src/plugins/moinmoin/common/MoinMoinPlugin.class.php -text
 src/plugins/moinmoin/common/moinmoin-init.php -text
 src/plugins/moinmoin/cronjobs/create-wikis.php -text
-src/plugins/moinmoin/etc/PROJECT_NAME.py.tmpl -text
-src/plugins/moinmoin/etc/moinmoin.conf -text
 src/plugins/moinmoin/etc/moinmoin.ini -text
 src/plugins/moinmoin/lib/farmconfig.py -text
 src/plugins/moinmoin/lib/ff_groups.py -text
