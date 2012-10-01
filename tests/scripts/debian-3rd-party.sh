@@ -45,5 +45,5 @@ CHANGEFILEM=mediawiki_1.19.2-1_amd64.changes
 make -C 3rd-party/mediawiki BUILDRESULT=$BUILDRESULT COWBUILDERCONFIG=$COWBUILDERCONFIG
 cd $BUILDRESULT
 reprepro -Vb ${REPOPATH} --ignore=wrongdistribution include $DIST $CHANGEFILEM
-gpg --export --armor > ${REPOPATH}/debian/key
+gpg --export --armor > ${REPOPATH}/key
 
