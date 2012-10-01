@@ -2,8 +2,10 @@
 
 DSCFILE=http://ftp.de.debian.org/debian/pool/main/m/mediawiki/mediawiki_1.19.2-1.dsc
 DIST=wheezy
+ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
+CHANGEFILEM=mediawiki_1.19.2-1_$(ARCH).changes
 
-cowbuild: mediawiki_1.19.2-1.dsc
+$(BUILDRESULT)/$(CHANGEFILEM): mediawiki_1.19.2-1.dsc
 	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --buildresult $(BUILDRESULT) --build mediawiki_1.19.2-1.dsc
 
 pdebuild: mediawiki-1.19.2
