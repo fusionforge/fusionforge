@@ -5,22 +5,14 @@
 export FORGE_HOME=/opt/gforge
 export DIST=wheezy
 #export FILTER="-filter func/PluginsMoinMoin/moinmoinTest.php"
+export FILTER=DEBDebian70Tests.php
 
 get_config $@
 prepare_workspace
-#destroy_vm -t debian7 $@
+destroy_vm -t debian7 $@
 start_vm_if_not_keeped -t debian7 $@
 
-# Build 3rd-party 
-# make -C 3rd-party -f Makefile.debian BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
-
-# Setup debian repo
-# ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
-# ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
-# ssh root@$HOST "echo \"deb file:/debian $DIST main\" >> /etc/apt/sources.list"
-# scp -r $WORKSPACE/build/debian root@$HOST:/
-# gpg --export --armor | ssh root@$HOST "apt-key add -"
-# sleep 5
+setup_debian_3rd-party_repo
 
 ssh root@$HOST "apt-get update"
 
@@ -61,7 +53,7 @@ ssh root@$HOST "apt-get -y install xfonts-base vnc4server ; mkdir -p /root/.vnc"
 ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
-$FORGE_HOME/tests/scripts/phpunit.sh $FILTER DEBDebian70Tests.php &> /var/log/phpunit.log &
+$FORGE_HOME/tests/scripts/phpunit.sh $FILTER &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
 wait %1
 echo \$? > /root/phpunit.exitcode
