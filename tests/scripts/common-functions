@@ -81,5 +81,5 @@ if [ -z "$DEB3RD" ] ; then  echo "DEB3RD undefined" ; exit 2 ; fi
 if [ -z "$DIST" ] ; then  echo "DIST undefined" ; exit 3 ; fi
 echo "Installing debian 3rd party repo $DEB3RD $DIST on $HOST"
 ssh root@$HOST "echo \"deb $DEB3RD $DIST main\" > /etc/apt/sources.list.d/3rd-party.list"
-gpg --export --armor | ssh root@$HOST "apt-key add -"
+wget -q -O - ${DEB3RD}key | ssh root@$HOST "apt-key add -"
 }
