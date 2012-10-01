@@ -2,15 +2,15 @@
 
 # Setup Env
 relativepath=`dirname $0`
-absolutesourcepath=`cd $relativepath/../..; pwd`
-cd $absolutesourcepath
+absolutetestspath=`cd $relativepath/..; pwd`
+cd $absolutetestspath
 
 echo "Read config from tests/config/default"
-. tests/config/default
-if [ -f tests/config/`hostname` ]
+. config/default
+if [ -f config/`hostname` ]
 then
-	echo "Read config from tests/config/`hostname`"
-	. tests/config/`hostname`
+	echo "Read config from config/`hostname`"
+	. config/`hostname`
 fi
 BUILDERDIR=${BUILDERDIR:-$HOME/builder/}
 
