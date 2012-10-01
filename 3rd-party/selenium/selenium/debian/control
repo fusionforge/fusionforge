@@ -1,0 +1,15 @@
+Source: selenium
+Section: misc
+Priority: extra
+Maintainer: Christian Bayle <bayle@debian.org>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://fusionforge.org
+#Vcs-Git: git://git.debian.org/collab-maint/selenium.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/selenium.git;a=summary
+
+Package: selenium
+Architecture: all
+Depends: ${misc:Depends}
+Description: Selenium server Jar
+ Not a real package, only contains selenium server jar
