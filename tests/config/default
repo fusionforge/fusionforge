@@ -31,6 +31,9 @@ DEBMIRRORSEC=http://security.debian.org/
 #DAG_RPMFORGE_REPO=http://apt.sw.be/redhat
 #EPEL_REPO=http://download.fedoraproject.org/pub/epel
 
+# Debian 3rd-party
+DEB3RD=http://buildbot3.fusionforge.org/job/3rd-party/ws/build/debian/
+
 # The following is for static ip config samples
 # hostname=vmengine:template:address/mask:gateway
 # OpenVZ
