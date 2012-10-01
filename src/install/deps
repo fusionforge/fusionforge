@@ -62,7 +62,7 @@ deps_debian() {
 	DEBIAN_FRONTEND=noninteractive
 	export DEBIAN_FRONTEND
 	apt-get -y update
-	apt-get -y --force-yes install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release php-htmlpurifier python-moinmoin python-psycopg2 libapache2-mod-wsgi php5-cli
+	apt-get -y --force-yes install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release php-htmlpurifier python-moinmoin python-psycopg2 libapache2-mod-wsgi php5-cli mediawiki
 	a2enmod headers
 	a2enmod proxy
 	a2enmod ssl
