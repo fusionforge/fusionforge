@@ -5,5 +5,4 @@ plugins/moinmoin/lib/*            @PLUGIN_PATH@/moinmoin/lib/
 plugins/moinmoin/www/*            @PLUGIN_PATH@/moinmoin/www/
 plugins/moinmoin/wsgi/moin.wsgi   @PLUGIN_PATH@/moinmoin/wsgi
 plugins/moinmoin/etc/*.ini 	  		@CONFIG_PATH@/config.ini.d/
-plugins/moinmoin/etc/moinmoin.conf		@CONFIG_PATH@/plugins/moinmoin
-plugins/moinmoin/etc/PROJECT_NAME.py.tmpl	@CONFIG_PATH@/plugins/moinmoin
+plugins/moinmoin/etc/plugins/moinmoin/*		@CONFIG_PATH@/plugins/moinmoin/
