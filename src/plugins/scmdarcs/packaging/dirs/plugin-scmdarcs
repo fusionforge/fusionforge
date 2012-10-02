@@ -4,4 +4,4 @@ usr/share/gforge/plugins/scmdarcs/cgi-bin
 usr/share/gforge/plugins/scmdarcs/common
 usr/share/gforge/plugins/scmdarcs/www
 usr/share/gforge/www/plugins
-var/lib/gforge/chroot/scmrepos/darcs
+@DATA_PATH@/chroot/scmrepos/darcs

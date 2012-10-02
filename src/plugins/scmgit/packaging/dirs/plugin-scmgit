@@ -4,4 +4,4 @@ usr/share/gforge/plugins/scmgit/cgi-bin
 usr/share/gforge/plugins/scmgit/common
 usr/share/gforge/plugins/scmgit/www
 usr/share/gforge/www/plugins/scmgit
-var/lib/gforge/chroot/scmrepos/git
+@DATA_PATH@/chroot/scmrepos/git
