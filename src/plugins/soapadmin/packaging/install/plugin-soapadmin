@@ -1,8 +1,8 @@
-common/*                  usr/share/gforge/plugins/soapadmin/common/
-include/*                 usr/share/gforge/plugins/soapadmin/include/
-db/*                      usr/share/gforge/plugins/soapadmin/db/
-bin/*                     usr/share/gforge/plugins/soapadmin/bin/
-www/*                     usr/share/gforge/plugins/soapadmin/www/
+common/*                  @PLUGIN_PATH@/soapadmin/common/
+include/*                 @PLUGIN_PATH@/soapadmin/include/
+db/*                      @PLUGIN_PATH@/soapadmin/db/
+bin/*                     @PLUGIN_PATH@/soapadmin/bin/
+www/*                     @PLUGIN_PATH@/soapadmin/www/
 cronjobs/*                usr/share/gforge/cronjobs
 etc/plugins/soapadmin/*     etc/gforge/plugins/soapadmin/
 etc/httpd.d/*             usr/share/gforge/etc/httpd.d/

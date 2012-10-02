@@ -1,4 +1,4 @@
-plugins/projectlabels/bin/*	usr/share/gforge/plugins/projectlabels/bin/
-plugins/projectlabels/common/*	usr/share/gforge/plugins/projectlabels/common/
-plugins/projectlabels/db/*	usr/share/gforge/plugins/projectlabels/lib/
-plugins/projectlabels/www/*	usr/share/gforge/plugins/projectlabels/www/
+plugins/projectlabels/bin/*	@PLUGIN_PATH@/projectlabels/bin/
+plugins/projectlabels/common/*	@PLUGIN_PATH@/projectlabels/common/
+plugins/projectlabels/db/*	@PLUGIN_PATH@/projectlabels/lib/
+plugins/projectlabels/www/*	@PLUGIN_PATH@/projectlabels/www/

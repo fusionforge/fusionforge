@@ -1,4 +1,4 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/scmhg
-usr/share/gforge/plugins/scmhg/common
+@PLUGIN_PATH@/scmhg/common
 @DATA_PATH@/chroot/scmrepos/hg

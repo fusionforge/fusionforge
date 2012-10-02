@@ -5,4 +5,4 @@ plugins/projects-hierarchy/include/*                  @PLUGIN_PATH@/projects-hie
 plugins/projects-hierarchy/www/*                     @PLUGIN_PATH@/projects-hierarchy/www/
 plugins/projects-hierarchy/etc/*.ini 	   			etc/@PACKAGE@/config.ini.d/
 plugins/projects-hierarchy/db/*                      @PLUGIN_PATH@/projects-hierarchy/db/
-plugins/projects-hierarchy/bin/*                     usr/share/gforge/plugins/projects-hierarchy/bin/
+plugins/projects-hierarchy/bin/*                     @PLUGIN_PATH@/projects-hierarchy/bin/

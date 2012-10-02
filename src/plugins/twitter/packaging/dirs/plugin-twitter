@@ -1,3 +1,3 @@
-usr/share/gforge/plugins/twitter/common
-usr/share/gforge/plugins/twitter/include
-usr/share/gforge/plugins/twitter/www
+@PLUGIN_PATH@/twitter/common
+@PLUGIN_PATH@/twitter/include
+@PLUGIN_PATH@/twitter/www

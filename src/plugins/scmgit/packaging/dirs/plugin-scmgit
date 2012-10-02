@@ -1,7 +1,7 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/scmgit
-usr/share/gforge/plugins/scmgit/cgi-bin
-usr/share/gforge/plugins/scmgit/common
-usr/share/gforge/plugins/scmgit/www
+@PLUGIN_PATH@/scmgit/cgi-bin
+@PLUGIN_PATH@/scmgit/common
+@PLUGIN_PATH@/scmgit/www
 usr/share/gforge/www/plugins/scmgit
 @DATA_PATH@/chroot/scmrepos/git

@@ -1,7 +1,7 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/scmcvs
-usr/share/gforge/plugins/scmcvs/bin
-usr/share/gforge/plugins/scmcvs/sbin
-usr/share/gforge/plugins/scmcvs/common
+@PLUGIN_PATH@/scmcvs/bin
+@PLUGIN_PATH@/scmcvs/sbin
+@PLUGIN_PATH@/scmcvs/common
 @DATA_PATH@/chroot/scmrepos/cvs
 @LOG_PATH@/cvs

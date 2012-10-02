@@ -1,1 +1,1 @@
-/usr/share/gforge/plugins/oauthprovider/www /usr/share/gforge/www/plugins/oauthprovider
+@PLUGIN_PATH@/oauthprovider/www /usr/share/gforge/www/plugins/oauthprovider

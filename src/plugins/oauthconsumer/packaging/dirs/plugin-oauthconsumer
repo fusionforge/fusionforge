@@ -1,2 +1,2 @@
-usr/share/gforge/plugins/oauthconsumer/common
-usr/share/gforge/plugins/oauthconsumer/www
+@PLUGIN_PATH@/oauthconsumer/common
+@PLUGIN_PATH@/oauthconsumer/www

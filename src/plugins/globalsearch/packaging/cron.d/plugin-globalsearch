@@ -1,1 +1,1 @@
-30 3 * * * gforge [ -x /usr/share/gforge/plugins/globalsearch/bin/get_assoc_sites_projects.pl ] && /usr/share/gforge/plugins/globalsearch/bin/get_assoc_sites_projects.pl > /dev/null 2>&1
+30 3 * * * gforge [ -x @PLUGIN_PATH@/globalsearch/bin/get_assoc_sites_projects.pl ] && @PLUGIN_PATH@/globalsearch/bin/get_assoc_sites_projects.pl > /dev/null 2>&1

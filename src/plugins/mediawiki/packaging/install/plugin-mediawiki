@@ -1,9 +1,9 @@
-plugins/mediawiki/*                usr/share/gforge/plugins/mediawiki/
-plugins/mediawiki/bin/*            usr/share/gforge/plugins/mediawiki/bin/
-plugins/mediawiki/include/*         usr/share/gforge/plugins/mediawiki/include/
-plugins/mediawiki/cronjobs/*       usr/share/gforge/plugins/mediawiki/cronjobs/
-plugins/mediawiki/db/*		   usr/share/gforge/plugins/mediawiki/lib/
-plugins/mediawiki/www/*            usr/share/gforge/plugins/mediawiki/www/
+plugins/mediawiki/*                @PLUGIN_PATH@/mediawiki/
+plugins/mediawiki/bin/*            @PLUGIN_PATH@/mediawiki/bin/
+plugins/mediawiki/include/*         @PLUGIN_PATH@/mediawiki/include/
+plugins/mediawiki/cronjobs/*       @PLUGIN_PATH@/mediawiki/cronjobs/
+plugins/mediawiki/db/*		   @PLUGIN_PATH@/mediawiki/lib/
+plugins/mediawiki/www/*            @PLUGIN_PATH@/mediawiki/www/
 plugins/mediawiki/mediawiki-skin/FusionForge.php usr/share/mediawiki/skins/
 plugins/mediawiki/etc/httpd.d/*    usr/share/gforge/etc/httpd.d/
 plugins/mediawiki/etc/*.ini 	   etc/@PACKAGE@/config.ini.d/

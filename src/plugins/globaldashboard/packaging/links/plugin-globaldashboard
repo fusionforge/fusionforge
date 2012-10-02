@@ -1,1 +1,1 @@
-/usr/share/gforge/plugins/globaldashboard/www /usr/share/gforge/www/plugins/globaldashboard
+@PLUGIN_PATH@/globaldashboard/www /usr/share/gforge/www/plugins/globaldashboard

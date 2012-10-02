@@ -1,4 +1,4 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/scmcpold
-usr/share/gforge/plugins/scmcpold/common
+@PLUGIN_PATH@/scmcpold/common
 @DATA_PATH@/chroot/scmrepos/cpold

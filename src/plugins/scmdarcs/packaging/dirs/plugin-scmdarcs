@@ -1,7 +1,7 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/scmdarcs
-usr/share/gforge/plugins/scmdarcs/cgi-bin
-usr/share/gforge/plugins/scmdarcs/common
-usr/share/gforge/plugins/scmdarcs/www
+@PLUGIN_PATH@/scmdarcs/cgi-bin
+@PLUGIN_PATH@/scmdarcs/common
+@PLUGIN_PATH@/scmdarcs/www
 usr/share/gforge/www/plugins
 @DATA_PATH@/chroot/scmrepos/darcs

@@ -1,5 +1,5 @@
 etc/gforge/plugins/extsubproj
-usr/share/gforge/plugins/extsubproj/actions
-usr/share/gforge/plugins/extsubproj/common
-usr/share/gforge/plugins/extsubproj/view
-usr/share/gforge/plugins/extsubproj/www
+@PLUGIN_PATH@/extsubproj/actions
+@PLUGIN_PATH@/extsubproj/common
+@PLUGIN_PATH@/extsubproj/view
+@PLUGIN_PATH@/extsubproj/www

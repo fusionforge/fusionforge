@@ -1,1 +1,1 @@
-/usr/share/gforge/plugins/compactpreview/www /usr/share/gforge/www/plugins/compactpreview
+@PLUGIN_PATH@/compactpreview/www /usr/share/gforge/www/plugins/compactpreview

@@ -1,8 +1,8 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/scmsvn
-usr/share/gforge/plugins/scmsvn/bin
-usr/share/gforge/plugins/scmsvn/cronjobs
-usr/share/gforge/plugins/scmsvn/common
+@PLUGIN_PATH@/scmsvn/bin
+@PLUGIN_PATH@/scmsvn/cronjobs
+@PLUGIN_PATH@/scmsvn/common
 @DATA_PATH@/chroot/scmrepos/svn
 @DATA_PATH@/dumps
 @LOG_PATH@/svn

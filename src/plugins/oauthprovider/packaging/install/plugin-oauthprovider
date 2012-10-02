@@ -1,7 +1,7 @@
-plugins/oauthprovider/common/*                  usr/share/gforge/plugins/oauthprovider/common/
-plugins/oauthprovider/include/*.php             usr/share/gforge/plugins/oauthprovider/include/
-plugins/oauthprovider/db/*                      usr/share/gforge/plugins/oauthprovider/db/
-plugins/oauthprovider/bin/*                     usr/share/gforge/plugins/oauthprovider/bin/
-plugins/oauthprovider/www/*                     usr/share/gforge/plugins/oauthprovider/www/
+plugins/oauthprovider/common/*                  @PLUGIN_PATH@/oauthprovider/common/
+plugins/oauthprovider/include/*.php             @PLUGIN_PATH@/oauthprovider/include/
+plugins/oauthprovider/db/*                      @PLUGIN_PATH@/oauthprovider/db/
+plugins/oauthprovider/bin/*                     @PLUGIN_PATH@/oauthprovider/bin/
+plugins/oauthprovider/www/*                     @PLUGIN_PATH@/oauthprovider/www/
 plugins/oauthprovider/etc/plugins/oauthprovider/*     etc/gforge/plugins/oauthprovider/
 plugins/oauthprovider/etc/*.ini etc/@PACKAGE@/config.ini.d/

@@ -1,5 +1,5 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/foafprofiles
-usr/share/gforge/plugins/foafprofiles/cgi-bin
-usr/share/gforge/plugins/foafprofiles/common
-usr/share/gforge/plugins/foafprofiles/www
+@PLUGIN_PATH@/foafprofiles/cgi-bin
+@PLUGIN_PATH@/foafprofiles/common
+@PLUGIN_PATH@/foafprofiles/www

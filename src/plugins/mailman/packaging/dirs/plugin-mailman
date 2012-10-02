@@ -1,5 +1,5 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/mailman
-usr/share/gforge/plugins/mailman/cgi-bin
-usr/share/gforge/plugins/mailman/common
-usr/share/gforge/plugins/mailman/www
+@PLUGIN_PATH@/mailman/cgi-bin
+@PLUGIN_PATH@/mailman/common
+@PLUGIN_PATH@/mailman/www

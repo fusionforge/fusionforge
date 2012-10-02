@@ -1,5 +1,5 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/soapadmin
-usr/share/gforge/plugins/soapadmin/cgi-bin
-usr/share/gforge/plugins/soapadmin/common
-usr/share/gforge/plugins/soapadmin/www
+@PLUGIN_PATH@/soapadmin/cgi-bin
+@PLUGIN_PATH@/soapadmin/common
+@PLUGIN_PATH@/soapadmin/www

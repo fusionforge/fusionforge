@@ -1,5 +1,5 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/globaldashboard
-usr/share/gforge/plugins/globaldashboard/cgi-bin
-usr/share/gforge/plugins/globaldashboard/common
-usr/share/gforge/plugins/globaldashboard/www
+@PLUGIN_PATH@/globaldashboard/cgi-bin
+@PLUGIN_PATH@/globaldashboard/common
+@PLUGIN_PATH@/globaldashboard/www

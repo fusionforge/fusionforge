@@ -1,4 +1,4 @@
-plugins/globalsearch/bin/* usr/share/gforge/plugins/globalsearch/bin/
-plugins/globalsearch/db/* usr/share/gforge/plugins/globalsearch/db/
-plugins/globalsearch/common/* usr/share/gforge/plugins/globalsearch/common/
-plugins/globalsearch/www/* usr/share/gforge/plugins/globalsearch/www/
+plugins/globalsearch/bin/* @PLUGIN_PATH@/globalsearch/bin/
+plugins/globalsearch/db/* @PLUGIN_PATH@/globalsearch/db/
+plugins/globalsearch/common/* @PLUGIN_PATH@/globalsearch/common/
+plugins/globalsearch/www/* @PLUGIN_PATH@/globalsearch/www/

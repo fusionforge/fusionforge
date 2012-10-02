@@ -1,1 +1,1 @@
-/usr/share/gforge/plugins/extsubproj/www /usr/share/gforge/www/plugins/extsubproj
+@PLUGIN_PATH@/extsubproj/www /usr/share/gforge/www/plugins/extsubproj
