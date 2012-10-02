@@ -45,5 +45,5 @@ $(DSCFILE): selenium/selenium-server.jar
 	dpkg-source -b selenium
 
 $(BUILDRESULT)/$(CHANGEFILE): $(DSCFILE)
-        sudo cowbuilder --configfile $(COWBUILDERCONFIG) --buildresult $(BUILDRESULT) --build $(DSCFILE)
+	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --buildresult $(BUILDRESULT) --build $(DSCFILE)
 
