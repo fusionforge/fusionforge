@@ -1041,6 +1041,7 @@ fi
 
 %files plugin-moinmoin
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/moinmoin.ini
+%config(noreplace) %{FORGE_CONF_DIR}/plugins/moinmoin/
 %{FORGE_DIR}/plugins/moinmoin/
 %{FORGE_DIR}/www/plugins/moinmoin
 
