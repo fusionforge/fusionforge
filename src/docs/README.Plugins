@@ -322,6 +322,13 @@ had been written.
   [TODO: The output of the hook appears after the closing SGML comment marker
    and before the closing </script> element. Is this what is really indended?]
 
+  Hook Name  : javascript_file
+  Locations  : www/include/Layout.class.php (function headerJS)
+  Description: Add JS file in header. No params.
+               Offer easy use ot use_javascript('yourfile.js') or declare
+               a specific call of html_use_jquery if needed.
+               See plugin headermenu of example of use.
+
   Hook Name  : project_admin_plugins
   Parameters : group_id - The numeric ID of the group
   Locations  : www/project/admin/index.php
