@@ -33,9 +33,6 @@ if (!$type) {
 global $use_tooltips;
 $headermenu = plugin_get_object('headermenu');
 
-html_use_jquery();
-use_javascript('scripts/HeaderMenuController.js');
-
 switch ($type) {
 	case 'globaladmin': {
 		if (!session_loggedin()) {

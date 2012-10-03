@@ -30,6 +30,7 @@ class headermenuPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = 'headermenu' ;
 		$this->text = 'headermenu' ;
+		$this->_addHook('javascript_file');
 		$this->_addHook('headermenu');
 		$this->_addHook('site_admin_option_hook');
 		$this->_addHook('outermenu');
@@ -47,6 +48,11 @@ class headermenuPlugin extends Plugin {
 			}
 			case 'site_admin_option_hook': {
 				echo '<li>'.$this->getAdminOptionLink().'</li>';
+				break;
+			}
+			case 'javascript_file': {
+				html_use_jquery();
+				use_javascript('/plugins/'.$this->name.'/scripts/HeaderMenuController.js');
 				break;
 			}
 		}
