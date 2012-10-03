@@ -251,19 +251,23 @@ if (count($results) < 1) {
 
 	usort($results, 'date_compare');
 
-	$theader = array();
-	$theader[] = _('Time');
-	$theader[] = _('Activity');
-	$theader[] = _('By');
 
-	echo '<br/>';
-	echo $HTML->listTableTop($theader);
-
+	$displayTableTop = 0;
 	$j = 0;
 	$last_day = 0;
 	foreach ($results as $arr) {
 		if (!check_perm_for_activity($arr)) {
 			continue;
+		}
+		if (!$displayTableTop) {
+			$theader = array();
+			$theader[] = _('Time');
+			$theader[] = _('Activity');
+			$theader[] = _('By');
+
+			echo '<br/>';
+			echo $HTML->listTableTop($theader);
+			$displayTableTop = 1;
 		}
 		if ($last_day != strftime($date_format, $arr['activity_date'])) {
 			//	echo $HTML->listTableBottom($theader);
@@ -333,7 +337,12 @@ if (count($results) < 1) {
 		}
 		echo '</td></tr>';
 	}
-	echo $HTML->listTableBottom($theader);
+	if ($displayTableTop) {
+		echo $HTML->listTableBottom($theader);
+	}
+	if (!$displayTableTop) {
+		echo '<p class="information">' . _('No Activity Found') . '</p>';
+	}
 }
 
 site_project_footer(array());
