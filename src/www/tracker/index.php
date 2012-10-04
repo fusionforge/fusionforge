@@ -47,9 +47,11 @@ $atid = getIntFromRequest('atid');
 //if the ATID and GID are not provided, but
 //the artifact_id is, then fetch the other vars
 if ($aid && (!$group_id || !$atid)) {
-	$a =& artifact_get_object($aid);
-	if (!$a || !is_object($a) || $a->isError()) {
-		exit_error(_('Could Not Get Artifact Object'),'tracker');
+	$a = artifact_get_object($aid);
+	if (!$a || !is_object($a)) {
+		exit_error(sprintf(_('Item [#%s] does not exist in this project'), $aid),'tracker');
+	} elseif ($a->isError()) {
+		exit_error($a->getErrorMessage(),'tracker');
 	} else {
 		$group_id=$a->ArtifactType->Group->getID();
 		$atid=$a->ArtifactType->getID();
