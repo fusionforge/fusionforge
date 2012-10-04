@@ -25,7 +25,8 @@
 /**
  * filechecks_islegalname() - Make sure a filename is legal
  *
- * @param		string	The name of the file to check
+ * @param	string	$filename	The name of the file to check
+ * @return	int
  */
 function filechecks_islegalname($filename) {
 	if (strstr($filename,' ') || strstr($filename,'\\')

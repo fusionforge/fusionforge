@@ -37,11 +37,11 @@ class HtmlSearchRenderer extends SearchRenderer {
 	/**
 	 * Constructor
 	 *
-	 * @param string $typeOfSearch type of the search (Software, Forum, People and so on)
-	 * @param string $words words we are searching for
-	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
-	 * @param object $searchQuery SearchQuery instance
+	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
+	 * @param string  $words        words we are searching for
+	 * @param int     $offset       offset
+	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
+	 * @param object  $searchQuery  SearchQuery instance
 	 */
 	function HtmlSearchRenderer($typeOfSearch, $words, $isExact, $searchQuery) {
 		$this->SearchRenderer($typeOfSearch, $words, $isExact, $searchQuery);

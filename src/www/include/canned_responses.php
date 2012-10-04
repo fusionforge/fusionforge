@@ -24,8 +24,8 @@
 /**
  * add_canned_response() - Add a new canned response
  *
- * @param		string	Canned response title
- * @param		string	Canned response text
+ * @param		string	$title	Canned response title
+ * @param		string	$text	Canned response text
  */
 function add_canned_response($title, $text)
 {

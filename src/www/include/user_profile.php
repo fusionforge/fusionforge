@@ -29,7 +29,8 @@
 * Display user's profile / personal info either in compact or extensive way
 *
 * @param object $user
-* @param boolean $compact
+* @param bool $compact
+* @param string|bool	$title
 * @return string HTML
 */
 function user_personal_information($user, $compact = false, $title = false) {
