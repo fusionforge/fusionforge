@@ -52,4 +52,4 @@ echo '</p>';
 
 <p><strong><?php printf(_('The %1$s Team'), forge_get_config ('forge_name')); ?></strong></p>
 
-<?php echo $HTML->footer(array());
+<?php $sh->footer(array());
