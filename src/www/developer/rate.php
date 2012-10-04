@@ -91,5 +91,5 @@ if (!session_loggedin()) {
 	<p>'._('You can re-rate this person by simply returning to their ratings page and re-submitting the info.').'.</p>
 	<p>&nbsp;</p>';
 
-	echo $HTML->footer(array());
+	$HTML->footer(array());
 }

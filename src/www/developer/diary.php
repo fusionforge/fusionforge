@@ -59,8 +59,8 @@ if ($diary_user) {
 		}
 	}
 
-	echo $HTML->boxTop(_('Existing Diary And Note Entries'));
-	echo '<table cellspacing="2" width="100%">';
+	echo '<h2>' . _('Existing Diary And Note Entries') . '</h2>' . "\n";
+	echo '<table class="fullwidth">' . "\n";
 	/*
 		List all diary entries
 	*/
@@ -90,9 +90,8 @@ if ($diary_user) {
 		<tr><td colspan="2" class="tablecontent">&nbsp;</td></tr>';
 	}
 	echo "</table>\n";
-	echo $HTML->boxBottom();
 
-	echo $HTML->footer(array());
+	$HTML->footer(array());
 
 } else {
 	exit_error(_('No User Selected'),'home');

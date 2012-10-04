@@ -382,7 +382,7 @@ switch (getStringFromRequest('function')) {
 	}
 }
 
-echo admin_table_show($table, $unit, $primary_key);
+admin_table_show($table, $unit, $primary_key);
 
 $HTML->footer(array());
 
