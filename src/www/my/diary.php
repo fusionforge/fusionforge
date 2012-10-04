@@ -171,21 +171,20 @@ To stop monitoring this user, visit the following link:
 	$params['user_id'] = $u->getID();
 	plugin_hook_by_reference("text_editor", $params);
 
-	echo '
-	<h2>'. $info_str .'</h2>
+	echo '<h2>'. $info_str .'</h2>
 
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post">
 	<input type="hidden" name="form_key" value="'.form_generate_key().'"/>
 	<input type="hidden" name="'. $proc_str .'" value="1" />
 	<input type="hidden" name="diary_id" value="'. $_diary_id .'" />
 	<table class="fullwidth">
-	<tr><td colspan="2"><strong>'._('Summary').':</strong><br />
+	<tr><td><strong>'._('Summary').':</strong><br />
 		<input type="text" name="summary" size="60" maxlength="60" value="'. $_summary .'" />
 	</td></tr>
 
-	<tr><td colspan="2"><strong>'._('Details').':</strong><br />'.
+	<tr><td><strong>'._('Details').':</strong><br />'.
 		$params['content'].'</td></tr>
-	<tr><td colspan="2">
+	<tr><td>
 		<p>
 		<input type="submit" name="submit" value="'._('Submit').'" />
 		&nbsp; <input type="checkbox" name="is_public" value="1" '. (($_is_public)?'checked="checked"':'') .' /> '._('Is Public').'
@@ -193,19 +192,15 @@ To stop monitoring this user, visit the following link:
 		<p>'._('If marked as public, your entry will be mailed to any monitoring users when it is first submitted.').'
 		</p>
 	</td></tr>
+	</table></form>';
 
-	</table></form>
-
-	<p />';
-
-	echo $HTML->boxTop(_('Existing Diary And Note Entries'));
-	echo '</p><table class="fullwidth">';
+	echo "<h2>" . _('Existing Diary And Note Entries') . "</h2>\n";
+	echo '<table class="fullwidth">';
 	$result=db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 ORDER BY id DESC',
 			array(user_getid() ));
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '
-			<strong>'._('You Have No Diary Entries').'</strong>';
+		echo '<tr><td><strong>'._('You Have No Diary Entries').'</strong></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -220,8 +215,6 @@ To stop monitoring this user, visit the following link:
 		}
 	}
 	echo '</table>';
-	echo $HTML->boxBottom();
 
 	site_user_footer(array());
-
 }
