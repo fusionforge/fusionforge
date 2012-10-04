@@ -86,7 +86,7 @@ echo $HTML->listTableBottom();
 if($totalCount > ADMIN_CRONMAN_ROWS) {
 ?>
 <br />
-<table class="tablegetmore" width="100%" cellpadding="5">
+<table class="tablegetmore fullwidth" cellpadding="5">
 	<tr>
 		<td><?php
 		if ($offset != 0) {

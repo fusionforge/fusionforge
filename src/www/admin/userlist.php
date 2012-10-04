@@ -180,10 +180,10 @@ if ($usingplugin) {
 	if (in_array($status,array('D','A','S','P'))) {
 		$filter = '&amp;status='.$status;
 	}
-	$sortorder = getStringFromRequest('sortorder', 'realname');
-	util_ensure_value_in_set ($sortorder,
+	$sort_order = getStringFromRequest('sortorder', 'realname');
+	util_ensure_value_in_set ($sort_order,
 					  array('realname','user_name','lastname','firstname','user_id','status','add_date')) ;
-	show_users_list ($list_id, $filter, $sortorder);
+	show_users_list ($list_id, $filter, $sort_order);
 } else {
 	/*
 		Show list for one project
@@ -196,10 +196,10 @@ if ($usingplugin) {
 			$users_id[] = $user->getID();
 		}
 		$filter = '&amp;group_id='.$group_id;
-		$sortorder = getStringFromRequest('sortorder', 'realname');
-		util_ensure_value_in_set ($sortorder,
+		$sort_order = getStringFromRequest('sortorder', 'realname');
+		util_ensure_value_in_set ($sort_order,
 					array('realname','user_name','lastname','firstname','user_id','status','add_date')) ;
-		show_users_list ($users_id, $filter, $sortorder);
+		show_users_list ($users_id, $filter, $sort_order);
 	}
 	else {
 		echo '<p>'._('No user in this project').'</p>';
