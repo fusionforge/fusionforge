@@ -45,14 +45,17 @@ if (!$u || !is_object($u)) {
 	exit_error($u->getErrorMessage(),'admin');
 }
 
-if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_delete') == '1') {
-	// delete user
-	if (!$u->delete(true)) {
-		exit_error( _('Could Not Complete Operation: ').$u->getErrorMessage(),'admin');
+if (getStringFromRequest('delete_user') != '') {
+	if (getStringFromRequest('confirm_delete') == '1') {
+		// delete user
+		if (!$u->delete(true)) {
+			exit_error( _('Could Not Complete Operation: ').$u->getErrorMessage(),'admin');
+		} else {
+			$feedback = _('Deleted (D)').'<br />';
+		}
 	} else {
-		$feedback = _('Deleted (D)').'<br />';
+		$error_msg = _('Please check the confirmation box if you really want to delete this user.');
 	}
-
 } elseif (getStringFromRequest('action') == "update_user" && getStringFromRequest('delete_user') == '') {
 	$email = getStringFromRequest('email');
 	$shell = getStringFromRequest('shell');
@@ -115,7 +118,7 @@ $title = _('Site Admin: User Info');
 site_admin_header(array('title'=>$title));
 
 ?>
-<h2><?php echo _('Account Information'); ?><sup>1</sup></h2>
+<h2><?php echo _('Account Information'); ?></h2>
 
 <form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <input type="hidden" name="action" value="update_user" />
@@ -142,7 +145,7 @@ site_admin_header(array('title'=>$title));
 
 <tr>
 <td>
-<?php echo _('Real name'); ?>
+<?php echo _('Real name') . _(':'); ?>
 </td>
 <td>
 <?php echo $u->getRealName(); ?>
@@ -151,7 +154,7 @@ site_admin_header(array('title'=>$title));
 
 <tr>
 <td>
-<?php echo _('Web account status'); ?>
+<?php echo _('Web account status') . _(':'); ?>
 </td>
 <td>
 <?php
@@ -178,13 +181,11 @@ echo html_build_select_box_from_arrays(
 </tr>
 
 <?php
-
-
 	if (forge_get_config('use_shell')) {
 ?>
 <tr>
 	<td>
-		<?php echo _('Unix Account Status'); ?><sup>2</sup>:
+		<?php echo _('Unix Account Status'); ?>:
 	</td>
 	<td>
 		<?php echo $unix_status2str[$u->getUnixStatus()]; ?>
@@ -193,24 +194,24 @@ echo html_build_select_box_from_arrays(
 
 <tr>
 	<td>
-		<?php echo _('Unix Shell:'); ?>
+        <label for="unix-shell"><?php echo _('Unix Shell:'); ?></label>
 	</td>
 	<td>
-<select name="shell">
-<?php account_shellselects($u->getShell()); ?>
-</select>
-	</td>
+		<select id="unix-shell" name="shell">
+			<?php account_shellselects($u->getShell()); ?>
+        </select>
+    </td>
 </tr>
 <?php
-	}  // end of sys_use_shell conditionnal
+	}  // end of sys_use_shell conditional
 ?>
 
 <tr>
 <td>
-<?php echo _('Email')._(':'); ?>
+<label for="email"><?php echo _('Email')._(':'); ?></label>
 </td>
 <td>
-<input type="text" name="email" value="<?php echo $u->getEmail(); ?>" size="25" maxlength="255" />
+<input id="email" type="text" name="email" value="<?php echo $u->getEmail(); ?>" size="40" maxlength="255" />
 </td>
 </tr>
 
@@ -224,24 +225,24 @@ echo html_build_select_box_from_arrays(
 </tr>
 <?php if ($u->getStatus() != 'D') {	?>
 <tr>
-<td colspan="2"><input type="checkbox" name="confirm_delete" value="1" /><?php echo _('I want to delete this user'); ?>
-&nbsp;<input type="submit" name="delete_user" value="<?php echo _('Delete'); ?>" /><br />&nbsp;
+<td colspan="2">
+	<input id="confirm-delete"  type="checkbox" name="confirm_delete" value="1" />
+	<label for="confirm-delete"><?php echo _('I want to delete this user'); ?></label>&nbsp;
+	<input type="submit" name="delete_user" value="<?php echo _('Delete'); ?>" /><br />&nbsp;
 </td>
 </tr>
 <?php } ?>
 </table>
 <input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
 <p>
-<sup>1</sup><?php echo _('This pages allows to change only direct properties of user object. To edit properties pertinent to user within specific group, visit admin page of that group (below).'); ?>
+<?php echo _('This pages allows to change only direct properties of user object. To edit properties pertinent to user within specific group, visit admin page of that group (below).'); ?>
 </p>
 
 <?php
-
-
 	if (forge_get_config('use_shell')) {
 ?>
 <p>
-<sup>2</sup><?php echo _('Unix status updated mirroring web status, unless it has value \'No unix account (N)\''); ?>
+<?php echo _('Unix status updated mirroring web status, unless it has value \'No unix account (N)\''); ?>
 </p>
 <?php
 	} //end of sys_use_shell condition
