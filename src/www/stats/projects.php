@@ -49,12 +49,10 @@ $HTML->header(array('title'=>sprintf(_('%1$s Site Project Statistical Comparison
 </table>
 
 <hr />
-	<div align="center">
+<div align="center">
 	<br /><br />
-	<?php
-	stats_site_projects( $report, $orderby, $projects, $trovecatid );
-	?>
+	<?php stats_site_projects( $report, $orderby, $projects, $trovecatid ); ?>
 	<br /><br />
-	</div>
-	<?php
+</div>
+<?php
 $HTML->footer( array() );
