@@ -102,10 +102,10 @@ VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= sprintf(_('ERROR inserting into skill inventory: %s'),db_error());
 			} else {
-				$feedback .= _('Added to skill inventory ');
+				$feedback .= _('Added to skill inventory');
 			}
 		} else {
-			$error_msg .= _('ERROR - skill already in your inventory ');
+			$error_msg .= _('ERROR - skill already in your inventory');
 		}
 		}
 	} else {

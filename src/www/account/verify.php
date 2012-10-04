@@ -88,7 +88,7 @@ if (isset($GLOBALS['error_msg'])) {
 if (forge_get_config('require_unique_email')) {
 	echo _('Login name or email address:');
 } else {
-	echo _('Login name:');
+	echo _('Login name')._(':');
 }
 ?>
 <br /><input type="text" name="loginname" /></p>

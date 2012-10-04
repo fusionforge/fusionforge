@@ -91,7 +91,7 @@ if (session_loggedin()) {
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 		<table>
-		<tr><td colspan="2"><strong><?php echo _('Version:'); ?></strong><br />
+		<tr><td colspan="2"><strong><?php echo _('Version')._(':'); ?></strong><br />
 			<input type="text" name="version" size="10" maxlength="15" />
 		</td></tr>
 
@@ -214,7 +214,7 @@ function show_add_snippet_box() {
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 		<table>
-		<tr><td colspan="2"><strong><?php echo _('Version:'); ?></strong><br />
+		<tr><td colspan="2"><strong><?php echo _('Version')._(':'); ?></strong><br />
 			<input type="text" name="version" size="10" maxlength="15" />
 		</td></tr>
 

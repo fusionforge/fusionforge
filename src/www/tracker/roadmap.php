@@ -172,7 +172,7 @@ if ($group->isError()) {
 
 $atfh = new ArtifactTypeFactoryHtml($group);
 if (!$atfh || !is_object($atfh) || $atfh->isError()) {
-	exit_error(_('Error: could Not Get ArtifactTypeFactoryHtml'), 'tracker');
+	exit_error(_('Error')._(': ')._('could Not Get ArtifactTypeFactoryHtml'), 'tracker');
 }
 
 $template = getIntFromRequest('template', 0);
@@ -198,7 +198,7 @@ $selected_roadmap = null;
 if ($roadmap_name) {
 	$selected_roadmap = $roadmap_factory->getRoadmapByName($roadmap_name, true);
 	if (! is_object($selected_roadmap)) {
-		$error_msg .= sprintf(_('Error: roadmap %s is not available'), $roadmap_name);
+		$error_msg .= _('Error')._(': ').sprintf(_('roadmap %s is not available'), $roadmap_name);
 		local_exit();
 	}
 	else {
@@ -208,7 +208,7 @@ if ($roadmap_name) {
 elseif($roadmap_id) {
 	$selected_roadmap = $roadmap_factory->getRoadmapByID($roadmap_id, true);
 	if (! is_object($selected_roadmap)) {
-		$error_msg .= sprintf(_('Error: roadmap %s is not available'), 'ID='.$roadmap_id);
+		$error_msg .= _('Error')._(': ').sprintf(_('roadmap %s is not available'), 'ID='.$roadmap_id);
 		local_exit();
 	}
 	else {
@@ -220,7 +220,7 @@ else {
 	if ($roadmap_id) {
 		$selected_roadmap = new Roadmap($group, $roadmap_id);
 		if (! is_object($selected_roadmap)) {
-			$error_msg .= sprintf(_('Error: roadmap %s is not available'), 'ID='.$roadmap_id);
+			$error_msg .= _('Error')._(': ').sprintf(_('roadmap %s is not available'), 'ID='.$roadmap_id);
 			local_exit();
 		}
 	}
@@ -235,7 +235,7 @@ else {
 }
 $release_order = array_reverse($selected_roadmap->getReleases());
 if ($selected_release && ! in_array($selected_release, $release_order)) {
-	$error_msg .= sprintf(_('Error: release %s is not available'), $selected_release);
+	$error_msg .= _('Error')._(': ').sprintf(_('release %s is not available'), $selected_release);
 	local_exit();
 }
 
@@ -411,7 +411,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		echo '<table class="fullwidth"><tr>'."\n";
 
 		if (! empty($roadmaps) && ! $selected_release) {
-			echo '<td class="align-center">' . _("Roadmap: ") . '<select name="roadmap" id="roadmap">'."\n";
+			echo '<td class="align-center">' . _("Roadmap") . _(": ") . '<select name="roadmap" id="roadmap">'."\n";
 			foreach ($roadmaps as $roadmap) {
 				echo '<option value="'.$roadmap->getID().'"'.($roadmap->getID() == $roadmap_id ? ' selected="selected"' : '').' >'.$roadmap->getName().'</option>'."\n";
 			}
@@ -419,7 +419,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		}
 
 		if (! $selected_release) {
-			echo '<td class="align-center">'._('Number of release(s) to display: ');
+			echo '<td class="align-center">'._('Number of release(s) to display')._(': ');
 			echo '<select name="nb_release" id="nb_release" >';
 			foreach (array(1, 2, 4, 8) as $nb) {
 				echo '<option value="'.$nb.'"'.($nb_release == $nb ? ' selected="selected"' : '').' >'.$nb.'</option>';
@@ -432,7 +432,7 @@ if (!$at_arr || count($at_arr) < 1) {
 					getStringFromServer('PHP_SELF').'?group_id='.$group_id.($roadmap_id ? '&amp;roadmap_id='.$roadmap_id : ''));
 		}
 
-		echo '<td class="align-center">' . _("Display graphs: ") . '<select name="display_graph" id="display_graph">'."\n";
+		echo '<td class="align-center">' . _("Display graphs") . _(": ") . '<select name="display_graph" id="display_graph">'."\n";
 		if (! $selected_release) {
 			echo '<option value="2"'.($display_graph == 2 ? ' selected="selected"' : '').' >'._('Only last').'</option>'."\n";
 		}

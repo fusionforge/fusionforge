@@ -49,7 +49,7 @@ if (forge_check_global_perm('forge_admin')) {
 			$result=db_query_params('INSERT INTO people_job_category (name) VALUES ($1)', array($cat_name));
 			if (!$result) {
 				form_release_key(getStringFromRequest("form_key"));
-				$error_msg .= _(' Error inserting value: ').db_error();
+				$error_msg .= _('Error inserting value: ').db_error();
 			}
 
 			$feedback .= _('Category Inserted');
