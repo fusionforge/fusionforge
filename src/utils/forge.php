@@ -3,7 +3,7 @@
 /**
  * FusionForge source control management
  *
- * Copyright 2009, Roland Mas
+ * Copyright 2012, Alain Peyrat
  *
  * This file is part of FusionForge.
  *
@@ -25,8 +25,8 @@
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
-class Actions {
-	function help ($name='') {
+class CliActions {
+	function help () {
 		$methods = join('|', get_class_methods($this));
 		echo "Usage: forge.php ($methods) [arguments...]\n" ;
 		exit (1) ;
@@ -54,9 +54,9 @@ if (count($argv) == 3) {
 	$name   = '';
 }
 	
-$ctl = new Actions();
-if (!method_exists($ctl, $action)) {
-	$action = 'help';
+$ctl = new CliActions();
+if (method_exists($ctl, $action)) {
+	$ctl->$action($name);
+} else {
+	$ctl->help();
 }
-
-$ctl->$action($name);
