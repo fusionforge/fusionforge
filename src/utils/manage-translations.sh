@@ -65,7 +65,7 @@ case $1 in
 	
 	find . -type f \( -name \*.php -or -name users -or -name projects \) \
 	    | grep -v -e {arch} -e svn-base \
-	    | grep -v ^./plugins/wiki \
+	    | grep -v ^./plugins/wiki/www \
 	    | LANG=C sort \
 	    | xargs xgettext -d fusionforge -o translations/fusionforge.pot -L PHP --from-code=utf-8
 	    
