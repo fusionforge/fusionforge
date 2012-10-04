@@ -21,9 +21,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-if (!defined('UNICODE.PHP'))
+if (!defined('UNICODE_PHP'))
 {
-	define ('UNICODE.PHP', '1');
+	define ('UNICODE_PHP', '1');
 	function convert_unicode ($text)
 	{
 		$rep = $text;
