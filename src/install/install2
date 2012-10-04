@@ -144,6 +144,8 @@ install2_files(){
 	chmod -R 755 $fusionforge_dir/cronjobs/
 	chmod 755 $fusionforge_dir/www/scm/viewvc/bin/cgi/viewvc.cgi
 	chmod 755 $fusionforge_dir/utils/forge_get_config
+	chmod 755 $fusionforge_dir/utils/forge_get_config_basic
+	chmod 755 $fusionforge_dir/utils/fg_link
 	chmod 755 $fusionforge_dir/utils/forge_set_password
 	chmod 755 $fusionforge_dir/utils/forge_run_job
 	chmod 755 $fusionforge_dir/utils/forge_run_plugin_job
@@ -184,6 +186,16 @@ install2_files(){
 		then 
 			cp -r $fusionforge_dir/plugins/$plugin/etc/plugins/$plugin $fusionforge_etc_dir/plugins/
 		fi
+	done
+
+	# Plugin symlinks
+	[ -d "$fusionforge_dir/utils/tmp" ] || mkdir $fusionforge_dir/utils/tmp
+	for plugin in mediawiki moinmoin
+	do
+	
+		PLUGIN=$plugin $fusionforge_dir/utils/fg_link > $fusionforge_dir/utils/tmp/fg_link_$plugin.sh
+		chmod +x $fusionforge_dir/utils/tmp/fg_link_$plugin.sh
+		$fusionforge_dir/utils/tmp/fg_link_$plugin.sh
 	done
 		
 	for file in /opt/csw/apache2/etc/httpd.conf /etc/apache2/httpd.conf /etc/apache2/apache2.conf
