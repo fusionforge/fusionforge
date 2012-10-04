@@ -43,7 +43,7 @@ $config_depends_on = array(
 );
 
 class configCheck {
-	static function account_manager_type($v) { return ($v === 'pgsql'); }
+	static function account_manager_type($v) { return in_array($v, array('pgsql', 'UNIX')); }
 	static function chroot($v) { return is_dir($v); }
 	static function config_path($v) { return is_dir($v); }
 	static function data_path($v) { return is_dir($v); }
