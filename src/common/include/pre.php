@@ -129,7 +129,7 @@ if (isset($gfcgfile) && file_exists ($gfcgfile)) {
 }
 
 forge_read_config_file ($gfconfig.'/config.ini') ;
-forge_read_config_dir ($gfconfig.'/config.ini.d/') ;
+
 if (($ecf = forge_get_config ('extra_config_files')) != NULL) {
 	$ecfa = explode (',', $ecf) ;
 	foreach ($ecfa as $cf) {
