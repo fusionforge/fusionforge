@@ -1149,7 +1149,7 @@ fi
 
 %files plugin-wiki
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/wiki/
-%{_sysconfdir}/cron.d/cron.wiki
+%{_sysconfdir}/cron.d/%{name}-plugin-wiki
 %{FORGE_CONF_DIR}/httpd.conf.d/plugin-wiki.inc
 %{FORGE_DIR}/plugins/wiki
 %{FORGE_DIR}/www/wiki
