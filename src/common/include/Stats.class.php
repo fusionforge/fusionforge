@@ -54,8 +54,8 @@ class Stats extends Error {
 	* Returns a result set containing the group_name, unix_group_name, group_id, ranking, and percentile
 	* for either the last week or for all time
 	*
-	* @param type	week or null (for all time)
-	* @param offset	used to page thru the result
+	* @param string	$type	week or null (for all time)
+	* @param int	$offset	used to page thru the result
 	* @return a resultset of group_name, unix_group_name, group_id, ranking, percentile
 	*/
 	function getMostActiveStats($type, $offset) {

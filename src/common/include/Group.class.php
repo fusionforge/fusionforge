@@ -56,9 +56,9 @@ $GROUP_OBJ=array();
  * IMPORTANT! That db result must contain all fields
  * from groups table or you will have problems
  *
- * @param	int	Required
- * @param	int	Result set handle ("SELECT * FROM groups WHERE group_id=xx")
- * @return	object	a group object or false on failure
+ * @param int      $group_id Required
+ * @param int|bool $res      Result set handle ("SELECT * FROM groups WHERE group_id=xx")
+ * @return Group|bool A group object or false on failure
  */
 function &group_get_object($group_id, $res = false) {
 	//create a common set of group objects
@@ -223,9 +223,9 @@ class Group extends Error {
 	/**
 	 * Group - Group object constructor - use group_get_object() to instantiate.
 	 *
-	 * @param	int	Required - group_id of the group you want to instantiate.
-	 * @param	int	Database result from select query OR associative array of all columns.
-	 * @return	boolean	success or not
+	 * @param int|bool $id  Required - Id of the group you want to instantiate.
+	 * @param int|bool $res Database result from select query OR associative array of all columns.
+	 * @return boolean Success or not
 	 */
 	function __construct($id = false, $res = false) {
 		$this->Error();
@@ -262,8 +262,8 @@ class Group extends Error {
 	/**
 	 * fetchData - May need to refresh database fields if an update occurred.
 	 *
-	 * @param	int	The group_id.
-	 * @return	boolean	success or not
+	 * @param int	$group_id The group_id.
+	 * @return boolean	success or not
 	 */
 	function fetchData($group_id) {
 		$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1',
@@ -507,7 +507,7 @@ class Group extends Error {
 		}
 
 		// in the database, these all default to '1',
-		// so we have to explicity set 0
+		// so we have to explicitly set 0
 		if (!$use_mail) {
 			$use_mail = 0;
 		}
@@ -1408,7 +1408,7 @@ class Group extends Error {
 	/**
 	 * usesPlugin - returns true if the group uses a particular plugin
 	 *
-	 * @param	string	name of the plugin
+	 * @param	string	$pluginname name of the plugin
 	 * @return	boolean	whether plugin is being used or not
 	 */
 	function usesPlugin($pluginname) {
