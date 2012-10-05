@@ -49,7 +49,9 @@ $fusionforge_basedir = dirname(dirname(dirname( __FILE__ )));
 //
 
 // Easyforge config, allow several instances of gforge based on server name.
-if (getenv('sys_localinc')) {
+if (getenv('FORGE_CONFIG_PATH') && file_exists(getenv('FORGE_CONFIG_PATH').'/config.ini')) {
+	$gfconfig = getenv('FORGE_CONFIG_PATH');
+} elseif (getenv('sys_localinc')) {
 	$gfcgfile = getenv('sys_localinc');
 	$gfconfig = dirname($gfcgfile).'/';
 } elseif (isset($_SERVER['SERVER_NAME']) &&

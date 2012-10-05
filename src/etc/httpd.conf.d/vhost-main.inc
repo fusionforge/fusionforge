@@ -7,6 +7,8 @@ ServerAdmin webmaster@{core/web_host}
 DocumentRoot {core/source_path}/www
 DirectoryIndex index.html index.php
 
+SetEnv FORGE_CONFIG_PATH "{core/config_path}"
+
 <IfModule mod_userdir.c>
   UserDir disabled
 </IfModule>

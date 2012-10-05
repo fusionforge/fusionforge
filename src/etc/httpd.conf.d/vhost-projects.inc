@@ -4,6 +4,8 @@ ServerName siteadmin.{core/web_host}
 ServerAlias *.{core/web_host}
 DirectoryIndex index.html index.php index.htm
 
+SetEnv FORGE_CONFIG_PATH "{core/config_path}"
+
 # This is magic for virtual hosting!
 UseCanonicalName Off
 
