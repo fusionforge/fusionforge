@@ -5,3 +5,4 @@
 @PLUGIN_PATH@/moinmoin/www
 @PLUGIN_PATH@/moinmoin/wsgi
 @DATA_PATH@/plugins/moinmoin/wikidata
+@SOURCE_PATH@/www/plugins/moinmoin
