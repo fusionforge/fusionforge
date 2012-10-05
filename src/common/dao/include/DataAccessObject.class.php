@@ -8,7 +8,7 @@ class DataAccessObject {
     //! A constructor
     /**
     * Constructs the Dao
-    * @param $da instance of the DataAccess class
+    * @param DataAccess $da Instance of the DataAccess class
     */
     function DataAccessObject( & $da ) {
         $this->table_name = 'CLASSNAME_MUST_BE_DEFINE_FOR_EACH_CLASS';
@@ -18,11 +18,13 @@ class DataAccessObject {
 
 
     //! An accessor
-    /**
-    * For SELECT queries
-    * @param $sql the query string
-    * @return mixed either false if error or object DataAccessResult
-    */
+	/**
+	 * For SELECT queries
+	 *
+	 * @param string $sql    The query string
+	 * @param array  $params The arguments
+	 * @return mixed Either false if error or object DataAccessResult
+	 */
     function &retrieve($sql,$params) {
         $result = new DataAccessResult(db_query_params($sql,$params));
 
@@ -31,15 +33,13 @@ class DataAccessObject {
 
     //! An accessor
     /**
-    * For INSERT, UPDATE and DELETE queries
-    * @param $sql the query string
-    * @return boolean true if success
-    */
+     * For INSERT, UPDATE and DELETE queries
+     * @param string $sql the query string
+	 * @param array  $params The arguments
+	 * @return boolean true if success
+     */
     function update($sql,$params) {
         $result = db_query_params($sql,$params);
         return $result;
     }
-
-
-
 }

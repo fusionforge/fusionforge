@@ -25,7 +25,7 @@ require_once 'DataAccessException.class.php';
 class DataAccess {
 
     /**
-    * Constucts a new DataAccess object
+    * Constructs a new DataAccess object
     */
     function DataAccess() {
 
