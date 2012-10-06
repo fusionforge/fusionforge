@@ -11,7 +11,7 @@
  */
 
 require_once $gfwww.'include/pre.php';
-require $gfconfig.'/plugins/oauthprovider/config.php';
+require $gfconfig.'plugins/oauthprovider/config.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 $pluginname = 'oauthprovider';

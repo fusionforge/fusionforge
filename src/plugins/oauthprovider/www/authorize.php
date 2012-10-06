@@ -32,7 +32,7 @@
 
 require_once '../../env.inc.php';
 require_once $gfwww.'include/pre.php';
-require $gfconfig.'/plugins/oauthprovider/config.php';
+require $gfconfig.'plugins/oauthprovider/config.php';
 require_once 'checks.php';
 
 //non-admin users shud be able to do authorisations
