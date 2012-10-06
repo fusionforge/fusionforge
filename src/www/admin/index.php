@@ -30,6 +30,7 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'include/role_utils.php';
 
@@ -46,11 +47,9 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <h2><?php echo _('User Maintenance'); ?></h2>
 	<ul>
 	<li><?php
-		$res=db_query_params ('SELECT count(*) AS count FROM users WHERE status=$1',
-			array('A')) ;
-
-		$row = db_fetch_array($res);
-		printf(_('Active site users: <strong>%1$s</strong>'), $row['count']);
+		$gforge = new FusionForge();
+		printf(_('Active site users: <strong>%d</strong>'),
+		    $gforge->getNumberOfActiveUsers());
 	?></li>
 </ul>
 <ul>
