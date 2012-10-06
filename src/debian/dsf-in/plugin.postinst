@@ -28,6 +28,7 @@ case "$1" in
 	# Run plugin specific db upgrade
 	if [ -f @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-upgrade.pl ]
 	then
+		echo "=== Running @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-upgrade.pl ==="
 		@PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-upgrade.pl
 	fi
 	@BINARY_PATH@/register-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g') "@PLUGLONGNAME@"
@@ -43,6 +44,7 @@ case "$1" in
 	# Run plugin specific install
 	if [ -f @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh ]
 	then
+		echo "=== Running @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh configure ==="
 		@PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh configure
 	fi
     ;;
