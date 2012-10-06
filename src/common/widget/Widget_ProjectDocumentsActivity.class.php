@@ -118,7 +118,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		$activitysArray[] = $dm->getActivity($sections, $begin3, $end3);
 		$activitysArray[] = $dm->getActivity($sections, $begin2, $end2);
 		$activitysArray[] = $dm->getActivity($sections, $begin1, $end1);
-		echo '<script>';
+		echo '<script language="JavaScript" type="text/javascript">//<![CDATA[';
 		switch($this->_statistic_show) {
 			case 'F':
 				echo 'var s1 = ['.$activitysArray[0]['docmannew'].', '.$activitysArray[1]['docmannew'].', '.$activitysArray[2]['docmannew'].', '.$activitysArray[3]['docmannew'].'];';
@@ -191,7 +191,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		echo 'jQuery(window).resize(function() {
 				plot1.replot( { resetAxes: true } );
 			});';
-		echo '</script>';
+		echo '//]]></script>';
 		echo '<div id="chart1"></div>';
 		echo '<div class="underline-link">' . util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')) . '</div>';
 	}
