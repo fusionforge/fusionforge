@@ -2,7 +2,7 @@
 /*-
  * MediaWiki Plugin for FusionForge
  *
- * Copyright © 2010
+ * Copyright © 2010, 2012
  *      Thorsten Glaser <t.glaser@tarent.de>
  * All rights reserved.
  *
@@ -161,6 +161,7 @@ echo "</div>\n\n";
  style="border:solid 1px black; margin:3px; padding:3px;"
  action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$gid"; ?>">
 <h4><?php echo _("Upload a new logo") ?></h4>
+<p><?php echo _('The logo must be in PNG format and precisely 135x135 pixels in size.'); ?></p>
 <span class="important">
  <?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file.')?>)
 </span>
