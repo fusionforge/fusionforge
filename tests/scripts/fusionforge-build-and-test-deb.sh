@@ -19,6 +19,8 @@ prepare_workspace
 destroy_vm -t debian7 $HOST
 start_vm_if_not_keeped -t debian7 $HOST
 
+setup_debian_3rdparty_repo
+
 CHECKOUTPATH=$(pwd)
 
 COWBUILDERCONFIG=$BUILDERDIR/config/$DIST.config
@@ -69,14 +71,6 @@ SignWith: $SIGNKEY
 EOF
 
 reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
-
-# Build 3rd-party 
-# make -C 3rd-party -f Makefile.debian BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
-CHANGEFILEM=mediawiki_1.19.2-1_amd64.changes
-cd $CHECKOUTPATH
-make -C 3rd-party/mediawiki BUILDRESULT=$BUILDRESULT COWBUILDERCONFIG=$COWBUILDERCONFIG
-cd $BUILDRESULT
-reprepro -Vb $REPOPATH --ignore=wrongdistribution include $DIST $CHANGEFILEM
 
 # Build fusionforge
 # make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rwheezy
