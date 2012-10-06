@@ -34,6 +34,8 @@ install4_config(){
 	do
 		mv $i ${i%%.generated}
 	done
+	chmod +x $fusionforge_dir/utils/fg_template
+	SUFFIX='empty' $fusionforge_dir/utils/fg_template
 }
 
 install4_config_redhat()

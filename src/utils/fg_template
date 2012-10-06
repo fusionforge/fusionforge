@@ -1,0 +1,60 @@
+#! /bin/sh
+pathfromarvg0=`dirname $0`
+curpath=`cd $pathfromarvg0;pwd`
+srcpath=`cd $pathfromarvg0/..;pwd`
+
+PATH=$curpath:$PATH
+export PATH
+
+FLAVOUR=${FLAVOUR:-opt}
+export FLAVOUR
+SUFFIX=${SUFFIX:-.fg_template_new}
+export SUFFIX
+
+SOURCE_PATH=`forge_get_config_basic $FLAVOUR source_path`
+export SOURCE_PATH
+BINARY_PATH=`forge_get_config_basic $FLAVOUR binary_path`
+export BINARY_PATH
+PLUGIN_PATH=`forge_get_config_basic $FLAVOUR plugins_path`
+export PLUGIN_PATH
+DATA_PATH=`forge_get_config_basic $FLAVOUR data_path`
+export DATA_PATH
+CONFIG_PATH=`forge_get_config_basic $FLAVOUR config_path`
+export CONFIG_PATH
+LOG_PATH=`forge_get_config_basic $FLAVOUR log_path`
+export LOG_PATH
+
+SEARCH_PATH=${SEARCH_PATH:-"${CONFIG_PATH} ${PLUGIN_PATH}"}
+
+substitute(){
+	file=$1
+	if [ "x$SUFFIX" = "xempty" ]
+	then 
+		newfile=`dirname $file`/`basename $file '.fg_template'`
+	else 
+		newfile=`dirname $file`/`basename $file '.fg_template'`$SUFFIX
+	fi
+	echo "Template substitution"
+	echo "from: $file"
+	echo "  to: $newfile"
+	cat $file | \
+		grep -v "^$" | \
+		sed -e "s:@SOURCE_PATH@:${SOURCE_PATH}:g" \
+		-e "s:@BINARY_PATH@:${BINARY_PATH}:g" \
+		-e "s:@PLUGIN_PATH@:${PLUGIN_PATH}:g" \
+		-e "s:@DATA_PATH@:${DATA_PATH}:g" \
+		-e "s:@CONFIG_PATH@:${CONFIG_PATH}:g" \
+		-e "s:@LOG_PATH@:${LOG_PATH}:g" \
+	> $newfile
+}
+
+for dir in ${SEARCH_PATH} 
+do
+	if [ -d "$dir" ]
+	then 
+		find $dir -name '*.fg_template' | while read file
+		do
+			substitute $file
+		done
+	fi
+done
