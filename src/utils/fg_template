@@ -38,7 +38,6 @@ substitute(){
 	echo "from: $file"
 	echo "  to: $newfile"
 	cat $file | \
-		grep -v "^$" | \
 		sed -e "s:@SOURCE_PATH@:${SOURCE_PATH}:g" \
 		-e "s:@BINARY_PATH@:${BINARY_PATH}:g" \
 		-e "s:@PLUGIN_PATH@:${PLUGIN_PATH}:g" \
