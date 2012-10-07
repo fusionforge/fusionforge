@@ -12,6 +12,6 @@ from MoinMoin import log
 sys.path.insert(0, '/var/lib/gforge/plugins/moinmoin/wikidata')
 sys.path.insert(0, '/usr/share/gforge/plugins/moinmoin/lib')
 
-log.load_config('/etc/fusionforge/plugins/moinmoin/moinmoin.conf')
+log.load_config('/etc/gforge/plugins/moinmoin/moinmoin.conf')
 from MoinMoin.web.serving import make_application
 application = make_application(shared=True)
