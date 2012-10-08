@@ -4,9 +4,9 @@
 
 export FORGE_HOME=/opt/gforge
 export DIST=wheezy
-#export FILTER="-filter func/PluginsMoinMoin/*.php DEBDebian70Tests.php"
 #export FILTER="func/PluginsMediawiki/mediawikiTest.php"
 export FILTER="DEBDebian70Tests.php"
+#export FILTER="func/PluginsMoinMoin/moinmoinTest.php"
 
 get_config $@
 prepare_workspace
@@ -20,11 +20,6 @@ ssh root@$HOST "apt-get update"
 echo "Sync code on root@$HOST:$FORGE_HOME"
 #ssh root@$HOST mkdir -p $FORGE_HOME
 rsync -a --delete . root@$HOST:$FORGE_HOME
-
-ssh root@$HOST "cat > $FORGE_HOME/tests/config/phpunit" <<-EOF
-HUDSON_URL=$HUDSON_URL
-JOB_NAME=$JOB_NAME
-EOF
 
 echo "Run Install on $HOST"
 ssh root@$HOST "$FORGE_HOME/src/install-ng --auto --reinit"
@@ -46,32 +41,18 @@ ssh root@$HOST "service crond stop" || true
 make -C 3rd-party/selenium selenium-server.jar
 rsync -a 3rd-party/selenium/selenium-server.jar root@$HOST:$FORGE_HOME/tests/selenium-server.jar
 
+# Transfer hudson config
+ssh root@$HOST "cat > $FORGE_HOME/tests/config/phpunit" <<-EOF
+HUDSON_URL=$HUDSON_URL
+JOB_NAME=$JOB_NAME
+EOF
+
 # Run tests
 retcode=0
-echo "Run phpunit test on $HOST"
-
-ssh root@$HOST "apt-get -y install xfonts-base vnc4server ; mkdir -p /root/.vnc"
-ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
-#! /bin/bash
-: > /root/phpunit.exitcode
-$FORGE_HOME/tests/scripts/phpunit.sh $FILTER &> /var/log/phpunit.log &
-echo \$! > /root/phpunit.pid
-wait %1
-echo \$? > /root/phpunit.exitcode
-EOF
-ssh root@$HOST vncpasswd <<EOF
-password
-password
-EOF
-ssh root@$HOST "vncserver :1"
-sleep 5
-pid=$(ssh root@$HOST cat /root/phpunit.pid)
-ssh root@$HOST "tail -f /var/log/phpunit.log --pid=$pid"
-sleep 5
-retcode=$(ssh root@$HOST cat /root/phpunit.exitcode)
+echo "Run phpunit test on $HOST in $FORGE_HOME"
+ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER"
+retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
-scp root@$HOST:/tmp/gforge-*.log $WORKSPACE/reports/
-ssh root@$HOST "vncserver -kill :1" || retcode=$?
 
 stop_vm_if_not_keeped -t debian7 $@
 exit $retcode
