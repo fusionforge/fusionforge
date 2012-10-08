@@ -48,17 +48,17 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("Wiki not created yet"));
 
 		$this->click("link=Create New Page");
-		sleep(5); // Grmf.
+		sleep(10); // Grmf.
 
 		$this->assertFalse($this->isTextPresent("You are not allowed"));
 		$this->type("//textarea[@id='editor-textarea']", "Pardon me, boy
 Is that the Chattanooga choo choo?");
 		$this->click("//input[@name='button_save']");
-		sleep(5); // Grmf.
+		sleep(10); // Grmf.
 
 		$this->gotoProject('ProjectA');
 		$this->click("link=MoinMoinWiki");
-		sleep(5); // Grmf.
+		sleep(10); // Grmf.
 		$this->assertTrue($this->isTextPresent("Chattanooga"));
 	}
 }
