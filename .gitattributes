@@ -756,7 +756,6 @@ src/lib/vendor/scriptaculous/unittest.js -text
 src/lib/vendor/yui/build/base/base-min.css -text svneol=unset#text/css
 src/lib/vendor/yui/build/base/base.css -text svneol=unset#text/css
 src/lib/vendor/yui/build/reset-fonts-grids/reset-fonts-grids.css -text svneol=unset#text/css
-src/monitor/check-system.pl svneol=native#text/x-perl
 src/packaging/control/000source -text
 src/packaging/control/010meta-standard -text
 src/packaging/control/010meta-standard.shortdesc -text
