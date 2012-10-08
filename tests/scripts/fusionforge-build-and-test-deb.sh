@@ -11,7 +11,7 @@ get_config
 export FORGE_HOME=/usr/share/gforge
 export DIST=wheezy
 export HOST=$1
-#export FILTER="-filter func/PluginsMoinMoin/moinmoinTest.php"
+#export FILTER="func/PluginsMediawiki/mediawikiTest.php"
 export FILTER="DEBDebian70Tests.php"
 #export FILTER="func/PluginsMoinMoin/moinmoinTest.php"
 
@@ -113,6 +113,7 @@ make -C 3rd-party/selenium selenium-server.jar
 cp 3rd-party/selenium/selenium-server.jar tests/
 rsync -a --delete tests/ root@$HOST:$FORGE_HOME/tests/
 
+# Transfer hudson config
 ssh root@$HOST "cat > $FORGE_HOME/tests/config/phpunit" <<-EOF
 HUDSON_URL=$HUDSON_URL
 JOB_NAME=$JOB_NAME
@@ -121,35 +122,9 @@ EOF
 # Run tests
 retcode=0
 echo "Run phpunit test on $HOST in $FORGE_HOME"
-
-ssh root@$HOST "apt-get -y install xfonts-base vnc4server ; mkdir -p /root/.vnc"
-ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
-#! /bin/bash
-: > /root/phpunit.exitcode
-$FORGE_HOME/tests/scripts/phpunit.sh $FILTER &> /var/log/phpunit.log &
-echo \$! > /root/phpunit.pid
-wait %1
-echo \$? > /root/phpunit.exitcode
-EOF
-ssh root@$HOST vncpasswd <<EOF
-password
-password
-EOF
-ssh root@$HOST "vncserver :1"
-sleep 5
-pid=$(ssh root@$HOST cat /root/phpunit.pid)
-ssh root@$HOST "tail -f /var/log/phpunit.log --pid=$pid"
-sleep 5
-retcode=$(ssh root@$HOST cat /root/phpunit.exitcode)
+ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER"
+retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
-ssh root@$HOST "vncserver -kill :1" || retcode=$?
-
-# Run tests
-#retcode=0
-#echo "Run phpunit test on $HOST in $FORGE_HOME"
-#ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER"
-#retcode=$?
-#rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 
 stop_vm_if_not_keeped -t debian7 $@
 exit $retcode
