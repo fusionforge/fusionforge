@@ -71,7 +71,7 @@ check_base_dn() {
     if [ -z "$addon" ] ; then
 	echo Gforge base DN is equal to server base DN -- OK
 	return 0
-    elif [ -z $(echo $addon | cut -d, -f2-) ] ; then
+    elif [ -z "$(echo $addon | cut -d, -f2-)" ] ; then
 	echo Gforge base DN is just a level under the server base DN -- OK
 	return 0
     else
