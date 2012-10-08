@@ -4,7 +4,7 @@ fusionforge (5.2.50~-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Mon, 26 Mar 2012 20:10:13 +0200
 
-fusionforge (5.2~rc2~svn16089+) UNRELEASED; urgency=low
+fusionforge (5.2) UNRELEASED; urgency=low
 
   [ Olivier Berger ]
   * Properly fix #674536 without messing too much with upstream or other
@@ -24,6 +24,11 @@ fusionforge (5.2~rc2~svn16089+) UNRELEASED; urgency=low
   * Unbreak and silence the MediaWiki nightly dump cronjob (Closes: #680165)
   * SECURITY: Upon user deletion, remove their Unix account as well
   * SECURITY: Do not disclose inaccessible groups on user_home/toplist
+
+  [ Roland Mas ]
+  * Fail configuration of the -db-postgresql package if no
+    database is available, to prevent other packages from breaking
+    things due to misconfiguration. (Closes: #688374)
 
  -- Thorsten Glaser <tg@mirbsd.de>  Mon, 03 Sep 2012 14:07:16 +0200
 
