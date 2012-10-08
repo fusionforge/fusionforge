@@ -10,6 +10,7 @@ FLAVOUR=${FLAVOUR:-opt}
 export FLAVOUR
 PLUGIN=${PLUGIN:-mediawiki}
 export PLUGIN
+FORMAT=${FORMAT:-shell}
 
 LINKFILE=${LINKFILE:-$srcpath/plugins/$PLUGIN/packaging/links/plugin-$PLUGIN}
 
@@ -26,14 +27,41 @@ export CONFIG_PATH
 LOG_PATH=`forge_get_config_basic $FLAVOUR log_path`
 export LOG_PATH
 
+case $FORMAT in
+	shell)
+		cat ${LINKFILE} | \
+		grep -v "^$" | \
+		sed -e "s:@SOURCE_PATH@:${SOURCE_PATH}:g" \
+		-e "s:@BINARY_PATH@:${BINARY_PATH}:g" \
+		-e "s:@PLUGIN_PATH@:${PLUGIN_PATH}:g" \
+		-e "s:@DATA_PATH@:${DATA_PATH}:g" \
+		-e "s:@CONFIG_PATH@:${CONFIG_PATH}:g" \
+		-e "s:@LOG_PATH@:${LOG_PATH}:g" \
+		-e 's:^\([a-z]\):/\1:' \
+		-e "s/\([^ 	]*\)[ 	]*\([^ 	]*\)/\[ -L \2 \] \|\| ln -s \1 \2/"
+	;;
 
-cat ${LINKFILE} | \
-grep -v "^$" | \
-sed -e "s:@SOURCE_PATH@:${SOURCE_PATH}:g" \
--e "s:@BINARY_PATH@:${BINARY_PATH}:g" \
--e "s:@PLUGIN_PATH@:${PLUGIN_PATH}:g" \
--e "s:@DATA_PATH@:${DATA_PATH}:g" \
--e "s:@CONFIG_PATH@:${CONFIG_PATH}:g" \
--e "s:@LOG_PATH@:${LOG_PATH}:g" \
--e 's:^\([a-z]\):/\1:' \
--e "s/\([^ 	]*\)[ 	]*\([^ 	]*\)/\[ -L \2 \] \|\| ln -s \1 \2/"
+	deb)
+		cat ${LINKFILE} | \
+		grep -v "^$" | \
+		sed -e "s:@SOURCE_PATH@:${SOURCE_PATH}:g" \
+		-e "s:@BINARY_PATH@:${BINARY_PATH}:g" \
+		-e "s:@PLUGIN_PATH@:${PLUGIN_PATH}:g" \
+		-e "s:@DATA_PATH@:${DATA_PATH}:g" \
+		-e "s:@CONFIG_PATH@:${CONFIG_PATH}:g" \
+		-e "s:@LOG_PATH@:${LOG_PATH}:g" \
+	;;
+	rpm)
+		cat ${LINKFILE} | \
+		grep -v "^$" | \
+		sed -e "s:@SOURCE_PATH@:%{FORGE_DIR}:g" \
+		-e "s:@BINARY_PATH@:${BINARY_PATH}:g" \
+		-e "s:@PLUGIN_PATH@:${PLUGIN_PATH}:g" \
+		-e "s:@DATA_PATH@:${DATA_PATH}:g" \
+		-e "s:@CONFIG_PATH@:${CONFIG_PATH}:g" \
+		-e "s:@LOG_PATH@:${LOG_PATH}:g" \
+		-e 's:^\([a-z]\):/\1:' \
+		-e "s/\([^ 	]*\)[ 	]*\([^ 	]*\)/%{__ln_s} \1 \$RPM_BUILD_ROOT\2/"
+	;;
+esac
+

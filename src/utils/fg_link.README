@@ -1,0 +1,4 @@
+# Sample use
+# FORMAT=rpm FLAVOUR=fhsrh PLUGIN=hudson src/utils/fg_link
+# FORMAT=deb FLAVOUR=fhs PLUGIN=mediawiki src/utils/fg_link
+# FORMAT=rpm FLAVOUR=fhsrh PLUGIN=moinmoin src/utils/fg_link
