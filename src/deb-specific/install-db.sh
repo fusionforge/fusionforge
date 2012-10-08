@@ -82,9 +82,9 @@ case "$target" in
     configure-files)
 	# Tell PostgreSQL to let us use the database
 	export FUSIONFORGE_NO_PLUGINS=true
-	db_passwd=$(/usr/share/gforge/bin/forge_get_config database_password)
-	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
-	db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
+	db_passwd=$(forge_get_config database_password)
+	db_name=$(forge_get_config database_name)
+	db_user=$(forge_get_config database_user)
 	pattern=$(basename $0).XXXXXX
 
         # PostgreSQL configuration for versions from 7.3 on
@@ -118,9 +118,9 @@ case "$target" in
     configure)
 	# Create the appropriate database user
 	export FUSIONFORGE_NO_PLUGINS=true
-	db_passwd=$(/usr/share/gforge/bin/forge_get_config database_password)
-	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
-	db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
+	db_passwd=$(forge_get_config database_password)
+	db_name=$(forge_get_config database_name)
+	db_user=$(forge_get_config database_user)
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
@@ -283,8 +283,8 @@ EOF
 	;;
     purge)
 	export FUSIONFORGE_NO_PLUGINS=true
-	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
-	db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
+	db_name=$(forge_get_config database_name)
+	db_user=$(forge_get_config database_user)
 	su -s /bin/sh postgres -c "dropdb $db_name" > /dev/null 2>&1 || true
 	su -s /bin/sh postgres -c "dropuser $db_user" > /dev/null 2>&1 || true
 	;;
@@ -293,7 +293,7 @@ EOF
     #
     dump)
 	export FUSIONFORGE_NO_PLUGINS=true
-	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
+	db_name=$(forge_get_config database_name)
 	if [ "x$2" != "x" ] ;then
 		DUMPFILE=$2
 	else
@@ -313,7 +313,7 @@ EOF
     restore)
 	pg_name=postgresql-$pg_version
 	export FUSIONFORGE_NO_PLUGINS=true
-	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
+	db_name=$(forge_get_config database_name)
 	pattern=$(basename $0).XXXXXX
 	newpg=$(mktemp /tmp/$pattern)
 	localtrust="local all all trust"

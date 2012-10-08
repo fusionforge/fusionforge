@@ -1,6 +1,6 @@
 #! /bin/sh
 
-data_path=$(/usr/share/gforge/bin/forge_get_config data_path)
+data_path=$(forge_get_config data_path)
 dataprefix=$data_path/plugins/moinmoin/wikidata
 
 case "$1" in

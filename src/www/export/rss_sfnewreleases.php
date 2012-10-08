@@ -65,7 +65,7 @@ while ($row = db_fetch_array($res)) {
 	if (!isset ($seen[$row['group_id']])) {
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
-		print "   <link>http://forge_get_config('web_host')/project/showfiles.php?group_id=$row[group_id]</link>\n";
+		print "   <link>http://".forge_get_config('web_host')."/project/showfiles.php?group_id=$row[group_id]</link>\n";
 		print "   <description>".rss_description($row['summary'])."</description>\n";
 		print "  </item>\n";
 		$outputtotal++;

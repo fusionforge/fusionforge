@@ -2,3 +2,7 @@
 /etc/@PACKAGE@/config.ini @CONFIG_PATH@/config.ini
 /etc/@PACKAGE@/config.ini.d @CONFIG_PATH@/config.ini.d
 @PLUGIN_PATH@/authbuiltin/www @SOURCE_PATH@/www/plugins/authbuiltin
+
+@BINARY_PATH@/forge_wrapper usr/bin/forge_get_config
+@BINARY_PATH@/forge_wrapper usr/bin/forge_run_job
+@BINARY_PATH@/forge_wrapper usr/bin/forge_run_plugin_job

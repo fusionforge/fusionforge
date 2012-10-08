@@ -1,4 +1,4 @@
-fusionforge (5.2.50~-1) UNRELEASED; urgency=low
+fusionforge (5.2.50~-1) experimental; urgency=low
 
   * Bump version number after branching 5.2.
 

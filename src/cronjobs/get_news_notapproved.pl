@@ -47,7 +47,7 @@ unless (($debug && $resultOptions == 2) || ($resultOptions == 1)) {
 	exit(1);
 }
 
-chomp($server_admin=`/usr/share/gforge/bin/forge_get_config admin_email`);
+chomp($server_admin=`forge_get_config admin_email`);
 
 # Start to get de News
 #-------------------------------------------------------------------------------

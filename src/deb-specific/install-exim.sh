@@ -14,7 +14,7 @@ case "$1" in
     configure-files)
 	cp -a /etc/aliases /etc/aliases.gforge-new
 	# Redirect "noreply" mail to the bit bucket (if need be)
-	noreply_to_bitbucket=$(/usr/share/gforge/bin/forge_get_config noreply_to_bitbucket)
+	noreply_to_bitbucket=$(forge_get_config noreply_to_bitbucket)
 	if [ "$noreply_to_bitbucket" != "no" ] ; then
 	    if ! grep -q "^noreply:" /etc/aliases.gforge-new ; then
 		echo "### Next line inserted by GForge install" >> /etc/aliases.gforge-new
@@ -23,7 +23,7 @@ case "$1" in
 	fi
 
 	# Redirect "gforge" mail to the site admin
-	server_admin=$(/usr/share/gforge/bin/forge_get_config admin_email)
+	server_admin=$(forge_get_config admin_email)
 	if ! grep -q "^gforge:" /etc/aliases.gforge-new ; then
 	    echo "### Next line inserted by GForge install" >> /etc/aliases.gforge-new
 	    echo "gforge: $server_admin" >> /etc/aliases.gforge-new
@@ -210,7 +210,7 @@ while ($l = <>) { print $l; };
 	tmp1=$(mktemp /tmp/$pattern)
 	cp -a /etc/aliases /etc/aliases.gforge-new
 	# Redirect "noreply" mail to the bit bucket (if need be)
-	noreply_to_bitbucket=$(/usr/share/gforge/bin/forge_get_config noreply_to_bitbucket)
+	noreply_to_bitbucket=$(forge_get_config noreply_to_bitbucket)
 	if [ "$noreply_to_bitbucket" != "no" ] ; then
 	    grep -v "^noreply:" /etc/aliases.gforge-new > $tmp1
 	    cat $tmp1 > /etc/aliases.gforge-new

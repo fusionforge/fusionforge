@@ -40,7 +40,7 @@ case "$1" in
     cp -a $cfg_aliases $cfg_aliases_gforge
 
     # Redirect "noreply" mail to the bit bucket (if need be)
-    noreply_to_bitbucket=$(/usr/share/gforge/bin/forge_get_config noreply_to_bitbucket)
+    noreply_to_bitbucket=$(forge_get_config noreply_to_bitbucket)
     if [ "$noreply_to_bitbucket" != "no" ] ; then
       if ! grep -q "^noreply:" $cfg_aliases_gforge; then
 	echo "### Next line inserted by GForge install" >> $cfg_aliases_gforge
@@ -49,7 +49,7 @@ case "$1" in
     fi
 
     # Redirect "gforge" mail to the site admin
-    server_admin=$(/usr/share/gforge/bin/forge_get_config admin_email)
+    server_admin=$(forge_get_config admin_email)
     if ! grep -q "^gforge:" $cfg_aliases_gforge; then
       echo "### Next line inserted by GForge install" >> $cfg_aliases_gforge
       echo "gforge: $server_admin" >> $cfg_aliases_gforge
@@ -252,7 +252,7 @@ while (<>) { print; };
 
     grep -v "^gforge:" $cfg_aliases_gforge > $tmp1
     # Redirect "noreply" mail to the bit bucket (if need be)
-    noreply_to_bitbucket=$(/usr/share/gforge/bin/forge_get_config noreply_to_bitbucket)
+    noreply_to_bitbucket=$(forge_get_config noreply_to_bitbucket)
     if [ "$noreply_to_bitbucket" != "no" ] ; then
       grep -v "^noreply:" $tmp1 > $cfg_aliases_gforge
     else

@@ -824,6 +824,7 @@ src/packaging/install/shell-postgresql -text
 src/packaging/install/web-apache2 -text
 src/packaging/install/web-apache2-vhosts -text
 src/packaging/links/common -text
+src/packaging/links/db-postgresql -text
 src/packaging/links/web-apache2 -text
 src/packaging/readme/web-apache2 -text
 src/plugins/README -text
@@ -4641,6 +4642,7 @@ src/utils/forge_get_compressor -text
 src/utils/forge_get_config -text
 src/utils/forge_make_admin -text
 src/utils/forge_set_password -text
+src/utils/forge_wrapper -text
 src/utils/fusionforge-shell-postgresql.spec -text
 src/utils/include.pl svneol=native#text/x-perl
 src/utils/inject-files.php -text

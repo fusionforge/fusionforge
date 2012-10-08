@@ -32,3 +32,5 @@ plugins/authbuiltin/etc/*.ini 	    etc/@PACKAGE@/config.ini.d/
 #
 utils/list-admins.php                  @BINARY_PATH@/
 utils/list-projects-using-plugin.php   @BINARY_PATH@/
+#
+utils/forge_wrapper	                 @BINARY_PATH@/

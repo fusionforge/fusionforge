@@ -39,7 +39,7 @@ class FusionForgeLink():
             self.cachedconfig[secname] = {}
         if varname not in self.cachedconfig[secname]:
             self.cachedconfig[secname][varname] = \
-              subprocess.Popen(["/usr/share/gforge/bin/forge_get_config",
+              subprocess.Popen(["forge_get_config",
                                varname, secname],
                 stdout=subprocess.PIPE).communicate()[0].rstrip('\n')
         return self.cachedconfig[secname][varname]

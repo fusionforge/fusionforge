@@ -1,0 +1,2 @@
+@BINARY_PATH@/forge_wrapper usr/bin/forge_set_password
+@BINARY_PATH@/forge_wrapper usr/bin/forge_make_admin

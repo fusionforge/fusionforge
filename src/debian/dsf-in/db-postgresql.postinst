@@ -84,7 +84,7 @@ case "$1" in
 	@BINARY_PATH@/install-db.sh configure || v=$?
 	if test x"$v" = x"100"; then
 	    db_get @PACKAGE@/shared/admin_password || true
-	    /usr/share/gforge/bin/forge_set_password admin "$RET"
+	    forge_set_password admin "$RET"
 	elif test x"$v" != x"0"; then
 	    exit $v
 	fi

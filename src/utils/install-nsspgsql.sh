@@ -22,9 +22,9 @@ fi
 PATH=$PATH:/usr/sbin
 
 setup_vars() {
-    db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
-    db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
-    db_host=$(/usr/share/gforge/bin/forge_get_config database_host)
+    db_name=$(forge_get_config database_name)
+    db_user=$(forge_get_config database_user)
+    db_host=$(forge_get_config database_host)
     
     db_user_nss=${db_user}_nss
 
