@@ -3,8 +3,8 @@
 scriptname=$(basename $0)
 realpath=$(dirname $(readlink -f $(which $0)))
 
-if [ -x $realpath/$scriptname ] ; then
-    exec $realpath/$scriptname "$@"
+if [ -x "$realpath/$scriptname" ] ; then
+    exec "$realpath/$scriptname" "$@"
 else
     echo "No $scriptname script found."
     exit 1
