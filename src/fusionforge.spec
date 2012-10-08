@@ -586,10 +586,6 @@ done
 
 # plugin: cvstracker
 %{__ln_s} ../../plugins/cvstracker/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/cvstracker
-# delete stuff that is clearly outdated/obsolete so we don't package this and confuse others
-%{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/cvstracker/httpd.conf
-%{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/cvstracker/Makefile
-%{__rm} -rf $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/cvstracker/rpm-specific
 
 # plugin: externalsearch
 

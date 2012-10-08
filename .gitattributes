@@ -980,7 +980,6 @@ src/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
 src/plugins/cvstracker/etc/cvstracker.ini -text
 src/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 src/plugins/cvstracker/packaging/docs/plugin-cvstracker -text
-src/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 src/plugins/doaprdf/NAME -text
 src/plugins/doaprdf/README -text
 src/plugins/doaprdf/common/doaprdf-init.php -text
