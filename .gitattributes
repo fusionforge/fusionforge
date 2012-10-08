@@ -4581,21 +4581,12 @@ src/plugins/wiki/www/wiki -text
 src/plugins/wiki/www/wikiadmin.php -text
 src/plugins/wiki/www/wikilist.php -text
 src/rpm-specific/Makefile -text
-src/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 src/rpm-specific/dag-rpmforge.repo -text
 src/rpm-specific/epel-short.repo -text
 src/rpm-specific/epel-testing.repo -text
 src/rpm-specific/epel.repo -text
 src/rpm-specific/fusionforge-ci.repo -text
 src/rpm-specific/fusionforge.repo -text
-src/rpm-specific/patches/LocalSettings.php -text
-src/rpm-specific/patches/README.mediawiki.jlbond -text
-src/rpm-specific/patches/fusionforge-4.8.3-ereg_preg.patch -text
-src/rpm-specific/patches/fusionforge-4.8.3-mediawiki.patch -text
-src/rpm-specific/patches/fusionforge-4.8.3-register_globals.patch -text
-src/rpm-specific/patches/fusionforge-4.8.3-webcalendar.patch -text
-src/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
-src/rpm-specific/scripts/install-svn.sh -text svneol=unset#text/x-sh
 src/translations/bg.po -text
 src/translations/ca.po -text
 src/translations/de.po -text
