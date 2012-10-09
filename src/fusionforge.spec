@@ -862,7 +862,6 @@ fi
 %{FORGE_DIR}/install
 %{FORGE_DIR}/lib
 %{FORGE_DIR}/locales
-%{FORGE_DIR}/monitor
 %{FORGE_DIR}/translations
 %{FORGE_DIR}/utils
 #%{FORGE_DIR}/setup
