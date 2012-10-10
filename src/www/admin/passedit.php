@@ -70,10 +70,6 @@ if (getStringFromRequest('submit')) {
 			'Could not change password: '.$u->getErrorMessage()
 		);
 	}
-	//plugin webcal change user password
-	else {
-		plugin_hook('change_cal_password',$u->getID());
-	}
 
 	site_admin_header(array('title'=>_('Site Admin: Successfully Changed User Password')));
 

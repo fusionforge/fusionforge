@@ -211,9 +211,6 @@ class Widget_ProjectPublicAreas extends Widget {
 										echo "\n</div>\n";
 									}
 								}
-
-								//webcalendar
-								plugin_hook("cal_link_group",$group_id);
 	}
 
 	function canBeUsedByProject(&$project) {

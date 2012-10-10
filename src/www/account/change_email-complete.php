@@ -57,10 +57,6 @@ if (!$u || !is_object($u)) {
 if (!$u->setEmail($u->getNewEmail())) {
 	exit_error($u->getErrorMessage(),'my');
 }
-//plugin webcal change user mail
-	else {
-		plugin_hook('change_cal_mail',user_getid());
-	}
 
 site_user_header(array('title'=>_('Email Change Complete')));
 ?>

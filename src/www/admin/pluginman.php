@@ -32,7 +32,7 @@ require_once $gfwww.'admin/admin_utils.php';
 session_require_global_perm('forge_admin');
 
 // Skip non compatible plugins.
-$plugins_disabled = array('webcalendar', 'scmccase');
+$plugins_disabled = array('scmccase');
 
 // Skip non activable plugins due to general configuration
 if (!forge_get_config('use_scm')) {

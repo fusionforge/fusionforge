@@ -62,10 +62,6 @@ if (getStringFromRequest('submit')) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(_('Could not change password: ').$u->getErrorMessage(),'my');
 	}
-	//plugin webcal change user password
-	else {
-		plugin_hook('change_cal_password',user_getid());
-	}
 
 	site_user_header(array('title'=>_('Successfully Changed Password')));
 	?>

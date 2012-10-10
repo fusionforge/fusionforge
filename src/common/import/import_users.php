@@ -39,9 +39,6 @@ $equivs_text_value['pm']['Read']='0';
 $equivs_text_value['pm']['Tech']='1';
 $equivs_text_value['pm']['Tech & Admin']='2';
 $equivs_text_value['pm']['Admin Only']='3';
-$equivs_text_value['webcal']['No access']='0';
-$equivs_text_value['webcal']['Modify']='1';
-$equivs_text_value['webcal']['See']='2';
 */
 /*
 $observer_equivs_text_value['projectpublic']['Private']=0;
@@ -71,7 +68,6 @@ $equivs_name_value['Tasks Admin']='pmadmin';
 $equivs_name_value['Tasks:']='pm';
 $equivs_name_value['Tracker Admin']='trackeradmin';
 $equivs_name_value['Tracker:']='tracker';
-$equivs_name_value['Webcal']='webcal';
 $equivs_name_value['SCM']='scm';
 */
 /*
@@ -271,7 +267,6 @@ function role_update($group_id, $rolename, $role_id, $data){
     } else {
       $feedback = _('Successfully Updated Role');
     }
-    plugin_hook('change_cal_permission_auto',$group_id);
   }
 }
 */
@@ -298,7 +293,6 @@ function role_update($group_id, $rolename, $role_id, $data){
 //  } else {
 //    $feedback = _('Successfully Created New Role');
 //  }
-//  plugin_hook('change_cal_permission_auto',$group_id);
 //}
 /* TODO : reactivate or get rid, depending if still of any use
 function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $observer_equivs_text_value, $observer_equivs_name_value ){
@@ -420,12 +414,6 @@ function user_fill($users, $group_id, $check=False){
 				} else {
 					//echo 'User added:'.$user.'<br>';
 					$feedback = _('User Added Successfully');
-
-					//plugin webcal
-					//change assistant for webcal
-					$params[0] = $user_id;
-					$params[1] = $group_id;
-					plugin_hook('change_cal_permission',$params);
 				}
 			}
 			else {

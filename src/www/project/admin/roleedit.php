@@ -102,10 +102,6 @@ if (getStringFromRequest('submit')) {
 				$feedback = _('Successfully Updated Role');
 			}
 		}
-		//plugin webcal
-		//change assistant for webcal
-		$params = getIntFromRequest('group_id');
-		plugin_hook('change_cal_permission_auto', $params);
 	}
 }
 
@@ -167,8 +163,6 @@ for ($i=0; $i<count($keys); $i++) {
                 // We don't display modules not used
 		continue;
 	}
-
-	if ($keys[$i] == 'webcal') continue;
 
 	if (preg_match("/^plugin_([a-z]*)/", $keys[$i], $matches)) {
 		$p = $matches[1];
