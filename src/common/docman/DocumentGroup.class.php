@@ -557,7 +557,7 @@ class DocumentGroup extends Error {
 				if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
 					$browselink .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 				}
-				$browselink .= '&group_id='.$GLOBALS['group_id'];
+				$browselink .= '&group_id='.$this->Group->getID();
 				$returnPath .= '/'.util_make_link($browselink, $this->getName(), array('title' => _('Browse this folder'), 'class' => 'tabtitle'));
 			} else {
 				$returnPath .= '/'.$this->getName();
