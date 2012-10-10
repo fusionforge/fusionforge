@@ -249,16 +249,16 @@ Requires: %{name} >= %{version}, php
 %description plugin-online_help
 This is a online_help plugin within FusionForge.
 
-%package plugin-oslc
-Summary: OSLC plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php, php-ZendFramework > 1.10
-%description plugin-oslc
-OSLC-CM compatible plugin for FusionForge tracker system.
-OSLC-CM is a standard specification for APIs in Change Management
-applications. It is based on Web technologies such as REST, RDF, or AJAX.
-This package provides an OSLC-CM V2 compatible plugin for FusionForge
-tracker system.
+# %package plugin-oslc
+# Summary: OSLC plugin for FusionForge
+# Group: Development/Tools
+# Requires: %{name} >= %{version}, php, php-ZendFramework > 1.10
+# %description plugin-oslc
+# OSLC-CM compatible plugin for FusionForge tracker system.
+# OSLC-CM is a standard specification for APIs in Change Management
+# applications. It is based on Web technologies such as REST, RDF, or AJAX.
+# This package provides an OSLC-CM V2 compatible plugin for FusionForge
+# tracker system.
 
 %package plugin-projectimport
 Summary: Project Import plugin for FusionForge
@@ -681,7 +681,7 @@ done
 %{__ln_s} ../plugins/wiki/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/wiki
 
 # plugin: oslc
-%{__ln_s} ../../plugins/oslc/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oslc
+#%{__ln_s} ../../plugins/oslc/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oslc
 
 # plugin : projectimport
 %{__ln_s} ../../plugins/projectimport/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectimport
@@ -1049,12 +1049,12 @@ fi
 %{FORGE_DIR}/plugins/online_help
 %{FORGE_DIR}/www/plugins/online_help
 
-%files plugin-oslc
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/oslc/
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/oslc.ini
-%{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
-%{FORGE_DIR}/plugins/oslc
-%{FORGE_DIR}/www/plugins/oslc
+# %files plugin-oslc
+# %config(noreplace) %{FORGE_CONF_DIR}/plugins/oslc/
+# %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/oslc.ini
+# %{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
+# %{FORGE_DIR}/plugins/oslc
+# %{FORGE_DIR}/www/plugins/oslc
 
 %files plugin-projectimport
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
