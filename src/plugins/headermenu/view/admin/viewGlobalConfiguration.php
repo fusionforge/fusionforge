@@ -98,8 +98,20 @@ $select_name = 'typemenu';
 echo html_build_radio_buttons_from_arrays($vals, $texts, $select_name, 'url', false);
 echo '</td>';
 echo '</tr><tr id="htmlcode" style="display:none">';
-echo '<td>'._('Your HTML Code.').'</td><td><textarea name="htmlcode" rows="15" cols="70">'._('Just paste your code here...').'</textarea></td>';
-echo '</tr><tr id="urlcode" >';
+echo '<td>'._('Your HTML Code.').'</td><td>';
+$GLOBALS['editor_was_set_up'] = false;
+$body = _('Just paste your code here...');
+$params['name'] = 'htmlcode';
+$params['body'] = $body;
+$params['width'] = "800";
+$params['height'] = "500";
+$params['user_id'] = user_getid();
+plugin_hook("text_editor", $params);
+if (!$GLOBALS['editor_was_set_up']) {
+	echo '<textarea name="htmlcode" rows="5" cols="80">'.$body.'</textarea>';
+}
+unset($GLOBALS['editor_was_set_up']);
+echo '</td></tr><tr id="urlcode" >';
 echo '<td>'._('URL').'</td><td><input name="link" type="text" maxsize="255" /></td>';
 echo '</tr><tr>';
 echo '<td>';
