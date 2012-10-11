@@ -48,8 +48,9 @@ The hook is triggered after \'serve push pull bundle\' on the projects repositor
 		require_once $gfcommon.'mail/MailingList.class.php';
 		require_once $gfcommon.'mail/MailingListFactory.class.php';
 		if ($this->group->usesMail()) {
-			$mlFactory = new MailingListFactory($group);
+			$mlFactory = new MailingListFactory($this->group);
 			$mlArray = $mlFactory->getMailingLists();
+			$mlCount = count($mlArray);
 			for ($j = 0; $j < $mlCount; $j++) {
 				$currentList =& $mlArray[$j];
 				if ($currentList->getListEmail() == $this->group->getUnixName().'-commits@'.forge_get_config('lists_host'))
