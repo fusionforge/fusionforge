@@ -49,7 +49,7 @@ class GitPlugin extends SCMPlugin {
 	function printShortStats ($params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
+			return;
 		}
 
 		if ($project->usesPlugin($this->name)) {
@@ -214,7 +214,7 @@ class GitPlugin extends SCMPlugin {
 	function printBrowserPage($params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
+			return;
 		}
 
 		if ($project->usesPlugin($this->name)) {
@@ -312,7 +312,7 @@ class GitPlugin extends SCMPlugin {
 					"$main_repo/hooks/post-update");
 			}
 			if (!is_file("$main_repo/hooks/post-update")) {
-				$f = fopen("$main_repo/hooks/post-update");
+				$f = fopen("$main_repo/hooks/post-update", 'w');
 				fwrite($f, "exec git-update-server-info\n");
 				fclose($f);
 			}
@@ -357,7 +357,7 @@ class GitPlugin extends SCMPlugin {
 						"$repodir/hooks/post-update") ;
 				}
 				if (!is_file ("$repodir/hooks/post-update")) {
-					$f = fopen ("$repodir/hooks/post-update") ;
+					$f = fopen ("$repodir/hooks/post-update", 'w') ;
 					fwrite ($f, "exec git-update-server-info\n") ;
 					fclose ($f) ;
 				}
@@ -498,6 +498,11 @@ class GitPlugin extends SCMPlugin {
 						// Author line
 						$last_user = $matches['name'];
 						$user2email[$last_user] = strtolower($matches['mail']);
+						if (!isset($usr_adds[$last_user])) {
+							$usr_adds[$last_user] = 0;
+							$usr_updates[$last_user] = 0;
+							$usr_deletes[$last_user] = 0;
+						}
 					} else {
 						// Short-commit stats line
 						preg_match("/^(?P<mode>[AM])\s+(?P<file>.+)$/", $line, $matches);
@@ -637,7 +642,7 @@ class GitPlugin extends SCMPlugin {
 	 * @return boolean
 	 */
 	function widgets($params) {
- 		require_once 'common/widget/WidgetLayoutManager.class.php';
+		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
 			$params['fusionforge_widgets'][] = 'plugin_scmgit_project_latestcommits';
 		}
