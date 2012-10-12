@@ -122,7 +122,7 @@ retcode=0
 if $REMOTESELENIUM
 then
 	echo "Run phpunit test on $HOST"
-	ssh root@$HOST "apt-get -y install vnc4server ; mkdir -p /root/.vnc"
+	ssh root@$HOST "apt-get -y install xfonts-base vnc4server ; mkdir -p /root/.vnc"
 	ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
