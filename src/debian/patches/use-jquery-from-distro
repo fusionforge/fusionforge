@@ -4,7 +4,7 @@ Index: src/www/include/html.php
 ===================================================================
 --- src.orig/www/include/html.php
 +++ src/www/include/html.php
-@@ -377,14 +377,14 @@
+@@ -407,14 +407,14 @@
  }
  
  function html_use_jquery() {
@@ -22,7 +22,7 @@ Index: src/www/include/html.php
  }
  
  function html_use_storage() {
-@@ -407,8 +407,8 @@
+@@ -437,8 +437,8 @@
  
  function html_use_jqueryui() {
  	html_use_jquery();
@@ -32,4 +32,4 @@ Index: src/www/include/html.php
 +	use_stylesheet('/scripts/jquery-ui-themes/overcast/jquery-ui.min.css');
  }
  
- /**
+ function html_use_jqueryjqplot() {

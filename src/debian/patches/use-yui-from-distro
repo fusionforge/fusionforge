@@ -2,8 +2,8 @@ Index: src/etc/httpd.conf.d/vhost-main.inc
 ===================================================================
 --- src.orig/etc/httpd.conf.d/vhost-main.inc
 +++ src/etc/httpd.conf.d/vhost-main.inc
-@@ -34,7 +34,7 @@
- Alias /scripts/jquery-simpletreemenu/ {core/source_path}/lib/vendor/jquery-simpletreemenu/
+@@ -37,7 +37,7 @@
+ Alias /scripts/jquery-jqplot/ {core/source_path}/lib/vendor/jquery-jqplot/
  Alias /scripts/prototype/ {core/source_path}/lib/vendor/prototype/
  Alias /scripts/scriptaculous/ {core/source_path}/lib/vendor/scriptaculous/
 -Alias /scripts/yui/ {core/source_path}/lib/vendor/yui/build/

@@ -56,7 +56,7 @@ Index: src/plugins/scmgit/etc/scmgit.ini
 ===================================================================
 --- src.orig/plugins/scmgit/etc/scmgit.ini
 +++ src/plugins/scmgit/etc/scmgit.ini
-@@ -13,6 +13,6 @@ repos_path = "$core/chroot/scmrepos/git"
+@@ -13,6 +13,6 @@
  ; this value might be used to create an alias in your httpd conf for clone
  scm_root = "git"
  
