@@ -962,6 +962,7 @@ fi
 
 %files plugin-ckeditor
 %{FORGE_DIR}/plugins/ckeditor
+%{FORGE_CONF_DIR}/httpd.conf.d/plugin-ckeditor.inc
 
 %files plugin-cvssyncmail
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvssyncmail.ini

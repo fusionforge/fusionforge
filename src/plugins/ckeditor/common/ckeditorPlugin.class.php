@@ -71,9 +71,9 @@ class ckeditorPlugin extends Plugin {
 	/**
 	 * The function to be called for a Hook
 	 *
-	 * @param    String  $hookname  The name of the hookname that has been happened
-	 * @param    String  $params    The params of the Hook
-	 *
+	 * @param string  $hookname  The name of the hookname that has been happened
+	 * @param string  $params    The params of the Hook
+	 * @return bool
 	 */
 	function CallHook ($hookname, &$params) {
 
