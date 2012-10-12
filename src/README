@@ -3,9 +3,10 @@
 -----------------
 
 FusionForge is a web-based Collaborative Development Environment
-offering easy access to CVS, SVN, Bazaar, Git and other versioning systems, mailing
-lists, bug tracking, message boards/forums, task management, and permanent
-file archival. It provides full web-based administration.
+offering easy access to version control systems such as Bazaar, CVS,
+Darcs, Git, Mercurial, and Subversion, mailing lists, bug tracking,
+message boards/forums, task management, and permanent file
+archival. It provides full web-based administration.
 
 FusionForge is the new name of the same free software elements that
 were previously named GForge (versions 4.x).
