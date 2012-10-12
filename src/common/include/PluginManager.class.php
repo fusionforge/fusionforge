@@ -290,7 +290,7 @@ class PluginManager extends Error {
 /**
  * plugin_manager_get_object() - get the PluginManager object
  *
- * @return the PluginManager object
+ * @return PluginManager the PluginManager object
  */
 function &plugin_manager_get_object() {
 	global $PLUGINMANAGER_OBJ;
@@ -303,8 +303,8 @@ function &plugin_manager_get_object() {
 /**
  * plugin_get_object() - get a particular Plugin object
  *
- * @param pluginname - a plugin name
- * @return the Plugin object
+ * @param string $pluginname - a plugin name
+ * @return Plugin The Plugin object
  */
 function &plugin_get_object ($pluginname) {
 	global $PLUGINMANAGER_OBJ;

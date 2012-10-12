@@ -25,8 +25,8 @@
 /**
  * exit_error() - Exit PHP with error
  *
- * @param	string	Error text
- * @param	string	toptab for navigation bar
+ * @param	string	$text	Error text
+ * @param	string	$toptab for navigation bar
  */
 function exit_error($text = "", $toptab = '') {
 	global $HTML, $group_id;
@@ -40,7 +40,7 @@ function exit_error($text = "", $toptab = '') {
  * exit_permission_denied() - Exit with permission denied error
  *
  * @param	string	$reason_descr
- * @param	string	toptab needed for navigation
+ * @param	string	$toptab needed for navigation
  */
 function exit_permission_denied($reason_descr = '', $toptab = '') {
 	if(!session_loggedin()) {
@@ -63,7 +63,6 @@ function exit_not_logged_in() {
 
 /**
  * exit_no_group() - Exit with no group chosen error
- * @param	string	toptab
  */
 function exit_no_group() {
 	exit_error(_('Permission denied. No project was chosen, project does not exist or you can\'t access it.'), '');
@@ -72,9 +71,9 @@ function exit_no_group() {
 /**
  * exit_missing_param() - Exit with missing required parameters error
  *
- * @param	string	URL : usually $_SERVER['HTTP_REFERER']
- * @param	array	array of missing parameters
- * @param	string	toptab needed for navigation
+ * @param	string	$url	URL, usually $_SERVER['HTTP_REFERER']
+ * @param	array	$missing_params	array of missing parameters
+ * @param	string	$toptab needed for navigation
  */
 function exit_missing_param($url = '', $missing_params = array(), $toptab = '') {
 	if (!empty($missing_params)) {
@@ -99,7 +98,7 @@ function exit_missing_param($url = '', $missing_params = array(), $toptab = '') 
 /**
  * exit_disabled() - Exit with disabled feature error.
  *
- * @param	string	toptab needed for navigation
+ * @param	string	$toptab needed for navigation
  */
 function exit_disabled($toptab = 'summary') {
 	exit_error(_('The Site Administrator has turned off this feature.'), $toptab);
@@ -108,7 +107,7 @@ function exit_disabled($toptab = 'summary') {
 /**
  * exit_project_disabled() - Exit with disabled feature error (by project admin).
  *
- * @param	string	toptab needed for navigation
+ * @param	string	$toptab needed for navigation
  */
 function exit_project_disabled($toptab = 'summary') {
 	exit_error(_('The Project Administrator has turned off this feature.'), $toptab);
@@ -117,7 +116,7 @@ function exit_project_disabled($toptab = 'summary') {
 /**
  * exit_form_double_submit() - Exit with double submit error.
  *
- * @param	string	toptab needed for navigation
+ * @param	string	$toptab needed for navigation
  */
 function exit_form_double_submit($toptab = '') {
 	exit_error(_('You Attempted To Double-submit this item. Please avoid double-clicking.'), $toptab);

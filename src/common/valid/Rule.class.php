@@ -42,8 +42,8 @@ class Rule {
     /**
      * Default error message if rule is not apply on value.
      *
-     * @param  String  $val Value to check.
-     * @return Boolean
+     * @param  string  $key Value to check.
+     * @return boolean
      */
     function getErrorMessage($key) {
         return $this->error;
@@ -333,12 +333,12 @@ extends Rule {
         return $GLOBALS['Language']->getText($this->i18nPageName, $key, $params);
     }
 
-    /**
-     * Check file upload validity
-     *
-     * @param  Array   One entry in $_FILES superarray (e.g. $_FILES['test'])
-     * @return Boolean              Is file upload valid or not.
-     */
+	/**
+	 * Check file upload validity
+	 *
+	 * @param string $file
+	 * @return boolean Is file upload valid or not.
+	 */
     function isValid($file) {
         $ok = false;
         if(is_array($file)) {

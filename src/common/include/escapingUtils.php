@@ -43,7 +43,7 @@ function getStringFromRequest($key, $defaultValue = '') {
 }
 
 /**
- * getHtmlStringFromRequest - get an htmlified string from REQUEST
+ * getHtmlStringFromRequest - get an HTML converted string from REQUEST
  *
  * @param string $key key of the wanted value
  * @param string $defaultValue if we can't find the wanted value, it returns the default value
@@ -54,7 +54,7 @@ function getHtmlStringFromRequest($key, $defaultValue = '') {
 }
 
 /**
- * getHtmlTextFromRequest - get an htmlified text string from REQUEST (same as string but for textarea)
+ * getHtmlTextFromRequest - get an HTML converted text string from REQUEST (same as string but for textarea)
  *
  * @param string $key key of the wanted value
  * @param string $defaultValue if we can't find the wanted value, it returns the default value
@@ -73,7 +73,7 @@ function getHtmlTextFromRequest($key, $defaultValue = '') {
 /**
  * getArrayFromRequest - get an array from REQUEST
  * @param	string $key	Key of the wanted value
- * @param	string $defaultValue	if we can't find the wanted value, it returns the default value
+ * @param	array $defaultValue	if we can't find the wanted value, it returns the default value
  * @return	array	The value
  */
 function getArrayFromRequest($key, $defaultValue = array()) {
@@ -156,7 +156,7 @@ function getStringFromCookie($key, $defaultValue = '') {
  * returned.  If there was file upload control but no file was
  * entered, then $result['tmp_name'] is empty string.
  *
- * @param string name of the file
+ * @param string $key	name of the file
  * @return array uploaded file information
  */
 function getUploadedFile($key) {
@@ -177,7 +177,6 @@ function getUploadedFile($key) {
  * getStringFromServer - get a string from Server environment
  *
  * @param string $key key of the wanted value
- * @param string $defaultValue if we can't find the wanted value, it returns the default value
  * @return string the value
  */
 function getStringFromServer($key) {
@@ -218,7 +217,7 @@ function _getIntFromArray( $array, $key, $defaultValue = 0) {
  *
  * @param array $array the array
  * @param string $key the key of the wanted value
- * @param int $defaultValue an int which is returned if we can't find the key in the array
+ * @param string $defaultValue an int which is returned if we can't find the key in the array
  * @return string the wanted value
  */
 function _getStringFromArray( $array, $key, $defaultValue = '') {
@@ -235,7 +234,7 @@ function _getStringFromArray( $array, $key, $defaultValue = '') {
  *
  * @param array $array the array
  * @param string $key the key of the wanted value
- * @param int $defaultValue an array which is returned if we can't find the key in the array
+ * @param array $defaultValue an array which is returned if we can't find the key in the array
  * @return string the wanted value
  */
 function _getArrayFromArray( $array, $key, $defaultValue = array()) {
@@ -324,29 +323,29 @@ function & _getCookieArray() {
 }
 
 /**
-* inputSpecialchars - escape a string which is in an input
+* inputSpecialChars - escape a string which is in an input
 *
 * @param string $string string to escape
 * @return string escaped string
 */
-function inputSpecialchars($string) {
+function inputSpecialChars($string) {
 	return str_replace('"', '&quot;', $string);
 }
 
 /**
-* unInputSpecialchars - clean a string escaped with inputSpecialchars
+* unInputSpecialChars - clean a string escaped with inputSpecialChars
 *
 * @param string $string escaped string
 * @return string clean string
 */
-function unInputSpecialchars($string) {
+function unInputSpecialChars($string) {
 	return str_replace('&quot;', '"', $string);
 }
 
 /**
  * getFilteredStringFromRequest - get a string from REQUEST
  *
- * @param string $key key of the wanted value
+ * @param string $string key of the wanted value
  * @param string $pattern Regular expression of allowed values.
  * @param string $defaultValue if we can't find the wanted value, it returns the default value
  * @return string the value or false if not valid.

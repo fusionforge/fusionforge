@@ -39,7 +39,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * Role($group,$id) - CONSTRUCTOR.
 	 *
 	 * @param	object	The Group object.
-	 * @param	int	The role_id.
+	 * @param	int|bool	The role_id.
 	 */
 	function Role($Group, $role_id = false) {
 		$this->BaseRole();

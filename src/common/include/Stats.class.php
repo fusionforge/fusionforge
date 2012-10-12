@@ -56,7 +56,7 @@ class Stats extends Error {
 	*
 	* @param string	$type	week or null (for all time)
 	* @param int	$offset	used to page thru the result
-	* @return a resultset of group_name, unix_group_name, group_id, ranking, percentile
+	* @return resource A resultset of group_name, unix_group_name, group_id, ranking, percentile
 	*/
 	function getMostActiveStats($type, $offset) {
 		if ($type == 'week') 	{

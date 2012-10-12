@@ -1,12 +1,14 @@
 <?php
 /**
  * Handles persistence of data for plugins
+ *
  * @author Olivier Berger
  *
  */
 
 /**
  * Handles persistence of data for a plugin as a whole
+ *
  * @author Olivier Berger
  *
  */
@@ -32,6 +34,7 @@ class PluginPersistentStore extends Error {
 
 	/**
 	 * Constructor
+	 *
 	 * @param integer $plugin_id
 	 */
 	public function __construct($plugin_id) {
@@ -41,9 +44,11 @@ class PluginPersistentStore extends Error {
 	protected function additionalAndClause() {
 		return '';
 	}
+
 	/**
 	 * Loads persisted objects (saved in serialized form)
-	 * @param key $key
+	 *
+	 * @param string $key
 	 * @return array
 	 */
 	public function readObject($key) {
@@ -52,16 +57,16 @@ class PluginPersistentStore extends Error {
 					FROM '.self::persistence_table.'
 					WHERE plugin_id = $1
 					AND persisted_key = $2 '.$self->additionalAndClause(),
-					array($this->plugin_id,
-							$key));
+			array($this->plugin_id,
+				$key));
 		$rows = db_numrows($res);
 
 		/*
 		if ($rows > 1) {
 			$this->setError(_('More than one value for the plugin + key'))
 		}*/
-		for ($i=0; $i<$rows; $i++) {
-			$data = db_result($res,$i,'persisted_data');
+		for ($i = 0; $i < $rows; $i++) {
+			$data = db_result($res, $i, 'persisted_data');
 			$object = unserialize($data);
 			$result[] = $object;
 		}
@@ -70,14 +75,15 @@ class PluginPersistentStore extends Error {
 
 	public function saveObject($object, $key) {
 		$data = serialize($object);
-		$res = db_query_params('INSERT INTO '. self::persistence_table .' (plugin_id, persisted_key, persisted_data) VALUES ($1, $2, $3)',
-				array($this->plugin_id, $key, $data));
+		$res = db_query_params('INSERT INTO '.self::persistence_table.' (plugin_id, persisted_key, persisted_data) VALUES ($1, $2, $3)',
+			array($this->plugin_id, $key, $data));
 	}
 
 }
 
 /**
  * Handles persistence of data for a plugin, by group
+ *
  * @author olivier
  *
  */
@@ -104,7 +110,7 @@ class PluginGroupPersistentStore {
 		if ($rows > 1) {
 			$this->setError(_('More than one value for the plugin + key'));
 		}
-		$this->group_plugin_id = db_result($res,0,'persisted_data');
+		$this->group_plugin_id = db_result($res, 0, 'persisted_data');
 	}
 
 	protected function additionalAndClause() {
@@ -117,20 +123,21 @@ class PluginGroupPersistentStore {
 
 /**
  * Handles persistence of data for a plugin, by user
+ *
  * @author olivier
  *
  */
 class PluginUserPersistentStore {
 	var $user_id;
 
-		/*
+	/*
 
-	CREATE TABLE user_plugin_persistence (
-	user_plugin_id integer,
-	persisted_key character varying(100),
-	persisted_data bytea,
-	CONSTRAINT plugins_persistence_pkey PRIMARY KEY (user_plugin_id, persisted_key)
+   CREATE TABLE user_plugin_persistence (
+   user_plugin_id integer,
+   persisted_key character varying(100),
+   persisted_data bytea,
+   CONSTRAINT plugins_persistence_pkey PRIMARY KEY (user_plugin_id, persisted_key)
 
-		*/
+	   */
 
 }

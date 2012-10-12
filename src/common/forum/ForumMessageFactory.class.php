@@ -70,10 +70,10 @@ class ForumMessageFactory extends Error {
 	/**
 	 *	setup - call this function before getThreaded/nested/etc to set up the user preferences.
 	 *
-	 *	@param	int	The number of rows to skip.
-	 *	@param	string	The style of forum, whether it's nested, ultimate, etc.
-	 *	@param	int	The maximum number of rows to return.
-	 *	@param	int	Whether to set these prefs into the database - use "custom".
+	 *	@param	int    $offset   The number of rows to skip.
+	 *	@param	string $style    The style of forum, whether it's nested, ultimate, etc.
+	 *	@param	int	   $max_rows The maximum number of rows to return.
+	 *	@param	int	   $set      Whether to set these prefs into the database - use "custom".
 	 */
 	function setup($offset,$style,$max_rows,$set) {
 //echo "<br />offset: $offset| style: $style|max_rows: $max_rows|set: $set+";
