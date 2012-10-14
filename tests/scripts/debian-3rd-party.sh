@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/sh -e
 
 # Setup Env
 relativepath=`dirname $0`
@@ -20,9 +20,6 @@ COWBUILDERCONFIG=$BUILDERDIR/config/$DIST.config
 WORKDIR=$(cd $absolutesourcepath/..; pwd)
 # Jenkins will set WORKSPACE
 WORKSPACE=${WORKSPACE:-$WORKDIR}
-BUILDRESULT=$WORKSPACE/build/packages
-[ ! -d $BUILDRESULT/build ] || mkdir $BUILDRESULT/build
-[ ! -d $BUILDRESULT/build/packages ] || mkdir $BUILDRESULT/build/packages
 
 REPOPATH=$WORKSPACE/build/debian
 [ ! -d $REPOPATH ] || rm -r $REPOPATH
@@ -41,9 +38,6 @@ SignWith: $SIGNKEY
 EOF
 
 # Build mediawiki
-CHANGEFILEM=mediawiki_1.19.2-1_amd64.changes
-make -C 3rd-party/mediawiki BUILDRESULT=$BUILDRESULT COWBUILDERCONFIG=$COWBUILDERCONFIG
-cd $BUILDRESULT
-reprepro -Vb ${REPOPATH} --ignore=wrongdistribution include $DIST $CHANGEFILEM
+make -C 3rd-party/mediawiki COWBUILDERCONFIG=$COWBUILDERCONFIG REPOPATH=$REPOPATH
 gpg --export --armor > ${REPOPATH}/key
 
