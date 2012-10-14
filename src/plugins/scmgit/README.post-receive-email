@@ -8,3 +8,8 @@ This is done by filling config file
         emailprefix = [Fusionforge-commits]
 >----- cut here -------<
 and making a symlink in the hooks directory
+
+# 0n Fusionforge.org, using subgit 
+edit /srv/git/fusionforge/fusionforge.git/config
+cd /srv/git/fusionforge/fusionforge.git/
+ln -s /usr/share/git-core/contrib/hooks/post-receive-email hooks/user-post-receive
