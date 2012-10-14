@@ -1,18 +1,18 @@
-To send commit email, you may use
-/usr/share/git-core/contrib/hooks/post-receive-email
-This is done by filling config file
->----- cut here -------<
-[hooks]
-        mailinglist = fusionforge-commits@lists.fusionforge.org
-        envelopesender = fusionforge-general@lists.fusionforge.org
-        emailprefix = [Fusionforge-commits]
->----- cut here -------<
-and making a symlink in the hooks directory
-
+# To send commit email, you may use
+# /usr/share/git-core/contrib/hooks/post-receive-email
+# This is done by filling config file
+# >----- cut here -------<
+# [hooks]
+#         mailinglist = fusionforge-commits@lists.fusionforge.org
+#         envelopesender = fusionforge-general@lists.fusionforge.org
+#         emailprefix = [Fusionforge-commits]
+# >----- cut here -------<
+# and making a symlink in the hooks directory
+# 
 # 0n Fusionforge.org, using subgit 
-edit /srv/git/fusionforge/fusionforge.git/config
-cd /srv/git/fusionforge/fusionforge.git/
-ln -s /usr/share/git-core/contrib/hooks/post-receive-email hooks/user-post-receive
-
+# edit /srv/git/fusionforge/fusionforge.git/config
+# cd /srv/git/fusionforge/fusionforge.git/
+# ln -s /usr/share/git-core/contrib/hooks/post-receive-email hooks/user-post-receive
+# 
 # You will also have to chmod +x /usr/share/git-core/contrib/hooks/post-receive-email
 # or copy it and chmod +x too
