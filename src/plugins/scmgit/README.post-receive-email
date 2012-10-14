@@ -16,4 +16,3 @@
 # 
 # You will also have to chmod +x /usr/share/git-core/contrib/hooks/post-receive-email
 # or copy it and chmod +x too
-#
