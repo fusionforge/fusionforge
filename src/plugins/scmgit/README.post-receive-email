@@ -1,4 +1,4 @@
-#
+##
 # To send commit email, you may use
 # /usr/share/git-core/contrib/hooks/post-receive-email
 # This is done by filling config file
