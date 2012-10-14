@@ -13,3 +13,6 @@ and making a symlink in the hooks directory
 edit /srv/git/fusionforge/fusionforge.git/config
 cd /srv/git/fusionforge/fusionforge.git/
 ln -s /usr/share/git-core/contrib/hooks/post-receive-email hooks/user-post-receive
+
+# You will also have to chmod +x /usr/share/git-core/contrib/hooks/post-receive-email
+# or copy it and chmod +x too
