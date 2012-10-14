@@ -3,10 +3,12 @@
 # /usr/share/git-core/contrib/hooks/post-receive-email
 # This is done by filling config file
 # >----- cut here -------<
-# [hooks]
-#         mailinglist = fusionforge-commits@lists.fusionforge.org
-#         envelopesender = fusionforge-general@lists.fusionforge.org
-#         emailprefix = [Fusionforge-commits]
+#[hooks]
+#        mailinglist = fusionforge-commits@lists.fusionforge.org
+#        announcelist =
+#        #envelopesender = fusionforge-general@lists.fusionforge.org
+#        emailprefix = [Fusionforge-commits]
+#        showrev = "git show -C %s; echo"
 # >----- cut here -------<
 # and making a symlink in the hooks directory
 # 
