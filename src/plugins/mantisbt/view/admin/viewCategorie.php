@@ -57,7 +57,7 @@ if (!isset($errorPage)){
 				echo '<td>';
 				echo '<form method="POST" action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=renameCategory">';
 				echo '<input type="hidden" name="renameCategory" value="'.htmlspecialchars($category).'" />';
-				echo '<input name="newCategoryName" type="text"></input>';
+				echo '<input name="newCategoryName" type="text" />';
 				echo '<input type="submit" value="'._('Rename').'" />';
 				echo '</td>';
 				echo '</form>';

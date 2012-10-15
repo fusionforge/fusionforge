@@ -200,7 +200,7 @@ function createNewAccountForm($user_id) {
 			</fieldset>';
 	
 	echo '	<p style="text-align: center;">
-				<input type="submit" value="submit new account"></input>
+				<input type="submit" value="submit new account"/>
 			</p>
 			</form>
 		</p>';
