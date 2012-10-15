@@ -4,6 +4,7 @@
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012, Benoit Debaenst - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -304,6 +305,11 @@ class scmhookPlugin extends Plugin {
 					echo ' disabled="disabled"';
 
 				echo ' />';
+				if (in_array($hookPreCommit->getClassname(), $hooksEnabled) && $statusDeploy) {
+					echo '<input type="hidden" ';
+					echo 'name="'.$hookPreCommit->getLabel().'_'.$hookPreCommit->getClassname().'" ';
+					echo 'value="on" />';
+				}
 				echo '</td><td';
 				if (!$hookPreCommit->isAvailable())
 					echo ' class="tabtitle-w" title="'.$hookPreCommit->getDisabledMessage().'"';
@@ -342,6 +348,11 @@ class scmhookPlugin extends Plugin {
 					echo ' disabled="disabled"';
 
 				echo ' />';
+				if (in_array($hook->getClassname(), $hooksEnabled) && $statusDeploy) {
+					echo '<input type="hidden" ';
+					echo 'name="'.$hook->getLabel().'_'.$hook->getClassname().'" ';
+					echo 'value="on" />';
+				}
 				echo '</td><td';
 				if (!$hook->isAvailable())
 					echo ' class="tabtitle-w" title="'.$hook->getDisabledMessage().'"';
@@ -381,6 +392,11 @@ class scmhookPlugin extends Plugin {
 					echo ' disabled="disabled"';
 
 				echo ' />';
+				if (in_array($hookPostCommit->getClassname(), $hooksEnabled) && $statusDeploy) {
+					echo '<input type="hidden" ';
+					echo 'name="'.$hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname().'" ';
+					echo 'value="on" />';
+				}
 				echo '</td><td';
 				if (!$hookPostCommit->isAvailable())
 					echo ' class="tabtitle-w" title="'.$hookPostCommit->getDisabledMessage().'"';
@@ -437,6 +453,12 @@ class scmhookPlugin extends Plugin {
 					echo ' disabled="disabled"';
 
 				echo ' />';
+				if (in_array($hookServePushPullBundle->getClassname(), $hooksEnabled) && $statusDeploy) {
+					echo '<input type="hidden" ';
+					echo 'name="'.$hookServePushPullBundle->getLabel().'_'.$hookServePushPullBundle->getClassname().'" ';
+					echo 'value="on" />';
+				}
+
 				echo '</td><td';
 				if (!$hookServePushPullBundle->isAvailable())
 					echo ' class="tabtitle-w" title="'.$hookServePushPullBundle->getDisabledMessage().'"';
