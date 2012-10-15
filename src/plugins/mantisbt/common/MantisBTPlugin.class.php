@@ -68,7 +68,7 @@ class MantisBTPlugin extends Plugin {
 					$params['TOOLTIPS'][] = _('Tickets Management');
 					if (session_loggedin()) {
 						$user = session_get_user();
-						$userperm = $project->getPermission($user);
+						$userperm = $project->getPermission();
 						if ($userperm->isAdmin()) {
 							$params['ADMIN'][] = '/plugins/'.$this->name.'/?type=admin&group_id=' . $group_id . '&pluginname=' . $this->name;
 						}
@@ -397,7 +397,7 @@ class MantisBTPlugin extends Plugin {
 		$labelAttr = array();
 		$labelAttr[] = array('title' => _('View the roadmap, per version tickets'), 'id' => 'roadmapView', 'class' => 'tabtitle-nw');
 		$labelAttr[] = array('title' => _('View all tickets.'), 'id' => 'ticketView', 'class' => 'tabtitle');
-		$userperm = $group->getPermission($user);
+		$userperm = $group->getPermission();
 		if ($userperm->isAdmin()) {
 			$labelTitle[] = _('Administration');
 			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&pluginname=".$this->name;
@@ -709,7 +709,7 @@ class MantisBTPlugin extends Plugin {
 		if ( !$group || !$group->usesPlugin ( $this->name ) ) {
 			return false;
 		}
- 		require_once 'common/widget/WidgetLayoutManager.class.php';
+		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
 			$params['fusionforge_widgets'][] = 'plugin_mantisbt_project_latestissues';
 		}
