@@ -58,21 +58,21 @@ class gravatarPlugin extends Plugin {
 			if (isset($_SERVER['HTTPS']))
 				$url = 'https://secure.gravatar.com/avatar/';
 
-			$usize = 28;
+			$image_size = 28;
 
 			if ($size == 'l')
-				$usize = '130';
+				$image_size = 130;
 			if ($size == 'm')
-				$usize = 48;
+				$image_size = 48;
 			if ($size == 's')
-				$usize = 28;
+				$image_size = 28;
 			if ($size == 'xs')
-				$usize = 16;
+				$image_size = 16;
 
-			$url .= $hash.'?s='. $usize;
+			$url .= $hash.'?s='. $image_size;
 			$class = 'img-shadow-'.$size;
 			$code = '<div class="'.$class.'"><img src="'.$url.'" class="gravatar" alt="" /></div>';
-			if ($size == 'l') {
+			if ($size == 'l' && (user_getid() == $user_id)) {
 				$code .= '<div class="align-center"><i><a href="http://www.gravatar.com/">'._('Change face').'</a></i></div>';
 			}
 			return $code;
