@@ -37,7 +37,7 @@ class ArtifactHtml extends Artifact {
 		$result = $this->getDetails();
 		$result = util_gen_cross_ref($result, $this->ArtifactType->Group->getID());
 		//$result = util_line_wrap( $result, 120,"\n");
-		$result = preg_replace('/\r|\n/', '<br />', $result);
+		$result = nl2br($result);
 
 		$title_arr = array();
 		if ($editable === true) {
@@ -85,7 +85,7 @@ class ArtifactHtml extends Artifact {
 				$text = db_result($result, $i, 'body');
 				$text = util_gen_cross_ref($text, $this->ArtifactType->Group->getID());
 				//$text = util_line_wrap( $text, 120,"\n");
-				$text = preg_replace('/\r|\n/', '<br />', $text);
+				$text = nl2br($text);
 				echo "<br /><br />".$text.'</td></tr>';
 			}
 
