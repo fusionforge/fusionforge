@@ -3,6 +3,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -153,11 +154,11 @@ function show_sitestats() {
 	$gforge = new FusionForge();
 	$return = '<p>';
 	$return .= _('Hosted Projects').': ';
-	if (forge_get_config('use_trove')) {
+	if (forge_get_config('use_project_full_list')) {
 		$return .= '<a href="softwaremap/full_list.php">';
 	}
 	$return .= '<strong>'.number_format($gforge->getNumberOfPublicHostedProjects()).'</strong>';
-	if (forge_get_config('use_trove')) {
+	if (forge_get_config('use_project_full_list')) {
 		$return .= '</a>';
 	}
 	$return .= "</p><p>";
@@ -193,8 +194,10 @@ function show_newest_projects() {
 		$t_return = $return;
 		$return = '<table summary="">' . $t_return . "</table>\n"; 
 	}
-	
-	$return .= '<div class="align-center">'.util_make_link ('/softwaremap/full_list.php', _('All newest projects'), array('class' => 'dot-link')).'</div>';
+
+	if (forge_get_config('use_project_full_list')) {
+		$return .= '<div class="align-center">'.util_make_link ('/softwaremap/full_list.php', _('All newest projects'), array('class' => 'dot-link')).'</div>';
+	}
 	return $return;
 }
 
