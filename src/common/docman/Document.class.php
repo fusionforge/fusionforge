@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -791,7 +792,7 @@ class Document extends Error {
 			$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').
-				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&amp;view=listfile&amp;dirid='.$this->getDocGroupID());
+				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
 
 			util_send_message('', $subject, $body, '', $BCC);
 		}
