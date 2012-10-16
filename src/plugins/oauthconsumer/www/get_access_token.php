@@ -8,11 +8,11 @@ oauthconsumer_CheckUser();
 $providers = OAuthProvider::get_all_oauthproviders();
 if(count($providers)>0)	{
 ?>
-	<p>To get an access token, there are three steps involved: </p> 
-    <ol><li>Get an unauthorized request token 
-    <li>Authorize the request token 
+	<p>To get an access token, there are three steps involved: </p>
+    <ol><li>Get an unauthorized request token
+    <li>Authorize the request token
     <li>Exchange the authorized request token for an access token </ol>
-    Select a provider from the list below and get started!</p> 
+    Select a provider from the list below and get started!</p>
 	<form action="get_access_token.php" method="post">
 	
 	<select name=providers>
@@ -23,7 +23,7 @@ if(count($providers)>0)	{
 	<input type="submit" value="<?php echo _('Select') ?>"/>
 	</form>
 	
-	<?php 
+	<?php
 	$f_provider_name = "Provider";
 	$f_provider_id = getStringFromPost('providers');
 	if($f_provider_id)	{
@@ -36,7 +36,7 @@ if(count($providers)>0)	{
 		$f_access_token_url = $f_provider->get_access_token_url();
 	}
 	?>
-	<br><br>
+	<br /><br />
 	<form action="get_access_token.php" method="post">
 	<?php echo '<input type="hidden" name="plugin_oauthconsumer_get_request_token" value="'.form_generate_key().'"/>' ?>
 	<?php echo '<input type="hidden" name="providers" value="'.$f_provider_id.'"/>' ?>
@@ -66,17 +66,17 @@ if(count($providers)>0)	{
 		<td><input name="access_token_url" maxlength="250" size="80" value="<?php echo $f_access_token_url ?>"/></td>
 		</tr>
 		
-	</table><br>
+	</table><br />
 	<?php
 	if((strcasecmp(substr($f_request_token_url, 0, 5),"https")==0) ||
 		(strcasecmp(substr($f_authorization_url, 0, 5),"https")==0) ||
 		(strcasecmp(substr($f_access_token_url, 0, 5),"https")==0))	{?>
-		<input type="checkbox" name="not_verify_ssl">Do not verify SSL Certificate</input>	<br><br>
+		<input type="checkbox" name="not_verify_ssl">Do not verify SSL Certificate</input>	<br /><br />
 	<?php
 	}
-	$url_string = $f_request_token_url?"(from ".$f_request_token_url.")":""; 
+	$url_string = $f_request_token_url?"(from ".$f_request_token_url.")":"";
 	echo _('<b>Step 1: </b>Get Request Token '.$url_string) ?>
-	<br>
+	<br />
 	<input type="submit" value="<?php echo _('Go') ?>" />
 	</form>
 	
@@ -130,9 +130,9 @@ if(count($providers)>0)	{
 		parse_str($request_token_string, $request_token);
 		
 		if(array_key_exists('oauth_token', $request_token)&&array_key_exists('oauth_token_secret', $request_token))	{
-			echo _("New request token received!<br>");
-			echo _("Request Token Key : ".$request_token['oauth_token']."<br>");
-			echo _("Request Token Secret : ".$request_token['oauth_token_secret']."<br><br>");
+			echo _("New request token received!<br />");
+			echo _("Request Token Key : ".$request_token['oauth_token']."<br />");
+			echo _("Request Token Secret : ".$request_token['oauth_token_secret']."<br /><br />");
 			//print_r($request_token);
 			setcookie('PROVIDER', $f_provider_id, 0, '', '', false, true);
 			setcookie('OAUTH_TOKEN', $request_token['oauth_token'], 0, '', '', false, true);
@@ -149,12 +149,12 @@ if(count($providers)>0)	{
 		
 		<form action="get_access_token.php" method="post">
 		<?php echo '<input type="hidden" name="authorization_url" value="'.$new_user_authorization_url.'"/>' ?>
-		<?php 
+		<?php
 		echo _('<b>Step 2: </b>Authorize the Request Token (from '.$f_authorize_url.")") ?>
-		<br>
+		<br />
 		<input type="submit" value="<?php echo _('Go') ?>" />
 		</form>
-		<?php 
+		<?php
 		//header("Location:".$new_user_authorization_url);
 		}else 	{
 			echo $HTML->error_msg(htmlspecialchars("Error in retrieving request token"));
@@ -170,7 +170,7 @@ if(count($providers)>0)	{
 	echo '<p>'. _('There are no OAuth Providers registered in the database currently. Please ask your forge administer to create one.').'</p>';
 }
 
-echo'<br><br>';
+echo'<br /><br />';
 
 echo util_make_link('/plugins/'.$pluginname.'/providers.php', _('OAuth Providers')). ' <br />';
 echo util_make_link('/plugins/'.$pluginname.'/access_tokens.php', _('Access tokens')).'<br /> ';
