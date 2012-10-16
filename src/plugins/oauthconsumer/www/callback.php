@@ -68,13 +68,12 @@ if($f_provider_id)	{
 	$new_access_token = new OAuthAccessToken($f_provider_id, $access_token_array['oauth_token'], $access_token_array['oauth_token_secret'], $userid);
 	$new_access_token->write_to_db();
 	
-	echo _("New access token received and saved!"."<br />");
-	echo _("Access Token Key : ".$access_token_array['oauth_token']."<br />");
-	echo _("Access Token Secret : ".$access_token_array['oauth_token_secret']."<br />");
-
+	echo _("New access token received and saved!") . "<br />";
+	echo _("Access Token Key : ".$access_token_array['oauth_token']) . "<br />";
+	echo _("Access Token Secret : ".$access_token_array['oauth_token_secret']) . "<br />";
 }
 
-echo'<br /><br />';
+echo '<br /><br />';
 
 echo util_make_link('/plugins/'.$pluginname.'/providers.php', _('OAuth Providers')). ' <br />';
 echo util_make_link('/plugins/'.$pluginname.'/get_access_token.php', _('Get Access tokens')).'<br /> ';
