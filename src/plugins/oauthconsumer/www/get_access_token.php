@@ -12,7 +12,7 @@ if(count($providers)>0)	{
     <ol><li>Get an unauthorized request token
     <li>Authorize the request token
     <li>Exchange the authorized request token for an access token </ol>
-    Select a provider from the list below and get started!</p>
+    <p>Select a provider from the list below and get started!</p>
 	<form action="get_access_token.php" method="post">
 
 	<select name=providers>
@@ -131,8 +131,8 @@ if(count($providers)>0)	{
 
 		if(array_key_exists('oauth_token', $request_token)&&array_key_exists('oauth_token_secret', $request_token))	{
 			echo _("New request token received!") . "<br />";
-			echo _("Request Token Key : ".$request_token['oauth_token']) . "<br />";
-			echo _("Request Token Secret : ".$request_token['oauth_token_secret']") . "<br /><br />";
+			echo _("Request Token Key") . _(": ") . $request_token['oauth_token'] . "<br />";
+			echo _("Request Token Secret") . _(": ") . $request_token['oauth_token_secret'] . "<br /><br />";
 			//print_r($request_token);
 			setcookie('PROVIDER', $f_provider_id, 0, '', '', false, true);
 			setcookie('OAUTH_TOKEN', $request_token['oauth_token'], 0, '', '', false, true);
