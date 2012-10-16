@@ -1,7 +1,8 @@
 <?php
-/*
+/**
  * Copyright (C) 2008-2009 Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -19,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The Full List ("Contribution") has not been tested and/or
@@ -130,7 +131,9 @@ for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
 		// extra description
 		print '</td></tr><tr class="top"><td>';
 		// list all trove categories
-		print trove_getcatlisting($row_grp['group_id'],0,1,1);
+		if (forge_get_config('use_trove')) {
+			print trove_getcatlisting($row_grp['group_id'],0,1,1);
+		}
 		print '</td>';
 		print '<td class="bottom align-right"><br />'._('Register Date:').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong></td>';
 		print '</tr>';
