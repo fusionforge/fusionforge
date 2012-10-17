@@ -504,6 +504,132 @@ class HgPlugin extends SCMPlugin {
 		db_commit();
 	}
 
+	function scm_add_repo(&$params) {
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false ;
+		}
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		if (!isset($params['repo_name'])) {
+			return false;
+		}
+
+		if ($params['repo_name'] == $project->getUnixName()) {
+			$params['error_msg'] = sprintf(_('A repository %s already exists'), $params['repo_name']);
+			return false;
+		}
+
+		if (! util_is_valid_repository_name($params['repo_name'])) {
+			$params['error_msg'] = _('This repository name is not valid');
+			return false;
+		}
+
+		$result = db_query_params('SELECT count(*) AS count FROM plugin_scmhg_repos WHERE group_id=$1 AND repo_name = $2',
+						array ($params['group_id'], $params['repo_name']));
+		if (! $result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+		if (db_result($result, 0, 'count')) {
+			$params['error_msg'] = sprintf(_('A repository %s already exists'), $params['repo_name']);
+			return false;
+		}
+
+		$description = '';
+		$clone = '';
+		if (isset($params['clone'])) {
+			$clone = $params['clone'];
+			// Verify if repository used for the clone exists?
+			$description = sprintf(_('Clone of %s repository'), $params['clone']);
+		}
+		if (isset($params['description'])) {
+			$description = $params['description'];
+		}
+
+		$result = db_query_params ('INSERT INTO plugin_scmhg_repos (group_id, repo_name, description, clone) VALUES ($1, $2, $3, $4)',
+						array ($params['group_id'], $params['repo_name'], $description, $clone));
+		if (! $result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+
+		plugin_hook ("scm_admin_update", $params);
+		return true;
+	}
+
+	function scm_admin_buttons(&$params) {
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false ;
+		}
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		global $HTML;
+
+		$HTML->addButtons(
+				'/scm/admin/?group_id='.$params['group_id'].'&amp;form_create_repo=1',
+				_("Add Repository"),
+				array('icon' => html_image('ic/scm_repo_add.png'))
+		);
+	}
+
+	function scm_admin_form(&$params) {
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false ;
+		}
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+		
+		$project_name = $project->getUnixName();
+		
+		$select_repo = '<select name="frontpage">' . "\n";//array($project->getPublicName());
+		$result = db_query_params('SELECT repo_name FROM plugin_scmhg_repos WHERE group_id=$1',
+						array ($params['group_id']));
+		if (! $result) {
+			//$params['error_msg'] = db_error();
+			return false;
+		}
+		$select_repo = '<select name="clone">' . "\n";
+		$select_repo .= '<option value="">'._('None').'</option>' . "\n";
+		$select_repo .= '<option value="'.$project_name.'">'.$project_name.'</option>' . "\n";
+		while($data = db_fetch_array($result)) {
+			$select_repo .= '<option value="'.$data['repo_name'].'">'.$data['repo_name'].'</option>' . "\n";
+		}
+		$select_repo .= '</select>' . "\n";
+		
+		session_require_perm('project_admin', $params['group_id']);
+
+		$adminheadertitle = sprintf(_('Create SCM repository for project %1$s'), $project_name);
+		project_admin_header(array('title'=>$adminheadertitle, 'group'=>$params['group_id']));
+
+		?>
+<form name="form_create_repo"
+	action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<input type="hidden" name="group_id" value="<?php echo $params['group_id'] ?>" />
+<input type="hidden" name="create_repository" value="1" />
+<p><strong><?php echo _('Repository name:') ?></strong><?php echo utils_requiredField(); ?><br />
+<input type="text" required="required" size="20" name="repo_name" value="" /></p>
+<p><strong><?php echo _('Description')._(':'); ?></strong><br />
+<input type="text" size="60" name="description" value="" /></p>
+<p><strong><?php echo _('Cloned from:') ?></strong><br />
+<?php echo $select_repo ?></p>
+<input type="submit" name="cancel" value="<?php echo _('Cancel') ?>" />
+<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
+</form>
+
+		<?php
+
+		project_admin_footer(array());
+	}
+
+
 }
 
 // Local Variables:
