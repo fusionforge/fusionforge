@@ -8,6 +8,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011-2012, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -880,7 +881,7 @@ class Document extends Error {
 				}
 			}
 		}
-
+		$this->fetchData($this->getID());
 		$this->sendNotice(false);
 		return true;
 	}
@@ -890,7 +891,7 @@ class Document extends Error {
 	 *
 	 * @param	boolean	true = new document (default value)
 	 */
-	function sendNotice($new=true) {
+	function sendNotice($new = true) {
 		$BCC = $this->Group->getDocEmailAddress();
 		if ($this->isMonitoredBy('ALL')) {
 			$BCC .= $this->getMonitoredUserEmailAddress();
@@ -901,21 +902,25 @@ class Document extends Error {
 				$status = _('New document');
 			} else {
 				$status = _('Updated document').' '._('by').' ' . $sess->getRealName();
-			}
-			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
-			$body = _('Project:').' '.$this->Group->getPublicName()."\n";
-			$body .= _('Directory:').' '.$this->getDocGroupName()."\n";
-			$body .= _('Document title:').' '.$this->getName()."\n";
-			$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
-			$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
-			if (!$new) {
-				$body .= _('Updated By:').' '. $sess->getRealName ();
-			}
-			$body .= "\n\n-------------------------------------------------------\n".
-				_('For more info, visit:').
-				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
+			$BCCarray = explode(',',$BCC);
+			foreach ($BCCarray as $dest_email) {
+				if ($new) {
+					$status = _('New document');
+				} else {
+					$status = _('Updated document');
+				}
+				$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
+				$body = _('Project:').' '.$this->Group->getPublicName()."\n";
+				$body .= _('Directory:').' '.$this->getDocGroupName()."\n";
+				$body .= _('Document title:').' '.$this->getName()."\n";
+				$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
+				$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
+				$body .= "\n\n-------------------------------------------------------\n".
+					_('For more info, visit:').
+					"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
 
-			util_send_message('', $subject, $body, '', $BCC);
+				util_send_message($dest_email, $subject, $body, 'noreply@'.forge_get_config('web_host'), '', _('Docman'));
+			}
 		}
 
 		return true;
