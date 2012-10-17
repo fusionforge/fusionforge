@@ -1,7 +1,7 @@
 #! /usr/bin/php
 <?php
 /**
- * GForge Cron Job
+ * Fusionforge Cron Job
  *
  * The rest Copyright 2002-2005 (c) GForge Team
  * Copyright 2012, Franck Villaume - TrivialDev
@@ -137,19 +137,19 @@ foreach($active_projects as $project) {
 		//
 		//	Write the file back out to the project home dir
 		//
-		$fw = fopen(forge_get_config('groupdir_prefix')."/".$groupname."/htdocs/index.html", 'w');
+		$fw = fopen(forge_get_config('groupdir_prefix').'/'.$groupname.'/htdocs/index.html', 'w');
 		fwrite($fw, $contents);
 		fclose($fw);
 	}
 
 	if (forge_get_config('use_manual_uploads')) {
-		$incoming = forge_get_config('groupdir_prefix')."/".$groupname."/incoming";
+		$incoming = forge_get_config('groupdir_prefix').'/'.$groupname.'/incoming';
 		if (!is_dir($incoming)) {
 			@mkdir($incoming);
 		}
 	}
 
-	system("chown -R ".forge_get_config('apache_user').":".forge_get_config('apache_group')." ".forge_get_config('groupdir_prefix')."/".$groupname);
+	system('chown -R '.forge_get_config('apache_user').':'.forge_get_config('apache_group').' '.forge_get_config('groupdir_prefix').'/'.$groupname);
 }
 
 cron_entry(25,$err);
