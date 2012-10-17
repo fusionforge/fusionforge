@@ -53,15 +53,22 @@ $errorFlag = 0;
 foreach ($resarr as $item) {
 	$compt++;
 	$timestart = microtime_float();
-	$d = new Document($item['group_id'], $item['doc_id']);
-	$data = $d->getFileData();
+	$group = group_get_object($item['group_id']);
+	$d = new Document($group, $item['docid']);
+	$datafile = tempnam(forge_get_config('data_path'), 'tmp');
+	$fh = fopen($datafile, 'w');
+	fwrite($fh, $d->getFileData(false));
+	fclose($fh);
 	$lenin = $d->getFileSize();
-	$res = $p->get_parse_data($data, $item['title'], $item['description'], $item['filetype'], $item['filename']);
+	$res = $p->get_parse_data($datafile, htmlspecialchars($item['title']), htmlspecialchars($item['description']), $item['filetype'], $item['filename']);
 	$len = strlen($res);
+	if (file_exists($datafile)) {
+		unlink($datafile);
+	}
 	$resUp = db_query_params('UPDATE doc_data SET data_words=$1 WHERE docid=$2',
-			 array ($res, $item["docid"]));
+			 array ($res, $item['docid']));
 	if (!$resUp) {
-		die("unable to update data: ".db_error());
+		die('unable to update data: '.db_error());
 	}
 	$timeend = microtime_float();
 	$timetrait = $timeend - $timestart;
@@ -81,5 +88,3 @@ function microtime_float() {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
