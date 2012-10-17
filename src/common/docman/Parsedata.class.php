@@ -59,7 +59,7 @@ class Parsedata {
 				unlink($filename);
 			}
 		}
-		// always parse titre and description
+		// always parse title and description
 		$data2 = utf8_decode("$title $description");
 		// temporary file for treatement
 		$filename = tempnam("/tmp", "tmp");
