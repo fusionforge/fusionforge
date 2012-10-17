@@ -59,7 +59,7 @@ foreach ($resarr as $item) {
 	}
 	$data = base64_decode(db_result($res, 0, 'data'));
 	$lenin = strlen($data);
-	$res = $p->get_parse_data($data, $item["title"], $item["description"], $item["filetype"]);
+	$res = $p->get_parse_data($data, htmlspecialchars($item['title']), htmlspecialchars($item['description']), $item["filetype"]);
 	$len = strlen($res);
 	$resUp = db_query_params('UPDATE doc_data SET data_words=$1 WHERE docid=$2',
 			 array ($res, $item["docid"]));
