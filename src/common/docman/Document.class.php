@@ -8,6 +8,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011-2012, Franck Villaume - TrivialDev
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -60,7 +61,7 @@ class Document extends Error {
 	function __construct(&$Group, $docid = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setNotValidGroupObjectError();
+			$this->setError('Document:: '. _('No Valid Group Object'));
 			return false;
 		}
 		if ($Group->isError()) {
@@ -417,10 +418,13 @@ class Document extends Error {
 	/**
 	 * getFileData - the filedata of this document.
 	 *
+	 * @param	boolean	update the download flag or not. default is true
 	 * @return	string	The filedata.
 	 */
-	function getFileData() {
-		$this->downloadUp();
+	function getFileData($download = true) {
+		if ($download)
+			$this->downloadUp();
+
 		return file_get_contents(DocumentStorage::instance()->get($this->getID()));
 	}
 
@@ -879,7 +883,7 @@ class Document extends Error {
 			DocumentStorage::instance()->delete($this->getID())->commit();
 			DocumentStorage::instance()->store($this->getID(), $data);
 		}
-
+		$this->fetchData($this->getID());
 		$this->sendNotice(false);
 		return true;
 	}
@@ -904,21 +908,25 @@ class Document extends Error {
 				$status = _('New document');
 			} else {
 				$status = _('Updated document').' '._('by').' ' . $sess->getRealName();
-			}
-			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
-			$body = _('Project')._(': ').$this->Group->getPublicName()."\n";
-			$body .= _('Directory:').' '.$this->getDocGroupName()."\n";
-			$body .= _('Document title:').' '.$this->getName()."\n";
-			$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
-			$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
-			if (!$new) {
-				$body .= _('Updated By:').' '. $sess->getRealName();
-			}
-			$body .= "\n\n-------------------------------------------------------\n".
-				_('For more info, visit:').
-				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
+			$BCCarray = explode(',',$BCC);
+			foreach ($BCCarray as $dest_email) {
+				if ($new) {
+					$status = _('New document');
+				} else {
+					$status = _('Updated document');
+				}
+				$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
+				$body = _('Project:').' '.$this->Group->getPublicName()."\n";
+				$body .= _('Directory:').' '.$this->getDocGroupName()."\n";
+				$body .= _('Document title:').' '.$this->getName()."\n";
+				$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
+				$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
+				$body .= "\n\n-------------------------------------------------------\n".
+					_('For more info, visit:').
+					"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
 
-			util_send_message('', $subject, $body, '', $BCC);
+				util_send_message($dest_email, $subject, $body, 'noreply@'.forge_get_config('web_host'), '', _('Docman'));
+			}
 		}
 		return true;
 	}
@@ -985,9 +993,9 @@ class Document extends Error {
 	 */
 	private function setValueinDB($column, $value) {
 		switch ($column) {
-			case "stateid":
-			case "doc_group":
-			case "download": {
+			case 'stateid':
+			case 'doc_group':
+			case 'download': {
 				$qpa = db_construct_qpa();
 				$qpa = db_construct_qpa($qpa, 'UPDATE doc_data SET ');
 				$qpa = db_construct_qpa($qpa, $column);
