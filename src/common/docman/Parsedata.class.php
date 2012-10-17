@@ -53,11 +53,11 @@ class Parsedata {
 		// always parse title, description, filename and filetype
 		$data1 = utf8_decode("$title $description $filename $filetype");
 		// temporary file for treatement
-		$filename = tempnam("/tmp", "tmp");
-		$handle = fopen($filename, "w");
+		$filename = tempnam(forge_get_config('data_path'), 'tmp');
+		$handle = fopen($filename, 'w');
 		fwrite($handle, $data1);
 		fclose($handle);
-		$cmd = $this->p_path.$this->parsers["text/plain"];
+		$cmd = $this->p_path.$this->parsers['text/plain'];
 		$cmd = "php -f $cmd $filename";
 		$rep1 = shell_exec($cmd);
 		// dont need to unlink the filename because parser_text already remove it
@@ -65,9 +65,9 @@ class Parsedata {
 	}
 
 	function get_parser_list($parser_path) {
-		$file = $parser_path."parser_list.txt";
+		$file = $parser_path.'parser_list.txt';
 		$rep = array();
-		$handle = fopen($file, "r");
+		$handle = fopen($file, 'r');
 		if ($handle) {
 			$buff = fread($handle, 2048);
 			$lines = explode("\n", $buff);
