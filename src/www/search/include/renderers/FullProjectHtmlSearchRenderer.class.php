@@ -75,6 +75,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * flush - overwrites the flush method from htmlrenderer
 	 */
 	function flush() {
+		$this->writeHeader();
 		$this->writeBody();
 		$this->writeFooter();
 	}
@@ -83,9 +84,13 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeBody - write the Body of the output
 	 */
 	function writeBody() {
-		$title = _('Entire project search');
-		site_project_header(array('title' => $title, 'group' => $this->groupId, 'toptab' => 'home'));
-		echo $this->getResult();
+		if (!$this->words) {
+			echo '<p class="error">'._('Error') . _(': ') . _('Please enter a term to search for').'</p>';
+		} elseif (!forge_get_config('use_fti') && (strlen($this->words) < 3)) {
+			echo '<p class="error">'._('Error') . _(': ') . _('Search must be at least three characters').'</p>';
+		} else {
+			echo $this->getResult();
+		}
 	}
 
 	/**

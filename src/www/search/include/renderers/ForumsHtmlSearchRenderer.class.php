@@ -114,7 +114,8 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * getSections - get the array of possible sections to search in
 	 *
-  	 * @return array sections
+	 * @param  int $groupId
+	 * @return array sections
 	 */
 	static function getSections($groupId) {
 		$userIsGroupMember = ForumsHtmlSearchRenderer::isGroupMember($groupId);

@@ -46,7 +46,7 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$this->tableHeaders = array(
 			_('Summary'),
-			_('Posted by'),
+			_('Submitted by'),
 			_('Post date'),
 		);
 	}
