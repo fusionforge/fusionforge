@@ -23,15 +23,53 @@
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfwww.'scm/include/scm_utils.php';
 require_once $gfcommon.'scm/SCMFactory.class.php';
 
+html_use_jquery();
+html_use_coolfieldset();
+
 $group_id = getIntFromRequest('group_id');
+$group = group_get_object($group_id);
+if (!$group || !is_object($group)) {
+    exit_no_group();
+} elseif ($group->isError()) {
+	exit_error($group->getErrorMessage(), 'scm');
+}
 
 // Check permissions
 session_require_perm('project_admin', $group_id);
 
-if (getStringFromRequest('submit')) {
+if (getStringFromRequest('form_create_repo')) {
+	$hook_params = array();
+	$hook_params['group_id'] = $group_id;
+	plugin_hook('scm_admin_form', $hook_params);
+	exit;
+}
+
+if (getStringFromRequest('create_repository')) {
+	if (getStringFromRequest('submit')) {
+		$repo_name = trim(getStringFromRequest('repo_name'));
+		$description = preg_replace('/[\r\n]/', ' ', getStringFromRequest('description'));
+		$clone = getStringFromRequest('clone');
+		$hook_params = array () ;
+		$hook_params['group_id'] = $group_id;
+		$hook_params['repo_name'] = $repo_name;
+		$hook_params['description'] = $description;
+		$hook_params['clone'] = $clone;
+		$hook_params['error_msg'] = '';
+		plugin_hook_by_reference ('scm_add_repo', $hook_params);
+		if ($hook_params['error_msg']) {
+			$error_msg = $hook_params['error_msg'];
+		}
+		else {
+			$feedback = sprintf(_('New repository %s is registered'), $repo_name);
+		}
+	}
+	// Else is a cancel
+}
+elseif (getStringFromRequest('submit')) {
 	$hook_params = array();
 	$hook_params['group_id'] = $group_id;
 
@@ -41,6 +79,9 @@ if (getStringFromRequest('submit')) {
 		foreach ($scm_list as $scm) {
 			if ($key == strstr($key, $scm . "_")) {
 				$hook_params[$key] = $value;
+			}
+			else {
+				$hook_params[$scm] = getArrayFromRequest($scm);
 			}
 		}
 		if ($key == strstr($key, "scm_")) {
@@ -54,8 +95,6 @@ if (getStringFromRequest('submit')) {
 	$scm_plugins = $SCMFactory->getSCMs();
 
 	if (in_array($scmradio, $scm_plugins)) {
-		$group =& group_get_object($group_id);
-
 		foreach ($scm_plugins as $plugin) {
 			$myPlugin = plugin_get_object($plugin);
 			if ($scmradio == $myPlugin->name) {
@@ -69,14 +108,27 @@ if (getStringFromRequest('submit')) {
 	plugin_hook("scm_admin_update", $hook_params);
 }
 
+$hook_params = array();
+$hook_params['group_id'] = $group_id;
+plugin_hook('scm_admin_buttons', $hook_params);
+
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 ?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("input[type=radio][name=scmradio]").change(function() {
+			$("input[type=radio][name=scmradio]").each(function () {
+				$('#div_'+$(this).val()).hide();
+			});
+			$('#div_'+$("input[type=radio][name=scmradio]:checked").val()).show();
+		});
+	});
+</script>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <?php
 
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
-	$group =& group_get_object($group_id);
 
 	$SCMFactory = new SCMFactory();
 	$scm_plugins = $SCMFactory->getSCMs();
