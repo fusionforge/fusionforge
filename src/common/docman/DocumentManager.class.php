@@ -2,7 +2,7 @@
 /**
  * FusionForge document manager
  *
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011-2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -49,7 +49,7 @@ class DocumentManager extends Error {
 	function DocumentManager(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setNotValidGroupObjectError();
+            $this->setError('DocumentManager:: '. _('No Valid Group Object'));
 			return false;
 		}
 		if ($Group->isError()) {
