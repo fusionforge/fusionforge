@@ -31,8 +31,7 @@ require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
-$engine_path = dirname(__FILE__).'/../common/docman/engine/';
-$p = new Parsedata($engine_path);
+$p = new Parsedata();
 
 $timestarttrait = microtime_float();
 // documents list
@@ -54,13 +53,13 @@ $errorFlag = 0;
 foreach ($resarr as $item) {
 	$compt++;
 	$timestart = microtime_float();
-	$doc_dataData = db_query_params('SELECT data from doc_data where docid = $1', array($item["docid"]));
+	$doc_dataData = db_query_params('SELECT data from doc_data where docid = $1', array($item['docid']));
 	if (!$doc_dataData) {
 		die("unable to get data: ".db_error());
 	}
 	$data1 = base64_decode($doc_dataData["data"]);
 	$lenin = strlen($data1);
-	$res = $p->get_parse_data($data1, $item["title"], $item["description"], $item["filetype"]);
+	$res = $p->get_parse_data($data1, htmlspecialchars($item['title']), htmlspecialchars($item['description']), $item["filetype"]);
 	$len = strlen($res);
 	$resUp = db_query_params('UPDATE doc_data SET data_words=$1 WHERE docid=$2',
 			 array ($res, $item["docid"]));
