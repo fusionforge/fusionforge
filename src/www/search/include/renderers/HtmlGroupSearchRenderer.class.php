@@ -24,6 +24,9 @@
 
 require_once $gfwww.'search/include/renderers/HtmlSearchRenderer.class.php';
 
+/**
+ *
+ */
 class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 
 	/** TODO: Find what for is $offset, looks like it's not used, added to remove warning
@@ -45,12 +48,13 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	/**
 	 * Constructor
 	 *
-	 * @param string $typeOfSearch type of the search (Software, Forum, People and so on)
-	 * @param string $words words we are searching for
-	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
-	 * @param object $searchQuery SearchQuery instance
-	 * @param int $groupId group id
+	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
+	 * @param string  $words        words we are searching for
+	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
+	 * @param object  $searchQuery  SearchQuery instance
+	 * @param int     $groupId      group id
+	 * @param string  $topTab
+	 * @return void
 	 */
 	function HtmlGroupSearchRenderer($typeOfSearch, $words, $isExact, $searchQuery, $groupId, $topTab = '') {
 		$this->HtmlSearchRenderer($typeOfSearch, $words, $isExact, $searchQuery);
@@ -62,8 +66,13 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-		site_project_header(array('title' => _('Search'), 'group' => $this->groupId, 'toptab' => $this->topTab));
-		parent::writeHeader();
+		$title = sprintf(_('Search results for “%1$s”'), $this->query['words']);
+		site_project_header(array('title' => $title, 'group' => $this->groupId, 'toptab' => $this->topTab));
+
+		printf (_('Tip: Use %s to get more precise results.'),
+			util_make_link('/search/advanced_search.php?group_id='.$this->groupId.'&amp;words='.
+				htmlspecialchars_decode($this->query['words']),
+				_('Advanced search')));
 	}
 
 	/**
@@ -88,6 +97,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	 * isGroupMember - returns if the logged in user is member of the current group
 	 *
 	 * @param int $groupId group id
+	 * @return bool
 	 */
 	static function isGroupMember($groupId) {
 		$Group = group_get_object($groupId);

@@ -306,7 +306,7 @@ function account_group_homedir($group) {
  * checkKeys() - Simple function that tries to check the validity of public ssh keys with a regexp.
  * Exits with an error message if an invalid key is found.
  *
- * @param	keys	A string with a set of keys to check. Each key is delimited by a carriage return.
+ * @param string $keys	A string with a set of keys to check. Each key is delimited by a carriage return.
  */
 function checkKeys($keys) {
 	$key = strtok($keys, "\n");

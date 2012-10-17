@@ -39,7 +39,6 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 *
 	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
 	 * @param string  $words        words we are searching for
-	 * @param int     $offset       offset
 	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
 	 * @param object  $searchQuery  SearchQuery instance
 	 */
@@ -97,12 +96,11 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 		$query =& $this->query;
 
-		$html = '<h2>'.sprintf(_('Search results for <em>%1$s</em>'), $query['words']).'</h2>';
 		if(!$searchQuery->getResult() || $searchQuery->getRowsCount() < 1) {
-			$html .= '<p><strong>'.sprintf(_('No matches found for <em>%1$s</em>'), $query['words']).'</strong></p>';
+			$html = '<p><strong>'.sprintf(_('No matches found for “%1$s”'), $query['words']).'</strong></p>';
 			$html .= db_error();
 		} else {
-			$html .= $GLOBALS['HTML']->listTableTop($this->tableHeaders);
+			$html = $GLOBALS['HTML']->listTableTop($this->tableHeaders);
 			$html .= $this->getRows();
 			$html .= $GLOBALS['HTML']->listTableBottom();
 		}

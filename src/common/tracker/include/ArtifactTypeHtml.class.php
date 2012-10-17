@@ -133,7 +133,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function adminFooter($params) {
-		echo $this->footer($params);
+		$this->footer($params);
 	}
 
 	function renderSubmitInstructions() {
@@ -146,6 +146,16 @@ class ArtifactTypeHtml extends ArtifactType {
 		return str_replace("\n","<br />", $msg);
 	}
 
+	/**
+	 * @param array  $selected
+	 * @param bool   $show_100
+	 * @param string $text_100
+	 * @param bool   $show_any
+	 * @param string $text_any
+	 * @param array  $types
+	 * @param bool   $status_show_100
+	 * @param string $mode
+	 */
 	function renderExtraFields($selected=array(),$show_100=false,$text_100='none',$show_any=false,$text_any='Any',$types=array(),$status_show_100=false,$mode='') {
 		$efarr = $this->getExtraFields($types);
 		//each two columns, we'll reset this and start a new row
@@ -168,7 +178,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			}
 		}
 
-		// 'DISPLAY' mode is for renderding in 'read-only' mode (for detail view).
+		// 'DISPLAY' mode is for rendering in 'read-only' mode (for detail view).
 		if ($mode === 'DISPLAY') {
 			$keys=array_keys($efarr);
 			for ($k=0; $k<count($keys); $k++) {

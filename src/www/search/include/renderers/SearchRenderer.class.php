@@ -39,10 +39,11 @@ class SearchRenderer extends Error {
 	/**
 	 * Constructor
 	 *
-	 * @param string $typeOfSearch type of search
-	 * @param string $words words we are searching for
-	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param string  $typeOfSearch type of search
+	 * @param string  $words        words we are searching for
+	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
+	 * @param         $searchQuery
+	 * @return void
 	 */
 	function SearchRenderer($typeOfSearch, $words, $isExact, $searchQuery) {
 		$this->query['typeOfSearch'] = $typeOfSearch;
@@ -57,5 +58,4 @@ class SearchRenderer extends Error {
 	 * This is an abstract method. It _MUST_ be implemented in children classes.
 	 */
 	function flush() {}
-
 }
