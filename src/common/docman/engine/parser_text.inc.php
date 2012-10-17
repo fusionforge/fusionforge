@@ -5,6 +5,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,12 +28,12 @@ require_once $gfcommon.'include/config.php';
 
 function parser_text($fichin) {
 	if (!is_file($fichin))
-		return "";
+		return '';
 
 	if (filesize($fichin) == 0)
-		return "";
+		return '';
 
-	$handle = fopen($fichin, "r");
+	$handle = fopen($fichin, 'r');
 	$buff = fread($handle, filesize($fichin));
 
 	// tout en minuscules
@@ -44,14 +45,14 @@ function parser_text($fichin) {
 
 	// élimination d'éventuels caractères unicode encore présents
 	if (function_exists('mb_convert_encoding')) {
-		$buff = mb_convert_encoding($buff, "ascii");
+		$buff = mb_convert_encoding($buff, 'ascii');
 	}
 
 	// élimination caractères avec accents
 	// et caractères spéciaux
 	$buff = suppression_diacritics($buff);
 	// tous les mots dans un tableau
-	$words = explode(" ", $buff);
+	$words = explode(' ', $buff);
 	// élimination des doublons
 	$words = array_unique($words);
 	// envoi du résultat sur stdout
@@ -60,9 +61,9 @@ function parser_text($fichin) {
 }
 
 function print_list($list) {
-	$rep = "";
+	$rep = '';
 	foreach ($list as $el) {
-		if (strlen($el) > 1) $rep .= "$el ";
+		if (strlen($el) > 1) $rep .= $el.' ';
 	}
 	return $rep;
 }
@@ -78,7 +79,7 @@ function microtime_float() {
 	return ((float)$usec + (float)$sec);
 }
 
-function print_debug ($text) {
+function print_debug($text) {
 	echo "$text <br />\n";
 	ob_flush();
 }

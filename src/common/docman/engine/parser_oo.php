@@ -28,7 +28,7 @@ require dirname(__FILE__).'/../../include/env.inc.php';
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
 if ($argc != 2) {
-	echo "Usage : parser_oo.php <filename>\n";
+	echo 'Usage : parser_oo.php <filename>'."\n";
 	exit(1);
 }
 
@@ -38,7 +38,7 @@ if (!is_file($fichin))
 
 $zip = new ZipArchive;
 if ($zip->open($fichin) === TRUE) {
-	$output_dir = tempnam(forge_get_config('data_path'), "tmp");
+	$output_dir = tempnam(forge_get_config('data_path'), 'tmp');
 	unlink($output_dir);
 	mkdir($output_dir);
 	$zip->extractTo($output_dir, array('content.xml'));
@@ -50,7 +50,7 @@ if ($zip->open($fichin) === TRUE) {
 // transformer le context.xml en fichier txt
 $regexp_oo = "sed -e 's/<[^>]*>//g;s/&lt;/</g;s/&gt;/>/g;s/&apos;/'\"'\"'/g;s/&quot;/\"/g;s/&amp;/\&/g'";
 
-$cmd = $regexp_oo." ".$output_dir."/content.xml > ".$output_dir."/content.xml.txt";
+$cmd = $regexp_oo.' '.$output_dir.'/content.xml > '.$output_dir.'/content.xml.txt';
 
 $res = shell_exec($cmd);
 echo parser_text($output_dir.'/content.xml.txt');
@@ -63,5 +63,3 @@ rmdir($output_dir);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
