@@ -49,7 +49,7 @@ class DocumentManager extends Error {
 	function DocumentManager(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-            $this->setError('DocumentManager:: '. _('No Valid Group Object'));
+			$this->setError('DocumentManager:: '. _('No Valid Group Object'));
 			return false;
 		}
 		if ($Group->isError()) {

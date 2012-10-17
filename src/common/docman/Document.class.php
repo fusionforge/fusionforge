@@ -63,7 +63,7 @@ class Document extends Error {
 	function Document(&$Group, $docid = false, $arr = false, $engine = '') {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-            $this->setError('Document:: '. _('No Valid Group Object'));
+			$this->setError('Document:: '. _('No Valid Group Object'));
 			return false;
 		}
 		if ($Group->isError()) {
