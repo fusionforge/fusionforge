@@ -4872,6 +4872,7 @@ tests/func/Forums/forumsTest.php -text
 tests/func/News/newsTest.php -text
 tests/func/PluginsBlocks/blocksTest.php -text
 tests/func/PluginsOnlineHelp/contextualHelpTest.php -text
+tests/func/PluginsScmGit/gitTest.php -text
 tests/func/PluginsSvnTracker/trackerTest.php -text
 tests/func/RBAC/rbacTest.php -text
 tests/func/README.TXT -text
