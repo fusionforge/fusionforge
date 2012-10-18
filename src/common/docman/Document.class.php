@@ -903,28 +903,24 @@ class Document extends Error {
 			$BCC .= $dg->getMonitoredUserEmailAddress();
 		}
 		if (strlen($BCC) > 0) {
-			$sess = session_get_user();
+			$session = session_get_user();
 			if ($new) {
 				$status = _('New document');
 			} else {
-				$status = _('Updated document').' '._('by').' ' . $sess->getRealName();
+				$status = _('Updated document').' '._('by').' ' . $session->getRealName();
+			}
+			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
+			$body = _('Project:').' '.$this->Group->getPublicName()."\n";
+			$body .= _('Directory:').' '.$this->getDocGroupName()."\n";
+			$body .= _('Document title:').' '.$this->getName()."\n";
+			$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
+			$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
+			$body .= "\n\n-------------------------------------------------------\n".
+				_('For more info, visit:').
+				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
+
 			$BCCarray = explode(',',$BCC);
 			foreach ($BCCarray as $dest_email) {
-				if ($new) {
-					$status = _('New document');
-				} else {
-					$status = _('Updated document');
-				}
-				$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
-				$body = _('Project:').' '.$this->Group->getPublicName()."\n";
-				$body .= _('Directory:').' '.$this->getDocGroupName()."\n";
-				$body .= _('Document title:').' '.$this->getName()."\n";
-				$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
-				$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
-				$body .= "\n\n-------------------------------------------------------\n".
-					_('For more info, visit:').
-					"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
-
 				util_send_message($dest_email, $subject, $body, 'noreply@'.forge_get_config('web_host'), '', _('Docman'));
 			}
 		}
@@ -974,6 +970,7 @@ class Document extends Error {
 		$this->clearMonitor();
 		return true;
 	}
+
 
 	/**
 	 * downloadUp - +1 on download column
