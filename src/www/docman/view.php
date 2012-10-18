@@ -92,7 +92,7 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 
 	if ( $nested_groups != NULL ) {
 		$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
-		$file = forge_get_config('data_path').'/'.$filename;
+		$file = '/tmp/'.$filename;
 		$zip = new ZipArchive;
 		if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
 			exit_error(_('Unable to open zip archive for backup'),'docman');
