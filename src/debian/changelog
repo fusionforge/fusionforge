@@ -1,3 +1,9 @@
+fusionforge (5.2-1+20121018) unstable; urgency=low
+
+  * New SVN snapshot.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 18 Oct 2012 18:48:39 +0200
+
 fusionforge (5.2-1) unstable; urgency=low
 
   * Let's call this 5.2 (and return to non-native packaging).
