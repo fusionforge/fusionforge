@@ -342,6 +342,12 @@ table.full {
 	margin: 0 0 0 1em;
 }
 
+#globalWrapper #toc ul li, #globalWrapper .toc ul li {
+        margin:0em 0em 0.1em 0em;
+        list-style-image:none;
+        list-style-type:none;
+}
+
 /* Progress bargraph (trackers) */
 table.progress {
 	border: 1px solid #d7d7d7;

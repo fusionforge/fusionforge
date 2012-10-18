@@ -71,7 +71,7 @@ class projects_hierarchyPlugin extends Plugin {
 				break;
 			}
 			case "group_delete": {
-				if ($params['group']->usesPlugins($this->name)) {
+				if ($params['group']->usesPlugin($this->name)) {
 					if ($this->remove($params['group_id'])) {
 						$returned = true;
 					}

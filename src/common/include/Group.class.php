@@ -1570,11 +1570,12 @@ class Group extends Error {
 					array($this->getID()));
 
 		// unlink roles from this project
-		$ra = RoleAnonymous::getInstance();
-		$rl = RoleLoggedIn::getInstance();
-		$ra->unlinkProject($this);
-		$rl->unlinkProject($this);
-		// @todo : unlink all the other roles created in the project...
+		foreach ($this->getRoles() as $r) {
+			if ($r->getHomeProject() == NULL
+			    || $r->getHomeProject()->getID() != $this->getID()) {
+				$r->unlinkProject($this);
+			}
+		}
 
 		//
 		//	Delete Trackers

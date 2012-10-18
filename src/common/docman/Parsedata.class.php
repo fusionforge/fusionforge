@@ -6,6 +6,7 @@
  * Copyright 2009-2010, Franck Villaume - Capgemini
  * Copyright 2011, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -59,7 +60,7 @@ class Parsedata {
 				unlink($filename);
 			}
 		}
-		// always parse titre and description
+		// always parse title and description
 		$data2 = utf8_decode("$title $description");
 		// temporary file for treatement
 		$filename = tempnam("/tmp", "tmp");
@@ -69,6 +70,9 @@ class Parsedata {
 		$cmd = $this->p_path.$this->parsers["text/plain"];
 		$cmd = "php -f $cmd $filename";
 		$rep1 = shell_exec($cmd);
+		if ( file_exists ($filename ) ) {
+			unlink($filename);
+		}
 		// dont need to unlink the filename because parser_text already remove it
 		return preg_replace("/\n/", " ", "$rep $rep1");
 	}
