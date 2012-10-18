@@ -195,7 +195,9 @@ function show_newest_projects() {
 		$return = '<table summary="">' . $t_return . "</table>\n";
 	}
 
-	$return .= '<div class="align-center">'.util_make_link ('/softwaremap/full_list.php', _('All newest projects'), array('class' => 'dot-link')).'</div>';
+	if (forge_get_config('use_project_full_list')) {
+		$return .= '<div class="align-center">'.util_make_link ('/softwaremap/full_list.php', _('All newest projects'), array('class' => 'dot-link')).'</div>';
+	}
 	return $return;
 }
 
