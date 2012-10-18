@@ -3,5 +3,4 @@ etc/gforge/plugins/scmgit
 @PLUGIN_PATH@/scmgit/cgi-bin
 @PLUGIN_PATH@/scmgit/common
 @PLUGIN_PATH@/scmgit/www
-usr/share/gforge/www/plugins/scmgit
 @DATA_PATH@/chroot/scmrepos/git
