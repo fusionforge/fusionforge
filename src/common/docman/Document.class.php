@@ -902,6 +902,7 @@ class Document extends Error {
 				$status = _('New document');
 			} else {
 				$status = _('Updated document').' '._('by').' ' . $sess->getRealName();
+			}
 			$BCCarray = explode(',',$BCC);
 			foreach ($BCCarray as $dest_email) {
 				if ($new) {
