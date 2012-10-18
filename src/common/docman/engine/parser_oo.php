@@ -4,6 +4,7 @@
  * FusionForge document search engine
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -37,7 +38,10 @@ if (!is_file($fichin))
 
 $zip = new ZipArchive;
 if ($zip->open($fichin) === TRUE) {
-	$output_dir = tempnam(forge_get_config('data_path'), "tmp");
+	$output_dir = tempnam("/tmp", "tmp");
+	if (file_exists($output_dir))
+		unlink($output_dir);
+
 	unlink($output_dir);
 	mkdir($output_dir);
 	$zip->extractTo($output_dir, array('content.xml'));
