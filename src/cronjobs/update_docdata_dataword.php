@@ -57,7 +57,7 @@ foreach ($resarr as $item) {
 	if (!$doc_dataData) {
 		die("unable to get data: ".db_error());
 	}
-	$data1 = base64_decode($doc_dataData["data"]);
+	$data1 = base64_decode(db_result($doc_dataData, 0, 'data');
 	$lenin = strlen($data1);
 	$res = $p->get_parse_data($data1, htmlspecialchars($item['title']), htmlspecialchars($item['description']), $item["filetype"]);
 	$len = strlen($res);
