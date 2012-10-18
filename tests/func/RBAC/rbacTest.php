@@ -562,5 +562,23 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("Temporary role"));
+
+		// Non-regression test
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Display Full Project List/Edit Projects");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=SubProject");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Permanently Delete Project");
+		$this->waitForPageToLoad("30000");
+		$this->click("sure");
+		$this->click("reallysure");
+		$this->click("reallyreallysure");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Home");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("SubProject"));
 	}
 }
