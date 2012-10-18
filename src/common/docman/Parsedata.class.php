@@ -5,6 +5,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2010, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -66,6 +67,9 @@ class Parsedata {
 		$cmd = $this->p_path.$this->parsers["text/plain"];
 		$cmd = "php -f $cmd $filename";
 		$rep1 = shell_exec ($cmd);
+		if ( file_exists ($filename ) ) {
+			unlink($filename);
+		}
 		// dont need to unlink the filename because parser_text already remove it
 		return preg_replace("/\n/", " ", "$rep $rep1");
 	}
