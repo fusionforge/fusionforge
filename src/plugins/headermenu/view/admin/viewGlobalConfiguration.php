@@ -43,7 +43,7 @@ jQuery(document).ready(function() {
 
 //]]></script>
 
-<?
+<?php
 $linksArray = $headermenu->getAllAvailableLinks();
 if (sizeof($linksArray)) {
 	echo $HTML->boxTop(_('Manage available links'));

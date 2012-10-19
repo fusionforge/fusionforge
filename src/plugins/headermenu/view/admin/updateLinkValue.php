@@ -44,7 +44,7 @@ jQuery(document).ready(function() {
 
 //]]></script>
 
-<?
+<?php
 $linkValues = $headermenu->getLink($linkId);
 if (is_array($linkValues)) {
 	echo '<form method="POST" name="updateLink" action="index.php?type=globaladmin&action=updateLinkValue">';
