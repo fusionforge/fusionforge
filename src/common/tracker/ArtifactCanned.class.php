@@ -72,11 +72,11 @@ class ArtifactCanned extends Error {
 	}
 
 	/**
-	 *	create - create a new item in the database.
+	 * create - create a new item in the database.
 	 *
-	 *	@param	string	The item title.
-	 *	@param	string	The item body.
-	 *  @return id on success / false on failure.
+	 * @param string	$title The item title.
+	 * @param string	$body  The item body.
+	 * @return int id on success / false on failure.
 	 */
 	function create($title, $body) {
 		//
@@ -114,10 +114,10 @@ class ArtifactCanned extends Error {
 	}
 
 	/**
-	 *	fetchData - re-fetch the data for this ArtifactCanned from the database.
+	 * fetchData - re-fetch the data for this ArtifactCanned from the database.
 	 *
-	 *	@param int	The ID number.
-	 *	@return	boolean	success.
+	 * @param int $id The ID number.
+	 * @return boolean success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM artifact_canned_responses WHERE id=$1',
@@ -132,9 +132,9 @@ class ArtifactCanned extends Error {
 	}
 
 	/**
-	 *	getArtifactType - get the ArtifactType Object this ArtifactCanned message is associated with.
+	 * getArtifactType - get the ArtifactType Object this ArtifactCanned message is associated with.
 	 *
-	 *	@return ArtifactType.
+	 * @return ArtifactType.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;
@@ -170,9 +170,9 @@ class ArtifactCanned extends Error {
 	/**
 	 *  update - update an ArtifactCanned message.
 	 *
-	 *  @param	string	Title of the message.
-	 *  @param	string	Body of the message.
-	 *  @return	boolean	success.
+	 * @param	string	$title	Title of the message.
+	 * @param	string	$body	Body of the message.
+	 * @return	boolean	success.
 	 */
 	function update($title,$body) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {

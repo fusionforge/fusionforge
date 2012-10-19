@@ -98,10 +98,9 @@ class ArtifactExtraFieldElement extends Error {
 	 *	choices for selection boxes.  This function is only used for
 	 *	extra fields and boxes configured by the admin
 	 *
-	 *	@param	string		Name of the choice
-	 *	@param	int		Id the box that contains the choice.
-	 *  @param  int status_id - optional for status box - maps to either open/closed.
-	 *  @return 	true on success / false on failure.
+	 *	@param	string	$name      Name of the choice
+	 *	@param	int	    $status_id Id the box that contains the choice (optional).
+	 *  @return bool	true on success / false on failure.
 	 */
 
 	function create($name,$status_id=0) {
@@ -166,7 +165,7 @@ class ArtifactExtraFieldElement extends Error {
 	/**
 	 *	fetchData - re-fetch the data for this ArtifactExtraFieldElement from the database.
 	 *
-	 *	@param	int		ID of the Box.
+	 *	@param	int		$id ID of the Box.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
@@ -231,9 +230,9 @@ class ArtifactExtraFieldElement extends Error {
 	 *  for a selection box. This function is used only for extra
 	 *  boxes and fields configured by the admin
 	 *
-	 *  @param	string	Name of the choice in a box.
-	 *  @param  int status_id - optional for status box - maps to either open/closed.
-	 *  @return	boolean	success.
+	 *  @param	string	$name      Name of the choice in a box.
+	 *  @param  int     $status_id optional for status box - maps to either open/closed.
+	 *  @return	bool	success.
 	 */
 	function update($name,$status_id=0) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
@@ -303,7 +302,7 @@ class ArtifactExtraFieldElement extends Error {
 			$this->setError(db_error());
 			return false;
 		}
-		$result = db_query_params ('DELETE FROM artifact_workflow_event WHERE from_value_id=$1 OR to_value_id=$1',
+		db_query_params ('DELETE FROM artifact_workflow_event WHERE from_value_id=$1 OR to_value_id=$1',
 				    array ($this->getID())) ;
 		return true;
 	}

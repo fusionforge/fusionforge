@@ -52,11 +52,8 @@ class ArtifactExtraField extends Error {
 	var $data_array;
 
 	/**
-	 *	ArtifactExtraField - Constructer
-	 *
-	 *	@param	object	ArtifactType object.
-	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
-	 *  @return	boolean	success.
+	 * @param $ArtifactType
+	 * @param bool $data
 	 */
 	function __construct(&$ArtifactType, $data=false) {
 		$this->Error();
@@ -215,7 +212,7 @@ class ArtifactExtraField extends Error {
 	/**
 	 *	fetchData - re-fetch the data for this ArtifactExtraField from the database.
 	 *
-	 *	@param	int		ID of the Box.
+	 *	@param	int		$id ID of the Box.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
@@ -501,8 +498,8 @@ class ArtifactExtraField extends Error {
 	/**
 	 *	Generate an alias for this field. The alias can be entered by the user or
 	 *	be generated automatically from the name of the field.
-	 *	@param	string	Alias entered by the user
-	 *	@param	string	Name of the field entered by the user (it'll be used when $alias is empty)
+	 *	@param	string	$alias Alias entered by the user
+	 *	@param	string	$name  Name of the field entered by the user (it'll be used when $alias is empty)
 	 *	@return	string
 	 */
 	function generateAlias($alias, $name) {
@@ -579,6 +576,7 @@ class ArtifactExtraField extends Error {
 			return false;
 		}
 		$i = 1;
+		$data = array();
 		while ($i <= $max) {
 			if ($i == $new_pos) {
 				$data[] = $element_id;

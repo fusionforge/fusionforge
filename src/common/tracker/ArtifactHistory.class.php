@@ -112,7 +112,7 @@ class ArtifactHistory extends Error {
 	/**
 	 *	fetchData - re-fetch the data for this ArtifactHistory from the database.
 	 *
-	 *	@param	int		ID of the category.
+	 *	@param	int		$id ID of the category.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {

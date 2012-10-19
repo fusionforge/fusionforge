@@ -25,11 +25,11 @@ require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 require_once $gfcommon.'include/Error.class.php';
 
 /**
-*       Factory method which creates an ArtifactFile from an artifactFile ID
+* Factory method which creates an ArtifactFile from an artifactFile ID
 *
-*       @param int      The artifactFile ID
-*       @param array    The result array, if it's passed in
-*       @return object  Artifact object
+* @param int        $artifact_file_id The artifactFile ID
+* @param array|bool $data             The result array, if it's passed in
+* @return Artifact object
 */
 function &artifactfile_get_object($artifact_file_id,$data=false) {
 	global $ARTIFACTFILE_OBJ;
@@ -101,13 +101,14 @@ class ArtifactFile extends Error {
 	/**
 	 *	create - create a new item in the database.
 	 *
-	 *	@param	string	Filename of the item.
-	 *	@param	string	Item filetype.
-	 *	@param	string	Item filesize.
-	 *	@param	binary	file to store.
-	 *	@param	string	Item description.
-	 *	@param	array	Array of data to change submitter and time of submit like: array('user' => 127, 'time' => 1234556789)
-	 *	@return id on success / false on failure.
+	 *	@param	string	$filename Filename of the item.
+	 *	@param	string	$filetype filetype.
+	 *	@param	string	$filesize filesize.
+	 *	@param	string	$file file to store.
+	 *	@param	string	$description Description.
+	 *	@param	array	$importData Array of data to change submitter and time of submit like:
+	 *                  array('user' => 127, 'time' => 1234556789)
+	 *	@return int|bool Identifier on success / false on failure.
 	 */
 	function create($filename, $filetype, $filesize, $file, $description='None', $importData = array()) {
 		// Some browsers don't supply mime type if they don't know it
@@ -126,12 +127,12 @@ class ArtifactFile extends Error {
 		}
 
 		if (array_key_exists('user', $importData)){
-			$userid = $importData['user'];
+			$user_id = $importData['user'];
 		} else {
 			if (session_loggedin()) {
-				$userid=user_getid();
+				$user_id=user_getid();
 			} else {
-				$userid=100;
+				$user_id=100;
 			}
 		}
 
@@ -162,7 +163,7 @@ class ArtifactFile extends Error {
 					       $filesize,
 					       $filetype,
 					       $time,
-					       $userid)) ;
+					       $user_id)) ;
 
 		$id=db_insertid($res,'artifact_file','id');
 
@@ -220,7 +221,7 @@ class ArtifactFile extends Error {
 	/**
 	 *	fetchData - re-fetch the data for this ArtifactFile from the database.
 	 *
-	 *	@param	int	The file_id.
+	 *	@param	int	$id The file_id.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {

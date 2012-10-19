@@ -115,11 +115,25 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	create - create a row in the table that stores a saved query for
+	 * create - create a row in the table that stores a saved query for
 	 *  a tracker.
 	 *
-	 *	@param	string	Name of the saved query.
-	 *  @return 	true on success / false on failure.
+	 * @param        $name
+	 * @param        $status
+	 * @param        $assignee
+	 * @param        $moddaterange
+	 * @param        $sort_col
+	 * @param        $sort_ord
+	 * @param        $extra_fields
+	 * @param int    $opendaterange
+	 * @param int    $closedaterange
+	 * @param        $summary
+	 * @param        $description
+	 * @param        $followups
+	 * @param int    $query_type
+	 * @param array  $query_options
+	 * @param string $submitter Name of the saved query.
+	 * @return bool true on success / false on failure.
 	 */
 	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0,
 		$summary,$description,$followups,$query_type=0,$query_options=array(),$submitter='') {
@@ -194,7 +208,7 @@ class ArtifactQuery extends Error {
 	/**
 	 *	fetchData - re-fetch the data for this ArtifactQuery from the database.
 	 *
-	 *	@param	int		ID of saved query.
+	 *	@param	int		$id ID of saved query.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
@@ -255,7 +269,7 @@ class ArtifactQuery extends Error {
 
 		if (is_array($submitter)) {
 				for($e=0; $e<count($submitter); $e++) {
-					$submitter[$e]=intval($submitter[$e]); 
+					$submitter[$e]=intval($submitter[$e]);
 				}
 				$submitter=implode(',',$submitter);
 		} else {
@@ -662,9 +676,10 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	validateDateRange - validate a date range in this format '1999-05-01 1999-06-01'.
+	 * validateDateRange - validate a date range in this format '1999-05-01 1999-06-01'.
 	 *
-	 *	@return	boolean	true/false.
+	 * @param string $daterange A range of two dates (1999-05-01 1999-06-01)
+	 * @return bool true/false.
 	 */
 	function validateDateRange($daterange) {
 		return preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{4}-[0-9]{2}-[0-9]{2}/',$daterange);
@@ -674,9 +689,22 @@ class ArtifactQuery extends Error {
 	 *  update - update a row in the table used to query names
 	 *  for a tracker.
 	 *
-	 *  @param	int	 Id of the saved query
-	 *	@param	string	The name of the saved query
-	 *  @return	boolean	success.
+	 * @param        $name
+	 * @param        $status
+	 * @param        $assignee
+	 * @param        $moddaterange
+	 * @param        $sort_col
+	 * @param        $sort_ord
+	 * @param        $extra_fields
+	 * @param string $opendaterange
+	 * @param string $closedaterange
+	 * @param        $summary
+	 * @param        $description
+	 * @param        $followups
+	 * @param int    $query_type      Id of the saved query
+	 * @param array  $query_options
+	 * @param string $submitter
+	 * @return bool success.
 	 */
 	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='',
 		$summary,$description,$followups,$query_type=0,$query_options=array(),$submitter='') {
@@ -767,7 +795,7 @@ class ArtifactQuery extends Error {
                 return false;
             }
 		}
-		$res = db_query_params ('DELETE FROM user_preferences WHERE preference_value=$1 AND preference_name =$2',
+		db_query_params ('DELETE FROM user_preferences WHERE preference_value=$1 AND preference_name =$2',
 					array ($this->getID(),
 					       'art_query'.$this->ArtifactType->getID())) ;
 		unset($this->data_array);
@@ -776,9 +804,10 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *  Exist - check if already exist a query with the same name , user_id and artifact_id
+	 * Exist - check if already exist a query with the same name , user_id and artifact_id
 	 *
-	 *  @return	boolean	exist
+	 * @param string $name Name of query
+	 * @return bool true if query already exists
 	 */
 	function Exist($name) {
 		$user_id = user_getid();

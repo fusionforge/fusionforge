@@ -54,19 +54,19 @@ require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 		return $ARTIFACTTYPE_OBJ["_".$artType_id."_"];
 	}
 
-function artifacttype_get_groupid ($artifact_type_id) {
+function artifacttype_get_groupid($artifact_type_id) {
 	global $ARTIFACTTYPE_OBJ;
 	if (isset($ARTIFACTTYPE_OBJ["_".$artifact_type_id."_"])) {
-		return $ARTIFACTTYPE_OBJ["_".$artifact_type_id."_"]->Group->getID() ;
+		return $ARTIFACTTYPE_OBJ["_".$artifact_type_id."_"]->Group->getID();
 	}
 
-	$res = db_query_params ('SELECT group_id FROM artifact_group_list WHERE group_artifact_id=$1',
-				array ($artifact_type_id)) ;
+	$res = db_query_params('SELECT group_id FROM artifact_group_list WHERE group_artifact_id=$1',
+		array($artifact_type_id));
 	if (!$res || db_numrows($res) < 1) {
 		return false;
 	}
-	$arr = db_fetch_array ($res);
-	return $arr['group_id'] ;
+	$arr = db_fetch_array($res);
+	return $arr['group_id'];
 }
 
 class ArtifactType extends Error {
@@ -184,7 +184,7 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	create - use this to create a new ArtifactType in the database.
+	 * create - use this to create a new ArtifactType in the database.
 	 *
 	 *	@param	string	The type name.
 	 *	@param	string	The type description.
@@ -269,15 +269,15 @@ class ArtifactType extends Error {
 	/**
 	 *  fetchData - re-fetch the data for this ArtifactType from the database.
 	 *
-	 *  @param	int		The artifact type ID.
-	 *  @return boolean	success.
+	 * @param    int        $artifact_type_id The artifact type ID.
+	 * @return boolean    success.
 	 */
 	function fetchData($artifact_type_id) {
-		$res = db_query_params ('SELECT * FROM artifact_group_list_vw
+		$res = db_query_params('SELECT * FROM artifact_group_list_vw
 			WHERE group_artifact_id=$1
 			AND group_id=$2',
-					array ($artifact_type_id,
-					       $this->Group->getID())) ;
+			array($artifact_type_id,
+				$this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactType: Invalid ArtifactTypeID');
 			return false;
@@ -288,36 +288,36 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  getGroup - get the Group object this ArtifactType is associated with.
+	 * getGroup - get the Group object this ArtifactType is associated with.
 	 *
-	 *	  @return	Object	The Group object.
+	 * @return    Object    The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	  getID - get this ArtifactTypeID.
+	 * getID - get this ArtifactTypeID.
 	 *
-	 *	  @return	int	The group_artifact_id #.
+	 * @return    int    The group_artifact_id #.
 	 */
 	function getID() {
 		return $this->data_array['group_artifact_id'];
 	}
 
 	/**
-	 *	  getOpenCount - get the count of open tracker items in this tracker type.
+	 * getOpenCount - get the count of open tracker items in this tracker type.
 	 *
-	 *	  @return	int	The count.
+	 * @return    int    The count.
 	 */
 	function getOpenCount() {
 		return $this->data_array['open_count'];
 	}
 
 	/**
-	 *	  getTotalCount - get the total number of tracker items in this tracker type.
+	 * getTotalCount - get the total number of tracker items in this tracker type.
 	 *
-	 *	  @return	int	The total count.
+	 * @return    int    The total count.
 	 */
 	function getTotalCount() {
 		return $this->data_array['count'];
@@ -333,18 +333,18 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  getBrowseInstructions - get the free-form string strings.
+	 * getBrowseInstructions - get the free-form string strings.
 	 *
-	 *	  @return string instructions.
+	 * @return string instructions.
 	 */
 	function getBrowseInstructions() {
 		return $this->data_array['browse_instructions'];
 	}
 
 	/**
-	 *	  emailAll - determine if we're supposed to email on every event.
+	 * emailAll - determine if we're supposed to email on every event.
 	 *
-	 *	  @return	boolean	email_all.
+	 * @return    boolean    email_all.
 	 */
 	function emailAll() {
 		return $this->data_array['email_all_updates'];
@@ -374,7 +374,7 @@ class ArtifactType extends Error {
 	 * @return string formatted name
 	 */
 	function getFormattedName() {
-		$name = preg_replace('/[^[:alnum:]]/','',$this->getName());
+		$name = preg_replace('/[^[:alnum:]]/', '', $this->getName());
 		$name = strtolower($name);
 		return $name;
 	}
@@ -396,7 +396,7 @@ class ArtifactType extends Error {
 	function getReturnEmailAddress() {
 
 		$address = '';
-		if(forge_get_config('use_gateways')) {
+		if (forge_get_config('use_gateways')) {
 			$address .= strtolower($this->getUnixName());
 		} else {
 			$address .= 'noreply';

@@ -85,13 +85,13 @@ class ArtifactFactory extends Error {
 	/**
 	 *	setup - sets up limits and sorts before you call getTasks().
 	 *
-	 *	@param	int	The offset - number of rows to skip.
-	 *	@param	string	The column to sort on.
-	 *	@param	string	The way to order - ASC or DESC.
-	 *	@param	int	The max number of rows to return.
-	 *	@param	string	Whether to set these prefs into the user_prefs table - use "custom".
-	 *	@param	int	Include this param if you want to limit to a certain assignee.
-	 *	@param	int	Include this param if you want to limit to a particular status.
+	 *	@param	int	   $offset       The offset - number of rows to skip.
+	 *	@param	string $order_col    The column to sort on.
+	 *	@param	string $sort         The way to order - ASC or DESC.
+	 *	@param	int    $max_rows     The max number of rows to return.
+	 *	@param	string $set          Whether to set these prefs into the user_prefs table - use "custom".
+	 *	@param	int    $_assigned_to Include this param if you want to limit to a certain assignee.
+	 *	@param	int    $_status      Include this param if you want to limit to a particular status.
 	 *	@param	array	Array of extra fields & elements to limit the query to.
 	 */
 	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_extra_fields=array()) {
@@ -265,7 +265,7 @@ class ArtifactFactory extends Error {
 	/**
 	 *	setChangedFrom - sets up changed-from and last-changed before you call getTasks().
 	 *
-	 *	@param	int	The changed_from - offset time(sec) from now
+	 *	@param	int	$changed_from The changed_from - offset time(sec) from now
 	 */
 	function setChangedFrom($changed_from) {
 		$this->changed_from = ($changed_from <= 0) ? 0x7fffffff : $changed_from;
@@ -287,7 +287,7 @@ class ArtifactFactory extends Error {
 	/**
 	 *	getArtifacts - get an array of Artifact objects.
 	 *
-	 *	@return	array	The array of Artifact objects.
+	 *	@return	Artifact[] Array of Artifact objects.
 	 */
 	function getArtifacts() {
 		if (!empty($this->artifacts)) {
@@ -458,18 +458,20 @@ class ArtifactFactory extends Error {
 	}
 
 	/**
-	 *	getArtifactsByReleases - get an array of Artifact objects.
+	 * getArtifactsByReleases - get an array of Artifact objects.
 	 *
-	 *	@return	array	The array of Artifact objects.
+	 * @param $extra_field_id
+	 * @param $releases
+	 * @return array    The array of Artifact objects.
 	 */
 	function getArtifactsByReleases($extra_field_id, $releases) {
 		$artifacts = array();
 
-		$sql = 'SELECT a.* 
-		FROM artifact_extra_field_data aefd, artifact_extra_field_elements aefe, artifact_vw a 
-		WHERE aefd.extra_field_id=aefe.extra_field_id 
-		AND CAST (aefd.field_data AS integer)=aefe.element_id 
-		AND aefd.artifact_id=a.artifact_id 
+		$sql = 'SELECT a.*
+		FROM artifact_extra_field_data aefd, artifact_extra_field_elements aefe, artifact_vw a
+		WHERE aefd.extra_field_id=aefe.extra_field_id
+		AND CAST (aefd.field_data AS integer)=aefe.element_id
+		AND aefd.artifact_id=a.artifact_id
 		AND aefd.extra_field_id=$1';
 
 		$query_params = array($extra_field_id);
@@ -487,7 +489,7 @@ class ArtifactFactory extends Error {
 				$artifacts[] = new Artifact($this->ArtifactType, $arr);
 			}
 		}
-		
+
 		return $artifacts;
 	}
 
