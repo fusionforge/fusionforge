@@ -47,7 +47,7 @@ deps_redhat() {
 		addFusionForgeYumRepo
 		addDagRPMForgeYumRepo
 		msg green "Installing packages: Executing YUM. Please wait..."
-		yum --enablerepo=fusionforge --enablerepo=dag-rpmforge  -y --skip-broken install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring php-jpgraph-1.5.2 poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync
+		yum --enablerepo=fusionforge --enablerepo=dag-rpmforge  -y --skip-broken install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring php-jpgraph-1.5.2 poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync git gitweb
 		touch /tmp/done_yum
 		set +e
 	fi
@@ -56,7 +56,7 @@ deps_redhat() {
 deps_debian() {
 	type=debian
 	msg green "Installing packages: Executing apt-get. Please wait..."
-	apt-get -y install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release php-htmlpurifier
+	apt-get -y install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release php-htmlpurifier git gitweb
 	a2enmod headers
 	a2enmod proxy
 	a2enmod ssl
@@ -71,7 +71,7 @@ deps_ark() {
 	type=debian
 	msg green "Installing packages: Executing apt-get. Please wait..."
 	apt-get update
-	apt-get -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion subversion-server-httpd postfix rcs mod_ssl wget ssh
+	apt-get -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion subversion-server-httpd postfix rcs mod_ssl wget ssh git gitweb
 
 	msg green "Restarting PostgreSQL"
 	/sbin/service postgresql restart
@@ -83,7 +83,7 @@ deps_ark() {
 deps_suse() {
 	type=suse
 	msg green "Installing Packages with yast"
-	yast -i php5 apache2-prefork php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php4-pgsql subversion apache-mod_dav_svn ssh postfix rcs php4-gd mod_ssl perl-IPC-Run php4-curl wget subversion-server apache2-mod_php4
+	yast -i php5 apache2-prefork php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php4-pgsql subversion apache-mod_dav_svn ssh postfix rcs php4-gd mod_ssl perl-IPC-Run php4-curl wget subversion-server apache2-mod_php4 git gitweb
 
 	msg green "Fixing php4 installation"
 	cp /usr/lib/apache2-prefork/libphp4.so /usr/lib/apache2/mod_php.so
@@ -105,7 +105,7 @@ deps_suse() {
 deps_opensuse() {
 	type=suse
 	msg green "Installing Packages with yast"
-	yast -i php5 apache2-prefork apache2-mod_php5 cvs mailman perl-IPC-Run perl-URI php5 php5-curl php5-gd php5-gettext php5-pgsql postfix postgresql postgresql-contrib postgresql-libs postgresql-server rcs openssh subversion subversion-server wget viewvc
+	yast -i php5 apache2-prefork apache2-mod_php5 cvs mailman perl-IPC-Run perl-URI php5 php5-curl php5-gd php5-gettext php5-pgsql postfix postgresql postgresql-contrib postgresql-libs postgresql-server rcs openssh subversion subversion-server wget viewvc git gitweb
 
 	msg green "Restarting PostgreSQL..."
 	rcpostgresql restart
