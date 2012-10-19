@@ -42,7 +42,6 @@ if ($zip->open($fichin) === TRUE) {
 	if (file_exists($output_dir))
 		unlink($output_dir);
 
-	unlink($output_dir);
 	mkdir($output_dir);
 	$zip->extractTo($output_dir, array('content.xml'));
 	$zip->close();
