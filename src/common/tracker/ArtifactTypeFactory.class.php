@@ -48,10 +48,9 @@ class ArtifactTypeFactory extends Error {
 	var $dataType;
 
 	/**
-	 *  Constructor.
+	 * __construct - ArtifactTypeFactory constructor.
 	 *
-	 *	@param	object	The Group object to which this ArtifactTypeFactory is associated
-	 *	@return	boolean	success.
+	 *	@param	Group	$Group The Group object to which this ArtifactTypeFactory is associated
 	 */
 	function __construct(&$Group) {
 		$this->Error();

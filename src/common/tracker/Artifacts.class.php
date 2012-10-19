@@ -49,13 +49,11 @@ class Artifacts extends Error {
 	var $artifacts_array;
 
 	/**
-	 *  Artifacts - constructor.
+	 * __construct - Artifacts constructor.
 	 *
-	 *  Use this constructor if you are modifying an existing artifact.
+	 * Use this constructor if you are modifying an existing artifact.
 	 *
-	 *	@param	object	Artifact Type object.
-	 *  @param	int		(primary key from database).
-	 *  @return	boolean	success.
+	 * @param ArtifactType $ArtifactType Artifact Type object.
 	 */
 	function __construct(&$ArtifactType) {
 		$this->Error();
@@ -65,14 +63,13 @@ class Artifacts extends Error {
 		//was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
 			$this->setError('Artifact: No Valid ArtifactType');
-			return false;
+			return;
 		}
 		//did ArtifactType have an error?
 		if ($ArtifactType->isError()) {
 			$this->setError('Artifact: '.$ArtifactType->getErrorMessage());
-			return false;
+			return;
 		}
-
 	}
 
 	/**
@@ -80,8 +77,8 @@ class Artifacts extends Error {
 	 *
 	 *  Retrieves an array of artifact objects.
 	 *
-	 *  @param	boolean	Database query offset.
-	 *  @return an array of artifact objects on success / false on failure.
+	 *  @param	boolean	$offset Database query offset.
+	 *  @return array|bool An array of artifact objects on success / false on failure.
 	 */
 	function getArtifacts($offset=false) {
 		if (!$offset) {
@@ -107,7 +104,7 @@ class Artifacts extends Error {
 	/**
 	 * getArtifactType - get the artifact type.
 	 *
-	 *	@return	object	The ArtifactType object.
+	 * @return	ArtifactType	The ArtifactType object.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;

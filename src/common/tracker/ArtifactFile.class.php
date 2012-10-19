@@ -69,37 +69,31 @@ class ArtifactFile extends Error {
 	var $data_array;
 
 	/**
-	 *  ArtifactFile - constructor.
+	 *  __construct - ArtifactFile constructor.
 	 *
-	 *	@param	object	The Artifact object.
-	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
-	 *  @return	boolean	success.
+	 * @param Artifact   $Artifact The Artifact object.
+	 * @param array|bool $data     (all fields from artifact_file_user_vw) OR id from database.
 	 */
 	function __construct(&$Artifact, $data=false) {
 		$this->Error();
 
-		//was Artifact legit?
+		// Was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {
 			$this->setError('ArtifactFile: No Valid Artifact');
-			return false;
+			return;
 		}
-		//did ArtifactType have an error?
+		// Did ArtifactType have an error?
 		if ($Artifact->isError()) {
 			$this->setError('ArtifactFile: '.$Artifact->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Artifact =& $Artifact;
 
 		if ($data) {
 			if (is_array($data)) {
 				$this->data_array =& $data;
-				return true;
 			} else {
-				if (!$this->fetchData($data)) {
-					return false;
-				} else {
-					return true;
-				}
+				$this->fetchData($data);
 			}
 		}
 	}

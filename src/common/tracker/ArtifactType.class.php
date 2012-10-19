@@ -142,35 +142,34 @@ class ArtifactType extends Error {
 	var	$element_status;
 
 	/**
-	 *	ArtifactType - constructor.
+	 * ArtifactType - constructor.
 	 *
-	 *	@param	object	The Group object.
-	 *	@param	int		The id # assigned to this artifact type in the db.
-	 *  @param	array	The associative array of data.
-	 *	@return boolean	success.
+	 * @param Group      $Group            The Group object.
+	 * @param int|bool   $artifact_type_id The id # assigned to this artifact type in the db.
+	 * @param array|bool $arr              The associative array of data.
 	 */
-	function __construct($Group,$artifact_type_id=false, $arr=false) {
+	function __construct($Group, $artifact_type_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError('No Valid Group Object');
-			return false;
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('ArtifactType: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group = $Group;
 		if ($artifact_type_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($artifact_type_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
 					$this->setError('Group_id in db result does not match Group Object');
 					$this->data_array = null;
-					return false;
+					return;
 				}
 			}
 			//
@@ -179,7 +178,7 @@ class ArtifactType extends Error {
 			if (!forge_check_perm ('tracker', $this->getID(), 'read')) {
 				$this->setPermissionDeniedError();
 				$this->data_array = null;
-				return false;
+				return;
 			}
 		}
 	}

@@ -85,37 +85,31 @@ class ArtifactQuery extends Error {
 	var $element_array;
 
 	/**
-	 *	ArtifactQuery - Constructer
+	 *	__construct - Constructor
 	 *
-	 *	@param	object	ArtifactType object.
-	 *	@param
-	 *  	@return	boolean	success.
+	 *	@param $ArtifactType $ArtifactType c object.
+	 *	@param array|bool    $data
 	 */
 	function __construct(&$ArtifactType, $data = false) {
 		$this->Error();
 
-		//was ArtifactType legit?
+		// Was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
 			$this->setError('ArtifactQuery: No Valid ArtifactType');
-			return false;
+			return;
 		}
-		//did ArtifactType have an error?
+		// Did ArtifactType have an error?
 		if ($ArtifactType->isError()) {
 			$this->setError('ArtifactQuery: '.$ArtifactType->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->ArtifactType =& $ArtifactType;
 
 		if ($data) {
 			if (is_array($data)) {
 				$this->data_array =& $data;
-				return true;
 			} else {
-				if (!$this->fetchData($data)) {
-					return false;
-				} else {
-					return true;
-				}
+				$this->fetchData($data);
 			}
 		}
 	}

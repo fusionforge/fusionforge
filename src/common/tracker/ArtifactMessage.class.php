@@ -40,11 +40,10 @@ class ArtifactMessage extends Error {
 	var $data_array;
 
 	/**
-	 *  ArtifactMessage - constructor.
+	 *  __construct - ArtifactMessage constructor.
 	 *
-	 *	@param	object	Artifact object.
-	 *  @param	array	(all fields from artifact_history_user_vw) OR id from database.
-	 *  @return	boolean	success.
+	 * @param object    $Artifact    Artifact object.
+	 * @param array|bool $data (all fields from artifact_history_user_vw) OR id from database.
 	 */
 	function __construct(&$Artifact, $data=false) {
 		$this->Error();
@@ -52,25 +51,20 @@ class ArtifactMessage extends Error {
 		//was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {
 			$this->setError('ArtifactMessage: No Valid Artifact');
-			return false;
+			return;
 		}
 		//did Artifact have an error?
 		if ($Artifact->isError()) {
 			$this->setError('ArtifactMessage: '.$Artifact->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Artifact =& $Artifact;
 
 		if ($data) {
 			if (is_array($data)) {
 				$this->data_array =& $data;
-				return true;
 			} else {
-				if (!$this->fetchData($data)) {
-					return false;
-				} else {
-					return true;
-				}
+				$this->fetchData($data);
 			}
 		}
 	}
@@ -78,9 +72,9 @@ class ArtifactMessage extends Error {
 	/**
 	 *	create - create a new item in the database.
 	 *
-	 *	@param	string	Body.
-	 *	@param	string	email of submitter (obsolete?).
-	 *  @return id on success / false on failure.
+	 * @param string	   $body Body.
+	 * @param string|bool $by   Email of submitter (obsolete?).
+	 * @return int|bool id on success / false on failure.
 	 */
 	function create($body,$by=false) {
 		if (!$body) {
@@ -135,7 +129,7 @@ class ArtifactMessage extends Error {
 	/**
 	 *	fetchData - re-fetch the data for this ArtifactMessage from the database.
 	 *
-	 *	@param	int		ID of the category.
+	 *	@param int $id ID of the category.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {

@@ -43,10 +43,10 @@ class ArtifactTypes extends Error {
 	var $data_array;
 
 	/**
-	 *	ArtifactTypes - constructor.
+	 * ArtifactTypes - constructor.
 	 *
-	 *	@param	object	The Group object.
-	 *	@return	boolean	success.
+	 * @param Group $Group The Group object.
+	 * @return ArtifactTypes success.
 	 */
 	function __construct(&$Group) {
 		$this->Error();

@@ -42,9 +42,8 @@ class ArtifactHistory extends Error {
 	/**
 	 *  ArtifactHistory - constructor.
 	 *
-	 *	@param	object	Artifact object.
-	 *  @param	array	(all fields from artifact_history_user_vw) OR id from database.
-	 *  @return	boolean	success.
+	 *	@param Artifact   $Artifact Artifact object.
+	 *  @param array|bool $data     (all fields from artifact_history_user_vw) OR id from database.
 	 */
 	function __construct(&$Artifact, $data=false) {
 		$this->Error();
@@ -52,25 +51,20 @@ class ArtifactHistory extends Error {
 		//was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {
 			$this->setError('ArtifactHistory: No Valid Artifact');
-			return false;
+			return;
 		}
 		//did Artifact have an error?
 		if ($Artifact->isError()) {
 			$this->setError('ArtifactHistory: '.$Artifact->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Artifact =& $Artifact;
 
 		if ($data) {
 			if (is_array($data)) {
 				$this->data_array =& $data;
-				return true;
 			} else {
-				if (!$this->fetchData($data)) {
-					return false;
-				} else {
-					return true;
-				}
+				$this->fetchData($data);
 			}
 		}
 	}

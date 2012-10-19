@@ -34,9 +34,9 @@ class ArtifactsForUser extends Error {
 	var $Artifact;
 
 	/**
-	* Creates a new ArtifactsFor User object
+	* __construct - Creates a new ArtifactsForUser object
 	*
-	* @param	user	the User object for which to collect artifacts
+	* @param User $user	the User object for which to collect artifacts
 	*/
 	function __construct(&$user) {
 		$this->User =& $user;
@@ -44,11 +44,12 @@ class ArtifactsForUser extends Error {
 	}
 
 	/**
-	*	getArtifactsFromSQL - Gets an array of Artifacts
-	*
-	*	@param	sql	The sql that returns artifact_id
-	*	@return	Artifact[]	The array of Artifacts
-	*/
+	 * getArtifactsFromSQLwithParams - Gets an array of Artifacts
+	 *
+	 * @param    string   $sql     The sql that returns artifact_id
+	 * @param    array    $params  Array of values associated to sql query
+	 * @return    Artifact[]    The array of Artifacts
+	 */
 	function &getArtifactsFromSQLwithParams ($sql, $params) {
 		$artifacts = array();
 		$result = db_query_params ($sql, $params);
@@ -70,8 +71,8 @@ class ArtifactsForUser extends Error {
 	}
 
 	/**
-	*	getAssignedArtifacts	- Get the users's assigned artifacts
-	*	@return	Artifact[]	The array of Artifacts
+	* getAssignedArtifactsByGroup	- Get the users's assigned artifacts
+	* @return	Artifact[]	The array of Artifacts
 	*/
 	function &getAssignedArtifactsByGroup() {
 		return $this->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av WHERE av.assigned_to=$1 AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',

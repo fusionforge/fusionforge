@@ -41,37 +41,32 @@ class ArtifactCanned extends Error {
 	var $data_array;
 
 	/**
-	 *  ArtifactCanned - constructor.
+	 * __construct - constructor.
 	 *
-	 *	@param	object	The Artifact Type object.
-	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
-	 *  @return	boolean	success.
+	 * @param ArtifactType $ArtifactType The Artifact Type object.
+	 * @param array|bool   $data         (all fields from artifact_file_user_vw) OR id from database.
+	 * @return ArtifactCanned success.
 	 */
 	function __construct(&$ArtifactType, $data=false) {
 		$this->Error();
 
-		//was ArtifactType legit?
+		// Was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
 			$this->setError('ArtifactCanned: No Valid ArtifactType');
-			return false;
+			return;
 		}
-		//did ArtifactType have an error?
+		// Did ArtifactType have an error?
 		if ($ArtifactType->isError()) {
-			$this->setError('ArtifactCanned: '.$Artifact->getErrorMessage());
-			return false;
+			$this->setError('ArtifactCanned: '.$ArtifactType->getErrorMessage());
+			return;
 		}
 		$this->ArtifactType =& $ArtifactType;
 
 		if ($data) {
 			if (is_array($data)) {
 				$this->data_array =& $data;
-				return true;
 			} else {
-				if (!$this->fetchData($data)) {
-					return false;
-				} else {
-					return true;
-				}
+				$this->fetchData($data);
 			}
 		}
 	}

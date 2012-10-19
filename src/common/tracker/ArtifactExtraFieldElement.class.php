@@ -62,38 +62,33 @@ class ArtifactExtraFieldElement extends Error {
 	 * @var		array	$data_array.
 	 */
 	var $data_array;
+
 	/**
-	 *	ArtifactExtraFieldElement - Constructer
+	 *	__construct - Constructor
 	 *
-	 *	@param	object	ArtifactExtraField object.
-	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
-	 *  @return	boolean	success.
+	 *	@param	object	   $ArtifactExtraField ArtifactExtraField object.
+	 *  @param	array|bool $data               (all fields from artifact_file_user_vw) OR id from database.
 	 */
 	function __construct(&$ArtifactExtraField,$data=false) {
 		$this->Error();
 
-		//was ArtifactExtraField legit?
+		// Was ArtifactExtraField legit?
 		if (!$ArtifactExtraField || !is_object($ArtifactExtraField)) {
 			$this->setError('ArtifactExtraField: No Valid ArtifactExtraField');
-			return false;
+			return;
 		}
-		//did ArtifactExtraField have an error?
+		// Did ArtifactExtraField have an error?
 		if ($ArtifactExtraField->isError()) {
 			$this->setError('ArtifactExtraField: '.$ArtifactExtraField->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->ArtifactExtraField =& $ArtifactExtraField;
 		if ($data) {
 			if (is_array($data)) {
 //TODO validate that data actually belongs in this ArtifactExtraField
 				$this->data_array =& $data;
-				return true;
 			} else {
-				if (!$this->fetchData($data)) {
-					return false;
-				} else {
-					return true;
-				}
+				$this->fetchData($data);
 			}
 		}
 	}

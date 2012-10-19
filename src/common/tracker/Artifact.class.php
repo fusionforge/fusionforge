@@ -128,52 +128,38 @@ class Artifact extends Error {
 	/**
 	 *  Artifact - constructor.
 	 *
-	 *	@param	object	The ArtifactType object.
-	 *  @param	integer	(primary key from database OR complete assoc array)
-	 *		ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
-	 *  @return	boolean	success.
+	 * @param ArtifactType $ArtifactType The ArtifactType object.
+	 * @param int|bool     $data         (primary key from database OR complete assoc array)
+	 *                                   ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
 	 */
 	function __construct(&$ArtifactType, $data=false) {
 		$this->Error();
 
 		$this->ArtifactType =& $ArtifactType;
 
-		//was ArtifactType legit?
+		// Was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
 			$this->setError(_('No Valid Artifact Type'));
-			return false;
+			return;
 		}
 
-		//did ArtifactType have an error?
+		// Did ArtifactType have an error?
 		if ($ArtifactType->isError()) {
 			$this->setError($ArtifactType->getErrorMessage());
-			return false;
+			return;
 		}
 
-		//
-		//	make sure this person has permission to view artifacts
-		//
+		// Make sure this person has permission to view artifacts
 		if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'read')) {
 			$this->setError(_('Only project members can view private artifact types'));
-			return false;
+			return;
 		}
 
-		//
-		//	set up data structures
-		//
 		if ($data) {
 			if (is_array($data)) {
 				$this->data_array =& $data;
-//
-//	Should verify ArtifactType ID
-//
-				return true;
 			} else {
-				if (!$this->fetchData($data)) {
-					return false;
-				} else {
-					return true;
-				}
+				$this->fetchData($data);
 			}
 		}
 	}
