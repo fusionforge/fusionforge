@@ -7,6 +7,7 @@
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten Glaser - tarent solutions GmbH
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -114,6 +115,9 @@ switch ($type) {
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
 		} else {
+			$uploaded_data_type = $uploaded_data['type'];
+		}
+		if ($uploaded_data_type == 'application/octet-stream' && $uploaded_data_type != $uploaded_data['type']) {
 			$uploaded_data_type = $uploaded_data['type'];
 		}
 		$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
