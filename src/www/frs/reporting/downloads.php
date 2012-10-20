@@ -1,6 +1,7 @@
 <?php
-/*
+/**
  * Copyright (C) 2009-2012 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -19,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The program ("Contribution") has not been tested and/or
@@ -56,18 +57,18 @@ if (!$group_id) {
 	exit_no_group();
 }
 
-$group=group_get_object($group_id);
+$group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 } elseif ($group->isError()) {
-	exit_error($group->getErrorMessage(),'frs');
+	exit_error($group->getErrorMessage(), 'frs');
 }
 
-session_require_perm ('frs', $group_id, 'write') ;
+session_require_perm('frs', $group_id, 'write');
 
-$report=new Report();
+$report = new Report();
 if ($report->isError()) {
-	exit_error($report->getErrorMessage(),'frs');
+	exit_error($report->getErrorMessage(), 'frs');
 }
 
 if (!$start || !$end) $z =& $report->getMonthStartArr();
@@ -81,12 +82,12 @@ if (!$end) {
 }
 if ($end < $start) list($start, $end) = array($end, $start);
 
-frs_header(array('title'=>_('File Release Reporting'),
-		 'group'=>$group_id,
-		 'pagename'=>'project_showfiles',
-		 'sectionvals'=>group_getname($group_id)));
+frs_header(array('title' => _('File Release Reporting'),
+		 'group' => $group_id,
+		 'pagename' => 'project_showfiles',
+		 'sectionvals' => group_getname($group_id)));
 
-$report=new ReportDownloads($group_id,$package_id,$start,$end);
+$report = new ReportDownloads($group_id, $package_id, $start, $end);
 if ($report->isError()) {
 	echo '<p class="information">'.$report->getErrorMessage().'</p>';
 	frs_footer();
@@ -117,7 +118,64 @@ if (count($data) == 0) {
 	echo _('There have been no downloads for this package.');
 	echo '</p>';
 } else {
-	echo $HTML->listTableTop (array(_('Package'), _('Release'), _('File'), _('User'), _('Date')),
+	html_use_jqueryjqplotpluginCanvas();
+	echo $HTML->getJavascripts();
+	echo $HTML->getStylesheets();
+	echo '<script language="JavaScript" type="text/javascript">//<![CDATA['."\n";
+	echo 'var ticks = new Array();';
+	echo 'var values = new Array();';
+	$arr =& $report->getMonthStartArr();
+	$arr2 = array();
+	$valuesArr = array();
+	for ($i=0; $i < count($arr); $i++) {
+		if ($arr[$i] >= $start && $arr[$i] <= $end) {
+			$arr2[$i] = date(_('Y-m'), $arr[$i]);
+			$valuesArr[$i] = 0;
+		}
+	}
+	foreach ($arr2 as $key) {
+		echo 'ticks.push("'.$key.'");';
+	}
+	for ($i=0; $i < count($data); $i++) {
+		echo 'var labels = [{label:\''.$data[$i][0].'\'}];';
+		$thisdate = date(_('Y-m'), mktime(0, 0, 0, substr($data[$i][4], 4, 2), 0, substr($data[$i][4], 0, 4)));
+		$indexkey = array_search($thisdate, $arr2);
+		$valuesArr[$indexkey+1]++;
+	}
+	foreach ($valuesArr as $key) {
+		echo 'values.push('.$key.');';
+	}
+	echo 'var plot1;';
+	echo 'jQuery(document).ready(function(){
+			plot1 = jQuery.jqplot (\'chart1\', [values], {
+					legend: {
+						show: true,
+						placement: \'insideGrid\',
+						location: \'nw\'
+					},
+					series:
+						labels
+					,
+					axes: {
+						xaxis: {
+							label: "'._('Month').'",
+							renderer: jQuery.jqplot.CategoryAxisRenderer,
+							ticks: ticks,
+							pad: 0,
+						},
+						yaxis: {
+							label: "'._('Download').'",
+							padMin: 0,
+						}
+					}
+				});
+		});';
+	echo 'jQuery(window).resize(function() {
+			plot1.replot( { resetAxes: true } );
+		});'."\n";
+	echo '//]]></script>';
+	echo '<div id="chart1"></div>';
+	echo $HTML->listTableTop(array(_('Package'), _('Release'), _('File'), _('User'), _('Date')),
                               false, true, 'Download');
 	for ($i=0; $i<count($data); $i++) {
 		$date = preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][4]);
@@ -128,7 +186,7 @@ if (count($data) == 0) {
 			'<td><a href="/users/'.urlencode($data[$i][5]).'/">'. $data[$i][3] .'</a></td>'.
 			'<td class="align-center">'. $date .'</td></tr>';
 	}
-	echo $HTML->listTableBottom ();
+	echo $HTML->listTableBottom();
 }
 
 frs_footer();

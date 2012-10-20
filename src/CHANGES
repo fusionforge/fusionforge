@@ -1,7 +1,7 @@
 FusionForge-5.3:
 * Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)
 * Trackers: Attachements moved to filesystem to allow larger attachments & reduce DB size (Alcatel-Lucent)
-* Docman: Files moves to filesystem using the Storage generic class (TrivialDev)
+* Docman: Files moved to filesystem using the Storage generic class (TrivialDev)
 * Users: notify admins when user has validated his account (TrivialDev)
 * Allow project to disable the Project Activity (Alcatel-Lucent)
 * User: account ssh key management: rewrite backend, add more informations such as
@@ -10,6 +10,7 @@ FusionForge-5.3:
 * Activity: New Directory appears now in activity (TrivialDev)
 * Docman: Display number of download per file, max upload size (TrivialDev)
 * Widget: Project Document Activity : new or updates files, new directories, in the last 4 weeks (TrivialDev)
+* Frs: Download statistics are available as graph now (TrivialDev)
 
 Plugins:
 * headermenu: new plugin to handle links in headermenu or outermenu (TrivialDev)
