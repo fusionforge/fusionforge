@@ -451,6 +451,7 @@ function html_use_jqueryjqplotpluginCanvas() {
 	html_use_jqueryjqplot();
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.canvasTextRenderer.js');
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.canvasAxisLabelRenderer.js');
+	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.categoryAxisRenderer.js');
 }
 
 function html_use_jqueryjqplotpluginBar() {
