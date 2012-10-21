@@ -701,7 +701,7 @@ class GitPlugin extends SCMPlugin {
 		if (! $project->usesPlugin($this->name)) {
 			return false;
 		}
-		if (in_array('scm', $params['show'])) {
+		if (in_array('scmgit', $params['show'])) {
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
 			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
@@ -723,8 +723,8 @@ class GitPlugin extends SCMPlugin {
 				}
 			}
 		}
-		$params['ids'][] = 'scm';
-		$params['texts'][] = _('SCM Git Commits');
+		$params['ids'][] = $this->name;
+		$params['texts'][] = _('Git Commits');
 		return true;
 	}
 }
