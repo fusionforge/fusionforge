@@ -552,7 +552,7 @@ class SVNPlugin extends SCMPlugin {
 			return false;
 		}
 
-		if (in_array('scm', $params['show'])) {
+		if (in_array('scmsvn', $params['show'])) {
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
 			$d1 = date('Y-m-d', $start_time - 80000);
