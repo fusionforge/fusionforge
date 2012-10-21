@@ -1,11 +1,10 @@
 #
 # Regular cron jobs for the ftp-proftpd package
 #
-
-INCLUDE_PATH=@CONFIG_PATH@:@SOURCE_PATH@/:@SOURCE_PATH@/www:@SOURCE_PATH@/common
+PATH=@BINARY_PATH@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # FTP update
 0 * * * * root [ -x @BINARY_PATH@/install-ftp.sh ] && @BINARY_PATH@/install-ftp.sh update > /dev/null 2>&1
 
 # create and mount project directory in user's home directory
-0 * * * * root [ -x @BINARY_PATH@/ftp_create_group_access.php ] && /usr/bin/php -d include_path=$INCLUDE_PATH @BINARY_PATH@/ftp_create_group_access.php > /dev/null 2>&1
+0 * * * * root forge_run_job ftp_create_group_access.php
