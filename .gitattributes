@@ -152,174 +152,16 @@ htdocs/top-logo.png -text svneol=unset#image/png
 /specs.watchr -text
 src/AUTHORS -text
 src/CHANGES -text
-src/COPYING.php -text
 src/NEWS -text
 src/backend/include.pl svneol=native#text/x-perl
 src/backend/shell/apache.sh svneol=native#text/x-sh
-src/common/account/actions/addsshkey.php -text
-src/common/account/actions/deletesshkey.php -text
-src/common/dao/CodendiDataAccess.class.php -text
-src/common/dao/include/DataAccess.class.php -text
-src/common/dao/include/DataAccessException.class.php -text
-src/common/dao/include/DataAccessObject.class.php -text
-src/common/dao/include/DataAccessResult.class.php -text
-src/common/docman/DocumentStorage.class.php -text
-src/common/docman/Parsedata.class.php -text
-src/common/docman/actions/addfile.php -text
-src/common/docman/actions/addsubdocgroup.php -text
-src/common/docman/actions/deldir.php -text
-src/common/docman/actions/delfile.php -text
-src/common/docman/actions/editdocgroup.php -text
-src/common/docman/actions/editfile.php -text
-src/common/docman/actions/emptytrash.php -text
-src/common/docman/actions/enforcereserve.php -text
-src/common/docman/actions/forcereindexenginesearch.php -text
-src/common/docman/actions/getfile.php -text
-src/common/docman/actions/injectzip.php -text
-src/common/docman/actions/lockfile.php -text
-src/common/docman/actions/monitordirectory.php -text
-src/common/docman/actions/monitorfile.php -text
-src/common/docman/actions/releasefile.php -text
-src/common/docman/actions/reservefile.php -text
-src/common/docman/actions/trashdir.php -text
-src/common/docman/actions/trashfile.php -text
-src/common/docman/actions/updatecreateonline.php -text
-src/common/docman/actions/updateenginesearch.php -text
-src/common/docman/actions/updatewebdavinterface.php -text
-src/common/docman/actions/validatefile.php -text
-src/common/docman/engine/parser_doc.php -text
-src/common/docman/engine/parser_html.php -text
 src/common/docman/engine/parser_list.txt -text
-src/common/docman/engine/parser_oo.php -text
-src/common/docman/engine/parser_pdf.php -text
-src/common/docman/engine/parser_text.inc.php -text
-src/common/docman/engine/parser_text.php -text
-src/common/docman/include/utils.php -text
-src/common/docman/include/webdav.php -text
-src/common/docman/views/addfile.php -text
-src/common/docman/views/additem.php -text
-src/common/docman/views/addsubdocgroup.php -text
-src/common/docman/views/admin.php -text
-src/common/docman/views/editdocgroup.php -text
-src/common/docman/views/editfile.php -text
-src/common/docman/views/help.php -text
-src/common/docman/views/listfile.php -text
-src/common/docman/views/listtrashfile.php -text
-src/common/docman/views/menu.php -text
-src/common/docman/views/pendingfiles.php -text
-src/common/docman/views/search.php -text
-src/common/docman/views/tree.php -text
-src/common/docman/views/views.php -text
-src/common/event/Event.class.php -text
-src/common/forum/AttachManager.class.php -text
-src/common/forum/ForumAdmin.class.php -text
-src/common/frs/FRSFileProcessorType.class.php -text
-src/common/frs/FRSFileType.class.php -text
-src/common/import/import_arrays.php -text
-src/common/import/import_docman.php -text
-src/common/import/import_forums.php -text
-src/common/import/import_frs.php -text
-src/common/import/import_mailman.php -text
-src/common/import/import_news.php -text
-src/common/import/import_svn.php -text
-src/common/import/import_tasks.php -text
-src/common/import/import_trackers.php -text
-src/common/import/import_users.php -text
-src/common/include/AuthPlugin.class.php -text
-src/common/include/Codendi_HTMLPurifier.class.php -text
-src/common/include/Codendi_Request.class.php -text
-src/common/include/DatabaseInstaller.class.php -text
-src/common/include/HTTPRequest.class.php -text
-src/common/include/Navigation.class.php -text
-src/common/include/PFO-RBAC.interface.php -text
-src/common/include/PluginInfo.class.php -text
-src/common/include/PluginPersistence.class.php -text
-src/common/include/ProjectManager.class.php -text
-src/common/include/RBAC.php -text
-src/common/include/RBACEngine.class.php -text
-src/common/include/TextSanitizer.class.php -text
-src/common/include/UserManager.class.php -text
-src/common/include/config-vars.php -text
-src/common/include/config.php -text
-src/common/include/env.inc.php -text
-src/common/include/extras-debug.php -text
-src/common/include/forge_events.php -text
-src/common/include/group_section_texts.php -text
-src/common/include/minijson.php -text
-src/common/include/plugins_utils.php -text
-src/common/include/pre-compat.php -text
-src/common/include/preplugins.php -text
-src/common/include/rbac_texts.php -text
-src/common/include/rdfutils.php -text
-src/common/include/sqlparser.php -text
-src/common/include/tag_cloud.php -text
-src/common/include/timezones.php -text
-src/common/include/utils_crossref.php -text
 src/common/include/xhtml10t-rdfa10.dtd -text
-src/common/mail/Mail.class.php -text
-src/common/mvc/Actions.class.php -text
-src/common/mvc/Controler.class.php -text
-src/common/mvc/Views.class.php -text
-src/common/pm/ProjectTaskSqlQueries.php -text
-src/common/reporting/ReportDownloads.class.php -text
-src/common/rss/RSS.class.php -text
 src/common/rss/simplepie.inc -text
-src/common/search/DocsAllSearchQuery.class.php -text
-src/common/system_event/SystemEvent.class.php -text
-src/common/system_event/SystemEventManager.class.php -text
-src/common/tracker/ArtifactWorkflow.class.php -text
-src/common/tracker/actions/ajax.php -text
-src/common/tracker/actions/csv.php -text
-src/common/tracker/actions/format_csv.php -text
-src/common/tracker/include/ArtifactTypeFactoryHtml.class.php -text
-src/common/tracker/include/build_submission_form.php -text
-src/common/tracker/views/form-customizelist.php -text
-src/common/tracker/views/form-deleteextrafieldelement.php -text
-src/common/tracker/views/form-workflow.php -text
-src/common/tracker/views/form-workflow_roles.php -text
-src/common/valid/Rule.class.php -text
-src/common/valid/Valid.class.php -text
-src/common/valid/ValidFactory.class.php -text
-src/common/widget/Rule_Widget.class.php -text
-src/common/widget/Valid_Widget.class.php -text
-src/common/widget/Widget.class.php -text
-src/common/widget/WidgetLayout.class.php -text
-src/common/widget/WidgetLayoutManager.class.php -text
-src/common/widget/WidgetLayout_Row.class.php -text
-src/common/widget/WidgetLayout_Row_Column.class.php -text
-src/common/widget/Widget_MyAdmin.class.php -text
-src/common/widget/Widget_MyArtifacts.class.php -text
-src/common/widget/Widget_MyBookmarks.class.php -text
-src/common/widget/Widget_MyLatestSvnCommits.class.php -text
-src/common/widget/Widget_MyMonitoredDocuments.class.php -text
-src/common/widget/Widget_MyMonitoredForums.class.php -text
-src/common/widget/Widget_MyMonitoredFp.class.php -text
-src/common/widget/Widget_MyProjects.class.php -text
-src/common/widget/Widget_MyProjectsLastDocuments.class.php -text
-src/common/widget/Widget_MyRss.class.php -text
-src/common/widget/Widget_MySurveys.class.php -text
-src/common/widget/Widget_MyTasks.class.php -text
-src/common/widget/Widget_ProjectDescription.class.php -text
-src/common/widget/Widget_ProjectDocumentsActivity.class.php -text
-src/common/widget/Widget_ProjectInfo.class.php -text
-src/common/widget/Widget_ProjectLatestDocuments.class.php -text
-src/common/widget/Widget_ProjectLatestFileReleases.class.php -text
-src/common/widget/Widget_ProjectLatestNews.class.php -text
-src/common/widget/Widget_ProjectMembers.class.php -text
-src/common/widget/Widget_ProjectPublicAreas.class.php -text
-src/common/widget/Widget_ProjectRss.class.php -text
-src/common/widget/Widget_Rss.class.php -text
-src/cronjobs/auth_unix.php -text
-src/cronjobs/create_scm_repos.php -text
-src/cronjobs/ftp_create_group_access.php -text
-src/cronjobs/gather_scm_stats.php -text
-src/cronjobs/generate_scm_snapshots.php -text
 src/cronjobs/get_news_notapproved.pl svneol=native#text/x-perl
 src/cronjobs/gforge-db-backup.sh -text svneol=unset#text/x-sh
-src/cronjobs/homedirs.php -text
 src/cronjobs/job-restart.sh -text
 src/cronjobs/job-server.pl -text
-src/cronjobs/update_docdata_dataword.php -text
 src/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 src/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
 src/db/20040108-gforge-3.21 -text svneol=unset#application/octet-stream
@@ -339,7 +181,6 @@ src/db/20090507-add_artifact_workflow.sql -text
 src/db/20090507-add_element_pos.sql -text
 src/db/20090507-add_project_query.sql -text
 src/db/20090507-browse_list.sql -text
-src/db/20090507-install_workflow.php -text
 src/db/20100308-drop-forum-attachment-type.sql -text
 src/db/20100308-forum-attachment-types.sql -text
 src/db/20100330-add-system-event.sql -text
@@ -385,9 +226,7 @@ src/db/20111214-docman-doc_groups-created_by.sql -text
 src/db/20120321-add-news-in-activity_vw.sql -text
 src/db/20120322-add-news-in-activity_vw.sql -text
 src/db/20120409-add-new-processors-64bits.sql -text
-src/db/20120603-docman-file-moved-in-fs.php -text
 src/db/20120610-create-sshkeys.sql -text
-src/db/20120610-migrate-sshkeys.php -text
 src/db/20120611-drop-obsolete-column-data-in-docman.sql -text
 src/db/20120709-drop-obsolete-column-language_id-in-docman.sql -text
 src/db/20120710-add-docgroupnew-in-activity_vw.sql -text
@@ -423,7 +262,6 @@ src/deb-specific/install-ssh.sh svneol=native#text/x-sh
 src/deb-specific/mailfwd_update.pl -text
 src/deb-specific/manage-uufiles.sh svneol=native#text/x-sh
 src/deb-specific/old-db-upgrade.pl svneol=native#text/x-perl
-src/deb-specific/pkginfo.inc.php -text
 src/deb-specific/prepare-vhosts-file.pl svneol=native#text/x-perl
 src/deb-specific/ssh_dump_update.pl svneol=native#text/x-perl
 src/deb-specific/stats_cvs.pl svneol=native#text/x-perl
@@ -607,70 +445,6 @@ src/install/install3 -text
 src/install/install4 -text
 src/install/install5_post -text
 src/install/install6_upgrade -text
-src/lib/vendor/arc/ARC2.php -text
-src/lib/vendor/arc/ARC2_Class.php -text
-src/lib/vendor/arc/ARC2_Reader.php -text
-src/lib/vendor/arc/ARC2_Resource.php -text
-src/lib/vendor/arc/ARC2_getFormat.php -text
-src/lib/vendor/arc/ARC2_getPreferredFormat.php -text
-src/lib/vendor/arc/extractors/ARC2_DcExtractor.php -text
-src/lib/vendor/arc/extractors/ARC2_ErdfExtractor.php -text
-src/lib/vendor/arc/extractors/ARC2_MicroformatsExtractor.php -text
-src/lib/vendor/arc/extractors/ARC2_OpenidExtractor.php -text
-src/lib/vendor/arc/extractors/ARC2_PoshRdfExtractor.php -text
-src/lib/vendor/arc/extractors/ARC2_RDFExtractor.php -text
-src/lib/vendor/arc/extractors/ARC2_RdfaExtractor.php -text
-src/lib/vendor/arc/extractors/ARC2_TwitterProfilePicExtractor.php -text
-src/lib/vendor/arc/parsers/ARC2_AtomParser.php -text
-src/lib/vendor/arc/parsers/ARC2_CBJSONParser.php -text
-src/lib/vendor/arc/parsers/ARC2_JSONParser.php -text
-src/lib/vendor/arc/parsers/ARC2_LegacyXMLParser.php -text
-src/lib/vendor/arc/parsers/ARC2_RDFParser.php -text
-src/lib/vendor/arc/parsers/ARC2_RDFXMLParser.php -text
-src/lib/vendor/arc/parsers/ARC2_RSSParser.php -text
-src/lib/vendor/arc/parsers/ARC2_SGAJSONParser.php -text
-src/lib/vendor/arc/parsers/ARC2_SPARQLParser.php -text
-src/lib/vendor/arc/parsers/ARC2_SPARQLPlusParser.php -text
-src/lib/vendor/arc/parsers/ARC2_SPARQLXMLResultParser.php -text
-src/lib/vendor/arc/parsers/ARC2_SPOGParser.php -text
-src/lib/vendor/arc/parsers/ARC2_SemHTMLParser.php -text
-src/lib/vendor/arc/parsers/ARC2_TurtleParser.php -text
-src/lib/vendor/arc/serializers/ARC2_LegacyHTMLSerializer.php -text
-src/lib/vendor/arc/serializers/ARC2_LegacyJSONSerializer.php -text
-src/lib/vendor/arc/serializers/ARC2_LegacyXMLSerializer.php -text
-src/lib/vendor/arc/serializers/ARC2_MicroRDFSerializer.php -text
-src/lib/vendor/arc/serializers/ARC2_NTriplesSerializer.php -text
-src/lib/vendor/arc/serializers/ARC2_POSHRDFSerializer.php -text
-src/lib/vendor/arc/serializers/ARC2_RDFJSONSerializer.php -text
-src/lib/vendor/arc/serializers/ARC2_RDFSerializer.php -text
-src/lib/vendor/arc/serializers/ARC2_RDFXMLSerializer.php -text
-src/lib/vendor/arc/serializers/ARC2_RSS10Serializer.php -text
-src/lib/vendor/arc/serializers/ARC2_TurtleSerializer.php -text
-src/lib/vendor/arc/sparqlscript/ARC2_SPARQLScriptParser.php -text
-src/lib/vendor/arc/sparqlscript/ARC2_SPARQLScriptProcessor.php -text
-src/lib/vendor/arc/store/ARC2_RemoteStore.php -text
-src/lib/vendor/arc/store/ARC2_Store.php -text
-src/lib/vendor/arc/store/ARC2_StoreAskQueryHandler.php -text
-src/lib/vendor/arc/store/ARC2_StoreAtomLoader.php -text
-src/lib/vendor/arc/store/ARC2_StoreCBJSONLoader.php -text
-src/lib/vendor/arc/store/ARC2_StoreConstructQueryHandler.php -text
-src/lib/vendor/arc/store/ARC2_StoreDeleteQueryHandler.php -text
-src/lib/vendor/arc/store/ARC2_StoreDescribeQueryHandler.php -text
-src/lib/vendor/arc/store/ARC2_StoreDumpQueryHandler.php -text
-src/lib/vendor/arc/store/ARC2_StoreDumper.php -text
-src/lib/vendor/arc/store/ARC2_StoreEndpoint.php -text
-src/lib/vendor/arc/store/ARC2_StoreHelper.php -text
-src/lib/vendor/arc/store/ARC2_StoreInsertQueryHandler.php -text
-src/lib/vendor/arc/store/ARC2_StoreLoadQueryHandler.php -text
-src/lib/vendor/arc/store/ARC2_StoreQueryHandler.php -text
-src/lib/vendor/arc/store/ARC2_StoreRDFXMLLoader.php -text
-src/lib/vendor/arc/store/ARC2_StoreRSSLoader.php -text
-src/lib/vendor/arc/store/ARC2_StoreSGAJSONLoader.php -text
-src/lib/vendor/arc/store/ARC2_StoreSPOGLoader.php -text
-src/lib/vendor/arc/store/ARC2_StoreSelectQueryHandler.php -text
-src/lib/vendor/arc/store/ARC2_StoreSemHTMLLoader.php -text
-src/lib/vendor/arc/store/ARC2_StoreTableManager.php -text
-src/lib/vendor/arc/store/ARC2_StoreTurtleLoader.php -text
 src/lib/vendor/coolfieldset/css/jquery.coolfieldset.css -text
 src/lib/vendor/coolfieldset/images/collapsed.gif -text svneol=unset#unset
 src/lib/vendor/coolfieldset/images/expanded.gif -text svneol=unset#unset
@@ -830,43 +604,32 @@ src/packaging/readme/web-apache2 -text
 src/plugins/README -text
 src/plugins/admssw/NAME -text
 src/plugins/admssw/README -text
-src/plugins/admssw/common/admssw-init.php -text
 src/plugins/admssw/etc/admssw.ini -text
-src/plugins/admssw/include/admsswPlugin.class.php -text
 src/plugins/admssw/packaging/control/222plugin-admssw -text
 src/plugins/admssw/packaging/control/222plugin-admssw.shortdesc -text
 src/plugins/admssw/packaging/dirs/plugin-admssw -text
 src/plugins/admssw/packaging/docs/plugin-admssw -text
 src/plugins/admssw/packaging/install/plugin-admssw -text
 src/plugins/aselectextauth/etc/aselectextauth.ini -text
-src/plugins/authbuiltin/common/AuthBuiltinPlugin.class.php -text
-src/plugins/authbuiltin/common/authbuiltin-init.php -text
 src/plugins/authbuiltin/etc/authbuiltin.ini -text
-src/plugins/authbuiltin/www/post-login.php -text
 src/plugins/authcas/NAME -text
 src/plugins/authcas/README -text
 src/plugins/authcas/etc/authcas.ini -text
 src/plugins/authcas/gforge-plugin-authcas.spec -text
-src/plugins/authcas/include/AuthCASPlugin.class.php -text
-src/plugins/authcas/include/authcas-init.php -text
 src/plugins/authcas/packaging/control/301plugin-authcas -text
 src/plugins/authcas/packaging/control/301plugin-authcas.shortdesc -text
 src/plugins/authcas/packaging/docs/plugin-authcas -text
 src/plugins/authcas/packaging/install/plugin-authcas -text
 src/plugins/authcas/packaging/links/plugin-authcas -text
-src/plugins/authcas/www/post-login.php -text
 src/plugins/authhttpd/NAME -text
 src/plugins/authhttpd/README -text
 src/plugins/authhttpd/etc/authhttpd.ini -text
 src/plugins/authhttpd/gforge-plugin-authhttpd.spec -text
-src/plugins/authhttpd/include/AuthHTTPDPlugin.class.php -text
-src/plugins/authhttpd/include/authhttpd-init.php -text
 src/plugins/authhttpd/packaging/control/302plugin-authhttpd -text
 src/plugins/authhttpd/packaging/control/302plugin-authhttpd.shortdesc -text
 src/plugins/authhttpd/packaging/docs/plugin-authhttpd -text
 src/plugins/authhttpd/packaging/install/plugin-authhttpd -text
 src/plugins/authhttpd/packaging/links/plugin-authhttpd -text
-src/plugins/authhttpd/www/post-login.php -text
 src/plugins/authldap/NAME -text
 src/plugins/authldap/etc/authldap.ini -text
 src/plugins/authldap/packaging/control/300plugin-authldap -text
@@ -874,56 +637,37 @@ src/plugins/authldap/packaging/control/300plugin-authldap.shortdesc -text
 src/plugins/authldap/packaging/docs/plugin-authldap -text
 src/plugins/authldap/packaging/install/plugin-authldap -text
 src/plugins/authldap/packaging/links/plugin-authldap -text
-src/plugins/authldap/www/post-login.php -text
 src/plugins/authopenid/3rd-party/README -text
-src/plugins/authopenid/3rd-party/lightopenid/example-google.php -text
-src/plugins/authopenid/3rd-party/lightopenid/example.php -text
-src/plugins/authopenid/3rd-party/lightopenid/openid.php -text
 src/plugins/authopenid/NAME -text
 src/plugins/authopenid/README -text
 src/plugins/authopenid/bin/db-delete.pl -text
 src/plugins/authopenid/bin/db-upgrade.pl -text
 src/plugins/authopenid/db/authopenid-init.sql -text
 src/plugins/authopenid/etc/authopenid.ini -text
-src/plugins/authopenid/include/AuthOpenIDPlugin.class.php -text
-src/plugins/authopenid/include/authopenid-init.php -text
 src/plugins/authopenid/packaging/control/301plugin-authopenid -text
 src/plugins/authopenid/packaging/control/301plugin-authopenid.shortdesc -text
 src/plugins/authopenid/packaging/dirs/plugin-authopenid -text
 src/plugins/authopenid/packaging/docs/plugin-authopenid -text
 src/plugins/authopenid/packaging/install/plugin-authopenid -text
 src/plugins/authopenid/packaging/links/plugin-authopenid -text
-src/plugins/authopenid/www/index.php -text
-src/plugins/authopenid/www/post-login.php -text
 src/plugins/authwebid/3rd-party/README -text
 src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/LICENSE -text
 src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/README.markdown -text
-src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/lib/Authentication.php -text
-src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/lib/Authentication_Delegated.php -text
-src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/lib/Authentication_Session.php -text
-src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/lib/Authentication_URL.php -text
-src/plugins/authwebid/3rd-party/WebIDDelegatedAuth/lib/Authentication_X509CertRepo.php -text
 src/plugins/authwebid/NAME -text
 src/plugins/authwebid/README -text
 src/plugins/authwebid/bin/db-delete.pl -text
 src/plugins/authwebid/bin/db-upgrade.pl -text
 src/plugins/authwebid/db/authwebid-init.sql -text
 src/plugins/authwebid/etc/authwebid.ini -text
-src/plugins/authwebid/include/AuthWebIDPlugin.class.php -text
-src/plugins/authwebid/include/authwebid-init.php -text
 src/plugins/authwebid/packaging/control/301plugin-authwebid -text
 src/plugins/authwebid/packaging/control/301plugin-authwebid.shortdesc -text
 src/plugins/authwebid/packaging/dirs/plugin-authwebid -text
 src/plugins/authwebid/packaging/docs/plugin-authwebid -text
 src/plugins/authwebid/packaging/install/plugin-authwebid -text
 src/plugins/authwebid/packaging/links/plugin-authwebid -text
-src/plugins/authwebid/www/index.php -text
-src/plugins/authwebid/www/post-login.php -text
 src/plugins/blocks/NAME -text
-src/plugins/blocks/common/blocksPlugin.class.php -text
 src/plugins/blocks/db/blocks-init.sql -text
 src/plugins/blocks/etc/blocks.ini -text
-src/plugins/blocks/etc/plugins/blocks/config.php -text
 src/plugins/blocks/etc/templates.json -text
 src/plugins/blocks/packaging/control/222plugin-blocks -text
 src/plugins/blocks/packaging/control/222plugin-blocks.shortdesc -text
@@ -931,14 +675,9 @@ src/plugins/blocks/packaging/dirs/plugin-blocks -text
 src/plugins/blocks/packaging/docs/plugin-blocks -text
 src/plugins/blocks/packaging/install/plugin-blocks -text
 src/plugins/blocks/packaging/links/plugin-blocks -text
-src/plugins/blocks/www/index.php -text
-src/plugins/ckeditor/common/ckeditorPlugin.class.php -text
 src/plugins/compactpreview/NAME -text
 src/plugins/compactpreview/README -text
-src/plugins/compactpreview/common/compactpreview-init.php -text
 src/plugins/compactpreview/etc/compactpreview.ini -text
-src/plugins/compactpreview/include/CompactPreviewPlugin.class.php -text
-src/plugins/compactpreview/include/CompactResource.class.php -text
 src/plugins/compactpreview/packaging/control/222plugin-compactpreview -text
 src/plugins/compactpreview/packaging/control/222plugin-compactpreview.shortdesc -text
 src/plugins/compactpreview/packaging/dirs/plugin-compactpreview -text
@@ -956,15 +695,11 @@ src/plugins/compactpreview/www/images/Tooltip/balloon_top.png -text svneol=unset
 src/plugins/compactpreview/www/images/Tooltip/balloon_topLeft.png -text svneol=unset#image/png
 src/plugins/compactpreview/www/images/Tooltip/balloon_topRight.png -text svneol=unset#image/png
 src/plugins/compactpreview/www/images/Tooltip/oslc.png -text svneol=unset#image/png
-src/plugins/compactpreview/www/project.php -text
 src/plugins/compactpreview/www/scripts/oslcTooltip.js -text
-src/plugins/compactpreview/www/user.php -text
 src/plugins/contribtracker/INSTALL -text
 src/plugins/contribtracker/NAME -text
 src/plugins/contribtracker/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/contribtracker/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-src/plugins/contribtracker/common/ContribTrackerPlugin.class.php -text
-src/plugins/contribtracker/common/contribtracker-init.php -text
 src/plugins/contribtracker/db/contribtracker-init.sql -text
 src/plugins/contribtracker/etc/contribtracker.ini -text
 src/plugins/contribtracker/packaging/control/200plugin-contribtracker -text
@@ -972,10 +707,6 @@ src/plugins/contribtracker/packaging/control/200plugin-contribtracker.shortdesc 
 src/plugins/contribtracker/packaging/dirs/plugin-contribtracker -text
 src/plugins/contribtracker/packaging/install/plugin-contribtracker -text
 src/plugins/contribtracker/packaging/links/plugin-contribtracker -text
-src/plugins/contribtracker/www/actor_logo.php -text
-src/plugins/contribtracker/www/global_admin.php -text
-src/plugins/contribtracker/www/index.php -text
-src/plugins/contribtracker/www/project_admin.php -text
 src/plugins/cvssyncmail/etc/cvssyncmail.ini -text
 src/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
 src/plugins/cvstracker/etc/cvstracker.ini -text
@@ -983,15 +714,12 @@ src/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#applicat
 src/plugins/cvstracker/packaging/docs/plugin-cvstracker -text
 src/plugins/doaprdf/NAME -text
 src/plugins/doaprdf/README -text
-src/plugins/doaprdf/common/doaprdf-init.php -text
 src/plugins/doaprdf/etc/doaprdf.ini -text
-src/plugins/doaprdf/include/doaprdfPlugin.class.php -text
 src/plugins/doaprdf/packaging/control/222plugin-doaprdf -text
 src/plugins/doaprdf/packaging/control/222plugin-doaprdf.shortdesc -text
 src/plugins/doaprdf/packaging/dirs/plugin-doaprdf -text
 src/plugins/doaprdf/packaging/docs/plugin-doaprdf -text
 src/plugins/doaprdf/packaging/install/plugin-doaprdf -text
-src/plugins/env.inc.php -text
 src/plugins/externalsearch/bin/db-delete.pl svneol=native#text/x-perl
 src/plugins/externalsearch/bin/db-upgrade.pl svneol=native#text/x-perl
 src/plugins/externalsearch/etc/engines.json -text
@@ -1002,8 +730,6 @@ src/plugins/extratabs/NAME -text
 src/plugins/extratabs/README -text
 src/plugins/extratabs/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/extratabs/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-src/plugins/extratabs/common/ExtraTabsPlugin.class.php -text
-src/plugins/extratabs/common/extratabs-init.php -text
 src/plugins/extratabs/db/20101203-add_type_for_iframe.sql -text
 src/plugins/extratabs/db/extratabs-init.sql -text
 src/plugins/extratabs/etc/extratabs.ini -text
@@ -1013,29 +739,17 @@ src/plugins/extratabs/packaging/dirs/plugin-extratabs -text
 src/plugins/extratabs/packaging/docs/plugin-extratabs -text
 src/plugins/extratabs/packaging/install/plugin-extratabs -text
 src/plugins/extratabs/packaging/links/plugin-extratabs -text
-src/plugins/extratabs/www/iframe.php -text
-src/plugins/extratabs/www/index.php -text
 src/plugins/extsubproj/NAME -text
 src/plugins/extsubproj/README -text
-src/plugins/extsubproj/actions/addExtSubProj.php -text
-src/plugins/extsubproj/actions/delExtSubProj.php -text
 src/plugins/extsubproj/bin/db-delete.pl -text
 src/plugins/extsubproj/bin/db-upgrade.pl -text
-src/plugins/extsubproj/common/extsubproj-init.php -text
 src/plugins/extsubproj/db/extsubproj-init.sql -text
 src/plugins/extsubproj/etc/extsubproj.ini -text
-src/plugins/extsubproj/include/Graphite.php -text
-src/plugins/extsubproj/include/extsubprojPlugin.class.php -text
-src/plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php -text
 src/plugins/extsubproj/packaging/control/222plugin-extsubproj -text
 src/plugins/extsubproj/packaging/control/222plugin-extsubproj.shortdesc -text
 src/plugins/extsubproj/packaging/dirs/plugin-extsubproj -text
 src/plugins/extsubproj/packaging/install/plugin-extsubproj -text
 src/plugins/extsubproj/packaging/links/plugin-extsubproj -text
-src/plugins/extsubproj/view/admin/viewGlobalConfiguration.php -text
-src/plugins/extsubproj/view/admin/viewProjectConfiguration.php -text
-src/plugins/extsubproj/www/index.php -text
-src/plugins/fckeditor/common/fckeditorPlugin.class.php -text
 src/plugins/fckeditor/etc/fckeditor.ini -text
 src/plugins/fckeditor/packaging/docs/plugin-fckeditor -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/fckplugin.js -text
@@ -1114,11 +828,6 @@ src/plugins/fckeditor/www/_samples/perl/sample02.cgi -text
 src/plugins/fckeditor/www/_samples/perl/sample03.cgi -text
 src/plugins/fckeditor/www/_samples/perl/sample04.cgi -text
 src/plugins/fckeditor/www/_samples/perl/sampleposteddata.cgi -text
-src/plugins/fckeditor/www/_samples/php/sample01.php -text
-src/plugins/fckeditor/www/_samples/php/sample02.php -text
-src/plugins/fckeditor/www/_samples/php/sample03.php -text
-src/plugins/fckeditor/www/_samples/php/sample04.php -text
-src/plugins/fckeditor/www/_samples/php/sampleposteddata.php -text
 src/plugins/fckeditor/www/_samples/py/sample01.py -text
 src/plugins/fckeditor/www/_samples/py/sampleposteddata.py -text
 src/plugins/fckeditor/www/_samples/sample.css -text svneol=unset#text/css
@@ -1403,13 +1112,6 @@ src/plugins/fckeditor/www/editor/filemanager/connectors/perl/io.pl -text svneol=
 src/plugins/fckeditor/www/editor/filemanager/connectors/perl/upload.cgi -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/perl/upload_fck.pl -text svneol=unset#text/x-perl
 src/plugins/fckeditor/www/editor/filemanager/connectors/perl/util.pl -text svneol=unset#text/x-perl
-src/plugins/fckeditor/www/editor/filemanager/connectors/php/basexml.php -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/php/config.php -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/php/connector.php -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/php/io.php -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/php/phpcompat.php -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/php/upload.php -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/php/util.php -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/py/config.py -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/py/connector.py -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/py/fckcommands.py -text
@@ -1528,17 +1230,13 @@ src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.separator.gif -text
 src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.start.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/fckeditor.pl svneol=native#text/x-perl
 src/plugins/fckeditor/www/fckeditor.py -text
-src/plugins/fckeditor/www/fckeditor_php4.php -text
-src/plugins/fckeditor/www/fckeditor_php5.php -text
 src/plugins/fckeditor/www/fckpackager.xml -text svneol=unset#text/xml
 src/plugins/fckeditor/www/fckstyles.xml svneol=native#text/xml
 src/plugins/fckeditor/www/fcktemplates.xml svneol=native#text/xml
 src/plugins/fckeditor/www/fckutils.cfm -text
 src/plugins/foafprofiles/NAME -text
 src/plugins/foafprofiles/README -text
-src/plugins/foafprofiles/common/foafprofiles-init.php -text
 src/plugins/foafprofiles/etc/foafprofiles.ini -text
-src/plugins/foafprofiles/include/foafprofilesPlugin.class.php -text
 src/plugins/foafprofiles/packaging/control/222plugin-foafprofiles -text
 src/plugins/foafprofiles/packaging/control/222plugin-foafprofiles.shortdesc -text
 src/plugins/foafprofiles/packaging/dirs/plugin-foafprofiles -text
@@ -1550,32 +1248,14 @@ src/plugins/forumml/TODO -text
 src/plugins/forumml/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 src/plugins/forumml/bin/install.sh -text
 src/plugins/forumml/bin/installFF.sh -text svneol=unset#text/x-sh
-src/plugins/forumml/bin/mail_2_DB.php -text
 src/plugins/forumml/bin/mail_2_DB.pl -text svneol=unset#text/x-perl
-src/plugins/forumml/bin/mail_2_DBFF.php -text
 src/plugins/forumml/bin/mail_2_DBFF.pl -text svneol=unset#text/x-perl
 src/plugins/forumml/bin/ml_arch_2_DB.pl -text svneol=unset#text/x-perl
 src/plugins/forumml/bin/ml_arch_2_DBFF.pl -text svneol=unset#text/x-perl
-src/plugins/forumml/common/forumml-init.php -text
 src/plugins/forumml/db/forumml-init.sql -text
 src/plugins/forumml/db/install.sql -text
 src/plugins/forumml/etc/forumml.inc -text
 src/plugins/forumml/etc/forumml.ini -text
-src/plugins/forumml/include/ForumMLGroupSearchEngine.class.php -text
-src/plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php -text
-src/plugins/forumml/include/ForumMLInsert.class.php -text
-src/plugins/forumml/include/ForumMLPluginDescriptor.class.php -text
-src/plugins/forumml/include/ForumMLPluginInfo.class.php -text
-src/plugins/forumml/include/ForumMLSearchEngine.class.php -text
-src/plugins/forumml/include/ForumMLSearchQuery.class.php -text
-src/plugins/forumml/include/ForumML_Attachment.class.php -text
-src/plugins/forumml/include/ForumML_AttachmentDao.class.php -text
-src/plugins/forumml/include/ForumML_FileStorage.class.php -text
-src/plugins/forumml/include/ForumML_HTMLPurifier.class.php -text
-src/plugins/forumml/include/ForumML_MessageDao.class.php -text
-src/plugins/forumml/include/ForumML_MessageManager.class.php -text
-src/plugins/forumml/include/ForumML_mimeDecode.class.php -text
-src/plugins/forumml/include/forummlPlugin.class.php -text
 src/plugins/forumml/packaging/control/000source -text
 src/plugins/forumml/packaging/control/222plugin-forumml -text
 src/plugins/forumml/packaging/control/222plugin-forumml.shortdesc -text
@@ -1603,8 +1283,6 @@ src/plugins/forumml/selinux/forumml8.pp -text svneol=unset#unset
 src/plugins/forumml/selinux/forumml8.te -text
 src/plugins/forumml/site-content/en_US/forumml.tab -text
 src/plugins/forumml/site-content/fr_FR/forumml.tab -text
-src/plugins/forumml/tests/ForumML_FileStorageTest.php -text
-src/plugins/forumml/tests/ForumML_InsertTest.php -text
 src/plugins/forumml/tests/_fixtures/samples/attachment_only.mbox -text
 src/plugins/forumml/tests/_fixtures/samples/html_with_inline_content_and_attch_in_html_only.mbox -text
 src/plugins/forumml/tests/_fixtures/samples/html_with_inline_content_and_attch_in_text_plus_html.mbox -text
@@ -1617,10 +1295,6 @@ src/plugins/forumml/tests/_fixtures/samples/text_plus_attachment.mbox -text
 src/plugins/forumml/translations/en.po -text
 src/plugins/forumml/translations/gforge.pot -text
 src/plugins/forumml/utils/manage-translations.sh -text svneol=unset#text/x-sh
-src/plugins/forumml/www/forumml_utils.php -text
-src/plugins/forumml/www/index.php -text
-src/plugins/forumml/www/message.php -text
-src/plugins/forumml/www/scripts/cc_attach_js.php -text
 src/plugins/forumml/www/scripts/forumml.js -text
 src/plugins/forumml/www/themes/default/css/style.css -text svneol=unset#text/css
 src/plugins/forumml/www/themes/default/images/ic/attach.png -text svneol=unset#image/png
@@ -1638,24 +1312,13 @@ src/plugins/forumml/www/themes/default/images/ic/resultset_previous.png -text sv
 src/plugins/forumml/www/themes/default/images/ic/resultset_previous_disabled.png -text svneol=unset#image/png
 src/plugins/forumml/www/themes/default/images/ic/spinner-greenie.gif -text svneol=unset#image/gif
 src/plugins/forumml/www/themes/default/images/ic/trash.png -text svneol=unset#image/png
-src/plugins/forumml/www/upload.php -text
 src/plugins/globaldashboard/NAME -text
 src/plugins/globaldashboard/README -text
 src/plugins/globaldashboard/bin/db-delete.pl -text
 src/plugins/globaldashboard/bin/db-upgrade.pl -text
-src/plugins/globaldashboard/common/globaldashboard-init.php -text
-src/plugins/globaldashboard/common/manage_accounts_db_utils.php -text
-src/plugins/globaldashboard/cronjobs/manage_globaldashboard.php -text
 src/plugins/globaldashboard/db/globaldashboard-init.sql -text
 src/plugins/globaldashboard/etc/globaldashboard.ini -text
 src/plugins/globaldashboard/etc/httpd.d/62plugin-globaldashboard -text
-src/plugins/globaldashboard/etc/plugins/globaldashboard/config.php -text
-src/plugins/globaldashboard/include/Graphite.php -text
-src/plugins/globaldashboard/include/globalDashboardConstants.php -text
-src/plugins/globaldashboard/include/globalDashboard_Widget_MyArtifacts.php -text
-src/plugins/globaldashboard/include/globalDashboard_Widget_MyProjects.php -text
-src/plugins/globaldashboard/include/globalDashboard_utils.php -text
-src/plugins/globaldashboard/include/globaldashboardPlugin.class.php -text
 src/plugins/globaldashboard/packaging/control/000source -text
 src/plugins/globaldashboard/packaging/control/222plugin-globaldashboard -text
 src/plugins/globaldashboard/packaging/control/222plugin-globaldashboard.shortdesc -text
@@ -1666,24 +1329,12 @@ src/plugins/globaldashboard/packaging/links/plugin-globaldashboard -text
 src/plugins/globaldashboard/translations/en.po -text
 src/plugins/globaldashboard/translations/gforge.pot -text
 src/plugins/globaldashboard/utils/manage-translations.sh -text
-src/plugins/globaldashboard/www/admin/add_account.php -text
-src/plugins/globaldashboard/www/admin/delete_account.php -text
-src/plugins/globaldashboard/www/admin/edit_account.php -text
-src/plugins/globaldashboard/www/admin/edit_account_page.php -text
-src/plugins/globaldashboard/www/admin/index.php -text
-src/plugins/globaldashboard/www/admin/manage_accounts.php -text
-src/plugins/globaldashboard/www/help.php -text
-src/plugins/globaldashboard/www/index.php -text
 src/plugins/globalsearch/NAME -text
 src/plugins/globalsearch/README -text
 src/plugins/globalsearch/TODO -text
 src/plugins/globalsearch/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/globalsearch/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 src/plugins/globalsearch/bin/get_assoc_sites_projects.pl -text svneol=unset#text/x-perl
-src/plugins/globalsearch/common/GlobalsearchPlugin.class.php -text
-src/plugins/globalsearch/common/globalsearch-init.php -text
-src/plugins/globalsearch/common/globalsearch_edit_utils.php -text
-src/plugins/globalsearch/common/globalsearch_stats_boxes.php -text
 src/plugins/globalsearch/db/globalsearch-init.sql -text
 src/plugins/globalsearch/etc/globalsearch.ini -text
 src/plugins/globalsearch/packaging/control/180plugin-globalsearch -text
@@ -1693,36 +1344,22 @@ src/plugins/globalsearch/packaging/dirs/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/docs/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/install/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/links/plugin-globalsearch -text
-src/plugins/globalsearch/www/edit_assoc_sites.php -text
-src/plugins/globalsearch/www/index.php -text
 src/plugins/gravatar/NAME -text
-src/plugins/gravatar/common/gravatarPlugin.class.php -text
 src/plugins/gravatar/etc/gravatar.ini -text
 src/plugins/gravatar/packaging/control/223plugin-gravatar -text
 src/plugins/gravatar/packaging/control/223plugin-gravatar.shortdesc -text
 src/plugins/gravatar/packaging/dirs/plugin-gravatar -text
 src/plugins/gravatar/packaging/install/plugin-gravatar -text
-src/plugins/headermenu/action/addLink.php -text
-src/plugins/headermenu/action/deleteLink.php -text
-src/plugins/headermenu/action/updateLinkStatus.php -text
-src/plugins/headermenu/action/updateLinkValue.php -text
-src/plugins/headermenu/common/headermenuPlugin.class.php -text
 src/plugins/headermenu/db/20120930-addoutermenusupport.sql -text
 src/plugins/headermenu/db/headermenu-init.sql -text
 src/plugins/headermenu/etc/headermenu.ini -text
-src/plugins/headermenu/view/admin/updateLinkValue.php -text
-src/plugins/headermenu/view/admin/viewGlobalConfiguration.php -text
-src/plugins/headermenu/www/index.php -text
 src/plugins/headermenu/www/scripts/HeaderMenuController.js -text
 src/plugins/helloworld/NAME -text
 src/plugins/helloworld/README -text
 src/plugins/helloworld/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/helloworld/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-src/plugins/helloworld/cronjobs/manage_helloworld.php -text
 src/plugins/helloworld/etc/helloworld.ini -text
 src/plugins/helloworld/etc/httpd.d/62plugin-helloworld -text
-src/plugins/helloworld/include/HelloWorldPluginDescriptor.class.php -text
-src/plugins/helloworld/include/HelloWorldPluginInfo.class.php -text
 src/plugins/helloworld/packaging/control/222plugin-helloworld -text
 src/plugins/helloworld/packaging/control/222plugin-helloworld.shortdesc -text
 src/plugins/helloworld/packaging/dirs/plugin-helloworld -text
@@ -1732,41 +1369,14 @@ src/plugins/helloworld/packaging/links/plugin-helloworld -text
 src/plugins/helloworld/translations/en.po -text
 src/plugins/helloworld/translations/gforge.pot -text
 src/plugins/helloworld/utils/manage-translations.sh -text svneol=unset#text/x-sh
-src/plugins/helloworld/www/admin/index.php -text
 src/plugins/hudson/NAME -text
 src/plugins/hudson/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/hudson/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-src/plugins/hudson/common/hudson-init.php -text
-src/plugins/hudson/cronjobs/manage_hudson.php -text
 src/plugins/hudson/db/hudson-init.sql -text
 src/plugins/hudson/db/install.sql -text
 src/plugins/hudson/db/uninstall.sql -text
 src/plugins/hudson/etc/httpd.d/62plugin-hudson -text
 src/plugins/hudson/etc/hudson.ini -text
-src/plugins/hudson/etc/plugins/hudson/config.php -text
-src/plugins/hudson/include/HudsonBuild.class.php -text
-src/plugins/hudson/include/HudsonJob.class.php -text
-src/plugins/hudson/include/HudsonJobURLFileException.class.php -text
-src/plugins/hudson/include/HudsonJobURLFileNotFoundException.class.php -text
-src/plugins/hudson/include/HudsonJobURLMalformedException.class.php -text
-src/plugins/hudson/include/HudsonJobWidget.class.php -text
-src/plugins/hudson/include/HudsonOverviewWidget.class.php -text
-src/plugins/hudson/include/HudsonTestResult.class.php -text
-src/plugins/hudson/include/HudsonWidget.class.php -text
-src/plugins/hudson/include/PluginHudsonJobDao.class.php -text
-src/plugins/hudson/include/hudson.class.php -text
-src/plugins/hudson/include/hudsonActions.class.php -text
-src/plugins/hudson/include/hudsonPlugin.class.php -text
-src/plugins/hudson/include/hudsonPluginDescriptor.class.php -text
-src/plugins/hudson/include/hudsonPluginInfo.class.php -text
-src/plugins/hudson/include/hudsonViews.class.php -text
-src/plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php -text
-src/plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php -text
-src/plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php -text
-src/plugins/hudson/include/hudson_Widget_JobTestResults.class.php -text
-src/plugins/hudson/include/hudson_Widget_JobTestTrend.class.php -text
-src/plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php -text
-src/plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php -text
 src/plugins/hudson/packaging/control/000source -text
 src/plugins/hudson/packaging/control/222plugin-hudson -text
 src/plugins/hudson/packaging/control/222plugin-hudson.shortdesc -text
@@ -1777,19 +1387,12 @@ src/plugins/hudson/packaging/links/plugin-hudson -text
 src/plugins/hudson/site-content/en_US/hudson.tab -text
 src/plugins/hudson/site-content/en_US/hudson.tab.back -text
 src/plugins/hudson/site-content/fr_FR/hudson.tab -text
-src/plugins/hudson/tests/AllTests.php -text
-src/plugins/hudson/tests/HudsonBuildTest.php -text
-src/plugins/hudson/tests/HudsonJobTest.php -text
-src/plugins/hudson/tests/HudsonTestResultTest.php -text
 src/plugins/hudson/tests/resources/jobbuild.xml -text svneol=unset#text/xml
 src/plugins/hudson/tests/resources/testReport.xml -text svneol=unset#text/xml
 src/plugins/hudson/translations/en.po -text
 src/plugins/hudson/translations/gforge.pot -text
 src/plugins/hudson/utils/manage-translations.sh -text svneol=unset#text/x-sh
-src/plugins/hudson/www/admin/index.php -text
 src/plugins/hudson/www/hudson_tab.js -text
-src/plugins/hudson/www/index.php -text
-src/plugins/hudson/www/test_result_pie_chart.php -text
 src/plugins/hudson/www/themes/default/css/style.css -text svneol=unset#text/css
 src/plugins/hudson/www/themes/default/images/ic/cross.png -text svneol=unset#image/png
 src/plugins/hudson/www/themes/default/images/ic/edit.png -text svneol=unset#image/png
@@ -1827,10 +1430,7 @@ src/plugins/mailman/NAME -text
 src/plugins/mailman/README.txt -text
 src/plugins/mailman/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/mailman/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-src/plugins/mailman/bin/import_members_DB.php -text
 src/plugins/mailman/bin/install.sh -text
-src/plugins/mailman/common/mailman-init.php -text
-src/plugins/mailman/cronjobs/manage_mailmanlists.php -text
 src/plugins/mailman/db/mailman-init.sql -text
 src/plugins/mailman/etc/httpd.d/200list.vhost -text
 src/plugins/mailman/etc/httpd.d/20list -text
@@ -1838,18 +1438,6 @@ src/plugins/mailman/etc/httpd.d/20zlist.vhost -text
 src/plugins/mailman/etc/httpd.d/21list.vhost.ssl -text
 src/plugins/mailman/etc/httpd.d/62plugin-list-mailman -text
 src/plugins/mailman/etc/mailman.ini -text
-src/plugins/mailman/etc/plugins/mailman/config.php -text
-src/plugins/mailman/include/BackendMailmanList.class.php -text
-src/plugins/mailman/include/MailmanList.class.php -text
-src/plugins/mailman/include/MailmanListDao.class.php -text
-src/plugins/mailman/include/MailmanListFactory.class.php -text
-src/plugins/mailman/include/MailmanPluginDescriptor.class.php -text
-src/plugins/mailman/include/MailmanPluginInfo.class.php -text
-src/plugins/mailman/include/MailsForUser.class.php -text
-src/plugins/mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php -text
-src/plugins/mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php -text
-src/plugins/mailman/include/mailman-init.php -text
-src/plugins/mailman/include/mailmanPlugin.class.php -text
 src/plugins/mailman/packaging/control/000source -text
 src/plugins/mailman/packaging/control/222plugin-mailman -text
 src/plugins/mailman/packaging/control/222plugin-mailman.shortdesc -text
@@ -1870,74 +1458,20 @@ src/plugins/mailman/usr/lib/mailman/Mailman/PsycopgConnector.py -text
 src/plugins/mailman/usr/lib/mailman/Mailman/SecurityManager.py -text
 src/plugins/mailman/utils/manage-translations.sh -text svneol=unset#text/x-sh
 src/plugins/mailman/var/lib/mailman/lists/extend.py -text
-src/plugins/mailman/www/admin/deletelist.php -text
-src/plugins/mailman/www/admin/index.php -text
 src/plugins/mailman/www/index.html -text
-src/plugins/mailman/www/index.php -text
-src/plugins/mailman/www/mailman_utils.php -text
 src/plugins/mailman/www/themes/default/images/ic/add.png -text svneol=unset#image/png
 src/plugins/mailman/www/themes/default/images/ic/delete.png -text svneol=unset#image/png
 src/plugins/mailman/www/themes/default/images/ic/tick.png -text svneol=unset#image/png
 src/plugins/mantisbt/NAME -text
-src/plugins/mantisbt/action/addAttachment.php -text
-src/plugins/mantisbt/action/addCategory.php -text
-src/plugins/mantisbt/action/addIssue.php -text
-src/plugins/mantisbt/action/addNote.php -text
-src/plugins/mantisbt/action/addVersion.php -text
-src/plugins/mantisbt/action/deleteAttachment.php -text
-src/plugins/mantisbt/action/deleteCategory.php -text
-src/plugins/mantisbt/action/deleteNote.php -text
-src/plugins/mantisbt/action/deleteVersion.php -text
-src/plugins/mantisbt/action/init.php -text
-src/plugins/mantisbt/action/inituser.php -text
-src/plugins/mantisbt/action/renameCategory.php -text
-src/plugins/mantisbt/action/updateConf.php -text
-src/plugins/mantisbt/action/updateGlobalConf.php -text
-src/plugins/mantisbt/action/updateIssue.php -text
-src/plugins/mantisbt/action/updateNote.php -text
-src/plugins/mantisbt/action/updateVersion.php -text
-src/plugins/mantisbt/action/updateuserConf.php -text
 src/plugins/mantisbt/bin/db-delete.pl -text
 src/plugins/mantisbt/bin/db-upgrade.pl -text
-src/plugins/mantisbt/common/MantisBTPlugin.class.php -text
 src/plugins/mantisbt/common/languages/Base.tab -text
-src/plugins/mantisbt/common/mantisbt-init.php -text
-src/plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php -text
-src/plugins/mantisbt/controler/filter.php -text
-src/plugins/mantisbt/controler/filter_roadmap.php -text
 src/plugins/mantisbt/db/mantisbt-init.sql -text
 src/plugins/mantisbt/etc/mantisbt.ini -text
-src/plugins/mantisbt/etc/plugins/mantisbt/config.php -text
 src/plugins/mantisbt/packaging/control/224plugin-mantisbt -text
 src/plugins/mantisbt/packaging/control/224plugin-mantisbt.shortdesc -text
 src/plugins/mantisbt/packaging/install/plugin-mantisbt -text
 src/plugins/mantisbt/packaging/links/plugin-mantisbt -text
-src/plugins/mantisbt/view/addAttachment.php -text
-src/plugins/mantisbt/view/addIssue.php -text
-src/plugins/mantisbt/view/addOrEditNote.php -text
-src/plugins/mantisbt/view/admin/StatPerMember.php -text
-src/plugins/mantisbt/view/admin/StatPerStatus.php -text
-src/plugins/mantisbt/view/admin/addCategory.php -text
-src/plugins/mantisbt/view/admin/addVersion.php -text
-src/plugins/mantisbt/view/admin/editVersion.php -text
-src/plugins/mantisbt/view/admin/stat.php -text
-src/plugins/mantisbt/view/admin/viewCategorie.php -text
-src/plugins/mantisbt/view/admin/viewConfiguration.php -text
-src/plugins/mantisbt/view/admin/viewGlobalConfiguration.php -text
-src/plugins/mantisbt/view/admin/viewVersion.php -text
-src/plugins/mantisbt/view/adminuser.php -text
-src/plugins/mantisbt/view/editIssue.php -text
-src/plugins/mantisbt/view/init.php -text
-src/plugins/mantisbt/view/inituser.php -text
-src/plugins/mantisbt/view/jumpToIssue.php -text
-src/plugins/mantisbt/view/roadmap.php -text
-src/plugins/mantisbt/view/viewAttachment.php -text
-src/plugins/mantisbt/view/viewIssue.php -text
-src/plugins/mantisbt/view/viewIssues.php -text
-src/plugins/mantisbt/view/viewNote.php -text
-src/plugins/mantisbt/www/admin/index.php -text
-src/plugins/mantisbt/www/getAttachment.php -text
-src/plugins/mantisbt/www/group/index.php -text
 src/plugins/mantisbt/www/img/down.gif -text svneol=unset#image/gif
 src/plugins/mantisbt/www/img/priority_1.gif -text svneol=unset#image/gif
 src/plugins/mantisbt/www/img/priority_2.gif -text svneol=unset#image/gif
@@ -1949,32 +1483,18 @@ src/plugins/mantisbt/www/img/priority_normal.gif -text svneol=unset#image/gif
 src/plugins/mantisbt/www/img/protected.gif -text svneol=unset#image/gif
 src/plugins/mantisbt/www/img/up.gif -text svneol=unset#image/gif
 src/plugins/mantisbt/www/img/update.png -text svneol=unset#image/png
-src/plugins/mantisbt/www/index.php -text
 src/plugins/mantisbt/www/scripts/MantisBTController.js -text
 src/plugins/mantisbt/www/style.css -text svneol=unset#text/css
-src/plugins/mantisbt/www/user/index.php -text
 src/plugins/mediawiki/NAME -text
 src/plugins/mediawiki/README -text
 src/plugins/mediawiki/README.codendi -text
 src/plugins/mediawiki/bin/create_links.sh -text
 src/plugins/mediawiki/bin/db-delete.pl -text
 src/plugins/mediawiki/bin/db-upgrade.pl -text
-src/plugins/mediawiki/bin/mw-drop-wikis.php -text
-src/plugins/mediawiki/bin/mw-plugin-init.php -text
-src/plugins/mediawiki/bin/mw-wrapper.php -text
-src/plugins/mediawiki/cronjobs/create-imagedirs.php -text
-src/plugins/mediawiki/cronjobs/create-wikis-mysql.php -text
-src/plugins/mediawiki/cronjobs/create-wikis.php -text
-src/plugins/mediawiki/cronjobs/dump-wikis.php -text
 src/plugins/mediawiki/db/mediawiki-init.sql -text
 src/plugins/mediawiki/etc/cron.d/fusionforge-plugin-mediawiki -text
 src/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki -text
 src/plugins/mediawiki/etc/mediawiki.ini -text
-src/plugins/mediawiki/include/MediaWikiPluginDescriptor.class.php -text
-src/plugins/mediawiki/include/MediaWikiPluginInfo.class.php -text
-src/plugins/mediawiki/include/mediawiki-init.php -text
-src/plugins/mediawiki/include/mediawikiPlugin.class.php -text
-src/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
 src/plugins/mediawiki/mediawiki-skin/FusionForge.php.patch -text
 src/plugins/mediawiki/mediawiki-skin/FusionForge.php.renamed -text
 src/plugins/mediawiki/mediawiki-skin/Makefile -text
@@ -1986,19 +1506,10 @@ src/plugins/mediawiki/packaging/dirs/plugin-mediawiki -text
 src/plugins/mediawiki/packaging/docs/plugin-mediawiki -text
 src/plugins/mediawiki/packaging/install/plugin-mediawiki -text
 src/plugins/mediawiki/packaging/links/plugin-mediawiki -text
-src/plugins/mediawiki/www/DatabaseForgeMysql.php -text
-src/plugins/mediawiki/www/DatabaseForgePgsql.php -text
-src/plugins/mediawiki/www/LocalSettings.php -text
-src/plugins/mediawiki/www/plugin_admin.php -text
-src/plugins/message/common/messagePlugin.class.php -text
 src/plugins/message/db/message-init.sql -text
-src/plugins/message/www/index.php -text
 src/plugins/message/www/js/message.js -text
 src/plugins/moinmoin/NAME -text
 src/plugins/moinmoin/bin/install.sh -text
-src/plugins/moinmoin/common/MoinMoinPlugin.class.php -text
-src/plugins/moinmoin/common/moinmoin-init.php -text
-src/plugins/moinmoin/cronjobs/create-wikis.php -text
 src/plugins/moinmoin/etc/moinmoin.ini -text
 src/plugins/moinmoin/lib/farmconfig.py -text
 src/plugins/moinmoin/lib/ff_groups.py -text
@@ -2010,63 +1521,26 @@ src/plugins/moinmoin/packaging/dirs/plugin-moinmoin -text
 src/plugins/moinmoin/packaging/install/plugin-moinmoin -text
 src/plugins/moinmoin/packaging/links/plugin-moinmoin -text
 src/plugins/moinmoin/wsgi/moin.wsgi -text
-src/plugins/moinmoin/www/frame.php -text
 src/plugins/oauthconsumer/NAME -text
 src/plugins/oauthconsumer/README -text
-src/plugins/oauthconsumer/common/oauthconsumer-init.php -text
 src/plugins/oauthconsumer/db/oauthconsumer-init.sql -text
 src/plugins/oauthconsumer/etc/oauthconsumer.ini -text
-src/plugins/oauthconsumer/include/access_token_api.php -text
-src/plugins/oauthconsumer/include/fusionforge_oauth_datastore.php -text
-src/plugins/oauthconsumer/include/oauthconsumerPlugin.class.php -text
-src/plugins/oauthconsumer/include/provider_api.php -text
-src/plugins/oauthconsumer/include/resource_api.php -text
 src/plugins/oauthconsumer/packaging/control/222plugin-oauthconsumer -text
 src/plugins/oauthconsumer/packaging/control/222plugin-oauthconsumer.shortdesc -text
 src/plugins/oauthconsumer/packaging/dirs/plugin-oauthconsumer -text
 src/plugins/oauthconsumer/packaging/install/plugin-oauthconsumer -text
 src/plugins/oauthconsumer/packaging/links/plugin-oauthconsumer -text
-src/plugins/oauthconsumer/www/access_token_delete.php -text
-src/plugins/oauthconsumer/www/access_tokens.php -text
-src/plugins/oauthconsumer/www/callback.php -text
-src/plugins/oauthconsumer/www/checks.php -text
-src/plugins/oauthconsumer/www/get_access_token.php -text
-src/plugins/oauthconsumer/www/index.php -text
-src/plugins/oauthconsumer/www/provider_add.php -text
-src/plugins/oauthconsumer/www/provider_delete.php -text
-src/plugins/oauthconsumer/www/provider_edit.php -text
-src/plugins/oauthconsumer/www/provider_update.php -text
-src/plugins/oauthconsumer/www/providers.php -text
-src/plugins/oauthconsumer/www/response.php -text
 src/plugins/oauthprovider/3rd-party/README -text
 src/plugins/oauthprovider/3rd-party/oauth-php/CHANGELOG.txt -text
 src/plugins/oauthprovider/3rd-party/oauth-php/LICENSE.txt -text
-src/plugins/oauthprovider/3rd-party/oauth-php/OAuth.php -text
-src/plugins/oauthprovider/3rd-party/oauth-php/OAuth_TestServer.php -text
 src/plugins/oauthprovider/3rd-party/oauth-php/doc/design.txt -text
-src/plugins/oauthprovider/3rd-party/oauth-php/example/access_token.php -text
-src/plugins/oauthprovider/3rd-party/oauth-php/example/client.php -text
-src/plugins/oauthprovider/3rd-party/oauth-php/example/common.inc.php -text
-src/plugins/oauthprovider/3rd-party/oauth-php/example/echo_api.php -text
-src/plugins/oauthprovider/3rd-party/oauth-php/example/index.php -text
-src/plugins/oauthprovider/3rd-party/oauth-php/example/request_token.php -text
 src/plugins/oauthprovider/NAME -text
 src/plugins/oauthprovider/README -text
 src/plugins/oauthprovider/bin/db-delete.pl -text
 src/plugins/oauthprovider/bin/db-upgrade.pl -text
-src/plugins/oauthprovider/common/oauthprovider-init.php -text
-src/plugins/oauthprovider/cronjobs/manage_oauthprovider.php -text
 src/plugins/oauthprovider/db/oauthprovider-init.sql -text
 src/plugins/oauthprovider/etc/httpd.d/62plugin-oauthprovider -text
 src/plugins/oauthprovider/etc/oauthprovider.ini -text
-src/plugins/oauthprovider/etc/plugins/oauthprovider/config.php -text
-src/plugins/oauthprovider/example/command-line.php -text
-src/plugins/oauthprovider/include/access_token_api.php -text
-src/plugins/oauthprovider/include/consumer_api.php -text
-src/plugins/oauthprovider/include/fusionforge_oauth_datastore.php -text
-src/plugins/oauthprovider/include/oauthprovider_plugin.php -text
-src/plugins/oauthprovider/include/request_token_api.php -text
-src/plugins/oauthprovider/include/token_api.php -text
 src/plugins/oauthprovider/packaging/control/222plugin-oauthprovider -text
 src/plugins/oauthprovider/packaging/control/222plugin-oauthprovider.shortdesc -text
 src/plugins/oauthprovider/packaging/dirs/plugin-oauthprovider -text
@@ -2077,25 +1551,6 @@ src/plugins/oauthprovider/packaging/links/plugin-oauthprovider -text
 src/plugins/oauthprovider/translations/en.po -text
 src/plugins/oauthprovider/translations/gforge.pot -text
 src/plugins/oauthprovider/utils/manage-translations.sh -text
-src/plugins/oauthprovider/www/access_token.php -text
-src/plugins/oauthprovider/www/access_tokens.php -text
-src/plugins/oauthprovider/www/admin/index.php -text
-src/plugins/oauthprovider/www/authorize.php -text
-src/plugins/oauthprovider/www/checks.php -text
-src/plugins/oauthprovider/www/consumer.php -text
-src/plugins/oauthprovider/www/consumer_create.php -text
-src/plugins/oauthprovider/www/consumer_delete.php -text
-src/plugins/oauthprovider/www/consumer_manage.php -text
-src/plugins/oauthprovider/www/consumer_update.php -text
-src/plugins/oauthprovider/www/consumer_update_page.php -text
-src/plugins/oauthprovider/www/echo.php -text
-src/plugins/oauthprovider/www/index.php -text
-src/plugins/oauthprovider/www/request_token.php -text
-src/plugins/oauthprovider/www/request_tokens.php -text
-src/plugins/oauthprovider/www/token_authorize.php -text
-src/plugins/oauthprovider/www/token_delete.php -text
-src/plugins/oauthprovider/www/token_deny.php -text
-src/plugins/online_help/common/online_helpPlugin.class.php -text
 src/plugins/online_help/etc/online_help.ini -text
 src/plugins/online_help/www/ar01s01s01.html -text
 src/plugins/online_help/www/ar01s01s02.html -text
@@ -2146,39 +1601,12 @@ src/plugins/oslc/INSTALL -text
 src/plugins/oslc/NAME -text
 src/plugins/oslc/README -text
 src/plugins/oslc/bin/sayhello -text
-src/plugins/oslc/common/oslc-init.php -text
-src/plugins/oslc/cronjobs/manage_oslc.php -text
 src/plugins/oslc/etc/httpd.d/plugin-oslc.inc -text
 src/plugins/oslc/etc/oslc.ini -text
-src/plugins/oslc/etc/plugins/oslc/config.php -text
-src/plugins/oslc/include/oslc-zend/application/Bootstrap.php -text
 src/plugins/oslc/include/oslc-zend/application/basic-pwd.txt -text
 src/plugins/oslc/include/oslc-zend/application/configs/application.ini -text
-src/plugins/oslc/include/oslc-zend/application/controllers/CmController.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/CodendiCmController.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/CodendiOSLCConnector.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/CompactController.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/ErrorController.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/FusionForgeCmController.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/FusionForgeCompactController.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/FusionForgeOSLCConnector.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/MantisCmController.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/MantisOSLCConnector.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/OSLCConnector.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/cql-lime_parser.inc.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/cql.lime -text
-src/plugins/oslc/include/oslc-zend/application/controllers/cql.php -text
-src/plugins/oslc/include/oslc-zend/application/controllers/lime-parse_engine.php -text
-src/plugins/oslc/include/oslc-zend/application/exceptions/oslcException.php -text
-src/plugins/oslc/include/oslc-zend/application/models/ChangeRequests.php -text
-src/plugins/oslc/include/oslc-zend/application/models/Codendi.inc.php -text
-src/plugins/oslc/include/oslc-zend/application/models/fusionforge.inc.php -text
-src/plugins/oslc/include/oslc-zend/application/models/mantis.inc.php -text
 src/plugins/oslc/include/oslc-zend/application/test.csv -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/_add_hyperlinks.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/_resource_xml.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/_service-catalog_xml.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/_service-document_xml.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/get.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/index.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/oslc-cm-service-document.phtml -text
@@ -2203,10 +1631,6 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/read-resource.ph
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/read-resource.xml.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/show-creation-ui.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/show-selection-ui.phtml -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/_add_hyperlinks.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/_resource_xml.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/_service-catalog_xml.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/_service-document_xml.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/get.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/index.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/oslc-cm-service-document.phtml -text
@@ -2231,16 +1655,11 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/read-reso
 src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/read-resource.xml.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/show-creation-ui.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/codendicm/show-selection-ui.phtml -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/error/_error_resource.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/error/default.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/error/error.json.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/error/error.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/error/error.xml.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/error/res-not-found.phtml -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/_add_hyperlinks.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/_resource_xml.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/_service-catalog_xml.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/_service-document_xml.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/get.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/index.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-cm-service-document.json.phtml -text
@@ -2271,16 +1690,10 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-resource.xml.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/show-creation-ui.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/show-selection-ui.phtml -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecompact/_compact_project_xml.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecompact/_compact_user_xml.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecompact/oslc-compact-project-small.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecompact/oslc-compact-project.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecompact/oslc-compact-user-small.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecompact/oslc-compact-user.phtml -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/_add_hyperlinks.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/_resource_xml.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/_service-catalog_xml.php -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/_service-document_xml.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/get.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/index.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/oslc-cm-service-document.phtml -text
@@ -2305,7 +1718,6 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/read-resou
 src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/read-resource.xml.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/show-creation-ui.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/show-selection-ui.phtml -text
-src/plugins/oslc/include/oslcPlugin.class.php -text
 src/plugins/oslc/packaging/control/222plugin-oslc -text
 src/plugins/oslc/packaging/control/222plugin-oslc.shortdesc -text
 src/plugins/oslc/packaging/dirs/plugin-oslc -text
@@ -2314,17 +1726,13 @@ src/plugins/oslc/packaging/docs/plugin-oslc -text
 src/plugins/oslc/packaging/install/plugin-oslc -text
 src/plugins/oslc/packaging/links/plugin-oslc -text
 src/plugins/oslc/post-testdata.xml -text svneol=unset#text/xml
-src/plugins/oslc/tests/func/sureFireReportTest.php -text
 src/plugins/oslc/tests/run-provider-tests.sh -text
 src/plugins/oslc/tests/setup-provider-test.sh -text
 src/plugins/oslc/translations/en.po -text
 src/plugins/oslc/translations/gforge.pot -text
 src/plugins/oslc/utils/manage-translations.sh -text svneol=unset#text/x-sh
-src/plugins/oslc/www/admin/index.php -text
-src/plugins/oslc/www/index.php -text
 src/plugins/oslc/www/scripts/json.js -text
 src/plugins/projectimport/3rd-party/README -text
-src/plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/ARC2_OSLCCoreRDFJSONParserPlugin.php -text
 src/plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/README -text
 src/plugins/projectimport/3rd-party/pear/README -text
 src/plugins/projectimport/3rd-party/pear/opendocument-packages.patch -text
@@ -2332,11 +1740,6 @@ src/plugins/projectimport/INSTALL -text
 src/plugins/projectimport/NAME -text
 src/plugins/projectimport/README -text
 src/plugins/projectimport/bin/install.sh -text
-src/plugins/projectimport/common/ProjectImportPlugin.class.php -text
-src/plugins/projectimport/common/ProjectImporter.class.php -text
-src/plugins/projectimport/common/UploadedFiles.class.php -text
-src/plugins/projectimport/common/projectimport-init.php -text
-src/plugins/projectimport/etc/plugins/projectimport/config.php -text
 src/plugins/projectimport/etc/projectimport.ini -text
 src/plugins/projectimport/packaging/control/222plugin-projectimport -text
 src/plugins/projectimport/packaging/control/222plugin-projectimport.shortdesc -text
@@ -2344,15 +1747,10 @@ src/plugins/projectimport/packaging/dirs/plugin-projectimport -text
 src/plugins/projectimport/packaging/docs/plugin-projectimport -text
 src/plugins/projectimport/packaging/install/plugin-projectimport -text
 src/plugins/projectimport/packaging/links/plugin-projectimport -text
-src/plugins/projectimport/www/index.php -text
-src/plugins/projectimport/www/projectsimport.php -text
-src/plugins/projectimport/www/usersimport.php -text
 src/plugins/projectlabels/NAME -text
 src/plugins/projectlabels/README -text
 src/plugins/projectlabels/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/projectlabels/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-src/plugins/projectlabels/common/ProjectLabelsPlugin.class.php -text
-src/plugins/projectlabels/common/projectlabels-init.php -text
 src/plugins/projectlabels/db/projectlabels-init.sql -text
 src/plugins/projectlabels/etc/projectlabels.ini -text
 src/plugins/projectlabels/packaging/control/190plugin-projectlabels -text
@@ -2361,34 +1759,17 @@ src/plugins/projectlabels/packaging/dirs/plugin-projectlabels -text
 src/plugins/projectlabels/packaging/docs/plugin-projectlabels -text
 src/plugins/projectlabels/packaging/install/plugin-projectlabels -text
 src/plugins/projectlabels/packaging/links/plugin-projectlabels -text
-src/plugins/projectlabels/www/index.php -text
 src/plugins/projects-hierarchy/AUTHORS -text
 src/plugins/projects-hierarchy/COPYING -text
 src/plugins/projects-hierarchy/NAME -text
-src/plugins/projects-hierarchy/actions/addChild.php -text
-src/plugins/projects-hierarchy/actions/projectsHierarchyDocman.php -text
-src/plugins/projects-hierarchy/actions/removeChild.php -text
-src/plugins/projects-hierarchy/actions/removeParent.php -text
-src/plugins/projects-hierarchy/actions/updateGlobalConf.php -text
-src/plugins/projects-hierarchy/actions/updateProjectConf.php -text
-src/plugins/projects-hierarchy/actions/validateRelationship.php -text
 src/plugins/projects-hierarchy/bin/db-delete.pl -text
 src/plugins/projects-hierarchy/bin/db-upgrade.pl -text
-src/plugins/projects-hierarchy/common/projects-hierarchy-init.php -text
-src/plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php -text
 src/plugins/projects-hierarchy/db/projects-hierarchy-init.sql -text
 src/plugins/projects-hierarchy/etc/projects-hierarchy.ini -text
-src/plugins/projects-hierarchy/include/hierarchy_utils.php -text
 src/plugins/projects-hierarchy/packaging/control/100plugin-projects-hierarchy -text
 src/plugins/projects-hierarchy/packaging/control/100plugin-projects-hierarchy.shortdesc -text
 src/plugins/projects-hierarchy/packaging/install/plugin-projects-hierarchy -text
 src/plugins/projects-hierarchy/packaging/links/plugin-projects-hierarchy -text
-src/plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php -text
-src/plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php -text
-src/plugins/projects-hierarchy/view/admin_project_link.php -text
-src/plugins/projects-hierarchy/view/docman_project_link.php -text
-src/plugins/projects-hierarchy/view/home_project_link.php -text
-src/plugins/projects-hierarchy/www/add_link.php -text
 src/plugins/projects-hierarchy/www/dtree.css -text svneol=unset#text/css
 src/plugins/projects-hierarchy/www/dtree.js -text
 src/plugins/projects-hierarchy/www/img/base.gif -text svneol=unset#image/gif
@@ -2411,27 +1792,17 @@ src/plugins/projects-hierarchy/www/img/plus.gif -text svneol=unset#image/gif
 src/plugins/projects-hierarchy/www/img/plusbottom.gif -text svneol=unset#image/gif
 src/plugins/projects-hierarchy/www/img/question.gif -text svneol=unset#image/gif
 src/plugins/projects-hierarchy/www/img/trash.gif -text svneol=unset#image/gif
-src/plugins/projects-hierarchy/www/index.php -text
 src/plugins/quota_management/INSTALL -text
-src/plugins/quota_management/common/quota_managementPlugin.class.php -text
 src/plugins/quota_management/cronjobs/quota_update.pl -text svneol=unset#text/x-perl
 src/plugins/quota_management/db/quota_management-init.sql -text
 src/plugins/quota_management/etc/quota_management.ini -text
-src/plugins/quota_management/www/index.php -text
-src/plugins/quota_management/www/quota.php -text
-src/plugins/quota_management/www/quota_admin.php -text
-src/plugins/quota_management/www/quota_project.php -text
 src/plugins/scmarch/NAME -text
-src/plugins/scmarch/common/ArchPlugin.class.php -text
-src/plugins/scmarch/common/scmarch-init.php -text
 src/plugins/scmarch/etc/scmarch.ini -text
 src/plugins/scmarch/packaging/control/136plugin-scmarch -text
 src/plugins/scmarch/packaging/control/136plugin-scmarch.shortdesc -text
 src/plugins/scmarch/packaging/dirs/plugin-scmarch -text
 src/plugins/scmarch/packaging/install/plugin-scmarch -text
 src/plugins/scmbzr/NAME -text
-src/plugins/scmbzr/common/BzrPlugin.class.php -text
-src/plugins/scmbzr/common/scmbzr-init.php -text
 src/plugins/scmbzr/etc/plugins/scmbzr/serve-branches.conf -text
 src/plugins/scmbzr/etc/scmbzr.ini -text
 src/plugins/scmbzr/packaging/control/132plugin-scmbzr -text
@@ -2442,9 +1813,6 @@ src/plugins/scmccase/etc/scmccase.ini -text
 src/plugins/scmccase/packaging/docs/plugin-scmccase -text
 src/plugins/scmccase/packaging/install/plugin-scmccase -text
 src/plugins/scmcpold/NAME -text
-src/plugins/scmcpold/common/CpoldPlugin.class.php -text
-src/plugins/scmcpold/common/scmcpold-init.php -text
-src/plugins/scmcpold/etc/plugins/scmcpold/config.php -text
 src/plugins/scmcpold/etc/scmcpold.ini -text
 src/plugins/scmcpold/packaging/control/137plugin-scmcpold -text
 src/plugins/scmcpold/packaging/control/137plugin-scmcpold.shortdesc -text
@@ -2464,8 +1832,6 @@ src/plugins/scmcvs/packaging/install/plugin-scmcvs -text
 src/plugins/scmdarcs/NAME -text
 src/plugins/scmdarcs/bin/db-delete.pl -text
 src/plugins/scmdarcs/bin/db-upgrade.pl -text
-src/plugins/scmdarcs/common/DarcsPlugin.class.php -text
-src/plugins/scmdarcs/common/scmdarcs-init.php -text
 src/plugins/scmdarcs/db/scmdarcs-init.sql -text
 src/plugins/scmdarcs/etc/scmdarcs.ini -text
 src/plugins/scmdarcs/packaging/control/135plugin-scmdarcs -text
@@ -2476,9 +1842,6 @@ src/plugins/scmdarcs/packaging/links/plugin-scmdarcs -text
 src/plugins/scmgit/NAME -text
 src/plugins/scmgit/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/scmgit/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-src/plugins/scmgit/common/GitPlugin.class.php -text
-src/plugins/scmgit/common/scmgit-init.php -text
-src/plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php -text
 src/plugins/scmgit/db/scmgit-init.sql -text
 src/plugins/scmgit/etc/scmgit.ini -text
 src/plugins/scmgit/packaging/control/133plugin-scmgit -text
@@ -2486,37 +1849,20 @@ src/plugins/scmgit/packaging/control/133plugin-scmgit.shortdesc -text
 src/plugins/scmgit/packaging/dirs/plugin-scmgit -text
 src/plugins/scmgit/packaging/install/plugin-scmgit -text
 src/plugins/scmgit/packaging/links/plugin-scmgit -text
-src/plugins/scmgit/www/index.php -text
 src/plugins/scmhg/INSTALL -text
 src/plugins/scmhg/NAME -text
-src/plugins/scmhg/common/HgPlugin.class.php -text
-src/plugins/scmhg/common/scmhg-init.php -text
 src/plugins/scmhg/etc/fflog.tmpl -text
 src/plugins/scmhg/etc/scmhg.ini -text
 src/plugins/scmhg/packaging/control/134plugin-scmhg -text
 src/plugins/scmhg/packaging/control/134plugin-scmhg.shortdesc -text
 src/plugins/scmhg/packaging/dirs/plugin-scmhg -text
 src/plugins/scmhg/packaging/install/plugin-scmhg -text
-src/plugins/scmhook/common/scmhook.class.php -text
-src/plugins/scmhook/common/scmhookPlugin.class.php -text
-src/plugins/scmhook/cronjobs/updateScmRepo.php -text
 src/plugins/scmhook/db/scmhook-init.sql -text
 src/plugins/scmhook/etc/scmhook.ini -text
-src/plugins/scmhook/library/scmhg/commitEmail.class.php -text
-src/plugins/scmhook/library/scmhg/cronjobs/updateScmRepo.php -text
-src/plugins/scmhook/library/scmsvn/checkLog.class.php -text
-src/plugins/scmhook/library/scmsvn/checkMimetype.class.php -text
-src/plugins/scmhook/library/scmsvn/commitEmail.class.php -text
-src/plugins/scmhook/library/scmsvn/commitTracker.class.php -text
-src/plugins/scmhook/library/scmsvn/cronjobs/updateScmRepo.php -text
 src/plugins/scmhook/library/scmsvn/hooks/checkmimetype/check-mime-type.pl -text
-src/plugins/scmhook/library/scmsvn/hooks/commitemail/commit-email.php -text
 src/plugins/scmhook/library/scmsvn/hooks/commitemail/commit-email.pl -text
-src/plugins/scmhook/library/scmsvn/hooks/committracker/Snoopy.class.php -text
-src/plugins/scmhook/library/scmsvn/hooks/committracker/post.php -text
 src/plugins/scmhook/library/scmsvn/skel/post-commit/head -text
 src/plugins/scmhook/library/scmsvn/skel/pre-commit/head -text
-src/plugins/scmhook/www/committracker/newcommit.php -text
 src/plugins/scmsvn/NAME -text
 src/plugins/scmsvn/bin/install.sh svneol=native#text/x-sh
 src/plugins/scmsvn/etc/scmsvn.ini -text
@@ -2531,13 +1877,9 @@ src/plugins/soapadmin/README.txt -text
 src/plugins/soapadmin/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/soapadmin/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 src/plugins/soapadmin/bin/sayhello -text
-src/plugins/soapadmin/common/soapadmin-init.php -text
-src/plugins/soapadmin/cronjobs/manage_soapadmin.php -text
 src/plugins/soapadmin/db/soapadmin-init.sql -text
 src/plugins/soapadmin/etc/httpd.d/62plugin-soapadmin -text
-src/plugins/soapadmin/etc/plugins/soapadmin/config.php -text
 src/plugins/soapadmin/etc/soapadmin.ini -text
-src/plugins/soapadmin/include/soapadminPlugin.class.php -text
 src/plugins/soapadmin/packaging/control/000source -text
 src/plugins/soapadmin/packaging/control/222plugin-soapadmin -text
 src/plugins/soapadmin/packaging/control/222plugin-soapadmin.shortdesc -text
@@ -2548,80 +1890,43 @@ src/plugins/soapadmin/packaging/links/plugin-soapadmin -text
 src/plugins/soapadmin/translations/en.po -text
 src/plugins/soapadmin/translations/gforge.pot -text
 src/plugins/soapadmin/utils/manage-translations.sh -text svneol=unset#text/x-sh
-src/plugins/soapadmin/www/admin/index.php -text
 src/plugins/soapadmin/www/coreapi/FusionforgeCoreApi.wsdl -text
-src/plugins/soapadmin/www/coreapi/coreapi.php -text
-src/plugins/soapadmin/www/coreapi/coreapiobjects.php -text
-src/plugins/soapadmin/www/coreapi/coreapiservice.php -text
-src/plugins/soapadmin/www/index.php -text
 src/plugins/soapadmin/www/log4php.properties -text
-src/plugins/svncommitemail/bin/commit-email.php -text
 src/plugins/svncommitemail/bin/commit-email.pl svneol=native#text/x-perl
 src/plugins/svncommitemail/etc/svncommitemail.ini -text
 src/plugins/svntracker/AUTHORS -text
 src/plugins/svntracker/COPYING -text
 src/plugins/svntracker/README -text
-src/plugins/svntracker/bin/post.php -text
-src/plugins/svntracker/common/Snoopy.class.php -text
-src/plugins/svntracker/common/svntracker-init.php -text
-src/plugins/svntracker/common/svntrackerPlugin.class.php -text
 src/plugins/svntracker/db/20051011.sql -text
 src/plugins/svntracker/db/svntracker-init-mysql.sql -text
 src/plugins/svntracker/db/svntracker-init.sql -text
-src/plugins/svntracker/etc/plugins/svntracker/config.php -text
 src/plugins/svntracker/etc/svntracker.ini -text
 src/plugins/svntracker/httpd.conf -text
 src/plugins/svntracker/packaging/docs/plugin-svntracker -text
 src/plugins/svntracker/postcommit.example -text
 src/plugins/svntracker/rpm-specific/cron.d/gforge-plugin-svntracker -text
-src/plugins/svntracker/www/newcommit.php -text
 src/plugins/twitter/NAME -text
 src/plugins/twitter/README -text
-src/plugins/twitter/common/twitter-init.php -text
 src/plugins/twitter/etc/twitter.ini -text
-src/plugins/twitter/include/twitterPlugin.class.php -text
 src/plugins/twitter/packaging/control/222plugin-twitter -text
 src/plugins/twitter/packaging/control/222plugin-twitter.shortdesc -text
 src/plugins/twitter/packaging/dirs/plugin-twitter -text
 src/plugins/twitter/packaging/install/plugin-twitter -text
 src/plugins/twitter/packaging/links/plugin-twitter -text
-src/plugins/twitter/www/checks.php -text
-src/plugins/twitter/www/index.php -text
-src/plugins/webanalytics/action/addLink.php -text
-src/plugins/webanalytics/action/deleteLink.php -text
-src/plugins/webanalytics/action/updateLinkStatus.php -text
-src/plugins/webanalytics/action/updateLinkValue.php -text
-src/plugins/webanalytics/common/webanalytics-init.php -text
-src/plugins/webanalytics/common/webanalyticsPlugin.class.php -text
 src/plugins/webanalytics/db/webanalytics-init.sql -text
 src/plugins/webanalytics/etc/webanalytics.ini -text
-src/plugins/webanalytics/view/admin/updateLinkValue.php -text
-src/plugins/webanalytics/view/admin/viewGlobalConfiguration.php -text
-src/plugins/webanalytics/www/index.php -text
 src/plugins/wiki/README -text
-src/plugins/wiki/common/WikiGroupSearchEngine.class.php -text
-src/plugins/wiki/common/WikiHtmlSearchRenderer.class.php -text
-src/plugins/wiki/common/WikiPlugin.class.php -text
-src/plugins/wiki/common/WikiSearchEngine.class.php -text
-src/plugins/wiki/common/WikiSearchQuery.class.php -text
-src/plugins/wiki/common/wiki-init.php -text
-src/plugins/wiki/common/wikiconfig.class.php -text
-src/plugins/wiki/cronjobs/create_groups.php -text
 src/plugins/wiki/cronjobs/template_groups/www/index.html -text
 src/plugins/wiki/db/wiki-drop.sql -text
 src/plugins/wiki/db/wiki-init.sql -text
-src/plugins/wiki/etc/plugins/wiki/config.php -text
 src/plugins/wiki/packaging/docs/plugin-wiki -text
 src/plugins/wiki/www/.htaccess -text
 src/plugins/wiki/www/GoogleSearch.wsdl -text
 src/plugins/wiki/www/INSTALL -text
-src/plugins/wiki/www/ImageTile.php -text
 src/plugins/wiki/www/LICENSE -text
 src/plugins/wiki/www/Makefile -text
 src/plugins/wiki/www/PhpWiki.wsdl -text
 src/plugins/wiki/www/README -text
-src/plugins/wiki/www/RPC2.php -text
-src/plugins/wiki/www/SOAP.php -text
 src/plugins/wiki/www/TODO -text
 src/plugins/wiki/www/UPGRADING -text
 src/plugins/wiki/www/admin/.htaccess -text
@@ -2633,7 +1938,6 @@ src/plugins/wiki/www/admin/odt2phpwiki.xsl -text
 src/plugins/wiki/www/admin/updateinterwikimap -text
 src/plugins/wiki/www/admin/wiki2index.script -text
 src/plugins/wiki/www/admin/wiki2omega -text
-src/plugins/wiki/www/admin/wiki2public.php -text
 src/plugins/wiki/www/admin/wikircs-backup -text
 src/plugins/wiki/www/blank.htm -text
 src/plugins/wiki/www/config/.htaccess -text
@@ -2645,7 +1949,6 @@ src/plugins/wiki/www/config/migrate-phpwiki-config -text
 src/plugins/wiki/www/config/phpwiki.spec -text
 src/plugins/wiki/www/config/two-level-tlds -text
 src/plugins/wiki/www/config/whitelist -text
-src/plugins/wiki/www/configurator.php -text
 src/plugins/wiki/www/doc/CREDITS -text
 src/plugins/wiki/www/doc/HISTORY -text
 src/plugins/wiki/www/doc/INSTALL.MacOSX -text
@@ -2667,411 +1970,26 @@ src/plugins/wiki/www/doc/phpwiki.doxygen -text
 src/plugins/wiki/www/doc/phpwiki_architecture.png -text svneol=unset#image/png
 src/plugins/wiki/www/favicon.ico -text
 src/plugins/wiki/www/g -text
-src/plugins/wiki/www/getimg.php -text
-src/plugins/wiki/www/index.php -text
 src/plugins/wiki/www/lib/.htaccess -text
-src/plugins/wiki/www/lib/ASCIIMathPHP/ASCIIMathPHP-2.0.cfg.php -text
-src/plugins/wiki/www/lib/ASCIIMathPHP/ASCIIMathPHP-2.0.class.php -text
-src/plugins/wiki/www/lib/ASCIIMathPHP/ASCIIMathPHP.cfg.php -text
-src/plugins/wiki/www/lib/ASCIIMathPHP/ASCIIMathPHP.class.php -text
-src/plugins/wiki/www/lib/AccessLog.php -text
-src/plugins/wiki/www/lib/ArchiveCleaner.php -text
-src/plugins/wiki/www/lib/AtomParser.php -text
-src/plugins/wiki/www/lib/BlockParser.php -text
-src/plugins/wiki/www/lib/CachedMarkup.php -text
-src/plugins/wiki/www/lib/Captcha.php -text
-src/plugins/wiki/www/lib/DbSession.php -text
-src/plugins/wiki/www/lib/DbSession/ADODB.php -text
-src/plugins/wiki/www/lib/DbSession/PDO.php -text
-src/plugins/wiki/www/lib/DbSession/SQL.php -text
-src/plugins/wiki/www/lib/DbSession/dba.php -text
-src/plugins/wiki/www/lib/DbaDatabase.php -text
-src/plugins/wiki/www/lib/DbaListSet.php -text
-src/plugins/wiki/www/lib/DbaPartition.php -text
-src/plugins/wiki/www/lib/EditToolbar.php -text
-src/plugins/wiki/www/lib/ErrorManager.php -text
-src/plugins/wiki/www/lib/ExternalReferrer.php -text
-src/plugins/wiki/www/lib/FileFinder.php -text
-src/plugins/wiki/www/lib/Google.php -text
-src/plugins/wiki/www/lib/HtmlElement.php -text
-src/plugins/wiki/www/lib/HtmlElement5.php -text
-src/plugins/wiki/www/lib/HtmlParser.php -text
-src/plugins/wiki/www/lib/HttpClient.php -text
-src/plugins/wiki/www/lib/IniConfig.php -text
-src/plugins/wiki/www/lib/InlineParser.php -text
-src/plugins/wiki/www/lib/MailNotify.php -text
-src/plugins/wiki/www/lib/PageList.php -text
-src/plugins/wiki/www/lib/PagePerm.php -text
-src/plugins/wiki/www/lib/PageType.php -text
-src/plugins/wiki/www/lib/RSSWriter091.php -text
-src/plugins/wiki/www/lib/Request.php -text
-src/plugins/wiki/www/lib/RssParser.php -text
-src/plugins/wiki/www/lib/RssWriter.php -text
-src/plugins/wiki/www/lib/RssWriter2.php -text
-src/plugins/wiki/www/lib/SemanticWeb.php -text
-src/plugins/wiki/www/lib/SpamBlocklist.php -text
-src/plugins/wiki/www/lib/Template.php -text
-src/plugins/wiki/www/lib/TextSearchQuery.php -text
-src/plugins/wiki/www/lib/Units.php -text
-src/plugins/wiki/www/lib/WikiCallback.php -text
-src/plugins/wiki/www/lib/WikiDB.php -text
-src/plugins/wiki/www/lib/WikiDB/ADODB.php -text
-src/plugins/wiki/www/lib/WikiDB/PDO.php -text
-src/plugins/wiki/www/lib/WikiDB/SQL.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb-csvlib.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb-error.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb-errorhandler.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb-errorpear.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb-exceptions.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb-iterator.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb-lib.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb-pear.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb-php4.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb-time.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/adodb.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-access.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-ado.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-ado_access.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-ado_mssql.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-borland_ibase.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-csv.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-db2.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-fbsql.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-firebird.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-ibase.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-informix.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-informix72.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-ldap.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mssql.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mssqlnative.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mssqlpo.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mysql.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mysqli.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mysqlt.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-netezza.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-oci8.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-oci805.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-oci8po.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-odbc.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-odbc_mssql.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-odbc_oracle.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-odbtp.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-odbtp_unicode.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-oracle.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-postgres.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-postgres64.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-postgres7.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-proxy.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-sapdb.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-sqlanywhere.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-sqlite.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-sybase.inc.php -text
-src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-vfp.inc.php -text
 src/plugins/wiki/www/lib/WikiDB/adodb/license.txt -text
 src/plugins/wiki/www/lib/WikiDB/adodb/readme.htm -text
 src/plugins/wiki/www/lib/WikiDB/adodb/readme.txt -text
-src/plugins/wiki/www/lib/WikiDB/backend.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/ADODB.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/ADODB_mssql.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/ADODB_mssqlnative.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/ADODB_mysql.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/ADODB_oci8po.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/ADODB_postgres7.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/ADODB_sqlite.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/PDO.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/PDO_mysql.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/PDO_oci8.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/PDO_pgsql.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/PearDB.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/PearDB_ffpgsql.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/PearDB_mysql.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/PearDB_oci8.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/PearDB_pgsql.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/PearDB_sqlite.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/cvs.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/dba.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/dbaBase.php -text svneol=unset#unset
-src/plugins/wiki/www/lib/WikiDB/backend/dumb/AllRevisionsIter.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/dumb/BackLinkIter.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/dumb/LinkSearchIter.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/dumb/MostPopularIter.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/dumb/MostRecentIter.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/dumb/TextSearchIter.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/dumb/WantedPagesIter.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/file.php -text
-src/plugins/wiki/www/lib/WikiDB/backend/flatfile.php -text
-src/plugins/wiki/www/lib/WikiDB/cvs.php -text
-src/plugins/wiki/www/lib/WikiDB/dba.php -text
-src/plugins/wiki/www/lib/WikiDB/file.php -text
-src/plugins/wiki/www/lib/WikiDB/flatfile.php -text
-src/plugins/wiki/www/lib/WikiGroup.php -text
-src/plugins/wiki/www/lib/WikiPlugin.php -text
-src/plugins/wiki/www/lib/WikiPluginCached.php -text
-src/plugins/wiki/www/lib/WikiTheme.php -text
-src/plugins/wiki/www/lib/WikiUser.php -text
-src/plugins/wiki/www/lib/WikiUser/AdoDb.php -text
-src/plugins/wiki/www/lib/WikiUser/BogoLogin.php -text
-src/plugins/wiki/www/lib/WikiUser/Db.php -text
-src/plugins/wiki/www/lib/WikiUser/EMailConfirm.php -text
-src/plugins/wiki/www/lib/WikiUser/Facebook.php -text
-src/plugins/wiki/www/lib/WikiUser/File.php -text
-src/plugins/wiki/www/lib/WikiUser/Forbidden.php -text
-src/plugins/wiki/www/lib/WikiUser/FusionForge.php -text
-src/plugins/wiki/www/lib/WikiUser/HttpAuth.php -text
-src/plugins/wiki/www/lib/WikiUser/HttpAuthUpper.php -text
-src/plugins/wiki/www/lib/WikiUser/IMAP.php -text
-src/plugins/wiki/www/lib/WikiUser/LDAP.php -text
-src/plugins/wiki/www/lib/WikiUser/LdapUpper.php -text
-src/plugins/wiki/www/lib/WikiUser/OpenID.php -text
-src/plugins/wiki/www/lib/WikiUser/POP3.php -text
-src/plugins/wiki/www/lib/WikiUser/PdoDb.php -text
-src/plugins/wiki/www/lib/WikiUser/PearDb.php -text
-src/plugins/wiki/www/lib/WikiUser/PersonalPage.php -text
-src/plugins/wiki/www/lib/WikiUser/Session.php -text
-src/plugins/wiki/www/lib/WikiUserNew.php -text
-src/plugins/wiki/www/lib/WysiwygEdit.php -text
-src/plugins/wiki/www/lib/WysiwygEdit/FCKeditor.php -text
-src/plugins/wiki/www/lib/WysiwygEdit/Wikiwyg.php -text
-src/plugins/wiki/www/lib/WysiwygEdit/htmlarea2.php -text
-src/plugins/wiki/www/lib/WysiwygEdit/htmlarea3.php -text
-src/plugins/wiki/www/lib/WysiwygEdit/spaw.php -text
-src/plugins/wiki/www/lib/WysiwygEdit/tinymce.php -text
-src/plugins/wiki/www/lib/XMLRPC/utils.php -text
 src/plugins/wiki/www/lib/XMLRPC/xmlrpc.inc -text
 src/plugins/wiki/www/lib/XMLRPC/xmlrpc_emu.inc -text
 src/plugins/wiki/www/lib/XMLRPC/xmlrpcs.inc -text
 src/plugins/wiki/www/lib/XMLRPC/xmlrpcs_emu.inc -text
-src/plugins/wiki/www/lib/XmlElement.php -text
-src/plugins/wiki/www/lib/XmlParser.php -text
-src/plugins/wiki/www/lib/XmlRpcClient.php -text
-src/plugins/wiki/www/lib/XmlRpcServer.php -text
 src/plugins/wiki/www/lib/captcha/Vera.ttf -text
 src/plugins/wiki/www/lib/captcha/dictionary -text
-src/plugins/wiki/www/lib/config.php -text
-src/plugins/wiki/www/lib/diff.php -text
-src/plugins/wiki/www/lib/diff3.php -text
-src/plugins/wiki/www/lib/difflib.php -text
-src/plugins/wiki/www/lib/display.php -text
-src/plugins/wiki/www/lib/editpage.php -text
-src/plugins/wiki/www/lib/fortune.php -text
-src/plugins/wiki/www/lib/fpdf.php -text
-src/plugins/wiki/www/lib/fpdf/chinese.php -text
-src/plugins/wiki/www/lib/fpdf/courier.php -text
-src/plugins/wiki/www/lib/fpdf/helvetica.php -text
-src/plugins/wiki/www/lib/fpdf/helveticab.php -text
-src/plugins/wiki/www/lib/fpdf/helveticabi.php -text
-src/plugins/wiki/www/lib/fpdf/helveticai.php -text
-src/plugins/wiki/www/lib/fpdf/japanese.php -text
-src/plugins/wiki/www/lib/fpdf/symbol.php -text
-src/plugins/wiki/www/lib/fpdf/times.php -text
-src/plugins/wiki/www/lib/fpdf/timesb.php -text
-src/plugins/wiki/www/lib/fpdf/timesbi.php -text
-src/plugins/wiki/www/lib/fpdf/timesi.php -text
-src/plugins/wiki/www/lib/fpdf/zapfdingbats.php -text
-src/plugins/wiki/www/lib/gif.php -text
-src/plugins/wiki/www/lib/imagecache.php -text
-src/plugins/wiki/www/lib/imdb.php -text
-src/plugins/wiki/www/lib/install.php -text
 src/plugins/wiki/www/lib/interwiki.map -text
-src/plugins/wiki/www/lib/loadsave.php -text
-src/plugins/wiki/www/lib/main.php -text
 src/plugins/wiki/www/lib/nusoap/README.txt -text
 src/plugins/wiki/www/lib/nusoap/lgpl.txt -text
-src/plugins/wiki/www/lib/nusoap/nusoap.php -text
-src/plugins/wiki/www/lib/pdf.php -text
-src/plugins/wiki/www/lib/pear/Cache.php -text
-src/plugins/wiki/www/lib/pear/Cache/Container.php -text
-src/plugins/wiki/www/lib/pear/Cache/Container/db.php -text
-src/plugins/wiki/www/lib/pear/Cache/Container/file.php -text
-src/plugins/wiki/www/lib/pear/Cache/Container/imgfile.php -text
-src/plugins/wiki/www/lib/pear/Cache/Container/trifile.php -text
-src/plugins/wiki/www/lib/pear/Cache/Error.php -text
-src/plugins/wiki/www/lib/pear/Cache/Graphics.php -text
-src/plugins/wiki/www/lib/pear/DB.php -text
-src/plugins/wiki/www/lib/pear/DB/Pager.php -text
-src/plugins/wiki/www/lib/pear/DB/common.php -text
-src/plugins/wiki/www/lib/pear/DB/dbase.php -text
-src/plugins/wiki/www/lib/pear/DB/fbsql.php -text
-src/plugins/wiki/www/lib/pear/DB/ibase.php -text
-src/plugins/wiki/www/lib/pear/DB/ifx.php -text
-src/plugins/wiki/www/lib/pear/DB/ldap.php -text
-src/plugins/wiki/www/lib/pear/DB/msql.php -text
-src/plugins/wiki/www/lib/pear/DB/mssql.php -text
-src/plugins/wiki/www/lib/pear/DB/mysql.php -text
-src/plugins/wiki/www/lib/pear/DB/mysqli.php -text
-src/plugins/wiki/www/lib/pear/DB/oci8.php -text
-src/plugins/wiki/www/lib/pear/DB/odbc.php -text
-src/plugins/wiki/www/lib/pear/DB/pgsql.php -text
-src/plugins/wiki/www/lib/pear/DB/sqlite.php -text
-src/plugins/wiki/www/lib/pear/DB/storage.php -text
-src/plugins/wiki/www/lib/pear/DB/sybase.php -text
-src/plugins/wiki/www/lib/pear/File_Passwd.php -text
-src/plugins/wiki/www/lib/pear/JSON.php -text
 src/plugins/wiki/www/lib/pear/LICENSE -text
-src/plugins/wiki/www/lib/pear/PEAR.php -text
-src/plugins/wiki/www/lib/plugin/AddComment.php -text
-src/plugins/wiki/www/lib/plugin/AllPages.php -text
-src/plugins/wiki/www/lib/plugin/AllUsers.php -text
-src/plugins/wiki/www/lib/plugin/AnalyseAccessLogSql.php -text
-src/plugins/wiki/www/lib/plugin/AppendText.php -text
-src/plugins/wiki/www/lib/plugin/AsciiMath.php -text
-src/plugins/wiki/www/lib/plugin/AsciiSVG.php -text
-src/plugins/wiki/www/lib/plugin/AtomFeed.php -text
-src/plugins/wiki/www/lib/plugin/AuthorHistory.php -text
-src/plugins/wiki/www/lib/plugin/BackLinks.php -text
-src/plugins/wiki/www/lib/plugin/BlogArchives.php -text
-src/plugins/wiki/www/lib/plugin/BlogJournal.php -text
-src/plugins/wiki/www/lib/plugin/BoxRight.php -text
-src/plugins/wiki/www/lib/plugin/CacheTest.php -text
-src/plugins/wiki/www/lib/plugin/Calendar.php -text
-src/plugins/wiki/www/lib/plugin/CalendarList.php -text
-src/plugins/wiki/www/lib/plugin/CategoryPage.php -text
-src/plugins/wiki/www/lib/plugin/Chart.php -text
-src/plugins/wiki/www/lib/plugin/Comment.php -text
-src/plugins/wiki/www/lib/plugin/CreateBib.php -text
-src/plugins/wiki/www/lib/plugin/CreatePage.php -text
-src/plugins/wiki/www/lib/plugin/CreateToc.php -text
-src/plugins/wiki/www/lib/plugin/CurrentTime.php -text
-src/plugins/wiki/www/lib/plugin/DeadEndPages.php -text
-src/plugins/wiki/www/lib/plugin/Diff.php -text
-src/plugins/wiki/www/lib/plugin/DynamicIncludePage.php -text
-src/plugins/wiki/www/lib/plugin/EditMetaData.php -text
-src/plugins/wiki/www/lib/plugin/ExternalSearch.php -text
-src/plugins/wiki/www/lib/plugin/FacebookLike.php -text
-src/plugins/wiki/www/lib/plugin/FileInfo.php -text
-src/plugins/wiki/www/lib/plugin/FoafViewer.php -text
-src/plugins/wiki/www/lib/plugin/FrameInclude.php -text
-src/plugins/wiki/www/lib/plugin/FullTextSearch.php -text
-src/plugins/wiki/www/lib/plugin/FuzzyPages.php -text
-src/plugins/wiki/www/lib/plugin/GoTo.php -text
-src/plugins/wiki/www/lib/plugin/GoogleMaps.php -text
-src/plugins/wiki/www/lib/plugin/GooglePlugin.php -text
-src/plugins/wiki/www/lib/plugin/GraphViz.php -text
-src/plugins/wiki/www/lib/plugin/HelloWorld.php -text
-src/plugins/wiki/www/lib/plugin/HtmlConverter.php -text
-src/plugins/wiki/www/lib/plugin/Imdb.php -text
-src/plugins/wiki/www/lib/plugin/IncludePage.php -text
-src/plugins/wiki/www/lib/plugin/IncludePages.php -text
-src/plugins/wiki/www/lib/plugin/IncludeSiteMap.php -text
-src/plugins/wiki/www/lib/plugin/IncludeTree.php -text
-src/plugins/wiki/www/lib/plugin/InterWikiSearch.php -text
-src/plugins/wiki/www/lib/plugin/JabberPresence.php -text
-src/plugins/wiki/www/lib/plugin/LdapSearch.php -text
-src/plugins/wiki/www/lib/plugin/LikePages.php -text
-src/plugins/wiki/www/lib/plugin/LinkDatabase.php -text
-src/plugins/wiki/www/lib/plugin/LinkSearch.php -text
-src/plugins/wiki/www/lib/plugin/ListPages.php -text
-src/plugins/wiki/www/lib/plugin/ListRelations.php -text
-src/plugins/wiki/www/lib/plugin/ListSubpages.php -text
-src/plugins/wiki/www/lib/plugin/MediawikiTable.php -text
-src/plugins/wiki/www/lib/plugin/ModeratedPage.php -text
-src/plugins/wiki/www/lib/plugin/MostPopular.php -text
-src/plugins/wiki/www/lib/plugin/NewPagesPerUser.php -text
-src/plugins/wiki/www/lib/plugin/NoCache.php -text
-src/plugins/wiki/www/lib/plugin/OldStyleTable.php -text
-src/plugins/wiki/www/lib/plugin/OrphanedPages.php -text
-src/plugins/wiki/www/lib/plugin/PageDump.php -text
-src/plugins/wiki/www/lib/plugin/PageGroup.php -text
-src/plugins/wiki/www/lib/plugin/PageHistory.php -text
-src/plugins/wiki/www/lib/plugin/PageInfo.php -text
-src/plugins/wiki/www/lib/plugin/PageTrail.php -text
-src/plugins/wiki/www/lib/plugin/PasswordReset.php -text
-src/plugins/wiki/www/lib/plugin/PhotoAlbum.php -text
-src/plugins/wiki/www/lib/plugin/PhpHighlight.php -text
-src/plugins/wiki/www/lib/plugin/PhpWeather.php -text
-src/plugins/wiki/www/lib/plugin/Ploticus.php -text
-src/plugins/wiki/www/lib/plugin/PluginManager.php -text
-src/plugins/wiki/www/lib/plugin/PopUp.php -text
-src/plugins/wiki/www/lib/plugin/PopularNearby.php -text
-src/plugins/wiki/www/lib/plugin/PopularTags.php -text
-src/plugins/wiki/www/lib/plugin/PreferenceApp.php -text
-src/plugins/wiki/www/lib/plugin/PrevNext.php -text
-src/plugins/wiki/www/lib/plugin/Processing.php -text
-src/plugins/wiki/www/lib/plugin/RandomPage.php -text
-src/plugins/wiki/www/lib/plugin/RateIt.php -text
-src/plugins/wiki/www/lib/plugin/RawHtml.php -text
-src/plugins/wiki/www/lib/plugin/RecentChanges.php -text
-src/plugins/wiki/www/lib/plugin/RecentChangesCached.php -text
-src/plugins/wiki/www/lib/plugin/RecentComments.php -text
-src/plugins/wiki/www/lib/plugin/RecentEdits.php -text
-src/plugins/wiki/www/lib/plugin/RecentReferrers.php -text
-src/plugins/wiki/www/lib/plugin/RedirectTo.php -text
-src/plugins/wiki/www/lib/plugin/RelatedChanges.php -text
-src/plugins/wiki/www/lib/plugin/RichTable.php -text
-src/plugins/wiki/www/lib/plugin/RssFeed.php -text
-src/plugins/wiki/www/lib/plugin/SearchHighlight.php -text
-src/plugins/wiki/www/lib/plugin/SemanticRelations.php -text
-src/plugins/wiki/www/lib/plugin/SemanticSearch.php -text
-src/plugins/wiki/www/lib/plugin/SemanticSearchAdvanced.php -text
-src/plugins/wiki/www/lib/plugin/SiteMap.php -text
-src/plugins/wiki/www/lib/plugin/SpellCheck.php -text
-src/plugins/wiki/www/lib/plugin/SqlResult.php -text
-src/plugins/wiki/www/lib/plugin/SyncWiki.php -text
-src/plugins/wiki/www/lib/plugin/SyntaxHighlighter.php -text
-src/plugins/wiki/www/lib/plugin/SystemInfo.php -text
-src/plugins/wiki/www/lib/plugin/TeX2png.php -text
-src/plugins/wiki/www/lib/plugin/Template.php -text
-src/plugins/wiki/www/lib/plugin/TexToPng.php -text
-src/plugins/wiki/www/lib/plugin/TitleSearch.php -text
-src/plugins/wiki/www/lib/plugin/Transclude.php -text
-src/plugins/wiki/www/lib/plugin/TranslateText.php -text
-src/plugins/wiki/www/lib/plugin/UnfoldSubpages.php -text
-src/plugins/wiki/www/lib/plugin/UpLoad.php -text
-src/plugins/wiki/www/lib/plugin/UriResolver.php -text
-src/plugins/wiki/www/lib/plugin/UserPreferences.php -text
-src/plugins/wiki/www/lib/plugin/UserRatings.php -text
-src/plugins/wiki/www/lib/plugin/Video.php -text
-src/plugins/wiki/www/lib/plugin/VisualWiki.php -text
-src/plugins/wiki/www/lib/plugin/WantedPages.php -text
-src/plugins/wiki/www/lib/plugin/WantedPagesOld.php -text
-src/plugins/wiki/www/lib/plugin/WatchPage.php -text
-src/plugins/wiki/www/lib/plugin/WhoIsOnline.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminChmod.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminChown.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminMarkup.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminPurge.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminRemove.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminRename.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminSearchReplace.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminSelect.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminSetAcl.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminSetAclSimple.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminSetExternal.php -text
-src/plugins/wiki/www/lib/plugin/WikiAdminUtils.php -text
-src/plugins/wiki/www/lib/plugin/WikiBlog.php -text
-src/plugins/wiki/www/lib/plugin/WikiForm.php -text
-src/plugins/wiki/www/lib/plugin/WikiFormRich.php -text
-src/plugins/wiki/www/lib/plugin/WikiForum.php -text
-src/plugins/wiki/www/lib/plugin/WikiPoll.php -text
-src/plugins/wiki/www/lib/plugin/WikicreoleTable.php -text
-src/plugins/wiki/www/lib/plugin/YouTube.php -text
-src/plugins/wiki/www/lib/plugin/_AuthInfo.php -text
-src/plugins/wiki/www/lib/plugin/_BackendInfo.php -text
-src/plugins/wiki/www/lib/plugin/_GroupInfo.php -text
-src/plugins/wiki/www/lib/plugin/_PreferencesInfo.php -text
-src/plugins/wiki/www/lib/plugin/_Retransform.php -text
-src/plugins/wiki/www/lib/plugin/_WikiTranslation.php -text
-src/plugins/wiki/www/lib/plugin/text2png.php -text
-src/plugins/wiki/www/lib/prepend.php -text
-src/plugins/wiki/www/lib/purgepage.php -text
-src/plugins/wiki/www/lib/removepage.php -text
-src/plugins/wiki/www/lib/spam_babycart.php -text
-src/plugins/wiki/www/lib/stdlib.php -text
-src/plugins/wiki/www/lib/upgrade.php -text
-src/plugins/wiki/www/lib/wikilens/Buddy.php -text
-src/plugins/wiki/www/lib/wikilens/CustomPrefs.php -text
-src/plugins/wiki/www/lib/wikilens/PageListColumns.php -text
-src/plugins/wiki/www/lib/wikilens/RatingsDb.php -text
-src/plugins/wiki/www/lib/wikilens/RatingsUser.php -text
-src/plugins/wiki/www/lib/wikilens/Utils.php -text
-src/plugins/wiki/www/lib/ziplib.php -text
 src/plugins/wiki/www/locale/.exclude -text
 src/plugins/wiki/www/locale/.htaccess -text
 src/plugins/wiki/www/locale/Makefile -text
 src/plugins/wiki/www/locale/README -text
 src/plugins/wiki/www/locale/README.de.txt -text
 src/plugins/wiki/www/locale/de/LC_MESSAGES/phpwiki.mo -text
-src/plugins/wiki/www/locale/de/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/de/pgsrc/%C3%84hnlicheSeiten -text
 src/plugins/wiki/www/locale/de/pgsrc/AlleBenutzer -text
 src/plugins/wiki/www/locale/de/pgsrc/AlleSeiten -text
@@ -3158,7 +2076,6 @@ src/plugins/wiki/www/locale/de/pgsrc/WikiAdminAuswahl -text
 src/plugins/wiki/www/locale/de/pgsrc/WunschZettelSeiten -text
 src/plugins/wiki/www/locale/de/pgsrc/ZufallsSeite -text
 src/plugins/wiki/www/locale/es/LC_MESSAGES/phpwiki.mo -text
-src/plugins/wiki/www/locale/es/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/es/pgsrc/Ayuda -text
 src/plugins/wiki/www/locale/es/pgsrc/Ayuda%2FAgregarPaginas -text
 src/plugins/wiki/www/locale/es/pgsrc/Ayuda%2FBuenEstilo -text
@@ -3179,7 +2096,6 @@ src/plugins/wiki/www/locale/es/pgsrc/P%C3%A1ginaPrincipal -text
 src/plugins/wiki/www/locale/es/pgsrc/TodasLasPaginas -text
 src/plugins/wiki/www/locale/es/pgsrc/VisitantesRecientes -text
 src/plugins/wiki/www/locale/fr/LC_MESSAGES/phpwiki.mo -text
-src/plugins/wiki/www/locale/fr/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/fr/pgsrc/%C3%89diterLesMetaDonn%C3%A9es -text
 src/plugins/wiki/www/locale/fr/pgsrc/%C3%89ditionsR%C3%0025A9centes -text
 src/plugins/wiki/www/locale/fr/pgsrc/AdministrationDePhpWiki -text
@@ -3283,7 +2199,6 @@ src/plugins/wiki/www/locale/fr/pgsrc/TraduireUnTexte -text
 src/plugins/wiki/www/locale/fr/pgsrc/VersionsR%C3%0025A9centes -text
 src/plugins/wiki/www/locale/fr/pgsrc/VisiteursR%C3%0025A9cents -text
 src/plugins/wiki/www/locale/it/LC_MESSAGES/phpwiki.mo -text
-src/plugins/wiki/www/locale/it/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/it/pgsrc/Aiuto -text
 src/plugins/wiki/www/locale/it/pgsrc/Aiuto%2FAggiungerePagine -text
 src/plugins/wiki/www/locale/it/pgsrc/Aiuto%2FBuonStile -text
@@ -3311,13 +2226,11 @@ src/plugins/wiki/www/locale/it/pgsrc/TrovaPagina -text
 src/plugins/wiki/www/locale/it/pgsrc/TutteLePagine -text
 src/plugins/wiki/www/locale/it/pgsrc/VisitatoriRecenti -text
 src/plugins/wiki/www/locale/ja/LC_MESSAGES/phpwiki.mo -text
-src/plugins/wiki/www/locale/ja/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/ja/pgsrc/%E3%83%9A%E3%83%BC%E3%82%B8%E6%A4%9C%E7%B4%A2 -text
 src/plugins/wiki/www/locale/ja/pgsrc/%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8 -text
 src/plugins/wiki/www/locale/ja/pgsrc/.htaccess -text
 src/plugins/wiki/www/locale/make-php-trans.awk -text
 src/plugins/wiki/www/locale/nl/LC_MESSAGES/phpwiki.mo -text
-src/plugins/wiki/www/locale/nl/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/nl/pgsrc/Help -text
 src/plugins/wiki/www/locale/nl/pgsrc/Help%2FGebruikersVoorkeuren -text
 src/plugins/wiki/www/locale/nl/pgsrc/Help%2FGoedeStijl -text
@@ -3352,7 +2265,6 @@ src/plugins/wiki/www/locale/po/phpwiki.pot -text
 src/plugins/wiki/www/locale/po/sv.po -text
 src/plugins/wiki/www/locale/po/zh.po -text
 src/plugins/wiki/www/locale/sv/LC_MESSAGES/phpwiki.mo -text
-src/plugins/wiki/www/locale/sv/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/sv/pgsrc/Framsida -text
 src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp -text
 src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FG%C3%A4stboken -text
@@ -3370,7 +2282,6 @@ src/plugins/wiki/www/locale/sv/pgsrc/Sandl%C3%0025A5dan -text
 src/plugins/wiki/www/locale/sv/pgsrc/Senaste%C3%84ndringar -text
 src/plugins/wiki/www/locale/update-makefile.sh -text svneol=unset#text/x-sh
 src/plugins/wiki/www/locale/zh/LC_MESSAGES/phpwiki.mo -text
-src/plugins/wiki/www/locale/zh/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/zh/pgsrc/%E9%A6%96%E9%A0%81 -text
 src/plugins/wiki/www/locale/zh/pgsrc/AllPages -text
 src/plugins/wiki/www/locale/zh/pgsrc/AllUsers -text
@@ -3419,7 +2330,6 @@ src/plugins/wiki/www/locale/zh/pgsrc/TitleSearch -text
 src/plugins/wiki/www/locale/zh/pgsrc/UpLoad -text
 src/plugins/wiki/www/locale/zh/pgsrc/UserPreferences -text
 src/plugins/wiki/www/locale/zh/pgsrc/WantedPages -text
-src/plugins/wiki/www/passencrypt.php -text
 src/plugins/wiki/www/pgsrc/.htaccess -text
 src/plugins/wiki/www/pgsrc/AllPages -text
 src/plugins/wiki/www/pgsrc/AllPagesByAcl -text
@@ -3714,52 +2624,25 @@ src/plugins/wiki/www/tests/AAA_GetHomePage.inputs -text
 src/plugins/wiki/www/tests/AAB_EditSandBox.inputs -text
 src/plugins/wiki/www/tests/AAC_MakeAutoTestPage.inputs -text
 src/plugins/wiki/www/tests/AAD_FindText.inputs -text
-src/plugins/wiki/www/tests/CompatInfo.php -text
 src/plugins/wiki/www/tests/README -text
 src/plugins/wiki/www/tests/makemakebuild.pl -text svneol=unset#text/x-perl
 src/plugins/wiki/www/tests/maketest.pl -text svneol=unset#text/x-perl
 src/plugins/wiki/www/tests/unit/_mem_pl.ploticus -text
 src/plugins/wiki/www/tests/unit/combine_define.pl -text svneol=unset#text/x-perl
-src/plugins/wiki/www/tests/unit/lib/AtomParserTest.php -text
-src/plugins/wiki/www/tests/unit/lib/DumpHtml.php -text
-src/plugins/wiki/www/tests/unit/lib/HtmlParserTest.php -text
-src/plugins/wiki/www/tests/unit/lib/InlineParserTest.php -text
-src/plugins/wiki/www/tests/unit/lib/PageListTest.php -text
-src/plugins/wiki/www/tests/unit/lib/SetupWiki.php -text
-src/plugins/wiki/www/tests/unit/lib/TextSearchTest.php -text
-src/plugins/wiki/www/tests/unit/lib/XmlRpcTest.php -text
-src/plugins/wiki/www/tests/unit/lib/plugin/AllPagesTest.php -text
-src/plugins/wiki/www/tests/unit/lib/plugin/AllUsersTest.php -text
-src/plugins/wiki/www/tests/unit/lib/plugin/AtomFeedTest.php -text
-src/plugins/wiki/www/tests/unit/lib/plugin/IncludePageTest.php -text
-src/plugins/wiki/www/tests/unit/lib/plugin/ListPagesTest.php -text
-src/plugins/wiki/www/tests/unit/lib/plugin/OrphanedPagesTest.php -text
-src/plugins/wiki/www/tests/unit/lib/plugin/WantedPagesTest.php -text
 src/plugins/wiki/www/tests/unit/lib/plugin/atom-example.xml -text svneol=unset#text/xml
 src/plugins/wiki/www/tests/unit/mysql-test-destroy.sql -text
 src/plugins/wiki/www/tests/unit/mysql-test-initialize.sql -text
-src/plugins/wiki/www/tests/unit/pcre-crash.php -text
 src/plugins/wiki/www/tests/unit/prepare_pl -text
 src/plugins/wiki/www/tests/unit/psql-test-initialize.sql -text
 src/plugins/wiki/www/tests/unit/readme.html -text
 src/plugins/wiki/www/tests/unit/runme_all -text
 src/plugins/wiki/www/tests/unit/runme_basic -text
 src/plugins/wiki/www/tests/unit/runme_mem -text
-src/plugins/wiki/www/tests/unit/test.php -text
 src/plugins/wiki/www/tests/unit/testbox/latest_ver/latest_versions -text
 src/plugins/wiki/www/tests/unit/testbox/page_data/InterWikiMap -text
 src/plugins/wiki/www/tests/unit/testbox/page_data/WikiWord -text
 src/plugins/wiki/www/tests/unit/testbox/page_data/global_data -text
-src/plugins/wiki/www/tests/unit_test_backend_cvs.php -text
 src/plugins/wiki/www/tests/xmlrpc/curl-test -text
-src/plugins/wiki/www/tests/xmlrpc/interop-client.php -text
-src/plugins/wiki/www/tests/xmlrpc/interop-server.php -text
-src/plugins/wiki/www/tests/xmlrpc/validate-form.php -text
-src/plugins/wiki/www/tests/xmlrpc/validate.php -text
-src/plugins/wiki/www/tests/xmlrpc/xmlrpc-client.php -text
-src/plugins/wiki/www/tests/xmlrpc/xmlrpc-introspect.php -text
-src/plugins/wiki/www/tests/xmlrpc/xmlrpc-servers.php -text
-src/plugins/wiki/www/tests/xmlrpc/xmlrpc_utils.php -text
 src/plugins/wiki/www/themes/Crao/Makefile -text
 src/plugins/wiki/www/themes/Crao/buttons/%28diff%29.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Crao/buttons/Admin.png -text svneol=unset#image/png
@@ -3818,7 +2701,6 @@ src/plugins/wiki/www/themes/Crao/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/Crao/templates/signin.tmpl -text
 src/plugins/wiki/www/themes/Crao/templates/top.tmpl -text
 src/plugins/wiki/www/themes/Crao/templates/wikiblog.tmpl -text
-src/plugins/wiki/www/themes/Crao/themeinfo.php -text
 src/plugins/wiki/www/themes/Hawaiian/Hawaiian-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Hawaiian/Hawaiian.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Hawaiian/Makefile -text
@@ -3841,9 +2723,7 @@ src/plugins/wiki/www/themes/Hawaiian/images/pictures/WhaleRainbow.jpg -text svne
 src/plugins/wiki/www/themes/Hawaiian/images/tchecker-sand.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Hawaiian/images/tchecker-white.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Hawaiian/images/uhhbackground.jpg -text svneol=unset#image/jpeg
-src/plugins/wiki/www/themes/Hawaiian/lib/random.php -text
 src/plugins/wiki/www/themes/Hawaiian/preview.jpg -text svneol=unset#image/jpeg
-src/plugins/wiki/www/themes/Hawaiian/themeinfo.php -text
 src/plugins/wiki/www/themes/MacOSX/MacOSX-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MacOSX/MacOSX-topbottombars-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MacOSX/MacOSX-topbottombars.css -text svneol=unset#text/css
@@ -3889,7 +2769,6 @@ src/plugins/wiki/www/themes/MacOSX/buttons/de/SeiteSpeichern.png -text svneol=un
 src/plugins/wiki/www/themes/MacOSX/buttons/de/SeitenInfo.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/de/SeitenProtokoll.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/de/Verlinkte%C3%84nderungen.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/MacOSX/buttons/de/index.php -text
 src/plugins/wiki/www/themes/MacOSX/buttons/en/%28diff%29.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/en/1+day.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/en/2+days.png -text svneol=unset#image/png
@@ -3947,7 +2826,6 @@ src/plugins/wiki/www/themes/MacOSX/buttons/en/UserPrefs.png -text svneol=unset#i
 src/plugins/wiki/www/themes/MacOSX/buttons/en/View+Source.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/en/WikiAdminSelect.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/en/button-template.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/MacOSX/buttons/en/index.php -text
 src/plugins/wiki/www/themes/MacOSX/buttons/es/Borrar%2BP%C3%A1gina.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/es/BuenEstilo.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/es/BuscarP%C3%A1gina.png -text svneol=unset#image/png
@@ -3960,7 +2838,6 @@ src/plugins/wiki/www/themes/MacOSX/buttons/fr/30+jours.png -text svneol=unset#im
 src/plugins/wiki/www/themes/MacOSX/buttons/fr/4+jours.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/fr/7+jours.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/fr/90+jours.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/MacOSX/buttons/index.php -text
 src/plugins/wiki/www/themes/MacOSX/buttons/it/1+giorno.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/it/2+giorni.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/it/3+giorni.png -text svneol=unset#image/png
@@ -3981,15 +2858,12 @@ src/plugins/wiki/www/themes/MacOSX/buttons/uww.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/images/bggranular.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/images/bgpaper8.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/images/http.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/MacOSX/images/index.php -text
 src/plugins/wiki/www/themes/MacOSX/images/logo-template.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/images/logo.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/images/mailto.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/images/signature.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/images/wikiuser.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/MacOSX/lib/RecentChanges.php -text
 src/plugins/wiki/www/themes/MacOSX/preview.jpg -text svneol=unset#image/jpeg
-src/plugins/wiki/www/themes/MacOSX/themeinfo.php -text
 src/plugins/wiki/www/themes/Makefile -text
 src/plugins/wiki/www/themes/Makefile.global -text
 src/plugins/wiki/www/themes/MonoBook/IE60Fixes-min.css -text svneol=unset#text/css
@@ -4041,7 +2915,6 @@ src/plugins/wiki/www/themes/MonoBook/templates/signin.tmpl -text
 src/plugins/wiki/www/themes/MonoBook/templates/tags.tmpl -text
 src/plugins/wiki/www/themes/MonoBook/templates/top.tmpl -text
 src/plugins/wiki/www/themes/MonoBook/templates/viewsource.tmpl -text
-src/plugins/wiki/www/themes/MonoBook/themeinfo.php -text
 src/plugins/wiki/www/themes/MonoBook/wikibits-min.js -text
 src/plugins/wiki/www/themes/MonoBook/wikibits.js -text
 src/plugins/wiki/www/themes/MonoBook/wikiprintable-min.css -text svneol=unset#text/css
@@ -4049,7 +2922,6 @@ src/plugins/wiki/www/themes/MonoBook/wikiprintable.css -text svneol=unset#text/c
 src/plugins/wiki/www/themes/MonoBook/wikistandard-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/wikistandard.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Portland/Makefile -text
-src/plugins/wiki/www/themes/Portland/lib/RecentChanges.php -text
 src/plugins/wiki/www/themes/Portland/portland-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Portland/portland.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Portland/templates/actionbar.tmpl -text
@@ -4059,15 +2931,11 @@ src/plugins/wiki/www/themes/Portland/templates/debug.tmpl -text
 src/plugins/wiki/www/themes/Portland/templates/editpage.tmpl -text
 src/plugins/wiki/www/themes/Portland/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/Portland/templates/viewsource.tmpl -text
-src/plugins/wiki/www/themes/Portland/themeinfo.php -text
 src/plugins/wiki/www/themes/README -text
 src/plugins/wiki/www/themes/Sidebar/Makefile -text
 src/plugins/wiki/www/themes/Sidebar/buttons/TitleSearch.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/Sidebar/clock.php -text
 src/plugins/wiki/www/themes/Sidebar/hwiki.prop -text
-src/plugins/wiki/www/themes/Sidebar/hyperapplet.php -text
 src/plugins/wiki/www/themes/Sidebar/hyperwiki.jar -text
-src/plugins/wiki/www/themes/Sidebar/hyperwiki.php -text
 src/plugins/wiki/www/themes/Sidebar/images/UEB16.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Sidebar/images/bullet.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Sidebar/images/logo.png -text svneol=unset#image/png
@@ -4137,7 +3005,6 @@ src/plugins/wiki/www/themes/Sidebar/templates/search.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/signin.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/tags.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/top.tmpl -text
-src/plugins/wiki/www/themes/Sidebar/themeinfo.php -text
 src/plugins/wiki/www/themes/SpaceWiki/Makefile -text
 src/plugins/wiki/www/themes/SpaceWiki/SpaceWiki-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/SpaceWiki/SpaceWiki.css -text svneol=unset#text/css
@@ -4147,16 +3014,13 @@ src/plugins/wiki/www/themes/SpaceWiki/images/lights.png -text svneol=unset#image
 src/plugins/wiki/www/themes/SpaceWiki/images/starfield.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/SpaceWiki/images/tchecker-black.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/SpaceWiki/images/tchecker-grey.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/SpaceWiki/lib/RecentChanges.php -text
 src/plugins/wiki/www/themes/SpaceWiki/preview.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/SpaceWiki/themeinfo.php -text
 src/plugins/wiki/www/themes/Wordpress/Makefile -text
 src/plugins/wiki/www/themes/Wordpress/Wordpress-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Wordpress/Wordpress.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Wordpress/images/content-background.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Wordpress/images/header-background.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Wordpress/images/menu-background.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/Wordpress/lib/RecentChanges.php -text
 src/plugins/wiki/www/themes/Wordpress/templates/actionbar.tmpl -text
 src/plugins/wiki/www/themes/Wordpress/templates/body.tmpl -text
 src/plugins/wiki/www/themes/Wordpress/templates/browse.tmpl -text
@@ -4164,8 +3028,6 @@ src/plugins/wiki/www/themes/Wordpress/templates/editpage.tmpl -text
 src/plugins/wiki/www/themes/Wordpress/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/Wordpress/templates/signin.tmpl -text
 src/plugins/wiki/www/themes/Wordpress/templates/viewsource.tmpl -text
-src/plugins/wiki/www/themes/Wordpress/themeinfo.php -text
-src/plugins/wiki/www/themes/alphatest.php -text
 src/plugins/wiki/www/themes/blog/IEFixes-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/blog/IEFixes.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/blog/Kubrick-min.css -text svneol=unset#text/css
@@ -4185,7 +3047,6 @@ src/plugins/wiki/www/themes/blog/images/kubrickbgcolor.png -text svneol=unset#im
 src/plugins/wiki/www/themes/blog/images/kubrickbgwide.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/blog/images/kubrickfooter.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/blog/images/top_sidebar_round.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/blog/lib/RecentChanges.php -text
 src/plugins/wiki/www/themes/blog/pgsrc/About -text
 src/plugins/wiki/www/themes/blog/pgsrc/Blog -text
 src/plugins/wiki/www/themes/blog/pgsrc/BlogArchives -text
@@ -4207,7 +3068,6 @@ src/plugins/wiki/www/themes/blog/templates/sidebar.tmpl -text
 src/plugins/wiki/www/themes/blog/templates/top.tmpl -text
 src/plugins/wiki/www/themes/blog/templates/viewsource.tmpl -text
 src/plugins/wiki/www/themes/blog/templates/wikiblog.tmpl -text
-src/plugins/wiki/www/themes/blog/themeinfo.php -text
 src/plugins/wiki/www/themes/default/ASCIIsvg-min.js -text
 src/plugins/wiki/www/themes/default/ASCIIsvg.js -text
 src/plugins/wiki/www/themes/default/IEFixes-min.css -text svneol=unset#text/css
@@ -4430,7 +3290,6 @@ src/plugins/wiki/www/themes/default/templates/userprefs.tmpl -text
 src/plugins/wiki/www/themes/default/templates/viewsource.tmpl -text
 src/plugins/wiki/www/themes/default/templates/wikiblog.tmpl -text
 src/plugins/wiki/www/themes/default/templates/wikiforum.tmpl -text
-src/plugins/wiki/www/themes/default/themeinfo.php -text
 src/plugins/wiki/www/themes/default/toolbar-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/toolbar-min.js -text
 src/plugins/wiki/www/themes/default/toolbar.css -text svneol=unset#text/css
@@ -4502,7 +3361,6 @@ src/plugins/wiki/www/themes/fusionforge/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/templates/ratings.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/templates/savepage.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/templates/userprefs.tmpl -text
-src/plugins/wiki/www/themes/fusionforge/themeinfo.php -text
 src/plugins/wiki/www/themes/fusionforge/wikilens-min.js -text
 src/plugins/wiki/www/themes/fusionforge/wikilens.js -text
 src/plugins/wiki/www/themes/shamino_com/Makefile -text
@@ -4514,7 +3372,6 @@ src/plugins/wiki/www/themes/shamino_com/templates/debug.tmpl -text
 src/plugins/wiki/www/themes/shamino_com/templates/info.tmpl -text
 src/plugins/wiki/www/themes/shamino_com/templates/signin.tmpl -text
 src/plugins/wiki/www/themes/shamino_com/templates/top.tmpl -text
-src/plugins/wiki/www/themes/shamino_com/themeinfo.php -text
 src/plugins/wiki/www/themes/smaller/IEFixes.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/smaller/Makefile -text
 src/plugins/wiki/www/themes/smaller/phpwiki-min.css -text svneol=unset#text/css
@@ -4523,7 +3380,6 @@ src/plugins/wiki/www/themes/smaller/templates/actionbar.tmpl -text
 src/plugins/wiki/www/themes/smaller/templates/info.tmpl -text
 src/plugins/wiki/www/themes/smaller/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/smaller/templates/signin.tmpl -text
-src/plugins/wiki/www/themes/smaller/themeinfo.php -text
 src/plugins/wiki/www/themes/wikilens/Makefile -text
 src/plugins/wiki/www/themes/wikilens/images/README -text
 src/plugins/wiki/www/themes/wikilens/images/RateItAction.png -text svneol=unset#image/png
@@ -4571,15 +3427,11 @@ src/plugins/wiki/www/themes/wikilens/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/wikilens/templates/newuserwelcomepage.tmpl -text
 src/plugins/wiki/www/themes/wikilens/templates/ratings.tmpl -text
 src/plugins/wiki/www/themes/wikilens/templates/top.tmpl -text
-src/plugins/wiki/www/themes/wikilens/themeinfo.php -text
 src/plugins/wiki/www/themes/wikilens/wikilens-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/wikilens/wikilens-min.js -text
 src/plugins/wiki/www/themes/wikilens/wikilens.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/wikilens/wikilens.js -text
-src/plugins/wiki/www/uploads/index.php -text
 src/plugins/wiki/www/wiki -text
-src/plugins/wiki/www/wikiadmin.php -text
-src/plugins/wiki/www/wikilist.php -text
 src/rpm-specific/Makefile -text
 src/rpm-specific/dag-rpmforge.repo -text
 src/rpm-specific/epel-short.repo -text
@@ -4622,10 +3474,6 @@ src/utils/cvs1/cvstar_genlist.pl svneol=native#text/x-perl
 src/utils/cvs1/cvstar_superscript.pl svneol=native#text/x-perl
 src/utils/decode_images.sh svneol=native#text/x-sh
 src/utils/ffcountries.pl -text
-src/utils/filter-sql-dump.php -text
-src/utils/fixscripts/fix_default_role.php -text
-src/utils/fixscripts/populate_template_project.php -text
-src/utils/forge.php -text
 src/utils/forge_check_perm_for_user -text
 src/utils/forge_get_compressed_extension -text
 src/utils/forge_get_compressor -text
@@ -4635,25 +3483,15 @@ src/utils/forge_set_password -text
 src/utils/forge_wrapper -text
 src/utils/fusionforge-shell-postgresql.spec -text
 src/utils/include.pl svneol=native#text/x-perl
-src/utils/inject-files.php -text
-src/utils/inject-groups.php -text
-src/utils/inject-users.php -text
 src/utils/install-apache.sh svneol=native#text/x-sh
 src/utils/install-nsspgsql.sh -text svneol=unset#text/x-sh
 src/utils/ldap/sql2ldif.pl svneol=native#text/x-perl
 src/utils/ldap/sql2ldifadd.pl -text svneol=unset#text/x-perl
 src/utils/ldap/sql2ldifmod.pl -text svneol=unset#text/x-perl
-src/utils/list-admins.php -text
 src/utils/list-enabled-plugins.sh -text
-src/utils/list-projects-using-plugin.php -text
 src/utils/manage-apache-config.sh -text svneol=unset#text/x-sh
 src/utils/manage-translations.sh -text svneol=unset#text/x-sh
 src/utils/migrate-to-ini-files.sh -text svneol=unset#text/x-sh
-src/utils/normalize_roles.php -text
-src/utils/one-off-scripts/tracker-export.php -text
-src/utils/one-off-scripts/tracker-import.php -text
-src/utils/one-off-scripts/tracker-massmove.php -text
-src/utils/sync_unix_groups.php -text
 src/utils/underworld-dummy/dns_conf.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/dump_database.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/ia64_dump.pl svneol=native#text/x-perl
@@ -4662,22 +3500,8 @@ src/utils/underworld-dummy/mailing_lists_dump.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/new_aliases.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/ssh_dump.pl svneol=native#text/x-perl
 src/www/DTD/xhtml10t-rdfa10.dtd -text
-src/www/admin/globalroledelete.php -text
-src/www/admin/globalroleedit.php -text
-src/www/admin/passedit.php -text
-src/www/admin/pending-news.php -text
-src/www/admin/pi.php -text
 src/www/docman/scripts/DocManController.js -text
-src/www/env.inc.php -text
-src/www/export/rss20_docman.php -text
-src/www/export/rss20_forum.php -text
-src/www/export/rss20_tasks.php -text
-src/www/export/rss20_tracker.php -text
-src/www/export/rss20_version.php -text
-src/www/export/rssAboTask.php -text
-src/www/export/search_plugin.php -text
 src/www/favicon.ico svneol=native#unset
-src/www/frs/reporting/downloads.php -text
 src/www/images/ajax-loader.gif -text
 src/www/images/blank.png -text svneol=unset#image/png
 src/www/images/clear.png -text svneol=unset#image/png
@@ -4798,23 +3622,9 @@ src/www/images/widget/widget-preview-project_svn-stats.png -text svneol=unset#im
 src/www/images/widget/widget-preview-rss.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview-twitterfollow.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview.png -text svneol=unset#image/png
-src/www/include/login-form.php -text
-src/www/include/my_utils.php -text
-src/www/include/pre.php -text
-src/www/include/unicode.php -text
-src/www/include/user_profile.php -text
 src/www/js/common.js -text
 src/www/js/jquery-common.js -text
 src/www/js/sortable.js -text
-src/www/my/dashboard.php -text
-src/www/pm/csv.php -text
-src/www/pm/format_csv.php -text
-src/www/pm/t_follow.php -text
-src/www/pm/t_lookup.php -text
-src/www/project/admin/roledelete.php -text
-src/www/project/admin/tools.php -text
-src/www/project/admin/users.php -text
-src/www/scm/browser.php -text
 src/www/scm/viewvc/bin/cgi/viewvc-strace.sh svneol=native#text/x-sh
 src/www/scm/viewvc/templates/docroot/help.css svneol=native#text/css
 src/www/scm/viewvc/templates/docroot/images/annotate.png -text svneol=unset#image/png
@@ -4851,16 +3661,6 @@ src/www/scripts/codendi/common.js -text
 src/www/scripts/codendi/cross_references.js -text
 src/www/scripts/codendi/debug_reserved_names.js -text
 src/www/scripts/codendi/validate.js -text
-src/www/search/include/engines/DocsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
-src/www/search/include/engines/ForumsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
-src/www/search/include/engines/FrsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
-src/www/search/include/engines/NewsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
-src/www/search/include/engines/TasksGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
-src/www/search/include/engines/TrackersGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
-src/www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php -text
-src/www/softwaremap/full_list.php -text
-src/www/softwaremap/tag_cloud.php -text
-src/www/support/tracker.php -text
 src/www/tabber/example-ajax-0.html -text
 src/www/tabber/example-ajax-1.html -text
 src/www/tabber/example-ajax-2.html -text
@@ -4871,11 +3671,9 @@ src/www/tabber/example.html -text
 src/www/tabber/example2.html -text
 src/www/tabber/tabber-minimized.js -text
 src/www/tabber/tabber.js -text
-src/www/terms.php -text
 src/www/themes/css/fusionforge.css -text svneol=unset#text/css
 src/www/themes/funky/COPYING -text
 src/www/themes/funky/README.txt -text
-src/www/themes/funky/Theme.class.php -text
 src/www/themes/funky/css/theme-pages.css -text svneol=unset#text/css
 src/www/themes/funky/css/theme.css -text svneol=unset#text/css
 src/www/themes/funky/images/category.png -text svneol=unset#image/png
@@ -5004,7 +3802,6 @@ src/www/themes/funky/viewvc/images/view.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/styles.css -text svneol=unset#text/css
 src/www/themes/gforge/COPYING -text
 src/www/themes/gforge/README.txt -text
-src/www/themes/gforge/Theme.class.php -text
 src/www/themes/gforge/css/theme-pages.css -text svneol=unset#text/css
 src/www/themes/gforge/css/theme.css -text svneol=unset#text/css
 src/www/themes/gforge/images/bgrd_hpage_header.gif -text
@@ -5145,31 +3942,7 @@ src/www/themes/gforge/viewvc/images/text.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/up.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/view.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/styles.css -text svneol=unset#text/css
-src/www/trove/TroveCategory.class.php -text
-src/www/trove/TroveCategoryAdmin.class.php -text
-src/www/trove/TroveCategoryFactory.class.php -text
-src/www/trove/TroveCategoryLabel.class.php -text
-src/www/trove/admin/trove_cat_add.php -text
-src/www/trove/admin/trove_cat_edit.php -text
-src/www/trove/admin/trove_cat_list.php -text
-src/www/trove/include/trove.php -text
-src/www/trove/include/utils.php -text
-src/www/trove/index.php -text
 src/www/widgets/style.css -text svneol=unset#text/css
-src/www/widgets/updatelayout.php -text
-src/www/widgets/widget.php -text
-src/www/widgets/widgets.php -text
-tests/AllFullTests.php -text
-tests/AllTests.php -text
-tests/CDXCentos52Tests.php -text
-tests/DEBDebian60Tests.php -text
-tests/RPMCentosTests.php -text
-tests/SeleniumTests.php -text
-tests/TarCentosTests.php -text
-tests/build/documentation/DocumentationTest.php -text
-tests/build/packages/BuildTest.php -text
-tests/code/deprecations/DeprecationsTest.php -text
-tests/code/syntax/SyntaxTest.php -text
 tests/config/atom330 -text
 tests/config/build -text
 tests/config/christian -text
@@ -5178,40 +3951,11 @@ tests/config/g-dellm65-1 -text
 tests/config/g-quadri1 -text
 tests/config/g-virtual05 -text
 tests/config/vladimir -text
-tests/func/AllTests.php -text
-tests/func/Docs/createDocURLTest.php -text
-tests/func/Forums/forumsTest.php -text
-tests/func/News/newsTest.php -text
-tests/func/PluginsBlocks/blocksTest.php -text
-tests/func/PluginsOnlineHelp/contextualHelpTest.php -text
-tests/func/PluginsScmGit/gitTest.php -text
-tests/func/PluginsSvnTracker/trackerTest.php -text
-tests/func/RBAC/rbacTest.php -text
 tests/func/README.TXT -text
-tests/func/Search/searchTest.php -text
-tests/func/Site/loginTest.php -text
-tests/func/Site/projectsTest.php -text
-tests/func/Site/topTest.php -text
-tests/func/Site/troveTest.php -text
-tests/func/Soap/AllTests.php -text
-tests/func/Soap/checks.php -text
-tests/func/Soap/login.php -text
-tests/func/Soap/usergroup.php -text
-tests/func/Surveys/surveysTest.php -text
-tests/func/Tasks/createTaskTest.php -text
-tests/func/Testing/DEBSeleniumRemoteSuite.php -text
-tests/func/Testing/RPMSeleniumRemoteSuite.php -text
-tests/func/Testing/SeleniumGforge.php -text
-tests/func/Testing/SeleniumRemoteSuite.php -text
-tests/func/Testing/TarSeleniumRemoteSuite.php -text
-tests/func/Trackers/relationTest.php -text
-tests/func/Trackers/trackersTest.php -text
-tests/func/Trackers/workflowTest.php -text
 tests/func/config.php.buildbot -text
 tests/func/config.php.ffsandbox -text
 tests/func/config.php.sample -text
 tests/func/config.php.tests -text
-tests/func/db_reload.php -text
 tests/func/db_reload.sh -text
 tests/jenkins/Makefile -text
 tests/lxc/Makefile -text
@@ -5243,7 +3987,6 @@ tests/preseed/lists -text
 tests/preseed/mailman -text
 tests/preseed/postgresql -text
 tests/ruleset.xml -text
-tests/scripts/catch_mail.php -text
 tests/scripts/cdx40-build-and-test-source.sh -text
 tests/scripts/common-functions -text
 tests/scripts/common-vm -text
@@ -5259,12 +4002,6 @@ tests/scripts/phpunit.sh -text
 tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
 tests/scripts/start_vm -text
 tests/scripts/stop_vm -text
-tests/unit/common/minijsonTest.php -text
-tests/unit/config/ConfigTest.php -text
-tests/unit/utils/DbUtilsTest.php -text
-tests/unit/utils/HtmlPurifierTest.php -text
-tests/unit/utils/TextSanitizerTest.php -text
-tests/unit/utils/UtilsTest.php -text
 tools/VM-scripts/README.txt -text
 tools/VM-scripts/build.sh -text
 tools/VM-scripts/configure-scripts.sh -text
@@ -5275,7 +4012,6 @@ tools/VM-scripts/shrink.sh -text
 tools/VM-scripts/start-selenium.sh -text
 tools/VM-scripts/update.sh -text
 tools/bugzilla2GForge.pl svneol=native#text/x-perl
-tools/check_and_update_forum_role_settings.php -text
 tools/cmp-schemas.pl svneol=native#text/x-perl
 tools/createmissing.sh svneol=native#text/x-sh
 tools/createplugin.sh svneol=native#text/x-sh
@@ -5285,7 +4021,6 @@ tools/desc.sh svneol=native#text/x-sh
 tools/dump.sh svneol=native#text/x-sh
 tools/export-tracker.tcl -text
 tools/gource/gource.sh -text svneol=unset#text/x-sh
-tools/jpgraph_pietest.php -text
 tools/make-mo.sh -text svneol=unset#text/x-sh
 tools/make-theme-orig.sh svneol=native#text/x-sh
 tools/mcrypt-test.sh svneol=native#text/x-sh
