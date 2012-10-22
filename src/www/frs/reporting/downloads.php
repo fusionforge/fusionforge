@@ -82,6 +82,8 @@ if (!$end) {
 }
 if ($end < $start) list($start, $end) = array($end, $start);
 
+html_use_jqueryjqplotpluginCanvas();
+
 frs_header(array('title' => _('File Release Reporting'),
 		 'group' => $group_id,
 		 'pagename' => 'project_showfiles',
@@ -118,10 +120,7 @@ if (count($data) == 0) {
 	echo _('There have been no downloads for this package.');
 	echo '</p>';
 } else {
-	html_use_jqueryjqplotpluginCanvas();
-	echo $HTML->getJavascripts();
-	echo $HTML->getStylesheets();
-	echo '<script language="JavaScript" type="text/javascript">//<![CDATA['."\n";
+	echo '<script type="text/javascript">//<![CDATA['."\n";
 	echo 'var ticks = new Array();';
 	echo 'var values = new Array();';
 	$arr =& $report->getMonthStartArr();
