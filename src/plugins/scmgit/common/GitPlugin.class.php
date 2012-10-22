@@ -39,6 +39,7 @@ class GitPlugin extends SCMPlugin {
 		$this->_addHook('widget_instance', 'myPageBox', false);
 		$this->_addHook('widgets', 'widgets', false);
 		$this->_addHook('activity');
+		$this->_addHook('weekly');
 		$this->register();
 	}
 
