@@ -218,7 +218,7 @@ function setup_gettext_from_sys_lang () {
 function setup_gettext_from_locale ($locale) {
 	setlocale(LC_ALL, $locale);
 
-	if (forge_get_config('gettext_path') || isset($GLOBALS['sys_gettext_path'])) {
+	if (forge_get_config('gettext_path')) {
 		bindtextdomain('fusionforge', forge_get_config('gettext_path'));
 	} else {
 		bindtextdomain('fusionforge', '/usr/share/locale/');
