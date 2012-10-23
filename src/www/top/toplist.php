@@ -32,12 +32,7 @@ $type = getStringFromRequest('type');
 
 $stats = new Stats();
 
-if ($type == 'downloads_week') {
-	$res_top = "oops… no function for this in class Stats";
-	$title = _('Top Downloads in the Past 7 Days');
-	$column1 = _('Downloads');
-}
-else if ($type == 'pageviews_proj') {
+if ($type == 'pageviews_proj') {
 	$res_top = $stats->getTopPageViews();
 	$title = sprintf(_('Top Weekly Project Pageviews at *.%1$s (from impressions of %2$s logo)'), forge_get_config('web_host'), forge_get_config ('forge_name'));
 	$column1 = _('Pageviews');
@@ -49,7 +44,6 @@ else if ($type == 'forumposts_week') {
 }
 // default to downloads
 else {
-	$type = 'downloads';
 	$res_top = $stats->getTopDownloads();
 	$title = _('Top Downloads');
 	$column1 = _('Downloads');
