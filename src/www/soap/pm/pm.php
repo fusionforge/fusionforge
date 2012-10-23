@@ -328,6 +328,43 @@ $server->register(
 	$uri,$uri.'#getProjectTechnicians','rpc','encoded'
 );
 
+//addSubproject
+$server->register(
+	'addSubproject',
+	array('session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'group_project_id'=>'xsd:int',
+		'project_name'=>'xsd:string',
+		'description'=>'xsd:string',
+		'_public'=>'xsd:int',
+		'send_all_posts_to'=>'xsd:string'),
+	array('addSubproject'=>'xsd:int'),
+	$uri,$uri.'#addSubproject','rpc','encoded'
+);
+
+//updateSubproject
+$server->register(
+	'updateSubproject',
+	array('session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'group_project_id'=>'xsd:int',
+		'project_name'=>'xsd:string',
+		'description'=>'xsd:string',
+		'send_all_posts_to'=>'xsd:string'),
+	array('updateSubproject'=>'xsd:boolean'),
+	$uri,$uri.'#updateSubproject','rpc','encoded'
+);
+
+
+//deleteSubproject
+$server->register(
+	'deleteSubproject',
+	array('session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'group_project_id'=>'xsd:int'),
+	array('deleteSubproject'=>'xsd:boolean'),
+	$uri,$uri.'#deleteSubproject','rpc','encoded'
+);
 
 //
 //	getProjectGroups
@@ -688,5 +725,53 @@ function &addProjectMessage($session_ser,$group_id,$group_project_id,$project_ta
 		return new soap_fault ('','addProjectMessage',$am->getErrorMessage(),$am->getErrorMessage());
 	} else {
 		return $am->getID();
+	}
+}
+
+//
+//	addSubproject
+//
+function addSubproject($session_ser,$group_id,$group_project_id,$project_name,$description,$_public,$send_all_posts_to) {
+	continue_session($session_ser);
+	
+	$g = group_get_object($group_id);
+	$pg = new ProjectGroup($g,$group_project_id);
+
+	if (!$pg->create($project_name,$description,$send_all_posts_to)) {
+		return new soap_fault ('','addSubproject','Could Not Create Subproject','Could Not Create Subproject');
+	} else {
+		return $pg->getID();
+	}
+}
+
+//
+//	updateSubproject
+//
+function updateSubproject($session_ser,$group_id,$group_project_id,$project_name,$description,$send_all_posts_to) {
+	continue_session($session_ser);
+	
+	$g = group_get_object($group_id);
+	$pg = new ProjectGroup($g,$group_project_id);
+
+	if (!$pg->update($project_name,$description,$send_all_posts_to)) {
+		return new soap_fault ('','updateSubproject','Could Not Update Subproject','Could Not Update Subproject');
+	} else {
+		return true;
+	}
+}
+
+//
+//	deleteSubproject
+//
+function deleteSubproject($session_ser,$group_id,$group_project_id) {
+	continue_session($session_ser);
+	
+	$g = group_get_object($group_id);
+	$pg = new ProjectGroup($g,$group_project_id);
+
+	if (!$pg->delete(true,true)) {
+		return new soap_fault ('','deleteSubproject','Could Not Delete Subproject','Could Not Delete Subproject');
+	} else {
+		return true;
 	}
 }

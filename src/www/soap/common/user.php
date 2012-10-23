@@ -23,6 +23,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/User.class.php';
+require_once $gfcommon.'include/Role.class.php';
 
 // Add The definition of a user object
 $server->wsdl->addComplexType(
@@ -66,6 +67,25 @@ $server->register(
     array('userResponse'=>'tns:ArrayOfUser'),
     $uri,
     $uri.'#getUsers','rpc','encoded'
+);
+
+//getActiveUsers ()
+$server->register(
+    'getActiveUsers',
+    array('session_ser'=>'string'),
+    array('userResponse'=>'tns:ArrayOfUser'),
+    $uri,
+    $uri.'#getActiveUsers','rpc','encoded'
+);
+
+//[Yosu] getGroupUsers (session_ser, group_id)
+$server->register(
+    'getGroupUsers',
+    array('session_ser'=>'xsd:string',
+	 'group_id'=>'xsd:int'),
+    array('return'=>'tns:ArrayOfUser'),
+    $uri,
+    $uri.'#getGroupUsers','rpc','encoded'
 );
 
 //getUsersByName (unix_name array)
@@ -176,6 +196,39 @@ function &getUsers($session_ser,$user_ids) {
 	return users_to_soap($usrs);
 }
 
+//get active user objects 
+function getActiveUsers($session_ser) {
+	continue_session($session_ser);
+	$usrs =& user_get_active_users();
+	if (!$usrs) {
+		return new soap_fault ('3001','getActiveUsers','Could Not Get Forge Users','Could Not Get Forge Users');
+	}
+
+	return users_to_soap($usrs);
+}
+
+//[Yosu] getGroupUsers (session_ser, group_id)
+function getGroupUsers($session_ser, $group_id) {
+	continue_session($session_ser);
+
+	$group = group_get_object($group_id);
+
+	if (!$group || !is_object($group)) {
+		$errMsg = 'Could not get group: '.$group->getErrorMessage();
+		return new soap_fault ('3002','getGroupUsers',$errMsg,$errMsg);
+	} elseif ($group->isError()) {
+		$errMsg = 'Could not get group: '.$group->getErrorMessage();
+		return new soap_fault ('3002','getGroupUsers',$errMsg,$errMsg);
+	}
+	$members = $group->getUsers();
+	if (!$members) {
+		$errMsg = 'Could not get users';
+		return new soap_fault ('3002','getGroupUsers',$errMsg,$errMsg);
+	}
+
+	return users_to_soap($members);
+}
+
 //get user objects for array of unix_names
 function getUsersByName($session_ser,$user_names) {
 	continue_session($session_ser);
@@ -192,7 +245,7 @@ function addUser($unix_name,$firstname,$lastname,$password1,$password2,$email,
 		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,$unix_box,$address,$address2,$phone,$fax,$title,$ccode){
 	$new_user = new GFUser();
 
-	$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',$address,$address2,$phone,$fax,$title,$ccode);
+	$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,$unix_box,$address,$address2,$phone,$fax,$title,$ccode);
 
 	if (!$register){
 		return new soap_fault ('3004','user','Could Not Add A New User','Could Not Add A New User');
