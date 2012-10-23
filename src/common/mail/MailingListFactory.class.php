@@ -43,9 +43,9 @@ class MailingListFactory extends Error {
 
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *	@param	object	The Group object to which these mailing lists are associated.
+	 * @param	Group	$Group The Group object to which these mailing lists are associated.
 	 */
 	function MailingListFactory(& $Group) {
 		$this->Error();
@@ -73,10 +73,9 @@ class MailingListFactory extends Error {
 	}
 
 	/**
-	 *	getMailingLists - get an array of MailingList objects for this Group.
+	 * getMailingLists - get an array of MailingList objects for this Group.
 	 *
-	 * @param boolean $admin if we are in admin mode (we want to see deleted lists)
-	 *	@return	array	The array of MailingList objects.
+	 * @return	array	The array of MailingList objects.
 	 */
 	function getMailingLists() {
 		if (isset($this->mailingLists) && is_array($this->mailingLists)) {
@@ -85,9 +84,11 @@ class MailingListFactory extends Error {
 
 		$public_flag = MAIL__MAILING_LIST_IS_PUBLIC;
 
-		$perm = & $this->Group->getPermission ();
-		if ($perm && is_object($perm) && $perm->isMember()) {
-			$public_flag = MAIL__MAILING_LIST_IS_PRIVATE.', '.MAIL__MAILING_LIST_IS_PUBLIC;
+		if (session_loggedin()) {
+			$perm = $this->Group->getPermission();
+			if ($perm && is_object($perm) && $perm->isMember()) {
+				$public_flag = MAIL__MAILING_LIST_IS_PRIVATE.', '.MAIL__MAILING_LIST_IS_PUBLIC;
+			}
 		}
 
 		$result = db_query_params ('SELECT * FROM mail_group_list WHERE group_id=$1 AND is_public = ANY ($2) ORDER BY list_name',
