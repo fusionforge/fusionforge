@@ -215,7 +215,7 @@ class SurveyResponseFactory extends Error {
 			return $this->Result;
 		}
 
-		$arr = &$this->getSurveyResponses();
+		$arr = $this->getSurveyResponses();
 		if (!$arr || !is_array($arr)) {
 			return false;
 		}
