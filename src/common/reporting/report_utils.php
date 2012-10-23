@@ -214,6 +214,8 @@ function report_time_category_box($name='category',$selected=false) {
 //
 function report_pie_arr($labels, $vals, $format=1) {
 	global $pie_labels,$pie_vals;
+
+	$total = 0;
 	//first get sum of all values
 	for ($i=0; $i<count($vals); $i++) {
 		$total += $vals[$i];
