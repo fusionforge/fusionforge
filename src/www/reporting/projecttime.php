@@ -32,7 +32,6 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
-$sw = getStringFromRequest('sw');
 $typ = getStringFromRequest('typ');
 $g_id = getIntFromRequest('g_id');
 $type = getStringFromRequest('type');
@@ -68,7 +67,6 @@ $a2[]='user';
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<input type="hidden" name="sw" value="<?php echo $sw; ?>" />
 <input type="hidden" name="typ" value="<?php echo $typ; ?>" />
 <table><tr>
 <td><strong><?php echo _('Project'); ?>:</strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>
