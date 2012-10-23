@@ -83,14 +83,14 @@ class Valid {
         return $this->key;
     }
 
-    /**
-     * Add a new rule in this validation.
-     *
-     * ou can add a custom error message that will bypass the default one that
-     * comes with the rule.
-     * @param Rule   Reference on rule.
-     * @param String Error message.
-     */
+	/**
+	 * Add a new rule in this validation.
+	 *
+	 * ou can add a custom error message that will bypass the default one that
+	 * comes with the rule.
+	 * @param Rule   $rule    Reference on rule.
+	 * @param string|bool $message Error message.
+	 */
     function addRule(&$rule, $message=false) {
         $this->rules[] =& $rule;
         $this->errors[] = $message;
@@ -215,7 +215,8 @@ class Valid {
      * Run validation on given value.
      *
      * @param mixed Value to test.
-     */
+	 * @return bool
+	 */
     function validate($value) {
         if($this->isRequired
            || (!$this->isRequired && !$this->isValueEmpty($value))) {

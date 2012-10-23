@@ -147,7 +147,8 @@ extends Valid {
      * Is uploaded file empty or not.
      *
      * @param Array One entry of $_FILES
-     */
+	 * @return bool
+	 */
     function isEmptyValue($file) {
         if(!is_array($file)) {
             return false;
@@ -158,13 +159,13 @@ extends Valid {
         }
     }
 
-    /**
-     * Check rules on given file.
-     *
-     * @param  Array                            $_FILES superarray.
-     * @param  String Index of file to check in $_FILES array.
-     * @return Boolean
-     */
+	/**
+	 * Check rules on given file.
+	 *
+	 * @param $files Array $_FILES superarray.
+	 * @param string $index
+	 * @return bool
+	 */
     function validate($files, $index='') {
         if(is_array($files) && isset($files[$index])) {
             $this->addRule(new Rule_File());
