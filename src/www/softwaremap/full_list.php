@@ -64,11 +64,13 @@ $querytotalcount = count($projects);
 $page = getIntFromRequest('page',1);
 
 // store this as a var so it can be printed later as well
-$html_limit = '<span style="text-align:center;font-size:smaller">';
-if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
+$html_limit = '';
+if ($querytotalcount == $TROVE_HARDQUERYLIMIT) {
 	$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects in result set.'), $querytotalcount);
 }
 $html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $querytotalcount);
+
+$html_limit .= ' ';
 
 // only display pages stuff if there is more to display
 if ($querytotalcount > $TROVE_BROWSELIMIT) {
@@ -89,8 +91,6 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 		$html_limit .= ' ';
 	}
 }
-
-$html_limit .= '</span>';
 
 print $html_limit."<hr />\n";
 
