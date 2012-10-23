@@ -11,6 +11,7 @@ FusionForge-5.3:
 * Docman: Display number of download per file, max upload size (TrivialDev)
 * Widget: Project Document Activity : new or updates files, new directories, in the last 4 weeks (TrivialDev)
 * Frs: Download statistics are available as graph now (TrivialDev)
+* New SOAP services to handle adding/removing groups, users and tasks (patch by Pasquale Vitale)
 
 Plugins:
 * headermenu: new plugin to handle links in headermenu or outermenu (TrivialDev)
