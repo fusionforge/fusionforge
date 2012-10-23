@@ -96,7 +96,6 @@ class Permission extends Error {
 	 *	Constructor for this object.
 	 *
 	 *	@param	object	Group Object required.
-	 *	@param	object	User Object required.
 	 *
 	 */
 	function Permission (&$_Group) {
