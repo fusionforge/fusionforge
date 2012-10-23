@@ -1,13 +1,14 @@
 <?php
 
 abstract class ForgeEvent extends Plugin {
-	function ForgeEvent () {
+
+	function __construct() {
 		$this->Plugin() ;
 		$this->name = "event" ;
 		$this->text = "event" ;
-		$this->hooks[] = 'group_approve';
-		$this->hooks[] = 'scm_admin_update';
-		$this->hooks[] = 'site_admin_option_hook';
+		$this->_addHook('group_approve');
+		$this->_addHook('scm_admin_update');
+		$this->_addHook('site_admin_option_hook');
 	}
 
 	abstract function trigger_job($name);
