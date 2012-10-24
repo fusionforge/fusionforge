@@ -23,6 +23,7 @@
 /*
 	Determine group
 */
+
 $group_id=getIntFromRequest('group_id');
 $form_grp=getIntFromRequest('form_grp');
 if (isset($group_id) && is_numeric($group_id) && $group_id) {
@@ -51,17 +52,21 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	}
 	$expl_pathinfo = explode('/',$pathwithoutprefix);
 	if (($expl_pathinfo[1]=='foundry') || ($expl_pathinfo[1]=='projects')) {
+		$group_name_exploded = explode('?', $expl_pathinfo[2]);
 		$res_grp = db_query_params ('
 			SELECT *
 			FROM groups
 			WHERE unix_group_name=$1
 			AND status IN ($2,$3)',
-					    array ($expl_pathinfo[2],
+					    array ($group_name_exploded[0],
 						   'A',
 						   'H'));
 
 		// store subpage id for analyzing later
-		$subpage  = isset($expl_pathinfo[3])?$expl_pathinfo[3]:'';
+		$subpage_exploded = explode('?', $expl_pathinfo[3]);
+		
+		// This will later be used in the www/projects for instance
+		$subpage  = isset($subpage_exploded[0])?$subpage_exploded[0]:'';
 		$subpage2 = isset($expl_pathinfo[4]) ? $expl_pathinfo[4] : '';
 
 		//set up the group_id
@@ -77,6 +82,16 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 			} else {
 				$log_group=0;
 			}
+			
+			// This will later be used in the www/projects for instance
+			global $RESTPATH_PROJECTS_GROUP_ID;
+			$RESTPATH_PROJECTS_GROUP_ID = $group_id;
+			global $RESTPATH_PROJECTS_PROJECT;
+			$RESTPATH_PROJECTS_PROJECT = $project;
+			global $RESTPATH_PROJECTS_SUBPAGE;
+			$RESTPATH_PROJECTS_SUBPAGE = $subpage;
+			global $RESTPATH_PROJECTS_SUBPAGE2;
+			$RESTPATH_PROJECTS_SUBPAGE2 = $subpage2;
 		} else {
 			$log_group=0;
 		}
@@ -93,10 +108,6 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 			array($group_name,
 				'A',
 				'H'));
-
-		// store subpage id for analyzing later
-		$subpage = @$expl_pathinfo[4];
-		$subpage2 = @$expl_pathinfo[5];
 
 		//set up the group_id
 		$group_id=db_result($res_grp,0,'group_id');

@@ -23,82 +23,137 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/*
+ * This script provides support for some REST-like paths in the form /projects/PROJNAME/...
+ */
+
 require_once 'env.inc.php';
 require_once $gfcommon.'include/pre.php';
+
+/**
+ * Call hooks for content-negociated display
+ * @param string $hook_name - the hook to be invoked
+ * @param array $hook_params - its params
+ * @param string $accepted_type - the Accept type that is expected
+ * @param string $forced_content_type - a forced content-type for debugging purposes
+ */
+function display_content_negociated_hook($hook_name, $hook_params, $accepted_type, $forced_content_type = false)
+{
+
+	// The hook probably needs other params but take for granted these need an 'accept' param
+	$hook_params['accept'] = $accepted_type;
+
+	plugin_hook_by_reference($hook_name, $hook_params);
+
+	$content_type = $hook_params['content_type'];
+	
+	// If the hooks return a content-type
+	if($content_type != ''){
+			
+		// The returned content-type may be overriden
+		if($forced_content_type) {
+			$content_type = $forced_content_type;
+		}
+		
+		header('Content-type: '. $content_type);
+		echo $hook_params['content'];
+	}
+	else {
+		header('HTTP/1.1 406 Not Acceptable',true,406);
+		exit_error('HTTP/1.1 406 Not Acceptable - Not possible to display as : ' . $accepted_type);
+	}
+}
+
+$default_content_type = 'text/html';
+
+// It may be invoked with
+// http://fusionforge.example.com/projects/PROJNAME?forced_accept=application/rdf%2Bxml&forced_content_type=text/html (urlencoded) for instance
+
+// Instead of content-negociating with an Accept: header, potentially use the forced_accept arg
+$forced_accept = getStringFromRequest('forced_accept', false);
+
+// Instead of displaying the default rendering for the content-type, may force it with forced_content_type arg (text/plain for instance instead of XML)
+$forced_content_type = getStringFromRequest('forced_content_type', false);
+
 
 //
 //	IMPORTANT NOTE!!
 //	Setting up the $project object is all being
-//	handled in the logger now
+//	handled in the logger now (see logger.php)
 //	This was done so the logger would accurately record these pages
-//
-
 //
 //	test to see if the logger was successful in setting up the objects
 //
-
-$default_content_type = 'text/html';
+global $RESTPATH_PROJECTS_GROUP_ID;
+$group_id = $RESTPATH_PROJECTS_GROUP_ID;
+global $RESTPATH_PROJECTS_PROJECT;
+$project = $RESTPATH_PROJECTS_PROJECT;
 
 if (!$group_id || !$project) {
 
 	$script = 'projects_list';
-	$content_type = util_negociate_alternate_content_types($script, $default_content_type);
 
-	if($content_type != $default_content_type) {
+	// Check for an acceptable content-type
+	$accepted_type = util_negociate_alternate_content_types($script, $default_content_type, $forced_accept);
+
+	if($accepted_type != $default_content_type) {
+
 		$hook_params = array();
-		$hook_params['accept'] = $content_type;
 		$hook_params['return'] = '';
 		$hook_params['content_type'] = '';
-		plugin_hook_by_reference('content_negociated_projects_list', $hook_params);
-		if($hook_params['content_type'] != ''){
-				header('Content-type: '. $hook_params['content_type']);
-				echo $hook_params['content'];
-		}
-		else {
-			header('HTTP/1.1 406 Not Acceptable',true,406);
-			exit(0);
-		}
-	} else {
-		exit_no_group();
-	}
-} else {
-	$subpage = getStringFromRequest('subpage');
 
+		display_content_negociated_hook('content_negociated_projects_list', $hook_params, $accepted_type, $forced_content_type);
+
+	} else {
+		// '/projects' in HTML redirects to the softwaremap
+		session_redirect("/softwaremap/");
+	}
+
+} else {
+
+	// reuse vars from logger.php too if not specified explicitely ?
+	global $RESTPATH_PROJECTS_SUBPAGE;
+	$subpage = getStringFromRequest('subpage');
+	$subpage = isset($subpage)?$subpage:$RESTPATH_PROJECTS_SUBPAGE;
+	global $RESTPATH_PROJECTS_SUBPAGE2;
+	$subpage2 = getStringFromRequest('subpage2');
+	$subpage2 = isset($subpage2)?$subpage2:$RESTPATH_PROJECTS_SUBPAGE2;
+	
 	if ($subpage == "admin") {
-		session_redirect(util_make_url("/project/admin/?group_id=$group_id"));
+		
+		session_redirect("/project/admin/?group_id=$group_id");
+		
 	} else if ($subpage == "files" || $subpage == "download" || $subpage == "dl") {
-		if (getStringFromRequest('subpage2') == "release") {
-			session_redirect(util_make_url("/frs/admin/qrs.php?group_id=$group_id"));
+		
+		if ($subpage2 == "release") {
+			session_redirect("/frs/admin/qrs.php?group_id=$group_id");
 		} else {
-			session_redirect(util_make_url("/frs/?group_id=$group_id"));
+			session_redirect("/frs/?group_id=$group_id");
 		}
+		
 	} else if ($subpage == "cvs") {
 		header("Location: ".account_group_cvsweb_url($project->getUnixName()));
 		exit();
+		
 	} else {
-	
+
 		$script='project_home';
-		$content_type = util_negociate_alternate_content_types($script, $default_content_type);
-	
-		// if a custom content-type is selected, then redirect to plugin's rendering
-		if($content_type != $default_content_type) {
+			
+		$accepted_type = util_negociate_alternate_content_types($script, $default_content_type, $forced_accept);
+
+		// if a custom content-type is selected, then use plugin's/hooks rendering
+		if($accepted_type != $default_content_type) {
+				
 			$hook_params = array();
 			$hook_params['groupname'] = $project->getUnixName();
-			$hook_params['accept'] = $content_type;
+			$hook_params['group_id'] = $project->getID();
 			$hook_params['return'] = '';
 			$hook_params['content_type'] = '';
-			$hook_params['group_id'] = $project->getID();
-			plugin_hook_by_reference('content_negociated_project_home', $hook_params);
-			if($hook_params['content_type'] != ''){
-				header('Content-type: '. $hook_params['content_type']);
-				echo $hook_params['content'];
-			}
-			else {
-				header('HTTP/1.1 406 Not Acceptable',true,406);
-				exit(0);
-			}
+				
+			display_content_negociated_hook('content_negociated_project_home', $hook_params, $accepted_type, $forced_content_type);
+				
 		} else {
-			//show the project summary page
+			// show the project summary page for HTML display
 			include $gfwww.'include/project_home.php';
 		}
 	}
