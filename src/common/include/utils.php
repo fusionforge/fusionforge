@@ -1593,32 +1593,44 @@ function util_nat0(&$s) {
 }
 
 /**
- * TODO: Enter description here ...
- * @param unknown_type $script
- * @param unknown_type $default_content_type
- * @return Ambiguous
+ * util_negociate_alternate_content_types() - Manage content-type negociation based on 'script_accepted_types' hooks
+ * @param string $script
+ * @param string $default_content_type
+ * @param string $forced_content_type
+ * @return string
  */
-function util_negociate_alternate_content_types($script, $default_content_type) {
+function util_negociate_alternate_content_types($script, $default_content_type, $forced_content_type=false) {
 
-	// Invoke plugins' hooks 'script_accepted_types' to discover which alternate content types they would accept for /users/...
-	$hook_params = array();
-	$hook_params['script'] = $script;
-	$hook_params['accepted_types'] = array();
-	plugin_hook_by_reference('script_accepted_types', $hook_params);
-	if (count($hook_params['accepted_types'])) {
-		// By default, text/html is accepted
-		$accepted_types = array($default_content_type);
-		$new_accepted_types = $hook_params['accepted_types'];
-		$accepted_types = array_merge($accepted_types, $new_accepted_types);
-
-		// PEAR::HTTP (for negotiateMimeType())
-		require_once 'HTTP.php';
-
-		// negociate accepted content-type depending on the preferred ones declared by client
-		$http=new HTTP();
-		$content_type = $http->negotiateMimeType($accepted_types, false);
-	} else {
-		$content_type = $default_content_type;
+	$content_type = $default_content_type;
+	
+	// we can force the content-type to be returned automaticall if necessary
+	if ($forced_content_type) {
+		// TODO ideally, in this case we could try and apply the negociation to see if it matches 
+		// one provided by the hooks, but negotiateMimeType() doesn't allow this so for the moment, 
+		// we just force it whatever the hooks support
+		$content_type = $forced_content_type;
+	}
+	else {
+		// Invoke plugins' hooks 'script_accepted_types' to discover which alternate content types they would accept for /users/...
+		$hook_params = array();
+		$hook_params['script'] = $script;
+		$hook_params['accepted_types'] = array();
+		
+		plugin_hook_by_reference('script_accepted_types', $hook_params);
+		
+		if (count($hook_params['accepted_types'])) {
+			// By default, text/html is accepted
+			$accepted_types = array($default_content_type);
+			$new_accepted_types = $hook_params['accepted_types'];
+			$accepted_types = array_merge($accepted_types, $new_accepted_types);
+	
+			// PEAR::HTTP (for negotiateMimeType())
+			require_once 'HTTP.php';
+	
+			// negociate accepted content-type depending on the preferred ones declared by client
+			$http=new HTTP();
+			$content_type = $http->negotiateMimeType($accepted_types, false);
+		}
 	}
 	return $content_type;
 }
