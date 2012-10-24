@@ -28,16 +28,16 @@ SetEnv FORGE_CONFIG_PATH "{core/config_path}"
 Include {core/config_path}/httpd.conf.d/plugin-*.inc
 
 Alias /images/ {core/source_path}/www/images/
-Alias /scripts/coolfieldset/ {core/source_path}/lib/vendor/coolfieldset/
-Alias /scripts/jquery/ {core/source_path}/lib/vendor/jquery/
-Alias /scripts/jquery-ui/ {core/source_path}/lib/vendor/jquery-ui/
-Alias /scripts/jquery-tipsy/ {core/source_path}/lib/vendor/jquery-tipsy/
-Alias /scripts/jquery-storage/ {core/source_path}/lib/vendor/jquery-storage/
-Alias /scripts/jquery-simpletreemenu/ {core/source_path}/lib/vendor/jquery-simpletreemenu/
-Alias /scripts/jquery-jqplot/ {core/source_path}/lib/vendor/jquery-jqplot/
-Alias /scripts/prototype/ {core/source_path}/lib/vendor/prototype/
-Alias /scripts/scriptaculous/ {core/source_path}/lib/vendor/scriptaculous/
-Alias /scripts/yui/ {core/source_path}/lib/vendor/yui/build/
+Alias /scripts/coolfieldset/ {core/source_path}/vendor/coolfieldset/
+Alias /scripts/jquery/ {core/source_path}/vendor/jquery/
+Alias /scripts/jquery-ui/ {core/source_path}/vendor/jquery-ui/
+Alias /scripts/jquery-tipsy/ {core/source_path}/vendor/jquery-tipsy/
+Alias /scripts/jquery-storage/ {core/source_path}/vendor/jquery-storage/
+Alias /scripts/jquery-simpletreemenu/ {core/source_path}/vendor/jquery-simpletreemenu/
+Alias /scripts/jquery-jqplot/ {core/source_path}/vendor/jquery-jqplot/
+Alias /scripts/prototype/ {core/source_path}/vendor/prototype/
+Alias /scripts/scriptaculous/ {core/source_path}/vendor/scriptaculous/
+Alias /scripts/yui/ {core/source_path}/vendor/yui/build/
 
 # For FusionForge without DNS delegation, uncomment this
 # and remove 30-vhosts-projects.conf

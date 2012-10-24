@@ -178,7 +178,7 @@ class Layout extends Error {
 			if (file_exists($filename)) {
 				$js .= '?'.date ("U", filemtime($filename));
 			} else {
-				$filename = str_replace('/scripts/', $GLOBALS['fusionforge_basedir'].'/lib/vendor/', $js);
+				$filename = str_replace('/scripts/', $GLOBALS['fusionforge_basedir'].'/vendor/', $js);
 				if (file_exists($filename)) {
 					$js .= '?'.date ("U", filemtime($filename));
 				}
@@ -197,7 +197,7 @@ class Layout extends Error {
 			if (file_exists($filename)) {
 				$css .= '?'.date ("U", filemtime($filename));
 			} else {
-				$filename = str_replace('/scripts/', $GLOBALS['fusionforge_basedir'].'/lib/vendor/', $css);
+				$filename = str_replace('/scripts/', $GLOBALS['fusionforge_basedir'].'/vendor/', $css);
 				if (file_exists($filename)) {
 					$css .= '?'.date ("U", filemtime($filename));
 				}

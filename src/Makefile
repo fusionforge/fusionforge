@@ -14,7 +14,7 @@ www/js/common-min.js: www/js/common.js www/js/sortable.js
 	$(YUICOMPRESSOR) -o $@ /tmp/combined.js
 	rm -f /tmp/combined.js
 
-www/js/jquery-common-min.js: lib/vendor/jquery/jquery-1.4.2.min.js lib/vendor/jquery-tipsy/src/javascripts/jquery.tipsy.js lib/vendor/coolfieldset/js/jquery.coolfieldset.js www/js/jquery-common.js
+www/js/jquery-common-min.js: vendor/jquery/jquery-1.4.2.min.js vendor/jquery-tipsy/src/javascripts/jquery.tipsy.js vendor/coolfieldset/js/jquery.coolfieldset.js www/js/jquery-common.js
 	cat $^ > /tmp/combined.js
 	$(YUICOMPRESSOR) -o $@ /tmp/combined.js
 	rm -f /tmp/combined.js

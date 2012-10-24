@@ -6,10 +6,10 @@ usr/share/javascript/jquery @SOURCE_PATH@/www/scripts/jquery
 usr/share/javascript/jquery-tipsy @SOURCE_PATH@/www/scripts/jquery-tipsy
 usr/share/javascript/jquery-ui @SOURCE_PATH@/www/scripts/jquery-ui
 usr/share/javascript/jquery-ui-themes @SOURCE_PATH@/www/scripts/jquery-ui-themes
-usr/share/javascript/yui @SOURCE_PATH@/lib/vendor/yui
-usr/share/javascript/prototype @SOURCE_PATH@/lib/vendor/prototype
-usr/share/javascript/scriptaculous @SOURCE_PATH@/lib/vendor/scriptaculous
-usr/share/javascript/jquery @SOURCE_PATH@/lib/vendor/jquery
-usr/share/javascript/jquery-tipsy @SOURCE_PATH@/lib/vendor/jquery-tipsy
-usr/share/javascript/jquery-ui @SOURCE_PATH@/lib/vendor/jquery-ui
-usr/share/javascript/jquery-ui-themes @SOURCE_PATH@/lib/vendor/jquery-ui-themes
+usr/share/javascript/yui @SOURCE_PATH@/vendor/yui
+usr/share/javascript/prototype @SOURCE_PATH@/vendor/prototype
+usr/share/javascript/scriptaculous @SOURCE_PATH@/vendor/scriptaculous
+usr/share/javascript/jquery @SOURCE_PATH@/vendor/jquery
+usr/share/javascript/jquery-tipsy @SOURCE_PATH@/vendor/jquery-tipsy
+usr/share/javascript/jquery-ui @SOURCE_PATH@/vendor/jquery-ui
+usr/share/javascript/jquery-ui-themes @SOURCE_PATH@/vendor/jquery-ui-themes
