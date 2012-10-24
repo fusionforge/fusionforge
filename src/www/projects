@@ -77,19 +77,20 @@ $forced_content_type = getStringFromRequest('forced_content_type', false);
 
 
 //
-//	IMPORTANT NOTE!!
-//	Setting up the $project object is all being
-//	handled in the logger now (see logger.php)
-//	This was done so the logger would accurately record these pages
+// IMPORTANT NOTE!!
+// Setting up the $RESTPATH_PROJECTS_GROUP_ID and $RESTPATH_PROJECTS_PROJECT object is all being
+// handled in the logger now (see logger.php)
+// This was done so the logger would accurately record these pages
 //
-//	test to see if the logger was successful in setting up the objects
+// A valid project name gives a valid group_id and project object, whereas both unset means /projects
+// A group_id set to -1 means an unknown project
 //
 global $RESTPATH_PROJECTS_GROUP_ID;
 $group_id = $RESTPATH_PROJECTS_GROUP_ID;
 global $RESTPATH_PROJECTS_PROJECT;
 $project = $RESTPATH_PROJECTS_PROJECT;
 
-if (!$group_id || !$project) {
+if (!isset($group_id) && !isset($project)) {
 
 	$script = 'projects_list';
 
@@ -111,51 +112,57 @@ if (!$group_id || !$project) {
 
 } else {
 
-	// reuse vars from logger.php too if not specified explicitely ?
-	global $RESTPATH_PROJECTS_SUBPAGE;
-	$subpage = getStringFromRequest('subpage');
-	$subpage = isset($subpage)?$subpage:$RESTPATH_PROJECTS_SUBPAGE;
-	global $RESTPATH_PROJECTS_SUBPAGE2;
-	$subpage2 = getStringFromRequest('subpage2');
-	$subpage2 = isset($subpage2)?$subpage2:$RESTPATH_PROJECTS_SUBPAGE2;
-	
-	if ($subpage == "admin") {
+	if (isset($group_id) && isset($project)) {
+		// reuse vars from logger.php too if not specified explicitely ?
+		global $RESTPATH_PROJECTS_SUBPAGE;
+		$subpage = getStringFromRequest('subpage');
+		$subpage = isset($subpage)?$subpage:$RESTPATH_PROJECTS_SUBPAGE;
+		global $RESTPATH_PROJECTS_SUBPAGE2;
+		$subpage2 = getStringFromRequest('subpage2');
+		$subpage2 = isset($subpage2)?$subpage2:$RESTPATH_PROJECTS_SUBPAGE2;
 		
-		session_redirect("/project/admin/?group_id=$group_id");
-		
-	} else if ($subpage == "files" || $subpage == "download" || $subpage == "dl") {
-		
-		if ($subpage2 == "release") {
-			session_redirect("/frs/admin/qrs.php?group_id=$group_id");
-		} else {
-			session_redirect("/frs/?group_id=$group_id");
-		}
-		
-	} else if ($subpage == "cvs") {
-		header("Location: ".account_group_cvsweb_url($project->getUnixName()));
-		exit();
-		
-	} else {
-
-		$script='project_home';
+		if ($subpage == "admin") {
 			
-		$accepted_type = util_negociate_alternate_content_types($script, $default_content_type, $forced_accept);
-
-		// if a custom content-type is selected, then use plugin's/hooks rendering
-		if($accepted_type != $default_content_type) {
-				
-			$hook_params = array();
-			$hook_params['groupname'] = $project->getUnixName();
-			$hook_params['group_id'] = $project->getID();
-			$hook_params['return'] = '';
-			$hook_params['content_type'] = '';
-				
-			display_content_negociated_hook('content_negociated_project_home', $hook_params, $accepted_type, $forced_content_type);
-				
+			session_redirect("/project/admin/?group_id=$group_id");
+			
+		} else if ($subpage == "files" || $subpage == "download" || $subpage == "dl") {
+			
+			if ($subpage2 == "release") {
+				session_redirect("/frs/admin/qrs.php?group_id=$group_id");
+			} else {
+				session_redirect("/frs/?group_id=$group_id");
+			}
+			
+		} else if ($subpage == "cvs") {
+			header("Location: ".account_group_cvsweb_url($project->getUnixName()));
+			exit();
+			
 		} else {
-			// show the project summary page for HTML display
-			include $gfwww.'include/project_home.php';
+	
+			$script='project_home';
+				
+			$accepted_type = util_negociate_alternate_content_types($script, $default_content_type, $forced_accept);
+	
+			// if a custom content-type is selected, then use plugin's/hooks rendering
+			if($accepted_type != $default_content_type) {
+					
+				$hook_params = array();
+				$hook_params['groupname'] = $project->getUnixName();
+				$hook_params['group_id'] = $project->getID();
+				$hook_params['return'] = '';
+				$hook_params['content_type'] = '';
+					
+				display_content_negociated_hook('content_negociated_project_home', $hook_params, $accepted_type, $forced_content_type);
+					
+			} else {
+				// show the project summary page for HTML display
+				include $gfwww.'include/project_home.php';
+			}
 		}
+	}
+	else {
+		header('HTTP/1.1 404 Not Found',true,404);
+		exit_error('HTTP/1.1 404 Not Found');
 	}
 }
 
