@@ -330,7 +330,7 @@ function artifactFileDelete($session_ser,$group_id,$group_artifact_id,$artifact_
 	} elseif ($a->isError()) {
 		return new soap_fault ('','artifactFileDelete','$a->getErrorMessage()',$a->getErrorMessage());
 	}
-	if (!$a->delete()) {
+	if (!$a->delete(true)) {
 		return new soap_fault ('','artifactFileDelete','$a->getErrorMessage()',$a->getErrorMessage());
 	} else {
 		return true;
@@ -1127,7 +1127,7 @@ function artifact_history_to_soap($db_result, &$artifactType) {
 			$old_value = $artifactType->getStatusName($old_value);
 		} elseif ($field_name == 'assigned_to') {
 			$old_value =  user_getname($old_value);
-		} elseif ($field == 'close_date') {
+		} elseif ($field_name == 'close_date') {
 			$old_value =  date(_('Y-m-d H:i'), $old_value);
 		}
 
