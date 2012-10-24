@@ -459,7 +459,7 @@ webanalytics plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{_sysconfdir}/cron.d
 %{__install} -m 755 -d $RPM_BUILD_ROOT/bin
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/lib
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/vendor
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/www
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}
@@ -523,8 +523,6 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 
 # install fusionforge crontab
 %{__sed} -e 's/\$FFUSER/%{gfuser}/g' packaging/cron.d/cron.fusionforge > $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/%{name}
-
-%{__install} -m 644 deb-specific/sqlhelper.pm $RPM_BUILD_ROOT%{FORGE_DIR}/lib/sqlhelper.pm
 
 # Install locale files in Redhat standard location
 %{__cp} -a locales/* $RPM_BUILD_ROOT/%{FORGE_LANG_DIR}/
@@ -860,10 +858,10 @@ fi
 %{FORGE_DIR}/etc
 %{FORGE_DIR}/image-sources
 %{FORGE_DIR}/install
-%{FORGE_DIR}/lib
 %{FORGE_DIR}/locales
 %{FORGE_DIR}/translations
 %{FORGE_DIR}/utils
+%{FORGE_DIR}/vendor
 #%{FORGE_DIR}/setup
 %dir %{FORGE_DIR}/www
 # files under %{FORGE_DIR}/www
