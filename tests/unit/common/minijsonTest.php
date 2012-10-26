@@ -127,8 +127,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
             [quote] => "
             [backslash] => \\
             [controls] => 
-
-	
+	
             [slash] => / & /
             [alpha] => abcdefghijklmnopqrstuvwyz
             [ALPHA] => ABCDEFGHIJKLMNOPQRSTUVWYZ
@@ -176,8 +175,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
             [jsontext] => {"object with 1 member":["array with 1 element"]}
             [quotes] => &#34; " %22 0x22 034 &#x22;
             [/\\"쫾몾ꮘﳞ볚
-
-	`1~!@#$%^&*()_+-=[]{}|;:\',./<>?] => A key can be any string
+	`1~!@#$%^&*()_+-=[]{}|;:\',./<>?] => A key can be any string
         )
 
     [9] => 0.5
@@ -234,8 +232,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
 
             [# -- --> */] =>  
             [/\\"쫾몾ꮘﳞ볚
-
-	`1~!@#$%^&*()_+-=[]{}|;:\',./<>?] => A key can be any string
+	`1~!@#$%^&*()_+-=[]{}|;:\',./<>?] => A key can be any string
             [0123456789] => digit
             [ALPHA] => ABCDEFGHIJKLMNOPQRSTUVWYZ
             [E] => 1.23456789E+34
@@ -259,8 +256,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
                 )
 
             [controls] => 
-
-	
+	
             [digit] => 0123456789
             [e] => 1.23456789E-13
             [false] => 

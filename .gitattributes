@@ -4004,6 +4004,7 @@ tests/scripts/phpunit.sh -text
 tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
 tests/scripts/start_vm -text
 tests/scripts/stop_vm -text
+tests/unit/common/minijsonTest.php !eol
 tools/VM-scripts/README.txt -text
 tools/VM-scripts/build.sh -text
 tools/VM-scripts/configure-scripts.sh -text
