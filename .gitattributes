@@ -1,4 +1,5 @@
 * text=auto !eol
+tests/unit/common/minijsonTest.php -text
 *.php eol=lf
 /.bzrignore -text
 3rd-party/Makefile -text
