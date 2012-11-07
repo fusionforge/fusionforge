@@ -4,3 +4,6 @@ utils/install-apache.sh             usr/share/@OLDPACKAGE@/bin/
 utils/manage-apache-config.sh	    usr/share/@OLDPACKAGE@/bin/
 etc/httpd.conf.d-fhs		    usr/share/@OLDPACKAGE@/etc/
 etc/httpd.conf-fhs		    usr/share/@OLDPACKAGE@/etc/
+lib/vendor/coolfieldset		    usr/share/@OLDPACKAGE@/lib/vendor/
+lib/vendor/jquery-simpletreemenu    usr/share/@OLDPACKAGE@/lib/vendor/
+lib/vendor/jquery-storage	    usr/share/@OLDPACKAGE@/lib/vendor/
