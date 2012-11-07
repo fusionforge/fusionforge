@@ -3,15 +3,6 @@
 # Configure Loggerhead for FusionForge
 # Roland Mas
 
-PATH=/usr/share/gforge/bin:/usr/share/fusionforge/bin:$PATH
-source_path=`forge_get_config source_path`
-log_path=`forge_get_config log_path`
-data_path=`forge_get_config data_path`
-repos_path=$(forge_get_config repos_path scmbzr)
-web_host=$(forge_get_config web_host)
-url_prefix=$(forge_get_config url_prefix)
-
-
 set -e
 
 if [ `id -u` != 0 ] ; then
@@ -24,6 +15,11 @@ cachedir=/var/cache/gforge/loggerhead
 
 case "$1" in
     configure)
+	PATH=/usr/share/gforge/bin:/usr/share/fusionforge/bin:$PATH
+	repos_path=$(forge_get_config repos_path scmbzr)
+	web_host=$(forge_get_config web_host)
+	url_prefix=$(forge_get_config url_prefix)
+
 	a2enmod wsgi
 	if [ ! -e $configfile ] ; then
 	    mkdir -p $(dirname $configfile)
