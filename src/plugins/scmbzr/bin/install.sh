@@ -30,10 +30,10 @@ case "$1" in
 	    cat > $configfile <<EOF
 # Directory to serve bzr branches from
 # Non-bzr directories under this path will also be visible in loggerhead
-http_root_dir = '$repos_path'
+http_root_dir = '${repos_path}'
 
 # The url prefix for the bzr branches.
-http_user_prefix = 'http://$web_host/$url_prefix/scm/loggerhead'
+http_user_prefix = 'http://${web_host}${url_prefix}scm/loggerhead'
 
 # Directory to put cache files in
 http_sql_dir = '/var/cache/gforge/loggerhead'
