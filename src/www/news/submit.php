@@ -96,7 +96,7 @@ if (session_loggedin()) {
 			*/
 			
 			db_begin();
-			$f = new Forum($group);
+			$f = new Forum($group, false, false, true);
 			if (!$f->create(preg_replace('/[^_\.0-9a-z-]/','-', strtolower($summary)),$details,1,'',0,0)) {
 				db_rollback();
 				exit_error($f->getErrorMessage(),'news');
