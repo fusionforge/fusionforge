@@ -1,6 +1,6 @@
 Package: @PACKAGE@-plugin-scmbzr
 Architecture: all
-Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, bzr, php5-cli, ${misc:Depends}
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, bzr, php5-cli, ${misc:Depends}, libapache2-mod-wsgi, loggerhead (>= 1.19~bzr477~)
 Provides: @PACKAGE@-plugin-scm, @OLDPACKAGE@-plugin-scmbzr
 Conflicts: @OLDPACKAGE@-plugin-scmbzr
 Replaces: @OLDPACKAGE@-plugin-scmbzr
