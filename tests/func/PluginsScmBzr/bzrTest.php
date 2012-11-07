@@ -61,16 +61,16 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 
 		// Create a local branch, push it to the repo
 		$t = system("mktemp -d /tmp/bzrTest.XXXXXX");
-		system("cd $t && bzr init trunk >/dev/null", $ret);
+		system("cd $t && bzr init trunk &>/dev/null", $ret);
 		$this->assertEquals($ret, 0);
 
 		system("echo 'this is a simple text' > $t/trunk/mytext.txt");
-		system("cd $t/trunk && bzr add && bzr commit -m'Adding file'", $ret);
+		system("cd $t/trunk && bzr add --quiet &>/dev/null && bzr commit -m'Adding file' --quiet &>/dev/null", $ret);
 		system("echo 'another simple text' >> $t/trunk/mytext.txt");
-		system("cd $t/trunk && bzr add && bzr commit -m'Modifying file'", $ret);
+		system("cd $t/trunk && bzr add --quiet &>/dev/null && bzr commit -m'Modifying file' --quiet &>/dev/null", $ret);
 		$this->assertEquals($ret, 0);
 
-		system("cd $t/trunk && bzr push $p/trunk", $ret);
+		system("cd $t/trunk && BZR_PROGRESS_BAR=none bzr push --quiet $p/trunk &>/dev/null", $ret);
 		$this->assertEquals($ret, 0);
 
 		$this->open(ROOT.'/scm/loggerhead/projecta');
