@@ -60,17 +60,17 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$p = preg_replace(",/branchname$,", "", $p);
 
 		// Create a local branch, push it to the repo
-		$t = system("mktemp -d /tmp/bzrTest.XXXXXX");
-		system("cd $t && bzr init trunk &>/dev/null", $ret);
+		$t = exec("mktemp -d /tmp/bzrTest.XXXXXX");
+		system("cd $t && bzr init --quiet trunk >/dev/null", $ret);
 		$this->assertEquals($ret, 0);
 
 		system("echo 'this is a simple text' > $t/trunk/mytext.txt");
-		system("cd $t/trunk && bzr add --quiet &>/dev/null && bzr commit -m'Adding file' --quiet &>/dev/null", $ret);
+		system("cd $t/trunk && bzr add --quiet && bzr commit -m'Adding file' --quiet", $ret);
 		system("echo 'another simple text' >> $t/trunk/mytext.txt");
-		system("cd $t/trunk && bzr add --quiet &>/dev/null && bzr commit -m'Modifying file' --quiet &>/dev/null", $ret);
+		system("cd $t/trunk && bzr add --quiet && bzr commit -m'Modifying file' --quiet", $ret);
 		$this->assertEquals($ret, 0);
 
-		system("cd $t/trunk && BZR_PROGRESS_BAR=none bzr push --quiet $p/trunk &>/dev/null", $ret);
+		system("cd $t/trunk && bzr push --quiet $p/trunk", $ret);
 		$this->assertEquals($ret, 0);
 
 		$this->open(ROOT.'/scm/loggerhead/projecta');
