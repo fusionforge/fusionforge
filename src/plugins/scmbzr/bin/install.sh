@@ -24,6 +24,7 @@ cachedir=/var/cache/gforge/loggerhead
 
 case "$1" in
     configure)
+	a2enmod wsgi
 	if [ ! -e $configfile ] ; then
 	    mkdir -p $(dirname $configfile)
 	    cat > $configfile <<EOF
