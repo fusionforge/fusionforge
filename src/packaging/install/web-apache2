@@ -4,3 +4,6 @@ utils/install-apache.sh             @BINARY_PATH@/
 utils/manage-apache-config.sh	    @BINARY_PATH@/
 etc/httpd.conf.d-fhs		    @SOURCE_PATH@/etc/
 etc/httpd.conf-fhs		    @SOURCE_PATH@/etc/
+lib/vendor/coolfieldset		    @SOURCE_PATH@/lib/vendor/
+lib/vendor/jquery-simpletreemenu    @SOURCE_PATH@/lib/vendor/
+lib/vendor/jquery-storage	    @SOURCE_PATH@/lib/vendor/

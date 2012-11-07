@@ -334,7 +334,7 @@ abstract class BaseRole extends Error {
 		$sections = array_merge($sections, $sections_forum);
 		
 		$ff = new ForumFactory ($project) ;
-		$fids = $ff->getAllForumIds () ;
+		$fids = $ff->getAllForumIdsWithNews () ;
 		foreach ($fids as $fid) {
 			$result['forum'][$fid] = $this->getVal ('forum', $fid) ;
 		}
@@ -876,7 +876,7 @@ abstract class BaseRole extends Error {
 		$new_pa['forum'] = array () ;
 		foreach ($projects as $p) {
 			$ff = new ForumFactory ($p) ;
-			$fids = $ff->getAllForumIds () ;
+			$fids = $ff->getAllForumIdsWithNews () ;
 			foreach ($fids as $fid) {
 				if (array_key_exists ('forum', $this->perms_array)
 				    && array_key_exists ($fid, $this->perms_array['forum']) ) {

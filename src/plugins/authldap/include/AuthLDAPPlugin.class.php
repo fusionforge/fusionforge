@@ -270,7 +270,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 			}
 		}
 
-		$data = fetchDataForUser($loginname);
+		$data = $this->fetchDataForUser($loginname);
 		if (!$data) {
 			return FORGE_AUTH_AUTHORITATIVE_REJECT;
 		}
