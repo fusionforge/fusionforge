@@ -118,9 +118,17 @@ class Forum extends Error {
 				}
 			}
 			//
+			//	Is this a news posting (or a real forum)?
+			//
+			$res = db_query_params('SELECT forum_id FROM news_bytes
+				WHERE forum_id=$1',
+			    array($this->getID()));
+			$is_news = $res && db_numrows($res) >= 1;
+			//
 			//	Make sure they can even access this object
 			//
-			if (!forge_check_perm ('forum', $this->getID(), 'read')) {
+			if (!$is_news &&
+			    !forge_check_perm ('forum', $this->getID(), 'read')) {
 				$this->setPermissionDeniedError();
 				$this->data_array = null;
 				return false;
