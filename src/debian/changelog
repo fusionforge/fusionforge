@@ -1,8 +1,8 @@
-fusionforge (5.2-1+20121018) unstable; urgency=low
+fusionforge (5.2-1+20121107) unstable; urgency=low
 
-  * New SVN snapshot.
+  * New snapshot.
 
- -- Roland Mas <lolando@debian.org>  Thu, 18 Oct 2012 18:48:39 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 07 Nov 2012 18:26:15 +0100
 
 fusionforge (5.2-1) unstable; urgency=low
 
