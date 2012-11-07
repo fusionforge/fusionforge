@@ -40,7 +40,7 @@ switch (TRACKER_TYPE) {
 }
 
 print '<h1>'.$tracker.' Change Requests:</h1>';
-$xml = createRessourceCollectionView($this);
+$xml = createRessourceCollectionRdfView($this);
 $text = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
 $text = add_links($text, $this->serverUrl().$this->baseUrl());
 print '<pre>'.$text.'</pre>';?>

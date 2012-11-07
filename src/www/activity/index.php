@@ -209,7 +209,7 @@ if (count($results) < 1) {
 		if (!isset($cached_perms[$s][$ref])) {
 			switch ($s) {
 				case 'scm': {
-					$cached_perms[$s][$ref] = forge_check_perm('scm', $ref, 'read');
+					$cached_perms[$s][$ref] = forge_check_perm('scm', $group_id, 'read');
 					break;
 				}
 				case 'commit':

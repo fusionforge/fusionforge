@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2004 (c) Guillaume Smet
+ * Copyright 2012 Kenneth P. Hough
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -97,6 +98,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$dateFormat = _('Y-m-d H:i');
 
 		$return = '';
+		$i = 0;
 		foreach ($fd as $row) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
 				.'<td>'.$row['artifact_id'].'</td>'
@@ -105,6 +107,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				. ' '.$row['summary'].'</a></td>'
 				. '<td>'.$row['realname']."</td>"
 				. '<td>'.date($dateFormat, $row['open_date']).'</td></tr>';
+			$i++;
 		}
 		return $return;
 	}

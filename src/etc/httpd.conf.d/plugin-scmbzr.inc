@@ -1,8 +1,8 @@
-<Proxy http://127.0.0.1:8081/*>
-  Allow from all
-</Proxy>
+Alias {core/url_prefix}scm/loggerhead/static /usr/share/loggerhead/static
+RewriteEngine On
+RewriteRule ^{core/url_prefix}scm/loggerhead$ {core/url_prefix}scm/loggerhead/ [R]
 
-<Location {core/url_prefix}scm/loggerhead/>
-  ProxyPass http://127.0.0.1:8081/
-  ProxyPassReverse http://127.0.0.1:8081/
-</Location>
+<IfModule wsgi_module>
+    WSGIScriptAlias {core/url_prefix}scm/loggerhead /usr/bin/loggerhead.wsgi
+    WSGIProcessGroup fusionforge-plugin-scmbzr
+</IfModule>

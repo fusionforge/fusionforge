@@ -88,6 +88,19 @@ ORDER BY group_forum_id',
 		return $result ;
 	}
 
+	function &getAllForumIdsWithNews() {
+		$result = array () ;
+		$res = db_query_params('SELECT group_forum_id FROM forum_group_list WHERE group_id=$1 ORDER BY group_forum_id',
+			array ($this->Group->getID()));
+		if (!$res) {
+			return $result ;
+		}
+		while ($arr = db_fetch_array($res)) {
+			$result[] = $arr['group_forum_id'] ;
+		}
+		return $result ;
+	}
+
 	/**
 	 *	getForums - get an array of Forum objects for this Group.
 	 *

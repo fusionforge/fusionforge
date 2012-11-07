@@ -259,7 +259,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 	function testProjectRolesAndPermissions()
 	{
-		$this->populateStandardTemplate('trackers');
+		$this->populateStandardTemplate('all');
 
 		$this->createUser ("bigboss") ;
 		$this->createUser ("guru") ;
@@ -580,6 +580,48 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Home");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("SubProject"));
+
+		// Make sure permissions are saved for news-related forums
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject ("MetaProject") ;
+
+		$this->click("link=News");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Submit");
+		$this->waitForPageToLoad("30000");
+		$this->type("summary", "First news");
+		$this->type("details", "This is a simple news.");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=News");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("First news"));
+		$this->click("link=First news");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("First news"));
+		$this->assertTrue($this->isTextPresent("This is a simple news."));
+
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->click ("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
+		$this->waitForPageToLoad("30000");
+
+		$this->select("//tr/td[contains(.,'first-news')]/../td/select", "label=Read only");
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/select", "Read only");
+
+		$this->select("//tr/td[contains(.,'first-news')]/../td/select", "label=Moderated post");
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/select", "Moderated post");
+
+		$this->select("//tr/td[contains(.,'first-news')]/../td/select", "label=Unmoderated post");
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/select", "Unmoderated post");
 	}
 }
 ?>

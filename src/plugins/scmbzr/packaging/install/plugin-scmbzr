@@ -1,3 +1,4 @@
+plugins/scmbzr/bin/*                 usr/share/gforge/scmbzr/bin/
 plugins/scmbzr/common/*              usr/share/gforge/plugins/scmbzr/common/
 plugins/scmbzr/etc/plugins/scmbzr/*  etc/gforge/plugins/scmbzr/
 plugins/scmbzr/etc/*.ini 	     etc/@PACKAGE@/config.ini.d/
