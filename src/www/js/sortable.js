@@ -35,6 +35,50 @@ var alternate_row_colors = true;
 /* Don't change anything below this unless you know what you're doing */
 addEvent(window, "load", sortables_init);
 
+Array.prototype.sortStable = function(ocmpfn, orev) {
+	/* A stable sort function to allow multi-level sorting of data */
+	/* see: http://en.wikipedia.org/wiki/Cocktail_sort */
+	/* thanks to Joseph Nahmias */
+	/* Reverse sorting support by Thorsten "mirabilos" Glaser */
+	var b = 0;
+	var t = this.length - 1;
+	var swap = true;
+	var cmpfn = ocmpfn;
+
+	if (orev) {
+		cmpfn = function(a, b) {
+			return -ocmpfn(a, b);
+		}
+	}
+
+	while (swap) {
+		swap = false;
+		for (var i = b; i < t; ++i) {
+			if (cmpfn(this[i], this[i + 1]) > 0) {
+				var q = this[i];
+				this[i] = this[i + 1];
+				this[i + 1] = q;
+				swap = true;
+			}
+		}
+		t--;
+
+		if (!swap) {
+			break;
+		}
+
+		for (var i = t; i > b; --i) {
+			if (cmpfn(this[i], this[i - 1]) < 0) {
+				var q = this[i];
+				this[i] = this[i - 1];
+				this[i - 1] = q;
+				swap = true;
+			}
+		}
+		b++;
+	}
+}
+
 var SORT_COLUMN_INDEX;
 var thead = false;
 
@@ -146,10 +190,10 @@ function ts_resortTable(lnk, clid) {
 			}
 		}
 	}
-	newRows.sort(sortfn);
-	if (span.getAttribute("sortdir") == 'down') {
+	var sortReverse = (span.getAttribute("sortdir") == 'down');
+	newRows.sortStable(sortfn, sortReverse);
+	if (sortReverse) {
 			ARROW = '&nbsp;&nbsp;<img border="0" src="'+ image_path + image_down + '" alt="&darr;"/>';
-			newRows.reverse();
 			span.setAttribute('sortdir','up');
 	} else {
 			ARROW = '&nbsp;&nbsp;<img border="0" src="'+ image_path + image_up + '" alt="&uarr;"/>';
