@@ -874,6 +874,9 @@ abstract class BaseRole extends Error {
 		$new_sa['forum'] = array () ;
 		$new_pa['forum'] = array () ;
 		foreach ($projects as $p) {
+			if (!$p->usesForum()) {
+				continue;
+			}
 			$ff = new ForumFactory ($p) ;
 			$fids = $ff->getAllForumIdsWithNews () ;
 			foreach ($fids as $fid) {

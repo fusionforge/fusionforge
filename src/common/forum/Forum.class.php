@@ -92,7 +92,7 @@ class Forum extends Error {
 	 * @param	array	The associative array of data.
 	 * @return	boolean	success.
 	 */
-	function Forum(&$Group, $group_forum_id = false, $arr = false) {
+	function Forum(&$Group, $group_forum_id=false, $arr=false, $is_news=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('Forums: No Valid Group Object'));
@@ -100,6 +100,20 @@ class Forum extends Error {
 		}
 		if ($Group->isError()) {
 			$this->setError('Forums: '.$Group->getErrorMessage());
+			return false;
+		}
+		if (!$is_news && $group_forum_id) {
+			//
+			//	Is this a news posting (or a real forum)?
+			//
+			$res = db_query_params('SELECT forum_id FROM news_bytes
+				WHERE forum_id=$1',
+			    array($group_forum_id));
+			$is_news = $res && db_numrows($res) >= 1;
+		}
+		if (!$is_news && !$Group->usesForum()) {
+			$this->setError(sprintf(_('%s does not use the Forum tool'),
+			    $Group->getPublicName()));
 			return false;
 		}
 		$this->Group =& $Group;
@@ -120,7 +134,8 @@ class Forum extends Error {
 			//
 			//	Make sure they can even access this object
 			//
-			if (!forge_check_perm ('forum', $this->getID(), 'read')) {
+			if (!$is_news &&
+			    !forge_check_perm ('forum', $this->getID(), 'read')) {
 				$this->setPermissionDeniedError();
 				$this->data_array = null;
 				return false;
@@ -130,6 +145,7 @@ class Forum extends Error {
 		$this->view_types[] = 'flat';
 		$this->view_types[] = 'nested';
 		$this->view_types[] = 'threaded';
+		$this->is_news = $is_news;
 		return true;
 	}
 
@@ -146,11 +162,11 @@ class Forum extends Error {
 	 * @return	boolean	success.
 	 */
 	function create($forum_name,$description,$is_public=1,$send_all_posts_to='',$create_default_message=1,$allow_anonymous=1,$moderation_level=0) {
-		if (strlen($forum_name) < 3) {
+		if (!$this->is_news && strlen($forum_name) < 3) {
 			$this->setError(_('Forum Name Must Be At Least 3 Characters'));
 			return false;
 		}
-		if (strlen($description) < 10) {
+		if (!$this->is_news && strlen($description) < 10) {
 			$this->setError(_('Forum Description Must Be At Least 10 Characters'));
 			return false;
 		}
