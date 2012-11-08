@@ -1,12 +1,27 @@
 /*
 Table sorting script  by Joost de Valk, check it out at http://www.joostdevalk.nl/code/sortable-table/.
 Based on a script from http://www.kryogenix.org/code/browser/sorttable/.
-Distributed under the MIT license: http://www.kryogenix.org/code/browser/licence.html .
 
-Copyright (c) 1997-2007 Stuart Langridge, Joost de Valk.
+Version 1.5.7 + FusionForge
 
-Version 1.5.7
-*/
+ * Copyright (c) 1997-2007 Stuart Langridge, Joost de Valk
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 /* You can change these values */
 var image_path = "/images/";
@@ -242,11 +257,11 @@ function ts_sort_numeric(a,b) {
 	return compare_numeric(aa,bb);
 }
 function compare_numeric(a,b) {
-  var aa = parseFloat(a);
-  aa = (isNaN(aa) ? 0 : aa);
-  var bb = parseFloat(b);
-  bb = (isNaN(bb) ? 0 : bb);
-  return aa - bb;
+	var aa = parseFloat(a);
+	aa = (isNaN(aa) ? 0 : aa);
+	var bb = parseFloat(b);
+	bb = (isNaN(bb) ? 0 : bb);
+	return aa - bb;
 }
 function ts_sort_caseinsensitive(a,b) {
 	var aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]).toLowerCase();
