@@ -5,6 +5,7 @@ Based on a script from http://www.kryogenix.org/code/browser/sorttable/.
 Version 1.5.7 + FusionForge
 
  * Copyright (c) 1997-2007 Stuart Langridge, Joost de Valk
+ * Copyright (c) 2012 Thorsten Glaser <t.glaser@tarent.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -76,6 +77,7 @@ function ts_makeSortable(t) {
 function ts_getInnerText(el) {
 	if (typeof el == "string") return el;
 	if (typeof el == "undefined") { return el };
+	if (el.hasAttribute("content")) return el.getAttribute("content");
 	if (el.innerText) return el.innerText;	//Not needed but it is faster
 	var str = "";
 	
