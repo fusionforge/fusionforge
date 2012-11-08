@@ -49,7 +49,7 @@ function ts_makeSortable(t) {
 	for (var i=0;i<firstRow.cells.length;i++) {
 		var cell = firstRow.cells[i];
 		var txt = ts_getInnerText(cell);
-		if (cell.className != "unsortable" && cell.className.indexOf("unsortable") == -1) {
+		if (cell.className != "unsortable" && cell.className.indexOf("unsortable") == -1 && txt != "") {
 			cell.innerHTML = '<a href="#" class="sortheader" onclick="ts_resortTable(this, '+i+');return false;">'+txt+'<span class="sortarrow">&nbsp;&nbsp;<img src="'+ image_path + image_none + '" alt="&darr;"/></span></a>';
 		}
 	}
