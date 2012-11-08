@@ -30,11 +30,17 @@ class ForumAdmin extends Error {
 	var $p,$g;
 
 	function ForumAdmin($group_id) {
+		$this->Error();
 		$this->group_id = $group_id;
 		if ($group_id) {
 			$this->group_id = $group_id;
 			$this->g = group_get_object($group_id);
 			$this->p =& $this->g->getPermission();
+			if (!$this->g->usesForum()) {
+				$this->setError(sprintf(_('%s does not use the Forum tool'),
+				    $this->g->getPublicName()));
+				return false;
+			}
 		}
 	}
 

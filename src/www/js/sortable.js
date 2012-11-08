@@ -1,12 +1,28 @@
 /*
 Table sorting script  by Joost de Valk, check it out at http://www.joostdevalk.nl/code/sortable-table/.
 Based on a script from http://www.kryogenix.org/code/browser/sorttable/.
-Distributed under the MIT license: http://www.kryogenix.org/code/browser/licence.html .
 
-Copyright (c) 1997-2007 Stuart Langridge, Joost de Valk.
+Version 1.5.7 + FusionForge
 
-Version 1.5.7
-*/
+ * Copyright (c) 1997-2007 Stuart Langridge, Joost de Valk
+ * Copyright (c) 2012 Thorsten Glaser <t.glaser@tarent.de>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 /* You can change these values */
 var image_path = "/images/";
@@ -19,6 +35,50 @@ var alternate_row_colors = true;
 /* Don't change anything below this unless you know what you're doing */
 addEvent(window, "load", sortables_init);
 
+Array.prototype.sortStable = function(ocmpfn, orev) {
+	/* A stable sort function to allow multi-level sorting of data */
+	/* see: http://en.wikipedia.org/wiki/Cocktail_sort */
+	/* thanks to Joseph Nahmias */
+	/* Reverse sorting support by Thorsten "mirabilos" Glaser */
+	var b = 0;
+	var t = this.length - 1;
+	var swap = true;
+	var cmpfn = ocmpfn;
+
+	if (orev) {
+		cmpfn = function(a, b) {
+			return -ocmpfn(a, b);
+		}
+	}
+
+	while (swap) {
+		swap = false;
+		for (var i = b; i < t; ++i) {
+			if (cmpfn(this[i], this[i + 1]) > 0) {
+				var q = this[i];
+				this[i] = this[i + 1];
+				this[i + 1] = q;
+				swap = true;
+			}
+		}
+		t--;
+
+		if (!swap) {
+			break;
+		}
+
+		for (var i = t; i > b; --i) {
+			if (cmpfn(this[i], this[i - 1]) < 0) {
+				var q = this[i];
+				this[i] = this[i - 1];
+				this[i - 1] = q;
+				swap = true;
+			}
+		}
+		b++;
+	}
+}
+
 var SORT_COLUMN_INDEX;
 var thead = false;
 
@@ -28,7 +88,7 @@ function sortables_init() {
 	tbls = document.getElementsByTagName("table");
 	for (ti=0;ti<tbls.length;ti++) {
 		thisTbl = tbls[ti];
-		if (((' '+thisTbl.className+' ').indexOf("sortable") != -1) && (thisTbl.id)) {
+		if ((' '+thisTbl.className+' ').indexOf("sortable") != -1) {
 			ts_makeSortable(thisTbl);
 		}
 	}
@@ -49,8 +109,8 @@ function ts_makeSortable(t) {
 	for (var i=0;i<firstRow.cells.length;i++) {
 		var cell = firstRow.cells[i];
 		var txt = ts_getInnerText(cell);
-		if (cell.className != "unsortable" && cell.className.indexOf("unsortable") == -1) {
-			cell.innerHTML = '<a href="#" class="sortheader" onclick="ts_resortTable(this, '+i+');return false;">'+txt+'<span class="sortarrow">&nbsp;&nbsp;<img src="'+ image_path + image_none + '" alt="&darr;"/></span></a>';
+		if (cell.className != "unsortable" && cell.className.indexOf("unsortable") == -1 && txt != "") {
+			cell.innerHTML = '<a href="#" class="sortheader" onclick="ts_resortTable(this, '+i+');return false;">'+txt+'<span class="sortarrow">&nbsp;&nbsp;<img border="0" src="'+ image_path + image_none + '" alt="&darr;"/></span></a>';
 		}
 	}
 	if (alternate_row_colors) {
@@ -61,6 +121,7 @@ function ts_makeSortable(t) {
 function ts_getInnerText(el) {
 	if (typeof el == "string") return el;
 	if (typeof el == "undefined") { return el };
+	if (el.hasAttribute("content")) return el.getAttribute("content");
 	if (el.innerText) return el.innerText;	//Not needed but it is faster
 	var str = "";
 	
@@ -104,7 +165,7 @@ function ts_resortTable(lnk, clid) {
 	sortfn = ts_sort_caseinsensitive;
 	if (itm.match(/^\d\d[\/\.-][a-zA-z][a-zA-Z][a-zA-Z][\/\.-]\d\d\d\d$/)) sortfn = ts_sort_date;
 	if (itm.match(/^\d\d[\/\.-]\d\d[\/\.-]\d\d\d{2}?$/)) sortfn = ts_sort_date;
-	if (itm.match(/^-?[£$€Û¢´]\d/)) sortfn = ts_sort_numeric;
+	if (itm.match(/^-?[\u00A3$\u20AC\u00A2\u00A5]\d/)) sortfn = ts_sort_numeric;
 	// ape: added to provide numeric sort on size for the docs tools.
 	if (itm.match(/^\d+ *(B|KB|MB)$/)) sortfn = ts_sort_numeric;
 	if (itm.match(/^-?(\d+[,\.]?)+(E[-+][\d]+)?%?$/)) sortfn = ts_sort_numeric;
@@ -129,13 +190,13 @@ function ts_resortTable(lnk, clid) {
 			}
 		}
 	}
-	newRows.sort(sortfn);
-	if (span.getAttribute("sortdir") == 'down') {
-			ARROW = '&nbsp;&nbsp;<img src="'+ image_path + image_down + '" alt="&darr;"/>';
-			newRows.reverse();
+	var sortReverse = (span.getAttribute("sortdir") == 'down');
+	newRows.sortStable(sortfn, sortReverse);
+	if (sortReverse) {
+			ARROW = '&nbsp;&nbsp;<img border="0" src="'+ image_path + image_down + '" alt="&darr;"/>';
 			span.setAttribute('sortdir','up');
 	} else {
-			ARROW = '&nbsp;&nbsp;<img src="'+ image_path + image_up + '" alt="&uarr;"/>';
+			ARROW = '&nbsp;&nbsp;<img border="0" src="'+ image_path + image_up + '" alt="&uarr;"/>';
 			span.setAttribute('sortdir','down');
 	} 
     // We appendChild rows that already exist to the tbody, so it moves them rather than creating new ones
@@ -155,7 +216,7 @@ function ts_resortTable(lnk, clid) {
 	for (var ci=0;ci<allspans.length;ci++) {
 		if (allspans[ci].className == 'sortarrow') {
 			if (getParent(allspans[ci],"table") == getParent(lnk,"table")) { // in the same table as us?
-				allspans[ci].innerHTML = '&nbsp;&nbsp;<img src="'+ image_path + image_none + '" alt="&darr;"/>';
+				allspans[ci].innerHTML = '&nbsp;&nbsp;<img border="0" src="'+ image_path + image_none + '" alt="&darr;"/>';
 			}
 		}
 	}		
@@ -242,11 +303,11 @@ function ts_sort_numeric(a,b) {
 	return compare_numeric(aa,bb);
 }
 function compare_numeric(a,b) {
-  var aa = parseFloat(a);
-  aa = (isNaN(aa) ? 0 : aa);
-  var bb = parseFloat(b);
-  bb = (isNaN(bb) ? 0 : bb);
-  return aa - bb;
+	var aa = parseFloat(a);
+	aa = (isNaN(aa) ? 0 : aa);
+	var bb = parseFloat(b);
+	bb = (isNaN(bb) ? 0 : bb);
+	return aa - bb;
 }
 function ts_sort_caseinsensitive(a,b) {
 	var aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]).toLowerCase();
