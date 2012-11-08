@@ -119,7 +119,7 @@ function ts_resortTable(lnk, clid) {
 	sortfn = ts_sort_caseinsensitive;
 	if (itm.match(/^\d\d[\/\.-][a-zA-z][a-zA-Z][a-zA-Z][\/\.-]\d\d\d\d$/)) sortfn = ts_sort_date;
 	if (itm.match(/^\d\d[\/\.-]\d\d[\/\.-]\d\d\d{2}?$/)) sortfn = ts_sort_date;
-	if (itm.match(/^-?[£$€Û¢´]\d/)) sortfn = ts_sort_numeric;
+	if (itm.match(/^-?[\u00A3$\u20AC\u00A2\u00A5]\d/)) sortfn = ts_sort_numeric;
 	// ape: added to provide numeric sort on size for the docs tools.
 	if (itm.match(/^\d+ *(B|KB|MB)$/)) sortfn = ts_sort_numeric;
 	if (itm.match(/^-?(\d+[,\.]?)+(E[-+][\d]+)?%?$/)) sortfn = ts_sort_numeric;
