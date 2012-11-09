@@ -37,14 +37,36 @@ class ScmGitTest extends FForge_SeleniumTestCase
 		$this->click("//input[@name='scmradio' and @value='scmgit']");
 		$this->clickAndWait("submit");
 	    
+		$this->type("//input[@name='repo_name']", "other-repo");
+		$this->type("//input[@name='description']", "Description for second repository");
+		$this->clickAndWait("//input[@value='Submit']");
+		$this->assertTextPresent("New repository other-repo registered");
+		
 		// Run the cronjob to create repositories
-		$this->cron("create_scm_repos.php");
+		$this->cron("cronjobs/create_scm_repos.php");
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
+		$this->assertTextPresent("other-repo");
 
-		$this->assertTextPresent("Anonymous Git Access");
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=Admin");
+		$this->clickAndWait("link=Tools");
+		$this->clickAndWait("link=Source Code Admin");
+		$this->clickAndWait("//form[@name='form_delete_repo_other-repo']/input[@value='Delete']");
+		$this->assertTextPresent("Repository other-repo is marked for deletion");
+
+		// Run the cronjob to create repositories
+		$this->cron("cronjobs/create_scm_repos.php");
+
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$this->assertTextNotPresent("other-repo");
+
+		$this->assertTextPresent("Anonymous Access to the Git");
 		$this->clickAndWait("link=Request a personal repository");
 		$this->assertTextPresent("You have now requested a personal Git repository");
 

@@ -108,7 +108,9 @@ abstract class SCMPlugin extends Plugin {
 				$this->activity($params);
 				break;
 			}
-			default: { // Forgot something
+			default: {
+				// Default is to use method named as the hook
+				$this->$hookname($params);
 			}
 		}
 	}
@@ -265,10 +267,12 @@ abstract class SCMPlugin extends Plugin {
 		}
 
 		if ($project->usesPlugin($this->name) ) {
-			if (isset($params['scm_enable_anonymous']) && $params['scm_enable_anonymous']) {
-				$project->SetUsesAnonSCM(true);
-			} else {
-				$project->SetUsesAnonSCM(false);
+			if (isset($params['scm_enable_anonymous'])) {
+				if ($params['scm_enable_anonymous']) {
+					$project->SetUsesAnonSCM(true);
+				} else {
+					$project->SetUsesAnonSCM(false);
+				}
 			}
 		}
 	}

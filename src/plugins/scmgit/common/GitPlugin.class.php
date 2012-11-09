@@ -36,6 +36,9 @@ class GitPlugin extends SCMPlugin {
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
+		$this->_addHook('scm_admin_form');
+		$this->_addHook('scm_add_repo');
+		$this->_addHook('scm_delete_repo');
 		$this->_addHook('widget_instance', 'myPageBox', false);
 		$this->_addHook('widgets', 'widgets', false);
 		$this->_addHook('activity');
@@ -73,15 +76,31 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForAnon($project) {
-		$b = '<h2>' . _('Anonymous Git Access') . '</h2>';
+		$repo_list = array($project->getUnixName());
+		$result = db_query_params ('SELECT repo_name FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 0 ORDER BY repo_name',
+					   array ($project->getID())) ;
+		$rows = db_numrows ($result) ;
+		for ($i=0; $i<$rows; $i++) {
+			$repo_list[] = db_result($result,$i,'repo_name');
+		}
+		
+		$b = '<h2>' . ngettext('Anonymous Access to the Git repository',
+				       'Anonymous Access to the Git repositories',
+				       count($repo_list)) . '</h2>';
+		
 		$b .= '<p>';
-		$b .= _('This project\'s Git repository can be checked out through anonymous access with the following command.');
+		$b .= ngettext('This project\'s Git repository can be checked out through anonymous access with the following command.',
+			       'This project\'s Git repositories can be checked out through anonymous access with the following commands.',
+			       count($repo_list));
+		
 		$b .= '</p>';
-
-		$b .= '<p>' ;
-		$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/'.$project->getUnixName().'.git').'</tt><br />';
-		$b .= '</p>';
-
+		
+		foreach ($repo_list as $repo_name) {
+			$b .= '<p>' ;
+			$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git').'</tt><br />';
+			$b .= '</p>';
+		}
+		
 		$result = db_query_params('SELECT u.user_id, u.user_name, u.realname FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
 					   array ($project->getID(),
 						  'A'));
@@ -89,7 +108,9 @@ class GitPlugin extends SCMPlugin {
 
 		if ($rows > 0) {
 			$b .= '<h2>';
-			$b .= _('Developer\'s repository');
+			$b .= ngettext('Developer\'s repository',
+				       'Developer\'s repositories',
+				       $rows);
 			$b .= '</h2>'."\n";
 			$b .= '<p>';
 			$b .= ngettext('One of this project\'s members also has a personal Git repository that can be checked out anonymously.',
@@ -110,7 +131,15 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForRW($project) {
-
+		$repo_list = array($project->getUnixName());
+		
+		$result = db_query_params ('SELECT repo_name FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 0 ORDER BY repo_name',
+					   array ($project->getID())) ;
+		$rows = db_numrows ($result) ;
+		for ($i=0; $i<$rows; $i++) {
+			$repo_list[] = db_result($result,$i,'repo_name');
+		}
+		
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
@@ -118,23 +147,41 @@ class GitPlugin extends SCMPlugin {
 			$b = '';
 			if (forge_get_config('use_ssh', 'scmgit')) {
 				$b .= '<h2>';
-				$b .= _('Developer Git Access via SSH');
+				$b = '<h2>' . ngettext('Developer Access to the Git repository via SSH',
+						       'Developer Access to the Git repositories via SSH',
+						       count($repo_list)) . '</h2>';
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= _('Only project developers can access the Git tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
+				$b .= ngettext('Only project developers can access the GIT repository via this method. SSH must be installed on your client machine. Enter your site password when prompted.',
+					       'Only project developers can access the GIT repositories via this method. SSH must be installed on your client machine. Enter your site password when prompted.',
+					       count($repo_list));
+
 				$b .= '</p>';
-				$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				foreach ($repo_list as $repo_name) {
+					$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>' ;
+				}
+
 				$validSetup = 1;
 			} 
 			if (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$b .= '<h2>';
-				$b .= _('Developer Git Access via HTTP');
+				$b = '<h2>' . ngettext('Developer Access to the Git repository via HTTP',
+						       'Developer Access to the Git repositories via HTTP',
+						       count($repo_list)) . '</h2>';
+
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= _('Only project developers can access the Git tree via this method. Enter your site password when prompted.');
+				$b .= ngettext('Only project developers can access the GIT repository via this method. Enter your site password when prompted.',
+					       'Only project developers can access the GIT repositories via this method. Enter your site password when prompted.',
+					       count($repo_list));
+
 				$b .= '</p>';
-				$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $this->getBoxForProject($project) . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				foreach ($repo_list as $repo_name) {
+					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>' ;
+				}
+
+
 				$validSetup = 1;
 			}
 			if ($validSetup == 0) {
@@ -143,22 +190,39 @@ class GitPlugin extends SCMPlugin {
 		} else {
 			if (forge_get_config('use_ssh', 'scmgit')) {
 				$b = '<h2>';
-				$b .= _('Developer Git Access via SSH');
+				$b = '<h2>' . ngettext('Developer Access to the Git repository via SSH',
+						       'Developer Access to the Git repositories via SSH',
+						       count($repo_list)) . '</h2>';
+
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= _('Only project developers can access the Git tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.');
+				$b .= ngettext('Only project developers can access the GIT repository via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.',
+					       'Only project developers can access the GIT repositories via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.',
+					       count($repo_list));
+
 				$b .= '</p>';
-				$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				foreach ($repo_list as $repo_name) {
+					$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>' ;
+				}
+
 			} 
 			if (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$b = '<h2>';
-				$b .= _('Developer Git Access via HTTP');
+				$b = '<h2>' . ngettext('Developer Access to the Git repository via HTTP',
+						       'Developer Access to the Git repositories via HTTP',
+						       count($repo_list)) . '</h2>';
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= _('Only project developers can access the Git tree via this method. Enter your site password when prompted.');
+				$b .= ngettext('Only project developers can access the GIT repository via this method. Enter your site password when prompted.',
+					       'Only project developers can access the GIT repositories via this method. Enter your site password when prompted.',
+					       count($repo_list));
+
 				$b .= '</p>';
-				$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . $this->getBoxForProject($project) . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				foreach ($repo_list as $repo_name) {
+					$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>' ;
+				}
+
 			}
 		}
 
@@ -166,8 +230,8 @@ class GitPlugin extends SCMPlugin {
                         $u =& user_get_object(user_getid()) ;
 			if ($u->getUnixStatus() == 'A') {
 				$result = db_query_params('SELECT * FROM plugin_scmgit_personal_repos p WHERE p.group_id=$1 AND p.user_id=$2',
-							   array ($project->getID(),
-								  $u->getID()));
+							  array ($project->getID(),
+								 $u->getID()));
 				if ($result && db_numrows ($result) > 0) {
 					$b .= '<h2>';
 					$b .= _('Access to your personal repository');
@@ -301,6 +365,7 @@ class GitPlugin extends SCMPlugin {
 		}
 		$output = '';
 
+		// Create main repository
 		$main_repo = $root . '/' .  $project_name . '.git' ;
 		if (!is_file("$main_repo/HEAD") && !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs")) {
 			exec("GIT_DIR=\"$main_repo\" git init --bare --shared=group", $result) ;
@@ -341,6 +406,48 @@ class GitPlugin extends SCMPlugin {
 			system ("chmod -R g-rwx,o-rwx $main_repo") ;
 		}
 
+		// Create project-wide secondary repositories
+		$result = db_query_params ('SELECT repo_name, description, clone_url FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 0',
+					   array ($project->getID())) ;
+		$rows = db_numrows ($result) ;
+		for ($i=0; $i<$rows; $i++) {
+			$repo_name = db_result($result,$i,'repo_name');
+			$description = db_result($result,$i,'description');
+			$clone_url = db_result($result,$i,'clone_url');
+			$repodir = $root . '/' .  $repo_name . '.git' ;
+			if (!is_file ("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
+				if ($clone_url != '') {
+					system ("cd $root;git clone --bare $clone_url $repodir") ;
+				} else {
+					system ("GIT_DIR=\"$repodir\" git init --bare --shared=group") ;
+				}
+				system ("GIT_DIR=\"$repodir\" git update-server-info") ;
+				if (is_file ("$repodir/hooks/post-update.sample")) {
+					rename ("$repodir/hooks/post-update.sample",
+						"$repodir/hooks/post-update") ;
+				}
+				if (!is_file ("$repodir/hooks/post-update")) {
+					$f = fopen ("$repodir/hooks/post-update") ;
+					fwrite ($f, "exec git-update-server-info\n") ;
+					fclose ($f) ;
+				}
+				if (is_file ("$repodir/hooks/post-update")) {
+					system ("chmod +x $repodir/hooks/post-update") ;
+				}
+				$f = fopen("$repodir/description", "w");
+				fwrite($f, $description."\n");
+				fclose($f);
+				system ("chgrp -R $unix_group $repodir") ;
+				system ("chmod g+s $root") ;
+				if ($project->enableAnonSCM()) {
+					system ("chmod -R g+wX,o+rX-w $main_repo") ;
+				} else {
+					system ("chmod -R g+wX,o-rwx $main_repo") ;
+				}
+			}
+		}
+
+		// Create users' personal repositories
 		$result = db_query_params ('SELECT u.user_name FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
 					   array ($project->getID(),
 						  'A')) ;
@@ -694,6 +801,21 @@ class GitPlugin extends SCMPlugin {
 				$params['output'] .= $project_name.': '.`git gc --quiet 2>&1`;
 			}
 		}
+
+		// Delete project-wide secondary repositories
+		$result = db_query_params ('SELECT repo_name FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 1',
+					   array ($project->getID())) ;
+		$rows = db_numrows ($result) ;
+		for ($i=0; $i<$rows; $i++) {
+			$repo_name = db_result($result,$i,'repo_name');
+			$repodir = $root . '/' .  $repo_name . '.git' ;
+			if (util_is_valid_repository_name($repo_name)) {
+				system ("rm -rf $repodir");
+			}
+			db_query_params ('DELETE FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND repo_name=$2 AND next_action = 1',
+					 array ($project->getID(),
+						$repo_name)) ;
+		}
 	}
 
 	function activity($params) {
@@ -728,6 +850,208 @@ class GitPlugin extends SCMPlugin {
 		$params['texts'][] = _('Git Commits');
 		return true;
 	}
+
+	function scm_add_repo(&$params) {
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false ;
+		}
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		if (!isset($params['repo_name'])) {
+			return false;
+		}
+
+		if ($params['repo_name'] == $project->getUnixName()) {
+			$params['error_msg'] = _('Cannot create a secondary repository with the same name as the primary');
+			return false;
+		}
+
+		if (! util_is_valid_repository_name($params['repo_name'])) {
+			$params['error_msg'] = _('This repository name is not valid');
+			return false;
+		}
+
+		$result = db_query_params('SELECT count(*) AS count FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND repo_name = $2',
+						array ($params['group_id'], $params['repo_name']));
+		if (! $result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+		if (db_result($result, 0, 'count')) {
+			$params['error_msg'] = sprintf(_('A repository %s already exists'), $params['repo_name']);
+			return false;
+		}
+
+		$description = '';
+		$clone = '';
+		if (isset($params['clone'])) {
+			$url = $params['clone'];
+			if ($url == '') {
+				// Start from empty
+				$clone = $url;
+			} elseif (preg_match('|^git://|', $url) || preg_match('|^https?://|', $url)) {
+				// External URLs: OK
+				$clone = $url;
+			} elseif ($url == $project->getUnixName()) {
+				$clone = $url;
+			} elseif (($result = db_query_params('SELECT count(*) AS count FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND repo_name = $2', array ($project->getID(), $url)))
+				  && db_result($result, 0, 'count')) {
+				// Local repo: try to clone from an existing repo in same project
+				// Repository found
+				$clone = $url;
+			} else {
+				$params['error_msg'] = _('Invalid URL from which to clone');
+				$clone = '';
+				return false;
+			}
+		}
+		if (isset($params['description'])) {
+			$description = $params['description'];
+		}
+		if ($clone && !$description) {
+			$description = sprintf(_('Clone of %s'), $params['clone']);
+		}
+		if (!$description) {
+			$description = "Git repository $params[repo_name] for project ".$project->getUnixName();
+		}
+
+		$result = db_query_params ('INSERT INTO plugin_scmgit_secondary_repos (group_id, repo_name, description, clone_url) VALUES ($1, $2, $3, $4)',
+						array ($params['group_id'], $params['repo_name'], $description, $clone));
+		if (! $result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+
+		plugin_hook ("scm_admin_update", $params);
+		return true;
+	}
+
+	function scm_delete_repo(&$params) {
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false ;
+		}
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		if (!isset($params['repo_name'])) {
+			return false;
+		}
+
+		$result = db_query_params('SELECT count(*) AS count FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND repo_name = $2',
+						array ($params['group_id'], $params['repo_name']));
+		if (! $result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+		if (db_result($result, 0, 'count') == 0) {
+			$params['error_msg'] = sprintf(_('No repository %s exists'), $params['repo_name']);
+			return false;
+		}
+
+		$result = db_query_params ('UPDATE plugin_scmgit_secondary_repos SET next_action = 1 WHERE group_id=$1 AND repo_name=$2',
+						array ($params['group_id'], $params['repo_name']));
+		if (! $result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+
+		plugin_hook ("scm_admin_update", $params);
+		return true;
+	}
+
+	function scm_admin_buttons(&$params) {
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false ;
+		}
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		global $HTML;
+
+		$HTML->addButtons(
+				'/scm/admin/?group_id='.$params['group_id'].'&amp;form_create_repo=1',
+				_("Add Repository"),
+				array('icon' => html_image('ic/scm_repo_add.png'))
+		);
+	}
+
+	function scm_admin_form(&$params) {
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false ;
+		}
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+		
+		session_require_perm('project_admin', $params['group_id']);
+
+		$project_name = $project->getUnixName();
+		
+		$select_repo = '<select name="frontpage">' . "\n";
+		$result = db_query_params('SELECT repo_name, description, clone_url FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 0 ORDER BY repo_name',
+						array ($params['group_id']));
+		if (! $result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+		$existing_repos = array();
+		while($data = db_fetch_array($result)) {
+			$existing_repos[] = array('repo_name' => $data['repo_name'], 
+						  'description' => $data['description'], 
+						  'clone_url' => $data['clone_url']);
+		}
+		if (count($existing_repos) == 0) {
+			printf('<h2>'._('No extra Git repository for project %1$s').'</h2>', $project_name);
+		} else {
+			$t = sprintf(ngettext('Extra Git repository for project %1$s',
+					      'Extra Git repositories for project %1$s',
+					      count($existing_repos)), $project_name);
+			print '<h2>'.$t.'</h2>';
+			print '<table><thead><tr><th>'._('Repository name').'</th><th>'._('Initial repository description').'</th><th>'._('Initial clone URL (if any)').'</th><th>'._('Delete').'</th></tr></thead><tbody>';
+			foreach ($existing_repos as $repo) {
+				print "<tr><td><tt>$repo[repo_name]</tt></td><td>$repo[description]</td><td>$repo[clone_url]</td><td>";
+?>
+<form name="form_delete_repo_<?php echo $repo['repo_name']?>"
+	action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<input type="hidden" name="group_id" value="<?php echo $params['group_id'] ?>" />
+<input type="hidden" name="delete_repository" value="1" />
+<input type="hidden" name="repo_name" value="<?php echo $repo['repo_name']?>" />
+<input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
+</form>
+<?php				
+				print "</td></tr>\n";
+			}
+			print '</tbody></table>';
+		}
+			
+		printf('<h2>'._('Create new Git repository for project %1$s').'</h2>', $project_name);
+		
+		?>
+<form name="form_create_repo"
+	action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<input type="hidden" name="group_id" value="<?php echo $params['group_id'] ?>" />
+<input type="hidden" name="create_repository" value="1" />
+<p><strong><?php echo _('Repository name:') ?></strong><?php echo utils_requiredField(); ?><br />
+<input type="text" required="required" size="20" name="repo_name" value="" /></p>
+<p><strong><?php echo _('Description:'); ?></strong><br />
+<input type="text" size="60" name="description" value="" /></p>
+<p><strong><?php echo _('Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository):') ?></strong><br />
+<input type="text" size="60" name="clone" value="<?php echo $project_name; ?>" /></p>
+<input type="submit" name="cancel" value="<?php echo _('Cancel') ?>" />
+<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
+</form>
+
+		<?php
+	}
+
 }
 
 // Local Variables:

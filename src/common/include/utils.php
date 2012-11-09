@@ -865,6 +865,25 @@ function util_is_valid_filename($file) {
 	}
 }
 
+/* util_is_valid_repository_name() - Verifies whether a repository name is valid
+ *
+ * @param		string	The name to verify
+ * @returns true on success/false on error
+ *
+ */
+function util_is_valid_repository_name ($file) {
+	//bad char test
+	$invalidchars = preg_replace("/[-A-Z0-9+_\.]/i","",$file);
+
+	if (!empty($invalidchars)) {
+		return false;
+	} 
+	if (strstr($file,'..')) {
+		return false;
+	}
+	return true;
+}
+
 /**
  * valid_hostname() - Validates a hostname string to make sure it doesn't contain invalid characters
  *

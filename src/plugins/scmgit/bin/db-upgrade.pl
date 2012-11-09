@@ -71,6 +71,8 @@ eval {
 	$dbh->commit () ;
     }
     
+    &update_with_sql("/usr/share/gforge/plugins/$pluginname/lib/20121019-multiple-repos.sql","0.2");
+
     debug "It seems your database install/upgrade went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian GForge." ;
 
@@ -273,4 +275,28 @@ sub bump_sequence_to ( $$ ) {
 	@array = $sth->fetchrow_array () ;
 	$sth->finish () ;
     } until $array[0] >= $targetvalue ;
+}
+
+sub update_with_sql ( $$ ) {
+    my $sqlfile = shift or die "Not enough arguments" ;
+    my $target = shift or die "Not enough arguments" ;
+    $sqlfile =~ s/\.sql$//;
+    my $version = &get_db_version ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading database with $sqlfile.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("$sqlfile.sql") } ;
+        foreach my $s (@reqlist) {
+            my $query = $s ;
+            # debug $query ;
+            my $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("...OK.") ;
+        $dbh->commit () ;
+    }
 }

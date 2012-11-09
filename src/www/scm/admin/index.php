@@ -48,27 +48,36 @@ if (getStringFromRequest('form_create_repo')) {
 	exit;
 }
 
-if (getStringFromRequest('create_repository')) {
-	if (getStringFromRequest('submit')) {
-		$repo_name = trim(getStringFromRequest('repo_name'));
-		$description = preg_replace('/[\r\n]/', ' ', getStringFromRequest('description'));
-		$clone = getStringFromRequest('clone');
-		$hook_params = array () ;
-		$hook_params['group_id'] = $group_id;
-		$hook_params['repo_name'] = $repo_name;
-		$hook_params['description'] = $description;
-		$hook_params['clone'] = $clone;
-		$hook_params['error_msg'] = '';
-		plugin_hook_by_reference('scm_add_repo', $hook_params);
-		if ($hook_params['error_msg']) {
-			$error_msg = $hook_params['error_msg'];
-		}
-		else {
-			$feedback = sprintf(_('New repository %s is registered'), $repo_name);
-		}
-	}
-	// Else is a cancel
-}
+if (getStringFromRequest('create_repository') && getStringFromRequest('submit')) {
+       $repo_name = trim(getStringFromRequest('repo_name'));
+       $description = preg_replace('/[\r\n]/', ' ', getStringFromRequest('description'));
+       $clone = getStringFromRequest('clone');
+       $hook_params = array () ;
+       $hook_params['group_id'] = $group_id;
+       $hook_params['repo_name'] = $repo_name;
+       $hook_params['description'] = $description;
+       $hook_params['clone'] = $clone;
+       $hook_params['error_msg'] = '';
+       plugin_hook_by_reference('scm_add_repo', $hook_params);
+       if ($hook_params['error_msg']) {
+               $error_msg = $hook_params['error_msg'];
+       }
+       else {
+               $feedback = sprintf(_('New repository %s registered, will be created shortly.'), $repo_name);
+       }
+} elseif (getStringFromRequest('delete_repository') && getStringFromRequest('submit')) {
+       $repo_name = trim(getStringFromRequest('repo_name'));
+       $hook_params = array () ;
+       $hook_params['group_id'] = $group_id;
+       $hook_params['repo_name'] = $repo_name;
+       $hook_params['error_msg'] = '';
+       plugin_hook_by_reference('scm_delete_repo', $hook_params);
+       if ($hook_params['error_msg']) {
+               $error_msg = $hook_params['error_msg'];
+       }
+       else {
+               $feedback = sprintf(_('Repository %s is marked for deletion (actual deletion will happen shortly).'), $repo_name);
+       }
 elseif (getStringFromRequest('submit')) {
 	$hook_params = array();
 	$hook_params['group_id'] = $group_id;
@@ -167,6 +176,7 @@ scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 </form>
 <?php
 
+plugin_hook('scm_admin_form', $hook_params);
 scm_footer();
 
 // Local Variables:
