@@ -78,7 +78,7 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
        else {
                $feedback = sprintf(_('Repository %s is marked for deletion (actual deletion will happen shortly).'), $repo_name);
        }
-elseif (getStringFromRequest('submit')) {
+} elseif (getStringFromRequest('submit')) {
 	$hook_params = array();
 	$hook_params['group_id'] = $group_id;
 
