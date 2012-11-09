@@ -327,9 +327,11 @@ abstract class BaseRole extends Error {
 		}
 
 		$atf = new ArtifactTypeFactory ($project) ;
-		$tids = $atf->getAllArtifactTypeIds () ;
-		foreach ($tids as $tid) {
-			$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
+		if (!$atf->isError()) {
+			$tids = $atf->getAllArtifactTypeIds () ;
+			foreach ($tids as $tid) {
+				$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
+			}
 		}
 		array_push ($sections,'tracker');
 
@@ -340,9 +342,11 @@ abstract class BaseRole extends Error {
 		$sections = array_merge($sections, $sections_forum);
 		
 		$ff = new ForumFactory ($project) ;
-		$fids = $ff->getAllForumIdsWithNews () ;
-		foreach ($fids as $fid) {
-			$result['forum'][$fid] = $this->getVal ('forum', $fid) ;
+		if (!$ff->isError()) {
+			$fids = $ff->getAllForumIdsWithNews () ;
+			foreach ($fids as $fid) {
+				$result['forum'][$fid] = $this->getVal ('forum', $fid) ;
+			}
 		}
 		array_push ($sections,'forum');
 
@@ -351,10 +355,13 @@ abstract class BaseRole extends Error {
 			$result[$section_pm][$group_id] = $this->getVal ($section_pm, $group_id) ;
 		}
 		$sections = array_merge($sections, $sections_pm);
+
 		$pgf = new ProjectGroupFactory ($project) ;
-		$pgids = $pgf->getAllProjectGroupIds () ;
-		foreach ($pgids as $pgid) {
-			$result['pm'][$pgid] = $this->getVal ('pm', $pgid) ;
+		if (!$pgf->isError()) {
+			$pgids = $pgf->getAllProjectGroupIds () ;
+			foreach ($pgids as $pgid) {
+				$result['pm'][$pgid] = $this->getVal ('pm', $pgid) ;
+			}
 		}
 		array_push ($sections,'pm') ;
 
