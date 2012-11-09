@@ -559,23 +559,29 @@ abstract class BaseRole extends Error {
 		}
 
 		$atf = new ArtifactTypeFactory ($project) ;
-		$tids = $atf->getAllArtifactTypeIds () ;
-		foreach ($tids as $tid) {
-			$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
+		if (!$atf->isError()) {
+			$tids = $atf->getAllArtifactTypeIds () ;
+			foreach ($tids as $tid) {
+				$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
+			}
 		}
 		$sections[] = 'tracker' ;
 
 		$ff = new ForumFactory ($project) ;
-		$fids = $ff->getAllForumIds () ;
-		foreach ($fids as $fid) {
-			$result['forum'][$fid] = $this->getVal ('forum', $fid) ;
+		if (!$ff->isError()) {
+			$fids = $ff->getAllForumIds();
+			foreach ($fids as $fid) {
+				$result['forum'][$fid] = $this->getVal('forum', $fid);
+			}
 		}
 		$sections[] = 'forum' ;
 
 		$pgf = new ProjectGroupFactory ($project) ;
-		$pgids = $pgf->getAllProjectGroupIds () ;
-		foreach ($pgids as $pgid) {
-			$result['pm'][$pgid] = $this->getVal ('pm', $pgid) ;
+		if (!$pgf->isError()) {
+			$pgids = $pgf->getAllProjectGroupIds();
+			foreach ($pgids as $pgid) {
+				$result['pm'][$pgid] = $this->getVal('pm', $pgid);
+			}
 		}
 		$sections[] = 'pm' ;
 
