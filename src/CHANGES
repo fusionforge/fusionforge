@@ -17,6 +17,7 @@ Plugins:
 * headermenu: new plugin to handle links in headermenu or outermenu (TrivialDev)
 * scmgit: add browsing capability for user personal repository (TrivialDev)
 * scmgit: basic activity support (TrivialDev).
+* scmgit: multiple repositories per project (developed for/sponsored by AdaCore)
 * scmhg: merge patch from Denise Patzker: add http support, online browse, stats (TrivialDev)
 * webanalytics: new plugin to add support for piwik or google analytics tool (TrivialDev)
 * scmhook: Support added for pre-revprop-changehooks to change properties (Alcatel-Lucent)
@@ -40,7 +41,7 @@ FusionForge-5.2:
 * Docman: interaction with the projects-hierarchy plugin to enable hierarchical
   browsing. (Capgemini)
 * Admin: User add membership to multiples projects in one shot (Capgemini)
-* New MoinMoinWiki plugin (AdaCore)
+* New MoinMoinWiki plugin (developed for/sponsored by AdaCore)
 * Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)
 * scmsvn: private project can now be browsed with viewvc using user rights management (TrivialDev).
 * scmsvn: basic activity support (TrivialDev).
@@ -61,7 +62,8 @@ FusionForge-5.1:
 * Trackers: Sorting improved to allow text & select fields (Alcatel-Lucent)
 * [#127] Patch to auto approve projects.
 * scmgit plugin now allows project members to request a personal git
-  repository as a clone of the current project's one (AdaCore)
+  repository as a clone of the current project's one (developed
+  for/sponsored by AdaCore)
 * New blocks plugin, to add free HTML blocks on top of each tools of
   the project allowing admins to add free descriptions
   (Alcatel-Lucent), (better with fckeditor plugin).
