@@ -89,7 +89,7 @@ class MantisBTPlugin extends Plugin {
 					echo '<p>';
 					$arr_t = array();
 					$arr_t[] = array('title' => _('Manage your mantisbt account and follow your tickets'), 'class' => 'tabtitle');
-					echo util_make_link('/plugins/'.$this->name.'/?user_id=$userid&type=user&pluginname='.$this->name, _('View Personal MantisBT'), $arr_t);
+					echo util_make_link('/plugins/'.$this->name.'/?user_id='.$userid.'&type=user&pluginname='.$this->name, _('View Personal MantisBT'), $arr_t);
 					echo '</p>';
 				}
 				$returned = true;
