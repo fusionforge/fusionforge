@@ -29,11 +29,11 @@ class scmgit_Widget_MyRepositories extends Widget {
 	}
 
 	function getTitle() {
-		return _("My Git personal Repositories List");
+		return _("My Git cloned Repositories List");
 	}
 
 	function getCategory() {
-		return _('SCM');
+		return _('scm');
 	}
 
 	function getDescription() {
@@ -48,7 +48,8 @@ class scmgit_Widget_MyRepositories extends Widget {
 			$returnhtml = '<table>';
 			foreach ($GitRepositories as $GitRepository) {
 				$project = group_get_object($GitRepository);
-				$returnhtml .= '<tr><td><tt>git clone git+ssh://'.$user->getUnixName().'@' . $scmgitplugin->getBoxForProject($project) .'/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</tt></p></td><tr>';
+				$returnhtml .= '<tr><td><tt>git clone git+ssh://'.$user->getUnixName().'@' . $scmgitplugin->getBoxForProject($project) .'/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</tt></p></td>'.
+						'<td>'.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user->getID(), _('Browse Git Repository')).'</td><tr>';
 			}
 			$returnhtml .= '</table>';
 			return $returnhtml;
