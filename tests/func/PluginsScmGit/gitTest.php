@@ -42,29 +42,10 @@ class ScmGitTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("//input[@value='Submit']");
 		$this->assertTextPresent("New repository other-repo registered");
 		
-		// Run the cronjob to create repositories
-		$this->cron("cronjobs/create_scm_repos.php");
-
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
 		$this->assertTextPresent("other-repo");
-
-		$this->open(ROOT);
-		$this->clickAndWait("link=ProjectA");
-		$this->clickAndWait("link=Admin");
-		$this->clickAndWait("link=Tools");
-		$this->clickAndWait("link=Source Code Admin");
-		$this->clickAndWait("//form[@name='form_delete_repo_other-repo']/input[@value='Delete']");
-		$this->assertTextPresent("Repository other-repo is marked for deletion");
-
-		// Run the cronjob to create repositories
-		$this->cron("cronjobs/create_scm_repos.php");
-
-		$this->open(ROOT);
-		$this->clickAndWait("link=ProjectA");
-		$this->clickAndWait("link=SCM");
-		$this->assertTextNotPresent("other-repo");
 
 		$this->assertTextPresent("Anonymous Access to the Git");
 		$this->clickAndWait("link=Request a personal repository");
@@ -75,6 +56,29 @@ class ScmGitTest extends FForge_SeleniumTestCase
 
 		$this->clickAndWait("link=SCM");
 		$this->assertTextPresent("Access to your personal repository");
+
+		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
+		sleep(10); // Gitweb has no <h1> element, so no waitForPageToLoad()
+		$this->assertTextPresent("projecta.git");
+		$this->assertTextPresent("other-repo.git");
+		$this->assertTextPresent("users/".FORGE_ADMIN_USERNAME.".git");
+
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=Admin");
+		$this->clickAndWait("link=Tools");
+		$this->clickAndWait("link=Source Code Admin");
+		$this->clickAndWait("//form[@name='form_delete_repo_other-repo']/input[@value='Delete']");
+		$this->assertTextPresent("Repository other-repo is marked for deletion");
+
+		// Run the cronjob to create repositories
+		$this->cron("create_scm_repos.php");
+
+		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
+		sleep(10); // Gitweb has no <h1> element, so no waitForPageToLoad()
+		$this->assertTextPresent("projecta.git");
+		$this->assertTextNotPresent("other-repo.git");
+		$this->assertTextPresent("users/".FORGE_ADMIN_USERNAME.".git");
 	}
 }
 ?>
