@@ -447,6 +447,21 @@ class GitPlugin extends SCMPlugin {
 			}
 		}
 
+		// Delete project-wide secondary repositories
+		$result = db_query_params ('SELECT repo_name FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 1',
+					   array ($project->getID())) ;
+		$rows = db_numrows ($result) ;
+		for ($i=0; $i<$rows; $i++) {
+			$repo_name = db_result($result,$i,'repo_name');
+			$repodir = $root . '/' .  $repo_name . '.git' ;
+			if (util_is_valid_repository_name($repo_name)) {
+				system ("rm -rf $repodir");
+			}
+			db_query_params ('DELETE FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND repo_name=$2 AND next_action = 1',
+					 array ($project->getID(),
+						$repo_name)) ;
+		}
+
 		// Create users' personal repositories
 		$result = db_query_params ('SELECT u.user_name FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
 					   array ($project->getID(),
@@ -800,21 +815,6 @@ class GitPlugin extends SCMPlugin {
 				chdir($repo);
 				$params['output'] .= $project_name.': '.`git gc --quiet 2>&1`;
 			}
-		}
-
-		// Delete project-wide secondary repositories
-		$result = db_query_params ('SELECT repo_name FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 1',
-					   array ($project->getID())) ;
-		$rows = db_numrows ($result) ;
-		for ($i=0; $i<$rows; $i++) {
-			$repo_name = db_result($result,$i,'repo_name');
-			$repodir = $root . '/' .  $repo_name . '.git' ;
-			if (util_is_valid_repository_name($repo_name)) {
-				system ("rm -rf $repodir");
-			}
-			db_query_params ('DELETE FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND repo_name=$2 AND next_action = 1',
-					 array ($project->getID(),
-						$repo_name)) ;
 		}
 	}
 
