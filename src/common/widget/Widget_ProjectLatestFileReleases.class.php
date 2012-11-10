@@ -151,8 +151,8 @@ class Widget_ProjectLatestFileReleases extends Widget {
 					echo '</td>
 					</tr>';
 				}
-				echo '</table>';
 			}
+			echo '</table>';
 		}
 		echo '<div class="underline-link">' . util_make_link ('/frs/?group_id='.$group_id, _('View All Project Files')) . '</div>';
 	}
