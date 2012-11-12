@@ -122,21 +122,9 @@ class ArtifactTypeFactory extends Error {
 		}
 		return $this->ArtifactTypes;
 	}
-
-	/**
-	 * getPublicFlag - a utility method to load up the current user's permissions
- 	 *
-	 * @return 	string 	The public_flag field to plug into a SQL string
-	 */	
-	function &getPublicFlag() {
-		return $public_flag;
-	}
-
 }
 
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
