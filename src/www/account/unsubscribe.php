@@ -61,7 +61,6 @@ $user->unsubscribeFromMailings($all);
 
 site_header(array('title'=>_("Unsubscription Complete")));
 
-
 if ($all) {
 	$what = sprintf(_('You have been unsubscribed from all %1$s mailings and notifications. In case you will want to re-activate your subscriptions in the future, login and visit your Account Maintenance page.'), forge_get_config ('forge_name'));
 } else {

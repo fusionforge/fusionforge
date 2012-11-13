@@ -166,7 +166,7 @@ if (!isset ($fusionforge_config)) {
  * Get value of variable "name" in section "section"
  * @param string $var
  * @param string $section defaults to "core" if missing
- * @return Ambigous <NULL, boolean>
+ * @return mixed <NULL, boolean>
  */
 function forge_get_config ($var, $section = 'core') {
 	$c = FusionForgeConfig::get_instance () ;
