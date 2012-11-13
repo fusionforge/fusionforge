@@ -41,7 +41,7 @@ if ($diary_user) {
 		exit_error($user_obj->getErrorMessage(),'home');
 	}
 
-	$title = _('Diary And Notes For').': '. $user_obj->getRealName();
+	$title = _('Diary and Notes for') . ' ' . $user_obj->getRealName();
 	echo $HTML->header(array('title'=>$title));
 
 	if ($diary_id) {
@@ -59,7 +59,7 @@ if ($diary_user) {
 		}
 	}
 
-	echo '<h2>' . _('Existing Diary And Note Entries') . '</h2>' . "\n";
+	echo '<h2>' . _('Existing Diary and Notes Entries') . '</h2>' . "\n";
 	echo '<table class="fullwidth">' . "\n";
 	/*
 		List all diary entries
