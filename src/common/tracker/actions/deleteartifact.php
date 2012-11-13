@@ -48,7 +48,7 @@ $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $
 <table align="center">
 
 	<tr>
-		<td class="veryimportant"><?php echo _('Are you sure you want to delete this artifact?'); ?></td>
+		<td class="important"><?php echo _('Are you sure you want to delete this artifact?'); ?></td>
 	</tr>
 	<tr class="align-center">
 		<td class="align-center"><input type="checkbox" value="1" name="confirm_delete" /> <?php echo _('Yes, I want to delete this artifact'); ?></td>

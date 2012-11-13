@@ -94,7 +94,7 @@ function artifact_submission_form($ath, $group) {
 ?>
 
 		<p>&nbsp;</p>
-		<span class="veryimportant"><?php echo _('DO NOT enter passwords or confidential information in your message!'); ?></span>
+		<span class="important"><?php echo _('DO NOT enter passwords or confidential information in your message!'); ?></span>
 		</td>
 	</tr>
 
