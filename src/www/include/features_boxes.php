@@ -108,8 +108,7 @@ function show_top_downloads() {
 	if ( $return == "" ) {
 		return _('No Stats Available');
 	} else {
-		$t_return = $return;
-		$return = '<table summary="">' . $t_return . "</table>\n";
+		$return = '<table>' . $return . "</table>\n";
 	}
 	$return .= '<div class="align-center">' . util_make_link ('/top/', _('All the ranking'), array('class' => 'dot-link')) . '</div>';
 
@@ -191,8 +190,7 @@ function show_newest_projects() {
 	if ( $return == "" ) {
 		return _('No Stats Available');
 	} else {
-		$t_return = $return;
-		$return = '<table summary="">' . $t_return . "</table>\n";
+		$return = '<table>' . $return . "</table>\n";
 	}
 
 	if (forge_get_config('use_project_full_list')) {
@@ -225,20 +223,20 @@ function show_highest_ranked_users() {
 }
 
 function show_highest_ranked_projects() {
-	$statsobj = new Stats();
-	$result = $statsobj->getMostActiveStats ('week', 0) ;
+	$stats = new Stats();
+	$result = $stats->getMostActiveStats ('week', 0) ;
 	$return = '' ;
 
-	$count = 0 ;
-	while (($row=db_fetch_array($result)) && ($count < 20)) {
+	$count = 1 ;
+	while (($row=db_fetch_array($result)) && ($count <= 20)) {
 		if (!forge_check_perm ('project_read', $row['group_id'])) {
 			continue ;
 		}
-		$t_prj_activity = number_format(substr($row['ranking'],0,5),0);
+
 		$t_prj_link = util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name']);
 
 		$return .= "<tr>";
-		$return .= '<td class="width-stat-col1">'. $t_prj_activity . "</td>";
+		$return .= '<td class="width-stat-col1">'. $count . "</td>";
 		$return .= '<td>' . $t_prj_link . '</td>';
 		$return .= "</tr>\n";
 
@@ -247,8 +245,7 @@ function show_highest_ranked_projects() {
 	if ( $return == "" ) {
 		return _('No Stats Available');
 	} else {
-		$t_return = $return;
-		$return = '<table summary="">' . $t_return . "</table>\n";
+		$return = '<table>' . $return . "</table>\n";
 	}
 
 	$return .= '<div class="align-center">' . util_make_link ('/top/mostactive.php?type=week', _('All project activities'), array('class' => 'dot-link')) . '</div>';
