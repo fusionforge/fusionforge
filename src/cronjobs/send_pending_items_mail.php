@@ -97,7 +97,7 @@ function send_pending_tracker_items_mail(){
 	for ($tmp=0; $tmp<db_numrows($res); $tmp++) {
 		$realopendate=date(_('Y-m-d H:i'), db_result($res,$tmp,'open_date'));
 		$status_name=db_result($res,$tmp,'status_name');
-		$details=db_result($res,$tmp,'detail');
+		$detail=db_result($res,$tmp,'detail');
 		$summary= db_result($res,$tmp,'summary');
 		$users='('.db_result($res,$tmp,"submitted_by").','.db_result($res,$tmp,"assigned_to").')';
 		$hyperlink=util_make_url('/tracker/index.php?func=detail&aid='.db_result($res,$tmp,"artifact_id").'&group_id='.db_result($res,$tmp,"group_id")
@@ -122,7 +122,8 @@ Submitted by: %8$s
 Details: %9$s
 
 
-Click here to visit the item: %4$s'),  $artifact, $opendate, $summary, $hyperlink, $status_name, $realopendate, db_result($res,$tmp,'assigned_realname'), db_result($res,$tmp,'submitted_realname'),  db_result($res,$tmp,'details')));
+Click here to visit the item: %4$s'),  $artifact, $opendate, $summary, $hyperlink, $status_name, $realopendate,
+				db_result($res,$tmp,'assigned_realname'), db_result($res,$tmp,'submitted_realname'),  $detail));
 			/* and finally send the email */
 			util_send_message($mailto,$subject,$messagebody);
 		}
