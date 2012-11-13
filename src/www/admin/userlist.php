@@ -71,7 +71,7 @@ function show_users_list ($users, $filter='', $sortorder='realname') {
 		<span class="pending">'.util_make_link('/admin/userlist.php?status=P'.'&amp;sortorder='.$sortorder,_('(*)Pending')).'</span>'.'</p>';
 
 	if (!count($users)) {
-		echo '<p>'. _('No such users found') .'</p>';
+		echo '<div class="warning_msg">No user found matching selected criteria.</div>';
 		return;
 	}
 
@@ -154,13 +154,16 @@ if ($usingplugin) {
 } elseif (!$group_id) {
 	$user_name_search = getStringFromRequest('user_name_search');
 
-	print "<p>" ._('User list for ') . "<strong>" ._('All Projects'). "</strong></p>";
-
 	if ($user_name_search) {
 		$res = db_query_params ('SELECT user_id FROM users WHERE lower(user_name) LIKE $1 OR lower(lastname) LIKE $1',
 					   array (strtolower("$user_name_search%")));
 		$list_id = util_result_column_to_array($res,0);
+		$msg = sprintf(_('User list beginning with "%s" for all projects'), $user_name_search);
+	} else {
+		$msg = _('User list for all projects');
 	}
+	print "<p><strong>$msg</strong></p>\n";
+
 	if ($status) {
 		$res = db_query_params ('SELECT user_id FROM users WHERE status = $1',
 					   array ($status));
