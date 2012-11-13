@@ -30,13 +30,10 @@ function site_stats_day($year,$month,$day) {
 	//
 	//  build row for stats_site
 	//
-	$rel = db_query_params ('DELETE FROM stats_site WHERE month=$1 AND day=$2',
-				array("$year$month",
-				      $day));
+	db_query_params ('DELETE FROM stats_site WHERE month=$1 AND day=$2',
+		array("$year$month", $day));
 
-
-
-	$rel = db_query_params ('INSERT INTO stats_site (month,day,uniq_users,sessions,total_users,new_users,new_projects) 
+	db_query_params ('INSERT INTO stats_site (month,day,uniq_users,sessions,total_users,new_users,new_projects)
 	VALUES ($1,
 	$2,
 	(SELECT COUNT(DISTINCT(user_id)) FROM user_session WHERE (time < $3 AND time > $4)),
@@ -54,5 +51,3 @@ function site_stats_day($year,$month,$day) {
 	db_commit();
 
 }
-
-?>
