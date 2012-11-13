@@ -32,9 +32,11 @@ require_once $gfcommon.'include/PluginManager.class.php' ;
 // SCM-specific plugins subsystem
 require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
+session_set_admin () ;
+
 setup_plugin_manager () ;
 
-$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1 AND use_scm=1 ORDER BY group_id DESC',
+$res = db_query_params ('SELECT group_id, register_time FROM groups WHERE status=$1 AND use_scm=1 ORDER BY group_id DESC',
 			array ('A'));
 if (!$res) {
 	$this->setError('Unable to get list of projects using SCM: '.db_error());
@@ -42,13 +44,17 @@ if (!$res) {
 }
 
 $mode = 'day' ;
+$now = time();
 if (count ($argv) >= 2 && $argv[1] == '--all') {
 	$mode = 'all' ;
+} elseif (count ($argv) == 2) {
+	$now = $argv[1] ;
 }
 
+$output = '';
 while ($data = db_fetch_array ($res)) {
 	if ($mode == 'day') {
-		$time = time () - 86400 ;
+		$time = $now - 86400 ;
 		$hook_params = array ('group_id' => $data['group_id'],
 				      'mode' => 'day',
 				      'year' => date ('Y', $time),
@@ -56,25 +62,21 @@ while ($data = db_fetch_array ($res)) {
 				      'day' => date ('j', $time)) ;
 		plugin_hook ('scm_gather_stats', $hook_params) ;
 	} elseif ($mode == 'all') {
-		$last_seen_day = '' ;
-		$time = 0 ;
-		$now = time () ;
+		$time = $data['register_time'];
+		if (!$time) continue;
 		while ($time < $now) {
-			$day = date ('Y-m-d', $time) ;
-			print "processing $day\n" ;
-			if ($day != $last_seen_day) {
-				$hook_params = array ('group_id' => $data['group_id'],
+			$hook_params = array ('group_id' => $data['group_id'],
 						      'mode' => 'day',
 						      'year' => date ('Y', $time),
 						      'month' => date ('n', $time),
 						      'day' => date ('j', $time)) ;
-				plugin_hook ('scm_gather_stats', $hook_params) ;
-				$last_seen_day = $day ;
-			}
-			$time = $time + 80000 ;
+			plugin_hook ('scm_gather_stats', $hook_params) ;
+			$time = $time + 86400 ;
 		}
 	}
 }
+
+if ($output) cron_entry(28, $output);
 
 // Local Variables:
 // mode: php
