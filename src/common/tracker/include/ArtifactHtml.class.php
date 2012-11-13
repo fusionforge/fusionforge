@@ -57,22 +57,57 @@ class ArtifactHtml extends Artifact {
 	}
 
 
-	function showMessages($asc=true) {
-		$result= $this->getMessages($asc);
+	function showMessages() {
+
+		if (session_loggedin()) {
+			$u = session_get_user();
+			$order = $u->getPreference('tracker_messages_order');
+		}
+		if (!isset($order) || !$order) $order = 'up';
+
+		$result= $this->getMessages($order);
 		$rows=db_numrows($result);
 
 		if ($rows > 0) {
 			$title_arr=array();
 			$title_arr[]=_('Message');
 
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			if ($order == 'up') {
+				$img_order = 'down';
+				$char_order = '↓';
+			} else {
+				$img_order = 'up';
+				$char_order = '↑';
+			}
+			?>
+<script type="text/javascript">/* <![CDATA[ */
+function show_edit_button(id) {
+    var element = document.getElementById(id);
+	if (element) element.style.display = 'block';
+}
+function hide_edit_button(id) {
+    var element = document.getElementById(id);
+	if (element) element.style.display = 'none';
+}
+/* ]]> */</script>
+			<?php
+			echo '<img style="display: none;" id="img_order" src="" alt="" />';
+			echo '<table class="listing full" id="messages_list">
+<thead>
+<tr>
+<th>
+<a name="sort" href="#sort" class="sortheader" onclick="thead = true;ts_resortTable(this, 0);submitOrder();return false;">Message<span id="order_span" sortdir="'.$order.'" class="sortarrow">&nbsp;&nbsp;<img src="/images/sort_'.$img_order.'.gif" alt="'.$char_order.'" /></span></a></th>
+</tr>
+</thead>
+<tbody>';
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>';
+				echo '<tr onmouseover="show_edit_button(\'edit_bt_'.$i.'\')" onmouseout="hide_edit_button(\'edit_bt_'.$i.'\')" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>';
 
 				$params = array('user_id' => db_result($result,$i,'user_id'), 'size' => 's');
 				plugin_hook("user_logo", $params);
 
+				echo '<span style="float:left">';
 				echo _('Date').': '.
 					date(_('Y-m-d H:i'),db_result($result, $i, 'adddate')) .'<br />'.
 					_('Sender').': ';
@@ -81,12 +116,16 @@ class ArtifactHtml extends Artifact {
 				} else {
 					echo util_make_link_u (db_result($result,$i,'user_name'),db_result($result,$i,'user_id'),db_result($result,$i,'realname'));
 				}
+				echo '</span>';
 
+				echo '<p style="clear: both;padding-top: 1em;">';
 				$text = db_result($result, $i, 'body');
 				$text = util_gen_cross_ref($text, $this->ArtifactType->Group->getID());
 				//$text = util_line_wrap( $text, 120,"\n");
 				$text = nl2br($text);
-				echo "<br /><br />".$text.'</td></tr>';
+				echo $text;
+				echo '</p>';
+				echo '</td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
@@ -98,7 +137,6 @@ class ArtifactHtml extends Artifact {
 	}
 
 	function showHistory() {
-		global $artifact_cat_arr,$artifact_grp_arr,$artifact_res_arr;
 		$result=$this->getHistory();
 		$rows= db_numrows($result);
 

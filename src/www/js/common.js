@@ -91,3 +91,10 @@ function flipAll(formObj) {
        }
    }
 }
+
+function submitOrder() {
+  var order = document.getElementById('order_span').getAttribute('sortdir');
+  var myRand = Math.round(Math.random()*(1000000));
+  var imgSrc = '/tracker/setorder.php?' + 'order=' + order + '&rand=' + myRand;
+  document.getElementById('img_order').src = imgSrc;
+}

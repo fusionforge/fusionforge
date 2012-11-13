@@ -33,12 +33,6 @@ global $group;
 global $aid;
 global $atid;
 
-if (getStringFromRequest('commentsort') == 'anti') {
-       $sort_comments_chronologically = false;
-} else {
-       $sort_comments_chronologically = true;
-}
-
 html_use_coolfieldset();
 $ath->header(array ('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
 
@@ -48,7 +42,6 @@ echo notepad_func();
 	<form id="trackermodform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>"  enctype="multipart/form-data" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<input type="hidden" name="func" value="postmod"/>
-	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>"/>
 
 	<table width="80%">
@@ -151,12 +144,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		?>
 		</td><td>
 		<strong><?php echo _('Priority') ?>:</strong><br />
-		<?php
-		/*
-			Priority of this request
-		*/
-		build_priority_select_box('priority',$ah->getPriority());
-		?>
+		<?php build_priority_select_box('priority',$ah->getPriority()); ?>
 		</td>
 	</tr>
 
@@ -177,6 +165,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		$ath->renderRelatedTasks($group, $ah);
 		$ath->renderFiles($group_id, $ah);
 	?>
+
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
 		<input id="tracker-summary" title="<?php echo util_html_secure(_('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.')) ?>" type="text" name="summary" size="70" value="<?php
@@ -208,7 +197,7 @@ $nb = $count? ' ('.$count.')' : '';
 		echo $ath->cannedResponseBox('canned_response');
 		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1','('._('Admin').')');
 		?>
-		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+		<script type="text/javascript">/* <![CDATA[ */
 			$('#tracker-canned_response').change(function() {
 				$.ajax({
 					type: 'POST',
@@ -229,17 +218,8 @@ $nb = $count? ' ('.$count.')' : '';
 		<strong><?php echo _('Add A Comment') ?>:<?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
 		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
 		<h2><?php echo _('Followups: ') ;
-		if ($sort_comments_chronologically) {
-			echo '<a href="' .
-				util_make_url('/tracker/index.php?func=detail&amp;aid=' . $aid . '&amp;group_id=' . $group_id . '&amp;atid=' . $ath->getID() . '&amp;commentsort=anti') .
-				'">' . _('Sort comments antichronologically') . '</a>';
-		} else {
-			echo '<a href="' .
-				util_make_url('/tracker/index.php?func=detail&amp;aid=' . $aid . '&amp;group_id=' . $group_id . '&amp;atid=' . $ath->getID() . '&amp;commentsort=chrono') .
-				'">' . _('Sort comments chronologically') . '</a>';
-		}
 echo '</h2>';
-echo $ah->showMessages($sort_comments_chronologically);
+echo $ah->showMessages();
 		?>
 	</td></tr>
 </table>

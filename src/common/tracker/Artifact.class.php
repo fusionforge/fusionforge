@@ -664,7 +664,7 @@ class Artifact extends Error {
 	/**
 	 *	getHistory - returns a result set of audit trail for this support request.
 	 *
-	 *	@return database result set.
+	 *	@return resource result set.
 	 */
 	function getHistory() {
 		return db_query_params ('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC',
@@ -672,13 +672,35 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getMessages - get the list of messages attached to this artifact.
+	 *    getMessages - get the list of messages attached to this artifact.
 	 *
-	 *	@return database result set.
+	 * @param string $order
+	 * @return resource result set.
 	 */
-	function getMessages($asc=false) {
-		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate ' . ($asc ? 'ASC' : 'DESC'),
+	function getMessages($order='up') {
+		if ($order == 'up') {
+			$order = 'DESC';
+		}
+		else {
+			$order = 'ASC';
+		}
+		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate '.$order,
 					array ($this->getID())) ;
+	}
+
+	/**
+	 *	getMessage - get a message attached to this artifact.
+	 *
+	 * @param    int    $msg_id id of the message.
+	 * @access public
+	 * @return database result set.
+	 */
+	function getMessage($msg_id) {
+		if (!$msg_id) {
+			return false;
+		}
+		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE id=$1',
+			array($msg_id));
 	}
 
 	/**
