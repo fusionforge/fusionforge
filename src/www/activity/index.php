@@ -50,6 +50,10 @@ if (!$received_begin || $received_begin==0) {
 		$rendered_begin = $received_begin;
 	}
 }
+if ($begin < 0) {
+    $begin = 0;
+    $rendered_begin = strftime($date_format, $begin);
+}
 
 if (!$received_end || $received_end == 0) {
 	$end = time();
@@ -99,10 +103,6 @@ if (forge_get_config('use_forum') && $group->usesForum()) {
 }
 
 if (forge_get_config('use_tracker') && $group->usesTracker()) {
-// These lines are currently commented due to lack of explanations.
-// We need to enable these lines only if you use the commit tracker plugin I suppose.
-// 	$ids[]		= 'commit';
-// 	$texts[]	= _('Commit Tracking');
 	$ids[]		= 'trackeropen';
 	$texts[]	= _('Tracker Opened');
 	$ids[]		= 'trackerclose';
