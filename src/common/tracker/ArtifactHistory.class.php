@@ -70,46 +70,6 @@ class ArtifactHistory extends Error {
 	}
 
 	/**
-	 *	create - create a new item in the database.
-	 *
-	 *	@param	string	Item name.
-	 *	@param	int		User_id of assignee.
-	 *  @return id on success / false on failure.
-	 * /
-	function create($name, $auto_assign_to) {
-		//
-		//	data validation
-		//
-		if (!$name || !$auto_assign_to) {
-			$this->setError(_('ArtifactCategory: name and assignee are Required'));
-			return false;
-		}
-		if (!forge_check_perm ('tracker', $this->Artifact->ArtifactType->getID()), 'manager') {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		$result = db_query_params ('INSERT INTO artifact_category (group_artifact_id,category_name,auto_assign_to)
-			VALUES ($1,$2,$3)',
-					   array ($this->Artifact->getID(),
-						  htmlspecialchars($name),
-						  $auto_assign_to)) ;
-
-
-		if ($result && db_affected_rows($result) > 0) {
-			$this->clearError();
-			return true;
-		} else {
-			$this->setError(db_error());
-			return false;
-		}
-
-		//	Now set up our internal data structures
-		if (!$this->fetchData($id)) {
-			return false;
-		}
-	}*/
-
-	/**
 	 *	fetchData - re-fetch the data for this ArtifactHistory from the database.
 	 *
 	 *	@param	int		$id ID of the category.
