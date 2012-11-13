@@ -156,7 +156,7 @@ if (forge_get_config('require_unique_email')) {
 <input type="password" required="required" name="password2" />
 </p
 ><p>
-<?php echo _('Title:'); ?><br />
+<?php echo _('Title')._(':'); ?><br />
 <input type="text" name="title" value="<?php echo htmlspecialchars($title); ?>" size="10" />
 </p>
 <p>
@@ -192,7 +192,7 @@ if($toDisplay != "") {
 @<?php
 	echo _('Email Address:') . utils_requiredField() . "<br />\n<em>";
 	printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.'), forge_get_config('users_host')); ?></em>
-<br /><input size="30" type="text" name="email" value="<?php print(htmlspecialchars($email)); ?>" />
+<br /><input size="40" type="text" name="email" value="<?php print(htmlspecialchars($email)); ?>" />
 </p>
 <p>
 <?php
