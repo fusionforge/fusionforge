@@ -29,7 +29,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/FusionForge.class.php';
@@ -64,7 +63,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="usersearch" value="1" />
-		<input type="submit" value="<?php echo _('get'); ?>" />
+		<input type="submit" value="<?php echo _('Search'); ?>" />
 		</form>
 	</li>
     <li><a href="../account/register.php"><?php
@@ -128,8 +127,6 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		$row = db_fetch_array($res);
 		printf(_('Pending projects: <strong>%1$s</strong>'), $row['count']);
 	?></li>
-</ul>
-<ul>
 	<li><a href="grouplist.php"><?php echo _('Display Full Project List/Edit Projects'); ?></a></li>
 
 	<li><?php echo _('Display Projects Beginning with:').' ';
@@ -143,11 +140,9 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="groupsearch" value="1" />
-		<input type="submit" value="<?php echo _('get'); ?>" />
+		<input type="submit" value="<?php echo _('Search'); ?>" />
 		</form>
 	</li>
-</ul>
-<ul>
 	<li><?php echo util_make_link ('/register/',_('Register New Project')); ?></li>
 	<li><a href="approve-pending.php"><?php echo _('Pending projects (new project approval)'); ?></a></li>
 	<li><form name="projectsearch" action="search.php">
@@ -161,7 +156,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<input type="hidden" name="search" value="%"/>
 	<input type="submit" value="<?php echo _('Submit');?> "/>
 	</form></li>
-	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0"><?php echo _('Private Projects'); ?></a></li>
+	<li><a href="search.php?groupsearch=1&amp;is_public=0"><?php echo _('Private Projects'); ?></a></li>
 </ul>
 <?php
 	$params = array('result' => '');
@@ -206,11 +201,10 @@ if(forge_get_config('use_news')) {
 	<li><a href="edit_frs_filetype.php"><?php echo _('Add, Delete, or Edit File Types'); ?></a></li>
 	<li><a href="edit_frs_processor.php"><?php echo _('Add, Delete, or Edit Processors'); ?></a></li>
 	<li><a href="edit_theme.php"><?php echo _('Add, Delete, or Edit Themes'); ?></a></li>
-	<li><a href="<?php echo util_make_url ('/stats/lastlogins.php'); ?>"><?php echo _('Last Logins'); ?></a></li>
+	<li><a href="<?php echo util_make_url ('/stats/lastlogins.php'); ?>"><?php echo _('Most Recent Opened Sessions'); ?></a></li>
 	<li><a href="cronman.php"><?php echo _('Cron Manager'); ?></a></li>
 	<li><a href="pluginman.php"><?php echo _('Plugin Manager'); ?></a></li>
 	<li><a href="configman.php"><?php echo _('Config Manager'); ?></a></li>
-	<li><a href="pi.php">PHPinfo()</a></li>
 	<?php plugin_hook("site_admin_option_hook", false); ?>
 </ul>
 

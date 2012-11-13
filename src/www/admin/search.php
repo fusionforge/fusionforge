@@ -27,7 +27,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
@@ -35,15 +34,11 @@ require_once $gfwww.'admin/admin_utils.php';
 $search = trim(getStringFromRequest('search'));
 $usersearch = trim(getStringFromRequest('usersearch'));
 
-if (!$search) {
-	exit_error(_('Refusing to display whole DB. Please use a CLI query if you wish to do this.'),'admin');
-}
-
 site_admin_header(array('title'=>_('Admin Search Results')));
 
 function format_name($name, $status) {
 	if ($status == 'D') {
-		return "<strong><strike>$name</strike></strong>";
+		return "<strong><span class=\"strike\">$name</span></strong>";
 	} elseif ($status == 'S') {
 		return "<strong><span style=\"text-decoration:underline\">$name</span></strong>";
 	} elseif ($status == 'H') {
@@ -108,7 +103,7 @@ if ($usersearch) {
 if (getStringFromRequest('groupsearch')) {
 	$status = getStringFromRequest('status');
 	$is_public = getIntFromRequest('is_public', -1);
-	$crit_desc = '' ;
+	$crit_desc = '';
 	$qpa = db_construct_qpa () ;
 
 	if(is_numeric($search)) {
