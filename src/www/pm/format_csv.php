@@ -45,16 +45,14 @@
 //	so a user can choose a file to upload a .csv file and store it in task mgr
 //
 
-
-pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
+pm_header(array('title'=>_('Update CSV Format'),'group_project_id'=>$group_project_id));
 
 $headers = getIntFromRequest('headers', 1);
 $full = getIntFromRequest('full', 1);
 $sep = getStringFromRequest('sep', ',');
 
 ?>
-<center>
-<table>
+<table class="centered">
 	<tr>
 		<td>
 		<fieldset><legend><b>CSV Format</b></legend>
@@ -69,13 +67,11 @@ $sep = getStringFromRequest('sep', ',');
 				<td><input type="radio" name="full" value="1"<?php if ($full) echo ' checked="checked"' ?>/>Full<br />
 				<input type="radio" name="full" value="0"<?php if (!$full) echo ' checked="checked"' ?> />Normal</td>
 			</tr>
-			<tr><td colspan="2"></td></tr>
 			<tr>
 				<td class="top"><b>Separator :</b></td>
 				<td><input type="radio" name="sep" value=","<?php if ($sep==',') echo ' checked="checked"' ?>/>Comma (char: ',')<br />
 				<input type="radio" name="sep" value=";"<?php if ($sep==';') echo ' checked="checked"' ?>/>Semi-colon (char: ';')</td>
 			</tr>
-			<tr><td colspan="2"></td></tr>
 			<tr>
 				<td class="top"><b>Header :</b></td>
 				<td><input type="radio" name="headers" value="1"<?php if ($headers) echo ' checked="checked"' ?>/>Included<br />
@@ -87,7 +83,6 @@ $sep = getStringFromRequest('sep', ',');
 		</td>
 	</tr>
 </table>
-</center>
 <p><strong>Notes:</strong></p>
 <div>
 <ul>
