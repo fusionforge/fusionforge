@@ -109,7 +109,6 @@ class TrackerGateway extends Error {
 	 * @return boolean true if success
 	 */
 	function parseMail($input_file) {
-		global $argv;
 
 		if (!$mp = new MailParser($input_file)) {
 			$this->setError('Error In MailParser');
@@ -175,7 +174,7 @@ class TrackerGateway extends Error {
 	/**
 	 * Insert data into the tracker db
 	 *
-	 * @return - true or false
+	 * @return bool
 	 */
 	function addMessage() {
 		//

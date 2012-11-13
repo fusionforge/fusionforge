@@ -109,16 +109,12 @@ class ForumGateway extends Error {
 	 * @return boolean true if success
 	 */
 	function parseMail($input_file) {
-		global $argv;
-//DBG("parseMail start");
 
 		if (!$mp = new MailParser($input_file)) {
 			$this->setError('Error In MailParser');
-//DBG("parseMail error1: ".$mp->getErrorMessage());
 			return false;
 		} elseif ($mp->isError()) {
 			$this->setError('Error In MailParser '.$mp->getErrorMessage());
-//DBG("parseMail error2: ".$mp->getErrorMessage());
  			// even if it is an error, try to get the address of the sender so we
  			// can send him back the error
  			$this->FromEmail = $mp->getFromEmail();
@@ -126,39 +122,12 @@ class ForumGateway extends Error {
 		}
 
 		$this->FromEmail = $mp->getFromEmail();
-//DBG("email: ".$this->FromEmail);
-//echo ")()()()()()()".$this->FromEmail."(*(*(*(*(*";
-		//
-		//subjects are in this required format: '[group - Forum][123456] My Subject'
-		//where 123456 is the msg_id of the forum message.
-		//we parse that ID to get the forum and thread that this should post to
-		//
 		$subj = $mp->getSubject();
 		if ($mp->isError())
 			$this->setError($mp->getErrorMessage());
 		if ($subj === false)
 			return false;
 
-//DBG("mp headers: ".implode("**\n",$mp->headers));
-//DBG("mp body: ".$mp->body);
-//DBG("SUBJ: ".$subj);
-//DBG("BODY: ".$mp->getBody());
-/*
-		$parent_start = (strpos($subj,'[',(strpos($subj,'[')+1))+1);
-		$parent_end = (strpos($subj,']',$parent_start)-1);
-		$this->Parent = substr($subj,$parent_start,($parent_end-$parent_start+1));
-		if (!$this->Parent || !is_numeric($this->Parent)) {
-//			$argv[1] - listname
-//			echo "No Parent ".$argv[0]."||".$argv[1];
-			$this->Parent=0;
-			$this->Subject = addslashes($subj);
-//			$this->setError('No Valid Parent ID Found in Subject Line');
-//			return false;
-		} else {
-//			echo "Parent: ".$this->Parent."||".$argv[0]."||".$argv[1];
-			$this->Subject = addslashes(substr($subj,$parent_end+3));
-		}
-*/
 		if (preg_match('/(\[)([0-9]*)(\])/',$subj,$arr)) {
 			$this->Parent=$arr[2];
 			$parent_end=(strpos($subj,'['.$arr[2].']')) + strlen('['.$arr[2].']');
@@ -168,15 +137,14 @@ class ForumGateway extends Error {
 			$this->Parent=0;
 		}
 		$this->Body =& $mp->getBody();
-//DBG( "body1:". $this->Body);
 
 		$begin = strpos($this->Body, FORUM_MAIL_MARKER);
 		if ($begin === false) { //do nothing
-				return true;
+			$this->Message = $this->Body;
+			return true;
 		}
 		// get the part of the message located after the marker
 		$this->Body = substr($this->Body, $begin+strlen(FORUM_MAIL_MARKER));
-//DBG( "body2:". $this->Body);
 		// now look for the ending marker
 		$end = strpos($this->Body, FORUM_MAIL_MARKER);
 		if ($end === false) {
@@ -195,7 +163,7 @@ class ForumGateway extends Error {
 	/**
 	 * Insert data into the forum db
 	 *
-	 * @return - true or false
+	 * @return bool
 	 */
 	function addMessage() {
 		//
