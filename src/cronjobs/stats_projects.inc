@@ -287,5 +287,3 @@ OR help_requests > 0;',
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

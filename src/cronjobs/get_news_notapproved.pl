@@ -107,7 +107,7 @@ else {
 if ($debug) {print STDERR "get_news_notapproved process finished ok\n"};
 exit(0);
 
-# Funcitions
+# Functions
 #-------------------------------------------------------------------------------
 
 sub usage() {

@@ -333,7 +333,7 @@ if (forge_get_config('database_name') != "") {
 		if (session_loggedin()) {
 			$LUSER =& session_get_user();
 			$use_tooltips = $LUSER->usesTooltips();
-			header ('Cache-Control: private');
+			header('Cache-Control: private');
 			$x_theme = $LUSER->setUpTheme();
 		} else {
 			$use_tooltips = 1;
