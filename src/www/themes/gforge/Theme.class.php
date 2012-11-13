@@ -241,7 +241,7 @@ class Theme extends Layout {
 
 		$return = '
 		<!-- start tabs -->
-		<table class="tabGenerator width-100p100" summary="" ';
+		<table class="tabGenerator width-100p100" ';
 
 		if ($total_width != '100%') {
 			$return .= 'style="width:' . $total_width . ';"';

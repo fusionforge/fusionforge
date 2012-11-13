@@ -66,7 +66,7 @@ h3 {
 
 ul {
     list-style-type: circle;
-    margin: 0px;
+    margin: 0;
 }
 
 li {
@@ -303,7 +303,7 @@ hr {
 
 .tabGenerator .tg-middle span {
     background-color: #41495C;
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .tabGenerator .tg-middle span span {
@@ -311,7 +311,7 @@ hr {
     text-align:center;
     vertical-align: middle;
     height: 20px;
-    margin: 0px;
+    margin: 0;
     border-bottom: 0;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -383,7 +383,7 @@ hr {
 
 .innertabs .tabGenerator .tg-middle span {
     background-color: #F7F7F7;
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .innertabs .tabGenerator .tg-middle span span {
@@ -391,16 +391,16 @@ hr {
     text-align:center;
     vertical-align: middle;
     height: 20px;
-    margin: 0px;
+    margin: 0;
     border-bottom: 0;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     background-color: #F7F7F7;
     line-height: 17px;
     color: black;
     text-shadow: 1px 1px white;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
     border-left: 1px solid white;
     border-right: 1px solid white;
 }
@@ -486,11 +486,11 @@ a.topTabSelected:hover {
 
 .tabberlive ul {
     margin-top: 10px;
-    margin-bottom: 0px;
-    margin-left: 0px;
+    margin-bottom: 0;
+    margin-left: 0;
     /*border-collapse: collapse;*/
     border-bottom: 1px solid #E2E3E4;
-    border-spacing: 6px 0px;
+    border-spacing: 6px 0;
     padding-left: 0;
 }
 
@@ -548,7 +548,7 @@ a.topTabSelected:hover {
     border: 1px solid #E2E3E4;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .box-title-content {
@@ -564,18 +564,18 @@ a.topTabSelected:hover {
 
 .box-content {
     border-bottom: 1px solid #E2E3E4;
-    margin: 0px;
+    margin: 0;
     padding: 8px;
     padding-left: 18px;
 }
 
 .box-content p {
-    margin: 0px;
+    margin: 0;
 }
 
 
 .box-middle {
-  margin: 0px;
+  margin: 0;
   padding-left: 18px;
   padding-top: 2px;
   padding-bottom: 2px;
@@ -624,7 +624,7 @@ a.topTabSelected:hover {
 
 .widget_content {
     border-bottom: 1px solid #E2E3E4;
-    margin: 0px;
+    margin: 0;
     padding: 8px;
 }
 
@@ -659,10 +659,10 @@ a.topTabSelected:hover {
 .submenu {
     margin-top: 10px;
     margin-bottom: 25px;
-    margin-left: 0px;
+    margin-left: 0;
     /*border-collapse: collapse;*/
     border-bottom: 1px solid #E2E3E4;
-    border-spacing: 6px 0px;
+    border-spacing: 6px 0;
     padding-left: 0;
 }
 
@@ -717,7 +717,7 @@ a.topTabSelected:hover {
     margin-left: 3px;
 }
 
-.warning_msg, .warning, .tips, .important, .veryimportant {
+.warning_msg, .warning, .tips, .important {
     border-width: 1px;
     border-style: solid;
     background-color: #ffd297; /* orange */

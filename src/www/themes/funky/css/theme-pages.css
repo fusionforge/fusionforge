@@ -49,8 +49,8 @@
 }
 
 #Latest_News h3 {
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
     font-weight: bold;
 }
 
@@ -178,11 +178,11 @@
  *
  */
 .docman_h3 {
-	margin-top: 0px;
+	margin-top: 0;
 }
 
 .docman_h4 {
-	padding: 0px;
+	padding: 0;
 	margin: 2px;
 	font-style: italic;
 }

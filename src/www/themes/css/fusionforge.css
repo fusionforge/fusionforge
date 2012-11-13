@@ -162,7 +162,7 @@
 	font-weight: bold;
 }
 
-.veryimportant {
+.important {
 	color: red;
 	font-size: large;
 	font-weight: bold;
@@ -244,7 +244,7 @@ ul.tabbernav li.tabberactive a:hover {
 	color: #000;
 }
 
-up {
+.up {
 	font-family: arial,helvetica, sans-serif;
 	font-size: small;
 	font-weight: bold;
@@ -262,6 +262,8 @@ up {
 .nowrap {white-space: nowrap;}
 
 .tt {font-family: monospace;}
+
+.strike {text-decoration:line-through;}
 
 .bgcolor-grey {background-color: #e5e5e5;}
 .bgcolor-white {background-color: white;}
@@ -398,7 +400,7 @@ p.information {
    font-size: 12px;
    text-align: center;
    border: 1px solid;
-   margin: 15px 0px;
+   margin: 15px 0;
    padding: 10px 10px 10px 10px;
 }
 
@@ -455,7 +457,7 @@ p.information {
 .widget_titlebar_minimize,
 .widget_titlebar_maximize {
 	float: right;
-	padding: 0px 2px;
+	padding: 0 2px;
 }
 
 .widget_titlebar_rss a, .widget_titlebar_rss a:link, .widget_titlebar_rss a:visited, .widget_titlebar_rss a:hover,
@@ -777,8 +779,8 @@ div.layout-manager-column-remove_hover {
 
 #ffErrors .error {
 	background-color: inherit;
-	border-width: 0px;
-	padding: 0px;
+	border-width: 0;
+	padding: 0;
 	color: red;
 }
 
