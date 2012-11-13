@@ -164,10 +164,11 @@ class Plugin extends Error {
 		// Create a symbolic links to plugins/<plugin>/www (if directory exists).
 		if (is_dir($path . '/www')) { // if the plugin has a www dir make a link to it
 			// The apache group or user should have write perms the www/plugins folder...
-			if (!is_link('../'.$installdir)) {
-				$code = symlink($path . '/www', '../'.$installdir);
+			$www = dirname(dirname(dirname(__FILE__))).'/www';
+			if (!is_link($www.'/'.$installdir)) {
+				$code = symlink($path . '/www', $www.'/'.$installdir);
 				if (!$code) {
-					$this->setError('['.'../'.$installdir.'->'.$path . '/www]'.
+					$this->setError('['.$www.'/'.$installdir.'->'.$path . '/www]'.
 						'<br />Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
 				}
 			}
@@ -222,8 +223,9 @@ class Plugin extends Error {
 	}
 
 	function groupisactivecheckbox (&$params) {
-		//Check if the group is active
-		// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
+		// Check if the group is active
+		// This code creates the checkbox in the project edit public info page
+        // to activate/deactivate the plugin
 		$display = 1;
 		$title = _('current plugin status is:').' '.forge_get_config('plugin_status', $this->name);
 		$imgStatus = 'plugin_status_valid.png';
@@ -278,8 +280,9 @@ class Plugin extends Error {
 	}
 
 	function userisactivecheckbox(&$params) {
-		//check if user is active
-		// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
+		// Check if user is active
+		// This code creates the checkbox in the user account maintenance page
+        // to activate/deactivate the plugin
 		$display = 1;
 		$title = _('current plugin status is:').' '.forge_get_config('plugin_status', $this->name);
 		$imgStatus = 'plugin_status_valid.png';
