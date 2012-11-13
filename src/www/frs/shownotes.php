@@ -29,6 +29,13 @@ require_once $gfcommon.'frs/include/frs_utils.php';
 
 $release_id = getIntFromRequest('release_id');
 
+$frsr = frsrelease_get_object($release_id);
+if (!$frsr || !is_object($frsr)) {
+	exit_error(_('That Release Was Not Found'), 'frs');
+} elseif ($frsr->isError()) {
+	exit_error($frsr->getErrorMessage(), 'frs');
+}
+
 $result=db_query_params ('SELECT frs_release.notes,frs_release.changes,
 		frs_release.preformatted,frs_release.name,frs_package.group_id,frs_package.is_public
 		FROM frs_release,frs_package
