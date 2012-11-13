@@ -32,6 +32,8 @@ require_once $gfcommon.'include/PluginManager.class.php' ;
 // SCM-specific plugins subsystem
 require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
+session_set_admin () ;
+
 setup_plugin_manager () ;
 
 $res = db_query_params ('SELECT group_id FROM groups WHERE status=$1 AND use_scm=1 ORDER BY group_id DESC',
@@ -39,6 +41,10 @@ $res = db_query_params ('SELECT group_id FROM groups WHERE status=$1 AND use_scm
 if (!$res) {
 	$this->setError('Unable to get list of projects using SCM: '.db_error());
 	return false;
+}
+
+if (!is_dir(forge_get_config('scm_tarballs_path'))) {
+	mkdir(forge_get_config('scm_tarballs_path'), 0700, true); 
 }
 
 while ($data = db_fetch_array ($res)) {
