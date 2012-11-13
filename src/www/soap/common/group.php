@@ -27,8 +27,6 @@ require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/GroupJoinRequest.class.php';
 require_once $gfcommon.'include/User.class.php';
 require_once $gfcommon.'include/Role.class.php';
-require_once $gfcommon.'include/RBACEngine.class.php';
-require_once $gfcommon.'include/RBAC.php';
 
 // Add The definition of a group object
 $server->wsdl->addComplexType(
