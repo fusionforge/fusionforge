@@ -357,12 +357,11 @@ function start_graph($vals, $names)
     print ' cellspacing="' . $vals["cellspacing"] . '"';
     print ' border="' . $vals["border"] . '"';
 
-    if ($vals["width"] != 0) { print ' width="' . $vals["width"] . '"'; }
-    if ($vals["background"]) { print ' background="' . $vals["background"] . '"'; }
+    if (isset($vals["width"]) && ($vals["width"] != 0)) { print ' width="' . $vals["width"] . '"'; }
 
     print '>';
 
-    if (($vals["vlabel"]) || ($vals["hlabel"]))
+    if ((isset($vals["vlabel"]) && $vals["vlabel"]) || (isset($vals["hlabel"]) && $vals["hlabel"]))
        {
         if (($vals["type"] == 0) || ($vals["type"] == 2 ))// horizontal chart
            {
