@@ -41,6 +41,7 @@ case $1 in
 		-e 's,{core/groupdir_prefix},/var/lib/gforge/chroot/home/groups,g' \
 		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
 		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
+		-e 's,{core/mailman_path},/var/lib/mailman,g' \
 		$i > httpd.conf.d-fhs/$(basename $i)
 	done
 	message="FHS like paths"
@@ -66,6 +67,7 @@ EOF
 		-e 's,{core/groupdir_prefix},/var/lib/gforge/chroot/home/groups,g' \
 		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
 		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
+		-e 's,{core/mailman_path},/usr/lib/mailman,g' \
 		$i > httpd.conf.d-fhsrh/$(basename $i)
 	done
 	message="FHS like paths"
@@ -91,6 +93,7 @@ EOF
 		-e 's,{core/groupdir_prefix},/var/lib/gforge/chroot/home/groups,g' \
 		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
 		-e 's,{scmsvn/repos_path},/var/lib/gforge/svnroot,g' \
+		-e 's,{core/mailman_path},/usr/lib/mailman,g' \
 		$i > httpd.conf.d-opt/$(basename $i)
 	done
 	message="/opt like paths"
@@ -116,6 +119,7 @@ EOF
 		-e 's,{core/groupdir_prefix},/var/local/lib/gforge/chroot/home/groups,g' \
 		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
 		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
+		-e 's,{core/mailman_path},/usr/lib/mailman,g' \
 		$i > httpd.conf.d-usrlocal/$(basename $i)
 	done
 	message="/usr/local like paths"
