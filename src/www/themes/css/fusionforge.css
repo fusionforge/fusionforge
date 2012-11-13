@@ -650,6 +650,12 @@ p.information {
 .widget-preview-projectmembers-en_US {
 	background-image: url('../../images/widget/widget-preview-project_members-en_US.png');
 }
+.widget-preview-projectinfo-en_US {
+	background-image: url('../../images/widget/widget-preview-project_info-en_US.png');
+}
+.widget-preview-plugin_blocks_project_summary-en_US {
+	background-image: url('../../images/widget/widget-preview-project_plugin_blocks_summary-en_US.png');	
+}
 
 .widget-preview-mysystemevent-fr_FR {
 	background-image: url('../../images/widget/widget-preview-mysystemevent-fr_FR.png');

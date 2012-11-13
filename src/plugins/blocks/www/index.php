@@ -46,8 +46,6 @@
 
 require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
-require_once $gfconfig.'plugins/blocks/config.php' ;
-
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'mail/MailingListFactory.class.php';
@@ -58,9 +56,6 @@ function getAvailableBlocks($group) {
 	$blocks = array(
 		'summary_description' =>
 			_("Block to replace the default project description with an enhanced one."),
-//	To be reworked to play nice with the widgets page.
-//		'summary_right' =>
-//			_("Block in the summary page (right)"),
 		'request_join' =>
 			_("Block to list informations requested to ask to join a project"),
 	);
@@ -145,17 +140,6 @@ function blocks_Project_Header($params) {
 	site_project_header($params);
 }
 
-$user = session_get_user(); // get the session user
-
-if (!$user || !is_object($user) ) {
-	exit_error(_('Invalid User'),'home');
-} elseif ( $user->isError() ) {
-	exit_error($user->getErrorMessage(),'home');
-} elseif ( !$user->isActive()) {
-	exit_error(_('Invalid User : Not active'),'home');
-}
-
-
 $type = getStringFromRequest('type');
 $id = getStringFromRequest('id');
 $pluginname = getStringFromRequest('pluginname');
@@ -179,50 +163,36 @@ if (!$type) {
 	exit_error(_('Cannot Process your request : No TYPE specified'),'home'); // you can create items in Base.tab and customize this messages
 } elseif (!$id) {
 	exit_error(_('Cannot Process your request : No ID specified'),'home');
-} else {
-	if ($type == 'group') {
-		$group = group_get_object($id);
-		if ( !$group) {
-			exit_no_group();
-		}
-		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
-		}
+}
 
-		session_require_perm ('project_admin', $id) ;
+$group = group_get_object($id);
+if ( !$group) {
+	exit_no_group();
+}
+if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
+	exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+}
 
-		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-		// DO THE STUFF FOR THE PROJECT PART HERE
-		echo "We are in the Project blocks plugin <br />";
-		echo "Greetings from planet " . $world; // $world comes from the config file in /etc
-	} elseif ($type == 'admin') {
-		$group = group_get_object($id);
-		if ( !$group) {
-			exit_no_group();
-		}
-		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
-		}
-		session_require_perm ('project_admin', $id) ;
+session_require_perm ('project_admin', $id) ;
 
-		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-		// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
+if ($type == 'admin') {
+	blocks_Project_Header(array('title'=>'Blocks Administration','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 
-		$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
-				       array($id));
-		while ($row = db_fetch_array($res)) {
-			$status[ $row['name'] ] = $row['status'];
-		}
+	$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
+			array($id));
+	while ($row = db_fetch_array($res)) {
+		$status[ $row['name'] ] = $row['status'];
+	}
 
-		print _("Blocks are customizable HTML boxes in the left or right side of the pages the web site. They are created manually.");
+	print _("Blocks are customizable HTML boxes in the left or right side of the pages the web site. They are created manually.");
 
-		print "<form action=\"/plugins/blocks/\" method=\"post\">";
-		print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
-		print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
-		print "<input type=\"hidden\" name=\"type\" value=\"admin_post\" />\n";
+	print "<form action=\"/plugins/blocks/\" method=\"post\">";
+	print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
+	print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
+	print "<input type=\"hidden\" name=\"type\" value=\"admin_post\" />\n";
 
-		print "<table class=\"listing\" align=\"center\">";
-		print "<thead><tr><th>".
+	print "<table class=\"listing\" align=\"center\">";
+	print "<thead><tr><th>".
 			_("Name").
 			"</th>" .
 			"<th>".
@@ -235,158 +205,150 @@ if (!$type) {
 			_("Operation") .
 			"</th>" .
 			"</tr></thead>";
-		$blocks = getAvailableBlocks($group);
-		foreach ($blocks as $b => $help) {
+	$blocks = getAvailableBlocks($group);
+	$class = 'even';
+	foreach ($blocks as $b => $help) {
 
-			$class = (! isset($class) || $class == 'bgcolor-white') ? "bgcolor-grey" : "bgcolor-white";
+		$class = ($class == 'even') ? "odd" : "even";
 
-			$match = '';
-			if (preg_match('/(.*) index$/', $b, $match)) {
-				print '<tr><td colspan="4"><b>'.$blocks_text[$match[1]].'</b></td></tr>';
-			}
+		$match = '';
+		if (preg_match('/(.*) index$/', $b, $match)) {
+			print '<tr><td colspan="4"><b>'.$blocks_text[$match[1]].'</b></td></tr>';
+		}
 
-			$checked = (isset($status[$b]) && $status[$b] == 1) ? ' checked="checked"' : '';
+		$checked = (isset($status[$b]) && $status[$b] == 1) ? ' checked="checked"' : '';
 
-			print "<tr class=\"$class\"><td>$b</td>\n" .
-				"<td align=\"center\">" .
-				"<input type=\"checkbox\" name=\"activate[$b]\" value=\"1\"$checked /></td>\n" .
-				"<td>$help</td>\n" .
-				"<td><a href=\"/plugins/blocks/index.php?id=$id&amp;type=configure&amp;pluginname=blocks&amp;name=".urlencode($b)."\">configure</a></td>\n</tr>\n";
-			}
-		print "</table>";
-		print "<p align=\"center\"><input type=\"submit\" value=\"" .
+		print "<tr class=\"$class\"><td>$b</td>\n" .
+		"<td align=\"center\">" .
+		"<input type=\"checkbox\" name=\"activate[$b]\" value=\"1\"$checked /></td>\n" .
+		"<td>$help</td>\n" .
+		"<td><a href=\"/plugins/blocks/index.php?id=$id&amp;type=configure&amp;pluginname=blocks&amp;name=".urlencode($b)."\">configure</a></td>\n</tr>\n";
+	}
+	print "</table>";
+	print "<p align=\"center\"><input type=\"submit\" value=\"" .
 			_("Save Blocks") .
 			"\" /></p>";
-		print "</form><p />";
-	} elseif ($type == 'admin_post') {
-		$group = group_get_object($id);
-		if ( !$group) {
-			exit_no_group();
-		}
-		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
-		}
-		session_require_perm ('project_admin', $id) ;
+	print "</form><p />";
+} elseif ($type == 'admin_post') {
+	$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
+			array($id));
+	while ($row = db_fetch_array($res)) {
+		$present[ $row['name'] ] = true;
+		$status[ $row['name'] ] = $row['status'];
+	}
+	$blocks = getAvailableBlocks($group);
 
-		$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
-				       array($id));
-		while ($row = db_fetch_array($res)) {
-			$present[ $row['name'] ] = true;
-			$status[ $row['name'] ] = $row['status'];
+	// Workaround when a block has a name with a &amp; inside.
+	// It seems sadly converted by the form (or php?).
+	foreach ($activate as $k => $v) {
+		$nk = str_replace("&","&amp;", $k);
+		if ($nk !== $k) {
+			$activate[$nk] = $v;
+			unset($activate[$k]);
 		}
-		$blocks = getAvailableBlocks($group);
+	}
 
-		// Workaround when a block has a name with a &amp; inside.
-		// It seems sadly converted by the form (or php?).
-		foreach ($activate as $k => $v) {
-			$nk = str_replace("&","&amp;", $k);
-			if ($nk !== $k) {
-				$activate[$nk] = $v;
-				unset($activate[$k]);
+	foreach ($blocks as $b => $help) {
+
+		if (!$activate[$b])
+			$activate[$b] = 0;
+
+		if ((!isset($status[$b]) && $activate[$b]) ||
+				(isset($status[$b]) && $activate[$b] !== $status[$b]))
+			// Must be updated.
+			if (!isset($present[$b])) {
+			db_query_params('INSERT INTO plugin_blocks (group_id, name, status)
+					VALUES ($1, $2, $3)',
+					array($id, $b, $activate[$b]));
+		} else {
+			db_query_params('UPDATE plugin_blocks SET status=$1
+					WHERE group_id=$2 AND name=$3',
+					array($activate[$b], $id, $b));
+		}
+	}
+	$msg = _('Block Saved');
+	session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks&feedback='.urlencode($msg));
+} elseif ($type == 'configure') {
+	blocks_Project_Header(array('title'=>'Edit Block','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+	// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
+
+	$blocks = getAvailableBlocks($group);
+	$res = db_query_params('SELECT content FROM plugin_blocks WHERE group_id=$1 AND name=$2',
+			array($id, $name));
+	$body = db_result($res,0,"content");
+
+	print _("Edit the block as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)");
+
+	print "<center>";
+	print "<p><b>$blocks[$name]</b> ($name)</p>";
+	print "<form action=\"/plugins/blocks/\" method=\"post\">";
+	print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
+	print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
+	print "<input type=\"hidden\" name=\"type\" value=\"configure_post\" />\n";
+	print "<input type=\"hidden\" name=\"name\" value=\"$name\" />\n";
+
+	// Get default body from the templates defined in the config file.
+	if (!$body) {
+		$body = forge_get_config($name, 'blocks');
+		if (!$body) {
+			$body = forge_get_config('default', 'blocks');
+			if (!$body) {
+				$body = '{boxHeader}'._('Enter your text here').'{boxFooter}';
 			}
 		}
+	}
 
-		foreach ($blocks as $b => $help) {
+	$params['body'] = $body;
+	$params['width'] = "800";
+	$params['height'] = "500";
+	$params['group'] = $id;
+	$params['content'] = '<textarea name="body"  rows="20" cols="80">'.$body.'</textarea>';
+	plugin_hook_by_reference("text_editor", $params);
+	echo $params['content'];
 
-			if (!$activate[$b])
-				$activate[$b] = 0;
-
-			if ((!isset($status[$b]) && $activate[$b]) ||
-			    (isset($status[$b]) && $activate[$b] !== $status[$b]))
-				// Must be updated.
-				if (!isset($present[$b])) {
-					db_query_params('INSERT INTO plugin_blocks (group_id, name, status)
-							VALUES ($1, $2, $3)',
-							array($id, $b, $activate[$b]));
-				} else {
-					db_query_params('UPDATE plugin_blocks SET status=$1
-							WHERE group_id=$2 AND name=$3',
-							array($activate[$b], $id, $b));
-				}
-		}
-        $msg = _('Block Saved');
-		session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks&feedback='.urlencode($msg));
-	} elseif ($type == 'configure') {
-		$group = group_get_object($id);
-		if ( !$group) {
-			exit_no_group();
-		}
-		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginnname),'home');
-		}
-		session_require_perm ('project_admin', $id) ;
-
-		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-		// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
-
-		$blocks = getAvailableBlocks($group);
-		$res = db_query_params('SELECT content FROM plugin_blocks WHERE group_id=$1 AND name=$2',
-				       array($id, $name));
-		$body = db_result($res,0,"content");
-
-		print _("Edit the block as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)");
-
-		print "<center>";
-		print "<b>$blocks[$name]</b> ($name)";
-		print "<form action=\"/plugins/blocks/\" method=\"post\">";
-		print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
-		print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
-		print "<input type=\"hidden\" name=\"type\" value=\"configure_post\" />\n";
-		print "<input type=\"hidden\" name=\"name\" value=\"$name\" />\n";
-
-		// Get default page from the templates defined in the config file.
-		if (!$body && function_exists ('json_decode')) {
-			$templates=json_decode(file_get_contents(forge_get_config('templates_file','blocks'))) ;
-			if (isset($templates[$name])) {
-				$body = $templates[$name];
-			} else {
-				$body = $templates['*'];
-			}
-		}
-
-		$params['body'] = $body;
-		$params['width'] = "800";
-		$params['height'] = "500";
-		$params['group'] = $id;
-		$params['content'] = '<textarea name="body"  rows="20" cols="80">'.$body.'</textarea>';
-		plugin_hook_by_reference("text_editor", $params);
-		echo $params['content'];
-
-		print "<br /><input type=\"submit\" value=\"" .
+	print "<br /><input type=\"submit\" value=\"" .
 			_("Save") .
 			"\" />";
-		print "</form>";
-		print "</center>";
+	print "</form>";
+	print "</center>";
 
-		print "<fieldset><legend>".
+	print "<fieldset><legend>".
 			_("Tips").
 			"</legend>" .
-			_("<p>You can create boxes like the ones on the right site of summary page, by inserting the following sentences in the content:</p><ul><li>{boxTop Hello}: will create the top part of the box using Hello as title.</li><li>{boxMiddle Here}: will create a middle part of a box using Here as title (optional).</li><li>{boxBottom}: will create the end part of a box.</li></ul><p /><ul><li>{boxHeader}: will create a header before a text.</li><li>{boxFooter}: will create a footer after a text.</li></ul><p>You can create as many boxes as you want, but a boxTop has to be closed by a boxBottom and a boxHeader has to be closed by a boxFooter.</p>").
+			"<p>" .
+			_("You can create boxes like the ones on the right site of summary page, by inserting the following sentences in the content:").
+			"</p><ul><li>".
+			"{boxTop Hello}".
+			_(": will create the top part of the box using Hello as title.").
+			"</li><li>".
+			"{boxMiddle Here}".
+			_(": will create a middle part of a box using Here as title (optional).").
+			"</li><li>".
+			"{boxBottom}".
+			_(": will create the end part of a box.").
+			"</li></ul><p /><ul><li>".
+			"{boxHeader}".
+			_(": will create a header before a text.").
+			"</li><li>{boxFooter}".
+			_(": will create a footer after a text.").
+			"</li></ul><p>".
+			_("You can create as many boxes as you want, but a boxTop has to be closed by a boxBottom and a boxHeader has to be closed by a boxFooter.").
+			"</p>".
 			"</fieldset>";
-	} elseif ($type == 'configure_post') {
-		$group = group_get_object($id);
-		if ( !$group) {
-			exit_no_group();
-		}
-		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
-		}
-		session_require_perm ('project_admin', $id) ;
-
-		$res = db_query_params('SELECT id FROM plugin_blocks WHERE group_id=$1 AND name=$2',
-				       array($id,$name));
-		if (db_numrows($res)== 0) {
-			db_query_params('INSERT INTO plugin_blocks (group_id, name, content)
-					VALUES ($1, $2, $3)',
-					array($id, $name, $body));
-		} else {
-			db_query_params('UPDATE plugin_blocks SET content=$1
-					WHERE group_id=$2 AND name=$3',
-					array($body, $id, $name));
-		}
-        $msg = $name .' : '. _('Block configuration saved');
-		session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks&feedback='.urlencode($msg));
+} elseif ($type == 'configure_post') {
+	$res = db_query_params('SELECT id FROM plugin_blocks WHERE group_id=$1 AND name=$2',
+			array($id,$name));
+	if (db_numrows($res)== 0) {
+		db_query_params('INSERT INTO plugin_blocks (group_id, name, content)
+				VALUES ($1, $2, $3)',
+				array($id, $name, $body));
+	} else {
+		db_query_params('UPDATE plugin_blocks SET content=$1
+				WHERE group_id=$2 AND name=$3',
+				array($body, $id, $name));
 	}
+	$msg = $name .' : '. _('Block configuration saved');
+	session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks&feedback='.urlencode($msg));
 }
 
 site_project_footer(array());

@@ -22,7 +22,7 @@ Plugins:
 * scmhook: Support added for pre-revprop-changehooks to change properties (Alcatel-Lucent)
 * scmhook: Add commitEmail support for scmhg plugin (TrivialDev)
 * new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects 
-
+* blocks: improved with a new HTML widget for the project summary page (Alcatel-Lucent)
 
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)

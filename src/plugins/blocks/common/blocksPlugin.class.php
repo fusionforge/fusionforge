@@ -44,8 +44,6 @@
  * ALONE BASIS."
  */
 
-forge_define_config_item('templates_file','blocks','$core/source_path/plugins/blocks/etc/templates.json');
-
 class blocksPlugin extends Plugin {
 
 	function __construct() {
@@ -56,26 +54,23 @@ class blocksPlugin extends Plugin {
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
 		$this->hooks[] = "blocks"; // to show up in the admin page fro group
+		$this->hooks[] = 'widget_instance';
+		$this->hooks[] = 'widgets';
 	}
 
-	function CallHook ($hookname, &$params) {
-		if ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it's  blocks administration
-			$group_id = $params['group_id'];
-			$group = group_get_object($group_id);
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<p><a href="/plugins/blocks/index.php?id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _("Blocks Admin") . '</a></p>';
-			}
-		} elseif ($hookname == "blocks") {
-			return $this->blocks($params);
+	function project_admin_plugins($params) {
+		// this displays the link in the project admin options page to it's blocks administration
+		$group = group_get_object($params['group_id']);
+		if ($group && $group->usesPlugin ( $this->name )) {
+			echo '<p><a href="/plugins/blocks/index.php?id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _("Blocks Admin") . '</a></p>';
 		}
 	}
+
 	function blocks($params) {
 		// Check if block is active and if yes, display the block.
 		// Return true if plugin is active, false otherwise.
 		$group = group_get_object($GLOBALS['group_id']);
-		if ( $group && $group->usesPlugin ( $this->name ) ) {
-
+		if ($group && $group->usesPlugin ( $this->name )) {
 			$content = $this->renderBlock($params);
 			if ($content !== false) {
 				echo $content;
@@ -85,7 +80,22 @@ class blocksPlugin extends Plugin {
 		return false;
 	}
 
-	function renderBlock($name) {
+	function getTitleBlock($name) {
+		$group_id = $GLOBALS['group_id'];
+		$res = db_query_params('SELECT title
+				FROM plugin_blocks
+				WHERE group_id=$1
+				AND name=$2
+				AND status=1',
+				array($group_id, $name)); // 1 is for active
+		if (db_numrows($res)== 0) {
+			return false;
+		} else {
+			return db_result($res,0,"title");
+		}
+	}
+
+	function getContentBlock($name) {
 		$group_id = $GLOBALS['group_id'];
 		$res = db_query_params('SELECT content
 				FROM plugin_blocks
@@ -96,13 +106,18 @@ class blocksPlugin extends Plugin {
 		if (db_numrows($res)== 0) {
 			return false;
 		} else {
-			$content = db_result($res,0,"content");
-			if ($content) {
-				return $this->parseContent($content).'<br />';
-			} else {
-				return "<table width=\"100%\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">" .
-						"<tr><td align=\"center\">block: $name</td></tr></table><br />";
-			}
+			return db_result($res,0,"content");
+		}
+	}
+	function renderBlock($name) {
+		$content = $this->getContentBlock($name);
+		if ($content === false) {
+			return false;
+		} elseif ($content) {
+			return $this->parseContent($content).'<br />';
+		} else {
+			return "<table width=\"100%\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">" .
+					"<tr><td align=\"center\">block: $name</td></tr></table><br />";
 		}
 	}
 
@@ -122,6 +137,64 @@ class blocksPlugin extends Plugin {
 		$text = preg_replace('/{boxFooter}/i', '<hr />', $text);
 
 		return $text;
+	}
+
+	function widget_instance($params) {
+		require_once 'common/widget/WidgetLayoutManager.class.php';
+
+		$user = UserManager::instance()->getCurrentUser();
+
+		// MY
+//		if ($params['widget'] == 'plugin_hudson_my_jobs') {
+//			require_once('hudson_Widget_MyMonitoredJobs.class.php');
+//			$params['instance'] = new hudson_Widget_MyMonitoredJobs($this);
+//		}
+//		if ($params['widget'] == 'plugin_hudson_my_joblastbuilds') {
+//			require_once('hudson_Widget_JobLastBuilds.class.php');
+//			$params['instance'] = new hudson_Widget_JobLastBuilds(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+//		}
+//		if ($params['widget'] == 'plugin_hudson_my_jobtestresults') {
+//			require_once('hudson_Widget_JobTestResults.class.php');
+//			$params['instance'] = new hudson_Widget_JobTestResults(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+//		}
+//		if ($params['widget'] == 'plugin_hudson_my_jobtesttrend') {
+//			require_once('hudson_Widget_JobTestTrend.class.php');
+//			$params['instance'] = new hudson_Widget_JobTestTrend(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+//		}
+//		if ($params['widget'] == 'plugin_hudson_my_jobbuildhistory') {
+//			require_once('hudson_Widget_JobBuildHistory.class.php');
+//			$params['instance'] = new hudson_Widget_JobBuildHistory(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+//		}
+//		if ($params['widget'] == 'plugin_hudson_my_joblastartifacts') {
+//			require_once('hudson_Widget_JobLastArtifacts.class.php');
+//			$params['instance'] = new hudson_Widget_JobLastArtifacts(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+//		}
+
+		// PROJECT
+		if ($params['widget'] == 'plugin_blocks_project_summary') {
+			require_once 'blocks_Widget_ProjectSummary.class.php';
+			$params['instance'] = new blocks_Widget_ProjectSummary(WidgetLayoutManager::OWNER_TYPE_GROUP, $GLOBALS['group_id']);
+		}
+	}
+	function widgets($params) {
+		$group = group_get_object($GLOBALS['group_id']);
+		if ( !$group || !$group->usesPlugin ( $this->name ) ) {
+			return false;
+		}
+
+		require_once 'common/widget/WidgetLayoutManager.class.php';
+//		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
+//			$params['codendi_widgets'][] = 'plugin_hudson_my_jobs';
+//			$params['codendi_widgets'][] = 'plugin_hudson_my_joblastbuilds';
+//			$params['codendi_widgets'][] = 'plugin_hudson_my_jobtestresults';
+//			$params['codendi_widgets'][] = 'plugin_hudson_my_jobtesttrend';
+//			$params['codendi_widgets'][] = 'plugin_hudson_my_jobbuildhistory';
+//			$params['codendi_widgets'][] = 'plugin_hudson_my_joblastartifacts';
+//		}
+		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
+			$params['codendi_widgets'][] = 'plugin_blocks_project_summary';
+		}
+		return true;
 	}
 }
 

@@ -1131,7 +1131,6 @@ fi
 %{FORGE_DIR}/www/plugins/svntracker
 
 %files plugin-blocks
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/blocks/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/blocks.ini
 %{FORGE_DIR}/plugins/blocks
 %{FORGE_DIR}/www/plugins/blocks
