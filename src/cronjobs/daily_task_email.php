@@ -92,17 +92,15 @@ for ($i=0; $i<db_numrows($res);$i++) {
 						$debug_info .= 'Group ID: ' . $group->getID() . "\n";
 
 						if ($group->getID() != $last_group) {
-							echo $group->getPublicName().":\n";
+							echo "Project: ". $group->getPublicName()."\n";
 						}
 						if ($projectGroup->getID() != $last_projectgroup) {
-							echo $projectGroup->getName().":\n";
+							echo "Subproject Name: ". $projectGroup->getName()."\n";
 						}
-						echo html_entity_decode($task->getSummary()).":\n";
-						echo '***'.
-						(($now>$task->getEndDate())? 'overdue' : "due $end_date").
-						"***\n";
-						echo util_make_url ('/pm/task.php?func=detailtask&project_task_id='.
-								    $task->getID().'&group_id='.$group->getID().'&group_project_id='.$projectGroup->getID());
+						echo "Summary: ". html_entity_decode($task->getSummary())."\n";
+						echo 'Status: ***'. (($now>$task->getEndDate())? 'overdue' : "due $end_date"). "***\n";
+						echo util_make_url('/pm/task.php?func=detailtask&project_task_id='.
+							$task->getID().'&group_id='.$group->getID().'&group_project_id='.$projectGroup->getID());
 						echo "\n\n";
 
 						$last_group = $group->getID();
