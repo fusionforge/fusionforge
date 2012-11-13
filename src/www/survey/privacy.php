@@ -27,6 +27,11 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'survey/SurveyFactory.class.php';
 require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
+$group_id = getIntFromRequest('group_id');
+if (!$group_id) {
+	exit_no_group();
+}
+
 /* Show header */
 $title = _('Survey Privacy');
 $sh = new SurveyHtml();

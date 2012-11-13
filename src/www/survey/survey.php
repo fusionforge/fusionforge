@@ -45,14 +45,14 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
-$sh = new  SurveyHtml();
+$sh = new SurveyHtml();
 $s = new Survey($g, $survey_id);
 
-$title = sprintf(_('Vote for Survey: %1$s'), $s->getTitle());
+$title = _('Vote for Survey') . _(': ') . $s->getTitle();
 $sh->header(array('title'=>$title));
 
 if (!$survey_id) {
-    echo '<div class="error">'._('For some reason, the Project ID or Survey ID did not make it to this page').'</div>';
+    echo '<p class="error">'._('For some reason, the Project ID or Survey ID did not make it to this page').'</p>';
 } else {
 	plugin_hook ("blocks", "survey_".$s->getTitle());
     echo($sh->showSurveyForm($s));

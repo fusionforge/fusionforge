@@ -280,7 +280,7 @@ if (db_numrows($result) > 0) {
 
 	<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 	<br />
-	<?php util_make_link ('/survey/privacy.php',_('Survey Privacy')) ?>
+	<?php util_make_link ('/survey/privacy.php?group_id='.$group_id,_('Survey Privacy')) ?>
 	</td></tr>
 	</form>
 	</table>

@@ -552,7 +552,7 @@ class SurveyHTML extends Error {
 
 		$ret.='<tr><td class="align-center" colspan="2">'.
 			'<input type="submit" name="submit" value="'._('Submit').'" />'.
-			'<br />'.util_make_link ('/survey/privacy.php',_('Survey Privacy')).
+			'<br />'.util_make_link ('/survey/privacy.php?group_id='.$group_id,_('Survey Privacy')).
 			'</td></tr></form></table>';
 
 		return $ret;
