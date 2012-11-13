@@ -179,7 +179,7 @@ if ($set_roadmap_failed ||
 
 	$roadmap = new Roadmap($group, $roadmap_id);
 	$roadmap_list = getArrayFromRequest('roadmap_list', $roadmap->getList());
-	
+
 	if (getStringFromRequest('new_roadmap')) {
 		$atfh->header(array('title' => _('Create a new roadmap'), 'modal' => 1));
 	}

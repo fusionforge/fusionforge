@@ -33,7 +33,7 @@ $browse_instructions = getStringFromRequest('browse_instructions', $ath->getBrow
 //
 //	FORM TO UPDATE ARTIFACT TYPES
 //
-$ath->adminHeader(array ('title'=>sprintf(_('Update settings for %s'),$ath->getName())));
+$ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),$ath->getName())));
 		?>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<p>

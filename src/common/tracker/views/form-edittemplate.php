@@ -15,7 +15,7 @@ echo _('Notes:');
 ?>
 <h2>Important</h2>
 <ul>
-	<li>Keep the two columns table layout.</li>
+    <li>Keep the one table format with two columns table layout, do not add strings before or after the table.</li>
 	<li>All template variables (named like {$...}) should be left untouched.</li>
 	<li>Once a template model in use, if you add/remove custom fields, you'll have to update the template yourself.</li>
 </ul>
