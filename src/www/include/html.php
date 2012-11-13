@@ -89,7 +89,7 @@ function html_error_top($msg) {
  *
  * @param	string	The username of the user to link.
  */
-function make_user_link($username,$displayname='') {
+function make_user_link($username, $displayname = '') {
 	if (empty($displayname))
 		$displayname = $username;
 
