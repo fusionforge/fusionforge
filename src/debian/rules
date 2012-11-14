@@ -197,7 +197,7 @@ clean: remove-binary-files
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 
-install:
+install: .PHONY
 	$(DH) $@
 
 	sed \
@@ -255,7 +255,7 @@ install:
 # Also remove uuencoded files
 	find $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) -name \*.uu | xargs -r rm
 
-binary: install
+binary binary-arch binary-indep: install
 
 %:
 	$(DH) $@
