@@ -197,7 +197,7 @@ clean: remove-binary-files
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 
-install: build
+install:
 	$(DH) $@
 
 	sed \
