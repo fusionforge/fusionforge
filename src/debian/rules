@@ -197,7 +197,8 @@ clean: remove-binary-files
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 
-install: .PHONY
+.PHONY: install
+install:
 	$(DH) $@
 
 	sed \
