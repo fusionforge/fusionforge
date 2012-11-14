@@ -4,15 +4,7 @@
 relativepath=`dirname $0`
 absolutetestspath=`cd $relativepath/..; pwd`
 cd $absolutetestspath
-
-echo "Read config from tests/config/default"
-. config/default
-if [ -f config/`hostname` ]
-then
-	echo "Read config from config/`hostname`"
-	. config/`hostname`
-fi
-BUILDERDIR=${BUILDERDIR:-$HOME/builder/}
+BUILDERDIR=$(./scripts/builder_get_config.sh BUILDERDIR)
 
 # Prepare and/or update cowbuilder caches
 DISTROLIST=${DISTROLIST:-"squeeze wheezy"}

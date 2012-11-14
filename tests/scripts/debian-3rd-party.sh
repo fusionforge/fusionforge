@@ -4,24 +4,12 @@
 relativepath=`dirname $0`
 absolutesourcepath=`cd $relativepath/../..; pwd`
 cd $absolutesourcepath
+BUILDERDIR=$(./tests/scripts/builder_get_config.sh BUILDERDIR)
 
-echo "Read config from tests/config/default"
-. tests/config/default
-if [ -f tests/config/`hostname` ]
-then
-        echo "Read config from tests/config/`hostname`"
-        . tests/config/`hostname`
-fi
-BUILDERDIR=${BUILDERDIR:-$HOME/builder/}
 DIST=wheezy
-COWBUILDERCONFIG=$BUILDERDIR/config/$DIST.config
 
-# Setup Repo
-WORKDIR=$(cd $absolutesourcepath/..; pwd)
-# Jenkins will set WORKSPACE
-WORKSPACE=${WORKSPACE:-$WORKDIR}
+REPOPATH=$(./tests/scripts/builder_get_config.sh REPOPATH)
 
-REPOPATH=$WORKSPACE/build/debian
 [ ! -d $REPOPATH ] || rm -r $REPOPATH
 mkdir -p $REPOPATH/conf
 DEFAULTKEY=buildbot@$(hostname -f)
@@ -38,6 +26,9 @@ SignWith: $SIGNKEY
 EOF
 
 # Build mediawiki
-make -C 3rd-party/mediawiki COWBUILDERCONFIG=$COWBUILDERCONFIG REPOPATH=$REPOPATH
+make -C 3rd-party/mediawiki
+# Build selenium
+make -C 3rd-party/selenium
+# Write key
 gpg --export --armor > ${REPOPATH}/key
 

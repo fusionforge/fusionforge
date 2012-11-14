@@ -42,15 +42,22 @@ else
 fi
 ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
 
-
-[ ! -f debian/changelog.sos ] || mv debian/changelog.sos debian/changelog
-cp debian/changelog debian/changelog.sos
+# Build out of the source tree
+. $COWBUILDERCONFIG
+CHANGEFILE=${BUILDRESULT}/${PKGNAME}_${SMAJOR}${MINOR}_${ARCH}.changes
+cd $CHECKOUTPATH
+cp -r src/ $BUILDPLACE/$PKGNAME-$MAJOR/
+cd $BUILDPLACE/$PKGNAME-$MAJOR
 dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
 sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
 pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
-[ ! -f debian/changelog.sos ] || mv debian/changelog.sos debian/changelog
 
-CHANGEFILE=${PKGNAME}_$SMAJOR${MINOR}_$ARCH.changes
+#[ ! -f debian/changelog.sos ] || mv debian/changelog.sos debian/changelog
+#cp debian/changelog debian/changelog.sos
+#dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
+#sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
+#pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
+#[ ! -f debian/changelog.sos ] || mv debian/changelog.sos debian/changelog
 
 cd $BUILDRESULT
 REPOPATH=$WORKSPACE/build/debian
@@ -107,10 +114,11 @@ ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 echo "Stop cron daemon"
 ssh root@$HOST "invoke-rc.d cron stop" || true
 
+# Install selenium
+ssh root@$HOST "apt-get -y install selenium"
+
 # Install selenium tests
-ssh root@$HOST mkdir $FORGE_HOME/tests
-make -C 3rd-party/selenium selenium-server.jar
-cp 3rd-party/selenium/selenium-server.jar tests/
+ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
 rsync -a --delete tests/ root@$HOST:$FORGE_HOME/tests/
 
 # Transfer hudson config

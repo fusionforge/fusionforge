@@ -1,26 +1,25 @@
 # quick Mediawiki backport
+# use tests/scripts/manage-cowbuilder.sh before building
 MAJOR=1.19.2
 MINOR=2
 
 VERS=$(MAJOR)-$(MINOR)
 
+BUILDERDIR:=$(shell ../../tests/scripts/builder_get_config.sh BUILDERDIR)
+DIST=wheezy
+COWBUILDERCONFIG=$(BUILDERDIR)/config/$(DIST).config
 include $(COWBUILDERCONFIG)
+REPOPATH:=$(shell ../../tests/scripts/builder_get_config.sh REPOPATH)
 
-DSCFILE=http://ftp.de.debian.org/debian/pool/main/m/mediawiki/mediawiki_$(VERS).dsc
+DSCFILE=mediawiki_$(VERS).dsc
+DSCURL=http://ftp.de.debian.org/debian/pool/main/m/mediawiki/$(DSCFILE)
 DIST=wheezy
 ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
-CHANGEFILEM=mediawiki_$(VERS)_$(ARCH).changes
+CHANGEFILE=mediawiki_$(VERS)_$(ARCH).changes
 
-$(BUILDRESULT)/$(CHANGEFILEM): $(BUILDPLACE)/mediawiki_$(VERS).dsc
-	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --buildresult $(BUILDRESULT) --buildplace $(BUILDPLACE) --build $(BUILDPLACE)/mediawiki_$(VERS).dsc
-	reprepro -Vb ${REPOPATH} --ignore=wrongdistribution --ignore=missingfile include $(DIST) $@
+$(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
+	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --build $(BUILDPLACE)/$(DSCFILE)
+	[ ! -d $(REPOPATH) ] || reprepro -Vb $(REPOPATH) --ignore=wrongdistribution --ignore=missingfile include $(DIST) $@
 
-pdebuild: $(BUILDPLACE)/mediawiki-$(MAJOR)
-	cd $(BUILDPLACE)/mediawiki-$(MAJOR) ; pdebuild --configfile $(COWBUILDERCONFIG) --buildresult $(BUILDRESULT)
-
-mediawiki-$(MAJOR): $(BUILDPLACE)/mediawiki_$(VERS).dsc
-	cd $(BUILDPLACE) ; dpkg-source -x mediawiki_$(VERS).dsc
-	cd $(BUILDPLACE) ; sed -i -e "1s/unstable/$(DIST)/" $@/debian/changelog
-
-$(BUILDPLACE)/mediawiki_$(VERS).dsc: $(BUILDPLACE)
-	cd $(BUILDPLACE) ; dget -d $(DSCFILE)
+$(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)
+	cd $(BUILDPLACE) ; dget -d $(DSCURL)

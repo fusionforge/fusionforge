@@ -18,8 +18,9 @@ setup_debian_3rdparty_repo
 ssh root@$HOST "apt-get update"
 
 echo "Sync code on root@$HOST:$FORGE_HOME"
-#ssh root@$HOST mkdir -p $FORGE_HOME
-rsync -a --delete . root@$HOST:$FORGE_HOME
+ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
+rsync -a --delete src/ root@$HOST:$FORGE_HOME/src/
+rsync -a --delete tests/ root@$HOST:$FORGE_HOME/tests/
 
 echo "Run Install on $HOST"
 ssh root@$HOST "$FORGE_HOME/src/install-ng --auto --reinit"
@@ -37,9 +38,8 @@ ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> /etc/gforge/config
 echo "Stop cron daemon"
 ssh root@$HOST "service crond stop" || true
 
-# Copy selenium
-make -C 3rd-party/selenium selenium-server.jar
-rsync -a 3rd-party/selenium/selenium-server.jar root@$HOST:$FORGE_HOME/tests/selenium-server.jar
+# Install selenium
+ssh root@$HOST "apt-get -y install selenium"
 
 # Transfer hudson config
 ssh root@$HOST "cat > $FORGE_HOME/tests/config/phpunit" <<-EOF

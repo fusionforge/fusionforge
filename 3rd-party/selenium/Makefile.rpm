@@ -12,6 +12,10 @@ ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
 DSCFILE=selenium_$(VERS).dsc
 CHANGEFILE=selenium_$(VERS)_$(ARCH).changes
 
+RPMBUILD=rpmbuild --quiet --define='_topdir $(BUILDRESULT)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' 
+# --define='_rpmdir $(BUILDRESULT)'
+# --define='_sourcedir $(BUILDRESULT)' 
+
 $(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
 	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --build $(BUILDPLACE)/$(DSCFILE)
 	[ ! -d $(REPOPATH) ] || reprepro -Vb $(REPOPATH) --ignore=wrongdistribution --ignore=missingfile include $(DIST) $@
@@ -24,3 +28,14 @@ $(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian
 
 $(BUILDPLACE)/selenium/debian:
 	[ -d $@ ] || cp -r selenium $(BUILDPLACE)
+
+# Get the source code (TODO)
+svnexport:
+	svn export http://selenium.googlecode.com/svn/trunk/remote/server selenium-server
+	#svn export http://selenium.googlecode.com/svn/trunk selenium
+
+rpm: $(BUILDPLACE)/selenium/selenium-server.jar
+	[ -d $(BUILDRESULT)/SPEC ] || mkdir $(BUILDRESULT)/SPEC
+	cp selenium.spec $(BUILDRESULT)/SPEC
+	cp $(BUILDPLACE)/selenium/selenium-server.jar $(BUILDRESULT)/SPEC
+	cd $(BUILDRESULT)/SPEC ; $(RPMBUILD) --quiet --clean -ba selenium.spec

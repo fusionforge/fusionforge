@@ -10,3 +10,6 @@ VMENGINE=lxc
 REMOTESELENIUM=true
 KEEPVM=true
 BUILDERDIR=/data/pbuilder
+
+# Debian 3rd-party
+DEB3RD=http://172.16.0.1:8080/job/3rd-party/ws/build/debian/
