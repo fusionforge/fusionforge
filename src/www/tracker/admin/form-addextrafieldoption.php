@@ -46,6 +46,9 @@
 			$title_arr[]=_('Current / New positions');
 			$title_arr[]=_('Up/Down positions');
 			$title_arr[]=_('Elements Defined');
+			if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+				$title_arr[] = _('Mapping');
+			}
 			$title_arr[]='';
 			
 			echo $GLOBALS['HTML']->listTableTop ($title_arr,false, ' ');
@@ -61,7 +64,13 @@
 					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid.'&amp;id='.$efearr[$i]['element_id'].
 					'&amp;updownorder_opt=1&amp;new_pos='.(($i == $rows - 1)? $i + 1 : $i + 2).'">'.html_image('ic/btn_down.png','19','18',array('alt'=>"Down")).'</a>'.
 					'</td>'."\n".'<td>'.'&nbsp;&nbsp;&nbsp;'.$efearr[$i]['element_name'].
-					'</td>'."\n".'<td align="center">'.
+					"</td>\n";
+				if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+					echo '<td>' .
+					    $ath->getStatusName($efearr[$i]['status_id']) .
+					    "</td>\n";
+				}
+				echo '<td align="center">'.
 					'<a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
 					$efearr[$i]['element_id'].'&amp;boxid='.			
 					$boxid.'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
