@@ -1,41 +1,32 @@
-# use tests/scripts/manage-cowbuilder.sh before building#
+#
 
 include selenium.include
 
 BUILDERDIR:=$(shell ../../tests/scripts/builder_get_config.sh BUILDERDIR)
-DIST=wheezy
-COWBUILDERCONFIG=$(BUILDERDIR)/config/$(DIST).config
-include $(COWBUILDERCONFIG)
 REPOPATH:=$(shell ../../tests/scripts/builder_get_config.sh REPOPATH)
 
-ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
-DSCFILE=selenium_$(VERS).dsc
-CHANGEFILE=selenium_$(VERS)_$(ARCH).changes
+#ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
 
-RPMBUILD=rpmbuild --quiet --define='_topdir $(BUILDRESULT)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' 
-# --define='_rpmdir $(BUILDRESULT)'
-# --define='_sourcedir $(BUILDRESULT)' 
+#RPMBUILD=rpmbuild --quiet --define='_topdir $(BUILDRESULT)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' 
+#--define='_rpmdir $(BUILDRESULT)' --define='_sourcedir $(BUILDRESULT)' 
 
-$(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
-	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --build $(BUILDPLACE)/$(DSCFILE)
-	[ ! -d $(REPOPATH) ] || reprepro -Vb $(REPOPATH) --ignore=wrongdistribution --ignore=missingfile include $(DIST) $@
+RPM=selenium-$(MAJOR)-2.noarch.rpm
+TGZ=selenium-$(MAJOR).tgz
 
-$(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)/selenium/selenium-server.jar
-	cd $(BUILDPLACE) ; dpkg-source -b selenium
+BUILDRESULT=$(REPOPATH)/redhat
+BUILDPLACE=$(BUILDERDIR)/buildrpm
 
-$(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian
-	[ -d $@ ] || wget -O - $(SELENIUMURL) > $@
+$(BUILDRESULT)/$(RPM): $(BUILDPLACE)/$(TGZ) $(BUILDRESULT)
+	cd $(BUILDRESULT) ; alien --to-rpm $(BUILDPLACE)/$(TGZ)
 
-$(BUILDPLACE)/selenium/debian:
-	[ -d $@ ] || cp -r selenium $(BUILDPLACE)
+$(BUILDPLACE)/$(TGZ): $(BUILDPLACE)/selenium/usr/share/selenium/selenium-server.jar
+	cd $(BUILDPLACE)/selenium/ ; tar cvzf $@ usr
 
-# Get the source code (TODO)
-svnexport:
-	svn export http://selenium.googlecode.com/svn/trunk/remote/server selenium-server
-	#svn export http://selenium.googlecode.com/svn/trunk selenium
+$(BUILDPLACE)/selenium/usr/share/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/usr/share/selenium/
+	[ -f $@ ] || wget -O - $(SELENIUMURL) > $@
 
-rpm: $(BUILDPLACE)/selenium/selenium-server.jar
-	[ -d $(BUILDRESULT)/SPEC ] || mkdir $(BUILDRESULT)/SPEC
-	cp selenium.spec $(BUILDRESULT)/SPEC
-	cp $(BUILDPLACE)/selenium/selenium-server.jar $(BUILDRESULT)/SPEC
-	cd $(BUILDRESULT)/SPEC ; $(RPMBUILD) --quiet --clean -ba selenium.spec
+$(BUILDPLACE)/selenium/usr/share/selenium/:
+	[ -d $@ ] || mkdir -p $@
+	
+$(BUILDRESULT):
+	[ -d $@ ] || mkdir -p $@
