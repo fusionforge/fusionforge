@@ -21,7 +21,7 @@ case $1 in
 		WORKDIR=`cd $absolutetestspath/../..; pwd`
 		# Jenkins will set WORKSPACE
 		WORKSPACE=${WORKSPACE:-$WORKDIR}
-		REPOPATH=$WORKSPACE/build/debian
+		REPOPATH=$WORKSPACE/build
 		echo $REPOPATH
 		;;
 esac

@@ -5,16 +5,15 @@ relativepath=`dirname $0`
 absolutesourcepath=`cd $relativepath/../..; pwd`
 cd $absolutesourcepath
 BUILDERDIR=$(./tests/scripts/builder_get_config.sh BUILDERDIR)
+REPOPATH=$(./tests/scripts/builder_get_config.sh REPOPATH)
 
 DIST=wheezy
 
-REPOPATH=$(./tests/scripts/builder_get_config.sh REPOPATH)
-
-[ ! -d $REPOPATH ] || rm -r $REPOPATH
-mkdir -p $REPOPATH/conf
+[ ! -d $REPOPATH/debian ] || rm -r $REPOPATH/debian
+mkdir -p $REPOPATH/debian/conf
 DEFAULTKEY=buildbot@$(hostname -f)
 SIGNKEY=${DEBEMAIL:-$DEFAULTKEY}
-cat > $REPOPATH/conf/distributions <<EOF
+cat > $REPOPATH/debian/conf/distributions <<EOF
 Codename: $DIST
 Suite: $DIST
 Components: main
@@ -30,5 +29,5 @@ make -C 3rd-party/mediawiki
 # Build selenium
 make -C 3rd-party/selenium
 # Write key
-gpg --export --armor > ${REPOPATH}/key
+gpg --export --armor > ${REPOPATH}/debian/key
 
