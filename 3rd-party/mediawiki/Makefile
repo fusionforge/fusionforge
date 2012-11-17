@@ -17,7 +17,9 @@ DIST=wheezy
 ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
 CHANGEFILE=mediawiki_$(VERS)_$(ARCH).changes
 
-$(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE) dist
+default: $(BUILDRESULT)/$(CHANGEFILE) dist
+
+$(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
 	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --build $(BUILDPLACE)/$(DSCFILE)
 
 dist:
