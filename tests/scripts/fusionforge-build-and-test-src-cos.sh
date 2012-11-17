@@ -20,6 +20,9 @@ setup_redhat_3rdparty_repo
 
 setup_dag_repo $@
 
+echo "Create $FORGE_HOME if necessary"
+ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
+
 echo "Sync code on root@$HOST:$FORGE_HOME"
 rsync -a --delete src/ root@$HOST:$FORGE_HOME/src/
 
@@ -44,7 +47,6 @@ ssh root@$HOST "service crond stop" || true
 ssh root@$HOST "yum -y install selenium"
 
 # Install selenium tests
-ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
 rsync -a --delete tests/ root@$HOST:$FORGE_HOME/tests/
 
 # Transfer hudson config
