@@ -17,9 +17,11 @@ DIST=wheezy
 ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
 CHANGEFILE=mediawiki_$(VERS)_$(ARCH).changes
 
-$(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
+$(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE) dist
 	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --build $(BUILDPLACE)/$(DSCFILE)
-	[ ! -d $(REPOPATH)/debian ] || reprepro -Vb $(REPOPATH)/debian --ignore=wrongdistribution --ignore=missingfile include $(DIST) $@
+
+dist:
+	reprepro -Vb $(REPOPATH)/debian --ignore=wrongdistribution --ignore=missingfile include $(DIST) $(BUILDRESULT)/$(CHANGEFILE)
 
 $(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)
 	cd $(BUILDPLACE) ; dget -d $(DSCURL)
