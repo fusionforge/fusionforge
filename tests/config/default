@@ -32,7 +32,7 @@ DEBMIRRORSEC=http://security.debian.org/
 #EPEL_REPO=http://download.fedoraproject.org/pub/epel
 
 # Debian 3rd-party
-DEB3RD=http://buildbot3.fusionforge.org/job/3rd-party/ws/build/debian/
+DEB3RD=http://buildbot3.fusionforge.org/job/3rd-party-deb/ws/build/debian/
 
 # Redhat 3rd-party
 RPM3RD=http://buildbot3.fusionforge.org/job/3rd-party-rpm/ws/build/redhat/
