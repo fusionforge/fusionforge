@@ -19,7 +19,7 @@ CHANGEFILE=mediawiki_$(VERS)_$(ARCH).changes
 
 $(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
 	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --build $(BUILDPLACE)/$(DSCFILE)
-	[ ! -d $(REPOPATH) ] || reprepro -Vb $(REPOPATH) --ignore=wrongdistribution --ignore=missingfile include $(DIST) $@
+	[ ! -d $(REPOPATH)/debian ] || reprepro -Vb $(REPOPATH)/debian --ignore=wrongdistribution --ignore=missingfile include $(DIST) $@
 
 $(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)
 	cd $(BUILDPLACE) ; dget -d $(DSCURL)
