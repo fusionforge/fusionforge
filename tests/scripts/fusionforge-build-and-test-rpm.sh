@@ -16,9 +16,22 @@ setup_redhat_3rdparty_repo
 
 # BUILD FUSIONFORGE REPO
 echo "Build FUSIONFORGE REPO in $BUILDRESULT"
-make -f Makefile.rh BUILDRESULT=$BUILDRESULT RPM_TMP=$RPM_TMP all
+make -f Makefile.rh BUILDRESULT=$BUILDRESULT RPM_TMP=$RPM_TMP fusionforge dist
 
-setup_ff_repo $@
+# TRANSFER FUSIONFORGE REPO
+rsync -a --delete $BUILDRESULT/ root@$HOST:/root/fusionforge_repo/
+
+# SETUP FUSIONFORGE REPO
+echo "Installing FUSIONFORGE REPO"
+ssh root@$HOST "cat > /etc/yum.repos.d/FusionForge.repo" <<-EOF
+[FusionForge]
+name = Red Hat Enterprise \$releasever - fusionforge.org
+baseurl = file:///root/fusionforge_repo/noarch/
+enabled = 1
+protect = 0
+gpgcheck = 0
+EOF
+
 setup_dag_repo $@
 
 sleep 5
