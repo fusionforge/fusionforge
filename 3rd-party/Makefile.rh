@@ -28,6 +28,8 @@ WEBDAV_SERVER_SPEC=$(WEBDAV_SERVER_DIR)/php-pear-HTTP_WebDAV_Server.spec
 WEBDAV_SERVER_TBZ=HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION).tgz
 WEBDAV_SERVER_RPM=noarch/php-pear-HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION)-1.noarch.rpm
 
+SELENIUM_DIR=$(CURDIR)/selenium
+
 # rpmbuild --showrc | grep _topdir
 # gives
 # _builddir	%{_topdir}/BUILD
@@ -40,7 +42,8 @@ WEBDAV_SERVER_RPM=noarch/php-pear-HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION)-1.
 
 RPMBUILD=rpmbuild --quiet --define='_topdir $(RPM_TMP)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' --define='_rpmdir $(BUILDRESULT)'
 
-default: $(HTMLPURIFYER_DIR) $(JPGRAPH_DIR) $(WEBDAV_SERVER_DIR) dist getselenium
+#default: $(HTMLPURIFYER_DIR) $(JPGRAPH_DIR) $(WEBDAV_SERVER_DIR) $(SELENIUM_DIR) dist 
+default: $(SELENIUM_DIR) dist 
 
 all: clean default
 
@@ -50,9 +53,6 @@ clean:
 dist:
 	-mkdir -p $(BUILDRESULT)
 	createrepo $(BUILDRESULT)/noarch 2>&1 | grep -v DeprecationWarning
-
-getselenium:
-	cd selenium ; make getselenium
 
 #
 # Building RPM for external components
@@ -83,4 +83,9 @@ $(BUILDRESULT)/$(WEBDAV_SERVER_RPM): $(WEBDAV_SERVER_SPEC) $(WEBDAV_SERVER_DIR)/
 
 $(WEBDAV_SERVER_DIR)/$(WEBDAV_SERVER_TBZ):
 	@cd $(WEBDAV_SERVER_DIR); [ -f $@ ] || wget -q -N http://download.pear.php.net/package/$(WEBDAV_SERVER_TBZ)
+
+$(SELENIUM_DIR): $(BUILDRESULT)/seleniumbuild
+
+$(BUILDRESULT)/seleniumbuild:
+	make -C $(SELENIUM_DIR) -f Makefile.rpm
 

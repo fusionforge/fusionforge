@@ -1,8 +1,4 @@
 #!/bin/sh
-
-#set -e
-set -x
-
 . tests/scripts/common-functions
 . tests/scripts/common-vm
 

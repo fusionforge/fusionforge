@@ -34,6 +34,9 @@ DEBMIRRORSEC=http://security.debian.org/
 # Debian 3rd-party
 DEB3RD=http://buildbot3.fusionforge.org/job/3rd-party/ws/build/debian/
 
+# Redhat 3rd-party
+RPM3RD=http://buildbot3.fusionforge.org/job/3rd-party-rpm/ws/build/redhat/
+
 # The following is for static ip config samples
 # hostname=vmengine:template:address/mask:gateway
 # OpenVZ

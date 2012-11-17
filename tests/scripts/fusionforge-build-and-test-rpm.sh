@@ -2,11 +2,17 @@
 . tests/scripts/common-functions
 . tests/scripts/common-vm
 
+get_config
+
 export FORGE_HOME=/usr/share/gforge
-get_config $@
+export HOST=$1
+export FILTER="RPMCentosTests.php"
+
 prepare_workspace
-destroy_vm -t centos5 $@
-start_vm_if_not_keeped -t centos5 $@
+destroy_vm -t centos5 $HOST
+start_vm_if_not_keeped -t centos5 $HOST
+
+setup_redhat_3rdparty_repo
 
 # BUILD FUSIONFORGE REPO
 echo "Build FUSIONFORGE REPO in $BUILDRESULT"
