@@ -9,8 +9,8 @@ export HOST=$1
 export FILTER="TarCentosTests.php"
 
 prepare_workspace
-#destroy_vm -t centos5 $@
-start_vm_if_not_keeped -t centos5 $@
+destroy_vm -t centos5 $HOST
+start_vm_if_not_keeped -t centos5 $HOST
 
 setup_redhat_3rdparty_repo
 
