@@ -14,7 +14,7 @@ CHANGEFILE=selenium_$(VERS)_$(ARCH).changes
 
 $(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
 	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --build $(BUILDPLACE)/$(DSCFILE)
-	[ ! -d $(REPOPATH) ] || reprepro -Vb $(REPOPATH) --ignore=wrongdistribution --ignore=missingfile include $(DIST) $@
+	[ ! -d $(REPOPATH)/debian ] || reprepro -Vb $(REPOPATH)/debian --ignore=wrongdistribution --ignore=missingfile include $(DIST) $@
 
 $(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)/selenium/selenium-server.jar
 	cd $(BUILDPLACE) ; dpkg-source -b selenium
