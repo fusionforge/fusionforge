@@ -16,9 +16,9 @@ TGZ=selenium-$(MAJOR).tgz
 BUILDRESULT=$(REPOPATH)/redhat
 BUILDPLACE=$(BUILDERDIR)/buildrpm
 
-$(BUILDRESULT)/$(RPM): $(BUILDPLACE)/$(TGZ) $(BUILDRESULT)
-	cd $(BUILDRESULT) ; alien --to-rpm $(BUILDPLACE)/$(TGZ) ;
-	createrepo $(BUILDRESULT)
+$(BUILDRESULT)/noarch/$(RPM): $(BUILDPLACE)/$(TGZ) $(BUILDRESULT)
+	[ -d $(BUILDRESULT)/noarch ]  || mkdir $(BUILDRESULT)/noarch
+	cd $(BUILDRESULT)/noarch ; alien --to-rpm $(BUILDPLACE)/$(TGZ) ;
 
 $(BUILDPLACE)/$(TGZ): $(BUILDPLACE)/selenium/usr/share/selenium/selenium-server.jar
 	cd $(BUILDPLACE)/selenium/ ; tar cvzf $@ usr
