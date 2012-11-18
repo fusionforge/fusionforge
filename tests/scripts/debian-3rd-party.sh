@@ -1,4 +1,4 @@
-#! /bin/sh -e
+#! /bin/sh
 
 # Setup Env
 relativepath=`dirname $0`
