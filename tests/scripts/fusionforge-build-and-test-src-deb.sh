@@ -5,7 +5,7 @@
 export FORGE_HOME=/opt/gforge
 export DIST=wheezy
 #export FILTER="func/PluginsMediawiki/mediawikiTest.php"
-export FILTER="DEBDebian70Tests.php"
+export FILTER="DEBDebian70TestsSRC.php"
 #export FILTER="func/PluginsMoinMoin/moinmoinTest.php"
 
 get_config $@
