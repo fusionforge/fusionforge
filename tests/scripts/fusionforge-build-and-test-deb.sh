@@ -2,6 +2,8 @@
 . tests/scripts/common-functions
 . tests/scripts/common-vm
 
+set -e
+
 get_config
 
 export FORGE_HOME=/usr/share/gforge

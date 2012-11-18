@@ -22,6 +22,7 @@ prepare_workspace()
 	export WORKSPACE=${WORKSPACE:-$WORKDIR}
 	export RPM_TMP=$WORKDIR/tmp
 	export BUILDRESULT=$WORKSPACE/build/packages
+	mkdir -p $BUILDRESULT
 	export BUILDERDIR=${BUILDERDIR:-$HOME/builder}
 	# Delete existing packages
 	if [ -d $WORKSPACE/build/packages ] 
