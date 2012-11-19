@@ -137,7 +137,7 @@ class ArtifactExtraField extends Error {
 			}
 		} elseif ($field_type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 			if ($this->ArtifactType->getCustomStatusField()) {
-				$this->setError(_('This Tracker already uses custom statuses');
+				$this->setError(_('This Tracker already uses custom statuses'));
 				return false;
 			}
 		}
