@@ -197,6 +197,14 @@ EOF
 sed -i -e 's:/sbin/start_udev:#/sbin/start_udev:' $rootfs/etc/rc.d/rc.sysinit
 #CB# remove lines acting on /dev/pts
 sed -i -e 's:\(.*/dev/pts.*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
+#CB# remove lines acting on /dev/shm
+sed -i -e 's:\(.*/dev/shm*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
+#CB# remove proc and sys mounts
+sed -i -e 's:\(.*mount -f /proc.*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
+sed -i -e 's:\(.*mount -f /sys*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
+
+#CB# remove tty
+sed -i -e 's:ACTIVE_CONSOLES=.*:ACTIVE_CONSOLES=:' $rootfs/etc/sysconfig/init
 #CB#chroot $rootfs chkconfig udev-post off
 #chroot $rootfs chkconfig network on
 
@@ -223,12 +231,12 @@ test -e $rootfs/dev/full    || mknod -m 666 $rootfs/dev/full c 1 7
 test -e $rootfs/dev/initctl || mknod -m 600 $rootfs/dev/initctl p
 test -e $rootfs/dev/ptmx    || mknod -m 666 $rootfs/dev/ptmx c 5 2
 
-test -e $rootfs/dev/tty1 || mknod -m 666 $rootfs/dev/tty1 c 4 1
-test -e $rootfs/dev/tty2 || mknod -m 666 $rootfs/dev/tty2 c 4 2
-test -e $rootfs/dev/tty3 || mknod -m 666 $rootfs/dev/tty3 c 4 3
-test -e $rootfs/dev/tty4 || mknod -m 666 $rootfs/dev/tty4 c 4 4
-test -e $rootfs/dev/tty5 || mknod -m 666 $rootfs/dev/tty5 c 4 5
-test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
+#test -e $rootfs/dev/tty1 || mknod -m 666 $rootfs/dev/tty1 c 4 1
+#test -e $rootfs/dev/tty2 || mknod -m 666 $rootfs/dev/tty2 c 4 2
+#test -e $rootfs/dev/tty3 || mknod -m 666 $rootfs/dev/tty3 c 4 3
+#test -e $rootfs/dev/tty4 || mknod -m 666 $rootfs/dev/tty4 c 4 4
+#test -e $rootfs/dev/tty5 || mknod -m 666 $rootfs/dev/tty5 c 4 5
+#test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
 
     return 0
 }
@@ -453,24 +461,7 @@ lxc.network.hwaddr = $macaddr
 #CB#lxc.tty = 4
 lxc.pts = 1024
 lxc.rootfs = $rootfs
-# lxc.mount  = $path/fstab
-
-# lxc.console = /dev/console
-
 lxc.cgroup.devices.deny = a
-
-#lxc.cgroup.devices.allow = b 1:0 rwm
-#lxc.cgroup.devices.allow = b 1:1 rwm
-#lxc.cgroup.devices.allow = c 1:1 rwm
-#lxc.cgroup.devices.allow = c 1:2 rwm
-#lxc.cgroup.devices.allow = c 1:4 rwm
-#lxc.cgroup.devices.allow = c 1:6 rwm
-#lxc.cgroup.devices.allow = c 1:7 rwm
-#lxc.cgroup.devices.allow = c 1:11 rwm
-#
-#lxc.cgroup.devices.allow = c 2:* rwm
-#lxc.cgroup.devices.allow = c 3:* rwm
-
 # /dev/null and zero
 lxc.cgroup.devices.allow = c 1:3 rwm
 lxc.cgroup.devices.allow = c 1:5 rwm
@@ -503,7 +494,7 @@ EOF
     cat <<EOF > $path/fstab
 #proc            $rootfs/proc         proc    nodev,noexec,nosuid 0 0
 #devpts          $rootfs/dev/pts      devpts defaults 0 0
-##sysfs           $rootfs/sys          sysfs defaults  0 0
+#sysfs           $rootfs/sys          sysfs defaults  0 0
 #tmpfs           $rootfs/dev/shm      tmpfs defaults 0 0
 EOF
 
