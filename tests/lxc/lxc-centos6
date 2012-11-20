@@ -9,6 +9,7 @@
 
 # Authors:
 # Daniel Lezcano <daniel.lezcano@free.fr>
+# Christian Bayle <bayle@debian.org>
 
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -119,48 +120,18 @@ EOF
         fi
     fi
 
-    # provide the lxc service
-#    cat <<EOF > $rootfs/etc/init/lxc.conf
-## fake some events needed for correct startup other services
-#
-#description     "Container Upstart"
-#
-#start on startup
-#
-#script
-#        rm -rf /var/run/*.pid
-#        rm -rf /var/run/network/*
-#        /sbin/initctl emit stopped JOB=udevtrigger --no-wait
-#        /sbin/initctl emit started JOB=udev --no-wait
-#end script
-#EOF
-
     cat <<EOF > $rootfs/etc/init/console.conf
-# console - getty
+# tty - getty
 #
-# This service maintains a console on tty1 from the point the system is
-# started until it is shut down again.
+# This service maintains a getty on the specified device.
 
-start on stopped rc RUNLEVEL=[2345]
-stop on runlevel [!2345]
+stop on runlevel [S016]
 
 respawn
-#exec /sbin/getty -8 38400 /dev/console
-exec /sbin/mingetty console
+instance \$TTY
+exec /sbin/mingetty \$TTY
 EOF
 
-# Enable console
-#CB#cat <<EOF >> $rootfs/etc/inittab
-#CB#0:2345:respawn:/sbin/mingetty console
-#CB#EOF
-
-#    cat <<EOF > $rootfs/lib/init/fstab
-## /lib/init/fstab: lxc system fstab
-#none            /spu                      spufs           gid=spu,optional                  0 0
-#none            /tmp                      none            defaults                          0 0
-#none            /var/lock                 tmpfs           nodev,noexec,nosuid,showthrough   0 0
-#none            /lib/init/rw              tmpfs           mode=0755,nosuid,optional         0 0
-#EOF
 cat <<EOF > $rootfs/etc/fstab
 # NOT MOUNTING IN LXC
 #none /dev/pts devpts defaults 0 0
@@ -169,27 +140,7 @@ cat <<EOF > $rootfs/etc/fstab
 #none /dev/shm tmpfs  defaults 0 0
 EOF
 
-    # suppress log level output for udev
-#    sed -i "s/=\"err\"/=0/" $rootfs/etc/udev/udev.conf
-
-    # reconfigure some services
-#    if [ -z "$LANG" ]; then
-#	chroot $rootfs locale-gen en_US.UTF-8
-#	chroot $rootfs update-locale LANG=en_US.UTF-8
-#    else
-#	chroot $rootfs locale-gen $LANG
-#	chroot $rootfs update-locale LANG=$LANG
-#    fi
-
-    # remove pointless services in a container
-#    chroot $rootfs /usr/sbin/update-rc.d -f ondemand remove
-
 [ ! -f $rootfs/etc/init/kexec-disable.conf ] || mv $rootfs/etc/init/kexec-disable.conf $rootfs/etc/init/kexec-disable.conf.orig
-#    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls u*.conf); do mv $f $f.orig; done'
-#    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls tty[2-9].conf); do mv $f $f.orig; done'
-#    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls plymouth*.conf); do mv $f $f.orig; done'
-#    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls hwclock*.conf); do mv $f $f.orig; done'
-#    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls module*.conf); do mv $f $f.orig; done'
 
     echo "Please change root-password !"
     echo "root:root" | chroot $rootfs chpasswd
@@ -202,12 +153,6 @@ sed -i -e 's:\(.*/dev/shm*\):#\1:' $rootfs/etc/rc.d/rc.sysinit
 #CB# remove proc and sys mounts
 sed -i -e 's:\(.*mount -f /proc.*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
 sed -i -e 's:\(.*mount -f /sys*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
-
-#CB# remove tty
-sed -i -e 's:ACTIVE_CONSOLES=.*:ACTIVE_CONSOLES=:' $rootfs/etc/sysconfig/init
-#CB#chroot $rootfs chkconfig udev-post off
-#chroot $rootfs chkconfig network on
-
 
     # fix avahi
     if [ -f $rootfs/etc/init.d/avahi-daemon ]
@@ -231,12 +176,12 @@ test -e $rootfs/dev/full    || mknod -m 666 $rootfs/dev/full c 1 7
 test -e $rootfs/dev/initctl || mknod -m 600 $rootfs/dev/initctl p
 test -e $rootfs/dev/ptmx    || mknod -m 666 $rootfs/dev/ptmx c 5 2
 
-#test -e $rootfs/dev/tty1 || mknod -m 666 $rootfs/dev/tty1 c 4 1
-#test -e $rootfs/dev/tty2 || mknod -m 666 $rootfs/dev/tty2 c 4 2
-#test -e $rootfs/dev/tty3 || mknod -m 666 $rootfs/dev/tty3 c 4 3
-#test -e $rootfs/dev/tty4 || mknod -m 666 $rootfs/dev/tty4 c 4 4
-#test -e $rootfs/dev/tty5 || mknod -m 666 $rootfs/dev/tty5 c 4 5
-#test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
+test -e $rootfs/dev/tty1 || mknod -m 666 $rootfs/dev/tty1 c 4 1
+test -e $rootfs/dev/tty2 || mknod -m 666 $rootfs/dev/tty2 c 4 2
+test -e $rootfs/dev/tty3 || mknod -m 666 $rootfs/dev/tty3 c 4 3
+test -e $rootfs/dev/tty4 || mknod -m 666 $rootfs/dev/tty4 c 4 4
+test -e $rootfs/dev/tty5 || mknod -m 666 $rootfs/dev/tty5 c 4 5
+test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
 
     return 0
 }
@@ -324,10 +269,19 @@ test -e $cache/partial-$arch/dev/tty0    || mknod -m 666 $cache/partial-$arch/de
 test -e $cache/partial-$arch/dev/full    || mknod -m 666 $cache/partial-$arch/dev/full c 1 7
 test -e $cache/partial-$arch/dev/initctl || mknod -m 600 $cache/partial-$arch/dev/initctl p
 test -e $cache/partial-$arch/dev/ptmx    || mknod -m 666 $cache/partial-$arch/dev/ptmx c 5 2
+
+test -e $cache/partial-$arch/dev/tty1    || mknod -m 666 $cache/partial-$arch/dev/tty1 c 4 1
+test -e $cache/partial-$arch/dev/tty2    || mknod -m 666 $cache/partial-$arch/dev/tty2 c 4 2
+test -e $cache/partial-$arch/dev/tty3    || mknod -m 666 $cache/partial-$arch/dev/tty3 c 4 3
+test -e $cache/partial-$arch/dev/tty4    || mknod -m 666 $cache/partial-$arch/dev/tty4 c 4 4
+test -e $cache/partial-$arch/dev/tty5    || mknod -m 666 $cache/partial-$arch/dev/tty5 c 4 5
+test -e $cache/partial-$arch/dev/tty6    || mknod -m 666 $cache/partial-$arch/dev/tty6 c 4 6
 EOF
     chmod 755 /var/cache/rinse/$DISTRO-$arch.before_post_install
 
     cat <<EOF > /var/cache/rinse/$DISTRO-$arch.after_post_install
+# CREATE FSTAB IF NOT EXISTS
+touch /etc/fstab
 # MOUNT PROC
 echo "Mount /proc"
 chroot $cache/partial-$arch /bin/mount proc /proc -t proc
@@ -458,7 +412,7 @@ copy_configuration()
 lxc.network.hwaddr = $macaddr
 # lxc.utsname = $name
 
-#CB#lxc.tty = 4
+lxc.tty = 6
 lxc.pts = 1024
 lxc.rootfs = $rootfs
 lxc.cgroup.devices.deny = a
