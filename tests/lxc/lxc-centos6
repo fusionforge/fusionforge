@@ -121,15 +121,15 @@ EOF
     fi
 
     cat <<EOF > $rootfs/etc/init/console.conf
-# tty - getty
+# console - getty
 #
-# This service maintains a getty on the specified device.
+# This service maintains a console on tty1 from the point the system is
+# started until it is shut down again.
 
-stop on runlevel [S016]
+start on stopped rc RUNLEVEL=[2345]
+stop on runlevel [!2345]
 
-respawn
-instance \$TTY
-exec /sbin/mingetty \$TTY
+initctl start tty TTY=console
 EOF
 
 cat <<EOF > $rootfs/etc/fstab
@@ -150,7 +150,8 @@ sed -i -e 's:/sbin/start_udev:#/sbin/start_udev:' $rootfs/etc/rc.d/rc.sysinit
 sed -i -e 's:\(.*/dev/pts.*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
 #CB# remove lines acting on /dev/shm
 sed -i -e 's:\(.*/dev/shm*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
-#CB# remove proc and sys mounts
+#CB# remove / proc and sys mounts
+sed -i -e 's:\(.*mount -f /.*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
 sed -i -e 's:\(.*mount -f /proc.*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
 sed -i -e 's:\(.*mount -f /sys*\):#\1:' $rootfs/etc/rc.d/rc.sysinit 
 
