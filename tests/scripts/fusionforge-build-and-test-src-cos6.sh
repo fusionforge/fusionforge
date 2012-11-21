@@ -34,6 +34,10 @@ ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 
 echo "Set use_ssl=no"
 ssh root@$HOST "(echo [core];echo use_ssl=no;echo use_fti=no) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
+# Better to remove this until ssl conf is fixed properly
+# I noticed that on centos6 gforge.conf should be included after ssl.conf
+# We should consider having separate files for ssl and maybe separate ff package
+ssh root@$HOST "yum -y remove mod_ssl ; service httpd restart"
 ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
 
