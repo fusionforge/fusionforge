@@ -95,7 +95,6 @@ function initialise_at($atx) {
 
 	if (!($at = $atx) || !is_object($at) || $at->isError()) {
 		echo "error no AT\n";
-		db_rollback();
 		die;
 	}
 	$efarr = $at->getExtraFields();
@@ -129,7 +128,6 @@ foreach ($srclist as $aidx) {
 	$ah =& artifact_get_object($aid);
 	if (!$ah || !is_object($ah) || $ah->isError()) {
 		echo "error item $aidx\n";
-		db_rollback();
 		die;
 	}
 
