@@ -174,8 +174,9 @@ foreach ($srclist as $aidx) {
 		}
 	}
 
-	/* add a _permalink pseudo-field */
-	$rec['_permalink'] = util_make_url('/tracker/t_follow.php/' . $aid);
+	/* add pseudo-fields to aid in permalink construction */
+	$rec['_fmt_itempermalink'] = util_make_url('/tracker/t_follow.php/%d');
+	$rec['_fmt_taskpermalink'] = util_make_url('/pm/t_follow.php/%d');
 
 	/* copy votes */
 	$rec['_votes'] = array_combine(array(
@@ -186,29 +187,61 @@ foreach ($srclist as $aidx) {
 
 	/* copy related tasks and add task permalink format pseudo-field */
 	if ($usespm) {
-		$rec['~related_tasks'] = array();
+		$fv = array();
 		$taskcount = db_numrows($ah->getRelatedTasks());
 		if ($taskcount >= 1) for ($i = 0; $i < $taskcount; ++$i) {
 			$taskinfo = db_fetch_array($ah->relatedtasks, $i);
-			$rec['~related_tasks'][] =
-			    (int)$taskinfo['project_task_id'];
+			$fv[] = (int)$taskinfo['project_task_id'];
 		}
-		sort($rec['~related_tasks'], SORT_NUMERIC);
-		$rec['_fmt_taskpermalink'] = util_make_url('/pm/t_follow.php/%d');
+		sort($fv, SORT_NUMERIC);
+		if ($fv) {
+			$rec['~related_tasks'] = $fv;
+		}
+	}
+
+	/* copy backwards relations of other tracker items to this one */
+	$res = db_query_params('SELECT *
+		FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
+		WHERE field_type=9
+		AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
+		AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
+		AND artifact.artifact_id = artifact_extra_field_data.artifact_id
+		AND groups.group_id = artifact_group_list.group_id
+		AND (field_data = $1 OR field_data LIKE $2 OR field_data LIKE $3 OR field_data LIKE $4)
+		ORDER BY artifact_group_list.group_id ASC, name ASC, field_name ASC, artifact.artifact_id ASC',
+	    array(
+		$aid,
+		"$aid %",
+		"% $aid %",
+		"% $aid",
+	    ));
+	$fv = array();
+	if ($res) while (($row = db_fetch_array($res))) {
+		$fv[] = array(
+			'group' => dbe2jsn($row['group_name']),
+			'tracker' => dbe2jsn($row['name']),
+			'item' => (int)$row['artifact_id'],
+			'field' => dbe2jsn($row['field_name']),
+		    );
+	}
+	if ($fv) {
+		$rec['~backlinks'] = $fv;
 	}
 
 	/* copy comments */
 	$res = $ah->getMessages();
-	$c = array();
+	$fv = array();
 	if ($res) while (($row = db_fetch_array($res))) {
-		$c[] = array(
+		$fv[] = array(
 			'adddate' => (int)$row['adddate'],
 			'from_email' => $row['from_email'],
 			'body' => dbe2jsn($row['body']),
 			'from_user' => u2jsn($row['user_id']),
 		    );
 	}
-	$rec['~comments'] = $c;
+	if ($fv) {
+		$rec['~comments'] = $fv;
+	}
 
 	/* copy extra fields */
 	foreach ($ah->getExtraFieldData() as $k => $v) {
@@ -277,13 +310,47 @@ foreach ($srclist as $aidx) {
 		if ($efmap[$k]['alias']) {
 			$v['alias'] = $efmap[$k]['alias'];
 		}
+		if (!isset($rec['~extrafields'])) {
+			$rec['~extrafields'] = array();
+		}
 		$rec['~extrafields'][$efmap[$k]['name']] = $v;
 	}
 
-	/*
-	 * here would be the place to add more pseudo-elements, like
-	 * a _files Value…
-	 */
+	/* copy files */
+	$fv = array();
+	$res = db_query_params('SELECT * FROM artifact_file_user_vw
+		WHERE artifact_id=$1
+		ORDER BY adddate, id',
+	    array($ah->getID()));
+	if ($res) while (($row = db_fetch_array($res))) {
+		$fv[] = array(
+			'description' => $row['description'],
+			'filename' => $row['filename'],
+			'adddate' => (int)$row['adddate'],
+			'submitter' => u2jsn($row['submitted_by']),
+			'base64_data' => $row['bin_data'],
+		    );
+	}
+	if ($fv) {
+		$rec['~files'] = $fv;
+	}
+
+	/* copy history */
+	$fv = array();
+	$res = db_query_params('SELECT * FROM artifact_history
+		WHERE artifact_id=$1
+		ORDER BY entrydate, id',
+	    array($ah->getID()));
+	if ($res) while (($row = db_fetch_array($res))) {
+		$fv[] = array(
+			'field_name' => dbe2jsn($row['field_name']),
+			'old_value' => dbe2jsn($row['old_value']),
+			'new_value' => dbe2jsn($row['new_value']),
+			'by' => u2jsn($row['mod_by']),
+			'entrydate' => (int)$row['entrydate'],
+		    );
+	}
+	$rec['~changelog'] = $fv;
 
 	/* append to list of records to emit */
 	$out[$aid] = $rec;

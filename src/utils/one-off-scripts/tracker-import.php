@@ -78,7 +78,7 @@ define('IT_ARR', 2);
  * to import more, list them here, too.
  */
 $required_fields = array(
-	array(IT_STR, "_permalink"),
+	array(IT_STR, "_fmt_itempermalink"),
 	array(IT_STR, "details"),
 	array(IT_NUM, "last_modified_date"),
 	array(IT_NUM, "open_date"),
@@ -201,7 +201,8 @@ foreach ($iv as $k => $v) {
 	}
 
 	/* prepend the old permalink in front of the details */
-	$details = "Imported from: " . $v["_permalink"] . "\n\n" . $details;
+	$details = "Imported from: " .
+	    sprintf($v["_fmt_itempermalink"], $k) . "\n\n" . $details;
 
 	/* instantiate a new item */
 	$ah = new Artifact($at);
