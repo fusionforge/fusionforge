@@ -22,6 +22,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *-
  * Edit below; comments inline.  Exports all items in a tracker as JSON.
+ * Warning: may not work without forge-specific modifications; this code
+ * was written for use with EvolvisForge 5.1 and only as a quick hack.
+ * It does not export the “linked commits” information, but that’s mostly
+ * via plugins anyway, so…
  */
 
 require '/usr/share/gforge/common/include/env.inc.php';
