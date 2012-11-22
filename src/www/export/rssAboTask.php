@@ -139,11 +139,11 @@ function writeRssFeedBegin($objProjectTask, $objGroup, $objProjectGroup) {
 	printf(_('Update history of the task with the name %1$s and the ID %2$d.') . ' ', $objProjectTask->getSummary(), $objProjectTask->getID());
 	print _('Current values of the task’s…').' => ';
 
-	print ' '._('Subproject:').' '.$objProjectGroup->getName().' |';
-	print ' '._('Summary:').' '.$objProjectTask->getSummary().' |';
-	print ' '._('Complete:').' '.$objProjectTask->getPercentComplete().'% |';
-	print ' '._('Status:').' '.$objProjectTask->getStatusName().' |';
-	print ' '._('Details:').' '.$objProjectTask->getDetails().' |';
+	print ' '._('Subproject')._(': ').$objProjectGroup->getName().' |';
+	print ' '._('Summary')._(': ').$objProjectTask->getSummary().' |';
+	print ' '._('Complete')._(': ').$objProjectTask->getPercentComplete().'% |';
+	print ' '._('Status')._(': ').$objProjectTask->getStatusName().' |';
+	print ' '._('Details')._(': ').$objProjectTask->getDetails().' |';
 
 	print'</description>';
 	//print'<language>en-us</language>';
@@ -166,11 +166,11 @@ function writeRssFeedItem($objProjectTask, $updates) {
 		print $title;
 		print'</title>';
 		print'<description>';
-		print _('Updated value').': ';
+		print _('Updated value')._(': ');
 		print $description.' | ';
-		print _('Posted by').': ';
+		print _('Posted by')._(': ');
 		print $objGfUser->getUnixName().' | ';
-		print _('Update time').': ';
+		print _('Update time')._(': ');
 		print gmdate('D, d M Y G:i:s',$update[8]);
 		print'</description>';
 		print '<link>' . util_make_url("/pm/t_follow.php/" . $objProjectTask->getID()) . '</link>';

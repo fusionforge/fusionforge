@@ -1,6 +1,6 @@
 #! /usr/bin/php
 <?php
-/* 
+/*
  * Copyright 2010, Olaf Lenz
  * Copyright 2011, Roland Mas
  *
@@ -23,7 +23,7 @@
 
   /** This script will automatically create MoinMoin instances for
    projects that do not yet have them.
-   
+
    It is intended to be started in a cronjob.
    */
 
@@ -62,7 +62,7 @@ while ( $row = db_fetch_array($project_res) ) {
                       . "sed s/@PROJECT_NAME@/$project/ < $template) > $wikidata/$project.py");
 
 		$need_reload = true;
-	} 
+	}
 }
 
 if ($need_reload) {

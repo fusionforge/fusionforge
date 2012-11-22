@@ -559,7 +559,7 @@ class ProjectImportPage extends FileManagerPage {
 					foreach($projects as $project) {
 
 						// Display project's general description
-						$html .= '<table id="project-summary-and-devs" class="my-layout-table" summary="">
+						$html .= '<table id="project-summary-and-devs" class="my-layout-table">
 	                               <tr>
 		                             <td>
 			                            <h2>'._('Details of imported project : ').

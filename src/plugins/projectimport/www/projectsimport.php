@@ -219,7 +219,7 @@ class ProjectsImportPage extends FileManagerPage {
 			if(count($projects)) {
 
 				// Display project's general description
-				$html .= '<table id="project-summary-and-devs" class="my-layout-table" summary="">';
+				$html .= '<table id="project-summary-and-devs" class="my-layout-table">';
 
 				// Display project attributes
 				foreach($projects as $project) {
