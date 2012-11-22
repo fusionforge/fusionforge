@@ -1,6 +1,6 @@
 This is a file to explain how to setup your own openvz virtual hosts
 
-At the moment the setup is tested using static internet adresses,
+At the moment the setup is tested using static internet addresses,
 this should not be too difficult to make it work with dhcp network config
 but I experienced some instable behaviour trying to do like this.
 
@@ -16,7 +16,7 @@ So, first you need to have a working dhcp server, which I'll suppose you already
 second you need to setup a bridge, for this you should edit /etc/network/interfaces file
 see the exemple in interfaces.sample
 The exemple is using static ip, but you can also make this work if you server is using dclient
-to get adresses.
+to get addresses.
 
 This would look like:
 ---------------------------------
@@ -72,4 +72,4 @@ choose kind of network
  make netstaticcentos
 
 You may also need to make some special config because you are behind a firewall
-for this I porvide some exemple of local.`hostname` files
+for this I provide some exemple of local.`hostname` files
