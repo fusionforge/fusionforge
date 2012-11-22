@@ -100,7 +100,7 @@ if (getStringFromRequest('submit')) {
 	}
 
 	if ($scm_host == '') {
-		$scm_host = forge_get_config('web_host');
+		$scm_host = forge_get_config('scm_host');
 	}
 
 		if ( !$purpose && forge_get_config ('project_auto_approval') ) {
