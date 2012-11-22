@@ -29,7 +29,7 @@ DEBMIRRORSEC=http://security.debian.org/
 # Redhat mirrors
 #CENTOSMIRROR=http://mirror.bytemark.co.uk/centos/
 #DAG_RPMFORGE_REPO=http://apt.sw.be/redhat
-#EPEL_REPO=http://download.fedoraproject.org/pub/epel
+EPEL_REPO=http://download.fedoraproject.org/pub/epel
 
 # Debian 3rd-party
 DEB3RD=http://buildbot3.fusionforge.org/job/3rd-party-deb/ws/build/debian/
