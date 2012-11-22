@@ -42,18 +42,87 @@ prepare_workspace()
 	mkdir -p $WORKSPACE/apidocs
 }
 
+setup_epel_repo()
+{
+if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
+HOST=$1
+# EPEL REPO
+if [ ! -z "$EPEL_REPO" ] ; then
+        echo "Installing specific EPEL REPO $EPEL_REPO"
+	ssh root@$HOST "cat > /etc/yum.repos.d/epel.repo" <<-EOF
+# Name: EPEL RPM Repository for Red Hat Enterprise \$releasever - epel
+# URL: http://fedoraproject.org/wiki/EPEL
+[epel]
+name=Extra Packages for Enterprise Linux \$releasever - \$basearch 
+baseurl=$EPEL_REPO/\$releasever/\$basearch
+#mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel\$releasever&arch=\$basearch
+failovermethod=priority
+enabled=0
+gpgcheck=0
+EOF
+else
+        echo "Installing standard EPEL REPO"
+	ssh root@$HOST "cat > /etc/yum.repos.d/epel.repo" <<-EOF
+# Name: EPEL RPM Repository for Red Hat Enterprise \$releasever - epel
+# URL: http://fedoraproject.org/wiki/EPEL
+[epel]
+name=Extra Packages for Enterprise Linux \$releasever - \$basearch 
+#baseurl=http://download.fedoraproject.org/pub/epel/\$releasever/\$basearch
+mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel\$releasever&arch=\$basearch
+failovermethod=priority
+enabled=0
+gpgcheck=0
+EOF
+fi
+}
+
 setup_dag_repo()
 {
 HOST=$1
+if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
 # DAG REPO
 if [ ! -z "$DAG_RPMFORGE_REPO" ] ; then
         echo "Installing specific DAG REPO $DAG_RPMFORGE_REPO"
-        cp src/rpm-specific/dag-rpmforge.repo $WORKSPACE/build/packages/dag-rpmforge.repo
-        sed -i "s#http://apt.sw.be/redhat#${DAG_RPMFORGE_REPO}#" $WORKSPACE/build/packages/dag-rpmforge.repo
-        scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
+	ssh root@$HOST "cat > /etc/yum.repos.d/dag-rpmforge.repo" <<-EOF
+# Name: RPMforge RPM Repository for Red Hat Enterprise \$releasever - dag
+# URL: http://rpmforge.net/
+[dag-rpmforge]
+name = Red Hat Enterprise \$releasever - RPMforge.net - dag
+baseurl = $DAG_RPMFORGE_REPO/el\$releasever/en/\$basearch/dag
+#mirrorlist = http://apt.sw.be/redhat/el\$releasever/en/mirrors-rpmforge
+enabled = 1
+protect = 0
+gpgcheck = 0
+
+[dag-rpmforge-extra]
+name = Red Hat Enterprise \$releasever - RPMforge.net - extra
+baseurl = $DAG_RPMFORGE_REPO/el\$releasever/en/\$basearch/extras
+#mirrorlist = http://apt.sw.be/redhat/el\$releasever/en/mirrors-rpmforge
+enabled = 0
+protect = 0
+gpgcheck = 0
+EOF
 else
-        echo "Installing standard DAG REPO from src/rpm-specific/dag-rpmforge.repo"
-        scp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
+        echo "Installing standard DAG REPO"
+	ssh root@$HOST "cat > /etc/yum.repos.d/dag-rpmforge.repo" <<-EOF
+# Name: RPMforge RPM Repository for Red Hat Enterprise \$releasever - dag
+# URL: http://rpmforge.net/
+[dag-rpmforge]
+name = Red Hat Enterprise \$releasever - RPMforge.net - dag
+#baseurl = http://apt.sw.be/redhat/el\$releasever/en/\$basearch/dag
+mirrorlist = http://apt.sw.be/redhat/el\$releasever/en/mirrors-rpmforge
+enabled = 1
+protect = 0
+gpgcheck = 0
+
+[dag-rpmforge-extra]
+name = Red Hat Enterprise \$releasever - RPMforge.net - extra
+#baseurl = http://apt.sw.be/redhat/el\$releasever/en/\$basearch/extras
+mirrorlist = http://apt.sw.be/redhat/el\$releasever/en/mirrors-rpmforge
+enabled = 0
+protect = 0
+gpgcheck = 0
+EOF
 fi
 }
 
