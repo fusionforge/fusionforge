@@ -60,7 +60,7 @@ Requires: coreutils
 Requires: /usr/bin/newaliases
 Requires: php-pear-HTTP_WebDAV_Server
 Requires: php-pecl-zip
- 
+
 # BuildRequires: sed, perl
 
 %define INSTALL_LOG       %{_var}/log/gforge/install-%{version}.log
@@ -562,9 +562,6 @@ done
 %{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/httpd.d/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.d/
 %{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/httpd.conf.d/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/
 %{__cp} -rp $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/plugins/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/plugins/
-%{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/README
-
-
 
 # plugin: authbuiltin (internal plugin)
 %{__ln_s} ../../plugins/authbuiltin/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authbuiltin
