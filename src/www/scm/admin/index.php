@@ -59,7 +59,7 @@ if (getStringFromRequest('create_repository')) {
 		$hook_params['description'] = $description;
 		$hook_params['clone'] = $clone;
 		$hook_params['error_msg'] = '';
-		plugin_hook_by_reference ('scm_add_repo', $hook_params);
+		plugin_hook_by_reference('scm_add_repo', $hook_params);
 		if ($hook_params['error_msg']) {
 			$error_msg = $hook_params['error_msg'];
 		}
@@ -99,6 +99,9 @@ elseif (getStringFromRequest('submit')) {
 			$myPlugin = plugin_get_object($plugin);
 			if ($scmradio == $myPlugin->name) {
 				$group->setPluginUse($myPlugin->name, 1);
+				if ($myPlugin->getDefaultServer()) {
+					$group->setSCMBox($myPlugin->getDefaultServer());
+				}
 			} else {
 				$group->setPluginUse($myPlugin->name, 0);
 			}
