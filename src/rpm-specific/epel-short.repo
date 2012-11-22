@@ -1,7 +1,9 @@
+# Name: EPEL RPM Repository for Red Hat Enterprise $releasever - epel
+# URL: http://fedoraproject.org/wiki/EPEL
 [epel]
-name=Extra Packages for Enterprise Linux 5 - $basearch 
-baseurl=http://download.fedoraproject.org/pub/epel/5/$basearch
-#mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel5&arch=$basearch
+name=Extra Packages for Enterprise Linux $releasever - $basearch 
+baseurl=http://download.fedoraproject.org/pub/epel/$releasever/$basearch
+#mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel$releasever&arch=$basearch
 failovermethod=priority
 enabled=0
 gpgcheck=0
