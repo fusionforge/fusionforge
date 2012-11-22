@@ -19,6 +19,7 @@ setup_redhat_3rdparty_repo
 #make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages src
 
 setup_dag_repo $@
+setup_epel_repo $@
 
 echo "Create $FORGE_HOME if necessary"
 ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
@@ -46,6 +47,9 @@ ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> /etc/gforge/config
 
 echo "Stop cron daemon"
 ssh root@$HOST "service crond stop" || true
+
+# Install phpunit
+ssh root@$HOST "yum -y --enablerepo=epel install php-phpunit-PHPUnit-Selenium"
 
 # Install selenium
 ssh root@$HOST "yum -y install selenium"

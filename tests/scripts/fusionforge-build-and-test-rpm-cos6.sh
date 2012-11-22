@@ -33,11 +33,16 @@ gpgcheck = 0
 EOF
 
 setup_dag_repo $@
+setup_epel_repo $@
 
 sleep 5
 ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=$FORGE_ADMIN_USERNAME FFORGE_ADMIN_PASSWORD=$FORGE_ADMIN_PASSWORD export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD; yum install -y --skip-broken fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-svntracker fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-authldap fusionforge-plugin-scmgit fusionforge-plugin-blocks"
 
 ssh root@$HOST '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-buildbot.ini'
+# Better to remove this until ssl conf is fixed properly
+# I noticed that on centos6 gforge.conf should be included after ssl.conf
+# We should consider having separate files for ssl and maybe separate ff package
+ssh root@$HOST "yum -y remove mod_ssl ; service httpd restart"
 ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
@@ -46,6 +51,9 @@ ssh root@$HOST "perl -spi -e s#/usr/sbin/sendmail#$FORGE_HOME/tests/scripts/catc
 
 echo "Stop cron daemon"
 ssh root@$HOST "service crond stop" || true
+
+# Install phpunit
+ssh root@$HOST "yum -y --enablerepo=epel install php-phpunit-PHPUnit-Selenium"
 
 # Install selenium
 ssh root@$HOST "yum -y install selenium"
