@@ -46,6 +46,8 @@ class webanalyticsPlugin extends Plugin {
 				$returned = true;
 				break;
 			}
+			default:
+				$returned = false;
 		}
 		return $returned;
 	}
@@ -80,8 +82,8 @@ class webanalyticsPlugin extends Plugin {
 	/**
 	 * addLink - add a new valid link
 	 *
-	 * @param	string	the url
-	 * @param	string	an informative name
+	 * @param	string	$url	the url
+	 * @param	string	$name	an informative name
 	 * @return	bool	success or not
 	 */
 	function addLink($url, $name) {
@@ -105,7 +107,7 @@ class webanalyticsPlugin extends Plugin {
 	/**
 	 * deleteLink - delete a link
 	 *
-	 * @param	int	the link id
+	 * @param	int	$idLink	the link id
 	 * @return	bool	success or not
 	 */
 	function deleteLink($idLink) {
@@ -144,7 +146,7 @@ class webanalyticsPlugin extends Plugin {
 	/**
 	 * getHeader - initialize header and js
 	 *
-	 * @param	string	type : user, project, globaladmin (aka group)
+	 * @param	string	$type : user, project, globaladmin (aka group)
 	 * @return	bool	success or not
 	 */
 	function getHeader($type) {

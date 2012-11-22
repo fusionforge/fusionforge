@@ -44,7 +44,7 @@ class MoinMoinPlugin extends Plugin {
 
 	function getWikiUrl ($project) {
 		if (forge_get_config('use_frame', 'moinmoin')){
-			return util_make_uri('/plugins/moinmoin/frame.php?group_id=' . $project->getID()) ; 
+			return util_make_uri('/plugins/moinmoin/frame.php?group_id=' . $project->getID());
 		} else {
 			return util_make_uri('/plugins/moinmoin/'.$project->getUnixName().'/FrontPage');
 		}
