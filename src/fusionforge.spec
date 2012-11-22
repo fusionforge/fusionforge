@@ -249,7 +249,7 @@ Requires: %{name} >= %{version}, php
 %description plugin-online_help
 This is a online_help plugin within FusionForge.
 
-# %package plugin-oslc
+# %package plugin-oslc
 # Summary: OSLC plugin for FusionForge
 # Group: Development/Tools
 # Requires: %{name} >= %{version}, php, php-ZendFramework > 1.10
@@ -314,7 +314,7 @@ This is a plugin to integrate Git version control system with FusionForge
 %package plugin-scmhg
 Summary: Mercurial (hg) version control plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, hg
+Requires: %{name} >= %{version}, php, mercurial
 %description plugin-scmhg
 This is a plugin to integrate Mercurial (hg) version control system with FusionForge
 
@@ -436,7 +436,7 @@ globalsearch plugin for FusionForge.
 # Group: Development/Tools
 # Requires: %{name} >= %{version}, php, postgresql
 # %description plugin-oauthprovider
-# oauthprovider plugin for FusionForge. 
+# oauthprovider plugin for FusionForge.
 
 %package plugin-webanalytics
 Summary: webanalytics plugin for FusionForge
@@ -493,10 +493,10 @@ search_and_replace()
 # we need to fix up the fusionforge-install-3-db.php script to ref %{FORGE_DIR}
 search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 
-# installing gforge
+# Installing gforge
 %{__cp} -a * $RPM_BUILD_ROOT/%{FORGE_DIR}/
 
-# create project vhost space symlink
+# Create project vhost space symlink
 %{__ln_s} /home/groups $RPM_BUILD_ROOT/%{FORGE_VAR_LIB}/homedirs/groups
 # install restricted shell for cvs accounts
 %{__cp} -a plugins/scmcvs/bin/cvssh.pl $RPM_BUILD_ROOT/bin/
@@ -520,6 +520,7 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__sed} -i -e 's!use_people = yes!use_people = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 %{__sed} -i -e 's!use_project_vhost = yes!use_project_vhost = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 %{__sed} -i -e 's!use_snippet = yes!use_snippet = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{__sed} -i -e 's!use_ratings = yes!use_ratings = no!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 
 # install fusionforge crontab
 %{__sed} -e 's/\$FFUSER/%{gfuser}/g' packaging/cron.d/cron.fusionforge > $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/%{name}
@@ -563,7 +564,7 @@ done
 %{__cp} -rp $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/plugins/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/plugins/
 %{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/README
 
-# plugin: aselectextauth
+
 
 # plugin: authbuiltin (internal plugin)
 %{__ln_s} ../../plugins/authbuiltin/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authbuiltin
@@ -759,10 +760,10 @@ if [ "$1" -eq "1" ]; then
 	touch %{FORGE_VAR_LIB}/etc/httpd.vhosts
 
 	%{__sed} -i -e "s/^#ServerName (.*):80/ServerName $HOSTNAME:80/" /etc/httpd/conf/httpd.conf
-	%{__sed} -i -e "s/^Include/#Include/" %{FORGE_CONF_DIR}/httpd.conf.d/ssl-on.inc
 
-	%{__sed} -i -e "s/^#ServerName (.*):80/ServerName $HOSTNAME:80/" /etc/httpd/conf/httpd.conf
-	%{__sed} -i -e "s/^Include/#Include/" %{FORGE_CONF_DIR}/httpd.conf.d/ssl-on.inc
+	mv %{FORGE_CONF_DIR}/httpd.conf.d/ssl-really-on.inc %{FORGE_CONF_DIR}/httpd.conf.d/ssl-on.inc
+	%{__sed} -i -e "s!%{FORGE_CONF_DIR}/ssl-cert.pem!/etc/pki/tls/certs/localhost.crt!g" %{FORGE_CONF_DIR}/httpd.conf.d/ssl-on.inc
+	%{__sed} -i -e "s!%{FORGE_CONF_DIR}/ssl-cert.key!/etc/pki/tls/private/localhost.key!g" %{FORGE_CONF_DIR}/httpd.conf.d/ssl-on.inc
 
 	/etc/init.d/httpd restart >>%{INSTALL_LOG} 2>&1
 
@@ -775,7 +776,7 @@ if [ "$1" -eq "1" ]; then
 	# Mailman initial setup
 	/usr/lib/mailman/bin/newlist -q mailman $FFORGE_ADMIN_USER@$HOSTNAME $FFORGE_ADMIN_PASSWORD >>%{INSTALL_LOG} 2>&1
 	chkconfig mailman on >>%{INSTALL_LOG} 2>&1
-	/etc/init.d/mailman start >>%{INSTALL_LOG} 2>&1
+	/etc/init.d/mailman restart >>%{INSTALL_LOG} 2>&1
 
 	# add noreply mail alias
 	echo "noreply: /dev/null" >> /etc/aliases
@@ -831,7 +832,7 @@ fi
 
 %files
 %defattr(-, root, root)
-%doc AUTHORS* CHANGES COPYING INSTALL* NEWS README*
+%doc AUTHORS* CHANGES COPYING* INSTALL* NEWS README*
 %doc docs/*
 #%attr(0660, %{httpduser}, gforge) %config(noreplace) %{FORGE_CONF_DIR}/local.inc
 #%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/z-gforge.conf
@@ -841,13 +842,14 @@ fi
 # Files under %{FORGE_DIR}
 %{FORGE_DIR}/AUTHORS*
 %{FORGE_DIR}/CHANGES
-%{FORGE_DIR}/COPYING
+%{FORGE_DIR}/COPYING*
 %{FORGE_DIR}/INSTALL*
 %{FORGE_DIR}/Makefile
 %{FORGE_DIR}/NEWS
 %{FORGE_DIR}/README*
 %{FORGE_DIR}/fusionforge.spec
 %{FORGE_DIR}/install-ng
+%{FORGE_DIR}/plugins/README
 # Directories under %{FORGE_DIR}
 %{FORGE_DIR}/backend
 %{FORGE_DIR}/common
@@ -1053,7 +1055,7 @@ fi
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/oslc.ini
 # %{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
 # %{FORGE_DIR}/plugins/oslc
-# %{FORGE_DIR}/www/plugins/oslc
+# %{FORGE_DIR}/www/plugins/oslc
 
 %files plugin-projectimport
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
