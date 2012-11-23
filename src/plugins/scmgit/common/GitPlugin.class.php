@@ -77,8 +77,9 @@ class GitPlugin extends SCMPlugin {
 
 	function getInstructionsForAnon($project) {
 		$repo_list = array($project->getUnixName());
-		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = 0 AND plugin_id=$2 ORDER BY repo_name',
+		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
 					   array ($project->getID(),
+						  SCM_EXTRA_REPO_ACTION_UPDATE,
 						  $this->getID())) ;
 		$rows = db_numrows ($result) ;
 		for ($i=0; $i<$rows; $i++) {
@@ -135,8 +136,9 @@ class GitPlugin extends SCMPlugin {
 	function getInstructionsForRW($project) {
 		$repo_list = array($project->getUnixName());
 		
-		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = 0 AND plugin_id=$2 ORDER BY repo_name',
+		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
 					   array ($project->getID(),
+						  SCM_EXTRA_REPO_ACTION_UPDATE,
 						  $this->getID()));
 		$rows = db_numrows ($result) ;
 		for ($i=0; $i<$rows; $i++) {
@@ -411,8 +413,9 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		// Create project-wide secondary repositories
-		$result = db_query_params ('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = 0 AND plugin_id=$2',
+		$result = db_query_params ('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
 					   array ($project->getID(),
+						  SCM_EXTRA_REPO_ACTION_UPDATE,
 						  $this->getID()));
 		$rows = db_numrows ($result) ;
 		for ($i=0; $i<$rows; $i++) {
@@ -453,8 +456,9 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		// Delete project-wide secondary repositories
-		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = 1 AND plugin_id=$2',
+		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
 					   array ($project->getID(),
+						  SCM_EXTRA_REPO_ACTION_DELETE,
 						  $this->getID()));
 		$rows = db_numrows ($result) ;
 		for ($i=0; $i<$rows; $i++) {
@@ -463,9 +467,10 @@ class GitPlugin extends SCMPlugin {
 			if (util_is_valid_repository_name($repo_name)) {
 				system ("rm -rf $repodir");
 			}
-			db_query_params ('DELETE FROM scm_secondary_repos WHERE group_id=$1 AND repo_name=$2 AND next_action = 1 AND plugin_id=$3',
+			db_query_params ('DELETE FROM scm_secondary_repos WHERE group_id=$1 AND repo_name=$2 AND next_action = $3 AND plugin_id=$4',
 					 array ($project->getID(),
 						$repo_name,
+						SCM_EXTRA_REPO_ACTION_DELETE,
 						$this->getID()));
 		}
 
@@ -972,10 +977,11 @@ class GitPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$result = db_query_params ('UPDATE scm_secondary_repos SET next_action = 1 WHERE group_id=$1 AND repo_name=$2 AND plugin_id=$3',
-						array ($params['group_id'],
-						       $params['repo_name'],
-						       $this->getID()));
+		$result = db_query_params ('UPDATE scm_secondary_repos SET next_action = $1 WHERE group_id=$2 AND repo_name=$3 AND plugin_id=$4',
+					   array (SCM_EXTRA_REPO_ACTION_DELETE,
+						  $params['group_id'],
+						  $params['repo_name'],
+						  $this->getID()));
 		if (! $result) {
 			$params['error_msg'] = db_error();
 			return false;
@@ -1017,8 +1023,9 @@ class GitPlugin extends SCMPlugin {
 		$project_name = $project->getUnixName();
 		
 		$select_repo = '<select name="frontpage">' . "\n";
-		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = 0 AND plugin_id=$2 ORDER BY repo_name',
+		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
 					  array ($params['group_id'],
+						 SCM_EXTRA_REPO_ACTION_UPDATE,
 						 $this->getID()));
 		if (! $result) {
 			$params['error_msg'] = db_error();

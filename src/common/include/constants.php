@@ -76,6 +76,10 @@ define('GROUP_IS_TEMPLATE', forge_get_config('template_group'));
 /* Admin */
 define('ADMIN_CRONMAN_ROWS', 30);
 
+/* SCM repositories */
+define('SCM_EXTRA_REPO_ACTION_UPDATE', 0);
+define('SCM_EXTRA_REPO_ACTION_DELETE', 1);
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
