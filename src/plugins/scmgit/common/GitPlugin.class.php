@@ -951,64 +951,6 @@ class GitPlugin extends SCMPlugin {
 		return true;
 	}
 
-	function scm_delete_repo(&$params) {
-		$project = $this->checkParams($params);
-		if (!$project) {
-			return false ;
-		}
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
-		if (!isset($params['repo_name'])) {
-			return false;
-		}
-
-		$result = db_query_params('SELECT count(*) AS count FROM scm_secondary_repos WHERE group_id=$1 AND repo_name = $2 AND plugin_id=$3',
-					  array ($params['group_id'],
-						 $params['repo_name'],
-						 $this->getID()));
-		if (! $result) {
-			$params['error_msg'] = db_error();
-			return false;
-		}
-		if (db_result($result, 0, 'count') == 0) {
-			$params['error_msg'] = sprintf(_('No repository %s exists'), $params['repo_name']);
-			return false;
-		}
-
-		$result = db_query_params ('UPDATE scm_secondary_repos SET next_action = $1 WHERE group_id=$2 AND repo_name=$3 AND plugin_id=$4',
-					   array (SCM_EXTRA_REPO_ACTION_DELETE,
-						  $params['group_id'],
-						  $params['repo_name'],
-						  $this->getID()));
-		if (! $result) {
-			$params['error_msg'] = db_error();
-			return false;
-		}
-
-		plugin_hook ("scm_admin_update", $params);
-		return true;
-	}
-
-	function scm_admin_buttons(&$params) {
-		$project = $this->checkParams($params);
-		if (!$project) {
-			return false ;
-		}
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
-		global $HTML;
-
-		$HTML->addButtons(
-				'/scm/admin/?group_id='.$params['group_id'].'&amp;form_create_repo=1',
-				_("Add Repository"),
-				array('icon' => html_image('ic/scm_repo_add.png'))
-		);
-	}
-
 	function scm_admin_form(&$params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
