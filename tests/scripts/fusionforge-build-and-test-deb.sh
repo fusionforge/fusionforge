@@ -14,10 +14,6 @@ export FILTER="DEBDebian70Tests.php"
 #export FILTER="func/PluginsMoinMoin/moinmoinTest.php"
 
 prepare_workspace
-destroy_vm -t debian7 $HOST
-start_vm_if_not_keeped -t debian7 $HOST
-
-setup_debian_3rdparty_repo
 
 CHECKOUTPATH=$(pwd)
 
@@ -51,13 +47,6 @@ dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
 sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
 pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
 
-#[ ! -f debian/changelog.sos ] || mv debian/changelog.sos debian/changelog
-#cp debian/changelog debian/changelog.sos
-#dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
-#sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
-#pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
-#[ ! -f debian/changelog.sos ] || mv debian/changelog.sos debian/changelog
-
 cd $BUILDRESULT
 REPOPATH=$WORKSPACE/build/debian
 
@@ -78,8 +67,10 @@ EOF
 
 reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
-# Build fusionforge
-# make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rwheezy
+destroy_vm -t debian7 $HOST
+start_vm_if_not_keeped -t debian7 $HOST
+
+setup_debian_3rdparty_repo
 
 cd $CHECKOUTPATH
 # Transfer preseeding
