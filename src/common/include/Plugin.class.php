@@ -32,6 +32,7 @@
 class Plugin extends Error {
 	var $name;
 	var $hooks;
+	var $id = NULL;
 
 	/**
 	 * Plugin() - constructor
@@ -113,6 +114,22 @@ class Plugin extends Error {
 	 */
 	function CallHook($hookname, &$params) {
 		return true;
+	}
+
+	/**
+	 * getID - get the numeric ID of a plugin
+	 *
+	 * @return	int	identifier of the plugin
+	 */
+	function getID() {
+		if ($this->id) {
+			return $this->id;
+		}
+
+		$res = db_query_params('SELECT plugin_id FROM plugins WHERE plugin_name=$1',
+					array($this->name));
+		$this->id = db_result($res,$i,'plugin_id');
+		return $this->id;
 	}
 
 	/**
