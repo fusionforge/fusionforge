@@ -128,7 +128,7 @@ class Plugin extends Error {
 
 		$res = db_query_params('SELECT plugin_id FROM plugins WHERE plugin_name=$1',
 					array($this->name));
-		$this->id = db_result($res,$i,'plugin_id');
+		$this->id = db_result($res,0,'plugin_id');
 		return $this->id;
 	}
 
