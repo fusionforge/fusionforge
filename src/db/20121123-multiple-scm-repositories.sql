@@ -7,7 +7,7 @@ CREATE TABLE scm_secondary_repos (
 	next_action int DEFAULT 0 NOT NULL,
 	CONSTRAINT scm_secondary_repos_unique UNIQUE (group_id, plugin_id, repo_name)
 ) ;
-CREATE INDEX scm_secondary_repos_gid_idx ON plugin_scmgit_secondary_repos (group_id) ;
+CREATE INDEX scm_secondary_repos_gid_idx ON scm_secondary_repos (group_id) ;
 
 CREATE TABLE scm_personal_repos (
 	group_id int NOT NULL REFERENCES groups ON DELETE CASCADE ON UPDATE CASCADE,
@@ -16,4 +16,4 @@ CREATE TABLE scm_personal_repos (
 	next_action int DEFAULT 0 NOT NULL,
 	CONSTRAINT scm_personal_repos_unique UNIQUE (group_id, plugin_id, user_id)
 ) ;
-CREATE INDEX scm_personal_repos_uid_idx ON plugin_scmgit_secondary_repos (group_id) ;
+CREATE INDEX scm_personal_repos_uid_idx ON scm_personal_repos (group_id) ;
