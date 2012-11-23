@@ -77,8 +77,9 @@ class GitPlugin extends SCMPlugin {
 
 	function getInstructionsForAnon($project) {
 		$repo_list = array($project->getUnixName());
-		$result = db_query_params ('SELECT repo_name FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 0 ORDER BY repo_name',
-					   array ($project->getID())) ;
+		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = 0 AND plugin_id=$2 ORDER BY repo_name',
+					   array ($project->getID(),
+						  $this->getID())) ;
 		$rows = db_numrows ($result) ;
 		for ($i=0; $i<$rows; $i++) {
 			$repo_list[] = db_result($result,$i,'repo_name');
@@ -101,9 +102,10 @@ class GitPlugin extends SCMPlugin {
 			$b .= '</p>';
 		}
 		
-		$result = db_query_params('SELECT u.user_id, u.user_name, u.realname FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
+		$result = db_query_params('SELECT u.user_id, u.user_name, u.realname FROM scm_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2 AND plugin_id=$3',
 					   array ($project->getID(),
-						  'A'));
+						  'A',
+						  $this->getID()));
 		$rows = db_numrows($result);
 
 		if ($rows > 0) {
@@ -133,8 +135,9 @@ class GitPlugin extends SCMPlugin {
 	function getInstructionsForRW($project) {
 		$repo_list = array($project->getUnixName());
 		
-		$result = db_query_params ('SELECT repo_name FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 0 ORDER BY repo_name',
-					   array ($project->getID())) ;
+		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = 0 AND plugin_id=$2 ORDER BY repo_name',
+					   array ($project->getID(),
+						  $this->getID()));
 		$rows = db_numrows ($result) ;
 		for ($i=0; $i<$rows; $i++) {
 			$repo_list[] = db_result($result,$i,'repo_name');
@@ -229,9 +232,10 @@ class GitPlugin extends SCMPlugin {
 		if (session_loggedin()) {
                         $u =& user_get_object(user_getid()) ;
 			if ($u->getUnixStatus() == 'A') {
-				$result = db_query_params('SELECT * FROM plugin_scmgit_personal_repos p WHERE p.group_id=$1 AND p.user_id=$2',
+				$result = db_query_params('SELECT * FROM scm_personal_repos p WHERE p.group_id=$1 AND p.user_id=$2 AND plugin_id=$3',
 							  array ($project->getID(),
-								 $u->getID()));
+								 $u->getID(),
+								 $this->getID()));
 				if ($result && db_numrows ($result) > 0) {
 					$b .= '<h2>';
 					$b .= _('Access to your personal repository');
@@ -407,8 +411,9 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		// Create project-wide secondary repositories
-		$result = db_query_params ('SELECT repo_name, description, clone_url FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 0',
-					   array ($project->getID())) ;
+		$result = db_query_params ('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = 0 AND plugin_id=$2',
+					   array ($project->getID(),
+						  $this->getID()));
 		$rows = db_numrows ($result) ;
 		for ($i=0; $i<$rows; $i++) {
 			$repo_name = db_result($result,$i,'repo_name');
@@ -448,8 +453,9 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		// Delete project-wide secondary repositories
-		$result = db_query_params ('SELECT repo_name FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 1',
-					   array ($project->getID())) ;
+		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = 1 AND plugin_id=$2',
+					   array ($project->getID(),
+						  $this->getID()));
 		$rows = db_numrows ($result) ;
 		for ($i=0; $i<$rows; $i++) {
 			$repo_name = db_result($result,$i,'repo_name');
@@ -457,15 +463,17 @@ class GitPlugin extends SCMPlugin {
 			if (util_is_valid_repository_name($repo_name)) {
 				system ("rm -rf $repodir");
 			}
-			db_query_params ('DELETE FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND repo_name=$2 AND next_action = 1',
+			db_query_params ('DELETE FROM scm_secondary_repos WHERE group_id=$1 AND repo_name=$2 AND next_action = 1 AND plugin_id=$3',
 					 array ($project->getID(),
-						$repo_name)) ;
+						$repo_name,
+						$this->getID()));
 		}
 
 		// Create users' personal repositories
-		$result = db_query_params ('SELECT u.user_name FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
+		$result = db_query_params ('SELECT u.user_name FROM scm_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2 AND plugin_id=$3',
 					   array ($project->getID(),
-						  'A')) ;
+						  'A',
+						  $this->getID()));
 		$rows = db_numrows ($result) ;
 		for ($i=0; $i<$rows; $i++) {
 			system ("mkdir -p $root/users") ;
@@ -874,8 +882,10 @@ class GitPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$result = db_query_params('SELECT count(*) AS count FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND repo_name = $2',
-						array ($params['group_id'], $params['repo_name']));
+		$result = db_query_params('SELECT count(*) AS count FROM scm_secondary_repos WHERE group_id=$1 AND repo_name = $2 AND plugin_id=$3',
+					  array ($params['group_id'],
+						 $params['repo_name'],
+						 $this->getID()));
 		if (! $result) {
 			$params['error_msg'] = db_error();
 			return false;
@@ -897,7 +907,10 @@ class GitPlugin extends SCMPlugin {
 				$clone = $url;
 			} elseif ($url == $project->getUnixName()) {
 				$clone = $url;
-			} elseif (($result = db_query_params('SELECT count(*) AS count FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND repo_name = $2', array ($project->getID(), $url)))
+			} elseif (($result = db_query_params('SELECT count(*) AS count FROM scm_secondary_repos WHERE group_id=$1 AND repo_name = $2 AND plugin_id=$3',
+							     array ($project->getID(),
+								    $url,
+								    $this->getID())))
 				  && db_result($result, 0, 'count')) {
 				// Local repo: try to clone from an existing repo in same project
 				// Repository found
@@ -918,8 +931,12 @@ class GitPlugin extends SCMPlugin {
 			$description = "Git repository $params[repo_name] for project ".$project->getUnixName();
 		}
 
-		$result = db_query_params ('INSERT INTO plugin_scmgit_secondary_repos (group_id, repo_name, description, clone_url) VALUES ($1, $2, $3, $4)',
-						array ($params['group_id'], $params['repo_name'], $description, $clone));
+		$result = db_query_params ('INSERT INTO scm_secondary_repos (group_id, repo_name, description, clone_url, plugin_id) VALUES ($1, $2, $3, $4, $5)',
+					   array ($params['group_id'],
+						  $params['repo_name'],
+						  $description,
+						  $clone,
+						  $this->getID()));
 		if (! $result) {
 			$params['error_msg'] = db_error();
 			return false;
@@ -942,8 +959,10 @@ class GitPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$result = db_query_params('SELECT count(*) AS count FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND repo_name = $2',
-						array ($params['group_id'], $params['repo_name']));
+		$result = db_query_params('SELECT count(*) AS count FROM scm_secondary_repos WHERE group_id=$1 AND repo_name = $2 AND plugin_id=$3',
+					  array ($params['group_id'],
+						 $params['repo_name'],
+						 $this->getID()));
 		if (! $result) {
 			$params['error_msg'] = db_error();
 			return false;
@@ -953,8 +972,10 @@ class GitPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$result = db_query_params ('UPDATE plugin_scmgit_secondary_repos SET next_action = 1 WHERE group_id=$1 AND repo_name=$2',
-						array ($params['group_id'], $params['repo_name']));
+		$result = db_query_params ('UPDATE scm_secondary_repos SET next_action = 1 WHERE group_id=$1 AND repo_name=$2 AND plugin_id=$3',
+						array ($params['group_id'],
+						       $params['repo_name'],
+						       $this->getID()));
 		if (! $result) {
 			$params['error_msg'] = db_error();
 			return false;
@@ -996,8 +1017,9 @@ class GitPlugin extends SCMPlugin {
 		$project_name = $project->getUnixName();
 		
 		$select_repo = '<select name="frontpage">' . "\n";
-		$result = db_query_params('SELECT repo_name, description, clone_url FROM plugin_scmgit_secondary_repos WHERE group_id=$1 AND next_action = 0 ORDER BY repo_name',
-						array ($params['group_id']));
+		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = 0 AND plugin_id=$2 ORDER BY repo_name',
+					  array ($params['group_id'],
+						 $this->getID()));
 		if (! $result) {
 			$params['error_msg'] = db_error();
 			return false;
