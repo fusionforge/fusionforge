@@ -67,12 +67,12 @@ EOF
 
 reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
+cd $CHECKOUTPATH
+
 destroy_vm -t debian7 $HOST
 start_vm_if_not_keeped -t debian7 $HOST
-
 setup_debian_3rdparty_repo
 
-cd $CHECKOUTPATH
 # Transfer preseeding
 cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
 
