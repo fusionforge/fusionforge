@@ -424,8 +424,8 @@ function html_use_storage() {
 
 function html_use_simplemenu() {
 	html_use_jquery();
-	use_javascript('/scripts/jquery-simpletreemenu/js/jquery-simpleTreeMenu-1.1.0.js');
-	use_stylesheet('/scripts/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.1.0.css');
+	use_javascript('/scripts/jquery-simpletreemenu/js/jquery-simpleTreeMenu-1.5.0.js');
+	use_stylesheet('/scripts/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.5.0.css');
 }
 
 function html_use_coolfieldset() {
@@ -444,21 +444,25 @@ function html_use_jqueryui() {
 function html_use_jqueryjqplot() {
 	html_use_jquery();
 	use_javascript('/scripts/jquery-jqplot/jquery.jqplot.js');
+	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.canvasAxisLabelRenderer.js');
 	use_stylesheet('/scripts/jquery-jqplot/jquery.jqplot.css');
 }
 
 function html_use_jqueryjqplotpluginCanvas() {
 	html_use_jqueryjqplot();
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.canvasTextRenderer.js');
-	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.canvasAxisLabelRenderer.js');
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.categoryAxisRenderer.js');
 }
 
 function html_use_jqueryjqplotpluginBar() {
 	html_use_jqueryjqplot();
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.barRenderer.js');
-	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.categoryAxisRenderer.js');
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.pointLabels.js');
+}
+
+function html_use_jqueryjqplotpluginPie() {
+	html_use_jqueryjqplot();
+	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.pieRenderer.js');
 }
 
 /**

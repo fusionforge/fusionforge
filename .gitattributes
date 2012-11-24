@@ -3501,6 +3501,8 @@ src/utils/underworld-dummy/mail_aliases.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/mailing_lists_dump.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/new_aliases.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/ssh_dump.pl svneol=native#text/x-perl
+src/vendor/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.5.0.css -text
+src/vendor/jquery-simpletreemenu/js/jquery-simpleTreeMenu-1.5.0.js -text
 src/www/DTD/xhtml10t-rdfa10.dtd -text
 src/www/docman/scripts/DocManController.js -text
 src/www/favicon.ico svneol=native#unset

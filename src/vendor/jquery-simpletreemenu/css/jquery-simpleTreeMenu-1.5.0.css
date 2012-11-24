@@ -14,7 +14,7 @@ ul.simpleTreeMenu, ul.simpleTreeMenu ul {
 ul.simpleTreeMenu li.Node {
 	list-style-image: url("simpleTreeMenu/menu-arrow-right.png");
 	margin-left: 5px;
-	padding: 0px;	
+	padding: 0px;
 }
 
 ul.simpleTreeMenu li.Node span {
@@ -23,7 +23,7 @@ ul.simpleTreeMenu li.Node span {
 }
 
 ul.simpleTreeMenu li.Node span:hover {
-	background-color: #e0e0e0;
+	background-color: #d8d8d0;
 }
 
 ul.simpleTreeMenu li.expanded {
@@ -33,15 +33,25 @@ ul.simpleTreeMenu li.expanded {
 ul.simpleTreeMenu li.Leaf {
 	list-style-image: url("simpleTreeMenu/menu-dot.png");
 	margin-left: 5px;
-	padding: 0px;	
+	padding: 0px;
 }
 
 ul.simpleTreeMenu a, ul.simpleTreeMenu a:visited {
 	display: block;
 	text-decoration: none;
-	color: #3333AA;
+}
+
+ul.simpleTreeMenu li.selected {
+	background-color: #c0c0c0;
 }
 
 ul.simpleTreeMenu a:hover {
-	background-color: #e0e0e0;
+	background-color: #d8d8d0;
+	text-decoration: none;
 }
+
+ul.simpleTreeMenu li.EmptyNode {
+	/* Override li.Node with your EmptyNode preferences here: */
+	color: #808080;
+}
+
