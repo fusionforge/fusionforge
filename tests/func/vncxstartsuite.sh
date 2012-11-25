@@ -59,11 +59,15 @@ password
 password
 EOF
 
-# Setup ssh key
+# Setup ssh key and parameters
+cd
+mkdir -p .ssh
 if ! [ -e .ssh/id_rsa.pub ] ; then
-    mkdir -p .ssh
     ssh-keygen -f .ssh/id_rsa -N ''
     cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+fi
+if ! grep -q StrictHostKeyChecking .ssh/config ; then
+    echo StrictHostKeyChecking no >> .ssh/config
 fi
 
 # Start vnc server (that will start phpunit)
