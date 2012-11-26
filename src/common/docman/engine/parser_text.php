@@ -38,7 +38,6 @@ if (!is_file($fichin))
 	exit(1);
 
 echo parser_text($fichin);
-unlink($fichin);
 
 // Local Variables:
 // mode: php

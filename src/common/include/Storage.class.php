@@ -60,7 +60,7 @@ class Storage extends Error {
 
 		$this->pending_store[] = $storage;
 
-		if (is_file($file) && is_dir($storage)) {
+		if (is_file($file) && is_dir($dir)) {
 			$ret = rename($file, $storage);
 			if (!$ret) {
 				$this->setError(sprintf(_('File %1$s cannot be moved to the permanent location: %2$s.'), $file, $storage));

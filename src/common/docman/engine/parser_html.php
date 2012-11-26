@@ -50,11 +50,9 @@ fwrite($fd , $strip_content);
 fclose($fd);
 
 echo parser_text($filename);
-unlink ($fichin);
+unlink ($filename);
 
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
