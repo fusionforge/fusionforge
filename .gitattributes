@@ -3503,6 +3503,12 @@ src/utils/underworld-dummy/new_aliases.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/ssh_dump.pl svneol=native#text/x-perl
 src/vendor/jquery-simpletreemenu/css/jquery-simpleTreeMenu-1.5.0.css -text
 src/vendor/jquery-simpletreemenu/js/jquery-simpleTreeMenu-1.5.0.js -text
+src/vendor/jquery-ui/css/overcast/images/ui-bg_inset-soft_50_c9c9c9_1x100.png -text
+src/vendor/jquery-ui/css/overcast/images/ui-icons_70b2e1_256x240.png -text
+src/vendor/jquery-ui/css/overcast/images/ui-icons_fbc856_256x240.png -text
+src/vendor/jquery-ui/css/overcast/jquery-ui-1.9.2.custom.css -text
+src/vendor/jquery-ui/js/jquery-ui-1.9.2.custom.js -text
+src/vendor/jquery/jquery-1.8.3.js -text
 src/www/DTD/xhtml10t-rdfa10.dtd -text
 src/www/docman/scripts/DocManController.js -text
 src/www/favicon.ico svneol=native#unset

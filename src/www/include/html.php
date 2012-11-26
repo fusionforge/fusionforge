@@ -407,7 +407,7 @@ function html_get_tooltip_description($element_name) {
 }
 
 function html_use_jquery() {
-	use_javascript('/scripts/jquery/jquery-1.7.2.min.js');
+	use_javascript('/scripts/jquery/jquery-1.8.3.js');
 }
 
 function html_use_tooltips() {
@@ -437,20 +437,21 @@ function html_use_coolfieldset() {
 
 function html_use_jqueryui() {
 	html_use_jquery();
-	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.8.22.custom.min.js');
-	use_stylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.8.22.custom.css');
+	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.9.2.custom.js');
+	use_stylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.9.2.custom.css');
 }
 
 function html_use_jqueryjqplot() {
 	html_use_jquery();
 	use_javascript('/scripts/jquery-jqplot/jquery.jqplot.js');
-	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.canvasAxisLabelRenderer.js');
 	use_stylesheet('/scripts/jquery-jqplot/jquery.jqplot.css');
 }
 
 function html_use_jqueryjqplotpluginCanvas() {
 	html_use_jqueryjqplot();
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.canvasTextRenderer.js');
+	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.canvasAxisLabelRenderer.js');
+	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.canvasAxisTickRenderer.js');
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.categoryAxisRenderer.js');
 }
 
@@ -463,6 +464,16 @@ function html_use_jqueryjqplotpluginBar() {
 function html_use_jqueryjqplotpluginPie() {
 	html_use_jqueryjqplot();
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.pieRenderer.js');
+}
+
+function html_use_jqueryjqplotpluginhighlighter() {
+	html_use_jqueryjqplot();
+	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.highlighter.js');
+}
+
+function html_use_jqueryjqplotplugindateAxisRenderer() {
+	html_use_jqueryjqplot();
+	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.dateAxisRenderer.js');
 }
 
 /**
