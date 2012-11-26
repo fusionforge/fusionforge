@@ -184,10 +184,16 @@ class Document extends Error {
 
 		$docid = db_insertid($result, 'doc_data', 'docid');
 		if ($filesize) {
-			if (!DocumentStorage::instance()->store($docid, $data)) {
-				DocumentStorage::instance()->rollback();
+			if (is_file($data)) {
+				if (!DocumentStorage::instance()->store($docid, $data)) {
+					DocumentStorage::instance()->rollback();
+					db_rollback();
+					$this->setError(DocumentStorage::instance()->getErrorMessage());
+					return false;
+				}
+			} else {
+				$this->setError(_('Error Adding Document:').' '._('Not a file'));
 				db_rollback();
-				$this->setError(DocumentStorage::instance()->getErrorMessage());
 				return false;
 			}
 		}
