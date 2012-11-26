@@ -3,6 +3,7 @@
  * FusionForge Generic Storage Class
  *
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -51,17 +52,22 @@ class Storage extends Error {
 		$storage = $this->get_storage($key);
 		$dir     = dirname($storage);
 		if (!is_dir($dir)) {
-			if (!mkdir ( $dir, 0755, true)) {
-				$this->setError(_('mkdir failed').': '.$dir);
+			if (!mkdir( $dir, 0755, true)) {
+				$this->setError(_('Cannot create directory:').' '.$dir);
 				return false;
 			}
 		}
 
 		$this->pending_store[] = $storage;
 
-		$ret = rename($file, $storage);
-		if (!$ret) {
-			$this->setError( sprintf(_('File %1$s cannot be moved to the permanent location: %2$s.'), $file, $storage));
+		if (is_file($file) && is_dir($storage)) {
+			$ret = rename($file, $storage);
+			if (!$ret) {
+				$this->setError(sprintf(_('File %1$s cannot be moved to the permanent location: %2$s.'), $file, $storage));
+				return false;
+			}
+		} else {
+			$this->setError(sprintf(_('Not a File %1$s or not a directory %2$s.'), $file, $storage));
 			return false;
 		}
 		return $this;
