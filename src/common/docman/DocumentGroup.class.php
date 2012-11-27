@@ -773,6 +773,12 @@ class DocumentGroup extends Error {
 	 * @access	private
 	 */
 	private function injectContent($directory) {
+		// ugly hack in case of ppl injecting zip at / when there is not directory in the zipfile...
+		// force upload in the first directory of the tree ...
+		if (!$this->getID()) {
+			$subGroupArrID = $this->getSubgroup(0);
+			$this->data_array['doc_group'] = $subGroupArrID[0];
+		}
 		if (is_dir($directory)) {
 			$dir_arr = scandir($directory);
 			for ($i = 0; $i < count($dir_arr); $i++) {
