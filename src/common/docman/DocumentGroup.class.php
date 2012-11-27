@@ -740,6 +740,8 @@ class DocumentGroup extends Error {
 				$zip->close();
 				if ($this->injectContent($extractDir)) {
 					rmdir($extractDir);
+					die();
+					exit();
 					return true;
 				} else {
 					return false;
@@ -773,19 +775,14 @@ class DocumentGroup extends Error {
 	 * @access	private
 	 */
 	private function injectContent($directory) {
-		// ugly hack in case of ppl injecting zip at / when there is not directory in the zipfile...
-		// force upload in the first directory of the tree ...
-		if (!$this->getID()) {
-			$subGroupArrID = $this->getSubgroup(0);
-			$this->data_array['doc_group'] = $subGroupArrID[0];
-		}
 		if (is_dir($directory)) {
 			$dir_arr = scandir($directory);
 			for ($i = 0; $i < count($dir_arr); $i++) {
 				if ($dir_arr[$i] != '.' && $dir_arr[$i] != '..') {
 					if (is_dir($directory.'/'.$dir_arr[$i])) {
-						if ($this->create($dir_arr[$i], $this->getID())) {
-							if (!$this->injectContent($directory.'/'.$dir_arr[$i])) {
+						$ndg = new DocumentGroup($this->getGroup());
+						if ($ndg->create($dir_arr[$i], $this->getID())) {
+							if (!$ndg->injectContent($directory.'/'.$dir_arr[$i])) {
 								return false;
 							}
 						}
@@ -798,6 +795,12 @@ class DocumentGroup extends Error {
 							$dir_arr_type = 'application/binary';
 						}
 						if (util_is_valid_filename($dir_arr[$i])) {
+							// ugly hack in case of ppl injecting zip at / when there is not directory in the zipfile...
+							// force upload in the first directory of the tree ...
+							if (!$this->getID()) {
+									$subGroupArrID = $this->getSubgroup(0);
+									$this->data_array['doc_group'] = $subGroupArrID[0];
+							}
 							if (!$d->create($dir_arr[$i], $dir_arr_type, $directory.'/'.$dir_arr[$i], $this->getID(), $dir_arr[$i].' '._('injected by Zip:').date(DATE_ATOM), _('no description'))) {
 								$this->setError($dir_arr[$i].': '.$d->getErrorMessage());
 								return false;
