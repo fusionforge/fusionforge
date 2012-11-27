@@ -717,7 +717,10 @@ class DocumentGroup extends Error {
 				_('For more info, visit:').
 				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getID());
 
-			util_send_message('', $subject, $body, '', $BCC);
+			$BCCarray = explode(',',$BCC);
+			foreach ($BCCarray as $dest_email) {
+				util_send_message($dest_email, $subject, $body, 'noreply@'.forge_get_config('web_host'), '', _('Docman'));
+			}
 		}
 		return true;
 	}
