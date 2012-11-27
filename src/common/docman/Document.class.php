@@ -78,7 +78,7 @@ class Document extends Error {
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError('Document:: '. _('Group_id in db result does not match Group Object'));
+					$this->setError('Document:: '. _('group_id in db result does not match Group Object'));
 					$this->data_array = null;
 					return false;
 				}
@@ -136,14 +136,16 @@ class Document extends Error {
 				array($filename, $doc_group, $doc_initstatus));
 
 		if (!$result || db_numrows($result) > 0) {
-			$this->setError(_('Document already published in this directory'));
+			$dg = new DocumentGroup($this->getGroup(), $doc_group);
+			$this->setError(_('Document already published in this directory').' '.$dg->getPath());
 			return false;
 		}
 
 		$result = db_query_params('SELECT title FROM docdata_vw where title = $1 AND doc_group = $2',
 			array($title, $doc_group));
 		if (!$result || db_numrows($result) > 0) {
-			$this->setError(_('Document already published in this directory'));
+			$dg = new DocumentGroup($this->getGroup(), $doc_group);
+			$this->setError(_('Document already published in this directory').' '.$dg->getPath());
 			return false;
 		}
 
@@ -192,7 +194,7 @@ class Document extends Error {
 					return false;
 				}
 			} else {
-				$this->setError(_('Error Adding Document:').' '._('Not a file'));
+				$this->setError(_('Error Adding Document:').' '._('Not a file').' '.$filename);
 				db_rollback();
 				return false;
 			}
