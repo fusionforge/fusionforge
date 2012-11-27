@@ -459,6 +459,7 @@ function html_use_jqueryjqplotpluginBar() {
 	html_use_jqueryjqplot();
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.barRenderer.js');
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.pointLabels.js');
+	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.categoryAxisRenderer.js');	
 }
 
 function html_use_jqueryjqplotpluginPie() {
