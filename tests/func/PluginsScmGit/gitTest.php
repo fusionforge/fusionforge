@@ -58,7 +58,8 @@ class ScmGitTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Access to your personal repository");
 
 		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
-		sleep(10); // Gitweb has no <h1> element, so no waitForPageToLoad()
+		$this->waitForPageToLoad();
+		$this->assertElementPresent("//xhtml:div[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->assertTextPresent("other-repo.git");
 		$this->assertTextPresent("users/".FORGE_ADMIN_USERNAME.".git");
@@ -75,10 +76,25 @@ class ScmGitTest extends FForge_SeleniumTestCase
 		$this->cron("create_scm_repos.php");
 
 		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
-		sleep(10); // Gitweb has no <h1> element, so no waitForPageToLoad()
+		$this->waitForPageToLoad();
+		$this->assertElementPresent("//xhtml:div[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->assertTextNotPresent("other-repo.git");
 		$this->assertTextPresent("users/".FORGE_ADMIN_USERNAME.".git");
 	}
+
+	/**
+	 * Method that is called after Selenium actions.
+	 *
+	 * @param  string $action
+	 */
+	protected function defaultAssertions($action)
+	{
+		if ($action == 'waitForPageToLoad') {
+			$this->assertTrue($this->isElementPresent("//h1")
+					  || $this->isElementPresent("//xhtml:div"));
+		}
+	}
+
 }
 ?>
