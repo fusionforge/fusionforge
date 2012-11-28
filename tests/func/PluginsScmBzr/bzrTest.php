@@ -47,7 +47,8 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 
 		$this->open(ROOT.'/scm/loggerhead/');
 		$this->assertTextPresent("Browsing (root)");
-		$this->clickAndWait("link=projecta");
+		$this->click("link=projecta");
+		$this->waitForPageToLoad(60000);
 		$this->assertTextPresent("Browsing (root)/projecta");
 
 		// Get the address of the repo
@@ -73,13 +74,18 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		system("cd $t/trunk && bzr push --quiet $p/trunk", $ret);
 		$this->assertEquals($ret, 0);
 
-		$this->open(ROOT.'/scm/loggerhead/projecta');
+		$this->open(ROOT.'/scm/loggerhead/');
+		$this->assertTextPresent("Browsing (root)");
+		$this->click("link=projecta");
+		$this->waitForPageToLoad(60000);
 		$this->assertTextPresent("Browsing (root)/projecta");
 		$this->assertTextPresent("trunk");
-		$this->clickAndWait("link=trunk");
+		$this->click("link=trunk");
+		$this->waitForPageToLoad(60000);
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextNotPresent("Adding file");
-		$this->clickAndWait("link=Changes");
+		$this->click("link=Changes");
+		$this->waitForPageToLoad(60000);
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
 
