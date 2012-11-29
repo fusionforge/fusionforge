@@ -47,7 +47,7 @@ CHANGEFILE=${PKGNAME}_$SMAJOR${MINOR}_$ARCH.changes
 cd $BUILDRESULT
 REPOPATH=$WORKSPACE/build/debian
 
-rm -r $REPOPATH
+[ ! -d $REPOPATH ] || rm -r $REPOPATH
 mkdir -p $REPOPATH/conf
 cat > $REPOPATH/conf/distributions <<EOF
 Codename: $DIST
