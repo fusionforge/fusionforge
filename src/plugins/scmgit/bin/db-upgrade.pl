@@ -72,6 +72,7 @@ eval {
     }
     
     &update_with_sql("/usr/share/gforge/plugins/$pluginname/lib/20121019-multiple-repos.sql","0.2");
+    &update_with_sql("/usr/share/gforge/plugins/$pluginname/lib/20121128-drop-old-tables.sql","0.3");
 
     debug "It seems your database install/upgrade went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian GForge." ;
