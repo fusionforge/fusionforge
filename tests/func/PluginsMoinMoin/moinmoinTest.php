@@ -42,24 +42,31 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		sleep (5);
 
 		$this->gotoProject('ProjectA');
-		$this->click("link=MoinMoinWiki");
-		sleep(10); // MoinMoinWiki has no <h1> element, so no waitForPageToLoad()
+		$this->clickAndWait("link=MoinMoinWiki");
 		$this->assertFalse($this->isTextPresent("ConfigurationError"));
 		$this->assertFalse($this->isTextPresent("Wiki not created yet"));
 
-		$this->click("link=Create New Page");
-		sleep(5); // Grmf.
-
+		$this->clickAndWait("link=Create New Page");
 		$this->assertFalse($this->isTextPresent("You are not allowed"));
 		$this->type("//textarea[@id='editor-textarea']", "Pardon me, boy
 Is that the Chattanooga choo choo?");
-		$this->click("//input[@name='button_save']");
-		sleep(5); // Grmf.
-
+		$this->clickAndWait("//input[@name='button_save']");
 		$this->gotoProject('ProjectA');
-		$this->click("link=MoinMoinWiki");
-		sleep(5); // Grmf.
+		$this->clickAndWait("link=MoinMoinWiki");
 		$this->assertTrue($this->isTextPresent("Chattanooga"));
+	}
+
+	/**
+	 * Method that is called after Selenium actions.
+	 *
+	 * @param  string $action
+	 */
+	protected function defaultAssertions($action)
+	{
+		if ($action == 'waitForPageToLoad') {
+			$this->assertTrue($this->isElementPresent("//h1")
+					  || $this->isElementPresent("//div[@id='footer']"));
+		}
 	}
 }
 
