@@ -13,8 +13,6 @@ export DIST=wheezy
 export HOST=$1
 
 prepare_workspace
-destroy_vm -t debian7 $HOST
-start_vm_if_not_keeped -t debian7 $HOST
 
 CHECKOUTPATH=$(pwd)
 
@@ -61,6 +59,11 @@ SignWith: buildbot@$(hostname -f)
 EOF
 
 reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
+
+cd $CHECKOUTPATH
+
+destroy_vm -t debian7 $HOST
+start_vm_if_not_keeped -t debian7 $HOST
 
 # Build 3rd-party 
 # make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
