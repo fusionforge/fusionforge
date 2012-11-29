@@ -126,6 +126,17 @@ echo "Run phpunit test on $HOST in $FORGE_HOME"
 ssh root@$HOST "apt-get -y install xfonts-base vnc4server ; mkdir -p /root/.vnc"
 ssh root@$HOST "cat > /root/.vnc/xstartup ; chmod +x /root/.vnc/xstartup" <<EOF
 #! /bin/bash
+# Setup ssh key and parameters
+cd
+mkdir -p .ssh
+if ! [ -e .ssh/id_rsa.pub ] ; then
+    ssh-keygen -f .ssh/id_rsa -N ''
+    cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+fi
+if ! grep -q StrictHostKeyChecking .ssh/config ; then
+    echo StrictHostKeyChecking no >> .ssh/config
+fi
+
 : > /root/phpunit.exitcode
 $FORGE_HOME/tests/scripts/phpunit.sh DEBDebian70Tests.php &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
@@ -136,6 +147,7 @@ ssh root@$HOST vncpasswd <<EOF
 password
 password
 EOF
+
 ssh root@$HOST "vncserver :1"
 sleep 5
 pid=$(ssh root@$HOST cat /root/phpunit.pid)
