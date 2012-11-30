@@ -121,4 +121,16 @@ class Utils_Tests extends PHPUnit_Framework_TestCase
 		$_REQUEST=array('no_arg' => 'BaD');
 		$this->assertEquals(getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'), 'default');
 	}
+
+	public function testUtilIsHtml()
+	{
+		$this->assertFalse(util_is_html(''));
+		$this->assertFalse(util_is_html('This is a text.'));
+		$this->assertTrue(util_is_html('This is <strong>html</strong>'));
+		$this->assertFalse(util_is_html('Math: 4 > 3'));
+		$this->assertFalse(util_is_html('Math: "4" > 3'));
+		$this->assertTrue(util_is_html('Math: 4 &gt; 3'));
+		$this->assertTrue(util_is_html('Math&eacute;tiques'));
+		$this->assertTrue(util_is_html('Math: &quot;4&quot; > 3'));
+	}
 }

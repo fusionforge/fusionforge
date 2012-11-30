@@ -279,7 +279,7 @@ if ($type == 'admin') {
 
 	print _("Edit the block as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)");
 
-	print "<center>";
+	print '<div class="align-center">';
 	print "<p><b>$blocks[$name]</b> ($name)</p>";
 	print "<form action=\"/plugins/blocks/\" method=\"post\">";
 	print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
@@ -303,6 +303,12 @@ if ($type == 'admin') {
 	$params['height'] = "500";
 	$params['group'] = $id;
 	$params['content'] = '<textarea name="body"  rows="20" cols="80">'.$body.'</textarea>';
+
+	if (util_is_html($body)) {
+		// If user is editing HTML, keep HTML format by saying it's html
+		$params['content'] = '<input type="hidden" name="_body_content_type" value="html" />'."\n".$params['content'];
+	}
+
 	plugin_hook_by_reference("text_editor", $params);
 	echo $params['content'];
 
@@ -310,7 +316,7 @@ if ($type == 'admin') {
 			_("Save") .
 			"\" />";
 	print "</form>";
-	print "</center>";
+	print "</div>";
 
 	print "<fieldset><legend>".
 			_("Tips").
@@ -326,7 +332,7 @@ if ($type == 'admin') {
 			"</li><li>".
 			"{boxBottom}".
 			_(": will create the end part of a box.").
-			"</li></ul><p /><ul><li>".
+			"</li></ul><ul><li>".
 			"{boxHeader}".
 			_(": will create a header before a text.").
 			"</li><li>{boxFooter}".

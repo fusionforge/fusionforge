@@ -1704,6 +1704,9 @@ function util_sanitise_multiline_submission($text) {
 }
 
 
+function util_is_html($string) {
+	return (strip_tags(util_unconvert_htmlspecialchars($string)) != $string);
+}
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
