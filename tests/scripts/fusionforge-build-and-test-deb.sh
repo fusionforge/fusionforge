@@ -137,6 +137,8 @@ if ! grep -q StrictHostKeyChecking .ssh/config ; then
     echo StrictHostKeyChecking no >> .ssh/config
 fi
 
+[ -e /var/lib/gforge/.bazaar/bazaar.conf ] && sed -i -e s,https://,http://,g /var/lib/gforge/.bazaar/bazaar.conf
+
 : > /root/phpunit.exitcode
 $FORGE_HOME/tests/scripts/phpunit.sh DEBDebian70Tests.php &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
