@@ -31,7 +31,7 @@ global $aid;
 use_javascript('/tabber/tabber.js');
 html_use_coolfieldset();
 
-$ath->header(array ('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
+$ath->header(array ('title'=> $ah->getStringID() . $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
 
@@ -97,7 +97,7 @@ echo notepad_func();
 
 		<tr><td colspan="2">
 			<br />
-			<?php echo $ah->showDetails(); ?>
+			<?php $ah->showDetails(); ?>
 		</td></tr>
 </table>
 <div id="tabber" class="tabber">
