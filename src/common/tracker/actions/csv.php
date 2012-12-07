@@ -88,6 +88,6 @@ $format .= " using '$sep' as separator.";
 
 <p><a href="<?php echo $url_export ?>"><?php echo _('Download CSV file'); ?></a></p>
 
-<p />
+<p ></p>
 <?php
 $ath->footer(array());
