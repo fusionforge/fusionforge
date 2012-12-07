@@ -12,6 +12,9 @@ require_once $gfcommon.'include/FusionForge.class.php';
 ini_set('memory_limit','32M');
 sysdebug_off();
 
+// Disable error_reporting as it breaks XML generated output.
+error_reporting(0);
+
 $uri = 'http://'.forge_get_config('web_host');
 // 1. include client and server
 require_once $gfwww.'soap/nusoap.php';
