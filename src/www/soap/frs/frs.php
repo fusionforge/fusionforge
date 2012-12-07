@@ -338,14 +338,14 @@ function getReleases($session_ser,$group_id,$package_id) {
 		return new soap_fault ('','getReleases',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
-	$frsp =& frspackage_get_object($package_id);
+	$frsp = frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
 		return new soap_fault ('','getReleases','Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
 		return new soap_fault ('','getReleases',$frsp->getErrorMessage(),$frsp->getErrorMessage());
 	}
 
-	$release_arr =& $frsp->getReleases();
+	$release_arr = $frsp->getReleases();
 
 	return releases_to_soap($release_arr);
 }
@@ -383,7 +383,7 @@ function addRelease($session_ser,$group_id,$package_id,$name,$notes,$changes,$re
 		return new soap_fault ('','getPackages',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
-	$frsp =& frspackage_get_object($package_id);
+	$frsp = frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
 		return new soap_fault ('','getReleases','Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
