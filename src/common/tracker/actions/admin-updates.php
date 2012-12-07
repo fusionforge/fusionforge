@@ -187,7 +187,7 @@ if (getStringFromRequest('add_extrafield')) {
 		if (!$aef || !is_object($aef)) {
 			$error_msg .= _('Unable to create ArtifactExtraField Object');
 		} elseif ($aef->isError()) {
-			$error_msg .= $aefe->getErrorMessage();
+			$error_msg .= $aef->getErrorMessage();
 		} else {
 			$feedback .= ', Box: ';
 			$feedback .= $aef->getName();
@@ -547,7 +547,7 @@ if (getStringFromRequest('add_extrafield')) {
 	foreach ($elearray as $e) {
 		$from = $e['element_id'];
 		$next = isset($wk[$from]) ? array_keys($wk[$from]) : array();
-		$atw->saveNextNodes($from, array_keys($wk[$from]));
+		$atw->saveNextNodes($from, $next);
 	}
 	$feedback .= _('Workflow saved');
 
