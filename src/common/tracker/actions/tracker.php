@@ -58,7 +58,6 @@ switch (getStringFromRequest('func')) {
 		}
 
 		$user_email = getStringFromRequest('user_email');
-		$category_id = getIntFromRequest('category_id');
 		$artifact_group_id = getIntFromRequest('artifact_group_id');
 		$summary = getStringFromRequest('summary');
 		$details = getStringFromRequest('details');
@@ -70,7 +69,6 @@ switch (getStringFromRequest('func')) {
 			Create a new Artifact
 		*/
 		$ah=new ArtifactHtml($ath);
-		$feedback = '';
 		if (!$ah || !is_object($ah)) {
 			form_release_key(getStringFromRequest('form_key'));
 			exit_error(_('Artifact Could Not Be Created'),'tracker');
@@ -154,7 +152,6 @@ switch (getStringFromRequest('func')) {
 		$artifact_id_list = getArrayFromRequest('artifact_id_list');
 		$priority = getStringFromRequest('priority');
 		$status_id = getIntFromRequest('status_id');
-		$category_id = getIntFromRequest('category_id');
 		$artifact_group_id = getIntFromRequest('artifact_group_id');
 		$resolution_id = getIntFromRequest('resolution_id');
 		$assigned_to = getStringFromRequest('assigned_to');
@@ -240,7 +237,6 @@ switch (getStringFromRequest('func')) {
 		$artifact_id = getIntFromRequest('artifact_id');
 		$priority = getIntFromRequest('priority');
 		$status_id = getIntFromRequest('status_id');
-		$category_id = getIntFromRequest('category_id');
 		$artifact_group_id = getIntFromRequest('artifact_group_id');
 		$resolution_id = getIntFromRequest('resolution_id');
 		$assigned_to = getStringFromRequest('assigned_to');
