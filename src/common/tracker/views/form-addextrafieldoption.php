@@ -32,7 +32,7 @@
 	} elseif ($ac->isError()) {
 		exit_error($ac->getErrorMessage(),'tracker');
 	} else {
-	  	$efearr=$ath->getExtraFieldElements($boxid);
+		$efearr=$ath->getExtraFieldElements($boxid);
 		$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
 		$ath->adminHeader(array ('title'=>$title));
 

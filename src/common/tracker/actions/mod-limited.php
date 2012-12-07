@@ -33,7 +33,7 @@ global $aid;
 global $atid;
 
 html_use_coolfieldset();
-$ath->header(array ('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
+$ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
 
@@ -112,40 +112,39 @@ if (session_loggedin()) {
 
 	<tr>
 		<td><strong><?php echo _('Assigned to')?>:</strong><br />
-		<span id="tracker-assigned_to" title="<?php echo util_html_secure(html_get_tooltip_description('assigned_to')) ?>">
+		<span id="tracker-assigned_to" title="<?php echo html_get_tooltip_description('assigned_to') ?>">
 		<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)
 		</span></td>
 		<td>
 		<strong><?php echo _('Priority') ?>:</strong><br />
-		<span id="tracker-priority" title="<?php echo util_html_secure(html_get_tooltip_description('priority')) ?>">
+		<span id="tracker-priority" title="<?php echo html_get_tooltip_description('priority') ?>">
 		<?php echo $ah->getPriority(); ?>
 		</span></td>
 	</tr>
 
+	<?php if (!$ath->usesCustomStatuses()) { ?>
 	<tr>
 		<td>
-		<?php if (!$ath->usesCustomStatuses()) { ?>
 			<strong><?php echo _('State') ?>:</strong><br />
 			<span id="tracker-status_id" title="<?php echo util_html_secure(html_get_tooltip_description('status_id')) ?>">
 			<?php echo $ath->statusBox ('status_id', $ah->getStatusID() ); ?>
 			<span>
-		<?php } ?>
 		</td>
 		<td>
 		</td>
 	</tr>
+	<?php } ?>
 	<?php
 		$ath->renderRelatedTasks($group, $ah);
 		$ath->renderFiles($group_id, $ah);
 	?>
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
-			<span id="tracker-summary" title="<?php echo util_html_secure(html_get_tooltip_description('summary')) ?>">
+			<span id="tracker-summary" title="<?php echo html_get_tooltip_description('summary') ?>">
 			<?php echo $ah->getSummary(); ?>
 			</span>
 		</td>
 	</tr>
-
 	<tr><td colspan="2">
 		<br />
 		<?php echo $ah->showDetails(); ?>
@@ -189,7 +188,7 @@ $nb = $count? ' ('.$count.')' : '';
 		<h2><?php echo _('Attached Files') ?>:</h2>
 		<?php
 		//
-		//  print a list of files attached to this Artifact
+		// print a list of files attached to this Artifact
 		//
 			$ath->renderFiles($group_id, $ah);
 		?>
@@ -207,18 +206,12 @@ $nb = $count? ' ('.$count.')' : '';
 </table>
 </div>
 <div class="tabbertab" title="<?php echo _('Changes'); ?>">
-<table border="0" width="80%">
-	<tr><td colspan="2">
-		<h2><?php echo _('Change Log') ?>:</h2>
-		<?php
-			echo $ah->showHistory();
-		?>
-	</td></tr>
-</table>
+	<h2><?php echo _('Changes') ?></h2>
+	<?php $ah->showHistory(); ?>
 </div>
 <?php $ah->showRelations(); ?>
 </div>
-		</form>
+</form>
 <?php
 
 $ath->footer(array());

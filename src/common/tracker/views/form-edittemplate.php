@@ -4,13 +4,11 @@ $title = sprintf(_('Edit Layout Template for %s'), $ath->getName()) ;
 $ath->adminHeader(array('title'=>$title, 'modal'=>1));
 
 $params = array() ;
-$params['body'] = '<table>'.$ath->getRenderHTML(array(), 'DETAIL').'</table>';
+$params['body'] = isset($body)? $body : '<table>'.$ath->getRenderHTML(array(),'DETAIL').'</table>';
 $params['height'] = "500";
 $params['group'] = $group_id;
 $params['content'] = '<textarea name="body"  rows="30" cols="80">' . $params['body'] . '</textarea>';
 plugin_hook_by_reference("text_editor",$params);
-
-echo _('Notes:');
 
 ?>
 <h2>Important</h2>

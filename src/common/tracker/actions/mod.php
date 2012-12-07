@@ -34,7 +34,8 @@ global $aid;
 global $atid;
 
 html_use_coolfieldset();
-$ath->header(array ('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
+$ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
+
 
 echo notepad_func();
 
@@ -140,7 +141,8 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<td><strong><?php echo _('Assigned to')?>:</strong><br />
 		<?php
 		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
-		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1','('._('Admin').')');
+		echo " ";
+		echo util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1','('._('Admin').')');
 		?>
 		</td><td>
 		<strong><?php echo _('Priority') ?>:</strong><br />
@@ -148,19 +150,15 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		</td>
 	</tr>
 
+	<?php if (!$ath->usesCustomStatuses()) { ?>
 	<tr>
 		<td>
-		<?php if (!$ath->usesCustomStatuses()) { ?>
-		<strong><?php echo _('State') ?>:</strong><br />
-		<?php
-
-		echo $ath->statusBox ('status_id', $ah->getStatusID() );
-		}
-		?>
+			<strong><?php echo _('State') ?>:</strong><br />
+			<?php echo $ath->statusBox ('status_id', $ah->getStatusID() ); ?>
 		</td>
-		<td>
-		</td>
+		<td></td>
 	</tr>
+	<?php } ?>
 	<?php
 		$ath->renderRelatedTasks($group, $ah);
 		$ath->renderFiles($group_id, $ah);
@@ -168,7 +166,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
-		<input id="tracker-summary" title="<?php echo util_html_secure(_('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.')) ?>" type="text" name="summary" size="70" value="<?php
+		<input id="tracker-summary" required="required" title="<?php echo _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.') ?>" type="text" name="summary" size="70" value="<?php
 			echo $ah->getSummary();
 			?>" maxlength="255" />
 		</td>
@@ -177,10 +175,10 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<div id="edit" style="display:none;">
 		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>: <?php echo notepad_button('document.forms.trackermodform.description') ?></strong>
 		<br />
-		<textarea id="tracker-description" name="description" rows="30" cols="79" title="<?php echo util_html_secure(html_get_tooltip_description('description')) ?>"><?php echo $ah->getDetails(); ?></textarea>
+		<textarea id="tracker-description" required="required" name="description" rows="30" cols="79" title="<?php echo html_get_tooltip_description('description') ?>"><?php echo $ah->getDetails(); ?></textarea>
 		</div>
 		<div id="show" style="display:block;">
-		<?php echo $ah->showDetails(true); ?>
+		<?php $ah->showDetails(true); ?>
 		</div>
 	</td></tr>
 </table>
@@ -195,7 +193,8 @@ $nb = $count? ' ('.$count.')' : '';
 		<br /><strong><?php echo _('Use Canned Response') ?>:</strong><br />
 		<?php
 		echo $ath->cannedResponseBox('canned_response');
-		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1','('._('Admin').')');
+		echo " ";
+		echo util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1','('._('Admin').')');
 		?>
 		<script type="text/javascript">/* <![CDATA[ */
 			$('#tracker-canned_response').change(function() {
@@ -251,7 +250,7 @@ $nb = $count? ' ('.$count.')' : '';
         <input type="file" name="input_file4" size="30" /><br />
 		<?php
 		//
-		//	print a list of files attached to this Artifact
+		// print a list of files attached to this Artifact
 		//
 		$ath->renderFiles($group_id, $ah);
 		?>
@@ -269,20 +268,12 @@ $nb = $count? ' ('.$count.')' : '';
 </table>
 </div>
 <div class="tabbertab" title="<?php echo _('Changes'); ?>">
-<table border="0" width="80%">
-	<tr>
-	<td colspan="2">
-		<h2><?php echo _('Changes') ?>:</h2>
-		<?php
-			echo $ah->showHistory();
-		?>
-	</td>
-	</tr>
-</table>
+	<h2><?php echo _('Changes') ?></h2>
+	<?php $ah->showHistory(); ?>
 </div>
 <?php $ah->showRelations(); ?>
 </div>
-		</form>
+</form>
 <?php
 
 $ath->footer(array());

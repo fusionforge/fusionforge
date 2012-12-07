@@ -165,16 +165,8 @@ $nb = $count? ' ('.$count.')' : '';
 </table>
 </div>
 <div class="tabbertab" title="<?php echo _('Changes'); ?>">
-<table width="80%">
-	<tr>
-	<td colspan="2">
-	<h2><?php echo _('Changes') ?>:</h2>
-	<?php
-	echo $ah->showHistory();
-	?>
-	</td>
-	</tr>
-</table>
+	<h2><?php echo _('Changes') ?></h2>
+	<?php $ah->showHistory(); ?>
 </div>
 <?php $ah->showRelations(); ?>
 </div>

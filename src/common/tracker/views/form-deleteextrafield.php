@@ -21,7 +21,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 $ath->adminHeader(array('title'=>sprintf(_('Delete a custom field for %s'),$ath->getName())));
 
 $id = getStringFromRequest('id');
