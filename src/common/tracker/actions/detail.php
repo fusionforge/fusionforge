@@ -31,7 +31,7 @@ global $aid;
 use_javascript('/tabber/tabber.js');
 html_use_coolfieldset();
 
-$ath->header(array ('title'=> $ah->getStringID() . $ah->getSummary(), 'atid'=>$ath->getID()));
+$ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
 
