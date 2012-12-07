@@ -1,6 +1,6 @@
 <?php
 /**
- * Page to view latest logins to the site
+ * Page to view latest sessions to the site
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume
@@ -28,7 +28,7 @@ require_once $gfcommon.'include/pre.php';
 
 session_require_global_perm ('forge_admin');
 
-$res_logins = db_query_params ('SELECT us.user_id AS user_id,
+$res = db_query_params ('SELECT us.user_id AS user_id,
 	us.ip_addr AS ip_addr,
 	us.time AS time,
 	users.user_name AS user_name FROM user_session us,users
@@ -37,7 +37,7 @@ $res_logins = db_query_params ('SELECT us.user_id AS user_id,
 			       array (),
 			       50);
 
-if (!$res_logins || db_numrows($res_logins) < 1) {
+if (!$res || db_numrows($res) < 1) {
 	exit_error(_('No records found","Database error: "').db_error());
 }
 
@@ -45,22 +45,22 @@ $HTML->header(array('title'=>_('Most Recent Opened Sessions')));
 
 ?>
 
-<table  width="100%">
+<table class="fullwidth">
 <tr class="tableheading">
-<th><?php echo _('Date'); ?></th>
-<th><?php echo _('Username'); ?></th>
-<th><?php echo _('Source IP'); ?></th>
+	<th><?php echo _('Date'); ?></th>
+	<th><?php echo _('Username'); ?></th>
+	<th><?php echo _('Source IP'); ?></th>
 </tr>
 
 <?php
 
 $alt=true;
 $i=0;
-while ($row_logins = db_fetch_array($res_logins)) {
+while ($row = db_fetch_array($res)) {
 	print ' <tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>';
-	print '<td >'.date(_('Y-m-d H:i'), $row_logins['time']).'</td>';
-	print '<td >'.$row_logins['user_name'].'</td>';
-	print '<td >'.$row_logins['ip_addr'].'</td>';
+	print '<td >'.date(_('Y-m-d H:i'), $row['time']).'</td>';
+	print '<td >'.util_display_user($row['user_name']).'</td>';
+	print '<td >'.$row['ip_addr'].'</td>';
 	print '</tr>';
 }
 ?>
