@@ -93,7 +93,7 @@ $d_arr_private =& $df->getDocuments();
 if ($d_arr != NULL && $d_arr_private != NULL) {
 	$d_arr = array_merge($d_arr, $d_arr_private);
 } elseif ($d_arr_private != NULL) {
-		$d_arr = $d_arr_private;
+	$d_arr = $d_arr_private;
 }
 
 $nested_groups = $dgf->getNested();
