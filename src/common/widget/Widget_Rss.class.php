@@ -51,7 +51,9 @@ require_once 'Widget.class.php';
 			}
 			require_once 'common/rss/simplepie.inc';
 			if (!is_dir(forge_get_config('data_path') .'/rss')) {
-				mkdir(forge_get_config('data_path') .'/rss');
+				if (!mkdir(forge_get_config('data_path') .'/rss')) {
+					$content .= '<p class="error_msg" >'._('Cannot create backend directory. Contact forge administrator.').'</p>';
+				}
 			}
 			$rss = new SimplePie($this->rss_url, forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
 			$max_items = 10;
