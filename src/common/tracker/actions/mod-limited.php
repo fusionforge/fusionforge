@@ -40,13 +40,13 @@ echo notepad_func();
 ?>
 	<h1>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h1>
 
-	<form id="trackermodlimitedform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" enctype="multipart/form-data" method="post">
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
-	<input type="hidden" name="func" value="postmod" />
-	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
+<form id="trackermodlimitedform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" enctype="multipart/form-data" method="post">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
+<input type="hidden" name="func" value="postmod" />
+<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 
-	<table width="80%">
+<table width="80%">
 <?php
 if (session_loggedin()) {
 ?>
@@ -175,7 +175,7 @@ $count=count($file_list);
 $nb = $count? ' ('.$count.')' : '';
 ?>
 <div class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
-		<h2><?php echo _('Existing Files') ?>:</h2>
+<h2><?php echo _('Existing Files') ?>:</h2>
 <table width="80%">
 	<tr><td colspan="2">
 		<?php echo _('Attach Files') ?>: <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
