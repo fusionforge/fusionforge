@@ -1703,10 +1703,29 @@ function util_sanitise_multiline_submission($text) {
 	return $text;
 }
 
-
 function util_is_html($string) {
 	return (strip_tags(util_unconvert_htmlspecialchars($string)) != $string);
 }
+
+function util_init_messages() {
+	global $feedback, $warning_msg, $error_msg;
+
+	$feedback = getStringFromCookie('feedback', '');
+	setcookie('feedback');
+	$warning_msg = getStringFromCookie('warning_msg', '');
+	setcookie('warning_msg');
+	$error_msg = getStringFromCookie('error_msg', '');
+	setcookie('error_msg');
+}
+
+function util_save_messages() {
+	global $feedback, $warning_msg, $error_msg;
+
+	setcookie('feedback', $feedback, time() + 10);
+	setcookie('warning_msg', $warning_msg, time() + 10);
+	setcookie('error_msg', $error_msg, time() + 10);
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

@@ -341,12 +341,12 @@ function session_set_cookie($name ,$value, $domain = '', $expiration = 0) {
 }
 
 /**
- *	session_redirect() - Redirect browser within the site
+ * session_redirect() - Redirect browser within the site and exit.
  *
- *	@param		string	Absolute path within the site
- *	@return never returns
+ * @param  string $loc    Absolute path within the site
  */
 function session_redirect($loc) {
+	util_save_messages();
 	session_redirect_external(util_make_url ($loc));
 	exit;
 }
