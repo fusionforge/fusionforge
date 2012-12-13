@@ -74,73 +74,68 @@ switch (getStringFromRequest('func')) {
 			exit_error(_('Artifact Could Not Be Created'),'tracker');
 		} elseif (!forge_check_perm ('tracker',$ath->getID(),'submit')) {
 			exit_permission_denied('tracker');
-		} else {
-			if (empty($user_email)) {
-				$user_email=false;
-			} else {
-				if (!validate_email($user_email)) {
-					form_release_key(getStringFromRequest('form_key'));
-					exit_error(_('Invalid Email Address') . htmlspecialchars($user_email),'tracker');
-				}
-			}
-			if ($user_email) {
-				$details = "Anonymous message posted by $user_email\n\n".
-				$details;
-			}
-			if (!$ah->create($summary,$details,$assigned_to,$priority,$extra_fields)) {
-				form_release_key(getStringFromRequest('form_key'));
-				exit_error($ah->getErrorMessage(),'tracker');
-			} else {
-				//
-				//	  Attach files to this Artifact.
-				//
-				$ext_feedback = '';
-				for ($i=0; $i<5; $i++) {
-					$f = getUploadedFile("input_file$i");
-					$error = $f['error'];
-					if (isset($error) && $error > 0) {
-						$n = $i+1;
-						if ($error === 1 || $error === 2) {
-							// UPLOAD_ERR_INI_SIZE or UPLOAD_ERR_FORM_SIZE
-							$ext_feedback .= "<br />ERROR: Skipping attachement $n: file is too large.";
-						} elseif ($error === 3) {
-							// UPLOAD_ERR_PARTIAL
-							$ext_feedback .= "<br />ERROR: Skipping attachement $n: transfert interrupted.";
-						}
-						continue;
-					}
-					$file_name = $f['name'];
-					$tmp_name = $f['tmp_name'];
-					$size = $f['size'];
-					$type = $f['type'];
-					if (!is_uploaded_file($tmp_name)) {
-						continue;
-					}
+		}
 
-					$afh=new ArtifactFileHtml($ah);
-					if (!$afh || !is_object($afh)) {
-						$error_msg .= _('Could Not Create File Object');
-					} elseif ($afh->isError()) {
-						$error_msg .= $afh->getErrorMessage();
-					} else {
-						if (!util_check_fileupload($tmp_name)) {
-							form_release_key(getStringFromRequest('form_key'));
-							//delete the artifact
-							$ah->delete(true);
-							exit_error(_('Invalid filename'),'tracker');
-						}
-						if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
-							form_release_key(getStringFromRequest('form_key'));
-							//delete the artifact
-							$ah->delete(true);
-							exit_error(_('Could Not Attach File to Item: '.$afh->getErrorMessage()),'tracker');
-						}
+		if (empty($user_email)) {
+			$user_email=false;
+		} else {
+			if (!validate_email($user_email)) {
+				form_release_key(getStringFromRequest('form_key'));
+				exit_error(_('Invalid Email Address') . htmlspecialchars($user_email),'tracker');
+			}
+		}
+		if ($user_email) {
+			$details = "Anonymous message posted by $user_email\n\n".$details;
+		}
+
+		if (!$ah->create($summary,$details,$assigned_to,$priority,$extra_fields)) {
+			$error_msg = $ah->getErrorMessage();
+			form_release_key(getStringFromRequest('form_key'));
+			include $gfcommon.'tracker/actions/add.php';
+		} else {
+			$feedback .= sprintf(_('Item %s successfully created'),'[#'.$ah->getID().']');
+			$aid = $ah->getID();
+			//
+			//	  Attach files to this Artifact.
+			//
+			for ($i=0; $i<5; $i++) {
+				$f = getUploadedFile("input_file$i");
+				$error = $f['error'];
+				if (isset($error) && $error > 0) {
+					$n = $i+1;
+					if ($error === 1 || $error === 2) {
+						// UPLOAD_ERR_INI_SIZE or UPLOAD_ERR_FORM_SIZE
+						$error_msg = sprintf(_('Error on attached file %1$d, file is too large (maximum: %2$s).'),
+							$n, ini_get('upload_max_filesize'));
+					} elseif ($error === 3) {
+						// UPLOAD_ERR_PARTIAL
+						$error_msg = sprintf(_('Error on attached file %1$d, transfert interrupted.'), $n);
+					}
+					continue;
+				}
+				$file_name = $f['name'];
+				$tmp_name = $f['tmp_name'];
+				$size = $f['size'];
+				$type = $f['type'];
+				if (!is_uploaded_file($tmp_name)) {
+					continue;
+				}
+
+				$afh=new ArtifactFileHtml($ah);
+				if (!$afh || !is_object($afh)) {
+					$error_msg .= _('Could Not Create File Object');
+				} elseif ($afh->isError()) {
+					$error_msg .= $afh->getErrorMessage();
+				} else {
+					if (!util_check_fileupload($tmp_name)) {
+						$error_msg = _('Invalid filename');
+					}
+					if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
+						$error_msg = _('Could Not Attach File to Item: '.$afh->getErrorMessage());
 					}
 				}
-				$feedback .= sprintf(_('Item %s successfully created'),'[#'.$ah->getID().']');
-				$feedback .= $ext_feedback;
-				include $gfcommon.'tracker/actions/browse.php';
 			}
+			session_redirect('/tracker/?group_id='.$group_id.'&atid='.$atid.'&aid='.$aid);
 		}
 		break;
 	}
