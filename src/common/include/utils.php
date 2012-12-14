@@ -1710,12 +1710,18 @@ function util_is_html($string) {
 function util_init_messages() {
 	global $feedback, $warning_msg, $error_msg;
 
-	$feedback = getStringFromCookie('feedback', '');
-	setcookie('feedback', '', time()-3600);
-	$warning_msg = getStringFromCookie('warning_msg', '');
-	setcookie('warning_msg', '', time()-3600);
-	$error_msg = getStringFromCookie('error_msg', '');
-	setcookie('error_msg', '', time()-3600);
+	if (PHP_SAPI == 'cli') {
+		$feedback = $warning_msg = $error_msg = '';
+	} else {
+		$feedback = getStringFromCookie('feedback', '');
+		if ($feedback) setcookie('feedback', '', time()-3600, '/');
+
+		$warning_msg = getStringFromCookie('warning_msg', '');
+		if ($warning_msg) setcookie('warning_msg', '', time()-3600, '/');
+
+		$error_msg = getStringFromCookie('error_msg', '');
+		if ($error_msg) setcookie('error_msg', '', time()-3600, '/');
+	}
 }
 
 function util_save_messages() {
