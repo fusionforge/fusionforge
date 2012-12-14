@@ -1711,19 +1711,19 @@ function util_init_messages() {
 	global $feedback, $warning_msg, $error_msg;
 
 	$feedback = getStringFromCookie('feedback', '');
-	setcookie('feedback');
+	setcookie('feedback', '', time()-3600);
 	$warning_msg = getStringFromCookie('warning_msg', '');
-	setcookie('warning_msg');
+	setcookie('warning_msg', '', time()-3600);
 	$error_msg = getStringFromCookie('error_msg', '');
-	setcookie('error_msg');
+	setcookie('error_msg', '', time()-3600);
 }
 
 function util_save_messages() {
 	global $feedback, $warning_msg, $error_msg;
 
-	setcookie('feedback', $feedback, time() + 10);
-	setcookie('warning_msg', $warning_msg, time() + 10);
-	setcookie('error_msg', $error_msg, time() + 10);
+	setcookie('feedback', $feedback, time() + 10, '/');
+	setcookie('warning_msg', $warning_msg, time() + 10, '/');
+	setcookie('error_msg', $error_msg, time() + 10, '/');
 }
 
 // Local Variables:
