@@ -1703,10 +1703,35 @@ function util_sanitise_multiline_submission($text) {
 	return $text;
 }
 
-
 function util_is_html($string) {
 	return (strip_tags(util_unconvert_htmlspecialchars($string)) != $string);
 }
+
+function util_init_messages() {
+	global $feedback, $warning_msg, $error_msg;
+
+	if (PHP_SAPI == 'cli') {
+		$feedback = $warning_msg = $error_msg = '';
+	} else {
+		$feedback = getStringFromCookie('feedback', '');
+		if ($feedback) setcookie('feedback', '', time()-3600, '/');
+
+		$warning_msg = getStringFromCookie('warning_msg', '');
+		if ($warning_msg) setcookie('warning_msg', '', time()-3600, '/');
+
+		$error_msg = getStringFromCookie('error_msg', '');
+		if ($error_msg) setcookie('error_msg', '', time()-3600, '/');
+	}
+}
+
+function util_save_messages() {
+	global $feedback, $warning_msg, $error_msg;
+
+	setcookie('feedback', $feedback, time() + 10, '/');
+	setcookie('warning_msg', $warning_msg, time() + 10, '/');
+	setcookie('error_msg', $error_msg, time() + 10, '/');
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

@@ -67,7 +67,7 @@ class Storage extends Error {
 				return false;
 			}
 		} else {
-			$this->setError(sprintf(_('Not a File %1$s or not a directory %2$s.'), $file, $storage));
+			$this->setError(sprintf(_('Not a File %1$s or not a directory %2$s.'), $file, $dir));
 			return false;
 		}
 		return $this;

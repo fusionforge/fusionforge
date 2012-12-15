@@ -21,11 +21,11 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+require_once $gfcommon.'include/escapingUtils.php';
+require_once $gfcommon.'include/utils.php';
 
 // Declare and init variables to store messages
-$feedback = '';
-$warning_msg = '';
-$error_msg = '';
+util_init_messages();
 
 require_once $gfcommon.'include/escapingUtils.php';
 require_once $gfcommon.'include/config.php';
@@ -298,9 +298,6 @@ if (forge_get_config('database_name') != "") {
 
 		// HTML layout class, may be overriden by the Theme class
 		require_once $gfwww.'include/Layout.class.php';
-
-		// Various HTML utilities
-		require_once $gfcommon.'include/utils.php';
 
 		// Various HTML libs like button bar, themable
 		require_once $gfwww.'include/html.php';
