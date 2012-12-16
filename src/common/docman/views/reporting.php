@@ -47,6 +47,7 @@
 global $HTML; // html object
 global $d_arr; // document array
 global $group_id; // id of group
+global $g; // the group object
 
 if ( !forge_check_perm('docman', $group_id, 'admin')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -149,13 +150,17 @@ if (count($data) == 0) {
 		});'."\n";
 	echo '//]]></script>';
 	echo '<div id="chart1"></div>';
-	echo $HTML->listTableTop(array(_('Path'), _('File'), _('User'), _('Date')), false, true, 'Download');
+	$tabletop = array(_('Path'), _('File'), _('User'), _('Date'));
+	$classth = array('', '', '', '');
+	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
 	for ($i=0; $i<count($data); $i++) {
 		$date = preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][2]);
+		$ndg = new DocumentGroup($g, $data[$i][4]);
+		$path = $ndg->getPath(true);
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
-			'<td>PATH</td>'.
+			'<td>'.$path.'</td>'.
 			'<td>'. $data[$i][0] .'</td>'.
-			'<td><a href="/users/'.urlencode($data[$i][3]).'/">'. $data[$i][1] .'</a></td>'.
+			'<td><a class="tabtitle" title="'._('View user profile').'" href="/users/'.urlencode($data[$i][3]).'/">'. $data[$i][1] .'</a></td>'.
 			'<td class="align-center">'. $date .'</td></tr>';
 	}
 	echo $HTML->listTableBottom();

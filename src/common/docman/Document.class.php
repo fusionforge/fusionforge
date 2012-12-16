@@ -981,11 +981,19 @@ class Document extends Error {
 
 
 	/**
-	 * downloadUp - +1 on download column
+	 * downloadUp - insert download stats
 	 *
 	 */
 	private function downloadUp() {
-		$this->setValueinDB('download', ++$this->data_array['download']);
+		if (session_loggedin()) {
+			$s =& session_get_user();
+			$us = $s->getID();
+		} else {
+			$us=100;
+		}
+
+		$ip = getStringFromServer('REMOTE_ADDR');
+		$res = db_query_params("INSERT INTO docman_dlstats_doc (ip_address, docid, month, day, user_id) VALUES ($1, $2, $3, $4, $5)", array($ip, $this->getID(), date('Ym'), date('d'), $us));
 	}
 
 	/**
@@ -999,8 +1007,7 @@ class Document extends Error {
 	private function setValueinDB($column, $value) {
 		switch ($column) {
 			case 'stateid':
-			case 'doc_group':
-			case 'download': {
+			case 'doc_group': {
 				$qpa = db_construct_qpa();
 				$qpa = db_construct_qpa($qpa, 'UPDATE doc_data SET ');
 				$qpa = db_construct_qpa($qpa, $column);

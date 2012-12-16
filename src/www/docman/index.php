@@ -35,6 +35,9 @@ require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/include/DocumentGroupHTML.class.php';
 require_once $gfcommon.'docman/include/utils.php';
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
+require_once $gfcommon.'reporting/report_utils.php';
+require_once $gfcommon.'reporting/ReportPerGroupDocmanDownloads.class.php';
+require_once $gfwww.'include/html.php';
 
 /* are we using docman ? */
 if (!forge_get_config('use_docman'))

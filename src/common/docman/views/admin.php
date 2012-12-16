@@ -29,7 +29,7 @@
 global $g; //group object
 global $group_id; // id of the group
 
-if ( !forge_check_perm ('docman', $group_id, 'admin')) {
+if ( !forge_check_perm('docman', $group_id, 'admin')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }

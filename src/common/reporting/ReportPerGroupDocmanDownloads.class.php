@@ -72,7 +72,8 @@ class ReportPerGroupDocmanDownloads extends Report {
 
 		$res = db_query_params ('SELECT docdata_vw.filename, docdata_vw.realname,
 					docman_dlstats_doc.month || lpad(docman_dlstats_doc.day::text,2,0::text),
-					docdata_vw.user_name
+					docdata_vw.user_name,
+					docdata_vw.doc_group
 					FROM docman_dlstats_doc, docdata_vw
 					WHERE docdata_vw.group_id = $1
 					AND docman_dlstats_doc.month >= $2

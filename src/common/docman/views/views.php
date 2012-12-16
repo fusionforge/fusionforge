@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,6 +34,7 @@ switch ($view) {
 	case 'editfile':
 	case 'listfile':
 	case 'listtrashfile':
+	case 'reporting':
 	case 'search': {
 		include ($gfcommon.'docman/views/'.$view.'.php');
 		break;
