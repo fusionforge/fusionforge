@@ -101,7 +101,7 @@ class ArtifactExtraField extends Error {
 			return false;
 		}
 		if (!$field_type) {
-			$this->setError("Type of custom field not selected");
+			$this->setError(_('Type of custom field not selected'));
 			return false;
 		}
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
@@ -118,13 +118,18 @@ class ArtifactExtraField extends Error {
 		}
 		if ($field_type == ARTIFACT_EXTRAFIELDTYPE_TEXT || $field_type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 			if (!$attribute1 || !$attribute2 || $attribute2 < $attribute1) {
-				$this->setError("Invalid size/maxlength for text field");
+				$this->setError(_('Invalid size/maxlength for text field'));
 				return false;
 			}
 		}
 		if ($field_type == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 			if (!$attribute1 || !$attribute2) {
-				$this->setError("Invalid rows/cols for textarea field");
+				$this->setError(_('Invalid rows/cols for textarea field'));
+				return false;
+			}
+		} elseif ($field_type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+			if ($this->ArtifactType->getCustomStatusField()) {
+				$this->setError(_('This Tracker already uses custom statuses'));
 				return false;
 			}
 		}
