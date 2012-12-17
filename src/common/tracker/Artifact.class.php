@@ -681,7 +681,7 @@ class Artifact extends Error {
 	 *	@return database result set.
 	 */
 	function getHistory() {
-		return db_query_params ('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC',
+		return db_query_params ('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC, id ASC',
 					array ($this->getID())) ;
 	}
 
@@ -691,7 +691,7 @@ class Artifact extends Error {
 	 *	@return database result set.
 	 */
 	function getMessages($asc=false) {
-		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate ' . ($asc ? 'ASC' : 'DESC'),
+		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate ' . ($asc ? 'ASC' : 'DESC') . ', id ASC',
 					array ($this->getID())) ;
 	}
 
