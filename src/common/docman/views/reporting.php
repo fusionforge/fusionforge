@@ -80,7 +80,7 @@ echo $HTML->getStylesheets();
 
 $report = new ReportPerGroupDocmanDownloads($group_id, $start, $end);
 if ($report->isError()) {
-	echo '<p class="information">'.$report->getErrorMessage().'</p>';
+	echo '<p class="error_msg">'.$report->getErrorMessage().'</p>';
 } else {
 ?>
 
@@ -102,7 +102,7 @@ $data = $report->getData();
 
 if (count($data) == 0) {
 	echo '<p class="information">';
-	echo _('There have been no documents for this project.');
+	echo _('There have been no viewed documents for this project yet.');
 	echo '</p>';
 } else {
 	echo '<script type="text/javascript">//<![CDATA['."\n";

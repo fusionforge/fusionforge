@@ -91,7 +91,7 @@ frs_header(array('title' => _('File Release Reporting'),
 
 $report = new ReportDownloads($group_id, $package_id, $start, $end);
 if ($report->isError()) {
-	echo '<p class="information">'.$report->getErrorMessage().'</p>';
+	echo '<p class="error_msg">'.$report->getErrorMessage().'</p>';
 	frs_footer();
 	exit;
 }
