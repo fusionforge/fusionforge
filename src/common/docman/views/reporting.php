@@ -49,13 +49,22 @@ global $d_arr; // document array
 global $group_id; // id of group
 global $g; // the group object
 
-if ( !forge_check_perm('docman', $group_id, 'admin')) {
-	$return_msg= _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
-}
-
+$group_id = getIntFromRequest('group_id');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
+
+if (!$group_id) {
+	exit_no_group();
+}
+
+$group = group_get_object($group_id);
+if (!$group || !is_object($group)) {
+	exit_no_group();
+} elseif ($group->isError()) {
+	exit_error($group->getErrorMessage(), 'frs');
+}
+
+session_require_perm('docman', $group_id, 'admin');
 
 $report = new Report();
 if ($report->isError()) {
@@ -77,23 +86,25 @@ html_use_jqueryjqplotpluginCanvas();
 echo $HTML->getJavascripts();
 echo $HTML->getStylesheets();
 
-
 $report = new ReportPerGroupDocmanDownloads($group_id, $start, $end);
 if ($report->isError()) {
-	echo '<p class="information">'.$report->getErrorMessage().'</p>';
-} else {
+	exit_error($report->getErrorMessage(), 'docman');
+}
+
 ?>
 
 <form action="<?php echo util_make_url('/docman/') ?>" method="get">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<input type="hidden" name="view" value="reporting" />
-<table><tr>
-<td><strong><?php echo _('Start'); ?>:</strong><br />
-<?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo _('End'); ?>:</strong><br />
-<?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
-</tr></table>
+	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+	<input type="hidden" name="view" value="reporting" />
+	<table>
+		<tr>
+			<td><strong><?php echo _('Start'); ?>:</strong><br />
+				<?php echo report_months_box($report, 'start', $start); ?></td>
+			<td><strong><?php echo _('End'); ?>:</strong><br />
+				<?php echo report_months_box($report, 'end', $end); ?></td>
+			<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
+		</tr>
+	</table>
 </form>
 
 <?php
@@ -102,7 +113,7 @@ $data = $report->getData();
 
 if (count($data) == 0) {
 	echo '<p class="information">';
-	echo _('There have been no documents for this project.');
+	echo _('There have been no downloads for this project.');
 	echo '</p>';
 } else {
 	echo '<script type="text/javascript">//<![CDATA['."\n";
@@ -165,6 +176,3 @@ if (count($data) == 0) {
 	}
 	echo $HTML->listTableBottom();
 }
-
-}
- 

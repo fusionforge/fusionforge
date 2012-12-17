@@ -91,7 +91,7 @@ class ReportPerGroupDocmanDownloads extends Report {
 			$this->setError('ReportUserAct:: '.db_error());
 			return false;
 		}
-		
+
 		$rows = db_numrows($res);
 		$arr = array();
 		$i = 0;
