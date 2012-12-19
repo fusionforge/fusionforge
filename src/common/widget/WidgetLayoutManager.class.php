@@ -281,7 +281,7 @@ class WidgetLayoutManager {
 			echo '<input type="radio" name="layout_id" value="-1" id="layout_custom" '. $checked .'/>';
 			echo '</td><td>';
 			echo '<label for="layout_custom">';
-			echo html_image('layout/custom.png', array('style' => 'vertical-align:top;float:left;'));
+			echo html_image('layout/custom.png', '', '', array('style' => 'vertical-align:top;float:left;'));
 			echo '</label>';
 			echo '</td><td>';
 			echo '<label for="layout_custom"><strong>'. 'Custom' .'</strong><br />';
