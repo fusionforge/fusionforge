@@ -677,11 +677,22 @@ class Artifact extends Error {
 	 * @param string $order
 	 * @return resource result set.
 	 */
-	function getMessages($order='up') {
-		if ($order == 'up') {
+	function getMessages($ascending='up') {
+		/*
+		 * This is necessary because someone committed a change
+		 * to this method in FusionForge trunk that accepts 'up'
+		 * as default (luckily, it’s the same!) and 'down' as
+		 * alternative probability, whereas FusionForge 5.2 has
+		 * false as default and true for ascending order, so we
+		 * need to check this out and use === to be sure ☹
+		 */
+		if ($ascending === 'up') {
 			$order = 'DESC';
-		}
-		else {
+		} elseif ($ascending === true) {
+			$order = 'ASC';
+		} elseif ($ascending === false) {
+			$order = 'DESC';
+		} else {
 			$order = 'ASC';
 		}
 		return db_query_params('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate ' . $order . ', id ASC',
