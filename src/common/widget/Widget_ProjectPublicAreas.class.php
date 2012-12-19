@@ -1,21 +1,23 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2012, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
- * This file is a part of Codendi.
+ * This file is a part of Fusionforge.
  *
- * Codendi is free software; you can redistribute it and/or modify
+ * Fusionforge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Codendi is distributed in the hope that it will be useful,
+ * Fusionforge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
+ * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
 require_once 'Widget.class.php';
@@ -117,27 +119,27 @@ class Widget_ProjectPublicAreas extends Widget {
 			print "\n</div>";
 		}
 
-					// ##################### Doc Manager
+		// ##################### Doc Manager
 
-					if ($project->usesDocman()) {
-					echo '<div class="public-area-box">'."\n";
-					$link_content = $HTML->getDocmanPic('') . ' ' . _('DocManager: Project Documentation');
-					//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
-					print util_make_link( '/docman/?group_id='.$group_id, $link_content);
-					echo "\n</div>\n";
-					}
+		if ($project->usesDocman()) {
+			echo '<div class="public-area-box">'."\n";
+			$link_content = $HTML->getDocmanPic('') . ' ' . _('DocManager: Project Documentation');
+			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
+			print util_make_link( '/docman/?group_id='.$group_id, $link_content);
+			echo "\n</div>\n";
+		}
 
-					// ##################### Mailing lists
+		// ##################### Mailing lists
 
-					if ($project->usesMail()) {
-						echo '<div class="public-area-box">'."\n";
-						$link_content = $HTML->getMailPic('') . ' ' . _('Mailing Lists');
-						print util_make_link( '/mail/?group_id='.$group_id, $link_content);
-						$n = project_get_mail_list_count($group_id);
-						echo ' ';
-						printf(ngettext('(<strong>%1$s</strong> public mailing list)', '(<strong>%1$s</strong> public mailing lists)', $n), $n);
-						echo "\n</div>\n";
-					}
+		if ($project->usesMail()) {
+			echo '<div class="public-area-box">'."\n";
+			$link_content = $HTML->getMailPic('') . ' ' . _('Mailing Lists');
+			print util_make_link( '/mail/?group_id='.$group_id, $link_content);
+			$n = project_get_mail_list_count($group_id);
+			echo ' ';
+			printf(ngettext('(<strong>%1$s</strong> public mailing list)', '(<strong>%1$s</strong> public mailing lists)', $n), $n);
+			echo "\n</div>\n";
+		}
 
 		// ##################### Task Manager
 					
@@ -163,54 +165,54 @@ class Widget_ProjectPublicAreas extends Widget {
 			echo "\n</div>\n";
 		}
 
-					// ######################### Surveys
+		// ######################### Surveys
 
-					if ($project->usesSurvey()) {
-						echo '<div class="public-area-box">'."\n";
-						$link_content = $HTML->getSurveyPic('') . ' ' . _('Surveys');
-						echo util_make_link( '/survey/?group_id='.$group_id, $link_content);
-						echo ' (<strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').')';
-								echo "\n</div>\n";
-								}
+		if ($project->usesSurvey()) {
+			echo '<div class="public-area-box">'."\n";
+			$link_content = $HTML->getSurveyPic('') . ' ' . _('Surveys');
+			echo util_make_link( '/survey/?group_id='.$group_id, $link_content);
+			echo ' (<strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').')';
+			echo "\n</div>\n";
+		}
 
-								// ######################### SCM
+		// ######################### SCM
 
-								if ($project->usesSCM()) {
-								echo '<div class="public-area-box">'."\n";
+		if ($project->usesSCM()) {
+			echo '<div class="public-area-box">'."\n";
 
-								$link_content = $HTML->getScmPic('') . ' ' . _('SCM Repository');
-								//	print '<hr size="1" /><a rel="doap:repository" href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
-								print util_make_link( '/scm/?group_id='.$group_id, $link_content);
+			$link_content = $HTML->getScmPic('') . ' ' . _('SCM Repository');
+			//	print '<hr size="1" /><a rel="doap:repository" href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
+			print util_make_link( '/scm/?group_id='.$group_id, $link_content);
 
-								$hook_params = array () ;
-								$hook_params['group_id'] = $group_id ;
-								plugin_hook ("scm_stats", $hook_params) ;
-								echo "\n</div>\n";
-								}
+			$hook_params = array () ;
+			$hook_params['group_id'] = $group_id ;
+			plugin_hook ("scm_stats", $hook_params) ;
+			echo "\n</div>\n";
+		}
 
-								// ######################### Plugins
+		// ######################### Plugins
 
-								$hook_params = array ();
-								$hook_params['group_id'] = $group_id;
-								plugin_hook ("project_public_area", $hook_params);
+		$hook_params = array ();
+		$hook_params['group_id'] = $group_id;
+		plugin_hook ("project_public_area", $hook_params);
 
-								// ######################## AnonFTP
+		// ######################## AnonFTP
 
-								// CB hide FTP if desired
-								if ($project->usesFTP()) {
-									if ($project->isActive()) {
-										echo '<div class="public-area-box">'."\n";
+		// CB hide FTP if desired
+		if ($project->usesFTP()) {
+			if ($project->isActive()) {
+				echo '<div class="public-area-box">'."\n";
 
-										$link_content = $HTML->getFtpPic('') . ' ' . _('Anonymous FTP Space');
-										//		print '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName() .'/">';
-										if (forge_get_config('use_project_vhost')) {
-											print util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
-										} else {
-											print util_make_link('ftp://' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
-										}
-										echo "\n</div>\n";
-									}
-								}
+				$link_content = $HTML->getFtpPic('') . ' ' . _('Anonymous FTP Space');
+				//		print '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName() .'/">';
+				if (forge_get_config('use_project_vhost')) {
+					print util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
+				} else {
+					print util_make_link('ftp://' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
+				}
+				echo "\n</div>\n";
+			}
+		}
 	}
 
 	function canBeUsedByProject(&$project) {
