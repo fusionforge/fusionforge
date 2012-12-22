@@ -33,6 +33,10 @@ class headermenuPlugin extends Plugin {
 		$this->_addHook('headermenu');
 		$this->_addHook('site_admin_option_hook');
 		$this->_addHook('outermenu');
+		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
+		$this->_addHook('groupisactivecheckboxpost');
+		$this->_addHook('groupmenu');
+		$this->_addHook('project_admin_plugins');
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -47,6 +51,19 @@ class headermenuPlugin extends Plugin {
 			}
 			case 'site_admin_option_hook': {
 				echo '<li>'.$this->getAdminOptionLink().'</li>';
+				break;
+			}
+			case 'groupmenu': {
+				$this->getGroupLink($params);
+				break;
+			}
+			case 'project_admin_plugins': {
+				$group_id = $params['group_id'];
+				$project = group_get_object($group_id);
+				if ($project->usesPlugin($this->name)) {
+					echo '<p>'.util_make_link('/plugins/headermenu/?type=projectadmin&group_id='.$group_id,
+					     _('Project HeaderMenu Admin'), array('class' => 'tabtitle', 'title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
+				}
 				break;
 			}
 		}
@@ -93,6 +110,41 @@ class headermenuPlugin extends Plugin {
 					}
 					case 'htmlcode': {
 						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&pageid='.$link['id_headermenu'];
+						$params['TITLES'][] = $link['name'];
+						$params['TOOLTIPS'][] = $link['description'];
+						break;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * getGroupLink - update the links before generate the tab.
+	 *
+	 * @param	array	hook params array
+	 * @return	bool	true...
+	 */
+	function getGroupLink($params) {
+		$availableLinks = $this->getAvailableLinks('groupmenu');
+		foreach ($availableLinks as $link) {
+			if ($link['is_enable']) {
+				switch ($link['linktype']) {
+					case 'url': {
+						$params['DIRS'][] = $link['url'];
+						$params['TITLES'][] = $link['name'];
+						$params['TOOLTIPS'][] = $link['description'];
+						break;
+					}
+					case 'htmlcode': {
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&pageid='.$link['id_headermenu'];
+						$params['TITLES'][] = $link['name'];
+						$params['TOOLTIPS'][] = $link['description'];
+						break;
+					}
+					case 'iframe': {
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframe&pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
 						break;
@@ -222,6 +274,16 @@ class headermenuPlugin extends Plugin {
 	}
 
 	/**
+	 * iframeView - display the iframe
+	 *
+	 * @param	int	the iframe id
+	 * @return	string	the html code
+	 */
+	 function iframeView($pageid) {
+		return true;
+	 }
+
+	/**
 	 * getHeader - initialize header and js
 	 *
 	 * @param	string	type : user, project, globaladmin (aka group)
@@ -247,6 +309,12 @@ class headermenuPlugin extends Plugin {
 				$returned = true;
 				break;
 			}
+			case 'projectadmin': {
+				html_use_jquery();
+				site_header(array('title'=>_('Project Menu Admin'), 'toptab' => ''));
+				$returned = true;
+				break;
+			}
 		}
 		return $returned;
 	}
@@ -269,6 +337,6 @@ class headermenuPlugin extends Plugin {
 	 * @return	string	the description
 	 */
 	function getPluginDescription() {
-		return _('Get the ability to set new links next to the login menu (headermenu) or in the main menu (outermenu).');
+		return _('Get the ability to set new links next to the login menu (headermenu), in the main menu (outermenu) or in the project menu (groupmenu).');
 	}
 }
