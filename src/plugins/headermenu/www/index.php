@@ -70,6 +70,15 @@ switch ($type) {
 		echo $headermenu->pageView($pageid);
 		break;
 	}
+	case 'projectadmin': {
+		if (!session_loggedin()) {
+			exit_not_logged_in();
+		}
+		$group_id = getIntFromRequest('group_id');
+		session_require_perm('project_admin', $group_id);
+		$headermenu->getHeader($type);
+		
+	}
 }
 
 site_project_footer(array());
