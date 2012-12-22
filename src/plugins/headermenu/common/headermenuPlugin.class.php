@@ -335,6 +335,12 @@ class headermenuPlugin extends Plugin {
 				$returned = true;
 				break;
 			}
+			case 'projectadmin': {
+				html_use_jquery();
+				site_header(array('title'=>_('Project Menu Admin'), 'toptab' => ''));
+				$returned = true;
+				break;
+			}
 		}
 		return $returned;
 	}

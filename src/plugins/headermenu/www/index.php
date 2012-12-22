@@ -107,6 +107,7 @@ switch ($type) {
 				break;
 		}
 		break;
+		$headermenu->getHeader($type);
 	}
 }
 
