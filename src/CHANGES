@@ -15,7 +15,8 @@ FusionForge-5.3:
 * Docman: add report view as in FRS (TrivialDev)
 
 Plugins:
-* headermenu: new plugin to handle links in headermenu or outermenu (TrivialDev)
+* headermenu: new plugin to handle links in headermenu, outermenu & groupmenu
+              replace the old extratabs plugin (TrivialDev)
 * scmgit: add browsing capability for user personal repository (TrivialDev)
 * scmgit: basic activity support (TrivialDev).
 * scmgit: multiple repositories per project (developed for/sponsored by AdaCore)
