@@ -49,10 +49,11 @@ class Widget_ProjectLatestDocuments extends Widget {
 		$group_id = $request->get('group_id');
 
 		$qpa = db_construct_qpa();
-		$qpa = db_construct_qpa($qpa, 'SELECT filename, title, updatedate, createdate, realname, user_name, state_name, filetype, docid
+		$qpa = db_construct_qpa($qpa, 'SELECT filename, title, updatedate, createdate, realname, user_name, state_name, filetype, docid, doc_group
 						FROM docdata_vw
-						WHERE group_id=$1',
-					array($group_id));
+						WHERE group_id=$1
+						AND state_id=$2',
+					array($group_id,'1'));
 
 		if (session_loggedin() && (user_ismember($group_id) ||
 		    forge_check_global_perm('forge_admin'))) {
@@ -70,7 +71,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 			// No documents
 			echo '<div class="warning">'._('This Project Has Not Published Any Documents').'</div>';
 		} else {
-			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'));
+			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'), _('Path'));
 			if (session_loggedin() && (user_ismember($group_id) ||
 			    forge_check_global_perm('forge_admin'))) {
 				$tabletop[] = _('Status');
@@ -87,6 +88,9 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$statename = db_result($res_files,$f,'state_name');
 				$filetype = db_result($res_files,$f,'filetype');
 				$docid = db_result($res_files,$f,'docid');
+				$docgroup = db_result($res_files,$f,'doc_group');
+				$ndg = new DocumentGroup(group_get_object($group_id), $docgroup);
+				$path = $ndg->getPath(true, true);
 				switch ($filetype) {
 					case "URL": {
 						$docurl = $filename;
@@ -109,6 +113,9 @@ class Widget_ProjectLatestDocuments extends Widget {
 						</td>
 						<td >'
 							. make_user_link($user_name, $realname) .
+						'</td>
+						<td>'
+							. $path .
 						'</td>';
 				if (session_loggedin() && (user_ismember($group_id) ||
 				    forge_check_global_perm('forge_admin'))) {
