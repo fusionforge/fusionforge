@@ -1,5 +1,5 @@
 #! /bin/sh
-# 
+#
 # Configure Subversion for Sourceforge
 # Roland Mas, Gforge
 
@@ -12,7 +12,10 @@ if [ $(id -u) != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
-gforge_chroot=$(grep ^gforge_chroot= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
+gforge_chroot=$(
+	PATH=/usr/share/gforge/bin:/usr/share/fusionforge/bin:$PATH
+	forge_get_config chroot
+    )
 
 case "$1" in
     configure)
@@ -20,12 +23,14 @@ case "$1" in
         # First, dedupe the commented lines
         update-inetd --remove  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r $gforge_chroot" || true
         update-inetd --remove  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $gforge_chroot" || true
+        update-inetd --remove  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r "
         update-inetd --add  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $gforge_chroot"
 	;;
 
     purge)
         update-inetd --remove  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r $gforge_chroot"
         update-inetd --remove  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $gforge_chroot"
+        update-inetd --remove  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r "
 	;;
 
     *)
