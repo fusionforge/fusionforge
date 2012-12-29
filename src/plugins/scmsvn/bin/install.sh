@@ -21,16 +21,14 @@ case "$1" in
     configure)
         echo "Modifying inetd for Subversion server"
         # First, dedupe the commented lines
-        update-inetd --remove  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r $gforge_chroot" || true
-        update-inetd --remove  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $gforge_chroot" || true
-        update-inetd --remove  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r "
+	update-inetd --remove svnserve || true
+	update-inetd --remove svn || true
         update-inetd --add  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $gforge_chroot"
 	;;
 
     purge)
-        update-inetd --remove  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r $gforge_chroot"
-        update-inetd --remove  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $gforge_chroot"
-        update-inetd --remove  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r "
+	update-inetd --remove svnserve || true
+	update-inetd --remove svn || true
 	;;
 
     *)
