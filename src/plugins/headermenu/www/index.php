@@ -1,6 +1,6 @@
 <?php
 /**
- * headermenu plugin
+ * headermenu plugin : index page
  *
  * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
@@ -76,8 +76,29 @@ switch ($type) {
 		}
 		$group_id = getIntFromRequest('group_id');
 		session_require_perm('project_admin', $group_id);
+		$action = getStringFromRequest('action');
+		$view = getStringFromRequest('view');
+		switch ($action) {
+			case 'addLink':
+			case 'updateLinkValue':
+			case 'deleteLink':
+			case 'updateLinkStatus': {
+				global $gfplugins;
+				include($gfplugins.$headermenu->name.'/action/'.$action.'.php');
+				break;
+			}
+		}
 		$headermenu->getHeader($type);
-		
+		switch ($view) {
+			case 'updateLinkValue':
+				global $gfplugins;
+				include($gfplugins.$headermenu->name.'/view/admin/'.$view.'.php');
+				break;
+			default:
+				$headermenu->getProjectAdminView();
+				break;
+		}
+		break;
 	}
 }
 

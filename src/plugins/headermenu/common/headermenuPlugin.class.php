@@ -27,9 +27,9 @@ class headermenuPlugin extends Plugin {
 	var $pageid;
 
 	function __construct() {
-		$this->Plugin() ;
-		$this->name = 'headermenu' ;
-		$this->text = 'headermenu' ;
+		$this->Plugin();
+		$this->name = 'headermenu';
+		$this->text = 'headermenu';
 		$this->_addHook('headermenu');
 		$this->_addHook('site_admin_option_hook');
 		$this->_addHook('outermenu');
@@ -39,7 +39,7 @@ class headermenuPlugin extends Plugin {
 		$this->_addHook('project_admin_plugins');
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		switch ($hookname) {
 			case 'headermenu': {
 				$this->getHeaderLink();
@@ -328,6 +328,18 @@ class headermenuPlugin extends Plugin {
 		global $gfplugins;
 		$user = session_get_user();
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
+		return true;
+	}
+
+	/**
+	 * getProjectAdminView - display the Project Admin View
+	 *
+	 * @return	bool	true
+	 */
+	function getProjectAdminView() {
+		global $gfplugins;
+		$user = session_get_user();
+		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';
 		return true;
 	}
 
