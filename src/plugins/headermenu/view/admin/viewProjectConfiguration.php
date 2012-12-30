@@ -27,6 +27,20 @@ global $group_id;
 
 ?>
 
+<script language="Javascript" type="text/javascript">//<![CDATA[
+var controllerGroupMenu;
+
+jQuery(document).ready(function() {
+	controllerGroupMenu = new GroupMenuController({
+		inputHtmlCode:	jQuery('#typemenu_htmlcode'),
+		inputURL:	jQuery('#typemenu_url'),
+		trHtmlCode:	jQuery('#htmlcode'),
+		trUrlCode:	jQuery('#urlcode')
+    });
+});
+
+//]]></script>
+
 <?php
 $linksArray = $headermenu->getAvailableLinks('groupmenu');
 if (sizeof($linksArray)) {
@@ -67,7 +81,27 @@ echo '<td>'._('Displayed Name').'</td><td><input name="name" type="text" maxsize
 echo '</tr><tr>';
 echo '<td>'._('Description').'</td><td><input name="description" type="text" maxsize="255" /></td>';
 echo '</tr><tr>';
-echo '<tr id="urlcode" >';
+echo '<td>'._('Menu Type').'</td><td>';
+$texts = array('URL', 'New Page');
+$vals = array('url', 'htmlcode');
+$select_name = 'typemenu';
+echo html_build_radio_buttons_from_arrays($vals, $texts, $select_name, 'url', false);
+echo '</td>';
+echo '</tr><tr id="htmlcode" style="display:none">';
+echo '<td>'._('Your HTML Code.').'</td><td>';
+$GLOBALS['editor_was_set_up'] = false;
+$body = _('Just paste your code here...');
+$params['name'] = 'htmlcode';
+$params['body'] = $body;
+$params['width'] = "800";
+$params['height'] = "500";
+$params['user_id'] = user_getid();
+plugin_hook("text_editor", $params);
+if (!$GLOBALS['editor_was_set_up']) {
+	echo '<textarea name="htmlcode" rows="5" cols="80">'.$body.'</textarea>';
+}
+unset($GLOBALS['editor_was_set_up']);
+echo '</td></tr><tr id="urlcode" >';
 echo '<td>'._('URL').'</td><td><input name="link" type="text" maxsize="255" /></td>';
 echo '</tr><tr>';
 echo '<td>';
