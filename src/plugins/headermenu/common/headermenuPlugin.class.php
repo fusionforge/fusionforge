@@ -62,7 +62,7 @@ class headermenuPlugin extends Plugin {
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
 					echo '<p>'.util_make_link('/plugins/headermenu/?type=projectadmin&group_id='.$group_id,
-					     _('Project HeaderMenu Admin'), array('class' => 'tabtitle', 'title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
+					     _('Project GroupMenu Admin'), array('class' => 'tabtitle', 'title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
 				}
 				break;
 			}
@@ -311,6 +311,7 @@ class headermenuPlugin extends Plugin {
 			}
 			case 'projectadmin': {
 				html_use_jquery();
+				use_javascript('/js/sortable.js');
 				site_header(array('title'=>_('Project Menu Admin'), 'toptab' => ''));
 				$returned = true;
 				break;
