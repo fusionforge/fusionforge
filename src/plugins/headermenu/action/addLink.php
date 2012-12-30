@@ -1,6 +1,6 @@
 <?php
 /**
- * headermenu plugin
+ * headermenu plugin : addLink action
  *
  * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
@@ -22,60 +22,80 @@
  */
 
 global $headermenu;
+global $group_id;
 
-session_require_global_perm('forge_admin');
 $link = getStringFromRequest('link');
 $description = strip_tags(getStringFromRequest('description'));
 $name = strip_tags(getStringFromRequest('name'));
 $linkmenu = getStringFromRequest('linkmenu');
 $htmlcode = getStringFromRequest('htmlcode');
+$type = getStringFromRequest('type');
 
 if (!empty($name) && !empty($linkmenu)) {
 	switch ($linkmenu) {
-		case "headermenu": {
+		case 'headermenu': {
 			if (!empty($link)) {
 				if (util_check_url($link)) {
 					if ($headermenu->addLink($link, $name, $description, $linkmenu)) {
 						$feedback = _('Task succeeded.');
-						session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+						session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&feedback='.urlencode($feedback));
 					}
 					$error_msg = _('Task failed');
-					session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
 				}
 			}
 			$warning_msg = _('Missing Link URL.');
-			session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+			session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&warning_msg='.urlencode($warning_msg));
 			break;
 		}
-		case "outermenu": {
+		case 'outermenu': {
 			if (!empty($link)) {
 				if (util_check_url($link)) {
 					if ($headermenu->addLink($link, $name, $description, $linkmenu)) {
 						$feedback = _('Task succeeded.');
-						session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+						session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&feedback='.urlencode($feedback));
 					}
 					$error_msg = _('Task failed');
-					session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
 				}
 			}
 			if (!empty($htmlcode)) {
 				if ($headermenu->addLink('', $name, $description, $linkmenu, 'htmlcode', $htmlcode)) {
 					$feedback = _('Task succeeded.');
-					session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&feedback='.urlencode($feedback));
 				}
 				$error_msg = _('Task failed');
-				session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+				session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
 			}
 			$warning_msg = _('Missing Link URL or Html Code.');
-			session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+			session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&warning_msg='.urlencode($warning_msg));
+		}
+		case 'groupmenu': {
+			if (!empty($link)) {
+				if (util_check_url($link)) {
+					if ($headermenu->addLink($link, $name, $description, $linkmenu)) {
+						$feedback = _('Task succeeded.');
+						session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&group_id='.$group_id.'&feedback='.urlencode($feedback));
+					}
+					$error_msg = _('Task failed');
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&group_id='.$group_id.'&error_msg='.urlencode($error_msg));
+				} else {
+					$error_msg = _('Provided Link is not a valid URL.');
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&group_id='.$group_id.'&error_msg='.urlencode($error_msg));
+				}
+			}
 		}
 	}
 }
 $warning_msg = _('No link to create or name missing.');
-session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+$url = 'plugins/'.$headermenu->name.'/?type='.$type;
+if (isset($group_id)) {
+	$url .= '&group_id='.$group_id;
+}
+session_redirect($url.'&warning_msg='.urlencode($warning_msg));

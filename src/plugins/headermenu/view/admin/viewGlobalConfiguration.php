@@ -1,6 +1,6 @@
 <?php
 /**
- * headermenuPlugin Class
+ * headermenu : viewGlobalConfiguration page
  *
  * Copyright 2012 Franck Villaume - TrivialDev
  * http://fusionforge.org
@@ -24,7 +24,6 @@
 global $HTML;
 global $headermenu;
 
-session_require_global_perm('forge_admin');
 ?>
 
 <script language="Javascript" type="text/javascript">//<![CDATA[
