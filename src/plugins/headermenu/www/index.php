@@ -78,6 +78,7 @@ switch ($type) {
 		session_require_perm('project_admin', $group_id);
 		$action = getStringFromRequest('action');
 		$view = getStringFromRequest('view');
+
 		switch ($action) {
 			case 'addLink':
 			case 'updateLinkValue':
