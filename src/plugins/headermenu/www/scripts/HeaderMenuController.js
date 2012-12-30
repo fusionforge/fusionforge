@@ -32,6 +32,12 @@ HeaderMenuController = function(params) {
 	this.initializeView();
 };
 
+GroupMenuController = function(params) {
+	this.params = params;
+	this.bindControls();
+	this.initializeView();
+};
+
 HeaderMenuController.prototype =
 {
 	bindControls: function() {
@@ -43,6 +49,34 @@ HeaderMenuController.prototype =
 
 	initializeView: function() {
 		this.params.inputHtmlCode.prop('disabled', true);
+		this.params.trHtmlCode.hide();
+		this.params.trUrlCode.show();
+		this.params.inputURL.attr('checked', 'checked');
+	},
+
+	htmlCodeView: function() {
+		this.params.trHtmlCode.show();
+		this.params.trUrlCode.hide();
+	},
+
+	htmlUrlView: function() {
+		this.params.trHtmlCode.hide();
+		this.params.trUrlCode.show();
+	},
+
+	inputHtmlCodeView: function() {
+		this.params.inputHtmlCode.prop('disabled', false);
+	}
+};
+
+GroupMenuController.prototype =
+{
+	bindControls: function() {
+		this.params.inputHtmlCode.click(jQuery.proxy(this, "htmlCodeView"));
+		this.params.inputURL.click(jQuery.proxy(this, "htmlUrlView"));
+	},
+
+	initializeView: function() {
 		this.params.trHtmlCode.hide();
 		this.params.trUrlCode.show();
 		this.params.inputURL.attr('checked', 'checked');
