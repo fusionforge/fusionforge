@@ -22,18 +22,23 @@
  */
 
 global $headermenu;
+global $type;
+global $group_id;
 
-session_require_global_perm('forge_admin');
 $idLink = getIntFromRequest('linkid');
 $linkStatus = getIntFromRequest('linkstatus');
+$redirect_url = 'plugins/'.$headermenu->name.'/?type='.$type;
+if (isset($group_id) && $group_id) {
+	$redirect_url .= '&group_id='.$group_id;
+}
 
 if (!empty($idLink)) {
 	if ($headermenu->updateLinkStatus($idLink, $linkStatus)) {
 		$feedback = _('Link Status updated');
-		session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+		session_redirect($redirect_url.'&feedback='.urlencode($feedback));
 	}
 	$error_msg = _('Task failed');
-	session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+	session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
 }
 $warning_msg = _('Missing Link or status to be updated.');
-session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
