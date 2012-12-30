@@ -29,6 +29,36 @@ global $group_id;
 
 <?php
 $linksArray = $headermenu->getAvailableLinks('groupmenu');
+if (sizeof($linksArray)) {
+	echo $HTML->boxTop(_('Manage available links'));
+	$tabletop = array(_('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
+	$classth = array('','','','','unsortable');
+	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
+	foreach ($linksArray as $link) {
+		echo '<tr>';
+		if (strlen($link['url']) > 0) {
+			echo '<td>'._('URL').' ('.htmlspecialchars($link['url']).')</td>';
+		} else {
+			echo '<td>'._('static html code').'</td>';
+		}
+		echo '<td>'.htmlspecialchars($link['name']).'</td>';
+		echo '<td>'.htmlspecialchars($link['description']).'</td>';
+		if ($link['is_enable']) {
+			echo '<td>'.html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'class'=>'tabtitle', 'title'=>_('link is on'))).'</td>';
+			echo '<td><a class="tabtitle-ne" title="'._('Desactivate this link').'" href="index.php?type=projectadmin&group_id='.$group_id.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0">'.html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))). '</a>';
+		} else {
+			echo '<td>'.html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'class'=>'tabtitle', 'title'=>_('link is off'))).'</td>';
+			echo '<td><a class="tabtitle-ne" title="'._('Activate this link').'" href="index.php?type=projectadmin&group_id='.$group_id.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1">'.html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))). '</a>';
+		}
+		echo '<a class="tabtitle-ne" title="'._('Edit this link').'" href="index.php?type=projectadmin&group_id='.$group_id.'&view=updateLinkValue&linkid='.$link['id_headermenu'].'">'.html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))). '</a>';
+		echo '<a class="tabtitle-ne" title="'._('Delete this link').'" href="index.php?type=projectadmin&group_id='.$group_id.'&action=deleteLink&linkid='.$link['id_headermenu'].'">'.html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))). '</a>';
+		echo '</td>';
+		echo '</tr>';
+	}
+	echo $HTML->listTableBottom();
+	echo $HTML->boxBottom();
+	echo '</br>';
+}
 
 echo '<form method="POST" name="addLink" action="index.php?type=projectadmin&group_id='.$group_id.'&action=addLink">';
 echo '<table><tr>';
