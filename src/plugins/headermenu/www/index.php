@@ -70,6 +70,13 @@ switch ($type) {
 		echo $headermenu->pageView($pageid);
 		break;
 	}
+	case 'iframeview': {
+		$pageid = getIntFromRequest('pageid');
+		$headermenu->pageid = $pageid;
+		$headermenu->getHeader($type);
+		echo $headermenu->iframeView($pageid);
+		break;
+	}
 	case 'projectadmin': {
 		if (!session_loggedin()) {
 			exit_not_logged_in();

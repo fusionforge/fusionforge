@@ -30,6 +30,7 @@ $name = strip_tags(getStringFromRequest('name'));
 $linkmenu = getStringFromRequest('linkmenu');
 $htmlcode = getStringFromRequest('htmlcode');
 $type = getStringFromRequest('type');
+$iframed = getIntFromRequest('iframeview');
 
 $redirect_url = 'plugins/'.$headermenu->name.'/?type='.$type;
 if (isset($group_id) && $group_id) {
@@ -60,7 +61,11 @@ if (!empty($name) && !empty($linkmenu)) {
 		case 'groupmenu': {
 			if (!empty($link)) {
 				if (util_check_url($link)) {
-					if ($headermenu->addLink($link, $name, $description, $linkmenu)) {
+					$linktype = 'URL';
+					if ($iframed) {
+						$linktype = 'iframe';
+					}
+					if ($headermenu->addLink($link, $name, $description, $linkmenu, $linktype)) {
 						$feedback = _('Task succeeded.');
 						session_redirect($redirect_url.'&feedback='.urlencode($feedback));
 					}
