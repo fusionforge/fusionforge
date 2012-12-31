@@ -56,7 +56,8 @@ if (!empty($name) && !empty($linkmenu)) {
 			session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
 			break;
 		}
-		case 'outermenu': {
+		case 'outermenu':
+		case 'groupmenu': {
 			if (!empty($link)) {
 				if (util_check_url($link)) {
 					if ($headermenu->addLink($link, $name, $description, $linkmenu)) {
@@ -80,21 +81,6 @@ if (!empty($name) && !empty($linkmenu)) {
 			}
 			$warning_msg = _('Missing Link URL or Html Code.');
 			session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
-		}
-		case 'groupmenu': {
-			if (!empty($link)) {
-				if (util_check_url($link)) {
-					if ($headermenu->addLink($link, $name, $description, $linkmenu)) {
-						$feedback = _('Task succeeded.');
-						session_redirect($redirect_url.'&feedback='.urlencode($feedback));
-					}
-					$error_msg = _('Task failed');
-					session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
-				} else {
-					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
-				}
-			}
 		}
 	}
 }
