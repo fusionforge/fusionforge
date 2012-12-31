@@ -37,11 +37,6 @@ if (isset($group_id) && $group_id) {
 	$redirect_url .= '&group_id='.$group_id;
 }
 
-$redirect_url = 'plugins/'.$headermenu->name.'/?type='.$type;
-if (isset($group_id) && $group_id) {
-	$redirect_url .= '&group_id='.$group_id;
-}
-
 if (!empty($name) && !empty($linkmenu)) {
 	switch ($linkmenu) {
 		case 'headermenu': {
