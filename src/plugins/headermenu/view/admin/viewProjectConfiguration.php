@@ -35,7 +35,8 @@ jQuery(document).ready(function() {
 		inputHtmlCode:	jQuery('#typemenu_htmlcode'),
 		inputURL:	jQuery('#typemenu_url'),
 		trHtmlCode:	jQuery('#htmlcode'),
-		trUrlCode:	jQuery('#urlcode')
+		trUrlCode:	jQuery('#urlcode'),
+		trIframeView:	jQuery('#iframe'),
     });
 });
 
@@ -51,7 +52,11 @@ if (sizeof($linksArray)) {
 	foreach ($linksArray as $link) {
 		echo '<tr>';
 		if (strlen($link['url']) > 0) {
-			echo '<td>'._('URL').' ('.htmlspecialchars($link['url']).')</td>';
+			echo '<td>'._('URL');
+			if ($link['linktype'] == 'iframe') {
+				echo ' '._('displayed as iframe');
+			}
+			echo ' ('.htmlspecialchars($link['url']).')</td>';
 		} else {
 			echo '<td>'._('static html code').'</td>';
 		}
@@ -103,6 +108,8 @@ if (!$GLOBALS['editor_was_set_up']) {
 unset($GLOBALS['editor_was_set_up']);
 echo '</td></tr><tr id="urlcode" >';
 echo '<td>'._('URL').'</td><td><input name="link" type="text" maxsize="255" /></td>';
+echo '</td></tr><tr id="iframe" >';
+echo '<td colspan="2" ><input name="iframeview" type="checkbox" value="1" />Display URL as iframe.</td>';
 echo '</tr><tr>';
 echo '<td>';
 echo '<input type="hidden" name="linkmenu" value="groupmenu" />';

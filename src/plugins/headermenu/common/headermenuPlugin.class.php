@@ -147,10 +147,10 @@ class headermenuPlugin extends Plugin {
 						break;
 					}
 					case 'iframe': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframe&group_id='.$params['group'].'&pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframeview&group_id='.$params['group'].'&pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
-						if ($params['toptab'] == '/plugins/'.$this->name.'/?type=iframe&group_id='.$params['group'].'&pageid='.$link['id_headermenu']) {
+						if ($params['toptab'] == '/plugins/'.$this->name.'/?type=iframeview&group_id='.$params['group'].'&pageid='.$link['id_headermenu']) {
 							$params['selected'] = (count($params['DIRS'])-1);
 						}
 						break;
@@ -286,7 +286,8 @@ class headermenuPlugin extends Plugin {
 	 * @return	string	the html code
 	 */
 	 function iframeView($pageid) {
-		return true;
+		$link = $this->getLink($pageid);
+		return '<iframe src="'.rtrim($link['url'],'/').'" frameborder="0" height="600px" width="100%"></iframe>';
 	 }
 
 	/**
@@ -309,16 +310,17 @@ class headermenuPlugin extends Plugin {
 				$returned = true;
 				break;
 			}
-			case 'pageview': {
+			case 'pageview':
+			case 'iframeview': {
 				$link = $this->getLink($this->pageid);
 				$group_id = getIntFromRequest('group_id');
 				if ($group_id) {
-					$params['toptab'] = '/plugins/headermenu/?type=pageview&group_id='.$group_id.'&pageid='.$this->pageid;
+					$params['toptab'] = '/plugins/headermenu/?type='.$type.'&group_id='.$group_id.'&pageid='.$this->pageid;
 					$params['group'] = $group_id;
 					$params['title'] = $link['name'];
 					site_project_header($params);
 				} else {
-					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/headermenu/?type=pageview&pageid='.$this->pageid));
+					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/headermenu/?type='.$type.'&pageid='.$this->pageid));
 				}
 				$returned = true;
 				break;
