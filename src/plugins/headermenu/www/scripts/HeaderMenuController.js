@@ -85,11 +85,13 @@ GroupMenuController.prototype =
 	htmlCodeView: function() {
 		this.params.trHtmlCode.show();
 		this.params.trUrlCode.hide();
+		this.params.trIframeView.hide();
 	},
 
 	htmlUrlView: function() {
 		this.params.trHtmlCode.hide();
 		this.params.trUrlCode.show();
+		this.params.trIframeView.show();
 	},
 
 	inputHtmlCodeView: function() {
