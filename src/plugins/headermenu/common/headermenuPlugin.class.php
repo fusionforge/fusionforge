@@ -138,13 +138,13 @@ class headermenuPlugin extends Plugin {
 						break;
 					}
 					case 'htmlcode': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&group_id='.$params['group'].'&pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
 						break;
 					}
 					case 'iframe': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframe&pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframe&group_id='.$params['group'].'&pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
 						break;
@@ -305,7 +305,17 @@ class headermenuPlugin extends Plugin {
 			}
 			case 'pageview': {
 				$link = $this->getLink($this->pageid);
-				site_header(array('title'=> $link['name'], 'toptab' => '/plugins/headermenu/?pageview&pageid='.$this->pageid));
+				$group_id = getIntFromRequest('group_id');
+				if ($group_id) {
+					$params['toptab'] = '/plugins/headermenu/?type=pageview&group_id='.$group_id.'pageid='.$this->pageid;
+					$params['group'] = $group_id;
+					$params['title'] = $link['name'];
+					$params['pagename'] = $link['name'];
+					$params['sectionvals'] = array(group_getname($group_id));
+					site_project_header($params);
+				} else {
+					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/headermenu/?type=pageview&pageid='.$this->pageid));
+				}
 				$returned = true;
 				break;
 			}
