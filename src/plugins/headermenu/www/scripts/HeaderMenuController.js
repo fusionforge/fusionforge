@@ -52,6 +52,9 @@ HeaderMenuController.prototype =
 		this.params.trHtmlCode.hide();
 		this.params.trUrlCode.show();
 		this.params.inputURL.attr('checked', 'checked');
+		if (typeof(this.params.tableTbodyLink) != 'undefined') {
+			this.params.tableTbodyLink.sortable();
+		}
 	},
 
 	htmlCodeView: function() {
@@ -80,6 +83,9 @@ GroupMenuController.prototype =
 		this.params.trHtmlCode.hide();
 		this.params.trUrlCode.show();
 		this.params.inputURL.attr('checked', 'checked');
+		if (typeof(this.params.tableTbodyLink) != 'undefined') {
+			this.params.tableTbodyLink.sortable();
+		}
 	},
 
 	htmlCodeView: function() {

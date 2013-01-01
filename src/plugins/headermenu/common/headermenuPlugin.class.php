@@ -3,7 +3,7 @@
 /**
  * headermenuPlugin Class
  *
- * Copyright 2012 Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -61,7 +61,7 @@ class headermenuPlugin extends Plugin {
 				$group_id = $params['group_id'];
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
-					echo '<p>'.util_make_link('/plugins/headermenu/?type=projectadmin&group_id='.$group_id,
+					echo '<p>'.util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$group_id,
 					     _('Project GroupMenu Admin'), array('class' => 'tabtitle', 'title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
 				}
 				break;
@@ -304,6 +304,7 @@ class headermenuPlugin extends Plugin {
 				global $gfwww;
 				require_once($gfwww.'admin/admin_utils.php');
 				html_use_jquery();
+				html_use_jqueryui();
 				use_javascript('scripts/HeaderMenuController.js');
 				use_javascript('/js/sortable.js');
 				site_admin_header(array('title'=>_('Site Global Menu Admin'), 'toptab' => ''));
@@ -315,18 +316,19 @@ class headermenuPlugin extends Plugin {
 				$link = $this->getLink($this->pageid);
 				$group_id = getIntFromRequest('group_id');
 				if ($group_id) {
-					$params['toptab'] = '/plugins/headermenu/?type='.$type.'&group_id='.$group_id.'&pageid='.$this->pageid;
+					$params['toptab'] = '/plugins/'.$this->name.'/?type='.$type.'&group_id='.$group_id.'&pageid='.$this->pageid;
 					$params['group'] = $group_id;
 					$params['title'] = $link['name'];
 					site_project_header($params);
 				} else {
-					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/headermenu/?type='.$type.'&pageid='.$this->pageid));
+					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/'.$this->name.'/?type='.$type.'&pageid='.$this->pageid));
 				}
 				$returned = true;
 				break;
 			}
 			case 'projectadmin': {
 				html_use_jquery();
+				html_use_jqueryui();
 				use_javascript('scripts/HeaderMenuController.js');
 				use_javascript('/js/sortable.js');
 				site_header(array('title'=>_('Project Menu Admin'), 'toptab' => ''));

@@ -37,7 +37,8 @@ jQuery(document).ready(function() {
 		trHtmlCode:	jQuery('#htmlcode'),
 		trUrlCode:	jQuery('#urlcode'),
 		trIframeView:	jQuery('#iframe'),
-    });
+		tableTbodyLink:	jQuery('#sortable tbody')
+	});
 });
 
 //]]></script>
