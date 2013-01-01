@@ -1,7 +1,7 @@
 /**
  * headerMenu Plugin Js Controller
  *
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -104,8 +104,15 @@ EditHeaderMenuController.prototype =
 	bindControls: function() {
 		this.params.inputHtmlCode.click(jQuery.proxy(this, "htmlCodeView"));
 		this.params.inputURL.click(jQuery.proxy(this, "htmlUrlView"));
-		this.params.inputOuter.click(jQuery.proxy(this, "inputHtmlCodeView"));
-		this.params.inputHeader.click(jQuery.proxy(this, "headerView"));
+		if (typeof(this.params.inputOuter) != 'undefined') {
+			this.params.inputOuter.click(jQuery.proxy(this, "inputHtmlCodeView"));
+		}
+		if (typeof(this.params.inputHeader) != 'undefined') {
+			this.params.inputHeader.click(jQuery.proxy(this, "headerView"));
+		}
+		if (typeof(this.params.inputURLIframe) != 'undefined') {
+			this.params.inputURLIframe.click(jQuery.proxy(this, "htmlUrlView"));
+		}
 	},
 
 	initializeView: function() {
@@ -119,6 +126,12 @@ EditHeaderMenuController.prototype =
 		if (this.params.inputURL.attr("checked")) {
 			this.params.trHtmlCode.hide();
 			this.params.trUrlCode.show();
+		}
+		if (typeof(this.params.inputURLIframe) != 'undefined') {
+			if (this.params.inputURLIframe.attr("checked")) {
+				this.params.trHtmlCode.hide();
+				this.params.trUrlCode.show();
+			}
 		}
 	},
 
