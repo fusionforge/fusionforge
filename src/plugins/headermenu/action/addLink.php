@@ -2,7 +2,7 @@
 /**
  * headermenu plugin : addLink action
  *
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -61,7 +61,7 @@ if (!empty($name) && !empty($linkmenu)) {
 		case 'groupmenu': {
 			if (!empty($link)) {
 				if (util_check_url($link)) {
-					$linktype = 'URL';
+					$linktype = 'url';
 					if ($iframed) {
 						$linktype = 'iframe';
 					}
