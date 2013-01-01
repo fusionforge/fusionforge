@@ -46,12 +46,13 @@ jQuery(document).ready(function() {
 <?php
 $linksArray = $headermenu->getAvailableLinks('groupmenu');
 if (sizeof($linksArray)) {
+	echo '<p class="information">'. _('You can reorder links, just drag & drop rows in the table and save order.').'</p>';
 	echo $HTML->boxTop(_('Manage available links'));
-	$tabletop = array(_('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
-	$classth = array('','','','','unsortable');
+	$tabletop = array(_('Order'), _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
+	$classth = array('', '','','','','unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
-		echo '<tr>';
+		echo '<tr><td>'.$link['ordering'].'</td>';
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL');
 			if ($link['linktype'] == 'iframe') {
