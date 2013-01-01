@@ -63,15 +63,14 @@ if (is_array($linkValues)) {
 		echo html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $linkValues['linkmenu'], false);
 		echo '</td>';
 		echo '</tr><tr>';
+		$texts = array('URL', 'New Page');
+		$vals = array('url', 'htmlcode');
 	}
 	echo '<td>'._('Menu Type').'</td><td>';
 	if ($type == 'projectadmin') {
 		$texts = array('URL', 'URL as iframe', 'New Page');
 		$vals = array('url', 'iframe', 'htmlcode');
-	}
-	if ($type == 'globaladmin') {
-		$texts = array('URL', 'New Page');
-		$vals = array('url', 'htmlcode');
+		echo '<input type="hidden" name="linkmenu" value="groupmenu" />';
 	}
 	$select_name = 'typemenu';
 	echo html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $linkValues['linktype'], false);
