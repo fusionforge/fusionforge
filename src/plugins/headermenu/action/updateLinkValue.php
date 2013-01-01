@@ -23,7 +23,6 @@
 
 global $headermenu;
 
-session_require_global_perm('forge_admin');
 $idLink = getIntFromRequest('linkid');
 $link = getStringFromRequest('link');
 $name = strip_tags(getStringFromRequest('name'));
@@ -31,53 +30,55 @@ $description = strip_tags(getStringFromRequest('description'));
 $typemenu = getStringFromRequest('typemenu');
 $linkmenu = getStringFromRequest('linkmenu');
 $htmlcode = getStringFromRequest('htmlcode');
+$type = getStringFromRequest('type');
 
 if (!empty($idLink) && !empty($name)) {
 	switch ($linkmenu) {
-		case "headermenu": {
+		case 'headermenu': {
 			if (!empty($link)) {
 				if (util_check_url($link)) {
 					if ($headermenu->updateLink($idLink, $link, $name, $description, $linkmenu)) {
 						$feedback = _('Task succeeded.');
-						session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+						session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&feedback='.urlencode($feedback));
 					}
 					$error_msg = _('Task failed');
-					session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
 				}
 			}
 			$warning_msg = _('Missing Link URL.');
-			session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+			session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&warning_msg='.urlencode($warning_msg));
 			break;
 		}
-		case "outermenu": {
-			if (!empty($link) && $typemenu == 'url') {
+		case 'outermenu':
+		case 'groupmenu': {
+			if (!empty($link) && ($typemenu == 'url' || $typemenu == 'iframe')) {
 				if (util_check_url($link)) {
-					if ($headermenu->updateLink($idLink, $link, $name, $description, $linkmenu)) {
+					if ($headermenu->updateLink($idLink, $link, $name, $description, $linkmenu, $typemenu)) {
 						$feedback = _('Task succeeded.');
-						session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+						session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&feedback='.urlencode($feedback));
 					}
 					$error_msg = _('Task failed');
-					session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
 				}
 			}
 			if (!empty($htmlcode) && $typemenu == 'htmlcode') {
 				if ($headermenu->updateLink($idLink, '', $name, $description, $linkmenu, 'htmlcode', $htmlcode)) {
 					$feedback = _('Task succeeded.');
-					session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&feedback='.urlencode($feedback));
 				}
 				$error_msg = _('Task failed');
-				session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+				session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
 			}
 			$warning_msg = _('Missing Link URL or Html Code.');
-			session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+			session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&warning_msg='.urlencode($warning_msg));
 		}
 	}
 }
 $warning_msg = _('No link to update or name missing.');
-session_redirect('plugins/'.$headermenu->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&warning_msg='.urlencode($warning_msg));
