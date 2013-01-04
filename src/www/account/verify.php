@@ -77,7 +77,7 @@ $HTML->header(array('title'=>_('Verify')));
 
 echo '<p>' . _('In order to complete your registration, login now. Your account will then be activated for normal logins.') . '</p>';
 
-if (isset($GLOBALS['error_msg'])) {
+if (isset($GLOBALS['error_msg']) && $GLOBALS['error_msg'] != '') {
 	print '<p class="error">'.$GLOBALS['error_msg'].'</p>';
 }
 ?>
