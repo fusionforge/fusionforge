@@ -179,7 +179,7 @@ class ForumAdmin extends Error {
 			session_require_perm ('forum_admin', $f->Group->getID()) ;
 
 			if (!$f->update($forum_name,$description,$send_all_posts_to)) {
-				exit_error($f->getErrorMessage(),'forums');
+				$this->setError($f->getErrorMessage());
 			} else {
 				$feedback = _('Forum Info Updated Successfully');
 			}
@@ -206,7 +206,7 @@ class ForumAdmin extends Error {
 			}
 			if (!$f->create($forum_name,$description,$send_all_posts_to,1)) {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error($f->getErrorMessage(),'forums');
+				$this->setError($f->getErrorMessage());
 			} else {
 				$feedback = _('Forum added successfully');
 			}

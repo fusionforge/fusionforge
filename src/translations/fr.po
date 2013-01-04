@@ -22942,6 +22942,11 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Mediawiki plugin"
 #~ msgstr "Plugin Mediawiki"
 
+#: common/forum/Forum.class.php:156
+#: common/forum/Forum.class.php:537
+msgid "No space"
+msgstr "Caractère espace interdit"
+
 #~ msgid "See"
 #~ msgstr "Voir"
 
