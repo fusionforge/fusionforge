@@ -165,7 +165,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 	}
 
 	function getCategory() {
-		return 'File-Release';
+		return _('File-Release');
 	}
 
 	function getDescription() {

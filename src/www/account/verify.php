@@ -73,7 +73,7 @@ if (getStringFromRequest('submit')) {
 	session_redirect("/account/first.php");
 }
 
-$HTML->header(array('title'=>'Verify'));
+$HTML->header(array('title'=>_('Verify')));
 
 echo '<p>' . _('In order to complete your registration, login now. Your account will then be activated for normal logins.') . '</p>';
 

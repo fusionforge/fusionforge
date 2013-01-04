@@ -335,8 +335,8 @@ if (getStringFromRequest('add_forum')) {
 		}
 
 		forum_header(array('title'=>_('Edit a Message')));
-		echo '<p><a href="/forum/forum.php?forum_id=' . $new_forum_id . '">Return to the forum</a></p>';
-		echo '<p><a href="/forum/forum.php?thread_id='.$thread_id.'&amp;forum_id=' . $new_forum_id . '">Return to the thread</a></p>';
+		echo '<p><a href="/forum/forum.php?forum_id=' . $new_forum_id . '">'._('Return to the forum').'</a></p>';
+		echo '<p><a href="/forum/forum.php?thread_id='.$thread_id.'&amp;forum_id=' . $new_forum_id . '">'._('Return to the thread').'</a></p>';
 		forum_footer(array());
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum

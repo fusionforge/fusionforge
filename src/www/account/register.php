@@ -89,7 +89,7 @@ if (getStringFromRequest('submit')) {
 					      $email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
 					      $address,$address2,$phone,$fax,$title,$ccode,$send_mail);
 		if ($register) {
-			site_header(array('title'=>'Register Confirmation'));
+			site_header(array('title'=>_('Register Confirmation')));
 
 
 
