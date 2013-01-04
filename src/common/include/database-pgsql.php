@@ -421,6 +421,27 @@ function db_result($qhandle,$row,$field) {
 }
 
 /**
+ *  db_result_seek() - Sets cursor location in a result set.
+ *
+ *	@param		int		Query result set handle.
+ *  @param		integer Row number.
+ *	@return boolean True on success
+ */
+function db_result_seek($qhandle,$row) {
+	return @pg_result_seek($qhandle,$row);
+}
+
+/**
+ *  db_result_reset() - Resets cursor location in a result set.
+ *
+ *	@param		int		Query result set handle.
+ *	@return boolean True on success
+ */
+function db_result_reset($qhandle,$row) {
+	return db_result_seek($qhandle,0);
+}
+
+/**
  *  db_numfields() - Returns the number of fields in this result set.
  *
  *	@param		int		Query result set handle.
