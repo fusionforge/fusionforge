@@ -53,7 +53,11 @@ HeaderMenuController.prototype =
 		this.params.trUrlCode.show();
 		this.params.inputURL.attr('checked', 'checked');
 		if (typeof(this.params.tableTbodyLink) != 'undefined') {
-			this.params.tableTbodyLink.sortable();
+			this.params.tableTbodyLink.sortable({
+				update: function(event, ui) {
+						jQuery(ui.item).attr("id", jQuery(ui.item).index());
+					}
+			});
 		}
 	},
 
@@ -84,7 +88,19 @@ GroupMenuController.prototype =
 		this.params.trUrlCode.show();
 		this.params.inputURL.attr('checked', 'checked');
 		if (typeof(this.params.tableTbodyLink) != 'undefined') {
-			this.params.tableTbodyLink.sortable();
+			this.params.tableTbodyLink.sortable({
+				update: function(event, ui) {
+					jQuery("#sortable tbody").children().each(function() {
+						jQuery(this).attr("id", jQuery(this).index())
+						if (jQuery(this).attr("id") % 2 === 0) {
+							jQuery(this).attr("class", "even");
+						} else {
+							jQuery(this).attr("class", "odd");
+						}
+						jQuery(this).children(":first").text(jQuery(this).attr("id"));
+					});
+				}
+			});
 		}
 	},
 
