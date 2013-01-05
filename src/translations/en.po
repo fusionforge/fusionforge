@@ -20811,3 +20811,43 @@ msgstr[1] ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
+
+# :common/include/Plugin.class.php:226
+msgid "Use Plugin"
+msgstr ""
+
+# :www/account/register.php:92
+msgid "Register Confirmation"
+msgstr ""
+
+# :www/account/verify.php:71
+msgid "Verify"
+msgstr ""
+
+#: www/Account/lostpw.php:71
+msgid "Lost Password Confirmation"
+msgstr ""
+
+# : common/widget/Widget_ProjectLatestFileReleases.class.php:166
+msgid "File-Release"
+msgstr ""
+
+# : common/widget/Widget.class.php:335
+msgid "General"
+msgstr ""
+
+# : common/include/Role.class.php : 193
+msgid "Cannot create a role with an empty name"
+msgstr ""
+
+# : www/project/admin/users.php : 201
+msgid "Rejected"
+msgstr ""
+
+# : www/forum/admin/index.php : 370
+msgid "Return to the thread"
+msgstr ""
+
+# : common/forum/AttachManager.class.php : 92
+msgid "Proceed with deletion?"
+msgstr ""

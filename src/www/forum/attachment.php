@@ -40,7 +40,7 @@ require_once $gfcommon.'forum/ForumHTML.class.php';
 function goodbye($msg) {
 	site_header(array('title'=>_('Attachments')));
 	html_feedback_top($msg);
-	echo '<p><p><center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>';
+	echo '<p><p><center><form method="post"><input type="button" value="'._('Close Window').'" onclick="window.close()"></form></center>';
 	site_footer(array());
 	exit();
 	/*echo "<center>" . $msg . "</center><p>";

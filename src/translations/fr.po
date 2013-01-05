@@ -15108,17 +15108,15 @@ msgstr ""
 "passe.</div>"
 
 #: www/admin/passedit.php:81
-#, fuzzy, php-format
+#, php-format
 msgid "Go back to %s."
-msgstr "Retour"
+msgstr "Retour à %s."
 
 #: www/admin/passedit.php:81
-#, fuzzy
 msgid "the Full User List"
 msgstr "Liste des utilisateurs"
 
 #: www/admin/passedit.php:84
-#, fuzzy
 msgid "Site Admin: Change User Password"
 msgstr "Administration du site : Informations Utilisateur"
 
@@ -20009,7 +20007,7 @@ msgstr "Sondages"
 
 #: www/project/admin/tools.php:242
 msgid "Use News"
-msgstr "News"
+msgstr "Annonces"
 
 #: www/project/admin/tools.php:255
 msgid "Use Source Code"
@@ -22944,6 +22942,11 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Mediawiki plugin"
 #~ msgstr "Plugin Mediawiki"
 
+#: common/forum/Forum.class.php:156
+#: common/forum/Forum.class.php:537
+msgid "No space"
+msgstr "Caractère espace interdit"
+
 #~ msgid "See"
 #~ msgstr "Voir"
 
@@ -23335,6 +23338,46 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "OR Attach A Comment"
 #~ msgstr "Ou rédiger un commentaire"
+
+# :common/include/Plugin.class.php:226
+msgid "Use Plugin"
+msgstr "Utiliser le plugin "
+
+# :www/account/register.php:92
+msgid "Register Confirmation"
+msgstr "Confirmation d'enregistrement"
+
+# :www/account/verify.php:71
+msgid "Verify"
+msgstr "Vérification"
+
+#: www/Account/lostpw.php:71
+msgid "Lost Password Confirmation"
+msgstr "Confirmation de mot de passe perdu"
+
+# : common/widget/Widget_ProjectLatestFileReleases.class.php:166
+msgid "File-Release"
+msgstr "Publication-de-fichiers"
+
+# : common/widget/Widget.class.php:335
+msgid "General"
+msgstr "General"
+
+# : common/include/Role.class.php : 193
+msgid "Cannot create a role with an empty name"
+msgstr "Impossible de créer un rôle avec un nom vide"
+
+# : www/project/admin/users.php : 201
+msgid "Rejected"
+msgstr "Rejeté"
+
+# : www/forum/admin/index.php : 370
+msgid "Return to the thread"
+msgstr "Retourner à la discussion"
+
+# : common/forum/AttachManager.class.php : 92
+msgid "Proceed with deletion?"
+msgstr "Procéder à la suppression?"
 
 #~ msgid "Customize Layout"
 #~ msgstr "Personnaliser la mise en page"

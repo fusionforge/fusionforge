@@ -71,7 +71,7 @@ if (getStringFromRequest('submit')) {
 		$public = $role->isPublic () ;
 	}
 	if (!$role_name) {
-		$warning_msg .= ' Missing Role Name ';
+		$warning_msg .= _('Missing Role Name');
 	} else {
 		if (!$role_id) {
 			$role_id=$role->create($role_name,$data);

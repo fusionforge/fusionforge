@@ -175,7 +175,7 @@ if (getStringFromRequest('submit')) {
 			if (!$gjr->reject()) {
 				$error_msg = $gjr->getErrorMessage();
 			} else {
-				$feedback .= 'Rejected';
+				$feedback .= _('Rejected');
 			}
 		}
 	} elseif (getStringFromRequest('linkrole')) {

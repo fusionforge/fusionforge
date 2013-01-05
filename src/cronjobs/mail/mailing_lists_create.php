@@ -303,20 +303,19 @@ for($k = 0; $k < $rows; $k++) {
 		break;
 	}
 
-	exec($path_to_mailman."/bin/rmlist -a '$deleted_mail_list'", $output);
-	$success = false;
-	foreach ($output as $line) {
-		// Mailman 2.1.x
-		if (preg_match("/to finish removing/i", $line)) {
-			$success = true;
-			break;
-		}
-		// Mailman 2.1.0
-		if (preg_match("/removing list info/i", $line)) {
-			$success = true;
-			break;
-		}
-	}
+	$rm_cmd = forge_get_config('mailman_path')."/bin/rmlist -a $deleted_mail_list";
+    $err .= "Command to be executed is $rm_cmd";
+		passthru($rm_cmd, $failed);
+    if($failed) {
+		$err .= 'Failed to remove '.$listname.", skipping\n";
+		echo $err;
+		continue;
+    }
+    $success = false;
+    if (!file_exists(forge_get_config('mailman_data_path')."/lists/$deleted_mail_list")) {
+		 $success = true;
+    }
+    
 	if($success) {
 		$res1 = db_query_params('UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = $1',
 			array($deleted_mail_list));

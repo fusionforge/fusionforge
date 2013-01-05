@@ -167,8 +167,12 @@ class Forum extends Error {
 			$this->setError(_('Forum Description Must Be At Least 10 Characters'));
 			return false;
 		}
-		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {
-			$this->setError(_('Illegal Characters in Forum Name'));
+		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {			
+			if (preg_match('/ /',$forum_name)){
+				$this->setError(_('Illegal Characters in Forum Name').' - '._('No space'));
+			}else{
+				$this->setError(_('Illegal Characters in Forum Name'));
+			}
 			return false;
 		}
 		if ($send_all_posts_to) {
@@ -545,7 +549,11 @@ class Forum extends Error {
 			return false;
 		}
 		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {
-			$this->setError(_('Illegal Characters in Forum Name'));
+			if (preg_match('/ /',$forum_name)){
+				$this->setError(_('Illegal Characters in Forum Name').' - '._('No space'));
+			}else{
+				$this->setError(_('Illegal Characters in Forum Name'));
+			}
 			return false;
 		}
 		if ($send_all_posts_to) {

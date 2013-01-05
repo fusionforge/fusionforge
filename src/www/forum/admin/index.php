@@ -37,6 +37,7 @@ require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML in
 $group_id = getIntFromRequest('group_id');
 $group_forum_id = getIntFromRequest('group_forum_id');
 $deleteforum = getStringFromRequest('deleteforum');
+$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 
 global $HTML;
 
@@ -79,6 +80,9 @@ if (getStringFromRequest('post_changes')) {
 		if (check_email_available($g, $g->getUnixName() . '-' . getStringFromRequest('forum_name'), $error_msg)) {
 			$fa = new ForumAdmin($group_id);
 			$feedback .= $fa->ExecuteAction("add_forum");
+			if ($fa->isError()){
+				$error_msg = $fa->getErrorMessage();
+			}
 			$g->normalizeAllRoles () ;
 		}
 	} elseif (getStringFromRequest('change_status')) {
@@ -335,8 +339,8 @@ if (getStringFromRequest('add_forum')) {
 		}
 
 		forum_header(array('title'=>_('Edit a Message')));
-		echo '<p><a href="/forum/forum.php?forum_id=' . $new_forum_id . '">Return to the forum</a></p>';
-		echo '<p><a href="/forum/forum.php?thread_id='.$thread_id.'&amp;forum_id=' . $new_forum_id . '">Return to the thread</a></p>';
+		echo '<p><a href="/forum/forum.php?forum_id=' . $new_forum_id . '">'._('Return to the forum').'</a></p>';
+		echo '<p><a href="/forum/forum.php?thread_id='.$thread_id.'&amp;forum_id=' . $new_forum_id . '">'._('Return to the thread').'</a></p>';
 		forum_footer(array());
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum
