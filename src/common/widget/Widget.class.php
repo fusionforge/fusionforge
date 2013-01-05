@@ -362,7 +362,7 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 	}
 
 	function getCategory() {
-		return 'General';
+		return _('General');
 	}
 	function getDescription() {
 		return '';

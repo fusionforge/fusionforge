@@ -69,7 +69,7 @@ to change your password:
 
 		util_send_message($u->getEmail(),sprintf(_('%1$s Verification'), forge_get_config ('forge_name')),$message);
 
-		$HTML->header(array('title'=>"Lost Password Confirmation"));
+		$HTML->header(array('title'=>_('Lost Password Confirmation')));
 
 		echo '<p>'.printf(_('An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.').'</p><p><a href="%1$s">'._("Home").'</a>', util_make_url ('/')).'</p>';
 

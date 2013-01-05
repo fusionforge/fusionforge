@@ -167,7 +167,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			return false;
 		}
 		if ($role_name == '') {
-			$this->setError('Cannot create a role with an empty name');
+			$this->setError(_('Cannot create a role with an empty name'));
 			return false;
 		}
 

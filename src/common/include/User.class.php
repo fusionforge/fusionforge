@@ -289,6 +289,11 @@ class GFUser extends Error {
 			$this->setError(_('Invalid Password:'));
 			return false;
 		}
+		//testing if there is at least one capital letter in the unix name
+		if  (preg_match('/[A-Z]/', $unix_name)) {
+			$this->setError(_('Invalid Unix Name (must not contain uppercase characters)'));
+			return false;
+		}
 		$unix_name=strtolower($unix_name);
 		if (!account_namevalid($unix_name)) {
 			$this->setError(_('Invalid Unix Name.'));
