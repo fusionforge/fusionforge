@@ -168,7 +168,7 @@ class headermenuPlugin extends Plugin {
 	 * @return	array	the available links
 	 */
 	function getAvailableLinks($linkmenu) {
-		$links = db_query_params('select * FROM plugin_headermenu where linkmenu = $1', array($linkmenu));
+		$links = db_query_params('select * FROM plugin_headermenu where linkmenu = $1 order by ordering', array($linkmenu));
 		$availableLinks = array();
 		while ($arr = db_fetch_array($links)) {
 			$availableLinks[] = $arr;
@@ -230,6 +230,13 @@ class headermenuPlugin extends Plugin {
 		return false;
 	}
 
+	/**
+	 * updateLinkStatus - update the link status
+	 *
+	 * @param	int	$idLink the link id
+	 * @param	int	$linkStatus the new status of the link id
+	 * @return	bool	success or not
+	 */
 	function updateLinkStatus($idLink, $linkStatus) {
 		$res = db_query_params('update plugin_headermenu set is_enable = $1 where id_headermenu = $2', array($linkStatus, $idLink));
 		if ($res) {
@@ -238,6 +245,12 @@ class headermenuPlugin extends Plugin {
 		return false;
 	}
 
+	/**
+	 * getLink - get all informations about a link
+	 *
+	 * @param	int	$idLink the link id
+	 * @return	array	the link informations
+	 */
 	function getLink($idLink) {
 		$res = db_query_params('select * from plugin_headermenu where id_headermenu = $1', array($idLink));
 		if (db_numrows($res) == 1) {
@@ -276,7 +289,11 @@ class headermenuPlugin extends Plugin {
 	 */
 	function pageView($pageid) {
 		$link = $this->getLink($pageid);
-		return $link['htmlcode'];
+		if ($link) {
+			return $link['htmlcode'];
+		} else {
+			return '<p class="error" >'._('Cannot retrieve the page').'</p>';
+		}
 	}
 
 	/**
@@ -287,7 +304,11 @@ class headermenuPlugin extends Plugin {
 	 */
 	 function iframeView($pageid) {
 		$link = $this->getLink($pageid);
-		return '<iframe src="'.rtrim($link['url'],'/').'" frameborder="0" height="600px" width="100%"></iframe>';
+		if ($link) {
+			return '<iframe src="'.rtrim($link['url'],'/').'" frameborder="0" height="600px" width="100%"></iframe>';
+		} else {
+			return '<p class="error" >'._('Cannot retrieve the page').'</p>';
+		}
 	 }
 
 	/**

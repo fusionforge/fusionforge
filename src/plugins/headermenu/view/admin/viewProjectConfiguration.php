@@ -37,7 +37,10 @@ jQuery(document).ready(function() {
 		trHtmlCode:	jQuery('#htmlcode'),
 		trUrlCode:	jQuery('#urlcode'),
 		trIframeView:	jQuery('#iframe'),
-		tableTbodyLink:	jQuery('#sortable tbody')
+		tableTbodyLink:	jQuery('#sortable tbody'),
+		validateButton:	jQuery('#linkordervalidatebutton'),
+		groupId:	'<?php echo $group_id ?>',
+		headerMenuUrl:	'<?php util_make_uri("/plugins/headermenu") ?>'
 	});
 });
 
@@ -46,13 +49,13 @@ jQuery(document).ready(function() {
 <?php
 $linksArray = $headermenu->getAvailableLinks('groupmenu');
 if (sizeof($linksArray)) {
-	echo '<p class="information">'. _('You can reorder links, just drag & drop rows in the table and save order.').'</p>';
+	echo '<p class="information">'. _('You can reorder links, just drag & drop rows in the table and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.').'</p>';
 	echo $HTML->boxTop(_('Manage available links'));
 	$tabletop = array(_('Order'), _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '','','','','unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
-		echo '<tr id="'.$link['ordering'].'" ><td>'.$link['ordering'].'</td>';
+		echo '<tr id="'.$link['id_headermenu'].'" ><td>'.$link['ordering'].'</td>';
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL');
 			if ($link['linktype'] == 'iframe') {
@@ -78,9 +81,11 @@ if (sizeof($linksArray)) {
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->boxBottom();
+	echo '<input type="button" id="linkordervalidatebutton" value="'._('Validate Order').'" style="display:none;" />';
 	echo '</br>';
 }
 
+echo '<p class="information">'._('You can add your own tabs in the menu bar with the form below.').'</p>';
 echo '<form method="POST" name="addLink" action="index.php?type=projectadmin&group_id='.$group_id.'&action=addLink">';
 echo '<table><tr>';
 echo $HTML->boxTop(_('Add a new link'));
