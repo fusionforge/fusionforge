@@ -129,7 +129,8 @@ GroupMenuController.prototype =
 				linkorder:	linkOrder,
 				type:		'projectadmin'
 			});
-		jQuery('#maindiv').prepend('<p class="feedback">Link Order successfully validated</p>');
+		jQuery('#validateLinkFeedback').remove();
+		jQuery('#maindiv').prepend('<p id="validateLinkFeedback" class="feedback">Link Order successfully validated</p>');
 		this.params.validateButton.hide();
 	},
 };
