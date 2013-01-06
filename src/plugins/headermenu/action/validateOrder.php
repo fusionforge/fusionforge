@@ -1,8 +1,8 @@
 <?php
 /**
- * headermenu plugin: deleteLink action
+ * headermenu plugin : validateOrder action
  *
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -19,25 +19,19 @@
  * You should have received a copy of the GNU General Public License along
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */
+ */ 
 
 global $headermenu;
-global $type;
-global $group_id;
 
-$idLink = getIntFromRequest('linkid');
-$redirect_url = 'plugins/'.$headermenu->name.'/?type='.$type;
-if (isset($group_id) && $group_id) {
-	$redirect_url .= '&group_id='.$group_id;
-}
+$sysdebug_enable = false;
 
-if (!empty($idLink)) {
-	if ($headermenu->deleteLink($idLink)) {
-		$feedback = _('Link deleted');
-		session_redirect($redirect_url.'&feedback='.urlencode($feedback));
-	}
-	$error_msg = _('Task failed');
-	session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
+$linksOrder = getStringFromRequest('linkorder');
+$returnValue = 1;
+
+if ($linksOrder && strlen($linksOrder)) {
+	$linksOrderArr = explode(',', $linksOrder);
+	if ($headermenu->setLinksOrder($linksOrderArr))
+		$returnValue = 0;
 }
-$warning_msg = _('Missing Link to be deleted.');
-session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
+echo $returnValue;
+exit;

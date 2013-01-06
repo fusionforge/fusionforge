@@ -1,6 +1,6 @@
 <?php
 /**
- * headermenu plugin
+ * headermenu plugin: updateLinkStatus action
  *
  * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org

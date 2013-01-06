@@ -2,7 +2,7 @@
 /**
  * headermenu : viewProjectConfiguration page
  *
- * Copyright 2012 Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
 <?php
 $linksArray = $headermenu->getAvailableLinks('groupmenu');
 if (sizeof($linksArray)) {
-	echo '<p class="information">'. _('You can reorder links, just drag & drop rows in the table and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.').'</p>';
+	echo '<p class="information">'. _('You can reorder links, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.').'</p>';
 	echo $HTML->boxTop(_('Manage available links'));
 	$tabletop = array(_('Order'), _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '','','','','unsortable');

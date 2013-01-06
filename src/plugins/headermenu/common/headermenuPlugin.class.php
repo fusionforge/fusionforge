@@ -168,7 +168,7 @@ class headermenuPlugin extends Plugin {
 	 * @return	array	the available links
 	 */
 	function getAvailableLinks($linkmenu) {
-		$links = db_query_params('select * FROM plugin_headermenu where linkmenu = $1 order by ordering', array($linkmenu));
+		$links = db_query_params('select * FROM plugin_headermenu where linkmenu = $1 order by ordering asc', array($linkmenu));
 		$availableLinks = array();
 		while ($arr = db_fetch_array($links)) {
 			$availableLinks[] = $arr;
@@ -185,6 +185,21 @@ class headermenuPlugin extends Plugin {
 		$availableOuterLinks = $this->getAvailableLinks('outermenu');
 		$availableHeaderLinks = $this->getAvailableLinks('headermenu');
 		return array_merge($availableOuterLinks, $availableHeaderLinks);
+	}
+
+	/**
+	 * setLinksOrder - set the linkOrder for a set of links id
+	 *
+	 * @param	array	$linksOrder array of ordered links id
+	 * @return	bool	success or not
+	 */
+	function setLinksOrder($linksOrder) {
+		for ($i =0; $i < count($linksOrder); $i++) {
+			$res = db_query_params('update plugin_headermenu set ordering = $1 where id_headermenu = $2', array($i, $linksOrder[$i]));
+			if (!$res)
+				return false;
+		}
+		return true;
 	}
 
 	/**
@@ -352,7 +367,11 @@ class headermenuPlugin extends Plugin {
 				html_use_jqueryui();
 				use_javascript('scripts/HeaderMenuController.js');
 				use_javascript('/js/sortable.js');
-				site_header(array('title'=>_('Project Menu Admin'), 'toptab' => ''));
+				$group_id = getIntFromRequest('group_id');
+				$params['toptab'] = 'admin';
+				$params['group'] = $group_id;
+				$params['title'] = _('Project groupmenu Admin');
+				site_project_header($params);
 				$returned = true;
 				break;
 			}
