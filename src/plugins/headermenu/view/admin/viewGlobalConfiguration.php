@@ -47,12 +47,11 @@ jQuery(document).ready(function() {
 $linksArray = $headermenu->getAvailableLinks('headermenu');
 if (sizeof($linksArray)) {
 	echo $HTML->boxTop(_('Manage available links in headermenu'));
-	$tabletop = array(_('Menu Location'), _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
-	$classth = array('', '','','','','unsortable');
+	$tabletop = array( _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
+	$classth = array('','','','','unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
 		echo '<tr>';
-		echo '<td>'.htmlspecialchars($link['linkmenu']).'</td>';
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL').' ('.htmlspecialchars($link['url']).')</td>';
 		} else {
@@ -80,12 +79,11 @@ if (sizeof($linksArray)) {
 $linksArray = $headermenu->getAvailableLinks('outermenu');
 if (sizeof($linksArray)) {
 	echo $HTML->boxTop(_('Manage available links in outermenu'));
-	$tabletop = array(_('Menu Location'), _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
-	$classth = array('', '','','','','unsortable');
+	$tabletop = array(_('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
+	$classth = array('','','','','unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_outermenu_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
 		echo '<tr>';
-		echo '<td>'.htmlspecialchars($link['linkmenu']).'</td>';
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL').' ('.htmlspecialchars($link['url']).')</td>';
 		} else {
