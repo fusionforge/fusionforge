@@ -3,6 +3,7 @@
  * FusionForge configuration functions
  *
  * Copyright 2009, Roland Mas
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -104,22 +105,24 @@ class FusionForgeConfig {
 		$this->settings[$section][$var] = $value ;
 	}
 
-	function read_config_file ($filename) {
-		if (getenv ('FUSIONFORGE_USE_PRE_51_CONFIG') == 'true') {
+	function read_config_file($filename) {
+		if (getenv('FUSIONFORGE_USE_PRE_51_CONFIG') == 'true') {
 			$fallback_only = true;
 		} else {
 			$fallback_only = false;
 		}
 
 		if (file_exists($filename) && is_readable($filename)) {
-			$sections = parse_ini_file ($filename, true) ;
+			$sections = parse_ini_file($filename, true);
 			if (is_array($sections)) {
 				foreach ($sections as $section => $options) {
-					foreach ($options as $var => $value) {
-						if ($fallback_only) {
-							$this->set_value($section,$var,$value);
-						} else {
-							$this->reset_value($section,$var,$value);
+					if (is_array($options)) {
+						foreach ($options as $var => $value) {
+							if ($fallback_only) {
+								$this->set_value($section, $var, $value);
+							} else {
+								$this->reset_value($section, $var, $value);
+							}
 						}
 					}
 				}
