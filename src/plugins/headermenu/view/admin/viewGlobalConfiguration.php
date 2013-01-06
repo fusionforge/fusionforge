@@ -2,7 +2,7 @@
 /**
  * headermenu : viewGlobalConfiguration page
  *
- * Copyright 2012 Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -37,21 +37,29 @@ jQuery(document).ready(function() {
 		inputOuter:	jQuery('#linkmenu_outermenu'),
 		trHtmlCode:	jQuery('#htmlcode'),
 		trUrlCode:	jQuery('#urlcode'),
-		tableTbodyLink:	jQuery('#sortable tbody')
+		tableOutTbLink:	jQuery('.sortable_outermenu_listlinks tbody'),
+		tableHeaTbLink: jQuery('.sortable_headermenu_listlinks tbody'),
+		validOutButton:	jQuery('#linkorderoutervalidatebutton'),
+		validHeaButton:	jQuery('#linkorderheadervalidatebutton'),
 	});
 });
 
 //]]></script>
 
 <?php
-$linksArray = $headermenu->getAvailableLinks('headermenu');
-if (sizeof($linksArray)) {
+$linksHeaderMenuArray = $headermenu->getAvailableLinks('headermenu');
+$linksOuterMenuArray = $headermenu->getAvailableLinks('outermenu');
+
+if (sizeof($linksHeaderMenuArray) || sizeof($linksOuterMenuArray)) {
+	echo '<p class="information">'. _('You can reorder links, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.').'</p>';
+}
+if (sizeof($linksHeaderMenuArray)) {
 	echo $HTML->boxTop(_('Manage available links in headermenu'));
-	$tabletop = array( _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
-	$classth = array('','','','','unsortable');
+	$tabletop = array(_('Order'), _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
+	$classth = array('', '', '', '', '', 'unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
-	foreach ($linksArray as $link) {
-		echo '<tr>';
+	foreach ($linksHeaderMenuArray as $link) {
+		echo '<tr id="'.$link['id_headermenu'].'" ><td>'.$link['ordering'].'</td>';
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL').' ('.htmlspecialchars($link['url']).')</td>';
 		} else {
@@ -73,17 +81,20 @@ if (sizeof($linksArray)) {
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->boxBottom();
+	echo '<input type="button" id="linkorderheadervalidatebutton" value="'._('Save Order').'" style="display:none;" />';
 	echo '</br>';
+} else {
+	echo '<p class="information">'._('No links available for headermenu').'</p>';
 }
 
-$linksArray = $headermenu->getAvailableLinks('outermenu');
-if (sizeof($linksArray)) {
+
+if (sizeof($linksOuterMenuArray)) {
 	echo $HTML->boxTop(_('Manage available links in outermenu'));
-	$tabletop = array(_('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
-	$classth = array('','','','','unsortable');
+	$tabletop = array(_('Order'), _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
+	$classth = array('', '', '', '', '', 'unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_outermenu_listlinks', 'sortable', $classth);
-	foreach ($linksArray as $link) {
-		echo '<tr>';
+	foreach ($linksOuterMenuArray as $link) {
+		echo '<tr id="'.$link['id_headermenu'].'" ><td>'.$link['ordering'].'</td>';
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL').' ('.htmlspecialchars($link['url']).')</td>';
 		} else {
@@ -105,9 +116,13 @@ if (sizeof($linksArray)) {
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->boxBottom();
+	echo '<input type="button" id="linkorderoutervalidatebutton" value="'._('Save Order').'" style="display:none;" />';
 	echo '</br>';
+} else {
+	echo '<p class="information">'._('No links available for outermenu').'</p>';
 }
 
+echo '<p class="information">'._('You can add specific tabs in outermenu (main tab) or headermenu (next to the login) with the form below.').'</p>';
 echo '<form method="POST" name="addLink" action="index.php?type=globaladmin&action=addLink">';
 echo '<table><tr>';
 echo $HTML->boxTop(_('Add a new link'));
