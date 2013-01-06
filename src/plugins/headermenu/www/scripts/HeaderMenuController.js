@@ -45,6 +45,8 @@ HeaderMenuController.prototype =
 		this.params.inputURL.click(jQuery.proxy(this, "htmlUrlView"));
 		this.params.inputOuter.click(jQuery.proxy(this, "inputHtmlCodeView"));
 		this.params.inputHeader.click(jQuery.proxy(this, "initializeView"));
+		this.params.validOutButton.click(jQuery.proxy(this, "validateOutLinkOrder"));
+		this.params.validHeaButton.click(jQuery.proxy(this, "validateHeaLinkOrder"));
 	},
 
 	initializeView: function() {
@@ -52,11 +54,34 @@ HeaderMenuController.prototype =
 		this.params.trHtmlCode.hide();
 		this.params.trUrlCode.show();
 		this.params.inputURL.attr('checked', 'checked');
-		if (typeof(this.params.tableTbodyLink) != 'undefined') {
-			this.params.tableTbodyLink.sortable({
+		if (typeof(this.params.tableOutTbLink) != 'undefined') {
+			this.params.tableOutTbLink.sortable({
 				update: function(event, ui) {
-						jQuery(ui.item).attr("id", jQuery(ui.item).index());
-					}
+					jQuery(".sortable_outermenu_listlinks tbody").children().each(function() {
+						if (jQuery(this).index() % 2 === 0) {
+							jQuery(this).attr("class", "even");
+						} else {
+							jQuery(this).attr("class", "odd");
+						}
+						jQuery(this).children(":first").text(jQuery(this).index());
+					});
+					jQuery("#linkorderoutervalidatebutton").show();
+				}
+			});
+		}
+		if (typeof(this.params.tableHeaTbLink) != 'undefined') {
+			this.params.tableHeaTbLink.sortable({
+				update: function(event, ui) {
+					jQuery(".sortable_headermenu_listlinks tbody").children().each(function() {
+						if (jQuery(this).index() % 2 === 0) {
+							jQuery(this).attr("class", "even");
+						} else {
+							jQuery(this).attr("class", "odd");
+						}
+						jQuery(this).children(":first").text(jQuery(this).index());
+					});
+					jQuery("#linkorderheadervalidatebutton").show();
+				}
 			});
 		}
 	},
@@ -73,7 +98,31 @@ HeaderMenuController.prototype =
 
 	inputHtmlCodeView: function() {
 		this.params.inputHtmlCode.prop('disabled', false);
-	}
+	},
+
+	validateOutLinkOrder: function() {
+		var linkOrder = jQuery(".sortable_outermenu_listlinks tbody").sortable('toArray').toString();
+		jQuery.get(this.params.headerMenuUrl, {
+				action:		'validateOrder',
+				linkorder:	linkOrder,
+				type:		'globaladmin'
+			});
+		jQuery('#validateLinkFeedback').remove();
+		jQuery('#maindiv').prepend('<p id="validateLinkFeedback" class="feedback">Outermenu Link Order successfully validated</p>');
+		this.params.validOutButton.hide();
+	},
+
+	validateHeaLinkOrder: function() {
+		var linkOrder = jQuery(".sortable_headermenu_listlinks tbody").sortable('toArray').toString();
+		jQuery.get(this.params.headerMenuUrl, {
+				action:		'validateOrder',
+				linkorder:	linkOrder,
+				type:		'globaladmin'
+			});
+		jQuery('#validateLinkFeedback').remove();
+		jQuery('#maindiv').prepend('<p id="validateLinkFeedback" class="feedback">Headermenu Link Order successfully validated</p>');
+		this.params.validHeaButton.hide();
+	},
 };
 
 GroupMenuController.prototype =
@@ -81,7 +130,7 @@ GroupMenuController.prototype =
 	bindControls: function() {
 		this.params.inputHtmlCode.click(jQuery.proxy(this, "htmlCodeView"));
 		this.params.inputURL.click(jQuery.proxy(this, "htmlUrlView"));
-		this.params.validateButton.click(jQuery.proxy(this, "validateLinkOrder"));
+		this.params.validateButton.click(jQuery.proxy(this, "validateProjectLinkOrder"));
 	},
 
 	initializeView: function() {
@@ -121,7 +170,7 @@ GroupMenuController.prototype =
 		this.params.inputHtmlCode.prop('disabled', false);
 	},
 
-	validateLinkOrder: function() {
+	validateProjectLinkOrder: function() {
 		var linkOrder = jQuery("#sortable tbody").sortable('toArray').toString();
 		jQuery.get(this.params.headerMenuUrl, {
 				group_id:	this.params.groupId,

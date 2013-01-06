@@ -45,7 +45,8 @@ switch ($type) {
 			case 'addLink':
 			case 'updateLinkValue':
 			case 'deleteLink':
-			case 'updateLinkStatus': {
+			case 'updateLinkStatus':
+			case 'validateOrder': {
 				global $gfplugins;
 				include($gfplugins.$headermenu->name.'/action/'.$action.'.php');
 				break;

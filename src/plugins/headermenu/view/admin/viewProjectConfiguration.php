@@ -52,7 +52,7 @@ if (sizeof($linksArray)) {
 	echo '<p class="information">'. _('You can reorder links, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.').'</p>';
 	echo $HTML->boxTop(_('Manage available links'));
 	$tabletop = array(_('Order'), _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
-	$classth = array('', '','','','','unsortable');
+	$classth = array('', '', '', '', '', 'unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
 		echo '<tr id="'.$link['id_headermenu'].'" ><td>'.$link['ordering'].'</td>';
@@ -81,7 +81,7 @@ if (sizeof($linksArray)) {
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->boxBottom();
-	echo '<input type="button" id="linkordervalidatebutton" value="'._('Validate Order').'" style="display:none;" />';
+	echo '<input type="button" id="linkordervalidatebutton" value="'._('Save Order').'" style="display:none;" />';
 	echo '</br>';
 }
 
