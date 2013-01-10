@@ -7,7 +7,7 @@ fi
 DEBDIST=squeeze
 MIRVERS=${MIRVERS:-trk}
 MIRBASE=/var/lib/gforge/chroot/home/groups/fusionforge/htdocs/deb/$MIRVERS
-MIRHOST=buildbot3.debian.org
+MIRHOST=ftp.debian.org
 MIRDIR=job/fusionforge-$MIRVERS-build-and-test-deb/ws/build/debian
 DISTDEBTRK=squeeze
 
