@@ -366,9 +366,9 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->click("buttonDoc");
 		$this->type("title", "Doc2 Astromir");
-		$this->type("description", "Hudson (the needle) - also, ZONGO");
+		$this->type("//input[@name='description']", "Main website (the needle) - also, ZONGO");
 		$this->click("//input[@name='type' and @value='pasteurl']");
-		$this->type("file_url", "http://buildbot.fusionforge.org/");
+		$this->type("file_url", "http://fusionforge.org/");
 		$this->clickAndWait("submit");
 
 		// Search in Documents
