@@ -1,6 +1,6 @@
 # quick Mediawiki backport
 # use tests/scripts/manage-cowbuilder.sh before building
-VERS=$(shell rmadison -s testing mediawiki | cut -d\| -f2)
+VERS=$(strip $(shell rmadison -s testing mediawiki | cut -d\| -f2))
 
 BUILDERDIR:=$(shell ../../tests/scripts/builder_get_config.sh BUILDERDIR)
 DIST=wheezy
