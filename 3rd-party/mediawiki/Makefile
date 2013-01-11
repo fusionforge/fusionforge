@@ -1,9 +1,6 @@
 # quick Mediawiki backport
 # use tests/scripts/manage-cowbuilder.sh before building
-MAJOR=1.19.2
-MINOR=2
-
-VERS=$(MAJOR)-$(MINOR)
+VERS=$(shell rmadison -s testing mediawiki | cut -d\| -f2)
 
 BUILDERDIR:=$(shell ../../tests/scripts/builder_get_config.sh BUILDERDIR)
 DIST=wheezy
