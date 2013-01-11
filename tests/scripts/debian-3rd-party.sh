@@ -1,5 +1,7 @@
 #! /bin/sh
 
+set -e
+
 # Setup Env
 relativepath=`dirname $0`
 absolutesourcepath=`cd $relativepath/../..; pwd`
