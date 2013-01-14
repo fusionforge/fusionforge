@@ -107,7 +107,7 @@ HeaderMenuController.prototype =
 					action:		'validateOrder',
 					linkorder:	linkOrder,
 					type:		'globaladmin'
-				}
+				},
 				jQuery.proxy(function(data) {
 						jQuery('.feedback').remove();
 						jQuery('.error').remove();
@@ -128,7 +128,7 @@ HeaderMenuController.prototype =
 					action:		'validateOrder',
 					linkorder:	linkOrder,
 					type:		'globaladmin'
-				}
+				},
 				jQuery.proxy(function(data) {
 						jQuery('.feedback').remove();
 						jQuery('.error').remove();
