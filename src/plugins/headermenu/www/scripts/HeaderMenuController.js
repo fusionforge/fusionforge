@@ -102,26 +102,44 @@ HeaderMenuController.prototype =
 
 	validateOutLinkOrder: function() {
 		var linkOrder = jQuery(".sortable_outermenu_listlinks tbody").sortable('toArray').toString();
-		jQuery.get(this.params.headerMenuUrl, {
-				action:		'validateOrder',
-				linkorder:	linkOrder,
-				type:		'globaladmin'
-			});
-		jQuery('#validateLinkFeedback').remove();
-		jQuery('#maindiv').prepend('<p id="validateLinkFeedback" class="feedback">Outermenu Link Order successfully validated</p>');
-		this.params.validOutButton.hide();
+		jQuery.get(this.params.headerMenuUrl,
+				{
+					action:		'validateOrder',
+					linkorder:	linkOrder,
+					type:		'globaladmin'
+				}
+				jQuery.proxy(function(data) {
+						jQuery('.feedback').remove();
+						jQuery('.error').remove();
+						if (data == 0) {
+							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="feedback">'+this.params.validMessOut+'</p>');
+						} else {
+							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="error">'+this.params.errMessOut+'</p>');
+						}
+						this.params.validateButton.hide();
+					}, this)
+			);
 	},
 
 	validateHeaLinkOrder: function() {
 		var linkOrder = jQuery(".sortable_headermenu_listlinks tbody").sortable('toArray').toString();
-		jQuery.get(this.params.headerMenuUrl, {
-				action:		'validateOrder',
-				linkorder:	linkOrder,
-				type:		'globaladmin'
-			});
-		jQuery('#validateLinkFeedback').remove();
-		jQuery('#maindiv').prepend('<p id="validateLinkFeedback" class="feedback">Headermenu Link Order successfully validated</p>');
-		this.params.validHeaButton.hide();
+		jQuery.get(this.params.headerMenuUrl,
+				{
+					action:		'validateOrder',
+					linkorder:	linkOrder,
+					type:		'globaladmin'
+				}
+				jQuery.proxy(function(data) {
+						jQuery('.feedback').remove();
+						jQuery('.error').remove();
+						if (data == 0) {
+							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="feedback">'+this.params.validMessHea+'</p>');
+						} else {
+							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="error">'+this.params.errMessHea+'</p>');
+						}
+						this.params.validateButton.hide();
+					}, this)
+			);
 	},
 };
 
@@ -172,15 +190,25 @@ GroupMenuController.prototype =
 
 	validateProjectLinkOrder: function() {
 		var linkOrder = jQuery("#sortable tbody").sortable('toArray').toString();
-		jQuery.get(this.params.headerMenuUrl, {
-				group_id:	this.params.groupId,
-				action:		'validateOrder',
-				linkorder:	linkOrder,
-				type:		'projectadmin'
-			});
-		jQuery('#validateLinkFeedback').remove();
-		jQuery('#maindiv').prepend('<p id="validateLinkFeedback" class="feedback">Link Order successfully validated</p>');
-		this.params.validateButton.hide();
+		jQuery.get(this.params.headerMenuUrl,
+				{
+					group_id:	this.params.groupId,
+					action:		'validateOrder',
+					linkorder:	linkOrder,
+					type:		'projectadmin'
+				},
+				jQuery.proxy(function(data) {
+						jQuery('.feedback').remove();
+						jQuery('.error').remove();
+						if (data == 0) {
+							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="feedback">'+this.params.validMessage+'</p>');
+						} else {
+							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="error">'+this.params.errorMessage+'</p>');
+						}
+						this.params.validateButton.hide();
+					}, this)
+			);
+
 	},
 };
 

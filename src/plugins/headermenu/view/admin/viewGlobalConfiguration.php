@@ -41,6 +41,10 @@ jQuery(document).ready(function() {
 		tableHeaTbLink: jQuery('.sortable_headermenu_listlinks tbody'),
 		validOutButton:	jQuery('#linkorderoutervalidatebutton'),
 		validHeaButton:	jQuery('#linkorderheadervalidatebutton'),
+		validMessOut:	'<?php echo _('Outermenu Link Order successfully validated') ?>',
+		validMessHea:	'<?php echo _('Headermenu Link Order successfully validated') ?>',
+		errMessOut:	'<?php echo _('Error in Outermenu Link Order validation') ?>',
+		errMessHea:	'<?php echo _('Error in Headermenu Link Order validation') ?>',
 	});
 });
 

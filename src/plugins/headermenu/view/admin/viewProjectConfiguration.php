@@ -40,7 +40,9 @@ jQuery(document).ready(function() {
 		tableTbodyLink:	jQuery('#sortable tbody'),
 		validateButton:	jQuery('#linkordervalidatebutton'),
 		groupId:	'<?php echo $group_id ?>',
-		headerMenuUrl:	'<?php util_make_uri("/plugins/headermenu") ?>'
+		headerMenuUrl:	'<?php util_make_uri("/plugins/headermenu") ?>',
+		validMessage:	'<?php echo _('Link Order successfully validated') ?>',
+		errorMessage:	'<?php echo _('Error in Link Order validation') ?>',
 	});
 });
 
