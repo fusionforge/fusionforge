@@ -360,15 +360,15 @@ class Search extends FForge_SeleniumTestCase
 		$this->type("title", "Doc1 Vladimir");
 		$this->type("//input[@name='description']", "Jenkins buildbot - also, ZONGO");
 		$this->click("//input[@name='type' and @value='pasteurl']");
-		$this->type("file_url", "http://buildbot3.fusionforge.org/");
+		$this->type("file_url", "http://buildbot.fusionforge.org/");
 		$this->clickAndWait("submit");
 
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->click("buttonDoc");
 		$this->type("title", "Doc2 Astromir");
-		$this->type("//input[@name='description']", "Hudson (the needle) - also, ZONGO");
+		$this->type("//input[@name='description']", "Main website (the needle) - also, ZONGO");
 		$this->click("//input[@name='type' and @value='pasteurl']");
-		$this->type("file_url", "http://buildbot.fusionforge.org/");
+		$this->type("file_url", "http://fusionforge.org/");
 		$this->clickAndWait("submit");
 
 		// Search in Documents
