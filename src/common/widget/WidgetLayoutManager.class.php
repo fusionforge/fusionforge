@@ -3,20 +3,20 @@
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
- * This file is a part of Codendi.
+ * This file is a part of Fusionforge.
  *
- * Codendi is free software; you can redistribute it and/or modify
+ * Fusionforge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Codendi is distributed in the hope that it will be useful,
+ * Fusionforge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
+ * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
 require_once $gfcommon.'widget/WidgetLayout.class.php';
@@ -40,7 +40,7 @@ class WidgetLayoutManager {
 	/**
 	 * displayLayout
 	 *
-	 * Display the default layout for the "owner". It my be the home page, the project summary page or /my/ page.
+	 * Display the default layout for the "owner". It may be the home page, the project summary page or /my/ page.
 	 *
 	 * @param	int	owner_id
 	 * @param	char	owner_type
@@ -49,7 +49,7 @@ class WidgetLayoutManager {
 		$sql = "SELECT * from owner_layouts where owner_id=$1 and owner_type=$2";
 		$res = db_query_params($sql, array($owner_id, $owner_type));
 		if($res && db_numrows($res)<1) {
-			if($owner_type = self::OWNER_TYPE_USER) {
+			if($owner_type == self::OWNER_TYPE_USER) {
 				$this->createDefaultLayoutForUser($owner_id);
 				$this->displayLayout($owner_id,$owner_type);
 			} else {
