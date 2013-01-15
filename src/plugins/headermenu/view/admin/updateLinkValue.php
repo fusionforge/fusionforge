@@ -1,6 +1,6 @@
 <?php
 /**
- * headermenuPlugin Class
+ * headermenu plugin : updateLinkValue view
  *
  * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
@@ -24,8 +24,15 @@
 global $HTML;
 global $headermenu;
 global $type;
+global $group_id;
 
 $linkId = getIntFromRequest('linkid');
+$redirect_url = '/plugins/'.$headermenu->name.'/?type='.$type;
+$action_url = 'index.php?type='.$type.'&action=updateLinkValue';
+if (isset($group_id) && $group_id) {
+	$redirect_url .= '&group_id='.$group_id;
+	$action_url .= '&group_id='.$group_id;
+}
 ?>
 
 <script language="Javascript" type="text/javascript">//<![CDATA[
@@ -48,7 +55,7 @@ jQuery(document).ready(function() {
 <?php
 $linkValues = $headermenu->getLink($linkId);
 if (is_array($linkValues)) {
-	echo '<form method="POST" name="updateLink" action="index.php?type='.$type.'&action=updateLinkValue">';
+	echo '<form method="POST" name="updateLink" action="'.$action_url.'">';
 	echo '<table><tr>';
 	echo $HTML->boxTop(_('Update this link'));
 	echo '<td>'._('Displayed Name').'</td><td><input name="name" type="text" maxsize="255" value="'.$linkValues['name'].'" /></td>';
@@ -95,12 +102,12 @@ if (is_array($linkValues)) {
 	echo '<td>';
 	echo '<input type="hidden" name="linkid" value="'.$linkId.'" />';
 	echo '<input type="submit" value="'. _('Update') .'" />';
-	echo '<a href="/plugins/'.$headermenu->name.'/?type='.$type.'"><input type="button" value="'. _('Cancel') .'" /></a>';
+	echo '<a href="'.$redirect_url.'"><input type="button" value="'. _('Cancel') .'" /></a>';
 	echo '</td>';
 	echo $HTML->boxBottom();
 	echo '</tr></table>';
 	echo '</form>';
 } else {
 	$error_msg = _('Cannot retrieve value for this link:').' '.$linkId;
-	session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
+	session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
 }

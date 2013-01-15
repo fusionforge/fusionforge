@@ -32,7 +32,7 @@ $htmlcode = getStringFromRequest('htmlcode');
 $type = getStringFromRequest('type');
 $iframed = getIntFromRequest('iframeview');
 
-$redirect_url = 'plugins/'.$headermenu->name.'/?type='.$type;
+$redirect_url = '/plugins/'.$headermenu->name.'/?type='.$type;
 if (isset($group_id) && $group_id) {
 	$redirect_url .= '&group_id='.$group_id;
 }

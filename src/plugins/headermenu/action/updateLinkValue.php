@@ -2,7 +2,7 @@
 /**
  * headermenu plugin : updateLinkValue action
  *
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,6 +22,7 @@
  */
 
 global $headermenu;
+global $group_id;
 
 $idLink = getIntFromRequest('linkid');
 $link = getStringFromRequest('link');
@@ -32,6 +33,11 @@ $linkmenu = getStringFromRequest('linkmenu');
 $htmlcode = getStringFromRequest('htmlcode');
 $type = getStringFromRequest('type');
 
+$redirect_url = '/plugins/'.$headermenu->name.'/?type='.$type;
+if (isset($group_id) && $group_id) {
+	$redirect_url .= '&group_id='.$group_id;
+}
+
 if (!empty($idLink) && !empty($name)) {
 	switch ($linkmenu) {
 		case 'headermenu': {
@@ -39,17 +45,17 @@ if (!empty($idLink) && !empty($name)) {
 				if (util_check_url($link)) {
 					if ($headermenu->updateLink($idLink, $link, $name, $description, $linkmenu)) {
 						$feedback = _('Task succeeded.');
-						session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&feedback='.urlencode($feedback));
+						session_redirect($redirect_url.'&feedback='.urlencode($feedback));
 					}
 					$error_msg = _('Task failed');
-					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
+					session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
+					session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
 				}
 			}
 			$warning_msg = _('Missing Link URL.');
-			session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&warning_msg='.urlencode($warning_msg));
+			session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
 			break;
 		}
 		case 'outermenu':
@@ -58,27 +64,27 @@ if (!empty($idLink) && !empty($name)) {
 				if (util_check_url($link)) {
 					if ($headermenu->updateLink($idLink, $link, $name, $description, $linkmenu, $typemenu)) {
 						$feedback = _('Task succeeded.');
-						session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&feedback='.urlencode($feedback));
+						session_redirect($redirect_url.'&feedback='.urlencode($feedback));
 					}
 					$error_msg = _('Task failed');
-					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
+					session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
+					session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
 				}
 			}
 			if (!empty($htmlcode) && $typemenu == 'htmlcode') {
 				if ($headermenu->updateLink($idLink, '', $name, $description, $linkmenu, 'htmlcode', $htmlcode)) {
 					$feedback = _('Task succeeded.');
-					session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&feedback='.urlencode($feedback));
+					session_redirect($redirect_url.'&feedback='.urlencode($feedback));
 				}
 				$error_msg = _('Task failed');
-				session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&error_msg='.urlencode($error_msg));
+				session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
 			}
 			$warning_msg = _('Missing Link URL or Html Code.');
-			session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&warning_msg='.urlencode($warning_msg));
+			session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
 		}
 	}
 }
 $warning_msg = _('No link to update or name missing.');
-session_redirect('plugins/'.$headermenu->name.'/?type='.$type.'&warning_msg='.urlencode($warning_msg));
+session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
