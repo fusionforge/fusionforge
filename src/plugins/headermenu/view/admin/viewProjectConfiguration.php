@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
 //]]></script>
 
 <?php
-$linksArray = $headermenu->getAvailableLinks('groupmenu');
+$linksArray = $headermenu->getAvailableLinks('groupmenu', $group_id);
 if (sizeof($linksArray)) {
 	echo '<p class="information">'. _('You can reorder links, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.').'</p>';
 	echo $HTML->boxTop(_('Manage available links'));

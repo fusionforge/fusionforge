@@ -35,6 +35,8 @@ $iframed = getIntFromRequest('iframeview');
 $redirect_url = '/plugins/'.$headermenu->name.'/?type='.$type;
 if (isset($group_id) && $group_id) {
 	$redirect_url .= '&group_id='.$group_id;
+} else {
+	$group_id = 0;
 }
 
 if (!empty($name) && !empty($linkmenu)) {
@@ -65,7 +67,7 @@ if (!empty($name) && !empty($linkmenu)) {
 					if ($iframed) {
 						$linktype = 'iframe';
 					}
-					if ($headermenu->addLink($link, $name, $description, $linkmenu, $linktype)) {
+					if ($headermenu->addLink($link, $name, $description, $linkmenu, $linktype, $group_id)) {
 						$feedback = _('Task succeeded.');
 						session_redirect($redirect_url.'&feedback='.urlencode($feedback));
 					}
@@ -77,7 +79,7 @@ if (!empty($name) && !empty($linkmenu)) {
 				}
 			}
 			if (!empty($htmlcode)) {
-				if ($headermenu->addLink('', $name, $description, $linkmenu, 'htmlcode', $htmlcode)) {
+				if ($headermenu->addLink('', $name, $description, $linkmenu, 'htmlcode', $group_id, $htmlcode)) {
 					$feedback = _('Task succeeded.');
 					session_redirect($redirect_url.'&feedback='.urlencode($feedback));
 				}

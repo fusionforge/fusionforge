@@ -37,6 +37,7 @@ class headermenuPlugin extends Plugin {
 		$this->_addHook('groupisactivecheckboxpost');
 		$this->_addHook('groupmenu');
 		$this->_addHook('project_admin_plugins');
+		$this->_addHook('clone_project_from_template');
 	}
 
 	function CallHook($hookname, &$params) {
@@ -65,6 +66,36 @@ class headermenuPlugin extends Plugin {
 					     _('Project GroupMenu Admin'), array('class' => 'tabtitle', 'title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
 				}
 				break;
+			}
+			case "clone_project_from_template": {
+				$links = array();
+				$res = db_query_params('SELECT url, name, description, is_enable, linkmenu, linktype, htmlcode, ordering FROM plugin_headermenu WHERE project = $1',
+							array($params['template']->getID()));
+				while ($row = db_fetch_array($res)) {
+					$linksData = array();
+					$linksData['url'] = $row['url'];
+					$linksData['name'] = $row['name'];
+					$linksData['description'] = $row['description'];
+					$linksData['is_enable'] = $row['is_enable'];
+					$linksData['linkmenu'] = $row['linkmenu'];
+					$linksData['linktype'] = $row['linktype'];
+					$linksData['htmlcode'] = $row['htmlcode'];
+					$linksData['ordering'] = $row['ordering'];
+					$links[] = $linksData;
+				}
+
+				foreach ($links as $link) {
+					db_query_params('INSERT INTO plugin_headermenu (url, name, description, is_enable, linkmenu, linktype, htmlcode, ordering, project) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+							array($link['url'],
+								$link['name'],
+								$link['description'],
+								$link['is_enable'],
+								$link['linkmenu'],
+								$link['linktype'],
+								$link['htmlcode'],
+								$link['ordering'],
+								$params['project']->getID()));
+				}
 			}
 		}
 	}
@@ -127,7 +158,7 @@ class headermenuPlugin extends Plugin {
 	 * @return	bool	true...
 	 */
 	function getGroupLink($params) {
-		$availableLinks = $this->getAvailableLinks('groupmenu');
+		$availableLinks = $this->getAvailableLinks('groupmenu', $params['group']);
 		foreach ($availableLinks as $link) {
 			if ($link['is_enable']) {
 				switch ($link['linktype']) {
@@ -165,10 +196,11 @@ class headermenuPlugin extends Plugin {
 	 * getAvailableLinks - get all the links from the db of certain kind
 	 *
 	 * @param	string	the type of menu links search in db
+	 * @param	int	the group_id. Default is 0 meaning : forge level
 	 * @return	array	the available links
 	 */
-	function getAvailableLinks($linkmenu) {
-		$links = db_query_params('select * FROM plugin_headermenu where linkmenu = $1 order by ordering asc', array($linkmenu));
+	function getAvailableLinks($linkmenu, $project = 0) {
+		$links = db_query_params('select * FROM plugin_headermenu where linkmenu = $1 and project = $2 order by ordering asc', array($linkmenu, $project));
 		$availableLinks = array();
 		while ($arr = db_fetch_array($links)) {
 			$availableLinks[] = $arr;
@@ -210,12 +242,13 @@ class headermenuPlugin extends Plugin {
 	 * @param	string	$description a short description (to help administration)
 	 * @param	string	$linkmenu linkmenu entry : headermenu or outermenu
 	 * @param	string	$linktype
+	 * @param	int	$project the group_id or 0 meaning forge level
 	 * @param	string	$htmlcode
 	 * @return	bool	success or not
 	 */
-	function addLink($url, $name, $description, $linkmenu, $linktype = 'url', $htmlcode = '') {
-		$res = db_query_params('insert into plugin_headermenu (url, name, description, is_enable, linkmenu, linktype, htmlcode)
-					values ($1, $2, $3, $4, $5, $6, $7)',
+	function addLink($url, $name, $description, $linkmenu, $linktype = 'url', $project = 0, $htmlcode = '') {
+		$res = db_query_params('insert into plugin_headermenu (url, name, description, is_enable, linkmenu, linktype, project, htmlcode)
+					values ($1, $2, $3, $4, $5, $6, $7, $8)',
 					array(
 						$url,
 						$name,
@@ -223,6 +256,7 @@ class headermenuPlugin extends Plugin {
 						1,
 						$linkmenu,
 						$linktype,
+						$project,
 						$htmlcode
 					));
 		if (!$res)
