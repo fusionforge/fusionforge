@@ -38,6 +38,7 @@ class headermenuPlugin extends Plugin {
 		$this->_addHook('groupmenu');
 		$this->_addHook('project_admin_plugins');
 		$this->_addHook('clone_project_from_template');
+		$this->_addHook('group_delete');
 	}
 
 	function CallHook($hookname, &$params) {
@@ -55,7 +56,11 @@ class headermenuPlugin extends Plugin {
 				break;
 			}
 			case 'groupmenu': {
-				$this->getGroupLink($params);
+				$group_id = $params['group'];
+				$project = group_get_object($group_id);
+				if ($project->usesPlugin($this->name)) {
+					$this->getGroupLink($params);
+				}
 				break;
 			}
 			case 'project_admin_plugins': {
@@ -67,7 +72,7 @@ class headermenuPlugin extends Plugin {
 				}
 				break;
 			}
-			case "clone_project_from_template": {
+			case 'clone_project_from_template': {
 				$links = array();
 				$res = db_query_params('SELECT url, name, description, is_enable, linkmenu, linktype, htmlcode, ordering FROM plugin_headermenu WHERE project = $1',
 							array($params['template']->getID()));
@@ -95,6 +100,16 @@ class headermenuPlugin extends Plugin {
 								$link['htmlcode'],
 								$link['ordering'],
 								$params['project']->getID()));
+				}
+			}
+			case 'group_delete': {
+				$group_id = $params['group_id'];
+				$group = group_get_object($group_id);
+				if ($group->usesPlugin($this->name)) {
+					$links = $this->getAvailableLinks('groupmenu', $group_id);
+					foreach ($links as $link) {
+						$this->deleteLink($link['id_headermenu']);
+					}
 				}
 			}
 		}
