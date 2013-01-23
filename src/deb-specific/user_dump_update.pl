@@ -149,12 +149,14 @@ sub delete_user {
 	my $username = shift(@_);
 	
 	my $alreadydone=(-f "/var/lib/gforge/tmp/$username.tar.gz");
-	if (!$alreadydone){
+	if (!$alreadydone) {
+		my $oldmask = umask(077);
 		if ($verbose) {
 			print("Deleting User : $username\n");
 		}
 		run_verbose("/bin/mv /var/lib/gforge/chroot/home/users/$username /var/lib/gforge/chroot/home/users/deleted_$username");
 		run_verbose("/bin/tar -czf /var/lib/gforge/tmp/$username.tar.gz /var/lib/gforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username");
+		umask($oldmask);
 	}
 }
 
