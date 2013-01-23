@@ -193,7 +193,7 @@ class pgsql extends System {
  	*/
 	function sysRemoveUser($user_id) {
 		$res = db_query_params ('UPDATE users SET unix_status=$1 WHERE user_id=$2',
-					array ('N',
+					array ('D',
 					       $user_id)) ;
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Unix Status: '.db_error());
