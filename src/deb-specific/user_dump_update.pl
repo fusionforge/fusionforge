@@ -155,7 +155,7 @@ sub delete_user {
 			print("Deleting User : $username\n");
 		}
 		run_verbose("/bin/mv /var/lib/gforge/chroot/home/users/$username /var/lib/gforge/chroot/home/users/deleted_$username");
-		run_verbose("/bin/tar -czf /var/lib/gforge/tmp/$username.tar.gz /var/lib/gforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username");
+		run_verbose("cd / && /bin/tar -cf - /var/lib/gforge/chroot/home/users/deleted_$username | /bin/gzip -n9 >/var/lib/gforge/tmp/$username.tar.gz && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username");
 		umask($oldmask);
 	}
 }
