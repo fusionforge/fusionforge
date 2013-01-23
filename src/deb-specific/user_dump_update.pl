@@ -80,6 +80,18 @@ while ($ln = pop(@userdump_array)) {
 ###############################################
 
 #############################
+# Helper Function
+#############################
+sub run_verbose {
+	my $thecmd = shift(@_);
+
+	if ($verbose) {
+		print "$thecmd\n";
+	}
+	return system($thecmd);
+}
+
+#############################
 # User Add Function
 #############################
 sub add_user {  
@@ -138,11 +150,11 @@ sub delete_user {
 	
 	my $alreadydone=(-f "/var/lib/gforge/tmp/$username.tar.gz");
 	if (!$alreadydone){
-	if($verbose){print("Deleting User : $username\n")};
-		if($verbose){print("/bin/mv /var/lib/gforge/chroot/home/users/$username /var/lib/gforge/chroot/home/users/deleted_$username\n")};
-		system("/bin/mv /var/lib/gforge/chroot/home/users/$username /var/lib/gforge/chroot/home/users/deleted_$username");
-		if($verbose){print("/bin/tar -czf /var/lib/gforge/tmp/$username.tar.gz /var/lib/gforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username\n")};
-		system("/bin/tar -czf /var/lib/gforge/tmp/$username.tar.gz /var/lib/gforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username");
+		if ($verbose) {
+			print("Deleting User : $username\n");
+		}
+		run_verbose("/bin/mv /var/lib/gforge/chroot/home/users/$username /var/lib/gforge/chroot/home/users/deleted_$username");
+		run_verbose("/bin/tar -czf /var/lib/gforge/tmp/$username.tar.gz /var/lib/gforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username");
 	}
 }
 
