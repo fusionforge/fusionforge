@@ -258,9 +258,9 @@ class headermenuPlugin extends Plugin {
 	 * @param	string	$htmlcode
 	 * @return	bool	success or not
 	 */
-	function addLink($url, $name, $description, $linkmenu, $linktype = 'url', $project = 0, $htmlcode = '') {
-		$res = db_query_params('insert into plugin_headermenu (url, name, description, is_enable, linkmenu, linktype, project, htmlcode)
-					values ($1, $2, $3, $4, $5, $6, $7, $8)',
+	function addLink($url, $name, $description, $linkmenu, $linktype = 'url', $project = 0, $htmlcode = '', $ordering = 0) {
+		$res = db_query_params('insert into plugin_headermenu (url, name, description, is_enable, linkmenu, linktype, project, htmlcode, ordering)
+					values ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
 					array(
 						$url,
 						$name,
@@ -269,7 +269,8 @@ class headermenuPlugin extends Plugin {
 						$linkmenu,
 						$linktype,
 						$project,
-						$htmlcode
+						$htmlcode,
+						$ordering
 					));
 		if (!$res)
 			return false;
