@@ -101,15 +101,12 @@ class headermenuPlugin extends Plugin {
 								$link['ordering'],
 								$params['project']->getID()));
 				}
+				break;
 			}
 			case 'group_delete': {
-				$group_id = $params['group_id'];
-				$group = group_get_object($group_id);
-				if ($group->usesPlugin($this->name)) {
-					$links = $this->getAvailableLinks('groupmenu', $group_id);
-					foreach ($links as $link) {
-						$this->deleteLink($link['id_headermenu']);
-					}
+				$links = $this->getAvailableLinks('groupmenu', $params['group_id']);
+				foreach ($links as $link) {
+					$this->deleteLink($link['id_headermenu']);
 				}
 			}
 		}
