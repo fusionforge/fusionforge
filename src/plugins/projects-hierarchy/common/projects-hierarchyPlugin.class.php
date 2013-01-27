@@ -4,7 +4,7 @@
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -71,13 +71,8 @@ class projects_hierarchyPlugin extends Plugin {
 				break;
 			}
 			case "group_delete": {
-				if ($params['group']->usesPlugin($this->name)) {
-					if ($this->remove($params['group_id'])) {
-						$returned = true;
-					}
-				} else {
-					$returned = true;
-				}
+				$this->remove($params['group_id']);
+				$returned = true;
 				break;
 			}
 			case "site_admin_option_hook": {
@@ -811,6 +806,32 @@ class projects_hierarchyPlugin extends Plugin {
 						db_int_array_to_any_clause($family),
 						$this->name));
 		return html_build_select_box($son, $name, $selected, false);
+	}
+
+	/**
+	 * isUsed - is this plugin used by other projects than the current family ?
+	 *
+	 * @return	bool	yes or no
+	 */
+	function isUsed($group_id) {
+		$sons = $this->getFamily($group_id, 'child', true, 'any');
+		$parent = $this->getFamily($group_id, 'parent', true, 'any');
+		$family = array_merge($parent, $sons);
+		$used =false;
+		$res1 = db_query_params('SELECT g.group_name FROM plugins p, group_plugin gp, groups g
+					WHERE plugin_name = $1
+					AND gp.group_id = g.group_id
+					AND p.plugin_id = gp.plugin_id
+					AND g.group_id <> ALL ($2)',
+					array($this->name, db_int_array_to_any_clause($family))
+					);
+		if ($res1) {
+			// we want at least more than ourself
+			if (db_numrows($res1) > 1) {
+				$used = true;
+			}
+		}
+		return $used;
 	}
 }
 // Local Variables:
