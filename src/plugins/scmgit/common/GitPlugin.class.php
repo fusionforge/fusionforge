@@ -225,7 +225,7 @@ class GitPlugin extends SCMPlugin {
 
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>' ;
+					$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>' ;
 				}
 
 			}
