@@ -199,7 +199,7 @@ class ProjectGroupHTML extends ProjectGroup {
 	function showYearBox($name,$year=1) {
 		echo '
 		<select name="'.$name.'" size="1">';
-		for ($i=1999; $i<=2013; $i++) {
+		for ($i=1999; $i<=2038; $i++) {
 			if ($i == $year) {
 				echo '
 				<option selected="selected" value="'.$i.'">'.$i.'</option>';
