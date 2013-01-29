@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -183,7 +183,7 @@ class GitPlugin extends SCMPlugin {
 
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>' ;
+					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>' ;
 				}
 
 
