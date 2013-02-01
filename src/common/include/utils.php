@@ -1541,10 +1541,10 @@ function util_nat0(&$s) {
 }
 
 /**
- * TODO: Enter description here ...
- * @param unknown_type $script
- * @param unknown_type $default_content_type
- * @return Ambiguous
+ * Negociate HTTP content-type to be served depending on the Accept header and optional script_accepted_types hooks
+ * @param string $script
+ * @param string $default_content_type
+ * @return string
  */
 function util_negociate_alternate_content_types($script, $default_content_type) {
 

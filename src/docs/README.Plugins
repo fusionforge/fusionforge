@@ -441,7 +441,7 @@ had been written.
   hook Name  : outermenu
   Parameters : DIRS - A reference to the array of tab URLs
                TITLES - A reference to the array of tab titles
-  Location   : www/include/Layout.class.php
+  Location   : common/include/Navigation.class.php
   Description: Used to provide a plugin specific tab in main menu.
 
   Hook Name  : project_public_area

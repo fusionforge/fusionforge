@@ -24,7 +24,7 @@
 require_once $gfcommon.'include/Error.class.php';
 
 /**
- *	  Factory method which creates a FRSFile from an release id
+ *	  Factory method which creates a FRSFile from an file id
  *
  *	  @param int	  The file id
  *	  @param array	The result array, if it's passed in
@@ -289,6 +289,7 @@ class FRSFile extends Error {
 	 *
 	 *  @return string	The filetype name.
 	 */
+	// FIXME : Undefined index: filetype in /usr/share/gforge/common/frs/FRSFile.class.php on line 293
 	function getFileType() {
 		return $this->data_array['filetype'];
 	}
