@@ -369,12 +369,13 @@ class Layout extends Error {
 	function headerLinkedDataAutodiscovery() {
 		// Only activated for /projects or /users for the moment
 		$script_name = getStringFromServer('SCRIPT_NAME');
-
-		if ($script_name == '/projects' || $script_name == '/users') {
+		$script_name = substr($script_name,0,strpos($script_name,'/',1));
+		
+		if ($script_name == '/projects' || $script_name == '/users' || $script_name == '/softwaremap') {
 
 			$php_self = getStringFromServer('PHP_SELF');
 			
-			// invoke the 'alt_representations' hook
+			// invoke the 'alt_representations' hook to add potential meta links (useful for Linked Data)
 			$params = array('script_name' => $script_name,
 							'php_self' => $php_self,
 							'return' => array());
