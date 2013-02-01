@@ -521,6 +521,13 @@ TODO : document Auth plugins :
   Description: returns in $params['content'] an alternate content for /projects page and 
                in $params['content_type'] the actual content-type to return
 
+  Hook Name  : softwaremap_links
+  Parameters : TITLES - A reference to the array of submenu titles
+               URLS - A reference to the array of submenu URLs
+               ATTRS - A reference to the array of submenu attributes
+  Locations  : www/include/Layout.class.php
+  Description: Used to provide plugin specific softwaremap submenu link(s)
+
   Hook Name  : alt_representations
   Parameters : $params['script_name'] contains the SCRIPT_NAME (filtered to work only on /projects or /users for the moment)
   Description: returns alternate representations for a particular page in $params['results'] which is populated by the hook users 
