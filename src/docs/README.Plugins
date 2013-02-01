@@ -532,6 +532,11 @@ TODO : document Auth plugins :
   Parameters : $params['script_name'] contains the SCRIPT_NAME (filtered to work only on /projects or /users for the moment)
   Description: returns alternate representations for a particular page in $params['results'] which is populated by the hook users 
 
+  Hook Name  : content_negociated_projects_list
+  Parameters : $params['accept'] provides the content-type to be rendered
+  Description: returns in $params['content'] an alternate content for /projects page and 
+               in $params['content_type'] the actual content-type to return
+
   Hook Name  : content_negociated_trove_list
   Parameters : $params['accept'] provides the content-type to be rendered
   Description: returns in $params['content'] an alternate content for /softwaremap/trove_list.php page and 
