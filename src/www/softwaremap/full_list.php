@@ -55,7 +55,6 @@ $HTML->header(array('title'=>_('Project List'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
 $projects = get_public_active_projects_asc($TROVE_HARDQUERYLIMIT);
-
 $querytotalcount = count($projects);
 
 // #################################################################
