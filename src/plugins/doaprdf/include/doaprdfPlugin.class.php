@@ -52,6 +52,87 @@ class doaprdfPlugin extends Plugin {
 		}
 	}
 
+	function doapNameSpaces() {
+		// Construct an ARC2_Resource containing the project's RDF (DOAP) description
+		$ns = array(
+				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
+				'doap' => 'http://usefulinc.com/ns/doap#',
+				'dcterms' => 'http://purl.org/dc/terms/'
+		);
+		return $ns;
+	}
+	
+	function getProjectResourceIndex($group_id, &$ns) {
+
+		// connect to FusionForge internals
+		$pm = ProjectManager::instance();
+		$project = $pm->getProject($group_id);
+		$projectname = $project->getUnixName();
+		$project_shortdesc = $project->getPublicName();
+		$project_description = $project->getDescription();
+		$tags_list = NULL;
+		if (forge_get_config('use_project_tags')) {
+			$group = group_get_object($group_id);
+			$tags_list = $group->getTags();
+		}
+		
+		$conf = array(
+				'ns' => $ns
+		);
+			
+		$res = ARC2::getResource($conf);
+		$res->setURI(util_make_url_g($projectname, $group_id).'#project');
+		
+		// $res->setRel('rdf:type', 'doap:Project');
+		rdfutils_setPropToUri($res, 'rdf:type', 'doap:Project');
+			
+		$res->setProp('doap:name', $projectname);
+		$res->setProp('doap:shortdesc', $project_shortdesc);
+		if($project_description) {
+			$res->setProp('doap:description', $project_description);
+		}
+		$homepages = array(util_make_url_g($projectname, $group_id));
+		$project_homepage = $project->getHomePage();
+		if(!in_array($project_homepage, $homepages)) {
+			$homepages[] = $project_homepage;
+		}
+		$res->setProp('doap:homepage', $homepages);
+		$tags = array();
+		if($tags_list) {
+			$tags = split(', ',$tags_list);
+			$res->setProp('dcterms:subject', $tags);
+		}
+			
+		// Now, we need to collect complementary RDF descriptiosn of the project via other plugins
+		// invoke the 'project_rdf_metadata' hook so as to complement the RDF description
+		$hook_params = array();
+		$hook_params['prefixes'] = array();
+		foreach($ns as $prefix => $url) {
+			$hook_params['prefixes'][$url] = $prefix;
+		}
+		$hook_params['group'] = $group_id;
+		// pass the resource in case it could be useful (read-only in principle)
+		$hook_params['in_Resource'] = $res;
+		$hook_params['out_Resources'] = array();
+		plugin_hook_by_reference('project_rdf_metadata', $hook_params);
+		
+		// add new prefixes to the list
+		foreach($hook_params['prefixes'] as $url => $prefix) {
+			if (!isset($ns[$prefix])) {
+				$ns[$prefix] = $url;
+			}
+		}
+		
+		// merge the two sets of triples
+		$merged_index = $res->index;
+		foreach($hook_params['out_Resources'] as $out_res) {
+			$merged_index = ARC2::getMergedIndex($merged_index, $out_res->index);
+		}
+		
+		return $merged_index;
+	}
+	
 	/**
 	 * Outputs project's DOAP profile
 	 * @param unknown_type $params
@@ -63,76 +144,14 @@ class doaprdfPlugin extends Plugin {
 
 		if($accept == 'application/rdf+xml' || $accept == 'text/turtle') {
 			
-			// connect to FusionForge internals
-			$pm = ProjectManager::instance();
-			$project = $pm->getProject($group_id);
-			$project_shortdesc = $project->getPublicName();
-			$project_description = $project->getDescription();
-			$tags_list = NULL;
-			if (forge_get_config('use_project_tags')) {
-				$group = group_get_object($group_id);
-				$tags_list = $group->getTags();
-			}
 			
 			// We will return RDF+XML
-			$params['content_type'] = 'application/rdf+xml';
+			$params['content_type'] = $accept;
 
-			// Construct an ARC2_Resource containing the project's RDF (DOAP) description
-			$ns = array(
-					'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-					'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
-					'doap' => 'http://usefulinc.com/ns/doap#',
-					'dcterms' => 'http://purl.org/dc/terms/' 
-			);
-				
-			$conf = array(
-					'ns' => $ns
-			);
+			$ns = $this->doapNameSpaces();
 			
-			$res = ARC2::getResource($conf);
-			$res->setURI(util_make_url_g($projectname, $group_id));
+			$merged_index = $this->getProjectResourceIndex($group_id, $ns);
 				
-			// $res->setRel('rdf:type', 'doap:Project');
-			rdfutils_setPropToUri($res, 'rdf:type', 'doap:Project');
-							
-			$res->setProp('doap:name', $projectname);
-			$res->setProp('doap:shortdesc', $project_shortdesc);
-			if($project_description) {
-				$res->setProp('doap:description', $project_description);
-			}
-			$res->setProp('doap:homepage', $project->getHomePage());
-			$tags = array();
-			if($tags_list) {
-				$tags = split(', ',$tags_list);
-				$res->setProp('dcterms:subject', $tags);
-			}
-			
-			// Now, we need to collect complementary RDF descriptiosn of the project via other plugins 
-			// invoke the 'project_rdf_metadata' hook so as to complement the RDF description
-			$hook_params = array();
-			$hook_params['prefixes'] = array();
-			foreach($ns as $prefix => $url) {
-				$hook_params['prefixes'][$url] = $prefix;
-			}
-			$hook_params['group'] = $group_id;
-			// pass the resource in case it could be useful (read-only in principle)
-			$hook_params['in_Resource'] = $res;
-			$hook_params['out_Resources'] = array();
-			plugin_hook_by_reference('project_rdf_metadata', $hook_params);
-
-			// add new prefixes to the list
-			foreach($hook_params['prefixes'] as $url => $prefix) {
-				if (!isset($ns[$prefix])) {
-					$ns[$prefix] = $url;
-				}
-			}
-
-			// merge the two sets of triples
-			$merged_index = $res->index;
-			foreach($hook_params['out_Resources'] as $out_res) {
-				$merged_index = ARC2::getMergedIndex($merged_index, $out_res->index);
-			}
-
 			$conf = array(
 					'ns' => $ns,
 					'serializer_type_nodes' => true

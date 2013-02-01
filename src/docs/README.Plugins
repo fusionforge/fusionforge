@@ -509,8 +509,11 @@ TODO : document Auth plugins :
                in $params['content_type'] the actual content-type to return
 
   Hook Name  : project_rdf_metadata
-  Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, $params['xml'] already returned xml bits
-  Description: returns in $params['prefixes'] and $params['xml'] added prefixes and added bits of RDF+XML to be included in the project's DOAP description 
+  Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, 
+               $hook_params['group'] : group_id of the project,
+			   $hook_params['in_Resource'] : (read-only) ARC2 resource already available,
+			   $hook_params['out_Resources'] : (write) to be returned the new ARC2 resource 
+  Description: returns in $params['prefixes'] and $params['out_Resources'] added prefixes and ARC2 RDF resource to be included in the project's DOAP description 
 
   Hook Name  : alt_representations
   Parameters : $params['script_name'] contains the SCRIPT_NAME (filtered to work only on /projects or /users for the moment)
