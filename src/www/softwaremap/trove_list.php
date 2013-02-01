@@ -30,6 +30,29 @@ if (!forge_get_config('use_trove')) {
 	exit_disabled('home');
 }
 
+// Allow alternate content-type rendering by hook
+$default_content_type = 'text/html';
+
+$script = 'trove_list';
+$content_type = util_negociate_alternate_content_types($script, $default_content_type);
+
+if($content_type != $default_content_type) {
+	$hook_params = array();
+	$hook_params['accept'] = $content_type;
+	$hook_params['return'] = '';
+	$hook_params['content_type'] = '';
+	plugin_hook_by_reference('content_negociated_trove_list', $hook_params);
+	if($hook_params['content_type'] != ''){
+		header('Content-type: '. $hook_params['content_type']);
+		echo $hook_params['content'];
+	}
+	else {
+		header('HTTP/1.1 406 Not Acceptable',true,406);
+	}
+	exit(0);
+}
+
+
 $HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
