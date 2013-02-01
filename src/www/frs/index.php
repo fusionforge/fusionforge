@@ -124,17 +124,19 @@ if ( $num_packages < 1) {
 	// Iterate and show the packages
 	for ( $p = 0; $p < $num_packages; $p++ ) {
 
-		$frsPackage = new FRSPackage($cur_group, db_result($res_package, $p, 'package_id'));
+		$package_id = db_result($res_package, $p, 'package_id');
+		
+		$frsPackage = new FRSPackage($cur_group, $package_id);
 
 		$package_name = db_result($res_package, $p, 'name');
 
 		if($frsPackage->isMonitoring()) {
-			$title = db_result($res_package, $p, 'name') . " - " . _('Stop monitoring this package');
-			$url = '/frs/monitor.php?filemodule_id='. db_result($res_package, $p, 'package_id') .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;stop=1';
+			$title = $package_name . " - " . _('Stop monitoring this package');
+			$url = '/frs/monitor.php?filemodule_id='. $package_id .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;stop=1';
 			$package_monitor = util_make_link ( $url, $GLOBALS['HTML']->getMonitorPic($title));
 		} else {
-			$title = db_result($res_package, $p, 'name') . " - " . _('Monitor this package');
-			$url = '/frs/monitor.php?filemodule_id='. db_result($res_package, $p, 'package_id') .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;start=1';
+			$title = $package_name . " - " . _('Monitor this package');
+			$url = '/frs/monitor.php?filemodule_id='. $package_id .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;start=1';
 			$package_monitor = util_make_link ( $url, $GLOBALS['HTML']->getMonitorPic($title));
 		}
 
@@ -145,7 +147,7 @@ if ( $num_packages < 1) {
 		$res_release = db_query_params ('SELECT * FROM frs_release
 		WHERE package_id=$1
 		AND status_id=1 ORDER BY release_date DESC, name ASC',
-			array (db_result($res_package,$p,'package_id')));
+			array ($package_id));
 		$num_releases = db_numrows( $res_release );
 
 		$proj_stats['releases'] += $num_releases;
@@ -165,15 +167,17 @@ if ( $num_packages < 1) {
 			for ( $r = 0; $r < $num_releases; $r++ ) {
                 $package_release = db_fetch_array( $res_release );
 
+                $package_release_id = $package_release['release_id'];
+                
                 // Switch whether release_id exists and/or release_id is current one
-                if ( ! $release_id || $release_id==$package_release['release_id'] ) {
+                if ( ! $release_id || $release_id==$package_release_id ) {
                     // no release_id OR release_id is current one
-                    $release_title = util_make_link ( 'frs/shownotes.php?release_id=' . $package_release['release_id'], $package_name.' '.$package_release['name'].' ('.date(_('Y-m-d H:i'),$package_release['release_date']).')');
+                    $release_title = util_make_link ( 'frs/shownotes.php?release_id=' . $package_release_id, $package_name.' '.$package_release['name'].' ('.date(_('Y-m-d H:i'),$package_release['release_date']).')');
                     echo $GLOBALS['HTML']->boxTop($release_title, $package_name . '_' . $package_release['name'])."\n";
-                } elseif ( $release_id!=$package_release['release_id'] ) {
+                } elseif ( $release_id!=$package_release_id ) {
                     // release_id but not current one
                     $t_url_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release['name'])."-title-content";
-                    $t_url = 'frs/?group_id='.$group_id.'&amp;release_id=' . $package_release['release_id'] . "#" . $t_url_anchor;
+                    $t_url = 'frs/?group_id='.$group_id.'&amp;release_id=' . $package_release_id . "#" . $t_url_anchor;
                     $release_title = util_make_link ( $t_url, $package_name.' '.$package_release['name']);
                     echo '<div class="frs_release_name_version">'.$release_title."</div>"."\n";
                 }
@@ -191,7 +195,7 @@ if ( $num_packages < 1) {
 				WHERE release_id=$1
 				AND frs_filetype.type_id=frs_file.type_id
 				AND frs_processor.processor_id=frs_file.processor_id
-				ORDER BY filename", array($package_release['release_id']));
+				ORDER BY filename", array($package_release_id));
 				$num_files = db_numrows( $res_file );
 
 				@$proj_stats['files'] += $num_files;
@@ -209,14 +213,14 @@ if ( $num_packages < 1) {
                 if ( ! $release_id ) {
                     // no release_id
                     echo $GLOBALS['HTML']->listTableTop($cell_data,'',false);
-                } elseif ( $release_id==$package_release['release_id'] ) {
+                } elseif ( $release_id==$package_release_id ) {
                     // release_id is current one
                     echo $GLOBALS['HTML']->listTableTop($cell_data,'',true);
                 } else {
                     // release_id but not current one => dont print anything here
                 }
 
-                if ( ! $release_id || $release_id==$package_release['release_id'] ) {
+                if ( ! $release_id || $release_id==$package_release_id ) {
                     // no release_id OR no release_id OR release_id is current one
                     if ( !$res_file || $num_files < 1 ) {
                         echo '<tr><td colspan="7">&nbsp;&nbsp;<em>'._('No releases').'</em></td></tr>
@@ -254,7 +258,7 @@ if ( $num_packages < 1) {
                     // nothing to print here
                 }
 
-                if ( ! $release_id || $release_id==$package_release['release_id'] ) {
+                if ( ! $release_id || $release_id==$package_release_id ) {
                     echo $GLOBALS['HTML']->boxBottom();
                 }
 			} //for: release(s)
