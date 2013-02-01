@@ -59,7 +59,7 @@ if (!$group_id || !$project) {
 			exit(0);
 		}
 	} else {
-		exit_no_group();
+	  session_redirect(util_make_uri('/softwaremap/'));
 	}
 } else {
 	$subpage = getStringFromRequest('subpage');
