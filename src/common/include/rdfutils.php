@@ -25,13 +25,13 @@ require_once 'arc/ARC2.php';
 /**
  * rdfutils_setPropToUri() - Add a relation (a link to a URI) to an ARC2_Resource
  * 
- * example : $res->setRel('rdf:type', 'doap:Project');
+ * example : rdfutils_setPropToUri($res, 'rdf:type', 'doap:Project');
  * 
  * @param	ARC2_Resource	$res
  * @param	string	$prop
  * @param	string	$value
  */
-function rdfutils_setPropToUri($res, $prop, $value) {
+function rdfutils_setPropToUri(&$res, $prop, $value) {
 	// ARC2_Resource may not yet have a setRel() method
 	if (method_exists('ARC2_Resource','setRel')) {
 		$res->setRel($prop, $value);
@@ -57,6 +57,21 @@ function rdfutils_setPropToUri($res, $prop, $value) {
 	}
 }
 
+/**
+ * rdfutils_setPropToXSDdateTime() - Add a xsd:dateTime to an ARC2_Resource
+ *
+ * example : rdfutils_setPropToXSDdateTime($res, 'dcterms:created', date('c'));
+ *
+ * @param	ARC2_Resource	$res
+ * @param	string	$prop
+ * @param	string	$date
+ */
+function rdfutils_setPropToXSDdateTime(&$res, $prop, $date) {
+	$datecreated=array('value' => $date,
+		'type' => 'literal',
+		'datatype' => 'http://www.w3.org/2001/XMLSchema#dateTime');
+	$res->setProp($prop, $datecreated);
+}
 
 // Local Variables:
 // mode: php
