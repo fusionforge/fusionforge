@@ -48,7 +48,7 @@ class Widget_ProjectMembers extends Widget {
 				// A foaf:Person that holds an account on the forge
 				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
 				echo '<div typeof="foaf:Person" about="'.
-					$developer_url.'#me' .'" >'."\n";
+					$developer_url.'#person' .'" >'."\n";
 				echo '<div rel="foaf:account">'."\n";
 				echo '<div typeof="sioc:UserAccount" about="'.
 					$developer_url.
@@ -78,7 +78,7 @@ class Widget_ProjectMembers extends Widget {
 				// A foaf:Person that holds an account on the forge
 				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
 				echo '<div typeof="foaf:Person" about="'.
-					$developer_url.'#me' .'" >'."\n";
+					$developer_url.'#person' .'" >'."\n";
 				echo '<div rel="foaf:account">'."\n";
 				echo '<div typeof="sioc:UserAccount" about="'.
 					$developer_url.

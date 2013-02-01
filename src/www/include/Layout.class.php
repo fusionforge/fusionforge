@@ -260,6 +260,7 @@ class Layout extends Error {
 		$this->headerCSS();
 		$this->headerJS();
 		$this->headerForgepluckerMeta();
+		$this->headerLinkedDataAutodiscovery();
 		?>
 			</head>
 		<?php
@@ -358,6 +359,31 @@ class Layout extends Error {
 			echo $javascript;
 			echo '
 			</script>';
+		}
+	}
+
+	/**
+ 	 * headerLinkedDataAutodiscovery() - creates the link+meta links to alternate
+ 	 * 		representations for Linked Data autodiscovery
+ 	 */
+	function headerLinkedDataAutodiscovery() {
+		// Only activated for /projects or /users for the moment
+		$script_name = getStringFromServer('SCRIPT_NAME');
+
+		if ($script_name == '/projects' || $script_name == '/users') {
+
+			$php_self = getStringFromServer('PHP_SELF');
+			
+			// invoke the 'alt_representations' hook
+			$params = array('script_name' => $script_name,
+							'php_self' => $php_self,
+							'return' => array());
+
+			plugin_hook_by_reference('alt_representations', $params);
+
+			foreach($params['return'] as $link) {
+				echo "                        $link"."\n";
+			}
 		}
 	}
 

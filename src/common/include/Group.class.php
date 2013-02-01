@@ -150,6 +150,32 @@ function &group_get_object_by_publicname($groupname) {
 	return group_get_object(db_result($res, 0, 'group_id'), $res);
 }
 
+/**
+ * get_public_active_projects_asc() - Get a list of rows for public active projects (initially in trove/full_list)
+ *
+ * @param	   int	 Opional Maximum number of rows to limit query length 
+ */
+function get_public_active_projects_asc($max_query_limit = -1) {
+
+	$res_grp = db_query_params ('
+			SELECT group_id, group_name, unix_group_name, short_description, register_time
+			FROM groups
+			WHERE status = $1 AND type_id=1 AND group_id>4 AND register_time > 0
+			ORDER BY group_name ASC
+			',
+			array ('A'),
+			$max_query_limit);
+	$projects = array();
+	while ($row_grp = db_fetch_array($res_grp)) {
+		if (!forge_check_perm ('project_read', $row_grp['group_id'])) {
+			continue ;
+		}
+		$projects[] = $row_grp;
+	}
+	return $projects;
+}
+
+
 class Group extends Error {
 	/**
 	 * Associative array of data from db.
