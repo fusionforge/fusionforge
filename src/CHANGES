@@ -18,6 +18,9 @@ FusionForge-5.2:
 * Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)
 * scmsvn: private project can now be browsed with viewvc using user rights management (TrivialDev).
 * scmsvn: basic activity support (TrivialDev).
+* New doaprdf and foafprofiles plugins which provide RDF descriptions of projects and
+  people (Institut Telecom via COCLICO project)
+
 
 FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)

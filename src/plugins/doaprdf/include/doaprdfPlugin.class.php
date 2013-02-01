@@ -25,7 +25,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+
 require_once('common/include/ProjectManager.class.php');
+require_once('common/include/rdfutils.php');
 
 class doaprdfPlugin extends Plugin {
 	public function __construct($id=0) {
@@ -34,22 +36,24 @@ class doaprdfPlugin extends Plugin {
 		$this->text = "DoaPRDF!"; // To show in the tabs, use...
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_project_home");
+		$this->_addHook("alt_representations");
 
 	}
 
 	/**
-	 * Declares itself as accepting RDF XML on /users
+	 * Declares itself as accepting RDF XML on /projects/...
 	 * @param unknown_type $params
 	 */
 	function script_accepted_types (&$params) {
 		$script = $params['script'];
 		if ($script == 'project_home') {
 			$params['accepted_types'][] = 'application/rdf+xml';
+			$params['accepted_types'][] = 'text/turtle';
 		}
 	}
 
 	/**
-	 * Outputs user's FOAF profile
+	 * Outputs project's DOAP profile
 	 * @param unknown_type $params
 	 */
 	function content_negociated_project_home (&$params) {
@@ -57,7 +61,9 @@ class doaprdfPlugin extends Plugin {
 		$accept = $params['accept'];
 		$group_id = $params['group_id'];
 
-		if($accept == 'application/rdf+xml') {
+		if($accept == 'application/rdf+xml' || $accept == 'text/turtle') {
+			
+			// connect to FusionForge internals
 			$pm = ProjectManager::instance();
 			$project = $pm->getProject($group_id);
 			$project_shortdesc = $project->getPublicName();
@@ -68,60 +74,98 @@ class doaprdfPlugin extends Plugin {
 				$tags_list = $group->getTags();
 			}
 			
+			// We will return RDF+XML
 			$params['content_type'] = 'application/rdf+xml';
 
-			// invoke the 'project_rdf_metadata' hook so as to complement the RDF description
-			// Invoke plugins' hooks 'script_accepted_types' to discover which alternate content types they would accept for /users/...
-			$hook_params = array();
-			$hook_params['prefixes'] = array(
-							'http://www.w3.org/1999/02/22-rdf-syntax-ns#' => 'rdf',
-							'http://www.w3.org/2000/01/rdf-schema#' => 'rdfs',
-							'http://usefulinc.com/ns/doap#' => 'doap',
-							'http://purl.org/dc/terms/' => 'dcterms'
+			// Construct an ARC2_Resource containing the project's RDF (DOAP) description
+			$ns = array(
+					'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+					'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
+					'doap' => 'http://usefulinc.com/ns/doap#',
+					'dcterms' => 'http://purl.org/dc/terms/' 
 			);
-			$hook_params['xml'] = array();
-			$hook_params['group'] = $group_id;
+				
+			$conf = array(
+					'ns' => $ns
+			);
 			
-			plugin_hook_by_reference('project_rdf_metadata', $hook_params);
-			
-			$xml = '<?xml version="1.0"?>
-				<rdf:RDF';
-			foreach($hook_params['prefixes'] as $url => $prefix) {
-				$xml .= ' xmlns:'. $prefix . '="'. $url .'"';
+			$res = ARC2::getResource($conf);
+			$res->setURI(util_make_url_g($projectname, $group_id));
+				
+			// $res->setRel('rdf:type', 'doap:Project');
+			rdfutils_setPropToUri($res, 'rdf:type', 'doap:Project');
+							
+			$res->setProp('doap:name', $projectname);
+			$res->setProp('doap:shortdesc', $project_shortdesc);
+			if($project_description) {
+				$res->setProp('doap:description', $project_description);
 			}
-      		
-      		$xml .='>
-
-      			<doap:Project rdf:about="">
-      				<doap:name>'. $projectname .'</doap:name>';
-			$xml .= '<doap:shortdesc>'. $project_shortdesc . '</doap:shortdesc>';
-      		if($project_description) {
-				$xml .= '<doap:description>'. $project_description . '</doap:description>';
-			}
+			$res->setProp('doap:homepage', $project->getHomePage());
+			$tags = array();
 			if($tags_list) {
 				$tags = split(', ',$tags_list);
-				foreach($tags as $tag) {
-					$xml .= '<dcterms:subject>'.$tag.'</dcterms:subject>';
-				}
+				$res->setProp('dcterms:subject', $tags);
 			}
 			
-			if (count($hook_params['xml'])) {
-				foreach($hook_params['xml'] as $fragment) {
-					$xml .= $fragment;
+			// Now, we need to collect complementary RDF descriptiosn of the project via other plugins 
+			// invoke the 'project_rdf_metadata' hook so as to complement the RDF description
+			$hook_params = array();
+			$hook_params['prefixes'] = array();
+			foreach($ns as $prefix => $url) {
+				$hook_params['prefixes'][$url] = $prefix;
+			}
+			$hook_params['group'] = $group_id;
+			// pass the resource in case it could be useful (read-only in principle)
+			$hook_params['in_Resource'] = $res;
+			$hook_params['out_Resources'] = array();
+			plugin_hook_by_reference('project_rdf_metadata', $hook_params);
+
+			// add new prefixes to the list
+			foreach($hook_params['prefixes'] as $url => $prefix) {
+				if (!isset($ns[$prefix])) {
+					$ns[$prefix] = $url;
 				}
 			}
+
+			// merge the two sets of triples
+			$merged_index = $res->index;
+			foreach($hook_params['out_Resources'] as $out_res) {
+				$merged_index = ARC2::getMergedIndex($merged_index, $out_res->index);
+			}
+
+			$conf = array(
+					'ns' => $ns,
+					'serializer_type_nodes' => true
+			);
 			
-			$xml .='</doap:Project>
-    			</rdf:RDF>';
-			
-			$doc = new DOMDocument();
-			$doc->preserveWhiteSpace = false;
-			$doc->formatOutput   = true;
-			$doc->loadXML($xml);
-			 
-			$params['content'] = $doc->saveXML();
+			if($accept == 'application/rdf+xml') {
+				$ser = ARC2::getRDFXMLSerializer($conf);
+			}
+			else { 
+				// text/turtle
+				$ser = ARC2::getTurtleSerializer($conf);
+			}	
+			/* Serialize a resource index */
+			$doc = $ser->getSerializedIndex($merged_index);
+
+			$params['content'] = $doc . "\n";
 		}
 	}
+	
+	/**
+	 * Declares a link to itself in the link+meta HTML headers
+	 * @param unknown_type $params
+	 */
+	function alt_representations (&$params) {
+		$script_name = $params['script_name'];
+		$php_self = $params['php_self'];
+		// really trigger only for real projects descriptions, not for the projects index
+		if ( ($script_name == '/projects') && (($php_self != '/projects') && ($php_self != '/projects/')) ) {
+			$params['return'][] = '<link rel="meta" type="application/rdf+xml" title="DOAP RDF Data" href=""/>';
+			$params['return'][] = '<link rel="meta" type="test/turtle" title="DOAP RDF Data" href=""/>';
+		}
+	}
+	
 }
 
 // Local Variables:
