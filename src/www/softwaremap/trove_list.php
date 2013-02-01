@@ -58,6 +58,8 @@ $HTML->printSoftwareMapLinks();
 
 $form_cat = getIntFromRequest('form_cat');
 $page = getIntFromRequest('page',1);
+
+// 'c' for by categories
 $cat = getStringFromRequest('cat');
 if (empty($cat)) {
 	$cat = 'c';
@@ -148,7 +150,7 @@ if ( $cat === 'c' ) {
 		print '<p>'.$discrim_desc.'</p>';
 
 	// ######## two column table for key on right
-	// first print all parent cats and current cat
+	// first print all parent cats and current cat (breadcrumb)
 	print '<table summary="">' . "\n";
 	print '<tr>' . "\n";
 	print '<td id="project-tree-col1">' . "\n";
