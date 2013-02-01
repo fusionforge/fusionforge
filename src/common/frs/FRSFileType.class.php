@@ -44,9 +44,16 @@ class FRSFileType extends Error {
 	 */
 	var $data_array;
 
-	function FRSFileType ($type_id, $name) {
+	function FRSFileType ($type_id=false, $name=false) {
 		$this->Error();
-		$this->data_array = array( 'type_id' => $type_id, 'name' => $name);
+		if($type_id && $name) {
+			$this->data_array = array( 'type_id' => $type_id, 'name' => $name);
+		}
+		else {
+			if ($type_id) {
+				$this->fetchData($type_id);
+			}
+		}
 	}
 
 	/**
