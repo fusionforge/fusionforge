@@ -530,6 +530,16 @@ TODO : document Auth plugins :
   Description: returns in $params['content'] an alternate content for /softwaremap/trove_list.php page and 
                in $params['content_type'] the actual content-type to return
 
+  Hook Name  : content_negociated_frs_index
+  Parameters : $params['accept'] provides the content-type to be rendered
+  Description: returns in $params['content'] an alternate content for /frs/
+               in $params['content_type'] the actual content-type to return
+
+  Hook Name  : content_negociated_frs_download_file
+  Parameters : $params['accept'] provides the content-type to be rendered
+  Description: returns in $params['content'] an alternate content for /frs/download.php
+               in $params['content_type'] the actual content-type to return
+
 
 TODO (nerville) : document display_hierarchy
 TODO (lolando ?) : document role_normalize, role_translate_strings, role_has_permission, role_get_setting, list_roles_by_permission 
