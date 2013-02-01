@@ -127,6 +127,7 @@ class admsswPlugin extends Plugin {
 		$php_self = rtrim($php_self, '/');
 		if ($php_self == '/projects') {
 			$params['return'][] = '<link rel="meta" type="application/rdf+xml" title="ADMS.SW RDF Data" href=""/>';
+			$params['return'][] = '<link rel="meta" type="text/turtle" title="ADMS.SW RDF Data" href=""/>';
 		}
 	}
 	
@@ -139,6 +140,7 @@ class admsswPlugin extends Plugin {
 		$script = $params['script'];
 		if ($script == 'projects_list') {
 			$params['accepted_types'][] = 'application/rdf+xml';
+			$params['accepted_types'][] = 'text/turtle';
 		}
 	}
 	
@@ -150,7 +152,7 @@ class admsswPlugin extends Plugin {
 		
 		$accept = $params['accept'];
 			
-		if($accept == 'application/rdf+xml') {
+		if($accept == 'application/rdf+xml' || $accept == 'text/turtle') {
 				
 				
 			// We will return RDF+XML
@@ -199,9 +201,14 @@ class admsswPlugin extends Plugin {
 					'ns' => $ns,
 					'serializer_type_nodes' => true
 			);
-				
-			$ser = ARC2::getRDFXMLSerializer($conf);
-				
+			
+			if($accept == 'application/rdf+xml') {
+				$ser = ARC2::getRDFXMLSerializer($conf);
+			}
+			else {
+				// text/turtle
+				$ser = ARC2::getTurtleSerializer($conf);
+			}	
 			/* Serialize a resource index */
 			$doc = $ser->getSerializedIndex($res->index);
 	
