@@ -1410,6 +1410,13 @@ if (isset($params['group']) && $params['group']) {
 			$subMenuAttr[] = array('title' => _('Complete listing of available projects.'), 'class' => 'tabtitle');
 		}
 
+		// Allow plugins to add more softwaremap submenu entries
+		$hookParams = array();
+		$hookParams['TITLES'] = & $subMenuTitle;
+		$hookParams['URLS'] = & $subMenuUrl;
+		$hookParams['ATTRS'] = & $subMenuAttr;
+		plugin_hook("softwaremap_links", $hookParams);
+		
 		echo $this->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
 	}
 
