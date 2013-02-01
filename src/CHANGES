@@ -1,3 +1,5 @@
+* new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects
+
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)
 * Widget: New User Widget: Last 5 documents published in my project (Capgemini)
