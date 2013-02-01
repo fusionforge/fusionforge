@@ -156,8 +156,8 @@ class oslcPlugin extends Plugin {
 			$group_id=$params['group'];
 			$serviceprovider = util_make_url ("/plugins/oslc/cm/oslc-cm-services/".$group_id);
 
-			if (! $params['prefixes']['http://open-services.net/ns/core#']) {
-				$params['prefixes']['http://open-services.net/ns/core#'] = 'oslc';
+			if (! isset($params['prefixes']['oslc'])) {
+				$params['prefixes']['oslc'] = 'http://open-services.net/ns/core#';
 			}
 			$params['xml'][] = '<oslc:serviceProvider rdf:resource="'.$serviceprovider.'"/>';
 		}
