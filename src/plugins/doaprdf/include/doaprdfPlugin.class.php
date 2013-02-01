@@ -48,6 +48,7 @@ class doaprdfPlugin extends Plugin {
 		$script = $params['script'];
 		if ($script == 'project_home') {
 			$params['accepted_types'][] = 'application/rdf+xml';
+			$params['accepted_types'][] = 'text/turtle';
 		}
 	}
 
@@ -60,7 +61,7 @@ class doaprdfPlugin extends Plugin {
 		$accept = $params['accept'];
 		$group_id = $params['group_id'];
 
-		if($accept == 'application/rdf+xml') {
+		if($accept == 'application/rdf+xml' || $accept == 'text/turtle') {
 			
 			// connect to FusionForge internals
 			$pm = ProjectManager::instance();
@@ -137,8 +138,13 @@ class doaprdfPlugin extends Plugin {
 					'serializer_type_nodes' => true
 			);
 			
-			$ser = ARC2::getRDFXMLSerializer($conf);
-			
+			if($accept == 'application/rdf+xml') {
+				$ser = ARC2::getRDFXMLSerializer($conf);
+			}
+			else { 
+				// text/turtle
+				$ser = ARC2::getTurtleSerializer($conf);
+			}	
 			/* Serialize a resource index */
 			$doc = $ser->getSerializedIndex($merged_index);
 
@@ -156,6 +162,7 @@ class doaprdfPlugin extends Plugin {
 		// really trigger only for real projects descriptions, not for the projects index
 		if ( ($script_name == '/projects') && (($php_self != '/projects') && ($php_self != '/projects/')) ) {
 			$params['return'][] = '<link rel="meta" type="application/rdf+xml" title="DOAP RDF Data" href=""/>';
+			$params['return'][] = '<link rel="meta" type="test/turtle" title="DOAP RDF Data" href=""/>';
 		}
 	}
 	
