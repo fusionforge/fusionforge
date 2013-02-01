@@ -432,12 +432,24 @@ class FRSPackage extends Error {
 			$res = db_query_params ('SELECT * FROM frs_release WHERE package_id=$1',
 						array ($this->getID())) ;
 			while ($arr = db_fetch_array($res)) {
-				$this->package_releases[]=new FRSRelease($this,$arr['release_id'],$arr);
+				$this->package_releases[]=$this->newFRSRelease($arr['release_id'],$arr);
 			}
 		}
 		return $this->package_releases;
 	}
 
+
+	/**
+	 *	newFRSRelease - generates a FRSRelease (allows overloading by subclasses)
+	 *
+	 *  @param  string	FRS release identifier 
+	 *  @param  array	fetched data from the DB
+	 *	@return	FRSRelease	new FRSFile object.
+	 */
+	protected function newFRSRelease($release_id, $data) {
+		return new FRSRelease($this,$release_id, $data);
+	}
+	
 	/**
 	 *  delete - delete this package and all its related data.
 	 *

@@ -326,6 +326,17 @@ notified in the future, please login to %7$s and click this link:
 		}
 
 	}
+	
+	/**
+	 *	newFRSFile - generates a FRSFile (allows overloading by subclasses)
+	 *
+	 *  @param  string	FRS file identifier 
+	 *  @param  array	fetched data from the DB
+	 *	@return	FRSFile	new FRSFile object.
+	 */
+	protected function newFRSFile($file_id, $data) {
+		return new FRSFile($this,$file_id, $data);
+	}
 
 	/**
 	 *	getFiles - gets all the file objects for files in this release.
@@ -338,7 +349,7 @@ notified in the future, please login to %7$s and click this link:
 			$res = db_query_params ('SELECT * FROM frs_file_vw WHERE release_id=$1',
 						array ($this->getID())) ;
 			while ($arr = db_fetch_array($res)) {
-				$this->release_files[]=new FRSFile($this,$arr['file_id'],$arr);
+				$this->release_files[]=$this->newFRSFile($arr['file_id'],$arr);
 			}
 		}
 		return $this->release_files;
