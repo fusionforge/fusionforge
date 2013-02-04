@@ -1,4 +1,0 @@
-plugins/extratabs/bin/*	@PLUGIN_PATH@/extratabs/bin/
-plugins/extratabs/common/* @PLUGIN_PATH@/extratabs/common/
-plugins/extratabs/db/* @PLUGIN_PATH@/extratabs/db/
-plugins/extratabs/www/* @PLUGIN_PATH@/extratabs/www/
