@@ -177,7 +177,7 @@ class admsswPlugin extends Plugin {
 	 * 
 	 * @param int $group_id
 	 */
-	private function htmlPreviewProjectAsTurtle($group_id) {
+	public function htmlPreviewProjectAsTurtle($group_id) {
 	
 		$resourceindex = $this->getProjectResourceIndex($group_id);
 
@@ -612,7 +612,7 @@ class admsswPlugin extends Plugin {
 	 * Provides an HTML preview of the trove categories as SKOS looking like turtle
 	 * 
 	 */
-	private function htmlPreviewTroveCatsAsTurtle() {
+	public function htmlPreviewTroveCatsAsTurtle() {
 		$graph = $this->getTroveListResourcesGraph();
 	
 		return $graph->dump();
