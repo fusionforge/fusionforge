@@ -69,7 +69,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 					$hide_document = null;
 				}
 
-				list($hide_now,$count_diff,$hide_url) = my_hide_url('document',$group_id,$hide_item_id,$rows,$hide_document);
+				list($hide_now,$count_diff,$hide_url) = my_hide_url('document',$group_id,$hide_item_id,$rows2,$hide_document);
 
 				$html_hdr = ($j ? '<tr class="boxitem"><td colspan="2">' : '').
 				$hide_url.'<a href="/docman/?group_id='.$group_id.'">'.
@@ -91,7 +91,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 					}
 				}
 
-				$html_hdr .= '['.$rows2.($count_new ? ", <b>".sprintf(_('%s new'), array($count_new))."</b>]" : ']').'</td></tr>';
+				$html_hdr .= '['.$rows2.($count_new ? ", <b>".sprintf(_('%s new'), $count_new)."</b>]" : ']').'</td></tr>';
 				$html_my_monitored_documents .= $html_hdr.$html;
 			}
 			$html_my_monitored_documents .= '</table>';
