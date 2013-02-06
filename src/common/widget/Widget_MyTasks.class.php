@@ -95,7 +95,7 @@ class Widget_MyTasks extends Widget {
 
                 list($hide_now,$count_diff,$hide_url) = my_hide_url('pm',$group_project_id,$hide_item_id,$rows2,$hide_pm);
 
-                $html_hdr = ($j ? '<tr class="boxitem"><td colspan="3">' : '').
+                $html_hdr = '<tr class="boxitem"><td colspan="3">'.
                     $hide_url.'<a href="/pm/task.php?group_id='.$group_id.
                     '&amp;group_project_id='.$group_project_id.'">'.
                     db_result($result,$j,'group_name').' - '.

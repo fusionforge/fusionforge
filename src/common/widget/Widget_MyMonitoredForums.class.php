@@ -106,7 +106,7 @@ class Widget_MyMonitoredForums extends Widget {
 
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('forum',$group_id,$hide_item_id,$rows2,$hide_forum);
 
-				$html_hdr = ($j ? '<tr class="boxitem"><td colspan="2">' : '').
+				$html_hdr = '<tr class="boxitem"><td colspan="2">'.
 				$hide_url.'<a href="/forum/?group_id='.$group_id.'">'.
 				$glist[$j]['group_name'].'</a>    ';
 

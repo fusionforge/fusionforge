@@ -273,7 +273,7 @@ class Widget_MyArtifacts extends Widget {
 		//work on the tracker of the last round if there was one
 		if ($atid_old != 0 && $count_aids != 0) {
 			list($hide_now,$count_diff,$hide_url) = my_hide_url('artifact',$atid_old,$hide_item_id,$count_aids,$hide_artifact);
-			$html_hdr = ($j ? '<tr class="boxitem"><td colspan="3">' : '').
+			$html_hdr = '<tr class="boxitem"><td colspan="3">'.
 				$hide_url.
 				util_make_link('/tracker/?group_id='.$group_id_old, $group_name, array('class'=>'tabtitle-nw', 'title'=>_('Browse Trackers List for this project'))).
 				' - '.

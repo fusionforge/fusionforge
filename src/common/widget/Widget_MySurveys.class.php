@@ -59,9 +59,7 @@ class Widget_MySurveys extends Widget {
 			global $HTML;
 			$request =& HTTPRequest::instance();
 			$html_my_surveys .= '<table style="width:100%">';
-			$j = 0;
 			foreach ($projects as $project) {
-				$j++;
 				$group_id = $project->getID() ;
 				$surveyfacto = new SurveyFactory($project);
 				$surveys = $surveyfacto->getSurveys();
@@ -83,7 +81,7 @@ class Widget_MySurveys extends Widget {
 
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('survey',$group_id,$hide_item_id,count($surveys),$hide_survey);
 
-				$html_hdr = ($j ? '<tr class="boxitem"><td colspan="2">' : '').
+				$html_hdr = '<tr class="boxitem"><td colspan="2">'.
 					$hide_url.'<a href="/survey/?group_id='.$group_id.'">'.
 					$project->getPublicName().'</a>    ';
 
