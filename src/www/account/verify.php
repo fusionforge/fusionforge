@@ -35,54 +35,41 @@ if (getStringFromRequest('submit')) {
 	$passwd = getStringFromRequest('passwd');
 
 	if (!$loginname) {
-		exit_missing_param('',array(_('UserName')),'my');
+		$error_msg = _('Missing required parameters : ')._('UserName');
 	}
 
 	$u = user_get_object_by_name($loginname);
 	if (!$u && forge_get_config('require_unique_email')) {
 		$u = user_get_object_by_email ($loginname);
 	}
-	if (!$u || !is_object($u)) {
-		exit_error(_('Could Not Get User'),'home');
-	} elseif ($u->isError()) {
-		exit_error($u->getErrorMessage(),'my');
-	}
-
-	if ($u->getStatus()=='A'){
-		exit_error(_('Account already active.'),'my');
-	}
-
 	$confirm_hash = html_clean_hash_string($confirm_hash);
-
-	if ($confirm_hash != $u->getConfirmHash()) {
-		exit_error(_('Cannot confirm account identity - invalid confirmation hash (or login name)'),'my');
-	}
-
-	if (!session_login_valid($loginname, $passwd, 1)) {
-		exit_permission_denied(_('Credentials you entered do not correspond to valid account.'),'my');
-	}
-
-	if (!$u->setStatus('A')) {
-		exit_error( _('Error while activiting account').': '.$u->getErrorMessage(),'my');
+	if (!$u || !is_object($u)) {
+		$error_msg = _('Invalid Password Or User Name');
+	} elseif ($u->isError()) {
+		$error_msg = $u->getErrorMessage();
+	} elseif ($u->getStatus()=='A'){
+		$error_msg = _('Account already active.');
+	} elseif ($confirm_hash != $u->getConfirmHash()) {
+		$error_msg = _('Cannot confirm account identity - invalid confirmation hash (or login name)');
+	} elseif (!session_login_valid($loginname, $passwd, 1)) {
+		$warning_msg = _('Credentials you entered do not correspond to valid account.');
+	} elseif (!$u->setStatus('A')) {
+		$error_msg = _('Error while activiting account').': '.$u->getErrorMessage();
 	} else {
 		if (forge_get_config('user_notification_on_activation')) {
 			$u->setAdminNotification();
 		}
+		session_redirect("/account/first.php");
 	}
-
-	session_redirect("/account/first.php");
 }
 
 $HTML->header(array('title'=>_('Verify')));
 
 echo '<p>' . _('In order to complete your registration, login now. Your account will then be activated for normal logins.') . '</p>';
 
-if (isset($GLOBALS['error_msg']) && $GLOBALS['error_msg'] != '') {
-	print '<p class="error">'.$GLOBALS['error_msg'].'</p>';
-}
 ?>
 
-<form action="<?php echo util_make_url('/account/verify.php'); ?>" method="post">
+<form action="<?php echo util_make_url('/account/verify.php?confirm_hash='.$confirm_hash); ?>" method="post">
 
 <p><?php
 if (forge_get_config('require_unique_email')) {
@@ -100,3 +87,4 @@ if (forge_get_config('require_unique_email')) {
 
 <?php
 $HTML->footer(array());
+?>
