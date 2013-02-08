@@ -381,12 +381,12 @@ Requires: %{name} >= %{version}
 %description plugin-blocks
 HTML blocks plugin for FusionForge. 
 
-%package plugin-extratabs
-Summary: extratabs plugin for FusionForge
+%package plugin-headermenu
+Summary: headermenu plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}
-%description plugin-extratabs
-HTML extratabs plugin for FusionForge. 
+%description plugin-headermenu
+Headermenu plugin for FusionForge. 
 
 %package plugin-wiki
 Summary: Wiki plugin for FusionForge
@@ -670,8 +670,8 @@ done
 # plugin: blocks
 %{__ln_s} ../../plugins/blocks/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/blocks
 
-# plugin: extratabs
-%{__ln_s} ../../plugins/extratabs/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/extratabs
+# plugin: headermenu
+%{__ln_s} ../../plugins/headermenu/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/headermenu
 
 # plugin: wiki
 %{__ln_s} ../plugins/wiki/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/wiki
@@ -1134,10 +1134,10 @@ fi
 %{FORGE_DIR}/plugins/blocks
 %{FORGE_DIR}/www/plugins/blocks
 
-%files plugin-extratabs
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/extratabs.ini
-%{FORGE_DIR}/plugins/extratabs
-%{FORGE_DIR}/www/plugins/extratabs
+%files plugin-headermenu
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/headermenu.ini
+%{FORGE_DIR}/plugins/headermenu
+%{FORGE_DIR}/www/plugins/headermenu
 
 %files plugin-wiki
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/wiki/
