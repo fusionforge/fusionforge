@@ -1,0 +1,5 @@
+plugins/headermenu/action/*	@PLUGIN_PATH@/headermenu/action/
+plugins/headermenu/common/* @PLUGIN_PATH@/headermenu/common/
+plugins/headermenu/db/* @PLUGIN_PATH@/headermenu/db/
+plugins/headermenu/view/*	@PLUGIN_PATH@/headermenu/view/
+plugins/headermenu/www/* @PLUGIN_PATH@/headermenu/www/

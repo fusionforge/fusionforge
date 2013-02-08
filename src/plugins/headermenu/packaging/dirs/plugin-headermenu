@@ -1,0 +1,5 @@
+@PLUGIN_PATH@/headermenu/action
+@PLUGIN_PATH@/headermenu/common
+@PLUGIN_PATH@/headermenu/lib
+@PLUGIN_PATH@/headermenu/view
+@PLUGIN_PATH@/headermenu/www
