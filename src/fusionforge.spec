@@ -381,13 +381,6 @@ Requires: %{name} >= %{version}
 %description plugin-blocks
 HTML blocks plugin for FusionForge. 
 
-%package plugin-headermenu
-Summary: headermenu plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}
-%description plugin-headermenu
-Headermenu plugin for FusionForge. 
-
 %package plugin-wiki
 Summary: Wiki plugin for FusionForge
 Group: Development/Tools
@@ -593,9 +586,6 @@ done
 
 # plugin: forumml
 # %{__ln_s} ../../plugins/forumml/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/forumml
-
-# plugin: headermenu
-%{__ln_s} ../../plugins/headermenu/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/headermenu
 
 # plugin: hudson
 %{__ln_s} ../../plugins/hudson/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/hudson
@@ -1133,11 +1123,6 @@ fi
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/blocks.ini
 %{FORGE_DIR}/plugins/blocks
 %{FORGE_DIR}/www/plugins/blocks
-
-%files plugin-headermenu
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/headermenu.ini
-%{FORGE_DIR}/plugins/headermenu
-%{FORGE_DIR}/www/plugins/headermenu
 
 %files plugin-wiki
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/wiki/
