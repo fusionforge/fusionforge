@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -43,8 +43,6 @@ require_once $gfwww.'include/html.php';
 if (!forge_get_config('use_docman'))
 	exit_disabled('home');
 
-session_require_perm('docman', $group_id, 'read');
-
 /* get informations from request or $_POST */
 $group_id = getIntFromRequest('group_id');
 
@@ -55,6 +53,8 @@ if (!$group_id)
 $g = group_get_object($group_id);
 if (!$g || !is_object($g))
 	exit_no_group();
+
+session_require_perm('docman', $group_id, 'read');
 
 /* is this group using docman ? */
 if (!$g->usesDocman())
