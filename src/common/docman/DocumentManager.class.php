@@ -4,6 +4,7 @@
  *
  * Copyright 2011-2012, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, French Ministry of Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -189,7 +190,7 @@ class DocumentManager extends Error {
 					echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel;
 				}
 				if ($dg->getSubgroup($subGroupIdValue, $stateId)) {
-					echo '<ul>';
+					echo '<ul class="simpleTreeMenu" >';
 					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
 					echo '</ul>';
 				}
