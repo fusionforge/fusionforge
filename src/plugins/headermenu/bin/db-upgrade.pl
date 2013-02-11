@@ -52,7 +52,11 @@ eval {
     $version = &get_db_version ;
     $target = "0.1" ;
     if (is_lesser $version, $target) {
-	my @filelist = ( "/usr/share/gforge/plugins/$pluginname/db/$pluginname-init.sql" ) ;
+	my @filelist = ( "/usr/share/gforge/plugins/$pluginname/db/$pluginname-init.sql",
+			 "/usr/share/gforge/plugins/$pluginname/db/20120930-addoutermenusupport.sql",
+			 "/usr/share/gforge/plugins/$pluginname/db/20121231-reorderentry.sql",
+			 "/usr/share/gforge/plugins/$pluginname/db/20130120-addprojectcolumn.sql",
+	    ) ;
 	
 	foreach my $file (@filelist) {
 	    debug "Processing $file" ;
@@ -74,30 +78,6 @@ eval {
     }
     
     
-    $version = &get_db_version ;
-    $target = "0.2" ;
-    if (is_lesser $version, $target) {
-	my @filelist = ( "/usr/share/gforge/plugins/$pluginname/db/20101203-add_type_for_iframe.sql" ) ;
-	
-	foreach my $file (@filelist) {
-	    debug "Processing $file" ;
-	    @reqlist = @{ &parse_sql_file ($file) } ;
-	    
-	    foreach my $s (@reqlist) {
-		$query = $s ;
-		# debug $query ;
-		$sth = $dbh->prepare ($query) ;
-		$sth->execute () ;
-		$sth->finish () ;
-	    }
-	}
-	@reqlist = () ;
-	
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
-    }
-
     debug "It seems your database install/upgrade went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian GForge." ;
 
