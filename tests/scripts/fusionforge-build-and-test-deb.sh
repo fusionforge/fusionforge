@@ -99,6 +99,7 @@ ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload"
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
+ssh root@$HOST "service nscd stop"
 
 # Dump database
 echo "Dump freshly installed database"
