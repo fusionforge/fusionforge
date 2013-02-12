@@ -67,6 +67,13 @@ EOF
 
 reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
+rm ${BUILDPLACE}/${PKGNAME}_${SMAJOR}${MINOR}*
+rm -rf $BUILDPLACE/$PKGNAME-$MAJOR
+
+cd $BUILDRESULT
+cat $CHANGEFILE | sed '1,/^Checksums-Sha1:/d;/^[[:alnum:]]/,$d' | awk '{print $3}' | xargs rm
+rm $CHANGEFILE
+
 cd $CHECKOUTPATH
 
 destroy_vm -t debian7 $HOST
