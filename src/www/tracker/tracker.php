@@ -420,10 +420,10 @@ switch (getStringFromRequest('func')) {
 					$feedback = sprintf(_('Item %s successfully updated'),'[#'.$ah->getID().']');
 				}
 				$feedback .= $ext_feedback;
-				include $gfwww.'tracker/browse.php';
-				break;
 			}
 		}
+		include $gfwww.'tracker/browse.php';
+		break;
 	}
 		case 'monitor' : {
 			if (!session_loggedin()) {
