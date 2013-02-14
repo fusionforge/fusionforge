@@ -59,7 +59,17 @@ class Widget_ProjectLatestNews extends Widget {
 		$owner = $request->get('owner');
 		$group_id = (int)substr($owner, 1);
 		require_once 'www/export/rss_utils.inc';
-		rss_display_news($group_id, 10);
+//XXX the following function does not exist
+//		rss_display_news($group_id, 10);
+		echo 'Error! Use overridden getRssUrl method instead!';
+	}
+
+	/* replacement */
+	function getRssUrl($owner_id, $owner_type) {
+		if ($owner_type != 'g') {
+			return false;
+		}
+		return '/export/rss20_news.php?group_id=' . $owner_id;
 	}
 
 	function canBeUsedByProject(&$project) {
