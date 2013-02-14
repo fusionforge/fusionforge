@@ -56,8 +56,17 @@ function displayRss() {
 		$group_id = (int)substr($owner, 1);
 //		$group_id = $request->get('group_id');
 		require_once 'www/export/rss_utils.inc';
-		rss_display_news($group_id, 10);
+//XXX the following function does not exist
+//		rss_display_news($group_id, 10);
+		echo 'Error! Use overridden getRssUrl method instead!';
     }
+	/* replacement */
+	function getRssUrl($owner_id, $owner_type) {
+		if ($owner_type != 'g') {
+			return false;
+		}
+		return '/export/rss20_news.php?group_id=' . $owner_id;
+	}
     function canBeUsedByProject(&$project) {
         return $project->usesNews();
     }
@@ -65,5 +74,3 @@ function displayRss() {
         return _('List the last 10 pieces of news posted by the project members.');
     }
 }
-
-?>

@@ -416,10 +416,10 @@ switch (getStringFromRequest('func')) {
 					$feedback = sprintf(_('Item %s successfully updated'),'[#'.$ah->getID().']');
 				}
 				$feedback .= $ext_feedback;
-				include $gfcommon.'tracker/actions/browse.php';
-				break;
 			}
 		}
+		include $gfcommon.'tracker/actions/browse.php';
+		break;
 	}
 		case 'monitor' : {
 			if (!session_loggedin()) {
@@ -583,5 +583,3 @@ switch (getStringFromRequest('func')) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
