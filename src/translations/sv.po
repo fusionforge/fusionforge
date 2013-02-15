@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-12 16:23+0100\n"
+"POT-Creation-Date: 2013-02-15 09:47+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -6673,7 +6673,7 @@ msgid ""
 "main page of the file release system."
 msgstr ""
 
-#: common/widget/Widget_ProjectLatestNews.class.php:65
+#: common/widget/Widget_ProjectLatestNews.class.php:74
 msgid "List the last 10 pieces of news posted by the project members."
 msgstr ""
 

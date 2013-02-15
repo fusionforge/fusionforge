@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-12 16:23+0100\n"
+"POT-Creation-Date: 2013-02-15 09:47+0100\n"
 "PO-Revision-Date: 2012-05-24 15:28+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -6679,7 +6679,7 @@ msgstr ""
 "la surveillance peut être annulée depuis cette page ou depuis la page\n"
 "du système de publication de fichiers."
 
-#: common/widget/Widget_ProjectLatestNews.class.php:65
+#: common/widget/Widget_ProjectLatestNews.class.php:74
 msgid "List the last 10 pieces of news posted by the project members."
 msgstr "Liste des 10 dernières annonces publiées par les membres du projet."
 
