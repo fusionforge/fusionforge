@@ -3,7 +3,7 @@
  * FusionForge groups
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
- * Copyright 2009-2010, Roland Mas
+ * Copyright 2009-2013, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
@@ -160,7 +160,7 @@ function get_public_active_projects_asc($max_query_limit = -1) {
 	$res_grp = db_query_params ('
 			SELECT group_id, group_name, unix_group_name, short_description, register_time
 			FROM groups
-			WHERE status = $1 AND type_id=1 AND group_id>4 AND register_time > 0
+			WHERE status = $1 AND type_id=1 AND is_template=0 AND register_time > 0
 			ORDER BY group_name ASC
 			',
 			array ('A'),
