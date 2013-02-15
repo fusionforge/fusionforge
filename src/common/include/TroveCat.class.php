@@ -3,6 +3,7 @@
  * FusionForge trove categories
  *
  * Copyright 2013, Olivier Berger and Institut Mines-Telecom
+ * Copyright 2013, Roland Mas
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -105,10 +106,10 @@ class TroveCat extends Error {
 	}
 	
 	function listSubTree() {
-		return TroveCat::getsubtree($this->data_array['trove_cat_id']);
+		return TroveCat::getSubtree($this->data_array['trove_cat_id']);
 	}
 	
-	static function getallroots() {
+	static function getAllRoots() {
 		$rootcats = array();
 		
 		$res = db_query_params ('
@@ -129,7 +130,7 @@ class TroveCat extends Error {
 		return $rootcats; 
 	}
 	
-	static function getsubtree($root_cat_id) {
+	static function getSubtree($root_cat_id) {
 		$subcats = array();
 		
 		$res = db_query_params('
@@ -150,7 +151,7 @@ class TroveCat extends Error {
 		return $subcats;
 	}
 	
-	static function getprojectcats($group_id) {
+	static function getProjectCats($group_id) {
 		$cats = array();		
 	
 		$res = db_query_params ('

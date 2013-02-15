@@ -4,6 +4,7 @@
  * admsswPlugin Class
  *
  * Copyright 2012-2013, Olivier Berger & Institut Mines-Telecom
+ * Copyright 2013, Roland Mas
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -275,7 +276,7 @@ class admsswPlugin extends Plugin {
 				'schema:operatingSystem' => array(),
 				'admssw:status' => array(),
 				'rad:theme' => array());
-		$trovecats = TroveCat::getprojectcats($group_id);
+		$trovecats = TroveCat::getProjectCats($group_id);
 		foreach($trovecats as $trovecat) {
 			$cat_id = $trovecat->getId();
 			if(!isset($this->trovecat_id_to_shortname[$cat_id])) {
@@ -526,7 +527,7 @@ class admsswPlugin extends Plugin {
 		$graph = new Graphite();
 		$this->graphSetAdmsswNameSpaces($graph);
 		
-		$rootcats = TroveCat::getallroots();
+		$rootcats = TroveCat::getAllRoots();
 		
 		foreach($rootcats as $rootcat) {
 			
