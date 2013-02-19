@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,7 +25,7 @@
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
 global $group_id; // id of the group
-global $g; //id of the doc_group
+global $g; // the project object
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -33,7 +34,7 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 
 echo '<div class="docmanDivIncluded">';
 plugin_hook ("blocks", "doc help");
-if ($g->useWebdav()) {
+if (forge_get_config('use_webdav') && $g->useWebdav()) {
 	echo '<p>'. _('Documents parsing is also available thru webdav') .'</p>';
 	echo '<p>'. util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Direct Webdav URL')) .'</p>';
 }

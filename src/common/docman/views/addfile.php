@@ -7,7 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -35,7 +35,7 @@ global $dirid; //id of the doc_group
 // plugin projects-hierarchy
 $actionurl = '?group_id='.$group_id.'&amp;action=addfile&amp;dirid='.$dirid;
 $redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
-if ($childgroup_id) {
+if (isset($childgroup_id) && $childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$actionurl .= '&amp;childgroup_id='.$childgroup_id;
 	$redirecturl .= '&amp;childgroup_id='.$childgroup_id;

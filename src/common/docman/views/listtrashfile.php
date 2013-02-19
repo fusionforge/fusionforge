@@ -39,7 +39,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 // plugin projects-hierarchy
-if ($childgroup_id) {
+if (isset($childgroup_id) && $childgroup_id) {
 	$g = group_get_object($childgroup_id);
 }
 
