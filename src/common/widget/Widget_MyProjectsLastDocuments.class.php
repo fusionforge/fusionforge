@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of FusionForge.
@@ -135,6 +135,17 @@ class Widget_MyProjectsLastDocuments extends Widget {
 
 	function getCategory() {
 		return 'Documents-Manager';
+	}
+
+	function isAvailable() {
+		if (!forge_get_config('use_docman')) {
+			return false;
+		}
+		foreach (UserManager::instance()->getCurrentUser()->getGroups(false) as $p) {
+			if ($p->usesDocman()) {
+				return true;
+			}
+		}
 	}
 }
 

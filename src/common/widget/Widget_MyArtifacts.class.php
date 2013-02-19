@@ -1,7 +1,8 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of Education
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -255,6 +256,17 @@ class Widget_MyArtifacts extends Widget {
 
 	function getDescription() {
 		return _("List artifacts you have submitted or assigned to you, by project.");
+	}
+
+	function isAvailable() {
+		if (!forge_get_config('use_tracker')) {
+			return false;
+		}
+		foreach (UserManager::instance()->getCurrentUser()->getGroups(false) as $p) {
+			if ($p->usesTracker()) {
+				return true;
+			}
+		}
 	}
 }
 

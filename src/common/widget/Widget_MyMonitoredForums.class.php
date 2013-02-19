@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  *
  * This file is a part of FusionForge.
  *
@@ -140,6 +140,17 @@ class Widget_MyMonitoredForums extends Widget {
 		$ajax_url .= '&amp;hide_item_id=' . $request->get('hide_item_id') . '&amp;hide_forum=' . $request->get('hide_forum');
 		}
 		return $ajax_url;
+	}
+
+	function isAvailable() {
+		if (!forge_get_config('use_forum')) {
+			return false;
+		}
+		foreach (UserManager::instance()->getCurrentUser()->getGroups(false) as $p) {
+			if ($p->usesForum()) {
+				return true;
+			}
+		}
 	}
 }
 ?>
