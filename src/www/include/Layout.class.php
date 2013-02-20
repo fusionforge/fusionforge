@@ -363,7 +363,7 @@ class Layout extends Error {
 	}
 
 	/**
- 	 * headerLinkedDataAutodiscovery() - creates the link+meta links to alternate
+ 	 * headerLinkedDataAutodiscovery() - creates the link+alternate links to alternate
  	 * 		representations for Linked Data autodiscovery
  	 */
 	function headerLinkedDataAutodiscovery() {
@@ -375,7 +375,8 @@ class Layout extends Error {
 
 			$php_self = getStringFromServer('PHP_SELF');
 			
-			// invoke the 'alt_representations' hook to add potential meta links (useful for Linked Data)
+			// invoke the 'alt_representations' hook to add potential 'alternate' links (useful for Linked Data)
+			// cf. http://www.w3.org/TR/cooluris/#linking
 			$params = array('script_name' => $script_name,
 							'php_self' => $php_self,
 							'return' => array());
