@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -96,6 +96,34 @@ class DocumentGroupFactory extends Error {
 			$this->nested_groups["".$this->flat_groups[$i]->getParentID()][] =& $this->flat_groups[$i];
 		}
 		return $this->nested_groups;
+	}
+
+	/**
+	 * getDocumentGroups - Return an array of DocumentGroup objects.
+	 *
+	 * @param	int	The stateid of DocumentGroups : default is public (1).
+	 * @return	array	The array of DocumentGroup.
+	 */
+	function &getDocumentGroups($stateid = 1) {
+		if ($this->flat_groups) {
+			return $this->flat_groups;
+		}
+
+		$this->flat_groups = array();
+
+		$result = db_query_params('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
+						array($this->Group->getID(), $stateid));
+		$rows = db_numrows($result);
+
+		if (!$result || $rows < 1) {
+			$this->setError(_('No Documents Folder Found').' '.db_error());
+		} else {
+			while ($arr = db_fetch_array($result)) {
+				$this->flat_groups[] = new DocumentGroup($this->Group, $arr);
+			}
+		}
+
+		return $this->flat_groups;
 	}
 }
 
