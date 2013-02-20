@@ -180,8 +180,8 @@ class doaprdfPlugin extends Plugin {
 		$php_self = $params['php_self'];
 		// really trigger only for real projects descriptions, not for the projects index
 		if ( ($script_name == '/projects') && (($php_self != '/projects') && ($php_self != '/projects/')) ) {
-			$params['return'][] = '<link rel="meta" type="application/rdf+xml" title="DOAP RDF Data" href=""/>';
-			$params['return'][] = '<link rel="meta" type="test/turtle" title="DOAP RDF Data" href=""/>';
+			$params['return'][] = '<link rel="alternate" type="application/rdf+xml" title="DOAP RDF Data" href=""/>';
+			$params['return'][] = '<link rel="alternate" type="test/turtle" title="DOAP RDF Data" href=""/>';
 		}
 	}
 	
