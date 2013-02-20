@@ -367,10 +367,15 @@ class Layout extends Error {
  	 * 		representations for Linked Data autodiscovery
  	 */
 	function headerLinkedDataAutodiscovery() {
-		// Only activated for /projects or /users for the moment
+
+		// retrieve the script's prefix
 		$script_name = getStringFromServer('SCRIPT_NAME');
-		$script_name = substr($script_name,0,strpos($script_name,'/',1));
+		$end = strpos($script_name,'/',1);
+		if($end) {
+			$script_name = substr($script_name,0,$end);
+		}
 		
+		// Only activated for /projects, /users or /softwaremap for the moment 
 		if ($script_name == '/projects' || $script_name == '/users' || $script_name == '/softwaremap') {
 
 			$php_self = getStringFromServer('PHP_SELF');
