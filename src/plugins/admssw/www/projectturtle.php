@@ -41,7 +41,7 @@ session_require_perm ('project_read', $group_id) ;
 $group = &group_get_object($group_id);
 $projectname = $group->getUnixName();
 
-$HTML->header(array('title'=>'ADMS.SW project meta-data preview','pagename'=>'projectturtle'));
+site_project_header(array('title'=>_('ADMS.SW project meta-data preview'), 'h1' => '', 'group'=>$group_id, 'toptab' => 'home', 'pagename'=>'projectturtle'));
 
 $plugin = plugin_get_object($pluginname);
 

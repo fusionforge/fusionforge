@@ -34,7 +34,8 @@ require_once $gfcommon.'include/pre.php';
 
 $pluginname = 'admssw';
 
-$HTML->header(array('title'=>'ADMS.SW','pagename'=>'trove'));
+$HTML->header(array('title'=>_('SKOS meta-data for trove categories'),'pagename'=>'trove'));
+$HTML->printSoftwareMapLinks();
 
 $plugin = plugin_get_object ($pluginname);
 

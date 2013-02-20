@@ -34,7 +34,8 @@ require_once $gfcommon.'include/pre.php';
 
 $pluginname = 'admssw';
 
-$HTML->header(array('title'=>'ADMS.SW','pagename'=>'admssw'));
+$HTML->header(array('title'=>_('ADMS.SW'),'pagename'=>'admssw'));
+$HTML->printSoftwareMapLinks();
 
 echo '<p>'._('Preview of RDF meta-data about the forge, conforming to the ADMS.SW specifications').'</p>';
 

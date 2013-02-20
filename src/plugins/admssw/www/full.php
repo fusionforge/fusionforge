@@ -55,7 +55,8 @@ if($content_type != $default_content_type) {
 		exit(0);
 	}
 } else {
-	$HTML->header(array('title'=>'Full ADMS.SW export','pagename'=>'admssw_full'));
+	$HTML->header(array('title'=>_('Full ADMS.SW export'),'pagename'=>'admssw_full'));
+	$HTML->printSoftwareMapLinks();
 	
 	echo '<p>'. _('This script is meant to produce machine-readable RDF meta-data, in Turtle or RDF/XML formats, which can be obtained with, for instance:').'<br />';
 	

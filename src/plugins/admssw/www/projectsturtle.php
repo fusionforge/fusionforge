@@ -34,7 +34,8 @@ require_once $gfcommon.'include/pre.php';
 
 $pluginname = 'admssw';
 
-$HTML->header(array('title'=>'ADMS.SW','pagename'=>'admssw'));
+$HTML->header(array('title'=>_('ADMS.SW meta-data index of public projects'),'pagename'=>'admssw'));
+$HTML->printSoftwareMapLinks();
 
 $plugin = plugin_get_object ($pluginname);
 
