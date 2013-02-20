@@ -76,7 +76,7 @@ class admsswPlugin extends Plugin {
 		}
 
 		$this->_addHook("project_rdf_metadata"); // will provide some RDF metadata for the project's DOAP profile to 'doaprdf' plugin		
-		$this->_addHook("alt_representations"); // supports conneg (content-negociation) for alternate representations of some scripts
+		$this->_addHook("alt_representations"); // declares a link to itself in the link+meta HTML headers of /projects and /softwaremap
 		$this->_addHook("script_accepted_types"); // supported alternate content-types (Accept HTTP header values)
 		$this->_addHook("content_negociated_projects_list"); // registers to be able to return content-negociated content for /projects/...
 		$this->_addHook("softwaremap_links"); // display additional submenu in the softwaremap tool
@@ -111,11 +111,18 @@ class admsswPlugin extends Plugin {
 	public function alt_representations (&$params) {
 		$script_name = $params['script_name'];
 		$php_self = $params['php_self'];
-		$php_self = substr($php_self,0,strpos($php_self,'/',1));
-		if ($php_self == '/projects' || $php_self == '/softwaremap') {
-			$params['return'][] = '<link rel="meta" type="application/rdf+xml" title="ADMS.SW RDF Data" href="'. util_make_url ("/projects") .'"/>';
-			$params['return'][] = '<link rel="meta" type="text/turtle" title="ADMS.SW RDF Data" href="'. util_make_url ("/projects") .'"/>';
+		if ($php_self == '/softwaremap/trove_list.php') {
+			$params['return'][] = '<link rel="alternate" type="application/rdf+xml" title="ADMS.SW RDF Data" href="'. util_make_url ("/plugins/admssw/trove.php") .'"/>';
+			$params['return'][] = '<link rel="alternate" type="text/turtle" title="ADMS.SW RDF Data" href="'. util_make_url ("/plugins/admssw/trove.php") .'"/>';
 		}
+		elseif ($script_name == '/softwaremap') {
+			$params['return'][] = '<link rel="alternate" type="application/rdf+xml" title="ADMS.SW RDF Data" href="'. util_make_url ("/projects") .'"/>';
+			$params['return'][] = '<link rel="alternate" type="text/turtle" title="ADMS.SW RDF Data" href="'. util_make_url ("/projects") .'"/>';
+		}
+		else if($script_name == '/projects') {
+			$params['return'][] = '<link rel="alternate" type="application/rdf+xml" title="ADMS.SW RDF Data" href="'. util_make_url ($php_self) .'"/>';
+			$params['return'][] = '<link rel="alternate" type="text/turtle" title="ADMS.SW RDF Data" href="'. util_make_url ($php_self) .'"/>';
+		} 
 	}
 	
 	/**
@@ -137,7 +144,7 @@ class admsswPlugin extends Plugin {
 	 */
 	public function project_after_description (&$params) {
 		$group_id = $params['group_id'];
-		print '<br />'. sprintf( _('View <a href="%1$s">ADMS.SW meta-data</a> about the project'), util_make_url ('/plugins/'. $this->name .'/projectturtle.php?group_id='.$group_id));
+		print '<br />'. sprintf( _('Preview <a href="%1$s">ADMS.SW meta-data</a> about the project'), util_make_url ('/plugins/'. $this->name .'/projectturtle.php?group_id='.$group_id));
 	}
 	
 	
