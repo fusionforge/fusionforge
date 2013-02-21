@@ -63,7 +63,7 @@ class doaprdfPlugin extends Plugin {
 		return $ns;
 	}
 	
-	function getProjectResourceIndex($group_id, &$ns) {
+	function getProjectResourceIndex($group_id, &$ns, $detailed = false) {
 
 		// connect to FusionForge internals
 		$pm = ProjectManager::instance();
@@ -115,6 +115,12 @@ class doaprdfPlugin extends Plugin {
 		// pass the resource in case it could be useful (read-only in principle)
 		$hook_params['in_Resource'] = $res;
 		$hook_params['out_Resources'] = array();
+		if ($detailed) {
+			$hook_params['details'] = 'full';
+		} 
+		else {
+			$hook_params['details'] = 'minimal';
+		}
 		plugin_hook_by_reference('project_rdf_metadata', $hook_params);
 		
 		// add new prefixes to the list
@@ -150,7 +156,7 @@ class doaprdfPlugin extends Plugin {
 
 			$ns = $this->doapNameSpaces();
 			
-			$merged_index = $this->getProjectResourceIndex($group_id, $ns);
+			$merged_index = $this->getProjectResourceIndex($group_id, $ns, $detailed = true);
 				
 			$conf = array(
 					'ns' => $ns,

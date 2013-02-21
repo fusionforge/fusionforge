@@ -187,14 +187,14 @@ class admsswPlugin extends Plugin {
 	 */
 	public function htmlPreviewProjectAsTurtle($group_id) {
 	
-		$resourceindex = $this->getProjectResourceIndex($group_id);
-
+		$detailed = true;
+		
 		$graph = new Graphite();
 	
 		$this->graphSetAdmsswNameSpaces($graph);
-		
-		$count = $graph->addTriples( ARC2::getTriplesFromIndex($resourceindex) );
-	
+
+		$resourceindex = $this->addProjectResourceToGraph($graph, $group_id, $detailed);
+			
 		return $graph->dump();
 	}
 	
@@ -203,14 +203,14 @@ class admsswPlugin extends Plugin {
 	 * 
 	 * @param int $group_id
 	 */
-	private function getProjectResourceIndex($group_id) {
+	private function addProjectResourceToGraph(&$graph, $group_id, $detailed = false) {
 
 		// part of the work is done by the doaprdf plugin, which will in turn call us back (see project_rdf_metadata)	
 		$doaprdfplugin = plugin_get_object ("doaprdf");
 		
 		$ns = $this->admsswNameSpaces();
 		
-		$resourceindex = $doaprdfplugin->getProjectResourceIndex($group_id, $ns);
+		$resourceindex = $doaprdfplugin->getProjectResourceIndex($group_id, $ns, $detailed);
 		
 		// update the namespaces if they happen to get updated in between
 		foreach($ns as $s => $u)
@@ -220,7 +220,9 @@ class admsswPlugin extends Plugin {
 			}
 		}
 		
-		return $resourceindex;
+		$count = $graph->addTriples( ARC2::getTriplesFromIndex($resourceindex) );
+		
+		return $graph;
 	}
 	
 	/**
@@ -242,6 +244,11 @@ class admsswPlugin extends Plugin {
 			if (! isset($params['prefixes'][$u])) {
 				$params['prefixes'][$u] = $s;
 			}
+		}
+		
+		$detailed = false;
+		if ($params['details'] == 'full') {
+			$detailed = true;
 		}
 		
 		// The ARC2 RDF_Resource already initialized by doaprdf plugin
@@ -386,6 +393,27 @@ class admsswPlugin extends Plugin {
 		rdfutils_setPropToUri($res, 'rdfs:seeAlso', util_make_url ('/frs/?group_id='.$group_id));
 		
 		$params['out_Resources'][] = $res;
+		
+		if ($detailed) {
+			$graph = new Graphite();
+			$this->graphSetAdmsswNameSpaces($graph);
+			
+			$this->addProjectFrsResourcesToGraph($graph, $group_id);
+			
+			$subjects = $graph->allSubjects();
+			foreach ($subjects as $subject) {
+				$resource = $graph->resource( $subject );
+				$triples = $resource->toArcTriples();
+				
+				$index = ARC2::getSimpleIndex($triples, false);
+				
+				$res = ARC2::getResource();
+				$res->setIndex($index);
+				
+				$params['out_Resources'][] = $res;				
+			}
+		}
+		
 
 	}
 	
@@ -440,16 +468,10 @@ class admsswPlugin extends Plugin {
 		$count = $graph->addTriples( ARC2::getTriplesFromIndex($res->index) );
 
 		// if needed, provide also full details about the projects
-		if($detailed) {
-			foreach ($projects as $row_grp) {
+		foreach ($projects as $row_grp) {
 				$group_id = $row_grp['group_id'];
 				//$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']);
-				$resindex = $this->getProjectResourceIndex($row_grp['group_id']);
-				$count = $graph->addTriples( ARC2::getTriplesFromIndex($resindex) );
-				
-				$this->addProjectFrsResourcesToGraph($graph, $group_id);
-				
-			}
+				$count = $this->addProjectResourceToGraph($graph, $row_grp['group_id'], $detailed);				
 		}
 		
 		$this->graphSetAdmsswNameSpaces($graph);

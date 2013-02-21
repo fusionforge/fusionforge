@@ -506,6 +506,7 @@ TODO : document Auth plugins :
   Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, 
                $hook_params['group'] : group_id of the project,
 			   $hook_params['in_Resource'] : (read-only) ARC2 resource already available,
+			   $hook_params['details'] : 'full' or 'minimal' whether requesting a detailed or minimal description
 			   $hook_params['out_Resources'] : (write) to be returned the new ARC2 resource 
   Description: returns in $params['prefixes'] and $params['out_Resources'] added prefixes and ARC2 RDF resource to be included in the project's DOAP description 
 
