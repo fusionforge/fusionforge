@@ -4,7 +4,7 @@
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -805,7 +805,8 @@ class projects_hierarchyPlugin extends Plugin {
 					WHERE status = $1
 					AND group_id != $2
 					AND group_id <> ALL ($3)
-					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $4);',
+					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $4)
+					AND group_id NOT IN (select sub_project_id from plugin_projects_hierarchy_relationship);',
 					array('A',
 						$group_id,
 						db_int_array_to_any_clause($family),
