@@ -800,7 +800,8 @@ class projects_hierarchyPlugin extends Plugin {
 					WHERE status = $1
 					AND group_id != $2
 					AND group_id <> ALL ($3)
-					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $4);',
+					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $4)
+					AND group_id NOT IN (select sub_project_id from plugin_projects_hierarchy_relationship);',
 					array('A',
 						$group_id,
 						db_int_array_to_any_clause($family),

@@ -4,6 +4,7 @@
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2013, French Ministry of Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -42,8 +43,8 @@ if (sizeof($parent) || sizeof($childs)) {
 
 		echo '<ul>';
 		foreach ($childs as $child) {
-			$childGroup = group_get_object($child[0]);
-			echo '<li>'._('Child project').' '.util_make_link('/projects/'.$childGroup->getUnixName(), $childGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
+			$childGroup = group_get_object($child);
+			echo '<li>'._('Child project').': '.util_make_link('/projects/'.$childGroup->getUnixName(), $childGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
 		}
 		echo '</ul>';
 	}
