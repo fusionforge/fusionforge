@@ -24,8 +24,15 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item('default_server', 'scmgit', forge_get_config ('web_host')) ;
-forge_define_config_item('repos_path', 'scmgit', forge_get_config('chroot').'/scmrepos/git') ;
+forge_define_config_item('default_server', 'scmgit', forge_get_config ('web_host'));
+forge_define_config_item('repos_path', 'scmgit', forge_get_config('chroot').'/scmrepos/git');
+forge_define_config_item('use_ssh', 'scmgit', false);
+forge_set_config_item_bool('use_ssh', 'scmgit');
+forge_define_config_item('use_dav', 'scmgit', true);
+forge_set_config_item_bool('use_dav', 'scmgit');
+forge_define_config_item('use_ssl', 'scmgit', true);
+forge_set_config_item_bool('use_ssl', 'scmgit');
+
 
 class GitPlugin extends SCMPlugin {
 	function GitPlugin() {
@@ -392,7 +399,13 @@ class GitPlugin extends SCMPlugin {
 				system ("chmod +x $main_repo/hooks/post-update") ;
 			}
 			system ("echo \"Git repository for $project_name\" > $main_repo/description") ;
-			system ("find $main_repo -type d | xargs chmod g+s") ;
+			system ("find $main_repo -type d | xargs chmod g+s");
+			if (forge_get_config('use_dav','scmgit')) {
+				$f = fopen(forge_get_config('config_path').'/httpd.conf.d/plugin-scmgit-dav.inc','a');
+				fputs($f,'Use Project '.$project_name."\n");
+				fclose($f);
+				system("service httpd reload");
+			}
 		}
 		if (forge_get_config('use_ssh','scmgit')) {
 			$unix_group = 'scm_' . $project_name ;
@@ -408,8 +421,8 @@ class GitPlugin extends SCMPlugin {
 		} else {
 			$unix_user = forge_get_config('apache_user');
 			$unix_group = forge_get_config('apache_group');
-			system ("chown -R $unix_user:$unix_group $main_repo") ;
-			system ("chmod -R g-rwx,o-rwx $main_repo") ;
+			system("chown -R $unix_user:$unix_group $main_repo");
+			system("chmod -R g-rwx,o-rwx $main_repo");
 		}
 
 		// Create project-wide secondary repositories
@@ -539,18 +552,30 @@ class GitPlugin extends SCMPlugin {
 		fwrite($config_f, "\$javascript = '". util_make_url('/plugins/scmgit/gitweb.js')."';\n");
 		fwrite($config_f, "\$prevent_xss = 'true';\n");
 		fclose($config_f);
-		chmod ($fname.'.new', 0644) ;
-		rename ($fname.'.new', $fname) ;
+		chmod($fname.'.new', 0644);
+		rename($fname.'.new', $fname);
 
-		$fname = $config_dir . '/gitweb.list' ;
+		$fname = $config_dir . '/gitweb.list';
+		$f = fopen($fname.'.new', 'w');
 
-		$f = fopen ($fname.'.new', 'w');
+		$engine = RBACEngine::getInstance();
 		foreach ($list as $project) {
-                        $repos = $this->getRepositories($rootdir . "/" .  $project->getUnixName());
-                        foreach ($repos as $repo) {
-                                $reldir = substr($repo, strlen($rootdir) + 1);
-			        fwrite($f, $reldir . "\n");
-                        }
+			$repos = $this->getRepositories($rootdir . "/" .  $project->getUnixName());
+			foreach ($repos as $repo) {
+				$reldir = substr($repo, strlen($rootdir) + 1);
+				fwrite($f, $reldir . "\n");
+			}
+			$users = $engine->getUsersByAllowedAction('scm',$project->getID(),'write');
+			$password_data = '';
+			foreach ($users as $user) {
+				$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n";
+			}
+			$faname = forge_get_config('data_path').'/gituser-authfile.'.$project->getUnixName();
+			$fa = fopen($faname.'.new', 'w');
+			fwrite($fa, $password_data);
+			fclose($fa);
+			chmod($faname.'.new', 0644);
+			rename($faname.'.new', $faname);
 		}
 		fclose($f);
 		chmod($fname.'.new', 0644);
