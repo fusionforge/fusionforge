@@ -4,7 +4,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -574,7 +574,7 @@ class SVNPlugin extends SCMPlugin {
 			return false;
 		}
 
-		if (in_array('scmsvn', $params['show'])) {
+		if (in_array('scmsvn', $params['show']) || (count($params['show']) < 1)) {
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
 			$d1 = date('Y-m-d', $start_time - 80000);
