@@ -197,30 +197,46 @@ class GitPlugin extends SCMPlugin {
 
 		system ("mkdir -p $repo") ;
 		if (!is_file ("$repo/HEAD") && !is_dir("$repo/objects") && !is_dir("$repo/refs")) {
-			system ("GIT_DIR=\"$repo\" git init --bare --shared=group") ;
-			system ("GIT_DIR=\"$repo\" git update-server-info") ;
-			if (is_file ("$repo/hooks/post-update.sample")) {
-				rename ("$repo/hooks/post-update.sample",
-					"$repo/hooks/post-update") ;
-			}
-			if (!is_file ("$repo/hooks/post-update")) {
-				$f = fopen ("$repo/hooks/post-update") ;
++			$tmp_repo = util_mkdtemp('.git', $project_name);
++			if ($tmp_repo == false) {
++				return false;
++			}
++			system ("GIT_DIR=\"$tmp_repo\" git init --bare --shared=group") ;
++			system ("GIT_DIR=\"$tmp_repo\" git update-server-info") ;
++			if (is_file ("$tmp_repo/hooks/post-update.sample")) {
++				rename ("$tmp_repo/hooks/post-update.sample",
++					"$tmp_repo/hooks/post-update") ;
++			}
++			if (!is_file ("$tmp_repo/hooks/post-update")) {
++				$f = fopen ("$tmp_repo/hooks/post-update") ;
+
 				fwrite ($f, "exec git-update-server-info\n") ;
 				fclose ($f) ;
 			}
-			if (is_file ("$repo/hooks/post-update")) {
-				system ("chmod +x $repo/hooks/post-update") ;
+			if (is_file ("$tmp_repo/hooks/post-update")) {
+				system ("chmod +x $tmp_repo/hooks/post-update") ;
 			}
-			system ("echo \"Git repository for $project_name\" > $repo/description") ;
-			system ("find $repo -type d | xargs chmod g+s") ;
+			system ("echo \"Git repository for $project_name\" > $tmp_repo/description") ;
+			system ("find $tmp_repo -type d | xargs chmod g+s") ;
+			system ("chgrp -R $unix_group $tmp_repo") ;
+			if ($project->enableAnonSCM()) {
+				system ("chmod g+wX,o+rX-w $root") ;
+				system ("chmod -R g+wX,o+rX-w $tmp_repo") ;
+			} else {
+				system ("chmod g+wX,o-rwx $root") ;
+				system ("chmod -R g+wX,o-rwx $tmp_repo") ;
+			}
+			if (!rename ($tmp_repo, $repo)) {
+				return false;
+			}
 		}
 
-		system ("chgrp -R $unix_group $root") ;
+		system ("chgrp $unix_group $root") ;
 		system ("chmod g+s $root") ;
 		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wX,o+rX-w $root") ;
+			system ("chmod g+wX,o+rX-w $root") ;
 		} else {
-			system ("chmod -R g+wX,o-rwx $root") ;
+			system ("chmod g+wX,o-rwx $root") ;
 		}
 	}
 

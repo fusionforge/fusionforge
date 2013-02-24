@@ -1,3 +1,11 @@
+fusionforge (5.0.3-2) UNRELEASED; urgency=low
+
+  * SECURITY: Avoid attacks with symbolic or hard links that could lead to
+    privilege escalation (CVE-2013-1423).  Thanks to Helmut Grohne for the
+    initial report and help in preparing the fix.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 19 Feb 2013 15:22:46 +0100
+
 fusionforge (5.0.3-1) unstable; urgency=low
 
   * New upstream bugfix release.

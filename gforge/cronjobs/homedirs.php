@@ -171,7 +171,7 @@ foreach($groups as $group) {
 		fwrite($fw,$contents);
 		fclose($fw);
 	}
-	system("chown -R $sys_apache_user:$sys_apache_group $groupdir_prefix/$group");
+	system("chown $sys_apache_user:$sys_apache_group $groupdir_prefix/$group");
 }
 
 
