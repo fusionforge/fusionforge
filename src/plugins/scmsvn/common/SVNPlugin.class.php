@@ -249,26 +249,45 @@ class SVNPlugin extends SCMPlugin {
 		$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
-			system ("svnadmin create $repo") ;
+			if (!mkdir($repo, 0700)) {
+				return false;
+			}
+			$ret = 0;
+			system ("svnadmin create $repo", $ret) ;
+			if ($ret != 0) {
+				return false;
+			}
+			if (forge_get_config('use_ssh', 'scmsvn')) {
+				$unix_group = 'scm_' . $project->getUnixName() ;
+				system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
+				if ($project->enableAnonSCM()) {
+					system ("chmod -R g+wX,o+rX-w $repo") ;
+				} else {
+					system ("chmod -R g+wX,o-rwx $repo") ;
+				}
+				system ("chgrp -R $unix_group $repo") ;
+			} else {
+				$unix_user = forge_get_config('apache_user');
+				$unix_group = forge_get_config('apache_group');
+				system ("chmod -R g-rwx,o-rwx $repo") ;
+				system ("chown -R $unix_user:$unix_group $repo") ;
+			}
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 		}
 
 		$this->installOrUpdateCmds($project, $project->getUnixName(), $repo);
 
 		if (forge_get_config('use_ssh', 'scmsvn')) {
-			$unix_group = 'scm_' . $project->getUnixName() ;
-			system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
-			system ("chgrp -R $unix_group $repo") ;
 			if ($project->enableAnonSCM()) {
-				system ("chmod -R g+wX,o+rX-w $repo") ;
+				system ("chmod g+wX,o+rX-w $repo") ;
 			} else {
-				system ("chmod -R g+wX,o-rwx $repo") ;
+				system ("chmod g+wX,o-rwx $repo") ;
 			}
 		} else {
 			$unix_user = forge_get_config('apache_user');
 			$unix_group = forge_get_config('apache_group');
-			system ("chown -R $unix_user:$unix_group $repo") ;
-			system ("chmod -R g-rwx,o-rwx $repo") ;
+			system ("chown $unix_user:$unix_group $repo") ;
+			system ("chmod g-rwx,o-rwx $repo") ;
 		}
 	}
 

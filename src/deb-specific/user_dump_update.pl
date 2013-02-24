@@ -79,6 +79,61 @@ while ($ln = pop(@userdump_array)) {
 # Begin functions
 ###############################################
 
+## Become this effective user (EUID/EGID) and perform this action.
+## 
+## This protect against symlink attacks; they are inevitable when
+## working in a directory owned by a local user.  We could naively
+## check for the presence of symlinks, but then we'd still be
+## vulnerable to a symlink race attack.
+## 
+## We'll use set_e_uid/set_e_gid for efficiency and simplicity
+## (e.g. we can get the return value directly), which is enough for
+## opening files and similar basic operations.  When calling external
+## programs, you should use fork&exec&setuid/setgid.
+## 
+# arg1: username
+# arg2: a Perl sub{}
+sub SudoEffectiveUser {
+    my $user = $_[0];
+    my $sub_unprivileged = $_[1];
+
+    my ($uid,$gid) = GetUserUidGid($user);
+    if ($uid eq "" or $gid eq "") {
+	print "Unknown user: $user";
+	return;
+    }
+
+    my $old_GID = $GID; # save additional groups
+    $! = '';
+    $EGID = "$gid $gid"; # set egid and additional groups
+    if ($! ne '') {
+	warn "Cannot setegid($gid $gid): $!";
+	return;
+    }
+    $EUID = $uid;
+    if ($! ne '') {
+	warn "Cannot seteuid($uid): $!";
+	return;
+    }
+
+    # Perform the action under this effective user:
+    my $ret = &$sub_unprivileged();
+
+    # Back to root
+    undef($EUID);     # restore euid==uid
+    $EGID = $old_GID; # restore egid==gid + additional groups
+
+    return $ret;
+}
+
+## Get system uid/gid
+sub GetUserUidGid {
+    my $user = $_[0];
+    my ($name,$passwd,$uid,$gid,
+	$quota,$comment,$gcos,$dir,$shell,$expire) = getpwnam($user);
+    return ($uid,$gid);
+}
+
 #############################
 # Helper Function
 #############################
@@ -106,8 +161,9 @@ sub add_user {
 	mkdir $home_dir, 0755;
         chown $uid, $gid, $home_dir;
 	
-	mkdir $home_dir.'/incoming', 0755;
-	chown $uid, $gid, $home_dir.'/incoming' ;
+	SudoEffectiveUser($username, sub {
+	    mkdir $home_dir.'/incoming', 0755;
+			  });
 }
 
 #############################
@@ -119,27 +175,14 @@ sub update_user {
 	
 	if($verbose){print("Updating Account for: $username\n")};
 	
-        $home_dir = $homedir_prefix.'/'.$username;
-	unless (-d $home_dir.'/incoming') {
-	    mkdir $home_dir.'/incoming', 0755;
-	}
-
-	my $realuid=get_file_owner_uid($home_dir);
-	if ($uid eq $realuid){
-        	system("chown $uid $home_dir/incoming");
-		system("chmod 0755 $home_dir/incoming");
-	} else {
-		if($verbose){print("Changing owner of $home_dir $realuid -> $uid\n")};
-        	system("chown -R $uid $home_dir");
-		system("chmod 0755 $home_dir/incoming");
-	}
-	my $realgid=get_file_owner_gid($home_dir);
-	if ($gid eq $realgid){
-        	system("chgrp $gid $home_dir/incoming");
-	} else {
-		if($verbose){print("Changing group of $home_dir $realgid -> $gid\n")};
-        	system("chgrp -R $gid $home_dir");
-	}
+	SudoEffectiveUser($username, sub {
+	    $home_dir = $homedir_prefix.'/'.$username;
+	    if (-d $home_dir.'/incoming') {
+		chmod 0755, $home_dir.'/incoming';
+	    } else {
+		mkdir $home_dir.'/incoming', 0755;
+	    }
+			  });
 }
 
 #############################

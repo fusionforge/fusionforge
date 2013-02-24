@@ -1580,6 +1580,72 @@ function util_sanitise_multiline_submission($text) {
 	return $text;
 }
 
+/**
+ * util_create_file_with_contents() — Securely create (or replace) a file with given contents
+ *
+ * @param	string	$path		Path of the file to be created
+ * @param	string	$contents	Contents of the file
+ *
+ * @return	boolean	FALSE on error
+ */
+function util_create_file_with_contents($path, $contents) {
+	if (file_exists($path) && !unlink($path)) {
+		return false;
+	}
+	$handle = fopen($path, "x+");
+	if ($handle == false) {
+		return false;
+	}
+	fwrite($handle, $contents);
+	fclose($handle);
+}
+
+/**
+ * Create a directory in the system temp directory with a hard-to-predict name.
+ * Does not have the guarantees of the actual BSD libc function or Python tempfile function.
+ * @param string $suffix Append to the new directory's name
+ * @param string $prefix Prepend to the new directory's name
+ * @return string The path of the new directory.
+ *
+ * Mostly taken from https://gist.github.com/1407245 as a "temporary"
+ * workaround to https://bugs.php.net/bug.php?id=49211
+ */
+function util_mkdtemp($suffix = '', $prefix = 'tmp') {
+	$tempdir = sys_get_temp_dir();
+	for ($i=0; $i<5; $i++) {
+		$id = strtr(base64_encode(openssl_random_pseudo_bytes(6)), '+/', '-_');
+		$path = "{$tempdir}/{$prefix}{$id}{$suffix}";
+		if (mkdir($path, 0700)) {
+			return $path;
+		}
+	}
+	return false;
+}
+
+/**
+ * Run a function with only the permissions of a given Unix user
+ * Function can be an anonymous
+ * Optional arguments in an array
+ * @param	string	Unix user name
+ * @param	function	function to run (possibly anonymous)
+ * @param	array	parameters
+ * @return	boolean	true on success, false on error
+ */
+function util_sudo_effective_user($username, $function, $params=array()) {
+	$saved_egid = posix_getegid();
+	$saved_euid = posix_geteuid();
+
+	$userinfo = posix_getpwnam($username);
+	if ($userinfo === False) {
+		return False;
+	}
+	if (posix_setegid($userinfo['gid']) && posix_seteuid($userinfo['uid'])) {
+		$function($params);
+	}
+
+	posix_setegid($saved_egid);
+	posix_seteuid($saved_euid);
+}
 
 // Local Variables:
 // mode: php

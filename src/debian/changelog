@@ -6,12 +6,15 @@ fusionforge (5.1.1-9) UNRELEASED; urgency=low
   * Fail configuration of the -db-postgresql package if no database is
     available, to prevent other packages from breaking things due to
     misconfiguration.
+  * SECURITY: Avoid attacks with symbolic or hard links that could lead to
+    privilege escalation (CVE-2013-1423).  Thanks to Helmut Grohne for the
+    initial report and help in preparing the fix.
 
   [ Thorsten Glaser ]
   * SECURITY: Upon user deletion, remove their Unix account as well
   * SECURITY: Do not disclose inaccessible groups on user_home/toplist
 
- -- Roland Mas <lolando@debian.org>  Fri, 21 Sep 2012 16:05:28 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 19 Feb 2013 15:16:47 +0100
 
 fusionforge (5.1.1-8) unstable; urgency=low
 
