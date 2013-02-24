@@ -404,7 +404,7 @@ class GitPlugin extends SCMPlugin {
 				$f = fopen(forge_get_config('config_path').'/httpd.conf.d/plugin-scmgit-dav.inc','a');
 				fputs($f,'Use Project '.$project_name."\n");
 				fclose($f);
-				system("service httpd reload");
+				system(forge_get_config('httpd_reload_cmd','scmgit'));
 			}
 		}
 		if (forge_get_config('use_ssh','scmgit')) {

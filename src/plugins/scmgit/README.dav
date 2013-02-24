@@ -1,7 +1,8 @@
 Git repositories can be available thru http dav protocol.
 To setup git thru dav, here are some steps you need to follow :
 1) set use_dav to yes and set use_ssh to no in scmgit.ini
-2) copy the httpd.conf.d/plugin-scmgit-dav.inc in your httpd config directory
-3) configure the httpd.conf.d/plugin-scmgit-dav.inc according to your installation
-4) restart httpd
-5) the cronjob should do the job now when you add new repository
+2) set httpd_reload_cmd in scmgit.ini according to your linux distribution
+3) copy the httpd.conf.d/plugin-scmgit-dav.inc in your httpd config directory
+4) configure the httpd.conf.d/plugin-scmgit-dav.inc according to your installation
+5) restart httpd
+6) the cronjob should do the job now when you add new repository
