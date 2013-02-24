@@ -837,7 +837,7 @@ class GitPlugin extends SCMPlugin {
 		if (! $project->usesPlugin($this->name)) {
 			return false;
 		}
-		if (in_array('scmgit', $params['show'])) {
+		if (in_array('scmgit', $params['show']) || (count($params['show']) < 1)) {
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
 			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
