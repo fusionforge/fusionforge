@@ -271,8 +271,42 @@ class GitPlugin extends SCMPlugin {
 		return $b ;
 	}
 
+	static function createUserRepo($params) {
+		$project = $params['project'];
+		$project_name = $project->getUnixName();
+		$user_name = $params['user_name'];
+		$unix_group = $params['unix_group'];
+		$main_repo = $params['main_repo'];
+		$root = $params['root'];
+
+		$repodir = $root . '/users/' .  $user_name . '.git' ;
+		chgrp ($repodir, $unix_group);
+		if ($project->enableAnonSCM()) {
+			chmod ($repodir, 02755);
+		} else {
+			chmod ($repodir, 02750);
+		}
+		if (!is_file ("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
+			system ("git clone --bare $main_repo $repodir") ;
+			system ("GIT_DIR=\"$repodir\" git update-server-info") ;
+			if (is_file ("$repodir/hooks/post-update.sample")) {
+				rename ("$repodir/hooks/post-update.sample",
+					"$repodir/hooks/post-update") ;
+			}
+			if (!is_file ("$repodir/hooks/post-update")) {
+				$f = fopen ("$repodir/hooks/post-update","x+") ;
+				fwrite ($f, "exec git-update-server-info\n") ;
+				fclose ($f) ;
+			}
+			if (is_file ("$repodir/hooks/post-update")) {
+				system ("chmod +x $repodir/hooks/post-update") ;
+			}
+			system("echo \"Git repository for user $user_name in project $project_name\" > $repodir/description");
+		}
+	}
+
 	function createOrUpdateRepo($params) {
-		$project = $this->checkParams($params);
+		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
 		}
@@ -288,42 +322,57 @@ class GitPlugin extends SCMPlugin {
 
 		$main_repo = $root . '/' .  $project_name . '.git' ;
 		if (!is_file ("$main_repo/HEAD") && !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs")) {
-			exec ("GIT_DIR=\"$main_repo\" git init --bare --shared=group", $result) ;
+			$tmp_repo = util_mkdtemp('.git', $project_name);
+			if ($tmp_repo == false) {
+				return false;
+			}
+			system ("GIT_DIR=\"$tmp_repo\" git init --bare --shared=group", $result) ;
 			$output .= join("<br />", $result);
 			$result = '';
-			exec ("GIT_DIR=\"$main_repo\" git update-server-info", $result) ;
+			system ("GIT_DIR=\"$tmp_repo\" git update-server-info", $result) ;
 			$output .= join("<br />", $result);
-			if (is_file ("$main_repo/hooks/post-update.sample")) {
-				rename ("$main_repo/hooks/post-update.sample",
-					"$main_repo/hooks/post-update") ;
+			if (is_file ("$tmp_repo/hooks/post-update.sample")) {
+				rename ("$tmp_repo/hooks/post-update.sample",
+					"$tmp_repo/hooks/post-update") ;
 			}
-			if (!is_file ("$main_repo/hooks/post-update")) {
-				$f = fopen ("$main_repo/hooks/post-update") ;
+			if (!is_file ("$tmp_repo/hooks/post-update")) {
+				$f = fopen ("$tmp_repo/hooks/post-update") ;
 				fwrite ($f, "exec git-update-server-info\n") ;
 				fclose ($f) ;
 			}
-			if (is_file ("$main_repo/hooks/post-update")) {
-				system ("chmod +x $main_repo/hooks/post-update") ;
+			if (is_file ("$tmp_repo/hooks/post-update")) {
+				system ("chmod +x $tmp_repo/hooks/post-update") ;
 			}
-			system ("echo \"Git repository for $project_name\" > $main_repo/description") ;
-			system ("find $main_repo -type d | xargs chmod g+s") ;
+			system ("echo \"Git repository for $project_name\" > $tmp_repo/description") ;
+			system ("find $tmp_repo -type d | xargs chmod g+s") ;
+			system ("chgrp -R $unix_group $tmp_repo") ;
+			if ($project->enableAnonSCM()) {
+				system ("chmod g+wX,o+rX-w $root") ;
+				system ("chmod -R g+wX,o+rX-w $tmp_repo") ;
+			} else {
+				system ("chmod g+wX,o-rwx $root") ;
+				system ("chmod -R g+wX,o-rwx $tmp_repo") ;
+			}
+			$ret = true;
+			system("mv $tmp_repo $main_repo", $ret);
+			if (!$ret) {
+				return false;
+			}
 		}
 		if (forge_get_config('use_ssh','scmgit')) {
 			$unix_group = 'scm_' . $project_name ;
-			system ("chgrp -R $unix_group $root") ;
-			system ("chmod g+s $root") ;
 			if ($project->enableAnonSCM()) {
 				system ("chmod g+wX,o+rX-w $root") ;
-				system ("chmod -R g+rwX,o+rX-w $main_repo") ;
+				system ("chmod g+rwX,o+rX-w $main_repo") ;
 			} else {
 				system ("chmod g+wX,o-rwx $root") ;
-				system ("chmod -R g+rwX,o-rwx $main_repo") ;
+				system ("chmod g+rwX,o-rwx $main_repo") ;
 			}
 		} else {
 			$unix_user = forge_get_config('apache_user');
 			$unix_group = forge_get_config('apache_group');
-			system ("chown -R $unix_user:$unix_group $main_repo") ;
-			system ("chmod -R g-rwx,o-rwx $main_repo") ;
+			system ("chown $unix_user:$unix_group $tmp_repo") ;
+			system ("chmod g-rwx,o-rwx $tmp_repo") ;
 		}
 
 		$result = db_query_params ('SELECT u.user_name FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
@@ -334,31 +383,27 @@ class GitPlugin extends SCMPlugin {
 			system ("mkdir -p $root/users") ;
 			$user_name = db_result($result,$i,'user_name');
 			$repodir = $root . '/users/' .  $user_name . '.git' ;
+			
+			if (!is_dir($repodir) && mkdir ($repodir, 0700)) {
+				chown ($repodir, $user_name) ;
 
-			if (!is_file ("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
-				system ("git clone --bare $main_repo $repodir") ;
-				system ("GIT_DIR=\"$repodir\" git update-server-info") ;
-				if (is_file ("$repodir/hooks/post-update.sample")) {
-					rename ("$repodir/hooks/post-update.sample",
-						"$repodir/hooks/post-update") ;
-				}
-				if (!is_file ("$repodir/hooks/post-update")) {
-					$f = fopen ("$repodir/hooks/post-update") ;
-					fwrite ($f, "exec git-update-server-info\n") ;
-					fclose ($f) ;
-				}
-				if (is_file ("$repodir/hooks/post-update")) {
-					system ("chmod +x $repodir/hooks/post-update") ;
-				}
-				system("echo \"Git repository for user $user_name in project $project_name\" > $repodir/description");
-				system ("chown -R $user_name:$unix_group $repodir") ;
+				$params = array();
+				$params['project'] = $project;
+				$params['user_name'] = $user_name;
+				$params['unix_group'] = $unix_group;
+				$params['root'] = $root;
+				$params['main_repo'] = $main_repo;
+
+				util_sudo_effective_user($user_name,
+							 array("GitPlugin","createUserRepo"),
+							 $params);
 			}
 		}
 		if (is_dir ("$root/users")) {
 			if ($project->enableAnonSCM()) {
-				system ("chmod -R g+rX-w,o+rX-w $root/users") ;
+				system ("chmod g+rX-w,o+rX-w $root/users") ;
 			} else {
-				system ("chmod -R g+rX-w,o-rwx $root/users") ;
+				system ("chmod g+rX-w,o-rwx $root/users") ;
 			}
 		}
 		$params['output'] = $output;

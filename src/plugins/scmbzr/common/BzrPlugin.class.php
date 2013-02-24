@@ -172,16 +172,27 @@ class BzrPlugin extends SCMPlugin {
 		}
 
 		if (!$repo_exists) {
-			system ("mkdir -p $repo") ;
-			system ("bzr init-repo --no-trees $repo >/dev/null") ;
-			system ("find $repo -type d | xargs chmod g+s") ;
-		}
+			$tmp_repo = util_mkdtemp('.bzr', $project_name);
+			if ($tmp_repo == false) {
+				return false;
+			}
 
-		system ("chgrp -R $unix_group $repo") ;
+			system ("bzr init-repo --no-trees $tmp_repo >/dev/null") ;
+			system ("find $tmp_repo/.bzr -type d | xargs chmod g+s") ;
+			system ("chmod -R g+wX,o+rX-w $tmp_repo/.bzr") ;
+			system ("chgrp $unix_group $tmp_repo/.bzr") ;
+
+			system ("mkdir -p $repo") ;
+			system ("chgrp $unix_group $repo") ;
+			system ("chmod g+s $repo") ;
+			system ("mv $tmp_repo/.bzr $repo/.bzr");
+			rmdir ($tmp_repo);
+		}
+			
 		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wX,o+rX-w $repo") ;
+			system ("chmod o+rX-w $repo") ;
 		} else {
-			system ("chmod -R g+wX,o-rwx $repo") ;
+			system ("chmod o-rwx $repo") ;
 		}
 	}
 
