@@ -351,6 +351,14 @@ class GitPlugin extends SCMPlugin {
 				system ("chmod -R g+wX,o-rwx $tmp_repo") ;
 			}
 			$ret = true;
+			/*
+			 * $main_repo can already exist, for example if it’s
+			 * not a directory or doesn’t contain a HEAD file or
+			 * an objects or refs subdirectory… move it out of
+			 * the way in these cases
+			 */
+			system("if test -e $main_repo || test -h $main_repo; then d=\$(mktemp -d $main_repo.scmgit-moved.XXXXXXXXXX) && mv -f $main_repo \$d/; fi");
+			/* here’s still a TOCTOU but we check $ret below */
 			system("mv $tmp_repo $main_repo", $ret);
 			if (!$ret) {
 				return false;
