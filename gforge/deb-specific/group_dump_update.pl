@@ -153,12 +153,12 @@ sub add_group {
 	$ht_dir = $group_dir."/htdocs";
 
         if ($is_public) {
-            $default_perms = 2775 ;
-            $file_default_perms = 664;
+            $default_perms = 02775 ;
+            $file_default_perms = 0664;
 	    $default_page = "/usr/share/gforge/lib/default_page.php" ;
         } else {
-            $default_perms = 2770 ;
-            $file_default_perms = 660;
+            $default_perms = 02770 ;
+            $file_default_perms = 0660;
 	    $default_page = "/usr/share/gforge/lib/private_default_page.php" ;
         }
 	
@@ -196,9 +196,9 @@ sub update_group {
 	$ht_dir = $group_dir."/htdocs";
 
 	if ($is_public) {
-	    $default_perms = 2775 ;
+	    $default_perms = 02775 ;
 	} else {
-	    $default_perms = 2771 ;
+	    $default_perms = 02771 ;
 	}
 
 	if ($verbose) {print("Updating Group: $gname\n")};
