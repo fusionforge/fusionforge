@@ -96,6 +96,56 @@ if (!is_dir(forge_get_config('ftp_upload_dir'))) {
 	@mkdir(forge_get_config('ftp_upload_dir'), 0755, true);
 }
 
+//
+//	Read in the template file
+//
+$fo=fopen(dirname(__FILE__).'/../utils/default_page.php','r');
+$default_contents = '';
+if (!$fo) {
+	$err .= 'Default Page Not Found';
+} else {
+	while (!feof($fo)) {
+		$default_contents .= fread($fo, 8192);
+	}
+	fclose($fo);
+}
+
+function create_dirs_and_files($params) {
+	$project = $params['project'];
+	$groupname = $project->getUnixName();
+	$default_contents = $parmas['default_contents'];
+
+	mkdir(forge_get_config('groupdir_prefix')."/".$groupname."/htdocs");
+	mkdir(forge_get_config('groupdir_prefix')."/".$groupname."/cgi-bin");
+
+	$contents = $default_contents;
+	//
+	//	Change some defaults in the template file
+	//
+	$contents=str_replace('##comment##', _('Default Web Page for groups that haven\'t setup their page yet'), $contents);
+	$contents=str_replace('##purpose##', _('Please replace this file with your own website'), $contents);
+	$contents=str_replace('##welcome_to##', sprintf(_('Welcome to %s'), $project->getPublicName()), $contents);
+	$contents=str_replace('##body##',
+			      sprintf(
+				      _("We're Sorry but this Project hasn't yet uploaded their personal webpage yet. <br /> Please check back soon for updates or visit <a href=\"%s\">the project page</a>."),
+				      util_make_url ('/projects/'.$project->getUnixName())),
+			      $contents);
+	//
+	//	Write the file back out to the project home dir
+	//
+	$fw=fopen(forge_get_config('groupdir_prefix')."/".$groupname."/htdocs/index.html",'w');
+	fwrite($fw,$contents);
+	fclose($fw);
+
+	if (forge_get_config('use_manual_uploads')) { 
+		$incoming = forge_get_config('groupdir_prefix')."/".$groupname."/incoming" ;
+		if (!is_dir($incoming))
+		{
+			mkdir($incoming); 
+		}
+	}
+}
+
 foreach($active_projects as $project) {
 	$groupname = $project->getUnixName();
 	//create an FTP upload dir for this project
@@ -107,49 +157,16 @@ foreach($active_projects as $project) {
 
 	if (!is_dir(forge_get_config('groupdir_prefix')."/".$groupname)) {
 		@mkdir(forge_get_config('groupdir_prefix')."/".$groupname);
-		@mkdir(forge_get_config('groupdir_prefix')."/".$groupname."/htdocs");
-		@mkdir(forge_get_config('groupdir_prefix')."/".$groupname."/cgi-bin");
-
-		//
-		//	Read in the template file
-		//
-		$fo = fopen(dirname(__FILE__).'/../utils/default_page.php', 'r');
-		$contents = '';
-		if (!$fo) {
-			$err .= 'Default Page Not Found';
-		} else {
-			while (!feof($fo)) {
-				$contents .= fread($fo, 8192);
-			}
-			fclose($fo);
-		}
-		//
-		//	Change some defaults in the template file
-		//
-		$contents = str_replace('##comment##', _('Default Web Page for groups that haven\'t setup their page yet'), $contents);
-		$contents = str_replace('##purpose##', _('Please replace this file with your own website'), $contents);
-		$contents = str_replace('##welcome_to##', sprintf(_('Welcome to %s'), $project->getPublicName()), $contents);
-		$contents = str_replace('##body##',
-			sprintf(
-				_("We're Sorry but this Project hasn't yet uploaded their personal webpage yet. <br /> Please check back soon for updates or visit <a href=\"%s\">the project page</a>."),
-				util_make_url('/projects/'.$project->getUnixName())),
-				      $contents);
-		//
-		//	Write the file back out to the project home dir
-		//
-		$fw = fopen(forge_get_config('groupdir_prefix').'/'.$groupname.'/htdocs/index.html', 'w');
-		fwrite($fw, $contents);
-		fclose($fw);
+		system("chown ".forge_get_config('apache_user').":".forge_get_config('apache_group')." ".forge_get_config('groupdir_prefix')."/".$groupname);
 	}
 
-	if (forge_get_config('use_manual_uploads')) {
-		$incoming = forge_get_config('groupdir_prefix').'/'.$groupname.'/incoming';
-		if (!is_dir($incoming)) {
-			@mkdir($incoming);
-		}
-	}
-
-	system('chown -R '.forge_get_config('apache_user').':'.forge_get_config('apache_group').' '.forge_get_config('groupdir_prefix').'/'.$groupname);
+	$params = array();
+	$params['project'] = $project;
+	$params['default_contents'] = $default_contents;
+	
+	util_sudo_effective_user(forge_get_config('apache_user'),
+				 "create_dirs_and_files",
+				 $params);
 }
 
 cron_entry(25,$err);

@@ -81,6 +81,61 @@ while ($ln = pop(@groupdump_array)) {
 # Begin functions
 ###############################################
 
+## Become this effective user (EUID/EGID) and perform this action.
+## 
+## This protect against symlink attacks; they are inevitable when
+## working in a directory owned by a local user.  We could naively
+## check for the presence of symlinks, but then we'd still be
+## vulnerable to a symlink race attack.
+## 
+## We'll use set_e_uid/set_e_gid for efficiency and simplicity
+## (e.g. we can get the return value directly), which is enough for
+## opening files and similar basic operations.  When calling external
+## programs, you should use fork&exec&setuid/setgid.
+## 
+# arg1: username
+# arg2: a Perl sub{}
+sub SudoEffectiveUser {
+    my $user = $_[0];
+    my $sub_unprivileged = $_[1];
+
+    my ($uid,$gid) = GetUserUidGid($user);
+    if ($uid eq "" or $gid eq "") {
+	print "Unknown user: $user";
+	return;
+    }
+
+    my $old_GID = $GID; # save additional groups
+    $! = '';
+    $EGID = "$gid $gid"; # set egid and additional groups
+    if ($! ne '') {
+	warn "Cannot setegid($gid $gid): $!";
+	return;
+    }
+    $EUID = $uid;
+    if ($! ne '') {
+	warn "Cannot seteuid($uid): $!";
+	return;
+    }
+
+    # Perform the action under this effective user:
+    my $ret = &$sub_unprivileged();
+
+    # Back to root
+    undef($EUID);     # restore euid==uid
+    $EGID = $old_GID; # restore egid==gid + additional groups
+
+    return $ret;
+}
+
+## Get system uid/gid
+sub GetUserUidGid {
+    my $user = $_[0];
+    my ($name,$passwd,$uid,$gid,
+	$quota,$comment,$gcos,$dir,$shell,$expire) = getpwnam($user);
+    return ($uid,$gid);
+}
+
 #############################
 # Group Add Function
 #############################
@@ -99,32 +154,35 @@ sub add_group {
 	$inc_dir = $group_dir."/incoming";
 
         if ($is_public) {
-            $default_perms = 2775 ;
-            $file_default_perms = 664;
+            $default_perms = 02775 ;
+            $file_default_perms = 0664;
 	    $default_page = "/usr/share/gforge/lib/default_page.php" ;
         } else {
-            $default_perms = 2770 ;
-            $file_default_perms = 660;
+            $default_perms = 02770 ;
+            $file_default_perms = 0660;
 	    $default_page = "/usr/share/gforge/lib/private_default_page.php" ;
         }
 	
 	if ($verbose) {print("Making a Group for : $gname\n")};
 		
-	mkdir $group_dir, $default_perms ;
-	mkdir $log_dir, $default_perms ;
-	mkdir $cgi_dir, $default_perms ;
-	mkdir $ht_dir, $default_perms ;
-	mkdir $inc_dir, $default_perms ;
-	system("cp $default_page $ht_dir/index.php");
-	# perl is sometime fucked to create with right permission
-	system("chmod $default_perms $group_dir");
-	system("chmod $default_perms $log_dir");
-	system("chmod $default_perms $cgi_dir");
-	system("chmod $default_perms $ht_dir");
-	system("chmod $default_perms $inc_dir");
-	system("chmod $file_default_perms $ht_dir/index.php");
-	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
-	chown $dummy_uid, $gid, ("$ht_dir/index.php");
+	if (mkdir $group_dir, $default_perms) {
+	    chown $dummy_uid, $gid, $group_dir ;
+
+	    SudoEffectiveUser($dummy_uid, sub {
+		mkdir $log_dir, $default_perms ;
+		mkdir $cgi_dir, $default_perms ;
+		mkdir $ht_dir, $default_perms ;
+		mkdir $inc_dir, $default_perms ;
+		system("cp $default_page $ht_dir/index.php");
+		# perl is sometime fucked to create with right permission
+		chmod $default_perms, $group_dir;
+		chmod $default_perms, $log_dir;
+		chmod $default_perms, $cgi_dir;
+		chmod $default_perms, $ht_dir;
+		chmod $default_perms, $inc_dir;
+		chmod $file_default_perms, "$ht_dir/index.php";
+			      });
+	}
 }
 
 #############################
@@ -143,34 +201,22 @@ sub update_group {
 	$inc_dir = $group_dir."/incoming";
 
 	if ($is_public) {
-	    $default_perms = 2775 ;
+	    $default_perms = 02775 ;
 	} else {
-	    $default_perms = 2771 ;
+	    $default_perms = 02771 ;
 	}
 
 	if ($verbose) {print("Updating Group: $gname\n")};
 		
-	system("chmod $default_perms $group_dir");
-	system("chmod $default_perms $log_dir");
-	system("chmod $default_perms $cgi_dir");
-	system("chmod $default_perms $ht_dir");
-	system("chmod $default_perms $inc_dir");
-	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir, $inc_dir);
-	
-	my $realuid=get_file_owner_uid($group_dir);
-	if ($dummy_uid eq $realuid){
-        	system("chown $dummy_uid $group_dir");
-	} else {
-		if($verbose){print("Changing owner of $group_dir $realuid -> $dummy_uid\n")};
-        	system("chown -R $dummy_uid $group_dir");
-	}
-	my $realgid=get_file_owner_gid($group_dir);
-	if ($gid eq $realgid){
-        	system("chgrp $gid $group_dir");
-	} else {
-		if($verbose){print("Changing group of $group_dir $realgid -> $gid\n")};
-        	system("chgrp -R $gid $group_dir");
-	}
+	chown $dummy_uid, $gid, $group_dir;
+
+	SudoEffectiveUser($dummy_uid, sub {
+	    chmod $default_perms, $group_dir;
+	    chmod $default_perms, $log_dir;
+	    chmod $default_perms, $cgi_dir;
+	    chmod $default_perms, $ht_dir;
+	    chmod $default_perms, $inc_dir;
+			  });	
 }
 
 #############################

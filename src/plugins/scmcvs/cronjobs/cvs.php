@@ -298,10 +298,9 @@ function update_cvs_repositories() {
                 if(!is_dir($cvsdir_prefix."/.deleted"))
                         system("mkdir ".$cvsdir_prefix."/.deleted");
 
-                system("mv -f $cvsdir_prefix/$deleted_group_name/ $cvsdir_prefix/.deleted/");
-                system("chown -R root:root $cvsdir_prefix/.deleted/$deleted_group_name");
-                system("chmod -R o-rwx $cvsdir_prefix/.deleted/$deleted_group_name");
-
+                system("tar czfC $cvsdir_prefix/.deleted/$deleted_group_name.tar.gz $cvsdir_prefix $deleted_group_name");
+                system("chmod o-rwx $cvsdir_prefix/.deleted/$deleted_group_name.tar.gz");
+                system("rm -rf $cvsdir_prefix/$deleted_group_name");
 
                 $res9 = db_query_params ('UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = $1',
 			array ($deleted_group_name));

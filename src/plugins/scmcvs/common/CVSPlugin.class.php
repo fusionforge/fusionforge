@@ -211,33 +211,54 @@ class CVSPlugin extends SCMPlugin {
 			$repo_exists = true ;
 		}
 
+		if (forge_get_config('use_shell')) {
+			$unix_group = 'scm_' . $project->getUnixName() ;
+		} else {
+			$unix_group = forge_get_config ('apache_user') ;
+		}
+
 		if (!$repo_exists) {
-			system ("cvs -d $repo init") ;
+			if (!mkdir($repo, 0700)) {
+				return false;
+			}
+			$ret = 0;
+			system ("cvs -d $repo init", $ret) ;
+			if ($ret != 0) {
+				return false;
+			}
 			system ("mkdir -p $locks_dir") ;
+			system ("chgrp $unix_group $locks_dir") ;
+			system ("chmod 3777 $locks_dir") ;
+			
+			if (forge_get_config('use_shell')) {
+				util_create_file_with_contents ("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
+				if ($project->enableAnonSCM()) {
+					util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
+					util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous:\n");
+					system ("chmod -R g+wXs,o+rX-w $repo") ;
+				} else {
+					util_create_file_with_contents ("$repo/CVSROOT/readers", "\n");
+					util_create_file_with_contents ("$repo/CVSROOT/passwd", "\n");
+					system ("chmod -R g+wXs,o-rwx $repo") ;
+				}
+				system ("chgrp -R $unix_group $repo") ;
+			} else {
+				$unix_user = forge_get_config ('apache_user') ;
+				system ("chmod -R g-rwx,o-rwx $repo") ;
+				system ("chown -R $unix_user:$unix_group $repo") ;
+			}
 		}
 
 		if (forge_get_config('use_shell')) {
-			$unix_group = 'scm_' . $project->getUnixName() ;
-
-			system ("chgrp -R $unix_group $repo $locks_dir") ;
-			system ("chmod 3777 $locks_dir") ;
-			system ("echo \"SystemAuth=no\" > $repo/CVSROOT/config");
-			system ("echo \"LockDir=$locks_dir\" >> $repo/CVSROOT/config");
-			system ("echo \"UseNewInfoFmtStrings=yes\" >> $repo/CVSROOT/config");
 			if ($project->enableAnonSCM()) {
-				system ("chmod -R g+wXs,o+rX-w $repo") ;
-				system ("echo \"anonymous\" > $repo/CVSROOT/readers");
-				system ("echo \"anonymous:\" > $repo/CVSROOT/passwd");
+				util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
+				util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous:\n");
+				system ("chmod g+wXs,o+rX-w $repo") ;
 			} else {
-				system ("chmod -R g+wXs,o-rwx $repo") ;
-				system ("echo \"\" > $repo/CVSROOT/readers");
-				system ("echo \"\" > $repo/CVSROOT/passwd");
+				util_create_file_with_contents ("$repo/CVSROOT/readers", "\n");
+				util_create_file_with_contents ("$repo/CVSROOT/passwd", "\n");
+				system ("chmod g+wXs,o-rwx $repo") ;
 			}
-		} else {
-			$unix_user = forge_get_config ('apache_user') ;
-			$unix_group = forge_get_config ('apache_user') ;
-			system ("chown -R $unix_user:$unix_group $repo") ;
-			system ("chmod -R g-rwx,o-rwx $repo") ;
 		}
 	}
 
