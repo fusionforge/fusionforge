@@ -157,8 +157,10 @@ class BzrPlugin extends SCMPlugin {
 			return false;
 		}
 
+		$project_name = $project->getUnixName();
+
 		$repo = forge_get_config('repos_path', 'scmbzr') . '/' . $project->getUnixName() ;
-		$unix_group = 'scm_' . $project->getUnixName() ;
+		$unix_group = 'scm_' . $project_name ;
 
 		$repo_exists = false ;
 		if (is_dir ($repo)) {

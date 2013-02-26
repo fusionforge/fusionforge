@@ -320,17 +320,22 @@ class GitPlugin extends SCMPlugin {
 		system ("mkdir -p $root");
 		$output = '';
 
+		if (forge_get_config('use_ssh','scmgit')) {
+			$unix_group = 'scm_' . $project_name ;
+		} else {
+			$unix_group = forge_get_config('apache_group');
+		}
+
 		$main_repo = $root . '/' .  $project_name . '.git' ;
 		if (!is_file ("$main_repo/HEAD") && !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs")) {
 			$tmp_repo = util_mkdtemp('.git', $project_name);
 			if ($tmp_repo == false) {
 				return false;
 			}
-			system ("GIT_DIR=\"$tmp_repo\" git init --bare --shared=group", $result) ;
-			$output .= join("<br />", $result);
-			$result = '';
-			system ("GIT_DIR=\"$tmp_repo\" git update-server-info", $result) ;
-			$output .= join("<br />", $result);
+			$result = system ("GIT_DIR=\"$tmp_repo\" git init --bare --shared=group") ;
+			$output .= join("<br />", array($result));
+			$result = system ("GIT_DIR=\"$tmp_repo\" git update-server-info") ;
+			$output .= join("<br />", array($result));
 			if (is_file ("$tmp_repo/hooks/post-update.sample")) {
 				rename ("$tmp_repo/hooks/post-update.sample",
 					"$tmp_repo/hooks/post-update") ;
@@ -360,7 +365,6 @@ class GitPlugin extends SCMPlugin {
 			}
 		}
 		if (forge_get_config('use_ssh','scmgit')) {
-			$unix_group = 'scm_' . $project_name ;
 			if ($project->enableAnonSCM()) {
 				system ("chmod g+wX,o+rX-w $root") ;
 				system ("chmod g+rwX,o+rX-w $main_repo") ;
@@ -370,9 +374,8 @@ class GitPlugin extends SCMPlugin {
 			}
 		} else {
 			$unix_user = forge_get_config('apache_user');
-			$unix_group = forge_get_config('apache_group');
-			system ("chown $unix_user:$unix_group $tmp_repo") ;
-			system ("chmod g-rwx,o-rwx $tmp_repo") ;
+			system ("chown $unix_user:$unix_group $main_repo") ;
+			system ("chmod g-rwx,o-rwx $main_repo") ;
 		}
 
 		$result = db_query_params ('SELECT u.user_name FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',

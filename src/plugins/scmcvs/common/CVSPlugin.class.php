@@ -211,6 +211,12 @@ class CVSPlugin extends SCMPlugin {
 			$repo_exists = true ;
 		}
 
+		if (forge_get_config('use_shell')) {
+			$unix_group = 'scm_' . $project->getUnixName() ;
+		} else {
+			$unix_group = forge_get_config ('apache_user') ;
+		}
+
 		if (!$repo_exists) {
 			if (!mkdir($repo, 0700)) {
 				return false;
@@ -225,8 +231,6 @@ class CVSPlugin extends SCMPlugin {
 			system ("chmod 3777 $locks_dir") ;
 			
 			if (forge_get_config('use_shell')) {
-				$unix_group = 'scm_' . $project->getUnixName() ;
-				
 				util_create_file_with_contents ("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
 				if ($project->enableAnonSCM()) {
 					util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
@@ -240,7 +244,6 @@ class CVSPlugin extends SCMPlugin {
 				system ("chgrp -R $unix_group $repo") ;
 			} else {
 				$unix_user = forge_get_config ('apache_user') ;
-				$unix_group = forge_get_config ('apache_user') ;
 				system ("chmod -R g-rwx,o-rwx $repo") ;
 				system ("chown -R $unix_user:$unix_group $repo") ;
 			}
