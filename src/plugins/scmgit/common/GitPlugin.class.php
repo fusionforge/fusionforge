@@ -361,7 +361,7 @@ class GitPlugin extends SCMPlugin {
 			system("if test -e $main_repo || test -h $main_repo; then d=\$(mktemp -d $main_repo.scmgit-moved.XXXXXXXXXX) && mv -f $main_repo \$d/; fi");
 			/* here’s still a TOCTOU but we check $ret below */
 			system("mv $tmp_repo $main_repo", $ret);
-			if (!$ret) {
+			if ($ret != 0) {
 				return false;
 			}
 		}
