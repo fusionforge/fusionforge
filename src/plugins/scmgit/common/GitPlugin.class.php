@@ -363,7 +363,7 @@ class GitPlugin extends SCMPlugin {
 		$root = $params['root'];
 
 		$repodir = $root . '/users/' .  $user_name . '.git' ;
-		chgrp ($repodir, $unix_group);
+		system("su - $user_name -c 'chgrp $unix_group $repodir'");
 		if ($project->enableAnonSCM()) {
 			chmod ($repodir, 02755);
 		} else {
