@@ -360,7 +360,7 @@ class GitPlugin extends SCMPlugin {
 			}
 			$ret = true;
 			system("mv $tmp_repo $main_repo", $ret);
-			if (!$ret) {
+			if ($ret != 0) {
 				return false;
 			}
 		}
