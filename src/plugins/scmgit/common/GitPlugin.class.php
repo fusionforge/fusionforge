@@ -318,6 +318,9 @@ class GitPlugin extends SCMPlugin {
 		$project_name = $project->getUnixName();
 		$root = forge_get_config('repos_path', 'scmgit') . '/' . $project_name ;
 		system ("mkdir -p $root");
+		/* create main repository */
+		$repo_desc = "Main git repository for " .
+		    forge_get_config('forge_name') . " project $project_name";
 		$output = '';
 
 		if (forge_get_config('use_ssh','scmgit')) {
@@ -349,7 +352,7 @@ class GitPlugin extends SCMPlugin {
 			if (is_file ("$tmp_repo/hooks/post-update")) {
 				system ("chmod +x $tmp_repo/hooks/post-update") ;
 			}
-			system ("echo \"Git repository for $project_name\" > $tmp_repo/description") ;
+			system ("echo \"$repo_desc\" >$tmp_repo/description") ;
 			system ("find $tmp_repo -type d | xargs chmod g+s") ;
 			system ("chgrp -R $unix_group $tmp_repo") ;
 			if ($project->enableAnonSCM()) {
