@@ -1614,7 +1614,7 @@ function util_create_file_with_contents($path, $contents) {
 function util_mkdtemp($suffix = '', $prefix = 'tmp') {
 	$tempdir = sys_get_temp_dir();
 	for ($i=0; $i<5; $i++) {
-		$id = strtr(base64_encode(openssl_random_pseudo_bytes(6)), '+/', '-_');
+		$id = strtr(base64_encode(util_randbytes(6)), '+/', '-_');
 		$path = "{$tempdir}/{$prefix}{$id}{$suffix}";
 		if (mkdir($path, 0700)) {
 			return $path;
