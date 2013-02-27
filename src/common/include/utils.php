@@ -1638,6 +1638,7 @@ function util_create_file_with_contents($path, $contents) {
 	}
 	fwrite($handle, $contents);
 	fclose($handle);
+	return true;
 }
 
 /**
