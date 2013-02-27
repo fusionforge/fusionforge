@@ -1640,12 +1640,16 @@ function util_sudo_effective_user($username, $function, $params=array()) {
 	if ($userinfo === False) {
 		return False;
 	}
-	if (posix_setegid($userinfo['gid']) && posix_seteuid($userinfo['uid'])) {
+	if (posix_setegid($userinfo['gid']) &&
+	    ($saved_euid != 0 || posix_initgroups($username, $userinfo['gid'])) &&
+	    posix_seteuid($userinfo['uid'])) {
 		$function($params);
 	}
 
 	posix_setegid($saved_egid);
 	posix_seteuid($saved_euid);
+	if ($saved_euid == 0)
+		posix_initgroups("root", 0);
 }
 
 // Local Variables:
