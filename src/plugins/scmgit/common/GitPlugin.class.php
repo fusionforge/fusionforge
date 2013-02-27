@@ -352,6 +352,7 @@ class GitPlugin extends SCMPlugin {
 			if (is_file ("$tmp_repo/hooks/post-update")) {
 				system ("chmod +x $tmp_repo/hooks/post-update") ;
 			}
+			system ("ln -sf /etc/gforge/plugins/scmgit/post-receive-email.sh $tmp_repo/hooks/post-receive") ;
 			system ("echo \"$repo_desc\" >$tmp_repo/description") ;
 			system ("find $tmp_repo -type d | xargs chmod g+s") ;
 			system ("chgrp -R $unix_group $tmp_repo") ;
