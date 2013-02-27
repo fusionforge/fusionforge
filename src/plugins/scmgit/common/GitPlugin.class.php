@@ -387,6 +387,9 @@ class GitPlugin extends SCMPlugin {
 			system ("chmod g-rwx,o-rwx $main_repo") ;
 		}
 
+		util_create_file_with_contents("$root/ffgroup.nfo", $project_name);
+		system("chown 0 $root/ffgroup.nfo; chmod 644 $root/ffgroup.nfo");
+
 		$result = db_query_params ('SELECT u.user_name FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
 					   array ($project->getID(),
 						  'A')) ;
