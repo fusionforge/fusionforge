@@ -12,7 +12,26 @@ else
     lockfile-touch $LOCK &
     LOCKPID=$!
     trap "kill $LOCKPID ; lockfile-remove $LOCK" exit
-        
+
+	# Create /etc/gforge/shell.inc
+	(
+		echo '# THIS FILE IS GENERATED, DO NOT MODIFY'
+		php -r '
+			require_once "/usr/share/gforge/common/include/env.inc.php";
+			require_once $gfcommon."include/pre.php";
+
+			$mapping = array(
+				"domain_name" => array("web_host", "core"),
+				"lists_host" => array("lists_host", "core"),
+				"sys_name" => array("forge_name", "core"),
+			    );
+			foreach ($mapping as $key => $where) {
+				printf("%s %s\n", $key,
+				    forge_get_config($where[0], $where[1]));
+			}
+		    '
+	) >/etc/gforge/shell.inc
+
 	# Fill ldap tables
 	# Should be safe to comment this soon
 	# Be sure the system user are created before creating homes
