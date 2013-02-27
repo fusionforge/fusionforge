@@ -1750,6 +1750,7 @@ function util_create_file_with_contents($path, $contents) {
 	}
 	fwrite($handle, $contents);
 	fclose($handle);
+	return true;
 }
 
 /**
@@ -1765,7 +1766,7 @@ function util_create_file_with_contents($path, $contents) {
 function util_mkdtemp($suffix = '', $prefix = 'tmp') {
 	$tempdir = sys_get_temp_dir();
 	for ($i=0; $i<5; $i++) {
-		$id = strtr(base64_encode(openssl_random_pseudo_bytes(6)), '+/', '-_');
+		$id = strtr(base64_encode(util_randbytes(6)), '+/', '-_');
 		$path = "{$tempdir}/{$prefix}{$id}{$suffix}";
 		if (mkdir($path, 0700)) {
 			return $path;
@@ -1791,12 +1792,16 @@ function util_sudo_effective_user($username, $function, $params=array()) {
 	if ($userinfo === False) {
 		return False;
 	}
-	if (posix_setegid($userinfo['gid']) && posix_seteuid($userinfo['uid'])) {
+	if (posix_setegid($userinfo['gid']) &&
+	    ($saved_euid != 0 || posix_initgroups($username, $userinfo['gid'])) &&
+	    posix_seteuid($userinfo['uid'])) {
 		$function($params);
 	}
 
 	posix_setegid($saved_egid);
 	posix_seteuid($saved_euid);
+	if ($saved_euid == 0)
+		posix_initgroups("root", 0);
 }
 
 // Local Variables:
