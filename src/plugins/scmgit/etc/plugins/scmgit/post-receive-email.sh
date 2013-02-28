@@ -1,7 +1,7 @@
 #!/bin/mksh
 # Copyright © 2011, 2012
 #	Thorsten Glaser <t.glaser@tarent.de>
-# Part of FusionForge.
+# Part of FusionForge. Licenced under GNU GPLv2 or later.
 #
 # This script can only be used in EvolvisForge configured git repositories
 # for a (forge) project.
