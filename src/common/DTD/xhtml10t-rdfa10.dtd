@@ -12,7 +12,7 @@
    Copyright (c) 1998-2002 W3C (MIT, INRIA, Keio),
    All Rights Reserved.
 
-   Copyright (c) 2011 Thorsten Glaser <t.glaser@tarent.de>
+   Copyright (c) 2011, 2012 Thorsten Glaser <t.glaser@tarent.de>
    HTML 4 (loose) + RDFa 1.0 by: Shane McCarron <shane@aptest.com>
 
    This DTD module is covered by the same licence as the W3C published
@@ -911,6 +911,7 @@
   %focus;
   shape       %Shape;        "rect"
   coords      %Coords;       #IMPLIED
+  href        %URI;          #IMPLIED
   nohref      (nohref)       #IMPLIED
   alt         %Text;         #REQUIRED
   target      %FrameTarget;  #IMPLIED
