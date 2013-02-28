@@ -151,6 +151,10 @@ class scmhookPlugin extends Plugin {
 					$this->displayScmHgHook($hooksAvailable, $statusDeploy, $hooksEnabled);
 					break;
 				}
+				case "scmgit": {
+					$this->displayScmGitHook($hooksAvailable, $statusDeploy, $hooksEnabled);
+					break;
+				}
 				default: {
 					echo '<div class="warning">'._('SCM Type not supported yet by scmhook').'</div>';
 					break;
@@ -467,6 +471,67 @@ class scmhookPlugin extends Plugin {
 				echo $hookServePushPullBundle->getName();
 				echo '</td><td>';
 				echo $hookServePushPullBundle->getDescription();
+				echo '</td></tr>';
+			}
+			echo $HTML->listTableBottom();
+		}
+	}
+	function displayScmGitHook($hooksAvailable, $statusDeploy, $hooksEnabled) {
+		global $HTML;
+		$hooksPostReceive = array();
+		foreach ($hooksAvailable as $hook) {
+			switch ($hook->getHookType()) {
+				case "post-receive": {
+					$hooksPostReceive[] = $hook;
+					break;
+				}
+				default: {
+					//byebye hook.... we do not know you...
+					break;
+				}
+			}
+		}
+		if (count($hooksPostReceive)) {
+			echo '<h3>'._('post-receive Hooks').'</h3>';
+			$tabletop = array('', _('Hook Name'), _('Description'));
+			$classth = array('unsortable', '', '');
+			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_post-receive', 'sortable', $classth);
+			foreach ($hooksPostReceive as $hookPostReceive) {
+				$isdisabled = 0;
+				if (! empty($hookPostReceive->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
+					echo '<tr style="display: none;" ><td>';
+				}
+				else {
+					echo '<tr><td>';
+				}
+				echo '<input type="checkbox" ';
+				echo 'name="'.$hookPostReceive->getLabel().'_'.$hookPostReceive->getClassname().'" ';
+				if (in_array($hookPostReceive->getClassname(), $hooksEnabled))
+					echo ' checked="checked"';
+
+				if ($statusDeploy) {
+					$isdisabled = 1;
+					echo ' disabled="disabled"';
+				}
+
+				if (!$isdisabled && !$hookPostReceive->isAvailable())
+					echo ' disabled="disabled"';
+
+				echo ' />';
+				if (in_array($hookPostReceive->getClassname(), $hooksEnabled) && $statusDeploy) {
+					echo '<input type="hidden" ';
+					echo 'name="'.$hookPostReceive->getLabel().'_'.$hookPostReceive->getClassname().'" ';
+					echo 'value="on" />';
+				}
+
+				echo '</td><td';
+				if (!$hookPostReceive->isAvailable())
+					echo ' class="tabtitle-w" title="'.$hookPostReceive->getDisabledMessage().'"';
+
+				echo ' >';
+				echo $hookPostReceive->getName();
+				echo '</td><td>';
+				echo $hookPostReceive->getDescription();
 				echo '</td></tr>';
 			}
 			echo $HTML->listTableBottom();

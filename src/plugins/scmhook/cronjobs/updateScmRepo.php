@@ -2,6 +2,7 @@
 /**
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2013, Benoit Debaenst - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -90,6 +91,23 @@ while ($row = db_fetch_array($res)) {
 			$params['hooksString'] = $row['hooks'];
 			$params['scm_root'] = forge_get_config('repos_path', 'scmhg') . '/' . $group->getUnixName();
 			if ($scmhgcronjob->updateScmRepo($params)) {
+				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
+				if (!$res) {
+					$returnvalue = false;
+				}
+			}
+			break;
+		}
+		case 'scmgit': {
+			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
+			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
+			global $gitdir_prefix;
+			$scmgitcronjob = new ScmGitUpdateScmRepo();
+			$params = array();
+			$params['group_id'] = $group_id;
+			$params['hooksString'] = $row['hooks'];
+			$params['scm_root'] = forge_get_config('repos_path', 'scmgit') . '/' . $group->getUnixName() . '/' . $group->getUnixName() . '.git' ;
+			if ($scmgitcronjob->updateScmRepo($params)) {
 				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
 				if (!$res) {
 					$returnvalue = false;
