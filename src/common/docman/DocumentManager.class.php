@@ -3,7 +3,7 @@
  * FusionForge document manager
  *
  * Copyright 2011-2012, Franck Villaume - TrivialDev
- * Copyright 2013, French Ministry of Education
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
