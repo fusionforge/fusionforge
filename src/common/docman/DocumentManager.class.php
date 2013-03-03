@@ -4,7 +4,7 @@
  *
  * Copyright 2011-2012, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, French Ministry of Education
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -236,7 +236,7 @@ class DocumentManager extends Error {
 			case "json": {
 				$returnString = '{';
 				for ($i=0; $i<$rows; $i++) {
-					$returnString .= '\''.util_html_secure($text_array[$i]).'\':'.$id_array[$i].',';
+					$returnString .= '\''.util_html_secure(addslashes($text_array[$i]).'\':'.$id_array[$i].',';
 				}
 				$returnString .= '}';
 				break;
