@@ -233,7 +233,7 @@ class DocumentManager extends Error {
 			case "json": {
 				$returnString = '{';
 				for ($i=0; $i<$rows; $i++) {
-					$returnString .= '\''.util_html_secure($text_array[$i]).'\':'.$id_array[$i].',';
+					$returnString .= '\''.util_html_secure(addslashes($text_array[$i]).'\':'.$id_array[$i].',';
 				}
 				$returnString .= '}';
 				break;
