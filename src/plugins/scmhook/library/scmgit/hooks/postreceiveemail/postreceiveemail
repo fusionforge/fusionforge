@@ -1,5 +1,8 @@
 #!/bin/sh
 #
+# Copyright 2013, Benoit Debaenst - TrivialDev
+# Part of FusionForge. Licenced under GNU GPLv2 or later.
+#
 # Copyright (c) 2007 Andy Parkins
 #
 # An example hook script to mail out commit update information.  This hook
