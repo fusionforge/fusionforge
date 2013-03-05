@@ -113,11 +113,14 @@ sub open_array_file {
 #############################
 sub write_array_file {
         my ($file_name, @file_array) = @_;
+	my $oldmask = umask(077);
 
         use File::Temp qw(tempfile);
         use File::Basename qw(dirname);
 
         my ($fd, $filename) = tempfile( DIR => dirname($file_name), UNLINK => 0) ;
+	umask($oldmask);
+
 	return 1 unless ($fd && $filename) ;
 
         foreach (@file_array) { 

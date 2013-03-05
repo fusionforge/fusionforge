@@ -4,7 +4,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -251,8 +251,30 @@ class SVNPlugin extends SCMPlugin {
 		$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
-			system("svnadmin create $repo") ;
-			system("svn mkdir -m 'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null");
+			if (!mkdir($repo, 0700)) {
+				return false;
+			}
+			$ret = 0;
+			system ("svnadmin create $repo", $ret);
+			if ($ret != 0) {
+				return false;
+			}
+			if (forge_get_config('use_ssh', 'scmsvn')) {
+				$unix_group = 'scm_' . $project->getUnixName() ;
+				system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
+				if ($project->enableAnonSCM()) {
+					system ("chmod -R g+wX,o+rX-w $repo") ;
+				} else {
+					system ("chmod -R g+wX,o-rwx $repo") ;
+				}
+				system ("chgrp -R $unix_group $repo") ;
+			} else {
+				$unix_user = forge_get_config('apache_user');
+				$unix_group = forge_get_config('apache_group');
+				system ("chmod -R g-rwx,o-rwx $repo") ;
+				system ("chown -R $unix_user:$unix_group $repo") ;
+			}
+			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 		}
 
 		$this->installOrUpdateCmds($project, $project->getUnixName(), $repo);
@@ -262,20 +284,20 @@ class SVNPlugin extends SCMPlugin {
 			system("find $repo -type d | xargs -I{} chmod g+s {}");
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$unix_user = forge_get_config('apache_user');
-				system("chown -R $unix_user:$unix_group $repo");
+				system("chown $unix_user:$unix_group $repo");
 			} else {
-				system("chgrp -R $unix_group $repo");
+				system("chgrp $unix_group $repo");
 			}
 			if ($project->enableAnonSCM()) {
-				system("chmod -R g+wX,o+rX-w $repo");
+				system("chmod g+wX,o+rX-w $repo") ;
 			} else {
-				system("chmod -R g+wX,o-rwx $repo");
+				system("chmod g+wX,o-rwx $repo") ;
 			}
 		} else {
 			$unix_user = forge_get_config('apache_user');
 			$unix_group = forge_get_config('apache_group');
-			system("chown -R $unix_user:$unix_group $repo");
-			system("chmod -R g-rwx,o-rwx $repo");
+			system("chown $unix_user:$unix_group $repo") ;
+			system("chmod g-rwx,o-rwx $repo") ;
 		}
 	}
 
@@ -552,7 +574,7 @@ class SVNPlugin extends SCMPlugin {
 			return false;
 		}
 
-		if (in_array('scmsvn', $params['show'])) {
+		if (in_array('scmsvn', $params['show']) || (count($params['show']) < 1)) {
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
 			$d1 = date('Y-m-d', $start_time - 80000);

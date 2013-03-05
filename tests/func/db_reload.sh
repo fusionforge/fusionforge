@@ -103,3 +103,12 @@ then
 else
 	service httpd start
 fi
+
+echo "Flushing/restarting nscd"
+rm -f /var/cache/nscd/* || true
+if type invoke-rc.d 2>/dev/null
+then
+    invoke-rc.d nscd restart || true
+else
+    service nscd restart || true
+fi

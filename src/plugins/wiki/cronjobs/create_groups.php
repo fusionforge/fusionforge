@@ -63,7 +63,17 @@ $groups_dir = "$upload_path/groups";
 if (!is_dir($groups_dir))
 	system("mkdir -p $groups_dir");
 
+function populate_initial_wiki($params) {
+	$template_groups = $params['template_groups'];
+	$name = $params['name'];
+	$groups_dir = $params['groups_dir'];
 
+	if (isset($template_groups) && !empty($template_groups))
+		system("(cd $basedir/$template_groups ; tar cf - --exclude=.svn *) |" .
+		       " (cd $groups_dir/$name; tar xf -)");
+}
+
+$userinfo = posix_getpwnam($file_owner);
 while ( $row = db_fetch_array($res) ) {
 	if ($first_letter) {
 		$name = $row["unix_group_name"][0]."/".$row["unix_group_name"];
@@ -73,16 +83,24 @@ while ( $row = db_fetch_array($res) ) {
 
 	if (!is_dir("$groups_dir/$name")) {
 		system("mkdir -p $groups_dir/$name");
+		system("chown $file_owner $groups_dir/$name");
 
-		if (isset($template_groups) && !empty($template_groups))
-			system("(cd $basedir/$template_groups ; tar cf - --exclude=.svn *) |" .
-					" (cd $groups_dir/$name; tar xf -)");
+		$params = array();
+		$params['template_groups'] = $template_groups;
+		$params['name'] = $name;
+		$params['groups_dir'] = $groups_dir;
+		
+		util_sudo_effective_user($file_owner,
+					 "populate_initial_wiki",
+					 $params);
 	}
 }
 
-system("chown $file_owner -R $groups_dir/.");
-system("find $groups_dir/. -type d -exec chmod 700 {} \;");
-system("find $groups_dir/. -type f -exec chmod 600 {} \;");
+util_sudo_effective_user($file_owner,
+			 function() use ($groups_dir) {
+				 system("find $groups_dir -type d -exec chmod 700 {} \;");
+				 system("find $groups_dir -type f -exec chmod 600 {} \;");
+			 });
 
 cron_entry(901,$err);
 ?>

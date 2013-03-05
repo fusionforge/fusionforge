@@ -112,7 +112,7 @@ ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-bui
 ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "[ -e /var/lib/gforge/.bazaar/bazaar.conf ] && sed -i -e s,https://,http://,g /var/lib/gforge/.bazaar/bazaar.conf"
-ssh root@$HOST "service nscd stop"
+ssh root@$HOST "service nscd restart"
 
 # Dump database
 echo "Dump freshly installed database"

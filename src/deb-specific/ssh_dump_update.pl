@@ -104,22 +104,21 @@ while ($ln = pop(@ssh_array)) {
 	if($verbose){print ("Processing $username\n")};
 
 	if (-d "$homedir_prefix/$username"){
-		if (! -d $ssh_dir) {
-			mkdir $ssh_dir, 0755;
-                        chown $uid, $uid, $ssh_dir;
-		}
-	
-		if($verbose){print("Writing authorized_keys for $username: ")};
+		chown $uid, $uid, ("$homedir_prefix/$username");
 	
 		SudoEffectiveUser($username, sub {
+		    if (! -d $ssh_dir) {
+			mkdir $ssh_dir, 0755;
+		    }
+		    
+		    if($verbose){print("Writing authorized_keys for $username: ")};
+		    
 		    if (write_array_file("$ssh_dir/authorized_keys", @user_authorized_keys)) {
                         warn "Problem writing authorized_keys for $username\n";
                         next;
 		    }
+		    chmod 0644, "$ssh_dir/authorized_keys";
 				  });
-
-		chown $uid, $uid, ("$homedir_prefix/$username", $ssh_dir, "$ssh_dir/authorized_keys");
-		chmod 0644, "$ssh_dir/authorized_keys";
 
 		if($verbose){print ("Done\n")};
 	} else {
@@ -155,13 +154,11 @@ while ($ln = pop(@ssh_array)) {
 	if (-d $ssh_dir) {
 	    if($verbose){print("Resetting authorized_keys for $username: ")};
 
-	    if (-l "$ssh_dir") {
-		warn("$ssh_dir is a symlink, possible symlink attack!");
-	    } else {
+	    SudoEffectiveUser($username, sub {
 		unlink("$ssh_dir/authorized_keys");
-	    }
-	    system("chown $uid:$uid $homedir_prefix/$username");
-	    system("chown $uid:$uid $ssh_dir");
+			      });
+
+	    chown $uid, $uid, "$homedir_prefix/$username";
 
 	    if($verbose){print ("Done\n")};
 	}
