@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2001-2002, 2009, Roland Mas
  * Copyright 2004-2005, GForge, LLC
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -432,9 +433,9 @@ function session_require($req, $reason='') {
  *	fails checks.
  *
  */
-function session_require_perm ($section, $reference, $action = NULL, $reason='') {
-	if (!forge_check_perm ($section, $reference, $action)) {
-		exit_permission_denied ($reason,'');
+function session_require_perm($section, $reference, $action = NULL, $reason='') {
+	if (!forge_check_perm($section, $reference, $action)) {
+		exit_permission_denied($reason, $section);
 	}
 }
 
@@ -445,13 +446,13 @@ function session_require_perm ($section, $reference, $action = NULL, $reason='')
  *	fails checks.
  *
  */
-function session_require_global_perm ($section, $action = NULL, $reason='') {
-	if (!forge_check_global_perm ($section, $action)) {
+function session_require_global_perm($section, $action = NULL, $reason='') {
+	if (!forge_check_global_perm($section, $action)) {
 		if (!$reason) {
-			$reason = sprintf (_('Permission denied. The %s administrators will have to grant you permission to view this page.'),
+			$reason = sprintf(_('Permission denied. The %s administrators will have to grant you permission to view this page.'),
 					   forge_get_config ('forge_name')) ;
 		}
-		exit_permission_denied ($reason,'');
+		exit_permission_denied($reason, $section);
 	}
 }
 

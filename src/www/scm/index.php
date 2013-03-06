@@ -3,6 +3,7 @@
  * SCM Frontend
  *
  * Copyright 2004 (c) Roland Mas, Tim Perdue -GForge LLC
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -29,6 +30,8 @@ $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 }
+
+session_require_perm('scm', $group_id, 'read');
 
 // Check if there is an associated scm plugin and issue a warning if none.
 $scm_plugin = '';
