@@ -5,6 +5,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2003, Guillaume Smet
  * Copyright 2009, Roland Mas
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -56,6 +57,11 @@ class MailingListFactory extends Error {
 		}
 		if ($Group->isError()) {
 			$this->setError('MailingListFactory:: '.$Group->getErrorMessage());
+			return false;
+		}
+		if (!$Group->usesMail()) {
+			$this->setError(sprintf(_('%s does not use the Mailing-list tool'),
+			    $Group->getPublicName()));
 			return false;
 		}
 		$this->Group =& $Group;

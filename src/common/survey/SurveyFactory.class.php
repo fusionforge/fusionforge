@@ -5,6 +5,7 @@
  * Copyright 2004, Sung Kim/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -54,9 +55,13 @@ class SurveyFactory extends Error {
 			$this->setError(_('No valid Group Object'));
 			return false;
 		}
-
 		if ($Group->isError()) {
 			$this->setError(_('Survey').':: '.$Group->getErrorMessage());
+			return false;
+		}
+		if (!$Group->usesSurvey()) {
+			$this->setError(sprintf(_('%s does not use the Survey tool'),
+			    $Group->getPublicName()));
 			return false;
 		}
 		$this->Group =& $Group;
