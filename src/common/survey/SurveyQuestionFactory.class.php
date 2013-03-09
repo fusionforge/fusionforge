@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Sung Kim/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -54,6 +55,11 @@ class SurveyQuestionFactory extends Error {
 		}
 		if ($Group->isError()) {
 			$this->setError(_('Survey').':: '.$Group->getErrorMessage());
+			return false;
+		}
+		if (!$Group->usesSurvey()) {
+			$this->setError(sprintf(_('%s does not use the Survey tool'),
+			    $Group->getPublicName()));
 			return false;
 		}
 		$this->Group =& $Group;
