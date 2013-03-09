@@ -6,6 +6,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -598,6 +599,17 @@ class Forum extends Error {
 			return false;
 		}
 
+		$project_name = $this->Group->getUnixName();
+		$result_list_samename = db_query_params('SELECT 1 FROM mail_group_list WHERE list_name=$1 AND group_id=$2',
+
+							array($project_name.'-'.strtolower($forum_name),
+								$this->Group->getID()));
+
+		if (db_numrows($result_list_samename) > 0){
+			$this->setError(_('Mailing List Exists with same name'));
+			return false;
+		}
+		
 		$res = db_query_params('UPDATE forum_group_list SET
 			forum_name=$1,
 			description=$2,
