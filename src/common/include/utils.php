@@ -8,6 +8,7 @@
  * Copyright (c) 2010, 2011, 2012
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -1298,37 +1299,41 @@ function util_ensure_value_in_set ($value, $set) {
 
 function check_email_available($group, $email, &$response) {
 	// Check if a mailing list with same name already exists
-	$mlFactory = new MailingListFactory($group);
-	if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
-		$response .= $mlFactory->getErrorMessage();
-		return false;
-	}
-	$mlArray = $mlFactory->getMailingLists();
-	if ($mlFactory->isError()) {
-		$response .= $mlFactory->getErrorMessage();
-		return false;
-	}
-	for ($j = 0; $j < count($mlArray); $j++) {
-		$currentList =& $mlArray[$j];
-		if ($email == $currentList->getName()) {
-			$response .= _('Error: a mailing list with the same email address already exists.');
+	if ($group->usesMail()) {
+		$mlFactory = new MailingListFactory($group);
+		if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
+			$response .= $mlFactory->getErrorMessage();
 			return false;
+		}
+		$mlArray = $mlFactory->getMailingLists();
+		if ($mlFactory->isError()) {
+			$response .= $mlFactory->getErrorMessage();
+			return false;
+		}
+		for ($j = 0; $j < count($mlArray); $j++) {
+			$currentList =& $mlArray[$j];
+			if ($email == $currentList->getName()) {
+				$response .= _('Error: a mailing list with the same email address already exists.');
+				return false;
+			}
 		}
 	}
 
 	// Check if a forum with same name already exists
-	$ff = new ForumFactory($group);
-	if (!$ff || !is_object($ff) || $ff->isError()) {
-		$response .= $ff->getErrorMessage();
-		return false;
-	}
-	$farr = $ff->getForums();
-	$prefix = $group->getUnixName() . '-';
-	for ($j = 0; $j < count($farr); $j++) {
-		if (is_object($farr[$j])) {
-			if ($email == $prefix . $farr[$j]->getName()) {
-				$response .= _('Error: a forum with the same email address already exists.');
-				return false;
+	if ($group->usesForum()) {
+		$ff = new ForumFactory($group);
+		if (!$ff || !is_object($ff) || $ff->isError()) {
+			$response .= $ff->getErrorMessage();
+			return false;
+		}
+		$farr = $ff->getForums();
+		$prefix = $group->getUnixName() . '-';
+		for ($j = 0; $j < count($farr); $j++) {
+			if (is_object($farr[$j])) {
+				if ($email == $prefix . $farr[$j]->getName()) {
+					$response .= _('Error: a forum with the same email address already exists.');
+					return false;
+				}
 			}
 		}
 	}
