@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (c) 2011, 2012
  *	Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -433,7 +434,8 @@ function db_result_seek($qhandle,$row) {
  *	@param		int		Query result set handle.
  *	@return boolean True on success
  */
-function db_result_reset($qhandle,$row) {
+ //TODO : remove the second param if no one use it.
+function db_result_reset($qhandle,$row = 0) {
 	return db_result_seek($qhandle,0);
 }
 
