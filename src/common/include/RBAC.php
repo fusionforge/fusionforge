@@ -865,14 +865,16 @@ abstract class BaseRole extends Error {
 		$new_pa['tracker'] = array () ;
 		foreach ($projects as $p) {
 			$atf = new ArtifactTypeFactory ($p) ;
-			$trackerids = $atf->getAllArtifactTypeIds () ;
-			foreach ($trackerids as $tid) {
-				if (array_key_exists ('tracker', $this->perms_array)
-				    && array_key_exists ($tid, $this->perms_array['tracker']) ) {
-					$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid] ;
-				} elseif (array_key_exists ('new_tracker', $this->perms_array)
-					  && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
-					$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()] ;
+			if (!$atf->isError()) {
+				$trackerids = $atf->getAllArtifactTypeIds () ;
+				foreach ($trackerids as $tid) {
+					if (array_key_exists ('tracker', $this->perms_array)
+					    && array_key_exists ($tid, $this->perms_array['tracker']) ) {
+						$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid] ;
+					} elseif (array_key_exists ('new_tracker', $this->perms_array)
+						  && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
+						$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()] ;
+					}
 				}
 			}
 		}
