@@ -1598,6 +1598,7 @@ class Group extends Error {
 		//
 
 		if ($this->usesForum()) {
+			$ff = new ForumFactory($this);
 			$f_arr = $ff->getForums();
 			foreach ($f_arr as $i) {
 				if (!is_object($i)) {
