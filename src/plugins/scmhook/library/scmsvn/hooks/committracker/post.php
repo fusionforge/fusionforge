@@ -1,11 +1,12 @@
 #! /usr/bin/php
 <?php
 /**
- * GForge Plugin SVNTracker HTTPPoster
+ * Fusionforge Plugin SVNTracker HTTPPoster
  *
  * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -115,13 +116,14 @@ USAGE;
 
 $repository = $argv[1];
 $revision   = $argv[2];
+$svn_tracker_debug = 0;
 
 $UserName = trim(`svnlook author -r $revision $repository`); //username of author
 $date    = trim(`svnlook date -r $revision $repository`); //date
 $log     = trim(`svnlook log -r $revision $repository`); // the log
 $changed = trim(`svnlook changed -r $revision $repository | sed 's/[A-Z]*   //'`); // the filenames
 
-if ($svn_tracker_debug) {
+if (isset($svn_tracker_debug) && $svn_tracker_debug == 1) {
 	fwrite($file,"Vars filled:\n");
 	fwrite($file,"username :  " . $UserName . " \n");
 	fwrite($file,"date :  " . $date . " \n");
