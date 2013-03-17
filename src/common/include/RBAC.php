@@ -4,7 +4,7 @@
  *
  * Copyright 2004, GForge, LLC
  * Copyright 2009-2010, Roland Mas
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -865,6 +865,9 @@ abstract class BaseRole extends Error {
 		$new_sa['tracker'] = array () ;
 		$new_pa['tracker'] = array () ;
 		foreach ($projects as $p) {
+			if (!$p->usesTracker()) {
+				continue;
+			}
 			$atf = new ArtifactTypeFactory ($p) ;
 			if (!$atf->isError()) {
 				$trackerids = $atf->getAllArtifactTypeIds () ;
@@ -904,6 +907,9 @@ abstract class BaseRole extends Error {
 		$new_sa['pm'] = array () ;
 		$new_pa['pm'] = array () ;
 		foreach ($projects as $p) {
+			if (!$p->usesPM()) {
+				continue;
+			}
 			$pgf = new ProjectGroupFactory ($p) ;
 			$pgids = $pgf->getAllProjectGroupIds () ;
 			foreach ($pgids as $gid) {
