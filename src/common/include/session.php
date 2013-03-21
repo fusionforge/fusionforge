@@ -53,6 +53,11 @@ function session_build_session_token($user_id) {
 	$session_serial = $user_id.'-*-'.time().'-*-'.getStringFromServer('REMOTE_ADDR').'-*-'.getStringFromServer('HTTP_USER_AGENT');
 	$session_serial_hash = md5($session_serial.forge_get_config('session_key'));
 	$session_serial_token = base64_encode($session_serial).'-*-'.$session_serial_hash;
+	/*
+	 * TODO: would be better to use HMAC-SHA256 via
+	 * http://www.php.net/manual/en/function.hash-hmac.php
+	 * or do this using Keccak (SHA-3) which is its own MAC
+	 */
 	return $session_serial_token;
 }
 
