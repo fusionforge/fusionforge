@@ -5,7 +5,7 @@
  *
  * The rest Copyright 2002-2005 (c) GForge Team
  * Copyright 2012, Franck Villaume - TrivialDev
- * http://fusionforge.org/
+ * Copyright © 2013 Thorsten Glaser, tarent solutions GmbH
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -24,8 +24,8 @@
  */
 
 /*
-This file creates blank user home directories and 
-creates a group home directory with a template in it.
+ * This file creates blank user home directories and
+ * creates a group home directory with a template in it.
 
 #
 # * hosts
@@ -49,130 +49,127 @@ creates a group home directory with a template in it.
 	<IfModule apache_ssl.c>
 		SSLDisable
 	</IfModule>
-</VirtualHost> 
+</VirtualHost>
+
 */
+
 require_once dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
-setup_gettext_from_sys_lang();	
-define('USER_DEFAULT_GROUP','users');
-//error variable
+setup_gettext_from_sys_lang();
+define('USER_DEFAULT_GROUP', 'users');
+// error variable
 $err = '';
 
-if (forge_get_config('groupdir_prefix') == '') {		// this should be set in configuration
-	exit () ;
+/*
+ * check whether directory preficēs are set
+ * and create the præfix directories unless they exist
+ */
+
+if (!($gpfx = forge_get_config('groupdir_prefix'))) {
+	// this should be set in configuration
+	exit();
 }
 
-if (!is_dir(forge_get_config('groupdir_prefix'))) {
-	@mkdir(forge_get_config('groupdir_prefix'),0755,true);
+if (!is_dir($gpfx)) {
+	@mkdir($gpfx, 0755, true);
 }
 
-if (forge_get_config('homedir_prefix') == '') {		// this should be set in configuration
-	exit () ;
+if (!($hpfx = forge_get_config('homedir_prefix'))) {
+	// this should be set in configuration
+	exit();
 }
 
-if (!is_dir(forge_get_config('homedir_prefix'))) {
-	@mkdir(forge_get_config('homedir_prefix'),0755,true);
+if (!is_dir($hpfx)) {
+	@mkdir($hpfx, 0755, true);
 }
 
-$active_projects = group_get_active_projects() ;
-$unames = array () ;
-foreach ($active_projects as $project) {
-	foreach ($project->getUsers() as $u) {
-		$unames[] = $u->getUnixName() ;
+if (forge_get_config('use_ftp_uploads')) {
+	if (!($fpfx = forge_get_config('ftp_upload_dir'))) {
+		// this should be set in the configuration
+		exit();
 	}
-}
-$unames = array_unique ($unames) ;
-foreach($unames as $uname) {
-	if (is_dir(forge_get_config('homedir_prefix')."/".$uname)) {
-		
-	} else {
-		@mkdir(forge_get_config('homedir_prefix')."/".$uname);
+
+	if (!is_dir($fpfx)) {
+		@mkdir($fpfx, 0755, true);
 	}
-	system("chown $uname:".USER_DEFAULT_GROUP." ".forge_get_config('homedir_prefix')."/".$uname);
-}
-
-//test if the FTP upload dir exists and create it if not
-if (!is_dir(forge_get_config('ftp_upload_dir'))) {
-	@mkdir(forge_get_config('ftp_upload_dir'),0755,true);
-}
-
-//
-//	Read in the template file
-//
-$fo=fopen(dirname(__FILE__).'/../utils/default_page.php','r');
-$default_contents = '';
-if (!$fo) {
-	$err .= 'Default Page Not Found';
 } else {
+	/* signal that we do not use FTP */
+	$fpfx = false;
+}
+
+/* read in the group home template file */
+$contents = '';
+if (($fo = fopen(dirname(__FILE__) . '/../utils/default_page.php', 'r'))) {
 	while (!feof($fo)) {
-		$default_contents .= fread($fo, 8192);
+		$contents .= fread($fo, 8192);
 	}
 	fclose($fo);
+} else {
+	$err .= 'Default Page not found';
 }
 
-function create_dirs_and_files($params) {
-	$project = $params['project'];
-	$groupname = $project->getUnixName();
-	$default_contents = $parmas['default_contents'];
+/* create user homes */
 
-	mkdir(forge_get_config('groupdir_prefix')."/".$groupname."/htdocs");
-	mkdir(forge_get_config('groupdir_prefix')."/".$groupname."/cgi-bin");
-
-	$contents = $default_contents;
-	//
-	//	Change some defaults in the template file
-	//
-	$contents=str_replace('##comment##', _('Default Web Page for groups that haven\'t setup their page yet'), $contents);
-	$contents=str_replace('##purpose##', _('Please replace this file with your own website'), $contents);
-	$contents=str_replace('##welcome_to##', sprintf(_('Welcome to %s'), $project->getPublicName()), $contents);
-	$contents=str_replace('##body##',
-			      sprintf(
-				      _("We're Sorry but this Project hasn't yet uploaded their personal webpage yet. <br /> Please check back soon for updates or visit <a href=\"%s\">the project page</a>."),
-				      util_make_url ('/projects/'.$project->getUnixName())),
-			      $contents);
-	//
-	//	Write the file back out to the project home dir
-	//
-	$fw=fopen(forge_get_config('groupdir_prefix')."/".$groupname."/htdocs/index.html",'w');
-	fwrite($fw,$contents);
-	fclose($fw);
-
-	if (forge_get_config('use_manual_uploads')) { 
-		$incoming = forge_get_config('groupdir_prefix')."/".$groupname."/incoming" ;
-		if (!is_dir($incoming))
-		{
-			mkdir($incoming); 
-		}
+$active_projects = group_get_active_projects();
+$unames = array();
+foreach ($active_projects as $project) {
+	foreach ($project->getUsers() as $u) {
+		$unames[] = $u->getUnixName();
 	}
 }
+$unames = array_unique($unames);
+foreach ($unames as $uname) {
+	$uhome = $hpfx . "/" . $uname;
+	if (!is_dir($uhome)) {
+		@mkdir($uhome);
+	}
+	system("chown $uname:" . USER_DEFAULT_GROUP . " " . $uhome);
+}
 
-foreach($active_projects as $project) {
+/* create project/group homes */
+
+foreach ($active_projects as $project) {
 	$groupname = $project->getUnixName() ;
-	//create an FTP upload dir for this project
-	if (forge_get_config('use_ftp_uploads')) { 
-		if (!is_dir(forge_get_config('ftp_upload_dir').'/'.$groupname)) {
-			@mkdir(forge_get_config('ftp_upload_dir').'/'.$groupname); 
+
+	if ($fpfx && !is_dir($fpfx . '/' . $groupname)) {
+		@mkdir($fpfx . '/' . $groupname);
+		//XXX chown/chgrp/chmod?
+	}
+
+	$ghome = $gpfx . '/' . $groupname;
+	if (!is_dir($ghome)) {
+		@mkdir($ghome);
+		/* this is safe as this directory still belongs to root */
+		@mkdir($ghome . '/htdocs');
+		@mkdir($ghome . '/cgi-bin');
+
+		/* write substituted template to group home */
+		if (($fw = fopen($ghome . '/htdocs/index.html', 'w'))) {
+			fwrite($fw, str_replace('##comment##',
+			    _('Default Web Page for groups that haven\'t setup their page yet'),
+			    str_replace('##purpose##',
+			    _('Please replace this file with your own website'),
+			    str_replace('##welcome_to##',
+			    sprintf(_('Welcome to %s'), $project->getPublicName()),
+			    str_replace('##body##',
+			    sprintf(_("We're Sorry but this Project hasn't yet uploaded their personal webpage yet. <br /> Please check back soon for updates or visit <a href=\"%s\">the project page</a>."),
+			    util_make_url('/projects/' . $project->getUnixName())),
+			    $contents)))));
+			fclose($fw);
 		}
+
+		if (forge_get_config('use_manual_uploads')) {
+			@mkdir($ghome . '/incoming');
+		}
+
+		//system('chmod -R ug=rwX,o=rX ' . $ghome);
+		system('chown -R ' . forge_get_config('apache_user') . ':' .
+		    forge_get_config('apache_group') . ' ' . $ghome);
+		// find $ghome -type d -print0 | xargs -0 chmod g+s
+		//XXX disabled because, why is this owned by apache_group?
 	}
-
-	if (is_dir(forge_get_config('groupdir_prefix')."/".$groupname)) {
-
-	} else {
-		@mkdir(forge_get_config('groupdir_prefix')."/".$groupname);
-		system("chown ".forge_get_config('apache_user').":".forge_get_config('apache_group')." ".forge_get_config('groupdir_prefix')."/".$groupname);
-	}
-
-	$params = array();
-	$params['project'] = $project;
-	$params['default_contents'] = $default_contents;
-	
-	util_sudo_effective_user(forge_get_config('apache_user'),
-				 "create_dirs_and_files",
-				 $params);
 }
 
 cron_entry(25,$err);
-
-?>
