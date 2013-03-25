@@ -38,6 +38,7 @@ sub forge_get_config ($$) {
 }
 
 $sys_default_domain = &forge_get_config ('web_host') ;
+$sys_return_domain = &forge_get_config ('forum_return_domain') ;
 $sys_scm_host = &forge_get_config ('web_host') ;
 $domain_name = &forge_get_config ('web_host') ;
 $sys_users_host = &forge_get_config ('users_host') ;
@@ -58,6 +59,8 @@ $chroot_prefix = &forge_get_config ('chroot') ;
 $homedir_prefix = &forge_get_config ('homedir_prefix') ;
 $grpdir_prefix = &forge_get_config ('groupdir_prefix') ;
 $file_dir = &forge_get_config ('data_path') ;
+$sys_use_ssl = &forge_get_config('use_ssl');
+$sys_urlprefix = &forge_get_config('url_prefix');
 
 ##############################
 # Database Connect Functions
@@ -152,4 +155,25 @@ debug_print_backtrace
 		print " + " . $call_details[1] . ":" . $call_details[2] .
 		    " in function " . $call_details[3] . "\n";
 	}
+}
+
+#############################
+# Compatibility functions.
+#############################
+sub util_make_url {
+	my ($path) = @_;
+	my $url;
+
+	if (($sys_use_ssl eq 'true') || ($sys_use_ssl eq '1')) {
+		$url = 'https://';
+	} else {
+		$url = 'http://';
+	}
+
+	$url .= $sys_default_domain . $sys_urlprefix;
+	$url =~ s,/$,,;
+	$path =~ s,^/,,;
+	$url .= '/' . $path;
+
+	return $url;
 }
