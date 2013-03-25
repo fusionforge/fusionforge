@@ -26,7 +26,7 @@ sub SudoEffectiveUser {
 
     my ($uid,$gid) = GetUserUidGid($user);
     if ($uid eq "" or $gid eq "") {
-	print "Unknown user: $user";
+	print "Unknown user: $user\n";
 	return;
     }
 

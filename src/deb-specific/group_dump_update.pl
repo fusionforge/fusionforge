@@ -29,7 +29,7 @@ while(my ($group_id, $unix_gid, $group_name, $status, $is_public) = $c->fetchrow
 	$d->execute();
 
 	my $user_list = "";
-	
+
 	while($user_name = $d->fetchrow()) {
 	   $user_list .= "$user_name,";
 	}
@@ -60,21 +60,21 @@ if($verbose) {print ("\n\n	Processing Groups\n\n")};
 while ($ln = pop(@groupdump_array)) {
 	chop($ln);
 	($gname, $gstatus, $gid, $is_public, $userlist) = split(":", $ln);
-	
+
 	$userlist =~ tr/A-Z/a-z/;
 
 	$group_exists = (-d $grpdir_prefix .'/'. $gname);
 
 	if ($gstatus eq 'A' && $group_exists) {
 		update_group($gid, $gname, $is_public, $userlist);
-	
+
 	} elsif ($gstatus eq 'A' && !$group_exists) {
 		add_group($gid, $gname, $is_public, $userlist);
-	
+
 	} elsif ($gstatus eq 'D' && $group_exists) {
 		delete_group($gname);
 
-	} 
+	}
 }
 
 ###############################################
@@ -82,17 +82,17 @@ while ($ln = pop(@groupdump_array)) {
 ###############################################
 
 ## Become this effective user (EUID/EGID) and perform this action.
-## 
+##
 ## This protect against symlink attacks; they are inevitable when
 ## working in a directory owned by a local user.  We could naively
 ## check for the presence of symlinks, but then we'd still be
 ## vulnerable to a symlink race attack.
-## 
+##
 ## We'll use set_e_uid/set_e_gid for efficiency and simplicity
 ## (e.g. we can get the return value directly), which is enough for
 ## opening files and similar basic operations.  When calling external
 ## programs, you should use fork&exec&setuid/setgid.
-## 
+##
 # arg1: username
 # arg2: a Perl sub{}
 sub SudoEffectiveUser {
@@ -101,7 +101,7 @@ sub SudoEffectiveUser {
 
     my ($uid,$gid) = GetUserUidGid($user);
     if ($uid eq "" or $gid eq "") {
-	print "Unknown user: $user";
+	print "Unknown user: $user\n";
 	return;
     }
 
@@ -139,14 +139,14 @@ sub GetUserUidGid {
 #############################
 # Group Add Function
 #############################
-sub add_group {  
+sub add_group {
 	my ($gid, $gname, $is_public, $userlist) = @_;
 	my ($log_dir, $cgi_dir, $ht_dir);
 
 	my ($default_perms) ;
         my ($file_default_perms) ;
         my ($default_page) ;
-	
+
 	$group_dir = $grpdir_prefix."/".$gname;
 	$log_dir = $group_dir."/log";
 	$cgi_dir = $group_dir."/cgi-bin";
@@ -161,14 +161,18 @@ sub add_group {
             $default_perms = 02770 ;
             $file_default_perms = 0660;
 	    $default_page = "/usr/share/gforge/lib/private_default_page.php" ;
+	    if (! -e $default_page) {
+		$default_page = "/usr/share/gforge/lib/default_page.php";
+	    }
         }
-	
+	$incdir_perms = 02775;
+
 	if ($verbose) {print("Making a Group for : $gname\n")};
-		
+
 	if (mkdir $group_dir, $default_perms) {
 	    chown $dummy_uid, $gid, $group_dir ;
 
-	    SudoEffectiveUser($dummy_uid, sub {
+	    SudoEffectiveUser($dummy_user, sub {
 		mkdir $log_dir, $default_perms ;
 		mkdir $cgi_dir, $default_perms ;
 		mkdir $ht_dir, $default_perms ;
@@ -179,9 +183,9 @@ sub add_group {
 		chmod $default_perms, $log_dir;
 		chmod $default_perms, $cgi_dir;
 		chmod $default_perms, $ht_dir;
-		chmod $default_perms, $inc_dir;
-		chmod $file_default_perms, "$ht_dir/index.php";
-			      });
+		chmod $incdir_perms, $inc_dir;
+		chmod 0664, "$ht_dir/index.php";
+	    });
 	}
 }
 
@@ -193,7 +197,7 @@ sub update_group {
 	my ($log_dir, $cgi_dir, $ht_dir);
 	my ($realuid, $realgid);
 	my ($default_perms);
-	
+
 	$group_dir = $grpdir_prefix.'/'.$gname;
 	$log_dir = $group_dir."/log";
 	$cgi_dir = $group_dir."/cgi-bin";
@@ -205,18 +209,19 @@ sub update_group {
 	} else {
 	    $default_perms = 02771 ;
 	}
+	$incdir_perms = 02775;
 
 	if ($verbose) {print("Updating Group: $gname\n")};
-		
+
 	chown $dummy_uid, $gid, $group_dir;
 
-	SudoEffectiveUser($dummy_uid, sub {
+	SudoEffectiveUser($dummy_user, sub {
 	    chmod $default_perms, $group_dir;
 	    chmod $default_perms, $log_dir;
 	    chmod $default_perms, $cgi_dir;
 	    chmod $default_perms, $ht_dir;
-	    chmod $default_perms, $inc_dir;
-			  });	
+	    chmod $incdir_perms, $inc_dir;
+	});
 }
 
 #############################
@@ -226,7 +231,7 @@ sub delete_group {
 	my ($gname, $x, $gid, $userlist, $counter);
 	my $this_group = shift(@_);
 	$counter = 0;
-	
+
 	if (substr($hostname,0,3) ne "cvs") {
 		if ($verbose) {print("Deleting Group: $this_group\n")};
 		system("/bin/mv /var/lib/gforge/chroot/home/groups/$this_group /var/lib/gforge/chroot/home/groups/deleted_group_$this_group");
