@@ -47,11 +47,6 @@ $session_ser = getStringFromCookie('session_ser');
  *	@return cookie value
  */
 function session_build_session_cookie($user_id) {
-//	if (strlen(forge_get_config('host_uuid')) < 12 ||
-//	    /* also catch MD5(empty string) */
-//	    forge_get_config('host_uuid') === 'd41d8cd98f00') {
-//		exit_error('ATTN sysadmin: upgrade your host_uuid');
-//	}
 	$session_cookie_data = array(
 		$user_id,
 		getStringFromServer('REMOTE_ADDR'),
@@ -63,7 +58,6 @@ function session_build_session_cookie($user_id) {
 		$session_cookie .= '<' . util_html_encode($s);
 	}
 	$session_cookie_hmac = hash_hmac("sha256", $session_cookie,
-	    /* forge_get_config('host_uuid') . */
 	    forge_get_config('session_key'));
 	$session_serial_cookie = base64_encode($session_cookie) . '!' .
 	    base64_encode($session_cookie_hmac);
@@ -109,7 +103,6 @@ function session_check_session_cookie($session_cookie) {
 	$session_cookie = base64_decode($session_cookie);
 	$session_cookie_hmac = base64_decode($session_cookie_hmac);
 	if (hash_hmac("sha256", $session_cookie,
-	    /* forge_get_config('host_uuid') . */
 	    forge_get_config('session_key')) !== $session_cookie_hmac) {
 		/* HMAC mismatch */
 		return false;
@@ -600,15 +593,6 @@ function session_set() {
 	plugin_hook('session_set_entry');
 	global $G_SESSION;
 	global $session_ser;
-
-//	/* force HTTPS for Evolvis. Always. */
-//	if (!session_issecure()) {
-//		$dst = 'https://' . getStringFromServer('HTTP_HOST') .
-//		    getStringFromServer('REQUEST_URI');
-//		sysdebug_off('Location: ' . $dst);
-//		echo 'Go to: ' . $dst;
-//		exit;
-//	}
 
 	// assume bad session_hash and session. If all checks work, then allow
 	// otherwise make new session
