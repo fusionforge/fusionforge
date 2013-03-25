@@ -5,6 +5,8 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2001-2002, 2009, Roland Mas
  * Copyright 2004-2005, GForge, LLC
+ * Copyright © 2013
+ *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -50,13 +52,21 @@ function session_build_session_cookie($user_id) {
 //	    forge_get_config('host_uuid') === 'd41d8cd98f00') {
 //		exit_error('ATTN sysadmin: upgrade your host_uuid');
 //	}
-	$session_serial = $user_id . '-*-' . time() . '-*-' .
-	    getStringFromServer('REMOTE_ADDR') . '-*-' .
-	    getStringFromServer('HTTP_USER_AGENT');
-	$session_serial_hash = md5(/* forge_get_config('host_uuid') . */
-	    $session_serial . forge_get_config('session_key'));
-	$session_serial_cookie = base64_encode($session_serial) . '-*-' .
-	    $session_serial_hash;
+	$session_cookie_data = array(
+		$user_id,
+		getStringFromServer('REMOTE_ADDR'),
+		getStringFromServer('HTTP_USER_AGENT'),
+	    );
+	$session_cookie = "" . time();
+	foreach ($session_cookie_data as $s) {
+		/* for escaping; this is not really HTML */
+		$session_cookie .= '<' . util_html_encode($s);
+	}
+	$session_cookie_hmac = hash_hmac("sha256", $session_cookie,
+	    /* forge_get_config('host_uuid') . */
+	    forge_get_config('session_key'));
+	$session_serial_cookie = base64_encode($session_cookie) . '!' .
+	    base64_encode($session_cookie_hmac);
 	return $session_serial_cookie;
 }
 
@@ -69,8 +79,12 @@ function session_build_session_cookie($user_id) {
  *	@return hash
  */
 function session_get_session_cookie_hash($session_cookie) {
-	list ($junk, $hash) = explode('-*-', $session_cookie);
-	return $hash;
+	/*
+	 * we cannot just use the HMAC as that may be longer than
+	 * the database fields, and this code used to return a
+	 * string of the size of an md5(), so just md5 it
+	 */
+	return md5($session_cookie);
 }
 
 /**
@@ -80,17 +94,31 @@ function session_get_session_cookie_hash($session_cookie) {
  *	@return user_id if cookie is ok, false otherwise
  */
 function session_check_session_cookie($session_cookie) {
-
-	list ($session_serial, $hash) = explode('-*-', $session_cookie);
-	$session_serial = base64_decode($session_serial);
-	$new_hash = md5(/* forge_get_config('host_uuid') . */
-	    $session_serial . forge_get_config('session_key'));
-
-	if ($hash !== $new_hash) {
+	if (!preg_match('#^[A-Za-z0-9+/=]*![A-Za-z0-9+/=]*$#',
+	    $session_cookie)) {
+		/*
+		 * does not match basic format, off; recommended by
+		 * http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html
+		 * to protect the below code from malformed strings
+		 */
 		return false;
 	}
 
-	list($user_id, $time, $ip, $user_agent) = explode('-*-', $session_serial, 4);
+	list($session_cookie, $session_cookie_hmac) = explode('!',
+	    $session_cookie);
+	$session_cookie = base64_decode($session_cookie);
+	$session_cookie_hmac = base64_decode($session_cookie_hmac);
+	if (hash_hmac("sha256", $session_cookie,
+	    /* forge_get_config('host_uuid') . */
+	    forge_get_config('session_key')) !== $session_cookie_hmac) {
+		/* HMAC mismatch */
+		return false;
+	}
+
+	list($time, $user_id, $ip, $user_agent) = explode('<', $session_cookie);
+	$user_id = util_unconvert_htmlspecialchars($user_id);
+	$ip = util_unconvert_htmlspecialchars($ip);
+	$user_agent = util_unconvert_htmlspecialchars($user_agent);
 
 	if (!session_check_ip($ip, getStringFromServer('REMOTE_ADDR'))) {
 		return false;
@@ -116,13 +144,12 @@ function session_check_session_cookie($session_cookie) {
  *
  */
 function session_logout() {
-
 	// delete both session and username cookies
 	// NB: cookies must be deleted with the same scope parameters they were set with
 	//
 	session_cookie('session_ser', '');
 
-	RBACEngine::getInstance()->invalidateRoleCaches() ;
+	RBACEngine::getInstance()->invalidateRoleCaches();
 	return true;
 }
 
@@ -139,34 +166,34 @@ function session_logout() {
  *	@access public
  *
  */
-function session_login_valid($loginname, $passwd, $allowpending=0)  {
-	global $feedback,$error_msg,$warning_msg;
+function session_login_valid($loginname, $passwd, $allowpending=0) {
+	global $feedback, $error_msg, $warning_msg;
 
 	if (!$loginname || !$passwd) {
 		$warning_msg = _('Missing Password Or Users Name');
 		return false;
 	}
 
-	$hook_params = array () ;
-	$hook_params['loginname'] = $loginname ;
-	$hook_params['passwd'] = $passwd ;
-	$result = plugin_hook ("session_before_login", $hook_params) ;
+	$hook_params = array();
+	$hook_params['loginname'] = $loginname;
+	$hook_params['passwd'] = $passwd;
+	$result = plugin_hook("session_before_login", $hook_params);
 
 	// Refuse login if not all the plugins are ok.
 	if (!$result) {
-		if (!$feedback) {
+		if (!util_ifsetor($feedback)) {
 			$warning_msg = _('Invalid Password Or User Name');
 		}
 		return false;
 	}
 
-	return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;
+	return session_login_valid_dbonly($loginname, $passwd, $allowpending);
 }
 
-function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
-	global $feedback,$userstatus;
+function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
+	global $feedback, $userstatus;
 
-	//  Try to get the users from the database using user_id and (MD5) user_pw
+	// Try to get the users from the database using user_id and (MD5) user_pw
 	if (forge_get_config('require_unique_email')) {
 		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE (user_name=$1 OR email=$1) AND user_pw=$2',
 					array ($loginname,
@@ -287,29 +314,25 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
  *	@return true/false
  *	@access private
  */
-function session_check_ip($oldip,$newip) {
-	if (strstr ($oldip, ':')) {
+function session_check_ip($oldip, $newip) {
+	if (strstr($oldip, ':')) {
 		// Old IP is IPv6
-		if (strstr ($newip, ':')) {
+		if (strstr($newip, ':')) {
 			// New IP is IPv6 too
-			return ($oldip == $newip) ;
-		} else {
-			return false ;
+			return ($oldip == $newip);
 		}
-	} else {
-		// Old IP is IPv4
-		if (strstr ($newip, ':')) {
-			// New IP is IPv6
-			return false ;
-		} else {
-			$eoldip = explode(".",$oldip);
-			$enewip = explode(".",$newip);
-
-			// require same class b subnet
-			return ( ($eoldip[0] == $enewip[0])
-				 && ($eoldip[1] == $enewip[1]) ) ;
-		}
+		return false;
 	}
+	// Old IP is IPv4
+	if (strstr($newip, ':')) {
+		// New IP is IPv6
+		return false;
+	}
+	$eoldip = explode(".", $oldip);
+	$enewip = explode(".", $newip);
+
+	// require same Class B subnet
+	return (($eoldip[0] == $enewip[0]) && ($eoldip[1] == $enewip[1]));
 }
 
 /**
@@ -332,9 +355,8 @@ function session_issecure() {
  *	@param		string	Value of cookie
  *	@param		string	Domain scope (default '')
  *	@param		string	Expiration time in UNIX seconds (default 0)
- *	@return true/false
  */
-function session_cookie($name ,$value, $domain = '', $expiration = 0) {
+function session_cookie($name, $value, $domain='', $expiration=0) {
 	if (php_sapi_name() == 'cli') {
 		return;
 	}
@@ -390,35 +412,35 @@ function session_require($req, $reason='') {
 	}
 
 	$user =& user_get_object(user_getid());
-	if (! $user->isActive()) {
+	if (!$user->isActive()) {
 		session_logout();
-		exit_error(_('Your account is no longer active ; you have been disconnected'),'');
+		exit_error(_('Your account is no longer active; you have been disconnected'), '');
 	}
 
-	if (array_key_exists('group', $req)) {
-		$group = group_get_object($req['group']);
-		if (!$group || !is_object($group)) {
-			exit_no_group();
-		} elseif ($group->isError()) {
-			exit_error($reason == '' ? $group->getErrorMessage() : $reason, '');
-		}
+	if (!array_key_exists('group', $req)) {
+		exit_permission_denied($reason, '');
+	}
 
-		$perm =& $group->getPermission ();
-		if (!$perm || !is_object($perm) || $perm->isError()) {
-			exit_permission_denied($reason,'');
-		}
+	$group = group_get_object($req['group']);
+	if (!$group || !is_object($group)) {
+		exit_no_group();
+	} elseif ($group->isError()) {
+		exit_error($reason ? $reason : $group->getErrorMessage(), '');
+	}
 
-		if (isset($req['admin_flags']) && $req['admin_flags']) {
-			if (!$perm->isAdmin()) {
-				exit_permission_denied($reason,'');
-			}
-		} else {
-			if (!$perm->isMember()) {
-				exit_permission_denied($reason,'');
-			}
+	$perm =& $group->getPermission();
+	if (!$perm || !is_object($perm) || $perm->isError()) {
+		exit_permission_denied($reason, '');
+	}
+
+	if (isset($req['admin_flags']) && $req['admin_flags']) {
+		if (!$perm->isAdmin()) {
+			exit_permission_denied($reason, '');
 		}
 	} else {
-		exit_permission_denied($reason,'');
+		if (!$perm->isMember()) {
+			exit_permission_denied($reason, '');
+		}
 	}
 }
 
@@ -429,9 +451,9 @@ function session_require($req, $reason='') {
  *	fails checks.
  *
  */
-function session_require_perm ($section, $reference, $action = NULL, $reason='') {
-	if (!forge_check_perm ($section, $reference, $action)) {
-		exit_permission_denied ($reason,'');
+function session_require_perm($section, $reference, $action=NULL, $reason='') {
+	if (!forge_check_perm($section, $reference, $action)) {
+		exit_permission_denied($reason, '');
 	}
 }
 
@@ -442,13 +464,13 @@ function session_require_perm ($section, $reference, $action = NULL, $reason='')
  *	fails checks.
  *
  */
-function session_require_global_perm ($section, $action = NULL, $reason='') {
-	if (!forge_check_global_perm ($section, $action)) {
+function session_require_global_perm($section, $action=NULL, $reason='') {
+	if (!forge_check_global_perm($section, $action)) {
 		if (!$reason) {
-			$reason = sprintf (_('Permission denied. The %s administrators will have to grant you permission to view this page.'),
-					   forge_get_config ('forge_name')) ;
+			$reason = sprintf(_('Permission denied. The %s administrators will have to grant you permission to view this page.'),
+			    forge_get_config('forge_name'));
 		}
-		exit_permission_denied ($reason,'');
+		exit_permission_denied($reason, '');
 	}
 }
 
@@ -459,9 +481,9 @@ function session_require_global_perm ($section, $action = NULL, $reason='') {
  *	fails checks.
  *
  */
-function session_require_login () {
+function session_require_login() {
 	if (!session_loggedin()) {
-		exit_not_logged_in () ;
+		exit_not_logged_in();
 	}
 }
 
@@ -481,43 +503,45 @@ function session_set_new($user_id) {
 	//
 	$cookie = session_build_session_cookie($user_id);
 	session_cookie("session_ser", $cookie, "", forge_get_config('session_expire'));
-	$session_ser=$cookie;
+	$session_ser = $cookie;
 
-	$res = db_query_params ('SELECT count(*) as c FROM user_session WHERE session_hash =$1',
-				array (session_get_session_cookie_hash($cookie))) ;
-	if (!$res || db_result($res,0,'c') < 1) {
-		db_query_params ('INSERT INTO user_session (session_hash,ip_addr,time,user_id) VALUES ($1,$2,$3,$4)',
-				 array (session_get_session_cookie_hash($cookie),
-					getStringFromServer('REMOTE_ADDR'),
-					time(),
-					$user_id)) ;
+	$res = db_query_params('SELECT count(*) as c FROM user_session
+		WHERE session_hash=$1',
+	    array(($shash = session_get_session_cookie_hash($cookie))));
+	if (!$res || db_result($res, 0, 'c') < 1) {
+		db_query_params('INSERT INTO user_session
+			(session_hash,ip_addr,time,user_id)
+			VALUES ($1,$2,$3,$4)',
+		    array(
+			$shash,
+			getStringFromServer('REMOTE_ADDR'),
+			time(),
+			$user_id,
+		    ));
 	}
 
 	// check uniqueness of the session_hash in the database
-	//
 	$res = session_getdata($user_id);
 
 	if (!$res) {
-		exit_error(db_error(),'');
-	}
-	else if (db_numrows($res) < 1) {
-		exit_error(_('Could not fetch user session data'),'');
+		exit_error(db_error(), '');
+	} elseif (db_numrows($res) < 1) {
+		exit_error(_('Could not fetch user session data'), '');
 	} else {
-		session_set_internal ($user_id, $res) ;
+		session_set_internal($user_id, $res);
 	}
 }
 
-function session_set_internal ($user_id, $res=false) {
-	global $G_SESSION ;
+function session_set_internal($user_id, $res=false) {
+	global $G_SESSION;
 
-	$G_SESSION = user_get_object($user_id,$res);
+	$G_SESSION = user_get_object($user_id, $res);
 	if ($G_SESSION) {
 		$G_SESSION->setLoggedIn(true);
 	}
 
-	RBACEngine::getInstance()->invalidateRoleCaches() ;
+	RBACEngine::getInstance()->invalidateRoleCaches();
 }
-
 
 /**
  *	session_set_admin() - Setup session for the admin user
@@ -527,9 +551,9 @@ function session_set_internal ($user_id, $res=false) {
  *	@return none
  */
 function session_set_admin() {
-	$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('forge_admin', -1) ;
-	if (count ($admins) == 0) {
-		exit_error(_('No admin users ?'),'');
+	$admins = RBACEngine::getInstance()->getUsersByAllowedAction('forge_admin', -1);
+	if (count($admins) == 0) {
+		exit_error(_('No admin users ?'), '');
 	}
 	/*
 	 * Use the user with the lowest numerical user ID.
@@ -550,16 +574,18 @@ function session_set_admin() {
  *	Private optimization function for logins - fetches user data, language, and session
  *	with one query
  *
- *  @param		int		The user ID
+ *	@param	int		The user ID
  *	@access private
  */
 function session_getdata($user_id) {
-	return db_query_params ('SELECT u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code, t.dirname, t.fullname
-                                 FROM users u, supported_languages sl, themes t
-                                 WHERE u.language=sl.language_id
-                                   AND u.theme_id=t.theme_id
-                                   AND u.user_id=$1',
-				array ($user_id)) ;
+	return db_query_params('SELECT u.*, sl.language_id, sl.name,
+		    sl.filename, sl.classname, sl.language_code,
+		    t.dirname, t.fullname
+		FROM users u, supported_languages sl, themes t
+		WHERE u.language=sl.language_id
+		    AND u.theme_id=t.theme_id
+		    AND u.user_id=$1',
+	    array($user_id));
 }
 
 /**
@@ -590,13 +616,9 @@ function session_set() {
 
 	// If user says he's logged in (by presenting cookie), check that
 	if ($session_ser) {
-
 		$user_id = session_check_session_cookie($session_ser);
-
 		if ($user_id) {
-
 			$result = session_getdata($user_id);
-
 			if (db_numrows($result) > 0) {
 				$id_is_good = true;
 			}
@@ -612,14 +634,13 @@ function session_set() {
 		$G_SESSION=false;
 
 		// if there was bad session cookie, kill it and the user cookie
-		//
 		if ($session_ser) {
 			session_logout();
 		}
 	}
 	plugin_hook('session_set_return');
 
-	RBACEngine::getInstance()->invalidateRoleCaches() ;
+	RBACEngine::getInstance()->invalidateRoleCaches();
 }
 
 //TODO - this should be generalized and used for pre.php,
@@ -634,9 +655,8 @@ function session_continue($sessionKey) {
 	$LUSER =& session_get_user();
 	if (!is_object($LUSER) || $LUSER->isError()) {
 		return false;
-	} else {
-		return true;
 	}
+	return true;
 }
 
 function setup_tz_from_context() {
@@ -646,7 +666,7 @@ function setup_tz_from_context() {
 	} else {
 		$tz = $LUSER->getTimeZone();
 	}
-	putenv ('TZ='. $tz);
+	putenv('TZ=' . $tz);
 	date_default_timezone_set($tz);
 }
 
@@ -665,14 +685,12 @@ function &session_get_user() {
  *  user_getid()
  *  Get user_id of logged in user
  */
-
 function user_getid() {
 	global $G_SESSION;
 	if ($G_SESSION) {
 		return $G_SESSION->getID();
-	} else {
-		return false;
 	}
+	return false;
 }
 
 /**
@@ -684,9 +702,8 @@ function session_loggedin() {
 
 	if ($G_SESSION) {
 		return $G_SESSION->isLoggedIn();
-	} else {
-		return false;
 	}
+	return false;
 }
 
 // Local Variables:
