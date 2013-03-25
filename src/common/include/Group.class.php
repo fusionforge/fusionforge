@@ -6,7 +6,7 @@
  * Copyright 2009-2010, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -1580,43 +1580,50 @@ class Group extends Error {
 		//
 		//	Delete Trackers
 		//
-		$atf = new ArtifactTypeFactory($this);
-		$at_arr = $atf->getArtifactTypes();
-		foreach ($at_arr as $i) {
-			if (!is_object($i)) {
-				continue;
-			}
-			if (!$i->delete(1,1)) {
-				$this->setError(_('Could not properly delete the tracker:').' '.$i->getErrorMessage());
-				return false;
+		if ($this->usesTracker()) {
+			$atf = new ArtifactTypeFactory($this);
+			$at_arr = $atf->getArtifactTypes();
+			foreach ($at_arr as $i) {
+				if (!is_object($i)) {
+					continue;
+				}
+				if (!$i->delete(1,1)) {
+					$this->setError(_('Could not properly delete the tracker:').' '.$i->getErrorMessage());
+					return false;
+				}
 			}
 		}
 		//
 		//	Delete Forums
 		//
-		$ff = new ForumFactory($this);
-		$f_arr = $ff->getForums();
-		foreach ($f_arr as $i) {
-			if (!is_object($i)) {
-				continue;
-			}
-			if(!$i->delete(1,1)) {
-				$this->setError(_('Could not properly delete the forum:').' '.$i->getErrorMessage());
-				return false;
+
+		if ($this->usesForum()) {
+			$ff = new ForumFactory($this);
+			$f_arr = $ff->getForums();
+			foreach ($f_arr as $i) {
+				if (!is_object($i)) {
+					continue;
+				}
+				if(!$i->delete(1,1)) {
+					$this->setError(_('Could not properly delete the forum:').' '.$i->getErrorMessage());
+					return false;
+				}
 			}
 		}
 		//
 		//	Delete Subprojects
 		//
-		$pgf = new ProjectGroupFactory($this);
-		$pg_arr = $pgf->getProjectGroups();
-		foreach ($pg_arr as $i) {
-			if (!is_object($i)) {
-				continue;
-			}
-			if (!$i->delete(1,1)) {
-				$this->setError(_('Could not properly delete the ProjectGroup:').' '.$i->getErrorMessage());
-				return false;
+		if ($this->usesPM()) {
+			$pgf = new ProjectGroupFactory($this);
+			$pg_arr = $pgf->getProjectGroups();
+			foreach ($pg_arr as $i) {
+				if (!is_object($i)) {
+					continue;
+				}
+				if (!$i->delete(1,1)) {
+					$this->setError(_('Could not properly delete the ProjectGroup:').' '.$i->getErrorMessage());
+					return false;
+				}
 			}
 		}
 		//
@@ -1729,46 +1736,50 @@ class Group extends Error {
 		//
 		//	Delete Surveys
 		//
-		$sf = new SurveyFactory($this);
-		$s_arr =& $sf->getSurveys();
-		foreach ($s_arr as $i) {
-			if (!is_object($i)) {
-				continue;
+		if ($this->usesSurvey()) {
+			$sf = new SurveyFactory($this);
+			$s_arr =& $sf->getSurveys();
+			foreach ($s_arr as $i) {
+				if (!is_object($i)) {
+					continue;
+				}
+				if (!$i->delete()) {
+					$this->setError(_('Could not properly delete the survey'));
+					db_rollback();
+					return false;
+				}
 			}
-			if (!$i->delete()) {
-				$this->setError(_('Could not properly delete the survey'));
-				db_rollback();
-				return false;
-			}
-		}
 		//
 		//	Delete SurveyQuestions
 		//
-		$sqf = new SurveyQuestionFactory($this);
-		$sq_arr =& $sqf->getSurveyQuestions();
-		foreach ($sq_arr as $i) {
-			if (!is_object($i)) {
-				continue;
-			}
-			if (!$i->delete()) {
-				$this->setError(_('Could not properly delete the survey questions'));
-				db_rollback();
-				return false;
+			$sqf = new SurveyQuestionFactory($this);
+			$sq_arr =& $sqf->getSurveyQuestions();
+			foreach ($sq_arr as $i) {
+				if (!is_object($i)) {
+					continue;
+				}
+				if (!$i->delete()) {
+					$this->setError(_('Could not properly delete the survey questions'));
+					db_rollback();
+					return false;
+				}
 			}
 		}
 		//
 		//	Delete Mailing List Factory
 		//
-		$mlf = new MailingListFactory($this);
-		$ml_arr = $mlf->getMailingLists();
-		foreach ($ml_arr as $i) {
-			if (!is_object($i)) {
-				continue;
-			}
-			if (!$i->delete(1,1)) {
-				$this->setError(_('Could not properly delete the mailing list'));
-				db_rollback();
-				return false;
+		if ($this->usesMail()) {
+			$mlf = new MailingListFactory($this);
+			$ml_arr = $mlf->getMailingLists();
+			foreach ($ml_arr as $i) {
+				if (!is_object($i)) {
+					continue;
+				}
+				if (!$i->delete(1,1)) {
+					$this->setError(_('Could not properly delete the mailing list'));
+					db_rollback();
+					return false;
+				}
 			}
 		}
 		//

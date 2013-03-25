@@ -164,7 +164,7 @@ eval {
 	my ($group_list_id, $listname, $user_name, $password, $description, $is_public) ;
 	my ($tmp) ;
     	$tmp = mktemp ("/tmp/XXXXXX") ;
-	$cmd = "/usr/lib/mailman/bin/config_list -o $tmp $listname" ;
+	my $cmd = "/usr/lib/mailman/bin/config_list -o $tmp $listname" ;
 	#print "cmd = <$cmd>\n" ;
 # Commented out on Matt Hope <dopey@debian.org> advice
 # To be revised by Roland Mas

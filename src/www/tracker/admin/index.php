@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
  * Copyright 2010, FusionForge Team
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -53,12 +54,12 @@ if ($group->isError()) {
 	}
 }
 
+session_require_perm('tracker_admin', $group_id);
+
 if ($group_id && $atid) {
 //
 //		UPDATING A PARTICULAR ARTIFACT TYPE
 //
-
-	session_require_perm ('tracker_admin', $group_id) ;
 
 	//
 	//  Create the ArtifactType object

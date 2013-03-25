@@ -5,6 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -55,6 +56,11 @@ class ProjectGroupFactory extends Error {
 		}
 		if ($Group->isError()) {
 			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
+			return false;
+		}
+		if (!$Group->usesPM()) {
+			$this->setError(sprintf(_('%s does not use the Project Management tool'),
+			    $Group->getPublicName()));
 			return false;
 		}
 		$this->Group =& $Group;

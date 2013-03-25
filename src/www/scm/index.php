@@ -3,6 +3,7 @@
  * SCM Frontend
  *
  * Copyright 2004 (c) Roland Mas, Tim Perdue -GForge LLC
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -29,7 +30,10 @@ $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 }
-scm_header(array('title'=>_('SCM Repository'), 'group'=>$group_id));
+
+session_require_perm('scm', $group_id, 'read');
+
+scm_header(array('title'=> sprintf(_('Source Code Repository for %s'), $group->getPublicName()),'group'=>$group_id));
 
 plugin_hook("blocks", "scm index");
 

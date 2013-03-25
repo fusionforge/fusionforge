@@ -4,7 +4,7 @@
  *
  * Copyright 2004, GForge, LLC
  * Copyright 2009-2010, Roland Mas
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -864,15 +864,20 @@ abstract class BaseRole extends Error {
 		$new_sa['tracker'] = array () ;
 		$new_pa['tracker'] = array () ;
 		foreach ($projects as $p) {
+			if (!$p->usesTracker()) {
+				continue;
+			}
 			$atf = new ArtifactTypeFactory ($p) ;
-			$trackerids = $atf->getAllArtifactTypeIds () ;
-			foreach ($trackerids as $tid) {
-				if (array_key_exists ('tracker', $this->perms_array)
-				    && array_key_exists ($tid, $this->perms_array['tracker']) ) {
-					$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid] ;
-				} elseif (array_key_exists ('new_tracker', $this->perms_array)
-					  && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
-					$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()] ;
+			if (!$atf->isError()) {
+				$trackerids = $atf->getAllArtifactTypeIds () ;
+				foreach ($trackerids as $tid) {
+					if (array_key_exists ('tracker', $this->perms_array)
+					    && array_key_exists ($tid, $this->perms_array['tracker']) ) {
+						$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid] ;
+					} elseif (array_key_exists ('new_tracker', $this->perms_array)
+						  && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
+						$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()] ;
+					}
 				}
 			}
 		}
@@ -901,6 +906,9 @@ abstract class BaseRole extends Error {
 		$new_sa['pm'] = array () ;
 		$new_pa['pm'] = array () ;
 		foreach ($projects as $p) {
+			if (!$p->usesPM()) {
+				continue;
+			}
 			$pgf = new ProjectGroupFactory ($p) ;
 			$pgids = $pgf->getAllProjectGroupIds () ;
 			foreach ($pgids as $gid) {

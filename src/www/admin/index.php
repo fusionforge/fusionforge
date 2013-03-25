@@ -11,6 +11,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -122,7 +123,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		printf(_('Active projects: <strong>%1$s</strong>'), $row['count']);
 	?></li>
 	<li><?php
-		$res=db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1',
+		$res=db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1 AND is_template!=1',
 			array('P')) ;
 
 		$row = db_fetch_array($res);
