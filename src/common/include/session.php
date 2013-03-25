@@ -45,9 +45,18 @@ $session_ser = getStringFromCookie('session_ser');
  *	@return cookie value
  */
 function session_build_session_cookie($user_id) {
-	$session_serial = $user_id.'-*-'.time().'-*-'.getStringFromServer('REMOTE_ADDR').'-*-'.getStringFromServer('HTTP_USER_AGENT');
-	$session_serial_hash = md5($session_serial.forge_get_config('session_key'));
-	$session_serial_cookie = base64_encode($session_serial).'-*-'.$session_serial_hash;
+//	if (strlen(forge_get_config('host_uuid')) < 12 ||
+//	    /* also catch MD5(empty string) */
+//	    forge_get_config('host_uuid') === 'd41d8cd98f00') {
+//		exit_error('ATTN sysadmin: upgrade your host_uuid');
+//	}
+	$session_serial = $user_id . '-*-' . time() . '-*-' .
+	    getStringFromServer('REMOTE_ADDR') . '-*-' .
+	    getStringFromServer('HTTP_USER_AGENT');
+	$session_serial_hash = md5(/* forge_get_config('host_uuid') . */
+	    $session_serial . forge_get_config('session_key'));
+	$session_serial_cookie = base64_encode($session_serial) . '-*-' .
+	    $session_serial_hash;
 	return $session_serial_cookie;
 }
 
@@ -74,9 +83,10 @@ function session_check_session_cookie($session_cookie) {
 
 	list ($session_serial, $hash) = explode('-*-', $session_cookie);
 	$session_serial = base64_decode($session_serial);
-	$new_hash = md5($session_serial.forge_get_config('session_key'));
+	$new_hash = md5(/* forge_get_config('host_uuid') . */
+	    $session_serial . forge_get_config('session_key'));
 
-	if ($hash != $new_hash) {
+	if ($hash !== $new_hash) {
 		return false;
 	}
 
@@ -233,17 +243,17 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 		if ($allowpending && ($usr['status'] == 'P')) {
 			//1;
 		} else {
-			if ($usr['status'] == 'S') { 
+			if ($usr['status'] == 'S') {
 				//acount suspended
 				$feedback = _('Account Suspended');
 				return false;
 			}
-			if ($usr['status'] == 'P') { 
+			if ($usr['status'] == 'P') {
 				//account pending
 				$feedback = _('Account Pending');
 				return false;
-			} 
-			if ($usr['status'] == 'D') { 
+			}
+			if ($usr['status'] == 'D') {
 				//account deleted
 				$feedback = _('Account Deleted');
 				return false;
@@ -254,7 +264,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 				return false;
 			}
 		}
-		//create a new session
+		// create a new session
 		session_set_new(db_result($res,0,'user_id'));
 
 		return true;
@@ -294,9 +304,9 @@ function session_check_ip($oldip,$newip) {
 		} else {
 			$eoldip = explode(".",$oldip);
 			$enewip = explode(".",$newip);
-			
+
 			// require same class b subnet
-			return ( ($eoldip[0] == $enewip[0]) 
+			return ( ($eoldip[0] == $enewip[0])
 				 && ($eoldip[1] == $enewip[1]) ) ;
 		}
 	}
@@ -325,13 +335,20 @@ function session_issecure() {
  *	@return true/false
  */
 function session_cookie($name ,$value, $domain = '', $expiration = 0) {
-	if (php_sapi_name() != 'cli') {
-		if ( $expiration != 0){
-			setcookie($name, $value, time() + $expiration, '/', $domain, 0);
-		} else {
-			setcookie($name, $value, $expiration, '/', $domain, 0);
-		}
+	if (php_sapi_name() == 'cli') {
+		return;
 	}
+	if ($expiration) {
+		$expiration = time() + $expiration;
+	}
+	/* evolvis: force secure (SSL-only) session cookies */
+	//$force_secure = true;
+	/* not (yet?) in FusionForge */
+	$force_secure = false;
+	if ($force_secure && !session_issecure()) {
+		return;
+	}
+	setcookie($name, $value, $expiration, '/', $domain, $force_secure, true);
 }
 
 /**
@@ -369,9 +386,9 @@ function session_redirect($loc) {
  */
 function session_require($req, $reason='') {
 	if (!session_loggedin()) {
-		exit_not_logged_in();	
+		exit_not_logged_in();
 	}
-	
+
 	$user =& user_get_object(user_getid());
 	if (! $user->isActive()) {
 		session_logout();
@@ -415,7 +432,7 @@ function session_require($req, $reason='') {
 function session_require_perm ($section, $reference, $action = NULL, $reason='') {
 	if (!forge_check_perm ($section, $reference, $action)) {
 		exit_permission_denied ($reason,'');
-	}		
+	}
 }
 
 /**
@@ -432,7 +449,7 @@ function session_require_global_perm ($section, $action = NULL, $reason='') {
 					   forge_get_config ('forge_name')) ;
 		}
 		exit_permission_denied ($reason,'');
-	}		
+	}
 }
 
 /**
@@ -477,7 +494,7 @@ function session_set_new($user_id) {
 	}
 
 	// check uniqueness of the session_hash in the database
-	// 
+	//
 	$res = session_getdata($user_id);
 
 	if (!$res) {
@@ -492,7 +509,7 @@ function session_set_new($user_id) {
 
 function session_set_internal ($user_id, $res=false) {
 	global $G_SESSION ;
-	
+
 	$G_SESSION = user_get_object($user_id,$res);
 	if ($G_SESSION) {
 		$G_SESSION->setLoggedIn(true);
@@ -539,7 +556,7 @@ function session_set_admin() {
 function session_getdata($user_id) {
 	return db_query_params ('SELECT u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code, t.dirname, t.fullname
                                  FROM users u, supported_languages sl, themes t
-                                 WHERE u.language=sl.language_id 
+                                 WHERE u.language=sl.language_id
                                    AND u.theme_id=t.theme_id
                                    AND u.user_id=$1',
 				array ($user_id)) ;
@@ -557,6 +574,15 @@ function session_set() {
 	plugin_hook('session_set_entry');
 	global $G_SESSION;
 	global $session_ser;
+
+//	/* force HTTPS for Evolvis. Always. */
+//	if (!session_issecure()) {
+//		$dst = 'https://' . getStringFromServer('HTTP_HOST') .
+//		    getStringFromServer('REQUEST_URI');
+//		sysdebug_off('Location: ' . $dst);
+//		echo 'Go to: ' . $dst;
+//		exit;
+//	}
 
 	// assume bad session_hash and session. If all checks work, then allow
 	// otherwise make new session
@@ -596,8 +622,8 @@ function session_set() {
 	RBACEngine::getInstance()->invalidateRoleCaches() ;
 }
 
-//TODO - this should be generalized and used for pre.php, 
-//SOAP, forum_gateway.php, tracker_gateway.php, etc to 
+//TODO - this should be generalized and used for pre.php,
+//SOAP, forum_gateway.php, tracker_gateway.php, etc to
 //setup languages
 function session_continue($sessionKey) {
 	global $session_ser;
@@ -622,11 +648,11 @@ function setup_tz_from_context() {
 	}
 	putenv ('TZ='. $tz);
 	date_default_timezone_set($tz);
-}	
+}
 
 /**
  *	session_get_user() - Wrapper function to return the User object for the logged in user.
- *	
+ *
  *	@return User
  *	@access public
  */
@@ -667,5 +693,3 @@ function session_loggedin() {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
