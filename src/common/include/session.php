@@ -514,7 +514,19 @@ function session_set_admin() {
 	if (count ($admins) == 0) {
 		exit_error(_('No admin users ?'),'');
 	}
-	session_set_new ($admins[0]->getID());
+	/*
+	 * Use the user with the lowest numerical user ID.
+	 * This is to prevent complaints from real humans
+	 * if the system is doing something in their stead
+	 * (for example by populate_template_project.php).
+	 * Usually, “admin” has the ID 101.
+	 */
+	$admin_ids = array();
+	foreach ($admins as $admin) {
+		$admin_ids[] = $admin->getID();
+	}
+	sort($admin_ids);
+	session_set_new($admin_ids[0]);
 }
 
 /**
