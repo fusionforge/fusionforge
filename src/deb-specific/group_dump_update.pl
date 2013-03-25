@@ -168,7 +168,7 @@ sub add_group {
 	if (mkdir $group_dir, $default_perms) {
 	    chown $dummy_uid, $gid, $group_dir ;
 
-	    SudoEffectiveUser($dummy_uid, sub {
+	    SudoEffectiveUser($dummy_user, sub {
 		mkdir $log_dir, $default_perms ;
 		mkdir $cgi_dir, $default_perms ;
 		mkdir $ht_dir, $default_perms ;
@@ -210,7 +210,7 @@ sub update_group {
 		
 	chown $dummy_uid, $gid, $group_dir;
 
-	SudoEffectiveUser($dummy_uid, sub {
+	SudoEffectiveUser($dummy_user, sub {
 	    chmod $default_perms, $group_dir;
 	    chmod $default_perms, $log_dir;
 	    chmod $default_perms, $cgi_dir;

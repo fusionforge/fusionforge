@@ -4,8 +4,9 @@
 ##############################
 # Global Variables
 ##############################
-$dummy_uid      =       getpwnam('scm-gforge');                  # UserID of the dummy user that will own group's files
-$date           =       int(time()/3600/24);    # Get the number of days since 1/1/1970 for /etc/shadow
+$dummy_user	=	'scm-gforge';		# unix name of the dummy user
+$dummy_uid	=	getpwnam($dummy_user);	# uid of the dummy user that will own group's files
+$date		=	int(time()/3600/24);	# Get the number of days since 1/1/1970 for /etc/shadow
 
 @possible_paths = (
     '/usr/share/gforge/bin',
@@ -17,10 +18,10 @@ $date           =       int(time()/3600/24);    # Get the number of days since 1
     '/usr/bin',
     '/usr/local/bin') ;
 foreach $p (@possible_paths) {
-    if (-x "$p/forge_get_config") {
-	$fgc = "$p/forge_get_config";
-	last;
-    }
+	if (-x "$p/forge_get_config") {
+		$fgc = "$p/forge_get_config";
+		last;
+	}
 }
 
 %forge_config_cache = ();
@@ -76,8 +77,8 @@ sub db_connect ( ) {
 }
 
 sub db_disconnect ( ) {
-      $dbh->disconnect ;
-      $dbh = "" ;
+	$dbh->disconnect ;
+	$dbh = "" ;
 }
 
 sub db_drop_table_if_exists {
@@ -100,43 +101,43 @@ sub db_drop_table_if_exists {
 # File open function, spews the entire file to an array.
 ##############################
 sub open_array_file {
-        my $filename = shift(@_);
-        
-        open (FD, $filename) || die "Can't open $filename: $!.\n";
-        @tmp_array = <FD>;
-        close(FD);
-        
-        return @tmp_array;
-}       
+	my $filename = shift(@_);
+
+	open (FD, $filename) || die "Can't open $filename: $!.\n";
+	@tmp_array = <FD>;
+	close(FD);
+
+	return @tmp_array;
+}
 
 #############################
 # File write function.
 #############################
 sub write_array_file {
-        my ($file_name, @file_array) = @_;
+	my ($file_name, @file_array) = @_;
 	my $oldmask = umask(077);
 
-        use File::Temp qw(tempfile);
-        use File::Basename qw(dirname);
+	use File::Temp qw(tempfile);
+	use File::Basename qw(dirname);
 
-        my ($fd, $filename) = tempfile( DIR => dirname($file_name), UNLINK => 0) ;
+	my ($fd, $filename) = tempfile( DIR => dirname($file_name), UNLINK => 0) ;
 	umask($oldmask);
 
 	return 1 unless ($fd && $filename) ;
 
-        foreach (@file_array) { 
-                if ($_ ne '') { 
-                        print $fd $_;
-                }       
-        }       
+	foreach (@file_array) {
+		if ($_ ne '') {
+			print $fd $_;
+		}
+	}
 
-        close($fd);
-        unless (rename ($filename, $file_name)) {
-                unlink $filename;
-                return 1;
-        }
-        return 0;
-}      
+	close($fd);
+	unless (rename ($filename, $file_name)) {
+		unlink $filename;
+		return 1;
+	}
+	return 0;
+}
 
 #######################
 # Display a backtrace #
