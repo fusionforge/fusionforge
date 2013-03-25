@@ -58,7 +58,7 @@ function session_build_session_cookie($user_id) {
 		$session_cookie .= '<' . util_html_encode($s);
 	}
 	$session_cookie_hmac = hash_hmac("sha256", $session_cookie,
-	    forge_get_config('session_key'));
+	    forge_get_config('session_key'), true);
 	$session_serial_cookie = base64_encode($session_cookie) . '!' .
 	    base64_encode($session_cookie_hmac);
 	return $session_serial_cookie;
@@ -103,7 +103,7 @@ function session_check_session_cookie($session_cookie) {
 	$session_cookie = base64_decode($session_cookie);
 	$session_cookie_hmac = base64_decode($session_cookie_hmac);
 	if (hash_hmac("sha256", $session_cookie,
-	    forge_get_config('session_key')) !== $session_cookie_hmac) {
+	    forge_get_config('session_key'), true) !== $session_cookie_hmac) {
 		/* HMAC mismatch */
 		return false;
 	}
