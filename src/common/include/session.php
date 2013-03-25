@@ -335,15 +335,26 @@ function session_cookie($name ,$value, $domain = '', $expiration = 0) {
 }
 
 /**
+ *	session_redirect_uri() - Redirect browser
+ *
+ *	@param		string	Absolute URI
+ *	@return never returns
+ */
+function session_redirect_uri($loc) {
+	sysdebug_off("Status: 301 Moved Permanently", true, 301);
+	header("Location: ${loc}", true);
+	echo "\nPlease go to ${loc} instead!\n";
+	exit;
+}
+
+/**
  *	session_redirect() - Redirect browser within the site
  *
  *	@param		string	Absolute path within the site
  *	@return never returns
  */
 function session_redirect($loc) {
-	header('Location: '.util_make_url ($loc));
-	print("\n\n");
-	exit;
+	session_redirect_uri(util_make_url($loc));
 }
 
 /**
