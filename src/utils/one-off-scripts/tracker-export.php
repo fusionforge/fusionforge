@@ -2,7 +2,7 @@
 /*-
  * one-off script to export tracker items (limited)
  *
- * Copyright © 2012
+ * Copyright © 2012, 2013
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * All rights reserved.
  *
@@ -273,7 +273,7 @@ foreach ($srclist as $aidx) {
 		case 1:		/* ARTIFACT_EXTRAFIELDTYPE_SELECT */
 		case 3:		/* ARTIFACT_EXTRAFIELDTYPE_RADIO */
 		case 7:		/* ARTIFACT_EXTRAFIELDTYPE_STATUS */
-			$res = $efval[$k][(int)$v];
+			$res = util_ifsetor($efval[$k][(int)$v], NULL);
 			break;
 
 		/* arrays of list values */
@@ -281,7 +281,8 @@ foreach ($srclist as $aidx) {
 		case 5:		/* ARTIFACT_EXTRAFIELDTYPE_MULTISELECT */
 			$res = array();
 			foreach ($v as $fv) {
-				$res[] = $efval[$k][(int)$fv];
+				$res[] = util_ifsetor($efval[$k][(int)$fv],
+				    NULL);
 			}
 			break;
 
