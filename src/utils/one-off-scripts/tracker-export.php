@@ -177,8 +177,8 @@ foreach ($srclist as $aidx) {
 	}
 
 	/* add pseudo-fields to aid in permalink construction */
-	$rec['_fmt_itempermalink'] = util_make_url('/tracker/t_follow.php/%d');
-	$rec['_fmt_taskpermalink'] = util_make_url('/pm/t_follow.php/%d');
+	$rec['_rpl_itempermalink'] = util_make_url('/tracker/t_follow.php/#');
+	$rec['_rpl_taskpermalink'] = util_make_url('/pm/t_follow.php/#');
 
 	/* copy votes */
 	$rec['_votes'] = array_combine(array(
