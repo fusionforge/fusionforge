@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -111,14 +111,22 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 			</td>
 		</tr>';
 	}
-		echo $HTML->listTableBottom();
+	echo $HTML->listTableBottom();
+
+	$roadmap_factory = new RoadmapFactory($group);
+	$roadmaps = $roadmap_factory->getRoadmaps(true);
+	if (!empty($roadmaps)) {
+		echo '	<p id="roadmapadminlink">
+			<a href="'.util_make_url('/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1').'" >'._('Manage your roadmaps.').'</a>
+			</p>';
 	}
+}
 
-	//
-	//	Set up blank ArtifactType
-	//
+//
+//	Set up blank ArtifactType
+//
 
-	if (forge_check_perm ('tracker_admin', $group->getID())) {
+if (forge_check_perm ('tracker_admin', $group->getID())) {
 	?><?php echo _('<h3>Create a new tracker</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming.</p>') ?>
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="add_at" value="y" />
@@ -149,7 +157,7 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 	</form>
 	<?php
-	}
+}
 
 $atf->footer();
 

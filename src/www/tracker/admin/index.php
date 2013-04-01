@@ -37,6 +37,8 @@ require_once $gfcommon.'tracker/include/ArtifactHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactCanned.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
+require_once $gfcommon.'tracker/Roadmap.class.php';
+require_once $gfcommon.'tracker/RoadmapFactory.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');
