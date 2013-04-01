@@ -1,7 +1,9 @@
 <?php
-/** FusionForge Darcs plugin
+/**
+ * FusionForge Darcs plugin
  *
  * Copyright 2009, Roland Mas
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -68,7 +70,7 @@ class DarcsPlugin extends SCMPlugin {
 			return false ;
 		}
 
-		if ($project->usesPlugin($this->name)) {
+		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						  array ($project->getID())) ;
 			$commit_num = db_result($result,0,'commits');

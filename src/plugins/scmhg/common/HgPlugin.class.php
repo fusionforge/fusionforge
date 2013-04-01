@@ -1,9 +1,10 @@
 <?php
-/** FusionForge Mercurial (Hg) plugin
+/**
+ * FusionForge Mercurial (Hg) plugin
  *
  * Copyright 2009, Roland Mas
  * Copyright 2012, Denise Patzker
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -151,7 +152,7 @@ class HgPlugin extends SCMPlugin {
 		if (!$project) {
 			return false;
 		}
-		if ($project->usesPlugin($this->name)) {
+		if ($project->usesPlugin($this->name)  && forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array ($project->getID())) ;
 			$commit_num = db_result($result,0,'commits');
