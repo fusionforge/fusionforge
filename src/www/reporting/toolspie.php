@@ -61,14 +61,14 @@ if (!$datatype) {
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
 <td><strong><?php echo _('Trackers'); ?>:</strong><br /><?php echo report_tracker_box('datatype',$datatype); ?></td>
-<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><strong><?php echo _('Start Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
 <?php if ($start != $end) { ?>
 <p>
-<img src="toolspie_graph.php?<?php echo "datatype=$datatype&amp;start=$start&amp;end=$end"; ?>" width="640" height="480" alt="" />
+<img src="toolspie_graph.php?<?php echo "datatype=$datatype&amp;start=$start&amp;end=$end"; ?>" alt="" />
 </p>
 <?php }
 
