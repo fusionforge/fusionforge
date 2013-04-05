@@ -57,8 +57,8 @@ report_header(_('Site-Wide Time Tracking'));
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="typ" value="<?php echo $typ; ?>" />
 <table><tr>
-<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><strong><?php echo _('Start Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
@@ -100,7 +100,7 @@ if ($typ=='r') {
 
 } elseif ($start != $end) { ?>
 	<p>
-	<img src="sitetimebar_graph.php?<?php echo "start=$start&amp;end=$end"; ?>" width="640" height="480" alt="" />
+	<img src="sitetimebar_graph.php?<?php echo "start=$start&amp;end=$end"; ?>"  alt="" />
 	</p>
 	<?php
 }

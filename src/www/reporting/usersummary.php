@@ -66,9 +66,9 @@ report_header(_('User Summary Report'));
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 	<table>
 		<tr>
-			<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_weeks_box($report, 'start', $start); ?></td>
-			<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_weeks_box($report, 'end', $end); ?></td>
-			<td><strong><?php echo _('Task Status'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($l,$n,'tstat',$tstat,false); ?></td>
+			<td><strong><?php echo _('Start Date')._(':'); ?></strong><br /><?php echo report_weeks_box($report, 'start', $start); ?></td>
+			<td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_weeks_box($report, 'end', $end); ?></td>
+			<td><strong><?php echo _('Task Status')._(':'); ?></strong><br /><?php echo html_build_select_box_from_arrays($l,$n,'tstat',$tstat,false); ?></td>
 			<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 		</tr>
 	</table>
