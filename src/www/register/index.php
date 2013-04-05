@@ -170,7 +170,7 @@ site_user_header(array('title'=>_('Register Project')));
 <?php echo _('You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).') ?>
 </p>
 <p>
-<?php echo _('Full Name:') ?><br/>
+<?php echo _('Full Name') . _(': ') ?><br/>
 <input required="required" size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars($full_name); ?>"/>
 </p>
 
@@ -200,7 +200,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 <p><?php echo _('In addition to full project name, you will need to choose short, "Unix" name for your project.') ?></p>
 <p><?php echo _('The "Unix Name" has several restrictions because it is used in so many places around the site. They are:') ?></p>
 <ul>
-<li><?php echo _('cannot match the unix name of any other project;') ?></li>
+<li><?php echo _('cannot match the Unix name of any other project;') ?></li>
 <li><?php echo _('must be between 3 and 15 characters in length;') ?></li>
 <li><?php echo _('must be in lower case (upper case letters will be converted to lower case);') ?></li>
 <li><?php echo _('can only contain characters, numbers, and dashes;') ?></li>
@@ -208,7 +208,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 <li><?php echo _('cannot match one of our reserved domains;') ?></li>
 <li><?php echo _('Unix name will never change for this project;') ?></li>
 </ul>
-<p><?php echo _('Your unix name is important, however, because it will be used for many things, including:') ?></p>
+<p><?php echo _('Your Unix name is important, however, because it will be used for many things, including:') ?></p>
 <ul>
 <li><?php printf(_('a web site at <tt>unixname.%1$s</tt>,'), forge_get_config('web_host')) ?></li>
 <li><?php echo _('the URL of your source code repository,') ?></li>
@@ -218,7 +218,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 <li><?php echo _('search engines throughout the site.') ?></li>
 </ul>
 <p>
-<?php echo _('Unix Name:') ?>
+<?php echo _('Unix Name') . _(':'); ?>
 <br />
 <input required="required" type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>"/>
 </p>
@@ -249,7 +249,7 @@ if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 
 echo '<h2>'.$index++.'. '._('Project template'). '</h2>';
 
-if (count ($template_projects) >= 1) {
+if (count ($template_projects) > 1) {
 	$tpv_arr = array () ;
 	$tpn_arr = array () ;
 	echo '<p>';
@@ -285,7 +285,7 @@ if (count ($template_projects) >= 1) {
 		printf(_('Your project will initially have the same configuration as the %s project (same roles and permissions, same trackers, same set of enabled plugins, and so on).'),
 		       $template_projects[0]->getPublicName()) ;
 		echo '<input type="hidden" name="built_from_template" value="'.$template_projects[0]->getID().'" />' ;
-	echo '</p>' ;
+		echo '</p>' ;
 	}
 } else {
 	echo '<p>';
@@ -297,7 +297,7 @@ if (count ($template_projects) >= 1) {
 
 <p class="align-center">
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
-<input type="submit" name="i_disagree" value="<?php echo _('Cancel') ?>" />
+<input type="submit" name="i_disagree" formnovalidate="formnovalidate" value="<?php echo _('Cancel') ?>" />
 </p>
 
 </form>
