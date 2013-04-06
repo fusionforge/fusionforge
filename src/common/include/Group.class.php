@@ -669,7 +669,7 @@ class Group extends Error {
 	function setStatus(&$user, $status) {
 		global $SYS;
 
-		if (!forge_check_global_perm('approve_projects')) {
+		if (!forge_check_global_perm_for_user($user, 'approve_projects')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
