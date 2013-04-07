@@ -1,7 +1,8 @@
 <?php
-/*
+/**
  * Copyright 2010-2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -162,9 +163,6 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->open( ROOT . '/admin/approve-pending.php') ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue ($this->isPermissionDenied()) ;
-
-		// Approve it with a user that only has approve_projects
-		$this->approveProject ("TotoProject", "projapp") ;
 
 		// Submit a news in the project
 		$this->switchUser ("toto") ;
