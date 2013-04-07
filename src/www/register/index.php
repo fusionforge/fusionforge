@@ -136,7 +136,7 @@ if (getStringFromRequest('submit')) {
 	} else {
 		site_user_header(array('title'=>_('Registation Complete')));
 
-		if ( !forge_get_config('project_auto_approval') && !forge_check_global_perm('forge_admin')) {
+		if ( !forge_get_config('project_auto_approval') && !forge_check_global_perm('approve_projects')) {
 			printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
 		} elseif ($group->isError()) {
 			printf(_('<div class="error">ERROR: %1$s</div>'), $group->getErrorMessage() );
