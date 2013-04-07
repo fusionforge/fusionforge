@@ -46,8 +46,8 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class CreateProject extends FForge_SeleniumTestCase
 {
-	// Simple creation of a project by the admin user and
-	// approval of the creation just after.
+	// Simple creation of a project by the admin user.
+	// approval is automatic since project is created bu admin user.
 	// After creation, project is visible on the main page.
 	function testSimpleCreate()
 	{
@@ -65,14 +65,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isElementPresent("//select[@name='built_from_template']"));
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
-		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
-		$this->click("link=Site Admin");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Pending projects (new project approval)");
-		$this->waitForPageToLoad("30000");
-		$this->click("document.forms['approve.projecta'].submit");
-		$this->waitForPageToLoad("60000");
+		$this->assertTrue($this->isTextPresent("Your project has been automatically approved"));
 		$this->click("link=Home");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("ProjectA"));
@@ -96,14 +89,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("//input[@name='scm' and @value='scmsvn']");
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
-		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
-		$this->click("link=Site Admin");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Pending projects (new project approval)");
-		$this->waitForPageToLoad("30000");
-		$this->click("document.forms['approve.projectb'].submit");
-		$this->waitForPageToLoad("60000");
+		$this->assertTrue($this->isTextPresent("Your project has been automatically approved"));
 		$this->click("link=Home");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Project ' & B"));
