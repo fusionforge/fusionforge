@@ -303,9 +303,7 @@ class RBAC extends FForge_SeleniumTestCase
 		// Register projects
 		$this->switchUser ("bigboss") ;
 		$this->registerProject ("MetaProject", "bigboss") ;
-		$this->approveProject ("MetaProject", "bigboss") ;
 		$this->registerProject ("SubProject", "bigboss") ;
-		$this->approveProject ("SubProject", "bigboss") ;
 
 		// Create roles
 		$this->gotoProject ("MetaProject") ;
