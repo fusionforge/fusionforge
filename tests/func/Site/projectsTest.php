@@ -222,7 +222,6 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("toto Lastname"));
 
 		$this->registerProject('testal1','toto');
-		$this->approveProject('testal1',FORGE_ADMIN_USERNAME);
 
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
