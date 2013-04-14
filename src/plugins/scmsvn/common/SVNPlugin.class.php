@@ -6,6 +6,7 @@
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
  * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge.
  *
@@ -605,7 +606,15 @@ class SVNPlugin extends SCMPlugin {
 					$result['group_id'] = $group_id;
 					$result['ref_id'] = 'viewvc.php/?root='.$project->getUnixName();
 					$result['description'] = $message.' (r'.$revisions[$i].')';
-					$result['realname'] = '';
+					$result['user_name'] = $users[$i];
+					$userObject = user_get_object_by_name($users[$i]);
+					if (is_a($userObject, 'GFUser')) {
+						$result['realname'] = $user->getFirstName().' '.$user->getLastName();
+						$result['user_id'] = $user->getId();
+					} else {
+						$result['realname'] = '';
+						$result['user_id'] = '';
+					}
 					$result['activity_date'] = $times[$i];
 					$result['subref_id'] = '&view=rev&revision='.$revisions[$i];
 					$params['results'][] = $result;
