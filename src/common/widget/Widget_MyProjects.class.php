@@ -2,21 +2,23 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2013, French Ministry of National Education
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
- * This file is a part of Codendi.
+ * This file is a part of Fusionforge.
  *
- * Codendi is free software; you can redistribute it and/or modify
+ * Fusionforge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Codendi is distributed in the hope that it will be useful,
+ * Fusionforge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
+ * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
 require_once('Widget.class.php');
@@ -103,8 +105,8 @@ class Widget_MyProjects extends Widget {
 
 	function displayRss() {
 		$rss = new RSS(array(
-				'title'       => forge_get_config('forge_name').' - MyProjects',
-				'description' => 'My projects',
+				'title'       => forge_get_config('forge_name').' - '. _('MyProjects'),
+				'description' => _('My projects'),
 				'link'        => get_server_url(),
 				'language'    => 'en-us',
 				'copyright'   => 'Copyright Xerox',
@@ -113,14 +115,12 @@ class Widget_MyProjects extends Widget {
 		$projects = UserManager::instance()->getCurrentUser()->getGroups();
 		sortProjectList($projects);
 
-		if (!$result || $rows < 1) {
+		if (!$projects || count($projects) < 1) {
 			$rss->addItem(array(
-					  'title'       => 'Error',
+					  'title'       => forge_get_config('forge_name'),
 					  'description' => _("You're not a member of any project") . db_error(),
 					  'link'        => util_make_url()
 				  ));
-			$rss->display();
-			return ;
 		}
 
 		foreach ($projects as $project) {
@@ -143,6 +143,8 @@ class Widget_MyProjects extends Widget {
 						'link'        => $url)
 					);
 		}
+		$rss->display();
+		return;
 	}
 
 	function getDescription() {
