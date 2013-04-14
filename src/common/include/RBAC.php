@@ -5,6 +5,7 @@
  * Copyright 2004, GForge, LLC
  * Copyright 2009-2010, Roland Mas
  * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -891,14 +892,16 @@ abstract class BaseRole extends Error {
 				continue;
 			}
 			$ff = new ForumFactory ($p) ;
-			$fids = $ff->getAllForumIdsWithNews () ;
-			foreach ($fids as $fid) {
-				if (array_key_exists ('forum', $this->perms_array)
-				    && array_key_exists ($fid, $this->perms_array['forum']) ) {
-					$new_pa['forum'][$fid] = $this->perms_array['forum'][$fid] ;
-				} elseif (array_key_exists ('new_forum', $this->perms_array)
-					  && array_key_exists ($p->getID(), $this->perms_array['new_forum']) ) {
-					$new_pa['forum'][$fid] = $new_pa['new_forum'][$p->getID()] ;
+			if (!$ff->isError()) {
+				$fids = $ff->getAllForumIdsWithNews () ;
+				foreach ($fids as $fid) {
+					if (array_key_exists ('forum', $this->perms_array)
+					&& array_key_exists ($fid, $this->perms_array['forum']) ) {
+						$new_pa['forum'][$fid] = $this->perms_array['forum'][$fid] ;
+					} elseif (array_key_exists ('new_forum', $this->perms_array)
+						&& array_key_exists ($p->getID(), $this->perms_array['new_forum']) ) {
+						$new_pa['forum'][$fid] = $new_pa['new_forum'][$p->getID()] ;
+					}
 				}
 			}
 		}
@@ -911,14 +914,16 @@ abstract class BaseRole extends Error {
 				continue;
 			}
 			$pgf = new ProjectGroupFactory ($p) ;
-			$pgids = $pgf->getAllProjectGroupIds () ;
-			foreach ($pgids as $gid) {
-				if (array_key_exists ('pm', $this->perms_array)
-				    && array_key_exists ($gid, $this->perms_array['pm']) ) {
-					$new_pa['pm'][$gid] = $this->perms_array['pm'][$gid] ;
-				} elseif (array_key_exists ('new_pm', $this->perms_array)
-					  && array_key_exists ($p->getID(), $this->perms_array['new_pm']) ) {
-					$new_pa['pm'][$gid] = $new_pa['new_pm'][$p->getID()] ;
+			if (!$pgf->isError()) {
+				$pgids = $pgf->getAllProjectGroupIds () ;
+				foreach ($pgids as $gid) {
+					if (array_key_exists ('pm', $this->perms_array)
+					&& array_key_exists ($gid, $this->perms_array['pm']) ) {
+						$new_pa['pm'][$gid] = $this->perms_array['pm'][$gid] ;
+					} elseif (array_key_exists ('new_pm', $this->perms_array)
+						&& array_key_exists ($p->getID(), $this->perms_array['new_pm']) ) {
+						$new_pa['pm'][$gid] = $new_pa['new_pm'][$p->getID()] ;
+					}
 				}
 			}
 		}
