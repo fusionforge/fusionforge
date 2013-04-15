@@ -567,8 +567,8 @@ class SVNPlugin extends SCMPlugin {
 	function activity($params) {
 		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
 			$adds, $deletes, $updates, $commits, $date_key,
-			$usr_adds, $usr_deletes, $usr_updates,
-			$messages, $last_message, $times, $revisions;
+			$usr_adds, $usr_deletes, $usr_updates, $old_commit,
+			$messages, $last_message, $times, $revisions, $users;
 		$group_id = $params['group'];
 		$project = group_get_object($group_id);
 		if (! $project->usesPlugin($this->name)) {
@@ -576,6 +576,8 @@ class SVNPlugin extends SCMPlugin {
 		}
 
 		if (in_array('scmsvn', $params['show']) || (count($params['show']) < 1)) {
+			$commits = 0;
+			$old_commit = -1;
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
 			$d1 = date('Y-m-d', $start_time - 80000);
@@ -608,8 +610,8 @@ class SVNPlugin extends SCMPlugin {
 					$result['user_name'] = $users[$i];
 					$userObject = user_get_object_by_name($users[$i]);
 					if (is_a($userObject, 'GFUser')) {
-						$result['realname'] = $user->getFirstName().' '.$user->getLastName();
-						$result['user_id'] = $user->getId();
+						$result['realname'] = $userObject->getFirstName().' '.$userObject->getLastName();
+						$result['user_id'] = $userObject->getId();
 					} else {
 						$result['realname'] = '';
 						$result['user_id'] = '';
@@ -709,11 +711,12 @@ class SVNPlugin extends SCMPlugin {
 // End of class, helper functions now
 
 function SVNPluginCharData($parser, $chars) {
-	global $last_tag, $last_user, $last_time, $start_time, $end_time,
-		$time_ok, $user_list, $last_message, $messages, $times;
+	global $last_tag, $last_user, $last_time, $start_time, $end_time, $old_commit, $commits,
+		$time_ok, $user_list, $last_message, $messages, $times, $users;
 	switch ($last_tag) {
 		case "AUTHOR": {
 			$last_user = preg_replace('/[^a-z0-9_-]/', '', strtolower(trim($chars)));
+			$users[] = $last_user;
 			break;
 		}
 		case "DATE": {
@@ -728,7 +731,15 @@ function SVNPluginCharData($parser, $chars) {
 			break;
 		}
 		case "MSG": {
-			$messages[] = $chars;
+			/* If commit id is the same, then concatenate the string with the previous
++			 * (happen when the message contain accents).
++			 */
+			if ($old_commit == $commits) {
+				$messages[count($messages)-1] .= $chars;
+			} else {
+				$messages[] = $chars;
+			}
+			$old_commit = $commits;
 			break;
 		}
 	}
