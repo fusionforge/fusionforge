@@ -387,7 +387,12 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
 	if ($force_secure && !session_issecure()) {
 		return;
 	}
-	setcookie($name, $value, $expiration, '/', $domain, $force_secure, true);
+	if (PHP_MAJOR_VERSION < 5 || PHP_MINOR_VERSION < 2) {
+		// In PHP < 5.2, setcookie accepts at most 6 parameters
+		setcookie($name, $value, $expiration, '/', $domain, $force_secure);
+	} else {
+		setcookie($name, $value, $expiration, '/', $domain, $force_secure, true);
+	}
 }
 
 /**
