@@ -1228,6 +1228,7 @@ function util_ensure_value_in_set ($value, $set) {
 
 function check_email_available($group, $email, &$response) {
 	// Check if a mailing list with same name already exists
+	if ($group->usesMail()) {
 	$mlFactory = new MailingListFactory($group);
 	if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
 		$response .= $mlFactory->getErrorMessage();
@@ -1245,8 +1246,10 @@ function check_email_available($group, $email, &$response) {
 			return false;
 		}
 	}
+	}
 
 	// Check if a forum with same name already exists
+	if ($group->usesForum()) {
 	$ff = new ForumFactory($group);
 	if (!$ff || !is_object($ff) || $ff->isError()) {
 		$response .= $ff->getErrorMessage();
@@ -1261,6 +1264,7 @@ function check_email_available($group, $email, &$response) {
 				return false;
 			}
 		}
+	}
 	}
 
 	// Email is available
