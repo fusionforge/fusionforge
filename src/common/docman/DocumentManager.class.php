@@ -25,6 +25,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/User.class.php';
+require_once $gfcommon.'include/minijson.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 
 class DocumentManager extends Error {
@@ -213,13 +214,11 @@ class DocumentManager extends Error {
 		}
 		switch ($format) {
 			case 'json': {
-				$returnString = '{';
+				$state_values = array();
 				while ($stateArr = db_fetch_array($stateQuery)) {
-					$returnString .= util_html_secure($stateArr['name']).': \''.$stateArr['stateid'].'\',';
+					$state_values[$stateArr['name']] = $stateArr['stateid'];
 				}
-				$returnString .= '}';
-				return $returnString;
-				break;
+				return minijson_encode($state_values, false);
 			}
 			default: {
 				return $stateQuery;
