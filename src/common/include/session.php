@@ -6,6 +6,8 @@
  * Copyright 2001-2002, 2009, Roland Mas
  * Copyright 2004-2005, GForge, LLC
  * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright © 2013
+ *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -49,16 +51,25 @@ function session_build_session_token($user_id) {
 	if (!$user_id) {
 		return '';
 	}
+	return session_build_session_cookie($user_id);
+}
 
-	$session_serial = $user_id.'-*-'.time().'-*-'.getStringFromServer('REMOTE_ADDR').'-*-'.getStringFromServer('HTTP_USER_AGENT');
-	$session_serial_hash = md5($session_serial.forge_get_config('session_key'));
-	$session_serial_token = base64_encode($session_serial).'-*-'.$session_serial_hash;
-	/*
-	 * TODO: would be better to use HMAC-SHA256 via
-	 * http://www.php.net/manual/en/function.hash-hmac.php
-	 * or do this using Keccak (SHA-3) which is its own MAC
-	 */
-	return $session_serial_token;
+function session_build_session_cookie($user_id) {
+	$session_cookie_data = array(
+		$user_id,
+		getStringFromServer('REMOTE_ADDR'),
+		getStringFromServer('HTTP_USER_AGENT'),
+	    );
+	$session_cookie = "" . time();
+	foreach ($session_cookie_data as $s) {
+		/* for escaping; this is not really HTML */
+		$session_cookie .= '<' . util_html_encode($s);
+	}
+	$session_cookie_hmac = hash_hmac("sha256", $session_cookie,
+	    forge_get_config('session_key'), true);
+	$session_serial_cookie = base64_encode($session_cookie) . '!' .
+	    base64_encode($session_cookie_hmac);
+	return $session_serial_cookie;
 }
 
 /**
@@ -70,8 +81,15 @@ function session_build_session_token($user_id) {
  *	@return hash
  */
 function session_get_hash_from_token($session_token) {
-	list ($junk, $hash) = explode('-*-', $session_token);
-	return $hash;
+	return session_get_session_cookie_hash($session_token);
+}
+function session_get_session_cookie_hash($session_cookie) {
+	/*
+	 * we cannot just use the HMAC as that may be longer than
+	 * the database fields, and this code used to return a
+	 * string of the size of an md5(), so just md5 it
+	 */
+	return md5($session_cookie);
 }
 
 /**
@@ -84,16 +102,33 @@ function session_check_session_token($session_token) {
 	if ($session_token == '') {
 		return false;
 	}
-
-	list ($session_serial, $hash) = explode('-*-', $session_token);
-	$session_serial = base64_decode($session_serial);
-	$new_hash = md5($session_serial.forge_get_config('session_key'));
-
-	if ($hash != $new_hash) {
+	return session_check_session_cookie($session_token);
+}
+function session_check_session_cookie($session_cookie) {
+	if (!preg_match('#^[A-Za-z0-9+/=]*![A-Za-z0-9+/=]*$#',
+	    $session_cookie)) {
+		/*
+		 * does not match basic format, off; recommended by
+		 * http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html
+		 * to protect the below code from malformed strings
+		 */
 		return false;
 	}
 
-	list($user_id, $time, $ip, $user_agent) = explode('-*-', $session_serial, 4);
+	list($session_cookie, $session_cookie_hmac) = explode('!',
+	    $session_cookie);
+	$session_cookie = base64_decode($session_cookie);
+	$session_cookie_hmac = base64_decode($session_cookie_hmac);
+	if (hash_hmac("sha256", $session_cookie,
+	    forge_get_config('session_key'), true) !== $session_cookie_hmac) {
+		/* HMAC mismatch */
+		return false;
+	}
+
+	list($time, $user_id, $ip, $user_agent) = explode('<', $session_cookie);
+	$user_id = util_unconvert_htmlspecialchars($user_id);
+	$ip = util_unconvert_htmlspecialchars($ip);
+	$user_agent = util_unconvert_htmlspecialchars($user_agent);
 
 	if (!session_check_ip($ip, getStringFromServer('REMOTE_ADDR'))) {
 		return false;
@@ -120,7 +155,13 @@ function session_check_session_token($session_token) {
  */
 function session_logout() {
 	plugin_hook('close_auth_session');
-	RBACEngine::getInstance()->invalidateRoleCaches() ;
+
+	// delete both session and username cookies
+	// NB: cookies must be deleted with the same scope parameters they were set with
+	//
+	session_cookie('session_ser', '');
+
+	RBACEngine::getInstance()->invalidateRoleCaches();
 	return true;
 }
 
@@ -137,38 +178,37 @@ function session_logout() {
  *	@access public
  *
  */
-function session_login_valid($loginname, $passwd, $allowpending=0)  {
-	global $feedback,$error_msg,$warning_msg;
+function session_login_valid($loginname, $passwd, $allowpending=0) {
+	global $feedback, $error_msg, $warning_msg;
 
 	if (!$loginname || !$passwd) {
 		$warning_msg = _('Missing Password Or Users Name');
 		return false;
 	}
 
-	$hook_params = array () ;
-	$hook_params['loginname'] = $loginname ;
-	$hook_params['passwd'] = $passwd ;
-	$result = plugin_hook ("session_before_login", $hook_params) ;
+	$hook_params = array();
+	$hook_params['loginname'] = $loginname;
+	$hook_params['passwd'] = $passwd;
+	$result = plugin_hook("session_before_login", $hook_params);
 
 	// Refuse login if not all the plugins are ok.
 	if (!$result) {
-		if (!$feedback) {
+		if (!util_ifsetor($feedback)) {
 			$warning_msg = _('Invalid Password Or User Name');
 		}
 		return false;
 	}
 
-	return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;
-}
-
-function session_login_valid_dbonly($loginname, $passwd, $allowpending=false) {
-	return session_check_credentials_in_database($loginname, $passwd, $allowpending);
+	return session_login_valid_dbonly($loginname, $passwd, $allowpending);
 }
 
 function session_check_credentials_in_database($loginname, $passwd, $allowpending=false) {
-	global $warning_msg ,$userstatus;
+	return session_login_valid_dbonly($loginname, $passwd, $allowpending);
+}
+function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
+	global $feedback, $userstatus;
 
-	//  Try to get the users from the database using user_id and (MD5) user_pw
+	// Try to get the users from the database using user_id and (MD5) user_pw
 	if (forge_get_config('require_unique_email')) {
 		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE (user_name=$1 OR email=$1) AND user_pw=$2',
 					array ($loginname,
@@ -266,7 +306,7 @@ function session_check_credentials_in_database($loginname, $passwd, $allowpendin
 				return false;
 			}
 		}
-		//create a new session
+		// create a new session
 		session_set_new(db_result($res, 0, 'user_id'));
 
 		return true;
@@ -289,29 +329,25 @@ function session_check_credentials_in_database($loginname, $passwd, $allowpendin
  *	@return true/false
  *	@access private
  */
-function session_check_ip($oldip,$newip) {
-	if (strstr ($oldip, ':')) {
+function session_check_ip($oldip, $newip) {
+	if (strstr($oldip, ':')) {
 		// Old IP is IPv6
-		if (strstr ($newip, ':')) {
+		if (strstr($newip, ':')) {
 			// New IP is IPv6 too
-			return ($oldip == $newip) ;
-		} else {
-			return false ;
+			return ($oldip == $newip);
 		}
-	} else {
-		// Old IP is IPv4
-		if (strstr ($newip, ':')) {
-			// New IP is IPv6
-			return false ;
-		} else {
-			$eoldip = explode(".",$oldip);
-			$enewip = explode(".",$newip);
-
-			// require same class b subnet
-			return ( ($eoldip[0] == $enewip[0])
-				 && ($eoldip[1] == $enewip[1]) ) ;
-		}
+		return false;
 	}
+	// Old IP is IPv4
+	if (strstr($newip, ':')) {
+		// New IP is IPv6
+		return false;
+	}
+	$eoldip = explode(".", $oldip);
+	$enewip = explode(".", $newip);
+
+	// require same Class B subnet
+	return (($eoldip[0] == $enewip[0]) && ($eoldip[1] == $enewip[1]));
 }
 
 /**
@@ -334,16 +370,42 @@ function session_issecure() {
  *	@param		string	Value of cookie
  *	@param		string	Domain scope (default '')
  *	@param		string	Expiration time in UNIX seconds (default 0)
- *	@return true/false
  */
-function session_set_cookie($name ,$value, $domain = '', $expiration = 0) {
-	if (php_sapi_name() != 'cli') {
-		if ( $expiration != 0){
-			setcookie($name, $value, time() + $expiration, '/', $domain, 0);
-		} else {
-			setcookie($name, $value, $expiration, '/', $domain, 0);
-		}
+function session_set_cookie($name, $value, $domain='', $expiration=0) {
+	return session_cookie($name, $value, $domain, $expiration);
+}
+function session_cookie($name, $value, $domain='', $expiration=0) {
+	if (php_sapi_name() == 'cli') {
+		return;
 	}
+	if ($expiration) {
+		$expiration = time() + $expiration;
+	}
+	/* evolvis: force secure (SSL-only) session cookies */
+	//$force_secure = true;
+	/* not (yet?) in FusionForge */
+	$force_secure = false;
+	if ($force_secure && !session_issecure()) {
+		return;
+	}
+	setcookie($name, $value, $expiration, '/', $domain, $force_secure, true);
+}
+
+/**
+ *	session_redirect_uri() - Redirect browser
+ *
+ *	@param		string	Absolute URI
+ *	@return never returns
+ */
+function session_redirect_external($url) {
+	session_redirect_uri($url);
+}
+function session_redirect_uri($loc) {
+	util_save_messages();
+	sysdebug_off("Status: 301 Moved Permanently", true, 301);
+	header("Location: ${loc}", true);
+	echo "\nPlease go to ${loc} instead!\n";
+	exit;
 }
 
 /**
@@ -352,8 +414,7 @@ function session_set_cookie($name ,$value, $domain = '', $expiration = 0) {
  * @param  string $loc    Absolute path within the site
  */
 function session_redirect($loc) {
-	util_save_messages();
-	session_redirect_external(util_make_url ($loc));
+	session_redirect_uri(util_make_url($loc));
 	exit;
 }
 
@@ -364,6 +425,7 @@ function session_redirect($loc) {
  *	@return never returns
  */
 function session_redirect_external($url) {
+	util_save_messages();
 	header('Location: '.$url);
 	print("\n\n");
 	exit;
@@ -399,35 +461,35 @@ function session_require($req, $reason='') {
 	}
 
 	$user =& user_get_object(user_getid());
-	if (! $user->isActive()) {
+	if (!$user->isActive()) {
 		session_logout();
-		exit_error(_('Your account is no longer active ; you have been disconnected'),'');
+		exit_error(_('Your account is no longer active; you have been disconnected'), '');
 	}
 
-	if (array_key_exists('group', $req)) {
-		$group = group_get_object($req['group']);
-		if (!$group || !is_object($group)) {
-			exit_no_group();
-		} elseif ($group->isError()) {
-			exit_error($reason == '' ? $group->getErrorMessage() : $reason, '');
-		}
+	if (!array_key_exists('group', $req)) {
+		exit_permission_denied($reason, '');
+	}
 
-		$perm =& $group->getPermission ();
-		if (!$perm || !is_object($perm) || $perm->isError()) {
-			exit_permission_denied($reason,'');
-		}
+	$group = group_get_object($req['group']);
+	if (!$group || !is_object($group)) {
+		exit_no_group();
+	} elseif ($group->isError()) {
+		exit_error($reason ? $reason : $group->getErrorMessage(), '');
+	}
 
-		if (isset($req['admin_flags']) && $req['admin_flags']) {
-			if (!$perm->isAdmin()) {
-				exit_permission_denied($reason,'');
-			}
-		} else {
-			if (!$perm->isMember()) {
-				exit_permission_denied($reason,'');
-			}
+	$perm =& $group->getPermission();
+	if (!$perm || !is_object($perm) || $perm->isError()) {
+		exit_permission_denied($reason, '');
+	}
+
+	if (isset($req['admin_flags']) && $req['admin_flags']) {
+		if (!$perm->isAdmin()) {
+			exit_permission_denied($reason, '');
 		}
 	} else {
-		exit_permission_denied($reason,'');
+		if (!$perm->isMember()) {
+			exit_permission_denied($reason, '');
+		}
 	}
 }
 
@@ -438,7 +500,7 @@ function session_require($req, $reason='') {
  *	fails checks.
  *
  */
-function session_require_perm($section, $reference, $action = NULL, $reason='') {
+function session_require_perm($section, $reference, $action=NULL, $reason='') {
 	if (!forge_check_perm($section, $reference, $action)) {
 		exit_permission_denied($reason, $section);
 	}
@@ -451,11 +513,11 @@ function session_require_perm($section, $reference, $action = NULL, $reason='') 
  *	fails checks.
  *
  */
-function session_require_global_perm($section, $action = NULL, $reason='') {
+function session_require_global_perm($section, $action=NULL, $reason='') {
 	if (!forge_check_global_perm($section, $action)) {
 		if (!$reason) {
 			$reason = sprintf(_('Permission denied. The %s administrators will have to grant you permission to view this page.'),
-					   forge_get_config ('forge_name')) ;
+			    forge_get_config('forge_name'));
 		}
 		exit_permission_denied($reason, $section);
 	}
@@ -468,9 +530,9 @@ function session_require_global_perm($section, $action = NULL, $reason='') {
  *	fails checks.
  *
  */
-function session_require_login () {
+function session_require_login() {
 	if (!session_loggedin()) {
-		exit_not_logged_in () ;
+		exit_not_logged_in();
 	}
 }
 
@@ -486,40 +548,49 @@ function session_require_login () {
 function session_set_new($user_id) {
 	$token = session_build_session_token($user_id);
 
-	$res = db_query_params ('SELECT count(*) as c FROM user_session WHERE session_hash = $1',
-				array (session_get_hash_from_token($token))) ;
-	if (!$res || db_result($res,0,'c') < 1) {
-		db_query_params ('INSERT INTO user_session (session_hash,ip_addr,time,user_id) VALUES ($1,$2,$3,$4)',
-				 array (session_get_hash_from_token($token),
-					getStringFromServer('REMOTE_ADDR'),
-					time(),
-					$user_id)) ;
+	// set session cookie
+	//
+	$cookie = session_build_session_cookie($user_id);
+//	session_cookie("session_ser", $cookie, "", forge_get_config('session_expire'));
+//	$session_ser = $cookie;
+
+	$res = db_query_params('SELECT count(*) as c FROM user_session
+		WHERE session_hash=$1',
+	    array(($shash = session_get_session_cookie_hash($cookie))));
+	if (!$res || db_result($res, 0, 'c') < 1) {
+		db_query_params('INSERT INTO user_session
+			(session_hash,ip_addr,time,user_id)
+			VALUES ($1,$2,$3,$4)',
+		    array(
+			$shash,
+			getStringFromServer('REMOTE_ADDR'),
+			time(),
+			$user_id,
+		    ));
 	}
 
 	// check uniqueness of the session_hash in the database
 	$res = session_getdata($user_id);
 
 	if (!$res) {
-		exit_error(db_error(),'');
-	}
-	else if (db_numrows($res) < 1) {
-		exit_error(_('Could not fetch user session data'),'');
+		exit_error(db_error(), '');
+	} elseif (db_numrows($res) < 1) {
+		exit_error(_('Could not fetch user session data'), '');
 	} else {
-		session_set_internal ($user_id, $res) ;
+		session_set_internal($user_id, $res);
 	}
 }
 
-function session_set_internal ($user_id, $res=false) {
-	global $G_SESSION ;
+function session_set_internal($user_id, $res=false) {
+	global $G_SESSION;
 
-	$G_SESSION = user_get_object($user_id,$res);
+	$G_SESSION = user_get_object($user_id, $res);
 	if ($G_SESSION) {
 		$G_SESSION->setLoggedIn(true);
 	}
 
-	RBACEngine::getInstance()->invalidateRoleCaches() ;
+	RBACEngine::getInstance()->invalidateRoleCaches();
 }
-
 
 /**
  *	session_set_admin() - Setup session for the admin user
@@ -529,27 +600,41 @@ function session_set_internal ($user_id, $res=false) {
  *	@return none
  */
 function session_set_admin() {
-	$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('forge_admin', -1) ;
-	if (count ($admins) == 0) {
-		exit_error(_('No admin users ?'),'');
+	$admins = RBACEngine::getInstance()->getUsersByAllowedAction('forge_admin', -1);
+	if (count($admins) == 0) {
+		exit_error(_('No admin users ?'), '');
 	}
-	session_set_new ($admins[0]->getID());
+	/*
+	 * Use the user with the lowest numerical user ID.
+	 * This is to prevent complaints from real humans
+	 * if the system is doing something in their stead
+	 * (for example by populate_template_project.php).
+	 * Usually, “admin” has the ID 101.
+	 */
+	$admin_ids = array();
+	foreach ($admins as $admin) {
+		$admin_ids[] = $admin->getID();
+	}
+	sort($admin_ids);
+	session_set_new($admin_ids[0]);
 }
 
 /**
  *	Private optimization function for logins - fetches user data, language, and session
  *	with one query
  *
- *  @param		int		The user ID
+ *	@param	int		The user ID
  *	@access private
  */
 function session_getdata($user_id) {
-	return db_query_params ('SELECT u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code, t.dirname, t.fullname
-                                 FROM users u, supported_languages sl, themes t
-                                 WHERE u.language=sl.language_id
-                                   AND u.theme_id=t.theme_id
-                                   AND u.user_id=$1',
-				array ($user_id)) ;
+	return db_query_params('SELECT u.*, sl.language_id, sl.name,
+		    sl.filename, sl.classname, sl.language_code,
+		    t.dirname, t.fullname
+		FROM users u, supported_languages sl, themes t
+		WHERE u.language=sl.language_id
+		    AND u.theme_id=t.theme_id
+		    AND u.user_id=$1',
+	    array($user_id));
 }
 
 /**
@@ -664,7 +749,7 @@ function session_set_for_authplugin($authpluginname) {
 
 			$user->setLoggedIn(true);echo "user:".$user->getUnixName();
 			$G_SESSION = $user;
-						
+
 		} else {
 			$G_SESSION=false;
 		}
@@ -676,8 +761,6 @@ function session_set_for_authplugin($authpluginname) {
 	//print_r($re->getPublicRoles());
 	$re->invalidateRoleCaches() ;
 	//print_r($re->getAvailableRoles());
-	
-	
 }
 
 //TODO - this should be generalized and used for pre.php,
@@ -692,9 +775,8 @@ function session_continue($sessionKey) {
 	$LUSER =& session_get_user();
 	if (!is_object($LUSER) || $LUSER->isError()) {
 		return false;
-	} else {
-		return true;
 	}
+	return true;
 }
 
 function setup_tz_from_context() {
@@ -704,7 +786,7 @@ function setup_tz_from_context() {
 	} else {
 		$tz = $LUSER->getTimeZone();
 	}
-	putenv ('TZ='. $tz);
+	putenv('TZ=' . $tz);
 	date_default_timezone_set($tz);
 }
 
@@ -723,14 +805,12 @@ function &session_get_user() {
  *  user_getid()
  *  Get user_id of logged in user
  */
-
 function user_getid() {
 	global $G_SESSION;
 	if ($G_SESSION) {
 		return $G_SESSION->getID();
-	} else {
-		return false;
 	}
+	return false;
 }
 
 /**
@@ -742,9 +822,8 @@ function session_loggedin() {
 
 	if ($G_SESSION) {
 		return $G_SESSION->isLoggedIn();
-	} else {
-		return false;
 	}
+	return false;
 }
 
 // Local Variables:

@@ -2,7 +2,7 @@
 /*-
  * CAPTCHA support for FusionForge (or whatever your module does)
  *
- * Copyright © 2011
+ * Copyright © 2013
  *	First M. Last <user@domain>
  * All rights reserved.
  *
