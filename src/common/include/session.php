@@ -402,9 +402,6 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
  *	@param		string	Absolute URI
  *	@return never returns
  */
-function session_redirect_external($url) {
-	session_redirect_uri($url);
-}
 function session_redirect_uri($loc) {
 	util_save_messages();
 	sysdebug_off("Status: 301 Moved Permanently", true, 301);
