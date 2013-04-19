@@ -90,6 +90,7 @@ if ($login) {
 		}
 	} else {
 		if ($form_loginname && $form_pw) {
+			$warning_msg = _('Invalid Password Or User Name');
 		} else {
 			$warning_msg = _('Missing Password Or User Name');
 		}
