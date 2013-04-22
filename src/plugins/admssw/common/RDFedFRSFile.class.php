@@ -61,7 +61,7 @@ class RDFedFRSFile extends FRSFile {
 	 *	@return	string	URL
 	 */
 	public function getDownloadUrl() {
-		return util_make_url('/frs/download.php/file/'.$this->getID().'/'.$this->getName());
+		return util_make_url('/frs/download.php/file/'.$this->getID().'/'.rawurlencode($this->getName()));
 	}
 	
 	/**
