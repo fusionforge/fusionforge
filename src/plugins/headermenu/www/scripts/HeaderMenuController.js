@@ -140,7 +140,7 @@ HeaderMenuController.prototype =
 						this.params.validateButton.hide();
 					}, this)
 			);
-	},
+	}
 };
 
 GroupMenuController.prototype =
@@ -209,7 +209,7 @@ GroupMenuController.prototype =
 					}, this)
 			);
 
-	},
+	}
 };
 
 EditHeaderMenuController.prototype =
