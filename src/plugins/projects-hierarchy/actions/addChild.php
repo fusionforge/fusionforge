@@ -4,6 +4,7 @@
  * action: addChild
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,6 +28,8 @@ global $_SERVER;
 global $id;
 
 $sub_project_id = getIntFromRequest('sub_project_id');
+if ($sub_project_id && $projectsHierarchy->is_child($sub_project_id))
+	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('This project already has a parent'));
 
 if ($sub_project_id && $projectsHierarchy->addChild($id, $sub_project_id))
 	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Successfully added child'));
