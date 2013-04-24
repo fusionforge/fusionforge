@@ -5,6 +5,7 @@
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -546,12 +547,12 @@ class projects_hierarchyPlugin extends Plugin {
 					switch ($relation) {
 						case "parent": {
 							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
-										array($project_id, $sub_project_id));
+										array($sub_project_id, $project_id));
 							break;
 						}
 						case "child": {
 							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
-										array($sub_project_id, $project_id));
+										array($project_id, $sub_project_id));
 							break;
 						}
 						default: {
@@ -833,6 +834,19 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 		}
 		return $used;
+
+	/**
+	 * is_child - to verif if project already has a parent
+	 *
+	 * @param	integer	group_id
+	 * @return	bool	true on success
+	 * @access	public
+	 */
+	function is_child($group_id) {
+		if (count($this->getFamily($group_id, 'parent', true, 'any'))>0)
+			return true;
+		else
+			return false;
 	}
 }
 // Local Variables:
