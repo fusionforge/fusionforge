@@ -23,12 +23,13 @@ require dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
-
 $database=forge_get_config('database_name');
 $username=forge_get_config('database_user');
 $password=forge_get_config('database_password');
 $host=forge_get_config('database_host');
 $port=forge_get_config('database_port');
+
+$num_of_days = forge_get_config('backup_days'); // Number of days to keep if set, unlimited if not set
 
 $datetime=date('Y-m-d'); //we will use this to concatenate it with the tar filename
 
@@ -44,29 +45,47 @@ if(util_is_root_dir($sys_path_to_backup)){
 }
 
 if (!is_dir($sys_path_to_backup)) {
-	// try to recursively create it
-	$subdirs = explode('/', $sys_path_to_backup);
-	$path = '';
-	foreach ($subdirs as $subdir) {
-		$subdir = trim($subdir);
-		if (empty($subdir)) continue;
-		$path .= '/'.$subdir;
-		if (!file_exists($path)) {
-			if (!mkdir($path)) {
-				cron_entry(23,'Couldn\'t create directory '.$path.' for backups');
+	if (!mkdir($sys_path_to_backup, 0700, true)) {
+		cron_entry(23,'Couldn\'t create directory '.$sys_path_to_backup.' for backups');
 				exit;
 			}
 		}
-	}
-}
 
 // add trailing slash
 if (!preg_match('/\\/$/',$sys_path_to_backup)) {
 	$sys_path_to_backup .= '/';
 }
 
+function delete_files( $files )
+{
+	global $err;
+
+	$output="";
+	@exec('rm -rf '.$files.'  2>&1', $output, $retval);
+	if($retval!=0){
+		$err .= implode("\n", $output);
+	}
+}
+
 $output = "";
 $err = "";
+
+if ($num_of_days)
+{
+	/* Delete all old backups with in 30 days old */
+	for( $day = $num_of_days; $day <= $num_of_days + 30; $day = $day + 1)
+	{
+		// day to be deleted
+		$trash = date('Y-m-d', mktime(0,0,0, date("m"), date("d")-$day, date("Y")));
+
+		// delete old backups
+		delete_files($sys_path_to_backup.'/backup'.$trash.'.tar.bz2');
+		delete_files($sys_path_to_backup.'/*'.$trash.'.tar.bz2');
+		delete_files($sys_path_to_backup.'/*'.$trash.'.tar');
+		delete_files($sys_path_to_backup.'/*'.$trash);
+	}
+}
+
 $dump_cmd = 'pg_dump -U ' . $username;
 if ($host) {
 	$dump_cmd .= ' -h ' . $host;
@@ -113,7 +132,7 @@ $output="";
 // Most probable mailman data dir
 $mailman_data_dir = '/var/lib/mailman';
 if (file_exists($mailman_data_dir)) {
-	@exec('tar -jcvf '.$sys_path_to_backup.'mailinglist-tmp-'.$datetime.'.tar.bz2 '.$mailman_data_dir.'/ 2>&1', $output,$retval);   //proceed mailman dir tar file creation
+	@exec('tar -hjcvf '.$sys_path_to_backup.'mailinglist-tmp-'.$datetime.'.tar.bz2 '.$mailman_data_dir.'/ 2>&1', $output,$retval);   //proceed mailman dir tar file creation
 	if($retval!=0){
 		$err.= implode("\n", $output);
 	}
@@ -200,7 +219,7 @@ if($retval!=0){
 	$err.= implode("\n", $output);
 }
 
-//If execution of tar command was successfull ($retval equals zero) remove individual files
+//If execution of tar command was successful ($retval equals zero) remove individual files
 if($retval==0){
 	$output="";
 	@exec('rm '.$sys_path_to_backup.'*tmp-'.$datetime.'*  2>&1',$output,$retval);
@@ -209,7 +228,4 @@ if($retval==0){
 	}
 }
 
-
 cron_entry(23,$err);
-
-?>
