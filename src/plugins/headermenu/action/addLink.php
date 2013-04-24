@@ -28,7 +28,7 @@ $link = getStringFromRequest('link');
 $description = strip_tags(getStringFromRequest('description'));
 $name = strip_tags(getStringFromRequest('name'));
 $linkmenu = getStringFromRequest('linkmenu');
-$htmlcode = getStringFromRequest('htmlcode');
+$htmlcode = TextSanitizer::purify(getStringFromRequest('htmlcode'));
 $type = getStringFromRequest('type');
 $iframed = getIntFromRequest('iframeview');
 
@@ -86,7 +86,7 @@ if (!empty($name) && !empty($linkmenu)) {
 				$error_msg = _('Task failed');
 				session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
 			}
-			$warning_msg = _('Missing Link URL or Html Code.');
+			$warning_msg = _('Missing Link URL or HTML Page.');
 			session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
 		}
 	}

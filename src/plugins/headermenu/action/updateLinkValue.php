@@ -30,7 +30,7 @@ $name = strip_tags(getStringFromRequest('name'));
 $description = strip_tags(getStringFromRequest('description'));
 $typemenu = getStringFromRequest('typemenu');
 $linkmenu = getStringFromRequest('linkmenu');
-$htmlcode = getStringFromRequest('htmlcode');
+$htmlcode = TextSanitizer::purify(getStringFromRequest('htmlcode'));
 $type = getStringFromRequest('type');
 
 $redirect_url = '/plugins/'.$headermenu->name.'/?type='.$type;
@@ -81,7 +81,7 @@ if (!empty($idLink) && !empty($name)) {
 				$error_msg = _('Task failed');
 				session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
 			}
-			$warning_msg = _('Missing Link URL or Html Code.');
+			$warning_msg = _('Missing Link URL or HTML Page.');
 			session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
 		}
 	}

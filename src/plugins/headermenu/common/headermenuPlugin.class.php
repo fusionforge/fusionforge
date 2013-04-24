@@ -29,7 +29,7 @@ class headermenuPlugin extends Plugin {
 	function __construct() {
 		$this->Plugin();
 		$this->name = 'headermenu';
-		$this->text = 'headermenu';
+		$this->text = 'Menu Tabs Manager';
 		$this->_addHook('headermenu');
 		$this->_addHook('site_admin_option_hook');
 		$this->_addHook('outermenu');
@@ -43,10 +43,6 @@ class headermenuPlugin extends Plugin {
 
 	function CallHook($hookname, &$params) {
 		switch ($hookname) {
-			case 'headermenu': {
-				$this->getHeaderLink();
-				break;
-			}
 			case 'outermenu': {
 				$this->getOuterLink($params);
 				break;
@@ -67,8 +63,8 @@ class headermenuPlugin extends Plugin {
 				$group_id = $params['group_id'];
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
-					echo '<p>'.util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$group_id,
-					     _('Project GroupMenu Admin'), array('class' => 'tabtitle', 'title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
+					echo '<p>'.util_make_link('/plugins/'.$this->name.'/?type=projectadmin&amp;group_id='.$group_id,
+					     _('Menu Tabs Manager Admin'), array('class' => 'tabtitle', 'title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
 				}
 				break;
 			}
@@ -118,11 +114,12 @@ class headermenuPlugin extends Plugin {
 	}
 
 	/**
-	 * getHeaderLink - generate the links following the template
+	 * headermenu - Display the links following the template
 	 *
+	 * @param $params
 	 * @return	bool	true...
 	 */
-	function getHeaderLink() {
+	function headermenu($params) {
 		$availableLinks = $this->getAvailableLinks('headermenu');
 		foreach ($availableLinks as $link) {
 			if ($link['is_enable']) {
@@ -152,7 +149,7 @@ class headermenuPlugin extends Plugin {
 						break;
 					}
 					case 'htmlcode': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&amp;pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
 						break;
@@ -181,19 +178,19 @@ class headermenuPlugin extends Plugin {
 						break;
 					}
 					case 'htmlcode': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&group_id='.$params['group'].'&pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
-						if ($params['toptab'] == '/plugins/'.$this->name.'/?type=pageview&group_id='.$params['group'].'&pageid='.$link['id_headermenu']) {
+						if (isset($params['toptab']) && ($params['toptab'] == '/plugins/'.$this->name.'/?type=pageview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'])) {
 							$params['selected'] = (count($params['DIRS'])-1);
 						}
 						break;
 					}
 					case 'iframe': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframeview&group_id='.$params['group'].'&pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframeview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
-						if ($params['toptab'] == '/plugins/'.$this->name.'/?type=iframeview&group_id='.$params['group'].'&pageid='.$link['id_headermenu']) {
+						if (isset($params['toptab']) && ($params['toptab'] == '/plugins/'.$this->name.'/?type=iframeview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'])) {
 							$params['selected'] = (count($params['DIRS'])-1);
 						}
 						break;
@@ -256,9 +253,20 @@ class headermenuPlugin extends Plugin {
 	 * @param	string	$linktype
 	 * @param	int	$project the group_id or 0 meaning forge level
 	 * @param	string	$htmlcode
+	 * @param	integer	$ordering
 	 * @return	bool	success or not
 	 */
-	function addLink($url, $name, $description, $linkmenu, $linktype = 'url', $project = 0, $htmlcode = '', $ordering = 0) {
+	function addLink($url, $name, $description, $linkmenu, $linktype = 'url', $project = 0, $htmlcode = '', $ordering = NULL) {
+		if ($ordering == NULL) {
+			$res = db_query_params('SELECT MAX(ordering) as ordering FROM plugin_headermenu WHERE project=$1 AND linkmenu=$2',
+				array($project, $linkmenu));
+			if ($res) {
+				$ordering = db_result($res, 0, 'ordering')+1;
+			} else {
+				$ordering = 0;
+			}
+		}
+
 		$res = db_query_params('insert into plugin_headermenu (url, name, description, is_enable, linkmenu, linktype, project, htmlcode, ordering)
 					values ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
 					array(
@@ -344,7 +352,7 @@ class headermenuPlugin extends Plugin {
 	}
 
 	/**
-	 * pageView - display a static html code
+	 * pageView - display an HTML Page
 	 *
 	 * @param	int	the page id
 	 * @return	string	the html code
@@ -399,12 +407,12 @@ class headermenuPlugin extends Plugin {
 				$link = $this->getLink($this->pageid);
 				$group_id = getIntFromRequest('group_id');
 				if ($group_id) {
-					$params['toptab'] = '/plugins/'.$this->name.'/?type='.$type.'&group_id='.$group_id.'&pageid='.$this->pageid;
+					$params['toptab'] = '/plugins/'.$this->name.'/?type='.$type.'&amp;group_id='.$group_id.'&amp;pageid='.$this->pageid;
 					$params['group'] = $group_id;
 					$params['title'] = $link['name'];
 					site_project_header($params);
 				} else {
-					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/'.$this->name.'/?type='.$type.'&pageid='.$this->pageid));
+					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/'.$this->name.'/?type='.$type.'&amp;pageid='.$this->pageid));
 				}
 				$returned = true;
 				break;
@@ -417,7 +425,7 @@ class headermenuPlugin extends Plugin {
 				$group_id = getIntFromRequest('group_id');
 				$params['toptab'] = 'admin';
 				$params['group'] = $group_id;
-				$params['title'] = _('Project groupmenu Admin');
+				$params['title'] = _('Menu Tabs Manager Admin');
 				site_project_header($params);
 				$returned = true;
 				break;

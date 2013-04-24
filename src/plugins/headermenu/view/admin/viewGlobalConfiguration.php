@@ -26,7 +26,7 @@ global $headermenu;
 
 ?>
 
-<script language="Javascript" type="text/javascript">//<![CDATA[
+<script type="text/javascript">//<![CDATA[
 var controllerHeaderMenu;
 
 jQuery(document).ready(function() {
@@ -35,7 +35,7 @@ jQuery(document).ready(function() {
 		inputURL:	jQuery('#typemenu_url'),
 		inputHeader:	jQuery('#linkmenu_headermenu'),
 		inputOuter:	jQuery('#linkmenu_outermenu'),
-		trHtmlCode:	jQuery('#htmlcode'),
+		trHtmlCode:	jQuery('#trhtmlcode'),
 		trUrlCode:	jQuery('#urlcode'),
 		tableOutTbLink:	jQuery('.sortable_outermenu_listlinks tbody'),
 		tableHeaTbLink: jQuery('.sortable_headermenu_listlinks tbody'),
@@ -44,7 +44,7 @@ jQuery(document).ready(function() {
 		validMessOut:	'<?php echo _('Outermenu Link Order successfully validated') ?>',
 		validMessHea:	'<?php echo _('Headermenu Link Order successfully validated') ?>',
 		errMessOut:	'<?php echo _('Error in Outermenu Link Order validation') ?>',
-		errMessHea:	'<?php echo _('Error in Headermenu Link Order validation') ?>',
+		errMessHea:	'<?php echo _('Error in Headermenu Link Order validation') ?>'
 	});
 });
 
@@ -55,11 +55,11 @@ $linksHeaderMenuArray = $headermenu->getAvailableLinks('headermenu');
 $linksOuterMenuArray = $headermenu->getAvailableLinks('outermenu');
 
 if (sizeof($linksHeaderMenuArray) || sizeof($linksOuterMenuArray)) {
-	echo '<p class="information">'. _('You can reorder links, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.').'</p>';
+	echo '<p class="information">'. _('You can reorder tabs, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.').'</p>';
 }
 if (sizeof($linksHeaderMenuArray)) {
-	echo $HTML->boxTop(_('Manage available links in headermenu'));
-	$tabletop = array(_('Order'), _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
+	echo '<h2>'._('Manage available tabs in headermenu').'</h2>';
+	$tabletop = array(_('Order'), _('Tab Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '', '', '', '', 'unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksHeaderMenuArray as $link) {
@@ -67,34 +67,32 @@ if (sizeof($linksHeaderMenuArray)) {
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL').' ('.htmlspecialchars($link['url']).')</td>';
 		} else {
-			echo '<td>'._('static html code').'</td>';
+			echo '<td>'._('HTML Page').'</td>';
 		}
 		echo '<td>'.htmlspecialchars($link['name']).'</td>';
 		echo '<td>'.htmlspecialchars($link['description']).'</td>';
 		if ($link['is_enable']) {
 			echo '<td>'.html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'class'=>'tabtitle', 'title'=>_('link is on'))).'</td>';
-			echo '<td><a class="tabtitle-ne" title="'._('Desactivate this link').'" href="index.php?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0">'.html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))). '</a>';
+			echo '<td><a class="tabtitle-ne" title="'._('Desactivate this link').'" href="index.php?type=globaladmin&amp;action=updateLinkStatus&amp;linkid='.$link['id_headermenu'].'&amp;linkstatus=0">'.html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))). '</a>';
 		} else {
 			echo '<td>'.html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'class'=>'tabtitle', 'title'=>_('link is off'))).'</td>';
-			echo '<td><a class="tabtitle-ne" title="'._('Activate this link').'" href="index.php?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1">'.html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))). '</a>';
+			echo '<td><a class="tabtitle-ne" title="'._('Activate this link').'" href="index.php?type=globaladmin&amp;action=updateLinkStatus&amp;linkid='.$link['id_headermenu'].'&amp;linkstatus=1">'.html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))). '</a>';
 		}
-		echo '<a class="tabtitle-ne" title="'._('Edit this link').'" href="index.php?type=globaladmin&view=updateLinkValue&linkid='.$link['id_headermenu'].'">'.html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))). '</a>';
-		echo '<a class="tabtitle-ne" title="'._('Delete this link').'" href="index.php?type=globaladmin&action=deleteLink&linkid='.$link['id_headermenu'].'">'.html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))). '</a>';
+		echo '<a class="tabtitle-ne" title="'._('Edit this link').'" href="index.php?type=globaladmin&amp;view=updateLinkValue&amp;linkid='.$link['id_headermenu'].'">'.html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))). '</a>';
+		echo '<a class="tabtitle-ne" title="'._('Delete this link').'" href="index.php?type=globaladmin&amp;action=deleteLink&amp;linkid='.$link['id_headermenu'].'">'.html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))). '</a>';
 		echo '</td>';
 		echo '</tr>';
 	}
 	echo $HTML->listTableBottom();
-	echo $HTML->boxBottom();
 	echo '<input type="button" id="linkorderheadervalidatebutton" value="'._('Save Order').'" style="display:none;" />';
-	echo '</br>';
+	echo '<br/>';
 } else {
-	echo '<p class="information">'._('No links available for headermenu').'</p>';
+	echo '<p class="information">'._('No tabs available for headermenu').'</p>';
 }
 
-
 if (sizeof($linksOuterMenuArray)) {
-	echo $HTML->boxTop(_('Manage available links in outermenu'));
-	$tabletop = array(_('Order'), _('Menu Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
+	echo '<h2>'._('Manage available tabs in outermenu').'</h2>';
+	$tabletop = array(_('Order'), _('Tab Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '', '', '', '', 'unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_outermenu_listlinks', 'sortable', $classth);
 	foreach ($linksOuterMenuArray as $link) {
@@ -102,53 +100,52 @@ if (sizeof($linksOuterMenuArray)) {
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL').' ('.htmlspecialchars($link['url']).')</td>';
 		} else {
-			echo '<td>'._('static html code').'</td>';
+			echo '<td>'._('HTML Page').'</td>';
 		}
 		echo '<td>'.htmlspecialchars($link['name']).'</td>';
 		echo '<td>'.htmlspecialchars($link['description']).'</td>';
 		if ($link['is_enable']) {
 			echo '<td>'.html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'class'=>'tabtitle', 'title'=>_('link is on'))).'</td>';
-			echo '<td><a class="tabtitle-ne" title="'._('Desactivate this link').'" href="index.php?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0">'.html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))). '</a>';
+			echo '<td><a class="tabtitle-ne" title="'._('Desactivate this link').'" href="index.php?type=globaladmin&amp;action=updateLinkStatus&amp;linkid='.$link['id_headermenu'].'&amp;linkstatus=0">'.html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))). '</a>';
 		} else {
 			echo '<td>'.html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'class'=>'tabtitle', 'title'=>_('link is off'))).'</td>';
-			echo '<td><a class="tabtitle-ne" title="'._('Activate this link').'" href="index.php?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1">'.html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))). '</a>';
+			echo '<td><a class="tabtitle-ne" title="'._('Activate this link').'" href="index.php?type=globaladmin&amp;action=updateLinkStatus&amp;linkid='.$link['id_headermenu'].'&amp;linkstatus=1">'.html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))). '</a>';
 		}
-		echo '<a class="tabtitle-ne" title="'._('Edit this link').'" href="index.php?type=globaladmin&view=updateLinkValue&linkid='.$link['id_headermenu'].'">'.html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))). '</a>';
-		echo '<a class="tabtitle-ne" title="'._('Delete this link').'" href="index.php?type=globaladmin&action=deleteLink&linkid='.$link['id_headermenu'].'">'.html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))). '</a>';
+		echo '<a class="tabtitle-ne" title="'._('Edit this link').'" href="index.php?type=globaladmin&amp;view=updateLinkValue&amp;linkid='.$link['id_headermenu'].'">'.html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))). '</a>';
+		echo '<a class="tabtitle-ne" title="'._('Delete this link').'" href="index.php?type=globaladmin&amp;action=deleteLink&amp;linkid='.$link['id_headermenu'].'">'.html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))). '</a>';
 		echo '</td>';
 		echo '</tr>';
 	}
 	echo $HTML->listTableBottom();
-	echo $HTML->boxBottom();
 	echo '<input type="button" id="linkorderoutervalidatebutton" value="'._('Save Order').'" style="display:none;" />';
-	echo '</br>';
+	echo '<br/>';
 } else {
-	echo '<p class="information">'._('No links available for outermenu').'</p>';
+	echo '<p class="information">'._('No tabs available for outermenu').'</p>';
 }
 
+echo '<h2>'._('Add new tab').'</h2>';
 echo '<p class="information">'._('You can add specific tabs in outermenu (main tab) or headermenu (next to the login) with the form below.').'</p>';
-echo '<form method="POST" name="addLink" action="index.php?type=globaladmin&action=addLink">';
-echo '<table><tr>';
-echo $HTML->boxTop(_('Add a new link'));
-echo '<td>'._('Displayed Name').'</td><td><input name="name" type="text" maxsize="255" /></td>';
+echo '<form method="POST" name="addLink" action="index.php?type=globaladmin&amp;action=addLink">';
+echo '<table class="infotable"><tr>';
+echo '<td>'._('Displayed Name')._(':').'</td><td><input required="required" name="name" type="text" maxlength="255" /></td>';
 echo '</tr><tr>';
-echo '<td>'._('Description').'</td><td><input name="description" type="text" maxsize="255" /></td>';
+echo '<td>'._('Description')._(':').'</td><td><input name="description" type="text" maxlength="255" /></td>';
 echo '</tr><tr>';
-echo '<td>'._('Menu Location').'</td><td>';
+echo '<td>'._('Menu Location')._(':').'</td><td>';
 $vals = array('headermenu', 'outermenu');
 $texts = array('headermenu', 'outermenu');
 $select_name = 'linkmenu';
 echo html_build_radio_buttons_from_arrays($vals, $texts, $select_name, 'headermenu', false);
 echo '</td>';
 echo '</tr><tr>';
-echo '<td>'._('Menu Type').'</td><td>';
-$texts = array('URL', 'New Page');
+echo '<td>'._('Tab Type')._(':').'</td><td>';
+$texts = array('URL', 'HTML Page');
 $vals = array('url', 'htmlcode');
 $select_name = 'typemenu';
 echo html_build_radio_buttons_from_arrays($vals, $texts, $select_name, 'url', false);
 echo '</td>';
-echo '</tr><tr id="htmlcode" style="display:none">';
-echo '<td>'._('Your HTML Code.').'</td><td>';
+echo '</tr><tr id="trhtmlcode" style="display:none">';
+echo '<td>'._('HTML Page')._(':').'</td><td>';
 $GLOBALS['editor_was_set_up'] = false;
 $body = _('Just paste your code here...');
 $params['name'] = 'htmlcode';
@@ -162,11 +159,10 @@ if (!$GLOBALS['editor_was_set_up']) {
 }
 unset($GLOBALS['editor_was_set_up']);
 echo '</td></tr><tr id="urlcode" >';
-echo '<td>'._('URL').'</td><td><input name="link" type="text" maxsize="255" /></td>';
+echo '<td>'._('URL')._(':').'</td><td><input name="link" type="text" maxlength="255" /></td>';
 echo '</tr><tr>';
-echo '<td>';
+echo '<td colspan="2">';
 echo '<input type="submit" value="'. _('Add') .'" />';
 echo '</td>';
-echo $HTML->boxBottom();
 echo '</tr></table>';
 echo '</form>';
