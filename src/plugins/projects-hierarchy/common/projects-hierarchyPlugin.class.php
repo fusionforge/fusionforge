@@ -834,6 +834,7 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 		}
 		return $used;
+	}
 
 	/**
 	 * is_child - to verif if project already has a parent
