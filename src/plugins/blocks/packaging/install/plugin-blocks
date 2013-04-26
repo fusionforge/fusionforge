@@ -1,3 +1,4 @@
+plugins/blocks/bin/*	usr/share/@OLDPACKAGE@/plugins/blocks/bin/
 plugins/blocks/common/*               usr/share/@OLDPACKAGE@/plugins/blocks/common/
 plugins/blocks/db/*                   usr/share/@OLDPACKAGE@/plugins/blocks/db/
 plugins/blocks/www/*                  usr/share/@OLDPACKAGE@/plugins/blocks/www/
