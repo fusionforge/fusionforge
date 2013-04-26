@@ -72,7 +72,7 @@ eval {
     }
     $sth->finish () ;
 
-    $query = "SELECT relname FROM pg_class WHERE relname LIKE '$pattern' AND relkind='s'" ;
+    $query = "SELECT relname FROM pg_class WHERE relname LIKE '$pattern' AND relkind='S'" ;
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     while (@array = $sth->fetchrow_array ()) {
