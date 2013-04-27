@@ -2,7 +2,8 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  *
  * This file is a part of Fusionforge.
  *
@@ -50,13 +51,14 @@ class Widget_ProjectLatestDocuments extends Widget {
 		$qpa = db_construct_qpa();
 		$qpa = db_construct_qpa($qpa, 'SELECT filename, title, updatedate, createdate, realname, user_name, state_name, filetype, docid
 						FROM docdata_vw
-						WHERE group_id=$1
-						AND stateid=$2',
-					array($group_id, '1'));
+						WHERE group_id=$1',
+					array($group_id));
 
 		if (session_loggedin() && (user_ismember($group_id) ||
 		    forge_check_global_perm('forge_admin'))) {
-			$qpa = db_construct_qpa($qpa, ' OR stateid=$1 OR stateid=$2 OR stateid=$3', array('3','4','5'));
+			$qpa = db_construct_qpa($qpa, ' AND stateid IN ($1, $2, $3, $4)', array('1','3','4','5'));
+		} else {
+			$qpa = db_construct_qpa($qpa, ' AND stateid=$1', array('1'));
 		}
 
 		$qpa = db_construct_qpa($qpa, ' ORDER BY updatedate,createdate DESC LIMIT 5',array());
@@ -78,7 +80,6 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$updatedate = db_result($res_files, $f, 'updatedate');
 				$createdate = db_result($res_files, $f, 'createdate');
 				$realdate = ($updatedate >= $createdate) ? $updatedate : $createdate;
-				$displaydate = getdate($realdate);
 				$filename = db_result($res_files,$f,'filename');
 				$title = db_result($res_files,$f,'title');
 				$realname = db_result($res_files,$f,'realname');
@@ -98,7 +99,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 				echo '
 					<tr '. $HTML->boxGetAltRowStyle($f+1) .'>
 						<td>'
-							. $displaydate["month"] . ' ' . $displaydate["mday"] . ', ' . $displaydate["year"] .
+							. date(_('Y-m-d'),$realdate) .
 						'</td>
 						<td>
 							<a href="'.$docurl.'" ><strong>' . $filename . '</strong></a>
