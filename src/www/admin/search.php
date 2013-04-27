@@ -9,6 +9,8 @@
  * not any other (new) page.
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2013, French Ministry of National Education
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -70,12 +72,7 @@ if ($usersearch) {
 
 	print '<p><strong>' .sprintf(ngettext('User search with criteria <em>%1$s</em>: %2$s match', 'User search with criteria <em>%1$s</em>: %2$s matches', db_numrows($result)), $search, db_numrows($result)).'</strong></p>';
 
-	if (db_numrows($result) < 1) {
-
-		exit_error(db_error(),'admin');
-
-	} else {
-
+	if (db_numrows($result) >= 1) {
 		$title=array();
 		$title[]=_('ID');
 		$title[]=_('User name');
@@ -100,7 +97,8 @@ if ($usersearch) {
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
-
+	} else {
+		echo '<p class="information">'._('No user found.').'</p>';
 	}
 } // end if ($usersearch)
 
@@ -113,7 +111,7 @@ if (getStringFromRequest('groupsearch')) {
 
 	if(is_numeric($search)) {
 		$qpa = db_construct_qpa ($qpa, 'SELECT DISTINCT * FROM groups
-WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE $2)',
+						WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE $2)',
 					    array ($search,
 						   strtolower ("%$search%"))) ;
 	} else {
@@ -131,10 +129,7 @@ WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE
 	}
 
 	$result = db_query_qpa ($qpa) ;
-	if (db_numrows($result) < 1) {
-		echo db_error();
-	} else {
-
+	if (db_numrows($result) >= 1) {
 		$rows = array();
 		$ra = RoleAnonymous::getInstance() ;
 		while ($row = db_fetch_array($result)) {
@@ -183,10 +178,9 @@ WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
-
+	} else {
+		echo '<p class="information">'._('No project found.').'</p>';
 	}
-
-
 } //end if($groupsearch)
 
 site_admin_footer(array());
