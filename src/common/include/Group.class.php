@@ -7,6 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -404,14 +405,13 @@ class Group extends Error {
 	 * This function require site admin privilege.
 	 *
 	 * @param	object	User requesting operation (for access control).
-	 * @param	boolean	Whether group is publicly accessible (0/1).
 	 * @param	int	Group type (1-project, 2-foundry).
 	 * @param	string	Machine on which group's home directory located.
 	 * @param	string	Domain which serves group's WWW.
 	 * @return	status.
 	 * @access	public
 	 */
-	function updateAdmin(&$user, $is_public, $type_id, $unix_box, $http_domain) {
+	function updateAdmin(&$user, $type_id, $unix_box, $http_domain) {
 		$perm =& $this->getPermission();
 
 		if (!$perm || !is_object($perm)) {
