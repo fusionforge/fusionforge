@@ -38,6 +38,7 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->_addHook('site_admin_option_hook'); // to provide a link to the site wide administrative pages of plugin
 		$this->_addHook('display_hierarchy_submenu'); // to display a submenu in software map if projects-hierarchy plugin is used
 		$this->_addHook('docmansearch_has_hierarchy'); // used by the search menu in docman
+		$this->_addHook('clone_project_from_template'); // add project in database
 	}
 
 	function CallHook($hookname, &$params) {
@@ -136,6 +137,13 @@ class projects_hierarchyPlugin extends Plugin {
 					}
 				}
 				$returned = true;
+				break;
+			}
+			case "clone_project_from_template": {
+				$project = $params['project'];
+				if ($project->usesPlugin($this->name)) {
+					$this->add($project->getID());
+				}
 				break;
 			}
 		}
