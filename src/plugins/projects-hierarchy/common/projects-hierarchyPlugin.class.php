@@ -143,6 +143,8 @@ class projects_hierarchyPlugin extends Plugin {
 				$project = $params['project'];
 				if ($project->usesPlugin($this->name)) {
 					$this->add($project->getID());
+					$templateConfArr = $this->getConf($params['template']->getID());
+					$this->updateConf($project->getID(), $templateConfArr);
 				}
 				break;
 			}
@@ -702,9 +704,9 @@ class projects_hierarchyPlugin extends Plugin {
 
 		foreach($resArr as $column => $value) {
 			if ($value == 't') {
-				$returnArr[$column] = true;
+				$returnArr[$column] = 1;
 			} else {
-				$returnArr[$column] = false;
+				$returnArr[$column] = 0;
 			}
 		}
 
