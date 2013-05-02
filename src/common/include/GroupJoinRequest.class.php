@@ -62,8 +62,7 @@ class GroupJoinRequest extends Error {
 		$this->error();
 
 		if (!$Group || !is_object($Group)) {
-			$this->setError('GroupJoinRequest:: No Valid Group Object');
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('GroupJoinRequest:: '.$Group->getErrorMessage());
