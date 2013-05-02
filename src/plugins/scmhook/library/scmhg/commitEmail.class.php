@@ -80,6 +80,7 @@ The hook is triggered after \'serve push pull bundle\' on the projects repositor
 		$root = forge_get_config('repos_path', 'scmhg') . '/' . $project_name;
 		$unix_group = forge_get_config('apache_group');
 		$unix_user = forge_get_config('apache_user');
+		$sendmail = forge_get_config('sendmail_path');
 		$main_repo = $root . '/.hg';
 		if (is_dir("$main_repo")) {
 			$mail = $project_name.'-commits@'.forge_get_config('web_host');
@@ -104,7 +105,6 @@ The hook is triggered after \'serve push pull bundle\' on the projects repositor
 				if (!isset( $hgrc_val['email'])) {
 					/*set email parameter*/
 					$hgrc_val['email']['from'] = $mail;
-					$sendmail = forge_get_config('sendmail_path');
 					$hgrc_val['email']['method'] = $sendmail;
 				}
 				if (!isset( $hgrc_val['notify'])) {
@@ -171,7 +171,7 @@ The hook is triggered after \'serve push pull bundle\' on the projects repositor
 			fclose ($f);
 			rename ($main_repo.'/hgrc.new', $main_repo.'/hgrc');
 			system( "chown $unix_user:$unix_group $main_repo/hgrc" );
-			system( "chmod 660 $path/hgrc" );
+			system("chmod 660 $main_repo/hgrc" );
 		}
 		return true;
 	}
@@ -181,6 +181,7 @@ The hook is triggered after \'serve push pull bundle\' on the projects repositor
 	 * This is done by removing the needed entries from the projects hgrc file. 
 	 *
 	 * @param	$project	object containing project data
+	 * @return bool
 	 */
 	function disable($project) {
 		if (!$project) {
