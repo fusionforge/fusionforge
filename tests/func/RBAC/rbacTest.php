@@ -1,7 +1,8 @@
 <?php
-/*
+/**
  * Copyright 2010-2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -163,9 +164,6 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue ($this->isPermissionDenied()) ;
 
-		// Approve it with a user that only has approve_projects
-		$this->approveProject ("TotoProject", "projapp") ;
-
 		// Submit a news in the project
 		$this->switchUser ("toto") ;
 		$this->gotoProject ("TotoProject") ;
@@ -305,9 +303,7 @@ class RBAC extends FForge_SeleniumTestCase
 		// Register projects
 		$this->switchUser ("bigboss") ;
 		$this->registerProject ("MetaProject", "bigboss") ;
-		$this->approveProject ("MetaProject", "bigboss") ;
 		$this->registerProject ("SubProject", "bigboss") ;
-		$this->approveProject ("SubProject", "bigboss") ;
 
 		// Create roles
 		$this->gotoProject ("MetaProject") ;

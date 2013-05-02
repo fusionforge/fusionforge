@@ -447,12 +447,12 @@ class GitPlugin extends SCMPlugin {
 			system ("echo \"Git repository for $project_name\" > $tmp_repo/description") ;
 			system ("find $tmp_repo -type d | xargs chmod g+s") ;
 			system ("chgrp -R $unix_group $tmp_repo") ;
+			system ("chmod -R g+wX,o+rX-w $tmp_repo") ;
 			if ($project->enableAnonSCM()) {
 				system ("chmod g+wX,o+rX-w $root") ;
-				system ("chmod -R g+wX,o+rX-w $tmp_repo") ;
 			} else {
 				system ("chmod g+wX,o-rwx $root") ;
-				system ("chmod -R g+wX,o-rwx $tmp_repo") ;
+				system ("chmod g+wX,o-rwx $tmp_repo") ;
 			}
 			$ret = true;
 			/*

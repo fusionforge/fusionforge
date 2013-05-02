@@ -902,7 +902,7 @@ function site_project_footer($params) {
  * @param	params	array() must contain $user_id
  */
 function site_user_header($params) {
-	GLOBAL $HTML;
+	global $HTML;
 
 	/*
 		Check to see if active user
@@ -911,7 +911,7 @@ function site_user_header($params) {
 	site_header($params);
 	echo ($HTML->beginSubMenu());
 	$arr_t = array();
-	$all_l = array();
+	$arr_l = array();
 	$arr_attr = array();
 
 	$arr_t[] = _('My Personal Page');

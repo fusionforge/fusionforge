@@ -12,6 +12,10 @@ case "$1" in
 	    fi
 	done
 	chown gforge /etc/fusionforge/config.ini.d/debian-install-secrets.ini
+	if ! [ -e $dataprefix/moinmoin.log ] ; then
+	    touch $dataprefix/moinmoin.log
+	    chown gforge $dataprefix/moinmoin.log
+	fi
 	;;
     purge)
 	;;

@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) FusionForge Team
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -128,12 +129,14 @@ if ( $num_packages < 1) {
 			echo '<div class="warning">' . _('No releases') . '</div>
 			';
 		} else {
-			// display link to latest-release-as-zip
-			print '<p><em>'._('Download latest release as zip:').' ';
-			print util_make_link ('/frs/download.php/latestzip/'.$frsPackage->getID().'/'.$frsPackage->getNewestReleaseZipName(),
-					      $frsPackage->getNewestReleaseZipName(),
-					      array('title' => _('This link always points to the newest release as a zip file.')));
-			print '</em></p>';
+			if (class_exists('ZipArchive')) {
+				// display link to latest-release-as-zip
+				print '<p><em>'._('Download latest release as zip:').' ';
+				print util_make_link ('/frs/download.php/latestzip/'.$frsPackage->getID().'/'.$frsPackage->getNewestReleaseZipName(),
+						$frsPackage->getNewestReleaseZipName(),
+						array('title' => _('This link always points to the newest release as a zip file.')));
+				print '</em></p>';
+			}
 
 			// iterate and show the releases of the package
 			for ( $r = 0; $r < $num_releases; $r++ ) {

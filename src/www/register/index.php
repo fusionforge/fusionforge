@@ -19,6 +19,7 @@
  * Portions Copyright 2002-2009 (c) Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Jean-Christophe Masson - French National Education Department
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -135,14 +136,18 @@ if (getStringFromRequest('submit')) {
 	} else {
 		site_user_header(array('title'=>_('Registation Complete')));
 
-		if ( ! forge_get_config ('project_auto_approval') ) {
+		if ( !forge_get_config('project_auto_approval') && !forge_check_global_perm('approve_projects')) {
 			printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
 		} elseif ($group->isError()) {
 			printf(_('<div class="error">ERROR: %1$s</div>'), $group->getErrorMessage() );
 		} else {
 			printf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
 
-			if (!$group->approve( user_get_object_by_name ( forge_get_config ('project_auto_approval_user') ) ) ) {
+			if (forge_get_config('project_auto_approval')) {
+				$u = user_get_object_by_name(forge_get_config('project_auto_approval_user'));
+			}
+
+			if (!$group->approve($u)) {
 				printf(_('<div class="error">Approval ERROR: %1$s</div>'), $group->getErrorMessage() );
 			} else {
 				printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));

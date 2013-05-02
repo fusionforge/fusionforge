@@ -112,11 +112,11 @@ HeaderMenuController.prototype =
 						jQuery('.feedback').remove();
 						jQuery('.error').remove();
 						if (data == 0) {
-							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="feedback">'+this.params.validMessOut+'</p>');
+							jQuery('#maindiv').prepend('<div class="actionresult"><p id="validateLinkMessage" class="feedback">'+this.params.validMessOut+'</p></div>');
 						} else {
 							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="error">'+this.params.errMessOut+'</p>');
 						}
-						this.params.validateButton.hide();
+                        jQuery("#linkorderoutervalidatebutton").hide();
 					}, this)
 			);
 	},
@@ -133,14 +133,14 @@ HeaderMenuController.prototype =
 						jQuery('.feedback').remove();
 						jQuery('.error').remove();
 						if (data == 0) {
-							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="feedback">'+this.params.validMessHea+'</p>');
+							jQuery('#maindiv').prepend('<div class="actionresult"><p id="validateLinkMessage" class="feedback">'+this.params.validMessHea+'</p></div>');
 						} else {
 							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="error">'+this.params.errMessHea+'</p>');
 						}
-						this.params.validateButton.hide();
+                        jQuery("#linkorderheadervalidatebutton").hide();
 					}, this)
 			);
-	},
+	}
 };
 
 GroupMenuController.prototype =
@@ -158,7 +158,7 @@ GroupMenuController.prototype =
 		if (typeof(this.params.tableTbodyLink) != 'undefined') {
 			this.params.tableTbodyLink.sortable({
 				update: function(event, ui) {
-					jQuery("#sortable tbody").children().each(function() {
+					jQuery("#sortable").find("tbody").children().each(function() {
 						if (jQuery(this).index() % 2 === 0) {
 							jQuery(this).attr("class", "even");
 						} else {
@@ -189,7 +189,7 @@ GroupMenuController.prototype =
 	},
 
 	validateProjectLinkOrder: function() {
-		var linkOrder = jQuery("#sortable tbody").sortable('toArray').toString();
+		var linkOrder = jQuery("#sortable").find("tbody").sortable('toArray').toString();
 		jQuery.get(this.params.headerMenuUrl,
 				{
 					group_id:	this.params.groupId,
@@ -201,7 +201,7 @@ GroupMenuController.prototype =
 						jQuery('.feedback').remove();
 						jQuery('.error').remove();
 						if (data == 0) {
-							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="feedback">'+this.params.validMessage+'</p>');
+							jQuery('#maindiv').prepend('<div class="actionresult"><p id="validateLinkMessage" class="feedback">'+this.params.validMessage+'</p></div>');
 						} else {
 							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="error">'+this.params.errorMessage+'</p>');
 						}
@@ -209,7 +209,7 @@ GroupMenuController.prototype =
 					}, this)
 			);
 
-	},
+	}
 };
 
 EditHeaderMenuController.prototype =

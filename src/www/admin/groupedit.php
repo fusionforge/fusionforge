@@ -5,6 +5,8 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, French Ministry of National Education
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -38,7 +40,7 @@ if (!$group || !is_object($group)) {
 }
 
 // This function performs very update
-function do_update(&$group, $is_public, $is_template, $status, $group_type, $unix_box, $http_domain, $scm_box='') {
+function do_update(&$group, $is_template, $status, $group_type, $unix_box, $http_domain, $scm_box='') {
 	global $feedback;
 	global $error_msg;
 
@@ -50,7 +52,7 @@ function do_update(&$group, $is_public, $is_template, $status, $group_type, $uni
 		return false;
 	}
 
-	if (!$group->updateAdmin(session_get_user(), $is_public, $group_type, $unix_box, $http_domain)) {
+	if (!$group->updateAdmin(session_get_user(), $group_type, $unix_box, $http_domain)) {
 		$error_msg .= $group->getErrorMessage();
 		db_rollback();
 		return false;
@@ -76,14 +78,13 @@ function do_update(&$group, $is_public, $is_template, $status, $group_type, $uni
 
 
 if (getStringFromRequest('submit')) {
-	$form_public = getStringFromRequest('form_public');
 	$form_template = getStringFromRequest('form_template');
 	$form_status = getStringFromRequest('form_status');
 	$form_box = getStringFromRequest('form_box');
 	$form_domain = getStringFromRequest('form_domain');
 	$form_scm_box = getStringFromRequest('form_scm_box');
 
-	do_update($group, $form_public, $form_template, $form_status, 1, $form_box, $form_domain, $form_scm_box);
+	do_update($group, $form_template, $form_status, 1, $form_box, $form_domain, $form_scm_box);
 
 } elseif (getStringFromRequest('resend')) {
 
@@ -133,7 +134,6 @@ if($status == 'P') {
 </td>
 </tr>
 <tr>
-<?php if (USE_PFO_RBAC) { ?>
 <td colspan="2"><?php
 printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make a project public, <%1$s>link<%2$s> the global role “Anonymous/not logged in” then <%3$s>give<%4$s> it “Project visibility” permissions.'),
 	'a href="' . util_make_url('/project/admin/users.php?group_id=' .
@@ -144,25 +144,6 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 	'/a'
 );
 ?></td>
-<?php } else { ?>
-<td>
-<?php echo _('Public?') ?>:
-</td>
-<td>
-<?php 	// PLEASE DONT TRANSLATE THIS, THIS IS DATABASE INFO THAT CANT BE DIFFERENT AMONG LANGUAGES
-	echo html_build_select_box_from_arrays(
-	array(
-		'0',
-		'1'
-	),
-	array(
-		_('No'),
-		_('Yes')
-),
-	'form_public', $group->isPublic(), false
-); ?>
-</td>
-<?php } ?>
 </tr>
 
 <tr>

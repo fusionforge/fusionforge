@@ -3,6 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -83,7 +84,7 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 
 				if ($i != ($rows - 1)) {
 					echo '
-					<tr'.$row_color.'><td colspan="5">' ._('Changes since last version:').'<br />'.
+					<tr><td colspan="5">' ._('Changes since last version:').'<br />'.
 					nl2br(db_result($result,$i,'changes')).'</td></tr>';
 				}
 		}

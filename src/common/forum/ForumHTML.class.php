@@ -6,6 +6,7 @@
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -72,20 +73,22 @@ function forum_header($params) {
 				util_make_link_g($group->getUnixName(),db_result($result, 0, 'group_id'),$group->getPublicName()).'<br />
 				</p>
 				';
-				$body = db_result($result,0,'details');
-				$body = TextSanitizer::purify($body);
-				if (!strstr($body,'<')) {
-					//backwards compatibility for non html messages
-					echo util_make_links(nl2br($body));
-				} else {
-					echo util_make_links($body);
-			}
 
 			// display classification
 			if ($params['group'] == forge_get_config('news_group')) {
 				print stripslashes(trove_news_getcatlisting(db_result($result,0,'forum_id'),0,1));
 			} elseif (forge_get_config('use_trove')) {
 				print stripslashes(trove_getcatlisting($params['group'],0,1));
+			}
+
+			echo '<p><strong>'._('Content:').'</strong></p>';
+			$body = db_result($result,0,'details');
+			$body = TextSanitizer::purify($body);
+			if (!strstr($body,'<')) {
+				//backwards compatibility for non html messages
+				echo util_make_links(nl2br($body));
+			} else {
+				echo util_make_links($body);
 			}
 			echo '</td><td valign="top" width="35%">';
 			echo $HTML->boxTop(_('Latest News'));

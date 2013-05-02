@@ -2,6 +2,7 @@
 /*
  * Copyright (C) 2007-2008 Alain Peyrat <aljeux at free dot fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -363,8 +364,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 
 		$this->clickAndWait("submit");
-		$this->assertTextPresent("Your project has been submitted");
-		$this->assertTextPresent("you will receive notification of their decision and further instructions");
+		$this->assertTextPresent("Your project has been automatically approved");
 
 		$this->switchUser ($saved_user) ;
 	}
@@ -393,7 +393,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		// Create a simple project.
 		if ((!defined('PROJECTA')) || ($unix_name != "projecta")) {
 			$this->registerProject ($name, FORGE_ADMIN_USERNAME, $scm) ;
-			$this->approveProject ($name, FORGE_ADMIN_USERNAME) ;
 		}
 	}
 

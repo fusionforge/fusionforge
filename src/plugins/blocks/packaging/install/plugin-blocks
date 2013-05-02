@@ -1,3 +1,4 @@
+plugins/blocks/bin/*		      @PLUGIN_PATH@/blocks/bin/
 plugins/blocks/common/*               @PLUGIN_PATH@/blocks/common/
 plugins/blocks/db/*                   @PLUGIN_PATH@/blocks/db/
 plugins/blocks/www/*                  @PLUGIN_PATH@/blocks/www/

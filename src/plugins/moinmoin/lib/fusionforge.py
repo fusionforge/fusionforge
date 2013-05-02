@@ -9,6 +9,7 @@
 
 import base64
 import hashlib
+import hmac
 import logging
 import psycopg2
 import re
@@ -208,19 +209,21 @@ class FusionForgeSessionAuth(BaseAuth):
             cookievalue = \
               urllib.unquote(cookies[cookiename]).decode('iso-8859-1')
 
-            m = re.search('(.*)-\*-(.*)', cookievalue)
+            m = re.search('^([A-Za-z0-9+/=]+)!([A-Za-z0-9+/=]+)$', cookievalue)
             if m is None:
                 continue
             (sserial, shash) = m.group(1, 2)
 
             sdata = base64.b64decode(sserial)
-            if hashlib.md5(sdata + self.session_key).hexdigest() != shash:
+            shash = base64.b64decode(shash)
+            H = hmac.new(self.session_key, sdata, hashlib.sha256)
+            if H.digest() != shash:
                 continue
 
-            m = re.search('(.*)-\*-(.*)-\*-(.*)-\*-(.*)', sdata)
+            m = re.search('(.*)<(.*)<(.*)<(.*)', sdata)
             if m is None:
                 continue
-            (user_id, time, ip, user_agent) = m.group(1, 2, 3, 4)
+            (time, user_id, ip, user_agent) = m.group(1, 2, 3, 4)
 
             conn = self.fflink._conn
             cur = conn.cursor()

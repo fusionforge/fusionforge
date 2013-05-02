@@ -251,6 +251,13 @@ install2_files(){
 		fi
 	done
 
+	# Create writable log file for Moinmoinwiki plugin
+	if ! [ -e $fusionforge_data_dir/plugins/moinmoin/wikidata/moinmoin.log ] ; then
+	    mkdir -p $fusionforge_data_dir/plugins/moinmoin/wikidata
+	    touch $fusionforge_data_dir/plugins/moinmoin/wikidata/moinmoin.log
+	    chown gforge $fusionforge_data_dir/plugins/moinmoin/wikidata/moinmoin.log
+	fi
+
 	cd $fusionforge_dir
 	if [ ! -d $fusionforge_etc_dir ]
 	then

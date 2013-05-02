@@ -5,6 +5,7 @@
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -37,6 +38,7 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->_addHook('site_admin_option_hook'); // to provide a link to the site wide administrative pages of plugin
 		$this->_addHook('display_hierarchy_submenu'); // to display a submenu in software map if projects-hierarchy plugin is used
 		$this->_addHook('docmansearch_has_hierarchy'); // used by the search menu in docman
+		$this->_addHook('clone_project_from_template'); // add project in database
 	}
 
 	function CallHook($hookname, &$params) {
@@ -135,6 +137,15 @@ class projects_hierarchyPlugin extends Plugin {
 					}
 				}
 				$returned = true;
+				break;
+			}
+			case "clone_project_from_template": {
+				$project = $params['project'];
+				if ($project->usesPlugin($this->name)) {
+					$this->add($project->getID());
+					$templateConfArr = $this->getConf($params['template']->getID());
+					$this->updateConf($project->getID(), $templateConfArr);
+				}
 				break;
 			}
 		}
@@ -546,12 +557,12 @@ class projects_hierarchyPlugin extends Plugin {
 					switch ($relation) {
 						case "parent": {
 							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
-										array($project_id, $sub_project_id));
+										array($sub_project_id, $project_id));
 							break;
 						}
 						case "child": {
 							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
-										array($sub_project_id, $project_id));
+										array($project_id, $sub_project_id));
 							break;
 						}
 						default: {
@@ -693,9 +704,9 @@ class projects_hierarchyPlugin extends Plugin {
 
 		foreach($resArr as $column => $value) {
 			if ($value == 't') {
-				$returnArr[$column] = true;
+				$returnArr[$column] = 1;
 			} else {
-				$returnArr[$column] = false;
+				$returnArr[$column] = 0;
 			}
 		}
 
@@ -833,6 +844,20 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 		}
 		return $used;
+	}
+
+	/**
+	 * is_child - to verif if project already has a parent
+	 *
+	 * @param	integer	group_id
+	 * @return	bool	true on success
+	 * @access	public
+	 */
+	function is_child($group_id) {
+		if (count($this->getFamily($group_id, 'parent', true, 'any'))>0)
+			return true;
+		else
+			return false;
 	}
 }
 // Local Variables:
