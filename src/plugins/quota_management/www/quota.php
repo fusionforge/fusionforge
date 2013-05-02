@@ -33,7 +33,7 @@ $_quota_block_size = 1024;
 $_quota_block_size = trim(shell_exec("echo $BLOCK_SIZE")) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 
-site_admin_header(array('title'=>_('Site admin')));
+site_admin_header(array('title'=>_('Site Admin')));
 ?>
 <h4>
 	<?php echo _('Ressources usage and quota'); ?>
