@@ -35,9 +35,9 @@ session_require_perm ('tracker', $ath->getID(), 'read') ;
 
 $af = new ArtifactFactory($ath);
 if (!$af || !is_object($af)) {
-	exit_error('Error','Could Not Get Factory');
+	exit_error(_('Could Not Get Factory'),'tracker');
 } elseif ($af->isError()) {
-	exit_error('Error',$af->getErrorMessage());
+	exit_error($af->getErrorMessage(),'tracker');
 }
 
 $offset = getStringFromRequest('offset');
