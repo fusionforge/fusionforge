@@ -37,7 +37,7 @@ class SurveyResponse extends Error {
 	 *
 	 * @var	 object  $Group.
 	 */
-	var $Group; //group object
+	var $Group;
 
 	/**
 	 *  Constructor.
@@ -50,8 +50,7 @@ class SurveyResponse extends Error {
 	function __construct(&$Group, $arr=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'Survey Question'));
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('Survey:: '.$Group->getErrorMessage());

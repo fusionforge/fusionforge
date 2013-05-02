@@ -60,8 +60,7 @@ class Survey extends Error {
 	function __construct(&$Group, $survey_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), "Survey"));
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('Survey:: '.$Group->getErrorMessage());
