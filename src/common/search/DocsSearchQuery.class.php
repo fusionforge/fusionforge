@@ -5,6 +5,8 @@
  * Copyright 2004, Dominik Haas
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -88,7 +90,7 @@ class DocsSearchQuery extends SearchQuery {
 						 ') AS x WHERE ') ;
 			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
 			$qpa = db_construct_qpa ($qpa,
-						 ' ORDER BY x.groupname, x.docid') ;
+						 ' ORDER BY x.groupname, x.title') ;
 		}
 		return $qpa;
 	}
@@ -128,7 +130,7 @@ class DocsSearchQuery extends SearchQuery {
 			$qpa = $this->addMatchCondition($qpa, 'full_string_agg');
 		}
 		$qpa = db_construct_qpa ($qpa,
-					 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC, groupname ASC',
+					 ' ORDER BY groupname ASC, ts_rank(vectors, to_tsquery($1)) DESC, title ASC',
 					 array($words)) ;
 		return $qpa ;
 	}

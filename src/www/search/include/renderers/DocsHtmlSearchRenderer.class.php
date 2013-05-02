@@ -4,6 +4,8 @@
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -47,7 +49,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_DOCS, $words, $isExact, $searchQuery, $groupId, 'docman');
 
 		$this->tableHeaders = array(
-			'&nbsp;',
+			_('Directory'),
 			_('#'),
 			_('Title'),
 			_('Description')
@@ -79,12 +81,12 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$groupObject = group_get_object($this->groupId);
 			$document = new Document($groupObject, db_result($result, $i, 'docid'));
 			if ($lastDocGroup != $currentDocGroup) {
-				$return .= '<tr><td colspan="4">'.html_image('ic/cfolder15.png', '10', '12', array('border' => '0')).util_make_link('/docman/?group_id='.$this->groupId.'&amp;view=listfile&amp;dirid='.$document->getDocGroupID(),$currentDocGroup).'</td></tr>';
+				$return .= '<tr><td>'.html_image('ic/cfolder15.png', '10', '12', array('border' => '0')).util_make_link('/docman/?group_id='.$this->groupId.'&amp;view=listfile&amp;dirid='.$document->getDocGroupID(),$currentDocGroup).'</td><td colspan="3">&nbsp;</td></tr>';
 				$lastDocGroup = $currentDocGroup;
 				$rowColor = 0;
 			}
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
-				. '<td width="5%">&nbsp;</td>'
+				. '<td>&nbsp;</td>'
 				. '<td>'.db_result($result, $i, 'docid').'</td>'
 				. '<td><a href="'.util_make_url ('/docman/view.php/'.$this->groupId . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'filename')).'">'
 				. html_image('ic/msg.png', '10', '12')

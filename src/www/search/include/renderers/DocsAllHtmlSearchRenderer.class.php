@@ -4,6 +4,8 @@
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -54,8 +56,8 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 		$searchQuery = new DocsAllSearchQuery($words, $offset, $isExact , $sections, $parametersValues);
 		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_ALLDOCS, $words, $isExact, $searchQuery);
 		$this->tableHeaders = array(
-			'&nbsp;',
-			_('Project Name'),
+			_('Project'),
+			_('Directory'),
 			_('Title'),
 			_('Description')
 		);
@@ -88,13 +90,13 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			$currentDocGroup = db_result($result, $i, 'project_name');
 			$currentDocGroupObject = group_get_object_by_publicname($currentDocGroup);
 			if ($lastDocGroup != $currentDocGroup) {
-				$return .= '<tr><td colspan="4">'.html_image('ic/home16b.png', '10', '12', array('border' => '0')).'<b>'.util_make_link('/docman/?group_id='.$currentDocGroupObject->getID(),$currentDocGroup).'</b></td></tr>';
+				$return .= '<tr><td>'.html_image('ic/home16b.png', '10', '12', array('border' => '0')).'<b>'.util_make_link('/docman/?group_id='.$currentDocGroupObject->getID(),$currentDocGroup).'</b></td><td colspan="3">&nbsp;</td></tr>';
 				$lastDocGroup = $currentDocGroup;
 				$rowColor = 0;
 			}
 			$document = new Document($currentDocGroupObject, db_result($result, $i, 'docid'));
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
-						. '<td width="5%">&nbsp;</td>'
+						. '<td>&nbsp;</td>'
 						. '<td>'.html_image('ic/cfolder15.png', '10', '12', array('border' => '0')).util_make_link('/docman/?group_id='.$currentDocGroupObject->getID().'&amp;view=listfile&amp;dirid='.$document->getDocGroupID(),db_result($result, $i, 'groupname')).'</td>';
 						if (db_result($result, $i, 'filetype') == 'URL') {
 							$return .= '<td><a href="'.db_result($result, $i, 'filename').'">';

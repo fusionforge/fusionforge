@@ -5,6 +5,7 @@
  * Copyright 2004, Dominik Haas
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, French Minitry of National Education
  *
  * This file is part of FusionForge.
  *
@@ -80,7 +81,7 @@ class DocsAllSearchQuery extends SearchQuery {
 		$qpa = $this->addIlikeCondition($qpa, 'description', $this->words);
 		$qpa = db_construct_qpa($qpa, ') OR (');
 		$qpa = $this->addIlikeCondition($qpa, 'data_words', $this->words);
-		$qpa = db_construct_qpa ($qpa, ')) ORDER BY doc_groups.groupname, doc_data.docid') ;
+		$qpa = db_construct_qpa ($qpa, ')) ORDER BY groups.group_name, doc_groups.groupname, doc_data.title') ;
 
 		return $qpa;
 	}
