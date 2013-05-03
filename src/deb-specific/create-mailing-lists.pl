@@ -161,7 +161,7 @@ eval {
     $sth->finish () ;
     foreach $line (@lines) {
 	@array = @{$line} ;
-	my ($group_list_id, $listname, $user_name, $password, $description, $is_public) ;
+	my ($group_list_id, $listname, $user_name, $password, $description, $is_public) = @array ;
 	my ($tmp) ;
     	$tmp = mktemp ("/tmp/XXXXXX") ;
 	my $cmd = "/usr/lib/mailman/bin/config_list -o $tmp $listname" ;
