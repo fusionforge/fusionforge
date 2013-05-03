@@ -26,8 +26,6 @@
 
 require 'PFO-RBAC.interface.php';
 
-define ('USE_PFO_RBAC', true);
-
 // Code shared between classes
 
 /**

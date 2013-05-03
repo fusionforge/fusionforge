@@ -140,13 +140,9 @@ class MoinMoinPlugin extends Plugin {
 			$new_sa =& $params['new_sa'] ;
 			$new_pa =& $params['new_pa'] ;
 
-			if (USE_PFO_RBAC) {
-				$projects = $role->getLinkedProjects() ;		
-				foreach ($projects as $p) {
-					$role->normalizePermsForSection ($new_pa, 'plugin_moinmoin_access', $p->getID()) ;
-				}
-			} else {
-				$role->normalizeDataForSection ($new_sa, 'plugin_moinmoin_access') ;
+			$projects = $role->getLinkedProjects() ;		
+			foreach ($projects as $p) {
+				$role->normalizePermsForSection ($new_pa, 'plugin_moinmoin_access', $p->getID()) ;
 			}
 		} elseif ($hookname == "role_translate_strings") {
 			$right = new PluginSpecificRoleSetting ($role,
