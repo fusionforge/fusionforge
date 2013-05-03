@@ -56,8 +56,7 @@ if (session_loggedin()) {
 							  $language,
 							  $license));
 			if (!$result) {
-				$error_msg = _('ERROR DOING SNIPPET INSERT!');
-				echo db_error();
+				$error_msg = _('Error doing snippet insert').' '.db_error();
 			} else {
 				$feedback = _('Snippet Added Successfully.');
 				$snippet_id=db_insertid($result,'snippet','snippet_id');
@@ -72,15 +71,14 @@ if (session_loggedin()) {
 								  time(),
 								  htmlspecialchars($code)));
 				if (!$result) {
-					$feedback = _('ERROR DOING SNIPPET VERSION INSERT!');
-					echo db_error();
+					$feedback = _('Error doing snippet version insert').' '.db_error();
 				} else {
 					$feedback = _('Snippet Added Successfully.');
 				}
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error - Go back and fill in all the information'));
+			exit_error(_('Error: Go back and fill in all the information'));
 		}
 
 	}
@@ -143,7 +141,7 @@ if (session_loggedin()) {
 	</td></tr>
 
 	<tr><td colspan="2" class="align-center">
-        <?php echo $HTML->html_input('submit', '', _('Make sure all info is complete and accurate'), 'submit', _('SUBMIT')); ?>
+        <?php echo $HTML->html_input('submit', '', _('Make sure all info is complete and accurate'), 'submit', _('Submit')); ?>
 	</td></tr>
 	</table></form>
 

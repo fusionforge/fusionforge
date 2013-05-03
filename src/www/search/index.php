@@ -79,5 +79,5 @@ $renderer = $searchManager->getSearchRenderer($type_of_search, $words, $offset, 
 if ($renderer) {
 	$renderer->flush();
 } else {
-	exit_error(_('Error - Invalid search'));
+	exit_error(_('Error: Invalid search'));
 }

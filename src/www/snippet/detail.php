@@ -54,7 +54,7 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<div class="error">' ._('Error - no versions found').'</div>';
+		echo '<div class="error">' ._('Error: no versions found').'</div>';
 	} else {
 		echo '
 		<h3>' ._('Versions Of This Snippet:').'</h3>
@@ -144,7 +144,7 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<div class="error">' ._('Error - no versions found').'</div>';
+		echo '<div class="error">' ._('Error: no versions found').'</div>';
 	} else {
 		echo '
 		<h3>' ._('Versions Of This Package:').'</h3>
@@ -220,6 +220,6 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 
 } else {
 
-	exit_error(_('Error - was the URL mangled?'));
+	exit_error(_('Error: was the URL mangled?'));
 
 }

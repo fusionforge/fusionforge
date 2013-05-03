@@ -133,8 +133,6 @@ AND project_group_list.group_id=$3 ',
 
 		GraphIt($names, $values, _('Average duration for closed tasks (days)'));
 
-		echo "<p />";
-
 		for ($counter=1; $counter<=$span; $counter++) {
 
 			$start=($time_now-($counter*$sub_duration));
@@ -155,8 +153,6 @@ AND project_group_list.group_id=$3 ',
 		}
 
 		GraphIt($names, $values, _('Number of started tasks'));
-
-		echo "<p />";
 
 		for ($counter=1; $counter<=$span; $counter++) {
 
@@ -181,19 +177,17 @@ AND project_group_list.group_id=$3 ',
 
 		GraphIt($names, $values, _('Number of tasks still not completed'));
 
-		echo "<p />";
-
 		pm_footer(array());
 
 	} elseif ($what=="subproject") {
 		$qpa1 = db_construct_qpa (false,
-					  'SELECT project_group_list.project_name AS Subproject, count(*) AS Count
+					  'SELECT project_group_list.project_name AS subproject, count(*) AS Count
 FROM project_group_list,project_task
 WHERE project_group_list.group_project_id=project_task.group_project_id
 AND project_task.status_id = 1
 AND project_group_list.group_id=$1
 AND start_date >= $2
-GROUP BY Subproject',
+GROUP BY subproject',
 					  array ($group_id,
 						 $period_threshold)) ;
 		$qpa2 = db_construct_qpa(false, 'SELECT project_group_list.project_name AS Subproject, count(*) AS Count
@@ -202,7 +196,7 @@ WHERE project_group_list.group_project_id=project_task.group_project_id
 AND project_task.status_id <> 3
 AND project_group_list.group_id=$1
 AND start_date >= $2
-GROUP BY Subproject',
+GROUP BY subproject',
 					  array ($group_id,
 						 $period_threshold)) ;
 
@@ -212,7 +206,7 @@ GROUP BY Subproject',
 			  _('All Tasks By Category'), $qpa2);
 
 	} elseif ($what=="tech") {
-		$qpa1 = db_construct_qpa(false, 'SELECT users.user_name AS Technician, count(*) AS Count
+		$qpa1 = db_construct_qpa(false, 'SELECT users.user_name AS technician, count(*) AS Count
 FROM users,project_group_list,project_task,project_assigned_to
 WHERE users.user_id=project_assigned_to.assigned_to_id
 AND project_assigned_to.project_task_id=project_task.project_task_id
@@ -220,11 +214,11 @@ AND project_task.group_project_id=project_group_list.group_project_id
 AND project_task.status_id = 1
 AND project_group_list.group_id=$1
 AND start_date >= $2
-GROUP BY Technician',
+GROUP BY technician',
 					  array ($group_id,
 						 $period_threshold)) ;
 
-		$qpa2 = db_construct_qpa(false, 'SELECT users.user_name AS Technician, count(*) AS Count
+		$qpa2 = db_construct_qpa(false, 'SELECT users.user_name AS technician, count(*) AS Count
 FROM users,project_group_list,project_task,project_assigned_to
 WHERE users.user_id=project_assigned_to.assigned_to_id
 AND project_assigned_to.project_task_id=project_task.project_task_id
@@ -232,7 +226,7 @@ AND project_task.group_project_id=project_group_list.group_project_id
 AND project_task.status_id <> 3
 AND project_group_list.group_id=$1
 AND start_date >= $2
-GROUP BY Technician',
+GROUP BY technician',
 					  array ($group_id,
 						 $period_threshold)) ;
 

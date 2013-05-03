@@ -54,9 +54,8 @@ if (session_loggedin()) {
 			if (!$result) {
 				//error in database
 				form_release_key(getStringFromRequest("form_key"));
-				$error_msg .= _('ERROR DOING SNIPPET PACKAGE INSERT!');
+				$error_msg .= _('Error doing snippet package insert').' '.db_error();
 				snippet_header(array('title'=>_('Submit A New Snippet Package')));
-				echo db_error();
 				snippet_footer(array());
 				exit;
 			} else {
@@ -73,14 +72,14 @@ if (session_loggedin()) {
 								  time()));
 				if (!$result) {
 					//error in database
-					$error_msg .= _('ERROR DOING SNIPPET PACKAGE VERSION INSERT!');
+					$error_msg .= _('Error doing snippet package version insert');
 					snippet_header(array('title'=>_('Submit A New Snippet Package')));
 					echo db_error();
 					snippet_footer(array());
 					exit;
 				} else {
 					//so far so good - now add snippets to the package
-					$feedback .= _('Snippet Pacakge Version Added Successfully.');
+					$feedback .= _('Snippet Package Version Added Successfully.');
 
 					//id for this snippet_package_version
 					$snippet_package_version_id=
@@ -95,7 +94,7 @@ if (session_loggedin()) {
 
 <script type="text/javascript">/* <![CDATA[ */
 function show_add_snippet_box() {
-	newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
+	var newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
 	newWindow.location=('/snippet/add_snippet_to_package.php?suppress_nav=1&snippet_package_version_id=<?php
 			echo $snippet_package_version_id; ?>');
 }
@@ -121,7 +120,7 @@ function show_add_snippet_box() {
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error - Go back and fill in all the information'));
+			exit_error(_('Error: Go back and fill in all the information'));
 		}
 
 	}
@@ -174,7 +173,7 @@ function show_add_snippet_box() {
 	<tr><td colspan="2" class="align-center">
 		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 		<br />
-		<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
+		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 	</td></tr>
 
 	</table></form>

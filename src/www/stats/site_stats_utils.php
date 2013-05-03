@@ -141,7 +141,7 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 
 	$reports_names=array();
 	$reports_names[]=_('last_30');
-	$reports_names[]=_('all');
+	$reports_names[]=_('All');
 
 	echo html_build_select_box_from_arrays($reports_ids, $reports_names, 'report', $report, false);
 
@@ -213,7 +213,7 @@ ORDER BY ' . $order_clause,
 }
 
 function stats_site_projects( $report, $orderby, $projects, $trove ) {
-	$i=0;
+
 	$offset=0;
 	$trove_cat=0;
 	$res=stats_site_project_result( $report, $orderby, $projects, $trove );

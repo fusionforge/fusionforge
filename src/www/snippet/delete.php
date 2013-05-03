@@ -45,7 +45,7 @@ if (session_loggedin()) {
 			"WHERE submitted_by=$1 AND ".
 			"snippet_package_version_id=$2", array(user_getid(), $snippet_package_version_id));
 		if (!$result || db_numrows($result) < 1) {
-			echo '<p class="error">Error - Only the creator of a package version can delete snippets from it.</p>';
+			echo '<p class="error">Error: Only the creator of a package version can delete snippets from it.</p>';
 			snippet_footer(array());
 			exit;
 		} else {
@@ -57,7 +57,7 @@ AND snippet_package_version_id=$2',
 			array($snippet_version_id,
 				$snippet_package_version_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				echo '<p class="error">Error - That snippet doesn\'t exist in this package.</p>';
+				echo '<p class="error">Error: That snippet doesn\'t exist in this package.</p>';
 				snippet_footer(array());
 				exit;
 			} else {
@@ -76,7 +76,7 @@ AND snippet_package_version_id=$2',
 		$result=db_query_params("SELECT * FROM snippet_version ".
 			"WHERE snippet_version_id=$1 AND submitted_by=$2", array($snippet_version_id, user_getid()));
 		if (!$result || db_numrows($result) < 1) {
-			echo '<p class="error">Error - That snippet doesn\'t exist.</p>';
+			echo '<p class="error">Error: That snippet doesn\'t exist.</p>';
 			snippet_footer(array());
 			exit;
 		} else {
@@ -111,7 +111,7 @@ AND snippet_package_version_id=$2',
 			"snippet_package_version_id=$2", array(user_getid(), $snippet_package_version_id));
 		if (!$result || db_numrows($result) < 1) {
 			//they don't own it or it's not found
-			echo '<p class="error">Error - Only the creator of a package version can delete it.</p>';
+			echo '<p class="error">Error: Only the creator of a package version can delete it.</p>';
 			snippet_footer(array());
 			exit;
 		} else {
@@ -139,7 +139,7 @@ AND snippet_package_version_id=$2',
 			exit;
 		}
 	} else {
-		exit_error(_('Error - mangled URL?'));
+		exit_error(_('Error: mangled URL?'));
 	}
 
 } else {

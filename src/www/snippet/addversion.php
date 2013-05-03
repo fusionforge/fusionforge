@@ -36,7 +36,7 @@ if (session_loggedin()) {
 		$result=db_query_params ('SELECT * FROM snippet WHERE snippet_id=$1',
 			array($id));
 		if (!$result || db_numrows($result) < 1) {
-			exit_error(_('Error - snippet doesn\'t exist'));
+			exit_error(_('Error: snippet doesn\'t exist'));
 		}
 
 		/*
@@ -68,13 +68,13 @@ if (session_loggedin()) {
 								  time(),
 								  htmlspecialchars($code)));
 				if (!$result) {
-					$error_msg .= _('ERROR DOING SNIPPET VERSION INSERT! ').db_error();
+					$error_msg .= _('Error doing snippet version insert').' '.db_error();
 				} else {
 					form_release_key(getStringFromRequest("form_key"));
 					$feedback .= _('Snippet Version Added Successfully.');
 				}
 			} else {
-				exit_error(_('Error - Go back and fill in all the information'));
+				exit_error(_('Error: Go back and fill in all the information'));
 			}
 
 		}
@@ -95,18 +95,18 @@ if (session_loggedin()) {
 			<input type="text" name="version" size="10" maxlength="15" />
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo _('Changes:'); ?></strong><br />
+		<tr><td colspan="2"><strong><?php echo _('Changes')._(':'); ?></strong><br />
 			<textarea name="changes" rows="5" cols="45"></textarea>
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo _('Paste the Code Here:'); ?></strong><br />
+		<tr><td colspan="2"><strong><?php echo _('Paste the Code Here')._(':'); ?></strong><br />
 			<textarea name="code" rows="30" cols="85"></textarea>
 		</td></tr>
 
 		<tr><td colspan="2" class="align-center">
 			<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 			<br />
-			<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
+			<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 		</td></tr>
 		</table></form></p>
 		<?php
@@ -124,7 +124,7 @@ if (session_loggedin()) {
 		$result=db_query_params ('SELECT * FROM snippet_package WHERE snippet_package_id=$1',
 			array($id));
 		if (!$result || db_numrows($result) < 1) {
-			exit_error(_('Error - snippet_package doesn\'t exist'));
+			exit_error(_('Error: snippet_package doesn\'t exist'));
 		}
 
 		if (getStringFromRequest('post_changes')) {
@@ -151,7 +151,7 @@ if (session_loggedin()) {
 								  time()));
 				if (!$result) {
 					//error in database
-					$error_msg .= _('ERROR DOING SNIPPET PACKAGE VERSION INSERT! ').db_error();
+					$error_msg .= _('Error doing snippet package version insert').' '.db_error();
 					snippet_header(array('title'=>_('New snippet package')));
 					snippet_footer(array());
 					exit;
@@ -171,7 +171,7 @@ if (session_loggedin()) {
 
 <script type="text/javascript">/* <![CDATA[ */
 function show_add_snippet_box() {
-	newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
+	var newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
 	newWindow.location=('/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php
 			echo $snippet_package_version_id; ?>');
 }
@@ -195,7 +195,7 @@ function show_add_snippet_box() {
 
 			} else {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error( _('Error - Go back and fill in all the information'));
+				exit_error( _('Error: Go back and fill in all the information'));
 			}
 
 		}
@@ -218,14 +218,14 @@ function show_add_snippet_box() {
 			<input type="text" name="version" size="10" maxlength="15" />
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo _('Changes:'); ?></strong><br />
+		<tr><td colspan="2"><strong><?php echo _('Changes')._(':'); ?></strong><br />
 			<textarea name="changes" rows="5" cols="45"></textarea>
 		</td></tr>
 
 		<tr><td colspan="2" class="align-center">
 			<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 			<br />
-			<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
+			<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 		</td></tr>
 		</table></form></p>
 		<?php
@@ -234,13 +234,11 @@ function show_add_snippet_box() {
 
 
 	} else {
-		exit_error(_('Error - was the URL or form mangled??'));
+		exit_error(_('Error: was the URL or form mangled??'));
 	}
 
 } else {
-
 	exit_not_logged_in();
-
 }
 
 // Local Variables:

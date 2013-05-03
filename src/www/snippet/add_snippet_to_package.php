@@ -53,7 +53,7 @@ if (session_loggedin()) {
 
 	if (!$snippet_package_version_id) {
 		//make sure the package id was passed in
-		echo '<p class="error">' ._('Error - snippet_package_version_id missing') .'</p>';
+		echo '<p class="error">' ._('Error: snippet_package_version_id missing') .'</p>';
 		handle_add_exit();
 	}
 
@@ -69,7 +69,7 @@ if (session_loggedin()) {
 				"WHERE submitted_by=$1 AND ".
 				"snippet_package_version_id=$2", array(user_getid(), $snippet_package_version_id));
 			if (!$result || db_numrows($result) < 1) {
-				echo '<p class="error">' ._('Error - Only the creator of a package version can add snippets to it.').'</p>';
+				echo '<p class="error">' ._('Error: Only the creator of a package version can add snippets to it.').'</p>';
 				handle_add_exit();
 			}
 
@@ -79,7 +79,7 @@ if (session_loggedin()) {
 			$result=db_query_params ('SELECT * FROM snippet_version WHERE snippet_version_id=$1',
 			array($snippet_version_id));
 			if (!$result || db_numrows($result) < 1) {
-				echo '<p class="error">' ._('Error - That snippet doesn\'t exist.').'</p>';
+				echo '<p class="error">' ._('Error: That snippet doesn\'t exist.').'</p>';
 				echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
@@ -93,7 +93,7 @@ AND snippet_version_id=$2',
 			array($snippet_package_version_id,
 				$snippet_version_id));
 			if ($result && db_numrows($result) > 0) {
-				echo '<p class="error">'._('Error - That snippet was already added to this package.').'</p>';
+				echo '<p class="error">'._('Error: That snippet was already added to this package.').'</p>';
 				echo util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
@@ -105,13 +105,12 @@ AND snippet_version_id=$2',
 VALUES ($1, $2)", array($snippet_package_version_id, $snippet_version_id));
 
 			if (!$result) {
-				$feedback .= _('ERROR DOING SNIPPET VERSION INSERT!');
-				echo db_error();
+				$feedback .= _('Error doing snippet version insert').' '.db_error();
 			} else {
 				$feedback .= _('Snippet Version Added Successfully.');
 			}
 		} else {
-			echo '<p class="error">' ._('Error - Go back and fill in all the information').'</p>';
+			echo '<p class="error">' ._('Error: Go back and fill in all the information').'</p>';
 			echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 			handle_add_exit();
 		}
@@ -126,7 +125,7 @@ AND snippet_package_version.snippet_package_version_id=$1',
 
 	?>
 	<p>
-	<strong><?php echo _('Package:'); ?></strong><br />
+	<strong><?php echo _('Package')._(':'); ?></strong><br />
 	<?php echo db_result($result,0,'name') . ' -  ' . db_result($result,0,'version'); ?></p>
 	<p><?php echo _('You can use this form repeatedly to keep adding snippets to your package.'); ?></p>
 	<p><?php echo _('The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet on the browse pages.'); ?></p>
@@ -165,7 +164,7 @@ for ($i=0; $i<$combolistrows; $i++)
 	<tr><td colspan="2" class="align-center">
 		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 		<br />
-		<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
+		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 	</td></tr>
 	</table></form></p>
 	<?php

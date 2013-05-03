@@ -29,6 +29,7 @@ require_once $gfwww.'snippet/snippet_utils.php';
  * createSnippetQuery - Creates the SQL query for loading data about snippets
  *
  * @param	string	clause - the last part of the where clause
+ * @return string
  */
 function createSnippetQuery($clause) {
 	return "SELECT users.realname,users.user_name,snippet.description,snippet.snippet_id,snippet.name FROM snippet,users WHERE users.user_id=snippet.created_by AND ".$clause;
@@ -38,6 +39,7 @@ function createSnippetQuery($clause) {
  * createPackageQuery - Creates the SQL query for loading data about packages
  *
  * @param	string	clause - the last part of the where clause
+ * @return string
  */
 function createPackageQuery($clause) {
 	return "SELECT users.realname,users.user_name,users.user_id,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name FROM snippet_package,users WHERE users.user_id=snippet_package.created_by AND ".$clause;
@@ -65,7 +67,7 @@ if ($by=='lang') {
 
 	echo '<h2>' .sprintf(_('Snippets by category: %1$s'), $SCRIPT_CATEGORY[$cat]).'</h2>';
 } else {
-	exit_error(_('Error - bad url?'));
+	exit_error(_('Error: bad url?'));
 }
 
 $result = db_query_qpa ($qpa) ;

@@ -24,7 +24,7 @@
  */
 
 $SCRIPT_CATEGORY[0]= _('Choose One');
-$SCRIPT_CATEGORY[1]= _('UNIX Admin');
+$SCRIPT_CATEGORY[1]= _('Unix Admin');
 $SCRIPT_CATEGORY[2]= _('HTML Manipulation');
 $SCRIPT_CATEGORY[3]= _('BBS Systems');
 $SCRIPT_CATEGORY[4]= _('Auctions');
@@ -148,7 +148,7 @@ AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id
 AND snippet_package_item.snippet_package_version_id=$1", array($version));
 
 	$rows=db_numrows($result);
-	echo '<h3>' ._('Snippets In This Package:').'</h3>';
+	echo '<h3>' ._('Snippets In This Package').'</h3>';
 
 	$title_arr=array();
 	$title_arr[]= _('Snippet ID');
