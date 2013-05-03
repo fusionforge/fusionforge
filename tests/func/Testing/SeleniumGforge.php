@@ -212,7 +212,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->waitForPageToLoad("30000");
 			$this->click("link=Tools");
 			$this->waitForPageToLoad("30000");
-			$this->click("link=Tasks Admin");
+			$this->click("link=Tasks Administration");
 			$this->waitForPageToLoad("30000");
 			$this->click("link=Add a Subproject");
 			$this->waitForPageToLoad("30000");

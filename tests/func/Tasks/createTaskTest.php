@@ -342,7 +342,7 @@ class CreateTask extends FForge_SeleniumTestCase
 	    $this->waitForPageToLoad("30000");
         $this->clickAndWait("link=Project Admin");
         $this->clickAndWait("link=Tools");
-        $this->clickAndWait("link=Tasks Admin");
+        $this->clickAndWait("link=Tasks Administration");
         $this->clickAndWait("link=Add a Subproject");
         $this->type("project_name", "public");
         $this->type("//input[@name='description']", "This is a public subproject");
@@ -358,7 +358,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->waitForPageToLoad("30000");
         $this->clickAndWait("link=Project Admin");
         $this->clickAndWait("link=Tools");
-        $this->clickAndWait("link=Tasks Admin");
+        $this->clickAndWait("link=Tasks Administration");
         $this->clickAndWait("link=Add a Subproject");
         $this->click("//input[@name='is_public' and @value='0']");
         $this->type("project_name", "private");
