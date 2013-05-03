@@ -444,11 +444,18 @@ abstract class BaseRole extends Error {
 			break ;
 
 		case 'project_read':
+			if ($this->hasPermission('project_admin', $reference)) {
+				return 1;
+			}
+			return $value;
+			break;
 		case 'tracker_admin':
 		case 'pm_admin':
 		case 'forum_admin':
 			if ($this->hasPermission('project_admin', $reference)) {
 				return 1 ;
+			} elseif (!$this->hasPermission('project_read', $reference)) {
+				return 0;
 			}
 			return $value ;
 			break ;
@@ -456,6 +463,8 @@ abstract class BaseRole extends Error {
 		case 'scm':
 			if ($this->hasPermission('project_admin', $reference)) {
 				return 2 ;
+			} elseif (!$this->hasPermission('project_read', $reference)) {
+				return 0;
 			}
 			return $value ;
 			break ;
@@ -463,6 +472,8 @@ abstract class BaseRole extends Error {
 		case 'docman':
 			if ($this->hasPermission('project_admin', $reference)) {
 				return 4 ;
+			} elseif (!$this->hasPermission('project_read', $reference)) {
+				return 0;
 			}
 			return $value ;
 			break ;
@@ -470,6 +481,8 @@ abstract class BaseRole extends Error {
 		case 'frs':
 			if ($this->hasPermission('project_admin', $reference)) {
 				return 3 ;
+			} elseif (!$this->hasPermission('project_read', $reference)) {
+				return 0;
 			}
 			return $value ;
 			break ;
@@ -477,12 +490,16 @@ abstract class BaseRole extends Error {
 		case 'forum':
 			if ($this->hasPermission('forum_admin', forum_get_groupid($reference))) {
 				return 4 ;
+			} elseif (!$this->hasPermission('project_read', forum_get_groupid($reference))) {
+				return 0;
 			}
 			return $value ;
 			break ;
 		case 'new_forum':
 			if ($this->hasPermission('forum_admin', $reference)) {
 				return 4 ;
+			} elseif (!$this->hasPermission('project_read', $reference)) {
+				return 0;
 			}
 			return $value ;
 			break ;
@@ -490,12 +507,16 @@ abstract class BaseRole extends Error {
 		case 'tracker':
 			if ($this->hasPermission('tracker_admin', artifacttype_get_groupid($reference))) {
 				return 5 | $value ;
+			} elseif (!$this->hasPermission('project_read', artifacttype_get_groupid($reference))) {
+				return 0;
 			}
 			return $value ;
 			break ;
 		case 'new_tracker':
 			if ($this->hasPermission('tracker_admin', $reference)) {
 				return 5 | $value ;
+			} elseif (!$this->hasPermission('project_read', $reference)) {
+				return 0;
 			}
 			return $value ;
 			break ;
@@ -503,12 +524,16 @@ abstract class BaseRole extends Error {
 		case 'pm':
 			if ($this->hasPermission('pm_admin', projectgroup_get_groupid($reference))) {
 				return 5 | $value ;
+			} elseif (!$this->hasPermission('project_read', projectgroup_get_groupid($reference))) {
+				return 0;
 			}
 			return $value ;
 			break ;
 		case 'new_pm':
 			if ($this->hasPermission('pm_admin', $reference)) {
 				return 5 | $value ;
+			} elseif (!$this->hasPermission('project_read', $reference)) {
+				return 0;
 			}
 			return $value ;
 			break ;
