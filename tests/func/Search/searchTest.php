@@ -1,6 +1,7 @@
 <?php
-/*
+/**
  * Copyright 2011, Roland Mas
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -513,6 +514,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click ("//td/form/div[contains(.,'Trainee')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
+		$this->select("//tr/td[.='Project visibility']/../td/select[contains(@name,'data[project_read]'))", "label=Visible");
 		$this->select("//tr/td[.='Bugs']/../td/select[contains(@name,'data[tracker]')]", "label=Read only");
 		$this->select("//tr/td[.='Patches']/../td/select[contains(@name,'data[tracker]')]", "label=No access");
 		$this->select("//tr/td[.='To Do']/../td/select[contains(@name,'data[pm]')]", "label=Read only");
@@ -527,6 +529,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click ("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
+		$this->select("//tr/td[.='Project visibility']/../td/select[contains(@name,'data[project_read]'))", "label=Visible");
 		$this->select("//tr/td[.='Bugs']/../td/select[contains(@name,'data[tracker]')]", "label=No access");
 		$this->select("//tr/td[.='Patches']/../td/select[contains(@name,'data[tracker]')]", "label=No access");
 		$this->select("//tr/td[.='To Do']/../td/select[contains(@name,'data[pm]')]", "label=No access");
