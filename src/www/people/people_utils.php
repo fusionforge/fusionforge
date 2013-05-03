@@ -105,7 +105,7 @@ VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill
 				$feedback .= _('Added to skill inventory');
 			}
 		} else {
-			$error_msg .= _('ERROR - skill already in your inventory');
+			$error_msg .= _('Error: skill already in your inventory');
 		}
 		}
 	} else {
@@ -213,7 +213,7 @@ VALUES ($1, $2, $3, $4)', array($job_id, $skill_id, $skill_level_id, $skill_year
 				$feedback .= _('Added to skill inventory');
 			}
 		} else {
-			$feedback .= _('ERROR - skill already in your inventory');
+			$feedback .= _('Error: skill already in your inventory');
 		}
 
 	} else {
@@ -229,7 +229,6 @@ AND people_skill_level.skill_level_id=people_job_inventory.skill_level_id
 AND people_skill.skill_id=people_job_inventory.skill_id
 AND people_job_inventory.job_id=$1', array($job_id));
 
-	$title_arr=array();
 	$title_arr=array();
 	$title_arr[]=_('Skill');
 	$title_arr[]=_('Level');
