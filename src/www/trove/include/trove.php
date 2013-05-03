@@ -165,6 +165,7 @@ function trove_setnode($group_id,$trove_cat_id,$rootnode=0) {
  * trove_getrootcat() - Get the root categegory
  *
  * @param		int		Trove category ID
+ * @return int
  */
 function trove_getrootcat($trove_cat_id) {
 	$parent = 1;
@@ -235,6 +236,7 @@ function trove_catselectfull($node,$selected,$name) {
  * @param		int		The group ID
  * @param		bool	Whether filters have already been applied
  * @param		bool	Whether to print category links
+ * @return string
  */
 function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 	global $discrim_url;
@@ -253,8 +255,8 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 
 	$return = '';
 	if (db_numrows($res_trovecat) < 1) {
-		$return .= sprintf (_('This project has not yet categorized itself in the <a href="%s">Trove Software Map</a>.'), util_make_url ('/softwaremap/trove_list.php'))
-			.'<p />';
+		$return .= '<p>' . sprintf (_('This project has not yet categorized itself in the <a href="%s">Trove Software Map</a>.'), util_make_url ('/softwaremap/trove_list.php'))
+			.'</p>';
 	} else {
 		$return .= '<ul>';
 		$need_close_ul_tag = 1;

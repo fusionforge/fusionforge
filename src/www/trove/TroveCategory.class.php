@@ -61,14 +61,14 @@ class TroveCategory extends Error {
 			if (!$dataArray || !is_array($dataArray)) {
 				if (!$this->fetchData($categoryId)) {
 					$this->setError(_('Invalid Trove Category'),
-							_('That Trove category does not exist.').' '.db_error('SYS_DB_TROVE')
+							_('That Trove category does not exist').' '.db_error('SYS_DB_TROVE')
 					);
 				}
 			} else {
 				$this->dataArray =& $dataArray;
 			}
 		} else {
-			$this->setError(_('ERROR'), _('That Trove category does not exist.'));
+			$this->setError(_('Error'), _('That Trove category does not exist'));
 		}
 	}
 
@@ -94,7 +94,7 @@ class TroveCategory extends Error {
 		$fullName = trim($fullName);
 		$description = trim($description);
 		if(empty($shortName) || empty($fullName)) {
-			$this->setError(_('ERROR'), _('Empty strings'));
+			$this->setError(_('Error'), _('Empty strings'));
 			return false;
 		} else {
 			db_begin();
@@ -106,7 +106,7 @@ class TroveCategory extends Error {
 				WHERE trove_cat_id=$5",
 				array(htmlspecialchars($shortName), htmlspecialchars($fullName), htmlspecialchars($description), date('Ymd',time())."01", $this->categoryId));
 			if(!$result || db_affected_rows($result) != 1) {
-				$this->setError(_('ERROR'), _('Cannot update'));
+				$this->setError(_('Error'), _('Cannot update'));
 				db_rollback();
 				return false;
 			} else {

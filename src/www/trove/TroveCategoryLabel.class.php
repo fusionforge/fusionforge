@@ -84,6 +84,7 @@ class TroveCategoryLabel extends Error {
 		$this->labelId = db_insertid($result, 'trove_category_labels', 'label_id');
 		$this->fetchData($this->labelId);
 		db_commit();
+		return true;
 	}
 
 	function update() {

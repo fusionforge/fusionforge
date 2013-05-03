@@ -172,7 +172,7 @@ if ($group->isError()) {
 
 $atfh = new ArtifactTypeFactoryHtml($group);
 if (!$atfh || !is_object($atfh) || $atfh->isError()) {
-	exit_error(_('Error')._(': ')._('could Not Get ArtifactTypeFactoryHtml'), 'tracker');
+	exit_error(_('Error')._(': ')._('Could Not Get ArtifactTypeFactoryHtml'), 'tracker');
 }
 
 $template = getIntFromRequest('template', 0);
