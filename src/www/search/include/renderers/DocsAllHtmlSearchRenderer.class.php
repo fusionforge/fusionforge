@@ -89,6 +89,9 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			//section changed
 			$currentDocGroup = db_result($result, $i, 'project_name');
 			$currentDocGroupObject = group_get_object_by_publicname($currentDocGroup);
+			if(!forge_check_perm('project_read', $currentDocGroupObject->getID())) {
+				continue;
+			}
 			if ($lastDocGroup != $currentDocGroup) {
 				$return .= '<tr><td>'.html_image('ic/home16b.png', '10', '12', array('border' => '0')).'<b>'.util_make_link('/docman/?group_id='.$currentDocGroupObject->getID(),$currentDocGroup).'</b></td><td colspan="3">&nbsp;</td></tr>';
 				$lastDocGroup = $currentDocGroup;
