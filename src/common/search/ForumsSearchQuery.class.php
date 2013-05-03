@@ -5,6 +5,7 @@
  * Copyright 2004, Dominik Haas
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -129,8 +130,8 @@ class ForumsSearchQuery extends SearchQuery {
 	 * @param $showNonPublic boolean if we should consider non public sections
 	 */
 	static function getSections($groupId, $showNonPublic=false) {
-		$sql = 'SELECT group_forum_id, forum_name FROM forum_group_list WHERE group_id = $1';
-		$sql .= ' ORDER BY forum_name';
+		$sql = 'SELECT group_forum_id, forum_name FROM forum_group_list WHERE group_id = $1 AND ';
+		$sql .= 'group_forum_id NOT IN (SELECT forum_id FROM news_bytes)  ORDER BY forum_name';
 
 		$sections = array();
 		$res = db_query_params ($sql,

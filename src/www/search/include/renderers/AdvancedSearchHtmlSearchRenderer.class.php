@@ -3,6 +3,7 @@
  * Search Engine
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -244,7 +245,12 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		if ($group->usesNews()) {
 			require_once $gfwww.'search/include/renderers/NewsHtmlSearchRenderer.class.php';
-			$sections['short_news'] = true;
+			$undersections = NewsHtmlSearchRenderer::getSections($this->groupId);
+			if(count($undersections) > 0){
+				$sections['short_news'] = $undersections;
+			} else {
+				$sections['short_news'] = true;
+			}
 		}
 
 		if ($group->usesFRS()) {

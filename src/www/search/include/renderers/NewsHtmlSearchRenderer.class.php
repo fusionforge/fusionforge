@@ -3,6 +3,7 @@
  * Search Engine
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -71,6 +72,17 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				<td width="15%">'.date($dateFormat, db_result($result, $i, 'post_date')).'</td></tr>';
 		}
 		return $return;
+	}
+	
+	/**
+	 * getSections - get the array of possible sections to search in
+	 *
+	 * @return array sections
+	 */
+	static function getSections($groupId) {
+		$userIsGroupMember = NewsHtmlSearchRenderer::isGroupMember($groupId);
+
+		return NewsSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }
 

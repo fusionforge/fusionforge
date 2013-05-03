@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Dominik Haas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -84,6 +85,29 @@ class NewsSearchQuery extends SearchQuery {
 						 ' ORDER BY post_date DESC') ;
 		}
 		return $qpa ;
+	}
+		
+	/**
+	 * getSections - returns the list of available forums
+	 *
+	 * @param $groupId int group id
+	 * @param $showNonPublic boolean if we should consider non public sections
+	 */
+	static function getSections($groupId, $showNonPublic=false) {
+
+		// Select survey of the project
+		$sql = 'SELECT group_forum_id, forum_name FROM forum_group_list WHERE group_id = $1 AND ';
+		$sql .= 'group_forum_id IN (SELECT forum_id FROM news_bytes) ORDER BY forum_name';
+
+		$sections = array();
+		$res = db_query_params ($sql,
+					array ($groupId));
+		while($data = db_fetch_array($res)) {
+			if (forge_check_perm('forum',$data['group_forum_id'],'read')) {
+				$sections[$data['group_forum_id']] = $data['forum_name'];
+			}
+		}
+		return $sections;
 	}
 }
 
