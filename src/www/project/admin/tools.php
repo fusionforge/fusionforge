@@ -323,7 +323,7 @@ if($group->usesMail()) { ?>
 	<p><a href="/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Mailing Lists Admin') ?></a></p>
 <?php }
 if($group->usesPM()) { ?>
-	<p><a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Tasks Admin') ?></a></p>
+	<p><a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Tasks Administration') ?></a></p>
 <?php }
 if($group->usesDocman()) { ?>
 	<p><a href="/docman/?group_id=<?php echo $group->getID(); ?>&amp;view=admin"><?php echo _('Documents Admin') ?></a></p>
