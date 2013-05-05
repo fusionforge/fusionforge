@@ -5,7 +5,8 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -71,6 +72,17 @@ if (getStringFromRequest('submit')) {
 	$use_ratings = getStringFromRequest('use_ratings');
 	$use_tooltips = getIntFromRequest('use_tooltips');
 
+	
+	$check = true;
+	if (!strlen(trim($firstname))) {
+		$error_msg = _('You must supply a first name.');
+		$check = false;
+	} elseif (!strlen(trim($lastname))) {
+		$error_msg = _('You must supply a last name.');
+		$check = false;
+	}
+	
+	if ($check) {
 /*
 //needs security audit
 	if ($remember_user) {
@@ -81,21 +93,22 @@ if (getStringFromRequest('submit')) {
 		setcookie("sf_user_hash",'',0,'/');
 	}
 */
-	// Refresh page if language or theme changed
-	$refresh = ($language != $u->getLanguage() || $theme_id != $u->getThemeID());
+		// Refresh page if language or theme changed
+		$refresh = ($language != $u->getLanguage() || $theme_id != $u->getThemeID());
 
-	if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
-		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode,$use_tooltips)) {
-		form_release_key(getStringFromRequest('form_key'));
-		$error_msg = $u->getErrorMessage();
-		$refresh_url = '/account/?error_msg='.urlencode($error_msg);
-	} else {
-		$feedback = _('Updated');
-		$refresh_url = '/account/?feedback='.urlencode($feedback);
-	}
+		if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
+			$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode,$use_tooltips)) {
+			form_release_key(getStringFromRequest('form_key'));
+			$error_msg = $u->getErrorMessage();
+			$refresh_url = '/account/?error_msg='.urlencode($error_msg);
+		} else {
+			$feedback = _('Updated');
+			$refresh_url = '/account/?feedback='.urlencode($feedback);
+		}
 
-	if ($refresh) {
-		session_redirect($refresh_url);
+		if ($refresh) {
+			session_redirect($refresh_url);
+		}
 	}
 }
 
@@ -147,16 +160,16 @@ echo $HTML->boxTop(_('Account Maintenance'));
 </tr>
 
 <tr valign="top">
-<td><?php echo _('First Name:'); ?></td>
+<td><?php echo _('First Name:').utils_requiredField(); ?></td>
 <td>
-<input type="text" name="firstname" value="<?php print $u->getFirstName(); ?>" />
+<input required="required" type="text" name="firstname" value="<?php print $u->getFirstName(); ?>" />
 </td>
 </tr>
 
 <tr valign="top">
-<td><?php echo _('Last Name:'); ?></td>
+<td><?php echo _('Last Name:').utils_requiredField(); ?></td>
 <td>
-<input type="text" name="lastname" value="<?php print $u->getLastName(); ?>" />
+<input required="required" type="text" name="lastname" value="<?php print $u->getLastName(); ?>" />
 </td>
 </tr>
 
@@ -335,7 +348,7 @@ if (forge_get_config('use_shell')) {
 </tr>
 
 </table>
-
+<span><?php echo sprintf(_('%s Mandatory fields'), utils_requiredField())?></span>
 <p style="text-align: center;">
 <input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
 <input type="reset" name="reset" value="<?php echo _('Reset Changes'); ?>" />
