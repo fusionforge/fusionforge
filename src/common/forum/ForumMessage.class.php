@@ -5,6 +5,8 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -351,8 +353,8 @@ class ForumMessage extends Error {
 	 *	@return	boolean success.
 	 */
 	function create($subject, $body, $thread_id='', $is_followup_to='',$has_attach=false, $timestamp = 0) {
-		if (!$body || !$subject) {
-			$this->setError(_('Must Include A Message Body And Subject'));
+		if (!strlen(trim($body)) || !strlen(trim($subject))) {
+			$this->setError(_('Error: a forum message must iclude a message body and a subject.'));
 			return false;
 		}
 		if (!forge_check_perm ('forum', $this->Forum->getID(), 'post')) {
@@ -796,8 +798,11 @@ Or reply to this e-mail entering your response between the following markers:
 	 *	@return boolean success.
 	 */
 	function updatemsg($group_forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date) {
+		if (!strlen(trim($body)) || !strlen(trim($subject))) {
+			$this->setError(_('Error: a forum message must include a message body and a subject.'));
+			return false;
+		}
 		$subject = htmlspecialchars($subject);
-		$body = $body;
 		$msg_id = $this->getID();
 		$res = db_query_params ('UPDATE forum
 			SET group_forum_id=$1, posted_by=$2, subject=$3,

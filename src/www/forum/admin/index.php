@@ -6,6 +6,8 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, French Ministry of National Education
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -82,12 +84,16 @@ if (getStringFromRequest('post_changes')) {
 			$feedback .= $fa->ExecuteAction("add_forum");
 			if ($fa->isError()){
 				$error_msg = $fa->getErrorMessage();
+			} else {
+				$g->normalizeAllRoles();
 			}
-			$g->normalizeAllRoles () ;
 		}
 	} elseif (getStringFromRequest('change_status')) {
 		$fa = new ForumAdmin($group_id);
 		$feedback .= $fa->ExecuteAction("change_status");
+		if ($fa->isError()){
+			$error_msg = $fa->getErrorMessage();
+		}
 	}
 }
 
@@ -104,14 +110,14 @@ if (getStringFromRequest('add_forum')) {
 			<input type="hidden" name="add_forum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
-			<strong>'._('Forum Name').':</strong><br />
-			<input type="text" name="forum_name" value="" size="20" maxlength="30" />
+			<strong>'._('Forum Name').':'.utils_requiredField().'</strong><br />
+			<input type="text" name="forum_name" required="required" value="" size="20" maxlength="30" />
 			</p>
 			<p>
-			<strong>'._('Description').':</strong><br />
-			<input type="text" name="description" value="" size="40" maxlength="80" />
+			<strong>'._('Description').':'.utils_requiredField().'</strong><br />
+			<input type="text" name="description" required="required" value="" size="40" maxlength="80" />
 			</p>
-                        <p>
+			<p>
 			<strong>'._('Email All Posts To:').'</strong><br />
 			<input type="text" name="send_all_posts_to" value="" size="60" />
 			</p>
@@ -119,7 +125,7 @@ if (getStringFromRequest('add_forum')) {
 			<input type="submit" name="submit" value="'._('Add This Forum').'" />
 			</p>
 			</form>';
-
+	echo '<span>'.sprintf(_('%s Mandatory fields'), utils_requiredField()).'</span>';
 	forum_footer(array());
 
 } elseif (getStringFromRequest('change_status')) {
@@ -141,16 +147,16 @@ if (getStringFromRequest('add_forum')) {
 				<input type="hidden" name="change_status" value="y" />
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
 				<input type="hidden" name="group_id" value="'.$group_id.'" />
-				<strong>'._('Forum Name').':</strong><br />
-				<input type="text" name="forum_name" value="'. $f->getName() .'" size="20" maxlength="30" />
+				<strong>'._('Forum Name').':'.utils_requiredField().'</strong><br />
+				<input type="text" name="forum_name" required="required" value="'. $f->getName() .'" size="20" maxlength="30" />
 				</p>
 				<p>
 				<strong>'._('Email All Posts To:').'</strong><br />
 				<input type="text" name="send_all_posts_to" value="'. $f->getSendAllPostsTo() .'" size="60" />
 				</p>
 				<p>
-				<strong>'._('Description').':</strong><br />
-				<input type="text" name="description" value="'. $f->getDescription() .'" size="60" maxlength="80" /><br />
+				<strong>'._('Description').':'.utils_requiredField().'</strong><br />
+				<input type="text" name="description" required="required" value="'. $f->getDescription() .'" size="60" maxlength="80" /><br />
 				</p>
 				<p>
 				<input type="submit" name="submit" value="'._('Update').'" />
@@ -158,6 +164,7 @@ if (getStringFromRequest('add_forum')) {
 			</form><p>';
 	//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'._('Delete Message').'</a><br />';
 	echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'._('Delete entire forum and all content').'</a></p>';
+	echo '<span>'.sprintf(_('%s Mandatory fields'), utils_requiredField()).'</span>';
 	forum_footer(array());
 
 } elseif ($deleteforum && $group_forum_id) {
@@ -200,9 +207,9 @@ if (getStringFromRequest('add_forum')) {
 		// the user cancelled the request, go back to forum
 		//if thread_id is 0, then we came from message.php. else, we came from forum.php
 		if (!$thread_id) {
-            session_redirect('/forum/message.php?msg_id='.$msg_id);
+			session_redirect('/forum/message.php?msg_id='.$msg_id);
 		} else {
-            session_redirect('/forum/forum.php?thread_id='.$thread_id.'&forum_id='.$forum_id);
+			session_redirect('/forum/forum.php?thread_id='.$thread_id.'&forum_id='.$forum_id);
 		}
 		exit;
 	} else {
@@ -262,7 +269,7 @@ if (getStringFromRequest('add_forum')) {
 		if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date)) {
 			$feedback .= _('Message Edited Successfully');
 		} else {
-			$error_msg .= $fm->getErrorMessage();
+			session_redirect('/forum/admin/index.php?editmsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id.'&error_msg='.urlencode($fm->getErrorMessage()));
 		}
 		forum_header(array('title'=>_('Edit a Message')));
 		echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;

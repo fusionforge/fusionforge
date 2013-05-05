@@ -44,7 +44,7 @@ if ($group_id) {
 	$farr = $ff->getForums();
 
 	if ( $farr !== false && count($farr) == 1 ) {
-        session_redirect('/forum/forum.php?forum_id='.$farr[0]->getID());
+         session_redirect('/forum/forum.php?forum_id='.$farr[0]->getID());
 	}
 
 	forum_header(array('title'=>sprintf(_('Forums for %1$s'), $g->getPublicName()) ));

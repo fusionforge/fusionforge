@@ -7,6 +7,7 @@
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -514,7 +515,7 @@ class ForumHTML extends Error {
 			</td><td valign="top">
 			<br />
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
-				<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
+				<input type="text" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 		<br />
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms.ForumEditForm.body') ?><?php echo utils_requiredField(); ?><br />
 		<?php
@@ -527,7 +528,7 @@ class ForumHTML extends Error {
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
 			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="body"  rows="10" cols="70">' . $body . '</textarea>';
+			echo '<textarea name="body" required="required" rows="10" cols="70">' . $body . '</textarea>';
 		}
 		unset($GLOBALS['editor_was_set_up']);
 				?>
@@ -579,7 +580,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 			</td><td valign="top">
 			<br />
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
-				<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
+				<input type="text" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 			<br />
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms.ForumPostForm.body') ?><?php echo utils_requiredField(); ?><br />
 
@@ -593,7 +594,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
 			//if we don't have any plugin for text editor, display a simple textarea edit box
-					echo '<textarea name="body"  rows="10" cols="70">' . $body . '</textarea>';
+					echo '<textarea name="body" required="required" rows="10" cols="70">' . $body . '</textarea>';
 		}
 		unset($GLOBALS['editor_was_set_up']);
 		?> <?php //$text_support->displayTextField('body'); ?> <br>

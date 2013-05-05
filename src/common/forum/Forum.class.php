@@ -160,11 +160,11 @@ class Forum extends Error {
 	 * @return	boolean	success.
 	 */
 	function create($forum_name,$description,$send_all_posts_to='',$create_default_message=1) {
-		if (!$this->is_news && strlen($forum_name) < 3) {
+		if (!$this->is_news && strlen(trim($forum_name)) < 3) {
 			$this->setError(_('Forum Name Must Be At Least 3 Characters'));
 			return false;
 		}
-		if (!$this->is_news && strlen($description) < 10) {
+		if (!$this->is_news && strlen(trim($description)) < 10) {
 			$this->setError(_('Forum Description Must Be At Least 10 Characters'));
 			return false;
 		}

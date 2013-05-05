@@ -6,6 +6,7 @@
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -106,7 +107,7 @@ if ($forum_id) {
 
 		if (!$fm->create($subject, $body, $thread_id, $is_followup_to,$has_attach) || $fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error creating ForumMessage:').' '.$fm->getErrorMessage(), 'forums');
+			session_redirect('/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id.'&error_msg='.urlencode($fm->getErrorMessage()));
 		} else {
 			if ($fm->isPending() ) {
 				$feedback = _('Message Queued for moderation -> Please wait until the admin approves/rejects it');
