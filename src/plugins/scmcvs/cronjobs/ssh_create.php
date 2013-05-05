@@ -6,6 +6,7 @@
  * The rest Copyright 2002-2005 (c) GForge Team
  * Copyright (C) 2009  Sylvain Beucler
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2013, Xavier Le Boëc
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -66,7 +67,12 @@ foreach ($keys as $username => $v) {
 
 	$dir = forge_get_config('homedir_prefix').'/'.$username;
 	if (util_is_root_dir($dir)) {
-		$err .= "Error! homedir_prefix/username Points To Root Directory!";
+		$err .= _('Error: homedir_prefix/username points to root directory!');
+		continue;
+	}
+
+	if(!is_dir($dir)){
+		$err .=  sprintf(_('Error! homedirs.php hasn\'t created a home directory for user %s'), $username);
 		continue;
 	}
 
@@ -78,5 +84,3 @@ foreach ($keys as $username => $v) {
 }
 
 cron_entry(15,$err);
-
-?>
