@@ -5,7 +5,7 @@
  * Copyright 2004-2005 (c) GForge LLC, Tim Perdue
  * Copyright 2010 (c), Franck Villaume - Capgemini
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -71,6 +71,167 @@ function scm_header($params) {
 function scm_footer() {
 	echo '</div>';
 	site_project_footer(array());
+}
+
+function commitstime_graph($group_id, $chartid) {
+	$g = group_get_object($group_id);
+	$end = time();
+	$start = $g->getStartDate();
+	$monthsArr[] = date('Ym', $start);
+	$timeStampArr[] = mktime(0, 0, 0, substr($monthsArr[0], 4, 2) , 1, substr($monthsArr[0], 0, 4));
+	$i = 0;
+	while($start < $end) {
+		$start = strtotime(date('Y-m-d', $start).' +1 month');
+		$i++;
+		$monthsArr[$i] = date('Ym', $start);
+		$timeStampArr[$i] = mktime(0, 0, 0, substr($monthsArr[$i], 4, 2) , 1, substr($monthsArr[$i], 0, 4));
+		if ($monthsArr[$i] == date('Ym', strtotime(date('Y-m-d', $end).' +1 month'))) {
+			array_pop($monthsArr);
+			array_pop($timeStampArr);
+			$i--;
+		}
+	}
+	$res = db_query_params ('SELECT month, sum(commits) AS count
+				FROM stats_cvs_group
+				WHERE group_id = $1
+				GROUP BY month ORDER BY month ASC',
+				array($group_id));
+
+	if (db_error()) {
+		exit_error(db_error(),'scm');
+	}
+
+	echo '<script type="text/javascript">//<![CDATA['."\n";
+	echo 'var values = new Array();';
+
+	$data = array();
+	while ($row = db_fetch_array($res)) {
+		$data[$row[0]] = $row[1];
+	}
+
+	$yMax = 0;
+	for ($j = 0; $j < count($monthsArr); $j++) {
+		echo 'var date = new Date(0);';
+		echo 'date.setUTCSeconds('.$timeStampArr[$j].');';
+		$indexkey = array_key_exists($monthsArr[$j], $data);
+		if ($indexkey !== false) {
+			echo 'var datevalues = '.$data[$monthsArr[$j]].';';
+			if ($data[$monthsArr[$j]] > $yMax) {
+				$yMax = $data[$monthsArr[$j]];
+			}
+		} else {
+			echo 'var datevalues = 0;';
+		}
+		echo 'values.push([date, datevalues]);';
+	}
+	echo 'var plot'.$chartid.';';
+	echo 'var minDate = new Date(0);';
+	echo 'minDate.setUTCSeconds('.$timeStampArr[0].');';
+	echo 'jQuery(document).ready(function(){
+			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [values], {
+				axesDefaults: {
+					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
+					tickOptions: {
+						angle: -90,
+						fontSize: \'8px\',
+						showGridline: false,
+						showMark: false,
+					},
+					pad: 0,
+				},
+				seriesDefaults: {
+					showMarker: false,
+					lineWidth: 1,
+					fill: true,
+				},
+				legend: {
+					show: false,
+				},
+				axes: {
+					xaxis: {
+						renderer: jQuery.jqplot.DateAxisRenderer,
+						min: minDate,
+						tickInterval: \'1 month\',
+						tickOptions: {
+							formatString: \'%Y/%m\'
+						}
+					},
+					yaxis: {
+						max: '.++$yMax.',
+						tickOptions: {
+							angle: 0,
+							showMark: true,
+						}
+					}
+				},
+				highlighter: {
+					show: true,
+					sizeAdjust: 2.5,
+				},
+			});
+		});';
+	echo 'jQuery(window).resize(function() {
+			plot'.$chartid.'.replot();
+		});'."\n";
+	echo '//]]></script>';
+	echo '<div id="chart'.$chartid.'"></div>';
+}
+
+function commits_graph($group_id, $days, $chartid) {
+	$start = time() - ($days * 60 * 60 * 24);
+	$g = group_get_object($group_id);
+	$end=time();
+	if ( $start < $g->getStartDate()) {
+		$start = $g->getStartDate();
+	}
+	$formattedmonth = date('Ym', $start);
+	$res = db_query_params('SELECT u.realname,sum(commits) AS count
+			FROM stats_cvs_user scu, users u
+			WHERE u.user_id = scu.user_id
+			AND scu.month >= $1
+			AND group_id = $2
+			GROUP BY realname ORDER BY count DESC',
+			array($formattedmonth, $group_id));
+
+	if (db_error()) {
+		exit_error(db_error(), 'scm');
+	}
+
+	if (db_numrows($res)) {
+		echo '<script type="text/javascript">//<![CDATA['."\n";
+		echo 'var data'.$chartid.' = new Array();';
+		while ($row = db_fetch_array($res)) {
+			echo 'data'.$chartid.'.push([\''.htmlentities($row[0]).'\',\''.$row[1].'\']);';
+		}
+		echo 'var plot'.$chartid.';';
+		echo 'jQuery(document).ready(function(){
+			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data'.$chartid.'],
+				{
+					title : \''.utf8_decode(_("Commits By User")." (".strftime('%x',$start) ." - ". strftime('%x',$end) .")").'\',
+					seriesDefaults: {
+						// Make this a pie chart.
+						renderer: jQuery.jqplot.PieRenderer,
+						rendererOptions: {
+							// Put data labels on the pie slices.
+							// By default, labels show the percentage of the slice.
+							showDataLabels: true,
+							dataLabels: \'percent\',
+						}
+					},
+					legend: {
+						show:true, location: \'e\',
+					},
+				}
+				);
+			});';
+		echo 'jQuery(window).resize(function() {
+				plot'.$chartid.'.replot( { resetAxes: true } );
+			});'."\n";
+		echo '//]]></script>';
+		echo '<div id="chart'.$chartid.'"></div>';
+	} else {
+		echo '<p class="information">'._('No commits during this period.').'</p>';
+	}
 }
 
 // Local Variables:

@@ -5,7 +5,7 @@
  * Copyright 2003 GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,7 +28,9 @@ require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
+require_once $gfcommon.'reporting/ReportProjectAct.class.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
+
 
 $group_id = getIntFromRequest('group_id');
 if ( !$group_id ) {
@@ -80,6 +82,10 @@ if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }
 if ($start && !is_numeric($start)) { $start = false; }
 if ($end && !is_numeric($end)) { $end = false; }
 
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginhighlighter();
+html_use_jqueryjqplotplugindateAxisRenderer();
+
 project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_id));
 
 //
@@ -99,7 +105,12 @@ project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_i
 </tr></table>
 </form>
 <p>
+<?php
+projectact_graph($group_id, $area, $SPAN, $start, $end);
+?>
+<noscript>
 <img src="/reporting/projectact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;g_id=$group_id&amp;area=$area"; ?>" width="640" height="480" alt="stats graph" />
+</noscript>
 </p>
 </div>
 <?php

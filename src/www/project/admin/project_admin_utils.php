@@ -6,6 +6,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -230,6 +231,70 @@ function random_pwgen() {
 
 function permissions_blurb() {
 	return _('<strong>NOTE:</strong><dl><dt><strong>Project Admins (bold)</strong></dt><dd>can access this page and other project administration pages</dd><dt><strong>Release Technicians</strong></dt><dd>can make the file releases (any project admin also a release technician)</dd><dt><strong>Tool Technicians (T)</strong></dt><dd>can be assigned Bugs/Tasks/Patches</dd><dt><strong>Tool Admins (A)</strong></dt><dd>can make changes to Bugs/Tasks/Patches as well as use the /toolname/admin/ pages</dd><dt><strong>Tool No Permission (N/A)</strong></dt><dd>Developer doesn\'t have specific permission (currently equivalent to \'-\')</dd><dt><strong>Moderators</strong> (forums)</dt><dd>can delete messages from the project forums</dd><dt><strong>Editors</strong> (doc. manager)</dt><dd>can update/edit/remove documentation from the project.</dd></dl>');
+}
+
+/**
+ * projectact_graph - draw jqplot report stats
+ *
+ * @param	int	group_id, the project id
+ * @param	string	area, the stats zone (documents, trackers, ...)
+ * @param	int	SPAN, is it a daily, weekly, monthly report ?
+ * @param	int	start, date
+ * @param	int	end, date
+ * @return	string	the JS code
+ */
+function projectact_graph($group_id, $area, $SPAN, $start, $end) {
+	$report = new ReportProjectAct($SPAN, $group_id, $start, $end);
+	if ($report->isError()) {
+		exit_error($report->getErrorMessage());
+	}
+	switch ($area) {
+		case 'docman': {
+			$ydata  =& $report->getDocs();
+			break;
+		}
+		default: {
+			$results = array();
+			$ids = array();
+			$texts = array();
+
+			$hookParams['group'] = $group_id;
+			$hookParams['results'] = &$results;
+			$hookParams['show'] = array();
+			$hookParams['begin'] = $start;
+			$hookParams['end'] = $end;
+			$hookParams['ids'] = &$ids;
+			$hookParams['texts'] = &$texts;
+			plugin_hook("activity", $hookParams);
+			
+			if ($SPAN == REPORT_TYPE_DAILY) {
+				$interval = REPORT_DAY_SPAN;
+			} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
+				$interval = REPORT_WEEK_SPAN;
+			} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
+				$interval = REPORT_MONTH_SPAN;
+			}
+
+			$sum = array();
+			$starting_date = $start;
+			foreach ($results as $arr) {
+				$d = $arr['activity_date'];
+				$col = intval(($d - $starting_date)/$interval);
+				$col_date = $starting_date+$col*$interval;
+				@$sum[$col_date]++;
+			}
+
+			// Now, stores the values in the ydata array for the graph.
+			$ydata = array();
+			$i = 0;
+			foreach ($report->getDates() as $d) {
+				$ydata[$i++] = isset($sum[strtotime($d)]) ? $sum[strtotime($d)] : 0;
+			}
+			break;
+		}
+	}
+	var_dump($ydata);
+	echo 'joli graph';
 }
 
 // Local Variables:

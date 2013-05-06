@@ -3,6 +3,7 @@
  * Reporting System
  *
  * Copyright 2003-2004 (c) Tim Perdue - GForge LLC
+ * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,7 +51,9 @@ $res = db_query_params ('SELECT month,sum(commits) AS count
 	WHERE group_id=$1
 	GROUP BY month ORDER BY month ASC',
 			array ($group_id));
-echo db_error();
+if (db_error()) {
+	exit_error(db_error(), 'scm');
+}
 
 $report->labels=util_result_column_to_array($res,0);
 $report->setData($res,1);
