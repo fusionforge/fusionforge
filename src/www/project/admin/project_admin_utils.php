@@ -248,9 +248,21 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 	if ($report->isError()) {
 		exit_error($report->getErrorMessage());
 	}
+	if ($SPAN == REPORT_TYPE_DAILY) {
+		$interval = REPORT_DAY_SPAN;
+	} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
+		$interval = REPORT_WEEK_SPAN;
+	} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
+		$interval = REPORT_MONTH_SPAN;
+	}
 	switch ($area) {
 		case 'docman': {
-			$ydata  =& $report->getDocs();
+			$ydata =& $report->getDocs();
+			break;
+		}
+		case 'tracker': {
+			$ydata =& $report->getTrackerOpened();
+			$ydata2 =& $report->getTrackerClosed();
 			break;
 		}
 		default: {
@@ -266,14 +278,6 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 			$hookParams['ids'] = &$ids;
 			$hookParams['texts'] = &$texts;
 			plugin_hook("activity", $hookParams);
-			
-			if ($SPAN == REPORT_TYPE_DAILY) {
-				$interval = REPORT_DAY_SPAN;
-			} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
-				$interval = REPORT_WEEK_SPAN;
-			} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
-				$interval = REPORT_MONTH_SPAN;
-			}
 
 			$sum = array();
 			$starting_date = $start;
@@ -293,8 +297,79 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 			break;
 		}
 	}
-	var_dump($ydata);
-	echo 'joli graph';
+
+	$i = 0;
+	$timeStampArr[] = $start;
+	while($start < $end) {
+		$start += $interval;
+		$i++;
+		$timeStampArr[$i] = $start;
+		if ($timeStampArr[$i] > $end) {
+			array_pop($timeStampArr);
+		}
+	}
+	$chartid = 'projectgraph_'.$group_id;
+	$yMax = 0;
+	echo '<script type="text/javascript">//<![CDATA['."\n";
+	echo 'var values = new Array();';
+	echo 'var minDate = new Date('.$timeStampArr[0].');';
+	for ($j = 1; $j < count($timeStampArr) -1; $j++) {
+		echo 'var date = new Date(0);';
+		echo 'date.setUTCSeconds('.$timeStampArr[$j].');';
+		echo 'values.push([date, '.$ydata[$j].']);';
+		if ($ydata[$j] > $yMax) {
+			$yMax = $ydata[$j];
+		}
+	}
+	echo 'minDate.setUTCSeconds('.$timeStampArr[0].');';
+	echo 'jQuery(document).ready(function(){
+			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [values], {
+				axesDefaults: {
+					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
+					tickOptions: {
+						angle: -90,
+						fontSize: \'8px\',
+						showGridline: false,
+						showMark: false,
+					},
+					pad: 0,
+				},
+				seriesDefaults: {
+					showMarker: false,
+					lineWidth: 1,
+					fill: true,
+				},
+				legend: {
+					show: false,
+				},
+				axes: {
+					xaxis: {
+						renderer: jQuery.jqplot.DateAxisRenderer,
+						min: minDate,
+						tickInterval: \'1 month\',
+						tickOptions: {
+							formatString: \'%Y/%m\'
+						}
+					},
+					yaxis: {
+						max: '.++$yMax.',
+						tickOptions: {
+							angle: 0,
+							showMark: true,
+						}
+					}
+				},
+				highlighter: {
+					show: true,
+					sizeAdjust: 2.5,
+				},
+			});
+		});';
+	echo 'jQuery(window).resize(function() {
+		plot'.$chartid.'.replot();
+	});'."\n";
+	echo '//]]></script>';
+	echo '<div id="chart'.$chartid.'"></div>';
 }
 
 // Local Variables:
