@@ -85,7 +85,6 @@ if ($end && !is_numeric($end)) { $end = false; }
 html_use_jqueryjqplotpluginCanvas();
 html_use_jqueryjqplotpluginhighlighter();
 html_use_jqueryjqplotplugindateAxisRenderer();
-html_use_jqueryjqplotpluginBar();
 
 project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_id));
 

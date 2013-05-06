@@ -158,7 +158,6 @@ function commitstime_graph($group_id, $chartid) {
 					},
 					yaxis: {
 						max: '.++$yMax.',
-						min: 0,
 						tickOptions: {
 							angle: 0,
 							showMark: true,
