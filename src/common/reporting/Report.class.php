@@ -4,6 +4,7 @@
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -46,6 +47,7 @@ var $span_name=array(1=>'Daily',2=>'Weekly',3=>'Monthly',4=>'OverAll');
 var $graph_interval=array(1=>7,2=>1,3=>1,4=>1);
 var $max_weeks = 104;
 var $max_month = 24;
+var $rawdates;
 
 function Report() {
 	$this->Error();
@@ -118,6 +120,7 @@ function setDates($result,$column) {
 
 	for ($i=0; $i<count($arr); $i++) {
 		$this->labels[$i] = date($format,$arr[$i]);
+		$this->rawdates[$i] = $arr[$i];
 	}
 }
 
@@ -131,6 +134,10 @@ function &getData() {
 
 function &getDates() {
 	return $this->labels;
+}
+
+function &getRawDates() {
+	return $this->rawdates;
 }
 
 function getStartDate() {
