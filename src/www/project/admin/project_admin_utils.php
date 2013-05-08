@@ -248,13 +248,29 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 	if ($report->isError()) {
 		exit_error($report->getErrorMessage());
 	}
+	$rdates = $report->getRawDates();
 	if ($SPAN == REPORT_TYPE_DAILY) {
 		$interval = REPORT_DAY_SPAN;
+		$i = 0;
+		$looptime = $start;
+		while ($looptime < $end) {
+			$timeStampArr[$i] = $looptime;
+			$looptime += $interval;
+			$i++;
+		}
 	} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
 		$interval = REPORT_WEEK_SPAN;
+		$timeStampArr = $report->getWeekStartArr();
 	} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
 		$interval = REPORT_MONTH_SPAN;
+		$timeStampArr = $report->getMonthStartArr();
 	}
+	for ($j = 0; $j < count($timeStampArr); $j++) {
+		if ($timeStampArr[$j] < $start || $timeStampArr[$j] >= $end) {
+			unset($timeStampArr[$j]);
+		}
+	}
+	$timeStampArr = array_values($timeStampArr);
 	switch ($area) {
 		case 'docman': {
 			$ydata =& $report->getDocs();
@@ -298,27 +314,23 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 		}
 	}
 
-	$i = 0;
-	$timeStampArr[] = $start;
-	while($start < $end) {
-		$start += $interval;
-		$i++;
-		$timeStampArr[$i] = $start;
-		if ($timeStampArr[$i] > $end) {
-			array_pop($timeStampArr);
-		}
-	}
 	$chartid = 'projectgraph_'.$group_id;
 	$yMax = 0;
 	echo '<script type="text/javascript">//<![CDATA['."\n";
 	echo 'var values = new Array();';
-	echo 'var minDate = new Date('.$timeStampArr[0].');';
-	for ($j = 1; $j < count($timeStampArr) -1; $j++) {
+	echo 'var minDate = new Date(0);';
+	$z = 0;
+	for ($j = 0; $j < count($timeStampArr); $j++) {
 		echo 'var date = new Date(0);';
 		echo 'date.setUTCSeconds('.$timeStampArr[$j].');';
-		echo 'values.push([date, '.$ydata[$j].']);';
-		if ($ydata[$j] > $yMax) {
-			$yMax = $ydata[$j];
+		if (in_array($timeStampArr[$j], $rdates)) {
+			if ($ydata[$z] > $yMax) {
+				$yMax = $ydata[$z];
+			}
+			echo 'values.push([date, '.$ydata[$z].']);';
+			$z++;
+		} else {
+			echo 'values.push([date, 0]);';
 		}
 	}
 	echo 'minDate.setUTCSeconds('.$timeStampArr[0].');';
@@ -345,11 +357,12 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 				axes: {
 					xaxis: {
 						renderer: jQuery.jqplot.DateAxisRenderer,
-						min: minDate,
-						tickInterval: \'1 month\',
-						tickOptions: {
-							formatString: \'%Y/%m\'
-						}
+						min: minDate,';
+	if ($SPAN == REPORT_TYPE_MONTHLY) {
+		echo '				tickInterval: '.$interval.',';
+	}
+	echo '
+
 					},
 					yaxis: {
 						max: '.++$yMax.',
@@ -357,7 +370,7 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 							angle: 0,
 							showMark: true,
 						}
-					}
+					},
 				},
 				highlighter: {
 					show: true,
