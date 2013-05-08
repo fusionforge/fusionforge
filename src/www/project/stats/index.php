@@ -106,7 +106,11 @@ project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_i
 </form>
 <p>
 <?php
-projectact_graph($group_id, $area, $SPAN, $start, $end);
+if ($start == $end) {
+	echo '<p class="warning">'._('Cannot proceed the request. Start date is equal to end date.').'</p>';
+} else {
+	projectact_graph($group_id, $area, $SPAN, $start, $end);
+}
 ?>
 <noscript>
 <img src="/reporting/projectact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;g_id=$group_id&amp;area=$area"; ?>" width="640" height="480" alt="stats graph" />
