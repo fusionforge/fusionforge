@@ -6,6 +6,7 @@
  * Copyright 1999-2000 (c) The SourceForge Crew
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -76,14 +77,14 @@ if ($i<$rows) {
 	if ($offset>0) {
 		print '
 	<tr class="tablegetmore">
-		<td>'.util_make_link ('/top/mostactive.php?type='.$type.'&offset='.($offset-$LIMIT),'<strong><-- '._('More').'</strong>');
+		<td>'.util_make_link ('/top/mostactive.php?type='.$type.'&offset='.($offset-$limit),'<strong><-- '._('More').'</strong>');
 	} else {
 		print '&nbsp;';
 	}
 	print '
 		</td>
 		<td>&nbsp;</td>
-		<td align="RIGHT">'.util_make_link ('/top/mostactive.php?type='.$type.'&offset='.($offset+$LIMIT),'<strong>'._('More').' --></strong>').'
+		<td align="RIGHT">'.util_make_link ('/top/mostactive.php?type='.$type.'&offset='.($offset+$limit),'<strong>'._('More').' --></strong>').'
 		</td>
 	</tr>';
 }
