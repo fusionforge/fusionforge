@@ -85,6 +85,7 @@ if ($end && !is_numeric($end)) { $end = false; }
 html_use_jqueryjqplotpluginCanvas();
 html_use_jqueryjqplotpluginhighlighter();
 html_use_jqueryjqplotplugindateAxisRenderer();
+html_use_jqueryjqplotpluginBar();
 
 project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_id));
 
@@ -109,7 +110,9 @@ project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_i
 if ($start == $end) {
 	echo '<p class="warning">'._('Cannot proceed the request. Start date is equal to end date.').'</p>';
 } else {
-	projectact_graph($group_id, $area, $SPAN, $start, $end);
+	if (!projectact_graph($group_id, $area, $SPAN, $start, $end)) {
+		echo '<p class="error">'._('Error during graphic computation.');
+	}
 }
 ?>
 <noscript>

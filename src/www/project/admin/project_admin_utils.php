@@ -249,6 +249,9 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 		exit_error($report->getErrorMessage());
 	}
 	$rdates = $report->getRawDates();
+	if (!$rdates) {
+		return false;
+	}
 	if ($SPAN == REPORT_TYPE_DAILY) {
 		$interval = REPORT_DAY_SPAN;
 		$i = 0;
@@ -258,19 +261,27 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 			$looptime += $interval;
 			$i++;
 		}
+		$formatDate = _('Y/m/d');
 	} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
 		$interval = REPORT_WEEK_SPAN;
 		$timeStampArr = $report->getWeekStartArr();
+		$formatDate = _('W');
 	} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
 		$interval = REPORT_MONTH_SPAN;
 		$timeStampArr = $report->getMonthStartArr();
+		$formatDate = _('Y/m');
 	}
+	
 	for ($j = 0; $j < count($timeStampArr); $j++) {
 		if ($timeStampArr[$j] < $start || $timeStampArr[$j] >= $end) {
 			unset($timeStampArr[$j]);
 		}
 	}
 	$timeStampArr = array_values($timeStampArr);
+	for ($j = 0; $j < count($timeStampArr); $j++) {
+		$tickArr[] = date($formatDate, $timeStampArr[$j]);
+	}
+
 	switch ($area) {
 		case 'docman': {
 			$ydata =& $report->getDocs();
@@ -307,8 +318,8 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 			// Now, stores the values in the ydata array for the graph.
 			$ydata = array();
 			$i = 0;
-			foreach ($report->getDates() as $d) {
-				$ydata[$i++] = isset($sum[strtotime($d)]) ? $sum[strtotime($d)] : 0;
+			foreach ($report->getRawDates() as $d) {
+				$ydata[$i++] = isset($sum[$d]) ? $sum[$d] : 0;
 			}
 			break;
 		}
@@ -318,28 +329,48 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 	$yMax = 0;
 	echo '<script type="text/javascript">//<![CDATA['."\n";
 	echo 'var values = new Array();';
-	echo 'var minDate = new Date(0);';
-	$z = 0;
-	for ($j = 0; $j < count($timeStampArr); $j++) {
-		echo 'var date = new Date(0);';
-		echo 'date.setUTCSeconds('.$timeStampArr[$j].');';
-		if (in_array($timeStampArr[$j], $rdates)) {
-			if ($ydata[$z] > $yMax) {
-				$yMax = $ydata[$z];
+	echo 'var ticks = new Array();';
+	switch ($SPAN) {
+		case REPORT_TYPE_DAILY :
+		case REPORT_TYPE_MONTHLY : {
+			for ($j = 0; $j < count($timeStampArr); $j++) {
+				if (in_array($timeStampArr[$j], $rdates)) {
+					$thekey = array_search($timeStampArr[$j], $rdates);
+					if ($ydata[$thekey] > $yMax) {
+						$yMax = $ydata[$thekey];
+					}
+					echo 'values.push('.$ydata[$thekey].');';
+				} else {
+					echo 'values.push(0);';
+				}
+				echo 'ticks.push(\''.$tickArr[$j].'\');';
 			}
-			echo 'values.push([date, '.$ydata[$z].']);';
-			$z++;
-		} else {
-			echo 'values.push([date, 0]);';
+			break;
+		}
+		case REPORT_TYPE_WEEKLY : {
+			for ($j = 0; $j < count($rdates); $j++) {
+				$wrdates[$j] = date($formatDate, $rdates[$j]);
+			}
+			for ($j = 0; $j < count($tickArr); $j++) {
+				if (in_array($tickArr[$j], $wrdates)) {
+					$thekey = array_search($tickArr[$j], $wrdates);
+					if ($ydata[$thekey] > $yMax) {
+						$yMax = $ydata[$thekey];
+					}
+					echo 'values.push('.$ydata[$thekey].');';
+				} else {
+					echo 'values.push(0);';
+				}
+				echo 'ticks.push(\''.$tickArr[$j].'\');';
+			}
+			break;
 		}
 	}
-	echo 'minDate.setUTCSeconds('.$timeStampArr[0].');';
 	echo 'jQuery(document).ready(function(){
-			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [values], {
+			var plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [values], {
 				axesDefaults: {
-					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 					tickOptions: {
-						angle: -90,
+						angle: 30,
 						fontSize: \'8px\',
 						showGridline: false,
 						showMark: false,
@@ -350,22 +381,22 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 					showMarker: false,
 					lineWidth: 1,
 					fill: true,
+					renderer:jQuery.jqplot.BarRenderer,
+					rendererOptions: {
+						fillToZero: true,
+					},
 				},
 				legend: {
 					show: false,
 				},
 				axes: {
 					xaxis: {
-						renderer: jQuery.jqplot.DateAxisRenderer,
-						min: minDate,';
-	if ($SPAN == REPORT_TYPE_MONTHLY) {
-		echo '				tickInterval: '.$interval.',';
-	}
-	echo '
-
+						renderer: jQuery.jqplot.CategoryAxisRenderer,
+						ticks: ticks,
 					},
 					yaxis: {
 						max: '.++$yMax.',
+						min: 0,
 						tickOptions: {
 							angle: 0,
 							showMark: true,
@@ -383,6 +414,7 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 	});'."\n";
 	echo '//]]></script>';
 	echo '<div id="chart'.$chartid.'"></div>';
+	return true;
 }
 
 // Local Variables:
