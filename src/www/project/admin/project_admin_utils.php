@@ -261,15 +261,15 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 			$looptime += $interval;
 			$i++;
 		}
-		$formatDate = _('Y/m/d');
+		$formatDate = 'Y/m/d';
 	} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
 		$interval = REPORT_WEEK_SPAN;
 		$timeStampArr = $report->getWeekStartArr();
-		$formatDate = _('W');
+		$formatDate = 'Y/W';
 	} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
 		$interval = REPORT_MONTH_SPAN;
 		$timeStampArr = $report->getMonthStartArr();
-		$formatDate = _('Y/m');
+		$formatDate = 'Y/m';
 	}
 	
 	for ($j = 0; $j < count($timeStampArr); $j++) {
@@ -307,18 +307,29 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 			plugin_hook("activity", $hookParams);
 
 			$sum = array();
-			$starting_date = $start;
 			foreach ($results as $arr) {
-				$d = $arr['activity_date'];
-				$col = intval(($d - $starting_date)/$interval);
-				$col_date = $starting_date+$col*$interval;
-				@$sum[$col_date]++;
+				$dd = date($formatDate, $arr['activity_date']);
+				switch ($SPAN) {
+					case REPORT_TYPE_MONTHLY : {
+						$d = mktime(0, 0, 0, substr($dd, 5, 2) , 1, substr($dd, 0, 4));
+						break;
+					}
+					case REPORT_TYPE_WEEKLY: {
+						$d = strtotime(substr($dd, 0, 4).'-W'.substr($dd, 5, 2));
+						break;
+					}
+					case REPORT_TYPE_DAILY: {
+						$d = mktime(0, 0, 0, substr($dd, 5, 2) , substr($dd, 8, 2), substr($dd, 0, 4));
+						break;
+					}
+				}
+				@$sum[$d]++;
 			}
 
 			// Now, stores the values in the ydata array for the graph.
 			$ydata = array();
 			$i = 0;
-			foreach ($report->getRawDates() as $d) {
+			foreach ($rdates as $d) {
 				$ydata[$i++] = isset($sum[$d]) ? $sum[$d] : 0;
 			}
 			break;
