@@ -244,6 +244,10 @@ function permissions_blurb() {
  * @return	string	the JS code
  */
 function projectact_graph($group_id, $area, $SPAN, $start, $end) {
+	if (!strlen($area)) {
+		echo '<p class="information">'._('No selected area.').'</p>';
+		return true;
+	}
 	$report = new ReportProjectAct($SPAN, $group_id, $start, $end);
 	if ($report->isError()) {
 		exit_error($report->getErrorMessage());
@@ -285,27 +289,61 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 	switch ($area) {
 		case 'docman': {
 			$ydata =& $report->getDocs();
+			$areaname = _('Docs');
+			$label[] = _('Documents');
+			break;
+		}
+		case 'downloads': {
+			$ydata =& $report->getDownloads();
+			$areaname = _('Downloads');
+			$label[] = _('Downloads');
+			break;
+		}
+		case 'forum' : {
+			$ydata =& $report->getForum();
+			$areaname = _('Forums');
+			$label[] = _('Forums');
+			break;
+		}
+		case 'pageviews': {
+			$ydata =& $report->getPageViews();
+			$areaname = _('Page views');
+			$label[] = _('Page views');
+			break;
+		}
+		case 'taskman': {
+			$ydata =& $report->getTaskOpened();
+			$ydata2 =& $report->getTaskClosed();
+			$areaname = _('Tasks');
+			$label[] = _('Task open');
+			$label[] = _('Task close');
 			break;
 		}
 		case 'tracker': {
 			$ydata =& $report->getTrackerOpened();
 			$ydata2 =& $report->getTrackerClosed();
+			$areaname = _('Trackers');
+			$label[] = _('Tracker items opened');
+			$label[] = _('Tracker items closed');
 			break;
 		}
 		default: {
 			$results = array();
 			$ids = array();
 			$texts = array();
+			$show[] = $area;
 
 			$hookParams['group'] = $group_id;
 			$hookParams['results'] = &$results;
-			$hookParams['show'] = array();
+			$hookParams['show'] = &$show;
 			$hookParams['begin'] = $start;
 			$hookParams['end'] = $end;
 			$hookParams['ids'] = &$ids;
 			$hookParams['texts'] = &$texts;
 			plugin_hook("activity", $hookParams);
 
+			$areaname = $texts[0];
+			$label[] = $texts[0];
 			$sum = array();
 			foreach ($results as $arr) {
 				$dd = date($formatDate, $arr['activity_date']);
@@ -341,21 +379,30 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 	echo '<script type="text/javascript">//<![CDATA['."\n";
 	echo 'var values = new Array();';
 	echo 'var ticks = new Array();';
+	echo 'var labels = new Array();';
 	switch ($SPAN) {
 		case REPORT_TYPE_DAILY :
 		case REPORT_TYPE_MONTHLY : {
 			for ($j = 0; $j < count($timeStampArr); $j++) {
 				if (in_array($timeStampArr[$j], $rdates)) {
 					$thekey = array_search($timeStampArr[$j], $rdates);
-					if ($ydata[$thekey] > $yMax) {
-						$yMax = $ydata[$thekey];
+					if (isset($ydata[$thekey])) {
+						if ($ydata[$thekey] === false) {
+							$ydata[$thekey] = 0;
+						}
+						if ($ydata[$thekey] > $yMax) {
+							$yMax = $ydata[$thekey];
+						}
+						echo 'values.push('.$ydata[$thekey].');';
+					} else {
+						echo 'values.push(0);';
 					}
-					echo 'values.push('.$ydata[$thekey].');';
 				} else {
 					echo 'values.push(0);';
 				}
 				echo 'ticks.push(\''.$tickArr[$j].'\');';
 			}
+			echo 'labels.push({label:\''.$label[0].'\'});';
 			break;
 		}
 		case REPORT_TYPE_WEEKLY : {
@@ -365,23 +412,30 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 			for ($j = 0; $j < count($tickArr); $j++) {
 				if (in_array($tickArr[$j], $wrdates)) {
 					$thekey = array_search($tickArr[$j], $wrdates);
-					if ($ydata[$thekey] > $yMax) {
-						$yMax = $ydata[$thekey];
+					if (isset($ydata[$thekey])) {
+						if ($ydata[$thekey] === false) {
+							$ydata[$thekey] = 0;
+						}
+						if ($ydata[$thekey] > $yMax) {
+							$yMax = $ydata[$thekey];
+						}
+						echo 'values.push('.$ydata[$thekey].');';
 					}
-					echo 'values.push('.$ydata[$thekey].');';
 				} else {
 					echo 'values.push(0);';
 				}
 				echo 'ticks.push(\''.$tickArr[$j].'\');';
 			}
+			echo 'labels.push({label:\''.$label[0].'\'});';
 			break;
 		}
 	}
 	echo 'jQuery(document).ready(function(){
-			var plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [values], {
+			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [values], {
+				title : \''.utf8_decode($areaname).' ( '.strftime('%x',$start).' - '.strftime('%x',$end).') \',
 				axesDefaults: {
 					tickOptions: {
-						angle: 30,
+						angle: -30,
 						fontSize: \'8px\',
 						showGridline: false,
 						showMark: false,
@@ -398,8 +452,11 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 					},
 				},
 				legend: {
-					show: false,
+					show:true, location: \'ne\',
 				},
+				series:
+					labels
+				,
 				axes: {
 					xaxis: {
 						renderer: jQuery.jqplot.CategoryAxisRenderer,
