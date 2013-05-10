@@ -409,7 +409,6 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 				}
 				echo 'ticks.push(\''.$tickArr[$j].'\');';
 			}
-			echo 'labels.push({label:\''.$label[0].'\'});';
 			break;
 		}
 		case REPORT_TYPE_WEEKLY : {
@@ -437,7 +436,6 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 				}
 				echo 'ticks.push(\''.$tickArr[$j].'\');';
 			}
-			echo 'labels.push({label:\''.$label[0].'\'});';
 			break;
 		}
 	}
