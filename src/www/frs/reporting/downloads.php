@@ -83,6 +83,7 @@ if (!$end) {
 if ($end < $start) list($start, $end) = array($end, $start);
 
 html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginhighlighter();
 
 frs_header(array('title' => _('File Release Reporting'),
 		 'group' => $group_id,
@@ -147,6 +148,14 @@ if (count($data) == 0) {
 	echo 'var plot1;';
 	echo 'jQuery(document).ready(function(){
 			plot1 = jQuery.jqplot (\'chart1\', [values], {
+					axesDefaults: {
+						tickOptions: {
+							angle: -90,
+							fontSize: \'8px\',
+							showGridline: false,
+							showMark: false,
+						},
+					},
 					legend: {
 						show: true,
 						placement: \'insideGrid\',
@@ -165,8 +174,16 @@ if (count($data) == 0) {
 						yaxis: {
 							label: "'._('Downloads').'",
 							padMin: 0,
+							tickOptions: {
+								angle: 0,
+								showMark: true,
+							}
 						}
-					}
+					},
+					highlighter: {
+						show: true,
+						sizeAdjust: 2.5,
+					},
 				});
 		});';
 	echo 'jQuery(window).resize(function() {

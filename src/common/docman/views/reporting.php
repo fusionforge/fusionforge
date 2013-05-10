@@ -74,6 +74,7 @@ if (!$end) {
 if ($end < $start) list($start, $end) = array($end, $start);
 
 html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginhighlighter();
 echo $HTML->getJavascripts();
 echo $HTML->getStylesheets();
 
@@ -131,6 +132,14 @@ if (count($data) == 0) {
 	echo 'var plot1;';
 	echo 'jQuery(document).ready(function(){
 			plot1 = jQuery.jqplot (\'chart1\', [values], {
+					axesDefaults: {
+						tickOptions: {
+							angle: -90,
+							fontSize: \'8px\',
+							showGridline: false,
+							showMark: false,
+						},
+					},
 					axes: {
 						xaxis: {
 							label: "'._('Month').'",
@@ -141,8 +150,16 @@ if (count($data) == 0) {
 						yaxis: {
 							label: "'._('Downloads').'",
 							padMin: 0,
+							tickOptions: {
+								angle: 0,
+								showMark: true,
+							}
 						}
-					}
+					},
+					highlighter: {
+						show: true,
+						sizeAdjust: 2.5,
+					},
 				});
 		});';
 	echo 'jQuery(window).resize(function() {
