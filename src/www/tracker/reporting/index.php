@@ -5,6 +5,7 @@
  * Copyright 2003, Tim Perdue, tim@gforge.org
  * Copyright 2004 (c) GForge LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,6 +28,7 @@ require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
+require_once $gfcommon.'reporting/ReportTrackerAct.class.php';
 require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
 require_once $gfcommon.'tracker/include/ArtifactTypeFactoryHtml.class.php';
 
@@ -129,19 +131,33 @@ $h->header(array('title' => _('Tracker Activity Reporting')));
 </tr>
 </table>
 </form>
-<p class="align-center">
-<?php if ($atid) {
+<?php
+if ($start == $end) {
+	echo '<p class="warning">'._('Cannot proceed the request. Start date is equal to end date.').'</p>';
+} else {
+	if ($atid) {
 		if (!$area || $area == 'activity') {
+			if (!trackeract_graph($group_id, 'activity', $SPAN, $start, $end, $atid)) {
+				echo '<p class="error">'._('Error during graphic computation.');
+			}
 	?>
+	<noscript>
 	<img src="trackeract_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;group_id=$group_id&amp;atid=$atid"; ?>" width="640" height="480" alt="" />
+	</noscript>
 	<?php
 		} else {
+			if (!trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid)) {
+				echo '<p class="error">'._('Error during graphic computation.');
+			}
 	?>
+	<noscript>
 	<img src="trackerpie_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;group_id=$group_id&amp;atid=$atid&amp;area=$area"; ?>" width="640" height="480" alt="" />
+	</noscript>
 	<?php
-
 		}
-
+	} else {
+		echo '<p class="warning">'._('Missing tracker. Please select one tracker').'</p>';
+	}
 }
 ?>
 </p>

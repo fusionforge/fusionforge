@@ -5,7 +5,7 @@
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -243,6 +243,26 @@ function report_package_box($group_id, $name='dev_id', $selected='') {
 	$res = db_query_params ('SELECT package_id, name FROM frs_package WHERE frs_package.group_id = $1',
 				array ($group_id));
 	return html_build_select_box($res, $name, $selected, false);
+}
+
+function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
+	if (!strlen($area)) {
+		echo '<p class="information">'._('No selected area.').'</p>';
+		return true;
+	}
+	$report=new ReportTrackerAct($SPAN, $group_id, $atid, $start, $end);
+	var_dump($report);
+	echo 'joli graph';
+	return true;
+}
+
+function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
+	if (!strlen($area)) {
+		echo '<p class="information">'._('No selected area.').'</p>';
+		return true;
+	}
+	echo 'joli graph';
+	return true;
 }
 
 // Local Variables:
