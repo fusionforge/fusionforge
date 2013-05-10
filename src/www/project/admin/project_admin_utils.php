@@ -288,40 +288,40 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 
 	switch ($area) {
 		case 'docman': {
-			$ydata =& $report->getDocs();
+			$ydata[] =& $report->getDocs();
 			$areaname = _('Docs');
 			$label[] = _('Documents');
 			break;
 		}
 		case 'downloads': {
-			$ydata =& $report->getDownloads();
+			$ydata[] =& $report->getDownloads();
 			$areaname = _('Downloads');
 			$label[] = _('Downloads');
 			break;
 		}
 		case 'forum' : {
-			$ydata =& $report->getForum();
+			$ydata[] =& $report->getForum();
 			$areaname = _('Forums');
 			$label[] = _('Forums');
 			break;
 		}
 		case 'pageviews': {
-			$ydata =& $report->getPageViews();
+			$ydata[] =& $report->getPageViews();
 			$areaname = _('Page views');
 			$label[] = _('Page views');
 			break;
 		}
 		case 'taskman': {
-			$ydata =& $report->getTaskOpened();
-			$ydata2 =& $report->getTaskClosed();
+			$ydata[] =& $report->getTaskOpened();
+			$ydata[] =& $report->getTaskClosed();
 			$areaname = _('Tasks');
 			$label[] = _('Task open');
 			$label[] = _('Task close');
 			break;
 		}
 		case 'tracker': {
-			$ydata =& $report->getTrackerOpened();
-			$ydata2 =& $report->getTrackerClosed();
+			$ydata[] =& $report->getTrackerOpened();
+			$ydata[] =& $report->getTrackerClosed();
 			$areaname = _('Trackers');
 			$label[] = _('Tracker items opened');
 			$label[] = _('Tracker items closed');
@@ -365,10 +365,10 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 			}
 
 			// Now, stores the values in the ydata array for the graph.
-			$ydata = array();
+			$ydata[] = array();
 			$i = 0;
 			foreach ($rdates as $d) {
-				$ydata[$i++] = isset($sum[$d]) ? $sum[$d] : 0;
+				$ydata[0][$i++] = isset($sum[$d]) ? $sum[$d] : 0;
 			}
 			break;
 		}
@@ -380,29 +380,35 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 	echo 'var values = new Array();';
 	echo 'var ticks = new Array();';
 	echo 'var labels = new Array();';
+	echo 'var series = new Array();';
+	for ($z = 0; $z < count($ydata); $z++) {
+		echo 'values['.$z.'] = new Array();';
+		echo 'labels.push({label:\''.$label[$z].'\'});';
+	}
 	switch ($SPAN) {
 		case REPORT_TYPE_DAILY :
 		case REPORT_TYPE_MONTHLY : {
 			for ($j = 0; $j < count($timeStampArr); $j++) {
-				if (in_array($timeStampArr[$j], $rdates)) {
-					$thekey = array_search($timeStampArr[$j], $rdates);
-					if (isset($ydata[$thekey])) {
-						if ($ydata[$thekey] === false) {
-							$ydata[$thekey] = 0;
+				for ($z = 0; $z < count($ydata); $z++) {
+					if (in_array($timeStampArr[$j], $rdates)) {
+						$thekey = array_search($timeStampArr[$j], $rdates);
+						if (isset($ydata[$z][$thekey])) {
+							if ($ydata[$z][$thekey] === false) {
+								$ydata[$z][$thekey] = 0;
+							}
+							if ($ydata[$z][$thekey] > $yMax) {
+								$yMax = $ydata[$z][$thekey];
+							}
+							echo 'values['.$z.'].push('.$ydata[$z][$thekey].');';
+						} else {
+							echo 'values['.$z.'].push(0);';
 						}
-						if ($ydata[$thekey] > $yMax) {
-							$yMax = $ydata[$thekey];
-						}
-						echo 'values.push('.$ydata[$thekey].');';
 					} else {
-						echo 'values.push(0);';
+						echo 'values['.$z.'].push(0);';
 					}
-				} else {
-					echo 'values.push(0);';
 				}
 				echo 'ticks.push(\''.$tickArr[$j].'\');';
 			}
-			echo 'labels.push({label:\''.$label[0].'\'});';
 			break;
 		}
 		case REPORT_TYPE_WEEKLY : {
@@ -410,32 +416,38 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 				$wrdates[$j] = date($formatDate, $rdates[$j]);
 			}
 			for ($j = 0; $j < count($tickArr); $j++) {
-				if (in_array($tickArr[$j], $wrdates)) {
-					$thekey = array_search($tickArr[$j], $wrdates);
-					if (isset($ydata[$thekey])) {
-						if ($ydata[$thekey] === false) {
-							$ydata[$thekey] = 0;
+				for ($z = 0; $z < count($ydata); $z++) {
+					if (in_array($tickArr[$j], $wrdates)) {
+						$thekey = array_search($tickArr[$j], $wrdates);
+						if (isset($ydata[$z][$thekey])) {
+							if ($ydata[$z][$thekey] === false) {
+								$ydata[$z][$thekey] = 0;
+							}
+							if ($ydata[$z][$thekey] > $yMax) {
+								$yMax = $ydata[$z][$thekey];
+							}
+							echo 'values['.$z.'].push('.$ydata[$z][$thekey].');';
+						} else {
+							echo 'values['.$z.'].push(0);';
 						}
-						if ($ydata[$thekey] > $yMax) {
-							$yMax = $ydata[$thekey];
-						}
-						echo 'values.push('.$ydata[$thekey].');';
+					} else {
+						echo 'values['.$z.'].push(0);';
 					}
-				} else {
-					echo 'values.push(0);';
 				}
 				echo 'ticks.push(\''.$tickArr[$j].'\');';
 			}
-			echo 'labels.push({label:\''.$label[0].'\'});';
 			break;
 		}
 	}
+	for ($z = 0; $z < count($ydata); $z++) {
+		echo 'series.push(values['.$z.']);';
+	}
 	echo 'jQuery(document).ready(function(){
-			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [values], {
+			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
 				title : \''.utf8_decode($areaname).' ( '.strftime('%x',$start).' - '.strftime('%x',$end).') \',
 				axesDefaults: {
 					tickOptions: {
-						angle: -30,
+						angle: -90,
 						fontSize: \'8px\',
 						showGridline: false,
 						showMark: false,
