@@ -15,7 +15,7 @@ checkmount: checkfstab /cgroup
 checkfstab:
 	@grep ^cgroup /etc/fstab || (echo "You need to add cgroup entry to fstab 'cgroup /cgroup cgroup defaults 0 0'" && false)
 
-/usr/lib/lxc:
+/usr/share/lxc:
 	@[ -d $@ ] || sudo apt-get install lxc
 
 /usr/share/bridge-utils:
@@ -49,21 +49,21 @@ addrights: beroot
 delrights: beroot
 	lxc-setcap -d
 
-installtemplate: /usr/lib/lxc/templates/lxc-debian7 /usr/lib/lxc/templates/lxc-debian6 /usr/lib/lxc/templates/lxc-centos5 /usr/lib/lxc/templates/lxc-centos6
+installtemplate: /usr/share/lxc/templates/lxc-debian7 /usr/share/lxc/templates/lxc-debian6 /usr/share/lxc/templates/lxc-centos5 /usr/share/lxc/templates/lxc-centos6
 
-/usr/lib/lxc/templates/lxc-debian6: lxc-debian6 /usr/lib/lxc
-	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian6
-	chmod 755 /usr/lib/lxc/templates/lxc-debian6
+/usr/share/lxc/templates/lxc-debian6: lxc-debian6 /usr/share/lxc
+	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/share/lxc/templates/lxc-debian6
+	chmod 755 /usr/share/lxc/templates/lxc-debian6
 
-/usr/lib/lxc/templates/lxc-debian7: lxc-debian7 /usr/lib/lxc
-	cat lxc-debian7 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian7
-	chmod 755 /usr/lib/lxc/templates/lxc-debian7
+/usr/share/lxc/templates/lxc-debian7: lxc-debian7 /usr/share/lxc
+	cat lxc-debian7 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/share/lxc/templates/lxc-debian7
+	chmod 755 /usr/share/lxc/templates/lxc-debian7
 
-/usr/lib/lxc/templates/lxc-centos5: lxc-centos5 /usr/lib/lxc
-	cp lxc-centos5 /usr/lib/lxc/templates/
+/usr/share/lxc/templates/lxc-centos5: lxc-centos5 /usr/share/lxc
+	cp lxc-centos5 /usr/share/lxc/templates/
 
-/usr/lib/lxc/templates/lxc-centos6: lxc-centos6 /usr/lib/lxc
-	cp lxc-centos6 /usr/lib/lxc/templates/
+/usr/share/lxc/templates/lxc-centos6: lxc-centos6 /usr/share/lxc
+	cp lxc-centos6 /usr/share/lxc/templates/
 
 createdeb:
 	sudo /usr/bin/lxc-create -n dhdebian7.local -f config.debian7 -t debian7
