@@ -3,7 +3,7 @@
 
 # Guess where lxc data is and default to /usr/share/lxc
 LXC_DATA:=$(shell [ -d /usr/share/lxc ] && echo /usr/share/lxc || ([ -d /usr/lib/lxc ] && echo /usr/lib/lxc))
-LXC_DATA:=$(shell [ -z "$(LXC_DATA)" ] && echo /usr/lib/lxc)$(shell [ -z "$(LXC_DATA)" ] || echo "$(LXC_DATA)")
+LXC_DATA:=$(shell [ -z "$(LXC_DATA)" ] && echo /usr/share/lxc || echo "$(LXC_DATA)")
 TEMPLATELIST:=$(LXC_DATA)/templates/lxc-debian7 $(LXC_DATA)/templates/lxc-debian6 $(LXC_DATA)/templates/lxc-centos5 $(LXC_DATA)/templates/lxc-centos6
 
 default: checkdepends installtemplate
