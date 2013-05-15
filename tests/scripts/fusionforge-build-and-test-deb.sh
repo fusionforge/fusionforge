@@ -90,9 +90,10 @@ ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources
 ssh root@$HOST "apt-get update"
 ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes dist-upgrade"
 
-ssh root@$HOST "echo \"deb $DEBMIRROR unstable main\" >> /etc/apt/sources.list"
+ssh root@$HOST "echo \"deb $DEBMIRROR jessie main\" >> /etc/apt/sources.list.d/jessie.list"
 ssh root@$HOST "apt-get update"
 ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install loggerhead libapache2-mod-wsgi"
+ssh root@$HOST "rm /etc/apt/sources.list.d/jessie.list"
 
 ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
 ssh root@$HOST "apt-get update"
