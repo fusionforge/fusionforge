@@ -2,7 +2,7 @@
 -include ../config/$(shell hostname)
 
 # Guess where lxc data is and default to /usr/lib/lxc
-LXC_DATA:=$(shell [ -d /usr/lib/lxc ] && echo /usr/lib/lxc)$(shell [ -d /usr/share/lxc ] && echo /usr/share/lxc)
+LXC_DATA:=$(shell [ -d /usr/lib/lxc ] && echo /usr/lib/lxc || [ -d /usr/share/lxc ] && echo /usr/share/lxc)
 LXC_DATA:=$(shell [ -z "$(LXC_DATA)" ] && echo /usr/lib/lxc)$(shell [ -z "$(LXC_DATA)" ] || echo "$(LXC_DATA)")
 TEMPLATELIST:=$(LXC_DATA)/templates/lxc-debian7 $(LXC_DATA)/templates/lxc-debian6 $(LXC_DATA)/templates/lxc-centos5 $(LXC_DATA)/templates/lxc-centos6
 
