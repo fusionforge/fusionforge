@@ -250,7 +250,8 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 	}
 	$report = new ReportProjectAct($SPAN, $group_id, $start, $end);
 	if ($report->isError()) {
-		exit_error($report->getErrorMessage());
+		echo '<p class="error">'.$report->getErrorMessage().'</p>';
+		return false;
 	}
 	$rdates = $report->getRawDates();
 	if (!$rdates) {
