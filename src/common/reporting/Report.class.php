@@ -111,7 +111,12 @@ function setData($result,$column) {
 }
 
 function setDates($result,$column) {
-	$arr =& util_result_column_to_array($result,$column);
+	$arr = NULL;
+	if (!is_array($result)) {
+		$arr =& util_result_column_to_array($result,$column);
+	} elseif (is_array($result)) {
+		$arr = $result;
+	}
 	if(isset($this->span) && $this->span == REPORT_TYPE_MONTHLY) {
 		$format = 'M Y';
 	} else {
