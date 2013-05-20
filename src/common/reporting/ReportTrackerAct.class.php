@@ -4,6 +4,7 @@
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -98,8 +99,8 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 	$this->end_date=$end;
 
 	$this->setSpan($span);
-	$this->setDates($res,1);
-	$this->res=$res;
+	$this->setDates($arr, 1);
+	$this->res = $arr;
 	return true;
 }
 
