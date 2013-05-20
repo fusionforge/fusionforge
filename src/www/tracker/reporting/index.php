@@ -155,8 +155,6 @@ if ($start == $end) {
 	</noscript>
 	<?php
 		}
-	} else {
-		echo '<p class="warning">'._('Missing tracker. Please select one tracker').'</p>';
 	}
 }
 ?>
