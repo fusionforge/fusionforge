@@ -1,3 +1,4 @@
 plugins/admssw/common/*                  @PLUGIN_PATH@/admssw/common/
 plugins/admssw/include/*                 @PLUGIN_PATH@/admssw/include/
 plugins/admssw/etc/admssw.ini	             etc/@PACKAGE@/config.ini.d/
+plugins/admssw/www/* usr/share/@OLDPACKAGE@/plugins/admssw/www/
