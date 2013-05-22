@@ -59,8 +59,7 @@ class MailingList extends Error {
 	function __construct(&$Group, $groupListId = false, $dataArray = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'MailingList'));
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('MailingList:: '.$Group->getErrorMessage());
