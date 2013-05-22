@@ -111,8 +111,8 @@ class ProjectTasksForUser extends Error {
 
 	function &getTasksForThisWeek() {
 		$now = getdate();
-		$thisweek = mktime (18, 00, 00, $now['mon'], $now['mday'], $now['year'])+7*24*3600;
-		return $this->getOpenTasksForDate($thisweek);
+		$this_week = mktime (18, 00, 00, $now['mon'], $now['mday'], $now['year'])+7*24*3600;
+		return $this->getOpenTasksForDate($this_week);
 	}
 }
 

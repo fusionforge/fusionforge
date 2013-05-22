@@ -232,7 +232,7 @@ class Navigation extends Error {
 		$menu['tooltips'][] = _('Main Page');
 
 		// My Page
-                $menu['titles'][] = _('My Page');
+		$menu['titles'][] = _('My Page');
 		$menu['urls'][] = util_make_uri('/my/');
 		$menu['tooltips'][] = _('Your Page, widgets selected by you to follow your items.');
 		if (strstr($request_uri, util_make_uri('/my/'))
@@ -457,7 +457,7 @@ class Navigation extends Error {
 			// Mailing Lists
 			if ($group->usesMail()) {
 				$menu['titles'][] = _('Lists');
-				$menu['tooltips'][] = _('Mailing Lists.');
+				$menu['tooltips'][] = _('Mailing Lists');
 				$menu['urls'][] = util_make_uri('/mail/?group_id=' . $group_id);
 				if (forge_check_perm ('project_admin', $group_id)) {
 					$menu['adminurls'][] = util_make_uri('/mail/admin/?group_id='.$group_id);
