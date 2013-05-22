@@ -668,12 +668,11 @@ class Group extends Error {
 	 * getStatus - the status code.
 	 *
 	 * Statuses	char	include I,H,A,D,P.
-	 * TODO : document what these mean :
 	 *   A: Active
 	 *   H: Hold
 	 *   P: Pending
 	 *   I: Incomplete
-	 *   D: ?
+	 *   D: Deleted
 	 */
 	function getStatus() {
 		return $this->data_array['status'];
@@ -683,12 +682,11 @@ class Group extends Error {
 	 * setStatus - set the status code.
 	 *
 	 * Statuses include I,H,A,D,P.
-	 * TODO : document what these mean :
 	 *   A: Active
 	 *   H: Hold
 	 *   P: Pending
 	 *   I: Incomplete
-	 *   D: ?
+	 *   D: Deleted
 	 *
 	 * @param	object	User requesting operation (for access control).
 	 * @param	string	Status value.
