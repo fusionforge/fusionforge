@@ -318,15 +318,15 @@ class ArtifactExtraField extends Error {
 	 */
 	static function getAvailableTypes() {
 		return array(
-			1=>_('Select Box'),
-			2=>_('Check Box'),
-			3=>_('Radio Buttons'),
-			4=>_('Text Field'),
-			5=>_('Multi-Select Box'),
-			6=>_('Text Area'),
-			7=>_('Status'),
-			9=>_('Relation'),
-			10=>_('Integer')
+			ARTIFACT_EXTRAFIELDTYPE_SELECT =>_('Select Box'),
+			ARTIFACT_EXTRAFIELDTYPE_CHECKBOX =>_('Check Box'),
+			ARTIFACT_EXTRAFIELDTYPE_RADIO =>_('Radio Buttons'),
+			ARTIFACT_EXTRAFIELDTYPE_TEXT =>_('Text Field'),
+			ARTIFACT_EXTRAFIELDTYPE_MULTISELECT =>_('Multi-Select Box'),
+			ARTIFACT_EXTRAFIELDTYPE_TEXTAREA =>_('Text Area'),
+			ARTIFACT_EXTRAFIELDTYPE_STATUS =>_('Status'),
+			ARTIFACT_EXTRAFIELDTYPE_RELATION =>_('Relation between artifacts'),
+			ARTIFACT_EXTRAFIELDTYPE_INTEGER =>_('Integer')
 			);
 	}
 
