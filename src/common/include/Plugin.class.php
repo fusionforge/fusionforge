@@ -197,8 +197,8 @@ class Plugin extends Error {
 			if (!is_link(forge_get_config('config_path'). '/plugins/'.$name) && !is_dir(forge_get_config('config_path'). '/plugins/'.$name)) {
 				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
 				if (!$code) {
-					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.
-					_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
+					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.'<br />'.
+					_('Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
 				}
 			}
 		}
@@ -214,8 +214,8 @@ class Plugin extends Error {
 			if (!is_link(forge_get_config('config_path'). '/plugins/'.$name) && !is_dir(forge_get_config('config_path'). '/plugins/'.$name)) {
 				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
 				if (!$code) {
-					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.
-					_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
+					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.'<br />'.
+					_('Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
 				}
 			}
 		}
@@ -242,7 +242,7 @@ class Plugin extends Error {
 	function groupisactivecheckbox (&$params) {
 		// Check if the group is active
 		// This code creates the checkbox in the project edit public info page
-        // to activate/deactivate the plugin
+		// to activate/deactivate the plugin
 		$display = 1;
 		$title = _('current plugin status is:').' '.forge_get_config('plugin_status', $this->name);
 		$imgStatus = 'plugin_status_valid.png';
@@ -299,7 +299,7 @@ class Plugin extends Error {
 	function userisactivecheckbox(&$params) {
 		// Check if user is active
 		// This code creates the checkbox in the user account maintenance page
-        // to activate/deactivate the plugin
+		// to activate/deactivate the plugin
 		$display = 1;
 		$title = _('current plugin status is:').' '.forge_get_config('plugin_status', $this->name);
 		$imgStatus = 'plugin_status_valid.png';

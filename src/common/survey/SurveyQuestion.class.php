@@ -146,7 +146,7 @@ class SurveyQuestion extends Error {
 					      $question_id,
 					      $group_id));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('UPDATE FAILED').db_error());
+			$this->setError(_('Update failed').db_error());
 			return false;
 		}
 		return $this->fetchData($question_id);
