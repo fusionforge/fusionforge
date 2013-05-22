@@ -168,7 +168,8 @@ class BzrPlugin extends SCMPlugin {
 			$line = fgets ($pipe) ;
 			fclose ($pipe) ;
 
-			if (preg_match ("/^Shared repository/", $line) != 0) {
+			if (preg_match ("/^Shared repository/", $line) != 0
+			    || preg_match ("/^Repository branch/", $line) != 0) {
 				$repo_exists = true ;
 			}
 		}
