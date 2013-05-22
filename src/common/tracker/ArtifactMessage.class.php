@@ -86,7 +86,7 @@ class ArtifactMessage extends Error {
 			$user_id=user_getid();
 			$user =& user_get_object($user_id);
 			if (!$user || !is_object($user)) {
-				$this->setError('ERROR - Logged In User Bug Could Not Get User Object');
+				$this->setError('Error: Logged In User Bug Could Not Get User Object');
 				return false;
 			}
 			$body=_('Logged In: YES')." \nuser_id=$user_id\n\n".$body;

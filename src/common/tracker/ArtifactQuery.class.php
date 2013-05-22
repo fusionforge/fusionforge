@@ -325,7 +325,7 @@ class ArtifactQuery extends Error {
 
 		//MOD DATE RANGE  YYYY-MM-DD YYYY-MM-DD format
 		if ($moddaterange && !$this->validateDateRange($moddaterange)) {
-			$this->setError('Invalid Mod Date Range');
+			$this->setError(_('Invalid Last Modified Date Range'));
 			return false;
 		}
 		$res = db_query_params ('INSERT INTO artifact_query_fields
@@ -341,7 +341,7 @@ class ArtifactQuery extends Error {
 
 		//OPEN DATE RANGE YYYY-MM-DD YYYY-MM-DD format
 		if ($opendaterange && !$this->validateDateRange($opendaterange)) {
-			$this->setError('Invalid Open Date Range');
+			$this->setError(_('Invalid Open Date Range'));
 			return false;
 		}
 		$res = db_query_params ('INSERT INTO artifact_query_fields
@@ -357,7 +357,7 @@ class ArtifactQuery extends Error {
 
 		//CLOSE DATE RANGE YYYY-MM-DD YYYY-MM-DD format
 		if ($closedaterange && !$this->validateDateRange($closedaterange)) {
-			$this->setError('Invalid Close Date Range');
+			$this->setError(_('Invalid Close Date Range'));
 			return false;
 		}
 		$res = db_query_params ('INSERT INTO artifact_query_fields
