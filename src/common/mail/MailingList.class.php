@@ -180,7 +180,7 @@ class MailingList extends Error {
 			db_rollback();
 			return false;
 		} else {
-			$mailBody = sprintf(_('A mailing list will be created on %1$s in 6-24 hours
+			$mailBody = sprintf(_('A mailing list will be created on %1$s in one hour
 and you are the list administrator.
 
 This list is: %3$s@%2$s .
@@ -198,7 +198,7 @@ Thank you for registering your project with %1$s.
 
 -- the %1$s staff
 '), forge_get_config ('forge_name'), forge_get_config('lists_host'), $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
-			$mailSubject = sprintf(_('%1$s New Mailing List'), forge_get_config ('forge_name'));
+			$mailSubject = sprintf(_('%s New Mailing List'), forge_get_config ('forge_name'));
 
 			util_send_message($userEmail, $mailSubject, $mailBody);
 		}
