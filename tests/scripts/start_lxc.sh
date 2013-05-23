@@ -65,9 +65,9 @@ then
 	fi
 fi
 
-if [ ! -e /usr/lib/lxc/templates/lxc-$LXCTEMPLATE ]
+if [ ! -e /usr/share/lxc/templates/lxc-$LXCTEMPLATE ]
 then 
-	echo "/usr/lib/lxc/templates/lxc-$LXCTEMPLATE not found"
+	echo "/usr/share/lxc/templates/lxc-$LXCTEMPLATE not found"
 	echo "you need to install template"
 	echo "run: (cd $lxcdir ; sudo make)"
 else
