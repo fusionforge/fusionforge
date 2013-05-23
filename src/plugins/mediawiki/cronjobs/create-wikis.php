@@ -133,6 +133,7 @@ while ( $row = db_fetch_array($project_res) ) {
 
 		cron_debug("  Creating project dir $project_dir.");
 		mkdir($project_dir, 0775, true);
+		chmod($project_dir, 0775);
 
 		$f = fopen("$project_dir/ProjectSettings.php", "w");
 		fwrite($f, '<?php

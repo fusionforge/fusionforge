@@ -64,7 +64,12 @@ class Widget_MyAdmin extends Widget {
 	}
 
 	if (forge_check_global_perm ('approve_projects')) {
-		$res = db_query_params("SELECT count(*) AS count FROM groups WHERE status='P'",array());
+		$res = db_query_params('SELECT count(*) AS count FROM groups
+			WHERE group_id > 4
+			    AND status = $1
+			    AND register_time > 0
+			    AND is_template = 0',
+		    array('P'));
 		$row = db_fetch_array($res);
 		$pending_projects = $row['count'];
 
