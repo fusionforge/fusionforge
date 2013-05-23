@@ -126,6 +126,7 @@ while ( $row = db_fetch_array($project_res) ) {
 
 		cron_debug("  Creating project dir $project_dir.");
 		mkdir($project_dir, 0775, true);
+		chmod($project_dir, 0775);
 
 		$mwwrapper = forge_get_config('source_path')."/plugins/mediawiki/bin/mw-wrapper.php" ;
 		$dumpfile = forge_get_config('config_path')."/mediawiki/initial-content.xml" ;

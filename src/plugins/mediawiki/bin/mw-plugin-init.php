@@ -37,11 +37,13 @@ $src_path = forge_get_config('src_path', 'mediawiki');
 if (!is_dir($projects_path)) {
 	echo "Creating $projects_path...\n";
 	mkdir($projects_path, 0755, true);
+	chmod($projects_path, 0755);
 }
 
 if (!is_dir($master_path)) {
 	echo "Creating $master_path...\n";
 	mkdir($master_path, 0755, true);
+	chmod($master_path, 0755);
 }
 
 function mysymlink($from, $to) {
