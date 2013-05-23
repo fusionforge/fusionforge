@@ -1,12 +1,27 @@
-# French translations for FusionForge package.
-# Copyright (C) 2008-2010 FusionForge Team
-# This file is distributed under the same license as the FusionForge package.
-# Automatically generated
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FusionForge 5.1\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2013-05-23 15:39+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#~ # French translations for FusionForge package.
+#~ # Copyright (C) 2008-2010 FusionForge Team
+#~ # This file is distributed under the same license as the FusionForge package.
+#~ # Automatically generated
+#~ #
+#~ msgid ""
+#~ msgstr ""
+#~ "Project-Id-Version: FusionForge 5.1\n"
+#~ "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-02 21:26+0200\n"
 "PO-Revision-Date: 2013-05-03 10:24+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
@@ -818,14 +833,12 @@ msgid "Documents folder that document belongs in"
 msgstr "Répertoire auquel le document appartient"
 
 #: common/docman/views/addfile.php:204
-#, fuzzy
 msgid "Status of that document"
-msgstr "Démarrer la surveillance de ce document"
+msgstr "Statut de ce document"
 
-#: common/docman/views/addfile.php:212 plugins/mantisbt/view/addIssue.php:148
-#, fuzzy
+#: common/docman/views/addfile.php:223 plugins/mantisbt/view/addIssue.php:148
 msgid "Mandatory fields"
-msgstr "Champ obligatoire"
+msgstr "Champs obligatoires"
 
 #: common/docman/views/addfile.php:214
 msgid "Submit Information"
@@ -844,25 +857,22 @@ msgstr "Soumettre les informations"
 msgid "Document Manager Access Denied"
 msgstr "Administration du gestionnaire de documents : accès refusé."
 
-#: common/docman/views/additem.php:57
-#, fuzzy
+#: common/docman/views/additem.php:60
 msgid "Submit a new document in this folder."
-msgstr "Soumettre un nouveau document"
+msgstr "Soumettre un nouveau document dans ce répertoire."
 
-#: common/docman/views/additem.php:57
-#, fuzzy
+#: common/docman/views/additem.php:60
 msgid "Submit a new document."
-msgstr "Soumettre un nouveau document"
+msgstr "Soumettre un nouveau document."
 
 #: common/docman/views/additem.php:60
 #, fuzzy
 msgid "Create a folder based on this name."
 msgstr "Créer un nouvel outil de suivi à partir d'une copie de celui-ci."
 
-#: common/docman/views/additem.php:60
-#, fuzzy
+#: common/docman/views/additem.php:63
 msgid "Add a new folder."
-msgstr "Ajouter un nouveau répertoire"
+msgstr "Ajouter un nouveau répertoire."
 
 #: common/docman/views/additem.php:62
 msgid ""
@@ -875,10 +885,9 @@ msgstr ""
 msgid "Inject Tree"
 msgstr "Arbre des projets"
 
-#: common/docman/views/additem.php:66
-#, fuzzy
+#: common/docman/views/additem.php:69
 msgid "Add a new sub folder"
-msgstr "Ajouter un nouveau répertoire"
+msgstr "Ajouter un nouveau sous-répertoire"
 
 #: common/docman/views/additem.php:71
 msgid "Add a new document"
@@ -894,10 +903,9 @@ msgstr "Arbre des projets"
 msgid "Upload archive:"
 msgstr "Télécharger vers le serveur"
 
-#: common/docman/views/additem.php:80
-#, fuzzy
+#: common/docman/views/additem.php:83
 msgid "Inject"
-msgstr "Rejeter"
+msgstr "Injecter"
 
 #: common/docman/views/addsubdocgroup.php:56
 msgid "Name of the document subfolder to create:"
@@ -954,7 +962,7 @@ msgstr "Appartient à"
 
 #: common/docman/views/editdocgroup.php:67
 msgid "Restore"
-msgstr ""
+msgstr "Restaurer"
 
 #: common/docman/views/editdocgroup.php:70
 #: common/forum/AttachManager.class.php:149
@@ -992,9 +1000,9 @@ msgid "Both fields are used by document search engine."
 msgstr "Les deux champs sont utilisés par le moteur de recherche."
 
 #: common/docman/views/editfile.php:51
-#, fuzzy
+#: plugins/mantisbt/view/addAttachment.php:32
 msgid "File:"
-msgstr "Fichier"
+msgstr "Fichier :"
 
 #: common/docman/views/editfile.php:57
 msgid ""
@@ -1005,22 +1013,18 @@ msgstr ""
 "pas le modifier."
 
 #: common/docman/views/editfile.php:65
-#, fuzzy
 msgid "Folder that document belongs in:"
-msgstr "Répertoire auquel le document appartient"
+msgstr "Répertoire auquel le document appartient :"
 
 #: common/docman/views/editfile.php:70
-#, fuzzy
 msgid "State:"
 msgstr "État"
 
 #: common/docman/views/editfile.php:75
-#, fuzzy
 msgid "Specify an new outside URL where the file will be referenced:"
-msgstr "OU spécifier une URL externe pour le fichier"
+msgstr "Spécifier une URL externe pour le fichier :"
 
 #: common/docman/views/editfile.php:80
-#, fuzzy
 msgid "OPTIONAL: Upload new file:"
 msgstr "Optionnel : Uploader un nouveau fichier"
 
@@ -1033,9 +1037,8 @@ msgid "Direct Webdav URL"
 msgstr "Accès direct par WebDAV"
 
 #: common/docman/views/listfile.php:112
-#, fuzzy
 msgid "Invalid folder"
-msgstr "Utilisateur non valide"
+msgstr "Répertoire non valide"
 
 #: common/docman/views/listfile.php:158
 #: common/docman/views/listtrashfile.php:102
@@ -1054,9 +1057,8 @@ msgid "Path:"
 msgstr ""
 
 #: common/docman/views/listfile.php:174
-#, fuzzy
 msgid "Document Folder:"
-msgstr "Titre du document :"
+msgstr "Répertoire de documents :"
 
 #: common/docman/views/listfile.php:176 common/docman/views/listfile.php:207
 #: common/docman/views/listtrashfile.php:119
@@ -1065,43 +1067,29 @@ msgid "Edit this folder"
 msgstr "Modifier ce répertoire"
 
 #: common/docman/views/listfile.php:177
-#, fuzzy
 msgid "Move this folder and his content to trash"
-msgstr "Déplacer ce document vers la corbeille"
+msgstr "Déplacer ce répertoire et son contenu vers la corbeille"
 
 #: common/docman/views/listfile.php:179
-#, fuzzy
 msgid "Permanently delete this folder"
-msgstr "Supprimer ce document de manière permanente."
+msgstr "Supprimer ce répertoire de manière permanente"
 
 #: common/docman/views/listfile.php:184
-#, fuzzy
 msgid "Add a new item in this folder"
-msgstr "Ajouter un nouveau répertoire"
+msgstr "Ajouter un nouvel élément dans ce répertoire"
 
 #: common/docman/views/listfile.php:191
 msgid "Download this folder as a zip"
-msgstr ""
+msgstr "Télécharger ce dossier dans un fichier Zip"
 
-#: common/docman/views/listfile.php:196
-#, fuzzy
-msgid "Stop monitoring this directory"
-msgstr "Arrêter de surveiller ce document"
-
-#: common/docman/views/listfile.php:199
-#, fuzzy
-msgid "Start monitoring this directory"
-msgstr "Démarrer la surveillance de ce document"
-
-#: common/docman/views/listfile.php:213
-#, fuzzy
+#: common/docman/views/listfile.php:203
 msgid "Add a new item"
-msgstr "Ajouter une nouvelle compétence"
+msgstr "Ajouter un nouvel élément"
 
 #: common/docman/views/listfile.php:220
 #: common/docman/views/listtrashfile.php:130
 msgid "Select / Deselect all documents for massaction"
-msgstr ""
+msgstr "Sélectionner/désélectionner tous les documents pour une action collective"
 
 #: common/docman/views/listfile.php:220
 #: common/docman/views/listtrashfile.php:130
@@ -1225,15 +1213,14 @@ msgstr "Actions"
 
 #: common/docman/views/listfile.php:233 common/docman/views/listfile.php:238
 #: common/docman/views/listtrashfile.php:138
-#, fuzzy
 msgid "Select / Deselect this document for massaction"
-msgstr "Réserver ce document pour une édition ultérieure"
+msgstr "Sélectionner/déselectionner ce document pour une action collective"
 
 #: common/docman/views/listfile.php:245
 #: common/docman/views/listtrashfile.php:143
 #: common/docman/views/pendingfiles.php:75
 msgid "Visit this link"
-msgstr ""
+msgstr "Visiter ce lien"
 
 #: common/docman/views/listfile.php:250
 #: common/docman/views/listtrashfile.php:148
@@ -1244,7 +1231,6 @@ msgstr "Voir ce document"
 #: common/docman/views/listfile.php:259
 #: common/docman/views/listtrashfile.php:157
 #: common/docman/views/pendingfiles.php:89
-#, fuzzy
 msgid "new"
 msgstr "Nouvelle"
 
@@ -1261,10 +1247,9 @@ msgstr "Document réservé"
 msgid "Move this document to trash"
 msgstr "Déplacer ce document vers la corbeille"
 
-#: common/docman/views/listfile.php:320 common/docman/views/listfile.php:331
-#, fuzzy
+#: common/docman/views/listfile.php:307 common/docman/views/listfile.php:318
 msgid "Move to trash this document"
-msgstr "Permanently delete this document"
+msgstr "Déplacer ce document vers la corbeille"
 
 #: common/docman/views/listfile.php:321 common/docman/views/listfile.php:332
 #: common/docman/views/listtrashfile.php:193
@@ -1276,10 +1261,9 @@ msgstr "Éditer ce document"
 msgid "Reserve this document for later edition"
 msgstr "Réserver ce document pour une édition ultérieure"
 
-#: common/docman/views/listfile.php:323
-#, fuzzy
+#: common/docman/views/listfile.php:310
 msgid "Reserve this document"
-msgstr "Chercher à l'intérieur des documents"
+msgstr "Réserver ce document"
 
 #: common/docman/views/listfile.php:328
 msgid "Enforce reservation"
@@ -1303,31 +1287,29 @@ msgid ""
 "Actions availables for selected documents, you need to check at least one "
 "document to get actions"
 msgstr ""
+"Actions disponibles pour les documents sélectionnés ; au moins un\n"
+"document doit être sélectionné pour que ces actions aient lieu."
 
 #: common/docman/views/listfile.php:353
 #: common/docman/views/listtrashfile.php:200
 msgid "Mass actions for selected documents:"
-msgstr ""
+msgstr "Actions en attente sur les documents sélectionnés :"
 
-#: common/docman/views/listfile.php:357
-#, fuzzy
+#: common/docman/views/listfile.php:344
 msgid "Move to trash"
-msgstr "Déplacer la discussion"
+msgstr "Déplacer vers la corbeille"
 
-#: common/docman/views/listfile.php:359
-#, fuzzy
+#: common/docman/views/listfile.php:346
 msgid "Reserve for later edition"
 msgstr "Réserver ce document pour une édition ultérieure"
 
-#: common/docman/views/listfile.php:359
-#, fuzzy
+#: common/docman/views/listfile.php:346
 msgid "Reserve"
-msgstr "Réinitialiser"
+msgstr "Réserver"
 
-#: common/docman/views/listfile.php:361
-#, fuzzy
+#: common/docman/views/listfile.php:348
 msgid "Start monitoring"
-msgstr "Arrêter la surveillance"
+msgstr "Démarrer la surveillance"
 
 #: common/docman/views/listfile.php:362
 #: common/widget/Widget_MyMonitoredForums.class.php:125
@@ -1337,59 +1319,47 @@ msgstr "Arrêter la surveillance"
 #: common/docman/views/listfile.php:365
 #: common/docman/views/listtrashfile.php:204
 #: common/docman/views/pendingfiles.php:137
-#, fuzzy
 msgid "Download as a zip"
-msgstr "Téléchargement"
+msgstr "Télécharger un fichier Zip"
 
 #: common/docman/views/listfile.php:371
 #: common/docman/views/listtrashfile.php:210
-#, fuzzy
 msgid "No documents."
-msgstr "Nouveau document"
+msgstr "Aucun document"
 
 #: common/docman/views/listtrashfile.php:73
-#, fuzzy
 msgid "Invalid folder."
-msgstr "Utilisateur non valide"
+msgstr "Répertoire non valide"
 
 #: common/docman/views/listtrashfile.php:108
-#, fuzzy
 msgid "Delete permanently all documents and folders with deleted status."
 msgstr ""
 "Détruire de manière irrémédiable tous les documents au statut\n"
 "« supprimé »."
 
 #: common/docman/views/listtrashfile.php:117
-#, fuzzy
 msgid "Documents folder:"
-msgstr "Documents pour "
+msgstr "Répertoire de documents :"
 
 #: common/docman/views/listtrashfile.php:120
-#, fuzzy
 msgid "Delete permanently this folder and his content."
-msgstr "Supprimer le forum et tout son contenu"
+msgstr "Supprimer ce dossier et tout son contenu."
 
 #: common/docman/views/listtrashfile.php:159
-#, fuzzy
 msgid "Updated since less than 7 days"
 msgstr "Créé ou mis à jour au cours des 7 derniers jours"
 
 #: common/docman/views/listtrashfile.php:192
-#, fuzzy
 msgid "Delete permanently this document."
-msgstr ""
-"Détruire de manière irrémédiable tous les documents au statut\n"
-"« supprimé »."
+msgstr "Détruire de manière irrémédiable ce document."
 
 #: common/docman/views/listtrashfile.php:203
-#, fuzzy
 msgid "Delete permanently."
-msgstr "Supprimer le modèle"
+msgstr "Supprimer de manière permanente."
 
 #: common/docman/views/menu.php:44
-#, fuzzy
 msgid "List files & Directories"
-msgstr "Ajuster les répertoires"
+msgstr "Lister les fichiers et répertoires"
 
 #: common/docman/views/menu.php:46
 msgid ""
@@ -1398,9 +1368,8 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/menu.php:49
-#, fuzzy
 msgid "Add new item"
-msgstr "Ajouter un nouvel onglet"
+msgstr "Ajouter un nouvel élément"
 
 #: common/docman/views/menu.php:51
 msgid ""
@@ -1421,10 +1390,9 @@ msgid "Trash"
 msgstr "Vérifier la corbeille"
 
 #: common/docman/views/menu.php:63
-#, fuzzy
 msgid "Recover or delete permanently files with deleted status."
 msgstr ""
-"Détruire de manière irrémédiable tous les documents au statut\n"
+"Détruire de manière irrémédiable tous les fichiers au statut\n"
 "« supprimé »."
 
 #: common/docman/views/menu.php:67 common/include/Navigation.class.php:398
@@ -1436,7 +1404,6 @@ msgid "Admin"
 msgstr "Administration"
 
 #: common/docman/views/menu.php:69
-#, fuzzy
 msgid "Docman module administration."
 msgstr "Administration du gestionnaire de documents"
 
@@ -1451,29 +1418,28 @@ msgid "Docman module reporting."
 msgstr "Administration du gestionnaire de documents"
 
 #: common/docman/views/pendingfiles.php:42
-#, fuzzy
 msgid "No pending documents."
 msgstr "Pas de document en attente."
 
 #: common/docman/views/pendingfiles.php:62
-#, fuzzy
 msgid "Pending files"
-msgstr "Utilisateurs en attente"
+msgstr "Fichiers en attente"
 
 #: common/docman/views/pendingfiles.php:133
 msgid ""
 "Actions availables for checked files, you need to check at least one file to "
 "get actions"
 msgstr ""
+"Actions disponibles pour les fichiers sélectionnés ; au moins un\n"
+"fichier doit être sélectionné pour que ces actions aient lieu."
 
 #: common/docman/views/pendingfiles.php:134
 msgid "Mass actions for selected pending files:"
-msgstr ""
+msgstr "Actions collectives sur les fichiers en attente sélectionnés :"
 
 #: common/docman/views/pendingfiles.php:138
-#, fuzzy
 msgid "Activate in this directory"
-msgstr "Éditer ce répertoire"
+msgstr "Activer dans ce répertoire"
 
 #: common/docman/views/reporting.php:91 www/activity/index.php:180
 #: www/frs/reporting/downloads.php:106 www/project/stats/index.php:96
@@ -1572,9 +1538,8 @@ msgid "View user profile"
 msgstr "Affichage d'un profil de développeur"
 
 #: common/docman/views/search.php:61
-#, fuzzy
 msgid "Query: "
-msgstr "Requête mise à jour."
+msgstr "Requête :"
 
 #: common/docman/views/search.php:63 common/include/Navigation.class.php:171
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
@@ -1585,9 +1550,8 @@ msgid "Search"
 msgstr "Rechercher"
 
 #: common/docman/views/search.php:65
-#, fuzzy
 msgid "All searched words are mandatory"
-msgstr "Les champs marqués avec %s sont obligatoires."
+msgstr "Tous les mots sont obligatoires."
 
 #: common/docman/views/search.php:65
 msgid "With all the words"
@@ -1595,7 +1559,7 @@ msgstr "Avec tous les mots"
 
 #: common/docman/views/search.php:66
 msgid "At least one word must be found"
-msgstr ""
+msgstr "Au moins un mot doit être trouvé"
 
 #: common/docman/views/search.php:66
 msgid "With at least one of words"
@@ -1603,12 +1567,11 @@ msgstr "Avec au moins un mot"
 
 #: common/docman/views/search.php:68
 msgid "Filename and contents are used to match searched words"
-msgstr ""
+msgstr "Les noms des fichiers et leurs contenus sont utilisés pour la recherche"
 
 #: common/docman/views/search.php:68
-#, fuzzy
 msgid "Inside documents"
-msgstr "Utiliser le gestionnaire de documents"
+msgstr "Chercher à l'intérieur des documents"
 
 #: common/docman/views/search.php:75
 msgid "search into childs following project hierarchy"
@@ -1623,7 +1586,6 @@ msgid "Database query error"
 msgstr "Erreur lors de la requête en base de données"
 
 #: common/docman/views/search.php:129
-#, fuzzy
 msgid "Your search did not match any documents."
 msgstr "Votre recherche n'a renvoyé aucun document."
 
@@ -1639,17 +1601,15 @@ msgstr "Vous n'êtes pas membre de ce projet."
 
 #: common/docman/views/search.php:162
 msgid "Your search is empty."
-msgstr ""
+msgstr "Votre recherche est vide."
 
 #: common/docman/views/tree.php:63
-#, fuzzy
 msgid "Child project: "
 msgstr "Projet fils"
 
 #: common/docman/views/tree.php:63
-#, fuzzy
 msgid "Browse document manager in this project"
-msgstr "Vous n'êtes pas membre de ce projet."
+msgstr "Naviguer dans le gestionnaire de documents de ce projet"
 
 #: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:318
 #: www/forum/admin/index.php:324 www/forum/admin/index.php:389
