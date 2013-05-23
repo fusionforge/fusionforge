@@ -92,7 +92,7 @@ ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt
 
 ssh root@$HOST "echo \"deb $DEBMIRROR jessie main\" >> /etc/apt/sources.list.d/jessie.list"
 ssh root@$HOST "apt-get update"
-ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install loggerhead libapache2-mod-wsgi"
+ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install loggerhead libapache2-mod-wsgi nscd"
 ssh root@$HOST "rm /etc/apt/sources.list.d/jessie.list"
 
 ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
@@ -105,7 +105,7 @@ sleep 5
 ssh root@$HOST "apt-get update"
 
 # Install fusionforge
-ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install rsync postgresql-contrib fusionforge-full nscd"
+ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install rsync postgresql-contrib fusionforge-full"
 echo "Set forge admin password"
 ssh root@$HOST "/usr/share/gforge/bin/forge_set_password $FORGE_ADMIN_USERNAME $FORGE_ADMIN_PASSWORD"
 ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload"
