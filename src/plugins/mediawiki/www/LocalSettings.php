@@ -319,7 +319,7 @@ if (isset($_SERVER['SERVER_SOFTWARE'])) {
 		var $dstappendself = false;
 
 		function getTitle($subpage="") {
-			return 'SpecialForgeRedir';
+			return $this;
 		}
 
 		function getRedirect($subpage="") {

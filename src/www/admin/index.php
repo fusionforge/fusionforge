@@ -109,23 +109,31 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <h2><?php echo _('Project Maintenance'); ?></h2>
 <ul>
 	<li><?php
-		$res=db_query_params ('SELECT count(*) AS count FROM groups',
-			array()) ;
-
+		$res = db_query_params('SELECT count(*) AS count FROM groups
+			WHERE group_id > 4
+			    AND register_time > 0
+			    AND is_template = 0',
+		    array());
 		$row = db_fetch_array($res);
 		printf(_('Registered projects: <strong>%1$s</strong>'), $row['count']);
 	?></li>
 	<li><?php
-		$res=db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1',
-			array('A')) ;
-
+		$res = db_query_params('SELECT count(*) AS count FROM groups
+			WHERE group_id > 4
+			    AND status = $1
+			    AND register_time > 0
+			    AND is_template = 0',
+		    array('A'));
 		$row = db_fetch_array($res);
 		printf(_('Active projects: <strong>%1$s</strong>'), $row['count']);
 	?></li>
 	<li><?php
-		$res=db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1 AND is_template!=1',
-			array('P')) ;
-
+		$res = db_query_params('SELECT count(*) AS count FROM groups
+			WHERE group_id > 4
+			    AND status = $1
+			    AND register_time > 0
+			    AND is_template = 0',
+		    array('P'));
 		$row = db_fetch_array($res);
 		printf(_('Pending projects: <strong>%1$s</strong>'), $row['count']);
 	?></li>
