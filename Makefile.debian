@@ -432,6 +432,7 @@ $(LOCALREPO):
 
 clean: # Clean $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) (intermediate files) #
 	rm -rf $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) $(BUILDFILES) $(TARBALLS) 
+	rmdir $(BUILDPLACE) && mkdir $(BUILDPLACE)
 
 cleanenv: # Clean $(COWBUILDERBASE) $(PBUILDERTGZ) (chroots)#
 	sudo rm -rf $(COWBUILDERBASE) $(PBUILDERTGZ)
