@@ -1357,7 +1357,9 @@ function debug_string_backtrace() {
 	    $trace, 1);
 
 	// Renumber backtrace items.
-	$trace = preg_replace('/^#(\d+)/me', '\'#\' . ($1 - 1)', $trace);
+	$trace = preg_replace_callback('/^#(\d+)/m', create_function('$match', '
+		return sprintf("#%d", $match[1] - 1);
+	    ', $trace);
 
 	return $trace;
 }
