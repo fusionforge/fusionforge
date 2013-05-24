@@ -66,6 +66,7 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 		for ($i=0; $i<count($arr); $i++) {
 			if ($arr[$i]<$start || $arr[$i]>$end) {
 				//skip this month as it's not in the range
+				unset($arr[$i]);
 			} else {
 
 				$this->labels[]=date('M d',$arr[$i]).' <-> '.date('M d',($arr[$i-1]-1));
@@ -82,7 +83,8 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 
 		for ($i=0; $i<count($arr); $i++) {
 			if ($arr[$i]<$start || $arr[$i]>$end) {
-				//skip this month as it's not in the range
+				//skip this week as it's not in the range
+				unset($arr[$i]);
 			} else {
 
 				$this->labels[]=date('M d',$arr[$i]).' <-> '.date('M d',($arr[$i-1]-1));
@@ -99,6 +101,7 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 	$this->end_date=$end;
 
 	$this->setSpan($span);
+	$arr = array_values($arr);
 	$this->setDates($arr, 1);
 	$this->res = $arr;
 	return true;
