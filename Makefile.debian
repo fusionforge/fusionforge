@@ -431,7 +431,7 @@ $(LOCALREPO):
 	if [ -w `dirname $@` ] ; then mkdir $@ ; else sudo mkdir $@ ; sudo chown `id -u`.`id -g` $@; fi
 
 clean: # Clean $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) (intermediate files) #
-	rm -rf $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) 
+	rm -rf $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) $(BUILDFILES) $(TARBALLS) 
 
 cleanenv: # Clean $(COWBUILDERBASE) $(PBUILDERTGZ) (chroots)#
 	sudo rm -rf $(COWBUILDERBASE) $(PBUILDERTGZ)
