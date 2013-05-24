@@ -110,6 +110,7 @@ if ($atid) {
 }
 
 html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginPie();
 html_use_jqueryjqplotpluginhighlighter();
 html_use_jqueryjqplotplugindateAxisRenderer();
 html_use_jqueryjqplotpluginBar();
