@@ -378,6 +378,7 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 	$chartid = 'projectgraph_'.$group_id;
 	$yMax = 0;
 	echo '<script type="text/javascript">//<![CDATA['."\n";
+	echo 'var plot'.$chartid.';';
 	echo 'var values = new Array();';
 	echo 'var ticks = new Array();';
 	echo 'var labels = new Array();';
