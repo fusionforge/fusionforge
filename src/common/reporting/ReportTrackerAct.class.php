@@ -59,42 +59,28 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 		$this->setError('No group_id');
 		return false;
 	}
-	if (!$span || $span == REPORT_TYPE_MONTHLY) {
-
-		$arr =& $this->getMonthStartArr();
-
-		for ($i=0; $i<count($arr); $i++) {
-			if ($arr[$i]<$start || $arr[$i]>$end) {
-				//skip this month as it's not in the range
-				unset($arr[$i]);
-			} else {
-
-				$this->labels[]=date('M d',($arr[$i-1]-1)).' <-> '.date('M d',$arr[$i]);
-				$this->avgtime[]=$this->getAverageTime($atid,($arr[$i-1]-1),$arr[$i]);
-				$this->opencount[]=$this->getOpenCount($atid,($arr[$i-1]-1),$arr[$i]);
-				$this->stillopencount[]=$this->getStillOpenCount($atid,$arr[$i]);
-
-			}
+	
+	switch ($span) {
+		case REPORT_TYPE_WEEKLY: {
+			$arr =& $this->getWeekStartArr();
+			break;
 		}
-
-	} elseif ($span == REPORT_TYPE_WEEKLY) {
-
-		$arr =& $this->getWeekStartArr();
-
-		for ($i=0; $i<count($arr); $i++) {
-			if ($arr[$i]<$start || $arr[$i]>$end) {
-				//skip this week as it's not in the range
-				unset($arr[$i]);
-			} else {
-
-				$this->labels[]=date('M d',($arr[$i-1]-1)).' <-> '.date('M d',$arr[$i]);
-				$this->avgtime[]=$this->getAverageTime($atid,($arr[$i-1]-1),$arr[$i]);
-				$this->opencount[]=$this->getOpenCount($atid,($arr[$i-1]-1),$arr[$i]);
-				$this->stillopencount[]=$this->getStillOpenCount($atid,$arr[$i]);
-
-			}
+		default: {
+			$arr =& $this->getMonthStartArr();
+			break;
 		}
+	}
 
+	for ($i=0; $i<count($arr); $i++) {
+		if ($arr[$i]<$start || $arr[$i]>$end) {
+			//skip this month as it's not in the range
+			unset($arr[$i]);
+		} else {
+			$this->labels[]=date('M d',($arr[$i-1]-1)).' <-> '.date('M d',$arr[$i]);
+			$this->avgtime[]=$this->getAverageTime($atid,($arr[$i-1]-1),$arr[$i]);
+			$this->opencount[]=$this->getOpenCount($atid,($arr[$i-1]-1),$arr[$i]);
+			$this->stillopencount[]=$this->getStillOpenCount($atid,$arr[$i]);
+		}
 	}
 
 	$this->start_date=$start;
@@ -142,6 +128,19 @@ function getStillOpenCount($atid,$end) {
 				       $end, // Yes, really.
 				       $end)) ;
 	return db_result($res,0,0);
+}
+
+function getPerAssignee($atid, $start, $end) {
+	$res = db_query_params('SELECT u.realname,count(*)
+		FROM artifact a, users u
+		WHERE a.group_artifact_id=$1
+		AND a.assigned_to=u.user_id
+		AND a.open_date BETWEEN $2 AND $3
+		GROUP BY realname',
+				array($atid,
+				      $start,
+				      $end));
+	return $res;
 }
 
 function &getAverageTimeData() {
