@@ -250,9 +250,115 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 		echo '<p class="information">'._('No selected area.').'</p>';
 		return true;
 	}
-	$report=new ReportTrackerAct($SPAN, $group_id, $atid, $start, $end);
-	var_dump($report);
-	echo 'joli graph';
+	$report = new ReportTrackerAct($SPAN, $group_id, $atid, $start, $end);
+	if ($report->isError()) {
+		echo '<p class="error">'.$report->getErrorMessage().'</p>';
+		return false;
+	}
+	$rdates = $report->getRawDates();
+	if (!$rdates) {
+		return false;
+	}
+	$ydata[] =& $report->getAverageTimeData();
+	$label[] = _('Avg Time Open (in days)');
+	$ydata[] =& $report->getOpenCountData();
+	$label[] = _('Total Opened');
+	$ydata[] =& $report->getStillOpenCountData();
+	$label[] = _('Total Still Open');
+	$chartid = 'projecttrackergraph_'.$group_id;
+	$yMax = 0;
+	echo '<script type="text/javascript">//<![CDATA['."\n";
+	echo 'var values = new Array();';
+	echo 'var ticks = new Array();';
+	echo 'var labels = new Array();';
+	echo 'var series = new Array();';
+	for ($z = 0; $z < count($ydata); $z++) {
+		echo 'values['.$z.'] = new Array();';
+		echo 'labels.push({label:\''.$label[$z].'\'});';
+	}
+	$tickArr = array();
+	switch ($SPAN) {
+		case REPORT_TYPE_MONTHLY : {
+			$formatDate = 'Y/m';
+			break;
+		}
+		case REPORT_TYPE_WEEKLY : {
+			$formatDate = 'Y/W';
+			break;
+		}
+	}
+	for ($j = 0; $j < count($rdates); $j++) {
+		for ($z = 0; $z < count($ydata); $z++) {
+			if (isset($ydata[$z][$j])) {
+				if ($ydata[$z][$j] === false || $ydata[$z][$j] === NULL) {
+					$ydata[$z][$j] = 0;
+				}
+				if ($ydata[$z][$j] > $yMax) {
+					$yMax = $ydata[$z][$j];
+				}
+				echo 'values['.$z.'].push('.$ydata[$z][$j].');';
+			} else {
+				echo 'values['.$z.'].push(0);';
+			}
+		}
+		$tickArr[] = date($formatDate, $rdates[$j]);
+		echo 'ticks.push(\''.$tickArr[$j].'\');';
+	}
+	for ($z = 0; $z < count($ydata); $z++) {
+		echo 'series.push(values['.$z.']);';
+	}
+	echo 'jQuery(document).ready(function(){
+		plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
+			title : \''.utf8_decode(_('Tracker Activity')).' ( '.strftime('%x',$start).' - '.strftime('%x',$end).') \',
+			axesDefaults: {
+				tickOptions: {
+					angle: -90,
+					fontSize: \'8px\',
+					showGridline: false,
+					showMark: false,
+				},
+				pad: 0,
+			},
+			seriesDefaults: {
+				showMarker: false,
+				lineWidth: 1,
+				fill: true,
+				renderer:jQuery.jqplot.BarRenderer,
+				rendererOptions: {
+					fillToZero: true,
+				},
+			},
+			legend: {
+				show:true, location: \'ne\',
+			},
+			series:
+				labels
+			,
+			axes: {
+				xaxis: {
+					renderer: jQuery.jqplot.CategoryAxisRenderer,
+					ticks: ticks,
+				},
+				yaxis: {
+					max: '.++$yMax.',
+					min: 0,
+					tickOptions: {
+						angle: 0,
+						showMark: true,
+					}
+				},
+			},
+			highlighter: {
+				show: true,
+				sizeAdjust: 2.5,
+			},
+		});
+	});';
+	echo 'jQuery(window).resize(function() {
+		plot'.$chartid.'.replot();
+		});'."\n";
+	echo '//]]></script>';
+	echo '<div id="chart'.$chartid.'"></div>';
 	return true;
 }
 
