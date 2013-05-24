@@ -120,7 +120,6 @@ function getAverageTime($atid,$start,$end) {
 }
 
 function getOpenCount($atid,$start,$end) {
-	echo $start.'|'.$end."\n";
 	$res = db_query_params ('SELECT count(*)
 		FROM artifact
 		WHERE
