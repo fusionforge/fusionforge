@@ -23,7 +23,12 @@ DirectoryIndex index.html index.php
   ForceType application/x-httpd-php
 </Location>
 
-Include {core/config_path}/httpd.conf.d/plugin-*.inc
+<IfVersion >= 2.3>
+  IncludeOptional {core/config_path}/httpd.conf.d/plugin-*.inc
+</IfVersion>
+<IfVersion < 2.3>
+  Include {core/config_path}/httpd.conf.d/plugin-*.inc
+</IfVersion>
 
 Alias /images/ {core/source_path}/www/images/
 

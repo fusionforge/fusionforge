@@ -1,5 +1,5 @@
 <Location /svn>
-  <IfModule dav_svn>
+ <IfModule dav_svn>
   DAV svn
   SVNParentPath /var/lib/gforge/svnroot
   
@@ -9,8 +9,8 @@
   AuthName "Document repository"
   AuthUserFile /var/lib/gforge/svnroot-authfile
   SVNIndexXSLT "/svnindex.xsl"
-  </IfModule>
   
   # only authenticated users may access the repository
   Require valid-user
+ </IfModule>
 </Location>

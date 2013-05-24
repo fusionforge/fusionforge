@@ -20,7 +20,10 @@ set -e
 case "$1" in
     remove)
 	a2dissite @OLDPACKAGE@ || true
+	a2dissite @PACKAGE@ || true
+	a2dissite @PACKAGE@.conf || true
 	rm -f /etc/apache2/sites-available/@OLDPACKAGE@
+	rm -f /etc/apache2/sites-available/@PACKAGE@.conf
 	invoke-rc.d apache2 reload || true
 	;;
     upgrade|deconfigure|failed-upgrade)

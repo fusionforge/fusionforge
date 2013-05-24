@@ -23,7 +23,12 @@ DirectoryIndex index.html index.php
   ForceType application/x-httpd-php
 </Location>
 
-Include /etc/gforge/httpd.conf.d/plugin-*.inc
+<IfVersion >= 2.3>
+  IncludeOptional /etc/gforge/httpd.conf.d/plugin-*.inc
+</IfVersion>
+<IfVersion < 2.3>
+  Include /etc/gforge/httpd.conf.d/plugin-*.inc
+</IfVersion>
 
 Alias /images/ /usr/local/share/gforge/www/images/
 

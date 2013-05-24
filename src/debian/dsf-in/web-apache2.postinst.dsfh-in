@@ -78,15 +78,26 @@ case "$1" in
 	DEBIAN_FRONTEND=noninteractive a2enmod rewrite || true
 	DEBIAN_FRONTEND=noninteractive a2enmod proxy || true
 	DEBIAN_FRONTEND=noninteractive a2enmod proxy_http || true
+	DEBIAN_FRONTEND=noninteractive a2enmod access_compat || true
+	DEBIAN_FRONTEND=noninteractive a2enmod alias || true
+	DEBIAN_FRONTEND=noninteractive a2enmod dir || true
+	DEBIAN_FRONTEND=noninteractive a2enmod version || true
 	
 	# Enable the @FORGENAME@ configuration
 	if [ -e /etc/apache2/conf.d/@OLDPACKAGE@.httpd.conf ] ; then
 	    rm -f /etc/apache2/conf.d/@OLDPACKAGE@.httpd.conf
 	fi
-	if [ -d /etc/apache2/sites-available ] && [ ! -h /etc/apache2/sites-available/@OLDPACKAGE@ ] ; then
-	    ln -s /etc/@OLDPACKAGE@/httpd.conf /etc/apache2/sites-available/@OLDPACKAGE@
+	if test -d /etc/apache2/sites-available; then
+		if test -h /etc/apache2/sites-available/@OLDPACKAGE@; then
+			(a2dissite @OLDPACKAGE@ || :)
+			rm -f /etc/apache2/sites-available/@OLDPACKAGE@*
+		fi
+		if ! test -h /etc/apache2/sites-available/@PACKAGE@.conf; then
+			ln -s /etc/@OLDPACKAGE@/httpd.conf \
+			    /etc/apache2/sites-available/@PACKAGE@.conf
+		fi
+		a2ensite @PACKAGE@.conf || a2ensite @PACKAGE@
 	fi
-	a2ensite @OLDPACKAGE@
 	
 	# Make Apache see these new changes
 	invoke-rc.d apache2 restart || true
