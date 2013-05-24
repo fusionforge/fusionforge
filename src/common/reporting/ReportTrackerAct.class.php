@@ -69,10 +69,10 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 				unset($arr[$i]);
 			} else {
 
-				$this->labels[]=date('M d',$arr[$i]).' <-> '.date('M d',($arr[$i-1]-1));
-				$this->avgtime[]=$this->getAverageTime($atid,$arr[$i],($arr[$i-1]-1));
-				$this->opencount[]=$this->getOpenCount($atid,$arr[$i],($arr[$i-1]-1));
-				$this->stillopencount[]=$this->getStillOpenCount($atid,$arr[$i],($arr[$i-1]-1));
+				$this->labels[]=date('M d',($arr[$i-1]-1)).' <-> '.date('M d',$arr[$i]);
+				$this->avgtime[]=$this->getAverageTime($atid,($arr[$i-1]-1),$arr[$i]);
+				$this->opencount[]=$this->getOpenCount($atid,($arr[$i-1]-1),$arr[$i]);
+				$this->stillopencount[]=$this->getStillOpenCount($atid,$arr[$i]);
 
 			}
 		}
@@ -87,10 +87,10 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 				unset($arr[$i]);
 			} else {
 
-				$this->labels[]=date('M d',$arr[$i]).' <-> '.date('M d',($arr[$i-1]-1));
-				$this->avgtime[]=$this->getAverageTime($atid,$arr[$i],($arr[$i-1]-1));
-				$this->opencount[]=$this->getOpenCount($atid,$arr[$i],($arr[$i-1]-1));
-				$this->stillopencount[]=$this->getStillOpenCount($atid,$arr[$i],($arr[$i-1]-1));
+				$this->labels[]=date('M d',($arr[$i-1]-1)).' <-> '.date('M d',$arr[$i]);
+				$this->avgtime[]=$this->getAverageTime($atid,($arr[$i-1]-1),$arr[$i]);
+				$this->opencount[]=$this->getOpenCount($atid,($arr[$i-1]-1),$arr[$i]);
+				$this->stillopencount[]=$this->getStillOpenCount($atid,$arr[$i]);
 
 			}
 		}
@@ -120,6 +120,7 @@ function getAverageTime($atid,$start,$end) {
 }
 
 function getOpenCount($atid,$start,$end) {
+	echo $start.'|'.$end."\n";
 	$res = db_query_params ('SELECT count(*)
 		FROM artifact
 		WHERE
@@ -131,7 +132,7 @@ function getOpenCount($atid,$start,$end) {
 	return db_result($res,0,0);
 }
 
-function getStillOpenCount($atid,$start,$end) {
+function getStillOpenCount($atid,$end) {
 	$res = db_query_params ('SELECT count(*)
 		FROM artifact
 		WHERE
