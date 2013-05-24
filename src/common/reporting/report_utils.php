@@ -272,6 +272,7 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 	echo 'var ticks = new Array();';
 	echo 'var labels = new Array();';
 	echo 'var series = new Array();';
+	echo 'var plot'.$chartid.';';
 	for ($z = 0; $z < count($ydata); $z++) {
 		echo 'values['.$z.'] = new Array();';
 		echo 'labels.push({label:\''.$label[$z].'\'});';
@@ -367,7 +368,50 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 		echo '<p class="information">'._('No selected area.').'</p>';
 		return true;
 	}
-	echo 'joli graph';
+	$report = new ReportTrackerAct($SPAN, $group_id, $atid, $start, $end);
+	if ($report->isError()) {
+		echo '<p class="error">'.$report->getErrorMessage().'</p>';
+		return false;
+	}
+	switch ($area) {
+		default: {
+			$dbres = $report->getPerAssignee($atid, $start, $end);
+			$areaname = _('Per assignee');
+			break;
+		}
+	}
+	$chartid = 'projecttrackerpie_'.$group_id;
+	echo '<script type="text/javascript">//<![CDATA['."\n";
+	echo 'var plot'.$chartid.';';
+	echo 'var data = new Array();';
+	while ($row = db_fetch_array($dbres)) {
+		echo 'data.push([\''.htmlentities($row[0]).'\',\''.$row[1].'\']);';
+	}
+	echo 'jQuery(document).ready(function(){
+		plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data],
+			{
+				title : \''.utf8_decode($areaname." (".strftime('%x',$start) ." - ". strftime('%x',$end) .")").'\',
+				seriesDefaults: {
+					// Make this a pie chart.
+					renderer: jQuery.jqplot.PieRenderer,
+					rendererOptions: {
+						// Put data labels on the pie slices.
+						// By default, labels show the percentage of the slice.
+						showDataLabels: true,
+						dataLabels: \'percent\',
+					}
+				},
+				legend: {
+					show:true, location: \'e\',
+				},
+			}
+			);
+		});';
+	echo 'jQuery(window).resize(function() {
+			plot'.$chartid.'.replot( { resetAxes: true } );
+		});'."\n";
+	echo '//]]></script>';
+	echo '<div id="chart'.$chartid.'"></div>';
 	return true;
 }
 
