@@ -3,9 +3,8 @@
  * Reporting System
  *
  * Copyright 2004 (c) GForge LLC
- *
- * @author Tim Perdue tim@gforge.org
- * @date 2003-03-16
+ * Copyright 2006, Tim Perdue - gforge.org
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -36,13 +35,13 @@ report_header('Main Page');
 ?>
 <h2><?php echo _('Users'); ?></h2>
 <p>
-<a href="useradded.php?SPAN=1"><?php echo _('Users Added Weekly (graph)'); ?></a><br />
-<a href="usercum.php?SPAN=1"><?php echo _('Cumulative Users Weekly (graph)'); ?></a><br />
+<a href="useradded.php?SPAN=1"><?php echo _('Users Added (graph)'); ?></a><br />
+<a href="usercum.php?SPAN=1"><?php echo _('Cumulative Users (graph)'); ?></a><br />
 <a href="useract.php"><?php echo _('Activity (graph)'); ?></a></p>
 <h2><?php echo _('Projects'); ?></h2>
 <p>
-<a href="groupadded.php?SPAN=1"><?php echo _('Projects Added Weekly (graph)'); ?></a><br />
-<a href="groupcum.php?SPAN=1"><?php echo _('Cumulative Projects Weekly (graph)'); ?></a><br />
+<a href="groupadded.php?SPAN=1"><?php echo _('Projects Added (graph)'); ?></a><br />
+<a href="groupcum.php?SPAN=1"><?php echo _('Cumulative Projects (graph)'); ?></a><br />
 <?php echo _('Project-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads'); ?><br />
 <a href="projectact.php"><?php echo _('Activity (graph)'); ?></a></p>
 <h2><?php echo _('Site-Wide'); ?></h2>
