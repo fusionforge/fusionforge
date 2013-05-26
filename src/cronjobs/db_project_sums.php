@@ -3,6 +3,7 @@
 /**
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -142,30 +143,6 @@ GROUP BY group_id,type',
 
 }
 
-/*
-	Forum message count
-*/
-if (forge_get_config('use_forum')) {
-	$res=db_query_params ('INSERT INTO project_sums_agg
-SELECT forum_group_list.group_id,$1 AS type, count(forum.msg_id) AS count
-FROM forum,forum_group_list
-WHERE forum.group_forum_id=forum_group_list.group_forum_id
-AND forum_group_list.is_public=1
-GROUP BY group_id,type',
-			      array('fmsg'));
-	$err .= db_error();
-
-/*
-	Forum count
-*/
-	$res=db_query_params ('INSERT INTO project_sums_agg
-SELECT group_id,$1 AS type, count(*) AS count
-FROM forum_group_list
-WHERE is_public=1
-GROUP BY group_id,type',
-			      array('fora'));
-	$err .= db_error();
-}
 db_commit();
 $err .= db_error();
 
