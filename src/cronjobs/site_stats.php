@@ -2,6 +2,7 @@
 <?php
 /**
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -62,7 +63,7 @@ $rel = db_query_params ('DELETE FROM stats_agg_logo_by_group WHERE month=$1 AND 
 				$day));
 $err .= db_error();
 $rel = db_query_params ('INSERT INTO stats_agg_logo_by_group SELECT $1::int AS month, $2::int AS newday,group_id,count(*) AS count
-	FROM activity_log WHERE type=0 AND day=$3 GROUP BY month,newday,group_id',
+	FROM activity_log WHERE type=0 AND day=$3 AND group_id <> 0 GROUP BY month,newday,group_id',
 			array ("$year$month",
 			       $day,
 			       $yesterday_formatted)) ;
@@ -78,7 +79,7 @@ $rel = db_query_params ('DELETE FROM stats_agg_site_by_group WHERE month=$1 AND 
 			array ("$year$month",
 				$day));
 $err .= db_error();
-$rel = db_query_params ('INSERT INTO stats_agg_site_by_group SELECT $1::int AS month, $2::int AS newday,group_id,COUNT(*) AS count FROM activity_log WHERE type=0 AND day=$3 GROUP BY month,newday,group_id',
+$rel = db_query_params ('INSERT INTO stats_agg_site_by_group SELECT $1::int AS month, $2::int AS newday,group_id,COUNT(*) AS count FROM activity_log WHERE type=0 AND day=$3 AND group_id <> 0 GROUP BY month,newday,group_id',
 			array ("$year$month",
 			       $day,
 			       $yesterday_formatted)) ;
