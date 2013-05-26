@@ -6,6 +6,7 @@
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -44,16 +45,16 @@ if ($group_id) {
 	$farr = $ff->getForums();
 
 	if ( $farr !== false && count($farr) == 1 ) {
-         session_redirect('/forum/forum.php?forum_id='.$farr[0]->getID());
+		session_redirect('/forum/forum.php?forum_id='.$farr[0]->getID());
 	}
 
 	forum_header(array('title'=>sprintf(_('Forums for %1$s'), $g->getPublicName()) ));
 
 	if ($ff->isError()) {
-        echo '<div class="error">'. $ff->getErrorMessage().'</div>';
+		echo '<div class="error">'. $ff->getErrorMessage().'</div>';
 		forum_footer(array());
 		exit;
-    } elseif ( count($farr) < 1) {
+	} elseif ( count($farr) < 1) {
 		echo '<div class="warning_msg">'.sprintf(_('No Forums Found for %1$s'), $g->getPublicName()) .'</div>';
 		forum_footer(array());
 		exit;
