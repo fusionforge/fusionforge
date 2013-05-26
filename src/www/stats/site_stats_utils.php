@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -190,6 +191,8 @@ SELECT g.group_id, g.group_name,
        SUM(s.patches_closed) AS patches_closed,
        SUM(s.tasks_opened) AS tasks_opened,
        SUM(s.tasks_closed) AS tasks_closed,
+       SUM(s.artifacts_opened) AS artifacts_opened,
+       SUM(s.artifacts_closed) AS artifacts_closed,
        SUM(s.cvs_checkouts) AS cvs_checkouts,
        SUM(s.cvs_commits) AS cvs_commits,
        SUM(s.cvs_adds) AS cvs_adds
@@ -203,7 +206,7 @@ ORDER BY ' . $order_clause,
 SELECT g.group_id, g.group_name, s.downloads, s.site_views,
        s.subdomain_views, s.msg_posted, s.bugs_opened, s.bugs_closed,
        s.support_opened, s.support_closed, s.patches_opened,
-       s.patches_closed, s.tasks_opened, s.tasks_closed,
+       s.patches_closed, s.artifacts_opened, artifacts_closed, s.tasks_opened, s.tasks_closed,
        s.cvs_checkouts, s.cvs_commits, s.cvs_adds
 FROM stats_project_all_vw s, groups g
 WHERE s.group_id = g.group_id
@@ -320,7 +323,6 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 			plugin_hook('stats_data',$hook_params);
 			print '</tr>' . "\n";
 			$i++;
-			$sum = stats_util_sum_array( $sum, $row );
 		}
 
 		?>
@@ -349,7 +351,7 @@ function stats_site_projects_daily( $span ) {
 	echo db_error();
 
 	// if there are any weeks, we have valid data.
-	if ( ($valid_days = db_numrows( $res )) > 1 ) {
+	if ( ($valid_days = db_numrows( $res )) >= 1 ) {
 
 		?>
 		<h2><?php printf(_('Statistics for the past %1$s days'), $valid_days); ?></h2>
@@ -402,7 +404,7 @@ function stats_site_projects_monthly() {
 	echo db_error();
 
 	// if there are any weeks, we have valid data.
-	if ( ($valid_months = db_numrows( $res )) > 1 ) {
+	if ( ($valid_months = db_numrows( $res )) >= 1 ) {
 
 		?>
 
