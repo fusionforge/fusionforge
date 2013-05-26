@@ -2,6 +2,7 @@
 <?php
 /**
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -38,11 +39,6 @@ $err .= db_error();
 $then=(time()-604800);
 db_query_params ('DELETE FROM pfo_user_role WHERE EXISTS (SELECT user_id FROM users
 WHERE status=$1 and add_date < $2 AND users.user_id=pfo_user_role.user_id)',
-		 array ('P',
-			$then));
-$err .= db_error();
-db_query_params ('DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users
-WHERE status=$1 and add_date < $2 AND users.user_id=user_group.user_id)',
 		 array ('P',
 			$then));
 $err .= db_error();
