@@ -1,22 +1,33 @@
 <?php
 /**
-  *
-  * svntracker plugin
-  *
-  * This script stand for receiving a HTTP Post from a hook in a
-  *  svn script. Arguments are passed and new entries in DB are
-  *  generated.
-  *
-  * Copyright Daniel A. Perez <danielperez.arg@gmail.com>
-  *
-  */
+ * scmhook plugin: svn commitemail hook
+ *
+ * Copyright Daniel A. Perez <danielperez.arg@gmail.com>
+ * Copyright 2013, Franck Villaume - TrivialDev
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 /**
- * This script takes some POST variables.It makes a check and it
+ * This script takes some POST variables. It makes a check and it
  * store in DB the commit info attached to the tracker or task.
  *
  */
 
-require_once dirname(__FILE__)."/../../env.inc.php";
+require_once dirname(__FILE__)."/../../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 
 /**
@@ -24,31 +35,30 @@ require_once $gfcommon.'include/pre.php';
  * UserName, Repository, Path, FileName, PrevVersion, ActualVersion, Log,
  * ArtifactNumbers and TaskNumbers
  */
+
 $Config = array();
 $SubmittedVars = array();
-$SubmittedVars = unserialize(str_replace('\\\\', '\\', str_replace('\"','"',$_POST['data'])));
+$SubmittedVars = unserialize(urldecode($_POST['data']));
 
+$data = urldecode($_POST['data']);
 $i = 0;
-foreach ($SubmittedVars as $SubmittedVar) {
-	$Configs[$i] = array();
-	$Configs[$i]['UserName']        = $SubmittedVar['UserName'];
-	//$Configs[$i]['UserName']        = 'def_admin';   use this to make tests, just replace with a gforge user
-	$Configs[$i]['Repository']      = $SubmittedVar['Repository'];
-	$Configs[$i]['FileName']        = $SubmittedVar['FileName'];
-	$Configs[$i]['PrevVersion']     = $SubmittedVar['PrevVersion'];
-	$Configs[$i]['ActualVersion']   = $SubmittedVar['ActualVersion'];
-	$Configs[$i]['ArtifactNumbers'] = $SubmittedVar['ArtifactNumbers'];
-	$Configs[$i]['TaskNumbers']     = $SubmittedVar['TaskNumbers'];
-	$Configs[$i]['Log']             = $SubmittedVar['Log'];
-	$Configs[$i]['SvnDate']         = $SubmittedVar['SvnDate'];
-	$i++;
-	if($svn_tracker_debug) {
-		echo "Variables received by newcommit.php:\n";
-		print_r($Configs[$i]);
+
+if(is_array($SubmittedVars)) {
+	foreach ($SubmittedVars as $SubmittedVar) {
+		$Configs[$i] = array();
+		$Configs[$i]['UserName']        = $SubmittedVar['UserName'];
+		//$Configs[$i]['UserName']        = 'def_admin';   use this to make tests, just replace with a gforge user
+		$Configs[$i]['Repository']      = $SubmittedVar['Repository'];
+		$Configs[$i]['FileName']        = $SubmittedVar['FileName'];
+		$Configs[$i]['PrevVersion']     = $SubmittedVar['PrevVersion'];
+		$Configs[$i]['ActualVersion']   = $SubmittedVar['ActualVersion'];
+		$Configs[$i]['ArtifactNumbers'] = $SubmittedVar['ArtifactNumbers'];
+		$Configs[$i]['TaskNumbers']     = $SubmittedVar['TaskNumbers'];
+		$Configs[$i]['Log']             = $SubmittedVar['Log'];
+		$Configs[$i]['SvnDate']         = $SubmittedVar['SvnDate'];
+		$i++;
 	}
 }
-
-
 
 /**
  * Checks if the commit it's possible and parse arguments
@@ -82,11 +92,6 @@ function parseConfig(&$Config)
 		$Config['FileName'] = $Config['FileName'];
 	}
 
-	if($svn_tracker_debug) {
-		echo "GroupName = ".$GroupName."\n";
-		echo "SVNRootPath = ".$repos_path."\n";
-	}
-
 	$Result['group']    = group_get_object_by_name($GroupName);
 	$Result['user']     = user_get_object_by_name($UserName);
 	if (!$Result['group'] || !is_object($Result['group']) ||
@@ -95,7 +100,7 @@ function parseConfig(&$Config)
 		$Result['error'] = 'Group Not Found';
 	} else {
 		$Result['group_id'] = $Result['group']->getID();
-		if (!$Result['group']->usesPlugin('svntracker')) {
+		if (!$Result['group']->usesPlugin('scmhook')) {
 			$Result['check'] = false;
 			$Result['error'] = 'Plugin not enabled for this Group';
 		}
@@ -133,16 +138,16 @@ AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 
 	if ($Rows == 1) {
 		db_begin();
-		$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_artifact
+		$DBRes = db_query_params ('INSERT INTO plugin_scmhook_scmsvn_committracker_data_artifact
 (kind, group_artifact_id) VALUES
 (0, $1)',
 					  array ($Num));
-		$HolderID= db_insertid($DBRes,'plugin_svntracker_data_artifact','id');
+		$HolderID= db_insertid($DBRes,'plugin_scmhook_scmsvn_committracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
 			$return['Error']='Problems with Artifact $Num: '.db_error();
 			db_rollback();
 		} else {
-			$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_master (holder_id, svn_date, log_text, file, prev_version, actual_version, author) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+			$DBRes = db_query_params ('INSERT INTO plugin_scmhook_scmsvn_committracker_data_master (holder_id, svn_date, log_text, file, prev_version, actual_version, author) VALUES ($1, $2, $3, $4, $5, $6, $7)',
 						  array ($HolderID,
 							 $Config['SvnDate'],
 							 $Config['Log'],
@@ -189,21 +194,19 @@ AND project_group_list.group_id=$2',
 	}
 	if ($Rows == 1) {
 		db_begin();
-		$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_artifact
-(kind, project_task_id) VALUES
-(1, $1)',
+		$DBRes = db_query_params ('INSERT INTO plugin_scmhook_scmsvn_committracker_data_artifact
+						(kind, project_task_id) VALUES
+						(1, $1)',
 			array ($Num));
-		$HolderID= db_insertid($DBRes,'plugin_svntracker_data_artifact','id');
+		$HolderID= db_insertid($DBRes,'plugin_scmhook_scmsvn_committracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
 			$return['Error']='Problems with Task $Num: '.db_error();
 			db_rollback();
 		} else {
-			$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_master
-(holder_id, svn_date, log_text, file, prev_version,
-actual_version, author)
-VALUES ($1, $2, $3, $4, $5, $6, $7)',
-
-
+			$DBRes = db_query_params ('INSERT INTO plugin_scmhook_scmsvn_committracker_data_master
+							(holder_id, svn_date, log_text, file, prev_version,
+							actual_version, author)
+							VALUES ($1, $2, $3, $4, $5, $6, $7)',
 						  array ($HolderID,
 							 $Config['SvnDate'],
 							 $Config['Log'],
@@ -224,28 +227,30 @@ VALUES ($1, $2, $3, $4, $5, $6, $7)',
 	return $return;
 }
 
-foreach ($Configs as $Config) {
-	$Result = parseConfig($Config);
-	if ($Result['check'] == false) {
-		exit_error('Check_error', $Result['error']);
-	}
+if (isset($Configs) && is_array($Configs)) {
+	foreach ($Configs as $Config) {
+		$Result = parseConfig($Config);
+		if ($Result['check'] == false) {
+			exit_error('Check_error', $Result['error']);
+		}
 
-	if (!is_null($Config['ArtifactNumbers'])) {
-		foreach ($Config['ArtifactNumbers'] as $Num)
-		{
-			$AddResult = addArtifactLog($Config, $Result['group_id'], $Num);
-			if (isset($AddResult['Error'])) {
-				exit_error('Adding ArtifactNumber',$AddResult['Error']);
+		if (!is_null($Config['ArtifactNumbers'])) {
+			foreach ($Config['ArtifactNumbers'] as $Num)
+			{
+				$AddResult = addArtifactLog($Config, $Result['group_id'], $Num);
+				if (isset($AddResult['Error'])) {
+					exit_error('Adding ArtifactNumber',$AddResult['Error']);
+				}
 			}
 		}
-	}
 
-	if (!is_null($Config['TaskNumbers'])) {
-		foreach ($Config['TaskNumbers'] as $Num)
-		{
-			$AddResult = addTaskLog($Config, $Result['group_id'], $Num);
-			if (isset($AddResult['Error'])) {
-				exit_error('Adding TaskNumber',$AddResult['Error']);
+		if (!is_null($Config['TaskNumbers'])) {
+			foreach ($Config['TaskNumbers'] as $Num)
+			{
+				$AddResult = addTaskLog($Config, $Result['group_id'], $Num);
+				if (isset($AddResult['Error'])) {
+					exit_error('Adding TaskNumber',$AddResult['Error']);
+				}
 			}
 		}
 	}

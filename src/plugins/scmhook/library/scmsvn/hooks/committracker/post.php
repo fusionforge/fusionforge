@@ -162,7 +162,7 @@ foreach ($changed as $onefile) {
 }
 
 
-// Our POSTer in Gforge
+// Our POSTer in Fusionforge
 $snoopy = new Snoopy;
 
 $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommit.php');
@@ -190,6 +190,6 @@ foreach ( $files as $onefile )
 	$i++;
 }
 
-$vars['data'] = serialize($SubmitVars);
+$vars['data'] = urlencode(serialize($SubmitVars));
 $snoopy->submit($SubmitUrl, $vars);
 ?>
