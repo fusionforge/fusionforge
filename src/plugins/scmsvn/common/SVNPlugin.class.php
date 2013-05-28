@@ -260,6 +260,7 @@ class SVNPlugin extends SCMPlugin {
 			if ($ret != 0) {
 				return false;
 			}
+			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 			if (forge_get_config('use_ssh', 'scmsvn')) {
 				$unix_group = 'scm_' . $project->getUnixName() ;
 				system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
@@ -275,7 +276,6 @@ class SVNPlugin extends SCMPlugin {
 				system ("chmod -R g-rwx,o-rwx $repo") ;
 				system ("chown -R $unix_user:$unix_group $repo") ;
 			}
-			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 		}
 
 		$this->installOrUpdateCmds($project, $project->getUnixName(), $repo);
