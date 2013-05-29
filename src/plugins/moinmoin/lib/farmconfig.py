@@ -56,6 +56,6 @@ class FarmConfig(multiconfig.DefaultConfig):
                                 WikiGroups (request))
 
 wikis = map (lambda p: \
-               (p, "^https?://%s/plugins/moinmoin/%s.*$"
+               (p, "^https?://%s/plugins/moinmoin/%s/.*$"
                    % (FarmConfig.ff_host, p)),
              FarmConfig.ffsa.projects)
