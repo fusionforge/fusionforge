@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * Copyright 2013, Benoit Debaenst - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -68,7 +68,6 @@ while ($row = db_fetch_array($res)) {
 		case 'scmsvn': {
 			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
 			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
-			global $svndir_prefix;
 			$scmsvncronjob = new ScmSvnUpdateScmRepo();
 			$params = array();
 			$params['group_id'] = $group_id;
@@ -101,7 +100,6 @@ while ($row = db_fetch_array($res)) {
 		case 'scmgit': {
 			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
 			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
-			global $gitdir_prefix;
 			$scmgitcronjob = new ScmGitUpdateScmRepo();
 			$params = array();
 			$params['group_id'] = $group_id;
