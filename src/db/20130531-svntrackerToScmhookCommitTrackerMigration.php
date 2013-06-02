@@ -58,7 +58,7 @@ if ($pm->PluginIsInstalled('svntracker')) {
 			}
 			$projectObject->setPluginUse('scmhook');
 			$projectId = $projectObject->getID();
-			$group = $projectObject; // need to be set do to use of global vars in commitEmail class
+			$group = $projectObject; // need to be set due to use of global vars in commitEmail class
 			$pluginScmHook->add($projectId);
 			// -> add committracker hook
 			$params = array();

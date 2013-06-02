@@ -31,7 +31,7 @@ $pm = plugin_manager_get_object();
 if ($pm->PluginIsInstalled('svncommitemail')) {
 	$used = false;
 	$groupnames = db_query_params('SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = $1 and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id',
-		array('svntracker'));
+		array('svncommitemail'));
 
 	if ($groupnames) {
 		if (db_numrows($groupnames) > 0) {
@@ -58,7 +58,7 @@ if ($pm->PluginIsInstalled('svncommitemail')) {
 			}
 			$projectObject->setPluginUse('scmhook');
 			$projectId = $projectObject->getID();
-			$group = $projectObject; // need to be set do to use of global vars in commitEmail class
+			$group = $projectObject; // need to be set due to use of global vars in commitEmail class
 			$pluginScmHook->add($projectId);
 			// -> add commitEmail hook
 			$params = array();
