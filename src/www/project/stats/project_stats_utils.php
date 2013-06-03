@@ -42,14 +42,6 @@ function period2seconds($period_name,$span) {
 	}
 }
 
-function period2sql($period_name,$span,$field_name) {
-	$time_now=time();
-	$seconds=period2seconds($period_name,$span);
-	if (!$seconds) return '';
-
-	return "AND $field_name>=" . (string)($time_now-$seconds);
-}
-
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
