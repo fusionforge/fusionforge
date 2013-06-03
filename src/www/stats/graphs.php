@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,6 +30,9 @@ require_once $gfwww.'stats/site_stats_utils.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
 
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginhighlighter();
+
 $HTML->header(array('title'=>sprintf(_('%1$s Sitewide Statistics Graphs'), forge_get_config ('forge_name'))));
 ?>
 
@@ -45,10 +49,20 @@ $HTML->header(array('title'=>sprintf(_('%1$s Sitewide Statistics Graphs'), forge
 <hr />
 
 <p class="align-center">
+<?php 
+views_graph(1);
+?>
+<noscript>
 <img src="views_graph.php?monthly=1" alt="" />
+</noscript>
 </p>
 <p class="align-center">
+<?php
+users_graph();
+?>
+<noscript>
 <img src="users_graph.php" alt="" />
+</noscript>
 </p>
 
 <?php

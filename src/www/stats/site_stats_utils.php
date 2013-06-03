@@ -490,6 +490,80 @@ function stats_site_aggregate( ) {
 	<?php
 }
 
+function views_graph($monthly = 0) {
+	$year = gmstrftime("%Y", time() );
+	if ($monthly) {
+		$res = db_query_params('SELECT month,site_page_views AS site_views,subdomain_views
+					FROM stats_site_months ORDER BY month ASC',
+					array());
+	} else {
+		$beg_year=date('Y',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
+		$beg_month=date('m',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
+		$beg_day=date('d',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
+		$res = db_query_params ('SELECT month,day,site_page_views AS site_views,subdomain_views
+			FROM stats_site_vw
+			( month = $1 AND day >= $2 ) OR ( month > $3 )
+			ORDER BY month ASC, day ASC',
+			array ("$beg_year$beg_month",
+				$beg_day,
+				"$beg_year$beg_month"));
+	}
+
+	$i = 0;
+	$xlabel = array();
+	$ydata = array();
+	while ( $row = db_fetch_array($res) ) {
+		$xlabel[$i] = $row['month'] . ((isset($row['day'])) ? "/" . $row['day'] : '');
+		$ydata[$i] = $row["site_views"] + $row["subdomain_views"];
+		++$i;
+	}
+	if (count($ydata)) {
+		$chartid = '_views_graph';
+		echo '<script type="text/javascript">//<![CDATA['."\n";
+		echo 'var values = new Array();';
+		echo 'var plot'.$chartid.';';
+		$yMax = 0;
+		for ($j = 0; $j < count($ydata); $j++) {
+			$timeStamp = mktime(0, 0, 0, substr($xlabel[$j], 4, 2) , 1, substr($xlabel[$j], 0, 4));
+			echo 'var date = new Date(0);';
+			echo 'date.setUTCSeconds('.$timeStamp.');';
+			echo 'date = '.$xlabel[$j].';';
+			echo 'var datevalues = '.$ydata[$j].';';
+			echo 'values.push([date, datevalues]);';
+			if ($ydata[$j] > $yMax) {
+				$yMax = $ydata[$j];
+			}
+		}
+		echo 'jQuery(document).ready(function(){
+				plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [values], {
+					axes: {
+						xaxis: {
+							label: \''.('Month').'\',
+						},
+						yaxis: {
+							label: \''._('Pages view').'\',
+						}
+					},
+					highlighter: {
+						show: true,
+						sizeAdjust: 2.5,
+					},
+				});
+			});';
+		echo 'jQuery(window).resize(function() {
+			plot'.$chartid.'.replot();
+			});'."\n";
+		echo '//]]></script>';
+		echo '<div id="chart'.$chartid.'"></div>';
+	} else {
+		echo '<p class="information">'._('Page view: no graph to display.').'</p>';
+	}
+}
+
+function users_graph() {
+	echo 'autre joli graph';
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
