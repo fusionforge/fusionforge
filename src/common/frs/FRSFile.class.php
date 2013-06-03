@@ -4,7 +4,7 @@
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -46,7 +46,7 @@ function &frsfile_get_object($file_id, $data=false) {
 			}
 			$data = db_fetch_array($res);
 		}
-		$FRSRelease =& frsrelease_get_object($data['release_id']);
+		$FRSRelease = frsrelease_get_object($data['release_id']);
 		$FRSFILE_OBJ['_'.$file_id.'_']= new FRSFile($FRSRelease,$data['file_id'],$data);
 	}
 	return $FRSFILE_OBJ['_'.$file_id.'_'];
