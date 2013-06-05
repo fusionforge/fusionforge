@@ -1,2 +1,3 @@
 # Triggers for @PACKAGE@-plugin-mediawiki
-interest /usr/share/mediawiki/maintenance/postgres
+interest /usr/share/mediawiki
+interest /usr/share/mediawiki-extensions

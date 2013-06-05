@@ -66,9 +66,9 @@ move_mediawikis() {
 
 case "$1" in
     triggered)
-	if [ "$2" = /usr/share/mediawiki/maintenance/postgres ] ; then
-	    upgrade_mediawikis
-	fi
+	case $2 in
+	/usr/share/mediawiki*) upgrade_mediawikis ;;
+	esac
 	;;
     
     configure)

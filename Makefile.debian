@@ -87,8 +87,8 @@ MAJOR:=$(shell [ ! -f $(PKGDIR)/debian/changelog ] || dpkg-parsechangelog -l$(PK
 # SMAJOR is MAJOR without epoch if any
 SMAJOR:=$(shell echo $(MAJOR) | sed 's/^.://')
 
-in_svn_repo:= $(wildcard .svn/) 
-ifeq ($(strip $(in_svn_repo)),) 
+in_svn_repo:= $(wildcard .svn/)
+ifeq ($(strip $(in_svn_repo)),)
 in_bzr_repo:= $(wildcard .bzr/)
 ifeq ($(strip $(in_bzr_repo)),)
 in_git_repo:= $(wildcard .git/)
@@ -109,7 +109,7 @@ MINOR=-$(BRANCH)$(svnrev)+$(XDISTRIB)
 
 DEBUG=--debug
 DEBUG=
-DEBBUILDOPTS=--debbuildopts -sa 
+DEBBUILDOPTS=--debbuildopts -sa
 ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
 
 # Some doc found there http://wiki.debian.org/cowbuilder
@@ -126,7 +126,7 @@ CHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)_$(ARCH).changes
 PCHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)+p_$(ARCH).changes
 
 # Quite heavy version, but still requires to be root
-COWBUILDERCMD=cd $(BUILDPLACE) && dpkg-source -x $(BUILDFILES)/$(DSCFILE) ; cd $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) && pdebuild --pbuilder cowbuilder --buildresult $(BUILDRESULT) -- --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --buildplace $(BUILDPLACE) --aptcache $(APTCACHE) ; rm -rf $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) 
+COWBUILDERCMD=cd $(BUILDPLACE) && dpkg-source -x $(BUILDFILES)/$(DSCFILE) ; cd $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) && pdebuild --pbuilder cowbuilder --buildresult $(BUILDRESULT) -- --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --buildplace $(BUILDPLACE) --aptcache $(APTCACHE) ; rm -rf $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR)
 # This one is with sudo and probably faster
 COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --configfile $(COWBUILDERBASE)/configfile-$(ARCH) $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
 
@@ -219,13 +219,13 @@ documentor_subdir=PhpDocumentor-1.4.3
 #
 
 orig:   # Make Debian package .orig tarball #
-	$(MAKE) $(TARBALLS)/$(ORIGFILE) 
+	$(MAKE) $(TARBALLS)/$(ORIGFILE)
 
 #
 # PHPDOCUMENTOR
 #
 # Get phpdocumentor, install phpdocumentor, build $(PKGNAME) phpdoc
-phpdoc: $(PKGDIR)/docs/phpdoc/docs 
+phpdoc: $(PKGDIR)/docs/phpdoc/docs
 
 doc:
 	(cd src/docs/docbook ; make debian TARGET=$(CURDIR)/build/docs/docbook/)
@@ -244,7 +244,7 @@ phpdocumentor_unpack: phpdocumentor_get
 $(documentor_path)/$(documentor_subdir)/patched: phpdocumentor_unpack
 	cd $(documentor_path)/$(documentor_subdir) && \
         patch < $(CURDIR)/$(PKGDIR)/docs/phpdoc/phpDocumentor.ini.patch \
-        && touch $(documentor_path)/$(documentor_subdir)/patched 
+        && touch $(documentor_path)/$(documentor_subdir)/patched
 $(PKGDIR)/docs/phpdoc/docs: $(documentor_path)/$(documentor_subdir)/patched
 	cd $(PKGDIR)/docs/phpdoc/ && ./makedoc.sh
 
@@ -440,7 +440,8 @@ $(LOCALREPO):
 	if [ -w `dirname $@` ] ; then mkdir $@ ; else sudo mkdir $@ ; sudo chown `id -u`.`id -g` $@; fi
 
 clean: # Clean $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) (intermediate files) #
-	rm -rf $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) 
+	rm -rf $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) $(BUILDFILES) $(TARBALLS)
+	rmdir $(BUILDPLACE) && mkdir $(BUILDPLACE) || true
 
 cleanenv: # Clean $(COWBUILDERBASE) $(PBUILDERTGZ) (chroots)#
 	sudo rm -rf $(COWBUILDERBASE) $(PBUILDERTGZ)

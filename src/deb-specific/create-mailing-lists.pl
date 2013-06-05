@@ -69,6 +69,7 @@ eval {
 # To be revised by Roland Mas
 #	system ($cmd) ;
 	open CONFIG, ">>$tmp" ;
+	print CONFIG "# -*- coding: utf-8 -*-\n";
 	print CONFIG "description = \"$description\"\n" ;
 	print CONFIG "host_name = '$sys_lists_host'\n" ;
 	if (!$is_public) {
@@ -170,6 +171,7 @@ eval {
 # To be revised by Roland Mas
 #	system ($cmd) ;
 	open CONFIG, ">>$tmp" ;
+	print CONFIG "# -*- coding: utf-8 -*-\n";
 	print CONFIG "description = \"$description\"\n" ;
 	print CONFIG "host_name = '$sys_lists_host'\n" ;
 	if (!$is_public) {

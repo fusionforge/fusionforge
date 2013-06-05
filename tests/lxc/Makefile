@@ -65,6 +65,9 @@ installtemplate: /usr/share/lxc/templates/lxc-debian7 /usr/share/lxc/templates/l
 /usr/share/lxc/templates/lxc-centos6: lxc-centos6 /usr/share/lxc
 	cp lxc-centos6 /usr/share/lxc/templates/
 
+/usr/share/lxc/templates/lxc-centos5: lxc-centos5 /usr/share/lxc
+	cp lxc-centos5 /usr/share/lxc/templates/
+
 createdeb:
 	sudo /usr/bin/lxc-create -n dhdebian7.local -f config.debian7 -t debian7
 
