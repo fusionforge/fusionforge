@@ -5,6 +5,7 @@
 # Reworked for 5.x by Alain Peyrat <aljeux@free.fr>
 #
 # Copyright (C) 2010-2012 Alain Peyrat
+# Copyrght 2013, Franck Villaume - TrivialDev
 #
 
 # Global Definitions
@@ -358,22 +359,6 @@ Requires: %{name} >= %{version}, php, subversion, viewvc
 This RPM installs SCM SVN plugin for FusionForge and provides svn support
 to FusionForge.
 
-%package plugin-svncommitemail
-Summary: subversion commit email plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php, subversion, perl, %{name}-plugin-scmsvn >= %{version}
-%description plugin-svncommitemail
-This RPM installs subversion commit email notification plugin for FusionForge.
-
-%package plugin-svntracker
-Summary: SVNTracker plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php, subversion, perl, postgresql, %{name}-plugin-scmsvn >= %{version}
-%description plugin-svntracker
-SVNTracker plugin allows linking SVN log messages to Trackers and tasks.
-It will review all commits in a project and search for a specific string
-to know which task or tracker is related.
-
 %package plugin-blocks
 Summary: Blocks plugin for FusionForge
 Group: Development/Tools
@@ -649,13 +634,6 @@ done
 %{__ln_s} /usr/share/gitweb/static/gitweb.js $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/www/gitweb.js
 
 # plugin: scmhg
-
-# plugin: svncommitemail
-
-# plugin: svntracker
-%{__ln_s} ../../plugins/svntracker/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/svntracker
-# install crontab
-%{__install} -m 644 plugins/svntracker/rpm-specific/cron.d/gforge-plugin-svntracker $RPM_BUILD_ROOT%{_sysconfdir}/cron.d
 
 # plugin: blocks
 %{__ln_s} ../../plugins/blocks/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/blocks
@@ -1107,17 +1085,6 @@ fi
 %{FORGE_DIR}/plugins/scmsvn
 %{FORGE_DIR}/www/plugins/scmsvn
 %{FORGE_VAR_LIB}/chroot/scmrepos/svn
-
-%files plugin-svncommitemail
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/svncommitemail.ini
-%{FORGE_DIR}/plugins/svncommitemail
-
-%files plugin-svntracker
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/svntracker/
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/svntracker.ini
-%{_sysconfdir}/cron.d/gforge-plugin-svntracker
-%{FORGE_DIR}/plugins/svntracker
-%{FORGE_DIR}/www/plugins/svntracker
 
 %files plugin-blocks
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/blocks.ini

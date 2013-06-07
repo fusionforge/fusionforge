@@ -279,8 +279,6 @@ class SVNPlugin extends SCMPlugin {
 			}
 		}
 
-		$this->installOrUpdateCmds($project, $project->getUnixName(), $repo);
-
 		if (forge_get_config('use_ssh', 'scmsvn')) {
 			$unix_group = 'scm_' . $project->getUnixName();
 			system("find $repo -type d | xargs -I{} chmod g+s {}");
@@ -627,85 +625,6 @@ class SVNPlugin extends SCMPlugin {
 		$params['ids'][] = $this->name;
 		$params['texts'][] = _('Subversion Commits');
 		return true;
-	}
-
-	function installOrUpdateCmds($project, $unix_group_name, $repos) {
-
-		$hooks = array();
-		$params = array();
-		$params['unix_group_name'] = $unix_group_name;
-		$group = group_get_object_by_name($unix_group_name);
-		$params['group_id'] = $group->getID();
-		$params['repos'] = $repos;
-		$params['hooks'] = &$hooks;
-		plugin_hook_by_reference('cmd_for_post_commit_hook', $params);
-
-		foreach ($params['hooks'] as $plugin => $cmd ) {
-			if (getenv('sys_localinc')) {
-				$cmd = 'sys_localinc='.getenv(sys_localinc).' '.$cmd;
-			}
-			$contents = @file_get_contents($repos."/hooks/post-commit");
-			if ($project->usesPlugin($plugin)) {
-				if (strstr($contents, "#begin added by $plugin") === false ) {
-					$this->installCmdInHook($repos, $plugin, $cmd);
-				} else {
-					$this->updateCmdInHook($repos, $plugin, $cmd);
-				}
-			} elseif (!$project->usesPlugin($plugin) &&
-			(strstr($contents, "#begin added by $plugin") !== false )) {
-				$this->removeCmdInHook($repos, $plugin);
-			}
-		}
-	}
-
-	function installCmdInHook($repos, $name, $text) {
-
-		if (file_exists($repos.'/hooks/post-commit')) {
-			$FOut = fopen($repos.'/hooks/post-commit', "a+");
-			$Line = '';
-		} else {
-			$FOut = fopen($repos.'/hooks/post-commit', "w");
-			$Line = '#!/bin/sh'."\n"; // add this line to first line or else the script fails
-		}
-
-		if ($FOut) {
-			$Line .= "\n#begin added by $name\n$text\n#end added by $name\n";
-
-			fwrite($FOut, $Line);
-
-			system("chmod 700 $repos/hooks/post-commit");
-			fclose($FOut);
-		}
-	}
-
-	function updateCmdInHook($repos, $plugin, $text) {
-
-		$contents = @file_get_contents($repos."/hooks/post-commit");
-
-		$new = preg_replace("/(#begin added by $plugin\n)(.*)(\n#end added by $plugin)/s", '$1{COMMAND}$3', $contents);
-		$new = str_replace('{COMMAND}', $text, $new);
-
-		if ($contents !== $new) {
-			$fout = fopen($repos.'/hooks/post-commit', "w");
-			fwrite($fout, $new);
-			fclose($fout);
-		}
-	}
-
-	function removeCmdInHook($repos, $plugin) {
-
-		$contents = @file_get_contents($repos."/hooks/post-commit");
-		$new = preg_replace("/#begin added by $plugin\n.*?\n#end added by $plugin/s", '', $contents);
-
-		if ($contents !== $new) {
-			if (preg_match("/^#\!\/bin\/sh(\n+)$/s", $new)) {
-				unlink($repos.'/hooks/post-commit');
-			} else {
-				$fout = fopen($repos.'/hooks/post-commit', "w");
-				fwrite($fout, $new);
-				fclose($fout);
-			}
-		}
 	}
 }
 

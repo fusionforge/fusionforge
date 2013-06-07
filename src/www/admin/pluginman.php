@@ -7,6 +7,7 @@
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat - Alcatel-Lucent
  * Copyright (C) 2011, 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -141,10 +142,6 @@ echo $HTML->listTableTop($title_arr);
 $pm = plugin_manager_get_object();
 
 // Simple hack to disable dependent plugins.
-if (!$pm->PluginIsInstalled('scmsvn')) {
-	$plugins_disabled[] = 'svncommitemail';
-	$plugins_disabled[] = 'svntracker';
-}
 if (!$pm->PluginIsInstalled('scmcvs')) {
 	$plugins_disabled[] = 'cvssyncmail';
 	$plugins_disabled[] = 'cvstracker';

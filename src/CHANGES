@@ -25,6 +25,8 @@ Plugins:
 * scmhook: Add commitEmail support for scmhg plugin (TrivialDev)
 * new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects 
 * blocks: improved with a new HTML widget for the project summary page (Alcatel-Lucent)
+* svntracker : this plugin is superseed by scmhook
+* svncommitemail : this plugin is superseed by scmhook
 
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)
