@@ -1463,7 +1463,7 @@ function util_get_maxuploadfilesize() {
 
 	$postfile = (int)(($postmax * 3) / 4);
 
-	if ($postfile < $maxfile)
+	if ($postfile > $maxfile)
 		$postfile = $maxfile;
 
 	return $postfile;
