@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-02 21:26+0200\n"
+"POT-Creation-Date: 2013-06-12 17:36+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -431,7 +431,7 @@ msgid "Document Directory:"
 msgstr "Название документа"
 
 #: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:130
-#: common/include/Error.class.php:189 common/mail/MailingList.class.php:80
+#: common/include/Error.class.php:189 common/mail/MailingList.class.php:79
 #: common/survey/Survey.class.php:79 common/survey/SurveyQuestion.class.php:70
 #: plugins/mailman/include/MailmanList.class.php:104
 msgid "Group_id in db result does not match Group Object"
@@ -498,7 +498,7 @@ msgid "Updated directory"
 msgstr "Обновить запись:"
 
 #: common/docman/DocumentGroup.class.php:709
-#: common/forum/ForumHTML.class.php:72 plugins/contribtracker/www/index.php:35
+#: common/forum/ForumHTML.class.php:73 plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
 #: plugins/mantisbt/view/admin/StatPerStatus.php:47
 #: plugins/mantisbt/view/viewIssues.php:247 www/admin/database.php:81
@@ -511,7 +511,7 @@ msgid "Project"
 msgstr "Проект"
 
 #: common/docman/DocumentGroup.class.php:709
-#: common/forum/ForumHTML.class.php:72
+#: common/forum/ForumHTML.class.php:73
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: plugins/mantisbt/action/addAttachment.php:38
@@ -620,7 +620,7 @@ msgstr "Последние изменение"
 #: common/docman/views/listtrashfile.php:171
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
-#: common/forum/ForumHTML.class.php:220 common/pm/ProjectTask.class.php:1207
+#: common/forum/ForumHTML.class.php:221 common/pm/ProjectTask.class.php:1207
 #: common/tracker/actions/browse.php:608 common/tracker/actions/browse.php:619
 #: common/tracker/actions/browse.php:639 common/tracker/actions/detail.php:68
 #: common/tracker/actions/downloadcsv.php:84
@@ -650,17 +650,17 @@ msgstr "Последние изменение"
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:110
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:61
-#: www/account/editsshkeys.php:59 www/account/index.php:135
-#: www/account/index.php:312 www/admin/cronman.php:78
+#: www/account/editsshkeys.php:59 www/account/index.php:148
+#: www/account/index.php:325 www/admin/cronman.php:78
 #: www/admin/grouplist.php:118 www/admin/massmail.php:158
 #: www/admin/search.php:88 www/admin/search.php:168 www/admin/userlist.php:115
 #: www/developer/diary.php:56 www/developer/diary.php:87
 #: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
-#: www/export/tracker.php:108 www/forum/index.php:89 www/forum/message.php:127
+#: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:148 www/frs/index.php:207
 #: www/include/html.php:1009 www/include/stats_function.php:77
 #: www/include/stats_function.php:98 www/news/news_utils.php:147
-#: www/news/news_utils.php:267 www/people/people_utils.php:422
+#: www/news/news_utils.php:267 www/people/people_utils.php:421
 #: www/people/viewjob.php:78 www/pm/browse_task.php:265
 #: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
 #: www/pm/include/ProjectTaskHTML.class.php:175
@@ -672,7 +672,7 @@ msgstr "Последние изменение"
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:62
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:62
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:63
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:93
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:89
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
@@ -769,13 +769,13 @@ msgstr "(как минимум %1$s букв)"
 #: plugins/oauthprovider/www/consumer.php:110
 #: plugins/oauthprovider/www/consumer_update_page.php:65
 #: plugins/scmhg/common/HgPlugin.class.php:620
-#: plugins/scmhook/common/scmhookPlugin.class.php:288
-#: plugins/scmhook/common/scmhookPlugin.class.php:331
-#: plugins/scmhook/common/scmhookPlugin.class.php:374
-#: plugins/scmhook/common/scmhookPlugin.class.php:435
-#: plugins/scmhook/common/scmhookPlugin.class.php:496
-#: www/forum/admin/index.php:111 www/forum/admin/index.php:152
-#: www/forum/index.php:68 www/mail/index.php:79 www/people/editjob.php:52
+#: plugins/scmhook/common/scmhookPlugin.class.php:287
+#: plugins/scmhook/common/scmhookPlugin.class.php:330
+#: plugins/scmhook/common/scmhookPlugin.class.php:373
+#: plugins/scmhook/common/scmhookPlugin.class.php:434
+#: plugins/scmhook/common/scmhookPlugin.class.php:495
+#: www/forum/admin/index.php:117 www/forum/admin/index.php:158
+#: www/forum/index.php:69 www/mail/index.php:79 www/people/editjob.php:52
 #: www/people/editjob.php:74 www/pm/admin/index.php:286
 #: www/pm/admin/index.php:325 www/pm/index.php:100
 #: www/project/admin/editimages.php:228 www/project/admin/editimages.php:255
@@ -783,7 +783,7 @@ msgstr "(как минимум %1$s букв)"
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
-#: www/snippet/package.php:152 www/snippet/submit.php:110
+#: www/snippet/package.php:151 www/snippet/submit.php:108
 msgid "Description"
 msgstr "Описание"
 
@@ -1159,7 +1159,6 @@ msgstr ""
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:49
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:133
-#: plugins/svntracker/common/svntrackerPlugin.class.php:102
 #: www/frs/index.php:177
 msgid "Filename"
 msgstr "Имя файла"
@@ -1177,13 +1176,13 @@ msgstr "Имя файла"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/account/register.php:159 www/people/editjob.php:52
 #: www/people/editjob.php:74 www/people/editprofile.php:107
-#: www/people/people_utils.php:405 www/people/skills_utils.php:49
+#: www/people/people_utils.php:404 www/people/skills_utils.php:49
 #: www/pm/admin/index.php:188
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
-#: www/snippet/browse.php:82 www/snippet/package.php:148
-#: www/snippet/snippet_utils.php:156 www/snippet/submit.php:106
+#: www/snippet/browse.php:84 www/snippet/package.php:147
+#: www/snippet/snippet_utils.php:156 www/snippet/submit.php:104
 msgid "Title"
 msgstr "Заголовок"
 
@@ -1196,9 +1195,8 @@ msgstr "Заголовок"
 #: plugins/forumml/www/forumml_utils.php:64
 #: plugins/forumml/www/forumml_utils.php:189
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
-#: plugins/svntracker/common/svntrackerPlugin.class.php:107
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
-#: www/forum/forum.php:246 www/forum/message.php:160
+#: www/forum/forum.php:247 www/forum/message.php:160
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:49
 #: www/snippet/detail.php:66 www/snippet/detail.php:155
@@ -1229,7 +1227,7 @@ msgstr "Фамилия:"
 #: plugins/mantisbt/view/editIssue.php:130
 #: plugins/mantisbt/view/viewIssue.php:87
 #: plugins/mantisbt/view/viewIssues.php:305 www/admin/groupedit.php:108
-#: www/admin/grouplist.php:68 www/admin/pluginman.php:133
+#: www/admin/grouplist.php:68 www/admin/pluginman.php:134
 #: www/admin/search.php:77 www/admin/search.php:152 www/admin/userlist.php:66
 #: www/export/rssAboTask.php:145 www/frs/admin/editrelease.php:235
 #: www/frs/admin/index.php:155 www/my/dashboard.php:69
@@ -1557,7 +1555,7 @@ msgid "Y-m"
 msgstr ""
 
 #: common/docman/views/reporting.php:136 www/frs/reporting/downloads.php:160
-#: www/stats/site_stats_utils.php:412
+#: www/stats/site_stats_utils.php:414
 msgid "Month"
 msgstr "Месяц"
 
@@ -1584,7 +1582,7 @@ msgstr ""
 msgid "User"
 msgstr "Пользователь"
 
-#: common/docman/views/reporting.php:153 common/forum/ForumHTML.class.php:68
+#: common/docman/views/reporting.php:153 common/forum/ForumHTML.class.php:69
 #: common/tracker/actions/detail.php:68
 #: common/tracker/include/ArtifactHtml.class.php:111
 #: common/tracker/include/ArtifactHtml.class.php:148
@@ -1596,10 +1594,9 @@ msgstr "Пользователь"
 #: plugins/contribtracker/www/project_admin.php:289
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:109
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:134
-#: plugins/svntracker/common/svntrackerPlugin.class.php:103
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/admin/cronman.php:42 www/admin/massmail.php:139
-#: www/developer/diary.php:81 www/forum/forum.php:247
+#: www/developer/diary.php:81 www/forum/forum.php:248
 #: www/forum/message.php:161 www/frs/admin/showreleases.php:101
 #: www/frs/index.php:178 www/frs/reporting/downloads.php:177
 #: www/news/admin/news_admin_utils.php:57 www/pm/calendar.php:268
@@ -1626,8 +1623,8 @@ msgstr "Дневник дополнен"
 
 #: common/docman/views/search.php:63 common/include/Navigation.class.php:171
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
-#: www/admin/index.php:67 www/admin/index.php:144
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:330
+#: www/admin/index.php:67 www/admin/index.php:152
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:336
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:57
 msgid "Search"
 msgstr "Поиск"
@@ -1701,8 +1698,8 @@ msgstr "Дочерний проект"
 msgid "Browse document manager in this project"
 msgstr "Вы уже участник этого проекта."
 
-#: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:318
-#: www/forum/admin/index.php:324 www/forum/admin/index.php:389
+#: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:325
+#: www/forum/admin/index.php:331 www/forum/admin/index.php:396
 #: www/forum/admin/monitor.php:41
 #, fuzzy
 msgid "Could Not Get Forum Object"
@@ -1747,11 +1744,11 @@ msgstr "Невозможно получение группы проекта"
 #: plugins/scmgit/common/GitPlugin.class.php:1089
 #: www/admin/admin_table.php:162 www/admin/admin_table.php:326
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:152
-#: www/admin/useredit.php:231 www/forum/admin/index.php:167
-#: www/forum/admin/index.php:178 www/frs/admin/deletepackage.php:73
+#: www/admin/useredit.php:231 www/forum/admin/index.php:174
+#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:73
 #: www/frs/admin/deleterelease.php:77 www/frs/admin/index.php:184
 #: www/frs/admin/showreleases.php:114 www/news/admin/index.php:133
-#: www/people/people_utils.php:177 www/people/people_utils.php:322
+#: www/people/people_utils.php:177 www/people/people_utils.php:321
 #: www/people/skills_utils.php:46 www/people/skills_utils.php:104
 #: www/pm/admin/index.php:363 www/pm/admin/index.php:374
 #: www/project/admin/vhost.php:145 www/reporting/timeadd.php:157
@@ -1812,7 +1809,7 @@ msgid "File Updated Successfully"
 msgstr "Файл успешно обновлен"
 
 #: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:116
-#: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:56
+#: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
 #, php-format
 msgid "%s does not use the Forum tool"
 msgstr ""
@@ -1821,7 +1818,7 @@ msgstr ""
 msgid "Move thread"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:83 www/forum/admin/index.php:98
+#: common/forum/ForumAdmin.class.php:83 www/forum/admin/index.php:104
 msgid "Add forum"
 msgstr "Добавить форум"
 
@@ -1845,7 +1842,7 @@ msgstr "Информация форума дополнена"
 msgid "Forum added successfully"
 msgstr "Создан новый форум"
 
-#: common/forum/ForumAdmin.class.php:229 www/forum/admin/index.php:285
+#: common/forum/ForumAdmin.class.php:229 www/forum/admin/index.php:292
 msgid "Error Getting ForumMessage"
 msgstr "Сообщение форума блокировано"
 
@@ -1869,8 +1866,8 @@ msgstr "У группы на форуме нет управляющего"
 msgid "Proceed? Actions are permanent!"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:317 www/forum/admin/index.php:107
-#: www/forum/admin/index.php:144
+#: common/forum/ForumAdmin.class.php:317 www/forum/admin/index.php:113
+#: www/forum/admin/index.php:150
 msgid "Forum Name"
 msgstr "Имя форума"
 
@@ -1897,8 +1894,8 @@ msgstr "Без модерирования"
 msgid "Release"
 msgstr "Релизы"
 
-#: common/forum/ForumAdmin.class.php:357 common/forum/ForumHTML.class.php:329
-#: common/forum/ForumHTML.class.php:544
+#: common/forum/ForumAdmin.class.php:357 common/forum/ForumHTML.class.php:330
+#: common/forum/ForumHTML.class.php:545
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
 #: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
@@ -1914,13 +1911,13 @@ msgstr "Релизы"
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
 #: plugins/webanalytics/view/admin/updateLinkValue.php:41
-#: www/account/index.php:340 www/account/lostlogin.php:100
+#: www/account/index.php:353 www/account/lostlogin.php:100
 #: www/admin/groupedit.php:224 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
-#: www/admin/vhost.php:189 www/forum/admin/index.php:156
+#: www/admin/vhost.php:189 www/forum/admin/index.php:162
 #: www/frs/admin/index.php:181 www/mail/admin/index.php:230
 #: www/mail/admin/index.php:283 www/people/people_utils.php:176
-#: www/people/people_utils.php:321 www/pm/admin/index.php:343
+#: www/people/people_utils.php:320 www/pm/admin/index.php:343
 #: www/pm/calendar.php:293 www/project/admin/database.php:234
 #: www/project/admin/index.php:289 www/project/admin/tools.php:304
 #: www/reporting/timecategory.php:98 www/scm/admin/index.php:176
@@ -1931,19 +1928,19 @@ msgstr "Обновить"
 msgid "Forum deleted"
 msgstr "Форум удален"
 
-#: common/forum/ForumAdmin.class.php:416 www/forum/forum.php:69
+#: common/forum/ForumAdmin.class.php:416 www/forum/forum.php:70
 #: www/forum/message.php:72
 msgid "Error getting new Forum"
 msgstr "Ошибка при создании форума"
 
 #: common/forum/ForumAdmin.class.php:422
-#: www/forum/admin/pendingmsgdetail.php:57 www/forum/forum.php:88
+#: www/forum/admin/pendingmsgdetail.php:57 www/forum/forum.php:89
 #: www/forum/message.php:82
 msgid "Error getting new ForumMessage"
 msgstr "Ошибка получения нового сообщения форума"
 
 #: common/forum/ForumAdmin.class.php:424
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:91
+#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
 msgid "Error getting new ForumMessage: "
 msgstr "Ошибка получения нового сообщения форума:"
 
@@ -1953,8 +1950,8 @@ msgid "Pending message released"
 msgstr "Ожидание открытия форума"
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:181
-#: common/forum/ForumMessage.class.php:274
+#: common/forum/ForumMessage.class.php:183
+#: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "Временно недоступно создание заглавной темы"
 
@@ -2019,7 +2016,7 @@ msgstr "Сохранять позиции Вы можете лишь автор�
 msgid "Forum::savePlace()"
 msgstr "Сохранить позицию Форума"
 
-#: common/forum/Forum.class.php:598 common/mail/MailingList.class.php:257
+#: common/forum/Forum.class.php:598 common/mail/MailingList.class.php:256
 #: plugins/mailman/include/MailmanList.class.php:250
 #: plugins/mailman/include/MailmanList.class.php:377
 #: plugins/mailman/include/MailmanList.class.php:394
@@ -2029,8 +2026,8 @@ msgid "Error On Update:"
 msgstr "Ошибка при изменении"
 
 #: common/forum/Forum.class.php:613 common/frs/FRSPackage.class.php:451
-#: common/frs/FRSRelease.class.php:349 common/include/Group.class.php:1577
-#: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:360
+#: common/frs/FRSRelease.class.php:349 common/include/Group.class.php:1575
+#: common/mail/MailingList.class.php:384 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
 #: common/tracker/ArtifactExtraField.class.php:430
 #: common/tracker/ArtifactType.class.php:791
@@ -2049,7 +2046,7 @@ msgid "Forum:: No Valid Group Object"
 msgstr "Forum:: Объект не соответствует группе"
 
 #: common/forum/ForumFactory.class.php:56 common/include/rbac_texts.php:158
-#: www/forum/index.php:68 www/forum/myforums.php:69
+#: www/forum/index.php:69 www/forum/myforums.php:69
 msgid "Forum"
 msgstr "Форум"
 
@@ -2062,17 +2059,17 @@ msgstr "Доступ к странице блокирован"
 msgid "Forum not found"
 msgstr "Нет форума"
 
-#: common/forum/ForumHTML.class.php:57 www/forum/forum.php:156
+#: common/forum/ForumHTML.class.php:58 www/forum/forum.php:157
 #, fuzzy
 msgid "Forum: "
 msgstr "Форум"
 
-#: common/forum/ForumHTML.class.php:67
+#: common/forum/ForumHTML.class.php:68
 #, fuzzy
 msgid "Posted by:"
 msgstr "Опубликовал:"
 
-#: common/forum/ForumHTML.class.php:69 common/include/Navigation.class.php:380
+#: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:380
 #: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:556
 #: common/tracker/actions/detail.php:96
 #: common/tracker/actions/mod-limited.php:142
@@ -2087,33 +2084,33 @@ msgstr "Опубликовал:"
 #: www/my/dashboard.php:65 www/my/diary.php:181 www/pm/browse_task.php:145
 #: www/project/report/index.php:136
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:57
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:48
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:49
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:49
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:49
 msgid "Summary"
 msgstr "Общее"
 
-#: common/forum/ForumHTML.class.php:84
+#: common/forum/ForumHTML.class.php:85
 #, fuzzy
 msgid "Content:"
 msgstr "Новое содержимое"
 
-#: common/forum/ForumHTML.class.php:94
+#: common/forum/ForumHTML.class.php:95
 #: common/widget/Widget_ProjectLatestNews.class.php:42
 #: www/export/projnews.php:72 www/index_std.php:100
 msgid "Latest News"
 msgstr "Новости"
 
-#: common/forum/ForumHTML.class.php:105
+#: common/forum/ForumHTML.class.php:106
 #, fuzzy
 msgid "View Forums"
 msgstr "Использовать форумы"
 
-#: common/forum/ForumHTML.class.php:110
+#: common/forum/ForumHTML.class.php:111
 msgid "Discussion Forums:"
 msgstr "Дискуссионные форумы:"
 
-#: common/forum/ForumHTML.class.php:114 common/forum/ForumHTML.class.php:120
+#: common/forum/ForumHTML.class.php:115 common/forum/ForumHTML.class.php:121
 #: common/frs/include/frs_utils.php:78
 #: common/tracker/actions/admin-tracker.php:32
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:59
@@ -2130,63 +2127,63 @@ msgstr "Дискуссионные форумы:"
 msgid "Administration"
 msgstr "Администрирование"
 
-#: common/forum/ForumHTML.class.php:139 www/forum/monitor.php:59
+#: common/forum/ForumHTML.class.php:140 www/forum/monitor.php:59
 msgid "Stop Monitoring"
 msgstr "Снять с контроля"
 
-#: common/forum/ForumHTML.class.php:142 common/forum/ForumHTML.class.php:149
+#: common/forum/ForumHTML.class.php:143 common/forum/ForumHTML.class.php:150
 msgid "Monitor Forum"
 msgstr "Взять на контроль"
 
-#: common/forum/ForumHTML.class.php:145
+#: common/forum/ForumHTML.class.php:146
 msgid "Save Place"
 msgstr "Запомнить позицию"
 
-#: common/forum/ForumHTML.class.php:154 common/forum/ForumHTML.class.php:155
+#: common/forum/ForumHTML.class.php:155 common/forum/ForumHTML.class.php:156
 msgid "Start New Thread"
 msgstr "Начать ветвь"
 
-#: common/forum/ForumHTML.class.php:204
+#: common/forum/ForumHTML.class.php:205
 msgid "This is the content of the pending message"
 msgstr "Содержимое незаконченного сообщения"
 
-#: common/forum/ForumHTML.class.php:210 common/forum/ForumHTML.class.php:268
+#: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:269
 #: www/forum/message.php:126
 msgid "By:"
 msgstr "От:"
 
-#: common/forum/ForumHTML.class.php:267 www/forum/message.php:123
+#: common/forum/ForumHTML.class.php:268 www/forum/message.php:123
 msgid "reply"
 msgstr "Ответить"
 
-#: common/forum/ForumHTML.class.php:312
+#: common/forum/ForumHTML.class.php:313
 msgid "Current File"
 msgstr "Текущий файл"
 
-#: common/forum/ForumHTML.class.php:320 common/forum/ForumHTML.class.php:355
+#: common/forum/ForumHTML.class.php:321 common/forum/ForumHTML.class.php:356
 msgid "Use the \"Browse\" button to find the file you want to attach"
 msgstr ""
 "Воспользуйтесь клавишей \"Обзор\" для указания пути к файлу который вы "
 "желаете прикрепить"
 
-#: common/forum/ForumHTML.class.php:323 common/forum/ForumHTML.class.php:358
+#: common/forum/ForumHTML.class.php:324 common/forum/ForumHTML.class.php:359
 msgid "File to upload"
 msgstr "Файл для загрузки"
 
-#: common/forum/ForumHTML.class.php:326
+#: common/forum/ForumHTML.class.php:327
 #, fuzzy
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Внимание! Файл будет удален безвозвратно"
 
-#: common/forum/ForumHTML.class.php:516 common/forum/ForumHTML.class.php:581
+#: common/forum/ForumHTML.class.php:517 common/forum/ForumHTML.class.php:582
 msgid "Subject:"
 msgstr "Тема:"
 
-#: common/forum/ForumHTML.class.php:519 common/forum/ForumHTML.class.php:584
+#: common/forum/ForumHTML.class.php:520 common/forum/ForumHTML.class.php:585
 msgid "Message:"
 msgstr "Сообщение:"
 
-#: common/forum/ForumHTML.class.php:545
+#: common/forum/ForumHTML.class.php:546
 #: common/tracker/views/form-adminroadmap.php:167
 #: common/tracker/views/form-adminroadmap.php:235
 #: common/widget/Widget.class.php:103
@@ -2199,7 +2196,7 @@ msgstr "Сообщение:"
 #: plugins/scmhg/common/HgPlugin.class.php:624
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:59 www/admin/admin_table.php:165
-#: www/admin/admin_table.php:224 www/forum/admin/index.php:406
+#: www/admin/admin_table.php:224 www/forum/admin/index.php:413
 #: www/forum/monitor.php:65 www/my/rmproject.php:98
 #: www/people/editprofile.php:158 www/people/editprofile.php:217
 #: www/pm/mod_task.php:289 www/register/index.php:305
@@ -2208,89 +2205,90 @@ msgstr "Сообщение:"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: common/forum/ForumHTML.class.php:601
+#: common/forum/ForumHTML.class.php:602
 msgid "HTML tags will display in your post as text"
 msgstr "HTML теги будут отображаться как текст"
 
-#: common/forum/ForumHTML.class.php:608
+#: common/forum/ForumHTML.class.php:609
 #, fuzzy, php-format
 msgid ""
 "You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
 "a>"
 msgstr "Вы пишите сообщение анонимно"
 
-#: common/forum/ForumHTML.class.php:612
+#: common/forum/ForumHTML.class.php:613
 msgid "Post Comment"
 msgstr "Отправить сообщение"
 
-#: common/forum/ForumHTML.class.php:612
+#: common/forum/ForumHTML.class.php:613
 msgid "Anonymously"
 msgstr "Анонимно"
 
-#: common/forum/ForumHTML.class.php:613
+#: common/forum/ForumHTML.class.php:614
 msgid "Receive followups via email"
 msgstr "Получать ответы по почте"
 
-#: common/forum/ForumHTML.class.php:625
+#: common/forum/ForumHTML.class.php:626
 #, fuzzy, php-format
 msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
 msgstr "Вы сможете оставлять сообщения %1$s войдя в Вашу учетную запись %2$s"
 
-#: common/forum/ForumHTML.class.php:629
+#: common/forum/ForumHTML.class.php:630
 #, php-format
 msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:58
+#: common/forum/ForumMessage.class.php:60
 msgid "ForumMessage:: No Valid Forum Object"
 msgstr "ForumMessage:: Неправильный объект форума"
 
-#: common/forum/ForumMessage.class.php:86
+#: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
 msgstr "Group_forum_id в базе данных результат неимеет соответствий"
 
-#: common/forum/ForumMessage.class.php:111
-#: common/forum/ForumMessage.class.php:260
+#: common/forum/ForumMessage.class.php:113
+#: common/forum/ForumMessage.class.php:262
 msgid "Getting next thread_id failed"
 msgstr "Невозможно получить идентификатор"
 
-#: common/forum/ForumMessage.class.php:128
-#: common/forum/ForumMessage.class.php:213
-#: common/forum/ForumMessage.class.php:219
-#: common/forum/ForumMessage.class.php:313
+#: common/forum/ForumMessage.class.php:130
+#: common/forum/ForumMessage.class.php:215
+#: common/forum/ForumMessage.class.php:221
+#: common/forum/ForumMessage.class.php:315
 msgid "ForumMessage::create() Posting Failed"
 msgstr "Ошибка при создании сообщения"
 
-#: common/forum/ForumMessage.class.php:139
-#: common/forum/ForumMessage.class.php:224
-#: common/forum/ForumMessage.class.php:325
+#: common/forum/ForumMessage.class.php:141
+#: common/forum/ForumMessage.class.php:226
+#: common/forum/ForumMessage.class.php:327
 msgid "ForumMessage::create() Unable to get new message id"
 msgstr "Ошибка при получении идентификатора"
 
-#: common/forum/ForumMessage.class.php:192
-#: common/forum/ForumMessage.class.php:285
-#: common/forum/ForumMessage.class.php:297
+#: common/forum/ForumMessage.class.php:194
+#: common/forum/ForumMessage.class.php:287
+#: common/forum/ForumMessage.class.php:299
 msgid "Could Not Update Parent"
 msgstr "Невозможно обновить структуру"
 
-#: common/forum/ForumMessage.class.php:355
-msgid "Must Include A Message Body And Subject"
+#: common/forum/ForumMessage.class.php:357
+#, fuzzy
+msgid "Error: a forum message must iclude a message body and a subject."
 msgstr "Должен иметь тему и содержать текст сообщения"
 
-#: common/forum/ForumMessage.class.php:371
+#: common/forum/ForumMessage.class.php:373
 msgid "ForumMessage::create() No Valid ParentMessage Object"
 msgstr "ForumMessage::create() неправильное вложение"
 
-#: common/forum/ForumMessage.class.php:405
-#: common/forum/ForumMessage.class.php:424
+#: common/forum/ForumMessage.class.php:407
+#: common/forum/ForumMessage.class.php:426
 msgid "ForumMessage::fetchData() Invalid MessageID"
 msgstr "ForumMessage::fetchData() неправильный указатель в письме"
 
-#: common/forum/ForumMessage.class.php:577
+#: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr "неправильный идентификатор письма"
 
-#: common/forum/ForumMessage.class.php:658
+#: common/forum/ForumMessage.class.php:660
 #, php-format
 msgid ""
 "\n"
@@ -2298,7 +2296,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:660
+#: common/forum/ForumMessage.class.php:662
 #, php-format
 msgid ""
 "\n"
@@ -2309,7 +2307,7 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:666
+#: common/forum/ForumMessage.class.php:668
 #, php-format
 msgid ""
 "\n"
@@ -2318,18 +2316,23 @@ msgid ""
 "By: %s\n"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:671
+#: common/forum/ForumMessage.class.php:673
 #, fuzzy
 msgid "A file has been uploaded with this message."
 msgstr "Файл должен быть указан на этой странице."
 
-#: common/forum/ForumMessage.class.php:682
+#: common/forum/ForumMessage.class.php:684
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
+
+#: common/forum/ForumMessage.class.php:802
+#, fuzzy
+msgid "Error: a forum message must include a message body and a subject."
+msgstr "Должен иметь тему и содержать текст сообщения"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -2596,7 +2599,7 @@ msgstr "Карта категорий хранилища"
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
 #: www/snippet/addversion.php:94 www/snippet/addversion.php:217
-#: www/snippet/package.php:170 www/snippet/submit.php:138
+#: www/snippet/package.php:169 www/snippet/submit.php:136
 msgid "Version"
 msgstr "Версия"
 
@@ -2681,189 +2684,189 @@ msgstr "Нет доступа к изменению информации про�
 msgid "Error updating project information in plugin_hook group_update"
 msgstr "Нет доступа к изменению информации проекта: %s"
 
-#: common/include/Group.class.php:719
+#: common/include/Group.class.php:717
 #, fuzzy
 msgid "Invalid Status Change From: "
 msgstr "Неверное изменение статуса"
 
-#: common/include/Group.class.php:719
+#: common/include/Group.class.php:717
 msgid " To: "
 msgstr ""
 
-#: common/include/Group.class.php:730
+#: common/include/Group.class.php:728
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
 msgstr "Ошибка при изменении статуса группы: %s"
 
-#: common/include/Group.class.php:941
+#: common/include/Group.class.php:939
 msgid "Couldn't insert SCM_BOX to database"
 msgstr "Добавление в SCM базу репозиторя блокировано"
 
-#: common/include/Group.class.php:945
+#: common/include/Group.class.php:943
 msgid "SCM Box can't be empty"
 msgstr "Папка репозитория должна содержать хотябы один файл"
 
-#: common/include/Group.class.php:1545
+#: common/include/Group.class.php:1543
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
 
-#: common/include/Group.class.php:1554
+#: common/include/Group.class.php:1552
 #, fuzzy
 msgid "Setting tags:"
 msgstr "Установка"
 
-#: common/include/Group.class.php:1584
+#: common/include/Group.class.php:1582
 msgid "Cannot Delete System Group"
 msgstr "Нельзя удалять системные группы"
 
-#: common/include/Group.class.php:1606
+#: common/include/Group.class.php:1604
 #, fuzzy
 msgid "Could not properly remove member:"
 msgstr "При удалении списка рассылок произошла ошибка"
 
-#: common/include/Group.class.php:1630
+#: common/include/Group.class.php:1628
 #, fuzzy
 msgid "Could not properly delete the tracker:"
 msgstr "При удалении списка рассылок произошла ошибка"
 
-#: common/include/Group.class.php:1647
+#: common/include/Group.class.php:1645
 #, fuzzy
 msgid "Could not properly delete the forum:"
 msgstr "При удалении списка рассылок произошла ошибка"
 
-#: common/include/Group.class.php:1663
+#: common/include/Group.class.php:1661
 #, fuzzy
 msgid "Could not properly delete the ProjectGroup:"
 msgstr "При удалении списка рассылок произошла ошибка"
 
-#: common/include/Group.class.php:1674
+#: common/include/Group.class.php:1672
 #, fuzzy
 msgid "Error FRS Packages: "
 msgstr "Сообщение форума блокировано"
 
-#: common/include/Group.class.php:1682
+#: common/include/Group.class.php:1680
 #, fuzzy
 msgid "Could not properly delete the FRSPackage:"
 msgstr "При удалении списка рассылок произошла ошибка"
 
-#: common/include/Group.class.php:1693 common/include/Group.class.php:1708
+#: common/include/Group.class.php:1691 common/include/Group.class.php:1706
 #, fuzzy
 msgid "Error Deleting News: "
 msgstr "Ошибка при создании форума"
 
-#: common/include/Group.class.php:1701
+#: common/include/Group.class.php:1699
 #, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr "Невозможно удаление новостей форма: %d"
 
-#: common/include/Group.class.php:1719 common/include/Group.class.php:1727
+#: common/include/Group.class.php:1717 common/include/Group.class.php:1725
 #, fuzzy
 msgid "Error Deleting Documents: "
 msgstr "Ошибка вставки элемента"
 
-#: common/include/Group.class.php:1737
+#: common/include/Group.class.php:1735
 #, fuzzy
 msgid "Error Deleting Tags: "
 msgstr "Ошибка вставки элемента"
 
-#: common/include/Group.class.php:1748
+#: common/include/Group.class.php:1746
 #, fuzzy
 msgid "Error Deleting Project History: "
 msgstr "Нет доступа к изменению информации проекта: %s"
 
-#: common/include/Group.class.php:1759
+#: common/include/Group.class.php:1757
 #, fuzzy
 msgid "Error Deleting Project Plugins: "
 msgstr "Ошибка получения объекта участника: %s"
 
-#: common/include/Group.class.php:1770
+#: common/include/Group.class.php:1768
 #, fuzzy
 msgid "Error Deleting SCM Statistics: "
 msgstr "Ошибка получения списка"
 
-#: common/include/Group.class.php:1786
+#: common/include/Group.class.php:1784
 #, fuzzy
 msgid "Could not properly delete the survey"
 msgstr "При удалении списка рассылок произошла ошибка"
 
-#: common/include/Group.class.php:1802
+#: common/include/Group.class.php:1800
 #, fuzzy
 msgid "Could not properly delete the survey questions"
 msgstr "При удалении списка рассылок произошла ошибка"
 
-#: common/include/Group.class.php:1820
+#: common/include/Group.class.php:1818
 #: plugins/mailman/include/mailmanPlugin.class.php:200
 msgid "Could not properly delete the mailing list"
 msgstr "При удалении списка рассылок произошла ошибка"
 
-#: common/include/Group.class.php:1832 common/include/Group.class.php:1840
+#: common/include/Group.class.php:1830 common/include/Group.class.php:1838
 #, fuzzy
 msgid "Error Deleting Trove: "
 msgstr "Ошибка создания группы"
 
-#: common/include/Group.class.php:1851
+#: common/include/Group.class.php:1849
 #, fuzzy
 msgid "Error Deleting Counters: "
 msgstr "Ошибка создания сообщения на форуме"
 
-#: common/include/Group.class.php:1861 common/include/Group.class.php:1870
+#: common/include/Group.class.php:1859 common/include/Group.class.php:1868
 #, fuzzy
 msgid "Error Deleting Project:"
 msgstr "Ошибка получения объекта участника: %s"
 
-#: common/include/Group.class.php:1942
+#: common/include/Group.class.php:1940
 msgid "User is not active. Only active users can be added."
 msgstr "Добавлены в группу могут быть только активные участники"
 
-#: common/include/Group.class.php:1954
+#: common/include/Group.class.php:1952
 msgid "Error Getting Role Object"
 msgstr "Неполучена роль объекта"
 
-#: common/include/Group.class.php:1983
+#: common/include/Group.class.php:1981
 msgid "ERROR: User does not exist"
 msgstr "Ошибка: Пользователь не существует"
 
-#: common/include/Group.class.php:2031 common/include/Group.class.php:2150
+#: common/include/Group.class.php:2029 common/include/Group.class.php:2148
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr "Ошибка при удалении пользователя: %s"
 
-#: common/include/Group.class.php:2053
+#: common/include/Group.class.php:2051
 #, fuzzy
 msgid "ERROR: DB: artifact:"
 msgstr "Ошибка в детали базы данных: %s"
 
-#: common/include/Group.class.php:2074 common/include/Group.class.php:2087
+#: common/include/Group.class.php:2072 common/include/Group.class.php:2085
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr "Ошибка базы данных назначения проекта %d: %s"
 
-#: common/include/Group.class.php:2130 www/admin/globalroledelete.php:37
+#: common/include/Group.class.php:2128 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:41 www/project/admin/roledelete.php:46
 #: www/project/admin/roleedit.php:53
 msgid "Could Not Get Role"
 msgstr "Ошибка, не указана роль"
 
-#: common/include/Group.class.php:2133
+#: common/include/Group.class.php:2131
 #, php-format
 msgid "Role: %s"
 msgstr "Роль: %s"
 
-#: common/include/Group.class.php:2137
+#: common/include/Group.class.php:2135
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2243
+#: common/include/Group.class.php:2241
 msgid "Group already active"
 msgstr "Группа уже активна"
 
-#: common/include/Group.class.php:2505 common/include/Group.class.php:2576
+#: common/include/Group.class.php:2503 common/include/Group.class.php:2574
 msgid "Group does not have any administrators."
 msgstr "Группа без админстраторов."
 
-#: common/include/Group.class.php:2513
+#: common/include/Group.class.php:2511
 #, fuzzy, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -2930,12 +2933,12 @@ msgstr ""
 "\n"
 "-- Администрация FireForge.net"
 
-#: common/include/Group.class.php:2549
+#: common/include/Group.class.php:2547
 #, php-format
 msgid "%1$s Project Approved"
 msgstr "Проект %1$s утвержден."
 
-#: common/include/Group.class.php:2583
+#: common/include/Group.class.php:2581
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -2954,21 +2957,21 @@ msgstr ""
 "Мотивация:\n"
 "\n"
 
-#: common/include/Group.class.php:2602
+#: common/include/Group.class.php:2600
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "Проект %1$s отклонён."
 
-#: common/include/Group.class.php:2626
+#: common/include/Group.class.php:2624
 msgid "Could not find user who has submitted the project."
 msgstr "Автор проекта не найден."
 
-#: common/include/Group.class.php:2633
+#: common/include/Group.class.php:2631
 #, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "Нет администратора, которому отправить емайл."
 
-#: common/include/Group.class.php:2641
+#: common/include/Group.class.php:2639
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -2987,12 +2990,12 @@ msgstr ""
 "по ссылке:\n"
 "http://%5$s/admin/approve-pending.php"
 
-#: common/include/Group.class.php:2651
+#: common/include/Group.class.php:2649
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Утверждено %1$s (%2$s)"
 
-#: common/include/Group.class.php:2657
+#: common/include/Group.class.php:2655
 #, php-format
 msgid ""
 "\n"
@@ -3000,12 +3003,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2661 common/include/Group.class.php:2676
+#: common/include/Group.class.php:2659 common/include/Group.class.php:2674
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "Подана заявка о создании нового проекта %1$s"
 
-#: common/include/Group.class.php:2669
+#: common/include/Group.class.php:2667
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3025,42 +3028,42 @@ msgstr ""
 "Администрация %1$s приняла к рассмотрению ваш проект. О принятом решении Вы "
 "будете поставлены в известность."
 
-#: common/include/Group.class.php:2694
+#: common/include/Group.class.php:2692
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Вопрос слижком краток"
 
-#: common/include/Group.class.php:2697
+#: common/include/Group.class.php:2695
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Название группы (щелкните для изменения)"
 
-#: common/include/Group.class.php:2700
+#: common/include/Group.class.php:2698
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Такое название для проекта уже занято."
 
-#: common/include/Group.class.php:2782
+#: common/include/Group.class.php:2780
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/Group.class.php:2845
+#: common/include/Group.class.php:2843
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/Group.class.php:2863
+#: common/include/Group.class.php:2861
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group UseWebdab Status: %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/Group.class.php:2881
+#: common/include/Group.class.php:2879
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group UseDocmanSearch Status: %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/Group.class.php:2899
+#: common/include/Group.class.php:2897
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group force_docman_reindex %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
@@ -3134,8 +3137,8 @@ msgstr "Трекеры"
 #: common/reporting/report_utils.php:155 common/reporting/report_utils.php:193
 #: common/widget/Widget_ProjectPublicAreas.class.php:148
 #: plugins/blocks/www/index.php:154 www/my/dashboard.php:77
-#: www/stats/site_stats_utils.php:239 www/stats/site_stats_utils.php:365
-#: www/stats/site_stats_utils.php:420
+#: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:367
+#: www/stats/site_stats_utils.php:422
 msgid "Tasks"
 msgstr "Задачи"
 
@@ -3153,12 +3156,12 @@ msgstr "Система выпуска файла"
 #: common/include/Navigation.class.php:519 plugins/blocks/www/index.php:157
 #: plugins/quota_management/www/quota_project.php:74
 #: www/activity/index.php:114 www/activity/index.php:311
-#: www/admin/index.php:179 www/news/index.php:34
+#: www/admin/index.php:187 www/news/index.php:34
 msgid "News"
 msgstr "Новости"
 
 #: common/include/Navigation.class.php:175
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:88
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:89
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:75
 msgid "Advanced search"
 msgstr "Комбинированный поиск"
@@ -3200,7 +3203,7 @@ msgid "Your Page, widgets selected by you to follow your items."
 msgstr ""
 
 #: common/include/Navigation.class.php:248 www/project/admin/index.php:163
-#: www/reporting/index.php:42 www/stats/site_stats_utils.php:476
+#: www/reporting/index.php:42 www/stats/site_stats_utils.php:478
 msgid "Projects"
 msgstr "Проекты"
 
@@ -3288,8 +3291,8 @@ msgid "Lists"
 msgstr "Сп.рассылки"
 
 #: common/include/Navigation.class.php:460
-#, fuzzy
-msgid "Mailing Lists."
+#: common/widget/Widget_ProjectPublicAreas.class.php:136
+msgid "Mailing Lists"
 msgstr "Списки рассылки"
 
 #: common/include/Navigation.class.php:475
@@ -3324,8 +3327,8 @@ msgid "Flash head line from the project."
 msgstr "Выделенный объект не имеет пакетов"
 
 #: common/include/Navigation.class.php:534 common/include/rbac_texts.php:164
-#: plugins/blocks/www/index.php:158 www/stats/site_stats_utils.php:242
-#: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:421
+#: plugins/blocks/www/index.php:158 www/stats/site_stats_utils.php:245
+#: www/stats/site_stats_utils.php:368 www/stats/site_stats_utils.php:423
 msgid "SCM"
 msgstr "SCM"
 
@@ -3349,9 +3352,8 @@ msgstr "Показать источник"
 #: common/include/Plugin.class.php:201 common/include/Plugin.class.php:218
 #, fuzzy, php-format
 msgid ""
-"<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the "
-"write permissions for apache in /etc/gforge/plugins or create the link "
-"manually."
+"Config file could not be linked to etc/gforge/plugins/%1$s. Check the write "
+"permissions for apache in /etc/gforge/plugins or create the link manually."
 msgstr ""
 "<br>Файл конфигурации неприсоединен к etc/gforge/plugins/%1$s. Проверьте ваш "
 "уровень достпа к /etc/gforge/plugins или создайте линк в ручном режиме."
@@ -3385,36 +3387,36 @@ msgstr ""
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
 
-#: common/include/RBAC.php:196
+#: common/include/RBAC.php:194
 #, fuzzy
 msgid "Can't link to home project"
 msgstr "Вы уже участник этого проекта."
 
-#: common/include/RBAC.php:231
+#: common/include/RBAC.php:229
 #, fuzzy
 msgid "Can't unlink from home project"
 msgstr "Родительский проект"
 
-#: common/include/RBAC.php:571
+#: common/include/RBAC.php:594
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
 msgstr ""
 
-#: common/include/RBAC.php:774
+#: common/include/RBAC.php:797
 #, php-format
 msgid "%s (global role)"
 msgstr ""
 
-#: common/include/RBAC.php:778
+#: common/include/RBAC.php:801
 #, fuzzy, php-format
 msgid "%s (in project %s)"
 msgstr "%1$s проектов"
 
-#: common/include/RBAC.php:1098
+#: common/include/RBAC.php:1121
 #, fuzzy
 msgid "Anonymous/not logged in"
 msgstr "Вы должны авторизироватся прежде"
 
-#: common/include/RBAC.php:1146
+#: common/include/RBAC.php:1169
 #, fuzzy
 msgid "Any user logged in"
 msgstr "вход"
@@ -3438,7 +3440,7 @@ msgstr "Форумы: Управление"
 #: common/include/rbac_texts.php:97 common/include/rbac_texts.php:113
 #: common/include/rbac_texts.php:121 common/include/rbac_texts.php:127
 #: common/include/rbac_texts.php:130 common/include/rbac_texts.php:135
-#: plugins/moinmoin/common/MoinMoinPlugin.class.php:155
+#: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
 msgid "No access"
 msgstr "Нет доступа"
 
@@ -3454,7 +3456,7 @@ msgstr "Утвердить"
 
 #: common/include/rbac_texts.php:52
 #: plugins/mediawiki/include/mediawikiPlugin.class.php:200
-#: plugins/moinmoin/common/MoinMoinPlugin.class.php:156
+#: plugins/moinmoin/common/MoinMoinPlugin.class.php:152
 #, fuzzy
 msgid "Read access"
 msgstr "Нет доступа"
@@ -4079,10 +4081,12 @@ msgstr "Цвета приоритета"
 #: www/reporting/usersummary.php:69 www/reporting/usersummary.php:70
 #: www/reporting/usersummary.php:71 www/reporting/usertime.php:88
 #: www/reporting/usertime.php:89 www/reporting/usertime.php:90
-#: www/reporting/usertime.php:91 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:217 www/snippet/package.php:148
-#: www/snippet/package.php:152 www/snippet/package.php:157
-#: www/snippet/package.php:170
+#: www/reporting/usertime.php:91 www/snippet/add_snippet_to_package.php:128
+#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
+#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
+#: www/snippet/addversion.php:221 www/snippet/package.php:147
+#: www/snippet/package.php:151 www/snippet/package.php:156
+#: www/snippet/package.php:169
 #, php-format
 msgid ":"
 msgstr ""
@@ -4134,42 +4138,34 @@ msgstr "Такое имя пользователя уже существует."
 msgid "Error: a forum with the same email address already exists."
 msgstr "Такое имя пользователя уже существует."
 
-#: common/mail/MailingList.class.php:62
-#: common/mail/MailingListFactory.class.php:55
-#: plugins/mailman/include/MailmanList.class.php:86
-#: plugins/mailman/include/MailmanListFactory.class.php:71
-#, php-format
-msgid "%1$s:: No Valid Group Object"
-msgstr "%1$s:: Объект не соответствует группе"
-
-#: common/mail/MailingList.class.php:121
+#: common/mail/MailingList.class.php:120
 #: plugins/mailman/include/MailmanList.class.php:144
 msgid "Must Provide List Name That Is 4 or More Characters Long"
 msgstr "В фамилии должно быть минимум 4 буквы"
 
-#: common/mail/MailingList.class.php:127 common/mail/MailingList.class.php:134
+#: common/mail/MailingList.class.php:126 common/mail/MailingList.class.php:133
 #: plugins/mailman/include/MailmanList.class.php:151
 msgid "Invalid List Name"
 msgstr "Неверное имя списка"
 
-#: common/mail/MailingList.class.php:143
+#: common/mail/MailingList.class.php:142
 #: plugins/mailman/include/MailmanList.class.php:158
 msgid "List Already Exists"
 msgstr "Список уже существует"
 
-#: common/mail/MailingList.class.php:152
+#: common/mail/MailingList.class.php:151
 msgid "Forum exists with the same name"
 msgstr "С таким именем форум уже существует"
 
-#: common/mail/MailingList.class.php:169
+#: common/mail/MailingList.class.php:168
 #, fuzzy
 msgid "Error Creating mailing list: "
 msgstr "Существующие списки рассылки"
 
-#: common/mail/MailingList.class.php:184
+#: common/mail/MailingList.class.php:183
 #, fuzzy, php-format
 msgid ""
-"A mailing list will be created on %1$s in 6-24 hours\n"
+"A mailing list will be created on %1$s in one hour\n"
 "and you are the list administrator.\n"
 "\n"
 "This list is: %3$s@%2$s .\n"
@@ -4205,23 +4201,22 @@ msgstr ""
 "\n"
 "-- Администрация сайта %1$s \n"
 
-#: common/mail/MailingList.class.php:202
-#: plugins/mailman/www/mailman_utils.php:38
-#, php-format
-msgid "%1$s New Mailing List"
+#: common/mail/MailingList.class.php:201
+#, fuzzy, php-format
+msgid "%s New Mailing List"
 msgstr "%1$s. Новый список рассылки"
 
-#: common/mail/MailingList.class.php:222
+#: common/mail/MailingList.class.php:221
 #, fuzzy
 msgid "Error Getting mailing list"
 msgstr "Существующие списки рассылки"
 
-#: common/mail/MailingListFactory.class.php:63
+#: common/mail/MailingListFactory.class.php:62
 #, php-format
 msgid "%s does not use the Mailing-list tool"
 msgstr ""
 
-#: common/mail/MailingListFactory.class.php:106
+#: common/mail/MailingListFactory.class.php:105
 #: plugins/mailman/include/MailmanList.class.php:228
 #: plugins/mailman/include/MailmanListFactory.class.php:113
 #, php-format
@@ -4322,7 +4317,6 @@ msgstr "Ежедневно"
 #: common/widget/Widget_ProjectLatestDocuments.class.php:102
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:79
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:106
-#: plugins/svntracker/common/svntrackerPlugin.class.php:75
 #: www/my/dashboard.php:125 www/news/admin/news_admin_utils.php:43
 #: www/pm/detail_task.php:84 www/pm/detail_task.php:88
 #: www/reporting/timeadd.php:116
@@ -4362,9 +4356,9 @@ msgid "Saturday"
 msgstr "Суббота"
 
 #: common/reporting/report_utils.php:159 common/reporting/report_utils.php:197
-#: www/reporting/projectact_graph.php:116 www/stats/site_stats_utils.php:230
-#: www/stats/site_stats_utils.php:361 www/stats/site_stats_utils.php:415
-#: www/stats/site_stats_utils.php:474 www/top/toplist.php:49
+#: www/reporting/projectact_graph.php:116 www/stats/site_stats_utils.php:233
+#: www/stats/site_stats_utils.php:363 www/stats/site_stats_utils.php:417
+#: www/stats/site_stats_utils.php:476 www/top/toplist.php:49
 msgid "Downloads"
 msgstr "Загрузки"
 
@@ -4373,18 +4367,18 @@ msgstr "Загрузки"
 msgid "Page views"
 msgstr "Виды страниц"
 
-#: common/reporting/report_utils.php:177 www/stats/site_stats_utils.php:233
-#: www/stats/site_stats_utils.php:362 www/stats/site_stats_utils.php:416
+#: common/reporting/report_utils.php:177 www/stats/site_stats_utils.php:236
+#: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
 msgid "Bugs"
 msgstr "Ошибки"
 
-#: common/reporting/report_utils.php:178 www/stats/site_stats_utils.php:234
-#: www/stats/site_stats_utils.php:363 www/stats/site_stats_utils.php:417
+#: common/reporting/report_utils.php:178 www/stats/site_stats_utils.php:237
+#: www/stats/site_stats_utils.php:365 www/stats/site_stats_utils.php:419
 msgid "Support"
 msgstr "Поддержка"
 
-#: common/reporting/report_utils.php:179 www/stats/site_stats_utils.php:235
-#: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
+#: common/reporting/report_utils.php:179 www/stats/site_stats_utils.php:238
+#: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:420
 msgid "Patches"
 msgstr "Патчи"
 
@@ -4437,7 +4431,6 @@ msgid "The Survey data is not filled"
 msgstr "Данные об опросе не заполнены"
 
 #: common/survey/Survey.class.php:169 common/survey/Survey.class.php:207
-#: common/survey/SurveyQuestion.class.php:149
 msgid "UPDATE FAILED"
 msgstr "ОШИБКА ОБНОВЛЕНИЯ"
 
@@ -4474,6 +4467,11 @@ msgstr "Вопрос слижком краток"
 #: common/survey/SurveyQuestion.class.php:107 www/survey/admin/question.php:92
 msgid "Question Added"
 msgstr "Вопрос добавлен"
+
+#: common/survey/SurveyQuestion.class.php:149
+#, fuzzy
+msgid "Update failed"
+msgstr "Обновляется ежедневно"
 
 #: common/survey/SurveyQuestion.class.php:194
 msgid "Error finding question"
@@ -4520,6 +4518,8 @@ msgstr "Опросы не найдены"
 #: www/tracker/reporting/trackerpie_graph.php:63 www/tracker/roadmap.php:175
 #: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
+#: www/trove/TroveCategory.class.php:71 www/trove/TroveCategory.class.php:97
+#: www/trove/TroveCategory.class.php:109
 msgid "Error"
 msgstr "Ошибка"
 
@@ -4669,8 +4669,8 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:625
 #: www/account/pending-resend.php:75 www/activity/index.php:191
 #: www/admin/admin_table.php:222 www/admin/cronman.php:37
-#: www/admin/globalroleedit.php:247 www/admin/index.php:158
-#: www/admin/pending-news.php:163 www/forum/admin/index.php:405
+#: www/admin/globalroleedit.php:247 www/admin/index.php:166
+#: www/admin/pending-news.php:163 www/forum/admin/index.php:412
 #: www/include/vote_function.php:281 www/my/bookmark_add.php:50
 #: www/my/bookmark_edit.php:63 www/my/diary.php:189
 #: www/news/admin/index.php:151 www/news/news_utils.php:42
@@ -4680,8 +4680,10 @@ msgstr ""
 #: www/pm/deletetask.php:44 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:237 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
-#: www/register/index.php:304 www/survey/include/SurveyHTML.class.php:554
-#: www/tracker/roadmap.php:444
+#: www/register/index.php:304 www/snippet/add_snippet_to_package.php:167
+#: www/snippet/addversion.php:109 www/snippet/addversion.php:228
+#: www/snippet/package.php:176 www/snippet/submit.php:144
+#: www/survey/include/SurveyHTML.class.php:554 www/tracker/roadmap.php:444
 msgid "Submit"
 msgstr "Отправить"
 
@@ -5112,7 +5114,7 @@ msgstr "Назначено на"
 #: www/my/dashboard.php:75 www/news/admin/index.php:127
 #: www/pm/detail_task.php:39 www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:49
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
 msgid "Submitted by"
 msgstr "Утверждено"
@@ -5283,7 +5285,7 @@ msgstr "Прикрепленные файлы"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:200
 #: plugins/scmsvn/common/SVNPlugin.class.php:202
 #: utils/fixscripts/populate_template_project.php:203
-#: www/stats/site_stats_utils.php:283
+#: www/stats/site_stats_utils.php:286
 msgid "Commits"
 msgstr "Коммитов"
 
@@ -5292,6 +5294,7 @@ msgstr "Коммитов"
 #: common/tracker/actions/mod-limited.php:209
 #: common/tracker/actions/mod.php:269 common/tracker/actions/mod.php:270
 #: common/tracker/include/ArtifactHtml.class.php:216
+#: www/snippet/addversion.php:98 www/snippet/addversion.php:221
 msgid "Changes"
 msgstr "Изменения"
 
@@ -5329,7 +5332,7 @@ msgstr "Открыто"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:218
 #: plugins/scmgit/common/GitPlugin.class.php:354
 #: plugins/scmsvn/common/SVNPlugin.class.php:220 www/pm/index.php:102
-#: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
+#: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:268
 msgid "Total"
 msgstr "Всего"
 
@@ -5829,9 +5832,10 @@ msgid "Text Area"
 msgstr "Область текста"
 
 #: common/tracker/ArtifactExtraField.class.php:328
+#: common/tracker/views/form-addextrafield.php:134
 #, fuzzy
-msgid "Relation"
-msgstr "Резолюция"
+msgid "Relation between artifacts"
+msgstr "Удалить образец"
 
 #: common/tracker/ArtifactExtraField.class.php:329
 msgid "Integer"
@@ -5889,6 +5893,21 @@ msgstr "Запрос уже существует"
 msgid ""
 "You must have tracker admin rights to set or update a project level query."
 msgstr ""
+
+#: common/tracker/ArtifactQuery.class.php:328
+#, fuzzy
+msgid "Invalid Last Modified Date Range"
+msgstr "Диапазон дат последнего изменения"
+
+#: common/tracker/ArtifactQuery.class.php:344
+#, fuzzy
+msgid "Invalid Open Date Range"
+msgstr "Дата открытия"
+
+#: common/tracker/ArtifactQuery.class.php:360
+#, fuzzy
+msgid "Invalid Close Date Range"
+msgstr "Дата закрытия"
 
 #: common/tracker/ArtifactQuery.class.php:720
 msgid "Query does not exist"
@@ -6102,7 +6121,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:334
 #: plugins/scmsvn/common/SVNPlugin.class.php:200
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
-#: www/account/editsshkeys.php:51 www/account/index.php:304
+#: www/account/editsshkeys.php:51 www/account/index.php:317
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
 #: www/project/admin/editimages.php:267 www/reporting/usersummary.php:101
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
@@ -6113,9 +6132,9 @@ msgstr "Имя"
 #: common/tracker/include/ArtifactTypeHtml.class.php:537
 #: common/tracker/include/ArtifactTypeHtml.class.php:582
 #: common/tracker/include/ArtifactTypeHtml.class.php:749
-#: plugins/scmhg/common/HgPlugin.class.php:601 www/admin/pluginman.php:230
-#: www/admin/pluginman.php:249 www/admin/pluginman.php:261
-#: www/admin/pluginman.php:262 www/include/html.php:313
+#: plugins/scmhg/common/HgPlugin.class.php:601 www/admin/pluginman.php:227
+#: www/admin/pluginman.php:246 www/admin/pluginman.php:258
+#: www/admin/pluginman.php:259 www/include/html.php:313
 #: www/include/html.php:503 www/include/html.php:589 www/include/html.php:606
 #: www/include/html.php:640 www/include/html.php:681 www/pm/ganttpage.php:63
 #: www/tracker/roadmap.php:440
@@ -6315,11 +6334,6 @@ msgstr "Тип выделенного поля"
 msgid "Box type technician"
 msgstr "Техничесский отдел"
 
-#: common/tracker/views/form-addextrafield.php:134
-#, fuzzy
-msgid "Relation between artifacts"
-msgstr "Удалить образец"
-
 #: common/tracker/views/form-addextrafield.php:136
 msgid ""
 "Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols "
@@ -6352,7 +6366,7 @@ msgstr "Редактирование"
 msgid "Delete template"
 msgstr "Удалить тему"
 
-#: common/tracker/views/form-adminroadmap.php:57
+#: common/tracker/views/form-adminroadmap.php:57 www/tracker/roadmap.php:175
 #, fuzzy
 msgid "Could Not Get ArtifactTypeFactoryHtml"
 msgstr "Производство неполучно"
@@ -6434,7 +6448,7 @@ msgstr "Вы действительно хотите удалить эту за�
 #: plugins/mailman/www/admin/index.php:180
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
-#: www/admin/groupedit.php:162 www/forum/admin/index.php:215
+#: www/admin/groupedit.php:162 www/forum/admin/index.php:222
 #: www/mail/admin/index.php:192 www/mail/admin/index.php:223
 #: www/people/editprofile.php:247
 #: www/survey/admin/show_results_aggregate.php:193
@@ -6625,7 +6639,7 @@ msgstr "Элемент"
 #: common/tracker/views/form-deleteextrafieldelement.php:61
 #: common/tracker/views/form-deleteextrafield.php:38
 #: common/tracker/views/form-deletetracker.php:32
-#: www/forum/admin/index.php:176 www/frs/admin/deletepackage.php:67
+#: www/forum/admin/index.php:183 www/frs/admin/deletepackage.php:67
 #: www/frs/admin/deleterelease.php:75 www/frs/admin/editrelease.php:381
 #: www/pm/admin/index.php:371 www/project/admin/roledelete.php:81
 msgid "I'm Sure"
@@ -6649,7 +6663,7 @@ msgstr "Вы желаете полностью удалить это поле и
 
 #: common/tracker/views/form-deleteextrafield.php:39
 #: common/tracker/views/form-deletetracker.php:33
-#: www/forum/admin/index.php:177 www/frs/admin/deletepackage.php:70
+#: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:70
 #: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:372
 msgid "I'm Really Sure"
 msgstr "Я абсолютно уверен"
@@ -6805,7 +6819,7 @@ msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr ""
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:61
-#: plugins/mailman/www/mailman_utils.php:132 www/account/index.php:247
+#: plugins/mailman/www/mailman_utils.php:132 www/account/index.php:260
 #: www/include/Layout.class.php:1343
 msgid "Preferences"
 msgstr "Свойства"
@@ -6864,12 +6878,12 @@ msgstr ""
 msgid "Validated users <a href=\"%s\"><b>pending email activation</b></a>"
 msgstr ""
 
-#: common/widget/Widget_MyAdmin.class.php:73
+#: common/widget/Widget_MyAdmin.class.php:78
 #, php-format
 msgid "Groups in <a href=\"%s\"><b>P</b> (pending) Status</a>"
 msgstr ""
 
-#: common/widget/Widget_MyAdmin.class.php:94
+#: common/widget/Widget_MyAdmin.class.php:99
 #, fuzzy
 msgid "Site News Approval"
 msgstr "(Нет проектов для утверждения)"
@@ -7402,6 +7416,7 @@ msgstr "Проект не выпустил ниодного файла"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:82
 #: www/frs/reporting/downloads.php:104 www/frs/reporting/downloads.php:177
+#: www/snippet/add_snippet_to_package.php:128
 msgid "Package"
 msgstr "Пакет"
 
@@ -7523,10 +7538,6 @@ msgstr[2] "<strong>%d</strong> форумов"
 #: common/widget/Widget_ProjectPublicAreas.class.php:126
 msgid "DocManager: Project Documentation"
 msgstr "Менеджер документации"
-
-#: common/widget/Widget_ProjectPublicAreas.class.php:136
-msgid "Mailing Lists"
-msgstr "Списки рассылки"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:140
 #, php-format
@@ -7732,6 +7743,8 @@ msgid ""
 msgstr ""
 
 #: db/20130127-extratabToHeadermenuMigration.php:81
+#: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:90
+#: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:85
 #, fuzzy
 msgid "Soft link wasn't removed in www/plugins folder, please do so manually."
 msgstr ""
@@ -7739,6 +7752,8 @@ msgstr ""
 "режиме."
 
 #: db/20130127-extratabToHeadermenuMigration.php:90
+#: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:99
+#: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:94
 #, fuzzy
 msgid "Soft link wasn't removed in config folder, please do so manually."
 msgstr ""
@@ -7807,8 +7822,8 @@ msgid ""
 "<p>Your account is currently pending your email confirmation.<br/>Visiting "
 "the link sent to you in this email will activate your account.<br/>If you "
 "need this email resent, please click below and a confirmation email will be "
-"sent to the email address you provided in registration.</p><a href=\"%1$s"
-"\">[Resend Confirmation Email]</a><br><hr>"
+"sent to the email address you provided in registration.</p><a href=\"%1$s\">"
+"[Resend Confirmation Email]</a><br><hr>"
 msgstr ""
 "<P>На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
 "работоспособности вашего почтового ящика.\t\t Получив в теле письма ссылку, "
@@ -7902,7 +7917,7 @@ msgstr ""
 #: plugins/authopenid/www/index.php:38 plugins/authwebid/www/index.php:35
 #: www/account/change_email-complete.php:52 www/account/change_email.php:46
 #: www/account/change_pw.php:32 www/account/editsshkeys.php:39
-#: www/account/index.php:35 www/account/lostlogin.php:54
+#: www/account/index.php:36 www/account/lostlogin.php:54
 #: www/account/pending-resend.php:35 www/account/unsubscribe.php:54
 #: www/admin/database.php:62 www/admin/unsubscribe.php:74
 #: www/admin/useredit.php:43 www/admin/userlist.php:43
@@ -8166,7 +8181,7 @@ msgid ""
 "the web site. They are created manually."
 msgstr ""
 
-#: plugins/blocks/www/index.php:199 www/admin/pluginman.php:210
+#: plugins/blocks/www/index.php:199 www/admin/pluginman.php:207
 #: www/admin/userlist.php:68
 msgid "Active"
 msgstr "Включен"
@@ -8734,25 +8749,21 @@ msgstr "Репозиторий небыл обновлен."
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:110
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:135
-#: plugins/svntracker/common/svntrackerPlugin.class.php:104
 msgid "Previous Version"
 msgstr "Предыдущая версия"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:111
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:136
-#: plugins/svntracker/common/svntrackerPlugin.class.php:105
 msgid "Current Version"
 msgstr "Текущая версия"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:112
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:137
-#: plugins/svntracker/common/svntrackerPlugin.class.php:106
 msgid "Log Message"
 msgstr "Лог сообщений"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:164
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:190
-#: plugins/svntracker/common/svntrackerPlugin.class.php:159
 msgid "Diff To"
 msgstr "Перечень в лист изменений"
 
@@ -8861,7 +8872,7 @@ msgstr "Форум"
 
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:64
 #: plugins/forumml/www/forumml_utils.php:58
-#: plugins/forumml/www/forumml_utils.php:139 www/forum/forum.php:245
+#: plugins/forumml/www/forumml_utils.php:139 www/forum/forum.php:246
 #: www/forum/message.php:159
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
@@ -8910,7 +8921,7 @@ msgid "Last messages"
 msgstr "Лог сообщений"
 
 #: plugins/forumml/www/forumml_utils.php:171
-#: plugins/forumml/www/forumml_utils.php:245 www/forum/index.php:68
+#: plugins/forumml/www/forumml_utils.php:245 www/forum/index.php:69
 #: www/forum/myforums.php:69
 msgid "Threads"
 msgstr "Ветвления"
@@ -9280,8 +9291,8 @@ msgid "User account URL"
 msgstr "%1$s Регистрация учетной записи"
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
-#: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:134
-#: www/people/people_utils.php:158 www/people/people_utils.php:299
+#: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:135
+#: www/people/people_utils.php:158 www/people/people_utils.php:298
 #: www/project/admin/users.php:302 www/project/admin/users.php:382
 #: www/project/admin/users.php:442 www/project/admin/users.php:466
 msgid "Action"
@@ -9333,7 +9344,7 @@ msgstr "Закончено"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:100
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:152
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:219
-#: www/top/mostactive.php:51 www/top/toplist.php:53 www/top/topusers.php:62
+#: www/top/mostactive.php:52 www/top/toplist.php:53 www/top/topusers.php:62
 msgid "Rank"
 msgstr "Ранг"
 
@@ -9360,7 +9371,7 @@ msgstr "Подтвердите удаление образца?"
 #: plugins/mailman/www/admin/index.php:181
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
-#: www/admin/groupedit.php:161 www/forum/admin/index.php:216
+#: www/admin/groupedit.php:161 www/forum/admin/index.php:223
 #: www/mail/admin/index.php:193 www/mail/admin/index.php:224
 #: www/people/editprofile.php:246
 #: www/survey/admin/show_results_aggregate.php:207
@@ -9518,7 +9529,7 @@ msgstr "Результат поиска для <em>%1$s</em>"
 
 #: plugins/globalsearch/www/index.php:168
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:44
-#: www/stats/site_stats_utils.php:227
+#: www/stats/site_stats_utils.php:230
 #, fuzzy
 msgid "Project Name"
 msgstr "Название проекта"
@@ -10413,6 +10424,12 @@ msgstr ""
 msgid "Skip (%s)"
 msgstr ""
 
+#: plugins/mailman/include/MailmanList.class.php:86
+#: plugins/mailman/include/MailmanListFactory.class.php:71
+#, php-format
+msgid "%1$s:: No Valid Group Object"
+msgstr "%1$s:: Объект не соответствует группе"
+
 #: plugins/mailman/include/MailmanList.class.php:166
 #, php-format
 msgid "Error Creating %1$s"
@@ -10646,6 +10663,11 @@ msgstr ""
 "Администрация сайта благодарит Вас за регистрацию Вашего проекта %1$s.\n"
 "\n"
 "-- Администрация сайта %1$s \n"
+
+#: plugins/mailman/www/mailman_utils.php:38
+#, php-format
+msgid "%1$s New Mailing List"
+msgstr "%1$s. Новый список рассылки"
 
 #: plugins/mailman/www/mailman_utils.php:56
 #: plugins/mailman/www/mailman_utils.php:72
@@ -11017,13 +11039,13 @@ msgstr ""
 #: plugins/mantisbt/view/viewIssue.php:57
 #: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:49
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editjob.php:163 www/people/people_utils.php:350
-#: www/people/people_utils.php:406 www/pm/add_task.php:50
+#: www/people/editjob.php:163 www/people/people_utils.php:349
+#: www/people/people_utils.php:405 www/pm/add_task.php:50
 #: www/pm/browse_task.php:161 www/pm/browse_task.php:239
 #: www/pm/browse_task.php:371 www/pm/detail_task.php:49
 #: www/pm/ganttpage.php:158 www/pm/mod_task.php:61 www/pm/mod_task.php:268
-#: www/reporting/timeadd.php:139 www/snippet/package.php:163
-#: www/snippet/submit.php:131
+#: www/reporting/timeadd.php:139 www/snippet/package.php:162
+#: www/snippet/submit.php:129
 msgid "Category"
 msgstr "Категория"
 
@@ -11102,9 +11124,9 @@ msgid "Fixed"
 msgstr ""
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:50 www/activity/index.php:296
-#: www/reporting/usersummary.php:55 www/stats/site_stats_utils.php:269
-#: www/stats/site_stats_utils.php:271 www/stats/site_stats_utils.php:273
-#: www/stats/site_stats_utils.php:275 www/stats/site_stats_utils.php:279
+#: www/reporting/usersummary.php:55 www/stats/site_stats_utils.php:272
+#: www/stats/site_stats_utils.php:274 www/stats/site_stats_utils.php:276
+#: www/stats/site_stats_utils.php:278 www/stats/site_stats_utils.php:282
 #, fuzzy
 msgid "Closed"
 msgstr "закрыто"
@@ -11668,16 +11690,16 @@ msgid ""
 "able to use WYSIWYG formatting (bold, colors...)"
 msgstr ""
 
-#: plugins/moinmoin/common/MoinMoinPlugin.class.php:154
+#: plugins/moinmoin/common/MoinMoinPlugin.class.php:150
 msgid "MoinMoin Wiki access"
 msgstr ""
 
-#: plugins/moinmoin/common/MoinMoinPlugin.class.php:157
+#: plugins/moinmoin/common/MoinMoinPlugin.class.php:153
 #, fuzzy
 msgid "Write access"
 msgstr "Нет доступа"
 
-#: plugins/moinmoin/common/MoinMoinPlugin.class.php:158
+#: plugins/moinmoin/common/MoinMoinPlugin.class.php:154
 #, fuzzy
 msgid "Admin access"
 msgstr "Нет доступа"
@@ -13376,9 +13398,18 @@ msgstr "Обзор CVS-репозитория"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:199
 #: plugins/scmgit/common/GitPlugin.class.php:335
 #: plugins/scmsvn/common/SVNPlugin.class.php:201
-#: www/stats/site_stats_utils.php:284
+#: www/stats/site_stats_utils.php:287
 msgid "Adds"
 msgstr "Добавлены"
+
+#: plugins/scmcvs/cronjobs/ssh_create.php:70
+msgid "Error: homedir_prefix/username points to root directory!"
+msgstr ""
+
+#: plugins/scmcvs/cronjobs/ssh_create.php:75
+#, php-format
+msgid "Error! homedirs.php hasn't created a home directory for user %s"
+msgstr ""
 
 #: plugins/scmcvs/www/acl.php:44
 #, fuzzy
@@ -13956,32 +13987,32 @@ msgstr ""
 msgid "No hooks available"
 msgstr "Нет доступной статистики"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:287
+#: plugins/scmhook/common/scmhookPlugin.class.php:286
 msgid "pre-commit Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:288
-#: plugins/scmhook/common/scmhookPlugin.class.php:331
-#: plugins/scmhook/common/scmhookPlugin.class.php:374
-#: plugins/scmhook/common/scmhookPlugin.class.php:435
-#: plugins/scmhook/common/scmhookPlugin.class.php:496
+#: plugins/scmhook/common/scmhookPlugin.class.php:287
+#: plugins/scmhook/common/scmhookPlugin.class.php:330
+#: plugins/scmhook/common/scmhookPlugin.class.php:373
+#: plugins/scmhook/common/scmhookPlugin.class.php:434
+#: plugins/scmhook/common/scmhookPlugin.class.php:495
 #, fuzzy
 msgid "Hook Name"
 msgstr "Название роли"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:330
+#: plugins/scmhook/common/scmhookPlugin.class.php:329
 msgid "pre-revprop-change Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:373
+#: plugins/scmhook/common/scmhookPlugin.class.php:372
 msgid "post-commit Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:434
+#: plugins/scmhook/common/scmhookPlugin.class.php:433
 msgid "serve-push-pull-bundle Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:495
+#: plugins/scmhook/common/scmhookPlugin.class.php:494
 msgid "post-receive Hooks"
 msgstr ""
 
@@ -14151,7 +14182,7 @@ msgstr ""
 msgid "Browse Subversion Repository"
 msgstr "Обзор SVN репозитория"
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:628
+#: plugins/scmsvn/common/SVNPlugin.class.php:626
 #, fuzzy
 msgid "Subversion Commits"
 msgstr "Обзор SVN репозитория"
@@ -14165,10 +14196,6 @@ msgstr "Персональная энциклопедия"
 #, fuzzy
 msgid "SoapAdmin Admin"
 msgstr "Управление сайтом"
-
-#: plugins/svntracker/common/svntrackerPlugin.class.php:65
-msgid "Links to related SVN commits"
-msgstr "Ссылки на схожие коммиты SVN"
 
 #: plugins/twitter/www/checks.php:99
 msgid "You have no Twitter Access Tokens registered in the database currently"
@@ -14525,7 +14552,7 @@ msgstr "Добро пожаловать, %s. Теперь вы можете из
 msgid "You should now <a href=\"%1$s\">Return to User Prefs</a>."
 msgstr "Сейчас Вы должны %1$s вернутся к установкам Вашей учетной записи %2$s."
 
-#: www/account/change_pw.php:87 www/account/index.php:145
+#: www/account/change_pw.php:87 www/account/index.php:158
 msgid "Change Password"
 msgstr "Изменение пароля"
 
@@ -14556,29 +14583,29 @@ msgstr "Авторизационные SSH ключи участников Ва�
 msgid "Available keys"
 msgstr "Нет доступных трекеров"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:304
+#: www/account/editsshkeys.php:51 www/account/index.php:317
 msgid "Algorithm"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:304
+#: www/account/editsshkeys.php:51 www/account/index.php:317
 msgid "Fingerprint"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:304
+#: www/account/editsshkeys.php:51 www/account/index.php:317
 #: www/project/admin/editimages.php:266
 msgid "Uploaded"
 msgstr "Загружено"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:304
+#: www/account/editsshkeys.php:51 www/account/index.php:317
 #, fuzzy
 msgid "Ready ?"
 msgstr "Чтение"
 
-#: www/account/editsshkeys.php:61 www/account/index.php:314
+#: www/account/editsshkeys.php:61 www/account/index.php:327
 msgid "ssh key is deployed."
 msgstr ""
 
-#: www/account/editsshkeys.php:63 www/account/index.php:316
+#: www/account/editsshkeys.php:63 www/account/index.php:329
 msgid "ssh key is not deployed yet."
 msgstr ""
 
@@ -14673,108 +14700,118 @@ msgstr ""
 msgid "--the %1$s staff."
 msgstr "Кампания %1$s"
 
-#: www/account/index.php:93 www/admin/groupedit.php:74
+#: www/account/index.php:78
+#, fuzzy
+msgid "You must supply a first name."
+msgstr " Вы должны указать имя"
+
+#: www/account/index.php:81
+#, fuzzy
+msgid "You must supply a last name."
+msgstr "Вы должны указать фамилию"
+
+#: www/account/index.php:105 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
 msgid "Updated"
 msgstr "Обновлено"
 
-#: www/account/index.php:108 www/account/index.php:113
+#: www/account/index.php:121 www/account/index.php:126
 #: www/include/html.php:934
 msgid "Account Maintenance"
 msgstr "Мои настройки"
 
-#: www/account/index.php:117 www/index.php:33
+#: www/account/index.php:130 www/index.php:33
 msgid "Welcome"
 msgstr "Добро пожаловать"
 
-#: www/account/index.php:120
+#: www/account/index.php:133
 msgid "Account options:"
 msgstr "Опции учётной записи:"
 
-#: www/account/index.php:123
+#: www/account/index.php:136
 #, fuzzy
 msgid "View My Profile"
 msgstr "Просмотр профиля участника"
 
-#: www/account/index.php:125
+#: www/account/index.php:138
 msgid "Edit My Skills Profile"
 msgstr "Дополнить информацию о личном опыте работы"
 
-#: www/account/index.php:134
+#: www/account/index.php:147
 msgid "Member since:"
 msgstr "Дата регистрации участника:"
 
-#: www/account/index.php:138 www/admin/useredit.php:130
+#: www/account/index.php:151 www/admin/useredit.php:130
 #: www/include/user_profile.php:68
 #, fuzzy
 msgid "User Id:"
 msgstr "Id участника"
 
-#: www/account/index.php:143 www/include/user_profile.php:88
+#: www/account/index.php:156 www/include/user_profile.php:88
 msgid "Login name:"
 msgstr "Регистрационное имя:"
 
-#: www/account/index.php:150 www/account/register.php:163
+#: www/account/index.php:163 www/account/register.php:163
 msgid "First Name:"
 msgstr "Имя:"
 
-#: www/account/index.php:157 www/account/register.php:167
+#: www/account/index.php:170 www/account/register.php:167
 msgid "Last Name:"
 msgstr "Фамилия:"
 
-#: www/account/index.php:164
+#: www/account/index.php:177
 msgid "Language:"
 msgstr "Язык:"
 
-#: www/account/index.php:170 www/account/register.php:175
+#: www/account/index.php:183 www/account/register.php:175
 msgid "Timezone:"
 msgstr "Часовой пояс:"
 
-#: www/account/index.php:176
+#: www/account/index.php:189
 msgid "Theme:"
 msgstr "Тема оформления сайта:"
 
-#: www/account/index.php:182 www/account/register.php:188
+#: www/account/index.php:195 www/account/register.php:188
 msgid "Country:"
 msgstr "Страна:"
 
-#: www/account/index.php:188
+#: www/account/index.php:201
 msgid "Email Addr:"
 msgstr "Email адрес:"
 
-#: www/account/index.php:190
+#: www/account/index.php:203
 msgid "Change Email Addr"
 msgstr "Изменить email адрес"
 
-#: www/account/index.php:195 www/account/index.php:202
+#: www/account/index.php:208 www/account/index.php:215
 #: www/account/register.php:209 www/account/register.php:213
 #: www/include/user_profile.php:136
 msgid "Address:"
 msgstr "Адрес:"
 
-#: www/account/index.php:209 www/account/register.php:217
+#: www/account/index.php:222 www/account/register.php:217
 #: www/include/user_profile.php:143
 msgid "Phone:"
 msgstr "Телефон:"
 
-#: www/account/index.php:216 www/account/register.php:221
+#: www/account/index.php:229 www/account/register.php:221
 #: www/include/user_profile.php:154
 msgid "FAX:"
 msgstr "Факс:"
 
-#: www/account/index.php:223
+#: www/account/index.php:236
 msgid "Title:"
 msgstr "Обращение:"
 
-#: www/account/index.php:232 www/account/register.php:200
+#: www/account/index.php:245 www/account/register.php:200
 msgid "Jabber Address:"
 msgstr "Адрес Jabber:"
 
-#: www/account/index.php:236 www/account/register.php:204
+#: www/account/index.php:249 www/account/register.php:204
 msgid "Send auto-generated notices only to my Jabber address"
 msgstr "Отправлять авто-инфомирование только на мой Jabber "
 
-#: www/account/index.php:252 www/account/register.php:226
+#: www/account/index.php:265 www/account/register.php:226
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
@@ -14782,11 +14819,11 @@ msgstr ""
 "Получать новости об обновлениях на сайте. (<i>максимальная экономия вашего "
 "траффика</i>). Очень рекомендуется."
 
-#: www/account/index.php:258 www/account/register.php:230
+#: www/account/index.php:271 www/account/register.php:230
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "Получать письма от сообщества. <i>(С высокой экономией траффика.)</i>"
 
-#: www/account/index.php:273
+#: www/account/index.php:286
 #, php-format
 msgid ""
 "Participate in peer ratings. <i>(Allows you to rate other users using "
@@ -14800,33 +14837,39 @@ msgstr ""
 "Более подробно ознакомится с процдурой рейтингов Вы можете следуя <a href="
 "\"%s\"> вашей страницы</a> если включено.)</i> "
 
-#: www/account/index.php:279
+#: www/account/index.php:292
 msgid ""
 "Enable tooltips. Small help texts displayed on mouse over links, images."
 msgstr ""
 
-#: www/account/index.php:296
+#: www/account/index.php:309
 msgid "Shell Account Information"
 msgstr "Общая информация о пользователе"
 
-#: www/account/index.php:299
+#: www/account/index.php:312
 msgid "Shell box"
 msgstr "Ваш отдел"
 
-#: www/account/index.php:300
+#: www/account/index.php:313
 msgid "SSH Shared Authorized Keys"
 msgstr "Авторизационные SSH ключи участников Вашего проекта"
 
-#: www/account/index.php:326
+#: www/account/index.php:339
 msgid "Edit Keys"
 msgstr "<b> </b> Изменить SSH ключи"
 
-#: www/account/index.php:328
+#: www/account/index.php:341
 #, fuzzy
 msgid "Shell Account deactivated"
 msgstr "Общая информация о пользователе"
 
-#: www/account/index.php:341
+#: www/account/index.php:351 www/forum/admin/index.php:128
+#: www/forum/admin/index.php:167
+#, fuzzy, php-format
+msgid "%s Mandatory fields"
+msgstr "Управлять спец полями"
+
+#: www/account/index.php:354
 msgid "Reset Changes"
 msgstr "Сброс изменений"
 
@@ -14852,8 +14895,7 @@ msgstr ""
 "<h2>Пароль изменён</h2><p>Поздравляем, пароль был переустановлен. Теперь "
 "можно <a href=\"/account/login.php\">войти</a> на сайт.</p>"
 
-#: www/account/lostlogin.php:84 www/trove/TroveCategory.class.php:71
-#: www/trove/TroveCategory.class.php:97 www/trove/TroveCategory.class.php:109
+#: www/account/lostlogin.php:84
 msgid "ERROR"
 msgstr "ОШИБКА"
 
@@ -15204,9 +15246,9 @@ msgstr "коментарий"
 msgid "Commit for Tracker Item"
 msgstr "Часть трекера"
 
-#: www/activity/index.php:291 www/stats/site_stats_utils.php:268
-#: www/stats/site_stats_utils.php:270 www/stats/site_stats_utils.php:272
-#: www/stats/site_stats_utils.php:274 www/stats/site_stats_utils.php:278
+#: www/activity/index.php:291 www/stats/site_stats_utils.php:271
+#: www/stats/site_stats_utils.php:273 www/stats/site_stats_utils.php:275
+#: www/stats/site_stats_utils.php:277 www/stats/site_stats_utils.php:281
 #, fuzzy
 msgid "Opened"
 msgstr "Открыто"
@@ -15449,7 +15491,7 @@ msgstr ""
 msgid "Section %s"
 msgstr "Секция"
 
-#: www/admin/cronman.php:30 www/admin/index.php:206
+#: www/admin/cronman.php:30 www/admin/index.php:214
 msgid "Cron Manager"
 msgstr "Управление Cron"
 
@@ -15650,7 +15692,7 @@ msgid "Permanently Delete Project"
 msgstr "Полностью удалить объект"
 
 #: www/admin/groupedit.php:116 www/admin/groupedit.php:128
-#: www/admin/index.php:154 www/admin/useredit.php:163
+#: www/admin/index.php:162 www/admin/useredit.php:163
 #: www/admin/useredit.php:169
 msgid "Pending (P)"
 msgstr "В ожидании (P)"
@@ -15659,7 +15701,7 @@ msgstr "В ожидании (P)"
 msgid "Incomplete (I)"
 msgstr "Не завершен (I)"
 
-#: www/admin/groupedit.php:127 www/admin/index.php:152
+#: www/admin/groupedit.php:127 www/admin/index.php:160
 #: www/admin/useredit.php:35 www/admin/useredit.php:164
 #: www/admin/useredit.php:170 www/admin/useredit.php:174
 msgid "Active (A)"
@@ -15724,7 +15766,7 @@ msgstr "Уникальное имя (Unix)"
 msgid "Public?"
 msgstr "Общий?"
 
-#: www/admin/grouplist.php:70 www/snippet/submit.php:119
+#: www/admin/grouplist.php:70 www/snippet/submit.php:117
 msgid "License"
 msgstr "Лицензия"
 
@@ -15783,134 +15825,134 @@ msgstr "Создать"
 msgid "Project Maintenance"
 msgstr "Эксплуатация группы"
 
-#: www/admin/index.php:115
+#: www/admin/index.php:117
 #, php-format
 msgid "Registered projects: <strong>%1$s</strong>"
 msgstr "Созданные проекты: <strong>%1$s</strong>"
 
-#: www/admin/index.php:122
+#: www/admin/index.php:127
 #, php-format
 msgid "Active projects: <strong>%1$s</strong>"
 msgstr "Активные проекты: <strong>%1$s</strong>"
 
-#: www/admin/index.php:129
+#: www/admin/index.php:137
 #, php-format
 msgid "Pending projects: <strong>%1$s</strong>"
 msgstr "В очереди проекты: <strong>%1$s</strong>"
 
-#: www/admin/index.php:131
+#: www/admin/index.php:139
 #, fuzzy
 msgid "Display Full Project List/Edit Projects"
 msgstr "Полный список групп/Редактирование групп"
 
-#: www/admin/index.php:133
+#: www/admin/index.php:141
 #, fuzzy
 msgid "Display Projects Beginning with:"
 msgstr "Показывать группы начиная с :"
 
-#: www/admin/index.php:140
+#: www/admin/index.php:148
 #, fuzzy
 msgid "Search <em>(groupid, project Unix name, project full name)</em>"
 msgstr "Поиск <em>(групп, групп unix, полное имя)</em>"
 
-#: www/admin/index.php:147
+#: www/admin/index.php:155
 msgid "Register New Project"
 msgstr "Зарегистрировать проект"
 
-#: www/admin/index.php:148
+#: www/admin/index.php:156
 #, fuzzy
 msgid "Pending projects (new project approval)"
 msgstr "Нет проектов для утверждения"
 
-#: www/admin/index.php:150
+#: www/admin/index.php:158
 #, fuzzy
 msgid "Projects with status"
 msgstr "Группы со статусом"
 
-#: www/admin/index.php:153
+#: www/admin/index.php:161
 msgid "Hold (H)"
 msgstr ""
 
-#: www/admin/index.php:160
+#: www/admin/index.php:168
 #, fuzzy
 msgid "Private Projects"
 msgstr "Закрытые группы"
 
-#: www/admin/index.php:170
+#: www/admin/index.php:178
 #, fuzzy
 msgid "Plugins Project Maintenance"
 msgstr "Эксплуатация группы"
 
-#: www/admin/index.php:181
+#: www/admin/index.php:189
 msgid "Pending news (moderation for front-page)"
 msgstr ""
 
-#: www/admin/index.php:186 www/project/admin/project_admin_utils.php:92
+#: www/admin/index.php:194 www/project/admin/project_admin_utils.php:92
 msgid "Stats"
 msgstr "Статистика"
 
-#: www/admin/index.php:188
+#: www/admin/index.php:196
 msgid "Site-Wide Stats"
 msgstr "Статистика сайта"
 
-#: www/admin/index.php:192
+#: www/admin/index.php:200
 msgid "Trove Project Tree"
 msgstr "Структура дерева хранилища"
 
-#: www/admin/index.php:194
+#: www/admin/index.php:202
 msgid "Display Trove Map"
 msgstr "Показать карту хранилища"
 
-#: www/admin/index.php:195
+#: www/admin/index.php:203
 msgid "Add to the Trove Map"
 msgstr "Дополнить карту хранилищ"
 
-#: www/admin/index.php:198
+#: www/admin/index.php:206
 msgid "Site Utilities"
 msgstr "Утилиты сайта"
 
-#: www/admin/index.php:200 www/admin/massmail.php:79
+#: www/admin/index.php:208 www/admin/massmail.php:79
 #, php-format
 msgid "Mail Engine for %1$s Subscribers"
 msgstr "Поддержка почты для %1$s подписчиков"
 
-#: www/admin/index.php:201
+#: www/admin/index.php:209
 msgid "Site Mailings Maintenance"
 msgstr "Эксплуатация рассылки сайта"
 
-#: www/admin/index.php:202
+#: www/admin/index.php:210
 msgid "Add, Delete, or Edit File Types"
 msgstr "Добавить, удалить или изменить тип файла"
 
-#: www/admin/index.php:203
+#: www/admin/index.php:211
 msgid "Add, Delete, or Edit Processors"
 msgstr "Добавить, удалить или изменить процессоры"
 
-#: www/admin/index.php:204
+#: www/admin/index.php:212
 msgid "Add, Delete, or Edit Themes"
 msgstr "Управление темами"
 
-#: www/admin/index.php:205 www/stats/lastlogins.php:44
+#: www/admin/index.php:213 www/stats/lastlogins.php:44
 msgid "Most Recent Opened Sessions"
 msgstr "Последние открытые сессии"
 
-#: www/admin/index.php:207 www/admin/pluginman.php:122
+#: www/admin/index.php:215 www/admin/pluginman.php:123
 msgid "Plugin Manager"
 msgstr "Управление плагинами"
 
-#: www/admin/index.php:208
+#: www/admin/index.php:216
 msgid "Config Manager"
 msgstr "Управление концигурацией"
 
-#: www/admin/index.php:215
+#: www/admin/index.php:223
 msgid "Virtual Host Admin Tool"
 msgstr "Управление виртуальным хостингом"
 
-#: www/admin/index.php:219
+#: www/admin/index.php:227
 msgid "Project Database Administration"
 msgstr "Администрирование баз данных проекта"
 
-#: www/admin/index.php:222
+#: www/admin/index.php:230
 #, fuzzy
 msgid "Job / Categories Administration"
 msgstr "Форумы: Управление"
@@ -16086,7 +16128,7 @@ msgstr "Ничего нет к выполнению"
 msgid "Details"
 msgstr "Дополнительно"
 
-#: www/admin/pluginman.php:54
+#: www/admin/pluginman.php:55
 #, php-format
 msgid "%d user detached from plugin."
 msgid_plural "%d users detached from plugin."
@@ -16094,7 +16136,7 @@ msgstr[0] "%d участник отсоединен от плагина."
 msgstr[1] "%d участника отсоединены от плагина."
 msgstr[2] "%d участников отсоединены от плагина."
 
-#: www/admin/pluginman.php:62
+#: www/admin/pluginman.php:63
 #, fuzzy, php-format
 msgid "%d project detached from plugin."
 msgid_plural "%d projects detached from plugin."
@@ -16102,17 +16144,17 @@ msgstr[0] "%d группа отсоединена от плагина."
 msgstr[1] "%d группы отсоединены от плагина."
 msgstr[2] "%d групп отсоединено от плагина."
 
-#: www/admin/pluginman.php:69 www/admin/pluginman.php:104
+#: www/admin/pluginman.php:70 www/admin/pluginman.php:105
 #, php-format
 msgid "Plugin %1$s updated Successfully"
 msgstr "Модуль %1$s обновлён"
 
-#: www/admin/pluginman.php:74 www/admin/pluginman.php:112
+#: www/admin/pluginman.php:75 www/admin/pluginman.php:113
 #, fuzzy
 msgid "Couldn't get plugin object"
 msgstr "Невозможно получение группы проекта"
 
-#: www/admin/pluginman.php:83
+#: www/admin/pluginman.php:84
 #, fuzzy
 msgid ""
 "<br />Soft link wasn't removed in www/plugins folder, please do so manually."
@@ -16120,64 +16162,64 @@ msgstr ""
 "<br>удаление ссылки на каталог www/plugins блокировано, удалите в ручном "
 "режиме."
 
-#: www/admin/pluginman.php:94
+#: www/admin/pluginman.php:95
 msgid "Success, config not deleted"
 msgstr "Завершено, конфигурация не удалена"
 
-#: www/admin/pluginman.php:128
+#: www/admin/pluginman.php:129
 msgid ""
 "Here you can activate / deactivate site-wide plugins which are in the "
 "plugins/ folder. Then, you should activate them also per project, per user "
 "or whatever the plugin specifically applies to."
 msgstr ""
 
-#: www/admin/pluginman.php:130
+#: www/admin/pluginman.php:131
 msgid ""
 "Be careful because some projects/users can be using the plugin. Deactivating "
 "it will remove the plugin from all users/projects."
 msgstr ""
 
-#: www/admin/pluginman.php:132
+#: www/admin/pluginman.php:133
 msgid "Plugin Name"
 msgstr "Название плагина"
 
-#: www/admin/pluginman.php:135
+#: www/admin/pluginman.php:136
 msgid "Users Using it"
 msgstr "Участники использующие это"
 
-#: www/admin/pluginman.php:136
+#: www/admin/pluginman.php:137
 #, fuzzy
 msgid "Projects Using it"
 msgstr "Группы использующие это"
 
-#: www/admin/pluginman.php:137
+#: www/admin/pluginman.php:138
 #, fuzzy
 msgid "Global Administration View"
 msgstr "Администрирование"
 
-#: www/admin/pluginman.php:213
+#: www/admin/pluginman.php:210
 msgid "Deactivate"
 msgstr "Отключить"
 
-#: www/admin/pluginman.php:227
+#: www/admin/pluginman.php:224
 #, fuzzy, php-format
 msgid "%d users"
 msgstr "Добавить участника"
 
-#: www/admin/pluginman.php:246
+#: www/admin/pluginman.php:243
 #, fuzzy, php-format
 msgid "%d projects"
 msgstr "%1$s проектов"
 
-#: www/admin/pluginman.php:257
+#: www/admin/pluginman.php:254
 msgid "Inactive"
 msgstr "Выключен"
 
-#: www/admin/pluginman.php:260
+#: www/admin/pluginman.php:257
 msgid "Activate"
 msgstr "Включить"
 
-#: www/admin/pluginman.php:279
+#: www/admin/pluginman.php:276
 #, fuzzy
 msgid "Current plugin status:"
 msgstr "Текущий файл"
@@ -16551,7 +16593,8 @@ msgid "User updated to %1$s status"
 msgstr "Статус пользователя изменен на %1$s "
 
 #: www/admin/userlist.php:67 www/include/tool_reports.php:66
-#: www/tracker/roadmap.php:427 www/tracker/roadmap.php:439
+#: www/stats/site_stats_utils.php:145 www/tracker/roadmap.php:427
+#: www/tracker/roadmap.php:439
 msgid "All"
 msgstr "Все"
 
@@ -17019,19 +17062,19 @@ msgstr "Искать во всех разделах"
 msgid "Forums: Administration"
 msgstr "Форумы: Управление"
 
-#: www/forum/admin/index.php:115 www/forum/admin/index.php:148
+#: www/forum/admin/index.php:121 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
 msgstr "Переправлять сообщения с форума на емайл:"
 
-#: www/forum/admin/index.php:119
+#: www/forum/admin/index.php:125
 msgid "Add This Forum"
 msgstr "Добавить этот форум"
 
-#: www/forum/admin/index.php:132
+#: www/forum/admin/index.php:138
 msgid "Change forum status"
 msgstr "Изменить статус форума"
 
-#: www/forum/admin/index.php:133
+#: www/forum/admin/index.php:139
 msgid ""
 "You can adjust forum features from here. Please note that private forums can "
 "still be viewed by members of your project, not the general public."
@@ -17039,90 +17082,90 @@ msgstr ""
 "Вы можете изменять свойства форума. Но приватные форумы будут попрежнеу "
 "видны лишь участникам Вашего проекта."
 
-#: www/forum/admin/index.php:160
+#: www/forum/admin/index.php:166
 msgid "Delete entire forum and all content"
 msgstr "Полностью удалить всё содержимое форума"
 
-#: www/forum/admin/index.php:169
+#: www/forum/admin/index.php:176
 msgid ""
 "You are about to permanently and irretrievably delete this entire forum and "
 "all its contents!"
 msgstr "Вы удаляете безвозвратно и полностью всё содержимое форума! "
 
-#: www/forum/admin/index.php:196 www/forum/admin/index.php:210
+#: www/forum/admin/index.php:203 www/forum/admin/index.php:217
 msgid "Delete a Message"
 msgstr "Удалить сообщение"
 
-#: www/forum/admin/index.php:197 www/forum/admin/index.php:268
-#: www/forum/admin/index.php:342
+#: www/forum/admin/index.php:204 www/forum/admin/index.php:275
+#: www/forum/admin/index.php:349
 msgid "Return to the forum"
 msgstr ""
 
-#: www/forum/admin/index.php:213
+#: www/forum/admin/index.php:220
 msgid ""
 "WARNING! You are about to permanently delete a message and all of its "
 "followups!!"
 msgstr "Внимание! Вы хотите удалить сообщение и все следующие за ним !!"
 
-#: www/forum/admin/index.php:239 www/forum/admin/index.php:278
+#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
 #: www/forum/monitor.php:47 www/forum/new.php:48 www/forum/save.php:47
 #, fuzzy
 msgid "Error Getting Forum"
 msgstr "Ошибка доступа к форуму"
 
-#: www/forum/admin/index.php:245
+#: www/forum/admin/index.php:252
 msgid "Error getting new forum message"
 msgstr "Ошибка получения сообщения форума"
 
-#: www/forum/admin/index.php:263
+#: www/forum/admin/index.php:270
 msgid "Message Edited Successfully"
 msgstr "Сообщение отредактировано"
 
-#: www/forum/admin/index.php:267 www/forum/admin/index.php:297
-#: www/forum/admin/index.php:341
+#: www/forum/admin/index.php:274 www/forum/admin/index.php:304
+#: www/forum/admin/index.php:348
 msgid "Edit a Message"
 msgstr "Редактировать сообщение"
 
-#: www/forum/admin/index.php:292 www/forum/new.php:55
+#: www/forum/admin/index.php:299 www/forum/new.php:55
 msgid "Error Getting ForumHTML"
 msgstr "Ошибка получения сообщения форума в HTML"
 
-#: www/forum/admin/index.php:312
+#: www/forum/admin/index.php:319
 #, fuzzy
 msgid "Thread not moved"
 msgstr "Разветвленный"
 
-#: www/forum/admin/index.php:335
+#: www/forum/admin/index.php:342
 #, php-format
 msgid "Thread successfully moved from %1$s forum to %2$s forum"
 msgstr ""
 
-#: www/forum/admin/index.php:343
+#: www/forum/admin/index.php:350
 #, fuzzy
 msgid "Return to the thread"
 msgstr "Начать ветвь"
 
-#: www/forum/admin/index.php:356
+#: www/forum/admin/index.php:363
 #, fuzzy
 msgid "Move Thread"
 msgstr "Ответвление"
 
-#: www/forum/admin/index.php:366 www/forum/admin/index.php:442
+#: www/forum/admin/index.php:373 www/forum/admin/index.php:449
 #, fuzzy, php-format
 msgid "No Forums Found For %s"
 msgstr "Форум не найден для %1$s"
 
-#: www/forum/admin/index.php:396
+#: www/forum/admin/index.php:403
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
 msgstr ""
 
-#: www/forum/admin/index.php:419
+#: www/forum/admin/index.php:426
 #, fuzzy
 msgid "Forums Administration"
 msgstr "Форумы: Управление"
 
-#: www/forum/admin/index.php:460 www/forum/admin/monitor.php:48
+#: www/forum/admin/index.php:467 www/forum/admin/monitor.php:48
 #, fuzzy
 msgid "Monitoring Users"
 msgstr "Получать на емайл новости с дневника участника"
@@ -17155,7 +17198,7 @@ msgid "Message ID"
 msgstr "Сообщение"
 
 #: www/forum/admin/pendingmsgdetail.php:63 www/forum/attachment.php:156
-#: www/forum/forum.php:151 www/forum/message.php:101 www/forum/myforums.php:96
+#: www/forum/forum.php:152 www/forum/message.php:101 www/forum/myforums.php:96
 msgid "Error getting new ForumHTML"
 msgstr "Ошибка получения сообщения форума в HTML"
 
@@ -17180,17 +17223,12 @@ msgstr "Изменение прикрепленной части блокиро�
 msgid "No attach found"
 msgstr "Ничего не найдено"
 
-#: www/forum/forum.php:54
+#: www/forum/forum.php:55
 #, fuzzy
 msgid "Error forum not found: "
 msgstr "Нет форума"
 
-#: www/forum/forum.php:109
-#, fuzzy
-msgid "Error creating ForumMessage:"
-msgstr "Ошибка создания сообщения на форуме"
-
-#: www/forum/forum.php:112
+#: www/forum/forum.php:113
 msgid ""
 "Message Queued for moderation -> Please wait until the admin approves/"
 "rejects it"
@@ -17198,83 +17236,83 @@ msgstr ""
 "Сообщение отправлено для модерирования -> Дождитесь когда Админ примет "
 "решение"
 
-#: www/forum/forum.php:114
+#: www/forum/forum.php:115
 msgid "Message Posted Successfully"
 msgstr "Сообщение успешно добавлено"
 
-#: www/forum/forum.php:134 www/forum/message.php:89 www/forum/myforums.php:103
+#: www/forum/forum.php:135 www/forum/message.php:89 www/forum/myforums.php:103
 msgid "Error getting new ForumMessageFactory"
 msgstr "Ошибка получения нового сообщения форума"
 
-#: www/forum/forum.php:172
+#: www/forum/forum.php:173
 msgid "Nested"
 msgstr "Вложенный"
 
-#: www/forum/forum.php:172
+#: www/forum/forum.php:173
 msgid "Flat"
 msgstr "Плоский"
 
-#: www/forum/forum.php:172
+#: www/forum/forum.php:173
 msgid "Threaded"
 msgstr "Разветвленный"
 
-#: www/forum/forum.php:172
+#: www/forum/forum.php:173
 msgid "Ultimate"
 msgstr "Окончательно"
 
-#: www/forum/forum.php:178 www/include/tool_reports.php:114
+#: www/forum/forum.php:179 www/include/tool_reports.php:114
 msgid "Show"
 msgstr "Показать"
 
-#: www/forum/forum.php:192
+#: www/forum/forum.php:193
 msgid "Change View"
 msgstr "Изменить вид"
 
-#: www/forum/forum.php:330
+#: www/forum/forum.php:331
 msgid "Topic"
 msgstr "Тема"
 
-#: www/forum/forum.php:331
+#: www/forum/forum.php:332
 msgid "Topic Starter"
 msgstr "Инициатор темы"
 
-#: www/forum/forum.php:332
+#: www/forum/forum.php:333
 msgid "Replies"
 msgstr "Ответы"
 
-#: www/forum/forum.php:333 www/forum/index.php:68 www/forum/myforums.php:70
+#: www/forum/forum.php:334 www/forum/index.php:69 www/forum/myforums.php:70
 msgid "Last Post"
 msgstr "Последнее"
 
-#: www/forum/forum.php:377
+#: www/forum/forum.php:378
 #, fuzzy
 msgid "Newer Messages"
 msgstr "Следующие сообщения"
 
-#: www/forum/forum.php:388
+#: www/forum/forum.php:389
 #, fuzzy
 msgid "Older Messages"
 msgstr "Следующие сообщения"
 
-#: www/forum/forum.php:401
+#: www/forum/forum.php:402
 msgid "No forum chosen"
 msgstr "Форум не выбран"
 
-#: www/forum/index.php:50
+#: www/forum/index.php:51
 #, php-format
 msgid "Forums for %1$s"
 msgstr "Форум для %1$s"
 
-#: www/forum/index.php:57
+#: www/forum/index.php:58
 #, fuzzy, php-format
 msgid "No Forums Found for %1$s"
 msgstr "Форум не найден для %1$s"
 
-#: www/forum/index.php:64 www/forum/myforums.php:44 www/forum/myforums.php:46
+#: www/forum/index.php:65 www/forum/myforums.php:44 www/forum/myforums.php:46
 msgid "My Monitored Forums"
 msgstr "Мои наблюдаемые форумы"
 
-#: www/forum/index.php:68 www/forum/myforums.php:70 www/top/toplist.php:43
+#: www/forum/index.php:69 www/forum/myforums.php:70 www/top/toplist.php:43
 msgid "Posts"
 msgstr "Сообщения"
 
@@ -17867,7 +17905,7 @@ msgid "Highest Ranked Users"
 msgstr "Участники с наивысшим рейтингом"
 
 #: www/include/features_boxes.php:54 www/top/index.php:34
-#: www/top/mostactive.php:40
+#: www/top/mostactive.php:41
 msgid "Most Active This Week"
 msgstr "Самые активные проекты за неделю"
 
@@ -18273,11 +18311,11 @@ msgstr "Этот проект еще не зарегистрировался в"
 msgid "Trove Software Map"
 msgstr "Карта категорий хранилища"
 
-#: www/include/trove.php:337 www/trove/include/trove.php:300
+#: www/include/trove.php:337
 msgid "(Now Filtering)"
 msgstr "(Полная форма)"
 
-#: www/include/trove.php:345 www/trove/include/trove.php:309
+#: www/include/trove.php:345
 msgid "[Filter]"
 msgstr "[фильтр]"
 
@@ -19216,8 +19254,8 @@ msgid "JOB updated successfully"
 msgstr "Вид работы изменен"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:125
-#: www/people/people_utils.php:155 www/people/people_utils.php:234
-#: www/people/people_utils.php:296
+#: www/people/people_utils.php:155 www/people/people_utils.php:233
+#: www/people/people_utils.php:295
 #: www/search/include/SearchManager.class.php:158
 msgid "Skill"
 msgstr "Навыки"
@@ -19480,7 +19518,7 @@ msgid "No skill types in database - inform system administrator"
 msgstr "В базе отсутствует информация о квалификации, запросите администратора"
 
 #: www/people/editprofile.php:276 www/people/people_utils.php:186
-#: www/people/people_utils.php:331
+#: www/people/people_utils.php:330
 msgid "Add a new skill"
 msgstr "Добавить новую запись о уровне"
 
@@ -19587,21 +19625,22 @@ msgid "Added to skill inventory"
 msgstr "Добавлен уровень оборудования"
 
 #: www/people/people_utils.php:108 www/people/people_utils.php:216
-msgid "ERROR - skill already in your inventory"
+#, fuzzy
+msgid "Error: skill already in your inventory"
 msgstr "Этот уровень уже существует"
 
 #: www/people/people_utils.php:126 www/people/people_utils.php:156
-#: www/people/people_utils.php:235 www/people/people_utils.php:297
+#: www/people/people_utils.php:234 www/people/people_utils.php:296
 msgid "Level"
 msgstr "Уровень"
 
 #: www/people/people_utils.php:127 www/people/people_utils.php:157
-#: www/people/people_utils.php:236 www/people/people_utils.php:298
+#: www/people/people_utils.php:235 www/people/people_utils.php:297
 msgid "Experience"
 msgstr "Опыт"
 
-#: www/people/people_utils.php:135 www/people/people_utils.php:243
-#: www/people/people_utils.php:308
+#: www/people/people_utils.php:135 www/people/people_utils.php:242
+#: www/people/people_utils.php:307
 msgid "No Skill Inventory Set Up"
 msgstr "Навыки не указаны"
 
@@ -19609,7 +19648,7 @@ msgstr "Навыки не указаны"
 msgid "No skill setup"
 msgstr "Навыки не установлены"
 
-#: www/people/people_utils.php:192 www/people/people_utils.php:339
+#: www/people/people_utils.php:192 www/people/people_utils.php:338
 msgid "Add Skill"
 msgstr "Добавить навыки"
 
@@ -19617,24 +19656,24 @@ msgstr "Добавить навыки"
 msgid "ERROR inserting into skill inventory"
 msgstr "Неверное значение при указании опыта"
 
-#: www/people/people_utils.php:272
+#: www/people/people_utils.php:271
 msgid "Invalid ID"
 msgstr "Неверный указатель"
 
-#: www/people/people_utils.php:363
+#: www/people/people_utils.php:362
 msgid "No Categories Found"
 msgstr "Не найдено категорий"
 
-#: www/people/people_utils.php:407
+#: www/people/people_utils.php:406
 msgid "Date Opened"
 msgstr "Дата создания"
 
-#: www/people/people_utils.php:408
+#: www/people/people_utils.php:407
 #, php-format
 msgid "%1$s project"
 msgstr "проект %1$s"
 
-#: www/people/people_utils.php:415
+#: www/people/people_utils.php:414
 msgid "None Found"
 msgstr "Не найдено"
 
@@ -19866,7 +19905,7 @@ msgid ""
 msgstr ""
 "Вы запрашиваете полное и безвозвратное удаление подпроекта и всех его данных!"
 
-#: www/pm/admin/index.php:393
+#: www/pm/admin/index.php:393 www/project/admin/tools.php:326
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "Администрирование"
@@ -20304,7 +20343,7 @@ msgstr "Истечение времени"
 msgid "Week"
 msgstr "Неделя"
 
-#: www/pm/mod_task.php:266 www/stats/site_stats_utils.php:358
+#: www/pm/mod_task.php:266 www/stats/site_stats_utils.php:360
 msgid "Day"
 msgstr "День"
 
@@ -20328,39 +20367,39 @@ msgstr "Отчет по подпроекту"
 msgid "Average duration for closed tasks (days)"
 msgstr "Усредненное значение для закрытых задач(дней)"
 
-#: www/pm/reporting/index.php:157
+#: www/pm/reporting/index.php:155
 msgid "Number of started tasks"
 msgstr "Номера запущенных задач"
 
-#: www/pm/reporting/index.php:182
+#: www/pm/reporting/index.php:178
 msgid "Number of tasks still not completed"
 msgstr "Количество незавершонных задач"
 
-#: www/pm/reporting/index.php:210
+#: www/pm/reporting/index.php:205
 msgid "Tasks By Category"
 msgstr "Задачи по категории"
 
-#: www/pm/reporting/index.php:211
+#: www/pm/reporting/index.php:206
 msgid "Open Tasks By Category"
 msgstr "Открыть задачи по категории"
 
-#: www/pm/reporting/index.php:212
+#: www/pm/reporting/index.php:207
 msgid "All Tasks By Category"
 msgstr "Все задачи по категории"
 
-#: www/pm/reporting/index.php:240
+#: www/pm/reporting/index.php:235
 msgid "Tasks By Assignee"
 msgstr "Сортированы  задачи в порядке назначения"
 
-#: www/pm/reporting/index.php:241
+#: www/pm/reporting/index.php:236
 msgid "Open Tasks By Assignee"
 msgstr "Открывать в порядке назначений"
 
-#: www/pm/reporting/index.php:242
+#: www/pm/reporting/index.php:237
 msgid "All Tasks By Assignee"
 msgstr "Все задачи сортированы в порядке назначения"
 
-#: www/pm/reporting/index.php:243
+#: www/pm/reporting/index.php:238
 #, fuzzy
 msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
@@ -21019,11 +21058,6 @@ msgstr "Админ трекера"
 msgid "Mailing Lists Admin"
 msgstr "Списки рассылки"
 
-#: www/project/admin/tools.php:326
-#, fuzzy
-msgid "Tasks Admin"
-msgstr "Админ трекера"
-
 #: www/project/admin/tools.php:329
 #, fuzzy
 msgid "Documents Admin"
@@ -21204,10 +21238,10 @@ msgstr "Файл должен быть указан на этой страниц
 msgid "Project Member List"
 msgstr "Список участников проекта"
 
-#: www/project/memberlist.php:37 www/project/report/index.php:131
+#: www/project/memberlist.php:37
 #, fuzzy
 msgid ""
-"If you would like to contribute to this project by becoming a developer, "
+"If you would like to contribute to this project by becoming a member, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
 " Если Вы хотели бы внести свой вклад в этот проект, становясь разработчиком, "
@@ -21230,6 +21264,15 @@ msgstr "Роль/позиция"
 #: www/project/memberlist.php:53
 msgid "Skills"
 msgstr "Опыт"
+
+#: www/project/report/index.php:131
+#, fuzzy
+msgid ""
+"If you would like to contribute to this project by becoming a developer, "
+"contact one of the project admins, designated in bold text below."
+msgstr ""
+" Если Вы хотели бы внести свой вклад в этот проект, становясь разработчиком, "
+"свяжитесь с админстрацией проекта."
 
 #: www/project/report/index.php:135
 msgid "Developer"
@@ -21660,7 +21703,7 @@ msgstr "Трекер открыт"
 msgid "Task Close"
 msgstr "Трекер закрыт"
 
-#: www/reporting/projectact_graph.php:145 www/stats/site_stats_utils.php:228
+#: www/reporting/projectact_graph.php:145 www/stats/site_stats_utils.php:231
 msgid "Page Views"
 msgstr "Просмотров страницы"
 
@@ -21970,66 +22013,66 @@ msgstr "В задачах проекта"
 msgid "This project's trackers"
 msgstr "В трекерах проекта"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 msgid "Error: Under min length search"
 msgstr "Меньше минимальной строки для поиска"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:116
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:117
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:132
 msgid "Forum Search Results"
 msgstr "Результаты поиска форумов"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:121
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:122
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:128
 msgid "Tracker Search Results"
 msgstr "Результаты поиска в трекере"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:126
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:127
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:136
 msgid "Task Search Results"
 msgstr "Результаты поиска задач"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:131
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:132
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:140
 msgid "Documentation Search Results"
 msgstr "Результаты поиска документации"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:136
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:137
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:144
 msgid "Files Search Results"
 msgstr "Результаты поиска файлов"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:141
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:142
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:148
 msgid "News Search Results"
 msgstr "Результаты поиска новостей"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:189
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:190
 #, php-format
 msgid "Note: only the first %d results for this category are displayed."
 msgstr ""
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:194
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:195
 #, fuzzy, php-format
 msgid ""
 "No matches found for “%1$s” - No sections available (check your permissions)"
 msgstr "Проверьте ваши полномочия, секция недоступна"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:196
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #, fuzzy, php-format
 msgid "No matches found for “%1$s”"
 msgstr "Ничего не найдено для <em>%1$s</em>"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:335
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"
 msgstr "все слова"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:338
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:344
 msgid "with one word"
 msgstr "в одно слово"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:385
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:391
 #, fuzzy
 msgid "Search All"
 msgstr "Поиск"
@@ -22046,7 +22089,7 @@ msgid "#"
 msgstr ""
 
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:50
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:51
 msgid "Post date"
 msgstr "Дата отправки"
 
@@ -22108,7 +22151,8 @@ msgid "People"
 msgstr "Участники"
 
 #: www/search/index.php:82
-msgid "Error - Invalid search"
+#, fuzzy
+msgid "Error: Invalid search"
 msgstr "Ошибка - Неверный поиск"
 
 #: www/sendmessage.php:33
@@ -22189,51 +22233,54 @@ msgid "Submit A New Snippet"
 msgstr "Представлена новая часть"
 
 #: www/snippet/add_snippet_to_package.php:56
-msgid "Error - snippet_package_version_id missing"
+#, fuzzy
+msgid "Error: snippet_package_version_id missing"
 msgstr "Ошибка - не указан идентификатор версии пакета"
 
 #: www/snippet/add_snippet_to_package.php:72
-msgid "Error - Only the creator of a package version can add snippets to it."
+#, fuzzy
+msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr "Только владелец пакета может назначить версию для него."
 
 #: www/snippet/add_snippet_to_package.php:82
-msgid "Error - That snippet doesn't exist."
+#, fuzzy
+msgid "Error: That snippet doesn't exist."
 msgstr "Указана несуществующая вырезка."
 
 #: www/snippet/add_snippet_to_package.php:83
 #: www/snippet/add_snippet_to_package.php:97
-#: www/snippet/add_snippet_to_package.php:115
+#: www/snippet/add_snippet_to_package.php:114
 msgid "Back To Add Page"
 msgstr "Вернуться к странице добавления"
 
 #: www/snippet/add_snippet_to_package.php:96
-msgid "Error - That snippet was already added to this package."
+#, fuzzy
+msgid "Error: That snippet was already added to this package."
 msgstr "Эта вырезка была ранее добавлена в пакет."
 
-#: www/snippet/add_snippet_to_package.php:108 www/snippet/submit.php:75
-msgid "ERROR DOING SNIPPET VERSION INSERT!"
-msgstr "ОШИБКА УКАЗАНИЯ ВЕРСИИ ВЫРЕЗКИ"
+#: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
+#: www/snippet/submit.php:74
+#, fuzzy
+msgid "Error doing snippet version insert"
+msgstr "Ошибка - отрезок несуществует"
 
-#: www/snippet/add_snippet_to_package.php:111 www/snippet/addversion.php:74
+#: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
 msgstr "Отрезок версии добавлен"
 
-#: www/snippet/add_snippet_to_package.php:114 www/snippet/addversion.php:77
-#: www/snippet/addversion.php:198 www/snippet/package.php:124
-#: www/snippet/submit.php:83
-msgid "Error - Go back and fill in all the information"
+#: www/snippet/add_snippet_to_package.php:113 www/snippet/addversion.php:77
+#: www/snippet/addversion.php:198 www/snippet/package.php:123
+#: www/snippet/submit.php:81
+#, fuzzy
+msgid "Error: Go back and fill in all the information"
 msgstr "Ошибка! вернитесь и заполните необходимые поля"
 
-#: www/snippet/add_snippet_to_package.php:129
-msgid "Package:"
-msgstr "Пакет:"
-
-#: www/snippet/add_snippet_to_package.php:131
+#: www/snippet/add_snippet_to_package.php:130
 msgid ""
 "You can use this form repeatedly to keep adding snippets to your package."
 msgstr ""
 
-#: www/snippet/add_snippet_to_package.php:132
+#: www/snippet/add_snippet_to_package.php:131
 #, fuzzy
 msgid ""
 "The \"Snippet Version ID\" is the unique ID number that is shown next to a "
@@ -22244,39 +22291,30 @@ msgstr ""
 "которой будет отображатся как специфичная версия вырезок на странице при "
 "навигации."
 
-#: www/snippet/add_snippet_to_package.php:141
+#: www/snippet/add_snippet_to_package.php:140
 msgid "Add This Snippet Version ID:"
 msgstr "Добавить отрезок версии:"
 
-#: www/snippet/add_snippet_to_package.php:166 www/snippet/addversion.php:107
-#: www/snippet/addversion.php:226 www/snippet/package.php:175
-#: www/snippet/submit.php:146
+#: www/snippet/add_snippet_to_package.php:165 www/snippet/addversion.php:107
+#: www/snippet/addversion.php:226 www/snippet/package.php:174
+#: www/snippet/submit.php:144
 msgid "Make sure all info is complete and accurate"
 msgstr "Убедитесь что все сделано правильно"
 
-#: www/snippet/add_snippet_to_package.php:168 www/snippet/addversion.php:109
-#: www/snippet/addversion.php:228 www/snippet/package.php:177
-#: www/snippet/submit.php:146
-msgid "SUBMIT"
-msgstr "ОТПРАВИТЬ"
-
-#: www/snippet/add_snippet_to_package.php:185
+#: www/snippet/add_snippet_to_package.php:184
 #: www/snippet/snippet_utils.php:164
 msgid "No Snippets Are In This Package Yet"
 msgstr "В пакете еще нет вырезок"
 
-#: www/snippet/add_snippet_to_package.php:187
+#: www/snippet/add_snippet_to_package.php:186
+#: www/snippet/snippet_utils.php:151
 msgid "Snippets In This Package"
 msgstr "Вырезки в этом пакете"
 
 #: www/snippet/addversion.php:39
-msgid "Error - snippet doesn't exist"
-msgstr "Ошибка - отрезок несуществует"
-
-#: www/snippet/addversion.php:71
 #, fuzzy
-msgid "ERROR DOING SNIPPET VERSION INSERT! "
-msgstr "ОШИБКА УКАЗАНИЯ ВЕРСИИ ВЫРЕЗКИ"
+msgid "Error: snippet doesn't exist"
+msgstr "Ошибка - отрезок несуществует"
 
 #: www/snippet/addversion.php:81 www/snippet/addversion.php:202
 msgid "New snippet version"
@@ -22290,28 +22328,25 @@ msgstr ""
 "Если у вас есть измененная версия этого фрагмента и вы считаете необходимым, "
 "поделиться этим фрагментом с другими, Вы можете сделать это здесь."
 
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:221
-msgid "Changes:"
-msgstr "Изменения:"
-
-#: www/snippet/addversion.php:102
-msgid "Paste the Code Here:"
-msgstr "Вставить код здесь:"
+#: www/snippet/addversion.php:102 www/snippet/submit.php:140
+msgid "Paste the Code Here"
+msgstr "Вставить код здесь"
 
 #: www/snippet/addversion.php:127
-msgid "Error - snippet_package doesn't exist"
+#, fuzzy
+msgid "Error: snippet_package doesn't exist"
 msgstr "Ошибка - пакет отрезков не существует"
 
-#: www/snippet/addversion.php:154
+#: www/snippet/addversion.php:154 www/snippet/package.php:75
 #, fuzzy
-msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT! "
-msgstr "ОШИБКА НАЗНАЧЕНИЯ ВЕРСИИ ПАКЕТУ!"
+msgid "Error doing snippet package version insert"
+msgstr "Ошибка - не указан идентификатор версии пакета"
 
 #: www/snippet/addversion.php:155
 msgid "New snippet package"
 msgstr "Новый пакет частей"
 
-#: www/snippet/addversion.php:160
+#: www/snippet/addversion.php:160 www/snippet/package.php:82
 msgid "Snippet Package Version Added Successfully."
 msgstr "Пакет отрезков версии добавлен."
 
@@ -22319,11 +22354,11 @@ msgstr "Пакет отрезков версии добавлен."
 msgid "Add snippet to package"
 msgstr "Добавить часть в пакет"
 
-#: www/snippet/addversion.php:181 www/snippet/package.php:106
+#: www/snippet/addversion.php:181 www/snippet/package.php:105
 msgid "IMPORTANT!"
 msgstr "Важно!"
 
-#: www/snippet/addversion.php:183 www/snippet/package.php:108
+#: www/snippet/addversion.php:183 www/snippet/package.php:107
 msgid ""
 "If a new window opened, use it to add snippets to your package. If a new "
 "window did not open, use the following link to add to your package BEFORE "
@@ -22333,12 +22368,12 @@ msgstr ""
 "Если нет открытого окна, следуйте по ссылке для добавления в пакет Вашей "
 "вырезки ПЕРЕД ТЕМ как вы закроете эту страницу."
 
-#: www/snippet/addversion.php:186 www/snippet/package.php:88
-#: www/snippet/package.php:110
+#: www/snippet/addversion.php:186 www/snippet/package.php:87
+#: www/snippet/package.php:109
 msgid "Add snippets to package"
 msgstr "Добавить части в пакет"
 
-#: www/snippet/addversion.php:187 www/snippet/package.php:113
+#: www/snippet/addversion.php:187 www/snippet/package.php:112
 msgid ""
 "<strong>Browse the library</strong> to find the snippets you want to add, "
 "then add them using the new window link shown above."
@@ -22355,57 +22390,60 @@ msgstr ""
 "поделиться с другими, сделайте это здесь."
 
 #: www/snippet/addversion.php:237
-msgid "Error - was the URL or form mangled??"
+#, fuzzy
+msgid "Error: was the URL or form mangled??"
 msgstr "Форма или ссылка неверна"
 
-#: www/snippet/browse.php:46 www/snippet/detail.php:43
+#: www/snippet/browse.php:48 www/snippet/detail.php:43
 #: www/snippet/detail.php:131 www/snippet/detail.php:213
 #: www/snippet/index.php:101
 msgid "Snippet Library"
 msgstr "Библиотека отрезков"
 
-#: www/snippet/browse.php:59
+#: www/snippet/browse.php:61
 #, php-format
 msgid "Snippets by language: %1$s"
 msgstr "Отрезки на языке: %1$s"
 
-#: www/snippet/browse.php:66
+#: www/snippet/browse.php:68
 #, php-format
 msgid "Snippets by category: %1$s"
 msgstr "Отрезки по категории: %1$s"
 
-#: www/snippet/browse.php:68
-msgid "Error - bad url?"
+#: www/snippet/browse.php:70
+#, fuzzy
+msgid "Error: bad url?"
 msgstr "Ошибка - неверная ссылка?"
 
-#: www/snippet/browse.php:77
+#: www/snippet/browse.php:79
 msgid "No snippets found"
 msgstr "Отрезки не найдены"
 
-#: www/snippet/browse.php:81 www/snippet/detail.php:63
+#: www/snippet/browse.php:83 www/snippet/detail.php:63
 #: www/snippet/snippet_utils.php:154
 msgid "Snippet ID"
 msgstr "Идент. отрезка"
 
-#: www/snippet/browse.php:83
+#: www/snippet/browse.php:85
 msgid "Creator"
 msgstr "Автор"
 
-#: www/snippet/browse.php:90
+#: www/snippet/browse.php:92
 msgid "Packages Of Snippets"
 msgstr "Пакет отрезков"
 
-#: www/snippet/browse.php:105
+#: www/snippet/browse.php:107
 msgid "Snippets"
 msgstr "Отрезки"
 
 #: www/snippet/delete.php:142
 #, fuzzy
-msgid "Error - mangled URL?"
+msgid "Error: mangled URL?"
 msgstr "Это была искаженная ссылка?"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
-msgid "Error - no versions found"
+#, fuzzy
+msgid "Error: no versions found"
 msgstr "Ошибка - версий не найдено"
 
 #: www/snippet/detail.php:60
@@ -22473,7 +22511,8 @@ msgstr ""
 "изменили его и считаете целесообразным поделиться вашим вариантом с другими."
 
 #: www/snippet/detail.php:223
-msgid "Error - was the URL mangled?"
+#, fuzzy
+msgid "Error: was the URL mangled?"
 msgstr "Это была искаженная ссылка?"
 
 #: www/snippet/index.php:50
@@ -22513,44 +22552,37 @@ msgid "Browse by Category"
 msgstr "Обзор по категории"
 
 #: www/snippet/package.php:57
-msgid "ERROR DOING SNIPPET PACKAGE INSERT!"
-msgstr "ОШИБКА ДОБАВЛЕНИЯ ПАКЕТА ВЫРЕЗОК!"
+#, fuzzy
+msgid "Error doing snippet package insert"
+msgstr "Ошибка - пакет отрезков не существует"
 
-#: www/snippet/package.php:58 www/snippet/package.php:77
-#: www/snippet/package.php:128
+#: www/snippet/package.php:58 www/snippet/package.php:76
+#: www/snippet/package.php:127
 msgid "Submit A New Snippet Package"
 msgstr "Утвердить новый пакет отрезков"
 
-#: www/snippet/package.php:63
+#: www/snippet/package.php:62
 msgid "Snippet Package Added Successfully."
 msgstr "Пакет отрезков был добавлен."
 
-#: www/snippet/package.php:76
-msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
-msgstr "ОШИБКА НАЗНАЧЕНИЯ ВЕРСИИ ПАКЕТУ!"
-
-#: www/snippet/package.php:83
-msgid "Snippet Pacakge Version Added Successfully."
-msgstr "Была добавлена версия пакету."
-
-#: www/snippet/package.php:133
+#: www/snippet/package.php:132
 msgid ""
 "You can group together existing snippets into a package using this "
 "interface. Before creating your package, make sure all your snippets are in "
 "place and you have made a note of the snippet ID's."
 msgstr ""
 
-#: www/snippet/package.php:136
+#: www/snippet/package.php:135
 msgid "Create the package using this form."
 msgstr ""
 
-#: www/snippet/package.php:137
+#: www/snippet/package.php:136
 msgid ""
 "<strong>Then</strong> use the \"Add Snippets to Package\" link to add files "
 "to your package."
 msgstr ""
 
-#: www/snippet/package.php:139
+#: www/snippet/package.php:138
 msgid ""
 "<span class=\"important\">Note:</span> You can submit a new version of an "
 "existing package by browsing the library and using the link on the existing "
@@ -22558,16 +22590,16 @@ msgid ""
 "package."
 msgstr ""
 
-#: www/snippet/package.php:157 www/snippet/submit.php:125
+#: www/snippet/package.php:156 www/snippet/submit.php:123
 #: www/stats/i18n.php:33
 msgid "Language"
 msgstr "Язык"
 
-#: www/snippet/package.php:160 www/snippet/submit.php:127
+#: www/snippet/package.php:159 www/snippet/submit.php:125
 msgid "Suggest a Language"
 msgstr "Рекомендован язык"
 
-#: www/snippet/package.php:166 www/snippet/submit.php:133
+#: www/snippet/package.php:165 www/snippet/submit.php:131
 msgid "Suggest a Category"
 msgstr "Предложена категория"
 
@@ -22577,8 +22609,9 @@ msgid "Choose One"
 msgstr "Выбрать один"
 
 #: www/snippet/snippet_utils.php:27
-msgid "UNIX Admin"
-msgstr "Администратор UNIX"
+#, fuzzy
+msgid "Unix Admin"
+msgstr "Управление сайтом"
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -22656,23 +22689,20 @@ msgstr "Другой язык"
 msgid "Create A Package"
 msgstr "Создать пакет"
 
-#: www/snippet/snippet_utils.php:151
-msgid "Snippets In This Package:"
-msgstr "Вырезки в пакете:"
-
 #: www/snippet/submit.php:59
-msgid "ERROR DOING SNIPPET INSERT!"
-msgstr "ОШИБКА ДОБАВЛЕНИЯ ВЫРЕЗКИ!"
+#, fuzzy
+msgid "Error doing snippet insert"
+msgstr "Ошибка при вставке"
 
-#: www/snippet/submit.php:62 www/snippet/submit.php:78
+#: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
 msgstr "Вырезка добавлена"
 
-#: www/snippet/submit.php:87
+#: www/snippet/submit.php:85
 msgid "Snippet submit"
 msgstr "Выбрана часть"
 
-#: www/snippet/submit.php:91
+#: www/snippet/submit.php:89
 #, fuzzy
 msgid ""
 "You can post a new code snippet and share it with other people around the "
@@ -22686,7 +22716,7 @@ msgstr ""
 "</p><p><span class=\"important\">Примечание:</span> Вы можете принять новую "
 "версию существующего кусочка кода, исследовав "
 
-#: www/snippet/submit.php:94
+#: www/snippet/submit.php:92
 #, fuzzy
 msgid ""
 "<span class=\"important\">Note:</span> You can submit a new version of an "
@@ -22699,13 +22729,9 @@ msgstr ""
 "</p><p><span class=\"important\">Примечание:</span> Вы можете принять новую "
 "версию существующего кусочка кода, исследовав "
 
-#: www/snippet/submit.php:115
+#: www/snippet/submit.php:113
 msgid "Script Type"
 msgstr "Тип скрипта"
-
-#: www/snippet/submit.php:142
-msgid "Paste the Code Here"
-msgstr "Вставить код здесь"
 
 #: www/soap/index.php:161
 msgid "en_US"
@@ -22774,7 +22800,8 @@ msgstr "Созданные проекты: <strong>%1$s</strong>"
 msgid "Software Map"
 msgstr "Карта программ"
 
-#: www/softwaremap/trove_list.php:56
+#: www/softwaremap/trove_list.php:56 www/trove/TroveCategory.class.php:64
+#: www/trove/TroveCategory.class.php:71
 msgid "That Trove category does not exist"
 msgstr "Категория в каталоге проектов не существует"
 
@@ -22897,101 +22924,97 @@ msgstr ""
 msgid "%1$s Site Project Statistical Comparisons"
 msgstr "Статистика сравнения проектов"
 
-#: www/stats/site_stats_utils.php:70
+#: www/stats/site_stats_utils.php:71
 msgid "All Projects"
 msgstr "Все проекты"
 
-#: www/stats/site_stats_utils.php:71
+#: www/stats/site_stats_utils.php:72
 msgid "Special Projects"
 msgstr "Специальные проекты"
 
-#: www/stats/site_stats_utils.php:96
+#: www/stats/site_stats_utils.php:97
 #, php-format
 msgid " (no category found with ID %d)"
 msgstr " (нет категорий с идентификатором %d)"
 
-#: www/stats/site_stats_utils.php:128
+#: www/stats/site_stats_utils.php:129
 msgid "Projects in trove category:"
 msgstr "Проекты в категории хранилища:"
 
-#: www/stats/site_stats_utils.php:132
+#: www/stats/site_stats_utils.php:133
 msgid "OR enter Special Project List:"
 msgstr "Или укажите специальный лист проекта"
 
-#: www/stats/site_stats_utils.php:134
+#: www/stats/site_stats_utils.php:135
 msgid "<strong>comma separated</strong> group_id's)"
 msgstr "<strong>разделение запятой</strong> группы идент)"
 
-#: www/stats/site_stats_utils.php:136
+#: www/stats/site_stats_utils.php:137
 msgid "Report:"
 msgstr "Отчет:"
 
-#: www/stats/site_stats_utils.php:143
+#: www/stats/site_stats_utils.php:144
 msgid "last_30"
 msgstr "30 последних"
 
-#: www/stats/site_stats_utils.php:144
-msgid "all"
-msgstr "все"
-
-#: www/stats/site_stats_utils.php:150
+#: www/stats/site_stats_utils.php:151
 msgid "View by:"
 msgstr "Просмотр по:"
 
-#: www/stats/site_stats_utils.php:155
+#: www/stats/site_stats_utils.php:156
 msgid "Generate Report"
 msgstr "Генерирование отчета"
 
-#: www/stats/site_stats_utils.php:236 www/stats/site_stats_utils.php:419
+#: www/stats/site_stats_utils.php:239 www/stats/site_stats_utils.php:421
 msgid "All Trkr"
 msgstr "Все трекеры"
 
-#: www/stats/site_stats_utils.php:262
+#: www/stats/site_stats_utils.php:265
 msgid "Site"
 msgstr "Сайт"
 
-#: www/stats/site_stats_utils.php:263
+#: www/stats/site_stats_utils.php:266
 msgid "Subdomain"
 msgstr "Субдомен"
 
-#: www/stats/site_stats_utils.php:282
+#: www/stats/site_stats_utils.php:285
 #, fuzzy
 msgid "Checkouts"
 msgstr "Отмечено"
 
-#: www/stats/site_stats_utils.php:331
+#: www/stats/site_stats_utils.php:333
 msgid "Query returned no valid data."
 msgstr "Ответ на запрос искажен"
 
-#: www/stats/site_stats_utils.php:355
+#: www/stats/site_stats_utils.php:357
 #, php-format
 msgid "Statistics for the past %1$s days"
 msgstr "Статистика за последние %1$s дней"
 
-#: www/stats/site_stats_utils.php:359 www/stats/site_stats_utils.php:413
-#: www/stats/site_stats_utils.php:472
+#: www/stats/site_stats_utils.php:361 www/stats/site_stats_utils.php:415
+#: www/stats/site_stats_utils.php:474
 msgid "Site Views"
 msgstr "Просмотры сайта"
 
-#: www/stats/site_stats_utils.php:360 www/stats/site_stats_utils.php:414
-#: www/stats/site_stats_utils.php:473
+#: www/stats/site_stats_utils.php:362 www/stats/site_stats_utils.php:416
+#: www/stats/site_stats_utils.php:475
 msgid "Subdomain Views"
 msgstr "Просмотры субдоменов"
 
-#: www/stats/site_stats_utils.php:391 www/stats/site_stats_utils.php:447
+#: www/stats/site_stats_utils.php:393 www/stats/site_stats_utils.php:449
 msgid "No Data"
 msgstr "Нет данных"
 
-#: www/stats/site_stats_utils.php:409
+#: www/stats/site_stats_utils.php:411
 #, php-format
 msgid "Statistics for the past %1$s months"
 msgstr "Статистика за последние %1$s месяцев"
 
-#: www/stats/site_stats_utils.php:468
+#: www/stats/site_stats_utils.php:470
 msgid "Current Aggregate Statistics for All Time"
 msgstr "Текущая статистика сервисов за все время"
 
-#: www/stats/site_stats_utils.php:475
+#: www/stats/site_stats_utils.php:477
 msgid "Developers"
 msgstr "Разработчики"
 
@@ -23482,7 +23505,7 @@ msgstr ""
 "Статистика пользования проектами  %1$s, и отображение лучших проектов по "
 "категориям."
 
-#: www/top/index.php:35 www/top/mostactive.php:42
+#: www/top/index.php:35 www/top/mostactive.php:43
 msgid "Most Active All Time"
 msgstr "Высшая активность за все время"
 
@@ -23498,23 +23521,23 @@ msgstr "Счет высших посещений проектов"
 msgid "Top Forum Post Counts"
 msgstr "Счет высших постов форумов"
 
-#: www/top/mostactive.php:47 www/top/topusers.php:57
+#: www/top/mostactive.php:48 www/top/topusers.php:57
 msgid "Updated Daily"
 msgstr "Обновляется ежедневно"
 
-#: www/top/mostactive.php:49 www/top/toplist.php:52 www/top/topusers.php:59
+#: www/top/mostactive.php:50 www/top/toplist.php:52 www/top/topusers.php:59
 msgid "View Other Top Categories"
 msgstr "Просмотр других топ категорий"
 
-#: www/top/mostactive.php:51 www/top/toplist.php:53
+#: www/top/mostactive.php:52 www/top/toplist.php:53
 msgid "Project name"
 msgstr "Название проекта"
 
-#: www/top/mostactive.php:51
+#: www/top/mostactive.php:52
 msgid "Percentile"
 msgstr "Проценты"
 
-#: www/top/mostactive.php:79 www/top/mostactive.php:86
+#: www/top/mostactive.php:80 www/top/mostactive.php:87
 msgid "More"
 msgstr "Больше"
 
@@ -23650,11 +23673,6 @@ msgstr "Начато"
 msgid "End:"
 msgstr ""
 
-#: www/tracker/roadmap.php:175
-#, fuzzy
-msgid "could Not Get ArtifactTypeFactoryHtml"
-msgstr "Производство неполучно"
-
 #: www/tracker/roadmap.php:190 www/tracker/roadmap.php:230
 #, fuzzy
 msgid "No roadmap available"
@@ -23764,13 +23782,6 @@ msgstr "Административное редактирование катег
 msgid "update"
 msgstr "Обновить"
 
-#: www/trove/include/trove.php:256
-#, fuzzy, php-format
-msgid ""
-"This project has not yet categorized itself in the <a href=\"%s\">Trove "
-"Software Map</a>."
-msgstr "Этот проект еще не зарегистрировался в"
-
 #: www/trove/index.php:46
 #, fuzzy
 msgid "Trove Map"
@@ -23799,11 +23810,6 @@ msgstr[2] ""
 msgid "Invalid Trove Category"
 msgstr "Категория в каталоге проектов указана неверно"
 
-#: www/trove/TroveCategory.class.php:64 www/trove/TroveCategory.class.php:71
-#, fuzzy
-msgid "That Trove category does not exist."
-msgstr "Категория в каталоге проектов не существует"
-
 #: www/trove/TroveCategory.class.php:97
 msgid "Empty strings"
 msgstr ""
@@ -23816,6 +23822,83 @@ msgstr "Глобальное изменение"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#, fuzzy
+#~ msgid "Mailing Lists."
+#~ msgstr "Списки рассылки"
+
+#, fuzzy
+#~ msgid "Relation"
+#~ msgstr "Резолюция"
+
+#~ msgid "Links to related SVN commits"
+#~ msgstr "Ссылки на схожие коммиты SVN"
+
+#, fuzzy
+#~ msgid "Error creating ForumMessage:"
+#~ msgstr "Ошибка создания сообщения на форуме"
+
+#, fuzzy
+#~ msgid "Tasks Admin"
+#~ msgstr "Админ трекера"
+
+#~ msgid "ERROR DOING SNIPPET VERSION INSERT!"
+#~ msgstr "ОШИБКА УКАЗАНИЯ ВЕРСИИ ВЫРЕЗКИ"
+
+#~ msgid "Package:"
+#~ msgstr "Пакет:"
+
+#~ msgid "SUBMIT"
+#~ msgstr "ОТПРАВИТЬ"
+
+#, fuzzy
+#~ msgid "ERROR DOING SNIPPET VERSION INSERT! "
+#~ msgstr "ОШИБКА УКАЗАНИЯ ВЕРСИИ ВЫРЕЗКИ"
+
+#~ msgid "Changes:"
+#~ msgstr "Изменения:"
+
+#~ msgid "Paste the Code Here:"
+#~ msgstr "Вставить код здесь:"
+
+#, fuzzy
+#~ msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT! "
+#~ msgstr "ОШИБКА НАЗНАЧЕНИЯ ВЕРСИИ ПАКЕТУ!"
+
+#~ msgid "ERROR DOING SNIPPET PACKAGE INSERT!"
+#~ msgstr "ОШИБКА ДОБАВЛЕНИЯ ПАКЕТА ВЫРЕЗОК!"
+
+#~ msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
+#~ msgstr "ОШИБКА НАЗНАЧЕНИЯ ВЕРСИИ ПАКЕТУ!"
+
+#~ msgid "Snippet Pacakge Version Added Successfully."
+#~ msgstr "Была добавлена версия пакету."
+
+#~ msgid "UNIX Admin"
+#~ msgstr "Администратор UNIX"
+
+#~ msgid "Snippets In This Package:"
+#~ msgstr "Вырезки в пакете:"
+
+#~ msgid "ERROR DOING SNIPPET INSERT!"
+#~ msgstr "ОШИБКА ДОБАВЛЕНИЯ ВЫРЕЗКИ!"
+
+#~ msgid "all"
+#~ msgstr "все"
+
+#, fuzzy
+#~ msgid "could Not Get ArtifactTypeFactoryHtml"
+#~ msgstr "Производство неполучно"
+
+#, fuzzy
+#~ msgid ""
+#~ "This project has not yet categorized itself in the <a href=\"%s\">Trove "
+#~ "Software Map</a>."
+#~ msgstr "Этот проект еще не зарегистрировался в"
+
+#, fuzzy
+#~ msgid "That Trove category does not exist."
+#~ msgstr "Категория в каталоге проектов не существует"
 
 #, fuzzy
 #~ msgid "Document Manager Action Denied"
