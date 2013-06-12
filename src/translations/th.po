@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-12 17:36+0200\n"
+"POT-Creation-Date: 2013-06-12 17:37+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -20,9 +20,8 @@ msgstr ""
 
 #: common/account/actions/addsshkey.php:35
 #: common/account/actions/addsshkey.php:50
-#, fuzzy
 msgid "SSH Key added successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/account/actions/addsshkey.php:40
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:151
@@ -32,9 +31,8 @@ msgid "Invalid file name."
 msgstr ""
 
 #: common/account/actions/deletesshkey.php:30
-#, fuzzy
 msgid "SSH Key deleted successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/addfile.php:58 common/docman/actions/addfile.php:65
 #: common/docman/actions/addsubdocgroup.php:48
@@ -58,9 +56,8 @@ msgstr "กลุ่มเอกสาร: จำเป็นต้องมี�
 #: common/docman/actions/updatewebdavinterface.php:27
 #: common/docman/actions/validatefile.php:39
 #: common/docman/views/addfile.php:53
-#, fuzzy
 msgid "Document Manager Action Denied."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/actions/addfile.php:75
 msgid "No valid Directory was selected."
@@ -79,9 +76,9 @@ msgid "Unknown type submission."
 msgstr ""
 
 #: common/docman/actions/addfile.php:184
-#, fuzzy, php-format
+#, php-format
 msgid "Document %s submitted successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/addfile.php:187
 #, php-format
@@ -90,19 +87,17 @@ msgid ""
 msgstr ""
 
 #: common/docman/actions/addsubdocgroup.php:63
-#, fuzzy
 msgid "Document subfolder successfully created."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/addsubdocgroup.php:67
-#, fuzzy
 msgid "Document folder successfully created."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/deldir.php:64
-#, fuzzy, php-format
+#, php-format
 msgid "Document folder %s deleted successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/delfile.php:36
 #: common/docman/actions/enforcereserve.php:36
@@ -111,9 +106,8 @@ msgstr "กลุ่มเอกสาร: จำเป็นต้องมี�
 #: common/docman/actions/reservefile.php:37
 #: common/docman/actions/trashfile.php:50
 #: common/docman/actions/validatefile.php:44
-#, fuzzy
 msgid "Document(s)"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
@@ -126,24 +120,22 @@ msgid "No action to perform"
 msgstr ""
 
 #: common/docman/actions/delfile.php:52
-#, fuzzy
 msgid "deleted successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/editdocgroup.php:86
-#, fuzzy, php-format
+#, php-format
 msgid "Documents folder %s updated successfully"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/editdocgroup.php:88
-#, fuzzy, php-format
+#, php-format
 msgid "on project %s"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/actions/editfile.php:69
-#, fuzzy
 msgid "No document found to update"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/actions/editfile.php:89
 #, php-format
@@ -151,9 +143,9 @@ msgid "Invalid file attack attempt %1$s."
 msgstr ""
 
 #: common/docman/actions/editfile.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "Document %s updated successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/emptytrash.php:37
 msgid "Unable to clean trash"
@@ -164,9 +156,8 @@ msgid "Emptied Trash successfully."
 msgstr ""
 
 #: common/docman/actions/enforcereserve.php:47
-#, fuzzy
 msgid "reservation enforced successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/forcereindexenginesearch.php:36
 msgid ""
@@ -174,9 +165,8 @@ msgid ""
 msgstr ""
 
 #: common/docman/actions/injectzip.php:49
-#, fuzzy
 msgid "Archive injected successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:38 www/activity/index.php:322
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:60
@@ -185,14 +175,12 @@ msgid "Directory"
 msgstr ""
 
 #: common/docman/actions/monitordirectory.php:54
-#, fuzzy
 msgid "monitoring started"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:72
-#, fuzzy
 msgid "monitoring stopped."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
@@ -206,39 +194,33 @@ msgid "Monitoring Started"
 msgstr ""
 
 #: common/docman/actions/monitorfile.php:76
-#, fuzzy
 msgid "Monitoring Stopped"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/actions/releasefile.php:48
-#, fuzzy
 msgid "released successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/reservefile.php:48
-#, fuzzy
 msgid "reserved successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/trashdir.php:85
-#, fuzzy, php-format
+#, php-format
 msgid "Documents folder %s moved to trash successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/trashfile.php:66
-#, fuzzy
 msgid "moved to trash successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/updatecreateonline.php:33
-#, fuzzy
 msgid "Create Online Documents Status updated successfully : Active."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/updatecreateonline.php:36
-#, fuzzy
 msgid "Create Online Documents Status updated successfully : Off."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/updateenginesearch.php:33
 msgid "Search Engine Status updated successfully : Active."
@@ -253,20 +235,17 @@ msgid "Webdav Interface updated successfully : Active."
 msgstr ""
 
 #: common/docman/actions/updatewebdavinterface.php:36
-#, fuzzy
 msgid "Webdav Interface updated successfully : Off."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/actions/validatefile.php:60
-#, fuzzy
 msgid "activated successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/Document.class.php:64
 #: common/docman/DocumentManager.class.php:55
-#, fuzzy
 msgid "No Valid Group Object"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:81
 msgid "group_id in db result does not match Group Object"
@@ -287,34 +266,30 @@ msgid "Document already published in this directory"
 msgstr ""
 
 #: common/docman/Document.class.php:197 common/docman/Document.class.php:204
-#, fuzzy
 msgid "Error Adding Document:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:197
 msgid "Not a file"
 msgstr ""
 
 #: common/docman/Document.class.php:213
-#, fuzzy
 msgid "Error fetching Document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:223
-#, fuzzy
 msgid "Error updating document group:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:248
-#, fuzzy
 msgid "Document: Invalid docid"
-msgstr "เอกสาร:: หมายเลขเอกสาร ไม่ถูกต้อง"
+msgstr "เอกสาร: หมายเลขเอกสาร ไม่ถูกต้อง"
 
 #: common/docman/Document.class.php:576
 #: common/docman/DocumentGroup.class.php:408
 #, fuzzy
 msgid "Unable To Remove Monitor"
-msgstr "ไม่สามารถเพิ่มผู้ดูระบบได้"
+msgstr ""
 
 #: common/docman/Document.class.php:597
 #: common/docman/DocumentGroup.class.php:429 common/forum/Forum.class.php:450
@@ -325,27 +300,23 @@ msgstr "ไม่สามารถเพิ่มผู้ดูระบบไ
 #: common/docman/DocumentGroup.class.php:445
 #, fuzzy
 msgid "Unable To Clear Monitor"
-msgstr "ไม่สามารถเพิ่มผู้ดูระบบได้"
+msgstr ""
 
 #: common/docman/Document.class.php:662
-#, fuzzy
 msgid "Document lock failed"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:690
-#, fuzzy
 msgid "Document reservation failed"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:916
-#, fuzzy
 msgid "New document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:918
-#, fuzzy
 msgid "Updated document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:918
 #: common/docman/DocumentGroup.class.php:706
@@ -354,9 +325,8 @@ msgid "by"
 msgstr ""
 
 #: common/docman/Document.class.php:921
-#, fuzzy
 msgid "Project:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:922
 #: common/docman/DocumentGroup.class.php:710
@@ -364,14 +334,12 @@ msgid "Directory:"
 msgstr ""
 
 #: common/docman/Document.class.php:923
-#, fuzzy
 msgid "Document title:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:924
-#, fuzzy
 msgid "Document description:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:925
 #: common/docman/DocumentGroup.class.php:712
@@ -389,9 +357,8 @@ msgid "Docman"
 msgstr ""
 
 #: common/docman/Document.class.php:953
-#, fuzzy
 msgid "Error Deleting Document:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:1028
 #: common/docman/DocumentGroup.class.php:854
@@ -423,40 +390,35 @@ msgstr ""
 
 #: common/docman/DocumentGroup.class.php:103
 msgid "Name is required"
-msgstr ""
+msgstr "จำเป็นต้องมีชื่อ"
 
 #: common/docman/DocumentGroup.class.php:112
-#, fuzzy
 msgid "Invalid Documents folder parent ID"
-msgstr "กลุ่มเอกสาร: รหัสของกลุ่มเอกสารไม่ตรง"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:133
 msgid "Folder name already exists"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:149
-#, fuzzy
 msgid "Error Adding Folder:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:240
 msgid "Unsupported injected file:"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:258
-#, fuzzy
 msgid "Invalid Document Folder ID"
-msgstr "กลุ่มเอกสาร: รหัสของกลุ่มเอกสารไม่ตรง"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:488
-#, fuzzy
 msgid "Invalid Documents Folder parent ID"
-msgstr "กลุ่มเอกสาร: รหัสของกลุ่มเอกสารไม่ตรง"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:500
-#, fuzzy
 msgid "Documents Folder name already exists"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:523
 #: common/docman/include/DocumentGroupHTML.class.php:43
@@ -465,18 +427,16 @@ msgid "Error: %s"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:658
-#, fuzzy
 msgid "Browse this folder"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:704
 msgid "New directory"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:706
-#, fuzzy
 msgid "Updated directory"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:709
 #: common/forum/ForumHTML.class.php:73 plugins/contribtracker/www/index.php:35
@@ -544,9 +504,8 @@ msgid "injected by Zip:"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:804
-#, fuzzy
 msgid "no description"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:813
 msgid "Unknown item."
@@ -559,13 +518,12 @@ msgstr ""
 #: common/docman/DocumentGroupFactory.class.php:60
 #, fuzzy
 msgid "DocumentGroupFactory:: Invalid Project"
-msgstr "เอกสาร:: หมายเลขเอกสาร ไม่ถูกต้อง"
+msgstr ""
 
 #: common/docman/DocumentGroupFactory.class.php:85
 #: common/docman/DocumentGroupFactory.class.php:119
-#, fuzzy
 msgid "No Documents Folder Found"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/DocumentManager.class.php:177
 msgid "Number of documents in this folder"
@@ -657,9 +615,8 @@ msgid "Y-m-d H:i"
 msgstr ""
 
 #: common/docman/include/DocumentGroupHTML.class.php:39
-#, fuzzy
 msgid "Invalid Project"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/include/webdav.php:221 common/docman/include/webdav.php:232
 #: common/docman/include/webdav.php:294
@@ -671,9 +628,8 @@ msgid "You MUST first create at least one directory to store your document."
 msgstr ""
 
 #: common/docman/views/addfile.php:91 common/docman/views/editfile.php:38
-#, fuzzy
 msgid "Document Title:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/addfile.php:91
 msgid ""
@@ -761,9 +717,8 @@ msgid "Description"
 msgstr ""
 
 #: common/docman/views/addfile.php:116
-#, fuzzy
 msgid "Type of Document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/addfile.php:118 common/docman/views/addfile.php:144
 #: common/docman/views/reporting.php:153
@@ -830,9 +785,8 @@ msgid "Documents folder that document belongs in"
 msgstr ""
 
 #: common/docman/views/addfile.php:204
-#, fuzzy
 msgid "Status of that document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/addfile.php:212 plugins/mantisbt/view/addIssue.php:148
 msgid "Mandatory fields"
@@ -851,19 +805,16 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:37
 #: common/docman/views/reporting.php:53 common/docman/views/search.php:34
 #: common/docman/views/tree.php:35 common/docman/views/views.php:25
-#, fuzzy
 msgid "Document Manager Access Denied"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/additem.php:57
-#, fuzzy
 msgid "Submit a new document in this folder."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/additem.php:57
-#, fuzzy
 msgid "Submit a new document."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/additem.php:60
 msgid "Create a folder based on this name."
@@ -1034,9 +985,8 @@ msgstr ""
 #: common/docman/views/listfile.php:158
 #: common/docman/views/listtrashfile.php:102
 #: common/docman/views/pendingfiles.php:55
-#, fuzzy
 msgid "Edit document dialog box"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:170 www/export/rssAboTask.php:142
 #: www/pm/browse_task.php:387 www/pm/mod_task.php:66
@@ -1048,44 +998,38 @@ msgid "Path:"
 msgstr ""
 
 #: common/docman/views/listfile.php:174
-#, fuzzy
 msgid "Document Folder:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:176 common/docman/views/listfile.php:207
 #: common/docman/views/listtrashfile.php:119
 #: common/docman/views/listtrashfile.php:124
-#, fuzzy
 msgid "Edit this folder"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:177
 msgid "Move this folder and his content to trash"
 msgstr ""
 
 #: common/docman/views/listfile.php:179
-#, fuzzy
 msgid "Permanently delete this folder"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:184
-#, fuzzy
 msgid "Add a new item in this folder"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:191
 msgid "Download this folder as a zip"
 msgstr ""
 
 #: common/docman/views/listfile.php:196
-#, fuzzy
 msgid "Stop monitoring this directory"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:199
-#, fuzzy
 msgid "Start monitoring this directory"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:213
 msgid "Add a new item"
@@ -1228,9 +1172,8 @@ msgstr ""
 #: common/docman/views/listfile.php:250
 #: common/docman/views/listtrashfile.php:148
 #: common/docman/views/pendingfiles.php:80
-#, fuzzy
 msgid "View this document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:259
 #: common/docman/views/listtrashfile.php:157
@@ -1244,34 +1187,30 @@ msgid "Created or updated since less than 7 days"
 msgstr ""
 
 #: common/docman/views/listfile.php:279 common/docman/views/listfile.php:281
-#, fuzzy
 msgid "Reserved Document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:320 common/docman/views/listfile.php:331
 msgid "Move this document to trash"
 msgstr ""
 
 #: common/docman/views/listfile.php:320 common/docman/views/listfile.php:331
-#, fuzzy
 msgid "Move to trash this document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:321 common/docman/views/listfile.php:332
 #: common/docman/views/listtrashfile.php:193
 #: common/docman/views/pendingfiles.php:127
-#, fuzzy
 msgid "Edit this document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:323
 msgid "Reserve this document for later edition"
 msgstr ""
 
 #: common/docman/views/listfile.php:323
-#, fuzzy
 msgid "Reserve this document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:328
 msgid "Enforce reservation"
@@ -1282,9 +1221,8 @@ msgid "Release reservation"
 msgstr ""
 
 #: common/docman/views/listfile.php:339
-#, fuzzy
 msgid "Stop monitoring this document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:342
 msgid "Start monitoring this document"
@@ -1315,15 +1253,13 @@ msgid "Reserve"
 msgstr ""
 
 #: common/docman/views/listfile.php:361
-#, fuzzy
 msgid "Start monitoring"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:362
 #: common/widget/Widget_MyMonitoredForums.class.php:125
-#, fuzzy
 msgid "Stop monitoring"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listfile.php:365
 #: common/docman/views/listtrashfile.php:204
@@ -1333,9 +1269,8 @@ msgstr ""
 
 #: common/docman/views/listfile.php:371
 #: common/docman/views/listtrashfile.php:210
-#, fuzzy
 msgid "No documents."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listtrashfile.php:73
 msgid "Invalid folder."
@@ -1346,9 +1281,8 @@ msgid "Delete permanently all documents and folders with deleted status."
 msgstr ""
 
 #: common/docman/views/listtrashfile.php:117
-#, fuzzy
 msgid "Documents folder:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listtrashfile.php:120
 msgid "Delete permanently this folder and his content."
@@ -1359,9 +1293,8 @@ msgid "Updated since less than 7 days"
 msgstr ""
 
 #: common/docman/views/listtrashfile.php:192
-#, fuzzy
 msgid "Delete permanently this document."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/listtrashfile.php:203
 msgid "Delete permanently."
@@ -1423,9 +1356,8 @@ msgid "Docman module reporting."
 msgstr ""
 
 #: common/docman/views/pendingfiles.php:42
-#, fuzzy
 msgid "No pending documents."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/pendingfiles.php:62
 msgid "Pending files"
@@ -1468,9 +1400,8 @@ msgid "Refresh"
 msgstr ""
 
 #: common/docman/views/reporting.php:105
-#, fuzzy
 msgid "There have been no viewed documents for this project yet."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/reporting.php:116 common/docman/views/reporting.php:124
 #: common/reporting/report_utils.php:86 www/frs/reporting/downloads.php:131
@@ -1536,9 +1467,8 @@ msgid "Date"
 msgstr ""
 
 #: common/docman/views/reporting.php:163
-#, fuzzy
 msgid "View user profile"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/search.php:61
 msgid "Query: "
@@ -1573,18 +1503,16 @@ msgid "Filename and contents are used to match searched words"
 msgstr ""
 
 #: common/docman/views/search.php:68
-#, fuzzy
 msgid "Inside documents"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/search.php:75
 msgid "search into childs following project hierarchy"
 msgstr ""
 
 #: common/docman/views/search.php:75
-#, fuzzy
 msgid "Include child projects"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/search.php:126
 msgid "Database query error"
@@ -1600,18 +1528,16 @@ msgid "Status:"
 msgstr ""
 
 #: common/docman/views/search.php:154
-#, fuzzy
 msgid "Browse document manager for this project."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/search.php:162
 msgid "Your search is empty."
 msgstr ""
 
 #: common/docman/views/tree.php:63
-#, fuzzy
 msgid "Child project: "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/tree.php:63
 msgid "Browse document manager in this project"
@@ -1756,9 +1682,8 @@ msgid "Forum Info Updated Successfully"
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:211
-#, fuzzy
 msgid "Forum added successfully"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:229 www/forum/admin/index.php:292
 msgid "Error Getting ForumMessage"
@@ -1901,9 +1826,8 @@ msgid "Mailing List Exists with same name"
 msgstr ""
 
 #: common/forum/Forum.class.php:223
-#, fuzzy
 msgid "Error Adding Forum:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/forum/Forum.class.php:234 www/account/first.php:29
 #, php-format
@@ -1949,9 +1873,8 @@ msgstr ""
 #: common/forum/Forum.class.php:624 common/forum/Forum.class.php:632
 #: common/forum/Forum.class.php:640 common/forum/Forum.class.php:648
 #: common/forum/Forum.class.php:656 common/forum/Forum.class.php:664
-#, fuzzy
 msgid "Error Deleting Forum:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/forum/ForumFactory.class.php:52
 msgid "Forum:: No Valid Group Object"
@@ -2347,9 +2270,8 @@ msgid "Failed to find user %s"
 msgstr ""
 
 #: common/import/import_users.php:416
-#, fuzzy
 msgid "User Added Successfully"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: common/include/account.php:34
 msgid "Password must be at least 6 characters."
@@ -2674,9 +2596,8 @@ msgid "Error Deleting Counters: "
 msgstr ""
 
 #: common/include/Group.class.php:1859 common/include/Group.class.php:1868
-#, fuzzy
 msgid "Error Deleting Project:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/include/Group.class.php:1940
 msgid "User is not active. Only active users can be added."
@@ -3295,9 +3216,8 @@ msgid "Tech & manager (no submitting)"
 msgstr ""
 
 #: common/include/rbac_texts.php:75 common/include/rbac_texts.php:105
-#, fuzzy
 msgid "Submit only"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/include/rbac_texts.php:76 common/include/rbac_texts.php:106
 msgid "Read & submit"
@@ -3350,14 +3270,12 @@ msgid "Commit access"
 msgstr ""
 
 #: common/include/rbac_texts.php:132
-#, fuzzy
 msgid "Submit documents"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/include/rbac_texts.php:133
-#, fuzzy
 msgid "Approve documents"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/include/rbac_texts.php:134
 msgid "Doc manager administration"
@@ -3396,9 +3314,8 @@ msgid "Default for new forums"
 msgstr ""
 
 #: common/include/rbac_texts.php:165
-#, fuzzy
 msgid "Documentation manager"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/include/Role.class.php:170
 msgid "Cannot create a role with an empty name"
@@ -3518,9 +3435,8 @@ msgid "No admin users ?"
 msgstr ""
 
 #: common/include/Storage.class.php:56
-#, fuzzy
 msgid "Cannot create directory:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/include/Storage.class.php:66
 #, php-format
@@ -3533,9 +3449,8 @@ msgid "Not a File %1$s or not a directory %2$s."
 msgstr ""
 
 #: common/include/User.class.php:202
-#, fuzzy
 msgid "User Not Found"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/include/User.class.php:263
 msgid "You must supply a theme"
@@ -3863,9 +3778,8 @@ msgid "Forum exists with the same name"
 msgstr ""
 
 #: common/mail/MailingList.class.php:168
-#, fuzzy
 msgid "Error Creating mailing list: "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/mail/MailingList.class.php:183
 #, php-format
@@ -3895,9 +3809,8 @@ msgid "%s New Mailing List"
 msgstr ""
 
 #: common/mail/MailingList.class.php:221
-#, fuzzy
 msgid "Error Getting mailing list"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/mail/MailingListFactory.class.php:62
 #, php-format
@@ -3918,7 +3831,7 @@ msgstr ""
 #: common/pm/ProjectGroup.class.php:146 common/pm/ProjectGroup.class.php:318
 #, fuzzy
 msgid "Subproject Description Must Be At Least 10 Characters"
-msgstr "คำอธิบายเอกสารจะต้องมีอย่างน้อย 10 ตัวอักษร"
+msgstr ""
 
 #: common/pm/ProjectGroupFactory.class.php:62
 #, php-format
@@ -4144,9 +4057,8 @@ msgid "Question Added"
 msgstr ""
 
 #: common/survey/SurveyQuestion.class.php:149
-#, fuzzy
 msgid "Update failed"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/survey/SurveyQuestion.class.php:194
 msgid "Error finding question"
@@ -5267,44 +5179,36 @@ msgid "Message Body Is Required"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:228
-#, fuzzy
 msgid "Error remapping status"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:299
-#, fuzzy
 msgid "Invalid Artifact ID"
-msgstr "กลุ่มเอกสาร: รหัสของกลุ่มเอกสารไม่ตรง"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:515
-#, fuzzy
 msgid "Error deleting extra field data: "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:526
-#, fuzzy
 msgid "Error deleting file from db: "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:534
-#, fuzzy
 msgid "Error deleting message: "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:542
-#, fuzzy
 msgid "Error deleting history: "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:550
-#, fuzzy
 msgid "Error deleting monitor: "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:558
-#, fuzzy
 msgid "Error deleting artifact: "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:569 common/tracker/Artifact.class.php:579
 msgid "Error updating artifact counts: "
@@ -5351,9 +5255,8 @@ msgid "Nothing Changed - Update Cancelled"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:1239
-#, fuzzy
 msgid "Error updating assigned_to in artifact: "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:1314
 #: common/tracker/Artifact.class.php:1324
@@ -6005,18 +5908,16 @@ msgid "Create a new roadmap"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:187
-#, fuzzy
 msgid "Update roadmap"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:202 www/tracker/roadmap.php:257
 msgid "No trackers have been set up."
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:221
-#, fuzzy
 msgid "Not used"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:252 www/tracker/roadmap.php:201
 #: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
@@ -6139,9 +6040,8 @@ msgid ""
 msgstr ""
 
 #: common/tracker/views/form-customizelist.php:121
-#, fuzzy
 msgid "Add New Field"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/tracker/views/form-deleteextrafieldelement.php:47
 #, php-format
@@ -6331,9 +6231,8 @@ msgid "Preferences"
 msgstr ""
 
 #: common/widget/Widget.class.php:365
-#, fuzzy
 msgid "General"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:247
 #: common/widget/WidgetLayoutManager.class.php:252
@@ -6444,19 +6343,16 @@ msgid "Assigned"
 msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:248
-#, fuzzy
 msgid "Submitted"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:254
-#, fuzzy
 msgid "Monitored"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:264
-#, fuzzy
 msgid "Browse this artefact"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:296
 msgid ""
@@ -6515,9 +6411,8 @@ msgid "List SVN commits you have done, by project."
 msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:39
-#, fuzzy
 msgid "Monitored Documents"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:47
 msgid "You are not monitoring any documents."
@@ -6631,19 +6526,16 @@ msgid "Quit this project?"
 msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:96
-#, fuzzy
 msgid "<em>Private project</em>"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:109
-#, fuzzy
 msgid "MyProjects"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:110
-#, fuzzy
 msgid "My projects"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:152
 msgid ""
@@ -6656,9 +6548,8 @@ msgid "The 5 Last Documents in My Projects"
 msgstr ""
 
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-#, fuzzy
 msgid "No documents"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:132
 msgid ""
@@ -6716,18 +6607,16 @@ msgid "Allow you to view the project description"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:42
-#, fuzzy
 msgid "Last 4 weeks Documents Manager Activity"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:88
 msgid "new files [F]"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:89
-#, fuzzy
 msgid "new directories [D]"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:90
 msgid "updated files [U]"
@@ -6759,16 +6648,14 @@ msgstr ""
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:131
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:145
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:162
-#, fuzzy
 msgid "updated Files"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:137
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:153
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:163
-#, fuzzy
 msgid "new Directories"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 msgid "3 weeks ago"
@@ -6788,9 +6675,8 @@ msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:196
 #: common/widget/Widget_ProjectLatestDocuments.class.php:123
-#, fuzzy
 msgid "Browse Documents Manager"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:216
 msgid ""
@@ -7313,9 +7199,8 @@ msgid "Cannot insert new identity: %s"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:67
-#, fuzzy
 msgid "Identity successfully added"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:81
 msgid "ERROR: Missing URL for the new identity"
@@ -7336,9 +7221,8 @@ msgid "Cannot delete identity: %s"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:117 plugins/authwebid/www/index.php:82
-#, fuzzy
 msgid "Identity successfully deleted"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:122
 #, php-format
@@ -7350,9 +7234,8 @@ msgid "My OpenID identities"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:128 plugins/authopenid/www/index.php:134
-#, fuzzy
 msgid "Add new identity"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:130
 msgid "You can add your own OpenID identities in the form below."
@@ -7400,9 +7283,9 @@ msgid ""
 msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:273
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot bind new identity: %s"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:288
 msgid "WebID already used"
@@ -7486,9 +7369,8 @@ msgid ""
 msgstr ""
 
 #: plugins/blocks/common/blocksPlugin.class.php:65
-#, fuzzy
 msgid "Blocks Admin"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:47
 msgid ""
@@ -7872,9 +7754,8 @@ msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:381
 #: plugins/contribtracker/www/global_admin.php:398
-#, fuzzy
 msgid "Role description"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:390
 msgid "Edit a role"
@@ -7914,9 +7795,8 @@ msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:439
 #: plugins/contribtracker/www/global_admin.php:469
-#, fuzzy
 msgid "Actor description"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:441
 #: plugins/contribtracker/www/global_admin.php:471
@@ -8010,9 +7890,8 @@ msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:191
 #: plugins/contribtracker/www/project_admin.php:212
-#, fuzzy
 msgid "Contribution description"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:199
 msgid "Edit a contribution"
@@ -8081,21 +7960,19 @@ msgstr ""
 #: plugins/extsubproj/actions/addExtSubProj.php:31
 #, fuzzy
 msgid "Failed to add subproject."
-msgstr "ไม่สามารถเพิ่มผู้ดูระบบได้"
+msgstr ""
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
-#, fuzzy
 msgid "Sub project succesfully added."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
 msgid "Failed to delete subproject."
 msgstr ""
 
 #: plugins/extsubproj/actions/delExtSubProj.php:34
-#, fuzzy
 msgid "Sub project succesfully deleted."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
 msgid "External subprojects admin"
@@ -8119,18 +7996,16 @@ msgid "Project external subprojects"
 msgstr ""
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:36
-#, fuzzy
 msgid "Plugin (project)"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:40
 msgid "Displays links to external subprojects of the project"
 msgstr ""
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:52
-#, fuzzy
 msgid "Sub projects"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/extsubproj/view/admin/viewGlobalConfiguration.php:30
 #: plugins/mantisbt/view/admin/viewConfiguration.php:54
@@ -8140,9 +8015,8 @@ msgid "Manage configuration"
 msgstr ""
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:32
-#, fuzzy
 msgid "Subproject URL"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
 #: www/trove/admin/trove_cat_edit.php:94
@@ -8182,9 +8056,8 @@ msgstr ""
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:67
 #: plugins/forumml/www/forumml_utils.php:61
 #: plugins/forumml/www/forumml_utils.php:188
-#, fuzzy
 msgid "Submitted on"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/forumml/include/forummlPlugin.class.php:108
 msgid "This project's mailing lists"
@@ -8268,7 +8141,7 @@ msgstr ""
 #: plugins/forumml/www/index.php:55 plugins/forumml/www/message.php:93
 #, fuzzy
 msgid "No list specified"
-msgstr "หมายเลขกลุ่มกระทู้ไม่ถูกต้อง"
+msgstr ""
 
 #: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
 #: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:48
@@ -8307,9 +8180,8 @@ msgid "Mailing List "
 msgstr ""
 
 #: plugins/forumml/www/index.php:102
-#, fuzzy
 msgid "New Thread"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/forumml/www/index.php:103
 msgid "Browse Archives"
@@ -8386,7 +8258,7 @@ msgstr ""
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
 msgid "Error : Attachment not found"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: plugins/forumml/www/upload.php:85
 msgid "Error : Missing parameter "
@@ -8424,27 +8296,24 @@ msgid "Lists user projects hosted on remote forge systems"
 msgstr ""
 
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyProjects.php:53
-#, fuzzy
 msgid "My remote projects"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/add_account.php:42
 msgid "You can add remote accounts ONLY for yourself !!!"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/add_account.php:71
-#, fuzzy
 msgid "Remote Account successfully created"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/delete_account.php:31
 msgid "You can remove only YOUR remote accounts !!!"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/delete_account.php:39
-#, fuzzy
 msgid "Remote Account successfully deleted"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/delete_account.php:41
 msgid "Unable to delete remote account: "
@@ -8527,9 +8396,8 @@ msgid "You can edit only YOUR remote accounts !!!"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account.php:73
-#, fuzzy
 msgid "Remote Account successfully updated"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:54
 #: plugins/globaldashboard/www/index.php:38
@@ -8950,14 +8818,12 @@ msgid "Cannot retrieve value for this link:"
 msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:44
-#, fuzzy
 msgid "Outermenu Link Order successfully validated"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:45
-#, fuzzy
 msgid "Headermenu Link Order successfully validated"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:46
 msgid "Error in Outermenu Link Order validation"
@@ -9018,9 +8884,8 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:114
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:79
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:46
-#, fuzzy
 msgid "Edit this link"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:82
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:115
@@ -9049,9 +8914,8 @@ msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:126
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:89
-#, fuzzy
 msgid "Add new tab"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:127
 msgid ""
@@ -9066,9 +8930,8 @@ msgid "Just paste your code here..."
 msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:44
-#, fuzzy
 msgid "Link Order successfully validated"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:45
 msgid "Error in Link Order validation"
@@ -9091,9 +8954,8 @@ msgid "View Personal HelloWorld"
 msgstr ""
 
 #: plugins/helloworld/include/helloworldPlugin.class.php:116
-#, fuzzy
 msgid "HelloWorld Admin"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/helloworld/include/HelloWorldPluginDescriptor.class.php:30
 msgid "HelloWorld"
@@ -9106,7 +8968,7 @@ msgstr ""
 #: plugins/hudson/include/hudsonActions.class.php:53
 #, fuzzy
 msgid "Unable to add Hudson job."
-msgstr "ไม่สามารถเพิ่มผู้ดูระบบได้"
+msgstr ""
 
 #: plugins/hudson/include/hudsonActions.class.php:55
 msgid "Hudson job added."
@@ -9156,7 +9018,7 @@ msgstr ""
 #: plugins/hudson/include/HudsonTestResult.class.php:69
 #, fuzzy, php-format
 msgid "File not found at URL: %s"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: plugins/hudson/include/hudson.class.php:60
 #: plugins/hudson/include/hudson.class.php:86
@@ -9253,7 +9115,7 @@ msgstr ""
 #: plugins/hudson/include/hudsonViews.class.php:193
 #, fuzzy
 msgid "Error: Hudson object not found."
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:262
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:88
@@ -9451,7 +9313,7 @@ msgstr ""
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:102
 #, fuzzy
 msgid "Job not found."
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:49
 #, php-format
@@ -9508,9 +9370,8 @@ msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:105
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:100
-#, fuzzy
 msgid "No test found for this job."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:47
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:94
@@ -9836,9 +9697,8 @@ msgid "Administrate from Mailman"
 msgstr ""
 
 #: plugins/mantisbt/action/addCategory.php:42
-#, fuzzy
 msgid "Category added successfully"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/mantisbt/action/addCategory.php:45
 msgid "Missing category name"
@@ -9849,18 +9709,16 @@ msgid "Ticket "
 msgstr ""
 
 #: plugins/mantisbt/action/addNote.php:57
-#, fuzzy
 msgid "Note added successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/mantisbt/action/addVersion.php:73
 msgid "Missing version."
 msgstr ""
 
 #: plugins/mantisbt/action/deleteAttachment.php:36
-#, fuzzy
 msgid "Attachment deleted successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteAttachment.php:43
 msgid "Missing Attachment ID to delete."
@@ -9873,23 +9731,21 @@ msgid "Task failed:"
 msgstr ""
 
 #: plugins/mantisbt/action/deleteCategory.php:40
-#, fuzzy, php-format
+#, php-format
 msgid "Category %s deleted successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteCategory.php:43
 msgid "Missing parameters to delete category."
 msgstr ""
 
 #: plugins/mantisbt/action/deleteNote.php:39
-#, fuzzy
 msgid "Note deleted successfully"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteVersion.php:44
-#, fuzzy
 msgid "Version deleted successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteVersion.php:47
 msgid "Missing parameters to delete version."
@@ -9904,18 +9760,16 @@ msgid "Failed to initialize user."
 msgstr ""
 
 #: plugins/mantisbt/action/inituser.php:38
-#, fuzzy
 msgid "MantisBT User successfully initialized."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/mantisbt/action/renameCategory.php:37
 msgid "No action, same category name."
 msgstr ""
 
 #: plugins/mantisbt/action/renameCategory.php:47
-#, fuzzy
 msgid "Category renamed successfully."
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/mantisbt/action/renameCategory.php:50
 msgid "Missing category name."
@@ -9935,9 +9789,8 @@ msgid "MantisBT global configuration successfully updated."
 msgstr ""
 
 #: plugins/mantisbt/action/updateIssue.php:45
-#, fuzzy
 msgid "No type found."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/mantisbt/action/updateuserConf.php:34
 msgid "MantisBT User configuration successfully updated."
@@ -9977,14 +9830,12 @@ msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:234
 #: plugins/projectimport/www/index.php:629
-#, fuzzy
 msgid "No project found"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:245
-#, fuzzy
 msgid "No project found in MantisBT"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:251
 msgid "Cannot delete in database"
@@ -9997,7 +9848,7 @@ msgstr ""
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:293
 #, fuzzy
 msgid "ID MantisBT project not found"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:393
 msgid "Tickets"
@@ -10034,7 +9885,7 @@ msgstr ""
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:595
 #, fuzzy
 msgid "MantisBT project not found"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
 msgid "Global MantisBT admin"
@@ -10053,9 +9904,8 @@ msgid "MantisBT"
 msgstr ""
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:38
-#, fuzzy
 msgid "MantisBT description."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:42
 msgid "Not yet implemented"
@@ -10088,9 +9938,8 @@ msgid "Include child projects:"
 msgstr ""
 
 #: plugins/mantisbt/controler/filter.php:122
-#, fuzzy
 msgid "Submitted by:"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/mantisbt/controler/filter.php:138
 msgid "Assigned to:"
@@ -10175,9 +10024,8 @@ msgid "Add note"
 msgstr ""
 
 #: plugins/mantisbt/view/admin/addCategory.php:31
-#, fuzzy
 msgid "Add a new category"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/addVersion.php:34
 msgid "Add a new version"
@@ -10279,9 +10127,8 @@ msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:91
 #: plugins/mantisbt/view/viewIssue.php:60
-#, fuzzy
 msgid "Submit Date"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:92
 #: plugins/mantisbt/view/viewIssue.php:61
@@ -10397,9 +10244,8 @@ msgid "Ticket"
 msgstr ""
 
 #: plugins/mantisbt/view/viewIssue.php:130
-#, fuzzy
 msgid "Edit ticket"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/mantisbt/view/viewIssues.php:68
 msgid "No data to retrieve"
@@ -10423,9 +10269,8 @@ msgid "Modify"
 msgstr ""
 
 #: plugins/mantisbt/view/viewNote.php:70
-#, fuzzy
 msgid "No notes for this ticket"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/mantisbt/www/getAttachment.php:41 plugins/mantisbt/www/index.php:63
 #: plugins/quota_management/www/index.php:33 www/developer/index.php:41
@@ -11018,9 +10863,8 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_manage.php:94
 #: plugins/oauthprovider/www/consumer_update_page.php:50
 #: plugins/oauthprovider/www/consumer_update_page.php:85
-#, fuzzy
 msgid "Update Consumer"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/oauthprovider/www/consumer_manage.php:100
 msgid "Delete Consumer"
@@ -11072,9 +10916,8 @@ msgid "No request tokens were found!"
 msgstr ""
 
 #: plugins/oauthprovider/www/token_deny.php:58
-#, fuzzy
 msgid "Authorization Denied"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/oauthprovider/www/token_deny.php:60
 #, php-format
@@ -11092,14 +10935,12 @@ msgid "View Personal oslc"
 msgstr ""
 
 #: plugins/oslc/include/oslcPlugin.class.php:153
-#, fuzzy
 msgid "oslc Admin"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:171
-#, fuzzy
 msgid "Import projects"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:171
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:183
@@ -11146,7 +10987,7 @@ msgstr ""
 #: plugins/projectimport/common/UploadedFiles.class.php:368
 #, fuzzy
 msgid "File not found on server"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:381
 msgid "Please either select existing file OR upload new file"
@@ -11286,9 +11127,8 @@ msgid "Imported users mapped to it"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:427
-#, fuzzy
 msgid "New role"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:473
 #, php-format
@@ -11344,14 +11184,12 @@ msgid "You cannot import project unless you are an admin on that project"
 msgstr ""
 
 #: plugins/projectimport/www/projectsimport.php:257
-#, fuzzy
 msgid "Failed to create project"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projectimport/www/projectsimport.php:263
-#, fuzzy
 msgid "Created project"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projectimport/www/usersimport.php:72
 msgid "Users importer"
@@ -11509,9 +11347,8 @@ msgid "This project already has a parent"
 msgstr ""
 
 #: plugins/projects-hierarchy/actions/addChild.php:35
-#, fuzzy
 msgid "Successfully added child"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/addChild.php:37
 msgid "Failed to add child"
@@ -11526,18 +11363,16 @@ msgid "Failed to update status of hierarchical browsing"
 msgstr ""
 
 #: plugins/projects-hierarchy/actions/removeChild.php:32
-#, fuzzy
 msgid "Successfully removed child"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/removeChild.php:34
 msgid "Failed to removed child"
 msgstr ""
 
 #: plugins/projects-hierarchy/actions/removeParent.php:32
-#, fuzzy
 msgid "Successfully removed parent"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/removeParent.php:34
 msgid "Failed to removed parent"
@@ -11634,23 +11469,20 @@ msgid "Remove child project"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:47
-#, fuzzy
 msgid "Remove parent project"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:51
-#, fuzzy
 msgid "Add new child"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:54
 msgid "Select a project: "
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:56
-#, fuzzy
 msgid "Add Child project"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:59
 msgid "No other project using project hierarchy plugin."
@@ -11661,9 +11493,8 @@ msgid "Pending hierarchy request"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:68
-#, fuzzy
 msgid "Validate parent"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:70
 #: plugins/projects-hierarchy/view/admin_project_link.php:82
@@ -11675,9 +11506,8 @@ msgid "Validate child"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:88
-#, fuzzy
 msgid "No pending requests"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:37
 msgid "Enable Tree in projects tab."
@@ -11752,9 +11582,8 @@ msgid "Linked projects"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/home_project_link.php:37
-#, fuzzy
 msgid "Parent Project"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/projects-hierarchy/view/home_project_link.php:47
@@ -12236,7 +12065,7 @@ msgstr ""
 #: plugins/scmcvs/www/acl.php:53
 #, fuzzy, php-format
 msgid "User not found %s"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:89
 msgid ""
@@ -12453,9 +12282,9 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:990
 #: plugins/scmhg/common/HgPlugin.class.php:522
 #: plugins/scmhg/common/HgPlugin.class.php:538
-#, fuzzy, php-format
+#, php-format
 msgid "A repository %s already exists"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1015
 msgid "Invalid URL from which to clone"
@@ -12482,9 +12311,8 @@ msgid "Repository name"
 msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1080
-#, fuzzy
 msgid "Initial repository description"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1080
 msgid "Initial clone URL (if any)"
@@ -12804,9 +12632,8 @@ msgid "View Personal SoapAdmin"
 msgstr ""
 
 #: plugins/soapadmin/include/soapadminPlugin.class.php:148
-#, fuzzy
 msgid "SoapAdmin Admin"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/twitter/www/checks.php:99
 msgid "You have no Twitter Access Tokens registered in the database currently"
@@ -12868,9 +12695,8 @@ msgid "Is Active"
 msgstr ""
 
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:58
-#, fuzzy
 msgid "Add a new webanalytics reference"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/wiki/common/wikiconfig.class.php:39
 msgid ""
@@ -12898,14 +12724,12 @@ msgid "Page"
 msgstr ""
 
 #: plugins/wiki/common/WikiPlugin.class.php:76
-#, fuzzy
 msgid "Wiki Admin"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/wiki/common/WikiPlugin.class.php:93
-#, fuzzy
 msgid "This project's wiki"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/wiki/common/WikiPlugin.class.php:204
 msgid "List of active wikis in Forge"
@@ -13181,9 +13005,8 @@ msgid "Delete this ssh key."
 msgstr ""
 
 #: www/account/editsshkeys.php:73
-#, fuzzy
 msgid "Add a new ssh key"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/account/editsshkeys.php:74
 msgid ""
@@ -13678,19 +13501,16 @@ msgid "FRS Release"
 msgstr ""
 
 #: www/activity/index.php:124
-#, fuzzy
 msgid "New Documents"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/activity/index.php:126
-#, fuzzy
 msgid "Updated Documents"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/activity/index.php:128
-#, fuzzy
 msgid "New Directories"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/activity/index.php:169
 msgid "Invalid Data Passed to query"
@@ -13724,9 +13544,8 @@ msgid "Forum Post "
 msgstr ""
 
 #: www/activity/index.php:317
-#, fuzzy
 msgid "Document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/admin/admin_table.php:41
 #, php-format
@@ -13913,9 +13732,8 @@ msgid "Pending reason:"
 msgstr ""
 
 #: www/admin/approve-pending.php:219
-#, fuzzy
 msgid "Based on template project"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/admin/approve-pending.php:234
 msgid "Approve All On This Page"
@@ -14045,9 +13863,9 @@ msgid "ERROR: You did not tick the “really remove” box!"
 msgstr ""
 
 #: www/admin/globalroleedit.php:123
-#, fuzzy, php-format
+#, php-format
 msgid "User %s removed successfully"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: www/admin/globalroleedit.php:127
 #, php-format
@@ -14494,7 +14312,7 @@ msgstr ""
 #: www/news/admin/index.php:64 www/news/admin/index.php:112
 #, fuzzy
 msgid "Newsbyte not found"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: www/admin/pending-news.php:78 www/news/admin/index.php:93
 msgid "Newsbyte Updated."
@@ -14603,9 +14421,9 @@ msgid "%d users"
 msgstr ""
 
 #: www/admin/pluginman.php:243
-#, fuzzy, php-format
+#, php-format
 msgid "%d projects"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/admin/pluginman.php:254
 msgid "Inactive"
@@ -14700,9 +14518,8 @@ msgid "Member since"
 msgstr ""
 
 #: www/admin/search.php:96
-#, fuzzy
 msgid "No user found."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/admin/search.php:145
 #, php-format
@@ -14720,9 +14537,8 @@ msgid "Registered"
 msgstr ""
 
 #: www/admin/search.php:177
-#, fuzzy
 msgid "No project found."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:67
 msgid "Error In Trove Operation: "
@@ -15013,7 +14829,7 @@ msgstr ""
 #: www/admin/userlist.php:163
 #, fuzzy
 msgid "User list for all projects"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: www/admin/userlist.php:195
 msgid "User list for project: "
@@ -15114,7 +14930,7 @@ msgstr ""
 #: www/developer/diary.php:39
 #, fuzzy
 msgid "User could not be found."
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: www/developer/diary.php:44
 msgid "Diary and Notes for"
@@ -15206,9 +15022,8 @@ msgid ""
 msgstr ""
 
 #: www/docman/index.php:117
-#, fuzzy
 msgid "Documents for "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/docman/view.php:60 www/docman/view.php:229
 msgid "Document is not available."
@@ -15231,9 +15046,8 @@ msgid "Unable to download backup file"
 msgstr ""
 
 #: www/docman/view.php:134
-#, fuzzy
 msgid "No documents to backup."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/docman/view.php:138
 msgid "Zip extension is missing: no backup function"
@@ -15290,12 +15104,12 @@ msgstr ""
 #: www/export/rss20_forum.php:102
 #, fuzzy
 msgid "Forum RSS: No forums found"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: www/export/rss20_forum.php:268
 #, fuzzy
 msgid "Forum RSS: Forum not found: "
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: www/export/rss20_tracker.php:111
 msgid "Tracker RSS: No trackers found"
@@ -15367,9 +15181,8 @@ msgid "Project Releases"
 msgstr ""
 
 #: www/export/rss_project.php:110
-#, fuzzy
 msgid "Project Document Manager"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/export/rss_project.php:118
 msgid "Go back"
@@ -15466,9 +15279,9 @@ msgid "Move Thread"
 msgstr ""
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
-#, fuzzy, php-format
+#, php-format
 msgid "No Forums Found For %s"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/forum/admin/index.php:403
 #, php-format
@@ -15484,9 +15297,8 @@ msgid "Monitoring Users"
 msgstr ""
 
 #: www/forum/admin/monitor.php:56
-#, fuzzy
 msgid "No Monitoring Users"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/forum/admin/monitor.php:61
 msgid "Realname"
@@ -15534,7 +15346,7 @@ msgstr ""
 #: www/forum/forum.php:55
 #, fuzzy
 msgid "Error forum not found: "
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: www/forum/forum.php:113
 msgid ""
@@ -15608,9 +15420,9 @@ msgid "Forums for %1$s"
 msgstr ""
 
 #: www/forum/index.php:58
-#, fuzzy, php-format
+#, php-format
 msgid "No Forums Found for %1$s"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/forum/index.php:65 www/forum/myforums.php:44 www/forum/myforums.php:46
 msgid "My Monitored Forums"
@@ -17246,9 +17058,9 @@ msgid "Choose a News item and you can browse, search, and post messages."
 msgstr ""
 
 #: www/news/index.php:72
-#, fuzzy, php-format
+#, php-format
 msgid "No News Found for %s"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/news/index.php:74
 msgid "No News Found"
@@ -17279,9 +17091,8 @@ msgid "Submit News"
 msgstr ""
 
 #: www/news/news_utils.php:280
-#, fuzzy
 msgid "Not Found"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/news/submit.php:74
 msgid ""
@@ -17807,7 +17618,7 @@ msgstr ""
 #: www/people/viewprofile.php:78
 #, fuzzy
 msgid "User_id not found."
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: www/pm/add_task.php:30
 msgid "Add a new Task"
@@ -17880,14 +17691,12 @@ msgid "Category Updated"
 msgstr ""
 
 #: www/pm/admin/index.php:139
-#, fuzzy
 msgid "Subproject Updated successfully"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: www/pm/admin/index.php:154
-#, fuzzy
 msgid "Subproject Successfully Deleted"
-msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
+msgstr ""
 
 #: www/pm/admin/index.php:177
 #, php-format
@@ -18235,9 +18044,8 @@ msgid "Hours"
 msgstr ""
 
 #: www/pm/format_csv.php:48
-#, fuzzy
 msgid "Update CSV Format"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/pm/ganttofuser.php:33 www/pm/gantt.php:25
 #: www/survey/admin/graphs.php:44
@@ -18274,14 +18082,12 @@ msgid "Error in PTF: "
 msgstr ""
 
 #: www/pm/include/ProjectGroupHTML.class.php:55
-#, fuzzy
 msgid "General Admin"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/pm/include/ProjectGroupHTML.class.php:59
-#, fuzzy
 msgid "View Subprojects"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/pm/include/ProjectGroupHTML.class.php:66
 msgid "Add Task"
@@ -18336,14 +18142,13 @@ msgid "No Changes Have Been Made"
 msgstr ""
 
 #: www/pm/index.php:56
-#, fuzzy, php-format
+#, php-format
 msgid "Subprojects for %1$s"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/pm/index.php:61
-#, fuzzy
 msgid "No Subprojects Found"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/pm/index.php:62
 msgid "No subprojects have been set up, or you cannot view them."
@@ -18964,9 +18769,8 @@ msgid "Use Tasks"
 msgstr ""
 
 #: www/project/admin/tools.php:216
-#, fuzzy
 msgid "Use Documents"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/project/admin/tools.php:229
 msgid "Use Surveys"
@@ -19009,9 +18813,8 @@ msgid "Mailing Lists Admin"
 msgstr ""
 
 #: www/project/admin/tools.php:329
-#, fuzzy
 msgid "Documents Admin"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/project/admin/tools.php:332
 msgid "Survey Admin"
@@ -19906,9 +19709,9 @@ msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
-#, fuzzy, php-format
+#, php-format
 msgid "No matches found for “%1$s”"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"
@@ -19923,9 +19726,8 @@ msgid "Search All"
 msgstr ""
 
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:70
-#, fuzzy
 msgid "Search for documents"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:53
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:48
@@ -20250,7 +20052,7 @@ msgstr ""
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
 #, fuzzy
 msgid "Error: no versions found"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: www/snippet/detail.php:60
 msgid "Versions Of This Snippet:"
@@ -20406,9 +20208,8 @@ msgid "Choose One"
 msgstr ""
 
 #: www/snippet/snippet_utils.php:27
-#, fuzzy
 msgid "Unix Admin"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -20487,9 +20288,8 @@ msgid "Create A Package"
 msgstr ""
 
 #: www/snippet/submit.php:59
-#, fuzzy
 msgid "Error doing snippet insert"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
@@ -20975,9 +20775,8 @@ msgid "Show Results"
 msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:76
-#, fuzzy
 msgid "Views Surveys"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:104
 msgid "Add this Question"
@@ -21018,9 +20817,8 @@ msgid ""
 msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:190
-#, fuzzy
 msgid "Survey Title: "
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:193
 msgid "Is Active?"
@@ -21187,9 +20985,8 @@ msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:51
-#, fuzzy
 msgid "Vote for Survey"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:49
 msgid ""
@@ -21524,70 +21321,3 @@ msgstr ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Document Manager Action Denied"
-#~ msgstr "ไม่พบเอกสาร"
-
-#, fuzzy
-#~ msgid "Project groupmenu Admin"
-#~ msgstr "ไม่พบเอกสาร"
-
-#, fuzzy
-#~ msgid "Add a new link"
-#~ msgstr "ไม่พบเอกสาร"
-
-#, fuzzy
-#~ msgid "Tab successfully renamed"
-#~ msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
-
-#, fuzzy
-#~ msgid "URL successfully changed"
-#~ msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
-
-#, fuzzy
-#~ msgid "Type successfully changed"
-#~ msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
-
-#, fuzzy
-#~ msgid "No Storage API Found"
-#~ msgstr "ไม่พบเอกสาร"
-
-#, fuzzy
-#~ msgid "Unable to add document from zip injection."
-#~ msgstr "ไม่สามารถเพิ่มผู้ดูระบบได้"
-
-#, fuzzy
-#~ msgid "Submitted by: %s"
-#~ msgstr "ไม่พบเอกสาร"
-
-#, fuzzy
-#~ msgid "Document Edit"
-#~ msgstr "ไม่พบเอกสาร"
-
-#, fuzzy
-#~ msgid "DocumentGroup:"
-#~ msgstr "ไม่พบเอกสาร"
-
-#, fuzzy
-#~ msgid "No Document Directory Found"
-#~ msgstr "ไม่พบเอกสาร"
-
-#, fuzzy
-#~ msgid "Document Directory Updated successfully."
-#~ msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
-
-#, fuzzy
-#~ msgid "Document Directory moved to trash successfully."
-#~ msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
-
-#, fuzzy
-#~ msgid "DocumentGroupHTML:: Invalid Project"
-#~ msgstr "เอกสาร:: หมายเลขเอกสาร ไม่ถูกต้อง"
-
-#, fuzzy
-#~ msgid "Invalid DocumentGroup ID"
-#~ msgstr "กลุ่มเอกสาร: รหัสของกลุ่มเอกสารไม่ตรง"
-
-#~ msgid "DocumentGroup: name is Required"
-#~ msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
