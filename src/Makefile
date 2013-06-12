@@ -4,6 +4,7 @@ YUICOMPRESSOR = java -jar plugins/wiki/www/themes/default/yuicompressor-2.4.7.ja
 all: gettext js
 
 gettext:
+	utils/manage-translations.sh check
 	utils/manage-translations.sh refresh
 	utils/manage-translations.sh build
 
